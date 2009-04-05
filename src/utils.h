@@ -49,11 +49,11 @@ void           gtranslator_utils_menu_position_under_tree_view (GtkMenu  *menu,
 					   gboolean *push_in,
 					   gpointer  user_data);
 
-gboolean       gtranslator_utils_get_glade_widgets    (const gchar *filename,
-						       const gchar *root_node,
-						       GtkWidget **error_widget,
-						       const gchar *widget_name,
-						       ...)G_GNUC_NULL_TERMINATED;
+gboolean       gtranslator_utils_get_ui_objects (const gchar  *filename,
+						 gchar       **root_objects,
+						 GtkWidget   **error_widget,
+						 const gchar  *object_name,
+						 ...)G_GNUC_NULL_TERMINATED;
 
 GSList        *gtranslator_utils_drop_get_locations   (GtkSelectionData *selection_data);
 

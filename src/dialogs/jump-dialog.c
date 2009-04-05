@@ -74,6 +74,11 @@ gtranslator_jump_dialog_init (GtranslatorJumpDialog *dlg)
 {
 	gboolean ret;
 	GtkWidget *error_widget;
+	gchar *root_objects [] = {
+		"adjustment1",
+		"main_box",
+		NULL
+	};
 	
 	dlg->priv = GTR_JUMP_DIALOG_GET_PRIVATE (dlg);
 	
@@ -104,8 +109,8 @@ gtranslator_jump_dialog_init (GtranslatorJumpDialog *dlg)
 			  NULL);
 	
 	/*Glade*/
-	ret = gtranslator_utils_get_glade_widgets(PKGDATADIR "/jump-dialog.glade",
-		"main_box",
+	ret = gtranslator_utils_get_ui_objects (PKGDATADIR "/jump-dialog.ui",
+		root_objects,
 		&error_widget,
 		
 		"main_box", &dlg->priv->main_box,

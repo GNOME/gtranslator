@@ -247,6 +247,10 @@ gtranslator_checkout_dialog_init (GtranslatorCheckoutDialog *dlg)
 {
 	gboolean ret;
 	GtkWidget *error_widget;
+	gchar *root_objects [] = {
+		"checkout_main_box",
+		NULL
+	};
 	
 	dlg->priv = GTR_CHECKOUT_DIALOG_GET_PRIVATE (dlg);
 	
@@ -275,8 +279,8 @@ gtranslator_checkout_dialog_init (GtranslatorCheckoutDialog *dlg)
 			  NULL);
 	
 	/*Glade*/
-	ret = gtranslator_utils_get_glade_widgets (GLADE_FILE,
-		"checkout_main_box",
+	ret = gtranslator_utils_get_ui_objects (UI_FILE,
+		root_objects,
 		&error_widget,
 		
 		"checkout_main_box", &dlg->priv->main_box,

@@ -33,15 +33,15 @@ libdialogs_la_SOURCES = \
 	jump-dialog.c \
 	jump-dialog.h
 
-gladedir = $(pkgdatadir)
+uidir = $(pkgdatadir)
 
-glade_DATA =  \
-		preferences-dialog.glade \
-		search-dialog.glade \
-		header-dialog.glade \
-		comment-dialog.glade \
-		profile-dialog.glade \
-		jump-dialog.glade
+ui_DATA =  \
+		preferences-dialog.ui \
+		search-dialog.ui \
+		header-dialog.ui \
+		comment-dialog.ui \
+		profile-dialog.ui \
+		jump-dialog.ui
 
 EXTRA_DIST = \
-		$(glade_DATA)
+		$(ui_DATA)

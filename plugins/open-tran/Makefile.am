@@ -27,10 +27,10 @@ libopentran_la_LDFLAGS = \
 	$(GTRANSLATOR_LIBS)					\
 	$(SOUP_LIBS)
 
-gladedir = $(pkgdatadir)
+uidir = $(pkgdatadir)
 
-glade_DATA =  \
-	open-tran-dialog.glade
+ui_DATA =  \
+	open-tran-dialog.ui
 
 pixmaps_dir = $(datadir)/pixmaps/gtranslator
 pixmaps__DATA = \
@@ -52,7 +52,7 @@ plugin_in_files = open-tran.gtranslator-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gtranslator-plugin.desktop.in=.gtranslator.plugin)
 
-EXTRA_DIST = $(glade_DATA) $(pixmaps__DATA) $(plugin_in_files)
+EXTRA_DIST = $(ui_DATA) $(pixmaps__DATA) $(plugin_in_files)
 
 CLEANFILES = $(plugin_DATA)
 DISTCLEANFILES = $(plugin_DATA)

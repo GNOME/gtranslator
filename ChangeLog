@@ -1,5 +1,48 @@
 2009-04-05  Pablo Sanxiao  <psanxiao@gmail.com>
 
+	Applied patch by Ignacio Casal Quinteiro with
+	several modifications and minor fixes.
+
+	* configure.ac:
+	* plugins/open-tran/Makefile.am:
+	* plugins/open-tran/open-tran-dialog.ui:
+	* plugins/open-tran/open-tran-plugin.c (get_configuration_dialog):
+	* plugins/source-code-view/Makefile.am:
+	* plugins/source-code-view/source-code-view-dialog.ui:
+	* plugins/source-code-view/source-code-view-plugin.c
+	(get_configuration_dialog):
+	* plugins/source-code-view/viewer.c (gtranslator_viewer_init):
+	* plugins/source-code-view/viewer.ui:
+	* plugins/subversion/Makefile.am:
+	* plugins/subversion/checkout-dialog.c
+	(gtranslator_checkout_dialog_init):
+	* plugins/subversion/commit-dialog.c
+	(gtranslator_commit_dialog_init):
+	* plugins/subversion/diff-dialog.c (gtranslator_diff_dialog_init):
+	* plugins/subversion/subversion-plugin.h:
+	* plugins/subversion/subversion.ui:
+	* src/dialogs/Makefile.am:
+	* src/dialogs/comment-dialog.c (gtranslator_comment_dialog_init):
+	* src/dialogs/comment-dialog.ui:
+	* src/dialogs/header-dialog.c (gtranslator_header_dialog_init):
+	* src/dialogs/header-dialog.ui:
+	* src/dialogs/jump-dialog.c (gtranslator_jump_dialog_init):
+	* src/dialogs/jump-dialog.ui:
+	* src/dialogs/preferences-dialog.c (setup_interface_pages),
+	(gtranslator_preferences_dialog_init):
+	* src/dialogs/preferences-dialog.ui:
+	* src/dialogs/profile-dialog.c (gtranslator_profile_dialog_init):
+	* src/dialogs/profile-dialog.ui:
+	* src/dialogs/search-dialog.c (gtranslator_search_dialog_init):
+	* src/dialogs/search-dialog.ui:
+	* src/utils.c (handle_builder_error),
+	(gtranslator_utils_get_ui_objects):
+	* src/utils.h:
+	Ported to gtkbuilder. (Fixes bug #514816)
+
+
+2009-04-05  Pablo Sanxiao  <psanxiao@gmail.com>
+
 	* plugins/subversion/subversion.gtranslator-plugin.desktop.in:
 	Added license to subversion plugin. Included exception for OpenSSL
 

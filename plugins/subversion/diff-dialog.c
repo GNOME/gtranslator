@@ -463,6 +463,10 @@ gtranslator_diff_dialog_init (GtranslatorDiffDialog *dlg)
 	gboolean ret;
 	GtkWidget *error_widget;
 	gboolean active;
+	gchar *root_objects [] = {
+		"diff_main_box",
+		NULL
+	};
 	
 	dlg->priv = GTR_DIFF_DIALOG_GET_PRIVATE (dlg);
 	
@@ -494,8 +498,8 @@ gtranslator_diff_dialog_init (GtranslatorDiffDialog *dlg)
 			  NULL);
 	
 	/*Glade*/
-	ret = gtranslator_utils_get_glade_widgets (GLADE_FILE,
-		"diff_main_box",
+	ret = gtranslator_utils_get_ui_objects (UI_FILE,
+		root_objects,
 		&error_widget,
 		
 		"diff_main_box", &dlg->priv->main_box,

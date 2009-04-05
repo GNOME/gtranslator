@@ -40,7 +40,7 @@
 #define LINE_CMD_KEY SOURCE_CODE_VIEW_BASE_KEY "/line_cmd"
 
 /* Glade */
-#define GLADE_FILE DATADIR"/source-code-view-dialog.glade"
+#define UI_FILE DATADIR"/source-code-view-dialog.ui"
 
 #define GTR_SOURCE_CODE_VIEW_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
@@ -587,17 +587,21 @@ get_configuration_dialog (GtranslatorSourceCodeViewPlugin *plugin)
 	GtkWidget *error_widget;
 	gchar *value;
 	gboolean use_editor;
+	gchar *root_objects [] = {
+		"dialog",
+		NULL
+	};
 	
-	ret = gtranslator_utils_get_glade_widgets (GLADE_FILE,
-						  "dialog",
-						  &error_widget,
-						  "dialog", &plugin->priv->dialog,
-						  "main_box", &plugin->priv->main_box,
-						  "use_editor", &plugin->priv->use_editor_checkbutton,
-						  "program_box", &plugin->priv->program_box,
-						  "program_cmd", &plugin->priv->program_cmd_entry,
-						  "line_cmd", &plugin->priv->line_cmd_entry,
-						  NULL);
+	ret = gtranslator_utils_get_ui_objects (UI_FILE,
+						root_objects,
+						&error_widget,
+						"dialog", &plugin->priv->dialog,
+						"main_box", &plugin->priv->main_box,
+						"use_editor", &plugin->priv->use_editor_checkbutton,
+						"program_box", &plugin->priv->program_box,
+						"program_cmd", &plugin->priv->program_cmd_entry,
+						"line_cmd", &plugin->priv->line_cmd_entry,
+						NULL);
 
 	if(!ret)
 	{

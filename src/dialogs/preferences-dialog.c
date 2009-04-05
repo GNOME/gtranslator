@@ -560,6 +560,8 @@ setup_interface_pages(GtranslatorPreferencesDialog *dlg)
 	const gchar * const *scheme_ids;
 	const gchar * scheme_active;
 	gint i = 0;
+	GtkListStore *store;
+	GtkCellRenderer *cell;
 	
 	/*Set initial value*/
 	pane_switcher_style = gtranslator_prefs_manager_get_pane_switcher_style ();
@@ -569,6 +571,18 @@ setup_interface_pages(GtranslatorPreferencesDialog *dlg)
 	/*
 	 * Scheme color
 	 */
+	store = gtk_list_store_new (1, G_TYPE_STRING);
+	gtk_combo_box_set_model (GTK_COMBO_BOX (dlg->priv->scheme_color_combobox),
+				 GTK_TREE_MODEL (store));
+	g_object_unref (store);
+	
+	cell = gtk_cell_renderer_text_new ();
+	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (dlg->priv->scheme_color_combobox),
+				    cell, TRUE);
+	gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (dlg->priv->scheme_color_combobox),
+					cell, "text", 0,
+					NULL);
+	
 	manager = gtk_source_style_scheme_manager_get_default ();
 	scheme_ids = gtk_source_style_scheme_manager_get_scheme_ids (manager);
 	scheme_active = gtranslator_prefs_manager_get_color_scheme ();
@@ -1082,6 +1096,14 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 {
 	gboolean ret;
 	GtkWidget *error_widget;
+	gchar *root_objects[] = {
+		"notebook",
+		"adjustment1",
+		"adjustment2",
+		"adjustment3",
+		"model1",
+		NULL
+	};
 	
 	dlg->priv = GTR_PREFERENCES_DIALOG_GET_PRIVATE (dlg);
 	
@@ -1110,27 +1132,26 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 	
 	/*Glade*/
 	
-	ret = gtranslator_utils_get_glade_widgets(PKGDATADIR "/preferences-dialog.glade",
-		"notebook",
+	ret = gtranslator_utils_get_ui_objects (PKGDATADIR "/preferences-dialog.ui",
+		root_objects,
 		&error_widget,
 		
 		"notebook", &dlg->priv->notebook,
 
-		"warn_if_contains_fuzzy_checkbutton", &dlg->priv->warn_if_contains_fuzzy_checkbutton,
+		"warn_if_fuzzy_checkbutton", &dlg->priv->warn_if_contains_fuzzy_checkbutton,
 		"delete_compiled_checkbutton", &dlg->priv->delete_compiled_checkbutton,
-
 		"autosave_checkbutton", &dlg->priv->autosave_checkbutton,
 		"autosave_interval_spinbutton", &dlg->priv->autosave_interval_spinbutton,
 		"autosave_hbox", &dlg->priv->autosave_hbox,
 		"create_backup_checkbutton", &dlg->priv->create_backup_checkbutton,
 
-		"highlight_syntax_checkbutton", &dlg->priv->highlight_syntax_checkbutton,
+		"highlight_checkbutton", &dlg->priv->highlight_syntax_checkbutton,
 		"visible_whitespace_checkbutton", &dlg->priv->visible_whitespace_checkbutton,
 		"use_custom_font_checkbutton", &dlg->priv->use_custom_font_checkbutton,
 		"editor_font_fontbutton", &dlg->priv->editor_font_fontbutton,
 		"editor_font_hbox", &dlg->priv->editor_font_hbox,
 
-		"unmark_fuzzy_when_changed_checkbutton", &dlg->priv->unmark_fuzzy_when_changed_checkbutton,
+		"unmark_fuzzy_checkbutton", &dlg->priv->unmark_fuzzy_when_changed_checkbutton,
 		"spellcheck_checkbutton", &dlg->priv->spellcheck_checkbutton,
 
 		"profile_treeview", &dlg->priv->profile_treeview,
@@ -1145,8 +1166,8 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 
 		"use_lang_profile_in_tm", &dlg->priv->use_lang_profile_in_tm,
 		"tm_lang_entry", &dlg->priv->tm_lang_entry,		  			  
- 		"missing_words_spinbutton", &dlg->priv->missing_words_spinbutton,
- 		"sentence_length_spinbutton", &dlg->priv->sentence_length_spinbutton,
+		"missing_words_spinbutton", &dlg->priv->missing_words_spinbutton,
+		"sentence_length_spinbutton", &dlg->priv->sentence_length_spinbutton,
  		
 		"gdl_combobox", &dlg->priv->gdl_combobox,
 		"scheme_color_combobox", &dlg->priv->scheme_color_combobox,

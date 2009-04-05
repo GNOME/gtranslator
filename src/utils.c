@@ -34,7 +34,6 @@
 
 #include <glib.h>
 #include <glib/gi18n.h>
-#include <glade/glade.h>
 #include <gtk/gtk.h>
 
 static const gchar * badwords[]= 
@@ -299,110 +298,131 @@ gtranslator_utils_menu_position_under_tree_view (GtkMenu  *menu,
 	}
 }
 
+static GtkWidget *
+handle_builder_error (const gchar *message,
+		      ...)
+{
+	GtkWidget *label;
+	gchar *msg;
+	gchar *msg_plain;
+	va_list args;
+
+	va_start (args, message);
+	va_arg (args, const gchar *);
+	msg_plain = g_strdup_vprintf (message, args);
+
+	msg = g_strconcat ("<span size=\"large\" weight=\"bold\">",
+			msg_plain, "</span>\n\n",
+			_("Please check your installation."), NULL);
+	label = gtk_label_new (msg);
+
+	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+
+	g_free (msg_plain);
+	g_free (msg);
+
+	gtk_misc_set_padding (GTK_MISC (label), 5, 5);
+
+	return label;
+}
 
 /**
- * gtranslator_utils_get_glade_widgets:
- * @filename: the path to the glade file
- * @root_node: the root node in the glade file
+ * gtranslator_utils_get_ui_objects:
+ * @filename: the path to the gtk builder file
+ * @root_objects: a NULL terminated list of root objects to load or NULL to
+ *                load all objects
  * @error_widget: a pointer were a #GtkLabel
- * @widget_name: the name of the first widget
- * @...: a pointer were the first widget is returned, followed by more
- *       name / widget pairs and terminated by NULL.
+ * @object_name: the name of the first object
+ * @...: a pointer were the first object is returned, followed by more
+ *       name / object pairs and terminated by NULL.
  *
- * This function gets the requested widgets from a glade file. In case
+ * This function gets the requested objects from a GtkBuilder ui file. In case
  * of error it returns FALSE and sets error_widget to a GtkLabel containing
  * the error message to display.
  *
- * Returns: FALSE if an error occurs, TRUE on success.
+ * Returns FALSE if an error occurs, TRUE on success.
  */
 gboolean
-gtranslator_utils_get_glade_widgets (const gchar *filename,
-				     const gchar *root_node,
-				     GtkWidget **error_widget,
-				     const gchar *widget_name,
-				     ...)
+gtranslator_utils_get_ui_objects (const gchar  *filename,
+				  gchar       **root_objects,
+				  GtkWidget   **error_widget,
+				  const gchar  *object_name,
+				  ...)
 {
-	GtkWidget *label;
-	GladeXML *gui;
+	GtkBuilder *builder;
 	va_list args;
 	const gchar *name;
-	gchar *msg;
+	GError *error = NULL;
 	gchar *filename_markup;
-	gchar *msg_plain;
 	gboolean ret = TRUE;
 
 	g_return_val_if_fail (filename != NULL, FALSE);
 	g_return_val_if_fail (error_widget != NULL, FALSE);
-	g_return_val_if_fail (widget_name != NULL, FALSE);
+	g_return_val_if_fail (object_name != NULL, FALSE);
 
+	filename_markup = g_markup_printf_escaped ("<i>%s</i>", filename);
 	*error_widget = NULL;
 
-	gui = glade_xml_new (filename, root_node, NULL);
-	if (!gui)
+	builder = gtk_builder_new ();
+	
+	if (root_objects != NULL)
+		gtk_builder_add_objects_from_file (builder, 
+						   filename, 
+						   root_objects, 
+						   &error);
+	else
+		gtk_builder_add_from_file (builder,
+					   filename,
+					   &error);
+
+	if (error != NULL)
 	{
-		filename_markup = g_markup_printf_escaped ("<i>%s</i>", filename);
-		msg_plain = g_strdup_printf (_("Unable to find file %s."),
-				filename_markup);
-		msg = g_strconcat ("<span size=\"large\" weight=\"bold\">",
-				msg_plain, "</span>\n\n",
-				_("Please check your installation."), NULL);
-		label = gtk_label_new (msg);
-
-		gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-		gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-		
+		*error_widget = handle_builder_error (_("Unable to open ui file %s. Error: %s"),
+						      filename_markup,
+						      error->message);
+		g_error_free (error);
 		g_free (filename_markup);
-		g_free (msg_plain);
-		g_free (msg);
-
-		gtk_misc_set_padding (GTK_MISC (label), 5, 5);
- 		
-		*error_widget = label;
 
 		return FALSE;
 	}
 
-	va_start (args, widget_name);
-	for (name = widget_name; name; name = va_arg (args, const gchar *) )
+	va_start (args, object_name);
+	for (name = object_name; name; name = va_arg (args, const gchar *) )
 	{
-		GtkWidget **wid;
+		GObject **gobj;
 
-		wid = va_arg (args, GtkWidget **);
-		*wid = glade_xml_get_widget (gui, name);
-		if (*wid == NULL)
+		gobj = va_arg (args, GObject **);
+		*gobj = gtk_builder_get_object (builder, name);
+
+		if (!*gobj)
 		{
-			g_warning ("Cannot find widget '%s' inside file '%s'.",
-				   name,
-				   filename);
-				   
-			filename_markup = g_markup_printf_escaped ("<i>%s</i>", filename);
-			msg_plain = g_strdup_printf (
-					_("Unable to find the required widgets inside file %s."),
-					filename_markup);
-			msg = g_strconcat ("<span size=\"large\" weight=\"bold\">",
-					msg_plain, "</span>\n\n",
-					_("Please check your installation."), NULL);
-			label = gtk_label_new (msg);
-
-			gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-			gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-			
-			g_free (filename_markup);
-			g_free (msg_plain);
-			g_free (msg);
-
-			gtk_misc_set_padding (GTK_MISC (label), 5, 5);
- 			
-			*error_widget = label;
-
+			*error_widget = handle_builder_error (_("Unable to find the object '%s' inside file %s."), 
+							      name, 
+							      filename_markup),
 			ret = FALSE;
-
 			break;
+		}
+
+		/* we return a new ref for the root objects,
+		 * the others are already reffed by their parent root object */
+		if (root_objects != NULL)
+		{
+			gint i;
+
+			for (i = 0; root_objects[i] != NULL; ++i)
+			{
+				if ((strcmp (name, root_objects[i]) == 0))
+				{
+					g_object_ref (*gobj);
+				}
+			}
 		}
 	}
 	va_end (args);
 
-	g_object_unref (gui);
+	g_free (filename_markup);
+	g_object_unref (builder);
 
 	return ret;
 }

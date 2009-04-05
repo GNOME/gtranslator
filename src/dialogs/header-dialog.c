@@ -244,6 +244,10 @@ static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
 {
 	gboolean ret;
 	GtkWidget *error_widget;
+	gchar *root_objects [] = {
+		"main_box",
+		NULL
+	};
 	
 	dlg->priv = GTR_HEADER_DIALOG_GET_PRIVATE (dlg);
 
@@ -267,8 +271,8 @@ static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
 			  G_CALLBACK (gtk_widget_destroy),
 			  NULL);
 	
-	ret = gtranslator_utils_get_glade_widgets(PKGDATADIR"/header-dialog.glade",
-		"main_box",
+	ret = gtranslator_utils_get_ui_objects (PKGDATADIR"/header-dialog.ui",
+		root_objects,
 		&error_widget,
 		"main_box", &dlg->priv->main_box,
 		"notebook", &dlg->priv->notebook,

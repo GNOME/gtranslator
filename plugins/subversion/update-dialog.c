@@ -217,6 +217,10 @@ gtranslator_update_dialog_init (GtranslatorUpdateDialog *dlg)
 {
 	gboolean ret;
 	GtkWidget *error_widget;
+	gchar *root_objects [] = {
+	  "upadate_main_box",
+	  NULL
+	};
 	
 	dlg->priv = GTR_UPDATE_DIALOG_GET_PRIVATE (dlg);
 	
@@ -244,16 +248,13 @@ gtranslator_update_dialog_init (GtranslatorUpdateDialog *dlg)
 			  G_CALLBACK (dialog_response_handler),
 			  NULL);
 	
-	/*Glade*/
-	ret = gtranslator_utils_get_glade_widgets (GLADE_FILE,
-		"update_main_box",
-		&error_widget,
-		
-		"update_main_box", &dlg->priv->main_box,
-		"dir_button", &dlg->priv->dir_button,
-		"update_treeview", &dlg->priv->update_treeview,
-		
-		NULL);
+	ret = gtranslator_utils_get_ui_objects (UI_FILE,
+						root_objects,
+						&error_widget,
+						"update_main_box", &dlg->priv->main_box,
+						"dir_button", &dlg->priv->dir_button,
+						"update_treeview", &dlg->priv->update_treeview,
+						NULL);
 	
 	if(!ret)
 	{

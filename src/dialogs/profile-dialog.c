@@ -335,6 +335,10 @@ static void gtranslator_profile_dialog_init (GtranslatorProfileDialog *dlg)
 {
 	gboolean ret;
 	GtkWidget *error_widget;
+	gchar *root_objects [] = {
+		"profiles_dialog",
+		NULL
+	};
 	
 	dlg->priv = GTR_PROFILE_DIALOG_GET_PRIVATE (dlg);
 	
@@ -346,8 +350,8 @@ static void gtranslator_profile_dialog_init (GtranslatorProfileDialog *dlg)
 	gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);
 
-	ret = gtranslator_utils_get_glade_widgets(PKGDATADIR"/profile-dialog.glade",
-		"profiles_dialog",
+	ret = gtranslator_utils_get_ui_objects (PKGDATADIR"/profile-dialog.ui",
+		root_objects,
 		&error_widget,
 		"profiles_dialog", &dlg->priv->main_box,
 		"profile_entry", &dlg->priv->profile_name_entry,

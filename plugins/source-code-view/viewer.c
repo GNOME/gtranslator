@@ -64,6 +64,10 @@ gtranslator_viewer_init (GtranslatorViewer *dlg)
 	gboolean ret;
 	GtkWidget *error_widget;
 	GtkWidget *sw;
+	gchar *root_objects [] = {
+		"main_box",
+		NULL
+	};
 	
 	dlg->priv = GTR_VIEWER_GET_PRIVATE (dlg);
 	
@@ -89,9 +93,9 @@ gtranslator_viewer_init (GtranslatorViewer *dlg)
 			  G_CALLBACK (dialog_response_handler),
 			  NULL);
 	
-	/*Glade*/
-	ret = gtranslator_utils_get_glade_widgets(DATADIR "/viewer.glade",
-		"main_box",
+	/*Builder*/
+	ret = gtranslator_utils_get_ui_objects (DATADIR "/viewer.ui",
+		root_objects,
 		&error_widget,
 		
 		"main_box", &dlg->priv->main_box,

@@ -352,6 +352,10 @@ gtranslator_search_dialog_init (GtranslatorSearchDialog *dlg)
 	GtkWidget *content;
 	GtkWidget *error_widget;
 	gboolean ret;
+	gchar *root_objects [] = {
+		"search_dialog_content",
+		NULL
+	};
 
 	dlg->priv = GTR_SEARCH_DIALOG_GET_PRIVATE (dlg);
 
@@ -369,8 +373,8 @@ gtranslator_search_dialog_init (GtranslatorSearchDialog *dlg)
 	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), 5);
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);
 
-	ret = gtranslator_utils_get_glade_widgets (PKGDATADIR"/search-dialog.glade",
-					     "search_dialog_content",
+	ret = gtranslator_utils_get_ui_objects (PKGDATADIR"/search-dialog.ui",
+					     root_objects,
 					     &error_widget,
 					     "search_dialog_content", &content,
 					     "table", &dlg->priv->table,

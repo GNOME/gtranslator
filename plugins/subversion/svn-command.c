@@ -107,18 +107,20 @@ simple_prompt (SimplePromptArgs *args)
 	gboolean ret;
 	svn_error_t *err = NULL;
 	SvnCommand *svn_command;
-
-	ret = gtranslator_utils_get_glade_widgets (GLADE_FILE,
-											   "svn_user_auth",
-											   &error_widget,
-											   
-											   "svn_user_auth", &svn_user_auth,
-											   "auth_realm", &auth_realm,
-											   "username_entry", &username_entry,
-											   "password_entry", &password_entry,
-											   "remember_pwd", &remember_pwd,
-											   
-											   NULL);
+	gchar *root_objects [] = {
+	  "svn_user_auth",
+	  NULL
+	};
+	
+	ret = gtranslator_utils_get_ui_objects (UI_FILE,
+											root_objects,
+											&error_widget,
+											"svn_user_auth", &svn_user_auth,
+											"auth_realm", &auth_realm,
+											"username_entry", &username_entry,
+											"password_entry", &password_entry,
+											"remember_pwd", &remember_pwd,
+											NULL);
 	
 	if(!ret)
 	{
@@ -198,17 +200,19 @@ ssl_server_trust_prompt (SSLServerTrustArgs *args)
 	svn_error_t *err = NULL;
 	gchar* info;
 	SvnCommand *svn_command;
+	gchar *root_objects [] = {
+	  "svn_server_trust",
+	  NULL
+	};
 	
-	ret = gtranslator_utils_get_glade_widgets (GLADE_FILE,
-											   "svn_server_trust",
-											   &error_widget,
-											   
-											   "svn_server_trust", &svn_server_trust,
-											   "realm_label", &auth_realm,
-											   "server_info_label", &server_info,
-											   "remember_check", &remember_check,
-											   
-											   NULL);
+	ret = gtranslator_utils_get_ui_objects (UI_FILE,
+											root_objects,
+											&error_widget,
+											"svn_server_trust", &svn_server_trust,
+											"realm_label", &auth_realm,
+											"server_info_label", &server_info,
+											"remember_check", &remember_check,
+											NULL);
 	
 	if(!ret)
 	{

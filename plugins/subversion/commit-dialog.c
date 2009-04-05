@@ -554,6 +554,10 @@ gtranslator_commit_dialog_init (GtranslatorCommitDialog *dlg)
 	GtkWidget *error_widget;
 	GtkWidget *sw_view;
 	gboolean data;
+	gchar *root_objects [] = {
+		"commit_main_box",
+		NULL
+	};
 	
 	dlg->priv = GTR_COMMIT_DIALOG_GET_PRIVATE (dlg);
 	
@@ -585,8 +589,8 @@ gtranslator_commit_dialog_init (GtranslatorCommitDialog *dlg)
 			  NULL);
 	
 	/*Glade*/
-	ret = gtranslator_utils_get_glade_widgets (GLADE_FILE,
-		"commit_main_box",
+	ret = gtranslator_utils_get_ui_objects (UI_FILE,
+		root_objects,
 		&error_widget,
 		
 		"commit_main_box", &dlg->priv->main_box,

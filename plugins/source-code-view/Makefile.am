@@ -24,11 +24,11 @@ libsourcecodeview_la_LDFLAGS = \
 	$(PLUGIN_LIBTOOL_FLAGS)				\
 	$(GTRANSLATOR_LIBS)
 
-gladedir = $(pkgdatadir)
+uidir = $(pkgdatadir)
 
-glade_DATA =  \
-        viewer.glade \
-	source-code-view-dialog.glade
+ui_DATA =  \
+        viewer.ui \
+	source-code-view-dialog.ui
 
 # Plugin Info
 
@@ -40,7 +40,7 @@ plugin_DATA = $(plugin_in_files:.gtranslator-plugin.desktop.in=.gtranslator.plug
 
 EXTRA_DIST =	\
 	$(plugin_in_files)	\
-	$(glade_DATA)
+	$(ui_DATA)
 
 CLEANFILES = $(plugin_DATA)
 DISTCLEANFILES = $(plugin_DATA)

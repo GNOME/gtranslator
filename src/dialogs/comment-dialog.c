@@ -83,6 +83,10 @@ gtranslator_comment_dialog_init (GtranslatorCommentDialog *dlg)
 {
 	gboolean ret;
 	GtkWidget *error_widget;
+	gchar *root_objects [] = {
+		"main_box",
+		NULL
+	};
 	
 	dlg->priv = GTR_COMMENT_DIALOG_GET_PRIVATE (dlg);
 	
@@ -109,8 +113,8 @@ gtranslator_comment_dialog_init (GtranslatorCommentDialog *dlg)
 			  NULL);
 	
 	/*Glade*/
-	ret = gtranslator_utils_get_glade_widgets(PKGDATADIR "/comment-dialog.glade",
-		"main_box",
+	ret = gtranslator_utils_get_ui_objects (PKGDATADIR "/comment-dialog.ui",
+		root_objects,
 		&error_widget,
 		
 		"main_box", &dlg->priv->main_box,

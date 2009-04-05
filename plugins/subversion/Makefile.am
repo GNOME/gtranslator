@@ -70,10 +70,10 @@ libsubversion_la_LDFLAGS = \
 	$(GTRANSLATOR_LIBS)				\
 	$(SVN_LIB)
 
-gladedir = $(pkgdatadir)
+uidir = $(pkgdatadir)
 
-glade_DATA =  \
-	subversion.glade
+ui_DATA =  \
+	subversion.ui
 
 pixmaps_dir = $(datadir)/pixmaps/gtranslator
 pixmaps__DATA = \
@@ -94,7 +94,7 @@ plugin_in_files = subversion.gtranslator-plugin.desktop.in
 plugin_DATA = $(plugin_in_files:.gtranslator-plugin.desktop.in=.gtranslator.plugin)
 
 EXTRA_DIST =	\
-	$(glade_DATA)	\
+	$(ui_DATA)	\
 	$(pixmaps__DATA)	\
 	$(plugin_in_files)	\
 	subversion-enum-types.h.template \

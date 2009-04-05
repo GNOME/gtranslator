@@ -36,7 +36,7 @@ G_BEGIN_DECLS
 #define GTR_IS_SUBVERSION_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_SUBVERSION_PLUGIN))
 #define GTR_SUBVERSION_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_SUBVERSION_PLUGIN_PLUGIN, GtranslatorSubversionPluginClass))
 
-#define GLADE_FILE DATADIR "/subversion.glade"
+#define UI_FILE DATADIR "/subversion.ui"
 
 /* Gconf keys */
 #define SUBVERSION_BASE_KEY "/apps/gtranslator/plugins/subversion"

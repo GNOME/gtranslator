@@ -360,15 +360,19 @@ get_configuration_dialog (GtranslatorSubversionPlugin *plugin)
 
 	gboolean ret;
 	GtkWidget *error_widget;
+	gchar *root_objects [] = {
+	  "settings_dialog",
+	  NULL
+	};
 	
-	ret = gtranslator_utils_get_glade_widgets (GLADE_FILE,
-						   "settings_dialog",
-						   &error_widget,
-						   "settings_dialog", &plugin->priv->dialog,
-						   "main_box", &plugin->priv->main_box,
-						   "program_name", &plugin->priv->program_name_entry,
-						   "line_argument", &plugin->priv->line_argument_entry,
-						   NULL);
+	ret = gtranslator_utils_get_ui_objects (UI_FILE,
+						root_objects,
+						&error_widget,
+						"settings_dialog", &plugin->priv->dialog,
+						"main_box", &plugin->priv->main_box,
+						"program_name", &plugin->priv->program_name_entry,
+						"line_argument", &plugin->priv->line_argument_entry,
+						NULL);
 
 	if(!ret)
 	{

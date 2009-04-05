@@ -34,7 +34,7 @@
 
 #define OPEN_TRAN_PLUGIN_ICON "open-tran.png"
 #define WINDOW_DATA_KEY	"GtranslatorOpenTranPluginWindowData"
-#define GLADE_FILE DATADIR"/open-tran-dialog.glade"
+#define UI_FILE DATADIR"/open-tran-dialog.ui"
 
 #define GTR_OPEN_TRAN_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
@@ -163,15 +163,19 @@ get_configuration_dialog (GtranslatorOpenTranPlugin *plugin)
 
 	gboolean ret;
 	GtkWidget *error_widget;
+	gchar *root_objects [] = {
+		"dialog",
+		NULL
+	};
 	
-	ret = gtranslator_utils_get_glade_widgets (GLADE_FILE,
-						  "dialog",
-						  &error_widget,
-						  "dialog", &plugin->priv->dialog,
-						  "main_box", &plugin->priv->main_box,
-						  "search_code", &plugin->priv->search_code_entry,
-						  "own_code", &plugin->priv->own_code_entry,
-						  NULL);
+	ret = gtranslator_utils_get_ui_objects (UI_FILE,
+						root_objects,
+						&error_widget,
+						"dialog", &plugin->priv->dialog,
+						"main_box", &plugin->priv->main_box,
+						"search_code", &plugin->priv->search_code_entry,
+						"own_code", &plugin->priv->own_code_entry,
+						NULL);
 
 	if(!ret)
 	{
