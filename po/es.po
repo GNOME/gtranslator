@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: gtranslator.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&component=general\n"
-"POT-Creation-Date: 2009-03-19 14:39+0000\n"
-"PO-Revision-Date: 2009-03-20 13:52+0100\n"
+"POT-Creation-Date: 2009-04-05 14:54+0000\n"
+"PO-Revision-Date: 2009-04-05 18:47+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -444,15 +444,27 @@ msgstr "Insertar etiquetas"
 msgid "Tags detection and easy insertion."
 msgstr "Detección e inserción fácil de etiquetas."
 
-#: ../plugins/open-tran/open-tran-dialog.glade.h:1
+#: ../plugins/open-tran/open-tran-dialog.ui.h:1
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:1
+#: ../plugins/subversion/subversion.ui.h:2
+#: ../src/dialogs/preferences-dialog.ui.h:1
+msgid "    "
+msgstr "    "
+
+#: ../plugins/open-tran/open-tran-dialog.ui.h:2
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:2
+msgid "     "
+msgstr "     "
+
+#: ../plugins/open-tran/open-tran-dialog.ui.h:3
 msgid "<b>Code language of the results:</b>"
 msgstr "<b>Código del idioma del resultado:</b>"
 
-#: ../plugins/open-tran/open-tran-dialog.glade.h:2
+#: ../plugins/open-tran/open-tran-dialog.ui.h:4
 msgid "<b>Code language to query open-tran:</b>"
 msgstr "<b>Código del idioma para consultar a Open Tran:</b>"
 
-#: ../plugins/open-tran/open-tran-dialog.glade.h:3
+#: ../plugins/open-tran/open-tran-dialog.ui.h:5
 msgid "Open Tran Settings"
 msgstr "Ajustes de Open Tran"
 
@@ -514,25 +526,24 @@ msgid "Look for phrases in Open tran memory translation database."
 msgstr ""
 "Buscar frases en la base de datos de la memoria de traducción de Open Tran."
 
-#: ../plugins/source-code-view/source-code-view-dialog.glade.h:1
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:3
 msgid "<b>Line command:</b>"
 msgstr "<b>Comando:</b>"
 
-#: ../plugins/source-code-view/source-code-view-dialog.glade.h:2
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:4
 msgid "<b>Program command:</b>"
 msgstr "<b>Comando de programa:</b>"
 
-#: ../plugins/source-code-view/source-code-view-dialog.glade.h:3
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:5
 msgid "Source View Settings"
 msgstr "Ajustes de vista de fuentes"
 
-#: ../plugins/source-code-view/source-code-view-dialog.glade.h:4
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:6
 msgid "Use external editor"
 msgstr "Usar editor externo"
 
 #: ../plugins/source-code-view/source-code-view-plugin.c:115
 #, c-format
-#| msgid "Please, install %s to be able to show the file"
 msgid "Please install %s to be able to show the file"
 msgstr "Instale %s para poder mostrar el archivo"
 
@@ -548,21 +559,23 @@ msgstr "Mostrar el mensaje en el código fuente."
 msgid "Source Code View"
 msgstr "Visor de código fuente"
 
-#: ../plugins/source-code-view/viewer.c:75
+#: ../plugins/source-code-view/viewer.c:79
 msgid "Source Viewer"
 msgstr "Visor de código fuente"
+
+#: ../plugins/source-code-view/viewer.ui.h:1
+msgid "<b>Source code</b>"
+msgstr "<b>Código fuente</b>"
 
 #: ../plugins/subversion/checkout-dialog.c:76
 msgid "Subversion: Checkout complete."
 msgstr "Subversion: Descarga completada."
 
 #: ../plugins/subversion/checkout-dialog.c:125
-#| msgid "Please, add a directory path to make the checkout"
 msgid "Please add a directory path to make the checkout"
 msgstr "Añada una ruta de directorio para realizar la descarga"
 
 #: ../plugins/subversion/checkout-dialog.c:138
-#| msgid "Please, add a Subversion URL"
 msgid "Please add a Subversion URL"
 msgstr "Añada un URL de Subversion"
 
@@ -570,7 +583,7 @@ msgstr "Añada un URL de Subversion"
 msgid "Checkout directory"
 msgstr "Descargar directorio"
 
-#: ../plugins/subversion/checkout-dialog.c:260
+#: ../plugins/subversion/checkout-dialog.c:264
 msgid "Checkout repository"
 msgstr "Descargar repositorio"
 
@@ -591,7 +604,6 @@ msgstr "Spanish"
 
 #: ../plugins/subversion/commit-dialog.c:295
 #, c-format
-#| msgid "The ChangeLog file '%s' does not exists"
 msgid "The ChangeLog file '%s' does not exist"
 msgstr "El archivo ChangeLog «%s» no existe"
 
@@ -603,7 +615,7 @@ msgstr "¿Está seguro de que quiere pasar un mensaje de registro vacío?"
 msgid "You have to select at least one file to send"
 msgstr "Debe seleccionar al menos un archivo para enviar"
 
-#: ../plugins/subversion/commit-dialog.c:570
+#: ../plugins/subversion/commit-dialog.c:574
 msgid "Commit Changes"
 msgstr "Subir cambios"
 
@@ -613,7 +625,6 @@ msgstr "Subversion: Diff completado."
 
 #: ../plugins/subversion/diff-dialog.c:108
 #, c-format
-#| msgid "Please, install %s to be able to diff the file"
 msgid "Please install %s to be able to diff the file"
 msgstr "Instale %s para poder ver el diff del archivo"
 
@@ -621,7 +632,7 @@ msgstr "Instale %s para poder ver el diff del archivo"
 msgid "Diff file"
 msgstr "Archivo diff"
 
-#: ../plugins/subversion/diff-dialog.c:479
+#: ../plugins/subversion/diff-dialog.c:483
 msgid "Diff"
 msgstr "Diff"
 
@@ -673,100 +684,104 @@ msgstr "Obtener una copia del repositorio nueva"
 msgid "S_ubversion"
 msgstr "S_ubversion"
 
-#: ../plugins/subversion/subversion.glade.h:1
+#: ../plugins/subversion/subversion.ui.h:1
+msgid "  "
+msgstr "  "
+
+#: ../plugins/subversion/subversion.ui.h:3
+msgid "        "
+msgstr "        "
+
+#: ../plugins/subversion/subversion.ui.h:4
 msgid "<b>Diff options:</b>"
 msgstr "<b>Opciones de diff</b>"
 
-#: ../plugins/subversion/subversion.glade.h:2
+#: ../plugins/subversion/subversion.ui.h:5
 msgid "<b>Diff program:</b>"
 msgstr "<b>Programa de diff:</b>"
 
-#: ../plugins/subversion/subversion.glade.h:3
+#: ../plugins/subversion/subversion.ui.h:6
 msgid "<b>Directory to checkout:</b>"
 msgstr "<b>Directorio que descargar:</b>"
 
-#: ../plugins/subversion/subversion.glade.h:4
+#: ../plugins/subversion/subversion.ui.h:7
 msgid "<b>Directory to update:</b>"
 msgstr "<b>Directorio que actualizar:</b>"
 
-#: ../plugins/subversion/subversion.glade.h:5
+#: ../plugins/subversion/subversion.ui.h:8
 msgid "<b>Information:</b>"
 msgstr "<b>Información:</b>"
 
-#: ../plugins/subversion/subversion.glade.h:6
+#: ../plugins/subversion/subversion.ui.h:9
 msgid "<b>Log Message:</b>"
 msgstr "<b>Mensaje del registro:</b>"
 
-#: ../plugins/subversion/subversion.glade.h:7
+#: ../plugins/subversion/subversion.ui.h:10
 msgid "<b>Password:</b>"
 msgstr "<b>Contraseña:</b>"
 
-#: ../plugins/subversion/subversion.glade.h:8
+#: ../plugins/subversion/subversion.ui.h:11
 msgid "<b>Realm:</b>"
 msgstr "<b>Reino:</b>"
 
-#: ../plugins/subversion/subversion.glade.h:9
+#: ../plugins/subversion/subversion.ui.h:12
 msgid "<b>Select files to Commit:</b>"
 msgstr "<b>Seleccionar archivos para subir:</b>"
 
-#: ../plugins/subversion/subversion.glade.h:10
+#: ../plugins/subversion/subversion.ui.h:13
 msgid "<b>Subversion URL:</b>"
 msgstr "<b>URL de subversion:</b>"
 
-#: ../plugins/subversion/subversion.glade.h:11
+#: ../plugins/subversion/subversion.ui.h:14
 msgid "<b>Username:</b>"
 msgstr "<b>Usuario:</b>"
 
-#: ../plugins/subversion/subversion.glade.h:12
+#: ../plugins/subversion/subversion.ui.h:15
 msgid "Add Log Message to ChangeLog file"
 msgstr "Añadir mensaje de registro al archivo ChangeLog"
 
-#: ../plugins/subversion/subversion.glade.h:13
+#: ../plugins/subversion/subversion.ui.h:16
 msgid "Line argument:"
 msgstr "Argumento de línea:"
 
-#: ../plugins/subversion/subversion.glade.h:14
+#: ../plugins/subversion/subversion.ui.h:17
 msgid "Program name:"
 msgstr "Nombre del programa:"
 
-#: ../plugins/subversion/subversion.glade.h:15
+#: ../plugins/subversion/subversion.ui.h:18
 msgid "Remember Password"
 msgstr "Recordar contraseña"
 
-#: ../plugins/subversion/subversion.glade.h:16
+#: ../plugins/subversion/subversion.ui.h:19
 msgid "Remember this decision"
 msgstr "Recordar esta decisión"
 
-#: ../plugins/subversion/subversion.glade.h:17
+#: ../plugins/subversion/subversion.ui.h:20
 msgid "Repository authorization"
 msgstr "Autorización del repositorio"
 
-#: ../plugins/subversion/subversion.glade.h:18
+#: ../plugins/subversion/subversion.ui.h:21
 msgid "Retrieving status..."
 msgstr "Obteniendo estado..."
 
-#: ../plugins/subversion/subversion.glade.h:19
+#: ../plugins/subversion/subversion.ui.h:22
 msgid "Save the diff file"
 msgstr "Guardar el archivo diff"
 
-#: ../plugins/subversion/subversion.glade.h:20
-msgid "Select Folder"
-msgstr "Seleccionar carpeta"
-
-#: ../plugins/subversion/subversion.glade.h:21
+#: ../plugins/subversion/subversion.ui.h:23
 msgid "Send Changes"
 msgstr "Enviar cambios"
 
-#: ../plugins/subversion/subversion.glade.h:22
-#: ../plugins/subversion/update-dialog.c:230
+#: ../plugins/subversion/subversion.ui.h:24
+#: ../plugins/subversion/update-dialog.c:234
 msgid "Update repository"
 msgstr "Actualizar repositorio"
 
-#: ../plugins/subversion/subversion.glade.h:23
+#: ../plugins/subversion/subversion.ui.h:25
 msgid "Use configured program to view the diff"
 msgstr "Usar el programa configurado para ver el diff"
 
-#: ../plugins/subversion/subversion.glade.h:24
+#: ../plugins/subversion/subversion.ui.h:26
 msgid "label"
 msgstr "etiqueta"
 
@@ -778,118 +793,118 @@ msgstr "Un complemento de cliente de subversion basado en libsvn."
 msgid "Subversion"
 msgstr "Subversion"
 
-#: ../plugins/subversion/svn-command.c:172
-#: ../plugins/subversion/svn-command.c:252
+#: ../plugins/subversion/svn-command.c:177
+#: ../plugins/subversion/svn-command.c:262
 msgid "Authentication canceled"
 msgstr "Autenticación cancelada"
 
-#: ../plugins/subversion/svn-command.c:225
+#: ../plugins/subversion/svn-command.c:235
 msgid "Hostname:"
 msgstr "Nombre del equipo:"
 
-#: ../plugins/subversion/svn-command.c:226
+#: ../plugins/subversion/svn-command.c:236
 msgid "Fingerprint:"
 msgstr "Huella:"
 
-#: ../plugins/subversion/svn-command.c:227
+#: ../plugins/subversion/svn-command.c:237
 msgid "Valid from:"
 msgstr "Válido desde:"
 
-#: ../plugins/subversion/svn-command.c:228
+#: ../plugins/subversion/svn-command.c:238
 msgid "Valid until:"
 msgstr "Válido hasta:"
 
-#: ../plugins/subversion/svn-command.c:229
+#: ../plugins/subversion/svn-command.c:239
 msgid "Issuer DN:"
 msgstr "DN expedido:"
 
-#: ../plugins/subversion/svn-command.c:230
+#: ../plugins/subversion/svn-command.c:240
 msgid "DER certificate:"
 msgstr "Certificado DER:"
 
-#: ../plugins/subversion/svn-command.c:377
-#: ../plugins/subversion/svn-command.c:393
+#: ../plugins/subversion/svn-command.c:387
+#: ../plugins/subversion/svn-command.c:403
 #, c-format
 msgid "Deleted: %s"
 msgstr "Borrado: %s"
 
-#: ../plugins/subversion/svn-command.c:380
-#: ../plugins/subversion/svn-command.c:399
+#: ../plugins/subversion/svn-command.c:390
+#: ../plugins/subversion/svn-command.c:409
 #, c-format
 msgid "Added: %s"
 msgstr "Añadido: %s"
 
-#: ../plugins/subversion/svn-command.c:383
+#: ../plugins/subversion/svn-command.c:393
 #, c-format
 msgid "Reverted: %s"
 msgstr "Revertido: %s"
 
-#: ../plugins/subversion/svn-command.c:386
+#: ../plugins/subversion/svn-command.c:396
 #, c-format
 msgid "Revert failed: %s"
 msgstr "Falló la reversión: %s"
 
-#: ../plugins/subversion/svn-command.c:390
+#: ../plugins/subversion/svn-command.c:400
 #, c-format
 msgid "Resolved: %s"
 msgstr "Resolueto: %s"
 
-#: ../plugins/subversion/svn-command.c:396
+#: ../plugins/subversion/svn-command.c:406
 #, c-format
 msgid "Updated: %s"
 msgstr "Actualizado: %s"
 
-#: ../plugins/subversion/svn-command.c:402
+#: ../plugins/subversion/svn-command.c:412
 #, c-format
 msgid "Externally Updated: %s"
 msgstr "Actualizado externamente: %s"
 
-#: ../plugins/subversion/svn-command.c:406
+#: ../plugins/subversion/svn-command.c:416
 #, c-format
 msgid "Commit Modified: %s"
 msgstr "El commit modificó: %s"
 
-#: ../plugins/subversion/svn-command.c:410
+#: ../plugins/subversion/svn-command.c:420
 #, c-format
 msgid "Commit Added: %s"
 msgstr "El commit añadió: %s"
 
-#: ../plugins/subversion/svn-command.c:413
+#: ../plugins/subversion/svn-command.c:423
 #, c-format
 msgid "Commit Deleted: %s"
 msgstr "El commit borró: %s"
 
-#: ../plugins/subversion/svn-command.c:417
+#: ../plugins/subversion/svn-command.c:427
 #, c-format
 msgid "Commit Replaced: %s"
 msgstr "El commit reemplazó: %s"
 
-#: ../plugins/subversion/svn-command.c:421
+#: ../plugins/subversion/svn-command.c:431
 #, c-format
 msgid "Created File: %s"
 msgstr "Archivo creado: %s"
 
-#: ../plugins/subversion/svn-command.c:436
+#: ../plugins/subversion/svn-command.c:446
 #, c-format
 msgid "Modified: %s"
 msgstr "Modificado: %s"
 
-#: ../plugins/subversion/svn-command.c:439
+#: ../plugins/subversion/svn-command.c:449
 #, c-format
 msgid "Merged: %s"
 msgstr "Mezclado: %s"
 
-#: ../plugins/subversion/svn-command.c:442
+#: ../plugins/subversion/svn-command.c:452
 #, c-format
 msgid "Conflicted: %s"
 msgstr "En conflicto: %s"
 
-#: ../plugins/subversion/svn-command.c:446
+#: ../plugins/subversion/svn-command.c:456
 #, c-format
 msgid "Missing: %s"
 msgstr "Falta: %s"
 
-#: ../plugins/subversion/svn-command.c:449
+#: ../plugins/subversion/svn-command.c:459
 #, c-format
 msgid "Obstructed: %s"
 msgstr "Obstruído: %s"
@@ -1037,7 +1052,7 @@ msgstr "Contexto:"
 msgid "Extracted comments:"
 msgstr "Comentarios extraídos:"
 
-#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:702
+#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:716
 msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
 msgstr ""
 "<span weight=\"bold\" size=\"large\">Cadenas añadidas a la base de datos</"
@@ -1193,12 +1208,13 @@ msgstr "El administrador del sistema ha desactivado el guardado."
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Si no guarda perderá todos los cambios permanentemente."
 
-#: ../src/dialogs/comment-dialog.c:94
+#: ../src/dialogs/comment-dialog.c:98
 msgid "Edit Comment"
 msgstr "Editar comentario"
 
-#: ../src/dialogs/comment-dialog.glade.h:1
-msgid "<b>Write your comments below:</b>"
+#: ../src/dialogs/comment-dialog.ui.h:1
+#| msgid "<b>Write your comments below:</b>"
+msgid "<b>Write your comments bellow:</b>"
 msgstr "<b>Escriba sus comentarios debajo:</b>"
 
 #: ../src/dialogs/file-dialogs.c:60
@@ -1213,80 +1229,88 @@ msgstr "Plantilla de traducción Gettext"
 msgid "All files"
 msgstr "Todos los archivos"
 
-#: ../src/dialogs/header-dialog.c:255
+#: ../src/dialogs/header-dialog.c:259
 msgid "Edit Header"
 msgstr "Editar la cabecera"
 
-#: ../src/dialogs/header-dialog.glade.h:1
+#: ../src/dialogs/header-dialog.ui.h:1
 msgid "Char_set:"
 msgstr "Co_njunto de caracteres:"
 
-#: ../src/dialogs/header-dialog.glade.h:2
+#: ../src/dialogs/header-dialog.ui.h:2
 msgid "Comment"
 msgstr "Comentario"
 
-#: ../src/dialogs/header-dialog.glade.h:3
+#: ../src/dialogs/header-dialog.ui.h:3
 msgid "Enc_oding:"
 msgstr "_Codificación:"
 
-#: ../src/dialogs/header-dialog.glade.h:4
+#: ../src/dialogs/header-dialog.ui.h:4
 msgid "Language gro_up email:"
 msgstr "Correo-_e del equipo de traducción:"
 
-#: ../src/dialogs/header-dialog.glade.h:5
+#: ../src/dialogs/header-dialog.ui.h:5
 msgid "Po file _revision date:"
 msgstr "Fecha de _revisión del archivo PO:"
 
-#: ../src/dialogs/header-dialog.glade.h:6
+#: ../src/dialogs/header-dialog.ui.h:6
 msgid "Pot _file creation date:"
 msgstr "Fecha de creación del _archivo POT:"
 
-#: ../src/dialogs/header-dialog.glade.h:7
+#: ../src/dialogs/header-dialog.ui.h:7
 msgid "Project"
 msgstr "Proyecto"
 
-#: ../src/dialogs/header-dialog.glade.h:8
+#: ../src/dialogs/header-dialog.ui.h:8
 msgid "Project Id _version:"
 msgstr "_Versión del proyecto:"
 
-#: ../src/dialogs/header-dialog.glade.h:9
-msgid "Report msgid _bugs to:"
-msgstr "Informar de _jerrores en los mensajes a:"
+#: ../src/dialogs/header-dialog.ui.h:9
+#| msgid "Report msgid _bugs to:"
+msgid "Report message _bugs to:"
+msgstr "Informar de _errores en los mensajes a:"
 
-#: ../src/dialogs/header-dialog.glade.h:10
+#: ../src/dialogs/header-dialog.ui.h:10
 msgid "Translator and Language"
 msgstr "Traductor e idioma"
 
-#: ../src/dialogs/header-dialog.glade.h:11
+#: ../src/dialogs/header-dialog.ui.h:11
 msgid "Translator's _email:"
 msgstr "Correo-_e del traductor:"
 
-#: ../src/dialogs/header-dialog.glade.h:12
+#: ../src/dialogs/header-dialog.ui.h:12
 msgid "Translator's _name:"
 msgstr "_Nombre del traductor:"
 
-#: ../src/dialogs/header-dialog.glade.h:13
+#: ../src/dialogs/header-dialog.ui.h:13
 msgid "Use my options to complete the following entries:"
 msgstr "Usar mis opciones para completar las siguientes entradas:"
 
-#: ../src/dialogs/header-dialog.glade.h:14
-#: ../src/dialogs/profile-dialog.glade.h:9
+#: ../src/dialogs/header-dialog.ui.h:14 ../src/dialogs/profile-dialog.ui.h:9
 msgid "_Language:"
 msgstr "_Idioma:"
 
-#: ../src/dialogs/jump-dialog.c:87
+#: ../src/dialogs/jump-dialog.c:92
 msgid "Go to Message"
 msgstr "Ir la mensaje"
 
-#: ../src/dialogs/jump-dialog.glade.h:1
+#: ../src/dialogs/jump-dialog.ui.h:1
 msgid "<b>Enter message number:</b>"
 msgstr "<b>Introducir el número del mensaje:</b>"
+
+#: ../src/dialogs/jump-dialog.ui.h:2
+msgid "gtk-cancel"
+msgstr "gtk-cancel"
+
+#: ../src/dialogs/jump-dialog.ui.h:3
+msgid "gtk-ok"
+msgstr "gtk-ok"
 
 #: ../src/dialogs/preferences-dialog.c:517
 msgid "Active"
 msgstr "Activo"
 
-#: ../src/dialogs/preferences-dialog.c:1046
+#: ../src/dialogs/preferences-dialog.c:1060
 msgid ""
 "<span weight=\"bold\" size=\"large\">Impossible to remove the active "
 "profile</span>"
@@ -1294,11 +1318,11 @@ msgstr ""
 "<span weight=\"bold\" size=\"large\">No se puede eliminar el perfil activo</"
 "span>"
 
-#: ../src/dialogs/preferences-dialog.c:1049
+#: ../src/dialogs/preferences-dialog.c:1063
 msgid "Another profile should be selected as active before"
 msgstr "Antes debería seleccionar otro perfil como activo"
 
-#: ../src/dialogs/preferences-dialog.c:1061
+#: ../src/dialogs/preferences-dialog.c:1075
 msgid ""
 "<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
 "profile?</span>"
@@ -1306,142 +1330,132 @@ msgstr ""
 "<span weight=\"bold\" size=\"large\">¿Está seguro de que quiere borrar este "
 "perfil?</span>"
 
-#: ../src/dialogs/preferences-dialog.c:1095
-#: ../src/dialogs/preferences-dialog.glade.h:15
+#: ../src/dialogs/preferences-dialog.c:1117
+#: ../src/dialogs/preferences-dialog.ui.h:16
 msgid "Gtranslator Preferences"
 msgstr "Preferencias de Gtranslator"
 
-#: ../src/dialogs/preferences-dialog.glade.h:1
-msgid "<b>Anchor style</b>"
-msgstr "<b>Estilo del ancla</b>"
+#: ../src/dialogs/preferences-dialog.ui.h:2
+#| msgid "<b>Anchor style</b>"
+msgid "<b>Anchor style:</b>"
+msgstr "<b>Estilo del ancla:</b>"
 
-#: ../src/dialogs/preferences-dialog.glade.h:2
+#: ../src/dialogs/preferences-dialog.ui.h:3
 msgid "<b>Autosave</b>"
 msgstr "<b>Guardar automáticamente</b>"
 
-#: ../src/dialogs/preferences-dialog.glade.h:3
-msgid "<b>Configuration</b>"
-msgstr "<b>Configuración</b>"
+#: ../src/dialogs/preferences-dialog.ui.h:4
+#| msgid "<b>Configuration</b>"
+msgid "<b>Configuration:</b>"
+msgstr "<b>Configuración:</b>"
 
-#: ../src/dialogs/preferences-dialog.glade.h:4
+#: ../src/dialogs/preferences-dialog.ui.h:5
 msgid "<b>Contents</b>"
 msgstr "<b>Contenido</b>"
 
-#: ../src/dialogs/preferences-dialog.glade.h:5
-msgid "<b>Database</b>"
-msgstr "<b>Base de datos</b>"
+#: ../src/dialogs/preferences-dialog.ui.h:6
+#| msgid "<b>Database</b>"
+msgid "<b>Database:</b>"
+msgstr "<b>Base de datos:</b>"
 
-#: ../src/dialogs/preferences-dialog.glade.h:6
+#: ../src/dialogs/preferences-dialog.ui.h:7
 msgid "<b>General</b>"
 msgstr "<b>General</b>"
 
-#: ../src/dialogs/preferences-dialog.glade.h:7
-msgid "<b>Scheme color</b>"
-msgstr "<b>Esquema de colores</b>"
+#: ../src/dialogs/preferences-dialog.ui.h:8
+#| msgid "<b>Scheme color</b>"
+msgid "<b>Scheme color:</b>"
+msgstr "<b>Esquema de colores:</b>"
 
-#: ../src/dialogs/preferences-dialog.glade.h:8
+#: ../src/dialogs/preferences-dialog.ui.h:9
 msgid "<b>Text Display</b>"
 msgstr "<b>Mostrado de texto</b>"
 
-#: ../src/dialogs/preferences-dialog.glade.h:9
+#: ../src/dialogs/preferences-dialog.ui.h:10
 msgid "Add to Database"
 msgstr "Añadir a la base de datos"
 
-#: ../src/dialogs/preferences-dialog.glade.h:10
+#: ../src/dialogs/preferences-dialog.ui.h:11
 msgid "Check _spelling"
 msgstr "Comprobar _ortografía"
 
-#: ../src/dialogs/preferences-dialog.glade.h:11
+#: ../src/dialogs/preferences-dialog.ui.h:12
 msgid "Create a _backup copy of files before saving"
 msgstr "Crear un _respaldo de los archivos antes de guardar"
 
-#: ../src/dialogs/preferences-dialog.glade.h:12
+#: ../src/dialogs/preferences-dialog.ui.h:13
 msgid "Editor"
 msgstr "Editor"
 
-#: ../src/dialogs/preferences-dialog.glade.h:13
+#: ../src/dialogs/preferences-dialog.ui.h:14
 msgid "Editor _font:"
 msgstr "_Tipografía del editor:"
 
-#: ../src/dialogs/preferences-dialog.glade.h:14
+#: ../src/dialogs/preferences-dialog.ui.h:15
 msgid "Files"
 msgstr "Archivos"
 
-#: ../src/dialogs/preferences-dialog.glade.h:16
+#: ../src/dialogs/preferences-dialog.ui.h:17
 msgid "Interface"
 msgstr "Interfaz"
 
-#: ../src/dialogs/preferences-dialog.glade.h:17
+#: ../src/dialogs/preferences-dialog.ui.h:18
 msgid "Make _whitespace visible"
 msgstr "Hacer visibles los _espacios en blanco"
 
-#: ../src/dialogs/preferences-dialog.glade.h:18
+#: ../src/dialogs/preferences-dialog.ui.h:19
 msgid "Max. # of missing words:"
 msgstr "Número máximo de palabras faltantes:"
 
-#: ../src/dialogs/preferences-dialog.glade.h:19
+#: ../src/dialogs/preferences-dialog.ui.h:20
 msgid "Max. difference in sentence length:"
 msgstr "Diferencia máxima en la longitud de cadena:"
 
-#: ../src/dialogs/preferences-dialog.glade.h:20
+#: ../src/dialogs/preferences-dialog.ui.h:21
 msgid "Plugins"
 msgstr "Complementos"
 
-#: ../src/dialogs/preferences-dialog.glade.h:21
+#: ../src/dialogs/preferences-dialog.ui.h:22
 msgid "Profiles"
 msgstr "Perfiles"
 
-#: ../src/dialogs/preferences-dialog.glade.h:22
+#: ../src/dialogs/preferences-dialog.ui.h:23
 msgid "Select directory contains PO files:"
 msgstr "Seleccionar el directorio que contiene los archivos PO:"
 
-#: ../src/dialogs/preferences-dialog.glade.h:23
-msgid ""
-"Text\n"
-"Icons\n"
-"Text + Icons\n"
-"Gnome toolbar setting\n"
-"Tabs"
-msgstr ""
-"Texto\n"
-"Iconos\n"
-"Texto + Iconos\n"
-"Ajustes de la barra de herramientas de GNOME\n"
-"Solapas"
-
-#: ../src/dialogs/preferences-dialog.glade.h:28 ../src/tab.c:658
+#: ../src/dialogs/preferences-dialog.ui.h:24 ../src/tab.c:658
 msgid "Translation Memory"
 msgstr "Memoria de traducción"
 
-#: ../src/dialogs/preferences-dialog.glade.h:29
+#: ../src/dialogs/preferences-dialog.ui.h:25
 msgid "Use _custom font"
 msgstr "Usar tipografía personali_zada"
 
-#: ../src/dialogs/preferences-dialog.glade.h:30
+#: ../src/dialogs/preferences-dialog.ui.h:26
 msgid "Use only files with this name:"
 msgstr "Sólo usar los archivos con este nombre:"
 
-#: ../src/dialogs/preferences-dialog.glade.h:31
+#: ../src/dialogs/preferences-dialog.ui.h:27
 msgid "_Autosave files every"
 msgstr "_Autoguardar archivos cada"
 
-#: ../src/dialogs/preferences-dialog.glade.h:32
+#: ../src/dialogs/preferences-dialog.ui.h:28
 msgid "_Delete compiled GMO files"
 msgstr "_Borrar los archivos compilados GMO"
 
-#: ../src/dialogs/preferences-dialog.glade.h:33
+#: ../src/dialogs/preferences-dialog.ui.h:29
 msgid "_Highlight message syntax"
 msgstr "_Resaltar la sintaxis del mensaje"
 
-#: ../src/dialogs/preferences-dialog.glade.h:34
+#: ../src/dialogs/preferences-dialog.ui.h:30
 msgid "_Remove fuzzy status if message is changed"
 msgstr "_Quitar el estado difuso si se modifica el mensaje"
 
-#: ../src/dialogs/preferences-dialog.glade.h:35
+#: ../src/dialogs/preferences-dialog.ui.h:31
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "A_visar si el archivo PO contiene traducciones difusas"
 
-#: ../src/dialogs/preferences-dialog.glade.h:36
+#: ../src/dialogs/preferences-dialog.ui.h:32
 msgid "_minutes"
 msgstr "_minutos"
 
@@ -1451,60 +1465,59 @@ msgid ""
 msgstr ""
 "<span weight=\"bold\" size=\"large\">El nombre del perfil ya existe</span>"
 
-#: ../src/dialogs/profile-dialog.c:341
-#| msgid "gtranslator Profile"
+#: ../src/dialogs/profile-dialog.c:345
 msgid "Gtranslator Profile"
 msgstr "Perfil de Gtranslator"
 
-#: ../src/dialogs/profile-dialog.c:374
+#: ../src/dialogs/profile-dialog.c:381
 msgid "Example: nplurals=2; plural=(n != 1);"
 msgstr "Ejemplo: nplurals=2; plural=(n != 1);"
 
-#: ../src/dialogs/profile-dialog.glade.h:1
+#: ../src/dialogs/profile-dialog.ui.h:1
 msgid "<b>Language Settings</b>"
 msgstr "<b>Ajustes del idioma</b>"
 
-#: ../src/dialogs/profile-dialog.glade.h:2
+#: ../src/dialogs/profile-dialog.ui.h:2
 msgid "<b>Profile Information</b>"
 msgstr "<b>Información del perfil</b>"
 
-#: ../src/dialogs/profile-dialog.glade.h:3
+#: ../src/dialogs/profile-dialog.ui.h:3
 msgid "<b>Translator Information</b>"
 msgstr "<b>Información del traductor</b>"
 
-#: ../src/dialogs/profile-dialog.glade.h:4
+#: ../src/dialogs/profile-dialog.ui.h:4
 msgid "Character _set"
 msgstr "Co_njunto de caracteres:"
 
-#: ../src/dialogs/profile-dialog.glade.h:5
+#: ../src/dialogs/profile-dialog.ui.h:5
 msgid "Language _code:"
 msgstr "_Código del idioma:"
 
-#: ../src/dialogs/profile-dialog.glade.h:6
+#: ../src/dialogs/profile-dialog.ui.h:6
 msgid "N_ame:"
 msgstr "N_ombre:"
 
-#: ../src/dialogs/profile-dialog.glade.h:7
+#: ../src/dialogs/profile-dialog.ui.h:7
 msgid "Transfer en_coding:"
 msgstr "_Codificación de transferencia:"
 
-#: ../src/dialogs/profile-dialog.glade.h:8
+#: ../src/dialogs/profile-dialog.ui.h:8
 msgid "_Email:"
 msgstr "Correo-_e:"
 
-#: ../src/dialogs/profile-dialog.glade.h:10
+#: ../src/dialogs/profile-dialog.ui.h:10
 msgid "_Name:"
 msgstr "_Nombre:"
 
-#: ../src/dialogs/profile-dialog.glade.h:11
+#: ../src/dialogs/profile-dialog.ui.h:11
 msgid "_Plural forms:"
 msgstr "Formas _plurales:"
 
-#: ../src/dialogs/profile-dialog.glade.h:12
+#: ../src/dialogs/profile-dialog.ui.h:12
 msgid "_Team email:"
 msgstr "Correo-e del _equipo:"
 
-#: ../src/dialogs/search-dialog.c:323 ../src/dialogs/search-dialog.glade.h:4
+#: ../src/dialogs/search-dialog.c:323 ../src/dialogs/search-dialog.ui.h:4
 msgid "Replace"
 msgstr "Reemplazar"
 
@@ -1512,51 +1525,51 @@ msgstr "Reemplazar"
 msgid "Find"
 msgstr "Buscar"
 
-#: ../src/dialogs/search-dialog.c:438
+#: ../src/dialogs/search-dialog.c:442
 msgid "Replace _All"
 msgstr "Reemplazar _todo"
 
-#: ../src/dialogs/search-dialog.c:441
+#: ../src/dialogs/search-dialog.c:445
 msgid "_Replace"
 msgstr "_Reemplazar"
 
-#: ../src/dialogs/search-dialog.glade.h:1
+#: ../src/dialogs/search-dialog.ui.h:1
 msgid "Include fuzzy strings"
 msgstr "Incluir cadenas difusas"
 
-#: ../src/dialogs/search-dialog.glade.h:2
+#: ../src/dialogs/search-dialog.ui.h:2
 msgid "Match _entire word only"
 msgstr "Coincidir sólo con la palabra _entera"
 
-#: ../src/dialogs/search-dialog.glade.h:3
+#: ../src/dialogs/search-dialog.ui.h:3
 msgid "Original text"
 msgstr "Original"
 
-#: ../src/dialogs/search-dialog.glade.h:5
+#: ../src/dialogs/search-dialog.ui.h:5
 msgid "Replace All"
 msgstr "Reemplazar todo"
 
-#: ../src/dialogs/search-dialog.glade.h:6
+#: ../src/dialogs/search-dialog.ui.h:6
 msgid "Replace _with: "
 msgstr "Reemplazar _con: "
 
-#: ../src/dialogs/search-dialog.glade.h:7
+#: ../src/dialogs/search-dialog.ui.h:7
 msgid "Search _backwards"
 msgstr "Buscar hacia _atrás"
 
-#: ../src/dialogs/search-dialog.glade.h:8
+#: ../src/dialogs/search-dialog.ui.h:8
 msgid "Translated text"
 msgstr "Traducción"
 
-#: ../src/dialogs/search-dialog.glade.h:9
+#: ../src/dialogs/search-dialog.ui.h:9
 msgid "_Match case"
 msgstr "_Coincidir con capitalización"
 
-#: ../src/dialogs/search-dialog.glade.h:10
+#: ../src/dialogs/search-dialog.ui.h:10
 msgid "_Search for: "
 msgstr "_Buscar: "
 
-#: ../src/dialogs/search-dialog.glade.h:11
+#: ../src/dialogs/search-dialog.ui.h:11
 msgid "_Wrap around"
 msgstr "_Volver al principio"
 
@@ -1657,35 +1670,35 @@ msgstr "Complemento"
 msgid "Enabled"
 msgstr "Activado"
 
-#: ../src/plugin-system/plugin-manager.c:503
+#: ../src/plugin-system/plugin-manager.c:504
 msgid "_About"
 msgstr "_Acerca de"
 
-#: ../src/plugin-system/plugin-manager.c:511
+#: ../src/plugin-system/plugin-manager.c:512
 msgid "C_onfigure"
 msgstr "C_onfigurar"
 
-#: ../src/plugin-system/plugin-manager.c:520
+#: ../src/plugin-system/plugin-manager.c:521
 msgid "A_ctivate"
 msgstr "A_ctivar"
 
-#: ../src/plugin-system/plugin-manager.c:531
+#: ../src/plugin-system/plugin-manager.c:532
 msgid "Ac_tivate All"
 msgstr "Ac_tivar todos"
 
-#: ../src/plugin-system/plugin-manager.c:536
+#: ../src/plugin-system/plugin-manager.c:537
 msgid "_Deactivate All"
 msgstr "_Desactivar todos"
 
-#: ../src/plugin-system/plugin-manager.c:795
+#: ../src/plugin-system/plugin-manager.c:796
 msgid "Active plugins"
 msgstr "Complementos activados"
 
-#: ../src/plugin-system/plugin-manager.c:824
+#: ../src/plugin-system/plugin-manager.c:825
 msgid "_About Plugin"
 msgstr "_Acerca del complemento"
 
-#: ../src/plugin-system/plugin-manager.c:828
+#: ../src/plugin-system/plugin-manager.c:829
 msgid "C_onfigure Plugin"
 msgstr "C_onfigurar complemento"
 
@@ -1799,24 +1812,23 @@ msgstr "Nivel"
 msgid "String"
 msgstr "Cadena"
 
-#: ../src/utils.c:344
-#, c-format
-msgid "Unable to find file %s."
-msgstr "No se puede encontrar el archivo %s."
-
-#: ../src/utils.c:348 ../src/utils.c:384
+#: ../src/utils.c:316
 msgid "Please check your installation."
 msgstr "Compruebe su instalación."
 
-#: ../src/utils.c:380
+#: ../src/utils.c:381
 #, c-format
-msgid "Unable to find the required widgets inside file %s."
-msgstr "No se pudieron encontrar los widgets requeridos dentro del archivo %s."
+#| msgid "Unable to find file %s."
+msgid "Unable to open ui file %s. Error: %s"
+msgstr "No se puede abrir el archivo de IU %s. Error: %s"
 
-#: ../src/utils.c:788
-#| msgid ""
-#| "Unable to display help. Please make sure Gtranslator documentation "
-#| "package is installed."
+#: ../src/utils.c:400
+#, c-format
+#| msgid "Unable to find the required widgets inside file %s."
+msgid "Unable to find the object '%s' inside file %s."
+msgstr "No se pudo encontrar el objeto «%s» dentro del archivo %s."
+
+#: ../src/utils.c:808
 msgid ""
 "Unable to display help. Please make sure the Gtranslator documentation "
 "package is installed."
@@ -2162,14 +2174,21 @@ msgstr "Editor de la barra de herramientas"
 msgid "Documents"
 msgstr "Documentos"
 
-#~ msgid "<b>Source code</b>"
-#~ msgstr "<b>Código fuente</b>"
+#~ msgid "Select Folder"
+#~ msgstr "Seleccionar carpeta"
 
-#~ msgid "gtk-cancel"
-#~ msgstr "gtk-cancel"
-
-#~ msgid "gtk-ok"
-#~ msgstr "gtk-ok"
+#~ msgid ""
+#~ "Text\n"
+#~ "Icons\n"
+#~ "Text + Icons\n"
+#~ "Gnome toolbar setting\n"
+#~ "Tabs"
+#~ msgstr ""
+#~ "Texto\n"
+#~ "Iconos\n"
+#~ "Texto + Iconos\n"
+#~ "Ajustes de la barra de herramientas de GNOME\n"
+#~ "Solapas"
 
 #~ msgid "original.db"
 #~ msgstr "base de datos original"
@@ -2182,18 +2201,6 @@ msgstr "Documentos"
 
 #~ msgid "Jump To"
 #~ msgstr "Saltar a"
-
-#~ msgid "    "
-#~ msgstr "    "
-
-#~ msgid "     "
-#~ msgstr "     "
-
-#~ msgid "  "
-#~ msgstr "  "
-
-#~ msgid "        "
-#~ msgstr "        "
 
 #~ msgid "Show options in translated messages"
 #~ msgstr "Mostrar opciones en los mensajes traducidos"
