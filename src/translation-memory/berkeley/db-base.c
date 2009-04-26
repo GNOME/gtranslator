@@ -173,7 +173,7 @@ gtranslator_db_base_show_error (GtranslatorDbBase *base,
 				err = g_strdup_printf (_("There was an error recovering the database: %s"),
 						       db_strerror (e));
 				
-				g_warning (err);
+				g_warning ("%s", err);
 				g_free (err);
 			}
 			break;
@@ -181,7 +181,7 @@ gtranslator_db_base_show_error (GtranslatorDbBase *base,
 			err = g_strdup_printf (_("There was an error in database: %s"),
 					       db_strerror (error));
 			
-			g_warning (err);
+			g_warning ("%s", err);
 			g_free (err);
 			break;
 	}

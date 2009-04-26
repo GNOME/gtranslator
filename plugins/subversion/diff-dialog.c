@@ -157,7 +157,7 @@ on_cat_command_info_arrived (GtranslatorCommand *command,
 	
 	if (tmpfd == -1)
 	{
-		g_warning (error->message);
+		g_warning ("%s", error->message);
 		g_error_free (error);
 		
 		/* In this case we don't have to close the file */
@@ -185,14 +185,14 @@ on_cat_command_info_arrived (GtranslatorCommand *command,
 	
 	if (error)
 	{
-		g_warning (error->message);
+		g_warning ("%s", error->message);
 		g_error_free (error);
 		error = NULL;
 	}
 	
 	if (!g_output_stream_close (G_OUTPUT_STREAM (ostream), NULL, &error))
 	{
-		g_warning (error->message);
+		g_warning ("%s", error->message);
 		g_error_free (error);
 	}
 	
@@ -245,7 +245,7 @@ on_diff_command_info_arrived (GtranslatorCommand *command,
 	{
 		if (!g_file_delete (tmp_file, NULL, &error))
 		{
-			g_warning (error->message);
+			g_warning ("%s", error->message);
 			g_error_free (error);
 			
 			g_object_unref (tmp_file);
@@ -272,14 +272,14 @@ on_diff_command_info_arrived (GtranslatorCommand *command,
 	
 	if (error)
 	{
-		g_warning (error->message);
+		g_warning ("%s", error->message);
 		g_error_free (error);
 		error = NULL;
 	}
 	
 	if (!g_output_stream_close (G_OUTPUT_STREAM (ostream), NULL, &error))
 	{
-		g_warning (error->message);
+		g_warning ("%s", error->message);
 		g_error_free (error);
 	}
 	

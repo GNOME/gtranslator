@@ -944,7 +944,7 @@ gtranslator_utils_scan_dir (GFile *dir,
 		
 		if (error)
 		{
-			g_warning (error->message);
+			g_warning ("%s", error->message);
 		}
 	}
 }

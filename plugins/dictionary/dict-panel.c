@@ -94,11 +94,11 @@ gtranslator_dict_panel_create_warning_dialog (const gchar *primary,
 					 GTK_DIALOG_DESTROY_WITH_PARENT,
 					 GTK_MESSAGE_WARNING,
 					 GTK_BUTTONS_CLOSE,
-					 primary);
+					 "%s", primary);
 	
 	if (secondary)
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-							  secondary);
+							  "%s", secondary);
 	gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 }
@@ -289,7 +289,7 @@ source_activated_cb (GdictSourceChooser *chooser,
 		
 		message = g_strdup_printf (_("Dictionary source '%s' selected"),
 					   gdict_source_get_description (source));
-		gtranslator_statusbar_flash_message (panel->priv->status, 0, message);
+		gtranslator_statusbar_flash_message ("%s", panel->priv->status, 0, message);
 		g_free (message);
 	}
 }
@@ -308,7 +308,7 @@ strategy_activated_cb (GdictStrategyChooser *chooser,
 		gchar *message;
 		
 		message = g_strdup_printf (_("Strategy '%s' selected"), strat_desc);
-		gtranslator_statusbar_flash_message (priv->status, 0, message);
+		gtranslator_statusbar_flash_message ("%s", priv->status, 0, message);
 		g_free (message);
 	}
 }
@@ -327,7 +327,7 @@ database_activated_cb (GdictDatabaseChooser *chooser,
 		gchar *message;
 		
 		message = g_strdup_printf (_("Database '%s' selected"), db_desc);
-		gtranslator_statusbar_flash_message (priv->status, 0, message);
+		gtranslator_statusbar_flash_message ("%s", priv->status, 0, message);
 		g_free (message);
 	}
 }
@@ -373,7 +373,7 @@ speller_word_activated_cb (GdictSpeller *speller,
 		gchar *message;
 		
 		message = g_strdup_printf (_("Word '%s' selected"), word);
-		gtranslator_statusbar_flash_message (priv->status, 0, message);
+		gtranslator_statusbar_flash_message ("%s", priv->status, 0, message);
 		g_free (message);
 	}
 }
@@ -425,7 +425,7 @@ sidebar_page_changed_cb (GdictSidebar *sidebar,
 	}
 	
 	if (message && priv->status)
-		gtranslator_statusbar_flash_message (priv->status, 0, message);
+		gtranslator_statusbar_flash_message ("%s", priv->status, 0, message);
 }
 
 static void

@@ -246,7 +246,7 @@ on_command_info_arrived (GtranslatorCommand *command,
 	{
 		message = g_queue_pop_head (info);
 		gtranslator_statusbar_flash_message (status, 0,
-						     message);
+						     "%s", message);
 		g_free (message);
 	}
 }
@@ -306,7 +306,7 @@ add_changelog_entry (GtranslatorCommitDialog *dlg)
 	
 	if (tmpfd == -1)
 	{
-		g_warning (error->message);
+		g_warning ("%s", error->message);
 		g_error_free (error);
 		g_object_unref (changelog_file);
 		
@@ -373,7 +373,7 @@ add_changelog_entry (GtranslatorCommitDialog *dlg)
 	
 free:   if (error)
 	{
-		g_warning (error->message);
+		g_warning ("%s", error->message);
 		g_error_free (error);
 	}
 	g_object_unref (tmp_file);

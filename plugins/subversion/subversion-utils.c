@@ -55,7 +55,7 @@ subversion_utils_report_errors (GtranslatorWindow *window,
 						 GTK_DIALOG_DESTROY_WITH_PARENT,
 						 GTK_MESSAGE_ERROR,
 						 GTK_BUTTONS_CLOSE,
-						 message);
+						 "%s", message);
 		g_free (message);
 		
 		gtk_dialog_run (GTK_DIALOG (dialog));
@@ -119,20 +119,20 @@ subversion_utils_from_file_to_file (GInputStream *istream,
 	
 	if (error)
 	{
-		g_warning (error->message);
+		g_warning ("%s", error->message);
 		g_error_free (error);
 		error = NULL;
 	}
 	
 	if (!g_output_stream_close (ostream, NULL, &error))
 	{
-		g_warning (error->message);
+		g_warning ("%s", error->message);
 		g_error_free (error);
 		error = NULL;
 	}
 	if (!g_input_stream_close (istream, NULL, &error))
 	{
-		g_warning (error->message);
+		g_warning ("%s", error->message);
 		g_error_free (error);
 	}
 }

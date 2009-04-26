@@ -81,7 +81,7 @@ gtranslator_attach_gtkspell(GtranslatorView *view)
 		g_warning(_("gtkspell error: %s\n"), error->message);
 		errortext = g_strdup_printf(_("GtkSpell was unable to initialize.\n %s"),
 					    error->message);
-		g_warning(errortext);
+		g_warning("%s", errortext);
 		
 		g_error_free(error);
 		g_free(errortext);

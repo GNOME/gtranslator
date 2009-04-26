@@ -70,7 +70,7 @@ gtranslator_module_load (GTypeModule *gmodule)
 
 	if (module->library == NULL)
 	{
-		g_warning (g_module_error());
+		g_warning ("%s", g_module_error());
 
 		return FALSE;
 	}
@@ -79,7 +79,7 @@ gtranslator_module_load (GTypeModule *gmodule)
 	if (!g_module_symbol (module->library, "register_gtranslator_plugin",
 			      (void *) &register_func))
 	{
-		g_warning (g_module_error());
+		g_warning ("%s", g_module_error());
 		g_module_close (module->library);
 
 		return FALSE;

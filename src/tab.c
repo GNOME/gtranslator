@@ -172,7 +172,7 @@ gtranslator_tab_autosave (GtranslatorTab *tab)
 	gtranslator_po_save_file (tab->priv->po, &error);
 	if (error)
 	{
-		g_warning (error->message);
+		g_warning ("%s", error->message);
 		g_error_free (error);
 	}
 	
