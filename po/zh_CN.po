@@ -1,21 +1,22 @@
 # zh_CN translation of gtranslator.
 # Copyright (C) 2001-2009 Free Software Foundation, Inc.
-# Wang Jian <lark@linux.net.cn>, 2001
-# Wang Jian <lark@linux.net.cn>, 2003.
+# Wang Jian <lark@linux.net.cn>, 2001,2003.
 # Zhang Miao <mymzhang@gmail.com>, 2009.
+# Ming Yang <yamisoe@gmail.com>, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&component=general\n"
-"POT-Creation-Date: 2009-04-10 15:28+0000\n"
-"PO-Revision-Date: 2009-03-28 12:41+0800\n"
-"Last-Translator: Zhang Miao <mymzhang@gmail.com>\n"
+"POT-Creation-Date: 2009-05-21 20:18+0000\n"
+"PO-Revision-Date: 2009-05-17 23:18+0800\n"
+"Last-Translator: Ming Yang <yamisoe@gmail.com>\n"
 "Language-Team: Chinese/Simplified <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:1
 msgid "Gtranslator PO Editor"
@@ -35,7 +36,7 @@ msgstr "自动保存时间间隔"
 
 #: ../data/gtranslator.schemas.in.h:3
 msgid "Check spelling"
-msgstr "检查拼写"
+msgstr "拼写检查"
 
 #: ../data/gtranslator.schemas.in.h:4
 msgid "Color scheme"
@@ -47,7 +48,7 @@ msgstr "保存前创建备份"
 
 #: ../data/gtranslator.schemas.in.h:6
 msgid "Custom font to use for edit fields."
-msgstr "自定义编辑字段用的字体。"
+msgstr "自定义编辑框中的字体。"
 
 #: ../data/gtranslator.schemas.in.h:7
 msgid "Delete compiled GMO files"
@@ -55,7 +56,7 @@ msgstr "删除已编译的 GMO 文件"
 
 #: ../data/gtranslator.schemas.in.h:8
 msgid "Directory containing PO files to add to the translation memory."
-msgstr ""
+msgstr "包含要加入到翻译记忆的 PO 文件的目录"
 
 #: ../data/gtranslator.schemas.in.h:9
 msgid "Editor font"
@@ -63,24 +64,24 @@ msgstr "编辑器字体"
 
 #: ../data/gtranslator.schemas.in.h:10
 msgid "Filename to restrict search to"
-msgstr "要限定查找的文件名"
+msgstr "限定要搜索的文件名"
 
 #: ../data/gtranslator.schemas.in.h:11
 msgid ""
 "Filename to which searching of the translation memory should be restricted."
-msgstr ""
+msgstr "翻译记忆搜索仅限于该文件名"
 
 #: ../data/gtranslator.schemas.in.h:12
 msgid "Highlight syntax in edit fields"
-msgstr "翻译消息语法高亮"
+msgstr "语法高亮翻译消息"
 
 #: ../data/gtranslator.schemas.in.h:13
 msgid "If true, apply syntax highlighting to strings in edit fields."
-msgstr "若选中，对编辑字段中的字符串应用语法高亮。"
+msgstr "若选中，对编辑框中的字符串应用语法高亮。"
 
 #: ../data/gtranslator.schemas.in.h:14
 msgid "If true, automatically save files at specified intervals."
-msgstr "若选中，按照固定的时间间隔自动保存 PO 文件"
+msgstr "若选中，按照指定的时间间隔自动保存 PO 文件"
 
 #: ../data/gtranslator.schemas.in.h:15
 msgid "If true, check the spelling of translated messages."
@@ -88,49 +89,45 @@ msgstr "若选中，则检查已翻译消息的拼写。"
 
 #: ../data/gtranslator.schemas.in.h:16
 msgid "If true, create a backup copy of a file before saving it."
-msgstr ""
+msgstr "若选中，在保存文件前创建一个备份。"
 
 #: ../data/gtranslator.schemas.in.h:17
 msgid "If true, display whitespace in strings as representative symbols."
-msgstr ""
+msgstr "若选中，用指示符号来显示字符串中的空格。"
 
 #: ../data/gtranslator.schemas.in.h:18
 msgid ""
 "If true, only include files with a specified filename when searching the "
 "translation memory."
-msgstr ""
+msgstr "若选中，仅在具有指定名称的文件中搜索翻译记忆。"
 
 #: ../data/gtranslator.schemas.in.h:19
 msgid ""
 "If true, overwrite the values in the PO header with those in the active "
 "profile."
-msgstr ""
+msgstr "若选中，用活动的配置文件覆盖 PO 文件头中的值。"
 
 #: ../data/gtranslator.schemas.in.h:20
 msgid "If true, remove compiled GMO binary files when saving."
-msgstr "如果为真，保存时移除编译的 GMO 二进制文件。"
+msgstr "若选中，保存时移除编译的 GMO 二进制文件。"
 
 #: ../data/gtranslator.schemas.in.h:21
-#, fuzzy
-#| msgid "Remove fuzzy status if message is changed"
 msgid "If true, remove fuzzy status from translations when they are changed."
-msgstr "如果消息被改动，将模糊状态清除"
+msgstr "若选中，在消息被改动时，将其模糊状态清除"
 
 #: ../data/gtranslator.schemas.in.h:22
 msgid "If true, use a custom font for edit fields."
-msgstr "若选中，编辑字段使用自定义字体。"
+msgstr "若选中，编辑框使用自定义字体。"
 
 #: ../data/gtranslator.schemas.in.h:23
 msgid ""
 "If true, warn the user when saving a PO translation file containing fuzzy "
 "strings."
-msgstr ""
+msgstr "若选中，当保存含有模糊状态字符串的 PO 文件时，警告用户。"
 
 #: ../data/gtranslator.schemas.in.h:24
-#, fuzzy
-#| msgid "Append a suffix to automatically saved files"
 msgid "Interval in minutes at which to automatically save files."
-msgstr "给自动保存文件添加后缀"
+msgstr "自动保存文件的时间间隔（以分钟为单位）。"
 
 #: ../data/gtranslator.schemas.in.h:25
 msgid "Make whitespace visible"
@@ -140,31 +137,29 @@ msgstr "使空白字符可见"
 msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
-msgstr ""
+msgstr "显示的消息与翻译记忆匹配的消息的最大长度差"
 
 #: ../data/gtranslator.schemas.in.h:27
 msgid "Maximum difference in message length"
-msgstr ""
+msgstr "最大消息长度差"
 
 #: ../data/gtranslator.schemas.in.h:28
-#, fuzzy
-#| msgid "Maximum number of entries in the recent files list:"
 msgid "Maximum number of missing words"
-msgstr "在最近打开文件列表中显示的最大数目："
+msgstr "最大缺失单词数"
 
 #: ../data/gtranslator.schemas.in.h:29
 msgid ""
 "Maximum number of words that can be missing from a message displayed as a "
 "match by the translation memory."
-msgstr ""
+msgstr "翻译记忆匹配到的消息所能容许的最大缺失单词数"
 
 #: ../data/gtranslator.schemas.in.h:30
 msgid "Message list sort order"
-msgstr ""
+msgstr "消息列表的排序次序"
 
 #: ../data/gtranslator.schemas.in.h:31
 msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
-msgstr ""
+msgstr "用于语法高亮的 gtksourceview 配色方案名"
 
 #: ../data/gtranslator.schemas.in.h:32
 msgid "PO directory"
@@ -176,23 +171,27 @@ msgstr "改动消息时移除模糊翻译状态"
 
 #: ../data/gtranslator.schemas.in.h:34
 msgid "Restrict search by filename"
-msgstr ""
+msgstr "用文件名限制搜索"
 
 #: ../data/gtranslator.schemas.in.h:35
 msgid "Side pane switcher style"
-msgstr ""
+msgstr "侧边面板切换器风格"
 
 #: ../data/gtranslator.schemas.in.h:36
 msgid ""
 "Sort order to use in the message list. Possible values are \"status\", \"id"
 "\", \"original_text\" and \"translated_text\"."
 msgstr ""
+"用于消息列表的排序次序。可能的取值为：“状态”、“编号”、“初始文本”和“翻译文"
+"本”。"
 
 #: ../data/gtranslator.schemas.in.h:37
 msgid ""
 "Style for switchers in the side pane. Possible values are \"icons\", \"text"
 "\", \"icons_and_text\", \"tabs\" and \"system\"."
 msgstr ""
+"侧边切换器的风格。可能的取值为：“图标”、“文本”、“图标和文本”、“页签”和“系"
+"统”。"
 
 #: ../data/gtranslator.schemas.in.h:38
 msgid "Use custom font"
@@ -200,13 +199,11 @@ msgstr "使用自定义字体"
 
 #: ../data/gtranslator.schemas.in.h:39
 msgid "Use profile values for header"
-msgstr ""
+msgstr "在文件头中使用配置文件中的值"
 
 #: ../data/gtranslator.schemas.in.h:40
-#, fuzzy
-#| msgid "Warn if po file contains fuzzy translations"
 msgid "Warn if file contains fuzzy translations"
-msgstr "如果 PO 文件包含模糊的翻译则发出警告"
+msgstr "如果文件包含模糊翻译则发出警告"
 
 #: ../data/po.lang.h:1
 msgid "Others"
@@ -214,7 +211,7 @@ msgstr "其他"
 
 #: ../data/po.lang.h:2
 msgid "Special variable"
-msgstr ""
+msgstr "特殊变量"
 
 #: ../data/po.lang.h:3
 msgid "Tag"
@@ -222,29 +219,27 @@ msgstr "标签"
 
 #: ../data/po.lang.h:4
 msgid "gtranslator highlight"
-msgstr "gtranslator 突出显示"
+msgstr "gtranslator 高亮显示"
 
 #: ../plugins/alternate-language/alternate-language-panel.c:117
 msgid "Message not found"
-msgstr "未找到信息"
+msgstr "未找到消息"
 
 #: ../plugins/alternate-language/alternate-language-panel.c:221
 msgid "Open file for alternate language"
-msgstr ""
+msgstr "打开替代语言文件"
 
 #: ../plugins/alternate-language/alternate-language-panel.c:246
 msgid "File closed"
-msgstr "文件关闭"
+msgstr "文件已关闭"
 
 #: ../plugins/alternate-language/alternate-language-panel.c:319
 msgid "There isn't any file loaded"
-msgstr ""
+msgstr "没有任何载入的文件"
 
 #: ../plugins/alternate-language/alternate-language-plugin.c:59
-#, fuzzy
-#| msgid "Translator and Language"
 msgid "_Alternate Language"
-msgstr "翻译者和语言"
+msgstr "替代语言(_A)"
 
 #: ../plugins/alternate-language/alternate-language-plugin.c:60
 msgid "Show the Alternate Language panel"
@@ -252,10 +247,8 @@ msgstr "显示替代语言面板"
 
 #: ../plugins/alternate-language/alternate-language-plugin.c:123
 #: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:1
-#, fuzzy
-#| msgid "Translator and Language"
 msgid "Alternate Language"
-msgstr "翻译者和语言"
+msgstr "替代语言"
 
 #: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:2
 msgid "Load an alternate language."
@@ -264,69 +257,69 @@ msgstr "载入一个替代语言。"
 #: ../plugins/charmap/charmap-plugin.c:299
 #: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:1
 msgid "Character Map"
-msgstr ""
+msgstr "字符表"
 
 #: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:2
 msgid "Insert special characters just by clicking on them."
-msgstr ""
+msgstr "通过点击来插入特殊字符。"
 
 #: ../plugins/dictionary/dict-panel.c:186
 #, c-format
 msgid "No dictionary source available with name '%s'"
-msgstr ""
+msgstr "名为“%s”的字典源不可用"
 
 #: ../plugins/dictionary/dict-panel.c:189
 msgid "Unable to find dictionary source"
-msgstr ""
+msgstr "无法找到字典源"
 
 #: ../plugins/dictionary/dict-panel.c:204
 #, c-format
 msgid "No context available for source '%s'"
-msgstr ""
+msgstr "源“%s”没有可用的上下文"
 
 #: ../plugins/dictionary/dict-panel.c:207
 msgid "Unable to create a context"
-msgstr ""
+msgstr "无法创建上下文"
 
 #: ../plugins/dictionary/dict-panel.c:290
 #, c-format
 msgid "Dictionary source '%s' selected"
-msgstr ""
+msgstr "已选中字典源“%s”"
 
 #: ../plugins/dictionary/dict-panel.c:310
 #, c-format
 msgid "Strategy '%s' selected"
-msgstr ""
+msgstr "已选中策略“%s”"
 
 #: ../plugins/dictionary/dict-panel.c:329
 #, c-format
 msgid "Database '%s' selected"
-msgstr "数据库“%s”已选定"
+msgstr "已选中数据库“%s”"
 
 #: ../plugins/dictionary/dict-panel.c:375
 #, c-format
 msgid "Word '%s' selected"
-msgstr "已选择单词“%s”"
+msgstr "已选中单词“%s”"
 
 #. speller
 #: ../plugins/dictionary/dict-panel.c:398
 msgid "Double-click on the word to look up"
-msgstr "在要查找的单词上双击"
+msgstr "双击要查找的单词"
 
 #. strat-chooser
 #: ../plugins/dictionary/dict-panel.c:404
 msgid "Double-click on the matching strategy to use"
-msgstr "在要使用的匹配策略上双击"
+msgstr "双击要用的匹配策略"
 
 #. source-chooser
 #: ../plugins/dictionary/dict-panel.c:409
 msgid "Double-click on the source to use"
-msgstr ""
+msgstr "双击要用的源"
 
 #. db-chooser
 #: ../plugins/dictionary/dict-panel.c:418
 msgid "Double-click on the database to use"
-msgstr "在要使用的数据库上双击"
+msgstr "双击要用的数据库"
 
 #.
 #. * Look up Button
@@ -341,24 +334,24 @@ msgstr "相似的单词"
 
 #: ../plugins/dictionary/dict-panel.c:570
 msgid "Available dictionaries"
-msgstr "可用的辞典"
+msgstr "可用的字典"
 
 #: ../plugins/dictionary/dict-panel.c:586
 msgid "Available strategies"
-msgstr "可用的规则"
+msgstr "可用的策略"
 
 #: ../plugins/dictionary/dict-panel.c:597
 msgid "Dictionary sources"
-msgstr "辞典源"
+msgstr "字典源"
 
 #: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:1
 #: ../plugins/dictionary/dictionary-plugin.c:94
 msgid "Dictionary"
-msgstr "辞典"
+msgstr "字典"
 
 #: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:2
 msgid "Look up words in a dictionary."
-msgstr "在一个辞典中查找单词。"
+msgstr "在字典中查找单词。"
 
 #: ../plugins/fullscreen/fullscreen-plugin.c:46
 msgid "_Fullscreen"
@@ -366,7 +359,7 @@ msgstr "全屏(_F)"
 
 #: ../plugins/fullscreen/fullscreen-plugin.c:47
 msgid "Place window on fullscreen state"
-msgstr ""
+msgstr "将窗口全屏"
 
 #: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:1
 msgid "Fullscreen"
@@ -374,41 +367,35 @@ msgstr "全屏"
 
 #: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:2
 msgid "Place window in the fullscreen state."
-msgstr ""
+msgstr "将窗口全屏"
 
 #: ../plugins/insert-params/insert-params-plugin.c:79
-#, fuzzy
-#| msgid "_Next"
 msgid "_Next Param"
-msgstr "下一条(_N)"
+msgstr "下一参数(_N)"
 
 #: ../plugins/insert-params/insert-params-plugin.c:80
 msgid "Insert the next param of the message"
-msgstr ""
+msgstr "插入下一参数"
 
 #: ../plugins/insert-params/insert-params-plugin.c:82
 msgid "_Insert Params"
-msgstr ""
+msgstr "插入参数(_I)"
 
 #: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:1
 msgid "Insert Params"
-msgstr ""
+msgstr "插入参数"
 
 #: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:2
 msgid "Parameters detection and easy insertion."
-msgstr ""
+msgstr "参数检测以及插入"
 
 #: ../plugins/insert-tags/insert-tags-plugin.c:70
-#, fuzzy
-#| msgid "_Next"
 msgid "_Next Tag"
-msgstr "下一条(_N)"
+msgstr "下一标签(_N)"
 
 #: ../plugins/insert-tags/insert-tags-plugin.c:71
-#, fuzzy
-#| msgid "Go to next untranslated message"
 msgid "Insert the next tag of the message"
-msgstr "转到下一个未翻译的消息"
+msgstr "插入下一标签"
 
 #: ../plugins/insert-tags/insert-tags-plugin.c:73
 msgid "_Insert Tags"
@@ -420,36 +407,36 @@ msgstr "插入标签"
 
 #: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:2
 msgid "Tags detection and easy insertion."
-msgstr ""
+msgstr "标签检测和插入"
 
 #: ../plugins/open-tran/open-tran-dialog.ui.h:1
 #: ../plugins/source-code-view/source-code-view-dialog.ui.h:1
 #: ../plugins/subversion/subversion.ui.h:2
 #: ../src/dialogs/preferences-dialog.ui.h:1
 msgid "    "
-msgstr ""
+msgstr "    "
 
 #: ../plugins/open-tran/open-tran-dialog.ui.h:2
 #: ../plugins/source-code-view/source-code-view-dialog.ui.h:2
 msgid "     "
-msgstr ""
+msgstr "     "
 
 #: ../plugins/open-tran/open-tran-dialog.ui.h:3
 msgid "<b>Code language of the results:</b>"
-msgstr ""
+msgstr "<b>结果的语言代码：</b>"
 
 #: ../plugins/open-tran/open-tran-dialog.ui.h:4
 msgid "<b>Code language to query open-tran:</b>"
-msgstr ""
+msgstr "<b>用于问询 Open Tran 的语言代码：</b>"
 
 #: ../plugins/open-tran/open-tran-dialog.ui.h:5
 msgid "Open Tran Settings"
-msgstr ""
+msgstr "Open Tran 设置"
 
 #: ../plugins/open-tran/open-tran-panel.c:213
 #: ../plugins/open-tran/open-tran-panel.c:277
 msgid "ERROR: could not parse response\n"
-msgstr ""
+msgstr "错误：无法解析响应\n"
 
 #: ../plugins/open-tran/open-tran-panel.c:261
 #, c-format
@@ -464,7 +451,7 @@ msgstr "故障：%d %s\n"
 #: ../plugins/open-tran/open-tran-panel.c:288
 #, c-format
 msgid "WRONG! Can't get result element %d\n"
-msgstr ""
+msgstr "错误！无法取得结果元素 %d\n"
 
 #: ../plugins/open-tran/open-tran-panel.c:304 ../src/actions-search.c:200
 msgid "Phrase not found"
@@ -472,15 +459,15 @@ msgstr "词组未找到"
 
 #: ../plugins/open-tran/open-tran-panel.c:326
 msgid "You have to provide a phrase to search"
-msgstr ""
+msgstr "您必须提供一个词组以供搜索"
 
 #: ../plugins/open-tran/open-tran-panel.c:336
 msgid "You have to provide a search language code"
-msgstr ""
+msgstr "您必须提供一个搜索语言代码"
 
 #: ../plugins/open-tran/open-tran-panel.c:346
 msgid "You have to provide a language code for your language"
-msgstr ""
+msgstr "您必须为您的语言提供一个语言代码"
 
 #: ../plugins/open-tran/open-tran-panel.c:375
 msgid "Type"
@@ -492,18 +479,16 @@ msgstr "Open-Tran.eu"
 
 #: ../plugins/open-tran/open-tran-panel.c:425
 msgid "Look for:"
-msgstr ""
+msgstr "查找："
 
 #: ../plugins/open-tran/open-tran-plugin.c:107
 #: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:2
-#, fuzzy
-#| msgid "Open %s"
 msgid "Open Tran"
-msgstr "打开 %s"
+msgstr "Open Tran"
 
 #: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:1
 msgid "Look for phrases in Open tran memory translation database."
-msgstr ""
+msgstr "在 Open Tran 翻译记忆数据库中查找词组。"
 
 #: ../plugins/source-code-view/source-code-view-dialog.ui.h:3
 msgid "<b>Line command:</b>"
@@ -511,32 +496,28 @@ msgstr "<b>行命令：</b>"
 
 #: ../plugins/source-code-view/source-code-view-dialog.ui.h:4
 msgid "<b>Program command:</b>"
-msgstr ""
+msgstr "<b>程序命令：</b>"
 
 #: ../plugins/source-code-view/source-code-view-dialog.ui.h:5
 msgid "Source View Settings"
-msgstr "源查看设置"
+msgstr "源码查看设置"
 
 #: ../plugins/source-code-view/source-code-view-dialog.ui.h:6
-#, fuzzy
-#| msgid "Use special dictionary:"
 msgid "Use external editor"
-msgstr "使用特别的字典："
+msgstr "使用外部编辑器"
 
 #: ../plugins/source-code-view/source-code-view-plugin.c:115
 #, c-format
 msgid "Please install %s to be able to show the file"
-msgstr ""
+msgstr "请安装 %s 来显示该文件"
 
 #: ../plugins/source-code-view/source-code-view-plugin.c:466
 msgid "Paths:\n"
-msgstr ""
+msgstr "路径：\n"
 
 #: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:1
-#, fuzzy
-#| msgid "Show the messages table (requires restart)"
 msgid "Show the message in the source code."
-msgstr "显示消息表(需要重新启动 gtranslator)"
+msgstr "在源码中显示消息。"
 
 #: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:2
 msgid "Source Code View"
@@ -547,36 +528,32 @@ msgid "Source Viewer"
 msgstr "源码查看器"
 
 #: ../plugins/source-code-view/viewer.ui.h:1
-#, fuzzy
-#| msgid "<b>Language code:</b>"
 msgid "<b>Source code</b>"
-msgstr "<b>语言代码：</b>"
+msgstr "<b>源码</b>"
 
 #: ../plugins/subversion/checkout-dialog.c:76
 msgid "Subversion: Checkout complete."
-msgstr "Subversion：校验完成。"
+msgstr "Subversion：仓库已取出。"
 
 #: ../plugins/subversion/checkout-dialog.c:125
 msgid "Please add a directory path to make the checkout"
-msgstr "请添加一个目录路径以进行校验"
+msgstr "请添加一个目录路径以进行取出"
 
 #: ../plugins/subversion/checkout-dialog.c:138
 msgid "Please add a Subversion URL"
-msgstr "请添加一个 Subversion 地址"
+msgstr "请添加一个 Subversion URL"
 
 #: ../plugins/subversion/checkout-dialog.c:172 ../src/dialogs/assistant.c:666
-#, fuzzy
-#| msgid "Scripts directory:"
 msgid "Checkout directory"
-msgstr "脚本目录："
+msgstr "取出目录"
 
 #: ../plugins/subversion/checkout-dialog.c:264
 msgid "Checkout repository"
-msgstr ""
+msgstr "从版本库中取出代码"
 
 #: ../plugins/subversion/commit-dialog.c:226
 msgid "Subversion: Commit complete."
-msgstr "Subversion: 注释完成。"
+msgstr "Subversion:提交已完成。"
 
 #.
 #. * Translators: Please change LANGUAGE for your language name in English.
@@ -587,86 +564,85 @@ msgstr "Subversion: 注释完成。"
 #: ../plugins/subversion/commit-dialog.c:269
 msgctxt "ChangeLog entry"
 msgid "LANGUAGE"
-msgstr "语言"
+msgstr "Simplified Chinese"
 
 #: ../plugins/subversion/commit-dialog.c:295
-#, fuzzy, c-format
-#| msgid "The file `%s' doesn't exist at all!"
+#, c-format
 msgid "The ChangeLog file '%s' does not exist"
-msgstr "文件“%s”不存在！"
+msgstr "ChangeLog 文件“%s”不存在"
 
 #: ../plugins/subversion/commit-dialog.c:407
 msgid "Are you sure that you want to pass an empty log message?"
-msgstr ""
+msgstr "您确定要写入空的日志消息？"
 
 #: ../plugins/subversion/commit-dialog.c:424
 msgid "You have to select at least one file to send"
-msgstr ""
+msgstr "您必须选择至少一个文件以供提交"
 
 #: ../plugins/subversion/commit-dialog.c:574
 msgid "Commit Changes"
-msgstr "注释更改"
+msgstr "提交修改"
 
 #: ../plugins/subversion/diff-dialog.c:79
 msgid "Subversion: Diff complete."
-msgstr ""
+msgstr "Subversion：Diff 已完成。"
 
 #: ../plugins/subversion/diff-dialog.c:108
 #, c-format
 msgid "Please install %s to be able to diff the file"
-msgstr ""
+msgstr "安装 %s 才能 diff 文件"
 
 #: ../plugins/subversion/diff-dialog.c:411
 msgid "Diff file"
-msgstr ""
+msgstr "Diff 文件"
 
 #: ../plugins/subversion/diff-dialog.c:483
 msgid "Diff"
-msgstr ""
+msgstr "Diff"
 
 #: ../plugins/subversion/subversion-plugin.c:84
 msgid "Subversion: File will be added on next commit."
-msgstr ""
+msgstr "Subversion：该文件将在下次提交中加入。"
 
 #: ../plugins/subversion/subversion-plugin.c:138
 msgid "_Update"
-msgstr "更新(_U)"
+msgstr "更新(_Update)"
 
 #: ../plugins/subversion/subversion-plugin.c:139
 msgid "Sync your local copy with the Subversion tree"
-msgstr ""
+msgstr "将您的本地拷贝与 Subversion 源码树同步"
 
 #: ../plugins/subversion/subversion-plugin.c:142
 msgid "_Commit"
-msgstr "注释(_C)"
+msgstr "提交(_Commit)"
 
 #: ../plugins/subversion/subversion-plugin.c:143
 msgid "Commit your changes to the Subversion tree"
-msgstr ""
+msgstr "把您的改动提交至 Subversion 源码树"
 
 #: ../plugins/subversion/subversion-plugin.c:146
 msgid "_Add"
-msgstr "添加(_A)"
+msgstr "添加(_Add)"
 
 #: ../plugins/subversion/subversion-plugin.c:147
 msgid "Add a new file/directory to the Subversion tree"
-msgstr ""
+msgstr "添加新的文件/目录至 Subversion 源码树"
 
 #: ../plugins/subversion/subversion-plugin.c:150
 msgid "_Diff"
-msgstr ""
+msgstr "_Diff"
 
 #: ../plugins/subversion/subversion-plugin.c:151
 msgid "Diff local PO file with repository PO file"
-msgstr ""
+msgstr "Diff 本地 PO 文件与版本库中的文件"
 
 #: ../plugins/subversion/subversion-plugin.c:154
 msgid "C_heckout"
-msgstr "检验(_H)"
+msgstr "取出(C_heckout)"
 
 #: ../plugins/subversion/subversion-plugin.c:155
 msgid "Get a new repository copy"
-msgstr ""
+msgstr "从版本库中获取新的拷贝"
 
 #: ../plugins/subversion/subversion-plugin.c:158
 msgid "S_ubversion"
@@ -674,27 +650,27 @@ msgstr "S_ubversion"
 
 #: ../plugins/subversion/subversion.ui.h:1
 msgid "  "
-msgstr ""
+msgstr "  "
 
 #: ../plugins/subversion/subversion.ui.h:3
 msgid "        "
-msgstr ""
+msgstr "        "
 
 #: ../plugins/subversion/subversion.ui.h:4
 msgid "<b>Diff options:</b>"
-msgstr ""
+msgstr "<b>Diff 选项：</b>"
 
 #: ../plugins/subversion/subversion.ui.h:5
 msgid "<b>Diff program:</b>"
-msgstr ""
+msgstr "<b>Diff 程序：</b>"
 
 #: ../plugins/subversion/subversion.ui.h:6
 msgid "<b>Directory to checkout:</b>"
-msgstr ""
+msgstr "<b>取出到目录：</b>"
 
 #: ../plugins/subversion/subversion.ui.h:7
 msgid "<b>Directory to update:</b>"
-msgstr ""
+msgstr "<b>更新目录：</b>"
 
 #: ../plugins/subversion/subversion.ui.h:8
 msgid "<b>Information:</b>"
@@ -702,7 +678,7 @@ msgstr "<b>信息：</b>"
 
 #: ../plugins/subversion/subversion.ui.h:9
 msgid "<b>Log Message:</b>"
-msgstr ""
+msgstr "<b>日志消息：</b>"
 
 #: ../plugins/subversion/subversion.ui.h:10
 msgid "<b>Password:</b>"
@@ -710,11 +686,11 @@ msgstr "<b>密码：</b>"
 
 #: ../plugins/subversion/subversion.ui.h:11
 msgid "<b>Realm:</b>"
-msgstr ""
+msgstr "<b>域：</b>"
 
 #: ../plugins/subversion/subversion.ui.h:12
 msgid "<b>Select files to Commit:</b>"
-msgstr ""
+msgstr "<b>选择要提交的文件：</b>"
 
 #: ../plugins/subversion/subversion.ui.h:13
 msgid "<b>Subversion URL:</b>"
@@ -726,17 +702,15 @@ msgstr "<b>用户名：</b>"
 
 #: ../plugins/subversion/subversion.ui.h:15
 msgid "Add Log Message to ChangeLog file"
-msgstr ""
+msgstr "把日志消息加入到 ChangLog 文件中"
 
 #: ../plugins/subversion/subversion.ui.h:16
 msgid "Line argument:"
-msgstr ""
+msgstr "行参数："
 
 #: ../plugins/subversion/subversion.ui.h:17
-#, fuzzy
-#| msgid "Project name:"
 msgid "Program name:"
-msgstr "项目名称："
+msgstr "程序名称："
 
 #: ../plugins/subversion/subversion.ui.h:18
 msgid "Remember Password"
@@ -744,21 +718,19 @@ msgstr "记住密码"
 
 #: ../plugins/subversion/subversion.ui.h:19
 msgid "Remember this decision"
-msgstr ""
+msgstr "记住本次选择"
 
 #: ../plugins/subversion/subversion.ui.h:20
 msgid "Repository authorization"
-msgstr ""
+msgstr "版本库授权"
 
 #: ../plugins/subversion/subversion.ui.h:21
 msgid "Retrieving status..."
 msgstr "获取状态..."
 
 #: ../plugins/subversion/subversion.ui.h:22
-#, fuzzy
-#| msgid "Update the po file"
 msgid "Save the diff file"
-msgstr "更新 PO 文件"
+msgstr "保存 diff 文件"
 
 #: ../plugins/subversion/subversion.ui.h:23
 msgid "Send Changes"
@@ -766,14 +738,12 @@ msgstr "发送更改"
 
 #: ../plugins/subversion/subversion.ui.h:24
 #: ../plugins/subversion/update-dialog.c:234
-#, fuzzy
-#| msgid "Update the po file"
 msgid "Update repository"
-msgstr "更新 PO 文件"
+msgstr "更新版本库"
 
 #: ../plugins/subversion/subversion.ui.h:25
 msgid "Use configured program to view the diff"
-msgstr ""
+msgstr "用所设置的程序来查看 diff"
 
 #: ../plugins/subversion/subversion.ui.h:26
 msgid "label"
@@ -790,114 +760,108 @@ msgstr "Subversion"
 #: ../plugins/subversion/svn-command.c:177
 #: ../plugins/subversion/svn-command.c:262
 msgid "Authentication canceled"
-msgstr "认证取消"
+msgstr "验证取消"
 
 #: ../plugins/subversion/svn-command.c:235
-#, fuzzy
-#| msgid "Project name:"
 msgid "Hostname:"
-msgstr "项目名称："
+msgstr "主机名："
 
 #: ../plugins/subversion/svn-command.c:236
-#, fuzzy
-#| msgid "Find in:"
 msgid "Fingerprint:"
-msgstr "查找位于："
+msgstr "指纹："
 
 #: ../plugins/subversion/svn-command.c:237
 msgid "Valid from:"
-msgstr ""
+msgstr "有效期开始于："
 
 #: ../plugins/subversion/svn-command.c:238
 msgid "Valid until:"
-msgstr ""
+msgstr "有效期终止于："
 
 #: ../plugins/subversion/svn-command.c:239
 msgid "Issuer DN:"
-msgstr ""
+msgstr "发起者 DN："
 
 #: ../plugins/subversion/svn-command.c:240
 msgid "DER certificate:"
-msgstr ""
+msgstr "DER 认证："
 
 #: ../plugins/subversion/svn-command.c:387
 #: ../plugins/subversion/svn-command.c:403
 #, c-format
 msgid "Deleted: %s"
-msgstr ""
+msgstr "已删除：%s"
 
 #: ../plugins/subversion/svn-command.c:390
 #: ../plugins/subversion/svn-command.c:409
 #, c-format
 msgid "Added: %s"
-msgstr ""
+msgstr "已添加：%s"
 
 #: ../plugins/subversion/svn-command.c:393
 #, c-format
 msgid "Reverted: %s"
-msgstr ""
+msgstr "已恢复：%s"
 
 #: ../plugins/subversion/svn-command.c:396
-#, fuzzy, c-format
-#| msgid "Recover file"
+#, c-format
 msgid "Revert failed: %s"
-msgstr "恢复文件"
+msgstr "恢复失败：%s"
 
 #: ../plugins/subversion/svn-command.c:400
 #, c-format
 msgid "Resolved: %s"
-msgstr ""
+msgstr "已解决：%s"
 
 #: ../plugins/subversion/svn-command.c:406
-#, fuzzy, c-format
-#| msgid "Update"
+#, c-format
 msgid "Updated: %s"
-msgstr "更新"
+msgstr "已更新：%s"
 
 #: ../plugins/subversion/svn-command.c:412
 #, c-format
 msgid "Externally Updated: %s"
-msgstr ""
+msgstr "已外部更新：%s"
 
 #: ../plugins/subversion/svn-command.c:416
 #, c-format
 msgid "Commit Modified: %s"
-msgstr ""
+msgstr "提交更改：%s"
 
 #: ../plugins/subversion/svn-command.c:420
 #, c-format
 msgid "Commit Added: %s"
-msgstr ""
+msgstr "提交添加：%s"
 
 #: ../plugins/subversion/svn-command.c:423
 #, c-format
 msgid "Commit Deleted: %s"
-msgstr ""
+msgstr "提交删除：%s"
 
 #: ../plugins/subversion/svn-command.c:427
 #, c-format
 msgid "Commit Replaced: %s"
-msgstr ""
+msgstr "提交替换：%s"
 
 #: ../plugins/subversion/svn-command.c:431
 #, c-format
 msgid "Created File: %s"
-msgstr ""
+msgstr "已创建文件：%s"
 
 #: ../plugins/subversion/svn-command.c:446
 #, c-format
 msgid "Modified: %s"
-msgstr ""
+msgstr "已修改：%s"
 
 #: ../plugins/subversion/svn-command.c:449
 #, c-format
 msgid "Merged: %s"
-msgstr ""
+msgstr "已合并：%s"
 
 #: ../plugins/subversion/svn-command.c:452
 #, c-format
 msgid "Conflicted: %s"
-msgstr ""
+msgstr "冲突：%s"
 
 #: ../plugins/subversion/svn-command.c:456
 #, c-format
@@ -907,16 +871,16 @@ msgstr "丢失：%s"
 #: ../plugins/subversion/svn-command.c:459
 #, c-format
 msgid "Obstructed: %s"
-msgstr ""
+msgstr "阻碍：%s"
 
 #: ../plugins/subversion/svn-update-command.c:103
 #, c-format
 msgid "Updated to revision %ld."
-msgstr ""
+msgstr "更新至版本 %ld。"
 
 #: ../plugins/subversion/update-dialog.c:74
 msgid "Subversion: Update complete."
-msgstr ""
+msgstr "Subversion：更新完毕。"
 
 #: ../plugins/subversion/vcs-status-tree-view.c:293
 msgid "Modified"
@@ -932,17 +896,15 @@ msgstr "已删除"
 
 #: ../plugins/subversion/vcs-status-tree-view.c:305
 msgid "Conflicted"
-msgstr ""
+msgstr "冲突"
 
 #: ../plugins/subversion/vcs-status-tree-view.c:309
 msgid "Missing"
-msgstr "未翻译"
+msgstr "丢失"
 
 #: ../src/actions-file.c:202
-#, fuzzy
-#| msgid "Copy _message -> translation"
 msgid "Open file for translation"
-msgstr "复制消息到翻译中(_M)"
+msgstr "打开文件进行翻译"
 
 #: ../src/actions-file.c:276 ../src/actions-file.c:403
 msgid "File saved."
@@ -955,7 +917,7 @@ msgstr "另存为..."
 #: ../src/actions-file.c:747
 #, c-format
 msgid "Failed to write profile data into profiles file '%s'"
-msgstr ""
+msgstr "无法将配置数据写入配置文件“%s”"
 
 #: ../src/actions-help.c:55
 msgid "Current Developers"
@@ -972,6 +934,9 @@ msgid ""
 "Software Foundation, either version 3 of the License, or (at your option) "
 "any later version."
 msgstr ""
+"这一程序是自由软件；你可以遵照自由软件基金会出版的 GNU 通用公共许可证条款来修"
+"改和重新发布这一程序；可采用该许可证的第三版，或者(根据您的选择)用任何更新的"
+"版本。"
 
 #: ../src/actions-help.c:84
 msgid ""
@@ -980,20 +945,22 @@ msgid ""
 "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 "more details."
 msgstr ""
+"发布这一程序的目的是希望它有用，但没有任何担保，甚至没有适合特定目的的隐含的"
+"担保。更详细的情况请参阅 GNU 通用公共许可证。"
 
 #: ../src/actions-help.c:88
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see <http://www.gnu.org/licenses/>."
 msgstr ""
+"您应该已经和程序一起收到一份 GNU 通用公共许可证的拷贝。如果还没有，请参见 "
+"<http://www.gnu.org/licenses/>。"
 
 #: ../src/actions-help.c:100
-#, fuzzy
-#| msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
-msgstr "用于应用程序和库本地化的翻译文件编辑组合。"
+msgstr "用于应用程序和库本地化的翻译文件编辑套件。"
 
 #: ../src/actions-help.c:102
 msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
@@ -1013,7 +980,8 @@ msgstr ""
 "http://i18n.linux.net.cn\n"
 "Wang Jian <lark@linux.net.cn>\n"
 "jan2xue <75jan@163.com>\n"
-"Zhang Miao <mymzhang@gmail.com>"
+"Zhang Miao <mymzhang@gmail.com>\n"
+"Ming Yang <yamisoe@gmail.com>"
 
 #: ../src/actions-help.c:115
 msgid "Gtranslator Web Site"
@@ -1023,32 +991,28 @@ msgstr "Gtranslator 网站"
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "找到并替换了 %d 个匹配项"
+msgstr[1] "找到并替换了 %d 个匹配项"
 
 #: ../src/actions-search.c:185
 msgid "Found and replaced one occurrence"
-msgstr "找到并替换一个匹配项"
+msgstr "找到并替换了一个匹配项"
 
 #: ../src/context.c:61
 msgid "Format:"
-msgstr ""
+msgstr "格式："
 
 #: ../src/context.c:62
-#, fuzzy
-#| msgid "Contents"
 msgid "Context:"
-msgstr "注释"
+msgstr "上下文："
 
 #: ../src/context.c:63
-#, fuzzy
-#| msgid "Edit comment"
 msgid "Extracted comments:"
-msgstr "编辑注释"
+msgstr "注释："
 
 #: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:716
 msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
-msgstr "<span weight=\"bold\" size=\"large\">添加到数据库的字符串</span>"
+msgstr "<span weight=\"bold\" size=\"large\">字符串已添加到数据库</span>"
 
 #: ../src/dialogs/assistant.c:281
 #, c-format
@@ -1064,6 +1028,16 @@ msgid ""
 "Plural form: %s\n"
 "Database path: %s"
 msgstr ""
+"配置名：%s\n"
+"翻译者姓名：%s\n"
+"翻译者电子邮件：%s\n"
+"语言名称：%s\n"
+"团队电子邮件：%s\n"
+"语言代码：%s\n"
+"字符集：%s\n"
+"转换编码：%s\n"
+"复数形式：%s\n"
+"数据库路径：%s"
 
 #: ../src/dialogs/assistant.c:300
 msgid "None"
@@ -1074,18 +1048,16 @@ msgid ""
 "This assistant will help you to create the main profile\n"
 "and generate your translation memory database."
 msgstr ""
+"该助手将帮助您创建主配置文件\n"
+"以及生成您的翻译记忆数据库。"
 
 #: ../src/dialogs/assistant.c:327
-#, fuzzy
-#| msgid "Russian"
 msgid "Assistant"
-msgstr "俄语"
+msgstr "创建助手"
 
 #: ../src/dialogs/assistant.c:416
-#, fuzzy
-#| msgid "Project name:"
 msgid "<b>Profile name:</b>"
-msgstr "项目名称："
+msgstr "<b>配置名称：</b>"
 
 #: ../src/dialogs/assistant.c:436
 msgid "<b>Translator name:</b>"
@@ -1101,12 +1073,12 @@ msgstr "<b>语言：</b>"
 
 #: ../src/dialogs/assistant.c:496
 msgid "<b>Team email:</b>"
-msgstr "<b>团队电邮:</b>"
+msgstr "<b>团队电子邮件:</b>"
 
 #: ../src/dialogs/assistant.c:508 ../src/dialogs/assistant.c:656
 #: ../src/dialogs/preferences-dialog.c:511
 msgid "Profile"
-msgstr ""
+msgstr "配置"
 
 #: ../src/dialogs/assistant.c:584
 msgid "<b>Language code:</b>"
@@ -1118,11 +1090,11 @@ msgstr "<b>字符集：</b>"
 
 #: ../src/dialogs/assistant.c:624
 msgid "<b>Transfer encoding:</b>"
-msgstr "<b>转换编码：</b>"
+msgstr "<b>传输编码：</b>"
 
 #: ../src/dialogs/assistant.c:644
 msgid "<b>Plural forms:</b>"
-msgstr "<b>附属形式:</b>"
+msgstr "<b>复数形式:</b>"
 
 #: ../src/dialogs/assistant.c:706
 msgid "<b>Select the path to generate the database:</b>"
@@ -1130,7 +1102,7 @@ msgstr "<b>选择路径以生成数据库：</b>"
 
 #: ../src/dialogs/assistant.c:736
 msgid "<b>Look for a specific PO filename:</b>"
-msgstr ""
+msgstr "<b>查找指定的 PO 文件名：</b>"
 
 #: ../src/dialogs/assistant.c:745
 msgid "E.g.: gl.po"
@@ -1146,7 +1118,7 @@ msgstr "确认"
 
 #: ../src/dialogs/close-confirmation-dialog.c:131
 msgid "Close _without Saving"
-msgstr "不保存直接关闭(_W)"
+msgstr "不保存而直接关闭(_W)"
 
 #: ../src/dialogs/close-confirmation-dialog.c:165
 msgid "Question"
@@ -1161,20 +1133,20 @@ msgstr "在关闭前是否保存对文档“%s”的更改？"
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "对 %d 份文档的改动将永久丢失。"
+msgstr[1] "对 %d 份文档的改动将永久丢失。"
 
 #: ../src/dialogs/close-confirmation-dialog.c:561
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "有 %d 份含有未保存的改动的文档。要在关闭前保存吗？"
+msgstr[1] "有 %d 份含有未保存的改动的文档。要在关闭前保存吗？"
 
 #: ../src/dialogs/close-confirmation-dialog.c:579
 msgid "Docum_ents with unsaved changes:"
-msgstr ""
+msgstr "含有未保存的改动的文档(_E)"
 
 #: ../src/dialogs/close-confirmation-dialog.c:581
 msgid "S_elect the documents you want to save:"
@@ -1194,25 +1166,21 @@ msgstr "编辑注释"
 
 #: ../src/dialogs/comment-dialog.ui.h:1
 msgid "<b>Write your comments bellow:</b>"
-msgstr ""
+msgstr "<b>请在下方写入您的注释：</b>"
 
 #: ../src/dialogs/file-dialogs.c:60
 msgid "Gettext translation"
-msgstr "Gettext 翻译"
+msgstr "Gettext 翻译文件"
 
 #: ../src/dialogs/file-dialogs.c:65
-#, fuzzy
-#| msgid "Go to next untranslated message"
 msgid "Gettext translation template"
-msgstr "转到下一个未翻译的消息"
+msgstr "Gettext 翻译模板"
 
 #: ../src/dialogs/file-dialogs.c:70
 msgid "All files"
 msgstr "所有文件"
 
 #: ../src/dialogs/header-dialog.c:259
-#, fuzzy
-#| msgid "Edit the header"
 msgid "Edit Header"
 msgstr "编辑文件头"
 
@@ -1233,32 +1201,24 @@ msgid "Language gro_up email:"
 msgstr "语言小组电子邮件(_U)："
 
 #: ../src/dialogs/header-dialog.ui.h:5
-#, fuzzy
-#| msgid "Po file revision date:"
 msgid "Po file _revision date:"
-msgstr "PO 文件修改时间："
+msgstr "PO 文件修改日期(_R)："
 
 #: ../src/dialogs/header-dialog.ui.h:6
-#, fuzzy
-#| msgid "Pot file creation date:"
 msgid "Pot _file creation date:"
-msgstr "POT 文件创建时间："
+msgstr "POT 文件创建日期(_F)："
 
 #: ../src/dialogs/header-dialog.ui.h:7
 msgid "Project"
 msgstr "项目"
 
 #: ../src/dialogs/header-dialog.ui.h:8
-#, fuzzy
-#| msgid "Project version:"
 msgid "Project Id _version:"
-msgstr "项目版本："
+msgstr "项目编号版本："
 
 #: ../src/dialogs/header-dialog.ui.h:9
-#, fuzzy
-#| msgid "Report message string bugs to:"
 msgid "Report message _bugs to:"
-msgstr "字符串错误报告给:"
+msgstr "报告消息 bug 至："
 
 #: ../src/dialogs/header-dialog.ui.h:10
 msgid "Translator and Language"
@@ -1270,7 +1230,7 @@ msgstr "翻译者电子邮件(_E)："
 
 #: ../src/dialogs/header-dialog.ui.h:12
 msgid "Translator's _name:"
-msgstr "翻译者名字(_N)："
+msgstr "翻译者姓名(_N)："
 
 #: ../src/dialogs/header-dialog.ui.h:13
 msgid "Use my options to complete the following entries:"
@@ -1286,29 +1246,21 @@ msgstr "转到消息"
 
 #: ../src/dialogs/jump-dialog.ui.h:1
 msgid "<b>Enter message number:</b>"
-msgstr "<b>键入消息号：</b>"
-
-#: ../src/dialogs/jump-dialog.ui.h:2
-msgid "gtk-cancel"
-msgstr ""
-
-#: ../src/dialogs/jump-dialog.ui.h:3
-msgid "gtk-ok"
-msgstr ""
+msgstr "<b>键入消息编号：</b>"
 
 #: ../src/dialogs/preferences-dialog.c:517
 msgid "Active"
-msgstr ""
+msgstr "活动的"
 
 #: ../src/dialogs/preferences-dialog.c:1060
 msgid ""
 "<span weight=\"bold\" size=\"large\">Impossible to remove the active "
 "profile</span>"
-msgstr ""
+msgstr "<span weight=\"bold\" size=\"large\">无法移除活动的配置文件</span>"
 
 #: ../src/dialogs/preferences-dialog.c:1063
 msgid "Another profile should be selected as active before"
-msgstr ""
+msgstr "在此之前，必须选择另一个配置文件"
 
 #: ../src/dialogs/preferences-dialog.c:1075
 msgid ""
@@ -1322,42 +1274,32 @@ msgid "Gtranslator Preferences"
 msgstr "Gtranslator 首选项"
 
 #: ../src/dialogs/preferences-dialog.ui.h:2
-#, fuzzy
-#| msgid "<b>Character set:</b>"
 msgid "<b>Anchor style:</b>"
-msgstr "<b>字符集：</b>"
+msgstr "<b>锚点类型：</b>"
 
 #: ../src/dialogs/preferences-dialog.ui.h:3
 msgid "<b>Autosave</b>"
 msgstr "<b>自动保存</b>"
 
 #: ../src/dialogs/preferences-dialog.ui.h:4
-#, fuzzy
-#| msgid "<b>Configuration</b>"
 msgid "<b>Configuration:</b>"
-msgstr "<b>配置</b>"
+msgstr "<b>配置：</b>"
 
 #: ../src/dialogs/preferences-dialog.ui.h:5
-#, fuzzy
-#| msgid "Contents"
 msgid "<b>Contents</b>"
-msgstr "注释"
+msgstr "<b>内容</b>"
 
 #: ../src/dialogs/preferences-dialog.ui.h:6
-#, fuzzy
-#| msgid "<b>Database</b>"
 msgid "<b>Database:</b>"
-msgstr "<b>数据库</b>"
+msgstr "<b>数据库：</b>"
 
 #: ../src/dialogs/preferences-dialog.ui.h:7
 msgid "<b>General</b>"
 msgstr "<b>常规</b>"
 
 #: ../src/dialogs/preferences-dialog.ui.h:8
-#, fuzzy
-#| msgid "<b>Team email:</b>"
 msgid "<b>Scheme color:</b>"
-msgstr "<b>团队电邮:</b>"
+msgstr "<b>配色方案:</b>"
 
 #: ../src/dialogs/preferences-dialog.ui.h:9
 msgid "<b>Text Display</b>"
@@ -1369,11 +1311,11 @@ msgstr "添加到数据库"
 
 #: ../src/dialogs/preferences-dialog.ui.h:11
 msgid "Check _spelling"
-msgstr "检查拼写(_S)"
+msgstr "拼写检查(_S)"
 
 #: ../src/dialogs/preferences-dialog.ui.h:12
 msgid "Create a _backup copy of files before saving"
-msgstr "文件保存前创建一份备份(_B)"
+msgstr "保存文件前创建一份备份(_B)"
 
 #: ../src/dialogs/preferences-dialog.ui.h:13
 msgid "Editor"
@@ -1393,35 +1335,31 @@ msgstr "界面"
 
 #: ../src/dialogs/preferences-dialog.ui.h:18
 msgid "Make _whitespace visible"
-msgstr ""
+msgstr "显示空格字符(_W)"
 
 #: ../src/dialogs/preferences-dialog.ui.h:19
 msgid "Max. # of missing words:"
-msgstr ""
+msgstr "最大缺失单词数："
 
 #: ../src/dialogs/preferences-dialog.ui.h:20
 msgid "Max. difference in sentence length:"
-msgstr ""
+msgstr "最大句子长度差值："
 
 #: ../src/dialogs/preferences-dialog.ui.h:21
 msgid "Plugins"
 msgstr "插件"
 
 #: ../src/dialogs/preferences-dialog.ui.h:22
-#, fuzzy
-#| msgid "Files"
 msgid "Profiles"
-msgstr "文件"
+msgstr "配置文件"
 
 #: ../src/dialogs/preferences-dialog.ui.h:23
 msgid "Select directory contains PO files:"
-msgstr ""
+msgstr "选择包含 PO 文件的目录"
 
 #: ../src/dialogs/preferences-dialog.ui.h:24 ../src/tab.c:658
-#, fuzzy
-#| msgid "Translation"
 msgid "Translation Memory"
-msgstr "翻译"
+msgstr "翻译记忆"
 
 #: ../src/dialogs/preferences-dialog.ui.h:25
 msgid "Use _custom font"
@@ -1429,7 +1367,7 @@ msgstr "使用自定义字体(_C)"
 
 #: ../src/dialogs/preferences-dialog.ui.h:26
 msgid "Use only files with this name:"
-msgstr ""
+msgstr "仅使用具有该名称的文件："
 
 #: ../src/dialogs/preferences-dialog.ui.h:27
 msgid "_Autosave files every"
@@ -1441,13 +1379,11 @@ msgstr "删除已编译的 GMO 文件(_D)"
 
 #: ../src/dialogs/preferences-dialog.ui.h:29
 msgid "_Highlight message syntax"
-msgstr ""
+msgstr "语法高亮消息(_H)"
 
 #: ../src/dialogs/preferences-dialog.ui.h:30
-#, fuzzy
-#| msgid "Remove fuzzy status if message is changed"
 msgid "_Remove fuzzy status if message is changed"
-msgstr "如果消息被改动，将模糊状态清除"
+msgstr "如果消息被改动，则清除模糊状态(_R)"
 
 #: ../src/dialogs/preferences-dialog.ui.h:31
 msgid "_Warn if PO file contains fuzzy translations"
@@ -1460,7 +1396,7 @@ msgstr "分钟(_M)"
 #: ../src/dialogs/profile-dialog.c:257
 msgid ""
 "<span weight=\"bold\" size=\"large\">The profile name already exists</span>"
-msgstr ""
+msgstr "<span weight=\"bold\" size=\"large\">配置文件名已存在</span>"
 
 #: ../src/dialogs/profile-dialog.c:345
 msgid "Gtranslator Profile"
@@ -1496,7 +1432,7 @@ msgstr "姓名(_A)："
 
 #: ../src/dialogs/profile-dialog.ui.h:7
 msgid "Transfer en_coding:"
-msgstr ""
+msgstr "传输编码："
 
 #: ../src/dialogs/profile-dialog.ui.h:8
 msgid "_Email:"
@@ -1552,7 +1488,7 @@ msgstr "替换成(_W)："
 
 #: ../src/dialogs/search-dialog.ui.h:7
 msgid "Search _backwards"
-msgstr ""
+msgstr "向后查找(_B)"
 
 #: ../src/dialogs/search-dialog.ui.h:8
 msgid "Translated text"
@@ -1560,7 +1496,7 @@ msgstr "已翻译文本"
 
 #: ../src/dialogs/search-dialog.ui.h:9
 msgid "_Match case"
-msgstr "大小写匹配(_M)"
+msgstr "匹配大小写(_M)"
 
 #: ../src/dialogs/search-dialog.ui.h:10
 msgid "_Search for: "
@@ -1568,7 +1504,7 @@ msgstr "查找(_S)："
 
 #: ../src/dialogs/search-dialog.ui.h:11
 msgid "_Wrap around"
-msgstr ""
+msgstr "自动从头查找(_W)"
 
 #: ../src/main.c:46
 msgid "[FILE...]"
@@ -1577,7 +1513,7 @@ msgstr "[文件...]"
 #: ../src/main.c:72
 #, c-format
 msgid "%s: malformed file name or URI.\n"
-msgstr ""
+msgstr "%s：不正确的文件名或 URI。\n"
 
 #: ../src/main.c:108
 msgid "Gtranslator"
@@ -1604,20 +1540,20 @@ msgstr "状态"
 
 #: ../src/message-table.c:297
 msgid "ID"
-msgstr "ID"
+msgstr "编号"
 
 #: ../src/message-table.c:313
 msgid "Original Text"
-msgstr "初始文本"
+msgstr "原始文本"
 
 #: ../src/message-table.c:329
 msgid "Translated Text"
-msgstr "已翻译文本"
+msgstr "翻译文本"
 
 #: ../src/notebook.c:94
 #, c-format
 msgid "<b>Path:</b> %s"
-msgstr ""
+msgstr "<b>路径：</b> %s"
 
 #: ../src/notebook.c:153
 msgid "Close document"
@@ -1636,12 +1572,12 @@ msgstr "文件为空"
 #: ../src/po.c:405
 #, c-format
 msgid "Gettext returned a null message domain list."
-msgstr ""
+msgstr "Gettext 返回了一个空的消息域列表。"
 
 #: ../src/po.c:552
 #, c-format
 msgid "No messages obtained from parser."
-msgstr ""
+msgstr "没有从解析器获得任何消息。"
 
 #: ../src/po.c:793
 #, c-format
@@ -1702,12 +1638,12 @@ msgstr "配置插件(_O)"
 #. Translators: Insert mode
 #: ../src/statusbar.c:114 ../src/statusbar.c:242
 msgid "INS"
-msgstr ""
+msgstr "插入"
 
 #. Translators: Overwrite mode
 #: ../src/statusbar.c:114 ../src/statusbar.c:240
 msgid "OVR"
-msgstr ""
+msgstr "改写"
 
 #: ../src/tab.c:224
 msgid "There is an error in the message:"
@@ -1727,20 +1663,16 @@ msgid "Message Table"
 msgstr "消息表"
 
 #: ../src/tab.c:650
-#, fuzzy
-#| msgid "Contents"
 msgid "Context"
-msgstr "注释"
+msgstr "上下文"
 
 #: ../src/tab.c:688
-#, fuzzy
-#| msgid "Original text font:"
 msgid "<b>Original Text:</b>"
-msgstr "原来的文本字体："
+msgstr "<b>原始文本：</b>"
 
 #: ../src/tab.c:749
 msgid "<b>Translate_d Text:</b>"
-msgstr ""
+msgstr "<b>已翻译文本：</b>"
 
 #. Translaters: This string is for a toggle to display a toolbar.
 #. * The name of the toolbar is automatically computed from the widgets
@@ -1784,17 +1716,17 @@ msgstr "分割符"
 
 #: ../src/translation-memory/berkeley/db-base.c:165
 msgid "Running recovery..."
-msgstr ""
+msgstr "恢复中..."
 
 #: ../src/translation-memory/berkeley/db-base.c:173
 #, c-format
 msgid "There was an error recovering the database: %s"
-msgstr ""
+msgstr "恢复数据出错：%s"
 
 #: ../src/translation-memory/berkeley/db-base.c:181
 #, c-format
 msgid "There was an error in database: %s"
-msgstr "数据库中有错误：%s"
+msgstr "数据库出错：%s"
 
 #: ../src/translation-memory/translation-memory-ui.c:209
 #, c-format
@@ -1803,11 +1735,11 @@ msgstr "插入选项 nº %d"
 
 #: ../src/translation-memory/translation-memory-ui.c:286
 msgid "Shortcut"
-msgstr ""
+msgstr "快捷键"
 
 #: ../src/translation-memory/translation-memory-ui.c:297
 msgid "Level"
-msgstr ""
+msgstr "级别"
 
 #: ../src/translation-memory/translation-memory-ui.c:308
 msgid "String"
@@ -1818,16 +1750,14 @@ msgid "Please check your installation."
 msgstr "请检查您的安装。"
 
 #: ../src/utils.c:381
-#, fuzzy, c-format
-#| msgid "Unable to find file %s."
+#, c-format
 msgid "Unable to open ui file %s. Error: %s"
-msgstr "无法找到文件 %s。"
+msgstr "无法打开 UI 文件 %s。错误：%s"
 
 #: ../src/utils.c:400
-#, fuzzy, c-format
-#| msgid "Unable to find file %s."
+#, c-format
 msgid "Unable to find the object '%s' inside file %s."
-msgstr "无法找到文件 %s。"
+msgstr "无法在文件 %2$s 中找到对象“%1$s”。"
 
 #: ../src/utils.c:808
 msgid ""
@@ -1846,7 +1776,7 @@ msgid ""
 "GtkSpell was unable to initialize.\n"
 " %s"
 msgstr ""
-"GtkSpell 无法初始化。\n"
+"无法初始化 GtkSpell。\n"
 " %s"
 
 #: ../src/window.c:109
@@ -1902,10 +1832,8 @@ msgstr "文件头(_H)..."
 
 #. Help menu
 #: ../src/window.c:138
-#, fuzzy
-#| msgid "Contents"
 msgid "_Contents"
-msgstr "注释"
+msgstr "内容(_C)"
 
 #: ../src/window.c:150
 msgid "Save the current file"
@@ -1925,7 +1853,7 @@ msgstr "撤消上一次操作"
 
 #: ../src/window.c:167
 msgid "Redo last undone operation"
-msgstr "重复上次未完成的操作"
+msgstr "重做上次撤销的操作"
 
 #: ../src/window.c:170
 msgid "Cut the selected text"
@@ -1941,7 +1869,7 @@ msgstr "粘贴剪贴板上的内容"
 
 #: ../src/window.c:179
 msgid "Clear the selected translation"
-msgstr "清楚选择的翻译"
+msgstr "清除选定的翻译"
 
 #: ../src/window.c:183
 msgid "C_omment..."
@@ -1952,47 +1880,37 @@ msgid "Edit message comment"
 msgstr "编辑消息注释"
 
 #: ../src/window.c:186
-#, fuzzy
-#| msgid "Copy _message -> translation"
 msgid "Copy _Message to Translation"
 msgstr "复制消息到翻译中(_M)"
 
 #: ../src/window.c:187
-#, fuzzy
-#| msgid "Copy the original message contents and paste them as translation"
 msgid "Copy original message contents to the translation field"
-msgstr "复制原始消息并粘贴内容作为翻译"
+msgstr "将原始消息复制到翻译编辑框中"
 
 #: ../src/window.c:189
-#, fuzzy
-#| msgid "Toggle fuzzy status of a message"
 msgid "Toggle _Fuzzy Status"
-msgstr "切换一条消息的模糊状态"
+msgstr "切换模糊状态(_F)"
 
 #: ../src/window.c:190
 msgid "Toggle fuzzy status of a message"
 msgstr "切换一条消息的模糊状态"
 
 #: ../src/window.c:192 ../src/window.c:199
-#, fuzzy
-#| msgid "Translation"
 msgid "_Translation Memory"
-msgstr "翻译"
+msgstr "翻译记忆(_T)"
 
 #. View menu
 #: ../src/window.c:196
-#, fuzzy
-#| msgid "Contents"
 msgid "_Context"
-msgstr "注释"
+msgstr "上下文(_C)"
 
 #: ../src/window.c:197
 msgid "Show the Context panel"
-msgstr ""
+msgstr "显示上下文面板"
 
 #: ../src/window.c:200
 msgid "Show the Translation Memory panel"
-msgstr ""
+msgstr "显示翻译记忆面板"
 
 #. { "ViewSidePane", NULL, N_("Side _Pane"), "F9",
 #. N_("Show or hide the side pane in the current window"),
@@ -2029,7 +1947,7 @@ msgstr "下一个文件(_L)"
 
 #: ../src/window.c:232
 msgid "_Previous Message"
-msgstr "前一个消息(_P)"
+msgstr "前一条消息(_P)"
 
 #: ../src/window.c:233
 msgid "Move back one message"
@@ -2037,7 +1955,7 @@ msgstr "转到上一条消息"
 
 #: ../src/window.c:235
 msgid "_Next Message"
-msgstr "下一个消息(_N)"
+msgstr "下一条消息(_N)"
 
 #: ../src/window.c:236
 msgid "Move forward one message"
@@ -2045,7 +1963,7 @@ msgstr "转到下一条消息"
 
 #: ../src/window.c:238
 msgid "_Go to Message..."
-msgstr "转到信息(_G)..."
+msgstr "转到消息(_G)..."
 
 #: ../src/window.c:239
 msgid "Jumps to a specific message"
@@ -2069,7 +1987,7 @@ msgstr "转到最后一条消息"
 
 #: ../src/window.c:247
 msgid "Next Fuz_zy"
-msgstr "下一个模糊翻译(_Z)"
+msgstr "下一条模糊翻译(_Z)"
 
 #: ../src/window.c:248
 msgid "Go to the next fuzzy message"
@@ -2077,15 +1995,15 @@ msgstr "转到下一条模糊翻译的消息"
 
 #: ../src/window.c:250
 msgid "Previous Fuzz_y"
-msgstr "前一个模糊翻译(_Y)"
+msgstr "前一条模糊翻译(_Y)"
 
 #: ../src/window.c:251
 msgid "Go to the previous fuzzy message"
-msgstr "转到前一个模糊翻译的消息"
+msgstr "转到前一条模糊翻译的消息"
 
 #: ../src/window.c:253
 msgid "Next _Untranslated"
-msgstr "下一个未翻译的(_U)"
+msgstr "下一条未翻译的消息(_U)"
 
 #: ../src/window.c:254
 msgid "Go to the next untranslated message"
@@ -2093,7 +2011,7 @@ msgstr "转到下一条未翻译的消息"
 
 #: ../src/window.c:256
 msgid "Previ_ous Untranslated"
-msgstr "前一个未翻译的(_O)"
+msgstr "前一条未翻译的消息(_O)"
 
 #: ../src/window.c:257
 msgid "Go to the previous untranslated message"
@@ -2101,7 +2019,7 @@ msgstr "转到前一条未翻译的消息"
 
 #: ../src/window.c:259
 msgid "Next Fu_zzy or Untranslated"
-msgstr "下一个模糊翻译或未翻译的(_Z)"
+msgstr "下一条模糊翻译或未翻译的消息(_Z)"
 
 #: ../src/window.c:260
 msgid "Go to the next fuzzy or untranslated message"
@@ -2109,7 +2027,7 @@ msgstr "转到下一条模糊翻译或未翻译的消息"
 
 #: ../src/window.c:262
 msgid "Pre_vious Fuzzy or Untranslated"
-msgstr ""
+msgstr "前一条模糊翻译或未翻译的消息(_V)"
 
 #: ../src/window.c:263
 msgid "Go to the previous fuzzy or untranslated message"
@@ -2125,11 +2043,11 @@ msgstr "查找和替换文本"
 
 #: ../src/window.c:752
 msgid "Untranslated"
-msgstr "未翻译"
+msgstr "未翻译的"
 
 #: ../src/window.c:754
 msgid "Translated"
-msgstr "已译"
+msgstr "已翻译"
 
 #: ../src/window.c:756
 msgid "Fuzzy"
@@ -2184,6 +2102,12 @@ msgstr "工具条编辑器"
 #: ../src/window.c:1552
 msgid "Documents"
 msgstr "文档"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-cancel"
+
+#~ msgid "gtk-ok"
+#~ msgstr "gtk-ok"
 
 #~ msgid "Select Folder"
 #~ msgstr "选择文件夹"
