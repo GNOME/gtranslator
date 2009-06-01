@@ -1,102 +1,98 @@
 # Copyright (C) 2000-2002 Free Software Foundation, Inc.
-# Yuri Syrota <rasta@renome.rovno.ua>, 2000.
-#
+# Yuri Syrota <rasta@renome.rovno.ua>, 2000
+# Sergey Panasenko <nitay@users.sourceforge.net>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 0.17\n"
+"Project-Id-Version: gtranslator 1.95\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-03 22:56+0200\n"
-"PO-Revision-Date: 2002-04-30 09:54+0200\n"
-"Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
-"Language-Team: Ukrainian <linux@linux.org.ua>\n"
+"POT-Creation-Date: 2009-06-01 15:53+0300\n"
+"PO-Revision-Date: 2009-06-01 14:43+0300\n"
+"Last-Translator: Sergey Panasenko <nitay@users.sourceforge.net>\n"
+"Language-Team: Ukrainian <>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/desktop/gtranslator.desktop.in.h:1
-#, fuzzy
+#: ../data/desktop/gtranslator.desktop.in.h:1
 msgid "The GNOME translation program"
 msgstr "Програма перекладу для GNOME"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1139
+#: ../data/desktop/gtranslator.desktop.in.h:2 ../src/parse.c:1164
 msgid "gtranslator"
 msgstr "Перекладач"
 
 #. Translator credits
-#: src/about.c:60
+#: ../src/about.c:60
 #, fuzzy
 msgid "translator_credits"
-msgstr "Сайт Перекладача"
+msgstr ""
+"Yuri Syrota <rasta@renome.rovno.ua>\n"
+"Сергій Панасенко <nitay@users.sourceforge.net>"
 
-#: src/about.c:80
+#: ../src/about.c:80
 msgid "(C) 1999 The Free Software Foundation, Inc."
-msgstr ""
+msgstr "(C) 1999 The Free Software Foundation, Inc."
 
-#: src/about.c:81
+#: ../src/about.c:81
 msgid "gtranslator is a po file editing suite with many bells and whistles."
-msgstr ""
+msgstr "gtranslator - редактор po-файлів із багатьма додатковими можливостями."
 
-#: src/bookmark.c:93 src/dialogs.c:1492
-#, fuzzy
+#: ../src/bookmark.c:67 ../src/bookmark.c:93 ../src/dialogs.c:1400
 msgid "No comment"
-msgstr "Виправити коментар:"
+msgstr "Нема коментаря"
 
-#: src/bookmark.c:598
-#, fuzzy
+#: ../src/bookmark.c:598
 msgid "_View/_Bookmarks/"
-msgstr "_Кольорові схеми"
+msgstr "_Вид/_Закладки/"
 
-#: src/bookmark.c:635
-#, fuzzy, c-format
+#: ../src/bookmark.c:635
+#, c-format
 msgid "Open %s (%s)"
-msgstr "Відкрити %s"
+msgstr "Відкрити %s (%s)"
 
-#: src/color-schemes.c:196
-#, fuzzy, c-format
+#: ../src/color-schemes.c:195
+#, c-format
 msgid "Can't apply color scheme file `%s'!"
-msgstr "Не вдалося відкрити скомпільований gettext-файл \"%s\"!"
+msgstr "Неможливо використати файл схеми кольорів  \"%s\"!"
 
-#: src/color-schemes.c:318
-#, fuzzy
+#: ../src/color-schemes.c:317
 msgid "Couldn't retrieve author information!"
-msgstr "Не вдалося завантажити навіть типовий шрифт!"
+msgstr "Не вдалося отримати інформацію про автора!"
 
 #.
 #. * Translators: These strings are used as author informations if
 #. *  no author informations could be retrieved:
 #.
-#: src/color-schemes.c:324 src/translator.c:318
+#: ../src/color-schemes.c:323 ../src/translator.c:318
 msgid "Unknown"
-msgstr ""
+msgstr "Невідомо"
 
-#: src/color-schemes.c:325
+#: ../src/color-schemes.c:324
 msgid "<Not Given>"
 msgstr "<Не вказано>"
 
-#: src/color-schemes.c:472
-#, fuzzy
+#: ../src/color-schemes.c:471
 msgid "_View/_Colorschemes/"
-msgstr "_Кольорові схеми"
+msgstr "_Вид/_Кольорові схеми"
 
-#: src/color-schemes.c:502
+#: ../src/color-schemes.c:501
 #, c-format
 msgid "Activate colorscheme %s"
 msgstr "Активувати кольорову схему %s"
 
-#: src/dialogs.c:115
+#: ../src/dialogs.c:103
 msgid "gtranslator -- open po file"
 msgstr "Перекладач -- відкривання po-файлу"
 
-#: src/dialogs.c:157
+#: ../src/dialogs.c:145
 msgid "gtranslator -- save file as.."
 msgstr "Перекладач -- зберігання файлу"
 
-#: src/dialogs.c:177
-#, fuzzy
+#: ../src/dialogs.c:165
 msgid "gtranslator -- save local copy of file as.."
-msgstr "Перекладач -- зберігання файлу як .. "
+msgstr "Перекладач -- зберігти локальну копію файлу як .. "
 
-#: src/dialogs.c:227
+#: ../src/dialogs.c:215
 #, c-format
 msgid ""
 "File %s\n"
@@ -105,68 +101,56 @@ msgstr ""
 "Файл %s\n"
 "було змінено. Зберегти?"
 
-#: src/dialogs.c:233
+#: ../src/dialogs.c:221
 msgid "Don't save"
-msgstr ""
+msgstr "Не збережено"
 
-#: src/dialogs.c:277
-msgid "gtranslator -- import po file"
-msgstr "Перекладач -- імпорт po-файлу"
-
-#: src/dialogs.c:324
-msgid "gtranslator -- export po file"
-msgstr "Перекладач -- експорт po-файлу"
-
-#: src/dialogs.c:372 src/dialogs.c:405
-#, fuzzy
+#: ../src/dialogs.c:257 ../src/dialogs.c:290
 msgid "gtranslator -- edit comment"
-msgstr "Перекладач -- редагування заголовку"
+msgstr "Перекладач -- редагування коментарю"
 
-#: src/dialogs.c:397
+#: ../src/dialogs.c:282
 msgid "Comment:"
 msgstr "Коментар:"
 
-#: src/dialogs.c:512
+#: ../src/dialogs.c:399
 #, c-format
 msgid "Should ALL translations from `%s' be removed?"
 msgstr "Чи потрібно видалити ВСІ переклади з \"%s\"?"
 
-#: src/dialogs.c:615
+#: ../src/dialogs.c:506
 msgid "gtranslator -- go to"
 msgstr "Перекладач -- перехід"
 
-#: src/dialogs.c:623
+#: ../src/dialogs.c:514
 msgid "Go to message number:"
 msgstr "Перейти до повідомлення за номером:"
 
-#: src/dialogs.c:681
-#, fuzzy
+#: ../src/dialogs.c:572
 msgid "Find in the po file"
 msgstr "Пошук у po-файлі"
 
-#: src/dialogs.c:690
-#, fuzzy
+#: ../src/dialogs.c:581
 msgid "Enter search string:"
-msgstr "Введіть необхідний для пошуку рядок:"
+msgstr "Введіть рядок пошуку:"
 
-#: src/dialogs.c:695
+#: ../src/dialogs.c:586
 msgid "Case sensitive"
 msgstr "Реґістрова чутливисть"
 
-#: src/dialogs.c:700
-#, fuzzy
+#: ../src/dialogs.c:591
 msgid "Find in:"
 msgstr "Шукати в: "
 
-#: src/dialogs.c:704 src/dialogs.c:835
+#: ../src/dialogs.c:595 ../src/dialogs.c:730
 msgid "Comments"
 msgstr "Коментарі"
 
-#: src/dialogs.c:707 src/dialogs.c:838 src/languages.c:97
+#: ../src/dialogs.c:598 ../src/dialogs.c:733 ../src/languages.c:101
 msgid "English"
 msgstr "Англійське"
 
-#: src/dialogs.c:710 src/dialogs.c:841 src/messages-table.c:254
+#: ../src/dialogs.c:601 ../src/dialogs.c:736 ../src/messages-table.c:229
 msgid "Translation"
 msgstr "Переклад"
 
@@ -174,51 +158,43 @@ msgstr "Переклад"
 #. * Translators: this means that the hotkeys ("_" etc.) are ignored
 #. *  during the search action.
 #.
-#: src/dialogs.c:721
+#: ../src/dialogs.c:612
 msgid "Ignore hotkeys"
-msgstr ""
+msgstr "Ігнорувати гарячі клавіши"
 
-#: src/dialogs.c:814
-#, fuzzy
+#: ../src/dialogs.c:709
 msgid "gtranslator -- replace"
-msgstr "Перекладач -- %s"
+msgstr "Перекладач -- заміна"
 
-#: src/dialogs.c:818 src/menus.c:355
+#: ../src/dialogs.c:713 ../src/menus.c:337
 msgid "Replace"
 msgstr "Замінити"
 
-#: src/dialogs.c:819
+#: ../src/dialogs.c:714
 msgid "Replace all"
 msgstr "Замінити всюди"
 
-#: src/dialogs.c:824
+#: ../src/dialogs.c:719
 msgid "String to replace:"
 msgstr "Рядок до заміни:"
 
-#: src/dialogs.c:827
+#: ../src/dialogs.c:722
 msgid "Replace string:"
 msgstr "Рядок заміни:"
 
-#: src/dialogs.c:832
+#: ../src/dialogs.c:727
 msgid "Replace in:"
 msgstr "Замінити в:"
 
-#: src/dialogs.c:895
-#, fuzzy
+#: ../src/dialogs.c:805
 msgid "Please enter a string to replace!"
-msgstr "Введіть необхідний для пошуку рядок"
+msgstr "Будь ласка, введіть рядок для заміни!"
 
-#: src/dialogs.c:903
-#, fuzzy
-msgid "Please enter a string to replace with!"
-msgstr "Введіть необхідний для пошуку рядок"
-
-#: src/dialogs.c:945
-#, fuzzy
+#: ../src/dialogs.c:856
 msgid "An error occurred while msgfmt was executed:\n"
 msgstr "Виникла помилка під час виконання msgfmt:\n"
 
-#: src/dialogs.c:986
+#: ../src/dialogs.c:897
 #, c-format
 msgid ""
 "The file\n"
@@ -231,8 +207,17 @@ msgid ""
 "\n"
 "Shall fool gtranslator open this file anyway ?"
 msgstr ""
+"Файл\n"
+"\n"
+"   %s\n"
+"\n"
+"вже відкрито іншою копіею gtranslator!\n"
+"Будь ласка, закрийте іншу копію програми,\n"
+"яка блокує цей файл, щоб отримати доступ.\n"
+"\n"
+"Ви впевнені, що бажаєте відкрити цей файл незважаючи на це?"
 
-#: src/dialogs.c:1027
+#: ../src/dialogs.c:938
 #, c-format
 msgid ""
 "File %s\n"
@@ -241,24 +226,23 @@ msgstr ""
 "Файл %s\n"
 "було змінено. Ви хочете повернутись до збереженої копії?"
 
-#: src/dialogs.c:1059
-#, fuzzy
+#: ../src/dialogs.c:967
 msgid "gtranslator -- open from URI"
-msgstr "Перекладач -- перехід"
+msgstr "Перекладач -- відкрити за посиланням URI"
 
-#: src/dialogs.c:1071
+#: ../src/dialogs.c:979
 msgid "Enter URI:"
-msgstr "Введіть URI:"
+msgstr "Введіть адресу URI:"
 
-#: src/dialogs.c:1107
+#: ../src/dialogs.c:1015
 msgid "No URI given!"
 msgstr "Не вказано URI!"
 
-#: src/dialogs.c:1122
+#: ../src/dialogs.c:1030
 msgid "No supported URI protocol (like \"ftp://\") given!"
-msgstr ""
+msgstr "Такий протокол URI (наприклад \"ftp://\") не підтримуеться!"
 
-#: src/dialogs.c:1130
+#: ../src/dialogs.c:1038
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
 "The standard Internet addresses (URLs) are also URIs -- you can\n"
@@ -271,14 +255,30 @@ msgid ""
 "file:///<PO-FILE> or\n"
 "http://www.DOMAIN.COM/PO-FILE"
 msgstr ""
+"URI-адреса використовується як засіб однозначного вказання файлів, які "
+"знаходяться на будь-яких комп'ютерах. \n"
+"Стандартні адреси Інтернету (URL) також є URI-адресами -- Ви маєте "
+"можливість \n"
+"використовувати їх для відкриття віддалених po-файлів розміщених на "
+"серверах, які підтримують стандартні протоколи\n"
+"такі як \"http\", \"ftp\"  або багато інших засобів доступу, що "
+"підтримуються GnomeVFS.\n"
+"Ось декілька прикладів для наочності:\n"
+"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
+"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
+"file:///<PO-FILE> \n"
+"http://www.DOMAIN.COM/PO-FILE"
 
-#: src/dialogs.c:1169
+#: ../src/dialogs.c:1077
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
 "It was saved by gtranslator before gtranslator last closed\n"
 "and may contain your hard work!\n"
 msgstr ""
+"Відкрити резервний файл для \"%s\"?\n"
+"Його було збережено до останнього закривання перекладача, \n"
+"та він може містити Ваш нелегкий труд!\n"
 
 #.
 #. * Translators: All this is about recovering a po file after
@@ -286,86 +286,88 @@ msgstr ""
 #. *   get asked the next time he starts up gtranslator again
 #. *    if he/she wants to recover file.
 #.
-#: src/dialogs.c:1181
+#: ../src/dialogs.c:1089
 msgid "Postpone decision"
-msgstr ""
+msgstr "Відкласти рішення"
 
-#: src/dialogs.c:1183
+#: ../src/dialogs.c:1091
 msgid "Ignore recovery file"
-msgstr ""
+msgstr "Відмовитися   "
 
-#: src/dialogs.c:1185
-#, fuzzy
+#: ../src/dialogs.c:1093
 msgid "Recover file"
-msgstr "Недавні файли"
+msgstr "Відновити файл"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:1244
+#: ../src/dialogs.c:1152
 msgid "Here you can query existing translations from your learn buffer."
-msgstr ""
+msgstr "Тут ви можете запросити існуючий переклад з навчального буферу."
 
-#: src/dialogs.c:1247
-#, fuzzy
+#: ../src/dialogs.c:1155
 msgid "gtranslator -- query your personal learn buffer"
-msgstr "Перекладач -- відкривання po-файлу"
+msgstr "Перекладач -- запит до персонального навчального буферу."
 
-#: src/dialogs.c:1251 src/menus.c:360
+#: ../src/dialogs.c:1159 ../src/menus.c:342
 msgid "Query"
 msgstr "Запит"
 
-#: src/dialogs.c:1252
+#: ../src/dialogs.c:1160
 msgid "Query message content"
 msgstr "Запит вмісту повідомлення"
 
-#: src/dialogs.c:1262
+#: ../src/dialogs.c:1170
 msgid "Query string:"
 msgstr "Рядок запиту:"
 
-#: src/dialogs.c:1300
+#: ../src/dialogs.c:1208
 msgid "No query string given!"
 msgstr "Не вказано рядка запиту!"
 
-#: src/dialogs.c:1322
+#: ../src/dialogs.c:1230
 msgid "Couldn't find any result for the query in your learn buffer!"
-msgstr ""
+msgstr "На ваш запит не знайдено жодного результату у навчальному буфері!"
 
-#: src/dialogs.c:1334
+#: ../src/dialogs.c:1242
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\".\n"
 "Would you like to insert it into the translation?"
 msgstr ""
+"Знайдено \"%s\" як переклад до \"%s\".\n"
+"Чи бажаєте Ви вставити це у переклад?"
 
 #.
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1404
+#: ../src/dialogs.c:1312
 msgid "Query's result translation is already there!"
-msgstr ""
+msgstr "Результат запита перекладу вже тут!"
 
-#: src/dialogs.c:1436
+#: ../src/dialogs.c:1344
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
 msgstr ""
+"Перекласти файл автоматично, використовуючи навчальний буфер для "
+"автоматичного перекладу файлу?"
 
-#: src/dialogs.c:1472 src/dialogs.c:1500
-#, fuzzy
+#: ../src/dialogs.c:1380 ../src/dialogs.c:1408
 msgid "gtranslator -- add bookmark with comment?"
-msgstr "Перекладач -- редагування заголовку"
+msgstr "Перекладач -- додати закладку з коментарем"
 
-#: src/dialogs.c:1492
+#: ../src/dialogs.c:1400
 msgid "Comment for the bookmark:"
-msgstr ""
+msgstr "Коментар для закладки"
 
-#: src/find.c:217
+#: ../src/find.c:218
+#, c-format
 msgid "Please enter a search string"
-msgstr "Введіть необхідний для пошуку рядок"
+msgstr "Введіть рядок пошуку"
 
-#: src/find.c:233
+#: ../src/find.c:236
 #, c-format
 msgid ""
 "Could not find\n"
@@ -374,864 +376,839 @@ msgstr ""
 "Не знайдено\n"
 "\"%s\""
 
-#: src/gui.c:199
+#: ../src/gui.c:176
 msgid "Edit comment"
-msgstr "Виправити коментар:"
+msgstr "Редагувати коментар:"
 
-#: src/gui.c:501
-#, c-format
+#: ../src/gui.c:494
+#, fuzzy, c-format
 msgid "%s [ %i Fuzzy left ]"
-msgstr "%s [ Лишилось невизначених: %i ]"
+msgid_plural "%s [ %i Fuzzy left ]"
+msgstr[0] "%s [ Лишилось невизначених: %i ]"
+msgstr[1] "%s [ Лишилось невизначених: %i ]"
 
-#: src/gui.c:501 src/gui.c:505 src/menus.c:341 src/messages-table.c:315
+#: ../src/gui.c:494 ../src/gui.c:498 ../src/menus.c:323
+#: ../src/messages-table.c:291
 msgid "Fuzzy"
 msgstr "Невизначено"
 
-#: src/gui.c:505
+#: ../src/gui.c:498
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Не визначених не лишилось ]"
 
-#: src/gui.c:513
+#: ../src/gui.c:506
 msgid "Sticky (Message & translation are the same)"
-msgstr ""
+msgstr "Стикер (Повідомлення або переклад, однаково"
 
-#: src/gui.c:515 src/messages-table.c:323
+#: ../src/gui.c:508 ../src/messages-table.c:299
 msgid "Translated"
-msgstr "Перекладене"
+msgstr "Перекладено"
 
-#: src/gui.c:524
-#, c-format
+#: ../src/gui.c:517
+#, fuzzy, c-format
 msgid "%s [ %i Untranslated left ]"
-msgstr "%s [ Лишилось неперекладених: %i ]"
+msgid_plural "%s [ %i Untranslated left ]"
+msgstr[0] "%s [ Лишилось неперекладених: %i ]"
+msgstr[1] "%s [ Лишилось неперекладених: %i ]"
 
-#: src/gui.c:524 src/gui.c:526 src/messages-table.c:306
+#: ../src/gui.c:517 ../src/gui.c:519 ../src/messages-table.c:282
 msgid "Untranslated"
-msgstr "Неперекладене"
+msgstr "Неперекладено"
 
-#: src/gui.c:526
+#: ../src/gui.c:519
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Не лишилось неперекладених ]"
 
-#: src/gui.c:545
-#, fuzzy, c-format
+#: ../src/gui.c:538
+#, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
-msgstr "Повідомлення %d / %d / Стан: %s"
+msgstr "Повідомлення %d / %d / Стан: %s(повідомлення містить форми множини)"
 
-#: src/gui.c:549
+#: ../src/gui.c:542
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "Повідомлення %d / %d / Стан: %s"
 
-#: src/header_stuff.c:495
+#: ../src/header_stuff.c:544
 msgid "gtranslator -- edit header"
 msgstr "Перекладач -- редагування заголовку"
 
-#: src/header_stuff.c:519
+#: ../src/header_stuff.c:568
 msgid "Comments:"
 msgstr "Коментарі:"
 
-#: src/header_stuff.c:526
+#: ../src/header_stuff.c:575
 msgid "Project name:"
 msgstr "Назва проекту:"
 
-#: src/header_stuff.c:532
+#: ../src/header_stuff.c:581
 msgid "Project version:"
 msgstr "Версія проекту:"
 
-#: src/header_stuff.c:539
-#, fuzzy
+#: ../src/header_stuff.c:588
 msgid "Pot file creation date:"
-msgstr "дата створення фойлу pot:"
+msgstr "Дата створення фойлу pot:"
 
-#: src/header_stuff.c:545
-#, fuzzy
+#: ../src/header_stuff.c:594
 msgid "Po file revision date:"
-msgstr "дата видання файлу po:"
+msgstr "Дата оновлення файлу po:"
 
-#: src/header_stuff.c:559
+#: ../src/header_stuff.c:608
 msgid "Report message string bugs to:"
-msgstr ""
+msgstr "Повідомляти про помилки за адресою:"
 
-#: src/header_stuff.c:572
+#: ../src/header_stuff.c:621
 msgid "Generator:"
 msgstr "Ґенератор:"
 
-#: src/header_stuff.c:576
+#: ../src/header_stuff.c:625
 msgid "Project"
 msgstr "Проект"
 
-#: src/header_stuff.c:582
-#, fuzzy
+#: ../src/header_stuff.c:631
 msgid "Use my options to complete the following entries:"
-msgstr "Використовувати мої налаштування для цих записів."
+msgstr "Використовувати мої типові налаштування для заповнення цих записів."
 
-#: src/header_stuff.c:595
+#: ../src/header_stuff.c:644
 msgid "Translator's name:"
 msgstr "Ім'я перекладача:"
 
-#: src/header_stuff.c:601
+#: ../src/header_stuff.c:650
 msgid "Translator's e-mail:"
 msgstr "Електронна адреса перекладача:"
 
-#: src/header_stuff.c:608 src/prefs.c:500
+#: ../src/header_stuff.c:657 ../src/prefs.c:500
 msgid "Language:"
 msgstr "Мова:"
 
-#: src/header_stuff.c:615 src/prefs.c:512
-#, fuzzy
+#: ../src/header_stuff.c:664 ../src/prefs.c:512
 msgid "Language group's email:"
 msgstr "Електронна адреса групи:"
 
-#: src/header_stuff.c:622 src/prefs.c:518
+#: ../src/header_stuff.c:671 ../src/prefs.c:518
 msgid "Charset:"
 msgstr "Набір символів:"
 
-#: src/header_stuff.c:629 src/prefs.c:523
+#: ../src/header_stuff.c:678 ../src/prefs.c:523
 msgid "Encoding:"
 msgstr "Кодування:"
 
-#: src/header_stuff.c:637
+#: ../src/header_stuff.c:686
 msgid "Translator and Language"
 msgstr "Перекладач та мова"
 
-#: src/history.c:195
+#: ../src/history.c:195
 msgid "_File/Recen_t files/"
 msgstr "Файл/Недавні файли/"
 
-#: src/history.c:243
+#: ../src/history.c:243
 #, c-format
 msgid "Open %s"
 msgstr "Відкрити %s"
 
-#: src/languages.c:37
+#: ../src/languages.c:37
 msgid "Afrikaans"
 msgstr "Африканська"
 
-#: src/languages.c:41
+#: ../src/languages.c:41
+#, fuzzy
+msgid "Albanian"
+msgstr "Румунська"
+
+#: ../src/languages.c:45
 msgid "Arabic"
 msgstr "Арабська"
 
-#: src/languages.c:45
+#: ../src/languages.c:49
 msgid "Azerbaijani Turkish"
 msgstr "Азейбарджанська турецька"
 
-#: src/languages.c:49
+#: ../src/languages.c:53
 msgid "Basque"
 msgstr "Баскська"
 
-#: src/languages.c:53
-msgid "Belorussian"
+#: ../src/languages.c:57
+#, fuzzy
+msgid "Belarusian"
 msgstr "Білоруська"
 
-#: src/languages.c:57
+#: ../src/languages.c:61
 msgid "Bengali"
-msgstr ""
+msgstr "Бенгалі"
 
-#: src/languages.c:61
+#: ../src/languages.c:65
 msgid "Britton"
 msgstr "Кельтська"
 
-#: src/languages.c:65
+#: ../src/languages.c:69
 msgid "Bulgarian"
 msgstr "Болгарська"
 
-#: src/languages.c:69
+#: ../src/languages.c:73
 msgid "Catalan"
 msgstr "Каталонська"
 
-#: src/languages.c:73
+#: ../src/languages.c:77
 msgid "Chinese/Simplified"
 msgstr "Китайська/Спрощена"
 
-#: src/languages.c:77
+#: ../src/languages.c:81
 msgid "Chinese/Traditional"
 msgstr "Китайська/Традиційна"
 
-#: src/languages.c:81
+#: ../src/languages.c:85
 msgid "Croatian"
 msgstr "Хорватська"
 
-#: src/languages.c:85
+#: ../src/languages.c:89
 msgid "Czech"
 msgstr "Чешська"
 
-#: src/languages.c:89
+#: ../src/languages.c:93
 msgid "Danish"
 msgstr "Датська"
 
-#: src/languages.c:93
+#: ../src/languages.c:97
 msgid "Dutch"
 msgstr "Голандська"
 
-#: src/languages.c:101
+#: ../src/languages.c:105
 msgid "English/Canada"
 msgstr "Англійська/Канада"
 
-#: src/languages.c:105
+#: ../src/languages.c:109
 msgid "English/GB"
 msgstr "Англійська/Велика Британія"
 
-#: src/languages.c:109
+#: ../src/languages.c:113
 msgid "English/USA"
 msgstr "Англійська/США"
 
-#: src/languages.c:113
+#: ../src/languages.c:117
 msgid "Esperanto"
 msgstr "Есперанто"
 
-#: src/languages.c:117
+#: ../src/languages.c:121
 msgid "Estonian"
 msgstr "Естонська"
 
-#: src/languages.c:121
-#, fuzzy
+#: ../src/languages.c:125
 msgid "Persian"
-msgstr "Білоруська"
+msgstr "Фарсі"
 
-#: src/languages.c:125
+#: ../src/languages.c:129
 msgid "Finnish"
 msgstr "Фінська"
 
-#: src/languages.c:129
+#: ../src/languages.c:133
 msgid "French"
 msgstr "Французька"
 
-#: src/languages.c:133
+#: ../src/languages.c:137
 msgid "Galician"
 msgstr "Ґальська"
 
-#: src/languages.c:137
+#: ../src/languages.c:141
 msgid "German"
 msgstr "Німецька"
 
-#: src/languages.c:141
+#: ../src/languages.c:145
 msgid "Greek"
 msgstr "Грецька"
 
-#: src/languages.c:145
+#: ../src/languages.c:149
 msgid "Gujarati"
+msgstr "Ґудраджаті"
+
+#: ../src/languages.c:153
+msgid "Hebrew"
 msgstr ""
 
-#: src/languages.c:149
-#, fuzzy
+#: ../src/languages.c:157
 msgid "Hindi"
-msgstr "Шукати"
+msgstr "Хінді"
 
-#: src/languages.c:153
+#: ../src/languages.c:161
 msgid "Hungarian"
 msgstr "Угорська"
 
-#: src/languages.c:157
+#: ../src/languages.c:165
 msgid "Icelandic"
-msgstr ""
+msgstr "Ісландська"
 
-#: src/languages.c:161
+#: ../src/languages.c:169
 msgid "Indonesian"
 msgstr "Індонезійська"
 
-#: src/languages.c:165
+#: ../src/languages.c:173
 msgid "Italian"
 msgstr "Італійська"
 
-#: src/languages.c:169
+#: ../src/languages.c:177
 msgid "Irish"
 msgstr "Ірландська"
 
-#: src/languages.c:173
+#: ../src/languages.c:181
 msgid "Japanese"
 msgstr "Японська"
 
-#: src/languages.c:177
+#: ../src/languages.c:185
 msgid "Kannada"
-msgstr ""
+msgstr "Каннада"
 
-#: src/languages.c:181
+#: ../src/languages.c:189
 msgid "Korean"
 msgstr "Корейська"
 
-#: src/languages.c:185
+#: ../src/languages.c:193
+#, fuzzy
+msgid "Kurdish"
+msgstr "Турецька"
+
+#: ../src/languages.c:197
 msgid "Latvian"
 msgstr "Латвійська"
 
-#: src/languages.c:189
+#: ../src/languages.c:201
 msgid "Lithuanian"
 msgstr "Литовська"
 
-#: src/languages.c:193
-msgid "Malay/Bahasa Melayu"
-msgstr ""
+#: ../src/languages.c:205
+#, fuzzy
+msgid "Macedonian"
+msgstr "Індонезійська"
 
-#: src/languages.c:197
+#: ../src/languages.c:209
+msgid "Malay/Bahasa Melayu"
+msgstr "Малайська"
+
+#: ../src/languages.c:213
 msgid "Maltese"
 msgstr "Мальтійська"
 
-#: src/languages.c:201
+#: ../src/languages.c:217
+msgid "Mongolian"
+msgstr ""
+
+#: ../src/languages.c:221
 msgid "Marathi"
-msgstr ""
+msgstr "Маратхі"
 
-#: src/languages.c:205
+#: ../src/languages.c:225
 msgid "Norwegian/Bokmaal"
-msgstr "Норвежська/Букмель"
+msgstr "Норвезька/Букмель"
 
-#: src/languages.c:209
+#: ../src/languages.c:229
 msgid "Norwegian/Nynorsk"
-msgstr "Норвежська/Ньорск"
+msgstr "Норвезька/Ньорск"
 
-#: src/languages.c:213
+#: ../src/languages.c:233
 msgid "Punjabi"
-msgstr ""
+msgstr "Панджабі"
 
-#: src/languages.c:217
+#: ../src/languages.c:237
 msgid "Polish"
 msgstr "Польська"
 
-#: src/languages.c:221
+#: ../src/languages.c:241
 msgid "Portuguese"
 msgstr "Португальська"
 
-#: src/languages.c:225
+#: ../src/languages.c:245
 msgid "Portuguese/Brazil"
 msgstr "Португальська/Бразилія"
 
-#: src/languages.c:229
-#, fuzzy
+#: ../src/languages.c:249
 msgid "Romanian"
-msgstr "Хорватська"
+msgstr "Румунська"
 
-#: src/languages.c:233
+#: ../src/languages.c:253
 msgid "Russian"
 msgstr "Російська"
 
-#: src/languages.c:237
+#: ../src/languages.c:257
 msgid "Serbian/Cyrillic"
 msgstr "Сербська/Кирилиця"
 
-#: src/languages.c:241
+#: ../src/languages.c:261
 msgid "Serbian/Latin"
 msgstr "Сербська/Латиниця"
 
-#: src/languages.c:245
+#: ../src/languages.c:265
 msgid "Slovak"
 msgstr "Словацька"
 
-#: src/languages.c:249
+#: ../src/languages.c:269
 msgid "Slovenian"
 msgstr "Словенська"
 
-#: src/languages.c:253
+#: ../src/languages.c:273
 msgid "Spanish"
 msgstr "Іспанська"
 
-#: src/languages.c:257
+#: ../src/languages.c:277
 msgid "Spanish/Spain"
 msgstr "Іспанська/Іспанія"
 
-#: src/languages.c:261
+#: ../src/languages.c:281
 msgid "Spanish/Mexico"
 msgstr "Іспанська/Мексика"
 
-#: src/languages.c:265
+#: ../src/languages.c:285
 msgid "Swedish"
 msgstr "Шведська"
 
-#: src/languages.c:269
+#: ../src/languages.c:289
+msgid "Tagalog"
+msgstr ""
+
+#: ../src/languages.c:293
 msgid "Tamil"
 msgstr "Тамільська"
 
-#: src/languages.c:273
+#: ../src/languages.c:297
 msgid "Telugu"
-msgstr ""
+msgstr "Телугу"
 
-#: src/languages.c:277
+#: ../src/languages.c:301
 msgid "Thai"
-msgstr "Тайландська"
+msgstr "Тайська "
 
-#: src/languages.c:281
+#: ../src/languages.c:305
 msgid "Turkish"
 msgstr "Турецька"
 
-#: src/languages.c:285
+#: ../src/languages.c:309
 msgid "Ukrainian"
 msgstr "Українська"
 
-#: src/languages.c:289
+#: ../src/languages.c:313
+msgid "Urdu"
+msgstr ""
+
+#: ../src/languages.c:317
 msgid "Uzbekian"
 msgstr "Узбецька"
 
-#: src/languages.c:293
+#: ../src/languages.c:321
 msgid "Vietnamese"
 msgstr "В'єтнамська"
 
-#: src/languages.c:297
+#: ../src/languages.c:325
 msgid "Walloon"
 msgstr "Валонська"
 
-#: src/languages.c:301
+#: ../src/languages.c:329
 msgid "Welsh"
-msgstr "Уельська"
+msgstr "Валлійська"
 
-#: src/learn.c:379
-#, fuzzy
+#: ../src/learn.c:379
+#, c-format
 msgid "gtranslator learn buffer statistics:"
-msgstr "Перекладач - параметри"
+msgstr "Перекладач - статистика навчального буферу"
 
-#: src/learn.c:382
+#: ../src/learn.c:382
 #, c-format
 msgid "Learn buffer filename: `%s`"
-msgstr ""
+msgstr "Файл навчального буферу: `%s`"
 
 #.
 #. * Translators: This means the encoding of the learn buffer (XML) file.
 #.
-#: src/learn.c:388
-#, fuzzy, c-format
+#: ../src/learn.c:388
+#, c-format
 msgid "Encoding: `%s'"
-msgstr "Кодування:"
+msgstr "Кодування: `%s'"
 
 #.
 #. * Translators: "Serial number" of the learn buffer - means # of file updates.
 #.
-#: src/learn.c:394
+#: ../src/learn.c:394
 #, c-format
 msgid "Serial: `%i'"
-msgstr ""
+msgstr "Номер: `%i'"
 
 #.
 #. * Translators: That's the number of message entries in the learn buffer.
 #.
-#: src/learn.c:400
+#: ../src/learn.c:400
 #, c-format
 msgid "Number of entries: `%i'"
-msgstr ""
+msgstr "Кількість повідомлень: `%i'"
 
-#: src/main.c:85
-#, fuzzy
+#: ../src/main.c:81
 msgid "Auto translate the po file"
-msgstr "Автоматично перекласти po-файл і вийти"
+msgstr "Автоматично перекласти po-файл"
 
-#: src/main.c:85 src/main.c:101
+#: ../src/main.c:81 ../src/main.c:93
 msgid "FILENAME"
 msgstr "НАЗВА_ФАЙЛУ"
 
-#: src/main.c:89
-msgid "Show build specifications"
-msgstr ""
-
-#: src/main.c:93
+#: ../src/main.c:85
 msgid "Export learn buffer to a plain po file"
-msgstr ""
+msgstr "Експортувати навчальний буфер у звичайний po-файл"
 
-#: src/main.c:93
+#: ../src/main.c:85
 msgid "PO_FILE"
 msgstr "ФАЙЛ_PO"
 
-#: src/main.c:97
-#, fuzzy
+#: ../src/main.c:89
 msgid "Specify main window geometry"
-msgstr "Визначає геометрію головного вікна"
+msgstr "Уточнити геометрію головного вікна"
 
-#: src/main.c:97
+#: ../src/main.c:89
 msgid "GEOMETRY"
 msgstr "ГЕОМЕТРІЯ"
 
-#: src/main.c:101
-#, fuzzy
+#: ../src/main.c:93
 msgid "Learn the file completely"
-msgstr "Повністю засвоїти файл і вийти"
+msgstr "Повністю вивчити файл"
 
-#: src/main.c:105
+#: ../src/main.c:97
 msgid "Show learn buffer statistics"
-msgstr ""
+msgstr "Показати статистику навчального буферу"
 
-#: src/main.c:148
+#: ../src/main.c:140
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Помилка під час ініціалізації GConf: %s."
-
-#: src/main.c:180
-#, fuzzy
-msgid "gtranslator build information/specs:"
-msgstr "Перекладач - параметри"
-
-#: src/main.c:182
-msgid "Version and build date:"
-msgstr ""
-
-#: src/main.c:184
-msgid "Build GLib / Gtk+ / GNOME / XML versions:"
-msgstr ""
-
-#: src/main.c:186
-msgid "Colorschemes directory:"
-msgstr "Каталог кольорових схем:"
-
-#: src/main.c:188
-msgid "Scripts directory:"
-msgstr "Каталог скриптів:"
-
-#: src/main.c:190
-msgid "Window icon:"
-msgstr "Піктограма вікна: "
-
-#: src/main.c:192
-msgid "Own locale directory:"
-msgstr ""
-
-#: src/main.c:194
-msgid "Default learn buffer file location:"
-msgstr ""
 
 #.
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:459
-#, fuzzy, c-format
+#: ../src/main.c:419
+#, c-format
 msgid "Learned file `%s' successfully for your learn buffer.\n"
-msgstr "Поновлення відбулось успішно."
+msgstr "Навчальний файл `%s' успішно додано до навчального буферу.\n"
 
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:501
+#: ../src/main.c:461
 #, c-format
 msgid "Exported learn buffer to file `%s'.\n"
-msgstr ""
+msgstr "Експортувати навчальний буфер у файл `%s'.\n"
 
-#: src/menus.c:48
-#, fuzzy
+#: ../src/menus.c:47
 msgid "_Go"
-msgstr "Пішли!"
+msgstr "_Перейти!"
 
-#: src/menus.c:58
+#: ../src/menus.c:57
 msgid "_Compile"
-msgstr "Компілювати"
+msgstr "_Компілювати"
 
-#: src/menus.c:59 src/menus.c:296
-#, fuzzy
+#: ../src/menus.c:58 ../src/menus.c:278
 msgid "Compile the po file"
 msgstr "Компілювати po-файл"
 
-#: src/menus.c:65
+#: ../src/menus.c:64
 msgid "_Update"
-msgstr "Поновити"
+msgstr "По_новити"
 
-#: src/menus.c:66 src/menus.c:300
-#, fuzzy
+#: ../src/menus.c:65 ../src/menus.c:282
 msgid "Update the po file"
 msgstr "Поновити po-файл"
 
-#: src/menus.c:73
+#: ../src/menus.c:72
 msgid "Add bookmark"
-msgstr ""
+msgstr "Додати закладку"
 
-#: src/menus.c:74
+#: ../src/menus.c:73
 msgid "Add a bookmark for this message in this po file"
-msgstr ""
+msgstr "Додати закладку на це повідомлення у цьому po-файлі"
 
-#: src/menus.c:81
-#, fuzzy
+#: ../src/menus.c:80
 msgid "Aut_otranslate..."
-msgstr "Перекладено"
+msgstr "_Автопереклад"
 
-#: src/menus.c:82
+#: ../src/menus.c:81
 msgid "Autotranslate the file with information from your learn buffer"
-msgstr ""
+msgstr "Автопереклад файлу за допомогою інформації з Вашого навчального буферу"
 
-#: src/menus.c:89
+#: ../src/menus.c:88
 msgid "Remove all translations..."
 msgstr "Видалити всі переклади..."
 
-#: src/menus.c:90
+#: ../src/menus.c:89
 msgid "Remove all existing translations from the po file"
 msgstr "Видалити всі наявні переклади з po-файлу"
 
-#: src/menus.c:98
+#: ../src/menus.c:97
 msgid "Open from _URI..."
 msgstr "Відкрити з _URI..."
 
-#: src/menus.c:99
+#: ../src/menus.c:98
 msgid "Open a po file from a given URI"
 msgstr "Відкрити po-файл з вказаного URI"
 
-#: src/menus.c:109
+#: ../src/menus.c:108
 msgid "Recen_t files"
 msgstr "Недавні файли"
 
-#: src/menus.c:113
-msgid "_Export to UTF-8..."
-msgstr "_Експортувати в UTF-8.."
-
-#: src/menus.c:114
-msgid "Export the current po file to UTF-8"
-msgstr "Експортувати поточний po-файл в UTF-8"
-
-#: src/menus.c:120
-msgid "_Import from UTF-8..."
-msgstr "_Імпортувати з UTF-8..."
-
-#: src/menus.c:121
-msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
-msgstr "Імпортувати po-файл кодований UTF-8 у відповідне просте кодування"
-
-#: src/menus.c:153
+#: ../src/menus.c:135
 msgid "_Query..."
 msgstr "_Запит..."
 
-#: src/menus.c:154 src/menus.c:361
+#: ../src/menus.c:136 ../src/menus.c:343
 msgid "Query for a string"
 msgstr "Запитати рядок"
 
-#: src/menus.c:161
+#: ../src/menus.c:143
 msgid "_Header..."
 msgstr "Заголовок..."
 
-#: src/menus.c:162
-#, fuzzy
+#: ../src/menus.c:144
 msgid "Edit po file header"
-msgstr "Змінити заголовок"
+msgstr "Змінити заголовок po-файлу"
 
-#: src/menus.c:169
+#: ../src/menus.c:151
 msgid "C_omment..."
 msgstr "_Коментар..."
 
-#: src/menus.c:170
+#: ../src/menus.c:152
 msgid "Edit message comment"
-msgstr "Виправити коментар повідомлення"
+msgstr "Редагувати коментар повідомлення"
 
-#: src/menus.c:177
+#: ../src/menus.c:159
 msgid "Copy _message -> translation"
-msgstr ""
+msgstr "Скопіювати повідомлення у переклад"
 
-#: src/menus.c:178
+#: ../src/menus.c:160
 msgid "Copy the original message contents and paste them as translation"
-msgstr ""
+msgstr "Скопіювати первинне повідомлення та помістити його як переклад"
 
-#: src/menus.c:185
-#, fuzzy
+#: ../src/menus.c:167
 msgid "Fu_zzy"
 msgstr "Невизначено"
 
-#: src/menus.c:186
+#: ../src/menus.c:168
 msgid "Toggle fuzzy status of a message"
-msgstr "Перемикнути невизначений стан повідомлення"
+msgstr "Перемкнути ознаку повідомлення як \"невизначено\""
 
-#: src/menus.c:200
+#: ../src/menus.c:182
 msgid "_First"
 msgstr "Перше"
 
-#: src/menus.c:201 src/menus.c:317
+#: ../src/menus.c:183 ../src/menus.c:299
 msgid "Go to the first message"
 msgstr "Перейти до першого повідомлення"
 
-#: src/menus.c:207
+#: ../src/menus.c:189
 msgid "_Back"
 msgstr "Назад"
 
-#: src/menus.c:208 src/menus.c:321
-#, fuzzy
+#: ../src/menus.c:190 ../src/menus.c:303
 msgid "Move back one message"
 msgstr "Перейти на одне повідомлення назад"
 
-#: src/menus.c:215
+#: ../src/menus.c:197
 msgid "_Next"
 msgstr "Наступне"
 
-#: src/menus.c:216 src/menus.c:326
-#, fuzzy
+#: ../src/menus.c:198 ../src/menus.c:308
 msgid "Move forward one message"
-msgstr "Перейти на одне повідомлення назад"
+msgstr "Перейти на одне повідомлення вперед"
 
-#: src/menus.c:222
+#: ../src/menus.c:204
 msgid "_Last"
 msgstr "Останнє"
 
-#: src/menus.c:223 src/menus.c:330
+#: ../src/menus.c:205 ../src/menus.c:312
 msgid "Go to the last message"
 msgstr "Перейти до останнього повідомлення"
 
-#: src/menus.c:230
+#: ../src/menus.c:212
 msgid "_Go to..."
 msgstr "Перейти..."
 
-#: src/menus.c:231
+#: ../src/menus.c:213
 msgid "Goto specified message number"
-msgstr "Перейти до вказаного повідомлення"
+msgstr "Перейти до повідомлення під номером"
 
-#: src/menus.c:237
+#: ../src/menus.c:219
 msgid "Next fuz_zy"
-msgstr "Ноступне невизначене"
+msgstr "Наступне невизначене"
 
-#: src/menus.c:238
+#: ../src/menus.c:220
 msgid "Go to next fuzzy message"
 msgstr "Перейти до наступного невизначеного повідомлення"
 
-#: src/menus.c:244
+#: ../src/menus.c:226
 msgid "Next _untranslated"
 msgstr "Наступне неперекладене"
 
-#: src/menus.c:245 src/menus.c:335
+#: ../src/menus.c:227 ../src/menus.c:317
 msgid "Go to next untranslated message"
 msgstr "Перейти до наступного неперекладеного повідомлення"
 
-#: src/menus.c:255
+#: ../src/menus.c:237
 msgid "_Bookmarks"
-msgstr ""
+msgstr "_Закладки"
 
-#: src/menus.c:256
+#: ../src/menus.c:238
 msgid "_Colorschemes"
 msgstr "_Кольорові схеми"
 
-#: src/menus.c:270
+#: ../src/menus.c:252
 msgid "gtranslator _website"
 msgstr "Сайт Перекладача"
 
-#: src/menus.c:271
+#: ../src/menus.c:253
 msgid "gtranslator's homepage on the web"
 msgstr "Сторінка Перекладача в Інтернеті"
 
-#: src/menus.c:282
+#: ../src/menus.c:264
 msgid "Open"
 msgstr "Відкрити"
 
-#: src/menus.c:283
+#: ../src/menus.c:265
 msgid "Open a po file"
 msgstr "Відкрити po-файл"
 
-#: src/menus.c:286
+#: ../src/menus.c:268
 msgid "Save"
 msgstr "Зберегти"
 
-#: src/menus.c:287
+#: ../src/menus.c:269
 msgid "Save File"
 msgstr "Зберегти файл"
 
-#: src/menus.c:290
+#: ../src/menus.c:272
 msgid "Save as"
 msgstr "Зберегти як"
 
-#: src/menus.c:291
+#: ../src/menus.c:273
 msgid "Save file with a different name"
 msgstr "Зберегти файл з іншою назвою"
 
-#: src/menus.c:295
+#: ../src/menus.c:277
 msgid "Compile"
 msgstr "Компілювати"
 
-#: src/menus.c:299
+#: ../src/menus.c:281
 msgid "Update"
 msgstr "Поновити"
 
-#: src/menus.c:303
+#: ../src/menus.c:285
 msgid "Header"
 msgstr "Заголовок"
 
-#: src/menus.c:304
+#: ../src/menus.c:286
 msgid "Edit the header"
 msgstr "Змінити заголовок"
 
-#: src/menus.c:308
+#: ../src/menus.c:290
 msgid "Undo"
-msgstr ""
+msgstr "Відмінити дію"
 
-#: src/menus.c:309
+#: ../src/menus.c:291
 msgid "Undo the last performed action"
-msgstr ""
+msgstr "Відміна останньої виконаної дії"
 
-#: src/menus.c:316
+#: ../src/menus.c:298
 msgid "First"
 msgstr "Перший"
 
-#: src/menus.c:320
+#: ../src/menus.c:302
 msgid "Back"
 msgstr "Назад"
 
-#: src/menus.c:325
+#: ../src/menus.c:307
 msgid "Next"
 msgstr "Наступний"
 
-#: src/menus.c:329
+#: ../src/menus.c:311
 msgid "Last"
 msgstr "Останній"
 
-#: src/menus.c:334
+#: ../src/menus.c:316
 msgid "Missing"
 msgstr "Відсутнє"
 
-#: src/menus.c:342
+#: ../src/menus.c:324
 msgid "Go to the next fuzzy translation"
 msgstr "Перейти до наступного невизначеного перекладу"
 
-#: src/menus.c:347
+#: ../src/menus.c:329
 msgid "Go to"
 msgstr "Перейти"
 
-#: src/menus.c:348
+#: ../src/menus.c:330
 msgid "Go to specified message number"
-msgstr "Перейти до вказаного номеру повідомлення"
+msgstr "Перейти до повідомлення за номером"
 
-#: src/menus.c:351
+#: ../src/menus.c:333
 msgid "Find"
 msgstr "Шукати"
 
-#: src/menus.c:352
-#, fuzzy
+#: ../src/menus.c:334
 msgid "Find string in po file"
 msgstr "Пошук рядка у po-файлі"
 
-#: src/menus.c:356
-#, fuzzy
+#: ../src/menus.c:338
 msgid "Replace string in po file"
-msgstr "Пошук рядка у po-файлі"
+msgstr "Замінити рядок у po-файлі"
 
-#: src/message.c:96
+#: ../src/message.c:96
 msgid "Couldn't get the message!"
 msgstr "Не вдалося отримати повідомлення!"
 
-#: src/message.c:118
+#: ../src/message.c:118
 msgid "There are no fuzzy messages left."
 msgstr "Більше немає невизначених повідомлень"
 
-#: src/message.c:142
+#: ../src/message.c:142
 msgid "All messages seem to be translated."
-msgstr "Схоже всі повідомлення перекладено"
+msgstr "Всі повідомлення перекладено"
 
-#: src/message.c:328
-#, fuzzy
-msgid "gtranslator -- edit plural forms of message translation"
-msgstr "Перекладач -- вибір шрифту"
-
-#: src/messages-table.c:243
-msgid "Original"
+#: ../src/message.c:277
+#, c-format
+msgid "gtkspell error: %s\n"
 msgstr ""
 
-#: src/open.c:144
+#: ../src/message.c:278
+#, c-format
+msgid ""
+"GtkSpell was unable to initialize.\n"
+" %s"
+msgstr ""
+
+#: ../src/message.c:319
+msgid "gtranslator -- edit plural forms of message translation"
+msgstr "Перекладач -- вибір форм множини для повідомлень перекладу"
+
+#: ../src/messages-table.c:216
+msgid "Original"
+msgstr "Оригінал"
+
+#: ../src/open.c:144
 #, c-format
 msgid "Couldn't open compiled gettext file `%s'!"
 msgstr "Не вдалося відкрити скомпільований gettext-файл \"%s\"!"
 
-#: src/open.c:192
-#, fuzzy, c-format
+#: ../src/open.c:192
+#, c-format
 msgid "Couldn't open compressed gettext file `%s'!"
-msgstr "Не вдалося відкрити скомпільований gettext-файл \"%s\"!"
+msgstr "Не вдалося відкрити запакований gettext-файл \"%s\"!"
 
 #.
 #. * The %s format here stands for the used
 #. *  compressions program (gzip, bzip2 etc.)
 #.
-#: src/open.c:202
-#, fuzzy, c-format
+#: ../src/open.c:202
+#, c-format
 msgid "Couldn't open %s'd gettext file `%s'!"
-msgstr "Не вдалося відкрити стиснутий gzip gettext-файл \"%s\"!"
+msgstr "Не вдалося відкрити %s'-типу файл`%s'!"
 
-#: src/open.c:271
-#, fuzzy, c-format
+#: ../src/open.c:271
+#, c-format
 msgid "Couldn't open zip'ed po file `%s'!"
-msgstr "Не вдалося відкрити стиснутий gzip gettext-файл \"%s\"!"
+msgstr "Не вдалося відкрити стиснутий zip gettext-файл \"%s\"!"
 
-#: src/parse.c:483
+#: ../src/parse.c:464
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1242,7 +1219,7 @@ msgstr ""
 "в рядку %d.\n"
 "Перевірте файл та спробуйте знову."
 
-#: src/parse.c:538
+#: ../src/parse.c:519
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1251,52 +1228,65 @@ msgstr ""
 "Файл порожній:\n"
 "%s"
 
-#: src/parse.c:560
+#: ../src/parse.c:541
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
-msgstr "Файл \"%s\" не існує!"
+msgstr "Файл \"%s\" не існує! Зовсім!"
 
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:692
+#: ../src/parse.c:673
 msgid "Header record not found - defaulting from preferences"
-msgstr ""
+msgstr "Запис заголовку не знайдено - використовуються значення за замовчанням"
 
-#: src/parse.c:708
+#: ../src/parse.c:689
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "Перекладач -- %s"
 
-#: src/parse.c:920
-#, fuzzy, c-format
+#: ../src/parse.c:914
+#, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
 "Pot files are generated by the compilation process.\n"
 "Your file should likely be named '%s.po'."
 msgstr ""
 "Ви намагаєтесь зберегти файл із розширенням *.pot.\n"
-"Однак, такі файли ґенеруються програмою.\n"
+"Однак, такі файли генеруються при компіляції.\n"
 "Ваш файл міг би мати розширення *.po, вийшло б %s.po"
 
-#: src/parse.c:982
-#, fuzzy, c-format
+#: ../src/parse.c:976
+#, c-format
 msgid "Could not open file `%s' for writing!"
-msgstr "Не вдалося відкрити базу даних \"%s\"!"
+msgstr "Не вдалося відкрити файл \"%s\"для запису!"
 
-#: src/parse.c:1034
+#: ../src/parse.c:1028
 #, fuzzy, c-format
 msgid ""
 "File %s\n"
+"contains %d fuzzy message"
+msgid_plural ""
+"File %s\n"
 "contains %d fuzzy messages"
-msgstr "Перейти до наступного невизначеного повідомлення"
+msgstr[0] ""
+"Файл %s\n"
+"містить %d невизначених повідомлення"
+msgstr[1] ""
+"Файл %s\n"
+"містить %d невизначених повідомлення"
 
-#: src/parse.c:1303
+#: ../src/parse.c:1068
+#, c-format
+msgid "The file '%s' already exists, Do you want overwrite it?"
+msgstr ""
+
+#: ../src/parse.c:1331
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Нажаль програма msgfmt не доступна у вашій системі!"
 
-#: src/parse.c:1338
-#, fuzzy, c-format
+#: ../src/parse.c:1366
+#, c-format
 msgid ""
 "Compile successful:\n"
 "%s"
@@ -1304,303 +1294,282 @@ msgstr ""
 "Скомпільовано успішно:\n"
 "%s"
 
-#: src/preferences.c:180
+#: ../src/preferences.c:180
 msgid "Couldn't generate the current date!"
 msgstr "Не вдалося створити поточну дату!"
 
-#: src/prefs.c:212
+#: ../src/prefs.c:211
 msgid "Hotkey indicating character:"
-msgstr ""
+msgstr "Символ гарячої клавіши"
 
-#: src/prefs.c:332
+#: ../src/prefs.c:331
 msgid "gtranslator -- options"
 msgstr "Перекладач - параметри"
 
 #.
 #. * Files page
 #.
-#: src/prefs.c:350
-#, fuzzy
+#: ../src/prefs.c:350
 msgid "Files"
-msgstr "Перший"
+msgstr "Файли"
 
-#: src/prefs.c:351 src/prefs.c:530 src/prefs.c:587
-#, fuzzy
+#: ../src/prefs.c:351 ../src/prefs.c:530 ../src/prefs.c:587
 msgid "General"
-msgstr "Ґенератор:"
+msgstr "Головне:"
 
-#: src/prefs.c:352
-#, fuzzy
+#: ../src/prefs.c:352
 msgid "Warn if po file contains fuzzy translations"
 msgstr "Попереджувати, якщо po-файл містить невизначені переклади"
 
-#: src/prefs.c:356
+#: ../src/prefs.c:356
 msgid "Delete compiled files (e.g. \"project.gmo\")"
-msgstr "Стерти скомпільовані файли (наприклад \"project.gmp\")"
+msgstr "Стерти скомпільовані файли (наприклад \"project.gmo\")"
 
-#: src/prefs.c:360
-#, fuzzy
+#: ../src/prefs.c:360
 msgid "Autosave"
 msgstr "Автозбереження"
 
-#: src/prefs.c:361
-#, fuzzy
+#: ../src/prefs.c:361
 msgid "Automatically save at regular intervals"
-msgstr "Перейти до наступного неперекладеного повідомлення"
+msgstr "Автозбереження за інтервалом"
 
-#: src/prefs.c:369
-#, fuzzy
+#: ../src/prefs.c:369
 msgid "Autosave interval:"
-msgstr "Автозбереження"
+msgstr "Інтервал автозбереження"
 
-#: src/prefs.c:370
+#: ../src/prefs.c:370
 msgid "Append a suffix to automatically saved files"
-msgstr ""
+msgstr "Додавати суфікс до автозбереженних файлів"
 
-#: src/prefs.c:377
+#: ../src/prefs.c:377
 msgid "Suffix:"
-msgstr ""
+msgstr "Суфікс:"
 
-#: src/prefs.c:378
-#, fuzzy
+#: ../src/prefs.c:378
 msgid "Recent files"
 msgstr "Недавні файли"
 
-#: src/prefs.c:386
+#: ../src/prefs.c:386
 msgid "Maximum number of entries in the recent files list:"
-msgstr ""
+msgstr "Кількість файлів у списку недавніх:"
 
-#: src/prefs.c:387
-#, fuzzy
+#: ../src/prefs.c:387
 msgid "Check recent files before showing in recent files list"
-msgstr "еревіряти існування кожного файлу в списку"
+msgstr "Перевіряти існування кожного файлу в списку"
 
 #.
 #. * Editor page
 #.
-#: src/prefs.c:395
+#: ../src/prefs.c:395
 msgid "Editor"
-msgstr ""
+msgstr "Редактор"
 
-#: src/prefs.c:398
+#: ../src/prefs.c:398
 msgid "Text display"
-msgstr ""
+msgstr "Показ тексту"
 
-#: src/prefs.c:399
+#: ../src/prefs.c:399
 msgid "Highlight syntax of the translation message"
-msgstr ""
+msgstr "Підсвічувати синтаксис перекладених повідомлень "
 
-#: src/prefs.c:410
+#: ../src/prefs.c:410
 msgid "Syntax color scheme to use:"
-msgstr ""
+msgstr "Кольори підсвічування синтаксису"
 
-#: src/prefs.c:411
-#, fuzzy
+#: ../src/prefs.c:411
 msgid "Use special character to indicate white space"
-msgstr "Використовувати символ \"Ї\" замість пропуску"
+msgstr "Використовувати символ замість пробілу"
 
-#: src/prefs.c:419
-#, fuzzy
+#: ../src/prefs.c:419
 msgid "Apply own fonts"
-msgstr "Застосувати власні шрифти:"
+msgstr "Застосувати власні шрифти"
 
-#: src/prefs.c:423
-#, fuzzy
+#: ../src/prefs.c:423
 msgid "gtranslator -- font selection/msgid font"
-msgstr "Перекладач -- вибір шрифту"
+msgstr "Перекладач -- вибір шрифту повідомлень та обраного"
 
-#: src/prefs.c:427
+#: ../src/prefs.c:427
 msgid "Original text font:"
-msgstr "Початковий шрифт тексту:"
+msgstr "Шрифт оригіналу:"
 
-#: src/prefs.c:428
-#, fuzzy
+#: ../src/prefs.c:428
 msgid "gtranslator -- font selection/msgstr font"
-msgstr "Перекладач -- вибір шрифту"
+msgstr "Перекладач -- вибір шрифту повідомлень та обраного"
 
-#: src/prefs.c:432
+#: ../src/prefs.c:432
 msgid "Translation font:"
 msgstr "Шрифт перекладу:"
 
-#: src/prefs.c:433
+#: ../src/prefs.c:433
 msgid "Apply own colors:"
 msgstr "Застосувати власні кольори:"
 
-#: src/prefs.c:437
+#: ../src/prefs.c:437
 msgid "gtranslator -- foreground color"
 msgstr "Перекладач -- колір переднього плану"
 
-#: src/prefs.c:441
+#: ../src/prefs.c:441
 msgid "Foreground color:"
 msgstr "Колір переднього плану:"
 
-#: src/prefs.c:442
+#: ../src/prefs.c:442
 msgid "gtranslator -- background color"
 msgstr "Перекладач -- колір тла"
 
-#: src/prefs.c:446
-#, fuzzy
+#: ../src/prefs.c:446
 msgid "Background:"
-msgstr "Колір тла:"
+msgstr "Тло:"
 
-#: src/prefs.c:447
-#, fuzzy
+#: ../src/prefs.c:447
 msgid "Contents"
-msgstr "Коментарі"
+msgstr "Вміст"
 
-#: src/prefs.c:448
-#, fuzzy
+#: ../src/prefs.c:448
 msgid "Remove fuzzy status if message is changed"
-msgstr "Забирати невизначений стан, якщо повідомлення було змінено"
+msgstr "Прибирати невизначений стан, якщо повідомлення було змінено"
 
-#: src/prefs.c:452
+#: ../src/prefs.c:452
 msgid "Keep obsolete messages in the po files"
-msgstr ""
+msgstr "Зберігати застарілі повідомлення у po-файлі"
 
-#: src/prefs.c:456
-#, fuzzy
+#: ../src/prefs.c:456
 msgid "Spell checking"
-msgstr "Швидка перевірка орфографії"
+msgstr "Перевірка орфографії"
 
-#: src/prefs.c:457
+#: ../src/prefs.c:457
 msgid "Instant spell checking"
-msgstr "Швидка перевірка орфографії"
+msgstr "Миттєва перевірка орфографії"
 
-#: src/prefs.c:463
+#: ../src/prefs.c:463
 msgid "Use special dictionary:"
 msgstr "Використовувати спеціальний словник:"
 
 #.
 #. * PO header page
 #.
-#: src/prefs.c:481
-#, fuzzy
+#: ../src/prefs.c:481
 msgid "PO header"
 msgstr "Заголовок"
 
-#: src/prefs.c:484
-#, fuzzy
+#: ../src/prefs.c:484
 msgid "Personal Information"
 msgstr "Персональна інформація"
 
-#: src/prefs.c:488
+#: ../src/prefs.c:488
 msgid "Author's name:"
 msgstr "Ім'я автора:"
 
-#: src/prefs.c:492
-#, fuzzy
+#: ../src/prefs.c:492
 msgid "Author's email:"
 msgstr "Електронна адреса автора: "
 
-#: src/prefs.c:493
+#: ../src/prefs.c:493
 msgid "Language settings"
 msgstr "Мовні параметри"
 
-#: src/prefs.c:506
+#: ../src/prefs.c:506
 msgid "Language code:"
 msgstr "Код мови:"
 
 #.
 #. * Functionality page
 #.
-#: src/prefs.c:528
+#: ../src/prefs.c:528
 msgid "Functionality"
-msgstr ""
+msgstr "Функціональність"
 
-#: src/prefs.c:531
+#: ../src/prefs.c:531
 msgid "Enable the functionality to update a po file from within gtranslator"
-msgstr ""
+msgstr "Дозволити Перекладачу поновлювати po-файл"
 
-#: src/prefs.c:535
+#: ../src/prefs.c:535
 msgid "Enable the functionality to remove all translations from a po file"
-msgstr ""
+msgstr "Дозволяти Перекладачу видаляти всі переклади з po-файлу"
 
-#: src/prefs.c:539
+#: ../src/prefs.c:539
 msgid "Show instant comment view in main pane"
-msgstr ""
+msgstr "Показувати коментарі у головній панелі"
 
-#: src/prefs.c:543
+#: ../src/prefs.c:543
 msgid "Display special dialog for messages with plural forms"
-msgstr ""
+msgstr "Показувати спеціальний діалог для повідомлень з формами множини"
 
-#: src/prefs.c:547
-#, fuzzy
+#: ../src/prefs.c:547
 msgid "Save geometry on exit and restore it on startup"
 msgstr "Зберігати геометрію на виході та відновлювати її на початку"
 
-#: src/prefs.c:551
+#: ../src/prefs.c:551
 msgid "Messages table"
 msgstr "Таблиця повідомлень"
 
-#: src/prefs.c:552
+#: ../src/prefs.c:552
 msgid "Show the messages table (requires restart)"
-msgstr ""
+msgstr "Показати таблицю повідомлень (потрібен перезапуск)"
 
-#: src/prefs.c:556
+#: ../src/prefs.c:556
 msgid "Collapse all entries by default"
-msgstr ""
+msgstr "Згортати всі повідомлення за замовченням"
 
-#: src/prefs.c:560
+#: ../src/prefs.c:560
 msgid "Use own colors for messages table groups"
-msgstr ""
+msgstr "Використовувати власні кольори для груп повідомлень у таблиці"
 
-#: src/prefs.c:569
+#: ../src/prefs.c:569
 msgid "Fuzzy entries color:"
 msgstr "Колір невизначених повідомлень:"
 
-#: src/prefs.c:575
-#, fuzzy
+#: ../src/prefs.c:575
 msgid "Untranslated entries color:"
-msgstr "Неперекладене"
-
-#: src/prefs.c:581
-msgid "Translated entries color:"
 msgstr "Колір неперекладених повідомлень:"
+
+#: ../src/prefs.c:581
+msgid "Translated entries color:"
+msgstr "Колір перекладених повідомлень:"
 
 #.
 #. * Autotranslate page
 #.
-#: src/prefs.c:586
-#, fuzzy
+#: ../src/prefs.c:586
 msgid "Autotranslation"
-msgstr "Переклад"
+msgstr "Автопереклад"
 
-#: src/prefs.c:588
+#: ../src/prefs.c:588
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr ""
+"Також запитувати власний навчальний буфер для автоперекладу неперекладених "
+"повідомлень"
 
-#: src/prefs.c:592
-#, fuzzy
+#: ../src/prefs.c:592
 msgid "Automatically learn a newly translated message"
-msgstr "Перейти до наступного неперекладеного повідомлення"
+msgstr "Вивчати автоматично недавно перекладені повідомлення"
 
-#: src/prefs.c:596
+#: ../src/prefs.c:596
 msgid "Fuzzy matching"
-msgstr ""
+msgstr "Неточна відповідність"
 
-#: src/prefs.c:603
+#: ../src/prefs.c:603
 msgid "Use \"fuzzy\" matching routines for learn buffer queries"
-msgstr ""
+msgstr "Використовувати пошук у навчальному буфері неточних перекладів"
 
-#: src/prefs.c:610
+#: ../src/prefs.c:610
 msgid "Minimal required similarity persentage for fuzzy queries:"
-msgstr ""
+msgstr "Мінімальний процент схожості при автоперекладі"
 
-#: src/prefs.c:655
+#: ../src/prefs.c:659
 msgid "Please enter your name!"
 msgstr "Будь ласка, введіть ваше ім'я."
 
-#: src/prefs.c:669
+#: ../src/prefs.c:679
 msgid "Please enter your EMail address!"
 msgstr "Будь ласка, введіть електронну адресу."
 
-#: src/prefs.c:682
+#: ../src/prefs.c:699
 msgid "Please enter a valid EMail address!"
-msgstr "Будь ласка, введіть правильну електронну адресу."
+msgstr "Будь ласка, введіть правильну електронну адресу!"
 
-#: src/replace.c:171
+#: ../src/replace.c:175
 msgid "No replacements made!"
 msgstr "Жодної заміни не було зроблено."
 
@@ -1611,148 +1580,191 @@ msgstr "Жодної заміни не було зроблено."
 #. *  another than a 'Y' to avoid the usage of the mid dot (U+00B7) in the
 #. *   text displaying routines of gtranslator.
 #.
-#: src/runtime-config.c:72
+#: ../src/runtime-config.c:72
 msgid "Y"
-msgstr ""
+msgstr "Так"
 
 #.
 #. * Translators: this character is used if the middle dot
 #. *  can't be used under your locale.
 #.
-#: src/runtime-config.c:88 src/runtime-config.c:93
+#: ../src/runtime-config.c:88 ../src/runtime-config.c:93
 msgid "^"
 msgstr "^"
 
-#: src/save.c:116
-#, fuzzy, c-format
+#: ../src/save.c:116
+#, c-format
 msgid "Couldn't save compiled gettext file `%s'!"
-msgstr "Не вдалося відкрити скомпільований gettext-файл \"%s\"!"
+msgstr "Не вдалося зберегти скомпільований gettext-файл \"%s\"!"
 
-#: src/save.c:159
-#, fuzzy, c-format
+#: ../src/save.c:159
+#, c-format
 msgid "Couldn't save compressed gettext file `%s'!"
-msgstr "Не вдалося відкрити скомпільований gettext-файл \"%s\"!"
+msgstr "Не вдалося зберегти gettext-файл `%s'!"
 
 #.
 #. * The %s format here stands for the used
 #. *  compressions program (gzip, bzip2 etc.)
 #.
-#: src/save.c:169
-#, fuzzy, c-format
+#: ../src/save.c:169
+#, c-format
 msgid "Couldn't save %s'd gettext file `%s'!"
-msgstr "Не вдалося відкрити стиснутий gzip gettext-файл \"%s\"!"
+msgstr "Не вдалося зберегти %s-стиснутий gettext-файл \"%s\"!"
 
-#: src/save.c:228
-#, fuzzy, c-format
+#: ../src/save.c:228
+#, c-format
 msgid "Couldn't save zip'ed po file `%s'!"
-msgstr "Не вдалося відкрити стиснутий gzip gettext-файл \"%s\"!"
+msgstr "Не вдалося зберегти zip-стиснутий gettext-файл \"%s\"!"
 
-#: src/session.c:86
+#: ../src/session.c:86
 msgid "Session restored successfully."
-msgstr "Файл сеансу було успішно відновлено."
+msgstr "Сеанс успішно відновлено."
 
-#: src/stylistics.c:265
-msgid "No font set! Using default font"
-msgstr "Не встановлено шрифт! Використовується типовий."
-
-#.
-#. * Use gtranslator's font in this case -- should be a fallback font
-#. *  for your language.
-#.
-#: src/stylistics.c:271
-msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
-msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-koi8-u"
-
-#: src/update.c:102
+#: ../src/update.c:101
 msgid "No POTFILES.in found!"
 msgstr "Не знайдено POTFILES.in!"
 
-#: src/update.c:113
+#: ../src/update.c:112
+#, fuzzy
 msgid "Po file is uptodate."
-msgstr ""
+msgstr "Po-файл приведено до сучасного стану."
 
-#: src/update.c:120
+#: ../src/update.c:119
 msgid "The update was successfull."
 msgstr "Поновлення відбулось успішно."
 
-#: src/update.c:125
-#, fuzzy
+#: ../src/update.c:124
 msgid "An error occurred while updating the po file."
-msgstr "Виникла помилка під час виконання msgfmt:\n"
+msgstr "Виникла помилка під час оновлення po-файлу."
 
-#: src/utils.c:308 src/utils.c:325
+#: ../src/utils.c:308 ../src/utils.c:325
 #, c-format
 msgid "Can't create directory `%s'!"
 msgstr "Не вдалося створити каталог \"%s\"!"
 
-#.
-#. * Again return the fallback default locale value given by the translator.
-#.
-#: src/utils.c:794
-msgid "iso-8859-1"
-msgstr ""
-
-#: src/utils_gui.c:144
+#: ../src/utils_gui.c:144
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "Неможливо пронаналізувати рядок геометрії: \"%s\""
 
-#: src/utils_gui.c:360
+#: ../src/utils_gui.c:360
 #, c-format
 msgid "You are not permitted to access file '%s'."
-msgstr ""
+msgstr "Ви не маєте прав для доступу до файлу '%s'."
 
-#: src/utils_gui.c:378
+#: ../src/utils_gui.c:378
 #, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
 "Please save a new copy of it to a place of your choice and get write\n"
 "permission for it."
 msgstr ""
+"Ви не маєте прав для модифікації файлу '%s'.\n"
+"Будь ласка, збережіть нову копію будь куди на ваш вибір та встановіть\n"
+" права на запис для нього."
 
-#: src/utils_gui.c:467
+#: ../src/utils_gui.c:467
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
-msgstr ""
+msgstr "Необхідна для розпакування програма `%s' не встановлена!"
 
-#: src/utils_gui.c:472
+#: ../src/utils_gui.c:472
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
-msgstr ""
+msgstr "Необхідна для стиснення програма `%s' не встановлена!"
 
-#: src/vfs-handle.c:121
-#, fuzzy, c-format
+#: ../src/vfs-handle.c:121
+#, c-format
 msgid "Couldn't create temporary directory `%s'!"
 msgstr "Не вдалося створити тимчасовий каталог \"%s\"."
 
-#: src/vfs-handle.c:149
+#: ../src/vfs-handle.c:149
 #, c-format
 msgid "File `%s' couldn't be found!"
-msgstr "Файл \"%s\" не може бути знайдено!"
+msgstr "Файл \"%s\" не знайдено!"
 
-#: src/vfs-handle.c:154
+#: ../src/vfs-handle.c:154
 #, c-format
 msgid "Malformed URI `%s' entered!"
 msgstr "Введено недопустимий URI \"%s\"!"
 
-#: src/vfs-handle.c:159
+#: ../src/vfs-handle.c:159
 #, c-format
 msgid "Host `%s' couldn't be found!"
-msgstr "Не вдалося знайти хости \"%s\"!"
+msgstr "Не вдалося знайти хост \"%s\"!"
 
-#: src/vfs-handle.c:164
+#: ../src/vfs-handle.c:164
 #, c-format
 msgid "Hostname `%s' is not valid!"
 msgstr "Назва хоста \"%s\" не вірна!"
 
-#: src/vfs-handle.c:169
+#: ../src/vfs-handle.c:169
 #, c-format
 msgid "Host `%s' has no address!"
 msgstr "Хост \"%s\" не має адреси!"
 
-#: src/vfs-handle.c:174
+#: ../src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "Передавання перервано!"
+
+#~ msgid "gtranslator -- import po file"
+#~ msgstr "Перекладач -- імпорт po-файлу"
+
+#~ msgid "gtranslator -- export po file"
+#~ msgstr "Перекладач -- експорт po-файлу"
+
+#, fuzzy
+#~ msgid "Please enter a string to replace with!"
+#~ msgstr "Введіть необхідний для пошуку рядок"
+
+#~ msgid "Show build specifications"
+#~ msgstr "Показати подробиці будування"
+
+#~ msgid "gtranslator build information/specs:"
+#~ msgstr "Перекладач - параметри/спеціфікації будування"
+
+#~ msgid "Version and build date:"
+#~ msgstr "Версія та дата будування:"
+
+#~ msgid "Build GLib / Gtk+ / GNOME / XML versions:"
+#~ msgstr "Збудовано з версією GLib / Gtk+ / GNOME / XML :"
+
+#~ msgid "Colorschemes directory:"
+#~ msgstr "Каталог кольорових схем:"
+
+#~ msgid "Scripts directory:"
+#~ msgstr "Каталог скриптів:"
+
+#~ msgid "Window icon:"
+#~ msgstr "Піктограма вікна: "
+
+#~ msgid "Own locale directory:"
+#~ msgstr "Рідний каталог локалі:"
+
+#~ msgid "Default learn buffer file location:"
+#~ msgstr "Розміщення файлу навчального буферу за замовченням:"
+
+#~ msgid "_Export to UTF-8..."
+#~ msgstr "_Експортувати в UTF-8.."
+
+#~ msgid "Export the current po file to UTF-8"
+#~ msgstr "Експортувати поточний po-файл в UTF-8"
+
+#~ msgid "_Import from UTF-8..."
+#~ msgstr "_Імпортувати з UTF-8..."
+
+#~ msgid ""
+#~ "Import a UTF-8 encoded po file into it's corresponding plain encoding"
+#~ msgstr "Імпортувати po-файл кодований UTF-8 у відповідне просте кодування"
+
+#~ msgid "No font set! Using default font"
+#~ msgstr "Не встановлено шрифт! Використовується типовий."
+
+#~ msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
+#~ msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-koi8-u"
+
+#~ msgid "iso-8859-1"
+#~ msgstr "koi8-u"
 
 #~ msgid "Both"
 #~ msgstr "Обидва"
