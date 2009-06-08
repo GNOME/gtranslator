@@ -181,7 +181,7 @@ gtranslator_statusbar_push (GtranslatorStatusbar *statusbar,
 			    guint context_id,
 			    const gchar *text)
 {
-	g_return_if_fail (GTR_IS_STATUSBAR (statusbar));
+	g_return_val_if_fail (GTR_IS_STATUSBAR (statusbar), 0);
 	
 	return gtk_statusbar_push (GTK_STATUSBAR (statusbar->priv->statusbar),
 				   context_id, text);

@@ -241,7 +241,7 @@ open_connection(GtranslatorOpenTranPanel *panel,
 	array = soup_value_array_new_with_vals (G_TYPE_STRING, text,
 						G_TYPE_STRING, search_code,
 						G_TYPE_STRING, own_code,
-						"%s", G_TYPE_INVALID);
+						NULL);
 	
 	body = soup_xmlrpc_build_method_call ("suggest2", array->values,
 					      array->n_values);

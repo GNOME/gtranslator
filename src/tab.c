@@ -1053,7 +1053,7 @@ gtranslator_tab_get_all_views(GtranslatorTab *tab,
 	GList *ret = NULL;
 	gint i = 0;
 	
-	g_return_if_fail(GTR_IS_TAB(tab));
+	g_return_val_if_fail(GTR_IS_TAB(tab), NULL);
 	
 	if(original)
 	{

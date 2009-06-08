@@ -173,7 +173,7 @@ xmlDocPtr
 gtranslator_xml_open_file (const gchar *filename) 
 {
   xmlDocPtr doc;
-  g_return_if_fail (filename != NULL);
+  g_return_val_if_fail (filename != NULL, NULL);
   doc = xmlParseFile (filename);
   return doc;
 }

@@ -162,7 +162,7 @@ gtranslator_context_panel_new (GtkWidget *tab)
 GtkTextView *
 gtranslator_context_panel_get_context_text_view (GtranslatorContextPanel *panel)
 {
-	g_return_if_fail (GTR_IS_CONTEXT_PANEL (panel));
+	g_return_val_if_fail (GTR_IS_CONTEXT_PANEL (panel), NULL);
 	
 	return GTK_TEXT_VIEW (panel->priv->context);
 }

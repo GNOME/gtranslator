@@ -1940,7 +1940,7 @@ gtranslator_window_get_tab_from_location (GtranslatorWindow *window,
 	GtranslatorPo *po;
 	GFile *po_location;
 	
-	g_return_if_fail (GTR_IS_WINDOW (window));
+	g_return_val_if_fail (GTR_IS_WINDOW (window), NULL);
 
 	tabs = gtranslator_window_get_all_tabs (window);
 	

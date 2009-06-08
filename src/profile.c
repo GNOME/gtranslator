@@ -27,6 +27,10 @@
 
 #include <glib.h>
 #include <glib-object.h>
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/socket.h>
 
 #define GTR_PROFILE_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 					 	(object),	\
