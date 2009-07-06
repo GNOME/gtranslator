@@ -2,1069 +2,1820 @@
 # Copyright © 2001, 2006 Free Software Foundation, Inc.
 # Softcatalà <info@softcatala.org>, 2001.
 # Jordi Mallach <jordi@sindominio.net>, 2006.
+# David Planella <david.planella@gmail.com>, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 0.9.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-24 20:55+0200\n"
-"PO-Revision-Date: 2006-09-24 21:28+0200\n"
-"Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
+"POT-Creation-Date: 2009-07-06 20:54+0200\n"
+"PO-Revision-Date: 2009-07-06 20:53+0200\n"
+"Last-Translator: David Planella <david.planella@gmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n!=1;\n"
 
-#: ../data/desktop/gtranslator.desktop.in.h:1
-msgid "The GNOME translation program"
-msgstr "El programa de traducció del GNOME"
+#: ../data/desktop/gtranslator.desktop.in.in.h:1
+msgid "Gtranslator PO Editor"
+msgstr "Editor de fitxers PO Gtranslator"
 
-#: ../data/desktop/gtranslator.desktop.in.h:2
-msgid "gtranslator"
-msgstr "gtranslator"
+#: ../data/desktop/gtranslator.desktop.in.in.h:2
+msgid "Translate and localize applications and libraries"
+msgstr "Traduïu aplicacions i biblioteques"
 
-#: ../src/about.c:63
-msgid "(C) 1999-2005 The Free Software Foundation, Inc."
-msgstr "© 1999-2006 The Free Software Foundation, Inc."
+#: ../data/gtranslator.schemas.in.h:1
+msgid "Autosave files"
+msgstr "Desament automàtic"
 
-#: ../src/about.c:64
-msgid "gtranslator is a po file editing suite with many bells and whistles."
-msgstr "El gtranslator és un paquet per a editar fitxers PO que té moltes característiques."
+#: ../data/gtranslator.schemas.in.h:2
+msgid "Autosave interval"
+msgstr "Interval entre desaments automàtics"
 
-#: ../src/about.c:67
-msgid "translator-credits"
-msgstr ""
-"Softcatalà <info@softcatala.org>\n"
-"Jordi Mallach <jordi@sindominio.net>"
+#: ../data/gtranslator.schemas.in.h:3
+msgid "Check spelling"
+msgstr "Verifica l'ortografia"
 
-#: ../src/bookmark.c:525
-msgid "_View/_Bookmarks/"
-msgstr "_Visualitza/_Adreces d'interès/"
+#: ../data/gtranslator.schemas.in.h:4
+msgid "Color scheme"
+msgstr "Esquema de color"
 
-#: ../src/bookmark.c:562
-#, c-format
-msgid "Open %s (%s)"
-msgstr "Obre %s (%s)"
+#: ../data/gtranslator.schemas.in.h:5
+msgid "Create backup before saving"
+msgstr "Crea una còpia de seguretat abans de desar"
 
-#: ../src/color-schemes.c:195
-#, c-format
-msgid "Can't apply color scheme file `%s'!"
-msgstr "No es pot aplicar el fitxer de combinació de colors `%s'!"
+#: ../data/gtranslator.schemas.in.h:6
+msgid "Custom font to use for edit fields."
+msgstr "Tipus de lletra personalitzat per als camps d'edició."
 
-#: ../src/color-schemes.c:317
-msgid "Couldn't retrieve author information!"
-msgstr "No s'han pogut recuperar les dades de l'autor!"
+#: ../data/gtranslator.schemas.in.h:7
+msgid "Delete compiled GMO files"
+msgstr "Suprimeix els fitxers GMO compilats"
 
-#.
-#. * Translators: These strings are used as author informations if
-#. *  no author informations could be retrieved:
-#.
-#: ../src/color-schemes.c:323 ../src/translator.c:334
-msgid "Unknown"
-msgstr "Desconegut"
+#: ../data/gtranslator.schemas.in.h:8
+msgid "Directory containing PO files to add to the translation memory."
+msgstr "Directori que conté els fitxers PO a afegir a la memòria de traducció."
 
-#: ../src/color-schemes.c:324
-msgid "<Not Given>"
-msgstr "<No s'ha indicat>"
+#: ../data/gtranslator.schemas.in.h:9
+msgid "Editor font"
+msgstr "Tipus de lletra de l'editor"
 
-#: ../src/color-schemes.c:471
-msgid "_View/_Colorschemes/"
-msgstr "_Visualitza/Esquemes de color:"
+#: ../data/gtranslator.schemas.in.h:10
+msgid "Filename to restrict search to"
+msgstr "Nom de fitxer al qual s'ha de restringir la cerca"
 
-#: ../src/color-schemes.c:501
-#, c-format
-msgid "Activate colorscheme %s"
-msgstr "Activa l'esquema de color %s"
-
-#: ../src/compile.c:80
-#, fuzzy
-msgid "An error occurred while msgfmt was executed:\n"
-msgstr "S'ha produït un error mentre s'executava el msgfmt:\n"
-
-#: ../src/compile.c:157
-msgid "Sorry, msgfmt isn't available on your system!"
-msgstr "El msgfmt no és disponible en el vostre sistema!"
-
-#: ../src/compile.c:197
-#, c-format
+#: ../data/gtranslator.schemas.in.h:11
 msgid ""
-"Compile successful:\n"
-"%s"
+"Filename to which searching of the translation memory should be restricted."
 msgstr ""
-"S'ha compilat amb èxit:\n"
-"%s"
+"Nom de fitxer al qual s'ha de restringir la cerca de la memòria de traducció."
 
-#: ../src/dialogs.c:109
-msgid "Gettext translation"
-msgstr "Traducció de gettext"
+#: ../data/gtranslator.schemas.in.h:12
+msgid "Highlight syntax in edit fields"
+msgstr "Realça la sintaxi en els camps d'edició"
 
-#: ../src/dialogs.c:114
-msgid "Gettext translation template"
-msgstr "Plantilla de traducció de gettext"
+#: ../data/gtranslator.schemas.in.h:13
+msgid "If true, apply syntax highlighting to strings in edit fields."
+msgstr ""
+"Si és «true» (cert), aplica el realçament de la sintaxi a les cadenes dels "
+"camps d'edició."
 
-#: ../src/dialogs.c:119
-msgid "All files"
-msgstr "Tots els fitxers"
+#: ../data/gtranslator.schemas.in.h:14
+msgid "If true, automatically save files at specified intervals."
+msgstr ""
+"Si és «true» (cert), desa automàticament els fitxers en intervals de temps "
+"especificats."
 
-#: ../src/dialogs.c:176
+#: ../data/gtranslator.schemas.in.h:15
+msgid "If true, check the spelling of translated messages."
+msgstr "Si és «true» (cert), verifica l'ortografia dels missatges traduïts."
+
+#: ../data/gtranslator.schemas.in.h:16
+msgid "If true, create a backup copy of a file before saving it."
+msgstr ""
+"Si és «true» (cert), crea una còpia de seguretat d'un fitxer abans de desar-"
+"lo."
+
+#: ../data/gtranslator.schemas.in.h:17
+msgid "If true, display whitespace in strings as representative symbols."
+msgstr ""
+"Si és «true» (cert), mostra els espais en blanc de les cadenes com a símbols."
+
+#: ../data/gtranslator.schemas.in.h:18
+msgid ""
+"If true, only include files with a specified filename when searching the "
+"translation memory."
+msgstr ""
+"Si és «true» (cert), inclou només els fitxers amb un nom de fitxer "
+"especificat en cercar la memòria de traducció."
+
+#: ../data/gtranslator.schemas.in.h:19
+msgid ""
+"If true, overwrite the values in the PO header with those in the active "
+"profile."
+msgstr ""
+"Si és «true» (cert), sobreescriu els valors de la capçalera del fitxer PO amb "
+"els del perfil actiu."
+
+#: ../data/gtranslator.schemas.in.h:20
+msgid "If true, remove compiled GMO binary files when saving."
+msgstr ""
+"Si és «true» (cert), suprimeix els fitxers binaris compilats GMO en desar."
+
+#: ../data/gtranslator.schemas.in.h:21
+msgid "If true, remove fuzzy status from translations when they are changed."
+msgstr ""
+"Si és «true» (cert), suprimeix l'estat difús del missatges en modificar-los."
+
+#: ../data/gtranslator.schemas.in.h:22
+msgid "If true, use a custom font for edit fields."
+msgstr ""
+"Si és «true» (cert), utilitza un tipus de lletra personalitzat per als camps "
+"d'edició."
+
+#: ../data/gtranslator.schemas.in.h:23
+msgid ""
+"If true, warn the user when saving a PO translation file containing fuzzy "
+"strings."
+msgstr ""
+"Si és «true» (cert), avisa l'usuari en desar un fitxer de traducció PO que "
+"contingui cadenes difuses."
+
+#: ../data/gtranslator.schemas.in.h:24
+msgid "Interval in minutes at which to automatically save files."
+msgstr "Interval en minuts en què desar els fitxers de manera automàtica."
+
+#: ../data/gtranslator.schemas.in.h:25
+msgid "Make whitespace visible"
+msgstr "Fes que els espais en blanc siguin visibles"
+
+#: ../data/gtranslator.schemas.in.h:26
+msgid ""
+"Maximum difference in length between messages displayed as matches by the "
+"translation memory."
+msgstr ""
+"Diferència màxima de llargada dels missatges que la memòria de traducció "
+"mostra com a coincidència."
+
+#: ../data/gtranslator.schemas.in.h:27
+msgid "Maximum difference in message length"
+msgstr "Diferència màxima en la llargada del missatge"
+
+#: ../data/gtranslator.schemas.in.h:28
+msgid "Maximum number of missing words"
+msgstr "Nombre màxim de paraules que manquen"
+
+#: ../data/gtranslator.schemas.in.h:29
+msgid ""
+"Maximum number of words that can be missing from a message displayed as a "
+"match by the translation memory."
+msgstr ""
+"Nombre màxim de paraules que poden mancar en un missatge que la memòria de "
+"traducció mostra com a coincidència."
+
+#: ../data/gtranslator.schemas.in.h:30
+msgid "Message list sort order"
+msgstr "Ordenació de la llista de missatges"
+
+#: ../data/gtranslator.schemas.in.h:31
+msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
+msgstr ""
+"Nom d'un esquema de colors de la gtksourceview a utilitzar per al realçat de "
+"la sintaxi."
+
+#: ../data/gtranslator.schemas.in.h:32
+msgid "PO directory"
+msgstr "Directori dels fitxers PO"
+
+#: ../data/gtranslator.schemas.in.h:33
+msgid "Remove fuzzy status when message is changed"
+msgstr "Suprimeix l'estat difús del missatge en modificar-lo"
+
+#: ../data/gtranslator.schemas.in.h:34
+msgid "Restrict search by filename"
+msgstr "Restringeix la cerca per nom de fitxer"
+
+#: ../data/gtranslator.schemas.in.h:35
+msgid "Side pane switcher style"
+msgstr "Estil del commutador de quadre lateral"
+
+#: ../data/gtranslator.schemas.in.h:36
+msgid ""
+"Sort order to use in the message list. Possible values are \"status\", \"id"
+"\", \"original_text\" and \"translated_text\"."
+msgstr ""
+"Ordenació a utilitzar a la llista de missatges. Els valors possibles són "
+"«status» (estat), «id» (identificador), «original_text» (text original) i "
+"«translated_text» (text traduït)."
+
+#: ../data/gtranslator.schemas.in.h:37
+msgid ""
+"Style for switchers in the side pane. Possible values are \"icons\", \"text"
+"\", \"icons_and_text\", \"tabs\" and \"system\"."
+msgstr ""
+"Estil dels commutadors de la subfinestra lateral. Els valors possibles són "
+"«icons» (icones), «text» (text), «icons_and_text» (icones i text), "
+"«tabs» (pestanyes) i «system» (sistema)."
+
+#: ../data/gtranslator.schemas.in.h:38
+msgid "Use custom font"
+msgstr "Utilitza un tipus de lletra personalitzat"
+
+#: ../data/gtranslator.schemas.in.h:39
+msgid "Use profile values for header"
+msgstr "Utilitza els valors del perfil per a la capçalera"
+
+#: ../data/gtranslator.schemas.in.h:40
+msgid "Warn if file contains fuzzy translations"
+msgstr "Avisa'm si el fitxer PO conté traduccions difuses"
+
+#: ../data/po.lang.h:1
+msgid "Others"
+msgstr "Altres"
+
+#: ../data/po.lang.h:2
+msgid "Special variable"
+msgstr "Variable especial"
+
+#: ../data/po.lang.h:3
+msgid "Tag"
+msgstr "Etiqueta"
+
+#: ../data/po.lang.h:4
+msgid "gtranslator highlight"
+msgstr "realçament del gtranslator"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:117
+msgid "Message not found"
+msgstr "No s'ha trobat el missatge"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:221
+msgid "Open file for alternate language"
+msgstr "Obre el fitxer en una llengua alternativa"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:246
+msgid "File closed"
+msgstr "S'ha tancat el fitxer"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:319
+msgid "There isn't any file loaded"
+msgstr "No hi ha cap fitxer carregat"
+
+#: ../plugins/alternate-language/alternate-language-plugin.c:59
+msgid "_Alternate Language"
+msgstr "Llengua _alternativa"
+
+#: ../plugins/alternate-language/alternate-language-plugin.c:60
+msgid "Show the Alternate Language panel"
+msgstr "Mostra el quadre de llengua alternativa"
+
+#: ../plugins/alternate-language/alternate-language-plugin.c:123
+#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:1
+msgid "Alternate Language"
+msgstr "Llengua alternativa"
+
+#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:2
+msgid "Load an alternate language."
+msgstr "Carrega una llengua alternativa."
+
+#: ../plugins/charmap/charmap-plugin.c:299
+#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:1
+msgid "Character Map"
+msgstr "Mapa de caràcters"
+
+#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:2
+msgid "Insert special characters just by clicking on them."
+msgstr "Inseriu caràcters especials simplement en fer-hi clic."
+
+#: ../plugins/dictionary/dict-panel.c:186
+#, c-format
+msgid "No dictionary source available with name '%s'"
+msgstr "No hi ha cap diccionari disponible amb el nom «%s»"
+
+#: ../plugins/dictionary/dict-panel.c:189
+msgid "Unable to find dictionary source"
+msgstr "No s'ha pogut trobar la font del diccionari"
+
+#: ../plugins/dictionary/dict-panel.c:204
+#, c-format
+msgid "No context available for source '%s'"
+msgstr "No hi ha cap context disponible per a la font «%s»"
+
+#: ../plugins/dictionary/dict-panel.c:207
+msgid "Unable to create a context"
+msgstr "No s'ha pogut crear un context"
+
+#: ../plugins/dictionary/dict-panel.c:290
+#, c-format
+msgid "Dictionary source '%s' selected"
+msgstr "S'ha seleccionat la font de diccionari «%s»"
+
+#: ../plugins/dictionary/dict-panel.c:310
+#, c-format
+msgid "Strategy '%s' selected"
+msgstr "S'ha seleccionat l'estratègia «%s»"
+
+#: ../plugins/dictionary/dict-panel.c:329
+#, c-format
+msgid "Database '%s' selected"
+msgstr "S'ha seleccionat la base de dades «%s»"
+
+#: ../plugins/dictionary/dict-panel.c:375
+#, c-format
+msgid "Word '%s' selected"
+msgstr "S'ha seleccionat la paraula «%s»"
+
+#. speller
+#: ../plugins/dictionary/dict-panel.c:398
+msgid "Double-click on the word to look up"
+msgstr "Feu doble clic a la paraula a cercar"
+
+#. strat-chooser
+#: ../plugins/dictionary/dict-panel.c:404
+msgid "Double-click on the matching strategy to use"
+msgstr "Feu doble clic a l'estratègia de coincidències a utilitzar"
+
+#. source-chooser
+#: ../plugins/dictionary/dict-panel.c:409
+msgid "Double-click on the source to use"
+msgstr "Feu doble clic a la font a utilitzar"
+
+#. db-chooser
+#: ../plugins/dictionary/dict-panel.c:418
+msgid "Double-click on the database to use"
+msgstr "Feu doble clic a la base de dades a utilitzar"
+
+#.
+#. * Look up Button
+#.
+#: ../plugins/dictionary/dict-panel.c:481
+msgid "Look _up:"
+msgstr "_Cerca:"
+
+#: ../plugins/dictionary/dict-panel.c:554
+msgid "Similar words"
+msgstr "Paraules similars"
+
+#: ../plugins/dictionary/dict-panel.c:570
+msgid "Available dictionaries"
+msgstr "Diccionaris disponibles"
+
+#: ../plugins/dictionary/dict-panel.c:586
+msgid "Available strategies"
+msgstr "Estratègies disponibles"
+
+#: ../plugins/dictionary/dict-panel.c:597
+msgid "Dictionary sources"
+msgstr "Fonts de diccionaris"
+
+#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/dictionary/dictionary-plugin.c:94
+msgid "Dictionary"
+msgstr "Diccionari"
+
+#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:2
+msgid "Look up words in a dictionary."
+msgstr "Cerqueu paraules en un diccionari."
+
+#: ../plugins/fullscreen/fullscreen-plugin.c:46
+msgid "_Fullscreen"
+msgstr "_Pantalla completa"
+
+#: ../plugins/fullscreen/fullscreen-plugin.c:47
+msgid "Place window on fullscreen state"
+msgstr "Fes que la finestra ocupi tota la pantalla"
+
+#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:1
+msgid "Fullscreen"
+msgstr "Pantalla completa"
+
+#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:2
+msgid "Place window in the fullscreen state."
+msgstr "Fes que la finestra ocupi tota la pantalla."
+
+#: ../plugins/insert-params/insert-params-plugin.c:79
+msgid "_Next Param"
+msgstr "Paràmetre _següent"
+
+#: ../plugins/insert-params/insert-params-plugin.c:80
+msgid "Insert the next param of the message"
+msgstr "Inseriu el paràmetre següent del missatge"
+
+#: ../plugins/insert-params/insert-params-plugin.c:82
+msgid "_Insert Params"
+msgstr "_Insereix paràmetres"
+
+#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:1
+msgid "Insert Params"
+msgstr "Insereix paràmetres"
+
+#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:2
+msgid "Parameters detection and easy insertion."
+msgstr "Detecció i inserció fàcil de paràmetres."
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:70
+msgid "_Next Tag"
+msgstr "Etiqueta _següent"
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:71
+msgid "Insert the next tag of the message"
+msgstr "Insereix l'etiqueta següent del missatge"
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:73
+msgid "_Insert Tags"
+msgstr "_Insereix etiquetes"
+
+#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:1
+msgid "Insert Tags"
+msgstr "Insereix etiquetes"
+
+#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:2
+msgid "Tags detection and easy insertion."
+msgstr "Detecció d'etiquetes i inserció fàcil"
+
+#: ../plugins/open-tran/open-tran-dialog.ui.h:1
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:1
+#: ../plugins/subversion/subversion.ui.h:2
+#: ../src/dialogs/preferences-dialog.ui.h:1
+msgid "    "
+msgstr "    "
+
+#: ../plugins/open-tran/open-tran-dialog.ui.h:2
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:2
+msgid "     "
+msgstr "     "
+
+#: ../plugins/open-tran/open-tran-dialog.ui.h:3
+msgid "<b>Code language of the results:</b>"
+msgstr "<b>Codi de llengua dels resultats:</b>"
+
+#: ../plugins/open-tran/open-tran-dialog.ui.h:4
+msgid "<b>Code language to query open-tran:</b>"
+msgstr "<b>Codi de llengua per a la consulta a l'Open Tran:</b>"
+
+#: ../plugins/open-tran/open-tran-dialog.ui.h:5
+msgid "Open Tran Settings"
+msgstr "Paràmetres de l'Open Tran"
+
+#: ../plugins/open-tran/open-tran-panel.c:213
+#: ../plugins/open-tran/open-tran-panel.c:277
+msgid "ERROR: could not parse response\n"
+msgstr "ERROR: no s'ha pogut analitzar la resposta\n"
+
+#: ../plugins/open-tran/open-tran-panel.c:261
+#, c-format
+msgid "ERROR: %d %s\n"
+msgstr "ERROR: %d %s\n"
+
+#: ../plugins/open-tran/open-tran-panel.c:272
+#, c-format
+msgid "FAULT: %d %s\n"
+msgstr "FALLADA: %d %s\n"
+
+#: ../plugins/open-tran/open-tran-panel.c:288
+#, c-format
+msgid "WRONG! Can't get result element %d\n"
+msgstr "ERROR: no es pot obtenir l'element del resultat %d\n"
+
+#: ../plugins/open-tran/open-tran-panel.c:304 ../src/actions-search.c:200
+msgid "Phrase not found"
+msgstr "No s'ha trobat la frase"
+
+#: ../plugins/open-tran/open-tran-panel.c:326
+msgid "You have to provide a phrase to search"
+msgstr "Heu de proporcionar una frase a cercar"
+
+#: ../plugins/open-tran/open-tran-panel.c:336
+msgid "You have to provide a search language code"
+msgstr "Heu de proporcionar un codi de llengua per a la cerca"
+
+#: ../plugins/open-tran/open-tran-panel.c:346
+msgid "You have to provide a language code for your language"
+msgstr "Heu de proporcionar un codi de llengua per a la vostra llengua"
+
+#: ../plugins/open-tran/open-tran-panel.c:375
+msgid "Type"
+msgstr "Tipus"
+
+#: ../plugins/open-tran/open-tran-panel.c:386
+msgid "Open-Tran.eu"
+msgstr "Open-Tran.eu"
+
+#: ../plugins/open-tran/open-tran-panel.c:425
+msgid "Look for:"
+msgstr "Cerca:"
+
+#: ../plugins/open-tran/open-tran-plugin.c:107
+#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:2
+msgid "Open Tran"
+msgstr "Open Tran"
+
+#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:1
+msgid "Look for phrases in Open tran memory translation database."
+msgstr ""
+"Cerca frases a la base de dades de la memòria de traducció de l'Open Tran."
+
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:3
+msgid "<b>Line command:</b>"
+msgstr "<b>Ordre de línia:</b>"
+
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:4
+msgid "<b>Program command:</b>"
+msgstr "<b>Ordre de programa:</b>"
+
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:5
+msgid "Source View Settings"
+msgstr "Paràmetres de la visualització del codi font"
+
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:6
+msgid "Use external editor"
+msgstr "Utilitza un editor extern"
+
+#: ../plugins/source-code-view/source-code-view-plugin.c:115
+#, c-format
+msgid "Please install %s to be able to show the file"
+msgstr "Hauríeu d'instal·lar el %s per a poder mostrar el fitxer"
+
+#: ../plugins/source-code-view/source-code-view-plugin.c:466
+msgid "Paths:\n"
+msgstr "Camins:\n"
+
+#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:1
+msgid "Show the message in the source code."
+msgstr "Mostra el missatge al codi font."
+
+#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:2
+msgid "Source Code View"
+msgstr "Visualització del codi font"
+
+#: ../plugins/source-code-view/viewer.c:79
+msgid "Source Viewer"
+msgstr "Visualitzador de codi font"
+
+#: ../plugins/source-code-view/viewer.ui.h:1
+msgid "<b>Source code</b>"
+msgstr "<b>Codi font</b>"
+
+#: ../plugins/subversion/checkout-dialog.c:76
+msgid "Subversion: Checkout complete."
+msgstr "Subversion: s'ha completat la baixada."
+
+#: ../plugins/subversion/checkout-dialog.c:125
+msgid "Please add a directory path to make the checkout"
+msgstr "Afegiu un camí de directori on fer la baixada"
+
+#: ../plugins/subversion/checkout-dialog.c:138
+msgid "Please add a Subversion URL"
+msgstr "Afegiu un URL del Subversion"
+
+#: ../plugins/subversion/checkout-dialog.c:172 ../src/dialogs/assistant.c:666
+msgid "Checkout directory"
+msgstr "Directori de baixada"
+
+#: ../plugins/subversion/checkout-dialog.c:264
+msgid "Checkout repository"
+msgstr "Dipòsit de baixada"
+
+#: ../plugins/subversion/commit-dialog.c:226
+msgid "Subversion: Commit complete."
+msgstr "Subversion: s'ha completat la confirmació."
+
+#.
+#. * Translators: Please change LANGUAGE for your language name in English.
+#. * This string is used to fill the ChangeLog entry
+#. * For example: "Updated Galician translation"
+#. * where LANGUAGE = Galician.
+#.
+#: ../plugins/subversion/commit-dialog.c:269
+msgctxt "ChangeLog entry"
+msgid "LANGUAGE"
+msgstr "Catalan"
+
+#: ../plugins/subversion/commit-dialog.c:295
+#, c-format
+msgid "The ChangeLog file '%s' does not exist"
+msgstr "El fitxer de registre de canvis «%s» no existeix"
+
+#: ../plugins/subversion/commit-dialog.c:407
+msgid "Are you sure that you want to pass an empty log message?"
+msgstr "Esteu segur que voleu passar un missatge de registre buit?"
+
+#: ../plugins/subversion/commit-dialog.c:424
+msgid "You have to select at least one file to send"
+msgstr "Heu de seleccionar almenys un fitxer a enviar"
+
+#: ../plugins/subversion/commit-dialog.c:574
+msgid "Commit Changes"
+msgstr "Confirma els canvis"
+
+#: ../plugins/subversion/diff-dialog.c:79
+msgid "Subversion: Diff complete."
+msgstr "Subversion: s'ha completat la diferenciació."
+
+#: ../plugins/subversion/diff-dialog.c:108
+#, c-format
+msgid "Please install %s to be able to diff the file"
+msgstr "Instal·leu el %s per a poder veure les diferències del fitxer"
+
+#: ../plugins/subversion/diff-dialog.c:411
+msgid "Diff file"
+msgstr "Mostra les diferències del fitxer"
+
+#: ../plugins/subversion/diff-dialog.c:483
+msgid "Diff"
+msgstr "Diferències"
+
+#: ../plugins/subversion/subversion-plugin.c:84
+msgid "Subversion: File will be added on next commit."
+msgstr "Subversion: s'afegirà el fitxer en la propera confirmació."
+
+#: ../plugins/subversion/subversion-plugin.c:138
+msgid "_Update"
+msgstr "_Actualitza"
+
+#: ../plugins/subversion/subversion-plugin.c:139
+msgid "Sync your local copy with the Subversion tree"
+msgstr "Sincronitzeu la còpia local amb l'arbre del Subversion"
+
+#: ../plugins/subversion/subversion-plugin.c:142
+msgid "_Commit"
+msgstr "_Confirma"
+
+#: ../plugins/subversion/subversion-plugin.c:143
+msgid "Commit your changes to the Subversion tree"
+msgstr "Confirma els canvis a l'arbre del Subversion"
+
+#: ../plugins/subversion/subversion-plugin.c:146
+msgid "_Add"
+msgstr "_Afegeix"
+
+#: ../plugins/subversion/subversion-plugin.c:147
+msgid "Add a new file/directory to the Subversion tree"
+msgstr "Afegeix un fitxer o directori nou a l'arbre del Subversion"
+
+#: ../plugins/subversion/subversion-plugin.c:150
+msgid "_Diff"
+msgstr "_Diferències"
+
+#: ../plugins/subversion/subversion-plugin.c:151
+msgid "Diff local PO file with repository PO file"
+msgstr "Mostra les diferències entre el fitxer PO local i el del dipòsit"
+
+#: ../plugins/subversion/subversion-plugin.c:154
+msgid "C_heckout"
+msgstr "_Baixa"
+
+#: ../plugins/subversion/subversion-plugin.c:155
+msgid "Get a new repository copy"
+msgstr "Obté una còpia nova del dipòsit"
+
+#: ../plugins/subversion/subversion-plugin.c:158
+msgid "S_ubversion"
+msgstr "S_ubversion"
+
+#: ../plugins/subversion/subversion.ui.h:1
+msgid "  "
+msgstr "  "
+
+#: ../plugins/subversion/subversion.ui.h:3
+msgid "        "
+msgstr "        "
+
+#: ../plugins/subversion/subversion.ui.h:4
+msgid "<b>Diff options:</b>"
+msgstr "<b>Opcions de la diferenciació:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:5
+msgid "<b>Diff program:</b>"
+msgstr "<b>Programa de diferències:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:6
+msgid "<b>Directory to checkout:</b>"
+msgstr "<b>Directori a baixar:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:7
+msgid "<b>Directory to update:</b>"
+msgstr "<b>Directori a actualitzar:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:8
+msgid "<b>Information:</b>"
+msgstr "<b>Informació:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:9
+msgid "<b>Log Message:</b>"
+msgstr "<b>Missatge de registre:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:10
+msgid "<b>Password:</b>"
+msgstr "<b>Contrasenya:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:11
+msgid "<b>Realm:</b>"
+msgstr "<b>Reialme:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:12
+msgid "<b>Select files to Commit:</b>"
+msgstr "<b>Seleccioneu els fitxers a confirmar:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:13
+msgid "<b>Subversion URL:</b>"
+msgstr "<b>URL del Subversion:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:14
+msgid "<b>Username:</b>"
+msgstr "<b>Nom d'usuari:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:15
+msgid "Add Log Message to ChangeLog file"
+msgstr "Afegeix el missatge de registre al registre de canvis"
+
+#: ../plugins/subversion/subversion.ui.h:16
+msgid "Line argument:"
+msgstr "Argument de línia:"
+
+#: ../plugins/subversion/subversion.ui.h:17
+msgid "Program name:"
+msgstr "Nom del programa:"
+
+#: ../plugins/subversion/subversion.ui.h:18
+msgid "Remember Password"
+msgstr "Recorda la contrasenya"
+
+#: ../plugins/subversion/subversion.ui.h:19
+msgid "Remember this decision"
+msgstr "Recorda aquesta decisió"
+
+#: ../plugins/subversion/subversion.ui.h:20
+msgid "Repository authorization"
+msgstr "Autorització del dipòsit"
+
+#: ../plugins/subversion/subversion.ui.h:21
+msgid "Retrieving status..."
+msgstr "S'està obtenint l'estat..."
+
+#: ../plugins/subversion/subversion.ui.h:22
+msgid "Save the diff file"
+msgstr "Desa el fitxer de diferències"
+
+#: ../plugins/subversion/subversion.ui.h:23
+msgid "Send Changes"
+msgstr "Envia els canvis"
+
+#: ../plugins/subversion/subversion.ui.h:24
+#: ../plugins/subversion/update-dialog.c:234
+msgid "Update repository"
+msgstr "Actualitza el dipòsit"
+
+#: ../plugins/subversion/subversion.ui.h:25
+msgid "Use configured program to view the diff"
+msgstr "Utilitza el programa configurat per a visualitzar les diferències"
+
+#: ../plugins/subversion/subversion.ui.h:26
+msgid "label"
+msgstr "etiqueta"
+
+#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:1
+msgid "A Subversion client plugin based on libsvn."
+msgstr "Un connector de client del Subversion basat en la libsvn."
+
+#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:2
+msgid "Subversion"
+msgstr "Subversion"
+
+#: ../plugins/subversion/svn-command.c:177
+#: ../plugins/subversion/svn-command.c:262
+msgid "Authentication canceled"
+msgstr "S'ha cancel·lat l'autenticació"
+
+#: ../plugins/subversion/svn-command.c:235
+msgid "Hostname:"
+msgstr "Nom del servidor:"
+
+#: ../plugins/subversion/svn-command.c:236
+msgid "Fingerprint:"
+msgstr "Empremta digital:"
+
+#: ../plugins/subversion/svn-command.c:237
+msgid "Valid from:"
+msgstr "Vàlida des del:"
+
+#: ../plugins/subversion/svn-command.c:238
+msgid "Valid until:"
+msgstr "Vàlida fins el:"
+
+#: ../plugins/subversion/svn-command.c:239
+msgid "Issuer DN:"
+msgstr "Nom de domini de l'emissor:"
+
+#: ../plugins/subversion/svn-command.c:240
+msgid "DER certificate:"
+msgstr "Certificat DER:"
+
+#: ../plugins/subversion/svn-command.c:387
+#: ../plugins/subversion/svn-command.c:403
+#, c-format
+msgid "Deleted: %s"
+msgstr "Suprimit: %s"
+
+#: ../plugins/subversion/svn-command.c:390
+#: ../plugins/subversion/svn-command.c:409
+#, c-format
+msgid "Added: %s"
+msgstr "Afegit: %s"
+
+#: ../plugins/subversion/svn-command.c:393
+#, c-format
+msgid "Reverted: %s"
+msgstr "Desfet: %s"
+
+#: ../plugins/subversion/svn-command.c:396
+#, c-format
+msgid "Revert failed: %s"
+msgstr "No s'ha pogut desfer: %s"
+
+#: ../plugins/subversion/svn-command.c:400
+#, c-format
+msgid "Resolved: %s"
+msgstr "Resolt: %s"
+
+#: ../plugins/subversion/svn-command.c:406
+#, c-format
+msgid "Updated: %s"
+msgstr "Actualitzat: %s"
+
+#: ../plugins/subversion/svn-command.c:412
+#, c-format
+msgid "Externally Updated: %s"
+msgstr "Actualitzat externament: %s"
+
+#: ../plugins/subversion/svn-command.c:416
+#, c-format
+msgid "Commit Modified: %s"
+msgstr "Modificat en confirmar: %s"
+
+#: ../plugins/subversion/svn-command.c:420
+#, c-format
+msgid "Commit Added: %s"
+msgstr "Afegit en confirmar: %s"
+
+#: ../plugins/subversion/svn-command.c:423
+#, c-format
+msgid "Commit Deleted: %s"
+msgstr "Suprimit en confirmar: %s"
+
+#: ../plugins/subversion/svn-command.c:427
+#, c-format
+msgid "Commit Replaced: %s"
+msgstr "Reemplaçat en confirmar: %s"
+
+#: ../plugins/subversion/svn-command.c:431
+#, c-format
+msgid "Created File: %s"
+msgstr "S'ha creat el fitxer: %s"
+
+#: ../plugins/subversion/svn-command.c:446
+#, c-format
+msgid "Modified: %s"
+msgstr "Modificat: %s"
+
+#: ../plugins/subversion/svn-command.c:449
+#, c-format
+msgid "Merged: %s"
+msgstr "Fusionat: %s"
+
+#: ../plugins/subversion/svn-command.c:452
+#, c-format
+msgid "Conflicted: %s"
+msgstr "Conflictes: %s"
+
+#: ../plugins/subversion/svn-command.c:456
+#, c-format
+msgid "Missing: %s"
+msgstr "Manquen: %s"
+
+#: ../plugins/subversion/svn-command.c:459
+#, c-format
+msgid "Obstructed: %s"
+msgstr "Obstruït: %s"
+
+#: ../plugins/subversion/svn-update-command.c:103
+#, c-format
+msgid "Updated to revision %ld."
+msgstr "S'ha actualitzat a la revisió %ld."
+
+#: ../plugins/subversion/update-dialog.c:74
+msgid "Subversion: Update complete."
+msgstr "Subversion: s'ha completat l'actualització."
+
+#: ../plugins/subversion/vcs-status-tree-view.c:293
+msgid "Modified"
+msgstr "Modificat"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:297
+msgid "Added"
+msgstr "Afegit"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:301
+msgid "Deleted"
+msgstr "Suprimit"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:305
+msgid "Conflicted"
+msgstr "Conflicte"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:309
+msgid "Missing"
+msgstr "Sense traduir"
+
+#: ../src/actions-file.c:202
 msgid "Open file for translation"
 msgstr "Obre un fitxer per a traduir"
 
-#: ../src/dialogs.c:204
+#: ../src/actions-file.c:276 ../src/actions-file.c:403
+msgid "File saved."
+msgstr "S'ha desat el fitxer."
+
+#: ../src/actions-file.c:326
 msgid "Save file as..."
 msgstr "Anomena i desa el fitxer..."
 
-#: ../src/dialogs.c:210
-msgid "Save local copy of file as..."
-msgstr "Anomena i desa una còpia local del fitxer..."
-
-#: ../src/dialogs.c:253
+#: ../src/actions-file.c:747
 #, c-format
+msgid "Failed to write profile data into profiles file '%s'"
+msgstr "No s'han pogut escriure les dades del perfil al fitxer de perfils «%s»"
+
+#: ../src/actions-help.c:55
+msgid "Current Developers"
+msgstr "Desenvolupadors actuals"
+
+#: ../src/actions-help.c:61
+msgid "Previous Developers"
+msgstr "Desenvolupadors anteriors"
+
+#: ../src/actions-help.c:80
 msgid ""
-"File %s\n"
-"was changed. Save?"
+"This program is free software: you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation, either version 3 of the License, or (at your option) "
+"any later version."
 msgstr ""
-"El fitxer %s\n"
-"ha canviat. Voleu desar-ho?"
+"Aquest programa és programari lliure; podeu redistribuir-lo i/o modificar-lo "
+"sota els termes de la Llicència Pública General GNU tal com ha estat "
+"publicada per la Free Software Foundation; ja sigui la versió 3 de la "
+"Llicència o bé (si ho preferiu) qualsevol altra versió posterior. "
 
-#: ../src/dialogs.c:295 ../src/dialogs.c:328
-msgid "gtranslator -- edit comment"
-msgstr "gtranslator -- edita el comentari"
-
-#: ../src/dialogs.c:320
-msgid "Comment:"
-msgstr "Comentari:"
-
-#: ../src/dialogs.c:437
-#, c-format
-msgid "Should ALL translations from `%s' be removed?"
+#: ../src/actions-help.c:84
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details."
 msgstr ""
+"Aquest programa es distribueix amb l'expectativa que serà útil, però SENSE "
+"CAP GARANTIA; ni tan sols la garantia implícita de COMERCIABILITAT o "
+"ADEQUACIÓ PER UN PROPÒSIT PARTICULAR. Vegeu la Llicència Pública General GNU "
+"per obtenir-ne més detalls."
 
-#: ../src/dialogs.c:510
-msgid "gtranslator -- go to"
-msgstr "gtranslator -- vés a"
+#: ../src/actions-help.c:88
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program.  If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"Hauríeu d'haver rebut una còpia de la Llicència Pública General GNU "
+"juntament amb aquest programa; en cas contrari, consulteu <http://www.gnu."
+"org/licenses/>."
 
-#: ../src/dialogs.c:518
-msgid "Go to message number:"
-msgstr "Vés al missatge número:"
+#: ../src/actions-help.c:100
+msgid ""
+"Translation file editing suite for localization of applications and "
+"libraries."
+msgstr ""
+"Paquet d'edició de fitxers de traducció per a la localització d'aplicacions "
+"i biblioteques."
 
-#: ../src/dialogs.c:576
-msgid "Find in the po file"
-msgstr "Cerca en el fitxer PO"
+#: ../src/actions-help.c:102
+msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
+msgstr "Copyright © 1999-2008 Free Software Foundation, Inc."
 
-#: ../src/dialogs.c:585
-#, fuzzy
-msgid "Enter search string:"
-msgstr "Introduïu la cadena que voleu cercar:"
-
-#: ../src/dialogs.c:590
-msgid "Case sensitive"
-msgstr "Distingeix majúscules i minúscules"
-
-#: ../src/dialogs.c:595
-msgid "Find in:"
-msgstr "Cerca en:"
-
-#: ../src/dialogs.c:599 ../src/dialogs.c:728
-msgid "Comments"
-msgstr "Comentaris"
-
-#: ../src/dialogs.c:602 ../src/dialogs.c:731 ../src/languages.c:101
-msgid "English"
-msgstr "Anglès"
-
-#: ../src/dialogs.c:605 ../src/dialogs.c:734 ../src/messages-table.c:222
-msgid "Translation"
-msgstr "Traducció"
+#: ../src/actions-help.c:106
+msgid "About Gtranslator"
+msgstr "Quant al Gtranslator"
 
 #.
-#. * Translators: this means that the hotkeys ("_" etc.) are ignored
-#. *  during the search action.
+#. * Note to translators: put here your name and email so it will show
+#. * up in the "about" box
 #.
-#: ../src/dialogs.c:616
-msgid "Ignore hotkeys"
-msgstr "Ignora els acceleradors"
+#: ../src/actions-help.c:111
+msgid "translator-credits"
+msgstr ""
+"Softcatalà <info@softcatala.org>\n"
+"Jordi Mallach <jordi@sindominio.net>\n"
+"David Planella <david.planella@gmail.com>"
 
-#: ../src/dialogs.c:707
-msgid "gtranslator -- replace"
-msgstr "gtranslator -- reemplaça"
+#: ../src/actions-help.c:115
+msgid "Gtranslator Web Site"
+msgstr "Lloc web del Gtranslator"
 
-#: ../src/dialogs.c:711 ../src/menus.c:332
-msgid "Replace"
-msgstr "Reemplaça"
+#: ../src/actions-search.c:175
+#, c-format
+msgid "Found and replaced %d occurrence"
+msgid_plural "Found and replaced %d occurrences"
+msgstr[0] "S'ha trobat i reemplaçat %d ocurrència"
+msgstr[1] "S'han trobat i reemplaçat %d ocurrències"
 
-#: ../src/dialogs.c:712
-msgid "Replace all"
-msgstr "Reemplaça-ho tot"
+#: ../src/actions-search.c:185
+msgid "Found and replaced one occurrence"
+msgstr "S'ha trobat i reemplaçat una ocurrència"
 
-#: ../src/dialogs.c:717
-msgid "String to replace:"
-msgstr "Reemplaça la cadena:"
+#: ../src/context.c:61
+msgid "Format:"
+msgstr "Format:"
 
-#: ../src/dialogs.c:720
-msgid "Replace string:"
-msgstr "Per la cadena:"
+#: ../src/context.c:62
+msgid "Context:"
+msgstr "Context:"
 
-#: ../src/dialogs.c:725
-msgid "Replace in:"
-msgstr "Reemplaça en:"
+#: ../src/context.c:63
+msgid "Extracted comments:"
+msgstr "Comentaris extrets:"
 
-#: ../src/dialogs.c:795
-msgid "Please enter a string to replace!"
-msgstr "Introduïu una cadena per a reemplaçar"
+#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:716
+msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"large\">S'han afegit les cadenes a la base de "
+"dades</span>"
 
-#: ../src/dialogs.c:852
+#: ../src/dialogs/assistant.c:281
 #, c-format
 msgid ""
-"The file\n"
-"\n"
-"   %s\n"
-"\n"
-"is already open in another instance of gtranslator!\n"
-"Please close the other instance of gtranslator handling\n"
-"this file currently to re-gain access to this file.\n"
-"\n"
-"Shall fool gtranslator open this file anyway ?"
+"Profile name: %s\n"
+"Translator name: %s\n"
+"Translator email: %s\n"
+"Language name: %s\n"
+"Team email: %s\n"
+"Language code: %s\n"
+"Character set: %s\n"
+"Transfer encoding: %s\n"
+"Plural form: %s\n"
+"Database path: %s"
 msgstr ""
+"Nom del perfil: %s\n"
+"Nom del traductor: %s\n"
+"Adreça electrònica del traductor: %s\n"
+"Nom de la llengua: %s\n"
+"Adreça electrònica de l'equip: %s\n"
+"Codi de la llengua: %s\n"
+"Joc de caràcters: %s\n"
+"Codificació de transferència: %s\n"
+"Forma dels plurals: %s\n"
+"Camí de la base de dades: %s"
 
-#: ../src/dialogs.c:893
-#, c-format
+#: ../src/dialogs/assistant.c:300
+msgid "None"
+msgstr "Cap"
+
+#: ../src/dialogs/assistant.c:321
 msgid ""
-"File %s\n"
-"was changed. Do you want to revert to saved copy?"
+"This assistant will help you to create the main profile\n"
+"and generate your translation memory database."
 msgstr ""
-"El fitxer %s\n"
-"ha canviat. Voleu tornar a la còpia desada?"
+"Aquest auxiliar us ajudarà a crear el perfil principal\n"
+"i generarà la base de dades de la vostra memòria de traducció."
 
-#: ../src/dialogs.c:922
-msgid "gtranslator -- open from URI"
-msgstr "gtranslator -- obre des d'un URI"
+#: ../src/dialogs/assistant.c:327
+msgid "Assistant"
+msgstr "Auxiliar"
 
-#: ../src/dialogs.c:934
-msgid "Enter URI:"
-msgstr "Introduïu l'URI:"
+#: ../src/dialogs/assistant.c:416
+msgid "<b>Profile name:</b>"
+msgstr "<b>Nom del perfil:</b>"
 
-#: ../src/dialogs.c:971
-msgid "No URI given!"
-msgstr "No s'ha indicat cap URI!"
+#: ../src/dialogs/assistant.c:436
+msgid "<b>Translator name:</b>"
+msgstr "<b>Nom del traductor:</b>"
 
-#: ../src/dialogs.c:989
-msgid ""
-"URIs are used to locate files uniquely on different systems.\n"
-"The standard Internet addresses (URLs) are also URIs -- you can\n"
-"use them to open remote po files lying on servers with standard protocols\n"
-"like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
-"Some example URIs for clarification (these ones are supported):\n"
-"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
-"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
-"\n"
-"file:///<PO-FILE> or\n"
-"http://www.DOMAIN.COM/PO-FILE"
-msgstr ""
+#: ../src/dialogs/assistant.c:456
+msgid "<b>Translator email:</b>"
+msgstr "<b>Adreça electrònica del traductor:</b>"
 
-#: ../src/dialogs.c:1029
+#: ../src/dialogs/assistant.c:476
+msgid "<b>Language:</b>"
+msgstr "<b>Llengua:<b>"
+
+#: ../src/dialogs/assistant.c:496
+msgid "<b>Team email:</b>"
+msgstr "<b>Adreça electrònica de l'equip:</b>"
+
+#: ../src/dialogs/assistant.c:508 ../src/dialogs/assistant.c:656
+#: ../src/dialogs/preferences-dialog.c:511
+msgid "Profile"
+msgstr "Perfil"
+
+#: ../src/dialogs/assistant.c:584
+msgid "<b>Language code:</b>"
+msgstr "<b>Codi de la llengua:</b>"
+
+#: ../src/dialogs/assistant.c:604
+msgid "<b>Character set:</b>"
+msgstr "<b>Joc de caràcters:</b>"
+
+#: ../src/dialogs/assistant.c:624
+msgid "<b>Transfer encoding:</b>"
+msgstr "<b>Codificació de transferència:</b>"
+
+#: ../src/dialogs/assistant.c:644
+msgid "<b>Plural forms:</b>"
+msgstr "<b>Formes del plural:</b>"
+
+#: ../src/dialogs/assistant.c:706
+msgid "<b>Select the path to generate the database:</b>"
+msgstr "<b>Seleccioneu el camí on generar la base de dades:</b>"
+
+#: ../src/dialogs/assistant.c:736
+msgid "<b>Look for a specific PO filename:</b>"
+msgstr "<b>Cerca un nom de fitxer PO determinat:</b>"
+
+#: ../src/dialogs/assistant.c:745
+msgid "E.g.: gl.po"
+msgstr "Ex.: ca.po"
+
+#: ../src/dialogs/assistant.c:748
+msgid "Generate Database"
+msgstr "Genera la base de dades"
+
+#: ../src/dialogs/assistant.c:772
+msgid "Confirmation"
+msgstr "Confirmació"
+
+#: ../src/dialogs/close-confirmation-dialog.c:131
+msgid "Close _without Saving"
+msgstr "Tanca _sense desar"
+
+#: ../src/dialogs/close-confirmation-dialog.c:165
+msgid "Question"
+msgstr "Pregunta"
+
+#: ../src/dialogs/close-confirmation-dialog.c:383
 #, c-format
-msgid ""
-"Open recovery file for `%s'?\n"
-"It was saved by gtranslator before gtranslator last closed\n"
-"and may contain your hard work!\n"
-msgstr ""
-"Voleu obrir el fitxer de recuperació de «%s»?\n"
-"El gtranslator va desar-lo abans de tancar-se.\n"
-"Potser conté feinades considerables!\n"
+msgid "Save the changes to document \"%s\" before closing?"
+msgstr "Voleu desar els canvis al document «%s» abans de tancar-lo?"
 
-#.
-#. * Translators: All this is about recovering a po file after
-#. *  a crash or something; postbone means that the user will
-#. *   get asked the next time he starts up gtranslator again
-#. *    if he/she wants to recover file.
-#.
-#: ../src/dialogs.c:1041
-msgid "Postpone decision"
-msgstr "Ajorna la decisió"
-
-#: ../src/dialogs.c:1043
-msgid "Ignore recovery file"
-msgstr "Descarta el fitxer de recuperació"
-
-#: ../src/dialogs.c:1045
-msgid "Recover file"
-msgstr "Recupera el fitxer"
-
-#: ../src/dialogs.c:1101
-msgid ""
-"Should gtranslator autotranslate the file using information\n"
-"from your personal learn buffer?"
-msgstr ""
-
-#: ../src/dialogs.c:1141 ../src/dialogs.c:1169
-msgid "gtranslator -- add bookmark with comment?"
-msgstr "gtranslator -- voleu afegir una adreça d'interès amb comentari?"
-
-#: ../src/dialogs.c:1161
-msgid "Comment for the bookmark:"
-msgstr "Comentari per a l'adreça d'interès:"
-
-#: ../src/dialogs.c:1161
-msgid "No comment"
-msgstr "Cap comentari"
-
-#: ../src/find.c:216
-msgid "Please enter a search string"
-msgstr "Introduïu una cadena per cercar"
-
-#: ../src/find.c:232
+#: ../src/dialogs/close-confirmation-dialog.c:555
 #, c-format
-msgid ""
-"Could not find\n"
-"\"%s\""
-msgstr ""
-"No s'ha trobat\n"
-"«%s»"
+msgid "Changes to %d document will be permanently lost."
+msgid_plural "Changes to %d documents will be permanently lost."
+msgstr[0] "Els canvis a %d document es perdran de manera permanent."
+msgstr[1] "Els canvis a %d documents es perdran de manera permanent."
 
-#: ../src/gui.c:405
+#: ../src/dialogs/close-confirmation-dialog.c:561
 #, c-format
-msgid "%s [ %i Fuzzy left ]"
-msgid_plural "%s [ %i Fuzzy left ]"
-msgstr[0] "%s [ Queda %i cadena difusa ]"
-msgstr[1] "%s [ Queden %i cadenes difuses ]"
+msgid "There is %d document with unsaved changes. Save changes before closing?"
+msgid_plural ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr[0] ""
+"Hi ha %d document amb canvis sense desar. Voleu desar els canvis abans de "
+"tancar-lo?"
+msgstr[1] ""
+"Hi ha %d documents amb canvis sense desar. Voleu desar els canvis abans de "
+"tancar-los?"
 
-#: ../src/gui.c:405 ../src/gui.c:409 ../src/menus.c:318
-#: ../src/messages-table.c:252
-msgid "Fuzzy"
-msgstr "Difuses"
+#: ../src/dialogs/close-confirmation-dialog.c:579
+msgid "Docum_ents with unsaved changes:"
+msgstr "Docu_ments amb canvis sense desar:"
 
-#: ../src/gui.c:409
-#, c-format
-msgid "%s [ No fuzzy left ]"
-msgstr "%s [ No hi ha cap cadena difusa ]"
+#: ../src/dialogs/close-confirmation-dialog.c:581
+msgid "S_elect the documents you want to save:"
+msgstr "S_eleccioneu els documents que vulgueu desar:"
 
-#: ../src/gui.c:418 ../src/messages-table.c:260
-msgid "Translated"
-msgstr "Traduïdes"
+#: ../src/dialogs/close-confirmation-dialog.c:600
+msgid "Saving has been disabled by the system administrator."
+msgstr "L'administrador ha inhabilitat el desament de fitxers."
 
-#: ../src/gui.c:426
-#, c-format
-msgid "%s [ %i Untranslated left ]"
-msgid_plural "%s [ %i Untranslated left ]"
-msgstr[0] "%s [ Queda %i cadena sense traduir ]"
-msgstr[1] "%s [ Queden %i cadenes sense traduir ]"
+#: ../src/dialogs/close-confirmation-dialog.c:602
+msgid "If you don't save, all your changes will be permanently lost."
+msgstr "Si no els deseu, es perdran tots els canvis de manera permanent."
 
-#: ../src/gui.c:426 ../src/gui.c:428 ../src/messages-table.c:244
-msgid "Untranslated"
-msgstr "Sense traduir"
-
-#: ../src/gui.c:428
-#, c-format
-msgid "%s [ No untranslated left ]"
-msgstr "%s [ No hi ha cap cadena sense traduir ]"
-
-#: ../src/gui.c:447
-#, c-format
-msgid "Message %d / %d / Status: %s (Message contains plural forms)"
-msgstr "Missatge %d / %d / Estat: %s (el missatge conté formes plurals)"
-
-#: ../src/gui.c:451
-#, c-format
-msgid "Message %d / %d / Status: %s"
-msgstr "Missatge %d / %d / Estat: %s"
-
-#: ../src/gui.c:754 ../src/page.c:99
-msgid "Edit comment"
+#: ../src/dialogs/comment-dialog.c:98
+msgid "Edit Comment"
 msgstr "Edita el comentari"
 
-#: ../src/header_stuff.c:406
-msgid "No header for this file/domain"
-msgstr ""
+#: ../src/dialogs/comment-dialog.ui.h:1
+msgid "<b>Write your comments bellow:</b>"
+msgstr "<b>Escriviu els vostres comentaris a sota:</b>"
 
-#: ../src/header_stuff.c:445
-msgid "gtranslator -- edit header"
-msgstr "gtranslator -- edita la capçalera"
+#: ../src/dialogs/file-dialogs.c:60
+msgid "Gettext translation"
+msgstr "Traducció del gettext"
 
-#. gtk_text_buffer_set_text(buffer, ph->comment, -1);
-#: ../src/header_stuff.c:469
-msgid "Comments:"
-msgstr "Comentaris:"
+#: ../src/dialogs/file-dialogs.c:65
+msgid "Gettext translation template"
+msgstr "Plantilla de traducció del gettext"
 
-#: ../src/header_stuff.c:476
-msgid "Project name:"
-msgstr "Nom del projecte:"
+#: ../src/dialogs/file-dialogs.c:70
+msgid "All files"
+msgstr "Tots els fitxers"
 
-#: ../src/header_stuff.c:482
-msgid "Project version:"
-msgstr "Versió del projecte:"
+#: ../src/dialogs/header-dialog.c:259
+msgid "Edit Header"
+msgstr "Edita la capçalera"
 
-#: ../src/header_stuff.c:489
-msgid "Pot file creation date:"
-msgstr "Data de creació del fitxer POT:"
+#: ../src/dialogs/header-dialog.ui.h:1
+msgid "Char_set:"
+msgstr "Joc de _caràcters:"
 
-#: ../src/header_stuff.c:495
-msgid "Po file revision date:"
-msgstr "Data de revisió del fitxer PO:"
+#: ../src/dialogs/header-dialog.ui.h:2
+msgid "Comment"
+msgstr "Comentari"
 
-#: ../src/header_stuff.c:502
-msgid "Report message string bugs to:"
-msgstr ""
+#: ../src/dialogs/header-dialog.ui.h:3
+msgid "Enc_oding:"
+msgstr "Co_dificació:"
 
-#: ../src/header_stuff.c:516
-msgid "Generator:"
-msgstr "Generador:"
+#: ../src/dialogs/header-dialog.ui.h:4
+msgid "Language gro_up email:"
+msgstr "Adreça electrònica de l'eq_uip de la llengua:"
 
-#: ../src/header_stuff.c:521
+#: ../src/dialogs/header-dialog.ui.h:5
+msgid "Po file _revision date:"
+msgstr "Data de _revisió del fitxer PO:"
+
+#: ../src/dialogs/header-dialog.ui.h:6
+msgid "Pot _file creation date:"
+msgstr "Data de creació del _fitxer POT:"
+
+#: ../src/dialogs/header-dialog.ui.h:7
 msgid "Project"
 msgstr "Projecte"
 
-#: ../src/header_stuff.c:527
-#, fuzzy
-msgid "Use my options to complete the following entries:"
-msgstr "Fes servir les meves opcions per emplenar les entrades següents."
+#: ../src/dialogs/header-dialog.ui.h:8
+msgid "Project Id _version:"
+msgstr "_Versió de l'identificador del projecte:"
 
-#: ../src/header_stuff.c:540
-msgid "Translator's name:"
-msgstr "Nom del traductor:"
+#: ../src/dialogs/header-dialog.ui.h:9
+msgid "Report message _bugs to:"
+msgstr "Informeu d'e_rrors en els missatges a:"
 
-#: ../src/header_stuff.c:546
-msgid "Translator's e-mail:"
-msgstr "Correu electrònic del traductor:"
-
-#: ../src/header_stuff.c:553 ../src/prefs.c:872
-msgid "Language:"
-msgstr "Idioma:"
-
-#: ../src/header_stuff.c:560 ../src/prefs.c:901
-msgid "Language group's email:"
-msgstr "Correu electrònic del grup de la llengua:"
-
-#: ../src/header_stuff.c:567 ../src/prefs.c:887
-msgid "Charset:"
-msgstr "Joc de caràcters:"
-
-#: ../src/header_stuff.c:574 ../src/prefs.c:894
-msgid "Encoding:"
-msgstr "Codificació:"
-
-#: ../src/header_stuff.c:582
+#: ../src/dialogs/header-dialog.ui.h:10
 msgid "Translator and Language"
-msgstr "Traductor i idioma"
+msgstr "Traductor i llengua"
 
-#: ../src/history.c:189
-msgid "_File/Recen_t files/"
-msgstr "_Fitxer/Fitxers recen_ts/"
+#: ../src/dialogs/header-dialog.ui.h:11
+msgid "Translator's _email:"
+msgstr "Adreça _electrònica del traductor:"
 
-#: ../src/history.c:226
+#: ../src/dialogs/header-dialog.ui.h:12
+msgid "Translator's _name:"
+msgstr "_Nom del traductor:"
+
+#: ../src/dialogs/header-dialog.ui.h:13
+msgid "Use my options to complete the following entries:"
+msgstr "Utilitza les meves opcions per emplenar les entrades següents:"
+
+#: ../src/dialogs/header-dialog.ui.h:14 ../src/dialogs/profile-dialog.ui.h:9
+msgid "_Language:"
+msgstr "_Llengua:"
+
+#: ../src/dialogs/jump-dialog.c:92
+msgid "Go to Message"
+msgstr "Vés al missatge"
+
+#: ../src/dialogs/jump-dialog.ui.h:1
+msgid "<b>Enter message number:</b>"
+msgstr "<b>Introduïu el número del missatge:</b>"
+
+#: ../src/dialogs/preferences-dialog.c:517
+msgid "Active"
+msgstr "Actiu"
+
+#: ../src/dialogs/preferences-dialog.c:1060
+msgid ""
+"<span weight=\"bold\" size=\"large\">Impossible to remove the active "
+"profile</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"large\">No es pot suprimir el perfil actiu</"
+"span>"
+
+#: ../src/dialogs/preferences-dialog.c:1063
+msgid "Another profile should be selected as active before"
+msgstr "S'ha de seleccionar un altre perfil com a actiu abans"
+
+#: ../src/dialogs/preferences-dialog.c:1075
+msgid ""
+"<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
+"profile?</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"large\">Segur que voleu suprimir aquest perfil?"
+"</span>"
+
+#: ../src/dialogs/preferences-dialog.c:1117
+#: ../src/dialogs/preferences-dialog.ui.h:16
+msgid "Gtranslator Preferences"
+msgstr "Preferències del Gtranslator"
+
+#: ../src/dialogs/preferences-dialog.ui.h:2
+msgid "<b>Anchor style:</b>"
+msgstr "<b>Estil de l'àncora:</b>"
+
+#: ../src/dialogs/preferences-dialog.ui.h:3
+msgid "<b>Autosave</b>"
+msgstr "<b>Desament automàtic</b>"
+
+#: ../src/dialogs/preferences-dialog.ui.h:4
+msgid "<b>Configuration:</b>"
+msgstr "<b>Configuració:</b>"
+
+#: ../src/dialogs/preferences-dialog.ui.h:5
+msgid "<b>Contents</b>"
+msgstr "<b>Contingut</b>"
+
+#: ../src/dialogs/preferences-dialog.ui.h:6
+msgid "<b>Database:</b>"
+msgstr "<b>Base de dades:</b>"
+
+#: ../src/dialogs/preferences-dialog.ui.h:7
+msgid "<b>General</b>"
+msgstr "<b>General</b>"
+
+#: ../src/dialogs/preferences-dialog.ui.h:8
+msgid "<b>Scheme color:</b>"
+msgstr "<b>Esquema de color:</b>"
+
+#: ../src/dialogs/preferences-dialog.ui.h:9
+msgid "<b>Text Display</b>"
+msgstr "<b>Visualització del text</b>"
+
+#: ../src/dialogs/preferences-dialog.ui.h:10
+msgid "Add to Database"
+msgstr "Afegeix a la base de dades"
+
+#: ../src/dialogs/preferences-dialog.ui.h:11
+msgid "Check _spelling"
+msgstr "Verifica l'_ortografia"
+
+#: ../src/dialogs/preferences-dialog.ui.h:12
+msgid "Create a _backup copy of files before saving"
+msgstr "Crea una còpia de _seguretat dels fitxers abans de desar"
+
+#: ../src/dialogs/preferences-dialog.ui.h:13
+msgid "Editor"
+msgstr "Editor"
+
+#: ../src/dialogs/preferences-dialog.ui.h:14
+msgid "Editor _font:"
+msgstr "_Tipus de lletra de l'editor:"
+
+#: ../src/dialogs/preferences-dialog.ui.h:15
+msgid "Files"
+msgstr "Fitxers"
+
+#: ../src/dialogs/preferences-dialog.ui.h:17
+msgid "Interface"
+msgstr "Interfície"
+
+#: ../src/dialogs/preferences-dialog.ui.h:18
+msgid "Make _whitespace visible"
+msgstr "Fes que els _espai en blanc siguin visibles"
+
+#: ../src/dialogs/preferences-dialog.ui.h:19
+msgid "Max. # of missing words:"
+msgstr "Nombre màxim de paraules que manquen:"
+
+#: ../src/dialogs/preferences-dialog.ui.h:20
+msgid "Max. difference in sentence length:"
+msgstr "Diferència màxima en la llargada de la frase:"
+
+#: ../src/dialogs/preferences-dialog.ui.h:21
+msgid "Plugins"
+msgstr "Connectors"
+
+#: ../src/dialogs/preferences-dialog.ui.h:22
+msgid "Profiles"
+msgstr "Perfils"
+
+#: ../src/dialogs/preferences-dialog.ui.h:23
+msgid "Select directory contains PO files:"
+msgstr "Seleccioneu el directori que conté els fitxers PO:"
+
+#: ../src/dialogs/preferences-dialog.ui.h:24 ../src/tab.c:658
+msgid "Translation Memory"
+msgstr "Memòria de traducció"
+
+#: ../src/dialogs/preferences-dialog.ui.h:25
+msgid "Use _custom font"
+msgstr "Utilitza un _tipus de lletra personalitzat"
+
+#: ../src/dialogs/preferences-dialog.ui.h:26
+msgid "Use only files with this name:"
+msgstr "Utilitza només fitxers amb aquest nom:"
+
+#: ../src/dialogs/preferences-dialog.ui.h:27
+msgid "_Autosave files every"
+msgstr "Interval entre _desaments automàtics"
+
+#: ../src/dialogs/preferences-dialog.ui.h:28
+msgid "_Delete compiled GMO files"
+msgstr "_Suprimeix els fitxers GMO compilats"
+
+#: ../src/dialogs/preferences-dialog.ui.h:29
+msgid "_Highlight message syntax"
+msgstr "_Realça la sintaxi dels missatges"
+
+#: ../src/dialogs/preferences-dialog.ui.h:30
+msgid "_Remove fuzzy status if message is changed"
+msgstr "_Suprimeix l'estat difús del missatge si s'ha modificat"
+
+#: ../src/dialogs/preferences-dialog.ui.h:31
+msgid "_Warn if PO file contains fuzzy translations"
+msgstr "_Avisa'm si el fitxer PO conté traduccions difuses"
+
+#: ../src/dialogs/preferences-dialog.ui.h:32
+msgid "_minutes"
+msgstr "_minuts"
+
+#: ../src/dialogs/profile-dialog.c:257
+msgid ""
+"<span weight=\"bold\" size=\"large\">The profile name already exists</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"large\">El nom del perfil ja existeix</span>"
+
+#: ../src/dialogs/profile-dialog.c:345
+msgid "Gtranslator Profile"
+msgstr "Perfil del Gtranslator"
+
+#: ../src/dialogs/profile-dialog.c:381
+msgid "Example: nplurals=2; plural=(n != 1);"
+msgstr "Exemple: nplurals=2; plural=(n != 1);"
+
+#: ../src/dialogs/profile-dialog.ui.h:1
+msgid "<b>Language Settings</b>"
+msgstr "<b>Paràmetres de la llengua</b>"
+
+#: ../src/dialogs/profile-dialog.ui.h:2
+msgid "<b>Profile Information</b>"
+msgstr "<b>Dades de perfil</b>"
+
+#: ../src/dialogs/profile-dialog.ui.h:3
+msgid "<b>Translator Information</b>"
+msgstr "<b>Informació del traductor</b>"
+
+#: ../src/dialogs/profile-dialog.ui.h:4
+msgid "Character _set"
+msgstr "Joc de _caràcters:"
+
+#: ../src/dialogs/profile-dialog.ui.h:5
+msgid "Language _code:"
+msgstr "_Codi de la llengua:"
+
+#: ../src/dialogs/profile-dialog.ui.h:6
+msgid "N_ame:"
+msgstr "_Nom:"
+
+#: ../src/dialogs/profile-dialog.ui.h:7
+msgid "Transfer en_coding:"
+msgstr "Codifica_ció de transferència:"
+
+#: ../src/dialogs/profile-dialog.ui.h:8
+msgid "_Email:"
+msgstr "Adreça _electrònica:"
+
+#: ../src/dialogs/profile-dialog.ui.h:10
+msgid "_Name:"
+msgstr "No_m:"
+
+#: ../src/dialogs/profile-dialog.ui.h:11
+msgid "_Plural forms:"
+msgstr "Formes del _plural:"
+
+#: ../src/dialogs/profile-dialog.ui.h:12
+msgid "_Team email:"
+msgstr "Adreça electrònica de l'_equip:"
+
+#: ../src/dialogs/search-dialog.c:323 ../src/dialogs/search-dialog.ui.h:4
+msgid "Replace"
+msgstr "Reemplaça"
+
+#: ../src/dialogs/search-dialog.c:343
+msgid "Find"
+msgstr "Cerca"
+
+#: ../src/dialogs/search-dialog.c:443
+msgid "Replace _All"
+msgstr "Reemplaça-ho _tot"
+
+#: ../src/dialogs/search-dialog.c:446
+msgid "_Replace"
+msgstr "_Reemplaça"
+
+#: ../src/dialogs/search-dialog.ui.h:1
+msgid "Include fuzzy strings"
+msgstr "Inclou-hi les cadenes difuses"
+
+#: ../src/dialogs/search-dialog.ui.h:2
+msgid "Match _entire word only"
+msgstr "F_es que coincideixi només la paraula completa"
+
+#: ../src/dialogs/search-dialog.ui.h:3
+msgid "Original text"
+msgstr "Text original"
+
+#: ../src/dialogs/search-dialog.ui.h:5
+msgid "Replace All"
+msgstr "Reemplaça-ho tot"
+
+#: ../src/dialogs/search-dialog.ui.h:6
+msgid "Replace _with: "
+msgstr "Reemplaça _per:"
+
+#: ../src/dialogs/search-dialog.ui.h:7
+msgid "Search _backwards"
+msgstr "Cerca cap _enrere"
+
+#: ../src/dialogs/search-dialog.ui.h:8
+msgid "Translated text"
+msgstr "Text traduït"
+
+#: ../src/dialogs/search-dialog.ui.h:9
+msgid "_Match case"
+msgstr "Coi_ncidència de majúscules i minúscules"
+
+#: ../src/dialogs/search-dialog.ui.h:10
+msgid "_Search for: "
+msgstr "_Cerca: "
+
+#: ../src/dialogs/search-dialog.ui.h:11
+msgid "_Wrap around"
+msgstr "Continua des de l'_inici"
+
+#: ../src/main.c:46
+msgid "[FILE...]"
+msgstr "[FITXER...]"
+
+#: ../src/main.c:72
 #, c-format
-msgid "Open %s"
-msgstr "Obre %s"
-
-#: ../src/languages.c:37
-msgid "Afrikaans"
-msgstr "Afrikaans"
-
-#: ../src/languages.c:41
-msgid "Albanian"
-msgstr "Albanès"
-
-#: ../src/languages.c:45
-msgid "Arabic"
-msgstr "Àrab"
-
-#: ../src/languages.c:49
-msgid "Azerbaijani Turkish"
-msgstr "Azerbaitjanès turc"
-
-#: ../src/languages.c:53
-msgid "Basque"
-msgstr "Basc"
-
-#: ../src/languages.c:57
-msgid "Belarusian"
-msgstr "Bielorús"
-
-#: ../src/languages.c:61
-msgid "Bengali"
-msgstr ""
-
-#: ../src/languages.c:65
-msgid "Britton"
-msgstr "Bretó"
-
-#: ../src/languages.c:69
-msgid "Bulgarian"
-msgstr "Búlgar"
-
-#: ../src/languages.c:73
-msgid "Catalan"
-msgstr "Català"
-
-#: ../src/languages.c:77
-msgid "Chinese/Simplified"
-msgstr "Xinès simplificat"
-
-#: ../src/languages.c:81
-msgid "Chinese/Traditional"
-msgstr "Xinès tradicional"
-
-#: ../src/languages.c:85
-msgid "Croatian"
-msgstr "Croat"
-
-#: ../src/languages.c:89
-msgid "Czech"
-msgstr "Txec"
-
-#: ../src/languages.c:93
-msgid "Danish"
-msgstr "Danès"
-
-#: ../src/languages.c:97
-msgid "Dutch"
-msgstr "Holandès"
-
-#: ../src/languages.c:105
-msgid "English/Canada"
-msgstr "Anglès del Canadà"
-
-#: ../src/languages.c:109
-msgid "English/GB"
-msgstr "Anglès de la Gran Bretanya"
-
-#: ../src/languages.c:113
-msgid "English/USA"
-msgstr "Anglès dels Estats Units"
-
-#: ../src/languages.c:117
-msgid "Esperanto"
-msgstr "Esperanto"
-
-#: ../src/languages.c:121
-msgid "Estonian"
-msgstr "Estonià"
-
-#: ../src/languages.c:125
-msgid "Persian"
-msgstr "Persa"
-
-#: ../src/languages.c:129
-msgid "Finnish"
-msgstr "Finès"
-
-#: ../src/languages.c:133
-msgid "French"
-msgstr "Francès"
-
-#: ../src/languages.c:137
-msgid "Galician"
-msgstr "Gallec"
-
-#: ../src/languages.c:141
-msgid "German"
-msgstr "Alemany"
-
-#: ../src/languages.c:145
-msgid "Greek"
-msgstr "Grec"
-
-#: ../src/languages.c:149
-msgid "Gujarati"
-msgstr "Gujarati"
-
-#: ../src/languages.c:153
-msgid "Hebrew"
-msgstr "Hebreu"
-
-#: ../src/languages.c:157
-msgid "Hindi"
-msgstr "Hindi"
-
-#: ../src/languages.c:161
-msgid "Hungarian"
-msgstr "Hongarès"
-
-#: ../src/languages.c:165
-msgid "Icelandic"
-msgstr "Islandès"
-
-#: ../src/languages.c:169
-msgid "Indonesian"
-msgstr "Indonesi"
-
-#: ../src/languages.c:173
-msgid "Italian"
-msgstr "Italià"
-
-#: ../src/languages.c:177
-msgid "Irish"
-msgstr "Irlandès"
-
-#: ../src/languages.c:181
-msgid "Japanese"
-msgstr "Japonès"
-
-#: ../src/languages.c:185
-msgid "Kannada"
-msgstr "Kannada"
-
-#: ../src/languages.c:189
-msgid "Korean"
-msgstr "Coreà"
-
-#: ../src/languages.c:193
-msgid "Latvian"
-msgstr "Letó"
-
-#: ../src/languages.c:197
-msgid "Lithuanian"
-msgstr "Lituà"
-
-#: ../src/languages.c:201
-msgid "Malay/Bahasa Melayu"
-msgstr "Malai/Bahasa Melayu"
-
-#: ../src/languages.c:205
-msgid "Maltese"
-msgstr "Maltès"
-
-#: ../src/languages.c:209
-msgid "Marathi"
-msgstr "Marati"
-
-#: ../src/languages.c:213
-msgid "Mongolian"
-msgstr "Mongol"
-
-#: ../src/languages.c:217
-msgid "Norwegian/Bokmaal"
-msgstr "Noruec bokmaal"
-
-#: ../src/languages.c:221
-msgid "Norwegian/Nynorsk"
-msgstr "Noruec nynorsk"
-
-#: ../src/languages.c:225
-msgid "Punjabi"
-msgstr "Panjabi"
-
-#: ../src/languages.c:229
-msgid "Polish"
-msgstr "Polonès"
-
-#: ../src/languages.c:233
-msgid "Portuguese"
-msgstr "Portuguès"
-
-#: ../src/languages.c:237
-msgid "Portuguese/Brazil"
-msgstr "Portuguès del Brasil"
-
-#: ../src/languages.c:241
-msgid "Romanian"
-msgstr "Romanès"
-
-#: ../src/languages.c:245
-msgid "Russian"
-msgstr "Rus"
-
-#: ../src/languages.c:249
-msgid "Serbian/Cyrillic"
-msgstr "Serbi en ciríl·lic"
-
-#: ../src/languages.c:253
-msgid "Serbian/Latin"
-msgstr "Serbi en llatí"
-
-#: ../src/languages.c:257
-msgid "Slovak"
-msgstr "Eslovac"
-
-#: ../src/languages.c:261
-msgid "Slovenian"
-msgstr "Eslovè"
-
-#: ../src/languages.c:265
-msgid "Spanish"
-msgstr "Espanyol"
-
-#: ../src/languages.c:269
-msgid "Spanish/Spain"
-msgstr "Espanyol d'Espanya"
-
-#: ../src/languages.c:273
-msgid "Spanish/Mexico"
-msgstr "Espanyol de Mèxic"
-
-#: ../src/languages.c:277
-msgid "Swedish"
-msgstr "Suec"
-
-#: ../src/languages.c:281
-msgid "Tagalog"
-msgstr ""
-
-#: ../src/languages.c:285
-msgid "Tamil"
-msgstr "Tàmil"
-
-#: ../src/languages.c:289
-msgid "Telugu"
-msgstr ""
-
-#: ../src/languages.c:293
-msgid "Thai"
-msgstr "Tai"
-
-#: ../src/languages.c:297
-msgid "Turkish"
-msgstr "Turc"
-
-#: ../src/languages.c:301
-msgid "Ukrainian"
-msgstr "Ucraïnès"
-
-#: ../src/languages.c:305
-msgid "Uzbekian"
-msgstr "Uzbek"
-
-#: ../src/languages.c:309
-msgid "Vietnamese"
-msgstr "Vietnamita"
-
-#: ../src/languages.c:313
-msgid "Walloon"
-msgstr "Való"
-
-#: ../src/languages.c:317
-msgid "Welsh"
-msgstr "Gal·lès"
-
-#: ../src/learn.c:380
-#, fuzzy
-msgid "gtranslator learn buffer statistics:"
-msgstr "Informacions i especificacions de muntatge del gtranslator:"
-
-#: ../src/learn.c:383
-#, c-format
-msgid "Learn buffer filename: `%s`"
-msgstr ""
-
-#.
-#. * Translators: This means the encoding of the learn buffer (XML) file.
-#.
-#: ../src/learn.c:389
-#, fuzzy, c-format
-msgid "Encoding: `%s'"
-msgstr "Codificació:"
-
-#.
-#. * Translators: "Serial number" of the learn buffer - means # of file updates.
-#.
-#: ../src/learn.c:395
-#, c-format
-msgid "Serial: `%i'"
-msgstr ""
-
-#.
-#. * Translators: That's the number of message entries in the learn buffer.
-#.
-#: ../src/learn.c:401
-#, c-format
-msgid "Number of entries: `%i'"
-msgstr ""
-
-#: ../src/main.c:71
-msgid "Specify main window geometry"
-msgstr "Indica la geometria de la finestra principal"
-
-#: ../src/main.c:71
-msgid "GEOMETRY"
-msgstr "GEOMETRY"
-
-#: ../src/main.c:119
+msgid "%s: malformed file name or URI.\n"
+msgstr "%s: el nom del fitxer o l'URI no està ben format.\n"
+
+#: ../src/main.c:108
+msgid "Gtranslator"
+msgstr "Gtranslator"
+
+#. Setup command line options
+#: ../src/main.c:111
+msgid "- Edit PO files"
+msgstr "- edita fitxers PO"
+
+#: ../src/main.c:121
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "S'ha produït un error durant la inicialització del GConf: %s."
 
-#: ../src/main.c:250
-#, fuzzy, c-format
-msgid "Couldn't open '%s': %s\n"
-msgstr "No s'ha pogut obrir el fitxer gettext comprimit (en format %s) `%s'!"
-
-#: ../src/menus.c:51
-msgid "_Go"
-msgstr "_Vés"
-
-#: ../src/menus.c:61
-msgid "_Compile"
-msgstr "_Compila"
-
-#: ../src/menus.c:62 ../src/menus.c:273
-msgid "Compile the po file"
-msgstr "Compila el fitxer PO"
-
-#: ../src/menus.c:68
-msgid "_Update"
-msgstr "_Actualitza"
-
-#: ../src/menus.c:69 ../src/menus.c:277
-msgid "Update the po file"
-msgstr "Actualitza el fitxer PO"
-
-#: ../src/menus.c:76
-msgid "Add bookmark"
-msgstr "Afegeix una adreça d'interès"
-
-#: ../src/menus.c:77
-#, fuzzy
-msgid "Add a bookmark for this message in this po file"
-msgstr "Conserva els missatges obsolets en el fitxer PO"
-
-#: ../src/menus.c:84
-msgid "Aut_otranslate..."
-msgstr "Tradueix aut_omàticament..."
-
-#: ../src/menus.c:85
-msgid "Autotranslate the file with information from your learn buffer"
+#: ../src/main.c:139
+#, c-format
+msgid "Error setting the default window icon: %s"
 msgstr ""
+"S'ha produït un error en establir la icona predeterminada de la finestra: %s"
 
-#: ../src/menus.c:92
-msgid "Remove all translations..."
+#: ../src/message-table.c:284
+msgid "Status"
+msgstr "Estat"
+
+#: ../src/message-table.c:297
+msgid "ID"
+msgstr "Identificador"
+
+#: ../src/message-table.c:313
+msgid "Original Text"
+msgstr "Text original"
+
+#: ../src/message-table.c:329
+msgid "Translated Text"
+msgstr "Text traduït"
+
+#: ../src/notebook.c:94
+#, c-format
+msgid "<b>Path:</b> %s"
+msgstr "<b>Camí:</b> %s"
+
+#: ../src/notebook.c:153
+msgid "Close document"
+msgstr "Tanca el document"
+
+#: ../src/po.c:365
+#, c-format
+msgid "Failed opening file '%s': %s"
+msgstr "Ha fallat l'obertura del fitxer «%s»: %s"
+
+#: ../src/po.c:391
+#, c-format
+msgid "The file is empty"
+msgstr "El fitxer és buit"
+
+#: ../src/po.c:405
+#, c-format
+msgid "Gettext returned a null message domain list."
+msgstr "El gettext ha retornat una llista de dominis de missatges nul·la."
+
+#: ../src/po.c:552
+#, c-format
+msgid "No messages obtained from parser."
+msgstr "No s'ha obtingut cap missatge de l'analitzador."
+
+#: ../src/po.c:793
+#, c-format
+msgid ""
+"You are saving a file with a .pot extension.\n"
+"Pot files are generated by the compilation process.\n"
+"Your file should likely be named '%s.po'."
 msgstr ""
+"Esteu desant un fitxer amb extensió .pot.\n"
+"Aquest tipus de fitxer es genera durant el procés de compilació.\n"
+"Segurament el fitxer s'hauria de dir «%s.po»"
 
-#: ../src/menus.c:93
-#, fuzzy
-msgid "Remove all existing translations from the po file"
+#: ../src/po.c:828
+#, c-format
+msgid "There was an error writing the PO file: %s"
+msgstr "S'ha produït un error en escriure el fitxer PO: %s"
+
+#: ../src/plugin-system/plugin-manager.c:54
+msgid "Plugin"
+msgstr "Connector"
+
+#: ../src/plugin-system/plugin-manager.c:55
+msgid "Enabled"
+msgstr "Habilitat"
+
+#: ../src/plugin-system/plugin-manager.c:504
+msgid "_About"
+msgstr "_Quant a"
+
+#: ../src/plugin-system/plugin-manager.c:512
+msgid "C_onfigure"
+msgstr "C_onfigura"
+
+#: ../src/plugin-system/plugin-manager.c:521
+msgid "A_ctivate"
+msgstr "A_ctiva"
+
+#: ../src/plugin-system/plugin-manager.c:532
+msgid "Ac_tivate All"
+msgstr "Ac_tiva'ls tots"
+
+#: ../src/plugin-system/plugin-manager.c:537
+msgid "_Deactivate All"
+msgstr "_Desactiva'ls tots"
+
+#: ../src/plugin-system/plugin-manager.c:796
+msgid "Active plugins"
+msgstr "Connectors actius"
+
+#: ../src/plugin-system/plugin-manager.c:825
+msgid "_About Plugin"
+msgstr "_Quant al connector"
+
+#: ../src/plugin-system/plugin-manager.c:829
+msgid "C_onfigure Plugin"
+msgstr "C_onfigura el connector"
+
+#. Translators: Insert mode
+#: ../src/statusbar.c:114 ../src/statusbar.c:242
+msgid "INS"
+msgstr "INS"
+
+# FIXME: Sobreescriu? (dpm)
+#. Translators: Overwrite mode
+#: ../src/statusbar.c:114 ../src/statusbar.c:240
+msgid "OVR"
+msgstr "SBR"
+
+#: ../src/tab.c:224
+msgid "There is an error in the message:"
+msgstr "Hi ha un error en el missatge:"
+
+#: ../src/tab.c:397
+msgid "Open comment dialog"
+msgstr "Obre el diàleg de comentaris"
+
+#: ../src/tab.c:570
+#, c-format
+msgid "Plural %d"
+msgstr "Plural %d"
+
+#: ../src/tab.c:615
+msgid "Message Table"
+msgstr "Taula de missatges"
+
+#: ../src/tab.c:650
+msgid "Context"
+msgstr "Context"
+
+#: ../src/tab.c:688
+msgid "<b>Original Text:</b>"
+msgstr "<b>Text original:</b>"
+
+#: ../src/tab.c:749
+msgid "<b>Translate_d Text:</b>"
+msgstr "<b>Te_xt traduït:</b>"
+
+#. Translaters: This string is for a toggle to display a toolbar.
+#. * The name of the toolbar is automatically computed from the widgets
+#. * on the toolbar, and is placed at the %s. Note the _ before the %s
+#. * which is used to add mnemonics. We know that this is likely to
+#. * produce duplicates, but don't worry about it. If your language
+#. * normally has a mnemonic at the start, please use the _. If not,
+#. * please remove.
+#: ../src/toolbareditor/egg-editable-toolbar.c:918
+#, c-format
+msgid "Show “_%s”"
+msgstr "Mostra «_%s»"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1381
+msgid "_Move on Toolbar"
+msgstr "_Mou dins de la barra d'eines"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1382
+msgid "Move the selected item on the toolbar"
+msgstr "Mou l'element seleccionat dins de la barra d'eines"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1383
+msgid "_Remove from Toolbar"
+msgstr "_Suprimeix de la barra d'eines"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1384
+msgid "Remove the selected item from the toolbar"
+msgstr "Suprimeix l'element seleccionat de la barra d'eines"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1385
+msgid "_Delete Toolbar"
+msgstr "_Suprimeix la barra d'eines"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1386
+msgid "Remove the selected toolbar"
+msgstr "Suprimeix la barra d'eines seleccionada"
+
+#: ../src/toolbareditor/egg-toolbar-editor.c:485
+msgid "Separator"
+msgstr "Separador"
+
+#: ../src/translation-memory/berkeley/db-base.c:165
+msgid "Running recovery..."
+msgstr "S'està executant la recuperació..."
+
+#: ../src/translation-memory/berkeley/db-base.c:173
+#, c-format
+msgid "There was an error recovering the database: %s"
+msgstr "S'ha produït un error en recuperar la base de dades: %s"
+
+#: ../src/translation-memory/berkeley/db-base.c:181
+#, c-format
+msgid "There was an error in database: %s"
+msgstr "S'ha produït un error en la base de dades: %s"
+
+#: ../src/translation-memory/translation-memory-ui.c:209
+#, c-format
+msgid "Insert Option nº %d"
+msgstr "Insereix l'opció núm. %d"
+
+#: ../src/translation-memory/translation-memory-ui.c:286
+msgid "Shortcut"
+msgstr "Drecera"
+
+#: ../src/translation-memory/translation-memory-ui.c:297
+msgid "Level"
+msgstr "Nivell"
+
+#: ../src/translation-memory/translation-memory-ui.c:308
+msgid "String"
+msgstr "Cadena"
+
+#: ../src/utils.c:316
+msgid "Please check your installation."
+msgstr "Comproveu la vostra instal·lació."
+
+#: ../src/utils.c:381
+#, c-format
+msgid "Unable to open ui file %s. Error: %s"
+msgstr "No s'ha pogut obrir el fitxer d'interfície gràfica %s. Error %s"
+
+#: ../src/utils.c:400
+#, c-format
+msgid "Unable to find the object '%s' inside file %s."
+msgstr "No s'ha pogut trobar l'objecte «%s» dins del fitxer %s."
+
+#: ../src/utils.c:808
+msgid ""
+"Unable to display help. Please make sure the Gtranslator documentation "
+"package is installed."
 msgstr ""
-"Emplena automàticament les traduccions que falten a partir del domini de "
-"consulta predeterminat"
+"No s'ha pogut mostrar l'ajuda. Assegureu-vos que el paquet de documentació "
+"del Gtranslator està instal·lat."
 
-#: ../src/menus.c:101
-#, fuzzy
-msgid "Open from _URI..."
-msgstr "Obre a partir d'un _URI"
-
-#: ../src/menus.c:102
-msgid "Open a po file from a given URI"
-msgstr "Obre un fitxer PO a partir d'un URI indicat"
-
-#: ../src/menus.c:112
-msgid "Recen_t files"
-msgstr "Fitxers recen_ts"
-
-#: ../src/menus.c:139
-msgid "_Header..."
-msgstr "_Capçalera..."
-
-#: ../src/menus.c:140
-msgid "Edit po file header"
-msgstr "Edita la capçalera del fitxer po"
-
-#: ../src/menus.c:147
-msgid "C_omment..."
-msgstr "C_omentari..."
-
-#: ../src/menus.c:148
-msgid "Edit message comment"
-msgstr ""
-
-#: ../src/menus.c:155
-msgid "Copy _message -> translation"
-msgstr ""
-
-#: ../src/menus.c:156
-msgid "Copy the original message contents and paste them as translation"
-msgstr ""
-
-#: ../src/menus.c:163
-msgid "Fu_zzy"
-msgstr "Di_fús"
-
-#: ../src/menus.c:164
-msgid "Toggle fuzzy status of a message"
-msgstr "Commuta si el missatge és difús o no"
-
-#: ../src/menus.c:177
-msgid "_First"
-msgstr "_Primer"
-
-#: ../src/menus.c:178 ../src/menus.c:294
-msgid "Go to the first message"
-msgstr "Vés al primer missatge"
-
-#: ../src/menus.c:184
-msgid "_Back"
-msgstr "_Precedent"
-
-#: ../src/menus.c:185 ../src/menus.c:298
-msgid "Move back one message"
-msgstr "Vés un missatge enrere"
-
-#: ../src/menus.c:192
-msgid "_Next"
-msgstr "_Següent"
-
-#: ../src/menus.c:193 ../src/menus.c:303
-#, fuzzy
-msgid "Move forward one message"
-msgstr "Visualitza els formats de C del missatge"
-
-#: ../src/menus.c:199
-msgid "_Last"
-msgstr "_Últim"
-
-#: ../src/menus.c:200 ../src/menus.c:307
-msgid "Go to the last message"
-msgstr "Vés a l'últim missatge"
-
-#: ../src/menus.c:207
-msgid "_Go to..."
-msgstr "_Vés a..."
-
-#: ../src/menus.c:208
-msgid "Goto specified message number"
-msgstr "Vés al número de missatge indicat"
-
-#: ../src/menus.c:214
-msgid "Next fuz_zy"
-msgstr "Di_fús següent"
-
-#: ../src/menus.c:215
-msgid "Go to next fuzzy message"
-msgstr "Vés al missatge difús següent"
-
-#: ../src/menus.c:221
-msgid "Next _untranslated"
-msgstr "_Sense traduir següent"
-
-#: ../src/menus.c:222 ../src/menus.c:312
-msgid "Go to next untranslated message"
-msgstr "Vés al missatge sense traduir següent"
-
-#: ../src/menus.c:232
-msgid "_Bookmarks"
-msgstr "_Adreces d'interès"
-
-#: ../src/menus.c:233
-msgid "_Colorschemes"
-msgstr "Esquemes de _color"
-
-#: ../src/menus.c:247
-msgid "gtranslator _website"
-msgstr "Lloc _web del gtranslator"
-
-#: ../src/menus.c:248
-msgid "gtranslator's homepage on the web"
-msgstr "Pàgina inicial del gtranslator al web"
-
-#: ../src/menus.c:259
-msgid "Open"
-msgstr "Obre"
-
-#: ../src/menus.c:260
-msgid "Open a po file"
-msgstr "Obre un fitxer PO"
-
-#: ../src/menus.c:263
-msgid "Save"
-msgstr "Desa"
-
-#: ../src/menus.c:264
-msgid "Save File"
-msgstr "Desa el fitxer"
-
-#: ../src/menus.c:267
-msgid "Save as"
-msgstr "Anomena i desa"
-
-#: ../src/menus.c:268
-msgid "Save file with a different name"
-msgstr "Reanomena i desa el fitxer"
-
-#: ../src/menus.c:272
-msgid "Compile"
-msgstr "Compila"
-
-#: ../src/menus.c:276
-msgid "Update"
-msgstr "Actualitza"
-
-#: ../src/menus.c:280
-msgid "Header"
-msgstr "Capçalera"
-
-#: ../src/menus.c:281
-msgid "Edit the header"
-msgstr "Edita la capçalera"
-
-#: ../src/menus.c:285
-msgid "Undo"
-msgstr "Desfés"
-
-#: ../src/menus.c:286
-msgid "Undo the last performed action"
-msgstr "Desfés l'última acció realitzada"
-
-#: ../src/menus.c:293
-msgid "First"
-msgstr "Primer"
-
-#: ../src/menus.c:297
-msgid "Back"
-msgstr "Precedent"
-
-#: ../src/menus.c:302
-msgid "Next"
-msgstr "Següent"
-
-#: ../src/menus.c:306
-msgid "Last"
-msgstr "Últim"
-
-#: ../src/menus.c:311
-msgid "Missing"
-msgstr "Sense traduir"
-
-#: ../src/menus.c:319
-msgid "Go to the next fuzzy translation"
-msgstr "Vés a la traducció difusa següent"
-
-#: ../src/menus.c:324
-msgid "Go to"
-msgstr "Vés a"
-
-#: ../src/menus.c:325
-msgid "Go to specified message number"
-msgstr "Vés al número de missatge indicat"
-
-#: ../src/menus.c:328
-msgid "Find"
-msgstr "Cerca"
-
-#: ../src/menus.c:329
-msgid "Find string in po file"
-msgstr "Troba una cadena en el fitxer PO"
-
-#: ../src/menus.c:333
-msgid "Replace string in po file"
-msgstr "Reemplaça una cadena en el fitxer PO"
-
-#: ../src/message.c:94
-msgid "Couldn't get the message!"
-msgstr "No s'ha pogut recuperar el missatge!"
-
-#: ../src/message.c:116
-msgid "There are no fuzzy messages left."
-msgstr "No hi queden missatges difusos."
-
-#: ../src/message.c:140
-msgid "All messages seem to be translated."
-msgstr "Sembla que tots els missatges estan traduïts."
-
-#: ../src/message.c:272
+#: ../src/view.c:81
 #, c-format
 msgid "gtkspell error: %s\n"
-msgstr ""
+msgstr "Error del GtkSpell: %s\n"
 
-#: ../src/message.c:273
+#: ../src/view.c:82
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1073,472 +1824,977 @@ msgstr ""
 "No s'ha pogut inicialitzar el GtkSpell.\n"
 " %s"
 
-#: ../src/messages-table.c:210
-msgid "Original"
-msgstr ""
+#: ../src/window.c:109
+msgid "_File"
+msgstr "_Fitxer"
 
-#: ../src/page.c:199
-#, c-format
-msgid "Error autosaving file: %s"
-msgstr ""
+#: ../src/window.c:110
+msgid "_Edit"
+msgstr "_Edita"
 
-#: ../src/parse.c:86
-msgid "Parser output"
-msgstr ""
+#: ../src/window.c:111
+msgid "_View"
+msgstr "_Visualitza"
 
-#: ../src/parse.c:254
-#, c-format
-msgid "Failed opening file '%s': %s"
-msgstr ""
+#. { "Bookmarks", NULL, N_("_Bookmarks") },
+#. { "Actions", NULL, N_("_Actions") },
+#: ../src/window.c:114
+msgid "_Search"
+msgstr "_Cerca"
 
-#: ../src/parse.c:275
-msgid "Gettext returned a null message domain list."
-msgstr ""
+#: ../src/window.c:115
+msgid "_Go"
+msgstr "_Vés"
 
-#: ../src/parse.c:317
-msgid "No messages obtained from parser."
-msgstr ""
+#: ../src/window.c:116
+msgid "_Help"
+msgstr "A_juda"
 
-#: ../src/parse.c:379 ../src/parse.c:383
-msgid "N/A"
-msgstr ""
+#: ../src/window.c:120
+msgid "Open a PO file"
+msgstr "Obre un fitxer PO"
 
-#.
-#. * Set window title
-#.
-#: ../src/parse.c:417
-#, c-format
-msgid "gtranslator -- %s"
-msgstr "gtranslator -- %s"
+#: ../src/window.c:122
+msgid "_Recent Files"
+msgstr "Fitxers _recents"
 
-#: ../src/parse.c:539
-#, fuzzy, c-format
-msgid ""
-"You are saving a file with a .pot extension.\n"
-"Pot files are generated by the compilation process.\n"
-"Your file should likely be named '%s.po'."
-msgstr ""
-"Esteu provant de desar un fitxer amb extensió *.pot,\n"
-"i els fitxers en *.pot els generen els programes.\n"
-"L'extensió del vostre fitxer hauria ser *.po.\n"
-"Segurament el fitxer s'hauria de dir %s.po"
+#: ../src/window.c:125
+msgid "Quit the program"
+msgstr "Surt del programa"
 
-#: ../src/parse.c:579
-#, c-format
-msgid ""
-"File %s\n"
-"contains %d fuzzy message"
-msgid_plural ""
-"File %s\n"
-"contains %d fuzzy messages"
-msgstr[0] ""
-"El fitxer %s\n"
-"conté %d missatge difús"
-msgstr[1] ""
-"El fitxer %s\n"
-"conté %d missatges difusos"
+#. Edit menu
+#: ../src/window.c:129
+msgid "T_oolbar"
+msgstr "Bar_ra d'eines"
 
-#: ../src/preferences.c:180
-msgid "Couldn't generate the current date!"
-msgstr "No s'ha pogut generar la data actual!"
+#: ../src/window.c:132
+msgid "Edit gtranslator preferences"
+msgstr "Edita les preferències del Gtranslator"
 
-#: ../src/prefs.c:464 ../src/prefs.c:567
-msgid " Categories: "
-msgstr ""
+#: ../src/window.c:134 ../src/window.c:181
+msgid "_Header..."
+msgstr "_Capçalera..."
 
-#: ../src/prefs.c:483
-msgid ""
-"Note: It was not possible to determine GNU header for plural forms. Your GNU "
-"gettext tools may be too old or they do not contain a suggested value for "
-"your language."
-msgstr ""
+#. Help menu
+#: ../src/window.c:138
+msgid "_Contents"
+msgstr "_Contingut"
 
-#: ../src/prefs.c:492
-msgid ""
-"Note: Your settings do not contain a plural forms string. These data "
-"retrieved from GNU gettext tools."
-msgstr ""
+#: ../src/window.c:150
+msgid "Save the current file"
+msgstr "Desa el fitxer PO actual"
 
-#: ../src/prefs.c:497
-msgid ""
-"Note: Your settings contain an invalid plural forms string. These data "
-"retrieved from GNU gettext tools."
-msgstr ""
+#: ../src/window.c:153
+msgid "Save the current file with another name"
+msgstr "Desa el fitxer actual amb un altre nom"
 
-#: ../src/prefs.c:546
-msgid "gtranslator -- options"
-msgstr "gtranslator -- opcions"
+#: ../src/window.c:159
+msgid "Close the current file"
+msgstr "Tanca el fitxer PO actual"
 
-#: ../src/prefs.c:598
-msgid "Files"
-msgstr "Fitxers"
+#: ../src/window.c:164
+msgid "Undo last operation"
+msgstr "Desfés l'última acció realitzada"
 
-#. General item
-#: ../src/prefs.c:605
-msgid "General"
-msgstr "General"
+#: ../src/window.c:167
+msgid "Redo last undone operation"
+msgstr "Refés l'última acció desfeta"
 
-#: ../src/prefs.c:613
-msgid "Warn if po file contains fuzzy translations"
-msgstr "Avisa'm si el fitxer PO conté traduccions difuses"
+#: ../src/window.c:170
+msgid "Cut the selected text"
+msgstr "Retalla el text seleccionat"
 
-#: ../src/prefs.c:617
-msgid "Delete compiled files (e.g. \"project.gmo\")"
-msgstr ""
+#: ../src/window.c:173
+msgid "Copy the selected text"
+msgstr "Copia el text seleccionat"
 
-#. Autosave item
-#: ../src/prefs.c:623
-msgid "Autosave"
-msgstr "Desament automàtic"
+#: ../src/window.c:176
+msgid "Paste the contents of the clipboard"
+msgstr "Enganxa el contingut del porta-retalls"
 
-#: ../src/prefs.c:631
-#, fuzzy
-msgid "Automatically save at regular intervals"
+#: ../src/window.c:179
+msgid "Clear the selected translation"
+msgstr "Neteja la traducció seleccionada"
+
+#: ../src/window.c:183
+msgid "C_omment..."
+msgstr "C_omentari..."
+
+#: ../src/window.c:184
+msgid "Edit message comment"
+msgstr "Edita el comentari del missatge"
+
+#: ../src/window.c:186
+msgid "Copy _Message to Translation"
+msgstr "Copia el _missatge a la traducció"
+
+#: ../src/window.c:187
+msgid "Copy original message contents to the translation field"
+msgstr "Copia el contingut del missatge original al camp de la traducció"
+
+#: ../src/window.c:189
+msgid "Toggle _Fuzzy Status"
+msgstr "Commuta l'estat di_fús"
+
+#: ../src/window.c:190
+msgid "Toggle fuzzy status of a message"
+msgstr "Commuta si el missatge és difús o no"
+
+#: ../src/window.c:192 ../src/window.c:199
+msgid "_Translation Memory"
+msgstr "Memòria de _traducció"
+
+#. View menu
+#: ../src/window.c:196
+msgid "_Context"
+msgstr "_Context"
+
+#: ../src/window.c:197
+msgid "Show the Context panel"
+msgstr "Mostra el quadre de context"
+
+#: ../src/window.c:200
+msgid "Show the Translation Memory panel"
+msgstr "Mostra el quadre de la memòria de traducció"
+
+#. { "ViewSidePane", NULL, N_("Side _Pane"), "F9",
+#. N_("Show or hide the side pane in the current window"),
+#. NULL },
+#. Bookmarks menu
+#. { "BookmarksAdd", GTK_STOCK_ADD, N_("_Add Bookmark"), "<control>D",
+#. N_("Add a bookmark to the current message"), NULL},
+#. { "BookmarksEdit", GTK_STOCK_EDIT, N_("_Edit Bookmarks"), "<control>B",
+#. N_("Edit stored bookmarks"), NULL},
+#. Action menu
+#. { "ActionsCompile", GTK_STOCK_CONVERT, N_("_Compile"), NULL,
+#. N_("Compile the current file to a MO file"), NULL },
+#. { "ActionsRefresh", GTK_STOCK_REFRESH, NULL, NULL,
+#. N_("  "), NULL },
+#. //G_CALLBACK(gtranslator_bookmark_adding_dialog) },
+#. { "ActionsAutotranslate", NULL, N_("Aut_otranslate..."), NULL,
+#. N_("Autotranslate the current file using a translation memory"), NULL},
+#. //G_CALLBACK(gtranslator_auto_translation_dialog) },
+#. { "ActionsRemoveTranslations", GTK_STOCK_REMOVE, N_("Remo_ve All Translations..."), NULL,
+#. N_("Remove all existing translations"), NULL},
+#. //G_CALLBACK(gtranslator_remove_all_translations_dialog) },
+#. Go menu
+#: ../src/window.c:226
+msgid "Prev F_ile"
+msgstr "_Fitxer anterior"
+
+#: ../src/window.c:227 ../src/window.c:230
+msgid "Go to the next file"
+msgstr "Vés al fitxer següent"
+
+#: ../src/window.c:229
+msgid "Next Fi_le"
+msgstr "Fitxer _següent"
+
+#: ../src/window.c:232
+msgid "_Previous Message"
+msgstr "_Missatge anterior"
+
+#: ../src/window.c:233
+msgid "Move back one message"
+msgstr "Vés un missatge enrere"
+
+#: ../src/window.c:235
+msgid "_Next Message"
+msgstr "Missatge _següent"
+
+#: ../src/window.c:236
+msgid "Move forward one message"
+msgstr "Vés un missatge cap endavant"
+
+#: ../src/window.c:238
+msgid "_Go to Message..."
+msgstr "_Vés al missatge..."
+
+#: ../src/window.c:239
+msgid "Jumps to a specific message"
+msgstr "Va al missatge especificat"
+
+#: ../src/window.c:241
+msgid "_First Message"
+msgstr "_Primer missatge"
+
+#: ../src/window.c:242
+msgid "Go to the first message"
+msgstr "Vés al primer missatge"
+
+#: ../src/window.c:244
+msgid "_Last Message"
+msgstr "_Darrer missatge"
+
+#: ../src/window.c:245
+msgid "Go to the last message"
+msgstr "Vés a l'últim missatge"
+
+#: ../src/window.c:247
+msgid "Next Fuz_zy"
+msgstr "Di_fús següent"
+
+#: ../src/window.c:248
+msgid "Go to the next fuzzy message"
+msgstr "Vés al missatge difús següent"
+
+#: ../src/window.c:250
+msgid "Previous Fuzz_y"
+msgstr "Di_fús anterior"
+
+#: ../src/window.c:251
+msgid "Go to the previous fuzzy message"
+msgstr "Vés al missatge difús anterior"
+
+#: ../src/window.c:253
+msgid "Next _Untranslated"
+msgstr "_Sense traduir següent"
+
+#: ../src/window.c:254
+msgid "Go to the next untranslated message"
 msgstr "Vés al missatge sense traduir següent"
 
-#: ../src/prefs.c:639
-msgid "Autosave interval:"
-msgstr "Interval entre desaments automàtics:"
+#: ../src/window.c:256
+msgid "Previ_ous Untranslated"
+msgstr "Sense traduir an_terior"
 
-#: ../src/prefs.c:640
-msgid "Append a suffix to automatically saved files"
-msgstr "Afegeix un sufix als fitxers desats automàticament"
+#: ../src/window.c:257
+msgid "Go to the previous untranslated message"
+msgstr "Vés al missatge sense traduir anterior"
 
-#: ../src/prefs.c:647
-msgid "Suffix:"
-msgstr "Sufix:"
+#: ../src/window.c:259
+msgid "Next Fu_zzy or Untranslated"
+msgstr "_Sense traduir o difús següent"
 
-#. Recent item
-#: ../src/prefs.c:649
-msgid "Recent files"
-msgstr "Fitxers recents"
+#: ../src/window.c:260
+msgid "Go to the next fuzzy or untranslated message"
+msgstr "Vés al missatge sense traduir o difús següent"
 
-#: ../src/prefs.c:664
-msgid "Maximum number of entries in the recent files list:"
-msgstr ""
+#: ../src/window.c:262
+msgid "Pre_vious Fuzzy or Untranslated"
+msgstr "S_ense traduir o difús anterior"
 
-#: ../src/prefs.c:665
-#, fuzzy
-msgid "Check recent files before showing in recent files list"
-msgstr "Comprova cada fitxer recent abans d'incloure'l a la llista"
+#: ../src/window.c:263
+msgid "Go to the previous fuzzy or untranslated message"
+msgstr "Vés al missatge sense traduir o difús anterior"
 
-#: ../src/prefs.c:676
-msgid "Editor"
-msgstr "Editor"
+#: ../src/window.c:268
+msgid "Search for text"
+msgstr "Cerca text"
 
-#. Text item
-#: ../src/prefs.c:681
-msgid "Text display"
-msgstr "Visualització del text"
+#: ../src/window.c:277
+msgid "Search for and replace text"
+msgstr "Cerca i reemplaça text"
 
-#: ../src/prefs.c:695
-msgid "Highlight syntax of the translation message"
-msgstr ""
+#: ../src/window.c:752
+msgid "Untranslated"
+msgstr "Sense traduir"
 
-#: ../src/prefs.c:700
-msgid "Use special character to indicate white space"
-msgstr ""
+#: ../src/window.c:754
+msgid "Translated"
+msgstr "Traduïdes"
 
-#: ../src/prefs.c:705
-#, fuzzy
-msgid "Hotkey indicating character:"
-msgstr "Fes servir espai addicional per indicar el caràcter especial"
+#: ../src/window.c:756
+msgid "Fuzzy"
+msgstr "Difuses"
 
-#: ../src/prefs.c:714
-msgid "Apply own fonts"
-msgstr "Aplica tipus de lletra propis"
+#: ../src/window.c:761
+#, c-format
+msgid "Status: %s"
+msgstr "Estat: %s"
 
-#: ../src/prefs.c:718
-msgid "gtranslator -- font selection/msgid font"
-msgstr "gtranslator -- selecció de lletra / lletra del msgid"
+#: ../src/window.c:762
+#, c-format
+msgid "Current: %d"
+msgstr "Actual: %d"
 
-#: ../src/prefs.c:722
-msgid "Original text font:"
-msgstr "Tipus de lletra del text original:"
+#: ../src/window.c:763
+#, c-format
+msgid "Total: %d"
+msgstr "Total: %d"
 
-#: ../src/prefs.c:723
-msgid "gtranslator -- font selection/msgstr font"
-msgstr "gtranslator -- selecció de la lletra / lletra del msgstr"
+#: ../src/window.c:764
+#, c-format
+msgid "Fuzzy: %d"
+msgstr "Difuses: %d"
 
-#: ../src/prefs.c:727
-msgid "Translation font:"
-msgstr "Tipus de lletra de la traducció:"
-
-#. Contents item
-#: ../src/prefs.c:730
-msgid "Contents"
-msgstr "Continguts"
-
-#: ../src/prefs.c:743
-msgid "Remove fuzzy status if message is changed"
-msgstr "Suprimeix l'estat difús del missatge si ha canviat"
-
-#: ../src/prefs.c:747
-#, fuzzy
-msgid "Keep obsolete messages in the po files"
-msgstr "Conserva els missatges obsolets en el fitxer PO"
-
-#: ../src/prefs.c:752
-msgid "Instant spell checking"
-msgstr "Verificació de l'ortografia instantània"
-
-#: ../src/prefs.c:763 ../src/prefs.c:778
-msgid "PO header"
-msgstr "Capçalera PO"
-
-#: ../src/prefs.c:772
-msgid "Personal Information"
-msgstr "Dades personals"
-
-#: ../src/prefs.c:789
-msgid "Use self contact info from Evolution Data Server"
-msgstr ""
-
-#: ../src/prefs.c:799
-msgid "<i>Unable to get email from Evolution Data Server.</i>"
-msgstr ""
-
-#: ../src/prefs.c:804
-msgid "My name:"
-msgstr "Nom:"
-
-#: ../src/prefs.c:809
-msgid "My Email:"
-msgstr "Correu electrònic:"
-
-#: ../src/prefs.c:813
-msgid "<b>Author's info</b>"
-msgstr "<b>Informació de l'autor</b>"
-
-#: ../src/prefs.c:817
-msgid "<i>Unable to get personal info from Evolution Data Server.</i>"
-msgstr "<i>No s'ha pogut obtenir les dades de l'Evolution Data Server.</i>"
-
-#: ../src/prefs.c:835
-msgid "Author's name:"
-msgstr "Nom de l'autor:"
-
-#: ../src/prefs.c:841
-msgid "Author's email:"
-msgstr "Correu electrònic de l'autor:"
-
-#. Language item
-#: ../src/prefs.c:852
-msgid "Language settings"
-msgstr "Paràmetres de la llengua"
-
-#: ../src/prefs.c:879
-msgid "Language code:"
-msgstr "Codi de la llengua"
-
-#: ../src/prefs.c:905
-msgid "Plural forms string:"
-msgstr "Cadena de formes plurals:"
-
-#: ../src/prefs.c:920
-msgid "Functionality"
-msgstr "Funcionalitat"
-
-#: ../src/prefs.c:935
-msgid "The Possibility to update a po file from within gtranslator"
-msgstr ""
-
-#: ../src/prefs.c:939
-#, fuzzy
-msgid "The Possibility to remove all translations from a po file"
-msgstr ""
-"Emplena automàticament les traduccions que falten a partir del domini de "
-"consulta predeterminat"
-
-#: ../src/prefs.c:943
-msgid "Show instant comment view in main pane"
-msgstr ""
-
-#: ../src/prefs.c:947
-#, fuzzy
-msgid "Save geometry on exit and restore it on startup"
-msgstr "Desa la geometria quan surtis i restaura-la quan engegis"
-
-#. Messages table item
-#: ../src/prefs.c:953
-#, fuzzy
-msgid "Messages table"
-msgstr "Mostra la taula de missatges"
-
-#: ../src/prefs.c:961
-msgid "Show the messages table (requires restart)"
-msgstr ""
-
-#: ../src/prefs.c:965
-msgid "Collapse all entries by default"
-msgstr ""
-
-#: ../src/prefs.c:976
-msgid "Autotranslation"
-msgstr "Traducció automàtica"
-
-#: ../src/prefs.c:988
-msgid "Query the personal learn buffer while autotranslating"
-msgstr ""
-
-#: ../src/prefs.c:992
-#, fuzzy
-msgid "Automatically learn a newly translated message"
-msgstr "Vés al missatge sense traduir següent"
-
-#. Fuzzy item
-#: ../src/prefs.c:998
-msgid "Fuzzy matching"
-msgstr ""
-
-#: ../src/prefs.c:1012
-msgid "Use \"fuzzy\" matching routines for learn buffer queries"
-msgstr ""
-
-#: ../src/prefs.c:1019
-msgid "Minimal required similarity persentage for fuzzy queries:"
-msgstr ""
-
-#: ../src/prefs.c:1076
-msgid "Please enter your name!"
-msgstr "Introduïu el vostre nom."
-
-#: ../src/prefs.c:1105
-msgid "Please enter your EMail address!"
-msgstr "Introduïu la vostra adreça de correu electrònic."
-
-#: ../src/prefs.c:1125
-msgid "Please enter a valid EMail address!"
-msgstr "Introduïu una adreça de correu electrònic vàlida."
-
-#: ../src/replace.c:162
-#, fuzzy
-msgid "No replacements made!"
-msgstr "No s'ha fet cap reemplaçament!"
+#: ../src/window.c:765
+#, c-format
+msgid "Untranslated: %d"
+msgstr "Sense traduir: %d"
 
 #.
-#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
-#. *
-#. * Translators: you should translate this foo'sh string into something
-#. *  another than a 'Y' to avoid the usage of the mid dot (U+00B7) in the
-#. *   text displaying routines of gtranslator.
+#. * Translators: The title of the window when there is only one tab
 #.
-#: ../src/runtime-config.c:72
-msgid "Y"
-msgstr "N"
-
-#.
-#. * Translators: this character is used if the middle dot
-#. *  can't be used under your locale.
-#.
-#: ../src/runtime-config.c:88 ../src/runtime-config.c:93
-msgid "^"
-msgstr ""
-
-#: ../src/save.c:116
-#, fuzzy, c-format
-msgid "Couldn't save compiled gettext file `%s'!"
-msgstr "No s'ha pogut obrir el fitxer gettext compilat `%s'!"
-
-#: ../src/save.c:159
-#, fuzzy, c-format
-msgid "Couldn't save compressed gettext file `%s'!"
-msgstr "No s'ha pogut obrir el fitxer gettext comprimit `%s'!"
-
-#.
-#. * The %s format here stands for the used
-#. *  compressions program (gzip, bzip2 etc.)
-#.
-#: ../src/save.c:169
-#, fuzzy, c-format
-msgid "Couldn't save %s'd gettext file `%s'!"
-msgstr "No s'ha pogut obrir el fitxer gettext comprimit (en format %s) `%s'!"
-
-#: ../src/save.c:227
-#, fuzzy, c-format
-msgid "Couldn't save zip'ed po file `%s'!"
-msgstr "No s'ha pogut obrir el fitxer gettext comprimit (en format zip) `%s'!"
-
-#: ../src/session.c:85
-msgid "Session restored successfully."
-msgstr "S'ha restaurat la sessió amb èxit."
-
-#: ../src/sighandling.c:65
+#: ../src/window.c:869 ../src/window.c:873
 #, c-format
-msgid "Saving file failed: %s"
-msgstr ""
+msgid "gtranslator - %s"
+msgstr "Gtranslator - %s"
 
-#: ../src/stylistics.c:265
-msgid "No font set! Using default font"
-msgstr ""
-"No s'ha indicat cap tipus de lletra! S'està fent servir el predeterminat"
-
-#.
-#. * Use gtranslator's font in this case -- should be a fallback font
-#. *  for your language.
-#.
-#: ../src/stylistics.c:271
-msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
-msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
-
-#: ../src/utils.c:274 ../src/utils.c:291
+#: ../src/window.c:871
 #, c-format
-msgid "Can't create directory `%s'!"
-msgstr "No es pot crear el directori `%s'!"
+msgid "gtranslator - *%s"
+msgstr "Gtranslator - *%s"
 
-#: ../src/utils.c:874
+#: ../src/window.c:878
+msgid "gtranslator"
+msgstr "Gtranslator"
+
+#: ../src/window.c:1234
+msgid "Toolbar Editor"
+msgstr "Editor de la barra d'eines"
+
+#: ../src/window.c:1552
+msgid "Documents"
+msgstr "Documents"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-cancel"
+
+#~ msgid "gtk-ok"
+#~ msgstr "gtk-ok"
+
+#~ msgid "The GNOME translation program"
+#~ msgstr "El programa de traducció del GNOME"
+
+#~ msgid "_View/_Bookmarks/"
+#~ msgstr "_Visualitza/_Adreces d'interès/"
+
+#~ msgid "Open %s (%s)"
+#~ msgstr "Obre %s (%s)"
+
+#~ msgid "Can't apply color scheme file `%s'!"
+#~ msgstr "No es pot aplicar el fitxer de combinació de colors `%s'!"
+
+#~ msgid "Couldn't retrieve author information!"
+#~ msgstr "No s'han pogut recuperar les dades de l'autor!"
+
+#~ msgid "Unknown"
+#~ msgstr "Desconegut"
+
+#~ msgid "<Not Given>"
+#~ msgstr "<No s'ha indicat>"
+
+#~ msgid "_View/_Colorschemes/"
+#~ msgstr "_Visualitza/Esquemes de color:"
+
+#~ msgid "Activate colorscheme %s"
+#~ msgstr "Activa l'esquema de color %s"
+
 #, fuzzy
-msgid "Sorry, msginit isn't available on your system!"
-msgstr "El msgfmt no és disponible en el vostre sistema!"
+#~ msgid "An error occurred while msgfmt was executed:\n"
+#~ msgstr "S'ha produït un error mentre s'executava el msgfmt:\n"
 
-#: ../src/utils_gui.c:141
-#, c-format
-msgid "The geometry string \"%s\" couldn't be parsed!"
-msgstr "La cadena de geometria \"%s\" no s'ha pogut analitzar!"
+#~ msgid "Sorry, msgfmt isn't available on your system!"
+#~ msgstr "El msgfmt no és disponible en el vostre sistema!"
 
-#: ../src/utils_gui.c:355
-#, fuzzy, c-format
-msgid "The necessary decompression program `%s' is not installed!"
-msgstr "Hi falta el programa de descompressió `%s', que és necessari!"
+#~ msgid ""
+#~ "Compile successful:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "S'ha compilat amb èxit:\n"
+#~ "%s"
 
-#: ../src/utils_gui.c:360
-#, fuzzy, c-format
-msgid "The necessary compression program `%s' is not installed!"
-msgstr "Hi falta el programa de compressió `%s', que és necessari!"
+#~ msgid "Save local copy of file as..."
+#~ msgstr "Anomena i desa una còpia local del fitxer..."
 
-#: ../src/vfs-handle.c:121
-#, c-format
-msgid "Couldn't create temporary directory `%s'!"
-msgstr "El directori temporal `%s' no s'ha pogut crear!"
+#~ msgid ""
+#~ "File %s\n"
+#~ "was changed. Save?"
+#~ msgstr ""
+#~ "El fitxer %s\n"
+#~ "ha canviat. Voleu desar-ho?"
 
-#: ../src/vfs-handle.c:149
-#, c-format
-msgid "File `%s' couldn't be found!"
-msgstr "No s'ha pogut trobar el fitxer `%s'!"
+#~ msgid "gtranslator -- edit comment"
+#~ msgstr "gtranslator -- edita el comentari"
 
-#: ../src/vfs-handle.c:154
-#, c-format
-msgid "Malformed URI `%s' entered!"
-msgstr "Heu introduït un URI mal format: `%s'!"
+#~ msgid "Comment:"
+#~ msgstr "Comentari:"
 
-#: ../src/vfs-handle.c:159
-#, c-format
-msgid "Host `%s' couldn't be found!"
-msgstr "No s'ha pogut trobar l'ordinador central `%s'!"
+#~ msgid "gtranslator -- go to"
+#~ msgstr "gtranslator -- vés a"
 
-#: ../src/vfs-handle.c:164
-#, c-format
-msgid "Hostname `%s' is not valid!"
-msgstr "El nom d'ordinador central `%s' no és vàlid!"
+#~ msgid "Find in the po file"
+#~ msgstr "Cerca en el fitxer PO"
 
-#: ../src/vfs-handle.c:169
-#, c-format
-msgid "Host `%s' has no address!"
-msgstr "L'ordinador central `%s' no té adreça!"
+#, fuzzy
+#~ msgid "Enter search string:"
+#~ msgstr "Introduïu la cadena que voleu cercar:"
 
-#: ../src/vfs-handle.c:174
-msgid "Transfer interrupted!"
-msgstr "La transferència s'ha interromput!"
+#~ msgid "Case sensitive"
+#~ msgstr "Distingeix majúscules i minúscules"
+
+#~ msgid "English"
+#~ msgstr "Anglès"
+
+#~ msgid "Ignore hotkeys"
+#~ msgstr "Ignora els acceleradors"
+
+#~ msgid "String to replace:"
+#~ msgstr "Reemplaça la cadena:"
+
+#~ msgid "Replace string:"
+#~ msgstr "Per la cadena:"
+
+#~ msgid "Please enter a string to replace!"
+#~ msgstr "Introduïu una cadena per a reemplaçar"
+
+#~ msgid ""
+#~ "File %s\n"
+#~ "was changed. Do you want to revert to saved copy?"
+#~ msgstr ""
+#~ "El fitxer %s\n"
+#~ "ha canviat. Voleu tornar a la còpia desada?"
+
+#~ msgid "gtranslator -- open from URI"
+#~ msgstr "gtranslator -- obre des d'un URI"
+
+#~ msgid "Enter URI:"
+#~ msgstr "Introduïu l'URI:"
+
+#~ msgid "No URI given!"
+#~ msgstr "No s'ha indicat cap URI!"
+
+#~ msgid ""
+#~ "Open recovery file for `%s'?\n"
+#~ "It was saved by gtranslator before gtranslator last closed\n"
+#~ "and may contain your hard work!\n"
+#~ msgstr ""
+#~ "Voleu obrir el fitxer de recuperació de «%s»?\n"
+#~ "El gtranslator va desar-lo abans de tancar-se.\n"
+#~ "Potser conté feinades considerables!\n"
+
+#~ msgid "Postpone decision"
+#~ msgstr "Ajorna la decisió"
+
+#~ msgid "Ignore recovery file"
+#~ msgstr "Descarta el fitxer de recuperació"
+
+#~ msgid "gtranslator -- add bookmark with comment?"
+#~ msgstr "gtranslator -- voleu afegir una adreça d'interès amb comentari?"
+
+#~ msgid "Comment for the bookmark:"
+#~ msgstr "Comentari per a l'adreça d'interès:"
+
+#~ msgid "No comment"
+#~ msgstr "Cap comentari"
+
+#~ msgid "Please enter a search string"
+#~ msgstr "Introduïu una cadena per cercar"
+
+#~ msgid ""
+#~ "Could not find\n"
+#~ "\"%s\""
+#~ msgstr ""
+#~ "No s'ha trobat\n"
+#~ "«%s»"
+
+#~ msgid "%s [ %i Fuzzy left ]"
+#~ msgid_plural "%s [ %i Fuzzy left ]"
+#~ msgstr[0] "%s [ Queda %i cadena difusa ]"
+#~ msgstr[1] "%s [ Queden %i cadenes difuses ]"
+
+#~ msgid "%s [ No fuzzy left ]"
+#~ msgstr "%s [ No hi ha cap cadena difusa ]"
+
+#~ msgid "%s [ %i Untranslated left ]"
+#~ msgid_plural "%s [ %i Untranslated left ]"
+#~ msgstr[0] "%s [ Queda %i cadena sense traduir ]"
+#~ msgstr[1] "%s [ Queden %i cadenes sense traduir ]"
+
+#~ msgid "%s [ No untranslated left ]"
+#~ msgstr "%s [ No hi ha cap cadena sense traduir ]"
+
+#~ msgid "Message %d / %d / Status: %s (Message contains plural forms)"
+#~ msgstr "Missatge %d / %d / Estat: %s (el missatge conté formes plurals)"
+
+#~ msgid "Message %d / %d / Status: %s"
+#~ msgstr "Missatge %d / %d / Estat: %s"
+
+#~ msgid "gtranslator -- edit header"
+#~ msgstr "gtranslator -- edita la capçalera"
+
+#~ msgid "Comments:"
+#~ msgstr "Comentaris:"
+
+#~ msgid "_File/Recen_t files/"
+#~ msgstr "_Fitxer/Fitxers recen_ts/"
+
+#~ msgid "Afrikaans"
+#~ msgstr "Afrikaans"
+
+#~ msgid "Albanian"
+#~ msgstr "Albanès"
+
+#~ msgid "Arabic"
+#~ msgstr "Àrab"
+
+#~ msgid "Azerbaijani Turkish"
+#~ msgstr "Azerbaitjanès turc"
+
+#~ msgid "Basque"
+#~ msgstr "Basc"
+
+#~ msgid "Belarusian"
+#~ msgstr "Bielorús"
+
+#~ msgid "Britton"
+#~ msgstr "Bretó"
+
+#~ msgid "Bulgarian"
+#~ msgstr "Búlgar"
+
+#~ msgid "Catalan"
+#~ msgstr "Català"
+
+#~ msgid "Chinese/Simplified"
+#~ msgstr "Xinès simplificat"
+
+#~ msgid "Chinese/Traditional"
+#~ msgstr "Xinès tradicional"
+
+#~ msgid "Croatian"
+#~ msgstr "Croat"
+
+#~ msgid "Czech"
+#~ msgstr "Txec"
+
+#~ msgid "Danish"
+#~ msgstr "Danès"
+
+#~ msgid "Dutch"
+#~ msgstr "Holandès"
+
+#~ msgid "English/Canada"
+#~ msgstr "Anglès del Canadà"
+
+#~ msgid "English/GB"
+#~ msgstr "Anglès de la Gran Bretanya"
+
+#~ msgid "English/USA"
+#~ msgstr "Anglès dels Estats Units"
+
+#~ msgid "Esperanto"
+#~ msgstr "Esperanto"
+
+#~ msgid "Estonian"
+#~ msgstr "Estonià"
+
+#~ msgid "Persian"
+#~ msgstr "Persa"
+
+#~ msgid "Finnish"
+#~ msgstr "Finès"
+
+#~ msgid "French"
+#~ msgstr "Francès"
+
+#~ msgid "Galician"
+#~ msgstr "Gallec"
+
+#~ msgid "German"
+#~ msgstr "Alemany"
+
+#~ msgid "Greek"
+#~ msgstr "Grec"
+
+#~ msgid "Gujarati"
+#~ msgstr "Gujarati"
+
+#~ msgid "Hebrew"
+#~ msgstr "Hebreu"
+
+#~ msgid "Hindi"
+#~ msgstr "Hindi"
+
+#~ msgid "Hungarian"
+#~ msgstr "Hongarès"
+
+#~ msgid "Icelandic"
+#~ msgstr "Islandès"
+
+#~ msgid "Indonesian"
+#~ msgstr "Indonesi"
+
+#~ msgid "Italian"
+#~ msgstr "Italià"
+
+#~ msgid "Irish"
+#~ msgstr "Irlandès"
+
+#~ msgid "Japanese"
+#~ msgstr "Japonès"
+
+#~ msgid "Kannada"
+#~ msgstr "Kannada"
+
+#~ msgid "Korean"
+#~ msgstr "Coreà"
+
+#~ msgid "Latvian"
+#~ msgstr "Letó"
+
+#~ msgid "Lithuanian"
+#~ msgstr "Lituà"
+
+#~ msgid "Malay/Bahasa Melayu"
+#~ msgstr "Malai/Bahasa Melayu"
+
+#~ msgid "Maltese"
+#~ msgstr "Maltès"
+
+#~ msgid "Marathi"
+#~ msgstr "Marati"
+
+#~ msgid "Mongolian"
+#~ msgstr "Mongol"
+
+#~ msgid "Norwegian/Bokmaal"
+#~ msgstr "Noruec bokmaal"
+
+#~ msgid "Norwegian/Nynorsk"
+#~ msgstr "Noruec nynorsk"
+
+#~ msgid "Punjabi"
+#~ msgstr "Panjabi"
+
+#~ msgid "Portuguese"
+#~ msgstr "Portuguès"
+
+#~ msgid "Portuguese/Brazil"
+#~ msgstr "Portuguès del Brasil"
+
+#~ msgid "Romanian"
+#~ msgstr "Romanès"
+
+#~ msgid "Serbian/Cyrillic"
+#~ msgstr "Serbi en ciríl·lic"
+
+#~ msgid "Serbian/Latin"
+#~ msgstr "Serbi en llatí"
+
+#~ msgid "Slovak"
+#~ msgstr "Eslovac"
+
+#~ msgid "Slovenian"
+#~ msgstr "Eslovè"
+
+#~ msgid "Spanish"
+#~ msgstr "Espanyol"
+
+#~ msgid "Spanish/Spain"
+#~ msgstr "Espanyol d'Espanya"
+
+#~ msgid "Spanish/Mexico"
+#~ msgstr "Espanyol de Mèxic"
+
+#~ msgid "Swedish"
+#~ msgstr "Suec"
+
+#~ msgid "Tamil"
+#~ msgstr "Tàmil"
+
+#~ msgid "Thai"
+#~ msgstr "Tai"
+
+#~ msgid "Turkish"
+#~ msgstr "Turc"
+
+#~ msgid "Ukrainian"
+#~ msgstr "Ucraïnès"
+
+#~ msgid "Uzbekian"
+#~ msgstr "Uzbek"
+
+#~ msgid "Vietnamese"
+#~ msgstr "Vietnamita"
+
+#~ msgid "Walloon"
+#~ msgstr "Való"
+
+#~ msgid "Welsh"
+#~ msgstr "Gal·lès"
+
+#, fuzzy
+#~ msgid "gtranslator learn buffer statistics:"
+#~ msgstr "Informacions i especificacions de muntatge del gtranslator:"
+
+#, fuzzy
+#~ msgid "Encoding: `%s'"
+#~ msgstr "Codificació:"
+
+#~ msgid "Specify main window geometry"
+#~ msgstr "Indica la geometria de la finestra principal"
+
+#~ msgid "GEOMETRY"
+#~ msgstr "GEOMETRY"
+
+#, fuzzy
+#~ msgid "Couldn't open '%s': %s\n"
+#~ msgstr ""
+#~ "No s'ha pogut obrir el fitxer gettext comprimit (en format %s) `%s'!"
+
+#~ msgid "_Compile"
+#~ msgstr "_Compila"
+
+#~ msgid "Add bookmark"
+#~ msgstr "Afegeix una adreça d'interès"
+
+#, fuzzy
+#~ msgid "Add a bookmark for this message in this po file"
+#~ msgstr "Conserva els missatges obsolets en el fitxer PO"
+
+#~ msgid "Aut_otranslate..."
+#~ msgstr "Tradueix aut_omàticament..."
+
+#, fuzzy
+#~ msgid "Remove all existing translations from the po file"
+#~ msgstr ""
+#~ "Emplena automàticament les traduccions que falten a partir del domini de "
+#~ "consulta predeterminat"
+
+#, fuzzy
+#~ msgid "Open from _URI..."
+#~ msgstr "Obre a partir d'un _URI"
+
+#~ msgid "Open a po file from a given URI"
+#~ msgstr "Obre un fitxer PO a partir d'un URI indicat"
+
+#~ msgid "Recen_t files"
+#~ msgstr "Fitxers recen_ts"
+
+#~ msgid "Edit po file header"
+#~ msgstr "Edita la capçalera del fitxer po"
+
+#~ msgid "Fu_zzy"
+#~ msgstr "Di_fús"
+
+#~ msgid "_First"
+#~ msgstr "_Primer"
+
+#~ msgid "_Back"
+#~ msgstr "_Precedent"
+
+#~ msgid "_Last"
+#~ msgstr "_Últim"
+
+#~ msgid "Goto specified message number"
+#~ msgstr "Vés al número de missatge indicat"
+
+#~ msgid "_Bookmarks"
+#~ msgstr "_Adreces d'interès"
+
+#~ msgid "gtranslator's homepage on the web"
+#~ msgstr "Pàgina inicial del gtranslator al web"
+
+#~ msgid "Open"
+#~ msgstr "Obre"
+
+#~ msgid "Save"
+#~ msgstr "Desa"
+
+#~ msgid "Save as"
+#~ msgstr "Anomena i desa"
+
+#~ msgid "Compile"
+#~ msgstr "Compila"
+
+#~ msgid "Header"
+#~ msgstr "Capçalera"
+
+#~ msgid "Undo"
+#~ msgstr "Desfés"
+
+#~ msgid "First"
+#~ msgstr "Primer"
+
+#~ msgid "Back"
+#~ msgstr "Precedent"
+
+#~ msgid "Next"
+#~ msgstr "Següent"
+
+#~ msgid "Last"
+#~ msgstr "Últim"
+
+#~ msgid "Go to"
+#~ msgstr "Vés a"
+
+#~ msgid "Find string in po file"
+#~ msgstr "Troba una cadena en el fitxer PO"
+
+#~ msgid "Replace string in po file"
+#~ msgstr "Reemplaça una cadena en el fitxer PO"
+
+#~ msgid "Couldn't get the message!"
+#~ msgstr "No s'ha pogut recuperar el missatge!"
+
+#~ msgid "There are no fuzzy messages left."
+#~ msgstr "No hi queden missatges difusos."
+
+#~ msgid ""
+#~ "File %s\n"
+#~ "contains %d fuzzy message"
+#~ msgid_plural ""
+#~ "File %s\n"
+#~ "contains %d fuzzy messages"
+#~ msgstr[0] ""
+#~ "El fitxer %s\n"
+#~ "conté %d missatge difús"
+#~ msgstr[1] ""
+#~ "El fitxer %s\n"
+#~ "conté %d missatges difusos"
+
+#~ msgid "Couldn't generate the current date!"
+#~ msgstr "No s'ha pogut generar la data actual!"
+
+#~ msgid "gtranslator -- options"
+#~ msgstr "gtranslator -- opcions"
+
+#~ msgid "Suffix:"
+#~ msgstr "Sufix:"
+
+#, fuzzy
+#~ msgid "Check recent files before showing in recent files list"
+#~ msgstr "Comprova cada fitxer recent abans d'incloure'l a la llista"
+
+#, fuzzy
+#~ msgid "Hotkey indicating character:"
+#~ msgstr "Fes servir espai addicional per indicar el caràcter especial"
+
+#~ msgid "Apply own fonts"
+#~ msgstr "Aplica tipus de lletra propis"
+
+#~ msgid "gtranslator -- font selection/msgid font"
+#~ msgstr "gtranslator -- selecció de lletra / lletra del msgid"
+
+#~ msgid "gtranslator -- font selection/msgstr font"
+#~ msgstr "gtranslator -- selecció de la lletra / lletra del msgstr"
+
+#~ msgid "Translation font:"
+#~ msgstr "Tipus de lletra de la traducció:"
+
+#, fuzzy
+#~ msgid "Keep obsolete messages in the po files"
+#~ msgstr "Conserva els missatges obsolets en el fitxer PO"
+
+#~ msgid "Instant spell checking"
+#~ msgstr "Verificació de l'ortografia instantània"
+
+#~ msgid "PO header"
+#~ msgstr "Capçalera PO"
+
+#~ msgid "My name:"
+#~ msgstr "Nom:"
+
+#~ msgid "<i>Unable to get personal info from Evolution Data Server.</i>"
+#~ msgstr "<i>No s'ha pogut obtenir les dades de l'Evolution Data Server.</i>"
+
+#~ msgid "Author's name:"
+#~ msgstr "Nom de l'autor:"
+
+#~ msgid "Author's email:"
+#~ msgstr "Correu electrònic de l'autor:"
+
+#~ msgid "Functionality"
+#~ msgstr "Funcionalitat"
+
+#, fuzzy
+#~ msgid "The Possibility to remove all translations from a po file"
+#~ msgstr ""
+#~ "Emplena automàticament les traduccions que falten a partir del domini de "
+#~ "consulta predeterminat"
+
+#, fuzzy
+#~ msgid "Save geometry on exit and restore it on startup"
+#~ msgstr "Desa la geometria quan surtis i restaura-la quan engegis"
+
+#, fuzzy
+#~ msgid "Automatically learn a newly translated message"
+#~ msgstr "Vés al missatge sense traduir següent"
+
+#~ msgid "Please enter your name!"
+#~ msgstr "Introduïu el vostre nom."
+
+#~ msgid "Please enter your EMail address!"
+#~ msgstr "Introduïu la vostra adreça de correu electrònic."
+
+#~ msgid "Please enter a valid EMail address!"
+#~ msgstr "Introduïu una adreça de correu electrònic vàlida."
+
+#, fuzzy
+#~ msgid "No replacements made!"
+#~ msgstr "No s'ha fet cap reemplaçament!"
+
+#~ msgid "Y"
+#~ msgstr "N"
+
+#, fuzzy
+#~ msgid "Couldn't save compiled gettext file `%s'!"
+#~ msgstr "No s'ha pogut obrir el fitxer gettext compilat `%s'!"
+
+#, fuzzy
+#~ msgid "Couldn't save compressed gettext file `%s'!"
+#~ msgstr "No s'ha pogut obrir el fitxer gettext comprimit `%s'!"
+
+#, fuzzy
+#~ msgid "Couldn't save %s'd gettext file `%s'!"
+#~ msgstr ""
+#~ "No s'ha pogut obrir el fitxer gettext comprimit (en format %s) `%s'!"
+
+#, fuzzy
+#~ msgid "Couldn't save zip'ed po file `%s'!"
+#~ msgstr ""
+#~ "No s'ha pogut obrir el fitxer gettext comprimit (en format zip) `%s'!"
+
+#~ msgid "Session restored successfully."
+#~ msgstr "S'ha restaurat la sessió amb èxit."
+
+#~ msgid "No font set! Using default font"
+#~ msgstr ""
+#~ "No s'ha indicat cap tipus de lletra! S'està fent servir el predeterminat"
+
+#~ msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
+#~ msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
+
+#~ msgid "Can't create directory `%s'!"
+#~ msgstr "No es pot crear el directori `%s'!"
+
+#, fuzzy
+#~ msgid "Sorry, msginit isn't available on your system!"
+#~ msgstr "El msgfmt no és disponible en el vostre sistema!"
+
+#~ msgid "The geometry string \"%s\" couldn't be parsed!"
+#~ msgstr "La cadena de geometria \"%s\" no s'ha pogut analitzar!"
+
+#, fuzzy
+#~ msgid "The necessary decompression program `%s' is not installed!"
+#~ msgstr "Hi falta el programa de descompressió `%s', que és necessari!"
+
+#, fuzzy
+#~ msgid "The necessary compression program `%s' is not installed!"
+#~ msgstr "Hi falta el programa de compressió `%s', que és necessari!"
+
+#~ msgid "Couldn't create temporary directory `%s'!"
+#~ msgstr "El directori temporal `%s' no s'ha pogut crear!"
+
+#~ msgid "File `%s' couldn't be found!"
+#~ msgstr "No s'ha pogut trobar el fitxer `%s'!"
+
+#~ msgid "Malformed URI `%s' entered!"
+#~ msgstr "Heu introduït un URI mal format: `%s'!"
+
+#~ msgid "Host `%s' couldn't be found!"
+#~ msgstr "No s'ha pogut trobar l'ordinador central `%s'!"
+
+#~ msgid "Hostname `%s' is not valid!"
+#~ msgstr "El nom d'ordinador central `%s' no és vàlid!"
+
+#~ msgid "Host `%s' has no address!"
+#~ msgstr "L'ordinador central `%s' no té adreça!"
+
+#~ msgid "Transfer interrupted!"
+#~ msgstr "La transferència s'ha interromput!"
 
 #~ msgid "gtranslator -- open po file"
 #~ msgstr "gtranslator -- obre un fitxer PO"
@@ -1571,9 +2827,6 @@ msgstr "La transferència s'ha interromput!"
 #~ msgid "Query"
 #~ msgstr "Consulta"
 
-#~ msgid "Query string:"
-#~ msgstr "Cadena per consultar:"
-
 #~ msgid "No query string given!"
 #~ msgstr "No heu indicat cap cadena per consultar!"
 
@@ -1600,10 +2853,6 @@ msgstr "La transferència s'ha interromput!"
 #~ msgid "Show build specifications"
 #~ msgstr "Mostra les informacions i especificacions de muntatge"
 
-#, fuzzy
-#~ msgid "gtranslator build information/specs:"
-#~ msgstr "Informacions i especificacions de muntatge del gtranslator:"
-
 #~ msgid "Version and build date:"
 #~ msgstr "Versió i data de muntatge:"
 
@@ -1613,9 +2862,6 @@ msgstr "La transferència s'ha interromput!"
 
 #~ msgid "Colorschemes directory:"
 #~ msgstr "Directori de les combinacions de color:"
-
-#~ msgid "Scripts directory:"
-#~ msgstr "Directori de les seqüències:"
 
 #~ msgid "Window icon:"
 #~ msgstr "Icona de la finestra:"
@@ -1675,16 +2921,6 @@ msgstr "La transferència s'ha interromput!"
 #~ "a la línia %d.\n"
 #~ "Comproveu el fitxer i torneu-ho a provar."
 
-#~ msgid ""
-#~ "The file is empty:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "El fitxer és buit:\n"
-#~ "%s"
-
-#~ msgid "The file `%s' doesn't exist at all!"
-#~ msgstr "El fitxer `%s' no existeix!"
-
 #~ msgid "Could not open file `%s' for writing!"
 #~ msgstr "No s'ha pogut obrir el fitxer `%s' per escriure-hi!"
 
@@ -1710,10 +2946,6 @@ msgstr "La transferència s'ha interromput!"
 #, fuzzy
 #~ msgid "Spell checking"
 #~ msgstr "Verificació de l'ortografia instantània"
-
-#, fuzzy
-#~ msgid "Use special dictionary:"
-#~ msgstr "Fes servir un diccionari especial"
 
 #, fuzzy
 #~ msgid "Use own colors for messages table groups"
@@ -1749,9 +2981,6 @@ msgstr "La transferència s'ha interromput!"
 
 #~ msgid "Both"
 #~ msgstr "Tots dos tipus"
-
-#~ msgid "In all strings"
-#~ msgstr "En totes les cadenes"
 
 #~ msgid "Farsi"
 #~ msgstr "Persa"
@@ -1811,9 +3040,6 @@ msgstr "La transferència s'ha interromput!"
 #~ msgid "gtranslator -- translated entries' color"
 #~ msgstr "gtranslator -- color del fons"
 
-#~ msgid "Comment"
-#~ msgstr "Comentari"
-
 #~ msgid "Number"
 #~ msgstr "Número"
 
@@ -1828,9 +3054,6 @@ msgstr "La transferència s'ha interromput!"
 
 #~ msgid "_Messages"
 #~ msgstr "_Missatges"
-
-#~ msgid "Mess_age status"
-#~ msgstr "Estat del miss_atge"
 
 #~ msgid ""
 #~ "New escaped char found: \\%c\n"
@@ -1926,23 +3149,11 @@ msgstr "La transferència s'ha interromput!"
 #~ msgid "Aut_oaccomplish"
 #~ msgstr "Acompleix aut_omàticament"
 
-#~ msgid "_Message"
-#~ msgstr "_Missatge"
-
 #~ msgid "Standard messages view"
 #~ msgstr "Visualització de missatges estàndard"
 
-#~ msgid "_Comments"
-#~ msgstr "_Comentaris"
-
 #~ msgid "View comments for message"
 #~ msgstr "Visualitza els comentaris del missatge"
-
-#~ msgid "_Numbers"
-#~ msgstr "_Números"
-
-#~ msgid "View numbers in the message"
-#~ msgstr "Visualitza els números del missatge"
 
 #~ msgid "C _Formats"
 #~ msgstr "_Formats de C"
@@ -1964,9 +3175,6 @@ msgstr "La transferència s'ha interromput!"
 
 #~ msgid "Redo"
 #~ msgstr "Refés"
-
-#~ msgid "Redo the last undone action"
-#~ msgstr "Refés l'última acció desfeta"
 
 #~ msgid "Options"
 #~ msgstr "Opcions"
@@ -2004,9 +3212,6 @@ msgstr "La transferència s'ha interromput!"
 #~ msgid "Maximally showed recent files:"
 #~ msgstr "Fitxers recents mostrats més cops:"
 
-#~ msgid "Dictionary to use:"
-#~ msgstr "Diccionari:"
-
 #~ msgid "Save the po file automatically after a period of time"
 #~ msgstr "Desa el fitxer PO automàticament després d'un període de temps"
 
@@ -2029,14 +3234,8 @@ msgstr "La transferència s'ha interromput!"
 #~ "No s'ha definit cap idioma en les preferències per consultar-ne els "
 #~ "dominis!"
 
-#~ msgid "Views"
-#~ msgstr "Visualitzacions"
-
 #~ msgid "Message"
 #~ msgstr "Missatge"
-
-#~ msgid "Format"
-#~ msgstr "Format"
 
 #~ msgid "Hotkey"
 #~ msgstr "Tecla ràpida"
@@ -2050,14 +3249,8 @@ msgstr "La transferència s'ha interromput!"
 #~ msgid "You don't have read permissions on file `%s'"
 #~ msgstr "No teniu permisos de lectura sobre el fitxer `%s'"
 
-#~ msgid "No comments available for this message."
-#~ msgstr "No hi ha comentaris disponibles per a aquest missatge."
-
 #~ msgid "No numbers found."
 #~ msgstr "No s'han trobat números."
-
-#~ msgid " "
-#~ msgstr " "
 
 #~ msgid "No C formats present."
 #~ msgstr "No hi ha formats de C."
@@ -2070,9 +3263,6 @@ msgstr "La transferència s'ha interromput!"
 
 #~ msgid "Open Po File"
 #~ msgstr "Obre el fitxer PO"
-
-#~ msgid "Gtranslator Po File"
-#~ msgstr "Fitxer PO del gtranslator"
 
 #~ msgid "Gtranslator Po File View"
 #~ msgstr "Visualització de fitxers PO del gtranslator"
