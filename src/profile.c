@@ -30,7 +30,16 @@
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
+#ifdef G_OS_WIN32
+#define SAVE_DATADIR DATADIR
+#undef DATADIR
+#include <winsock2.h>
+#define DATADIR SAVE_DATADIR
+#undef SAVE_DATADIR
+#else
 #include <sys/socket.h>
+#endif
+
 
 #define GTR_PROFILE_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 					 	(object),	\

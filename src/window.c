@@ -43,7 +43,12 @@
 #include <gdl/gdl-dock.h>
 #include <gdl/gdl-dock-bar.h>
 #include <gdl/gdl-dock-layout.h>
+#ifdef G_OS_WIN32
+#include <gdl/libgdltypebuiltins.h>
+#else
 #include <gdl/gdl-switcher.h>
+#endif
+
 
 #include <glib.h>
 #include <glib-object.h>
