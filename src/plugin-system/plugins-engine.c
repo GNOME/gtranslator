@@ -42,6 +42,7 @@
 #include "plugin.h"
 #include "debug.h"
 #include "application.h"
+#include "utils.h"
 
 #include "module.h"
 #ifdef ENABLE_PYTHON
@@ -185,7 +186,12 @@ gtranslator_plugins_engine_load_all (GtranslatorPluginsEngine *engine)
 	pdirs_env = g_getenv ("GTR_PLUGINS_PATH");
 	/* What if no env var is set? We use the default location(s)! */
 	if (pdirs_env == NULL)
-		pdirs_env = GTR_PLUGINDIR;
+	  pdirs_env=GTR_PLUGINDIR;
+
+	/* FIXME, workaround to avoid enviroment variables on windows */
+#ifdef G_OS_WIN32
+	pdirs_env = gtranslator_utils_get_win32_plugindir();
+#endif
 
 	DEBUG_PRINT ( "GTR_PLUGINS_PATH=%s", pdirs_env);
 	pdirs = g_strsplit (pdirs_env, G_SEARCHPATH_SEPARATOR_S, 0);

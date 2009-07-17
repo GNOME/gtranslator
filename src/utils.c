@@ -1064,3 +1064,33 @@ gtranslator_utils_get_datadir (void)
 
 	return path;
 }
+
+/**
+ * gtranslator_utils_get_win32_plugindir:
+ *
+ * Returns the path to the GTR_PLUGINDIR folder on windows
+ */
+
+gchar *
+gtranslator_utils_get_win32_plugindir (void)
+{
+	gchar *path;
+
+#ifndef G_OS_WIN32
+	path = NULL;
+#else
+	gchar *win32_dir;
+	
+	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+
+	path = g_build_filename (win32_dir,
+				 "lib",
+				 "gtranslator",
+				 "plugins",
+				 NULL);
+	
+	g_free (win32_dir);
+#endif
+
+	return path;
+}

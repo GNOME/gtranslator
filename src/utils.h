@@ -98,4 +98,5 @@ gchar         *gtranslator_utils_get_file_from_pkgdatadir (gchar *filename);
 
 gchar         *gtranslator_utils_get_datadir (void);
 
+gchar         *gtranslator_utils_get_win32_plugindir (void);
 #endif
