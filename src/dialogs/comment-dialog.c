@@ -87,6 +87,7 @@ gtranslator_comment_dialog_init (GtranslatorCommentDialog *dlg)
 		"main_box",
 		NULL
 	};
+	gchar *path;
 	
 	dlg->priv = GTR_COMMENT_DIALOG_GET_PRIVATE (dlg);
 	
@@ -113,7 +114,8 @@ gtranslator_comment_dialog_init (GtranslatorCommentDialog *dlg)
 			  NULL);
 	
 	/*Glade*/
-	ret = gtranslator_utils_get_ui_objects (PKGDATADIR "/comment-dialog.ui",
+	path = gtranslator_utils_get_file_from_pkgdatadir("comment-dialog.ui");
+	ret = gtranslator_utils_get_ui_objects (path,
 		root_objects,
 		&error_widget,
 		
@@ -121,6 +123,7 @@ gtranslator_comment_dialog_init (GtranslatorCommentDialog *dlg)
 		"comment", &dlg->priv->comment,
 		
 		NULL);
+	g_free(path);
 	
 	if(!ret)
 	{

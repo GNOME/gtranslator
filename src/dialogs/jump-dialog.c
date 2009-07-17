@@ -79,6 +79,7 @@ gtranslator_jump_dialog_init (GtranslatorJumpDialog *dlg)
 		"main_box",
 		NULL
 	};
+	gchar *path;
 	
 	dlg->priv = GTR_JUMP_DIALOG_GET_PRIVATE (dlg);
 	
@@ -109,7 +110,8 @@ gtranslator_jump_dialog_init (GtranslatorJumpDialog *dlg)
 			  NULL);
 	
 	/*Glade*/
-	ret = gtranslator_utils_get_ui_objects (PKGDATADIR "/jump-dialog.ui",
+	path = gtranslator_utils_get_file_from_pkgdatadir("jump-dialog.ui");
+	ret = gtranslator_utils_get_ui_objects (path,
 		root_objects,
 		&error_widget,
 		
@@ -117,6 +119,7 @@ gtranslator_jump_dialog_init (GtranslatorJumpDialog *dlg)
 		"jump", &dlg->priv->jump,
 		
 		NULL);
+	g_free(path);
 	
 	if(!ret)
 	{

@@ -98,6 +98,7 @@ gtranslator_view_init (GtranslatorView *view)
 	gchar **langs;
 	const gchar * const *temp;
 	gint i;
+	gchar *pkgdatadir;
 	
 	view->priv = GTR_VIEW_GET_PRIVATE (view);
 	
@@ -111,7 +112,9 @@ gtranslator_view_init (GtranslatorView *view)
 	    ++temp)
 		g_ptr_array_add(dirs, g_strdup(*temp));
 		
-	g_ptr_array_add(dirs, g_strdup(PKGDATADIR));
+	pkgdatadir = gtranslator_utils_get_file_from_pkgdatadir(NULL);	
+	/* FIXME: Where pkgdatadir must be free */
+	g_ptr_array_add(dirs, pkgdatadir);
 	g_ptr_array_add(dirs, NULL);
 	langs = (gchar **)g_ptr_array_free(dirs, FALSE);
 

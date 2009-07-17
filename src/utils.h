@@ -92,4 +92,10 @@ void           gtranslator_utils_scan_dir             (GFile *dir,
 
 gchar *        gtranslator_utils_reduce_path        (const gchar *path);
 
+gchar         *gtranslator_utils_get_file_from_pixmapsdir (gchar *filename);
+
+gchar         *gtranslator_utils_get_file_from_pkgdatadir (gchar *filename);
+
+gchar         *gtranslator_utils_get_datadir (void);
+
 #endif

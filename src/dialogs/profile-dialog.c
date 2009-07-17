@@ -339,6 +339,7 @@ static void gtranslator_profile_dialog_init (GtranslatorProfileDialog *dlg)
 		"profiles_dialog",
 		NULL
 	};
+	gchar *path;
 	
 	dlg->priv = GTR_PROFILE_DIALOG_GET_PRIVATE (dlg);
 	
@@ -350,7 +351,8 @@ static void gtranslator_profile_dialog_init (GtranslatorProfileDialog *dlg)
 	gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);
 
-	ret = gtranslator_utils_get_ui_objects (PKGDATADIR"/profile-dialog.ui",
+	path = gtranslator_utils_get_file_from_pkgdatadir("profile-dialog.ui");
+	ret = gtranslator_utils_get_ui_objects (path,
 		root_objects,
 		&error_widget,
 		"profiles_dialog", &dlg->priv->main_box,
@@ -364,6 +366,7 @@ static void gtranslator_profile_dialog_init (GtranslatorProfileDialog *dlg)
 		"team_email_entry", &dlg->priv->language_email_entry,
 		"plurals_entry", &dlg->priv->plurals_forms_entry,
 		NULL);
+	g_free(path);
 
 	if(!ret)
 	{

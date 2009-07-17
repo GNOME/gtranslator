@@ -356,6 +356,7 @@ gtranslator_search_dialog_init (GtranslatorSearchDialog *dlg)
 		"search_dialog_content",
 		NULL
 	};
+	gchar *path;
 
 	dlg->priv = GTR_SEARCH_DIALOG_GET_PRIVATE (dlg);
 
@@ -373,7 +374,8 @@ gtranslator_search_dialog_init (GtranslatorSearchDialog *dlg)
 	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), 5);
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);
 
-	ret = gtranslator_utils_get_ui_objects (PKGDATADIR"/search-dialog.ui",
+	path = gtranslator_utils_get_file_from_pkgdatadir("search-dialog.ui");
+	ret = gtranslator_utils_get_ui_objects (path,
 					     root_objects,
 					     &error_widget,
 					     "search_dialog_content", &content,
@@ -388,6 +390,7 @@ gtranslator_search_dialog_init (GtranslatorSearchDialog *dlg)
 					     "search_backwards_checkbutton", &dlg->priv->backwards_checkbutton,
 					     "wrap_around_checkbutton", &dlg->priv->wrap_around_checkbutton,
 					     NULL);
+	g_free(path);
 
 	if (!ret)
 	{

@@ -365,14 +365,15 @@ gtranslator_window_layout_load (GtranslatorWindow *window,
 		!gdl_dock_layout_load_from_file (window->priv->layout_manager,
 						 layout_filename))
 	{
-		gchar *filename;
+		gchar *path;
 		
-		filename = g_build_filename (PKGDATADIR"/layout.xml", NULL);
-		//DEBUG_PRINT ("Layout = %s", filename);
+		
+		path = gtranslator_utils_get_file_from_pkgdatadir("layout.xml");
+		//DEBUG_PRINT ("Layout = %s", path);
 		if (!gdl_dock_layout_load_from_file (window->priv->layout_manager,
-						     filename))
-			g_warning ("Loading layout from '%s' failed!!", filename);
-		g_free (filename);
+						     path))
+			g_warning ("Loading layout from '%s' failed!!", path);
+		g_free (path);
 	}
 	
 	if (!gdl_dock_layout_load_layout (window->priv->layout_manager, name))
@@ -1329,6 +1330,7 @@ gtranslator_window_draw (GtranslatorWindow *window)
 	GtkWidget *dockbar;
 	GtkWidget *hbox_dock;
 	GtkWidget *tm_widget;
+	gchar *path;
 
 	GtranslatorWindowPrivate *priv = window->priv;
 	
@@ -1366,13 +1368,15 @@ gtranslator_window_draw (GtranslatorWindow *window)
 					    priv->action_group, 0);
 
 
+	path=gtranslator_utils_get_file_from_pkgdatadir("gtranslator-ui.xml");
 	if (!gtk_ui_manager_add_ui_from_file (priv->ui_manager,
-					      PKGDATADIR"/gtranslator-ui.xml",
+					      path,
 					      &error)) {
 		g_warning ("building menus failed: %s", error->message);
 		g_error_free (error);
 	}
-	
+	g_free(path);
+
 	/* show tooltips in the statusbar */
 	g_signal_connect (priv->ui_manager,
 			  "connect_proxy",

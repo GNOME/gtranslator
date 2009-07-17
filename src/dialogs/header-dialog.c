@@ -248,6 +248,7 @@ static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
 		"main_box",
 		NULL
 	};
+	gchar *path;
 	
 	dlg->priv = GTR_HEADER_DIALOG_GET_PRIVATE (dlg);
 
@@ -270,8 +271,10 @@ static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
 			  "response",
 			  G_CALLBACK (gtk_widget_destroy),
 			  NULL);
+
+	path = gtranslator_utils_get_file_from_pkgdatadir("header-dialog.ui");
 	
-	ret = gtranslator_utils_get_ui_objects (PKGDATADIR"/header-dialog.ui",
+	ret = gtranslator_utils_get_ui_objects (path,
 		root_objects,
 		&error_widget,
 		"main_box", &dlg->priv->main_box,
@@ -290,6 +293,7 @@ static void gtranslator_header_dialog_init (GtranslatorHeaderDialog *dlg)
 		"charset_entry", &dlg->priv->charset,
 		"encoding_entry", &dlg->priv->encoding,
 		NULL);
+	g_free(path);
 
 	if(!ret)
 	{

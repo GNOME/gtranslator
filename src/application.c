@@ -133,7 +133,7 @@ static void
 gtranslator_application_init (GtranslatorApplication *application)
 {
 	gchar *gtranslator_folder;
-	gchar *filename;
+	gchar *path_default_gtr_toolbar;
 	gchar *profiles_file;
 
 	GtranslatorApplicationPrivate * priv;
@@ -199,24 +199,21 @@ gtranslator_application_init (GtranslatorApplication *application)
 	priv->toolbars_file = g_build_filename (gtranslator_folder,
 						"gtr-toolbar.xml",
 						NULL);
-
-	filename = g_build_filename (PKGDATADIR,
-				     "gtr-toolbar.xml",
-				     NULL);
+	path_default_gtr_toolbar = gtranslator_utils_get_file_from_pkgdatadir ("gtr-toolbar.xml");
 
 	g_free (gtranslator_folder);
 	
 	egg_toolbars_model_load_names (priv->toolbars_model,
-				       filename);
+				      path_default_gtr_toolbar);
 
 	if (!egg_toolbars_model_load_toolbars (priv->toolbars_model,
 					       priv->toolbars_file)) 
 	{
 		egg_toolbars_model_load_toolbars (priv->toolbars_model,
-						  filename);
+						  path_default_gtr_toolbar);
 	}
 	
-	g_free (filename);
+	g_free (path_default_gtr_toolbar);
 
 	egg_toolbars_model_set_flags (priv->toolbars_model, 0,
 				      EGG_TB_MODEL_NOT_REMOVABLE);	
@@ -514,9 +511,7 @@ gtranslator_application_register_icon (GtranslatorApplication *app,
 	GtkIconSource *	icon_source = gtk_icon_source_new ();
 	gchar *path;
 	
-	path = g_build_filename (PIXMAPSDIR,
-				 icon,
-				 NULL);
+	path = gtranslator_utils_get_file_from_pixmapsdir (icon);
 	
 	GdkPixbuf* pixbuf = gdk_pixbuf_new_from_file (path, NULL);
 	if (pixbuf)

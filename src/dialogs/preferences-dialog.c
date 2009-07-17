@@ -1104,6 +1104,7 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 		"model1",
 		NULL
 	};
+	gchar *path;
 	
 	dlg->priv = GTR_PREFERENCES_DIALOG_GET_PRIVATE (dlg);
 	
@@ -1132,7 +1133,8 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 	
 	/*Glade*/
 	
-	ret = gtranslator_utils_get_ui_objects (PKGDATADIR "/preferences-dialog.ui",
+	path = gtranslator_utils_get_file_from_pkgdatadir("preferences-dialog.ui");
+	ret = gtranslator_utils_get_ui_objects (path,
 		root_objects,
 		&error_widget,
 		
@@ -1174,6 +1176,7 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog *dlg)
 		
 		"plugins_box", &dlg->priv->plugins_box,
 		NULL);
+	g_free(path);
 	
 	if(!ret)
 	{

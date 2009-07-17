@@ -95,6 +95,8 @@ main (gint argc,
 	gchar *config_folder;
 	GList *profiles_list = NULL;
 	GFile *file;
+	gchar *pixmapsdir;
+	gchar *window_icon;
 
 	/*
 	 * Initialize gettext.
@@ -133,7 +135,9 @@ main (gint argc,
 	/*
 	 * Show the application window with icon.
 	 */
-	gtk_window_set_default_icon_from_file(WINDOW_ICON, &error);
+	window_icon = gtranslator_utils_get_file_from_pixmapsdir("gtranslator.png");
+	gtk_window_set_default_icon_from_file(window_icon, &error);
+	g_free (window_icon);
 	if(error)
 	{
 		g_warning(_("Error setting the default window icon: %s"),
@@ -144,8 +148,11 @@ main (gint argc,
 	/*
 	 * We set the default icon dir
 	 */
+
+	pixmapsdir = gtranslator_utils_get_file_from_pixmapsdir(NULL);
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
-					   PIXMAPSDIR);
+					   pixmapsdir);
+	g_free(pixmapsdir);
 	
 	/*
 	 * Init preferences manager
