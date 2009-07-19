@@ -109,11 +109,35 @@ AC_SUBST(GTRANSLATOR_LIBS)
 AC_PATH_PROG([GLIB_GENMARSHAL], [glib-genmarshal])
 AC_PATH_PROG([GLIB_MKENUMS], [glib-mkenums])
 
+dnl ------------------------
+dnl Check for win32 platform
+dnl ------------------------
+AC_MSG_CHECKING([for Win32 platform])
+case "$host" in
+  *-*-mingw*|*-*-cygwin*)
+    platform_win32=yes
+    AC_CHECK_TOOL(WINDRES, windres)
+    ;;
+  *)
+    platform_win32=no
+    ;;
+esac
+AC_MSG_RESULT([$platform_win32])
+AM_CONDITIONAL(PLATFORM_WIN32, test "$platform_win32" = "yes")
+
+
 dnl -----------------------------------
 dnl Plugins libraries compilation flags
 dnl -----------------------------------
-PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
+# on win32 plugins must be able to resolve all symbols at link time
+# so we create a lib
+if test "$platform_win32" = yes; then
+	PLUGIN_LIBTOOL_FLAGS="-module -avoid-version -no-undefined -mwindows -Wl,\$(top_builddir)/src/libgtranslator-\$(GTR_API_VERSION).a"
+else
+	PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
+fi
 AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
+
 
 dnl -------------------------------------------------------------------
 dnl Whether we use the broken, unsupported gtk+ functions
