@@ -779,6 +779,24 @@ gtranslator_utils_help_display (GtkWindow   *parent,
 	gchar *uri = NULL;
 	gchar *path;
 	gint i;
+
+
+	/* FIXME: How to display help on windows. Gedit opens a browser and displays
+	   a url with the contents of the help */
+	if (uri == NULL)
+	{
+		GtkWidget *dialog;
+		dialog = gtk_message_dialog_new (parent,
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_CLOSE,
+						 _("Sorry, Gtranslator for windows is unable to display help yet."));
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+		
+		return;
+	} /* End of FIXME: How to display help on windows.*/
+	
 	
 	g_return_if_fail (file_name != NULL);
 
@@ -801,6 +819,7 @@ gtranslator_utils_help_display (GtkWindow   *parent,
 		uri = NULL;
 	}
 
+
 	if (uri == NULL)
 	{
 		GtkWidget *dialog;
@@ -816,12 +835,14 @@ gtranslator_utils_help_display (GtkWindow   *parent,
 		
 		return;
 	}
-	
+
 	command = g_strconcat ("gnome-help ghelp://", uri,  NULL);
 	g_free (uri);
 
 	screen = gtk_widget_get_screen (GTK_WIDGET (parent));
 	gdk_spawn_command_line_on_screen (screen, command, &error);
+
+
 	if (error != NULL)
 	{
 		g_warning ("Error executing help application: %s",

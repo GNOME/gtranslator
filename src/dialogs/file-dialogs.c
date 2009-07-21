@@ -58,7 +58,11 @@ gtranslator_file_chooser_new (GtkWindow *parent,
 		/* Now we set the filters */
 		filter = gtk_file_filter_new();
 		gtk_file_filter_set_name(filter,_("Gettext translation"));
+#ifndef G_OS_WIN32
 		gtk_file_filter_add_mime_type(filter,"text/x-gettext-translation");
+#else
+		gtk_file_filter_add_pattern (filter,"*.po");
+#endif
 		gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog),filter);
 	
 		filter = gtk_file_filter_new();
