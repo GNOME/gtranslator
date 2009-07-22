@@ -48,6 +48,7 @@ else
 gtranslator_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 endif
 
+
 libgtranslator_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
 BUILT_SOURCES =                         \
@@ -55,6 +56,13 @@ BUILT_SOURCES =                         \
         gtranslator-marshal.c	\
 	gtranslator-enum-types.h \
 	gtranslator-enum-types.c
+
+if PLATFORM_WIN32
+gtranslator-res.o: gtranslator.rc
+	$(WINDRES) -i gtranslator.rc --input-format=rc -o gtranslator-res.o -O coff
+
+gtranslator_LDADD += gtranslator-res.o
+endif
 
 INST_H_FILES =				\
 	application.h \
