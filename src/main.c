@@ -37,6 +37,15 @@
 #include <gio/gio.h>
 
 #include <gconf/gconf.h>
+#ifdef G_OS_WIN32
+#define SAVE_DATADIR DATADIR
+#undef DATADIR
+#define _WIN32_WINNT 0x0500
+#include <windows.h>
+#define DATADIR SAVE_DATADIR
+#undef SAVE_DATADIR
+#endif
+
 
 static gchar **file_arguments = NULL;
 
@@ -79,6 +88,40 @@ get_command_line_data ()
 	return file_list;
 }
 
+
+/* Copied from gedit code */
+#ifdef G_OS_WIN32
+static void
+setup_path (void)
+{
+	/* Set PATH to include the gedit executable's folder */
+	wchar_t exe_filename[MAX_PATH];
+	wchar_t *p;
+	gchar *exe_folder_utf8;
+	gchar *path;
+	
+	GetModuleFileNameW (NULL, exe_filename, G_N_ELEMENTS (exe_filename)); 
+	
+	p = wcsrchr (exe_filename, L'\\');
+	g_assert (p != NULL);
+	
+	*p = L'\0';
+	exe_folder_utf8 = g_utf16_to_utf8 (exe_filename, -1, NULL, NULL, NULL);
+	
+	path = g_build_path (";",
+			     exe_folder_utf8,
+			     g_getenv ("PATH"),
+			     NULL);
+	if (!g_setenv ("PATH", path, TRUE))
+		g_warning ("Could not set PATH for gtranslator");
+	
+	g_free (exe_folder_utf8);
+	g_free (path);
+}
+#endif
+
+
+
 /*
  * The ubiquitous main function...
  */
@@ -112,6 +155,10 @@ main (gint argc,
 	/* Setup command line options */
 	context = g_option_context_new (_("- Edit PO files"));
 	g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
+
+#ifdef G_OS_WIN32
+	setup_path ();
+#endif
 
 	/*
 	 * Initialize the GConf library.
