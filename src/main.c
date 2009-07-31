@@ -89,7 +89,7 @@ get_command_line_data ()
 }
 
 
-/* Copied from gedit code */
+/* This method is from the file gedit.c which is part of gedit */
 #ifdef G_OS_WIN32
 static void
 setup_path (void)

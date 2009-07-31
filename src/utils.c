@@ -782,7 +782,7 @@ gtranslator_utils_help_display (GtkWindow   *parent,
 
 
 	/* FIXME: How to display help on windows. Gedit opens a browser and displays
-	   a url with the contents of the help */
+	   a url with the contents of the help 
 	if (uri == NULL)
 	{
 		GtkWidget *dialog;
@@ -795,7 +795,7 @@ gtranslator_utils_help_display (GtkWindow   *parent,
 		gtk_widget_destroy (dialog);
 		
 		return;
-	} /* End of FIXME: How to display help on windows.*/
+	} End of FIXME: How to display help on windows.*/
 	
 	
 	g_return_if_fail (file_name != NULL);
