@@ -47,6 +47,7 @@
 #define XFCE_ICON    PIXMAPSDIR"/xfce.png"
 #define INKSCAPE_ICON PIXMAPSDIR"/inkscape.png"
 #define OPEN_OFFICE_ICON PIXMAPSDIR"/oo-logo.png"
+#define FEDORA_ICON PIXMAPSDIR"/fedora.png"
 
 GTR_PLUGIN_DEFINE_TYPE(GtranslatorOpenTranPanel, gtranslator_open_tran_panel, GTK_TYPE_VBOX)
 
@@ -143,6 +144,8 @@ print_struct_to_tree_view(const gchar *str,
 		icon = create_pixbuf (INKSCAPE_ICON);
 	else if (strcmp ("OpenOffice.org", str) == 0)
 		icon = create_pixbuf (OPEN_OFFICE_ICON);
+	else if (strcmp ("Fedora", str) == 0)
+		icon = create_pixbuf (FEDORA_ICON);
 	else icon = NULL;
 	
 	gtk_list_store_append(panel->priv->store, &iter);

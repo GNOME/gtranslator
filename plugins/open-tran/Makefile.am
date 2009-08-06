@@ -42,7 +42,8 @@ pixmaps__DATA = \
 	suse.png \
 	xfce.png \
 	inkscape.png \
-	oo-logo.png
+	oo-logo.png \
+	fedora.png
 
 # Plugin Info
 
