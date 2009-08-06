@@ -118,49 +118,43 @@ create_pixbuf(const gchar *path)
 }
 
 static void
-print_struct_to_tree_view(gpointer value,
+print_struct_to_tree_view(const gchar *str,
 			  GtranslatorOpenTranPanel *panel)
 {
-	const gchar *str;
 	GdkPixbuf *icon;
 	GtkTreeIter iter;
 
 	/*
 	 * Text value
 	 */
-	if (G_VALUE_HOLDS_STRING (value))
-	{
-		str = g_value_get_string (value);
-
-		if (strcmp ("GNOME", str) == 0)
-			icon = create_pixbuf (GNOME_ICON);
-		else if (strcmp ("KDE", str) == 0)
-			icon = create_pixbuf (KDE_ICON);
-		else if (strcmp ("MOZILLA", str) == 0)
-			icon = create_pixbuf (MOZILLA_ICON);
-		else if (strcmp ("DEBIAN", str) == 0)
-			icon = create_pixbuf (DEBIAN_ICON);
-		else if (strcmp ("SUSE", str) == 0)
-			icon = create_pixbuf (SUSE_ICON);
-		else if (strcmp ("XFCE", str) == 0)
-			icon = create_pixbuf (XFCE_ICON);
-		else if (strcmp ("Inkscape", str) == 0)
-			icon = create_pixbuf (INKSCAPE_ICON);
-		else if (strcmp ("OpenOffice.org", str) == 0)
-			icon = create_pixbuf (OPEN_OFFICE_ICON);
-		else icon = NULL;
-		
-		gtk_list_store_append(panel->priv->store, &iter);
-		gtk_list_store_set(panel->priv->store, &iter,
-				   ICON_COLUMN, icon,
-				   TEXT_COLUMN, panel->priv->text,
-				   -1);
-				   
-		g_free (panel->priv->text);
-		
-		if (icon)
-			g_object_unref (icon);
-	}
+	if (strcmp ("GNOME", str) == 0)
+		icon = create_pixbuf (GNOME_ICON);
+	else if (strcmp ("KDE", str) == 0)
+		icon = create_pixbuf (KDE_ICON);
+	else if (strcmp ("MOZILLA", str) == 0)
+		icon = create_pixbuf (MOZILLA_ICON);
+	else if (strcmp ("DEBIAN", str) == 0)
+		icon = create_pixbuf (DEBIAN_ICON);
+	else if (strcmp ("SUSE", str) == 0)
+		icon = create_pixbuf (SUSE_ICON);
+	else if (strcmp ("XFCE", str) == 0)
+		icon = create_pixbuf (XFCE_ICON);
+	else if (strcmp ("Inkscape", str) == 0)
+		icon = create_pixbuf (INKSCAPE_ICON);
+	else if (strcmp ("OpenOffice.org", str) == 0)
+		icon = create_pixbuf (OPEN_OFFICE_ICON);
+	else icon = NULL;
+	
+	gtk_list_store_append(panel->priv->store, &iter);
+	gtk_list_store_set(panel->priv->store, &iter,
+			   ICON_COLUMN, icon,
+			   TEXT_COLUMN, panel->priv->text,
+			   -1);
+			   
+	g_free (panel->priv->text);
+	
+	if (icon)
+		g_object_unref (icon);
 }
 
 /*
@@ -174,7 +168,6 @@ print_struct_field (gpointer key,
 {
 	GtranslatorOpenTranPanel *panel = GTR_OPEN_TRAN_PANEL(data);
 	GHashTable *hash;
-	GList *values;
 	GValueArray *array;
 	const gchar *str;
 	
@@ -182,20 +175,24 @@ print_struct_field (gpointer key,
 	{
 		str = g_value_get_string (value);
 		panel->priv->text = g_strdup (str);
-	}
-			
-	if (G_VALUE_HOLDS (value, G_TYPE_VALUE_ARRAY))
+	}		
+	else if (G_VALUE_HOLDS (value, G_TYPE_VALUE_ARRAY))
 	{
 		array = g_value_get_boxed (value);
 
 		if (G_VALUE_HOLDS (array->values, G_TYPE_HASH_TABLE))
+		{
+			gpointer name;
+		
 			hash = g_value_get_boxed (array->values);
-		else
-			return;
+			name = g_hash_table_lookup (hash, "name");
 			
-		values = g_hash_table_get_values (hash);
-		if ((values = g_list_next (values)))
-			print_struct_to_tree_view (values->data, panel);
+			if (name != NULL)
+			{
+				print_struct_to_tree_view (g_value_get_string (name),
+							   panel);
+			}
+		}
 		
 		/*
 		 * It's important freeing the array after the use of its contents
