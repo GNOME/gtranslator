@@ -36,7 +36,7 @@
 #ifdef G_OS_WIN32
 #include <gdl/libgdltypebuiltins.h>
 #else
-#include <gdl/gdl-switcher.h>
+#include <gdl/gdl.h>
 #endif
 
 /* Useful enum for sort order pref */

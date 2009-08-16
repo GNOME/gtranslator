@@ -27,11 +27,11 @@
 #endif
 
 #include <string.h>
-#include <gdl/gdl-dock-layout.h>
+
 #ifdef G_OS_WIN32
 #include <gdl/libgdltypebuiltins.h>
 #else
-#include <gdl/gdl-switcher.h>
+#include <gdl/gdl.h>
 #endif
 
 #include "prefs-manager.h"
