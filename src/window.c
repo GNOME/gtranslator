@@ -761,14 +761,14 @@ gtranslator_window_update_statusbar_message_count(GtranslatorTab *tab,
 		default: break;
 	}
 
-	status_msg = g_strdup_printf(_("Status: %s"), status);
+	status_msg = g_strdup_printf("(%s)", status);
 	current = g_strdup_printf(_("Current: %d"), pos);
-	total = g_strdup_printf(_("Total: %d"), message_count);
-	fuzzy_msg = g_strdup_printf(_("Fuzzy: %d"), fuzzy);
-	untranslated_msg = g_strdup_printf(_("Untranslated: %d"), untranslated);
+	total = g_strdup_printf(_("Total: %d translated"), message_count);
+	fuzzy_msg = g_strdup_printf(_("%d fuzzy"), fuzzy);
+	untranslated_msg = g_strdup_printf(_("%d untranslated"), untranslated);
 		
-	msg = g_strconcat("    ", current, "    ", status_msg, "    ", total,
-			  "    ", fuzzy_msg, "    ", untranslated_msg, NULL);
+	msg = g_strconcat ("    ", current, " ", status_msg, "    ", total,
+			   ", ", fuzzy_msg, ", ", untranslated_msg, NULL);
 	
 	gtranslator_statusbar_pop (GTR_STATUSBAR (window->priv->statusbar),
 				   0);
