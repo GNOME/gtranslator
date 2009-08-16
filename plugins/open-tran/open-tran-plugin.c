@@ -98,7 +98,7 @@ impl_activate (GtranslatorPlugin *plugin,
 	gtranslator_application_register_icon (GTR_APP, "open-tran.png",
 					       "open-tran-plugin-icon");
 
-	opentran = gtranslator_open_tran_panel_new(window);
+	opentran = gtranslator_open_tran_panel_new (window);
 	gtk_widget_show (opentran);
 
 	gtranslator_window_add_widget (window,
@@ -108,13 +108,13 @@ impl_activate (GtranslatorPlugin *plugin,
 				       "open-tran-plugin-icon",
 				       GTR_WINDOW_PLACEMENT_LEFT);
 
-	g_object_set_data(G_OBJECT(window),
-			  WINDOW_DATA_KEY,
-			  opentran);
+	g_object_set_data (G_OBJECT (window),
+			   WINDOW_DATA_KEY,
+			   opentran);
 }
 
 static void
-impl_deactivate	(GtranslatorPlugin *plugin,
+impl_deactivate (GtranslatorPlugin *plugin,
 		 GtranslatorWindow *window)
 {
 	GtkWidget *opentran;

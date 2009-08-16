@@ -87,31 +87,31 @@ show_error_dialog (GtranslatorWindow *parent,
 	msg = g_strdup_vprintf (message_format, args);
 	va_end (args);
 	
-	dialog = gtk_message_dialog_new(GTK_WINDOW(parent),
-				       GTK_DIALOG_DESTROY_WITH_PARENT,
-				       GTK_MESSAGE_ERROR,
-				       GTK_BUTTONS_CLOSE,
-				       "%s", msg);
-	g_free(msg);
+	dialog = gtk_message_dialog_new (GTK_WINDOW (parent),
+					 GTK_DIALOG_DESTROY_WITH_PARENT,
+					 GTK_MESSAGE_ERROR,
+					 GTK_BUTTONS_CLOSE,
+					 "%s", msg);
+	g_free (msg);
 	
-	g_signal_connect(dialog, "response",
-			 G_CALLBACK(gtk_widget_destroy),
-			 &dialog);
-	gtk_widget_show(dialog);
+	g_signal_connect (dialog, "response",
+			  G_CALLBACK (gtk_widget_destroy),
+			  &dialog);
+	gtk_widget_show (dialog);
 }
 
 static GdkPixbuf *
-create_pixbuf(const gchar *path)
+create_pixbuf (const gchar *path)
 {
 	GdkPixbuf *icon;
 	GError *error = NULL;
 	
-	icon = gdk_pixbuf_new_from_file(path, &error);
+	icon = gdk_pixbuf_new_from_file (path, &error);
 	
 	if (error)
 	{
 		g_warning ("Could not load icon: %s\n", error->message);
-		g_error_free(error);
+		g_error_free (error);
 		return NULL;
 	}
 	
@@ -119,8 +119,8 @@ create_pixbuf(const gchar *path)
 }
 
 static void
-print_struct_to_tree_view(const gchar *str,
-			  GtranslatorOpenTranPanel *panel)
+print_struct_to_tree_view (const gchar *str,
+			   GtranslatorOpenTranPanel *panel)
 {
 	GdkPixbuf *icon;
 	GtkTreeIter iter;
@@ -148,11 +148,11 @@ print_struct_to_tree_view(const gchar *str,
 		icon = create_pixbuf (FEDORA_ICON);
 	else icon = NULL;
 	
-	gtk_list_store_append(panel->priv->store, &iter);
-	gtk_list_store_set(panel->priv->store, &iter,
-			   ICON_COLUMN, icon,
-			   TEXT_COLUMN, panel->priv->text,
-			   -1);
+	gtk_list_store_append (panel->priv->store, &iter);
+	gtk_list_store_set (panel->priv->store, &iter,
+			    ICON_COLUMN, icon,
+			    TEXT_COLUMN, panel->priv->text,
+			    -1);
 			   
 	g_free (panel->priv->text);
 	
@@ -169,7 +169,7 @@ print_struct_field (gpointer key,
 		    gpointer value,
 		    gpointer data)
 {
-	GtranslatorOpenTranPanel *panel = GTR_OPEN_TRAN_PANEL(data);
+	GtranslatorOpenTranPanel *panel = GTR_OPEN_TRAN_PANEL (data);
 	GHashTable *hash;
 	GValueArray *array;
 	const gchar *str;
@@ -221,10 +221,10 @@ check_xmlrpc (GValue *value, GType type, ...)
 }
 
 static void
-open_connection(GtranslatorOpenTranPanel *panel,
-		const gchar *text,
-		const gchar *search_code,
-		const gchar *own_code)
+open_connection (GtranslatorOpenTranPanel *panel,
+		 const gchar *text,
+		 const gchar *search_code,
+		 const gchar *own_code)
 {
 	const gchar *uri = "http://open-tran.eu/RPC2";
 	SoupMessage *msg;
@@ -284,25 +284,25 @@ open_connection(GtranslatorOpenTranPanel *panel,
 	{
 		if (!soup_value_array_get_nth (array, i, G_TYPE_HASH_TABLE, &result))
 		{
-			show_error_dialog(panel->priv->window,
-					  _("WRONG! Can't get result element %d\n"), i + 1);
+			show_error_dialog (panel->priv->window,
+					   _("WRONG! Can't get result element %d\n"), i + 1);
 			break;
 		}
 		
-		g_hash_table_foreach(result, print_struct_field, panel);
+		g_hash_table_foreach (result, print_struct_field, panel);
 	}
 	
 	/*
 	 * We have to check if we didn't find any text
 	 */
-	if(!gtk_tree_model_get_iter_first(GTK_TREE_MODEL(panel->priv->store),
-                                          &treeiter))
+	if (!gtk_tree_model_get_iter_first (GTK_TREE_MODEL (panel->priv->store),
+					    &treeiter))
 	{
-		gtk_list_store_append(panel->priv->store, &treeiter);
-		gtk_list_store_set(panel->priv->store, &treeiter,
-				   ICON_COLUMN, NULL,
-				   TEXT_COLUMN, _("Phrase not found"),
-				   -1);
+		gtk_list_store_append (panel->priv->store, &treeiter);
+		gtk_list_store_set (panel->priv->store, &treeiter,
+				    ICON_COLUMN, NULL,
+				    TEXT_COLUMN, _("Phrase not found"),
+				    -1);
 	}
 	
 	soup_session_abort (panel->priv->session);
@@ -317,79 +317,79 @@ entry_activate_cb (GtkEntry *entry,
 	const gchar *search_code = NULL;
 	const gchar *own_code = NULL;
 	
-	gtk_list_store_clear(panel->priv->store);
+	gtk_list_store_clear (panel->priv->store);
 	
-	entry_text = gtk_entry_get_text(GTK_ENTRY(panel->priv->entry));
-	if(!entry_text)
+	entry_text = gtk_entry_get_text (GTK_ENTRY (panel->priv->entry));
+	if (!entry_text)
 	{
-		show_error_dialog(panel->priv->window,
-				  _("You have to provide a phrase to search"));
+		show_error_dialog (panel->priv->window,
+				   _("You have to provide a phrase to search"));
 		return;
 	}
 	
 	search_code = gconf_client_get_string (panel->priv->gconf_client,
 					       SEARCH_CODE_KEY,
 					       NULL);
-	if(!search_code)
+	if (!search_code)
 	{
-		show_error_dialog(panel->priv->window,
-				  _("You have to provide a search language code"));
+		show_error_dialog (panel->priv->window,
+				   _("You have to provide a search language code"));
 		return;
 	}
 	
 	own_code = gconf_client_get_string (panel->priv->gconf_client,
 					    OWN_CODE_KEY,
 					    NULL);
-	if(!own_code)
+	if (!own_code)
 	{
-		show_error_dialog(panel->priv->window,
-				  _("You have to provide a language code for your language"));
+		show_error_dialog (panel->priv->window,
+				   _("You have to provide a language code for your language"));
 		return;
 	}
 	
-	open_connection(panel, entry_text, search_code, own_code);
+	open_connection (panel, entry_text, search_code, own_code);
 }
 
 static void
 gtranslator_open_tran_panel_draw_treeview (GtranslatorOpenTranPanel *panel)
 {
 	GtkTreeViewColumn *column;
-	GtkCellRenderer *renderer;	
+	GtkCellRenderer *renderer;
 	
 	GtranslatorOpenTranPanelPrivate *priv = panel->priv;
 	
-	priv->store = gtk_list_store_new(N_COLUMNS,
-					 GDK_TYPE_PIXBUF,
-					 G_TYPE_STRING);
+	priv->store = gtk_list_store_new (N_COLUMNS,
+					  GDK_TYPE_PIXBUF,
+					  G_TYPE_STRING);
 					 
-	priv->treeview = gtk_tree_view_new_with_model(GTK_TREE_MODEL(priv->store));
-	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(priv->treeview),
-					  FALSE);
+	priv->treeview = gtk_tree_view_new_with_model (GTK_TREE_MODEL(priv->store));
+	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (priv->treeview),
+					   FALSE);
 	
 	/*
 	 * Icon column
 	 */
-	column = gtk_tree_view_column_new();
+	column = gtk_tree_view_column_new ();
 	
-	renderer = gtk_cell_renderer_pixbuf_new();
-	column = gtk_tree_view_column_new_with_attributes(_("Type"),
-							  renderer, "pixbuf",
-							  ICON_COLUMN, NULL);
-	gtk_tree_view_column_set_resizable(column, FALSE);
-	gtk_tree_view_append_column (GTK_TREE_VIEW(priv->treeview), column);
+	renderer = gtk_cell_renderer_pixbuf_new ();
+	column = gtk_tree_view_column_new_with_attributes (_("Type"),
+							   renderer, "pixbuf",
+							   ICON_COLUMN, NULL);
+	gtk_tree_view_column_set_resizable (column, FALSE);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (priv->treeview), column);
 	
 	/*
 	 * Text column
 	 */
-	column = gtk_tree_view_column_new();
-	renderer = gtk_cell_renderer_text_new();
-	column = gtk_tree_view_column_new_with_attributes(_("Open-Tran.eu"),
-							  renderer,
-							  "text", TEXT_COLUMN,
-							  NULL);
+	column = gtk_tree_view_column_new ();
+	renderer = gtk_cell_renderer_text_new ();
+	column = gtk_tree_view_column_new_with_attributes (_("Open-Tran.eu"),
+							   renderer,
+							   "text", TEXT_COLUMN,
+							   NULL);
 
-	gtk_tree_view_column_set_resizable(column, FALSE);
-	gtk_tree_view_append_column (GTK_TREE_VIEW(priv->treeview), column);
+	gtk_tree_view_column_set_resizable (column, FALSE);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (priv->treeview), column);
 }
 
 static void
@@ -402,40 +402,40 @@ gtranslator_open_tran_panel_draw (GtranslatorOpenTranPanel *panel)
 	/*
 	 * Set up the scrolling window for the extracted comments display
 	 */	
-	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledwindow),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledwindow),
-					    GTK_SHADOW_IN);
-	gtk_box_pack_start(GTK_BOX(panel), scrolledwindow, TRUE, TRUE, 0);
+	scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow),
+				        GTK_POLICY_AUTOMATIC,
+				        GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow),
+					     GTK_SHADOW_IN);
+	gtk_box_pack_start (GTK_BOX (panel), scrolledwindow, TRUE, TRUE, 0);
 	
 	/*
 	 * TreeView
 	 */
 	gtranslator_open_tran_panel_draw_treeview (panel);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  panel->priv->treeview);
+	gtk_container_add (GTK_CONTAINER (scrolledwindow),
+			   panel->priv->treeview);
 			  
 	/*
 	 * Entry
 	 */
-	hbox = gtk_hbox_new(FALSE, 6);
+	hbox = gtk_hbox_new (FALSE, 6);
 	
-	button = gtk_button_new_with_label(_("Look for:"));
-	gtk_button_set_relief(GTK_BUTTON(button),
-			      GTK_RELIEF_NONE);
-	g_signal_connect(button, "clicked",
-			 G_CALLBACK(entry_activate_cb), panel);
+	button = gtk_button_new_with_label (_("Look for:"));
+	gtk_button_set_relief (GTK_BUTTON (button),
+			       GTK_RELIEF_NONE);
+	g_signal_connect (button, "clicked",
+			  G_CALLBACK (entry_activate_cb), panel);
 			      
-	gtk_box_pack_start(GTK_BOX(hbox), button, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 	
-	panel->priv->entry = gtk_entry_new();
-	gtk_box_pack_start(GTK_BOX(hbox), panel->priv->entry, TRUE, TRUE, 0);
-	g_signal_connect(panel->priv->entry, "activate",
-			 G_CALLBACK(entry_activate_cb), panel);
+	panel->priv->entry = gtk_entry_new ();
+	gtk_box_pack_start (GTK_BOX (hbox), panel->priv->entry, TRUE, TRUE, 0);
+	g_signal_connect (panel->priv->entry, "activate",
+			  G_CALLBACK (entry_activate_cb), panel);
 	
-	gtk_box_pack_start(GTK_BOX(panel), hbox, FALSE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (panel), hbox, FALSE, TRUE, 0);
 }
 
 static void
@@ -446,7 +446,7 @@ gtranslator_open_tran_panel_init (GtranslatorOpenTranPanel *panel)
 
 	panel->priv->gconf_client = gconf_client_get_default ();
 	
-	gtranslator_open_tran_panel_draw(panel);
+	gtranslator_open_tran_panel_draw (panel);
 }
 
 static void
