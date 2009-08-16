@@ -1000,14 +1000,14 @@ gtranslator_utils_reduce_path (const gchar *path)
  * the pixmaps. If filename is NULL returns the path to the folder PIXMAPSDIR
  */
 gchar *
-gtranslator_utils_get_file_from_pixmapsdir (gchar *filename)
+gtranslator_utils_get_file_from_pixmapsdir (const gchar *filename)
 {
 	gchar *path;
 	
 #ifndef G_OS_WIN32
-	path = g_build_filename(PIXMAPSDIR,
-				filename,
-				NULL);
+	path = g_build_filename (PIXMAPSDIR,
+				 filename,
+				 NULL);
 #else
 	gchar *win32_dir;
 
@@ -1033,14 +1033,14 @@ gtranslator_utils_get_file_from_pixmapsdir (gchar *filename)
  * that contains the data of the package.
  */
 gchar *
-gtranslator_utils_get_file_from_pkgdatadir (gchar *filename)
+gtranslator_utils_get_file_from_pkgdatadir (const gchar *filename)
 {
 	gchar *path;
 	
 #ifndef G_OS_WIN32
-	path = g_build_filename(PKGDATADIR,
-				filename,
-				NULL);
+	path = g_build_filename (PKGDATADIR,
+				 filename,
+				 NULL);
 #else
 	gchar *win32_dir;
 
@@ -1091,7 +1091,6 @@ gtranslator_utils_get_datadir (void)
  *
  * Returns the path to the GTR_PLUGINDIR folder on windows
  */
-
 gchar *
 gtranslator_utils_get_win32_plugindir (void)
 {
