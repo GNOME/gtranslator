@@ -36,3 +36,5 @@ libberkeley_la_CFLAGS = \
 
 EXTRA_DIST = $(pixmaps__DATA)
 
+
+-include $(top_srcdir)/git.mk

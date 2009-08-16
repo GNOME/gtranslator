@@ -12,3 +12,5 @@ CLEANFILES = $(gtranslator_man__DATA)
 
 EXTRA_DIST = \
 	gtranslator.1.in 
+
+-include $(top_srcdir)/git.mk

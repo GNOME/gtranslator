@@ -20,3 +20,5 @@ endif
 if BUILD_SVN
 SUBDIRS += subversion
 endif
+
+-include $(top_srcdir)/git.mk

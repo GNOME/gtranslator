@@ -15,3 +15,4 @@ DISTCLEANFILES = 		\
 	gnome-doc-utils.make    
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --enable-gtk-doc
+-include $(top_srcdir)/git.mk

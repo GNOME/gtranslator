@@ -33,3 +33,4 @@ install-data-hook:
 
 uninstall-hook:
 	$(UPDATE_DESKTOP) 
+-include $(top_srcdir)/git.mk

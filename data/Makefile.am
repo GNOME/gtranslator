@@ -34,3 +34,5 @@ EXTRA_DIST =			\
 CLEANFILES =	 		\
 	$(schemas_DATA)		\
 	$(pkgconfig_DATA)
+
+-include $(top_srcdir)/git.mk

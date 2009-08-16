@@ -27,3 +27,5 @@ specpack: $(UMTF_SPEC_FILES)
 
 clean:
 	rm -rf UMTF-$(UMTF_VERSION)
+
+-include $(top_srcdir)/git.mk

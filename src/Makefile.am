@@ -157,3 +157,5 @@ EXTRA_DIST =	\
 	gtranslator-enum-types.c.template
 
 CLEANFILES = $(BUILT_SOURCES)
+
+-include $(top_srcdir)/git.mk
