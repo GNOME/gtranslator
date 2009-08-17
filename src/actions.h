@@ -96,12 +96,6 @@ void       gtranslator_actions_view_translation_memory
 						 GtranslatorWindow *window);
 
 /*Go*/
-void       gtranslator_file_go_to_next          (GtkAction  * action,
-						 GtranslatorWindow *window);
-
-void       gtranslator_file_go_to_prev          (GtkAction  * action,
-						 GtranslatorWindow *window);
-
 void       gtranslator_message_go_to_first      (GtkAction  * action,
 						 GtranslatorWindow *window);
 
@@ -144,6 +138,15 @@ void       _gtranslator_actions_search_find     (GtkAction   *action,
 						 GtranslatorWindow *window);
 
 void       _gtranslator_actions_search_replace  (GtkAction   *action,
+						 GtranslatorWindow *window);
+
+/*Documents*/
+void       gtranslator_actions_documents_next_document
+						(GtkAction  * action,
+						 GtranslatorWindow *window);
+
+void       gtranslator_actions_documents_previous_document
+						(GtkAction  * action,
 						 GtranslatorWindow *window);
 
 /*Help*/

@@ -282,9 +282,9 @@ static const GtkActionEntry entries[] = {
 	{ "FileCloseAll", GTK_STOCK_CLOSE, N_("_Close All"), "<shift><control>W",
 	  N_("Close all open files"), NULL }, //G_CALLBACK (_gedit_cmd_file_close_all) },
 	{ "DocumentsPreviousDocument", NULL, N_("_Previous Document"), "<alt><control>Page_Up",
-	  N_("Activate previous document"), G_CALLBACK (gtranslator_file_go_to_prev) },
+	  N_("Activate previous document"), G_CALLBACK (gtranslator_actions_documents_previous_document) },
 	{ "DocumentsNextDocument", NULL, N_("_Next Document"), "<alt><control>Page_Down",
-	  N_("Activate next document"), G_CALLBACK (gtranslator_file_go_to_next) }
+	  N_("Activate next document"), G_CALLBACK (gtranslator_actions_documents_next_document) }
 };
 
 /*

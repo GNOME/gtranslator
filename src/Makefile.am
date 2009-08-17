@@ -103,6 +103,7 @@ libgtranslator_la_SOURCES = \
 	utils.c \
 	msg.c \
 	actions.h \
+	actions-documents.c \
 	actions-file.c \
 	actions-go.c \
 	actions-edit.c \

@@ -31,24 +31,6 @@
 #include "window.h"
 
 
-void       
-gtranslator_file_go_to_next (GtkAction  * action,
-			     GtranslatorWindow *window)
-{
-  GtranslatorNotebook *notebook;
-  notebook = gtranslator_window_get_notebook (window);
-  gtk_notebook_next_page (GTK_NOTEBOOK (notebook));
-}
-
-void       
-gtranslator_file_go_to_prev (GtkAction  * action,
-			     GtranslatorWindow *window)
-{
-  GtranslatorNotebook *notebook;
-  notebook = gtranslator_window_get_notebook (window);
-  gtk_notebook_prev_page (GTK_NOTEBOOK (notebook));
-}
-
 void 
 gtranslator_message_go_to_first(GtkAction *action,
 				GtranslatorWindow *window)
