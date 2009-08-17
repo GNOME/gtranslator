@@ -705,11 +705,11 @@ set_sensitive_according_to_tab(GtranslatorWindow *window,
 	g_return_if_fail (current_page >= 0);
 	
 	action = gtk_action_group_get_action (window->priv->action_group,
-					      "GoPrevFile");
+					      "DocumentsPreviousDocument");
 	gtk_action_set_sensitive (action, current_page != 0);
 	
 	action = gtk_action_group_get_action (window->priv->action_group,
-					      "GoNextFile");
+					      "DocumentsNextDocument");
 	gtk_action_set_sensitive (action, 
 				  current_page < pages - 1);
 
@@ -810,7 +810,7 @@ documents_list_menu_activate (GtkToggleAction *action,
 	n = gtk_radio_action_get_current_value (GTK_RADIO_ACTION (action));
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (window->priv->notebook), n);
 }
-/*
+
 static gchar *
 get_menu_tip_for_tab (GtranslatorTab *tab)
 {
@@ -818,19 +818,20 @@ get_menu_tip_for_tab (GtranslatorTab *tab)
 	gchar *uri;
 	gchar *ruri;
 	gchar *tip;
+	GFile *file;
 
 	doc = gtranslator_tab_get_po (tab);
+	file = gtranslator_po_get_location (doc);
 
-	uri = gtranslator_document_get_uri_for_display (doc);
-	ruri = gtranslator_utils_replace_home_dir_with_tilde (uri);
-	g_free (uri);
-*/
+	uri = g_file_get_path (file);
+	g_object_unref (file);
+
 	/* Translators: %s is a URI */
-/*	tip =  g_strdup_printf (_("Activate '%s'"), ruri);
-	g_free (ruri);
+	tip =  g_strdup_printf (_("Activate '%s'"), uri);
+	g_free (uri);
 	
 	return tip;
-}*/
+}
 
 static void
 update_documents_list_menu (GtranslatorWindow *window)
@@ -884,15 +885,14 @@ update_documents_list_menu (GtranslatorWindow *window)
 		action_name = g_strdup_printf ("Tab_%d", i);
 		tab_name = gtranslator_tab_get_name (GTR_TAB (tab));
 		name = gtranslator_utils_escape_underscores (tab_name, -1);
-		/*tip =  get_menu_tip_for_tab (GTR_TAB (tab));*/
+		tip =  get_menu_tip_for_tab (GTR_TAB (tab));
 
 		/* alt + 1, 2, 3... 0 to switch to the first ten tabs */
 		accel = (i < 10) ? g_strdup_printf ("<alt>%d", (i + 1) % 10) : NULL;
 
 		action = gtk_radio_action_new (action_name,
 					       name,
-					       //tip,
-					       NULL,
+					       tip,
 					       NULL,
 					       i);
 
@@ -913,7 +913,7 @@ update_documents_list_menu (GtranslatorWindow *window)
 
 		gtk_ui_manager_add_ui (p->ui_manager,
 				       id,
-				       "/MenuBar/DocumentsMenu/DocumentsListPlaceholder",
+				       "/MainMenu/DocumentsMenu/DocumentsListPlaceholder",
 				       action_name, action_name,
 				       GTK_UI_MANAGER_MENUITEM,
 				       FALSE);
@@ -1007,6 +1007,8 @@ set_window_title (GtranslatorWindow *window,
       po = gtranslator_tab_get_po (active_tab);
       file = gtranslator_po_get_location (po);
       
+      
+      /* FIXME: We are leaking a lot here */
       /*
        * Translators: The title of the window when there is only one tab
        */
@@ -1036,6 +1038,8 @@ notebook_switch_page(GtkNotebook *nb,
 	GtranslatorView *view;
 	GtranslatorPo *po;
 	gint n_pages;
+	GtkAction *action;
+	gchar *action_name;
 	
 	tab = GTR_TAB (gtk_notebook_get_nth_page (nb, page_num));
 	if (tab == window->priv->active_tab)
@@ -1063,6 +1067,20 @@ notebook_switch_page(GtkNotebook *nb,
 	po = gtranslator_tab_get_po(tab);
 	msg = gtranslator_po_get_current_message(po);
 	gtranslator_window_update_statusbar_message_count(tab,msg->data, window);
+
+	/* activate the right item in the documents menu */
+	action_name = g_strdup_printf ("Tab_%d", page_num);
+	action = gtk_action_group_get_action (window->priv->documents_list_action_group,
+					      action_name);
+
+	/* sometimes the action doesn't exist yet, and the proper action
+	 * is set active during the documents list menu creation
+	 * CHECK: would it be nicer if active_tab was a property and we monitored the notify signal?
+	 */
+	if (action != NULL)
+		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
+
+	g_free (action_name);
 
 	gtranslator_plugins_engine_update_plugins_ui (gtranslator_plugins_engine_get_default (),
 						      window, FALSE);
