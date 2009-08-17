@@ -101,7 +101,9 @@ showed_message_cb (GtranslatorTab *tab,
 				 path);
 	
 	gtk_tree_selection_select_iter (selection, &iter);
-				       
+	
+	gtk_tree_path_next (path);
+	
 	gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (table->priv->treeview),
 				      path,
 				      NULL,
