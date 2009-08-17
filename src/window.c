@@ -78,6 +78,8 @@ struct _GtranslatorWindowPrivate
 	GtkWidget *toolbar;
 	GtkActionGroup *always_sensitive_action_group;
 	GtkActionGroup *action_group;
+	GtkActionGroup *documents_list_action_group;
+	guint           documents_list_menu_ui_id;
 	
 	GtkWidget *notebook;
 	GtranslatorTab *active_tab;
@@ -109,12 +111,13 @@ enum
 static const GtkActionEntry always_sensitive_entries[] = {
 	
 	{ "File", NULL, N_("_File") },
-        { "Edit", NULL, N_("_Edit") },
+	{ "Edit", NULL, N_("_Edit") },
 	{ "View", NULL, N_("_View") },
 	//{ "Bookmarks", NULL, N_("_Bookmarks") },
 	//{ "Actions", NULL, N_("_Actions") },
 	{ "Search", NULL, N_("_Search") },
-        { "Go", NULL, N_("_Go") },
+	{ "Go", NULL, N_("_Go") },
+	{ "Documents", NULL, N_("_Documents") },
 	{ "Help", NULL, N_("_Help") },
 	
 	/* File menu */
@@ -225,12 +228,6 @@ static const GtkActionEntry entries[] = {
 	  //G_CALLBACK(gtranslator_remove_all_translations_dialog) },*/
 	
         /* Go menu */
-        { "GoPrevFile", NULL, N_("Prev F_ile"), 
-	  "<control>Page_Up", N_("Go to the next file"),
-          G_CALLBACK (gtranslator_file_go_to_prev) },
-        { "GoNextFile", NULL, N_("Next Fi_le"), 
-	  "<control>Page_Down", N_("Go to the next file"),
-	  G_CALLBACK (gtranslator_file_go_to_next) },
 	{ "GoPrevious", GTK_STOCK_GO_BACK, N_("_Previous Message"),
 	  "<alt>Left", N_("Move back one message"),
           G_CALLBACK (gtranslator_message_go_to_previous) },
@@ -279,6 +276,15 @@ static const GtkActionEntry entries[] = {
 	  N_("Search for and replace text"),
 	  G_CALLBACK (_gtranslator_actions_search_replace) },
 	
+	/* Documents menu */
+	{ "FileSaveAll", GTK_STOCK_SAVE, N_("_Save All"), "<shift><control>L",
+	  N_("Save all open files"), NULL }, //G_CALLBACK (_gedit_cmd_file_save_all) },
+	{ "FileCloseAll", GTK_STOCK_CLOSE, N_("_Close All"), "<shift><control>W",
+	  N_("Close all open files"), NULL }, //G_CALLBACK (_gedit_cmd_file_close_all) },
+	{ "DocumentsPreviousDocument", NULL, N_("_Previous Document"), "<alt><control>Page_Up",
+	  N_("Activate previous document"), G_CALLBACK (gtranslator_file_go_to_prev) },
+	{ "DocumentsNextDocument", NULL, N_("_Next Document"), "<alt><control>Page_Down",
+	  N_("Activate next document"), G_CALLBACK (gtranslator_file_go_to_next) }
 };
 
 /*
@@ -792,6 +798,141 @@ gtranslator_window_update_statusbar_message_count(GtranslatorTab *tab,
 						   (gdouble)gtranslator_po_get_messages_count (po));
 }
 
+static void
+documents_list_menu_activate (GtkToggleAction *action,
+			      GtranslatorWindow *window)
+{
+	gint n;
+
+	if (gtk_toggle_action_get_active (action) == FALSE)
+		return;
+
+	n = gtk_radio_action_get_current_value (GTK_RADIO_ACTION (action));
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (window->priv->notebook), n);
+}
+/*
+static gchar *
+get_menu_tip_for_tab (GtranslatorTab *tab)
+{
+	GtranslatorPo *doc;
+	gchar *uri;
+	gchar *ruri;
+	gchar *tip;
+
+	doc = gtranslator_tab_get_po (tab);
+
+	uri = gtranslator_document_get_uri_for_display (doc);
+	ruri = gtranslator_utils_replace_home_dir_with_tilde (uri);
+	g_free (uri);
+*/
+	/* Translators: %s is a URI */
+/*	tip =  g_strdup_printf (_("Activate '%s'"), ruri);
+	g_free (ruri);
+	
+	return tip;
+}*/
+
+static void
+update_documents_list_menu (GtranslatorWindow *window)
+{
+	GtranslatorWindowPrivate *p = window->priv;
+	GList *actions, *l;
+	gint n, i;
+	guint id;
+	GSList *group = NULL;
+
+	g_return_if_fail (p->documents_list_action_group != NULL);
+
+	if (p->documents_list_menu_ui_id != 0)
+		gtk_ui_manager_remove_ui (p->ui_manager,
+					  p->documents_list_menu_ui_id);
+
+	actions = gtk_action_group_list_actions (p->documents_list_action_group);
+	for (l = actions; l != NULL; l = l->next)
+	{
+		g_signal_handlers_disconnect_by_func (GTK_ACTION (l->data),
+						      G_CALLBACK (documents_list_menu_activate),
+						      window);
+ 		gtk_action_group_remove_action (p->documents_list_action_group,
+						GTK_ACTION (l->data));
+	}
+	g_list_free (actions);
+
+	n = gtk_notebook_get_n_pages (GTK_NOTEBOOK (p->notebook));
+
+	id = (n > 0) ? gtk_ui_manager_new_merge_id (p->ui_manager) : 0;
+
+	for (i = 0; i < n; i++)
+	{
+		GtkWidget *tab;
+		GtkRadioAction *action;
+		gchar *action_name;
+		gchar *tab_name;
+		gchar *name;
+		gchar *tip;
+		gchar *accel;
+
+		tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (p->notebook), i);
+
+		/* NOTE: the action is associated to the position of the tab in
+		 * the notebook not to the tab itself! This is needed to work
+		 * around the gtk+ bug #170727: gtk leaves around the accels
+		 * of the action. Since the accel depends on the tab position
+		 * the problem is worked around, action with the same name always
+		 * get the same accel.
+		 */
+		action_name = g_strdup_printf ("Tab_%d", i);
+		tab_name = gtranslator_tab_get_name (GTR_TAB (tab));
+		name = gtranslator_utils_escape_underscores (tab_name, -1);
+		/*tip =  get_menu_tip_for_tab (GTR_TAB (tab));*/
+
+		/* alt + 1, 2, 3... 0 to switch to the first ten tabs */
+		accel = (i < 10) ? g_strdup_printf ("<alt>%d", (i + 1) % 10) : NULL;
+
+		action = gtk_radio_action_new (action_name,
+					       name,
+					       //tip,
+					       NULL,
+					       NULL,
+					       i);
+
+		if (group != NULL)
+			gtk_radio_action_set_group (action, group);
+
+		/* note that group changes each time we add an action, so it must be updated */
+		group = gtk_radio_action_get_group (action);
+
+		gtk_action_group_add_action_with_accel (p->documents_list_action_group,
+							GTK_ACTION (action),
+							accel);
+
+		g_signal_connect (action,
+				  "activate",
+				  G_CALLBACK (documents_list_menu_activate),
+				  window);
+
+		gtk_ui_manager_add_ui (p->ui_manager,
+				       id,
+				       "/MenuBar/DocumentsMenu/DocumentsListPlaceholder",
+				       action_name, action_name,
+				       GTK_UI_MANAGER_MENUITEM,
+				       FALSE);
+
+		if (GTR_TAB (tab) == p->active_tab)
+			gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
+
+		g_object_unref (action);
+
+		g_free (action_name);
+		g_free (tab_name);
+		g_free (name);
+		g_free (tip);
+		g_free (accel);
+	}
+
+	p->documents_list_menu_ui_id = id;
+}
+
 static GtranslatorWindow *
 get_drop_window (GtkWidget *widget)
 {
@@ -943,6 +1084,8 @@ notebook_page_removed (GtkNotebook *notebook,
 		set_window_title (window, TRUE);
 	else
 		set_window_title (window, FALSE);
+	
+	update_documents_list_menu (window);
 }
 
 static void
@@ -1091,7 +1234,9 @@ notebook_tab_added(GtkNotebook *notebook,
 			 "notify::state",
 			  G_CALLBACK (sync_state), 
 			  window);
-			  
+	
+	update_documents_list_menu (window);
+	
 	gtranslator_plugins_engine_update_plugins_ui (gtranslator_plugins_engine_get_default (),
 						      window, FALSE);
 }
@@ -1327,6 +1472,7 @@ gtranslator_window_draw (GtranslatorWindow *window)
 	GtkWidget *dockbar;
 	GtkWidget *hbox_dock;
 	GtkWidget *tm_widget;
+	GtkActionGroup *action_group;
 	gchar *path;
 
 	GtranslatorWindowPrivate *priv = window->priv;
@@ -1364,15 +1510,22 @@ gtranslator_window_draw (GtranslatorWindow *window)
 	gtk_ui_manager_insert_action_group (priv->ui_manager,
 					    priv->action_group, 0);
 
+	/* list of open documents menu */
+	action_group = gtk_action_group_new ("DocumentsListActions");
+	gtk_action_group_set_translation_domain (action_group, NULL);
+	priv->documents_list_action_group = action_group;
+	gtk_ui_manager_insert_action_group (priv->ui_manager, action_group, 0);
+	g_object_unref (action_group);
 
-	path=gtranslator_utils_get_file_from_pkgdatadir("gtranslator-ui.xml");
+	path = gtranslator_utils_get_file_from_pkgdatadir ("gtranslator-ui.xml");
 	if (!gtk_ui_manager_add_ui_from_file (priv->ui_manager,
 					      path,
-					      &error)) {
+					      &error))
+	{
 		g_warning ("building menus failed: %s", error->message);
 		g_error_free (error);
 	}
-	g_free(path);
+	g_free (path);
 
 	/* show tooltips in the statusbar */
 	g_signal_connect (priv->ui_manager,

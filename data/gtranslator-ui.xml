@@ -93,6 +93,21 @@
 
     <placeholder name="ExtraMenu_1" />
 
+    <menu name="DocumentsMenu" action="Documents">
+      <menuitem action="FileSaveAll" />
+      <menuitem action="FileCloseAll" />
+      <placeholder name="DocumentsOps_1" />
+      <separator/>
+      <placeholder name="DocumentsOps_2" />
+      <separator/>
+      <placeholder name="DocumentsOps_3" />
+      <menuitem action="DocumentsPreviousDocument" />
+      <menuitem action="DocumentsNextDocument" />
+      <placeholder name="DocumentsListPlaceholder">
+        <separator/>
+      </placeholder>
+    </menu>
+
     <menu name="HelpMenu" action="Help">
       <menuitem name="HelpContentsMenu" action="HelpContents"/>
       <menuitem name="HelpAboutMenu" action="HelpAbout"/>
