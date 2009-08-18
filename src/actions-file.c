@@ -693,6 +693,68 @@ gtranslator_file_close (GtkAction * widget,
 	gtranslator_close_tab (tab, window);
 }
 
+static GList *
+get_modified_documents (GtranslatorWindow *window)
+{
+	GtranslatorNotebook *nb;
+	GtranslatorTab *tab;
+	GtranslatorPo *po;
+	gint pages;
+	GList *list = NULL;
+
+	nb = gtranslator_window_get_notebook (window);
+	pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (nb));
+
+	while (pages > 0)
+	{		
+		tab = GTR_TAB (gtk_notebook_get_nth_page (GTK_NOTEBOOK (nb),
+							  pages - 1));
+		
+		po = gtranslator_tab_get_po (tab);
+		if (gtranslator_po_get_state (po) == GTR_PO_STATE_MODIFIED)
+			list = g_list_prepend (list, po);
+		
+		pages--;
+	}
+	
+	return list;
+}
+
+static void
+close_all_documents (GtranslatorWindow *window,
+		     gboolean logout_mode)
+{
+	GList *list;
+	
+	list = get_modified_documents (window);
+
+	if (list != NULL)
+	{
+		GtkWidget *dlg;
+
+		dlg = gtranslator_close_confirmation_dialog_new (GTK_WINDOW (window),
+								 list, logout_mode);
+
+		g_signal_connect (dlg,
+				  "response",
+				  G_CALLBACK (close_confirmation_dialog_response_handler),
+				  window);
+		
+		g_list_free (list);
+
+		gtk_widget_show (dlg);
+	}
+	else
+	{
+		close_all_tabs (window);
+		
+		if (logout_mode)
+		{
+			gtk_widget_destroy (GTK_WIDGET (window));
+		}
+	}
+}
+
 void
 gtranslator_file_quit (GtkAction *action,
 		       GtranslatorWindow *window)
@@ -744,52 +806,24 @@ gtranslator_file_quit (GtkAction *action,
 		}
 		else
 		{
-			g_warning (N_("Failed to write profile data into profiles file '%s'"), filename);
-		}	
+			g_warning (_("Failed to write profile data into profiles file '%s'"), filename);
+		}
 	}
 	
 	g_free (config_folder);
 	g_object_unref (file_temp);
 	g_object_unref (file);
 
-	nb = gtranslator_window_get_notebook (window);
-	pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK(nb));
-
-	while (pages > 0)
-	{		
-		tab = GTR_TAB (gtk_notebook_get_nth_page (GTK_NOTEBOOK (nb),
-							  pages - 1));
-		
-		po = gtranslator_tab_get_po (tab);
-		if (gtranslator_po_get_state (po) == GTR_PO_STATE_MODIFIED)
-			list = g_list_prepend (list, po);
-		
-		pages--;
-	}
-
 	g_object_set_data (G_OBJECT (window),
 			   GTR_IS_CLOSING_ALL,
 			   GINT_TO_POINTER (1));
 
-	if (list != NULL)
-	{
-		GtkWidget     *dlg;
+	close_all_documents (window, TRUE);
+}
 
-		dlg = gtranslator_close_confirmation_dialog_new (GTK_WINDOW (window),
-								 list, TRUE);
-
-		g_signal_connect (dlg,
-				  "response",
-				  G_CALLBACK (close_confirmation_dialog_response_handler),
-				  window);
-		
-		g_list_free (list);
-
-		gtk_widget_show (dlg);
-	}
-	else {
-		close_all_tabs (window);
-		
-		gtk_widget_destroy (GTK_WIDGET (window));
-	}
+void
+_gtranslator_file_close_all (GtkAction *action,
+			     GtranslatorWindow *window)
+{
+	close_all_documents (window, FALSE);
 }
