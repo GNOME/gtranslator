@@ -100,7 +100,6 @@ prj_comment_changed (GtkTextBuffer *buffer,
 {
         const gchar *text;
 	GtkTextIter start, end;
-	gchar *text_utf8;
 	
 	gtranslator_header_set_header_changed (header, TRUE);
 
