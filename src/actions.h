@@ -51,7 +51,10 @@ void       gtranslator_file_quit                (GtkAction *action,
 void       gtranslator_actions_load_locations   (GtranslatorWindow *window,
 						 const GSList      *locations);
 
-void      _gtranslator_file_close_all           (GtkAction *action,
+void      _gtranslator_actions_file_close_all   (GtkAction *action,
+						 GtranslatorWindow *window);
+
+void      _gtranslator_actions_file_save_all    (GtkAction *action,
 						 GtranslatorWindow *window);
 
 /*Edit*/

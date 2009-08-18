@@ -278,9 +278,9 @@ static const GtkActionEntry entries[] = {
 	
 	/* Documents menu */
 	{ "FileSaveAll", GTK_STOCK_SAVE, N_("_Save All"), "<shift><control>L",
-	  N_("Save all open files"), NULL }, //G_CALLBACK (_gedit_cmd_file_save_all) },
+	  N_("Save all open files"), G_CALLBACK (_gtranslator_actions_file_save_all) },
 	{ "FileCloseAll", GTK_STOCK_CLOSE, N_("_Close All"), "<shift><control>W",
-	  N_("Close all open files"), G_CALLBACK (_gtranslator_file_close_all) },
+	  N_("Close all open files"), G_CALLBACK (_gtranslator_actions_file_close_all) },
 	{ "DocumentsPreviousDocument", NULL, N_("_Previous Document"), "<alt><control>Page_Up",
 	  N_("Activate previous document"), G_CALLBACK (gtranslator_actions_documents_previous_document) },
 	{ "DocumentsNextDocument", NULL, N_("_Next Document"), "<alt><control>Page_Down",

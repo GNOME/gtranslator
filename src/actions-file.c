@@ -822,8 +822,50 @@ gtranslator_file_quit (GtkAction *action,
 }
 
 void
-_gtranslator_file_close_all (GtkAction *action,
-			     GtranslatorWindow *window)
+_gtranslator_actions_file_close_all (GtkAction *action,
+				     GtranslatorWindow *window)
 {
 	close_all_documents (window, FALSE);
+}
+
+void
+_gtranslator_actions_file_save_all (GtkAction *action,
+				    GtranslatorWindow *window)
+{
+	GList *list, *l;
+	
+	list = get_modified_documents (window);
+	
+	for (l = list; l != NULL; l = g_list_next (l))
+	{
+		GError *error = NULL;
+		GtranslatorStatusbar *status;
+	
+		gtranslator_po_save_file (GTR_PO (l->data), &error);
+		
+		if (error)
+		{
+			GtkWidget *dialog;
+			
+			dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+							 GTK_DIALOG_DESTROY_WITH_PARENT,
+							 GTK_MESSAGE_WARNING,
+							 GTK_BUTTONS_OK,
+							 "%s", error->message);
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
+			g_clear_error (&error);
+			
+			return;
+		}
+	
+		/* We have to change the state of the tab */
+		gtranslator_po_set_state (GTR_PO (l->data), GTR_PO_STATE_SAVED);
+	
+		/* Flash a message */
+		status = GTR_STATUSBAR (gtranslator_window_get_statusbar (window));
+		gtranslator_statusbar_flash_message (status, 0, _("Files saved."));
+	}
+	
+	g_list_free (list);
 }
