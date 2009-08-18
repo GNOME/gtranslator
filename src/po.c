@@ -715,7 +715,7 @@ gtranslator_po_save_header_in_msg (GtranslatorPo *po, GtranslatorHeader *header)
 	 */
 	if ((g_utf8_collate (prev_translator, aux) != 0) || (prev_translator == NULL)) {
 
-	  header_comment = g_strchomp(gtranslator_header_get_comment (header));
+	  header_comment = (const gchar *) g_strchomp((gchar *) gtranslator_header_get_comment (header));
 	  aux2 = g_strconcat(header_comment, "\n",gtranslator_header_get_translator(header), " ", "<",
 			     gtranslator_header_get_tr_email(header), ">", ",", " ", year, ".", NULL);
 
