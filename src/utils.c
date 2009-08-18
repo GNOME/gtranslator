@@ -308,7 +308,6 @@ handle_builder_error (const gchar *message,
 	va_list args;
 
 	va_start (args, message);
-	va_arg (args, const gchar *);
 	msg_plain = g_strdup_vprintf (message, args);
 
 	msg = g_strconcat ("<span size=\"large\" weight=\"bold\">",
