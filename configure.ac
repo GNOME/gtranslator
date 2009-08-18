@@ -27,7 +27,6 @@ dnl -------------------------------------------------------------------
 IT_PROG_INTLTOOL([0.35.0])
 GETTEXT_PACKAGE=gtranslator
 AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE(GETTEXT_PACKAGE,[gtranslator],[Package name for use by gettext library])
 AM_GLIB_GNU_GETTEXT
 AC_CHECK_FUNC(bind_textdomain_codeset,,[AC_CHECK_LIB(intl,bind_textdomain_codeset)])
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[Gettext package])
