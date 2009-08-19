@@ -36,39 +36,36 @@
 						 GTR_TYPE_DB_KEYS,     \
 						 GtranslatorDbKeysPrivate))
 
-G_DEFINE_TYPE(GtranslatorDbKeys, gtranslator_db_keys, G_TYPE_OBJECT)
+G_DEFINE_TYPE (GtranslatorDbKeys, gtranslator_db_keys, G_TYPE_OBJECT)
+     struct _GtranslatorDbKeysPrivate
+     {
+       db_recno_t *list;
+       gsize count;
+     };
 
-
-struct _GtranslatorDbKeysPrivate
+     static void gtranslator_db_keys_init (GtranslatorDbKeys * db_keys)
 {
-	db_recno_t *list;
-	gsize count;
-};
-
-static void
-gtranslator_db_keys_init (GtranslatorDbKeys *db_keys)
-{
-	db_keys->priv = GTR_DB_KEYS_GET_PRIVATE (db_keys);
+  db_keys->priv = GTR_DB_KEYS_GET_PRIVATE (db_keys);
 }
 
 static void
-gtranslator_db_keys_finalize (GObject *object)
+gtranslator_db_keys_finalize (GObject * object)
 {
-	GtranslatorDbKeys *keys = GTR_DB_KEYS (object);
-	
-	g_free (keys->priv->list);
-	
-	G_OBJECT_CLASS (gtranslator_db_keys_parent_class)->finalize (object);
+  GtranslatorDbKeys *keys = GTR_DB_KEYS (object);
+
+  g_free (keys->priv->list);
+
+  G_OBJECT_CLASS (gtranslator_db_keys_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_db_keys_class_init (GtranslatorDbKeysClass *klass)
+gtranslator_db_keys_class_init (GtranslatorDbKeysClass * klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	g_type_class_add_private (klass, sizeof (GtranslatorDbKeysPrivate));
+  g_type_class_add_private (klass, sizeof (GtranslatorDbKeysPrivate));
 
-	object_class->finalize = gtranslator_db_keys_finalize;
+  object_class->finalize = gtranslator_db_keys_finalize;
 }
 
 /**
@@ -80,17 +77,17 @@ gtranslator_db_keys_class_init (GtranslatorDbKeysClass *klass)
  * Returns: a new #GtranslatorDbKeys object
  */
 GtranslatorDbKeys *
-gtranslator_db_keys_new (DBT *data)
+gtranslator_db_keys_new (DBT * data)
 {
-	GtranslatorDbKeys *db_keys;
+  GtranslatorDbKeys *db_keys;
 
-	db_keys = g_object_new (GTR_TYPE_DB_KEYS, NULL);
-	
-	db_keys->priv->count = data->size / sizeof(db_recno_t);
-	db_keys->priv->list = g_new (db_recno_t, db_keys->priv->count);
-	memcpy (db_keys->priv->list, data->data, data->size);
-	
-	return db_keys;
+  db_keys = g_object_new (GTR_TYPE_DB_KEYS, NULL);
+
+  db_keys->priv->count = data->size / sizeof (db_recno_t);
+  db_keys->priv->list = g_new (db_recno_t, db_keys->priv->count);
+  memcpy (db_keys->priv->list, data->data, data->size);
+
+  return db_keys;
 }
 
 /**
@@ -104,14 +101,14 @@ gtranslator_db_keys_new (DBT *data)
 GtranslatorDbKeys *
 gtranslator_db_keys_new_with_size (gsize cnt)
 {
-	GtranslatorDbKeys *db_keys;
+  GtranslatorDbKeys *db_keys;
 
-	db_keys = g_object_new (GTR_TYPE_DB_KEYS, NULL);
-	
-	db_keys->priv->list = g_new (db_recno_t, cnt);
-	db_keys->priv->count = cnt;
-	
-	return db_keys;
+  db_keys = g_object_new (GTR_TYPE_DB_KEYS, NULL);
+
+  db_keys->priv->list = g_new (db_recno_t, cnt);
+  db_keys->priv->count = cnt;
+
+  return db_keys;
 }
 
 /**
@@ -123,11 +120,11 @@ gtranslator_db_keys_new_with_size (gsize cnt)
  * Returns: the list of keys
  */
 db_recno_t *
-gtranslator_db_keys_get_list (GtranslatorDbKeys *db_keys)
+gtranslator_db_keys_get_list (GtranslatorDbKeys * db_keys)
 {
-	g_return_val_if_fail (GTR_IS_DB_KEYS (db_keys), NULL);
-	
-	return db_keys->priv->list;
+  g_return_val_if_fail (GTR_IS_DB_KEYS (db_keys), NULL);
+
+  return db_keys->priv->list;
 }
 
 /**
@@ -139,18 +136,17 @@ gtranslator_db_keys_get_list (GtranslatorDbKeys *db_keys)
  * Returns: the number of elements in the list
  */
 gsize
-gtranslator_db_keys_get_count (GtranslatorDbKeys *db_keys)
+gtranslator_db_keys_get_count (GtranslatorDbKeys * db_keys)
 {
-	g_return_val_if_fail (GTR_IS_DB_KEYS (db_keys), 0);
-	
-	return db_keys->priv->count;
+  g_return_val_if_fail (GTR_IS_DB_KEYS (db_keys), 0);
+
+  return db_keys->priv->count;
 }
 
 void
-gtranslator_db_keys_set_count (GtranslatorDbKeys *db_keys,
-			       gsize count)
+gtranslator_db_keys_set_count (GtranslatorDbKeys * db_keys, gsize count)
 {
-	g_return_if_fail (GTR_IS_DB_KEYS (db_keys));
-	
-	db_keys->priv->count = count;
+  g_return_if_fail (GTR_IS_DB_KEYS (db_keys));
+
+  db_keys->priv->count = count;
 }

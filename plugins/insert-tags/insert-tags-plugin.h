@@ -25,7 +25,6 @@
 #include "plugin.h"
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -35,38 +34,40 @@ G_BEGIN_DECLS
 #define GTR_IS_INSERT_TAGS_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_INSERT_TAGS_PLUGIN))
 #define GTR_IS_INSERT_TAGS_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_INSERT_TAGS_PLUGIN))
 #define GTR_INSERT_TAGS_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_INSERT_TAGS_PLUGIN_PLUGIN, GtranslatorInsertTagsPluginClass))
-
 /* Private structure type */
-typedef struct _GtranslatorInsertTagsPluginPrivate	GtranslatorInsertTagsPluginPrivate;
+typedef struct _GtranslatorInsertTagsPluginPrivate
+  GtranslatorInsertTagsPluginPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorInsertTagsPlugin		GtranslatorInsertTagsPlugin;
+typedef struct _GtranslatorInsertTagsPlugin GtranslatorInsertTagsPlugin;
 
 struct _GtranslatorInsertTagsPlugin
 {
-	GtranslatorPlugin parent_instance;
+  GtranslatorPlugin parent_instance;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorInsertTagsPluginClass	GtranslatorInsertTagsPluginClass;
+typedef struct _GtranslatorInsertTagsPluginClass
+  GtranslatorInsertTagsPluginClass;
 
 struct _GtranslatorInsertTagsPluginClass
 {
-	GtranslatorPluginClass parent_class;
+  GtranslatorPluginClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType	gtranslator_insert_tags_plugin_get_type	(void) G_GNUC_CONST;
+GType
+gtranslator_insert_tags_plugin_get_type (void)
+  G_GNUC_CONST;
 
 /* All the plugins must implement this function */
-G_MODULE_EXPORT GType register_gtranslator_plugin (GTypeModule *module);
+     G_MODULE_EXPORT GType register_gtranslator_plugin (GTypeModule * module);
 
 G_END_DECLS
-
 #endif /* __GTR_INSERT_TAGS_PLUGIN_H__ */

@@ -23,7 +23,6 @@
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -33,42 +32,42 @@ G_BEGIN_DECLS
 #define GTR_IS_BERKELEY(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_BERKELEY))
 #define GTR_IS_BERKELEY_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_BERKELEY))
 #define GTR_BERKELEY_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_BERKELEY, GtranslatorBerkeleyClass))
-
 /* Private structure type */
-typedef struct _GtranslatorBerkeleyPrivate	GtranslatorBerkeleyPrivate;
+typedef struct _GtranslatorBerkeleyPrivate GtranslatorBerkeleyPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorBerkeley		GtranslatorBerkeley;
+typedef struct _GtranslatorBerkeley GtranslatorBerkeley;
 
 struct _GtranslatorBerkeley
 {
-	GObject parent_instance;
-	
-	/*< private > */
-	GtranslatorBerkeleyPrivate *priv;
+  GObject parent_instance;
+
+  /*< private > */
+  GtranslatorBerkeleyPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorBerkeleyClass	GtranslatorBerkeleyClass;
+typedef struct _GtranslatorBerkeleyClass GtranslatorBerkeleyClass;
 
 struct _GtranslatorBerkeleyClass
 {
-	GObjectClass parent_class;
+  GObjectClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_berkeley_get_type	  (void) G_GNUC_CONST;
+GType
+gtranslator_berkeley_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_berkeley_register_type   (GTypeModule * module);
+     GType gtranslator_berkeley_register_type (GTypeModule * module);
 
-GtranslatorBerkeley   *gtranslator_berkeley_new	  (void);
+     GtranslatorBerkeley *gtranslator_berkeley_new (void);
 
 G_END_DECLS
-
 #endif /* __BERKELEY_H__ */

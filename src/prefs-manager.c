@@ -87,278 +87,257 @@ gtranslator_prefs_manager_set_ ## name (const gchar* v)			\
 									\
 	gtranslator_prefs_manager_set_string (key,				\
 				        v);				\
-}	
+}
 
 
 GtranslatorPrefsManager *gtranslator_prefs_manager = NULL;
 
-static gboolean		 gtranslator_prefs_manager_get_bool		(const gchar* key);
+static gboolean gtranslator_prefs_manager_get_bool (const gchar * key);
 
-static gint		 gtranslator_prefs_manager_get_int		(const gchar* key);
+static gint gtranslator_prefs_manager_get_int (const gchar * key);
 
-static gchar		*gtranslator_prefs_manager_get_string		(const gchar* key);
+static gchar *gtranslator_prefs_manager_get_string (const gchar * key);
 
 
 void
 gtranslator_prefs_manager_init (void)
 {
-	//gtranslator_debug (DEBUG_PREFS);
+  //gtranslator_debug (DEBUG_PREFS);
 
-	if (gtranslator_prefs_manager == NULL)
-	{
-		GConfClient *gconf_client;
+  if (gtranslator_prefs_manager == NULL)
+    {
+      GConfClient *gconf_client;
 
-		gconf_client = gconf_client_get_default ();
-		if (gconf_client == NULL)
-			g_error("Failed to initialize preferences manager");
+      gconf_client = gconf_client_get_default ();
+      if (gconf_client == NULL)
+	g_error ("Failed to initialize preferences manager");
 
-		gtranslator_prefs_manager = g_new0 (GtranslatorPrefsManager, 1);
+      gtranslator_prefs_manager = g_new0 (GtranslatorPrefsManager, 1);
 
-		gtranslator_prefs_manager->gconf_client = gconf_client;
-	}	
+      gtranslator_prefs_manager->gconf_client = gconf_client;
+    }
 }
 
 void
 gtranslator_prefs_manager_shutdown ()
 {
-	//gtranslator_debug (DEBUG_PREFS);
+  //gtranslator_debug (DEBUG_PREFS);
 
-	g_object_unref (gtranslator_prefs_manager->gconf_client);
-	gtranslator_prefs_manager->gconf_client = NULL;
+  g_object_unref (gtranslator_prefs_manager->gconf_client);
+  gtranslator_prefs_manager->gconf_client = NULL;
 }
 
-static gboolean		 
-gtranslator_prefs_manager_get_bool (const gchar* key)
+static gboolean
+gtranslator_prefs_manager_get_bool (const gchar * key)
 {
-	//gtranslator_debug (DEBUG_PREFS);
+  //gtranslator_debug (DEBUG_PREFS);
 
-	return gconf_client_get_bool (gtranslator_prefs_manager->gconf_client,
-					key,
-					NULL);
+  return gconf_client_get_bool (gtranslator_prefs_manager->gconf_client,
+				key, NULL);
 }
 
-static gint 
-gtranslator_prefs_manager_get_int (const gchar* key)
+static gint
+gtranslator_prefs_manager_get_int (const gchar * key)
 {
-	//gtranslator_debug (DEBUG_PREFS);
+  //gtranslator_debug (DEBUG_PREFS);
 
-	return gconf_client_get_int (gtranslator_prefs_manager->gconf_client,
-					key,
-					NULL);
-}	
+  return gconf_client_get_int (gtranslator_prefs_manager->gconf_client,
+			       key, NULL);
+}
 
 static gchar *
-gtranslator_prefs_manager_get_string (const gchar* key)
+gtranslator_prefs_manager_get_string (const gchar * key)
 {
-	//gtranslator_debug (DEBUG_PREFS);
+  //gtranslator_debug (DEBUG_PREFS);
 
-	return gconf_client_get_string (gtranslator_prefs_manager->gconf_client,
-					key,
-					NULL);
-}	
-
-static void		 
-gtranslator_prefs_manager_set_bool (const gchar* key, gboolean value)
-{
-	//gtranslator_debug (DEBUG_PREFS);
-
-	g_return_if_fail (gconf_client_key_is_writable (
-				gtranslator_prefs_manager->gconf_client, key, NULL));
-			
-	gconf_client_set_bool (gtranslator_prefs_manager->gconf_client, key, value, NULL);
+  return gconf_client_get_string (gtranslator_prefs_manager->gconf_client,
+				  key, NULL);
 }
 
-static void		 
-gtranslator_prefs_manager_set_int (const gchar* key, gint value)
+static void
+gtranslator_prefs_manager_set_bool (const gchar * key, gboolean value)
 {
-	//gtranslator_debug (DEBUG_PREFS);
+  //gtranslator_debug (DEBUG_PREFS);
 
-	g_return_if_fail (gconf_client_key_is_writable (
-				gtranslator_prefs_manager->gconf_client, key, NULL));
-			
-	gconf_client_set_int (gtranslator_prefs_manager->gconf_client, key, value, NULL);
+  g_return_if_fail (gconf_client_key_is_writable
+		    (gtranslator_prefs_manager->gconf_client, key, NULL));
+
+  gconf_client_set_bool (gtranslator_prefs_manager->gconf_client, key, value,
+			 NULL);
 }
 
-static void		 
-gtranslator_prefs_manager_set_string (const gchar* key, const gchar* value)
+static void
+gtranslator_prefs_manager_set_int (const gchar * key, gint value)
 {
-	//gtranslator_debug (DEBUG_PREFS);
+  //gtranslator_debug (DEBUG_PREFS);
 
-	g_return_if_fail (value != NULL);
-	
-	g_return_if_fail (gconf_client_key_is_writable (
-				gtranslator_prefs_manager->gconf_client, key, NULL));
-			
-	gconf_client_set_string (gtranslator_prefs_manager->gconf_client, key, value, NULL);
+  g_return_if_fail (gconf_client_key_is_writable
+		    (gtranslator_prefs_manager->gconf_client, key, NULL));
+
+  gconf_client_set_int (gtranslator_prefs_manager->gconf_client, key, value,
+			NULL);
 }
 
-static gboolean 
-gtranslator_prefs_manager_key_is_writable (const gchar* key)
+static void
+gtranslator_prefs_manager_set_string (const gchar * key, const gchar * value)
 {
-	//gtranslator_debug (DEBUG_PREFS);
+  //gtranslator_debug (DEBUG_PREFS);
 
-	return gconf_client_key_is_writable (gtranslator_prefs_manager->gconf_client, key, NULL);
+  g_return_if_fail (value != NULL);
+
+  g_return_if_fail (gconf_client_key_is_writable
+		    (gtranslator_prefs_manager->gconf_client, key, NULL));
+
+  gconf_client_set_string (gtranslator_prefs_manager->gconf_client, key,
+			   value, NULL);
+}
+
+static gboolean
+gtranslator_prefs_manager_key_is_writable (const gchar * key)
+{
+  //gtranslator_debug (DEBUG_PREFS);
+
+  return gconf_client_key_is_writable (gtranslator_prefs_manager->
+				       gconf_client, key, NULL);
 }
 
 /* Files */
-DEFINE_BOOL_PREF(warn_if_contains_fuzzy,
-		 GPM_WARN_IF_CONTAINS_FUZZY)
-
-DEFINE_BOOL_PREF(delete_compiled,
-		 GPM_DELETE_COMPILED)
-
-DEFINE_BOOL_PREF(autosave,
-		 GPM_AUTOSAVE)
-
-DEFINE_INT_PREF(autosave_interval,
-		GPM_AUTOSAVE_INTERVAL)
-
-DEFINE_BOOL_PREF(create_backup,
-		 GPM_CREATE_BACKUP)
-
-DEFINE_BOOL_PREF(use_profile_values,
-		 GPM_USE_PROFILE_VALUES)
-
+DEFINE_BOOL_PREF (warn_if_contains_fuzzy,
+		  GPM_WARN_IF_CONTAINS_FUZZY)
+DEFINE_BOOL_PREF (delete_compiled,
+		  GPM_DELETE_COMPILED)
+DEFINE_BOOL_PREF (autosave,
+		  GPM_AUTOSAVE)
+DEFINE_INT_PREF (autosave_interval,
+		 GPM_AUTOSAVE_INTERVAL)
+DEFINE_BOOL_PREF (create_backup,
+		  GPM_CREATE_BACKUP)
+DEFINE_BOOL_PREF (use_profile_values, GPM_USE_PROFILE_VALUES)
 /* Editor */
-DEFINE_BOOL_PREF(highlight_syntax,
-		 GPM_HIGHLIGHT_SYNTAX)
-
-DEFINE_BOOL_PREF(visible_whitespace,
-		 GPM_VISIBLE_WHITESPACE)
-
-DEFINE_BOOL_PREF(use_custom_font,
-		 GPM_USE_CUSTOM_FONT)
-
-DEFINE_STRING_PREF(editor_font,
-		   GPM_EDITOR_FONT)
-
-DEFINE_BOOL_PREF(unmark_fuzzy_when_changed,
-		 GPM_UNMARK_FUZZY_WHEN_CHANGED)
-
-DEFINE_BOOL_PREF(spellcheck,
-		 GPM_SPELLCHECK)
-
+  DEFINE_BOOL_PREF (highlight_syntax,
+		  GPM_HIGHLIGHT_SYNTAX)
+DEFINE_BOOL_PREF (visible_whitespace,
+		  GPM_VISIBLE_WHITESPACE)
+DEFINE_BOOL_PREF (use_custom_font,
+		  GPM_USE_CUSTOM_FONT)
+DEFINE_STRING_PREF (editor_font,
+		    GPM_EDITOR_FONT)
+DEFINE_BOOL_PREF (unmark_fuzzy_when_changed,
+		  GPM_UNMARK_FUZZY_WHEN_CHANGED)
+DEFINE_BOOL_PREF (spellcheck, GPM_SPELLCHECK)
 /* Translation Memory */
-DEFINE_STRING_PREF (po_directory,
+  DEFINE_STRING_PREF (po_directory,
 		    GPM_PO_DIRECTORY)
-
 DEFINE_BOOL_PREF (restrict_to_filename,
-		 GPM_RESTRICT_TO_FILENAME)
-
+		  GPM_RESTRICT_TO_FILENAME)
 DEFINE_STRING_PREF (filename_restriction,
 		    GPM_FILENAME_RESTRICTION)
-
 DEFINE_INT_PREF (max_missing_words,
 		 GPM_MAX_MISSING_WORDS)
-
-DEFINE_INT_PREF (max_length_diff,
-		 GPM_MAX_LENGTH_DIFF)
-
+DEFINE_INT_PREF (max_length_diff, GPM_MAX_LENGTH_DIFF)
 /* UI */
-
 /* pane_switcher_style requires custom functions to deal with conversion from a
    string to an enum */
-GdlSwitcherStyle
+  GdlSwitcherStyle
 gtranslator_prefs_manager_get_pane_switcher_style (void)
 {
-	GdlSwitcherStyle pane_switcher_style;
-	const gchar *v;
+  GdlSwitcherStyle pane_switcher_style;
+  const gchar *v;
 
-	v = gtranslator_prefs_manager_get_string (GPM_PANE_SWITCHER_STYLE);
-	if (!g_strcmp0(v, "icons"))
-		pane_switcher_style = GDL_SWITCHER_STYLE_ICON;
-	else if (!g_strcmp0(v, "text"))
-		pane_switcher_style = GDL_SWITCHER_STYLE_TEXT;
-	else if (!g_strcmp0(v, "icons_and_text"))
-		pane_switcher_style = GDL_SWITCHER_STYLE_BOTH;
-	else if (!g_strcmp0(v, "tabs"))
-		pane_switcher_style = GDL_SWITCHER_STYLE_TABS;
-	else if (!g_strcmp0(v, "system"))
-		pane_switcher_style = GDL_SWITCHER_STYLE_TOOLBAR;
-	else
-		pane_switcher_style = GDL_SWITCHER_STYLE_BOTH;
+  v = gtranslator_prefs_manager_get_string (GPM_PANE_SWITCHER_STYLE);
+  if (!g_strcmp0 (v, "icons"))
+    pane_switcher_style = GDL_SWITCHER_STYLE_ICON;
+  else if (!g_strcmp0 (v, "text"))
+    pane_switcher_style = GDL_SWITCHER_STYLE_TEXT;
+  else if (!g_strcmp0 (v, "icons_and_text"))
+    pane_switcher_style = GDL_SWITCHER_STYLE_BOTH;
+  else if (!g_strcmp0 (v, "tabs"))
+    pane_switcher_style = GDL_SWITCHER_STYLE_TABS;
+  else if (!g_strcmp0 (v, "system"))
+    pane_switcher_style = GDL_SWITCHER_STYLE_TOOLBAR;
+  else
+    pane_switcher_style = GDL_SWITCHER_STYLE_BOTH;
 
-	return pane_switcher_style;
+  return pane_switcher_style;
 }
 
 void
-gtranslator_prefs_manager_set_pane_switcher_style (GdlSwitcherStyle pane_switcher_style)
+gtranslator_prefs_manager_set_pane_switcher_style (GdlSwitcherStyle
+						   pane_switcher_style)
 {
-	const gchar *v;
+  const gchar *v;
 
-	switch (pane_switcher_style) {
-		case GDL_SWITCHER_STYLE_ICON:
-			v = "icons";
-			break;
+  switch (pane_switcher_style)
+    {
+    case GDL_SWITCHER_STYLE_ICON:
+      v = "icons";
+      break;
 
-		case GDL_SWITCHER_STYLE_TEXT:
-			v = "text";
-			break;
+    case GDL_SWITCHER_STYLE_TEXT:
+      v = "text";
+      break;
 
-		case GDL_SWITCHER_STYLE_TABS:
-			v = "tabs";
-			break;
+    case GDL_SWITCHER_STYLE_TABS:
+      v = "tabs";
+      break;
 
-		case GDL_SWITCHER_STYLE_TOOLBAR:
-			v = "system";
-			break;
+    case GDL_SWITCHER_STYLE_TOOLBAR:
+      v = "system";
+      break;
 
-		case GDL_SWITCHER_STYLE_BOTH:
-		default:
-			v = "icons_and_text";
-	}
-	gtranslator_prefs_manager_set_string (GPM_PANE_SWITCHER_STYLE,
-						v);
+    case GDL_SWITCHER_STYLE_BOTH:
+    default:
+      v = "icons_and_text";
+    }
+  gtranslator_prefs_manager_set_string (GPM_PANE_SWITCHER_STYLE, v);
 }
 
-DEFINE_STRING_PREF (color_scheme,
-		    GPM_COLOR_SCHEME)
-
+DEFINE_STRING_PREF (color_scheme, GPM_COLOR_SCHEME)
 /* sort_order requires custom functions to deal with conversion from a string to
    an enum */
-GtranslatorSortOrder
+  GtranslatorSortOrder
 gtranslator_prefs_manager_get_sort_order (void)
 {
-	GtranslatorSortOrder sort_order;
-	const gchar *v;
+  GtranslatorSortOrder sort_order;
+  const gchar *v;
 
-	v = gtranslator_prefs_manager_get_string (GPM_SORT_ORDER);
-	if (!g_strcmp0(v, "status"))
-		sort_order = GTR_SORT_ORDER_STATUS;
-	else if (!g_strcmp0(v, "id"))
-		sort_order = GTR_SORT_ORDER_ID;
-	else if (!g_strcmp0(v, "original_text"))
-		sort_order = GTR_SORT_ORDER_ORIGINAL_TEXT;
-	else if (!g_strcmp0(v, "translated_text"))
-		sort_order = GTR_SORT_ORDER_TRANSLATED_TEXT;
-	else
-		sort_order = GTR_SORT_ORDER_ID;
+  v = gtranslator_prefs_manager_get_string (GPM_SORT_ORDER);
+  if (!g_strcmp0 (v, "status"))
+    sort_order = GTR_SORT_ORDER_STATUS;
+  else if (!g_strcmp0 (v, "id"))
+    sort_order = GTR_SORT_ORDER_ID;
+  else if (!g_strcmp0 (v, "original_text"))
+    sort_order = GTR_SORT_ORDER_ORIGINAL_TEXT;
+  else if (!g_strcmp0 (v, "translated_text"))
+    sort_order = GTR_SORT_ORDER_TRANSLATED_TEXT;
+  else
+    sort_order = GTR_SORT_ORDER_ID;
 
-	return sort_order;
+  return sort_order;
 }
 
 void
 gtranslator_prefs_manager_set_sort_order (GtranslatorSortOrder sort_order)
 {
-	const gchar *v;
+  const gchar *v;
 
-	switch (sort_order) {
-		case GTR_SORT_ORDER_STATUS:
-			v = "status";
-			break;
+  switch (sort_order)
+    {
+    case GTR_SORT_ORDER_STATUS:
+      v = "status";
+      break;
 
-		case GTR_SORT_ORDER_ORIGINAL_TEXT:
-			v = "original_text";
-			break;
+    case GTR_SORT_ORDER_ORIGINAL_TEXT:
+      v = "original_text";
+      break;
 
-		case GTR_SORT_ORDER_TRANSLATED_TEXT:
-			v = "translated_text";
-			break;
+    case GTR_SORT_ORDER_TRANSLATED_TEXT:
+      v = "translated_text";
+      break;
 
-		case GTR_SORT_ORDER_ID:
-		default:
-			v = "id";
-	}
-	gtranslator_prefs_manager_set_string (GPM_SORT_ORDER,
-						v);
+    case GTR_SORT_ORDER_ID:
+    default:
+      v = "id";
+    }
+  gtranslator_prefs_manager_set_string (GPM_SORT_ORDER, v);
 }

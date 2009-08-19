@@ -33,7 +33,6 @@
 #include "header.h"
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -43,135 +42,138 @@ G_BEGIN_DECLS
 #define GTR_IS_PO(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_PO))
 #define GTR_IS_PO_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_PO))
 #define GTR_PO_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_PO, GtranslatorPoClass))
-
 /* Private structure type */
-typedef struct _GtranslatorPoPrivate	GtranslatorPoPrivate;
+typedef struct _GtranslatorPoPrivate GtranslatorPoPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorPo		GtranslatorPo;
+typedef struct _GtranslatorPo GtranslatorPo;
 
 struct _GtranslatorPo
 {
-	GObject parent_instance;
-	
-	/*< private > */
-	GtranslatorPoPrivate *priv;
+  GObject parent_instance;
+
+  /*< private > */
+  GtranslatorPoPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorPoClass	GtranslatorPoClass;
+typedef struct _GtranslatorPoClass GtranslatorPoClass;
 
 struct _GtranslatorPoClass
 {
-	GObjectClass parent_class;
+  GObjectClass parent_class;
 };
 
 #define GTR_PO_ERROR gtranslator_po_error_quark()
 
 enum
 {
-	GTR_PO_ERROR_GETTEXT,
-	GTR_PO_ERROR_FILENAME,
-	GTR_PO_ERROR_RECOVERY,
-	GTR_PO_ERROR_FILE_EMPTY,
-	GTR_PO_ERROR_OTHER,
+  GTR_PO_ERROR_GETTEXT,
+  GTR_PO_ERROR_FILENAME,
+  GTR_PO_ERROR_RECOVERY,
+  GTR_PO_ERROR_FILE_EMPTY,
+  GTR_PO_ERROR_OTHER,
 };
 
 typedef enum
 {
-	GTR_PO_STATE_SAVED,
-	GTR_PO_STATE_MODIFIED
-}GtranslatorPoState;
+  GTR_PO_STATE_SAVED,
+  GTR_PO_STATE_MODIFIED
+} GtranslatorPoState;
 
 /*
  * Public methods
  */
-GQuark		gtranslator_po_error_quark		(void);
+GQuark gtranslator_po_error_quark (void);
 
-GType		gtranslator_po_get_type			(void) G_GNUC_CONST;
+GType
+gtranslator_po_get_type (void)
+  G_GNUC_CONST;
 
-GType		gtranslator_po_register_type		(GTypeModule * module);
+     GType gtranslator_po_register_type (GTypeModule * module);
 
-GtranslatorPo	*gtranslator_po_new			(void);
+     GtranslatorPo *gtranslator_po_new (void);
 
-void		gtranslator_po_parse			(GtranslatorPo *po,
-							 GFile *filename,
-							 GError **error);
+     void gtranslator_po_parse (GtranslatorPo * po,
+				GFile * filename, GError ** error);
 
-void		gtranslator_po_save_header_in_msg	(GtranslatorPo *po,
-							 GtranslatorHeader *header);
+     void gtranslator_po_save_header_in_msg (GtranslatorPo * po,
+					     GtranslatorHeader * header);
 
-void		gtranslator_po_save_file           	(GtranslatorPo *po,
-							GError **error);
-							
-GtranslatorPoState    gtranslator_po_get_state          (GtranslatorPo *po);
+     void gtranslator_po_save_file (GtranslatorPo * po, GError ** error);
 
-void            gtranslator_po_set_state                (GtranslatorPo *po,
-							 GtranslatorPoState state);
+     GtranslatorPoState gtranslator_po_get_state (GtranslatorPo * po);
 
-GFile          *gtranslator_po_get_location             (GtranslatorPo *po);
+     void gtranslator_po_set_state (GtranslatorPo * po,
+				    GtranslatorPoState state);
 
-void            gtranslator_po_set_location		(GtranslatorPo *po,
-							 GFile *location);
+     GFile *gtranslator_po_get_location (GtranslatorPo * po);
 
-gboolean         gtranslator_po_get_write_perms		(GtranslatorPo *po);
+     void gtranslator_po_set_location (GtranslatorPo * po, GFile * location);
 
-GList           *gtranslator_po_get_messages		(GtranslatorPo *po);
+     gboolean gtranslator_po_get_write_perms (GtranslatorPo * po);
 
-void             gtranslator_po_set_messages		(GtranslatorPo *po,
-							GList *messages);
+     GList *gtranslator_po_get_messages (GtranslatorPo * po);
 
-GList           *gtranslator_po_get_current_message	(GtranslatorPo *po);
+     void gtranslator_po_set_messages (GtranslatorPo * po, GList * messages);
 
-GList           *gtranslator_po_get_domains		(GtranslatorPo *po);
+     GList *gtranslator_po_get_current_message (GtranslatorPo * po);
 
-po_file_t        gtranslator_po_get_po_file		(GtranslatorPo *po);
+     GList *gtranslator_po_get_domains (GtranslatorPo * po);
 
-GList           *gtranslator_po_get_next_fuzzy		(GtranslatorPo *po);
+     po_file_t gtranslator_po_get_po_file (GtranslatorPo * po);
 
-GList           *gtranslator_po_get_prev_fuzzy		(GtranslatorPo *po);
+     GList *gtranslator_po_get_next_fuzzy (GtranslatorPo * po);
 
-GList           *gtranslator_po_get_next_untrans	(GtranslatorPo *po);
+     GList *gtranslator_po_get_prev_fuzzy (GtranslatorPo * po);
 
-GList           *gtranslator_po_get_prev_untrans	(GtranslatorPo *po);
+     GList *gtranslator_po_get_next_untrans (GtranslatorPo * po);
 
-GList           *gtranslator_po_get_next_fuzzy_or_untrans (GtranslatorPo *po);
+     GList *gtranslator_po_get_prev_untrans (GtranslatorPo * po);
 
-GList           *gtranslator_po_get_prev_fuzzy_or_untrans (GtranslatorPo *po);
+     GList *gtranslator_po_get_next_fuzzy_or_untrans (GtranslatorPo * po);
 
-GList           *gtranslator_po_get_msg_from_number     (GtranslatorPo *po,
-							 gint number);
+     GList *gtranslator_po_get_prev_fuzzy_or_untrans (GtranslatorPo * po);
 
-GtranslatorHeader  
-		*gtranslator_po_get_header		(GtranslatorPo *po);
+     GList *gtranslator_po_get_msg_from_number (GtranslatorPo * po,
+						gint number);
 
-void             gtranslator_po_set_header              (GtranslatorPo *po, 
-							 GtranslatorHeader *header);
+GtranslatorHeader * gtranslator_po_get_header (GtranslatorPo * po);
 
-gint             gtranslator_po_get_translated_count	(GtranslatorPo *po);
+     void
+     gtranslator_po_set_header (GtranslatorPo * po,
+				GtranslatorHeader * header);
 
-gint             gtranslator_po_get_fuzzy_count		(GtranslatorPo *po);
+     gint
+     gtranslator_po_get_translated_count (GtranslatorPo * po);
 
-gint             gtranslator_po_get_untranslated_count	(GtranslatorPo *po);
+     gint
+     gtranslator_po_get_fuzzy_count (GtranslatorPo * po);
 
-gint             gtranslator_po_get_messages_count	(GtranslatorPo *po);
+     gint
+     gtranslator_po_get_untranslated_count (GtranslatorPo * po);
 
-gint             gtranslator_po_get_message_position	(GtranslatorPo *po);
+     gint
+     gtranslator_po_get_messages_count (GtranslatorPo * po);
 
-gchar           *gtranslator_po_check_po_file		(GtranslatorPo *po);
+     gint
+     gtranslator_po_get_message_position (GtranslatorPo * po);
+
+     gchar *
+     gtranslator_po_check_po_file (GtranslatorPo * po);
 
 /* Unexported funcs */
-void            _gtranslator_po_increase_decrease_translated
-                                                       (GtranslatorPo *po,
-							gboolean increase);
+     void
+     _gtranslator_po_increase_decrease_translated
+       (GtranslatorPo * po, gboolean increase);
 
-void            _gtranslator_po_increase_decrease_fuzzy(GtranslatorPo *po,
-							gboolean increase);
+     void
+     _gtranslator_po_increase_decrease_fuzzy (GtranslatorPo * po,
+					      gboolean increase);
 
 G_END_DECLS
-
 #endif /* __PO_H__ */

@@ -24,7 +24,6 @@
 #include <glib-object.h>
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -34,38 +33,38 @@ G_BEGIN_DECLS
 #define GTR_IS_DICT_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_Dict_PLUGIN))
 #define GTR_IS_DICT_PLUGIN_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_Dict_PLUGIN))
 #define GTR_Dict_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_Dict_PLUGIN, GtranslatorDictPluginClass))
-
 /* Private structure type */
-typedef struct _GtranslatorDictPluginPrivate	GtranslatorDictPluginPrivate;
+typedef struct _GtranslatorDictPluginPrivate GtranslatorDictPluginPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorDictPlugin		GtranslatorDictPlugin;
+typedef struct _GtranslatorDictPlugin GtranslatorDictPlugin;
 
 struct _GtranslatorDictPlugin
 {
-	GtranslatorPlugin parent_instance;
+  GtranslatorPlugin parent_instance;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorDictPluginClass	GtranslatorDictPluginClass;
+typedef struct _GtranslatorDictPluginClass GtranslatorDictPluginClass;
 
 struct _GtranslatorDictPluginClass
 {
-	GtranslatorPluginClass parent_class;
+  GtranslatorPluginClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType	gtranslator_dict_plugin_get_type	(void) G_GNUC_CONST;
+GType
+gtranslator_dict_plugin_get_type (void)
+  G_GNUC_CONST;
 
 /* All the plugins must implement this function */
-G_MODULE_EXPORT GType register_gtranslator_plugin (GTypeModule *module);
+     G_MODULE_EXPORT GType register_gtranslator_plugin (GTypeModule * module);
 
 G_END_DECLS
-
 #endif /* __GTR_Dict_PLUGIN_H__ */

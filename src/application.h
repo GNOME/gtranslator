@@ -31,7 +31,6 @@
 #include "window.h"
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -41,80 +40,94 @@ G_BEGIN_DECLS
 #define GTR_IS_APPLICATION(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_APPLICATION))
 #define GTR_IS_APPLICATION_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_APPLICATION))
 #define GTR_APPLICATION_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_APPLIAPPLICATION, GtranslatorApplicationClass))
-
 #define GTR_APP			        (gtranslator_application_get_default())
-
 /* Private structure type */
-typedef struct _GtranslatorApplicationPrivate	GtranslatorApplicationPrivate;
+typedef struct _GtranslatorApplicationPrivate GtranslatorApplicationPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorApplication		GtranslatorApplication;
+typedef struct _GtranslatorApplication GtranslatorApplication;
 
 struct _GtranslatorApplication
 {
-	GObject base_instance;
-	
-	/*< private > */
-	GtranslatorApplicationPrivate *priv;
+  GObject base_instance;
+
+  /*< private > */
+  GtranslatorApplicationPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorApplicationClass	GtranslatorApplicationClass;
+typedef struct _GtranslatorApplicationClass GtranslatorApplicationClass;
 
 struct _GtranslatorApplicationClass
 {
-	GObjectClass parent_class;
+  GObjectClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		         gtranslator_application_get_type	   (void) G_GNUC_CONST;
-GtranslatorApplication	*gtranslator_application_get_default	           (void);
+GType
+gtranslator_application_get_type (void)
+  G_GNUC_CONST;
+     GtranslatorApplication *gtranslator_application_get_default (void);
 
-void              gtranslator_application_shutdown            (GtranslatorApplication *app);
+     void gtranslator_application_shutdown (GtranslatorApplication * app);
 
-GList            *gtranslator_application_get_views           (GtranslatorApplication *app,
-							       gboolean original,
-							       gboolean translated);
+     GList *gtranslator_application_get_views (GtranslatorApplication * app,
+					       gboolean original,
+					       gboolean translated);
 
-GtranslatorWindow *gtranslator_application_open_window (GtranslatorApplication *app);
+     GtranslatorWindow
+       *gtranslator_application_open_window (GtranslatorApplication * app);
 
-GtranslatorWindow *gtranslator_application_get_active_window  (GtranslatorApplication * app);
+     GtranslatorWindow
+       *gtranslator_application_get_active_window (GtranslatorApplication *
+						   app);
 
-const GList       *gtranslator_application_get_windows (GtranslatorApplication *app);
+     const GList *gtranslator_application_get_windows (GtranslatorApplication
+						       * app);
 
-GtranslatorProfile *gtranslator_application_get_active_profile (GtranslatorApplication *app);
+     GtranslatorProfile
+       *gtranslator_application_get_active_profile (GtranslatorApplication *
+						    app);
 
-void              gtranslator_application_set_active_profile (GtranslatorApplication *app,
-							      GtranslatorProfile *profile);
+     void gtranslator_application_set_active_profile (GtranslatorApplication *
+						      app,
+						      GtranslatorProfile *
+						      profile);
 
-GList             *gtranslator_application_get_profiles (GtranslatorApplication *app);
+     GList *gtranslator_application_get_profiles (GtranslatorApplication *
+						  app);
 
-void              gtranslator_application_set_profiles (GtranslatorApplication *app,
-							GList *profiles);
+     void gtranslator_application_set_profiles (GtranslatorApplication * app,
+						GList * profiles);
 
-void              gtranslator_application_register_icon (GtranslatorApplication *app,
-							 const gchar *icon,
-				       			 const gchar *stock_id);
-				       			 
-GObject          *gtranslator_application_get_translation_memory (GtranslatorApplication *app);
+     void gtranslator_application_register_icon (GtranslatorApplication * app,
+						 const gchar * icon,
+						 const gchar * stock_id);
+
+     GObject
+       *gtranslator_application_get_translation_memory (GtranslatorApplication
+							* app);
 
 /* Non exported funcs */
 
-GObject          *_gtranslator_application_get_toolbars_model  (GtranslatorApplication   *application);
+     GObject
+       *_gtranslator_application_get_toolbars_model (GtranslatorApplication *
+						     application);
 
-void              _gtranslator_application_save_toolbars_model (GtranslatorApplication   *application);
+     void _gtranslator_application_save_toolbars_model (GtranslatorApplication
+							* application);
 
-const gchar *     _gtranslator_application_get_last_dir        (GtranslatorApplication *app);
+     const gchar
+       *_gtranslator_application_get_last_dir (GtranslatorApplication * app);
 
-void              _gtranslator_application_set_last_dir        (GtranslatorApplication *app,
-							        const gchar *last_dir);
+     void _gtranslator_application_set_last_dir (GtranslatorApplication * app,
+						 const gchar * last_dir);
 
 G_END_DECLS
-
 #endif /* __APPLICATION_H__ */

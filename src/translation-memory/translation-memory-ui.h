@@ -26,52 +26,54 @@
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
 #define GTR_TYPE_TRANSLATION_MEMORY_UI	        (gtranslator_translation_memory_ui_get_type ())
 #define GTR_TRANSLATION_MEMORY_UI(o)	        (G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_TRANSLATION_MEMORY_UI, GtranslatorTranslationMemoryUi))
 #define GTR_TRANSLATION_MEMORY_UI_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_TRANSLATION_MEMORY_UI, GtranslatorTranslationMemoryUiClass))
-#define GTR_IS_TRANSLATION_MEMORY_UI(o)	        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_TRANSLATION_MEMORY_UI))  
+#define GTR_IS_TRANSLATION_MEMORY_UI(o)	        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_TRANSLATION_MEMORY_UI))
 #define GTR_IS_TRANSLATION_MEMORY_UI_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_TRANSLATION_MEMORY_UI))
 #define GTR_TRANSLATION_MEMORY_UI_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_TRANSLATION_MEMORY_UI, GtranslatorTranslationMemoryUiClass))
-
 /* Private structure type */
-typedef struct _GtranslatorTranslationMemoryUiPrivate	GtranslatorTranslationMemoryUiPrivate;
+typedef struct _GtranslatorTranslationMemoryUiPrivate
+  GtranslatorTranslationMemoryUiPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorTranslationMemoryUi		GtranslatorTranslationMemoryUi;
+typedef struct _GtranslatorTranslationMemoryUi GtranslatorTranslationMemoryUi;
 
 struct _GtranslatorTranslationMemoryUi
 {
-        GtkScrolledWindow parent_instance;
-	
-	/*< private > */
-	GtranslatorTranslationMemoryUiPrivate *priv;
+  GtkScrolledWindow parent_instance;
+
+  /*< private > */
+  GtranslatorTranslationMemoryUiPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorTranslationMemoryUiClass	GtranslatorTranslationMemoryUiClass;
+typedef struct _GtranslatorTranslationMemoryUiClass
+  GtranslatorTranslationMemoryUiClass;
 
 struct _GtranslatorTranslationMemoryUiClass
 {
-        GtkScrolledWindowClass parent_class;
+  GtkScrolledWindowClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_translation_memory_ui_get_type	   (void) G_GNUC_CONST;
+GType
+gtranslator_translation_memory_ui_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_translation_memory_ui_register_type   (GTypeModule * module);
+     GType gtranslator_translation_memory_ui_register_type (GTypeModule *
+							    module);
 
-GtkWidget	*gtranslator_translation_memory_ui_new	           (GtkWidget *tab);
+     GtkWidget *gtranslator_translation_memory_ui_new (GtkWidget * tab);
 
 G_END_DECLS
-
 #endif /* __TRANSLATION_MEMORY_UI_H__ */

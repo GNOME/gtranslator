@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA. 
  */
- 
+
 /*
  * Modified by the gtranslator Team, 2002-2007. See the AUTHORS file for a
  * list of people on the gtranslator Team.
@@ -37,36 +37,36 @@
 
 struct _GtranslatorPluginInfo
 {
-	gint               refcount;
+  gint refcount;
 
-	gchar             *file;
+  gchar *file;
 
-	gchar             *module_name;
-	GType              module_type;
-	GtranslatorModule       *module;
-	gchar            **dependencies;
+  gchar *module_name;
+  GType module_type;
+  GtranslatorModule *module;
+  gchar **dependencies;
 
-	gchar             *name;
-	gchar             *desc;
-	gchar             *icon_name;
-	gchar            **authors;
-	gchar             *copyright;
-	gchar             *website;
-        gchar             *license;
+  gchar *name;
+  gchar *desc;
+  gchar *icon_name;
+  gchar **authors;
+  gchar *copyright;
+  gchar *website;
+  gchar *license;
 
-	GtranslatorPlugin       *plugin;
+  GtranslatorPlugin *plugin;
 
-	gint               active : 1;
+  gint active:1;
 
-	/* A plugin is unavailable if it is not possible to activate it
-	   due to an error loading the plugin module (e.g. for Python plugins
-	   when the interpreter has not been correctly initializated) */
-	gint               available : 1;
+  /* A plugin is unavailable if it is not possible to activate it
+     due to an error loading the plugin module (e.g. for Python plugins
+     when the interpreter has not been correctly initializated) */
+  gint available:1;
 };
 
-GtranslatorPluginInfo		*_gtranslator_plugin_info_new		(const gchar *file);
-void			 _gtranslator_plugin_info_ref		(GtranslatorPluginInfo *info);
-void			 _gtranslator_plugin_info_unref	(GtranslatorPluginInfo *info);
+GtranslatorPluginInfo *_gtranslator_plugin_info_new (const gchar * file);
+void _gtranslator_plugin_info_ref (GtranslatorPluginInfo * info);
+void _gtranslator_plugin_info_unref (GtranslatorPluginInfo * info);
 
 
 #endif /* __GTR_PLUGIN_INFO_PRIV_H__ */

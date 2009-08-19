@@ -38,432 +38,414 @@
 						 	GtranslatorViewerPrivate))
 
 
-G_DEFINE_TYPE(GtranslatorViewer, gtranslator_viewer, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (GtranslatorViewer, gtranslator_viewer, GTK_TYPE_DIALOG)
+     struct _GtranslatorViewerPrivate
+     {
+       GtkWidget *main_box;
+       GtkWidget *view;
+       GtkWidget *filename_label;
+     };
 
-struct _GtranslatorViewerPrivate
+     static void dialog_response_handler (GtkDialog * dlg, gint res_id)
 {
-	GtkWidget *main_box;
-	GtkWidget *view;
-	GtkWidget *filename_label;
-};		    
-
-static void
-dialog_response_handler (GtkDialog *dlg, 
-			 gint       res_id)
-{
-	switch (res_id)
-	{
-		default:
-			gtk_widget_destroy (GTK_WIDGET(dlg));
-	}
+  switch (res_id)
+    {
+    default:
+      gtk_widget_destroy (GTK_WIDGET (dlg));
+    }
 }
 
 static void
-gtranslator_viewer_init (GtranslatorViewer *dlg)
+gtranslator_viewer_init (GtranslatorViewer * dlg)
 {
-	gboolean ret;
-	GtkWidget *error_widget;
-	GtkWidget *sw;
-	gchar *root_objects [] = {
-		"main_box",
-		NULL
-	};
-	
-	dlg->priv = GTR_VIEWER_GET_PRIVATE (dlg);
-	
-	gtk_dialog_add_buttons (GTK_DIALOG (dlg),
-				GTK_STOCK_CLOSE,
-				GTK_RESPONSE_CLOSE,
-				NULL);
-	
-	gtk_window_set_title (GTK_WINDOW (dlg), _("Source Viewer"));
-	gtk_window_set_default_size(GTK_WINDOW(dlg), 800, 600);
-	gtk_window_set_resizable (GTK_WINDOW (dlg), TRUE);
-	gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
-	gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
-	
-	/* HIG defaults */
-	gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2); /* 2 * 5 + 2 = 12 */
-	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 4);
-	
-	g_signal_connect (dlg,
-			  "response",
-			  G_CALLBACK (dialog_response_handler),
-			  NULL);
-	
-	/*Builder*/
-	ret = gtranslator_utils_get_ui_objects (DATADIR "/viewer.ui",
-		root_objects,
-		&error_widget,
-		
-		"main_box", &dlg->priv->main_box,
-		"scrolledwindow", &sw,
-		"filename_label", &dlg->priv->filename_label,
-		NULL);
-	
-	if(!ret)
-	{
-		gtk_widget_show(error_widget);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-				    error_widget,
-				    TRUE,
-				    TRUE,
-				    0);
-		
-		return;
-	}
-	
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-			    dlg->priv->main_box, TRUE, TRUE, 0);
-	
-	gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->main_box), 5);
-	
-	/* Source view */
-	dlg->priv->view = gtk_source_view_new ();
-	gtk_text_view_set_editable (GTK_TEXT_VIEW (dlg->priv->view), FALSE);
-	gtk_widget_show (dlg->priv->view);
-	gtk_container_add (GTK_CONTAINER (sw), dlg->priv->view);
-	
-	gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (dlg->priv->view),
-						    TRUE);
-	
-	gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (dlg->priv->view),
-					       TRUE);
-	
-	gtk_source_view_set_show_right_margin (GTK_SOURCE_VIEW (dlg->priv->view),
-					       TRUE);
+  gboolean ret;
+  GtkWidget *error_widget;
+  GtkWidget *sw;
+  gchar *root_objects[] = {
+    "main_box",
+    NULL
+  };
+
+  dlg->priv = GTR_VIEWER_GET_PRIVATE (dlg);
+
+  gtk_dialog_add_buttons (GTK_DIALOG (dlg),
+			  GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE, NULL);
+
+  gtk_window_set_title (GTK_WINDOW (dlg), _("Source Viewer"));
+  gtk_window_set_default_size (GTK_WINDOW (dlg), 800, 600);
+  gtk_window_set_resizable (GTK_WINDOW (dlg), TRUE);
+  gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
+  gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
+
+  /* HIG defaults */
+  gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
+  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);	/* 2 * 5 + 2 = 12 */
+  gtk_container_set_border_width (GTK_CONTAINER
+				  (GTK_DIALOG (dlg)->action_area), 5);
+  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 4);
+
+  g_signal_connect (dlg,
+		    "response", G_CALLBACK (dialog_response_handler), NULL);
+
+  /*Builder */
+  ret = gtranslator_utils_get_ui_objects (DATADIR "/viewer.ui",
+					  root_objects,
+					  &error_widget,
+					  "main_box", &dlg->priv->main_box,
+					  "scrolledwindow", &sw,
+					  "filename_label",
+					  &dlg->priv->filename_label, NULL);
+
+  if (!ret)
+    {
+      gtk_widget_show (error_widget);
+      gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
+			  error_widget, TRUE, TRUE, 0);
+
+      return;
+    }
+
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
+		      dlg->priv->main_box, TRUE, TRUE, 0);
+
+  gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->main_box), 5);
+
+  /* Source view */
+  dlg->priv->view = gtk_source_view_new ();
+  gtk_text_view_set_editable (GTK_TEXT_VIEW (dlg->priv->view), FALSE);
+  gtk_widget_show (dlg->priv->view);
+  gtk_container_add (GTK_CONTAINER (sw), dlg->priv->view);
+
+  gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW
+					      (dlg->priv->view), TRUE);
+
+  gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (dlg->priv->view),
+					 TRUE);
+
+  gtk_source_view_set_show_right_margin (GTK_SOURCE_VIEW (dlg->priv->view),
+					 TRUE);
 }
 
 static void
-gtranslator_viewer_finalize (GObject *object)
+gtranslator_viewer_finalize (GObject * object)
 {
-	G_OBJECT_CLASS (gtranslator_viewer_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtranslator_viewer_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_viewer_class_init (GtranslatorViewerClass *klass)
+gtranslator_viewer_class_init (GtranslatorViewerClass * klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	g_type_class_add_private (klass, sizeof (GtranslatorViewerPrivate));
+  g_type_class_add_private (klass, sizeof (GtranslatorViewerPrivate));
 
-	object_class->finalize = gtranslator_viewer_finalize;
+  object_class->finalize = gtranslator_viewer_finalize;
 }
 
 /***************** File loading *****************/
 
 static void
-error_dialog (GtkWindow *parent, const gchar *msg, ...)
+error_dialog (GtkWindow * parent, const gchar * msg, ...)
 {
-	va_list ap;
-	gchar *tmp;
-	GtkWidget *dialog;
+  va_list ap;
+  gchar *tmp;
+  GtkWidget *dialog;
 
-	va_start (ap, msg);
-	tmp = g_strdup_vprintf (msg, ap);
-	va_end (ap);
+  va_start (ap, msg);
+  tmp = g_strdup_vprintf (msg, ap);
+  va_end (ap);
 
-	dialog = gtk_message_dialog_new (parent,
-					 GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_MESSAGE_ERROR,
-					 GTK_BUTTONS_OK,
-					 "%s", tmp);
-	g_free (tmp);
+  dialog = gtk_message_dialog_new (parent,
+				   GTK_DIALOG_DESTROY_WITH_PARENT,
+				   GTK_MESSAGE_ERROR,
+				   GTK_BUTTONS_OK, "%s", tmp);
+  g_free (tmp);
 
-	gtk_dialog_run (GTK_DIALOG (dialog));
-	gtk_widget_destroy (dialog);
+  gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (dialog);
 }
 
 static gboolean
-gtk_source_buffer_load_file (GtkSourceBuffer *source_buffer,
-			     const gchar     *filename,
-			     GError         **error)
+gtk_source_buffer_load_file (GtkSourceBuffer * source_buffer,
+			     const gchar * filename, GError ** error)
 {
-	GtkTextIter iter;
-	gchar *buffer;
-	GError *error_here = NULL;
+  GtkTextIter iter;
+  gchar *buffer;
+  GError *error_here = NULL;
 
-	g_return_val_if_fail (GTK_IS_SOURCE_BUFFER (source_buffer), FALSE);
-	g_return_val_if_fail (filename != NULL, FALSE);
+  g_return_val_if_fail (GTK_IS_SOURCE_BUFFER (source_buffer), FALSE);
+  g_return_val_if_fail (filename != NULL, FALSE);
 
-	if (!g_file_get_contents (filename, &buffer, NULL, &error_here))
-	{
-		error_dialog (NULL, "%s\nFile %s", error_here->message, filename);
-		g_propagate_error (error, error_here);
-		return FALSE;
-	}
+  if (!g_file_get_contents (filename, &buffer, NULL, &error_here))
+    {
+      error_dialog (NULL, "%s\nFile %s", error_here->message, filename);
+      g_propagate_error (error, error_here);
+      return FALSE;
+    }
 
-	gtk_source_buffer_begin_not_undoable_action (source_buffer);
-	gtk_text_buffer_set_text (GTK_TEXT_BUFFER (source_buffer), buffer, -1);
-	gtk_source_buffer_end_not_undoable_action (source_buffer);
-	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (source_buffer), FALSE);
+  gtk_source_buffer_begin_not_undoable_action (source_buffer);
+  gtk_text_buffer_set_text (GTK_TEXT_BUFFER (source_buffer), buffer, -1);
+  gtk_source_buffer_end_not_undoable_action (source_buffer);
+  gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (source_buffer), FALSE);
 
-	/* move cursor to the beginning */
-	gtk_text_buffer_get_start_iter (GTK_TEXT_BUFFER (source_buffer), &iter);
-	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (source_buffer), &iter);
+  /* move cursor to the beginning */
+  gtk_text_buffer_get_start_iter (GTK_TEXT_BUFFER (source_buffer), &iter);
+  gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (source_buffer), &iter);
 
-	{
-		GtkTextIter start, end;
-		char *text;
-		gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (source_buffer), &start, &end);
-		text = gtk_text_buffer_get_text (GTK_TEXT_BUFFER (source_buffer), &start, &end, TRUE);
-		g_assert (!strcmp (text, buffer));
-		g_free (text);
-	}
+  {
+    GtkTextIter start, end;
+    char *text;
+    gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (source_buffer), &start,
+				&end);
+    text =
+      gtk_text_buffer_get_text (GTK_TEXT_BUFFER (source_buffer), &start, &end,
+				TRUE);
+    g_assert (!strcmp (text, buffer));
+    g_free (text);
+  }
 
-	g_free (buffer);
-	return TRUE;
+  g_free (buffer);
+  return TRUE;
 }
 
 static void
-remove_all_marks (GtkSourceBuffer *buffer)
+remove_all_marks (GtkSourceBuffer * buffer)
 {
-	GtkTextIter s, e;
+  GtkTextIter s, e;
 
-	gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (buffer), &s, &e);
+  gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (buffer), &s, &e);
 
-	gtk_source_buffer_remove_source_marks (buffer, &s, &e, NULL);
+  gtk_source_buffer_remove_source_marks (buffer, &s, &e, NULL);
 }
 
 /* Note this is wrong for several reasons, e.g. g_pattern_match is broken
  * for glob matching. */
 static GtkSourceLanguage *
-get_language_for_filename (const gchar *filename)
+get_language_for_filename (const gchar * filename)
 {
-	const gchar * const *languages;
-	gchar *filename_utf8;
-	GtkSourceLanguageManager *manager;
+  const gchar *const *languages;
+  gchar *filename_utf8;
+  GtkSourceLanguageManager *manager;
 
-	filename_utf8 = g_filename_to_utf8 (filename, -1, NULL, NULL, NULL);
-	g_return_val_if_fail (filename_utf8 != NULL, NULL);
+  filename_utf8 = g_filename_to_utf8 (filename, -1, NULL, NULL, NULL);
+  g_return_val_if_fail (filename_utf8 != NULL, NULL);
 
-	manager = gtk_source_language_manager_get_default ();
-	languages = gtk_source_language_manager_get_language_ids (manager);
+  manager = gtk_source_language_manager_get_default ();
+  languages = gtk_source_language_manager_get_language_ids (manager);
 
-	while (*languages != NULL)
+  while (*languages != NULL)
+    {
+      GtkSourceLanguage *lang;
+      gchar **globs, **p;
+
+      lang = gtk_source_language_manager_get_language (manager, *languages);
+      g_return_val_if_fail (GTK_IS_SOURCE_LANGUAGE (lang), NULL);
+      ++languages;
+
+      globs = gtk_source_language_get_globs (lang);
+      if (globs == NULL)
+	continue;
+
+      for (p = globs; *p != NULL; p++)
 	{
-		GtkSourceLanguage *lang;
-		gchar **globs, **p;
+	  if (g_pattern_match_simple (*p, filename_utf8))
+	    {
+	      g_strfreev (globs);
+	      g_free (filename_utf8);
 
-		lang = gtk_source_language_manager_get_language (manager,
-								 *languages);
-		g_return_val_if_fail (GTK_IS_SOURCE_LANGUAGE (lang), NULL);
-		++languages;
-
-		globs = gtk_source_language_get_globs (lang);
-		if (globs == NULL)
-			continue;
-
-		for (p = globs; *p != NULL; p++)
-		{
-			if (g_pattern_match_simple (*p, filename_utf8))
-			{
-				g_strfreev (globs);
-				g_free (filename_utf8);
-
-				return lang;
-			}
-		}
-
-		g_strfreev (globs);
+	      return lang;
+	    }
 	}
 
-	g_free (filename_utf8);
-	return NULL;
+      g_strfreev (globs);
+    }
+
+  g_free (filename_utf8);
+  return NULL;
 }
 
 static GtkSourceLanguage *
-get_language_for_file (const gchar *filename)
+get_language_for_file (const gchar * filename)
 {
-	GtkSourceLanguage *language = NULL;
+  GtkSourceLanguage *language = NULL;
 
-	if (!language)
-		language = get_language_for_filename (filename);
+  if (!language)
+    language = get_language_for_filename (filename);
 
-	return language;
+  return language;
 }
 
 static GtkSourceLanguage *
-get_language_by_id (const gchar *id)
+get_language_by_id (const gchar * id)
 {
-	GtkSourceLanguageManager *manager;
-	manager = gtk_source_language_manager_get_default ();
-	return gtk_source_language_manager_get_language (manager, id);
+  GtkSourceLanguageManager *manager;
+  manager = gtk_source_language_manager_get_default ();
+  return gtk_source_language_manager_get_language (manager, id);
 }
 
 static GtkSourceLanguage *
-get_language (GtkTextBuffer *buffer, const gchar *filename)
+get_language (GtkTextBuffer * buffer, const gchar * filename)
 {
-	GtkSourceLanguage *language = NULL;
-	GtkTextIter start, end;
-	gchar *text;
-	gchar *lang_string;
+  GtkSourceLanguage *language = NULL;
+  GtkTextIter start, end;
+  gchar *text;
+  gchar *lang_string;
 
-	gtk_text_buffer_get_start_iter (buffer, &start);
-	end = start;
-	gtk_text_iter_forward_line (&end);
+  gtk_text_buffer_get_start_iter (buffer, &start);
+  end = start;
+  gtk_text_iter_forward_line (&end);
 
 #define LANG_STRING "gtk-source-lang:"
-	text = gtk_text_iter_get_slice (&start, &end);
-	lang_string = strstr (text, LANG_STRING);
-	if (lang_string != NULL)
-	{
-		gchar **tokens;
+  text = gtk_text_iter_get_slice (&start, &end);
+  lang_string = strstr (text, LANG_STRING);
+  if (lang_string != NULL)
+    {
+      gchar **tokens;
 
-		lang_string += strlen (LANG_STRING);
-		g_strchug (lang_string);
+      lang_string += strlen (LANG_STRING);
+      g_strchug (lang_string);
 
-		tokens = g_strsplit_set (lang_string, " \t\n", 2);
+      tokens = g_strsplit_set (lang_string, " \t\n", 2);
 
-		if (tokens != NULL && tokens[0] != NULL)
-			language = get_language_by_id (tokens[0]);
+      if (tokens != NULL && tokens[0] != NULL)
+	language = get_language_by_id (tokens[0]);
 
-		g_strfreev (tokens);
-	}
+      g_strfreev (tokens);
+    }
 
-	if (!language)
-		language = get_language_for_file (filename);
+  if (!language)
+    language = get_language_for_file (filename);
 
-	g_free (text);
-	return language;
+  g_free (text);
+  return language;
 }
 
 static gboolean
-open_file (GtkSourceBuffer *buffer, const gchar *filename)
+open_file (GtkSourceBuffer * buffer, const gchar * filename)
 {
-	GtkSourceLanguage *language = NULL;
-	gchar *freeme = NULL;
-	gboolean success = FALSE;
-	GFile *file;
-	gchar *path;
-	
-	file = g_file_new_for_path (filename);
-	path = g_file_get_path (file);
-	g_object_unref (file);
-	
-	remove_all_marks (buffer);
+  GtkSourceLanguage *language = NULL;
+  gchar *freeme = NULL;
+  gboolean success = FALSE;
+  GFile *file;
+  gchar *path;
 
-	success = gtk_source_buffer_load_file (buffer, path, NULL);
+  file = g_file_new_for_path (filename);
+  path = g_file_get_path (file);
+  g_object_unref (file);
 
-	if (!success)
-		goto out;
+  remove_all_marks (buffer);
 
-	language = get_language (GTK_TEXT_BUFFER (buffer), filename);
+  success = gtk_source_buffer_load_file (buffer, path, NULL);
 
-	if (language == NULL)
-		g_print ("No language found for file `%s'\n", filename);
+  if (!success)
+    goto out;
 
-	gtk_source_buffer_set_language (buffer, language);
-	g_object_set_data_full (G_OBJECT (buffer),
-				"filename", g_strdup (filename),
-				(GDestroyNotify) g_free);
+  language = get_language (GTK_TEXT_BUFFER (buffer), filename);
 
-	if (language != NULL)
+  if (language == NULL)
+    g_print ("No language found for file `%s'\n", filename);
+
+  gtk_source_buffer_set_language (buffer, language);
+  g_object_set_data_full (G_OBJECT (buffer),
+			  "filename", g_strdup (filename),
+			  (GDestroyNotify) g_free);
+
+  if (language != NULL)
+    {
+      gchar **styles;
+
+      styles = gtk_source_language_get_style_ids (language);
+
+      if (styles == NULL)
+	g_print ("No styles in language '%s'\n",
+		 gtk_source_language_get_name (language));
+      else
 	{
-		gchar **styles;
+	  gchar **ids;
+	  g_print ("Styles in in language '%s':\n",
+		   gtk_source_language_get_name (language));
 
-		styles = gtk_source_language_get_style_ids (language);
+	  ids = styles;
 
-		if (styles == NULL)
-			g_print ("No styles in language '%s'\n", gtk_source_language_get_name (language));
-		else
-		{
-			gchar **ids;
-			g_print ("Styles in in language '%s':\n", gtk_source_language_get_name (language));
+	  while (*ids != NULL)
+	    {
+	      const gchar *name;
 
-			ids = styles;
+	      name = gtk_source_language_get_style_name (language, *ids);
 
-			while (*ids != NULL)
-			{
-				const gchar *name;
+	      g_print ("- %s (name: '%s')\n", *ids, name);
 
-				name = gtk_source_language_get_style_name (language, *ids);
+	      ++ids;
+	    }
 
-				g_print ("- %s (name: '%s')\n", *ids, name);
-
-				++ids;
-			}
-
-			g_strfreev (styles);
-		}
-
-		g_print("\n");
+	  g_strfreev (styles);
 	}
+
+      g_print ("\n");
+    }
 out:
-	g_free (freeme);
-	return success;
+  g_free (freeme);
+  return success;
 }
 
 static void
-jump_to_line (GtkTextView *view,
-	      gint line)
+jump_to_line (GtkTextView * view, gint line)
 {
-	GtkTextBuffer *buffer;
-	GtkTextIter iter;
-	gint line_count;
-	
-	buffer = gtk_text_view_get_buffer (view);
-	
-	line_count = gtk_text_buffer_get_line_count (buffer);
+  GtkTextBuffer *buffer;
+  GtkTextIter iter;
+  gint line_count;
 
-	if (line >= line_count)
-		gtk_text_buffer_get_end_iter (buffer,
-					      &iter);
-	else
-		gtk_text_buffer_get_iter_at_line (buffer,
-						  &iter,
-						  line-1);
+  buffer = gtk_text_view_get_buffer (view);
 
-	gtk_text_buffer_place_cursor (buffer, &iter);
-	
-	gtk_text_view_scroll_to_mark (view,
-				      gtk_text_buffer_get_insert (buffer),
-				      0.25,
-				      FALSE,
-				      0.0,
-				      0.0);
+  line_count = gtk_text_buffer_get_line_count (buffer);
+
+  if (line >= line_count)
+    gtk_text_buffer_get_end_iter (buffer, &iter);
+  else
+    gtk_text_buffer_get_iter_at_line (buffer, &iter, line - 1);
+
+  gtk_text_buffer_place_cursor (buffer, &iter);
+
+  gtk_text_view_scroll_to_mark (view,
+				gtk_text_buffer_get_insert (buffer),
+				0.25, FALSE, 0.0, 0.0);
 }
 
 void
-gtranslator_show_viewer (GtranslatorWindow *window,
-			 const gchar *path,
-			 gint line)
+gtranslator_show_viewer (GtranslatorWindow * window,
+			 const gchar * path, gint line)
 {
-	static GtranslatorViewer *dlg = NULL;
-	
-	g_return_if_fail (GTR_IS_WINDOW (window));
-	
-	if (dlg == NULL)
-	{
-		GtkSourceBuffer *buffer;
-		gchar *label;
-		
-		dlg = g_object_new (GTR_TYPE_VIEWER, NULL);
+  static GtranslatorViewer *dlg = NULL;
 
-		buffer = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (dlg->priv->view)));
-		
-		open_file (buffer, path);
-		jump_to_line (GTK_TEXT_VIEW (dlg->priv->view), line);
+  g_return_if_fail (GTR_IS_WINDOW (window));
 
-		label = g_strdup_printf ("<b>%s</b>", g_path_get_basename (path));
-		gtk_label_set_markup (GTK_LABEL (dlg->priv->filename_label),
-				      label);
-		g_free (label);
-		
-		g_signal_connect (dlg,
-				  "destroy",
-				  G_CALLBACK (gtk_widget_destroyed),
-				  &dlg);
-		gtk_widget_show (GTK_WIDGET (dlg));
-	}
-	
-	if (GTK_WINDOW (window) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
-	{
-		gtk_window_set_transient_for (GTK_WINDOW (dlg),
-					      GTK_WINDOW (window));
-	}
+  if (dlg == NULL)
+    {
+      GtkSourceBuffer *buffer;
+      gchar *label;
 
-	gtk_window_present (GTK_WINDOW (dlg));
+      dlg = g_object_new (GTR_TYPE_VIEWER, NULL);
+
+      buffer =
+	GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
+			   (GTK_TEXT_VIEW (dlg->priv->view)));
+
+      open_file (buffer, path);
+      jump_to_line (GTK_TEXT_VIEW (dlg->priv->view), line);
+
+      label = g_strdup_printf ("<b>%s</b>", g_path_get_basename (path));
+      gtk_label_set_markup (GTK_LABEL (dlg->priv->filename_label), label);
+      g_free (label);
+
+      g_signal_connect (dlg,
+			"destroy", G_CALLBACK (gtk_widget_destroyed), &dlg);
+      gtk_widget_show (GTK_WIDGET (dlg));
+    }
+
+  if (GTK_WINDOW (window) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
+    {
+      gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
+    }
+
+  gtk_window_present (GTK_WINDOW (dlg));
 }

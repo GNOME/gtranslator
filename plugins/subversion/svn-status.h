@@ -30,36 +30,35 @@
 #include "vcs-status-tree-view.h"
 
 G_BEGIN_DECLS
-
 #define SVN_TYPE_STATUS             (svn_status_get_type ())
 #define SVN_STATUS(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), SVN_TYPE_STATUS, SvnStatus))
 #define SVN_STATUS_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), SVN_TYPE_STATUS, SvnStatusClass))
 #define SVN_IS_STATUS(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), SVN_TYPE_STATUS))
 #define SVN_IS_STATUS_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), SVN_TYPE_STATUS))
 #define SVN_STATUS_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), SVN_TYPE_STATUS, SvnStatusClass))
-
 typedef struct _SvnStatusClass SvnStatusClass;
 typedef struct _SvnStatus SvnStatus;
 typedef struct _SvnStatusPriv SvnStatusPriv;
 
 struct _SvnStatusClass
 {
-	GObjectClass parent_class;
+  GObjectClass parent_class;
 };
 
 struct _SvnStatus
 {
-	GObject parent_instance;
-	
-	SvnStatusPriv *priv;
+  GObject parent_instance;
+
+  SvnStatusPriv *priv;
 };
 
-GType svn_status_get_type (void) G_GNUC_CONST;
-SvnStatus *svn_status_new (gchar *path, enum svn_wc_status_kind status);
-void svn_status_destroy (SvnStatus *self);
-gchar * svn_status_get_path (SvnStatus *self);
-GtranslatorVcsStatus svn_status_get_vcs_status (SvnStatus *self);
+GType
+svn_status_get_type (void)
+  G_GNUC_CONST;
+     SvnStatus *svn_status_new (gchar * path, enum svn_wc_status_kind status);
+     void svn_status_destroy (SvnStatus * self);
+     gchar *svn_status_get_path (SvnStatus * self);
+     GtranslatorVcsStatus svn_status_get_vcs_status (SvnStatus * self);
 
 G_END_DECLS
-
 #endif /* _SVN_STATUS_H_ */

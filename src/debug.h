@@ -21,27 +21,23 @@
  * @short_description: Debug functions
  * @include: gtranslator/debug.h
  */
- 
+
 #ifndef __DEBUG_H__
 #define __DEBUG_H__
 
 #include <glib.h>
 
 G_BEGIN_DECLS
-
 /**
  * DEBUG_PRINT:
  *
  * Equivalent to g_message(), except it has only effect when DEBUG is
  * defined. Used for printing debug messages.
  */
- 
 #ifdef DEBUG
 #  define DEBUG_PRINT g_message
 #else
 #  define DEBUG_PRINT(...)
 #endif
-
-G_END_DECLS
-
+  G_END_DECLS
 #endif /* __DEBUG_H__ */

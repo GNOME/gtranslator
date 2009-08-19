@@ -23,7 +23,6 @@
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -33,44 +32,46 @@ G_BEGIN_DECLS
 #define GTR_IS_CONTEXT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_CONTEXT_PANEL))
 #define GTR_IS_CONTEXT_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_CONTEXT_PANEL))
 #define GTR_CONTEXT_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_CONTEXT_PANEL, GtranslatorContextPanelClass))
-
 /* Private structure type */
-typedef struct _GtranslatorContextPanelPrivate	GtranslatorContextPanelPrivate;
+typedef struct _GtranslatorContextPanelPrivate GtranslatorContextPanelPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorContextPanel		GtranslatorContextPanel;
+typedef struct _GtranslatorContextPanel GtranslatorContextPanel;
 
 struct _GtranslatorContextPanel
 {
-	GtkVBox parent_instance;
-	
-	/*< private > */
-	GtranslatorContextPanelPrivate *priv;
+  GtkVBox parent_instance;
+
+  /*< private > */
+  GtranslatorContextPanelPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorContextPanelClass	GtranslatorContextPanelClass;
+typedef struct _GtranslatorContextPanelClass GtranslatorContextPanelClass;
 
 struct _GtranslatorContextPanelClass
 {
-	GtkVBoxClass parent_class;
+  GtkVBoxClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_context_panel_get_type	   (void) G_GNUC_CONST;
+GType
+gtranslator_context_panel_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_context_panel_register_type   (GTypeModule * module);
+     GType gtranslator_context_panel_register_type (GTypeModule * module);
 
-GtkWidget	*gtranslator_context_panel_new	           (GtkWidget *tab);
-							    
-GtkTextView     *gtranslator_context_panel_get_context_text_view (GtranslatorContextPanel *panel);
+     GtkWidget *gtranslator_context_panel_new (GtkWidget * tab);
+
+     GtkTextView
+       *gtranslator_context_panel_get_context_text_view
+       (GtranslatorContextPanel * panel);
 
 G_END_DECLS
-
 #endif /* __CONTEXT_PANEL_H__ */

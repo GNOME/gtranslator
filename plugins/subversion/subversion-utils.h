@@ -27,15 +27,15 @@
 #include "window.h"
 #include "command.h"
 
-void        subversion_utils_report_errors         (GtranslatorWindow *window,
-						    GtranslatorCommand *command,
-						    guint error_code);
+void subversion_utils_report_errors (GtranslatorWindow * window,
+				     GtranslatorCommand * command,
+				     guint error_code);
 
-gchar      *subversion_utils_get_log_from_textview (GtkWidget* textview);
+gchar *subversion_utils_get_log_from_textview (GtkWidget * textview);
 
-void        subversion_utils_from_file_to_file     (GInputStream *istream,
-						    GOutputStream *ostream);
+void subversion_utils_from_file_to_file (GInputStream * istream,
+					 GOutputStream * ostream);
 
-gchar      *subversion_utils_get_changelog_entry_from_view (GtkWidget *view);
+gchar *subversion_utils_get_changelog_entry_from_view (GtkWidget * view);
 
 #endif

@@ -34,55 +34,55 @@
 #include "async-command.h"
 
 G_BEGIN_DECLS
-
 #define SVN_TYPE_COMMAND             (svn_command_get_type ())
 #define SVN_COMMAND(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), SVN_TYPE_COMMAND, SvnCommand))
 #define SVN_COMMAND_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), SVN_TYPE_COMMAND, SvnCommandClass))
 #define SVN_IS_COMMAND(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), SVN_TYPE_COMMAND))
 #define SVN_IS_COMMAND_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), SVN_TYPE_COMMAND))
 #define SVN_COMMAND_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), SVN_TYPE_COMMAND, SvnCommandClass))
-
 typedef struct _SvnCommandClass SvnCommandClass;
 typedef struct _SvnCommand SvnCommand;
 typedef struct _SvnCommandPriv SvnCommandPriv;
 
 struct _SvnCommandClass
 {
-	GtranslatorAsyncCommandClass parent_class;
+  GtranslatorAsyncCommandClass parent_class;
 };
 
 struct _SvnCommand
 {
-	GtranslatorAsyncCommand parent_instance;
-	
-	SvnCommandPriv *priv;
+  GtranslatorAsyncCommand parent_instance;
+
+  SvnCommandPriv *priv;
 };
 
-GType svn_command_get_type (void) G_GNUC_CONST;
+GType
+svn_command_get_type (void)
+  G_GNUC_CONST;
 
-void svn_command_push_info (SvnCommand *self, const gchar *message);
+     void svn_command_push_info (SvnCommand * self, const gchar * message);
 
-GQueue * svn_command_get_info_queue (SvnCommand *self);
+     GQueue *svn_command_get_info_queue (SvnCommand * self);
 
-void svn_command_set_error (SvnCommand *self, svn_error_t *error);
+     void svn_command_set_error (SvnCommand * self, svn_error_t * error);
 
-svn_client_ctx_t *svn_command_get_client_context (SvnCommand *self);
+     svn_client_ctx_t *svn_command_get_client_context (SvnCommand * self);
 
-apr_pool_t *svn_command_get_pool (SvnCommand *self);
+     apr_pool_t *svn_command_get_pool (SvnCommand * self);
 
-void svn_command_lock_ui (SvnCommand *self);
+     void svn_command_lock_ui (SvnCommand * self);
 
-void svn_command_unlock_ui (SvnCommand *self);
+     void svn_command_unlock_ui (SvnCommand * self);
 
-gchar *svn_command_make_canonical_path (SvnCommand *self, const gchar *path);
+     gchar *svn_command_make_canonical_path (SvnCommand * self,
+					     const gchar * path);
 
 /* Static methods */
-svn_opt_revision_t *svn_command_get_revision (const gchar *revision);
+     svn_opt_revision_t *svn_command_get_revision (const gchar * revision);
 
-GList *svn_command_copy_path_list (GList *list);
+     GList *svn_command_copy_path_list (GList * list);
 
-void svn_command_free_path_list (GList *list);
+     void svn_command_free_path_list (GList * list);
 
 G_END_DECLS
-
 #endif /* _SVN_COMMAND_H_ */

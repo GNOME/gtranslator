@@ -25,7 +25,6 @@
 #include "window.h"
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -35,42 +34,42 @@ G_BEGIN_DECLS
 #define GTR_IS_JUMP_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_JUMP_DIALOG))
 #define GTR_IS_JUMP_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_JUMP_DIALOG))
 #define GTR_JUMP_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_JUMP_DIALOG, GtranslatorJumpDialogClass))
-
 /* Private structure type */
-typedef struct _GtranslatorJumpDialogPrivate	GtranslatorJumpDialogPrivate;
+typedef struct _GtranslatorJumpDialogPrivate GtranslatorJumpDialogPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorJumpDialog		GtranslatorJumpDialog;
+typedef struct _GtranslatorJumpDialog GtranslatorJumpDialog;
 
 struct _GtranslatorJumpDialog
 {
-	GtkDialog parent_instance;
-	
-	/*< private > */
-	GtranslatorJumpDialogPrivate *priv;
+  GtkDialog parent_instance;
+
+  /*< private > */
+  GtranslatorJumpDialogPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorJumpDialogClass	GtranslatorJumpDialogClass;
+typedef struct _GtranslatorJumpDialogClass GtranslatorJumpDialogClass;
 
 struct _GtranslatorJumpDialogClass
 {
-	GtkDialogClass parent_class;
+  GtkDialogClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_jump_dialog_get_type               (void) G_GNUC_CONST;
+GType
+gtranslator_jump_dialog_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_jump_dialog_register_type          (GTypeModule * module);
+     GType gtranslator_jump_dialog_register_type (GTypeModule * module);
 
-void	         gtranslator_show_jump_dialog                   (GtranslatorWindow *window);
+     void gtranslator_show_jump_dialog (GtranslatorWindow * window);
 
 G_END_DECLS
-
 #endif /* __JUMP_DIALOG_H__ */

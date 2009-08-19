@@ -25,7 +25,6 @@
 #include "window.h"
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -35,42 +34,42 @@ G_BEGIN_DECLS
 #define GTR_IS_DIFF_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_DIFF_DIALOG))
 #define GTR_IS_DIFF_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_DIFF_DIALOG))
 #define GTR_DIFF_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_DIFF_DIALOG, GtranslatorDiffDialogClass))
-
 /* Private structure type */
-typedef struct _GtranslatorDiffDialogPrivate	GtranslatorDiffDialogPrivate;
+typedef struct _GtranslatorDiffDialogPrivate GtranslatorDiffDialogPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorDiffDialog		GtranslatorDiffDialog;
+typedef struct _GtranslatorDiffDialog GtranslatorDiffDialog;
 
 struct _GtranslatorDiffDialog
 {
-	GtkDialog parent_instance;
-	
-	/*< private > */
-	GtranslatorDiffDialogPrivate *priv;
+  GtkDialog parent_instance;
+
+  /*< private > */
+  GtranslatorDiffDialogPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorDiffDialogClass	GtranslatorDiffDialogClass;
+typedef struct _GtranslatorDiffDialogClass GtranslatorDiffDialogClass;
 
 struct _GtranslatorDiffDialogClass
 {
-	GtkDialogClass parent_class;
+  GtkDialogClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_diff_dialog_get_type               (void) G_GNUC_CONST;
+GType
+gtranslator_diff_dialog_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_diff_dialog_register_type          (GTypeModule * module);
+     GType gtranslator_diff_dialog_register_type (GTypeModule * module);
 
-void	     gtranslator_show_diff_dialog                   (GtranslatorWindow *window);
+     void gtranslator_show_diff_dialog (GtranslatorWindow * window);
 
 G_END_DECLS
-
 #endif /* __DIFF_DIALOG_H__ */

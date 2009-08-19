@@ -37,134 +37,135 @@
 						 GTR_TYPE_GLOSSARY_PANEL,     \
 						 GtranslatorGlossaryPanelPrivate))
 
-G_DEFINE_TYPE(GtranslatorGlossaryPanel, gtranslator_glossary_panel, GTK_TYPE_VBOX)
-
+G_DEFINE_TYPE (GtranslatorGlossaryPanel, gtranslator_glossary_panel,
+	       GTK_TYPE_VBOX)
 #define XML_FILE_NAME "glossary.xml"
-
 /*
  * TreeItem structure
  */
-typedef struct _TreeItem TreeItem;
-struct _TreeItem
-{
-	gchar *word;
-	gchar *description;
-	GList *children;
-};
+     typedef struct _TreeItem TreeItem;
+     struct _TreeItem
+     {
+       gchar *word;
+       gchar *description;
+       GList *children;
+     };
 
-enum
-{
-	WORD_COLUMN,
-	DESCRIPTION_COLUMN,
-	N_COLUMNS
-};
+     enum
+     {
+       WORD_COLUMN,
+       DESCRIPTION_COLUMN,
+       N_COLUMNS
+     };
 
-struct _GtranslatorGlossaryPanelPrivate
-{
-	GtkWidget	*tree;
-	GtkWidget	*search_entry;
-	GtkWidget	*add_button;
-	xmlDocPtr	*doc;
-	GList		*elements;
-};
+     struct _GtranslatorGlossaryPanelPrivate
+     {
+       GtkWidget *tree;
+       GtkWidget *search_entry;
+       GtkWidget *add_button;
+       xmlDocPtr *doc;
+       GList *elements;
+     };
 
-typedef struct person {
-    xmlChar *name;
-    xmlChar *email;
-    xmlChar *company;
-    xmlChar *organisation;
-    xmlChar *smail;
-    xmlChar *webPage;
-    xmlChar *phone;
-} person, *personPtr;
+     typedef struct person
+     {
+       xmlChar *name;
+       xmlChar *email;
+       xmlChar *company;
+       xmlChar *organisation;
+       xmlChar *smail;
+       xmlChar *webPage;
+       xmlChar *phone;
+     } person, *personPtr;
 
 /*
  * And the code needed to parse it
  */
-static personPtr
-parsePerson(xmlDocPtr doc, xmlNsPtr ns, xmlNodePtr cur) {
-    personPtr ret = NULL;
+     static personPtr parsePerson (xmlDocPtr doc, xmlNsPtr ns, xmlNodePtr cur)
+{
+  personPtr ret = NULL;
 
-    /*
-     * allocate the struct
-     */
-    ret = (personPtr) malloc(sizeof(person));
-    if (ret == NULL) {
-        fprintf(stderr,"out of memory\n");
-	return(NULL);
+  /*
+   * allocate the struct
+   */
+  ret = (personPtr) malloc (sizeof (person));
+  if (ret == NULL)
+    {
+      fprintf (stderr, "out of memory\n");
+      return (NULL);
     }
-    memset(ret, 0, sizeof(person));
+  memset (ret, 0, sizeof (person));
 
-    /* We don't care what the top level element name is */
-    /* COMPAT xmlChildrenNode is a macro unifying libxml1 and libxml2 names */
-    cur = cur->xmlChildrenNode;
-    while (cur != NULL) {
-        if ((!xmlStrcmp(cur->name, (const xmlChar *)"Person")) &&
-	    (cur->ns == ns))
-	    ret->name = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
-        if ((!xmlStrcmp(cur->name, (const xmlChar *)"Email")) &&
-	    (cur->ns == ns))
-	    ret->email = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
-	cur = cur->next;
+  /* We don't care what the top level element name is */
+  /* COMPAT xmlChildrenNode is a macro unifying libxml1 and libxml2 names */
+  cur = cur->xmlChildrenNode;
+  while (cur != NULL)
+    {
+      if ((!xmlStrcmp (cur->name, (const xmlChar *) "Person")) &&
+	  (cur->ns == ns))
+	ret->name = xmlNodeListGetString (doc, cur->xmlChildrenNode, 1);
+      if ((!xmlStrcmp (cur->name, (const xmlChar *) "Email")) &&
+	  (cur->ns == ns))
+	ret->email = xmlNodeListGetString (doc, cur->xmlChildrenNode, 1);
+      cur = cur->next;
     }
 
-    return(ret);
+  return (ret);
 }
 
 static void
-process_node(xmlNode *root_node)
-{	
-	GtranslatorGlossaryPanelPrivate *priv;
-	
-	xmlNodePtr cur_node;
-	
-	cur_node = cur_node->xmlChildrenNode;
+process_node (xmlNode * root_node)
+{
+  GtranslatorGlossaryPanelPrivate *priv;
+
+  xmlNodePtr cur_node;
+
+  cur_node = cur_node->xmlChildrenNode;
 
 }
 
 static gboolean
-gtranslator_glossary_panel_load_items(GtranslatorGlossaryPanel *panel)
+gtranslator_glossary_panel_load_items (GtranslatorGlossaryPanel * panel)
 {
-	GtranslatorGlossaryPanelPrivate *priv = panel->priv;
-	
-	return FALSE;
+  GtranslatorGlossaryPanelPrivate *priv = panel->priv;
+
+  return FALSE;
 }
 
 static void
-gtranslator_glossary_panel_draw (GtranslatorGlossaryPanel *panel)
+gtranslator_glossary_panel_draw (GtranslatorGlossaryPanel * panel)
 {
-	GtranslatorGlossaryPanelPrivate *priv = panel->priv;
-	
-	priv->tree = gtk_tree_view_new();
+  GtranslatorGlossaryPanelPrivate *priv = panel->priv;
+
+  priv->tree = gtk_tree_view_new ();
 }
 
 static void
-gtranslator_glossary_panel_init (GtranslatorGlossaryPanel *panel)
-{	
-	panel->priv = GTR_GLOSSARY_PANEL_GET_PRIVATE (panel);
-	
-	
+gtranslator_glossary_panel_init (GtranslatorGlossaryPanel * panel)
+{
+  panel->priv = GTR_GLOSSARY_PANEL_GET_PRIVATE (panel);
+
+
 }
 
 static void
-gtranslator_glossary_panel_finalize (GObject *object)
+gtranslator_glossary_panel_finalize (GObject * object)
 {
-	G_OBJECT_CLASS (gtranslator_glossary_panel_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtranslator_glossary_panel_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_glossary_panel_class_init (GtranslatorGlossaryPanelClass *klass)
+gtranslator_glossary_panel_class_init (GtranslatorGlossaryPanelClass * klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	g_type_class_add_private (klass, sizeof (GtranslatorGlossaryPanelPrivate));
+  g_type_class_add_private (klass, sizeof (GtranslatorGlossaryPanelPrivate));
 
-	object_class->finalize = gtranslator_glossary_panel_finalize;
+  object_class->finalize = gtranslator_glossary_panel_finalize;
 }
 
 GtkWidget *
 gtranslator_glossary_panel_new (void)
 {
-	return GTK_WIDGET (g_object_new (GTR_TYPE_GLOSSARY_PANEL, NULL));
+  return GTK_WIDGET (g_object_new (GTR_TYPE_GLOSSARY_PANEL, NULL));
 }
-

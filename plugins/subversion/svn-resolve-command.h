@@ -29,34 +29,34 @@
 #include "svn-command.h"
 
 G_BEGIN_DECLS
-
 #define SVN_TYPE_RESOLVE_COMMAND             (svn_resolve_command_get_type ())
 #define SVN_RESOLVE_COMMAND(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), SVN_TYPE_RESOLVE_COMMAND, SvnResolveCommand))
 #define SVN_RESOLVE_COMMAND_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), SVN_TYPE_RESOLVE_COMMAND, SvnResolveCommandClass))
 #define SVN_IS_RESOLVE_COMMAND(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), SVN_TYPE_RESOLVE_COMMAND))
 #define SVN_IS_RESOLVE_COMMAND_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), SVN_TYPE_RESOLVE_COMMAND))
 #define SVN_RESOLVE_COMMAND_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), SVN_TYPE_RESOLVE_COMMAND, SvnResolveCommandClass))
-
 typedef struct _SvnResolveCommandClass SvnResolveCommandClass;
 typedef struct _SvnResolveCommand SvnResolveCommand;
 typedef struct _SvnResolveCommandPriv SvnResolveCommandPriv;
 
 struct _SvnResolveCommandClass
 {
-	SvnCommandClass parent_class;
+  SvnCommandClass parent_class;
 };
 
 struct _SvnResolveCommand
 {
-	SvnCommand parent_instance;
-	
-	SvnResolveCommandPriv *priv;
+  SvnCommand parent_instance;
+
+  SvnResolveCommandPriv *priv;
 };
 
-GType svn_resolve_command_get_type (void) G_GNUC_CONST;
-SvnResolveCommand *svn_resolve_command_new (GList *paths, gboolean recursive);
-void svn_resolve_command_destroy (SvnResolveCommand *self);
+GType
+svn_resolve_command_get_type (void)
+  G_GNUC_CONST;
+     SvnResolveCommand *svn_resolve_command_new (GList * paths,
+						 gboolean recursive);
+     void svn_resolve_command_destroy (SvnResolveCommand * self);
 
 G_END_DECLS
-
 #endif /* _SVN_RESOLVE_COMMAND_H_ */

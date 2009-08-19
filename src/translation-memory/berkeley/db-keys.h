@@ -24,7 +24,6 @@
 #include DB_HEADER
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -34,51 +33,51 @@ G_BEGIN_DECLS
 #define GTR_IS_DB_KEYS(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_DB_KEYS))
 #define GTR_IS_DB_KEYS_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_DB_KEYS))
 #define GTR_DB_KEYS_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_DB_KEYS, GtranslatorDbKeysClass))
-
 /* Private structure type */
-typedef struct _GtranslatorDbKeysPrivate	GtranslatorDbKeysPrivate;
+typedef struct _GtranslatorDbKeysPrivate GtranslatorDbKeysPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorDbKeys		GtranslatorDbKeys;
+typedef struct _GtranslatorDbKeys GtranslatorDbKeys;
 
 struct _GtranslatorDbKeys
 {
-	GObject parent_instance;
-	
-	/*< private > */
-	GtranslatorDbKeysPrivate *priv;
+  GObject parent_instance;
+
+  /*< private > */
+  GtranslatorDbKeysPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorDbKeysClass	GtranslatorDbKeysClass;
+typedef struct _GtranslatorDbKeysClass GtranslatorDbKeysClass;
 
 struct _GtranslatorDbKeysClass
 {
-	GObjectClass parent_class;
+  GObjectClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_db_keys_get_type	      (void) G_GNUC_CONST;
+GType
+gtranslator_db_keys_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_db_keys_register_type    (GTypeModule * module);
+     GType gtranslator_db_keys_register_type (GTypeModule * module);
 
-GtranslatorDbKeys *gtranslator_db_keys_new	      (DBT *data);
+     GtranslatorDbKeys *gtranslator_db_keys_new (DBT * data);
 
-GtranslatorDbKeys *gtranslator_db_keys_new_with_size  (gsize cnt);
+     GtranslatorDbKeys *gtranslator_db_keys_new_with_size (gsize cnt);
 
-db_recno_t      *gtranslator_db_keys_get_list         (GtranslatorDbKeys *db_keys);
+     db_recno_t *gtranslator_db_keys_get_list (GtranslatorDbKeys * db_keys);
 
-gsize            gtranslator_db_keys_get_count        (GtranslatorDbKeys *db_keys);
+     gsize gtranslator_db_keys_get_count (GtranslatorDbKeys * db_keys);
 
-void             gtranslator_db_keys_set_count        (GtranslatorDbKeys *db_keys,
-						       gsize count);
+     void gtranslator_db_keys_set_count (GtranslatorDbKeys * db_keys,
+					 gsize count);
 
 G_END_DECLS
-
 #endif /* __DB_KEYS_H__ */

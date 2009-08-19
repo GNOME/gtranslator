@@ -42,10 +42,10 @@
 /* Useful enum for sort order pref */
 typedef enum
 {
-	GTR_SORT_ORDER_STATUS,
-	GTR_SORT_ORDER_ID,
-	GTR_SORT_ORDER_ORIGINAL_TEXT,
-	GTR_SORT_ORDER_TRANSLATED_TEXT
+  GTR_SORT_ORDER_STATUS,
+  GTR_SORT_ORDER_ID,
+  GTR_SORT_ORDER_ORIGINAL_TEXT,
+  GTR_SORT_ORDER_TRANSLATED_TEXT
 } GtranslatorSortOrder;
 
 #define GTR_BASE_KEY			"/apps/gtranslator"
@@ -89,76 +89,85 @@ typedef enum
 
 /** LIFE CYCLE MANAGEMENT FUNCTIONS **/
 
-void		gtranslator_prefs_manager_init				(void);
+void gtranslator_prefs_manager_init (void);
 
 /* This function must be called before exiting gtranslator */
-void			gtranslator_prefs_manager_shutdown			(void);
+void gtranslator_prefs_manager_shutdown (void);
 
 
 /** PREFS MANAGEMENT FUNCTIONS **/
 
 /* Files */
-void			gtranslator_prefs_manager_set_warn_if_contains_fuzzy	(gboolean warn_if_contains_fuzzy);
-gboolean		gtranslator_prefs_manager_get_warn_if_contains_fuzzy	(void);
+void gtranslator_prefs_manager_set_warn_if_contains_fuzzy (gboolean
+							   warn_if_contains_fuzzy);
+gboolean gtranslator_prefs_manager_get_warn_if_contains_fuzzy (void);
 
-void			gtranslator_prefs_manager_set_delete_compiled		(gboolean delete_compiled);
-gboolean		gtranslator_prefs_manager_get_delete_compiled		(void);
+void gtranslator_prefs_manager_set_delete_compiled (gboolean delete_compiled);
+gboolean gtranslator_prefs_manager_get_delete_compiled (void);
 
-void			gtranslator_prefs_manager_set_autosave			(gboolean autosave);
-gboolean		gtranslator_prefs_manager_get_autosave			(void);
+void gtranslator_prefs_manager_set_autosave (gboolean autosave);
+gboolean gtranslator_prefs_manager_get_autosave (void);
 
-void			gtranslator_prefs_manager_set_autosave_interval		(gint autosave_interval);
-gint			gtranslator_prefs_manager_get_autosave_interval		(void);
+void gtranslator_prefs_manager_set_autosave_interval (gint autosave_interval);
+gint gtranslator_prefs_manager_get_autosave_interval (void);
 
-void			gtranslator_prefs_manager_set_create_backup		(gboolean create_backup);
-gboolean		gtranslator_prefs_manager_get_create_backup		(void);
+void gtranslator_prefs_manager_set_create_backup (gboolean create_backup);
+gboolean gtranslator_prefs_manager_get_create_backup (void);
 
-void			gtranslator_prefs_manager_set_use_profile_values	(gboolean use_profile_values);
-gboolean		gtranslator_prefs_manager_get_use_profile_values	(void);
+void gtranslator_prefs_manager_set_use_profile_values (gboolean
+						       use_profile_values);
+gboolean gtranslator_prefs_manager_get_use_profile_values (void);
 
 /* Editor */
-void			gtranslator_prefs_manager_set_highlight_syntax		(gboolean highlight_syntax);
-gboolean		gtranslator_prefs_manager_get_highlight_syntax		(void);
+void gtranslator_prefs_manager_set_highlight_syntax (gboolean
+						     highlight_syntax);
+gboolean gtranslator_prefs_manager_get_highlight_syntax (void);
 
-void			gtranslator_prefs_manager_set_visible_whitespace	(gboolean visible_whitespace);
-gboolean		gtranslator_prefs_manager_get_visible_whitespace	(void);
+void gtranslator_prefs_manager_set_visible_whitespace (gboolean
+						       visible_whitespace);
+gboolean gtranslator_prefs_manager_get_visible_whitespace (void);
 
-void			gtranslator_prefs_manager_set_use_custom_font		(gboolean use_custom_font);
-gboolean		gtranslator_prefs_manager_get_use_custom_font		(void);
+void gtranslator_prefs_manager_set_use_custom_font (gboolean use_custom_font);
+gboolean gtranslator_prefs_manager_get_use_custom_font (void);
 
-void			gtranslator_prefs_manager_set_editor_font		(const gchar *editor_font);
-const gchar *		gtranslator_prefs_manager_get_editor_font		(void);
+void gtranslator_prefs_manager_set_editor_font (const gchar * editor_font);
+const gchar *gtranslator_prefs_manager_get_editor_font (void);
 
-void			gtranslator_prefs_manager_set_unmark_fuzzy_when_changed	(gboolean unmark_fuzzy_when_changed);
-gboolean		gtranslator_prefs_manager_get_unmark_fuzzy_when_changed	(void);
+void gtranslator_prefs_manager_set_unmark_fuzzy_when_changed (gboolean
+							      unmark_fuzzy_when_changed);
+gboolean gtranslator_prefs_manager_get_unmark_fuzzy_when_changed (void);
 
-void			gtranslator_prefs_manager_set_spellcheck		(gboolean spellcheck);
-gboolean		gtranslator_prefs_manager_get_spellcheck		(void);
+void gtranslator_prefs_manager_set_spellcheck (gboolean spellcheck);
+gboolean gtranslator_prefs_manager_get_spellcheck (void);
 
 /* Translation memory */
-void			gtranslator_prefs_manager_set_po_directory		(const gchar *po_directory);
-const gchar *		gtranslator_prefs_manager_get_po_directory		(void);
+void gtranslator_prefs_manager_set_po_directory (const gchar * po_directory);
+const gchar *gtranslator_prefs_manager_get_po_directory (void);
 
-void			gtranslator_prefs_manager_set_restrict_to_filename	(gboolean restrict_to_filename);
-gboolean		gtranslator_prefs_manager_get_restrict_to_filename	(void);
+void gtranslator_prefs_manager_set_restrict_to_filename (gboolean
+							 restrict_to_filename);
+gboolean gtranslator_prefs_manager_get_restrict_to_filename (void);
 
-void			gtranslator_prefs_manager_set_filename_restriction	(const gchar *filename_restriction);
-const gchar *		gtranslator_prefs_manager_get_filename_restriction	(void);
+void gtranslator_prefs_manager_set_filename_restriction (const gchar *
+							 filename_restriction);
+const gchar *gtranslator_prefs_manager_get_filename_restriction (void);
 
-void			gtranslator_prefs_manager_set_max_missing_words		(gint max_missing_words);
-gint			gtranslator_prefs_manager_get_max_missing_words		(void);
+void gtranslator_prefs_manager_set_max_missing_words (gint max_missing_words);
+gint gtranslator_prefs_manager_get_max_missing_words (void);
 
-void			gtranslator_prefs_manager_set_max_length_diff		(gint max_length_diff);
-gint			gtranslator_prefs_manager_get_max_length_diff		(void);
+void gtranslator_prefs_manager_set_max_length_diff (gint max_length_diff);
+gint gtranslator_prefs_manager_get_max_length_diff (void);
 
 /* UI */
-void			gtranslator_prefs_manager_set_pane_switcher_style	(GdlSwitcherStyle pane_switcher_style);
-GdlSwitcherStyle	gtranslator_prefs_manager_get_pane_switcher_style	(void);
+void gtranslator_prefs_manager_set_pane_switcher_style (GdlSwitcherStyle
+							pane_switcher_style);
+GdlSwitcherStyle gtranslator_prefs_manager_get_pane_switcher_style (void);
 
-void			gtranslator_prefs_manager_set_color_scheme		(const gchar *color_scheme);
-const gchar *		gtranslator_prefs_manager_get_color_scheme		(void);
+void gtranslator_prefs_manager_set_color_scheme (const gchar * color_scheme);
+const gchar *gtranslator_prefs_manager_get_color_scheme (void);
 
-void			gtranslator_prefs_manager_set_sort_order		(GtranslatorSortOrder sort_order);
-GtranslatorSortOrder	gtranslator_prefs_manager_get_sort_order		(void);
+void gtranslator_prefs_manager_set_sort_order (GtranslatorSortOrder
+					       sort_order);
+GtranslatorSortOrder gtranslator_prefs_manager_get_sort_order (void);
 
 #endif /* __GTR_PREFS_MANAGER_H__ */

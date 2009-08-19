@@ -32,102 +32,104 @@
 						 GTR_TYPE_CONTEXT_PANEL,     \
 						 GtranslatorContextPanelPrivate))
 
-G_DEFINE_TYPE(GtranslatorContextPanel, gtranslator_context_panel, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (GtranslatorContextPanel, gtranslator_context_panel,
+	       GTK_TYPE_VBOX)
+     struct _GtranslatorContextPanelPrivate
+     {
+       GtkWidget *context;
 
+       GtranslatorTab *tab;
+     };
 
-struct _GtranslatorContextPanelPrivate
+     static void
+       showed_message_cb (GtranslatorTab * tab,
+			  GtranslatorMsg * msg,
+			  GtranslatorContextPanel * panel)
 {
-	GtkWidget *context;
+  GtkTextBuffer *buffer;
+  GtkTextIter iter;
+  gchar *extracted;
+  gchar *context;
+  gchar *format;
+  gchar *toset;
 
-	GtranslatorTab *tab;
-};
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (panel->priv->context));
+  gtk_text_buffer_set_text (buffer, "", 0);
+  gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
 
-static void
-showed_message_cb (GtranslatorTab *tab,
-		   GtranslatorMsg *msg,
-		   GtranslatorContextPanel *panel)
-{
-	GtkTextBuffer *buffer;
-	GtkTextIter iter;
-	gchar *extracted;
-	gchar *context;
-	gchar *format;
-    	gchar *toset;
+  format = g_strconcat (_("Format:"), gtranslator_msg_get_format (msg), NULL);
+  context =
+    g_strconcat (_("Context:"), gtranslator_msg_get_msgctxt (msg), NULL);
+  extracted =
+    g_strconcat (_("Extracted comments:"),
+		 gtranslator_msg_get_extracted_comments (msg), NULL);
 
-	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (panel->priv->context));
-	gtk_text_buffer_set_text (buffer, "", 0);
-	gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
+  toset = g_strdup_printf ("%s\n%s\n%s", format, context, extracted);
 
-	format = g_strconcat (_("Format:"), gtranslator_msg_get_format (msg), NULL);
-    	context = g_strconcat (_("Context:"), gtranslator_msg_get_msgctxt (msg), NULL);
-    	extracted = g_strconcat (_("Extracted comments:"),
-				 gtranslator_msg_get_extracted_comments(msg), NULL);
-    
-   	toset = g_strdup_printf("%s\n%s\n%s", format, context, extracted);
-    
-    	g_free (format);
-    	g_free (context);
-    	g_free (extracted);
+  g_free (format);
+  g_free (context);
+  g_free (extracted);
 
-	gtk_text_buffer_insert (buffer, &iter, toset, -1);
-    
-    	g_free (toset);
+  gtk_text_buffer_insert (buffer, &iter, toset, -1);
+
+  g_free (toset);
 }
 
 static void
-gtranslator_context_panel_draw (GtranslatorContextPanel *panel)
+gtranslator_context_panel_draw (GtranslatorContextPanel * panel)
 {
-	GtranslatorContextPanelPrivate *priv = panel->priv;
-	GtkWidget *context_scrolled_window;
-	
-	/*
-	 * Set up the scrolling window for the extracted context display
-	 */	
-	context_scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (context_scrolled_window),
-				        GTK_POLICY_AUTOMATIC,
-				        GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (context_scrolled_window),
-					     GTK_SHADOW_IN);
-	gtk_box_pack_start (GTK_BOX (panel), context_scrolled_window, TRUE, TRUE, 0);
-	gtk_widget_show (context_scrolled_window);
+  GtranslatorContextPanelPrivate *priv = panel->priv;
+  GtkWidget *context_scrolled_window;
 
-	/*
-	 * Context
-	 */	
-	priv->context = gtk_text_view_new();
-	
-	gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->context), FALSE);
-	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (priv->context),
-				     GTK_WRAP_WORD);
-	gtk_container_add (GTK_CONTAINER (context_scrolled_window),
-			   GTK_WIDGET (priv->context));
-	gtk_widget_show (priv->context);
+  /*
+   * Set up the scrolling window for the extracted context display
+   */
+  context_scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW
+				  (context_scrolled_window),
+				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW
+				       (context_scrolled_window),
+				       GTK_SHADOW_IN);
+  gtk_box_pack_start (GTK_BOX (panel), context_scrolled_window, TRUE, TRUE,
+		      0);
+  gtk_widget_show (context_scrolled_window);
+
+  /*
+   * Context
+   */
+  priv->context = gtk_text_view_new ();
+
+  gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->context), FALSE);
+  gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (priv->context), GTK_WRAP_WORD);
+  gtk_container_add (GTK_CONTAINER (context_scrolled_window),
+		     GTK_WIDGET (priv->context));
+  gtk_widget_show (priv->context);
 }
 
 
 static void
-gtranslator_context_panel_init (GtranslatorContextPanel *panel)
+gtranslator_context_panel_init (GtranslatorContextPanel * panel)
 {
-	panel->priv = GTR_CONTEXT_PANEL_GET_PRIVATE (panel);
-	
-	gtranslator_context_panel_draw (panel);
+  panel->priv = GTR_CONTEXT_PANEL_GET_PRIVATE (panel);
+
+  gtranslator_context_panel_draw (panel);
 }
 
 static void
-gtranslator_context_panel_finalize (GObject *object)
+gtranslator_context_panel_finalize (GObject * object)
 {
-	G_OBJECT_CLASS (gtranslator_context_panel_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtranslator_context_panel_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_context_panel_class_init (GtranslatorContextPanelClass *klass)
+gtranslator_context_panel_class_init (GtranslatorContextPanelClass * klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	g_type_class_add_private (klass, sizeof (GtranslatorContextPanelPrivate));
+  g_type_class_add_private (klass, sizeof (GtranslatorContextPanelPrivate));
 
-	object_class->finalize = gtranslator_context_panel_finalize;
+  object_class->finalize = gtranslator_context_panel_finalize;
 }
 
 /**
@@ -139,18 +141,17 @@ gtranslator_context_panel_class_init (GtranslatorContextPanelClass *klass)
  * Returns: a new #GtranslatorContextPanel object
  */
 GtkWidget *
-gtranslator_context_panel_new (GtkWidget *tab)
+gtranslator_context_panel_new (GtkWidget * tab)
 {
-	GtranslatorContextPanel *context;
-	context = g_object_new (GTR_TYPE_CONTEXT_PANEL, NULL);
-	
-	context->priv->tab = GTR_TAB (tab);
-	g_signal_connect (tab,
-			  "showed-message",
-			  G_CALLBACK (showed_message_cb),
-			  context);
-	
-	return GTK_WIDGET (context);
+  GtranslatorContextPanel *context;
+  context = g_object_new (GTR_TYPE_CONTEXT_PANEL, NULL);
+
+  context->priv->tab = GTR_TAB (tab);
+  g_signal_connect (tab,
+		    "showed-message",
+		    G_CALLBACK (showed_message_cb), context);
+
+  return GTK_WIDGET (context);
 }
 
 /**
@@ -160,10 +161,10 @@ gtranslator_context_panel_new (GtkWidget *tab)
  * Returns: the context #GtkTextView
  */
 GtkTextView *
-gtranslator_context_panel_get_context_text_view (GtranslatorContextPanel *panel)
+gtranslator_context_panel_get_context_text_view (GtranslatorContextPanel *
+						 panel)
 {
-	g_return_val_if_fail (GTR_IS_CONTEXT_PANEL (panel), NULL);
-	
-	return GTK_TEXT_VIEW (panel->priv->context);
+  g_return_val_if_fail (GTR_IS_CONTEXT_PANEL (panel), NULL);
+
+  return GTK_TEXT_VIEW (panel->priv->context);
 }
-							    

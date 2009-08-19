@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA 02111-1307, USA.
  */
- 
+
 /*
  * Modified by the gtranslator Team, 2002-2007. See the AUTHORS file for a
  * list of people on the gtranslator Team.
@@ -36,27 +36,36 @@
 #include "module.h"
 
 G_BEGIN_DECLS
-
 #define GTR_TYPE_PLUGIN_INFO			(gtranslator_plugin_info_get_type ())
 #define GTR_PLUGIN_INFO(obj)			((GtranslatorPluginInfo *) (obj))
+typedef struct _GtranslatorPluginInfo GtranslatorPluginInfo;
 
-typedef struct _GtranslatorPluginInfo			GtranslatorPluginInfo;
+GType
+gtranslator_plugin_info_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_plugin_info_get_type		(void) G_GNUC_CONST;
+     gboolean gtranslator_plugin_info_is_active (GtranslatorPluginInfo *
+						 info);
+     gboolean gtranslator_plugin_info_is_available (GtranslatorPluginInfo *
+						    info);
+     gboolean gtranslator_plugin_info_is_configurable (GtranslatorPluginInfo *
+						       info);
 
-gboolean 	 gtranslator_plugin_info_is_active		(GtranslatorPluginInfo *info);
-gboolean 	 gtranslator_plugin_info_is_available		(GtranslatorPluginInfo *info);
-gboolean	 gtranslator_plugin_info_is_configurable	(GtranslatorPluginInfo *info);
-
-const gchar	*gtranslator_plugin_info_get_name		(GtranslatorPluginInfo *info);
-const gchar	*gtranslator_plugin_info_get_description	(GtranslatorPluginInfo *info);
-const gchar	*gtranslator_plugin_info_get_icon_name	        (GtranslatorPluginInfo *info);
-const gchar    **gtranslator_plugin_info_get_authors		(GtranslatorPluginInfo *info);
-const gchar	*gtranslator_plugin_info_get_website		(GtranslatorPluginInfo *info);
-const gchar	*gtranslator_plugin_info_get_copyright	        (GtranslatorPluginInfo *info);
-const gchar     *gtranslator_plugin_info_get_license            (GtranslatorPluginInfo *info);
+     const gchar *gtranslator_plugin_info_get_name (GtranslatorPluginInfo *
+						    info);
+     const gchar
+       *gtranslator_plugin_info_get_description (GtranslatorPluginInfo *
+						 info);
+     const gchar *gtranslator_plugin_info_get_icon_name (GtranslatorPluginInfo
+							 * info);
+     const gchar **gtranslator_plugin_info_get_authors (GtranslatorPluginInfo
+							* info);
+     const gchar *gtranslator_plugin_info_get_website (GtranslatorPluginInfo *
+						       info);
+     const gchar *gtranslator_plugin_info_get_copyright (GtranslatorPluginInfo
+							 * info);
+     const gchar *gtranslator_plugin_info_get_license (GtranslatorPluginInfo *
+						       info);
 
 G_END_DECLS
-
 #endif /* __GTR_PLUGIN_INFO_H__ */
-

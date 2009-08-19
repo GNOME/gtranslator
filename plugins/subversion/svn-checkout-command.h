@@ -25,34 +25,34 @@
 #include "svn-command.h"
 
 G_BEGIN_DECLS
-
 #define SVN_TYPE_CHECKOUT_COMMAND             (svn_checkout_command_get_type ())
 #define SVN_CHECKOUT_COMMAND(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), SVN_TYPE_CHECKOUT_COMMAND, SvnCheckoutCommand))
 #define SVN_CHECKOUT_COMMAND_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), SVN_TYPE_CHECKOUT_COMMAND, SvnCheckoutCommandClass))
 #define SVN_IS_CHECKOUT_COMMAND(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), SVN_TYPE_CHECKOUT_COMMAND))
 #define SVN_IS_CHECKOUT_COMMAND_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), SVN_TYPE_CHECKOUT_COMMAND))
 #define SVN_CHECKOUT_COMMAND_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), SVN_TYPE_CHECKOUT_COMMAND, SvnCheckoutCommandClass))
-
 typedef struct _SvnCheckoutCommandClass SvnCheckoutCommandClass;
 typedef struct _SvnCheckoutCommand SvnCheckoutCommand;
 typedef struct _SvnCheckoutCommandPriv SvnCheckoutCommandPriv;
 
 struct _SvnCheckoutCommandClass
 {
-	SvnCommandClass parent_class;
+  SvnCommandClass parent_class;
 };
 
 struct _SvnCheckoutCommand
 {
-	SvnCommand parent_instance;
-	
-	SvnCheckoutCommandPriv *priv;
+  SvnCommand parent_instance;
+
+  SvnCheckoutCommandPriv *priv;
 };
 
-GType svn_checkout_command_get_type (void) G_GNUC_CONST;
-SvnCheckoutCommand * svn_checkout_command_new (const gchar *url, const gchar *path);
-void svn_checkout_command_destroy (SvnCheckoutCommand *self);
+GType
+svn_checkout_command_get_type (void)
+  G_GNUC_CONST;
+     SvnCheckoutCommand *svn_checkout_command_new (const gchar * url,
+						   const gchar * path);
+     void svn_checkout_command_destroy (SvnCheckoutCommand * self);
 
 G_END_DECLS
-
 #endif /* _SVN_CHECKOUT_COMMAND_H_ */

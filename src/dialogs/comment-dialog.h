@@ -26,7 +26,6 @@
 #include "msg.h"
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -36,42 +35,43 @@ G_BEGIN_DECLS
 #define GTR_IS_COMMENT_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_COMMENT_DIALOG))
 #define GTR_IS_COMMENT_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_COMMENT_DIALOG))
 #define GTR_COMMENT_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_COMMENT_DIALOG, GtranslatorCommentDialogClass))
-
 /* Private structure type */
-typedef struct _GtranslatorCommentDialogPrivate	GtranslatorCommentDialogPrivate;
+typedef struct _GtranslatorCommentDialogPrivate
+  GtranslatorCommentDialogPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorCommentDialog		GtranslatorCommentDialog;
+typedef struct _GtranslatorCommentDialog GtranslatorCommentDialog;
 
 struct _GtranslatorCommentDialog
 {
-	GtkDialog parent_instance;
-	
-	/*< private > */
-	GtranslatorCommentDialogPrivate *priv;
+  GtkDialog parent_instance;
+
+  /*< private > */
+  GtranslatorCommentDialogPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorCommentDialogClass	GtranslatorCommentDialogClass;
+typedef struct _GtranslatorCommentDialogClass GtranslatorCommentDialogClass;
 
 struct _GtranslatorCommentDialogClass
 {
-	GtkDialogClass parent_class;
+  GtkDialogClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_comment_dialog_get_type               (void) G_GNUC_CONST;
+GType
+gtranslator_comment_dialog_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_comment_dialog_register_type          (GTypeModule * module);
+     GType gtranslator_comment_dialog_register_type (GTypeModule * module);
 
-void	         gtranslator_show_comment_dialog                   (GtranslatorWindow *window);
+     void gtranslator_show_comment_dialog (GtranslatorWindow * window);
 
 G_END_DECLS
-
 #endif /* __COMMENT_DIALOG_H__ */

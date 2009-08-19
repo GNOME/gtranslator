@@ -23,9 +23,7 @@
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
-
-GtkWidget    *create_error_message_area              (const gchar *primary_text,
-						      const gchar *secondary_text);
+  GtkWidget * create_error_message_area (const gchar * primary_text,
+					 const gchar * secondary_text);
 G_END_DECLS
-
 #endif

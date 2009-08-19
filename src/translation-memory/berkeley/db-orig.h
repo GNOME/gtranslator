@@ -24,7 +24,6 @@
 #include "db-base.h"
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -34,49 +33,49 @@ G_BEGIN_DECLS
 #define GTR_IS_DB_ORIG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_DB_ORIG))
 #define GTR_IS_DB_ORIG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_DB_ORIG))
 #define GTR_DB_ORIG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_DB_ORIG, GtranslatorDbOrigClass))
-
 /* Private structure type */
-typedef struct _GtranslatorDbOrigPrivate	GtranslatorDbOrigPrivate;
+typedef struct _GtranslatorDbOrigPrivate GtranslatorDbOrigPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorDbOrig		GtranslatorDbOrig;
+typedef struct _GtranslatorDbOrig GtranslatorDbOrig;
 
 struct _GtranslatorDbOrig
 {
-	GtranslatorDbBase parent_instance;
-	
-	/*< private > */
-	GtranslatorDbOrigPrivate *priv;
+  GtranslatorDbBase parent_instance;
+
+  /*< private > */
+  GtranslatorDbOrigPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorDbOrigClass	GtranslatorDbOrigClass;
+typedef struct _GtranslatorDbOrigClass GtranslatorDbOrigClass;
 
 struct _GtranslatorDbOrigClass
 {
-	GtranslatorDbBaseClass parent_class;
+  GtranslatorDbBaseClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_db_orig_get_type	      (void) G_GNUC_CONST;
+GType
+gtranslator_db_orig_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_db_orig_register_type    (GTypeModule * module);
+     GType gtranslator_db_orig_register_type (GTypeModule * module);
 
-GtranslatorDbOrig *gtranslator_db_orig_new	      (void);
+     GtranslatorDbOrig *gtranslator_db_orig_new (void);
 
-gboolean         gtranslator_db_orig_write            (GtranslatorDbOrig *orig,
-						       const gchar *string,
-						       db_recno_t value);
-						       
-db_recno_t       gtranslator_db_orig_read             (GtranslatorDbOrig *orig,
-						       const gchar *string);
+     gboolean gtranslator_db_orig_write (GtranslatorDbOrig * orig,
+					 const gchar * string,
+					 db_recno_t value);
+
+     db_recno_t gtranslator_db_orig_read (GtranslatorDbOrig * orig,
+					  const gchar * string);
 
 G_END_DECLS
-
 #endif /* __DB_ORIG_H__ */

@@ -22,14 +22,15 @@
 #include <gtk/gtk.h>
 #include "window.h"
 
-typedef enum {
-	FILESEL_OPEN,
-	FILESEL_SAVE
+typedef enum
+{
+  FILESEL_OPEN,
+  FILESEL_SAVE
 } FileselMode;
 
-GtkWidget	*gtranslator_file_chooser_new			(GtkWindow *parent,
-								 FileselMode mode,
-								 const gchar *title,
-								 const gchar *dir);
+GtkWidget *gtranslator_file_chooser_new (GtkWindow * parent,
+					 FileselMode mode,
+					 const gchar * title,
+					 const gchar * dir);
 
 #endif

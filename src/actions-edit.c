@@ -33,156 +33,156 @@
 #include "window.h"
 
 void
-gtranslator_actions_edit_undo (GtkAction   *action,
-			       GtranslatorWindow *window)
+gtranslator_actions_edit_undo (GtkAction * action, GtranslatorWindow * window)
 {
-	GtranslatorView *active_view;
-	GtkSourceBuffer *active_document;
+  GtranslatorView *active_view;
+  GtkSourceBuffer *active_document;
 
-	active_view = gtranslator_window_get_active_view (window);
-	g_return_if_fail (active_view);
+  active_view = gtranslator_window_get_active_view (window);
+  g_return_if_fail (active_view);
 
-	active_document = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (active_view)));
+  active_document =
+    GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
+		       (GTK_TEXT_VIEW (active_view)));
 
-	gtk_text_buffer_begin_user_action(GTK_TEXT_BUFFER(active_document));
-	gtk_source_buffer_undo (active_document);
-	gtk_text_buffer_end_user_action(GTK_TEXT_BUFFER(active_document));
+  gtk_text_buffer_begin_user_action (GTK_TEXT_BUFFER (active_document));
+  gtk_source_buffer_undo (active_document);
+  gtk_text_buffer_end_user_action (GTK_TEXT_BUFFER (active_document));
 
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+  gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
 
 void
-gtranslator_actions_edit_redo (GtkAction   *action,
-			       GtranslatorWindow *window)
+gtranslator_actions_edit_redo (GtkAction * action, GtranslatorWindow * window)
 {
-	GtranslatorView *active_view;
-	GtkSourceBuffer *active_document;
+  GtranslatorView *active_view;
+  GtkSourceBuffer *active_document;
 
-	active_view = gtranslator_window_get_active_view (window);
-	g_return_if_fail (active_view);
+  active_view = gtranslator_window_get_active_view (window);
+  g_return_if_fail (active_view);
 
-	active_document = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (active_view)));
+  active_document =
+    GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
+		       (GTK_TEXT_VIEW (active_view)));
 
-	gtk_text_buffer_begin_user_action(GTK_TEXT_BUFFER(active_document));
-	gtk_source_buffer_redo (active_document);
-	gtk_text_buffer_end_user_action(GTK_TEXT_BUFFER(active_document));
+  gtk_text_buffer_begin_user_action (GTK_TEXT_BUFFER (active_document));
+  gtk_source_buffer_redo (active_document);
+  gtk_text_buffer_end_user_action (GTK_TEXT_BUFFER (active_document));
 
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+  gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
 
 void
-gtranslator_actions_edit_cut (GtkAction   *action,
-			      GtranslatorWindow *window)
+gtranslator_actions_edit_cut (GtkAction * action, GtranslatorWindow * window)
 {
-	GtranslatorView *active_view;
+  GtranslatorView *active_view;
 
-	active_view = gtranslator_window_get_active_view (window);
-	g_return_if_fail (active_view);
+  active_view = gtranslator_window_get_active_view (window);
+  g_return_if_fail (active_view);
 
-	gtranslator_view_cut_clipboard (active_view);
+  gtranslator_view_cut_clipboard (active_view);
 
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+  gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
 
 void
-gtranslator_actions_edit_copy (GtkAction   *action,
-			       GtranslatorWindow *window)
+gtranslator_actions_edit_copy (GtkAction * action, GtranslatorWindow * window)
 {
-	GtranslatorView *active_view;
+  GtranslatorView *active_view;
 
-	active_view = gtranslator_window_get_active_view (window);
-	g_return_if_fail (active_view);
+  active_view = gtranslator_window_get_active_view (window);
+  g_return_if_fail (active_view);
 
-	gtranslator_view_copy_clipboard (active_view);
+  gtranslator_view_copy_clipboard (active_view);
 
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+  gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
 
 void
-gtranslator_actions_edit_paste (GtkAction   *action,
-				GtranslatorWindow *window)
+gtranslator_actions_edit_paste (GtkAction * action,
+				GtranslatorWindow * window)
 {
-	GtranslatorView *active_view;
+  GtranslatorView *active_view;
 
-	active_view = gtranslator_window_get_active_view (window);
-	g_return_if_fail (active_view);
+  active_view = gtranslator_window_get_active_view (window);
+  g_return_if_fail (active_view);
 
-	gtranslator_view_paste_clipboard (active_view);
+  gtranslator_view_paste_clipboard (active_view);
 
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+  gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
 
 
 /*
  * Use the untranslated message as the translation.
  */
-void 
-gtranslator_message_copy_to_translation(GtkAction *action,
-					GtranslatorWindow *window)
+void
+gtranslator_message_copy_to_translation (GtkAction * action,
+					 GtranslatorWindow * window)
 {
-	GtranslatorTab *current;
-	
-	current = gtranslator_window_get_active_tab (window);
-	
-	gtranslator_tab_copy_to_translation (current);
+  GtranslatorTab *current;
+
+  current = gtranslator_window_get_active_tab (window);
+
+  gtranslator_tab_copy_to_translation (current);
 }
 
 /*
  * Toggle the sticky status
  */
-void 
-gtranslator_message_status_toggle_fuzzy(GtkAction *action,
-					GtranslatorWindow *window)
+void
+gtranslator_message_status_toggle_fuzzy (GtkAction * action,
+					 GtranslatorWindow * window)
 {
-	GtranslatorTab *current;
-	GtranslatorPo *po;
-	GList *msg;
-	
-	current = gtranslator_window_get_active_tab(window);
-	po = gtranslator_tab_get_po(current);
-	msg = gtranslator_po_get_current_message(po);
-	
-	if(gtranslator_msg_is_fuzzy(msg->data))
-		gtranslator_msg_set_fuzzy(msg->data, FALSE);
-	else
-		gtranslator_msg_set_fuzzy(msg->data, TRUE);
-	
-	/*
-	 * Emit that message was changed.
-	 */
-	g_signal_emit_by_name(current, "message_changed", msg->data);					
+  GtranslatorTab *current;
+  GtranslatorPo *po;
+  GList *msg;
+
+  current = gtranslator_window_get_active_tab (window);
+  po = gtranslator_tab_get_po (current);
+  msg = gtranslator_po_get_current_message (po);
+
+  if (gtranslator_msg_is_fuzzy (msg->data))
+    gtranslator_msg_set_fuzzy (msg->data, FALSE);
+  else
+    gtranslator_msg_set_fuzzy (msg->data, TRUE);
+
+  /*
+   * Emit that message was changed.
+   */
+  g_signal_emit_by_name (current, "message_changed", msg->data);
 }
 
 void
-gtranslator_actions_edit_preferences(GtkAction *action,
-				     GtranslatorWindow *window)
+gtranslator_actions_edit_preferences (GtkAction * action,
+				      GtranslatorWindow * window)
 {
-	gtranslator_show_preferences_dialog(window);
+  gtranslator_show_preferences_dialog (window);
 }
 
 void
-gtranslator_actions_edit_header(GtkAction *action,
-				GtranslatorWindow *window)
+gtranslator_actions_edit_header (GtkAction * action,
+				 GtranslatorWindow * window)
 {
-	gtranslator_show_header_dialog(window);
+  gtranslator_show_header_dialog (window);
 }
 
 void
-gtranslator_edit_message_comment(GtkAction *action,
-				 GtranslatorWindow *window)
-{	
-	gtranslator_show_comment_dialog(window);
+gtranslator_edit_message_comment (GtkAction * action,
+				  GtranslatorWindow * window)
+{
+  gtranslator_show_comment_dialog (window);
 }
 
 void
-gtranslator_actions_edit_clear (GtkAction *action,
-				GtranslatorWindow *window)
+gtranslator_actions_edit_clear (GtkAction * action,
+				GtranslatorWindow * window)
 {
-	GtranslatorTab *tab;
-	
-	g_return_if_fail (GTR_IS_WINDOW (window));
-	
-	tab = gtranslator_window_get_active_tab (window);
-	
-	gtranslator_tab_clear_msgstr_views (tab);
+  GtranslatorTab *tab;
+
+  g_return_if_fail (GTR_IS_WINDOW (window));
+
+  tab = gtranslator_window_get_active_tab (window);
+
+  gtranslator_tab_clear_msgstr_views (tab);
 }

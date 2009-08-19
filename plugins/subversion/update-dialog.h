@@ -25,7 +25,6 @@
 #include "window.h"
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -35,42 +34,42 @@ G_BEGIN_DECLS
 #define GTR_IS_UPDATE_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_UPDATE_DIALOG))
 #define GTR_IS_UPDATE_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_UPDATE_DIALOG))
 #define GTR_UPDATE_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_UPDATE_DIALOG, GtranslatorUpdateDialogClass))
-
 /* Private structure type */
-typedef struct _GtranslatorUpdateDialogPrivate	GtranslatorUpdateDialogPrivate;
+typedef struct _GtranslatorUpdateDialogPrivate GtranslatorUpdateDialogPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorUpdateDialog		GtranslatorUpdateDialog;
+typedef struct _GtranslatorUpdateDialog GtranslatorUpdateDialog;
 
 struct _GtranslatorUpdateDialog
 {
-	GtkDialog parent_instance;
-	
-	/*< private > */
-	GtranslatorUpdateDialogPrivate *priv;
+  GtkDialog parent_instance;
+
+  /*< private > */
+  GtranslatorUpdateDialogPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorUpdateDialogClass	GtranslatorUpdateDialogClass;
+typedef struct _GtranslatorUpdateDialogClass GtranslatorUpdateDialogClass;
 
 struct _GtranslatorUpdateDialogClass
 {
-	GtkDialogClass parent_class;
+  GtkDialogClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_update_dialog_get_type               (void) G_GNUC_CONST;
+GType
+gtranslator_update_dialog_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_update_dialog_register_type          (GTypeModule * module);
+     GType gtranslator_update_dialog_register_type (GTypeModule * module);
 
-void	     gtranslator_show_update_dialog                   (GtranslatorWindow *window);
+     void gtranslator_show_update_dialog (GtranslatorWindow * window);
 
 G_END_DECLS
-
 #endif /* __UPDATE_DIALOG_H__ */

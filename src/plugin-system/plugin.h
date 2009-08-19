@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA. 
  */
- 
+
 /*
  * Modified by the gtranslator Team, 2002-2005. See the AUTHORS file for a 
  * list of people on the gtranslator Team.  
@@ -37,10 +37,9 @@
 #include "debug.h"
 
 /* TODO: add a .h file that includes all the .h files normally needed to
- * develop a plugin */ 
+ * develop a plugin */
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -50,15 +49,14 @@ G_BEGIN_DECLS
 #define GTR_IS_PLUGIN(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GTR_TYPE_PLUGIN))
 #define GTR_IS_PLUGIN_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_PLUGIN))
 #define GTR_PLUGIN_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GTR_TYPE_PLUGIN, GtranslatorPluginClass))
-
 /*
  * Main object structure
  */
 typedef struct _GtranslatorPlugin GtranslatorPlugin;
 
-struct _GtranslatorPlugin 
+struct _GtranslatorPlugin
 {
-	GObject parent;
+  GObject parent;
 };
 
 /*
@@ -66,51 +64,48 @@ struct _GtranslatorPlugin
  */
 typedef struct _GtranslatorPluginClass GtranslatorPluginClass;
 
-struct _GtranslatorPluginClass 
+struct _GtranslatorPluginClass
 {
-	GObjectClass parent_class;
+  GObjectClass parent_class;
 
-	/* Virtual public methods */
-	
-	void 		(*activate)		(GtranslatorPlugin *plugin,
-						 GtranslatorWindow *window);
-	void 		(*deactivate)		(GtranslatorPlugin *plugin,
-						 GtranslatorWindow *window);
+  /* Virtual public methods */
 
-	void 		(*update_ui)		(GtranslatorPlugin *plugin,
-						 GtranslatorWindow *window);
+  void (*activate) (GtranslatorPlugin * plugin, GtranslatorWindow * window);
+  void (*deactivate) (GtranslatorPlugin * plugin, GtranslatorWindow * window);
 
-	GtkWidget 	*(*create_configure_dialog)
-						(GtranslatorPlugin *plugin);
+  void (*update_ui) (GtranslatorPlugin * plugin, GtranslatorWindow * window);
 
-	/* Plugins should not override this, it's handled automatically by
-	   the GtranslatorPluginClass */
-	gboolean 	(*is_configurable)
-						(GtranslatorPlugin *plugin);
+  GtkWidget *(*create_configure_dialog) (GtranslatorPlugin * plugin);
 
-	/* Padding for future expansion */
-	void		(*_gtranslator_reserved1)	(void);
-	void		(*_gtranslator_reserved2)	(void);
-	void		(*_gtranslator_reserved3)	(void);
-	void		(*_gtranslator_reserved4)	(void);
+  /* Plugins should not override this, it's handled automatically by
+     the GtranslatorPluginClass */
+    gboolean (*is_configurable) (GtranslatorPlugin * plugin);
+
+  /* Padding for future expansion */
+  void (*_gtranslator_reserved1) (void);
+  void (*_gtranslator_reserved2) (void);
+  void (*_gtranslator_reserved3) (void);
+  void (*_gtranslator_reserved4) (void);
 };
 
 /*
  * Public methods
  */
-GType 		 gtranslator_plugin_get_type 		(void) G_GNUC_CONST;
+GType
+gtranslator_plugin_get_type (void)
+  G_GNUC_CONST;
 
-void 		 gtranslator_plugin_activate		(GtranslatorPlugin *plugin,
-						 GtranslatorWindow *window);
-void 		 gtranslator_plugin_deactivate	(GtranslatorPlugin *plugin,
-						 GtranslatorWindow *window);
-				 
-void 		 gtranslator_plugin_update_ui		(GtranslatorPlugin *plugin,
-						 GtranslatorWindow *window);
+     void gtranslator_plugin_activate (GtranslatorPlugin * plugin,
+				       GtranslatorWindow * window);
+     void gtranslator_plugin_deactivate (GtranslatorPlugin * plugin,
+					 GtranslatorWindow * window);
 
-gboolean	 gtranslator_plugin_is_configurable	(GtranslatorPlugin *plugin);
-GtkWidget	*gtranslator_plugin_create_configure_dialog		
-						(GtranslatorPlugin *plugin);
+     void gtranslator_plugin_update_ui (GtranslatorPlugin * plugin,
+					GtranslatorWindow * window);
+
+     gboolean gtranslator_plugin_is_configurable (GtranslatorPlugin * plugin);
+     GtkWidget *gtranslator_plugin_create_configure_dialog
+       (GtranslatorPlugin * plugin);
 
 /**
  * GTR_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE):
@@ -239,7 +234,4 @@ object_name##_register_type (GTypeModule *module)					\
 	GTR_PLUGIN_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, ;)
 
 G_END_DECLS
-
-#endif  /* __GTR_PLUGIN_H__ */
-
-
+#endif /* __GTR_PLUGIN_H__ */

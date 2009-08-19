@@ -25,7 +25,6 @@
 #include "plugin.h"
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -35,41 +34,44 @@ G_BEGIN_DECLS
 #define GTR_IS_SOURCE_CODE_VIEW_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN))
 #define GTR_IS_SOURCE_CODE_VIEW_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN))
 #define GTR_SOURCE_CODE_VIEW_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN_PLUGIN, GtranslatorSourceCodeViewPluginClass))
-
 /* Private structure type */
-typedef struct _GtranslatorSourceCodeViewPluginPrivate	GtranslatorSourceCodeViewPluginPrivate;
+typedef struct _GtranslatorSourceCodeViewPluginPrivate
+  GtranslatorSourceCodeViewPluginPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorSourceCodeViewPlugin		GtranslatorSourceCodeViewPlugin;
+typedef struct _GtranslatorSourceCodeViewPlugin
+  GtranslatorSourceCodeViewPlugin;
 
 struct _GtranslatorSourceCodeViewPlugin
 {
-	GtranslatorPlugin parent_instance;
-	
-	/* private */
-	GtranslatorSourceCodeViewPluginPrivate *priv;
+  GtranslatorPlugin parent_instance;
+
+  /* private */
+  GtranslatorSourceCodeViewPluginPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorSourceCodeViewPluginClass	GtranslatorSourceCodeViewPluginClass;
+typedef struct _GtranslatorSourceCodeViewPluginClass
+  GtranslatorSourceCodeViewPluginClass;
 
 struct _GtranslatorSourceCodeViewPluginClass
 {
-	GtranslatorPluginClass parent_class;
+  GtranslatorPluginClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType	gtranslator_source_code_view_plugin_get_type	(void) G_GNUC_CONST;
+GType
+gtranslator_source_code_view_plugin_get_type (void)
+  G_GNUC_CONST;
 
 /* All the plugins must implement this function */
-G_MODULE_EXPORT GType register_gtranslator_plugin (GTypeModule *module);
+     G_MODULE_EXPORT GType register_gtranslator_plugin (GTypeModule * module);
 
 G_END_DECLS
-
 #endif /* __GTR_SOURCE_CODE_VIEW_PLUGIN_H__ */

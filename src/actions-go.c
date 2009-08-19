@@ -31,143 +31,144 @@
 #include "window.h"
 
 
-void 
-gtranslator_message_go_to_first(GtkAction *action,
-				GtranslatorWindow *window)
+void
+gtranslator_message_go_to_first (GtkAction * action,
+				 GtranslatorWindow * window)
 {
-	GtranslatorTab *current;
-	GtranslatorPo *po;
-	
-	current = gtranslator_window_get_active_tab(window);
-	po = gtranslator_tab_get_po(current);
-	gtranslator_tab_go_to_first (current);
-	set_sensitive_according_to_message(window, po);
-}
+  GtranslatorTab *current;
+  GtranslatorPo *po;
 
-void 
-gtranslator_message_go_to_previous(GtkAction *action,
-				   GtranslatorWindow *window)
-{
-	GtranslatorTab *current;
-	GtranslatorPo *po;
-	
-	current = gtranslator_window_get_active_tab(window);
-	po = gtranslator_tab_get_po(current);
-	gtranslator_tab_go_to_prev (current);
-	set_sensitive_according_to_message(window, po);
-}
-
-void 
-gtranslator_message_go_to_next(GtkAction *action,
-			       GtranslatorWindow *window)
-{
-	GtranslatorTab *current;
-	GtranslatorPo *po;
-	
-	current = gtranslator_window_get_active_tab(window);
-	po = gtranslator_tab_get_po(current);
-	gtranslator_tab_go_to_next (current);
-	set_sensitive_according_to_message(window, po);
-}
-
-void 
-gtranslator_message_go_to_last(GtkAction *action,
-			       GtranslatorWindow *window)
-{
-	GtranslatorTab *current;
-	GtranslatorPo *po;
-	
-	current = gtranslator_window_get_active_tab(window);
-	po = gtranslator_tab_get_po(current);
-	gtranslator_tab_go_to_last (current);
-	set_sensitive_according_to_message(window, po);
+  current = gtranslator_window_get_active_tab (window);
+  po = gtranslator_tab_get_po (current);
+  gtranslator_tab_go_to_first (current);
+  set_sensitive_according_to_message (window, po);
 }
 
 void
-gtranslator_message_go_to_next_fuzzy(GtkAction *action,
-				     GtranslatorWindow *window)
+gtranslator_message_go_to_previous (GtkAction * action,
+				    GtranslatorWindow * window)
 {
-	GtranslatorTab *current;
-	GtranslatorPo *po;
-	
-	current = gtranslator_window_get_active_tab (window);
-	po = gtranslator_tab_get_po (current);
-	if (gtranslator_tab_go_to_next_fuzzy (current))
-		set_sensitive_according_to_message (window, po);
+  GtranslatorTab *current;
+  GtranslatorPo *po;
+
+  current = gtranslator_window_get_active_tab (window);
+  po = gtranslator_tab_get_po (current);
+  gtranslator_tab_go_to_prev (current);
+  set_sensitive_according_to_message (window, po);
 }
 
 void
-gtranslator_message_go_to_prev_fuzzy(GtkAction *action,
-				     GtranslatorWindow *window)
+gtranslator_message_go_to_next (GtkAction * action,
+				GtranslatorWindow * window)
 {
-	GtranslatorTab *current;
-	GtranslatorPo *po;
-	
-	current = gtranslator_window_get_active_tab(window);
-	po = gtranslator_tab_get_po(current);
-	if (gtranslator_tab_go_to_prev_fuzzy (current))
-		set_sensitive_according_to_message (window, po);
+  GtranslatorTab *current;
+  GtranslatorPo *po;
+
+  current = gtranslator_window_get_active_tab (window);
+  po = gtranslator_tab_get_po (current);
+  gtranslator_tab_go_to_next (current);
+  set_sensitive_according_to_message (window, po);
 }
 
 void
-gtranslator_message_go_to_next_untranslated(GtkAction *action,
-					    GtranslatorWindow *window)
+gtranslator_message_go_to_last (GtkAction * action,
+				GtranslatorWindow * window)
 {
-	GtranslatorTab *current;
-	GtranslatorPo *po;
-	GList *msg;
-	
-	current = gtranslator_window_get_active_tab(window);
-	po = gtranslator_tab_get_po(current);
-	if (gtranslator_tab_go_to_next_untrans (current))
-		set_sensitive_according_to_message (window, po);
+  GtranslatorTab *current;
+  GtranslatorPo *po;
+
+  current = gtranslator_window_get_active_tab (window);
+  po = gtranslator_tab_get_po (current);
+  gtranslator_tab_go_to_last (current);
+  set_sensitive_according_to_message (window, po);
 }
 
 void
-gtranslator_message_go_to_prev_untranslated(GtkAction *action,
-					    GtranslatorWindow *window)
+gtranslator_message_go_to_next_fuzzy (GtkAction * action,
+				      GtranslatorWindow * window)
 {
-	GtranslatorTab *current;
-	GtranslatorPo *po;
-	GList *msg;
-	
-	current = gtranslator_window_get_active_tab(window);
-	po = gtranslator_tab_get_po(current);
-	if (gtranslator_tab_go_to_prev_untrans (current))
-		set_sensitive_according_to_message (window, po);
+  GtranslatorTab *current;
+  GtranslatorPo *po;
+
+  current = gtranslator_window_get_active_tab (window);
+  po = gtranslator_tab_get_po (current);
+  if (gtranslator_tab_go_to_next_fuzzy (current))
+    set_sensitive_according_to_message (window, po);
 }
 
 void
-gtranslator_message_go_to_next_fuzzy_or_untranslated (GtkAction *action,
-						      GtranslatorWindow *window)
+gtranslator_message_go_to_prev_fuzzy (GtkAction * action,
+				      GtranslatorWindow * window)
 {
-	GtranslatorTab *current;
-	GtranslatorPo *po;
-	GList *msg;
-	
-	current = gtranslator_window_get_active_tab (window);
-	po = gtranslator_tab_get_po (current);
-	if (gtranslator_tab_go_to_next_fuzzy_or_untrans (current))
-		set_sensitive_according_to_message (window, po);
+  GtranslatorTab *current;
+  GtranslatorPo *po;
+
+  current = gtranslator_window_get_active_tab (window);
+  po = gtranslator_tab_get_po (current);
+  if (gtranslator_tab_go_to_prev_fuzzy (current))
+    set_sensitive_according_to_message (window, po);
 }
 
 void
-gtranslator_message_go_to_prev_fuzzy_or_untranslated (GtkAction *action,
-						      GtranslatorWindow *window)
+gtranslator_message_go_to_next_untranslated (GtkAction * action,
+					     GtranslatorWindow * window)
 {
-	GtranslatorTab *current;
-	GtranslatorPo *po;
-	GList *msg;
-	
-	current = gtranslator_window_get_active_tab (window);
-	po = gtranslator_tab_get_po (current);
-	if (gtranslator_tab_go_to_prev_fuzzy_or_untrans (current))
-		set_sensitive_according_to_message (window, po);
+  GtranslatorTab *current;
+  GtranslatorPo *po;
+  GList *msg;
+
+  current = gtranslator_window_get_active_tab (window);
+  po = gtranslator_tab_get_po (current);
+  if (gtranslator_tab_go_to_next_untrans (current))
+    set_sensitive_according_to_message (window, po);
 }
 
 void
-gtranslator_message_jump (GtkAction *action,
-			  GtranslatorWindow *window)
+gtranslator_message_go_to_prev_untranslated (GtkAction * action,
+					     GtranslatorWindow * window)
 {
-	gtranslator_show_jump_dialog (window);
+  GtranslatorTab *current;
+  GtranslatorPo *po;
+  GList *msg;
+
+  current = gtranslator_window_get_active_tab (window);
+  po = gtranslator_tab_get_po (current);
+  if (gtranslator_tab_go_to_prev_untrans (current))
+    set_sensitive_according_to_message (window, po);
+}
+
+void
+gtranslator_message_go_to_next_fuzzy_or_untranslated (GtkAction * action,
+						      GtranslatorWindow *
+						      window)
+{
+  GtranslatorTab *current;
+  GtranslatorPo *po;
+  GList *msg;
+
+  current = gtranslator_window_get_active_tab (window);
+  po = gtranslator_tab_get_po (current);
+  if (gtranslator_tab_go_to_next_fuzzy_or_untrans (current))
+    set_sensitive_according_to_message (window, po);
+}
+
+void
+gtranslator_message_go_to_prev_fuzzy_or_untranslated (GtkAction * action,
+						      GtranslatorWindow *
+						      window)
+{
+  GtranslatorTab *current;
+  GtranslatorPo *po;
+  GList *msg;
+
+  current = gtranslator_window_get_active_tab (window);
+  po = gtranslator_tab_get_po (current);
+  if (gtranslator_tab_go_to_prev_fuzzy_or_untrans (current))
+    set_sensitive_according_to_message (window, po);
+}
+
+void
+gtranslator_message_jump (GtkAction * action, GtranslatorWindow * window)
+{
+  gtranslator_show_jump_dialog (window);
 }

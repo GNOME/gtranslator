@@ -36,38 +36,40 @@
 #define GTR_HEADER_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_HEADER_DIALOG, GtranslatorHeaderDialogClass))
 
 /* Private structure type */
-typedef struct _GtranslatorHeaderDialogPrivate	GtranslatorHeaderDialogPrivate;
+typedef struct _GtranslatorHeaderDialogPrivate GtranslatorHeaderDialogPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorHeaderDialog		GtranslatorHeaderDialog;
+typedef struct _GtranslatorHeaderDialog GtranslatorHeaderDialog;
 
 struct _GtranslatorHeaderDialog
 {
-	GtkDialog parent_instance;
-	
-	/*< private > */
-	GtranslatorHeaderDialogPrivate *priv;
+  GtkDialog parent_instance;
+
+  /*< private > */
+  GtranslatorHeaderDialogPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorHeaderDialogClass	GtranslatorHeaderDialogClass;
+typedef struct _GtranslatorHeaderDialogClass GtranslatorHeaderDialogClass;
 
 struct _GtranslatorHeaderDialogClass
 {
-	GtkDialogClass parent_class;
+  GtkDialogClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_header_dialog_get_type               (void) G_GNUC_CONST;
+GType
+gtranslator_header_dialog_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_header_dialog_register_type          (GTypeModule * module);
+     GType gtranslator_header_dialog_register_type (GTypeModule * module);
 
-void	         gtranslator_show_header_dialog                   (GtranslatorWindow *window);
+     void gtranslator_show_header_dialog (GtranslatorWindow * window);
 
 #endif

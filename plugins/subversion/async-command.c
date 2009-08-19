@@ -48,136 +48,136 @@
 
 struct _GtranslatorAsyncCommandPriv
 {
-	GMutex *mutex;
-	guint return_code;
-	gboolean complete;
-	gboolean new_data_arrived;
+  GMutex *mutex;
+  guint return_code;
+  gboolean complete;
+  gboolean new_data_arrived;
 };
 
-G_DEFINE_TYPE (GtranslatorAsyncCommand, gtranslator_async_command, GTR_TYPE_COMMAND);
+G_DEFINE_TYPE (GtranslatorAsyncCommand, gtranslator_async_command,
+	       GTR_TYPE_COMMAND);
 
 static void
-gtranslator_async_command_init (GtranslatorAsyncCommand *self)
+gtranslator_async_command_init (GtranslatorAsyncCommand * self)
 {
-	self->priv = g_new0 (GtranslatorAsyncCommandPriv, 1);
-	
-	self->priv->mutex = g_mutex_new ();
+  self->priv = g_new0 (GtranslatorAsyncCommandPriv, 1);
+
+  self->priv->mutex = g_mutex_new ();
 }
 
 static void
-gtranslator_async_command_finalize (GObject *object)
+gtranslator_async_command_finalize (GObject * object)
 {
-	GtranslatorAsyncCommand *self;
-	
-	self = GTR_ASYNC_COMMAND (object);
-	
-	g_mutex_free (self->priv->mutex);
-	g_idle_remove_by_data (self);
-	
-	g_free (self->priv);
+  GtranslatorAsyncCommand *self;
 
-	G_OBJECT_CLASS (gtranslator_async_command_parent_class)->finalize (object);
+  self = GTR_ASYNC_COMMAND (object);
+
+  g_mutex_free (self->priv->mutex);
+  g_idle_remove_by_data (self);
+
+  g_free (self->priv);
+
+  G_OBJECT_CLASS (gtranslator_async_command_parent_class)->finalize (object);
 }
 
 static gboolean
-gtranslator_async_command_notification_poll (GtranslatorCommand *command)
+gtranslator_async_command_notification_poll (GtranslatorCommand * command)
 {
-	GtranslatorAsyncCommand *self;
-	
-	self = GTR_ASYNC_COMMAND (command);
-	
-	if (self->priv->new_data_arrived &&
-		g_mutex_trylock (self->priv->mutex))
-	{
-		g_signal_emit_by_name (command, "data-arrived");
-		g_mutex_unlock (self->priv->mutex);
-		self->priv->new_data_arrived = FALSE;
-	}
-	
-	if (self->priv->complete)
-	{
-		g_signal_emit_by_name (command, "command-finished", 
-							   self->priv->return_code);
-		return FALSE;
-	}
-	else
-		return TRUE;
-	
+  GtranslatorAsyncCommand *self;
+
+  self = GTR_ASYNC_COMMAND (command);
+
+  if (self->priv->new_data_arrived && g_mutex_trylock (self->priv->mutex))
+    {
+      g_signal_emit_by_name (command, "data-arrived");
+      g_mutex_unlock (self->priv->mutex);
+      self->priv->new_data_arrived = FALSE;
+    }
+
+  if (self->priv->complete)
+    {
+      g_signal_emit_by_name (command, "command-finished",
+			     self->priv->return_code);
+      return FALSE;
+    }
+  else
+    return TRUE;
+
 }
 
 static gpointer
-gtranslator_async_command_thread (GtranslatorCommand *command)
+gtranslator_async_command_thread (GtranslatorCommand * command)
 {
-	guint return_code;
-	
-	return_code = GTR_COMMAND_GET_CLASS (command)->run (command);
-	gtranslator_command_notify_complete (command, return_code);
-	return NULL;
+  guint return_code;
+
+  return_code = GTR_COMMAND_GET_CLASS (command)->run (command);
+  gtranslator_command_notify_complete (command, return_code);
+  return NULL;
 }
 
 static void
-start_command (GtranslatorCommand *command)
+start_command (GtranslatorCommand * command)
 {
-	g_idle_add ((GSourceFunc) gtranslator_async_command_notification_poll, 
-				command);
-	g_thread_create ((GThreadFunc) gtranslator_async_command_thread, 
-					 command, FALSE, NULL);
+  g_idle_add ((GSourceFunc) gtranslator_async_command_notification_poll,
+	      command);
+  g_thread_create ((GThreadFunc) gtranslator_async_command_thread,
+		   command, FALSE, NULL);
 }
 
 static void
-notify_data_arrived (GtranslatorCommand *command)
+notify_data_arrived (GtranslatorCommand * command)
 {
-	GtranslatorAsyncCommand *self;
-	
-	self = GTR_ASYNC_COMMAND (command);
-	
-	self->priv->new_data_arrived = TRUE;
+  GtranslatorAsyncCommand *self;
+
+  self = GTR_ASYNC_COMMAND (command);
+
+  self->priv->new_data_arrived = TRUE;
 }
 
 static void
-notify_complete (GtranslatorCommand *command, guint return_code)
+notify_complete (GtranslatorCommand * command, guint return_code)
 {
-	GtranslatorAsyncCommand *self;
-	
-	self = GTR_ASYNC_COMMAND (command);
-	
-	self->priv->complete = TRUE;
-	self->priv->return_code = return_code;
+  GtranslatorAsyncCommand *self;
+
+  self = GTR_ASYNC_COMMAND (command);
+
+  self->priv->complete = TRUE;
+  self->priv->return_code = return_code;
 }
 
 static void
-gtranslator_async_command_class_init (GtranslatorAsyncCommandClass *klass)
+gtranslator_async_command_class_init (GtranslatorAsyncCommandClass * klass)
 {
-	GObjectClass* object_class = G_OBJECT_CLASS (klass);
-	GtranslatorCommandClass* parent_class = GTR_COMMAND_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtranslatorCommandClass *parent_class = GTR_COMMAND_CLASS (klass);
 
-	object_class->finalize = gtranslator_async_command_finalize;
-	
-	parent_class->start = start_command;
-	parent_class->notify_data_arrived = notify_data_arrived;
-	parent_class->notify_complete = notify_complete;
+  object_class->finalize = gtranslator_async_command_finalize;
+
+  parent_class->start = start_command;
+  parent_class->notify_data_arrived = notify_data_arrived;
+  parent_class->notify_complete = notify_complete;
 }
 
 void
-gtranslator_async_command_set_error_message (GtranslatorCommand *command, 
-										gchar *error_message)
+gtranslator_async_command_set_error_message (GtranslatorCommand * command,
+					     gchar * error_message)
 {
-	gtranslator_async_command_lock (GTR_ASYNC_COMMAND (command));
-	GTR_COMMAND_GET_CLASS (command)->set_error_message (command, 
-														   error_message);
-	gtranslator_async_command_unlock (GTR_ASYNC_COMMAND (command));
+  gtranslator_async_command_lock (GTR_ASYNC_COMMAND (command));
+  GTR_COMMAND_GET_CLASS (command)->set_error_message (command, error_message);
+  gtranslator_async_command_unlock (GTR_ASYNC_COMMAND (command));
 }
 
 gchar *
-gtranslator_async_command_get_error_message (GtranslatorCommand *command)
+gtranslator_async_command_get_error_message (GtranslatorCommand * command)
 {
-	gchar *error_message;
-	
-	gtranslator_async_command_lock (GTR_ASYNC_COMMAND (command));
-	error_message = GTR_COMMAND_GET_CLASS (command)->get_error_message (command);
-	gtranslator_async_command_unlock (GTR_ASYNC_COMMAND (command));
-	
-	return error_message;
+  gchar *error_message;
+
+  gtranslator_async_command_lock (GTR_ASYNC_COMMAND (command));
+  error_message =
+    GTR_COMMAND_GET_CLASS (command)->get_error_message (command);
+  gtranslator_async_command_unlock (GTR_ASYNC_COMMAND (command));
+
+  return error_message;
 }
 
 /**
@@ -187,9 +187,9 @@ gtranslator_async_command_get_error_message (GtranslatorCommand *command)
  * Locks the command's built-in mutex.
  */
 void
-gtranslator_async_command_lock (GtranslatorAsyncCommand *self)
+gtranslator_async_command_lock (GtranslatorAsyncCommand * self)
 {
-	g_mutex_lock (self->priv->mutex);
+  g_mutex_lock (self->priv->mutex);
 }
 
 /**
@@ -199,7 +199,7 @@ gtranslator_async_command_lock (GtranslatorAsyncCommand *self)
  * Unlocks the command's built-in mutex.
  */
 void
-gtranslator_async_command_unlock (GtranslatorAsyncCommand *self)
+gtranslator_async_command_unlock (GtranslatorAsyncCommand * self)
 {
-	g_mutex_unlock (self->priv->mutex);
+  g_mutex_unlock (self->priv->mutex);
 }

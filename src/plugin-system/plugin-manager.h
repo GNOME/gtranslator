@@ -34,7 +34,6 @@
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -44,21 +43,21 @@ G_BEGIN_DECLS
 #define GTR_IS_PLUGIN_MANAGER(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GTR_TYPE_PLUGIN_MANAGER))
 #define GTR_IS_PLUGIN_MANAGER_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_PLUGIN_MANAGER))
 #define GTR_PLUGIN_MANAGER_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GTR_TYPE_PLUGIN_MANAGER, GtranslatorPluginManagerClass))
-
 /* Private structure type */
-typedef struct _GtranslatorPluginManagerPrivate GtranslatorPluginManagerPrivate;
+typedef struct _GtranslatorPluginManagerPrivate
+  GtranslatorPluginManagerPrivate;
 
 /*
  * Main object structure
  */
 typedef struct _GtranslatorPluginManager GtranslatorPluginManager;
 
-struct _GtranslatorPluginManager 
+struct _GtranslatorPluginManager
 {
-	GtkVBox vbox;
+  GtkVBox vbox;
 
-	/*< private > */
-	GtranslatorPluginManagerPrivate *priv;
+  /*< private > */
+  GtranslatorPluginManagerPrivate *priv;
 };
 
 /*
@@ -66,18 +65,19 @@ struct _GtranslatorPluginManager
  */
 typedef struct _GtranslatorPluginManagerClass GtranslatorPluginManagerClass;
 
-struct _GtranslatorPluginManagerClass 
+struct _GtranslatorPluginManagerClass
 {
-	GtkVBoxClass parent_class;
+  GtkVBoxClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_plugin_manager_get_type		(void) G_GNUC_CONST;
+GType
+gtranslator_plugin_manager_get_type (void)
+  G_GNUC_CONST;
 
-GtkWidget	*gtranslator_plugin_manager_new		(void);
-   
+     GtkWidget *gtranslator_plugin_manager_new (void);
+
 G_END_DECLS
-
-#endif  /* __GTR_PLUGIN_MANAGER_H__  */
+#endif /* __GTR_PLUGIN_MANAGER_H__  */

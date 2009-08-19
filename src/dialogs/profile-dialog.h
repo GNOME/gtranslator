@@ -30,10 +30,11 @@
 #include "window.h"
 #include "preferences-dialog.h"
 
-enum {
-    NEW_PROFILE,
-    EDIT_PROFILE
-  };
+enum
+{
+  NEW_PROFILE,
+  EDIT_PROFILE
+};
 
 /*
  * Type checking and casting macros
@@ -46,40 +47,44 @@ enum {
 #define GTR_PROFILE_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_PROFILE_DIALOG, GtranslatorProfileDialogClass))
 
 /* Private structure type */
-typedef struct _GtranslatorProfileDialogPrivate	GtranslatorProfileDialogPrivate;
+typedef struct _GtranslatorProfileDialogPrivate
+  GtranslatorProfileDialogPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorProfileDialog	GtranslatorProfileDialog;
+typedef struct _GtranslatorProfileDialog GtranslatorProfileDialog;
 
 struct _GtranslatorProfileDialog
 {
-	GtkDialog parent_instance;
-	
-	/*< private > */
-	GtranslatorProfileDialogPrivate *priv;
+  GtkDialog parent_instance;
+
+  /*< private > */
+  GtranslatorProfileDialogPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorProfileDialogClass	GtranslatorProfileDialogClass;
+typedef struct _GtranslatorProfileDialogClass GtranslatorProfileDialogClass;
 
 struct _GtranslatorProfileDialogClass
 {
-	GtkDialogClass parent_class;
+  GtkDialogClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_profile_dialog_get_type               (void) G_GNUC_CONST;
+GType
+gtranslator_profile_dialog_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_profile_dialog_register_type          (GTypeModule * module);
+     GType gtranslator_profile_dialog_register_type (GTypeModule * module);
 
-void	         gtranslator_show_profile_dialog                   (GtranslatorPreferencesDialog *dialog,
-								    GtranslatorProfile *profile,
-								    gint action);
+     void gtranslator_show_profile_dialog (GtranslatorPreferencesDialog *
+					   dialog,
+					   GtranslatorProfile * profile,
+					   gint action);
 
 #endif

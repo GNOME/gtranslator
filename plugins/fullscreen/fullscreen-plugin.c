@@ -30,123 +30,120 @@
 #define WINDOW_DATA_KEY "GtranslatorFullscreenPluginWindowData"
 #define MENU_PATH "/MainMenu/ViewMenu/ViewOps_1"
 
-GTR_PLUGIN_REGISTER_TYPE(GtranslatorFullscreenPlugin, gtranslator_fullscreen_plugin)
-
-static void
-on_fullscreen_activated (GtkToggleAction *action,
-			 GtranslatorWindow *window)
+GTR_PLUGIN_REGISTER_TYPE (GtranslatorFullscreenPlugin,
+			  gtranslator_fullscreen_plugin)
+     static void on_fullscreen_activated (GtkToggleAction * action,
+					  GtranslatorWindow * window)
 {
-	if (gtk_toggle_action_get_active (action))
-		gtk_window_fullscreen (GTK_WINDOW (window));
-	else gtk_window_unfullscreen (GTK_WINDOW (window));
+  if (gtk_toggle_action_get_active (action))
+    gtk_window_fullscreen (GTK_WINDOW (window));
+  else
+    gtk_window_unfullscreen (GTK_WINDOW (window));
 }
 
-static const GtkToggleActionEntry action_entries[] =
-{
-	{ "Fullscreen", NULL, N_("_Fullscreen"), "F11",
-	 N_("Place window on fullscreen state"),
-	 G_CALLBACK (on_fullscreen_activated)}, 
+static const GtkToggleActionEntry action_entries[] = {
+  {"Fullscreen", NULL, N_("_Fullscreen"), "F11",
+   N_("Place window on fullscreen state"),
+   G_CALLBACK (on_fullscreen_activated)},
 };
 
 typedef struct
 {
-	GtkActionGroup *action_group;
-	guint           ui_id;
+  GtkActionGroup *action_group;
+  guint ui_id;
 } WindowData;
 
 static void
-free_window_data (WindowData *data)
+free_window_data (WindowData * data)
 {
-	g_return_if_fail (data != NULL);
+  g_return_if_fail (data != NULL);
 
-	g_free (data);
+  g_free (data);
 }
 
 static void
-gtranslator_fullscreen_plugin_init (GtranslatorFullscreenPlugin *message_table)
+gtranslator_fullscreen_plugin_init (GtranslatorFullscreenPlugin *
+				    message_table)
 {
 }
 
 static void
-gtranslator_fullscreen_plugin_finalize (GObject *object)
+gtranslator_fullscreen_plugin_finalize (GObject * object)
 {
-	G_OBJECT_CLASS (gtranslator_fullscreen_plugin_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtranslator_fullscreen_plugin_parent_class)->
+    finalize (object);
 }
 
 static void
-impl_activate (GtranslatorPlugin *plugin,
-	       GtranslatorWindow *window)
+impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 {
-	GtkUIManager *manager;
-	WindowData *data;
-	GError *error = NULL;
-	
-	g_return_if_fail (GTR_IS_WINDOW (window));
+  GtkUIManager *manager;
+  WindowData *data;
+  GError *error = NULL;
 
-	data = g_new (WindowData, 1);
+  g_return_if_fail (GTR_IS_WINDOW (window));
 
-	manager = gtranslator_window_get_ui_manager (window);
+  data = g_new (WindowData, 1);
 
-	data->action_group = gtk_action_group_new ("GtranslatorFullscreenPluginActions");
-	gtk_action_group_set_translation_domain (data->action_group, 
-						 GETTEXT_PACKAGE);
-	gtk_action_group_add_toggle_actions (data->action_group,
-					     action_entries,
-					     G_N_ELEMENTS (action_entries), 
-					     window);
+  manager = gtranslator_window_get_ui_manager (window);
 
-	gtk_ui_manager_insert_action_group (manager, data->action_group, -1);
+  data->action_group =
+    gtk_action_group_new ("GtranslatorFullscreenPluginActions");
+  gtk_action_group_set_translation_domain (data->action_group,
+					   GETTEXT_PACKAGE);
+  gtk_action_group_add_toggle_actions (data->action_group, action_entries,
+				       G_N_ELEMENTS (action_entries), window);
 
-	data->ui_id = gtk_ui_manager_new_merge_id (manager);
-	
-	if (data->ui_id == 0)
-	{
-		g_warning ("%s", error->message);
-		g_error_free (error);
-		g_free (data);
-		return;
-	}
+  gtk_ui_manager_insert_action_group (manager, data->action_group, -1);
 
-	g_object_set_data_full (G_OBJECT (window), 
-				WINDOW_DATA_KEY, 
-				data,
-				(GDestroyNotify) free_window_data);
-	
-	gtk_ui_manager_add_ui (manager,
-			       data->ui_id,
-			       MENU_PATH,
-			       "Fullscreen",
-			       "Fullscreen",
-			       GTK_UI_MANAGER_MENUITEM,
-			       FALSE);
+  data->ui_id = gtk_ui_manager_new_merge_id (manager);
+
+  if (data->ui_id == 0)
+    {
+      g_warning ("%s", error->message);
+      g_error_free (error);
+      g_free (data);
+      return;
+    }
+
+  g_object_set_data_full (G_OBJECT (window),
+			  WINDOW_DATA_KEY,
+			  data, (GDestroyNotify) free_window_data);
+
+  gtk_ui_manager_add_ui (manager,
+			 data->ui_id,
+			 MENU_PATH,
+			 "Fullscreen",
+			 "Fullscreen", GTK_UI_MANAGER_MENUITEM, FALSE);
 }
 
 static void
-impl_deactivate(GtranslatorPlugin *plugin,
-	        GtranslatorWindow *window)
+impl_deactivate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 {
-	GtkUIManager *manager;
-	WindowData *data;
-	
-	manager = gtranslator_window_get_ui_manager (window);
+  GtkUIManager *manager;
+  WindowData *data;
 
-	data = (WindowData *) g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
-	g_return_if_fail (data != NULL);
+  manager = gtranslator_window_get_ui_manager (window);
 
-	gtk_ui_manager_remove_ui (manager, data->ui_id);
-	gtk_ui_manager_remove_action_group (manager, data->action_group);
+  data =
+    (WindowData *) g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
+  g_return_if_fail (data != NULL);
 
-	g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);	
+  gtk_ui_manager_remove_ui (manager, data->ui_id);
+  gtk_ui_manager_remove_action_group (manager, data->action_group);
+
+  g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
 }
 
 static void
-gtranslator_fullscreen_plugin_class_init (GtranslatorFullscreenPluginClass *klass)
+gtranslator_fullscreen_plugin_class_init (GtranslatorFullscreenPluginClass *
+					  klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	GtranslatorPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtranslatorPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
-	object_class->finalize = gtranslator_fullscreen_plugin_finalize;
+  object_class->finalize = gtranslator_fullscreen_plugin_finalize;
 
-	plugin_class->activate = impl_activate;
-	plugin_class->deactivate = impl_deactivate;
+  plugin_class->activate = impl_activate;
+  plugin_class->deactivate = impl_deactivate;
 }

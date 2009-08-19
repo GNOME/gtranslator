@@ -31,7 +31,7 @@
 #include "dialogs/assistant.h"
 #include "./translation-memory/translation-memory.h"
 #include "./translation-memory/berkeley/berkeley.h"
-  
+
 
 
 #include <glib.h>
@@ -45,227 +45,224 @@
 					 GTR_TYPE_APPLICATION,     \
 					 GtranslatorApplicationPrivate))
 
-G_DEFINE_TYPE(GtranslatorApplication, gtranslator_application, G_TYPE_OBJECT)
+G_DEFINE_TYPE (GtranslatorApplication, gtranslator_application, G_TYPE_OBJECT)
+     struct _GtranslatorApplicationPrivate
+     {
+       GList *windows;
+       GtranslatorWindow *active_window;
 
-struct _GtranslatorApplicationPrivate
+       GList *profiles;
+       GtranslatorProfile *active_profile;
+
+       gchar *toolbars_file;
+       EggToolbarsModel *toolbars_model;
+
+       GtkIconFactory *icon_factory;
+
+       gchar *last_dir;
+
+       GtranslatorTranslationMemory *tm;
+
+       gboolean first_run;
+     };
+
+     static gchar *get_accel_file (void)
 {
-	GList *windows;
-	GtranslatorWindow *active_window;
+  gchar *config;
 
-        GList *profiles;
-	GtranslatorProfile *active_profile;
+  config = gtranslator_utils_get_user_config_dir ();
 
-	gchar *toolbars_file;
-	EggToolbarsModel *toolbars_model;
-	
-	GtkIconFactory *icon_factory;
+  if (config != NULL)
+    {
+      return g_build_filename (config, "gtranslator-accels", NULL);
+      g_free (config);
+    }
 
-	gchar *last_dir;
-	
-	GtranslatorTranslationMemory *tm;
-	
-	gboolean first_run;
-};
-
-static gchar *
-get_accel_file (void)
-{
-	gchar *config;
-
-	config = gtranslator_utils_get_user_config_dir ();
-
-	if (config != NULL)
-	{
-		return g_build_filename (config,
-					 "gtranslator-accels",
-					 NULL);
-		g_free (config);
-	}
-
-	return NULL;
+  return NULL;
 }
 
 static void
 load_accels (void)
 {
-	gchar *filename;
+  gchar *filename;
 
-	filename = get_accel_file ();
-	if (filename != NULL)
-	{
-		gtk_accel_map_load (filename);
-		g_free (filename);
-	}
+  filename = get_accel_file ();
+  if (filename != NULL)
+    {
+      gtk_accel_map_load (filename);
+      g_free (filename);
+    }
 }
 
 static void
 save_accels (void)
 {
-	gchar *filename;
+  gchar *filename;
 
-	filename = get_accel_file ();
-	if (filename != NULL)
-	{
-		gtk_accel_map_save (filename);
-		g_free (filename);
-	}
+  filename = get_accel_file ();
+  if (filename != NULL)
+    {
+      gtk_accel_map_save (filename);
+      g_free (filename);
+    }
 }
 
 static gboolean
-on_window_delete_event_cb(GtranslatorWindow *window,
-			  GdkEvent *event,
-			  GtranslatorApplication *app)
+on_window_delete_event_cb (GtranslatorWindow * window,
+			   GdkEvent * event, GtranslatorApplication * app)
 {
-	gtranslator_file_quit(NULL, window);
-	return TRUE;
+  gtranslator_file_quit (NULL, window);
+  return TRUE;
 }
 
 static void
-on_window_destroy_cb(GtranslatorWindow *window,
-		     GtranslatorApplication *app)
+on_window_destroy_cb (GtranslatorWindow * window,
+		      GtranslatorApplication * app)
 {
-	save_accels ();
-	//if(app->priv->active_window == NULL)
-		g_object_unref(app);
+  save_accels ();
+  //if(app->priv->active_window == NULL)
+  g_object_unref (app);
 }
 
 static void
-gtranslator_application_init (GtranslatorApplication *application)
+gtranslator_application_init (GtranslatorApplication * application)
 {
-	gchar *gtranslator_folder;
-	gchar *path_default_gtr_toolbar;
-	gchar *profiles_file;
+  gchar *gtranslator_folder;
+  gchar *path_default_gtr_toolbar;
+  gchar *profiles_file;
 
-	GtranslatorApplicationPrivate * priv;
-	
-	application->priv = GTR_APPLICATION_GET_PRIVATE (application);
-	priv = application->priv;
-	
-	priv->windows = NULL;
-	priv->last_dir = NULL;
-	priv->first_run = FALSE;
-	priv->profiles = NULL;
+  GtranslatorApplicationPrivate *priv;
 
-	/*
-	 * Creating config folder
-	 */
-	gtranslator_folder = gtranslator_utils_get_user_config_dir ();
+  application->priv = GTR_APPLICATION_GET_PRIVATE (application);
+  priv = application->priv;
 
-	if (!g_file_test (gtranslator_folder, G_FILE_TEST_IS_DIR))
+  priv->windows = NULL;
+  priv->last_dir = NULL;
+  priv->first_run = FALSE;
+  priv->profiles = NULL;
+
+  /*
+   * Creating config folder
+   */
+  gtranslator_folder = gtranslator_utils_get_user_config_dir ();
+
+  if (!g_file_test (gtranslator_folder, G_FILE_TEST_IS_DIR))
+    {
+      GFile *file;
+      GError *error = NULL;
+
+      file = g_file_new_for_path (gtranslator_folder);
+
+      if (g_file_test (gtranslator_folder, G_FILE_TEST_IS_REGULAR))
 	{
-		GFile *file;
-		GError *error = NULL;
-		
-		file = g_file_new_for_path (gtranslator_folder);
-		
-		if (g_file_test (gtranslator_folder, G_FILE_TEST_IS_REGULAR))
-		{
-			if (!g_file_delete (file, NULL, &error))
-			{
-				g_warning ("There was an error deleting the "
-					   "old gtranslator file: %s", error->message);
-				g_error_free (error);
-				g_object_unref (file);
-				g_free (gtranslator_folder);
-				gtranslator_application_shutdown (application);
-			}
-		}
-		
-		if (!g_file_make_directory (file, NULL, &error))
-		{
-			g_warning ("There was an error making the gtranslator config directory: %s",
-				   error->message);
-					   
-			g_error_free (error);
-			g_object_unref (file);
-			g_free (gtranslator_folder);
-			gtranslator_application_shutdown (application);
-		}
-		
-		priv->first_run = TRUE;
-		g_object_unref (file);
+	  if (!g_file_delete (file, NULL, &error))
+	    {
+	      g_warning ("There was an error deleting the "
+			 "old gtranslator file: %s", error->message);
+	      g_error_free (error);
+	      g_object_unref (file);
+	      g_free (gtranslator_folder);
+	      gtranslator_application_shutdown (application);
+	    }
 	}
 
-	/*
-	 * If the config folder exists but there is no profile
-	 */
-	profiles_file = g_build_filename (gtranslator_folder, "profiles.xml", NULL);
-	if (!g_file_test (profiles_file, G_FILE_TEST_EXISTS))
-	    priv->first_run = TRUE;
-	g_free (profiles_file);
-
-	priv->toolbars_model = egg_toolbars_model_new ();
-				     
-	priv->toolbars_file = g_build_filename (gtranslator_folder,
-						"gtr-toolbar.xml",
-						NULL);
-	path_default_gtr_toolbar = gtranslator_utils_get_file_from_pkgdatadir ("gtr-toolbar.xml");
-
-	g_free (gtranslator_folder);
-	
-	egg_toolbars_model_load_names (priv->toolbars_model,
-				      path_default_gtr_toolbar);
-
-	if (!egg_toolbars_model_load_toolbars (priv->toolbars_model,
-					       priv->toolbars_file)) 
+      if (!g_file_make_directory (file, NULL, &error))
 	{
-		egg_toolbars_model_load_toolbars (priv->toolbars_model,
-						  path_default_gtr_toolbar);
+	  g_warning
+	    ("There was an error making the gtranslator config directory: %s",
+	     error->message);
+
+	  g_error_free (error);
+	  g_object_unref (file);
+	  g_free (gtranslator_folder);
+	  gtranslator_application_shutdown (application);
 	}
-	
-	g_free (path_default_gtr_toolbar);
 
-	egg_toolbars_model_set_flags (priv->toolbars_model, 0,
-				      EGG_TB_MODEL_NOT_REMOVABLE);	
-	
-	load_accels ();
-	
-	/* Create Icon factory */
-	application->priv->icon_factory = gtk_icon_factory_new ();
-	gtk_icon_factory_add_default (application->priv->icon_factory);
-	
-	/* Creating translation memory */
-	application->priv->tm = GTR_TRANSLATION_MEMORY (gtranslator_berkeley_new ());
-	gtranslator_translation_memory_set_max_omits (application->priv->tm,
- 						      gtranslator_prefs_manager_get_max_missing_words ());
- 	gtranslator_translation_memory_set_max_delta (application->priv->tm,
-						      gtranslator_prefs_manager_get_max_length_diff ());
-	gtranslator_translation_memory_set_max_items (application->priv->tm,
-						      10);
+      priv->first_run = TRUE;
+      g_object_unref (file);
+    }
+
+  /*
+   * If the config folder exists but there is no profile
+   */
+  profiles_file = g_build_filename (gtranslator_folder, "profiles.xml", NULL);
+  if (!g_file_test (profiles_file, G_FILE_TEST_EXISTS))
+    priv->first_run = TRUE;
+  g_free (profiles_file);
+
+  priv->toolbars_model = egg_toolbars_model_new ();
+
+  priv->toolbars_file = g_build_filename (gtranslator_folder,
+					  "gtr-toolbar.xml", NULL);
+  path_default_gtr_toolbar =
+    gtranslator_utils_get_file_from_pkgdatadir ("gtr-toolbar.xml");
+
+  g_free (gtranslator_folder);
+
+  egg_toolbars_model_load_names (priv->toolbars_model,
+				 path_default_gtr_toolbar);
+
+  if (!egg_toolbars_model_load_toolbars (priv->toolbars_model,
+					 priv->toolbars_file))
+    {
+      egg_toolbars_model_load_toolbars (priv->toolbars_model,
+					path_default_gtr_toolbar);
+    }
+
+  g_free (path_default_gtr_toolbar);
+
+  egg_toolbars_model_set_flags (priv->toolbars_model, 0,
+				EGG_TB_MODEL_NOT_REMOVABLE);
+
+  load_accels ();
+
+  /* Create Icon factory */
+  application->priv->icon_factory = gtk_icon_factory_new ();
+  gtk_icon_factory_add_default (application->priv->icon_factory);
+
+  /* Creating translation memory */
+  application->priv->tm =
+    GTR_TRANSLATION_MEMORY (gtranslator_berkeley_new ());
+  gtranslator_translation_memory_set_max_omits (application->priv->tm,
+						gtranslator_prefs_manager_get_max_missing_words
+						());
+  gtranslator_translation_memory_set_max_delta (application->priv->tm,
+						gtranslator_prefs_manager_get_max_length_diff
+						());
+  gtranslator_translation_memory_set_max_items (application->priv->tm, 10);
 }
 
 
 static void
-gtranslator_application_finalize (GObject *object)
+gtranslator_application_finalize (GObject * object)
 {
-	GtranslatorApplication *app = GTR_APPLICATION (object);
-	
-	if (app->priv->icon_factory)
-		g_object_unref (app->priv->icon_factory);
+  GtranslatorApplication *app = GTR_APPLICATION (object);
 
-	g_free (app->priv->last_dir);
-	
-	if (app->priv->tm)
-		g_object_unref (app->priv->tm);
+  if (app->priv->icon_factory)
+    g_object_unref (app->priv->icon_factory);
 
-	G_OBJECT_CLASS (gtranslator_application_parent_class)->finalize (object);
+  g_free (app->priv->last_dir);
+
+  if (app->priv->tm)
+    g_object_unref (app->priv->tm);
+
+  G_OBJECT_CLASS (gtranslator_application_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_application_class_init (GtranslatorApplicationClass *klass)
+gtranslator_application_class_init (GtranslatorApplicationClass * klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	g_type_class_add_private (klass, sizeof (GtranslatorApplicationPrivate));
-	
-	object_class->finalize = gtranslator_application_finalize;
+  g_type_class_add_private (klass, sizeof (GtranslatorApplicationPrivate));
+
+  object_class->finalize = gtranslator_application_finalize;
 }
 
 static void
-app_weak_notify (gpointer data,
-                 GObject *where_the_app_was)
+app_weak_notify (gpointer data, GObject * where_the_app_was)
 {
-        gtk_main_quit ();
+  gtk_main_quit ();
 }
 
 /**
@@ -278,17 +275,15 @@ app_weak_notify (gpointer data,
 GtranslatorApplication *
 gtranslator_application_get_default (void)
 {
-	static GtranslatorApplication *instance = NULL;
-	
-	if(!instance)
-	{
-		instance = GTR_APPLICATION(g_object_new (GTR_TYPE_APPLICATION, NULL));
-		
-		g_object_weak_ref (G_OBJECT (instance),
-				   app_weak_notify,
-				   NULL);
-	}
-	return instance;
+  static GtranslatorApplication *instance = NULL;
+
+  if (!instance)
+    {
+      instance = GTR_APPLICATION (g_object_new (GTR_TYPE_APPLICATION, NULL));
+
+      g_object_weak_ref (G_OBJECT (instance), app_weak_notify, NULL);
+    }
+  return instance;
 }
 
 /**
@@ -300,47 +295,48 @@ gtranslator_application_get_default (void)
  * Returns: the #GtranslatorWindow to be opened
  */
 GtranslatorWindow *
-gtranslator_application_open_window (GtranslatorApplication *app)
+gtranslator_application_open_window (GtranslatorApplication * app)
 {
-	GtranslatorWindow *window;
-	GdkWindowState state;
-	gint w,h;
+  GtranslatorWindow *window;
+  GdkWindowState state;
+  gint w, h;
 
-	app->priv->active_window = window = GTR_WINDOW(g_object_new(GTR_TYPE_WINDOW, NULL));
-	
-	state = gtranslator_prefs_manager_get_window_state();
-	
-	if((state & GDK_WINDOW_STATE_MAXIMIZED) != 0)
-	{
-		gtranslator_prefs_manager_get_default_window_size(&w, &h);
-		gtk_window_set_default_size (GTK_WINDOW (window), w, h);
-                gtk_window_maximize (GTK_WINDOW (window));
-	}
-	else
-	{
-		gtranslator_prefs_manager_get_window_size(&w, &h);
-		gtk_window_set_default_size (GTK_WINDOW (window), w, h);
-                gtk_window_unmaximize (GTK_WINDOW (window));
-	}
-	
-	g_signal_connect(window, "delete-event",
-			 G_CALLBACK(on_window_delete_event_cb), app);
-	
-	g_signal_connect(window, "destroy",
-			 G_CALLBACK(on_window_destroy_cb), app);
+  app->priv->active_window = window =
+    GTR_WINDOW (g_object_new (GTR_TYPE_WINDOW, NULL));
 
-	gtk_widget_show(GTK_WIDGET(window));
-	
-	/*
-	 * If it is the first run, the default directory was created in this
-	 * run, then we show the First run Assistant
-	 */
-	if (app->priv->first_run)
-		gtranslator_show_assistant (window);
-	
-	return window;
+  state = gtranslator_prefs_manager_get_window_state ();
+
+  if ((state & GDK_WINDOW_STATE_MAXIMIZED) != 0)
+    {
+      gtranslator_prefs_manager_get_default_window_size (&w, &h);
+      gtk_window_set_default_size (GTK_WINDOW (window), w, h);
+      gtk_window_maximize (GTK_WINDOW (window));
+    }
+  else
+    {
+      gtranslator_prefs_manager_get_window_size (&w, &h);
+      gtk_window_set_default_size (GTK_WINDOW (window), w, h);
+      gtk_window_unmaximize (GTK_WINDOW (window));
+    }
+
+  g_signal_connect (window, "delete-event",
+		    G_CALLBACK (on_window_delete_event_cb), app);
+
+  g_signal_connect (window, "destroy",
+		    G_CALLBACK (on_window_destroy_cb), app);
+
+  gtk_widget_show (GTK_WIDGET (window));
+
+  /*
+   * If it is the first run, the default directory was created in this
+   * run, then we show the First run Assistant
+   */
+  if (app->priv->first_run)
+    gtranslator_show_assistant (window);
+
+  return window;
 }
-				     
+
 /**
  * _gtranslator_application_get_toolbars_model:
  * @application: a #GtranslatorApplication
@@ -350,9 +346,10 @@ gtranslator_application_open_window (GtranslatorApplication *app)
  * Retuns: the toolbar model.
  */
 GObject *
-_gtranslator_application_get_toolbars_model (GtranslatorApplication *application)
+_gtranslator_application_get_toolbars_model (GtranslatorApplication *
+					     application)
 {
-	return G_OBJECT (application->priv->toolbars_model);
+  return G_OBJECT (application->priv->toolbars_model);
 }
 
 /**
@@ -362,10 +359,11 @@ _gtranslator_application_get_toolbars_model (GtranslatorApplication *application
  * Saves the toolbar model.
  */
 void
-_gtranslator_application_save_toolbars_model (GtranslatorApplication *application)
+_gtranslator_application_save_toolbars_model (GtranslatorApplication *
+					      application)
 {
-        egg_toolbars_model_save_toolbars (application->priv->toolbars_model,
-			 	          application->priv->toolbars_file, "1.0");
+  egg_toolbars_model_save_toolbars (application->priv->toolbars_model,
+				    application->priv->toolbars_file, "1.0");
 }
 
 /**
@@ -375,17 +373,17 @@ _gtranslator_application_save_toolbars_model (GtranslatorApplication *applicatio
  * Shutdowns the application.
  */
 void
-gtranslator_application_shutdown(GtranslatorApplication *app)
+gtranslator_application_shutdown (GtranslatorApplication * app)
 {
-	if(app->priv->toolbars_model)
-	{
-		g_object_unref(app->priv->toolbars_model);
-		g_free(app->priv->toolbars_file);
-		app->priv->toolbars_model = NULL;
-		app->priv->toolbars_file = NULL;
-	}
-	
-	g_object_unref(app);
+  if (app->priv->toolbars_model)
+    {
+      g_object_unref (app->priv->toolbars_model);
+      g_free (app->priv->toolbars_file);
+      app->priv->toolbars_model = NULL;
+      app->priv->toolbars_file = NULL;
+    }
+
+  g_object_unref (app);
 }
 
 /**
@@ -399,20 +397,21 @@ gtranslator_application_shutdown(GtranslatorApplication *app)
  * Return value: a newly allocated list of #GtranslationApplication objects
  */
 GList *
-gtranslator_application_get_views (GtranslatorApplication *app,
-				   gboolean original,
-				   gboolean translated)
+gtranslator_application_get_views (GtranslatorApplication * app,
+				   gboolean original, gboolean translated)
 {
-	GList *res = NULL;
+  GList *res = NULL;
 
-	g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
+  g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
-	res = g_list_concat (res,
-			     gtranslator_window_get_all_views (GTR_WINDOW (app->priv->active_window),
-							       original,
-							       translated));
-	
-	return res;
+  res = g_list_concat (res,
+		       gtranslator_window_get_all_views (GTR_WINDOW
+							 (app->priv->
+							  active_window),
+							 original,
+							 translated));
+
+  return res;
 }
 
 /**
@@ -422,9 +421,9 @@ gtranslator_application_get_views (GtranslatorApplication *app,
  * Return value: the active #GtranslatorWindow
  **/
 GtranslatorWindow *
-gtranslator_application_get_active_window(GtranslatorApplication * app)
+gtranslator_application_get_active_window (GtranslatorApplication * app)
 {
-	return GTR_WINDOW(app->priv->active_window);
+  return GTR_WINDOW (app->priv->active_window);
 }
 
 /**
@@ -434,14 +433,15 @@ gtranslator_application_get_active_window(GtranslatorApplication * app)
  * Return value: a list of all opened windows.
  **/
 const GList *
-gtranslator_application_get_windows (GtranslatorApplication *app)
+gtranslator_application_get_windows (GtranslatorApplication * app)
 {
-	g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
+  g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
-	if(!app->priv->windows)
-		app->priv->windows = g_list_prepend(app->priv->windows, app->priv->active_window);
-		
-	return app->priv->windows;
+  if (!app->priv->windows)
+    app->priv->windows =
+      g_list_prepend (app->priv->windows, app->priv->active_window);
+
+  return app->priv->windows;
 }
 
 /**
@@ -451,9 +451,9 @@ gtranslator_application_get_windows (GtranslatorApplication *app)
  * Return value: the active #GtranslatorProfile
  **/
 GtranslatorProfile *
-gtranslator_application_get_active_profile (GtranslatorApplication *app)
+gtranslator_application_get_active_profile (GtranslatorApplication * app)
 {
-	return app->priv->active_profile;
+  return app->priv->active_profile;
 }
 
 /**
@@ -463,8 +463,9 @@ gtranslator_application_get_active_profile (GtranslatorApplication *app)
  *
  **/
 void
-gtranslator_application_set_active_profile (GtranslatorApplication *app,
-					    GtranslatorProfile *profile) {
+gtranslator_application_set_active_profile (GtranslatorApplication * app,
+					    GtranslatorProfile * profile)
+{
   app->priv->active_profile = profile;
 }
 
@@ -475,11 +476,11 @@ gtranslator_application_set_active_profile (GtranslatorApplication *app,
  * Return value: a list of all profiles.
  **/
 GList *
-gtranslator_application_get_profiles (GtranslatorApplication *app)
+gtranslator_application_get_profiles (GtranslatorApplication * app)
 {
-	g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
+  g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
-	return app->priv->profiles;
+  return app->priv->profiles;
 }
 
 /**
@@ -489,9 +490,10 @@ gtranslator_application_get_profiles (GtranslatorApplication *app)
  *
  **/
 void
-gtranslator_application_set_profiles (GtranslatorApplication *app, 
-				      GList *profiles) {
-   app->priv->profiles = profiles;   
+gtranslator_application_set_profiles (GtranslatorApplication * app,
+				      GList * profiles)
+{
+  app->priv->profiles = profiles;
 }
 
 /**
@@ -503,26 +505,26 @@ gtranslator_application_set_profiles (GtranslatorApplication *app,
  * Registers a new @icon with the @stock_id.
  */
 void
-gtranslator_application_register_icon (GtranslatorApplication *app,
-				       const gchar *icon,
-				       const gchar *stock_id)
+gtranslator_application_register_icon (GtranslatorApplication * app,
+				       const gchar * icon,
+				       const gchar * stock_id)
 {
-	GtkIconSet *icon_set;
-	GtkIconSource *	icon_source = gtk_icon_source_new ();
-	gchar *path;
-	
-	path = gtranslator_utils_get_file_from_pixmapsdir (icon);
-	
-	GdkPixbuf* pixbuf = gdk_pixbuf_new_from_file (path, NULL);
-	if (pixbuf)
-	{
-		icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-		gtk_icon_factory_add (app->priv->icon_factory, stock_id, icon_set);
-		g_object_unref (pixbuf);
-	}
-	
-	g_free (path);
-	gtk_icon_source_free (icon_source);
+  GtkIconSet *icon_set;
+  GtkIconSource *icon_source = gtk_icon_source_new ();
+  gchar *path;
+
+  path = gtranslator_utils_get_file_from_pixmapsdir (icon);
+
+  GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file (path, NULL);
+  if (pixbuf)
+    {
+      icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
+      gtk_icon_factory_add (app->priv->icon_factory, stock_id, icon_set);
+      g_object_unref (pixbuf);
+    }
+
+  g_free (path);
+  gtk_icon_source_free (icon_source);
 }
 
 /**
@@ -532,11 +534,11 @@ gtranslator_application_register_icon (GtranslatorApplication *app,
  * Return value: the last dir where a file was opened in the GtkFileChooser
  */
 const gchar *
-_gtranslator_application_get_last_dir (GtranslatorApplication *app)
+_gtranslator_application_get_last_dir (GtranslatorApplication * app)
 {
-	g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
+  g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
-	return app->priv->last_dir;
+  return app->priv->last_dir;
 }
 
 /**
@@ -546,18 +548,18 @@ _gtranslator_application_get_last_dir (GtranslatorApplication *app)
  * GtkFileChooser.
  */
 void
-_gtranslator_application_set_last_dir (GtranslatorApplication *app,
-				       const gchar *last_dir)
+_gtranslator_application_set_last_dir (GtranslatorApplication * app,
+				       const gchar * last_dir)
 {
-	g_return_if_fail (GTR_IS_APPLICATION (app));
+  g_return_if_fail (GTR_IS_APPLICATION (app));
 
-	app->priv->last_dir = g_strdup (last_dir);
+  app->priv->last_dir = g_strdup (last_dir);
 }
 
 GObject *
-gtranslator_application_get_translation_memory (GtranslatorApplication *app)
+gtranslator_application_get_translation_memory (GtranslatorApplication * app)
 {
-	g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
-	
-	return G_OBJECT (app->priv->tm);
+  g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
+
+  return G_OBJECT (app->priv->tm);
 }

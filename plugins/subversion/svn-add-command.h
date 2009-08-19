@@ -32,34 +32,34 @@
 #include "svn-command.h"
 
 G_BEGIN_DECLS
-
 #define SVN_TYPE_ADD_COMMAND             (svn_add_command_get_type ())
 #define SVN_ADD_COMMAND(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), SVN_TYPE_ADD_COMMAND, SvnAddCommand))
 #define SVN_ADD_COMMAND_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), SVN_TYPE_ADD_COMMAND, SvnAddCommandClass))
 #define SVN_IS_ADD_COMMAND(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), SVN_TYPE_ADD_COMMAND))
 #define SVN_IS_ADD_COMMAND_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), SVN_TYPE_ADD_COMMAND))
 #define SVN_ADD_COMMAND_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), SVN_TYPE_ADD_COMMAND, SvnAddCommandClass))
-
 typedef struct _SvnAddCommandClass SvnAddCommandClass;
 typedef struct _SvnAddCommand SvnAddCommand;
 typedef struct _SvnAddCommandPriv SvnAddCommandPriv;
 
 struct _SvnAddCommandClass
 {
-	SvnCommandClass parent_class;
+  SvnCommandClass parent_class;
 };
 
 struct _SvnAddCommand
 {
-	SvnCommand parent_instance;
-	
-	SvnAddCommandPriv *priv;
+  SvnCommand parent_instance;
+
+  SvnAddCommandPriv *priv;
 };
 
-GType svn_add_command_get_type (void) G_GNUC_CONST;
-SvnAddCommand * svn_add_command_new (const gchar *path, gboolean force, gboolean recursive);
-void svn_add_command_destroy (SvnAddCommand *self);
+GType
+svn_add_command_get_type (void)
+  G_GNUC_CONST;
+     SvnAddCommand *svn_add_command_new (const gchar * path, gboolean force,
+					 gboolean recursive);
+     void svn_add_command_destroy (SvnAddCommand * self);
 
 G_END_DECLS
-
 #endif /* _SVN_ADD_COMMAND_H_ */

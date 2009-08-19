@@ -25,7 +25,6 @@
 #include <gtksourceview/gtksourceview.h>
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -35,80 +34,77 @@ G_BEGIN_DECLS
 #define GTR_IS_VIEW(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_VIEW))
 #define GTR_IS_VIEW_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_VIEW))
 #define GTR_VIEW_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_VIEW, GtranslatorViewClass))
-
-typedef enum
+  typedef enum
 {
-        GTR_SEARCH_DONT_SET_FLAGS     = 1 << 0, 
-        GTR_SEARCH_ENTIRE_WORD        = 1 << 1,
-        GTR_SEARCH_CASE_SENSITIVE     = 1 << 2
-
+  GTR_SEARCH_DONT_SET_FLAGS = 1 << 0,
+  GTR_SEARCH_ENTIRE_WORD = 1 << 1,
+  GTR_SEARCH_CASE_SENSITIVE = 1 << 2
 } GtranslatorSearchFlags;
 
 /* Private structure type */
-typedef struct _GtranslatorViewPrivate	GtranslatorViewPrivate;
+typedef struct _GtranslatorViewPrivate GtranslatorViewPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorView		GtranslatorView;
+typedef struct _GtranslatorView GtranslatorView;
 
 struct _GtranslatorView
 {
-	GtkSourceView parent_instance;
-	
-	/*< private > */
-	GtranslatorViewPrivate *priv;
+  GtkSourceView parent_instance;
+
+  /*< private > */
+  GtranslatorViewPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorViewClass	GtranslatorViewClass;
+typedef struct _GtranslatorViewClass GtranslatorViewClass;
 
 struct _GtranslatorViewClass
 {
-	GtkSourceViewClass parent_class;
+  GtkSourceViewClass parent_class;
 };
 
 
 /*
  * Public methods
  */
-GType		 gtranslator_view_get_type               (void) G_GNUC_CONST;
+GType
+gtranslator_view_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_view_register_type          (GTypeModule * module);
+     GType gtranslator_view_register_type (GTypeModule * module);
 
-GtkWidget	*gtranslator_view_new                    (void);
+     GtkWidget *gtranslator_view_new (void);
 
-gboolean         gtranslator_view_get_selected_text      (GtranslatorView *view,
-							  gchar         **selected_text,
-							  gint           *len);
+     gboolean gtranslator_view_get_selected_text (GtranslatorView * view,
+						  gchar ** selected_text,
+						  gint * len);
 
-void             gtranslator_view_enable_spellcheck      (GtranslatorView *view,
-							  gboolean enable);
+     void gtranslator_view_enable_spellcheck (GtranslatorView * view,
+					      gboolean enable);
 
-void             gtranslator_view_enable_visible_whitespace
-                                                         (GtranslatorView *view,
-							  gboolean enable);
+     void gtranslator_view_enable_visible_whitespace
+       (GtranslatorView * view, gboolean enable);
 
-void             gtranslator_view_cut_clipboard          (GtranslatorView *view);
+     void gtranslator_view_cut_clipboard (GtranslatorView * view);
 
-void             gtranslator_view_copy_clipboard         (GtranslatorView *view);
+     void gtranslator_view_copy_clipboard (GtranslatorView * view);
 
-void             gtranslator_view_paste_clipboard        (GtranslatorView *view);
+     void gtranslator_view_paste_clipboard (GtranslatorView * view);
 
-void             gtranslator_view_set_font               (GtranslatorView   *view, 
-							  gboolean     def, 
-							  const gchar *font_name);
+     void gtranslator_view_set_font (GtranslatorView * view,
+				     gboolean def, const gchar * font_name);
 
-void             gtranslator_view_set_search_text        (GtranslatorView *view,
-							  const gchar   *text,
-							  guint          flags);
+     void gtranslator_view_set_search_text (GtranslatorView * view,
+					    const gchar * text, guint flags);
 
-gchar           *gtranslator_view_get_search_text        (GtranslatorView *view,
-							  guint         *flags);
+     gchar *gtranslator_view_get_search_text (GtranslatorView * view,
+					      guint * flags);
 
-void             gtranslator_view_reload_scheme_color    (GtranslatorView *view);
+     void gtranslator_view_reload_scheme_color (GtranslatorView * view);
 
 
 /* Search macros */
@@ -125,5 +121,4 @@ void             gtranslator_view_reload_scheme_color    (GtranslatorView *view)
 (sflags |= GTR_SEARCH_CASE_SENSITIVE) : (sflags &= ~GTR_SEARCH_CASE_SENSITIVE))
 
 G_END_DECLS
-
 #endif /* __VIEW_H__ */

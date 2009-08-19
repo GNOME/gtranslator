@@ -30,43 +30,43 @@
 #include "svn-command.h"
 
 G_BEGIN_DECLS
-
 #define SVN_TYPE_DIFF_COMMAND             (svn_diff_command_get_type ())
 #define SVN_DIFF_COMMAND(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), SVN_TYPE_DIFF_COMMAND, SvnDiffCommand))
 #define SVN_DIFF_COMMAND_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), SVN_TYPE_DIFF_COMMAND, SvnDiffCommandClass))
 #define SVN_IS_DIFF_COMMAND(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), SVN_TYPE_DIFF_COMMAND))
 #define SVN_IS_DIFF_COMMAND_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), SVN_TYPE_DIFF_COMMAND))
 #define SVN_DIFF_COMMAND_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), SVN_TYPE_DIFF_COMMAND, SvnDiffCommandClass))
-
 typedef struct _SvnDiffCommandClass SvnDiffCommandClass;
 typedef struct _SvnDiffCommand SvnDiffCommand;
 typedef struct _SvnDiffCommandPriv SvnDiffCommandPriv;
 
 struct _SvnDiffCommandClass
 {
-	SvnCommandClass parent_class;
+  SvnCommandClass parent_class;
 };
 
 struct _SvnDiffCommand
 {
-	SvnCommandClass parent_instance;
-	
-	SvnDiffCommandPriv *priv;
+  SvnCommandClass parent_instance;
+
+  SvnDiffCommandPriv *priv;
 };
 
 enum
 {
-	SVN_DIFF_REVISION_PREVIOUS = -1,
-	SVN_DIFF_REVISION_NONE = 0
-}; 
+  SVN_DIFF_REVISION_PREVIOUS = -1,
+  SVN_DIFF_REVISION_NONE = 0
+};
 
-GType svn_diff_command_get_type (void) G_GNUC_CONST;
-SvnDiffCommand *svn_diff_command_new (const gchar *path, glong revision1,
-									  glong revision2, gboolean recursive);
-void svn_diff_command_destroy (SvnDiffCommand *self);
+GType
+svn_diff_command_get_type (void)
+  G_GNUC_CONST;
+     SvnDiffCommand *svn_diff_command_new (const gchar * path,
+					   glong revision1, glong revision2,
+					   gboolean recursive);
+     void svn_diff_command_destroy (SvnDiffCommand * self);
 
-GQueue *svn_diff_command_get_output (SvnDiffCommand *self);
+     GQueue *svn_diff_command_get_output (SvnDiffCommand * self);
 
 G_END_DECLS
-
 #endif /* _SVN_DIFF_COMMAND_H_ */

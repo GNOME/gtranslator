@@ -26,7 +26,6 @@
 #include "msg.h"
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -36,44 +35,43 @@ G_BEGIN_DECLS
 #define GTR_IS_VIEWER(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_VIEWER))
 #define GTR_IS_VIEWER_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_VIEWER))
 #define GTR_VIEWER_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_VIEWER, GtranslatorViewerClass))
-
 /* Private structure type */
-typedef struct _GtranslatorViewerPrivate	GtranslatorViewerPrivate;
+typedef struct _GtranslatorViewerPrivate GtranslatorViewerPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorViewer		GtranslatorViewer;
+typedef struct _GtranslatorViewer GtranslatorViewer;
 
 struct _GtranslatorViewer
 {
-	GtkDialog parent_instance;
-	
-	/*< private > */
-	GtranslatorViewerPrivate *priv;
+  GtkDialog parent_instance;
+
+  /*< private > */
+  GtranslatorViewerPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorViewerClass	GtranslatorViewerClass;
+typedef struct _GtranslatorViewerClass GtranslatorViewerClass;
 
 struct _GtranslatorViewerClass
 {
-	GtkDialogClass parent_class;
+  GtkDialogClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_viewer_get_type               (void) G_GNUC_CONST;
+GType
+gtranslator_viewer_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_viewer_register_type          (GTypeModule * module);
+     GType gtranslator_viewer_register_type (GTypeModule * module);
 
-void	         gtranslator_show_viewer                   (GtranslatorWindow *window,
-							    const gchar *path,
-							    gint line);
+     void gtranslator_show_viewer (GtranslatorWindow * window,
+				   const gchar * path, gint line);
 
 G_END_DECLS
-
 #endif /* __VIEWER_H__ */

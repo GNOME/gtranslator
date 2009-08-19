@@ -25,7 +25,6 @@
 #include "window.h"
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -35,45 +34,45 @@ G_BEGIN_DECLS
 #define GTR_IS_DICT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_DICT_PANEL))
 #define GTR_IS_DICT_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_DICT_PANEL))
 #define GTR_DICT_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_DICT_PANEL, GtranslatorDictPanelClass))
-
 /* Private structure type */
-typedef struct _GtranslatorDictPanelPrivate	GtranslatorDictPanelPrivate;
+typedef struct _GtranslatorDictPanelPrivate GtranslatorDictPanelPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorDictPanel		GtranslatorDictPanel;
+typedef struct _GtranslatorDictPanel GtranslatorDictPanel;
 
 struct _GtranslatorDictPanel
 {
-	GtkVBox parent_instance;
-	
-	/*< private > */
-	GtranslatorDictPanelPrivate *priv;
+  GtkVBox parent_instance;
+
+  /*< private > */
+  GtranslatorDictPanelPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorDictPanelClass	GtranslatorDictPanelClass;
+typedef struct _GtranslatorDictPanelClass GtranslatorDictPanelClass;
 
 struct _GtranslatorDictPanelClass
 {
-	GtkVBoxClass parent_class;
+  GtkVBoxClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_dict_panel_get_type	   (void) G_GNUC_CONST;
+GType
+gtranslator_dict_panel_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_dict_panel_register_type    (GTypeModule * module);
+     GType gtranslator_dict_panel_register_type (GTypeModule * module);
 
-GtkWidget *	 gtranslator_dict_panel_new 		   (GtranslatorWindow *window);
+     GtkWidget *gtranslator_dict_panel_new (GtranslatorWindow * window);
 
-void             gtranslator_dict_panel_set_position     (GtranslatorDictPanel *panel,
-						    gint pos);
+     void gtranslator_dict_panel_set_position (GtranslatorDictPanel * panel,
+					       gint pos);
 
 G_END_DECLS
-
 #endif /* __DICT_PANEL_H__ */

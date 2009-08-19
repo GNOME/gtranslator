@@ -28,48 +28,50 @@
 #include <glib-object.h>
 
 G_BEGIN_DECLS
-
 #define GTR_TYPE_COMMAND             (gtranslator_command_get_type ())
 #define GTR_COMMAND(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_COMMAND, GtranslatorCommand))
 #define GTR_COMMAND_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTR_TYPE_COMMAND, GtranslatorCommandClass))
 #define GTR_IS_COMMAND(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_COMMAND))
 #define GTR_IS_COMMAND_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_COMMAND))
 #define GTR_COMMAND_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTR_TYPE_COMMAND, GtranslatorCommandClass))
-
 typedef struct _GtranslatorCommandClass GtranslatorCommandClass;
 typedef struct _GtranslatorCommand GtranslatorCommand;
 typedef struct _GtranslatorCommandPriv GtranslatorCommandPriv;
 
 struct _GtranslatorCommandClass
 {
-	GObjectClass parent_class;
-	
-	/* Virtual Methods */
-	guint (*run) (GtranslatorCommand *self);
-	void (*start) (GtranslatorCommand *self);
-	void (*notify_data_arrived) (GtranslatorCommand *self);
-	void (*notify_complete) (GtranslatorCommand *self, guint return_code);
-	void (*set_error_message) (GtranslatorCommand *self, gchar *error_message);
-	gchar * (*get_error_message) (GtranslatorCommand *self);
+  GObjectClass parent_class;
+
+  /* Virtual Methods */
+    guint (*run) (GtranslatorCommand * self);
+  void (*start) (GtranslatorCommand * self);
+  void (*notify_data_arrived) (GtranslatorCommand * self);
+  void (*notify_complete) (GtranslatorCommand * self, guint return_code);
+  void (*set_error_message) (GtranslatorCommand * self,
+			     gchar * error_message);
+  gchar *(*get_error_message) (GtranslatorCommand * self);
 
 };
 
 struct _GtranslatorCommand
 {
-	GObject parent_instance;
-	
-	GtranslatorCommandPriv *priv;
+  GObject parent_instance;
+
+  GtranslatorCommandPriv *priv;
 };
 
-GType gtranslator_command_get_type (void) G_GNUC_CONST;
+GType
+gtranslator_command_get_type (void)
+  G_GNUC_CONST;
 
-void gtranslator_command_start (GtranslatorCommand *self);
-void gtranslator_command_notify_data_arrived (GtranslatorCommand *self);
-void gtranslator_command_notify_complete (GtranslatorCommand *self, guint return_code);
+     void gtranslator_command_start (GtranslatorCommand * self);
+     void gtranslator_command_notify_data_arrived (GtranslatorCommand * self);
+     void gtranslator_command_notify_complete (GtranslatorCommand * self,
+					       guint return_code);
 
-void gtranslator_command_set_error_message (GtranslatorCommand *self, gchar *error_message);
-gchar *gtranslator_command_get_error_message (GtranslatorCommand *self);
+     void gtranslator_command_set_error_message (GtranslatorCommand * self,
+						 gchar * error_message);
+     gchar *gtranslator_command_get_error_message (GtranslatorCommand * self);
 
 G_END_DECLS
-
 #endif /* _GTR_COMMAND_H_ */

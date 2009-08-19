@@ -26,90 +26,90 @@
 
 struct _SvnStatusPriv
 {
-	gchar *path;
-	enum svn_wc_status_kind status;
+  gchar *path;
+  enum svn_wc_status_kind status;
 };
 
 G_DEFINE_TYPE (SvnStatus, svn_status, G_TYPE_OBJECT);
 
 static void
-svn_status_init (SvnStatus *self)
+svn_status_init (SvnStatus * self)
 {
-	self->priv = g_new0 (SvnStatusPriv, 1);
+  self->priv = g_new0 (SvnStatusPriv, 1);
 }
 
 static void
-svn_status_finalize (GObject *object)
+svn_status_finalize (GObject * object)
 {
-	SvnStatus *self;
-	
-	self = SVN_STATUS (object);
-	
-	g_free (self->priv->path);
-	g_free (self->priv);
+  SvnStatus *self;
 
-	G_OBJECT_CLASS (svn_status_parent_class)->finalize (object);
+  self = SVN_STATUS (object);
+
+  g_free (self->priv->path);
+  g_free (self->priv);
+
+  G_OBJECT_CLASS (svn_status_parent_class)->finalize (object);
 }
 
 static void
-svn_status_class_init (SvnStatusClass *klass)
+svn_status_class_init (SvnStatusClass * klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	object_class->finalize = svn_status_finalize;
+  object_class->finalize = svn_status_finalize;
 }
 
 SvnStatus *
-svn_status_new (gchar *path, enum svn_wc_status_kind status)
+svn_status_new (gchar * path, enum svn_wc_status_kind status)
 {
-	SvnStatus *self;
-	
-	self = g_object_new (SVN_TYPE_STATUS, NULL);
-	
-	self->priv->path = g_strdup (path);
-	self->priv->status = status;
-	
-	return self;
+  SvnStatus *self;
+
+  self = g_object_new (SVN_TYPE_STATUS, NULL);
+
+  self->priv->path = g_strdup (path);
+  self->priv->status = status;
+
+  return self;
 }
 
 void
-svn_status_destroy (SvnStatus *self)
+svn_status_destroy (SvnStatus * self)
 {
-	g_object_unref (self);
+  g_object_unref (self);
 }
 
 gchar *
-svn_status_get_path (SvnStatus *self)
+svn_status_get_path (SvnStatus * self)
 {
-	return g_strdup (self->priv->path);
+  return g_strdup (self->priv->path);
 }
 
 GtranslatorVcsStatus
-svn_status_get_vcs_status (SvnStatus *self)
+svn_status_get_vcs_status (SvnStatus * self)
 {
-	GtranslatorVcsStatus status;
-	
-	switch (self->priv->status)
-	{
-		case svn_wc_status_modified:
-			status = GTR_VCS_STATUS_MODIFIED;
-			break;
-		case svn_wc_status_added:
-			status = GTR_VCS_STATUS_ADDED;
-			break;
-		case svn_wc_status_deleted:
-			status = GTR_VCS_STATUS_DELETED;
-			break;
-		case svn_wc_status_conflicted:
-			status = GTR_VCS_STATUS_CONFLICTED;
-			break;
-		case svn_wc_status_missing:
-			status = GTR_VCS_STATUS_MISSING;
-			break;
-		default:
-			status = GTR_VCS_STATUS_NONE;
-			break;
-	}
-	
-	return status;
+  GtranslatorVcsStatus status;
+
+  switch (self->priv->status)
+    {
+    case svn_wc_status_modified:
+      status = GTR_VCS_STATUS_MODIFIED;
+      break;
+    case svn_wc_status_added:
+      status = GTR_VCS_STATUS_ADDED;
+      break;
+    case svn_wc_status_deleted:
+      status = GTR_VCS_STATUS_DELETED;
+      break;
+    case svn_wc_status_conflicted:
+      status = GTR_VCS_STATUS_CONFLICTED;
+      break;
+    case svn_wc_status_missing:
+      status = GTR_VCS_STATUS_MISSING;
+      break;
+    default:
+      status = GTR_VCS_STATUS_NONE;
+      break;
+    }
+
+  return status;
 }

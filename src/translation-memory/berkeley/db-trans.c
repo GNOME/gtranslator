@@ -35,38 +35,34 @@
 						 GTR_TYPE_DB_TRANS,     \
 						 GtranslatorDbTransPrivate))
 
-G_DEFINE_TYPE(GtranslatorDbTrans, gtranslator_db_trans, GTR_TYPE_DB_BASE)
+G_DEFINE_TYPE (GtranslatorDbTrans, gtranslator_db_trans, GTR_TYPE_DB_BASE)
+     struct _GtranslatorDbTransPrivate
+     {
 
+     };
 
-struct _GtranslatorDbTransPrivate
+     static void gtranslator_db_trans_init (GtranslatorDbTrans * db_trans)
 {
+  //db_trans->priv = GTR_DB_TRANS_GET_PRIVATE (db_trans);
 
-};
-
-static void
-gtranslator_db_trans_init (GtranslatorDbTrans *db_trans)
-{
-	//db_trans->priv = GTR_DB_TRANS_GET_PRIVATE (db_trans);
-	
-	gtranslator_db_base_create_dabatase (GTR_DB_BASE (db_trans),
-					     "translations.db",
-					     DB_RECNO);
+  gtranslator_db_base_create_dabatase (GTR_DB_BASE (db_trans),
+				       "translations.db", DB_RECNO);
 }
 
 static void
-gtranslator_db_trans_finalize (GObject *object)
+gtranslator_db_trans_finalize (GObject * object)
 {
-	G_OBJECT_CLASS (gtranslator_db_trans_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtranslator_db_trans_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_db_trans_class_init (GtranslatorDbTransClass *klass)
+gtranslator_db_trans_class_init (GtranslatorDbTransClass * klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	//g_type_class_add_private (klass, sizeof (GtranslatorDbTransPrivate));
+  //g_type_class_add_private (klass, sizeof (GtranslatorDbTransPrivate));
 
-	object_class->finalize = gtranslator_db_trans_finalize;
+  object_class->finalize = gtranslator_db_trans_finalize;
 }
 
 /**
@@ -79,11 +75,11 @@ gtranslator_db_trans_class_init (GtranslatorDbTransClass *klass)
 GtranslatorDbTrans *
 gtranslator_db_trans_new ()
 {
-	GtranslatorDbTrans *db_trans;
+  GtranslatorDbTrans *db_trans;
 
-	db_trans = g_object_new (GTR_TYPE_DB_TRANS, NULL);
-	
-	return db_trans;
+  db_trans = g_object_new (GTR_TYPE_DB_TRANS, NULL);
+
+  return db_trans;
 }
 
 /**
@@ -97,21 +93,20 @@ gtranslator_db_trans_new ()
  * Returns: if @index is 0 then returns the new index, else returns @index
  */
 db_recno_t
-gtranslator_db_trans_write_string (GtranslatorDbTrans *db_trans,
-				   const gchar *translation,
-				   db_recno_t key)
+gtranslator_db_trans_write_string (GtranslatorDbTrans * db_trans,
+				   const gchar * translation, db_recno_t key)
 {
-	gchar *array[2];
-	db_recno_t toret;
-	
-	array[0] = g_strdup (translation);
-	array[1] = NULL;
-	
-	toret = gtranslator_db_trans_write (db_trans, array, key);
-	
-	g_free (array[0]);
-	
-	return toret;
+  gchar *array[2];
+  db_recno_t toret;
+
+  array[0] = g_strdup (translation);
+  array[1] = NULL;
+
+  toret = gtranslator_db_trans_write (db_trans, array, key);
+
+  g_free (array[0]);
+
+  return toret;
 }
 
 /**
@@ -125,83 +120,82 @@ gtranslator_db_trans_write_string (GtranslatorDbTrans *db_trans,
  * Returns: if @index is 0 then returns the new index, else returns @index
  */
 db_recno_t
-gtranslator_db_trans_write (GtranslatorDbTrans *db_trans,
-			    gchar **translations,
-			    db_recno_t index)
+gtranslator_db_trans_write (GtranslatorDbTrans * db_trans,
+			    gchar ** translations, db_recno_t index)
 {
-	DBT key, data;
-	gsize bufLen;
-	gsize i;
-	gint error = 0;
-	gsize len;
-	gint trans_len;
-	
-	trans_len = g_strv_length (translations);
-	
-	/*
-	 * Firstly we get buffer length to store:
-	 * - In the first position the number of strings
-	 * - then we store for each string: the length of the string
-	 *   and the string.
-	 * Graphic: (trans_len)(string_len)----->(string_len)----->.....
-	 * ----> = string data
-	 */
-	for (bufLen = 0, i = 0; i < trans_len; i++)
-	{
-		len = strlen (translations[i]);
-		bufLen += sizeof (len) + len;
-	}
-	bufLen += sizeof (trans_len);
-	
-	/*
-	 * Now we create the buffer with the length I've got in the previous
-	 * iteration and I store in that buffer what I said before.
-	 */
-	u_int8_t *p, buf[bufLen];
-	
-	p = &buf[0];
-	memcpy (p, &trans_len, sizeof (trans_len));
-	p += sizeof (trans_len);
-	
-	for (i = 0; i < g_strv_length (translations); i++)
-	{
-		len = strlen (translations[i]);
-		memcpy (p, &len, sizeof (len));
-		p += sizeof (len);
-		memcpy (p, translations[i], len);
-		p += len;
-	}
-	
-	/*
-	 * Storing the buffer with the length in the that and after that
-	 * we try to store it in the database.
-	 * If there is a problem we show it.
-	 */
-	memset (&key, 0, sizeof (key));
-	memset (&data, 0, sizeof (data));
-	data.data = buf;
-	data.size = bufLen;
-	
-	if (index == 0)
-	{
-		error = gtranslator_db_base_put (GTR_DB_BASE (db_trans),
-						 &key, &data, DB_APPEND);
-	}
-	else
-	{
-		key.data = &index;
-		key.size = sizeof (index);
+  DBT key, data;
+  gsize bufLen;
+  gsize i;
+  gint error = 0;
+  gsize len;
+  gint trans_len;
 
-		error = gtranslator_db_base_put (GTR_DB_BASE (db_trans),
-						 &key, &data, 0);
-	}
+  trans_len = g_strv_length (translations);
 
-	if (error != 0)
-	{
-		gtranslator_db_base_show_error (GTR_DB_BASE (db_trans), error);
-		return 0;
-	}    
-	return (index == 0) ? *((db_recno_t*)key.data) : index;
+  /*
+   * Firstly we get buffer length to store:
+   * - In the first position the number of strings
+   * - then we store for each string: the length of the string
+   *   and the string.
+   * Graphic: (trans_len)(string_len)----->(string_len)----->.....
+   * ----> = string data
+   */
+  for (bufLen = 0, i = 0; i < trans_len; i++)
+    {
+      len = strlen (translations[i]);
+      bufLen += sizeof (len) + len;
+    }
+  bufLen += sizeof (trans_len);
+
+  /*
+   * Now we create the buffer with the length I've got in the previous
+   * iteration and I store in that buffer what I said before.
+   */
+  u_int8_t *p, buf[bufLen];
+
+  p = &buf[0];
+  memcpy (p, &trans_len, sizeof (trans_len));
+  p += sizeof (trans_len);
+
+  for (i = 0; i < g_strv_length (translations); i++)
+    {
+      len = strlen (translations[i]);
+      memcpy (p, &len, sizeof (len));
+      p += sizeof (len);
+      memcpy (p, translations[i], len);
+      p += len;
+    }
+
+  /*
+   * Storing the buffer with the length in the that and after that
+   * we try to store it in the database.
+   * If there is a problem we show it.
+   */
+  memset (&key, 0, sizeof (key));
+  memset (&data, 0, sizeof (data));
+  data.data = buf;
+  data.size = bufLen;
+
+  if (index == 0)
+    {
+      error = gtranslator_db_base_put (GTR_DB_BASE (db_trans),
+				       &key, &data, DB_APPEND);
+    }
+  else
+    {
+      key.data = &index;
+      key.size = sizeof (index);
+
+      error = gtranslator_db_base_put (GTR_DB_BASE (db_trans),
+				       &key, &data, 0);
+    }
+
+  if (error != 0)
+    {
+      gtranslator_db_base_show_error (GTR_DB_BASE (db_trans), error);
+      return 0;
+    }
+  return (index == 0) ? *((db_recno_t *) key.data) : index;
 }
 
 /**
@@ -214,64 +208,62 @@ gtranslator_db_trans_write (GtranslatorDbTrans *db_trans,
  * The caller must free the #GPtrArray.
  */
 GPtrArray *
-gtranslator_db_trans_read (GtranslatorDbTrans *db_trans,
-			   db_recno_t index)
+gtranslator_db_trans_read (GtranslatorDbTrans * db_trans, db_recno_t index)
 {
-	DBT key, data;
-	gint error;
-	GPtrArray *gparray;
-	gint bufLen;
-	u_int8_t *p;
-	u_int8_t *buf;
-	gint i =0;
+  DBT key, data;
+  gint error;
+  GPtrArray *gparray;
+  gint bufLen;
+  u_int8_t *p;
+  u_int8_t *buf;
+  gint i = 0;
 
-	memset (&key, 0, sizeof (key));
-	memset (&data, 0, sizeof (data));
-	key.data = &index;
-	key.size = sizeof (index);
-	
-	/*
-	 * We get the data from the key
-	 */
-	error = gtranslator_db_base_get (GTR_DB_BASE (db_trans),
-					 &key, &data);
-	if (error != 0)
-	{
-		gtranslator_db_base_show_error (GTR_DB_BASE (db_trans), error);
-		return NULL;
-	}
-	
-	/*
-	 * Once we have the data we have to parse the byte array
-	 * and store it in our GPtrArray
-	 */
-	gparray = g_ptr_array_new ();
-	
-	buf = data.data;
-	
-	p = &buf[0];
-	memcpy (&bufLen, p, sizeof (bufLen));
-	p += sizeof (bufLen);
-	
-	while (i < bufLen)
-	{
-		gsize len;
-		gchar *data;
-		
-		memcpy (&len, p, sizeof (len));
-		p += sizeof (len);
-		
-		data = g_malloc (len+1);
-		memcpy (data, p, len);
-		p += len;
-		data[len] = '\0';
+  memset (&key, 0, sizeof (key));
+  memset (&data, 0, sizeof (data));
+  key.data = &index;
+  key.size = sizeof (index);
 
-		g_ptr_array_add (gparray, (gpointer)data);
-		
-		i++;
-	}
-	
-	g_ptr_array_add (gparray, NULL);
-	
-	return gparray;
+  /*
+   * We get the data from the key
+   */
+  error = gtranslator_db_base_get (GTR_DB_BASE (db_trans), &key, &data);
+  if (error != 0)
+    {
+      gtranslator_db_base_show_error (GTR_DB_BASE (db_trans), error);
+      return NULL;
+    }
+
+  /*
+   * Once we have the data we have to parse the byte array
+   * and store it in our GPtrArray
+   */
+  gparray = g_ptr_array_new ();
+
+  buf = data.data;
+
+  p = &buf[0];
+  memcpy (&bufLen, p, sizeof (bufLen));
+  p += sizeof (bufLen);
+
+  while (i < bufLen)
+    {
+      gsize len;
+      gchar *data;
+
+      memcpy (&len, p, sizeof (len));
+      p += sizeof (len);
+
+      data = g_malloc (len + 1);
+      memcpy (data, p, len);
+      p += len;
+      data[len] = '\0';
+
+      g_ptr_array_add (gparray, (gpointer) data);
+
+      i++;
+    }
+
+  g_ptr_array_add (gparray, NULL);
+
+  return gparray;
 }

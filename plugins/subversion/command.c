@@ -51,15 +51,15 @@
 
 struct _GtranslatorCommandPriv
 {
-	gchar *error_message;
+  gchar *error_message;
 };
 
 enum
 {
-	DATA_ARRIVED,
-	COMMAND_FINISHED,
+  DATA_ARRIVED,
+  COMMAND_FINISHED,
 
-	LAST_SIGNAL
+  LAST_SIGNAL
 };
 
 
@@ -68,37 +68,37 @@ static guint gtranslator_command_signals[LAST_SIGNAL] = { 0 };
 G_DEFINE_TYPE (GtranslatorCommand, gtranslator_command, G_TYPE_OBJECT);
 
 static void
-gtranslator_command_init (GtranslatorCommand *self)
+gtranslator_command_init (GtranslatorCommand * self)
 {
-	self->priv = g_new0 (GtranslatorCommandPriv, 1);
+  self->priv = g_new0 (GtranslatorCommandPriv, 1);
 }
 
 static void
-gtranslator_command_finalize (GObject *object)
+gtranslator_command_finalize (GObject * object)
 {
-	GtranslatorCommand *self;
-	
-	self = GTR_COMMAND (object);
-	
-	g_free (self->priv->error_message);
-	g_free (self->priv);
+  GtranslatorCommand *self;
 
-	G_OBJECT_CLASS (gtranslator_command_parent_class)->finalize (object);
+  self = GTR_COMMAND (object);
+
+  g_free (self->priv->error_message);
+  g_free (self->priv);
+
+  G_OBJECT_CLASS (gtranslator_command_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_command_class_init (GtranslatorCommandClass *klass)
+gtranslator_command_class_init (GtranslatorCommandClass * klass)
 {
-	GObjectClass* object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	object_class->finalize = gtranslator_command_finalize;
-	
-	klass->run = NULL;
-	klass->start = NULL;
-	klass->notify_data_arrived = NULL;
-	klass->notify_complete = NULL;
-	klass->set_error_message = gtranslator_command_set_error_message;
-	klass->get_error_message = gtranslator_command_get_error_message;
+  object_class->finalize = gtranslator_command_finalize;
+
+  klass->run = NULL;
+  klass->start = NULL;
+  klass->notify_data_arrived = NULL;
+  klass->notify_complete = NULL;
+  klass->set_error_message = gtranslator_command_set_error_message;
+  klass->get_error_message = gtranslator_command_get_error_message;
 
 	/**
 	 * GtranslatorCommand::data-arrived:
@@ -107,15 +107,12 @@ gtranslator_command_class_init (GtranslatorCommandClass *klass)
 	 * Notifies clients that the command has processed data that is ready to 
 	 * be used.
 	 */
-	gtranslator_command_signals[DATA_ARRIVED] =
-		g_signal_new ("data-arrived",
-		              G_OBJECT_CLASS_TYPE (klass),
-		              G_SIGNAL_RUN_FIRST,
-		              0,
-		              NULL, NULL,
-		              g_cclosure_marshal_VOID__VOID,
-		              G_TYPE_NONE, 
-					  0);
+  gtranslator_command_signals[DATA_ARRIVED] =
+    g_signal_new ("data-arrived",
+		  G_OBJECT_CLASS_TYPE (klass),
+		  G_SIGNAL_RUN_FIRST,
+		  0,
+		  NULL, NULL, g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
 
 	/**
 	 * GtranslatorCommand::command-finished:
@@ -125,15 +122,13 @@ gtranslator_command_class_init (GtranslatorCommandClass *klass)
 	 * Indicates that the command has completed. Clients should at least handle
 	 * this signal to unref the command object. 
 	 */
-	gtranslator_command_signals[COMMAND_FINISHED] =
-		g_signal_new ("command-finished",
-		              G_OBJECT_CLASS_TYPE (klass),
-		              G_SIGNAL_RUN_FIRST,
-		              0,
-		              NULL, NULL,
-		              g_cclosure_marshal_VOID__UINT ,
-		              G_TYPE_NONE, 1,
-		              G_TYPE_UINT);
+  gtranslator_command_signals[COMMAND_FINISHED] =
+    g_signal_new ("command-finished",
+		  G_OBJECT_CLASS_TYPE (klass),
+		  G_SIGNAL_RUN_FIRST,
+		  0,
+		  NULL, NULL,
+		  g_cclosure_marshal_VOID__UINT, G_TYPE_NONE, 1, G_TYPE_UINT);
 }
 
 /**
@@ -147,9 +142,9 @@ gtranslator_command_class_init (GtranslatorCommandClass *klass)
  * call ::run, which actually does the command's legwork. 
  */
 void
-gtranslator_command_start (GtranslatorCommand *self)
+gtranslator_command_start (GtranslatorCommand * self)
 {
-	GTR_COMMAND_GET_CLASS (self)->start (self);
+  GTR_COMMAND_GET_CLASS (self)->start (self);
 }
 
 
@@ -162,9 +157,9 @@ gtranslator_command_start (GtranslatorCommand *self)
  * objects that are not base classes. 
  */
 void
-gtranslator_command_notify_data_arrived (GtranslatorCommand *self)
+gtranslator_command_notify_data_arrived (GtranslatorCommand * self)
 {
-	GTR_COMMAND_GET_CLASS (self)->notify_data_arrived (self);
+  GTR_COMMAND_GET_CLASS (self)->notify_data_arrived (self);
 }
 
 /**
@@ -176,9 +171,10 @@ gtranslator_command_notify_data_arrived (GtranslatorCommand *self)
  * #GtranslatorCommand objects that are not base classes. 
  */
 void
-gtranslator_command_notify_complete (GtranslatorCommand *self, guint return_code)
+gtranslator_command_notify_complete (GtranslatorCommand * self,
+				     guint return_code)
 {
-	GTR_COMMAND_GET_CLASS (self)->notify_complete (self, return_code);
+  GTR_COMMAND_GET_CLASS (self)->notify_complete (self, return_code);
 }
 
 /**
@@ -190,12 +186,13 @@ gtranslator_command_notify_complete (GtranslatorCommand *self, guint return_code
  * of failure. 
  */
 void
-gtranslator_command_set_error_message (GtranslatorCommand *self, gchar *error_message)
+gtranslator_command_set_error_message (GtranslatorCommand * self,
+				       gchar * error_message)
 {
-	if (self->priv->error_message)
-		g_free (error_message);
-	
-	self->priv->error_message = g_strdup (error_message);
+  if (self->priv->error_message)
+    g_free (error_message);
+
+  self->priv->error_message = g_strdup (error_message);
 }
 
 /**
@@ -211,7 +208,7 @@ gtranslator_command_set_error_message (GtranslatorCommand *self, gchar *error_me
  * If no error is set, return %NULL.
  */
 gchar *
-gtranslator_command_get_error_message (GtranslatorCommand *self)
+gtranslator_command_get_error_message (GtranslatorCommand * self)
 {
-	return g_strdup (self->priv->error_message);
+  return g_strdup (self->priv->error_message);
 }

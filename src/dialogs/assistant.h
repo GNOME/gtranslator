@@ -25,7 +25,6 @@
 #include "window.h"
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -35,42 +34,42 @@ G_BEGIN_DECLS
 #define GTR_IS_ASSISTANT(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_ASSISTANT))
 #define GTR_IS_ASSISTANT_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_ASSISTANT))
 #define GTR_ASSISTANT_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_ASSISTANT, GtranslatorAssistantClass))
-
 /* Private structure type */
-typedef struct _GtranslatorAssistantPrivate	GtranslatorAssistantPrivate;
+typedef struct _GtranslatorAssistantPrivate GtranslatorAssistantPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorAssistant		GtranslatorAssistant;
+typedef struct _GtranslatorAssistant GtranslatorAssistant;
 
 struct _GtranslatorAssistant
 {
-	GtkAssistant parent_instance;
-	
-	/*< private > */
-	GtranslatorAssistantPrivate *priv;
+  GtkAssistant parent_instance;
+
+  /*< private > */
+  GtranslatorAssistantPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorAssistantClass	GtranslatorAssistantClass;
+typedef struct _GtranslatorAssistantClass GtranslatorAssistantClass;
 
 struct _GtranslatorAssistantClass
 {
-	GtkAssistantClass parent_class;
+  GtkAssistantClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_assistant_get_type               (void) G_GNUC_CONST;
+GType
+gtranslator_assistant_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_assistant_register_type          (GTypeModule * module);
+     GType gtranslator_assistant_register_type (GTypeModule * module);
 
-void	         gtranslator_show_assistant                   (GtranslatorWindow *window);
+     void gtranslator_show_assistant (GtranslatorWindow * window);
 
 G_END_DECLS
-
 #endif /* __ASSISTANT_H__ */

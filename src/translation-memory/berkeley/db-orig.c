@@ -35,38 +35,34 @@
 						 GTR_TYPE_DB_ORIG,     \
 						 GtranslatorDbOrigPrivate))
 
-G_DEFINE_TYPE(GtranslatorDbOrig, gtranslator_db_orig, GTR_TYPE_DB_BASE)
+G_DEFINE_TYPE (GtranslatorDbOrig, gtranslator_db_orig, GTR_TYPE_DB_BASE)
+     struct _GtranslatorDbOrigPrivate
+     {
 
+     };
 
-struct _GtranslatorDbOrigPrivate
+     static void gtranslator_db_orig_init (GtranslatorDbOrig * db_orig)
 {
+  //db_orig->priv = GTR_DB_ORIG_GET_PRIVATE (db_orig);
 
-};
-
-static void
-gtranslator_db_orig_init (GtranslatorDbOrig *db_orig)
-{
-	//db_orig->priv = GTR_DB_ORIG_GET_PRIVATE (db_orig);
-	
-	gtranslator_db_base_create_dabatase (GTR_DB_BASE (db_orig),
-					     "original.db",
-					     DB_HASH);
+  gtranslator_db_base_create_dabatase (GTR_DB_BASE (db_orig),
+				       "original.db", DB_HASH);
 }
 
 static void
-gtranslator_db_orig_finalize (GObject *object)
+gtranslator_db_orig_finalize (GObject * object)
 {
-	G_OBJECT_CLASS (gtranslator_db_orig_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtranslator_db_orig_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_db_orig_class_init (GtranslatorDbOrigClass *klass)
+gtranslator_db_orig_class_init (GtranslatorDbOrigClass * klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	//g_type_class_add_private (klass, sizeof (GtranslatorDbOrigPrivate));
+  //g_type_class_add_private (klass, sizeof (GtranslatorDbOrigPrivate));
 
-	object_class->finalize = gtranslator_db_orig_finalize;
+  object_class->finalize = gtranslator_db_orig_finalize;
 }
 
 /**
@@ -79,11 +75,11 @@ gtranslator_db_orig_class_init (GtranslatorDbOrigClass *klass)
 GtranslatorDbOrig *
 gtranslator_db_orig_new ()
 {
-	GtranslatorDbOrig *db_orig;
+  GtranslatorDbOrig *db_orig;
 
-	db_orig = g_object_new (GTR_TYPE_DB_ORIG, NULL);
-	
-	return db_orig;
+  db_orig = g_object_new (GTR_TYPE_DB_ORIG, NULL);
+
+  return db_orig;
 }
 
 /**
@@ -98,31 +94,27 @@ gtranslator_db_orig_new ()
  * Returns: TRUE if it was successfully stored.
  */
 gboolean
-gtranslator_db_orig_write (GtranslatorDbOrig *orig,
-			   const gchar *string,
-			   db_recno_t value)
+gtranslator_db_orig_write (GtranslatorDbOrig * orig,
+			   const gchar * string, db_recno_t value)
 {
-	DBT key, data;
-	gint error;
+  DBT key, data;
+  gint error;
 
-	memset (&key, 0, sizeof (key));
-	memset (&data, 0, sizeof (data));
-	key.data = (gpointer) string;
-	key.size = strlen (string);
-	data.data = &value;
-	data.size = sizeof (value);
-	
-	error = gtranslator_db_base_put (GTR_DB_BASE (orig),
-					 &key,
-					 &data,
-					 0);
-	if (error != 0)
-	{
-		gtranslator_db_base_show_error (GTR_DB_BASE (orig), error);
-		return FALSE;
-	}
-	
-	return TRUE;
+  memset (&key, 0, sizeof (key));
+  memset (&data, 0, sizeof (data));
+  key.data = (gpointer) string;
+  key.size = strlen (string);
+  data.data = &value;
+  data.size = sizeof (value);
+
+  error = gtranslator_db_base_put (GTR_DB_BASE (orig), &key, &data, 0);
+  if (error != 0)
+    {
+      gtranslator_db_base_show_error (GTR_DB_BASE (orig), error);
+      return FALSE;
+    }
+
+  return TRUE;
 }
 
 /**
@@ -136,26 +128,23 @@ gtranslator_db_orig_write (GtranslatorDbOrig *orig,
  * Returns: the foreign key for #GtranslatorDbTrans
  */
 db_recno_t
-gtranslator_db_orig_read (GtranslatorDbOrig *orig,
-			  const gchar *string)
+gtranslator_db_orig_read (GtranslatorDbOrig * orig, const gchar * string)
 {
-	DBT key, data;
-	gint error;
+  DBT key, data;
+  gint error;
 
-	memset (&key, 0, sizeof (key));
-	memset (&data, 0, sizeof (data));
-	key.data = (gpointer)string;
-	key.size = strlen (string);
-	
-	error = gtranslator_db_base_get (GTR_DB_BASE (orig),
-					 &key, &data);
-	if (error != 0)
-	{
-		if (error != DB_NOTFOUND)
-			gtranslator_db_base_show_error (GTR_DB_BASE (orig),
-							error);
-		return 0;
-	}
-	
-	return *((db_recno_t*)data.data);
+  memset (&key, 0, sizeof (key));
+  memset (&data, 0, sizeof (data));
+  key.data = (gpointer) string;
+  key.size = strlen (string);
+
+  error = gtranslator_db_base_get (GTR_DB_BASE (orig), &key, &data);
+  if (error != 0)
+    {
+      if (error != DB_NOTFOUND)
+	gtranslator_db_base_show_error (GTR_DB_BASE (orig), error);
+      return 0;
+    }
+
+  return *((db_recno_t *) data.data);
 }

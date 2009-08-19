@@ -41,35 +41,48 @@
 #define GTR_IS_CLOSE_CONFIRMATION_DIALOG_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_CLOSE_CONFIRMATION_DIALOG))
 #define GTR_CLOSE_CONFIRMATION_DIALOG_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj),GTR_TYPE_CLOSE_CONFIRMATION_DIALOG, GtranslatorCloseConfirmationDialogClass))
 
-typedef struct _GtranslatorCloseConfirmationDialog 		GtranslatorCloseConfirmationDialog;
-typedef struct _GtranslatorCloseConfirmationDialogClass 	GtranslatorCloseConfirmationDialogClass;
-typedef struct _GtranslatorCloseConfirmationDialogPrivate 	GtranslatorCloseConfirmationDialogPrivate;
+typedef struct _GtranslatorCloseConfirmationDialog
+  GtranslatorCloseConfirmationDialog;
+typedef struct _GtranslatorCloseConfirmationDialogClass
+  GtranslatorCloseConfirmationDialogClass;
+typedef struct _GtranslatorCloseConfirmationDialogPrivate
+  GtranslatorCloseConfirmationDialogPrivate;
 
-struct _GtranslatorCloseConfirmationDialog 
+struct _GtranslatorCloseConfirmationDialog
 {
-	GtkDialog parent;
+  GtkDialog parent;
 
-	/*< private > */
-	GtranslatorCloseConfirmationDialogPrivate *priv;
+  /*< private > */
+  GtranslatorCloseConfirmationDialogPrivate *priv;
 };
 
-struct _GtranslatorCloseConfirmationDialogClass 
+struct _GtranslatorCloseConfirmationDialogClass
 {
-	GtkDialogClass parent_class;
+  GtkDialogClass parent_class;
 };
 
-GType 		 gtranslator_close_confirmation_dialog_get_type		(void) G_GNUC_CONST;
+GType
+gtranslator_close_confirmation_dialog_get_type (void)
+  G_GNUC_CONST;
 
-GtkWidget	*gtranslator_close_confirmation_dialog_new			(GtkWindow     *parent,
-									 GList         *unsaved_documents,
-									 gboolean       logout_mode);
-GtkWidget 	*gtranslator_close_confirmation_dialog_new_single 		(GtkWindow     *parent, 
-									 GtranslatorPo *doc,
- 									 gboolean       logout_mode);
+     GtkWidget *gtranslator_close_confirmation_dialog_new (GtkWindow * parent,
+							   GList *
+							   unsaved_documents,
+							   gboolean
+							   logout_mode);
+     GtkWidget *gtranslator_close_confirmation_dialog_new_single (GtkWindow *
+								  parent,
+								  GtranslatorPo
+								  * doc,
+								  gboolean
+								  logout_mode);
 
-const GList	*gtranslator_close_confirmation_dialog_get_unsaved_documents  (GtranslatorCloseConfirmationDialog *dlg);
+     const GList
+       *gtranslator_close_confirmation_dialog_get_unsaved_documents
+       (GtranslatorCloseConfirmationDialog * dlg);
 
-GList		*gtranslator_close_confirmation_dialog_get_selected_documents	(GtranslatorCloseConfirmationDialog *dlg);
+     GList
+       *gtranslator_close_confirmation_dialog_get_selected_documents
+       (GtranslatorCloseConfirmationDialog * dlg);
 
 #endif /* __GTR_CLOSE_CONFIRMATION_DIALOG_H__ */
-

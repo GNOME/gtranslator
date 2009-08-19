@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA. 
  */
- 
+
 /*
  * Modified by the gtranslator Team, 2002-2005. See the AUTHORS file for a 
  * list of people on the gtranslator Team.  
@@ -34,42 +34,41 @@
 
 #include "plugin.h"
 
-G_DEFINE_TYPE(GtranslatorPlugin, gtranslator_plugin, G_TYPE_OBJECT)
-
-static void
-dummy (GtranslatorPlugin *plugin, GtranslatorWindow *window)
+G_DEFINE_TYPE (GtranslatorPlugin, gtranslator_plugin, G_TYPE_OBJECT)
+     static void
+       dummy (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 {
-	/* Empty */
+  /* Empty */
 }
 
 static GtkWidget *
-create_configure_dialog	(GtranslatorPlugin *plugin)
+create_configure_dialog (GtranslatorPlugin * plugin)
 {
-	return NULL;
+  return NULL;
 }
 
 static gboolean
-is_configurable (GtranslatorPlugin *plugin)
+is_configurable (GtranslatorPlugin * plugin)
 {
-	return (GTR_PLUGIN_GET_CLASS (plugin)->create_configure_dialog !=
-		create_configure_dialog);
-}
-
-static void 
-gtranslator_plugin_class_init (GtranslatorPluginClass *klass)
-{
-	klass->activate = dummy;
-	klass->deactivate = dummy;
-	klass->update_ui = dummy;
-	
-	klass->create_configure_dialog = create_configure_dialog;
-	klass->is_configurable = is_configurable;
+  return (GTR_PLUGIN_GET_CLASS (plugin)->create_configure_dialog !=
+	  create_configure_dialog);
 }
 
 static void
-gtranslator_plugin_init (GtranslatorPlugin *plugin)
+gtranslator_plugin_class_init (GtranslatorPluginClass * klass)
 {
-	/* Empty */
+  klass->activate = dummy;
+  klass->deactivate = dummy;
+  klass->update_ui = dummy;
+
+  klass->create_configure_dialog = create_configure_dialog;
+  klass->is_configurable = is_configurable;
+}
+
+static void
+gtranslator_plugin_init (GtranslatorPlugin * plugin)
+{
+  /* Empty */
 }
 
 /**
@@ -80,13 +79,13 @@ gtranslator_plugin_init (GtranslatorPlugin *plugin)
  * Activates the plugin.
  */
 void
-gtranslator_plugin_activate (GtranslatorPlugin *plugin,
-		       GtranslatorWindow *window)
+gtranslator_plugin_activate (GtranslatorPlugin * plugin,
+			     GtranslatorWindow * window)
 {
-	g_return_if_fail (GTR_IS_PLUGIN (plugin));
-	g_return_if_fail (GTR_IS_WINDOW (window));
-	
-	GTR_PLUGIN_GET_CLASS (plugin)->activate (plugin, window);
+  g_return_if_fail (GTR_IS_PLUGIN (plugin));
+  g_return_if_fail (GTR_IS_WINDOW (window));
+
+  GTR_PLUGIN_GET_CLASS (plugin)->activate (plugin, window);
 }
 
 /**
@@ -97,13 +96,13 @@ gtranslator_plugin_activate (GtranslatorPlugin *plugin,
  * Deactivates the plugin.
  */
 void
-gtranslator_plugin_deactivate	(GtranslatorPlugin *plugin,
-			 GtranslatorWindow *window)
+gtranslator_plugin_deactivate (GtranslatorPlugin * plugin,
+			       GtranslatorWindow * window)
 {
-	g_return_if_fail (GTR_IS_PLUGIN (plugin));
-	g_return_if_fail (GTR_IS_WINDOW (window));
+  g_return_if_fail (GTR_IS_PLUGIN (plugin));
+  g_return_if_fail (GTR_IS_WINDOW (window));
 
-	GTR_PLUGIN_GET_CLASS (plugin)->deactivate (plugin, window);
+  GTR_PLUGIN_GET_CLASS (plugin)->deactivate (plugin, window);
 }
 
 /**
@@ -113,15 +112,15 @@ gtranslator_plugin_deactivate	(GtranslatorPlugin *plugin,
  *
  * Triggers an update of the user interface to take into account state changes
  * caused by the plugin.
- */		 
+ */
 void
-gtranslator_plugin_update_ui	(GtranslatorPlugin *plugin,
-			 GtranslatorWindow *window)
+gtranslator_plugin_update_ui (GtranslatorPlugin * plugin,
+			      GtranslatorWindow * window)
 {
-	g_return_if_fail (GTR_IS_PLUGIN (plugin));
-	g_return_if_fail (GTR_IS_WINDOW (window));
+  g_return_if_fail (GTR_IS_PLUGIN (plugin));
+  g_return_if_fail (GTR_IS_WINDOW (window));
 
-	GTR_PLUGIN_GET_CLASS (plugin)->update_ui (plugin, window);
+  GTR_PLUGIN_GET_CLASS (plugin)->update_ui (plugin, window);
 }
 
 /**
@@ -133,11 +132,11 @@ gtranslator_plugin_update_ui	(GtranslatorPlugin *plugin,
  * Returns: TRUE if the plugin is configurable:
  */
 gboolean
-gtranslator_plugin_is_configurable (GtranslatorPlugin *plugin)
+gtranslator_plugin_is_configurable (GtranslatorPlugin * plugin)
 {
-	g_return_val_if_fail (GTR_IS_PLUGIN (plugin), FALSE);
+  g_return_val_if_fail (GTR_IS_PLUGIN (plugin), FALSE);
 
-	return GTR_PLUGIN_GET_CLASS (plugin)->is_configurable (plugin);
+  return GTR_PLUGIN_GET_CLASS (plugin)->is_configurable (plugin);
 }
 
 /**
@@ -149,9 +148,9 @@ gtranslator_plugin_is_configurable (GtranslatorPlugin *plugin)
  * Returns: the configure dialog widget for the plugin.
  */
 GtkWidget *
-gtranslator_plugin_create_configure_dialog (GtranslatorPlugin *plugin)
+gtranslator_plugin_create_configure_dialog (GtranslatorPlugin * plugin)
 {
-	g_return_val_if_fail (GTR_IS_PLUGIN (plugin), NULL);
-	
-	return GTR_PLUGIN_GET_CLASS (plugin)->create_configure_dialog (plugin);
+  g_return_val_if_fail (GTR_IS_PLUGIN (plugin), NULL);
+
+  return GTR_PLUGIN_GET_CLASS (plugin)->create_configure_dialog (plugin);
 }

@@ -25,7 +25,6 @@
 #include "db-keys.h"
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -35,51 +34,52 @@ G_BEGIN_DECLS
 #define GTR_IS_DB_WORDS(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_DB_WORDS))
 #define GTR_IS_DB_WORDS_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_DB_WORDS))
 #define GTR_DB_WORDS_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_DB_WORDS, GtranslatorDbWordsClass))
-
 /* Private structure type */
-typedef struct _GtranslatorDbWordsPrivate	GtranslatorDbWordsPrivate;
+typedef struct _GtranslatorDbWordsPrivate GtranslatorDbWordsPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorDbWords		GtranslatorDbWords;
+typedef struct _GtranslatorDbWords GtranslatorDbWords;
 
 struct _GtranslatorDbWords
 {
-	GtranslatorDbBase parent_instance;
-	
-	/*< private > */
-	GtranslatorDbWordsPrivate *priv;
+  GtranslatorDbBase parent_instance;
+
+  /*< private > */
+  GtranslatorDbWordsPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorDbWordsClass	GtranslatorDbWordsClass;
+typedef struct _GtranslatorDbWordsClass GtranslatorDbWordsClass;
 
 struct _GtranslatorDbWordsClass
 {
-	GtranslatorDbBaseClass parent_class;
+  GtranslatorDbBaseClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_db_words_get_type	      (void) G_GNUC_CONST;
+GType
+gtranslator_db_words_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_db_words_register_type   (GTypeModule * module);
+     GType gtranslator_db_words_register_type (GTypeModule * module);
 
-GtranslatorDbWords *gtranslator_db_words_new	      (void);
+     GtranslatorDbWords *gtranslator_db_words_new (void);
 
-gboolean         gtranslator_db_words_append          (GtranslatorDbWords *db_words,
-						       const gchar *word,
-						       guint sentence_size,
-						       db_recno_t value);
-						       
-GtranslatorDbKeys *gtranslator_db_words_read          (GtranslatorDbWords *db_words,
-						       const gchar *word,
-						       guint sentence_size);
+     gboolean gtranslator_db_words_append (GtranslatorDbWords * db_words,
+					   const gchar * word,
+					   guint sentence_size,
+					   db_recno_t value);
+
+     GtranslatorDbKeys *gtranslator_db_words_read (GtranslatorDbWords *
+						   db_words,
+						   const gchar * word,
+						   guint sentence_size);
 
 G_END_DECLS
-
 #endif /* __DB_WORDS_H__ */

@@ -28,78 +28,79 @@
 #include <libxml/tree.h>
 #include <gio/gio.h>
 
-gchar **       gtranslator_utils_split_string_in_words (const gchar *string);
+gchar **gtranslator_utils_split_string_in_words (const gchar * string);
 
-xmlDocPtr      gtranslator_xml_new_doc (const gchar *name);
+xmlDocPtr gtranslator_xml_new_doc (const gchar * name);
 
-xmlDocPtr      gtranslator_xml_open_file (const gchar *filename);
+xmlDocPtr gtranslator_xml_open_file (const gchar * filename);
 
-GtkWidget     *gtranslator_gtk_button_new_with_stock_icon (const gchar *label,
-				      const gchar *stock_id);
+GtkWidget *gtranslator_gtk_button_new_with_stock_icon (const gchar * label,
+						       const gchar *
+						       stock_id);
 
-void           gtranslator_utils_menu_position_under_widget (GtkMenu  *menu,
-					gint     *x,
-					gint     *y,
-					gboolean *push_in,
-					gpointer  user_data);
-					
-void           gtranslator_utils_menu_position_under_tree_view (GtkMenu  *menu,
-					   gint     *x,
-					   gint     *y,
-					   gboolean *push_in,
-					   gpointer  user_data);
+void gtranslator_utils_menu_position_under_widget (GtkMenu * menu,
+						   gint * x,
+						   gint * y,
+						   gboolean * push_in,
+						   gpointer user_data);
 
-gboolean       gtranslator_utils_get_ui_objects (const gchar  *filename,
-						 gchar       **root_objects,
-						 GtkWidget   **error_widget,
-						 const gchar  *object_name,
-						 ...)G_GNUC_NULL_TERMINATED;
+void gtranslator_utils_menu_position_under_tree_view (GtkMenu * menu,
+						      gint * x,
+						      gint * y,
+						      gboolean * push_in,
+						      gpointer user_data);
 
-GSList        *gtranslator_utils_drop_get_locations   (GtkSelectionData *selection_data);
+gboolean
+gtranslator_utils_get_ui_objects (const gchar * filename,
+				  gchar ** root_objects,
+				  GtkWidget ** error_widget,
+				  const gchar * object_name, ...)
+  G_GNUC_NULL_TERMINATED;
 
-gchar         *gtranslator_utils_escape_search_text   (const gchar* text);
+     GSList *gtranslator_utils_drop_get_locations (GtkSelectionData *
+						   selection_data);
 
-gchar         *gtranslator_utils_unescape_search_text (const gchar *text);
+     gchar *gtranslator_utils_escape_search_text (const gchar * text);
 
-gboolean       g_utf8_caselessnmatch                  (const gchar *s1,
-						       const gchar *s2,
-						       gssize n1,
-						       gssize n2);
+     gchar *gtranslator_utils_unescape_search_text (const gchar * text);
 
-void           gtranslator_utils_activate_url         (GtkAboutDialog *dialog,
-						       const gchar *url,
-						       gpointer data);
+     gboolean g_utf8_caselessnmatch (const gchar * s1,
+				     const gchar * s2, gssize n1, gssize n2);
 
-void           gtranslator_utils_activate_email       (GtkAboutDialog *dialog,
-						       const gchar *email,
-						       gpointer data);
-						       
-void           gtranslator_utils_help_display         (GtkWindow   *parent,
-						       const gchar *doc_id,
-						       const gchar *file_name);
-						       
-gchar         *gtranslator_utils_get_user_config_dir  (void);
+     void gtranslator_utils_activate_url (GtkAboutDialog * dialog,
+					  const gchar * url, gpointer data);
 
-gchar         *gtranslator_utils_get_current_date     (void);
+     void gtranslator_utils_activate_email (GtkAboutDialog * dialog,
+					    const gchar * email,
+					    gpointer data);
 
-gchar         *gtranslator_utils_get_current_time     (void);
+     void gtranslator_utils_help_display (GtkWindow * parent,
+					  const gchar * doc_id,
+					  const gchar * file_name);
 
-gchar         *gtranslator_utils_get_current_year     (void);
+     gchar *gtranslator_utils_get_user_config_dir (void);
 
-void           gtranslator_utils_scan_dir             (GFile *dir,
-						       GSList **list,
-						       const gchar *po_name);
+     gchar *gtranslator_utils_get_current_date (void);
 
-gchar *        gtranslator_utils_reduce_path        (const gchar *path);
+     gchar *gtranslator_utils_get_current_time (void);
 
-gchar         *gtranslator_utils_escape_underscores (const gchar* text,
-						     gssize       length);
+     gchar *gtranslator_utils_get_current_year (void);
 
-gchar         *gtranslator_utils_get_file_from_pixmapsdir (const gchar *filename);
+     void gtranslator_utils_scan_dir (GFile * dir,
+				      GSList ** list, const gchar * po_name);
 
-gchar         *gtranslator_utils_get_file_from_pkgdatadir (const gchar *filename);
+     gchar *gtranslator_utils_reduce_path (const gchar * path);
 
-gchar         *gtranslator_utils_get_datadir (void);
+     gchar *gtranslator_utils_escape_underscores (const gchar * text,
+						  gssize length);
 
-gchar         *gtranslator_utils_get_win32_plugindir (void);
+     gchar *gtranslator_utils_get_file_from_pixmapsdir (const gchar *
+							filename);
+
+     gchar *gtranslator_utils_get_file_from_pkgdatadir (const gchar *
+							filename);
+
+     gchar *gtranslator_utils_get_datadir (void);
+
+     gchar *gtranslator_utils_get_win32_plugindir (void);
 #endif

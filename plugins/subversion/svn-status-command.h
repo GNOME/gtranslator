@@ -30,36 +30,36 @@
 #include "svn-status.h"
 
 G_BEGIN_DECLS
-
 #define SVN_TYPE_STATUS_COMMAND             (svn_status_command_get_type ())
 #define SVN_STATUS_COMMAND(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), SVN_TYPE_STATUS_COMMAND, SvnStatusCommand))
 #define SVN_STATUS_COMMAND_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), SVN_TYPE_STATUS_COMMAND, SvnStatusCommandClass))
 #define SVN_IS_STATUS_COMMAND(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), SVN_TYPE_STATUS_COMMAND))
 #define SVN_IS_STATUS_COMMAND_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), SVN_TYPE_STATUS_COMMAND))
 #define SVN_STATUS_COMMAND_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), SVN_TYPE_STATUS_COMMAND, SvnStatusCommandClass))
-
 typedef struct _SvnStatusCommandClass SvnStatusCommandClass;
 typedef struct _SvnStatusCommand SvnStatusCommand;
 typedef struct _SvnStatusCommandPriv SvnStatusCommandPriv;
 
 struct _SvnStatusCommandClass
 {
-	SvnCommandClass parent_class;
+  SvnCommandClass parent_class;
 };
 
 struct _SvnStatusCommand
 {
-	SvnCommand parent_instance;
-	
-	SvnStatusCommandPriv *priv;
+  SvnCommand parent_instance;
+
+  SvnStatusCommandPriv *priv;
 };
 
-GType svn_status_command_get_type (void) G_GNUC_CONST;
-SvnStatusCommand *svn_status_command_new (const gchar *path, gboolean recursive, 
-										  gboolean get_all_items);
-void svn_status_command_destroy (SvnStatusCommand *self);
-GQueue *svn_status_command_get_status_queue (SvnStatusCommand *self);
+GType
+svn_status_command_get_type (void)
+  G_GNUC_CONST;
+     SvnStatusCommand *svn_status_command_new (const gchar * path,
+					       gboolean recursive,
+					       gboolean get_all_items);
+     void svn_status_command_destroy (SvnStatusCommand * self);
+     GQueue *svn_status_command_get_status_queue (SvnStatusCommand * self);
 
 G_END_DECLS
-
 #endif /* _SVN_STATUS_COMMAND_H_ */

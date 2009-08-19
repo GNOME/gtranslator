@@ -25,7 +25,6 @@
 #include "window.h"
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -35,42 +34,42 @@ G_BEGIN_DECLS
 #define GTR_IS_COMMIT_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_COMMIT_DIALOG))
 #define GTR_IS_COMMIT_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_COMMIT_DIALOG))
 #define GTR_COMMIT_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_COMMIT_DIALOG, GtranslatorCommitDialogClass))
-
 /* Private structure type */
-typedef struct _GtranslatorCommitDialogPrivate	GtranslatorCommitDialogPrivate;
+typedef struct _GtranslatorCommitDialogPrivate GtranslatorCommitDialogPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorCommitDialog		GtranslatorCommitDialog;
+typedef struct _GtranslatorCommitDialog GtranslatorCommitDialog;
 
 struct _GtranslatorCommitDialog
 {
-	GtkDialog parent_instance;
-	
-	/*< private > */
-	GtranslatorCommitDialogPrivate *priv;
+  GtkDialog parent_instance;
+
+  /*< private > */
+  GtranslatorCommitDialogPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorCommitDialogClass	GtranslatorCommitDialogClass;
+typedef struct _GtranslatorCommitDialogClass GtranslatorCommitDialogClass;
 
 struct _GtranslatorCommitDialogClass
 {
-	GtkDialogClass parent_class;
+  GtkDialogClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_commit_dialog_get_type               (void) G_GNUC_CONST;
+GType
+gtranslator_commit_dialog_get_type (void)
+  G_GNUC_CONST;
 
-GType		 gtranslator_commit_dialog_register_type          (GTypeModule * module);
+     GType gtranslator_commit_dialog_register_type (GTypeModule * module);
 
-void         gtranslator_show_commit_dialog                   (GtranslatorWindow *window);
+     void gtranslator_show_commit_dialog (GtranslatorWindow * window);
 
 G_END_DECLS
-
 #endif /* __COMMIT_DIALOG_H__ */

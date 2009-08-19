@@ -26,7 +26,6 @@
 #include "window.h"
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -36,45 +35,45 @@ G_BEGIN_DECLS
 #define GTR_IS_OPEN_TRAN_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_OPEN_TRAN_PANEL))
 #define GTR_IS_OPEN_TRAN_PANEL_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_OPEN_TRAN_PANEL))
 #define GTR_OPEN_TRAN_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_OPEN_TRAN_PANEL, GtranslatorOpenTranPanelClass))
-
 /* Gconf keys */
 #define OPEN_TRAN_BASE_KEY "/apps/gtranslator/plugins/open-tran"
 #define SEARCH_CODE_KEY OPEN_TRAN_BASE_KEY "/search_code"
 #define OWN_CODE_KEY OPEN_TRAN_BASE_KEY "/own_code"
-
 /* Private structure type */
-typedef struct _GtranslatorOpenTranPanelPrivate	GtranslatorOpenTranPanelPrivate;
+typedef struct _GtranslatorOpenTranPanelPrivate
+  GtranslatorOpenTranPanelPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorOpenTranPanel		GtranslatorOpenTranPanel;
+typedef struct _GtranslatorOpenTranPanel GtranslatorOpenTranPanel;
 
 struct _GtranslatorOpenTranPanel
 {
-	GtkVBox parent_instance;
-	
-	/*< private > */
-	GtranslatorOpenTranPanelPrivate *priv;
+  GtkVBox parent_instance;
+
+  /*< private > */
+  GtranslatorOpenTranPanelPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorOpenTranPanelClass	GtranslatorOpenTranPanelClass;
+typedef struct _GtranslatorOpenTranPanelClass GtranslatorOpenTranPanelClass;
 
 struct _GtranslatorOpenTranPanelClass
 {
-	GtkVBoxClass parent_class;
+  GtkVBoxClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_open_tran_panel_get_type	   (void) G_GNUC_CONST;
-GType		 gtranslator_open_tran_panel_register_type (GTypeModule * module);
-GtkWidget	*gtranslator_open_tran_panel_new	   (GtranslatorWindow *window);
+GType
+gtranslator_open_tran_panel_get_type (void)
+  G_GNUC_CONST;
+     GType gtranslator_open_tran_panel_register_type (GTypeModule * module);
+     GtkWidget *gtranslator_open_tran_panel_new (GtranslatorWindow * window);
 
 G_END_DECLS
-
 #endif /* __OPEN_TRAN_PANEL_H__ */

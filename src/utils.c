@@ -36,52 +36,51 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-static const gchar * badwords[]= 
-{
-	"a",
-	//"all",
-	"an",
-	//"are",
-	//"can",
-	//"for",
-	//"from",
-	"have",
-	//"it",
-	//"may",
-	//"not",
-	"of",
-	//"that",
-	"the",
-	//"this",
-	//"was",
-	"will",
-	//"with",
-	//"you",
-	//"your",
-	NULL
+static const gchar *badwords[] = {
+  "a",
+  //"all",
+  "an",
+  //"are",
+  //"can",
+  //"for",
+  //"from",
+  "have",
+  //"it",
+  //"may",
+  //"not",
+  "of",
+  //"that",
+  "the",
+  //"this",
+  //"was",
+  "will",
+  //"with",
+  //"you",
+  //"your",
+  NULL
 };
 
 static gboolean
-check_good_word (const gchar *word, gchar **badwords)
+check_good_word (const gchar * word, gchar ** badwords)
 {
-	gboolean check = TRUE;
-	gchar *lower = g_utf8_strdown (word, -1);
-	gint i = 0;
-	
-	while (badwords[i] != NULL)
+  gboolean check = TRUE;
+  gchar *lower = g_utf8_strdown (word, -1);
+  gint i = 0;
+
+  while (badwords[i] != NULL)
+    {
+      gchar *lower_collate = g_utf8_collate_key (lower, -1);
+
+      if (strcmp (lower_collate, badwords[i]) == 0)
 	{
-		gchar *lower_collate = g_utf8_collate_key (lower, -1);
-		
-		if (strcmp (lower_collate, badwords[i]) == 0)
-		{
-			check = FALSE;
-			g_free (lower_collate);
-			break;
-		}
-		i++;
-		g_free (lower_collate);
+	  check = FALSE;
+	  g_free (lower_collate);
+	  break;
 	}
-	return check;
+      i++;
+      g_free (lower_collate);
+    }
+  return check;
 }
 
 /**
@@ -93,84 +92,80 @@ check_good_word (const gchar *word, gchar **badwords)
  * Returns: an array of words of the processed text
  */
 gchar **
-gtranslator_utils_split_string_in_words (const gchar *string)
+gtranslator_utils_split_string_in_words (const gchar * string)
 {
-	PangoLanguage *lang = pango_language_from_string ("en");
-	PangoLogAttr *attrs;
-	GPtrArray *array;
-	gint char_len;
-	gint i = 0;
-	gchar *s;
-	static gchar **badwords_collate = NULL;
-	
-	if (badwords_collate == NULL)
+  PangoLanguage *lang = pango_language_from_string ("en");
+  PangoLogAttr *attrs;
+  GPtrArray *array;
+  gint char_len;
+  gint i = 0;
+  gchar *s;
+  static gchar **badwords_collate = NULL;
+
+  if (badwords_collate == NULL)
+    {
+      gint words_size = g_strv_length ((gchar **) badwords);
+      gint x = 0;
+
+      badwords_collate = g_new0 (gchar *, words_size + 1);
+
+      while (badwords[x] != NULL)
 	{
-		gint words_size = g_strv_length ((gchar **)badwords);
-		gint x = 0;
-		
-		badwords_collate = g_new0 (gchar *, words_size + 1);
-		
-		while (badwords[x] != NULL)
-		{
-			badwords_collate[x] = g_utf8_collate_key (badwords[x], -1);
-			x++;
-		}
-		badwords_collate[x] = NULL;
+	  badwords_collate[x] = g_utf8_collate_key (badwords[x], -1);
+	  x++;
+	}
+      badwords_collate[x] = NULL;
+    }
+
+  char_len = g_utf8_strlen (string, -1);
+  attrs = g_new (PangoLogAttr, char_len + 1);
+
+  pango_get_log_attrs (string,
+		       strlen (string), -1, lang, attrs, char_len + 1);
+
+  array = g_ptr_array_new ();
+
+  s = (gchar *) string;
+  while (i <= char_len)
+    {
+      gchar *start, *end;
+
+      if (attrs[i].is_word_start)
+	start = s;
+      if (attrs[i].is_word_end)
+	{
+	  gchar *word;
+
+	  end = s;
+	  word = g_strndup (start, end - start);
+
+	  if (check_good_word (word, badwords_collate))
+	    g_ptr_array_add (array, word);
 	}
 
-	char_len = g_utf8_strlen (string, -1);
-	attrs = g_new (PangoLogAttr, char_len + 1);
-	
-	pango_get_log_attrs (string,
-			     strlen (string),
-			     -1,
-			     lang,
-			     attrs,
-			     char_len + 1);
+      i++;
+      s = g_utf8_next_char (s);
+    }
 
-	array = g_ptr_array_new ();
-	
-	s = (gchar *)string;
-	while (i <= char_len)
-	{
-		gchar *start, *end;
-		
-		if (attrs[i].is_word_start)
-			start = s;
-		if (attrs[i].is_word_end)
-		{
-			gchar *word;
-			
-			end = s;
-			word = g_strndup (start, end - start);
-			
-			if (check_good_word (word, badwords_collate))
-				g_ptr_array_add (array, word);
-		}
+  g_free (attrs);
+  g_ptr_array_add (array, NULL);
 
-		i++;
-		s = g_utf8_next_char (s);
-	}
-	
-	g_free (attrs);
-	g_ptr_array_add (array, NULL);
-	
-	return (gchar **)g_ptr_array_free (array, FALSE);
+  return (gchar **) g_ptr_array_free (array, FALSE);
 }
 
-xmlDocPtr 
-gtranslator_xml_new_doc (const gchar *name) 
+xmlDocPtr
+gtranslator_xml_new_doc (const gchar * name)
 {
-	xmlNodePtr root;
-	xmlDocPtr doc;
-	doc = xmlNewDoc ("1.0");
-	root = xmlNewDocNode (doc, NULL, name, NULL);
-	xmlDocSetRootElement (doc, root);
-	return doc;
+  xmlNodePtr root;
+  xmlDocPtr doc;
+  doc = xmlNewDoc ("1.0");
+  root = xmlNewDocNode (doc, NULL, name, NULL);
+  xmlDocSetRootElement (doc, root);
+  return doc;
 }
 
-xmlDocPtr 
-gtranslator_xml_open_file (const gchar *filename) 
+xmlDocPtr
+gtranslator_xml_open_file (const gchar * filename)
 {
   xmlDocPtr doc;
   g_return_val_if_fail (filename != NULL, NULL);
@@ -188,17 +183,17 @@ gtranslator_xml_open_file (const gchar *filename)
  * Returns: a new #GtkButton
  */
 GtkWidget *
-gtranslator_gtk_button_new_with_stock_icon (const gchar *label,
-				      const gchar *stock_id)
+gtranslator_gtk_button_new_with_stock_icon (const gchar * label,
+					    const gchar * stock_id)
 {
-	GtkWidget *button;
+  GtkWidget *button;
 
-	button = gtk_button_new_with_mnemonic (label);
-	gtk_button_set_image (GTK_BUTTON (button),
-			      gtk_image_new_from_stock (stock_id,
-							GTK_ICON_SIZE_BUTTON));
+  button = gtk_button_new_with_mnemonic (label);
+  gtk_button_set_image (GTK_BUTTON (button),
+			gtk_image_new_from_stock (stock_id,
+						  GTK_ICON_SIZE_BUTTON));
 
-        return button;
+  return button;
 }
 
 /**
@@ -212,30 +207,30 @@ gtranslator_gtk_button_new_with_stock_icon (const gchar *label,
  * It returns the position to popup a menu in a specific widget.
  */
 void
-gtranslator_utils_menu_position_under_widget (GtkMenu  *menu,
-					      gint     *x,
-					      gint     *y,
-					      gboolean *push_in,
-					      gpointer  user_data)
+gtranslator_utils_menu_position_under_widget (GtkMenu * menu,
+					      gint * x,
+					      gint * y,
+					      gboolean * push_in,
+					      gpointer user_data)
 {
-	GtkWidget *w = GTK_WIDGET (user_data);
-	GtkRequisition requisition;
+  GtkWidget *w = GTK_WIDGET (user_data);
+  GtkRequisition requisition;
 
-	gdk_window_get_origin (w->window, x, y);
-	gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
+  gdk_window_get_origin (w->window, x, y);
+  gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
 
-	if (gtk_widget_get_direction (w) == GTK_TEXT_DIR_RTL)
-	{
-		*x += w->allocation.x + w->allocation.width - requisition.width;
-	}
-	else
-	{
-		*x += w->allocation.x;
-	}
+  if (gtk_widget_get_direction (w) == GTK_TEXT_DIR_RTL)
+    {
+      *x += w->allocation.x + w->allocation.width - requisition.width;
+    }
+  else
+    {
+      *x += w->allocation.x;
+    }
 
-	*y += w->allocation.y + w->allocation.height;
+  *y += w->allocation.y + w->allocation.height;
 
-	*push_in = TRUE;
+  *push_in = TRUE;
 }
 
 /**
@@ -249,81 +244,78 @@ gtranslator_utils_menu_position_under_widget (GtkMenu  *menu,
  * It returns the position to popup a menu in a TreeView.
  */
 void
-gtranslator_utils_menu_position_under_tree_view (GtkMenu  *menu,
-						 gint     *x,
-						 gint     *y,
-						 gboolean *push_in,
-						 gpointer  user_data)
+gtranslator_utils_menu_position_under_tree_view (GtkMenu * menu,
+						 gint * x,
+						 gint * y,
+						 gboolean * push_in,
+						 gpointer user_data)
 {
-	GtkTreeView *tree = GTK_TREE_VIEW (user_data);
-	GtkTreeModel *model;
-	GtkTreeSelection *selection;
-	GtkTreeIter iter;
-	
-	model = gtk_tree_view_get_model (tree);
-	g_return_if_fail (model != NULL);
+  GtkTreeView *tree = GTK_TREE_VIEW (user_data);
+  GtkTreeModel *model;
+  GtkTreeSelection *selection;
+  GtkTreeIter iter;
 
-	selection = gtk_tree_view_get_selection (tree);
-	g_return_if_fail (selection != NULL);
+  model = gtk_tree_view_get_model (tree);
+  g_return_if_fail (model != NULL);
 
-	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+  selection = gtk_tree_view_get_selection (tree);
+  g_return_if_fail (selection != NULL);
+
+  if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+    {
+      GtkTreePath *path;
+      GdkRectangle rect;
+
+      gdk_window_get_origin (GTK_WIDGET (tree)->window, x, y);
+
+      path = gtk_tree_model_get_path (model, &iter);
+      gtk_tree_view_get_cell_area (tree, path, gtk_tree_view_get_column (tree, 0),	/* FIXME 0 for RTL ? */
+				   &rect);
+      gtk_tree_path_free (path);
+
+      *x += rect.x;
+      *y += rect.y + rect.height;
+
+      if (gtk_widget_get_direction (GTK_WIDGET (tree)) == GTK_TEXT_DIR_RTL)
 	{
-		GtkTreePath *path;
-		GdkRectangle rect;
-
-		gdk_window_get_origin (GTK_WIDGET (tree)->window, x, y);
-			
-		path = gtk_tree_model_get_path (model, &iter);
-		gtk_tree_view_get_cell_area (tree, path,
-					     gtk_tree_view_get_column (tree, 0), /* FIXME 0 for RTL ? */
-					     &rect);
-		gtk_tree_path_free (path);
-		
-		*x += rect.x;
-		*y += rect.y + rect.height;
-		
-		if (gtk_widget_get_direction (GTK_WIDGET (tree)) == GTK_TEXT_DIR_RTL)
-		{
-			GtkRequisition requisition;
-			gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
-			*x += rect.width - requisition.width;
-		}
+	  GtkRequisition requisition;
+	  gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
+	  *x += rect.width - requisition.width;
 	}
-	else
-	{
-		/* no selection -> regular "under widget" positioning */
-		gtranslator_utils_menu_position_under_widget (menu,
-							x, y, push_in,
-							tree);
-	}
+    }
+  else
+    {
+      /* no selection -> regular "under widget" positioning */
+      gtranslator_utils_menu_position_under_widget (menu,
+						    x, y, push_in, tree);
+    }
 }
 
 static GtkWidget *
-handle_builder_error (const gchar *message,
-		      ...)
+handle_builder_error (const gchar * message, ...)
 {
-	GtkWidget *label;
-	gchar *msg;
-	gchar *msg_plain;
-	va_list args;
+  GtkWidget *label;
+  gchar *msg;
+  gchar *msg_plain;
+  va_list args;
 
-	va_start (args, message);
-	msg_plain = g_strdup_vprintf (message, args);
+  va_start (args, message);
+  msg_plain = g_strdup_vprintf (message, args);
 
-	msg = g_strconcat ("<span size=\"large\" weight=\"bold\">",
-			msg_plain, "</span>\n\n",
-			_("Please check your installation."), NULL);
-	label = gtk_label_new (msg);
+  msg = g_strconcat ("<span size=\"large\" weight=\"bold\">",
+		     msg_plain, "</span>\n\n",
+		     _("Please check your installation."), NULL);
+  label = gtk_label_new (msg);
 
-	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+  gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
 
-	g_free (msg_plain);
-	g_free (msg);
+  g_free (msg_plain);
+  g_free (msg);
 
-	gtk_misc_set_padding (GTK_MISC (label), 5, 5);
+  gtk_misc_set_padding (GTK_MISC (label), 5, 5);
 
-	return label;
+  return label;
 }
 
 /**
@@ -343,144 +335,143 @@ handle_builder_error (const gchar *message,
  * Returns FALSE if an error occurs, TRUE on success.
  */
 gboolean
-gtranslator_utils_get_ui_objects (const gchar  *filename,
-				  gchar       **root_objects,
-				  GtkWidget   **error_widget,
-				  const gchar  *object_name,
-				  ...)
+gtranslator_utils_get_ui_objects (const gchar * filename,
+				  gchar ** root_objects,
+				  GtkWidget ** error_widget,
+				  const gchar * object_name, ...)
 {
-	GtkBuilder *builder;
-	va_list args;
-	const gchar *name;
-	GError *error = NULL;
-	gchar *filename_markup;
-	gboolean ret = TRUE;
+  GtkBuilder *builder;
+  va_list args;
+  const gchar *name;
+  GError *error = NULL;
+  gchar *filename_markup;
+  gboolean ret = TRUE;
 
-	g_return_val_if_fail (filename != NULL, FALSE);
-	g_return_val_if_fail (error_widget != NULL, FALSE);
-	g_return_val_if_fail (object_name != NULL, FALSE);
+  g_return_val_if_fail (filename != NULL, FALSE);
+  g_return_val_if_fail (error_widget != NULL, FALSE);
+  g_return_val_if_fail (object_name != NULL, FALSE);
 
-	filename_markup = g_markup_printf_escaped ("<i>%s</i>", filename);
-	*error_widget = NULL;
+  filename_markup = g_markup_printf_escaped ("<i>%s</i>", filename);
+  *error_widget = NULL;
 
-	builder = gtk_builder_new ();
-	
-	if (root_objects != NULL)
-		gtk_builder_add_objects_from_file (builder, 
-						   filename, 
-						   root_objects, 
-						   &error);
-	else
-		gtk_builder_add_from_file (builder,
-					   filename,
-					   &error);
+  builder = gtk_builder_new ();
 
-	if (error != NULL)
+  if (root_objects != NULL)
+    gtk_builder_add_objects_from_file (builder,
+				       filename, root_objects, &error);
+  else
+    gtk_builder_add_from_file (builder, filename, &error);
+
+  if (error != NULL)
+    {
+      *error_widget =
+	handle_builder_error (_("Unable to open ui file %s. Error: %s"),
+			      filename_markup, error->message);
+      g_error_free (error);
+      g_free (filename_markup);
+
+      return FALSE;
+    }
+
+  va_start (args, object_name);
+  for (name = object_name; name; name = va_arg (args, const gchar *))
+    {
+      GObject **gobj;
+
+      gobj = va_arg (args, GObject **);
+      *gobj = gtk_builder_get_object (builder, name);
+
+      if (!*gobj)
 	{
-		*error_widget = handle_builder_error (_("Unable to open ui file %s. Error: %s"),
-						      filename_markup,
-						      error->message);
-		g_error_free (error);
-		g_free (filename_markup);
-
-		return FALSE;
+	  *error_widget =
+	    handle_builder_error (_
+				  ("Unable to find the object '%s' inside file %s."),
+				  name, filename_markup), ret = FALSE;
+	  break;
 	}
 
-	va_start (args, object_name);
-	for (name = object_name; name; name = va_arg (args, const gchar *) )
+      /* we return a new ref for the root objects,
+       * the others are already reffed by their parent root object */
+      if (root_objects != NULL)
 	{
-		GObject **gobj;
+	  gint i;
 
-		gobj = va_arg (args, GObject **);
-		*gobj = gtk_builder_get_object (builder, name);
-
-		if (!*gobj)
+	  for (i = 0; root_objects[i] != NULL; ++i)
+	    {
+	      if ((strcmp (name, root_objects[i]) == 0))
 		{
-			*error_widget = handle_builder_error (_("Unable to find the object '%s' inside file %s."), 
-							      name, 
-							      filename_markup),
-			ret = FALSE;
-			break;
+		  g_object_ref (*gobj);
 		}
-
-		/* we return a new ref for the root objects,
-		 * the others are already reffed by their parent root object */
-		if (root_objects != NULL)
-		{
-			gint i;
-
-			for (i = 0; root_objects[i] != NULL; ++i)
-			{
-				if ((strcmp (name, root_objects[i]) == 0))
-				{
-					g_object_ref (*gobj);
-				}
-			}
-		}
+	    }
 	}
-	va_end (args);
+    }
+  va_end (args);
 
-	g_free (filename_markup);
-	g_object_unref (builder);
+  g_free (filename_markup);
+  g_object_unref (builder);
 
-	return ret;
+  return ret;
 }
 
 static gboolean
 is_valid_scheme_character (gchar c)
 {
-	return g_ascii_isalnum (c) || c == '+' || c == '-' || c == '.';
+  return g_ascii_isalnum (c) || c == '+' || c == '-' || c == '.';
 }
 
 static gboolean
-has_valid_scheme (const gchar *uri)
+has_valid_scheme (const gchar * uri)
 {
-	const gchar *p;
+  const gchar *p;
 
-	p = uri;
+  p = uri;
 
-	if (!is_valid_scheme_character (*p)) {
-		return FALSE;
-	}
+  if (!is_valid_scheme_character (*p))
+    {
+      return FALSE;
+    }
 
-	do {
-		p++;
-	} while (is_valid_scheme_character (*p));
+  do
+    {
+      p++;
+    }
+  while (is_valid_scheme_character (*p));
 
-	return *p == ':';
+  return *p == ':';
 }
 
 gboolean
-gtranslator_utils_is_valid_uri (const gchar *uri)
+gtranslator_utils_is_valid_uri (const gchar * uri)
 {
-	const guchar *p;
+  const guchar *p;
 
-	if (uri == NULL)
-		return FALSE;
+  if (uri == NULL)
+    return FALSE;
 
-	if (!has_valid_scheme (uri))
-		return FALSE;
+  if (!has_valid_scheme (uri))
+    return FALSE;
 
-	/* We expect to have a fully valid set of characters */
-	for (p = (const guchar *)uri; *p; p++) {
-		if (*p == '%')
-		{
-			++p;
-			if (!g_ascii_isxdigit (*p))
-				return FALSE;
+  /* We expect to have a fully valid set of characters */
+  for (p = (const guchar *) uri; *p; p++)
+    {
+      if (*p == '%')
+	{
+	  ++p;
+	  if (!g_ascii_isxdigit (*p))
+	    return FALSE;
 
-			++p;		
-			if (!g_ascii_isxdigit (*p))
-				return FALSE;
-		}
-		else
-		{
-			if (*p <= 32 || *p >= 128)
-				return FALSE;
-		}
+	  ++p;
+	  if (!g_ascii_isxdigit (*p))
+	    return FALSE;
 	}
+      else
+	{
+	  if (*p <= 32 || *p >= 128)
+	    return FALSE;
+	}
+    }
 
-	return TRUE;
+  return TRUE;
 }
 
 /**
@@ -494,198 +485,196 @@ gtranslator_utils_is_valid_uri (const gchar *uri)
  *		 string array is no longer used
  */
 GSList *
-gtranslator_utils_drop_get_locations (GtkSelectionData *selection_data)
+gtranslator_utils_drop_get_locations (GtkSelectionData * selection_data)
 {
-	gchar **uris;
-	gint i;
-	GSList *locations = NULL;
+  gchar **uris;
+  gint i;
+  GSList *locations = NULL;
 
-	uris = g_uri_list_extract_uris ((gchar *) selection_data->data);
+  uris = g_uri_list_extract_uris ((gchar *) selection_data->data);
 
-	for (i = 0; uris[i] != NULL; i++)
+  for (i = 0; uris[i] != NULL; i++)
+    {
+      GFile *file;
+      /* Silently ignore malformed URI/filename */
+      if (gtranslator_utils_is_valid_uri (uris[i]))
 	{
-		GFile *file;
-		/* Silently ignore malformed URI/filename */
-		if (gtranslator_utils_is_valid_uri (uris[i]))
-		{
-			file = g_file_new_for_uri (uris[i]);
-			locations = g_slist_prepend (locations, file);
-		}
+	  file = g_file_new_for_uri (uris[i]);
+	  locations = g_slist_prepend (locations, file);
 	}
+    }
 
-	return locations;
+  return locations;
 }
 
 gchar *
-gtranslator_utils_escape_search_text (const gchar* text)
+gtranslator_utils_escape_search_text (const gchar * text)
 {
-	GString *str;
-	gint length;
-	const gchar *p;
- 	const gchar *end;
+  GString *str;
+  gint length;
+  const gchar *p;
+  const gchar *end;
 
-	if (text == NULL)
-		return NULL;
+  if (text == NULL)
+    return NULL;
 
-    	length = strlen (text);
+  length = strlen (text);
 
-	/* no escape when typing.
-	 * The short circuit works only for ascii, but we only
-	 * care about not escaping a single '\' */
-	if (length == 1)
-		return g_strdup (text);
+  /* no escape when typing.
+   * The short circuit works only for ascii, but we only
+   * care about not escaping a single '\' */
+  if (length == 1)
+    return g_strdup (text);
 
-	str = g_string_new ("");
+  str = g_string_new ("");
 
-	p = text;
-  	end = text + length;
+  p = text;
+  end = text + length;
 
-  	while (p != end)
-    	{
-      		const gchar *next;
-      		next = g_utf8_next_char (p);
+  while (p != end)
+    {
+      const gchar *next;
+      next = g_utf8_next_char (p);
 
-		switch (*p)
-        	{
-       			case '\n':
-          			g_string_append (str, "\\n");
-          			break;
-			case '\r':
-          			g_string_append (str, "\\r");
-          			break;
-			case '\t':
-          			g_string_append (str, "\\t");
-          			break;
-			case '\\':
-          			g_string_append (str, "\\\\");
-          			break;
-        		default:
-          			g_string_append_len (str, p, next - p);
-          			break;
-        	}
+      switch (*p)
+	{
+	case '\n':
+	  g_string_append (str, "\\n");
+	  break;
+	case '\r':
+	  g_string_append (str, "\\r");
+	  break;
+	case '\t':
+	  g_string_append (str, "\\t");
+	  break;
+	case '\\':
+	  g_string_append (str, "\\\\");
+	  break;
+	default:
+	  g_string_append_len (str, p, next - p);
+	  break;
+	}
 
-      		p = next;
-    	}
+      p = next;
+    }
 
-	return g_string_free (str, FALSE);
+  return g_string_free (str, FALSE);
 }
 
 gchar *
-gtranslator_utils_unescape_search_text (const gchar *text)
+gtranslator_utils_unescape_search_text (const gchar * text)
 {
-	GString *str;
-	gint length;
-	gboolean drop_prev = FALSE;
-	const gchar *cur;
-	const gchar *end;
-	const gchar *prev;
-	
-	if (text == NULL)
-		return NULL;
+  GString *str;
+  gint length;
+  gboolean drop_prev = FALSE;
+  const gchar *cur;
+  const gchar *end;
+  const gchar *prev;
 
-	length = strlen (text);
+  if (text == NULL)
+    return NULL;
 
-	str = g_string_new ("");
+  length = strlen (text);
 
-	cur = text;
-	end = text + length;
-	prev = NULL;
-	
-	while (cur != end) 
+  str = g_string_new ("");
+
+  cur = text;
+  end = text + length;
+  prev = NULL;
+
+  while (cur != end)
+    {
+      const gchar *next;
+      next = g_utf8_next_char (cur);
+
+      if (prev && (*prev == '\\'))
 	{
-		const gchar *next;
-		next = g_utf8_next_char (cur);
-
-		if (prev && (*prev == '\\')) 
-		{
-			switch (*cur) 
-			{
-				case 'n':
-					str = g_string_append (str, "\n");
-				break;
-				case 'r':
-					str = g_string_append (str, "\r");
-				break;
-				case 't':
-					str = g_string_append (str, "\t");
-				break;
-				case '\\':
-					str = g_string_append (str, "\\");
-					drop_prev = TRUE;
-				break;
-				default:
-					str = g_string_append (str, "\\");
-					str = g_string_append_len (str, cur, next - cur);
-				break;
-			}
-		} 
-		else if (*cur != '\\') 
-		{
-			str = g_string_append_len (str, cur, next - cur);
-		} 
-		else if ((next == end) && (*cur == '\\')) 
-		{
-			str = g_string_append (str, "\\");
-		}
-		
-		if (!drop_prev)
-		{
-			prev = cur;
-		}
-		else 
-		{
-			prev = NULL;
-			drop_prev = FALSE;
-		}
-
-		cur = next;
+	  switch (*cur)
+	    {
+	    case 'n':
+	      str = g_string_append (str, "\n");
+	      break;
+	    case 'r':
+	      str = g_string_append (str, "\r");
+	      break;
+	    case 't':
+	      str = g_string_append (str, "\t");
+	      break;
+	    case '\\':
+	      str = g_string_append (str, "\\");
+	      drop_prev = TRUE;
+	      break;
+	    default:
+	      str = g_string_append (str, "\\");
+	      str = g_string_append_len (str, cur, next - cur);
+	      break;
+	    }
+	}
+      else if (*cur != '\\')
+	{
+	  str = g_string_append_len (str, cur, next - cur);
+	}
+      else if ((next == end) && (*cur == '\\'))
+	{
+	  str = g_string_append (str, "\\");
 	}
 
-	return g_string_free (str, FALSE);
+      if (!drop_prev)
+	{
+	  prev = cur;
+	}
+      else
+	{
+	  prev = NULL;
+	  drop_prev = FALSE;
+	}
+
+      cur = next;
+    }
+
+  return g_string_free (str, FALSE);
 }
 
 /*
  * n: len of the string in bytes
  */
-gboolean 
-g_utf8_caselessnmatch (const gchar *s1,
-		       const gchar *s2,
-		       gssize n1,
-		       gssize n2)
+gboolean
+g_utf8_caselessnmatch (const gchar * s1,
+		       const gchar * s2, gssize n1, gssize n2)
 {
-	gchar *casefold;
-	gchar *normalized_s1;
-      	gchar *normalized_s2;
-	gint len_s1;
-	gint len_s2;
-	gboolean ret = FALSE;
+  gchar *casefold;
+  gchar *normalized_s1;
+  gchar *normalized_s2;
+  gint len_s1;
+  gint len_s2;
+  gboolean ret = FALSE;
 
-	g_return_val_if_fail (s1 != NULL, FALSE);
-	g_return_val_if_fail (s2 != NULL, FALSE);
-	g_return_val_if_fail (n1 > 0, FALSE);
-	g_return_val_if_fail (n2 > 0, FALSE);
+  g_return_val_if_fail (s1 != NULL, FALSE);
+  g_return_val_if_fail (s2 != NULL, FALSE);
+  g_return_val_if_fail (n1 > 0, FALSE);
+  g_return_val_if_fail (n2 > 0, FALSE);
 
-	casefold = g_utf8_casefold (s1, n1);
-	normalized_s1 = g_utf8_normalize (casefold, -1, G_NORMALIZE_NFD);
-	g_free (casefold);
+  casefold = g_utf8_casefold (s1, n1);
+  normalized_s1 = g_utf8_normalize (casefold, -1, G_NORMALIZE_NFD);
+  g_free (casefold);
 
-	casefold = g_utf8_casefold (s2, n2);
-	normalized_s2 = g_utf8_normalize (casefold, -1, G_NORMALIZE_NFD);
-	g_free (casefold);
+  casefold = g_utf8_casefold (s2, n2);
+  normalized_s2 = g_utf8_normalize (casefold, -1, G_NORMALIZE_NFD);
+  g_free (casefold);
 
-	len_s1 = strlen (normalized_s1);
-	len_s2 = strlen (normalized_s2);
+  len_s1 = strlen (normalized_s1);
+  len_s2 = strlen (normalized_s2);
 
-	if (len_s1 < len_s2)
-		goto finally_2;
+  if (len_s1 < len_s2)
+    goto finally_2;
 
-	ret = (strncmp (normalized_s1, normalized_s2, len_s2) == 0);
-	
+  ret = (strncmp (normalized_s1, normalized_s2, len_s2) == 0);
+
 finally_2:
-	g_free (normalized_s1);
-	g_free (normalized_s2);	
+  g_free (normalized_s1);
+  g_free (normalized_s2);
 
-	return ret;
+  return ret;
 }
 
 /**
@@ -697,29 +686,26 @@ finally_2:
  * Shows the corresponding @url in the default browser.
  */
 void
-gtranslator_utils_activate_url (GtkAboutDialog *dialog,
-				const gchar *url,
-				gpointer data)
+gtranslator_utils_activate_url (GtkAboutDialog * dialog,
+				const gchar * url, gpointer data)
 {
-	//FIXME: gtk_url_show deprecates this func.
-	gchar *open[3];
+  //FIXME: gtk_url_show deprecates this func.
+  gchar *open[3];
 
-	if (g_find_program_in_path ("xdg-open"))
-	{
-		open[0] = "xdg-open";
-	}
-	else return;
-	
-	open[1] = (gchar *)url;
-	open[2] = NULL;
-					
-	gdk_spawn_on_screen (gdk_screen_get_default (),
-			     NULL,
-			     open,
-			     NULL,
-			     G_SPAWN_SEARCH_PATH,
-			     NULL,
-			     NULL, NULL, NULL);
+  if (g_find_program_in_path ("xdg-open"))
+    {
+      open[0] = "xdg-open";
+    }
+  else
+    return;
+
+  open[1] = (gchar *) url;
+  open[2] = NULL;
+
+  gdk_spawn_on_screen (gdk_screen_get_default (),
+		       NULL,
+		       open,
+		       NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
 }
 
 /**
@@ -731,29 +717,26 @@ gtranslator_utils_activate_url (GtkAboutDialog *dialog,
  * Shows the corresponding @email in the default mailer.
  */
 void
-gtranslator_utils_activate_email (GtkAboutDialog *dialog,
-				  const gchar *email,
-				  gpointer data)
+gtranslator_utils_activate_email (GtkAboutDialog * dialog,
+				  const gchar * email, gpointer data)
 {
-	//FIXME: gtk_url_show deprecates this func.
-	gchar *open[3];
+  //FIXME: gtk_url_show deprecates this func.
+  gchar *open[3];
 
-	if (g_find_program_in_path ("xdg-email"))
-	{
-		open[0] = "xdg-email";
-	}
-	else return;
-	
-	open[1] = (gchar *)email;
-	open[2] = NULL;
-					
-	gdk_spawn_on_screen (gdk_screen_get_default (),
-			     NULL,
-			     open,
-			     NULL,
-			     G_SPAWN_SEARCH_PATH,
-			     NULL,
-			     NULL, NULL, NULL);
+  if (g_find_program_in_path ("xdg-email"))
+    {
+      open[0] = "xdg-email";
+    }
+  else
+    return;
+
+  open[1] = (gchar *) email;
+  open[2] = NULL;
+
+  gdk_spawn_on_screen (gdk_screen_get_default (),
+		       NULL,
+		       open,
+		       NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
 }
 
 /**
@@ -765,92 +748,91 @@ gtranslator_utils_activate_email (GtkAboutDialog *dialog,
  * Shows the help for an specific document in the default help browser.
  */
 void
-gtranslator_utils_help_display (GtkWindow   *parent,
-				const gchar *doc_id,
-				const gchar *file_name)
+gtranslator_utils_help_display (GtkWindow * parent,
+				const gchar * doc_id, const gchar * file_name)
 {
 
-	GError *error = NULL;
-	GdkScreen *screen;
-	gchar *command;
-	const gchar *lang;
-	const gchar * const *langs;
-	gchar *uri = NULL;
-	gchar *path;
-	gint i;
+  GError *error = NULL;
+  GdkScreen *screen;
+  gchar *command;
+  const gchar *lang;
+  const gchar *const *langs;
+  gchar *uri = NULL;
+  gchar *path;
+  gint i;
 
 
-	/* FIXME: How to display help on windows. Gedit opens a browser and displays
-	   a url with the contents of the help 
-	if (uri == NULL)
+  /* FIXME: How to display help on windows. Gedit opens a browser and displays
+     a url with the contents of the help 
+     if (uri == NULL)
+     {
+     GtkWidget *dialog;
+     dialog = gtk_message_dialog_new (parent,
+     GTK_DIALOG_DESTROY_WITH_PARENT,
+     GTK_MESSAGE_ERROR,
+     GTK_BUTTONS_CLOSE,
+     _("Sorry, Gtranslator for windows is unable to display help yet."));
+     gtk_dialog_run (GTK_DIALOG (dialog));
+     gtk_widget_destroy (dialog);
+
+     return;
+     } End of FIXME: How to display help on windows. */
+
+
+  g_return_if_fail (file_name != NULL);
+
+  langs = g_get_language_names ();
+  for (i = 0; langs[i]; i++)
+    {
+      lang = langs[i];
+      if (strchr (lang, '.'))
+	continue;
+
+      path = gtranslator_utils_get_datadir ();
+      uri = g_build_filename (path, "/gnome/help/", doc_id,
+			      lang, file_name, NULL);
+      g_free (path);
+
+      if (g_file_test (uri, G_FILE_TEST_EXISTS))
 	{
-		GtkWidget *dialog;
-		dialog = gtk_message_dialog_new (parent,
-						 GTK_DIALOG_DESTROY_WITH_PARENT,
-						 GTK_MESSAGE_ERROR,
-						 GTK_BUTTONS_CLOSE,
-						 _("Sorry, Gtranslator for windows is unable to display help yet."));
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
-		
-		return;
-	} End of FIXME: How to display help on windows.*/
-	
-	
-	g_return_if_fail (file_name != NULL);
-
-	langs = g_get_language_names ();
-	for (i = 0; langs[i]; i++)
-	{
-		lang = langs[i];
-		if (strchr (lang, '.'))
-			continue;
-
-		path = gtranslator_utils_get_datadir ();
-		uri = g_build_filename (path, "/gnome/help/", doc_id,
-					lang, file_name, NULL);
-		g_free(path);
-		
-		if (g_file_test (uri, G_FILE_TEST_EXISTS)) {
-			break;
-		}
-		g_free (uri);
-		uri = NULL;
+	  break;
 	}
+      g_free (uri);
+      uri = NULL;
+    }
 
 
-	if (uri == NULL)
-	{
-		GtkWidget *dialog;
-		dialog = gtk_message_dialog_new (parent,
-						 GTK_DIALOG_DESTROY_WITH_PARENT,
-						 GTK_MESSAGE_ERROR,
-						 GTK_BUTTONS_CLOSE,
-						 _("Unable to display help. "
-						 "Please make sure the Gtranslator "
-						 "documentation package is installed."));
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
-		
-		return;
-	}
+  if (uri == NULL)
+    {
+      GtkWidget *dialog;
+      dialog = gtk_message_dialog_new (parent,
+				       GTK_DIALOG_DESTROY_WITH_PARENT,
+				       GTK_MESSAGE_ERROR,
+				       GTK_BUTTONS_CLOSE,
+				       _("Unable to display help. "
+					 "Please make sure the Gtranslator "
+					 "documentation package is installed."));
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
 
-	command = g_strconcat ("gnome-help ghelp://", uri,  NULL);
-	g_free (uri);
+      return;
+    }
 
-	screen = gtk_widget_get_screen (GTK_WIDGET (parent));
-	gdk_spawn_command_line_on_screen (screen, command, &error);
+  command = g_strconcat ("gnome-help ghelp://", uri, NULL);
+  g_free (uri);
+
+  screen = gtk_widget_get_screen (GTK_WIDGET (parent));
+  gdk_spawn_command_line_on_screen (screen, command, &error);
 
 
-	if (error != NULL)
-	{
-		g_warning ("Error executing help application: %s",
-				   error->message);
-		g_error_free (error);
-		
-		return;
-	}
-	g_free (command);
+  if (error != NULL)
+    {
+      g_warning ("Error executing help application: %s", error->message);
+      g_error_free (error);
+
+      return;
+    }
+  g_free (command);
 }
 
 /**
@@ -863,46 +845,47 @@ gtranslator_utils_help_display (GtkWindow   *parent,
 gchar *
 gtranslator_utils_get_user_config_dir (void)
 {
-	return g_build_filename (g_get_user_config_dir (),
-				 "gtranslator",
-				 NULL);
+  return g_build_filename (g_get_user_config_dir (), "gtranslator", NULL);
 }
 
-gchar *gtranslator_utils_get_current_date (void)
+gchar *
+gtranslator_utils_get_current_date (void)
 {
   time_t now;
   struct tm *now_here;
   gchar *date = g_malloc (11);
-  
-  now = time(NULL);
-  now_here = localtime(&now);
-  strftime(date, 11, "%Y-%m-%d", now_here);
+
+  now = time (NULL);
+  now_here = localtime (&now);
+  strftime (date, 11, "%Y-%m-%d", now_here);
 
   return date;
 }
 
-gchar *gtranslator_utils_get_current_time (void)
+gchar *
+gtranslator_utils_get_current_time (void)
 {
   time_t now;
   struct tm *now_here;
   gchar *t = g_malloc (11);
 
-  now = time(NULL);
-  now_here = localtime(&now);
-  strftime(t, 11, "%H:%M%z", now_here);
- 
+  now = time (NULL);
+  now_here = localtime (&now);
+  strftime (t, 11, "%H:%M%z", now_here);
+
   return t;
 }
 
-gchar *gtranslator_utils_get_current_year (void)
+gchar *
+gtranslator_utils_get_current_year (void)
 {
   time_t now;
   struct tm *now_here;
-  gchar *year=g_malloc (5);
+  gchar *year = g_malloc (5);
 
-  now = time(NULL);
-  now_here = localtime(&now);
-  strftime(year, 5, "%Y", now_here);
+  now = time (NULL);
+  now_here = localtime (&now);
+  strftime (year, 5, "%Y", now_here);
 
   return year;
 }
@@ -918,74 +901,76 @@ gchar *gtranslator_utils_get_current_year (void)
  * g_slist_foreach (list, (GFunc)g_object_unref, NULL).
  */
 void
-gtranslator_utils_scan_dir (GFile *dir,
-			    GSList **list,
-			    const gchar *po_name)
+gtranslator_utils_scan_dir (GFile * dir,
+			    GSList ** list, const gchar * po_name)
 {
-	GFileInfo *info;
-	GError *error;
-	GFile *file;
-	GFileEnumerator *enumerator;
+  GFileInfo *info;
+  GError *error;
+  GFile *file;
+  GFileEnumerator *enumerator;
 
-	error = NULL;
-	enumerator = g_file_enumerate_children (dir,
-						G_FILE_ATTRIBUTE_STANDARD_NAME,
-						G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS,
-						NULL,
-						&error);
-	if (enumerator) 
+  error = NULL;
+  enumerator = g_file_enumerate_children (dir,
+					  G_FILE_ATTRIBUTE_STANDARD_NAME,
+					  G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS,
+					  NULL, &error);
+  if (enumerator)
+    {
+      error = NULL;
+
+      while ((info =
+	      g_file_enumerator_next_file (enumerator, NULL, &error)) != NULL)
 	{
-		error = NULL;
-		
-		while ((info = g_file_enumerator_next_file (enumerator, NULL, &error)) != NULL) 
-		{
-			const gchar *name;
-			gchar *filename;
-			
-			name = g_file_info_get_name (info);
-			file = g_file_get_child (dir, name);
+	  const gchar *name;
+	  gchar *filename;
 
-			if (po_name != NULL)
-			{
-				if (g_str_has_suffix (po_name, ".po"))
-					filename = g_strdup (po_name);
-				else 
-					filename = g_strconcat (po_name, ".po", NULL);
-			}
-			else
-				filename = g_strdup (".po");
-			
-			if (g_str_has_suffix (name, filename))
-				*list = g_slist_prepend (*list, file);
-			g_free (filename);
+	  name = g_file_info_get_name (info);
+	  file = g_file_get_child (dir, name);
 
-			gtranslator_utils_scan_dir (file, list, po_name);
-			g_object_unref (info);
-		}
-		g_file_enumerator_close (enumerator, NULL, NULL);
-		g_object_unref (enumerator);
-		
-		if (error)
-		{
-			g_warning ("%s", error->message);
-		}
+	  if (po_name != NULL)
+	    {
+	      if (g_str_has_suffix (po_name, ".po"))
+		filename = g_strdup (po_name);
+	      else
+		filename = g_strconcat (po_name, ".po", NULL);
+	    }
+	  else
+	    filename = g_strdup (".po");
+
+	  if (g_str_has_suffix (name, filename))
+	    *list = g_slist_prepend (*list, file);
+	  g_free (filename);
+
+	  gtranslator_utils_scan_dir (file, list, po_name);
+	  g_object_unref (info);
 	}
+      g_file_enumerator_close (enumerator, NULL, NULL);
+      g_object_unref (enumerator);
+
+      if (error)
+	{
+	  g_warning ("%s", error->message);
+	}
+    }
 }
 
 gchar *
-gtranslator_utils_reduce_path (const gchar *path)
+gtranslator_utils_reduce_path (const gchar * path)
 {
   gchar *new_str;
   gchar **array;
-  
+
   array = g_strsplit (path, "/", -1);
 
-  new_str = g_build_filename (array[1], "/../", array[g_strv_length (array)-1], NULL);
-  
+  new_str =
+    g_build_filename (array[1], "/../", array[g_strv_length (array) - 1],
+		      NULL);
+
   if (strlen (new_str) >= 30)
     {
       g_free (new_str);
-      new_str = g_build_filename ("../", array[g_strv_length (array)-1], NULL);
+      new_str =
+	g_build_filename ("../", array[g_strv_length (array) - 1], NULL);
     }
   return new_str;
 }
@@ -994,43 +979,42 @@ gtranslator_utils_reduce_path (const gchar *path)
  * Doubles underscore to avoid spurious menu accels.
  * Got from gedit
  */
-gchar * 
-gtranslator_utils_escape_underscores (const gchar* text,
-				      gssize       length)
+gchar *
+gtranslator_utils_escape_underscores (const gchar * text, gssize length)
 {
-	GString *str;
-	const gchar *p;
-	const gchar *end;
+  GString *str;
+  const gchar *p;
+  const gchar *end;
 
-	g_return_val_if_fail (text != NULL, NULL);
+  g_return_val_if_fail (text != NULL, NULL);
 
-	if (length < 0)
-		length = strlen (text);
+  if (length < 0)
+    length = strlen (text);
 
-	str = g_string_sized_new (length);
+  str = g_string_sized_new (length);
 
-	p = text;
-	end = text + length;
+  p = text;
+  end = text + length;
 
-	while (p != end)
+  while (p != end)
+    {
+      const gchar *next;
+      next = g_utf8_next_char (p);
+
+      switch (*p)
 	{
-		const gchar *next;
-		next = g_utf8_next_char (p);
-
-		switch (*p)
-		{
-			case '_':
-				g_string_append (str, "__");
-				break;
-			default:
-				g_string_append_len (str, p, next - p);
-				break;
-		}
-
-		p = next;
+	case '_':
+	  g_string_append (str, "__");
+	  break;
+	default:
+	  g_string_append_len (str, p, next - p);
+	  break;
 	}
 
-	return g_string_free (str, FALSE);
+      p = next;
+    }
+
+  return g_string_free (str, FALSE);
 }
 
 /**
@@ -1041,27 +1025,21 @@ gtranslator_utils_escape_underscores (const gchar* text,
  * the pixmaps. If filename is NULL returns the path to the folder PIXMAPSDIR
  */
 gchar *
-gtranslator_utils_get_file_from_pixmapsdir (const gchar *filename)
+gtranslator_utils_get_file_from_pixmapsdir (const gchar * filename)
 {
-	gchar *path;
-	
-#ifndef G_OS_WIN32
-	path = g_build_filename (PIXMAPSDIR,
-				 filename,
-				 NULL);
-#else
-	gchar *win32_dir;
+  gchar *path;
 
-	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
-	path = g_build_filename (win32_dir,
-				 "share",
-				 "pixmaps",
-				 filename,
-				 NULL);
-	g_free (win32_dir);
+#ifndef G_OS_WIN32
+  path = g_build_filename (PIXMAPSDIR, filename, NULL);
+#else
+  gchar *win32_dir;
+
+  win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+  path = g_build_filename (win32_dir, "share", "pixmaps", filename, NULL);
+  g_free (win32_dir);
 #endif
-	
-	return path;
+
+  return path;
 }
 
 
@@ -1074,27 +1052,21 @@ gtranslator_utils_get_file_from_pixmapsdir (const gchar *filename)
  * that contains the data of the package.
  */
 gchar *
-gtranslator_utils_get_file_from_pkgdatadir (const gchar *filename)
+gtranslator_utils_get_file_from_pkgdatadir (const gchar * filename)
 {
-	gchar *path;
-	
-#ifndef G_OS_WIN32
-	path = g_build_filename (PKGDATADIR,
-				 filename,
-				 NULL);
-#else
-	gchar *win32_dir;
+  gchar *path;
 
-	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
-	path = g_build_filename (win32_dir,
-				 "share",
-				 "gtranslator",
-				 filename,
-				 NULL);
-	g_free (win32_dir);
+#ifndef G_OS_WIN32
+  path = g_build_filename (PKGDATADIR, filename, NULL);
+#else
+  gchar *win32_dir;
+
+  win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+  path = g_build_filename (win32_dir, "share", "gtranslator", filename, NULL);
+  g_free (win32_dir);
 #endif
-	
-	return path;
+
+  return path;
 }
 
 
@@ -1107,24 +1079,21 @@ gtranslator_utils_get_file_from_pkgdatadir (const gchar *filename)
 gchar *
 gtranslator_utils_get_datadir (void)
 {
-	gchar *path;
+  gchar *path;
 
 #ifndef G_OS_WIN32
-	path = g_build_filename (DATADIR,
-				 NULL);
+  path = g_build_filename (DATADIR, NULL);
 #else
-	gchar *win32_dir;
-	
-	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+  gchar *win32_dir;
 
-	path = g_build_filename (win32_dir,
-				 "share",
-				 NULL);
-	
-	g_free (win32_dir);
+  win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+
+  path = g_build_filename (win32_dir, "share", NULL);
+
+  g_free (win32_dir);
 #endif
 
-	return path;
+  return path;
 }
 
 /**
@@ -1135,23 +1104,19 @@ gtranslator_utils_get_datadir (void)
 gchar *
 gtranslator_utils_get_win32_plugindir (void)
 {
-	gchar *path;
+  gchar *path;
 
 #ifndef G_OS_WIN32
-	path = NULL;
+  path = NULL;
 #else
-	gchar *win32_dir;
-	
-	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+  gchar *win32_dir;
 
-	path = g_build_filename (win32_dir,
-				 "lib",
-				 "gtranslator",
-				 "plugins",
-				 NULL);
-	
-	g_free (win32_dir);
+  win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+
+  path = g_build_filename (win32_dir, "lib", "gtranslator", "plugins", NULL);
+
+  g_free (win32_dir);
 #endif
 
-	return path;
+  return path;
 }

@@ -34,7 +34,6 @@
 #endif
 
 G_BEGIN_DECLS
-
 /*
  * Type checking and casting macros
  */
@@ -44,46 +43,49 @@ G_BEGIN_DECLS
 #define GTR_IS_CHARMAP_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_CHARMAP_PANEL))
 #define GTR_IS_CHARMAP_PANEL_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_CHARMAP_PANEL))
 #define GTR_CHARMAP_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_CHARMAP_PANEL, GtranslatorCharmapPanelClass))
-
 /* Private structure type */
-typedef struct _GtranslatorCharmapPanelPrivate	GtranslatorCharmapPanelPrivate;
+typedef struct _GtranslatorCharmapPanelPrivate GtranslatorCharmapPanelPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorCharmapPanel		GtranslatorCharmapPanel;
+typedef struct _GtranslatorCharmapPanel GtranslatorCharmapPanel;
 
 struct _GtranslatorCharmapPanel
 {
-	GtkVBox parent_instance;
-	
-	/*< private > */
-	GtranslatorCharmapPanelPrivate *priv;
+  GtkVBox parent_instance;
+
+  /*< private > */
+  GtranslatorCharmapPanelPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorCharmapPanelClass	GtranslatorCharmapPanelClass;
+typedef struct _GtranslatorCharmapPanelClass GtranslatorCharmapPanelClass;
 
 struct _GtranslatorCharmapPanelClass
 {
-	GtkVBoxClass parent_class;
+  GtkVBoxClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType		 gtranslator_charmap_panel_get_type	   (void) G_GNUC_CONST;
-GType		 gtranslator_charmap_panel_register_type (GTypeModule * module);
-GtkWidget	*gtranslator_charmap_panel_new	   (void);
+GType
+gtranslator_charmap_panel_get_type (void)
+  G_GNUC_CONST;
+     GType gtranslator_charmap_panel_register_type (GTypeModule * module);
+     GtkWidget *gtranslator_charmap_panel_new (void);
 
 #ifdef HAVE_GUCHARMAP_2
-GucharmapChartable *gtranslator_charmap_panel_get_chartable (GtranslatorCharmapPanel *panel);
+     GucharmapChartable
+       *gtranslator_charmap_panel_get_chartable (GtranslatorCharmapPanel *
+						 panel);
 #else
-GucharmapTable *gtranslator_charmap_panel_get_table	   (GtranslatorCharmapPanel *panel);
+     GucharmapTable
+       *gtranslator_charmap_panel_get_table (GtranslatorCharmapPanel * panel);
 #endif
 
 G_END_DECLS
-
 #endif /* __CHARMAP_PANEL_H__ */
