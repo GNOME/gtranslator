@@ -283,6 +283,45 @@ po_file_is_empty (po_file_t file)
   return TRUE;
 }
 
+
+/**
+ * is_read_only:
+ * @location: a GFile Object that represents the file to check
+ *
+ * This method is copied from gedit, file gedit-commands-file.c
+ *
+ * Returns: False if file is writeable. True if file doesn't exists, is read-only or read-only attribute can't be check
+ */
+static gboolean
+is_read_only (const gchar *filename)
+{
+  gboolean ret = TRUE; /* default to read only */
+  GFileInfo *info;
+  GFile *location;
+
+  location = g_file_new_for_path (filename);
+  info = g_file_query_info (location,
+			    G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE,
+			    G_FILE_QUERY_INFO_NONE,
+			    NULL,
+			    NULL);
+  g_object_unref (location);
+
+  if (info != NULL)
+    {
+      if (g_file_info_has_attribute (info,
+				     G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE))
+	{
+	  ret = !g_file_info_get_attribute_boolean (info,
+						    G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE);
+	}
+
+      g_object_unref (info);
+    }
+
+  return ret;
+}
+
 /***************************** Public funcs ***********************************/
 
 /**
@@ -841,6 +880,19 @@ gtranslator_po_save_file (GtranslatorPo * po, GError ** error)
       g_free (filename);
       return;
     }
+
+
+  if (is_read_only (filename))
+    {
+      g_set_error (error,
+		   GTR_PO_ERROR,
+		   GTR_PO_ERROR_READONLY,
+		   _("The file %s is read-only, and can not be overwritten"),
+		   filename);
+      g_free (filename);
+      return;
+    }
+
 
   /*
    * Check if the file is right
