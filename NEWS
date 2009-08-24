@@ -1,6 +1,39 @@
 NEWS from gtranslator R 1.9.5 "Heat it!" (2009-04-10):
 -----------------------------------------------------
 
+- Adapted gtranslator in order to work on Windows (by Francisco Puga)
+
+Bugs Fixed:
+
+     * #579775 - Fixed format string attack (Atilla Öntas)
+     * #582430 - Added some header files (Ray Wang Vicent Untz)
+     * #555672 - Fixed CRITICAL: editor_create_item_from_name (Ignacio Casal)
+     * #557096 - Fixed GtkSpinButton problem changing to GtkBuilder
+     * #569061 - Displaying an error message before saving a read only file (Francisco Puga)
+     * #569062 - Use a "standard" tabs menu instead of Go->Next/Prev File (Ignacio Casal)
+     * #569068 - Made more clear the message in the status bar (Ignacio Casal)
+     * #571497 - Fixed crash on first-time startup with po-file as argument (Christian Kirbach)
+     * #575128 - Removed deprecated GTK+ symbols (Thanks to Thomas Andersen)
+     * #579775 - Fixed Format string attack danger (Atilla Ontas)
+     * #582430 - Some of the header files weren't included in the source code (Ray Wang and Vicent Untz)
+     * #583961 - Fixed to build with gdl 2.27.2 (Ignacio Casal)
+     * #584692 - Show the next message of the one you are editing (Ignacio Casal)
+     * #591594 - Fixed problem that made Edit header only made effect when you close gtranslator (Francisco Puga)
+     * #592210 - Removed duplicated define in configure.ac (Jonh Wendell)     
+     * #592214 - Fixed some gcc warnings (Jonh Wendell)
+     * #592215 - Wrong arguments to gtranslator_statusbar_flash_message() (Jonh Wendell)
+     * #592226 - Fixed Error widget built wrongly (Jonh Wendell)
+     * #592227 - Source code did not working due to a wrong widget name (Jonh Wendell)
+     * #569054 - Fixed emty line insertion before translator email in header (Francisco Puga)
+
+Translations:
+	* zh_CN (M Zhang, Ming Yang), es (Jorge González), de (Mario Blättermann), el (Marios Zindilis), fr (Bruno Brouard, Claude Paroz),
+	  se (Daniel Nylander), gl (Francisco Diéguez), ru (Alexandre Prokoudine), ca (David Planella), uk (Maxim V. Dziumanenko), pt (António Lima),
+	  zh_CN (Aron Xu Zhang Miao), el (Marios Zindilis, Thanos Lefteris), ar (Khaled Hosny).
+
+NEWS from gtranslator R 1.9.5 "Heat it!" (2009-04-10):
+-----------------------------------------------------
+
 Bugs Fixed:
 
   * #569174 - Mark file to be saved when create or edit comment

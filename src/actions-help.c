@@ -49,19 +49,34 @@ gtranslator_about_dialog (GtkAction * action, GtranslatorWindow * window)
   gchar *license_trans;
 
   const gchar *authors[] = {
+    N_("Current Maintainers"),
+    "---------------------------------------------------------",
+    "Juan José Sánchez Penas <jjsanchez@igalia.com>",
+    "Pablo Sanxiao <psanxiao@gnome.org>",
+    "",
     N_("Current Developers"),
     "---------------------------------------------------------",
-    "Pablo Sanxiao <psanxiao@gmail.org>",
+    "Pablo Sanxiao <psanxiao@gnome.org>",
     "Ignacio Casal Quinteiro <nacho.resa@gmail.com>",
     "Seán de Búrca <leftmostcat@gmail.com>",
     "",
     N_("Previous Developers"),
     "---------------------------------------------------------",
+    "Fatih Demir <kabalak@kabalak.net> (Founder)",
     "Ross Golder <ross@golder.org>",
-    "Fatih Demir <kabalak@kabalak.net>",
     "Gediminas Paulauskas <menesis@delfi.lt>",
     "Thomas Ziehmer <thomas@kabalak.net>",
     "Peeter Vois <peeter@kabalak.net>",
+    "",
+    N_("Contributors"),
+    "---------------------------------------------------------",
+    "Christian Kirbach <christian.kirbach@googlemail.com>",
+    "Luca Ferreti <elle.uca@libero.it>",
+    "Jordi Mallach <jordi@sindominio.net>",
+    "Jonh Wendell <jwendell@gnome.org>",
+    "Baris Cicek <baris@teamforce.name.tr>",
+    "Francisco Puga <fran.puga@gmail.com>",
+    "Yuri Penkin",
     NULL
   };
   const gchar *documenters[] = {
