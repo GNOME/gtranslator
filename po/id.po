@@ -1,1684 +1,3123 @@
-# 
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Andika Triwidada <andika@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-03 22:56+0200\n"
-"PO-Revision-Date: 2003-06-22 23:24+0700\n"
-"Last-Translator: Mohammad DAMT <mdamt@bisnisweb.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gtranslator&component=general\n"
+"POT-Creation-Date: 2009-08-25 14:49+0000\n"
+"PO-Revision-Date: 2009-08-29 12:30+0700\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: data/desktop/gtranslator.desktop.in.h:1
-msgid "The GNOME translation program"
+#: ../data/desktop/gtranslator.desktop.in.in.h:1
+msgid "Gtranslator PO Editor"
+msgstr "Gtranslator Penyunting PO"
+
+#: ../data/desktop/gtranslator.desktop.in.in.h:2
+msgid "Translate and localize applications and libraries"
+msgstr "Terjemahkan dan lokalisasi aplikasi dan pustaka"
+
+#: ../data/gtranslator.schemas.in.h:1
+msgid "Autosave files"
+msgstr "Simpan sendiri berkas"
+
+#: ../data/gtranslator.schemas.in.h:2
+msgid "Autosave interval"
+msgstr "Selang waktu simpan sendiri"
+
+#: ../data/gtranslator.schemas.in.h:3
+msgid "Check spelling"
+msgstr "Periksa ejaan"
+
+#: ../data/gtranslator.schemas.in.h:4
+msgid "Color scheme"
+msgstr "Skema warna"
+
+#: ../data/gtranslator.schemas.in.h:5
+msgid "Create backup before saving"
+msgstr "Buat cadangan sebelum menyimpan"
+
+#: ../data/gtranslator.schemas.in.h:6
+msgid "Custom font to use for edit fields."
+msgstr "Fonta pilihan untuk dipakai pada bidang sunting."
+
+#: ../data/gtranslator.schemas.in.h:7
+msgid "Delete compiled GMO files"
+msgstr "Hapus berkas GMO hasil kompilasi"
+
+#: ../data/gtranslator.schemas.in.h:8
+msgid "Directory containing PO files to add to the translation memory."
+msgstr "Direktori yang memuat berkas PO untuk ditambah ke ingatan terjemahan."
+
+#: ../data/gtranslator.schemas.in.h:9
+msgid "Editor font"
+msgstr "Fonta penyunting"
+
+#: ../data/gtranslator.schemas.in.h:10
+msgid "Filename to restrict search to"
+msgstr "Nama berkas untuk pembatasan pencarian"
+
+#: ../data/gtranslator.schemas.in.h:11
+msgid ""
+"Filename to which searching of the translation memory should be restricted."
+msgstr "Nama berkas untuk membatasi pencarian atas ingatan terjemahan."
+
+#: ../data/gtranslator.schemas.in.h:12
+msgid "Highlight syntax in edit fields"
+msgstr "Tandai sintaks pada bidang sunting"
+
+#: ../data/gtranslator.schemas.in.h:13
+msgid "If true, apply syntax highlighting to strings in edit fields."
 msgstr ""
+"Bila benar, terapkan penandaan sintaks atas string pada bidang sunting."
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1139
-msgid "gtranslator"
+#: ../data/gtranslator.schemas.in.h:14
+msgid "If true, automatically save files at specified intervals."
+msgstr "Bila benar, otomatis menyimpan pada selang waktu tertentu."
+
+#: ../data/gtranslator.schemas.in.h:15
+msgid "If true, check the spelling of translated messages."
+msgstr "Bila benar, periksa ejaan dari pesan yang diterjemahkan."
+
+#: ../data/gtranslator.schemas.in.h:16
+msgid "If true, create a backup copy of a file before saving it."
 msgstr ""
+"Bila benar, buat salinan cadangan dari suatu berkas sebelum menyimpannya."
 
-#. Translator credits
-#: src/about.c:60
+#: ../data/gtranslator.schemas.in.h:17
+msgid "If true, display whitespace in strings as representative symbols."
+msgstr "Bila benar, tampilkan whitespace dalam string sebagai simbol."
+
+#: ../data/gtranslator.schemas.in.h:18
+msgid ""
+"If true, only include files with a specified filename when searching the "
+"translation memory."
+msgstr ""
+"Bila benar, hanya sertakan berkas dengan nama yang dinyatakan ketika mencari "
+"ingatan terjemahan."
+
+#: ../data/gtranslator.schemas.in.h:19
+msgid ""
+"If true, overwrite the values in the PO header with those in the active "
+"profile."
+msgstr ""
+"Bila benar, timpa nilai-nilai pada header PO dengan nilai dari profil aktif."
+
+#: ../data/gtranslator.schemas.in.h:20
+msgid "If true, remove compiled GMO binary files when saving."
+msgstr "Bila benar, hapus biner GMO hasil kompilasi ketika menyimpan."
+
+#: ../data/gtranslator.schemas.in.h:21
+msgid "If true, remove fuzzy status from translations when they are changed."
+msgstr "Bila benar, hapus status ragu dari terjemahan bila pesan diubah."
+
+#: ../data/gtranslator.schemas.in.h:22
+msgid "If true, use a custom font for edit fields."
+msgstr "Bila benar, gunakan fonta sendiri untuk bidang sunting."
+
+#: ../data/gtranslator.schemas.in.h:23
+msgid ""
+"If true, warn the user when saving a PO translation file containing fuzzy "
+"strings."
+msgstr ""
+"BIla benar, peringatkan pengguna ketika menyimpan berkas terjemahan PO yang "
+"memuat string ragu."
+
+#: ../data/gtranslator.schemas.in.h:24
+msgid "Interval in minutes at which to automatically save files."
+msgstr "Selang waktu dalam menit untuk menyimpan berkas secara otomatis."
+
+#: ../data/gtranslator.schemas.in.h:25
+msgid "Make whitespace visible"
+msgstr "Buat whitespace nampak"
+
+#: ../data/gtranslator.schemas.in.h:26
+msgid ""
+"Maximum difference in length between messages displayed as matches by the "
+"translation memory."
+msgstr ""
+"Perbedaan panjang maksimum antar pesan yang ditampilkan sebagai cocok oleh "
+"ingatan terjemahan."
+
+#: ../data/gtranslator.schemas.in.h:27
+msgid "Maximum difference in message length"
+msgstr "Perbedaan panjang pesan maksimum"
+
+#: ../data/gtranslator.schemas.in.h:28
+msgid "Maximum number of missing words"
+msgstr "Cacah maksimum kata yang hilang"
+
+#: ../data/gtranslator.schemas.in.h:29
+msgid ""
+"Maximum number of words that can be missing from a message displayed as a "
+"match by the translation memory."
+msgstr ""
+"Cacah kata maksimum yang boleh hilang dari pesan yang ditampilkan sebacai "
+"cocok oleh ingatan terjemahan."
+
+#: ../data/gtranslator.schemas.in.h:30
+msgid "Message list sort order"
+msgstr "Pengurutan daftar pesan"
+
+#: ../data/gtranslator.schemas.in.h:31
+msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
+msgstr "Nama dari skema warna gtksourceview untuk penandaan sintaks"
+
+#: ../data/gtranslator.schemas.in.h:32
+msgid "PO directory"
+msgstr "Direktori PO"
+
+#: ../data/gtranslator.schemas.in.h:33
+msgid "Remove fuzzy status when message is changed"
+msgstr "Hapus status ragu bila pesan diubah"
+
+#: ../data/gtranslator.schemas.in.h:34
+msgid "Restrict search by filename"
+msgstr "Batasi pencarian berdasar nama berkas"
+
+#: ../data/gtranslator.schemas.in.h:35
+msgid "Side pane switcher style"
+msgstr "Gaya penukar panel sisi"
+
+#: ../data/gtranslator.schemas.in.h:36
+msgid ""
+"Sort order to use in the message list. Possible values are \"status\", \"id"
+"\", \"original_text\" and \"translated_text\"."
+msgstr ""
+"Pengurutan yang dipakai dalam daftar pesan. Nilai-nilai yang mungkin adalah "
+"\"status\", \"id\", \"original_text\" dan \"translated_text\"."
+
+#: ../data/gtranslator.schemas.in.h:37
+msgid ""
+"Style for switchers in the side pane. Possible values are \"icons\", \"text"
+"\", \"icons_and_text\", \"tabs\" and \"system\"."
+msgstr ""
+"Gaya bagi penukar di panel sisi. Nilai-nilai yang mungkin adalah \"icons\", "
+"\"text\", \"icons_and_text\", \"tabs\", dan \"system\"."
+
+#: ../data/gtranslator.schemas.in.h:38
+msgid "Use custom font"
+msgstr "Gunakan fonta sendiri"
+
+#: ../data/gtranslator.schemas.in.h:39
+msgid "Use profile values for header"
+msgstr "Gunakan nilai-nilai profil bagi header"
+
+#: ../data/gtranslator.schemas.in.h:40
+msgid "Warn if file contains fuzzy translations"
+msgstr "Peringatkan bila berkas memuat terjemahan ragu"
+
+#: ../data/po.lang.h:1
+msgid "Others"
+msgstr "Lainnya"
+
+#: ../data/po.lang.h:2
+msgid "Special variable"
+msgstr "Variabel khusus"
+
+#: ../data/po.lang.h:3
+msgid "Tag"
+msgstr "Tag"
+
+#: ../data/po.lang.h:4
+msgid "gtranslator highlight"
+msgstr "penandaan gtranslator"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:117
+msgid "Message not found"
+msgstr "Pesan tak ditemukan"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:221
+msgid "Open file for alternate language"
+msgstr "Buka berkas bagi bahasa alternatif"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:246
+msgid "File closed"
+msgstr "Berkas ditutup"
+
+#: ../plugins/alternate-language/alternate-language-panel.c:314
+msgid "There isn't any file loaded"
+msgstr "Tidak ada berkas yang dimuat"
+
+#: ../plugins/alternate-language/alternate-language-plugin.c:56
+msgid "_Alternate Language"
+msgstr "Bahasa _Alternatif"
+
+#: ../plugins/alternate-language/alternate-language-plugin.c:57
+msgid "Show the Alternate Language panel"
+msgstr "Tampilkan panel Bahasa Alternatif"
+
+#: ../plugins/alternate-language/alternate-language-plugin.c:119
+#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:1
+msgid "Alternate Language"
+msgstr "Bahasa Alternatif"
+
+#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:2
+msgid "Load an alternate language."
+msgstr "Muat suatu bahasa alternatif."
+
+#: ../plugins/charmap/charmap-plugin.c:283
+#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:1
+msgid "Character Map"
+msgstr "Tabel Karakter"
+
+#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:2
+msgid "Insert special characters just by clicking on them."
+msgstr "Sisipkan karakter khusus hanya dengan mengklik mereka."
+
+#: ../plugins/dictionary/dict-panel.c:183
+#, c-format
+msgid "No dictionary source available with name '%s'"
+msgstr "Tidak ada sumber kamus dengan nama '%s'"
+
+#: ../plugins/dictionary/dict-panel.c:187
+msgid "Unable to find dictionary source"
+msgstr "Tak dapat menemukan sumber kamus"
+
+#: ../plugins/dictionary/dict-panel.c:204
+#, c-format
+msgid "No context available for source '%s'"
+msgstr "Tak ada konteks tersedia bagi sumber '%s'"
+
+#: ../plugins/dictionary/dict-panel.c:208
+msgid "Unable to create a context"
+msgstr "Tak dapat membuat suatu konteks"
+
+#: ../plugins/dictionary/dict-panel.c:294
+#, c-format
+msgid "Dictionary source '%s' selected"
+msgstr "Sumber kamus '%s' dipilih"
+
+#: ../plugins/dictionary/dict-panel.c:314
+#, c-format
+msgid "Strategy '%s' selected"
+msgstr "Strategi '%s' dipilih"
+
+#: ../plugins/dictionary/dict-panel.c:333
+#, c-format
+msgid "Database '%s' selected"
+msgstr "Basis data '%s' dipilih"
+
+#: ../plugins/dictionary/dict-panel.c:379
+#, c-format
+msgid "Word '%s' selected"
+msgstr "Kata '%s' dipilih"
+
+#. speller
+#: ../plugins/dictionary/dict-panel.c:402
+msgid "Double-click on the word to look up"
+msgstr "Klik ganda pada kata untuk mencari terjemahannya"
+
+#. strat-chooser
+#: ../plugins/dictionary/dict-panel.c:407
+msgid "Double-click on the matching strategy to use"
+msgstr "Klik ganda pada strategi yang cocok untuk dipakai"
+
+#. source-chooser
+#: ../plugins/dictionary/dict-panel.c:413
+msgid "Double-click on the source to use"
+msgstr "Klik ganda pada sumber yang akan dipakai"
+
+#. db-chooser
+#: ../plugins/dictionary/dict-panel.c:423
+msgid "Double-click on the database to use"
+msgstr "Klik ganda pada basis data untuk dipakai"
+
+#.
+#. * Look up Button
+#.
+#: ../plugins/dictionary/dict-panel.c:487
+msgid "Look _up:"
+msgstr "Cari:"
+
+#: ../plugins/dictionary/dict-panel.c:559
+msgid "Similar words"
+msgstr "Kata serupa"
+
+#: ../plugins/dictionary/dict-panel.c:574
+msgid "Available dictionaries"
+msgstr "Kamus tersedia"
+
+#: ../plugins/dictionary/dict-panel.c:590
+msgid "Available strategies"
+msgstr "Strategi tersedia"
+
+#: ../plugins/dictionary/dict-panel.c:600
+msgid "Dictionary sources"
+msgstr "Sumber kamus"
+
+#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/dictionary/dictionary-plugin.c:92
+msgid "Dictionary"
+msgstr "Kamus"
+
+#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:2
+msgid "Look up words in a dictionary."
+msgstr "Cari kata dalam kamus."
+
+#: ../plugins/fullscreen/fullscreen-plugin.c:45
+msgid "_Fullscreen"
+msgstr "Layar Penuh"
+
+#: ../plugins/fullscreen/fullscreen-plugin.c:46
+msgid "Place window on fullscreen state"
+msgstr "Tempatkan jendela memenuhi layar"
+
+#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:1
+msgid "Fullscreen"
+msgstr "Layar penuh"
+
+#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:2
+msgid "Place window in the fullscreen state."
+msgstr "Tempatkan jendela dalam keadaan layar penuh."
+
+#: ../plugins/insert-params/insert-params-plugin.c:75
+msgid "_Next Param"
+msgstr "Param Berikut"
+
+#: ../plugins/insert-params/insert-params-plugin.c:76
+msgid "Insert the next param of the message"
+msgstr "Sisipkan param berikutnya dari pesan"
+
+#: ../plugins/insert-params/insert-params-plugin.c:78
+msgid "_Insert Params"
+msgstr "S_isip Param"
+
+#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:1
+msgid "Insert Params"
+msgstr "Sisip Param"
+
+#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:2
+msgid "Parameters detection and easy insertion."
+msgstr "Deteksi parameter dan penyisipan mudah."
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:68
+msgid "_Next Tag"
+msgstr "Tag Berikutnya"
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:69
+msgid "Insert the next tag of the message"
+msgstr "Sisipkan tag berikutnya dari pesan"
+
+#: ../plugins/insert-tags/insert-tags-plugin.c:71
+msgid "_Insert Tags"
+msgstr "S_isip Tag"
+
+#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:1
+msgid "Insert Tags"
+msgstr "Sisipkan Tag"
+
+#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:2
+msgid "Tags detection and easy insertion."
+msgstr "Deteksi tag dan penyisipan mudah"
+
+#: ../plugins/open-tran/open-tran-dialog.ui.h:1
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:1
+#: ../plugins/subversion/subversion.ui.h:2
+#: ../src/dialogs/preferences-dialog.ui.h:1
+msgid "    "
+msgstr "    "
+
+#: ../plugins/open-tran/open-tran-dialog.ui.h:2
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:2
+msgid "     "
+msgstr "     "
+
+#: ../plugins/open-tran/open-tran-dialog.ui.h:3
+msgid "<b>Code language of the results:</b>"
+msgstr "<b>Bahasa kode dari hasil:</b>"
+
+#: ../plugins/open-tran/open-tran-dialog.ui.h:4
+msgid "<b>Code language to query open-tran:</b>"
+msgstr "<b>Bahasa kode untuk query open tran:</b>"
+
+#: ../plugins/open-tran/open-tran-dialog.ui.h:5
+msgid "Open Tran Settings"
+msgstr "Penataan Open Tran"
+
+#: ../plugins/open-tran/open-tran-panel.c:207
+#: ../plugins/open-tran/open-tran-panel.c:272
+msgid "ERROR: could not parse response\n"
+msgstr "GALAT: tak dapat mengurai jawaban\n"
+
+#: ../plugins/open-tran/open-tran-panel.c:254
+#, c-format
+msgid "ERROR: %d %s\n"
+msgstr "GALAT: %d %s\n"
+
+#: ../plugins/open-tran/open-tran-panel.c:267
+#, c-format
+msgid "FAULT: %d %s\n"
+msgstr "CACAT: %d %s\n"
+
+#: ../plugins/open-tran/open-tran-panel.c:283
+#, c-format
+msgid "WRONG! Can't get result element %d\n"
+msgstr "SALAH: Tak bisa mendapat elemen hasil %d\n"
+
+#: ../plugins/open-tran/open-tran-panel.c:300 ../src/actions-search.c:195
+msgid "Phrase not found"
+msgstr "Frasa tak ditemukan"
+
+#: ../plugins/open-tran/open-tran-panel.c:320
+msgid "You have to provide a phrase to search"
+msgstr "Anda mesti menyatakan frasa yang akan dicari"
+
+#: ../plugins/open-tran/open-tran-panel.c:329
+msgid "You have to provide a search language code"
+msgstr "Anda mesti menyatakan kode bahasa pencarian"
+
+#: ../plugins/open-tran/open-tran-panel.c:339
+msgid "You have to provide a language code for your language"
+msgstr "Anda mesti menyatakan kode bahasa untuk bahasa anda"
+
+#: ../plugins/open-tran/open-tran-panel.c:367
+msgid "Type"
+msgstr "Tipe"
+
+#: ../plugins/open-tran/open-tran-panel.c:378
+msgid "Open-Tran.eu"
+msgstr "Open-Tran.eu"
+
+#: ../plugins/open-tran/open-tran-panel.c:415
+msgid "Look for:"
+msgstr "Mencari:"
+
+#: ../plugins/open-tran/open-tran-plugin.c:106
+#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:2
+msgid "Open Tran"
+msgstr "Open Tran"
+
+#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:1
+msgid "Look for phrases in Open tran memory translation database."
+msgstr "Mencari frasa dalam basis data terjemahan ingatan Open tran."
+
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:3
+msgid "<b>Line command:</b>"
+msgstr "<b>Perintah baris:</b>"
+
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:4
+msgid "<b>Program command:</b>"
+msgstr "<b>Perintah program:</b>"
+
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:5
+msgid "Source View Settings"
+msgstr "Penataan Tampilan Sumber"
+
+#: ../plugins/source-code-view/source-code-view-dialog.ui.h:6
+msgid "Use external editor"
+msgstr "Gunakan penyunting eksternal"
+
+#: ../plugins/source-code-view/source-code-view-plugin.c:111
+#, c-format
+msgid "Please install %s to be able to show the file"
+msgstr "Silahkan pasang %s untuk dapat menampilkan berkas"
+
+#: ../plugins/source-code-view/source-code-view-plugin.c:446
+msgid "Paths:\n"
+msgstr "Path:\n"
+
+#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:1
+msgid "Show the message in the source code."
+msgstr "Tampilkan pesan dalam kode sumber."
+
+#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:2
+msgid "Source Code View"
+msgstr "Tampilan Kode Sumber"
+
+#: ../plugins/source-code-view/viewer.c:74
+msgid "Source Viewer"
+msgstr "Penampil Sumber"
+
+#: ../plugins/source-code-view/viewer.ui.h:1
+msgid "<b>Source code</b>"
+msgstr "<b>Kode sumber</b>"
+
+#: ../plugins/subversion/checkout-dialog.c:77
+msgid "Subversion: Checkout complete."
+msgstr "Subversion: Checkout komplit."
+
+#: ../plugins/subversion/checkout-dialog.c:124
+msgid "Please add a directory path to make the checkout"
+msgstr "Silahkan tambahkan suatu path direktori untuk melakukan checkout"
+
+#: ../plugins/subversion/checkout-dialog.c:138
+msgid "Please add a Subversion URL"
+msgstr "Silahkan tambahkan suatu URL Subversion"
+
+#: ../plugins/subversion/checkout-dialog.c:170 ../src/dialogs/assistant.c:689
+msgid "Checkout directory"
+msgstr "Direktori checkout"
+
+#: ../plugins/subversion/checkout-dialog.c:252
+msgid "Checkout repository"
+msgstr "Checkout repositori"
+
+#: ../plugins/subversion/commit-dialog.c:221
+msgid "Subversion: Commit complete."
+msgstr "Subversion: Commit komplit."
+
+#.
+#. * Translators: Please change LANGUAGE for your language name in English.
+#. * This string is used to fill the ChangeLog entry
+#. * For example: "Updated Galician translation"
+#. * where LANGUAGE = Galician.
+#.
+#: ../plugins/subversion/commit-dialog.c:262
+msgctxt "ChangeLog entry"
+msgid "LANGUAGE"
+msgstr "Indonesian"
+
+#: ../plugins/subversion/commit-dialog.c:286
+#, c-format
+msgid "The ChangeLog file '%s' does not exist"
+msgstr "Berkas ChangeLog '%s' tidak ada"
+
+#: ../plugins/subversion/commit-dialog.c:400
+msgid "Are you sure that you want to pass an empty log message?"
+msgstr "Anda yakin akan meneruskan pesan log kosong?"
+
+#: ../plugins/subversion/commit-dialog.c:422
+msgid "You have to select at least one file to send"
+msgstr "Anda mesti memilih paling tidak satu berkas untuk dikirim"
+
+#: ../plugins/subversion/commit-dialog.c:562
+msgid "Commit Changes"
+msgstr "Perubahan Commit"
+
+#: ../plugins/subversion/diff-dialog.c:80
+msgid "Subversion: Diff complete."
+msgstr "Subversion: Diff komplit."
+
+#: ../plugins/subversion/diff-dialog.c:109
+#, c-format
+msgid "Please install %s to be able to diff the file"
+msgstr "Silahkan pasang %s untuk bisa men-diff berkas"
+
+#: ../plugins/subversion/diff-dialog.c:390
+msgid "Diff file"
+msgstr "Berkas diff"
+
+#: ../plugins/subversion/diff-dialog.c:455
+msgid "Diff"
+msgstr "Diff"
+
+#: ../plugins/subversion/subversion-plugin.c:82
+msgid "Subversion: File will be added on next commit."
+msgstr "Subversion: Berkas akan ditambahkan pada commit berikutnya."
+
+#: ../plugins/subversion/subversion-plugin.c:129
+msgid "_Update"
+msgstr "Perbar_ui"
+
+#: ../plugins/subversion/subversion-plugin.c:130
+msgid "Sync your local copy with the Subversion tree"
+msgstr "Sinkronkan salinan lokal anda dengan tree Subversion"
+
+#: ../plugins/subversion/subversion-plugin.c:133
+msgid "_Commit"
+msgstr "_Commit"
+
+#: ../plugins/subversion/subversion-plugin.c:134
+msgid "Commit your changes to the Subversion tree"
+msgstr "Commit perubahan lokal anda ke tree Subversion"
+
+#: ../plugins/subversion/subversion-plugin.c:137
+msgid "_Add"
+msgstr "T_ambah"
+
+#: ../plugins/subversion/subversion-plugin.c:138
+msgid "Add a new file/directory to the Subversion tree"
+msgstr "Tambah suatu berkas/direktori baru ke tree Subversion"
+
+#: ../plugins/subversion/subversion-plugin.c:141
+msgid "_Diff"
+msgstr "_Diff"
+
+#: ../plugins/subversion/subversion-plugin.c:142
+msgid "Diff local PO file with repository PO file"
+msgstr "Diff berkas PO lokal dengan berkas PO repositori"
+
+#: ../plugins/subversion/subversion-plugin.c:145
+msgid "C_heckout"
+msgstr "C_heckout"
+
+#: ../plugins/subversion/subversion-plugin.c:146
+msgid "Get a new repository copy"
+msgstr "Ambil salinan repositori baru"
+
+#: ../plugins/subversion/subversion-plugin.c:149
+msgid "S_ubversion"
+msgstr "S_ubversion"
+
+#: ../plugins/subversion/subversion.ui.h:1
+msgid "  "
+msgstr "  "
+
+#: ../plugins/subversion/subversion.ui.h:3
+msgid "        "
+msgstr "        "
+
+#: ../plugins/subversion/subversion.ui.h:4
+msgid "<b>Diff options:</b>"
+msgstr "<b>Opsi diff:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:5
+msgid "<b>Diff program:</b>"
+msgstr "<b>Program diff:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:6
+msgid "<b>Directory to checkout:</b>"
+msgstr "<b>Direktori untuk checkout:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:7
+msgid "<b>Directory to update:</b>"
+msgstr "<b>Direktori yang akan diperbarui:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:8
+msgid "<b>Information:</b>"
+msgstr "<b>Informasi:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:9
+msgid "<b>Log Message:</b>"
+msgstr "<b>Pesan Log:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:10
+msgid "<b>Password:</b>"
+msgstr "<b>Kata Sandi:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:11
+msgid "<b>Realm:</b>"
+msgstr "<b>Realm:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:12
+msgid "<b>Select files to Commit:</b>"
+msgstr "<b>Pilih berkas untuk Commit:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:13
+msgid "<b>Subversion URL:</b>"
+msgstr "<b>URL Subversion:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:14
+msgid "<b>Username:</b>"
+msgstr "<b>Nama Pengguna:</b>"
+
+#: ../plugins/subversion/subversion.ui.h:15
+msgid "Add Log Message to ChangeLog file"
+msgstr "Tambahkan Pesan Log ke berkas ChangeLog"
+
+#: ../plugins/subversion/subversion.ui.h:16
+msgid "Line argument:"
+msgstr "Argumen baris:"
+
+#: ../plugins/subversion/subversion.ui.h:17
+msgid "Program name:"
+msgstr "Nama program:"
+
+#: ../plugins/subversion/subversion.ui.h:18
+msgid "Remember Password"
+msgstr "Ingat Kata Sandi"
+
+#: ../plugins/subversion/subversion.ui.h:19
+msgid "Remember this decision"
+msgstr "Ingat keputusan ini"
+
+#: ../plugins/subversion/subversion.ui.h:20
+msgid "Repository authorization"
+msgstr "Otorisasi repositori"
+
+#: ../plugins/subversion/subversion.ui.h:21
+msgid "Retrieving status..."
+msgstr "Mengambil status..."
+
+#: ../plugins/subversion/subversion.ui.h:22
+msgid "Save the diff file"
+msgstr "Simpan berkas diff"
+
+#: ../plugins/subversion/subversion.ui.h:23
+msgid "Send Changes"
+msgstr "Kirim Perubahan"
+
+#: ../plugins/subversion/subversion.ui.h:24
+#: ../plugins/subversion/update-dialog.c:222
+msgid "Update repository"
+msgstr "Perbarui repositori"
+
+#: ../plugins/subversion/subversion.ui.h:25
+msgid "Use configured program to view the diff"
+msgstr "Gunakan program yang diatur untuk melihat diff"
+
+#: ../plugins/subversion/subversion.ui.h:26
+msgid "label"
+msgstr "label"
+
+#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:1
+msgid "A Subversion client plugin based on libsvn."
+msgstr "Plugin klien Subversion berbasis libsvn."
+
+#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:2
+msgid "Subversion"
+msgstr "Subversion"
+
+#: ../plugins/subversion/svn-command.c:176
+#: ../plugins/subversion/svn-command.c:258
+msgid "Authentication canceled"
+msgstr "Otentikasi dibatalkan"
+
+#: ../plugins/subversion/svn-command.c:231
+msgid "Hostname:"
+msgstr "Nama host:"
+
+#: ../plugins/subversion/svn-command.c:232
+msgid "Fingerprint:"
+msgstr "Sidik jari:"
+
+#: ../plugins/subversion/svn-command.c:233
+msgid "Valid from:"
+msgstr "Valid mulai:"
+
+#: ../plugins/subversion/svn-command.c:234
+msgid "Valid until:"
+msgstr "Valid sampai:"
+
+#: ../plugins/subversion/svn-command.c:235
+msgid "Issuer DN:"
+msgstr "DN penerbit:"
+
+#: ../plugins/subversion/svn-command.c:236
+msgid "DER certificate:"
+msgstr "Sertifikat DER:"
+
+#: ../plugins/subversion/svn-command.c:385
+#: ../plugins/subversion/svn-command.c:400
+#, c-format
+msgid "Deleted: %s"
+msgstr "Dihapus: %s"
+
+#: ../plugins/subversion/svn-command.c:388
+#: ../plugins/subversion/svn-command.c:406
+#, c-format
+msgid "Added: %s"
+msgstr "Ditambahkan: %s"
+
+#: ../plugins/subversion/svn-command.c:391
+#, c-format
+msgid "Reverted: %s"
+msgstr "Dipulihkan: %s"
+
+#: ../plugins/subversion/svn-command.c:394
+#, c-format
+msgid "Revert failed: %s"
+msgstr "Pemulihan gagal: %s"
+
+#: ../plugins/subversion/svn-command.c:397
+#, c-format
+msgid "Resolved: %s"
+msgstr "Terpecahkan: %s"
+
+#: ../plugins/subversion/svn-command.c:403
+#, c-format
+msgid "Updated: %s"
+msgstr "Diperbarui: %s"
+
+#: ../plugins/subversion/svn-command.c:409
+#, c-format
+msgid "Externally Updated: %s"
+msgstr "Diperbarui Dari Luar: %s"
+
+#: ../plugins/subversion/svn-command.c:413
+#, c-format
+msgid "Commit Modified: %s"
+msgstr "Commit Diubah: %s"
+
+#: ../plugins/subversion/svn-command.c:417
+#, c-format
+msgid "Commit Added: %s"
+msgstr "Commit Ditambahkan: %s"
+
+#: ../plugins/subversion/svn-command.c:420
+#, c-format
+msgid "Commit Deleted: %s"
+msgstr "Commit Dihapus: %s"
+
+#: ../plugins/subversion/svn-command.c:424
+#, c-format
+msgid "Commit Replaced: %s"
+msgstr "Commit Diganti: %s"
+
+#: ../plugins/subversion/svn-command.c:428
+#, c-format
+msgid "Created File: %s"
+msgstr "Berkas Dibuat: %s"
+
+#: ../plugins/subversion/svn-command.c:443
+#, c-format
+msgid "Modified: %s"
+msgstr "Diubah: %s"
+
+#: ../plugins/subversion/svn-command.c:446
+#, c-format
+msgid "Merged: %s"
+msgstr "Digabung: %s"
+
+#: ../plugins/subversion/svn-command.c:449
+#, c-format
+msgid "Conflicted: %s"
+msgstr "Bertentangan: %s"
+
+#: ../plugins/subversion/svn-command.c:452
+#, c-format
+msgid "Missing: %s"
+msgstr "Hilang: %s"
+
+#: ../plugins/subversion/svn-command.c:455
+#, c-format
+msgid "Obstructed: %s"
+msgstr "Terhambat: %s"
+
+#: ../plugins/subversion/svn-update-command.c:104
+#, c-format
+msgid "Updated to revision %ld."
+msgstr "Diperbarui ke revisi %ld."
+
+#: ../plugins/subversion/update-dialog.c:75
+msgid "Subversion: Update complete."
+msgstr "Subversion: Pembaruan komplit."
+
+#: ../plugins/subversion/vcs-status-tree-view.c:290
+msgid "Modified"
+msgstr "Diubah"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:294
+msgid "Added"
+msgstr "Ditambahkan"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:298
+msgid "Deleted"
+msgstr "Dihapus"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:302
+msgid "Conflicted"
+msgstr "Bertentangan"
+
+#: ../plugins/subversion/vcs-status-tree-view.c:306
+msgid "Missing"
+msgstr "Hilang"
+
+#: ../src/actions-file.c:208
+msgid "Open file for translation"
+msgstr "Buka berkas untuk diterjemahkan"
+
+#: ../src/actions-file.c:281 ../src/actions-file.c:402
+msgid "File saved."
+msgstr "Berkas disimpan."
+
+#: ../src/actions-file.c:331
+msgid "Save file as..."
+msgstr "Simpan berkas sebagai..."
+
+#: ../src/actions-file.c:795
+#, c-format
+msgid "Failed to write profile data into profiles file '%s'"
+msgstr "Gagal menulis data profil ke berkas profil '%s'"
+
+#: ../src/actions-file.c:853
+msgid "Files saved."
+msgstr "Berkas disimpan."
+
+#: ../src/actions-help.c:52
+msgid "Current Maintainers"
+msgstr "Para Pemelihara Kini"
+
+#: ../src/actions-help.c:57
+msgid "Current Developers"
+msgstr "Para Pengembang Kini"
+
+#: ../src/actions-help.c:63
+msgid "Previous Developers"
+msgstr "Para Pengembang Sebelumnya"
+
+#: ../src/actions-help.c:71
+msgid "Contributors"
+msgstr "Para Kontributor"
+
+#: ../src/actions-help.c:91
+msgid ""
+"This program is free software: you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation, either version 3 of the License, or (at your option) "
+"any later version."
+msgstr ""
+"Program ini adalah perangkat lunak bebas: anda dapat menyebarluaskannya dan/"
+"atau mengubahnya di bawah syarat dari GNU General Public License sebagaimana "
+"dipublikasikan oleh Free Software Foundation, bisa Lisensi versi 3, atau "
+"(sesuai pilihan anda) sebarang versi setelahnya."
+
+#: ../src/actions-help.c:95
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details."
+msgstr ""
+"Program ini disebarluaskan dengan harapan akan berguna, tapi TANPA JAMINAN "
+"APAPUN; bahkan tanpa jaminan tersirat atas KELAYAKAN JUAL atau KECOCOKAN "
+"BAGI KEPERLUAN TERTENTU. Lihat GNU General Public License untuk rincian "
+"lebih jauh."
+
+#: ../src/actions-help.c:99
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program.  If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"Anda mestinya menerima salinan dari GNU General Public License bersama "
+"dengan program ini. Bila tidak, lihat <http://www.gnu.org/licenses/>."
+
+#: ../src/actions-help.c:111
+msgid ""
+"Translation file editing suite for localization of applications and "
+"libraries."
+msgstr "Penyunting berkas terjemahan untuk lokalisasi aplikasi dan pustaka."
+
+#: ../src/actions-help.c:114
+msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
+msgstr "Hak Cipta © 1999-2008 Free Software Foundation, Inc."
+
+#: ../src/actions-help.c:117
+msgid "About Gtranslator"
+msgstr "Tentang Gtranslator"
+
+#.
+#. * Note to translators: put here your name and email so it will show
+#. * up in the "about" box
+#.
+#: ../src/actions-help.c:122
 msgid "translator-credits"
-msgstr "Mohammad DAMT <mdamt@bisnisweb.com>"
-
-#: src/about.c:80
-msgid "(C) 1999 The Free Software Foundation, Inc."
 msgstr ""
+"Mohammad DAMT <mdamt@bisnisweb.com>\n"
+"Andika Triwidada <andika@gmail.com>"
 
-#: src/about.c:81
-msgid "gtranslator is a po file editing suite with many bells and whistles."
-msgstr ""
+#: ../src/actions-help.c:126
+msgid "Gtranslator Web Site"
+msgstr "Situs Web Gtranslator"
 
-#: src/bookmark.c:93 src/dialogs.c:1492
+#: ../src/actions-search.c:173
+#, c-format
+msgid "Found and replaced %d occurrence"
+msgid_plural "Found and replaced %d occurrences"
+msgstr[0] "Ditemukan dan diganti %d kali"
+
+#: ../src/actions-search.c:183
+msgid "Found and replaced one occurrence"
+msgstr "Ditemukan dan diganti satu kali"
+
+#: ../src/context.c:60
+msgid "Format:"
+msgstr "Format:"
+
+#: ../src/context.c:62
+msgid "Context:"
+msgstr "Context:"
+
+#: ../src/context.c:64
 #, fuzzy
-msgid "No comment"
+msgid "Extracted comments:"
+msgstr "Komentar terekstrak:"
+
+#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:755
+msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"large\">String ditambahkan ke basis data</span>"
+
+#: ../src/dialogs/assistant.c:298
+#, c-format
+msgid ""
+"Profile name: %s\n"
+"Translator name: %s\n"
+"Translator email: %s\n"
+"Language name: %s\n"
+"Team email: %s\n"
+"Language code: %s\n"
+"Character set: %s\n"
+"Transfer encoding: %s\n"
+"Plural form: %s\n"
+"Database path: %s"
+msgstr ""
+"Nama profil: %s\n"
+"Nama penerjemah: %s\n"
+"Email penerjemah: %s\n"
+"Nama bahasa: %s\n"
+"Email tim: %s\n"
+"Kode bahasa: %s\n"
+"Gugus karakter: %s\n"
+"Encoding transfer: %s\n"
+"Bentuk jamak: %s\n"
+"Path basis data: %s"
+
+#: ../src/dialogs/assistant.c:325
+msgid "None"
+msgstr "Tak ada"
+
+#: ../src/dialogs/assistant.c:348
+msgid ""
+"This assistant will help you to create the main profile\n"
+"and generate your translation memory database."
+msgstr ""
+"Asisten ini akan membantu anda membuat profil utama\n"
+"dan membuat basis data ingatan terjemahan."
+
+#: ../src/dialogs/assistant.c:354
+msgid "Assistant"
+msgstr "Pembantu"
+
+#: ../src/dialogs/assistant.c:446
+msgid "<b>Profile name:</b>"
+msgstr "<b>Nama profil:</b>"
+
+#: ../src/dialogs/assistant.c:465
+msgid "<b>Translator name:</b>"
+msgstr "<b>Nama penerjemah:</b>"
+
+#: ../src/dialogs/assistant.c:484
+msgid "<b>Translator email:</b>"
+msgstr "<b>Email penerjemah:</b>"
+
+#: ../src/dialogs/assistant.c:503
+msgid "<b>Language:</b>"
+msgstr "<b>Bahasa:</b>"
+
+#: ../src/dialogs/assistant.c:522
+msgid "<b>Team email:</b>"
+msgstr "<b>Email tim:</b>"
+
+#: ../src/dialogs/assistant.c:534 ../src/dialogs/assistant.c:680
+#: ../src/dialogs/preferences-dialog.c:548
+msgid "Profile"
+msgstr "Profil"
+
+#: ../src/dialogs/assistant.c:611
+msgid "<b>Language code:</b>"
+msgstr "<b>Kode bahasa:</b>"
+
+#: ../src/dialogs/assistant.c:630
+msgid "<b>Character set:</b>"
+msgstr "<b>Gugus karakter:</b>"
+
+#: ../src/dialogs/assistant.c:649
+msgid "<b>Transfer encoding:</b>"
+msgstr "<b>Transfer encoding:</b>"
+
+#: ../src/dialogs/assistant.c:668
+msgid "<b>Plural forms:</b>"
+msgstr "<b>Bentuk jamak:</b>"
+
+#: ../src/dialogs/assistant.c:727
+msgid "<b>Select the path to generate the database:</b>"
+msgstr "<b>Pilih path untuk menjangkitkan basis data:</b>"
+
+#: ../src/dialogs/assistant.c:756
+msgid "<b>Look for a specific PO filename:</b>"
+msgstr "<b>Cari nama berkas PO spesifik:</b>"
+
+#: ../src/dialogs/assistant.c:765
+msgid "E.g.: gl.po"
+msgstr "Mis: id.po"
+
+#: ../src/dialogs/assistant.c:769
+msgid "Generate Database"
+msgstr "Jangkitkan Basis Data"
+
+#: ../src/dialogs/assistant.c:795
+msgid "Confirmation"
+msgstr "Konfirmasi"
+
+#: ../src/dialogs/close-confirmation-dialog.c:128
+msgid "Close _without Saving"
+msgstr "Tutup tanpa Menyimpan"
+
+#: ../src/dialogs/close-confirmation-dialog.c:159
+msgid "Question"
+msgstr "Pertanyaan"
+
+#: ../src/dialogs/close-confirmation-dialog.c:380
+#, c-format
+msgid "Save the changes to document \"%s\" before closing?"
+msgstr "Simpan perubahan ke dokumen \"%s\" sebelum menutup?"
+
+#: ../src/dialogs/close-confirmation-dialog.c:543
+#, c-format
+msgid "Changes to %d document will be permanently lost."
+msgid_plural "Changes to %d documents will be permanently lost."
+msgstr[0] "Perubahan ke %d dokumen akan hilang selamanya."
+
+#: ../src/dialogs/close-confirmation-dialog.c:550
+#, c-format
+msgid "There is %d document with unsaved changes. Save changes before closing?"
+msgid_plural ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr[0] ""
+"Ada %d dokumen dengan perubahan yang belum tersimpan. Simpan perubahan "
+"sebelum menutup?"
+
+#: ../src/dialogs/close-confirmation-dialog.c:571
+msgid "Docum_ents with unsaved changes:"
+msgstr "Dokum_en dengan perubahan yang belum disimpan:"
+
+#: ../src/dialogs/close-confirmation-dialog.c:575
+msgid "S_elect the documents you want to save:"
+msgstr "Pilih dokum_en yang ingin anda simpan:"
+
+#: ../src/dialogs/close-confirmation-dialog.c:595
+msgid "Saving has been disabled by the system administrator."
+msgstr "Penyimpanan telah dimatikan oleh administrator sistem."
+
+#: ../src/dialogs/close-confirmation-dialog.c:597
+msgid "If you don't save, all your changes will be permanently lost."
+msgstr "Bila anda tidak menyimpan, semua perubahan anda akan hilang permanen."
+
+#: ../src/dialogs/comment-dialog.c:95
+msgid "Edit Comment"
+msgstr "Sunting Komentar"
+
+#: ../src/dialogs/comment-dialog.ui.h:1
+msgid "<b>Write your comments bellow:</b>"
+msgstr "<b>Tulis komentar anda di bawah:</b>"
+
+#: ../src/dialogs/file-dialogs.c:62
+msgid "Gettext translation"
+msgstr "Terjemahan gettext"
+
+#: ../src/dialogs/file-dialogs.c:71
+msgid "Gettext translation template"
+msgstr "Templat terjemahan gettext"
+
+#: ../src/dialogs/file-dialogs.c:76
+msgid "All files"
+msgstr "Semua berkas"
+
+#: ../src/dialogs/header-dialog.c:270
+msgid "Edit Header"
+msgstr "Sunting Header"
+
+#: ../src/dialogs/header-dialog.ui.h:1
+msgid "Char_set:"
+msgstr "Gugu_s karakter:"
+
+#: ../src/dialogs/header-dialog.ui.h:2
+msgid "Comment"
 msgstr "Komentar"
 
-#: src/bookmark.c:598
-msgid "_View/_Bookmarks/"
-msgstr ""
-
-#: src/bookmark.c:635
-#, fuzzy, c-format
-msgid "Open %s (%s)"
-msgstr "Buka %s"
-
-#: src/color-schemes.c:196
-#, c-format
-msgid "Can't apply color scheme file `%s'!"
-msgstr ""
-
-#: src/color-schemes.c:318
-msgid "Couldn't retrieve author information!"
-msgstr ""
-
-#.
-#. * Translators: These strings are used as author informations if
-#. *  no author informations could be retrieved:
-#.
-#: src/color-schemes.c:324 src/translator.c:318
-msgid "Unknown"
-msgstr ""
-
-#: src/color-schemes.c:325
-msgid "<Not Given>"
-msgstr ""
-
-#: src/color-schemes.c:472
-msgid "_View/_Colorschemes/"
-msgstr ""
-
-#: src/color-schemes.c:502
-#, c-format
-msgid "Activate colorscheme %s"
-msgstr ""
-
-#: src/dialogs.c:115
-msgid "gtranslator -- open po file"
-msgstr ""
-
-#: src/dialogs.c:157
-msgid "gtranslator -- save file as.."
-msgstr ""
-
-#: src/dialogs.c:177
-msgid "gtranslator -- save local copy of file as.."
-msgstr ""
-
-#: src/dialogs.c:227
-#, c-format
-msgid ""
-"File %s\n"
-"was changed. Save?"
-msgstr ""
-
-#: src/dialogs.c:233
-msgid "Don't save"
-msgstr ""
-
-#: src/dialogs.c:277
-msgid "gtranslator -- import po file"
-msgstr ""
-
-#: src/dialogs.c:324
-msgid "gtranslator -- export po file"
-msgstr ""
-
-#: src/dialogs.c:372 src/dialogs.c:405
-msgid "gtranslator -- edit comment"
-msgstr ""
-
-#: src/dialogs.c:397
-msgid "Comment:"
-msgstr "Keterangan:"
-
-#: src/dialogs.c:512
-#, c-format
-msgid "Should ALL translations from `%s' be removed?"
-msgstr ""
-
-#: src/dialogs.c:615
-msgid "gtranslator -- go to"
-msgstr ""
-
-#: src/dialogs.c:623
-msgid "Go to message number:"
-msgstr ""
-
-#: src/dialogs.c:681
-msgid "Find in the po file"
-msgstr ""
-
-#: src/dialogs.c:690
-msgid "Enter search string:"
-msgstr ""
-
-#: src/dialogs.c:695
-msgid "Case sensitive"
-msgstr "Huruf besar berbeda dengan huruf kecil"
-
-#: src/dialogs.c:700
+#: ../src/dialogs/header-dialog.ui.h:3
 #, fuzzy
-msgid "Find in:"
-msgstr "Hindi"
+msgid "Enc_oding:"
+msgstr "Enc_oding:"
 
-#: src/dialogs.c:704 src/dialogs.c:835
-msgid "Comments"
-msgstr "Komentar"
+#: ../src/dialogs/header-dialog.ui.h:4
+msgid "Language gro_up email:"
+msgstr "Email gr_up bahasa:"
 
-#: src/dialogs.c:707 src/dialogs.c:838 src/languages.c:97
-msgid "English"
-msgstr "Bahasa Inggris"
+#: ../src/dialogs/header-dialog.ui.h:5
+msgid "Po file _revision date:"
+msgstr "Tanggal _revisi berkas po:"
 
-#: src/dialogs.c:710 src/dialogs.c:841 src/messages-table.c:254
-msgid "Translation"
-msgstr ""
+#: ../src/dialogs/header-dialog.ui.h:6
+msgid "Pot _file creation date:"
+msgstr "Tanggal pembuatan berkas Pot:"
 
-#.
-#. * Translators: this means that the hotkeys ("_" etc.) are ignored
-#. *  during the search action.
-#.
-#: src/dialogs.c:721
-msgid "Ignore hotkeys"
-msgstr ""
-
-#: src/dialogs.c:814
-msgid "gtranslator -- replace"
-msgstr ""
-
-#: src/dialogs.c:818 src/menus.c:355
-msgid "Replace"
-msgstr "Ganti"
-
-#: src/dialogs.c:819
-msgid "Replace all"
-msgstr "Ganti semua"
-
-#: src/dialogs.c:824
-msgid "String to replace:"
-msgstr "Kalimat yang hendak diganti:"
-
-#: src/dialogs.c:827
-msgid "Replace string:"
-msgstr "Ganti kalimat:"
-
-#: src/dialogs.c:832
-msgid "Replace in:"
-msgstr "Ganti dalam:"
-
-#: src/dialogs.c:895
-#, fuzzy
-msgid "Please enter a string to replace!"
-msgstr "Kalimat yang hendak diganti:"
-
-#: src/dialogs.c:903
-msgid "Please enter a string to replace with!"
-msgstr ""
-
-#: src/dialogs.c:945
-msgid "An error occurred while msgfmt was executed:\n"
-msgstr "Ada error saat msgfmt dijalankan:\n"
-
-#: src/dialogs.c:986
-#, c-format
-msgid ""
-"The file\n"
-"\n"
-"   %s\n"
-"\n"
-"is already open in another instance of gtranslator!\n"
-"Please close the other instance of gtranslator handling\n"
-"this file currently to re-gain access to this file.\n"
-"\n"
-"Shall fool gtranslator open this file anyway ?"
-msgstr ""
-
-#: src/dialogs.c:1027
-#, c-format
-msgid ""
-"File %s\n"
-"was changed. Do you want to revert to saved copy?"
-msgstr ""
-
-#: src/dialogs.c:1059
-msgid "gtranslator -- open from URI"
-msgstr "gtranslator -- buka dari URI"
-
-#: src/dialogs.c:1071
-msgid "Enter URI:"
-msgstr "Masukkan URI:"
-
-#: src/dialogs.c:1107
-msgid "No URI given!"
-msgstr "Tidak ada URI yang diberikan!"
-
-#: src/dialogs.c:1122
-msgid "No supported URI protocol (like \"ftp://\") given!"
-msgstr "Tidak ada protokol URI yang disebutkan (misalnya \"ftp://\")"
-
-#: src/dialogs.c:1130
-msgid ""
-"URIs are used to locate files uniquely on different systems.\n"
-"The standard Internet addresses (URLs) are also URIs -- you can\n"
-"use them to open remote po files lying on servers with standard protocols\n"
-"like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
-"Some example URIs for clarification (these ones are supported):\n"
-"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
-"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
-"\n"
-"file:///<PO-FILE> or\n"
-"http://www.DOMAIN.COM/PO-FILE"
-msgstr ""
-
-#: src/dialogs.c:1169
-#, c-format
-msgid ""
-"Open recovery file for `%s'?\n"
-"It was saved by gtranslator before gtranslator last closed\n"
-"and may contain your hard work!\n"
-msgstr ""
-
-#.
-#. * Translators: All this is about recovering a po file after
-#. *  a crash or something; postbone means that the user will
-#. *   get asked the next time he starts up gtranslator again
-#. *    if he/she wants to recover file.
-#.
-#: src/dialogs.c:1181
-msgid "Postpone decision"
-msgstr ""
-
-#: src/dialogs.c:1183
-msgid "Ignore recovery file"
-msgstr ""
-
-#: src/dialogs.c:1185
-msgid "Recover file"
-msgstr ""
-
-#.
-#. * A half-baken dialog for the query functionality.
-#.
-#: src/dialogs.c:1244
-msgid "Here you can query existing translations from your learn buffer."
-msgstr ""
-
-#: src/dialogs.c:1247
-msgid "gtranslator -- query your personal learn buffer"
-msgstr ""
-
-#: src/dialogs.c:1251 src/menus.c:360
-msgid "Query"
-msgstr ""
-
-#: src/dialogs.c:1252
-msgid "Query message content"
-msgstr ""
-
-#: src/dialogs.c:1262
-msgid "Query string:"
-msgstr ""
-
-#: src/dialogs.c:1300
-msgid "No query string given!"
-msgstr ""
-
-#: src/dialogs.c:1322
-msgid "Couldn't find any result for the query in your learn buffer!"
-msgstr ""
-
-#: src/dialogs.c:1334
-#, c-format
-msgid ""
-"Found \"%s\" as a translation for \"%s\".\n"
-"Would you like to insert it into the translation?"
-msgstr ""
-
-#.
-#. * Translators: This means that the query result string is
-#. *  already translated.
-#.
-#: src/dialogs.c:1404
-msgid "Query's result translation is already there!"
-msgstr ""
-
-#: src/dialogs.c:1436
-msgid ""
-"Should gtranslator autotranslate the file using information\n"
-"from your personal learn buffer?"
-msgstr ""
-
-#: src/dialogs.c:1472 src/dialogs.c:1500
-msgid "gtranslator -- add bookmark with comment?"
-msgstr ""
-
-#: src/dialogs.c:1492
-msgid "Comment for the bookmark:"
-msgstr ""
-
-#: src/find.c:217
-msgid "Please enter a search string"
-msgstr ""
-
-#: src/find.c:233
-#, c-format
-msgid ""
-"Could not find\n"
-"\"%s\""
-msgstr ""
-
-#: src/gui.c:199
-msgid "Edit comment"
-msgstr ""
-
-#: src/gui.c:501
-#, c-format
-msgid "%s [ %i Fuzzy left ]"
-msgstr ""
-
-#: src/gui.c:501 src/gui.c:505 src/menus.c:341 src/messages-table.c:315
-msgid "Fuzzy"
-msgstr "Fuzzy"
-
-#: src/gui.c:505
-#, c-format
-msgid "%s [ No fuzzy left ]"
-msgstr "%s [Tidak ada fuzzy lagi]"
-
-#: src/gui.c:513
-msgid "Sticky (Message & translation are the same)"
-msgstr "Identik (Pesan dan terjemahan sama)"
-
-#: src/gui.c:515 src/messages-table.c:323
-msgid "Translated"
-msgstr "Terjemahan"
-
-#: src/gui.c:524
-#, c-format
-msgid "%s [ %i Untranslated left ]"
-msgstr "%s [%i belum diterjemahkan]"
-
-#: src/gui.c:524 src/gui.c:526 src/messages-table.c:306
-msgid "Untranslated"
-msgstr "Belum lengkap diterjemahkan"
-
-#: src/gui.c:526
-#, c-format
-msgid "%s [ No untranslated left ]"
-msgstr "%s [semuanya lengkap diterjemahkan]"
-
-#: src/gui.c:545
-#, fuzzy, c-format
-msgid "Message %d / %d / Status: %s (Message contains plural forms)"
-msgstr "Pesan %d / %d / Status: %s"
-
-#: src/gui.c:549
-#, c-format
-msgid "Message %d / %d / Status: %s"
-msgstr "Pesan %d / %d / Status: %s"
-
-#: src/header_stuff.c:495
-msgid "gtranslator -- edit header"
-msgstr "gtranslator -- edit header"
-
-#: src/header_stuff.c:519
-msgid "Comments:"
-msgstr "Komentar:"
-
-#: src/header_stuff.c:526
-msgid "Project name:"
-msgstr "Nama proyek:"
-
-#: src/header_stuff.c:532
-msgid "Project version:"
-msgstr "Versi proyek:"
-
-#: src/header_stuff.c:539
-msgid "Pot file creation date:"
-msgstr "Tanggal pembuatan file Pot:"
-
-#: src/header_stuff.c:545
-msgid "Po file revision date:"
-msgstr "Tanggal revisi file po:"
-
-#: src/header_stuff.c:559
-msgid "Report message string bugs to:"
-msgstr "Laporkan kesalahan pesan ke:"
-
-#: src/header_stuff.c:572
-msgid "Generator:"
-msgstr "Generator:"
-
-#: src/header_stuff.c:576
+#: ../src/dialogs/header-dialog.ui.h:7
 msgid "Project"
 msgstr "Proyek"
 
-#: src/header_stuff.c:582
+#: ../src/dialogs/header-dialog.ui.h:8
+msgid "Project Id _version:"
+msgstr "_Versi proyek:"
+
+#: ../src/dialogs/header-dialog.ui.h:9
+msgid "Report message _bugs to:"
+msgstr "Laporkan _masalah pesan ke:"
+
+#: ../src/dialogs/header-dialog.ui.h:10
+msgid "Translator and Language"
+msgstr "Penerjemah dan Bahasa"
+
+#: ../src/dialogs/header-dialog.ui.h:11
+msgid "Translator's _email:"
+msgstr "_Email penerjemah:"
+
+#: ../src/dialogs/header-dialog.ui.h:12
+msgid "Translator's _name:"
+msgstr "_Nama penerjemah:"
+
+#: ../src/dialogs/header-dialog.ui.h:13
 msgid "Use my options to complete the following entries:"
-msgstr ""
+msgstr "Gunakan opsiku untuk melengkapi masukan berikut:"
 
-#: src/header_stuff.c:595
-msgid "Translator's name:"
-msgstr "Nama Penterjemah:"
-
-#: src/header_stuff.c:601
-msgid "Translator's e-mail:"
-msgstr "Email penterjemah:"
-
-#: src/header_stuff.c:608 src/prefs.c:500
-msgid "Language:"
+#: ../src/dialogs/header-dialog.ui.h:14 ../src/dialogs/profile-dialog.ui.h:9
+msgid "_Language:"
 msgstr "Bahasa:"
 
-#: src/header_stuff.c:615 src/prefs.c:512
+#: ../src/dialogs/jump-dialog.c:91
+msgid "Go to Message"
+msgstr "Pergi ke Pesan"
+
+#: ../src/dialogs/jump-dialog.ui.h:1
+msgid "<b>Enter message number:</b>"
+msgstr "<b>Pergi ke pesan nomor:</b>"
+
+#: ../src/dialogs/preferences-dialog.c:554
+msgid "Active"
+msgstr "Aktif"
+
+#: ../src/dialogs/preferences-dialog.c:1124
+msgid ""
+"<span weight=\"bold\" size=\"large\">Impossible to remove the active "
+"profile</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"large\">Tak mungkin menghapus profil aktif</"
+"span>"
+
+#: ../src/dialogs/preferences-dialog.c:1129
+msgid "Another profile should be selected as active before"
+msgstr "Profil lain mesti dipilih sebagai aktif sebelumnya"
+
+#: ../src/dialogs/preferences-dialog.c:1143
+msgid ""
+"<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
+"profile?</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"large\">Yakin ingin menghapus profil ini?</span>"
+
+#: ../src/dialogs/preferences-dialog.c:1181
+#: ../src/dialogs/preferences-dialog.ui.h:16
+msgid "Gtranslator Preferences"
+msgstr "Preferensi Gtranslator"
+
+#: ../src/dialogs/preferences-dialog.ui.h:2
 #, fuzzy
-msgid "Language group's email:"
-msgstr "Milis:"
+msgid "<b>Anchor style:</b>"
+msgstr "<b>Gaya anchor:</b>"
 
-#: src/header_stuff.c:622 src/prefs.c:518
-msgid "Charset:"
-msgstr "Gugus Karakter:"
+#: ../src/dialogs/preferences-dialog.ui.h:3
+msgid "<b>Autosave</b>"
+msgstr "<b>Simpan sendiri</b>"
 
-#: src/header_stuff.c:629 src/prefs.c:523
-msgid "Encoding:"
-msgstr "Encoding:"
+#: ../src/dialogs/preferences-dialog.ui.h:4
+msgid "<b>Configuration:</b>"
+msgstr "<b>Konfigurasi:</b>"
 
-#: src/header_stuff.c:637
-msgid "Translator and Language"
-msgstr "Penterjemah dan Bahasa"
+#: ../src/dialogs/preferences-dialog.ui.h:5
+msgid "<b>Contents</b>"
+msgstr "<b>Isi</b>"
 
-#: src/history.c:195
-msgid "_File/Recen_t files/"
+#: ../src/dialogs/preferences-dialog.ui.h:6
+msgid "<b>Database:</b>"
+msgstr "<b>Basis data:</b>"
+
+#: ../src/dialogs/preferences-dialog.ui.h:7
+msgid "<b>General</b>"
+msgstr "<b>Umum</b>"
+
+#: ../src/dialogs/preferences-dialog.ui.h:8
+msgid "<b>Scheme color:</b>"
+msgstr "<b>Warna skema:</b>"
+
+#: ../src/dialogs/preferences-dialog.ui.h:9
+msgid "<b>Text Display</b>"
+msgstr "<b>Tampilan Teks</b>"
+
+#: ../src/dialogs/preferences-dialog.ui.h:10
+msgid "Add to Database"
+msgstr "Tambahkan ke Basis Data"
+
+#: ../src/dialogs/preferences-dialog.ui.h:11
+msgid "Check _spelling"
+msgstr "Periksa ejaan"
+
+#: ../src/dialogs/preferences-dialog.ui.h:12
+msgid "Create a _backup copy of files before saving"
+msgstr "_Buat salinan cadangan dari berkas sebelum menyimpan"
+
+#: ../src/dialogs/preferences-dialog.ui.h:13
+msgid "Editor"
+msgstr "Penyunting"
+
+#: ../src/dialogs/preferences-dialog.ui.h:14
+msgid "Editor _font:"
+msgstr "_Fonta penyunting:"
+
+#: ../src/dialogs/preferences-dialog.ui.h:15
+msgid "Files"
+msgstr "Berkas"
+
+#: ../src/dialogs/preferences-dialog.ui.h:17
+msgid "Interface"
+msgstr "Antar muka"
+
+#: ../src/dialogs/preferences-dialog.ui.h:18
+msgid "Make _whitespace visible"
+msgstr "Buat _whitespace nampak"
+
+#: ../src/dialogs/preferences-dialog.ui.h:19
+msgid "Max. # of missing words:"
+msgstr "Cacah kata hilang maks.:"
+
+#: ../src/dialogs/preferences-dialog.ui.h:20
+msgid "Max. difference in sentence length:"
+msgstr "Perbedaan panjang kalimat maks.:"
+
+#: ../src/dialogs/preferences-dialog.ui.h:21
+msgid "Plugins"
+msgstr "Pengaya"
+
+#: ../src/dialogs/preferences-dialog.ui.h:22
+msgid "Profiles"
+msgstr "Profil"
+
+#: ../src/dialogs/preferences-dialog.ui.h:23
+msgid "Select directory contains PO files:"
+msgstr "Pilih direktori yang memuat berkas PO:"
+
+#: ../src/dialogs/preferences-dialog.ui.h:24 ../src/tab.c:662
+msgid "Translation Memory"
+msgstr "Ingatan Terjemahan"
+
+#: ../src/dialogs/preferences-dialog.ui.h:25
+msgid "Use _custom font"
+msgstr "Gunakan fonta sendiri"
+
+#: ../src/dialogs/preferences-dialog.ui.h:26
+msgid "Use only files with this name:"
+msgstr "Gunakan hanya berkas dengan nama ini:"
+
+#: ../src/dialogs/preferences-dialog.ui.h:27
+msgid "_Autosave files every"
+msgstr "Simp_an sendiri berkas setiap"
+
+#: ../src/dialogs/preferences-dialog.ui.h:28
+msgid "_Delete compiled GMO files"
+msgstr "Hapus berkas GMO hasil kompilasi"
+
+#: ../src/dialogs/preferences-dialog.ui.h:29
+msgid "_Highlight message syntax"
+msgstr "Tandai sintaks pesan"
+
+#: ../src/dialogs/preferences-dialog.ui.h:30
+msgid "_Remove fuzzy status if message is changed"
+msgstr "Hapus status _ragu bila pesan diubah"
+
+#: ../src/dialogs/preferences-dialog.ui.h:31
+msgid "_Warn if PO file contains fuzzy translations"
+msgstr "Peringatkan bila berkas po memuat terjemahan ragu"
+
+#: ../src/dialogs/preferences-dialog.ui.h:32
+msgid "_minutes"
+msgstr "_menit"
+
+#: ../src/dialogs/profile-dialog.c:262
+msgid ""
+"<span weight=\"bold\" size=\"large\">The profile name already exists</span>"
+msgstr "<span weight=\"bold\" size=\"large\">Nama profil telah ada</span>"
+
+#: ../src/dialogs/profile-dialog.c:375
+msgid "Gtranslator Profile"
+msgstr "Profil Gtranslator"
+
+#: ../src/dialogs/profile-dialog.c:420
+msgid "Example: nplurals=2; plural=(n != 1);"
+msgstr "Contoh: nplurals=2; plural=(n != 1); atau nplurals=1; plural=0;"
+
+#: ../src/dialogs/profile-dialog.ui.h:1
+msgid "<b>Language Settings</b>"
+msgstr "<b>Penataan Bahasa</b>"
+
+#: ../src/dialogs/profile-dialog.ui.h:2
+msgid "<b>Profile Information</b>"
+msgstr "<b>Informasi Profil</b>"
+
+#: ../src/dialogs/profile-dialog.ui.h:3
+msgid "<b>Translator Information</b>"
+msgstr "<b>Informasi Penerjemah</b>"
+
+#: ../src/dialogs/profile-dialog.ui.h:4
+msgid "Character _set"
+msgstr "Gugu_s karakter"
+
+#: ../src/dialogs/profile-dialog.ui.h:5
+msgid "Language _code:"
+msgstr "Kode bahasa:"
+
+#: ../src/dialogs/profile-dialog.ui.h:6
+msgid "N_ame:"
+msgstr "N_ama:"
+
+#: ../src/dialogs/profile-dialog.ui.h:7
+msgid "Transfer en_coding:"
+msgstr "Transfer en_coding:"
+
+#: ../src/dialogs/profile-dialog.ui.h:8
+msgid "_Email:"
+msgstr "_Email:"
+
+#: ../src/dialogs/profile-dialog.ui.h:10
+msgid "_Name:"
+msgstr "_Nama:"
+
+#: ../src/dialogs/profile-dialog.ui.h:11
+msgid "_Plural forms:"
+msgstr "Bentuk jamak:"
+
+#: ../src/dialogs/profile-dialog.ui.h:12
+msgid "_Team email:"
+msgstr "Email _tim:"
+
+#: ../src/dialogs/search-dialog.c:332 ../src/dialogs/search-dialog.ui.h:4
+msgid "Replace"
+msgstr "Ganti"
+
+#: ../src/dialogs/search-dialog.c:356
+msgid "Find"
+msgstr "Cari"
+
+#: ../src/dialogs/search-dialog.c:471
+msgid "Replace _All"
+msgstr "Ganti Semu_a"
+
+#: ../src/dialogs/search-dialog.c:475
+msgid "_Replace"
+msgstr "Ganti"
+
+#: ../src/dialogs/search-dialog.ui.h:1
+msgid "Include fuzzy strings"
+msgstr "Termasuk string ragu"
+
+#: ../src/dialogs/search-dialog.ui.h:2
+msgid "Match _entire word only"
+msgstr "Hanya cocok s_eluruh kata"
+
+#: ../src/dialogs/search-dialog.ui.h:3
+msgid "Original text"
+msgstr "Teks asli"
+
+#: ../src/dialogs/search-dialog.ui.h:5
+msgid "Replace All"
+msgstr "Ganti Semua"
+
+#: ../src/dialogs/search-dialog.ui.h:6
+msgid "Replace _with: "
+msgstr "Ganti dengan:"
+
+#: ../src/dialogs/search-dialog.ui.h:7
+msgid "Search _backwards"
+msgstr "Cari mundur"
+
+#: ../src/dialogs/search-dialog.ui.h:8
+msgid "Translated text"
+msgstr "Teks terjemahan"
+
+#: ../src/dialogs/search-dialog.ui.h:9
+msgid "_Match case"
+msgstr "Besar/kecil cocok"
+
+#: ../src/dialogs/search-dialog.ui.h:10
+msgid "_Search for: "
+msgstr "Cari: "
+
+#: ../src/dialogs/search-dialog.ui.h:11
+msgid "_Wrap around"
 msgstr ""
 
-#: src/history.c:243
+#: ../src/main.c:54
+msgid "[FILE...]"
+msgstr "[FILE...]"
+
+#: ../src/main.c:80
 #, c-format
-msgid "Open %s"
-msgstr "Buka %s"
-
-#: src/languages.c:37
-msgid "Afrikaans"
-msgstr "Afrikaans"
-
-#: src/languages.c:41
-msgid "Arabic"
-msgstr "Arab"
-
-#: src/languages.c:45
-msgid "Azerbaijani Turkish"
-msgstr "Turki Azerbaijan"
-
-#: src/languages.c:49
-msgid "Basque"
-msgstr "Basque"
-
-#: src/languages.c:53
-msgid "Belorussian"
-msgstr "Belorussia"
-
-#: src/languages.c:57
-msgid "Bengali"
-msgstr "Bengal"
-
-#: src/languages.c:61
-msgid "Britton"
-msgstr "Britton"
-
-#: src/languages.c:65
-msgid "Bulgarian"
-msgstr "Bulgaria"
-
-#: src/languages.c:69
-msgid "Catalan"
-msgstr "Catalan"
-
-#: src/languages.c:73
-msgid "Chinese/Simplified"
-msgstr "China/Disederhanakan"
-
-#: src/languages.c:77
-msgid "Chinese/Traditional"
-msgstr "China/Tradisional"
-
-#: src/languages.c:81
-msgid "Croatian"
-msgstr "Kroasia"
-
-#: src/languages.c:85
-msgid "Czech"
-msgstr "Ceko"
-
-#: src/languages.c:89
-msgid "Danish"
-msgstr "Denmark"
-
-#: src/languages.c:93
-msgid "Dutch"
-msgstr "Belanda"
-
-#: src/languages.c:101
-msgid "English/Canada"
-msgstr "Bahasa Inggris/Kanada"
-
-#: src/languages.c:105
-msgid "English/GB"
-msgstr "Bahasa Inggris/Inggris Raya"
-
-#: src/languages.c:109
-msgid "English/USA"
-msgstr "Bahasa Inggris/Amerika Serikat"
-
-#: src/languages.c:113
-msgid "Esperanto"
-msgstr "Esperanto"
-
-#: src/languages.c:117
-msgid "Estonian"
-msgstr "Estonia"
-
-#: src/languages.c:121
-#, fuzzy
-msgid "Persian"
-msgstr "Belorussia"
-
-#: src/languages.c:125
-msgid "Finnish"
-msgstr "Finlandia"
-
-#: src/languages.c:129
-msgid "French"
-msgstr "Perancis"
-
-#: src/languages.c:133
-msgid "Galician"
-msgstr "Galisia"
-
-#: src/languages.c:137
-msgid "German"
-msgstr "Jerman"
-
-#: src/languages.c:141
-msgid "Greek"
-msgstr "Yunani"
-
-#: src/languages.c:145
-msgid "Gujarati"
-msgstr "Gujarat"
-
-#: src/languages.c:149
-msgid "Hindi"
-msgstr "Hindi"
-
-#: src/languages.c:153
-msgid "Hungarian"
-msgstr "Hungaria"
-
-#: src/languages.c:157
-msgid "Icelandic"
-msgstr "Islandia"
-
-#: src/languages.c:161
-msgid "Indonesian"
-msgstr "Bahasa Indonesia"
-
-#: src/languages.c:165
-msgid "Italian"
-msgstr "Itali"
-
-#: src/languages.c:169
-msgid "Irish"
-msgstr "Irlandia"
-
-#: src/languages.c:173
-msgid "Japanese"
-msgstr "Jepang"
-
-#: src/languages.c:177
-msgid "Kannada"
-msgstr "Kannada"
-
-#: src/languages.c:181
-msgid "Korean"
-msgstr "Korea"
-
-#: src/languages.c:185
-msgid "Latvian"
-msgstr "Latvia"
-
-#: src/languages.c:189
-msgid "Lithuanian"
-msgstr "Lithuania"
-
-#: src/languages.c:193
-msgid "Malay/Bahasa Melayu"
-msgstr "Bahasa Melayu"
-
-#: src/languages.c:197
-msgid "Maltese"
-msgstr "Malta"
-
-#: src/languages.c:201
-msgid "Marathi"
-msgstr "Marathi"
-
-#: src/languages.c:205
-msgid "Norwegian/Bokmaal"
-msgstr "Norwegia/Bokmaal"
-
-#: src/languages.c:209
-msgid "Norwegian/Nynorsk"
-msgstr "Norwegia/Nynorsk"
-
-#: src/languages.c:213
-msgid "Punjabi"
-msgstr "Punjab"
-
-#: src/languages.c:217
-msgid "Polish"
-msgstr "Polandia"
-
-#: src/languages.c:221
-msgid "Portuguese"
-msgstr "Portugis"
-
-#: src/languages.c:225
-msgid "Portuguese/Brazil"
-msgstr "Portugis/Brasil"
-
-#: src/languages.c:229
-msgid "Romanian"
-msgstr "Romania"
-
-#: src/languages.c:233
-msgid "Russian"
-msgstr "Russia"
-
-#: src/languages.c:237
-msgid "Serbian/Cyrillic"
-msgstr "Serbia/Sirilik"
-
-#: src/languages.c:241
-msgid "Serbian/Latin"
-msgstr "Serbia/Latin"
-
-#: src/languages.c:245
-msgid "Slovak"
-msgstr "Slovakia"
-
-#: src/languages.c:249
-msgid "Slovenian"
-msgstr "Slovenia"
-
-#: src/languages.c:253
-msgid "Spanish"
-msgstr "Spanyol"
-
-#: src/languages.c:257
-msgid "Spanish/Spain"
-msgstr "Spanyol/Spanyol"
-
-#: src/languages.c:261
-msgid "Spanish/Mexico"
-msgstr "Spanyol/Meksiko"
-
-#: src/languages.c:265
-msgid "Swedish"
-msgstr "Swedia"
-
-#: src/languages.c:269
-msgid "Tamil"
-msgstr "Tamil"
-
-#: src/languages.c:273
-msgid "Telugu"
-msgstr "Telugu"
-
-#: src/languages.c:277
-msgid "Thai"
-msgstr "Thailand"
-
-#: src/languages.c:281
-msgid "Turkish"
-msgstr "Turki"
-
-#: src/languages.c:285
-msgid "Ukrainian"
-msgstr "Ukrania"
-
-#: src/languages.c:289
-msgid "Uzbekian"
-msgstr "Uzbekistan"
-
-#: src/languages.c:293
-msgid "Vietnamese"
-msgstr "Vietnam"
-
-#: src/languages.c:297
-msgid "Walloon"
-msgstr "Wallon"
-
-#: src/languages.c:301
-msgid "Welsh"
-msgstr "Welsh"
-
-#: src/learn.c:379
-msgid "gtranslator learn buffer statistics:"
-msgstr ""
-
-#: src/learn.c:382
-#, c-format
-msgid "Learn buffer filename: `%s`"
-msgstr ""
-
-#.
-#. * Translators: This means the encoding of the learn buffer (XML) file.
-#.
-#: src/learn.c:388
-#, fuzzy, c-format
-msgid "Encoding: `%s'"
-msgstr "Encoding:"
-
-#.
-#. * Translators: "Serial number" of the learn buffer - means # of file updates.
-#.
-#: src/learn.c:394
-#, c-format
-msgid "Serial: `%i'"
-msgstr ""
-
-#.
-#. * Translators: That's the number of message entries in the learn buffer.
-#.
-#: src/learn.c:400
-#, c-format
-msgid "Number of entries: `%i'"
-msgstr ""
-
-#: src/main.c:85
-#, fuzzy
-msgid "Auto translate the po file"
-msgstr "Terjemahkan file po secara otomatis lantas keluar"
-
-#: src/main.c:85 src/main.c:101
-msgid "FILENAME"
-msgstr "NAMA·FILE"
-
-#: src/main.c:89
-msgid "Show build specifications"
-msgstr ""
-
-#: src/main.c:93
-msgid "Export learn buffer to a plain po file"
-msgstr ""
-
-#: src/main.c:93
-msgid "PO_FILE"
-msgstr ""
-
-#: src/main.c:97
-msgid "Specify main window geometry"
-msgstr ""
-
-#: src/main.c:97
-msgid "GEOMETRY"
-msgstr "GEOMETRY"
-
-#: src/main.c:101
-msgid "Learn the file completely"
-msgstr ""
-
-#: src/main.c:105
-msgid "Show learn buffer statistics"
-msgstr ""
-
-#: src/main.c:148
+msgid "%s: malformed file name or URI.\n"
+msgstr "%s: nama berkas atau URI yang salah bentuk.\n"
+
+#: ../src/main.c:148
+msgid "Gtranslator"
+msgstr "Gtranslator"
+
+#. Setup command line options
+#: ../src/main.c:151
+msgid "- Edit PO files"
+msgstr "- Sunting berkas PO"
+
+#: ../src/main.c:165
 #, c-format
 msgid "Error during GConf initialization: %s."
-msgstr ""
+msgstr "Galat saat inisialisasi GConf: %s."
 
-#: src/main.c:180
-msgid "gtranslator build information/specs:"
-msgstr ""
-
-#: src/main.c:182
-msgid "Version and build date:"
-msgstr ""
-
-#: src/main.c:184
-msgid "Build GLib / Gtk+ / GNOME / XML versions:"
-msgstr ""
-
-#: src/main.c:186
-msgid "Colorschemes directory:"
-msgstr ""
-
-#: src/main.c:188
-msgid "Scripts directory:"
-msgstr ""
-
-#: src/main.c:190
-msgid "Window icon:"
-msgstr ""
-
-#: src/main.c:192
-msgid "Own locale directory:"
-msgstr ""
-
-#: src/main.c:194
-msgid "Default learn buffer file location:"
-msgstr ""
-
-#.
-#. * As everything seemed to went fine, print out a nice
-#. *  message informing the user about the success.
-#.
-#: src/main.c:459
+#: ../src/main.c:187
 #, c-format
-msgid "Learned file `%s' successfully for your learn buffer.\n"
-msgstr ""
+msgid "Error setting the default window icon: %s"
+msgstr "Galat menata ikon jendela bawaan: %s"
 
-#.
-#. * Give us another small status feedback about the export.
-#.
-#: src/main.c:501
+#: ../src/message-table.c:273
+msgid "Status"
+msgstr "Kondisi"
+
+#: ../src/message-table.c:289
+msgid "ID"
+msgstr "ID"
+
+#: ../src/message-table.c:308
+msgid "Original Text"
+msgstr "Teks Asli"
+
+#: ../src/message-table.c:327
+msgid "Translated Text"
+msgstr "Teks Terjemahan"
+
+#: ../src/notebook.c:90
 #, c-format
-msgid "Exported learn buffer to file `%s'.\n"
-msgstr ""
+msgid "<b>Path:</b> %s"
+msgstr "<b>Path:</b> %s"
 
-#: src/menus.c:48
-msgid "_Go"
-msgstr ""
+#: ../src/notebook.c:143
+msgid "Close document"
+msgstr "Tutup dokumen"
 
-#: src/menus.c:58
-msgid "_Compile"
-msgstr ""
-
-#: src/menus.c:59 src/menus.c:296
-msgid "Compile the po file"
-msgstr ""
-
-#: src/menus.c:65
-msgid "_Update"
-msgstr "_Update"
-
-#: src/menus.c:66 src/menus.c:300
-msgid "Update the po file"
-msgstr ""
-
-#: src/menus.c:73
-msgid "Add bookmark"
-msgstr ""
-
-#: src/menus.c:74
-msgid "Add a bookmark for this message in this po file"
-msgstr ""
-
-#: src/menus.c:81
-msgid "Aut_otranslate..."
-msgstr ""
-
-#: src/menus.c:82
-msgid "Autotranslate the file with information from your learn buffer"
-msgstr ""
-
-#: src/menus.c:89
-msgid "Remove all translations..."
-msgstr ""
-
-#: src/menus.c:90
-msgid "Remove all existing translations from the po file"
-msgstr ""
-
-#: src/menus.c:98
-msgid "Open from _URI..."
-msgstr ""
-
-#: src/menus.c:99
-msgid "Open a po file from a given URI"
-msgstr ""
-
-#: src/menus.c:109
-msgid "Recen_t files"
-msgstr ""
-
-#: src/menus.c:113
-msgid "_Export to UTF-8..."
-msgstr ""
-
-#: src/menus.c:114
-msgid "Export the current po file to UTF-8"
-msgstr ""
-
-#: src/menus.c:120
-msgid "_Import from UTF-8..."
-msgstr ""
-
-#: src/menus.c:121
-msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
-msgstr ""
-
-#: src/menus.c:153
-msgid "_Query..."
-msgstr ""
-
-#: src/menus.c:154 src/menus.c:361
-msgid "Query for a string"
-msgstr ""
-
-#: src/menus.c:161
-msgid "_Header..."
-msgstr ""
-
-#: src/menus.c:162
-msgid "Edit po file header"
-msgstr ""
-
-#: src/menus.c:169
-msgid "C_omment..."
-msgstr ""
-
-#: src/menus.c:170
-msgid "Edit message comment"
-msgstr ""
-
-#: src/menus.c:177
-msgid "Copy _message -> translation"
-msgstr ""
-
-#: src/menus.c:178
-msgid "Copy the original message contents and paste them as translation"
-msgstr ""
-
-#: src/menus.c:185
-msgid "Fu_zzy"
-msgstr ""
-
-#: src/menus.c:186
-msgid "Toggle fuzzy status of a message"
-msgstr ""
-
-#: src/menus.c:200
-msgid "_First"
-msgstr "_Pertama"
-
-#: src/menus.c:201 src/menus.c:317
-msgid "Go to the first message"
-msgstr ""
-
-#: src/menus.c:207
-msgid "_Back"
-msgstr "_Mundur"
-
-#: src/menus.c:208 src/menus.c:321
-msgid "Move back one message"
-msgstr ""
-
-#: src/menus.c:215
-msgid "_Next"
-msgstr ""
-
-#: src/menus.c:216 src/menus.c:326
-msgid "Move forward one message"
-msgstr ""
-
-#: src/menus.c:222
-msgid "_Last"
-msgstr "_Akhir"
-
-#: src/menus.c:223 src/menus.c:330
-msgid "Go to the last message"
-msgstr ""
-
-#: src/menus.c:230
-msgid "_Go to..."
-msgstr ""
-
-#: src/menus.c:231
-msgid "Goto specified message number"
-msgstr ""
-
-#: src/menus.c:237
-msgid "Next fuz_zy"
-msgstr ""
-
-#: src/menus.c:238
-msgid "Go to next fuzzy message"
-msgstr ""
-
-#: src/menus.c:244
-msgid "Next _untranslated"
-msgstr ""
-
-#: src/menus.c:245 src/menus.c:335
-msgid "Go to next untranslated message"
-msgstr ""
-
-#: src/menus.c:255
-msgid "_Bookmarks"
-msgstr ""
-
-#: src/menus.c:256
-msgid "_Colorschemes"
-msgstr ""
-
-#: src/menus.c:270
-msgid "gtranslator _website"
-msgstr ""
-
-#: src/menus.c:271
-msgid "gtranslator's homepage on the web"
-msgstr ""
-
-#: src/menus.c:282
-msgid "Open"
-msgstr "Buka"
-
-#: src/menus.c:283
-msgid "Open a po file"
-msgstr ""
-
-#: src/menus.c:286
-msgid "Save"
-msgstr ""
-
-#: src/menus.c:287
-msgid "Save File"
-msgstr ""
-
-#: src/menus.c:290
-msgid "Save as"
-msgstr ""
-
-#: src/menus.c:291
-msgid "Save file with a different name"
-msgstr ""
-
-#: src/menus.c:295
-msgid "Compile"
-msgstr ""
-
-#: src/menus.c:299
-msgid "Update"
-msgstr ""
-
-#: src/menus.c:303
-msgid "Header"
-msgstr ""
-
-#: src/menus.c:304
-msgid "Edit the header"
-msgstr ""
-
-#: src/menus.c:308
-msgid "Undo"
-msgstr ""
-
-#: src/menus.c:309
-msgid "Undo the last performed action"
-msgstr ""
-
-#: src/menus.c:316
-msgid "First"
-msgstr "Pertama"
-
-#: src/menus.c:320
-msgid "Back"
-msgstr ""
-
-#: src/menus.c:325
-msgid "Next"
-msgstr "Selanjutnya"
-
-#: src/menus.c:329
-msgid "Last"
-msgstr "Akhir"
-
-#: src/menus.c:334
-msgid "Missing"
-msgstr ""
-
-#: src/menus.c:342
-msgid "Go to the next fuzzy translation"
-msgstr ""
-
-#: src/menus.c:347
-msgid "Go to"
-msgstr ""
-
-#: src/menus.c:348
-msgid "Go to specified message number"
-msgstr ""
-
-#: src/menus.c:351
-msgid "Find"
-msgstr ""
-
-#: src/menus.c:352
-msgid "Find string in po file"
-msgstr ""
-
-#: src/menus.c:356
-msgid "Replace string in po file"
-msgstr ""
-
-#: src/message.c:96
-msgid "Couldn't get the message!"
-msgstr ""
-
-#: src/message.c:118
-msgid "There are no fuzzy messages left."
-msgstr ""
-
-#: src/message.c:142
-msgid "All messages seem to be translated."
-msgstr ""
-
-#: src/message.c:328
-msgid "gtranslator -- edit plural forms of message translation"
-msgstr ""
-
-#: src/messages-table.c:243
-msgid "Original"
-msgstr ""
-
-#: src/open.c:144
+#: ../src/po.c:398
 #, c-format
-msgid "Couldn't open compiled gettext file `%s'!"
-msgstr ""
+msgid "Failed opening file '%s': %s"
+msgstr "Gagal membuka berkas '%s': %s"
 
-#: src/open.c:192
+#: ../src/po.c:422
 #, c-format
-msgid "Couldn't open compressed gettext file `%s'!"
-msgstr ""
+msgid "The file is empty"
+msgstr "Berkas ini kosong"
 
-#.
-#. * The %s format here stands for the used
-#. *  compressions program (gzip, bzip2 etc.)
-#.
-#: src/open.c:202
+#: ../src/po.c:437
 #, c-format
-msgid "Couldn't open %s'd gettext file `%s'!"
-msgstr ""
+msgid "Gettext returned a null message domain list."
+msgstr "Gettext mengembalikan daftar domain pesan null."
 
-#: src/open.c:271
+#: ../src/po.c:593
 #, c-format
-msgid "Couldn't open zip'ed po file `%s'!"
-msgstr ""
+msgid "No messages obtained from parser."
+msgstr "Tidak ada pesan diperoleh dari pengurai."
 
-#: src/parse.c:483
-#, c-format
-msgid ""
-"Error in file \"%s\"\n"
-"at line %d.\n"
-"Please check the file and try again."
-msgstr ""
-
-#: src/parse.c:538
-#, c-format
-msgid ""
-"The file is empty:\n"
-"%s"
-msgstr ""
-
-#: src/parse.c:560
-#, c-format
-msgid "The file `%s' doesn't exist at all!"
-msgstr ""
-
-#.
-#. * Provide a default po->header to avoid segfaults (#62244)
-#.
-#: src/parse.c:692
-msgid "Header record not found - defaulting from preferences"
-msgstr ""
-
-#: src/parse.c:708
-#, c-format
-msgid "gtranslator -- %s"
-msgstr ""
-
-#: src/parse.c:920
+#: ../src/po.c:877
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
 "Pot files are generated by the compilation process.\n"
 "Your file should likely be named '%s.po'."
 msgstr ""
+"Anda menyimpan berkas dengan akhiran pot \n"
+"Berkas pot dibuat oleh proses kompilasi \n"
+"Berkas anda mungkin perlu dinamai '%s.po'."
 
-#: src/parse.c:982
+#: ../src/po.c:890
 #, c-format
-msgid "Could not open file `%s' for writing!"
-msgstr ""
+msgid "The file %s is read-only, and can not be overwritten"
+msgstr "Berkas %s hanya dapat dibaca, dan tak bisa ditimpa"
 
-#: src/parse.c:1034
+#: ../src/po.c:923
+#, c-format
+msgid "There was an error writing the PO file: %s"
+msgstr "Ada galat menulis berkas PO: %s"
+
+#: ../src/plugin-system/plugin-manager.c:54
+msgid "Plugin"
+msgstr "Plugin"
+
+#: ../src/plugin-system/plugin-manager.c:55
+msgid "Enabled"
+msgstr "Difungsikan"
+
+#: ../src/plugin-system/plugin-manager.c:508
+msgid "_About"
+msgstr "Ihw_al"
+
+#: ../src/plugin-system/plugin-manager.c:514
+msgid "C_onfigure"
+msgstr "K_onfigur"
+
+#: ../src/plugin-system/plugin-manager.c:523
+msgid "A_ctivate"
+msgstr "Aktifkan"
+
+#: ../src/plugin-system/plugin-manager.c:534
+msgid "Ac_tivate All"
+msgstr "Ak_tifkan Semua"
+
+#: ../src/plugin-system/plugin-manager.c:538
+msgid "_Deactivate All"
+msgstr "Matikan Semua"
+
+#: ../src/plugin-system/plugin-manager.c:777
+msgid "Active plugins"
+msgstr "Plugin aktif"
+
+#: ../src/plugin-system/plugin-manager.c:806
+msgid "_About Plugin"
+msgstr "Tent_ang Plugin"
+
+#: ../src/plugin-system/plugin-manager.c:811
+msgid "C_onfigure Plugin"
+msgstr "K_onfigur Plugin"
+
+#: ../src/statusbar.c:118 ../src/statusbar.c:249
+msgid "INS"
+msgstr "INS"
+
+#: ../src/statusbar.c:119 ../src/statusbar.c:245
+msgid "OVR"
+msgstr "OVR"
+
+#: ../src/tab.c:223
+msgid "There is an error in the message:"
+msgstr "Ada galat dalam pesan:"
+
+#: ../src/tab.c:398
+msgid "Open comment dialog"
+msgstr "Buka dialog komentar"
+
+#: ../src/tab.c:576
+#, c-format
+msgid "Plural %d"
+msgstr "Jamak %d"
+
+#: ../src/tab.c:621
+msgid "Message Table"
+msgstr "Tabel Pesan"
+
+#: ../src/tab.c:653
+msgid "Context"
+msgstr "Konteks"
+
+#: ../src/tab.c:692
+msgid "<b>Original Text:</b>"
+msgstr "<b>Teks Asli:</b>"
+
+#: ../src/tab.c:753
+msgid "<b>Translate_d Text:</b>"
+msgstr "<b>Teks Terje_mahan:</b>"
+
+#. Translaters: This string is for a toggle to display a toolbar.
+#. * The name of the toolbar is automatically computed from the widgets
+#. * on the toolbar, and is placed at the %s. Note the _ before the %s
+#. * which is used to add mnemonics. We know that this is likely to
+#. * produce duplicates, but don't worry about it. If your language
+#. * normally has a mnemonic at the start, please use the _. If not,
+#. * please remove.
+#: ../src/toolbareditor/egg-editable-toolbar.c:939
+#, fuzzy, c-format
+msgid "Show “_%s”"
+msgstr "Tampilkan \"_%s\""
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1405
+msgid "_Move on Toolbar"
+msgstr "_Pindah pada Toolbar"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1406
+msgid "Move the selected item on the toolbar"
+msgstr "Pindah objek yang dipilih pada toolbar"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1407
+msgid "_Remove from Toolbar"
+msgstr "_Hapus dari Toolbar"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1408
+msgid "Remove the selected item from the toolbar"
+msgstr "Hapus objek yang dipilih dari toolbar"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1410
+msgid "_Delete Toolbar"
+msgstr "Ha_pus Toolbar"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1411
+msgid "Remove the selected toolbar"
+msgstr "Hapus toolbar yang dipilih"
+
+#: ../src/toolbareditor/egg-toolbar-editor.c:475
+msgid "Separator"
+msgstr "Pemisah"
+
+#: ../src/translation-memory/berkeley/db-base.c:157
+msgid "Running recovery..."
+msgstr "Menjalankan pemulihan..."
+
+#: ../src/translation-memory/berkeley/db-base.c:166
+#, c-format
+msgid "There was an error recovering the database: %s"
+msgstr "Ada galat memulihkan basis data: %s"
+
+#: ../src/translation-memory/berkeley/db-base.c:174
+#, c-format
+msgid "There was an error in database: %s"
+msgstr "Ada galat dalam basis data: %s"
+
+#: ../src/translation-memory/translation-memory-ui.c:212
+#, c-format
+msgid "Insert Option nº %d"
+msgstr "Sisipkan Opsi nº %d"
+
+#: ../src/translation-memory/translation-memory-ui.c:290
+msgid "Shortcut"
+msgstr "Tombol Pintas"
+
+#: ../src/translation-memory/translation-memory-ui.c:299
+msgid "Level"
+msgstr "Tingkat"
+
+#: ../src/translation-memory/translation-memory-ui.c:308
+msgid "String"
+msgstr "String"
+
+#: ../src/utils.c:307
+msgid "Please check your installation."
+msgstr "Silakan periksa instalasi anda."
+
+#: ../src/utils.c:368
+#, c-format
+msgid "Unable to open ui file %s. Error: %s"
+msgstr "Gagal membuka berkas ui %s. Galat: %s"
+
+#: ../src/utils.c:388
+#, c-format
+msgid "Unable to find the object '%s' inside file %s."
+msgstr "Tak bisa menemukan objek '%s' di dalam berkas %s."
+
+#: ../src/utils.c:812
+msgid ""
+"Unable to display help. Please make sure the Gtranslator documentation "
+"package is installed."
+msgstr ""
+"Tak bisa menampilkan bantuan. Pastikan bahwa paket dokumentasi Gtranslator "
+"telah dipasang."
+
+#: ../src/view.c:79
+#, c-format
+msgid "gtkspell error: %s\n"
+msgstr "galat gtkspell: %s\n"
+
+#: ../src/view.c:81
 #, c-format
 msgid ""
-"File %s\n"
-"contains %d fuzzy messages"
+"GtkSpell was unable to initialize.\n"
+" %s"
 msgstr ""
+"GtkSpell tak bisa mengawali.\n"
+" %s"
 
-#: src/parse.c:1303
-msgid "Sorry, msgfmt isn't available on your system!"
-msgstr ""
+#: ../src/window.c:113
+msgid "_File"
+msgstr "_Berkas"
 
-#: src/parse.c:1338
+#: ../src/window.c:114
+msgid "_Edit"
+msgstr "_Edit"
+
+#: ../src/window.c:115
+msgid "_View"
+msgstr "_Tampilan"
+
+#. { "Bookmarks", NULL, N_("_Bookmarks") },
+#. { "Actions", NULL, N_("_Actions") },
+#: ../src/window.c:118
+msgid "_Search"
+msgstr "_Cari"
+
+#: ../src/window.c:119
+msgid "_Go"
+msgstr "Ay_o"
+
+#: ../src/window.c:120
+msgid "_Documents"
+msgstr "_Dokumen"
+
+#: ../src/window.c:121
+msgid "_Help"
+msgstr "Bantua_n"
+
+#: ../src/window.c:125
+msgid "Open a PO file"
+msgstr "Buka suatu berkas PO"
+
+#: ../src/window.c:127
+msgid "_Recent Files"
+msgstr "Be_rkas Terkini"
+
+#: ../src/window.c:130
+msgid "Quit the program"
+msgstr "Keluar dari program"
+
+#. Edit menu
+#: ../src/window.c:134
+msgid "T_oolbar"
+msgstr "T_oolbar"
+
+#: ../src/window.c:137
+msgid "Edit gtranslator preferences"
+msgstr "Sunting preferensi gtranslator"
+
+#: ../src/window.c:139 ../src/window.c:186
+msgid "_Header..."
+msgstr "_Header..."
+
+#. Help menu
+#: ../src/window.c:143
+msgid "_Contents"
+msgstr "_Isi"
+
+#: ../src/window.c:155
+msgid "Save the current file"
+msgstr "Simpan berkas kini"
+
+#: ../src/window.c:158
+msgid "Save the current file with another name"
+msgstr "Simpan berkas kini dengan nama berbeda"
+
+#: ../src/window.c:164
+msgid "Close the current file"
+msgstr "Tutup berkas kini"
+
+#: ../src/window.c:169
+msgid "Undo last operation"
+msgstr "Batalkan operasi terakhir"
+
+#: ../src/window.c:172
+msgid "Redo last undone operation"
+msgstr "Lakukan lagi operasi terakhir yang dibatalkan"
+
+#: ../src/window.c:175
+msgid "Cut the selected text"
+msgstr "Potong teks yang dipilih"
+
+#: ../src/window.c:178
+msgid "Copy the selected text"
+msgstr "Salin teks yang dipilih"
+
+#: ../src/window.c:181
+msgid "Paste the contents of the clipboard"
+msgstr "Tempel isi clipboard"
+
+#: ../src/window.c:184
+msgid "Clear the selected translation"
+msgstr "Bersihkan terjemahan yang dipilih"
+
+#: ../src/window.c:188
+msgid "C_omment..."
+msgstr "_Komentar..."
+
+#: ../src/window.c:189
+msgid "Edit message comment"
+msgstr "Sunting komentar pesan"
+
+#: ../src/window.c:191
+msgid "Copy _Message to Translation"
+msgstr "Salin Pesan ke Terje_mahan"
+
+#: ../src/window.c:193
+msgid "Copy original message contents to the translation field"
+msgstr "Salin isi pesan asli dan tempelkan sebagai terjemahan"
+
+#: ../src/window.c:195
+msgid "Toggle _Fuzzy Status"
+msgstr "_Jungkit Status Keraguan"
+
+#: ../src/window.c:196
+msgid "Toggle fuzzy status of a message"
+msgstr "Bolak-balik status keraguan dari suatu pesan"
+
+#: ../src/window.c:198 ../src/window.c:206
+msgid "_Translation Memory"
+msgstr "Ing_atan Terjemahan"
+
+#. View menu
+#: ../src/window.c:203
+msgid "_Context"
+msgstr "_Konteks"
+
+#: ../src/window.c:204
+msgid "Show the Context panel"
+msgstr "Tampilkan panel Konteks"
+
+#: ../src/window.c:207
+msgid "Show the Translation Memory panel"
+msgstr "Tampilkan panel Ingatan Terjemahan"
+
+#. { "ViewSidePane", NULL, N_("Side _Pane"), "F9",
+#. N_("Show or hide the side pane in the current window"),
+#. NULL },
+#. Bookmarks menu
+#. { "BookmarksAdd", GTK_STOCK_ADD, N_("_Add Bookmark"), "<control>D",
+#. N_("Add a bookmark to the current message"), NULL},
+#. { "BookmarksEdit", GTK_STOCK_EDIT, N_("_Edit Bookmarks"), "<control>B",
+#. N_("Edit stored bookmarks"), NULL},
+#. Action menu
+#. { "ActionsCompile", GTK_STOCK_CONVERT, N_("_Compile"), NULL,
+#. N_("Compile the current file to a MO file"), NULL },
+#. { "ActionsRefresh", GTK_STOCK_REFRESH, NULL, NULL,
+#. N_("  "), NULL },
+#. //G_CALLBACK(gtranslator_bookmark_adding_dialog) },
+#. { "ActionsAutotranslate", NULL, N_("Aut_otranslate..."), NULL,
+#. N_("Autotranslate the current file using a translation memory"), NULL},
+#. //G_CALLBACK(gtranslator_auto_translation_dialog) },
+#. { "ActionsRemoveTranslations", GTK_STOCK_REMOVE, N_("Remo_ve All Translations..."), NULL,
+#. N_("Remove all existing translations"), NULL},
+#. //G_CALLBACK(gtranslator_remove_all_translations_dialog) },
+#. Go menu
+#: ../src/window.c:233
+msgid "_Previous Message"
+msgstr "_Pesan Sebelumnya"
+
+#: ../src/window.c:234
+msgid "Move back one message"
+msgstr "Mundur satu pesan"
+
+#: ../src/window.c:236
+msgid "_Next Message"
+msgstr "Pesa_n Berikutnya"
+
+#: ../src/window.c:237
+msgid "Move forward one message"
+msgstr "Maju satu pesan"
+
+#: ../src/window.c:239
+msgid "_Go to Message..."
+msgstr "_Lompat ke Pesan..."
+
+#: ../src/window.c:240
+msgid "Jumps to a specific message"
+msgstr "Lompat ke nomor pesan tertentu"
+
+#: ../src/window.c:242
+msgid "_First Message"
+msgstr "_Pesan Pertama"
+
+#: ../src/window.c:243
+msgid "Go to the first message"
+msgstr "Pergi ke pesan pertama"
+
+#: ../src/window.c:245
+msgid "_Last Message"
+msgstr "Pesan _Terakhir"
+
+#: ../src/window.c:246
+msgid "Go to the last message"
+msgstr "Pergi ke pesan terakhir"
+
+#: ../src/window.c:248
+msgid "Next Fuz_zy"
+msgstr "Ragu Beriku_tnya"
+
+#: ../src/window.c:249
+msgid "Go to the next fuzzy message"
+msgstr "Pergi ke pesan ragu berikutnya"
+
+#: ../src/window.c:251
+msgid "Previous Fuzz_y"
+msgstr "Ragu Sebelumn_ya"
+
+#: ../src/window.c:252
+msgid "Go to the previous fuzzy message"
+msgstr "Pergi ke pesan ragu sebelumnya"
+
+#: ../src/window.c:254
+msgid "Next _Untranslated"
+msgstr "Bel_um Terjemah Berikutnya"
+
+#: ../src/window.c:255
+msgid "Go to the next untranslated message"
+msgstr "Lompat ke pesan berikutnya yang belum diterjemahkan"
+
+#: ../src/window.c:258
+msgid "Previ_ous Untranslated"
+msgstr "Belum Terjemah _Sebelumnya"
+
+#: ../src/window.c:259
+msgid "Go to the previous untranslated message"
+msgstr "Lompat ke pesan sebelumnya yang belum diterjemahkan"
+
+#: ../src/window.c:262
+msgid "Next Fu_zzy or Untranslated"
+msgstr "Belum Terjemah _atau Ragu Berikutnya"
+
+#: ../src/window.c:264
+msgid "Go to the next fuzzy or untranslated message"
+msgstr "Lompat ke pesan berikutnya yang belum diterjemahkan atau ragu"
+
+#: ../src/window.c:267
+msgid "Pre_vious Fuzzy or Untranslated"
+msgstr "Ragu atau Belum Terjema_h Sebelumnya"
+
+#: ../src/window.c:269
+msgid "Go to the previous fuzzy or untranslated message"
+msgstr "Lompat ke pesan berikutnya yang belum diterjemahkan atau ragu"
+
+#: ../src/window.c:274
+msgid "Search for text"
+msgstr "Cari teks"
+
+#: ../src/window.c:283
+msgid "Search for and replace text"
+msgstr "Cari dan ganti teks"
+
+#. Documents menu
+#: ../src/window.c:287
+msgid "_Save All"
+msgstr "_Simpan Semua"
+
+#: ../src/window.c:288
+msgid "Save all open files"
+msgstr "Simpan semua berkas terbuka"
+
+#: ../src/window.c:290
+msgid "_Close All"
+msgstr "_Tutup Semua"
+
+#: ../src/window.c:291
+msgid "Close all open files"
+msgstr "Tutup semua berkas terbuka"
+
+#: ../src/window.c:293
+msgid "_Previous Document"
+msgstr "Dokumen Se_belumnya"
+
+#: ../src/window.c:295
+msgid "Activate previous document"
+msgstr "Aktifkan dokumen sebelumnya"
+
+#: ../src/window.c:297
+msgid "_Next Document"
+msgstr "Dokumen Sela_njutnya"
+
+#: ../src/window.c:299
+msgid "Activate next document"
+msgstr "Aktifkan dokumen selanjutnya"
+
+#: ../src/window.c:764
+msgid "Untranslated"
+msgstr "Belum diterjemahkan"
+
+#: ../src/window.c:767
+msgid "Translated"
+msgstr "Diterjemahkan"
+
+#: ../src/window.c:770
+msgid "Fuzzy"
+msgstr "Ragu"
+
+#: ../src/window.c:777
 #, c-format
-msgid ""
-"Compile successful:\n"
-"%s"
-msgstr ""
+msgid "Current: %d"
+msgstr "Kini: %d"
 
-#: src/preferences.c:180
-msgid "Couldn't generate the current date!"
-msgstr ""
+#: ../src/window.c:778
+#, c-format
+msgid "Total: %d translated"
+msgstr "Total: %d diterjemahkan"
 
-#: src/prefs.c:212
-msgid "Hotkey indicating character:"
-msgstr ""
+#: ../src/window.c:779
+#, c-format
+msgid "%d fuzzy"
+msgstr "%d ragu"
 
-#: src/prefs.c:332
-msgid "gtranslator -- options"
-msgstr ""
+#: ../src/window.c:780
+#, c-format
+msgid "%d untranslated"
+msgstr "%d belum diterjemahkan"
 
+#. Translators: %s is a URI
+#: ../src/window.c:839
+#, c-format
+msgid "Activate '%s'"
+msgstr "Aktifkan '%s'"
+
+#. FIXME: We are leaking a lot here
 #.
-#. * Files page
+#. * Translators: The title of the window when there is only one tab
 #.
-#: src/prefs.c:350
+#: ../src/window.c:1016 ../src/window.c:1022
+#, c-format
+msgid "gtranslator - %s"
+msgstr "gtranslator - %s"
+
+#: ../src/window.c:1019
+#, c-format
+msgid "gtranslator - *%s"
+msgstr "gtranslator - *%s"
+
+#: ../src/window.c:1027
+msgid "gtranslator"
+msgstr "gtranslator"
+
+#: ../src/window.c:1389
+msgid "Toolbar Editor"
+msgstr "Penyunting Toolbar"
+
+#: ../src/window.c:1700
+msgid "Documents"
+msgstr "Dokumen"
+
+#~ msgid "Select Folder"
+#~ msgstr "Pilih Folder"
+
+#~ msgid "Jump To"
+#~ msgstr "Lompat Ke"
+
+#~ msgid ""
+#~ "Text\n"
+#~ "Icons\n"
+#~ "Text + Icons\n"
+#~ "Gnome toolbar setting\n"
+#~ "Tabs"
+#~ msgstr ""
+#~ "Teks\n"
+#~ "Ikon\n"
+#~ "Teks + Ikon\n"
+#~ "Penataan toolbar Gnome\n"
+#~ "Tab"
+
+#~ msgid "original.db"
+#~ msgstr "original.db"
+
+#~ msgid "translations.db"
+#~ msgstr "translations.db"
+
+#~ msgid "words.db"
+#~ msgstr "words.db"
+
+#~ msgid "Prev F_ile"
+#~ msgstr "Berkas Sebelumnya"
+
+#~ msgid "Go to the next file"
+#~ msgstr "Pergi ke berkas berikutnya"
+
+#~ msgid "Next Fi_le"
+#~ msgstr "Berkas Berikutnya"
+
+#~ msgid "Status: %s"
+#~ msgstr "Kondisi: %s"
+
+#~ msgid "Total: %d"
+#~ msgstr "Total: %d"
+
+#~ msgid "Fuzzy: %d"
+#~ msgstr "Ragu: %d"
+
+#~ msgid "Untranslated: %d"
+#~ msgstr "Belum diterjemahkan: %d"
+
+#~ msgid "The GNOME translation program"
+#~ msgstr "Program penerjemah GNOME"
+
+#~ msgid "No comment"
+#~ msgstr "Tiada komentar"
+
 #, fuzzy
-msgid "Files"
-msgstr "Pertama"
+#~ msgid "_View/_Bookmarks/"
+#~ msgstr "Tampil/Penanda Buku/"
 
-#: src/prefs.c:351 src/prefs.c:530 src/prefs.c:587
+#~ msgid "Open %s (%s)"
+#~ msgstr "Buka %s (%s)"
+
+#~ msgid "Can't apply color scheme file `%s'!"
+#~ msgstr "Tak dapat menerapkan berkas skema warna '%s'!"
+
+#~ msgid "Couldn't retrieve author information!"
+#~ msgstr "Tidak dapat mengambil info penulis!"
+
+#~ msgid "Unknown"
+#~ msgstr "Tak diketahui"
+
+#~ msgid "<Not Given>"
+#~ msgstr "<Tak Diberikan>"
+
+#~ msgid "_View/_Colorschemes/"
+#~ msgstr "Tampil/Skema Warna/"
+
+#~ msgid "Activate colorscheme %s"
+#~ msgstr "Aktfikan skema warna %s"
+
+#~ msgid "gtranslator -- open po file"
+#~ msgstr "gtranslator -- buka berkas po"
+
+#~ msgid "gtranslator -- save file as.."
+#~ msgstr "gtranslator -- simpan berkas sebagai.."
+
+#~ msgid "gtranslator -- save local copy of file as.."
+#~ msgstr "gtranslator -- simpan salinan lokal berkas sebagai.."
+
+#~ msgid ""
+#~ "File %s\n"
+#~ "was changed. Save?"
+#~ msgstr ""
+#~ "Berkas %s\n"
+#~ "telah diubah. Simpan?"
+
+#~ msgid "Don't save"
+#~ msgstr "Jangan simpan"
+
+#~ msgid "gtranslator -- export po file"
+#~ msgstr "gtranslator -- ekspor berkas po"
+
+#~ msgid "gtranslator -- edit comment"
+#~ msgstr "gtranslator -- sunting komentar"
+
+#~ msgid "Should ALL translations from `%s' be removed?"
+#~ msgstr "Perlukah SEMUA terjemahan dari '%s' dihapus?"
+
+#~ msgid "Find in the po file"
+#~ msgstr "Cari di berkas po"
+
+#~ msgid "Enter search string:"
+#~ msgstr "Masukkan kata cari:"
+
+#~ msgid "Case sensitive"
+#~ msgstr "Huruf besar berbeda dengan huruf kecil"
+
+#~ msgid "English"
+#~ msgstr "Bahasa Inggris"
+
+#~ msgid "Ignore hotkeys"
+#~ msgstr "Abaikan kunci pintas"
+
+#~ msgid "String to replace:"
+#~ msgstr "Kalimat yang hendak diganti:"
+
+#~ msgid "Replace string:"
+#~ msgstr "Kalimat pengganti:"
+
+#~ msgid "Please enter a string to replace!"
+#~ msgstr "Masukkan kalimat yang hendak diganti:"
+
+#~ msgid "Please enter a string to replace with!"
+#~ msgstr "Masukkan kalimat pengganti!"
+
+#~ msgid "An error occurred while msgfmt was executed:\n"
+#~ msgstr "Ada error saat msgfmt dijalankan:\n"
+
 #, fuzzy
-msgid "General"
-msgstr "Generator:"
+#~ msgid ""
+#~ "The file\n"
+#~ "\n"
+#~ "   %s\n"
+#~ "\n"
+#~ "is already open in another instance of gtranslator!\n"
+#~ "Please close the other instance of gtranslator handling\n"
+#~ "this file currently to re-gain access to this file.\n"
+#~ "\n"
+#~ "Shall fool gtranslator open this file anyway ?"
+#~ msgstr ""
+#~ "Berkas\n"
+#~ "\n"
+#~ "   %s\n"
+#~ "\n"
+#~ "telah dibuka pada instansi gtranslator lain!\n"
+#~ "Silahkan tutup instansi lain dari gtranslator yang kini\n"
+#~ "menangani berkas ini agar dapat diakses kembali\n"
+#~ "\n"
+#~ "Apakah gtranslator bodoh perlu nekat membuka berkas ini?"
 
-#: src/prefs.c:352
-msgid "Warn if po file contains fuzzy translations"
-msgstr ""
+#~ msgid ""
+#~ "File %s\n"
+#~ "was changed. Do you want to revert to saved copy?"
+#~ msgstr ""
+#~ "Berkas %s\n"
+#~ "telah diubah. Apakah anda ingin kembali ke salinan tersimpan?"
 
-#: src/prefs.c:356
-msgid "Delete compiled files (e.g. \"project.gmo\")"
-msgstr ""
+#~ msgid "gtranslator -- open from URI"
+#~ msgstr "gtranslator -- buka dari URI"
 
-#: src/prefs.c:360
-msgid "Autosave"
-msgstr ""
+#~ msgid "Enter URI:"
+#~ msgstr "Masukkan URI:"
 
-#: src/prefs.c:361
-msgid "Automatically save at regular intervals"
-msgstr ""
+#~ msgid "No URI given!"
+#~ msgstr "Tidak ada URI yang diberikan!"
 
-#: src/prefs.c:369
-msgid "Autosave interval:"
-msgstr ""
+#~ msgid "No supported URI protocol (like \"ftp://\") given!"
+#~ msgstr "Tidak ada protokol URI yang disebutkan (misalnya \"ftp://\")"
 
-#: src/prefs.c:370
-msgid "Append a suffix to automatically saved files"
-msgstr ""
+#~ msgid ""
+#~ "URIs are used to locate files uniquely on different systems.\n"
+#~ "The standard Internet addresses (URLs) are also URIs -- you can\n"
+#~ "use them to open remote po files lying on servers with standard "
+#~ "protocols\n"
+#~ "like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
+#~ "Some example URIs for clarification (these ones are supported):\n"
+#~ "http://www.gtranslator.org/remote-po/gtranslator.pot\n"
+#~ "ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
+#~ "\n"
+#~ "file:///<PO-FILE> or\n"
+#~ "http://www.DOMAIN.COM/PO-FILE"
+#~ msgstr ""
+#~ "URI dipakai untuk menentukan lokasi berkas secara unik pada sistem\n"
+#~ "yang berbeda. Alamat Internet standar (URL) juga URI -- anda dapat\n"
+#~ "memakai mereka untuk membuka berkas po yang ada pada suatu\n"
+#~ "server dari jauh dengan protokol standar seperti \"http\", \"ftp\", "
+#~ "atau \n"
+#~ "sebarang metoda akses lain yang didukung oleh GnomeVGS.\n"
+#~ "Beberapa contoh URI untuk memperjelas (berikut ini didukung):\n"
+#~ "http://www.gtranslator.org/remote-po/gtranslator.pot\n"
+#~ "ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
+#~ "\n"
+#~ "file:///<PO-FILE> atau\n"
+#~ "http://www.DOMAIN.COM/PO-FILE"
 
-#: src/prefs.c:377
-msgid "Suffix:"
-msgstr ""
+#~ msgid ""
+#~ "Open recovery file for `%s'?\n"
+#~ "It was saved by gtranslator before gtranslator last closed\n"
+#~ "and may contain your hard work!\n"
+#~ msgstr ""
+#~ "Buka berkas pemulihan bagi '%s'?\n"
+#~ "Itu telah disimpan oleh gtranslator sebelum gtranslator dimatikan\n"
+#~ "dan mungkin memuat hasil kerja keras anda!\n"
 
-#: src/prefs.c:378
-msgid "Recent files"
-msgstr ""
+#~ msgid "Postpone decision"
+#~ msgstr "Tunda keputusan"
 
-#: src/prefs.c:386
-msgid "Maximum number of entries in the recent files list:"
-msgstr ""
+#~ msgid "Ignore recovery file"
+#~ msgstr "Abaikan berkas pemulihan"
 
-#: src/prefs.c:387
-msgid "Check recent files before showing in recent files list"
-msgstr ""
-
-#.
-#. * Editor page
-#.
-#: src/prefs.c:395
-msgid "Editor"
-msgstr ""
-
-#: src/prefs.c:398
-msgid "Text display"
-msgstr ""
-
-#: src/prefs.c:399
-msgid "Highlight syntax of the translation message"
-msgstr ""
-
-#: src/prefs.c:410
-msgid "Syntax color scheme to use:"
-msgstr ""
-
-#: src/prefs.c:411
-msgid "Use special character to indicate white space"
-msgstr ""
-
-#: src/prefs.c:419
-msgid "Apply own fonts"
-msgstr ""
-
-#: src/prefs.c:423
-msgid "gtranslator -- font selection/msgid font"
-msgstr ""
-
-#: src/prefs.c:427
-msgid "Original text font:"
-msgstr ""
-
-#: src/prefs.c:428
-msgid "gtranslator -- font selection/msgstr font"
-msgstr ""
-
-#: src/prefs.c:432
-msgid "Translation font:"
-msgstr ""
-
-#: src/prefs.c:433
-msgid "Apply own colors:"
-msgstr ""
-
-#: src/prefs.c:437
-msgid "gtranslator -- foreground color"
-msgstr ""
-
-#: src/prefs.c:441
-msgid "Foreground color:"
-msgstr ""
-
-#: src/prefs.c:442
-msgid "gtranslator -- background color"
-msgstr ""
-
-#: src/prefs.c:446
-msgid "Background:"
-msgstr ""
-
-#: src/prefs.c:447
 #, fuzzy
-msgid "Contents"
-msgstr "Komentar"
+#~ msgid "Here you can query existing translations from your learn buffer."
+#~ msgstr ""
+#~ "Di sini anda dapat meminta terjemahan yang telah ada dari penyangga ajar."
 
-#: src/prefs.c:448
-msgid "Remove fuzzy status if message is changed"
-msgstr ""
-
-#: src/prefs.c:452
-msgid "Keep obsolete messages in the po files"
-msgstr ""
-
-#: src/prefs.c:456
-msgid "Spell checking"
-msgstr ""
-
-#: src/prefs.c:457
-msgid "Instant spell checking"
-msgstr ""
-
-#: src/prefs.c:463
-msgid "Use special dictionary:"
-msgstr ""
-
-#.
-#. * PO header page
-#.
-#: src/prefs.c:481
-msgid "PO header"
-msgstr ""
-
-#: src/prefs.c:484
-msgid "Personal Information"
-msgstr ""
-
-#: src/prefs.c:488
-msgid "Author's name:"
-msgstr ""
-
-#: src/prefs.c:492
 #, fuzzy
-msgid "Author's email:"
-msgstr "Email penterjemah:"
+#~ msgid "gtranslator -- query your personal learn buffer"
+#~ msgstr "gtranslator -- query penyangga ajar pribadi"
 
-#: src/prefs.c:493
-msgid "Language settings"
-msgstr ""
+#~ msgid "Query"
+#~ msgstr "Query"
 
-#: src/prefs.c:506
-msgid "Language code:"
-msgstr ""
+#~ msgid "Query message content"
+#~ msgstr "Query isi pesan"
 
-#.
-#. * Functionality page
-#.
-#: src/prefs.c:528
-msgid "Functionality"
-msgstr ""
+#~ msgid "No query string given!"
+#~ msgstr "Kalimat query tak diberikan!"
 
-#: src/prefs.c:531
-msgid "Enable the functionality to update a po file from within gtranslator"
-msgstr ""
+#, fuzzy
+#~ msgid "Couldn't find any result for the query in your learn buffer!"
+#~ msgstr "Tak menemukan hasil apapun untuk query pada penyangga ajar anda!"
 
-#: src/prefs.c:535
-msgid "Enable the functionality to remove all translations from a po file"
-msgstr ""
+#~ msgid ""
+#~ "Found \"%s\" as a translation for \"%s\".\n"
+#~ "Would you like to insert it into the translation?"
+#~ msgstr ""
+#~ "Ditemukan \"%s\" sebagai terjemahan bagi \"%s\" \n"
+#~ "Apakah anda ingin menyisipkannya ke dalam terjemahan?"
 
-#: src/prefs.c:539
-msgid "Show instant comment view in main pane"
-msgstr ""
+#~ msgid "Query's result translation is already there!"
+#~ msgstr "Hasil terjemahan query telah ada di sana!"
 
-#: src/prefs.c:543
-msgid "Display special dialog for messages with plural forms"
-msgstr ""
+#~ msgid ""
+#~ "Should gtranslator autotranslate the file using information\n"
+#~ "from your personal learn buffer?"
+#~ msgstr ""
+#~ "Mestikah gtranslator menerjemahkan otomatis berkas memakai\n"
+#~ "informasi dari penyangga ajar pribadimu?"
 
-#: src/prefs.c:547
-msgid "Save geometry on exit and restore it on startup"
-msgstr ""
+#~ msgid "gtranslator -- add bookmark with comment?"
+#~ msgstr "gtranslator -- tambah penanda buku dengan komentar?"
 
-#: src/prefs.c:551
-msgid "Messages table"
-msgstr ""
+#~ msgid "Comment for the bookmark:"
+#~ msgstr "Komentar bagi penanda buku:"
 
-#: src/prefs.c:552
-msgid "Show the messages table (requires restart)"
-msgstr ""
+#~ msgid "Please enter a search string"
+#~ msgstr "Silahkan masukkan kalimat untuk dicari"
 
-#: src/prefs.c:556
-msgid "Collapse all entries by default"
-msgstr ""
+#~ msgid ""
+#~ "Could not find\n"
+#~ "\"%s\""
+#~ msgstr ""
+#~ "Tak menemukan\n"
+#~ "\"%s\""
 
-#: src/prefs.c:560
-msgid "Use own colors for messages table groups"
-msgstr ""
+#~ msgid "%s [ %i Fuzzy left ]"
+#~ msgstr "%s [ %i Ragu ]"
 
-#: src/prefs.c:569
-msgid "Fuzzy entries color:"
-msgstr ""
+#~ msgid "%s [ No fuzzy left ]"
+#~ msgstr "%s [ Tak ada keraguan lagi ]"
 
-#: src/prefs.c:575
-msgid "Untranslated entries color:"
-msgstr ""
+#, fuzzy
+#~ msgid "Sticky (Message & translation are the same)"
+#~ msgstr "Identik (Pesan dan terjemahan sama)"
 
-#: src/prefs.c:581
-msgid "Translated entries color:"
-msgstr ""
+#~ msgid "%s [ %i Untranslated left ]"
+#~ msgstr "%s [%i Belum diterjemahkan ]"
 
-#.
-#. * Autotranslate page
-#.
-#: src/prefs.c:586
-msgid "Autotranslation"
-msgstr ""
+#~ msgid "%s [ No untranslated left ]"
+#~ msgstr "%s [ Semua telah diterjemahkan ]"
 
-#: src/prefs.c:588
-msgid ""
-"Also query the personal learn buffer while autotranslating untranslated "
-"messages"
-msgstr ""
+#~ msgid "Message %d / %d / Status: %s (Message contains plural forms)"
+#~ msgstr "Pesan %d / %d / Status: %s (Pesan mengandung bentuk jamak)"
 
-#: src/prefs.c:592
-msgid "Automatically learn a newly translated message"
-msgstr ""
+#~ msgid "Message %d / %d / Status: %s"
+#~ msgstr "Pesan %d / %d / Status: %s"
 
-#: src/prefs.c:596
-msgid "Fuzzy matching"
-msgstr ""
+#~ msgid "gtranslator -- edit header"
+#~ msgstr "gtranslator -- edit header"
 
-#: src/prefs.c:603
-msgid "Use \"fuzzy\" matching routines for learn buffer queries"
-msgstr ""
+#~ msgid "Comments:"
+#~ msgstr "Komentar:"
 
-#: src/prefs.c:610
-msgid "Minimal required similarity persentage for fuzzy queries:"
-msgstr ""
+#~ msgid "_File/Recen_t files/"
+#~ msgstr "Berkas/Berkas _terkini/"
 
-#: src/prefs.c:655
-msgid "Please enter your name!"
-msgstr ""
+#~ msgid "Afrikaans"
+#~ msgstr "Afrikaans"
 
-#: src/prefs.c:669
-msgid "Please enter your EMail address!"
-msgstr ""
+#~ msgid "Arabic"
+#~ msgstr "Arab"
 
-#: src/prefs.c:682
-msgid "Please enter a valid EMail address!"
-msgstr ""
+#~ msgid "Azerbaijani Turkish"
+#~ msgstr "Turki Azerbaijan"
 
-#: src/replace.c:171
-msgid "No replacements made!"
-msgstr ""
+#~ msgid "Basque"
+#~ msgstr "Basque"
 
-#.
-#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
-#. *
-#. * Translators: you should translate this foo'sh string into something
-#. *  another than a 'Y' to avoid the usage of the mid dot (U+00B7) in the
-#. *   text displaying routines of gtranslator.
-#.
-#: src/runtime-config.c:72
-msgid "Y"
-msgstr ""
+#~ msgid "Belorussian"
+#~ msgstr "Belorussia"
 
-#.
-#. * Translators: this character is used if the middle dot
-#. *  can't be used under your locale.
-#.
-#: src/runtime-config.c:88 src/runtime-config.c:93
-msgid "^"
-msgstr ""
+#~ msgid "Bengali"
+#~ msgstr "Bengal"
 
-#: src/save.c:116
-#, c-format
-msgid "Couldn't save compiled gettext file `%s'!"
-msgstr ""
+#~ msgid "Britton"
+#~ msgstr "Britton"
 
-#: src/save.c:159
-#, c-format
-msgid "Couldn't save compressed gettext file `%s'!"
-msgstr ""
+#~ msgid "Bulgarian"
+#~ msgstr "Bulgaria"
 
-#.
-#. * The %s format here stands for the used
-#. *  compressions program (gzip, bzip2 etc.)
-#.
-#: src/save.c:169
-#, c-format
-msgid "Couldn't save %s'd gettext file `%s'!"
-msgstr ""
+#~ msgid "Catalan"
+#~ msgstr "Catalan"
 
-#: src/save.c:228
-#, c-format
-msgid "Couldn't save zip'ed po file `%s'!"
-msgstr ""
+#~ msgid "Chinese/Simplified"
+#~ msgstr "China/Disederhanakan"
 
-#: src/session.c:86
-msgid "Session restored successfully."
-msgstr ""
+#~ msgid "Chinese/Traditional"
+#~ msgstr "China/Tradisional"
 
-#: src/stylistics.c:265
-msgid "No font set! Using default font"
-msgstr ""
+#~ msgid "Croatian"
+#~ msgstr "Kroasia"
 
-#.
-#. * Use gtranslator's font in this case -- should be a fallback font
-#. *  for your language.
-#.
-#: src/stylistics.c:271
-msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
-msgstr ""
+#~ msgid "Czech"
+#~ msgstr "Ceko"
 
-#: src/update.c:102
-msgid "No POTFILES.in found!"
-msgstr ""
+#~ msgid "Danish"
+#~ msgstr "Denmark"
 
-#: src/update.c:113
-msgid "Po file is uptodate."
-msgstr ""
+#~ msgid "Dutch"
+#~ msgstr "Belanda"
 
-#: src/update.c:120
-msgid "The update was successfull."
-msgstr ""
+#~ msgid "English/Canada"
+#~ msgstr "Bahasa Inggris/Kanada"
 
-#: src/update.c:125
-msgid "An error occurred while updating the po file."
-msgstr ""
+#~ msgid "English/GB"
+#~ msgstr "Bahasa Inggris/Inggris Raya"
 
-#: src/utils.c:308 src/utils.c:325
-#, c-format
-msgid "Can't create directory `%s'!"
-msgstr ""
+#~ msgid "English/USA"
+#~ msgstr "Bahasa Inggris/Amerika Serikat"
 
-#.
-#. * Again return the fallback default locale value given by the translator.
-#.
-#: src/utils.c:794
-msgid "iso-8859-1"
-msgstr ""
+#~ msgid "Esperanto"
+#~ msgstr "Esperanto"
 
-#: src/utils_gui.c:144
-#, c-format
-msgid "The geometry string \"%s\" couldn't be parsed!"
-msgstr ""
+#~ msgid "Estonian"
+#~ msgstr "Estonia"
 
-#: src/utils_gui.c:360
-#, c-format
-msgid "You are not permitted to access file '%s'."
-msgstr ""
+#~ msgid "Persian"
+#~ msgstr "Persia"
 
-#: src/utils_gui.c:378
-#, c-format
-msgid ""
-"You do not have permission to modify file '%s'.\n"
-"Please save a new copy of it to a place of your choice and get write\n"
-"permission for it."
-msgstr ""
+#~ msgid "Finnish"
+#~ msgstr "Finlandia"
 
-#: src/utils_gui.c:467
-#, c-format
-msgid "The necessary decompression program `%s' is not installed!"
-msgstr ""
+#~ msgid "French"
+#~ msgstr "Perancis"
 
-#: src/utils_gui.c:472
-#, c-format
-msgid "The necessary compression program `%s' is not installed!"
-msgstr ""
+#~ msgid "Galician"
+#~ msgstr "Galisia"
 
-#: src/vfs-handle.c:121
-#, c-format
-msgid "Couldn't create temporary directory `%s'!"
-msgstr ""
+#~ msgid "German"
+#~ msgstr "Jerman"
 
-#: src/vfs-handle.c:149
-#, c-format
-msgid "File `%s' couldn't be found!"
-msgstr ""
+#~ msgid "Greek"
+#~ msgstr "Yunani"
 
-#: src/vfs-handle.c:154
-#, c-format
-msgid "Malformed URI `%s' entered!"
-msgstr ""
+#~ msgid "Gujarati"
+#~ msgstr "Gujarat"
 
-#: src/vfs-handle.c:159
-#, c-format
-msgid "Host `%s' couldn't be found!"
-msgstr ""
+#~ msgid "Hindi"
+#~ msgstr "Hindi"
 
-#: src/vfs-handle.c:164
-#, c-format
-msgid "Hostname `%s' is not valid!"
-msgstr ""
+#~ msgid "Hungarian"
+#~ msgstr "Hungaria"
 
-#: src/vfs-handle.c:169
-#, c-format
-msgid "Host `%s' has no address!"
-msgstr ""
+#~ msgid "Icelandic"
+#~ msgstr "Islandia"
 
-#: src/vfs-handle.c:174
-msgid "Transfer interrupted!"
-msgstr ""
+#~ msgid "Indonesian"
+#~ msgstr "Bahasa Indonesia"
+
+#~ msgid "Italian"
+#~ msgstr "Itali"
+
+#~ msgid "Irish"
+#~ msgstr "Irlandia"
+
+#~ msgid "Japanese"
+#~ msgstr "Jepang"
+
+#~ msgid "Kannada"
+#~ msgstr "Kannada"
+
+#~ msgid "Korean"
+#~ msgstr "Korea"
+
+#~ msgid "Latvian"
+#~ msgstr "Latvia"
+
+#~ msgid "Lithuanian"
+#~ msgstr "Lithuania"
+
+#~ msgid "Malay/Bahasa Melayu"
+#~ msgstr "Bahasa Melayu"
+
+#~ msgid "Maltese"
+#~ msgstr "Malta"
+
+#~ msgid "Marathi"
+#~ msgstr "Marathi"
+
+#~ msgid "Norwegian/Bokmaal"
+#~ msgstr "Norwegia/Bokmaal"
+
+#~ msgid "Norwegian/Nynorsk"
+#~ msgstr "Norwegia/Nynorsk"
+
+#~ msgid "Punjabi"
+#~ msgstr "Punjab"
+
+#~ msgid "Portuguese"
+#~ msgstr "Portugis"
+
+#~ msgid "Portuguese/Brazil"
+#~ msgstr "Portugis/Brasil"
+
+#~ msgid "Romanian"
+#~ msgstr "Romania"
+
+#~ msgid "Serbian/Cyrillic"
+#~ msgstr "Serbia/Sirilik"
+
+#~ msgid "Serbian/Latin"
+#~ msgstr "Serbia/Latin"
+
+#~ msgid "Slovak"
+#~ msgstr "Slovakia"
+
+#~ msgid "Slovenian"
+#~ msgstr "Slovenia"
+
+#~ msgid "Spanish"
+#~ msgstr "Spanyol"
+
+#~ msgid "Spanish/Spain"
+#~ msgstr "Spanyol/Spanyol"
+
+#~ msgid "Spanish/Mexico"
+#~ msgstr "Spanyol/Meksiko"
+
+#~ msgid "Swedish"
+#~ msgstr "Swedia"
+
+#~ msgid "Tamil"
+#~ msgstr "Tamil"
+
+#~ msgid "Telugu"
+#~ msgstr "Telugu"
+
+#~ msgid "Thai"
+#~ msgstr "Thailand"
+
+#~ msgid "Turkish"
+#~ msgstr "Turki"
+
+#~ msgid "Ukrainian"
+#~ msgstr "Ukrania"
+
+#~ msgid "Uzbekian"
+#~ msgstr "Uzbekistan"
+
+#~ msgid "Vietnamese"
+#~ msgstr "Vietnam"
+
+#~ msgid "Walloon"
+#~ msgstr "Wallon"
+
+#~ msgid "Welsh"
+#~ msgstr "Welsh"
+
+#, fuzzy
+#~ msgid "gtranslator learn buffer statistics:"
+#~ msgstr "statistik penyangga ajar gtranslator:"
+
+#~ msgid "Learn buffer filename: `%s`"
+#~ msgstr "Nama berkas penyangga ajar: '%s'"
+
+#~ msgid "Encoding: `%s'"
+#~ msgstr "Encoding: '%s'"
+
+#~ msgid "Serial: `%i'"
+#~ msgstr "Nomor seri: '%i'"
+
+#~ msgid "Number of entries: `%i'"
+#~ msgstr "Cacah entri: '%i'"
+
+#~ msgid "Auto translate the po file"
+#~ msgstr "Terjemahkan berkas po secara otomatis"
+
+#~ msgid "FILENAME"
+#~ msgstr "NAMA·BERKAS"
+
+#~ msgid "Show build specifications"
+#~ msgstr "Tampilkan spesifikasi saat membangun"
+
+#~ msgid "Export learn buffer to a plain po file"
+#~ msgstr "Ekspor penyangga ajar ke sebuah berkas po polos"
+
+#~ msgid "PO_FILE"
+#~ msgstr "BERKAS_PO"
+
+#~ msgid "Specify main window geometry"
+#~ msgstr "Nyatakan geometri jendela utama"
+
+#~ msgid "GEOMETRY"
+#~ msgstr "GEOMETRI"
+
+#~ msgid "Learn the file completely"
+#~ msgstr "Pelajari berkas secara lengkap"
+
+#~ msgid "Show learn buffer statistics"
+#~ msgstr "Tampilkan statistik penyangga ajar"
+
+#~ msgid "Version and build date:"
+#~ msgstr "Versi dan tanggal bangun:"
+
+#~ msgid "Build GLib / Gtk+ / GNOME / XML versions:"
+#~ msgstr "Versi GLib / Gtk+ / GNOME / XML saat membangun:"
+
+#~ msgid "Colorschemes directory:"
+#~ msgstr "Direktori skema warna:"
+
+#~ msgid "Window icon:"
+#~ msgstr "Ikon jendela:"
+
+#, fuzzy
+#~ msgid "Own locale directory:"
+#~ msgstr "Direktori locale sendiri:"
+
+#, fuzzy
+#~ msgid "Default learn buffer file location:"
+#~ msgstr "Lokasi berkas penyangga ajar bawaan:"
+
+#, fuzzy
+#~ msgid "Learned file `%s' successfully for your learn buffer.\n"
+#~ msgstr "Sukses mempelajari berkas '%s' bagi penyangga ajar anda.\n"
+
+#, fuzzy
+#~ msgid "Exported learn buffer to file `%s'.\n"
+#~ msgstr "Mengekspor penyangga ajar ke berkas '%s'.\n"
+
+#~ msgid "_Compile"
+#~ msgstr "Kompail"
+
+#~ msgid "Add bookmark"
+#~ msgstr "Tambah penanda buku"
+
+#~ msgid "Add a bookmark for this message in this po file"
+#~ msgstr "Tambahkan suatu penanda buku bagi pesan ini dalam berkas po ini"
+
+#~ msgid "Aut_otranslate..."
+#~ msgstr "Terjemah _Otomatis"
+
+#~ msgid "Autotranslate the file with information from your learn buffer"
+#~ msgstr ""
+#~ "Terjemahkan secara otomatis berkas dengan informasi dari penyangga ajar "
+#~ "anda"
+
+#~ msgid "Remove all translations..."
+#~ msgstr "Hapus semua terjemahan..."
+
+#~ msgid "Remove all existing translations from the po file"
+#~ msgstr "Hapus semua terjemahan yang telah ada di berkas po"
+
+#~ msgid "Open from _URI..."
+#~ msgstr "Buka dari _URI..."
+
+#~ msgid "Open a po file from a given URI"
+#~ msgstr "Buka suatu berkas po dari URI yang diberikan"
+
+#~ msgid "Recen_t files"
+#~ msgstr "Berkas _terkini"
+
+#~ msgid "_Export to UTF-8..."
+#~ msgstr "_Ekspor ke UTF-8..."
+
+#~ msgid "Export the current po file to UTF-8"
+#~ msgstr "Ekspor berkas po kini ke UTF-8"
+
+#~ msgid "_Import from UTF-8..."
+#~ msgstr "_Impor dari UTF-8"
+
+#, fuzzy
+#~ msgid ""
+#~ "Import a UTF-8 encoded po file into it's corresponding plain encoding"
+#~ msgstr "Impor suatu berkas berbentuk UTF-8 ke bentuk polos yang bersesuaian"
+
+#~ msgid "_Query..."
+#~ msgstr "_Query..."
+
+#~ msgid "Query for a string"
+#~ msgstr "Query untuk suatu kalimat"
+
+#~ msgid "Edit po file header"
+#~ msgstr "Sunting awalan (header) berkas po"
+
+#~ msgid "Fu_zzy"
+#~ msgstr "Rag_u"
+
+#~ msgid "_Back"
+#~ msgstr "Mun_dur"
+
+#~ msgid "_Last"
+#~ msgstr "_Akhir"
+
+#~ msgid "Goto specified message number"
+#~ msgstr "Lompat ke pesan nomor tertentu"
+
+#~ msgid "_Bookmarks"
+#~ msgstr "Penanda _buku"
+
+#~ msgid "gtranslator's homepage on the web"
+#~ msgstr "rumah gtranslator di web"
+
+#~ msgid "Open"
+#~ msgstr "Buka"
+
+#~ msgid "Save"
+#~ msgstr "Simpan"
+
+#~ msgid "Save as"
+#~ msgstr "Simpan sebagai"
+
+#~ msgid "Compile"
+#~ msgstr "Compile"
+
+#~ msgid "Header"
+#~ msgstr "Header"
+
+#~ msgid "Undo"
+#~ msgstr "Batal"
+
+#~ msgid "First"
+#~ msgstr "Pertama"
+
+#~ msgid "Back"
+#~ msgstr "Mundur"
+
+#~ msgid "Next"
+#~ msgstr "Maju"
+
+#~ msgid "Last"
+#~ msgstr "Akhir"
+
+#~ msgid "Go to"
+#~ msgstr "Lompat ke"
+
+#~ msgid "Find string in po file"
+#~ msgstr "Cari string dalam berkas po"
+
+#~ msgid "Replace string in po file"
+#~ msgstr "Gantikan string dalam berkas po"
+
+#~ msgid "Couldn't get the message!"
+#~ msgstr "Tak dapat memperoleh pesan"
+
+#~ msgid "There are no fuzzy messages left."
+#~ msgstr "Tidak ada pesan ragu tersisa."
+
+#~ msgid "All messages seem to be translated."
+#~ msgstr "Semua pesan telah diterjemahkan."
+
+#~ msgid "gtranslator -- edit plural forms of message translation"
+#~ msgstr "gtranslator -- sunting bentuk jamak dari terjemahan pesan"
+
+#, fuzzy
+#~ msgid "Couldn't open compiled gettext file `%s'!"
+#~ msgstr "Tak dapat membuka berkas gettext terkompail '%s'!"
+
+#~ msgid "Couldn't open compressed gettext file `%s'!"
+#~ msgstr "Tak dapat membuka berkas gettext termampatkan '%s'!"
+
+#, fuzzy
+#~ msgid "Couldn't open %s'd gettext file `%s'!"
+#~ msgstr "Tak dapat membuka berkas gettext ter-%s '%s'!"
+
+#~ msgid "Couldn't open zip'ed po file `%s'!"
+#~ msgstr "Tak dapat membuka berkas po ter-zip '%s'!"
+
+#~ msgid ""
+#~ "Error in file \"%s\"\n"
+#~ "at line %d.\n"
+#~ "Please check the file and try again."
+#~ msgstr ""
+#~ "Galat pada berkas \"%s\"\n"
+#~ "pada baris %d \n"
+#~ "Silahkan periksa berkas dan coba lagi."
+
+#~ msgid "Header record not found - defaulting from preferences"
+#~ msgstr "Record header tidak ditemukan - diisi nilai bawaan dari preferensi"
+
+#~ msgid "Could not open file `%s' for writing!"
+#~ msgstr "Tak dapat membuka berkas '%s' untuk ditulisi!"
+
+#~ msgid ""
+#~ "File %s\n"
+#~ "contains %d fuzzy messages"
+#~ msgstr ""
+#~ "Berkas %s\n"
+#~ "memuat %d pesan ragu"
+
+#~ msgid "Sorry, msgfmt isn't available on your system!"
+#~ msgstr "Maaf, msgfmt tak tersedia pada sistem anda!"
+
+#~ msgid ""
+#~ "Compile successful:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Kompail sukses:\n"
+#~ "%s"
+
+#~ msgid "Couldn't generate the current date!"
+#~ msgstr "Tak dapat menjangkitkan tanggal kini!"
+
+#~ msgid "Hotkey indicating character:"
+#~ msgstr "Karakter penanda kunci pintas:"
+
+#~ msgid "gtranslator -- options"
+#~ msgstr "gtranslator -- opsi-opsi"
+
+#~ msgid "Suffix:"
+#~ msgstr "Akhiran:"
+
+#~ msgid "Check recent files before showing in recent files list"
+#~ msgstr "Uji berkas terkini sebelum ditampilkan di daftar berkas terkini"
+
+#~ msgid "Syntax color scheme to use:"
+#~ msgstr "Skema warna sintaks:"
+
+#~ msgid "Use special character to indicate white space"
+#~ msgstr "Gunakan karakter khusus untuk menandai ruang kosong"
+
+#~ msgid "Apply own fonts"
+#~ msgstr "Pakai fonta sendiri"
+
+#~ msgid "gtranslator -- font selection/msgid font"
+#~ msgstr "gtranslator -- pilihan fonta/fonta msgid"
+
+#~ msgid "gtranslator -- font selection/msgstr font"
+#~ msgstr "gtranslator -- pilihan fonta/fonta msgstr"
+
+#~ msgid "Translation font:"
+#~ msgstr "Fonta terjemahan:"
+
+#~ msgid "Apply own colors:"
+#~ msgstr "Pakai warna sendiri:"
+
+#~ msgid "gtranslator -- foreground color"
+#~ msgstr "gtranslator -- warna latar depan"
+
+#~ msgid "Foreground color:"
+#~ msgstr "Warna latar depan:"
+
+#~ msgid "gtranslator -- background color"
+#~ msgstr "gtranslator -- warna latar belakang"
+
+#~ msgid "Background:"
+#~ msgstr "Latar belakang:"
+
+#~ msgid "Keep obsolete messages in the po files"
+#~ msgstr "Pertahankan pesan kadaluarsa di dalam berkas po"
+
+#~ msgid "Spell checking"
+#~ msgstr "Pemeriksaan ejaan"
+
+#~ msgid "Instant spell checking"
+#~ msgstr "Pemeriksaan ejaan seketika"
+
+#~ msgid "PO header"
+#~ msgstr "Header PO"
+
+#~ msgid "Author's name:"
+#~ msgstr "Nama penerjemah:"
+
+#~ msgid "Author's email:"
+#~ msgstr "Email penerjemah:"
+
+#~ msgid "Enable the functionality to update a po file from within gtranslator"
+#~ msgstr ""
+#~ "Aktifkan fungsi untuk memperbarui suatu berkas po dari dalam gtranslator"
+
+#~ msgid "Enable the functionality to remove all translations from a po file"
+#~ msgstr ""
+#~ "Aktifkan fungsi untuk menghapus semua terjemahan dari suatu berkas po"
+
+#~ msgid "Show instant comment view in main pane"
+#~ msgstr "Tunjukkan tampilkan komentar seketika di panel utama"
+
+#~ msgid "Display special dialog for messages with plural forms"
+#~ msgstr "Tampilkan dialog khusus untuk pesan dengan bentuk jamak"
+
+#~ msgid "Save geometry on exit and restore it on startup"
+#~ msgstr "Simpan geometri saat keluar dan kembalikan saat dimulai"
+
+#, fuzzy
+#~ msgid "Collapse all entries by default"
+#~ msgstr "Lipat semua entri di awal"
+
+#~ msgid "Use own colors for messages table groups"
+#~ msgstr "Gunakan warna sendiri untuk group tabel pesan"
+
+#~ msgid "Fuzzy entries color:"
+#~ msgstr "Warna entri ragu:"
+
+#~ msgid "Untranslated entries color:"
+#~ msgstr "Warna entri belum diterjemahkan:"
+
+#~ msgid "Translated entries color:"
+#~ msgstr "Warna entri telah diterjemahkan:"
+
+#~ msgid ""
+#~ "Also query the personal learn buffer while autotranslating untranslated "
+#~ "messages"
+#~ msgstr ""
+#~ "Juga query penyangga ajar pribadi ketika menerjemahkan pesan-pesan secara "
+#~ "otomatis"
+
+#~ msgid "Automatically learn a newly translated message"
+#~ msgstr "Otomatis mempelajari suatu pesan yang baru diterjemahkan"
+
+#~ msgid "Fuzzy matching"
+#~ msgstr "Pencocokan fuzzy"
+
+#, fuzzy
+#~ msgid "Use \"fuzzy\" matching routines for learn buffer queries"
+#~ msgstr "Gunakan rutin pencocokan \"fuzzy\" bagi query penyangga ajar"
+
+#~ msgid "Minimal required similarity persentage for fuzzy queries:"
+#~ msgstr "Persentase kemiripan minimal yang diperlukan untuk query fuzzy:"
+
+#~ msgid "Please enter your name!"
+#~ msgstr "Silahkan masukkan nama anda!"
+
+#~ msgid "Please enter your EMail address!"
+#~ msgstr "Silahkan masukkan alamat email anda!"
+
+#~ msgid "Please enter a valid EMail address!"
+#~ msgstr "Silahkan masukkan alamat email yang benar!"
+
+#~ msgid "No replacements made!"
+#~ msgstr "Tidak dilakukan penggantian!"
+
+#~ msgid "Y"
+#~ msgstr "Y"
+
+#~ msgid "^"
+#~ msgstr "^"
+
+#~ msgid "Couldn't save compiled gettext file `%s'!"
+#~ msgstr "Tak dapat menyimpan berkas gettext hasil kompail '%s'!"
+
+#~ msgid "Couldn't save compressed gettext file `%s'!"
+#~ msgstr "Tak dapat menyimpan berkas gettext termampatkan '%s'!"
+
+#~ msgid "Couldn't save %s'd gettext file `%s'!"
+#~ msgstr "Tak dapat menyimpan berkas gettext ter-%s '%s'!"
+
+#~ msgid "Couldn't save zip'ed po file `%s'!"
+#~ msgstr "Tak dapat menyimpan berkas po ter-zip '%s'!"
+
+#~ msgid "Session restored successfully."
+#~ msgstr "Sesi dikembalikan dengan sukses."
+
+#~ msgid "No font set! Using default font"
+#~ msgstr "Tak ada fonta dipilih! Menggunakan fonta bawaan"
+
+#~ msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
+#~ msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
+
+#~ msgid "No POTFILES.in found!"
+#~ msgstr "POTFILES.in tak ditemukan!"
+
+#~ msgid "Po file is uptodate."
+#~ msgstr "Berkas po telah terkini."
+
+#~ msgid "The update was successfull."
+#~ msgstr "Pembaruan sukses."
+
+#~ msgid "An error occurred while updating the po file."
+#~ msgstr "Galat terjadi saat memperbarui berkas po."
+
+#~ msgid "Can't create directory `%s'!"
+#~ msgstr "Tak dapat membuat direktori '%s'!"
+
+#~ msgid "iso-8859-1"
+#~ msgstr "iso-8859-1"
+
+#~ msgid "The geometry string \"%s\" couldn't be parsed!"
+#~ msgstr "String geometri \"%s\" tak dapat diurai!"
+
+#~ msgid "You are not permitted to access file '%s'."
+#~ msgstr "Anda tak berhak mengakses berkas '%s'."
+
+#~ msgid ""
+#~ "You do not have permission to modify file '%s'.\n"
+#~ "Please save a new copy of it to a place of your choice and get write\n"
+#~ "permission for it."
+#~ msgstr ""
+#~ "Anda tak berhak mengubah berkas '%s'.\n"
+#~ "Silahkan simpan salinan baru ke lokasi lain dan mintalah hak tulis\n"
+#~ "untuk hal itu."
+
+#~ msgid "The necessary decompression program `%s' is not installed!"
+#~ msgstr "Program pengurai pemampatan '%s' yang dibutuhkan tak terpasang."
+
+#~ msgid "The necessary compression program `%s' is not installed!"
+#~ msgstr "Program pemampat '%s' yang dibutuhkan tak terpasang."
+
+#~ msgid "Couldn't create temporary directory `%s'!"
+#~ msgstr "Tak dapat membuat direktori sementara '%s'!"
+
+#~ msgid "File `%s' couldn't be found!"
+#~ msgstr "Berkas '%s' tak dapat ditemukan!"
+
+#~ msgid "Malformed URI `%s' entered!"
+#~ msgstr "URI rusak '%s' dimasukkan!"
+
+#~ msgid "Host `%s' couldn't be found!"
+#~ msgstr "Host '%s' tak dapat ditemukan!"
+
+#~ msgid "Hostname `%s' is not valid!"
+#~ msgstr "Nama host '%s' tidak valid!"
+
+#~ msgid "Host `%s' has no address!"
+#~ msgstr "Host '%s' tak punya alamat!"
+
+#~ msgid "Transfer interrupted!"
+#~ msgstr "Transfer terputus!"
 
 #~ msgid "Both"
 #~ msgstr "Keduanya"
@@ -1693,10 +3132,7 @@ msgstr ""
 #~ msgstr "%s-%s berisi %i pesan."
 
 #~ msgid "Project <b>%s</b> (last po file revision: %s)."
-#~ msgstr "Proyek <b>%s</b> (revisi file po terakhir: %s)."
+#~ msgstr "Projek <b>%s</b> (revisi file po terakhir: %s)."
 
 #~ msgid "Last translator: %s"
-#~ msgstr "Penterjemah terakhir: %s"
-
-#~ msgid "Status"
-#~ msgstr "Kondisi"
+#~ msgstr "Penerjemah terakhir: %s"
