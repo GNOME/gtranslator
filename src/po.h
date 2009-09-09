@@ -167,6 +167,10 @@ GtranslatorHeader * gtranslator_po_get_header (GtranslatorPo * po);
      gchar *
      gtranslator_po_check_po_file (GtranslatorPo * po);
 
+     extern char * 
+     gtranslator_po_header_set_field (const char *header, const char *field, const char *value);
+
+
 /* Unexported funcs */
      void
      _gtranslator_po_increase_decrease_translated

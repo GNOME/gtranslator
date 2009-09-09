@@ -609,6 +609,24 @@ gtranslator_po_parse (GtranslatorPo * po, GFile * location, GError ** error)
 }
 
 /**
+ * gstranslator_po_header_set_field:
+ * wrapper for po_header_set_field in order to sanitize value
+ *
+ */
+extern char *
+gtranslator_po_header_set_field (const char *header, const char *field, const char *value)
+{
+    if (value == NULL)
+    {
+        value = g_strdup ("");
+    }
+    return po_header_set_field (header, field, value);
+
+}
+
+
+
+/**
  * gtranslator_po_save_header_in_msg:
  * @po: a #GtranslatorPo
  *
@@ -813,32 +831,32 @@ gtranslator_po_save_header_in_msg (GtranslatorPo * po,
   comments = gtranslator_header_get_comment (header);
   po_message_set_comments (message, comments);
 
-  msgstr = po_header_set_field (msgstr, "Project-Id-Version",
+  msgstr = gtranslator_po_header_set_field (msgstr, "Project-Id-Version",
 				gtranslator_header_get_prj_id_version
 				(header));
   msgstr =
-    po_header_set_field (msgstr, "Report-Msgid-Bugs-To",
+    gtranslator_po_header_set_field (msgstr, "Report-Msgid-Bugs-To",
 			 gtranslator_header_get_rmbt (header));
   msgstr =
-    po_header_set_field (msgstr, "PO-Revision-Date",
+    gtranslator_po_header_set_field (msgstr, "PO-Revision-Date",
 			 gtranslator_header_get_po_date (header));
 
   aux = g_strconcat (gtranslator_header_get_translator (header), " ", "<",
 		     gtranslator_header_get_tr_email (header), ">", NULL);
-  msgstr = po_header_set_field (msgstr, "Last-Translator", aux);
+  msgstr = gtranslator_po_header_set_field (msgstr, "Last-Translator", aux);
   g_free (aux);
 
   aux = g_strconcat (gtranslator_header_get_language (header), " ", "<",
 		     gtranslator_header_get_lg_email (header), ">", NULL);
-  msgstr = po_header_set_field (msgstr, "Language-Team", aux);
+  msgstr = gtranslator_po_header_set_field (msgstr, "Language-Team", aux);
   g_free (aux);
 
   aux = g_strconcat ("text/plain;", " charset=",
 		     gtranslator_header_get_charset (header), NULL);
-  msgstr = po_header_set_field (msgstr, "Content-Type", aux);
+  msgstr = gtranslator_po_header_set_field (msgstr, "Content-Type", aux);
   g_free (aux);
 
-  msgstr = po_header_set_field (msgstr, "Content-Transfer-Encoding",
+  msgstr = gtranslator_po_header_set_field (msgstr, "Content-Transfer-Encoding",
 				gtranslator_header_get_encoding (header));
   po_message_set_msgstr (message, msgstr);
 }
