@@ -6,13 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-08 17:28+0400\n"
-"PO-Revision-Date: 2009-08-31 14:26+0400\n"
+"POT-Creation-Date: 2009-09-10 12:36+0400\n"
+"PO-Revision-Date: 2009-09-10 12:55+0400\n"
 "Last-Translator: Alexandre Prokoudine <alexandre.prokoudine@gmail.com>\n"
-"Language-Team: Russian <gnome-cyr@gnome.org>\n"
+"Language-Team: Russian <gnome-cyr@lists.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: UTF-8\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); 10<=4 && (n%100<10 || n%"
 "100>=20) ? 1 : 2);\n"
@@ -23,7 +23,7 @@ msgstr "Редактор файлов локализации Gtranslator"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:2
 msgid "Translate and localize applications and libraries"
-msgstr ""
+msgstr "Перевод и локализация файлов и приложений"
 
 #: ../data/gtranslator.schemas.in.h:1
 msgid "Autosave files"
@@ -50,9 +50,8 @@ msgid "Custom font to use for edit fields."
 msgstr ""
 
 #: ../data/gtranslator.schemas.in.h:7
-#, fuzzy
 msgid "Delete compiled GMO files"
-msgstr "Удалять файл результата компиляции (например \"project.gmo\")"
+msgstr "Удалять созданные двоичные файлы переводов"
 
 #: ../data/gtranslator.schemas.in.h:8
 msgid "Directory containing PO files to add to the translation memory."
@@ -168,7 +167,7 @@ msgstr ""
 
 #: ../data/gtranslator.schemas.in.h:32
 msgid "PO directory"
-msgstr ""
+msgstr "Каталог PO"
 
 #: ../data/gtranslator.schemas.in.h:33
 #, fuzzy
@@ -240,20 +239,20 @@ msgstr "Открыть файл для перевода"
 msgid "File closed"
 msgstr "Файлы"
 
-#: ../plugins/alternate-language/alternate-language-panel.c:319
+#: ../plugins/alternate-language/alternate-language-panel.c:314
 msgid "There isn't any file loaded"
 msgstr ""
 
-#: ../plugins/alternate-language/alternate-language-plugin.c:59
+#: ../plugins/alternate-language/alternate-language-plugin.c:56
 #, fuzzy
 msgid "_Alternate Language"
 msgstr "Переводчик и язык"
 
-#: ../plugins/alternate-language/alternate-language-plugin.c:60
+#: ../plugins/alternate-language/alternate-language-plugin.c:57
 msgid "Show the Alternate Language panel"
 msgstr ""
 
-#: ../plugins/alternate-language/alternate-language-plugin.c:123
+#: ../plugins/alternate-language/alternate-language-plugin.c:119
 #: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:1
 msgid "Alternate Language"
 msgstr "Альтернативный язык"
@@ -262,7 +261,7 @@ msgstr "Альтернативный язык"
 msgid "Load an alternate language."
 msgstr ""
 
-#: ../plugins/charmap/charmap-plugin.c:299
+#: ../plugins/charmap/charmap-plugin.c:283
 #: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:1
 msgid "Character Map"
 msgstr "Касса символов"
@@ -271,12 +270,12 @@ msgstr "Касса символов"
 msgid "Insert special characters just by clicking on them."
 msgstr ""
 
-#: ../plugins/dictionary/dict-panel.c:186
+#: ../plugins/dictionary/dict-panel.c:183
 #, c-format
 msgid "No dictionary source available with name '%s'"
 msgstr ""
 
-#: ../plugins/dictionary/dict-panel.c:189
+#: ../plugins/dictionary/dict-panel.c:187
 msgid "Unable to find dictionary source"
 msgstr ""
 
@@ -285,88 +284,87 @@ msgstr ""
 msgid "No context available for source '%s'"
 msgstr ""
 
-#: ../plugins/dictionary/dict-panel.c:207
+#: ../plugins/dictionary/dict-panel.c:208
 msgid "Unable to create a context"
 msgstr ""
 
-#: ../plugins/dictionary/dict-panel.c:290
+#: ../plugins/dictionary/dict-panel.c:294
 #, c-format
 msgid "Dictionary source '%s' selected"
 msgstr ""
 
-#: ../plugins/dictionary/dict-panel.c:310
+#: ../plugins/dictionary/dict-panel.c:314
 #, c-format
 msgid "Strategy '%s' selected"
 msgstr ""
 
-#: ../plugins/dictionary/dict-panel.c:329
+#: ../plugins/dictionary/dict-panel.c:333
 #, c-format
 msgid "Database '%s' selected"
 msgstr ""
 
-#: ../plugins/dictionary/dict-panel.c:375
+#: ../plugins/dictionary/dict-panel.c:379
 #, c-format
 msgid "Word '%s' selected"
 msgstr ""
 
 #. speller
-#: ../plugins/dictionary/dict-panel.c:398
+#: ../plugins/dictionary/dict-panel.c:402
 msgid "Double-click on the word to look up"
 msgstr ""
 
 #. strat-chooser
-#: ../plugins/dictionary/dict-panel.c:404
+#: ../plugins/dictionary/dict-panel.c:407
 msgid "Double-click on the matching strategy to use"
 msgstr ""
 
 #. source-chooser
-#: ../plugins/dictionary/dict-panel.c:409
+#: ../plugins/dictionary/dict-panel.c:413
 msgid "Double-click on the source to use"
 msgstr ""
 
 #. db-chooser
-#: ../plugins/dictionary/dict-panel.c:418
+#: ../plugins/dictionary/dict-panel.c:423
 msgid "Double-click on the database to use"
 msgstr ""
 
 #.
 #. * Look up Button
 #.
-#: ../plugins/dictionary/dict-panel.c:481
+#: ../plugins/dictionary/dict-panel.c:487
 msgid "Look _up:"
 msgstr ""
 
-#: ../plugins/dictionary/dict-panel.c:554
+#: ../plugins/dictionary/dict-panel.c:559
 msgid "Similar words"
-msgstr ""
+msgstr "Схожие слова"
 
-#: ../plugins/dictionary/dict-panel.c:570
+#: ../plugins/dictionary/dict-panel.c:574
 msgid "Available dictionaries"
-msgstr ""
+msgstr "Доступные словари"
 
-#: ../plugins/dictionary/dict-panel.c:586
+#: ../plugins/dictionary/dict-panel.c:590
 msgid "Available strategies"
-msgstr ""
+msgstr "Доступные стратегии"
 
-#: ../plugins/dictionary/dict-panel.c:597
+#: ../plugins/dictionary/dict-panel.c:600
 msgid "Dictionary sources"
 msgstr ""
 
 #: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:1
-#: ../plugins/dictionary/dictionary-plugin.c:94
-#, fuzzy
+#: ../plugins/dictionary/dictionary-plugin.c:92
 msgid "Dictionary"
-msgstr "Настройки"
+msgstr "Словарь"
 
 #: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:2
 msgid "Look up words in a dictionary."
 msgstr ""
 
-#: ../plugins/fullscreen/fullscreen-plugin.c:46
+#: ../plugins/fullscreen/fullscreen-plugin.c:45
 msgid "_Fullscreen"
 msgstr ""
 
-#: ../plugins/fullscreen/fullscreen-plugin.c:47
+#: ../plugins/fullscreen/fullscreen-plugin.c:46
 msgid "Place window on fullscreen state"
 msgstr ""
 
@@ -378,16 +376,16 @@ msgstr ""
 msgid "Place window in the fullscreen state."
 msgstr ""
 
-#: ../plugins/insert-params/insert-params-plugin.c:79
+#: ../plugins/insert-params/insert-params-plugin.c:75
 #, fuzzy
 msgid "_Next Param"
 msgstr "В_перёд"
 
-#: ../plugins/insert-params/insert-params-plugin.c:80
+#: ../plugins/insert-params/insert-params-plugin.c:76
 msgid "Insert the next param of the message"
 msgstr ""
 
-#: ../plugins/insert-params/insert-params-plugin.c:82
+#: ../plugins/insert-params/insert-params-plugin.c:78
 msgid "_Insert Params"
 msgstr ""
 
@@ -399,17 +397,17 @@ msgstr ""
 msgid "Parameters detection and easy insertion."
 msgstr ""
 
-#: ../plugins/insert-tags/insert-tags-plugin.c:70
+#: ../plugins/insert-tags/insert-tags-plugin.c:68
 #, fuzzy
 msgid "_Next Tag"
 msgstr "В_перёд"
 
-#: ../plugins/insert-tags/insert-tags-plugin.c:71
+#: ../plugins/insert-tags/insert-tags-plugin.c:69
 #, fuzzy
 msgid "Insert the next tag of the message"
 msgstr "Перейти к следующему непереведённому сообщению"
 
-#: ../plugins/insert-tags/insert-tags-plugin.c:73
+#: ../plugins/insert-tags/insert-tags-plugin.c:71
 msgid "_Insert Tags"
 msgstr ""
 
@@ -445,55 +443,55 @@ msgstr ""
 msgid "Open Tran Settings"
 msgstr ""
 
-#: ../plugins/open-tran/open-tran-panel.c:213
-#: ../plugins/open-tran/open-tran-panel.c:277
+#: ../plugins/open-tran/open-tran-panel.c:207
+#: ../plugins/open-tran/open-tran-panel.c:272
 msgid "ERROR: could not parse response\n"
 msgstr ""
 
-#: ../plugins/open-tran/open-tran-panel.c:261
+#: ../plugins/open-tran/open-tran-panel.c:254
 #, c-format
 msgid "ERROR: %d %s\n"
 msgstr ""
 
-#: ../plugins/open-tran/open-tran-panel.c:272
+#: ../plugins/open-tran/open-tran-panel.c:267
 #, c-format
 msgid "FAULT: %d %s\n"
 msgstr ""
 
-#: ../plugins/open-tran/open-tran-panel.c:288
+#: ../plugins/open-tran/open-tran-panel.c:283
 #, c-format
 msgid "WRONG! Can't get result element %d\n"
 msgstr ""
 
-#: ../plugins/open-tran/open-tran-panel.c:304 ../src/actions-search.c:200
+#: ../plugins/open-tran/open-tran-panel.c:300 ../src/actions-search.c:195
 msgid "Phrase not found"
-msgstr ""
+msgstr "Фраза не найдена"
 
-#: ../plugins/open-tran/open-tran-panel.c:326
+#: ../plugins/open-tran/open-tran-panel.c:320
 msgid "You have to provide a phrase to search"
 msgstr ""
 
-#: ../plugins/open-tran/open-tran-panel.c:336
+#: ../plugins/open-tran/open-tran-panel.c:329
 msgid "You have to provide a search language code"
 msgstr ""
 
-#: ../plugins/open-tran/open-tran-panel.c:346
+#: ../plugins/open-tran/open-tran-panel.c:339
 msgid "You have to provide a language code for your language"
 msgstr ""
 
-#: ../plugins/open-tran/open-tran-panel.c:375
+#: ../plugins/open-tran/open-tran-panel.c:367
 msgid "Type"
-msgstr ""
+msgstr "Тип"
 
-#: ../plugins/open-tran/open-tran-panel.c:386
+#: ../plugins/open-tran/open-tran-panel.c:378
 msgid "Open-Tran.eu"
 msgstr ""
 
-#: ../plugins/open-tran/open-tran-panel.c:425
+#: ../plugins/open-tran/open-tran-panel.c:415
 msgid "Look for:"
 msgstr ""
 
-#: ../plugins/open-tran/open-tran-plugin.c:107
+#: ../plugins/open-tran/open-tran-plugin.c:106
 #: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:2
 #, fuzzy
 msgid "Open Tran"
@@ -519,12 +517,12 @@ msgstr ""
 msgid "Use external editor"
 msgstr ""
 
-#: ../plugins/source-code-view/source-code-view-plugin.c:115
+#: ../plugins/source-code-view/source-code-view-plugin.c:111
 #, c-format
 msgid "Please install %s to be able to show the file"
 msgstr ""
 
-#: ../plugins/source-code-view/source-code-view-plugin.c:466
+#: ../plugins/source-code-view/source-code-view-plugin.c:446
 msgid "Paths:\n"
 msgstr "Расположение:\n"
 
@@ -537,7 +535,7 @@ msgstr "Показать таблицу сообщений (требуется �
 msgid "Source Code View"
 msgstr ""
 
-#: ../plugins/source-code-view/viewer.c:79
+#: ../plugins/source-code-view/viewer.c:74
 msgid "Source Viewer"
 msgstr ""
 
@@ -545,11 +543,11 @@ msgstr ""
 msgid "<b>Source code</b>"
 msgstr "<b>Исходный код</b>"
 
-#: ../plugins/subversion/checkout-dialog.c:76
+#: ../plugins/subversion/checkout-dialog.c:77
 msgid "Subversion: Checkout complete."
 msgstr ""
 
-#: ../plugins/subversion/checkout-dialog.c:125
+#: ../plugins/subversion/checkout-dialog.c:124
 msgid "Please add a directory path to make the checkout"
 msgstr ""
 
@@ -557,15 +555,15 @@ msgstr ""
 msgid "Please add a Subversion URL"
 msgstr ""
 
-#: ../plugins/subversion/checkout-dialog.c:172 ../src/dialogs/assistant.c:666
+#: ../plugins/subversion/checkout-dialog.c:170 ../src/dialogs/assistant.c:689
 msgid "Checkout directory"
 msgstr ""
 
-#: ../plugins/subversion/checkout-dialog.c:264
+#: ../plugins/subversion/checkout-dialog.c:252
 msgid "Checkout repository"
 msgstr ""
 
-#: ../plugins/subversion/commit-dialog.c:226
+#: ../plugins/subversion/commit-dialog.c:221
 msgid "Subversion: Commit complete."
 msgstr ""
 
@@ -575,91 +573,91 @@ msgstr ""
 #. * For example: "Updated Galician translation"
 #. * where LANGUAGE = Galician.
 #.
-#: ../plugins/subversion/commit-dialog.c:269
+#: ../plugins/subversion/commit-dialog.c:262
 msgctxt "ChangeLog entry"
 msgid "LANGUAGE"
 msgstr ""
 
-#: ../plugins/subversion/commit-dialog.c:295
+#: ../plugins/subversion/commit-dialog.c:286
 #, c-format
 msgid "The ChangeLog file '%s' does not exist"
 msgstr ""
 
-#: ../plugins/subversion/commit-dialog.c:407
+#: ../plugins/subversion/commit-dialog.c:400
 msgid "Are you sure that you want to pass an empty log message?"
 msgstr ""
 
-#: ../plugins/subversion/commit-dialog.c:424
+#: ../plugins/subversion/commit-dialog.c:422
 msgid "You have to select at least one file to send"
 msgstr ""
 
-#: ../plugins/subversion/commit-dialog.c:574
+#: ../plugins/subversion/commit-dialog.c:562
 msgid "Commit Changes"
 msgstr ""
 
-#: ../plugins/subversion/diff-dialog.c:79
+#: ../plugins/subversion/diff-dialog.c:80
 msgid "Subversion: Diff complete."
 msgstr ""
 
-#: ../plugins/subversion/diff-dialog.c:108
+#: ../plugins/subversion/diff-dialog.c:109
 #, c-format
 msgid "Please install %s to be able to diff the file"
 msgstr ""
 
-#: ../plugins/subversion/diff-dialog.c:411
+#: ../plugins/subversion/diff-dialog.c:390
 msgid "Diff file"
 msgstr ""
 
-#: ../plugins/subversion/diff-dialog.c:483
+#: ../plugins/subversion/diff-dialog.c:455
 msgid "Diff"
 msgstr ""
 
-#: ../plugins/subversion/subversion-plugin.c:84
+#: ../plugins/subversion/subversion-plugin.c:82
 msgid "Subversion: File will be added on next commit."
 msgstr ""
 
-#: ../plugins/subversion/subversion-plugin.c:138
+#: ../plugins/subversion/subversion-plugin.c:129
 msgid "_Update"
 msgstr "_Обновить"
 
-#: ../plugins/subversion/subversion-plugin.c:139
+#: ../plugins/subversion/subversion-plugin.c:130
 msgid "Sync your local copy with the Subversion tree"
 msgstr ""
 
-#: ../plugins/subversion/subversion-plugin.c:142
+#: ../plugins/subversion/subversion-plugin.c:133
 #, fuzzy
 msgid "_Commit"
 msgstr "Комментарий:"
 
-#: ../plugins/subversion/subversion-plugin.c:143
+#: ../plugins/subversion/subversion-plugin.c:134
 msgid "Commit your changes to the Subversion tree"
 msgstr ""
 
-#: ../plugins/subversion/subversion-plugin.c:146
+#: ../plugins/subversion/subversion-plugin.c:137
 msgid "_Add"
 msgstr ""
 
-#: ../plugins/subversion/subversion-plugin.c:147
+#: ../plugins/subversion/subversion-plugin.c:138
 msgid "Add a new file/directory to the Subversion tree"
 msgstr ""
 
-#: ../plugins/subversion/subversion-plugin.c:150
+#: ../plugins/subversion/subversion-plugin.c:141
 msgid "_Diff"
 msgstr ""
 
-#: ../plugins/subversion/subversion-plugin.c:151
+#: ../plugins/subversion/subversion-plugin.c:142
 msgid "Diff local PO file with repository PO file"
 msgstr ""
 
-#: ../plugins/subversion/subversion-plugin.c:154
+#: ../plugins/subversion/subversion-plugin.c:145
 msgid "C_heckout"
 msgstr ""
 
-#: ../plugins/subversion/subversion-plugin.c:155
+#: ../plugins/subversion/subversion-plugin.c:146
 msgid "Get a new repository copy"
 msgstr ""
 
-#: ../plugins/subversion/subversion-plugin.c:158
+#: ../plugins/subversion/subversion-plugin.c:149
 msgid "S_ubversion"
 msgstr ""
 
@@ -689,7 +687,7 @@ msgstr ""
 
 #: ../plugins/subversion/subversion.ui.h:8
 msgid "<b>Information:</b>"
-msgstr ""
+msgstr "<b>Информация:</b>"
 
 #: ../plugins/subversion/subversion.ui.h:9
 msgid "<b>Log Message:</b>"
@@ -697,7 +695,7 @@ msgstr ""
 
 #: ../plugins/subversion/subversion.ui.h:10
 msgid "<b>Password:</b>"
-msgstr ""
+msgstr "<b>Пароль:</b>"
 
 #: ../plugins/subversion/subversion.ui.h:11
 msgid "<b>Realm:</b>"
@@ -754,7 +752,7 @@ msgid "Send Changes"
 msgstr ""
 
 #: ../plugins/subversion/subversion.ui.h:24
-#: ../plugins/subversion/update-dialog.c:234
+#: ../plugins/subversion/update-dialog.c:222
 #, fuzzy
 msgid "Update repository"
 msgstr "Обновить po-файл"
@@ -775,180 +773,191 @@ msgstr ""
 msgid "Subversion"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:177
-#: ../plugins/subversion/svn-command.c:262
+#: ../plugins/subversion/svn-command.c:176
+#: ../plugins/subversion/svn-command.c:258
 msgid "Authentication canceled"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:235
+#: ../plugins/subversion/svn-command.c:231
 #, fuzzy
 msgid "Hostname:"
 msgstr "Название проекта:"
 
-#: ../plugins/subversion/svn-command.c:236
+#: ../plugins/subversion/svn-command.c:232
 #, fuzzy
 msgid "Fingerprint:"
 msgstr "Искать в поле:"
 
-#: ../plugins/subversion/svn-command.c:237
+#: ../plugins/subversion/svn-command.c:233
 msgid "Valid from:"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:238
+#: ../plugins/subversion/svn-command.c:234
 msgid "Valid until:"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:239
+#: ../plugins/subversion/svn-command.c:235
 msgid "Issuer DN:"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:240
+#: ../plugins/subversion/svn-command.c:236
 msgid "DER certificate:"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:387
-#: ../plugins/subversion/svn-command.c:403
+#: ../plugins/subversion/svn-command.c:385
+#: ../plugins/subversion/svn-command.c:400
 #, c-format
 msgid "Deleted: %s"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:390
-#: ../plugins/subversion/svn-command.c:409
+#: ../plugins/subversion/svn-command.c:388
+#: ../plugins/subversion/svn-command.c:406
 #, c-format
 msgid "Added: %s"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:393
+#: ../plugins/subversion/svn-command.c:391
 #, c-format
 msgid "Reverted: %s"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:396
+#: ../plugins/subversion/svn-command.c:394
 #, fuzzy, c-format
 msgid "Revert failed: %s"
 msgstr "Восстановить файл"
 
-#: ../plugins/subversion/svn-command.c:400
+#: ../plugins/subversion/svn-command.c:397
 #, c-format
 msgid "Resolved: %s"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:406
+#: ../plugins/subversion/svn-command.c:403
 #, fuzzy, c-format
 msgid "Updated: %s"
 msgstr "Обновить"
 
-#: ../plugins/subversion/svn-command.c:412
+#: ../plugins/subversion/svn-command.c:409
 #, c-format
 msgid "Externally Updated: %s"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:416
+#: ../plugins/subversion/svn-command.c:413
 #, c-format
 msgid "Commit Modified: %s"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:420
+#: ../plugins/subversion/svn-command.c:417
 #, c-format
 msgid "Commit Added: %s"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:423
+#: ../plugins/subversion/svn-command.c:420
 #, c-format
 msgid "Commit Deleted: %s"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:427
+#: ../plugins/subversion/svn-command.c:424
 #, c-format
 msgid "Commit Replaced: %s"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:431
+#: ../plugins/subversion/svn-command.c:428
 #, c-format
 msgid "Created File: %s"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:446
+#: ../plugins/subversion/svn-command.c:443
 #, c-format
 msgid "Modified: %s"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:449
+#: ../plugins/subversion/svn-command.c:446
 #, c-format
 msgid "Merged: %s"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:452
+#: ../plugins/subversion/svn-command.c:449
 #, c-format
 msgid "Conflicted: %s"
 msgstr ""
 
-#: ../plugins/subversion/svn-command.c:456
+#: ../plugins/subversion/svn-command.c:452
 #, fuzzy, c-format
 msgid "Missing: %s"
 msgstr "Ошибка"
 
-#: ../plugins/subversion/svn-command.c:459
+#: ../plugins/subversion/svn-command.c:455
 #, c-format
 msgid "Obstructed: %s"
 msgstr ""
 
-#: ../plugins/subversion/svn-update-command.c:103
+#: ../plugins/subversion/svn-update-command.c:104
 #, c-format
 msgid "Updated to revision %ld."
 msgstr ""
 
-#: ../plugins/subversion/update-dialog.c:74
+#: ../plugins/subversion/update-dialog.c:75
 msgid "Subversion: Update complete."
 msgstr ""
 
-#: ../plugins/subversion/vcs-status-tree-view.c:293
+#: ../plugins/subversion/vcs-status-tree-view.c:290
 msgid "Modified"
 msgstr ""
 
-#: ../plugins/subversion/vcs-status-tree-view.c:297
+#: ../plugins/subversion/vcs-status-tree-view.c:294
 msgid "Added"
 msgstr ""
 
-#: ../plugins/subversion/vcs-status-tree-view.c:301
+#: ../plugins/subversion/vcs-status-tree-view.c:298
 msgid "Deleted"
 msgstr ""
 
-#: ../plugins/subversion/vcs-status-tree-view.c:305
+#: ../plugins/subversion/vcs-status-tree-view.c:302
 msgid "Conflicted"
 msgstr ""
 
-#: ../plugins/subversion/vcs-status-tree-view.c:309
+#: ../plugins/subversion/vcs-status-tree-view.c:306
 msgid "Missing"
 msgstr "Ошибка"
 
-#: ../src/actions-file.c:202
+#: ../src/actions-file.c:208
 msgid "Open file for translation"
 msgstr "Открыть файл для перевода"
 
-#: ../src/actions-file.c:276 ../src/actions-file.c:403
-#, fuzzy
+#: ../src/actions-file.c:281 ../src/actions-file.c:402
 msgid "File saved."
-msgstr "Файлы"
+msgstr "Файл сохранен."
 
-#: ../src/actions-file.c:326
+#: ../src/actions-file.c:331
 msgid "Save file as..."
 msgstr "Сохранить файл как..."
 
-#: ../src/actions-file.c:747
+#: ../src/actions-file.c:795
 #, c-format
 msgid "Failed to write profile data into profiles file '%s'"
 msgstr ""
 
-#: ../src/actions-help.c:55
-msgid "Current Developers"
+#: ../src/actions-file.c:853
+msgid "Files saved."
+msgstr "Файлы сохранены."
+
+#: ../src/actions-help.c:52
+msgid "Current Maintainers"
 msgstr ""
 
-#: ../src/actions-help.c:61
+#: ../src/actions-help.c:57
+msgid "Current Developers"
+msgstr "Активные разработчики"
+
+#: ../src/actions-help.c:63
 msgid "Previous Developers"
 msgstr ""
 
-#: ../src/actions-help.c:80
+#: ../src/actions-help.c:71
+msgid "Contributors"
+msgstr "Участники"
+
+#: ../src/actions-help.c:91
 msgid ""
 "This program is free software: you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -956,7 +965,7 @@ msgid ""
 "any later version."
 msgstr ""
 
-#: ../src/actions-help.c:84
+#: ../src/actions-help.c:95
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -964,26 +973,24 @@ msgid ""
 "more details."
 msgstr ""
 
-#: ../src/actions-help.c:88
+#: ../src/actions-help.c:99
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see <http://www.gnu.org/licenses/>."
 msgstr ""
 
-#: ../src/actions-help.c:100
-#, fuzzy
+#: ../src/actions-help.c:111
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
-msgstr ""
-"gtranslator - редактор po-файлов со множеством дополнительных возможностей."
+msgstr "Средство локализации приложений и библиотек"
 
-#: ../src/actions-help.c:102
+#: ../src/actions-help.c:114
 msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
 msgstr ""
 "Авторские права © 1999-2008 Фонд Свободного Программного Обеспечения, Inc"
 
-#: ../src/actions-help.c:106
+#: ../src/actions-help.c:117
 msgid "About Gtranslator"
 msgstr "О Gtranslator"
 
@@ -991,15 +998,15 @@ msgstr "О Gtranslator"
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/actions-help.c:111
+#: ../src/actions-help.c:122
 msgid "translator-credits"
 msgstr "Диконов Вячеслав <sdiconov@mail.ru>"
 
-#: ../src/actions-help.c:115
+#: ../src/actions-help.c:126
 msgid "Gtranslator Web Site"
 msgstr "Домашняя страница Gtranslator"
 
-#: ../src/actions-search.c:175
+#: ../src/actions-search.c:173
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
@@ -1007,11 +1014,11 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../src/actions-search.c:185
+#: ../src/actions-search.c:183
 msgid "Found and replaced one occurrence"
 msgstr ""
 
-#: ../src/context.c:61
+#: ../src/context.c:60
 msgid "Format:"
 msgstr "Формат:"
 
@@ -1019,15 +1026,15 @@ msgstr "Формат:"
 msgid "Context:"
 msgstr "Контекст:"
 
-#: ../src/context.c:63
+#: ../src/context.c:64
 msgid "Extracted comments:"
 msgstr "Извлеченные комментарии:"
 
-#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:716
+#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:755
 msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
 msgstr ""
 
-#: ../src/dialogs/assistant.c:281
+#: ../src/dialogs/assistant.c:298
 #, c-format
 msgid ""
 "Profile name: %s\n"
@@ -1042,96 +1049,95 @@ msgid ""
 "Database path: %s"
 msgstr ""
 
-#: ../src/dialogs/assistant.c:300
+#: ../src/dialogs/assistant.c:325
 msgid "None"
-msgstr ""
+msgstr "Нет"
 
-#: ../src/dialogs/assistant.c:321
+#: ../src/dialogs/assistant.c:348
 msgid ""
 "This assistant will help you to create the main profile\n"
 "and generate your translation memory database."
 msgstr ""
 
-#: ../src/dialogs/assistant.c:327
+#: ../src/dialogs/assistant.c:354
 msgid "Assistant"
 msgstr "Ассистент"
 
-#: ../src/dialogs/assistant.c:416
+#: ../src/dialogs/assistant.c:446
 msgid "<b>Profile name:</b>"
 msgstr "<b>Название профиля:</b>"
 
-#: ../src/dialogs/assistant.c:436
+#: ../src/dialogs/assistant.c:465
 msgid "<b>Translator name:</b>"
 msgstr "<b>Имя переводчика:</b>"
 
-#: ../src/dialogs/assistant.c:456
+#: ../src/dialogs/assistant.c:484
 msgid "<b>Translator email:</b>"
 msgstr "<b>Эл. почта:</b>"
 
-#: ../src/dialogs/assistant.c:476
+#: ../src/dialogs/assistant.c:503
 msgid "<b>Language:</b>"
 msgstr "<b>Язык:</b>"
 
-#: ../src/dialogs/assistant.c:496
+#: ../src/dialogs/assistant.c:522
 msgid "<b>Team email:</b>"
 msgstr "<b>Эл. почта команды:</b>"
 
-#: ../src/dialogs/assistant.c:508 ../src/dialogs/assistant.c:656
-#: ../src/dialogs/preferences-dialog.c:511
+#: ../src/dialogs/assistant.c:534 ../src/dialogs/assistant.c:680
+#: ../src/dialogs/preferences-dialog.c:548
 msgid "Profile"
 msgstr "Профиль"
 
-#: ../src/dialogs/assistant.c:584
+#: ../src/dialogs/assistant.c:611
 msgid "<b>Language code:</b>"
 msgstr "<b>Код языка:</b>"
 
-#: ../src/dialogs/assistant.c:604
+#: ../src/dialogs/assistant.c:630
 msgid "<b>Character set:</b>"
 msgstr "<b>Кодировка:</b>"
 
-#: ../src/dialogs/assistant.c:624
+#: ../src/dialogs/assistant.c:649
 msgid "<b>Transfer encoding:</b>"
 msgstr ""
 
-#: ../src/dialogs/assistant.c:644
+#: ../src/dialogs/assistant.c:668
 msgid "<b>Plural forms:</b>"
 msgstr "<b>Множественные формы:</b>"
 
-#: ../src/dialogs/assistant.c:706
+#: ../src/dialogs/assistant.c:727
 msgid "<b>Select the path to generate the database:</b>"
 msgstr ""
 
-#: ../src/dialogs/assistant.c:736
+#: ../src/dialogs/assistant.c:756
 msgid "<b>Look for a specific PO filename:</b>"
 msgstr ""
 
-#: ../src/dialogs/assistant.c:745
+#: ../src/dialogs/assistant.c:765
 msgid "E.g.: gl.po"
-msgstr ""
+msgstr "Например: ru.po"
 
-#: ../src/dialogs/assistant.c:748
+#: ../src/dialogs/assistant.c:769
 msgid "Generate Database"
-msgstr ""
+msgstr "Создать базу данных"
 
-#: ../src/dialogs/assistant.c:772
-#, fuzzy
+#: ../src/dialogs/assistant.c:795
 msgid "Confirmation"
-msgstr "Личная информация"
+msgstr "Подтверждение"
 
-#: ../src/dialogs/close-confirmation-dialog.c:131
+#: ../src/dialogs/close-confirmation-dialog.c:128
 msgid "Close _without Saving"
 msgstr ""
 
-#: ../src/dialogs/close-confirmation-dialog.c:165
+#: ../src/dialogs/close-confirmation-dialog.c:159
 msgid "Question"
-msgstr ""
+msgstr "Вопрос"
 
-#: ../src/dialogs/close-confirmation-dialog.c:383
+#: ../src/dialogs/close-confirmation-dialog.c:380
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr ""
 
-#: ../src/dialogs/close-confirmation-dialog.c:555
+#: ../src/dialogs/close-confirmation-dialog.c:543
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
@@ -1139,7 +1145,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../src/dialogs/close-confirmation-dialog.c:561
+#: ../src/dialogs/close-confirmation-dialog.c:550
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -1148,45 +1154,43 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../src/dialogs/close-confirmation-dialog.c:579
+#: ../src/dialogs/close-confirmation-dialog.c:571
 msgid "Docum_ents with unsaved changes:"
 msgstr ""
 
-#: ../src/dialogs/close-confirmation-dialog.c:581
+#: ../src/dialogs/close-confirmation-dialog.c:575
 msgid "S_elect the documents you want to save:"
 msgstr ""
 
-#: ../src/dialogs/close-confirmation-dialog.c:600
+#: ../src/dialogs/close-confirmation-dialog.c:595
 msgid "Saving has been disabled by the system administrator."
 msgstr ""
 
-#: ../src/dialogs/close-confirmation-dialog.c:602
+#: ../src/dialogs/close-confirmation-dialog.c:597
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr ""
 
-#: ../src/dialogs/comment-dialog.c:98
-#, fuzzy
+#: ../src/dialogs/comment-dialog.c:95
 msgid "Edit Comment"
-msgstr "Комментарий"
+msgstr "Правка комментария"
 
 #: ../src/dialogs/comment-dialog.ui.h:1
 msgid "<b>Write your comments bellow:</b>"
-msgstr ""
+msgstr "<b>Напишите ниже свой комментарий:</b>"
 
-#: ../src/dialogs/file-dialogs.c:60
+#: ../src/dialogs/file-dialogs.c:62
 msgid "Gettext translation"
 msgstr "Перевод Gettext"
 
-#: ../src/dialogs/file-dialogs.c:65
+#: ../src/dialogs/file-dialogs.c:71
 msgid "Gettext translation template"
 msgstr "Шаблон перевода Gettext"
 
-#: ../src/dialogs/file-dialogs.c:70
+#: ../src/dialogs/file-dialogs.c:76
 msgid "All files"
 msgstr "Все файлы"
 
-#: ../src/dialogs/header-dialog.c:259
-#, fuzzy
+#: ../src/dialogs/header-dialog.c:270
 msgid "Edit Header"
 msgstr "Правка заголовка"
 
@@ -1196,14 +1200,12 @@ msgid "Char_set:"
 msgstr "Кодировка:"
 
 #: ../src/dialogs/header-dialog.ui.h:2
-#, fuzzy
 msgid "Comment"
-msgstr "Комментарий:"
+msgstr "Комментарий"
 
 #: ../src/dialogs/header-dialog.ui.h:3
-#, fuzzy
 msgid "Enc_oding:"
-msgstr "Формат:"
+msgstr "_Кодировка:"
 
 #: ../src/dialogs/header-dialog.ui.h:4
 #, fuzzy
@@ -1239,59 +1241,54 @@ msgid "Translator and Language"
 msgstr "Переводчик и язык"
 
 #: ../src/dialogs/header-dialog.ui.h:11
-#, fuzzy
 msgid "Translator's _email:"
-msgstr "Э-почта:"
+msgstr "Эл. почта переводчика:"
 
 #: ../src/dialogs/header-dialog.ui.h:12
-#, fuzzy
 msgid "Translator's _name:"
-msgstr "Имя переводчика:"
+msgstr "_Имя переводчика:"
 
 #: ../src/dialogs/header-dialog.ui.h:13
 msgid "Use my options to complete the following entries:"
 msgstr "Использовать личные настройки для заполнения полей заголовка"
 
 #: ../src/dialogs/header-dialog.ui.h:14 ../src/dialogs/profile-dialog.ui.h:9
-#, fuzzy
 msgid "_Language:"
-msgstr "Язык:"
+msgstr "_Язык:"
 
-#: ../src/dialogs/jump-dialog.c:92
-#, fuzzy
+#: ../src/dialogs/jump-dialog.c:91
 msgid "Go to Message"
-msgstr "Номер сообщения:"
+msgstr "Перейти к сообщению"
 
 #: ../src/dialogs/jump-dialog.ui.h:1
 #, fuzzy
 msgid "<b>Enter message number:</b>"
 msgstr "Номер сообщения:"
 
-#: ../src/dialogs/preferences-dialog.c:517
+#: ../src/dialogs/preferences-dialog.c:554
 msgid "Active"
 msgstr ""
 
-#: ../src/dialogs/preferences-dialog.c:1060
+#: ../src/dialogs/preferences-dialog.c:1124
 msgid ""
 "<span weight=\"bold\" size=\"large\">Impossible to remove the active "
 "profile</span>"
 msgstr ""
 
-#: ../src/dialogs/preferences-dialog.c:1063
+#: ../src/dialogs/preferences-dialog.c:1129
 msgid "Another profile should be selected as active before"
 msgstr ""
 
-#: ../src/dialogs/preferences-dialog.c:1075
+#: ../src/dialogs/preferences-dialog.c:1143
 msgid ""
 "<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
 "profile?</span>"
 msgstr ""
 
-#: ../src/dialogs/preferences-dialog.c:1117
+#: ../src/dialogs/preferences-dialog.c:1181
 #: ../src/dialogs/preferences-dialog.ui.h:16
-#, fuzzy
 msgid "Gtranslator Preferences"
-msgstr "Замена"
+msgstr "Параметры Gtranslator"
 
 #: ../src/dialogs/preferences-dialog.ui.h:2
 #, fuzzy
@@ -1299,18 +1296,16 @@ msgid "<b>Anchor style:</b>"
 msgstr "<b>Информация об авторе</b>"
 
 #: ../src/dialogs/preferences-dialog.ui.h:3
-#, fuzzy
 msgid "<b>Autosave</b>"
-msgstr "Автосохранение"
+msgstr "<b>Автосохранение</b>"
 
 #: ../src/dialogs/preferences-dialog.ui.h:4
 msgid "<b>Configuration:</b>"
-msgstr ""
+msgstr "<b>Конфигурация:</b>"
 
 #: ../src/dialogs/preferences-dialog.ui.h:5
-#, fuzzy
 msgid "<b>Contents</b>"
-msgstr "Содержание"
+msgstr "<b>Содержимое</b>"
 
 #: ../src/dialogs/preferences-dialog.ui.h:6
 msgid "<b>Database:</b>"
@@ -1322,33 +1317,31 @@ msgstr "<b>Общие</b>"
 
 #: ../src/dialogs/preferences-dialog.ui.h:8
 msgid "<b>Scheme color:</b>"
-msgstr ""
+msgstr "<b>Цвет схемы:</b>"
 
 #: ../src/dialogs/preferences-dialog.ui.h:9
-#, fuzzy
 msgid "<b>Text Display</b>"
-msgstr "Отображение текста"
+msgstr "<b>Отображение текста</b>"
 
 #: ../src/dialogs/preferences-dialog.ui.h:10
 msgid "Add to Database"
-msgstr ""
+msgstr "Добавить в базу данных"
 
 #: ../src/dialogs/preferences-dialog.ui.h:11
 msgid "Check _spelling"
-msgstr ""
+msgstr "Про_верять орфографию"
 
 #: ../src/dialogs/preferences-dialog.ui.h:12
 msgid "Create a _backup copy of files before saving"
-msgstr ""
+msgstr "Создавать _резервную копию перевода перед сохранением"
 
 #: ../src/dialogs/preferences-dialog.ui.h:13
 msgid "Editor"
 msgstr "Редактор"
 
 #: ../src/dialogs/preferences-dialog.ui.h:14
-#, fuzzy
 msgid "Editor _font:"
-msgstr "Комментарий"
+msgstr "_Шрифт редактора:"
 
 #: ../src/dialogs/preferences-dialog.ui.h:15
 msgid "Files"
@@ -1371,23 +1364,20 @@ msgid "Max. difference in sentence length:"
 msgstr ""
 
 #: ../src/dialogs/preferences-dialog.ui.h:21
-#, fuzzy
 msgid "Plugins"
-msgstr "Польский"
+msgstr "Модули"
 
 #: ../src/dialogs/preferences-dialog.ui.h:22
-#, fuzzy
 msgid "Profiles"
-msgstr "Файлы"
+msgstr "Профили"
 
 #: ../src/dialogs/preferences-dialog.ui.h:23
 msgid "Select directory contains PO files:"
 msgstr ""
 
-#: ../src/dialogs/preferences-dialog.ui.h:24 ../src/tab.c:658
-#, fuzzy
+#: ../src/dialogs/preferences-dialog.ui.h:24 ../src/tab.c:662
 msgid "Translation Memory"
-msgstr "Перевод"
+msgstr "Память переводов"
 
 #: ../src/dialogs/preferences-dialog.ui.h:25
 msgid "Use _custom font"
@@ -1398,46 +1388,43 @@ msgid "Use only files with this name:"
 msgstr ""
 
 #: ../src/dialogs/preferences-dialog.ui.h:27
-#, fuzzy
 msgid "_Autosave files every"
-msgstr "Интервал автосохранения:"
+msgstr "_Интервал автосохранения:"
 
 #: ../src/dialogs/preferences-dialog.ui.h:28
-#, fuzzy
 msgid "_Delete compiled GMO files"
-msgstr "Удалять файл результата компиляции (например \"project.gmo\")"
+msgstr "_Удалять созданные файлы GMO"
 
 #: ../src/dialogs/preferences-dialog.ui.h:29
 msgid "_Highlight message syntax"
-msgstr ""
+msgstr "_Подсвечивать синтаксис сообщений"
 
 #: ../src/dialogs/preferences-dialog.ui.h:30
-#, fuzzy
 msgid "_Remove fuzzy status if message is changed"
-msgstr "Снимать признак неточного перевода с отредактированных сообщений"
+msgstr "_Снимать статус неточного перевода с измененных сообщений"
 
 #: ../src/dialogs/preferences-dialog.ui.h:31
-#, fuzzy
 msgid "_Warn if PO file contains fuzzy translations"
-msgstr "Предупреждать если po-файл содержит неточные переводы"
+msgstr "Предупреждать о наличии _неточных переводов"
 
 #: ../src/dialogs/preferences-dialog.ui.h:32
 msgid "_minutes"
-msgstr ""
+msgstr "_минут"
 
-#: ../src/dialogs/profile-dialog.c:257
+#: ../src/dialogs/profile-dialog.c:262
 msgid ""
 "<span weight=\"bold\" size=\"large\">The profile name already exists</span>"
 msgstr ""
+"<span weight=\"bold\" size=\"large\">Профиль с таким именем уже существует</"
+"span>"
 
-#: ../src/dialogs/profile-dialog.c:345
-#, fuzzy
+#: ../src/dialogs/profile-dialog.c:375
 msgid "Gtranslator Profile"
-msgstr "Замена"
+msgstr "Профиль Gtranslator"
 
-#: ../src/dialogs/profile-dialog.c:381
+#: ../src/dialogs/profile-dialog.c:420
 msgid "Example: nplurals=2; plural=(n != 1);"
-msgstr ""
+msgstr "Пример: nplurals=2; plural=(n != 1);"
 
 #: ../src/dialogs/profile-dialog.ui.h:1
 msgid "<b>Language Settings</b>"
@@ -1483,23 +1470,21 @@ msgstr "_Множественные формы:"
 msgid "_Team email:"
 msgstr ""
 
-#: ../src/dialogs/search-dialog.c:323 ../src/dialogs/search-dialog.ui.h:4
+#: ../src/dialogs/search-dialog.c:332 ../src/dialogs/search-dialog.ui.h:4
 msgid "Replace"
 msgstr "Заменить"
 
-#: ../src/dialogs/search-dialog.c:343
+#: ../src/dialogs/search-dialog.c:356
 msgid "Find"
 msgstr "Поиск"
 
-#: ../src/dialogs/search-dialog.c:443
-#, fuzzy
+#: ../src/dialogs/search-dialog.c:471
 msgid "Replace _All"
-msgstr "Заменить всё"
+msgstr "Заменить _все"
 
-#: ../src/dialogs/search-dialog.c:446
-#, fuzzy
+#: ../src/dialogs/search-dialog.c:475
 msgid "_Replace"
-msgstr "Заменить"
+msgstr "З_аменить"
 
 #: ../src/dialogs/search-dialog.ui.h:1
 msgid "Include fuzzy strings"
@@ -1510,12 +1495,10 @@ msgid "Match _entire word only"
 msgstr ""
 
 #: ../src/dialogs/search-dialog.ui.h:3
-#, fuzzy
 msgid "Original text"
-msgstr "Исходный шрифт текста:"
+msgstr "Исходный текст"
 
 #: ../src/dialogs/search-dialog.ui.h:5
-#, fuzzy
 msgid "Replace All"
 msgstr "Заменить всё"
 
@@ -1545,81 +1528,81 @@ msgstr ""
 msgid "_Wrap around"
 msgstr ""
 
-#: ../src/main.c:46
+#: ../src/main.c:54
 msgid "[FILE...]"
 msgstr ""
 
-#: ../src/main.c:72
+#: ../src/main.c:80
 #, c-format
 msgid "%s: malformed file name or URI.\n"
 msgstr ""
 
-#: ../src/main.c:108
+#: ../src/main.c:148
 #, fuzzy
 msgid "Gtranslator"
-msgstr "gtranslator"
+msgstr "Gtranslator"
 
 #. Setup command line options
-#: ../src/main.c:111
+#: ../src/main.c:151
 msgid "- Edit PO files"
 msgstr ""
 
-#: ../src/main.c:121
+#: ../src/main.c:165
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Ошибка инициализации GConf: %s."
 
-#: ../src/main.c:139
+#: ../src/main.c:187
 #, c-format
 msgid "Error setting the default window icon: %s"
 msgstr ""
 
-#: ../src/message-table.c:284
+#: ../src/message-table.c:273
 msgid "Status"
 msgstr "Статус"
 
-#: ../src/message-table.c:297
+#: ../src/message-table.c:289
 msgid "ID"
 msgstr "ID"
 
-#: ../src/message-table.c:313
+#: ../src/message-table.c:308
 msgid "Original Text"
 msgstr "Исходный текст"
 
-#: ../src/message-table.c:329
+#: ../src/message-table.c:327
 msgid "Translated Text"
 msgstr "Текст перевода"
 
-#: ../src/notebook.c:94
+#: ../src/notebook.c:90
 #, c-format
 msgid "<b>Path:</b> %s"
 msgstr ""
 
-#: ../src/notebook.c:153
+#: ../src/notebook.c:143
 msgid "Close document"
 msgstr "Закрыть документ"
 
-#: ../src/po.c:365
+#: ../src/po.c:398
 #, c-format
 msgid "Failed opening file '%s': %s"
 msgstr "Ошибка приоткрытии файла \"%s\": %s"
 
-#: ../src/po.c:391
+#: ../src/po.c:422
 #, c-format
 msgid "The file is empty"
 msgstr ""
 
-#: ../src/po.c:405
+#: ../src/po.c:437
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext вернул пустой список сообщений домена."
 
-#: ../src/po.c:552
+#: ../src/po.c:593
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Не получено сообщений от анализатора."
 
-#: ../src/po.c:793
+#: ../src/po.c:877
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1630,90 +1613,90 @@ msgstr ""
 "Учтите, что такие файлы создаются при компиляции.\n"
 "Файл перевода должен иметь расширение \"po\", скорее всего %s.po"
 
-#: ../src/po.c:828
+#: ../src/po.c:890
+#, c-format
+msgid "The file %s is read-only, and can not be overwritten"
+msgstr ""
+
+#: ../src/po.c:923
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr ""
 
 #: ../src/plugin-system/plugin-manager.c:54
 msgid "Plugin"
-msgstr "Расширение"
+msgstr "Модуль"
 
 #: ../src/plugin-system/plugin-manager.c:55
 msgid "Enabled"
 msgstr ""
 
-#: ../src/plugin-system/plugin-manager.c:504
+#: ../src/plugin-system/plugin-manager.c:508
 msgid "_About"
 msgstr "_О программе"
 
-#: ../src/plugin-system/plugin-manager.c:512
+#: ../src/plugin-system/plugin-manager.c:514
 msgid "C_onfigure"
-msgstr ""
+msgstr "_Настроить"
 
-#: ../src/plugin-system/plugin-manager.c:521
+#: ../src/plugin-system/plugin-manager.c:523
 msgid "A_ctivate"
-msgstr ""
+msgstr "_Активировать"
 
-#: ../src/plugin-system/plugin-manager.c:532
+#: ../src/plugin-system/plugin-manager.c:534
 msgid "Ac_tivate All"
-msgstr ""
+msgstr "А_ктивировать все"
 
-#: ../src/plugin-system/plugin-manager.c:537
+#: ../src/plugin-system/plugin-manager.c:538
 msgid "_Deactivate All"
-msgstr ""
+msgstr "_Деактивировать все"
 
-#: ../src/plugin-system/plugin-manager.c:796
+#: ../src/plugin-system/plugin-manager.c:777
 msgid "Active plugins"
-msgstr ""
+msgstr "Активные модули"
 
-#: ../src/plugin-system/plugin-manager.c:825
+#: ../src/plugin-system/plugin-manager.c:806
 msgid "_About Plugin"
-msgstr ""
+msgstr "О _модуле"
 
-#: ../src/plugin-system/plugin-manager.c:829
+#: ../src/plugin-system/plugin-manager.c:811
 msgid "C_onfigure Plugin"
-msgstr ""
+msgstr "_Настроить модуль"
 
-#. Translators: Insert mode
-#: ../src/statusbar.c:114 ../src/statusbar.c:242
+#: ../src/statusbar.c:118 ../src/statusbar.c:249
 msgid "INS"
 msgstr ""
 
-#. Translators: Overwrite mode
-#: ../src/statusbar.c:114 ../src/statusbar.c:240
+#: ../src/statusbar.c:119 ../src/statusbar.c:245
 msgid "OVR"
 msgstr ""
 
-#: ../src/tab.c:224
+#: ../src/tab.c:223
 msgid "There is an error in the message:"
 msgstr ""
 
-#: ../src/tab.c:397
+#: ../src/tab.c:398
 msgid "Open comment dialog"
 msgstr ""
 
-#: ../src/tab.c:570
+#: ../src/tab.c:576
 #, c-format
 msgid "Plural %d"
 msgstr ""
 
-#: ../src/tab.c:615
-#, fuzzy
+#: ../src/tab.c:621
 msgid "Message Table"
 msgstr "Таблица сообщений"
 
-#: ../src/tab.c:650
-#, fuzzy
+#: ../src/tab.c:653
 msgid "Context"
-msgstr "Содержание"
+msgstr "Контекст"
 
-#: ../src/tab.c:688
-#, fuzzy
+#: ../src/tab.c:692
 msgid "<b>Original Text:</b>"
-msgstr "Исходный шрифт текста:"
+msgstr "<b>Исходный текст:</b>"
 
-#: ../src/tab.c:749
+#: ../src/tab.c:753
 msgid "<b>Translate_d Text:</b>"
 msgstr ""
 
@@ -1724,97 +1707,97 @@ msgstr ""
 #. * produce duplicates, but don't worry about it. If your language
 #. * normally has a mnemonic at the start, please use the _. If not,
 #. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:918
+#: ../src/toolbareditor/egg-editable-toolbar.c:939
 #, c-format
 msgid "Show “_%s”"
 msgstr ""
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1381
+#: ../src/toolbareditor/egg-editable-toolbar.c:1405
 msgid "_Move on Toolbar"
 msgstr ""
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1382
+#: ../src/toolbareditor/egg-editable-toolbar.c:1406
 msgid "Move the selected item on the toolbar"
 msgstr ""
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1383
+#: ../src/toolbareditor/egg-editable-toolbar.c:1407
 msgid "_Remove from Toolbar"
 msgstr ""
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1384
+#: ../src/toolbareditor/egg-editable-toolbar.c:1408
 msgid "Remove the selected item from the toolbar"
 msgstr ""
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1385
+#: ../src/toolbareditor/egg-editable-toolbar.c:1410
 msgid "_Delete Toolbar"
 msgstr ""
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1386
+#: ../src/toolbareditor/egg-editable-toolbar.c:1411
 msgid "Remove the selected toolbar"
 msgstr ""
 
-#: ../src/toolbareditor/egg-toolbar-editor.c:485
+#: ../src/toolbareditor/egg-toolbar-editor.c:475
 #, fuzzy
 msgid "Separator"
 msgstr "Генератор:"
 
-#: ../src/translation-memory/berkeley/db-base.c:165
+#: ../src/translation-memory/berkeley/db-base.c:157
 msgid "Running recovery..."
 msgstr ""
 
-#: ../src/translation-memory/berkeley/db-base.c:173
+#: ../src/translation-memory/berkeley/db-base.c:166
 #, c-format
 msgid "There was an error recovering the database: %s"
 msgstr ""
 
-#: ../src/translation-memory/berkeley/db-base.c:181
+#: ../src/translation-memory/berkeley/db-base.c:174
 #, c-format
 msgid "There was an error in database: %s"
 msgstr ""
 
-#: ../src/translation-memory/translation-memory-ui.c:209
+#: ../src/translation-memory/translation-memory-ui.c:212
 #, c-format
 msgid "Insert Option nº %d"
 msgstr ""
 
-#: ../src/translation-memory/translation-memory-ui.c:286
+#: ../src/translation-memory/translation-memory-ui.c:290
 msgid "Shortcut"
-msgstr ""
+msgstr "Комбинация клавиш"
 
-#: ../src/translation-memory/translation-memory-ui.c:297
+#: ../src/translation-memory/translation-memory-ui.c:299
 msgid "Level"
-msgstr ""
+msgstr "Уровень схожести"
 
 #: ../src/translation-memory/translation-memory-ui.c:308
 msgid "String"
-msgstr ""
+msgstr "Строка"
 
-#: ../src/utils.c:316
+#: ../src/utils.c:307
 msgid "Please check your installation."
 msgstr ""
 
-#: ../src/utils.c:381
+#: ../src/utils.c:368
 #, fuzzy, c-format
 msgid "Unable to open ui file %s. Error: %s"
 msgstr "Ошибка приоткрытии файла \"%s\": %s"
 
-#: ../src/utils.c:400
+#: ../src/utils.c:388
 #, c-format
 msgid "Unable to find the object '%s' inside file %s."
 msgstr ""
 
-#: ../src/utils.c:808
+#: ../src/utils.c:812
 msgid ""
 "Unable to display help. Please make sure the Gtranslator documentation "
 "package is installed."
 msgstr ""
 
-#: ../src/view.c:81
+#: ../src/view.c:79
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "Ошибка gtkspell: %s\n"
 
-#: ../src/view.c:82
+#: ../src/view.c:81
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1823,152 +1806,144 @@ msgstr ""
 "GtkSpell не смог проинициализироваться.\n"
 " %s"
 
-#: ../src/window.c:109
+#: ../src/window.c:113
 msgid "_File"
 msgstr "_Файл"
 
-#: ../src/window.c:110
+#: ../src/window.c:114
 msgid "_Edit"
 msgstr "_Правка"
 
-#: ../src/window.c:111
+#: ../src/window.c:115
 msgid "_View"
 msgstr "_Вид"
 
 #. { "Bookmarks", NULL, N_("_Bookmarks") },
 #. { "Actions", NULL, N_("_Actions") },
-#: ../src/window.c:114
+#: ../src/window.c:118
 msgid "_Search"
 msgstr "П_оиск"
 
-#: ../src/window.c:115
+#: ../src/window.c:119
 msgid "_Go"
 msgstr "Пере_ход"
 
-#: ../src/window.c:116
+#: ../src/window.c:120
+msgid "_Documents"
+msgstr "_Документы"
+
+#: ../src/window.c:121
 msgid "_Help"
 msgstr "_Справка"
 
-#: ../src/window.c:120
-#, fuzzy
+#: ../src/window.c:125
 msgid "Open a PO file"
-msgstr "Открыть po-файл"
+msgstr "Открыть файл PO"
 
-#: ../src/window.c:122
+#: ../src/window.c:127
 msgid "_Recent Files"
 msgstr "_Недавние файлы"
 
-#: ../src/window.c:125
+#: ../src/window.c:130
 msgid "Quit the program"
-msgstr ""
+msgstr "Завершить работу с программой"
 
 #. Edit menu
-#: ../src/window.c:129
+#: ../src/window.c:134
 msgid "T_oolbar"
-msgstr ""
+msgstr "П_анель инструментов"
 
-#: ../src/window.c:132
-#, fuzzy
+#: ../src/window.c:137
 msgid "Edit gtranslator preferences"
-msgstr "Замена"
+msgstr "Изменить параметры работы Gtranslator"
 
-#: ../src/window.c:134 ../src/window.c:181
+#: ../src/window.c:139 ../src/window.c:186
 msgid "_Header..."
 msgstr "За_головок..."
 
 #. Help menu
-#: ../src/window.c:138
-#, fuzzy
+#: ../src/window.c:143
 msgid "_Contents"
-msgstr "Содержание"
+msgstr "_Содержание"
 
-#: ../src/window.c:150
-#, fuzzy
+#: ../src/window.c:155
 msgid "Save the current file"
-msgstr "Обновить po-файл"
+msgstr "Сохранить сообщение файл"
 
-#: ../src/window.c:153
-#, fuzzy
+#: ../src/window.c:158
 msgid "Save the current file with another name"
-msgstr "Сохранить файл под другим именем"
-
-#: ../src/window.c:159
-#, fuzzy
-msgid "Close the current file"
-msgstr "Компилировать po-файл"
+msgstr "Сохранить текущий файл под другим именем"
 
 #: ../src/window.c:164
+msgid "Close the current file"
+msgstr "Закрыть текущий файл"
+
+#: ../src/window.c:169
 #, fuzzy
 msgid "Undo last operation"
 msgstr "Отмена последнего выполненного действия"
 
-#: ../src/window.c:167
+#: ../src/window.c:172
 msgid "Redo last undone operation"
 msgstr ""
 
-#: ../src/window.c:170
+#: ../src/window.c:175
 msgid "Cut the selected text"
 msgstr ""
 
-#: ../src/window.c:173
+#: ../src/window.c:178
 msgid "Copy the selected text"
 msgstr ""
 
-#: ../src/window.c:176
+#: ../src/window.c:181
 msgid "Paste the contents of the clipboard"
 msgstr ""
 
-#: ../src/window.c:179
+#: ../src/window.c:184
 #, fuzzy
 msgid "Clear the selected translation"
 msgstr "Перевод Gettext"
 
-#: ../src/window.c:183
+#: ../src/window.c:188
 msgid "C_omment..."
 msgstr "_Комментарий"
 
-#: ../src/window.c:184
+#: ../src/window.c:189
 msgid "Edit message comment"
 msgstr "Правка комментария"
 
-#: ../src/window.c:186
-#, fuzzy
+#: ../src/window.c:191
 msgid "Copy _Message to Translation"
 msgstr "Скопировать _сообщение в перевод"
 
-#: ../src/window.c:187
-#, fuzzy
+#: ../src/window.c:193
 msgid "Copy original message contents to the translation field"
 msgstr "Скопировать исходное сообщение и вставить его как перевод"
 
-#: ../src/window.c:189
-#, fuzzy
+#: ../src/window.c:195
 msgid "Toggle _Fuzzy Status"
-msgstr "Изменить признак неточного перевода"
+msgstr "Изменить статус _неточного перевода"
 
-#: ../src/window.c:190
+#: ../src/window.c:196
 msgid "Toggle fuzzy status of a message"
 msgstr "Изменить признак неточного перевода"
 
-#: ../src/window.c:192 ../src/window.c:199
-#, fuzzy
+#: ../src/window.c:198 ../src/window.c:206
 msgid "_Translation Memory"
-msgstr "Перевод"
+msgstr "_Память переводов"
 
 #. View menu
-#: ../src/window.c:196
-#, fuzzy
+#: ../src/window.c:203
 msgid "_Context"
-msgstr "Содержание"
+msgstr "_Контекст"
 
-#: ../src/window.c:197
+#: ../src/window.c:204
 msgid "Show the Context panel"
 msgstr "Открыть панель с контекстом"
 
-#: ../src/window.c:200
-#, fuzzy
+#: ../src/window.c:207
 msgid "Show the Translation Memory panel"
-msgstr "Шаблон перевода Gettext"
+msgstr "Показывать панель памяти переводов"
 
 #. { "ViewSidePane", NULL, N_("Side _Pane"), "F9",
 #. N_("Show or hide the side pane in the current window"),
@@ -1991,193 +1966,240 @@ msgstr "Шаблон перевода Gettext"
 #. N_("Remove all existing translations"), NULL},
 #. //G_CALLBACK(gtranslator_remove_all_translations_dialog) },
 #. Go menu
-#: ../src/window.c:226
-#, fuzzy
-msgid "Prev F_ile"
-msgstr "Сохранить файл"
-
-#: ../src/window.c:227 ../src/window.c:230
-#, fuzzy
-msgid "Go to the next file"
-msgstr "Перейти к следующему неточному переводу"
-
-#: ../src/window.c:229
-#, fuzzy
-msgid "Next Fi_le"
-msgstr "Сохранить файл"
-
-#: ../src/window.c:232
-msgid "_Previous Message"
-msgstr ""
-
 #: ../src/window.c:233
+msgid "_Previous Message"
+msgstr "_Предыдущее сообщение"
+
+#: ../src/window.c:234
 msgid "Move back one message"
 msgstr "Перейти на одно сообщение назад"
 
-#: ../src/window.c:235
-msgid "_Next Message"
-msgstr ""
-
 #: ../src/window.c:236
+msgid "_Next Message"
+msgstr "_Следующее сообщение"
+
+#: ../src/window.c:237
 msgid "Move forward one message"
 msgstr "Перейти на одно сообщение вперёд"
 
-#: ../src/window.c:238
+#: ../src/window.c:239
 #, fuzzy
 msgid "_Go to Message..."
 msgstr "Перейти по _номеру"
 
-#: ../src/window.c:239
+#: ../src/window.c:240
 #, fuzzy
 msgid "Jumps to a specific message"
 msgstr "Перейти к указанному сообщению"
 
-#: ../src/window.c:241
-#, fuzzy
-msgid "_First Message"
-msgstr "На_чало"
-
 #: ../src/window.c:242
+msgid "_First Message"
+msgstr "П_ервое сообщение"
+
+#: ../src/window.c:243
 msgid "Go to the first message"
 msgstr "Перейти к первому сообщению"
 
-#: ../src/window.c:244
-msgid "_Last Message"
-msgstr ""
-
 #: ../src/window.c:245
+msgid "_Last Message"
+msgstr "П_оследнее сообщение"
+
+#: ../src/window.c:246
 msgid "Go to the last message"
 msgstr "Перейти к последнему сообщению"
 
-#: ../src/window.c:247
-#, fuzzy
-msgid "Next Fuz_zy"
-msgstr "Следующий не_точный перевод"
-
 #: ../src/window.c:248
+msgid "Next Fuz_zy"
+msgstr "Следующее не_точное"
+
+#: ../src/window.c:249
 #, fuzzy
 msgid "Go to the next fuzzy message"
 msgstr "Перейти к следующему неточному сообщению"
 
-#: ../src/window.c:250
-msgid "Previous Fuzz_y"
-msgstr ""
-
 #: ../src/window.c:251
+msgid "Previous Fuzz_y"
+msgstr "Пре_дыдущее неточное"
+
+#: ../src/window.c:252
 #, fuzzy
 msgid "Go to the previous fuzzy message"
 msgstr "Перейти к следующему неточному сообщению"
 
-#: ../src/window.c:253
+#: ../src/window.c:254
 #, fuzzy
 msgid "Next _Untranslated"
 msgstr "_Следующее непереведённое"
 
-#: ../src/window.c:254
+#: ../src/window.c:255
 #, fuzzy
 msgid "Go to the next untranslated message"
 msgstr "Перейти к следующему непереведённому сообщению"
 
-#: ../src/window.c:256
+#: ../src/window.c:258
 #, fuzzy
 msgid "Previ_ous Untranslated"
 msgstr "Непереведённые"
 
-#: ../src/window.c:257
+#: ../src/window.c:259
 #, fuzzy
 msgid "Go to the previous untranslated message"
 msgstr "Перейти к следующему непереведённому сообщению"
 
-#: ../src/window.c:259
+#: ../src/window.c:262
 #, fuzzy
 msgid "Next Fu_zzy or Untranslated"
 msgstr "_Следующее непереведённое"
 
-#: ../src/window.c:260
+#: ../src/window.c:264
 #, fuzzy
 msgid "Go to the next fuzzy or untranslated message"
 msgstr "Перейти к следующему непереведённому сообщению"
 
-#: ../src/window.c:262
+#: ../src/window.c:267
 msgid "Pre_vious Fuzzy or Untranslated"
 msgstr ""
 
-#: ../src/window.c:263
+#: ../src/window.c:269
 #, fuzzy
 msgid "Go to the previous fuzzy or untranslated message"
 msgstr "Перейти к следующему непереведённому сообщению"
 
-#: ../src/window.c:268
+#: ../src/window.c:274
 msgid "Search for text"
 msgstr ""
 
-#: ../src/window.c:277
+#: ../src/window.c:283
 msgid "Search for and replace text"
 msgstr ""
 
-#: ../src/window.c:752
+#. Documents menu
+#: ../src/window.c:287
+#, fuzzy
+msgid "_Save All"
+msgstr "Сохранить как"
+
+#: ../src/window.c:288
+#, fuzzy
+msgid "Save all open files"
+msgstr "Сохранить локальную копию файла как..."
+
+#: ../src/window.c:290
+msgid "_Close All"
+msgstr ""
+
+#: ../src/window.c:291
+#, fuzzy
+msgid "Close all open files"
+msgstr "Компилировать po-файл"
+
+#: ../src/window.c:293
+#, fuzzy
+msgid "_Previous Document"
+msgstr "Закрыть документ"
+
+#: ../src/window.c:295
+msgid "Activate previous document"
+msgstr ""
+
+#: ../src/window.c:297
+#, fuzzy
+msgid "_Next Document"
+msgstr "Комментарий"
+
+#: ../src/window.c:299
+msgid "Activate next document"
+msgstr ""
+
+#: ../src/window.c:764
 msgid "Untranslated"
 msgstr "Не переведено"
 
-#: ../src/window.c:754
+#: ../src/window.c:767
 msgid "Translated"
 msgstr "Переведено"
 
-#: ../src/window.c:756
+#: ../src/window.c:770
 msgid "Fuzzy"
 msgstr "Неточное"
 
-#: ../src/window.c:761
-#, c-format
-msgid "Status: %s"
-msgstr "Статус: %s"
-
-#: ../src/window.c:762
+#: ../src/window.c:777
 #, c-format
 msgid "Current: %d"
 msgstr "Текущее: %d"
 
-#: ../src/window.c:763
-#, c-format
-msgid "Total: %d"
-msgstr "Всего: %d"
+#: ../src/window.c:778
+#, fuzzy, c-format
+msgid "Total: %d translated"
+msgstr "Переведено"
 
-#: ../src/window.c:764
-#, c-format
-msgid "Fuzzy: %d"
-msgstr "Неточных: %d"
+#: ../src/window.c:779
+#, fuzzy, c-format
+msgid "%d fuzzy"
+msgstr "Неточное"
 
-#: ../src/window.c:765
-#, c-format
-msgid "Untranslated: %d"
-msgstr "Непереведённых: %d"
+#: ../src/window.c:780
+#, fuzzy, c-format
+msgid "%d untranslated"
+msgstr "Не переведено"
 
+#. Translators: %s is a URI
+#: ../src/window.c:839
+#, fuzzy, c-format
+msgid "Activate '%s'"
+msgstr "Применить цветовую схему %s"
+
+#. FIXME: We are leaking a lot here
 #.
 #. * Translators: The title of the window when there is only one tab
 #.
-#: ../src/window.c:869 ../src/window.c:873
+#: ../src/window.c:1016 ../src/window.c:1022
 #, c-format
 msgid "gtranslator - %s"
 msgstr "Gtranslator - %s"
 
-#: ../src/window.c:871
+#: ../src/window.c:1019
 #, fuzzy, c-format
 msgid "gtranslator - *%s"
 msgstr "gtranslator - %s"
 
-#: ../src/window.c:878
+#: ../src/window.c:1027
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/window.c:1234
+#: ../src/window.c:1389
 #, fuzzy
 msgid "Toolbar Editor"
 msgstr "Редактор"
 
-#: ../src/window.c:1552
+#: ../src/window.c:1700
 #, fuzzy
 msgid "Documents"
 msgstr "Комментарий"
+
+#, fuzzy
+#~ msgid "Prev F_ile"
+#~ msgstr "Сохранить файл"
+
+#, fuzzy
+#~ msgid "Go to the next file"
+#~ msgstr "Перейти к следующему неточному переводу"
+
+#, fuzzy
+#~ msgid "Next Fi_le"
+#~ msgstr "Сохранить файл"
+
+#~ msgid "Status: %s"
+#~ msgstr "Статус: %s"
+
+#~ msgid "Total: %d"
+#~ msgstr "Всего: %d"
+
+#~ msgid "Fuzzy: %d"
+#~ msgstr "Неточных: %d"
+
+#~ msgid "Untranslated: %d"
+#~ msgstr "Непереведённых: %d"
 
 #~ msgid "The GNOME translation program"
 #~ msgstr "Программа перевода для GNOME"
@@ -2203,9 +2225,6 @@ msgstr "Комментарий"
 #~ msgid "_View/_Colorschemes/"
 #~ msgstr "_View/_Цветовые схемы/"
 
-#~ msgid "Activate colorscheme %s"
-#~ msgstr "Применить цветовую схему %s"
-
 #~ msgid "An error occurred while msgfmt was executed:\n"
 #~ msgstr "При выполнении команды msgfmt возникла ошибка:\n"
 
@@ -2218,9 +2237,6 @@ msgstr "Комментарий"
 #~ msgstr ""
 #~ "Компиляция прошла успешно.\n"
 #~ "Сообщений: %s"
-
-#~ msgid "Save local copy of file as..."
-#~ msgstr "Сохранить локальную копию файла как..."
 
 #~ msgid ""
 #~ "File %s\n"
@@ -2681,9 +2697,6 @@ msgstr "Комментарий"
 
 #~ msgid "Save"
 #~ msgstr "Сохранить"
-
-#~ msgid "Save as"
-#~ msgstr "Сохранить как"
 
 #~ msgid "Compile"
 #~ msgstr "Компилировать"
