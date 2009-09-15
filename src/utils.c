@@ -1030,7 +1030,7 @@ gtranslator_utils_get_file_from_pixmapsdir (const gchar * filename)
   gchar *path;
 
 #ifndef G_OS_WIN32
-  path = g_build_filename (PIXMAPSDIR, filename, NULL);
+  path = g_build_filename (WINDOW_ICON, NULL, NULL);
 #else
   gchar *win32_dir;
 
