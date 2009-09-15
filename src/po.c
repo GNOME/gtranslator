@@ -299,7 +299,12 @@ is_read_only (const gchar *filename)
   GFileInfo *info;
   GFile *location;
 
+
   location = g_file_new_for_path (filename);
+  
+  if (!g_file_query_exists (location, NULL))
+    return FALSE;
+
   info = g_file_query_info (location,
 			    G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE,
 			    G_FILE_QUERY_INFO_NONE,
