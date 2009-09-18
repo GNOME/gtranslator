@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-20 22:03+0200\n"
-"PO-Revision-Date: 2009-08-20 22:04+0100\n"
+"POT-Creation-Date: 2009-09-18 13:01+0200\n"
+"PO-Revision-Date: 2009-09-18 13:02+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -938,38 +938,46 @@ msgstr "Misslyckades med att skriva profildata till profilfilen \"%s\""
 msgid "Files saved."
 msgstr "Filer sparade."
 
-# src/sidebar.c:107
 #: ../src/actions-help.c:52
+msgid "Current Maintainers"
+msgstr "Nuvarande ansvariga"
+
+# src/sidebar.c:107
+#: ../src/actions-help.c:57
 msgid "Current Developers"
 msgstr "Aktuella utvecklare"
 
-#: ../src/actions-help.c:58
+#: ../src/actions-help.c:63
 msgid "Previous Developers"
 msgstr "Tidigare utvecklare"
 
-#: ../src/actions-help.c:76
+#: ../src/actions-help.c:71
+msgid "Contributors"
+msgstr "Bidragsgivare"
+
+#: ../src/actions-help.c:91
 msgid "This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version."
 msgstr "Detta program är fri programvara. Du kan distribuera det och/eller modifiera det under villkoren i GNU General Public License, publicerad av Free Software Foundation, antingen version 3 eller (om du så vill) någon senare version."
 
-#: ../src/actions-help.c:80
+#: ../src/actions-help.c:95
 msgid "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details."
 msgstr "Detta program distribueras i hopp om att det ska vara användbart, men UTAN NÅGON SOM HELST GARANTI, även utan underförstådd garanti om SÄLJBARHET eller LÄMPLIGHET FÖR NÅGOT SPECIELLT ÄNDAMÅL. Se GNU General Public License för ytterligare information."
 
-#: ../src/actions-help.c:84
+#: ../src/actions-help.c:99
 msgid "You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>."
 msgstr "Du bör ha fått en kopia av GNU General Public License tillsammans med detta program. Om inte, se <http://www.gnu.org/licenses/>."
 
 # src/about.c:60
-#: ../src/actions-help.c:96
+#: ../src/actions-help.c:111
 msgid "Translation file editing suite for localization of applications and libraries."
 msgstr "Svit för redigering av översättningsfiler för lokalanpassning av program och bibliotek."
 
-#: ../src/actions-help.c:99
+#: ../src/actions-help.c:114
 msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
 msgstr "Copyright © 1999-2008 Free Software Foundation, Inc."
 
 # src/prefs.c:239
-#: ../src/actions-help.c:102
+#: ../src/actions-help.c:117
 msgid "About Gtranslator"
 msgstr "Om Gtranslator"
 
@@ -978,7 +986,7 @@ msgstr "Om Gtranslator"
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/actions-help.c:107
+#: ../src/actions-help.c:122
 msgid "translator-credits"
 msgstr ""
 "Daniel Nylander\n"
@@ -989,7 +997,7 @@ msgstr ""
 "tp-sv@listor.tp-sv.se"
 
 # src/menus.c:265
-#: ../src/actions-help.c:111
+#: ../src/actions-help.c:126
 msgid "Gtranslator Web Site"
 msgstr "Webbplats för Gtranslator"
 
@@ -1630,27 +1638,27 @@ msgstr "<b>Sökväg:</b> %s"
 msgid "Close document"
 msgstr "Stäng dokumentet"
 
-#: ../src/po.c:359
+#: ../src/po.c:403
 #, c-format
 msgid "Failed opening file '%s': %s"
 msgstr "Misslyckades med att öppna filen \"%s\": %s"
 
-#: ../src/po.c:383
+#: ../src/po.c:427
 #, c-format
 msgid "The file is empty"
 msgstr "Filen är tom"
 
-#: ../src/po.c:398
+#: ../src/po.c:442
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext returnerade ett noll meddelande domänlista."
 
-#: ../src/po.c:554
+#: ../src/po.c:598
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Inga meddelanden hämtades från tolkare."
 
-#: ../src/po.c:838
+#: ../src/po.c:900
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1661,7 +1669,12 @@ msgstr ""
 "Pot-filer genereras av kompileringsprocessen.\n"
 "Din fil bör troligtvis kallas \"%s.po\"."
 
-#: ../src/po.c:871
+#: ../src/po.c:913
+#, c-format
+msgid "The file %s is read-only, and can not be overwritten"
+msgstr "Filen %s är skrivskyddad och kan inte skrivas över"
+
+#: ../src/po.c:946
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Det inträffade ett fel vid skrivning av PO-filen: %s"
