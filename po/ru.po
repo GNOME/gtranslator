@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-09-10 12:36+0400\n"
-"PO-Revision-Date: 2009-09-10 12:55+0400\n"
+"PO-Revision-Date: 2009-10-02 17:51+0400\n"
 "Last-Translator: Alexandre Prokoudine <alexandre.prokoudine@gmail.com>\n"
 "Language-Team: Russian <gnome-cyr@lists.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr "Создавать архивную копию перед сохране
 
 #: ../data/gtranslator.schemas.in.h:6
 msgid "Custom font to use for edit fields."
-msgstr ""
+msgstr "Свой шрифт для полей редактирования"
 
 #: ../data/gtranslator.schemas.in.h:7
 msgid "Delete compiled GMO files"
@@ -227,7 +227,7 @@ msgstr "gtranslator"
 
 #: ../plugins/alternate-language/alternate-language-panel.c:117
 msgid "Message not found"
-msgstr ""
+msgstr "Сообщение не найдено"
 
 #: ../plugins/alternate-language/alternate-language-panel.c:221
 #, fuzzy
@@ -537,7 +537,7 @@ msgstr ""
 
 #: ../plugins/source-code-view/viewer.c:74
 msgid "Source Viewer"
-msgstr ""
+msgstr "Просмотр исходного кода"
 
 #: ../plugins/source-code-view/viewer.ui.h:1
 msgid "<b>Source code</b>"
@@ -593,7 +593,7 @@ msgstr ""
 
 #: ../plugins/subversion/commit-dialog.c:562
 msgid "Commit Changes"
-msgstr ""
+msgstr "Зафиксировать изменения"
 
 #: ../plugins/subversion/diff-dialog.c:80
 msgid "Subversion: Diff complete."
@@ -625,9 +625,8 @@ msgid "Sync your local copy with the Subversion tree"
 msgstr ""
 
 #: ../plugins/subversion/subversion-plugin.c:133
-#, fuzzy
 msgid "_Commit"
-msgstr "Комментарий:"
+msgstr "З_афиксировать"
 
 #: ../plugins/subversion/subversion-plugin.c:134
 msgid "Commit your changes to the Subversion tree"
@@ -635,7 +634,7 @@ msgstr ""
 
 #: ../plugins/subversion/subversion-plugin.c:137
 msgid "_Add"
-msgstr ""
+msgstr "_Добавить"
 
 #: ../plugins/subversion/subversion-plugin.c:138
 msgid "Add a new file/directory to the Subversion tree"
@@ -722,13 +721,12 @@ msgid "Line argument:"
 msgstr ""
 
 #: ../plugins/subversion/subversion.ui.h:17
-#, fuzzy
 msgid "Program name:"
-msgstr "Название проекта:"
+msgstr "Название программы:"
 
 #: ../plugins/subversion/subversion.ui.h:18
 msgid "Remember Password"
-msgstr ""
+msgstr "Запомнить пароль"
 
 #: ../plugins/subversion/subversion.ui.h:19
 msgid "Remember this decision"
@@ -951,7 +949,7 @@ msgstr "Активные разработчики"
 
 #: ../src/actions-help.c:63
 msgid "Previous Developers"
-msgstr ""
+msgstr "Предыдущие разработчики"
 
 #: ../src/actions-help.c:71
 msgid "Contributors"
@@ -1048,6 +1046,16 @@ msgid ""
 "Plural form: %s\n"
 "Database path: %s"
 msgstr ""
+"Profile name: %s\n"
+"Имя переводчика: %s\n"
+"Эл. почта переводчика: %s\n"
+"Язык: %s\n"
+"Эл. почта команды: %s\n"
+"Код языка: %s\n"
+"Кодировка: %s\n"
+"Передаваемая кодировка: %s\n"
+"Множественные формы: %s\n"
+"Расположение базы данных: %s"
 
 #: ../src/dialogs/assistant.c:325
 msgid "None"
@@ -1073,7 +1081,7 @@ msgstr "<b>Имя переводчика:</b>"
 
 #: ../src/dialogs/assistant.c:484
 msgid "<b>Translator email:</b>"
-msgstr "<b>Эл. почта:</b>"
+msgstr "<b>Эл. почта переводчика:</b>"
 
 #: ../src/dialogs/assistant.c:503
 msgid "<b>Language:</b>"
@@ -1098,7 +1106,7 @@ msgstr "<b>Кодировка:</b>"
 
 #: ../src/dialogs/assistant.c:649
 msgid "<b>Transfer encoding:</b>"
-msgstr ""
+msgstr "<b>Передаваемая кодировка:</b>"
 
 #: ../src/dialogs/assistant.c:668
 msgid "<b>Plural forms:</b>"
@@ -1126,7 +1134,7 @@ msgstr "Подтверждение"
 
 #: ../src/dialogs/close-confirmation-dialog.c:128
 msgid "Close _without Saving"
-msgstr ""
+msgstr "Закрыть _без сохранения"
 
 #: ../src/dialogs/close-confirmation-dialog.c:159
 msgid "Question"
@@ -1135,15 +1143,15 @@ msgstr "Вопрос"
 #: ../src/dialogs/close-confirmation-dialog.c:380
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
-msgstr ""
+msgstr "Сохранить изменения в документе \"%s\" перед закрытием?"
 
 #: ../src/dialogs/close-confirmation-dialog.c:543
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Изменения в %d документе будут потеряны навсегда."
+msgstr[1] "Изменения в %d документах будут потеряны навсегда."
+msgstr[2] "Изменения в %d документах будут потеряны навсегда."
 
 #: ../src/dialogs/close-confirmation-dialog.c:550
 #, c-format
@@ -1156,7 +1164,7 @@ msgstr[2] ""
 
 #: ../src/dialogs/close-confirmation-dialog.c:571
 msgid "Docum_ents with unsaved changes:"
-msgstr ""
+msgstr "_Документы с несохраненными изменениями:"
 
 #: ../src/dialogs/close-confirmation-dialog.c:575
 msgid "S_elect the documents you want to save:"
@@ -1208,9 +1216,8 @@ msgid "Enc_oding:"
 msgstr "_Кодировка:"
 
 #: ../src/dialogs/header-dialog.ui.h:4
-#, fuzzy
 msgid "Language gro_up email:"
-msgstr "Э-почта команды:"
+msgstr "_Эл. почта команды:"
 
 #: ../src/dialogs/header-dialog.ui.h:5
 #, fuzzy
@@ -1468,7 +1475,7 @@ msgstr "_Множественные формы:"
 
 #: ../src/dialogs/profile-dialog.ui.h:12
 msgid "_Team email:"
-msgstr ""
+msgstr "_Эл. почта группы"
 
 #: ../src/dialogs/search-dialog.c:332 ../src/dialogs/search-dialog.ui.h:4
 msgid "Replace"
@@ -1488,11 +1495,11 @@ msgstr "З_аменить"
 
 #: ../src/dialogs/search-dialog.ui.h:1
 msgid "Include fuzzy strings"
-msgstr ""
+msgstr "Включая неточные переводы"
 
 #: ../src/dialogs/search-dialog.ui.h:2
 msgid "Match _entire word only"
-msgstr ""
+msgstr "Только _полные слова"
 
 #: ../src/dialogs/search-dialog.ui.h:3
 msgid "Original text"
@@ -1500,29 +1507,27 @@ msgstr "Исходный текст"
 
 #: ../src/dialogs/search-dialog.ui.h:5
 msgid "Replace All"
-msgstr "Заменить всё"
+msgstr "Заменить все"
 
 #: ../src/dialogs/search-dialog.ui.h:6
-#, fuzzy
 msgid "Replace _with: "
-msgstr "Замена в поле:"
+msgstr "З_аменить на:"
 
 #: ../src/dialogs/search-dialog.ui.h:7
 msgid "Search _backwards"
-msgstr ""
+msgstr "О_братный поиск"
 
 #: ../src/dialogs/search-dialog.ui.h:8
-#, fuzzy
 msgid "Translated text"
-msgstr "Переведённые"
+msgstr "Текст перевода"
 
 #: ../src/dialogs/search-dialog.ui.h:9
 msgid "_Match case"
-msgstr ""
+msgstr "_Учитывать регистр"
 
 #: ../src/dialogs/search-dialog.ui.h:10
 msgid "_Search for: "
-msgstr ""
+msgstr "На_йти:"
 
 #: ../src/dialogs/search-dialog.ui.h:11
 msgid "_Wrap around"
@@ -1538,7 +1543,6 @@ msgid "%s: malformed file name or URI.\n"
 msgstr ""
 
 #: ../src/main.c:148
-#, fuzzy
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
@@ -1576,7 +1580,7 @@ msgstr "Текст перевода"
 #: ../src/notebook.c:90
 #, c-format
 msgid "<b>Path:</b> %s"
-msgstr ""
+msgstr "<b>Расположение:</b> %s"
 
 #: ../src/notebook.c:143
 msgid "Close document"
@@ -1590,7 +1594,7 @@ msgstr "Ошибка приоткрытии файла \"%s\": %s"
 #: ../src/po.c:422
 #, c-format
 msgid "The file is empty"
-msgstr ""
+msgstr "Файл пуст"
 
 #: ../src/po.c:437
 #, c-format
@@ -1698,7 +1702,7 @@ msgstr "<b>Исходный текст:</b>"
 
 #: ../src/tab.c:753
 msgid "<b>Translate_d Text:</b>"
-msgstr ""
+msgstr "<b>Те_кст перевода:</b>"
 
 #. Translaters: This string is for a toggle to display a toolbar.
 #. * The name of the toolbar is automatically computed from the widgets
