@@ -745,9 +745,10 @@ gtranslator_window_update_statusbar_message_count (GtranslatorTab * tab,
   gchar *status, *status_msg;
   gchar *current;
   gchar *total;
+  gchar *translated_msg;
   gchar *fuzzy_msg;
   gchar *untranslated_msg;
-  gint pos, message_count, fuzzy, untranslated;
+  gint pos, message_count, translated, fuzzy, untranslated;
 
   g_return_if_fail (GTR_IS_MSG (message));
 
@@ -755,6 +756,7 @@ gtranslator_window_update_statusbar_message_count (GtranslatorTab * tab,
 
   message_count = gtranslator_po_get_messages_count (po);
   pos = gtranslator_po_get_message_position (po);
+  translated = gtranslator_po_get_translated_count (po);
   fuzzy = gtranslator_po_get_fuzzy_count (po);
   untranslated = gtranslator_po_get_untranslated_count (po);
 
@@ -775,12 +777,23 @@ gtranslator_window_update_statusbar_message_count (GtranslatorTab * tab,
 
   status_msg = g_strdup_printf ("(%s)", status);
   current = g_strdup_printf (_("Current: %d"), pos);
-  total = g_strdup_printf (_("Total: %d translated"), message_count);
-  fuzzy_msg = g_strdup_printf (_("%d fuzzy"), fuzzy);
-  untranslated_msg = g_strdup_printf (_("%d untranslated"), untranslated);
+  total = g_strdup_printf (_("Total: %d"), message_count);
+  translated_msg = g_strdup_printf (ngettext ("%d translated", 
+                                              "%d translated", 
+                                              translated), 
+                                    translated);
+  fuzzy_msg = g_strdup_printf (ngettext ("%d fuzzy", 
+                                         "%d fuzzy", 
+                                         fuzzy), 
+                               fuzzy);
+  untranslated_msg = g_strdup_printf (ngettext ("%d untranslated", 
+                                                "%d untranslated", 
+                                                untranslated), 
+                                      untranslated);
 
   msg = g_strconcat ("    ", current, " ", status_msg, "    ", total,
-		     ", ", fuzzy_msg, ", ", untranslated_msg, NULL);
+		     " (", translated_msg, ", ", fuzzy_msg, ", ", 
+		     untranslated_msg, ")", NULL);
 
   gtranslator_statusbar_pop (GTR_STATUSBAR (window->priv->statusbar), 0);
 
@@ -791,6 +804,7 @@ gtranslator_window_update_statusbar_message_count (GtranslatorTab * tab,
   g_free (current);
   g_free (status_msg);
   g_free (total);
+  g_free (translated_msg);
   g_free (fuzzy_msg);
   g_free (untranslated_msg);
 
@@ -799,12 +813,8 @@ gtranslator_window_update_statusbar_message_count (GtranslatorTab * tab,
    */
   gtranslator_statusbar_update_progress_bar (GTR_STATUSBAR
 					     (window->priv->statusbar),
-					     (gdouble)
-					     gtranslator_po_get_translated_count
-					     (po),
-					     (gdouble)
-					     gtranslator_po_get_messages_count
-					     (po));
+					     (gdouble) translated,
+					     (gdouble) message_count);
 }
 
 static void
