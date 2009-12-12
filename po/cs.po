@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gtranslator gnome-master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&component=general\n"
-"POT-Creation-Date: 2009-10-23 11:27+0000\n"
-"PO-Revision-Date: 2009-11-03 23:32+0100\n"
+"POT-Creation-Date: 2009-12-08 14:25+0000\n"
+"PO-Revision-Date: 2009-12-09 00:33+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1683,7 +1683,7 @@ msgstr "_O zásuvném modulu"
 
 #: ../src/plugin-system/plugin-manager.c:811
 msgid "C_onfigure Plugin"
-msgstr "_Natavit zásuvný modul"
+msgstr "_Nastavit zásuvný modul"
 
 #: ../src/statusbar.c:118 ../src/statusbar.c:249
 msgid "INS"
@@ -2116,40 +2116,54 @@ msgstr "_Následující dokument"
 msgid "Activate next document"
 msgstr "Aktivovat následující dokument"
 
-#: ../src/window.c:764
+#: ../src/window.c:766
 msgid "Untranslated"
 msgstr "Nepřeložená"
 
-#: ../src/window.c:767
+#: ../src/window.c:769
 msgid "Translated"
 msgstr "Přeložená"
 
-#: ../src/window.c:770
+#: ../src/window.c:772
 msgid "Fuzzy"
 msgstr "Nepřesná"
 
-#: ../src/window.c:777
+#: ../src/window.c:779
 #, c-format
 msgid "Current: %d"
 msgstr "Aktuální: %d"
 
-#: ../src/window.c:778
-#, c-format
-msgid "Total: %d translated"
-msgstr "Celkem %d přeložených"
-
-#: ../src/window.c:779
-#, c-format
-msgid "%d fuzzy"
-msgstr "%d nepřesných"
-
 #: ../src/window.c:780
 #, c-format
+msgid "Total: %d"
+msgstr "Celkem: %d"
+
+#: ../src/window.c:781
+#, c-format
+msgid "%d translated"
+msgid_plural "%d translated"
+msgstr[0] "%d přeložená"
+msgstr[1] "%d přeložené"
+msgstr[2] "%d přeložených"
+
+#: ../src/window.c:785
+#, c-format
+msgid "%d fuzzy"
+msgid_plural "%d fuzzy"
+msgstr[0] "%d nepřesná"
+msgstr[1] "%d nepřesné"
+msgstr[2] "%d nepřesných"
+
+#: ../src/window.c:789
+#, c-format
 msgid "%d untranslated"
-msgstr "%d nepřeložených"
+msgid_plural "%d untranslated"
+msgstr[0] "%d nepřeložená"
+msgstr[1] "%d nepřeložené"
+msgstr[2] "%d nepřeložených"
 
 #. Translators: %s is a URI
-#: ../src/window.c:839
+#: ../src/window.c:849
 #, c-format
 msgid "Activate '%s'"
 msgstr "Aktivovat „%s“"
@@ -2158,775 +2172,24 @@ msgstr "Aktivovat „%s“"
 #.
 #. * Translators: The title of the window when there is only one tab
 #.
-#: ../src/window.c:1016 ../src/window.c:1022
+#: ../src/window.c:1026 ../src/window.c:1032
 #, c-format
 msgid "gtranslator - %s"
 msgstr "gtranslator - %s"
 
-#: ../src/window.c:1019
+#: ../src/window.c:1029
 #, c-format
 msgid "gtranslator - *%s"
 msgstr "gtranslator - *%s"
 
-#: ../src/window.c:1027
+#: ../src/window.c:1037
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/window.c:1389
+#: ../src/window.c:1399
 msgid "Toolbar Editor"
 msgstr "Editor panelu nástrojů"
 
-#: ../src/window.c:1700
+#: ../src/window.c:1710
 msgid "Documents"
 msgstr "Dokumenty"
-
-#~ msgid "The GNOME translation program"
-#~ msgstr "Překladatelský nástroj pro GNOME"
-
-#~ msgid "_View/_Bookmarks/"
-#~ msgstr "_Zobrazit/_Záložky/"
-
-#~ msgid "Open %s (%s)"
-#~ msgstr "Otevřít %s (%s)"
-
-#~ msgid "Can't apply color scheme file `%s'!"
-#~ msgstr "Nemohu použít barevné schéma ze souboru `%s'!"
-
-#~ msgid "Couldn't retrieve author information!"
-#~ msgstr "Nemohu získat informace o autorovi!"
-
-#~ msgid "Unknown"
-#~ msgstr "Neznámý"
-
-#~ msgid "<Not Given>"
-#~ msgstr "<Nezadaný>"
-
-#~ msgid "_View/_Colorschemes/"
-#~ msgstr "_Zobrazit/Barevné _schéma/"
-
-#~ msgid "An error occurred while msgfmt was executed:\n"
-#~ msgstr "Při spouštění programu msgfmt došlo k chybě:\n"
-
-#~ msgid "Sorry, msgfmt isn't available on your system!"
-#~ msgstr "Lituji, msgfmt není ve vašem systému dostupný!"
-
-#~ msgid ""
-#~ "Compile successful:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Kompilace se zdařila:\n"
-#~ "%s"
-
-#~ msgid ""
-#~ "File %s\n"
-#~ "was changed. Save?"
-#~ msgstr ""
-#~ "Soubor %s\n"
-#~ "byl změněn. Chcete změny uložit?"
-
-#~ msgid "gtranslator -- edit comment"
-#~ msgstr "gtranslator – upravit komentář"
-
-#~ msgid "Should ALL translations from `%s' be removed?"
-#~ msgstr "Chcete smazat VŠECHNY překlady ze souboru `%s'?"
-
-#~ msgid "Find in the po file"
-#~ msgstr "Hledání v katalogu"
-
-#~ msgid "Enter search string:"
-#~ msgstr "Hledat:"
-
-#~ msgid "Case sensitive"
-#~ msgstr "Rozlišovat velikost"
-
-#~ msgid "English"
-#~ msgstr "Originál"
-
-#~ msgid "Ignore hotkeys"
-#~ msgstr "Ignorovat znaky označující horké klávesy"
-
-#~ msgid "String to replace:"
-#~ msgstr "Hledat:"
-
-#~ msgid "Replace string:"
-#~ msgstr "Nahradit čím:"
-
-#~ msgid "Please enter a string to replace!"
-#~ msgstr "Prosím, zadejte nahrazovaný řetězec"
-
-#~ msgid ""
-#~ "The file\n"
-#~ "\n"
-#~ "   %s\n"
-#~ "\n"
-#~ "is already open in another instance of gtranslator!\n"
-#~ "Please close the other instance of gtranslator handling\n"
-#~ "this file currently to re-gain access to this file.\n"
-#~ "\n"
-#~ "Shall fool gtranslator open this file anyway ?"
-#~ msgstr ""
-#~ "Soubor\n"
-#~ "\n"
-#~ "   %s\n"
-#~ "\n"
-#~ "je již otevřen jinou instancí programu gtranslator.\n"
-#~ "Před otevřením souboru musíte nejprve\n"
-#~ "druhou instanci gtranslatoru ukončit.\n"
-#~ "\n"
-#~ "Má gtranslator přesto tento soubor otevřít?"
-
-#~ msgid ""
-#~ "File %s\n"
-#~ "was changed. Do you want to revert to saved copy?"
-#~ msgstr ""
-#~ "Soubor %s\n"
-#~ "byl změněn. Chcete se vrátit k uložené verzi?"
-
-#~ msgid "gtranslator -- open from URI"
-#~ msgstr "gtranslator – otevřít URI"
-
-#~ msgid "Enter URI:"
-#~ msgstr "Zadejte URI:"
-
-#~ msgid "No URI given!"
-#~ msgstr "Nebylo zadáno URI."
-
-#~ msgid ""
-#~ "URIs are used to locate files uniquely on different systems.\n"
-#~ "The standard Internet addresses (URLs) are also URIs -- you can\n"
-#~ "use them to open remote po files lying on servers with standard "
-#~ "protocols\n"
-#~ "like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
-#~ "Some example URIs for clarification (these ones are supported):\n"
-#~ "http://www.gtranslator.org/remote-po/gtranslator.pot\n"
-#~ "ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
-#~ "\n"
-#~ "file:///<PO-FILE> or\n"
-#~ "http://www.DOMAIN.COM/PO-FILE"
-#~ msgstr ""
-#~ "URI se používají k jednoznačné lokalizaci souborů na různých systémech.\n"
-#~ "Standardní internetové adresy (URL) jsou rovněž platnými URI. Lze je "
-#~ "použít\n"
-#~ "k otvírání vzdálených po souborů umístěných na serverech pomocí\n"
-#~ "standardních protokolů jako \"http\", \"ftp\" a jiných přístupových "
-#~ "metod\n"
-#~ "podporovaných GnomeVFS.\n"
-#~ "Příklady podporovaných URI:\n"
-#~ "http://www.gtranslator.org/remote-po/gtranslator.pot\n"
-#~ "ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
-#~ "\n"
-#~ "file:///<PO-SOUBOR> nebo\n"
-#~ "http://www.DOMENA.COM/PO-SOUBOR"
-
-#~ msgid ""
-#~ "Open recovery file for `%s'?\n"
-#~ "It was saved by gtranslator before gtranslator last closed\n"
-#~ "and may contain your hard work!\n"
-#~ msgstr ""
-#~ "Otevřít záložní kopii souboru `%s'?\n"
-#~ "Záložní kopie byla uložena gtranslatorem před posledním ukončením\n"
-#~ "a může obsahovat výsledky vaší namáhavé práce!\n"
-
-#~ msgid "Postpone decision"
-#~ msgstr "Odložit rozhodnutí"
-
-#~ msgid "Ignore recovery file"
-#~ msgstr "Ignorovat záložní soubor"
-
-#~ msgid ""
-#~ "Should gtranslator autotranslate the file using information\n"
-#~ "from your personal learn buffer?"
-#~ msgstr ""
-#~ "Chcete, aby byl proveden automatický hrubý překlad katalogu\n"
-#~ "na základě informací obsažených ve vaší překladové paměti?"
-
-#~ msgid "gtranslator -- add bookmark with comment?"
-#~ msgstr "gtranslator – přidat záložku s komentářem?"
-
-#~ msgid "Comment for the bookmark:"
-#~ msgstr "Komentář k záložce:"
-
-#~ msgid "No comment"
-#~ msgstr "Žádný komentář"
-
-#~ msgid "Please enter a search string"
-#~ msgstr "Prosím, zadejte hledaný řetězec"
-
-#~ msgid ""
-#~ "Could not find\n"
-#~ "\"%s\""
-#~ msgstr ""
-#~ "Nemohu najít\n"
-#~ "\"%s\""
-
-#~ msgid "%s [ %i Fuzzy left ]"
-#~ msgid_plural "%s [ %i Fuzzy left ]"
-#~ msgstr[0] "%s [ Zbývá %i neúplně přeložená ]"
-#~ msgstr[1] "%s [ Zbývají %i neúplně přeložené ]"
-#~ msgstr[2] "%s [ Zbývá %i neúplně přeložených ]"
-
-#~ msgid "%s [ No fuzzy left ]"
-#~ msgstr "%s [ Žádné neúplně přeložené zprávy ]"
-
-#~ msgid "%s [ %i Untranslated left ]"
-#~ msgid_plural "%s [ %i Untranslated left ]"
-#~ msgstr[0] "%s [ Zbývá %i nepřeložená ]"
-#~ msgstr[1] "%s [ Zbývá %i nepřeložené ]"
-#~ msgstr[2] "%s [ Zbývá %i nepřeložených ]"
-
-#~ msgid "%s [ No untranslated left ]"
-#~ msgstr "%s [ Žádné nepřeložené zprávy ]"
-
-#~ msgid "Message %d / %d / Status: %s (Message contains plural forms)"
-#~ msgstr "Zpráva %d z %d. Stav: %s (Zpráva s množnými čísly)"
-
-#~ msgid "Message %d / %d / Status: %s"
-#~ msgstr "Zpráva %d z %d. Stav: %s"
-
-#~ msgid "No header for this file/domain"
-#~ msgstr "Žádná hlavička pro tento soubor/doménu"
-
-#~ msgid "gtranslator -- edit header"
-#~ msgstr "gtranslator – upravit hlavičku"
-
-#~ msgid "Comments:"
-#~ msgstr "Komentáře:"
-
-#~ msgid "_File/Recen_t files/"
-#~ msgstr "_Soubor/_Nedávno otevřené/"
-
-#~ msgid "Afrikaans"
-#~ msgstr "Afrikánština"
-
-#~ msgid "Albanian"
-#~ msgstr "Albánština"
-
-#~ msgid "Arabic"
-#~ msgstr "Arabština"
-
-#~ msgid "Azerbaijani Turkish"
-#~ msgstr "Ázerbajdžánština"
-
-#~ msgid "Basque"
-#~ msgstr "Baskičtina"
-
-#~ msgid "Belarusian"
-#~ msgstr "Běloruština"
-
-#~ msgid "Bengali"
-#~ msgstr "Bengálština"
-
-#~ msgid "Britton"
-#~ msgstr "Bretonština"
-
-#~ msgid "Bulgarian"
-#~ msgstr "Bulharština"
-
-#~ msgid "Catalan"
-#~ msgstr "Katalánština"
-
-#~ msgid "Chinese/Simplified"
-#~ msgstr "Čínština zjednodušená"
-
-#~ msgid "Chinese/Traditional"
-#~ msgstr "Čínština tradiční"
-
-#~ msgid "Croatian"
-#~ msgstr "Chorvatština"
-
-#~ msgid "Czech"
-#~ msgstr "Čeština"
-
-#~ msgid "Danish"
-#~ msgstr "Dánština"
-
-#~ msgid "Dutch"
-#~ msgstr "Holandština"
-
-#~ msgid "English/Canada"
-#~ msgstr "Angličtina - Kanada"
-
-#~ msgid "English/GB"
-#~ msgstr "Angličtina - Spojené království"
-
-#~ msgid "English/USA"
-#~ msgstr "Angličtina - USA"
-
-#~ msgid "Esperanto"
-#~ msgstr "Esperanto"
-
-#~ msgid "Estonian"
-#~ msgstr "Estonština"
-
-#~ msgid "Persian"
-#~ msgstr "Perština"
-
-#~ msgid "Finnish"
-#~ msgstr "Finština"
-
-#~ msgid "French"
-#~ msgstr "Francouzština"
-
-#~ msgid "Galician"
-#~ msgstr "Galicijština"
-
-#~ msgid "German"
-#~ msgstr "Němčina"
-
-#~ msgid "Greek"
-#~ msgstr "Řečtina"
-
-#~ msgid "Gujarati"
-#~ msgstr "Gudžarátština"
-
-#~ msgid "Hebrew"
-#~ msgstr "Hebrejština"
-
-#~ msgid "Hindi"
-#~ msgstr "Hindština"
-
-#~ msgid "Hungarian"
-#~ msgstr "Maďarština"
-
-#~ msgid "Icelandic"
-#~ msgstr "Islandština"
-
-#~ msgid "Indonesian"
-#~ msgstr "Indonéština"
-
-#~ msgid "Italian"
-#~ msgstr "Italština"
-
-#~ msgid "Irish"
-#~ msgstr "Irština"
-
-#~ msgid "Japanese"
-#~ msgstr "Japonština"
-
-#~ msgid "Kannada"
-#~ msgstr "Kannadština"
-
-#~ msgid "Korean"
-#~ msgstr "Korejština"
-
-#~ msgid "Latvian"
-#~ msgstr "Litevština"
-
-#~ msgid "Lithuanian"
-#~ msgstr "Lotyština"
-
-#~ msgid "Malay/Bahasa Melayu"
-#~ msgstr "Malajsijština"
-
-#~ msgid "Maltese"
-#~ msgstr "Maltština"
-
-#~ msgid "Marathi"
-#~ msgstr "Maráthština"
-
-#~ msgid "Norwegian/Bokmaal"
-#~ msgstr "Norština – bokmål"
-
-#~ msgid "Norwegian/Nynorsk"
-#~ msgstr "Norština – nynorsk"
-
-#~ msgid "Punjabi"
-#~ msgstr "Paňdžábština"
-
-#~ msgid "Portuguese"
-#~ msgstr "Portugalština"
-
-#~ msgid "Portuguese/Brazil"
-#~ msgstr "Portugalština - Brazílie"
-
-#~ msgid "Romanian"
-#~ msgstr "Rumunština"
-
-#~ msgid "Serbian/Cyrillic"
-#~ msgstr "Srbština - cyrilice"
-
-#~ msgid "Serbian/Latin"
-#~ msgstr "Srbština - latinka"
-
-#~ msgid "Slovak"
-#~ msgstr "Slovenština"
-
-#~ msgid "Slovenian"
-#~ msgstr "Slovinština"
-
-#~ msgid "Spanish"
-#~ msgstr "Španělština"
-
-#~ msgid "Spanish/Spain"
-#~ msgstr "Španělština - Španělsko"
-
-#~ msgid "Spanish/Mexico"
-#~ msgstr "Španělština - Mexiko"
-
-#~ msgid "Swedish"
-#~ msgstr "Švédština"
-
-#~ msgid "Tamil"
-#~ msgstr "Tamilština"
-
-#~ msgid "Telugu"
-#~ msgstr "Telugština"
-
-#~ msgid "Thai"
-#~ msgstr "Thajština"
-
-#~ msgid "Turkish"
-#~ msgstr "Turečtina"
-
-#~ msgid "Ukrainian"
-#~ msgstr "Ukrajinština"
-
-#~ msgid "Uzbekian"
-#~ msgstr "Uzbečtina"
-
-#~ msgid "Vietnamese"
-#~ msgstr "Vietnamština"
-
-#~ msgid "Walloon"
-#~ msgstr "Valonská francouzština"
-
-#~ msgid "Welsh"
-#~ msgstr "Velština"
-
-#~ msgid "gtranslator learn buffer statistics:"
-#~ msgstr "Statistika překladové paměti:"
-
-#~ msgid "Learn buffer filename: `%s`"
-#~ msgstr "Jméno souboru překladové paměti: `%s'."
-
-#~ msgid "Encoding: `%s'"
-#~ msgstr "Kódování: `%s'"
-
-#~ msgid "Serial: `%i'"
-#~ msgstr "Pořadové číslo: `%i'"
-
-#~ msgid "Number of entries: `%i'"
-#~ msgstr "Počet záznamů: `%i'"
-
-#~ msgid "Show build specifications"
-#~ msgstr "Zobrazit informace o sestavení"
-
-#~ msgid "Specify main window geometry"
-#~ msgstr "Nastavení geometrie hlavního okna"
-
-#~ msgid "GEOMETRY"
-#~ msgstr "GEOMETRIE"
-
-#~ msgid "Couldn't open '%s': %s\n"
-#~ msgstr "Nemohu otevřít '%s': %s\n"
-
-#~ msgid "Version and build date:"
-#~ msgstr "Verze a datum sestavení:"
-
-#~ msgid "Build GLib / Gtk+ / GNOME / XML versions:"
-#~ msgstr "Verze GLib / Gtk+ / GNOME / XML použité při sestavení:"
-
-#~ msgid "Colorschemes directory:"
-#~ msgstr "Adresář barevných schémat:"
-
-#~ msgid "Window icon:"
-#~ msgstr "Ikona okna:"
-
-#~ msgid "Own locale directory:"
-#~ msgstr "Vlastní lokalizační adresář:"
-
-#~ msgid "Default learn buffer file location:"
-#~ msgstr "Implicitní umístění souboru překladové paměti:"
-
-#~ msgid "_Compile"
-#~ msgstr "Kompilovat"
-
-#~ msgid "Add bookmark"
-#~ msgstr "Přidat záložku"
-
-#~ msgid "Add a bookmark for this message in this po file"
-#~ msgstr "Přidat záložku k této zprávě v tomto katalogu"
-
-#~ msgid "Aut_otranslate..."
-#~ msgstr "Automatický _překlad"
-
-#~ msgid "Autotranslate the file with information from your learn buffer"
-#~ msgstr ""
-#~ "Provést hrubý překlad katalogu na základě informací z překladové paměti"
-
-#~ msgid "Remove all translations..."
-#~ msgstr "Odstranit všechny překlady"
-
-#~ msgid "Remove all existing translations from the po file"
-#~ msgstr "Odstranit všechny překlady z katalogu"
-
-#~ msgid "Open from _URI..."
-#~ msgstr "Otevřít _URI..."
-
-#~ msgid "Open a po file from a given URI"
-#~ msgstr "Otevřít soubor ze zadaného URI"
-
-#~ msgid "Recen_t files"
-#~ msgstr "_Nedávno otevřené"
-
-#~ msgid "Edit po file header"
-#~ msgstr "Upravit hlavičku katalogu"
-
-#~ msgid "Fu_zzy"
-#~ msgstr "N_eúplný překlad"
-
-#~ msgid "_Back"
-#~ msgstr "Pře_dchozí"
-
-#~ msgid "_Last"
-#~ msgstr "Pos_lední"
-
-#~ msgid "Goto specified message number"
-#~ msgstr "Přejít na zadanou zprávu"
-
-#~ msgid "_Bookmarks"
-#~ msgstr "_Záložky"
-
-#~ msgid "gtranslator's homepage on the web"
-#~ msgstr "Domovská stránka gtranslatoru"
-
-#~ msgid "Open"
-#~ msgstr "Otevřít"
-
-#~ msgid "Save"
-#~ msgstr "Uložit"
-
-#~ msgid "Save as"
-#~ msgstr "Uložit jako"
-
-#~ msgid "Compile"
-#~ msgstr "Kompilovat"
-
-#~ msgid "Header"
-#~ msgstr "Hlavička"
-
-#~ msgid "Undo"
-#~ msgstr "Zpět"
-
-#~ msgid "First"
-#~ msgstr "První"
-
-#~ msgid "Back"
-#~ msgstr "Předchozí"
-
-#~ msgid "Next"
-#~ msgstr "Další"
-
-#~ msgid "Last"
-#~ msgstr "Poslední"
-
-#~ msgid "Go to the next fuzzy translation"
-#~ msgstr "Přejít na následující neúplně přeloženou zprávu"
-
-#~ msgid "Go to"
-#~ msgstr "Zpráva číslo..."
-
-#~ msgid "Find string in po file"
-#~ msgstr "Najít řetězec v katalogu"
-
-#~ msgid "Replace string in po file"
-#~ msgstr "Nahradit řetězec v katalogu"
-
-#~ msgid "Couldn't get the message!"
-#~ msgstr "Nemohu získat zprávu!"
-
-#~ msgid "There are no fuzzy messages left."
-#~ msgstr "Žádné neúplně přeložené zprávy."
-
-#~ msgid "All messages seem to be translated."
-#~ msgstr "Všechny zprávy jsou přeloženy"
-
-#~ msgid "Parser output"
-#~ msgstr "Výstup parseru"
-
-#~ msgid "N/A"
-#~ msgstr "N/A"
-
-#~ msgid ""
-#~ "File %s\n"
-#~ "contains %d fuzzy message"
-#~ msgid_plural ""
-#~ "File %s\n"
-#~ "contains %d fuzzy messages"
-#~ msgstr[0] ""
-#~ "Soubor %s\n"
-#~ "obsahuje %d neúplně přeloženou zprávu."
-#~ msgstr[1] ""
-#~ "Soubor %s\n"
-#~ "obsahuje %d neúplně přeložené zprávy."
-#~ msgstr[2] ""
-#~ "Soubor %s\n"
-#~ "obsahuje %d neúplně přeložených zpráv."
-
-#~ msgid "Couldn't generate the current date!"
-#~ msgstr "Nemohu vygenerovat aktuální datum!"
-
-#~ msgid "Hotkey indicating character:"
-#~ msgstr "Znak označující horkou klávesu:"
-
-#~ msgid "gtranslator -- options"
-#~ msgstr "gtranslator – Nastavení"
-
-#~ msgid "Suffix:"
-#~ msgstr "Přípona:"
-
-#~ msgid "Check recent files before showing in recent files list"
-#~ msgstr ""
-#~ "Kontrolovat soubory před jejich zobrazením v seznamu naposledy otevřených "
-#~ "souborů"
-
-#~ msgid "Use special character to indicate white space"
-#~ msgstr "Vyznačit mezery zobrazením zvláštního znaku"
-
-#~ msgid "Apply own fonts"
-#~ msgstr "Použít vlastní písma"
-
-#~ msgid "gtranslator -- font selection/msgid font"
-#~ msgstr "gtranslator – výběr písma/msgid font"
-
-#~ msgid "gtranslator -- font selection/msgstr font"
-#~ msgstr "gtranslator – výběr písma/msgstr font"
-
-#~ msgid "Translation font:"
-#~ msgstr "Písmo překladu:"
-
-#~ msgid "Keep obsolete messages in the po files"
-#~ msgstr "Ponechat zastaralé zprávy v katalogu "
-
-#~ msgid "Spell checking"
-#~ msgstr "Kontrola pravopisu"
-
-#~ msgid "Instant spell checking"
-#~ msgstr "Při psaní kontrolovat pravopis"
-
-#~ msgid "PO header"
-#~ msgstr "Hlavička"
-
-#~ msgid "Author's name:"
-#~ msgstr "Jméno autora:"
-
-#~ msgid "Author's email:"
-#~ msgstr "E-mail autora:"
-
-#~ msgid "Enable the functionality to update a po file from within gtranslator"
-#~ msgstr "Umožnit aktualizaci katalogů přímo v programu gtranslator"
-
-#~ msgid "Enable the functionality to remove all translations from a po file"
-#~ msgstr "Povolit možnost odstranění všech překladů z katalogu"
-
-#~ msgid "Show instant comment view in main pane"
-#~ msgstr "Zobrazovat v hlavním okně náhled komentáře"
-
-#~ msgid "Display special dialog for messages with plural forms"
-#~ msgstr "Zobrazit zvláštní dialogové okno pro zprávy s množnými čísly"
-
-#~ msgid "Save geometry on exit and restore it on startup"
-#~ msgstr "Při ukončení uložit a při spuštění obnovit geometrii"
-
-#~ msgid "Collapse all entries by default"
-#~ msgstr "Při otevření katalogu sbalit všechny položky"
-
-#~ msgid ""
-#~ "Also query the personal learn buffer while autotranslating untranslated "
-#~ "messages"
-#~ msgstr ""
-#~ "Při automatickém překladu se dotazovat i v osobní překladové paměti."
-
-#~ msgid "Automatically learn a newly translated message"
-#~ msgstr "Nově přeložené zprávy automaticky ukládat do překladové paměti"
-
-#~ msgid "Fuzzy matching"
-#~ msgstr "Fuzzy matching"
-
-#~ msgid "Use \"fuzzy\" matching routines for learn buffer queries"
-#~ msgstr "Při hledání v překladové paměti používat rutiny hledající \"fuzzy\""
-
-#~ msgid "Minimal required similarity persentage for fuzzy queries:"
-#~ msgstr "Minimální požadovaná podobnost pro „fuzzy“ dotazy:"
-
-#~ msgid "Please enter your name!"
-#~ msgstr "Zadejte, prosím, vaše jméno."
-
-#~ msgid "Please enter your EMail address!"
-#~ msgstr "Zadejte, prosím, vaši e-mailovou adresu."
-
-#~ msgid "Please enter a valid EMail address!"
-#~ msgstr "Zadejte, prosím, platnou e-mailovou adresu."
-
-#~ msgid "No replacements made!"
-#~ msgstr "Nebylo provedeny žádné záměny."
-
-#~ msgid "Y"
-#~ msgstr "Y"
-
-#~ msgid "^"
-#~ msgstr "^"
-
-#~ msgid "Couldn't save compiled gettext file `%s'!"
-#~ msgstr "Nemohu uložit kompilovaný soubor gettextu `%s'!"
-
-#~ msgid "Couldn't save compressed gettext file `%s'!"
-#~ msgstr "Nemohu uložit komprimovaný soubor gettextu `%s'!"
-
-#~ msgid "Couldn't save %s'd gettext file `%s'!"
-#~ msgstr "Nemohu uložit programem %s komprimovaný soubor `%s'!"
-
-#~ msgid "Couldn't save zip'ed po file `%s'!"
-#~ msgstr "Nemohu uložit programem zip komprimovaný soubor `%s'!"
-
-#~ msgid "Session restored successfully."
-#~ msgstr "Sezení bylo úspěšně obnoveno."
-
-#~ msgid "Saving file failed: %s"
-#~ msgstr "Ukládání souboru selhalo: %s"
-
-#~ msgid "No font set! Using default font"
-#~ msgstr "Nebylo nastaveno písmo! Používám implicitní font."
-
-#~ msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
-#~ msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-2"
-
-#~ msgid "Can't create directory `%s'!"
-#~ msgstr "Nemohu vytvořit adresář `%s'!"
-
-#~ msgid "Error autosaving file: %s"
-#~ msgstr "Chyba při automatickém ukládání souboru: %s"
-
-#~ msgid "The geometry string \"%s\" couldn't be parsed!"
-#~ msgstr "Řetězec \"%s\" určující geometrii není platný."
-
-#~ msgid "The necessary decompression program `%s' is not installed!"
-#~ msgstr "Program `%s' potřebný pro dekompresi nebyl nalezen."
-
-#~ msgid "The necessary compression program `%s' is not installed!"
-#~ msgstr "Program `%s' potřebný pro komprimaci nebyl nalezen."
-
-#~ msgid "Couldn't create temporary directory `%s'!"
-#~ msgstr "Nemohu vytvořit dočasný adresář `%s'."
-
-#~ msgid "File `%s' couldn't be found!"
-#~ msgstr "Soubor `%s' nebyl nenalezen!"
-
-#~ msgid "Malformed URI `%s' entered!"
-#~ msgstr "Bylo zadáno chybné URI `%s'."
-
-#~ msgid "Host `%s' couldn't be found!"
-#~ msgstr "Počítač `%s' nebyl nalezen."
-
-#~ msgid "Hostname `%s' is not valid!"
-#~ msgstr "Název počítače `%s' není platný."
-
-#~ msgid "Host `%s' has no address!"
-#~ msgstr "Počítač `%s' nemá adresu."
-
-#~ msgid "Transfer interrupted!"
-#~ msgstr "Přenos byl přerušen!"
-
-#~ msgid "gtranslator -- save file as.."
-#~ msgstr "gtranslator – uložit soubor jako..."
-
