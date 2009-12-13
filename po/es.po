@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: gtranslator.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&component=general\n"
-"POT-Creation-Date: 2009-08-24 16:21+0000\n"
-"PO-Revision-Date: 2009-08-30 11:16+0200\n"
+"POT-Creation-Date: 2009-12-08 14:25+0000\n"
+"PO-Revision-Date: 2009-12-12 12:13+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1624,27 +1624,27 @@ msgstr "<b>Ruta<:/b> %s"
 msgid "Close document"
 msgstr "Cerrar el documento"
 
-#: ../src/po.c:398
+#: ../src/po.c:403
 #, c-format
 msgid "Failed opening file '%s': %s"
 msgstr "Falló al abrir el archivo «%s»: %s"
 
-#: ../src/po.c:422
+#: ../src/po.c:427
 #, c-format
 msgid "The file is empty"
 msgstr "El archivo está vacío"
 
-#: ../src/po.c:437
+#: ../src/po.c:442
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext devolvió una lista de dominios de mensaje nula."
 
-#: ../src/po.c:593
+#: ../src/po.c:598
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "No se obtuvieron mensajes del analizador."
 
-#: ../src/po.c:877
+#: ../src/po.c:900
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1655,12 +1655,12 @@ msgstr ""
 "Los archivos pot se generan en el proceso de compilación.\n"
 "Su archivo debería nombrarse como «%s.po»."
 
-#: ../src/po.c:890
+#: ../src/po.c:913
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "El archivo %s es de sólo lectura y no se puede sobreescribir."
 
-#: ../src/po.c:923
+#: ../src/po.c:946
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Hubo un error al escribir el archivo PO: %s"
@@ -2136,40 +2136,54 @@ msgstr "Documento _siguiente"
 msgid "Activate next document"
 msgstr "Activar el documento siguiente"
 
-#: ../src/window.c:764
+#: ../src/window.c:766
 msgid "Untranslated"
 msgstr "Sin traducir"
 
-#: ../src/window.c:767
+#: ../src/window.c:769
 msgid "Translated"
 msgstr "Traducido"
 
-#: ../src/window.c:770
+#: ../src/window.c:772
 msgid "Fuzzy"
 msgstr "Difuso"
 
-#: ../src/window.c:777
+#: ../src/window.c:779
 #, c-format
 msgid "Current: %d"
 msgstr "Actual: %d"
 
-#: ../src/window.c:778
-#, c-format
-msgid "Total: %d translated"
-msgstr "Total: %d traducido"
-
-#: ../src/window.c:779
-#, c-format
-msgid "%d fuzzy"
-msgstr "%d difusos"
-
 #: ../src/window.c:780
 #, c-format
+msgid "Total: %d"
+msgstr "Total: %d"
+
+#: ../src/window.c:781
+#, c-format
+#| msgid "%d untranslated"
+msgid "%d translated"
+msgid_plural "%d translated"
+msgstr[0] "%d traducidas"
+msgstr[1] "%d sin traducir"
+
+#: ../src/window.c:785
+#, c-format
+#| msgid "%d fuzzy"
+msgid "%d fuzzy"
+msgid_plural "%d fuzzy"
+msgstr[0] "%d difusa"
+msgstr[1] "%d difusas"
+
+#: ../src/window.c:789
+#, c-format
+#| msgid "%d untranslated"
 msgid "%d untranslated"
-msgstr "%d sin traducir"
+msgid_plural "%d untranslated"
+msgstr[0] "%d sin traducir"
+msgstr[1] "%d sin traducir"
 
 #. Translators: %s is a URI
-#: ../src/window.c:839
+#: ../src/window.c:849
 #, c-format
 msgid "Activate '%s'"
 msgstr "Activar «%s»"
@@ -2178,27 +2192,30 @@ msgstr "Activar «%s»"
 #.
 #. * Translators: The title of the window when there is only one tab
 #.
-#: ../src/window.c:1016 ../src/window.c:1022
+#: ../src/window.c:1026 ../src/window.c:1032
 #, c-format
 msgid "gtranslator - %s"
 msgstr "gtranslator - %s"
 
-#: ../src/window.c:1019
+#: ../src/window.c:1029
 #, c-format
 msgid "gtranslator - *%s"
 msgstr "gtranslator - *%s"
 
-#: ../src/window.c:1027
+#: ../src/window.c:1037
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/window.c:1389
+#: ../src/window.c:1399
 msgid "Toolbar Editor"
 msgstr "Editor de la barra de herramientas"
 
-#: ../src/window.c:1700
+#: ../src/window.c:1710
 msgid "Documents"
 msgstr "Documentos"
+
+#~ msgid "Total: %d translated"
+#~ msgstr "Total: %d traducido"
 
 #~ msgid "Prev F_ile"
 #~ msgstr "Archivo an_terior"
@@ -2211,9 +2228,6 @@ msgstr "Documentos"
 
 #~ msgid "Status: %s"
 #~ msgstr "Estado: %s"
-
-#~ msgid "Total: %d"
-#~ msgstr "Total: %d"
 
 #~ msgid "Fuzzy: %d"
 #~ msgstr "Difusos: %d"
