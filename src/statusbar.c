@@ -356,6 +356,11 @@ gtranslator_statusbar_update_progress_bar (GtranslatorStatusbar * statusbar,
       gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR
 				     (statusbar->priv->progress_bar),
 				     percentage);
+      gchar *aux = g_strconcat(g_strdup_printf("%.2f",percentage*100),"%",NULL);
+      gtk_progress_bar_set_text (GTK_PROGRESS_BAR
+				 (statusbar->priv->progress_bar),
+				 aux);
+      g_free(aux);
     }
 }
 
