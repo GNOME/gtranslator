@@ -1,15 +1,15 @@
 # Swedish messages for gtranslator.
-# Copyright (C) 2000-2009 Free Software Foundation, Inc.
+# Copyright (C) 2000-2010 Free Software Foundation, Inc.
 # Christian Rose <menthos@menthos.com>, 2000, 2001, 2002, 2003.
 # Martin Norbäck <d95mback@dtek.chalmers.se>, 2000.
-# Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008, 2009.
+# Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008, 2009, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-18 13:01+0200\n"
-"PO-Revision-Date: 2009-09-18 13:02+0100\n"
+"POT-Creation-Date: 2010-01-10 11:56+0100\n"
+"PO-Revision-Date: 2010-01-10 11:57+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -2189,46 +2189,57 @@ msgid "Activate next document"
 msgstr "Aktivera nästa dokument"
 
 # src/gui.c:407 src/gui.c:409
-#: ../src/window.c:764
+#: ../src/window.c:766
 msgid "Untranslated"
 msgstr "Oöversatt"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: ../src/window.c:767
+#: ../src/window.c:769
 msgid "Translated"
 msgstr "Översatt"
 
 # src/gui.c:385 src/gui.c:389 src/menus.c:348
-#: ../src/window.c:770
+#: ../src/window.c:772
 msgid "Fuzzy"
 msgstr "Luddig"
 
 # src/sidebar.c:107
-#: ../src/window.c:777
+#: ../src/window.c:779
 #, c-format
 msgid "Current: %d"
 msgstr "Aktuell: %d"
 
-# src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: ../src/window.c:778
-#, c-format
-msgid "Total: %d translated"
-msgstr "Totalt: %d översatta"
-
-# src/gui.c:385 src/gui.c:389 src/menus.c:348
-#: ../src/window.c:779
-#, c-format
-msgid "%d fuzzy"
-msgstr "%d luddiga"
-
-# src/gui.c:407 src/gui.c:409
 #: ../src/window.c:780
 #, c-format
+msgid "Total: %d"
+msgstr "Totalt: %d"
+
+# src/gui.c:407 src/gui.c:409
+#: ../src/window.c:781
+#, c-format
+msgid "%d translated"
+msgid_plural "%d translated"
+msgstr[0] "%d översatt"
+msgstr[1] "%d översatta"
+
+# src/gui.c:385 src/gui.c:389 src/menus.c:348
+#: ../src/window.c:785
+#, c-format
+msgid "%d fuzzy"
+msgid_plural "%d fuzzy"
+msgstr[0] "%d luddig"
+msgstr[1] "%d luddiga"
+
+# src/gui.c:407 src/gui.c:409
+#: ../src/window.c:789
+#, c-format
 msgid "%d untranslated"
-msgstr "%d oöversatta"
+msgid_plural "%d untranslated"
+msgstr[0] "%d oöversatt"
+msgstr[1] "%d oöversatta"
 
 #. Translators: %s is a URI
-#: ../src/window.c:839
+#: ../src/window.c:849
 #, c-format
 msgid "Activate '%s'"
 msgstr "Aktivera \"%s\""
@@ -2238,36 +2249,38 @@ msgstr "Aktivera \"%s\""
 #.
 #. * Translators: The title of the window when there is only one tab
 #.
-#: ../src/window.c:1016
-#: ../src/window.c:1022
+#: ../src/window.c:1026
+#: ../src/window.c:1032
 #, c-format
 msgid "gtranslator - %s"
 msgstr "gtranslator - %s"
 
 # src/parse.c:396
-#: ../src/window.c:1019
+#: ../src/window.c:1029
 #, c-format
 msgid "gtranslator - *%s"
 msgstr "gtranslator - *%s"
 
 # src/prefs.c:239
-#: ../src/window.c:1027
+#: ../src/window.c:1037
 msgid "gtranslator"
 msgstr "gtranslator"
 
 # src/menus.c:315 src/menus.c:316
-#: ../src/window.c:1389
+#: ../src/window.c:1399
 msgid "Toolbar Editor"
 msgstr "Verktygsradsredigerare"
 
 # src/dialogs.c:508 src/dialogs.c:588
-#: ../src/window.c:1700
+#: ../src/window.c:1710
 msgid "Documents"
 msgstr "Dokument"
 
+# src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
+#~ msgid "Total: %d translated"
+#~ msgstr "Totalt: %d översatta"
 #~ msgid "Prev F_ile"
 #~ msgstr "Föreg f_il"
-
 # src/parse.c:645
 #~ msgid "Go to the next file"
 #~ msgstr "Gå till nästa fil"
@@ -2276,8 +2289,6 @@ msgstr "Dokument"
 #~ msgstr "Nästa fi_l"
 #~ msgid "Status: %s"
 #~ msgstr "Status: %s"
-#~ msgid "Total: %d"
-#~ msgstr "Totalt: %d"
 # src/gui.c:385 src/gui.c:389 src/menus.c:348
 #~ msgid "Fuzzy: %d"
 #~ msgstr "Luddiga: %d"
