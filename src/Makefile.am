@@ -69,8 +69,7 @@ INST_H_FILES =				\
 	context.h \
 	debug.h \
 	header.h \
-	io-error-message-area.h \
-	message-area.h \
+	io-error-info-bar.h \
 	message-table.h \
 	msg.h \
 	notebook.h \
@@ -90,7 +89,6 @@ header_DATA = \
 libgtranslator_la_SOURCES = \
 	$(BUILT_SOURCES) \
 	application.c \
-	message-area.c \
 	message-table.c \
 	message-table-model.c \
 	message-table-model.h \
@@ -109,7 +107,7 @@ libgtranslator_la_SOURCES = \
 	actions-edit.c \
 	actions-view.c \
 	actions-help.c \
-	io-error-message-area.c \
+	io-error-info-bar.c \
 	prefs-manager.c \
 	prefs-manager.h \
 	prefs-manager-private.h \

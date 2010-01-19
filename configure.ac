@@ -73,7 +73,7 @@ dnl it too, or it will never make it into the spec file!
 dnl
 dnl ==========================================================================
 
-GTK_REQUIRED=2.16.0
+GTK_REQUIRED=2.18.0
 GLIB_REQUIRED=2.15.5
 GCONF_REQUIRED=2.18.0
 LIBXML_REQUIRED=2.4.12
@@ -97,10 +97,11 @@ AC_SUBST(GDICT_OPTIONAL)
 AC_SUBST(GTKSPELL_OPTIONAL)
 
 PKG_CHECK_MODULES(GTRANSLATOR, [
-gconf-2.0 >= $GCONF_REQUIRED
-gtksourceview-2.0 >= $SOURCEVIEW_REQUIRED
-gio-2.0 >= $GLIB_REQUIRED
-gdl-1.0 >= $GDL_REQUIRED
+	gtk+-2.0 >= $GTK_REQUIRED
+	gconf-2.0 >= $GCONF_REQUIRED
+	gtksourceview-2.0 >= $SOURCEVIEW_REQUIRED
+	gio-2.0 >= $GLIB_REQUIRED
+	gdl-1.0 >= $GDL_REQUIRED
 ])
 
 AC_SUBST(GTRANSLATOR_CFLAGS)

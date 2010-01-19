@@ -34,8 +34,7 @@
 
 #include "application.h"
 #include "context.h"
-#include "io-error-message-area.h"
-#include "message-area.h"
+#include "io-error-info-bar.h"
 #include "message-table.h"
 #include "msg.h"
 #include "tab.h"
@@ -78,8 +77,8 @@ G_DEFINE_TYPE (GtranslatorTab, gtranslator_tab, GTK_TYPE_VBOX)
        /*Comment button */
        GtkWidget *comment_button;
 
-       /*Message area */
-       GtkWidget *message_area;
+       /*Info bar */
+       GtkWidget *infobar;
 
        /*Original text */
        GtkWidget *msgid_hbox;
@@ -199,7 +198,7 @@ gtranslator_tab_edition_finished (GtranslatorTab * tab, GtranslatorMsg * msg)
 {
   GtranslatorTranslationMemory *tm;
   gchar *message_error;
-  GtkWidget *message_area;
+  GtkWidget *infobar;
 
   tm =
     GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory
@@ -219,16 +218,15 @@ gtranslator_tab_edition_finished (GtranslatorTab * tab, GtranslatorMsg * msg)
     {
       gtranslator_tab_block_movement (tab);
 
-      message_area =
-	create_error_message_area (_("There is an error in the message:"),
-				   message_error);
-      gtranslator_tab_set_message_area (tab, message_area);
+      infobar =	create_error_info_bar (_("There is an error in the message:"),
+				       message_error);
+      gtranslator_tab_set_info_bar (tab, infobar);
       g_free (message_error);
     }
   else
     {
       gtranslator_tab_unblock_movement (tab);
-      gtranslator_tab_set_message_area (tab, NULL);
+      gtranslator_tab_set_info_bar (tab, NULL);
     }
 }
 
@@ -1746,32 +1744,32 @@ gtranslator_tab_go_to_number (GtranslatorTab * tab, gint number)
 }
 
 /**
- * gtranslator_tab_set_message_area:
+ * gtranslator_tab_set_info_bar:
  * @tab: a #GtranslatorTab
- * @message_area: a #GtranslatorMessageArea
+ * @infobar: a #GtranslatorMessageArea
  *
- * Sets the @message_area to be shown in the @tab.
+ * Sets the @infobar to be shown in the @tab.
  */
 void
-gtranslator_tab_set_message_area (GtranslatorTab * tab,
-				  GtkWidget * message_area)
+gtranslator_tab_set_info_bar (GtranslatorTab *tab,
+			      GtkWidget      *infobar)
 {
   g_return_if_fail (GTR_IS_TAB (tab));
 
-  if (tab->priv->message_area == message_area)
+  if (tab->priv->infobar == infobar)
     return;
 
-  if (tab->priv->message_area != NULL)
-    gtk_widget_destroy (tab->priv->message_area);
+  if (tab->priv->infobar != NULL)
+    gtk_widget_destroy (tab->priv->infobar);
 
-  tab->priv->message_area = message_area;
+  tab->priv->infobar = infobar;
 
-  if (message_area == NULL)
+  if (infobar == NULL)
     return;
 
   gtk_box_pack_start (GTK_BOX (tab),
-		      tab->priv->message_area, FALSE, FALSE, 0);
+		      tab->priv->infobar, FALSE, FALSE, 0);
 
-  g_object_add_weak_pointer (G_OBJECT (tab->priv->message_area),
-			     (gpointer *) & tab->priv->message_area);
+  g_object_add_weak_pointer (G_OBJECT (tab->priv->infobar),
+			     (gpointer *) &tab->priv->infobar);
 }

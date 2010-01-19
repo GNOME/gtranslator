@@ -171,8 +171,8 @@ gtranslator_tab_get_type (void)
 
      void gtranslator_tab_go_to_number (GtranslatorTab * tab, gint number);
 
-     void gtranslator_tab_set_message_area (GtranslatorTab * tab,
-					    GtkWidget * message_area);
+     void gtranslator_tab_set_info_bar (GtranslatorTab *tab,
+					GtkWidget      *infobar);
 
      gboolean _gtranslator_tab_can_close (GtranslatorTab * tab);
 
