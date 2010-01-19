@@ -120,6 +120,9 @@ create_error_info_bar (const gchar *primary_text,
   infobar = gtk_info_bar_new_with_buttons (GTK_STOCK_CLOSE,
 					   GTK_RESPONSE_CLOSE, NULL);
 
+  gtk_info_bar_set_message_type (GTK_INFO_BAR (infobar),
+				 GTK_MESSAGE_WARNING);
+
   set_info_bar_text_and_icon (GTK_INFO_BAR (infobar),
 			      GTK_STOCK_DIALOG_ERROR,
 			      primary_text, secondary_text);
