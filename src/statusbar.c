@@ -350,17 +350,17 @@ gtranslator_statusbar_update_progress_bar (GtranslatorStatusbar * statusbar,
    */
   if (percentage > 0.0 || percentage < 1.0)
     {
-      /*
-       * Set the progressbar status.
-       */
-      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR
-				     (statusbar->priv->progress_bar),
+      gchar *percentage_str;
+
+      /* Set the progressbar status */
+      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (statusbar->priv->progress_bar),
 				     percentage);
-      gchar *aux = g_strconcat(g_strdup_printf("%.2f",percentage*100),"%",NULL);
-      gtk_progress_bar_set_text (GTK_PROGRESS_BAR
-				 (statusbar->priv->progress_bar),
-				 aux);
-      g_free(aux);
+
+      percentage_str = g_strdup_printf ("%.2f%%", percentage * 100);
+
+      gtk_progress_bar_set_text (GTK_PROGRESS_BAR (statusbar->priv->progress_bar),
+				 percentage_str);
+      g_free (percentage_str);
     }
 }
 
