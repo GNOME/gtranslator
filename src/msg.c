@@ -39,32 +39,33 @@
 
 
 G_DEFINE_TYPE (GtranslatorMsg, gtranslator_msg, G_TYPE_OBJECT)
-     struct _GtranslatorMsgPrivate
-     {
-       po_message_iterator_t iterator;
 
-       po_message_t message;
+struct _GtranslatorMsgPrivate
+{
+  po_message_iterator_t iterator;
 
-       GtranslatorMsgStatus status;
+  po_message_t message;
 
-       GtkTreeRowReference *row_reference;
+  GtranslatorMsgStatus status;
 
-       gint po_position;
-     };
+  GtkTreeRowReference *row_reference;
 
-     enum
-     {
-       PROP_0,
-       PROP_GETTEXT_ITER,
-       PROP_GETTEXT_MSG
-     };
+  gint po_position;
+};
 
-     static gchar *message_error = NULL;
+enum
+{
+  PROP_0,
+  PROP_GETTEXT_ITER,
+  PROP_GETTEXT_MSG
+};
 
-     static void
-       gtranslator_msg_set_property (GObject * object,
-				     guint prop_id,
-				     const GValue * value, GParamSpec * pspec)
+static gchar *message_error = NULL;
+
+static void
+gtranslator_msg_set_property (GObject * object,
+			      guint prop_id,
+			      const GValue * value, GParamSpec * pspec)
 {
   GtranslatorMsg *msg = GTR_MSG (object);
 
@@ -155,6 +156,8 @@ gtranslator_msg_new (po_message_iterator_t iter, po_message_t message)
 {
   GtranslatorMsg *msg;
 
+  g_return_val_if_fail (iter != NULL || message != NULL, NULL);
+
   msg = g_object_new (GTR_TYPE_MSG, NULL);
 
   gtranslator_msg_set_iterator (msg, iter);
@@ -227,6 +230,9 @@ gtranslator_msg_get_message (GtranslatorMsg * msg)
 void
 gtranslator_msg_set_message (GtranslatorMsg * msg, po_message_t message)
 {
+  g_return_if_fail (GTR_IS_MSG (msg));
+  g_return_if_fail (message != NULL);
+
   msg->priv->message = message;
 
   g_object_notify (G_OBJECT (msg), "gettext-msg");
@@ -242,6 +248,8 @@ gtranslator_msg_set_message (GtranslatorMsg * msg, po_message_t message)
 GtkTreeRowReference *
 gtranslator_msg_get_row_reference (GtranslatorMsg * msg)
 {
+  g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
+
   return msg->priv->row_reference;
 }
 
@@ -256,6 +264,8 @@ void
 gtranslator_msg_set_row_reference (GtranslatorMsg * msg,
 				   GtkTreeRowReference * row_reference)
 {
+  g_return_if_fail (GTR_IS_MSG (msg));
+
   msg->priv->row_reference = row_reference;
 }
 
@@ -268,6 +278,8 @@ gtranslator_msg_set_row_reference (GtranslatorMsg * msg,
 gboolean
 gtranslator_msg_is_translated (GtranslatorMsg * msg)
 {
+  g_return_val_if_fail (GTR_IS_MSG (msg), FALSE);
+
   if (po_message_msgid_plural (msg->priv->message) == NULL)
     return po_message_msgstr (msg->priv->message)[0] != '\0';
   else
@@ -297,6 +309,8 @@ gtranslator_msg_is_translated (GtranslatorMsg * msg)
 gboolean
 gtranslator_msg_is_fuzzy (GtranslatorMsg * msg)
 {
+  g_return_val_if_fail (GTR_IS_MSG (msg), FALSE);
+
   return po_message_is_fuzzy (msg->priv->message);
 }
 
@@ -311,6 +325,8 @@ gtranslator_msg_is_fuzzy (GtranslatorMsg * msg)
 void
 gtranslator_msg_set_fuzzy (GtranslatorMsg * msg, gboolean fuzzy)
 {
+  g_return_if_fail (GTR_IS_MSG (msg));
+
   po_message_set_fuzzy (msg->priv->message, fuzzy);
 }
 
@@ -324,6 +340,8 @@ gtranslator_msg_set_fuzzy (GtranslatorMsg * msg, gboolean fuzzy)
 void
 gtranslator_msg_set_status (GtranslatorMsg * msg, GtranslatorMsgStatus status)
 {
+  g_return_if_fail (GTR_IS_MSG (msg));
+
   msg->priv->status = status;
 }
 
@@ -336,6 +354,8 @@ gtranslator_msg_set_status (GtranslatorMsg * msg, GtranslatorMsgStatus status)
 GtranslatorMsgStatus
 gtranslator_msg_get_status (GtranslatorMsg * msg)
 {
+  g_return_val_if_fail (GTR_IS_MSG (msg), 0);
+
   return msg->priv->status;
 }
 
@@ -348,6 +368,8 @@ gtranslator_msg_get_status (GtranslatorMsg * msg)
 const gchar *
 gtranslator_msg_get_msgid (GtranslatorMsg * msg)
 {
+  g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
+
   return po_message_msgid (msg->priv->message);
 }
 
@@ -376,6 +398,8 @@ gtranslator_msg_get_msgid_plural (GtranslatorMsg * msg)
 const gchar *
 gtranslator_msg_get_msgstr (GtranslatorMsg * msg)
 {
+  g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
+
   return po_message_msgstr (msg->priv->message);
 }
 
@@ -391,6 +415,9 @@ gtranslator_msg_get_msgstr (GtranslatorMsg * msg)
 void
 gtranslator_msg_set_msgstr (GtranslatorMsg * msg, const gchar * msgstr)
 {
+  g_return_if_fail (GTR_IS_MSG (msg));
+  g_return_if_fail (msgstr != NULL);
+
   po_message_set_msgstr (msg->priv->message, msgstr);
 }
 
@@ -406,6 +433,8 @@ gtranslator_msg_set_msgstr (GtranslatorMsg * msg, const gchar * msgstr)
 const gchar *
 gtranslator_msg_get_msgstr_plural (GtranslatorMsg * msg, gint index)
 {
+  g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
+
   return po_message_msgstr_plural (msg->priv->message, index);
 }
 
@@ -422,6 +451,9 @@ void
 gtranslator_msg_set_msgstr_plural (GtranslatorMsg * msg,
 				   gint index, const gchar * msgstr)
 {
+  g_return_if_fail (GTR_IS_MSG (msg));
+  g_return_if_fail (msgstr != NULL);
+
   po_message_set_msgstr_plural (msg->priv->message, index, msgstr);
 }
 
@@ -435,6 +467,8 @@ gtranslator_msg_set_msgstr_plural (GtranslatorMsg * msg,
 const gchar *
 gtranslator_msg_get_comment (GtranslatorMsg * msg)
 {
+  g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
+
   return po_message_comments (msg->priv->message);
 }
 
@@ -450,6 +484,9 @@ gtranslator_msg_get_comment (GtranslatorMsg * msg)
 void
 gtranslator_msg_set_comment (GtranslatorMsg * msg, const gchar * comment)
 {
+  g_return_if_fail (GTR_IS_MSG (msg));
+  g_return_if_fail (comment != NULL);
+
   po_message_set_comments (msg->priv->message, comment);
 }
 
@@ -465,6 +502,8 @@ gtranslator_msg_set_comment (GtranslatorMsg * msg, const gchar * comment)
 gint
 gtranslator_msg_get_po_position (GtranslatorMsg * msg)
 {
+  g_return_val_if_fail (GTR_IS_MSG (msg), 0);
+
   return msg->priv->po_position;
 }
 
@@ -478,6 +517,8 @@ gtranslator_msg_get_po_position (GtranslatorMsg * msg)
 void
 gtranslator_msg_set_po_position (GtranslatorMsg * msg, gint po_position)
 {
+  g_return_if_fail (GTR_IS_MSG (msg));
+
   msg->priv->po_position = po_position;
 }
 
@@ -490,6 +531,8 @@ gtranslator_msg_set_po_position (GtranslatorMsg * msg, gint po_position)
 const gchar *
 gtranslator_msg_get_extracted_comments (GtranslatorMsg * msg)
 {
+  g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
+
   return po_message_extracted_comments (msg->priv->message);
 }
 
@@ -504,6 +547,8 @@ gtranslator_msg_get_extracted_comments (GtranslatorMsg * msg)
 const gchar *
 gtranslator_msg_get_filename (GtranslatorMsg * msg, gint i)
 {
+  g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
+
   po_filepos_t filepos;
 
   filepos = po_message_filepos (msg->priv->message, i);
@@ -525,6 +570,8 @@ gtranslator_msg_get_filename (GtranslatorMsg * msg, gint i)
 gint *
 gtranslator_msg_get_file_line (GtranslatorMsg * msg, gint i)
 {
+  g_return_val_if_fail (GTR_IS_MSG (msg), (gint *)0);
+
   po_filepos_t filepos;
 
   filepos = po_message_filepos (msg->priv->message, i);
