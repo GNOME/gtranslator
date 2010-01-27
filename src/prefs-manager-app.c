@@ -34,6 +34,7 @@
 #include <gdl/gdl.h>
 #endif
 
+#include "dirs.h"
 #include "prefs-manager.h"
 #include "prefs-manager-private.h"
 #include "prefs-manager-app.h"
@@ -123,7 +124,7 @@ get_gtranslator_state_file ()
 
       state_file = g_key_file_new ();
 
-      config_folder = gtranslator_utils_get_user_config_dir ();
+      config_folder = gtranslator_dirs_get_user_config_dir ();
       path = g_build_filename (config_folder, GTR_STATE_FILE_NAME, NULL);
       g_free (config_folder);
 
@@ -199,7 +200,7 @@ gtranslator_state_file_sync ()
   state_file = get_gtranslator_state_file ();
   g_return_val_if_fail (state_file != NULL, FALSE);
 
-  config_folder = gtranslator_utils_get_user_config_dir ();
+  config_folder = gtranslator_dirs_get_user_config_dir ();
   path = g_build_filename (config_folder, GTR_STATE_FILE_NAME, NULL);
   g_free (config_folder);
 

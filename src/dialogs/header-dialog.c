@@ -28,6 +28,7 @@
 #include <string.h>
 
 #include "application.h"
+#include "dirs.h"
 #include "header-dialog.h"
 #include "utils.h"
 #include "prefs-manager.h"
@@ -269,8 +270,7 @@ gtranslator_header_dialog_init (GtranslatorHeaderDialog * dlg)
 
   g_signal_connect (dlg, "response", G_CALLBACK (gtk_widget_destroy), NULL);
 
-  path = gtranslator_utils_get_file_from_pkgdatadir ("header-dialog.ui");
-
+  path = gtranslator_dirs_get_ui_file ("header-dialog.ui");
   ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,

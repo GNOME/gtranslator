@@ -25,14 +25,13 @@
 #endif
 
 #include "application.h"
+#include "dirs.h"
 #include "utils.h"
 #include "window.h"
 #include "egg-toolbars-model.h"
 #include "dialogs/assistant.h"
 #include "./translation-memory/translation-memory.h"
 #include "./translation-memory/berkeley/berkeley.h"
-
-
 
 #include <glib.h>
 #include <glib-object.h>
@@ -46,31 +45,33 @@
 					 GtranslatorApplicationPrivate))
 
 G_DEFINE_TYPE (GtranslatorApplication, gtranslator_application, G_TYPE_OBJECT)
-     struct _GtranslatorApplicationPrivate
-     {
-       GList *windows;
-       GtranslatorWindow *active_window;
 
-       GList *profiles;
-       GtranslatorProfile *active_profile;
+struct _GtranslatorApplicationPrivate
+{
+  GList *windows;
+  GtranslatorWindow *active_window;
 
-       gchar *toolbars_file;
-       EggToolbarsModel *toolbars_model;
+  GList *profiles;
+  GtranslatorProfile *active_profile;
 
-       GtkIconFactory *icon_factory;
+  gchar *toolbars_file;
+  EggToolbarsModel *toolbars_model;
 
-       gchar *last_dir;
+  GtkIconFactory *icon_factory;
 
-       GtranslatorTranslationMemory *tm;
+  gchar *last_dir;
 
-       gboolean first_run;
-     };
+  GtranslatorTranslationMemory *tm;
 
-     static gchar *get_accel_file (void)
+  gboolean first_run;
+};
+
+static gchar *
+get_accel_file (void)
 {
   gchar *config;
 
-  config = gtranslator_utils_get_user_config_dir ();
+  config = gtranslator_dirs_get_user_config_dir ();
 
   if (config != NULL)
     {
@@ -130,6 +131,7 @@ gtranslator_application_init (GtranslatorApplication * application)
   gchar *gtranslator_folder;
   gchar *path_default_gtr_toolbar;
   gchar *profiles_file;
+  gchar *dir;
 
   GtranslatorApplicationPrivate *priv;
 
@@ -144,7 +146,7 @@ gtranslator_application_init (GtranslatorApplication * application)
   /*
    * Creating config folder
    */
-  gtranslator_folder = gtranslator_utils_get_user_config_dir ();
+  gtranslator_folder = gtranslator_dirs_get_user_config_dir ();
 
   if (!g_file_test (gtranslator_folder, G_FILE_TEST_IS_DIR))
     {
@@ -194,10 +196,14 @@ gtranslator_application_init (GtranslatorApplication * application)
 
   priv->toolbars_file = g_build_filename (gtranslator_folder,
 					  "gtr-toolbar.xml", NULL);
-  path_default_gtr_toolbar =
-    gtranslator_utils_get_file_from_pkgdatadir ("gtr-toolbar.xml");
 
   g_free (gtranslator_folder);
+
+  dir = gtranslator_dirs_get_gtranslator_data_dir ();
+  path_default_gtr_toolbar = g_build_filename (dir,
+                                               "gtr-toolbar.xml",
+                                               NULL);
+  g_free (dir);
 
   egg_toolbars_model_load_names (priv->toolbars_model,
 				 path_default_gtr_toolbar);
@@ -511,11 +517,17 @@ gtranslator_application_register_icon (GtranslatorApplication * app,
 {
   GtkIconSet *icon_set;
   GtkIconSource *icon_source = gtk_icon_source_new ();
+  gchar *pixmaps_dir;
   gchar *path;
+  GdkPixbuf *pixbuf;
 
-  path = gtranslator_utils_get_file_from_pixmapsdir (icon);
+  pixmaps_dir = gtranslator_dirs_get_pixmaps_dir ();
+  path = g_build_filename (pixmaps_dir,
+                           icon,
+                           NULL);
+  g_free (pixmaps_dir);
 
-  GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file (path, NULL);
+  pixbuf = gdk_pixbuf_new_from_file (path, NULL);
   if (pixbuf)
     {
       icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);

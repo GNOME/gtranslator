@@ -30,6 +30,7 @@
 #include "prefs-manager-app.h"
 #include "plugins-engine.h"
 #include "utils.h"
+#include "dirs.h"
 
 #include <locale.h>
 #include <glib.h>
@@ -87,36 +88,34 @@ get_command_line_data ()
   return file_list;
 }
 
-
 /* This method is from the file gedit.c which is part of gedit */
 #ifdef G_OS_WIN32
 static void
 setup_path (void)
 {
-  /* Set PATH to include the gedit executable's folder */
-  wchar_t exe_filename[MAX_PATH];
-  wchar_t *p;
-  gchar *exe_folder_utf8;
   gchar *path;
+  gchar *installdir;
+  gchar *bin;
 
-  GetModuleFileNameW (NULL, exe_filename, G_N_ELEMENTS (exe_filename));
+  installdir = g_win32_get_package_installation_directory_of_module (NULL);
 
-  p = wcsrchr (exe_filename, L'\\');
-  g_assert (p != NULL);
+  bin = g_build_filename (installdir,
+                          "bin", NULL);
+  g_free (installdir);
 
-  *p = L'\0';
-  exe_folder_utf8 = g_utf16_to_utf8 (exe_filename, -1, NULL, NULL, NULL);
+  /* Set PATH to include the gedit executable's folder */
+  path = g_build_path (";",
+                       bin,
+                       g_getenv ("PATH"),
+                       NULL);
+  g_free (bin);
 
-  path = g_build_path (";", exe_folder_utf8, g_getenv ("PATH"), NULL);
   if (!g_setenv ("PATH", path, TRUE))
-    g_warning ("Could not set PATH for gtranslator");
+    g_warning ("Could not set PATH for gedit");
 
-  g_free (exe_folder_utf8);
   g_free (path);
 }
 #endif
-
-
 
 /*
  * The ubiquitous main function...
@@ -133,7 +132,7 @@ main (gint argc, gchar * argv[])
   gchar *config_folder;
   GList *profiles_list = NULL;
   GFile *file;
-  gchar *pixmapsdir;
+  gchar *pixmaps_dir;
   gchar *window_icon;
 
   /*
@@ -178,8 +177,10 @@ main (gint argc, gchar * argv[])
   /*
    * Show the application window with icon.
    */
-  window_icon =
-    gtranslator_utils_get_file_from_pixmapsdir ("gtranslator.png");
+  pixmaps_dir = gtranslator_dirs_get_pixmaps_dir ();
+  window_icon = g_build_filename (pixmaps_dir,
+  				  "gtranslator.png",
+  				  NULL);
   gtk_window_set_default_icon_from_file (window_icon, &error);
   g_free (window_icon);
   if (error)
@@ -189,14 +190,10 @@ main (gint argc, gchar * argv[])
       g_clear_error (&error);
     }
 
-  /*
-   * We set the default icon dir
-   */
-
-  pixmapsdir = gtranslator_utils_get_file_from_pixmapsdir (NULL);
+  /* We set the default icon dir */
   gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
-				     pixmapsdir);
-  g_free (pixmapsdir);
+                                     pixmaps_dir);
+  g_free (pixmaps_dir);
 
   /*
    * Init preferences manager
@@ -215,7 +212,7 @@ main (gint argc, gchar * argv[])
   /*
    * Load profiles list
    */
-  config_folder = gtranslator_utils_get_user_config_dir ();
+  config_folder = gtranslator_dirs_get_user_config_dir ();
   filename = g_build_filename (config_folder, "profiles.xml", NULL);
   file = g_file_new_for_path (filename);
 

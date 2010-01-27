@@ -27,6 +27,7 @@
 
 #include <string.h>
 
+#include "dirs.h"
 #include "prefs-manager.h"
 #include "utils.h"
 #include "view.h"
@@ -51,18 +52,18 @@
 						 	GtranslatorViewPrivate))
 
 G_DEFINE_TYPE (GtranslatorView, gtranslator_view, GTK_TYPE_SOURCE_VIEW)
-     struct _GtranslatorViewPrivate
-     {
-       GtkSourceBuffer *buffer;
 
-       guint search_flags;
-       gchar *search_text;
+struct _GtranslatorViewPrivate
+{
+  GtkSourceBuffer *buffer;
+
+  guint search_flags;
+  gchar *search_text;
 
 #ifdef HAVE_GTKSPELL
-       GtkSpell *spell;
+  GtkSpell *spell;
 #endif
-     };
-
+};
 
 #ifdef HAVE_GTKSPELL
      static void gtranslator_attach_gtkspell (GtranslatorView * view)
@@ -97,7 +98,7 @@ gtranslator_view_init (GtranslatorView * view)
   gchar **langs;
   const gchar *const *temp;
   gint i;
-  gchar *pkgdatadir;
+  gchar *datadir;
 
   view->priv = GTR_VIEW_GET_PRIVATE (view);
 
@@ -110,12 +111,11 @@ gtranslator_view_init (GtranslatorView * view)
        temp != NULL && *temp != NULL; ++temp)
     g_ptr_array_add (dirs, g_strdup (*temp));
 
-  pkgdatadir = gtranslator_utils_get_file_from_pkgdatadir (NULL);
+  datadir = gtranslator_dirs_get_gtranslator_data_dir ();
   /* FIXME: Where pkgdatadir must be free */
-  g_ptr_array_add (dirs, pkgdatadir);
+  g_ptr_array_add (dirs, datadir);
   g_ptr_array_add (dirs, NULL);
   langs = (gchar **) g_ptr_array_free (dirs, FALSE);
-
 
   gtk_source_language_manager_set_search_path (lm, langs);
   lang = gtk_source_language_manager_get_language (lm, "gtranslator");

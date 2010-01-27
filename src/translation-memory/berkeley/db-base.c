@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include "dirs.h"
 #include "utils.h"
 #include "db-base.h"
 #include DB_HEADER
@@ -38,18 +39,20 @@
 						 GtranslatorDbBasePrivate))
 
 G_DEFINE_TYPE (GtranslatorDbBase, gtranslator_db_base, G_TYPE_OBJECT)
-     struct _GtranslatorDbBasePrivate
-     {
-       DB *db;
-       gchar *path;
-     };
 
-     static gchar *get_db_base_directory ()
+struct _GtranslatorDbBasePrivate
+{
+  DB *db;
+  gchar *path;
+};
+
+static gchar *
+get_db_base_directory ()
 {
   gchar *config;
   gchar *db_dir;
 
-  config = gtranslator_utils_get_user_config_dir ();
+  config = gtranslator_dirs_get_user_config_dir ();
 
   db_dir = g_build_filename (config, "berkeley", NULL);
   g_free (config);

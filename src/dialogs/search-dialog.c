@@ -37,6 +37,7 @@
 #include <glib/gi18n.h>
 #include <gdk/gdkkeysyms.h>
 
+#include "dirs.h"
 #include "search-dialog.h"
 #include "history-entry.h"
 #include "utils.h"
@@ -82,17 +83,17 @@ struct _GtranslatorSearchDialogPrivate
 
 G_DEFINE_TYPE (GtranslatorSearchDialog, gtranslator_search_dialog,
 	       GTK_TYPE_DIALOG)
-     enum
-     {
-       PROP_0,
-       PROP_SHOW_REPLACE
-     };
+enum
+{
+  PROP_0,
+  PROP_SHOW_REPLACE
+};
 
-     static void
-       gtranslator_search_dialog_set_property (GObject * object,
-					       guint prop_id,
-					       const GValue * value,
-					       GParamSpec * pspec)
+static void
+gtranslator_search_dialog_set_property (GObject * object,
+					guint prop_id,
+					const GValue * value,
+					GParamSpec * pspec)
 {
   GtranslatorSearchDialog *dlg = GTR_SEARCH_DIALOG (object);
 
@@ -365,11 +366,11 @@ gtranslator_search_dialog_init (GtranslatorSearchDialog * dlg)
   GtkWidget *content;
   GtkWidget *error_widget;
   gboolean ret;
+  gchar *path;
   gchar *root_objects[] = {
     "search_dialog_content",
     NULL
   };
-  gchar *path;
 
   dlg->priv = GTR_SEARCH_DIALOG_GET_PRIVATE (dlg);
 
@@ -387,7 +388,7 @@ gtranslator_search_dialog_init (GtranslatorSearchDialog * dlg)
 				  (GTK_DIALOG (dlg)->action_area), 5);
   gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);
 
-  path = gtranslator_utils_get_file_from_pkgdatadir ("search-dialog.ui");
+  path = gtranslator_dirs_get_ui_file ("search-dialog.ui");
   ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,

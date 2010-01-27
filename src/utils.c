@@ -788,8 +788,8 @@ gtranslator_utils_help_display (GtkWindow * parent,
       if (strchr (lang, '.'))
 	continue;
 
-      path = gtranslator_utils_get_datadir ();
-      uri = g_build_filename (path, "/gnome/help/", doc_id,
+      path = gtranslator_dirs_get_gtranslator_data_dir ();
+      uri = g_build_filename (path, "gnome", "help", doc_id,
 			      lang, file_name, NULL);
       g_free (path);
 
@@ -833,19 +833,6 @@ gtranslator_utils_help_display (GtkWindow * parent,
       return;
     }
   g_free (command);
-}
-
-/**
- * gtranslator_utils_get_user_config_dir:
- * 
- * Returns the default config dir for gtranslator.
- * 
- * Returns: the config dir for gtranslator.
- */
-gchar *
-gtranslator_utils_get_user_config_dir (void)
-{
-  return g_build_filename (g_get_user_config_dir (), "gtranslator", NULL);
 }
 
 gchar *
@@ -1015,108 +1002,4 @@ gtranslator_utils_escape_underscores (const gchar * text, gssize length)
     }
 
   return g_string_free (str, FALSE);
-}
-
-/**
- * gtranslator_utils_get_file_from_pixmapsdir:
- * @filename: name of the file
- *
- * Returns the absolute path of a file that is located on the folder that contains 
- * the pixmaps. If filename is NULL returns the path to the folder PIXMAPSDIR
- */
-gchar *
-gtranslator_utils_get_file_from_pixmapsdir (const gchar * filename)
-{
-  gchar *path;
-
-#ifndef G_OS_WIN32
-  path = g_build_filename (WINDOW_ICON, NULL, NULL);
-#else
-  gchar *win32_dir;
-
-  win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
-  path = g_build_filename (win32_dir, "share", "pixmaps", filename, NULL);
-  g_free (win32_dir);
-#endif
-
-  return path;
-}
-
-
-/**
- * gtranslator_utils_get_file_from_pkgdatadir:
- * @filename: name of the file
- *
- * Returns the absolute path of a file that is located on the folder that contains 
- * the data of the package. If filename is NULL returns the path to the folder
- * that contains the data of the package.
- */
-gchar *
-gtranslator_utils_get_file_from_pkgdatadir (const gchar * filename)
-{
-  gchar *path;
-
-#ifndef G_OS_WIN32
-  path = g_build_filename (PKGDATADIR, filename, NULL);
-#else
-  gchar *win32_dir;
-
-  win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
-  path = g_build_filename (win32_dir, "share", "gtranslator", filename, NULL);
-  g_free (win32_dir);
-#endif
-
-  return path;
-}
-
-
-/**
- * gtranslator_utils_get_datadir:
- *
- * Returns the path to the DATADIR folder
- */
-
-gchar *
-gtranslator_utils_get_datadir (void)
-{
-  gchar *path;
-
-#ifndef G_OS_WIN32
-  path = g_build_filename (DATADIR, NULL);
-#else
-  gchar *win32_dir;
-
-  win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
-
-  path = g_build_filename (win32_dir, "share", NULL);
-
-  g_free (win32_dir);
-#endif
-
-  return path;
-}
-
-/**
- * gtranslator_utils_get_win32_plugindir:
- *
- * Returns the path to the GTR_PLUGINDIR folder on windows
- */
-gchar *
-gtranslator_utils_get_win32_plugindir (void)
-{
-  gchar *path;
-
-#ifndef G_OS_WIN32
-  path = NULL;
-#else
-  gchar *win32_dir;
-
-  win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
-
-  path = g_build_filename (win32_dir, "lib", "gtranslator", "plugins", NULL);
-
-  g_free (win32_dir);
-#endif
-
-  return path;
 }

@@ -4,7 +4,7 @@
 ## the dirs where all the DATA should go ..
 ##
 Applicationdir = $(datadir)/applications
-Applicationicondir = $(datadir)/pixmaps
+Applicationicondir = $(datadir)/gtranslator/pixmaps
 
 ##
 ## and the DATA

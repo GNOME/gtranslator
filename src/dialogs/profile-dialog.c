@@ -24,6 +24,7 @@
 #endif
 
 #include "application.h"
+#include "dirs.h"
 #include "profile-dialog.h"
 #include "preferences-dialog.h"
 #include "profile.h"
@@ -44,29 +45,31 @@
 
 G_DEFINE_TYPE (GtranslatorProfileDialog, gtranslator_profile_dialog,
 	       GTK_TYPE_DIALOG)
-     struct _GtranslatorProfileDialogPrivate
-     {
-       GtkWidget *main_box;
 
-       GtkWidget *profile_name_entry;
+struct _GtranslatorProfileDialogPrivate
+{
+  GtkWidget *main_box;
 
-       GtkWidget *author_name_entry;
-       GtkWidget *author_email_entry;
+  GtkWidget *profile_name_entry;
 
-       GtkWidget *language_name_entry;
-       GtkWidget *language_code_entry;
-       GtkWidget *charset_entry;
-       GtkWidget *encoding_entry;
-       GtkWidget *language_email_entry;
-       GtkWidget *plurals_forms_entry;
+  GtkWidget *author_name_entry;
+  GtkWidget *author_email_entry;
 
-       GtranslatorPreferencesDialog *prefs_dlg;
+  GtkWidget *language_name_entry;
+  GtkWidget *language_code_entry;
+  GtkWidget *charset_entry;
+  GtkWidget *encoding_entry;
+  GtkWidget *language_email_entry;
+  GtkWidget *plurals_forms_entry;
 
-       GtranslatorProfile *new_profile;
-       GtranslatorProfile *old_profile;
-     };
+  GtranslatorPreferencesDialog *prefs_dlg;
 
-     static void gtranslator_profile_dialog_finalize (GObject * object)
+  GtranslatorProfile *new_profile;
+  GtranslatorProfile *old_profile;
+};
+
+static void
+gtranslator_profile_dialog_finalize (GObject * object)
 {
   G_OBJECT_CLASS (gtranslator_profile_dialog_parent_class)->finalize (object);
 }
@@ -364,11 +367,11 @@ gtranslator_profile_dialog_init (GtranslatorProfileDialog * dlg)
 {
   gboolean ret;
   GtkWidget *error_widget;
+  gchar *path;
   gchar *root_objects[] = {
     "profiles_dialog",
     NULL
   };
-  gchar *path;
 
   dlg->priv = GTR_PROFILE_DIALOG_GET_PRIVATE (dlg);
 
@@ -380,7 +383,7 @@ gtranslator_profile_dialog_init (GtranslatorProfileDialog * dlg)
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
   gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);
 
-  path = gtranslator_utils_get_file_from_pkgdatadir ("profile-dialog.ui");
+  path = gtranslator_dirs_get_ui_file ("profile-dialog.ui");
   ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,

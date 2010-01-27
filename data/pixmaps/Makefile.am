@@ -1,4 +1,4 @@
-icondir = $(datadir)/pixmaps/gtranslator
+icondir = $(datadir)/gtranslator/pixmaps
 icon_DATA =	\
 	gtranslator-plugin.png \
 	gtranslator-fuzzy-next.png \

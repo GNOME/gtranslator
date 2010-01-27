@@ -26,6 +26,7 @@
 
 #include "actions.h"
 #include "application.h"
+#include "dirs.h"
 #include "header.h"
 #include "msg.h"
 #include "notebook.h"
@@ -378,9 +379,12 @@ gtranslator_window_layout_load (GtranslatorWindow * window,
 				       layout_filename))
     {
       gchar *path;
+      gchar *datadir;
 
+      datadir = gtranslator_dirs_get_gtranslator_data_dir ();
+      path = g_build_filename (datadir, "layout.xml", NULL);
+      g_free (datadir);
 
-      path = gtranslator_utils_get_file_from_pkgdatadir ("layout.xml");
       //DEBUG_PRINT ("Layout = %s", path);
       if (!gdl_dock_layout_load_from_file (window->priv->layout_manager,
 					   path))
@@ -1487,6 +1491,7 @@ gtranslator_window_draw (GtranslatorWindow * window)
   GtkWidget *hbox_dock;
   GtkWidget *tm_widget;
   GtkActionGroup *action_group;
+  gchar *datadir;
   gchar *path;
 
   GtranslatorWindowPrivate *priv = window->priv;
@@ -1535,7 +1540,10 @@ gtranslator_window_draw (GtranslatorWindow * window)
   gtk_ui_manager_insert_action_group (priv->ui_manager, action_group, 0);
   g_object_unref (action_group);
 
-  path = gtranslator_utils_get_file_from_pkgdatadir ("gtranslator-ui.xml");
+  datadir = gtranslator_dirs_get_gtranslator_data_dir ();
+  path = g_build_filename (datadir, "gtranslator-ui.xml", NULL);
+  g_free (datadir);
+
   if (!gtk_ui_manager_add_ui_from_file (priv->ui_manager, path, &error))
     {
       g_warning ("building menus failed: %s", error->message);
@@ -1713,12 +1721,12 @@ gtranslator_window_init (GtranslatorWindow * window)
   /*
    * Loading dock layout
    */
-  config_folder = gtranslator_utils_get_user_config_dir ();
+  config_folder = gtranslator_dirs_get_user_config_dir ();
   filename = g_build_filename (config_folder, "gtranslator-layout.xml", NULL);
+  g_free (config_folder);
 
   gtranslator_window_layout_load (window, filename, NULL);
   g_free (filename);
-  g_free (config_folder);
 }
 
 static void
@@ -1760,12 +1768,12 @@ save_panes_state (GtranslatorWindow * window)
   if (gtranslator_prefs_manager_window_state_can_set ())
     gtranslator_prefs_manager_set_window_state (window->priv->window_state);
 
-  config_folder = gtranslator_utils_get_user_config_dir ();
+  config_folder = gtranslator_dirs_get_user_config_dir ();
   filename = g_build_filename (config_folder, "gtranslator-layout.xml", NULL);
-  gtranslator_window_layout_save (window, filename, NULL);
-
-  g_free (filename);
   g_free (config_folder);
+
+  gtranslator_window_layout_save (window, filename, NULL);
+  g_free (filename);
 }
 
 static void

@@ -20,6 +20,7 @@
 #include <config.h>
 #endif
 
+#include "dirs.h"
 #include "jump-dialog.h"
 #include "tab.h"
 #include "utils.h"
@@ -39,15 +40,17 @@
 
 G_DEFINE_TYPE (GtranslatorJumpDialog, gtranslator_jump_dialog,
 	       GTK_TYPE_DIALOG)
-     struct _GtranslatorJumpDialogPrivate
-     {
-       GtkWidget *main_box;
-       GtkWidget *jump;
 
-       GtranslatorWindow *window;
-     };
+struct _GtranslatorJumpDialogPrivate
+{
+  GtkWidget *main_box;
+  GtkWidget *jump;
 
-     static void dialog_response_handler (GtkDialog * dlg, gint res_id)
+  GtranslatorWindow *window;
+};
+
+static void
+dialog_response_handler (GtkDialog * dlg, gint res_id)
 {
   GtranslatorJumpDialog *dialog = GTR_JUMP_DIALOG (dlg);
   GtranslatorTab *tab;
@@ -74,12 +77,12 @@ gtranslator_jump_dialog_init (GtranslatorJumpDialog * dlg)
 {
   gboolean ret;
   GtkWidget *error_widget;
+  gchar *path;
   gchar *root_objects[] = {
     "adjustment1",
     "main_box",
     NULL
   };
-  gchar *path;
 
   dlg->priv = GTR_JUMP_DIALOG_GET_PRIVATE (dlg);
 
@@ -107,7 +110,7 @@ gtranslator_jump_dialog_init (GtranslatorJumpDialog * dlg)
 		    "response", G_CALLBACK (dialog_response_handler), NULL);
 
   /*Glade */
-  path = gtranslator_utils_get_file_from_pkgdatadir ("jump-dialog.ui");
+  path = gtranslator_dirs_get_ui_file ("jump-dialog.ui");
   ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,
@@ -128,8 +131,6 @@ gtranslator_jump_dialog_init (GtranslatorJumpDialog * dlg)
 		      dlg->priv->main_box, TRUE, TRUE, 0);
 
   gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->main_box), 5);
-
-
 }
 
 static void

@@ -26,6 +26,7 @@
 #endif
 
 #include "application.h"
+#include "dirs.h"
 #include "preferences-dialog.h"
 #include "prefs-manager.h"
 #include "profile.h"
@@ -437,9 +438,12 @@ active_toggled_cb (GtkCellRendererToggle * cell_renderer,
   GFile *file;
 
 
-  config_folder = gtranslator_utils_get_user_config_dir ();
+  config_folder = gtranslator_dirs_get_user_config_dir ();
   filename = g_build_filename (config_folder, "profiles.xml", NULL);
+  g_free (config_folder);
+
   file = g_file_new_for_path (filename);
+  g_free (filename);
 
   path = gtk_tree_path_new_from_string (path_str);
 
@@ -473,6 +477,7 @@ active_toggled_cb (GtkCellRendererToggle * cell_renderer,
 	    }
 	}
     }
+
   gtk_list_store_clear (GTK_LIST_STORE (model));
   gtranslator_preferences_fill_profile_treeview (dlg, model);
   gtk_tree_path_free (path);
@@ -1195,7 +1200,7 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog * dlg)
 
   /*Glade */
 
-  path = gtranslator_utils_get_file_from_pkgdatadir ("preferences-dialog.ui");
+  path = gtranslator_dirs_get_ui_file ("preferences-dialog.ui");
   ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,

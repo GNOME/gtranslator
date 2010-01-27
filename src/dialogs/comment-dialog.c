@@ -20,6 +20,7 @@
 #include <config.h>
 #endif
 
+#include "dirs.h"
 #include "po.h"
 #include "comment-dialog.h"
 #include "tab.h"
@@ -109,7 +110,7 @@ gtranslator_comment_dialog_init (GtranslatorCommentDialog * dlg)
 		    "response", G_CALLBACK (dialog_response_handler), NULL);
 
   /*Glade */
-  path = gtranslator_utils_get_file_from_pkgdatadir ("comment-dialog.ui");
+  path = gtranslator_dirs_get_ui_file ("comment-dialog.ui");
   ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,

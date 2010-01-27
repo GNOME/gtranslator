@@ -33,8 +33,7 @@ libdialogs_la_SOURCES = \
 	jump-dialog.c \
 	jump-dialog.h
 
-uidir = $(pkgdatadir)
-
+uidir = $(pkgdatadir)/ui
 ui_DATA =  \
 		preferences-dialog.ui \
 		search-dialog.ui \

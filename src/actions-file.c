@@ -763,15 +763,15 @@ gtranslator_file_quit (GtkAction * action, GtranslatorWindow * window)
   GFile *file, *file_temp;
   gint r;
 
-  config_folder = gtranslator_utils_get_user_config_dir ();
+  config_folder = gtranslator_dirs_get_user_config_dir ();
   filename = g_build_filename (config_folder, "profiles.xml", NULL);
+  g_free (config_folder);
   filename_temp = g_build_filename (g_get_tmp_dir (), "profiles.xml", NULL);
 
   file = g_file_new_for_path (filename);
   file_temp = g_file_new_for_path (filename_temp);
 
   profiles_list = gtranslator_application_get_profiles (GTR_APP);
-
 
   if (profiles_list != NULL)
     {
@@ -797,7 +797,6 @@ gtranslator_file_quit (GtkAction * action, GtranslatorWindow * window)
 	}
     }
 
-  g_free (config_folder);
   g_object_unref (file_temp);
   g_object_unref (file);
 
