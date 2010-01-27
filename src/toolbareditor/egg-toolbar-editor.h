@@ -23,7 +23,9 @@
 
 #include "egg-toolbars-model.h"
 
-G_BEGIN_DECLS typedef struct EggToolbarEditorClass EggToolbarEditorClass;
+G_BEGIN_DECLS
+
+typedef struct EggToolbarEditorClass EggToolbarEditorClass;
 
 #define EGG_TYPE_TOOLBAR_EDITOR             (egg_toolbar_editor_get_type ())
 #define EGG_TOOLBAR_EDITOR(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), EGG_TYPE_TOOLBAR_EDITOR, EggToolbarEditor))
@@ -40,7 +42,7 @@ struct EggToolbarEditor
 {
   GtkVBox parent_object;
 
-  /*< private > */
+  /*< private >*/
   EggToolbarEditorPrivate *priv;
 };
 
@@ -50,11 +52,12 @@ struct EggToolbarEditorClass
 };
 
 
-GType egg_toolbar_editor_get_type (void);
-GtkWidget *egg_toolbar_editor_new (GtkUIManager * manager,
-				   EggToolbarsModel * model);
-void egg_toolbar_editor_set_model (EggToolbarEditor * t,
-				   EggToolbarsModel * model);
+GType             egg_toolbar_editor_get_type     (void);
+GtkWidget        *egg_toolbar_editor_new          (GtkUIManager *manager,
+						   EggToolbarsModel *model);
+void		  egg_toolbar_editor_set_model	  (EggToolbarEditor *t,
+						   EggToolbarsModel *model);
 
 G_END_DECLS
+
 #endif
