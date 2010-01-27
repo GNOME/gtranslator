@@ -1,12 +1,12 @@
 /*
  * (C) 2007 Pablo Sanxiao <psanxiao@gmail.com>
  *     2008 Igalia
- *  		
+ *
  * gtranslator is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or   
  * (at your option) any later version.
- *    
+ *
  * gtranslator is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
@@ -18,6 +18,7 @@
  *
  * Authors:
  *   Pablo Sanxiao <psanxiao@gmail.com>
+ *   Ignacio Casal Quinteiro <icq@gnome.org>
  */
 
 #ifndef __HEADER_H__
@@ -25,6 +26,8 @@
 
 #include <glib.h>
 #include <glib-object.h>
+
+#include "msg.h"
 
 /*
  * Utility Macros
@@ -47,7 +50,8 @@ typedef struct _GtranslatorHeader GtranslatorHeader;
 
 struct _GtranslatorHeader
 {
-  GObject parent_instance;
+  GtranslatorMsg parent_instance;
+
   /*< private > */
   GtranslatorHeaderPrivate *priv;
 };
@@ -59,111 +63,70 @@ typedef struct _GtranslatorHeaderClass GtranslatorHeaderClass;
 
 struct _GtranslatorHeaderClass
 {
-  GObjectClass parent_class;
+  GtranslatorMsgClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType
-gtranslator_header_get_type (void)
-  G_GNUC_CONST;
+GType                 gtranslator_header_get_type            (void)G_GNUC_CONST;
 
-     GType gtranslator_header_register_type (GTypeModule * module);
+GType                 gtranslator_header_register_type       (GTypeModule * module);
 
-GtranslatorHeader * gtranslator_header_new (void);
+GtranslatorHeader    *gtranslator_header_new                 (po_message_iterator_t iter,
+                                                              po_message_t          message);
 
-     const gchar *
-     gtranslator_header_get_comment (GtranslatorHeader * header);
-     void
-     gtranslator_header_set_comment (GtranslatorHeader * header,
-				     const gchar * data);
+const gchar          *gtranslator_header_get_comments        (GtranslatorHeader *header);
+void                  gtranslator_header_set_comments        (GtranslatorHeader *header,
+                                                              const gchar *comments);
 
-     const gchar *
-     gtranslator_header_get_prj_id_version (GtranslatorHeader * header);
-     void
-     gtranslator_header_set_prj_id_version (GtranslatorHeader * header,
-					    const gchar * data);
+gchar                *gtranslator_header_get_prj_id_version  (GtranslatorHeader *header);
+void                  gtranslator_header_set_prj_id_version  (GtranslatorHeader *header,
+                                                              const gchar *prj_id_version);
 
-     const gchar *
-     gtranslator_header_get_rmbt (GtranslatorHeader * header);
-     void
-     gtranslator_header_set_rmbt (GtranslatorHeader * header,
-				  const gchar * data);
+gchar                *gtranslator_header_get_rmbt            (GtranslatorHeader *header);
+void                  gtranslator_header_set_rmbt            (GtranslatorHeader *header,
+                                                              const gchar *rmbt);
 
-     const gchar *
-     gtranslator_header_get_pot_date (GtranslatorHeader * header);
-     void
-     gtranslator_header_set_pot_date (GtranslatorHeader * header,
-				      const gchar * data);
+gchar                *gtranslator_header_get_pot_date        (GtranslatorHeader *header);
+void                  gtranslator_header_set_pot_date        (GtranslatorHeader *header,
+                                                              const gchar *pot_date);
 
-     const gchar *
-     gtranslator_header_get_po_date (GtranslatorHeader * header);
-     void
-     gtranslator_header_set_po_date (GtranslatorHeader * header,
-				     const gchar * data);
+gchar                *gtranslator_header_get_po_date         (GtranslatorHeader *header);
+void                  gtranslator_header_set_po_date         (GtranslatorHeader *header,
+                                                              const gchar *po_date);
 
-     const gchar *
-     gtranslator_header_get_translator (GtranslatorHeader * header);
-     void
-     gtranslator_header_set_translator (GtranslatorHeader * header,
-					const gchar * data);
+gchar                *gtranslator_header_get_translator      (GtranslatorHeader *header);
+gchar                *gtranslator_header_get_tr_email        (GtranslatorHeader *header);
+void                  gtranslator_header_set_translator      (GtranslatorHeader *header,
+                                                              const gchar *name,
+                                                              const gchar *email);
 
-     const gchar *
-     gtranslator_header_get_tr_email (GtranslatorHeader * header);
-     void
-     gtranslator_header_set_tr_email (GtranslatorHeader * header,
-				      const gchar * data);
+const gchar          *gtranslator_header_get_prev_translator (GtranslatorHeader *header);
+void                  gtranslator_header_set_prev_translator (GtranslatorHeader *header,
+                                                              const gchar *prev_translator);
 
-     const gchar *
-     gtranslator_header_get_prev_translator (GtranslatorHeader * header);
-     void
-     gtranslator_header_set_prev_translator (GtranslatorHeader * header,
-					     const gchar * data);
+gchar                *gtranslator_header_get_language        (GtranslatorHeader *header);
+gchar                *gtranslator_header_get_lg_email        (GtranslatorHeader *header);
+void                  gtranslator_header_set_language        (GtranslatorHeader *header,
+                                                              const gchar *language,
+                                                              const gchar *email);
 
-     const gchar *
-     gtranslator_header_get_language (GtranslatorHeader * header);
-     void
-     gtranslator_header_set_language (GtranslatorHeader * header,
-				      const gchar * data);
+gchar                *gtranslator_header_get_mime_version    (GtranslatorHeader *header);
+void                  gtranslator_header_set_mime_version    (GtranslatorHeader *header,
+                                                              const gchar *mime_version);
 
-     const gchar *
-     gtranslator_header_get_lg_email (GtranslatorHeader * header);
-     void
-     gtranslator_header_set_lg_email (GtranslatorHeader * header,
-				      const gchar * data);
+gchar                *gtranslator_header_get_charset         (GtranslatorHeader *header);
+void                  gtranslator_header_set_charset         (GtranslatorHeader *header,
+                                                              const gchar *charset);
 
-     const gchar *
-     gtranslator_header_get_mime_version (GtranslatorHeader * header);
-     void
-     gtranslator_header_set_mime_version (GtranslatorHeader * header,
-					  const gchar * data);
+gchar                *gtranslator_header_get_encoding        (GtranslatorHeader *header);
+void                  gtranslator_header_set_encoding        (GtranslatorHeader *header,
+                                                              const gchar *encoding);
 
-     const gchar *
-     gtranslator_header_get_charset (GtranslatorHeader * header);
-     void
-     gtranslator_header_set_charset (GtranslatorHeader * header,
-				     const gchar * data);
-
-     const gchar *
-     gtranslator_header_get_encoding (GtranslatorHeader * header);
-     void
-     gtranslator_header_set_encoding (GtranslatorHeader * header,
-				      const gchar * data);
-
-     const gchar *
-     gtranslator_header_get_plural_forms (GtranslatorHeader * header);
-     void
-     gtranslator_header_set_plural_forms (GtranslatorHeader * header,
-					  const gchar * plural_forms);
-
-     gboolean
-     gtranslator_header_get_header_changed (GtranslatorHeader * header);
-     void
-     gtranslator_header_set_header_changed (GtranslatorHeader * header,
-					    gboolean change);
-
-     gint
-     gtranslator_header_get_nplurals (GtranslatorHeader * header);
+gchar                *gtranslator_header_get_plural_forms    (GtranslatorHeader *header);
+void                  gtranslator_header_set_plural_forms    (GtranslatorHeader * header,
+                                                              const gchar * plural_forms);
+gint                  gtranslator_header_get_nplurals        (GtranslatorHeader * header);
 
 #endif /* __HEADER_H__ */
