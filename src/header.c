@@ -29,6 +29,7 @@
 
 #include <glib.h>
 #include <glib-object.h>
+#include <string.h>
 
 #define GTR_HEADER_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
                                          (object), \
