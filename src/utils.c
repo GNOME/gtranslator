@@ -29,6 +29,7 @@
  */
 
 #include "utils.h"
+#include "dirs.h"
 
 #include <string.h>
 

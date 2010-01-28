@@ -174,7 +174,7 @@ showed_message_cb (GtranslatorTab * tab,
       tm_ui->priv->tm_list[i - 1] = g_strdup (match->match);
       level_column =
 	gtk_tree_view_get_column (GTK_TREE_VIEW (tm_ui->priv->tree_view), 0);
-      renderers_list = gtk_tree_view_column_get_cell_renderers (level_column);
+      renderers_list = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (level_column));
 
       g_object_set (renderers_list->data,
 		    "accel-mods", GDK_CONTROL_MASK, NULL);
@@ -256,7 +256,7 @@ tree_view_size_cb (GtkWidget * widget,
   treeview = GTK_TREE_VIEW (user_data);
 
   column = gtk_tree_view_get_column (treeview, 2);
-  renderers_list = gtk_tree_view_column_get_cell_renderers (column);
+  renderers_list = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (column));
 
   size = gtk_tree_view_column_get_width (column);
 
