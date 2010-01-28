@@ -26,6 +26,7 @@
 #include "header.h"
 #include "prefs-manager.h"
 #include "profile.h"
+#include "utils.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -40,7 +41,6 @@ G_DEFINE_TYPE (GtranslatorHeader, gtranslator_header, GTR_TYPE_MSG)
 
 struct _GtranslatorHeaderPrivate
 {
-  gchar *prev_translator;
   gint   nplurals;
 };
 
@@ -110,17 +110,12 @@ gtranslator_header_init (GtranslatorHeader * header)
 {
   header->priv = GTR_HEADER_GET_PRIVATE (header);
 
-  header->priv->prev_translator = NULL;
   header->priv->nplurals = -1;
 }
 
 static void
 gtranslator_header_finalize (GObject * object)
 {
-  GtranslatorHeader *header = GTR_HEADER (object);
-
-  g_free (header->priv->prev_translator);
-
   G_OBJECT_CLASS (gtranslator_header_parent_class)->finalize (object);
 }
 
@@ -318,25 +313,6 @@ gtranslator_header_set_translator (GtranslatorHeader *header,
   g_free (translator);
 }
 
-const gchar *
-gtranslator_header_get_prev_translator (GtranslatorHeader *header)
-{
-  g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
-
-  return header->priv->prev_translator;
-}
-
-void
-gtranslator_header_set_prev_translator (GtranslatorHeader *header,
-                                        const gchar *prev_translator)
-{
-  g_return_if_fail (GTR_IS_HEADER (header));
-  g_return_if_fail (prev_translator != NULL);
-
-  g_free (header->priv->prev_translator);
-  header->priv->prev_translator = g_strdup (prev_translator);
-}
-
 gchar *
 gtranslator_header_get_language (GtranslatorHeader *header)
 {
@@ -445,7 +421,7 @@ gtranslator_header_set_charset (GtranslatorHeader *header,
 
   g_return_if_fail (GTR_IS_HEADER (header));
 
-  set = g_strconcat(" text/plain;", " charset=",
+  set = g_strconcat("text/plain;", " charset=",
                     charset, NULL);
 
   gtranslator_header_set_field (header, "Content-Type",
@@ -528,4 +504,162 @@ gtranslator_header_get_nplurals (GtranslatorHeader * header)
     return header->priv->nplurals;
   else
     return 1;
+}
+
+static void
+set_profile_values (GtranslatorHeader *header)
+{
+  if (gtranslator_prefs_manager_get_use_profile_values ())
+    {
+      GtranslatorProfile *active_profile;
+
+      active_profile = gtranslator_application_get_active_profile (GTR_APP);
+
+      gtranslator_header_set_translator (header, gtranslator_profile_get_author_name (active_profile),
+                                         gtranslator_profile_get_author_email (active_profile));
+      gtranslator_header_set_language (header, gtranslator_profile_get_language_name (active_profile),
+                                       gtranslator_profile_get_group_email (active_profile));
+      gtranslator_header_set_charset (header, gtranslator_profile_get_charset (active_profile));
+      gtranslator_header_set_encoding (header, gtranslator_profile_get_encoding (active_profile));
+      gtranslator_header_set_plural_forms (header, gtranslator_profile_get_plurals (active_profile));
+    }
+}
+
+static void
+update_po_date (GtranslatorHeader *header)
+{
+  gchar *current_date;
+  gchar *current_time;
+  gchar *new_date;
+
+  current_date = gtranslator_utils_get_current_date ();
+  current_time = gtranslator_utils_get_current_time ();
+
+  new_date = g_strconcat (current_date, " ", current_time, NULL);
+
+  g_free (current_date);
+  g_free (current_time);
+
+  gtranslator_header_set_po_date (header, new_date);
+
+  g_free (new_date);
+}
+
+static void
+update_comments (GtranslatorHeader *header,
+                 const gchar       *comments)
+{
+  GString *new_comments;
+  GString *years;
+  gchar **comment_lines;
+  gchar *translator;
+  gchar *email;
+  gchar *current_year;
+  gint i;
+
+  current_year = gtranslator_utils_get_current_year ();
+
+  /* Save the previous translator to update the header's comment */
+  if (gtranslator_prefs_manager_get_use_profile_values ())
+    {
+      GtranslatorProfile *active_profile;
+
+      active_profile = gtranslator_application_get_active_profile (GTR_APP);
+
+      translator = g_strdup (gtranslator_profile_get_author_name (active_profile));
+      email = g_strdup (gtranslator_profile_get_author_email (active_profile));
+    }
+  else
+    {
+      translator = gtranslator_header_get_translator (header);
+      email = gtranslator_header_get_tr_email (header);
+    }
+
+  comment_lines = g_strsplit (comments, "\n", -1);
+  new_comments = g_string_new ("");
+  years = g_string_new ("");
+
+  for (i = 0; comment_lines != NULL && comment_lines[i] != NULL; i++)
+    {
+      if (g_str_has_prefix (comment_lines[i], translator))
+        {
+          gchar **year_array;
+          gint j;
+
+          year_array = g_strsplit (comment_lines[i], ",", -1);
+
+          for (j = 1; year_array != NULL && year_array[j] != NULL; j++)
+            {
+              gchar *search;
+
+              if (g_str_has_suffix (year_array[j], "."))
+                {
+                  gint len;
+
+                  len = g_utf8_strlen (year_array[j], -1);
+                  search = g_strndup (year_array[j], len - 1);
+                }
+              else
+                search = g_strdup (year_array[j]);
+
+              if (g_strrstr (years->str, search) == NULL)
+                {
+                  years = g_string_append (years, search);
+                  years = g_string_append_c (years, ',');
+                }
+
+              g_free (search);
+            }
+
+          g_strfreev (year_array);
+        }
+      else
+        {
+          new_comments = g_string_append (new_comments, comment_lines[i]);
+          new_comments = g_string_append_c (new_comments, '\n');
+        }
+    }
+
+  g_strfreev (comment_lines);
+
+  g_string_append_printf (years, " %s.", current_year);
+
+  /* If the last line is a \n just remove it */
+  if (new_comments->str[new_comments->len - 1] == '\n')
+    new_comments = g_string_truncate (new_comments, new_comments->len - 1);
+
+  g_string_append_printf (new_comments, "%s <%s>,%s",
+                          translator, email, years->str);
+
+  g_string_free (years, TRUE);
+
+  gtranslator_header_set_comments (header, new_comments->str);
+
+  g_string_free (new_comments, TRUE);
+}
+
+/* FIXME: complete this */
+static void
+add_default_comments (GtranslatorHeader *header)
+{
+}
+
+void
+gtranslator_header_update_header (GtranslatorHeader *header)
+{
+  const gchar *comments;
+
+  /* If needed update the header with the profile values */
+  set_profile_values (header);
+
+  /* Update the po date */
+  update_po_date (header);
+
+  /* Update the header's comment */
+  comments = gtranslator_header_get_comments (header);
+
+  if (comments != NULL)
+    update_comments (header, comments);
+  else
+    add_default_comments (header);
 }
