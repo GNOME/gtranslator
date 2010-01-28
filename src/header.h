@@ -102,10 +102,6 @@ void                  gtranslator_header_set_translator      (GtranslatorHeader 
                                                               const gchar *name,
                                                               const gchar *email);
 
-const gchar          *gtranslator_header_get_prev_translator (GtranslatorHeader *header);
-void                  gtranslator_header_set_prev_translator (GtranslatorHeader *header,
-                                                              const gchar *prev_translator);
-
 gchar                *gtranslator_header_get_language        (GtranslatorHeader *header);
 gchar                *gtranslator_header_get_lg_email        (GtranslatorHeader *header);
 void                  gtranslator_header_set_language        (GtranslatorHeader *header,

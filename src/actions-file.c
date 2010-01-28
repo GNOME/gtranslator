@@ -33,6 +33,7 @@
 #include "actions.h"
 #include "application.h"
 #include "dialogs/close-confirmation-dialog.h"
+#include "dirs.h"
 #include "file-dialogs.h"
 #include "notebook.h"
 #include "po.h"
