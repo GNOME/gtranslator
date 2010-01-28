@@ -88,23 +88,19 @@ static void
 take_my_options_checkbutton_toggled (GtkToggleButton *button,
 				     GtranslatorHeaderDialog *dlg)
 {
+  gboolean active;
+
   g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->priv->take_my_options));
 
+  active = gtk_toggle_button_get_active (button);
 
-  gtranslator_prefs_manager_set_use_profile_values
-    (gtk_toggle_button_get_active (button));
+  gtranslator_prefs_manager_set_use_profile_values (active);
 
-  gtk_widget_set_sensitive (dlg->priv->translator,
-			    !gtk_toggle_button_get_active (button));
-  gtk_widget_set_sensitive (dlg->priv->tr_email,
-			    !gtk_toggle_button_get_active (button));
-  gtk_widget_set_sensitive (dlg->priv->language,
-			    !gtk_toggle_button_get_active (button));
-  gtk_widget_set_sensitive (dlg->priv->lg_email,
-			    !gtk_toggle_button_get_active (button));
-  gtk_widget_set_sensitive (dlg->priv->encoding,
-			    !gtk_toggle_button_get_active (button));
-
+  gtk_widget_set_sensitive (dlg->priv->translator, !active);
+  gtk_widget_set_sensitive (dlg->priv->tr_email, !active);
+  gtk_widget_set_sensitive (dlg->priv->language, !active);
+  gtk_widget_set_sensitive (dlg->priv->lg_email, !active);
+  gtk_widget_set_sensitive (dlg->priv->encoding, !active);
 }
 
 static void
@@ -243,7 +239,6 @@ gtranslator_header_dialog_fill_from_header (GtranslatorHeaderDialog * dlg)
 static void
 gtranslator_header_dialog_init (GtranslatorHeaderDialog * dlg)
 {
-  GtkTextBuffer *buffer;
   gboolean ret;
   GtkWidget *error_widget;
   gchar *path;
@@ -338,6 +333,17 @@ gtranslator_header_dialog_init (GtranslatorHeaderDialog * dlg)
       gtk_widget_set_sensitive (dlg->priv->lg_email, !active);
       gtk_widget_set_sensitive (dlg->priv->encoding, !active);
     }
+}
+
+static void
+set_default_values (GtranslatorHeaderDialog *dlg,
+		    GtranslatorWindow       *window)
+{
+  GtkTextBuffer *buffer;
+
+  /* Write header's values on Header dialog */
+  dlg->priv->header = gtranslator_window_get_header_from_active_tab (window);
+  gtranslator_header_dialog_fill_from_header (GTR_HEADER_DIALOG (dlg));
 
   /*Connect signals */
   g_signal_connect (dlg->priv->take_my_options, "toggled",
@@ -399,10 +405,7 @@ gtranslator_show_header_dialog (GtranslatorWindow * window)
                         G_CALLBACK (gtk_widget_destroyed),
                         &dlg);
 
-      dlg->priv->header = gtranslator_window_get_header_from_active_tab (window);
-
-      /* Write header's values on Header dialog */
-      gtranslator_header_dialog_fill_from_header (GTR_HEADER_DIALOG (dlg));
+      set_default_values (dlg, window);
 
       gtk_widget_show (GTK_WIDGET (dlg));
     }
