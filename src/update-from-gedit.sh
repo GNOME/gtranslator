@@ -1,17 +1,7 @@
 #!/bin/sh
 
-#I don't know why but you have to change #include <gtk/gtkdialog.h>
-#in message-area.h to #<gtk/gtk.h>
-
-SVN_URI=http://svn.gnome.org/svn/gedit/trunk/gedit
 FILES="gedit-history-entry.h \
        gedit-history-entry.c"
-
-echo "Obtaining latest version of the sources"
-for FILE in $FILES
-do
-  svn export $SVN_URI/$FILE
-done
 
 sed_it () {
 	sed \
