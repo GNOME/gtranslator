@@ -47,41 +47,43 @@
 
 G_DEFINE_TYPE (GtranslatorAssistant, gtranslator_assistant,
 	       GTK_TYPE_ASSISTANT)
-     struct _GtranslatorAssistantPrivate
-     {
-       /* Profiles Page 1 */
-       GtkWidget *profile_name;
-       GtkWidget *name;
-       GtkWidget *email;
-       GtkWidget *language;
-       GtkWidget *team_email;
 
-       /* Profiles Page 2 */
-       GtkWidget *lang_code;
-       GtkWidget *charset;
-       GtkWidget *trans_enc;
-       GtkWidget *plural_form;
+struct _GtranslatorAssistantPrivate
+{
+  /* Profiles Page 1 */
+  GtkWidget *profile_name;
+  GtkWidget *name;
+  GtkWidget *email;
+  GtkWidget *language;
+  GtkWidget *team_email;
 
-       /* Database Page */
-       GtkWidget *path;
-       GtkWidget *search_button;
-       GtkWidget *po_name;
+  /* Profiles Page 2 */
+  GtkWidget *lang_code;
+  GtkWidget *charset;
+  GtkWidget *trans_enc;
+  GtkWidget *plural_form;
 
-       /* Confirmation Page */
-       GtkWidget *finish_box;
-       GtkWidget *confirm_label;
-       GtkWidget *add_db_progressbar;
-     };
+  /* Database Page */
+  GtkWidget *path;
+  GtkWidget *search_button;
+  GtkWidget *po_name;
 
-     typedef struct _IdleData
-     {
-       GSList *list;
-       GtkProgressBar *progress;
-       GtranslatorTranslationMemory *tm;
-       GtkWindow *parent;
-     } IdleData;
+  /* Confirmation Page */
+  GtkWidget *finish_box;
+  GtkWidget *confirm_label;
+  GtkWidget *add_db_progressbar;
+};
 
-     static gboolean add_to_database (gpointer data_pointer)
+typedef struct _IdleData
+{
+  GSList *list;
+  GtkProgressBar *progress;
+  GtranslatorTranslationMemory *tm;
+  GtkWindow *parent;
+} IdleData;
+
+static gboolean
+add_to_database (gpointer data_pointer)
 {
   IdleData *data = (IdleData *) data_pointer;
   static GSList *l = NULL;
@@ -136,8 +138,7 @@ G_DEFINE_TYPE (GtranslatorAssistant, gtranslator_assistant,
 				       GTK_BUTTONS_CLOSE, NULL);
 
       gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
-				     _
-				     ("<span weight=\"bold\" size=\"large\">Strings added to database</span>"));
+				     _("<span weight=\"bold\" size=\"large\">Strings added to database</span>"));
 
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
@@ -344,9 +345,8 @@ create_start_page (GtranslatorAssistant * as)
   gtk_container_set_border_width (GTK_CONTAINER (box), 12);
 
   label =
-    gtk_label_new (_
-		   ("This assistant will help you to create the main profile\n"
-		    "and generate your translation memory database."));
+    gtk_label_new (_("This assistant will help you to create the main profile\n"
+		   "and generate your translation memory database."));
   gtk_widget_show (label);
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
@@ -849,9 +849,7 @@ gtranslator_show_assistant (GtranslatorWindow * window)
       gtk_widget_show (GTK_WIDGET (assist));
     }
 
-  /*
-   * Make asssitant modal preventing using application without profile
-   */
+  /* Make asssitant modal preventing using application without profile */
   gtk_window_set_modal (GTK_WINDOW (assist), TRUE);
 
   if (GTK_WINDOW (window) !=
