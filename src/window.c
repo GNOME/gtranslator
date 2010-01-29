@@ -70,83 +70,81 @@ static void gtranslator_window_cmd_edit_toolbar (GtkAction * action,
 
 
 G_DEFINE_TYPE (GtranslatorWindow, gtranslator_window, GTK_TYPE_WINDOW)
-     struct _GtranslatorWindowPrivate
-     {
-       GtkWidget *main_box;
 
-       GtkWidget *menubar;
-       GtkWidget *view_menu;
-       GtkWidget *toolbar;
-       GtkActionGroup *always_sensitive_action_group;
-       GtkActionGroup *action_group;
-       GtkActionGroup *documents_list_action_group;
-       guint documents_list_menu_ui_id;
+struct _GtranslatorWindowPrivate
+{
+  GtkWidget *main_box;
 
-       GtkWidget *notebook;
-       GtranslatorTab *active_tab;
+  GtkWidget *menubar;
+  GtkWidget *view_menu;
+  GtkWidget *toolbar;
+  GtkActionGroup *always_sensitive_action_group;
+  GtkActionGroup *action_group;
+  GtkActionGroup *documents_list_action_group;
+  guint documents_list_menu_ui_id;
 
-       GtkWidget *dock;
-       GdlDockLayout *layout_manager;
-       GHashTable *widgets;
+  GtkWidget *notebook;
+  GtranslatorTab *active_tab;
 
-       GtkWidget *statusbar;
+  GtkWidget *dock;
+  GdlDockLayout *layout_manager;
+  GHashTable *widgets;
 
-       GtkUIManager *ui_manager;
-       GtkRecentManager *recent_manager;
-       GtkWidget *recent_menu;
+  GtkWidget *statusbar;
 
-       GtkWidget *tm_menu;
+  GtkUIManager *ui_manager;
+  GtkRecentManager *recent_manager;
+  GtkWidget *recent_menu;
 
-       gint width;
-       gint height;
-       GdkWindowState window_state;
+  GtkWidget *tm_menu;
 
-       gboolean destroy_has_run:1;
-     };
+  gint width;
+  gint height;
+  GdkWindowState window_state;
 
-     enum
-     {
-       TARGET_URI_LIST = 100
-     };
+  gboolean destroy_has_run:1;
+};
 
-     static const GtkActionEntry always_sensitive_entries[] = {
+enum
+{
+  TARGET_URI_LIST = 100
+};
 
-       {"File", NULL, N_("_File")},
-       {"Edit", NULL, N_("_Edit")},
-       {"View", NULL, N_("_View")},
-       //{ "Bookmarks", NULL, N_("_Bookmarks") },
-       //{ "Actions", NULL, N_("_Actions") },
-       {"Search", NULL, N_("_Search")},
-       {"Go", NULL, N_("_Go")},
-       {"Documents", NULL, N_("_Documents")},
-       {"Help", NULL, N_("_Help")},
+static const GtkActionEntry always_sensitive_entries[] = {
 
-       /* File menu */
-       {"FileOpen", GTK_STOCK_OPEN, NULL, "<control>O",
-	N_("Open a PO file"),
-	G_CALLBACK (gtranslator_open_file_dialog)},
-       {"FileRecentFiles", NULL, N_("_Recent Files"), NULL,
-	NULL, NULL},
-       {"FileQuitWindow", GTK_STOCK_QUIT, NULL, "<control>Q",
-	N_("Quit the program"),
-	G_CALLBACK (gtranslator_file_quit)},
+  {"File", NULL, N_("_File")},
+  {"Edit", NULL, N_("_Edit")},
+  {"View", NULL, N_("_View")},
+  {"Search", NULL, N_("_Search")},
+  {"Go", NULL, N_("_Go")},
+  {"Documents", NULL, N_("_Documents")},
+  {"Help", NULL, N_("_Help")},
 
-       /* Edit menu */
-       {"EditToolbar", NULL, N_("T_oolbar"), NULL, NULL,
-	G_CALLBACK (gtranslator_window_cmd_edit_toolbar)},
-       {"EditPreferences", GTK_STOCK_PREFERENCES, NULL, NULL,
-	N_("Edit gtranslator preferences"),
-	G_CALLBACK (gtranslator_actions_edit_preferences)},
-       {"EditHeader", GTK_STOCK_PROPERTIES, N_("_Header..."), NULL, NULL,
-	G_CALLBACK (gtranslator_actions_edit_header)},
+  /* File menu */
+  {"FileOpen", GTK_STOCK_OPEN, NULL, "<control>O",
+   N_("Open a PO file"),
+   G_CALLBACK (gtranslator_open_file_dialog)},
+  {"FileRecentFiles", NULL, N_("_Recent Files"), NULL,
+   NULL, NULL},
+  {"FileQuitWindow", GTK_STOCK_QUIT, NULL, "<control>Q",
+   N_("Quit the program"),
+   G_CALLBACK (gtranslator_file_quit)},
 
-       /* Help menu */
-       {"HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1", NULL,
-	G_CALLBACK (gtranslator_cmd_help_contents)},
-       {"HelpAbout", GTK_STOCK_ABOUT, NULL, NULL, NULL,
-	G_CALLBACK (gtranslator_about_dialog)},
-     };
+  /* Edit menu */
+  {"EditToolbar", NULL, N_("T_oolbar"), NULL, NULL,
+   G_CALLBACK (gtranslator_window_cmd_edit_toolbar)},
+  {"EditPreferences", GTK_STOCK_PREFERENCES, NULL, NULL,
+   N_("Edit gtranslator preferences"),
+   G_CALLBACK (gtranslator_actions_edit_preferences)},
+  {"EditHeader", GTK_STOCK_PROPERTIES, N_("_Header..."), NULL, NULL,
+   G_CALLBACK (gtranslator_actions_edit_header)},
 
+  /* Help menu */
+  {"HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1", NULL,
+   G_CALLBACK (gtranslator_cmd_help_contents)},
+  {"HelpAbout", GTK_STOCK_ABOUT, NULL, NULL, NULL,
+   G_CALLBACK (gtranslator_about_dialog)},
+};
 
 /* Normal items */
 static const GtkActionEntry entries[] = {
@@ -207,28 +205,6 @@ static const GtkActionEntry entries[] = {
   {"ViewTranslationMemory", NULL, N_("_Translation Memory"), "<control>K",
    N_("Show the Translation Memory panel"),
    G_CALLBACK (gtranslator_actions_view_translation_memory)},
-  /*{ "ViewSidePane", NULL, N_("Side _Pane"), "F9",
-     N_("Show or hide the side pane in the current window"),
-     NULL }, */
-
-  /* Bookmarks menu */
-  /*{ "BookmarksAdd", GTK_STOCK_ADD, N_("_Add Bookmark"), "<control>D",
-     N_("Add a bookmark to the current message"), NULL},
-     { "BookmarksEdit", GTK_STOCK_EDIT, N_("_Edit Bookmarks"), "<control>B",
-     N_("Edit stored bookmarks"), NULL}, */
-
-  /* Action menu */
-  /*{ "ActionsCompile", GTK_STOCK_CONVERT, N_("_Compile"), NULL,
-     N_("Compile the current file to a MO file"), NULL },
-     { "ActionsRefresh", GTK_STOCK_REFRESH, NULL, NULL,
-     N_("  "), NULL },
-     //G_CALLBACK(gtranslator_bookmark_adding_dialog) },
-     { "ActionsAutotranslate", NULL, N_("Aut_otranslate..."), NULL,
-     N_("Autotranslate the current file using a translation memory"), NULL},
-     //G_CALLBACK(gtranslator_auto_translation_dialog) },
-     { "ActionsRemoveTranslations", GTK_STOCK_REMOVE, N_("Remo_ve All Translations..."), NULL,
-     N_("Remove all existing translations"), NULL},
-     //G_CALLBACK(gtranslator_remove_all_translations_dialog) }, */
 
   /* Go menu */
   {"GoPrevious", GTK_STOCK_GO_BACK, N_("_Previous Message"),
@@ -274,12 +250,6 @@ static const GtkActionEntry entries[] = {
   {"SearchFind", GTK_STOCK_FIND, NULL, "<control>F",
    N_("Search for text"),
    G_CALLBACK (_gtranslator_actions_search_find)},
-  /*{ "SearchFindNext", NULL, N_("Find Ne_xt"), NULL,
-     N_("Search forward for the same text"), NULL},
-     // G_CALLBACK (gtranslator_find) },
-     { "SearchFindPrevious", NULL, N_("Find _Previous"), NULL,
-     N_("Search backward for the same text"), NULL},
-     // G_CALLBACK (gtranslator_find) }, */
   {"SearchReplace", GTK_STOCK_FIND_AND_REPLACE, NULL, "<control>H",
    N_("Search for and replace text"),
    G_CALLBACK (_gtranslator_actions_search_replace)},
@@ -745,8 +715,9 @@ gtranslator_window_update_statusbar_message_count (GtranslatorTab * tab,
 						   GtranslatorWindow * window)
 {
   GtranslatorPo *po;
+  const gchar *status;
   gchar *msg;
-  gchar *status, *status_msg;
+  gchar *status_msg;
   gchar *current;
   gchar *total;
   gchar *translated_msg;
@@ -782,21 +753,21 @@ gtranslator_window_update_statusbar_message_count (GtranslatorTab * tab,
   status_msg = g_strdup_printf ("(%s)", status);
   current = g_strdup_printf (_("Current: %d"), pos);
   total = g_strdup_printf (_("Total: %d"), message_count);
-  translated_msg = g_strdup_printf (ngettext ("%d translated", 
-                                              "%d translated", 
-                                              translated), 
+  translated_msg = g_strdup_printf (ngettext ("%d translated",
+                                              "%d translated",
+                                              translated),
                                     translated);
-  fuzzy_msg = g_strdup_printf (ngettext ("%d fuzzy", 
-                                         "%d fuzzy", 
-                                         fuzzy), 
+  fuzzy_msg = g_strdup_printf (ngettext ("%d fuzzy",
+                                         "%d fuzzy",
+                                         fuzzy),
                                fuzzy);
-  untranslated_msg = g_strdup_printf (ngettext ("%d untranslated", 
-                                                "%d untranslated", 
-                                                untranslated), 
+  untranslated_msg = g_strdup_printf (ngettext ("%d untranslated",
+                                                "%d untranslated",
+                                                untranslated),
                                       untranslated);
 
   msg = g_strconcat ("    ", current, " ", status_msg, "    ", total,
-		     " (", translated_msg, ", ", fuzzy_msg, ", ", 
+		     " (", translated_msg, ", ", fuzzy_msg, ", ",
 		     untranslated_msg, ")", NULL);
 
   gtranslator_statusbar_pop (GTR_STATUSBAR (window->priv->statusbar), 0);
@@ -812,9 +783,7 @@ gtranslator_window_update_statusbar_message_count (GtranslatorTab * tab,
   g_free (fuzzy_msg);
   g_free (untranslated_msg);
 
-  /*
-   * We have to update the progress bar too
-   */
+  /* We have to update the progress bar too */
   gtranslator_statusbar_update_progress_bar (GTR_STATUSBAR
 					     (window->priv->statusbar),
 					     (gdouble) translated,
@@ -1022,12 +991,6 @@ set_window_title (GtranslatorWindow * window, gboolean with_path)
       po = gtranslator_tab_get_po (active_tab);
       file = gtranslator_po_get_location (po);
 
-
-      /* FIXME: We are leaking a lot here */
-      /*
-       * Translators: The title of the window when there is only one tab
-       */
-      title = g_strdup_printf (_("gtranslator - %s"), g_file_get_path (file));
       if (state == GTR_PO_STATE_MODIFIED)
 	title =
 	  g_strdup_printf (_("gtranslator - *%s"), g_file_get_path (file));
@@ -1091,6 +1054,7 @@ notebook_switch_page (GtkNotebook * nb,
   action =
     gtk_action_group_get_action (window->priv->documents_list_action_group,
 				 action_name);
+  g_free (action_name);
 
   /* sometimes the action doesn't exist yet, and the proper action
    * is set active during the documents list menu creation
@@ -1098,8 +1062,6 @@ notebook_switch_page (GtkNotebook * nb,
    */
   if (action != NULL)
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
-
-  g_free (action_name);
 
   gtranslator_plugins_engine_update_plugins_ui
     (gtranslator_plugins_engine_get_default (), window, FALSE);
@@ -1496,16 +1458,12 @@ gtranslator_window_draw (GtranslatorWindow * window)
 
   GtranslatorWindowPrivate *priv = window->priv;
 
-  /*
-   * Main box
-   */
+  /* Main box */
   priv->main_box = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (window), priv->main_box);
   gtk_widget_show (priv->main_box);
 
-  /*
-   * Menus
-   */
+  /* Menus */
   priv->ui_manager = gtk_ui_manager_new ();
 
   gtk_window_add_accel_group (GTK_WINDOW (window),
@@ -1562,9 +1520,7 @@ gtranslator_window_draw (GtranslatorWindow * window)
   gtk_box_pack_start (GTK_BOX (priv->main_box),
 		      priv->menubar, FALSE, FALSE, 0);
 
-  /*
-   * Recent files 
-   */
+  /* Recent files */
   priv->recent_manager = gtk_recent_manager_get_default ();
 
   priv->recent_menu =
@@ -1579,15 +1535,11 @@ gtranslator_window_draw (GtranslatorWindow * window)
 				      "/MainMenu/FileMenu/FileRecentFilesMenu");
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (widget), priv->recent_menu);
 
-  /*
-   * Translation Memory
-   */
+  /* Translation Memory */
   priv->tm_menu = gtk_ui_manager_get_widget (priv->ui_manager,
 					     "/MainMenu/EditMenu/EditTranslationMemory");
 
-  /*
-   * Toolbar
-   */
+  /* Toolbar */
   priv->toolbar = GTK_WIDGET
     (g_object_new (EGG_TYPE_EDITABLE_TOOLBAR,
 		   "ui-manager", priv->ui_manager,
@@ -1601,9 +1553,7 @@ gtranslator_window_draw (GtranslatorWindow * window)
 		      priv->toolbar, FALSE, FALSE, 0);
   gtk_widget_show (priv->toolbar);
 
-  /*
-   * Docker
-   */
+  /* Docker */
   hbox = gtk_hbox_new (FALSE, 0);
   priv->dock = gdl_dock_new ();
   gtk_widget_show (priv->dock);
@@ -1623,9 +1573,7 @@ gtranslator_window_draw (GtranslatorWindow * window)
 		    "notify::dirty",
 		    G_CALLBACK (on_layout_dirty_notify), window);
 
-  /*
-   * notebook
-   */
+  /* notebook */
   priv->notebook = GTK_WIDGET (gtranslator_notebook_new ());
   g_signal_connect (priv->notebook, "switch-page",
 		    G_CALLBACK (notebook_switch_page), window);
@@ -1636,16 +1584,13 @@ gtranslator_window_draw (GtranslatorWindow * window)
   g_signal_connect (priv->notebook,
 		    "tab_close_request",
 		    G_CALLBACK (notebook_tab_close_request), window);
-  /*
-   * hbox
-   */
+
+  /* hbox */
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (priv->main_box), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
 
-  /*
-   * statusbar & progress bar
-   */
+  /* statusbar & progress bar */
   window->priv->statusbar = gtranslator_statusbar_new ();
 
   gtk_box_pack_end (GTK_BOX (hbox), window->priv->statusbar, TRUE, TRUE, 0);
@@ -1694,33 +1639,25 @@ gtranslator_window_init (GtranslatorWindow * window)
 		    "drag_data_received",
 		    G_CALLBACK (drag_data_received_cb), NULL);
 
-  /*
-   * Create widgets menu 
-   */
+  /* Create widgets menu */
   view_menu =
     gtk_ui_manager_get_widget (window->priv->ui_manager,
 			       "/MainMenu/ViewMenu");
   window->priv->view_menu =
     gtk_menu_item_get_submenu (GTK_MENU_ITEM (view_menu));
 
-  /*
-   * Plugins
-   */
+  /* Plugins */
   gtranslator_plugins_engine_update_plugins_ui
     (gtranslator_plugins_engine_get_default (), window, TRUE);
 
-  /*
-   * Adding notebook to dock
-   */
+  /* Adding notebook to dock */
   add_widget_full (window,
 		   window->priv->notebook,
 		   "GtranslatorNotebook",
 		   _("Documents"),
 		   NULL, GTR_WINDOW_PLACEMENT_CENTER, TRUE, NULL);
 
-  /*
-   * Loading dock layout
-   */
+  /* Loading dock layout */
   config_folder = gtranslator_dirs_get_user_config_dir ();
   filename = g_build_filename (config_folder, "gtranslator-layout.xml", NULL);
   g_free (config_folder);
