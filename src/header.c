@@ -602,7 +602,8 @@ update_comments (GtranslatorHeader *header,
               else
                 search = g_strdup (year_array[j]);
 
-              if (g_strrstr (years->str, search) == NULL)
+              if ((g_strrstr (years->str, search) == NULL) &&
+                  (strcmp (search + 1, current_year) != 0))
                 {
                   years = g_string_append (years, search);
                   years = g_string_append_c (years, ',');
