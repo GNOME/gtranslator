@@ -624,11 +624,11 @@ update_comments (GtranslatorHeader *header,
 
   g_string_append_printf (years, " %s.", current_year);
 
-  /* If the last line is a \n just remove it */
-  if (new_comments->str[new_comments->len - 1] == '\n')
+  /* Remove all empty lines at the end */
+  while (new_comments->str[new_comments->len - 1] == '\n')
     new_comments = g_string_truncate (new_comments, new_comments->len - 1);
 
-  g_string_append_printf (new_comments, "%s <%s>,%s",
+  g_string_append_printf (new_comments, "\n%s <%s>,%s",
                           translator, email, years->str);
 
   g_string_free (years, TRUE);
