@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator&component=general\n"
-"POT-Creation-Date: 2009-12-19 10:14+0000\n"
-"PO-Revision-Date: 2009-12-28 11:50+0100\n"
+"POT-Creation-Date: 2010-01-30 21:20+0000\n"
+"PO-Revision-Date: 2010-01-31 11:21+0100\n"
 "Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -95,7 +95,7 @@ msgstr "Izbrana možnost omogoči ustvarjanje varnostne kopije datoteke pred shr
 
 #: ../data/gtranslator.schemas.in.h:17
 msgid "If true, display whitespace in strings as representative symbols."
-msgstr "Izbrana možnost omogoči prikaz presledkov v nizih kot predstavljive simbole."
+msgstr "Izbrana možnost omogoči prikaz preslednih znakov v nizih kot predstavljive simbole."
 
 #: ../data/gtranslator.schemas.in.h:18
 msgid "If true, only include files with a specified filename when searching the translation memory."
@@ -127,7 +127,7 @@ msgstr "Časovni razmik samodejnega shranjevanja datotek v minutah."
 
 #: ../data/gtranslator.schemas.in.h:25
 msgid "Make whitespace visible"
-msgstr "Naredi presledke vidne"
+msgstr "Pokaži presledne znake"
 
 #: ../data/gtranslator.schemas.in.h:26
 msgid "Maximum difference in length between messages displayed as matches by the translation memory."
@@ -888,20 +888,20 @@ msgstr "V neskladju"
 msgid "Missing"
 msgstr "Manjkajoče"
 
-#: ../src/actions-file.c:208
+#: ../src/actions-file.c:209
 msgid "Open file for translation"
 msgstr "Odpri datoteko za prevajanje"
 
-#: ../src/actions-file.c:281
-#: ../src/actions-file.c:402
+#: ../src/actions-file.c:282
+#: ../src/actions-file.c:403
 msgid "File saved."
 msgstr "Datoteka je shranjena."
 
-#: ../src/actions-file.c:331
+#: ../src/actions-file.c:332
 msgid "Save file as..."
 msgstr "Shrani datoteko kot ..."
 
-#: ../src/actions-file.c:795
+#: ../src/actions-file.c:796
 #, c-format
 msgid "Failed to write profile data into profiles file '%s'"
 msgstr "Zapis podatkov profila v datoteko profilov '%s' je spodletel"
@@ -987,14 +987,14 @@ msgstr "Vsebina:"
 
 #: ../src/context.c:64
 msgid "Extracted comments:"
-msgstr "Izvleček opomb:"
+msgstr "Razširjene opombe:"
 
-#: ../src/dialogs/assistant.c:140
-#: ../src/dialogs/preferences-dialog.c:755
+#: ../src/dialogs/assistant.c:141
+#: ../src/dialogs/preferences-dialog.c:760
 msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
 msgstr "<span weight=\"bold\" size=\"large\">Nizi dodani v zbirko podatkov</span>"
 
-#: ../src/dialogs/assistant.c:298
+#: ../src/dialogs/assistant.c:299
 #, c-format
 msgid ""
 "Profile name: %s\n"
@@ -1019,7 +1019,7 @@ msgstr ""
 "Množinska oblika: %s\n"
 "Pot zbirke podatkov: %s"
 
-#: ../src/dialogs/assistant.c:325
+#: ../src/dialogs/assistant.c:326
 msgid "None"
 msgstr "Noben"
 
@@ -1057,7 +1057,7 @@ msgstr "<b>E-poštni naslov skupine:</b>"
 
 #: ../src/dialogs/assistant.c:534
 #: ../src/dialogs/assistant.c:680
-#: ../src/dialogs/preferences-dialog.c:548
+#: ../src/dialogs/preferences-dialog.c:553
 msgid "Profile"
 msgstr "Profil"
 
@@ -1144,13 +1144,13 @@ msgstr "Skrbnik sistema je onemogočil shranjevanje."
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "V kolikor sprememb ne shranite, bodo trajno izgubljene."
 
-#: ../src/dialogs/comment-dialog.c:95
+#: ../src/dialogs/comment-dialog.c:96
 msgid "Edit Comment"
 msgstr "Uredi opombo"
 
 #: ../src/dialogs/comment-dialog.ui.h:1
-msgid "<b>Write your comments bellow:</b>"
-msgstr "<b>Napišite svoje opombe spodaj:</b>"
+msgid "Write your comments below:"
+msgstr "Napišite svoje opombe spodaj:"
 
 #: ../src/dialogs/file-dialogs.c:62
 msgid "Gettext translation"
@@ -1164,7 +1164,7 @@ msgstr "Predloga prevoda gettext"
 msgid "All files"
 msgstr "Vse datoteke"
 
-#: ../src/dialogs/header-dialog.c:270
+#: ../src/dialogs/header-dialog.c:255
 msgid "Edit Header"
 msgstr "Uredi glavo"
 
@@ -1225,118 +1225,118 @@ msgstr "Uporabi moje možnosti za dokončanje naslednjih vnosov:"
 msgid "_Language:"
 msgstr "_Jezik:"
 
-#: ../src/dialogs/jump-dialog.c:91
+#: ../src/dialogs/jump-dialog.c:94
 msgid "Go to Message"
 msgstr "Pojdi na sporočilo"
 
 #: ../src/dialogs/jump-dialog.ui.h:1
-msgid "<b>Enter message number:</b>"
-msgstr "<b>Vnesite številko sporočila:</b>"
+msgid "Enter message number:"
+msgstr "Vnesite številko sporočila:"
 
-#: ../src/dialogs/preferences-dialog.c:554
+#: ../src/dialogs/preferences-dialog.c:559
 msgid "Active"
 msgstr "Dejavno"
 
-#: ../src/dialogs/preferences-dialog.c:1124
+#: ../src/dialogs/preferences-dialog.c:1129
 msgid "<span weight=\"bold\" size=\"large\">Impossible to remove the active profile</span>"
 msgstr "<span weight=\"bold\" size=\"large\">Dejavnega profila ni mogoče odstraniti</span>"
 
-#: ../src/dialogs/preferences-dialog.c:1129
+#: ../src/dialogs/preferences-dialog.c:1134
 msgid "Another profile should be selected as active before"
 msgstr "Prej mora biti kot dejaven izbran drug profil"
 
-#: ../src/dialogs/preferences-dialog.c:1143
+#: ../src/dialogs/preferences-dialog.c:1148
 msgid "<span weight=\"bold\" size=\"large\">Are you sure you want to delete this profile?</span>"
 msgstr "<span weight=\"bold\" size=\"large\">Ali ste prepričani, da želite izbrisati ta profil?</span>"
 
-#: ../src/dialogs/preferences-dialog.c:1181
-#: ../src/dialogs/preferences-dialog.ui.h:16
+#: ../src/dialogs/preferences-dialog.c:1186
+#: ../src/dialogs/preferences-dialog.ui.h:14
 msgid "Gtranslator Preferences"
 msgstr "Gtranslator možnosti"
 
 #: ../src/dialogs/preferences-dialog.ui.h:2
-msgid "<b>Anchor style:</b>"
-msgstr "<b>Slog sidra:</b>"
-
-#: ../src/dialogs/preferences-dialog.ui.h:3
-msgid "<b>Autosave</b>"
-msgstr "<b>Samodejno shranjevanje</b>"
-
-#: ../src/dialogs/preferences-dialog.ui.h:4
-msgid "<b>Configuration:</b>"
-msgstr "<b>Nastavitev:</b>"
-
-#: ../src/dialogs/preferences-dialog.ui.h:5
-msgid "<b>Contents</b>"
-msgstr "<b>Vsebina</b>"
-
-#: ../src/dialogs/preferences-dialog.ui.h:6
-msgid "<b>Database:</b>"
-msgstr "<b>Zbirka podatkov:</b>"
-
-#: ../src/dialogs/preferences-dialog.ui.h:7
-msgid "<b>General</b>"
-msgstr "<b>Splošno</b>"
-
-#: ../src/dialogs/preferences-dialog.ui.h:8
-msgid "<b>Scheme color:</b>"
-msgstr "<b>Barva sheme:</b>"
-
-#: ../src/dialogs/preferences-dialog.ui.h:9
-msgid "<b>Text Display</b>"
-msgstr "<b>Prikaz besedila</b>"
-
-#: ../src/dialogs/preferences-dialog.ui.h:10
 msgid "Add to Database"
 msgstr "Dodaj v zbirko podatkov"
 
-#: ../src/dialogs/preferences-dialog.ui.h:11
+#: ../src/dialogs/preferences-dialog.ui.h:3
+msgid "Anchor style:"
+msgstr "Slog sidra:"
+
+#: ../src/dialogs/preferences-dialog.ui.h:4
+msgid "Autosave"
+msgstr "Samodejno shranjevanje"
+
+#: ../src/dialogs/preferences-dialog.ui.h:5
 msgid "Check _spelling"
 msgstr "_Preveri črkovanje"
 
-#: ../src/dialogs/preferences-dialog.ui.h:12
+#: ../src/dialogs/preferences-dialog.ui.h:6
+msgid "Configuration:"
+msgstr "Nastavitev:"
+
+#: ../src/dialogs/preferences-dialog.ui.h:7
+msgid "Contents"
+msgstr "Vsebina"
+
+#: ../src/dialogs/preferences-dialog.ui.h:8
 msgid "Create a _backup copy of files before saving"
 msgstr "Ustvari _varnostne kopije datotek pred shranjevanjem"
 
-#: ../src/dialogs/preferences-dialog.ui.h:13
+#: ../src/dialogs/preferences-dialog.ui.h:9
+msgid "Database:"
+msgstr "Zbirka podatkov:"
+
+#: ../src/dialogs/preferences-dialog.ui.h:10
 msgid "Editor"
 msgstr "Urejevalnik"
 
-#: ../src/dialogs/preferences-dialog.ui.h:14
+#: ../src/dialogs/preferences-dialog.ui.h:11
 msgid "Editor _font:"
 msgstr "_Pisava urejevalnika:"
 
-#: ../src/dialogs/preferences-dialog.ui.h:15
+#: ../src/dialogs/preferences-dialog.ui.h:12
 msgid "Files"
 msgstr "Datoteke"
 
-#: ../src/dialogs/preferences-dialog.ui.h:17
+#: ../src/dialogs/preferences-dialog.ui.h:13
+msgid "General"
+msgstr "Splošno"
+
+#: ../src/dialogs/preferences-dialog.ui.h:15
 msgid "Interface"
 msgstr "Vmesnik"
 
-#: ../src/dialogs/preferences-dialog.ui.h:18
+#: ../src/dialogs/preferences-dialog.ui.h:16
 msgid "Make _whitespace visible"
-msgstr "Naredi presledke vidne"
+msgstr "Pokaži _presledne znake"
 
-#: ../src/dialogs/preferences-dialog.ui.h:19
+#: ../src/dialogs/preferences-dialog.ui.h:17
 msgid "Max. # of missing words:"
 msgstr "Največje število manjkajočih besed:"
 
-#: ../src/dialogs/preferences-dialog.ui.h:20
+#: ../src/dialogs/preferences-dialog.ui.h:18
 msgid "Max. difference in sentence length:"
 msgstr "Največja razlika v dolžini stavkov:"
 
-#: ../src/dialogs/preferences-dialog.ui.h:21
+#: ../src/dialogs/preferences-dialog.ui.h:19
 msgid "Plugins"
 msgstr "Vstavki"
 
-#: ../src/dialogs/preferences-dialog.ui.h:22
+#: ../src/dialogs/preferences-dialog.ui.h:20
 msgid "Profiles"
 msgstr "Profili"
 
-#: ../src/dialogs/preferences-dialog.ui.h:23
-msgid "Select directory contains PO files:"
+#: ../src/dialogs/preferences-dialog.ui.h:21
+msgid "Scheme color:"
+msgstr "Barva sheme:"
+
+#: ../src/dialogs/preferences-dialog.ui.h:22
+msgid "Select the directory which contains PO files:"
 msgstr "Izberite mapo s PO datotekami:"
+
+#: ../src/dialogs/preferences-dialog.ui.h:23
+msgid "Text Display"
+msgstr "Prikaz besedila"
 
 #: ../src/dialogs/preferences-dialog.ui.h:24
 #: ../src/tab.c:662
@@ -1375,45 +1375,45 @@ msgstr "_Opozori v primeru da PO datoteka vsebuje ohlapne prevode"
 msgid "_minutes"
 msgstr "_minut"
 
-#: ../src/dialogs/profile-dialog.c:262
+#: ../src/dialogs/profile-dialog.c:265
 msgid "<span weight=\"bold\" size=\"large\">The profile name already exists</span>"
 msgstr "<span weight=\"bold\" size=\"large\">Ime profila že obstaja</span>"
 
-#: ../src/dialogs/profile-dialog.c:375
+#: ../src/dialogs/profile-dialog.c:378
 msgid "Gtranslator Profile"
 msgstr "Gtranslator profil"
 
-#: ../src/dialogs/profile-dialog.c:420
+#: ../src/dialogs/profile-dialog.c:423
 msgid "Example: nplurals=2; plural=(n != 1);"
 msgstr "Primer: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);"
 
 #: ../src/dialogs/profile-dialog.ui.h:1
-msgid "<b>Language Settings</b>"
-msgstr "<b>Jezikovne nastavitve</b>"
-
-#: ../src/dialogs/profile-dialog.ui.h:2
-msgid "<b>Profile Information</b>"
-msgstr "<b>Podrobnosti o profilu</b>"
-
-#: ../src/dialogs/profile-dialog.ui.h:3
-msgid "<b>Translator Information</b>"
-msgstr "<b>Podrobnosti o prevajalcu</b>"
-
-#: ../src/dialogs/profile-dialog.ui.h:4
 msgid "Character _set"
 msgstr "Znakovni _nabor"
 
-#: ../src/dialogs/profile-dialog.ui.h:5
+#: ../src/dialogs/profile-dialog.ui.h:2
+msgid "Language Settings"
+msgstr "Jezikovne nastavitve"
+
+#: ../src/dialogs/profile-dialog.ui.h:3
 msgid "Language _code:"
 msgstr "_Koda jezika:"
 
-#: ../src/dialogs/profile-dialog.ui.h:6
+#: ../src/dialogs/profile-dialog.ui.h:4
 msgid "N_ame:"
 msgstr "_Ime:"
 
-#: ../src/dialogs/profile-dialog.ui.h:7
+#: ../src/dialogs/profile-dialog.ui.h:5
+msgid "Profile Information"
+msgstr "Podrobnosti o profilu"
+
+#: ../src/dialogs/profile-dialog.ui.h:6
 msgid "Transfer en_coding:"
 msgstr "Prenos k_odiranja:"
+
+#: ../src/dialogs/profile-dialog.ui.h:7
+msgid "Translator Information"
+msgstr "Podrobnosti o prevajalcu"
 
 #: ../src/dialogs/profile-dialog.ui.h:8
 msgid "_Email:"
@@ -1431,87 +1431,87 @@ msgstr "_Množinske oblike:"
 msgid "_Team email:"
 msgstr "E-poš_tni naslov ekipe:"
 
-#: ../src/dialogs/search-dialog.c:332
-#: ../src/dialogs/search-dialog.ui.h:4
+#: ../src/dialogs/search-dialog.c:333
+#: ../src/dialogs/search-dialog.ui.h:3
 msgid "Replace"
 msgstr "Zamenjaj"
 
-#: ../src/dialogs/search-dialog.c:356
+#: ../src/dialogs/search-dialog.c:357
 msgid "Find"
 msgstr "Najdi"
 
-#: ../src/dialogs/search-dialog.c:471
+#: ../src/dialogs/search-dialog.c:472
 msgid "Replace _All"
 msgstr "Zamenjaj _vse"
 
-#: ../src/dialogs/search-dialog.c:475
+#: ../src/dialogs/search-dialog.c:476
 msgid "_Replace"
 msgstr "_Zamenjaj"
 
 #: ../src/dialogs/search-dialog.ui.h:1
-msgid "Include fuzzy strings"
-msgstr "Vključi ohlapne nize"
+msgid "Include fu_zzy strings"
+msgstr "Vključi oh_lapne nize"
 
 #: ../src/dialogs/search-dialog.ui.h:2
 msgid "Match _entire word only"
 msgstr "Poišči le _cele besede"
 
-#: ../src/dialogs/search-dialog.ui.h:3
-msgid "Original text"
-msgstr "Izvirno besedilo"
-
-#: ../src/dialogs/search-dialog.ui.h:5
+#: ../src/dialogs/search-dialog.ui.h:4
 msgid "Replace All"
 msgstr "Zamenjaj vse"
 
-#: ../src/dialogs/search-dialog.ui.h:6
+#: ../src/dialogs/search-dialog.ui.h:5
 msgid "Replace _with: "
 msgstr "Zamenjaj _z:"
 
-#: ../src/dialogs/search-dialog.ui.h:7
+#: ../src/dialogs/search-dialog.ui.h:6
 msgid "Search _backwards"
 msgstr "Poišči _nazaj"
 
-#: ../src/dialogs/search-dialog.ui.h:8
-msgid "Translated text"
-msgstr "Prevedeno besedilo"
-
-#: ../src/dialogs/search-dialog.ui.h:9
+#: ../src/dialogs/search-dialog.ui.h:7
 msgid "_Match case"
 msgstr "_Upoštevaj velikost črk"
 
-#: ../src/dialogs/search-dialog.ui.h:10
+#: ../src/dialogs/search-dialog.ui.h:8
+msgid "_Original text"
+msgstr "_Izvirno besedilo"
+
+#: ../src/dialogs/search-dialog.ui.h:9
 msgid "_Search for: "
 msgstr "_Poišči:"
+
+#: ../src/dialogs/search-dialog.ui.h:10
+msgid "_Translated text"
+msgstr "_Prevedeno besedilo"
 
 #: ../src/dialogs/search-dialog.ui.h:11
 msgid "_Wrap around"
 msgstr "_Prelomi vrstice"
 
-#: ../src/main.c:54
+#: ../src/main.c:55
 msgid "[FILE...]"
 msgstr "[DATOTEKA...]"
 
-#: ../src/main.c:80
+#: ../src/main.c:81
 #, c-format
 msgid "%s: malformed file name or URI.\n"
 msgstr "%s: napačno oblikovano ime datoteke ali URI.\n"
 
-#: ../src/main.c:148
+#: ../src/main.c:147
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
 #. Setup command line options
-#: ../src/main.c:151
+#: ../src/main.c:150
 msgid "- Edit PO files"
 msgstr "- Uredi PO datoteke"
 
-#: ../src/main.c:165
+#: ../src/main.c:164
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Napaka med zagonom GConf: %s."
 
-#: ../src/main.c:187
+#: ../src/main.c:188
 #, c-format
 msgid "Error setting the default window icon: %s"
 msgstr "Napaka med nastavljanjem privzete ikone oken: %s"
@@ -1541,27 +1541,27 @@ msgstr "<b>Pot:</b> %s"
 msgid "Close document"
 msgstr "Zapri dokument"
 
-#: ../src/po.c:403
+#: ../src/po.c:394
 #, c-format
 msgid "Failed opening file '%s': %s"
 msgstr "Odpiranje datoteke '%s' je spodletelo: %s"
 
-#: ../src/po.c:427
+#: ../src/po.c:418
 #, c-format
 msgid "The file is empty"
 msgstr "Datoteka je prazna"
 
-#: ../src/po.c:442
+#: ../src/po.c:433
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext je vrnil seznam domen brez sporočili."
 
-#: ../src/po.c:598
+#: ../src/po.c:485
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Razčlenjevalnik ni izpisal sporočil."
 
-#: ../src/po.c:900
+#: ../src/po.c:534
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1572,12 +1572,12 @@ msgstr ""
 "Datoteke pot so ustvarjene med prevajanjem.\n"
 "Datoteka bi se morala imenovati '%s.po'."
 
-#: ../src/po.c:913
+#: ../src/po.c:547
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Datoteka %s je dostopna le za branje in je ni mogoče prepisati"
 
-#: ../src/po.c:946
+#: ../src/po.c:578
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Prišlo je do napake med zapisovanjem PO datoteke: %s"
@@ -1647,7 +1647,7 @@ msgstr "Množinska oblika %d"
 
 #: ../src/tab.c:621
 msgid "Message Table"
-msgstr "Razpredelnica sporočil"
+msgstr "Preglednica sporočil"
 
 #: ../src/tab.c:653
 msgid "Context"
@@ -1668,49 +1668,49 @@ msgstr "<b>Prevede_no besedilo:</b>"
 #. * produce duplicates, but don't worry about it. If your language
 #. * normally has a mnemonic at the start, please use the _. If not,
 #. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:939
+#: ../src/toolbareditor/egg-editable-toolbar.c:934
 #, c-format
 msgid "Show “_%s”"
 msgstr "Pokaži \"_%s\""
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1405
+#: ../src/toolbareditor/egg-editable-toolbar.c:1397
 msgid "_Move on Toolbar"
 msgstr "_Premakni na orodni vrstici"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1406
+#: ../src/toolbareditor/egg-editable-toolbar.c:1398
 msgid "Move the selected item on the toolbar"
 msgstr "Premakne izbrani predmet na orodni vrstici"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1407
+#: ../src/toolbareditor/egg-editable-toolbar.c:1399
 msgid "_Remove from Toolbar"
 msgstr "_Odstrani iz orodne vrstice"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1408
+#: ../src/toolbareditor/egg-editable-toolbar.c:1400
 msgid "Remove the selected item from the toolbar"
 msgstr "Odstrani izbrani predmet iz orodne vrstice"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1410
+#: ../src/toolbareditor/egg-editable-toolbar.c:1401
 msgid "_Delete Toolbar"
 msgstr "_Izbriši orodno vrstico"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1411
+#: ../src/toolbareditor/egg-editable-toolbar.c:1402
 msgid "Remove the selected toolbar"
 msgstr "Odstrani izbrano orodno vrstico"
 
-#: ../src/toolbareditor/egg-toolbar-editor.c:475
+#: ../src/toolbareditor/egg-toolbar-editor.c:485
 msgid "Separator"
 msgstr "Ločilnik"
 
-#: ../src/translation-memory/berkeley/db-base.c:157
+#: ../src/translation-memory/berkeley/db-base.c:160
 msgid "Running recovery..."
 msgstr "Obnavljanje je v teku ..."
 
-#: ../src/translation-memory/berkeley/db-base.c:166
+#: ../src/translation-memory/berkeley/db-base.c:169
 #, c-format
 msgid "There was an error recovering the database: %s"
 msgstr "Med obnavljanjem podatkovne zbirke je prišlo do napake: %s"
 
-#: ../src/translation-memory/berkeley/db-base.c:174
+#: ../src/translation-memory/berkeley/db-base.c:177
 #, c-format
 msgid "There was an error in database: %s"
 msgstr "Prišlo je do napake zbirke podatkov: %s"
@@ -1732,30 +1732,30 @@ msgstr "Raven"
 msgid "String"
 msgstr "Niz"
 
-#: ../src/utils.c:307
+#: ../src/utils.c:308
 msgid "Please check your installation."
 msgstr "Preverite namestitev."
 
-#: ../src/utils.c:368
+#: ../src/utils.c:369
 #, c-format
 msgid "Unable to open ui file %s. Error: %s"
 msgstr "Ni mogoče odpreti vmesniške datoteke %s. Napaka: %s"
 
-#: ../src/utils.c:388
+#: ../src/utils.c:389
 #, c-format
 msgid "Unable to find the object '%s' inside file %s."
 msgstr "Ni mogoče najti predmeta '%s' v datoteki %s."
 
-#: ../src/utils.c:812
+#: ../src/utils.c:813
 msgid "Unable to display help. Please make sure the Gtranslator documentation package is installed."
 msgstr "Pomoči ni mogoče prikazati. Prepričajte se, da je Gtranslator paket dokumentacije nameščen."
 
-#: ../src/view.c:79
+#: ../src/view.c:80
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "Gtkspell napaka: %s\n"
 
-#: ../src/view.c:81
+#: ../src/view.c:82
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1764,20 +1764,18 @@ msgstr ""
 "Ni mogoče zagnati GtkSpell-a.\n"
 " %s"
 
-#: ../src/window.c:113
+#: ../src/window.c:115
 msgid "_File"
 msgstr "_Datoteka"
 
-#: ../src/window.c:114
+#: ../src/window.c:116
 msgid "_Edit"
 msgstr "_Uredi"
 
-#: ../src/window.c:115
+#: ../src/window.c:117
 msgid "_View"
 msgstr "_Pogled"
 
-#. { "Bookmarks", NULL, N_("_Bookmarks") },
-#. { "Actions", NULL, N_("_Actions") },
 #: ../src/window.c:118
 msgid "_Search"
 msgstr "_Išči"
@@ -1816,7 +1814,7 @@ msgid "Edit gtranslator preferences"
 msgstr "Urejanje gtranslator nastavitev"
 
 #: ../src/window.c:139
-#: ../src/window.c:186
+#: ../src/window.c:185
 msgid "_Header..."
 msgstr "_Glava ..."
 
@@ -1825,257 +1823,237 @@ msgstr "_Glava ..."
 msgid "_Contents"
 msgstr "_Vsebina"
 
-#: ../src/window.c:155
+#: ../src/window.c:154
 msgid "Save the current file"
 msgstr "Shrani trenutno datoteko"
 
-#: ../src/window.c:158
+#: ../src/window.c:157
 msgid "Save the current file with another name"
 msgstr "Shrani datoteko pod drugim imenom"
 
-#: ../src/window.c:164
+#: ../src/window.c:163
 msgid "Close the current file"
 msgstr "Zapri trenutno datoteko"
 
-#: ../src/window.c:169
+#: ../src/window.c:168
 msgid "Undo last operation"
 msgstr "Povrni zadnje dejanje"
 
-#: ../src/window.c:172
+#: ../src/window.c:171
 msgid "Redo last undone operation"
 msgstr "Uveljavi zadnje razveljavljeno dejanje"
 
-#: ../src/window.c:175
+#: ../src/window.c:174
 msgid "Cut the selected text"
 msgstr "Izreži izbrano besedilo"
 
-#: ../src/window.c:178
+#: ../src/window.c:177
 msgid "Copy the selected text"
 msgstr "Kopiraj izbrano besedilo"
 
-#: ../src/window.c:181
+#: ../src/window.c:180
 msgid "Paste the contents of the clipboard"
 msgstr "Prilepi vsebino odložišča"
 
-#: ../src/window.c:184
+#: ../src/window.c:183
 msgid "Clear the selected translation"
 msgstr "Počisti izbran prevod"
 
-#: ../src/window.c:188
+#: ../src/window.c:187
 msgid "C_omment..."
 msgstr "O_pomba ..."
 
-#: ../src/window.c:189
+#: ../src/window.c:188
 msgid "Edit message comment"
 msgstr "Uredi opombo sporočila"
 
-#: ../src/window.c:191
+#: ../src/window.c:190
 msgid "Copy _Message to Translation"
 msgstr "Kopiraj _izvirnik v polje prevoda"
 
-#: ../src/window.c:193
+#: ../src/window.c:192
 msgid "Copy original message contents to the translation field"
 msgstr "Kopiraj vsebino izvirnega sporočila in jo prilepi kot prevod"
 
-#: ../src/window.c:195
+#: ../src/window.c:194
 msgid "Toggle _Fuzzy Status"
 msgstr "Preklopi _ohlapno stanje"
 
-#: ../src/window.c:196
+#: ../src/window.c:195
 msgid "Toggle fuzzy status of a message"
 msgstr "Preklopi med ohlapnim stanjem sporočila"
 
-#: ../src/window.c:198
-#: ../src/window.c:206
+#: ../src/window.c:197
+#: ../src/window.c:205
 msgid "_Translation Memory"
 msgstr "_Pomnilnik prevodov"
 
 #. View menu
-#: ../src/window.c:203
+#: ../src/window.c:202
 msgid "_Context"
 msgstr "_Vsebina"
 
-#: ../src/window.c:204
+#: ../src/window.c:203
 msgid "Show the Context panel"
 msgstr "Pokaži vsebinski pult"
 
-#: ../src/window.c:207
+#: ../src/window.c:206
 msgid "Show the Translation Memory panel"
 msgstr "Pokaži pult pomnilnika prevodov"
 
-#. { "ViewSidePane", NULL, N_("Side _Pane"), "F9",
-#. N_("Show or hide the side pane in the current window"),
-#. NULL },
-#. Bookmarks menu
-#. { "BookmarksAdd", GTK_STOCK_ADD, N_("_Add Bookmark"), "<control>D",
-#. N_("Add a bookmark to the current message"), NULL},
-#. { "BookmarksEdit", GTK_STOCK_EDIT, N_("_Edit Bookmarks"), "<control>B",
-#. N_("Edit stored bookmarks"), NULL},
-#. Action menu
-#. { "ActionsCompile", GTK_STOCK_CONVERT, N_("_Compile"), NULL,
-#. N_("Compile the current file to a MO file"), NULL },
-#. { "ActionsRefresh", GTK_STOCK_REFRESH, NULL, NULL,
-#. N_("  "), NULL },
-#. //G_CALLBACK(gtranslator_bookmark_adding_dialog) },
-#. { "ActionsAutotranslate", NULL, N_("Aut_otranslate..."), NULL,
-#. N_("Autotranslate the current file using a translation memory"), NULL},
-#. //G_CALLBACK(gtranslator_auto_translation_dialog) },
-#. { "ActionsRemoveTranslations", GTK_STOCK_REMOVE, N_("Remo_ve All Translations..."), NULL,
-#. N_("Remove all existing translations"), NULL},
-#. //G_CALLBACK(gtranslator_remove_all_translations_dialog) },
 #. Go menu
-#: ../src/window.c:233
+#: ../src/window.c:210
 msgid "_Previous Message"
 msgstr "_Predhodno sporočilo"
 
-#: ../src/window.c:234
+#: ../src/window.c:211
 msgid "Move back one message"
 msgstr "Premakni se nazaj za eno sporočilo"
 
-#: ../src/window.c:236
+#: ../src/window.c:213
 msgid "_Next Message"
 msgstr "_Naslednje sporočilo"
 
-#: ../src/window.c:237
+#: ../src/window.c:214
 msgid "Move forward one message"
 msgstr "Premakni se naprej za eno sporočilo"
 
-#: ../src/window.c:239
+#: ../src/window.c:216
 msgid "_Go to Message..."
 msgstr "_Pojdi na sporočilo ..."
 
-#: ../src/window.c:240
+#: ../src/window.c:217
 msgid "Jumps to a specific message"
 msgstr "Skoči na določeno sporočilo"
 
-#: ../src/window.c:242
+#: ../src/window.c:219
 msgid "_First Message"
 msgstr "_Prvo sporočilo"
 
-#: ../src/window.c:243
+#: ../src/window.c:220
 msgid "Go to the first message"
 msgstr "Pojdi na prvo sporočilo"
 
-#: ../src/window.c:245
+#: ../src/window.c:222
 msgid "_Last Message"
 msgstr "_Zadnje sporočilo"
 
-#: ../src/window.c:246
+#: ../src/window.c:223
 msgid "Go to the last message"
 msgstr "Pojdi na zadnje sporočilo"
 
-#: ../src/window.c:248
+#: ../src/window.c:225
 msgid "Next Fuz_zy"
 msgstr "Naslednje ohla_pno"
 
-#: ../src/window.c:249
+#: ../src/window.c:226
 msgid "Go to the next fuzzy message"
 msgstr "Pojdi na naslednje ohlapno sporočilo"
 
-#: ../src/window.c:251
+#: ../src/window.c:228
 msgid "Previous Fuzz_y"
 msgstr "Predhodno _ohlapno"
 
-#: ../src/window.c:252
+#: ../src/window.c:229
 msgid "Go to the previous fuzzy message"
 msgstr "Pojdi na predhodno ohlapno sporočilo"
 
-#: ../src/window.c:254
+#: ../src/window.c:231
 msgid "Next _Untranslated"
 msgstr "Naslednje _neprevedeno"
 
-#: ../src/window.c:255
+#: ../src/window.c:232
 msgid "Go to the next untranslated message"
 msgstr "Pojdi na naslednje neprevedeno sporočilo"
 
-#: ../src/window.c:258
+#: ../src/window.c:235
 msgid "Previ_ous Untranslated"
 msgstr "Pre_dhodno naprevedno"
 
-#: ../src/window.c:259
+#: ../src/window.c:236
 msgid "Go to the previous untranslated message"
 msgstr "Pojdi na predhodno neprevedeno sporočilo"
 
-#: ../src/window.c:262
+#: ../src/window.c:239
 msgid "Next Fu_zzy or Untranslated"
 msgstr "Naslednje oh_lapno ali neprevedeno"
 
-#: ../src/window.c:264
+#: ../src/window.c:241
 msgid "Go to the next fuzzy or untranslated message"
 msgstr "Pojdi na naslednje ohlapno ali neprevedeno sporočilo"
 
-#: ../src/window.c:267
+#: ../src/window.c:244
 msgid "Pre_vious Fuzzy or Untranslated"
 msgstr "Pred_hodno ohlapno ali neprevedeno"
 
-#: ../src/window.c:269
+#: ../src/window.c:246
 msgid "Go to the previous fuzzy or untranslated message"
 msgstr "Pojdi na predhodno ohlapno ali neprevedeno sporočilo"
 
-#: ../src/window.c:274
+#: ../src/window.c:251
 msgid "Search for text"
 msgstr "Poišči besedilo"
 
-#: ../src/window.c:283
+#: ../src/window.c:254
 msgid "Search for and replace text"
 msgstr "Poišči in zamenjaj besedilo"
 
 #. Documents menu
-#: ../src/window.c:287
+#: ../src/window.c:258
 msgid "_Save All"
 msgstr "_Shrani vse"
 
-#: ../src/window.c:288
+#: ../src/window.c:259
 msgid "Save all open files"
 msgstr "Shrani vse odprte datoteke"
 
-#: ../src/window.c:290
+#: ../src/window.c:261
 msgid "_Close All"
 msgstr "_Zapri vse"
 
-#: ../src/window.c:291
+#: ../src/window.c:262
 msgid "Close all open files"
 msgstr "Zapri vse odprte datoteke"
 
-#: ../src/window.c:293
+#: ../src/window.c:264
 msgid "_Previous Document"
 msgstr "_Predhodni dokument"
 
-#: ../src/window.c:295
+#: ../src/window.c:266
 msgid "Activate previous document"
 msgstr "Pokaži predhodni dokument"
 
-#: ../src/window.c:297
+#: ../src/window.c:268
 msgid "_Next Document"
 msgstr "_Naslednji dokument"
 
-#: ../src/window.c:299
+#: ../src/window.c:270
 msgid "Activate next document"
 msgstr "Pokaži naslednji dokument"
 
-#: ../src/window.c:766
+#: ../src/window.c:741
 msgid "Untranslated"
 msgstr "Neprevedeno"
 
-#: ../src/window.c:769
+#: ../src/window.c:744
 msgid "Translated"
 msgstr "Prevedeno"
 
-#: ../src/window.c:772
+#: ../src/window.c:747
 msgid "Fuzzy"
 msgstr "Ohlapno"
 
-#: ../src/window.c:779
+#: ../src/window.c:754
 #, c-format
 msgid "Current: %d"
 msgstr "Trenutno: %d"
 
-#: ../src/window.c:780
+#: ../src/window.c:755
 #, c-format
 msgid "Total: %d"
 msgstr "Skupaj: %d"
 
-#: ../src/window.c:781
+#: ../src/window.c:756
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
@@ -2084,7 +2062,7 @@ msgstr[1] "%d preveden"
 msgstr[2] "%d prevedena"
 msgstr[3] "%d prevedeni"
 
-#: ../src/window.c:785
+#: ../src/window.c:760
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
@@ -2093,7 +2071,7 @@ msgstr[1] "%d ohlapen"
 msgstr[2] "%d ohlapna"
 msgstr[3] "%d ohlapni"
 
-#: ../src/window.c:789
+#: ../src/window.c:764
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -2103,38 +2081,39 @@ msgstr[2] "%d neprevedena"
 msgstr[3] "%d neprevedeni"
 
 #. Translators: %s is a URI
-#: ../src/window.c:849
+#: ../src/window.c:822
 #, c-format
 msgid "Activate '%s'"
 msgstr "Pokaži '%s'"
 
-#. FIXME: We are leaking a lot here
-#.
-#. * Translators: The title of the window when there is only one tab
-#.
-#: ../src/window.c:1026
-#: ../src/window.c:1032
-#, c-format
-msgid "gtranslator - %s"
-msgstr "gtranslator - %s"
-
-#: ../src/window.c:1029
+#: ../src/window.c:996
 #, c-format
 msgid "gtranslator - *%s"
 msgstr "gtranslator - *%s"
 
-#: ../src/window.c:1037
+#: ../src/window.c:999
+#, c-format
+msgid "gtranslator - %s"
+msgstr "gtranslator - %s"
+
+#: ../src/window.c:1004
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/window.c:1399
+#: ../src/window.c:1365
 msgid "Toolbar Editor"
 msgstr "Urejevalnik orodnih vrstic"
 
-#: ../src/window.c:1710
+#: ../src/window.c:1657
 msgid "Documents"
 msgstr "Dokumenti"
 
+#~ msgid "<b>Autosave</b>"
+#~ msgstr "<b>Samodejno shranjevanje</b>"
+#~ msgid "<b>Configuration:</b>"
+#~ msgstr "<b>Nastavitev:</b>"
+#~ msgid "<b>Contents</b>"
+#~ msgstr "<b>Vsebina</b>"
 #~ msgid "The GNOME translation program"
 #~ msgstr "Prevajalski program za GNOME"
 #~ msgid "_View/_Bookmarks/"
@@ -2571,7 +2550,7 @@ msgstr "Dokumenti"
 #~ msgid "Check recent files before showing in recent files list"
 #~ msgstr "Preveri nedavne datoteke pred prikazom v seznamu nedavnih datotek"
 #~ msgid "Use special character to indicate white space"
-#~ msgstr "Uporabi poseben znak za prikaz presledkov"
+#~ msgstr "Uporabi poseben znak za prikaz preslednih znakov"
 #~ msgid "Hotkey indicating character:"
 #~ msgstr "Znak za nakazovanje bližnjice s tipkami:"
 #~ msgid "Apply own fonts"
