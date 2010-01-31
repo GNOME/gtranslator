@@ -4,7 +4,7 @@ dnl -------------------------------------------------------------------
 dnl (C) 2000-2004 Fatih Demir <kabalak@kabalak.net>
 dnl -------------------------------------------------------------------
 AC_PREREQ(2.52)
-AC_INIT(gtranslator, 1.9.6,
+AC_INIT(gtranslator, 1.9.7,
 	http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator)
 
 AC_CONFIG_SRCDIR(src/main.c)
