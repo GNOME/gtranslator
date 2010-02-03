@@ -1,6 +1,7 @@
 icondir = $(datadir)/gtranslator/pixmaps
 icon_DATA =	\
 	gtranslator-plugin.png \
+	gtranslator-logo.png \
 	gtranslator-fuzzy-next.png \
 	gtranslator-fuzzy-prev.png \
 	gtranslator-untranslated-next.png \

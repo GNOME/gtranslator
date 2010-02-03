@@ -300,6 +300,7 @@ data/Makefile
 data/gtranslator.pc
 data/desktop/Makefile
 data/desktop/gtranslator.desktop.in
+data/desktop/icons/Makefile
 data/pixmaps/Makefile
 doc/Makefile
 doc/reference/Makefile

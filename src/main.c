@@ -145,6 +145,7 @@ main (gint argc, gchar * argv[])
   textdomain (GETTEXT_PACKAGE);
 
   g_set_application_name (_("Gtranslator"));
+  gtk_window_set_default_icon_name ("gtranslator");
 
   /* Setup command line options */
   context = g_option_context_new (_("- Edit PO files"));
@@ -174,23 +175,8 @@ main (gint argc, gchar * argv[])
 
   g_option_context_parse (context, &argc, &argv, NULL);
 
-  /*
-   * Show the application window with icon.
-   */
-  pixmaps_dir = gtranslator_dirs_get_pixmaps_dir ();
-  window_icon = g_build_filename (pixmaps_dir,
-  				  "gtranslator.png",
-  				  NULL);
-  gtk_window_set_default_icon_from_file (window_icon, &error);
-  g_free (window_icon);
-  if (error)
-    {
-      g_warning (_("Error setting the default window icon: %s"),
-		 error->message);
-      g_clear_error (&error);
-    }
-
   /* We set the default icon dir */
+  pixmaps_dir = gtranslator_dirs_get_pixmaps_dir ();
   gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
                                      pixmaps_dir);
   g_free (pixmaps_dir);

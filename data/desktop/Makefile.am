@@ -1,17 +1,15 @@
-## ./data/desktop/Makefile.am of gtranslator
+SUBDIRS = icons
 
 ##
 ## the dirs where all the DATA should go ..
 ##
 Applicationdir = $(datadir)/applications
-Applicationicondir = $(datadir)/gtranslator/pixmaps
 
 ##
 ## and the DATA
 ##
 Application_predata = gtranslator.desktop.in
 Application_DATA = $(Application_predata:.desktop.in=.desktop)
-Applicationicon_DATA = gtranslator.png
 
 @INTLTOOL_DESKTOP_RULE@
 
