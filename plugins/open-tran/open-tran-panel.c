@@ -51,32 +51,34 @@
 
 GTR_PLUGIN_DEFINE_TYPE (GtranslatorOpenTranPanel, gtranslator_open_tran_panel,
 			GTK_TYPE_VBOX)
-     struct _GtranslatorOpenTranPanelPrivate
-     {
-       GConfClient *gconf_client;
 
-       GtkWidget *treeview;
-       GtkListStore *store;
+struct _GtranslatorOpenTranPanelPrivate
+{
+  GConfClient *gconf_client;
 
-       GtkWidget *entry;
+  GtkWidget *treeview;
+  GtkListStore *store;
 
-       SoupSession *session;
+  GtkWidget *entry;
 
-       GtranslatorWindow *window;
+  SoupSession *session;
 
-       gchar *text;
-     };
+  GtranslatorWindow *window;
 
-     enum
-     {
-       ICON_COLUMN,
-       TEXT_COLUMN,
-       N_COLUMNS
-     };
+  gchar *text;
+};
 
-     static void
-       show_error_dialog (GtranslatorWindow * parent,
-			  const gchar * message_format, ...)
+enum
+{
+  ICON_COLUMN,
+  TEXT_COLUMN,
+  N_COLUMNS
+};
+
+static void
+show_error_dialog (GtranslatorWindow * parent,
+		   const gchar * message_format,
+		   ...)
 {
   gchar *msg = NULL;
   va_list args;
@@ -205,7 +207,9 @@ check_xmlrpc (GValue * value, GType type, ...)
   if (!G_VALUE_HOLDS (value, type))
     {
       g_warning (_("ERROR: could not parse response\n"));
-      g_value_unset (value);
+
+      if (G_IS_VALUE (value))
+        g_value_unset (value);
       return;
     }
 
@@ -228,8 +232,6 @@ open_connection (GtranslatorOpenTranPanel * panel,
   GHashTable *result;
   GtkTreeIter treeiter;
   gint i;
-
-  panel->priv->session = soup_session_async_new ();
 
   array = soup_value_array_new_with_vals (G_TYPE_STRING, text,
 					  G_TYPE_STRING, search_code,
@@ -301,7 +303,6 @@ open_connection (GtranslatorOpenTranPanel * panel,
     }
 
   soup_session_abort (panel->priv->session);
-  g_object_unref (panel->priv->session);
 }
 
 static void
@@ -433,15 +434,22 @@ gtranslator_open_tran_panel_init (GtranslatorOpenTranPanel * panel)
   panel->priv = GTR_OPEN_TRAN_PANEL_GET_PRIVATE (panel);
 
   panel->priv->gconf_client = gconf_client_get_default ();
+  panel->priv->session = soup_session_async_new ();
 
   gtranslator_open_tran_panel_draw (panel);
 }
 
 static void
-gtranslator_open_tran_panel_finalize (GObject * object)
+gtranslator_open_tran_panel_dispose (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_open_tran_panel_parent_class)->
-    finalize (object);
+  GtranslatorOpenTranPanel *panel = GTR_OPEN_TRAN_PANEL (object);
+
+  if (panel->priv->session != NULL)
+    {
+      g_object_unref (panel->priv->session);
+      panel->priv->session = NULL;
+    }
+  G_OBJECT_CLASS (gtranslator_open_tran_panel_parent_class)->dispose (object);
 }
 
 static void
@@ -451,7 +459,7 @@ gtranslator_open_tran_panel_class_init (GtranslatorOpenTranPanelClass * klass)
 
   g_type_class_add_private (klass, sizeof (GtranslatorOpenTranPanelPrivate));
 
-  object_class->finalize = gtranslator_open_tran_panel_finalize;
+  object_class->dispose = gtranslator_open_tran_panel_dispose;
 }
 
 GtkWidget *
