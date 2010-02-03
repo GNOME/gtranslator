@@ -81,10 +81,6 @@ SOURCEVIEW_REQUIRED=2.4.0
 GDL_REQUIRED=2.26.0
 GDICT_OPTIONAL=0.11.0
 GTKSPELL_OPTIONAL=2.0.2
-SVN_MAJOR=1
-SVN_MINOR=5
-SVN_PATCH=0
-LIBSVN_OPTIONAL=$SVN_MAJOR.$SVN_MINOR.$SVN_PATCH
 LIBSOUP_OPTIONAL=2.4.0
 
 AC_SUBST(GTK_REQUIRED)
@@ -273,178 +269,6 @@ fi
 
 AM_CONDITIONAL(USE_CHARMAP, test x"$have_gucharmap" = "xyes")
 
-dnl  **********************************************************
-dnl  check if we have svn libraries to build subversion plugin
-dnl  (stolen from kdevelop ;-)
-dnl  **********************************************************
-
-AC_MSG_CHECKING(for Subversion svn-config)
-AC_ARG_WITH(subversion-dir,
-		AC_HELP_STRING([--with-subversion-dir=DIR],[where Subversion is installed]),
-		[
-				SVNCONFIG="$withval/bin/svn-config"
-		])
-
-if test -z "$SVNCONFIG"; then
-		_SVNCONFIG="`svn-config --prefix 2> /dev/null`"
-		if test -n "$_SVNCONFIG"; then
-				SVNCONFIG="$_SVNCONFIG/bin/svn-config"
-		fi
-fi
-
-AC_SUBST(SVNCONFIG)
-if test -x "$SVNCONFIG"; then
-		SVNLD="`$SVNCONFIG --ldflags 2> /dev/null`"
-		SVN_LIB="`$SVNCONFIG --libs --cflags 2> /dev/null` -lsvn_client-1 -lsvn_subr-1"
-		dnl ugly hack for subversion svn-config problems in 0.14.x, to be removed when svn-config is fixed
-		SVN_INCLUDE="`$SVNCONFIG --includes 2> /dev/null` -I$_SVNCONFIG/include/subversion-1/"
-		AC_MSG_RESULT(yes)
-else
-		AC_MSG_RESULT(not found)
-		
-		dnl just a fallback to debian's config so that it works for me :)
-		AC_ARG_WITH(svn-include,
-								AC_HELP_STRING([--with-svn-include=DIR],[Use the given path to the subversion headers.]),
-								[
-								if test "$withval" != "yes" -a "$withval" != ""; then
-										SVN_INCLUDES=$withval
-								fi
-								])
-		if test -z "$SVN_INCLUDES"; then
-			SVN_INCLUDES="/usr/local/include /usr/include"
-		fi
-		AC_MSG_CHECKING([for Subversion headers])
-		SVN_INCLUDE=""
-		for VALUE in $SVN_INCLUDES ; do
-				if test -f $VALUE/subversion-1/svn_types.h ; then
-						SVN_INCLUDE=$VALUE/subversion-1
-						break
-				fi
-				if test -f $VALUE/svn_types.h ; then
-						SVN_INCLUDE=$VALUE
-						break
-				fi
-		done
-		if test $SVN_INCLUDE ; then
-				AC_MSG_RESULT([found])
-		else
-				AC_MSG_RESULT([not found])
-		fi
-		SVN_LIBS="/usr/local/lib /usr/lib"
-		AC_ARG_WITH(svn-lib,
-						AC_HELP_STRING([--with-svn-lib=DIR],[Use the given path to the subversion libraries.]),
-						[
-							if test "$withval" != "yes" -a "$withval" != ""; then
-								SVN_LIBS=$withval
-							fi
-						])
-		AC_MSG_CHECKING([for Subversion libraries])
-		SVN_LIB=""
-		for VALUE in $SVN_LIBS ; do
-				if ls $VALUE/libsvn_client-1.* 1>/dev/null 2>&1; then
-						SVN_LIB=$VALUE
-						break
-				fi
-		done
-		if test $SVN_LIB ; then
-				AC_MSG_RESULT([found])
-		else
-				AC_MSG_RESULT([not found])
-		fi
-fi
-
-dnl ******************************************************************
-dnl Check for extra libs required by subversion.
-dnl FIXME: This should actually be done by subversion and not by us.
-dnl ******************************************************************
-
-AC_ARG_ENABLE(plugin-subversion,
-  AC_HELP_STRING([--disable-plugin-subversion],[Disable subversion support in GTranslator.]),
-  [ if test "$enableval" = "no"; then
-        user_disabled_subversion=1
-    fi ],
-  [ user_disabled_subversion=0 ] )
-
-AC_MSG_CHECKING(if subversion support is disabled)
-if test "$user_disabled_subversion" = 1; then
-	AC_MSG_RESULT(yes)
-	SVN_INCLUDE=""
-	SVN_LIB=""
-else
-	AC_MSG_RESULT(no)
-fi
-
-if test -n "$SVN_INCLUDE" ; then
-	dnl ------------------------------------
-	dnl APR. Required by subversion (devel)
-	dnl ------------------------------------
-	have_atr=no
-	PKG_CHECK_MODULES(APR,                            \
-		apr-1, have_apr=yes, have_apr=no)
-	if test x"$have_apr" = "xno"; then
-		SVN_INCLUDE=""
-	fi
-	
-	dnl -----------------------------------------
-	dnl APR util. Required by subversion (devel)
-	dnl------------------------------------------
-	have_atr_util=no
-	PKG_CHECK_MODULES(APR_UTILS,                            \
-		apr-util-1, have_apr_util=yes, have_apr_util=no)
-	if test x"$have_apr_util" = "xno"; then
-		SVN_INCLUDE=""
-	fi
-	
-	dnl -----------------------------------------
-	dnl NEON. Required by subversion (devel)
-	dnl------------------------------------------
-	have_neon=no
-	PKG_CHECK_MODULES(NEON,                            \
-                neon, have_neon=yes, have_neon=no)
-        if test x"$have_neon" = "xno"; then
-		SVN_INCLUDE=""
-	fi
-
-	dnl Make sure our SVN version is high enough
-	dnl Eww, eww, eww, this is dirty
-	AC_MSG_CHECKING([for subversion >= $LIBSVN_OPTIONAL])
-	AC_LANG(C)
-	dnl Temporarily set CFLAGS so that include dirs are found
-	CFLAGS_TMP=$CFLAGS
-	CFLAGS="-I$SVN_INCLUDE $APR_CFLAGS"
-	AC_COMPILE_IFELSE(
-		[AC_LANG_PROGRAM([[#include <svn_version.h>]],
-			[[
-				#if (SVN_VER_MAJOR < $SVN_MAJOR) || (SVN_VER_MINOR < $SVN_MINOR) || (SVN_VER_PATCH < $SVN_PATCH)
-				#	error "Version too low"
-				#endif
-			]])], AC_MSG_RESULT(yes), have_svn_version=no)
-	if test x"$have_svn_version" = "xno"; then
-		AC_MSG_RESULT(no)
-		SVN_INCLUDE=""
-	fi
-	CFLAGS=$CFLAGS_TMP
-fi
-
-dnl ------------------------------------------
-dnl Finally prepare subversion build flags
-dnl ------------------------------------------
-
-if test -n "$SVN_INCLUDE" ; then
-	SVN_INCLUDE="-I$SVN_INCLUDE"
-	if test x != "x$SVN_LIB" ; then
-	    SVN_LIB="-L$SVN_LIB $APR_LIBS $APR_UTILS_LIBS -lsvn_client-1 -lsvn_subr-1"
-	else
-	    SVN_LIB="$APR_LIBS $APR_UTILS_LIBS -lsvn_client-1 -lsvn_subr-1"
-	fi
-	SVN_CFLAGS="$APR_CFLAGS $APR_UTILS_CFLAGS"
-fi
-
-AM_CONDITIONAL(BUILD_SVN, [test -n "$SVN_INCLUDE"])
-AC_SUBST(SVN_INCLUDE)
-AC_SUBST(SVN_LIB)
-AC_SUBST(SVN_CFLAGS)
-
 dnl -------------------------------------------------------------------
 dnl Enable debug builds.
 dnl -------------------------------------------------------------------
@@ -494,7 +318,6 @@ plugins/insert-params/Makefile
 plugins/insert-tags/Makefile
 plugins/open-tran/Makefile
 plugins/source-code-view/Makefile
-plugins/subversion/Makefile
 src/Makefile
 src/dialogs/Makefile
 src/toolbareditor/Makefile
@@ -518,16 +341,6 @@ build with deprecation 	  :	${enable_deprecated:-no}
 compilation flags      	  :	${CFLAGS}
 ------------------------------------------------------------------
 "
-if [ test -n "$SVN_INCLUDE" ]; then
-        echo "Building subversion plugin: ............................YES"
-else
-        echo "Building subversion plugin: ............................NO"
-		echo "        Requires apr (>= 0.9.4); http://subversion.org"
-		echo "        Requires apr-util (>= 0.9.4); http://subversion.org"
-		echo "        Requires neon (>= 0.24.5); http://subversion.org"
-		echo "        Requires subversion (>= 1.5.0); http://subversion.org"
-
-fi
 
 if [ test x"$have_gucharmap" = "xyes" ]; then
 	echo "Building charmap plugin: ...............................YES"

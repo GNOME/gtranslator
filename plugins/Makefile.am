@@ -17,8 +17,4 @@ if USE_DICTIONARY
 SUBDIRS += dictionary
 endif
 
-if BUILD_SVN
-SUBDIRS += subversion
-endif
-
 -include $(top_srcdir)/git.mk
