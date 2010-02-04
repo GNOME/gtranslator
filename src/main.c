@@ -144,7 +144,7 @@ main (gint argc, gchar * argv[])
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  g_set_application_name (_("Gtr"));
+  g_set_application_name (_("Gtranslator"));
   gtk_window_set_default_icon_name ("gtranslator");
 
   /* Setup command line options */
