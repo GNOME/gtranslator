@@ -16,6 +16,6 @@ DOC_FIGURES = figures/mainwindow.png \
 	      figures/profiles-dialog.png \
 	      figures/prefs-interface.png \
 	      figures/prefs-tm.png
-DOC_LINGUAS = de el es th zh_CN
+DOC_LINGUAS = cs de el es th zh_CN
 
 -include $(top_srcdir)/git.mk
