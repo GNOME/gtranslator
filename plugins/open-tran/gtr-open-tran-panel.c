@@ -199,23 +199,19 @@ print_struct_field (gpointer key, gpointer value, gpointer data)
     }
 }
 
-static void
+static gboolean
 check_xmlrpc (GValue * value, GType type, ...)
 {
   va_list args;
 
   if (!G_VALUE_HOLDS (value, type))
-    {
-      g_warning (_("ERROR: could not parse response\n"));
-
-      if (G_IS_VALUE (value))
-        g_value_unset (value);
-      return;
-    }
+    return FALSE;
 
   va_start (args, type);
   SOUP_VALUE_GETV (value, type, args);
   va_end (args);
+
+  return TRUE;
 }
 
 static void
@@ -272,10 +268,18 @@ open_connection (GtranslatorOpenTranPanel * panel,
       else
 	show_error_dialog (panel->priv->window,
 			   _("ERROR: could not parse response\n"));
+
+      g_object_unref (msg);
+      return;
     }
   g_object_unref (msg);
 
-  check_xmlrpc (&retval, G_TYPE_VALUE_ARRAY, &array);
+  if (!check_xmlrpc (&retval, G_TYPE_VALUE_ARRAY, &array))
+    {
+      show_error_dialog (panel->priv->window,
+                         _("ERROR: could not parse response\n"));
+      return;
+    }
 
   for (i = 0; i < array->n_values; i++)
     {
@@ -290,9 +294,7 @@ open_connection (GtranslatorOpenTranPanel * panel,
       g_hash_table_foreach (result, print_struct_field, panel);
     }
 
-  /*
-   * We have to check if we didn't find any text
-   */
+  /* We have to check if we didn't find any text */
   if (!gtk_tree_model_get_iter_first (GTK_TREE_MODEL (panel->priv->store),
 				      &treeiter))
     {
