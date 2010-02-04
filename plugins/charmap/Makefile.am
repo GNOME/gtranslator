@@ -15,10 +15,10 @@ INCLUDES = \
 plugin_LTLIBRARIES = libcharmap.la
 
 libcharmap_la_SOURCES = \
-	charmap-plugin.h				\
-	charmap-plugin.c				\
-	charmap-panel.h				\
-	charmap-panel.c
+	gtr-charmap-plugin.h				\
+	gtr-charmap-plugin.c				\
+	gtr-charmap-panel.h				\
+	gtr-charmap-panel.c
 
 libcharmap_la_LDFLAGS = \
 	$(PLUGIN_LIBTOOL_FLAGS)				\
@@ -31,7 +31,7 @@ pixmaps__DATA = \
 
 # Plugin Info
 
-plugin_in_files = charmap.gtranslator-plugin.desktop.in
+plugin_in_files = gtr-charmap.gtranslator-plugin.desktop.in
 
 %.gtranslator.plugin: %.gtranslator-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 

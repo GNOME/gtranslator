@@ -15,8 +15,8 @@ plugin_LTLIBRARIES = \
 	libfullscreen.la
 
 libfullscreen_la_SOURCES = \
-	fullscreen-plugin.c \
-	fullscreen-plugin.h
+	gtr-fullscreen-plugin.c \
+	gtr-fullscreen-plugin.h
 
 
 libfullscreen_la_LDFLAGS = \
@@ -25,7 +25,7 @@ libfullscreen_la_LDFLAGS = \
 
 # Plugin Info
 
-plugin_in_files = fullscreen.gtranslator-plugin.desktop.in
+plugin_in_files = gtr-fullscreen.gtranslator-plugin.desktop.in
 
 %.gtranslator.plugin: %.gtranslator-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 

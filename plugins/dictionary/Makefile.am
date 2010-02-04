@@ -15,12 +15,12 @@ INCLUDES = \
 plugin_LTLIBRARIES = libdict.la
 
 libdict_la_SOURCES = \
-	dict-panel.h			\
-	dict-panel.c			\
-	gdict-sidebar.c			\
-	gdict-sidebar.h			\
-	dictionary-plugin.h		\
-	dictionary-plugin.c
+	gtr-dict-panel.h			\
+	gtr-dict-panel.c			\
+	gtr-gdict-sidebar.c			\
+	gtr-gdict-sidebar.h			\
+	gtr-dictionary-plugin.h		\
+	gtr-dictionary-plugin.c
 	
 
 libdict_la_LDFLAGS = \
@@ -35,7 +35,7 @@ pixmaps__DATA = \
 
 # Plugin Info
 
-plugin_in_files = dict.gtranslator-plugin.desktop.in
+plugin_in_files = gtr-dict.gtranslator-plugin.desktop.in
 
 %.gtranslator.plugin: %.gtranslator-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 

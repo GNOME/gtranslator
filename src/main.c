@@ -25,12 +25,12 @@
 #include <config.h>
 #endif
 
-#include "actions.h"
-#include "application.h"
-#include "prefs-manager-app.h"
-#include "plugins-engine.h"
-#include "utils.h"
-#include "dirs.h"
+#include "gtr-actions.h"
+#include "gtr-application.h"
+#include "gtr-prefs-manager-app.h"
+#include "gtr-plugins-engine.h"
+#include "gtr-utils.h"
+#include "gtr-dirs.h"
 
 #include <locale.h>
 #include <glib.h>

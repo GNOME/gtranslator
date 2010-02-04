@@ -15,8 +15,8 @@ plugin_LTLIBRARIES = \
 	libinserttags.la
 
 libinserttags_la_SOURCES = \
-	insert-tags-plugin.c \
-	insert-tags-plugin.h
+	gtr-insert-tags-plugin.c \
+	gtr-insert-tags-plugin.h
 
 
 libinserttags_la_LDFLAGS = \
@@ -25,7 +25,7 @@ libinserttags_la_LDFLAGS = \
 
 # Plugin Info
 
-plugin_in_files = insert-tags.gtranslator-plugin.desktop.in
+plugin_in_files = gtr-insert-tags.gtranslator-plugin.desktop.in
 
 %.gtranslator.plugin: %.gtranslator-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 

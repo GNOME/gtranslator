@@ -14,33 +14,33 @@ noinst_LTLIBRARIES = \
 	libdialogs.la
 
 libdialogs_la_SOURCES = \
-	close-confirmation-dialog.c \
-	close-confirmation-dialog.h \
-	file-dialogs.c \
-	file-dialogs.h \
-	preferences-dialog.c \
-	preferences-dialog.h \
-	search-dialog.c \
-	search-dialog.h \
-	header-dialog.c \
-	header-dialog.h \
-	comment-dialog.c \
-	comment-dialog.h \
-	profile-dialog.c \
-	profile-dialog.h \
-	assistant.c \
-	assistant.h \
-	jump-dialog.c \
-	jump-dialog.h
+	gtr-close-confirmation-dialog.c \
+	gtr-close-confirmation-dialog.h \
+	gtr-file-dialogs.c \
+	gtr-file-dialogs.h \
+	gtr-preferences-dialog.c \
+	gtr-preferences-dialog.h \
+	gtr-search-dialog.c \
+	gtr-search-dialog.h \
+	gtr-header-dialog.c \
+	gtr-header-dialog.h \
+	gtr-comment-dialog.c \
+	gtr-comment-dialog.h \
+	gtr-profile-dialog.c \
+	gtr-profile-dialog.h \
+	gtr-assistant.c \
+	gtr-assistant.h \
+	gtr-jump-dialog.c \
+	gtr-jump-dialog.h
 
 uidir = $(pkgdatadir)/ui
 ui_DATA =  \
-		preferences-dialog.ui \
-		search-dialog.ui \
-		header-dialog.ui \
-		comment-dialog.ui \
-		profile-dialog.ui \
-		jump-dialog.ui
+		gtr-preferences-dialog.ui \
+		gtr-search-dialog.ui \
+		gtr-header-dialog.ui \
+		gtr-comment-dialog.ui \
+		gtr-profile-dialog.ui \
+		gtr-jump-dialog.ui
 
 EXTRA_DIST = \
 		$(ui_DATA)

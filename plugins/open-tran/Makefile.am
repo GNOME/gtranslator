@@ -17,10 +17,10 @@ INCLUDES =                                                      \
 plugin_LTLIBRARIES = libopentran.la
 
 libopentran_la_SOURCES = \
-	open-tran-panel.c \
-	open-tran-panel.h\
-	open-tran-plugin.c \
-	open-tran-plugin.h
+	gtr-open-tran-panel.c \
+	gtr-open-tran-panel.h\
+	gtr-open-tran-plugin.c \
+	gtr-open-tran-plugin.h
 
 libopentran_la_LDFLAGS = \
 	$(PLUGIN_LIBTOOL_FLAGS)				\
@@ -30,7 +30,7 @@ libopentran_la_LDFLAGS = \
 uidir = $(pkgdatadir)
 
 ui_DATA =  \
-	open-tran-dialog.ui
+	gtr-open-tran-dialog.ui
 
 pixmaps_dir = $(datadir)/pixmaps/gtranslator
 pixmaps__DATA = \
@@ -47,7 +47,7 @@ pixmaps__DATA = \
 
 # Plugin Info
 
-plugin_in_files = open-tran.gtranslator-plugin.desktop.in
+plugin_in_files = gtr-open-tran.gtranslator-plugin.desktop.in
 
 %.gtranslator.plugin: %.gtranslator-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 

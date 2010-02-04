@@ -15,7 +15,7 @@ noinst_LTLIBRARIES = \
 	libpluginsystem.la
 
 INST_H_FILES = \
-	plugin.h
+	gtr-plugin.h
 
 headerdir = $(prefix)/include/gtranslator-@GTR_API_VERSION@/gtranslator
 
@@ -24,16 +24,16 @@ header_DATA = \
 
 libpluginsystem_la_SOURCES = \
 	$(INST_H_FILES) \
-	module.h \
-	module.c \
-	plugin-info-priv.h \
-	plugin-info.c \
-	plugin-info.h \
-	plugin.c \
-	plugin-manager.c \
-	plugin-manager.h \
-	plugins-engine.c \
-	plugins-engine.h
+	gtr-module.h \
+	gtr-module.c \
+	gtr-plugin-info-priv.h \
+	gtr-plugin-info.c \
+	gtr-plugin-info.h \
+	gtr-plugin.c \
+	gtr-plugin-manager.c \
+	gtr-plugin-manager.h \
+	gtr-plugins-engine.c \
+	gtr-plugins-engine.h
 
 libpluginsystem_la_CFLAGS = \
 	$(GTRANSLATOR_CFLAGS)			\

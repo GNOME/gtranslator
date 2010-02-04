@@ -52,10 +52,10 @@ endif
 libgtranslator_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
 BUILT_SOURCES =                         \
-        gtranslator-marshal.h  \
-        gtranslator-marshal.c	\
-	gtranslator-enum-types.h \
-	gtranslator-enum-types.c
+	gtr-marshal.h  \
+	gtr-marshal.c	\
+	gtr-enum-types.h \
+	gtr-enum-types.c
 
 if PLATFORM_WIN32
 gtranslator-res.o: gtranslator.rc
@@ -65,21 +65,21 @@ gtranslator_LDADD += gtranslator-res.o
 endif
 
 INST_H_FILES =				\
-	application.h \
-	context.h \
-	debug.h \
-	header.h \
-	io-error-info-bar.h \
-	message-table.h \
-	msg.h \
-	notebook.h \
-	po.h \
-	profile.h \
-	statusbar.h \
-	tab.h \
-	utils.h \
-	view.h \
-	window.h
+	gtr-application.h \
+	gtr-context.h \
+	gtr-debug.h \
+	gtr-header.h \
+	gtr-io-error-info-bar.h \
+	gtr-message-table.h \
+	gtr-msg.h \
+	gtr-notebook.h \
+	gtr-po.h \
+	gtr-profile.h \
+	gtr-statusbar.h \
+	gtr-tab.h \
+	gtr-utils.h \
+	gtr-view.h \
+	gtr-window.h
 
 headerdir = $(prefix)/include/gtranslator-@GTR_API_VERSION@/gtranslator
 
@@ -88,39 +88,39 @@ header_DATA = \
 
 libgtranslator_la_SOURCES = \
 	$(BUILT_SOURCES) \
-	application.c \
-	dirs.h \
-	dirs.c \
-	message-table.c \
-	message-table-model.c \
-	message-table-model.h \
-	notebook.c \
-	tab.c \
-	view.c \
-	window.c \
-	po.c \
-	profile.c \
-	utils.c \
-	msg.c \
-	actions.h \
-	actions-documents.c \
-	actions-file.c \
-	actions-go.c \
-	actions-edit.c \
-	actions-view.c \
-	actions-help.c \
-	io-error-info-bar.c \
-	prefs-manager.c \
-	prefs-manager.h \
-	prefs-manager-private.h \
-	prefs-manager-app.c \
-	prefs-manager-app.h \
-	history-entry.c \
-	history-entry.h \
-	actions-search.c \
-	header.c \
-	statusbar.c \
-	context.c \
+	gtr-application.c \
+	gtr-dirs.h \
+	gtr-dirs.c \
+	gtr-message-table.c \
+	gtr-message-table-model.c \
+	gtr-message-table-model.h \
+	gtr-notebook.c \
+	gtr-tab.c \
+	gtr-view.c \
+	gtr-window.c \
+	gtr-po.c \
+	gtr-profile.c \
+	gtr-utils.c \
+	gtr-msg.c \
+	gtr-actions.h \
+	gtr-actions-documents.c \
+	gtr-actions-file.c \
+	gtr-actions-go.c \
+	gtr-actions-edit.c \
+	gtr-actions-view.c \
+	gtr-actions-help.c \
+	gtr-io-error-info-bar.c \
+	gtr-prefs-manager.c \
+	gtr-prefs-manager.h \
+	gtr-prefs-manager-private.h \
+	gtr-prefs-manager-app.c \
+	gtr-prefs-manager-app.h \
+	gtr-history-entry.c \
+	gtr-history-entry.h \
+	gtr-actions-search.c \
+	gtr-header.c \
+	gtr-statusbar.c \
+	gtr-context.c \
 	$(INST_H_FILES) 
 
 libgtranslator_la_LIBADD = \
@@ -140,22 +140,22 @@ libgtranslator_la_LIBADD = \
 #	export-learn-buffer.c
 #	
 
-gtranslator-enum-types.h: gtranslator-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
-	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gtranslator-enum-types.h.template $(INST_H_FILES)) > $@
+gtr-enum-types.h: gtr-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
+	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gtr-enum-types.h.template $(INST_H_FILES)) > $@
 	
-gtranslator-enum-types.c: gtranslator-enum-types.c.template $(INST_H_FILES) $(GLIB_MKENUMS)
-	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gtranslator-enum-types.c.template $(INST_H_FILES)) > $@
+gtr-enum-types.c: gtr-enum-types.c.template $(INST_H_FILES) $(GLIB_MKENUMS)
+	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gtr-enum-types.c.template $(INST_H_FILES)) > $@
 
-gtranslator-marshal.h: gtranslator-marshal.list $(GLIB_GENMARSHAL)
-	$(AM_V_GEN) $(GLIB_GENMARSHAL) $< --header --prefix=gtranslator_marshal > $@
+gtr-marshal.h: gtr-marshal.list $(GLIB_GENMARSHAL)
+	$(AM_V_GEN) $(GLIB_GENMARSHAL) $< --header --prefix=gtr_marshal > $@
 
-gtranslator-marshal.c: gtranslator-marshal.list $(GLIB_GENMARSHAL)
-	$(AM_V_GEN) $(GLIB_GENMARSHAL) $< --body --header --prefix=gtranslator_marshal > $@
+gtr-marshal.c: gtr-marshal.list $(GLIB_GENMARSHAL)
+	$(AM_V_GEN) $(GLIB_GENMARSHAL) $< --body --header --prefix=gtr_marshal > $@
 
 EXTRA_DIST =	\
-	gtranslator-marshal.list	\
-	gtranslator-enum-types.h.template	\
-	gtranslator-enum-types.c.template
+	gtr-marshal.list	\
+	gtr-enum-types.h.template	\
+	gtr-enum-types.c.template
 
 CLEANFILES = $(BUILT_SOURCES)
 

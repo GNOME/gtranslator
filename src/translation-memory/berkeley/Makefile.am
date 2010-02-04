@@ -14,18 +14,18 @@ noinst_LTLIBRARIES = \
 	libberkeley.la
 
 libberkeley_la_SOURCES = \
-	berkeley.c \
-	berkeley.h \
-	db-base.h \
-	db-base.c \
-	db-trans.h \
-	db-trans.c \
-	db-orig.h \
-	db-orig.c \
-	db-words.h \
-	db-words.c \
-	db-keys.h \
-	db-keys.c
+	gtr-berkeley.c \
+	gtr-berkeley.h \
+	gtr-db-base.h \
+	gtr-db-base.c \
+	gtr-db-trans.h \
+	gtr-db-trans.c \
+	gtr-db-orig.h \
+	gtr-db-orig.c \
+	gtr-db-words.h \
+	gtr-db-words.c \
+	gtr-db-keys.h \
+	gtr-db-keys.c
 
 libberkeley_la_CFLAGS = \
 	$(GTRANSLATOR_CFLAGS)			\

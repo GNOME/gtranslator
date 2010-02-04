@@ -15,10 +15,10 @@ plugin_LTLIBRARIES = \
 	libsourcecodeview.la
 
 libsourcecodeview_la_SOURCES = \
-	source-code-view-plugin.c \
-	source-code-view-plugin.h \
-	viewer.c \
-	viewer.h
+	gtr-source-code-view-plugin.c \
+	gtr-source-code-view-plugin.h \
+	gtr-viewer.c \
+	gtr-viewer.h
 
 libsourcecodeview_la_LDFLAGS = \
 	$(PLUGIN_LIBTOOL_FLAGS)				\
@@ -27,12 +27,12 @@ libsourcecodeview_la_LDFLAGS = \
 uidir = $(pkgdatadir)
 
 ui_DATA =  \
-        viewer.ui \
-	source-code-view-dialog.ui
+        gtr-viewer.ui \
+	gtr-source-code-view-dialog.ui
 
 # Plugin Info
 
-plugin_in_files = source-code-view.gtranslator-plugin.desktop.in
+plugin_in_files = gtr-source-code-view.gtranslator-plugin.desktop.in
 
 %.gtranslator.plugin: %.gtranslator-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 

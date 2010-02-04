@@ -15,10 +15,10 @@ plugin_LTLIBRARIES = \
 	libalternatelang.la
 
 libalternatelang_la_SOURCES = \
-	alternate-language-panel.h \
-	alternate-language-panel.c \
-	alternate-language-plugin.c \
-	alternate-language-plugin.h
+	gtr-alternate-language-panel.h \
+	gtr-alternate-language-panel.c \
+	gtr-alternate-language-plugin.c \
+	gtr-alternate-language-plugin.h
 
 
 libalternatelang_la_LDFLAGS = \
@@ -27,7 +27,7 @@ libalternatelang_la_LDFLAGS = \
 
 # Plugin Info
 
-plugin_in_files = alternate-language.gtranslator-plugin.desktop.in
+plugin_in_files = gtr-alternate-language.gtranslator-plugin.desktop.in
 
 %.gtranslator.plugin: %.gtranslator-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
