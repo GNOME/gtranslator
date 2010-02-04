@@ -4,73 +4,63 @@
 data/desktop/gtranslator.desktop.in.in
 data/gtranslator.schemas.in
 data/po.lang
-plugins/alternate-language/alternate-language-panel.c
-plugins/alternate-language/alternate-language-plugin.c
-plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in
-plugins/charmap/charmap-plugin.c
-plugins/charmap/charmap.gtranslator-plugin.desktop.in
-plugins/dictionary/dict-panel.c
-plugins/dictionary/dict.gtranslator-plugin.desktop.in
-plugins/dictionary/dictionary-plugin.c
-plugins/fullscreen/fullscreen-plugin.c
-plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in
-plugins/insert-params/insert-params-plugin.c
-plugins/insert-params/insert-params.gtranslator-plugin.desktop.in
-plugins/insert-tags/insert-tags-plugin.c
-plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in
-[type: gettext/glade]plugins/open-tran/open-tran-dialog.ui
-plugins/open-tran/open-tran-panel.c
-plugins/open-tran/open-tran-plugin.c
-plugins/open-tran/open-tran.gtranslator-plugin.desktop.in
-[type: gettext/glade]plugins/source-code-view/source-code-view-dialog.ui
-plugins/source-code-view/source-code-view-plugin.c
-plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in
-plugins/source-code-view/viewer.c
-[type: gettext/glade]plugins/source-code-view/viewer.ui
-plugins/subversion/checkout-dialog.c
-plugins/subversion/commit-dialog.c
-plugins/subversion/diff-dialog.c
-plugins/subversion/subversion-plugin.c
-[type: gettext/glade]plugins/subversion/subversion.ui
-plugins/subversion/subversion.gtranslator-plugin.desktop.in
-plugins/subversion/svn-command.c
-plugins/subversion/svn-update-command.c
-plugins/subversion/update-dialog.c
-plugins/subversion/vcs-status-tree-view.c
-src/actions-file.c
-src/actions-help.c
-src/actions-search.c
-src/context.c
-src/dialogs/assistant.c
-src/dialogs/close-confirmation-dialog.c
-src/dialogs/comment-dialog.c
-[type: gettext/glade]src/dialogs/comment-dialog.ui
-src/dialogs/file-dialogs.c
-src/dialogs/header-dialog.c
-[type: gettext/glade]src/dialogs/header-dialog.ui
-src/dialogs/jump-dialog.c
-[type: gettext/glade]src/dialogs/jump-dialog.ui
-src/dialogs/preferences-dialog.c
-[type: gettext/glade]src/dialogs/preferences-dialog.ui
-src/dialogs/profile-dialog.c
-[type: gettext/glade]src/dialogs/profile-dialog.ui
-src/dialogs/search-dialog.c
-[type: gettext/glade]src/dialogs/search-dialog.ui
+plugins/alternate-language/gtr-alternate-language-panel.c
+plugins/alternate-language/gtr-alternate-language-plugin.c
+plugins/alternate-language/gtr-alternate-language.gtranslator-plugin.desktop.in
+plugins/charmap/gtr-charmap-plugin.c
+plugins/charmap/gtr-charmap.gtranslator-plugin.desktop.in
+plugins/dictionary/gtr-dict-panel.c
+plugins/dictionary/gtr-dict.gtranslator-plugin.desktop.in
+plugins/dictionary/gtr-dictionary-plugin.c
+plugins/fullscreen/gtr-fullscreen-plugin.c
+plugins/fullscreen/gtr-fullscreen.gtranslator-plugin.desktop.in
+plugins/insert-params/gtr-insert-params-plugin.c
+plugins/insert-params/gtr-insert-params.gtranslator-plugin.desktop.in
+plugins/insert-tags/gtr-insert-tags-plugin.c
+plugins/insert-tags/gtr-insert-tags.gtranslator-plugin.desktop.in
+[type: gettext/glade]plugins/open-tran/gtr-open-tran-dialog.ui
+plugins/open-tran/gtr-open-tran-panel.c
+plugins/open-tran/gtr-open-tran-plugin.c
+plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in
+[type: gettext/glade]plugins/source-code-view/gtr-source-code-view-dialog.ui
+plugins/source-code-view/gtr-source-code-view-plugin.c
+plugins/source-code-view/gtr-source-code-view.gtranslator-plugin.desktop.in
+plugins/source-code-view/gtr-viewer.c
+[type: gettext/glade]plugins/source-code-view/gtr-viewer.ui
+src/gtr-actions-file.c
+src/gtr-actions-help.c
+src/gtr-actions-search.c
+src/gtr-context.c
+src/dialogs/gtr-assistant.c
+src/dialogs/gtr-close-confirmation-dialog.c
+src/dialogs/gtr-comment-dialog.c
+[type: gettext/glade]src/dialogs/gtr-comment-dialog.ui
+src/dialogs/gtr-file-dialogs.c
+src/dialogs/gtr-header-dialog.c
+[type: gettext/glade]src/dialogs/gtr-header-dialog.ui
+src/dialogs/gtr-jump-dialog.c
+[type: gettext/glade]src/dialogs/gtr-jump-dialog.ui
+src/dialogs/gtr-preferences-dialog.c
+[type: gettext/glade]src/dialogs/gtr-preferences-dialog.ui
+src/dialogs/gtr-profile-dialog.c
+[type: gettext/glade]src/dialogs/gtr-profile-dialog.ui
+src/dialogs/gtr-search-dialog.c
+[type: gettext/glade]src/dialogs/gtr-search-dialog.ui
 src/main.c
-src/message-table.c
-src/notebook.c
-src/po.c
-src/plugin-system/plugin-manager.c
-src/prefs-manager.c
-src/statusbar.c
-src/tab.c
+src/gtr-message-table.c
+src/gtr-notebook.c
+src/gtr-po.c
+src/plugin-system/gtr-plugin-manager.c
+src/gtr-prefs-manager.c
+src/gtr-statusbar.c
+src/gtr-tab.c
 src/toolbareditor/egg-editable-toolbar.c
 src/toolbareditor/egg-toolbar-editor.c
-src/translation-memory/berkeley/db-base.c
-src/translation-memory/berkeley/db-orig.c
-src/translation-memory/berkeley/db-trans.c
-src/translation-memory/berkeley/db-words.c
-src/translation-memory/translation-memory-ui.c
-src/utils.c
-src/view.c
-src/window.c
+src/translation-memory/berkeley/gtr-db-base.c
+src/translation-memory/berkeley/gtr-db-orig.c
+src/translation-memory/berkeley/gtr-db-trans.c
+src/translation-memory/berkeley/gtr-db-words.c
+src/translation-memory/gtr-translation-memory-ui.c
+src/gtr-utils.c
+src/gtr-view.c
+src/gtr-window.c
