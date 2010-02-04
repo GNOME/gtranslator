@@ -20,6 +20,7 @@
 #include <config.h>
 #endif
 
+#include "gtr-dirs.h"
 #include "gtr-utils.h"
 #include "gtr-viewer.h"
 #include "gtr-window.h"
