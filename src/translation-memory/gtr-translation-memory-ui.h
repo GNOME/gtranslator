@@ -30,35 +30,35 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_TRANSLATION_MEMORY_UI	        (gtranslator_translation_memory_ui_get_type ())
-#define GTR_TRANSLATION_MEMORY_UI(o)	        (G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_TRANSLATION_MEMORY_UI, GtranslatorTranslationMemoryUi))
-#define GTR_TRANSLATION_MEMORY_UI_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_TRANSLATION_MEMORY_UI, GtranslatorTranslationMemoryUiClass))
+#define GTR_TRANSLATION_MEMORY_UI(o)	        (G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_TRANSLATION_MEMORY_UI, GtrTranslationMemoryUi))
+#define GTR_TRANSLATION_MEMORY_UI_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_TRANSLATION_MEMORY_UI, GtrTranslationMemoryUiClass))
 #define GTR_IS_TRANSLATION_MEMORY_UI(o)	        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_TRANSLATION_MEMORY_UI))
 #define GTR_IS_TRANSLATION_MEMORY_UI_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_TRANSLATION_MEMORY_UI))
-#define GTR_TRANSLATION_MEMORY_UI_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_TRANSLATION_MEMORY_UI, GtranslatorTranslationMemoryUiClass))
+#define GTR_TRANSLATION_MEMORY_UI_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_TRANSLATION_MEMORY_UI, GtrTranslationMemoryUiClass))
 /* Private structure type */
-typedef struct _GtranslatorTranslationMemoryUiPrivate
-  GtranslatorTranslationMemoryUiPrivate;
+typedef struct _GtrTranslationMemoryUiPrivate
+  GtrTranslationMemoryUiPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorTranslationMemoryUi GtranslatorTranslationMemoryUi;
+typedef struct _GtrTranslationMemoryUi GtrTranslationMemoryUi;
 
-struct _GtranslatorTranslationMemoryUi
+struct _GtrTranslationMemoryUi
 {
   GtkScrolledWindow parent_instance;
 
   /*< private > */
-  GtranslatorTranslationMemoryUiPrivate *priv;
+  GtrTranslationMemoryUiPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorTranslationMemoryUiClass
-  GtranslatorTranslationMemoryUiClass;
+typedef struct _GtrTranslationMemoryUiClass
+  GtrTranslationMemoryUiClass;
 
-struct _GtranslatorTranslationMemoryUiClass
+struct _GtrTranslationMemoryUiClass
 {
   GtkScrolledWindowClass parent_class;
 };

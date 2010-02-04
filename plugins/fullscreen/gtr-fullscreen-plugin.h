@@ -29,34 +29,34 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_FULLSCREEN_PLUGIN		(gtranslator_fullscreen_get_type ())
-#define GTR_FULLSCREEN_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGEFULLSCREEN_PLUGIN, GtranslatorFullscreenPlugin))
-#define GTR_FULLSCREEN_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_FULLSCREEN_PLUGIN, GtranslatorFullscreenPluginClass))
+#define GTR_FULLSCREEN_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGEFULLSCREEN_PLUGIN, GtrFullscreenPlugin))
+#define GTR_FULLSCREEN_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_FULLSCREEN_PLUGIN, GtrFullscreenPluginClass))
 #define GTR_IS_FULLSCREEN_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_FULLSCREEN_PLUGIN))
 #define GTR_IS_FULLSCREEN_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_FULLSCREEN_PLUGIN))
-#define GTR_FULLSCREEN_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_FULLSCREEN_PLUGIN_PLUGIN, GtranslatorFullscreenPluginClass))
+#define GTR_FULLSCREEN_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_FULLSCREEN_PLUGIN_PLUGIN, GtrFullscreenPluginClass))
 /* Private structure type */
-typedef struct _GtranslatorFullscreenPluginPrivate
-  GtranslatorFullscreenPluginPrivate;
+typedef struct _GtrFullscreenPluginPrivate
+  GtrFullscreenPluginPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorFullscreenPlugin GtranslatorFullscreenPlugin;
+typedef struct _GtrFullscreenPlugin GtrFullscreenPlugin;
 
-struct _GtranslatorFullscreenPlugin
+struct _GtrFullscreenPlugin
 {
-  GtranslatorPlugin parent_instance;
+  GtrPlugin parent_instance;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorFullscreenPluginClass
-  GtranslatorFullscreenPluginClass;
+typedef struct _GtrFullscreenPluginClass
+  GtrFullscreenPluginClass;
 
-struct _GtranslatorFullscreenPluginClass
+struct _GtrFullscreenPluginClass
 {
-  GtranslatorPluginClass parent_class;
+  GtrPluginClass parent_class;
 };
 
 /*

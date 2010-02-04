@@ -32,15 +32,15 @@
 #include <gtk/gtk.h>
 
 #define OPEN_TRAN_PLUGIN_ICON "open-tran.png"
-#define WINDOW_DATA_KEY	"GtranslatorOpenTranPluginWindowData"
+#define WINDOW_DATA_KEY	"GtrOpenTranPluginWindowData"
 #define UI_FILE DATADIR"/open-tran-dialog.ui"
 
 #define GTR_OPEN_TRAN_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
 				GTR_TYPE_OPEN_TRAN_PLUGIN,		\
-				GtranslatorOpenTranPluginPrivate))
+				GtrOpenTranPluginPrivate))
 
-struct _GtranslatorOpenTranPluginPrivate
+struct _GtrOpenTranPluginPrivate
 {
   GConfClient *gconf_client;
 
@@ -58,11 +58,11 @@ typedef struct
   guint context_id;
 } WindowData;
 
-GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtranslatorOpenTranPlugin,
+GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrOpenTranPlugin,
 				    gtranslator_open_tran_plugin,
 				    gtranslator_open_tran_panel_register_type
 				    (module);)
-     static void gtranslator_open_tran_plugin_init (GtranslatorOpenTranPlugin
+     static void gtranslator_open_tran_plugin_init (GtrOpenTranPlugin
 						    * plugin)
 {
   plugin->priv = GTR_OPEN_TRAN_PLUGIN_GET_PRIVATE (plugin);
@@ -77,7 +77,7 @@ GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtranslatorOpenTranPlugin,
 static void
 gtranslator_open_tran_plugin_finalize (GObject * object)
 {
-  GtranslatorOpenTranPlugin *plugin = GTR_OPEN_TRAN_PLUGIN (object);
+  GtrOpenTranPlugin *plugin = GTR_OPEN_TRAN_PLUGIN (object);
 
   gconf_client_suggest_sync (plugin->priv->gconf_client, NULL);
 
@@ -89,7 +89,7 @@ gtranslator_open_tran_plugin_finalize (GObject * object)
 
 
 static void
-impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_activate (GtrPlugin * plugin, GtrWindow * window)
 {
   GtkWidget *opentran;
 
@@ -101,7 +101,7 @@ impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 
   gtranslator_window_add_widget (window,
 				 opentran,
-				 "GtranslatorOpenTranPlugin",
+				 "GtrOpenTranPlugin",
 				 _("Open Tran"),
 				 "open-tran-plugin-icon",
 				 GTR_WINDOW_PLACEMENT_LEFT);
@@ -110,7 +110,7 @@ impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 }
 
 static void
-impl_deactivate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
 {
   GtkWidget *opentran;
 
@@ -124,7 +124,7 @@ impl_deactivate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 }
 
 static void
-get_custom_code (GtranslatorOpenTranPlugin * plugin, gboolean own_code)
+get_custom_code (GtrOpenTranPlugin * plugin, gboolean own_code)
 {
   gchar *type;
   gchar *code;
@@ -152,7 +152,7 @@ get_custom_code (GtranslatorOpenTranPlugin * plugin, gboolean own_code)
 }
 
 static GtkWidget *
-get_configuration_dialog (GtranslatorOpenTranPlugin * plugin)
+get_configuration_dialog (GtrOpenTranPlugin * plugin)
 {
 
   gboolean ret;
@@ -185,7 +185,7 @@ get_configuration_dialog (GtranslatorOpenTranPlugin * plugin)
 }
 
 static void
-ok_button_pressed (GtranslatorOpenTranPlugin * plugin)
+ok_button_pressed (GtrOpenTranPlugin * plugin)
 {
   const gchar *search_code;
   const gchar *own_code;
@@ -214,7 +214,7 @@ ok_button_pressed (GtranslatorOpenTranPlugin * plugin)
 static void
 configure_dialog_response_cb (GtkWidget * widget,
 			      gint response,
-			      GtranslatorOpenTranPlugin * plugin)
+			      GtrOpenTranPlugin * plugin)
 {
   switch (response)
     {
@@ -233,7 +233,7 @@ configure_dialog_response_cb (GtkWidget * widget,
 }
 
 static GtkWidget *
-impl_create_configure_dialog (GtranslatorPlugin * plugin)
+impl_create_configure_dialog (GtrPlugin * plugin)
 {
   GtkWidget *dialog;
 
@@ -250,11 +250,11 @@ impl_create_configure_dialog (GtranslatorPlugin * plugin)
 }
 
 static void
-gtranslator_open_tran_plugin_class_init (GtranslatorOpenTranPluginClass *
+gtranslator_open_tran_plugin_class_init (GtrOpenTranPluginClass *
 					 klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtranslatorPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
+  GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
   object_class->finalize = gtranslator_open_tran_plugin_finalize;
 
@@ -263,5 +263,5 @@ gtranslator_open_tran_plugin_class_init (GtranslatorOpenTranPluginClass *
   plugin_class->create_configure_dialog = impl_create_configure_dialog;
 
   g_type_class_add_private (object_class,
-			    sizeof (GtranslatorOpenTranPluginPrivate));
+			    sizeof (GtrOpenTranPluginPrivate));
 }

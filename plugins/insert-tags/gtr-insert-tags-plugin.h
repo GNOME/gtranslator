@@ -29,34 +29,34 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_INSERT_TAGS_PLUGIN		(gtranslator_insert_tags_get_type ())
-#define GTR_INSERT_TAGS_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGEINSERT_TAGS_PLUGIN, GtranslatorInsertTagsPlugin))
-#define GTR_INSERT_TAGS_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_INSERT_TAGS_PLUGIN, GtranslatorInsertTagsPluginClass))
+#define GTR_INSERT_TAGS_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGEINSERT_TAGS_PLUGIN, GtrInsertTagsPlugin))
+#define GTR_INSERT_TAGS_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_INSERT_TAGS_PLUGIN, GtrInsertTagsPluginClass))
 #define GTR_IS_INSERT_TAGS_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_INSERT_TAGS_PLUGIN))
 #define GTR_IS_INSERT_TAGS_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_INSERT_TAGS_PLUGIN))
-#define GTR_INSERT_TAGS_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_INSERT_TAGS_PLUGIN_PLUGIN, GtranslatorInsertTagsPluginClass))
+#define GTR_INSERT_TAGS_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_INSERT_TAGS_PLUGIN_PLUGIN, GtrInsertTagsPluginClass))
 /* Private structure type */
-typedef struct _GtranslatorInsertTagsPluginPrivate
-  GtranslatorInsertTagsPluginPrivate;
+typedef struct _GtrInsertTagsPluginPrivate
+  GtrInsertTagsPluginPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorInsertTagsPlugin GtranslatorInsertTagsPlugin;
+typedef struct _GtrInsertTagsPlugin GtrInsertTagsPlugin;
 
-struct _GtranslatorInsertTagsPlugin
+struct _GtrInsertTagsPlugin
 {
-  GtranslatorPlugin parent_instance;
+  GtrPlugin parent_instance;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorInsertTagsPluginClass
-  GtranslatorInsertTagsPluginClass;
+typedef struct _GtrInsertTagsPluginClass
+  GtrInsertTagsPluginClass;
 
-struct _GtranslatorInsertTagsPluginClass
+struct _GtrInsertTagsPluginClass
 {
-  GtranslatorPluginClass parent_class;
+  GtrPluginClass parent_class;
 };
 
 /*

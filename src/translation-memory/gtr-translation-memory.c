@@ -19,14 +19,14 @@
 
 /**
  * gtranslator_translation_memory_store:
- * @obj: a #GtranslatorTranslationMemory
+ * @obj: a #GtrTranslationMemory
  * @original: the untranslated text
  * @translation: the @original text translated
  *
  * Stores the @original and @translation strings in the database.
  */
 gboolean
-gtranslator_translation_memory_store (GtranslatorTranslationMemory * obj,
+gtranslator_translation_memory_store (GtrTranslationMemory * obj,
 				      const gchar * original,
 				      const gchar * translation)
 {
@@ -37,7 +37,7 @@ gtranslator_translation_memory_store (GtranslatorTranslationMemory * obj,
 
 /* Default implementation */
 static gboolean
-gtranslator_translation_memory_store_default (GtranslatorTranslationMemory *
+gtranslator_translation_memory_store_default (GtrTranslationMemory *
 					      obj, const gchar * original,
 					      const gchar * translation)
 {
@@ -46,15 +46,15 @@ gtranslator_translation_memory_store_default (GtranslatorTranslationMemory *
 
 /**
  * gtranslator_translation_memory_lookup:
- * @obj: a #GtranslatorTranslationMemory
+ * @obj: a #GtrTranslationMemory
  * @phrase: the unstranslated text to search for translations.
  *
- * Looks for the @phrase in the database and gets a list of the #GtranslatorTranslationMemoryMatch.
+ * Looks for the @phrase in the database and gets a list of the #GtrTranslationMemoryMatch.
  *
- * Returns: a list of #GtranslatorTranslationMemoryMatch.
+ * Returns: a list of #GtrTranslationMemoryMatch.
  */
 GList *
-gtranslator_translation_memory_lookup (GtranslatorTranslationMemory * obj,
+gtranslator_translation_memory_lookup (GtrTranslationMemory * obj,
 				       const gchar * phrase)
 {
   g_return_val_if_fail (GTR_IS_TRANSLATION_MEMORY (obj), 0);
@@ -63,7 +63,7 @@ gtranslator_translation_memory_lookup (GtranslatorTranslationMemory * obj,
 
 /* Default implementation */
 static GList *
-gtranslator_translation_memory_lookup_default (GtranslatorTranslationMemory *
+gtranslator_translation_memory_lookup_default (GtrTranslationMemory *
 					       obj, const gchar * phrase)
 {
   g_return_val_if_reached (0);
@@ -76,7 +76,7 @@ gtranslator_translation_memory_lookup_default (GtranslatorTranslationMemory *
  * Sets the number of omits used in the search.
  */
 void
-gtranslator_translation_memory_set_max_omits (GtranslatorTranslationMemory *
+gtranslator_translation_memory_set_max_omits (GtrTranslationMemory *
 					      obj, gsize omits)
 {
   g_return_if_fail (GTR_IS_TRANSLATION_MEMORY (obj));
@@ -86,7 +86,7 @@ gtranslator_translation_memory_set_max_omits (GtranslatorTranslationMemory *
 /* Default implementation */
 static void
 gtranslator_translation_memory_set_max_omits_default
-  (GtranslatorTranslationMemory * obj, gsize omits)
+  (GtrTranslationMemory * obj, gsize omits)
 {
   g_return_if_reached ();
 }
@@ -98,7 +98,7 @@ gtranslator_translation_memory_set_max_omits_default
  * Sets the difference in the length of string for searching in the database.
  */
 void
-gtranslator_translation_memory_set_max_delta (GtranslatorTranslationMemory *
+gtranslator_translation_memory_set_max_delta (GtrTranslationMemory *
 					      obj, gsize delta)
 {
   g_return_if_fail (GTR_IS_TRANSLATION_MEMORY (obj));
@@ -108,7 +108,7 @@ gtranslator_translation_memory_set_max_delta (GtranslatorTranslationMemory *
 /* Default implementation */
 static void
 gtranslator_translation_memory_set_max_delta_default
-  (GtranslatorTranslationMemory * obj, gsize omits)
+  (GtrTranslationMemory * obj, gsize omits)
 {
   g_return_if_reached ();
 }
@@ -120,7 +120,7 @@ gtranslator_translation_memory_set_max_delta_default
  * Sets the number of item to return in gtranslator_translation_memory_lookup().
  */
 void
-gtranslator_translation_memory_set_max_items (GtranslatorTranslationMemory *
+gtranslator_translation_memory_set_max_items (GtrTranslationMemory *
 					      obj, gint items)
 {
   g_return_if_fail (GTR_IS_TRANSLATION_MEMORY (obj));
@@ -130,13 +130,13 @@ gtranslator_translation_memory_set_max_items (GtranslatorTranslationMemory *
 /* Default implementation */
 static void
 gtranslator_translation_memory_set_max_items_default
-  (GtranslatorTranslationMemory * obj, gint items)
+  (GtrTranslationMemory * obj, gint items)
 {
   g_return_if_reached ();
 }
 
 static void
-gtranslator_translation_memory_base_init (GtranslatorTranslationMemoryIface *
+gtranslator_translation_memory_base_init (GtrTranslationMemoryIface *
 					  klass)
 {
   static gboolean initialized = FALSE;
@@ -161,7 +161,7 @@ gtranslator_translation_memory_get_type (void)
   if (!type)
     {
       static const GTypeInfo info = {
-	sizeof (GtranslatorTranslationMemoryIface),
+	sizeof (GtrTranslationMemoryIface),
 	(GBaseInitFunc) gtranslator_translation_memory_base_init,
 	NULL,
 	NULL,
@@ -173,7 +173,7 @@ gtranslator_translation_memory_get_type (void)
       };
       type =
 	g_type_register_static (G_TYPE_INTERFACE,
-				"GtranslatorTranslationMemory", &info, 0);
+				"GtrTranslationMemory", &info, 0);
       g_type_interface_add_prerequisite (type, G_TYPE_OBJECT);
     }
   return type;

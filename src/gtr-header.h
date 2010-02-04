@@ -34,36 +34,36 @@
  */
 
 #define GTR_TYPE_HEADER			(gtranslator_header_get_type ())
-#define GTR_HEADER(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_HEADER, GtranslatorHeader))
-#define GTR_HEADER_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_HEADER, GtranslatorHeaderClass))
+#define GTR_HEADER(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_HEADER, GtrHeader))
+#define GTR_HEADER_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_HEADER, GtrHeaderClass))
 #define GTR_IS_HEADER(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_HEADER))
 #define GTR_IS_HEADER_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_HEADER))
-#define GTR_HEADER_GET_CLASS(o)		(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_HEADER, GtranslatorHeaderClass))
+#define GTR_HEADER_GET_CLASS(o)		(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_HEADER, GtrHeaderClass))
 
 /* Private structure type */
-typedef struct _GtranslatorHeaderPrivate GtranslatorHeaderPrivate;
+typedef struct _GtrHeaderPrivate GtrHeaderPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorHeader GtranslatorHeader;
+typedef struct _GtrHeader GtrHeader;
 
-struct _GtranslatorHeader
+struct _GtrHeader
 {
-  GtranslatorMsg parent_instance;
+  GtrMsg parent_instance;
 
   /*< private > */
-  GtranslatorHeaderPrivate *priv;
+  GtrHeaderPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorHeaderClass GtranslatorHeaderClass;
+typedef struct _GtrHeaderClass GtrHeaderClass;
 
-struct _GtranslatorHeaderClass
+struct _GtrHeaderClass
 {
-  GtranslatorMsgClass parent_class;
+  GtrMsgClass parent_class;
 };
 
 /*
@@ -73,56 +73,56 @@ GType                 gtranslator_header_get_type            (void)G_GNUC_CONST;
 
 GType                 gtranslator_header_register_type       (GTypeModule * module);
 
-GtranslatorHeader    *gtranslator_header_new                 (po_message_iterator_t iter,
+GtrHeader    *gtranslator_header_new                 (po_message_iterator_t iter,
                                                               po_message_t          message);
 
-const gchar          *gtranslator_header_get_comments        (GtranslatorHeader *header);
-void                  gtranslator_header_set_comments        (GtranslatorHeader *header,
+const gchar          *gtranslator_header_get_comments        (GtrHeader *header);
+void                  gtranslator_header_set_comments        (GtrHeader *header,
                                                               const gchar *comments);
 
-gchar                *gtranslator_header_get_prj_id_version  (GtranslatorHeader *header);
-void                  gtranslator_header_set_prj_id_version  (GtranslatorHeader *header,
+gchar                *gtranslator_header_get_prj_id_version  (GtrHeader *header);
+void                  gtranslator_header_set_prj_id_version  (GtrHeader *header,
                                                               const gchar *prj_id_version);
 
-gchar                *gtranslator_header_get_rmbt            (GtranslatorHeader *header);
-void                  gtranslator_header_set_rmbt            (GtranslatorHeader *header,
+gchar                *gtranslator_header_get_rmbt            (GtrHeader *header);
+void                  gtranslator_header_set_rmbt            (GtrHeader *header,
                                                               const gchar *rmbt);
 
-gchar                *gtranslator_header_get_pot_date        (GtranslatorHeader *header);
-void                  gtranslator_header_set_pot_date        (GtranslatorHeader *header,
+gchar                *gtranslator_header_get_pot_date        (GtrHeader *header);
+void                  gtranslator_header_set_pot_date        (GtrHeader *header,
                                                               const gchar *pot_date);
 
-gchar                *gtranslator_header_get_po_date         (GtranslatorHeader *header);
-void                  gtranslator_header_set_po_date         (GtranslatorHeader *header,
+gchar                *gtranslator_header_get_po_date         (GtrHeader *header);
+void                  gtranslator_header_set_po_date         (GtrHeader *header,
                                                               const gchar *po_date);
 
-gchar                *gtranslator_header_get_translator      (GtranslatorHeader *header);
-gchar                *gtranslator_header_get_tr_email        (GtranslatorHeader *header);
-void                  gtranslator_header_set_translator      (GtranslatorHeader *header,
+gchar                *gtranslator_header_get_translator      (GtrHeader *header);
+gchar                *gtranslator_header_get_tr_email        (GtrHeader *header);
+void                  gtranslator_header_set_translator      (GtrHeader *header,
                                                               const gchar *name,
                                                               const gchar *email);
 
-gchar                *gtranslator_header_get_language        (GtranslatorHeader *header);
-gchar                *gtranslator_header_get_lg_email        (GtranslatorHeader *header);
-void                  gtranslator_header_set_language        (GtranslatorHeader *header,
+gchar                *gtranslator_header_get_language        (GtrHeader *header);
+gchar                *gtranslator_header_get_lg_email        (GtrHeader *header);
+void                  gtranslator_header_set_language        (GtrHeader *header,
                                                               const gchar *language,
                                                               const gchar *email);
 
-gchar                *gtranslator_header_get_mime_version    (GtranslatorHeader *header);
-void                  gtranslator_header_set_mime_version    (GtranslatorHeader *header,
+gchar                *gtranslator_header_get_mime_version    (GtrHeader *header);
+void                  gtranslator_header_set_mime_version    (GtrHeader *header,
                                                               const gchar *mime_version);
 
-gchar                *gtranslator_header_get_charset         (GtranslatorHeader *header);
-void                  gtranslator_header_set_charset         (GtranslatorHeader *header,
+gchar                *gtranslator_header_get_charset         (GtrHeader *header);
+void                  gtranslator_header_set_charset         (GtrHeader *header,
                                                               const gchar *charset);
 
-gchar                *gtranslator_header_get_encoding        (GtranslatorHeader *header);
-void                  gtranslator_header_set_encoding        (GtranslatorHeader *header,
+gchar                *gtranslator_header_get_encoding        (GtrHeader *header);
+void                  gtranslator_header_set_encoding        (GtrHeader *header,
                                                               const gchar *encoding);
 
-gchar                *gtranslator_header_get_plural_forms    (GtranslatorHeader *header);
-void                  gtranslator_header_set_plural_forms    (GtranslatorHeader * header,
+gchar                *gtranslator_header_get_plural_forms    (GtrHeader *header);
+void                  gtranslator_header_set_plural_forms    (GtrHeader * header,
                                                               const gchar * plural_forms);
-gint                  gtranslator_header_get_nplurals        (GtranslatorHeader * header);
+gint                  gtranslator_header_get_nplurals        (GtrHeader * header);
 
 #endif /* __HEADER_H__ */

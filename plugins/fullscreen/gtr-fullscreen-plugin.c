@@ -27,13 +27,13 @@
 #include <gtk/gtk.h>
 #include <string.h>
 
-#define WINDOW_DATA_KEY "GtranslatorFullscreenPluginWindowData"
+#define WINDOW_DATA_KEY "GtrFullscreenPluginWindowData"
 #define MENU_PATH "/MainMenu/ViewMenu/ViewOps_1"
 
-GTR_PLUGIN_REGISTER_TYPE (GtranslatorFullscreenPlugin,
+GTR_PLUGIN_REGISTER_TYPE (GtrFullscreenPlugin,
 			  gtranslator_fullscreen_plugin)
      static void on_fullscreen_activated (GtkToggleAction * action,
-					  GtranslatorWindow * window)
+					  GtrWindow * window)
 {
   if (gtk_toggle_action_get_active (action))
     gtk_window_fullscreen (GTK_WINDOW (window));
@@ -62,7 +62,7 @@ free_window_data (WindowData * data)
 }
 
 static void
-gtranslator_fullscreen_plugin_init (GtranslatorFullscreenPlugin *
+gtranslator_fullscreen_plugin_init (GtrFullscreenPlugin *
 				    message_table)
 {
 }
@@ -75,7 +75,7 @@ gtranslator_fullscreen_plugin_finalize (GObject * object)
 }
 
 static void
-impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_activate (GtrPlugin * plugin, GtrWindow * window)
 {
   GtkUIManager *manager;
   WindowData *data;
@@ -88,7 +88,7 @@ impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
   manager = gtranslator_window_get_ui_manager (window);
 
   data->action_group =
-    gtk_action_group_new ("GtranslatorFullscreenPluginActions");
+    gtk_action_group_new ("GtrFullscreenPluginActions");
   gtk_action_group_set_translation_domain (data->action_group,
 					   GETTEXT_PACKAGE);
   gtk_action_group_add_toggle_actions (data->action_group, action_entries,
@@ -118,7 +118,7 @@ impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 }
 
 static void
-impl_deactivate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
 {
   GtkUIManager *manager;
   WindowData *data;
@@ -136,11 +136,11 @@ impl_deactivate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 }
 
 static void
-gtranslator_fullscreen_plugin_class_init (GtranslatorFullscreenPluginClass *
+gtranslator_fullscreen_plugin_class_init (GtrFullscreenPluginClass *
 					  klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtranslatorPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
+  GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
   object_class->finalize = gtranslator_fullscreen_plugin_finalize;
 

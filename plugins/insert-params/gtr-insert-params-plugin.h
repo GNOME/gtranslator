@@ -29,34 +29,34 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_INSERT_PARAMS_PLUGIN		(gtranslator_insert_params_get_type ())
-#define GTR_INSERT_PARAMS_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGEINSERT_PARAMS_PLUGIN, GtranslatorInsertParamsPlugin))
-#define GTR_INSERT_PARAMS_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_INSERT_PARAMS_PLUGIN, GtranslatorInsertParamsPluginClass))
+#define GTR_INSERT_PARAMS_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGEINSERT_PARAMS_PLUGIN, GtrInsertParamsPlugin))
+#define GTR_INSERT_PARAMS_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_INSERT_PARAMS_PLUGIN, GtrInsertParamsPluginClass))
 #define GTR_IS_INSERT_PARAMS_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_INSERT_PARAMS_PLUGIN))
 #define GTR_IS_INSERT_PARAMS_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_INSERT_PARAMS_PLUGIN))
-#define GTR_INSERT_PARAMS_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_INSERT_PARAMS_PLUGIN_PLUGIN, GtranslatorInsertParamsPluginClass))
+#define GTR_INSERT_PARAMS_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_INSERT_PARAMS_PLUGIN_PLUGIN, GtrInsertParamsPluginClass))
 /* Private structure type */
-typedef struct _GtranslatorInsertParamsPluginPrivate
-  GtranslatorInsertParamsPluginPrivate;
+typedef struct _GtrInsertParamsPluginPrivate
+  GtrInsertParamsPluginPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorInsertParamsPlugin GtranslatorInsertParamsPlugin;
+typedef struct _GtrInsertParamsPlugin GtrInsertParamsPlugin;
 
-struct _GtranslatorInsertParamsPlugin
+struct _GtrInsertParamsPlugin
 {
-  GtranslatorPlugin parent_instance;
+  GtrPlugin parent_instance;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorInsertParamsPluginClass
-  GtranslatorInsertParamsPluginClass;
+typedef struct _GtrInsertParamsPluginClass
+  GtrInsertParamsPluginClass;
 
-struct _GtranslatorInsertParamsPluginClass
+struct _GtrInsertParamsPluginClass
 {
-  GtranslatorPluginClass parent_class;
+  GtrPluginClass parent_class;
 };
 
 /*

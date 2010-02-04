@@ -34,9 +34,9 @@
 #define GTR_CHARMAP_PANEL_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),		       \
 						 GTR_TYPE_CHARMAP_PANEL,     \
-						 GtranslatorCharmapPanelPrivate))
+						 GtrCharmapPanelPrivate))
 
-struct _GtranslatorCharmapPanelPrivate
+struct _GtrCharmapPanelPrivate
 {
 #ifdef HAVE_GUCHARMAP_2
   GucharmapChaptersView *chapters_view;
@@ -47,14 +47,14 @@ struct _GtranslatorCharmapPanelPrivate
 #endif
 };
 
-GTR_PLUGIN_DEFINE_TYPE (GtranslatorCharmapPanel, gtranslator_charmap_panel,
+GTR_PLUGIN_DEFINE_TYPE (GtrCharmapPanel, gtranslator_charmap_panel,
 			GTK_TYPE_VBOX)
 #ifdef HAVE_GUCHARMAP_2
      static void
        on_chapter_view_selection_changed (GtkTreeSelection * selection,
-					  GtranslatorCharmapPanel * panel)
+					  GtrCharmapPanel * panel)
 {
-  GtranslatorCharmapPanelPrivate *priv = panel->priv;
+  GtrCharmapPanelPrivate *priv = panel->priv;
   GucharmapCodepointList *codepoint_list;
   GtkTreeIter iter;
 
@@ -70,7 +70,7 @@ GTR_PLUGIN_DEFINE_TYPE (GtranslatorCharmapPanel, gtranslator_charmap_panel,
 #else
      static void
        on_chapter_changed (GucharmapChapters * chapters,
-			   GtranslatorCharmapPanel * panel)
+			   GtrCharmapPanel * panel)
 {
   gucharmap_table_set_codepoint_list (GUCHARMAP_TABLE (panel->priv->table),
 				      gucharmap_chapters_get_codepoint_list
@@ -79,9 +79,9 @@ GTR_PLUGIN_DEFINE_TYPE (GtranslatorCharmapPanel, gtranslator_charmap_panel,
 #endif /* HAVE_GUCHARMAP_2 */
 
 static void
-gtranslator_charmap_panel_init (GtranslatorCharmapPanel * panel)
+gtranslator_charmap_panel_init (GtrCharmapPanel * panel)
 {
-  GtranslatorCharmapPanelPrivate *priv;
+  GtrCharmapPanelPrivate *priv;
   GtkPaned *paned;
 #ifdef HAVE_GUCHARMAP_2
   GtkWidget *scrolled_window, *view, *chartable;
@@ -168,11 +168,11 @@ gtranslator_charmap_panel_finalize (GObject * object)
 }
 
 static void
-gtranslator_charmap_panel_class_init (GtranslatorCharmapPanelClass * klass)
+gtranslator_charmap_panel_class_init (GtrCharmapPanelClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorCharmapPanelPrivate));
+  g_type_class_add_private (klass, sizeof (GtrCharmapPanelPrivate));
 
   object_class->finalize = gtranslator_charmap_panel_finalize;
 }
@@ -185,13 +185,13 @@ gtranslator_charmap_panel_new (void)
 
 #ifdef HAVE_GUCHARMAP_2
 GucharmapChartable *
-gtranslator_charmap_panel_get_chartable (GtranslatorCharmapPanel * panel)
+gtranslator_charmap_panel_get_chartable (GtrCharmapPanel * panel)
 {
   return panel->priv->chartable;
 }
 #else
 GucharmapTable *
-gtranslator_charmap_panel_get_table (GtranslatorCharmapPanel * panel)
+gtranslator_charmap_panel_get_table (GtrCharmapPanel * panel)
 {
   return GUCHARMAP_TABLE (panel->priv->table);
 }

@@ -44,17 +44,17 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_PLUGIN              (gtranslator_plugin_get_type())
-#define GTR_PLUGIN(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GTR_TYPE_PLUGIN, GtranslatorPlugin))
-#define GTR_PLUGIN_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GTR_TYPE_PLUGIN, GtranslatorPluginClass))
+#define GTR_PLUGIN(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GTR_TYPE_PLUGIN, GtrPlugin))
+#define GTR_PLUGIN_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GTR_TYPE_PLUGIN, GtrPluginClass))
 #define GTR_IS_PLUGIN(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GTR_TYPE_PLUGIN))
 #define GTR_IS_PLUGIN_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_PLUGIN))
-#define GTR_PLUGIN_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GTR_TYPE_PLUGIN, GtranslatorPluginClass))
+#define GTR_PLUGIN_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GTR_TYPE_PLUGIN, GtrPluginClass))
 /*
  * Main object structure
  */
-typedef struct _GtranslatorPlugin GtranslatorPlugin;
+typedef struct _GtrPlugin GtrPlugin;
 
-struct _GtranslatorPlugin
+struct _GtrPlugin
 {
   GObject parent;
 };
@@ -62,24 +62,24 @@ struct _GtranslatorPlugin
 /*
  * Class definition
  */
-typedef struct _GtranslatorPluginClass GtranslatorPluginClass;
+typedef struct _GtrPluginClass GtrPluginClass;
 
-struct _GtranslatorPluginClass
+struct _GtrPluginClass
 {
   GObjectClass parent_class;
 
   /* Virtual public methods */
 
-  void (*activate) (GtranslatorPlugin * plugin, GtranslatorWindow * window);
-  void (*deactivate) (GtranslatorPlugin * plugin, GtranslatorWindow * window);
+  void (*activate) (GtrPlugin * plugin, GtrWindow * window);
+  void (*deactivate) (GtrPlugin * plugin, GtrWindow * window);
 
-  void (*update_ui) (GtranslatorPlugin * plugin, GtranslatorWindow * window);
+  void (*update_ui) (GtrPlugin * plugin, GtrWindow * window);
 
-  GtkWidget *(*create_configure_dialog) (GtranslatorPlugin * plugin);
+  GtkWidget *(*create_configure_dialog) (GtrPlugin * plugin);
 
   /* Plugins should not override this, it's handled automatically by
-     the GtranslatorPluginClass */
-    gboolean (*is_configurable) (GtranslatorPlugin * plugin);
+     the GtrPluginClass */
+    gboolean (*is_configurable) (GtrPlugin * plugin);
 
   /* Padding for future expansion */
   void (*_gtranslator_reserved1) (void);
@@ -95,17 +95,17 @@ GType
 gtranslator_plugin_get_type (void)
   G_GNUC_CONST;
 
-     void gtranslator_plugin_activate (GtranslatorPlugin * plugin,
-				       GtranslatorWindow * window);
-     void gtranslator_plugin_deactivate (GtranslatorPlugin * plugin,
-					 GtranslatorWindow * window);
+     void gtranslator_plugin_activate (GtrPlugin * plugin,
+				       GtrWindow * window);
+     void gtranslator_plugin_deactivate (GtrPlugin * plugin,
+					 GtrWindow * window);
 
-     void gtranslator_plugin_update_ui (GtranslatorPlugin * plugin,
-					GtranslatorWindow * window);
+     void gtranslator_plugin_update_ui (GtrPlugin * plugin,
+					GtrWindow * window);
 
-     gboolean gtranslator_plugin_is_configurable (GtranslatorPlugin * plugin);
+     gboolean gtranslator_plugin_is_configurable (GtrPlugin * plugin);
      GtkWidget *gtranslator_plugin_create_configure_dialog
-       (GtranslatorPlugin * plugin);
+       (GtrPlugin * plugin);
 
 /**
  * GTR_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE):

@@ -42,14 +42,14 @@
 #define GTR_TRANSLATION_MEMORY_UI_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 							(object),	               \
 							GTR_TYPE_TRANSLATION_MEMORY_UI,	       \
-							GtranslatorTranslationMemoryUiPrivate))
+							GtrTranslationMemoryUiPrivate))
 
-G_DEFINE_TYPE (GtranslatorTranslationMemoryUi,
+G_DEFINE_TYPE (GtrTranslationMemoryUi,
 	       gtranslator_translation_memory_ui, GTK_TYPE_SCROLLED_WINDOW)
-     struct _GtranslatorTranslationMemoryUiPrivate
+     struct _GtrTranslationMemoryUiPrivate
      {
        GtkWidget *tree_view;
-       GtranslatorTab *tab;
+       GtrTab *tab;
 
        gchar **tm_list;
      };
@@ -68,15 +68,15 @@ G_DEFINE_TYPE (GtranslatorTranslationMemoryUi,
 
      static void
        on_activate_item_cb (GtkMenuItem * menuitem,
-			    GtranslatorTranslationMemoryUi * tm_ui)
+			    GtrTranslationMemoryUi * tm_ui)
 {
-  GtranslatorView *view;
+  GtrView *view;
   GtkTextBuffer *buffer;
-  GtranslatorPo *po;
+  GtrPo *po;
   GList *current_msg = NULL;
-  GtranslatorMsg *msg;
+  GtrMsg *msg;
   gint index;
-  GtranslatorWindow *window;
+  GtrWindow *window;
 
   window = gtranslator_application_get_active_window (GTR_APP);
 
@@ -104,19 +104,19 @@ G_DEFINE_TYPE (GtranslatorTranslationMemoryUi,
 static void
 free_list (gpointer data, gpointer useless)
 {
-  GtranslatorTranslationMemoryMatch *match =
-    (GtranslatorTranslationMemoryMatch *) data;
+  GtrTranslationMemoryMatch *match =
+    (GtrTranslationMemoryMatch *) data;
 
   g_free (match->match);
   g_free (match);
 }
 
 static void
-showed_message_cb (GtranslatorTab * tab,
-		   GtranslatorMsg * msg,
-		   GtranslatorTranslationMemoryUi * tm_ui)
+showed_message_cb (GtrTab * tab,
+		   GtrMsg * msg,
+		   GtrTranslationMemoryUi * tm_ui)
 {
-  GtranslatorTranslationMemory *tm;
+  GtrTranslationMemory *tm;
   GtkListStore *model;
   GtkTreeIter iter;
   GtkTreeViewColumn *level_column;
@@ -130,7 +130,7 @@ showed_message_cb (GtranslatorTab * tab,
   GtkWidget *tm_item;
   GtkWidget *tm_menu;
   GtkWidget *items_menu;
-  GtranslatorWindow *window;
+  GtrWindow *window;
   GtkUIManager *manager;
   gchar *item_name;
 
@@ -169,8 +169,8 @@ showed_message_cb (GtranslatorTab * tab,
 
   for (l = tm_list; l; l = l->next)
     {
-      GtranslatorTranslationMemoryMatch *match;
-      match = (GtranslatorTranslationMemoryMatch *) l->data;
+      GtrTranslationMemoryMatch *match;
+      match = (GtrTranslationMemoryMatch *) l->data;
       tm_ui->priv->tm_list[i - 1] = g_strdup (match->match);
       level_column =
 	gtk_tree_view_get_column (GTK_TREE_VIEW (tm_ui->priv->tree_view), 0);
@@ -216,7 +216,7 @@ showed_message_cb (GtranslatorTab * tab,
       gtk_widget_show (tm_item);
 
       accel_path =
-	g_strdup_printf ("<Gtranslator-sheet>/Edit/_Translation Memory/%s",
+	g_strdup_printf ("<Gtr-sheet>/Edit/_Translation Memory/%s",
 			 item_name);
 
       gtk_menu_item_set_accel_path (GTK_MENU_ITEM (tm_item), accel_path);
@@ -267,10 +267,10 @@ tree_view_size_cb (GtkWidget * widget,
 
 
 static void
-gtranslator_translation_memory_ui_draw (GtranslatorTranslationMemoryUi *
+gtranslator_translation_memory_ui_draw (GtrTranslationMemoryUi *
 					tm_ui)
 {
-  GtranslatorTranslationMemoryUiPrivate *priv = tm_ui->priv;
+  GtrTranslationMemoryUiPrivate *priv = tm_ui->priv;
   GtkListStore *model;
   GtkCellRenderer *level_renderer, *string_renderer, *shortcut_renderer;
   GtkTreeViewColumn *shortcut, *string, *level;
@@ -320,7 +320,7 @@ gtranslator_translation_memory_ui_draw (GtranslatorTranslationMemoryUi *
 }
 
 static void
-gtranslator_translation_memory_ui_init (GtranslatorTranslationMemoryUi *
+gtranslator_translation_memory_ui_init (GtrTranslationMemoryUi *
 					tm_ui)
 {
   tm_ui->priv = GTR_TRANSLATION_MEMORY_UI_GET_PRIVATE (tm_ui);
@@ -332,7 +332,7 @@ gtranslator_translation_memory_ui_init (GtranslatorTranslationMemoryUi *
 static void
 gtranslator_translation_memory_ui_finalize (GObject * object)
 {
-  GtranslatorTranslationMemoryUi *tm_ui = GTR_TRANSLATION_MEMORY_UI (object);
+  GtrTranslationMemoryUi *tm_ui = GTR_TRANSLATION_MEMORY_UI (object);
 
   g_strfreev (tm_ui->priv->tm_list);
 
@@ -342,12 +342,12 @@ gtranslator_translation_memory_ui_finalize (GObject * object)
 
 static void
 gtranslator_translation_memory_ui_class_init
-  (GtranslatorTranslationMemoryUiClass * klass)
+  (GtrTranslationMemoryUiClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass,
-			    sizeof (GtranslatorTranslationMemoryUiPrivate));
+			    sizeof (GtrTranslationMemoryUiPrivate));
 
   object_class->finalize = gtranslator_translation_memory_ui_finalize;
 }
@@ -355,7 +355,7 @@ gtranslator_translation_memory_ui_class_init
 GtkWidget *
 gtranslator_translation_memory_ui_new (GtkWidget * tab)
 {
-  GtranslatorTranslationMemoryUi *tm_ui;
+  GtrTranslationMemoryUi *tm_ui;
   tm_ui = g_object_new (GTR_TYPE_TRANSLATION_MEMORY_UI, NULL);
 
   tm_ui->priv->tab = GTR_TAB (tab);

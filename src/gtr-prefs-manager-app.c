@@ -493,7 +493,7 @@ gtranslator_prefs_manager_editor_font_changed (GConfClient * client,
 
   while (l != NULL)
     {
-      /* Note: we use def=FALSE to avoid GtranslatorView to query gconf */
+      /* Note: we use def=FALSE to avoid GtrView to query gconf */
       gtranslator_view_set_font (GTR_VIEW (l->data), FALSE, font);
       l = l->next;
     }
@@ -603,7 +603,7 @@ gtranslator_prefs_manager_gdl_style_changed (GConfClient * client,
 					     GConfEntry * entry,
 					     gpointer user_data)
 {
-  GtranslatorWindow *window;
+  GtrWindow *window;
   GdlSwitcherStyle style;
   GdlDockLayout *layout_manager;
 
@@ -626,7 +626,7 @@ gtranslator_prefs_manager_autosave_changed (GConfClient * client,
 {
   GList *tabs;
   GList *l;
-  GtranslatorWindow *window;
+  GtrWindow *window;
 
   g_return_if_fail (entry->key != NULL);
   g_return_if_fail (entry->value != NULL);
@@ -643,7 +643,7 @@ gtranslator_prefs_manager_autosave_changed (GConfClient * client,
 
       for (l = tabs; l != NULL; l = g_list_next (l))
 	{
-	  GtranslatorTab *tab = GTR_TAB (l->data);
+	  GtrTab *tab = GTR_TAB (l->data);
 
 	  gtranslator_tab_set_autosave_enabled (tab, autosave);
 	}
@@ -663,7 +663,7 @@ gtranslator_prefs_manager_autosave_changed (GConfClient * client,
 
       for (l = tabs; l != NULL; l = g_list_next (l))
 	{
-	  GtranslatorTab *tab = GTR_TAB (l->data);
+	  GtrTab *tab = GTR_TAB (l->data);
 
 	  gtranslator_tab_set_autosave_interval (tab, autosave_interval);
 	}

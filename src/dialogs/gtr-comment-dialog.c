@@ -36,24 +36,24 @@
 #define GTR_COMMENT_DIALOG_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 	(object),	\
 						 	GTR_TYPE_COMMENT_DIALOG,     \
-						 	GtranslatorCommentDialogPrivate))
+						 	GtrCommentDialogPrivate))
 
 
-G_DEFINE_TYPE (GtranslatorCommentDialog, gtranslator_comment_dialog,
+G_DEFINE_TYPE (GtrCommentDialog, gtranslator_comment_dialog,
 	       GTK_TYPE_DIALOG)
-     struct _GtranslatorCommentDialogPrivate
+     struct _GtrCommentDialogPrivate
      {
        GtkWidget *main_box;
        GtkWidget *comment;
      };
 
      static void
-       comment_changed_cb (GtkTextBuffer * buffer, GtranslatorWindow * window)
+       comment_changed_cb (GtkTextBuffer * buffer, GtrWindow * window)
 {
   gchar *text;
   GtkTextIter start, end;
-  GtranslatorTab *tab;
-  GtranslatorPo *po;
+  GtrTab *tab;
+  GtrPo *po;
   GList *msg;
 
   tab = gtranslator_window_get_active_tab (window);
@@ -78,7 +78,7 @@ dialog_response_handler (GtkDialog * dlg, gint res_id)
 }
 
 static void
-gtranslator_comment_dialog_init (GtranslatorCommentDialog * dlg)
+gtranslator_comment_dialog_init (GtrCommentDialog * dlg)
 {
   gboolean ret;
   GtkWidget *error_widget;
@@ -142,22 +142,22 @@ gtranslator_comment_dialog_finalize (GObject * object)
 }
 
 static void
-gtranslator_comment_dialog_class_init (GtranslatorCommentDialogClass * klass)
+gtranslator_comment_dialog_class_init (GtrCommentDialogClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorCommentDialogPrivate));
+  g_type_class_add_private (klass, sizeof (GtrCommentDialogPrivate));
 
   object_class->finalize = gtranslator_comment_dialog_finalize;
 }
 
 void
-gtranslator_show_comment_dialog (GtranslatorWindow * window)
+gtranslator_show_comment_dialog (GtrWindow * window)
 {
-  static GtranslatorCommentDialog *dlg = NULL;
+  static GtrCommentDialog *dlg = NULL;
   static GtkTextBuffer *buf;
-  GtranslatorTab *tab = gtranslator_window_get_active_tab (window);
-  GtranslatorPo *po = gtranslator_tab_get_po (tab);
+  GtrTab *tab = gtranslator_window_get_active_tab (window);
+  GtrPo *po = gtranslator_tab_get_po (tab);
   GList *msg = gtranslator_po_get_current_message (po);
 
   g_return_if_fail (GTR_IS_WINDOW (window));

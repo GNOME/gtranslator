@@ -46,7 +46,7 @@
 #define GTR_TAB_SAVE_AS "gtranslator-tab-save-as"
 #define GTR_IS_CLOSING_ALL            "gtranslator-is-closing-all"
 
-static void load_file_list (GtranslatorWindow * window, const GSList * uris);
+static void load_file_list (GtrWindow * window, const GSList * uris);
 
 
 /*
@@ -55,13 +55,13 @@ static void load_file_list (GtranslatorWindow * window, const GSList * uris);
  */
 gboolean
 gtranslator_open (GFile * location,
-		  GtranslatorWindow * window, GError ** error)
+		  GtrWindow * window, GError ** error)
 {
-  GtranslatorHeader *header;
-  GtranslatorPo *po;
-  GtranslatorTab *tab;
+  GtrHeader *header;
+  GtrPo *po;
+  GtrTab *tab;
   GList *current;
-  GtranslatorView *active_view;
+  GtrView *active_view;
   const gchar *project_id;
 
   /*
@@ -116,7 +116,7 @@ gtranslator_open (GFile * location,
 
 static void
 gtranslator_po_parse_files_from_dialog (GtkWidget * dialog,
-					GtranslatorWindow * window)
+					GtrWindow * window)
 {
   GSList *po_files, *l;
   GSList *locations = NULL;
@@ -165,7 +165,7 @@ gtranslator_po_parse_files_from_dialog (GtkWidget * dialog,
 static void
 gtranslator_file_chooser_analyse (gpointer dialog,
 				  FileselMode mode,
-				  GtranslatorWindow * window)
+				  GtrWindow * window)
 {
   gint reply;
 
@@ -195,7 +195,7 @@ gtranslator_file_chooser_analyse (gpointer dialog,
  * The "Open file" dialog.
  */
 void
-gtranslator_open_file_dialog (GtkAction * action, GtranslatorWindow * window)
+gtranslator_open_file_dialog (GtkAction * action, GtrWindow * window)
 {
   GtkWidget *dialog = NULL;
 
@@ -223,14 +223,14 @@ gtranslator_open_file_dialog (GtkAction * action, GtranslatorWindow * window)
 
 static void
 save_dialog_response_cb (GtkDialog * dialog,
-			 gint response_id, GtranslatorWindow * window)
+			 gint response_id, GtrWindow * window)
 {
   GError *error = NULL;
-  GtranslatorPo *po;
-  GtranslatorTab *tab;
+  GtrPo *po;
+  GtrTab *tab;
   gchar *filename;
   GFile *location;
-  GtranslatorStatusbar *status;
+  GtrStatusbar *status;
 
   tab = GTR_TAB (g_object_get_data (G_OBJECT (dialog), GTR_TAB_SAVE_AS));
 
@@ -309,11 +309,11 @@ confirm_overwrite_callback (GtkFileChooser * dialog, gpointer data)
  */
 void
 gtranslator_save_file_as_dialog (GtkAction * action,
-				 GtranslatorWindow * window)
+				 GtrWindow * window)
 {
   GtkWidget *dialog = NULL;
-  GtranslatorTab *current_page;
-  GtranslatorPo *po;
+  GtrTab *current_page;
+  GtrPo *po;
   GFile *location;
   gchar *uri = NULL;
   gboolean uri_set = FALSE;
@@ -370,12 +370,12 @@ gtranslator_save_file_as_dialog (GtkAction * action,
  */
 void
 gtranslator_save_current_file_dialog (GtkWidget * widget,
-				      GtranslatorWindow * window)
+				      GtrWindow * window)
 {
   GError *error = NULL;
-  GtranslatorTab *current;
-  GtranslatorPo *po;
-  GtranslatorStatusbar *status;
+  GtrTab *current;
+  GtrPo *po;
+  GtrStatusbar *status;
 
   current = gtranslator_window_get_active_tab (window);
   po = gtranslator_tab_get_po (current);
@@ -418,7 +418,7 @@ is_duplicated_location (const GSList * locations, GFile * u)
 }
 
 static void
-load_file_list (GtranslatorWindow * window, const GSList * locations)
+load_file_list (GtrWindow * window, const GSList * locations)
 {
   GSList *locations_to_load = NULL;
   const GSList *l;
@@ -500,7 +500,7 @@ load_file_list (GtranslatorWindow * window, const GSList * locations)
  * Ignore non-existing URIs 
  */
 void
-gtranslator_actions_load_locations (GtranslatorWindow * window,
+gtranslator_actions_load_locations (GtrWindow * window,
 				    const GSList * locations)
 {
   g_return_if_fail (GTR_IS_WINDOW (window));
@@ -510,9 +510,9 @@ gtranslator_actions_load_locations (GtranslatorWindow * window,
 }
 
 static void
-save_and_close_document (GtranslatorPo * po, GtranslatorWindow * window)
+save_and_close_document (GtrPo * po, GtrWindow * window)
 {
-  GtranslatorTab *tab;
+  GtrTab *tab;
 
   gtranslator_save_current_file_dialog (NULL, window);
 
@@ -522,9 +522,9 @@ save_and_close_document (GtranslatorPo * po, GtranslatorWindow * window)
 }
 
 static void
-close_all_tabs (GtranslatorWindow * window)
+close_all_tabs (GtrWindow * window)
 {
-  GtranslatorNotebook *nb;
+  GtrNotebook *nb;
   gint pages;
 
   nb = gtranslator_window_get_notebook (window);
@@ -543,9 +543,9 @@ close_all_tabs (GtranslatorWindow * window)
 
 static void
 save_and_close_all_documents (GList * unsaved_documents,
-			      GtranslatorWindow * window)
+			      GtrWindow * window)
 {
-  GtranslatorTab *tab;
+  GtrTab *tab;
   GList *l;
   GError *error = NULL;
 
@@ -577,9 +577,9 @@ save_and_close_all_documents (GList * unsaved_documents,
 }
 
 static void
-close_confirmation_dialog_response_handler (GtranslatorCloseConfirmationDialog
+close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog
 					    * dlg, gint response_id,
-					    GtranslatorWindow * window)
+					    GtrWindow * window)
 {
   GList *selected_documents;
   gboolean is_closing_all;
@@ -654,7 +654,7 @@ close_confirmation_dialog_response_handler (GtranslatorCloseConfirmationDialog
 }
 
 void
-gtranslator_close_tab (GtranslatorTab * tab, GtranslatorWindow * window)
+gtranslator_close_tab (GtrTab * tab, GtrWindow * window)
 {
   g_object_set_data (G_OBJECT (window),
 		     GTR_IS_CLOSING_ALL, GINT_TO_POINTER (0));
@@ -680,9 +680,9 @@ gtranslator_close_tab (GtranslatorTab * tab, GtranslatorWindow * window)
 }
 
 void
-gtranslator_file_close (GtkAction * widget, GtranslatorWindow * window)
+gtranslator_file_close (GtkAction * widget, GtrWindow * window)
 {
-  GtranslatorTab *tab;
+  GtrTab *tab;
 
   tab = gtranslator_window_get_active_tab (window);
 
@@ -690,11 +690,11 @@ gtranslator_file_close (GtkAction * widget, GtranslatorWindow * window)
 }
 
 static GList *
-get_modified_documents (GtranslatorWindow * window)
+get_modified_documents (GtrWindow * window)
 {
-  GtranslatorNotebook *nb;
-  GtranslatorTab *tab;
-  GtranslatorPo *po;
+  GtrNotebook *nb;
+  GtrTab *tab;
+  GtrPo *po;
   gint pages;
   GList *list = NULL;
 
@@ -717,7 +717,7 @@ get_modified_documents (GtranslatorWindow * window)
 }
 
 static void
-close_all_documents (GtranslatorWindow * window, gboolean logout_mode)
+close_all_documents (GtrWindow * window, gboolean logout_mode)
 {
   GList *list;
 
@@ -751,11 +751,11 @@ close_all_documents (GtranslatorWindow * window, gboolean logout_mode)
 }
 
 void
-gtranslator_file_quit (GtkAction * action, GtranslatorWindow * window)
+gtranslator_file_quit (GtkAction * action, GtrWindow * window)
 {
-  GtranslatorNotebook *nb;
-  GtranslatorTab *tab;
-  GtranslatorPo *po;
+  GtrNotebook *nb;
+  GtrTab *tab;
+  GtrPo *po;
   gint pages;
   GList *list = NULL;
   GList *profiles_list = NULL;
@@ -809,14 +809,14 @@ gtranslator_file_quit (GtkAction * action, GtranslatorWindow * window)
 
 void
 _gtranslator_actions_file_close_all (GtkAction * action,
-				     GtranslatorWindow * window)
+				     GtrWindow * window)
 {
   close_all_documents (window, FALSE);
 }
 
 void
 _gtranslator_actions_file_save_all (GtkAction * action,
-				    GtranslatorWindow * window)
+				    GtrWindow * window)
 {
   GList *list, *l;
 
@@ -825,7 +825,7 @@ _gtranslator_actions_file_save_all (GtkAction * action,
   for (l = list; l != NULL; l = g_list_next (l))
     {
       GError *error = NULL;
-      GtranslatorStatusbar *status;
+      GtrStatusbar *status;
 
       gtranslator_po_save_file (GTR_PO (l->data), &error);
 

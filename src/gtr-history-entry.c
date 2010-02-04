@@ -51,9 +51,9 @@ enum {
 
 #define GTR_HISTORY_ENTRY_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
 						GTR_TYPE_HISTORY_ENTRY, \
-						GtranslatorHistoryEntryPrivate))
+						GtrHistoryEntryPrivate))
 
-struct _GtranslatorHistoryEntryPrivate
+struct _GtrHistoryEntryPrivate
 {
 	gchar              *history_id;
 	guint               history_length;
@@ -63,7 +63,7 @@ struct _GtranslatorHistoryEntryPrivate
 	GConfClient        *gconf_client;
 };
 
-G_DEFINE_TYPE(GtranslatorHistoryEntry, gtranslator_history_entry, GTK_TYPE_COMBO_BOX_ENTRY)
+G_DEFINE_TYPE(GtrHistoryEntry, gtranslator_history_entry, GTK_TYPE_COMBO_BOX_ENTRY)
 
 static void
 gtranslator_history_entry_set_property (GObject      *object,
@@ -71,7 +71,7 @@ gtranslator_history_entry_set_property (GObject      *object,
 				  const GValue *value,
 				  GParamSpec   *spec)
 {
-	GtranslatorHistoryEntry *entry;
+	GtrHistoryEntry *entry;
 
 	g_return_if_fail (GTR_IS_HISTORY_ENTRY (object));
 
@@ -96,7 +96,7 @@ gtranslator_history_entry_get_property (GObject    *object,
 				  GValue     *value,
 				  GParamSpec *spec)
 {
-	GtranslatorHistoryEntryPrivate *priv;
+	GtrHistoryEntryPrivate *priv;
 
 	g_return_if_fail (GTR_IS_HISTORY_ENTRY (object));
 
@@ -126,7 +126,7 @@ gtranslator_history_entry_destroy (GtkObject *object)
 static void
 gtranslator_history_entry_finalize (GObject *object)
 {
-	GtranslatorHistoryEntryPrivate *priv;
+	GtrHistoryEntryPrivate *priv;
 
 	priv = GTR_HISTORY_ENTRY (object)->priv;
 	
@@ -142,7 +142,7 @@ gtranslator_history_entry_finalize (GObject *object)
 }
 
 static void 
-gtranslator_history_entry_class_init (GtranslatorHistoryEntryClass *klass)
+gtranslator_history_entry_class_init (GtrHistoryEntryClass *klass)
 {
 	GObjectClass   *object_class = G_OBJECT_CLASS (klass);
 	GtkObjectClass *gtkobject_class = GTK_OBJECT_CLASS (klass);
@@ -174,11 +174,11 @@ gtranslator_history_entry_class_init (GtranslatorHistoryEntryClass *klass)
 
 	/* TODO: Add enable-completion property */
 
-	g_type_class_add_private (object_class, sizeof(GtranslatorHistoryEntryPrivate));
+	g_type_class_add_private (object_class, sizeof(GtrHistoryEntryPrivate));
 }
 
 static GtkListStore *
-get_history_store (GtranslatorHistoryEntry *entry)
+get_history_store (GtrHistoryEntry *entry)
 {
 	GtkTreeModel *store;
 
@@ -189,7 +189,7 @@ get_history_store (GtranslatorHistoryEntry *entry)
 }
 
 static char *
-get_history_key (GtranslatorHistoryEntry *entry)
+get_history_key (GtrHistoryEntry *entry)
 {
 	gchar *tmp;
 	gchar *key;
@@ -213,7 +213,7 @@ get_history_key (GtranslatorHistoryEntry *entry)
 }
 
 static GSList *
-get_history_list (GtranslatorHistoryEntry *entry)
+get_history_list (GtrHistoryEntry *entry)
 {
 	GtkListStore *store;
 	GtkTreeIter iter;
@@ -244,7 +244,7 @@ get_history_list (GtranslatorHistoryEntry *entry)
 }
 
 static void
-gtranslator_history_entry_save_history (GtranslatorHistoryEntry *entry)
+gtranslator_history_entry_save_history (GtrHistoryEntry *entry)
 {
 	GSList *gconf_items;
 	gchar *key;
@@ -324,7 +324,7 @@ clamp_list_store (GtkListStore *store,
 }
 
 static void
-insert_history_item (GtranslatorHistoryEntry *entry,
+insert_history_item (GtrHistoryEntry *entry,
 		     const gchar       *text,
 		     gboolean           prepend)
 {
@@ -360,7 +360,7 @@ insert_history_item (GtranslatorHistoryEntry *entry,
 }
 
 void
-gtranslator_history_entry_prepend_text (GtranslatorHistoryEntry *entry,
+gtranslator_history_entry_prepend_text (GtrHistoryEntry *entry,
 				  const gchar       *text)
 {
 	g_return_if_fail (GTR_IS_HISTORY_ENTRY (entry));
@@ -370,7 +370,7 @@ gtranslator_history_entry_prepend_text (GtranslatorHistoryEntry *entry,
 }
 
 void
-gtranslator_history_entry_append_text (GtranslatorHistoryEntry *entry,
+gtranslator_history_entry_append_text (GtrHistoryEntry *entry,
 				 const gchar       *text)
 {
 	g_return_if_fail (GTR_IS_HISTORY_ENTRY (entry));
@@ -380,7 +380,7 @@ gtranslator_history_entry_append_text (GtranslatorHistoryEntry *entry,
 }
 
 static void
-gtranslator_history_entry_load_history (GtranslatorHistoryEntry *entry)
+gtranslator_history_entry_load_history (GtrHistoryEntry *entry)
 {
 	GSList *gconf_items, *l;
 	GtkListStore *store;
@@ -418,7 +418,7 @@ gtranslator_history_entry_load_history (GtranslatorHistoryEntry *entry)
 }
 
 void
-gtranslator_history_entry_clear (GtranslatorHistoryEntry *entry)
+gtranslator_history_entry_clear (GtrHistoryEntry *entry)
 {
 	GtkListStore *store;
 
@@ -431,9 +431,9 @@ gtranslator_history_entry_clear (GtranslatorHistoryEntry *entry)
 }
 
 static void
-gtranslator_history_entry_init (GtranslatorHistoryEntry *entry)
+gtranslator_history_entry_init (GtrHistoryEntry *entry)
 {
-	GtranslatorHistoryEntryPrivate *priv;
+	GtrHistoryEntryPrivate *priv;
 
 	priv = GTR_HISTORY_ENTRY_GET_PRIVATE (entry);
 	entry->priv = priv;
@@ -447,7 +447,7 @@ gtranslator_history_entry_init (GtranslatorHistoryEntry *entry)
 }
 
 void
-gtranslator_history_entry_set_history_length (GtranslatorHistoryEntry *entry,
+gtranslator_history_entry_set_history_length (GtrHistoryEntry *entry,
 					guint              history_length)
 {
 	g_return_if_fail (GTR_IS_HISTORY_ENTRY (entry));
@@ -459,7 +459,7 @@ gtranslator_history_entry_set_history_length (GtranslatorHistoryEntry *entry,
 }
 
 guint
-gtranslator_history_entry_get_history_length (GtranslatorHistoryEntry *entry)
+gtranslator_history_entry_get_history_length (GtrHistoryEntry *entry)
 {
 	g_return_val_if_fail (GTR_IS_HISTORY_ENTRY (entry), 0);
 
@@ -467,7 +467,7 @@ gtranslator_history_entry_get_history_length (GtranslatorHistoryEntry *entry)
 }
 
 gchar *
-gtranslator_history_entry_get_history_id (GtranslatorHistoryEntry *entry)
+gtranslator_history_entry_get_history_id (GtrHistoryEntry *entry)
 {
 	g_return_val_if_fail (GTR_IS_HISTORY_ENTRY (entry), NULL);
 
@@ -475,7 +475,7 @@ gtranslator_history_entry_get_history_id (GtranslatorHistoryEntry *entry)
 }
 
 void
-gtranslator_history_entry_set_enable_completion (GtranslatorHistoryEntry *entry,
+gtranslator_history_entry_set_enable_completion (GtrHistoryEntry *entry,
 					   gboolean           enable)
 {
 	g_return_if_fail (GTR_IS_HISTORY_ENTRY (entry));
@@ -517,7 +517,7 @@ gtranslator_history_entry_set_enable_completion (GtranslatorHistoryEntry *entry,
 }
 							 
 gboolean
-gtranslator_history_entry_get_enable_completion (GtranslatorHistoryEntry *entry)
+gtranslator_history_entry_get_enable_completion (GtrHistoryEntry *entry)
 {
 	g_return_val_if_fail (GTR_IS_HISTORY_ENTRY (entry), FALSE);
 	
@@ -571,13 +571,13 @@ gtranslator_history_entry_new (const gchar *history_id,
 /*
  * Utility function to get the editable text entry internal widget.
  * I would prefer to not expose this implementation detail and 
- * simply make the GtranslatorHistoryEntry widget implement the 
+ * simply make the GtrHistoryEntry widget implement the 
  * GtkEditable interface. Unfortunately both GtkEditable and
  * GtkComboBox have a "changed" signal and I am not sure how to
  * handle the conflict.
  */
 GtkWidget *
-gtranslator_history_entry_get_entry (GtranslatorHistoryEntry *entry)
+gtranslator_history_entry_get_entry (GtrHistoryEntry *entry)
 {
 	g_return_val_if_fail (GTR_IS_HISTORY_ENTRY (entry), NULL);
 
@@ -589,7 +589,7 @@ escape_cell_data_func (GtkTreeViewColumn           *col,
 		       GtkCellRenderer             *renderer,
 		       GtkTreeModel                *model,
 		       GtkTreeIter                 *iter,
-		       GtranslatorHistoryEntryEscapeFunc  escape_func)
+		       GtrHistoryEntryEscapeFunc  escape_func)
 {
 	gchar *str;
 	gchar *escaped;
@@ -603,8 +603,8 @@ escape_cell_data_func (GtkTreeViewColumn           *col,
 }
 
 void
-gtranslator_history_entry_set_escape_func (GtranslatorHistoryEntry           *entry,
-				     GtranslatorHistoryEntryEscapeFunc  escape_func)
+gtranslator_history_entry_set_escape_func (GtrHistoryEntry           *entry,
+				     GtrHistoryEntryEscapeFunc  escape_func)
 {
 	GList *cells;
 

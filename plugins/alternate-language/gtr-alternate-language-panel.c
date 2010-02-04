@@ -39,11 +39,11 @@
 #define GTR_ALTERNATE_LANG_PANEL_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),		       \
 						 GTR_TYPE_ALTERNATE_LANG_PANEL,     \
-						 GtranslatorAlternateLangPanelPrivate))
+						 GtrAlternateLangPanelPrivate))
 
-GTR_PLUGIN_DEFINE_TYPE (GtranslatorAlternateLangPanel,
+GTR_PLUGIN_DEFINE_TYPE (GtrAlternateLangPanel,
 			gtranslator_alternate_lang_panel, GTK_TYPE_VBOX)
-     struct _GtranslatorAlternateLangPanelPrivate
+     struct _GtrAlternateLangPanelPrivate
      {
        GtkWidget *open_button;
        GtkWidget *close_button;
@@ -51,14 +51,14 @@ GTR_PLUGIN_DEFINE_TYPE (GtranslatorAlternateLangPanel,
 
        GtkWidget *status;
 
-       GtranslatorPo *po;
-       GtranslatorMsg *first;
-       GtranslatorTab *tab;
+       GtrPo *po;
+       GtrMsg *first;
+       GtrTab *tab;
      };
 
      static void
        gtranslator_alternate_lang_panel_set_text
-       (GtranslatorAlternateLangPanel * panel, const gchar * text)
+       (GtrAlternateLangPanel * panel, const gchar * text)
 {
   GtkTextBuffer *buf;
 
@@ -68,7 +68,7 @@ GTR_PLUGIN_DEFINE_TYPE (GtranslatorAlternateLangPanel,
 }
 
 static void
-search_message (GtranslatorAlternateLangPanel * panel, GtranslatorMsg * msg)
+search_message (GtrAlternateLangPanel * panel, GtrMsg * msg)
 {
   GList *messages;
   GList *l;
@@ -76,7 +76,7 @@ search_message (GtranslatorAlternateLangPanel * panel, GtranslatorMsg * msg)
   gchar *msgid_collate;
   const gchar *string;
   gchar *string_collate;
-  GtranslatorMsgStatus status;
+  GtrMsgStatus status;
 
   msgid_collate = g_utf8_collate_key (msgid, -1);
   messages = gtranslator_po_get_messages (panel->priv->po);
@@ -124,9 +124,9 @@ search_message (GtranslatorAlternateLangPanel * panel, GtranslatorMsg * msg)
 }
 
 static void
-showed_message_cb (GtranslatorTab * tab,
-		   GtranslatorMsg * msg,
-		   GtranslatorAlternateLangPanel * panel)
+showed_message_cb (GtrTab * tab,
+		   GtrMsg * msg,
+		   GtrAlternateLangPanel * panel)
 {
   if (panel->priv->po == NULL)
     {
@@ -137,7 +137,7 @@ showed_message_cb (GtranslatorTab * tab,
 }
 
 static void
-open_file (GtkWidget * dialog, GtranslatorAlternateLangPanel * panel)
+open_file (GtkWidget * dialog, GtrAlternateLangPanel * panel)
 {
   GError *error = NULL;
   GFile *file;
@@ -176,7 +176,7 @@ open_file (GtkWidget * dialog, GtranslatorAlternateLangPanel * panel)
 
 static void
 gtranslator_file_chooser_analyse (gpointer dialog,
-				  GtranslatorAlternateLangPanel * panel)
+				  GtrAlternateLangPanel * panel)
 {
   gint reply;
 
@@ -199,11 +199,11 @@ gtranslator_file_chooser_analyse (gpointer dialog,
 
 static void
 open_button_clicked_cb (GtkWidget * open_button,
-			GtranslatorAlternateLangPanel * panel)
+			GtrAlternateLangPanel * panel)
 {
   GtkWidget *dialog = NULL;
   gchar *dir;
-  GtranslatorPo *tab_po;
+  GtrPo *tab_po;
   GFile *location, *parent;
 
   if (dialog != NULL)
@@ -239,7 +239,7 @@ open_button_clicked_cb (GtkWidget * open_button,
 
 static void
 close_button_clicked_cb (GtkWidget * close_button,
-			 GtranslatorAlternateLangPanel * panel)
+			 GtrAlternateLangPanel * panel)
 {
   if (panel->priv->po != NULL)
     {
@@ -254,7 +254,7 @@ close_button_clicked_cb (GtkWidget * close_button,
 }
 
 static void
-gtranslator_alternate_lang_panel_draw (GtranslatorAlternateLangPanel * panel)
+gtranslator_alternate_lang_panel_draw (GtrAlternateLangPanel * panel)
 {
   GtkWidget *hbox;
   GtkWidget *buttonbox;
@@ -327,7 +327,7 @@ gtranslator_alternate_lang_panel_draw (GtranslatorAlternateLangPanel * panel)
 }
 
 static void
-gtranslator_alternate_lang_panel_init (GtranslatorAlternateLangPanel * panel)
+gtranslator_alternate_lang_panel_init (GtrAlternateLangPanel * panel)
 {
   panel->priv = GTR_ALTERNATE_LANG_PANEL_GET_PRIVATE (panel);
 
@@ -345,12 +345,12 @@ gtranslator_alternate_lang_panel_finalize (GObject * object)
 
 static void
 gtranslator_alternate_lang_panel_class_init
-  (GtranslatorAlternateLangPanelClass * klass)
+  (GtrAlternateLangPanelClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass,
-			    sizeof (GtranslatorAlternateLangPanelPrivate));
+			    sizeof (GtrAlternateLangPanelPrivate));
 
   object_class->finalize = gtranslator_alternate_lang_panel_finalize;
 }
@@ -360,7 +360,7 @@ gtranslator_alternate_lang_panel_class_init
 GtkWidget *
 gtranslator_alternate_lang_panel_new (GtkWidget * tab)
 {
-  GtranslatorAlternateLangPanel *panel;
+  GtrAlternateLangPanel *panel;
   panel = g_object_new (GTR_TYPE_ALTERNATE_LANG_PANEL, NULL);
 
   panel->priv->tab = GTR_TAB (tab);

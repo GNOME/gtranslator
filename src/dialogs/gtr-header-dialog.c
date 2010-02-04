@@ -37,12 +37,12 @@
 #define GTR_HEADER_DIALOG_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),	\
 						 GTR_TYPE_HEADER_DIALOG,     \
-						 GtranslatorHeaderDialogPrivate))
+						 GtrHeaderDialogPrivate))
 
-G_DEFINE_TYPE (GtranslatorHeaderDialog, gtranslator_header_dialog,
+G_DEFINE_TYPE (GtrHeaderDialog, gtranslator_header_dialog,
 	       GTK_TYPE_DIALOG)
 
-struct _GtranslatorHeaderDialogPrivate
+struct _GtrHeaderDialogPrivate
 {
   GtkWidget *main_box;
   GtkWidget *notebook;
@@ -65,7 +65,7 @@ struct _GtranslatorHeaderDialogPrivate
   GtkWidget *charset;
   GtkWidget *encoding;
 
-  GtranslatorHeader *header;
+  GtrHeader *header;
 };
 
 static void
@@ -75,18 +75,18 @@ gtranslator_header_dialog_finalize (GObject *object)
 }
 
 static void
-gtranslator_header_dialog_class_init (GtranslatorHeaderDialogClass *klass)
+gtranslator_header_dialog_class_init (GtrHeaderDialogClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorHeaderDialogPrivate));
+  g_type_class_add_private (klass, sizeof (GtrHeaderDialogPrivate));
 
   object_class->finalize = gtranslator_header_dialog_finalize;
 }
 
 static void
 take_my_options_checkbutton_toggled (GtkToggleButton *button,
-				     GtranslatorHeaderDialog *dlg)
+				     GtrHeaderDialog *dlg)
 {
   gboolean active;
 
@@ -105,7 +105,7 @@ take_my_options_checkbutton_toggled (GtkToggleButton *button,
 
 static void
 prj_comment_changed (GtkTextBuffer * buffer,
-                     GtranslatorHeaderDialog *dlg)
+                     GtrHeaderDialog *dlg)
 {
   GtkTextIter start, end;
   gchar *text;
@@ -122,7 +122,7 @@ prj_comment_changed (GtkTextBuffer * buffer,
 
 static void
 prj_id_version_changed (GtkWidget *widget,
-			GtranslatorHeaderDialog *dlg)
+			GtrHeaderDialog *dlg)
 {
   const gchar *text;
 
@@ -134,7 +134,7 @@ prj_id_version_changed (GtkWidget *widget,
 
 static void
 rmbt_changed (GtkWidget *widget,
-	      GtranslatorHeaderDialog *dlg)
+	      GtrHeaderDialog *dlg)
 {
   const gchar *text;
 
@@ -146,7 +146,7 @@ rmbt_changed (GtkWidget *widget,
 
 static void
 translator_changed (GtkWidget *widget,
-		    GtranslatorHeaderDialog *dlg)
+		    GtrHeaderDialog *dlg)
 {
   const gchar *name, *email;
 
@@ -159,7 +159,7 @@ translator_changed (GtkWidget *widget,
 
 static void
 language_changed (GtkWidget *widget,
-		  GtranslatorHeaderDialog *dlg)
+		  GtrHeaderDialog *dlg)
 {
   const gchar *language, *lg_email;
 
@@ -171,9 +171,9 @@ language_changed (GtkWidget *widget,
 }
 
 static void
-gtranslator_header_dialog_fill_from_header (GtranslatorHeaderDialog * dlg)
+gtranslator_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
 {
-  GtranslatorHeader *header;
+  GtrHeader *header;
   GtkTextBuffer *buffer;
   gchar *text;
 
@@ -237,7 +237,7 @@ gtranslator_header_dialog_fill_from_header (GtranslatorHeaderDialog * dlg)
 }
 
 static void
-gtranslator_header_dialog_init (GtranslatorHeaderDialog * dlg)
+gtranslator_header_dialog_init (GtrHeaderDialog * dlg)
 {
   gboolean ret;
   GtkWidget *error_widget;
@@ -336,8 +336,8 @@ gtranslator_header_dialog_init (GtranslatorHeaderDialog * dlg)
 }
 
 static void
-set_default_values (GtranslatorHeaderDialog *dlg,
-		    GtranslatorWindow       *window)
+set_default_values (GtrHeaderDialog *dlg,
+		    GtrWindow       *window)
 {
   GtkTextBuffer *buffer;
 
@@ -384,11 +384,11 @@ set_default_values (GtranslatorHeaderDialog *dlg,
 }
 
 void
-gtranslator_show_header_dialog (GtranslatorWindow * window)
+gtranslator_show_header_dialog (GtrWindow * window)
 {
-  static GtranslatorHeaderDialog *dlg = NULL;
-  GtranslatorPo *po;
-  GtranslatorTab *tab;
+  static GtrHeaderDialog *dlg = NULL;
+  GtrPo *po;
+  GtrTab *tab;
 
   tab = gtranslator_window_get_active_tab (window);
   g_return_if_fail (tab != NULL);

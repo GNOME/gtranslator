@@ -28,32 +28,32 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_DICT_PLUGIN		(gtranslator_dict_plugin_get_type ())
-#define GTR_DICT_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_DICT_PLUGIN, GtranslatorDictPlugin))
-#define GTR_DICT_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_Dict_PLUGIN, GtranslatorDictPluginClass))
+#define GTR_DICT_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_DICT_PLUGIN, GtrDictPlugin))
+#define GTR_DICT_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_Dict_PLUGIN, GtrDictPluginClass))
 #define GTR_IS_DICT_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_Dict_PLUGIN))
 #define GTR_IS_DICT_PLUGIN_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_Dict_PLUGIN))
-#define GTR_Dict_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_Dict_PLUGIN, GtranslatorDictPluginClass))
+#define GTR_Dict_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_Dict_PLUGIN, GtrDictPluginClass))
 /* Private structure type */
-typedef struct _GtranslatorDictPluginPrivate GtranslatorDictPluginPrivate;
+typedef struct _GtrDictPluginPrivate GtrDictPluginPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorDictPlugin GtranslatorDictPlugin;
+typedef struct _GtrDictPlugin GtrDictPlugin;
 
-struct _GtranslatorDictPlugin
+struct _GtrDictPlugin
 {
-  GtranslatorPlugin parent_instance;
+  GtrPlugin parent_instance;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorDictPluginClass GtranslatorDictPluginClass;
+typedef struct _GtrDictPluginClass GtrDictPluginClass;
 
-struct _GtranslatorDictPluginClass
+struct _GtrDictPluginClass
 {
-  GtranslatorPluginClass parent_class;
+  GtrPluginClass parent_class;
 };
 
 /*

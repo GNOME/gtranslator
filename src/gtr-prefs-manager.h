@@ -46,7 +46,7 @@ typedef enum
   GTR_SORT_ORDER_ID,
   GTR_SORT_ORDER_ORIGINAL_TEXT,
   GTR_SORT_ORDER_TRANSLATED_TEXT
-} GtranslatorSortOrder;
+} GtrSortOrder;
 
 #define GTR_BASE_KEY			"/apps/gtranslator"
 #define GPM_PREFS_DIR			GTR_BASE_KEY "/preferences"
@@ -166,8 +166,8 @@ GdlSwitcherStyle gtranslator_prefs_manager_get_pane_switcher_style (void);
 void gtranslator_prefs_manager_set_color_scheme (const gchar * color_scheme);
 const gchar *gtranslator_prefs_manager_get_color_scheme (void);
 
-void gtranslator_prefs_manager_set_sort_order (GtranslatorSortOrder
+void gtranslator_prefs_manager_set_sort_order (GtrSortOrder
 					       sort_order);
-GtranslatorSortOrder gtranslator_prefs_manager_get_sort_order (void);
+GtrSortOrder gtranslator_prefs_manager_get_sort_order (void);
 
 #endif /* __GTR_PREFS_MANAGER_H__ */

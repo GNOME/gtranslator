@@ -31,21 +31,21 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_MESSAGE_TABLE_MODEL		(gtranslator_message_table_model_get_type ())
-#define GTR_MESSAGE_TABLE_MODEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGE_TABLE_MODEL, GtranslatorMessageTableModel))
-#define GTR_MESSAGE_TABLE_MODEL_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_MESSAGE_TABLE_MODEL, GtranslatorMessageTableModelClass))
+#define GTR_MESSAGE_TABLE_MODEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGE_TABLE_MODEL, GtrMessageTableModel))
+#define GTR_MESSAGE_TABLE_MODEL_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_MESSAGE_TABLE_MODEL, GtrMessageTableModelClass))
 #define GTR_IS_MESSAGE_TABLE_MODEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_MESSAGE_TABLE_MODEL))
 #define GTR_IS_MESSAGE_TABLE_MODEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_MESSAGE_TABLE_MODEL))
-#define GTR_MESSAGE_TABLE_MODEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_MESSAGE_TABLE_MODEL, GtranslatorMessageTableModelClass))
+#define GTR_MESSAGE_TABLE_MODEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_MESSAGE_TABLE_MODEL, GtrMessageTableModelClass))
 /* Private structure type */
-typedef struct _GtranslatorMessageTableModelPrivate
-  GtranslatorMessageTableModelPrivate;
+typedef struct _GtrMessageTableModelPrivate
+  GtrMessageTableModelPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorMessageTableModel GtranslatorMessageTableModel;
+typedef struct _GtrMessageTableModel GtrMessageTableModel;
 
-struct _GtranslatorMessageTableModel
+struct _GtrMessageTableModel
 {
   GObject parent_instance;
 
@@ -57,18 +57,18 @@ struct _GtranslatorMessageTableModel
 /*
  * Class definition
  */
-typedef struct _GtranslatorMessageTableModelClass
-  GtranslatorMessageTableModelClass;
+typedef struct _GtrMessageTableModelClass
+  GtrMessageTableModelClass;
 
-struct _GtranslatorMessageTableModelClass
+struct _GtrMessageTableModelClass
 {
   GObjectClass parent_class;
 };
 
-typedef enum _GtranslatorMessageTableModelColumn
-  GtranslatorMessageTableModelColumn;
+typedef enum _GtrMessageTableModelColumn
+  GtrMessageTableModelColumn;
 
-enum _GtranslatorMessageTableModelColumn
+enum _GtrMessageTableModelColumn
 {
   GTR_MESSAGE_TABLE_MODEL_ICON_COLUMN,
   GTR_MESSAGE_TABLE_MODEL_ID_COLUMN,
@@ -89,16 +89,16 @@ gtranslator_message_table_model_get_type (void)
      GType gtranslator_message_table_model_register_type (GTypeModule *
 							  module);
 
-     GtranslatorMessageTableModel *gtranslator_message_table_model_new (void);
+     GtrMessageTableModel *gtranslator_message_table_model_new (void);
 
-     void gtranslator_message_table_model_append (GtranslatorMessageTableModel
+     void gtranslator_message_table_model_append (GtrMessageTableModel
 						  * model,
-						  GtranslatorMsg * msg,
+						  GtrMsg * msg,
 						  GtkTreeIter * iter);
 
      void
        gtranslator_message_table_model_update_row
-       (GtranslatorMessageTableModel * model, GtkTreePath * path);
+       (GtrMessageTableModel * model, GtkTreePath * path);
 
 G_END_DECLS
 #endif /* __MESSAGE_TABLE_MODEL_H__ */

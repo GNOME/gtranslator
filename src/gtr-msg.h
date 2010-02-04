@@ -33,33 +33,33 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_MSG		(gtranslator_msg_get_type ())
-#define GTR_MSG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MSG, GtranslatorMsg))
-#define GTR_MSG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_MSG, GtranslatorMsgClass))
+#define GTR_MSG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MSG, GtrMsg))
+#define GTR_MSG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_MSG, GtrMsgClass))
 #define GTR_IS_MSG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_MSG))
 #define GTR_IS_MSG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_MSG))
-#define GTR_MSG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_MSG, GtranslatorMsgClass))
+#define GTR_MSG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_MSG, GtrMsgClass))
 /* Private structure type */
-typedef struct _GtranslatorMsgPrivate GtranslatorMsgPrivate;
+typedef struct _GtrMsgPrivate GtrMsgPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorMsg GtranslatorMsg;
+typedef struct _GtrMsg GtrMsg;
 
-struct _GtranslatorMsg
+struct _GtrMsg
 {
   GObject parent_instance;
 
   /*< private > */
-  GtranslatorMsgPrivate *priv;
+  GtrMsgPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorMsgClass GtranslatorMsgClass;
+typedef struct _GtrMsgClass GtrMsgClass;
 
-struct _GtranslatorMsgClass
+struct _GtrMsgClass
 {
   GObjectClass parent_class;
 };
@@ -69,7 +69,7 @@ typedef enum
   GTR_MSG_STATUS_UNTRANSLATED,
   GTR_MSG_STATUS_FUZZY,
   GTR_MSG_STATUS_TRANSLATED
-} GtranslatorMsgStatus;
+} GtrMsgStatus;
 
 /*
  * Public methods
@@ -80,76 +80,76 @@ gtranslator_msg_get_type (void)
 
      GType gtranslator_msg_register_type (GTypeModule * module);
 
-     GtranslatorMsg *gtranslator_msg_new (po_message_iterator_t iter,
+     GtrMsg *gtranslator_msg_new (po_message_iterator_t iter,
 					  po_message_t message);
 
 po_message_iterator_t
-gtranslator_msg_get_iterator (GtranslatorMsg * msg);
+gtranslator_msg_get_iterator (GtrMsg * msg);
 
-     void gtranslator_msg_set_iterator (GtranslatorMsg * msg,
+     void gtranslator_msg_set_iterator (GtrMsg * msg,
 					po_message_iterator_t iter);
 
-     po_message_t gtranslator_msg_get_message (GtranslatorMsg * msg);
+     po_message_t gtranslator_msg_get_message (GtrMsg * msg);
 
-     void gtranslator_msg_set_message (GtranslatorMsg * msg,
+     void gtranslator_msg_set_message (GtrMsg * msg,
 				       po_message_t message);
 
-     GtkTreeRowReference *gtranslator_msg_get_row_reference (GtranslatorMsg *
+     GtkTreeRowReference *gtranslator_msg_get_row_reference (GtrMsg *
 							     msg);
 
-     void gtranslator_msg_set_row_reference (GtranslatorMsg * msg,
+     void gtranslator_msg_set_row_reference (GtrMsg * msg,
 					     GtkTreeRowReference *
 					     row_reference);
 
-     gboolean gtranslator_msg_is_translated (GtranslatorMsg * msg);
+     gboolean gtranslator_msg_is_translated (GtrMsg * msg);
 
-     gboolean gtranslator_msg_is_fuzzy (GtranslatorMsg * msg);
+     gboolean gtranslator_msg_is_fuzzy (GtrMsg * msg);
 
-     void gtranslator_msg_set_fuzzy (GtranslatorMsg * msg, gboolean fuzzy);
+     void gtranslator_msg_set_fuzzy (GtrMsg * msg, gboolean fuzzy);
 
-     void gtranslator_msg_set_status (GtranslatorMsg * msg,
-				      GtranslatorMsgStatus status);
+     void gtranslator_msg_set_status (GtrMsg * msg,
+				      GtrMsgStatus status);
 
-     GtranslatorMsgStatus gtranslator_msg_get_status (GtranslatorMsg * msg);
+     GtrMsgStatus gtranslator_msg_get_status (GtrMsg * msg);
 
-     const gchar *gtranslator_msg_get_msgid (GtranslatorMsg * msg);
+     const gchar *gtranslator_msg_get_msgid (GtrMsg * msg);
 
-     const gchar *gtranslator_msg_get_msgid_plural (GtranslatorMsg * msg);
+     const gchar *gtranslator_msg_get_msgid_plural (GtrMsg * msg);
 
-     const gchar *gtranslator_msg_get_msgstr (GtranslatorMsg * msg);
+     const gchar *gtranslator_msg_get_msgstr (GtrMsg * msg);
 
-     void gtranslator_msg_set_msgstr (GtranslatorMsg * msg,
+     void gtranslator_msg_set_msgstr (GtrMsg * msg,
 				      const gchar * msgstr);
 
-     const gchar *gtranslator_msg_get_msgstr_plural (GtranslatorMsg * msg,
+     const gchar *gtranslator_msg_get_msgstr_plural (GtrMsg * msg,
 						     gint index);
 
-     void gtranslator_msg_set_msgstr_plural (GtranslatorMsg * msg,
+     void gtranslator_msg_set_msgstr_plural (GtrMsg * msg,
 					     gint index,
 					     const gchar * msgstr);
 
-     const gchar *gtranslator_msg_get_comment (GtranslatorMsg * msg);
+     const gchar *gtranslator_msg_get_comment (GtrMsg * msg);
 
-     void gtranslator_msg_set_comment (GtranslatorMsg * msg,
+     void gtranslator_msg_set_comment (GtrMsg * msg,
 				       const gchar * comment);
 
-     gint gtranslator_msg_get_po_position (GtranslatorMsg * msg);
+     gint gtranslator_msg_get_po_position (GtrMsg * msg);
 
-     void gtranslator_msg_set_po_position (GtranslatorMsg * msg,
+     void gtranslator_msg_set_po_position (GtrMsg * msg,
 					   gint po_position);
 
      const gchar *gtranslator_msg_get_extracted_comments
-       (GtranslatorMsg * msg);
+       (GtrMsg * msg);
 
-     const gchar *gtranslator_msg_get_filename (GtranslatorMsg * msg, gint i);
+     const gchar *gtranslator_msg_get_filename (GtrMsg * msg, gint i);
 
-     gint *gtranslator_msg_get_file_line (GtranslatorMsg * msg, gint i);
+     gint *gtranslator_msg_get_file_line (GtrMsg * msg, gint i);
 
-     const gchar *gtranslator_msg_get_msgctxt (GtranslatorMsg * msg);
+     const gchar *gtranslator_msg_get_msgctxt (GtrMsg * msg);
 
-     const gchar *gtranslator_msg_get_format (GtranslatorMsg * msg);
+     const gchar *gtranslator_msg_get_format (GtrMsg * msg);
 
-     gchar *gtranslator_msg_check (GtranslatorMsg * msg);
+     gchar *gtranslator_msg_check (GtrMsg * msg);
 
 G_END_DECLS
 #endif /* __MSG_H__ */

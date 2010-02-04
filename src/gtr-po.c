@@ -54,12 +54,12 @@
 #define GTR_PO_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 					 (object),	\
 					 GTR_TYPE_PO,     \
-					 GtranslatorPoPrivate))
+					 GtrPoPrivate))
 
 
-G_DEFINE_TYPE (GtranslatorPo, gtranslator_po, G_TYPE_OBJECT)
+G_DEFINE_TYPE (GtrPo, gtranslator_po, G_TYPE_OBJECT)
 
-struct _GtranslatorPoPrivate
+struct _GtrPoPrivate
 {
   GFile *location;
 
@@ -94,9 +94,9 @@ struct _GtranslatorPoPrivate
   guint autosave_timeout;
 
   /* Header object */
-  GtranslatorHeader *header;
+  GtrHeader *header;
 
-  GtranslatorPoState state;
+  GtrPoState state;
 
   /* Marks if the file was changed;  */
   guint file_changed : 1;
@@ -116,7 +116,7 @@ gtranslator_po_get_property (GObject * object,
 			     GValue * value,
 			     GParamSpec * pspec)
 {
-  GtranslatorPo *po = GTR_PO (object);
+  GtrPo *po = GTR_PO (object);
 
   switch (prop_id)
     {
@@ -134,7 +134,7 @@ gtranslator_po_get_property (GObject * object,
  *  po-file.
  */
 static void
-determine_translation_status (GtranslatorMsg * msg, GtranslatorPo * po)
+determine_translation_status (GtrMsg * msg, GtrPo * po)
 {
   if (gtranslator_msg_is_fuzzy (msg))
     po->priv->fuzzy++;
@@ -146,7 +146,7 @@ determine_translation_status (GtranslatorMsg * msg, GtranslatorPo * po)
  * Update the count of the completed translated entries.
  */
 static void
-gtranslator_po_update_translated_count (GtranslatorPo * po)
+gtranslator_po_update_translated_count (GtrPo * po)
 {
   po->priv->translated = 0;
   po->priv->fuzzy = 0;
@@ -155,7 +155,7 @@ gtranslator_po_update_translated_count (GtranslatorPo * po)
 }
 
 static void
-gtranslator_po_init (GtranslatorPo * po)
+gtranslator_po_init (GtrPo * po)
 {
   po->priv = GTR_PO_GET_PRIVATE (po);
 
@@ -166,7 +166,7 @@ gtranslator_po_init (GtranslatorPo * po)
 static void
 gtranslator_po_finalize (GObject * object)
 {
-  GtranslatorPo *po = GTR_PO (object);
+  GtrPo *po = GTR_PO (object);
 
   if (po->priv->messages)
     {
@@ -190,7 +190,7 @@ gtranslator_po_finalize (GObject * object)
 static void
 gtranslator_po_dispose (GObject * object)
 {
-  GtranslatorPo *po = GTR_PO (object);
+  GtrPo *po = GTR_PO (object);
 
   if (po->priv->location != NULL)
     {
@@ -202,11 +202,11 @@ gtranslator_po_dispose (GObject * object)
 }
 
 static void
-gtranslator_po_class_init (GtranslatorPoClass * klass)
+gtranslator_po_class_init (GtrPoClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorPoPrivate));
+  g_type_class_add_private (klass, sizeof (GtrPoPrivate));
 
   object_class->finalize = gtranslator_po_finalize;
   object_class->dispose = gtranslator_po_dispose;
@@ -323,14 +323,14 @@ is_read_only (const gchar *filename)
 /**
  * gtranslator_po_new:
  *
- * Creates a new #GtranslatorPo.
+ * Creates a new #GtrPo.
  *
- * Returns: a new #GtranslatorPo object
+ * Returns: a new #GtrPo object
  **/
-GtranslatorPo *
+GtrPo *
 gtranslator_po_new (void)
 {
-  GtranslatorPo *po;
+  GtrPo *po;
 
   po = g_object_new (GTR_TYPE_PO, NULL);
 
@@ -339,19 +339,19 @@ gtranslator_po_new (void)
 
 /**
  * gtranslator_po_parse:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  * @location: the file to open
  * @error: a variable to store the errors
  *
- * Parses all things related to the #GtranslatorPo and initilizes all neccessary
+ * Parses all things related to the #GtrPo and initilizes all neccessary
  * variables.
  **/
 void
-gtranslator_po_parse (GtranslatorPo * po, GFile * location, GError ** error)
+gtranslator_po_parse (GtrPo * po, GFile * location, GError ** error)
 {
-  GtranslatorPoPrivate *priv = po->priv;
+  GtrPoPrivate *priv = po->priv;
   gchar *filename;
-  GtranslatorMsg *msg;
+  GtrMsg *msg;
   struct po_xerror_handler handler;
   po_message_t message;
   po_message_iterator_t iter;
@@ -502,19 +502,19 @@ gtranslator_po_parse (GtranslatorPo * po, GFile * location, GError ** error)
 
 /**
  * gtranslator_po_save_file:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  * @error: a GError to manage the exceptions
  *
  * It saves the po file and if there are any problem it stores the error
  * in @error.
  **/
 void
-gtranslator_po_save_file (GtranslatorPo * po, GError ** error)
+gtranslator_po_save_file (GtrPo * po, GError ** error)
 {
   struct po_xerror_handler handler;
   gchar *msg_error;
   gchar *filename;
-  GtranslatorHeader *header;
+  GtrHeader *header;
 
   /*
    * Initialice the handler error.
@@ -603,7 +603,7 @@ gtranslator_po_save_file (GtranslatorPo * po, GError ** error)
 
 /**
  * gtranslator_po_get_filename:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Gets the GFile of the po file.
  *
@@ -611,7 +611,7 @@ gtranslator_po_save_file (GtranslatorPo * po, GError ** error)
  * with g_object_unref.
  **/
 GFile *
-gtranslator_po_get_location (GtranslatorPo * po)
+gtranslator_po_get_location (GtrPo * po)
 {
   g_return_val_if_fail (GTR_IS_PO (po), NULL);
 
@@ -620,13 +620,13 @@ gtranslator_po_get_location (GtranslatorPo * po)
 
 /**
  * gtranslator_po_set_location:
- * @po: a #GtranslatorPo
- * @location: The GFile to set to the #GtranslatorPo
+ * @po: a #GtrPo
+ * @location: The GFile to set to the #GtrPo
  *
- * Sets the GFile location within the #GtranslatorPo object.
+ * Sets the GFile location within the #GtrPo object.
  **/
 void
-gtranslator_po_set_location (GtranslatorPo * po, GFile * location)
+gtranslator_po_set_location (GtrPo * po, GFile * location)
 {
   g_return_if_fail (GTR_IS_PO (po));
 
@@ -638,25 +638,25 @@ gtranslator_po_set_location (GtranslatorPo * po, GFile * location)
 
 /**
  * gtranslator_po_get_state:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
- * Return value: the #GtranslatorPoState value of the @po.
+ * Return value: the #GtrPoState value of the @po.
  */
-GtranslatorPoState
-gtranslator_po_get_state (GtranslatorPo * po)
+GtrPoState
+gtranslator_po_get_state (GtrPo * po)
 {
   return po->priv->state;
 }
 
 /**
  * gtranslator_po_set_state:
- * @po: a #GtranslatorPo
- * @state: a #GtranslatorPoState
+ * @po: a #GtrPo
+ * @state: a #GtrPoState
  *
- * Sets the state for a #GtranslatorPo
+ * Sets the state for a #GtrPo
  */
 void
-gtranslator_po_set_state (GtranslatorPo * po, GtranslatorPoState state)
+gtranslator_po_set_state (GtrPo * po, GtrPoState state)
 {
   po->priv->state = state;
 
@@ -667,44 +667,44 @@ gtranslator_po_set_state (GtranslatorPo * po, GtranslatorPoState state)
  * FIXME: We are not using this func.
  */
 gboolean
-gtranslator_po_get_write_perms (GtranslatorPo * po)
+gtranslator_po_get_write_perms (GtrPo * po)
 {
   return po->priv->no_write_perms;
 }
 
 /**
  * gtranslator_po_get_messages:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Return value: a pointer to the messages list
  **/
 GList *
-gtranslator_po_get_messages (GtranslatorPo * po)
+gtranslator_po_get_messages (GtrPo * po)
 {
   return po->priv->messages;
 }
 
 /**
  * gtranslator_po_set_messages:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  * @messages: a pointer to a new messages list.
  *
  * Sets an updated list of messages.
  **/
 void
-gtranslator_po_set_messages (GtranslatorPo * po, GList * messages)
+gtranslator_po_set_messages (GtrPo * po, GList * messages)
 {
   po->priv->messages = messages;
 }
 
 /**
  * gtranslator_po_get_current_message:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Return value: a pointer to the current message
  **/
 GList *
-gtranslator_po_get_current_message (GtranslatorPo * po)
+gtranslator_po_get_current_message (GtrPo * po)
 {
   return po->priv->current;
 }
@@ -712,15 +712,15 @@ gtranslator_po_get_current_message (GtranslatorPo * po)
 
 /**
  * gtranslator_po_update_current_message:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  * @msg: the message where should point the current message.
  *
  * Sets the new current message to the message that is passed in
  * the argument.
  **/
 void
-gtranslator_po_update_current_message (GtranslatorPo * po,
-				       GtranslatorMsg * msg)
+gtranslator_po_update_current_message (GtrPo * po,
+				       GtrMsg * msg)
 {
   gint i;
   i = g_list_index (po->priv->messages, msg);
@@ -729,36 +729,36 @@ gtranslator_po_update_current_message (GtranslatorPo * po,
 
 /**
  * gtranslator_po_get_domains:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Return value: a pointer to the domains list
  **/
 GList *
-gtranslator_po_get_domains (GtranslatorPo * po)
+gtranslator_po_get_domains (GtrPo * po)
 {
   return po->priv->domains;
 }
 
 /**
  * gtranslator_po_get_po_file:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Return value: the gettext file
  **/
 po_file_t
-gtranslator_po_get_po_file (GtranslatorPo * po)
+gtranslator_po_get_po_file (GtrPo * po)
 {
   return po->priv->gettext_po_file;
 }
 
 /**
  * gtranslator_po_get_next_fuzzy:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Return value: a pointer to the next fuzzy message
  **/
 GList *
-gtranslator_po_get_next_fuzzy (GtranslatorPo * po)
+gtranslator_po_get_next_fuzzy (GtrPo * po)
 {
   GList *msg;
 
@@ -775,12 +775,12 @@ gtranslator_po_get_next_fuzzy (GtranslatorPo * po)
 
 /**
  * gtranslator_po_get_prev_fuzzy:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Return value: a pointer to the previously fuzzy message
  **/
 GList *
-gtranslator_po_get_prev_fuzzy (GtranslatorPo * po)
+gtranslator_po_get_prev_fuzzy (GtrPo * po)
 {
   GList *msg;
 
@@ -797,12 +797,12 @@ gtranslator_po_get_prev_fuzzy (GtranslatorPo * po)
 
 /**
  * gtranslator_po_get_next_untrans:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Return value: a pointer to the next untranslated message
  **/
 GList *
-gtranslator_po_get_next_untrans (GtranslatorPo * po)
+gtranslator_po_get_next_untrans (GtrPo * po)
 {
   GList *msg;
 
@@ -819,13 +819,13 @@ gtranslator_po_get_next_untrans (GtranslatorPo * po)
 
 /**
  * gtranslator_po_get_prev_untrans:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Return value: a pointer to the previously untranslated message
  * or NULL if there are not previously untranslated message.
  **/
 GList *
-gtranslator_po_get_prev_untrans (GtranslatorPo * po)
+gtranslator_po_get_prev_untrans (GtrPo * po)
 {
   GList *msg;
 
@@ -841,13 +841,13 @@ gtranslator_po_get_prev_untrans (GtranslatorPo * po)
 
 /**
  * gtranslator_po_get_next_fuzzy_or_untrans:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Return value: a pointer to the next fuzzy or untranslated message
  * or NULL if there is not next fuzzy or untranslated message.
  **/
 GList *
-gtranslator_po_get_next_fuzzy_or_untrans (GtranslatorPo * po)
+gtranslator_po_get_next_fuzzy_or_untrans (GtrPo * po)
 {
   GList *msg;
 
@@ -864,13 +864,13 @@ gtranslator_po_get_next_fuzzy_or_untrans (GtranslatorPo * po)
 
 /**
  * gtranslator_po_get_prev_fuzzy_or_untrans:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Return value: a pointer to the previously fuzzy or untranslated message
  * or NULL if there is not previously fuzzy or untranslated message.
  **/
 GList *
-gtranslator_po_get_prev_fuzzy_or_untrans (GtranslatorPo * po)
+gtranslator_po_get_prev_fuzzy_or_untrans (GtrPo * po)
 {
   GList *msg;
 
@@ -887,13 +887,13 @@ gtranslator_po_get_prev_fuzzy_or_untrans (GtranslatorPo * po)
 
 /**
  * gtranslator_po_get_msg_from_number:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  * @number: the message to jump
  *
  * Gets the message at the given position.
  */
 GList *
-gtranslator_po_get_msg_from_number (GtranslatorPo * po, gint number)
+gtranslator_po_get_msg_from_number (GtrPo * po, gint number)
 {
   g_return_val_if_fail (GTR_IS_PO (po), NULL);
 
@@ -902,12 +902,12 @@ gtranslator_po_get_msg_from_number (GtranslatorPo * po, gint number)
 
 /**
  * gtranslator_po_get_header:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
- * Return value: The #GtranslatorHeader of the @po.
+ * Return value: The #GtrHeader of the @po.
  **/
-GtranslatorHeader *
-gtranslator_po_get_header (GtranslatorPo * po)
+GtrHeader *
+gtranslator_po_get_header (GtrPo * po)
 {
   g_return_val_if_fail (GTR_IS_PO (po), NULL);
 
@@ -915,19 +915,19 @@ gtranslator_po_get_header (GtranslatorPo * po)
 }
 
 void
-gtranslator_po_set_header (GtranslatorPo * po, GtranslatorHeader * header)
+gtranslator_po_set_header (GtrPo * po, GtrHeader * header)
 {
   po->priv->header = header;
 }
 
 /**
  * gtranslator_po_get_translated_count:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Return value: the count of the translated messages.
  **/
 gint
-gtranslator_po_get_translated_count (GtranslatorPo * po)
+gtranslator_po_get_translated_count (GtrPo * po)
 {
   g_return_val_if_fail (GTR_IS_PO (po), -1);
 
@@ -940,7 +940,7 @@ gtranslator_po_get_translated_count (GtranslatorPo * po)
  * This funcs must not be exported.
  */
 void
-_gtranslator_po_increase_decrease_translated (GtranslatorPo * po,
+_gtranslator_po_increase_decrease_translated (GtrPo * po,
 					      gboolean increase)
 {
   g_return_if_fail (GTR_IS_PO (po));
@@ -953,12 +953,12 @@ _gtranslator_po_increase_decrease_translated (GtranslatorPo * po,
 
 /**
  * gtranslator_po_get_fuzzy_count:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Return value: the count of the fuzzy messages.
  **/
 gint
-gtranslator_po_get_fuzzy_count (GtranslatorPo * po)
+gtranslator_po_get_fuzzy_count (GtrPo * po)
 {
   g_return_val_if_fail (GTR_IS_PO (po), -1);
 
@@ -971,7 +971,7 @@ gtranslator_po_get_fuzzy_count (GtranslatorPo * po)
  * This funcs must not be exported.
  */
 void
-_gtranslator_po_increase_decrease_fuzzy (GtranslatorPo * po,
+_gtranslator_po_increase_decrease_fuzzy (GtrPo * po,
 					 gboolean increase)
 {
   g_return_if_fail (GTR_IS_PO (po));
@@ -984,12 +984,12 @@ _gtranslator_po_increase_decrease_fuzzy (GtranslatorPo * po,
 
 /**
  * gtranslator_po_get_untranslated_count:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Return value: the count of the untranslated messages.
  **/
 gint
-gtranslator_po_get_untranslated_count (GtranslatorPo * po)
+gtranslator_po_get_untranslated_count (GtrPo * po)
 {
   g_return_val_if_fail (GTR_IS_PO (po), -1);
 
@@ -1002,12 +1002,12 @@ gtranslator_po_get_untranslated_count (GtranslatorPo * po)
 
 /**
  * gtranslator_po_get_messages_count:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Return value: the number of messages messages.
  **/
 gint
-gtranslator_po_get_messages_count (GtranslatorPo * po)
+gtranslator_po_get_messages_count (GtrPo * po)
 {
   g_return_val_if_fail (GTR_IS_PO (po), -1);
 
@@ -1016,12 +1016,12 @@ gtranslator_po_get_messages_count (GtranslatorPo * po)
 
 /**
  * gtranslator_po_get_message_position:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Return value: the number of the current message.
  **/
 gint
-gtranslator_po_get_message_position (GtranslatorPo * po)
+gtranslator_po_get_message_position (GtrPo * po)
 {
   g_return_val_if_fail (GTR_IS_PO (po), -1);
 
@@ -1030,14 +1030,14 @@ gtranslator_po_get_message_position (GtranslatorPo * po)
 
 /**
  * gtranslator_po_check_po_file:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
  * Test whether an entire PO file is valid, like msgfmt does it.
  * Returns: If it is invalid, returns the error. The return value must be freed
  * with g_free.
  **/
 gchar *
-gtranslator_po_check_po_file (GtranslatorPo * po)
+gtranslator_po_check_po_file (GtrPo * po)
 {
   struct po_xerror_handler handler;
 

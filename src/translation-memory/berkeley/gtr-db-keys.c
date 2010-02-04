@@ -34,16 +34,16 @@
 #define GTR_DB_KEYS_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),		       \
 						 GTR_TYPE_DB_KEYS,     \
-						 GtranslatorDbKeysPrivate))
+						 GtrDbKeysPrivate))
 
-G_DEFINE_TYPE (GtranslatorDbKeys, gtranslator_db_keys, G_TYPE_OBJECT)
-     struct _GtranslatorDbKeysPrivate
+G_DEFINE_TYPE (GtrDbKeys, gtranslator_db_keys, G_TYPE_OBJECT)
+     struct _GtrDbKeysPrivate
      {
        db_recno_t *list;
        gsize count;
      };
 
-     static void gtranslator_db_keys_init (GtranslatorDbKeys * db_keys)
+     static void gtranslator_db_keys_init (GtrDbKeys * db_keys)
 {
   db_keys->priv = GTR_DB_KEYS_GET_PRIVATE (db_keys);
 }
@@ -51,7 +51,7 @@ G_DEFINE_TYPE (GtranslatorDbKeys, gtranslator_db_keys, G_TYPE_OBJECT)
 static void
 gtranslator_db_keys_finalize (GObject * object)
 {
-  GtranslatorDbKeys *keys = GTR_DB_KEYS (object);
+  GtrDbKeys *keys = GTR_DB_KEYS (object);
 
   g_free (keys->priv->list);
 
@@ -59,11 +59,11 @@ gtranslator_db_keys_finalize (GObject * object)
 }
 
 static void
-gtranslator_db_keys_class_init (GtranslatorDbKeysClass * klass)
+gtranslator_db_keys_class_init (GtrDbKeysClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorDbKeysPrivate));
+  g_type_class_add_private (klass, sizeof (GtrDbKeysPrivate));
 
   object_class->finalize = gtranslator_db_keys_finalize;
 }
@@ -72,14 +72,14 @@ gtranslator_db_keys_class_init (GtranslatorDbKeysClass * klass)
  * gtranslator_db_keys_new:
  * @data: the db_recno_t with the list of keys stored into it
  *
- * Creates a new #GtranslatorDbKeys object.
+ * Creates a new #GtrDbKeys object.
  *
- * Returns: a new #GtranslatorDbKeys object
+ * Returns: a new #GtrDbKeys object
  */
-GtranslatorDbKeys *
+GtrDbKeys *
 gtranslator_db_keys_new (DBT * data)
 {
-  GtranslatorDbKeys *db_keys;
+  GtrDbKeys *db_keys;
 
   db_keys = g_object_new (GTR_TYPE_DB_KEYS, NULL);
 
@@ -94,14 +94,14 @@ gtranslator_db_keys_new (DBT * data)
  * gtranslator_db_keys_new_with_size:
  * @cnt: the number of element for the list
  *
- * Creates a new #GtranslatorDbKeys object with #cnt elements.
+ * Creates a new #GtrDbKeys object with #cnt elements.
  *
- * Returns: a new #GtranslatorDbKeys object
+ * Returns: a new #GtrDbKeys object
  */
-GtranslatorDbKeys *
+GtrDbKeys *
 gtranslator_db_keys_new_with_size (gsize cnt)
 {
-  GtranslatorDbKeys *db_keys;
+  GtrDbKeys *db_keys;
 
   db_keys = g_object_new (GTR_TYPE_DB_KEYS, NULL);
 
@@ -113,14 +113,14 @@ gtranslator_db_keys_new_with_size (gsize cnt)
 
 /**
  * gtranslator_db_keys_get_list:
- * @db_keys: a #GtranslatorDbKeys
+ * @db_keys: a #GtrDbKeys
  * 
  * Gets the list of keys.
  * 
  * Returns: the list of keys
  */
 db_recno_t *
-gtranslator_db_keys_get_list (GtranslatorDbKeys * db_keys)
+gtranslator_db_keys_get_list (GtrDbKeys * db_keys)
 {
   g_return_val_if_fail (GTR_IS_DB_KEYS (db_keys), NULL);
 
@@ -129,14 +129,14 @@ gtranslator_db_keys_get_list (GtranslatorDbKeys * db_keys)
 
 /**
  * gtranslator_db_keys_get_count:
- * @db_keys: a #GtranslatorDbKeys
+ * @db_keys: a #GtrDbKeys
  *
  * Gets the number of elements in the list.
  *
  * Returns: the number of elements in the list
  */
 gsize
-gtranslator_db_keys_get_count (GtranslatorDbKeys * db_keys)
+gtranslator_db_keys_get_count (GtrDbKeys * db_keys)
 {
   g_return_val_if_fail (GTR_IS_DB_KEYS (db_keys), 0);
 
@@ -144,7 +144,7 @@ gtranslator_db_keys_get_count (GtranslatorDbKeys * db_keys)
 }
 
 void
-gtranslator_db_keys_set_count (GtranslatorDbKeys * db_keys, gsize count)
+gtranslator_db_keys_set_count (GtrDbKeys * db_keys, gsize count)
 {
   g_return_if_fail (GTR_IS_DB_KEYS (db_keys));
 

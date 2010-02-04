@@ -27,23 +27,23 @@
 
 #include <glib/gi18n-lib.h>
 
-#define WINDOW_DATA_KEY	"GtranslatorAlternateLangPluginWindowData"
-#define TAB_DATA_KEY    "GtranslatorAlternateLangPluginTabData"
+#define WINDOW_DATA_KEY	"GtrAlternateLangPluginWindowData"
+#define TAB_DATA_KEY    "GtrAlternateLangPluginTabData"
 #define MENU_PATH "/MainMenu/ViewMenu/ViewOps_2"
 
 #define GTR_MESSAGE_TABLE_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
 				GTR_TYPE_MESSAGE_TABLE,		\
-				GtranslatorAlternateLangPluginPrivate))
+				GtrAlternateLangPluginPrivate))
 
-GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtranslatorAlternateLangPlugin,
+GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrAlternateLangPlugin,
 				    gtranslator_alternate_lang_plugin,
 				    gtranslator_alternate_lang_panel_register_type
 				    (module);)
      static void on_alternate_lang_activated (GtkAction * action,
-					      GtranslatorWindow * window)
+					      GtrWindow * window)
 {
-  GtranslatorTab *tab;
+  GtrTab *tab;
   GtkWidget *alternatelang;
 
   tab = gtranslator_window_get_active_tab (window);
@@ -73,9 +73,9 @@ free_window_data (WindowData * data)
 }
 
 static void
-update_ui_real (GtranslatorWindow * window, WindowData * data)
+update_ui_real (GtrWindow * window, WindowData * data)
 {
-  GtranslatorTab *tab;
+  GtrTab *tab;
   GtkAction *action;
 
   tab = gtranslator_window_get_active_tab (window);
@@ -85,7 +85,7 @@ update_ui_real (GtranslatorWindow * window, WindowData * data)
 }
 
 static void
-gtranslator_alternate_lang_plugin_init (GtranslatorAlternateLangPlugin *
+gtranslator_alternate_lang_plugin_init (GtrAlternateLangPlugin *
 					message_table)
 {
 }
@@ -102,10 +102,10 @@ static void
 create_alternate_lang_plugin_panel (GtkNotebook * notebook,
 				    GtkWidget * child,
 				    guint page_num,
-				    GtranslatorWindow * window)
+				    GtrWindow * window)
 {
   GtkWidget *alternatelang;
-  GtranslatorPo *po;
+  GtrPo *po;
 
   po = gtranslator_tab_get_po (GTR_TAB (child));
 
@@ -122,9 +122,9 @@ create_alternate_lang_plugin_panel (GtkNotebook * notebook,
 }
 
 static void
-impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_activate (GtrPlugin * plugin, GtrWindow * window)
 {
-  GtranslatorNotebook *notebook;
+  GtrNotebook *notebook;
   GList *tabs = NULL;
   GtkUIManager *manager;
   WindowData *data;
@@ -134,7 +134,7 @@ impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
   manager = gtranslator_window_get_ui_manager (window);
 
   data->action_group =
-    gtk_action_group_new ("GtranslatorAlternateLangPluginActions");
+    gtk_action_group_new ("GtrAlternateLangPluginActions");
   gtk_action_group_set_translation_domain (data->action_group,
 					   GETTEXT_PACKAGE);
   gtk_action_group_add_actions (data->action_group, action_entries,
@@ -173,9 +173,9 @@ impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 }
 
 static void
-impl_deactivate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
 {
-  GtranslatorNotebook *notebook;
+  GtrNotebook *notebook;
   GtkWidget *alternatelang;
   GList *tabs;
   GtkUIManager *manager;
@@ -217,7 +217,7 @@ impl_deactivate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 }
 
 static void
-impl_update_ui (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_update_ui (GtrPlugin * plugin, GtrWindow * window)
 {
   WindowData *data;
 
@@ -230,10 +230,10 @@ impl_update_ui (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 
 static void
 gtranslator_alternate_lang_plugin_class_init
-  (GtranslatorAlternateLangPluginClass * klass)
+  (GtrAlternateLangPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtranslatorPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
+  GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
   object_class->finalize = gtranslator_alternate_lang_plugin_finalize;
 

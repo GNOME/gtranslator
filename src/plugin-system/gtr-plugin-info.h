@@ -38,34 +38,34 @@
 
 G_BEGIN_DECLS
 #define GTR_TYPE_PLUGIN_INFO			(gtranslator_plugin_info_get_type ())
-#define GTR_PLUGIN_INFO(obj)			((GtranslatorPluginInfo *) (obj))
-typedef struct _GtranslatorPluginInfo GtranslatorPluginInfo;
+#define GTR_PLUGIN_INFO(obj)			((GtrPluginInfo *) (obj))
+typedef struct _GtrPluginInfo GtrPluginInfo;
 
 GType
 gtranslator_plugin_info_get_type (void)
   G_GNUC_CONST;
 
-     gboolean gtranslator_plugin_info_is_active (GtranslatorPluginInfo *
+     gboolean gtranslator_plugin_info_is_active (GtrPluginInfo *
 						 info);
-     gboolean gtranslator_plugin_info_is_available (GtranslatorPluginInfo *
+     gboolean gtranslator_plugin_info_is_available (GtrPluginInfo *
 						    info);
-     gboolean gtranslator_plugin_info_is_configurable (GtranslatorPluginInfo *
+     gboolean gtranslator_plugin_info_is_configurable (GtrPluginInfo *
 						       info);
 
-     const gchar *gtranslator_plugin_info_get_name (GtranslatorPluginInfo *
+     const gchar *gtranslator_plugin_info_get_name (GtrPluginInfo *
 						    info);
      const gchar
-       *gtranslator_plugin_info_get_description (GtranslatorPluginInfo *
+       *gtranslator_plugin_info_get_description (GtrPluginInfo *
 						 info);
-     const gchar *gtranslator_plugin_info_get_icon_name (GtranslatorPluginInfo
+     const gchar *gtranslator_plugin_info_get_icon_name (GtrPluginInfo
 							 * info);
-     const gchar **gtranslator_plugin_info_get_authors (GtranslatorPluginInfo
+     const gchar **gtranslator_plugin_info_get_authors (GtrPluginInfo
 							* info);
-     const gchar *gtranslator_plugin_info_get_website (GtranslatorPluginInfo *
+     const gchar *gtranslator_plugin_info_get_website (GtrPluginInfo *
 						       info);
-     const gchar *gtranslator_plugin_info_get_copyright (GtranslatorPluginInfo
+     const gchar *gtranslator_plugin_info_get_copyright (GtrPluginInfo
 							 * info);
-     const gchar *gtranslator_plugin_info_get_license (GtranslatorPluginInfo *
+     const gchar *gtranslator_plugin_info_get_license (GtrPluginInfo *
 						       info);
 
 G_END_DECLS

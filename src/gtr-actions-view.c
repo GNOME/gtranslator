@@ -19,9 +19,9 @@
 
 void
 gtranslator_actions_view_context (GtkAction * action,
-				  GtranslatorWindow * window)
+				  GtrWindow * window)
 {
-  GtranslatorTab *tab;
+  GtrTab *tab;
   GtkWidget *context;
 
   tab = gtranslator_window_get_active_tab (window);
@@ -32,9 +32,9 @@ gtranslator_actions_view_context (GtkAction * action,
 
 void
 gtranslator_actions_view_translation_memory (GtkAction * action,
-					     GtranslatorWindow * window)
+					     GtrWindow * window)
 {
-  GtranslatorTab *tab;
+  GtrTab *tab;
   GtkWidget *tm_ui;
 
   tab = gtranslator_window_get_active_tab (window);

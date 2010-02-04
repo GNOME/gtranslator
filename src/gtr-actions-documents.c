@@ -23,18 +23,18 @@
 
 void
 gtranslator_actions_documents_next_document (GtkAction * action,
-					     GtranslatorWindow * window)
+					     GtrWindow * window)
 {
-  GtranslatorNotebook *notebook;
+  GtrNotebook *notebook;
   notebook = gtranslator_window_get_notebook (window);
   gtk_notebook_next_page (GTK_NOTEBOOK (notebook));
 }
 
 void
 gtranslator_actions_documents_previous_document (GtkAction * action,
-						 GtranslatorWindow * window)
+						 GtrWindow * window)
 {
-  GtranslatorNotebook *notebook;
+  GtrNotebook *notebook;
   notebook = gtranslator_window_get_notebook (window);
   gtk_notebook_prev_page (GTK_NOTEBOOK (notebook));
 }

@@ -35,27 +35,27 @@
 G_BEGIN_DECLS
 
 #define GTR_TYPE_HISTORY_ENTRY             (gtranslator_history_entry_get_type ())
-#define GTR_HISTORY_ENTRY(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_HISTORY_ENTRY, GtranslatorHistoryEntry))
-#define GTR_HISTORY_ENTRY_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTR_TYPE_HISTORY_ENTRY, GtranslatorHistoryEntryClass))
+#define GTR_HISTORY_ENTRY(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_HISTORY_ENTRY, GtrHistoryEntry))
+#define GTR_HISTORY_ENTRY_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTR_TYPE_HISTORY_ENTRY, GtrHistoryEntryClass))
 #define GTR_IS_HISTORY_ENTRY(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_HISTORY_ENTRY))
 #define GTR_IS_HISTORY_ENTRY_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_HISTORY_ENTRY))
-#define GTR_HISTORY_ENTRY_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTR_TYPE_HISTORY_ENTRY, GtranslatorHistoryEntryClass))
+#define GTR_HISTORY_ENTRY_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTR_TYPE_HISTORY_ENTRY, GtrHistoryEntryClass))
 
 
-typedef struct _GtranslatorHistoryEntry        GtranslatorHistoryEntry;
-typedef struct _GtranslatorHistoryEntryClass   GtranslatorHistoryEntryClass;
-typedef struct _GtranslatorHistoryEntryPrivate GtranslatorHistoryEntryPrivate;
+typedef struct _GtrHistoryEntry        GtrHistoryEntry;
+typedef struct _GtrHistoryEntryClass   GtrHistoryEntryClass;
+typedef struct _GtrHistoryEntryPrivate GtrHistoryEntryPrivate;
 
-struct _GtranslatorHistoryEntryClass
+struct _GtrHistoryEntryClass
 {
 	GtkComboBoxEntryClass parent_class;
 };
 
-struct _GtranslatorHistoryEntry
+struct _GtrHistoryEntry
 {
 	GtkComboBoxEntry parent_instance;
 
-	GtranslatorHistoryEntryPrivate *priv;
+	GtrHistoryEntryPrivate *priv;
 };
 
 GType		 gtranslator_history_entry_get_type	(void) G_GNUC_CONST;
@@ -63,33 +63,33 @@ GType		 gtranslator_history_entry_get_type	(void) G_GNUC_CONST;
 GtkWidget	*gtranslator_history_entry_new		(const gchar       *history_id,
 							 gboolean           enable_completion);
 
-void		 gtranslator_history_entry_prepend_text	(GtranslatorHistoryEntry *entry,
+void		 gtranslator_history_entry_prepend_text	(GtrHistoryEntry *entry,
 							 const gchar       *text);
 
-void		 gtranslator_history_entry_append_text	(GtranslatorHistoryEntry *entry,
+void		 gtranslator_history_entry_append_text	(GtrHistoryEntry *entry,
 							 const gchar       *text);
 
-void		 gtranslator_history_entry_clear		(GtranslatorHistoryEntry *entry);
+void		 gtranslator_history_entry_clear		(GtrHistoryEntry *entry);
 
-void		 gtranslator_history_entry_set_history_length	(GtranslatorHistoryEntry *entry,
+void		 gtranslator_history_entry_set_history_length	(GtrHistoryEntry *entry,
 							 guint              max_saved);
 
-guint		 gtranslator_history_entry_get_history_length	(GtranslatorHistoryEntry *gentry);
+guint		 gtranslator_history_entry_get_history_length	(GtrHistoryEntry *gentry);
 
-gchar		*gtranslator_history_entry_get_history_id	(GtranslatorHistoryEntry *entry);
+gchar		*gtranslator_history_entry_get_history_id	(GtrHistoryEntry *entry);
 
 void             gtranslator_history_entry_set_enable_completion 
-							(GtranslatorHistoryEntry *entry,
+							(GtrHistoryEntry *entry,
 							 gboolean           enable);
 							 
 gboolean         gtranslator_history_entry_get_enable_completion 
-							(GtranslatorHistoryEntry *entry);
+							(GtrHistoryEntry *entry);
 
-GtkWidget	*gtranslator_history_entry_get_entry		(GtranslatorHistoryEntry *entry);
+GtkWidget	*gtranslator_history_entry_get_entry		(GtrHistoryEntry *entry);
 
-typedef gchar * (* GtranslatorHistoryEntryEscapeFunc) (const gchar *str);
-void		gtranslator_history_entry_set_escape_func	(GtranslatorHistoryEntry *entry,
-							 GtranslatorHistoryEntryEscapeFunc escape_func);
+typedef gchar * (* GtrHistoryEntryEscapeFunc) (const gchar *str);
+void		gtranslator_history_entry_set_escape_func	(GtrHistoryEntry *entry,
+							 GtrHistoryEntryEscapeFunc escape_func);
 
 G_END_DECLS
 

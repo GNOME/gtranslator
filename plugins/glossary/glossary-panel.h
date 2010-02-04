@@ -33,34 +33,34 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_GLOSSARY_PANEL		(gtranslator_glossary_panel_get_type ())
-#define GTR_GLOSSARY_PANEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_GLOSSARY_PANEL, GtranslatorGlossaryPanel))
-#define GTR_GLOSSARY_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_GLOSSARY_PANEL, GtranslatorGlossaryPanelClass))
+#define GTR_GLOSSARY_PANEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_GLOSSARY_PANEL, GtrGlossaryPanel))
+#define GTR_GLOSSARY_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_GLOSSARY_PANEL, GtrGlossaryPanelClass))
 #define GTR_IS_GLOSSARY_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_GLOSSARY_PANEL))
 #define GTR_IS_GLOSSARY_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_GLOSSARY_PANEL))
-#define GTR_GLOSSARY_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_GLOSSARY_PANEL, GtranslatorGlossaryPanelClass))
+#define GTR_GLOSSARY_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_GLOSSARY_PANEL, GtrGlossaryPanelClass))
 /* Private structure type */
-typedef struct _GtranslatorGlossaryPanelPrivate
-  GtranslatorGlossaryPanelPrivate;
+typedef struct _GtrGlossaryPanelPrivate
+  GtrGlossaryPanelPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorGlossaryPanel GtranslatorGlossaryPanel;
+typedef struct _GtrGlossaryPanel GtrGlossaryPanel;
 
-struct _GtranslatorGlossaryPanel
+struct _GtrGlossaryPanel
 {
   GtkVBox parent_instance;
 
   /*< private > */
-  GtranslatorGlossaryPanelPrivate *priv;
+  GtrGlossaryPanelPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorGlossaryPanelClass GtranslatorGlossaryPanelClass;
+typedef struct _GtrGlossaryPanelClass GtrGlossaryPanelClass;
 
-struct _GtranslatorGlossaryPanelClass
+struct _GtrGlossaryPanelClass
 {
   GtkVBoxClass parent_class;
 };

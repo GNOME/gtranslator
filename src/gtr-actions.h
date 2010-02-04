@@ -27,129 +27,129 @@
 G_BEGIN_DECLS
 /*File*/
 void gtranslator_open_file_dialog (GtkAction * action,
-				   GtranslatorWindow * window);
+				   GtrWindow * window);
 
 void gtranslator_save_current_file_dialog (GtkWidget * widget,
-					   GtranslatorWindow * window);
+					   GtrWindow * window);
 
 void gtranslator_save_file_as_dialog (GtkAction * action,
-				      GtranslatorWindow * window);
+				      GtrWindow * window);
 
 gboolean gtranslator_open (GFile * location,
-			   GtranslatorWindow * window, GError ** error);
+			   GtrWindow * window, GError ** error);
 
-void gtranslator_close_tab (GtranslatorTab * tab, GtranslatorWindow * window);
+void gtranslator_close_tab (GtrTab * tab, GtrWindow * window);
 
-void gtranslator_file_close (GtkAction * widget, GtranslatorWindow * window);
+void gtranslator_file_close (GtkAction * widget, GtrWindow * window);
 
-void gtranslator_file_quit (GtkAction * action, GtranslatorWindow * window);
+void gtranslator_file_quit (GtkAction * action, GtrWindow * window);
 
-void gtranslator_actions_load_locations (GtranslatorWindow * window,
+void gtranslator_actions_load_locations (GtrWindow * window,
 					 const GSList * locations);
 
 void _gtranslator_actions_file_close_all (GtkAction * action,
-					  GtranslatorWindow * window);
+					  GtrWindow * window);
 
 void _gtranslator_actions_file_save_all (GtkAction * action,
-					 GtranslatorWindow * window);
+					 GtrWindow * window);
 
 /*Edit*/
 void gtranslator_actions_edit_undo (GtkAction * action,
-				    GtranslatorWindow * window);
+				    GtrWindow * window);
 
 void gtranslator_actions_edit_redo (GtkAction * action,
-				    GtranslatorWindow * window);
+				    GtrWindow * window);
 
 void gtranslator_actions_edit_cut (GtkAction * action,
-				   GtranslatorWindow * window);
+				   GtrWindow * window);
 
 void gtranslator_actions_edit_copy (GtkAction * action,
-				    GtranslatorWindow * window);
+				    GtrWindow * window);
 
 void gtranslator_actions_edit_paste (GtkAction * action,
-				     GtranslatorWindow * window);
+				     GtrWindow * window);
 
 void gtranslator_actions_edit_header (GtkAction * action,
-				      GtranslatorWindow * window);
+				      GtrWindow * window);
 
 void gtranslator_edit_message_comment (GtkAction * action,
-				       GtranslatorWindow * window);
+				       GtrWindow * window);
 
 void gtranslator_message_copy_to_translation
-  (GtkAction * action, GtranslatorWindow * window);
+  (GtkAction * action, GtrWindow * window);
 
 void gtranslator_message_status_toggle_fuzzy
-  (GtkAction * action, GtranslatorWindow * window);
+  (GtkAction * action, GtrWindow * window);
 
 void gtranslator_actions_edit_preferences (GtkAction * action,
-					   GtranslatorWindow * window);
+					   GtrWindow * window);
 
 void gtranslator_actions_edit_clear (GtkAction * action,
-				     GtranslatorWindow * window);
+				     GtrWindow * window);
 
 /* View */
 void gtranslator_actions_view_context (GtkAction * action,
-				       GtranslatorWindow * window);
+				       GtrWindow * window);
 
 void gtranslator_actions_view_translation_memory
-  (GtkAction * action, GtranslatorWindow * window);
+  (GtkAction * action, GtrWindow * window);
 
 /*Go*/
 void gtranslator_message_go_to_first (GtkAction * action,
-				      GtranslatorWindow * window);
+				      GtrWindow * window);
 
 void gtranslator_message_go_to_previous (GtkAction * action,
-					 GtranslatorWindow * window);
+					 GtrWindow * window);
 
 void gtranslator_message_go_to_next (GtkAction * action,
-				     GtranslatorWindow * window);
+				     GtrWindow * window);
 
 void gtranslator_message_go_to_last (GtkAction * action,
-				     GtranslatorWindow * window);
+				     GtrWindow * window);
 
 void gtranslator_message_go_to_next_fuzzy (GtkAction * action,
-					   GtranslatorWindow * window);
+					   GtrWindow * window);
 
 void gtranslator_message_go_to_prev_fuzzy (GtkAction * action,
-					   GtranslatorWindow * window);
+					   GtrWindow * window);
 
 void gtranslator_message_go_to_next_untranslated
-  (GtkAction * action, GtranslatorWindow * window);
+  (GtkAction * action, GtrWindow * window);
 
 void gtranslator_message_go_to_prev_untranslated
-  (GtkAction * action, GtranslatorWindow * window);
+  (GtkAction * action, GtrWindow * window);
 
 void gtranslator_message_go_to_next_fuzzy_or_untranslated
-  (GtkAction * action, GtranslatorWindow * window);
+  (GtkAction * action, GtrWindow * window);
 
 void gtranslator_message_go_to_prev_fuzzy_or_untranslated
-  (GtkAction * action, GtranslatorWindow * window);
+  (GtkAction * action, GtrWindow * window);
 
 void gtranslator_message_jump (GtkAction * action,
-			       GtranslatorWindow * window);
+			       GtrWindow * window);
 
 /*Search*/
 void _gtranslator_actions_search_find (GtkAction * action,
-				       GtranslatorWindow * window);
+				       GtrWindow * window);
 
 void _gtranslator_actions_search_replace (GtkAction * action,
-					  GtranslatorWindow * window);
+					  GtrWindow * window);
 
 /*Documents*/
 void gtranslator_actions_documents_next_document
-  (GtkAction * action, GtranslatorWindow * window);
+  (GtkAction * action, GtrWindow * window);
 
 void gtranslator_actions_documents_previous_document
-  (GtkAction * action, GtranslatorWindow * window);
+  (GtkAction * action, GtrWindow * window);
 
 /*Help*/
 void gtranslator_window_show_home_page (GtkAction * action, gpointer useless);
 
 void gtranslator_cmd_help_contents (GtkAction * action,
-				    GtranslatorWindow * window);
+				    GtrWindow * window);
 
 void gtranslator_about_dialog (GtkAction * action,
-			       GtranslatorWindow * window);
+			       GtrWindow * window);
 
 
 

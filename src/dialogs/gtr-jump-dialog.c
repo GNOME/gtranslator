@@ -35,25 +35,25 @@
 #define GTR_JUMP_DIALOG_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 	(object),	\
 						 	GTR_TYPE_JUMP_DIALOG,     \
-						 	GtranslatorJumpDialogPrivate))
+						 	GtrJumpDialogPrivate))
 
 
-G_DEFINE_TYPE (GtranslatorJumpDialog, gtranslator_jump_dialog,
+G_DEFINE_TYPE (GtrJumpDialog, gtranslator_jump_dialog,
 	       GTK_TYPE_DIALOG)
 
-struct _GtranslatorJumpDialogPrivate
+struct _GtrJumpDialogPrivate
 {
   GtkWidget *main_box;
   GtkWidget *jump;
 
-  GtranslatorWindow *window;
+  GtrWindow *window;
 };
 
 static void
 dialog_response_handler (GtkDialog * dlg, gint res_id)
 {
-  GtranslatorJumpDialog *dialog = GTR_JUMP_DIALOG (dlg);
-  GtranslatorTab *tab;
+  GtrJumpDialog *dialog = GTR_JUMP_DIALOG (dlg);
+  GtrTab *tab;
   gint number;
 
   switch (res_id)
@@ -73,7 +73,7 @@ dialog_response_handler (GtkDialog * dlg, gint res_id)
 }
 
 static void
-gtranslator_jump_dialog_init (GtranslatorJumpDialog * dlg)
+gtranslator_jump_dialog_init (GtrJumpDialog * dlg)
 {
   gboolean ret;
   GtkWidget *error_widget;
@@ -140,26 +140,26 @@ gtranslator_jump_dialog_finalize (GObject * object)
 }
 
 static void
-gtranslator_jump_dialog_class_init (GtranslatorJumpDialogClass * klass)
+gtranslator_jump_dialog_class_init (GtrJumpDialogClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorJumpDialogPrivate));
+  g_type_class_add_private (klass, sizeof (GtrJumpDialogPrivate));
 
   object_class->finalize = gtranslator_jump_dialog_finalize;
 }
 
 void
-gtranslator_show_jump_dialog (GtranslatorWindow * window)
+gtranslator_show_jump_dialog (GtrWindow * window)
 {
-  static GtranslatorJumpDialog *dlg = NULL;
+  static GtrJumpDialog *dlg = NULL;
 
   g_return_if_fail (GTR_IS_WINDOW (window));
 
   if (dlg == NULL)
     {
-      GtranslatorTab *tab;
-      GtranslatorPo *po;
+      GtrTab *tab;
+      GtrPo *po;
       gint messages;
 
       dlg = g_object_new (GTR_TYPE_JUMP_DIALOG, NULL);

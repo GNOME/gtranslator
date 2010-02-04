@@ -33,10 +33,10 @@
 
 void
 gtranslator_message_go_to_first (GtkAction * action,
-				 GtranslatorWindow * window)
+				 GtrWindow * window)
 {
-  GtranslatorTab *current;
-  GtranslatorPo *po;
+  GtrTab *current;
+  GtrPo *po;
 
   current = gtranslator_window_get_active_tab (window);
   po = gtranslator_tab_get_po (current);
@@ -46,10 +46,10 @@ gtranslator_message_go_to_first (GtkAction * action,
 
 void
 gtranslator_message_go_to_previous (GtkAction * action,
-				    GtranslatorWindow * window)
+				    GtrWindow * window)
 {
-  GtranslatorTab *current;
-  GtranslatorPo *po;
+  GtrTab *current;
+  GtrPo *po;
 
   current = gtranslator_window_get_active_tab (window);
   po = gtranslator_tab_get_po (current);
@@ -59,10 +59,10 @@ gtranslator_message_go_to_previous (GtkAction * action,
 
 void
 gtranslator_message_go_to_next (GtkAction * action,
-				GtranslatorWindow * window)
+				GtrWindow * window)
 {
-  GtranslatorTab *current;
-  GtranslatorPo *po;
+  GtrTab *current;
+  GtrPo *po;
 
   current = gtranslator_window_get_active_tab (window);
   po = gtranslator_tab_get_po (current);
@@ -72,10 +72,10 @@ gtranslator_message_go_to_next (GtkAction * action,
 
 void
 gtranslator_message_go_to_last (GtkAction * action,
-				GtranslatorWindow * window)
+				GtrWindow * window)
 {
-  GtranslatorTab *current;
-  GtranslatorPo *po;
+  GtrTab *current;
+  GtrPo *po;
 
   current = gtranslator_window_get_active_tab (window);
   po = gtranslator_tab_get_po (current);
@@ -85,10 +85,10 @@ gtranslator_message_go_to_last (GtkAction * action,
 
 void
 gtranslator_message_go_to_next_fuzzy (GtkAction * action,
-				      GtranslatorWindow * window)
+				      GtrWindow * window)
 {
-  GtranslatorTab *current;
-  GtranslatorPo *po;
+  GtrTab *current;
+  GtrPo *po;
 
   current = gtranslator_window_get_active_tab (window);
   po = gtranslator_tab_get_po (current);
@@ -98,10 +98,10 @@ gtranslator_message_go_to_next_fuzzy (GtkAction * action,
 
 void
 gtranslator_message_go_to_prev_fuzzy (GtkAction * action,
-				      GtranslatorWindow * window)
+				      GtrWindow * window)
 {
-  GtranslatorTab *current;
-  GtranslatorPo *po;
+  GtrTab *current;
+  GtrPo *po;
 
   current = gtranslator_window_get_active_tab (window);
   po = gtranslator_tab_get_po (current);
@@ -111,10 +111,10 @@ gtranslator_message_go_to_prev_fuzzy (GtkAction * action,
 
 void
 gtranslator_message_go_to_next_untranslated (GtkAction * action,
-					     GtranslatorWindow * window)
+					     GtrWindow * window)
 {
-  GtranslatorTab *current;
-  GtranslatorPo *po;
+  GtrTab *current;
+  GtrPo *po;
   GList *msg;
 
   current = gtranslator_window_get_active_tab (window);
@@ -125,10 +125,10 @@ gtranslator_message_go_to_next_untranslated (GtkAction * action,
 
 void
 gtranslator_message_go_to_prev_untranslated (GtkAction * action,
-					     GtranslatorWindow * window)
+					     GtrWindow * window)
 {
-  GtranslatorTab *current;
-  GtranslatorPo *po;
+  GtrTab *current;
+  GtrPo *po;
   GList *msg;
 
   current = gtranslator_window_get_active_tab (window);
@@ -139,11 +139,11 @@ gtranslator_message_go_to_prev_untranslated (GtkAction * action,
 
 void
 gtranslator_message_go_to_next_fuzzy_or_untranslated (GtkAction * action,
-						      GtranslatorWindow *
+						      GtrWindow *
 						      window)
 {
-  GtranslatorTab *current;
-  GtranslatorPo *po;
+  GtrTab *current;
+  GtrPo *po;
   GList *msg;
 
   current = gtranslator_window_get_active_tab (window);
@@ -154,11 +154,11 @@ gtranslator_message_go_to_next_fuzzy_or_untranslated (GtkAction * action,
 
 void
 gtranslator_message_go_to_prev_fuzzy_or_untranslated (GtkAction * action,
-						      GtranslatorWindow *
+						      GtrWindow *
 						      window)
 {
-  GtranslatorTab *current;
-  GtranslatorPo *po;
+  GtrTab *current;
+  GtrPo *po;
   GList *msg;
 
   current = gtranslator_window_get_active_tab (window);
@@ -168,7 +168,7 @@ gtranslator_message_go_to_prev_fuzzy_or_untranslated (GtkAction * action,
 }
 
 void
-gtranslator_message_jump (GtkAction * action, GtranslatorWindow * window)
+gtranslator_message_jump (GtkAction * action, GtrWindow * window)
 {
   gtranslator_show_jump_dialog (window);
 }

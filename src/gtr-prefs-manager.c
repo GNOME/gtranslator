@@ -90,7 +90,7 @@ gtranslator_prefs_manager_set_ ## name (const gchar* v)			\
 }
 
 
-GtranslatorPrefsManager *gtranslator_prefs_manager = NULL;
+GtrPrefsManager *gtranslator_prefs_manager = NULL;
 
 static gboolean gtranslator_prefs_manager_get_bool (const gchar * key);
 
@@ -112,7 +112,7 @@ gtranslator_prefs_manager_init (void)
       if (gconf_client == NULL)
 	g_error ("Failed to initialize preferences manager");
 
-      gtranslator_prefs_manager = g_new0 (GtranslatorPrefsManager, 1);
+      gtranslator_prefs_manager = g_new0 (GtrPrefsManager, 1);
 
       gtranslator_prefs_manager->gconf_client = gconf_client;
     }
@@ -295,10 +295,10 @@ gtranslator_prefs_manager_set_pane_switcher_style (GdlSwitcherStyle
 DEFINE_STRING_PREF (color_scheme, GPM_COLOR_SCHEME)
 /* sort_order requires custom functions to deal with conversion from a string to
    an enum */
-  GtranslatorSortOrder
+  GtrSortOrder
 gtranslator_prefs_manager_get_sort_order (void)
 {
-  GtranslatorSortOrder sort_order;
+  GtrSortOrder sort_order;
   const gchar *v;
 
   v = gtranslator_prefs_manager_get_string (GPM_SORT_ORDER);
@@ -317,7 +317,7 @@ gtranslator_prefs_manager_get_sort_order (void)
 }
 
 void
-gtranslator_prefs_manager_set_sort_order (GtranslatorSortOrder sort_order)
+gtranslator_prefs_manager_set_sort_order (GtrSortOrder sort_order)
 {
   const gchar *v;
 

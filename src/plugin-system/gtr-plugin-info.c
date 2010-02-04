@@ -47,20 +47,20 @@
 #endif
 
 void
-_gtranslator_plugin_info_ref (GtranslatorPluginInfo * info)
+_gtranslator_plugin_info_ref (GtrPluginInfo * info)
 {
   g_atomic_int_inc (&info->refcount);
 }
 
-static GtranslatorPluginInfo *
-gtranslator_plugin_info_copy (GtranslatorPluginInfo * info)
+static GtrPluginInfo *
+gtranslator_plugin_info_copy (GtrPluginInfo * info)
 {
   _gtranslator_plugin_info_ref (info);
   return info;
 }
 
 void
-_gtranslator_plugin_info_unref (GtranslatorPluginInfo * info)
+_gtranslator_plugin_info_unref (GtrPluginInfo * info)
 {
   if (!g_atomic_int_dec_and_test (&info->refcount))
     return;
@@ -91,10 +91,10 @@ _gtranslator_plugin_info_unref (GtranslatorPluginInfo * info)
 /**
  * gtranslator_plugin_info_get_type:
  *
- * Retrieves the #GType object which is associated with the #GtranslatorPluginInfo
+ * Retrieves the #GType object which is associated with the #GtrPluginInfo
  * class.
  *
- * Return value: the GType associated with #GtranslatorPluginInfo.
+ * Return value: the GType associated with #GtrPluginInfo.
  **/
 GType
 gtranslator_plugin_info_get_type (void)
@@ -102,7 +102,7 @@ gtranslator_plugin_info_get_type (void)
   static GType the_type = 0;
 
   if (G_UNLIKELY (!the_type))
-    the_type = g_boxed_type_register_static ("GtranslatorPluginInfo",
+    the_type = g_boxed_type_register_static ("GtrPluginInfo",
 					     (GBoxedCopyFunc)
 					     gtranslator_plugin_info_copy,
 					     (GBoxedFreeFunc)
@@ -115,14 +115,14 @@ gtranslator_plugin_info_get_type (void)
  * gtranslator_plugin_info_new:
  * @filename: the filename where to read the plugin information
  *
- * Creates a new #GtranslatorPluginInfo from a file on the disk.
+ * Creates a new #GtrPluginInfo from a file on the disk.
  *
- * Return value: a newly created #GtranslatorPluginInfo.
+ * Return value: a newly created #GtrPluginInfo.
  */
-GtranslatorPluginInfo *
+GtrPluginInfo *
 _gtranslator_plugin_info_new (const gchar * file)
 {
-  GtranslatorPluginInfo *info;
+  GtrPluginInfo *info;
   GKeyFile *plugin_file = NULL;
   gchar *str;
 
@@ -130,7 +130,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   DEBUG_PRINT ("Loading plugin: %s", file);
 
-  info = g_new0 (GtranslatorPluginInfo, 1);
+  info = g_new0 (GtrPluginInfo, 1);
   info->refcount = 1;
   info->file = g_strdup (file);
 
@@ -141,7 +141,7 @@ _gtranslator_plugin_info_new (const gchar * file)
       goto error;
     }
 
-  if (!g_key_file_has_key (plugin_file, "Gtranslator Plugin", "IAge", NULL))
+  if (!g_key_file_has_key (plugin_file, "Gtr Plugin", "IAge", NULL))
     {
       DEBUG_PRINT ("IAge key does not exist in file: %s", file);
       goto error;
@@ -149,7 +149,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Check IAge=2 */
   if (g_key_file_get_integer (plugin_file,
-			      "Gtranslator Plugin", "IAge", NULL) != 2)
+			      "Gtr Plugin", "IAge", NULL) != 2)
     {
       DEBUG_PRINT ("Wrong IAge in file: %s", file);
       goto error;
@@ -157,7 +157,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get module name */
   str = g_key_file_get_string (plugin_file,
-			       "Gtranslator Plugin", "Module", NULL);
+			       "Gtr Plugin", "Module", NULL);
 
   if ((str != NULL) && (*str != '\0'))
     {
@@ -171,7 +171,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get the dependency list */
   info->dependencies = g_key_file_get_string_list (plugin_file,
-						   "Gtranslator Plugin",
+						   "Gtr Plugin",
 						   "Depends", NULL, NULL);
   if (info->dependencies == NULL)
     {
@@ -181,7 +181,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get the loader for this plugin */
   str = g_key_file_get_string (plugin_file,
-			       "Gtranslator Plugin", "Loader", NULL);
+			       "Gtr Plugin", "Loader", NULL);
   if (str && strcmp (str, "python") == 0)
     {
 #ifndef ENABLE_PYTHON
@@ -200,7 +200,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get Name */
   str = g_key_file_get_locale_string (plugin_file,
-				      "Gtranslator Plugin",
+				      "Gtr Plugin",
 				      "Name", NULL, NULL);
   if (str)
     info->name = str;
@@ -212,7 +212,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get Description */
   str = g_key_file_get_locale_string (plugin_file,
-				      "Gtranslator Plugin",
+				      "Gtr Plugin",
 				      "Description", NULL, NULL);
   if (str)
     info->desc = str;
@@ -221,7 +221,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get Icon */
   str = g_key_file_get_locale_string (plugin_file,
-				      "Gtranslator Plugin",
+				      "Gtr Plugin",
 				      "Icon", NULL, NULL);
   if (str)
     info->icon_name = str;
@@ -231,7 +231,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get Authors */
   info->authors = g_key_file_get_string_list (plugin_file,
-					      "Gtranslator Plugin",
+					      "Gtr Plugin",
 					      "Authors", NULL, NULL);
   if (info->authors == NULL)
     DEBUG_PRINT ("Could not find 'Authors' in %s", file);
@@ -239,7 +239,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get Copyright */
   str = g_key_file_get_string (plugin_file,
-			       "Gtranslator Plugin", "Copyright", NULL);
+			       "Gtr Plugin", "Copyright", NULL);
   if (str)
     info->copyright = str;
   else
@@ -247,7 +247,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get License */
   str = g_key_file_get_string (plugin_file,
-			       "Gtranslator Plugin", "License", NULL);
+			       "Gtr Plugin", "License", NULL);
   if (str)
     info->license = str;
   else
@@ -255,7 +255,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get Website */
   str = g_key_file_get_string (plugin_file,
-			       "Gtranslator Plugin", "Website", NULL);
+			       "Gtr Plugin", "Website", NULL);
   if (str)
     info->website = str;
   else
@@ -280,7 +280,7 @@ error:
 }
 
 gboolean
-gtranslator_plugin_info_is_active (GtranslatorPluginInfo * info)
+gtranslator_plugin_info_is_active (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, FALSE);
 
@@ -288,7 +288,7 @@ gtranslator_plugin_info_is_active (GtranslatorPluginInfo * info)
 }
 
 gboolean
-gtranslator_plugin_info_is_available (GtranslatorPluginInfo * info)
+gtranslator_plugin_info_is_available (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, FALSE);
 
@@ -296,7 +296,7 @@ gtranslator_plugin_info_is_available (GtranslatorPluginInfo * info)
 }
 
 gboolean
-gtranslator_plugin_info_is_configurable (GtranslatorPluginInfo * info)
+gtranslator_plugin_info_is_configurable (GtrPluginInfo * info)
 {
   DEBUG_PRINT ("Is '%s' configurable?", info->name);
 
@@ -309,7 +309,7 @@ gtranslator_plugin_info_is_configurable (GtranslatorPluginInfo * info)
 }
 
 const gchar *
-gtranslator_plugin_info_get_name (GtranslatorPluginInfo * info)
+gtranslator_plugin_info_get_name (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, NULL);
 
@@ -317,7 +317,7 @@ gtranslator_plugin_info_get_name (GtranslatorPluginInfo * info)
 }
 
 const gchar *
-gtranslator_plugin_info_get_description (GtranslatorPluginInfo * info)
+gtranslator_plugin_info_get_description (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, NULL);
 
@@ -325,7 +325,7 @@ gtranslator_plugin_info_get_description (GtranslatorPluginInfo * info)
 }
 
 const gchar *
-gtranslator_plugin_info_get_icon_name (GtranslatorPluginInfo * info)
+gtranslator_plugin_info_get_icon_name (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, NULL);
 
@@ -340,7 +340,7 @@ gtranslator_plugin_info_get_icon_name (GtranslatorPluginInfo * info)
 }
 
 const gchar **
-gtranslator_plugin_info_get_authors (GtranslatorPluginInfo * info)
+gtranslator_plugin_info_get_authors (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, (const gchar **) NULL);
 
@@ -348,7 +348,7 @@ gtranslator_plugin_info_get_authors (GtranslatorPluginInfo * info)
 }
 
 const gchar *
-gtranslator_plugin_info_get_website (GtranslatorPluginInfo * info)
+gtranslator_plugin_info_get_website (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, NULL);
 
@@ -356,7 +356,7 @@ gtranslator_plugin_info_get_website (GtranslatorPluginInfo * info)
 }
 
 const gchar *
-gtranslator_plugin_info_get_copyright (GtranslatorPluginInfo * info)
+gtranslator_plugin_info_get_copyright (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, NULL);
 
@@ -364,7 +364,7 @@ gtranslator_plugin_info_get_copyright (GtranslatorPluginInfo * info)
 }
 
 const gchar *
-gtranslator_plugin_info_get_license (GtranslatorPluginInfo * info)
+gtranslator_plugin_info_get_license (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, NULL);
 

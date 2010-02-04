@@ -34,15 +34,15 @@
 #define GTR_DB_WORDS_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),		       \
 						 GTR_TYPE_DB_WORDS,     \
-						 GtranslatorDbWordsPrivate))
+						 GtrDbWordsPrivate))
 
-G_DEFINE_TYPE (GtranslatorDbWords, gtranslator_db_words, GTR_TYPE_DB_BASE)
-     struct _GtranslatorDbWordsPrivate
+G_DEFINE_TYPE (GtrDbWords, gtranslator_db_words, GTR_TYPE_DB_BASE)
+     struct _GtrDbWordsPrivate
      {
 
      };
 
-     static void gtranslator_db_words_init (GtranslatorDbWords * db_words)
+     static void gtranslator_db_words_init (GtrDbWords * db_words)
 {
   //db_words->priv = GTR_DB_WORDS_GET_PRIVATE (db_words);
 
@@ -57,19 +57,19 @@ gtranslator_db_words_finalize (GObject * object)
 }
 
 static void
-gtranslator_db_words_class_init (GtranslatorDbWordsClass * klass)
+gtranslator_db_words_class_init (GtrDbWordsClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  //g_type_class_add_private (klass, sizeof (GtranslatorDbWordsPrivate));
+  //g_type_class_add_private (klass, sizeof (GtrDbWordsPrivate));
 
   object_class->finalize = gtranslator_db_words_finalize;
 }
 
-GtranslatorDbWords *
+GtrDbWords *
 gtranslator_db_words_new ()
 {
-  GtranslatorDbWords *db_words;
+  GtrDbWords *db_words;
 
   db_words = g_object_new (GTR_TYPE_DB_WORDS, NULL);
 
@@ -77,7 +77,7 @@ gtranslator_db_words_new ()
 }
 
 gboolean
-gtranslator_db_words_append (GtranslatorDbWords * db_words,
+gtranslator_db_words_append (GtrDbWords * db_words,
 			     const gchar * word,
 			     guint sentence_size, db_recno_t value)
 {
@@ -90,7 +90,7 @@ gtranslator_db_words_append (GtranslatorDbWords * db_words,
   DBT key, data;
   gsize len;
   gsize buf_len;
-  GtranslatorDbKeys *keys;
+  GtrDbKeys *keys;
   db_recno_t *value_buf = NULL;
   gint error = 0;
 
@@ -149,14 +149,14 @@ gtranslator_db_words_append (GtranslatorDbWords * db_words,
   return TRUE;
 }
 
-GtranslatorDbKeys *
-gtranslator_db_words_read (GtranslatorDbWords * db_words,
+GtrDbKeys *
+gtranslator_db_words_read (GtrDbWords * db_words,
 			   const gchar * word, guint sentence_size)
 {
   DBT key, data;
   gsize len;
   gsize buf_len;
-  GtranslatorDbKeys *keys;
+  GtrDbKeys *keys;
   gint error = 0;
 
   /*

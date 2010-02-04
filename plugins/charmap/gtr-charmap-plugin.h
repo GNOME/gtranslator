@@ -32,33 +32,33 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_CHARMAP_PLUGIN		(gtranslator_charmap_plugin_get_type ())
-#define GTR_CHARMAP_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_CHARMAP_PLUGIN, GtranslatorCharmapPlugin))
-#define GTR_CHARMAP_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_CHARMAP_PLUGIN, GtranslatorCharmapPluginClass))
+#define GTR_CHARMAP_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_CHARMAP_PLUGIN, GtrCharmapPlugin))
+#define GTR_CHARMAP_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_CHARMAP_PLUGIN, GtrCharmapPluginClass))
 #define GTR_IS_CHARMAP_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_CHARMAP_PLUGIN))
 #define GTR_IS_CHARMAP_PLUGIN_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_CHARMAP_PLUGIN))
-#define GTR_CHARMAP_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_CHARMAP_PLUGIN, GtranslatorCharmapPluginClass))
+#define GTR_CHARMAP_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_CHARMAP_PLUGIN, GtrCharmapPluginClass))
 /* Private structure type */
-typedef struct _GtranslatorCharmapPluginPrivate
-  GtranslatorCharmapPluginPrivate;
+typedef struct _GtrCharmapPluginPrivate
+  GtrCharmapPluginPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorCharmapPlugin GtranslatorCharmapPlugin;
+typedef struct _GtrCharmapPlugin GtrCharmapPlugin;
 
-struct _GtranslatorCharmapPlugin
+struct _GtrCharmapPlugin
 {
-  GtranslatorPlugin parent_instance;
+  GtrPlugin parent_instance;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorCharmapPluginClass GtranslatorCharmapPluginClass;
+typedef struct _GtrCharmapPluginClass GtrCharmapPluginClass;
 
-struct _GtranslatorCharmapPluginClass
+struct _GtrCharmapPluginClass
 {
-  GtranslatorPluginClass parent_class;
+  GtrPluginClass parent_class;
 };
 
 /*

@@ -41,12 +41,12 @@
 #define GTR_PROFILE_DIALOG_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 	(object),	\
 						 	GTR_TYPE_PROFILE_DIALOG,     \
-						 	GtranslatorProfileDialogPrivate))
+						 	GtrProfileDialogPrivate))
 
-G_DEFINE_TYPE (GtranslatorProfileDialog, gtranslator_profile_dialog,
+G_DEFINE_TYPE (GtrProfileDialog, gtranslator_profile_dialog,
 	       GTK_TYPE_DIALOG)
 
-struct _GtranslatorProfileDialogPrivate
+struct _GtrProfileDialogPrivate
 {
   GtkWidget *main_box;
 
@@ -62,10 +62,10 @@ struct _GtranslatorProfileDialogPrivate
   GtkWidget *language_email_entry;
   GtkWidget *plurals_forms_entry;
 
-  GtranslatorPreferencesDialog *prefs_dlg;
+  GtrPreferencesDialog *prefs_dlg;
 
-  GtranslatorProfile *new_profile;
-  GtranslatorProfile *old_profile;
+  GtrProfile *new_profile;
+  GtrProfile *old_profile;
 };
 
 static void
@@ -75,11 +75,11 @@ gtranslator_profile_dialog_finalize (GObject * object)
 }
 
 static void
-gtranslator_profile_dialog_class_init (GtranslatorProfileDialogClass * klass)
+gtranslator_profile_dialog_class_init (GtrProfileDialogClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorProfileDialogPrivate));
+  g_type_class_add_private (klass, sizeof (GtrProfileDialogPrivate));
 
   object_class->finalize = gtranslator_profile_dialog_finalize;
 }
@@ -88,7 +88,7 @@ gtranslator_profile_dialog_class_init (GtranslatorProfileDialogClass * klass)
 static void
 profile_name_entry_changed (GObject * gobject,
 			    GParamSpec * arg1,
-			    GtranslatorProfileDialog * profile_dlg)
+			    GtrProfileDialog * profile_dlg)
 {
   const gchar *text;
 
@@ -104,7 +104,7 @@ profile_name_entry_changed (GObject * gobject,
 static void
 author_name_entry_changed (GObject * gobject,
 			   GParamSpec * arg1,
-			   GtranslatorProfileDialog * profile_dlg)
+			   GtrProfileDialog * profile_dlg)
 {
   const gchar *text;
 
@@ -120,7 +120,7 @@ author_name_entry_changed (GObject * gobject,
 static void
 author_email_entry_changed (GObject * gobject,
 			    GParamSpec * arg1,
-			    GtranslatorProfileDialog * profile_dlg)
+			    GtrProfileDialog * profile_dlg)
 {
   const gchar *text;
 
@@ -136,7 +136,7 @@ author_email_entry_changed (GObject * gobject,
 static void
 language_name_entry_changed (GObject * gobject,
 			     GParamSpec * arg1,
-			     GtranslatorProfileDialog * profile_dlg)
+			     GtrProfileDialog * profile_dlg)
 {
   const gchar *text;
 
@@ -152,7 +152,7 @@ language_name_entry_changed (GObject * gobject,
 static void
 language_code_entry_changed (GObject * gobject,
 			     GParamSpec * arg1,
-			     GtranslatorProfileDialog * profile_dlg)
+			     GtrProfileDialog * profile_dlg)
 {
   const gchar *text;
 
@@ -168,7 +168,7 @@ language_code_entry_changed (GObject * gobject,
 static void
 charset_entry_changed (GObject * gobject,
 		       GParamSpec * arg1,
-		       GtranslatorProfileDialog * profile_dlg)
+		       GtrProfileDialog * profile_dlg)
 {
   const gchar *text;
 
@@ -184,7 +184,7 @@ charset_entry_changed (GObject * gobject,
 static void
 encoding_entry_changed (GObject * gobject,
 			GParamSpec * arg1,
-			GtranslatorProfileDialog * profile_dlg)
+			GtrProfileDialog * profile_dlg)
 {
   const gchar *text;
 
@@ -200,7 +200,7 @@ encoding_entry_changed (GObject * gobject,
 static void
 group_email_entry_changed (GObject * gobject,
 			   GParamSpec * arg1,
-			   GtranslatorProfileDialog * profile_dlg)
+			   GtrProfileDialog * profile_dlg)
 {
   const gchar *text;
 
@@ -216,7 +216,7 @@ group_email_entry_changed (GObject * gobject,
 static void
 plurals_entry_changed (GObject * gobject,
 		       GParamSpec * arg1,
-		       GtranslatorProfileDialog * profile_dlg)
+		       GtrProfileDialog * profile_dlg)
 {
   const gchar *text;
 
@@ -230,10 +230,10 @@ plurals_entry_changed (GObject * gobject,
 }
 
 static void
-save_new_profile (GtkWidget * widget, GtranslatorProfileDialog * profile_dlg)
+save_new_profile (GtkWidget * widget, GtrProfileDialog * profile_dlg)
 {
   GList *profiles_list = NULL, *l = NULL;
-  GtranslatorPreferencesDialog *dlg;
+  GtrPreferencesDialog *dlg;
   gboolean profile_exists;
   GtkWidget *treeview;
   GtkTreeModel *model;
@@ -243,8 +243,8 @@ save_new_profile (GtkWidget * widget, GtranslatorProfileDialog * profile_dlg)
 
   for (l = profiles_list; l; l = l->next)
     {
-      GtranslatorProfile *profile_in_list;
-      profile_in_list = (GtranslatorProfile *) l->data;
+      GtrProfile *profile_in_list;
+      profile_in_list = (GtrProfile *) l->data;
       if (!strcmp (gtranslator_profile_get_name (profile_in_list),
 		   gtranslator_profile_get_name (profile_dlg->priv->
 						 new_profile)))
@@ -306,7 +306,7 @@ save_new_profile (GtkWidget * widget, GtranslatorProfileDialog * profile_dlg)
 
 static void
 save_modified_profile (GtkWidget * widget,
-		       GtranslatorProfileDialog * profile_dlg)
+		       GtrProfileDialog * profile_dlg)
 {
   GtkWidget *treeview;
   GtkTreeModel *model;
@@ -326,7 +326,7 @@ save_modified_profile (GtkWidget * widget,
 }
 
 static void
-destroy_without_changes (GtkWidget * widget, GtranslatorProfileDialog * dlg)
+destroy_without_changes (GtkWidget * widget, GtrProfileDialog * dlg)
 {
   gtranslator_profile_set_name (dlg->priv->new_profile,
 				gtranslator_profile_get_name (dlg->priv->
@@ -363,7 +363,7 @@ destroy_without_changes (GtkWidget * widget, GtranslatorProfileDialog * dlg)
 }
 
 static void
-gtranslator_profile_dialog_init (GtranslatorProfileDialog * dlg)
+gtranslator_profile_dialog_init (GtrProfileDialog * dlg)
 {
   gboolean ret;
   GtkWidget *error_widget;
@@ -375,7 +375,7 @@ gtranslator_profile_dialog_init (GtranslatorProfileDialog * dlg)
 
   dlg->priv = GTR_PROFILE_DIALOG_GET_PRIVATE (dlg);
 
-  gtk_window_set_title (GTK_WINDOW (dlg), _("Gtranslator Profile"));
+  gtk_window_set_title (GTK_WINDOW (dlg), _("Gtr Profile"));
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
   gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
@@ -429,12 +429,12 @@ gtranslator_profile_dialog_init (GtranslatorProfileDialog * dlg)
 }
 
 void
-gtranslator_show_profile_dialog (GtranslatorPreferencesDialog * dialog,
-				 GtranslatorProfile * profile, gint action)
+gtranslator_show_profile_dialog (GtrPreferencesDialog * dialog,
+				 GtrProfile * profile, gint action)
 {
-  static GtranslatorProfileDialog *dlg = NULL;
+  static GtrProfileDialog *dlg = NULL;
   GtkButton *ok_button, *cancel_button;
-  GtranslatorProfile *old_profile;
+  GtrProfile *old_profile;
 
   old_profile = gtranslator_profile_new ();
 

@@ -39,30 +39,30 @@
 #define GTR_MESSAGE_TABLE_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE (	\
 							(object),		\
 							GTR_TYPE_MESSAGE_TABLE,	\
-							GtranslatorMessageTablePrivate))
+							GtrMessageTablePrivate))
 
-G_DEFINE_TYPE (GtranslatorMessageTable, gtranslator_message_table,
+G_DEFINE_TYPE (GtrMessageTable, gtranslator_message_table,
 	       GTK_TYPE_VBOX)
-     struct _GtranslatorMessageTablePrivate
+     struct _GtrMessageTablePrivate
      {
        GtkWidget *treeview;
-       GtranslatorMessageTableModel *store;
+       GtrMessageTableModel *store;
        GtkTreeModel *sort_model;
 
-       GtranslatorTab *tab;
+       GtrTab *tab;
      };
 
      static void
        gtranslator_message_table_selection_changed (GtkTreeSelection *
 						    selection,
-						    GtranslatorMessageTable *
+						    GtrMessageTable *
 						    table)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
   GList *msg = NULL;
   GList *current_msg = NULL;
-  GtranslatorPo *po;
+  GtrPo *po;
 
   g_return_if_fail (selection != NULL);
 
@@ -85,8 +85,8 @@ G_DEFINE_TYPE (GtranslatorMessageTable, gtranslator_message_table,
 }
 
 static void
-showed_message_cb (GtranslatorTab * tab,
-		   GtranslatorMsg * msg, GtranslatorMessageTable * table)
+showed_message_cb (GtrTab * tab,
+		   GtrMsg * msg, GtrMessageTable * table)
 {
   GtkTreeModel *model, *sort_model;
   GtkTreePath *path, *sort_path;
@@ -111,8 +111,8 @@ showed_message_cb (GtranslatorTab * tab,
 }
 
 static void
-message_changed_cb (GtranslatorTab * tab,
-		    GtranslatorMsg * msg, GtranslatorMessageTable * table)
+message_changed_cb (GtrTab * tab,
+		    GtrMsg * msg, GtrMessageTable * table)
 {
   GtkTreePath *sort_path, *path;
   GtkTreeRowReference *row;
@@ -203,9 +203,9 @@ list_compare_by_translation (gconstpointer a, gconstpointer b)
 
 static void
 sort_message_list (GtkTreeViewColumn * column,
-		   GtranslatorMessageTable * table)
+		   GtrMessageTable * table)
 {
-  GtranslatorPo *po;
+  GtrPo *po;
   GList *messages;
   gint sort_column;
 
@@ -240,9 +240,9 @@ sort_message_list (GtkTreeViewColumn * column,
 }
 
 static void
-gtranslator_message_table_draw (GtranslatorMessageTable * table)
+gtranslator_message_table_draw (GtrMessageTable * table)
 {
-  GtranslatorMessageTablePrivate *priv = table->priv;
+  GtrMessageTablePrivate *priv = table->priv;
 
   GtkTreeViewColumn *column;
   GtkCellRenderer *renderer;
@@ -350,7 +350,7 @@ gtranslator_message_table_draw (GtranslatorMessageTable * table)
 
 
 static void
-gtranslator_message_table_init (GtranslatorMessageTable * table)
+gtranslator_message_table_init (GtrMessageTable * table)
 {
   GtkWidget *scrolledwindow;
 
@@ -375,27 +375,27 @@ gtranslator_message_table_finalize (GObject * object)
 }
 
 static void
-gtranslator_message_table_class_init (GtranslatorMessageTableClass * klass)
+gtranslator_message_table_class_init (GtrMessageTableClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorMessageTablePrivate));
+  g_type_class_add_private (klass, sizeof (GtrMessageTablePrivate));
 
   object_class->finalize = gtranslator_message_table_finalize;
 }
 
 /**
  * gtranslator_message_table_new:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
- * Creates a new #GtranslatorMessageTable object.
+ * Creates a new #GtrMessageTable object.
  *
- * Returns: the newly created #GtranslatorMessageTable
+ * Returns: the newly created #GtrMessageTable
  */
 GtkWidget *
 gtranslator_message_table_new (GtkWidget * tab)
 {
-  GtranslatorMessageTable *obj =
+  GtrMessageTable *obj =
     GTR_MESSAGE_TABLE (g_object_new (GTR_TYPE_MESSAGE_TABLE, NULL));
   obj->priv->tab = GTR_TAB (tab);
   g_signal_connect (obj->priv->tab,
@@ -408,14 +408,14 @@ gtranslator_message_table_new (GtkWidget * tab)
 
 /**
  * gtranslator_message_table_populate:
- * @table: a #GtranslatorMessageTable
- * @messages: a list of #GtranslatorMsg
+ * @table: a #GtrMessageTable
+ * @messages: a list of #GtrMsg
  *
- * Populates the #GtranslatorMessageTable with the list of #GtranslatorMsg and
+ * Populates the #GtrMessageTable with the list of #GtrMsg and
  * sort them.
  */
 void
-gtranslator_message_table_populate (GtranslatorMessageTable * table,
+gtranslator_message_table_populate (GtrMessageTable * table,
 				    GList * messages)
 {
   GtkTreeIter iter, sort_iter;

@@ -58,7 +58,7 @@ enum
   N_COLUMNS
 };
 
-struct _GtranslatorCloseConfirmationDialogPrivate
+struct _GtrCloseConfirmationDialogPrivate
 {
   gboolean logout_mode;
 
@@ -73,15 +73,15 @@ struct _GtranslatorCloseConfirmationDialogPrivate
 
 #define GTR_CLOSE_CONFIRMATION_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), \
 							GTR_TYPE_CLOSE_CONFIRMATION_DIALOG, \
-							GtranslatorCloseConfirmationDialogPrivate))
+							GtrCloseConfirmationDialogPrivate))
 
 #define GET_MODE(priv) (((priv->unsaved_documents != NULL) && \
 			 (priv->unsaved_documents->next == NULL)) ? \
 			  SINGLE_DOC_MODE : MULTIPLE_DOCS_MODE)
 
-G_DEFINE_TYPE (GtranslatorCloseConfirmationDialog,
+G_DEFINE_TYPE (GtrCloseConfirmationDialog,
 	       gtranslator_close_confirmation_dialog, GTK_TYPE_DIALOG)
-     static void set_unsaved_document (GtranslatorCloseConfirmationDialog *
+     static void set_unsaved_document (GtrCloseConfirmationDialog *
 				       dlg, const GList * list);
 
      static GList *get_selected_docs (GtkTreeModel * store);
@@ -90,10 +90,10 @@ G_DEFINE_TYPE (GtranslatorCloseConfirmationDialog,
  *  before the user ones
  */
      static void
-       response_cb (GtranslatorCloseConfirmationDialog * dlg,
+       response_cb (GtrCloseConfirmationDialog * dlg,
 		    gint response_id, gpointer data)
 {
-  GtranslatorCloseConfirmationDialogPrivate *priv;
+  GtrCloseConfirmationDialogPrivate *priv;
 
   g_return_if_fail (GTR_IS_CLOSE_CONFIRMATION_DIALOG (dlg));
 
@@ -120,7 +120,7 @@ G_DEFINE_TYPE (GtranslatorCloseConfirmationDialog,
 }
 
 static void
-set_logout_mode (GtranslatorCloseConfirmationDialog * dlg,
+set_logout_mode (GtrCloseConfirmationDialog * dlg,
 		 gboolean logout_mode)
 {
 
@@ -136,7 +136,7 @@ set_logout_mode (GtranslatorCloseConfirmationDialog * dlg,
 }
 
 static void
-gtranslator_close_confirmation_dialog_init (GtranslatorCloseConfirmationDialog
+gtranslator_close_confirmation_dialog_init (GtrCloseConfirmationDialog
 					    * dlg)
 {
   AtkObject *atk_obj;
@@ -164,7 +164,7 @@ gtranslator_close_confirmation_dialog_init (GtranslatorCloseConfirmationDialog
 static void
 gtranslator_close_confirmation_dialog_finalize (GObject * object)
 {
-  GtranslatorCloseConfirmationDialogPrivate *priv;
+  GtrCloseConfirmationDialogPrivate *priv;
 
   priv = GTR_CLOSE_CONFIRMATION_DIALOG (object)->priv;
 
@@ -185,7 +185,7 @@ gtranslator_close_confirmation_dialog_set_property (GObject * object,
 						    const GValue * value,
 						    GParamSpec * pspec)
 {
-  GtranslatorCloseConfirmationDialog *dlg;
+  GtrCloseConfirmationDialog *dlg;
 
   dlg = GTR_CLOSE_CONFIRMATION_DIALOG (object);
 
@@ -211,7 +211,7 @@ gtranslator_close_confirmation_dialog_get_property (GObject * object,
 						    GValue * value,
 						    GParamSpec * pspec)
 {
-  GtranslatorCloseConfirmationDialogPrivate *priv;
+  GtrCloseConfirmationDialogPrivate *priv;
 
   priv = GTR_CLOSE_CONFIRMATION_DIALOG (object)->priv;
 
@@ -233,7 +233,7 @@ gtranslator_close_confirmation_dialog_get_property (GObject * object,
 
 static void
 gtranslator_close_confirmation_dialog_class_init
-  (GtranslatorCloseConfirmationDialogClass * klass)
+  (GtrCloseConfirmationDialogClass * klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
@@ -245,7 +245,7 @@ gtranslator_close_confirmation_dialog_class_init
 
   g_type_class_add_private (klass,
 			    sizeof
-			    (GtranslatorCloseConfirmationDialogPrivate));
+			    (GtrCloseConfirmationDialogPrivate));
 
   g_object_class_install_property (gobject_class,
 				   PROP_UNSAVED_DOCUMENTS,
@@ -278,7 +278,7 @@ get_selected_docs (GtkTreeModel * store)
   while (valid)
     {
       gboolean to_save;
-      GtranslatorPo *doc;
+      GtrPo *doc;
 
       gtk_tree_model_get (store, &iter,
 			  SAVE_COLUMN, &to_save, DOC_COLUMN, &doc, -1);
@@ -295,7 +295,7 @@ get_selected_docs (GtkTreeModel * store)
 
 GList *
 gtranslator_close_confirmation_dialog_get_selected_documents
-  (GtranslatorCloseConfirmationDialog * dlg)
+  (GtrCloseConfirmationDialog * dlg)
 {
   g_return_val_if_fail (GTR_IS_CLOSE_CONFIRMATION_DIALOG (dlg), NULL);
 
@@ -325,7 +325,7 @@ gtranslator_close_confirmation_dialog_new (GtkWindow * parent,
 
 GtkWidget *
 gtranslator_close_confirmation_dialog_new_single (GtkWindow * parent,
-						  GtranslatorPo * doc,
+						  GtrPo * doc,
 						  gboolean logout_mode)
 {
   GtkWidget *dlg;
@@ -344,13 +344,13 @@ gtranslator_close_confirmation_dialog_new_single (GtkWindow * parent,
 }
 
 static void
-build_single_doc_dialog (GtranslatorCloseConfirmationDialog * dlg)
+build_single_doc_dialog (GtrCloseConfirmationDialog * dlg)
 {
   GtkWidget *hbox;
   GtkWidget *vbox;
   GtkWidget *primary_label;
   GtkWidget *image;
-  GtranslatorPo *doc;
+  GtrPo *doc;
   GFile *location;
   gchar *doc_name;
   gchar *str;
@@ -413,7 +413,7 @@ populate_model (GtkTreeModel * store, GList * docs)
 
   while (docs != NULL)
     {
-      GtranslatorPo *po;
+      GtrPo *po;
       GFile *location;
       gchar *name;
 
@@ -452,7 +452,7 @@ save_toggled (GtkCellRendererToggle * renderer,
 }
 
 static GtkWidget *
-create_treeview (GtranslatorCloseConfirmationDialogPrivate * priv)
+create_treeview (GtrCloseConfirmationDialogPrivate * priv)
 {
   GtkListStore *store;
   GtkWidget *treeview;
@@ -500,9 +500,9 @@ create_treeview (GtranslatorCloseConfirmationDialogPrivate * priv)
 }
 
 static void
-build_multiple_docs_dialog (GtranslatorCloseConfirmationDialog * dlg)
+build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
 {
-  GtranslatorCloseConfirmationDialogPrivate *priv;
+  GtrCloseConfirmationDialogPrivate *priv;
   GtkWidget *hbox;
   GtkWidget *image;
   GtkWidget *vbox;
@@ -608,10 +608,10 @@ build_multiple_docs_dialog (GtranslatorCloseConfirmationDialog * dlg)
 }
 
 static void
-set_unsaved_document (GtranslatorCloseConfirmationDialog * dlg,
+set_unsaved_document (GtrCloseConfirmationDialog * dlg,
 		      const GList * list)
 {
-  GtranslatorCloseConfirmationDialogPrivate *priv;
+  GtrCloseConfirmationDialogPrivate *priv;
 
   g_return_if_fail (list != NULL);
 
@@ -632,7 +632,7 @@ set_unsaved_document (GtranslatorCloseConfirmationDialog * dlg,
 
 const GList *
 gtranslator_close_confirmation_dialog_get_unsaved_documents
-  (GtranslatorCloseConfirmationDialog * dlg)
+  (GtrCloseConfirmationDialog * dlg)
 {
   g_return_val_if_fail (GTR_IS_CLOSE_CONFIRMATION_DIALOG (dlg), NULL);
 

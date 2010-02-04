@@ -28,13 +28,13 @@
 
 #include <gconf/gconf-client.h>
 
-typedef struct _GtranslatorPrefsManager GtranslatorPrefsManager;
+typedef struct _GtrPrefsManager GtrPrefsManager;
 
-struct _GtranslatorPrefsManager
+struct _GtrPrefsManager
 {
   GConfClient *gconf_client;
 };
 
-extern GtranslatorPrefsManager *gtranslator_prefs_manager;
+extern GtrPrefsManager *gtranslator_prefs_manager;
 
 #endif /* __GTR_PREFS_MANAGER_PRIVATE_H__ */

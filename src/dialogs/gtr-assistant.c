@@ -42,13 +42,13 @@
 #define GTR_ASSISTANT_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),	\
 						 GTR_TYPE_ASSISTANT,     \
-						 GtranslatorAssistantPrivate))
+						 GtrAssistantPrivate))
 
 
-G_DEFINE_TYPE (GtranslatorAssistant, gtranslator_assistant,
+G_DEFINE_TYPE (GtrAssistant, gtranslator_assistant,
 	       GTK_TYPE_ASSISTANT)
 
-struct _GtranslatorAssistantPrivate
+struct _GtrAssistantPrivate
 {
   /* Profiles Page 1 */
   GtkWidget *profile_name;
@@ -78,7 +78,7 @@ typedef struct _IdleData
 {
   GSList *list;
   GtkProgressBar *progress;
-  GtranslatorTranslationMemory *tm;
+  GtrTranslationMemory *tm;
   GtkWindow *parent;
 } IdleData;
 
@@ -100,7 +100,7 @@ add_to_database (gpointer data_pointer)
       GList *l2 = NULL;
       GFile *location;
       GError *error = NULL;
-      GtranslatorPo *po;
+      GtrPo *po;
 
       po = gtranslator_po_new ();
       location = (GFile *) l->data;
@@ -113,7 +113,7 @@ add_to_database (gpointer data_pointer)
 
       for (l2 = msg_list; l2; l2 = g_list_next (l2))
 	{
-	  GtranslatorMsg *msg;
+	  GtrMsg *msg;
 
 	  msg = GTR_MSG (l2->data);
 	  if (gtranslator_msg_is_translated (msg))
@@ -191,9 +191,9 @@ on_assistant_apply (GtkAssistant * assistant)
   GFile *dir;
   const gchar *dir_name;
   IdleData *data;
-  GtranslatorAssistant *as = GTR_ASSISTANT (assistant);
+  GtrAssistant *as = GTR_ASSISTANT (assistant);
   const gchar *po_name;
-  GtranslatorProfile *profile;
+  GtrProfile *profile;
   GList *profiles_list;
   gulong close_signal_id;
 
@@ -287,7 +287,7 @@ on_assistant_apply (GtkAssistant * assistant)
 static void
 on_assistant_prepare (GtkAssistant * assistant, GtkWidget * page)
 {
-  GtranslatorAssistant *as = GTR_ASSISTANT (assistant);
+  GtrAssistant *as = GTR_ASSISTANT (assistant);
   gchar *string;
   const gchar *database_path;
 
@@ -336,7 +336,7 @@ on_assistant_cancel (GtkAssistant * assistant)
 }
 
 static void
-create_start_page (GtranslatorAssistant * as)
+create_start_page (GtrAssistant * as)
 {
   GtkWidget *box, *label;
 
@@ -358,7 +358,7 @@ create_start_page (GtranslatorAssistant * as)
 }
 
 static void
-on_profile1_entry_changed (GtkWidget * widget, GtranslatorAssistant * as)
+on_profile1_entry_changed (GtkWidget * widget, GtrAssistant * as)
 {
   const gchar *text;
   GtkWidget *current_page;
@@ -425,11 +425,11 @@ on_profile1_entry_changed (GtkWidget * widget, GtranslatorAssistant * as)
 }
 
 static void
-create_profiles_page1 (GtranslatorAssistant * as)
+create_profiles_page1 (GtrAssistant * as)
 {
   GtkWidget *box, *hbox;
   GtkWidget *label;
-  GtranslatorAssistantPrivate *priv = as->priv;
+  GtrAssistantPrivate *priv = as->priv;
 
   box = gtk_vbox_new (FALSE, 6);
   gtk_widget_show (box);
@@ -535,7 +535,7 @@ create_profiles_page1 (GtranslatorAssistant * as)
 }
 
 static void
-on_profile2_entry_changed (GtkWidget * widget, GtranslatorAssistant * as)
+on_profile2_entry_changed (GtkWidget * widget, GtrAssistant * as)
 {
   const gchar *text;
   GtkWidget *current_page;
@@ -590,11 +590,11 @@ on_profile2_entry_changed (GtkWidget * widget, GtranslatorAssistant * as)
 }
 
 static void
-create_profiles_page2 (GtranslatorAssistant * as)
+create_profiles_page2 (GtrAssistant * as)
 {
   GtkWidget *box, *hbox;
   GtkWidget *label;
-  GtranslatorAssistantPrivate *priv = as->priv;
+  GtrAssistantPrivate *priv = as->priv;
 
   box = gtk_vbox_new (FALSE, 6);
   gtk_widget_show (box);
@@ -681,7 +681,7 @@ create_profiles_page2 (GtranslatorAssistant * as)
 }
 
 static void
-on_dir_find_button_clicked (GtkButton * button, GtranslatorAssistant * as)
+on_dir_find_button_clicked (GtkButton * button, GtrAssistant * as)
 {
   GtkWidget *dialog;
   gint res;
@@ -711,11 +711,11 @@ on_dir_find_button_clicked (GtkButton * button, GtranslatorAssistant * as)
 }
 
 static void
-create_database_page (GtranslatorAssistant * as)
+create_database_page (GtrAssistant * as)
 {
   GtkWidget *box, *hbox;
   GtkWidget *label;
-  GtranslatorAssistantPrivate *priv = as->priv;
+  GtrAssistantPrivate *priv = as->priv;
 
   box = gtk_vbox_new (FALSE, 6);
   gtk_widget_show (box);
@@ -771,7 +771,7 @@ create_database_page (GtranslatorAssistant * as)
 }
 
 static void
-create_finish_page (GtranslatorAssistant * as)
+create_finish_page (GtrAssistant * as)
 {
   as->priv->finish_box = gtk_vbox_new (FALSE, 0);
   gtk_widget_show (as->priv->finish_box);
@@ -796,7 +796,7 @@ create_finish_page (GtranslatorAssistant * as)
 }
 
 static void
-gtranslator_assistant_init (GtranslatorAssistant * as)
+gtranslator_assistant_init (GtrAssistant * as)
 {
   as->priv = GTR_ASSISTANT_GET_PRIVATE (as);
 
@@ -818,12 +818,12 @@ gtranslator_assistant_finalize (GObject * object)
 }
 
 static void
-gtranslator_assistant_class_init (GtranslatorAssistantClass * klass)
+gtranslator_assistant_class_init (GtrAssistantClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkAssistantClass *assistant_class = GTK_ASSISTANT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorAssistantPrivate));
+  g_type_class_add_private (klass, sizeof (GtrAssistantPrivate));
 
   object_class->finalize = gtranslator_assistant_finalize;
   assistant_class->prepare = on_assistant_prepare;
@@ -833,9 +833,9 @@ gtranslator_assistant_class_init (GtranslatorAssistantClass * klass)
 }
 
 void
-gtranslator_show_assistant (GtranslatorWindow * window)
+gtranslator_show_assistant (GtrWindow * window)
 {
-  static GtranslatorAssistant *assist = NULL;
+  static GtrAssistant *assist = NULL;
 
   g_return_if_fail (GTR_IS_WINDOW (window));
 

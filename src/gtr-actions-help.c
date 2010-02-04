@@ -35,7 +35,7 @@
  * Show the user's guide for gtranslator
  */
 void
-gtranslator_cmd_help_contents (GtkAction * action, GtranslatorWindow * window)
+gtranslator_cmd_help_contents (GtkAction * action, GtrWindow * window)
 {
   gtranslator_utils_help_display (GTK_WINDOW (window),
 				  "gtranslator", "gtranslator.xml");
@@ -45,7 +45,7 @@ gtranslator_cmd_help_contents (GtkAction * action, GtranslatorWindow * window)
  * Creates and shows the about box for gtranslator.
  */
 void
-gtranslator_about_dialog (GtkAction * action, GtranslatorWindow * window)
+gtranslator_about_dialog (GtkAction * action, GtrWindow * window)
 {
   gchar *license_trans;
 
@@ -127,7 +127,7 @@ gtranslator_about_dialog (GtkAction * action, GtranslatorWindow * window)
 			 ("Copyright © 1999-2008 Free Software Foundation, Inc."),
 			 "documenters", documenters, "license", license_trans,
 			 "logo", logo,
-			 "title", _("About Gtranslator"),
+			 "title", _("About Gtr"),
 			 /*
 			  * Note to translators: put here your name and email so it will show
 			  * up in the "about" box
@@ -136,7 +136,7 @@ gtranslator_about_dialog (GtkAction * action, GtranslatorWindow * window)
 			 "version", VERSION,
 			 "website", "http://gtranslator.sourceforge.net/",
 			 "wrap-license", TRUE,
-			 "website-label", _("Gtranslator Web Site"), NULL);
+			 "website-label", _("Gtr Web Site"), NULL);
 
   if (logo)
     g_object_unref (logo);

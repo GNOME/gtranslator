@@ -72,7 +72,7 @@ last_search_data_free (LastSearchData * data)
 }
 
 static void
-last_search_data_set (LastSearchData * data, GtranslatorSearchDialog * dialog)
+last_search_data_set (LastSearchData * data, GtrSearchDialog * dialog)
 {
   const gchar *str;
 
@@ -101,7 +101,7 @@ last_search_data_set (LastSearchData * data, GtranslatorSearchDialog * dialog)
 }
 
 static void
-search_dialog_set_last_find_text (GtranslatorSearchDialog * dialog,
+search_dialog_set_last_find_text (GtrSearchDialog * dialog,
 				  LastSearchData * data)
 {
   if (data->find_text)
@@ -109,7 +109,7 @@ search_dialog_set_last_find_text (GtranslatorSearchDialog * dialog,
 }
 
 static void
-search_dialog_set_last_replace_text (GtranslatorSearchDialog * dialog,
+search_dialog_set_last_replace_text (GtrSearchDialog * dialog,
 				     LastSearchData * data)
 {
   if (data->replace_text)
@@ -117,7 +117,7 @@ search_dialog_set_last_replace_text (GtranslatorSearchDialog * dialog,
 }
 
 static void
-search_dialog_set_last_options (GtranslatorSearchDialog * dialog,
+search_dialog_set_last_options (GtrSearchDialog * dialog,
 				LastSearchData * data)
 {
   gtranslator_search_dialog_set_original_text (dialog, data->original_text);
@@ -134,8 +134,8 @@ search_dialog_set_last_options (GtranslatorSearchDialog * dialog,
  * Used to get the old search data and store the new values.
  */
 static void
-restore_last_searched_data (GtranslatorSearchDialog * dialog,
-			    GtranslatorTab * tab)
+restore_last_searched_data (GtrSearchDialog * dialog,
+			    GtrTab * tab)
 {
   LastSearchData *data;
 
@@ -159,9 +159,9 @@ restore_last_searched_data (GtranslatorSearchDialog * dialog,
 
 /* Use occurences only for Replace All */
 static void
-phrase_found (GtranslatorWindow * window, gint occurrences)
+phrase_found (GtrWindow * window, gint occurrences)
 {
-  GtranslatorStatusbar *statusbar;
+  GtrStatusbar *statusbar;
 
   statusbar = GTR_STATUSBAR (gtranslator_window_get_statusbar (window));
 
@@ -187,16 +187,16 @@ phrase_found (GtranslatorWindow * window, gint occurrences)
 }
 
 static void
-phrase_not_found (GtranslatorWindow * window)
+phrase_not_found (GtrWindow * window)
 {
-  GtranslatorStatusbar *status;
+  GtrStatusbar *status;
 
   status = GTR_STATUSBAR (gtranslator_window_get_statusbar (window));
   gtranslator_statusbar_flash_message (status, 0, _("Phrase not found"));
 }
 
 static gboolean
-run_search (GtranslatorView * view, gboolean follow)
+run_search (GtrView * view, gboolean follow)
 {
   GtkSourceBuffer *doc;
   GtkTextIter start_iter;
@@ -235,12 +235,12 @@ run_search (GtranslatorView * view, gboolean follow)
 }
 
 static gboolean
-find_in_list (GtranslatorWindow * window,
+find_in_list (GtrWindow * window,
 	      GList * views,
 	      gboolean fuzzy, gboolean wrap_around, gboolean search_backwards)
 {
-  GtranslatorTab *tab = gtranslator_window_get_active_tab (window);
-  GtranslatorPo *po = gtranslator_tab_get_po (tab);
+  GtrTab *tab = gtranslator_window_get_active_tab (window);
+  GtrPo *po = gtranslator_tab_get_po (tab);
   GList *l = gtranslator_po_get_current_message (po);
   GList *current;
   static GList *viewsaux = NULL;
@@ -331,9 +331,9 @@ find_in_list (GtranslatorWindow * window,
 }
 
 static void
-do_find (GtranslatorSearchDialog * dialog, GtranslatorWindow * window)
+do_find (GtrSearchDialog * dialog, GtrWindow * window)
 {
-  GtranslatorTab *tab;
+  GtrTab *tab;
   GList *views, *list;
   gchar *search_text;
   const gchar *entry_text;
@@ -425,9 +425,9 @@ replace_selected_text (GtkTextBuffer * buffer, const gchar * replace)
 }
 
 static void
-do_replace (GtranslatorSearchDialog * dialog, GtranslatorWindow * window)
+do_replace (GtrSearchDialog * dialog, GtrWindow * window)
 {
-  GtranslatorView *view;
+  GtrView *view;
   const gchar *search_entry_text;
   const gchar *replace_entry_text;
   gchar *unescaped_search_text;
@@ -484,9 +484,9 @@ do_replace (GtranslatorSearchDialog * dialog, GtranslatorWindow * window)
 }
 
 static void
-do_replace_all (GtranslatorSearchDialog * dialog, GtranslatorWindow * window)
+do_replace_all (GtrSearchDialog * dialog, GtrWindow * window)
 {
-  GtranslatorTab *tab;
+  GtrTab *tab;
   GList *views, *l;
   GList *current_msg, *aux;
   const gchar *search_entry_text;
@@ -564,8 +564,8 @@ do_replace_all (GtranslatorSearchDialog * dialog, GtranslatorWindow * window)
 }
 
 static void
-search_dialog_response_cb (GtranslatorSearchDialog * dialog,
-			   gint response_id, GtranslatorWindow * window)
+search_dialog_response_cb (GtrSearchDialog * dialog,
+			   gint response_id, GtrWindow * window)
 {
   switch (response_id)
     {
@@ -584,20 +584,20 @@ search_dialog_response_cb (GtranslatorSearchDialog * dialog,
 }
 
 static void
-search_dialog_destroyed (GtranslatorWindow * window,
-			 GtranslatorSearchDialog * dialog)
+search_dialog_destroyed (GtrWindow * window,
+			 GtrSearchDialog * dialog)
 {
   g_object_set_data (G_OBJECT (window), GTR_SEARCH_DIALOG_KEY, NULL);
 }
 
 void
 _gtranslator_actions_search_find (GtkAction * action,
-				  GtranslatorWindow * window)
+				  GtrWindow * window)
 {
   gpointer data;
   GtkWidget *search_dialog;
-  GtranslatorTab *tab;
-  GtranslatorView *view;
+  GtrTab *tab;
+  GtrView *view;
   gboolean selection_exists;
   gchar *find_text = NULL;
   gint sel_len;
@@ -670,12 +670,12 @@ _gtranslator_actions_search_find (GtkAction * action,
 
 void
 _gtranslator_actions_search_replace (GtkAction * action,
-				     GtranslatorWindow * window)
+				     GtrWindow * window)
 {
   gpointer data;
   GtkWidget *replace_dialog;
-  GtranslatorTab *tab;
-  GtranslatorView *view;
+  GtrTab *tab;
+  GtrView *view;
   gboolean selection_exists;
   gchar *find_text = NULL;
   gint sel_len;
@@ -750,9 +750,9 @@ _gtranslator_actions_search_replace (GtkAction * action,
 }
 
 static void
-do_find_again (GtranslatorWindow * window, gboolean backward)
+do_find_again (GtrWindow * window, gboolean backward)
 {
-  GtranslatorView *active_view;
+  GtrView *active_view;
   GtkTextBuffer *buffer;
   gboolean wrap_around = TRUE;
   LastSearchData *data;
@@ -772,14 +772,14 @@ do_find_again (GtranslatorWindow * window, gboolean backward)
 
 void
 _gtranslator_actions_search_find_next (GtkAction * action,
-				       GtranslatorWindow * window)
+				       GtrWindow * window)
 {
   do_find_again (window, FALSE);
 }
 
 void
 _gtranslator_actions_search_find_prev (GtkAction * action,
-				       GtranslatorWindow * window)
+				       GtrWindow * window)
 {
   do_find_again (window, TRUE);
 }

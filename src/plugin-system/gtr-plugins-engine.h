@@ -38,67 +38,67 @@
 
 G_BEGIN_DECLS
 #define GTR_TYPE_PLUGINS_ENGINE              (gtranslator_plugins_engine_get_type ())
-#define GTR_PLUGINS_ENGINE(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GTR_TYPE_PLUGINS_ENGINE, GtranslatorPluginsEngine))
-#define GTR_PLUGINS_ENGINE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GTR_TYPE_PLUGINS_ENGINE, GtranslatorPluginsEngineClass))
+#define GTR_PLUGINS_ENGINE(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GTR_TYPE_PLUGINS_ENGINE, GtrPluginsEngine))
+#define GTR_PLUGINS_ENGINE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GTR_TYPE_PLUGINS_ENGINE, GtrPluginsEngineClass))
 #define GTR_IS_PLUGINS_ENGINE(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GTR_TYPE_PLUGINS_ENGINE))
 #define GTR_IS_PLUGINS_ENGINE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_PLUGINS_ENGINE))
-#define GTR_PLUGINS_ENGINE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GTR_TYPE_PLUGINS_ENGINE, GtranslatorPluginsEngineClass))
-typedef struct _GtranslatorPluginsEngine GtranslatorPluginsEngine;
-typedef struct _GtranslatorPluginsEnginePrivate
-  GtranslatorPluginsEnginePrivate;
+#define GTR_PLUGINS_ENGINE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GTR_TYPE_PLUGINS_ENGINE, GtrPluginsEngineClass))
+typedef struct _GtrPluginsEngine GtrPluginsEngine;
+typedef struct _GtrPluginsEnginePrivate
+  GtrPluginsEnginePrivate;
 
-struct _GtranslatorPluginsEngine
+struct _GtrPluginsEngine
 {
   GObject parent;
-  GtranslatorPluginsEnginePrivate *priv;
+  GtrPluginsEnginePrivate *priv;
 };
 
-typedef struct _GtranslatorPluginsEngineClass GtranslatorPluginsEngineClass;
+typedef struct _GtrPluginsEngineClass GtrPluginsEngineClass;
 
-struct _GtranslatorPluginsEngineClass
+struct _GtrPluginsEngineClass
 {
   GObjectClass parent_class;
 
-  void (*activate_plugin) (GtranslatorPluginsEngine * engine,
-			   GtranslatorPluginInfo * info);
+  void (*activate_plugin) (GtrPluginsEngine * engine,
+			   GtrPluginInfo * info);
 
-  void (*deactivate_plugin) (GtranslatorPluginsEngine * engine,
-			     GtranslatorPluginInfo * info);
+  void (*deactivate_plugin) (GtrPluginsEngine * engine,
+			     GtrPluginInfo * info);
 };
 
 GType
 gtranslator_plugins_engine_get_type (void)
   G_GNUC_CONST;
 
-     GtranslatorPluginsEngine *gtranslator_plugins_engine_get_default (void);
+     GtrPluginsEngine *gtranslator_plugins_engine_get_default (void);
 
-     void gtranslator_plugins_engine_garbage_collect (GtranslatorPluginsEngine
+     void gtranslator_plugins_engine_garbage_collect (GtrPluginsEngine
 						      * engine);
 
      const GList
-       *gtranslator_plugins_engine_get_plugin_list (GtranslatorPluginsEngine *
+       *gtranslator_plugins_engine_get_plugin_list (GtrPluginsEngine *
 						    engine);
 
-     GtranslatorPluginInfo
-       *gtranslator_plugins_engine_get_plugin_info (GtranslatorPluginsEngine *
+     GtrPluginInfo
+       *gtranslator_plugins_engine_get_plugin_info (GtrPluginsEngine *
 						    engine,
 						    const gchar * name);
 
      gboolean
-       gtranslator_plugins_engine_activate_plugin (GtranslatorPluginsEngine *
+       gtranslator_plugins_engine_activate_plugin (GtrPluginsEngine *
 						   engine,
-						   GtranslatorPluginInfo *
+						   GtrPluginInfo *
 						   info);
      gboolean
-       gtranslator_plugins_engine_deactivate_plugin (GtranslatorPluginsEngine
+       gtranslator_plugins_engine_deactivate_plugin (GtrPluginsEngine
 						     * engine,
-						     GtranslatorPluginInfo *
+						     GtrPluginInfo *
 						     info);
 
      void
-       gtranslator_plugins_engine_configure_plugin (GtranslatorPluginsEngine *
+       gtranslator_plugins_engine_configure_plugin (GtrPluginsEngine *
 						    engine,
-						    GtranslatorPluginInfo *
+						    GtrPluginInfo *
 						    info, GtkWindow * parent);
 
 /* 
@@ -106,9 +106,9 @@ gtranslator_plugins_engine_get_type (void)
  * has been created
  */
      void
-       gtranslator_plugins_engine_update_plugins_ui (GtranslatorPluginsEngine
+       gtranslator_plugins_engine_update_plugins_ui (GtrPluginsEngine
 						     * engine,
-						     GtranslatorWindow *
+						     GtrWindow *
 						     window,
 						     gboolean new_window);
 

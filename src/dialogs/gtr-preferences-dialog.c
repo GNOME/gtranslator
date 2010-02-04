@@ -48,12 +48,12 @@
 #define GTR_PREFERENCES_DIALOG_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 	(object),	\
 						 	GTR_TYPE_PREFERENCES_DIALOG,     \
-						 	GtranslatorPreferencesDialogPrivate))
+						 	GtrPreferencesDialogPrivate))
 
 
-G_DEFINE_TYPE (GtranslatorPreferencesDialog, gtranslator_preferences_dialog,
+G_DEFINE_TYPE (GtrPreferencesDialog, gtranslator_preferences_dialog,
 	       GTK_TYPE_DIALOG)
-     struct _GtranslatorPreferencesDialogPrivate
+     struct _GtrPreferencesDialogPrivate
      {
        GtkWidget *notebook;
 
@@ -116,11 +116,11 @@ G_DEFINE_TYPE (GtranslatorPreferencesDialog, gtranslator_preferences_dialog,
        GtkWidget *plugins_box;
      };
 
-     static void setup_profile_pages (GtranslatorPreferencesDialog * dlg);
+     static void setup_profile_pages (GtrPreferencesDialog * dlg);
 
      GtkWidget
        *gtranslator_preferences_dialog_get_treeview
-       (GtranslatorPreferencesDialog * dlg)
+       (GtrPreferencesDialog * dlg)
 {
   g_return_val_if_fail (GTR_IS_PREFERENCES_DIALOG (dlg), NULL);
 
@@ -131,7 +131,7 @@ G_DEFINE_TYPE (GtranslatorPreferencesDialog, gtranslator_preferences_dialog,
 
 static void
 warn_if_contains_fuzzy_checkbutton_toggled (GtkToggleButton * button,
-					    GtranslatorPreferencesDialog *
+					    GtrPreferencesDialog *
 					    dlg)
 {
   g_return_if_fail (button ==
@@ -144,7 +144,7 @@ warn_if_contains_fuzzy_checkbutton_toggled (GtkToggleButton * button,
 
 static void
 delete_compiled_checkbutton_toggled (GtkToggleButton * button,
-				     GtranslatorPreferencesDialog * dlg)
+				     GtrPreferencesDialog * dlg)
 {
   g_return_if_fail (button ==
 		    GTK_TOGGLE_BUTTON (dlg->priv->
@@ -155,7 +155,7 @@ delete_compiled_checkbutton_toggled (GtkToggleButton * button,
 }
 
 static void
-setup_files_general_page (GtranslatorPreferencesDialog * dlg)
+setup_files_general_page (GtrPreferencesDialog * dlg)
 {
   /*Set initial value */
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
@@ -178,7 +178,7 @@ setup_files_general_page (GtranslatorPreferencesDialog * dlg)
 
 static void
 autosave_checkbutton_toggled (GtkToggleButton * button,
-			      GtranslatorPreferencesDialog * dlg)
+			      GtrPreferencesDialog * dlg)
 {
   gboolean autosave;
 
@@ -194,7 +194,7 @@ autosave_checkbutton_toggled (GtkToggleButton * button,
 
 static void
 create_backup_checkbutton_toggled (GtkToggleButton * button,
-				   GtranslatorPreferencesDialog * dlg)
+				   GtrPreferencesDialog * dlg)
 {
   gboolean create_backup;
 
@@ -208,7 +208,7 @@ create_backup_checkbutton_toggled (GtkToggleButton * button,
 
 static void
 autosave_interval_spinbutton_value_changed (GtkSpinButton * spin_button,
-					    GtranslatorPreferencesDialog *
+					    GtrPreferencesDialog *
 					    dlg)
 {
   g_return_if_fail (spin_button ==
@@ -220,7 +220,7 @@ autosave_interval_spinbutton_value_changed (GtkSpinButton * spin_button,
 }
 
 static void
-setup_files_autosave_page (GtranslatorPreferencesDialog * dlg)
+setup_files_autosave_page (GtrPreferencesDialog * dlg)
 {
   gboolean autosave, backup;
   gint autosave_interval;
@@ -255,7 +255,7 @@ setup_files_autosave_page (GtranslatorPreferencesDialog * dlg)
 }
 
 static void
-setup_files_pages (GtranslatorPreferencesDialog * dlg)
+setup_files_pages (GtrPreferencesDialog * dlg)
 {
   /*Children */
   setup_files_general_page (dlg);
@@ -266,7 +266,7 @@ setup_files_pages (GtranslatorPreferencesDialog * dlg)
 /***************Editor pages****************/
 static void
 highlight_syntax_checkbutton_toggled (GtkToggleButton * button,
-				      GtranslatorPreferencesDialog * dlg)
+				      GtrPreferencesDialog * dlg)
 {
   g_return_if_fail (button ==
 		    GTK_TOGGLE_BUTTON (dlg->priv->
@@ -278,7 +278,7 @@ highlight_syntax_checkbutton_toggled (GtkToggleButton * button,
 
 static void
 visible_whitespace_checkbutton_toggled (GtkToggleButton * button,
-					GtranslatorPreferencesDialog * dlg)
+					GtrPreferencesDialog * dlg)
 {
   g_return_if_fail (button ==
 		    GTK_TOGGLE_BUTTON (dlg->priv->
@@ -290,7 +290,7 @@ visible_whitespace_checkbutton_toggled (GtkToggleButton * button,
 
 static void
 use_custom_font_checkbutton_toggled (GtkToggleButton * button,
-				     GtranslatorPreferencesDialog * dlg)
+				     GtrPreferencesDialog * dlg)
 {
   gboolean use_custom_font;
 
@@ -306,7 +306,7 @@ use_custom_font_checkbutton_toggled (GtkToggleButton * button,
 }
 
 static void
-editor_font_set (GtkFontButton * button, GtranslatorPreferencesDialog * dlg)
+editor_font_set (GtkFontButton * button, GtrPreferencesDialog * dlg)
 {
   const gchar *editor_font;
 
@@ -323,7 +323,7 @@ editor_font_set (GtkFontButton * button, GtranslatorPreferencesDialog * dlg)
 }
 
 static void
-setup_editor_text_display_page (GtranslatorPreferencesDialog * dlg)
+setup_editor_text_display_page (GtrPreferencesDialog * dlg)
 {
   gboolean use_custom_font;
   const gchar *editor_font;
@@ -369,7 +369,7 @@ setup_editor_text_display_page (GtranslatorPreferencesDialog * dlg)
 
 static void
 unmark_fuzzy_when_changed_checkbutton_toggled (GtkToggleButton * button,
-					       GtranslatorPreferencesDialog *
+					       GtrPreferencesDialog *
 					       dlg)
 {
   g_return_if_fail (button ==
@@ -382,7 +382,7 @@ unmark_fuzzy_when_changed_checkbutton_toggled (GtkToggleButton * button,
 
 static void
 spellcheck_checkbutton_toggled (GtkToggleButton * button,
-				GtranslatorPreferencesDialog * dlg)
+				GtrPreferencesDialog * dlg)
 {
   g_return_if_fail (button ==
 		    GTK_TOGGLE_BUTTON (dlg->priv->spellcheck_checkbutton));
@@ -392,7 +392,7 @@ spellcheck_checkbutton_toggled (GtkToggleButton * button,
 }
 
 static void
-setup_editor_contents (GtranslatorPreferencesDialog * dlg)
+setup_editor_contents (GtrPreferencesDialog * dlg)
 {
   /*Set initial values */
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
@@ -414,7 +414,7 @@ setup_editor_contents (GtranslatorPreferencesDialog * dlg)
 }
 
 static void
-setup_editor_pages (GtranslatorPreferencesDialog * dlg)
+setup_editor_pages (GtrPreferencesDialog * dlg)
 {
   /*Children */
   setup_editor_text_display_page (dlg);
@@ -424,14 +424,14 @@ setup_editor_pages (GtranslatorPreferencesDialog * dlg)
 /***************Profile pages****************/
 static void
 active_toggled_cb (GtkCellRendererToggle * cell_renderer,
-		   gchar * path_str, GtranslatorPreferencesDialog * dlg)
+		   gchar * path_str, GtrPreferencesDialog * dlg)
 {
   GtkTreeIter iter;
   GtkTreePath *path;
   GtkTreeModel *model;
   gboolean active;
   gchar *profile_row;
-  GtranslatorProfile *old_profile_active;
+  GtrProfile *old_profile_active;
   GList *l = NULL, *profiles_list = NULL;
   gchar *filename;
   gchar *config_folder;
@@ -469,8 +469,8 @@ active_toggled_cb (GtkCellRendererToggle * cell_renderer,
 
       for (l = profiles_list; l; l = l->next)
 	{
-	  GtranslatorProfile *profile;
-	  profile = (GtranslatorProfile *) l->data;
+	  GtrProfile *profile;
+	  profile = (GtrProfile *) l->data;
 	  if (!strcmp (gtranslator_profile_get_name (profile), profile_row))
 	    {
 	      gtranslator_application_set_active_profile (GTR_APP, profile);
@@ -484,11 +484,11 @@ active_toggled_cb (GtkCellRendererToggle * cell_renderer,
 }
 
 void
-gtranslator_preferences_fill_profile_treeview (GtranslatorPreferencesDialog *
+gtranslator_preferences_fill_profile_treeview (GtrPreferencesDialog *
 					       dlg, GtkTreeModel * model)
 {
   GtkTreeIter iter;
-  GtranslatorProfile *active_profile;
+  GtrProfile *active_profile;
   GList *l = NULL, *profiles_list = NULL;
 
   gtk_list_store_clear (GTK_LIST_STORE (model));
@@ -501,10 +501,10 @@ gtranslator_preferences_fill_profile_treeview (GtranslatorPreferencesDialog *
   for (l = profiles_list; l; l = l->next)
     {
 
-      GtranslatorProfile *profile;
+      GtrProfile *profile;
       const gchar *profile_name;
 
-      profile = (GtranslatorProfile *) l->data;
+      profile = (GtrProfile *) l->data;
 
       profile_name = gtranslator_profile_get_name (profile);
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
@@ -526,7 +526,7 @@ gtranslator_preferences_fill_profile_treeview (GtranslatorPreferencesDialog *
 }
 
 static void
-setup_profile_pages (GtranslatorPreferencesDialog * dlg)
+setup_profile_pages (GtrPreferencesDialog * dlg)
 {
 
   GtkTreeViewColumn *name_column, *toggle_column;
@@ -575,7 +575,7 @@ setup_profile_pages (GtranslatorPreferencesDialog * dlg)
 
 /***************Interface pages****************/
 static void
-style_changed_cb (GtkComboBox * combobox, GtranslatorPreferencesDialog * dlg)
+style_changed_cb (GtkComboBox * combobox, GtrPreferencesDialog * dlg)
 {
   g_return_if_fail (combobox == GTK_COMBO_BOX (dlg->priv->gdl_combobox));
 
@@ -585,7 +585,7 @@ style_changed_cb (GtkComboBox * combobox, GtranslatorPreferencesDialog * dlg)
 
 static void
 scheme_color_changed_cb (GtkComboBox * combobox,
-			 GtranslatorPreferencesDialog * dlg)
+			 GtrPreferencesDialog * dlg)
 {
   g_return_if_fail (combobox ==
 		    GTK_COMBO_BOX (dlg->priv->scheme_color_combobox));
@@ -595,7 +595,7 @@ scheme_color_changed_cb (GtkComboBox * combobox,
 }
 
 static void
-setup_interface_pages (GtranslatorPreferencesDialog * dlg)
+setup_interface_pages (GtrPreferencesDialog * dlg)
 {
   gint pane_switcher_style;
   GtkSourceStyleSchemeManager *manager;
@@ -651,9 +651,9 @@ static void
 response_filechooser_cb (GtkDialog * dialog,
 			 gint response_id, gpointer user_data)
 {
-  GtranslatorPreferencesDialog *dlg;
+  GtrPreferencesDialog *dlg;
 
-  dlg = (GtranslatorPreferencesDialog *) user_data;
+  dlg = (GtrPreferencesDialog *) user_data;
 
 
   if (response_id == GTK_RESPONSE_YES)
@@ -675,9 +675,9 @@ static void
 on_search_button_pulsed (GtkButton * button, gpointer data)
 {
   GtkWidget *filechooser;
-  GtranslatorPreferencesDialog *dlg;
+  GtrPreferencesDialog *dlg;
 
-  dlg = (GtranslatorPreferencesDialog *) data;
+  dlg = (GtrPreferencesDialog *) data;
 
   filechooser = gtk_file_chooser_dialog_new ("Select PO directory",
 					     GTK_WINDOW (dlg),
@@ -697,7 +697,7 @@ typedef struct _IdleData
 {
   GSList *list;
   GtkProgressBar *progress;
-  GtranslatorTranslationMemory *tm;
+  GtrTranslationMemory *tm;
   GtkWindow *parent;
 } IdleData;
 
@@ -719,7 +719,7 @@ add_to_database (gpointer data_pointer)
       GList *l2 = NULL;
       GFile *location;
       GError *error = NULL;
-      GtranslatorPo *po;
+      GtrPo *po;
 
       po = gtranslator_po_new ();
       location = (GFile *) l->data;
@@ -732,7 +732,7 @@ add_to_database (gpointer data_pointer)
 
       for (l2 = msg_list; l2; l2 = l2->next)
 	{
-	  GtranslatorMsg *msg;
+	  GtrMsg *msg;
 	  msg = GTR_MSG (l2->data);
 	  if (gtranslator_msg_is_translated (msg))
 	    gtranslator_translation_memory_store (data->tm,
@@ -797,7 +797,7 @@ destroy_idle_data (gpointer data)
 
 static void
 on_add_database_button_pulsed (GtkButton * button,
-			       GtranslatorPreferencesDialog * dlg)
+			       GtrPreferencesDialog * dlg)
 {
   GFile *dir;
   const gchar *dir_name;
@@ -841,7 +841,7 @@ on_use_lang_profile_checkbutton_changed (GtkToggleButton * button,
 
 static void
 tm_lang_entry_changed (GObject * gobject,
-		       GParamSpec * arg1, GtranslatorPreferencesDialog * dlg)
+		       GParamSpec * arg1, GtrPreferencesDialog * dlg)
 {
   const gchar *text;
 
@@ -880,7 +880,7 @@ on_sentence_length_spinbutton_changed (GtkSpinButton * spinbutton,
 static void
 directory_entry_changed (GObject * gobject,
 			 GParamSpec * arg1,
-			 GtranslatorPreferencesDialog * dlg)
+			 GtrPreferencesDialog * dlg)
 {
   const gchar *text;
 
@@ -895,9 +895,9 @@ directory_entry_changed (GObject * gobject,
 
 
 static void
-setup_tm_pages (GtranslatorPreferencesDialog * dlg)
+setup_tm_pages (GtrPreferencesDialog * dlg)
 {
-  GtranslatorProfile *profile;
+  GtrProfile *profile;
   const gchar *language_code;
   const gchar *filename = NULL;
 
@@ -961,7 +961,7 @@ setup_tm_pages (GtranslatorPreferencesDialog * dlg)
 
 /***************Plugins pages****************/
 static void
-setup_plugin_pages (GtranslatorPreferencesDialog * dlg)
+setup_plugin_pages (GtrPreferencesDialog * dlg)
 {
   GtkWidget *alignment;
   GtkWidget *page_content;
@@ -992,23 +992,23 @@ dialog_response_handler (GtkDialog * dlg, gint res_id)
 }
 
 static void
-add_button_pulsed (GtkWidget * button, GtranslatorPreferencesDialog * dlg)
+add_button_pulsed (GtkWidget * button, GtrPreferencesDialog * dlg)
 {
-  GtranslatorProfile *profile;
+  GtrProfile *profile;
   profile = gtranslator_profile_new ();
   gtranslator_show_profile_dialog (dlg, profile, NEW_PROFILE);
 }
 
 static void
-edit_button_pulsed (GtkWidget * button, GtranslatorPreferencesDialog * dlg)
+edit_button_pulsed (GtkWidget * button, GtrPreferencesDialog * dlg)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
   GtkTreeSelection *selection;
   gchar *profile_row;
   const gchar *old_profile_name;
-  GtranslatorProfile *edited_profile = NULL;
-  GtranslatorProfile *active_profile;
+  GtrProfile *edited_profile = NULL;
+  GtrProfile *active_profile;
   GList *profiles_list = NULL, *l = NULL;
 
   model =
@@ -1028,8 +1028,8 @@ edit_button_pulsed (GtkWidget * button, GtranslatorPreferencesDialog * dlg)
 
       for (l = profiles_list; l; l = l->next)
 	{
-	  GtranslatorProfile *profile;
-	  profile = (GtranslatorProfile *) l->data;
+	  GtrProfile *profile;
+	  profile = (GtrProfile *) l->data;
 	  if (!strcmp (gtranslator_profile_get_name (profile), profile_row))
 	    {
 	      old_profile_name = gtranslator_profile_get_name (profile);
@@ -1043,7 +1043,7 @@ edit_button_pulsed (GtkWidget * button, GtranslatorPreferencesDialog * dlg)
 static void
 delete_confirm_dialog_cb (GtkWidget * dialog,
 			  gint response_id,
-			  GtranslatorPreferencesDialog * dlg)
+			  GtrPreferencesDialog * dlg)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
@@ -1072,8 +1072,8 @@ delete_confirm_dialog_cb (GtkWidget * dialog,
 
 	  for (l = profiles_list; l; l = l->next)
 	    {
-	      GtranslatorProfile *profile;
-	      profile = (GtranslatorProfile *) l->data;
+	      GtrProfile *profile;
+	      profile = (GtrProfile *) l->data;
 	      if (!strcmp
 		  (gtranslator_profile_get_name (profile), profile_row))
 		{
@@ -1092,13 +1092,13 @@ delete_confirm_dialog_cb (GtkWidget * dialog,
 }
 
 static void
-delete_button_pulsed (GtkWidget * button, GtranslatorPreferencesDialog * dlg)
+delete_button_pulsed (GtkWidget * button, GtrPreferencesDialog * dlg)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
   GtkTreeSelection *selection;
   gchar *profile_row;
-  GtranslatorProfile *active_profile;
+  GtrProfile *active_profile;
   GtkWidget *dialog;
 
   model =
@@ -1162,7 +1162,7 @@ delete_button_pulsed (GtkWidget * button, GtranslatorPreferencesDialog * dlg)
 }
 
 static void
-gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog * dlg)
+gtranslator_preferences_dialog_init (GtrPreferencesDialog * dlg)
 {
   gboolean ret;
   GtkWidget *error_widget;
@@ -1183,7 +1183,7 @@ gtranslator_preferences_dialog_init (GtranslatorPreferencesDialog * dlg)
 			  GTK_RESPONSE_CLOSE,
 			  GTK_STOCK_HELP, GTK_RESPONSE_HELP, NULL);
 
-  gtk_window_set_title (GTK_WINDOW (dlg), _("Gtranslator Preferences"));
+  gtk_window_set_title (GTK_WINDOW (dlg), _("Gtr Preferences"));
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
   gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
@@ -1315,19 +1315,19 @@ gtranslator_preferences_dialog_finalize (GObject * object)
 }
 
 static void
-gtranslator_preferences_dialog_class_init (GtranslatorPreferencesDialogClass *
+gtranslator_preferences_dialog_class_init (GtrPreferencesDialogClass *
 					   klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass,
-			    sizeof (GtranslatorPreferencesDialogPrivate));
+			    sizeof (GtrPreferencesDialogPrivate));
 
   object_class->finalize = gtranslator_preferences_dialog_finalize;
 }
 
 void
-gtranslator_show_preferences_dialog (GtranslatorWindow * window)
+gtranslator_show_preferences_dialog (GtrWindow * window)
 {
   static GtkWidget *dlg = NULL;
 

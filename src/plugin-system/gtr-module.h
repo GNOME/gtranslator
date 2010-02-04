@@ -44,14 +44,14 @@
 
 G_BEGIN_DECLS
 #define GTR_TYPE_MODULE		(gtranslator_module_get_type ())
-#define GTR_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_MODULE, GtranslatorModule))
-#define GTR_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTR_TYPE_MODULE, GtranslatorModuleClass))
+#define GTR_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_MODULE, GtrModule))
+#define GTR_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTR_TYPE_MODULE, GtrModuleClass))
 #define GTR_IS_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_MODULE))
 #define GTR_IS_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_MODULE))
-#define GTR_MODULE_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS((obj), GTR_TYPE_MODULE, GtranslatorModuleClass))
-typedef struct _GtranslatorModule GtranslatorModule;
+#define GTR_MODULE_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS((obj), GTR_TYPE_MODULE, GtrModuleClass))
+typedef struct _GtrModule GtrModule;
 
-struct _GtranslatorModule
+struct _GtrModule
 {
   GTypeModule parent;
 
@@ -62,9 +62,9 @@ struct _GtranslatorModule
   GType type;
 };
 
-typedef struct _GtranslatorModuleClass GtranslatorModuleClass;
+typedef struct _GtrModuleClass GtrModuleClass;
 
-struct _GtranslatorModuleClass
+struct _GtrModuleClass
 {
   GTypeModuleClass parent_class;
 
@@ -76,15 +76,15 @@ GType
 gtranslator_module_get_type (void)
   G_GNUC_CONST;
 
-     const gchar *gtranslator_module_get_path (GtranslatorModule * module);
+     const gchar *gtranslator_module_get_path (GtrModule * module);
 
-     const gchar *gtranslator_module_get_module_name (GtranslatorModule *
+     const gchar *gtranslator_module_get_module_name (GtrModule *
 						      module);
 
-     GObject *gtranslator_module_new_object (GtranslatorModule * module);
+     GObject *gtranslator_module_new_object (GtrModule * module);
 
      void gtranslator_module_class_garbage_collect
-       (GtranslatorModuleClass * klass);
+       (GtrModuleClass * klass);
 
 G_END_DECLS
 #endif

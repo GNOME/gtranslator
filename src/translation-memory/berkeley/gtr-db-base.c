@@ -36,11 +36,11 @@
 #define GTR_DB_BASE_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),		       \
 						 GTR_TYPE_DB_BASE,     \
-						 GtranslatorDbBasePrivate))
+						 GtrDbBasePrivate))
 
-G_DEFINE_TYPE (GtranslatorDbBase, gtranslator_db_base, G_TYPE_OBJECT)
+G_DEFINE_TYPE (GtrDbBase, gtranslator_db_base, G_TYPE_OBJECT)
 
-struct _GtranslatorDbBasePrivate
+struct _GtrDbBasePrivate
 {
   DB *db;
   gchar *path;
@@ -83,7 +83,7 @@ get_db_base_directory ()
 }
 
 static void
-gtranslator_db_base_init (GtranslatorDbBase * base)
+gtranslator_db_base_init (GtrDbBase * base)
 {
   base->priv = GTR_DB_BASE_GET_PRIVATE (base);
 
@@ -93,7 +93,7 @@ gtranslator_db_base_init (GtranslatorDbBase * base)
 static void
 gtranslator_db_base_finalize (GObject * object)
 {
-  GtranslatorDbBase *base = GTR_DB_BASE (object);
+  GtrDbBase *base = GTR_DB_BASE (object);
   int err;
 
   if ((err = base->priv->db->close (base->priv->db, 0)) != 0)
@@ -105,17 +105,17 @@ gtranslator_db_base_finalize (GObject * object)
 }
 
 static void
-gtranslator_db_base_class_init (GtranslatorDbBaseClass * klass)
+gtranslator_db_base_class_init (GtrDbBaseClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorDbBasePrivate));
+  g_type_class_add_private (klass, sizeof (GtrDbBasePrivate));
 
   object_class->finalize = gtranslator_db_base_finalize;
 }
 
 void
-gtranslator_db_base_create_dabatase (GtranslatorDbBase * base,
+gtranslator_db_base_create_dabatase (GtrDbBase * base,
 				     const gchar * filename, DBTYPE type)
 {
   gint error;
@@ -146,7 +146,7 @@ gtranslator_db_base_create_dabatase (GtranslatorDbBase * base,
 }
 
 void
-gtranslator_db_base_show_error (GtranslatorDbBase * base, int error)
+gtranslator_db_base_show_error (GtrDbBase * base, int error)
 {
   gchar *err = NULL;
   DB_ENV *env;
@@ -184,14 +184,14 @@ gtranslator_db_base_show_error (GtranslatorDbBase * base, int error)
 }
 
 gint
-gtranslator_db_base_put (GtranslatorDbBase * base,
+gtranslator_db_base_put (GtrDbBase * base,
 			 DBT * key, DBT * data, u_int32_t flags)
 {
   return base->priv->db->put (base->priv->db, NULL, key, data, flags);
 }
 
 gint
-gtranslator_db_base_get (GtranslatorDbBase * base, DBT * key, DBT * data)
+gtranslator_db_base_get (GtrDbBase * base, DBT * key, DBT * data)
 {
   return base->priv->db->get (base->priv->db, NULL, key, data, 0);
 }

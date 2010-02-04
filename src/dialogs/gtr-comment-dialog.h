@@ -31,34 +31,34 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_COMMENT_DIALOG		(gtranslator_comment_dialog_get_type ())
-#define GTR_COMMENT_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_COMMENT_DIALOG, GtranslatorCommentDialog))
-#define GTR_COMMENT_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_COMMENT_DIALOG, GtranslatorCommentDialogClass))
+#define GTR_COMMENT_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_COMMENT_DIALOG, GtrCommentDialog))
+#define GTR_COMMENT_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_COMMENT_DIALOG, GtrCommentDialogClass))
 #define GTR_IS_COMMENT_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_COMMENT_DIALOG))
 #define GTR_IS_COMMENT_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_COMMENT_DIALOG))
-#define GTR_COMMENT_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_COMMENT_DIALOG, GtranslatorCommentDialogClass))
+#define GTR_COMMENT_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_COMMENT_DIALOG, GtrCommentDialogClass))
 /* Private structure type */
-typedef struct _GtranslatorCommentDialogPrivate
-  GtranslatorCommentDialogPrivate;
+typedef struct _GtrCommentDialogPrivate
+  GtrCommentDialogPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorCommentDialog GtranslatorCommentDialog;
+typedef struct _GtrCommentDialog GtrCommentDialog;
 
-struct _GtranslatorCommentDialog
+struct _GtrCommentDialog
 {
   GtkDialog parent_instance;
 
   /*< private > */
-  GtranslatorCommentDialogPrivate *priv;
+  GtrCommentDialogPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorCommentDialogClass GtranslatorCommentDialogClass;
+typedef struct _GtrCommentDialogClass GtrCommentDialogClass;
 
-struct _GtranslatorCommentDialogClass
+struct _GtrCommentDialogClass
 {
   GtkDialogClass parent_class;
 };
@@ -72,7 +72,7 @@ gtranslator_comment_dialog_get_type (void)
 
      GType gtranslator_comment_dialog_register_type (GTypeModule * module);
 
-     void gtranslator_show_comment_dialog (GtranslatorWindow * window);
+     void gtranslator_show_comment_dialog (GtrWindow * window);
 
 G_END_DECLS
 #endif /* __COMMENT_DIALOG_H__ */

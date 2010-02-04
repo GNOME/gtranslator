@@ -45,7 +45,7 @@
 
 #define GTR_SEARCH_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
 						GTR_TYPE_SEARCH_DIALOG,              \
-						GtranslatorSearchDialogPrivate))
+						GtrSearchDialogPrivate))
 
 /* Signals */
 enum
@@ -56,7 +56,7 @@ enum
 
 static guint dialog_signals[LAST_SIGNAL] = { 0 };
 
-struct _GtranslatorSearchDialogPrivate
+struct _GtrSearchDialogPrivate
 {
   gboolean show_replace;
 
@@ -81,7 +81,7 @@ struct _GtranslatorSearchDialogPrivate
   gboolean glade_error;
 };
 
-G_DEFINE_TYPE (GtranslatorSearchDialog, gtranslator_search_dialog,
+G_DEFINE_TYPE (GtrSearchDialog, gtranslator_search_dialog,
 	       GTK_TYPE_DIALOG)
 enum
 {
@@ -95,7 +95,7 @@ gtranslator_search_dialog_set_property (GObject * object,
 					const GValue * value,
 					GParamSpec * pspec)
 {
-  GtranslatorSearchDialog *dlg = GTR_SEARCH_DIALOG (object);
+  GtrSearchDialog *dlg = GTR_SEARCH_DIALOG (object);
 
   switch (prop_id)
     {
@@ -115,7 +115,7 @@ gtranslator_search_dialog_get_property (GObject * object,
 					guint prop_id,
 					GValue * value, GParamSpec * pspec)
 {
-  GtranslatorSearchDialog *dlg = GTR_SEARCH_DIALOG (object);
+  GtrSearchDialog *dlg = GTR_SEARCH_DIALOG (object);
 
   switch (prop_id)
     {
@@ -129,7 +129,7 @@ gtranslator_search_dialog_get_property (GObject * object,
 }
 
 static gboolean
-show_replace (GtranslatorSearchDialog * dlg)
+show_replace (GtrSearchDialog * dlg)
 {
   gtranslator_search_dialog_set_show_replace (dlg, TRUE);
 
@@ -137,7 +137,7 @@ show_replace (GtranslatorSearchDialog * dlg)
 }
 
 static void
-gtranslator_search_dialog_class_init (GtranslatorSearchDialogClass * klass)
+gtranslator_search_dialog_class_init (GtrSearchDialogClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkBindingSet *binding_set;
@@ -151,7 +151,7 @@ gtranslator_search_dialog_class_init (GtranslatorSearchDialogClass * klass)
     g_signal_new ("show_replace",
 		  G_TYPE_FROM_CLASS (object_class),
 		  G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-		  G_STRUCT_OFFSET (GtranslatorSearchDialogClass,
+		  G_STRUCT_OFFSET (GtrSearchDialogClass,
 				   show_replace), NULL, NULL,
 		  gtr_marshal_BOOLEAN__NONE, G_TYPE_BOOLEAN, 0);
 
@@ -163,7 +163,7 @@ gtranslator_search_dialog_class_init (GtranslatorSearchDialogClass * klass)
 							 G_PARAM_READWRITE));
 
   g_type_class_add_private (object_class,
-			    sizeof (GtranslatorSearchDialogPrivate));
+			    sizeof (GtrSearchDialogPrivate));
 
   binding_set = gtk_binding_set_by_class (klass);
 
@@ -211,7 +211,7 @@ insert_text_handler (GtkEditable * editable,
 }
 
 static void
-search_entry_changed (GtkComboBox * combo, GtranslatorSearchDialog * dialog)
+search_entry_changed (GtkComboBox * combo, GtrSearchDialog * dialog)
 {
   GtkWidget *entry;
   const gchar *search_string;
@@ -248,7 +248,7 @@ search_entry_changed (GtkComboBox * combo, GtranslatorSearchDialog * dialog)
  */
 static void
 original_translated_checkbutton_toggled (GtkToggleButton * button,
-					 GtranslatorSearchDialog * dialog)
+					 GtrSearchDialog * dialog)
 {
   gboolean original_text;
   gboolean translated_text;
@@ -272,7 +272,7 @@ original_translated_checkbutton_toggled (GtkToggleButton * button,
 }
 
 static void
-response_handler (GtranslatorSearchDialog * dialog,
+response_handler (GtrSearchDialog * dialog,
 		  gint response_id, gpointer data)
 {
   const gchar *str;
@@ -309,7 +309,7 @@ response_handler (GtranslatorSearchDialog * dialog,
 }
 
 static void
-show_replace_widgets (GtranslatorSearchDialog * dlg, gboolean show_replace)
+show_replace_widgets (GtrSearchDialog * dlg, gboolean show_replace)
 {
   if (show_replace)
     {
@@ -361,7 +361,7 @@ show_replace_widgets (GtranslatorSearchDialog * dlg, gboolean show_replace)
 }
 
 static void
-gtranslator_search_dialog_init (GtranslatorSearchDialog * dlg)
+gtranslator_search_dialog_init (GtrSearchDialog * dlg)
 {
   GtkWidget *content;
   GtkWidget *error_widget;
@@ -436,7 +436,7 @@ gtranslator_search_dialog_init (GtranslatorSearchDialog * dlg)
   gtk_widget_set_size_request (dlg->priv->search_entry, 300, -1);
   gtranslator_history_entry_set_escape_func
     (GTR_HISTORY_ENTRY (dlg->priv->search_entry),
-     (GtranslatorHistoryEntryEscapeFunc)
+     (GtrHistoryEntryEscapeFunc)
      gtranslator_utils_escape_search_text);
 
   dlg->priv->search_text_entry = gtranslator_history_entry_get_entry
@@ -451,7 +451,7 @@ gtranslator_search_dialog_init (GtranslatorSearchDialog * dlg)
     gtranslator_history_entry_new ("gtranslator_replace_with_entry", TRUE);
   gtranslator_history_entry_set_escape_func (GTR_HISTORY_ENTRY
 					     (dlg->priv->replace_entry),
-					     (GtranslatorHistoryEntryEscapeFunc)
+					     (GtrHistoryEntryEscapeFunc)
 					     gtranslator_utils_escape_search_text);
 
   dlg->priv->replace_text_entry = gtranslator_history_entry_get_entry
@@ -526,7 +526,7 @@ gtranslator_search_dialog_init (GtranslatorSearchDialog * dlg)
 GtkWidget *
 gtranslator_search_dialog_new (GtkWindow * parent, gboolean show_replace)
 {
-  GtranslatorSearchDialog *dlg;
+  GtrSearchDialog *dlg;
 
   dlg = g_object_new (GTR_TYPE_SEARCH_DIALOG,
 		      "show-replace", show_replace, NULL);
@@ -538,7 +538,7 @@ gtranslator_search_dialog_new (GtkWindow * parent, gboolean show_replace)
 }
 
 void
-gtranslator_search_dialog_present_with_time (GtranslatorSearchDialog * dialog,
+gtranslator_search_dialog_present_with_time (GtrSearchDialog * dialog,
 					     guint32 timestamp)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
@@ -549,7 +549,7 @@ gtranslator_search_dialog_present_with_time (GtranslatorSearchDialog * dialog,
 }
 
 gboolean
-gtranslator_search_dialog_get_show_replace (GtranslatorSearchDialog * dialog)
+gtranslator_search_dialog_get_show_replace (GtrSearchDialog * dialog)
 {
   g_return_val_if_fail (GTR_IS_SEARCH_DIALOG (dialog), FALSE);
 
@@ -557,7 +557,7 @@ gtranslator_search_dialog_get_show_replace (GtranslatorSearchDialog * dialog)
 }
 
 void
-gtranslator_search_dialog_set_show_replace (GtranslatorSearchDialog * dialog,
+gtranslator_search_dialog_set_show_replace (GtrSearchDialog * dialog,
 					    gboolean show_replace)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
@@ -572,7 +572,7 @@ gtranslator_search_dialog_set_show_replace (GtranslatorSearchDialog * dialog,
 }
 
 void
-gtranslator_search_dialog_set_search_text (GtranslatorSearchDialog * dialog,
+gtranslator_search_dialog_set_search_text (GtrSearchDialog * dialog,
 					   const gchar * text)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
@@ -593,7 +593,7 @@ gtranslator_search_dialog_set_search_text (GtranslatorSearchDialog * dialog,
  * The text must be unescaped before searching.
  */
 const gchar *
-gtranslator_search_dialog_get_search_text (GtranslatorSearchDialog * dialog)
+gtranslator_search_dialog_get_search_text (GtrSearchDialog * dialog)
 {
   g_return_val_if_fail (GTR_IS_SEARCH_DIALOG (dialog), NULL);
 
@@ -601,7 +601,7 @@ gtranslator_search_dialog_get_search_text (GtranslatorSearchDialog * dialog)
 }
 
 void
-gtranslator_search_dialog_set_replace_text (GtranslatorSearchDialog * dialog,
+gtranslator_search_dialog_set_replace_text (GtrSearchDialog * dialog,
 					    const gchar * text)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
@@ -611,7 +611,7 @@ gtranslator_search_dialog_set_replace_text (GtranslatorSearchDialog * dialog,
 }
 
 const gchar *
-gtranslator_search_dialog_get_replace_text (GtranslatorSearchDialog * dialog)
+gtranslator_search_dialog_get_replace_text (GtrSearchDialog * dialog)
 {
   g_return_val_if_fail (GTR_IS_SEARCH_DIALOG (dialog), NULL);
 
@@ -619,7 +619,7 @@ gtranslator_search_dialog_get_replace_text (GtranslatorSearchDialog * dialog)
 }
 
 void
-gtranslator_search_dialog_set_original_text (GtranslatorSearchDialog * dialog,
+gtranslator_search_dialog_set_original_text (GtrSearchDialog * dialog,
 					     gboolean match_case)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
@@ -630,7 +630,7 @@ gtranslator_search_dialog_set_original_text (GtranslatorSearchDialog * dialog,
 }
 
 gboolean
-gtranslator_search_dialog_get_original_text (GtranslatorSearchDialog * dialog)
+gtranslator_search_dialog_get_original_text (GtrSearchDialog * dialog)
 {
   g_return_val_if_fail (GTR_IS_SEARCH_DIALOG (dialog), FALSE);
 
@@ -640,7 +640,7 @@ gtranslator_search_dialog_get_original_text (GtranslatorSearchDialog * dialog)
 }
 
 void
-gtranslator_search_dialog_set_translated_text (GtranslatorSearchDialog *
+gtranslator_search_dialog_set_translated_text (GtrSearchDialog *
 					       dialog, gboolean match_case)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
@@ -651,7 +651,7 @@ gtranslator_search_dialog_set_translated_text (GtranslatorSearchDialog *
 }
 
 gboolean
-gtranslator_search_dialog_get_translated_text (GtranslatorSearchDialog *
+gtranslator_search_dialog_get_translated_text (GtrSearchDialog *
 					       dialog)
 {
   g_return_val_if_fail (GTR_IS_SEARCH_DIALOG (dialog), FALSE);
@@ -663,7 +663,7 @@ gtranslator_search_dialog_get_translated_text (GtranslatorSearchDialog *
 }
 
 void
-gtranslator_search_dialog_set_fuzzy (GtranslatorSearchDialog * dialog,
+gtranslator_search_dialog_set_fuzzy (GtrSearchDialog * dialog,
 				     gboolean match_case)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
@@ -674,7 +674,7 @@ gtranslator_search_dialog_set_fuzzy (GtranslatorSearchDialog * dialog,
 }
 
 gboolean
-gtranslator_search_dialog_get_fuzzy (GtranslatorSearchDialog * dialog)
+gtranslator_search_dialog_get_fuzzy (GtrSearchDialog * dialog)
 {
   g_return_val_if_fail (GTR_IS_SEARCH_DIALOG (dialog), FALSE);
 
@@ -684,7 +684,7 @@ gtranslator_search_dialog_get_fuzzy (GtranslatorSearchDialog * dialog)
 }
 
 void
-gtranslator_search_dialog_set_match_case (GtranslatorSearchDialog * dialog,
+gtranslator_search_dialog_set_match_case (GtrSearchDialog * dialog,
 					  gboolean match_case)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
@@ -695,7 +695,7 @@ gtranslator_search_dialog_set_match_case (GtranslatorSearchDialog * dialog,
 }
 
 gboolean
-gtranslator_search_dialog_get_match_case (GtranslatorSearchDialog * dialog)
+gtranslator_search_dialog_get_match_case (GtrSearchDialog * dialog)
 {
   g_return_val_if_fail (GTR_IS_SEARCH_DIALOG (dialog), FALSE);
 
@@ -705,7 +705,7 @@ gtranslator_search_dialog_get_match_case (GtranslatorSearchDialog * dialog)
 }
 
 void
-gtranslator_search_dialog_set_entire_word (GtranslatorSearchDialog * dialog,
+gtranslator_search_dialog_set_entire_word (GtrSearchDialog * dialog,
 					   gboolean entire_word)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
@@ -716,7 +716,7 @@ gtranslator_search_dialog_set_entire_word (GtranslatorSearchDialog * dialog,
 }
 
 gboolean
-gtranslator_search_dialog_get_entire_word (GtranslatorSearchDialog * dialog)
+gtranslator_search_dialog_get_entire_word (GtrSearchDialog * dialog)
 {
   g_return_val_if_fail (GTR_IS_SEARCH_DIALOG (dialog), FALSE);
 
@@ -726,7 +726,7 @@ gtranslator_search_dialog_get_entire_word (GtranslatorSearchDialog * dialog)
 }
 
 void
-gtranslator_search_dialog_set_backwards (GtranslatorSearchDialog * dialog,
+gtranslator_search_dialog_set_backwards (GtrSearchDialog * dialog,
 					 gboolean backwards)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
@@ -737,7 +737,7 @@ gtranslator_search_dialog_set_backwards (GtranslatorSearchDialog * dialog,
 }
 
 gboolean
-gtranslator_search_dialog_get_backwards (GtranslatorSearchDialog * dialog)
+gtranslator_search_dialog_get_backwards (GtrSearchDialog * dialog)
 {
   g_return_val_if_fail (GTR_IS_SEARCH_DIALOG (dialog), FALSE);
 
@@ -747,7 +747,7 @@ gtranslator_search_dialog_get_backwards (GtranslatorSearchDialog * dialog)
 }
 
 void
-gtranslator_search_dialog_set_wrap_around (GtranslatorSearchDialog * dialog,
+gtranslator_search_dialog_set_wrap_around (GtrSearchDialog * dialog,
 					   gboolean wrap_around)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
@@ -758,7 +758,7 @@ gtranslator_search_dialog_set_wrap_around (GtranslatorSearchDialog * dialog,
 }
 
 gboolean
-gtranslator_search_dialog_get_wrap_around (GtranslatorSearchDialog * dialog)
+gtranslator_search_dialog_get_wrap_around (GtrSearchDialog * dialog)
 {
   g_return_val_if_fail (GTR_IS_SEARCH_DIALOG (dialog), FALSE);
 

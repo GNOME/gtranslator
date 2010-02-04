@@ -29,40 +29,40 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_VIEW		(gtranslator_view_get_type ())
-#define GTR_VIEW(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_VIEW, GtranslatorView))
-#define GTR_VIEW_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_VIEW, GtranslatorViewClass))
+#define GTR_VIEW(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_VIEW, GtrView))
+#define GTR_VIEW_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_VIEW, GtrViewClass))
 #define GTR_IS_VIEW(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_VIEW))
 #define GTR_IS_VIEW_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_VIEW))
-#define GTR_VIEW_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_VIEW, GtranslatorViewClass))
+#define GTR_VIEW_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_VIEW, GtrViewClass))
   typedef enum
 {
   GTR_SEARCH_DONT_SET_FLAGS = 1 << 0,
   GTR_SEARCH_ENTIRE_WORD = 1 << 1,
   GTR_SEARCH_CASE_SENSITIVE = 1 << 2
-} GtranslatorSearchFlags;
+} GtrSearchFlags;
 
 /* Private structure type */
-typedef struct _GtranslatorViewPrivate GtranslatorViewPrivate;
+typedef struct _GtrViewPrivate GtrViewPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorView GtranslatorView;
+typedef struct _GtrView GtrView;
 
-struct _GtranslatorView
+struct _GtrView
 {
   GtkSourceView parent_instance;
 
   /*< private > */
-  GtranslatorViewPrivate *priv;
+  GtrViewPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorViewClass GtranslatorViewClass;
+typedef struct _GtrViewClass GtrViewClass;
 
-struct _GtranslatorViewClass
+struct _GtrViewClass
 {
   GtkSourceViewClass parent_class;
 };
@@ -79,32 +79,32 @@ gtranslator_view_get_type (void)
 
      GtkWidget *gtranslator_view_new (void);
 
-     gboolean gtranslator_view_get_selected_text (GtranslatorView * view,
+     gboolean gtranslator_view_get_selected_text (GtrView * view,
 						  gchar ** selected_text,
 						  gint * len);
 
-     void gtranslator_view_enable_spellcheck (GtranslatorView * view,
+     void gtranslator_view_enable_spellcheck (GtrView * view,
 					      gboolean enable);
 
      void gtranslator_view_enable_visible_whitespace
-       (GtranslatorView * view, gboolean enable);
+       (GtrView * view, gboolean enable);
 
-     void gtranslator_view_cut_clipboard (GtranslatorView * view);
+     void gtranslator_view_cut_clipboard (GtrView * view);
 
-     void gtranslator_view_copy_clipboard (GtranslatorView * view);
+     void gtranslator_view_copy_clipboard (GtrView * view);
 
-     void gtranslator_view_paste_clipboard (GtranslatorView * view);
+     void gtranslator_view_paste_clipboard (GtrView * view);
 
-     void gtranslator_view_set_font (GtranslatorView * view,
+     void gtranslator_view_set_font (GtrView * view,
 				     gboolean def, const gchar * font_name);
 
-     void gtranslator_view_set_search_text (GtranslatorView * view,
+     void gtranslator_view_set_search_text (GtrView * view,
 					    const gchar * text, guint flags);
 
-     gchar *gtranslator_view_get_search_text (GtranslatorView * view,
+     gchar *gtranslator_view_get_search_text (GtrView * view,
 					      guint * flags);
 
-     void gtranslator_view_reload_scheme_color (GtranslatorView * view);
+     void gtranslator_view_reload_scheme_color (GtrView * view);
 
 
 /* Search macros */

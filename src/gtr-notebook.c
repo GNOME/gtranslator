@@ -31,10 +31,10 @@
 #define GTR_NOTEBOOK_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 					 (object),	\
 					 GTR_TYPE_NOTEBOOK,     \
-					 GtranslatorNotebookPrivate))
+					 GtrNotebookPrivate))
 
-G_DEFINE_TYPE (GtranslatorNotebook, gtranslator_notebook, GTK_TYPE_NOTEBOOK)
-     struct _GtranslatorNotebookPrivate
+G_DEFINE_TYPE (GtrNotebook, gtranslator_notebook, GTK_TYPE_NOTEBOOK)
+     struct _GtrNotebookPrivate
      {
        GList *pages;
 
@@ -64,13 +64,13 @@ tab_label_style_set_cb (GtkWidget * hbox,
 }
 
 static void
-sync_name (GtranslatorPo * po, GParamSpec * pspec, GtkWidget * hbox)
+sync_name (GtrPo * po, GParamSpec * pspec, GtkWidget * hbox)
 {
   gchar *str;
   GtkWidget *label;
   GtkWidget *ebox;
   gchar *tooltip;
-  GtranslatorTab *tab;
+  GtrTab *tab;
   GFile *location;
   gchar *path;
 
@@ -99,14 +99,14 @@ sync_name (GtranslatorPo * po, GParamSpec * pspec, GtkWidget * hbox)
 static void
 close_button_clicked_cb (GtkWidget * widget, GtkWidget * tab)
 {
-  GtranslatorNotebook *notebook;
+  GtrNotebook *notebook;
 
   notebook = GTR_NOTEBOOK (gtk_widget_get_parent (tab));
   g_signal_emit (notebook, signals[TAB_CLOSE_REQUEST], 0, tab);
 }
 
 static GtkWidget *
-build_tab_label (GtranslatorNotebook * nb, GtranslatorTab * tab)
+build_tab_label (GtrNotebook * nb, GtrTab * tab)
 {
   GtkWidget *hbox, *label_hbox, *label_ebox;
   GtkWidget *label, *dummy_label;
@@ -180,10 +180,10 @@ build_tab_label (GtranslatorNotebook * nb, GtranslatorTab * tab)
 }
 
 static void
-gtranslator_notebook_init (GtranslatorNotebook * notebook)
+gtranslator_notebook_init (GtrNotebook * notebook)
 {
   notebook->priv = GTR_NOTEBOOK_GET_PRIVATE (notebook);
-  GtranslatorNotebookPrivate *priv = notebook->priv;
+  GtrNotebookPrivate *priv = notebook->priv;
 
   priv->pages = NULL;
 }
@@ -191,7 +191,7 @@ gtranslator_notebook_init (GtranslatorNotebook * notebook)
 static void
 gtranslator_notebook_finalize (GObject * object)
 {
-  GtranslatorNotebook *notebook = GTR_NOTEBOOK (object);
+  GtrNotebook *notebook = GTR_NOTEBOOK (object);
 
   if (notebook->priv->pages)
     g_list_free (notebook->priv->pages);
@@ -200,11 +200,11 @@ gtranslator_notebook_finalize (GObject * object)
 }
 
 static void
-gtranslator_notebook_class_init (GtranslatorNotebookClass * klass)
+gtranslator_notebook_class_init (GtrNotebookClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorNotebookPrivate));
+  g_type_class_add_private (klass, sizeof (GtrNotebookPrivate));
 
   object_class->finalize = gtranslator_notebook_finalize;
 
@@ -212,7 +212,7 @@ gtranslator_notebook_class_init (GtranslatorNotebookClass * klass)
     g_signal_new ("tab-close-request",
 		  G_OBJECT_CLASS_TYPE (object_class),
 		  G_SIGNAL_RUN_LAST,
-		  G_STRUCT_OFFSET (GtranslatorNotebookClass,
+		  G_STRUCT_OFFSET (GtrNotebookClass,
 				   tab_close_request), NULL, NULL,
 		  g_cclosure_marshal_VOID__OBJECT, G_TYPE_NONE, 1,
 		  GTR_TYPE_TAB);
@@ -223,9 +223,9 @@ gtranslator_notebook_class_init (GtranslatorNotebookClass * klass)
 /**
  * gtranslator_notebook_new:
  * 
- * Creates a new #GtranslatorNotebook.
+ * Creates a new #GtrNotebook.
  * 
- * Returns: a new #GtranslatorNotebook object
+ * Returns: a new #GtrNotebook object
  */
 GtkWidget *
 gtranslator_notebook_new ()
@@ -235,17 +235,17 @@ gtranslator_notebook_new ()
 
 /**
  * gtranslator_notebook_add_page:
- * @notebook: a #GtranslatorNotebook
- * @tab: a #GtranslatorTab
+ * @notebook: a #GtrNotebook
+ * @tab: a #GtrTab
  * 
- * Adds a new #GtranslatorTab to @notebook.
+ * Adds a new #GtrTab to @notebook.
  */
 void
-gtranslator_notebook_add_page (GtranslatorNotebook * notebook,
-			       GtranslatorTab * tab)
+gtranslator_notebook_add_page (GtrNotebook * notebook,
+			       GtrTab * tab)
 {
-  GtranslatorNotebookPrivate *priv = notebook->priv;
-  GtranslatorPo *po;
+  GtrNotebookPrivate *priv = notebook->priv;
+  GtrPo *po;
   GtkWidget *label;
 
   g_return_if_fail (GTR_IS_NOTEBOOK (notebook));
@@ -271,13 +271,13 @@ gtranslator_notebook_add_page (GtranslatorNotebook * notebook,
 
 /**
  * gtranslator_notebook_remove_page:
- * @notebook: a #GtranslatorNotebook
+ * @notebook: a #GtrNotebook
  * @page_num: the index of a notebook page, starting from 0.
  *
  * Removes a page from the notebook given its index in the notebook.
  */
 void
-gtranslator_notebook_remove_page (GtranslatorNotebook * notebook,
+gtranslator_notebook_remove_page (GtrNotebook * notebook,
 				  gint page_num)
 {
   GtkWidget *tab;
@@ -297,14 +297,14 @@ gtranslator_notebook_remove_page (GtranslatorNotebook * notebook,
 
 /**
  * gtranslator_notebook_get_page:
- * @notebook: a #GtranslatorNotebook
+ * @notebook: a #GtrNotebook
  * 
- * Gets the selected page in the #GtranslatorNotebook.
+ * Gets the selected page in the #GtrNotebook.
  * 
  * Returns: the selected page in the @notebook
  */
-GtranslatorTab *
-gtranslator_notebook_get_page (GtranslatorNotebook * notebook)
+GtrTab *
+gtranslator_notebook_get_page (GtrNotebook * notebook)
 {
   gint num;
 

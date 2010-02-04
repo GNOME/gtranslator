@@ -37,40 +37,40 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_TAB		(gtranslator_tab_get_type ())
-#define GTR_TAB(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_TAB, GtranslatorTab))
-#define GTR_TAB_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_TAB, GtranslatorTabClass))
+#define GTR_TAB(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_TAB, GtrTab))
+#define GTR_TAB_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_TAB, GtrTabClass))
 #define GTR_IS_TAB(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_TAB))
 #define GTR_IS_TAB_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_TAB))
-#define GTR_TAB_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_TAB, GtranslatorTabClass))
+#define GTR_TAB_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_TAB, GtrTabClass))
 /* Private structure type */
-typedef struct _GtranslatorTabPrivate GtranslatorTabPrivate;
+typedef struct _GtrTabPrivate GtrTabPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorTab GtranslatorTab;
+typedef struct _GtrTab GtrTab;
 
-struct _GtranslatorTab
+struct _GtrTab
 {
   GtkVBox parent_instance;
 
   /*< private > */
-  GtranslatorTabPrivate *priv;
+  GtrTabPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorTabClass GtranslatorTabClass;
+typedef struct _GtrTabClass GtrTabClass;
 
-struct _GtranslatorTabClass
+struct _GtrTabClass
 {
   GtkVBoxClass parent_class;
 
-  void (*showed_message) (GtranslatorTab * tab, GtranslatorMsg * msg);
-  void (*message_changed) (GtranslatorTab * tab, GtranslatorMsg * msg);
-  void (*message_edition_finished) (GtranslatorTab * tab,
-				    GtranslatorMsg * msg);
+  void (*showed_message) (GtrTab * tab, GtrMsg * msg);
+  void (*message_changed) (GtrTab * tab, GtrMsg * msg);
+  void (*message_edition_finished) (GtrTab * tab,
+				    GtrMsg * msg);
 };
 
 typedef enum
@@ -78,7 +78,7 @@ typedef enum
   GTR_TAB_MOVE_NONE,
   GTR_TAB_MOVE_NEXT,
   GTR_TAB_MOVE_PREV
-} GtranslatorTabMove;
+} GtrTabMove;
 
 /*
  * Public methods
@@ -89,92 +89,92 @@ gtranslator_tab_get_type (void)
 
      GType gtranslator_tab_register_type (GTypeModule * module);
 
-     GtranslatorTab *gtranslator_tab_new (GtranslatorPo * po);
+     GtrTab *gtranslator_tab_new (GtrPo * po);
 
-     GtranslatorPo *gtranslator_tab_get_po (GtranslatorTab * tab);
+     GtrPo *gtranslator_tab_get_po (GtrTab * tab);
 
-     GtkWidget *gtranslator_tab_get_panel (GtranslatorTab * tab);
+     GtkWidget *gtranslator_tab_get_panel (GtrTab * tab);
 
-     gint gtranslator_tab_get_active_trans_tab (GtranslatorTab * tab);
+     gint gtranslator_tab_get_active_trans_tab (GtrTab * tab);
 
-     GtranslatorContextPanel
-       *gtranslator_tab_get_context_panel (GtranslatorTab * tab);
+     GtrContextPanel
+       *gtranslator_tab_get_context_panel (GtrTab * tab);
 
-     GtkWidget *gtranslator_tab_get_translation_memory_ui (GtranslatorTab *
+     GtkWidget *gtranslator_tab_get_translation_memory_ui (GtrTab *
 							   tab);
 
-     GtranslatorView *gtranslator_tab_get_active_view (GtranslatorTab * tab);
+     GtrView *gtranslator_tab_get_active_view (GtrTab * tab);
 
-     GList *gtranslator_tab_get_all_views (GtranslatorTab * tab,
+     GList *gtranslator_tab_get_all_views (GtrTab * tab,
 					   gboolean original,
 					   gboolean translated);
 
-     gchar *gtranslator_tab_get_name (GtranslatorTab * tab);
+     gchar *gtranslator_tab_get_name (GtrTab * tab);
 
-     void gtranslator_tab_message_go_to (GtranslatorTab * tab,
+     void gtranslator_tab_message_go_to (GtrTab * tab,
 					 GList * to_go,
 					 gboolean searching,
-					 GtranslatorTabMove move);
+					 GtrTabMove move);
 
-     GtranslatorTab *gtranslator_tab_get_from_document (GtranslatorPo * po);
+     GtrTab *gtranslator_tab_get_from_document (GtrPo * po);
 
-     gboolean gtranslator_tab_get_autosave_enabled (GtranslatorTab * tab);
+     gboolean gtranslator_tab_get_autosave_enabled (GtrTab * tab);
 
-     void gtranslator_tab_set_autosave_enabled (GtranslatorTab * tab,
+     void gtranslator_tab_set_autosave_enabled (GtrTab * tab,
 						gboolean enable);
 
-     gint gtranslator_tab_get_autosave_interval (GtranslatorTab * tab);
+     gint gtranslator_tab_get_autosave_interval (GtrTab * tab);
 
-     void gtranslator_tab_set_autosave_interval (GtranslatorTab * tab,
+     void gtranslator_tab_set_autosave_interval (GtrTab * tab,
 						 gint interval);
 
-     void gtranslator_tab_add_widget_to_lateral_panel (GtranslatorTab * tab,
+     void gtranslator_tab_add_widget_to_lateral_panel (GtrTab * tab,
 						       GtkWidget * widget,
 						       const gchar *
 						       tab_name);
 
-     void gtranslator_tab_remove_widget_from_lateral_panel (GtranslatorTab *
+     void gtranslator_tab_remove_widget_from_lateral_panel (GtrTab *
 							    tab,
 							    GtkWidget *
 							    widget);
 
-     void gtranslator_tab_show_lateral_panel_widget (GtranslatorTab * tab,
+     void gtranslator_tab_show_lateral_panel_widget (GtrTab * tab,
 						     GtkWidget * widget);
 
-     void gtranslator_tab_clear_msgstr_views (GtranslatorTab * tab);
+     void gtranslator_tab_clear_msgstr_views (GtrTab * tab);
 
-     void gtranslator_tab_block_movement (GtranslatorTab * tab);
+     void gtranslator_tab_block_movement (GtrTab * tab);
 
-     void gtranslator_tab_unblock_movement (GtranslatorTab * tab);
+     void gtranslator_tab_unblock_movement (GtrTab * tab);
 
-     void gtranslator_tab_go_to_next (GtranslatorTab * tab);
+     void gtranslator_tab_go_to_next (GtrTab * tab);
 
-     void gtranslator_tab_go_to_prev (GtranslatorTab * tab);
+     void gtranslator_tab_go_to_prev (GtrTab * tab);
 
-     void gtranslator_tab_go_to_first (GtranslatorTab * tab);
+     void gtranslator_tab_go_to_first (GtrTab * tab);
 
-     void gtranslator_tab_go_to_last (GtranslatorTab * tab);
+     void gtranslator_tab_go_to_last (GtrTab * tab);
 
-     gboolean gtranslator_tab_go_to_next_fuzzy (GtranslatorTab * tab);
+     gboolean gtranslator_tab_go_to_next_fuzzy (GtrTab * tab);
 
-     gboolean gtranslator_tab_go_to_prev_fuzzy (GtranslatorTab * tab);
+     gboolean gtranslator_tab_go_to_prev_fuzzy (GtrTab * tab);
 
-     gboolean gtranslator_tab_go_to_next_untrans (GtranslatorTab * tab);
+     gboolean gtranslator_tab_go_to_next_untrans (GtrTab * tab);
 
-     gboolean gtranslator_tab_go_to_prev_untrans (GtranslatorTab * tab);
+     gboolean gtranslator_tab_go_to_prev_untrans (GtrTab * tab);
 
-     gboolean gtranslator_tab_go_to_next_fuzzy_or_untrans (GtranslatorTab *
+     gboolean gtranslator_tab_go_to_next_fuzzy_or_untrans (GtrTab *
 							   tab);
 
-     gboolean gtranslator_tab_go_to_prev_fuzzy_or_untrans (GtranslatorTab *
+     gboolean gtranslator_tab_go_to_prev_fuzzy_or_untrans (GtrTab *
 							   tab);
 
-     void gtranslator_tab_go_to_number (GtranslatorTab * tab, gint number);
+     void gtranslator_tab_go_to_number (GtrTab * tab, gint number);
 
-     void gtranslator_tab_set_info_bar (GtranslatorTab *tab,
+     void gtranslator_tab_set_info_bar (GtrTab *tab,
 					GtkWidget      *infobar);
 
-     gboolean _gtranslator_tab_can_close (GtranslatorTab * tab);
+     gboolean _gtranslator_tab_can_close (GtrTab * tab);
 
 G_END_DECLS
 #endif /* __TAB_H__ */

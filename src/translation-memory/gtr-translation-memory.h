@@ -22,29 +22,29 @@
 
 G_BEGIN_DECLS
 #define GTR_TYPE_TRANSLATION_MEMORY (gtranslator_translation_memory_get_type ())
-#define GTR_TRANSLATION_MEMORY(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_TRANSLATION_MEMORY, GtranslatorTranslationMemory))
+#define GTR_TRANSLATION_MEMORY(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_TRANSLATION_MEMORY, GtrTranslationMemory))
 #define GTR_IS_TRANSLATION_MEMORY(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_TRANSLATION_MEMORY))
-#define GTR_TRANSLATION_MEMORY_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTR_TYPE_TRANSLATION_MEMORY, GtranslatorTranslationMemoryIface))
-typedef struct _GtranslatorTranslationMemory GtranslatorTranslationMemory;
-typedef struct _GtranslatorTranslationMemoryIface
-  GtranslatorTranslationMemoryIface;
+#define GTR_TRANSLATION_MEMORY_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTR_TYPE_TRANSLATION_MEMORY, GtrTranslationMemoryIface))
+typedef struct _GtrTranslationMemory GtrTranslationMemory;
+typedef struct _GtrTranslationMemoryIface
+  GtrTranslationMemoryIface;
 
-struct _GtranslatorTranslationMemoryIface
+struct _GtrTranslationMemoryIface
 {
   GTypeInterface g_iface;
 
 
-    gboolean (*store) (GtranslatorTranslationMemory * obj,
+    gboolean (*store) (GtrTranslationMemory * obj,
 		       const gchar * original, const gchar * translation);
-  GList *(*lookup) (GtranslatorTranslationMemory * obj, const gchar * phrase);
-  void (*set_max_omits) (GtranslatorTranslationMemory * obj, gsize omits);
-  void (*set_max_delta) (GtranslatorTranslationMemory * obj, gsize delta);
-  void (*set_max_items) (GtranslatorTranslationMemory * obj, gint items);
+  GList *(*lookup) (GtrTranslationMemory * obj, const gchar * phrase);
+  void (*set_max_omits) (GtrTranslationMemory * obj, gsize omits);
+  void (*set_max_delta) (GtrTranslationMemory * obj, gsize delta);
+  void (*set_max_items) (GtrTranslationMemory * obj, gint items);
 };
 
-typedef struct _GtranslatorTranslationMemoryMatch
-  GtranslatorTranslationMemoryMatch;
-struct _GtranslatorTranslationMemoryMatch
+typedef struct _GtrTranslationMemoryMatch
+  GtrTranslationMemoryMatch;
+struct _GtrTranslationMemoryMatch
 {
   gchar *match;
   gint level;
@@ -52,23 +52,23 @@ struct _GtranslatorTranslationMemoryMatch
 
 GType gtranslator_translation_memory_get_type (void);
 
-gboolean gtranslator_translation_memory_store (GtranslatorTranslationMemory *
+gboolean gtranslator_translation_memory_store (GtrTranslationMemory *
 					       obj, const gchar * original,
 					       const gchar * translation);
 
-GList *gtranslator_translation_memory_lookup (GtranslatorTranslationMemory *
+GList *gtranslator_translation_memory_lookup (GtrTranslationMemory *
 					      obj, const gchar * phrase);
 
 void
-gtranslator_translation_memory_set_max_omits (GtranslatorTranslationMemory *
+gtranslator_translation_memory_set_max_omits (GtrTranslationMemory *
 					      obj, gsize omits);
 
 void
-gtranslator_translation_memory_set_max_delta (GtranslatorTranslationMemory *
+gtranslator_translation_memory_set_max_delta (GtrTranslationMemory *
 					      obj, gsize delta);
 
 void
-gtranslator_translation_memory_set_max_items (GtranslatorTranslationMemory *
+gtranslator_translation_memory_set_max_items (GtrTranslationMemory *
 					      obj, gint items);
 
 G_END_DECLS

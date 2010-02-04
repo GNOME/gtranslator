@@ -124,8 +124,8 @@ gint
 main (gint argc, gchar * argv[])
 {
   GError *error = NULL;
-  GtranslatorPluginsEngine *engine;
-  GtranslatorWindow *window;
+  GtrPluginsEngine *engine;
+  GtrWindow *window;
   GSList *file_list = NULL;
   GOptionContext *context;
   gchar *filename;
@@ -144,7 +144,7 @@ main (gint argc, gchar * argv[])
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  g_set_application_name (_("Gtranslator"));
+  g_set_application_name (_("Gtr"));
   gtk_window_set_default_icon_name ("gtranslator");
 
   /* Setup command line options */

@@ -33,15 +33,15 @@
 #define GTR_DB_ORIG_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),		       \
 						 GTR_TYPE_DB_ORIG,     \
-						 GtranslatorDbOrigPrivate))
+						 GtrDbOrigPrivate))
 
-G_DEFINE_TYPE (GtranslatorDbOrig, gtranslator_db_orig, GTR_TYPE_DB_BASE)
-     struct _GtranslatorDbOrigPrivate
+G_DEFINE_TYPE (GtrDbOrig, gtranslator_db_orig, GTR_TYPE_DB_BASE)
+     struct _GtrDbOrigPrivate
      {
 
      };
 
-     static void gtranslator_db_orig_init (GtranslatorDbOrig * db_orig)
+     static void gtranslator_db_orig_init (GtrDbOrig * db_orig)
 {
   //db_orig->priv = GTR_DB_ORIG_GET_PRIVATE (db_orig);
 
@@ -56,11 +56,11 @@ gtranslator_db_orig_finalize (GObject * object)
 }
 
 static void
-gtranslator_db_orig_class_init (GtranslatorDbOrigClass * klass)
+gtranslator_db_orig_class_init (GtrDbOrigClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  //g_type_class_add_private (klass, sizeof (GtranslatorDbOrigPrivate));
+  //g_type_class_add_private (klass, sizeof (GtrDbOrigPrivate));
 
   object_class->finalize = gtranslator_db_orig_finalize;
 }
@@ -68,14 +68,14 @@ gtranslator_db_orig_class_init (GtranslatorDbOrigClass * klass)
 /**
  * gtranslator_db_orig_new:
  * 
- * Creates a new #GtranslatorDbOrig object.
+ * Creates a new #GtrDbOrig object.
  * 
- * Returns: a newly #GtranslatorDbOrig object
+ * Returns: a newly #GtrDbOrig object
  */
-GtranslatorDbOrig *
+GtrDbOrig *
 gtranslator_db_orig_new ()
 {
-  GtranslatorDbOrig *db_orig;
+  GtrDbOrig *db_orig;
 
   db_orig = g_object_new (GTR_TYPE_DB_ORIG, NULL);
 
@@ -84,9 +84,9 @@ gtranslator_db_orig_new ()
 
 /**
  * gtranslator_db_orig_write:
- * @orig: a #GtranslatorDbOrig
+ * @orig: a #GtrDbOrig
  * @string: string to store in the database
- * @value: the foreign key from #GtranslatorDbTrans
+ * @value: the foreign key from #GtrDbTrans
  *
  * Stores the @string in the database with the right foreign key @value.
  * It returns TRUE if there was not any error.
@@ -94,7 +94,7 @@ gtranslator_db_orig_new ()
  * Returns: TRUE if it was successfully stored.
  */
 gboolean
-gtranslator_db_orig_write (GtranslatorDbOrig * orig,
+gtranslator_db_orig_write (GtrDbOrig * orig,
 			   const gchar * string, db_recno_t value)
 {
   DBT key, data;
@@ -119,16 +119,16 @@ gtranslator_db_orig_write (GtranslatorDbOrig * orig,
 
 /**
  * gtranslator_db_orig_read:
- * @orig: a #GtranslatorDbOrig
- * @string: the primary key of the #GtranslatorDbOrig
+ * @orig: a #GtrDbOrig
+ * @string: the primary key of the #GtrDbOrig
  *
- * Gets the foreign key for #GtranslatorDbTrans for a given #GtranslatorDbOrig
+ * Gets the foreign key for #GtrDbTrans for a given #GtrDbOrig
  * primary key.
  *
- * Returns: the foreign key for #GtranslatorDbTrans
+ * Returns: the foreign key for #GtrDbTrans
  */
 db_recno_t
-gtranslator_db_orig_read (GtranslatorDbOrig * orig, const gchar * string)
+gtranslator_db_orig_read (GtrDbOrig * orig, const gchar * string)
 {
   DBT key, data;
   gint error;

@@ -38,34 +38,34 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_PLUGIN_MANAGER              (gtranslator_plugin_manager_get_type())
-#define GTR_PLUGIN_MANAGER(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GTR_TYPE_PLUGIN_MANAGER, GtranslatorPluginManager))
-#define GTR_PLUGIN_MANAGER_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GTR_TYPE_PLUGIN_MANAGER, GtranslatorPluginManagerClass))
+#define GTR_PLUGIN_MANAGER(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GTR_TYPE_PLUGIN_MANAGER, GtrPluginManager))
+#define GTR_PLUGIN_MANAGER_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GTR_TYPE_PLUGIN_MANAGER, GtrPluginManagerClass))
 #define GTR_IS_PLUGIN_MANAGER(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GTR_TYPE_PLUGIN_MANAGER))
 #define GTR_IS_PLUGIN_MANAGER_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_PLUGIN_MANAGER))
-#define GTR_PLUGIN_MANAGER_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GTR_TYPE_PLUGIN_MANAGER, GtranslatorPluginManagerClass))
+#define GTR_PLUGIN_MANAGER_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GTR_TYPE_PLUGIN_MANAGER, GtrPluginManagerClass))
 /* Private structure type */
-typedef struct _GtranslatorPluginManagerPrivate
-  GtranslatorPluginManagerPrivate;
+typedef struct _GtrPluginManagerPrivate
+  GtrPluginManagerPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorPluginManager GtranslatorPluginManager;
+typedef struct _GtrPluginManager GtrPluginManager;
 
-struct _GtranslatorPluginManager
+struct _GtrPluginManager
 {
   GtkVBox vbox;
 
   /*< private > */
-  GtranslatorPluginManagerPrivate *priv;
+  GtrPluginManagerPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorPluginManagerClass GtranslatorPluginManagerClass;
+typedef struct _GtrPluginManagerClass GtrPluginManagerClass;
 
-struct _GtranslatorPluginManagerClass
+struct _GtrPluginManagerClass
 {
   GtkVBoxClass parent_class;
 };

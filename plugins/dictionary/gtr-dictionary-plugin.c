@@ -26,12 +26,12 @@
 
 #include <glib/gi18n-lib.h>
 
-#define WINDOW_DATA_KEY	"GtranslatorDictPluginWindowData"
+#define WINDOW_DATA_KEY	"GtrDictPluginWindowData"
 
 #define GTR_DICT_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
 				GTR_TYPE_DICT_PLUGIN,		\
-				GtranslatorDictPluginPrivate))
+				GtrDictPluginPrivate))
 
 typedef struct
 {
@@ -39,11 +39,11 @@ typedef struct
   guint context_id;
 } WindowData;
 
-GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtranslatorDictPlugin,
+GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrDictPlugin,
 				    gtranslator_dict_plugin,
 				    gtranslator_dict_panel_register_type
 				    (module);)
-     static void gtranslator_dict_plugin_init (GtranslatorDictPlugin * plugin)
+     static void gtranslator_dict_plugin_init (GtrDictPlugin * plugin)
 {
 }
 
@@ -63,7 +63,7 @@ free_window_data (WindowData * data)
 
 
 static GtkWidget *
-create_dict_panel (GtranslatorWindow * window)
+create_dict_panel (GtrWindow * window)
 {
   GtkWidget *panel;
 
@@ -75,7 +75,7 @@ create_dict_panel (GtranslatorWindow * window)
 }
 
 static void
-impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_activate (GtrPlugin * plugin, GtrWindow * window)
 {
   WindowData *data;
 
@@ -88,7 +88,7 @@ impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 
   gtranslator_window_add_widget (window,
 				 data->panel,
-				 "GtranslatorDictionaryPlugin",
+				 "GtrDictionaryPlugin",
 				 _("Dictionary"),
 				 "dictionary-icon",
 				 GTR_WINDOW_PLACEMENT_LEFT);
@@ -99,7 +99,7 @@ impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 }
 
 static void
-impl_deactivate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
 {
   WindowData *data;
 
@@ -113,10 +113,10 @@ impl_deactivate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 }
 
 static void
-gtranslator_dict_plugin_class_init (GtranslatorDictPluginClass * klass)
+gtranslator_dict_plugin_class_init (GtrDictPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtranslatorPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
+  GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
   object_class->finalize = gtranslator_dict_plugin_finalize;
 

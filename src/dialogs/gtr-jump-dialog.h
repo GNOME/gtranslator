@@ -30,33 +30,33 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_JUMP_DIALOG		(gtranslator_jump_dialog_get_type ())
-#define GTR_JUMP_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_JUMP_DIALOG, GtranslatorJumpDialog))
-#define GTR_JUMP_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_JUMP_DIALOG, GtranslatorJumpDialogClass))
+#define GTR_JUMP_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_JUMP_DIALOG, GtrJumpDialog))
+#define GTR_JUMP_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_JUMP_DIALOG, GtrJumpDialogClass))
 #define GTR_IS_JUMP_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_JUMP_DIALOG))
 #define GTR_IS_JUMP_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_JUMP_DIALOG))
-#define GTR_JUMP_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_JUMP_DIALOG, GtranslatorJumpDialogClass))
+#define GTR_JUMP_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_JUMP_DIALOG, GtrJumpDialogClass))
 /* Private structure type */
-typedef struct _GtranslatorJumpDialogPrivate GtranslatorJumpDialogPrivate;
+typedef struct _GtrJumpDialogPrivate GtrJumpDialogPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorJumpDialog GtranslatorJumpDialog;
+typedef struct _GtrJumpDialog GtrJumpDialog;
 
-struct _GtranslatorJumpDialog
+struct _GtrJumpDialog
 {
   GtkDialog parent_instance;
 
   /*< private > */
-  GtranslatorJumpDialogPrivate *priv;
+  GtrJumpDialogPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorJumpDialogClass GtranslatorJumpDialogClass;
+typedef struct _GtrJumpDialogClass GtrJumpDialogClass;
 
-struct _GtranslatorJumpDialogClass
+struct _GtrJumpDialogClass
 {
   GtkDialogClass parent_class;
 };
@@ -70,7 +70,7 @@ gtranslator_jump_dialog_get_type (void)
 
      GType gtranslator_jump_dialog_register_type (GTypeModule * module);
 
-     void gtranslator_show_jump_dialog (GtranslatorWindow * window);
+     void gtranslator_show_jump_dialog (GtrWindow * window);
 
 G_END_DECLS
 #endif /* __JUMP_DIALOG_H__ */

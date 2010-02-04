@@ -35,7 +35,7 @@
 #include "gtr-plugin-info.h"
 #include "gtr-plugin.h"
 
-struct _GtranslatorPluginInfo
+struct _GtrPluginInfo
 {
   gint refcount;
 
@@ -43,7 +43,7 @@ struct _GtranslatorPluginInfo
 
   gchar *module_name;
   GType module_type;
-  GtranslatorModule *module;
+  GtrModule *module;
   gchar **dependencies;
 
   gchar *name;
@@ -54,7 +54,7 @@ struct _GtranslatorPluginInfo
   gchar *website;
   gchar *license;
 
-  GtranslatorPlugin *plugin;
+  GtrPlugin *plugin;
 
   gint active:1;
 
@@ -64,9 +64,9 @@ struct _GtranslatorPluginInfo
   gint available:1;
 };
 
-GtranslatorPluginInfo *_gtranslator_plugin_info_new (const gchar * file);
-void _gtranslator_plugin_info_ref (GtranslatorPluginInfo * info);
-void _gtranslator_plugin_info_unref (GtranslatorPluginInfo * info);
+GtrPluginInfo *_gtranslator_plugin_info_new (const gchar * file);
+void _gtranslator_plugin_info_ref (GtrPluginInfo * info);
+void _gtranslator_plugin_info_unref (GtrPluginInfo * info);
 
 
 #endif /* __GTR_PLUGIN_INFO_PRIV_H__ */

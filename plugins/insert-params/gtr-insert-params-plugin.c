@@ -29,9 +29,9 @@
 #include <gtk/gtk.h>
 #include <string.h>
 
-#define WINDOW_DATA_KEY "GtranslatorInsertParamsPluginWindowData"
+#define WINDOW_DATA_KEY "GtrInsertParamsPluginWindowData"
 
-GTR_PLUGIN_REGISTER_TYPE (GtranslatorInsertParamsPlugin,
+GTR_PLUGIN_REGISTER_TYPE (GtrInsertParamsPlugin,
 			  gtranslator_insert_params_plugin)
      static GSList *params = NULL;
      static gint param_position;
@@ -44,9 +44,9 @@ GTR_PLUGIN_REGISTER_TYPE (GtranslatorInsertParamsPlugin,
        "[diouxXeEfFgGaAcsCSpnm]";	// conversion specifier
 
      static void
-       on_next_tag_activated (GtkAction * action, GtranslatorWindow * window)
+       on_next_tag_activated (GtkAction * action, GtrWindow * window)
 {
-  GtranslatorView *view;
+  GtrView *view;
   GtkTextBuffer *buffer;
   GSList *param;
 
@@ -102,7 +102,7 @@ free_window_data (WindowData * data)
 }
 
 static void
-update_ui_real (GtranslatorWindow * window, WindowData * data)
+update_ui_real (GtrWindow * window, WindowData * data)
 {
   GtkTextView *view;
   GtkAction *action;
@@ -121,7 +121,7 @@ update_ui_real (GtranslatorWindow * window, WindowData * data)
 }
 
 static void
-gtranslator_insert_params_plugin_init (GtranslatorInsertParamsPlugin *
+gtranslator_insert_params_plugin_init (GtrInsertParamsPlugin *
 				       message_table)
 {
 }
@@ -140,11 +140,11 @@ gtranslator_insert_params_plugin_finalize (GObject * object)
 }
 
 static void
-on_menuitem_activated (GtkMenuItem * item, GtranslatorWindow * window)
+on_menuitem_activated (GtkMenuItem * item, GtrWindow * window)
 {
   const gchar *name;
   GtkWidget *label;
-  GtranslatorView *view;
+  GtrView *view;
   GtkTextBuffer *buffer;
 
   label = gtk_bin_get_child (GTK_BIN (item));
@@ -160,7 +160,7 @@ on_menuitem_activated (GtkMenuItem * item, GtranslatorWindow * window)
 }
 
 static void
-parse_list (GtranslatorWindow * window)
+parse_list (GtrWindow * window)
 {
   GtkUIManager *manager;
   GtkWidget *insert_params, *next_param;
@@ -203,8 +203,8 @@ parse_list (GtranslatorWindow * window)
 }
 
 static void
-showed_message_cb (GtranslatorTab * tab,
-		   GtranslatorMsg * msg, GtranslatorWindow * window)
+showed_message_cb (GtrTab * tab,
+		   GtrMsg * msg, GtrWindow * window)
 {
   const gchar *msgid;
   GRegex *regex;
@@ -266,19 +266,19 @@ showed_message_cb (GtranslatorTab * tab,
 
 static void
 page_added_cb (GtkNotebook * notebook,
-	       GtkWidget * child, guint page_num, GtranslatorWindow * window)
+	       GtkWidget * child, guint page_num, GtrWindow * window)
 {
   g_signal_connect (child, "showed-message",
 		    G_CALLBACK (showed_message_cb), window);
 }
 
 static void
-impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_activate (GtrPlugin * plugin, GtrWindow * window)
 {
   GtkUIManager *manager;
   WindowData *data;
   GError *error = NULL;
-  GtranslatorNotebook *notebook;
+  GtrNotebook *notebook;
   GList *tabs = NULL;
 
   g_return_if_fail (GTR_IS_WINDOW (window));
@@ -288,7 +288,7 @@ impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
   manager = gtranslator_window_get_ui_manager (window);
 
   data->action_group =
-    gtk_action_group_new ("GtranslatorInsertParamsPluginActions");
+    gtk_action_group_new ("GtrInsertParamsPluginActions");
   gtk_action_group_set_translation_domain (data->action_group,
 					   GETTEXT_PACKAGE);
   gtk_action_group_add_actions (data->action_group, action_entries,
@@ -332,9 +332,9 @@ impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 }
 
 static void
-impl_deactivate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
 {
-  GtranslatorNotebook *notebook;
+  GtrNotebook *notebook;
   GtkUIManager *manager;
   WindowData *data;
 
@@ -361,7 +361,7 @@ impl_deactivate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 }
 
 static void
-impl_update_ui (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_update_ui (GtrPlugin * plugin, GtrWindow * window)
 {
   WindowData *data;
 
@@ -374,10 +374,10 @@ impl_update_ui (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 
 static void
 gtranslator_insert_params_plugin_class_init
-  (GtranslatorInsertParamsPluginClass * klass)
+  (GtrInsertParamsPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtranslatorPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
+  GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
   object_class->finalize = gtranslator_insert_params_plugin_finalize;
 

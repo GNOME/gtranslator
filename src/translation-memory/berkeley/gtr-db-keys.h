@@ -28,33 +28,33 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_DB_KEYS		(gtranslator_db_keys_get_type ())
-#define GTR_DB_KEYS(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_DB_KEYS, GtranslatorDbKeys))
-#define GTR_DB_KEYS_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_DB_KEYS, GtranslatorDbKeysClass))
+#define GTR_DB_KEYS(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_DB_KEYS, GtrDbKeys))
+#define GTR_DB_KEYS_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_DB_KEYS, GtrDbKeysClass))
 #define GTR_IS_DB_KEYS(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_DB_KEYS))
 #define GTR_IS_DB_KEYS_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_DB_KEYS))
-#define GTR_DB_KEYS_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_DB_KEYS, GtranslatorDbKeysClass))
+#define GTR_DB_KEYS_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_DB_KEYS, GtrDbKeysClass))
 /* Private structure type */
-typedef struct _GtranslatorDbKeysPrivate GtranslatorDbKeysPrivate;
+typedef struct _GtrDbKeysPrivate GtrDbKeysPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorDbKeys GtranslatorDbKeys;
+typedef struct _GtrDbKeys GtrDbKeys;
 
-struct _GtranslatorDbKeys
+struct _GtrDbKeys
 {
   GObject parent_instance;
 
   /*< private > */
-  GtranslatorDbKeysPrivate *priv;
+  GtrDbKeysPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorDbKeysClass GtranslatorDbKeysClass;
+typedef struct _GtrDbKeysClass GtrDbKeysClass;
 
-struct _GtranslatorDbKeysClass
+struct _GtrDbKeysClass
 {
   GObjectClass parent_class;
 };
@@ -68,15 +68,15 @@ gtranslator_db_keys_get_type (void)
 
      GType gtranslator_db_keys_register_type (GTypeModule * module);
 
-     GtranslatorDbKeys *gtranslator_db_keys_new (DBT * data);
+     GtrDbKeys *gtranslator_db_keys_new (DBT * data);
 
-     GtranslatorDbKeys *gtranslator_db_keys_new_with_size (gsize cnt);
+     GtrDbKeys *gtranslator_db_keys_new_with_size (gsize cnt);
 
-     db_recno_t *gtranslator_db_keys_get_list (GtranslatorDbKeys * db_keys);
+     db_recno_t *gtranslator_db_keys_get_list (GtrDbKeys * db_keys);
 
-     gsize gtranslator_db_keys_get_count (GtranslatorDbKeys * db_keys);
+     gsize gtranslator_db_keys_get_count (GtrDbKeys * db_keys);
 
-     void gtranslator_db_keys_set_count (GtranslatorDbKeys * db_keys,
+     void gtranslator_db_keys_set_count (GtrDbKeys * db_keys,
 					 gsize count);
 
 G_END_DECLS

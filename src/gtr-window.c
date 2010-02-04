@@ -63,15 +63,15 @@
 #define GTR_WINDOW_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 					 (object),	\
 					 GTR_TYPE_WINDOW,     \
-					 GtranslatorWindowPrivate))
+					 GtrWindowPrivate))
 
 static void gtranslator_window_cmd_edit_toolbar (GtkAction * action,
-						 GtranslatorWindow * window);
+						 GtrWindow * window);
 
 
-G_DEFINE_TYPE (GtranslatorWindow, gtranslator_window, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE (GtrWindow, gtranslator_window, GTK_TYPE_WINDOW)
 
-struct _GtranslatorWindowPrivate
+struct _GtrWindowPrivate
 {
   GtkWidget *main_box;
 
@@ -84,7 +84,7 @@ struct _GtranslatorWindowPrivate
   guint documents_list_menu_ui_id;
 
   GtkWidget *notebook;
-  GtranslatorTab *active_tab;
+  GtrTab *active_tab;
 
   GtkWidget *dock;
   GdlDockLayout *layout_manager;
@@ -310,7 +310,7 @@ on_update_widget_view_menuitem (gpointer key, gpointer wid, gpointer data)
 
 static void
 on_layout_dirty_notify (GObject * object,
-			GParamSpec * pspec, GtranslatorWindow * window)
+			GParamSpec * pspec, GtrWindow * window)
 {
   if (!strcmp (pspec->name, "dirty"))
     {
@@ -326,7 +326,7 @@ on_layout_dirty_notify (GObject * object,
 }
 
 static void
-gtranslator_window_layout_save (GtranslatorWindow * window,
+gtranslator_window_layout_save (GtrWindow * window,
 				const gchar * filename, const gchar * name)
 {
   g_return_if_fail (GTR_IS_WINDOW (window));
@@ -338,7 +338,7 @@ gtranslator_window_layout_save (GtranslatorWindow * window,
 }
 
 static void
-gtranslator_window_layout_load (GtranslatorWindow * window,
+gtranslator_window_layout_load (GtrWindow * window,
 				const gchar * layout_filename,
 				const gchar * name)
 {
@@ -377,7 +377,7 @@ remove_from_widgets_hash (gpointer name,
 }
 
 static void
-on_widget_destroy (GtkWidget * widget, GtranslatorWindow * window)
+on_widget_destroy (GtkWidget * widget, GtrWindow * window)
 {
   //DEBUG_PRINT ("Widget about to be destroyed");
   g_hash_table_foreach_remove (window->priv->widgets,
@@ -386,7 +386,7 @@ on_widget_destroy (GtkWidget * widget, GtranslatorWindow * window)
 
 static void
 on_widget_remove (GtkWidget * container,
-		  GtkWidget * widget, GtranslatorWindow * window)
+		  GtkWidget * widget, GtrWindow * window)
 {
   GtkWidget *dock_item;
 
@@ -411,7 +411,7 @@ on_widget_remove (GtkWidget * container,
 static void
 on_widget_removed_from_hash (gpointer widget)
 {
-  GtranslatorWindow *window;
+  GtrWindow *window;
   GtkWidget *menuitem;
   GdlDockItem *dockitem;
 
@@ -437,12 +437,12 @@ on_widget_removed_from_hash (gpointer widget)
 }
 
 static void
-add_widget_full (GtranslatorWindow * window,
+add_widget_full (GtrWindow * window,
 		 GtkWidget * widget,
 		 const char *name,
 		 const char *title,
 		 const char *stock_id,
-		 GtranslatorWindowPlacement placement,
+		 GtrWindowPlacement placement,
 		 gboolean locked, GError ** error)
 {
   GtkWidget *item;
@@ -514,7 +514,7 @@ add_widget_full (GtranslatorWindow * window,
 }
 
 static void
-remove_widget (GtranslatorWindow * window,
+remove_widget (GtrWindow * window,
 	       GtkWidget * widget, GError ** error)
 {
   GtkWidget *dock_item;
@@ -535,7 +535,7 @@ remove_widget (GtranslatorWindow * window,
 }
 
 static void
-gtranslator_app_present_widget (GtranslatorWindow * window,
+gtranslator_app_present_widget (GtrWindow * window,
 				GtkWidget * widget, GError ** error)
 {
   GdlDockItem *dock_item;
@@ -570,8 +570,8 @@ gtranslator_app_present_widget (GtranslatorWindow * window,
 }
 
 void
-set_sensitive_according_to_message (GtranslatorWindow * window,
-				    GtranslatorPo * po)
+set_sensitive_according_to_message (GtrWindow * window,
+				    GtrPo * po)
 {
   GList *current;
   GtkAction *action;
@@ -627,16 +627,16 @@ set_sensitive_according_to_message (GtranslatorWindow * window,
 }
 
 static void
-set_sensitive_according_to_tab (GtranslatorWindow * window,
-				GtranslatorTab * tab)
+set_sensitive_according_to_tab (GtrWindow * window,
+				GtrTab * tab)
 {
-  GtranslatorNotebook *notebook;
-  GtranslatorView *view;
-  GtranslatorPo *po;
+  GtrNotebook *notebook;
+  GtrView *view;
+  GtrPo *po;
   GtkSourceBuffer *buf;
   GtkAction *action;
   GList *current;
-  GtranslatorPoState state;
+  GtrPoState state;
   gint pages;
   gint current_page;
 
@@ -694,7 +694,7 @@ set_sensitive_according_to_tab (GtranslatorWindow * window,
 }
 
 void
-set_sensitive_according_to_window (GtranslatorWindow * window)
+set_sensitive_according_to_window (GtrWindow * window)
 {
   gint pages;
 
@@ -710,11 +710,11 @@ set_sensitive_according_to_window (GtranslatorWindow * window)
  * in the statusbar widget.
  */
 static void
-gtranslator_window_update_statusbar_message_count (GtranslatorTab * tab,
-						   GtranslatorMsg * message,
-						   GtranslatorWindow * window)
+gtranslator_window_update_statusbar_message_count (GtrTab * tab,
+						   GtrMsg * message,
+						   GtrWindow * window)
 {
-  GtranslatorPo *po;
+  GtrPo *po;
   const gchar *status;
   gchar *msg;
   gchar *status_msg;
@@ -792,7 +792,7 @@ gtranslator_window_update_statusbar_message_count (GtranslatorTab * tab,
 
 static void
 documents_list_menu_activate (GtkToggleAction * action,
-			      GtranslatorWindow * window)
+			      GtrWindow * window)
 {
   gint n;
 
@@ -804,9 +804,9 @@ documents_list_menu_activate (GtkToggleAction * action,
 }
 
 static gchar *
-get_menu_tip_for_tab (GtranslatorTab * tab)
+get_menu_tip_for_tab (GtrTab * tab)
 {
-  GtranslatorPo *doc;
+  GtrPo *doc;
   gchar *uri;
   gchar *ruri;
   gchar *tip;
@@ -826,9 +826,9 @@ get_menu_tip_for_tab (GtranslatorTab * tab)
 }
 
 static void
-update_documents_list_menu (GtranslatorWindow * window)
+update_documents_list_menu (GtrWindow * window)
 {
-  GtranslatorWindowPrivate *p = window->priv;
+  GtrWindowPrivate *p = window->priv;
   GList *actions, *l;
   gint n, i;
   guint id;
@@ -918,7 +918,7 @@ update_documents_list_menu (GtranslatorWindow * window)
   p->documents_list_menu_ui_id = id;
 }
 
-static GtranslatorWindow *
+static GtrWindow *
 get_drop_window (GtkWidget * widget)
 {
   GtkWidget *target_window;
@@ -929,7 +929,7 @@ get_drop_window (GtkWidget * widget)
   return GTR_WINDOW (target_window);
 }
 
-/* Handle drops on the GtranslatorWindow */
+/* Handle drops on the GtrWindow */
 static void
 drag_data_received_cb (GtkWidget * widget,
 		       GdkDragContext * context,
@@ -938,7 +938,7 @@ drag_data_received_cb (GtkWidget * widget,
 		       GtkSelectionData * selection_data,
 		       guint info, guint time, gpointer data)
 {
-  GtranslatorWindow *window;
+  GtrWindow *window;
   GSList *locations;
 
   window = get_drop_window (widget);
@@ -958,7 +958,7 @@ drag_data_received_cb (GtkWidget * widget,
 
 static void
 update_overwrite_mode_statusbar (GtkTextView * view,
-				 GtranslatorWindow * window)
+				 GtrWindow * window)
 {
   if (view != GTK_TEXT_VIEW (gtranslator_window_get_active_view (window)))
     return;
@@ -973,11 +973,11 @@ update_overwrite_mode_statusbar (GtkTextView * view,
 }
 
 static void
-set_window_title (GtranslatorWindow * window, gboolean with_path)
+set_window_title (GtrWindow * window, gboolean with_path)
 {
-  GtranslatorPo *po;
-  GtranslatorPoState state;
-  GtranslatorTab *active_tab;
+  GtrPo *po;
+  GtrPoState state;
+  GtrTab *active_tab;
   GFile *file;
   gchar *title;
 
@@ -1010,12 +1010,12 @@ set_window_title (GtranslatorWindow * window, gboolean with_path)
 static void
 notebook_switch_page (GtkNotebook * nb,
 		      GtkNotebookPage * page,
-		      gint page_num, GtranslatorWindow * window)
+		      gint page_num, GtrWindow * window)
 {
-  GtranslatorTab *tab;
+  GtrTab *tab;
   GList *msg;
-  GtranslatorView *view;
-  GtranslatorPo *po;
+  GtrView *view;
+  GtrPo *po;
   gint n_pages;
   GtkAction *action;
   gchar *action_name;
@@ -1070,7 +1070,7 @@ notebook_switch_page (GtkNotebook * nb,
 static void
 notebook_page_removed (GtkNotebook * notebook,
 		       GtkWidget * child,
-		       guint page_num, GtranslatorWindow * window)
+		       guint page_num, GtrWindow * window)
 {
   gint n_pages;
 
@@ -1087,8 +1087,8 @@ notebook_page_removed (GtkNotebook * notebook,
 }
 
 static void
-notebook_tab_close_request (GtranslatorNotebook * notebook,
-			    GtranslatorTab * tab, GtranslatorWindow * window)
+notebook_tab_close_request (GtrNotebook * notebook,
+			    GtrTab * tab, GtrWindow * window)
 {
   /* Note: we are destroying the tab before the default handler
    * seems to be ok, but we need to keep an eye on this. */
@@ -1100,11 +1100,11 @@ notebook_tab_close_request (GtranslatorNotebook * notebook,
 
 static void
 can_undo (GtkSourceBuffer * doc,
-	  GParamSpec * pspec, GtranslatorWindow * window)
+	  GParamSpec * pspec, GtrWindow * window)
 {
   GtkAction *action;
   gboolean sensitive;
-  GtranslatorView *view;
+  GtrView *view;
   GtkSourceBuffer *buf;
 
   view = gtranslator_window_get_active_view (window);
@@ -1122,11 +1122,11 @@ can_undo (GtkSourceBuffer * doc,
 
 static void
 can_redo (GtkSourceBuffer * doc,
-	  GParamSpec * spec, GtranslatorWindow * window)
+	  GParamSpec * spec, GtrWindow * window)
 {
   GtkAction *action;
   gboolean sensitive;
-  GtranslatorView *view;
+  GtrView *view;
   GtkSourceBuffer *buf;
 
   view = gtranslator_window_get_active_view (window);
@@ -1143,8 +1143,8 @@ can_redo (GtkSourceBuffer * doc,
 }
 
 static void
-sync_state (GtranslatorPo * po,
-	    GParamSpec * pspec, GtranslatorWindow * window)
+sync_state (GtrPo * po,
+	    GParamSpec * pspec, GtrWindow * window)
 {
   int n_pages = 0;
 
@@ -1157,8 +1157,8 @@ sync_state (GtranslatorPo * po,
 }
 
 static void
-showed_message_cb (GtranslatorTab * tab,
-		   GtranslatorMsg * msg, GtranslatorWindow * window)
+showed_message_cb (GtrTab * tab,
+		   GtrMsg * msg, GtrWindow * window)
 {
   g_return_if_fail (GTR_IS_TAB (tab));
 
@@ -1170,10 +1170,10 @@ showed_message_cb (GtranslatorTab * tab,
 static void
 notebook_tab_added (GtkNotebook * notebook,
 		    GtkWidget * child,
-		    guint page_num, GtranslatorWindow * window)
+		    guint page_num, GtrWindow * window)
 {
   GList *views;
-  GtranslatorTab *tab = GTR_TAB (child);
+  GtrTab *tab = GTR_TAB (child);
   GtkTextBuffer *buffer;
   gint n_pages;
 
@@ -1226,7 +1226,7 @@ notebook_tab_added (GtkNotebook * notebook,
 }
 
 void
-gtranslator_recent_add (GtranslatorWindow * window,
+gtranslator_recent_add (GtrWindow * window,
 			GFile * location, gchar * project_id)
 {
   GtkRecentData *recent_data;
@@ -1264,7 +1264,7 @@ gtranslator_recent_add (GtranslatorWindow * window,
 }
 
 void
-gtranslator_recent_remove (GtranslatorWindow * window, const gchar * path)
+gtranslator_recent_remove (GtrWindow * window, const gchar * path)
 {
   gchar *uri;
   GError *error = NULL;
@@ -1291,7 +1291,7 @@ gtranslator_recent_remove (GtranslatorWindow * window, const gchar * path)
 
 static void
 gtranslator_recent_chooser_item_activated_cb (GtkRecentChooser * chooser,
-					      GtranslatorWindow * window)
+					      GtrWindow * window)
 {
   gchar *uri;
   GError *error = NULL;
@@ -1311,7 +1311,7 @@ gtranslator_recent_chooser_item_activated_cb (GtkRecentChooser * chooser,
 }
 
 static GtkWidget *
-create_recent_chooser_menu (GtranslatorWindow * window,
+create_recent_chooser_menu (GtrWindow * window,
 			    GtkRecentManager * manager)
 {
   GtkWidget *recent_menu;
@@ -1335,7 +1335,7 @@ create_recent_chooser_menu (GtranslatorWindow * window,
 }
 
 static void
-gtranslator_window_set_action_sensitive (GtranslatorWindow * window,
+gtranslator_window_set_action_sensitive (GtrWindow * window,
 					 const gchar * name,
 					 gboolean sensitive)
 {
@@ -1348,7 +1348,7 @@ static void
 gtranslator_window_cmd_edit_toolbar_cb (GtkDialog * dialog,
 					gint response, gpointer data)
 {
-  GtranslatorWindow *window = GTR_WINDOW (data);
+  GtrWindow *window = GTR_WINDOW (data);
   egg_editable_toolbar_set_edit_mode
     (EGG_EDITABLE_TOOLBAR (window->priv->toolbar), FALSE);
   _gtranslator_application_save_toolbars_model (GTR_APP);
@@ -1357,7 +1357,7 @@ gtranslator_window_cmd_edit_toolbar_cb (GtkDialog * dialog,
 
 static void
 gtranslator_window_cmd_edit_toolbar (GtkAction * action,
-				     GtranslatorWindow * window)
+				     GtrWindow * window)
 {
   GtkWidget *dialog;
   GtkWidget *editor;
@@ -1392,7 +1392,7 @@ gtranslator_window_cmd_edit_toolbar (GtkAction * action,
 }
 
 static void
-menu_item_select_cb (GtkMenuItem * proxy, GtranslatorWindow * window)
+menu_item_select_cb (GtkMenuItem * proxy, GtrWindow * window)
 {
   GtkAction *action;
   char *message;
@@ -1410,7 +1410,7 @@ menu_item_select_cb (GtkMenuItem * proxy, GtranslatorWindow * window)
 }
 
 static void
-menu_item_deselect_cb (GtkMenuItem * proxy, GtranslatorWindow * window)
+menu_item_deselect_cb (GtkMenuItem * proxy, GtrWindow * window)
 {
   gtranslator_statusbar_pop_default (GTR_STATUSBAR (window->priv->statusbar));
 }
@@ -1418,7 +1418,7 @@ menu_item_deselect_cb (GtkMenuItem * proxy, GtranslatorWindow * window)
 static void
 connect_proxy_cb (GtkUIManager * manager,
 		  GtkAction * action,
-		  GtkWidget * proxy, GtranslatorWindow * window)
+		  GtkWidget * proxy, GtrWindow * window)
 {
   if (GTK_IS_MENU_ITEM (proxy))
     {
@@ -1432,7 +1432,7 @@ connect_proxy_cb (GtkUIManager * manager,
 static void
 disconnect_proxy_cb (GtkUIManager * manager,
 		     GtkAction * action,
-		     GtkWidget * proxy, GtranslatorWindow * window)
+		     GtkWidget * proxy, GtrWindow * window)
 {
   if (GTK_IS_MENU_ITEM (proxy))
     {
@@ -1444,7 +1444,7 @@ disconnect_proxy_cb (GtkUIManager * manager,
 }
 
 static void
-gtranslator_window_draw (GtranslatorWindow * window)
+gtranslator_window_draw (GtrWindow * window)
 {
   GtkWidget *hbox;		//Statusbar and progressbar
   GtkWidget *widget;
@@ -1456,7 +1456,7 @@ gtranslator_window_draw (GtranslatorWindow * window)
   gchar *datadir;
   gchar *path;
 
-  GtranslatorWindowPrivate *priv = window->priv;
+  GtrWindowPrivate *priv = window->priv;
 
   /* Main box */
   priv->main_box = gtk_vbox_new (FALSE, 0);
@@ -1599,7 +1599,7 @@ gtranslator_window_draw (GtranslatorWindow * window)
 }
 
 static void
-gtranslator_window_init (GtranslatorWindow * window)
+gtranslator_window_init (GtrWindow * window)
 {
   GtkTargetList *tl;
   gint active_page;
@@ -1653,7 +1653,7 @@ gtranslator_window_init (GtranslatorWindow * window)
   /* Adding notebook to dock */
   add_widget_full (window,
 		   window->priv->notebook,
-		   "GtranslatorNotebook",
+		   "GtrNotebook",
 		   _("Documents"),
 		   NULL, GTR_WINDOW_PLACEMENT_CENTER, TRUE, NULL);
 
@@ -1669,8 +1669,8 @@ gtranslator_window_init (GtranslatorWindow * window)
 static void
 gtranslator_window_dispose (GObject * object)
 {
-  GtranslatorWindow *window = GTR_WINDOW (object);
-  GtranslatorWindowPrivate *priv = window->priv;
+  GtrWindow *window = GTR_WINDOW (object);
+  GtrWindowPrivate *priv = window->priv;
 
   if (priv->ui_manager)
     {
@@ -1693,7 +1693,7 @@ gtranslator_window_finalize (GObject * object)
 }
 
 static void
-save_panes_state (GtranslatorWindow * window)
+save_panes_state (GtrWindow * window)
 {
   gchar *filename;
   gchar *config_folder;
@@ -1716,7 +1716,7 @@ save_panes_state (GtranslatorWindow * window)
 static void
 gtranslator_window_destroy (GtkObject * object)
 {
-  GtranslatorWindow *window;
+  GtrWindow *window;
 
   window = GTR_WINDOW (object);
 
@@ -1734,7 +1734,7 @@ static gboolean
 gtranslator_window_configure_event (GtkWidget * widget,
 				    GdkEventConfigure * event)
 {
-  GtranslatorWindow *window = GTR_WINDOW (widget);
+  GtrWindow *window = GTR_WINDOW (widget);
 
   window->priv->width = event->width;
   window->priv->height = event->height;
@@ -1744,13 +1744,13 @@ gtranslator_window_configure_event (GtkWidget * widget,
 }
 
 static void
-gtranslator_window_class_init (GtranslatorWindowClass * klass)
+gtranslator_window_class_init (GtrWindowClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkObjectClass *gobject_class = GTK_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorWindowPrivate));
+  g_type_class_add_private (klass, sizeof (GtrWindowPrivate));
 
   object_class->finalize = gtranslator_window_finalize;
   object_class->dispose = gtranslator_window_dispose;
@@ -1764,18 +1764,18 @@ gtranslator_window_class_init (GtranslatorWindowClass * klass)
 
 /**
  * gtranslator_window_create_tab:
- * @window: a #GtranslatorWindow
- * @po: a #GtranslatorPo
+ * @window: a #GtrWindow
+ * @po: a #GtrPo
  * 
- * Adds a new #GtranslatorTab to the #GtranslatorNotebook and returns the
- * #GtranslatorTab.
+ * Adds a new #GtrTab to the #GtrNotebook and returns the
+ * #GtrTab.
  * 
- * Returns: a new #GtranslatorTab object
+ * Returns: a new #GtrTab object
  */
-GtranslatorTab *
-gtranslator_window_create_tab (GtranslatorWindow * window, GtranslatorPo * po)
+GtrTab *
+gtranslator_window_create_tab (GtrWindow * window, GtrPo * po)
 {
-  GtranslatorTab *tab;
+  GtrTab *tab;
 
   tab = gtranslator_tab_new (po);
   gtk_widget_show (GTK_WIDGET (tab));
@@ -1787,14 +1787,14 @@ gtranslator_window_create_tab (GtranslatorWindow * window, GtranslatorPo * po)
 
 /**
  * gtranslator_window_get_active_tab:
- * @window: a #GtranslatorWindow
+ * @window: a #GtrWindow
  * 
- * Gets the active #GtranslatorTab of the @window.
+ * Gets the active #GtrTab of the @window.
  *
- * Returns: the active #GtranslatorTab of the @window.
+ * Returns: the active #GtrTab of the @window.
  */
-GtranslatorTab *
-gtranslator_window_get_active_tab (GtranslatorWindow * window)
+GtrTab *
+gtranslator_window_get_active_tab (GtrWindow * window)
 {
   return
     gtranslator_notebook_get_page (GTR_NOTEBOOK (window->priv->notebook));
@@ -1802,14 +1802,14 @@ gtranslator_window_get_active_tab (GtranslatorWindow * window)
 
 /**
  * gtranslator_window_get_all_tabs:
- * @window: a #GtranslatorWindow
+ * @window: a #GtrWindow
  *
  * Gets a list of all tabs in the @window or NULL if there is no tab opened.
  *
  * Returns: a list of all tabs in the @window or NULL if there is no tab opened.
  */
 GList *
-gtranslator_window_get_all_tabs (GtranslatorWindow * window)
+gtranslator_window_get_all_tabs (GtrWindow * window)
 {
   gint num_pages;
   gint i = 0;
@@ -1832,20 +1832,20 @@ gtranslator_window_get_all_tabs (GtranslatorWindow * window)
 
 /**
  * gtranslator_window_get_header_from_active_tab:
- * @window: a #GtranslatorWindow
+ * @window: a #GtrWindow
  *
- * Gets the #GtranslatorHeader of the #GtranslatorPo of in the active
- * #GtranslatorTab.
+ * Gets the #GtrHeader of the #GtrPo of in the active
+ * #GtrTab.
  *
- * Returns: the #GtranslatorHeader of the #GtranslatorPo of in the active
- * #GtranslatorTab
+ * Returns: the #GtrHeader of the #GtrPo of in the active
+ * #GtrTab
  */
-GtranslatorHeader *
-gtranslator_window_get_header_from_active_tab (GtranslatorWindow * window)
+GtrHeader *
+gtranslator_window_get_header_from_active_tab (GtrWindow * window)
 {
-  GtranslatorTab *current_page;
-  GtranslatorPo *po;
-  GtranslatorHeader *header;
+  GtrTab *current_page;
+  GtrPo *po;
+  GtrHeader *header;
 
   g_return_val_if_fail (GTR_IS_WINDOW (window), NULL);
 
@@ -1861,42 +1861,42 @@ gtranslator_window_get_header_from_active_tab (GtranslatorWindow * window)
 
 /**
  * gtranslator_window_get_notebook:
- * @window: a #GtranslatorWindow
+ * @window: a #GtrWindow
  * 
- * Gets the main #GtranslatorNotebook of the @window.
+ * Gets the main #GtrNotebook of the @window.
  *
- * Returns: the #GtranslatorNotebook of the @window
+ * Returns: the #GtrNotebook of the @window
  */
-GtranslatorNotebook *
-gtranslator_window_get_notebook (GtranslatorWindow * window)
+GtrNotebook *
+gtranslator_window_get_notebook (GtrWindow * window)
 {
   return GTR_NOTEBOOK (window->priv->notebook);
 }
 
 /**
  * gtranslator_window_get_statusbar:
- * @window: a #GtranslatorWindow
+ * @window: a #GtrWindow
  *
  * Gets the statusbar widget of the window.
  *
  * Returns: the statusbar widget of the window
  */
 GtkWidget *
-gtranslator_window_get_statusbar (GtranslatorWindow * window)
+gtranslator_window_get_statusbar (GtrWindow * window)
 {
   return window->priv->statusbar;
 }
 
 /**
  * gtranslator_window_get_ui_manager:
- * @window: a #GtranslatorWindow
+ * @window: a #GtrWindow
  *
  * Gets the #GtkUIManager of the window.
  *
  * Returns: the #GtkUIManager of the @window
  */
 GtkUIManager *
-gtranslator_window_get_ui_manager (GtranslatorWindow * window)
+gtranslator_window_get_ui_manager (GtrWindow * window)
 {
   return window->priv->ui_manager;
 }
@@ -1911,10 +1911,10 @@ gtranslator_window_get_ui_manager (GtranslatorWindow * window)
  * Returns: the active translation view in the #GtranslationWindow or
  * NULL if there is not tab opened.
  **/
-GtranslatorView *
-gtranslator_window_get_active_view (GtranslatorWindow * window)
+GtrView *
+gtranslator_window_get_active_view (GtrWindow * window)
 {
-  GtranslatorTab *current_tab;
+  GtrTab *current_tab;
   current_tab = gtranslator_window_get_active_tab (window);
 
   if (!current_tab)
@@ -1934,7 +1934,7 @@ gtranslator_window_get_active_view (GtranslatorWindow * window)
  * Return value: a newly allocated list of #GtranslationWindow objects
  **/
 GList *
-gtranslator_window_get_all_views (GtranslatorWindow * window,
+gtranslator_window_get_all_views (GtrWindow * window,
 				  gboolean original, gboolean translated)
 {
   gint numtabs;
@@ -1963,23 +1963,23 @@ gtranslator_window_get_all_views (GtranslatorWindow * window,
 
 /**
  * gtranslator_window_add_widget:
- * @window: a #GtranslatorWindow
+ * @window: a #GtrWindow
  * @widget: the widget to add in the window
  * @name: the name of the widged
  * @title: the title
  * @stock_id: the stock id for the icon
- * @placement: a #GtranslatorWindowPlacement
+ * @placement: a #GtrWindowPlacement
  *
  * Adds a new widget to the @window in the placement you prefer with and 
  * specific name, title and icon you want.
  */
 void
-gtranslator_window_add_widget (GtranslatorWindow * window,
+gtranslator_window_add_widget (GtrWindow * window,
 			       GtkWidget * widget,
 			       const gchar * name,
 			       const gchar * title,
 			       const gchar * stock_id,
-			       GtranslatorWindowPlacement placement)
+			       GtrWindowPlacement placement)
 {
   /*FIXME: We have to manage the error */
   add_widget_full (window, widget,
@@ -1988,13 +1988,13 @@ gtranslator_window_add_widget (GtranslatorWindow * window,
 
 /**
  * gtranslator_window_remove_widget:
- * @window: a #GtranslatorWindow
+ * @window: a #GtrWindow
  * @widget: the widget to remove
  *
  * Removes from the @window the @widget if it exists.
  */
 void
-gtranslator_window_remove_widget (GtranslatorWindow * window,
+gtranslator_window_remove_widget (GtrWindow * window,
 				  GtkWidget * widget)
 {
   /*FIXME: We have to manage the error */
@@ -2003,14 +2003,14 @@ gtranslator_window_remove_widget (GtranslatorWindow * window,
 
 /**
  * _gtranslator_window_get_layout_manager:
- * @window: a #GtranslatorWindow
+ * @window: a #GtrWindow
  * 
  * Gets the GDL layout manager of the window.
  * 
  * Returns: the GDL layout manager of the window.
  */
 GObject *
-_gtranslator_window_get_layout_manager (GtranslatorWindow * window)
+_gtranslator_window_get_layout_manager (GtrWindow * window)
 {
   g_return_val_if_fail (GTR_IS_WINDOW (window), NULL);
 
@@ -2019,20 +2019,20 @@ _gtranslator_window_get_layout_manager (GtranslatorWindow * window)
 
 /**
  * gtranslator_window_get_tab_from_uri:
- * @window: a #GtranslatorWindow
- * @location: the GFile of the po file of the #GtranslatorTab
+ * @window: a #GtrWindow
+ * @location: the GFile of the po file of the #GtrTab
  *
- * Gets the #GtranslatorTab of the #GtranslatorWindows that matches with the
+ * Gets the #GtrTab of the #GtrWindows that matches with the
  * @location.
  *
- * Returns: the #GtranslatorTab which @location matches with its po file.
+ * Returns: the #GtrTab which @location matches with its po file.
  */
 GtkWidget *
-gtranslator_window_get_tab_from_location (GtranslatorWindow * window,
+gtranslator_window_get_tab_from_location (GtrWindow * window,
 					  GFile * location)
 {
   GList *tabs, *l;
-  GtranslatorPo *po;
+  GtrPo *po;
   GFile *po_location;
 
   g_return_val_if_fail (GTR_IS_WINDOW (window), NULL);
@@ -2059,13 +2059,13 @@ gtranslator_window_get_tab_from_location (GtranslatorWindow * window,
 
 /**
  * gtranslator_window_set_active_tab:
- * @window: a #GtranslatorWindow
- * @tab: a #GtranslatorTab
+ * @window: a #GtrWindow
+ * @tab: a #GtrTab
  *
  * Sets the active tab for the @window.
  */
 void
-gtranslator_window_set_active_tab (GtranslatorWindow * window,
+gtranslator_window_set_active_tab (GtrWindow * window,
 				   GtkWidget * tab)
 {
   gint page;
@@ -2077,15 +2077,15 @@ gtranslator_window_set_active_tab (GtranslatorWindow * window,
 
 /**
  * _gtranslator_window_close_tab:
- * @window: a #GtranslatorWindow
- * @tab: a #GtranslatorTab
+ * @window: a #GtrWindow
+ * @tab: a #GtrTab
  *
  * Closes the opened @tab of the @window and sets the right sensitivity of the
  * widgets.
  */
 void
-_gtranslator_window_close_tab (GtranslatorWindow * window,
-			       GtranslatorTab * tab)
+_gtranslator_window_close_tab (GtrWindow * window,
+			       GtrTab * tab)
 {
   gint i;
 
@@ -2110,7 +2110,7 @@ _gtranslator_window_close_tab (GtranslatorWindow * window,
   set_sensitive_according_to_window (window);
 }
 
-GtkWidget * gtranslator_window_get_tm_menu (GtranslatorWindow * window)
+GtkWidget * gtranslator_window_get_tm_menu (GtrWindow * window)
 {
   return window->priv->tm_menu;
 }

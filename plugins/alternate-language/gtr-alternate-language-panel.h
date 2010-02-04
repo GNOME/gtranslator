@@ -27,35 +27,35 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_ALTERNATE_LANG_PANEL		(gtranslator_alternate_lang_panel_get_type ())
-#define GTR_ALTERNATE_LANG_PANEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_ALTERNATE_LANG_PANEL, GtranslatorAlternateLangPanel))
-#define GTR_ALTERNATE_LANG_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_ALTERNATE_LANG_PANEL, GtranslatorAlternateLangPanelClass))
+#define GTR_ALTERNATE_LANG_PANEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_ALTERNATE_LANG_PANEL, GtrAlternateLangPanel))
+#define GTR_ALTERNATE_LANG_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_ALTERNATE_LANG_PANEL, GtrAlternateLangPanelClass))
 #define GTR_IS_ALTERNATE_LANG_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_ALTERNATE_LANG_PANEL))
 #define GTR_IS_ALTERNATE_LANG_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_ALTERNATE_LANG_PANEL))
-#define GTR_ALTERNATE_LANG_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_ALTERNATE_LANG_PANEL, GtranslatorAlternateLangPanelClass))
+#define GTR_ALTERNATE_LANG_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_ALTERNATE_LANG_PANEL, GtrAlternateLangPanelClass))
 /* Private structure type */
-typedef struct _GtranslatorAlternateLangPanelPrivate
-  GtranslatorAlternateLangPanelPrivate;
+typedef struct _GtrAlternateLangPanelPrivate
+  GtrAlternateLangPanelPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorAlternateLangPanel GtranslatorAlternateLangPanel;
+typedef struct _GtrAlternateLangPanel GtrAlternateLangPanel;
 
-struct _GtranslatorAlternateLangPanel
+struct _GtrAlternateLangPanel
 {
   GtkVBox parent_instance;
 
   /*< private > */
-  GtranslatorAlternateLangPanelPrivate *priv;
+  GtrAlternateLangPanelPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorAlternateLangPanelClass
-  GtranslatorAlternateLangPanelClass;
+typedef struct _GtrAlternateLangPanelClass
+  GtrAlternateLangPanelClass;
 
-struct _GtranslatorAlternateLangPanelClass
+struct _GtrAlternateLangPanelClass
 {
   GtkVBoxClass parent_class;
 };

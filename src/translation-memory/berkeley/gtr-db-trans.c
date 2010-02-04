@@ -33,15 +33,15 @@
 #define GTR_DB_TRANS_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),		       \
 						 GTR_TYPE_DB_TRANS,     \
-						 GtranslatorDbTransPrivate))
+						 GtrDbTransPrivate))
 
-G_DEFINE_TYPE (GtranslatorDbTrans, gtranslator_db_trans, GTR_TYPE_DB_BASE)
-     struct _GtranslatorDbTransPrivate
+G_DEFINE_TYPE (GtrDbTrans, gtranslator_db_trans, GTR_TYPE_DB_BASE)
+     struct _GtrDbTransPrivate
      {
 
      };
 
-     static void gtranslator_db_trans_init (GtranslatorDbTrans * db_trans)
+     static void gtranslator_db_trans_init (GtrDbTrans * db_trans)
 {
   //db_trans->priv = GTR_DB_TRANS_GET_PRIVATE (db_trans);
 
@@ -56,11 +56,11 @@ gtranslator_db_trans_finalize (GObject * object)
 }
 
 static void
-gtranslator_db_trans_class_init (GtranslatorDbTransClass * klass)
+gtranslator_db_trans_class_init (GtrDbTransClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  //g_type_class_add_private (klass, sizeof (GtranslatorDbTransPrivate));
+  //g_type_class_add_private (klass, sizeof (GtrDbTransPrivate));
 
   object_class->finalize = gtranslator_db_trans_finalize;
 }
@@ -68,14 +68,14 @@ gtranslator_db_trans_class_init (GtranslatorDbTransClass * klass)
 /**
  * gtranslator_db_trans_new:
  * 
- * Creates a new #GtranslatorDbTrans object.
+ * Creates a new #GtrDbTrans object.
  * 
- * Returns: a newly #GtranslatorDbTrans object
+ * Returns: a newly #GtrDbTrans object
  */
-GtranslatorDbTrans *
+GtrDbTrans *
 gtranslator_db_trans_new ()
 {
-  GtranslatorDbTrans *db_trans;
+  GtrDbTrans *db_trans;
 
   db_trans = g_object_new (GTR_TYPE_DB_TRANS, NULL);
 
@@ -84,7 +84,7 @@ gtranslator_db_trans_new ()
 
 /**
  * gtranslator_db_trans_write_string:
- * @db_trans: a #GtranslatorDbTrans
+ * @db_trans: a #GtrDbTrans
  * @translation: string to be stored in the database
  * @key: the index record in the database to be modified
  * 
@@ -93,7 +93,7 @@ gtranslator_db_trans_new ()
  * Returns: if @index is 0 then returns the new index, else returns @index
  */
 db_recno_t
-gtranslator_db_trans_write_string (GtranslatorDbTrans * db_trans,
+gtranslator_db_trans_write_string (GtrDbTrans * db_trans,
 				   const gchar * translation, db_recno_t key)
 {
   gchar *array[2];
@@ -111,7 +111,7 @@ gtranslator_db_trans_write_string (GtranslatorDbTrans * db_trans,
 
 /**
  * gtranslator_db_trans_write:
- * @db_trans: a #GtranslatorDbTrans
+ * @db_trans: a #GtrDbTrans
  * @translations: array of translations
  * @index: the index record in the database to be modified
  *
@@ -120,7 +120,7 @@ gtranslator_db_trans_write_string (GtranslatorDbTrans * db_trans,
  * Returns: if @index is 0 then returns the new index, else returns @index
  */
 db_recno_t
-gtranslator_db_trans_write (GtranslatorDbTrans * db_trans,
+gtranslator_db_trans_write (GtrDbTrans * db_trans,
 			    gchar ** translations, db_recno_t index)
 {
   DBT key, data;
@@ -200,7 +200,7 @@ gtranslator_db_trans_write (GtranslatorDbTrans * db_trans,
 
 /**
  * gtranslator_db_trans_read:
- * @db_trans: a #GtranslatorDbTrans
+ * @db_trans: a #GtrDbTrans
  * @index: the index record in the database
  *
  * Retrieves translations stored under given @index. Returns an #GPtrArray of
@@ -208,7 +208,7 @@ gtranslator_db_trans_write (GtranslatorDbTrans * db_trans,
  * The caller must free the #GPtrArray.
  */
 GPtrArray *
-gtranslator_db_trans_read (GtranslatorDbTrans * db_trans, db_recno_t index)
+gtranslator_db_trans_read (GtrDbTrans * db_trans, db_recno_t index)
 {
   DBT key, data;
   gint error;

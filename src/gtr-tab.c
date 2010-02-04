@@ -53,17 +53,17 @@
 #define GTR_TAB_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 					 (object),	\
 					 GTR_TYPE_TAB,     \
-					 GtranslatorTabPrivate))
+					 GtrTabPrivate))
 
 #define MAX_PLURALS 6
 
-#define GTR_TAB_KEY "GtranslatorTabFromDocument"
+#define GTR_TAB_KEY "GtrTabFromDocument"
 
-G_DEFINE_TYPE (GtranslatorTab, gtranslator_tab, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (GtrTab, gtranslator_tab, GTK_TYPE_VBOX)
 
-struct _GtranslatorTabPrivate
+struct _GtrTabPrivate
 {
-  GtranslatorPo *po;
+  GtrPo *po;
 
   GtkWidget *table_pane;
   GtkWidget *content_pane;
@@ -126,10 +126,10 @@ enum
 
 static guint signals[LAST_SIGNAL];
 
-static gboolean gtranslator_tab_autosave (GtranslatorTab * tab);
+static gboolean gtranslator_tab_autosave (GtrTab * tab);
 
 static void
-install_autosave_timeout (GtranslatorTab * tab)
+install_autosave_timeout (GtrTab * tab)
 {
   gint timeout;
 
@@ -145,7 +145,7 @@ install_autosave_timeout (GtranslatorTab * tab)
 }
 
 static gboolean
-install_autosave_timeout_if_needed (GtranslatorTab * tab)
+install_autosave_timeout_if_needed (GtrTab * tab)
 {
   g_return_val_if_fail (tab->priv->autosave_timeout <= 0, FALSE);
 
@@ -160,7 +160,7 @@ install_autosave_timeout_if_needed (GtranslatorTab * tab)
 }
 
 static gboolean
-gtranslator_tab_autosave (GtranslatorTab * tab)
+gtranslator_tab_autosave (GtrTab * tab)
 {
   GError *error = NULL;
 
@@ -178,7 +178,7 @@ gtranslator_tab_autosave (GtranslatorTab * tab)
 }
 
 static void
-remove_autosave_timeout (GtranslatorTab * tab)
+remove_autosave_timeout (GtrTab * tab)
 {
   g_return_if_fail (tab->priv->autosave_timeout > 0);
 
@@ -187,7 +187,7 @@ remove_autosave_timeout (GtranslatorTab * tab)
 }
 
 static void
-gtranslator_tab_showed_message (GtranslatorTab * tab, GtranslatorMsg * msg)
+gtranslator_tab_showed_message (GtrTab * tab, GtrMsg * msg)
 {
   if (strcmp (gtranslator_msg_get_comment (msg), "") != 0)
     gtk_widget_show (tab->priv->comment_button);
@@ -196,9 +196,9 @@ gtranslator_tab_showed_message (GtranslatorTab * tab, GtranslatorMsg * msg)
 }
 
 static void
-gtranslator_tab_edition_finished (GtranslatorTab * tab, GtranslatorMsg * msg)
+gtranslator_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
 {
-  GtranslatorTranslationMemory *tm;
+  GtrTranslationMemory *tm;
   gchar *message_error;
   GtkWidget *infobar;
 
@@ -238,13 +238,13 @@ gtranslator_tab_edition_finished (GtranslatorTab * tab, GtranslatorMsg * msg)
  */
 static void
 gtranslator_message_translation_update (GtkTextBuffer * textbuffer,
-					GtranslatorTab * tab)
+					GtrTab * tab)
 {
-  GtranslatorHeader *header;
+  GtrHeader *header;
   GtkTextIter start, end;
   GtkTextBuffer *buf;
   GList *msg_aux;
-  GtranslatorMsg *msg;
+  GtrMsg *msg;
   const gchar *check;
   gchar *translation;
   gint i;
@@ -351,9 +351,9 @@ gtranslator_tab_append_msgstr_page (const gchar * tab_label,
 }
 
 static void
-gtranslator_message_plural_forms (GtranslatorTab * tab, GtranslatorMsg * msg)
+gtranslator_message_plural_forms (GtrTab * tab, GtrMsg * msg)
 {
-  GtranslatorHeader *header;
+  GtrHeader *header;
   GtkTextBuffer *buf;
   const gchar *msgstr_plural;
   gint i;
@@ -403,7 +403,7 @@ gtranslator_tab_create_comment_button ()
 static void
 on_comment_button_clicked (GtkButton * button, gpointer useless)
 {
-  GtranslatorWindow *window =
+  GtrWindow *window =
     gtranslator_application_get_active_window (GTR_APP);
 
   gtranslator_show_comment_dialog (window);
@@ -412,16 +412,16 @@ on_comment_button_clicked (GtkButton * button, gpointer useless)
 /*
  * gtranslator_tab_show_message:
  * @tab: a #GtranslationTab
- * @msg: a #GtranslatorMsg
+ * @msg: a #GtrMsg
  * 
  * Shows the @msg in the @tab TextViews
  *
  */
 static void
-gtranslator_tab_show_message (GtranslatorTab * tab, GtranslatorMsg * msg)
+gtranslator_tab_show_message (GtrTab * tab, GtrMsg * msg)
 {
-  GtranslatorTabPrivate *priv = tab->priv;
-  GtranslatorPo *po;
+  GtrTabPrivate *priv = tab->priv;
+  GtrPo *po;
   GtkTextBuffer *buf;
   const gchar *msgid, *msgid_plural;
   const gchar *msgstr, *msgstr_plural;
@@ -474,7 +474,7 @@ gtranslator_tab_show_message (GtranslatorTab * tab, GtranslatorMsg * msg)
 }
 
 static void
-emit_message_changed_signal (GtkTextBuffer * buf, GtranslatorTab * tab)
+emit_message_changed_signal (GtkTextBuffer * buf, GtrTab * tab)
 {
   GList *msg;
 
@@ -484,10 +484,10 @@ emit_message_changed_signal (GtkTextBuffer * buf, GtranslatorTab * tab)
 }
 
 static void
-update_status (GtranslatorTab * tab, GtranslatorMsg * msg, gpointer useless)
+update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
 {
-  GtranslatorMsgStatus status;
-  GtranslatorPoState po_state;
+  GtrMsgStatus status;
+  GtrPoState po_state;
   gboolean fuzzy, translated;
 
   status = gtranslator_msg_get_status (msg);
@@ -543,7 +543,7 @@ update_status (GtranslatorTab * tab, GtranslatorMsg * msg, gpointer useless)
 
 static void
 comment_pane_position_changed (GObject * tab_gobject,
-			       GParamSpec * arg1, GtranslatorTab * tab)
+			       GParamSpec * arg1, GtrTab * tab)
 {
   gtranslator_prefs_manager_set_comment_pane_pos (gtk_paned_get_position
 						  (GTK_PANED (tab_gobject)));
@@ -551,17 +551,17 @@ comment_pane_position_changed (GObject * tab_gobject,
 
 static void
 content_pane_position_changed (GObject * tab_gobject,
-			       GParamSpec * arg1, GtranslatorTab * tab)
+			       GParamSpec * arg1, GtrTab * tab)
 {
   gtranslator_prefs_manager_set_content_pane_pos (gtk_paned_get_position
 						  (GTK_PANED (tab_gobject)));
 }
 
 static void
-gtranslator_tab_add_msgstr_tabs (GtranslatorTab * tab)
+gtranslator_tab_add_msgstr_tabs (GtrTab * tab)
 {
-  GtranslatorHeader *header;
-  GtranslatorTabPrivate *priv = tab->priv;
+  GtrHeader *header;
+  GtrTabPrivate *priv = tab->priv;
   gchar *label;
   GtkTextBuffer *buf;
   gint i = 0;
@@ -592,7 +592,7 @@ gtranslator_tab_add_msgstr_tabs (GtranslatorTab * tab)
 }
 
 static void
-gtranslator_tab_draw (GtranslatorTab * tab)
+gtranslator_tab_draw (GtrTab * tab)
 {
   gint current_page_num;
   GtkWidget *image;
@@ -603,7 +603,7 @@ gtranslator_tab_draw (GtranslatorTab * tab)
   GtkWidget *notebook, *tm_layout, *tm, *comments_label, *tm_label, *scroll;
   GtkWidget *hbox;
   GtkWidget *label;
-  GtranslatorTabPrivate *priv = tab->priv;
+  GtrTabPrivate *priv = tab->priv;
 
   /*
    * Panel
@@ -780,7 +780,7 @@ gtranslator_tab_draw (GtranslatorTab * tab)
 }
 
 static void
-gtranslator_tab_init (GtranslatorTab * tab)
+gtranslator_tab_init (GtrTab * tab)
 {
   tab->priv = GTR_TAB_GET_PRIVATE (tab);
 
@@ -801,7 +801,7 @@ gtranslator_tab_init (GtranslatorTab * tab)
 static void
 gtranslator_tab_finalize (GObject * object)
 {
-  GtranslatorTab *tab = GTR_TAB (object);
+  GtrTab *tab = GTR_TAB (object);
 
   if (tab->priv->po)
     g_object_unref (tab->priv->po);
@@ -820,7 +820,7 @@ gtranslator_tab_get_property (GObject * object,
 			      guint prop_id,
 			      GValue * value, GParamSpec * pspec)
 {
-  GtranslatorTab *tab = GTR_TAB (object);
+  GtrTab *tab = GTR_TAB (object);
 
   switch (prop_id)
     {
@@ -841,7 +841,7 @@ gtranslator_tab_set_property (GObject * object,
 			      guint prop_id,
 			      const GValue * value, GParamSpec * pspec)
 {
-  GtranslatorTab *tab = GTR_TAB (object);
+  GtrTab *tab = GTR_TAB (object);
 
   switch (prop_id)
     {
@@ -858,11 +858,11 @@ gtranslator_tab_set_property (GObject * object,
 }
 
 static void
-gtranslator_tab_class_init (GtranslatorTabClass * klass)
+gtranslator_tab_class_init (GtrTabClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorTabPrivate));
+  g_type_class_add_private (klass, sizeof (GtrTabPrivate));
 
   object_class->finalize = gtranslator_tab_finalize;
   object_class->set_property = gtranslator_tab_set_property;
@@ -875,7 +875,7 @@ gtranslator_tab_class_init (GtranslatorTabClass * klass)
     g_signal_new ("showed-message",
 		  G_OBJECT_CLASS_TYPE (klass),
 		  G_SIGNAL_RUN_LAST,
-		  G_STRUCT_OFFSET (GtranslatorTabClass, showed_message),
+		  G_STRUCT_OFFSET (GtrTabClass, showed_message),
 		  NULL, NULL,
 		  g_cclosure_marshal_VOID__POINTER,
 		  G_TYPE_NONE, 1, G_TYPE_POINTER);
@@ -884,7 +884,7 @@ gtranslator_tab_class_init (GtranslatorTabClass * klass)
     g_signal_new ("message-changed",
 		  G_OBJECT_CLASS_TYPE (klass),
 		  G_SIGNAL_RUN_LAST,
-		  G_STRUCT_OFFSET (GtranslatorTabClass, message_changed),
+		  G_STRUCT_OFFSET (GtrTabClass, message_changed),
 		  NULL, NULL,
 		  g_cclosure_marshal_VOID__POINTER,
 		  G_TYPE_NONE, 1, G_TYPE_POINTER);
@@ -893,7 +893,7 @@ gtranslator_tab_class_init (GtranslatorTabClass * klass)
     g_signal_new ("message-edition-finished",
 		  G_OBJECT_CLASS_TYPE (klass),
 		  G_SIGNAL_RUN_LAST,
-		  G_STRUCT_OFFSET (GtranslatorTabClass,
+		  G_STRUCT_OFFSET (GtrTabClass,
 				   message_edition_finished), NULL, NULL,
 		  g_cclosure_marshal_VOID__POINTER, G_TYPE_NONE, 1,
 		  G_TYPE_POINTER);
@@ -924,16 +924,16 @@ gtranslator_tab_class_init (GtranslatorTabClass * klass)
 
 /**
  * gtranslator_tab_new:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  * 
- * Creates a new #GtranslatorTab.
+ * Creates a new #GtrTab.
  * 
- * Return value: a new #GtranslatorTab object
+ * Return value: a new #GtrTab object
  **/
-GtranslatorTab *
-gtranslator_tab_new (GtranslatorPo * po)
+GtrTab *
+gtranslator_tab_new (GtrPo * po)
 {
-  GtranslatorTab *tab;
+  GtrTab *tab;
 
   g_return_val_if_fail (po != NULL, NULL);
 
@@ -959,12 +959,12 @@ gtranslator_tab_new (GtranslatorPo * po)
 
 /**
  * gtranslator_tab_get_po:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
- * Return value: the #GtranslatorPo stored in the #GtranslatorTab
+ * Return value: the #GtrPo stored in the #GtrTab
 **/
-GtranslatorPo *
-gtranslator_tab_get_po (GtranslatorTab * tab)
+GtrPo *
+gtranslator_tab_get_po (GtrTab * tab)
 {
   return tab->priv->po;
 }
@@ -976,7 +976,7 @@ gtranslator_tab_get_po (GtranslatorTab * tab)
  * Return value: the horizontal notebook of the #GtranslationTab
 **/
 GtkWidget *
-gtranslator_tab_get_panel (GtranslatorTab * tab)
+gtranslator_tab_get_panel (GtrTab * tab)
 {
   g_return_val_if_fail (tab != NULL, NULL);
 
@@ -990,7 +990,7 @@ gtranslator_tab_get_panel (GtranslatorTab * tab)
  * Return value: the number of the active translation notebook.
  **/
 gint
-gtranslator_tab_get_active_trans_tab (GtranslatorTab * tab)
+gtranslator_tab_get_active_trans_tab (GtrTab * tab)
 {
   return
     gtk_notebook_get_current_page (GTK_NOTEBOOK (tab->priv->trans_notebook));
@@ -998,24 +998,24 @@ gtranslator_tab_get_active_trans_tab (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_get_context_panel:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
  * Return value: the #GtranslaorContextPanel
  */
-GtranslatorContextPanel *
-gtranslator_tab_get_context_panel (GtranslatorTab * tab)
+GtrContextPanel *
+gtranslator_tab_get_context_panel (GtrTab * tab)
 {
   return GTR_CONTEXT_PANEL (tab->priv->context);
 }
 
 /**
  * gtranslator_tab_get_translation_memory_ui:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
- * Returns: the #GtranslatorTranslationMemoryUi panel.
+ * Returns: the #GtrTranslationMemoryUi panel.
  */
 GtkWidget *
-gtranslator_tab_get_translation_memory_ui (GtranslatorTab * tab)
+gtranslator_tab_get_translation_memory_ui (GtrTab * tab)
 {
   g_return_val_if_fail (GTR_IS_TAB (tab), NULL);
 
@@ -1028,8 +1028,8 @@ gtranslator_tab_get_translation_memory_ui (GtranslatorTab * tab)
  *
  * Return value: the active page of the translation notebook.
 **/
-GtranslatorView *
-gtranslator_tab_get_active_view (GtranslatorTab * tab)
+GtrView *
+gtranslator_tab_get_active_view (GtrTab * tab)
 {
   gint num;
 
@@ -1049,7 +1049,7 @@ gtranslator_tab_get_active_view (GtranslatorTab * tab)
  * Return value: a newly allocated list of #GtranslationTab objects
  */
 GList *
-gtranslator_tab_get_all_views (GtranslatorTab * tab,
+gtranslator_tab_get_all_views (GtrTab * tab,
 			       gboolean original, gboolean translated)
 {
   GList *ret = NULL;
@@ -1080,15 +1080,15 @@ gtranslator_tab_get_all_views (GtranslatorTab * tab,
 
 /**
  * gtranslator_tab_get_name:
- * @tab: a #GtranslatorTab 
+ * @tab: a #GtrTab 
  * 
  * Return value: a new allocated string with the name of the @tab.
  */
 gchar *
-gtranslator_tab_get_name (GtranslatorTab * tab)
+gtranslator_tab_get_name (GtrTab * tab)
 {
-  GtranslatorHeader *header;
-  GtranslatorPoState state;
+  GtrHeader *header;
+  GtrPoState state;
   const gchar *str;
   gchar *tab_name;
 
@@ -1108,19 +1108,19 @@ gtranslator_tab_get_name (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_message_go_to:
- * @tab: a #GtranslatorTab
- * @to_go: the #GtranslatorMsg you want to jump
+ * @tab: a #GtrTab
+ * @to_go: the #GtrMsg you want to jump
  * @searching: TRUE if we are searching in the message list
  *
  * Jumps to the specific @to_go pointer message and show the message
- * in the #GtranslatorView.
+ * in the #GtrView.
 **/
 void
-gtranslator_tab_message_go_to (GtranslatorTab * tab,
+gtranslator_tab_message_go_to (GtrTab * tab,
 			       GList * to_go,
-			       gboolean searching, GtranslatorTabMove move)
+			       gboolean searching, GtrTabMove move)
 {
-  GtranslatorPo *po;
+  GtrPo *po;
   GList *current_msg;
   static gboolean first_msg = TRUE;
 
@@ -1207,28 +1207,28 @@ gtranslator_tab_message_go_to (GtranslatorTab * tab,
 
 /**
  * _gtranslator_tab_can_close:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
- * Whether a #GtranslatorTab can be closed.
+ * Whether a #GtrTab can be closed.
  *
- * Returns: TRUE if the #GtranslatorPo of the @tab is already saved
+ * Returns: TRUE if the #GtrPo of the @tab is already saved
  */
 gboolean
-_gtranslator_tab_can_close (GtranslatorTab * tab)
+_gtranslator_tab_can_close (GtrTab * tab)
 {
   return gtranslator_po_get_state (tab->priv->po) == GTR_PO_STATE_SAVED;
 }
 
 /**
  * gtranslator_tab_get_from_document:
- * @po: a #GtranslatorPo
+ * @po: a #GtrPo
  *
- * Returns the #GtranslatorTab for a specific #GtranslatorPo.
+ * Returns the #GtrTab for a specific #GtrPo.
  *
- * Returns: the #GtranslatorTab for a specific #GtranslatorPo
+ * Returns: the #GtrTab for a specific #GtrPo
  */
-GtranslatorTab *
-gtranslator_tab_get_from_document (GtranslatorPo * po)
+GtrTab *
+gtranslator_tab_get_from_document (GtrPo * po)
 {
   gpointer res;
 
@@ -1241,14 +1241,14 @@ gtranslator_tab_get_from_document (GtranslatorPo * po)
 
 /**
  * gtranslator_tab_get_autosave_enabled:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  * 
  * Gets the current state for the autosave feature
  * 
  * Return value: TRUE if the autosave is enabled, else FALSE
  **/
 gboolean
-gtranslator_tab_get_autosave_enabled (GtranslatorTab * tab)
+gtranslator_tab_get_autosave_enabled (GtrTab * tab)
 {
   g_return_val_if_fail (GTR_IS_TAB (tab), FALSE);
 
@@ -1257,14 +1257,14 @@ gtranslator_tab_get_autosave_enabled (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_set_autosave_enabled:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  * @enable: enable (TRUE) or disable (FALSE) auto save
  * 
  * Enables or disables the autosave feature. It does not install an
  * autosave timeout if the document is new or is read-only
  **/
 void
-gtranslator_tab_set_autosave_enabled (GtranslatorTab * tab, gboolean enable)
+gtranslator_tab_set_autosave_enabled (GtrTab * tab, gboolean enable)
 {
   g_return_if_fail (GTR_IS_TAB (tab));
 
@@ -1292,14 +1292,14 @@ gtranslator_tab_set_autosave_enabled (GtranslatorTab * tab, gboolean enable)
 
 /**
  * gtranslator_tab_get_autosave_interval:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  * 
  * Gets the current interval for the autosaves
  * 
  * Return value: the value of the autosave
  **/
 gint
-gtranslator_tab_get_autosave_interval (GtranslatorTab * tab)
+gtranslator_tab_get_autosave_interval (GtrTab * tab)
 {
   g_return_val_if_fail (GTR_IS_TAB (tab), 0);
 
@@ -1308,7 +1308,7 @@ gtranslator_tab_get_autosave_interval (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_set_autosave_interval:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  * @interval: the new interval
  * 
  * Sets the interval for the autosave feature. It does nothing if the
@@ -1317,7 +1317,7 @@ gtranslator_tab_get_autosave_interval (GtranslatorTab * tab)
  * argument.
  **/
 void
-gtranslator_tab_set_autosave_interval (GtranslatorTab * tab, gint interval)
+gtranslator_tab_set_autosave_interval (GtrTab * tab, gint interval)
 {
   g_return_if_fail (GTR_IS_TAB (tab));
   g_return_if_fail (interval > 0);
@@ -1340,14 +1340,14 @@ gtranslator_tab_set_autosave_interval (GtranslatorTab * tab, gint interval)
 
 /**
  * gtranslator_tab_add_widget_to_lateral_panel:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  * @widget: a #GtkWidget
  * @tab_name: the tab name in the notebook
  *
  * Adds a new widget to the laberal panel notebook.
  */
 void
-gtranslator_tab_add_widget_to_lateral_panel (GtranslatorTab * tab,
+gtranslator_tab_add_widget_to_lateral_panel (GtrTab * tab,
 					     GtkWidget * widget,
 					     const gchar * tab_name)
 {
@@ -1364,13 +1364,13 @@ gtranslator_tab_add_widget_to_lateral_panel (GtranslatorTab * tab,
 
 /**
  * gtranslator_tab_remove_widget_from_lateral_panel:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  * @widget: a #GtkWidget
  *
  * Removes the @widget from the lateral panel notebook of @tab.
  */
 void
-gtranslator_tab_remove_widget_from_lateral_panel (GtranslatorTab * tab,
+gtranslator_tab_remove_widget_from_lateral_panel (GtrTab * tab,
 						  GtkWidget * widget)
 {
   gint page;
@@ -1386,13 +1386,13 @@ gtranslator_tab_remove_widget_from_lateral_panel (GtranslatorTab * tab,
 
 /**
  * gtranslator_tab_show_lateral_panel_widget:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  * @widget: the widget to be shown.
  *
  * Shows the notebook page of the @widget.
  */
 void
-gtranslator_tab_show_lateral_panel_widget (GtranslatorTab * tab,
+gtranslator_tab_show_lateral_panel_widget (GtrTab * tab,
 					   GtkWidget * widget)
 {
   gint page;
@@ -1405,15 +1405,15 @@ gtranslator_tab_show_lateral_panel_widget (GtranslatorTab * tab,
 
 /**
  * gtranslator_tab_clear_msgstr_views:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  * 
  * Clears all text from msgstr text views.
  */
 void
-gtranslator_tab_clear_msgstr_views (GtranslatorTab * tab)
+gtranslator_tab_clear_msgstr_views (GtrTab * tab)
 {
   gint i = 0;
-  GtranslatorHeader *header;
+  GtrHeader *header;
   GtkTextBuffer *buf;
 
   g_return_if_fail (GTR_IS_TAB (tab));
@@ -1434,12 +1434,12 @@ gtranslator_tab_clear_msgstr_views (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_copy_to_translation:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
  * Copies the text from the original text box to the translation text box.
  */
 void
-gtranslator_tab_copy_to_translation (GtranslatorTab * tab)
+gtranslator_tab_copy_to_translation (GtrTab * tab)
 {
   GtkTextBuffer *msgstr, *msgid;
   gint page_index;
@@ -1464,12 +1464,12 @@ gtranslator_tab_copy_to_translation (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_block_movement:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
  * Blocks the movement to the next/prev message.
  */
 void
-gtranslator_tab_block_movement (GtranslatorTab * tab)
+gtranslator_tab_block_movement (GtrTab * tab)
 {
   g_return_if_fail (GTR_IS_TAB (tab));
 
@@ -1478,12 +1478,12 @@ gtranslator_tab_block_movement (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_unblock_movement:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  * 
  * Unblocks the movement to the next/prev message.
  */
 void
-gtranslator_tab_unblock_movement (GtranslatorTab * tab)
+gtranslator_tab_unblock_movement (GtrTab * tab)
 {
   g_return_if_fail (GTR_IS_TAB (tab));
 
@@ -1492,14 +1492,14 @@ gtranslator_tab_unblock_movement (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_go_to_next:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
  * Moves to the next message or plural tab in case the message has plurals.
  */
 void
-gtranslator_tab_go_to_next (GtranslatorTab * tab)
+gtranslator_tab_go_to_next (GtrTab * tab)
 {
-  GtranslatorPo *po;
+  GtrPo *po;
 
   po = gtranslator_tab_get_po (tab);
 
@@ -1511,14 +1511,14 @@ gtranslator_tab_go_to_next (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_go_to_prev:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
  * Moves to the previous message or plural tab in case the message has plurals.
  */
 void
-gtranslator_tab_go_to_prev (GtranslatorTab * tab)
+gtranslator_tab_go_to_prev (GtrTab * tab)
 {
-  GtranslatorPo *po;
+  GtrPo *po;
 
   po = gtranslator_tab_get_po (tab);
 
@@ -1530,14 +1530,14 @@ gtranslator_tab_go_to_prev (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_go_to_first:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
  * Jumps to the first message.
  */
 void
-gtranslator_tab_go_to_first (GtranslatorTab * tab)
+gtranslator_tab_go_to_first (GtrTab * tab)
 {
-  GtranslatorPo *po;
+  GtrPo *po;
 
   po = gtranslator_tab_get_po (tab);
 
@@ -1549,14 +1549,14 @@ gtranslator_tab_go_to_first (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_go_to_last:
- * @tab: a #GtranslatorTab 
+ * @tab: a #GtrTab 
  *
  * Jumps to the last message.
  */
 void
-gtranslator_tab_go_to_last (GtranslatorTab * tab)
+gtranslator_tab_go_to_last (GtrTab * tab)
 {
-  GtranslatorPo *po;
+  GtrPo *po;
 
   po = gtranslator_tab_get_po (tab);
 
@@ -1568,16 +1568,16 @@ gtranslator_tab_go_to_last (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_go_to_next_fuzzy:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
  * If there is a next fuzzy message it jumps to it.
  *
  * Returns: TRUE if there is a next fuzzy message.
  */
 gboolean
-gtranslator_tab_go_to_next_fuzzy (GtranslatorTab * tab)
+gtranslator_tab_go_to_next_fuzzy (GtrTab * tab)
 {
-  GtranslatorPo *po;
+  GtrPo *po;
   GList *msg;
 
   po = gtranslator_tab_get_po (tab);
@@ -1594,16 +1594,16 @@ gtranslator_tab_go_to_next_fuzzy (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_go_to_prev_fuzzy:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
  * If there is a prev fuzzy message it jumps to it.
  *
  * Returns: TRUE if there is a prev fuzzy message.
  */
 gboolean
-gtranslator_tab_go_to_prev_fuzzy (GtranslatorTab * tab)
+gtranslator_tab_go_to_prev_fuzzy (GtrTab * tab)
 {
-  GtranslatorPo *po;
+  GtrPo *po;
   GList *msg;
 
   po = gtranslator_tab_get_po (tab);
@@ -1620,16 +1620,16 @@ gtranslator_tab_go_to_prev_fuzzy (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_go_to_next_untrans:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
  * If there is a next untranslated message it jumps to it.
  *
  * Returns: TRUE if there is a next untranslated message.
  */
 gboolean
-gtranslator_tab_go_to_next_untrans (GtranslatorTab * tab)
+gtranslator_tab_go_to_next_untrans (GtrTab * tab)
 {
-  GtranslatorPo *po;
+  GtrPo *po;
   GList *msg;
 
   po = gtranslator_tab_get_po (tab);
@@ -1646,16 +1646,16 @@ gtranslator_tab_go_to_next_untrans (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_go_to_prev_untrans:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
  * If there is a prev untranslated message it jumps to it.
  *
  * Returns: TRUE if there is a prev untranslated message.
  */
 gboolean
-gtranslator_tab_go_to_prev_untrans (GtranslatorTab * tab)
+gtranslator_tab_go_to_prev_untrans (GtrTab * tab)
 {
-  GtranslatorPo *po;
+  GtrPo *po;
   GList *msg;
 
   po = gtranslator_tab_get_po (tab);
@@ -1672,16 +1672,16 @@ gtranslator_tab_go_to_prev_untrans (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_go_to_next_fuzzy_or_untrans:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
  * If there is a next fuzzy or untranslated message it jumps to it.
  *
  * Returns: TRUE if there is a next fuzzy or untranslated message.
  */
 gboolean
-gtranslator_tab_go_to_next_fuzzy_or_untrans (GtranslatorTab * tab)
+gtranslator_tab_go_to_next_fuzzy_or_untrans (GtrTab * tab)
 {
-  GtranslatorPo *po;
+  GtrPo *po;
   GList *msg;
 
   po = gtranslator_tab_get_po (tab);
@@ -1698,16 +1698,16 @@ gtranslator_tab_go_to_next_fuzzy_or_untrans (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_go_to_prev_fuzzy_or_untrans:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  *
  * If there is a prev fuzzy or untranslated message it jumps to it.
  *
  * Returns: TRUE if there is a prev fuzzy or untranslated message.
  */
 gboolean
-gtranslator_tab_go_to_prev_fuzzy_or_untrans (GtranslatorTab * tab)
+gtranslator_tab_go_to_prev_fuzzy_or_untrans (GtrTab * tab)
 {
-  GtranslatorPo *po;
+  GtrPo *po;
   GList *msg;
 
   po = gtranslator_tab_get_po (tab);
@@ -1724,16 +1724,16 @@ gtranslator_tab_go_to_prev_fuzzy_or_untrans (GtranslatorTab * tab)
 
 /**
  * gtranslator_tab_go_to_number:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  * @number: the message number you want to jump
  *
  * Jumps to the message with the @number in the list, if the message does not
  * exists it does not jump.
  */
 void
-gtranslator_tab_go_to_number (GtranslatorTab * tab, gint number)
+gtranslator_tab_go_to_number (GtrTab * tab, gint number)
 {
-  GtranslatorPo *po;
+  GtrPo *po;
   GList *msg;
 
   po = gtranslator_tab_get_po (tab);
@@ -1747,13 +1747,13 @@ gtranslator_tab_go_to_number (GtranslatorTab * tab, gint number)
 
 /**
  * gtranslator_tab_set_info_bar:
- * @tab: a #GtranslatorTab
- * @infobar: a #GtranslatorMessageArea
+ * @tab: a #GtrTab
+ * @infobar: a #GtrMessageArea
  *
  * Sets the @infobar to be shown in the @tab.
  */
 void
-gtranslator_tab_set_info_bar (GtranslatorTab *tab,
+gtranslator_tab_set_info_bar (GtrTab *tab,
 			      GtkWidget      *infobar)
 {
   g_return_if_fail (GTR_IS_TAB (tab));

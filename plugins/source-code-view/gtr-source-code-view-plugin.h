@@ -29,38 +29,38 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN		(gtranslator_source_code_view_plugin_get_type ())
-#define GTR_SOURCE_CODE_VIEW_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN, GtranslatorSourceCodeViewPlugin))
-#define GTR_SOURCE_CODE_VIEW_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN, GtranslatorSourceCodeViewPluginClass))
+#define GTR_SOURCE_CODE_VIEW_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN, GtrSourceCodeViewPlugin))
+#define GTR_SOURCE_CODE_VIEW_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN, GtrSourceCodeViewPluginClass))
 #define GTR_IS_SOURCE_CODE_VIEW_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN))
 #define GTR_IS_SOURCE_CODE_VIEW_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN))
-#define GTR_SOURCE_CODE_VIEW_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN_PLUGIN, GtranslatorSourceCodeViewPluginClass))
+#define GTR_SOURCE_CODE_VIEW_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN_PLUGIN, GtrSourceCodeViewPluginClass))
 /* Private structure type */
-typedef struct _GtranslatorSourceCodeViewPluginPrivate
-  GtranslatorSourceCodeViewPluginPrivate;
+typedef struct _GtrSourceCodeViewPluginPrivate
+  GtrSourceCodeViewPluginPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorSourceCodeViewPlugin
-  GtranslatorSourceCodeViewPlugin;
+typedef struct _GtrSourceCodeViewPlugin
+  GtrSourceCodeViewPlugin;
 
-struct _GtranslatorSourceCodeViewPlugin
+struct _GtrSourceCodeViewPlugin
 {
-  GtranslatorPlugin parent_instance;
+  GtrPlugin parent_instance;
 
   /* private */
-  GtranslatorSourceCodeViewPluginPrivate *priv;
+  GtrSourceCodeViewPluginPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorSourceCodeViewPluginClass
-  GtranslatorSourceCodeViewPluginClass;
+typedef struct _GtrSourceCodeViewPluginClass
+  GtrSourceCodeViewPluginClass;
 
-struct _GtranslatorSourceCodeViewPluginClass
+struct _GtrSourceCodeViewPluginClass
 {
-  GtranslatorPluginClass parent_class;
+  GtrPluginClass parent_class;
 };
 
 /*

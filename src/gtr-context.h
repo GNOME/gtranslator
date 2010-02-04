@@ -27,33 +27,33 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_CONTEXT_PANEL		(gtranslator_context_panel_get_type ())
-#define GTR_CONTEXT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_CONTEXT_PANEL, GtranslatorContextPanel))
-#define GTR_CONTEXT_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_CONTEXT_PANEL, GtranslatorContextPanelClass))
+#define GTR_CONTEXT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_CONTEXT_PANEL, GtrContextPanel))
+#define GTR_CONTEXT_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_CONTEXT_PANEL, GtrContextPanelClass))
 #define GTR_IS_CONTEXT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_CONTEXT_PANEL))
 #define GTR_IS_CONTEXT_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_CONTEXT_PANEL))
-#define GTR_CONTEXT_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_CONTEXT_PANEL, GtranslatorContextPanelClass))
+#define GTR_CONTEXT_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_CONTEXT_PANEL, GtrContextPanelClass))
 /* Private structure type */
-typedef struct _GtranslatorContextPanelPrivate GtranslatorContextPanelPrivate;
+typedef struct _GtrContextPanelPrivate GtrContextPanelPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorContextPanel GtranslatorContextPanel;
+typedef struct _GtrContextPanel GtrContextPanel;
 
-struct _GtranslatorContextPanel
+struct _GtrContextPanel
 {
   GtkVBox parent_instance;
 
   /*< private > */
-  GtranslatorContextPanelPrivate *priv;
+  GtrContextPanelPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorContextPanelClass GtranslatorContextPanelClass;
+typedef struct _GtrContextPanelClass GtrContextPanelClass;
 
-struct _GtranslatorContextPanelClass
+struct _GtrContextPanelClass
 {
   GtkVBoxClass parent_class;
 };
@@ -71,7 +71,7 @@ gtranslator_context_panel_get_type (void)
 
      GtkTextView
        *gtranslator_context_panel_get_context_text_view
-       (GtranslatorContextPanel * panel);
+       (GtrContextPanel * panel);
 
 G_END_DECLS
 #endif /* __CONTEXT_PANEL_H__ */

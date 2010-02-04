@@ -30,34 +30,34 @@
  * Type checking and casting macros
  */
 #define GTR_TYPE_HEADER_DIALOG		(gtranslator_header_dialog_get_type ())
-#define GTR_HEADER_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_HEADER_DIALOG, GtranslatorHeaderDialog))
-#define GTR_HEADER_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_HEADER_DIALOG, GtranslatorHeaderDialogClass))
+#define GTR_HEADER_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_HEADER_DIALOG, GtrHeaderDialog))
+#define GTR_HEADER_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_HEADER_DIALOG, GtrHeaderDialogClass))
 #define GTR_IS_HEADER_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_HEADER_DIALOG))
 #define GTR_IS_HEADER_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_HEADER_DIALOG))
-#define GTR_HEADER_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_HEADER_DIALOG, GtranslatorHeaderDialogClass))
+#define GTR_HEADER_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_HEADER_DIALOG, GtrHeaderDialogClass))
 
 /* Private structure type */
-typedef struct _GtranslatorHeaderDialogPrivate GtranslatorHeaderDialogPrivate;
+typedef struct _GtrHeaderDialogPrivate GtrHeaderDialogPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorHeaderDialog GtranslatorHeaderDialog;
+typedef struct _GtrHeaderDialog GtrHeaderDialog;
 
-struct _GtranslatorHeaderDialog
+struct _GtrHeaderDialog
 {
   GtkDialog parent_instance;
 
   /*< private > */
-  GtranslatorHeaderDialogPrivate *priv;
+  GtrHeaderDialogPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorHeaderDialogClass GtranslatorHeaderDialogClass;
+typedef struct _GtrHeaderDialogClass GtrHeaderDialogClass;
 
-struct _GtranslatorHeaderDialogClass
+struct _GtrHeaderDialogClass
 {
   GtkDialogClass parent_class;
 };
@@ -71,6 +71,6 @@ gtranslator_header_dialog_get_type (void)
 
      GType gtranslator_header_dialog_register_type (GTypeModule * module);
 
-     void gtranslator_show_header_dialog (GtranslatorWindow * window);
+     void gtranslator_show_header_dialog (GtrWindow * window);
 
 #endif

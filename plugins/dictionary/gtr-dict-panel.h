@@ -29,33 +29,33 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_DICT_PANEL		(gtranslator_dict_panel_get_type ())
-#define GTR_DICT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_DICT_PANEL, GtranslatorDictPanel))
-#define GTR_DICT_PANEL_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_DICT_PANEL, GtranslatorDictPanelClass))
+#define GTR_DICT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_DICT_PANEL, GtrDictPanel))
+#define GTR_DICT_PANEL_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_DICT_PANEL, GtrDictPanelClass))
 #define GTR_IS_DICT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_DICT_PANEL))
 #define GTR_IS_DICT_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_DICT_PANEL))
-#define GTR_DICT_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_DICT_PANEL, GtranslatorDictPanelClass))
+#define GTR_DICT_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_DICT_PANEL, GtrDictPanelClass))
 /* Private structure type */
-typedef struct _GtranslatorDictPanelPrivate GtranslatorDictPanelPrivate;
+typedef struct _GtrDictPanelPrivate GtrDictPanelPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorDictPanel GtranslatorDictPanel;
+typedef struct _GtrDictPanel GtrDictPanel;
 
-struct _GtranslatorDictPanel
+struct _GtrDictPanel
 {
   GtkVBox parent_instance;
 
   /*< private > */
-  GtranslatorDictPanelPrivate *priv;
+  GtrDictPanelPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorDictPanelClass GtranslatorDictPanelClass;
+typedef struct _GtrDictPanelClass GtrDictPanelClass;
 
-struct _GtranslatorDictPanelClass
+struct _GtrDictPanelClass
 {
   GtkVBoxClass parent_class;
 };
@@ -69,9 +69,9 @@ gtranslator_dict_panel_get_type (void)
 
      GType gtranslator_dict_panel_register_type (GTypeModule * module);
 
-     GtkWidget *gtranslator_dict_panel_new (GtranslatorWindow * window);
+     GtkWidget *gtranslator_dict_panel_new (GtrWindow * window);
 
-     void gtranslator_dict_panel_set_position (GtranslatorDictPanel * panel,
+     void gtranslator_dict_panel_set_position (GtrDictPanel * panel,
 					       gint pos);
 
 G_END_DECLS

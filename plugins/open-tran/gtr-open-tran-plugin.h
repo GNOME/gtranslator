@@ -29,36 +29,36 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_OPEN_TRAN_PLUGIN		(gtranslator_open_tran_plugin_get_type ())
-#define GTR_OPEN_TRAN_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_OPEN_TRAN_PLUGIN, GtranslatorOpenTranPlugin))
-#define GTR_OPEN_TRAN_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_OPEN_TRAN_PLUGIN, GtranslatorOpenTranPluginClass))
+#define GTR_OPEN_TRAN_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_OPEN_TRAN_PLUGIN, GtrOpenTranPlugin))
+#define GTR_OPEN_TRAN_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_OPEN_TRAN_PLUGIN, GtrOpenTranPluginClass))
 #define GTR_IS_OPEN_TRAN_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_OPEN_TRAN_PLUGIN))
 #define GTR_IS_OPEN_TRAN_PLUGIN_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_OPEN_TRAN_PLUGIN))
-#define GTR_OPEN_TRAN_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_OPEN_TRAN_PLUGIN, GtranslatorOpenTranPluginClass))
+#define GTR_OPEN_TRAN_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_OPEN_TRAN_PLUGIN, GtrOpenTranPluginClass))
 /* Private structure type */
-typedef struct _GtranslatorOpenTranPluginPrivate
-  GtranslatorOpenTranPluginPrivate;
+typedef struct _GtrOpenTranPluginPrivate
+  GtrOpenTranPluginPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorOpenTranPlugin GtranslatorOpenTranPlugin;
+typedef struct _GtrOpenTranPlugin GtrOpenTranPlugin;
 
-struct _GtranslatorOpenTranPlugin
+struct _GtrOpenTranPlugin
 {
-  GtranslatorPlugin parent_instance;
+  GtrPlugin parent_instance;
 
   /* private */
-  GtranslatorOpenTranPluginPrivate *priv;
+  GtrOpenTranPluginPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorOpenTranPluginClass GtranslatorOpenTranPluginClass;
+typedef struct _GtrOpenTranPluginClass GtrOpenTranPluginClass;
 
-struct _GtranslatorOpenTranPluginClass
+struct _GtrOpenTranPluginClass
 {
-  GtranslatorPluginClass parent_class;
+  GtrPluginClass parent_class;
 };
 
 /*

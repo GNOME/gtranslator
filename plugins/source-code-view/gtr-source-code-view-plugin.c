@@ -45,9 +45,9 @@
 #define GTR_SOURCE_CODE_VIEW_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
 				GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN,		\
-				GtranslatorSourceCodeViewPluginPrivate))
+				GtrSourceCodeViewPluginPrivate))
 
-struct _GtranslatorSourceCodeViewPluginPrivate
+struct _GtrSourceCodeViewPluginPrivate
 {
   GConfClient *gconf_client;
 
@@ -60,16 +60,16 @@ struct _GtranslatorSourceCodeViewPluginPrivate
   GtkWidget *program_cmd_entry;
   GtkWidget *line_cmd_entry;
 
-  GtranslatorWindow *window;
+  GtrWindow *window;
 
   GSList *tags;
 };
 
-GTR_PLUGIN_REGISTER_TYPE (GtranslatorSourceCodeViewPlugin,
+GTR_PLUGIN_REGISTER_TYPE (GtrSourceCodeViewPlugin,
 			  gtranslator_source_code_view_plugin)
      static void insert_link (GtkTextBuffer * buffer, GtkTextIter * iter,
 			      const gchar * path, gint * line,
-			      GtranslatorSourceCodeViewPlugin * plugin,
+			      GtrSourceCodeViewPlugin * plugin,
 			      const gchar * msgid)
 {
   GtkTextTag *tag;
@@ -128,7 +128,7 @@ show_in_editor (const gchar * program_name,
 }
 
 static void
-show_source (GtranslatorSourceCodeViewPlugin * plugin,
+show_source (GtrSourceCodeViewPlugin * plugin,
 	     const gchar * path, gint line)
 {
   gboolean use_editor;
@@ -215,12 +215,12 @@ out:
 }
 
 static void
-follow_if_link (GtranslatorSourceCodeViewPlugin * plugin,
+follow_if_link (GtrSourceCodeViewPlugin * plugin,
 		GtkWidget * text_view, GtkTextIter * iter)
 {
   GSList *tags = NULL, *tagp = NULL;
-  GtranslatorTab *tab;
-  GtranslatorPo *po;
+  GtrTab *tab;
+  GtrPo *po;
   gchar *fullpath;
   gchar *dirname;
   GFile *location, *parent;
@@ -273,7 +273,7 @@ follow_if_link (GtranslatorSourceCodeViewPlugin * plugin,
 
 static gboolean
 event_after (GtkWidget * text_view,
-	     GdkEvent * ev, GtranslatorSourceCodeViewPlugin * plugin)
+	     GdkEvent * ev, GtrSourceCodeViewPlugin * plugin)
 {
   GtkTextIter start, end, iter;
   GtkTextBuffer *buffer;
@@ -392,7 +392,7 @@ visibility_notify_event (GtkWidget * text_view, GdkEventVisibility * event)
 }
 
 static void
-gtranslator_source_code_view_plugin_init (GtranslatorSourceCodeViewPlugin *
+gtranslator_source_code_view_plugin_init (GtrSourceCodeViewPlugin *
 					  plugin)
 {
   plugin->priv = GTR_SOURCE_CODE_VIEW_PLUGIN_GET_PRIVATE (plugin);
@@ -409,7 +409,7 @@ gtranslator_source_code_view_plugin_init (GtranslatorSourceCodeViewPlugin *
 static void
 gtranslator_source_code_view_plugin_finalize (GObject * object)
 {
-  GtranslatorSourceCodeViewPlugin *plugin =
+  GtrSourceCodeViewPlugin *plugin =
     GTR_SOURCE_CODE_VIEW_PLUGIN (object);
 
   gconf_client_suggest_sync (plugin->priv->gconf_client, NULL);
@@ -421,9 +421,9 @@ gtranslator_source_code_view_plugin_finalize (GObject * object)
 }
 
 static void
-showed_message_cb (GtranslatorTab * tab,
-		   GtranslatorMsg * msg,
-		   GtranslatorSourceCodeViewPlugin * plugin)
+showed_message_cb (GtrTab * tab,
+		   GtrMsg * msg,
+		   GtrSourceCodeViewPlugin * plugin)
 {
   const gchar *filename = NULL;
   gint i = 0;
@@ -431,7 +431,7 @@ showed_message_cb (GtranslatorTab * tab,
   GtkTextIter iter;
   GtkTextBuffer *buffer;
   GtkTextView *view;
-  GtranslatorContextPanel *panel;
+  GtrContextPanel *panel;
   GtkTextMark *path_start, *path_end;
 
   panel = gtranslator_tab_get_context_panel (tab);
@@ -465,12 +465,12 @@ showed_message_cb (GtranslatorTab * tab,
 }
 
 static void
-delete_text_and_tags (GtranslatorTab * tab,
-		      GtranslatorSourceCodeViewPlugin * plugin)
+delete_text_and_tags (GtrTab * tab,
+		      GtrSourceCodeViewPlugin * plugin)
 {
   GSList *tagp = NULL, *tags;
   GtkTextBuffer *buffer;
-  GtranslatorContextPanel *panel;
+  GtrContextPanel *panel;
   GtkTextView *view;
   GtkTextIter start, end;
   GtkTextMark *path_start, *path_end;
@@ -515,9 +515,9 @@ delete_text_and_tags (GtranslatorTab * tab,
 }
 
 static void
-message_edition_finished_cb (GtranslatorTab * tab,
-			     GtranslatorMsg * msg,
-			     GtranslatorSourceCodeViewPlugin * plugin)
+message_edition_finished_cb (GtrTab * tab,
+			     GtrMsg * msg,
+			     GtrSourceCodeViewPlugin * plugin)
 {
   delete_text_and_tags (tab, plugin);
 }
@@ -525,9 +525,9 @@ message_edition_finished_cb (GtranslatorTab * tab,
 static void
 page_added_cb (GtkNotebook * notebook,
 	       GtkWidget * child,
-	       guint page_num, GtranslatorSourceCodeViewPlugin * plugin)
+	       guint page_num, GtrSourceCodeViewPlugin * plugin)
 {
-  GtranslatorContextPanel *panel;
+  GtrContextPanel *panel;
   GtkTextView *view;
 
   panel = gtranslator_tab_get_context_panel (GTR_TAB (child));
@@ -549,14 +549,14 @@ page_added_cb (GtkNotebook * notebook,
 
 static void
 use_editor_toggled (GtkToggleButton * button,
-		    GtranslatorSourceCodeViewPlugin * plugin)
+		    GtrSourceCodeViewPlugin * plugin)
 {
   gtk_widget_set_sensitive (plugin->priv->program_box,
 			    gtk_toggle_button_get_active (button));
 }
 
 static GtkWidget *
-get_configuration_dialog (GtranslatorSourceCodeViewPlugin * plugin)
+get_configuration_dialog (GtrSourceCodeViewPlugin * plugin)
 {
 
   gboolean ret;
@@ -625,10 +625,10 @@ get_configuration_dialog (GtranslatorSourceCodeViewPlugin * plugin)
 }
 
 static void
-impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_activate (GtrPlugin * plugin, GtrWindow * window)
 {
   GtkWidget *notebook;
-  GtranslatorSourceCodeViewPlugin *source_code_view =
+  GtrSourceCodeViewPlugin *source_code_view =
     GTR_SOURCE_CODE_VIEW_PLUGIN (plugin);
   GList *tabs, *l;
 
@@ -651,7 +651,7 @@ impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
   tabs = gtranslator_window_get_all_tabs (window);
   for (l = tabs; l != NULL; l = g_list_next (l))
     {
-      GtranslatorPo *po;
+      GtrPo *po;
       GList *msg;
 
       page_added_cb (GTK_NOTEBOOK (notebook),
@@ -666,11 +666,11 @@ impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 }
 
 static void
-impl_deactivate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
 {
   GList *tabs, *l;
   GtkTextView *view;
-  GtranslatorContextPanel *panel;
+  GtrContextPanel *panel;
   GtkWidget *notebook;
 
   tabs = gtranslator_window_get_all_tabs (window);
@@ -697,7 +697,7 @@ impl_deactivate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 }
 
 static void
-ok_button_pressed (GtranslatorSourceCodeViewPlugin * plugin)
+ok_button_pressed (GtrSourceCodeViewPlugin * plugin)
 {
   const gchar *program_cmd;
   const gchar *line_cmd;
@@ -737,7 +737,7 @@ ok_button_pressed (GtranslatorSourceCodeViewPlugin * plugin)
 static void
 configure_dialog_response_cb (GtkWidget * widget,
 			      gint response,
-			      GtranslatorSourceCodeViewPlugin * plugin)
+			      GtrSourceCodeViewPlugin * plugin)
 {
   switch (response)
     {
@@ -756,7 +756,7 @@ configure_dialog_response_cb (GtkWidget * widget,
 }
 
 static GtkWidget *
-impl_create_configure_dialog (GtranslatorPlugin * plugin)
+impl_create_configure_dialog (GtrPlugin * plugin)
 {
   GtkWidget *dialog;
 
@@ -774,10 +774,10 @@ impl_create_configure_dialog (GtranslatorPlugin * plugin)
 
 static void
 gtranslator_source_code_view_plugin_class_init
-  (GtranslatorSourceCodeViewPluginClass * klass)
+  (GtrSourceCodeViewPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtranslatorPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
+  GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
   object_class->finalize = gtranslator_source_code_view_plugin_finalize;
 
@@ -786,5 +786,5 @@ gtranslator_source_code_view_plugin_class_init
   plugin_class->create_configure_dialog = impl_create_configure_dialog;
 
   g_type_class_add_private (object_class,
-			    sizeof (GtranslatorSourceCodeViewPluginPrivate));
+			    sizeof (GtrSourceCodeViewPluginPrivate));
 }

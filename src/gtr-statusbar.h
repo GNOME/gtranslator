@@ -25,24 +25,24 @@
 
 G_BEGIN_DECLS
 #define GTR_TYPE_STATUSBAR		(gtranslator_statusbar_get_type ())
-#define GTR_STATUSBAR(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_STATUSBAR, GtranslatorStatusbar))
-#define GTR_STATUSBAR_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_STATUSBAR, GtranslatorStatusbarClass))
+#define GTR_STATUSBAR(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_STATUSBAR, GtrStatusbar))
+#define GTR_STATUSBAR_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_STATUSBAR, GtrStatusbarClass))
 #define GTR_IS_STATUSBAR(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_STATUSBAR))
 #define GTR_IS_STATUSBAR_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_STATUSBAR))
-#define GTR_STATUSBAR_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_STATUSBAR, GtranslatorStatusbarClass))
-typedef struct _GtranslatorStatusbar GtranslatorStatusbar;
-typedef struct _GtranslatorStatusbarPrivate GtranslatorStatusbarPrivate;
-typedef struct _GtranslatorStatusbarClass GtranslatorStatusbarClass;
+#define GTR_STATUSBAR_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_STATUSBAR, GtrStatusbarClass))
+typedef struct _GtrStatusbar GtrStatusbar;
+typedef struct _GtrStatusbarPrivate GtrStatusbarPrivate;
+typedef struct _GtrStatusbarClass GtrStatusbarClass;
 
-struct _GtranslatorStatusbar
+struct _GtrStatusbar
 {
   GtkHBox parent;
 
   /* <private/> */
-  GtranslatorStatusbarPrivate *priv;
+  GtrStatusbarPrivate *priv;
 };
 
-struct _GtranslatorStatusbarClass
+struct _GtrStatusbarClass
 {
   GtkHBoxClass parent_class;
 };
@@ -53,40 +53,40 @@ gtranslator_statusbar_get_type (void)
 
      GtkWidget *gtranslator_statusbar_new (void);
 
-     void gtranslator_statusbar_push_default (GtranslatorStatusbar *
+     void gtranslator_statusbar_push_default (GtrStatusbar *
 					      statusbar, const gchar * text);
 
-     void gtranslator_statusbar_pop_default (GtranslatorStatusbar *
+     void gtranslator_statusbar_pop_default (GtrStatusbar *
 					     statusbar);
 
-     guint gtranslator_statusbar_push (GtranslatorStatusbar * statusbar,
+     guint gtranslator_statusbar_push (GtrStatusbar * statusbar,
 				       guint context_id, const gchar * text);
 
-     void gtranslator_statusbar_pop (GtranslatorStatusbar * statusbar,
+     void gtranslator_statusbar_pop (GtrStatusbar * statusbar,
 				     guint context_id);
 
-     guint gtranslator_statusbar_get_context_id (GtranslatorStatusbar *
+     guint gtranslator_statusbar_get_context_id (GtrStatusbar *
 						 statusbar,
 						 const gchar *
 						 context_description);
 
-     void gtranslator_statusbar_set_overwrite (GtranslatorStatusbar *
+     void gtranslator_statusbar_set_overwrite (GtrStatusbar *
 					       statusbar, gboolean overwrite);
 
-     void gtranslator_statusbar_clear_overwrite (GtranslatorStatusbar *
+     void gtranslator_statusbar_clear_overwrite (GtrStatusbar *
 						 statusbar);
 
-     void gtranslator_statusbar_flash_message (GtranslatorStatusbar *
+     void gtranslator_statusbar_flash_message (GtrStatusbar *
 					       statusbar, guint context_id,
 					       const gchar * format,
 					       ...) G_GNUC_PRINTF (3, 4);
 
-     void gtranslator_statusbar_update_progress_bar (GtranslatorStatusbar *
+     void gtranslator_statusbar_update_progress_bar (GtrStatusbar *
 						     statusbar,
 						     gdouble translated_count,
 						     gdouble messages_count);
 
-     void gtranslator_statusbar_clear_progress_bar (GtranslatorStatusbar *
+     void gtranslator_statusbar_clear_progress_bar (GtrStatusbar *
 						    statusbar);
 
 G_END_DECLS

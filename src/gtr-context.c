@@ -30,21 +30,21 @@
 #define GTR_CONTEXT_PANEL_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),		       \
 						 GTR_TYPE_CONTEXT_PANEL,     \
-						 GtranslatorContextPanelPrivate))
+						 GtrContextPanelPrivate))
 
-G_DEFINE_TYPE (GtranslatorContextPanel, gtranslator_context_panel,
+G_DEFINE_TYPE (GtrContextPanel, gtranslator_context_panel,
 	       GTK_TYPE_VBOX)
-     struct _GtranslatorContextPanelPrivate
+     struct _GtrContextPanelPrivate
      {
        GtkWidget *context;
 
-       GtranslatorTab *tab;
+       GtrTab *tab;
      };
 
      static void
-       showed_message_cb (GtranslatorTab * tab,
-			  GtranslatorMsg * msg,
-			  GtranslatorContextPanel * panel)
+       showed_message_cb (GtrTab * tab,
+			  GtrMsg * msg,
+			  GtrContextPanel * panel)
 {
   GtkTextBuffer *buffer;
   GtkTextIter iter;
@@ -76,9 +76,9 @@ G_DEFINE_TYPE (GtranslatorContextPanel, gtranslator_context_panel,
 }
 
 static void
-gtranslator_context_panel_draw (GtranslatorContextPanel * panel)
+gtranslator_context_panel_draw (GtrContextPanel * panel)
 {
-  GtranslatorContextPanelPrivate *priv = panel->priv;
+  GtrContextPanelPrivate *priv = panel->priv;
   GtkWidget *context_scrolled_window;
 
   /*
@@ -109,7 +109,7 @@ gtranslator_context_panel_draw (GtranslatorContextPanel * panel)
 
 
 static void
-gtranslator_context_panel_init (GtranslatorContextPanel * panel)
+gtranslator_context_panel_init (GtrContextPanel * panel)
 {
   panel->priv = GTR_CONTEXT_PANEL_GET_PRIVATE (panel);
 
@@ -123,27 +123,27 @@ gtranslator_context_panel_finalize (GObject * object)
 }
 
 static void
-gtranslator_context_panel_class_init (GtranslatorContextPanelClass * klass)
+gtranslator_context_panel_class_init (GtrContextPanelClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorContextPanelPrivate));
+  g_type_class_add_private (klass, sizeof (GtrContextPanelPrivate));
 
   object_class->finalize = gtranslator_context_panel_finalize;
 }
 
 /**
  * gtranslator_context_panel_new:
- * @tab: a #GtranslatorTab
+ * @tab: a #GtrTab
  * 
- * Creates a new #GtranslatorContextPanel object.
+ * Creates a new #GtrContextPanel object.
  * 
- * Returns: a new #GtranslatorContextPanel object
+ * Returns: a new #GtrContextPanel object
  */
 GtkWidget *
 gtranslator_context_panel_new (GtkWidget * tab)
 {
-  GtranslatorContextPanel *context;
+  GtrContextPanel *context;
   context = g_object_new (GTR_TYPE_CONTEXT_PANEL, NULL);
 
   context->priv->tab = GTR_TAB (tab);
@@ -156,12 +156,12 @@ gtranslator_context_panel_new (GtkWidget * tab)
 
 /**
  * gtranslator_context_panel_get_extracted_text_view:
- * @panel: a #GtranslatorContextPanel
+ * @panel: a #GtrContextPanel
  *
  * Returns: the context #GtkTextView
  */
 GtkTextView *
-gtranslator_context_panel_get_context_text_view (GtranslatorContextPanel *
+gtranslator_context_panel_get_context_text_view (GtrContextPanel *
 						 panel)
 {
   g_return_val_if_fail (GTR_IS_CONTEXT_PANEL (panel), NULL);

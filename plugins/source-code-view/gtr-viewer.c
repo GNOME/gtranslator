@@ -35,11 +35,11 @@
 #define GTR_VIEWER_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 	(object),	\
 						 	GTR_TYPE_VIEWER,     \
-						 	GtranslatorViewerPrivate))
+						 	GtrViewerPrivate))
 
 
-G_DEFINE_TYPE (GtranslatorViewer, gtranslator_viewer, GTK_TYPE_DIALOG)
-     struct _GtranslatorViewerPrivate
+G_DEFINE_TYPE (GtrViewer, gtranslator_viewer, GTK_TYPE_DIALOG)
+     struct _GtrViewerPrivate
      {
        GtkWidget *main_box;
        GtkWidget *view;
@@ -56,7 +56,7 @@ G_DEFINE_TYPE (GtranslatorViewer, gtranslator_viewer, GTK_TYPE_DIALOG)
 }
 
 static void
-gtranslator_viewer_init (GtranslatorViewer * dlg)
+gtranslator_viewer_init (GtrViewer * dlg)
 {
   gboolean ret;
   GtkWidget *error_widget;
@@ -133,11 +133,11 @@ gtranslator_viewer_finalize (GObject * object)
 }
 
 static void
-gtranslator_viewer_class_init (GtranslatorViewerClass * klass)
+gtranslator_viewer_class_init (GtrViewerClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorViewerPrivate));
+  g_type_class_add_private (klass, sizeof (GtrViewerPrivate));
 
   object_class->finalize = gtranslator_viewer_finalize;
 }
@@ -412,10 +412,10 @@ jump_to_line (GtkTextView * view, gint line)
 }
 
 void
-gtranslator_show_viewer (GtranslatorWindow * window,
+gtranslator_show_viewer (GtrWindow * window,
 			 const gchar * path, gint line)
 {
-  static GtranslatorViewer *dlg = NULL;
+  static GtrViewer *dlg = NULL;
 
   g_return_if_fail (GTR_IS_WINDOW (window));
 

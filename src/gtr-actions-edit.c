@@ -33,9 +33,9 @@
 #include "gtr-window.h"
 
 void
-gtranslator_actions_edit_undo (GtkAction * action, GtranslatorWindow * window)
+gtranslator_actions_edit_undo (GtkAction * action, GtrWindow * window)
 {
-  GtranslatorView *active_view;
+  GtrView *active_view;
   GtkSourceBuffer *active_document;
 
   active_view = gtranslator_window_get_active_view (window);
@@ -53,9 +53,9 @@ gtranslator_actions_edit_undo (GtkAction * action, GtranslatorWindow * window)
 }
 
 void
-gtranslator_actions_edit_redo (GtkAction * action, GtranslatorWindow * window)
+gtranslator_actions_edit_redo (GtkAction * action, GtrWindow * window)
 {
-  GtranslatorView *active_view;
+  GtrView *active_view;
   GtkSourceBuffer *active_document;
 
   active_view = gtranslator_window_get_active_view (window);
@@ -73,9 +73,9 @@ gtranslator_actions_edit_redo (GtkAction * action, GtranslatorWindow * window)
 }
 
 void
-gtranslator_actions_edit_cut (GtkAction * action, GtranslatorWindow * window)
+gtranslator_actions_edit_cut (GtkAction * action, GtrWindow * window)
 {
-  GtranslatorView *active_view;
+  GtrView *active_view;
 
   active_view = gtranslator_window_get_active_view (window);
   g_return_if_fail (active_view);
@@ -86,9 +86,9 @@ gtranslator_actions_edit_cut (GtkAction * action, GtranslatorWindow * window)
 }
 
 void
-gtranslator_actions_edit_copy (GtkAction * action, GtranslatorWindow * window)
+gtranslator_actions_edit_copy (GtkAction * action, GtrWindow * window)
 {
-  GtranslatorView *active_view;
+  GtrView *active_view;
 
   active_view = gtranslator_window_get_active_view (window);
   g_return_if_fail (active_view);
@@ -100,9 +100,9 @@ gtranslator_actions_edit_copy (GtkAction * action, GtranslatorWindow * window)
 
 void
 gtranslator_actions_edit_paste (GtkAction * action,
-				GtranslatorWindow * window)
+				GtrWindow * window)
 {
-  GtranslatorView *active_view;
+  GtrView *active_view;
 
   active_view = gtranslator_window_get_active_view (window);
   g_return_if_fail (active_view);
@@ -118,9 +118,9 @@ gtranslator_actions_edit_paste (GtkAction * action,
  */
 void
 gtranslator_message_copy_to_translation (GtkAction * action,
-					 GtranslatorWindow * window)
+					 GtrWindow * window)
 {
-  GtranslatorTab *current;
+  GtrTab *current;
 
   current = gtranslator_window_get_active_tab (window);
 
@@ -132,10 +132,10 @@ gtranslator_message_copy_to_translation (GtkAction * action,
  */
 void
 gtranslator_message_status_toggle_fuzzy (GtkAction * action,
-					 GtranslatorWindow * window)
+					 GtrWindow * window)
 {
-  GtranslatorTab *current;
-  GtranslatorPo *po;
+  GtrTab *current;
+  GtrPo *po;
   GList *msg;
 
   current = gtranslator_window_get_active_tab (window);
@@ -155,30 +155,30 @@ gtranslator_message_status_toggle_fuzzy (GtkAction * action,
 
 void
 gtranslator_actions_edit_preferences (GtkAction * action,
-				      GtranslatorWindow * window)
+				      GtrWindow * window)
 {
   gtranslator_show_preferences_dialog (window);
 }
 
 void
 gtranslator_actions_edit_header (GtkAction * action,
-				 GtranslatorWindow * window)
+				 GtrWindow * window)
 {
   gtranslator_show_header_dialog (window);
 }
 
 void
 gtranslator_edit_message_comment (GtkAction * action,
-				  GtranslatorWindow * window)
+				  GtrWindow * window)
 {
   gtranslator_show_comment_dialog (window);
 }
 
 void
 gtranslator_actions_edit_clear (GtkAction * action,
-				GtranslatorWindow * window)
+				GtrWindow * window)
 {
-  GtranslatorTab *tab;
+  GtrTab *tab;
 
   g_return_if_fail (GTR_IS_WINDOW (window));
 

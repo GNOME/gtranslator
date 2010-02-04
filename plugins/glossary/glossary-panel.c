@@ -35,9 +35,9 @@
 #define GTR_GLOSSARY_PANEL_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),		       \
 						 GTR_TYPE_GLOSSARY_PANEL,     \
-						 GtranslatorGlossaryPanelPrivate))
+						 GtrGlossaryPanelPrivate))
 
-G_DEFINE_TYPE (GtranslatorGlossaryPanel, gtranslator_glossary_panel,
+G_DEFINE_TYPE (GtrGlossaryPanel, gtranslator_glossary_panel,
 	       GTK_TYPE_VBOX)
 #define XML_FILE_NAME "glossary.xml"
 /*
@@ -58,7 +58,7 @@ G_DEFINE_TYPE (GtranslatorGlossaryPanel, gtranslator_glossary_panel,
        N_COLUMNS
      };
 
-     struct _GtranslatorGlossaryPanelPrivate
+     struct _GtrGlossaryPanelPrivate
      {
        GtkWidget *tree;
        GtkWidget *search_entry;
@@ -116,7 +116,7 @@ G_DEFINE_TYPE (GtranslatorGlossaryPanel, gtranslator_glossary_panel,
 static void
 process_node (xmlNode * root_node)
 {
-  GtranslatorGlossaryPanelPrivate *priv;
+  GtrGlossaryPanelPrivate *priv;
 
   xmlNodePtr cur_node;
 
@@ -125,23 +125,23 @@ process_node (xmlNode * root_node)
 }
 
 static gboolean
-gtranslator_glossary_panel_load_items (GtranslatorGlossaryPanel * panel)
+gtranslator_glossary_panel_load_items (GtrGlossaryPanel * panel)
 {
-  GtranslatorGlossaryPanelPrivate *priv = panel->priv;
+  GtrGlossaryPanelPrivate *priv = panel->priv;
 
   return FALSE;
 }
 
 static void
-gtranslator_glossary_panel_draw (GtranslatorGlossaryPanel * panel)
+gtranslator_glossary_panel_draw (GtrGlossaryPanel * panel)
 {
-  GtranslatorGlossaryPanelPrivate *priv = panel->priv;
+  GtrGlossaryPanelPrivate *priv = panel->priv;
 
   priv->tree = gtk_tree_view_new ();
 }
 
 static void
-gtranslator_glossary_panel_init (GtranslatorGlossaryPanel * panel)
+gtranslator_glossary_panel_init (GtrGlossaryPanel * panel)
 {
   panel->priv = GTR_GLOSSARY_PANEL_GET_PRIVATE (panel);
 
@@ -155,11 +155,11 @@ gtranslator_glossary_panel_finalize (GObject * object)
 }
 
 static void
-gtranslator_glossary_panel_class_init (GtranslatorGlossaryPanelClass * klass)
+gtranslator_glossary_panel_class_init (GtrGlossaryPanelClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorGlossaryPanelPrivate));
+  g_type_class_add_private (klass, sizeof (GtrGlossaryPanelPrivate));
 
   object_class->finalize = gtranslator_glossary_panel_finalize;
 }

@@ -30,38 +30,38 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_NOTEBOOK		(gtranslator_notebook_get_type ())
-#define GTR_NOTEBOOK(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_NOTEBOOK, GtranslatorNotebook))
-#define GTR_NOTEBOOK_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_NOTEBOOK, GtranslatorNotebookClass))
+#define GTR_NOTEBOOK(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_NOTEBOOK, GtrNotebook))
+#define GTR_NOTEBOOK_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_NOTEBOOK, GtrNotebookClass))
 #define GTR_IS_NOTEBOOK(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_NOTEBOOK))
 #define GTR_IS_NOTEBOOK_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_NOTEBOOK))
-#define GTR_NOTEBOOK_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_NOTEBOOK, GtranslatorNotebookClass))
+#define GTR_NOTEBOOK_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_NOTEBOOK, GtrNotebookClass))
 /* Private structure type */
-typedef struct _GtranslatorNotebookPrivate GtranslatorNotebookPrivate;
+typedef struct _GtrNotebookPrivate GtrNotebookPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorNotebook GtranslatorNotebook;
+typedef struct _GtrNotebook GtrNotebook;
 
-struct _GtranslatorNotebook
+struct _GtrNotebook
 {
   GtkNotebook parent_instance;
 
   /*< private > */
-  GtranslatorNotebookPrivate *priv;
+  GtrNotebookPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorNotebookClass GtranslatorNotebookClass;
+typedef struct _GtrNotebookClass GtrNotebookClass;
 
-struct _GtranslatorNotebookClass
+struct _GtrNotebookClass
 {
   GtkNotebookClass parent_class;
 
   void (*tab_close_request)
-    (GtranslatorNotebook * notebook, GtranslatorTab * tab);
+    (GtrNotebook * notebook, GtrTab * tab);
 };
 
 /*
@@ -75,13 +75,13 @@ gtranslator_notebook_get_type (void)
 
      GtkWidget *gtranslator_notebook_new (void);
 
-     void gtranslator_notebook_add_page (GtranslatorNotebook * notebook,
-					 GtranslatorTab * pax);
+     void gtranslator_notebook_add_page (GtrNotebook * notebook,
+					 GtrTab * pax);
 
-     void gtranslator_notebook_remove_page (GtranslatorNotebook * notebook,
+     void gtranslator_notebook_remove_page (GtrNotebook * notebook,
 					    gint i);
 
-     GtranslatorTab *gtranslator_notebook_get_page (GtranslatorNotebook *
+     GtrTab *gtranslator_notebook_get_page (GtrNotebook *
 						    notebook);
 
 G_END_DECLS

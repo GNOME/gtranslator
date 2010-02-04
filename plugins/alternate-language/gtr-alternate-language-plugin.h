@@ -30,34 +30,34 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_ALTERNATE_LANG_PLUGIN		(gtranslator_alternate_lang_get_type ())
-#define GTR_ALTERNATE_LANG_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGEALTERNATE_LANG_PLUGIN, GtranslatorAlternateLangPlugin))
-#define GTR_ALTERNATE_LANG_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_ALTERNATE_LANG_PLUGIN, GtranslatorAlternateLangPluginClass))
+#define GTR_ALTERNATE_LANG_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGEALTERNATE_LANG_PLUGIN, GtrAlternateLangPlugin))
+#define GTR_ALTERNATE_LANG_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_ALTERNATE_LANG_PLUGIN, GtrAlternateLangPluginClass))
 #define GTR_IS_ALTERNATE_LANG_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_ALTERNATE_LANG_PLUGIN))
 #define GTR_IS_ALTERNATE_LANG_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_ALTERNATE_LANG_PLUGIN))
-#define GTR_ALTERNATE_LANG_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_ALTERNATE_LANG_PLUGIN_PLUGIN, GtranslatorAlternateLangPluginClass))
+#define GTR_ALTERNATE_LANG_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_ALTERNATE_LANG_PLUGIN_PLUGIN, GtrAlternateLangPluginClass))
 /* Private structure type */
-typedef struct _GtranslatorAlternateLangPluginPrivate
-  GtranslatorAlternateLangPluginPrivate;
+typedef struct _GtrAlternateLangPluginPrivate
+  GtrAlternateLangPluginPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorAlternateLangPlugin GtranslatorAlternateLangPlugin;
+typedef struct _GtrAlternateLangPlugin GtrAlternateLangPlugin;
 
-struct _GtranslatorAlternateLangPlugin
+struct _GtrAlternateLangPlugin
 {
-  GtranslatorPlugin parent_instance;
+  GtrPlugin parent_instance;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorAlternateLangPluginClass
-  GtranslatorAlternateLangPluginClass;
+typedef struct _GtrAlternateLangPluginClass
+  GtrAlternateLangPluginClass;
 
-struct _GtranslatorAlternateLangPluginClass
+struct _GtrAlternateLangPluginClass
 {
-  GtranslatorPluginClass parent_class;
+  GtrPluginClass parent_class;
 };
 
 /*

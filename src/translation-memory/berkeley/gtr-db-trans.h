@@ -28,35 +28,35 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_DB_TRANS		(gtranslator_db_trans_get_type ())
-#define GTR_DB_TRANS(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_DB_TRANS, GtranslatorDbTrans))
-#define GTR_DB_TRANS_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_DB_TRANS, GtranslatorDbTransClass))
+#define GTR_DB_TRANS(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_DB_TRANS, GtrDbTrans))
+#define GTR_DB_TRANS_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_DB_TRANS, GtrDbTransClass))
 #define GTR_IS_DB_TRANS(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_DB_TRANS))
 #define GTR_IS_DB_TRANS_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_DB_TRANS))
-#define GTR_DB_TRANS_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_DB_TRANS, GtranslatorDbTransClass))
+#define GTR_DB_TRANS_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_DB_TRANS, GtrDbTransClass))
 /* Private structure type */
-typedef struct _GtranslatorDbTransPrivate GtranslatorDbTransPrivate;
+typedef struct _GtrDbTransPrivate GtrDbTransPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorDbTrans GtranslatorDbTrans;
+typedef struct _GtrDbTrans GtrDbTrans;
 
-struct _GtranslatorDbTrans
+struct _GtrDbTrans
 {
-  GtranslatorDbBase parent_instance;
+  GtrDbBase parent_instance;
 
   /*< private > */
-  GtranslatorDbTransPrivate *priv;
+  GtrDbTransPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorDbTransClass GtranslatorDbTransClass;
+typedef struct _GtrDbTransClass GtrDbTransClass;
 
-struct _GtranslatorDbTransClass
+struct _GtrDbTransClass
 {
-  GtranslatorDbBaseClass parent_class;
+  GtrDbBaseClass parent_class;
 };
 
 /*
@@ -68,18 +68,18 @@ gtranslator_db_trans_get_type (void)
 
      GType gtranslator_db_trans_register_type (GTypeModule * module);
 
-     GtranslatorDbTrans *gtranslator_db_trans_new (void);
+     GtrDbTrans *gtranslator_db_trans_new (void);
 
-     db_recno_t gtranslator_db_trans_write_string (GtranslatorDbTrans *
+     db_recno_t gtranslator_db_trans_write_string (GtrDbTrans *
 						   db_trans,
 						   const gchar * translation,
 						   db_recno_t key);
 
-     db_recno_t gtranslator_db_trans_write (GtranslatorDbTrans * db_trans,
+     db_recno_t gtranslator_db_trans_write (GtrDbTrans * db_trans,
 					    gchar ** translations,
 					    db_recno_t index);
 
-     GPtrArray *gtranslator_db_trans_read (GtranslatorDbTrans * db_trans,
+     GPtrArray *gtranslator_db_trans_read (GtrDbTrans * db_trans,
 					   db_recno_t index);
 
 G_END_DECLS

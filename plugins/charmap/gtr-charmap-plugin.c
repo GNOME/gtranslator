@@ -38,12 +38,12 @@
 #include <gucharmap/gucharmap-unicode-info.h>
 #endif
 
-#define WINDOW_DATA_KEY	"GtranslatorCharmapPluginWindowData"
+#define WINDOW_DATA_KEY	"GtrCharmapPluginWindowData"
 
 #define GTR_CHARMAP_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
 				GTR_TYPE_CHARMAP_PLUGIN,		\
-				GtranslatorCharmapPluginPrivate))
+				GtrCharmapPluginPrivate))
 
 typedef struct
 {
@@ -51,20 +51,20 @@ typedef struct
   guint context_id;
 } WindowData;
 
-GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtranslatorCharmapPlugin,
+GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrCharmapPlugin,
 				    gtranslator_charmap_plugin,
 				    gtranslator_charmap_panel_register_type
 				    (module);)
-     static void gtranslator_charmap_plugin_init (GtranslatorCharmapPlugin *
+     static void gtranslator_charmap_plugin_init (GtrCharmapPlugin *
 						  plugin)
 {
-  //gtranslator_debug_message (DEBUG_PLUGINS, "GtranslatorCharmapPlugin initializing");
+  //gtranslator_debug_message (DEBUG_PLUGINS, "GtrCharmapPlugin initializing");
 }
 
 static void
 gtranslator_charmap_plugin_finalize (GObject * object)
 {
-  //gtranslator_debug_message (DEBUG_PLUGINS, "GtranslatorCharmapPlugin finalizing");
+  //gtranslator_debug_message (DEBUG_PLUGINS, "GtrCharmapPlugin finalizing");
 
   G_OBJECT_CLASS (gtranslator_charmap_plugin_parent_class)->finalize (object);
 }
@@ -81,9 +81,9 @@ static void
 #else
 on_table_status_message (GucharmapTable * chartable,
 #endif
-			 const gchar * message, GtranslatorWindow * window)
+			 const gchar * message, GtrWindow * window)
 {
-  GtranslatorStatusbar *statusbar;
+  GtrStatusbar *statusbar;
   WindowData *data;
 
   statusbar = GTR_STATUSBAR (gtranslator_window_get_statusbar (window));
@@ -100,10 +100,10 @@ on_table_status_message (GucharmapTable * chartable,
 static void
 #ifdef HAVE_GUCHARMAP_2
 on_table_sync_active_char (GucharmapChartable * chartable,
-			   GParamSpec * psepc, GtranslatorWindow * window)
+			   GParamSpec * psepc, GtrWindow * window)
 #else
 on_table_set_active_char (GucharmapTable * chartable,
-			  gunichar wc, GtranslatorWindow * window)
+			  gunichar wc, GtrWindow * window)
 #endif
 {
   GString *gs;
@@ -143,7 +143,7 @@ on_table_set_active_char (GucharmapTable * chartable,
 
 static gboolean
 on_table_focus_out_event (GtkWidget * drawing_area,
-			  GdkEventFocus * event, GtranslatorWindow * window)
+			  GdkEventFocus * event, GtrWindow * window)
 {
 #ifdef HAVE_GUCHARMAP_2
   GucharmapChartable *chartable;
@@ -170,11 +170,11 @@ on_table_focus_out_event (GtkWidget * drawing_area,
 
 #ifdef HAVE_GUCHARMAP_2
 static void
-on_table_activate (GucharmapChartable * chartable, GtranslatorWindow * window)
+on_table_activate (GucharmapChartable * chartable, GtrWindow * window)
 #else
 static void
 on_table_activate (GucharmapTable * chartable,
-		   gunichar wc, GtranslatorWindow * window)
+		   gunichar wc, GtrWindow * window)
 #endif
 {
   GtkTextView *view;
@@ -213,7 +213,7 @@ on_table_activate (GucharmapTable * chartable,
 }
 
 static GtkWidget *
-create_charmap_panel (GtranslatorWindow * window)
+create_charmap_panel (GtrWindow * window)
 {
   GtkWidget *panel;
 #ifdef HAVE_GUCHARMAP_2
@@ -265,9 +265,9 @@ create_charmap_panel (GtranslatorWindow * window)
 }
 
 static void
-impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_activate (GtrPlugin * plugin, GtrWindow * window)
 {
-  GtranslatorStatusbar *statusbar;
+  GtrStatusbar *statusbar;
   WindowData *data;
 
   data = g_new (WindowData, 1);
@@ -279,7 +279,7 @@ impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 
   gtranslator_window_add_widget (window,
 				 data->panel,
-				 "GtranslatorCharmapPlugin",
+				 "GtrCharmapPlugin",
 				 _("Character Map"),
 				 "charmap-plugin-icon",
 				 GTR_WINDOW_PLACEMENT_LEFT);
@@ -294,7 +294,7 @@ impl_activate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 }
 
 static void
-impl_deactivate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
+impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
 {
   WindowData *data;
 #ifdef HAVE_GUCHARMAP_2
@@ -323,10 +323,10 @@ impl_deactivate (GtranslatorPlugin * plugin, GtranslatorWindow * window)
 }
 
 static void
-gtranslator_charmap_plugin_class_init (GtranslatorCharmapPluginClass * klass)
+gtranslator_charmap_plugin_class_init (GtrCharmapPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtranslatorPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
+  GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
   object_class->finalize = gtranslator_charmap_plugin_finalize;
 

@@ -66,15 +66,15 @@ enum
 
 static guint signals[LAST_SIGNAL];
 
-G_DEFINE_TYPE (GtranslatorPluginsEngine, gtranslator_plugins_engine,
+G_DEFINE_TYPE (GtrPluginsEngine, gtranslator_plugins_engine,
 	       G_TYPE_OBJECT)
-     struct _GtranslatorPluginsEnginePrivate
+     struct _GtrPluginsEnginePrivate
      {
        GList *plugin_list;
        GConfClient *gconf_client;
      };
 
-     GtranslatorPluginsEngine *default_engine = NULL;
+     GtrPluginsEngine *default_engine = NULL;
 
      static void
        gtranslator_plugins_engine_active_plugins_changed (GConfClient *
@@ -84,13 +84,13 @@ G_DEFINE_TYPE (GtranslatorPluginsEngine, gtranslator_plugins_engine,
 							  gpointer user_data);
      static void
        gtranslator_plugins_engine_activate_plugin_real
-       (GtranslatorPluginsEngine * engine, GtranslatorPluginInfo * info);
+       (GtrPluginsEngine * engine, GtrPluginInfo * info);
      static void
        gtranslator_plugins_engine_deactivate_plugin_real
-       (GtranslatorPluginsEngine * engine, GtranslatorPluginInfo * info);
+       (GtrPluginsEngine * engine, GtrPluginInfo * info);
 
      static void
-       gtranslator_plugins_engine_load_dir (GtranslatorPluginsEngine * engine,
+       gtranslator_plugins_engine_load_dir (GtrPluginsEngine * engine,
 					    const gchar * dir,
 					    GSList * active_plugins)
 {
@@ -116,7 +116,7 @@ G_DEFINE_TYPE (GtranslatorPluginsEngine, gtranslator_plugins_engine,
       if (g_str_has_suffix (dirent, PLUGIN_EXT))
 	{
 	  gchar *plugin_file;
-	  GtranslatorPluginInfo *info;
+	  GtrPluginInfo *info;
 
 	  plugin_file = g_build_filename (dir, dirent, NULL);
 	  info = _gtranslator_plugin_info_new (plugin_file);
@@ -156,7 +156,7 @@ G_DEFINE_TYPE (GtranslatorPluginsEngine, gtranslator_plugins_engine,
 }
 
 static void
-gtranslator_plugins_engine_load_all (GtranslatorPluginsEngine * engine)
+gtranslator_plugins_engine_load_all (GtrPluginsEngine * engine)
 {
   GSList *active_plugins = NULL;
   const gchar *home;
@@ -208,7 +208,7 @@ gtranslator_plugins_engine_load_all (GtranslatorPluginsEngine * engine)
 }
 
 static void
-gtranslator_plugins_engine_init (GtranslatorPluginsEngine * engine)
+gtranslator_plugins_engine_init (GtrPluginsEngine * engine)
 {
   //gtranslator_debug (DEBUG_PLUGINS);
 
@@ -220,7 +220,7 @@ gtranslator_plugins_engine_init (GtranslatorPluginsEngine * engine)
 
   engine->priv = G_TYPE_INSTANCE_GET_PRIVATE (engine,
 					      GTR_TYPE_PLUGINS_ENGINE,
-					      GtranslatorPluginsEnginePrivate);
+					      GtrPluginsEnginePrivate);
 
   engine->priv->gconf_client = gconf_client_get_default ();
   g_return_if_fail (engine->priv->gconf_client != NULL);
@@ -238,7 +238,7 @@ gtranslator_plugins_engine_init (GtranslatorPluginsEngine * engine)
 }
 
 void
-gtranslator_plugins_engine_garbage_collect (GtranslatorPluginsEngine * engine)
+gtranslator_plugins_engine_garbage_collect (GtrPluginsEngine * engine)
 {
   GType *module_types = g_type_children (GTR_TYPE_MODULE, NULL);
   unsigned i;
@@ -254,13 +254,13 @@ gtranslator_plugins_engine_garbage_collect (GtranslatorPluginsEngine * engine)
 static void
 gtranslator_plugins_engine_finalize (GObject * object)
 {
-  GtranslatorPluginsEngine *engine = GTR_PLUGINS_ENGINE (object);
+  GtrPluginsEngine *engine = GTR_PLUGINS_ENGINE (object);
 
   //gtranslator_debug (DEBUG_PLUGINS);
 
 #ifdef ENABLE_PYTHON
   /* Note: that this may cause finalization of objects (typically
-   * the GtranslatorWindow) by running the garbage collector. Since some
+   * the GtrWindow) by running the garbage collector. Since some
    * of the plugin may have installed callbacks upon object
    * finalization (typically they need to free the WindowData)
    * it must run before we get rid of the plugins.
@@ -278,7 +278,7 @@ gtranslator_plugins_engine_finalize (GObject * object)
 }
 
 static void
-gtranslator_plugins_engine_class_init (GtranslatorPluginsEngineClass * klass)
+gtranslator_plugins_engine_class_init (GtrPluginsEngineClass * klass)
 {
   GType the_type = G_TYPE_FROM_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -292,7 +292,7 @@ gtranslator_plugins_engine_class_init (GtranslatorPluginsEngineClass * klass)
     g_signal_new ("activate-plugin",
 		  the_type,
 		  G_SIGNAL_RUN_LAST,
-		  G_STRUCT_OFFSET (GtranslatorPluginsEngineClass,
+		  G_STRUCT_OFFSET (GtrPluginsEngineClass,
 				   activate_plugin), NULL, NULL,
 		  g_cclosure_marshal_VOID__BOXED, G_TYPE_NONE, 1,
 		  GTR_TYPE_PLUGIN_INFO | G_SIGNAL_TYPE_STATIC_SCOPE);
@@ -301,15 +301,15 @@ gtranslator_plugins_engine_class_init (GtranslatorPluginsEngineClass * klass)
     g_signal_new ("deactivate-plugin",
 		  the_type,
 		  G_SIGNAL_RUN_LAST,
-		  G_STRUCT_OFFSET (GtranslatorPluginsEngineClass,
+		  G_STRUCT_OFFSET (GtrPluginsEngineClass,
 				   deactivate_plugin), NULL, NULL,
 		  g_cclosure_marshal_VOID__BOXED, G_TYPE_NONE, 1,
 		  GTR_TYPE_PLUGIN_INFO | G_SIGNAL_TYPE_STATIC_SCOPE);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorPluginsEnginePrivate));
+  g_type_class_add_private (klass, sizeof (GtrPluginsEnginePrivate));
 }
 
-GtranslatorPluginsEngine *
+GtrPluginsEngine *
 gtranslator_plugins_engine_get_default (void)
 {
   if (default_engine != NULL)
@@ -323,7 +323,7 @@ gtranslator_plugins_engine_get_default (void)
 }
 
 const GList *
-gtranslator_plugins_engine_get_plugin_list (GtranslatorPluginsEngine * engine)
+gtranslator_plugins_engine_get_plugin_list (GtrPluginsEngine * engine)
 {
   //gtranslator_debug (DEBUG_PLUGINS);
 
@@ -331,24 +331,24 @@ gtranslator_plugins_engine_get_plugin_list (GtranslatorPluginsEngine * engine)
 }
 
 static gint
-compare_plugin_info_and_name (GtranslatorPluginInfo * info,
+compare_plugin_info_and_name (GtrPluginInfo * info,
 			      const gchar * module_name)
 {
   return strcmp (info->module_name, module_name);
 }
 
-GtranslatorPluginInfo *
-gtranslator_plugins_engine_get_plugin_info (GtranslatorPluginsEngine * engine,
+GtrPluginInfo *
+gtranslator_plugins_engine_get_plugin_info (GtrPluginsEngine * engine,
 					    const gchar * name)
 {
   GList *l = g_list_find_custom (engine->priv->plugin_list,
 				 name,
 				 (GCompareFunc) compare_plugin_info_and_name);
-  return l == NULL ? NULL : (GtranslatorPluginInfo *) l->data;
+  return l == NULL ? NULL : (GtrPluginInfo *) l->data;
 }
 
 static gboolean
-load_plugin_module (GtranslatorPluginInfo * info)
+load_plugin_module (GtrPluginInfo * info)
 {
   gchar *dirname;
 
@@ -409,7 +409,7 @@ load_plugin_module (GtranslatorPluginInfo * info)
 }
 
 static void
-save_active_plugin_list (GtranslatorPluginsEngine * engine)
+save_active_plugin_list (GtrPluginsEngine * engine)
 {
   GSList *active_plugins = NULL;
   GList *l;
@@ -417,8 +417,8 @@ save_active_plugin_list (GtranslatorPluginsEngine * engine)
 
   for (l = engine->priv->plugin_list; l != NULL; l = l->next)
     {
-      const GtranslatorPluginInfo *info =
-	(const GtranslatorPluginInfo *) l->data;
+      const GtrPluginInfo *info =
+	(const GtrPluginInfo *) l->data;
       if (info->active)
 	{
 	  active_plugins = g_slist_prepend (active_plugins,
@@ -437,9 +437,9 @@ save_active_plugin_list (GtranslatorPluginsEngine * engine)
 }
 
 static void
-gtranslator_plugins_engine_activate_plugin_real (GtranslatorPluginsEngine *
+gtranslator_plugins_engine_activate_plugin_real (GtrPluginsEngine *
 						 engine,
-						 GtranslatorPluginInfo * info)
+						 GtrPluginInfo * info)
 {
   gboolean res = TRUE;
 
@@ -464,8 +464,8 @@ gtranslator_plugins_engine_activate_plugin_real (GtranslatorPluginsEngine *
 }
 
 gboolean
-gtranslator_plugins_engine_activate_plugin (GtranslatorPluginsEngine * engine,
-					    GtranslatorPluginInfo * info)
+gtranslator_plugins_engine_activate_plugin (GtrPluginsEngine * engine,
+					    GtrPluginInfo * info)
 {
   //gtranslator_debug (DEBUG_PLUGINS);
 
@@ -485,9 +485,9 @@ gtranslator_plugins_engine_activate_plugin (GtranslatorPluginsEngine * engine,
 }
 
 static void
-gtranslator_plugins_engine_deactivate_plugin_real (GtranslatorPluginsEngine *
+gtranslator_plugins_engine_deactivate_plugin_real (GtrPluginsEngine *
 						   engine,
-						   GtranslatorPluginInfo *
+						   GtrPluginInfo *
 						   info)
 {
   const GList *wins;
@@ -505,9 +505,9 @@ gtranslator_plugins_engine_deactivate_plugin_real (GtranslatorPluginsEngine *
 }
 
 gboolean
-gtranslator_plugins_engine_deactivate_plugin (GtranslatorPluginsEngine *
+gtranslator_plugins_engine_deactivate_plugin (GtrPluginsEngine *
 					      engine,
-					      GtranslatorPluginInfo * info)
+					      GtrPluginInfo * info)
 {
   //gtranslator_debug (DEBUG_PLUGINS);
 
@@ -524,7 +524,7 @@ gtranslator_plugins_engine_deactivate_plugin (GtranslatorPluginsEngine *
 }
 
 static void
-reactivate_all (GtranslatorPluginsEngine * engine, GtranslatorWindow * window)
+reactivate_all (GtrPluginsEngine * engine, GtrWindow * window)
 {
   GList *pl;
 
@@ -534,7 +534,7 @@ reactivate_all (GtranslatorPluginsEngine * engine, GtranslatorWindow * window)
     {
       gboolean res = TRUE;
 
-      GtranslatorPluginInfo *info = (GtranslatorPluginInfo *) pl->data;
+      GtrPluginInfo *info = (GtrPluginInfo *) pl->data;
 
       /* If plugin is not available, don't try to activate/load it */
       if (info->available && info->active)
@@ -551,9 +551,9 @@ reactivate_all (GtranslatorPluginsEngine * engine, GtranslatorWindow * window)
 }
 
 void
-gtranslator_plugins_engine_update_plugins_ui (GtranslatorPluginsEngine *
+gtranslator_plugins_engine_update_plugins_ui (GtrPluginsEngine *
 					      engine,
-					      GtranslatorWindow * window,
+					      GtrWindow * window,
 					      gboolean new_window)
 {
   GList *pl;
@@ -568,7 +568,7 @@ gtranslator_plugins_engine_update_plugins_ui (GtranslatorPluginsEngine *
   /* updated ui of all the plugins that implement update_ui */
   for (pl = engine->priv->plugin_list; pl; pl = pl->next)
     {
-      GtranslatorPluginInfo *info = (GtranslatorPluginInfo *) pl->data;
+      GtrPluginInfo *info = (GtrPluginInfo *) pl->data;
 
       if (!info->available || !info->active)
 	continue;
@@ -580,9 +580,9 @@ gtranslator_plugins_engine_update_plugins_ui (GtranslatorPluginsEngine *
 }
 
 void
-gtranslator_plugins_engine_configure_plugin (GtranslatorPluginsEngine *
+gtranslator_plugins_engine_configure_plugin (GtrPluginsEngine *
 					     engine,
-					     GtranslatorPluginInfo * info,
+					     GtrPluginInfo * info,
 					     GtkWindow * parent)
 {
   GtkWidget *conf_dlg;
@@ -616,7 +616,7 @@ gtranslator_plugins_engine_active_plugins_changed (GConfClient * client,
 						   GConfEntry * entry,
 						   gpointer user_data)
 {
-  GtranslatorPluginsEngine *engine;
+  GtrPluginsEngine *engine;
   GList *pl;
   gboolean to_activate;
   GSList *active_plugins;
@@ -642,7 +642,7 @@ gtranslator_plugins_engine_active_plugins_changed (GConfClient * client,
 
   for (pl = engine->priv->plugin_list; pl; pl = pl->next)
     {
-      GtranslatorPluginInfo *info = (GtranslatorPluginInfo *) pl->data;
+      GtrPluginInfo *info = (GtrPluginInfo *) pl->data;
 
       if (!info->available)
 	continue;

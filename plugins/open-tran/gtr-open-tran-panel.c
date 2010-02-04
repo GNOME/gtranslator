@@ -37,7 +37,7 @@
 #define GTR_OPEN_TRAN_PANEL_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),		       \
 						 GTR_TYPE_OPEN_TRAN_PANEL,     \
-						 GtranslatorOpenTranPanelPrivate))
+						 GtrOpenTranPanelPrivate))
 
 #define GNOME_ICON   PIXMAPSDIR"/gnome.png"
 #define KDE_ICON     PIXMAPSDIR"/kde.ico"
@@ -49,10 +49,10 @@
 #define OPEN_OFFICE_ICON PIXMAPSDIR"/oo-logo.png"
 #define FEDORA_ICON PIXMAPSDIR"/fedora.png"
 
-GTR_PLUGIN_DEFINE_TYPE (GtranslatorOpenTranPanel, gtranslator_open_tran_panel,
+GTR_PLUGIN_DEFINE_TYPE (GtrOpenTranPanel, gtranslator_open_tran_panel,
 			GTK_TYPE_VBOX)
 
-struct _GtranslatorOpenTranPanelPrivate
+struct _GtrOpenTranPanelPrivate
 {
   GConfClient *gconf_client;
 
@@ -63,7 +63,7 @@ struct _GtranslatorOpenTranPanelPrivate
 
   SoupSession *session;
 
-  GtranslatorWindow *window;
+  GtrWindow *window;
 
   gchar *text;
 };
@@ -76,7 +76,7 @@ enum
 };
 
 static void
-show_error_dialog (GtranslatorWindow * parent,
+show_error_dialog (GtrWindow * parent,
 		   const gchar * message_format,
 		   ...)
 {
@@ -119,7 +119,7 @@ create_pixbuf (const gchar * path)
 
 static void
 print_struct_to_tree_view (const gchar * str,
-			   GtranslatorOpenTranPanel * panel)
+			   GtrOpenTranPanel * panel)
 {
   GdkPixbuf *icon;
   GtkTreeIter iter;
@@ -165,7 +165,7 @@ print_struct_to_tree_view (const gchar * str,
 static void
 print_struct_field (gpointer key, gpointer value, gpointer data)
 {
-  GtranslatorOpenTranPanel *panel = GTR_OPEN_TRAN_PANEL (data);
+  GtrOpenTranPanel *panel = GTR_OPEN_TRAN_PANEL (data);
   GHashTable *hash;
   GValueArray *array;
   const gchar *str;
@@ -215,7 +215,7 @@ check_xmlrpc (GValue * value, GType type, ...)
 }
 
 static void
-open_connection (GtranslatorOpenTranPanel * panel,
+open_connection (GtrOpenTranPanel * panel,
 		 const gchar * text,
 		 const gchar * search_code, const gchar * own_code)
 {
@@ -308,7 +308,7 @@ open_connection (GtranslatorOpenTranPanel * panel,
 }
 
 static void
-entry_activate_cb (GtkEntry * entry, GtranslatorOpenTranPanel * panel)
+entry_activate_cb (GtkEntry * entry, GtrOpenTranPanel * panel)
 {
   const gchar *entry_text = NULL;
   const gchar *search_code = NULL;
@@ -347,12 +347,12 @@ entry_activate_cb (GtkEntry * entry, GtranslatorOpenTranPanel * panel)
 }
 
 static void
-gtranslator_open_tran_panel_draw_treeview (GtranslatorOpenTranPanel * panel)
+gtranslator_open_tran_panel_draw_treeview (GtrOpenTranPanel * panel)
 {
   GtkTreeViewColumn *column;
   GtkCellRenderer *renderer;
 
-  GtranslatorOpenTranPanelPrivate *priv = panel->priv;
+  GtrOpenTranPanelPrivate *priv = panel->priv;
 
   priv->store = gtk_list_store_new (N_COLUMNS,
 				    GDK_TYPE_PIXBUF, G_TYPE_STRING);
@@ -388,7 +388,7 @@ gtranslator_open_tran_panel_draw_treeview (GtranslatorOpenTranPanel * panel)
 }
 
 static void
-gtranslator_open_tran_panel_draw (GtranslatorOpenTranPanel * panel)
+gtranslator_open_tran_panel_draw (GtrOpenTranPanel * panel)
 {
   GtkWidget *scrolledwindow;
   GtkWidget *button;
@@ -430,7 +430,7 @@ gtranslator_open_tran_panel_draw (GtranslatorOpenTranPanel * panel)
 }
 
 static void
-gtranslator_open_tran_panel_init (GtranslatorOpenTranPanel * panel)
+gtranslator_open_tran_panel_init (GtrOpenTranPanel * panel)
 {
 
   panel->priv = GTR_OPEN_TRAN_PANEL_GET_PRIVATE (panel);
@@ -444,7 +444,7 @@ gtranslator_open_tran_panel_init (GtranslatorOpenTranPanel * panel)
 static void
 gtranslator_open_tran_panel_dispose (GObject * object)
 {
-  GtranslatorOpenTranPanel *panel = GTR_OPEN_TRAN_PANEL (object);
+  GtrOpenTranPanel *panel = GTR_OPEN_TRAN_PANEL (object);
 
   if (panel->priv->session != NULL)
     {
@@ -455,19 +455,19 @@ gtranslator_open_tran_panel_dispose (GObject * object)
 }
 
 static void
-gtranslator_open_tran_panel_class_init (GtranslatorOpenTranPanelClass * klass)
+gtranslator_open_tran_panel_class_init (GtrOpenTranPanelClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorOpenTranPanelPrivate));
+  g_type_class_add_private (klass, sizeof (GtrOpenTranPanelPrivate));
 
   object_class->dispose = gtranslator_open_tran_panel_dispose;
 }
 
 GtkWidget *
-gtranslator_open_tran_panel_new (GtranslatorWindow * window)
+gtranslator_open_tran_panel_new (GtrWindow * window)
 {
-  GtranslatorOpenTranPanel *panel;
+  GtrOpenTranPanel *panel;
 
   panel = g_object_new (GTR_TYPE_OPEN_TRAN_PANEL, NULL);
 

@@ -30,33 +30,33 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_ASSISTANT		(gtranslator_assistant_get_type ())
-#define GTR_ASSISTANT(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_ASSISTANT, GtranslatorAssistant))
-#define GTR_ASSISTANT_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_ASSISTANT, GtranslatorAssistantClass))
+#define GTR_ASSISTANT(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_ASSISTANT, GtrAssistant))
+#define GTR_ASSISTANT_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_ASSISTANT, GtrAssistantClass))
 #define GTR_IS_ASSISTANT(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_ASSISTANT))
 #define GTR_IS_ASSISTANT_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_ASSISTANT))
-#define GTR_ASSISTANT_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_ASSISTANT, GtranslatorAssistantClass))
+#define GTR_ASSISTANT_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_ASSISTANT, GtrAssistantClass))
 /* Private structure type */
-typedef struct _GtranslatorAssistantPrivate GtranslatorAssistantPrivate;
+typedef struct _GtrAssistantPrivate GtrAssistantPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtranslatorAssistant GtranslatorAssistant;
+typedef struct _GtrAssistant GtrAssistant;
 
-struct _GtranslatorAssistant
+struct _GtrAssistant
 {
   GtkAssistant parent_instance;
 
   /*< private > */
-  GtranslatorAssistantPrivate *priv;
+  GtrAssistantPrivate *priv;
 };
 
 /*
  * Class definition
  */
-typedef struct _GtranslatorAssistantClass GtranslatorAssistantClass;
+typedef struct _GtrAssistantClass GtrAssistantClass;
 
-struct _GtranslatorAssistantClass
+struct _GtrAssistantClass
 {
   GtkAssistantClass parent_class;
 };
@@ -70,7 +70,7 @@ gtranslator_assistant_get_type (void)
 
      GType gtranslator_assistant_register_type (GTypeModule * module);
 
-     void gtranslator_show_assistant (GtranslatorWindow * window);
+     void gtranslator_show_assistant (GtrWindow * window);
 
 G_END_DECLS
 #endif /* __ASSISTANT_H__ */

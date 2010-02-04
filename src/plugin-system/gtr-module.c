@@ -41,7 +41,7 @@
 #include "gtr-module.h"
 #include "gtr-debug.h"
 
-typedef GType (*GtranslatorModuleRegisterFunc) (GTypeModule *);
+typedef GType (*GtrModuleRegisterFunc) (GTypeModule *);
 
 enum
 {
@@ -50,13 +50,13 @@ enum
   PROP_PATH
 };
 
-G_DEFINE_TYPE (GtranslatorModule, gtranslator_module, G_TYPE_TYPE_MODULE);
+G_DEFINE_TYPE (GtrModule, gtranslator_module, G_TYPE_TYPE_MODULE);
 
 static gboolean
 gtranslator_module_load (GTypeModule * gmodule)
 {
-  GtranslatorModule *module = GTR_MODULE (gmodule);
-  GtranslatorModuleRegisterFunc register_func;
+  GtrModule *module = GTR_MODULE (gmodule);
+  GtrModuleRegisterFunc register_func;
   gchar *path;
 
   DEBUG_PRINT ("Loading %s module from %s",
@@ -111,7 +111,7 @@ gtranslator_module_load (GTypeModule * gmodule)
 static void
 gtranslator_module_unload (GTypeModule * gmodule)
 {
-  GtranslatorModule *module = GTR_MODULE (gmodule);
+  GtrModule *module = GTR_MODULE (gmodule);
 
   DEBUG_PRINT ("Unloading %s", module->path);
 
@@ -128,17 +128,17 @@ gtranslator_module_class_real_garbage_collect (void)
 }
 
 static void
-gtranslator_module_init (GtranslatorModule * module)
+gtranslator_module_init (GtrModule * module)
 {
-  DEBUG_PRINT ("GtranslatorModule %p initialising", module);
+  DEBUG_PRINT ("GtrModule %p initialising", module);
 }
 
 static void
 gtranslator_module_finalize (GObject * object)
 {
-  GtranslatorModule *module = GTR_MODULE (object);
+  GtrModule *module = GTR_MODULE (object);
 
-  DEBUG_PRINT ("GtranslatorModule %p finalising", module);
+  DEBUG_PRINT ("GtrModule %p finalising", module);
 
   g_free (module->path);
   g_free (module->module_name);
@@ -151,7 +151,7 @@ gtranslator_module_get_property (GObject * object,
 				 guint prop_id,
 				 GValue * value, GParamSpec * pspec)
 {
-  GtranslatorModule *module = GTR_MODULE (object);
+  GtrModule *module = GTR_MODULE (object);
 
   switch (prop_id)
     {
@@ -171,7 +171,7 @@ gtranslator_module_set_property (GObject * object,
 				 guint prop_id,
 				 const GValue * value, GParamSpec * pspec)
 {
-  GtranslatorModule *module = GTR_MODULE (object);
+  GtrModule *module = GTR_MODULE (object);
 
   switch (prop_id)
     {
@@ -188,7 +188,7 @@ gtranslator_module_set_property (GObject * object,
 }
 
 static void
-gtranslator_module_class_init (GtranslatorModuleClass * klass)
+gtranslator_module_class_init (GtrModuleClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GTypeModuleClass *module_class = G_TYPE_MODULE_CLASS (klass);
@@ -222,7 +222,7 @@ gtranslator_module_class_init (GtranslatorModuleClass * klass)
 }
 
 void
-gtranslator_module_class_garbage_collect (GtranslatorModuleClass * klass)
+gtranslator_module_class_garbage_collect (GtrModuleClass * klass)
 {
   g_return_if_fail (GTR_IS_MODULE_CLASS (klass));
 
@@ -230,7 +230,7 @@ gtranslator_module_class_garbage_collect (GtranslatorModuleClass * klass)
 }
 
 GObject *
-gtranslator_module_new_object (GtranslatorModule * module)
+gtranslator_module_new_object (GtrModule * module)
 {
   g_return_val_if_fail (module->type != 0, NULL);
 
@@ -240,7 +240,7 @@ gtranslator_module_new_object (GtranslatorModule * module)
 }
 
 const gchar *
-gtranslator_module_get_path (GtranslatorModule * module)
+gtranslator_module_get_path (GtrModule * module)
 {
   g_return_val_if_fail (GTR_IS_MODULE (module), NULL);
 
@@ -248,7 +248,7 @@ gtranslator_module_get_path (GtranslatorModule * module)
 }
 
 const gchar *
-gtranslator_module_get_module_name (GtranslatorModule * module)
+gtranslator_module_get_module_name (GtrModule * module)
 {
   g_return_val_if_fail (GTR_IS_MODULE (module), NULL);
 

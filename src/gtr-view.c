@@ -49,11 +49,11 @@
 #define GTR_VIEW_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 	(object),	\
 						 	GTR_TYPE_VIEW,     \
-						 	GtranslatorViewPrivate))
+						 	GtrViewPrivate))
 
-G_DEFINE_TYPE (GtranslatorView, gtranslator_view, GTK_TYPE_SOURCE_VIEW)
+G_DEFINE_TYPE (GtrView, gtranslator_view, GTK_TYPE_SOURCE_VIEW)
 
-struct _GtranslatorViewPrivate
+struct _GtrViewPrivate
 {
   GtkSourceBuffer *buffer;
 
@@ -66,7 +66,7 @@ struct _GtranslatorViewPrivate
 };
 
 #ifdef HAVE_GTKSPELL
-     static void gtranslator_attach_gtkspell (GtranslatorView * view)
+     static void gtranslator_attach_gtkspell (GtrView * view)
 {
   gint i;
   GError *error = NULL;
@@ -90,7 +90,7 @@ struct _GtranslatorViewPrivate
 #endif
 
 static void
-gtranslator_view_init (GtranslatorView * view)
+gtranslator_view_init (GtrView * view)
 {
   GtkSourceLanguageManager *lm;
   GtkSourceLanguage *lang;
@@ -102,7 +102,7 @@ gtranslator_view_init (GtranslatorView * view)
 
   view->priv = GTR_VIEW_GET_PRIVATE (view);
 
-  GtranslatorViewPrivate *priv = view->priv;
+  GtrViewPrivate *priv = view->priv;
 
   lm = gtk_source_language_manager_new ();
   dirs = g_ptr_array_new ();
@@ -168,11 +168,11 @@ gtranslator_view_finalize (GObject * object)
 }
 
 static void
-gtranslator_view_class_init (GtranslatorViewClass * klass)
+gtranslator_view_class_init (GtrViewClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtranslatorViewPrivate));
+  g_type_class_add_private (klass, sizeof (GtrViewPrivate));
 
   object_class->finalize = gtranslator_view_finalize;
 }
@@ -180,9 +180,9 @@ gtranslator_view_class_init (GtranslatorViewClass * klass)
 /**
  * gtranslator_view_new:
  *
- * Creates a new #GtranslatorView. An empty default buffer will be created for you.
+ * Creates a new #GtrView. An empty default buffer will be created for you.
  * 
- * Returns: a new #GtranslatorView
+ * Returns: a new #GtrView
  */
 GtkWidget *
 gtranslator_view_new (void)
@@ -195,16 +195,16 @@ gtranslator_view_new (void)
 
 /**
  * gtranslator_view_get_selected_text:
- * @view: a #GtranslatorView
- * @selected_text: it stores the text selected in the #GtranslatorView
+ * @view: a #GtrView
+ * @selected_text: it stores the text selected in the #GtrView
  * @len: it stores the length of the @selected_text
  *
- * Gets the selected text region of the #GtranslatorView
+ * Gets the selected text region of the #GtrView
  *
  * Returns: TRUE if the @selected_text was got correctly.
  */
 gboolean
-gtranslator_view_get_selected_text (GtranslatorView * view,
+gtranslator_view_get_selected_text (GtrView * view,
 				    gchar ** selected_text, gint * len)
 {
   GtkTextIter start, end;
@@ -234,13 +234,13 @@ gtranslator_view_get_selected_text (GtranslatorView * view,
 
 /**
  * gtranslator_view_enable_spellcheck:
- * @view: a #GtranslatorView
+ * @view: a #GtrView
  * @enable: TRUE if you want enable the spellcheck
  * 
  * Enables the spellcheck
  **/
 void
-gtranslator_view_enable_spellcheck (GtranslatorView * view, gboolean enable)
+gtranslator_view_enable_spellcheck (GtrView * view, gboolean enable)
 {
   if (enable)
     {
@@ -260,13 +260,13 @@ gtranslator_view_enable_spellcheck (GtranslatorView * view, gboolean enable)
 
 /**
  * gtranslator_view_enable_visible_whitespace:
- * @view: a #GtranslatorView
+ * @view: a #GtrView
  * @enable: TRUE if you want to enable special chars for white spaces
  *
  * Enables special chars for white spaces including \n and \t
 **/
 void
-gtranslator_view_enable_visible_whitespace (GtranslatorView * view,
+gtranslator_view_enable_visible_whitespace (GtrView * view,
 					    gboolean enable)
 {
   g_return_if_fail (GTR_IS_VIEW (view));
@@ -280,13 +280,13 @@ gtranslator_view_enable_visible_whitespace (GtranslatorView * view,
 
 /**
  * gtranslator_view_cut_clipboard:
- * @view: a #GtranslatorView
+ * @view: a #GtrView
  *
  * Copies the currently-selected text to a clipboard,
  * then deletes said text if it's editable.
  */
 void
-gtranslator_view_cut_clipboard (GtranslatorView * view)
+gtranslator_view_cut_clipboard (GtrView * view)
 {
   GtkTextBuffer *buffer;
   GtkClipboard *clipboard;
@@ -312,12 +312,12 @@ gtranslator_view_cut_clipboard (GtranslatorView * view)
 
 /**
  * gtranslator_view_copy_clipboard:
- * @view: a #GtranslatorView
+ * @view: a #GtrView
  *
  * Copies the currently-selected text to a clipboard.
  */
 void
-gtranslator_view_copy_clipboard (GtranslatorView * view)
+gtranslator_view_copy_clipboard (GtrView * view)
 {
   GtkTextBuffer *buffer;
   GtkClipboard *clipboard;
@@ -337,13 +337,13 @@ gtranslator_view_copy_clipboard (GtranslatorView * view)
 
 /**
  * gtranslator_view_cut_clipboard:
- * @view: a #GtranslatorView
+ * @view: a #GtrView
  *
  * Pastes the contents of a clipboard at the insertion point,
  * or at override_location.
  */
 void
-gtranslator_view_paste_clipboard (GtranslatorView * view)
+gtranslator_view_paste_clipboard (GtrView * view)
 {
   GtkTextBuffer *buffer;
   GtkClipboard *clipboard;
@@ -370,14 +370,14 @@ gtranslator_view_paste_clipboard (GtranslatorView * view)
 
 /**
  * gtranslator_view_set_font:
- * @view: a #GtranslatorView
+ * @view: a #GtrView
  * @def: TRUE if you want to use the default font
- * @font_name: The name of the font you want to use in the #GtranslatorView
+ * @font_name: The name of the font you want to use in the #GtrView
  * 
- * Sets the #GtranslatorView font.
+ * Sets the #GtrView font.
  **/
 void
-gtranslator_view_set_font (GtranslatorView * view,
+gtranslator_view_set_font (GtrView * view,
 			   gboolean def, const gchar * font_name)
 {
   PangoFontDescription *font_desc = NULL;
@@ -400,14 +400,14 @@ gtranslator_view_set_font (GtranslatorView * view,
 
 /**
  * gtranslator_view_set_search_text:
- * @view: a #GtranslatorView
+ * @view: a #GtrView
  * @text: the text to set for searching
- * @flags: a #GtranslatorSearchFlags
+ * @flags: a #GtrSearchFlags
  *
  * Stores the text to search for in the @view with some specific @flags.
  */
 void
-gtranslator_view_set_search_text (GtranslatorView * view,
+gtranslator_view_set_search_text (GtrView * view,
 				  const gchar * text, guint flags)
 {
   GtkSourceBuffer *doc;
@@ -468,16 +468,16 @@ gtranslator_view_set_search_text (GtranslatorView * view,
 
 /**
  * gtranslator_view_get_search_text:
- * @view: a #GtranslatorView
- * @flags: the #GtranslatorSearchFlags of the stored text.
+ * @view: a #GtrView
+ * @flags: the #GtrSearchFlags of the stored text.
  * 
- * Returns the text to search for it and the #GtranslatorSearchFlags of that
+ * Returns the text to search for it and the #GtrSearchFlags of that
  * text.
  * 
  * Returns: the text to search for it.
  */
 gchar *
-gtranslator_view_get_search_text (GtranslatorView * view, guint * flags)
+gtranslator_view_get_search_text (GtrView * view, guint * flags)
 {
   g_return_val_if_fail (GTR_IS_VIEW (view), NULL);
 
@@ -489,12 +489,12 @@ gtranslator_view_get_search_text (GtranslatorView * view, guint * flags)
 
 /**
  * gtranslator_view_get_can_search_again:
- * @view: a #GtranslatorView
+ * @view: a #GtrView
  * 
  * Returns: TRUE if it can search again
  */
 gboolean
-gtranslator_view_get_can_search_again (GtranslatorView * view)
+gtranslator_view_get_can_search_again (GtrView * view)
 {
   g_return_val_if_fail (GTR_IS_VIEW (view), FALSE);
 
@@ -504,7 +504,7 @@ gtranslator_view_get_can_search_again (GtranslatorView * view)
 
 /**
  * gtranslator_view_search_forward:
- * @view: a #GtranslatorView
+ * @view: a #GtrView
  * @start: start of search 
  * @end: bound for the search, or %NULL for the end of the buffer
  * @match_start: return location for start of match, or %NULL
@@ -519,7 +519,7 @@ gtranslator_view_get_can_search_again (GtranslatorView * view)
  * Returns: whether a match was found
  */
 gboolean
-gtranslator_view_search_forward (GtranslatorView * view,
+gtranslator_view_search_forward (GtrView * view,
 				 const GtkTextIter * start,
 				 const GtkTextIter * end,
 				 GtkTextIter * match_start,
@@ -593,7 +593,7 @@ gtranslator_view_search_forward (GtranslatorView * view,
 
 /**
  * gtranslator_view_search_backward:
- * @view: a #GtranslatorView
+ * @view: a #GtrView
  * @start: start of search 
  * @end: bound for the search, or %NULL for the end of the buffer
  * @match_start: return location for start of match, or %NULL
@@ -608,7 +608,7 @@ gtranslator_view_search_forward (GtranslatorView * view,
  * Returns: whether a match was found
  */
 gboolean
-gtranslator_view_search_backward (GtranslatorView * view,
+gtranslator_view_search_backward (GtrView * view,
 				  const GtkTextIter * start,
 				  const GtkTextIter * end,
 				  GtkTextIter * match_start,
@@ -682,10 +682,10 @@ gtranslator_view_search_backward (GtranslatorView * view,
 
 /**
  * gtranslator_view_replace_all:
- * @view: a #GtranslatorView
+ * @view: a #GtrView
  * @find: the text to find
  * @replace: the text to replace @find
- * @flags: a #GtranslatorSearchFlags
+ * @flags: a #GtrSearchFlags
  * 
  * Replaces all matches of @find with @replace and returns the number of 
  * replacements.
@@ -693,7 +693,7 @@ gtranslator_view_search_backward (GtranslatorView * view,
  * Returns: the number of replacements made it.
  */
 gint
-gtranslator_view_replace_all (GtranslatorView * view,
+gtranslator_view_replace_all (GtrView * view,
 			      const gchar * find,
 			      const gchar * replace, guint flags)
 {
@@ -793,13 +793,13 @@ gtranslator_view_replace_all (GtranslatorView * view,
 
 /**
  * gtranslator_view_reload_scheme_color:
- * @view: a #GtranslatorView
+ * @view: a #GtrView
  *
  * Reloads the gtksourceview scheme color. Neccessary when the scheme color 
  * changes.
  */
 void
-gtranslator_view_reload_scheme_color (GtranslatorView * view)
+gtranslator_view_reload_scheme_color (GtrView * view)
 {
   GtkSourceBuffer *buf;
   GtkSourceStyleScheme *scheme;
