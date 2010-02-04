@@ -27,7 +27,7 @@ libopentran_la_LDFLAGS = \
 	$(GTRANSLATOR_LIBS)					\
 	$(SOUP_LIBS)
 
-uidir = $(pkgdatadir)
+uidir = $(pkgdatadir)/ui
 
 ui_DATA =  \
 	gtr-open-tran-dialog.ui

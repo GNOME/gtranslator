@@ -24,7 +24,7 @@ libsourcecodeview_la_LDFLAGS = \
 	$(PLUGIN_LIBTOOL_FLAGS)				\
 	$(GTRANSLATOR_LIBS)
 
-uidir = $(pkgdatadir)
+uidir = $(pkgdatadir)/ui
 
 ui_DATA =  \
         gtr-viewer.ui \

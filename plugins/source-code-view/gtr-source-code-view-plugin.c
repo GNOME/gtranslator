@@ -22,6 +22,7 @@
 
 #include "gtr-source-code-view-plugin.h"
 #include "gtr-context.h"
+#include "gtr-dirs.h"
 #include "gtr-utils.h"
 #include "gtr-viewer.h"
 #include "gtr-window.h"
@@ -38,9 +39,6 @@
 #define USE_EDITOR_KEY SOURCE_CODE_VIEW_BASE_KEY "/use_editor"
 #define PROGRAM_CMD_KEY SOURCE_CODE_VIEW_BASE_KEY "/program_cmd"
 #define LINE_CMD_KEY SOURCE_CODE_VIEW_BASE_KEY "/line_cmd"
-
-/* Glade */
-#define UI_FILE DATADIR"/source-code-view-dialog.ui"
 
 #define GTR_SOURCE_CODE_VIEW_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
@@ -563,12 +561,14 @@ get_configuration_dialog (GtrSourceCodeViewPlugin * plugin)
   GtkWidget *error_widget;
   gchar *value;
   gboolean use_editor;
+  gchar *path;
   gchar *root_objects[] = {
     "dialog",
     NULL
   };
 
-  ret = gtranslator_utils_get_ui_objects (UI_FILE,
+  path = gtranslator_dirs_get_ui_file ("source-code-view-dialog.ui");
+  ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,
 					  "dialog", &plugin->priv->dialog,
@@ -583,6 +583,7 @@ get_configuration_dialog (GtrSourceCodeViewPlugin * plugin)
 					  "line_cmd",
 					  &plugin->priv->line_cmd_entry,
 					  NULL);
+  g_free (path);
 
   if (!ret)
     {

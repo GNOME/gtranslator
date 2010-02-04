@@ -24,6 +24,7 @@
 #include "gtr-open-tran-plugin.h"
 #include "gtr-open-tran-panel.h"
 #include "gtr-application.h"
+#include "gtr-dirs.h"
 #include "gtr-window.h"
 #include "gtr-utils.h"
 
@@ -33,7 +34,6 @@
 
 #define OPEN_TRAN_PLUGIN_ICON "open-tran.png"
 #define WINDOW_DATA_KEY	"GtrOpenTranPluginWindowData"
-#define UI_FILE DATADIR"/open-tran-dialog.ui"
 
 #define GTR_OPEN_TRAN_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
@@ -157,12 +157,14 @@ get_configuration_dialog (GtrOpenTranPlugin * plugin)
 
   gboolean ret;
   GtkWidget *error_widget;
+  gchar *path;
   gchar *root_objects[] = {
     "dialog",
     NULL
   };
 
-  ret = gtranslator_utils_get_ui_objects (UI_FILE,
+  path = gtranslator_dirs_get_ui_file ("open-tran-dialog.ui");
+  ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,
 					  "dialog", &plugin->priv->dialog,
@@ -172,6 +174,7 @@ get_configuration_dialog (GtrOpenTranPlugin * plugin)
 					  "own_code",
 					  &plugin->priv->own_code_entry,
 					  NULL);
+  g_free (path);
 
   if (!ret)
     {

@@ -61,6 +61,7 @@ gtranslator_viewer_init (GtrViewer * dlg)
   gboolean ret;
   GtkWidget *error_widget;
   GtkWidget *sw;
+  gchar *path;
   gchar *root_objects[] = {
     "main_box",
     NULL
@@ -88,13 +89,15 @@ gtranslator_viewer_init (GtrViewer * dlg)
 		    "response", G_CALLBACK (dialog_response_handler), NULL);
 
   /*Builder */
-  ret = gtranslator_utils_get_ui_objects (DATADIR "/viewer.ui",
+  path = gtranslator_dirs_get_ui_file ("viewer.ui");
+  ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,
 					  "main_box", &dlg->priv->main_box,
 					  "scrolledwindow", &sw,
 					  "filename_label",
 					  &dlg->priv->filename_label, NULL);
+  g_free (path);
 
   if (!ret)
     {
