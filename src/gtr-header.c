@@ -92,12 +92,12 @@ parse_nplurals (GtrHeader * header)
 
   pointer = plural_forms;
 
-  while (*pointer != '=')
+  while (*pointer != '\0' && *pointer != '=')
     pointer++;
   pointer++;
 
   //if there are any space between '=' and nplural number pointer++
-  while (*pointer == ' ')
+  while (*pointer != '\0' && *pointer == ' ')
     pointer++;
 
   header->priv->nplurals = g_ascii_digit_value (*pointer);
