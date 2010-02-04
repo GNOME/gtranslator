@@ -110,7 +110,7 @@ gtranslator_comment_dialog_init (GtrCommentDialog * dlg)
 		    "response", G_CALLBACK (dialog_response_handler), NULL);
 
   /*Glade */
-  path = gtranslator_dirs_get_ui_file ("comment-dialog.ui");
+  path = gtranslator_dirs_get_ui_file ("gtr-comment-dialog.ui");
   ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,

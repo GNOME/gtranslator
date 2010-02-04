@@ -388,7 +388,7 @@ gtranslator_search_dialog_init (GtrSearchDialog * dlg)
 				  (GTK_DIALOG (dlg)->action_area), 5);
   gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);
 
-  path = gtranslator_dirs_get_ui_file ("search-dialog.ui");
+  path = gtranslator_dirs_get_ui_file ("gtr-search-dialog.ui");
   ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,

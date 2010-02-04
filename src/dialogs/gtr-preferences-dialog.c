@@ -1200,7 +1200,7 @@ gtranslator_preferences_dialog_init (GtrPreferencesDialog * dlg)
 
   /*Glade */
 
-  path = gtranslator_dirs_get_ui_file ("preferences-dialog.ui");
+  path = gtranslator_dirs_get_ui_file ("gtr-preferences-dialog.ui");
   ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,

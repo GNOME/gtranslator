@@ -110,7 +110,7 @@ gtranslator_jump_dialog_init (GtrJumpDialog * dlg)
 		    "response", G_CALLBACK (dialog_response_handler), NULL);
 
   /*Glade */
-  path = gtranslator_dirs_get_ui_file ("jump-dialog.ui");
+  path = gtranslator_dirs_get_ui_file ("gtr-jump-dialog.ui");
   ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,

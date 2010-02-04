@@ -141,7 +141,7 @@ _gtranslator_plugin_info_new (const gchar * file)
       goto error;
     }
 
-  if (!g_key_file_has_key (plugin_file, "Gtr Plugin", "IAge", NULL))
+  if (!g_key_file_has_key (plugin_file, "Gtranslator Plugin", "IAge", NULL))
     {
       DEBUG_PRINT ("IAge key does not exist in file: %s", file);
       goto error;
@@ -149,7 +149,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Check IAge=2 */
   if (g_key_file_get_integer (plugin_file,
-			      "Gtr Plugin", "IAge", NULL) != 2)
+			      "Gtranslator Plugin", "IAge", NULL) != 2)
     {
       DEBUG_PRINT ("Wrong IAge in file: %s", file);
       goto error;
@@ -157,7 +157,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get module name */
   str = g_key_file_get_string (plugin_file,
-			       "Gtr Plugin", "Module", NULL);
+			       "Gtranslator Plugin", "Module", NULL);
 
   if ((str != NULL) && (*str != '\0'))
     {
@@ -171,7 +171,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get the dependency list */
   info->dependencies = g_key_file_get_string_list (plugin_file,
-						   "Gtr Plugin",
+						   "Gtranslator Plugin",
 						   "Depends", NULL, NULL);
   if (info->dependencies == NULL)
     {
@@ -181,7 +181,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get the loader for this plugin */
   str = g_key_file_get_string (plugin_file,
-			       "Gtr Plugin", "Loader", NULL);
+			       "Gtranslator Plugin", "Loader", NULL);
   if (str && strcmp (str, "python") == 0)
     {
 #ifndef ENABLE_PYTHON
@@ -200,7 +200,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get Name */
   str = g_key_file_get_locale_string (plugin_file,
-				      "Gtr Plugin",
+				      "Gtranslator Plugin",
 				      "Name", NULL, NULL);
   if (str)
     info->name = str;
@@ -212,7 +212,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get Description */
   str = g_key_file_get_locale_string (plugin_file,
-				      "Gtr Plugin",
+				      "Gtranslator Plugin",
 				      "Description", NULL, NULL);
   if (str)
     info->desc = str;
@@ -221,7 +221,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get Icon */
   str = g_key_file_get_locale_string (plugin_file,
-				      "Gtr Plugin",
+				      "Gtranslator Plugin",
 				      "Icon", NULL, NULL);
   if (str)
     info->icon_name = str;
@@ -231,7 +231,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get Authors */
   info->authors = g_key_file_get_string_list (plugin_file,
-					      "Gtr Plugin",
+					      "Gtranslator Plugin",
 					      "Authors", NULL, NULL);
   if (info->authors == NULL)
     DEBUG_PRINT ("Could not find 'Authors' in %s", file);
@@ -239,7 +239,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get Copyright */
   str = g_key_file_get_string (plugin_file,
-			       "Gtr Plugin", "Copyright", NULL);
+			       "Gtranslator Plugin", "Copyright", NULL);
   if (str)
     info->copyright = str;
   else
@@ -247,7 +247,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get License */
   str = g_key_file_get_string (plugin_file,
-			       "Gtr Plugin", "License", NULL);
+			       "Gtranslator Plugin", "License", NULL);
   if (str)
     info->license = str;
   else
@@ -255,7 +255,7 @@ _gtranslator_plugin_info_new (const gchar * file)
 
   /* Get Website */
   str = g_key_file_get_string (plugin_file,
-			       "Gtr Plugin", "Website", NULL);
+			       "Gtranslator Plugin", "Website", NULL);
   if (str)
     info->website = str;
   else

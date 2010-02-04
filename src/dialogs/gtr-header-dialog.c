@@ -265,7 +265,7 @@ gtranslator_header_dialog_init (GtrHeaderDialog * dlg)
 
   g_signal_connect (dlg, "response", G_CALLBACK (gtk_widget_destroy), NULL);
 
-  path = gtranslator_dirs_get_ui_file ("header-dialog.ui");
+  path = gtranslator_dirs_get_ui_file ("gtr-header-dialog.ui");
   ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,

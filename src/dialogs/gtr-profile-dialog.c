@@ -383,7 +383,7 @@ gtranslator_profile_dialog_init (GtrProfileDialog * dlg)
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
   gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);
 
-  path = gtranslator_dirs_get_ui_file ("profile-dialog.ui");
+  path = gtranslator_dirs_get_ui_file ("gtr-profile-dialog.ui");
   ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,
