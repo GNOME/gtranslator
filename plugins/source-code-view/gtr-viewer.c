@@ -90,7 +90,7 @@ gtranslator_viewer_init (GtrViewer * dlg)
 		    "response", G_CALLBACK (dialog_response_handler), NULL);
 
   /*Builder */
-  path = gtranslator_dirs_get_ui_file ("viewer.ui");
+  path = gtranslator_dirs_get_ui_file ("gtr-viewer.ui");
   ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,
