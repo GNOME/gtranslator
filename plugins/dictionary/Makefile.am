@@ -9,7 +9,7 @@ INCLUDES = \
 	$(GTRANSLATOR_CFLAGS) 				\
 	$(DICTIONARY_CFLAGS)				\
 	$(WARN_CFLAGS)					\
-	$(DISABLE_DEPRECATED_CFLAGS)			\
+	$(DISABLE_DEPRECATED)				\
 	-DGTR_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"
 
 plugin_LTLIBRARIES = libdict.la

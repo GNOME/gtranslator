@@ -3,68 +3,66 @@ dnl Process this file with autoconf to produce a configure script.
 dnl -------------------------------------------------------------------
 dnl (C) 2000-2004 Fatih Demir <kabalak@kabalak.net>
 dnl -------------------------------------------------------------------
-AC_PREREQ(2.52)
-AC_INIT(gtranslator, 1.9.7,
-	http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator)
+AC_PREREQ(2.63.2)
+AC_INIT([gtranslator],[1.9.7],[http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator],[gtranslator],[http://gtranslator.sourceforge.net/])
 
-AC_CONFIG_SRCDIR(src/main.c)
+AC_CONFIG_SRCDIR([src/main.c])
+AC_CONFIG_HEADER([config.h])
 AC_CONFIG_MACRO_DIR([m4])
-AM_CONFIG_HEADER(config.h)
-AC_CONFIG_MACRO_DIR ([m4])
 
 GTR_API_VERSION=2.0
 AC_SUBST(GTR_API_VERSION)
 
-AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+AM_INIT_AUTOMAKE([1.10 check-news])
 AM_MAINTAINER_MODE
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
+dnl -------------------------------------------------------------------
+dnl Check for some standard stuff.
+dnl -------------------------------------------------------------------
+# Checks for programs
+AC_PROG_CC
 AC_PROG_INSTALL
+
+# Initialize libtool
+LT_PREREQ([2.2.6])
+LT_INIT
+
+# Checks for header files.
+AC_CHECK_HEADERS([locale.h stdlib.h string.h sys/socket.h unistd.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_TYPE_SIZE_T
+
+# Checks for library functions.
+AC_CHECK_FUNCS([memset setlocale strchr strdup strstr])
 
 dnl -------------------------------------------------------------------
 dnl Use intltools.
 dnl -------------------------------------------------------------------
-IT_PROG_INTLTOOL([0.35.0])
-GETTEXT_PACKAGE=gtranslator
-AC_SUBST(GETTEXT_PACKAGE)
+IT_PROG_INTLTOOL([0.40.0])
+
+AC_SUBST([GETTEXT_PACKAGE], [gtranslator])
+AM_GNU_GETTEXT_VERSION([0.17])
 AM_GLIB_GNU_GETTEXT
-AC_CHECK_FUNC(bind_textdomain_codeset,,[AC_CHECK_LIB(intl,bind_textdomain_codeset)])
-AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[Gettext package])
+AC_DEFINE([GETTEXT_PACKAGE], [PACKAGE_TARNAME], [Define to the gettext package name.])
 
 dnl -------------------------------------------------------------------
-dnl Standard bla-bla checks.
+dnl Documentation
 dnl -------------------------------------------------------------------
-AC_PROG_CC
-AC_ISC_POSIX
-AM_PROG_LIBTOOL
-AC_TYPE_SIGNAL
 GNOME_DOC_INIT
 GTK_DOC_CHECK([1.0])
 
 dnl -------------------------------------------------------------------
-dnl The standard checks for the compiler.
-dnl -------------------------------------------------------------------
-AC_HEADER_STDC
-
-dnl -------------------------------------------------------------------
 dnl The standard extended GNOME compile warning options ...
 dnl -------------------------------------------------------------------
-GNOME_COMPILE_WARNINGS(maximum)
+# Uncomment this when GtkSourceView uses single includes: GB#563786
+#GNOME_MAINTAINER_MODE_DEFINES
+GNOME_COMPILE_WARNINGS([maximum])
 
-AC_ARG_ENABLE(deprecations,
-              [AC_HELP_STRING([--enable-deprecations],
-                              [warn about deprecated usages [default=no]])],,
-              [enable_deprecations=no])
 
-if test "x$enable_deprecations" = "xyes"; then
-   DISABLE_DEPRECATED_CFLAGS="\
--DG_DISABLE_DEPRECATED \
--DGDK_DISABLE_DEPRECATED \
--DGTK_DISABLE_DEPRECATED \
--DGDK_PIXBUF_DISABLE_DEPRECATED \
--DGNOME_DISABLE_DEPRECATED"
-   AC_SUBST(DISABLE_DEPRECATED_CFLAGS)
-fi
+AC_PATH_PROG([GLIB_GENMARSHAL], [glib-genmarshal])
+AC_PATH_PROG([GLIB_MKENUMS], [glib-mkenums])
 
 dnl ==========================================================================
 dnl
@@ -103,9 +101,6 @@ PKG_CHECK_MODULES(GTRANSLATOR, [
 AC_SUBST(GTRANSLATOR_CFLAGS)
 AC_SUBST(GTRANSLATOR_LIBS)
 
-AC_PATH_PROG([GLIB_GENMARSHAL], [glib-genmarshal])
-AC_PATH_PROG([GLIB_MKENUMS], [glib-mkenums])
-
 dnl ------------------------
 dnl Check for win32 platform
 dnl ------------------------
@@ -136,14 +131,6 @@ fi
 AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
 
 
-dnl -------------------------------------------------------------------
-dnl Whether we use the broken, unsupported gtk+ functions
-dnl -------------------------------------------------------------------
-AC_ARG_ENABLE(gtk_enable_broken, [  --enable-gtk-broken     Use broken GTK functions ],[
-	gtk_enable_broken=yes
-	AC_DEFINE(GTK_ENABLE_BROKEN, [yes], [Define this to use broken GTK functions])
-])
-
 dnl ------
 dnl GCONF
 dnl ------
@@ -154,16 +141,6 @@ AC_PATH_PROG([GCONFTOOL], [gconftool-2], [no])
 if test "$GCONFTOOL" = "no"; then
    AC_MSG_ERROR([gconftool-2 not found])
 fi 
-
-dnl -------------------------------------------------------------------
-dnl Check for gettext >= 0.17.0 - uses it's parser/writer functions
-dnl -------------------------------------------------------------------
-AC_CHECK_HEADER([gettext-po.h])
-AC_CHECK_LIB([gettextpo], [po_format_list], [
-	LDFLAGS="$LDFLAGS -lgettextpo"
-],[
-	AC_MSG_ERROR(Missing or inadequate gettext library. Need at least version 0.17.0)
-])
 
 dnl -------------------------------------------------------------------
 dnl Check for libdb >= 4.3
@@ -181,8 +158,7 @@ dnl Check for gtkspell >= 2.0 and use it if found
 dnl -------------------------------------------------------------------
 have_gtkspell=no
 AC_ARG_WITH(gtkspell,
-            AC_HELP_STRING([--with-gtkspell],
-                           [Build with spell support]),,
+            AS_HELP_STRING([--with-gtkspell],[Build with spell support]),,
             with_gtkspell=auto)
 
 if test x"$with_gtkspell" != "xno"
@@ -231,8 +207,7 @@ AM_CONDITIONAL(USE_LIBSOUP, test x"$have_libsoup" = "xyes")
 # ================================================================
 have_gdict=no
 AC_ARG_WITH(dictionary,
-	    AC_HELP_STRING([--with-dictionary],
-	    		   [Build with dictionary support]),,
+	    AS_HELP_STRING([--with-dictionary],[Build with dictionary support]),,
 	    with_dictionary=auto)
 
 if test x"$with_dictionary" != "xno"
@@ -273,7 +248,7 @@ dnl -------------------------------------------------------------------
 dnl Enable debug builds.
 dnl -------------------------------------------------------------------
 AC_ARG_ENABLE(debug,
-	AC_HELP_STRING([--enable-debug],[Turn on debugging flags (default=yes)]),
+	AS_HELP_STRING([--enable-debug],[Turn on debugging flags (default=yes)]),
 	,enable_debug=yes)
 AC_MSG_CHECKING([if a debug friendly version should be build])
 if test "x$enable_debug" = "xyes" ; then
@@ -293,7 +268,7 @@ AC_SUBST(MY_DATE)
 dnl -------------------------------------------------------------------
 dnl Put out the configured files.
 dnl -------------------------------------------------------------------
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 gtranslator.spec
 data/Makefile
@@ -326,6 +301,7 @@ src/plugin-system/Makefile
 src/translation-memory/Makefile
 src/translation-memory/berkeley/Makefile
 ])
+AC_OUTPUT
 
 dnl ------------------------------------------------------------------
 dnl Print an information screen at the end of the process
@@ -335,11 +311,11 @@ echo "
 ------------------------------------------------------------------
 -- gtranslator compilation options
 
-gtranslator version	  :	${VERSION}
+gtranslator version	  :	${PACKAGE_VERSION}
 
 debug friendly build	  :	${enable_debug:-no}
-build with deprecation 	  :	${enable_deprecated:-no}
-compilation flags      	  :	${CFLAGS}
+compilation flags	  :	${CFLAGS}
+compilation warnings	  :	${WARN_CFLAGS}
 ------------------------------------------------------------------
 "
 

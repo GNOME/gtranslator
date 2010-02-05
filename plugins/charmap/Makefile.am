@@ -9,7 +9,7 @@ INCLUDES = \
 	$(GTRANSLATOR_CFLAGS) 				\
 	$(GUCHARMAP_CFLAGS)				\
 	$(WARN_CFLAGS)					\
-	$(DISABLE_DEPRECATED_CFLAGS)			\
+	$(DISABLE_DEPRECATED)				\
 	-DGTR_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"
 
 plugin_LTLIBRARIES = libcharmap.la

@@ -11,7 +11,7 @@ INCLUDES =                                                      \
 	$(GTRANSLATOR_CFLAGS) 				\
 	$(SOUP_CFLAGS)				\
 	$(WARN_CFLAGS)					\
-	$(DISABLE_DEPRECATED_CFLAGS)			\
+	$(DISABLE_DEPRECATED)				\
 	-DGTR_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"
 
 plugin_LTLIBRARIES = libopentran.la

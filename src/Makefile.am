@@ -26,7 +26,8 @@ INCLUDES = \
 	$(GTRANSLATOR_CFLAGS)                                   \
 	$(GTKSPELL_CFLAGS)                                      \
 	$(SPELLCHECK_CFLAGS)					\
-	$(DEPRECATED_FLAGS)                                     \
+	$(WARN_CFLAGS)						\
+	$(DISABLE_DEPRECATED)                                   \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"                         \
 	-DSCRIPTSDIR=\""$(pkgdatadir)"/scripts\"	\
 	-DWINDOW_ICON=\""$(datadir)"/pixmaps/gtranslator.png\"  \
@@ -40,7 +41,7 @@ bin_PROGRAMS = \
 
 gtranslator_SOURCES = main.c
 
-gtranslator_LDADD = libgtranslator.la $(GTRANSLATOR_LIBS) $(GTKSPELL_LIBS) $(INTLLIBS)
+gtranslator_LDADD = libgtranslator.la $(GTRANSLATOR_LIBS) $(GTKSPELL_LIBS) $(INTLLIBS) -lgettextpo
 
 if PLATFORM_WIN32
 gtranslator_LDFLAGS = -Wl,--export-all-symbols -mwindows -Wl,--out-implib,libgedit-$(GTR_API_VERSION).a

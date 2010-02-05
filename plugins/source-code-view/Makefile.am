@@ -7,7 +7,7 @@ INCLUDES = \
 	-I$(top_srcdir)/src/plugin-system		\
 	$(GTRANSLATOR_CFLAGS) 				\
 	$(WARN_CFLAGS)					\
-	$(DISABLE_DEPRECATED_CFLAGS)			\
+	$(DISABLE_DEPRECATED)				\
 	-DDATADIR=\""$(pkgdatadir)"\"                   \
 	-DGTR_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"
 

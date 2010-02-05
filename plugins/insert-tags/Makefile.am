@@ -8,7 +8,7 @@ INCLUDES = \
 	-I$(top_srcdir)/src/dialogs			\
 	$(GTRANSLATOR_CFLAGS) 				\
 	$(WARN_CFLAGS)					\
-	$(DISABLE_DEPRECATED_CFLAGS)			\
+	$(DISABLE_DEPRECATED)				\
 	-DGTR_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"
 
 plugin_LTLIBRARIES = \

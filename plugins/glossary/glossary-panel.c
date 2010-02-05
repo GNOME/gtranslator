@@ -88,7 +88,7 @@ G_DEFINE_TYPE (GtrGlossaryPanel, gtranslator_glossary_panel,
   /*
    * allocate the struct
    */
-  ret = (personPtr) malloc (sizeof (person));
+  ret = (personPtr) g_malloc (sizeof (person));
   if (ret == NULL)
     {
       fprintf (stderr, "out of memory\n");

@@ -9,7 +9,7 @@ INCLUDES =                                                      \
 	-DGTR_PLUGINDIR=\""$(libdir)/gtranslator/plugins"\"	\
         $(GTRANSLATOR_CFLAGS)                                   \
         $(WARN_CFLAGS)                                          \
-        $(DISABLE_DEPRECATED_CFLAGS)
+        $(DISABLE_DEPRECATED)
 
 noinst_LTLIBRARIES = \
 	libpluginsystem.la

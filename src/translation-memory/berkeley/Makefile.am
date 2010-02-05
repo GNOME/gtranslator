@@ -8,7 +8,7 @@ INCLUDES =                                                      \
 	-DPIXMAPSDIR=\""$(datadir)"/pixmaps/gtranslator\"       \
         $(GTRANSLATOR_CFLAGS)                                   \
         $(WARN_CFLAGS)                                          \
-        $(DISABLE_DEPRECATED_CFLAGS)
+        $(DISABLE_DEPRECATED)
 
 noinst_LTLIBRARIES = \
 	libberkeley.la

@@ -133,8 +133,8 @@ gtranslator_about_dialog (GtkAction * action, GtrWindow * window)
 			  * up in the "about" box
 			  */
 			 "translator-credits", _("translator-credits"),
-			 "version", VERSION,
-			 "website", "http://gtranslator.sourceforge.net/",
+			 "version", PACKAGE_VERSION,
+			 "website", PACKAGE_URL,
 			 "wrap-license", TRUE,
 			 "website-label", _("Gtr Web Site"), NULL);
 
