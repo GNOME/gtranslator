@@ -163,7 +163,7 @@ get_configuration_dialog (GtrOpenTranPlugin * plugin)
     NULL
   };
 
-  path = gtranslator_dirs_get_ui_file ("open-tran-dialog.ui");
+  path = gtranslator_dirs_get_ui_file ("gtr-open-tran-dialog.ui");
   ret = gtranslator_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,
