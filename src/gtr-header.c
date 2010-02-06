@@ -67,40 +67,53 @@ parse_nplurals (GtrHeader * header)
 {
   gchar *pointer, *plural_forms;
 
-  plural_forms = g_strdup (gtranslator_header_get_plural_forms (header));
+  plural_forms = gtranslator_header_get_plural_forms (header);
+  header->priv->nplurals = -1;
 
-  if (!plural_forms)
+  if (gtranslator_prefs_manager_get_use_profile_values () || !plural_forms)
     {
       const gchar *plural_form;
       GtrProfile *profile;
-
-      header->priv->nplurals = -1;
 
       profile = gtranslator_application_get_active_profile (GTR_APP);
 
       if (profile)
         plural_form = gtranslator_profile_get_plurals (profile);
-      else
+      else if (!plural_forms)
         return;
 
       if (plural_form)
         {
-          gtranslator_header_set_plural_forms (header, plural_form);
+          g_free (plural_forms);
           plural_forms = g_strdup (plural_form);
         }
+      else if (!plural_forms)
+        return;
     }
 
-  pointer = plural_forms;
+  pointer = g_strrstr (plural_forms, "nplurals");
 
-  while (*pointer != '\0' && *pointer != '=')
-    pointer++;
-  pointer++;
+  if (pointer != NULL)
+    {
+      while (*pointer != '\0' && *pointer != '=')
+        pointer++;
 
-  //if there are any space between '=' and nplural number pointer++
-  while (*pointer != '\0' && *pointer == ' ')
-    pointer++;
+      if (pointer != '\0')
+        {
+          pointer++;
+          while (*pointer != '\0' && *pointer == ' ')
+            pointer++;
 
-  header->priv->nplurals = g_ascii_digit_value (*pointer);
+          if (*pointer == '\0')
+            return;
+        }
+      else
+        return;
+
+      header->priv->nplurals = g_ascii_digit_value (*pointer);
+    }
+
+  /*g_message ("nplurals: %d", header->priv->nplurals);*/
 
   g_free (plural_forms);
 }
