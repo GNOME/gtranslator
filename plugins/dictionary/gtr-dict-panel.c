@@ -39,7 +39,7 @@
 						 GTR_TYPE_DICT_PANEL,     \
 						 GtrDictPanelPrivate))
 
-#define DICTIONARY_GCONF_DIR                     "/apps/gtranslator/plugins/dictionary"
+#define DICTIONARY_GCONF_DIR                     "/apps/gtr/plugins/dictionary"
 #define DICTIONARY_GCONF_DATABASE_KEY            DICTIONARY_GCONF_DIR "/database"
 #define DICTIONARY_GCONF_STRATEGY_KEY            DICTIONARY_GCONF_DIR "/strategy"
 #define DICTIONARY_DEFAULT_SOURCE_NAME           "Default"
@@ -52,7 +52,7 @@
 #define GDICT_SIDEBAR_STRATEGIES_PAGE   "strat-chooser"
 #define GDICT_SIDEBAR_SOURCES_PAGE      "source-chooser"
 
-GTR_PLUGIN_DEFINE_TYPE (GtrDictPanel, gtranslator_dict_panel,
+GTR_PLUGIN_DEFINE_TYPE (GtrDictPanel, gtr_dict_panel,
 			GTK_TYPE_VBOX)
      struct _GtrDictPanelPrivate
      {
@@ -82,7 +82,7 @@ GTR_PLUGIN_DEFINE_TYPE (GtrDictPanel, gtranslator_dict_panel,
      };
 
      static void
-       gtranslator_dict_panel_create_warning_dialog (const gchar * primary,
+       gtr_dict_panel_create_warning_dialog (const gchar * primary,
 						     const gchar * secondary)
 {
   GtkWidget *dialog;
@@ -113,7 +113,7 @@ gdict_gconf_get_string_with_default (GConfClient * client,
 }
 
 static void
-gtranslator_dict_panel_entry_activate_cb (GtkWidget * widget,
+gtr_dict_panel_entry_activate_cb (GtkWidget * widget,
 					  GtrDictPanel * panel)
 {
   GtrDictPanelPrivate *priv = panel->priv;
@@ -131,7 +131,7 @@ gtranslator_dict_panel_entry_activate_cb (GtkWidget * widget,
 }
 
 static void
-gtranslator_dict_panel_set_database (GtrDictPanel * panel,
+gtr_dict_panel_set_database (GtrDictPanel * panel,
 				     const gchar * database)
 {
   GtrDictPanelPrivate *priv = panel->priv;
@@ -149,7 +149,7 @@ gtranslator_dict_panel_set_database (GtrDictPanel * panel,
 }
 
 static void
-gtranslator_dict_panel_set_strategy (GtrDictPanel * panel,
+gtr_dict_panel_set_strategy (GtrDictPanel * panel,
 				     const gchar * strategy)
 {
   GtrDictPanelPrivate *priv = panel->priv;
@@ -183,7 +183,7 @@ get_context_from_loader (GtrDictPanel * panel)
 	g_strdup_printf (_("No dictionary source available with name '%s'"),
 			 priv->source_name);
 
-      gtranslator_dict_panel_create_warning_dialog (_
+      gtr_dict_panel_create_warning_dialog (_
 						    ("Unable to find dictionary source"),
 						    detail);
       g_free (detail);
@@ -191,9 +191,9 @@ get_context_from_loader (GtrDictPanel * panel)
       return NULL;
     }
 
-  gtranslator_dict_panel_set_database (panel,
+  gtr_dict_panel_set_database (panel,
 				       gdict_source_get_database (source));
-  gtranslator_dict_panel_set_strategy (panel,
+  gtr_dict_panel_set_strategy (panel,
 				       gdict_source_get_strategy (source));
 
   retval = gdict_source_get_context (source);
@@ -204,7 +204,7 @@ get_context_from_loader (GtrDictPanel * panel)
       detail = g_strdup_printf (_("No context available for source '%s'"),
 				gdict_source_get_description (source));
 
-      gtranslator_dict_panel_create_warning_dialog (_
+      gtr_dict_panel_create_warning_dialog (_
 						    ("Unable to create a context"),
 						    detail);
 
@@ -220,7 +220,7 @@ get_context_from_loader (GtrDictPanel * panel)
 }
 
 static void
-gtranslator_dict_panel_set_context (GtrDictPanel * panel,
+gtr_dict_panel_set_context (GtrDictPanel * panel,
 				    GdictContext * context)
 {
   GtrDictPanelPrivate *priv = panel->priv;
@@ -249,7 +249,7 @@ gtranslator_dict_panel_set_context (GtrDictPanel * panel,
 }
 
 static void
-gtranslator_dict_panel_set_source_name (GtrDictPanel * panel,
+gtr_dict_panel_set_source_name (GtrDictPanel * panel,
 					const gchar * source_name)
 {
   GtrDictPanelPrivate *priv = panel->priv;
@@ -270,7 +270,7 @@ gtranslator_dict_panel_set_source_name (GtrDictPanel * panel,
 					   DICTIONARY_DEFAULT_SOURCE_NAME);
 
   context = get_context_from_loader (panel);
-  gtranslator_dict_panel_set_context (panel, context);
+  gtr_dict_panel_set_context (panel, context);
 
   if (priv->source_chooser)
     gdict_source_chooser_set_current_source (GDICT_SOURCE_CHOOSER
@@ -284,7 +284,7 @@ source_activated_cb (GdictSourceChooser * chooser,
 		     GdictSource * source, GtrDictPanel * panel)
 {
   g_signal_handlers_block_by_func (chooser, source_activated_cb, panel);
-  gtranslator_dict_panel_set_source_name (panel, source_name);
+  gtr_dict_panel_set_source_name (panel, source_name);
   g_signal_handlers_unblock_by_func (chooser, source_activated_cb, panel);
 
   if (panel->priv->status)
@@ -293,7 +293,7 @@ source_activated_cb (GdictSourceChooser * chooser,
 
       message = g_strdup_printf (_("Dictionary source '%s' selected"),
 				 gdict_source_get_description (source));
-      gtranslator_statusbar_flash_message (panel->priv->status, 0, "%s",
+      gtr_statusbar_flash_message (panel->priv->status, 0, "%s",
 					   message);
       g_free (message);
     }
@@ -305,14 +305,14 @@ strategy_activated_cb (GdictStrategyChooser * chooser,
 		       const gchar * strat_desc, GtrDictPanel * panel)
 {
   GtrDictPanelPrivate *priv = panel->priv;
-  gtranslator_dict_panel_set_strategy (panel, strat_name);
+  gtr_dict_panel_set_strategy (panel, strat_name);
 
   if (priv->status)
     {
       gchar *message;
 
       message = g_strdup_printf (_("Strategy '%s' selected"), strat_desc);
-      gtranslator_statusbar_flash_message (panel->priv->status, 0, "%s",
+      gtr_statusbar_flash_message (panel->priv->status, 0, "%s",
 					   message);
       g_free (message);
     }
@@ -324,21 +324,21 @@ database_activated_cb (GdictDatabaseChooser * chooser,
 		       const gchar * db_desc, GtrDictPanel * panel)
 {
   GtrDictPanelPrivate *priv = panel->priv;
-  gtranslator_dict_panel_set_database (panel, db_name);
+  gtr_dict_panel_set_database (panel, db_name);
 
   if (priv->status)
     {
       gchar *message;
 
       message = g_strdup_printf (_("Database '%s' selected"), db_desc);
-      gtranslator_statusbar_flash_message (panel->priv->status, 0, "%s",
+      gtr_statusbar_flash_message (panel->priv->status, 0, "%s",
 					   message);
       g_free (message);
     }
 }
 
 static void
-gtranslator_dict_panel_set_word (GtrDictPanel * panel,
+gtr_dict_panel_set_word (GtrDictPanel * panel,
 				 const gchar * word, const gchar * database)
 {
   GtrDictPanelPrivate *priv = panel->priv;
@@ -370,14 +370,14 @@ speller_word_activated_cb (GdictSpeller * speller,
   GtrDictPanelPrivate *priv = panel->priv;
   gtk_entry_set_text (GTK_ENTRY (priv->entry), word);
 
-  gtranslator_dict_panel_set_word (panel, word, db_name);
+  gtr_dict_panel_set_word (panel, word, db_name);
 
   if (priv->status)
     {
       gchar *message;
 
       message = g_strdup_printf (_("Word '%s' selected"), word);
-      gtranslator_statusbar_flash_message (panel->priv->status, 0, "%s",
+      gtr_statusbar_flash_message (panel->priv->status, 0, "%s",
 					   message);
       g_free (message);
     }
@@ -431,7 +431,7 @@ sidebar_page_changed_cb (GdictSidebar * sidebar, GtrDictPanel * panel)
     }
 
   if (message && priv->status)
-    gtranslator_statusbar_flash_message (panel->priv->status, 0, "%s",
+    gtr_statusbar_flash_message (panel->priv->status, 0, "%s",
 					 message);
 }
 
@@ -451,7 +451,7 @@ store_position (GObject * gobject, GParamSpec * arg1, gpointer user_data)
 }
 
 static void
-gtranslator_dict_panel_link_clicked (GtkWidget * defbox,
+gtr_dict_panel_link_clicked (GtkWidget * defbox,
 				     const gchar * link_text,
 				     GtrDictPanel * panel)
 {
@@ -467,7 +467,7 @@ gtranslator_dict_panel_link_clicked (GtkWidget * defbox,
 }
 
 static void
-gtranslator_dict_panel_draw (GtrDictPanel * panel)
+gtr_dict_panel_draw (GtrDictPanel * panel)
 {
   GtkWidget *vbox;
   GtkWidget *hbox;
@@ -486,7 +486,7 @@ gtranslator_dict_panel_draw (GtrDictPanel * panel)
    */
   panel->priv->button = gtk_button_new_with_mnemonic (_("Look _up:"));
   g_signal_connect (panel->priv->button, "clicked",
-		    G_CALLBACK (gtranslator_dict_panel_entry_activate_cb),
+		    G_CALLBACK (gtr_dict_panel_entry_activate_cb),
 		    panel);
   gtk_button_set_relief (GTK_BUTTON (panel->priv->button), GTK_RELIEF_NONE);
   gtk_box_pack_start (GTK_BOX (hbox), panel->priv->button, FALSE, FALSE, 0);
@@ -500,7 +500,7 @@ gtranslator_dict_panel_draw (GtrDictPanel * panel)
     gtk_entry_set_text (GTK_ENTRY (panel->priv->entry), panel->priv->word);
 
   g_signal_connect (panel->priv->entry, "activate",
-		    G_CALLBACK (gtranslator_dict_panel_entry_activate_cb),
+		    G_CALLBACK (gtr_dict_panel_entry_activate_cb),
 		    panel);
   gtk_box_pack_start (GTK_BOX (hbox), panel->priv->entry, TRUE, TRUE, 0);
   gtk_widget_show (panel->priv->entry);
@@ -514,7 +514,7 @@ gtranslator_dict_panel_draw (GtrDictPanel * panel)
     gdict_defbox_set_context (GDICT_DEFBOX (panel->priv->defbox),
 			      panel->priv->context);
   g_signal_connect (panel->priv->defbox, "link-clicked",
-		    G_CALLBACK (gtranslator_dict_panel_link_clicked), panel);
+		    G_CALLBACK (gtr_dict_panel_link_clicked), panel);
 
   gtk_container_add (GTK_CONTAINER (vbox), panel->priv->defbox);
   gtk_widget_show (panel->priv->defbox);
@@ -605,7 +605,7 @@ gtranslator_dict_panel_draw (GtrDictPanel * panel)
 }
 
 static void
-gtranslator_dict_panel_gconf_notify_cb (GConfClient * client,
+gtr_dict_panel_gconf_notify_cb (GConfClient * client,
 					guint cnxn_id,
 					GConfEntry * entry,
 					gpointer user_data)
@@ -615,35 +615,35 @@ gtranslator_dict_panel_gconf_notify_cb (GConfClient * client,
   if (strcmp (entry->key, DICTIONARY_GCONF_SOURCE_KEY) == 0)
     {
       if (entry->value && (entry->value->type == GCONF_VALUE_STRING))
-	gtranslator_dict_panel_set_source_name (panel,
+	gtr_dict_panel_set_source_name (panel,
 						gconf_value_get_string
 						(entry->value));
       else
-	gtranslator_dict_panel_set_source_name (panel,
+	gtr_dict_panel_set_source_name (panel,
 						DICTIONARY_DEFAULT_SOURCE_NAME);
     }
   else if (strcmp (entry->key, DICTIONARY_GCONF_DATABASE_KEY) == 0)
     {
       if (entry->value && (entry->value->type == GCONF_VALUE_STRING))
-	gtranslator_dict_panel_set_database (panel,
+	gtr_dict_panel_set_database (panel,
 					     gconf_value_get_string (entry->
 								     value));
       else
-	gtranslator_dict_panel_set_database (panel, GDICT_DEFAULT_DATABASE);
+	gtr_dict_panel_set_database (panel, GDICT_DEFAULT_DATABASE);
     }
   else if (strcmp (entry->key, DICTIONARY_GCONF_STRATEGY_KEY) == 0)
     {
       if (entry->value && (entry->value->type == GCONF_VALUE_STRING))
-	gtranslator_dict_panel_set_strategy (panel,
+	gtr_dict_panel_set_strategy (panel,
 					     gconf_value_get_string (entry->
 								     value));
       else
-	gtranslator_dict_panel_set_strategy (panel, GDICT_DEFAULT_STRATEGY);
+	gtr_dict_panel_set_strategy (panel, GDICT_DEFAULT_STRATEGY);
     }
 }
 
 static void
-gtranslator_dict_panel_init (GtrDictPanel * panel)
+gtr_dict_panel_init (GtrDictPanel * panel)
 {
   gchar *data_dir;
   GtrDictPanelPrivate *priv;
@@ -658,7 +658,7 @@ gtranslator_dict_panel_init (GtrDictPanel * panel)
     panel->priv->loader = gdict_source_loader_new ();
 
   /* add our data dir inside $HOME to the loader's search paths */
-  data_dir = gtranslator_utils_get_user_config_dir ();
+  data_dir = gtr_utils_get_user_config_dir ();
   gdict_source_loader_add_search_path (priv->loader, data_dir);
   g_free (data_dir);
 
@@ -680,7 +680,7 @@ gtranslator_dict_panel_init (GtrDictPanel * panel)
 
   priv->notify_id = gconf_client_notify_add (priv->gconf_client,
 					     DICTIONARY_GCONF_DIR,
-					     gtranslator_dict_panel_gconf_notify_cb,
+					     gtr_dict_panel_gconf_notify_cb,
 					     panel, NULL, &gconf_error);
   if (gconf_error)
     {
@@ -692,14 +692,14 @@ gtranslator_dict_panel_init (GtrDictPanel * panel)
     }
 
   /* force retrieval of the configuration from GConf */
-  gtranslator_dict_panel_set_source_name (panel, NULL);
+  gtr_dict_panel_set_source_name (panel, NULL);
 
   /* Draw widgets */
-  gtranslator_dict_panel_draw (panel);
+  gtr_dict_panel_draw (panel);
 }
 
 static void
-gtranslator_dict_panel_finalize (GObject * object)
+gtr_dict_panel_finalize (GObject * object)
 {
   GtrDictPanel *panel = GTR_DICT_PANEL (object);
 
@@ -708,28 +708,28 @@ gtranslator_dict_panel_finalize (GObject * object)
   g_free (panel->priv->database);
   g_free (panel->priv->strategy);
 
-  G_OBJECT_CLASS (gtranslator_dict_panel_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_dict_panel_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_dict_panel_class_init (GtrDictPanelClass * klass)
+gtr_dict_panel_class_init (GtrDictPanelClass * klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrDictPanelPrivate));
 
-  gobject_class->finalize = gtranslator_dict_panel_finalize;
+  gobject_class->finalize = gtr_dict_panel_finalize;
 
 }
 
 GtkWidget *
-gtranslator_dict_panel_new (GtrWindow * window)
+gtr_dict_panel_new (GtrWindow * window)
 {
   GtrDictPanel *panel;
 
   panel = g_object_new (GTR_TYPE_DICT_PANEL, NULL);
   panel->priv->status =
-    GTR_STATUSBAR (gtranslator_window_get_statusbar (window));
+    GTR_STATUSBAR (gtr_window_get_statusbar (window));
 
   return GTK_WIDGET (panel);
 }

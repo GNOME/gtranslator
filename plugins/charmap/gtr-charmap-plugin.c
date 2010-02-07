@@ -1,5 +1,5 @@
 /*
- * gtranslator-charmap-plugin.c - Character map side-pane for gtranslator
+ * gtr-charmap-plugin.c - Character map side-pane for gtr
  * 
  * Copyright (C) 2006 Steve Frécinaux
  *
@@ -52,21 +52,21 @@ typedef struct
 } WindowData;
 
 GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrCharmapPlugin,
-				    gtranslator_charmap_plugin,
-				    gtranslator_charmap_panel_register_type
+				    gtr_charmap_plugin,
+				    gtr_charmap_panel_register_type
 				    (module);)
-     static void gtranslator_charmap_plugin_init (GtrCharmapPlugin *
+     static void gtr_charmap_plugin_init (GtrCharmapPlugin *
 						  plugin)
 {
-  //gtranslator_debug_message (DEBUG_PLUGINS, "GtrCharmapPlugin initializing");
+  //gtr_debug_message (DEBUG_PLUGINS, "GtrCharmapPlugin initializing");
 }
 
 static void
-gtranslator_charmap_plugin_finalize (GObject * object)
+gtr_charmap_plugin_finalize (GObject * object)
 {
-  //gtranslator_debug_message (DEBUG_PLUGINS, "GtrCharmapPlugin finalizing");
+  //gtr_debug_message (DEBUG_PLUGINS, "GtrCharmapPlugin finalizing");
 
-  G_OBJECT_CLASS (gtranslator_charmap_plugin_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_charmap_plugin_parent_class)->finalize (object);
 }
 
 static void
@@ -86,15 +86,15 @@ on_table_status_message (GucharmapTable * chartable,
   GtrStatusbar *statusbar;
   WindowData *data;
 
-  statusbar = GTR_STATUSBAR (gtranslator_window_get_statusbar (window));
+  statusbar = GTR_STATUSBAR (gtr_window_get_statusbar (window));
   data = (WindowData *) g_object_get_data (G_OBJECT (window),
 					   WINDOW_DATA_KEY);
   g_return_if_fail (data != NULL);
 
-  gtranslator_statusbar_pop (statusbar, data->context_id);
+  gtr_statusbar_pop (statusbar, data->context_id);
 
   if (message)
-    gtranslator_statusbar_push (statusbar, data->context_id, message);
+    gtr_statusbar_push (statusbar, data->context_id, message);
 }
 
 static void
@@ -157,10 +157,10 @@ on_table_focus_out_event (GtkWidget * drawing_area,
   g_return_val_if_fail (data != NULL, FALSE);
 
 #ifdef HAVE_GUCHARMAP_2
-  chartable = gtranslator_charmap_panel_get_chartable
+  chartable = gtr_charmap_panel_get_chartable
     (GTR_CHARMAP_PANEL (data->panel));
 #else
-  chartable = gtranslator_charmap_panel_get_table
+  chartable = gtr_charmap_panel_get_table
     (GTR_CHARMAP_PANEL (data->panel));
 #endif
 
@@ -190,7 +190,7 @@ on_table_activate (GucharmapTable * chartable,
 
   g_return_if_fail (gucharmap_unichar_validate (wc));
 
-  view = GTK_TEXT_VIEW (gtranslator_window_get_active_view (window));
+  view = GTK_TEXT_VIEW (gtr_window_get_active_view (window));
 
   if (!view || !gtk_text_view_get_editable (view))
     return;
@@ -222,13 +222,13 @@ create_charmap_panel (GtrWindow * window)
   GucharmapTable *table;
 #endif
 
-  panel = gtranslator_charmap_panel_new ();
+  panel = gtr_charmap_panel_new ();
 
 #ifdef HAVE_GUCHARMAP_2
   chartable =
-    gtranslator_charmap_panel_get_chartable (GTR_CHARMAP_PANEL (panel));
+    gtr_charmap_panel_get_chartable (GTR_CHARMAP_PANEL (panel));
 #else
-  table = gtranslator_charmap_panel_get_table (GTR_CHARMAP_PANEL (panel));
+  table = gtr_charmap_panel_get_table (GTR_CHARMAP_PANEL (panel));
 #endif
 
 #ifdef HAVE_GUCHARMAP_2
@@ -272,20 +272,20 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
 
   data = g_new (WindowData, 1);
 
-  gtranslator_application_register_icon (GTR_APP, "gucharmap.ico",
+  gtr_application_register_icon (GTR_APP, "gucharmap.ico",
 					 "charmap-plugin-icon");
 
   data->panel = create_charmap_panel (window);
 
-  gtranslator_window_add_widget (window,
+  gtr_window_add_widget (window,
 				 data->panel,
 				 "GtrCharmapPlugin",
 				 _("Character Map"),
 				 "charmap-plugin-icon",
 				 GTR_WINDOW_PLACEMENT_LEFT);
 
-  statusbar = GTR_STATUSBAR (gtranslator_window_get_statusbar (window));
-  data->context_id = gtranslator_statusbar_get_context_id (statusbar,
+  statusbar = GTR_STATUSBAR (gtr_window_get_statusbar (window));
+  data->context_id = gtr_statusbar_get_context_id (statusbar,
 							   "Character Description");
 
   g_object_set_data_full (G_OBJECT (window),
@@ -308,27 +308,27 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
   g_return_if_fail (data != NULL);
 
 #ifdef HAVE_GUCHARMAP_2
-  chartable = gtranslator_charmap_panel_get_chartable
+  chartable = gtr_charmap_panel_get_chartable
     (GTR_CHARMAP_PANEL (data->panel));
 #else
-  chartable = gtranslator_charmap_panel_get_table
+  chartable = gtr_charmap_panel_get_table
     (GTR_CHARMAP_PANEL (data->panel));
 #endif
   on_table_status_message (chartable, NULL, window);
 
-  gtranslator_window_remove_widget (window, data->panel);
+  gtr_window_remove_widget (window, data->panel);
 
   g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
 
 }
 
 static void
-gtranslator_charmap_plugin_class_init (GtrCharmapPluginClass * klass)
+gtr_charmap_plugin_class_init (GtrCharmapPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
-  object_class->finalize = gtranslator_charmap_plugin_finalize;
+  object_class->finalize = gtr_charmap_plugin_finalize;
 
   plugin_class->activate = impl_activate;
   plugin_class->deactivate = impl_deactivate;

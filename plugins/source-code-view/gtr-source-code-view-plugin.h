@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN		(gtranslator_source_code_view_plugin_get_type ())
+#define GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN		(gtr_source_code_view_plugin_get_type ())
 #define GTR_SOURCE_CODE_VIEW_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN, GtrSourceCodeViewPlugin))
 #define GTR_SOURCE_CODE_VIEW_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN, GtrSourceCodeViewPluginClass))
 #define GTR_IS_SOURCE_CODE_VIEW_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN))
@@ -67,11 +67,11 @@ struct _GtrSourceCodeViewPluginClass
  * Public methods
  */
 GType
-gtranslator_source_code_view_plugin_get_type (void)
+gtr_source_code_view_plugin_get_type (void)
   G_GNUC_CONST;
 
 /* All the plugins must implement this function */
-     G_MODULE_EXPORT GType register_gtranslator_plugin (GTypeModule * module);
+     G_MODULE_EXPORT GType register_gtr_plugin (GTypeModule * module);
 
 G_END_DECLS
 #endif /* __GTR_SOURCE_CODE_VIEW_PLUGIN_H__ */

@@ -37,8 +37,8 @@
 				GtrAlternateLangPluginPrivate))
 
 GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrAlternateLangPlugin,
-				    gtranslator_alternate_lang_plugin,
-				    gtranslator_alternate_lang_panel_register_type
+				    gtr_alternate_lang_plugin,
+				    gtr_alternate_lang_panel_register_type
 				    (module);)
      static void on_alternate_lang_activated (GtkAction * action,
 					      GtrWindow * window)
@@ -46,10 +46,10 @@ GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrAlternateLangPlugin,
   GtrTab *tab;
   GtkWidget *alternatelang;
 
-  tab = gtranslator_window_get_active_tab (window);
+  tab = gtr_window_get_active_tab (window);
   alternatelang = g_object_get_data (G_OBJECT (tab), TAB_DATA_KEY);
 
-  gtranslator_tab_show_lateral_panel_widget (GTR_TAB (tab), alternatelang);
+  gtr_tab_show_lateral_panel_widget (GTR_TAB (tab), alternatelang);
 }
 
 static const GtkActionEntry action_entries[] = {
@@ -78,22 +78,22 @@ update_ui_real (GtrWindow * window, WindowData * data)
   GtrTab *tab;
   GtkAction *action;
 
-  tab = gtranslator_window_get_active_tab (window);
+  tab = gtr_window_get_active_tab (window);
 
   action = gtk_action_group_get_action (data->action_group, "AlternateLang");
   gtk_action_set_sensitive (action, (tab != NULL));
 }
 
 static void
-gtranslator_alternate_lang_plugin_init (GtrAlternateLangPlugin *
+gtr_alternate_lang_plugin_init (GtrAlternateLangPlugin *
 					message_table)
 {
 }
 
 static void
-gtranslator_alternate_lang_plugin_finalize (GObject * object)
+gtr_alternate_lang_plugin_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_alternate_lang_plugin_parent_class)->
+  G_OBJECT_CLASS (gtr_alternate_lang_plugin_parent_class)->
     finalize (object);
 }
 
@@ -107,14 +107,14 @@ create_alternate_lang_plugin_panel (GtkNotebook * notebook,
   GtkWidget *alternatelang;
   GtrPo *po;
 
-  po = gtranslator_tab_get_po (GTR_TAB (child));
+  po = gtr_tab_get_po (GTR_TAB (child));
 
   g_return_if_fail (po != NULL);
 
-  alternatelang = gtranslator_alternate_lang_panel_new (child);
+  alternatelang = gtr_alternate_lang_panel_new (child);
   gtk_widget_show (alternatelang);
 
-  gtranslator_tab_add_widget_to_lateral_panel (GTR_TAB (child),
+  gtr_tab_add_widget_to_lateral_panel (GTR_TAB (child),
 					       alternatelang,
 					       _("Alternate Language"));
 
@@ -131,7 +131,7 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
 
   data = g_new (WindowData, 1);
 
-  manager = gtranslator_window_get_ui_manager (window);
+  manager = gtr_window_get_ui_manager (window);
 
   data->action_group =
     gtk_action_group_new ("GtrAlternateLangPluginActions");
@@ -154,13 +154,13 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
 			 "AlternateLang",
 			 "AlternateLang", GTK_UI_MANAGER_MENUITEM, FALSE);
 
-  notebook = gtranslator_window_get_notebook (window);
+  notebook = gtr_window_get_notebook (window);
 
   g_signal_connect (GTK_NOTEBOOK (notebook),
 		    "page-added",
 		    G_CALLBACK (create_alternate_lang_plugin_panel), window);
 
-  tabs = gtranslator_window_get_all_tabs (window);
+  tabs = gtr_window_get_all_tabs (window);
 
   if (tabs == NULL)
     return;
@@ -181,8 +181,8 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
   GtkUIManager *manager;
   WindowData *data;
 
-  tabs = gtranslator_window_get_all_tabs (window);
-  notebook = gtranslator_window_get_notebook (window);
+  tabs = gtr_window_get_all_tabs (window);
+  notebook = gtr_window_get_notebook (window);
 
   if (tabs != NULL)
     {
@@ -190,7 +190,7 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
 	{
 	  alternatelang =
 	    g_object_get_data (G_OBJECT (tabs->data), TAB_DATA_KEY);
-	  gtranslator_tab_remove_widget_from_lateral_panel (GTR_TAB
+	  gtr_tab_remove_widget_from_lateral_panel (GTR_TAB
 							    (tabs->data),
 							    alternatelang);
 
@@ -204,7 +204,7 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
 					window);
 
   /* Remove menuitem */
-  manager = gtranslator_window_get_ui_manager (window);
+  manager = gtr_window_get_ui_manager (window);
 
   data =
     (WindowData *) g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
@@ -229,13 +229,13 @@ impl_update_ui (GtrPlugin * plugin, GtrWindow * window)
 }
 
 static void
-gtranslator_alternate_lang_plugin_class_init
+gtr_alternate_lang_plugin_class_init
   (GtrAlternateLangPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
-  object_class->finalize = gtranslator_alternate_lang_plugin_finalize;
+  object_class->finalize = gtr_alternate_lang_plugin_finalize;
 
   plugin_class->activate = impl_activate;
   plugin_class->deactivate = impl_deactivate;

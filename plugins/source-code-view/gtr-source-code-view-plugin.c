@@ -35,7 +35,7 @@
 #include <ctype.h>
 
 /* Gconf keys */
-#define SOURCE_CODE_VIEW_BASE_KEY "/apps/gtranslator/plugins/source-view"
+#define SOURCE_CODE_VIEW_BASE_KEY "/apps/gtr/plugins/source-view"
 #define USE_EDITOR_KEY SOURCE_CODE_VIEW_BASE_KEY "/use_editor"
 #define PROGRAM_CMD_KEY SOURCE_CODE_VIEW_BASE_KEY "/program_cmd"
 #define LINE_CMD_KEY SOURCE_CODE_VIEW_BASE_KEY "/line_cmd"
@@ -64,7 +64,7 @@ struct _GtrSourceCodeViewPluginPrivate
 };
 
 GTR_PLUGIN_REGISTER_TYPE (GtrSourceCodeViewPlugin,
-			  gtranslator_source_code_view_plugin)
+			  gtr_source_code_view_plugin)
      static void insert_link (GtkTextBuffer * buffer, GtkTextIter * iter,
 			      const gchar * path, gint * line,
 			      GtrSourceCodeViewPlugin * plugin,
@@ -153,7 +153,7 @@ show_source (GtrSourceCodeViewPlugin * plugin,
       g_free (line_cmd);
     }
   else
-    gtranslator_show_viewer (plugin->priv->window, path, line);
+    gtr_show_viewer (plugin->priv->window, path, line);
 }
 
 static gboolean
@@ -223,13 +223,13 @@ follow_if_link (GtrSourceCodeViewPlugin * plugin,
   gchar *dirname;
   GFile *location, *parent;
 
-  tab = gtranslator_window_get_active_tab (plugin->priv->window);
+  tab = gtr_window_get_active_tab (plugin->priv->window);
 
   if (!tab)
     return;
-  po = gtranslator_tab_get_po (tab);
+  po = gtr_tab_get_po (tab);
 
-  location = gtranslator_po_get_location (po);
+  location = gtr_po_get_location (po);
   parent = g_file_get_parent (location);
   g_object_unref (location);
 
@@ -390,7 +390,7 @@ visibility_notify_event (GtkWidget * text_view, GdkEventVisibility * event)
 }
 
 static void
-gtranslator_source_code_view_plugin_init (GtrSourceCodeViewPlugin *
+gtr_source_code_view_plugin_init (GtrSourceCodeViewPlugin *
 					  plugin)
 {
   plugin->priv = GTR_SOURCE_CODE_VIEW_PLUGIN_GET_PRIVATE (plugin);
@@ -405,7 +405,7 @@ gtranslator_source_code_view_plugin_init (GtrSourceCodeViewPlugin *
 }
 
 static void
-gtranslator_source_code_view_plugin_finalize (GObject * object)
+gtr_source_code_view_plugin_finalize (GObject * object)
 {
   GtrSourceCodeViewPlugin *plugin =
     GTR_SOURCE_CODE_VIEW_PLUGIN (object);
@@ -414,7 +414,7 @@ gtranslator_source_code_view_plugin_finalize (GObject * object)
 
   g_object_unref (G_OBJECT (plugin->priv->gconf_client));
 
-  G_OBJECT_CLASS (gtranslator_source_code_view_plugin_parent_class)->
+  G_OBJECT_CLASS (gtr_source_code_view_plugin_parent_class)->
     finalize (object);
 }
 
@@ -432,8 +432,8 @@ showed_message_cb (GtrTab * tab,
   GtrContextPanel *panel;
   GtkTextMark *path_start, *path_end;
 
-  panel = gtranslator_tab_get_context_panel (tab);
-  view = gtranslator_context_panel_get_context_text_view (panel);
+  panel = gtr_tab_get_context_panel (tab);
+  view = gtr_context_panel_get_context_text_view (panel);
 
   buffer = gtk_text_view_get_buffer (view);
 
@@ -443,14 +443,14 @@ showed_message_cb (GtrTab * tab,
 					    "path_start", &iter, TRUE);
   gtk_text_buffer_insert (buffer, &iter, _("Paths:\n"), -1);
 
-  filename = gtranslator_msg_get_filename (msg, i);
+  filename = gtr_msg_get_filename (msg, i);
   while (filename)
     {
-      line = gtranslator_msg_get_file_line (msg, i);
+      line = gtr_msg_get_file_line (msg, i);
       insert_link (buffer, &iter, filename, line, plugin,
-		   gtranslator_msg_get_msgid (msg));
+		   gtr_msg_get_msgid (msg));
       i++;
-      filename = gtranslator_msg_get_filename (msg, i);
+      filename = gtr_msg_get_filename (msg, i);
     }
 
   /*
@@ -473,8 +473,8 @@ delete_text_and_tags (GtrTab * tab,
   GtkTextIter start, end;
   GtkTextMark *path_start, *path_end;
 
-  panel = gtranslator_tab_get_context_panel (tab);
-  view = gtranslator_context_panel_get_context_text_view (panel);
+  panel = gtr_tab_get_context_panel (tab);
+  view = gtr_context_panel_get_context_text_view (panel);
 
   buffer = gtk_text_view_get_buffer (view);
   path_start = gtk_text_buffer_get_mark (buffer, "path_start");
@@ -528,8 +528,8 @@ page_added_cb (GtkNotebook * notebook,
   GtrContextPanel *panel;
   GtkTextView *view;
 
-  panel = gtranslator_tab_get_context_panel (GTR_TAB (child));
-  view = gtranslator_context_panel_get_context_text_view (panel);
+  panel = gtr_tab_get_context_panel (GTR_TAB (child));
+  view = gtr_context_panel_get_context_text_view (panel);
 
   g_return_if_fail (GTK_IS_TEXT_VIEW (view));
 
@@ -567,8 +567,8 @@ get_configuration_dialog (GtrSourceCodeViewPlugin * plugin)
     NULL
   };
 
-  path = gtranslator_dirs_get_ui_file ("gtr-source-code-view-dialog.ui");
-  ret = gtranslator_utils_get_ui_objects (path,
+  path = gtr_dirs_get_ui_file ("gtr-source-code-view-dialog.ui");
+  ret = gtr_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,
 					  "dialog", &plugin->priv->dialog,
@@ -639,7 +639,7 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
   hand_cursor = gdk_cursor_new (GDK_HAND2);
   regular_cursor = gdk_cursor_new (GDK_XTERM);
 
-  notebook = GTK_WIDGET (gtranslator_window_get_notebook (window));
+  notebook = GTK_WIDGET (gtr_window_get_notebook (window));
 
   source_code_view->priv->window = window;
 
@@ -649,7 +649,7 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
   /*
    * If we already have tabs opened we have to add them
    */
-  tabs = gtranslator_window_get_all_tabs (window);
+  tabs = gtr_window_get_all_tabs (window);
   for (l = tabs; l != NULL; l = g_list_next (l))
     {
       GtrPo *po;
@@ -658,8 +658,8 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
       page_added_cb (GTK_NOTEBOOK (notebook),
 		     l->data, 0, GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
 
-      po = gtranslator_tab_get_po (GTR_TAB (l->data));
-      msg = gtranslator_po_get_current_message (po);
+      po = gtr_tab_get_po (GTR_TAB (l->data));
+      msg = gtr_po_get_current_message (po);
 
       showed_message_cb (GTR_TAB (l->data),
 			 msg->data, GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
@@ -674,13 +674,13 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
   GtrContextPanel *panel;
   GtkWidget *notebook;
 
-  tabs = gtranslator_window_get_all_tabs (window);
-  notebook = GTK_WIDGET (gtranslator_window_get_notebook (window));
+  tabs = gtr_window_get_all_tabs (window);
+  notebook = GTK_WIDGET (gtr_window_get_notebook (window));
 
   for (l = tabs; l != NULL; l = g_list_next (l))
     {
-      panel = gtranslator_tab_get_context_panel (GTR_TAB (l->data));
-      view = gtranslator_context_panel_get_context_text_view (panel);
+      panel = gtr_tab_get_context_panel (GTR_TAB (l->data));
+      view = gtr_context_panel_get_context_text_view (panel);
 
       delete_text_and_tags (GTR_TAB (l->data),
 			    GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
@@ -774,13 +774,13 @@ impl_create_configure_dialog (GtrPlugin * plugin)
 }
 
 static void
-gtranslator_source_code_view_plugin_class_init
+gtr_source_code_view_plugin_class_init
   (GtrSourceCodeViewPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
-  object_class->finalize = gtranslator_source_code_view_plugin_finalize;
+  object_class->finalize = gtr_source_code_view_plugin_finalize;
 
   plugin_class->activate = impl_activate;
   plugin_class->deactivate = impl_deactivate;

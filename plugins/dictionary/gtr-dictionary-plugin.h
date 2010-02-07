@@ -27,7 +27,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_DICT_PLUGIN		(gtranslator_dict_plugin_get_type ())
+#define GTR_TYPE_DICT_PLUGIN		(gtr_dict_plugin_get_type ())
 #define GTR_DICT_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_DICT_PLUGIN, GtrDictPlugin))
 #define GTR_DICT_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_Dict_PLUGIN, GtrDictPluginClass))
 #define GTR_IS_DICT_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_Dict_PLUGIN))
@@ -60,11 +60,11 @@ struct _GtrDictPluginClass
  * Public methods
  */
 GType
-gtranslator_dict_plugin_get_type (void)
+gtr_dict_plugin_get_type (void)
   G_GNUC_CONST;
 
 /* All the plugins must implement this function */
-     G_MODULE_EXPORT GType register_gtranslator_plugin (GTypeModule * module);
+     G_MODULE_EXPORT GType register_gtr_plugin (GTypeModule * module);
 
 G_END_DECLS
 #endif /* __GTR_Dict_PLUGIN_H__ */

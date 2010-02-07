@@ -40,17 +40,17 @@ typedef struct
 } WindowData;
 
 GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrDictPlugin,
-				    gtranslator_dict_plugin,
-				    gtranslator_dict_panel_register_type
+				    gtr_dict_plugin,
+				    gtr_dict_panel_register_type
 				    (module);)
-     static void gtranslator_dict_plugin_init (GtrDictPlugin * plugin)
+     static void gtr_dict_plugin_init (GtrDictPlugin * plugin)
 {
 }
 
 static void
-gtranslator_dict_plugin_finalize (GObject * object)
+gtr_dict_plugin_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_dict_plugin_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_dict_plugin_parent_class)->finalize (object);
 }
 
 static void
@@ -67,7 +67,7 @@ create_dict_panel (GtrWindow * window)
 {
   GtkWidget *panel;
 
-  panel = gtranslator_dict_panel_new (window);
+  panel = gtr_dict_panel_new (window);
 
   gtk_widget_show (panel);
 
@@ -83,10 +83,10 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
 
   data->panel = create_dict_panel (window);
 
-  gtranslator_application_register_icon (GTR_APP, "gnome-dictionary.png",
+  gtr_application_register_icon (GTR_APP, "gnome-dictionary.png",
 					 "dictionary-icon");
 
-  gtranslator_window_add_widget (window,
+  gtr_window_add_widget (window,
 				 data->panel,
 				 "GtrDictionaryPlugin",
 				 _("Dictionary"),
@@ -107,18 +107,18 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
 					   WINDOW_DATA_KEY);
   g_return_if_fail (data != NULL);
 
-  gtranslator_window_remove_widget (window, data->panel);
+  gtr_window_remove_widget (window, data->panel);
 
   g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
 }
 
 static void
-gtranslator_dict_plugin_class_init (GtrDictPluginClass * klass)
+gtr_dict_plugin_class_init (GtrDictPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
-  object_class->finalize = gtranslator_dict_plugin_finalize;
+  object_class->finalize = gtr_dict_plugin_finalize;
 
   plugin_class->activate = impl_activate;
   plugin_class->deactivate = impl_deactivate;

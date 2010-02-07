@@ -29,7 +29,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_ALTERNATE_LANG_PLUGIN		(gtranslator_alternate_lang_get_type ())
+#define GTR_TYPE_ALTERNATE_LANG_PLUGIN		(gtr_alternate_lang_get_type ())
 #define GTR_ALTERNATE_LANG_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGEALTERNATE_LANG_PLUGIN, GtrAlternateLangPlugin))
 #define GTR_ALTERNATE_LANG_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_ALTERNATE_LANG_PLUGIN, GtrAlternateLangPluginClass))
 #define GTR_IS_ALTERNATE_LANG_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_ALTERNATE_LANG_PLUGIN))
@@ -64,11 +64,11 @@ struct _GtrAlternateLangPluginClass
  * Public methods
  */
 GType
-gtranslator_alternate_lang_plugin_get_type (void)
+gtr_alternate_lang_plugin_get_type (void)
   G_GNUC_CONST;
 
 /* All the plugins must implement this function */
-     G_MODULE_EXPORT GType register_gtranslator_plugin (GTypeModule * module);
+     G_MODULE_EXPORT GType register_gtr_plugin (GTypeModule * module);
 
 G_END_DECLS
 #endif /* __GTR_ALTERNATE_LANG_PLUGIN_H__ */

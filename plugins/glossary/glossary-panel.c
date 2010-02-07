@@ -37,7 +37,7 @@
 						 GTR_TYPE_GLOSSARY_PANEL,     \
 						 GtrGlossaryPanelPrivate))
 
-G_DEFINE_TYPE (GtrGlossaryPanel, gtranslator_glossary_panel,
+G_DEFINE_TYPE (GtrGlossaryPanel, gtr_glossary_panel,
 	       GTK_TYPE_VBOX)
 #define XML_FILE_NAME "glossary.xml"
 /*
@@ -125,7 +125,7 @@ process_node (xmlNode * root_node)
 }
 
 static gboolean
-gtranslator_glossary_panel_load_items (GtrGlossaryPanel * panel)
+gtr_glossary_panel_load_items (GtrGlossaryPanel * panel)
 {
   GtrGlossaryPanelPrivate *priv = panel->priv;
 
@@ -133,7 +133,7 @@ gtranslator_glossary_panel_load_items (GtrGlossaryPanel * panel)
 }
 
 static void
-gtranslator_glossary_panel_draw (GtrGlossaryPanel * panel)
+gtr_glossary_panel_draw (GtrGlossaryPanel * panel)
 {
   GtrGlossaryPanelPrivate *priv = panel->priv;
 
@@ -141,7 +141,7 @@ gtranslator_glossary_panel_draw (GtrGlossaryPanel * panel)
 }
 
 static void
-gtranslator_glossary_panel_init (GtrGlossaryPanel * panel)
+gtr_glossary_panel_init (GtrGlossaryPanel * panel)
 {
   panel->priv = GTR_GLOSSARY_PANEL_GET_PRIVATE (panel);
 
@@ -149,23 +149,23 @@ gtranslator_glossary_panel_init (GtrGlossaryPanel * panel)
 }
 
 static void
-gtranslator_glossary_panel_finalize (GObject * object)
+gtr_glossary_panel_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_glossary_panel_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_glossary_panel_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_glossary_panel_class_init (GtrGlossaryPanelClass * klass)
+gtr_glossary_panel_class_init (GtrGlossaryPanelClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrGlossaryPanelPrivate));
 
-  object_class->finalize = gtranslator_glossary_panel_finalize;
+  object_class->finalize = gtr_glossary_panel_finalize;
 }
 
 GtkWidget *
-gtranslator_glossary_panel_new (void)
+gtr_glossary_panel_new (void)
 {
   return GTK_WIDGET (g_object_new (GTR_TYPE_GLOSSARY_PANEL, NULL));
 }

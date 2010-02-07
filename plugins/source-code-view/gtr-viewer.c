@@ -39,7 +39,7 @@
 						 	GtrViewerPrivate))
 
 
-G_DEFINE_TYPE (GtrViewer, gtranslator_viewer, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (GtrViewer, gtr_viewer, GTK_TYPE_DIALOG)
      struct _GtrViewerPrivate
      {
        GtkWidget *main_box;
@@ -57,7 +57,7 @@ G_DEFINE_TYPE (GtrViewer, gtranslator_viewer, GTK_TYPE_DIALOG)
 }
 
 static void
-gtranslator_viewer_init (GtrViewer * dlg)
+gtr_viewer_init (GtrViewer * dlg)
 {
   gboolean ret;
   GtkWidget *error_widget;
@@ -90,8 +90,8 @@ gtranslator_viewer_init (GtrViewer * dlg)
 		    "response", G_CALLBACK (dialog_response_handler), NULL);
 
   /*Builder */
-  path = gtranslator_dirs_get_ui_file ("gtr-viewer.ui");
-  ret = gtranslator_utils_get_ui_objects (path,
+  path = gtr_dirs_get_ui_file ("gtr-viewer.ui");
+  ret = gtr_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,
 					  "main_box", &dlg->priv->main_box,
@@ -131,19 +131,19 @@ gtranslator_viewer_init (GtrViewer * dlg)
 }
 
 static void
-gtranslator_viewer_finalize (GObject * object)
+gtr_viewer_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_viewer_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_viewer_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_viewer_class_init (GtrViewerClass * klass)
+gtr_viewer_class_init (GtrViewerClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrViewerPrivate));
 
-  object_class->finalize = gtranslator_viewer_finalize;
+  object_class->finalize = gtr_viewer_finalize;
 }
 
 /***************** File loading *****************/
@@ -416,7 +416,7 @@ jump_to_line (GtkTextView * view, gint line)
 }
 
 void
-gtranslator_show_viewer (GtrWindow * window,
+gtr_show_viewer (GtrWindow * window,
 			 const gchar * path, gint line)
 {
   static GtrViewer *dlg = NULL;

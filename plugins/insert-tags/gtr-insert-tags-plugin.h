@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_INSERT_TAGS_PLUGIN		(gtranslator_insert_tags_get_type ())
+#define GTR_TYPE_INSERT_TAGS_PLUGIN		(gtr_insert_tags_get_type ())
 #define GTR_INSERT_TAGS_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGEINSERT_TAGS_PLUGIN, GtrInsertTagsPlugin))
 #define GTR_INSERT_TAGS_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_INSERT_TAGS_PLUGIN, GtrInsertTagsPluginClass))
 #define GTR_IS_INSERT_TAGS_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_INSERT_TAGS_PLUGIN))
@@ -63,11 +63,11 @@ struct _GtrInsertTagsPluginClass
  * Public methods
  */
 GType
-gtranslator_insert_tags_plugin_get_type (void)
+gtr_insert_tags_plugin_get_type (void)
   G_GNUC_CONST;
 
 /* All the plugins must implement this function */
-     G_MODULE_EXPORT GType register_gtranslator_plugin (GTypeModule * module);
+     G_MODULE_EXPORT GType register_gtr_plugin (GTypeModule * module);
 
 G_END_DECLS
 #endif /* __GTR_INSERT_TAGS_PLUGIN_H__ */

@@ -1,5 +1,5 @@
 /*
- * gtranslator-charmap-plugin.h - Character map side-pane for gtranslator
+ * gtr-charmap-plugin.h - Character map side-pane for gtr
  * 
  * Copyright (C) 2006 Steve Frécinaux
  *
@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id: gtranslator-charmap-plugin.h 137 2006-04-23 15:13:27Z sfre $
+ * $Id: gtr-charmap-plugin.h 137 2006-04-23 15:13:27Z sfre $
  */
 
 #ifndef __GTR_CHARMAP_PLUGIN_H__
@@ -31,7 +31,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_CHARMAP_PLUGIN		(gtranslator_charmap_plugin_get_type ())
+#define GTR_TYPE_CHARMAP_PLUGIN		(gtr_charmap_plugin_get_type ())
 #define GTR_CHARMAP_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_CHARMAP_PLUGIN, GtrCharmapPlugin))
 #define GTR_CHARMAP_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_CHARMAP_PLUGIN, GtrCharmapPluginClass))
 #define GTR_IS_CHARMAP_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_CHARMAP_PLUGIN))
@@ -65,11 +65,11 @@ struct _GtrCharmapPluginClass
  * Public methods
  */
 GType
-gtranslator_charmap_plugin_get_type (void)
+gtr_charmap_plugin_get_type (void)
   G_GNUC_CONST;
 
 /* All the plugins must implement this function */
-     G_MODULE_EXPORT GType register_gtranslator_plugin (GTypeModule * module);
+     G_MODULE_EXPORT GType register_gtr_plugin (GTypeModule * module);
 
 G_END_DECLS
 #endif /* __GTR_CHARMAP_PLUGIN_H__ */

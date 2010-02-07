@@ -49,7 +49,7 @@
 #define OPEN_OFFICE_ICON PIXMAPSDIR"/oo-logo.png"
 #define FEDORA_ICON PIXMAPSDIR"/fedora.png"
 
-GTR_PLUGIN_DEFINE_TYPE (GtrOpenTranPanel, gtranslator_open_tran_panel,
+GTR_PLUGIN_DEFINE_TYPE (GtrOpenTranPanel, gtr_open_tran_panel,
 			GTK_TYPE_VBOX)
 
 struct _GtrOpenTranPanelPrivate
@@ -347,7 +347,7 @@ entry_activate_cb (GtkEntry * entry, GtrOpenTranPanel * panel)
 }
 
 static void
-gtranslator_open_tran_panel_draw_treeview (GtrOpenTranPanel * panel)
+gtr_open_tran_panel_draw_treeview (GtrOpenTranPanel * panel)
 {
   GtkTreeViewColumn *column;
   GtkCellRenderer *renderer;
@@ -388,7 +388,7 @@ gtranslator_open_tran_panel_draw_treeview (GtrOpenTranPanel * panel)
 }
 
 static void
-gtranslator_open_tran_panel_draw (GtrOpenTranPanel * panel)
+gtr_open_tran_panel_draw (GtrOpenTranPanel * panel)
 {
   GtkWidget *scrolledwindow;
   GtkWidget *button;
@@ -407,7 +407,7 @@ gtranslator_open_tran_panel_draw (GtrOpenTranPanel * panel)
   /*
    * TreeView
    */
-  gtranslator_open_tran_panel_draw_treeview (panel);
+  gtr_open_tran_panel_draw_treeview (panel);
   gtk_container_add (GTK_CONTAINER (scrolledwindow), panel->priv->treeview);
 
   /*
@@ -430,7 +430,7 @@ gtranslator_open_tran_panel_draw (GtrOpenTranPanel * panel)
 }
 
 static void
-gtranslator_open_tran_panel_init (GtrOpenTranPanel * panel)
+gtr_open_tran_panel_init (GtrOpenTranPanel * panel)
 {
 
   panel->priv = GTR_OPEN_TRAN_PANEL_GET_PRIVATE (panel);
@@ -438,11 +438,11 @@ gtranslator_open_tran_panel_init (GtrOpenTranPanel * panel)
   panel->priv->gconf_client = gconf_client_get_default ();
   panel->priv->session = soup_session_async_new ();
 
-  gtranslator_open_tran_panel_draw (panel);
+  gtr_open_tran_panel_draw (panel);
 }
 
 static void
-gtranslator_open_tran_panel_dispose (GObject * object)
+gtr_open_tran_panel_dispose (GObject * object)
 {
   GtrOpenTranPanel *panel = GTR_OPEN_TRAN_PANEL (object);
 
@@ -451,21 +451,21 @@ gtranslator_open_tran_panel_dispose (GObject * object)
       g_object_unref (panel->priv->session);
       panel->priv->session = NULL;
     }
-  G_OBJECT_CLASS (gtranslator_open_tran_panel_parent_class)->dispose (object);
+  G_OBJECT_CLASS (gtr_open_tran_panel_parent_class)->dispose (object);
 }
 
 static void
-gtranslator_open_tran_panel_class_init (GtrOpenTranPanelClass * klass)
+gtr_open_tran_panel_class_init (GtrOpenTranPanelClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrOpenTranPanelPrivate));
 
-  object_class->dispose = gtranslator_open_tran_panel_dispose;
+  object_class->dispose = gtr_open_tran_panel_dispose;
 }
 
 GtkWidget *
-gtranslator_open_tran_panel_new (GtrWindow * window)
+gtr_open_tran_panel_new (GtrWindow * window)
 {
   GtrOpenTranPanel *panel;
 

@@ -32,7 +32,7 @@
 #define WINDOW_DATA_KEY "GtrInsertTagsPluginWindowData"
 
 GTR_PLUGIN_REGISTER_TYPE (GtrInsertTagsPlugin,
-			  gtranslator_insert_tags_plugin)
+			  gtr_insert_tags_plugin)
      static GSList *tags = NULL;
      static gint tag_position;
 
@@ -51,7 +51,7 @@ GTR_PLUGIN_REGISTER_TYPE (GtrInsertTagsPlugin,
 
   tag = g_slist_nth (tags, tag_position);
 
-  view = gtranslator_window_get_active_view (window);
+  view = gtr_window_get_active_view (window);
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
@@ -100,7 +100,7 @@ update_ui_real (GtrWindow * window, WindowData * data)
   GtkTextView *view;
   GtkAction *action;
 
-  view = GTK_TEXT_VIEW (gtranslator_window_get_active_view (window));
+  view = GTK_TEXT_VIEW (gtr_window_get_active_view (window));
 
   action = gtk_action_group_get_action (data->action_group, "InsertTags");
   gtk_action_set_sensitive (action,
@@ -114,13 +114,13 @@ update_ui_real (GtrWindow * window, WindowData * data)
 }
 
 static void
-gtranslator_insert_tags_plugin_init (GtrInsertTagsPlugin *
+gtr_insert_tags_plugin_init (GtrInsertTagsPlugin *
 				     message_table)
 {
 }
 
 static void
-gtranslator_insert_tags_plugin_finalize (GObject * object)
+gtr_insert_tags_plugin_finalize (GObject * object)
 {
   if (tags != NULL)
     {
@@ -128,7 +128,7 @@ gtranslator_insert_tags_plugin_finalize (GObject * object)
       tags = NULL;
     }
 
-  G_OBJECT_CLASS (gtranslator_insert_tags_plugin_parent_class)->
+  G_OBJECT_CLASS (gtr_insert_tags_plugin_parent_class)->
     finalize (object);
 }
 
@@ -143,7 +143,7 @@ on_menuitem_activated (GtkMenuItem * item, GtrWindow * window)
   label = gtk_bin_get_child (GTK_BIN (item));
   name = gtk_label_get_text (GTK_LABEL (label));
 
-  view = gtranslator_window_get_active_view (window);
+  view = gtr_window_get_active_view (window);
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
@@ -161,7 +161,7 @@ parse_list (GtrWindow * window)
   GtkWidget *menu;
   GSList *l = tags;
 
-  manager = gtranslator_window_get_ui_manager (window);
+  manager = gtr_window_get_ui_manager (window);
 
   insert_tags = gtk_ui_manager_get_widget (manager,
 					   "/MainMenu/EditMenu/EditOps_1/EditInsertTags");
@@ -217,7 +217,7 @@ showed_message_cb (GtrTab * tab,
    */
   tag_position = 0;
 
-  msgid = gtranslator_msg_get_msgid (msg);
+  msgid = gtr_msg_get_msgid (msg);
 
   /*
    * Regular expression
@@ -260,7 +260,7 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
 
   data = g_new (WindowData, 1);
 
-  manager = gtranslator_window_get_ui_manager (window);
+  manager = gtr_window_get_ui_manager (window);
 
   data->action_group =
     gtk_action_group_new ("GtrInsertTagsPluginActions");
@@ -289,12 +289,12 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
 
   /*Adding menuitems */
 
-  notebook = gtranslator_window_get_notebook (window);
+  notebook = gtr_window_get_notebook (window);
 
   g_signal_connect (GTK_NOTEBOOK (notebook),
 		    "page-added", G_CALLBACK (page_added_cb), window);
 
-  tabs = gtranslator_window_get_all_tabs (window);
+  tabs = gtr_window_get_all_tabs (window);
 
   if (tabs == NULL)
     return;
@@ -313,7 +313,7 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
   GtkUIManager *manager;
   WindowData *data;
 
-  manager = gtranslator_window_get_ui_manager (window);
+  manager = gtr_window_get_ui_manager (window);
 
   data =
     (WindowData *) g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
@@ -324,7 +324,7 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
 
   g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
 
-  notebook = gtranslator_window_get_notebook (window);
+  notebook = gtr_window_get_notebook (window);
 
   g_signal_handlers_disconnect_by_func (notebook, page_added_cb, window);
 
@@ -348,13 +348,13 @@ impl_update_ui (GtrPlugin * plugin, GtrWindow * window)
 }
 
 static void
-gtranslator_insert_tags_plugin_class_init (GtrInsertTagsPluginClass *
+gtr_insert_tags_plugin_class_init (GtrInsertTagsPluginClass *
 					   klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
-  object_class->finalize = gtranslator_insert_tags_plugin_finalize;
+  object_class->finalize = gtr_insert_tags_plugin_finalize;
 
   plugin_class->activate = impl_activate;
   plugin_class->deactivate = impl_deactivate;

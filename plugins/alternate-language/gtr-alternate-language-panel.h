@@ -26,7 +26,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_ALTERNATE_LANG_PANEL		(gtranslator_alternate_lang_panel_get_type ())
+#define GTR_TYPE_ALTERNATE_LANG_PANEL		(gtr_alternate_lang_panel_get_type ())
 #define GTR_ALTERNATE_LANG_PANEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_ALTERNATE_LANG_PANEL, GtrAlternateLangPanel))
 #define GTR_ALTERNATE_LANG_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_ALTERNATE_LANG_PANEL, GtrAlternateLangPanelClass))
 #define GTR_IS_ALTERNATE_LANG_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_ALTERNATE_LANG_PANEL))
@@ -64,11 +64,11 @@ struct _GtrAlternateLangPanelClass
  * Public methods
  */
 GType
-gtranslator_alternate_lang_panel_get_type (void)
+gtr_alternate_lang_panel_get_type (void)
   G_GNUC_CONST;
-     GType gtranslator_alternate_lang_panel_register_type (GTypeModule *
+     GType gtr_alternate_lang_panel_register_type (GTypeModule *
 							   module);
-     GtkWidget *gtranslator_alternate_lang_panel_new (GtkWidget * tab);
+     GtkWidget *gtr_alternate_lang_panel_new (GtkWidget * tab);
 
 G_END_DECLS
 #endif /* __ALTERNATE_LANG_PANEL_H__ */

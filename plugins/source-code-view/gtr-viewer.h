@@ -29,7 +29,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_VIEWER		(gtranslator_viewer_get_type ())
+#define GTR_TYPE_VIEWER		(gtr_viewer_get_type ())
 #define GTR_VIEWER(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_VIEWER, GtrViewer))
 #define GTR_VIEWER_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_VIEWER, GtrViewerClass))
 #define GTR_IS_VIEWER(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_VIEWER))
@@ -65,12 +65,12 @@ struct _GtrViewerClass
  * Public methods
  */
 GType
-gtranslator_viewer_get_type (void)
+gtr_viewer_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_viewer_register_type (GTypeModule * module);
+     GType gtr_viewer_register_type (GTypeModule * module);
 
-     void gtranslator_show_viewer (GtrWindow * window,
+     void gtr_show_viewer (GtrWindow * window,
 				   const gchar * path, gint line);
 
 G_END_DECLS

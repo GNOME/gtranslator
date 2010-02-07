@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_OPEN_TRAN_PLUGIN		(gtranslator_open_tran_plugin_get_type ())
+#define GTR_TYPE_OPEN_TRAN_PLUGIN		(gtr_open_tran_plugin_get_type ())
 #define GTR_OPEN_TRAN_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_OPEN_TRAN_PLUGIN, GtrOpenTranPlugin))
 #define GTR_OPEN_TRAN_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_OPEN_TRAN_PLUGIN, GtrOpenTranPluginClass))
 #define GTR_IS_OPEN_TRAN_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_OPEN_TRAN_PLUGIN))
@@ -65,11 +65,11 @@ struct _GtrOpenTranPluginClass
  * Public methods
  */
 GType
-gtranslator_open_tran_plugin_get_type (void)
+gtr_open_tran_plugin_get_type (void)
   G_GNUC_CONST;
 
 /* All the plugins must implement this function */
-     G_MODULE_EXPORT GType register_gtranslator_plugin (GTypeModule * module);
+     G_MODULE_EXPORT GType register_gtr_plugin (GTypeModule * module);
 
 G_END_DECLS
 #endif /* __GTR_OPEN_TRAN_PLUGIN_H__ */

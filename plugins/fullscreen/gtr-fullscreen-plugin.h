@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_FULLSCREEN_PLUGIN		(gtranslator_fullscreen_get_type ())
+#define GTR_TYPE_FULLSCREEN_PLUGIN		(gtr_fullscreen_get_type ())
 #define GTR_FULLSCREEN_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGEFULLSCREEN_PLUGIN, GtrFullscreenPlugin))
 #define GTR_FULLSCREEN_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_FULLSCREEN_PLUGIN, GtrFullscreenPluginClass))
 #define GTR_IS_FULLSCREEN_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_FULLSCREEN_PLUGIN))
@@ -63,11 +63,11 @@ struct _GtrFullscreenPluginClass
  * Public methods
  */
 GType
-gtranslator_fullscreen_plugin_get_type (void)
+gtr_fullscreen_plugin_get_type (void)
   G_GNUC_CONST;
 
 /* All the plugins must implement this function */
-     G_MODULE_EXPORT GType register_gtranslator_plugin (GTypeModule * module);
+     G_MODULE_EXPORT GType register_gtr_plugin (GTypeModule * module);
 
 G_END_DECLS
 #endif /* __GTR_FULLSCREEN_PLUGIN_H__ */

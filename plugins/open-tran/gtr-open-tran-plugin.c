@@ -59,10 +59,10 @@ typedef struct
 } WindowData;
 
 GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrOpenTranPlugin,
-				    gtranslator_open_tran_plugin,
-				    gtranslator_open_tran_panel_register_type
+				    gtr_open_tran_plugin,
+				    gtr_open_tran_panel_register_type
 				    (module);)
-     static void gtranslator_open_tran_plugin_init (GtrOpenTranPlugin
+     static void gtr_open_tran_plugin_init (GtrOpenTranPlugin
 						    * plugin)
 {
   plugin->priv = GTR_OPEN_TRAN_PLUGIN_GET_PRIVATE (plugin);
@@ -75,7 +75,7 @@ GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrOpenTranPlugin,
 }
 
 static void
-gtranslator_open_tran_plugin_finalize (GObject * object)
+gtr_open_tran_plugin_finalize (GObject * object)
 {
   GtrOpenTranPlugin *plugin = GTR_OPEN_TRAN_PLUGIN (object);
 
@@ -83,7 +83,7 @@ gtranslator_open_tran_plugin_finalize (GObject * object)
 
   g_object_unref (G_OBJECT (plugin->priv->gconf_client));
 
-  G_OBJECT_CLASS (gtranslator_open_tran_plugin_parent_class)->
+  G_OBJECT_CLASS (gtr_open_tran_plugin_parent_class)->
     finalize (object);
 }
 
@@ -93,13 +93,13 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
 {
   GtkWidget *opentran;
 
-  gtranslator_application_register_icon (GTR_APP, "open-tran.png",
+  gtr_application_register_icon (GTR_APP, "open-tran.png",
 					 "open-tran-plugin-icon");
 
-  opentran = gtranslator_open_tran_panel_new (window);
+  opentran = gtr_open_tran_panel_new (window);
   gtk_widget_show (opentran);
 
-  gtranslator_window_add_widget (window,
+  gtr_window_add_widget (window,
 				 opentran,
 				 "GtrOpenTranPlugin",
 				 _("Open Tran"),
@@ -118,7 +118,7 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
 					      WINDOW_DATA_KEY);
   g_return_if_fail (opentran != NULL);
 
-  gtranslator_window_remove_widget (window, opentran);
+  gtr_window_remove_widget (window, opentran);
 
   g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
 }
@@ -163,8 +163,8 @@ get_configuration_dialog (GtrOpenTranPlugin * plugin)
     NULL
   };
 
-  path = gtranslator_dirs_get_ui_file ("gtr-open-tran-dialog.ui");
-  ret = gtranslator_utils_get_ui_objects (path,
+  path = gtr_dirs_get_ui_file ("gtr-open-tran-dialog.ui");
+  ret = gtr_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,
 					  "dialog", &plugin->priv->dialog,
@@ -253,13 +253,13 @@ impl_create_configure_dialog (GtrPlugin * plugin)
 }
 
 static void
-gtranslator_open_tran_plugin_class_init (GtrOpenTranPluginClass *
+gtr_open_tran_plugin_class_init (GtrOpenTranPluginClass *
 					 klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
-  object_class->finalize = gtranslator_open_tran_plugin_finalize;
+  object_class->finalize = gtr_open_tran_plugin_finalize;
 
   plugin_class->activate = impl_activate;
   plugin_class->deactivate = impl_deactivate;

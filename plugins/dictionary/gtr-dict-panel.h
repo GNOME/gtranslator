@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_DICT_PANEL		(gtranslator_dict_panel_get_type ())
+#define GTR_TYPE_DICT_PANEL		(gtr_dict_panel_get_type ())
 #define GTR_DICT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_DICT_PANEL, GtrDictPanel))
 #define GTR_DICT_PANEL_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_DICT_PANEL, GtrDictPanelClass))
 #define GTR_IS_DICT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_DICT_PANEL))
@@ -64,14 +64,14 @@ struct _GtrDictPanelClass
  * Public methods
  */
 GType
-gtranslator_dict_panel_get_type (void)
+gtr_dict_panel_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_dict_panel_register_type (GTypeModule * module);
+     GType gtr_dict_panel_register_type (GTypeModule * module);
 
-     GtkWidget *gtranslator_dict_panel_new (GtrWindow * window);
+     GtkWidget *gtr_dict_panel_new (GtrWindow * window);
 
-     void gtranslator_dict_panel_set_position (GtrDictPanel * panel,
+     void gtr_dict_panel_set_position (GtrDictPanel * panel,
 					       gint pos);
 
 G_END_DECLS

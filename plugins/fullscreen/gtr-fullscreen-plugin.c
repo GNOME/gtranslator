@@ -31,7 +31,7 @@
 #define MENU_PATH "/MainMenu/ViewMenu/ViewOps_1"
 
 GTR_PLUGIN_REGISTER_TYPE (GtrFullscreenPlugin,
-			  gtranslator_fullscreen_plugin)
+			  gtr_fullscreen_plugin)
      static void on_fullscreen_activated (GtkToggleAction * action,
 					  GtrWindow * window)
 {
@@ -62,15 +62,15 @@ free_window_data (WindowData * data)
 }
 
 static void
-gtranslator_fullscreen_plugin_init (GtrFullscreenPlugin *
+gtr_fullscreen_plugin_init (GtrFullscreenPlugin *
 				    message_table)
 {
 }
 
 static void
-gtranslator_fullscreen_plugin_finalize (GObject * object)
+gtr_fullscreen_plugin_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_fullscreen_plugin_parent_class)->
+  G_OBJECT_CLASS (gtr_fullscreen_plugin_parent_class)->
     finalize (object);
 }
 
@@ -85,7 +85,7 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
 
   data = g_new (WindowData, 1);
 
-  manager = gtranslator_window_get_ui_manager (window);
+  manager = gtr_window_get_ui_manager (window);
 
   data->action_group =
     gtk_action_group_new ("GtrFullscreenPluginActions");
@@ -123,7 +123,7 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
   GtkUIManager *manager;
   WindowData *data;
 
-  manager = gtranslator_window_get_ui_manager (window);
+  manager = gtr_window_get_ui_manager (window);
 
   data =
     (WindowData *) g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
@@ -136,13 +136,13 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
 }
 
 static void
-gtranslator_fullscreen_plugin_class_init (GtrFullscreenPluginClass *
+gtr_fullscreen_plugin_class_init (GtrFullscreenPluginClass *
 					  klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
-  object_class->finalize = gtranslator_fullscreen_plugin_finalize;
+  object_class->finalize = gtr_fullscreen_plugin_finalize;
 
   plugin_class->activate = impl_activate;
   plugin_class->deactivate = impl_deactivate;

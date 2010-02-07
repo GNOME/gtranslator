@@ -1,5 +1,5 @@
 /*
- * gtranslator-charmap-panel.c
+ * gtr-charmap-panel.c
  * 
  * Copyright (C) 2006 Steve Frécinaux
  *
@@ -47,7 +47,7 @@ struct _GtrCharmapPanelPrivate
 #endif
 };
 
-GTR_PLUGIN_DEFINE_TYPE (GtrCharmapPanel, gtranslator_charmap_panel,
+GTR_PLUGIN_DEFINE_TYPE (GtrCharmapPanel, gtr_charmap_panel,
 			GTK_TYPE_VBOX)
 #ifdef HAVE_GUCHARMAP_2
      static void
@@ -79,7 +79,7 @@ GTR_PLUGIN_DEFINE_TYPE (GtrCharmapPanel, gtranslator_charmap_panel,
 #endif /* HAVE_GUCHARMAP_2 */
 
 static void
-gtranslator_charmap_panel_init (GtrCharmapPanel * panel)
+gtr_charmap_panel_init (GtrCharmapPanel * panel)
 {
   GtrCharmapPanelPrivate *priv;
   GtkPaned *paned;
@@ -162,36 +162,36 @@ gtranslator_charmap_panel_init (GtrCharmapPanel * panel)
 }
 
 static void
-gtranslator_charmap_panel_finalize (GObject * object)
+gtr_charmap_panel_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_charmap_panel_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_charmap_panel_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_charmap_panel_class_init (GtrCharmapPanelClass * klass)
+gtr_charmap_panel_class_init (GtrCharmapPanelClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrCharmapPanelPrivate));
 
-  object_class->finalize = gtranslator_charmap_panel_finalize;
+  object_class->finalize = gtr_charmap_panel_finalize;
 }
 
 GtkWidget *
-gtranslator_charmap_panel_new (void)
+gtr_charmap_panel_new (void)
 {
   return GTK_WIDGET (g_object_new (GTR_TYPE_CHARMAP_PANEL, NULL));
 }
 
 #ifdef HAVE_GUCHARMAP_2
 GucharmapChartable *
-gtranslator_charmap_panel_get_chartable (GtrCharmapPanel * panel)
+gtr_charmap_panel_get_chartable (GtrCharmapPanel * panel)
 {
   return panel->priv->chartable;
 }
 #else
 GucharmapTable *
-gtranslator_charmap_panel_get_table (GtrCharmapPanel * panel)
+gtr_charmap_panel_get_table (GtrCharmapPanel * panel)
 {
   return GUCHARMAP_TABLE (panel->priv->table);
 }

@@ -42,7 +42,7 @@
 						 GtrAlternateLangPanelPrivate))
 
 GTR_PLUGIN_DEFINE_TYPE (GtrAlternateLangPanel,
-			gtranslator_alternate_lang_panel, GTK_TYPE_VBOX)
+			gtr_alternate_lang_panel, GTK_TYPE_VBOX)
      struct _GtrAlternateLangPanelPrivate
      {
        GtkWidget *open_button;
@@ -57,7 +57,7 @@ GTR_PLUGIN_DEFINE_TYPE (GtrAlternateLangPanel,
      };
 
      static void
-       gtranslator_alternate_lang_panel_set_text
+       gtr_alternate_lang_panel_set_text
        (GtrAlternateLangPanel * panel, const gchar * text)
 {
   GtkTextBuffer *buf;
@@ -72,25 +72,25 @@ search_message (GtrAlternateLangPanel * panel, GtrMsg * msg)
 {
   GList *messages;
   GList *l;
-  const gchar *msgid = gtranslator_msg_get_msgid (msg);
+  const gchar *msgid = gtr_msg_get_msgid (msg);
   gchar *msgid_collate;
   const gchar *string;
   gchar *string_collate;
   GtrMsgStatus status;
 
   msgid_collate = g_utf8_collate_key (msgid, -1);
-  messages = gtranslator_po_get_messages (panel->priv->po);
+  messages = gtr_po_get_messages (panel->priv->po);
   l = messages;
   do
     {
-      string = gtranslator_msg_get_msgid (l->data);
+      string = gtr_msg_get_msgid (l->data);
       string_collate = g_utf8_collate_key (string, -1);
       if (strcmp (string_collate, msgid_collate) == 0)
 	{
-	  gtranslator_alternate_lang_panel_set_text (panel,
-						     gtranslator_msg_get_msgstr
+	  gtr_alternate_lang_panel_set_text (panel,
+						     gtr_msg_get_msgstr
 						     (l->data));
-	  status = gtranslator_msg_get_status (GTR_MSG (l->data));
+	  status = gtr_msg_get_status (GTR_MSG (l->data));
 	  switch (status)
 	    {
 	    case GTR_MSG_STATUS_TRANSLATED:
@@ -114,7 +114,7 @@ search_message (GtrAlternateLangPanel * panel, GtrMsg * msg)
   while ((l = g_list_next (l)));
 
   g_free (msgid_collate);
-  gtranslator_alternate_lang_panel_set_text (panel, _("Message not found"));
+  gtr_alternate_lang_panel_set_text (panel, _("Message not found"));
 
   /*
    * If we are here the status is untranslated
@@ -146,8 +146,8 @@ open_file (GtkWidget * dialog, GtrAlternateLangPanel * panel)
   file = g_file_new_for_path (po_file);
   g_free (po_file);
 
-  panel->priv->po = gtranslator_po_new ();
-  gtranslator_po_parse (panel->priv->po, file, &error);
+  panel->priv->po = gtr_po_new ();
+  gtr_po_parse (panel->priv->po, file, &error);
 
   g_object_unref (file);
 
@@ -175,7 +175,7 @@ open_file (GtkWidget * dialog, GtrAlternateLangPanel * panel)
 
 
 static void
-gtranslator_file_chooser_analyse (gpointer dialog,
+gtr_file_chooser_analyse (gpointer dialog,
 				  GtrAlternateLangPanel * panel)
 {
   gint reply;
@@ -215,14 +215,14 @@ open_button_clicked_cb (GtkWidget * open_button,
   /*
    * I need a way here to get the window
    */
-  dialog = gtranslator_file_chooser_new (NULL,
+  dialog = gtr_file_chooser_new (NULL,
 					 FILESEL_OPEN,
 					 _
 					 ("Open file for alternate language"),
 					 NULL);
 
-  tab_po = gtranslator_tab_get_po (panel->priv->tab);
-  location = gtranslator_po_get_location (tab_po);
+  tab_po = gtr_tab_get_po (panel->priv->tab);
+  location = gtr_po_get_location (tab_po);
   parent = g_file_get_parent (location);
   g_object_unref (location);
 
@@ -234,7 +234,7 @@ open_button_clicked_cb (GtkWidget * open_button,
 
   gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (dialog), TRUE);
 
-  gtranslator_file_chooser_analyse ((gpointer) dialog, panel);
+  gtr_file_chooser_analyse ((gpointer) dialog, panel);
 }
 
 static void
@@ -243,7 +243,7 @@ close_button_clicked_cb (GtkWidget * close_button,
 {
   if (panel->priv->po != NULL)
     {
-      gtranslator_alternate_lang_panel_set_text (panel, _("File closed"));
+      gtr_alternate_lang_panel_set_text (panel, _("File closed"));
 
       gtk_widget_set_sensitive (panel->priv->textview, FALSE);
 
@@ -254,7 +254,7 @@ close_button_clicked_cb (GtkWidget * close_button,
 }
 
 static void
-gtranslator_alternate_lang_panel_draw (GtrAlternateLangPanel * panel)
+gtr_alternate_lang_panel_draw (GtrAlternateLangPanel * panel)
 {
   GtkWidget *hbox;
   GtkWidget *buttonbox;
@@ -305,11 +305,11 @@ gtranslator_alternate_lang_panel_draw (GtrAlternateLangPanel * panel)
   scroll = gtk_scrolled_window_new (NULL, NULL);
   gtk_widget_show (scroll);
 
-  panel->priv->textview = gtranslator_view_new ();
+  panel->priv->textview = gtr_view_new ();
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (panel->priv->textview),
 			       GTK_WRAP_WORD);
   gtk_text_view_set_editable (GTK_TEXT_VIEW (panel->priv->textview), FALSE);
-  gtranslator_alternate_lang_panel_set_text (panel,
+  gtr_alternate_lang_panel_set_text (panel,
 					     _
 					     ("There isn't any file loaded"));
   gtk_widget_set_sensitive (panel->priv->textview, FALSE);
@@ -327,24 +327,24 @@ gtranslator_alternate_lang_panel_draw (GtrAlternateLangPanel * panel)
 }
 
 static void
-gtranslator_alternate_lang_panel_init (GtrAlternateLangPanel * panel)
+gtr_alternate_lang_panel_init (GtrAlternateLangPanel * panel)
 {
   panel->priv = GTR_ALTERNATE_LANG_PANEL_GET_PRIVATE (panel);
 
-  gtranslator_alternate_lang_panel_draw (panel);
+  gtr_alternate_lang_panel_draw (panel);
 
   panel->priv->po = NULL;
 }
 
 static void
-gtranslator_alternate_lang_panel_finalize (GObject * object)
+gtr_alternate_lang_panel_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_alternate_lang_panel_parent_class)->
+  G_OBJECT_CLASS (gtr_alternate_lang_panel_parent_class)->
     finalize (object);
 }
 
 static void
-gtranslator_alternate_lang_panel_class_init
+gtr_alternate_lang_panel_class_init
   (GtrAlternateLangPanelClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -352,13 +352,13 @@ gtranslator_alternate_lang_panel_class_init
   g_type_class_add_private (klass,
 			    sizeof (GtrAlternateLangPanelPrivate));
 
-  object_class->finalize = gtranslator_alternate_lang_panel_finalize;
+  object_class->finalize = gtr_alternate_lang_panel_finalize;
 }
 
 /***************************** Public funcs ***********************************/
 
 GtkWidget *
-gtranslator_alternate_lang_panel_new (GtkWidget * tab)
+gtr_alternate_lang_panel_new (GtkWidget * tab)
 {
   GtrAlternateLangPanel *panel;
   panel = g_object_new (GTR_TYPE_ALTERNATE_LANG_PANEL, NULL);
