@@ -3,7 +3,7 @@ dnl Process this file with autoconf to produce a configure script.
 dnl -------------------------------------------------------------------
 dnl (C) 2000-2004 Fatih Demir <kabalak@kabalak.net>
 dnl -------------------------------------------------------------------
-AC_PREREQ(2.63.2)
+AC_PREREQ(2.64)
 AC_INIT([gtranslator],[1.9.7],[http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator],[gtranslator],[http://gtranslator.sourceforge.net/])
 
 AC_CONFIG_SRCDIR([src/main.c])
