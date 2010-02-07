@@ -43,7 +43,7 @@ gtr_actions_edit_undo (GtkAction * action, GtrWindow * window)
 
   active_document =
     GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
-		       (GTK_TEXT_VIEW (active_view)));
+                       (GTK_TEXT_VIEW (active_view)));
 
   gtk_text_buffer_begin_user_action (GTK_TEXT_BUFFER (active_document));
   gtk_source_buffer_undo (active_document);
@@ -63,7 +63,7 @@ gtr_actions_edit_redo (GtkAction * action, GtrWindow * window)
 
   active_document =
     GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
-		       (GTK_TEXT_VIEW (active_view)));
+                       (GTK_TEXT_VIEW (active_view)));
 
   gtk_text_buffer_begin_user_action (GTK_TEXT_BUFFER (active_document));
   gtk_source_buffer_redo (active_document);
@@ -99,8 +99,7 @@ gtr_actions_edit_copy (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtr_actions_edit_paste (GtkAction * action,
-				GtrWindow * window)
+gtr_actions_edit_paste (GtkAction * action, GtrWindow * window)
 {
   GtrView *active_view;
 
@@ -117,8 +116,7 @@ gtr_actions_edit_paste (GtkAction * action,
  * Use the untranslated message as the translation.
  */
 void
-gtr_message_copy_to_translation (GtkAction * action,
-					 GtrWindow * window)
+gtr_message_copy_to_translation (GtkAction * action, GtrWindow * window)
 {
   GtrTab *current;
 
@@ -131,8 +129,7 @@ gtr_message_copy_to_translation (GtkAction * action,
  * Toggle the sticky status
  */
 void
-gtr_message_status_toggle_fuzzy (GtkAction * action,
-					 GtrWindow * window)
+gtr_message_status_toggle_fuzzy (GtkAction * action, GtrWindow * window)
 {
   GtrTab *current;
   GtrPo *po;
@@ -154,29 +151,25 @@ gtr_message_status_toggle_fuzzy (GtkAction * action,
 }
 
 void
-gtr_actions_edit_preferences (GtkAction * action,
-				      GtrWindow * window)
+gtr_actions_edit_preferences (GtkAction * action, GtrWindow * window)
 {
   gtr_show_preferences_dialog (window);
 }
 
 void
-gtr_actions_edit_header (GtkAction * action,
-				 GtrWindow * window)
+gtr_actions_edit_header (GtkAction * action, GtrWindow * window)
 {
   gtr_show_header_dialog (window);
 }
 
 void
-gtr_edit_message_comment (GtkAction * action,
-				  GtrWindow * window)
+gtr_edit_message_comment (GtkAction * action, GtrWindow * window)
 {
   gtr_show_comment_dialog (window);
 }
 
 void
-gtr_actions_edit_clear (GtkAction * action,
-				GtrWindow * window)
+gtr_actions_edit_clear (GtkAction * action, GtrWindow * window)
 {
   GtrTab *tab;
 

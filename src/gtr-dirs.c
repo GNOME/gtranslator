@@ -29,180 +29,150 @@
 gchar *
 gtr_dirs_get_user_config_dir (void)
 {
-	gchar *config_dir = NULL;
+  gchar *config_dir = NULL;
 
-	config_dir = g_build_filename (g_get_user_config_dir (),
-				       "gtranslator",
-				       NULL);
+  config_dir = g_build_filename (g_get_user_config_dir (),
+                                 "gtranslator", NULL);
 
-	return config_dir;
+  return config_dir;
 }
 
 gchar *
 gtr_dirs_get_user_cache_dir (void)
 {
-	const gchar *cache_dir;
+  const gchar *cache_dir;
 
-	cache_dir = g_get_user_cache_dir ();
+  cache_dir = g_get_user_cache_dir ();
 
-	return g_build_filename (cache_dir,
-				 "gtranslator",
-				 NULL);
+  return g_build_filename (cache_dir, "gtranslator", NULL);
 }
 
 gchar *
 gtr_dirs_get_user_plugins_dir (void)
 {
-	gchar *config_dir;
-	gchar *plugin_dir;
+  gchar *config_dir;
+  gchar *plugin_dir;
 
-	config_dir = gtr_dirs_get_user_config_dir ();
+  config_dir = gtr_dirs_get_user_config_dir ();
 
-	plugin_dir = g_build_filename (config_dir,
-				       "plugins",
-				       NULL);
-	g_free (config_dir);
-	
-	return plugin_dir;
+  plugin_dir = g_build_filename (config_dir, "plugins", NULL);
+  g_free (config_dir);
+
+  return plugin_dir;
 }
 
 gchar *
 gtr_dirs_get_user_accels_file (void)
 {
-	gchar *accels = NULL;
-	gchar *config_dir = NULL;
+  gchar *accels = NULL;
+  gchar *config_dir = NULL;
 
-	config_dir = gtr_dirs_get_user_config_dir ();
-	accels = g_build_filename (config_dir,
-				   "accels",
-				   "gtranslator",
-				   NULL);
+  config_dir = gtr_dirs_get_user_config_dir ();
+  accels = g_build_filename (config_dir, "accels", "gtranslator", NULL);
 
-	g_free (config_dir);
+  g_free (config_dir);
 
-	return accels;
+  return accels;
 }
 
 gchar *
 gtr_dirs_get_gtr_data_dir (void)
 {
-	gchar *data_dir;
+  gchar *data_dir;
 
 #ifdef G_OS_WIN32
-	gchar *win32_dir;
-	
-	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+  gchar *win32_dir;
 
-	data_dir = g_build_filename (win32_dir,
-				     "share",
-				     "gtranslator",
-				     NULL);
-	
-	g_free (win32_dir);
+  win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+
+  data_dir = g_build_filename (win32_dir, "share", "gtranslator", NULL);
+
+  g_free (win32_dir);
 #else
-	data_dir = g_build_filename (DATADIR,
-	                             "gtranslator",
-	                             NULL);
+  data_dir = g_build_filename (DATADIR, "gtranslator", NULL);
 #endif
 
-	return data_dir;
+  return data_dir;
 }
 
 gchar *
 gtr_dirs_get_gtr_locale_dir (void)
 {
-	gchar *locale_dir;
+  gchar *locale_dir;
 
 #ifdef G_OS_WIN32
-	gchar *win32_dir;
-	
-	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+  gchar *win32_dir;
 
-	locale_dir = g_build_filename (win32_dir,
-				       "share",
-				       "locale",
-				       NULL);
-	
-	g_free (win32_dir);
+  win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+
+  locale_dir = g_build_filename (win32_dir, "share", "locale", NULL);
+
+  g_free (win32_dir);
 #else
-	locale_dir = g_build_filename (DATADIR,
-				       "locale",
-				       NULL);
+  locale_dir = g_build_filename (DATADIR, "locale", NULL);
 #endif
 
-	return locale_dir;
+  return locale_dir;
 }
 
 gchar *
 gtr_dirs_get_gtr_lib_dir (void)
 {
-	gchar *lib_dir;
+  gchar *lib_dir;
 
 #ifdef G_OS_WIN32
-	gchar *win32_dir;
-	
-	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+  gchar *win32_dir;
 
-	lib_dir = g_build_filename (win32_dir,
-				    "lib",
-				    "gtranslator",
-				    NULL);
-	
-	g_free (win32_dir);
+  win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
+
+  lib_dir = g_build_filename (win32_dir, "lib", "gtranslator", NULL);
+
+  g_free (win32_dir);
 #else
-	lib_dir = g_build_filename (LIBDIR,
-				    "gtranslator",
-				    NULL);
+  lib_dir = g_build_filename (LIBDIR, "gtranslator", NULL);
 #endif
 
-	return lib_dir;
+  return lib_dir;
 }
 
 gchar *
 gtr_dirs_get_gtr_plugins_dir (void)
 {
-	gchar *lib_dir;
-	gchar *plugin_dir;
-	
-	lib_dir = gtr_dirs_get_gtr_lib_dir ();
-	
-	plugin_dir = g_build_filename (lib_dir,
-				       "plugins",
-				       NULL);
-	g_free (lib_dir);
-	
-	return plugin_dir;
+  gchar *lib_dir;
+  gchar *plugin_dir;
+
+  lib_dir = gtr_dirs_get_gtr_lib_dir ();
+
+  plugin_dir = g_build_filename (lib_dir, "plugins", NULL);
+  g_free (lib_dir);
+
+  return plugin_dir;
 }
 
 gchar *
-gtr_dirs_get_ui_file (const gchar *file)
+gtr_dirs_get_ui_file (const gchar * file)
 {
-	gchar *datadir;
-	gchar *ui_file;
+  gchar *datadir;
+  gchar *ui_file;
 
-	g_return_val_if_fail (file != NULL, NULL);
-	
-	datadir = gtr_dirs_get_gtr_data_dir ();
-	ui_file = g_build_filename (datadir,
-				    "ui",
-				    file,
-				    NULL);
-	g_free (datadir);
-	
-	return ui_file;
+  g_return_val_if_fail (file != NULL, NULL);
+
+  datadir = gtr_dirs_get_gtr_data_dir ();
+  ui_file = g_build_filename (datadir, "ui", file, NULL);
+  g_free (datadir);
+
+  return ui_file;
 }
 
 gchar *
 gtr_dirs_get_pixmaps_dir (void)
 {
-	gchar *datadir;
-	gchar *pixmapsdir;
-	
-	datadir = gtr_dirs_get_gtr_data_dir ();
-	pixmapsdir = g_build_filename (datadir,
-				       "pixmaps",
-				       NULL);
-	g_free (datadir);
-	
-	return pixmapsdir;
+  gchar *datadir;
+  gchar *pixmapsdir;
+
+  datadir = gtr_dirs_get_gtr_data_dir ();
+  pixmapsdir = g_build_filename (datadir, "pixmaps", NULL);
+  g_free (datadir);
+
+  return pixmapsdir;
 }

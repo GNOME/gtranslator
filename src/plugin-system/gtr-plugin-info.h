@@ -45,28 +45,17 @@ GType
 gtr_plugin_info_get_type (void)
   G_GNUC_CONST;
 
-     gboolean gtr_plugin_info_is_active (GtrPluginInfo *
-						 info);
-     gboolean gtr_plugin_info_is_available (GtrPluginInfo *
-						    info);
-     gboolean gtr_plugin_info_is_configurable (GtrPluginInfo *
-						       info);
+     gboolean gtr_plugin_info_is_active (GtrPluginInfo * info);
+     gboolean gtr_plugin_info_is_available (GtrPluginInfo * info);
+     gboolean gtr_plugin_info_is_configurable (GtrPluginInfo * info);
 
-     const gchar *gtr_plugin_info_get_name (GtrPluginInfo *
-						    info);
-     const gchar
-       *gtr_plugin_info_get_description (GtrPluginInfo *
-						 info);
-     const gchar *gtr_plugin_info_get_icon_name (GtrPluginInfo
-							 * info);
-     const gchar **gtr_plugin_info_get_authors (GtrPluginInfo
-							* info);
-     const gchar *gtr_plugin_info_get_website (GtrPluginInfo *
-						       info);
-     const gchar *gtr_plugin_info_get_copyright (GtrPluginInfo
-							 * info);
-     const gchar *gtr_plugin_info_get_license (GtrPluginInfo *
-						       info);
+     const gchar *gtr_plugin_info_get_name (GtrPluginInfo * info);
+     const gchar * gtr_plugin_info_get_description (GtrPluginInfo * info);
+     const gchar *gtr_plugin_info_get_icon_name (GtrPluginInfo * info);
+     const gchar **gtr_plugin_info_get_authors (GtrPluginInfo * info);
+     const gchar *gtr_plugin_info_get_website (GtrPluginInfo * info);
+     const gchar *gtr_plugin_info_get_copyright (GtrPluginInfo * info);
+     const gchar *gtr_plugin_info_get_license (GtrPluginInfo * info);
 
 G_END_DECLS
 #endif /* __GTR_PLUGIN_INFO_H__ */

@@ -95,17 +95,13 @@ GType
 gtr_plugin_get_type (void)
   G_GNUC_CONST;
 
-     void gtr_plugin_activate (GtrPlugin * plugin,
-				       GtrWindow * window);
-     void gtr_plugin_deactivate (GtrPlugin * plugin,
-					 GtrWindow * window);
+     void gtr_plugin_activate (GtrPlugin * plugin, GtrWindow * window);
+     void gtr_plugin_deactivate (GtrPlugin * plugin, GtrWindow * window);
 
-     void gtr_plugin_update_ui (GtrPlugin * plugin,
-					GtrWindow * window);
+     void gtr_plugin_update_ui (GtrPlugin * plugin, GtrWindow * window);
 
      gboolean gtr_plugin_is_configurable (GtrPlugin * plugin);
-     GtkWidget *gtr_plugin_create_configure_dialog
-       (GtrPlugin * plugin);
+     GtkWidget *gtr_plugin_create_configure_dialog (GtrPlugin * plugin);
 
 /**
  * GTR_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE):

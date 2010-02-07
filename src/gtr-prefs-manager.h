@@ -99,7 +99,7 @@ void gtr_prefs_manager_shutdown (void);
 
 /* Files */
 void gtr_prefs_manager_set_warn_if_contains_fuzzy (gboolean
-							   warn_if_contains_fuzzy);
+                                                   warn_if_contains_fuzzy);
 gboolean gtr_prefs_manager_get_warn_if_contains_fuzzy (void);
 
 void gtr_prefs_manager_set_delete_compiled (gboolean delete_compiled);
@@ -114,17 +114,14 @@ gint gtr_prefs_manager_get_autosave_interval (void);
 void gtr_prefs_manager_set_create_backup (gboolean create_backup);
 gboolean gtr_prefs_manager_get_create_backup (void);
 
-void gtr_prefs_manager_set_use_profile_values (gboolean
-						       use_profile_values);
+void gtr_prefs_manager_set_use_profile_values (gboolean use_profile_values);
 gboolean gtr_prefs_manager_get_use_profile_values (void);
 
 /* Editor */
-void gtr_prefs_manager_set_highlight_syntax (gboolean
-						     highlight_syntax);
+void gtr_prefs_manager_set_highlight_syntax (gboolean highlight_syntax);
 gboolean gtr_prefs_manager_get_highlight_syntax (void);
 
-void gtr_prefs_manager_set_visible_whitespace (gboolean
-						       visible_whitespace);
+void gtr_prefs_manager_set_visible_whitespace (gboolean visible_whitespace);
 gboolean gtr_prefs_manager_get_visible_whitespace (void);
 
 void gtr_prefs_manager_set_use_custom_font (gboolean use_custom_font);
@@ -134,7 +131,7 @@ void gtr_prefs_manager_set_editor_font (const gchar * editor_font);
 const gchar *gtr_prefs_manager_get_editor_font (void);
 
 void gtr_prefs_manager_set_unmark_fuzzy_when_changed (gboolean
-							      unmark_fuzzy_when_changed);
+                                                      unmark_fuzzy_when_changed);
 gboolean gtr_prefs_manager_get_unmark_fuzzy_when_changed (void);
 
 void gtr_prefs_manager_set_spellcheck (gboolean spellcheck);
@@ -145,11 +142,11 @@ void gtr_prefs_manager_set_po_directory (const gchar * po_directory);
 const gchar *gtr_prefs_manager_get_po_directory (void);
 
 void gtr_prefs_manager_set_restrict_to_filename (gboolean
-							 restrict_to_filename);
+                                                 restrict_to_filename);
 gboolean gtr_prefs_manager_get_restrict_to_filename (void);
 
 void gtr_prefs_manager_set_filename_restriction (const gchar *
-							 filename_restriction);
+                                                 filename_restriction);
 const gchar *gtr_prefs_manager_get_filename_restriction (void);
 
 void gtr_prefs_manager_set_max_missing_words (gint max_missing_words);
@@ -160,14 +157,13 @@ gint gtr_prefs_manager_get_max_length_diff (void);
 
 /* UI */
 void gtr_prefs_manager_set_pane_switcher_style (GdlSwitcherStyle
-							pane_switcher_style);
+                                                pane_switcher_style);
 GdlSwitcherStyle gtr_prefs_manager_get_pane_switcher_style (void);
 
 void gtr_prefs_manager_set_color_scheme (const gchar * color_scheme);
 const gchar *gtr_prefs_manager_get_color_scheme (void);
 
-void gtr_prefs_manager_set_sort_order (GtrSortOrder
-					       sort_order);
+void gtr_prefs_manager_set_sort_order (GtrSortOrder sort_order);
 GtrSortOrder gtr_prefs_manager_get_sort_order (void);
 
 #endif /* __GTR_PREFS_MANAGER_H__ */

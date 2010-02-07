@@ -18,8 +18,7 @@
 #include "gtr-actions.h"
 
 void
-gtr_actions_view_context (GtkAction * action,
-				  GtrWindow * window)
+gtr_actions_view_context (GtkAction * action, GtrWindow * window)
 {
   GtrTab *tab;
   GtkWidget *context;
@@ -31,8 +30,7 @@ gtr_actions_view_context (GtkAction * action,
 }
 
 void
-gtr_actions_view_translation_memory (GtkAction * action,
-					     GtrWindow * window)
+gtr_actions_view_translation_memory (GtkAction * action, GtrWindow * window)
 {
   GtrTab *tab;
   GtkWidget *tm_ui;

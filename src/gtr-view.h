@@ -80,11 +80,9 @@ gtr_view_get_type (void)
      GtkWidget *gtr_view_new (void);
 
      gboolean gtr_view_get_selected_text (GtrView * view,
-						  gchar ** selected_text,
-						  gint * len);
+                                          gchar ** selected_text, gint * len);
 
-     void gtr_view_enable_spellcheck (GtrView * view,
-					      gboolean enable);
+     void gtr_view_enable_spellcheck (GtrView * view, gboolean enable);
 
      void gtr_view_enable_visible_whitespace
        (GtrView * view, gboolean enable);
@@ -96,31 +94,30 @@ gtr_view_get_type (void)
      void gtr_view_paste_clipboard (GtrView * view);
 
      void gtr_view_set_font (GtrView * view,
-				     gboolean def, const gchar * font_name);
+                             gboolean def, const gchar * font_name);
 
      void gtr_view_set_search_text (GtrView * view,
-					    const gchar * text, guint flags);
+                                    const gchar * text, guint flags);
 
-     gchar *gtr_view_get_search_text (GtrView * view,
-					      guint * flags);
+     gchar *gtr_view_get_search_text (GtrView * view, guint * flags);
 
      gboolean gtr_view_get_can_search_again (GtrView * view);
 
      gboolean gtr_view_search_forward (GtrView * view,
-				 const GtkTextIter * start,
-				 const GtkTextIter * end,
-				 GtkTextIter * match_start,
-				 GtkTextIter * match_end);
+                                       const GtkTextIter * start,
+                                       const GtkTextIter * end,
+                                       GtkTextIter * match_start,
+                                       GtkTextIter * match_end);
 
      gboolean gtr_view_search_backward (GtrView * view,
-				  const GtkTextIter * start,
-				  const GtkTextIter * end,
-				  GtkTextIter * match_start,
-				  GtkTextIter * match_end);
+                                        const GtkTextIter * start,
+                                        const GtkTextIter * end,
+                                        GtkTextIter * match_start,
+                                        GtkTextIter * match_end);
 
-      gint gtr_view_replace_all (GtrView * view,
-			      const gchar * find,
-			      const gchar * replace, guint flags);
+     gint gtr_view_replace_all (GtrView * view,
+                                const gchar * find,
+                                const gchar * replace, guint flags);
 
      void gtr_view_reload_scheme_color (GtrView * view);
 

@@ -43,8 +43,7 @@ gboolean gtr_prefs_manager_window_state_can_set (void);
 
 /* Window size */
 void gtr_prefs_manager_get_window_size (gint * width, gint * height);
-void gtr_prefs_manager_get_default_window_size (gint * width,
-							gint * height);
+void gtr_prefs_manager_get_default_window_size (gint * width, gint * height);
 void gtr_prefs_manager_set_window_size (gint width, gint height);
 gboolean gtr_prefs_manager_window_size_can_set (void);
 

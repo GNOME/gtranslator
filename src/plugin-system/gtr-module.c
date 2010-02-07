@@ -60,7 +60,7 @@ gtr_module_load (GTypeModule * gmodule)
   gchar *path;
 
   DEBUG_PRINT ("Loading %s module from %s",
-	       module->module_name, module->path);
+               module->module_name, module->path);
 
   path = g_module_build_path (module->path, module->module_name);
   g_return_val_if_fail (path != NULL, FALSE);
@@ -78,7 +78,7 @@ gtr_module_load (GTypeModule * gmodule)
 
   /* extract symbols from the lib */
   if (!g_module_symbol (module->library, "register_gtr_plugin",
-			(void *) &register_func))
+                        (void *) &register_func))
     {
       g_warning ("%s", g_module_error ());
       g_module_close (module->library);
@@ -101,7 +101,7 @@ gtr_module_load (GTypeModule * gmodule)
   if (module->type == 0)
     {
       g_warning ("Invalid gtr plugin contained by module %s",
-		 module->module_name);
+                 module->module_name);
       return FALSE;
     }
 
@@ -148,8 +148,7 @@ gtr_module_finalize (GObject * object)
 
 static void
 gtr_module_get_property (GObject * object,
-				 guint prop_id,
-				 GValue * value, GParamSpec * pspec)
+                         guint prop_id, GValue * value, GParamSpec * pspec)
 {
   GtrModule *module = GTR_MODULE (object);
 
@@ -168,8 +167,8 @@ gtr_module_get_property (GObject * object,
 
 static void
 gtr_module_set_property (GObject * object,
-				 guint prop_id,
-				 const GValue * value, GParamSpec * pspec)
+                         guint prop_id,
+                         const GValue * value, GParamSpec * pspec)
 {
   GtrModule *module = GTR_MODULE (object);
 
@@ -203,22 +202,22 @@ gtr_module_class_init (GtrModuleClass * klass)
   klass->garbage_collect = gtr_module_class_real_garbage_collect;
 
   g_object_class_install_property (object_class,
-				   PROP_MODULE_NAME,
-				   g_param_spec_string ("module-name",
-							"Module Name",
-							"The module to load for this plugin",
-							NULL,
-							G_PARAM_READWRITE |
-							G_PARAM_CONSTRUCT_ONLY));
+                                   PROP_MODULE_NAME,
+                                   g_param_spec_string ("module-name",
+                                                        "Module Name",
+                                                        "The module to load for this plugin",
+                                                        NULL,
+                                                        G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT_ONLY));
 
   g_object_class_install_property (object_class,
-				   PROP_PATH,
-				   g_param_spec_string ("path",
-							"Path",
-							"The path to use when loading this module",
-							NULL,
-							G_PARAM_READWRITE |
-							G_PARAM_CONSTRUCT_ONLY));
+                                   PROP_PATH,
+                                   g_param_spec_string ("path",
+                                                        "Path",
+                                                        "The path to use when loading this module",
+                                                        NULL,
+                                                        G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT_ONLY));
 }
 
 void

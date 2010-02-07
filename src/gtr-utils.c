@@ -73,11 +73,11 @@ check_good_word (const gchar * word, gchar ** badwords)
       gchar *lower_collate = g_utf8_collate_key (lower, -1);
 
       if (strcmp (lower_collate, badwords[i]) == 0)
-	{
-	  check = FALSE;
-	  g_free (lower_collate);
-	  break;
-	}
+        {
+          check = FALSE;
+          g_free (lower_collate);
+          break;
+        }
       i++;
       g_free (lower_collate);
     }
@@ -111,10 +111,10 @@ gtr_utils_split_string_in_words (const gchar * string)
       badwords_collate = g_new0 (gchar *, words_size + 1);
 
       while (badwords[x] != NULL)
-	{
-	  badwords_collate[x] = g_utf8_collate_key (badwords[x], -1);
-	  x++;
-	}
+        {
+          badwords_collate[x] = g_utf8_collate_key (badwords[x], -1);
+          x++;
+        }
       badwords_collate[x] = NULL;
     }
 
@@ -122,7 +122,7 @@ gtr_utils_split_string_in_words (const gchar * string)
   attrs = g_new (PangoLogAttr, char_len + 1);
 
   pango_get_log_attrs (string,
-		       strlen (string), -1, lang, attrs, char_len + 1);
+                       strlen (string), -1, lang, attrs, char_len + 1);
 
   array = g_ptr_array_new ();
 
@@ -132,17 +132,17 @@ gtr_utils_split_string_in_words (const gchar * string)
       gchar *start, *end;
 
       if (attrs[i].is_word_start)
-	start = s;
+        start = s;
       if (attrs[i].is_word_end)
-	{
-	  gchar *word;
+        {
+          gchar *word;
 
-	  end = s;
-	  word = g_strndup (start, end - start);
+          end = s;
+          word = g_strndup (start, end - start);
 
-	  if (check_good_word (word, badwords_collate))
-	    g_ptr_array_add (array, word);
-	}
+          if (check_good_word (word, badwords_collate))
+            g_ptr_array_add (array, word);
+        }
 
       i++;
       s = g_utf8_next_char (s);
@@ -185,14 +185,14 @@ gtr_xml_open_file (const gchar * filename)
  */
 GtkWidget *
 gtr_gtk_button_new_with_stock_icon (const gchar * label,
-					    const gchar * stock_id)
+                                    const gchar * stock_id)
 {
   GtkWidget *button;
 
   button = gtk_button_new_with_mnemonic (label);
   gtk_button_set_image (GTK_BUTTON (button),
-			gtk_image_new_from_stock (stock_id,
-						  GTK_ICON_SIZE_BUTTON));
+                        gtk_image_new_from_stock (stock_id,
+                                                  GTK_ICON_SIZE_BUTTON));
 
   return button;
 }
@@ -209,10 +209,9 @@ gtr_gtk_button_new_with_stock_icon (const gchar * label,
  */
 void
 gtr_utils_menu_position_under_widget (GtkMenu * menu,
-					      gint * x,
-					      gint * y,
-					      gboolean * push_in,
-					      gpointer user_data)
+                                      gint * x,
+                                      gint * y,
+                                      gboolean * push_in, gpointer user_data)
 {
   GtkWidget *w = GTK_WIDGET (user_data);
   GtkRequisition requisition;
@@ -246,10 +245,10 @@ gtr_utils_menu_position_under_widget (GtkMenu * menu,
  */
 void
 gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
-						 gint * x,
-						 gint * y,
-						 gboolean * push_in,
-						 gpointer user_data)
+                                         gint * x,
+                                         gint * y,
+                                         gboolean * push_in,
+                                         gpointer user_data)
 {
   GtkTreeView *tree = GTK_TREE_VIEW (user_data);
   GtkTreeModel *model;
@@ -270,25 +269,24 @@ gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
       gdk_window_get_origin (GTK_WIDGET (tree)->window, x, y);
 
       path = gtk_tree_model_get_path (model, &iter);
-      gtk_tree_view_get_cell_area (tree, path, gtk_tree_view_get_column (tree, 0),	/* FIXME 0 for RTL ? */
-				   &rect);
+      gtk_tree_view_get_cell_area (tree, path, gtk_tree_view_get_column (tree, 0),      /* FIXME 0 for RTL ? */
+                                   &rect);
       gtk_tree_path_free (path);
 
       *x += rect.x;
       *y += rect.y + rect.height;
 
       if (gtk_widget_get_direction (GTK_WIDGET (tree)) == GTK_TEXT_DIR_RTL)
-	{
-	  GtkRequisition requisition;
-	  gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
-	  *x += rect.width - requisition.width;
-	}
+        {
+          GtkRequisition requisition;
+          gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
+          *x += rect.width - requisition.width;
+        }
     }
   else
     {
       /* no selection -> regular "under widget" positioning */
-      gtr_utils_menu_position_under_widget (menu,
-						    x, y, push_in, tree);
+      gtr_utils_menu_position_under_widget (menu, x, y, push_in, tree);
     }
 }
 
@@ -304,8 +302,8 @@ handle_builder_error (const gchar * message, ...)
   msg_plain = g_strdup_vprintf (message, args);
 
   msg = g_strconcat ("<span size=\"large\" weight=\"bold\">",
-		     msg_plain, "</span>\n\n",
-		     _("Please check your installation."), NULL);
+                     msg_plain, "</span>\n\n",
+                     _("Please check your installation."), NULL);
   label = gtk_label_new (msg);
 
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
@@ -337,9 +335,9 @@ handle_builder_error (const gchar * message, ...)
  */
 gboolean
 gtr_utils_get_ui_objects (const gchar * filename,
-				  gchar ** root_objects,
-				  GtkWidget ** error_widget,
-				  const gchar * object_name, ...)
+                          gchar ** root_objects,
+                          GtkWidget ** error_widget,
+                          const gchar * object_name, ...)
 {
   GtkBuilder *builder;
   va_list args;
@@ -359,15 +357,15 @@ gtr_utils_get_ui_objects (const gchar * filename,
 
   if (root_objects != NULL)
     gtk_builder_add_objects_from_file (builder,
-				       filename, root_objects, &error);
+                                       filename, root_objects, &error);
   else
     gtk_builder_add_from_file (builder, filename, &error);
 
   if (error != NULL)
     {
       *error_widget =
-	handle_builder_error (_("Unable to open ui file %s. Error: %s"),
-			      filename_markup, error->message);
+        handle_builder_error (_("Unable to open ui file %s. Error: %s"),
+                              filename_markup, error->message);
       g_error_free (error);
       g_free (filename_markup);
 
@@ -383,28 +381,28 @@ gtr_utils_get_ui_objects (const gchar * filename,
       *gobj = gtk_builder_get_object (builder, name);
 
       if (!*gobj)
-	{
-	  *error_widget =
-	    handle_builder_error (_
-				  ("Unable to find the object '%s' inside file %s."),
-				  name, filename_markup), ret = FALSE;
-	  break;
-	}
+        {
+          *error_widget =
+            handle_builder_error (_
+                                  ("Unable to find the object '%s' inside file %s."),
+                                  name, filename_markup), ret = FALSE;
+          break;
+        }
 
       /* we return a new ref for the root objects,
        * the others are already reffed by their parent root object */
       if (root_objects != NULL)
-	{
-	  gint i;
+        {
+          gint i;
 
-	  for (i = 0; root_objects[i] != NULL; ++i)
-	    {
-	      if ((strcmp (name, root_objects[i]) == 0))
-		{
-		  g_object_ref (*gobj);
-		}
-	    }
-	}
+          for (i = 0; root_objects[i] != NULL; ++i)
+            {
+              if ((strcmp (name, root_objects[i]) == 0))
+                {
+                  g_object_ref (*gobj);
+                }
+            }
+        }
     }
   va_end (args);
 
@@ -456,20 +454,20 @@ gtr_utils_is_valid_uri (const gchar * uri)
   for (p = (const guchar *) uri; *p; p++)
     {
       if (*p == '%')
-	{
-	  ++p;
-	  if (!g_ascii_isxdigit (*p))
-	    return FALSE;
+        {
+          ++p;
+          if (!g_ascii_isxdigit (*p))
+            return FALSE;
 
-	  ++p;
-	  if (!g_ascii_isxdigit (*p))
-	    return FALSE;
-	}
+          ++p;
+          if (!g_ascii_isxdigit (*p))
+            return FALSE;
+        }
       else
-	{
-	  if (*p <= 32 || *p >= 128)
-	    return FALSE;
-	}
+        {
+          if (*p <= 32 || *p >= 128)
+            return FALSE;
+        }
     }
 
   return TRUE;
@@ -499,10 +497,10 @@ gtr_utils_drop_get_locations (GtkSelectionData * selection_data)
       GFile *file;
       /* Silently ignore malformed URI/filename */
       if (gtr_utils_is_valid_uri (uris[i]))
-	{
-	  file = g_file_new_for_uri (uris[i]);
-	  locations = g_slist_prepend (locations, file);
-	}
+        {
+          file = g_file_new_for_uri (uris[i]);
+          locations = g_slist_prepend (locations, file);
+        }
     }
 
   return locations;
@@ -538,23 +536,23 @@ gtr_utils_escape_search_text (const gchar * text)
       next = g_utf8_next_char (p);
 
       switch (*p)
-	{
-	case '\n':
-	  g_string_append (str, "\\n");
-	  break;
-	case '\r':
-	  g_string_append (str, "\\r");
-	  break;
-	case '\t':
-	  g_string_append (str, "\\t");
-	  break;
-	case '\\':
-	  g_string_append (str, "\\\\");
-	  break;
-	default:
-	  g_string_append_len (str, p, next - p);
-	  break;
-	}
+        {
+        case '\n':
+          g_string_append (str, "\\n");
+          break;
+        case '\r':
+          g_string_append (str, "\\r");
+          break;
+        case '\t':
+          g_string_append (str, "\\t");
+          break;
+        case '\\':
+          g_string_append (str, "\\\\");
+          break;
+        default:
+          g_string_append_len (str, p, next - p);
+          break;
+        }
 
       p = next;
     }
@@ -589,46 +587,46 @@ gtr_utils_unescape_search_text (const gchar * text)
       next = g_utf8_next_char (cur);
 
       if (prev && (*prev == '\\'))
-	{
-	  switch (*cur)
-	    {
-	    case 'n':
-	      str = g_string_append (str, "\n");
-	      break;
-	    case 'r':
-	      str = g_string_append (str, "\r");
-	      break;
-	    case 't':
-	      str = g_string_append (str, "\t");
-	      break;
-	    case '\\':
-	      str = g_string_append (str, "\\");
-	      drop_prev = TRUE;
-	      break;
-	    default:
-	      str = g_string_append (str, "\\");
-	      str = g_string_append_len (str, cur, next - cur);
-	      break;
-	    }
-	}
+        {
+          switch (*cur)
+            {
+            case 'n':
+              str = g_string_append (str, "\n");
+              break;
+            case 'r':
+              str = g_string_append (str, "\r");
+              break;
+            case 't':
+              str = g_string_append (str, "\t");
+              break;
+            case '\\':
+              str = g_string_append (str, "\\");
+              drop_prev = TRUE;
+              break;
+            default:
+              str = g_string_append (str, "\\");
+              str = g_string_append_len (str, cur, next - cur);
+              break;
+            }
+        }
       else if (*cur != '\\')
-	{
-	  str = g_string_append_len (str, cur, next - cur);
-	}
+        {
+          str = g_string_append_len (str, cur, next - cur);
+        }
       else if ((next == end) && (*cur == '\\'))
-	{
-	  str = g_string_append (str, "\\");
-	}
+        {
+          str = g_string_append (str, "\\");
+        }
 
       if (!drop_prev)
-	{
-	  prev = cur;
-	}
+        {
+          prev = cur;
+        }
       else
-	{
-	  prev = NULL;
-	  drop_prev = FALSE;
-	}
+        {
+          prev = NULL;
+          drop_prev = FALSE;
+        }
 
       cur = next;
     }
@@ -641,7 +639,7 @@ gtr_utils_unescape_search_text (const gchar * text)
  */
 gboolean
 g_utf8_caselessnmatch (const gchar * s1,
-		       const gchar * s2, gssize n1, gssize n2)
+                       const gchar * s2, gssize n1, gssize n2)
 {
   gchar *casefold;
   gchar *normalized_s1;
@@ -688,7 +686,7 @@ finally_2:
  */
 void
 gtr_utils_activate_url (GtkAboutDialog * dialog,
-				const gchar * url, gpointer data)
+                        const gchar * url, gpointer data)
 {
   //FIXME: gtk_url_show deprecates this func.
   gchar *open[3];
@@ -704,9 +702,9 @@ gtr_utils_activate_url (GtkAboutDialog * dialog,
   open[2] = NULL;
 
   gdk_spawn_on_screen (gdk_screen_get_default (),
-		       NULL,
-		       open,
-		       NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
+                       NULL,
+                       open,
+                       NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
 }
 
 /**
@@ -719,7 +717,7 @@ gtr_utils_activate_url (GtkAboutDialog * dialog,
  */
 void
 gtr_utils_activate_email (GtkAboutDialog * dialog,
-				  const gchar * email, gpointer data)
+                          const gchar * email, gpointer data)
 {
   //FIXME: gtk_url_show deprecates this func.
   gchar *open[3];
@@ -735,9 +733,9 @@ gtr_utils_activate_email (GtkAboutDialog * dialog,
   open[2] = NULL;
 
   gdk_spawn_on_screen (gdk_screen_get_default (),
-		       NULL,
-		       open,
-		       NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
+                       NULL,
+                       open,
+                       NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
 }
 
 /**
@@ -750,7 +748,7 @@ gtr_utils_activate_email (GtkAboutDialog * dialog,
  */
 void
 gtr_utils_help_display (GtkWindow * parent,
-				const gchar * doc_id, const gchar * file_name)
+                        const gchar * doc_id, const gchar * file_name)
 {
 
   GError *error = NULL;
@@ -787,17 +785,17 @@ gtr_utils_help_display (GtkWindow * parent,
     {
       lang = langs[i];
       if (strchr (lang, '.'))
-	continue;
+        continue;
 
       path = gtr_dirs_get_gtr_data_dir ();
       uri = g_build_filename (path, "gnome", "help", doc_id,
-			      lang, file_name, NULL);
+                              lang, file_name, NULL);
       g_free (path);
 
       if (g_file_test (uri, G_FILE_TEST_EXISTS))
-	{
-	  break;
-	}
+        {
+          break;
+        }
       g_free (uri);
       uri = NULL;
     }
@@ -807,12 +805,12 @@ gtr_utils_help_display (GtkWindow * parent,
     {
       GtkWidget *dialog;
       dialog = gtk_message_dialog_new (parent,
-				       GTK_DIALOG_DESTROY_WITH_PARENT,
-				       GTK_MESSAGE_ERROR,
-				       GTK_BUTTONS_CLOSE,
-				       _("Unable to display help. "
-					 "Please make sure the Gtr "
-					 "documentation package is installed."));
+                                       GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       GTK_MESSAGE_ERROR,
+                                       GTK_BUTTONS_CLOSE,
+                                       _("Unable to display help. "
+                                         "Please make sure the Gtr "
+                                         "documentation package is installed."));
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
 
@@ -889,8 +887,7 @@ gtr_utils_get_current_year (void)
  * g_slist_foreach (list, (GFunc)g_object_unref, NULL).
  */
 void
-gtr_utils_scan_dir (GFile * dir,
-			    GSList ** list, const gchar * po_name)
+gtr_utils_scan_dir (GFile * dir, GSList ** list, const gchar * po_name)
 {
   GFileInfo *info;
   GError *error;
@@ -899,46 +896,46 @@ gtr_utils_scan_dir (GFile * dir,
 
   error = NULL;
   enumerator = g_file_enumerate_children (dir,
-					  G_FILE_ATTRIBUTE_STANDARD_NAME,
-					  G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS,
-					  NULL, &error);
+                                          G_FILE_ATTRIBUTE_STANDARD_NAME,
+                                          G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS,
+                                          NULL, &error);
   if (enumerator)
     {
       error = NULL;
 
       while ((info =
-	      g_file_enumerator_next_file (enumerator, NULL, &error)) != NULL)
-	{
-	  const gchar *name;
-	  gchar *filename;
+              g_file_enumerator_next_file (enumerator, NULL, &error)) != NULL)
+        {
+          const gchar *name;
+          gchar *filename;
 
-	  name = g_file_info_get_name (info);
-	  file = g_file_get_child (dir, name);
+          name = g_file_info_get_name (info);
+          file = g_file_get_child (dir, name);
 
-	  if (po_name != NULL)
-	    {
-	      if (g_str_has_suffix (po_name, ".po"))
-		filename = g_strdup (po_name);
-	      else
-		filename = g_strconcat (po_name, ".po", NULL);
-	    }
-	  else
-	    filename = g_strdup (".po");
+          if (po_name != NULL)
+            {
+              if (g_str_has_suffix (po_name, ".po"))
+                filename = g_strdup (po_name);
+              else
+                filename = g_strconcat (po_name, ".po", NULL);
+            }
+          else
+            filename = g_strdup (".po");
 
-	  if (g_str_has_suffix (name, filename))
-	    *list = g_slist_prepend (*list, file);
-	  g_free (filename);
+          if (g_str_has_suffix (name, filename))
+            *list = g_slist_prepend (*list, file);
+          g_free (filename);
 
-	  gtr_utils_scan_dir (file, list, po_name);
-	  g_object_unref (info);
-	}
+          gtr_utils_scan_dir (file, list, po_name);
+          g_object_unref (info);
+        }
       g_file_enumerator_close (enumerator, NULL, NULL);
       g_object_unref (enumerator);
 
       if (error)
-	{
-	  g_warning ("%s", error->message);
-	}
+        {
+          g_warning ("%s", error->message);
+        }
     }
 }
 
@@ -952,13 +949,13 @@ gtr_utils_reduce_path (const gchar * path)
 
   new_str =
     g_build_filename (array[1], "/../", array[g_strv_length (array) - 1],
-		      NULL);
+                      NULL);
 
   if (strlen (new_str) >= 30)
     {
       g_free (new_str);
       new_str =
-	g_build_filename ("../", array[g_strv_length (array) - 1], NULL);
+        g_build_filename ("../", array[g_strv_length (array) - 1], NULL);
     }
   return new_str;
 }
@@ -990,14 +987,14 @@ gtr_utils_escape_underscores (const gchar * text, gssize length)
       next = g_utf8_next_char (p);
 
       switch (*p)
-	{
-	case '_':
-	  g_string_append (str, "__");
-	  break;
-	default:
-	  g_string_append_len (str, p, next - p);
-	  break;
-	}
+        {
+        case '_':
+          g_string_append (str, "__");
+          break;
+        default:
+          g_string_append_len (str, p, next - p);
+          break;
+        }
 
       p = next;
     }

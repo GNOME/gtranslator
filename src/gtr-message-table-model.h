@@ -37,8 +37,7 @@ G_BEGIN_DECLS
 #define GTR_IS_MESSAGE_TABLE_MODEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_MESSAGE_TABLE_MODEL))
 #define GTR_MESSAGE_TABLE_MODEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_MESSAGE_TABLE_MODEL, GtrMessageTableModelClass))
 /* Private structure type */
-typedef struct _GtrMessageTableModelPrivate
-  GtrMessageTableModelPrivate;
+typedef struct _GtrMessageTableModelPrivate GtrMessageTableModelPrivate;
 
 /*
  * Main object structure
@@ -57,16 +56,14 @@ struct _GtrMessageTableModel
 /*
  * Class definition
  */
-typedef struct _GtrMessageTableModelClass
-  GtrMessageTableModelClass;
+typedef struct _GtrMessageTableModelClass GtrMessageTableModelClass;
 
 struct _GtrMessageTableModelClass
 {
   GObjectClass parent_class;
 };
 
-typedef enum _GtrMessageTableModelColumn
-  GtrMessageTableModelColumn;
+typedef enum _GtrMessageTableModelColumn GtrMessageTableModelColumn;
 
 enum _GtrMessageTableModelColumn
 {
@@ -86,15 +83,13 @@ GType
 gtr_message_table_model_get_type (void)
   G_GNUC_CONST;
 
-     GType gtr_message_table_model_register_type (GTypeModule *
-							  module);
+     GType gtr_message_table_model_register_type (GTypeModule * module);
 
      GtrMessageTableModel *gtr_message_table_model_new (void);
 
      void gtr_message_table_model_append (GtrMessageTableModel
-						  * model,
-						  GtrMsg * msg,
-						  GtkTreeIter * iter);
+                                          * model,
+                                          GtrMsg * msg, GtkTreeIter * iter);
 
      void
        gtr_message_table_model_update_row

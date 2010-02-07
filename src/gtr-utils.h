@@ -35,48 +35,45 @@ xmlDocPtr gtr_xml_new_doc (const gchar * name);
 xmlDocPtr gtr_xml_open_file (const gchar * filename);
 
 GtkWidget *gtr_gtk_button_new_with_stock_icon (const gchar * label,
-						       const gchar *
-						       stock_id);
+                                               const gchar * stock_id);
 
 void gtr_utils_menu_position_under_widget (GtkMenu * menu,
-						   gint * x,
-						   gint * y,
-						   gboolean * push_in,
-						   gpointer user_data);
+                                           gint * x,
+                                           gint * y,
+                                           gboolean * push_in,
+                                           gpointer user_data);
 
 void gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
-						      gint * x,
-						      gint * y,
-						      gboolean * push_in,
-						      gpointer user_data);
+                                              gint * x,
+                                              gint * y,
+                                              gboolean * push_in,
+                                              gpointer user_data);
 
 gboolean
 gtr_utils_get_ui_objects (const gchar * filename,
-				  gchar ** root_objects,
-				  GtkWidget ** error_widget,
-				  const gchar * object_name, ...)
+                          gchar ** root_objects,
+                          GtkWidget ** error_widget,
+                          const gchar * object_name, ...)
   G_GNUC_NULL_TERMINATED;
 
-     GSList *gtr_utils_drop_get_locations (GtkSelectionData *
-						   selection_data);
+     GSList *gtr_utils_drop_get_locations (GtkSelectionData * selection_data);
 
      gchar *gtr_utils_escape_search_text (const gchar * text);
 
      gchar *gtr_utils_unescape_search_text (const gchar * text);
 
      gboolean g_utf8_caselessnmatch (const gchar * s1,
-				     const gchar * s2, gssize n1, gssize n2);
+                                     const gchar * s2, gssize n1, gssize n2);
 
      void gtr_utils_activate_url (GtkAboutDialog * dialog,
-					  const gchar * url, gpointer data);
+                                  const gchar * url, gpointer data);
 
      void gtr_utils_activate_email (GtkAboutDialog * dialog,
-					    const gchar * email,
-					    gpointer data);
+                                    const gchar * email, gpointer data);
 
      void gtr_utils_help_display (GtkWindow * parent,
-					  const gchar * doc_id,
-					  const gchar * file_name);
+                                  const gchar * doc_id,
+                                  const gchar * file_name);
 
      gchar *gtr_utils_get_user_config_dir (void);
 
@@ -87,18 +84,15 @@ gtr_utils_get_ui_objects (const gchar * filename,
      gchar *gtr_utils_get_current_year (void);
 
      void gtr_utils_scan_dir (GFile * dir,
-				      GSList ** list, const gchar * po_name);
+                              GSList ** list, const gchar * po_name);
 
      gchar *gtr_utils_reduce_path (const gchar * path);
 
-     gchar *gtr_utils_escape_underscores (const gchar * text,
-						  gssize length);
+     gchar *gtr_utils_escape_underscores (const gchar * text, gssize length);
 
-     gchar *gtr_utils_get_file_from_pixmapsdir (const gchar *
-							filename);
+     gchar *gtr_utils_get_file_from_pixmapsdir (const gchar * filename);
 
-     gchar *gtr_utils_get_file_from_pkgdatadir (const gchar *
-							filename);
+     gchar *gtr_utils_get_file_from_pkgdatadir (const gchar * filename);
 
      gchar *gtr_utils_get_datadir (void);
 

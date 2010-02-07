@@ -44,8 +44,7 @@ G_BEGIN_DECLS
 #define GTR_IS_PLUGINS_ENGINE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_PLUGINS_ENGINE))
 #define GTR_PLUGINS_ENGINE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GTR_TYPE_PLUGINS_ENGINE, GtrPluginsEngineClass))
 typedef struct _GtrPluginsEngine GtrPluginsEngine;
-typedef struct _GtrPluginsEnginePrivate
-  GtrPluginsEnginePrivate;
+typedef struct _GtrPluginsEnginePrivate GtrPluginsEnginePrivate;
 
 struct _GtrPluginsEngine
 {
@@ -59,11 +58,9 @@ struct _GtrPluginsEngineClass
 {
   GObjectClass parent_class;
 
-  void (*activate_plugin) (GtrPluginsEngine * engine,
-			   GtrPluginInfo * info);
+  void (*activate_plugin) (GtrPluginsEngine * engine, GtrPluginInfo * info);
 
-  void (*deactivate_plugin) (GtrPluginsEngine * engine,
-			     GtrPluginInfo * info);
+  void (*deactivate_plugin) (GtrPluginsEngine * engine, GtrPluginInfo * info);
 };
 
 GType
@@ -72,34 +69,27 @@ gtr_plugins_engine_get_type (void)
 
      GtrPluginsEngine *gtr_plugins_engine_get_default (void);
 
-     void gtr_plugins_engine_garbage_collect (GtrPluginsEngine
-						      * engine);
+     void gtr_plugins_engine_garbage_collect (GtrPluginsEngine * engine);
 
      const GList
-       *gtr_plugins_engine_get_plugin_list (GtrPluginsEngine *
-						    engine);
+       * gtr_plugins_engine_get_plugin_list (GtrPluginsEngine * engine);
 
-     GtrPluginInfo
-       *gtr_plugins_engine_get_plugin_info (GtrPluginsEngine *
-						    engine,
-						    const gchar * name);
+GtrPluginInfo
+  * gtr_plugins_engine_get_plugin_info (GtrPluginsEngine *
+                                        engine, const gchar * name);
 
-     gboolean
-       gtr_plugins_engine_activate_plugin (GtrPluginsEngine *
-						   engine,
-						   GtrPluginInfo *
-						   info);
-     gboolean
-       gtr_plugins_engine_deactivate_plugin (GtrPluginsEngine
-						     * engine,
-						     GtrPluginInfo *
-						     info);
+gboolean
+gtr_plugins_engine_activate_plugin (GtrPluginsEngine *
+                                    engine, GtrPluginInfo * info);
+gboolean
+gtr_plugins_engine_deactivate_plugin (GtrPluginsEngine
+                                      * engine, GtrPluginInfo * info);
 
      void
        gtr_plugins_engine_configure_plugin (GtrPluginsEngine *
-						    engine,
-						    GtrPluginInfo *
-						    info, GtkWindow * parent);
+                                            engine,
+                                            GtrPluginInfo *
+                                            info, GtkWindow * parent);
 
 /* 
  * new_window == TRUE if this function is called because a new top window
@@ -107,10 +97,9 @@ gtr_plugins_engine_get_type (void)
  */
      void
        gtr_plugins_engine_update_plugins_ui (GtrPluginsEngine
-						     * engine,
-						     GtrWindow *
-						     window,
-						     gboolean new_window);
+                                             * engine,
+                                             GtrWindow *
+                                             window, gboolean new_window);
 
 G_END_DECLS
 #endif /* __GTR_PLUGINS_ENGINE_H__ */

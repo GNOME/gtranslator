@@ -45,8 +45,7 @@ G_DEFINE_TYPE (GtrDbOrig, gtr_db_orig, GTR_TYPE_DB_BASE)
 {
   //db_orig->priv = GTR_DB_ORIG_GET_PRIVATE (db_orig);
 
-  gtr_db_base_create_dabatase (GTR_DB_BASE (db_orig),
-				       "original.db", DB_HASH);
+  gtr_db_base_create_dabatase (GTR_DB_BASE (db_orig), "original.db", DB_HASH);
 }
 
 static void
@@ -94,8 +93,7 @@ gtr_db_orig_new ()
  * Returns: TRUE if it was successfully stored.
  */
 gboolean
-gtr_db_orig_write (GtrDbOrig * orig,
-			   const gchar * string, db_recno_t value)
+gtr_db_orig_write (GtrDbOrig * orig, const gchar * string, db_recno_t value)
 {
   DBT key, data;
   gint error;
@@ -142,7 +140,7 @@ gtr_db_orig_read (GtrDbOrig * orig, const gchar * string)
   if (error != 0)
     {
       if (error != DB_NOTFOUND)
-	gtr_db_base_show_error (GTR_DB_BASE (orig), error);
+        gtr_db_base_show_error (GTR_DB_BASE (orig), error);
       return 0;
     }
 

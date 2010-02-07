@@ -52,7 +52,7 @@ static gchar **file_arguments = NULL;
 
 static const GOptionEntry options[] = {
   {G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &file_arguments,
-   NULL, N_("[FILE...]")},	/* collects file arguments */
+   NULL, N_("[FILE...]")},      /* collects file arguments */
 
   {NULL}
 };
@@ -67,20 +67,20 @@ get_command_line_data ()
       gint i;
 
       for (i = 0; file_arguments[i]; i++)
-	{
-	  GFile *file;
+        {
+          GFile *file;
 
-	  file = g_file_new_for_commandline_arg (file_arguments[i]);
+          file = g_file_new_for_commandline_arg (file_arguments[i]);
 
-	  if (file != NULL)
-	    {
-	      file_list = g_slist_prepend (file_list, file);
+          if (file != NULL)
+            {
+              file_list = g_slist_prepend (file_list, file);
 
-	    }
-	  else
-	    g_print (_("%s: malformed file name or URI.\n"),
-		     file_arguments[i]);
-	}
+            }
+          else
+            g_print (_("%s: malformed file name or URI.\n"),
+                     file_arguments[i]);
+        }
 
       file_list = g_slist_reverse (file_list);
     }
@@ -99,15 +99,11 @@ setup_path (void)
 
   installdir = g_win32_get_package_installation_directory_of_module (NULL);
 
-  bin = g_build_filename (installdir,
-                          "bin", NULL);
+  bin = g_build_filename (installdir, "bin", NULL);
   g_free (installdir);
 
   /* Set PATH to include the gedit executable's folder */
-  path = g_build_path (";",
-                       bin,
-                       g_getenv ("PATH"),
-                       NULL);
+  path = g_build_path (";", bin, g_getenv ("PATH"), NULL);
   g_free (bin);
 
   if (!g_setenv ("PATH", path, TRUE))
@@ -160,10 +156,10 @@ main (gint argc, gchar * argv[])
   if (!(gconf_init (argc, argv, &error)))
     {
       if (error)
-	{
-	  g_warning (_("Error during GConf initialization: %s."),
-		     error->message);
-	}
+        {
+          g_warning (_("Error during GConf initialization: %s."),
+                     error->message);
+        }
 
       g_clear_error (&error);
     }
@@ -191,8 +187,7 @@ main (gint argc, gchar * argv[])
   engine = gtr_plugins_engine_get_default ();
 
   gtk_about_dialog_set_url_hook (gtr_utils_activate_url, NULL, NULL);
-  gtk_about_dialog_set_email_hook (gtr_utils_activate_email, NULL,
-				   NULL);
+  gtk_about_dialog_set_email_hook (gtr_utils_activate_email, NULL, NULL);
 
   /*
    * Load profiles list
@@ -203,8 +198,7 @@ main (gint argc, gchar * argv[])
 
   if (g_file_query_exists (file, NULL))
     {
-      profiles_list =
-	gtr_profile_get_profiles_from_xml_file (filename);
+      profiles_list = gtr_profile_get_profiles_from_xml_file (filename);
     }
 
   gtr_application_set_profiles (GTR_APP, profiles_list);

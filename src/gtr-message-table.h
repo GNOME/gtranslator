@@ -72,13 +72,13 @@ gtr_message_table_get_type (void)
      GtkWidget *gtr_message_table_new (GtkWidget * tab);
 
      void gtr_message_table_populate (GtrMessageTable * table,
-					      GList * messages);
+                                      GList * messages);
 
      void
        gtr_message_table_update_translation (GtrMessageTable *
-						     table,
-						     GtrMsg * msg,
-						     gchar * translation);
+                                             table,
+                                             GtrMsg * msg,
+                                             gchar * translation);
 
 G_END_DECLS
 #endif /* __MESSAGE_TABLE_H__ */

@@ -52,18 +52,17 @@
 						 	GtrViewPrivate))
 
 G_DEFINE_TYPE (GtrView, gtr_view, GTK_TYPE_SOURCE_VIEW)
+     struct _GtrViewPrivate
+     {
+       GtkSourceBuffer *buffer;
 
-struct _GtrViewPrivate
-{
-  GtkSourceBuffer *buffer;
-
-  guint search_flags;
-  gchar *search_text;
+       guint search_flags;
+       gchar *search_text;
 
 #ifdef HAVE_GTKSPELL
-  GtkSpell *spell;
+       GtkSpell *spell;
 #endif
-};
+     };
 
 #ifdef HAVE_GTKSPELL
      static void gtr_attach_gtkspell (GtrView * view)
@@ -79,8 +78,8 @@ struct _GtrViewPrivate
     {
       g_warning (_("gtkspell error: %s\n"), error->message);
       errortext =
-	g_strdup_printf (_("GtkSpell was unable to initialize.\n %s"),
-			 error->message);
+        g_strdup_printf (_("GtkSpell was unable to initialize.\n %s"),
+                         error->message);
       g_warning ("%s", errortext);
 
       g_error_free (error);
@@ -123,13 +122,13 @@ gtr_view_init (GtrView * view)
   priv->buffer = gtk_source_buffer_new_with_language (lang);
 
   gtk_text_view_set_buffer (GTK_TEXT_VIEW (view),
-			    GTK_TEXT_BUFFER (priv->buffer));
+                            GTK_TEXT_BUFFER (priv->buffer));
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), GTK_WRAP_WORD);
 
   //Set syntax highlight according to preferences
   gtk_source_buffer_set_highlight_syntax (priv->buffer,
-					  gtr_prefs_manager_get_highlight_syntax
-					  ());
+                                          gtr_prefs_manager_get_highlight_syntax
+                                          ());
 
   //Set dot char according to preferences
 
@@ -204,7 +203,7 @@ gtr_view_new (void)
  */
 gboolean
 gtr_view_get_selected_text (GtrView * view,
-				    gchar ** selected_text, gint * len)
+                            gchar ** selected_text, gint * len)
 {
   GtkTextIter start, end;
   GtkTextBuffer *doc;
@@ -218,7 +217,7 @@ gtr_view_get_selected_text (GtrView * view,
   if (!gtk_text_buffer_get_selection_bounds (doc, &start, &end))
     {
       if (len != NULL)
-	len = 0;
+        len = 0;
 
       return FALSE;
     }
@@ -251,7 +250,7 @@ gtr_view_enable_spellcheck (GtrView * view, gboolean enable)
     {
 #ifdef HAVE_GTKSPELL
       if (!view->priv->spell)
-	return;
+        return;
       gtkspell_detach (view->priv->spell);
 #endif
     }
@@ -265,14 +264,13 @@ gtr_view_enable_spellcheck (GtrView * view, gboolean enable)
  * Enables special chars for white spaces including \n and \t
 **/
 void
-gtr_view_enable_visible_whitespace (GtrView * view,
-					    gboolean enable)
+gtr_view_enable_visible_whitespace (GtrView * view, gboolean enable)
 {
   g_return_if_fail (GTR_IS_VIEW (view));
 
   if (enable)
     gtk_source_view_set_draw_spaces (GTK_SOURCE_VIEW (view),
-				     GTK_SOURCE_DRAW_SPACES_ALL);
+                                     GTK_SOURCE_DRAW_SPACES_ALL);
   else
     gtk_source_view_set_draw_spaces (GTK_SOURCE_VIEW (view), 0);
 }
@@ -296,17 +294,17 @@ gtr_view_cut_clipboard (GtrView * view)
   g_return_if_fail (buffer != NULL);
 
   clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view),
-					GDK_SELECTION_CLIPBOARD);
+                                        GDK_SELECTION_CLIPBOARD);
 
   /* FIXME: what is default editability of a buffer? */
   gtk_text_buffer_cut_clipboard (buffer,
-				 clipboard,
-				 gtk_text_view_get_editable (GTK_TEXT_VIEW
-							     (view)));
+                                 clipboard,
+                                 gtk_text_view_get_editable (GTK_TEXT_VIEW
+                                                             (view)));
 
   gtk_text_view_scroll_to_mark (GTK_TEXT_VIEW (view),
-				gtk_text_buffer_get_insert (buffer),
-				0.0, FALSE, 0.0, 0.0);
+                                gtk_text_buffer_get_insert (buffer),
+                                0.0, FALSE, 0.0, 0.0);
 }
 
 /**
@@ -327,7 +325,7 @@ gtr_view_copy_clipboard (GtrView * view)
   g_return_if_fail (buffer != NULL);
 
   clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view),
-					GDK_SELECTION_CLIPBOARD);
+                                        GDK_SELECTION_CLIPBOARD);
 
   gtk_text_buffer_copy_clipboard (buffer, clipboard);
 
@@ -353,18 +351,18 @@ gtr_view_paste_clipboard (GtrView * view)
   g_return_if_fail (buffer != NULL);
 
   clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view),
-					GDK_SELECTION_CLIPBOARD);
+                                        GDK_SELECTION_CLIPBOARD);
 
   /* FIXME: what is default editability of a buffer? */
   gtk_text_buffer_paste_clipboard (buffer,
-				   clipboard,
-				   NULL,
-				   gtk_text_view_get_editable (GTK_TEXT_VIEW
-							       (view)));
+                                   clipboard,
+                                   NULL,
+                                   gtk_text_view_get_editable (GTK_TEXT_VIEW
+                                                               (view)));
 
   gtk_text_view_scroll_to_mark (GTK_TEXT_VIEW (view),
-				gtk_text_buffer_get_insert (buffer),
-				0.0, FALSE, 0.0, 0.0);
+                                gtk_text_buffer_get_insert (buffer),
+                                0.0, FALSE, 0.0, 0.0);
 }
 
 /**
@@ -376,8 +374,7 @@ gtr_view_paste_clipboard (GtrView * view)
  * Sets the #GtrView font.
  **/
 void
-gtr_view_set_font (GtrView * view,
-			   gboolean def, const gchar * font_name)
+gtr_view_set_font (GtrView * view, gboolean def, const gchar * font_name)
 {
   PangoFontDescription *font_desc = NULL;
 
@@ -406,8 +403,7 @@ gtr_view_set_font (GtrView * view,
  * Stores the text to search for in the @view with some specific @flags.
  */
 void
-gtr_view_set_search_text (GtrView * view,
-				  const gchar * text, guint flags)
+gtr_view_set_search_text (GtrView * view, const gchar * text, guint flags)
 {
   GtkSourceBuffer *doc;
   gchar *converted_text;
@@ -424,15 +420,15 @@ gtr_view_set_search_text (GtrView * view,
   if (text != NULL)
     {
       if (*text != '\0')
-	{
-	  converted_text = gtr_utils_unescape_search_text (text);
-	  notify = !gtr_view_get_can_search_again (view);
-	}
+        {
+          converted_text = gtr_utils_unescape_search_text (text);
+          notify = !gtr_view_get_can_search_again (view);
+        }
       else
-	{
-	  converted_text = g_strdup ("");
-	  notify = gtr_view_get_can_search_again (view);
-	}
+        {
+          converted_text = g_strdup ("");
+          notify = gtr_view_get_can_search_again (view);
+        }
 
       g_free (view->priv->search_text);
 
@@ -498,7 +494,7 @@ gtr_view_get_can_search_again (GtrView * view)
   g_return_val_if_fail (GTR_IS_VIEW (view), FALSE);
 
   return ((view->priv->search_text != NULL) &&
-	  (*view->priv->search_text != '\0'));
+          (*view->priv->search_text != '\0'));
 }
 
 /**
@@ -519,10 +515,9 @@ gtr_view_get_can_search_again (GtrView * view)
  */
 gboolean
 gtr_view_search_forward (GtrView * view,
-				 const GtkTextIter * start,
-				 const GtkTextIter * end,
-				 GtkTextIter * match_start,
-				 GtkTextIter * match_end)
+                         const GtkTextIter * start,
+                         const GtkTextIter * end,
+                         GtkTextIter * match_start, GtkTextIter * match_end)
 {
   GtkSourceBuffer *doc;
   GtkTextIter iter;
@@ -536,11 +531,11 @@ gtr_view_search_forward (GtrView * view,
   doc = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
 
   g_return_val_if_fail ((start == NULL) ||
-			(gtk_text_iter_get_buffer (start) ==
-			 GTK_TEXT_BUFFER (doc)), FALSE);
+                        (gtk_text_iter_get_buffer (start) ==
+                         GTK_TEXT_BUFFER (doc)), FALSE);
   g_return_val_if_fail ((end == NULL)
-			|| (gtk_text_iter_get_buffer (end) ==
-			    GTK_TEXT_BUFFER (doc)), FALSE);
+                        || (gtk_text_iter_get_buffer (end) ==
+                            GTK_TEXT_BUFFER (doc)), FALSE);
 
   if (view->priv->search_text == NULL)
     {
@@ -565,20 +560,20 @@ gtr_view_search_forward (GtrView * view,
   while (!found)
     {
       found = gtk_source_iter_forward_search (&iter,
-					      view->priv->search_text,
-					      search_flags,
-					      &m_start, &m_end, end);
+                                              view->priv->search_text,
+                                              search_flags,
+                                              &m_start, &m_end, end);
 
       if (found && GTR_SEARCH_IS_ENTIRE_WORD (view->priv->search_flags))
-	{
-	  found = gtk_text_iter_starts_word (&m_start) &&
-	    gtk_text_iter_ends_word (&m_end);
+        {
+          found = gtk_text_iter_starts_word (&m_start) &&
+            gtk_text_iter_ends_word (&m_end);
 
-	  if (!found)
-	    iter = m_end;
-	}
+          if (!found)
+            iter = m_end;
+        }
       else
-	break;
+        break;
     }
 
   if (found && (match_start != NULL))
@@ -608,10 +603,9 @@ gtr_view_search_forward (GtrView * view,
  */
 gboolean
 gtr_view_search_backward (GtrView * view,
-				  const GtkTextIter * start,
-				  const GtkTextIter * end,
-				  GtkTextIter * match_start,
-				  GtkTextIter * match_end)
+                          const GtkTextIter * start,
+                          const GtkTextIter * end,
+                          GtkTextIter * match_start, GtkTextIter * match_end)
 {
   GtkSourceBuffer *doc;
   GtkTextIter iter;
@@ -625,11 +619,11 @@ gtr_view_search_backward (GtrView * view,
   doc = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
 
   g_return_val_if_fail ((start == NULL) ||
-			(gtk_text_iter_get_buffer (start) ==
-			 GTK_TEXT_BUFFER (doc)), FALSE);
+                        (gtk_text_iter_get_buffer (start) ==
+                         GTK_TEXT_BUFFER (doc)), FALSE);
   g_return_val_if_fail ((end == NULL)
-			|| (gtk_text_iter_get_buffer (end) ==
-			    GTK_TEXT_BUFFER (doc)), FALSE);
+                        || (gtk_text_iter_get_buffer (end) ==
+                            GTK_TEXT_BUFFER (doc)), FALSE);
 
   if (view->priv->search_text == NULL)
     {
@@ -654,20 +648,20 @@ gtr_view_search_backward (GtrView * view,
   while (!found)
     {
       found = gtk_source_iter_backward_search (&iter,
-					       view->priv->search_text,
-					       search_flags,
-					       &m_start, &m_end, start);
+                                               view->priv->search_text,
+                                               search_flags,
+                                               &m_start, &m_end, start);
 
       if (found && GTR_SEARCH_IS_ENTIRE_WORD (view->priv->search_flags))
-	{
-	  found = gtk_text_iter_starts_word (&m_start) &&
-	    gtk_text_iter_ends_word (&m_end);
+        {
+          found = gtk_text_iter_starts_word (&m_start) &&
+            gtk_text_iter_ends_word (&m_end);
 
-	  if (!found)
-	    iter = m_start;
-	}
+          if (!found)
+            iter = m_start;
+        }
       else
-	break;
+        break;
     }
 
   if (found && (match_start != NULL))
@@ -693,8 +687,7 @@ gtr_view_search_backward (GtrView * view,
  */
 gint
 gtr_view_replace_all (GtrView * view,
-			      const gchar * find,
-			      const gchar * replace, guint flags)
+                      const gchar * find, const gchar * replace, guint flags)
 {
   GtkTextIter iter;
   GtkTextIter m_start;
@@ -713,7 +706,7 @@ gtr_view_replace_all (GtrView * view,
 
   g_return_val_if_fail (replace != NULL, 0);
   g_return_val_if_fail ((find != NULL)
-			|| (view->priv->search_text != NULL), 0);
+                        || (view->priv->search_text != NULL), 0);
 
   if (find == NULL)
     search_text = g_strdup (view->priv->search_text);
@@ -744,34 +737,34 @@ gtr_view_replace_all (GtrView * view,
   do
     {
       found = gtk_source_iter_forward_search (&iter,
-					      search_text,
-					      search_flags,
-					      &m_start, &m_end, NULL);
+                                              search_text,
+                                              search_flags,
+                                              &m_start, &m_end, NULL);
 
       if (found && GTR_SEARCH_IS_ENTIRE_WORD (flags))
-	{
-	  gboolean word;
+        {
+          gboolean word;
 
-	  word = gtk_text_iter_starts_word (&m_start) &&
-	    gtk_text_iter_ends_word (&m_end);
+          word = gtk_text_iter_starts_word (&m_start) &&
+            gtk_text_iter_ends_word (&m_end);
 
-	  if (!word)
-	    {
-	      iter = m_end;
-	      continue;
-	    }
-	}
+          if (!word)
+            {
+              iter = m_end;
+              continue;
+            }
+        }
 
       if (found)
-	{
-	  ++cont;
+        {
+          ++cont;
 
-	  gtk_text_buffer_delete (buffer, &m_start, &m_end);
-	  gtk_text_buffer_insert (buffer,
-				  &m_start, replace_text, replace_text_len);
+          gtk_text_buffer_delete (buffer, &m_start, &m_end);
+          gtk_text_buffer_insert (buffer,
+                                  &m_start, replace_text, replace_text_len);
 
-	  iter = m_start;
-	}
+          iter = m_start;
+        }
 
     }
   while (found);

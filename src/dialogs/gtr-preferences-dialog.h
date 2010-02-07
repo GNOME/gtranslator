@@ -44,8 +44,7 @@ G_BEGIN_DECLS
 #define GTR_IS_PREFERENCES_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_PREFERENCES_DIALOG))
 #define GTR_PREFERENCES_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_PREFERENCES_DIALOG, GtrPreferencesDialogClass))
 /* Private structure type */
-typedef struct _GtrPreferencesDialogPrivate
-  GtrPreferencesDialogPrivate;
+typedef struct _GtrPreferencesDialogPrivate GtrPreferencesDialogPrivate;
 
 /*
  * Main object structure
@@ -63,8 +62,7 @@ struct _GtrPreferencesDialog
 /*
  * Class definition
  */
-typedef struct _GtrPreferencesDialogClass
-  GtrPreferencesDialogClass;
+typedef struct _GtrPreferencesDialogClass GtrPreferencesDialogClass;
 
 struct _GtrPreferencesDialogClass
 {
@@ -78,14 +76,11 @@ GType
 gtr_preferences_dialog_get_type (void)
   G_GNUC_CONST;
 
-     GType gtr_preferences_dialog_register_type (GTypeModule *
-							 module);
+     GType gtr_preferences_dialog_register_type (GTypeModule * module);
 
      void gtr_show_preferences_dialog (GtrWindow * window);
 
-     GtkWidget
-       *gtr_preferences_dialog_get_treeview
-       (GtrPreferencesDialog * dlg);
+GtkWidget * gtr_preferences_dialog_get_treeview (GtrPreferencesDialog * dlg);
 
      void
        gtr_preferences_fill_profile_treeview

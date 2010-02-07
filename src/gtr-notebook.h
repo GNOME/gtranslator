@@ -60,8 +60,7 @@ struct _GtrNotebookClass
 {
   GtkNotebookClass parent_class;
 
-  void (*tab_close_request)
-    (GtrNotebook * notebook, GtrTab * tab);
+  void (*tab_close_request) (GtrNotebook * notebook, GtrTab * tab);
 };
 
 /*
@@ -75,14 +74,11 @@ gtr_notebook_get_type (void)
 
      GtkWidget *gtr_notebook_new (void);
 
-     void gtr_notebook_add_page (GtrNotebook * notebook,
-					 GtrTab * pax);
+     void gtr_notebook_add_page (GtrNotebook * notebook, GtrTab * pax);
 
-     void gtr_notebook_remove_page (GtrNotebook * notebook,
-					    gint i);
+     void gtr_notebook_remove_page (GtrNotebook * notebook, gint i);
 
-     GtrTab *gtr_notebook_get_page (GtrNotebook *
-						    notebook);
+     GtrTab *gtr_notebook_get_page (GtrNotebook * notebook);
 
 G_END_DECLS
 #endif /* __NOTEBOOK_H__ */

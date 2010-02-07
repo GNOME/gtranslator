@@ -71,11 +71,9 @@ gtr_db_orig_get_type (void)
      GtrDbOrig *gtr_db_orig_new (void);
 
      gboolean gtr_db_orig_write (GtrDbOrig * orig,
-					 const gchar * string,
-					 db_recno_t value);
+                                 const gchar * string, db_recno_t value);
 
-     db_recno_t gtr_db_orig_read (GtrDbOrig * orig,
-					  const gchar * string);
+     db_recno_t gtr_db_orig_read (GtrDbOrig * orig, const gchar * string);
 
 G_END_DECLS
 #endif /* __DB_ORIG_H__ */

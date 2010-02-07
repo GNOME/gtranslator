@@ -81,28 +81,25 @@ struct _GtrSearchDialogPrivate
   gboolean glade_error;
 };
 
-G_DEFINE_TYPE (GtrSearchDialog, gtr_search_dialog,
-	       GTK_TYPE_DIALOG)
-enum
-{
-  PROP_0,
-  PROP_SHOW_REPLACE
-};
+G_DEFINE_TYPE (GtrSearchDialog, gtr_search_dialog, GTK_TYPE_DIALOG)
+     enum
+     {
+       PROP_0,
+       PROP_SHOW_REPLACE
+     };
 
-static void
-gtr_search_dialog_set_property (GObject * object,
-					guint prop_id,
-					const GValue * value,
-					GParamSpec * pspec)
+     static void
+       gtr_search_dialog_set_property (GObject * object,
+                                       guint prop_id,
+                                       const GValue * value,
+                                       GParamSpec * pspec)
 {
   GtrSearchDialog *dlg = GTR_SEARCH_DIALOG (object);
 
   switch (prop_id)
     {
     case PROP_SHOW_REPLACE:
-      gtr_search_dialog_set_show_replace (dlg,
-						  g_value_get_boolean
-						  (value));
+      gtr_search_dialog_set_show_replace (dlg, g_value_get_boolean (value));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -112,8 +109,8 @@ gtr_search_dialog_set_property (GObject * object,
 
 static void
 gtr_search_dialog_get_property (GObject * object,
-					guint prop_id,
-					GValue * value, GParamSpec * pspec)
+                                guint prop_id,
+                                GValue * value, GParamSpec * pspec)
 {
   GtrSearchDialog *dlg = GTR_SEARCH_DIALOG (object);
 
@@ -149,21 +146,20 @@ gtr_search_dialog_class_init (GtrSearchDialogClass * klass)
 
   dialog_signals[SHOW_REPLACE] =
     g_signal_new ("show_replace",
-		  G_TYPE_FROM_CLASS (object_class),
-		  G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-		  G_STRUCT_OFFSET (GtrSearchDialogClass,
-				   show_replace), NULL, NULL,
-		  gtr_marshal_BOOLEAN__NONE, G_TYPE_BOOLEAN, 0);
+                  G_TYPE_FROM_CLASS (object_class),
+                  G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+                  G_STRUCT_OFFSET (GtrSearchDialogClass,
+                                   show_replace), NULL, NULL,
+                  gtr_marshal_BOOLEAN__NONE, G_TYPE_BOOLEAN, 0);
 
   g_object_class_install_property (object_class, PROP_SHOW_REPLACE,
-				   g_param_spec_boolean ("show-replace",
-							 "Show Replace",
-							 "Whether the dialog is used for Search&Replace",
-							 FALSE,
-							 G_PARAM_READWRITE));
+                                   g_param_spec_boolean ("show-replace",
+                                                         "Show Replace",
+                                                         "Whether the dialog is used for Search&Replace",
+                                                         FALSE,
+                                                         G_PARAM_READWRITE));
 
-  g_type_class_add_private (object_class,
-			    sizeof (GtrSearchDialogPrivate));
+  g_type_class_add_private (object_class, sizeof (GtrSearchDialogPrivate));
 
   binding_set = gtk_binding_set_by_class (klass);
 
@@ -171,15 +167,15 @@ gtr_search_dialog_class_init (GtrSearchDialogClass * klass)
    * GTK_STOCK_FIND_AND_REPLACE stock item since GNOME HIG suggests Ctrl+h
    * for Replace while gtk+ uses Ctrl+r */
   gtk_binding_entry_add_signal (binding_set, GDK_h, GDK_CONTROL_MASK,
-				"show_replace", 0);
+                                "show_replace", 0);
   gtk_binding_entry_add_signal (binding_set, GDK_H, GDK_CONTROL_MASK,
-				"show_replace", 0);
+                                "show_replace", 0);
 }
 
 static void
 insert_text_handler (GtkEditable * editable,
-		     const gchar * text,
-		     gint length, gint * position, gpointer data)
+                     const gchar * text,
+                     gint length, gint * position, gpointer data)
 {
   static gboolean insert_text = FALSE;
   gchar *escaped_text;
@@ -223,23 +219,23 @@ search_entry_changed (GtkComboBox * combo, GtrSearchDialog * dialog)
   if (*search_string != '\0')
     {
       gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
-					 GTR_SEARCH_DIALOG_FIND_RESPONSE,
-					 TRUE);
+                                         GTR_SEARCH_DIALOG_FIND_RESPONSE,
+                                         TRUE);
       gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
-					 GTR_SEARCH_DIALOG_REPLACE_ALL_RESPONSE,
-					 TRUE);
+                                         GTR_SEARCH_DIALOG_REPLACE_ALL_RESPONSE,
+                                         TRUE);
     }
   else
     {
       gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
-					 GTR_SEARCH_DIALOG_FIND_RESPONSE,
-					 FALSE);
+                                         GTR_SEARCH_DIALOG_FIND_RESPONSE,
+                                         FALSE);
       gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
-					 GTR_SEARCH_DIALOG_REPLACE_RESPONSE,
-					 FALSE);
+                                         GTR_SEARCH_DIALOG_REPLACE_RESPONSE,
+                                         FALSE);
       gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
-					 GTR_SEARCH_DIALOG_REPLACE_ALL_RESPONSE,
-					 FALSE);
+                                         GTR_SEARCH_DIALOG_REPLACE_ALL_RESPONSE,
+                                         FALSE);
     }
 }
 
@@ -248,23 +244,23 @@ search_entry_changed (GtkComboBox * combo, GtrSearchDialog * dialog)
  */
 static void
 original_translated_checkbutton_toggled (GtkToggleButton * button,
-					 GtrSearchDialog * dialog)
+                                         GtrSearchDialog * dialog)
 {
   gboolean original_text;
   gboolean translated_text;
 
   original_text =
     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-				  (dialog->priv->original_text_checkbutton));
+                                  (dialog->priv->original_text_checkbutton));
   translated_text =
     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-				  (dialog->priv->
-				   translated_text_checkbutton));
+                                  (dialog->
+                                   priv->translated_text_checkbutton));
 
   if (!original_text && !translated_text)
     {
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				    (dialog->priv->fuzzy_checkbutton), FALSE);
+                                    (dialog->priv->fuzzy_checkbutton), FALSE);
       gtk_widget_set_sensitive (dialog->priv->fuzzy_checkbutton, FALSE);
     }
   else
@@ -272,8 +268,7 @@ original_translated_checkbutton_toggled (GtkToggleButton * button,
 }
 
 static void
-response_handler (GtrSearchDialog * dialog,
-		  gint response_id, gpointer data)
+response_handler (GtrSearchDialog * dialog, gint response_id, gpointer data)
 {
   const gchar *str;
 
@@ -283,28 +278,28 @@ response_handler (GtrSearchDialog * dialog,
     case GTR_SEARCH_DIALOG_REPLACE_ALL_RESPONSE:
       str = gtk_entry_get_text (GTK_ENTRY (dialog->priv->replace_text_entry));
       if (*str != '\0')
-	{
-	  gchar *text;
+        {
+          gchar *text;
 
-	  text = gtr_utils_unescape_search_text (str);
-	  gtr_history_entry_prepend_text
-	    (GTR_HISTORY_ENTRY (dialog->priv->replace_entry), text);
+          text = gtr_utils_unescape_search_text (str);
+          gtr_history_entry_prepend_text
+            (GTR_HISTORY_ENTRY (dialog->priv->replace_entry), text);
 
-	  g_free (text);
-	}
+          g_free (text);
+        }
       /* fall through, so that we also save the find entry */
     case GTR_SEARCH_DIALOG_FIND_RESPONSE:
       str = gtk_entry_get_text (GTK_ENTRY (dialog->priv->search_text_entry));
       if (*str != '\0')
-	{
-	  gchar *text;
+        {
+          gchar *text;
 
-	  text = gtr_utils_unescape_search_text (str);
-	  gtr_history_entry_prepend_text
-	    (GTR_HISTORY_ENTRY (dialog->priv->search_entry), text);
+          text = gtr_utils_unescape_search_text (str);
+          gtr_history_entry_prepend_text
+            (GTR_HISTORY_ENTRY (dialog->priv->search_entry), text);
 
-	  g_free (text);
-	}
+          g_free (text);
+        }
     }
 }
 
@@ -320,8 +315,8 @@ show_replace_widgets (GtrSearchDialog * dlg, gboolean show_replace)
        * Set the default value of checkbutton
        */
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				    (dlg->priv->translated_text_checkbutton),
-				    TRUE);
+                                    (dlg->priv->translated_text_checkbutton),
+                                    TRUE);
 
       gtk_widget_show (dlg->priv->replace_label);
       gtk_widget_show (dlg->priv->replace_entry);
@@ -341,11 +336,11 @@ show_replace_widgets (GtrSearchDialog * dlg, gboolean show_replace)
        * Set the default value of checkbuttons
        */
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				    (dlg->priv->original_text_checkbutton),
-				    TRUE);
+                                    (dlg->priv->original_text_checkbutton),
+                                    TRUE);
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				    (dlg->priv->translated_text_checkbutton),
-				    TRUE);
+                                    (dlg->priv->translated_text_checkbutton),
+                                    TRUE);
 
       gtk_widget_hide (dlg->priv->replace_label);
       gtk_widget_hide (dlg->priv->replace_entry);
@@ -379,42 +374,39 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
-			  GTK_STOCK_CLOSE, GTK_RESPONSE_CANCEL, NULL);
+                          GTK_STOCK_CLOSE, GTK_RESPONSE_CANCEL, NULL);
 
   /* HIG defaults */
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);	/* 2 * 5 + 2 = 12 */
+  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);    /* 2 * 5 + 2 = 12 */
   gtk_container_set_border_width (GTK_CONTAINER
-				  (GTK_DIALOG (dlg)->action_area), 5);
+                                  (GTK_DIALOG (dlg)->action_area), 5);
   gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);
 
   path = gtr_dirs_get_ui_file ("gtr-search-dialog.ui");
   ret = gtr_utils_get_ui_objects (path,
-					  root_objects,
-					  &error_widget,
-					  "search_dialog_content", &content,
-					  "table", &dlg->priv->table,
-					  "search_label",
-					  &dlg->priv->search_label,
-					  "replace_with_label",
-					  &dlg->priv->replace_label,
-					  "original_text_checkbutton",
-					  &dlg->priv->
-					  original_text_checkbutton,
-					  "translated_text_checkbutton",
-					  &dlg->priv->
-					  translated_text_checkbutton,
-					  "fuzzy_checkbutton",
-					  &dlg->priv->fuzzy_checkbutton,
-					  "match_case_checkbutton",
-					  &dlg->priv->match_case_checkbutton,
-					  "entire_word_checkbutton",
-					  &dlg->priv->entire_word_checkbutton,
-					  "search_backwards_checkbutton",
-					  &dlg->priv->backwards_checkbutton,
-					  "wrap_around_checkbutton",
-					  &dlg->priv->wrap_around_checkbutton,
-					  NULL);
+                                  root_objects,
+                                  &error_widget,
+                                  "search_dialog_content", &content,
+                                  "table", &dlg->priv->table,
+                                  "search_label",
+                                  &dlg->priv->search_label,
+                                  "replace_with_label",
+                                  &dlg->priv->replace_label,
+                                  "original_text_checkbutton",
+                                  &dlg->priv->original_text_checkbutton,
+                                  "translated_text_checkbutton",
+                                  &dlg->priv->translated_text_checkbutton,
+                                  "fuzzy_checkbutton",
+                                  &dlg->priv->fuzzy_checkbutton,
+                                  "match_case_checkbutton",
+                                  &dlg->priv->match_case_checkbutton,
+                                  "entire_word_checkbutton",
+                                  &dlg->priv->entire_word_checkbutton,
+                                  "search_backwards_checkbutton",
+                                  &dlg->priv->backwards_checkbutton,
+                                  "wrap_around_checkbutton",
+                                  &dlg->priv->wrap_around_checkbutton, NULL);
   g_free (path);
 
   if (!ret)
@@ -422,7 +414,7 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
       gtk_widget_show (error_widget);
 
       gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-			  error_widget, TRUE, TRUE, 0);
+                          error_widget, TRUE, TRUE, 0);
 
       gtk_container_set_border_width (GTK_CONTAINER (error_widget), 5);
 
@@ -436,36 +428,35 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
   gtk_widget_set_size_request (dlg->priv->search_entry, 300, -1);
   gtr_history_entry_set_escape_func
     (GTR_HISTORY_ENTRY (dlg->priv->search_entry),
-     (GtrHistoryEntryEscapeFunc)
-     gtr_utils_escape_search_text);
+     (GtrHistoryEntryEscapeFunc) gtr_utils_escape_search_text);
 
   dlg->priv->search_text_entry = gtr_history_entry_get_entry
     (GTR_HISTORY_ENTRY (dlg->priv->search_entry));
   gtk_entry_set_activates_default (GTK_ENTRY (dlg->priv->search_text_entry),
-				   TRUE);
+                                   TRUE);
   gtk_widget_show (dlg->priv->search_entry);
   gtk_table_attach_defaults (GTK_TABLE (dlg->priv->table),
-			     dlg->priv->search_entry, 1, 2, 0, 1);
+                             dlg->priv->search_entry, 1, 2, 0, 1);
 
   dlg->priv->replace_entry =
     gtr_history_entry_new ("gtr_replace_with_entry", TRUE);
   gtr_history_entry_set_escape_func (GTR_HISTORY_ENTRY
-					     (dlg->priv->replace_entry),
-					     (GtrHistoryEntryEscapeFunc)
-					     gtr_utils_escape_search_text);
+                                     (dlg->priv->replace_entry),
+                                     (GtrHistoryEntryEscapeFunc)
+                                     gtr_utils_escape_search_text);
 
   dlg->priv->replace_text_entry = gtr_history_entry_get_entry
     (GTR_HISTORY_ENTRY (dlg->priv->replace_entry));
   gtk_entry_set_activates_default (GTK_ENTRY (dlg->priv->replace_text_entry),
-				   TRUE);
+                                   TRUE);
   gtk_widget_show (dlg->priv->replace_entry);
   gtk_table_attach_defaults (GTK_TABLE (dlg->priv->table),
-			     dlg->priv->replace_entry, 1, 2, 1, 2);
+                             dlg->priv->replace_entry, 1, 2, 1, 2);
 
   gtk_label_set_mnemonic_widget (GTK_LABEL (dlg->priv->search_label),
-				 dlg->priv->search_entry);
+                                 dlg->priv->search_entry);
   gtk_label_set_mnemonic_widget (GTK_LABEL (dlg->priv->replace_label),
-				 dlg->priv->replace_entry);
+                                 dlg->priv->replace_entry);
 
   dlg->priv->find_button = gtk_button_new_from_stock (GTK_STOCK_FIND);
   dlg->priv->replace_all_button =
@@ -473,52 +464,52 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
   dlg->priv->replace_button =
     gtk_button_new_from_stock (GTK_STOCK_FIND_AND_REPLACE);
   gtk_button_set_label (GTK_BUTTON (dlg->priv->replace_button),
-			_("_Replace"));
+                        _("_Replace"));
 
   gtk_dialog_add_action_widget (GTK_DIALOG (dlg),
-				dlg->priv->replace_all_button,
-				GTR_SEARCH_DIALOG_REPLACE_ALL_RESPONSE);
+                                dlg->priv->replace_all_button,
+                                GTR_SEARCH_DIALOG_REPLACE_ALL_RESPONSE);
   gtk_dialog_add_action_widget (GTK_DIALOG (dlg),
-				dlg->priv->replace_button,
-				GTR_SEARCH_DIALOG_REPLACE_RESPONSE);
+                                dlg->priv->replace_button,
+                                GTR_SEARCH_DIALOG_REPLACE_RESPONSE);
   gtk_dialog_add_action_widget (GTK_DIALOG (dlg),
-				dlg->priv->find_button,
-				GTR_SEARCH_DIALOG_FIND_RESPONSE);
+                                dlg->priv->find_button,
+                                GTR_SEARCH_DIALOG_FIND_RESPONSE);
   g_object_set (G_OBJECT (dlg->priv->find_button), "can-default", TRUE, NULL);
 
   gtk_dialog_set_default_response (GTK_DIALOG (dlg),
-				   GTR_SEARCH_DIALOG_FIND_RESPONSE);
+                                   GTR_SEARCH_DIALOG_FIND_RESPONSE);
 
   /* insensitive by default */
   gtk_dialog_set_response_sensitive (GTK_DIALOG (dlg),
-				     GTR_SEARCH_DIALOG_FIND_RESPONSE, FALSE);
+                                     GTR_SEARCH_DIALOG_FIND_RESPONSE, FALSE);
   gtk_dialog_set_response_sensitive (GTK_DIALOG (dlg),
-				     GTR_SEARCH_DIALOG_REPLACE_RESPONSE,
-				     FALSE);
+                                     GTR_SEARCH_DIALOG_REPLACE_RESPONSE,
+                                     FALSE);
   gtk_dialog_set_response_sensitive (GTK_DIALOG (dlg),
-				     GTR_SEARCH_DIALOG_REPLACE_ALL_RESPONSE,
-				     FALSE);
+                                     GTR_SEARCH_DIALOG_REPLACE_ALL_RESPONSE,
+                                     FALSE);
 
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-		      content, FALSE, FALSE, 0);
+                      content, FALSE, FALSE, 0);
   gtk_container_set_border_width (GTK_CONTAINER (content), 5);
 
   g_signal_connect (dlg->priv->search_text_entry,
-		    "insert_text", G_CALLBACK (insert_text_handler), NULL);
+                    "insert_text", G_CALLBACK (insert_text_handler), NULL);
   g_signal_connect (dlg->priv->replace_text_entry,
-		    "insert_text", G_CALLBACK (insert_text_handler), NULL);
+                    "insert_text", G_CALLBACK (insert_text_handler), NULL);
   g_signal_connect (dlg->priv->search_entry,
-		    "changed", G_CALLBACK (search_entry_changed), dlg);
+                    "changed", G_CALLBACK (search_entry_changed), dlg);
 
   g_signal_connect (dlg->priv->original_text_checkbutton,
-		    "toggled",
-		    G_CALLBACK (original_translated_checkbutton_toggled),
-		    dlg);
+                    "toggled",
+                    G_CALLBACK (original_translated_checkbutton_toggled),
+                    dlg);
 
   g_signal_connect (dlg->priv->translated_text_checkbutton,
-		    "toggled",
-		    G_CALLBACK (original_translated_checkbutton_toggled),
-		    dlg);
+                    "toggled",
+                    G_CALLBACK (original_translated_checkbutton_toggled),
+                    dlg);
 
   g_signal_connect (dlg, "response", G_CALLBACK (response_handler), NULL);
 }
@@ -529,7 +520,7 @@ gtr_search_dialog_new (GtkWindow * parent, gboolean show_replace)
   GtrSearchDialog *dlg;
 
   dlg = g_object_new (GTR_TYPE_SEARCH_DIALOG,
-		      "show-replace", show_replace, NULL);
+                      "show-replace", show_replace, NULL);
 
   if (parent != NULL)
     gtk_window_set_transient_for (GTK_WINDOW (dlg), parent);
@@ -539,7 +530,7 @@ gtr_search_dialog_new (GtkWindow * parent, gboolean show_replace)
 
 void
 gtr_search_dialog_present_with_time (GtrSearchDialog * dialog,
-					     guint32 timestamp)
+                                     guint32 timestamp)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
 
@@ -558,7 +549,7 @@ gtr_search_dialog_get_show_replace (GtrSearchDialog * dialog)
 
 void
 gtr_search_dialog_set_show_replace (GtrSearchDialog * dialog,
-					    gboolean show_replace)
+                                    gboolean show_replace)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
 
@@ -573,7 +564,7 @@ gtr_search_dialog_set_show_replace (GtrSearchDialog * dialog,
 
 void
 gtr_search_dialog_set_search_text (GtrSearchDialog * dialog,
-					   const gchar * text)
+                                   const gchar * text)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
   g_return_if_fail (text != NULL);
@@ -581,12 +572,12 @@ gtr_search_dialog_set_search_text (GtrSearchDialog * dialog,
   gtk_entry_set_text (GTK_ENTRY (dialog->priv->search_text_entry), text);
 
   gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
-				     GTR_SEARCH_DIALOG_FIND_RESPONSE,
-				     (text != '\0'));
+                                     GTR_SEARCH_DIALOG_FIND_RESPONSE,
+                                     (text != '\0'));
 
   gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
-				     GTR_SEARCH_DIALOG_REPLACE_ALL_RESPONSE,
-				     (text != '\0'));
+                                     GTR_SEARCH_DIALOG_REPLACE_ALL_RESPONSE,
+                                     (text != '\0'));
 }
 
 /*
@@ -602,7 +593,7 @@ gtr_search_dialog_get_search_text (GtrSearchDialog * dialog)
 
 void
 gtr_search_dialog_set_replace_text (GtrSearchDialog * dialog,
-					    const gchar * text)
+                                    const gchar * text)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
   g_return_if_fail (text != NULL);
@@ -620,13 +611,13 @@ gtr_search_dialog_get_replace_text (GtrSearchDialog * dialog)
 
 void
 gtr_search_dialog_set_original_text (GtrSearchDialog * dialog,
-					     gboolean match_case)
+                                     gboolean match_case)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				(dialog->priv->original_text_checkbutton),
-				match_case);
+                                (dialog->priv->original_text_checkbutton),
+                                match_case);
 }
 
 gboolean
@@ -636,41 +627,39 @@ gtr_search_dialog_get_original_text (GtrSearchDialog * dialog)
 
   return
     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-				  (dialog->priv->original_text_checkbutton));
+                                  (dialog->priv->original_text_checkbutton));
 }
 
 void
 gtr_search_dialog_set_translated_text (GtrSearchDialog *
-					       dialog, gboolean match_case)
+                                       dialog, gboolean match_case)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				(dialog->priv->translated_text_checkbutton),
-				match_case);
+                                (dialog->priv->translated_text_checkbutton),
+                                match_case);
 }
 
 gboolean
-gtr_search_dialog_get_translated_text (GtrSearchDialog *
-					       dialog)
+gtr_search_dialog_get_translated_text (GtrSearchDialog * dialog)
 {
   g_return_val_if_fail (GTR_IS_SEARCH_DIALOG (dialog), FALSE);
 
   return
     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-				  (dialog->priv->
-				   translated_text_checkbutton));
+                                  (dialog->
+                                   priv->translated_text_checkbutton));
 }
 
 void
-gtr_search_dialog_set_fuzzy (GtrSearchDialog * dialog,
-				     gboolean match_case)
+gtr_search_dialog_set_fuzzy (GtrSearchDialog * dialog, gboolean match_case)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				(dialog->priv->fuzzy_checkbutton),
-				match_case);
+                                (dialog->priv->fuzzy_checkbutton),
+                                match_case);
 }
 
 gboolean
@@ -680,18 +669,18 @@ gtr_search_dialog_get_fuzzy (GtrSearchDialog * dialog)
 
   return
     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-				  (dialog->priv->fuzzy_checkbutton));
+                                  (dialog->priv->fuzzy_checkbutton));
 }
 
 void
 gtr_search_dialog_set_match_case (GtrSearchDialog * dialog,
-					  gboolean match_case)
+                                  gboolean match_case)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				(dialog->priv->match_case_checkbutton),
-				match_case);
+                                (dialog->priv->match_case_checkbutton),
+                                match_case);
 }
 
 gboolean
@@ -701,18 +690,18 @@ gtr_search_dialog_get_match_case (GtrSearchDialog * dialog)
 
   return
     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-				  (dialog->priv->match_case_checkbutton));
+                                  (dialog->priv->match_case_checkbutton));
 }
 
 void
 gtr_search_dialog_set_entire_word (GtrSearchDialog * dialog,
-					   gboolean entire_word)
+                                   gboolean entire_word)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				(dialog->priv->entire_word_checkbutton),
-				entire_word);
+                                (dialog->priv->entire_word_checkbutton),
+                                entire_word);
 }
 
 gboolean
@@ -722,18 +711,17 @@ gtr_search_dialog_get_entire_word (GtrSearchDialog * dialog)
 
   return
     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-				  (dialog->priv->entire_word_checkbutton));
+                                  (dialog->priv->entire_word_checkbutton));
 }
 
 void
-gtr_search_dialog_set_backwards (GtrSearchDialog * dialog,
-					 gboolean backwards)
+gtr_search_dialog_set_backwards (GtrSearchDialog * dialog, gboolean backwards)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				(dialog->priv->backwards_checkbutton),
-				backwards);
+                                (dialog->priv->backwards_checkbutton),
+                                backwards);
 }
 
 gboolean
@@ -743,18 +731,18 @@ gtr_search_dialog_get_backwards (GtrSearchDialog * dialog)
 
   return
     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-				  (dialog->priv->backwards_checkbutton));
+                                  (dialog->priv->backwards_checkbutton));
 }
 
 void
 gtr_search_dialog_set_wrap_around (GtrSearchDialog * dialog,
-					   gboolean wrap_around)
+                                   gboolean wrap_around)
 {
   g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				(dialog->priv->wrap_around_checkbutton),
-				wrap_around);
+                                (dialog->priv->wrap_around_checkbutton),
+                                wrap_around);
 }
 
 gboolean
@@ -764,5 +752,5 @@ gtr_search_dialog_get_wrap_around (GtrSearchDialog * dialog)
 
   return
     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-				  (dialog->priv->wrap_around_checkbutton));
+                                  (dialog->priv->wrap_around_checkbutton));
 }

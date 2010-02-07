@@ -80,26 +80,21 @@ gtr_msg_get_type (void)
 
      GType gtr_msg_register_type (GTypeModule * module);
 
-     GtrMsg *gtr_msg_new (po_message_iterator_t iter,
-					  po_message_t message);
+     GtrMsg *gtr_msg_new (po_message_iterator_t iter, po_message_t message);
 
 po_message_iterator_t
 gtr_msg_get_iterator (GtrMsg * msg);
 
-     void gtr_msg_set_iterator (GtrMsg * msg,
-					po_message_iterator_t iter);
+     void gtr_msg_set_iterator (GtrMsg * msg, po_message_iterator_t iter);
 
      po_message_t gtr_msg_get_message (GtrMsg * msg);
 
-     void gtr_msg_set_message (GtrMsg * msg,
-				       po_message_t message);
+     void gtr_msg_set_message (GtrMsg * msg, po_message_t message);
 
-     GtkTreeRowReference *gtr_msg_get_row_reference (GtrMsg *
-							     msg);
+     GtkTreeRowReference *gtr_msg_get_row_reference (GtrMsg * msg);
 
      void gtr_msg_set_row_reference (GtrMsg * msg,
-					     GtkTreeRowReference *
-					     row_reference);
+                                     GtkTreeRowReference * row_reference);
 
      gboolean gtr_msg_is_translated (GtrMsg * msg);
 
@@ -107,8 +102,7 @@ gtr_msg_get_iterator (GtrMsg * msg);
 
      void gtr_msg_set_fuzzy (GtrMsg * msg, gboolean fuzzy);
 
-     void gtr_msg_set_status (GtrMsg * msg,
-				      GtrMsgStatus status);
+     void gtr_msg_set_status (GtrMsg * msg, GtrMsgStatus status);
 
      GtrMsgStatus gtr_msg_get_status (GtrMsg * msg);
 
@@ -118,28 +112,22 @@ gtr_msg_get_iterator (GtrMsg * msg);
 
      const gchar *gtr_msg_get_msgstr (GtrMsg * msg);
 
-     void gtr_msg_set_msgstr (GtrMsg * msg,
-				      const gchar * msgstr);
+     void gtr_msg_set_msgstr (GtrMsg * msg, const gchar * msgstr);
 
-     const gchar *gtr_msg_get_msgstr_plural (GtrMsg * msg,
-						     gint index);
+     const gchar *gtr_msg_get_msgstr_plural (GtrMsg * msg, gint index);
 
      void gtr_msg_set_msgstr_plural (GtrMsg * msg,
-					     gint index,
-					     const gchar * msgstr);
+                                     gint index, const gchar * msgstr);
 
      const gchar *gtr_msg_get_comment (GtrMsg * msg);
 
-     void gtr_msg_set_comment (GtrMsg * msg,
-				       const gchar * comment);
+     void gtr_msg_set_comment (GtrMsg * msg, const gchar * comment);
 
      gint gtr_msg_get_po_position (GtrMsg * msg);
 
-     void gtr_msg_set_po_position (GtrMsg * msg,
-					   gint po_position);
+     void gtr_msg_set_po_position (GtrMsg * msg, gint po_position);
 
-     const gchar *gtr_msg_get_extracted_comments
-       (GtrMsg * msg);
+     const gchar *gtr_msg_get_extracted_comments (GtrMsg * msg);
 
      const gchar *gtr_msg_get_filename (GtrMsg * msg, gint i);
 

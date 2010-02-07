@@ -62,76 +62,74 @@
 #define GTR_TAB_KEY "GtrTabFromDocument"
 
 G_DEFINE_TYPE (GtrTab, gtr_tab, GTK_TYPE_VBOX)
+     struct _GtrTabPrivate
+     {
+       GtrPo *po;
 
-struct _GtrTabPrivate
-{
-  GtrPo *po;
+       GtkWidget *table_pane;
+       GtkWidget *content_pane;
+       GtkWidget *panel;
+       GtkWidget *message_table;
+       GtkWidget *lateral_panel;        //TM, Context, etc.
 
-  GtkWidget *table_pane;
-  GtkWidget *content_pane;
-  GtkWidget *panel;
-  GtkWidget *message_table;
-  GtkWidget *lateral_panel;	//TM, Context, etc.
+       GtkWidget *comment_pane;
+       GtkWidget *context;
+       GtkWidget *translation_memory;
 
-  GtkWidget *comment_pane;
-  GtkWidget *context;
-  GtkWidget *translation_memory;
+       /*Comment button */
+       GtkWidget *comment_button;
 
-  /*Comment button */
-  GtkWidget *comment_button;
+       /*Info bar */
+       GtkWidget *infobar;
 
-  /*Info bar */
-  GtkWidget *infobar;
+       /*Original text */
+       GtkWidget *msgid_hbox;
+       GtkWidget *text_vbox;
+       GtkWidget *text_msgid;
+       GtkWidget *text_plural_scroll;
+       GtkWidget *text_msgid_plural;
 
-  /*Original text */
-  GtkWidget *msgid_hbox;
-  GtkWidget *text_vbox;
-  GtkWidget *text_msgid;
-  GtkWidget *text_plural_scroll;
-  GtkWidget *text_msgid_plural;
+       /*Translated text */
+       GtkWidget *msgstr_label;
+       GtkWidget *msgstr_hbox;
+       GtkWidget *trans_notebook;
+       GtkWidget *trans_msgstr[MAX_PLURALS];
 
-  /*Translated text */
-  GtkWidget *msgstr_label;
-  GtkWidget *msgstr_hbox;
-  GtkWidget *trans_notebook;
-  GtkWidget *trans_msgstr[MAX_PLURALS];
+       /*Status widgets */
+       GtkWidget *translated;
+       GtkWidget *fuzzy;
+       GtkWidget *untranslated;
 
-  /*Status widgets */
-  GtkWidget *translated;
-  GtkWidget *fuzzy;
-  GtkWidget *untranslated;
+       /* Autosave */
+       GTimer *timer;
+       gint autosave_interval;
+       guint autosave_timeout;
+       guint autosave:1;
 
-  /* Autosave */
-  GTimer *timer;
-  gint autosave_interval;
-  guint autosave_timeout;
-  guint autosave : 1;
+       /*Blocking movement */
+       guint blocking:1;
+     };
 
-  /*Blocking movement */
-  guint blocking : 1;
-};
+     enum
+     {
+       SHOWED_MESSAGE,
+       MESSAGE_CHANGED,
+       MESSAGE_EDITION_FINISHED,
+       LAST_SIGNAL
+     };
 
-enum
-{
-  SHOWED_MESSAGE,
-  MESSAGE_CHANGED,
-  MESSAGE_EDITION_FINISHED,
-  LAST_SIGNAL
-};
+     enum
+     {
+       PROP_0,
+       PROP_AUTOSAVE,
+       PROP_AUTOSAVE_INTERVAL
+     };
 
-enum
-{
-  PROP_0,
-  PROP_AUTOSAVE,
-  PROP_AUTOSAVE_INTERVAL
-};
+     static guint signals[LAST_SIGNAL];
 
-static guint signals[LAST_SIGNAL];
+     static gboolean gtr_tab_autosave (GtrTab * tab);
 
-static gboolean gtr_tab_autosave (GtrTab * tab);
-
-static void
-install_autosave_timeout (GtrTab * tab)
+     static void install_autosave_timeout (GtrTab * tab)
 {
   gint timeout;
 
@@ -141,7 +139,7 @@ install_autosave_timeout (GtrTab * tab)
 
   /* Add a new timeout */
   timeout = g_timeout_add (tab->priv->autosave_interval * 1000 * 60,
-			   (GSourceFunc) gtr_tab_autosave, tab);
+                           (GSourceFunc) gtr_tab_autosave, tab);
 
   tab->priv->autosave_timeout = timeout;
 }
@@ -205,13 +203,12 @@ gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
   GtkWidget *infobar;
 
   tm =
-    GTR_TRANSLATION_MEMORY (gtr_application_get_translation_memory
-			    (GTR_APP));
+    GTR_TRANSLATION_MEMORY (gtr_application_get_translation_memory (GTR_APP));
 
   if (gtr_msg_is_translated (msg) && !gtr_msg_is_fuzzy (msg))
     gtr_translation_memory_store (tm,
-					  gtr_msg_get_msgid (msg),
-					  gtr_msg_get_msgstr (msg));
+                                  gtr_msg_get_msgid (msg),
+                                  gtr_msg_get_msgstr (msg));
 
   /*
    * Checking message
@@ -222,8 +219,8 @@ gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
     {
       gtr_tab_block_movement (tab);
 
-      infobar =	create_error_info_bar (_("There is an error in the message:"),
-				       message_error);
+      infobar = create_error_info_bar (_("There is an error in the message:"),
+                                       message_error);
       gtr_tab_set_info_bar (tab, infobar);
       g_free (message_error);
     }
@@ -239,8 +236,7 @@ gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
  * mark the page dirty
  */
 static void
-gtr_message_translation_update (GtkTextBuffer * textbuffer,
-					GtrTab * tab)
+gtr_message_translation_update (GtkTextBuffer * textbuffer, GtrTab * tab)
 {
   GtrHeader *header;
   GtkTextIter start, end;
@@ -273,14 +269,14 @@ gtr_message_translation_update (GtkTextBuffer * textbuffer,
 
       /* Write back to PO file in memory */
       if (!(check = gtr_msg_get_msgid_plural (msg)))
-	{
-	  gtr_msg_set_msgstr (msg, translation);
-	}
+        {
+          gtr_msg_set_msgstr (msg, translation);
+        }
       else
-	{
-	  gtr_msg_set_msgstr_plural (msg, 0, translation);
-	  //free(check);
-	}
+        {
+          gtr_msg_set_msgstr_plural (msg, 0, translation);
+          //free(check);
+        }
       g_free (translation);
       return;
     }
@@ -289,18 +285,18 @@ gtr_message_translation_update (GtkTextBuffer * textbuffer,
     {
       /* Know when to break out of the loop */
       if (!tab->priv->trans_msgstr[i])
-	{
-	  break;
-	}
+        {
+          break;
+        }
 
       /* Have we reached the one we want yet? */
       buf =
-	gtk_text_view_get_buffer (GTK_TEXT_VIEW (tab->priv->trans_msgstr[i]));
+        gtk_text_view_get_buffer (GTK_TEXT_VIEW (tab->priv->trans_msgstr[i]));
       if (textbuffer != buf)
-	{
-	  i++;
-	  continue;
-	}
+        {
+          i++;
+          continue;
+        }
 
       /* Get message as UTF-8 buffer */
       gtk_text_buffer_get_bounds (textbuffer, &start, &end);
@@ -322,7 +318,7 @@ gtr_message_translation_update (GtkTextBuffer * textbuffer,
 
 static GtkWidget *
 gtr_tab_append_msgstr_page (const gchar * tab_label,
-				    GtkWidget * box, gboolean spellcheck)
+                            GtkWidget * box, gboolean spellcheck)
 {
   GtkWidget *scroll;
   GtkWidget *label;
@@ -342,10 +338,10 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
   gtk_container_add (GTK_CONTAINER (scroll), widget);
 
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroll),
-				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
-				       GTK_SHADOW_IN);
+                                       GTK_SHADOW_IN);
 
   gtk_notebook_append_page (GTK_NOTEBOOK (box), scroll, label);
 
@@ -369,15 +365,15 @@ gtr_message_plural_forms (GtrTab * tab, GtrMsg * msg)
     {
       msgstr_plural = gtr_msg_get_msgstr_plural (msg, i);
       if (msgstr_plural)
-	{
-	  buf =
-	    gtk_text_view_get_buffer (GTK_TEXT_VIEW
-				      (tab->priv->trans_msgstr[i]));
-	  gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER
-						       (buf));
-	  gtk_text_buffer_set_text (buf, (gchar *) msgstr_plural, -1);
-	  gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (buf));
-	}
+        {
+          buf =
+            gtk_text_view_get_buffer (GTK_TEXT_VIEW
+                                      (tab->priv->trans_msgstr[i]));
+          gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER
+                                                       (buf));
+          gtk_text_buffer_set_text (buf, (gchar *) msgstr_plural, -1);
+          gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (buf));
+        }
     }
 }
 
@@ -405,8 +401,7 @@ gtr_tab_create_comment_button ()
 static void
 on_comment_button_clicked (GtkButton * button, gpointer useless)
 {
-  GtrWindow *window =
-    gtr_application_get_active_window (GTR_APP);
+  GtrWindow *window = gtr_application_get_active_window (GTR_APP);
 
   gtr_show_comment_dialog (window);
 }
@@ -451,25 +446,25 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
       gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->trans_notebook), FALSE);
       gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->trans_notebook), 0);
       if (msgstr)
-	{
-	  buf =
-	    gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[0]));
-	  gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER
-						       (buf));
-	  gtk_text_buffer_set_text (buf, (gchar *) msgstr, -1);
-	  gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (buf));
-	  gtk_label_set_mnemonic_widget (GTK_LABEL (priv->msgstr_label),
-					 priv->trans_msgstr[0]);
-	}
+        {
+          buf =
+            gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[0]));
+          gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER
+                                                       (buf));
+          gtk_text_buffer_set_text (buf, (gchar *) msgstr, -1);
+          gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (buf));
+          gtk_label_set_mnemonic_widget (GTK_LABEL (priv->msgstr_label),
+                                         priv->trans_msgstr[0]);
+        }
     }
   else
     {
       gtk_widget_show (priv->text_plural_scroll);
       gtk_notebook_set_show_tabs (GTK_NOTEBOOK (tab->priv->trans_notebook),
-				  TRUE);
+                                  TRUE);
       buf =
-	gtk_text_view_get_buffer (GTK_TEXT_VIEW
-				  (tab->priv->text_msgid_plural));
+        gtk_text_view_get_buffer (GTK_TEXT_VIEW
+                                  (tab->priv->text_msgid_plural));
       gtk_text_buffer_set_text (buf, (gchar *) msgid_plural, -1);
       gtr_message_plural_forms (tab, msg);
     }
@@ -502,14 +497,14 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
     {
       _gtr_po_increase_decrease_fuzzy (tab->priv->po, FALSE);
       if (translated)
-	{
-	  status = GTR_MSG_STATUS_TRANSLATED;
-	  _gtr_po_increase_decrease_translated (tab->priv->po, TRUE);
-	}
+        {
+          status = GTR_MSG_STATUS_TRANSLATED;
+          _gtr_po_increase_decrease_translated (tab->priv->po, TRUE);
+        }
       else
-	{
-	  status = GTR_MSG_STATUS_UNTRANSLATED;
-	}
+        {
+          status = GTR_MSG_STATUS_UNTRANSLATED;
+        }
     }
   else if ((status == GTR_MSG_STATUS_TRANSLATED) && !translated)
     {
@@ -525,15 +520,15 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
   else if ((status == GTR_MSG_STATUS_UNTRANSLATED) && translated)
     {
       if (fuzzy)
-	{
-	  status = GTR_MSG_STATUS_FUZZY;
-	  _gtr_po_increase_decrease_fuzzy (tab->priv->po, TRUE);
-	}
+        {
+          status = GTR_MSG_STATUS_FUZZY;
+          _gtr_po_increase_decrease_fuzzy (tab->priv->po, TRUE);
+        }
       else
-	{
-	  status = GTR_MSG_STATUS_TRANSLATED;
-	  _gtr_po_increase_decrease_translated (tab->priv->po, TRUE);
-	}
+        {
+          status = GTR_MSG_STATUS_TRANSLATED;
+          _gtr_po_increase_decrease_translated (tab->priv->po, TRUE);
+        }
     }
 
   gtr_msg_set_status (msg, status);
@@ -545,18 +540,18 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
 
 static void
 comment_pane_position_changed (GObject * tab_gobject,
-			       GParamSpec * arg1, GtrTab * tab)
+                               GParamSpec * arg1, GtrTab * tab)
 {
   gtr_prefs_manager_set_comment_pane_pos (gtk_paned_get_position
-						  (GTK_PANED (tab_gobject)));
+                                          (GTK_PANED (tab_gobject)));
 }
 
 static void
 content_pane_position_changed (GObject * tab_gobject,
-			       GParamSpec * arg1, GtrTab * tab)
+                               GParamSpec * arg1, GtrTab * tab)
 {
   gtr_prefs_manager_set_content_pane_pos (gtk_paned_get_position
-						  (GTK_PANED (tab_gobject)));
+                                          (GTK_PANED (tab_gobject)));
 }
 
 static void
@@ -577,16 +572,14 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
     {
       label = g_strdup_printf (_("Plural %d"), i + 1);
       priv->trans_msgstr[i] = gtr_tab_append_msgstr_page (label,
-								  priv->
-								  trans_notebook,
-								  TRUE);
+                                                          priv->trans_notebook,
+                                                          TRUE);
       buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[i]));
       g_signal_connect (buf, "end-user-action",
-			G_CALLBACK (gtr_message_translation_update),
-			tab);
+                        G_CALLBACK (gtr_message_translation_update), tab);
 
       g_signal_connect_after (buf, "end_user_action",
-			      G_CALLBACK (emit_message_changed_signal), tab);
+                              G_CALLBACK (emit_message_changed_signal), tab);
       i++;
       g_free (label);
     }
@@ -618,7 +611,7 @@ gtr_tab_draw (GtrTab * tab)
   label_widget = gtk_label_new (_("Message Table"));
 
   gtk_notebook_append_page (GTK_NOTEBOOK (priv->panel),
-			    priv->message_table, label_widget);
+                            priv->message_table, label_widget);
 
   gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->panel), FALSE);
 
@@ -627,9 +620,9 @@ gtr_tab_draw (GtrTab * tab)
    */
   priv->comment_pane = gtk_hpaned_new ();
   gtk_paned_set_position (GTK_PANED (priv->comment_pane),
-			  gtr_prefs_manager_get_comment_pane_pos ());
+                          gtr_prefs_manager_get_comment_pane_pos ());
   g_signal_connect (priv->comment_pane, "notify::position",
-		    G_CALLBACK (comment_pane_position_changed), tab);
+                    G_CALLBACK (comment_pane_position_changed), tab);
   gtk_widget_show (priv->comment_pane);
 
   /*
@@ -639,34 +632,32 @@ gtr_tab_draw (GtrTab * tab)
   gtk_widget_show (tab->priv->lateral_panel);
 
   gtk_paned_pack2 (GTK_PANED (priv->comment_pane), tab->priv->lateral_panel,
-		   TRUE, TRUE);
+                   TRUE, TRUE);
 
   /*
    * Context
    */
   priv->context = gtr_context_panel_new (GTK_WIDGET (tab));
   gtk_widget_show (priv->context);
-  gtr_tab_add_widget_to_lateral_panel (tab, priv->context,
-					       _("Context"));
+  gtr_tab_add_widget_to_lateral_panel (tab, priv->context, _("Context"));
 
   /*
    * TM
    */
-  priv->translation_memory =
-    gtr_translation_memory_ui_new (GTK_WIDGET (tab));
+  priv->translation_memory = gtr_translation_memory_ui_new (GTK_WIDGET (tab));
   gtk_widget_show (priv->translation_memory);
   gtr_tab_add_widget_to_lateral_panel (tab, priv->translation_memory,
-					       _("Translation Memory"));
+                                       _("Translation Memory"));
 
   /*
    * Content pane; this is where the message table and message area go
    */
   priv->content_pane = gtk_vpaned_new ();
   gtk_paned_set_position (GTK_PANED (priv->content_pane),
-			  gtr_prefs_manager_get_content_pane_pos ());
+                          gtr_prefs_manager_get_content_pane_pos ());
   g_signal_connect (priv->content_pane,
-		    "notify::position",
-		    G_CALLBACK (content_pane_position_changed), tab);
+                    "notify::position",
+                    G_CALLBACK (content_pane_position_changed), tab);
   gtk_widget_show (priv->content_pane);
 
   /*
@@ -674,9 +665,9 @@ gtr_tab_draw (GtrTab * tab)
    */
   vertical_box = gtk_vbox_new (FALSE, 0);
   gtk_paned_pack1 (GTK_PANED (priv->content_pane), GTK_WIDGET (priv->panel),
-		   TRUE, FALSE);
+                   TRUE, FALSE);
   gtk_paned_pack2 (GTK_PANED (priv->content_pane), priv->comment_pane, FALSE,
-		   TRUE);
+                   TRUE);
   gtk_widget_show (vertical_box);
 
   /*
@@ -691,7 +682,7 @@ gtr_tab_draw (GtrTab * tab)
   gtk_widget_show (msgid_label);
 
   gtk_box_pack_start (GTK_BOX (priv->msgid_hbox), msgid_label, FALSE, FALSE,
-		      0);
+                      0);
 
   priv->text_vbox = gtk_vbox_new (FALSE, 0);
   gtk_widget_show (priv->text_vbox);
@@ -707,9 +698,9 @@ gtr_tab_draw (GtrTab * tab)
   gtk_container_add (GTK_CONTAINER (scroll), priv->text_msgid);
 
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroll),
-				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
-				       GTK_SHADOW_IN);
+                                       GTK_SHADOW_IN);
 
   gtk_box_pack_start (GTK_BOX (priv->text_vbox), scroll, TRUE, TRUE, 0);
 
@@ -722,20 +713,20 @@ gtr_tab_draw (GtrTab * tab)
   gtk_widget_show (priv->text_msgid_plural);
 
   gtk_container_add (GTK_CONTAINER (priv->text_plural_scroll),
-		     priv->text_msgid_plural);
+                     priv->text_msgid_plural);
 
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW
-				  (priv->text_plural_scroll),
-				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+                                  (priv->text_plural_scroll),
+                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW
-				       (priv->text_plural_scroll),
-				       GTK_SHADOW_IN);
+                                       (priv->text_plural_scroll),
+                                       GTK_SHADOW_IN);
 
   gtk_box_pack_start (GTK_BOX (priv->text_vbox), priv->text_plural_scroll,
-		      TRUE, TRUE, 0);
+                      TRUE, TRUE, 0);
 
   gtk_box_pack_start (GTK_BOX (vertical_box), priv->msgid_hbox, FALSE, FALSE,
-		      0);
+                      0);
   gtk_box_pack_start (GTK_BOX (vertical_box), priv->text_vbox, TRUE, TRUE, 0);
 
 
@@ -747,31 +738,31 @@ gtr_tab_draw (GtrTab * tab)
 
   priv->msgstr_label = gtk_label_new (NULL);
   gtk_label_set_markup_with_mnemonic (GTK_LABEL (priv->msgstr_label),
-				      _("<b>Translate_d Text:</b>"));
+                                      _("<b>Translate_d Text:</b>"));
   gtk_misc_set_padding (GTK_MISC (priv->msgstr_label), 0, 5);
   gtk_misc_set_alignment (GTK_MISC (priv->msgstr_label), 0, 0.5);
   gtk_widget_show (priv->msgstr_label);
 
   gtk_box_pack_start (GTK_BOX (priv->msgstr_hbox), priv->msgstr_label, TRUE,
-		      TRUE, 0);
+                      TRUE, 0);
 
   priv->comment_button = gtr_tab_create_comment_button ();
   gtk_box_pack_start (GTK_BOX (priv->msgstr_hbox), priv->comment_button,
-		      FALSE, FALSE, 0);
+                      FALSE, FALSE, 0);
   g_signal_connect (priv->comment_button, "clicked",
-		    G_CALLBACK (on_comment_button_clicked), NULL);
+                    G_CALLBACK (on_comment_button_clicked), NULL);
 
   priv->trans_notebook = gtk_notebook_new ();
   gtk_notebook_set_show_border (GTK_NOTEBOOK (priv->trans_notebook), FALSE);
   gtk_widget_show (priv->trans_notebook);
 
   gtk_box_pack_start (GTK_BOX (vertical_box), priv->msgstr_hbox, FALSE, FALSE,
-		      0);
+                      0);
   gtk_box_pack_start (GTK_BOX (vertical_box), priv->trans_notebook, TRUE,
-		      TRUE, 0);
+                      TRUE, 0);
 
   gtk_paned_pack1 (GTK_PANED (priv->comment_pane), vertical_box, FALSE,
-		   FALSE);
+                   FALSE);
 
   gtk_box_pack_start (GTK_BOX (tab), priv->content_pane, TRUE, TRUE, 0);
 }
@@ -789,8 +780,7 @@ gtr_tab_init (GtrTab * tab)
   tab->priv->autosave = gtr_prefs_manager_get_autosave ();
   tab->priv->autosave = (tab->priv->autosave != FALSE);
 
-  tab->priv->autosave_interval =
-    gtr_prefs_manager_get_autosave_interval ();
+  tab->priv->autosave_interval = gtr_prefs_manager_get_autosave_interval ();
   if (tab->priv->autosave_interval <= 0)
     tab->priv->autosave_interval = 1;
 }
@@ -814,8 +804,7 @@ gtr_tab_finalize (GObject * object)
 
 static void
 gtr_tab_get_property (GObject * object,
-			      guint prop_id,
-			      GValue * value, GParamSpec * pspec)
+                      guint prop_id, GValue * value, GParamSpec * pspec)
 {
   GtrTab *tab = GTR_TAB (object);
 
@@ -835,8 +824,7 @@ gtr_tab_get_property (GObject * object,
 
 static void
 gtr_tab_set_property (GObject * object,
-			      guint prop_id,
-			      const GValue * value, GParamSpec * pspec)
+                      guint prop_id, const GValue * value, GParamSpec * pspec)
 {
   GtrTab *tab = GTR_TAB (object);
 
@@ -870,51 +858,51 @@ gtr_tab_class_init (GtrTabClass * klass)
   /* Signals */
   signals[SHOWED_MESSAGE] =
     g_signal_new ("showed-message",
-		  G_OBJECT_CLASS_TYPE (klass),
-		  G_SIGNAL_RUN_LAST,
-		  G_STRUCT_OFFSET (GtrTabClass, showed_message),
-		  NULL, NULL,
-		  g_cclosure_marshal_VOID__POINTER,
-		  G_TYPE_NONE, 1, G_TYPE_POINTER);
+                  G_OBJECT_CLASS_TYPE (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (GtrTabClass, showed_message),
+                  NULL, NULL,
+                  g_cclosure_marshal_VOID__POINTER,
+                  G_TYPE_NONE, 1, G_TYPE_POINTER);
 
   signals[MESSAGE_CHANGED] =
     g_signal_new ("message-changed",
-		  G_OBJECT_CLASS_TYPE (klass),
-		  G_SIGNAL_RUN_LAST,
-		  G_STRUCT_OFFSET (GtrTabClass, message_changed),
-		  NULL, NULL,
-		  g_cclosure_marshal_VOID__POINTER,
-		  G_TYPE_NONE, 1, G_TYPE_POINTER);
+                  G_OBJECT_CLASS_TYPE (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (GtrTabClass, message_changed),
+                  NULL, NULL,
+                  g_cclosure_marshal_VOID__POINTER,
+                  G_TYPE_NONE, 1, G_TYPE_POINTER);
 
   signals[MESSAGE_EDITION_FINISHED] =
     g_signal_new ("message-edition-finished",
-		  G_OBJECT_CLASS_TYPE (klass),
-		  G_SIGNAL_RUN_LAST,
-		  G_STRUCT_OFFSET (GtrTabClass,
-				   message_edition_finished), NULL, NULL,
-		  g_cclosure_marshal_VOID__POINTER, G_TYPE_NONE, 1,
-		  G_TYPE_POINTER);
+                  G_OBJECT_CLASS_TYPE (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (GtrTabClass,
+                                   message_edition_finished), NULL, NULL,
+                  g_cclosure_marshal_VOID__POINTER, G_TYPE_NONE, 1,
+                  G_TYPE_POINTER);
 
   /* Properties */
   g_object_class_install_property (object_class,
-				   PROP_AUTOSAVE,
-				   g_param_spec_boolean ("autosave",
-							 "Autosave",
-							 "Autosave feature",
-							 TRUE,
-							 G_PARAM_READWRITE |
-							 G_PARAM_STATIC_STRINGS));
+                                   PROP_AUTOSAVE,
+                                   g_param_spec_boolean ("autosave",
+                                                         "Autosave",
+                                                         "Autosave feature",
+                                                         TRUE,
+                                                         G_PARAM_READWRITE |
+                                                         G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
-				   PROP_AUTOSAVE_INTERVAL,
-				   g_param_spec_int ("autosave-interval",
-						     "AutosaveInterval",
-						     "Time between two autosaves",
-						     0,
-						     G_MAXINT,
-						     0,
-						     G_PARAM_READWRITE |
-						     G_PARAM_STATIC_STRINGS));
+                                   PROP_AUTOSAVE_INTERVAL,
+                                   g_param_spec_int ("autosave-interval",
+                                                     "AutosaveInterval",
+                                                     "Time between two autosaves",
+                                                     0,
+                                                     G_MAXINT,
+                                                     0,
+                                                     G_PARAM_READWRITE |
+                                                     G_PARAM_STATIC_STRINGS));
 }
 
 /***************************** Public funcs ***********************************/
@@ -946,9 +934,8 @@ gtr_tab_new (GtrPo * po)
   gtr_tab_add_msgstr_tabs (tab);
 
   gtr_message_table_populate (GTR_MESSAGE_TABLE
-				      (tab->priv->message_table),
-				      gtr_po_get_messages (tab->priv->
-								   po));
+                              (tab->priv->message_table),
+                              gtr_po_get_messages (tab->priv->po));
 
   gtk_widget_show (GTK_WIDGET (tab));
   return tab;
@@ -1046,8 +1033,7 @@ gtr_tab_get_active_view (GtrTab * tab)
  * Return value: a newly allocated list of #GtranslationTab objects
  */
 GList *
-gtr_tab_get_all_views (GtrTab * tab,
-			       gboolean original, gboolean translated)
+gtr_tab_get_all_views (GtrTab * tab, gboolean original, gboolean translated)
 {
   GList *ret = NULL;
   gint i = 0;
@@ -1063,13 +1049,13 @@ gtr_tab_get_all_views (GtrTab * tab,
   if (translated)
     {
       while (i < MAX_PLURALS)
-	{
-	  if (tab->priv->trans_msgstr[i])
-	    ret = g_list_append (ret, tab->priv->trans_msgstr[i]);
-	  else
-	    break;
-	  i++;
-	}
+        {
+          if (tab->priv->trans_msgstr[i])
+            ret = g_list_append (ret, tab->priv->trans_msgstr[i]);
+          else
+            break;
+          i++;
+        }
     }
 
   return ret;
@@ -1114,8 +1100,7 @@ gtr_tab_get_name (GtrTab * tab)
 **/
 void
 gtr_tab_message_go_to (GtrTab * tab,
-			       GList * to_go,
-			       gboolean searching, GtrTabMove move)
+                       GList * to_go, gboolean searching, GtrTabMove move)
 {
   GtrPo *po;
   GList *current_msg;
@@ -1134,7 +1119,7 @@ gtr_tab_message_go_to (GtrTab * tab,
    */
   if (!searching && !first_msg)
     g_signal_emit (G_OBJECT (tab), signals[MESSAGE_EDITION_FINISHED],
-		   0, GTR_MSG (current_msg->data));
+                   0, GTR_MSG (current_msg->data));
 
   if (!tab->priv->blocking || first_msg)
     {
@@ -1153,42 +1138,42 @@ gtr_tab_message_go_to (GtrTab * tab,
        * rewrite this is a better way would be great.
        */
       plurals =
-	gtk_notebook_get_show_tabs (GTK_NOTEBOOK (tab->priv->trans_notebook));
+        gtk_notebook_get_show_tabs (GTK_NOTEBOOK (tab->priv->trans_notebook));
       current_page =
-	gtk_notebook_get_current_page (GTK_NOTEBOOK
-				       (tab->priv->trans_notebook));
+        gtk_notebook_get_current_page (GTK_NOTEBOOK
+                                       (tab->priv->trans_notebook));
       n_pages =
-	gtk_notebook_get_n_pages (GTK_NOTEBOOK (tab->priv->trans_notebook));
+        gtk_notebook_get_n_pages (GTK_NOTEBOOK (tab->priv->trans_notebook));
       if ((plurals == TRUE) && (move != GTR_TAB_MOVE_NONE))
-	{
-	  if ((n_pages - 1) == current_page && move == GTR_TAB_MOVE_NEXT)
-	    {
-	      gtk_notebook_set_current_page (GTK_NOTEBOOK
-					     (tab->priv->trans_notebook), 0);
-	      gtr_tab_show_message (tab, to_go->data);
-	    }
-	  else if (current_page == 0 && move == GTR_TAB_MOVE_PREV)
-	    {
-	      gtk_notebook_set_current_page (GTK_NOTEBOOK
-					     (tab->priv->trans_notebook),
-					     n_pages - 1);
-	      gtr_tab_show_message (tab, to_go->data);
-	    }
-	  else
-	    {
-	      if (move == GTR_TAB_MOVE_NEXT)
-		gtk_notebook_set_current_page (GTK_NOTEBOOK
-					       (tab->priv->trans_notebook),
-					       current_page + 1);
-	      else
-		gtk_notebook_set_current_page (GTK_NOTEBOOK
-					       (tab->priv->trans_notebook),
-					       current_page - 1);
-	      return;
-	    }
-	}
+        {
+          if ((n_pages - 1) == current_page && move == GTR_TAB_MOVE_NEXT)
+            {
+              gtk_notebook_set_current_page (GTK_NOTEBOOK
+                                             (tab->priv->trans_notebook), 0);
+              gtr_tab_show_message (tab, to_go->data);
+            }
+          else if (current_page == 0 && move == GTR_TAB_MOVE_PREV)
+            {
+              gtk_notebook_set_current_page (GTK_NOTEBOOK
+                                             (tab->priv->trans_notebook),
+                                             n_pages - 1);
+              gtr_tab_show_message (tab, to_go->data);
+            }
+          else
+            {
+              if (move == GTR_TAB_MOVE_NEXT)
+                gtk_notebook_set_current_page (GTK_NOTEBOOK
+                                               (tab->priv->trans_notebook),
+                                               current_page + 1);
+              else
+                gtk_notebook_set_current_page (GTK_NOTEBOOK
+                                               (tab->priv->trans_notebook),
+                                               current_page - 1);
+              return;
+            }
+        }
       else
-	gtr_tab_show_message (tab, to_go->data);
+        gtr_tab_show_message (tab, to_go->data);
       first_msg = FALSE;
     }
   else
@@ -1199,7 +1184,7 @@ gtr_tab_message_go_to (GtrTab * tab,
    */
   if (!searching)
     g_signal_emit (G_OBJECT (tab), signals[SHOWED_MESSAGE], 0,
-		   GTR_MSG (to_go->data));
+                   GTR_MSG (to_go->data));
 }
 
 /**
@@ -1345,8 +1330,8 @@ gtr_tab_set_autosave_interval (GtrTab * tab, gint interval)
  */
 void
 gtr_tab_add_widget_to_lateral_panel (GtrTab * tab,
-					     GtkWidget * widget,
-					     const gchar * tab_name)
+                                     GtkWidget * widget,
+                                     const gchar * tab_name)
 {
   GtkWidget *label;
 
@@ -1356,7 +1341,7 @@ gtr_tab_add_widget_to_lateral_panel (GtrTab * tab,
   label = gtk_label_new (tab_name);
 
   gtk_notebook_append_page (GTK_NOTEBOOK (tab->priv->lateral_panel),
-			    widget, label);
+                            widget, label);
 }
 
 /**
@@ -1367,8 +1352,7 @@ gtr_tab_add_widget_to_lateral_panel (GtrTab * tab,
  * Removes the @widget from the lateral panel notebook of @tab.
  */
 void
-gtr_tab_remove_widget_from_lateral_panel (GtrTab * tab,
-						  GtkWidget * widget)
+gtr_tab_remove_widget_from_lateral_panel (GtrTab * tab, GtkWidget * widget)
 {
   gint page;
 
@@ -1376,7 +1360,7 @@ gtr_tab_remove_widget_from_lateral_panel (GtrTab * tab,
   g_return_if_fail (GTK_IS_WIDGET (widget));
 
   page = gtk_notebook_page_num (GTK_NOTEBOOK (tab->priv->lateral_panel),
-				widget);
+                                widget);
 
   gtk_notebook_remove_page (GTK_NOTEBOOK (tab->priv->lateral_panel), page);
 }
@@ -1389,15 +1373,14 @@ gtr_tab_remove_widget_from_lateral_panel (GtrTab * tab,
  * Shows the notebook page of the @widget.
  */
 void
-gtr_tab_show_lateral_panel_widget (GtrTab * tab,
-					   GtkWidget * widget)
+gtr_tab_show_lateral_panel_widget (GtrTab * tab, GtkWidget * widget)
 {
   gint page;
 
   page = gtk_notebook_page_num (GTK_NOTEBOOK (tab->priv->lateral_panel),
-				widget);
+                                widget);
   gtk_notebook_set_current_page (GTK_NOTEBOOK (tab->priv->lateral_panel),
-				 page);
+                                 page);
 }
 
 /**
@@ -1420,7 +1403,7 @@ gtr_tab_clear_msgstr_views (GtrTab * tab)
   do
     {
       buf =
-	gtk_text_view_get_buffer (GTK_TEXT_VIEW (tab->priv->trans_msgstr[i]));
+        gtk_text_view_get_buffer (GTK_TEXT_VIEW (tab->priv->trans_msgstr[i]));
       gtk_text_buffer_begin_user_action (buf);
       gtk_text_buffer_set_text (buf, "", -1);
       gtk_text_buffer_end_user_action (buf);
@@ -1449,7 +1432,7 @@ gtr_tab_copy_to_translation (GtrTab * tab)
 
   msgstr =
     gtk_text_view_get_buffer (GTK_TEXT_VIEW
-			      (tab->priv->trans_msgstr[page_index]));
+                              (tab->priv->trans_msgstr[page_index]));
   msgid = gtk_text_view_get_buffer (GTK_TEXT_VIEW (tab->priv->text_msgid));
 
   gtk_text_buffer_begin_user_action (msgstr);
@@ -1501,9 +1484,9 @@ gtr_tab_go_to_next (GtrTab * tab)
   po = gtr_tab_get_po (tab);
 
   gtr_tab_message_go_to (tab,
-				 g_list_next
-				 (gtr_po_get_current_message (po)),
-				 FALSE, GTR_TAB_MOVE_NEXT);
+                         g_list_next
+                         (gtr_po_get_current_message (po)),
+                         FALSE, GTR_TAB_MOVE_NEXT);
 }
 
 /**
@@ -1520,9 +1503,9 @@ gtr_tab_go_to_prev (GtrTab * tab)
   po = gtr_tab_get_po (tab);
 
   gtr_tab_message_go_to (tab,
-				 g_list_previous
-				 (gtr_po_get_current_message (po)),
-				 FALSE, GTR_TAB_MOVE_PREV);
+                         g_list_previous
+                         (gtr_po_get_current_message (po)),
+                         FALSE, GTR_TAB_MOVE_PREV);
 }
 
 /**
@@ -1539,9 +1522,9 @@ gtr_tab_go_to_first (GtrTab * tab)
   po = gtr_tab_get_po (tab);
 
   gtr_tab_message_go_to (tab,
-				 g_list_first
-				 (gtr_po_get_current_message (po)),
-				 FALSE, GTR_TAB_MOVE_NONE);
+                         g_list_first
+                         (gtr_po_get_current_message (po)),
+                         FALSE, GTR_TAB_MOVE_NONE);
 }
 
 /**
@@ -1558,9 +1541,9 @@ gtr_tab_go_to_last (GtrTab * tab)
   po = gtr_tab_get_po (tab);
 
   gtr_tab_message_go_to (tab,
-				 g_list_last
-				 (gtr_po_get_current_message (po)),
-				 FALSE, GTR_TAB_MOVE_NONE);
+                         g_list_last
+                         (gtr_po_get_current_message (po)),
+                         FALSE, GTR_TAB_MOVE_NONE);
 }
 
 /**
@@ -1750,8 +1733,7 @@ gtr_tab_go_to_number (GtrTab * tab, gint number)
  * Sets the @infobar to be shown in the @tab.
  */
 void
-gtr_tab_set_info_bar (GtrTab *tab,
-			      GtkWidget      *infobar)
+gtr_tab_set_info_bar (GtrTab * tab, GtkWidget * infobar)
 {
   g_return_if_fail (GTR_IS_TAB (tab));
 
@@ -1766,9 +1748,8 @@ gtr_tab_set_info_bar (GtrTab *tab,
   if (infobar == NULL)
     return;
 
-  gtk_box_pack_start (GTK_BOX (tab),
-		      tab->priv->infobar, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (tab), tab->priv->infobar, FALSE, FALSE, 0);
 
   g_object_add_weak_pointer (G_OBJECT (tab->priv->infobar),
-			     (gpointer *) &tab->priv->infobar);
+                             (gpointer *) & tab->priv->infobar);
 }

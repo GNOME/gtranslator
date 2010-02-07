@@ -36,8 +36,7 @@ G_BEGIN_DECLS
 #define GTR_IS_TRANSLATION_MEMORY_UI_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_TRANSLATION_MEMORY_UI))
 #define GTR_TRANSLATION_MEMORY_UI_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_TRANSLATION_MEMORY_UI, GtrTranslationMemoryUiClass))
 /* Private structure type */
-typedef struct _GtrTranslationMemoryUiPrivate
-  GtrTranslationMemoryUiPrivate;
+typedef struct _GtrTranslationMemoryUiPrivate GtrTranslationMemoryUiPrivate;
 
 /*
  * Main object structure
@@ -55,8 +54,7 @@ struct _GtrTranslationMemoryUi
 /*
  * Class definition
  */
-typedef struct _GtrTranslationMemoryUiClass
-  GtrTranslationMemoryUiClass;
+typedef struct _GtrTranslationMemoryUiClass GtrTranslationMemoryUiClass;
 
 struct _GtrTranslationMemoryUiClass
 {
@@ -70,8 +68,7 @@ GType
 gtr_translation_memory_ui_get_type (void)
   G_GNUC_CONST;
 
-     GType gtr_translation_memory_ui_register_type (GTypeModule *
-							    module);
+     GType gtr_translation_memory_ui_register_type (GTypeModule * module);
 
      GtkWidget *gtr_translation_memory_ui_new (GtkWidget * tab);
 

@@ -78,56 +78,49 @@ gtr_application_get_type (void)
      void gtr_application_shutdown (GtrApplication * app);
 
      GList *gtr_application_get_views (GtrApplication * app,
-					       gboolean original,
-					       gboolean translated);
+                                       gboolean original,
+                                       gboolean translated);
 
-     GtrWindow
-       *gtr_application_open_window (GtrApplication * app);
+GtrWindow * gtr_application_open_window (GtrApplication * app);
 
-     GtrWindow
-       *gtr_application_get_active_window (GtrApplication *
-						   app);
+GtrWindow * gtr_application_get_active_window (GtrApplication * app);
 
-     const GList *gtr_application_get_windows (GtrApplication
-						       * app);
+     const GList *
+     gtr_application_get_windows (GtrApplication * app);
 
-     GtrProfile
-       *gtr_application_get_active_profile (GtrApplication *
-						    app);
+GtrProfile * gtr_application_get_active_profile (GtrApplication * app);
 
-     void gtr_application_set_active_profile (GtrApplication *
-						      app,
-						      GtrProfile *
-						      profile);
+     void
+     gtr_application_set_active_profile (GtrApplication *
+                                         app, GtrProfile * profile);
 
-     GList *gtr_application_get_profiles (GtrApplication *
-						  app);
+     GList *
+     gtr_application_get_profiles (GtrApplication * app);
 
-     void gtr_application_set_profiles (GtrApplication * app,
-						GList * profiles);
+     void
+     gtr_application_set_profiles (GtrApplication * app, GList * profiles);
 
-     void gtr_application_register_icon (GtrApplication * app,
-						 const gchar * icon,
-						 const gchar * stock_id);
+     void
+     gtr_application_register_icon (GtrApplication * app,
+                                    const gchar * icon,
+                                    const gchar * stock_id);
 
-     GObject
-       *gtr_application_get_translation_memory (GtrApplication
-							* app);
+GObject * gtr_application_get_translation_memory (GtrApplication * app);
 
 /* Non exported funcs */
 
-     GObject
-       *_gtr_application_get_toolbars_model (GtrApplication *
-						     application);
+GObject * _gtr_application_get_toolbars_model (GtrApplication * application);
 
-     void _gtr_application_save_toolbars_model (GtrApplication
-							* application);
+     void
+     _gtr_application_save_toolbars_model (GtrApplication * application);
 
-     const gchar
-       *_gtr_application_get_last_dir (GtrApplication * app);
+     const
+       gchar *
+     _gtr_application_get_last_dir (GtrApplication * app);
 
-     void _gtr_application_set_last_dir (GtrApplication * app,
-						 const gchar * last_dir);
+     void
+     _gtr_application_set_last_dir (GtrApplication * app,
+                                    const gchar * last_dir);
 
 G_END_DECLS
 #endif /* __APPLICATION_H__ */

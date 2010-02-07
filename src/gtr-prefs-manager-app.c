@@ -44,49 +44,46 @@
 #include "gtr-window.h"
 
 static void gtr_prefs_manager_editor_font_changed (GConfClient *
-							   client,
-							   guint cnxn_id,
-							   GConfEntry * entry,
-							   gpointer
-							   user_data);
+                                                   client,
+                                                   guint cnxn_id,
+                                                   GConfEntry * entry,
+                                                   gpointer user_data);
 
 static void gtr_prefs_manager_spellcheck_changed (GConfClient *
-							  client,
-							  guint cnxn_id,
-							  GConfEntry * entry,
-							  gpointer user_data);
+                                                  client,
+                                                  guint cnxn_id,
+                                                  GConfEntry * entry,
+                                                  gpointer user_data);
 
 static void gtr_prefs_manager_highlight_changed (GConfClient * client,
-							 guint cnxn_id,
-							 GConfEntry * entry,
-							 gpointer user_data);
+                                                 guint cnxn_id,
+                                                 GConfEntry * entry,
+                                                 gpointer user_data);
 
 static void gtr_prefs_manager_visible_whitespace_changed (GConfClient
-								  * client,
-								  guint
-								  cnxn_id,
-								  GConfEntry *
-								  entry,
-								  gpointer
-								  user_data);
+                                                          * client,
+                                                          guint
+                                                          cnxn_id,
+                                                          GConfEntry *
+                                                          entry,
+                                                          gpointer user_data);
 
 static void gtr_prefs_manager_gdl_style_changed (GConfClient * client,
-							 guint cnxn_id,
-							 GConfEntry * entry,
-							 gpointer user_data);
+                                                 guint cnxn_id,
+                                                 GConfEntry * entry,
+                                                 gpointer user_data);
 
 static void gtr_prefs_manager_autosave_changed (GConfClient * client,
-							guint cnxn_id,
-							GConfEntry * entry,
-							gpointer user_data);
+                                                guint cnxn_id,
+                                                GConfEntry * entry,
+                                                gpointer user_data);
 
 static void gtr_prefs_manager_scheme_color_changed (GConfClient *
-							    client,
-							    guint cnxn_id,
-							    GConfEntry *
-							    entry,
-							    gpointer
-							    user_data);
+                                                    client,
+                                                    guint cnxn_id,
+                                                    GConfEntry *
+                                                    entry,
+                                                    gpointer user_data);
 
 /* GUI state is serialized to a .desktop file, not in gconf */
 
@@ -129,15 +126,15 @@ get_gtr_state_file ()
       g_free (config_folder);
 
       if (!g_key_file_load_from_file (state_file,
-				      path, G_KEY_FILE_NONE, &err))
-	{
-	  if (err->domain != G_FILE_ERROR || err->code != G_FILE_ERROR_NOENT)
-	    {
-	      g_warning ("Could not load gtranslator state file: %s\n",
-			 err->message);
-	    }
-	  g_error_free (err);
-	}
+                                      path, G_KEY_FILE_NONE, &err))
+        {
+          if (err->domain != G_FILE_ERROR || err->code != G_FILE_ERROR_NOENT)
+            {
+              g_warning ("Could not load gtranslator state file: %s\n",
+                         err->message);
+            }
+          g_error_free (err);
+        }
       g_free (path);
     }
 
@@ -147,7 +144,7 @@ get_gtr_state_file ()
 
 static void
 gtr_state_get_int (const gchar * group,
-			   const gchar * key, gint defval, gint * result)
+                   const gchar * key, gint defval, gint * result)
 {
   GKeyFile *state_file;
   gint res;
@@ -159,15 +156,15 @@ gtr_state_get_int (const gchar * group,
   if (err != NULL)
     {
       if ((err->domain != G_KEY_FILE_ERROR) ||
-	  ((err->code != G_KEY_FILE_ERROR_GROUP_NOT_FOUND &&
-	    err->code != G_KEY_FILE_ERROR_KEY_NOT_FOUND)))
-	{
-	  g_warning ("Could not get state value %s::%s : %s\n",
-		     group, key, err->message);
-	}
+          ((err->code != G_KEY_FILE_ERROR_GROUP_NOT_FOUND &&
+            err->code != G_KEY_FILE_ERROR_KEY_NOT_FOUND)))
+        {
+          g_warning ("Could not get state value %s::%s : %s\n",
+                     group, key, err->message);
+        }
 
       if (defval > 0)
-	*result = defval;
+        *result = defval;
 
       g_error_free (err);
     }
@@ -215,8 +212,7 @@ gtr_state_file_sync ()
   if ((content != NULL) &&
       (!g_file_set_contents (path, content, length, &err)))
     {
-      g_warning ("Could not write gtr state file: %s\n",
-		 err->message);
+      g_warning ("Could not write gtr state file: %s\n", err->message);
       goto out;
     }
 
@@ -239,9 +235,8 @@ gtr_prefs_manager_get_window_state (void)
   if (window_state == -1)
     {
       gtr_state_get_int (GTR_STATE_WINDOW_GROUP,
-				 GTR_STATE_WINDOW_STATE,
-				 GTR_STATE_DEFAULT_WINDOW_STATE,
-				 &window_state);
+                         GTR_STATE_WINDOW_STATE,
+                         GTR_STATE_DEFAULT_WINDOW_STATE, &window_state);
     }
 
   return window_state;
@@ -254,8 +249,7 @@ gtr_prefs_manager_set_window_state (gint ws)
 
   window_state = ws;
 
-  gtr_state_set_int (GTR_STATE_WINDOW_GROUP,
-			     GTR_STATE_WINDOW_STATE, ws);
+  gtr_state_set_int (GTR_STATE_WINDOW_GROUP, GTR_STATE_WINDOW_STATE, ws);
 }
 
 gboolean
@@ -273,17 +267,15 @@ gtr_prefs_manager_get_window_size (gint * width, gint * height)
   if (window_width == -1)
     {
       gtr_state_get_int (GTR_STATE_WINDOW_GROUP,
-				 GTR_STATE_WINDOW_WIDTH,
-				 GTR_STATE_DEFAULT_WINDOW_WIDTH,
-				 &window_width);
+                         GTR_STATE_WINDOW_WIDTH,
+                         GTR_STATE_DEFAULT_WINDOW_WIDTH, &window_width);
     }
 
   if (window_height == -1)
     {
       gtr_state_get_int (GTR_STATE_WINDOW_GROUP,
-				 GTR_STATE_WINDOW_HEIGHT,
-				 GTR_STATE_DEFAULT_WINDOW_HEIGHT,
-				 &window_height);
+                         GTR_STATE_WINDOW_HEIGHT,
+                         GTR_STATE_DEFAULT_WINDOW_HEIGHT, &window_height);
     }
 
   *width = window_width;
@@ -291,8 +283,7 @@ gtr_prefs_manager_get_window_size (gint * width, gint * height)
 }
 
 void
-gtr_prefs_manager_get_default_window_size (gint * width,
-						   gint * height)
+gtr_prefs_manager_get_default_window_size (gint * width, gint * height)
 {
   g_return_if_fail (width != NULL && height != NULL);
 
@@ -308,10 +299,8 @@ gtr_prefs_manager_set_window_size (gint width, gint height)
   window_width = width;
   window_height = height;
 
-  gtr_state_set_int (GTR_STATE_WINDOW_GROUP,
-			     GTR_STATE_WINDOW_WIDTH, width);
-  gtr_state_set_int (GTR_STATE_WINDOW_GROUP,
-			     GTR_STATE_WINDOW_HEIGHT, height);
+  gtr_state_set_int (GTR_STATE_WINDOW_GROUP, GTR_STATE_WINDOW_WIDTH, width);
+  gtr_state_set_int (GTR_STATE_WINDOW_GROUP, GTR_STATE_WINDOW_HEIGHT, height);
 }
 
 gboolean
@@ -327,9 +316,9 @@ gtr_prefs_manager_get_content_pane_pos (void)
   if (content_pane_pos == -1)
     {
       gtr_state_get_int (GTR_STATE_WINDOW_GROUP,
-				 GTR_STATE_CONTENT_PANE_POS,
-				 GTR_STATE_DEFAULT_CONTENT_PANE_POS,
-				 &content_pane_pos);
+                         GTR_STATE_CONTENT_PANE_POS,
+                         GTR_STATE_DEFAULT_CONTENT_PANE_POS,
+                         &content_pane_pos);
     }
 
   return content_pane_pos;
@@ -351,7 +340,7 @@ gtr_prefs_manager_set_content_pane_pos (gint new_pane_pos)
 
   content_pane_pos = new_pane_pos;
   gtr_state_set_int (GTR_STATE_WINDOW_GROUP,
-			     GTR_STATE_CONTENT_PANE_POS, new_pane_pos);
+                     GTR_STATE_CONTENT_PANE_POS, new_pane_pos);
 }
 
 /* Comment pane */
@@ -361,9 +350,9 @@ gtr_prefs_manager_get_comment_pane_pos (void)
   if (comment_pane_pos == -1)
     {
       gtr_state_get_int (GTR_STATE_WINDOW_GROUP,
-				 GTR_STATE_COMMENT_PANE_POS,
-				 GTR_STATE_DEFAULT_COMMENT_PANE_POS,
-				 &comment_pane_pos);
+                         GTR_STATE_COMMENT_PANE_POS,
+                         GTR_STATE_DEFAULT_COMMENT_PANE_POS,
+                         &comment_pane_pos);
     }
 
   return comment_pane_pos;
@@ -385,7 +374,7 @@ gtr_prefs_manager_set_comment_pane_pos (gint new_pane_pos)
 
   comment_pane_pos = new_pane_pos;
   gtr_state_set_int (GTR_STATE_WINDOW_GROUP,
-			     GTR_STATE_COMMENT_PANE_POS, new_pane_pos);
+                     GTR_STATE_COMMENT_PANE_POS, new_pane_pos);
 }
 
 /* Normal prefs are stored in GConf */
@@ -402,43 +391,43 @@ gtr_prefs_manager_app_init (void)
     {
       /* TODO: notify, add dirs */
       gconf_client_add_dir (gtr_prefs_manager->gconf_client,
-			    GPM_PREFS_DIR,
-			    GCONF_CLIENT_PRELOAD_RECURSIVE, NULL);
+                            GPM_PREFS_DIR,
+                            GCONF_CLIENT_PRELOAD_RECURSIVE, NULL);
 
       gconf_client_notify_add (gtr_prefs_manager->gconf_client,
-			       GPM_EDITOR_FONT,
-			       gtr_prefs_manager_editor_font_changed,
-			       NULL, NULL, NULL);
+                               GPM_EDITOR_FONT,
+                               gtr_prefs_manager_editor_font_changed,
+                               NULL, NULL, NULL);
 
       gconf_client_notify_add (gtr_prefs_manager->gconf_client,
-			       GPM_SPELLCHECK,
-			       gtr_prefs_manager_spellcheck_changed,
-			       NULL, NULL, NULL);
+                               GPM_SPELLCHECK,
+                               gtr_prefs_manager_spellcheck_changed,
+                               NULL, NULL, NULL);
 
       gconf_client_notify_add (gtr_prefs_manager->gconf_client,
-			       GPM_HIGHLIGHT_SYNTAX,
-			       gtr_prefs_manager_highlight_changed,
-			       NULL, NULL, NULL);
+                               GPM_HIGHLIGHT_SYNTAX,
+                               gtr_prefs_manager_highlight_changed,
+                               NULL, NULL, NULL);
 
       gconf_client_notify_add (gtr_prefs_manager->gconf_client,
-			       GPM_VISIBLE_WHITESPACE,
-			       gtr_prefs_manager_visible_whitespace_changed,
-			       NULL, NULL, NULL);
+                               GPM_VISIBLE_WHITESPACE,
+                               gtr_prefs_manager_visible_whitespace_changed,
+                               NULL, NULL, NULL);
 
       gconf_client_notify_add (gtr_prefs_manager->gconf_client,
-			       GPM_PANE_SWITCHER_STYLE,
-			       gtr_prefs_manager_gdl_style_changed,
-			       NULL, NULL, NULL);
+                               GPM_PANE_SWITCHER_STYLE,
+                               gtr_prefs_manager_gdl_style_changed,
+                               NULL, NULL, NULL);
 
       gconf_client_notify_add (gtr_prefs_manager->gconf_client,
-			       GPM_AUTOSAVE,
-			       gtr_prefs_manager_autosave_changed,
-			       NULL, NULL, NULL);
+                               GPM_AUTOSAVE,
+                               gtr_prefs_manager_autosave_changed,
+                               NULL, NULL, NULL);
 
       gconf_client_notify_add (gtr_prefs_manager->gconf_client,
-			       GPM_COLOR_SCHEME,
-			       gtr_prefs_manager_scheme_color_changed,
-			       NULL, NULL, NULL);
+                               GPM_COLOR_SCHEME,
+                               gtr_prefs_manager_scheme_color_changed,
+                               NULL, NULL, NULL);
     }
 
   return gtr_prefs_manager != NULL;
@@ -456,9 +445,8 @@ gtr_prefs_manager_app_shutdown ()
 
 static void
 gtr_prefs_manager_editor_font_changed (GConfClient * client,
-					       guint cnxn_id,
-					       GConfEntry * entry,
-					       gpointer user_data)
+                                       guint cnxn_id,
+                                       GConfEntry * entry, gpointer user_data)
 {
   GList *views;
   GList *l;
@@ -473,9 +461,9 @@ gtr_prefs_manager_editor_font_changed (GConfClient * client,
       def = gconf_value_get_bool (entry->value);
 
       if (!def)
-	font = g_strdup ("Sans 10");	// Fix to use system font
+        font = g_strdup ("Sans 10");    // Fix to use system font
       else
-	font = g_strdup (gtr_prefs_manager_get_editor_font ());
+        font = g_strdup (gtr_prefs_manager_get_editor_font ());
     }
   else if (strcmp (entry->key, GPM_EDITOR_FONT) == 0)
     {
@@ -505,9 +493,8 @@ gtr_prefs_manager_editor_font_changed (GConfClient * client,
 
 static void
 gtr_prefs_manager_spellcheck_changed (GConfClient * client,
-					      guint cnxn_id,
-					      GConfEntry * entry,
-					      gpointer user_data)
+                                      guint cnxn_id,
+                                      GConfEntry * entry, gpointer user_data)
 {
   GList *l;
   GList *views;
@@ -520,8 +507,7 @@ gtr_prefs_manager_spellcheck_changed (GConfClient * client,
   while (l != NULL)
     {
       gtr_view_enable_spellcheck (GTR_VIEW (l->data),
-					  gtr_prefs_manager_get_spellcheck
-					  ());
+                                  gtr_prefs_manager_get_spellcheck ());
       l = l->next;
     }
   g_list_free (views);
@@ -530,9 +516,8 @@ gtr_prefs_manager_spellcheck_changed (GConfClient * client,
 
 static void
 gtr_prefs_manager_highlight_changed (GConfClient * client,
-					     guint cnxn_id,
-					     GConfEntry * entry,
-					     gpointer user_data)
+                                     guint cnxn_id,
+                                     GConfEntry * entry, gpointer user_data)
 {
   g_return_if_fail (entry->key != NULL);
   g_return_if_fail (entry->value != NULL);
@@ -550,16 +535,16 @@ gtr_prefs_manager_highlight_changed (GConfClient * client,
       l = views;
 
       while (l != NULL)
-	{
-	  buf =
-	    GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
-			       (GTK_TEXT_VIEW (l->data)));
-	  g_return_if_fail (GTK_IS_SOURCE_BUFFER (buf));
+        {
+          buf =
+            GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
+                               (GTK_TEXT_VIEW (l->data)));
+          g_return_if_fail (GTK_IS_SOURCE_BUFFER (buf));
 
-	  gtk_source_buffer_set_highlight_syntax (buf, enable);
+          gtk_source_buffer_set_highlight_syntax (buf, enable);
 
-	  l = l->next;
-	}
+          l = l->next;
+        }
 
       g_list_free (views);
     }
@@ -567,9 +552,9 @@ gtr_prefs_manager_highlight_changed (GConfClient * client,
 
 static void
 gtr_prefs_manager_visible_whitespace_changed (GConfClient * client,
-						      guint cnxn_id,
-						      GConfEntry * entry,
-						      gpointer user_data)
+                                              guint cnxn_id,
+                                              GConfEntry * entry,
+                                              gpointer user_data)
 {
   g_return_if_fail (entry->key != NULL);
   g_return_if_fail (entry->value != NULL);
@@ -586,12 +571,11 @@ gtr_prefs_manager_visible_whitespace_changed (GConfClient * client,
       l = views;
 
       while (l != NULL)
-	{
-	  gtr_view_enable_visible_whitespace (GTR_VIEW (l->data),
-						      enable);
+        {
+          gtr_view_enable_visible_whitespace (GTR_VIEW (l->data), enable);
 
-	  l = l->next;
-	}
+          l = l->next;
+        }
 
       g_list_free (views);
     }
@@ -599,9 +583,8 @@ gtr_prefs_manager_visible_whitespace_changed (GConfClient * client,
 
 static void
 gtr_prefs_manager_gdl_style_changed (GConfClient * client,
-					     guint cnxn_id,
-					     GConfEntry * entry,
-					     gpointer user_data)
+                                     guint cnxn_id,
+                                     GConfEntry * entry, gpointer user_data)
 {
   GtrWindow *window;
   GdlSwitcherStyle style;
@@ -611,18 +594,16 @@ gtr_prefs_manager_gdl_style_changed (GConfClient * client,
 
   style = gtr_prefs_manager_get_pane_switcher_style ();
 
-  layout_manager =
-    GDL_DOCK_LAYOUT (_gtr_window_get_layout_manager (window));
+  layout_manager = GDL_DOCK_LAYOUT (_gtr_window_get_layout_manager (window));
 
   g_object_set (G_OBJECT (layout_manager->master),
-		"switcher-style", style, NULL);
+                "switcher-style", style, NULL);
 }
 
 static void
 gtr_prefs_manager_autosave_changed (GConfClient * client,
-					    guint cnxn_id,
-					    GConfEntry * entry,
-					    gpointer user_data)
+                                    guint cnxn_id,
+                                    GConfEntry * entry, gpointer user_data)
 {
   GList *tabs;
   GList *l;
@@ -642,11 +623,11 @@ gtr_prefs_manager_autosave_changed (GConfClient * client,
       tabs = gtr_window_get_all_tabs (window);
 
       for (l = tabs; l != NULL; l = g_list_next (l))
-	{
-	  GtrTab *tab = GTR_TAB (l->data);
+        {
+          GtrTab *tab = GTR_TAB (l->data);
 
-	  gtr_tab_set_autosave_enabled (tab, autosave);
-	}
+          gtr_tab_set_autosave_enabled (tab, autosave);
+        }
 
       g_list_free (tabs);
     }
@@ -657,16 +638,16 @@ gtr_prefs_manager_autosave_changed (GConfClient * client,
       autosave_interval = gconf_value_get_int (entry->value);
 
       if (autosave_interval <= 0)
-	autosave_interval = 1;
+        autosave_interval = 1;
 
       tabs = gtr_window_get_all_tabs (window);
 
       for (l = tabs; l != NULL; l = g_list_next (l))
-	{
-	  GtrTab *tab = GTR_TAB (l->data);
+        {
+          GtrTab *tab = GTR_TAB (l->data);
 
-	  gtr_tab_set_autosave_interval (tab, autosave_interval);
-	}
+          gtr_tab_set_autosave_interval (tab, autosave_interval);
+        }
 
       g_list_free (tabs);
     }
@@ -674,9 +655,9 @@ gtr_prefs_manager_autosave_changed (GConfClient * client,
 
 static void
 gtr_prefs_manager_scheme_color_changed (GConfClient * client,
-						guint cnxn_id,
-						GConfEntry * entry,
-						gpointer user_data)
+                                        guint cnxn_id,
+                                        GConfEntry * entry,
+                                        gpointer user_data)
 {
   GList *views, *l;
 

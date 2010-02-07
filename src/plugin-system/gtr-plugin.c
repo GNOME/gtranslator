@@ -35,8 +35,7 @@
 #include "gtr-plugin.h"
 
 G_DEFINE_TYPE (GtrPlugin, gtr_plugin, G_TYPE_OBJECT)
-     static void
-       dummy (GtrPlugin * plugin, GtrWindow * window)
+     static void dummy (GtrPlugin * plugin, GtrWindow * window)
 {
   /* Empty */
 }
@@ -51,7 +50,7 @@ static gboolean
 is_configurable (GtrPlugin * plugin)
 {
   return (GTR_PLUGIN_GET_CLASS (plugin)->create_configure_dialog !=
-	  create_configure_dialog);
+          create_configure_dialog);
 }
 
 static void
@@ -79,8 +78,7 @@ gtr_plugin_init (GtrPlugin * plugin)
  * Activates the plugin.
  */
 void
-gtr_plugin_activate (GtrPlugin * plugin,
-			     GtrWindow * window)
+gtr_plugin_activate (GtrPlugin * plugin, GtrWindow * window)
 {
   g_return_if_fail (GTR_IS_PLUGIN (plugin));
   g_return_if_fail (GTR_IS_WINDOW (window));
@@ -96,8 +94,7 @@ gtr_plugin_activate (GtrPlugin * plugin,
  * Deactivates the plugin.
  */
 void
-gtr_plugin_deactivate (GtrPlugin * plugin,
-			       GtrWindow * window)
+gtr_plugin_deactivate (GtrPlugin * plugin, GtrWindow * window)
 {
   g_return_if_fail (GTR_IS_PLUGIN (plugin));
   g_return_if_fail (GTR_IS_WINDOW (window));
@@ -114,8 +111,7 @@ gtr_plugin_deactivate (GtrPlugin * plugin,
  * caused by the plugin.
  */
 void
-gtr_plugin_update_ui (GtrPlugin * plugin,
-			      GtrWindow * window)
+gtr_plugin_update_ui (GtrPlugin * plugin, GtrWindow * window)
 {
   g_return_if_fail (GTR_IS_PLUGIN (plugin));
   g_return_if_fail (GTR_IS_WINDOW (window));

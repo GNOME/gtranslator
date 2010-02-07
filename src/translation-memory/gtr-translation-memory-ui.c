@@ -45,7 +45,7 @@
 							GtrTranslationMemoryUiPrivate))
 
 G_DEFINE_TYPE (GtrTranslationMemoryUi,
-	       gtr_translation_memory_ui, GTK_TYPE_SCROLLED_WINDOW)
+               gtr_translation_memory_ui, GTK_TYPE_SCROLLED_WINDOW)
      struct _GtrTranslationMemoryUiPrivate
      {
        GtkWidget *tree_view;
@@ -64,11 +64,11 @@ G_DEFINE_TYPE (GtrTranslationMemoryUi,
 
      static void
        tree_view_size_cb (GtkWidget * widget,
-			  GtkAllocation * allocation, gpointer user_data);
+                          GtkAllocation * allocation, gpointer user_data);
 
      static void
        on_activate_item_cb (GtkMenuItem * menuitem,
-			    GtrTranslationMemoryUi * tm_ui)
+                            GtrTranslationMemoryUi * tm_ui)
 {
   GtrView *view;
   GtkTextBuffer *buffer;
@@ -104,17 +104,14 @@ G_DEFINE_TYPE (GtrTranslationMemoryUi,
 static void
 free_list (gpointer data, gpointer useless)
 {
-  GtrTranslationMemoryMatch *match =
-    (GtrTranslationMemoryMatch *) data;
+  GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) data;
 
   g_free (match->match);
   g_free (match);
 }
 
 static void
-showed_message_cb (GtrTab * tab,
-		   GtrMsg * msg,
-		   GtrTranslationMemoryUi * tm_ui)
+showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrTranslationMemoryUi * tm_ui)
 {
   GtrTranslationMemory *tm;
   GtkListStore *model;
@@ -136,20 +133,19 @@ showed_message_cb (GtrTab * tab,
 
   model =
     GTK_LIST_STORE (gtk_tree_view_get_model
-		    (GTK_TREE_VIEW (tm_ui->priv->tree_view)));
+                    (GTK_TREE_VIEW (tm_ui->priv->tree_view)));
 
   window = gtr_application_get_active_window (GTR_APP);
   tm_menu = gtr_window_get_tm_menu (window);
 
   g_signal_connect (tm_ui->priv->tree_view,
-		    "size_allocate",
-		    G_CALLBACK (tree_view_size_cb), tm_ui->priv->tree_view);
+                    "size_allocate",
+                    G_CALLBACK (tree_view_size_cb), tm_ui->priv->tree_view);
 
   msgid = gtr_msg_get_msgid (msg);
 
   tm =
-    GTR_TRANSLATION_MEMORY (gtr_application_get_translation_memory
-			    (GTR_APP));
+    GTR_TRANSLATION_MEMORY (gtr_application_get_translation_memory (GTR_APP));
 
   tm_list = gtr_translation_memory_lookup (tm, msgid);
 
@@ -173,24 +169,25 @@ showed_message_cb (GtrTab * tab,
       match = (GtrTranslationMemoryMatch *) l->data;
       tm_ui->priv->tm_list[i - 1] = g_strdup (match->match);
       level_column =
-	gtk_tree_view_get_column (GTK_TREE_VIEW (tm_ui->priv->tree_view), 0);
-      renderers_list = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (level_column));
+        gtk_tree_view_get_column (GTK_TREE_VIEW (tm_ui->priv->tree_view), 0);
+      renderers_list =
+        gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (level_column));
 
       g_object_set (renderers_list->data,
-		    "accel-mods", GDK_CONTROL_MASK, NULL);
+                    "accel-mods", GDK_CONTROL_MASK, NULL);
       g_list_free (renderers_list);
 
       gtk_list_store_append (model, &iter);
       gtk_list_store_set (model,
-			  &iter,
-			  SHORTCUT_COLUMN,
-			  GDK_0 + k,
-			  STRING_COLUMN,
-			  match->match, LEVEL_COLUMN, match->level, -1);
+                          &iter,
+                          SHORTCUT_COLUMN,
+                          GDK_0 + k,
+                          STRING_COLUMN,
+                          match->match, LEVEL_COLUMN, match->level, -1);
       i++;
       k++;
       if (k == MAX_ELEMENTS)
-	break;
+        break;
     }
 
   /* Ensure last element is NULL */
@@ -203,7 +200,7 @@ showed_message_cb (GtrTab * tab,
   manager = gtr_window_get_ui_manager (window);
 
   gtk_menu_set_accel_group (GTK_MENU (items_menu),
-			    gtk_ui_manager_get_accel_group (manager));
+                            gtk_ui_manager_get_accel_group (manager));
 
   do
     {
@@ -216,8 +213,8 @@ showed_message_cb (GtrTab * tab,
       gtk_widget_show (tm_item);
 
       accel_path =
-	g_strdup_printf ("<Gtr-sheet>/Edit/_Translation Memory/%s",
-			 item_name);
+        g_strdup_printf ("<Gtr-sheet>/Edit/_Translation Memory/%s",
+                         item_name);
 
       gtk_menu_item_set_accel_path (GTK_MENU_ITEM (tm_item), accel_path);
       gtk_accel_map_add_entry (accel_path, GDK_0 + (j - 1), GDK_CONTROL_MASK);
@@ -226,13 +223,13 @@ showed_message_cb (GtrTab * tab,
       g_free (item_name);
 
       g_signal_connect (tm_item, "activate",
-			G_CALLBACK (on_activate_item_cb), tm_ui);
+                        G_CALLBACK (on_activate_item_cb), tm_ui);
 
       gtk_menu_shell_append (GTK_MENU_SHELL (items_menu), tm_item);
 
       j++;
       if (j > MAX_ELEMENTS)
-	break;
+        break;
 
     }
   while ((tm_list = g_list_next (tm_list)));
@@ -246,7 +243,7 @@ showed_message_cb (GtrTab * tab,
 
 static void
 tree_view_size_cb (GtkWidget * widget,
-		   GtkAllocation * allocation, gpointer user_data)
+                   GtkAllocation * allocation, gpointer user_data)
 {
   GtkTreeView *treeview;
   GtkTreeViewColumn *column;
@@ -267,8 +264,7 @@ tree_view_size_cb (GtkWidget * widget,
 
 
 static void
-gtr_translation_memory_ui_draw (GtrTranslationMemoryUi *
-					tm_ui)
+gtr_translation_memory_ui_draw (GtrTranslationMemoryUi * tm_ui)
 {
   GtrTranslationMemoryUiPrivate *priv = tm_ui->priv;
   GtkListStore *model;
@@ -279,49 +275,48 @@ gtr_translation_memory_ui_draw (GtrTranslationMemoryUi *
   gtk_widget_show (priv->tree_view);
 
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (tm_ui),
-				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
   model =
     gtk_list_store_new (N_COLUMNS, G_TYPE_INT, G_TYPE_INT, G_TYPE_STRING);
   gtk_tree_view_set_model (GTK_TREE_VIEW (priv->tree_view),
-			   GTK_TREE_MODEL (model));
+                           GTK_TREE_MODEL (model));
 
   shortcut_renderer = gtk_cell_renderer_accel_new ();
   shortcut = gtk_tree_view_column_new_with_attributes (_("Shortcut"),
-						       shortcut_renderer,
-						       "accel-key",
-						       SHORTCUT_COLUMN, NULL);
+                                                       shortcut_renderer,
+                                                       "accel-key",
+                                                       SHORTCUT_COLUMN, NULL);
   g_object_set (shortcut_renderer, "width", 80, NULL);
 
   gtk_tree_view_append_column (GTK_TREE_VIEW (priv->tree_view), shortcut);
 
   level_renderer = gtk_cell_renderer_progress_new ();
   level = gtk_tree_view_column_new_with_attributes (_("Level"),
-						    level_renderer,
-						    "value", LEVEL_COLUMN,
-						    NULL);
+                                                    level_renderer,
+                                                    "value", LEVEL_COLUMN,
+                                                    NULL);
   g_object_set (level_renderer, "width", 80, NULL);
 
   gtk_tree_view_append_column (GTK_TREE_VIEW (priv->tree_view), level);
 
   string_renderer = gtk_cell_renderer_text_new ();
   string = gtk_tree_view_column_new_with_attributes (_("String"),
-						     string_renderer,
-						     "text", STRING_COLUMN,
-						     NULL);
+                                                     string_renderer,
+                                                     "text", STRING_COLUMN,
+                                                     NULL);
   gtk_tree_view_column_set_sizing (string, GTK_TREE_VIEW_COLUMN_FIXED);
 
   g_object_set (string_renderer,
-		"ypad", 0,
-		"xpad", 5,
-		"yalign", 0.0, "wrap-mode", PANGO_WRAP_WORD_CHAR, NULL);
+                "ypad", 0,
+                "xpad", 5,
+                "yalign", 0.0, "wrap-mode", PANGO_WRAP_WORD_CHAR, NULL);
 
   gtk_tree_view_append_column (GTK_TREE_VIEW (priv->tree_view), string);
 }
 
 static void
-gtr_translation_memory_ui_init (GtrTranslationMemoryUi *
-					tm_ui)
+gtr_translation_memory_ui_init (GtrTranslationMemoryUi * tm_ui)
 {
   tm_ui->priv = GTR_TRANSLATION_MEMORY_UI_GET_PRIVATE (tm_ui);
   tm_ui->priv->tm_list = NULL;
@@ -336,18 +331,15 @@ gtr_translation_memory_ui_finalize (GObject * object)
 
   g_strfreev (tm_ui->priv->tm_list);
 
-  G_OBJECT_CLASS (gtr_translation_memory_ui_parent_class)->
-    finalize (object);
+  G_OBJECT_CLASS (gtr_translation_memory_ui_parent_class)->finalize (object);
 }
 
 static void
-gtr_translation_memory_ui_class_init
-  (GtrTranslationMemoryUiClass * klass)
+  gtr_translation_memory_ui_class_init (GtrTranslationMemoryUiClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass,
-			    sizeof (GtrTranslationMemoryUiPrivate));
+  g_type_class_add_private (klass, sizeof (GtrTranslationMemoryUiPrivate));
 
   object_class->finalize = gtr_translation_memory_ui_finalize;
 }
@@ -360,7 +352,7 @@ gtr_translation_memory_ui_new (GtkWidget * tab)
 
   tm_ui->priv->tab = GTR_TAB (tab);
   g_signal_connect (tab,
-		    "showed-message", G_CALLBACK (showed_message_cb), tm_ui);
+                    "showed-message", G_CALLBACK (showed_message_cb), tm_ui);
 
   /* Scrolledwindow needs to be realized to add a widget */
   gtk_container_add (GTK_CONTAINER (tm_ui), tm_ui->priv->tree_view);

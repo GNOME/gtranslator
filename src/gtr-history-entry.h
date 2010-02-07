@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA.
  */
- 
+
 /*
  * Modified by the gedit Team, 2006. See the AUTHORS file for a 
  * list of people on the gtr Team.  
@@ -33,64 +33,62 @@
 
 
 G_BEGIN_DECLS
-
 #define GTR_TYPE_HISTORY_ENTRY             (gtr_history_entry_get_type ())
 #define GTR_HISTORY_ENTRY(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_HISTORY_ENTRY, GtrHistoryEntry))
 #define GTR_HISTORY_ENTRY_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTR_TYPE_HISTORY_ENTRY, GtrHistoryEntryClass))
 #define GTR_IS_HISTORY_ENTRY(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_HISTORY_ENTRY))
 #define GTR_IS_HISTORY_ENTRY_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_HISTORY_ENTRY))
 #define GTR_HISTORY_ENTRY_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTR_TYPE_HISTORY_ENTRY, GtrHistoryEntryClass))
-
-
-typedef struct _GtrHistoryEntry        GtrHistoryEntry;
-typedef struct _GtrHistoryEntryClass   GtrHistoryEntryClass;
+typedef struct _GtrHistoryEntry GtrHistoryEntry;
+typedef struct _GtrHistoryEntryClass GtrHistoryEntryClass;
 typedef struct _GtrHistoryEntryPrivate GtrHistoryEntryPrivate;
 
 struct _GtrHistoryEntryClass
 {
-	GtkComboBoxEntryClass parent_class;
+  GtkComboBoxEntryClass parent_class;
 };
 
 struct _GtrHistoryEntry
 {
-	GtkComboBoxEntry parent_instance;
+  GtkComboBoxEntry parent_instance;
 
-	GtrHistoryEntryPrivate *priv;
+  GtrHistoryEntryPrivate *priv;
 };
 
-GType		 gtr_history_entry_get_type	(void) G_GNUC_CONST;
+GType
+gtr_history_entry_get_type (void)
+  G_GNUC_CONST;
 
-GtkWidget	*gtr_history_entry_new		(const gchar       *history_id,
-							 gboolean           enable_completion);
+     GtkWidget *gtr_history_entry_new (const gchar * history_id,
+                                       gboolean enable_completion);
 
-void		 gtr_history_entry_prepend_text	(GtrHistoryEntry *entry,
-							 const gchar       *text);
+     void gtr_history_entry_prepend_text (GtrHistoryEntry * entry,
+                                          const gchar * text);
 
-void		 gtr_history_entry_append_text	(GtrHistoryEntry *entry,
-							 const gchar       *text);
+     void gtr_history_entry_append_text (GtrHistoryEntry * entry,
+                                         const gchar * text);
 
-void		 gtr_history_entry_clear		(GtrHistoryEntry *entry);
+     void gtr_history_entry_clear (GtrHistoryEntry * entry);
 
-void		 gtr_history_entry_set_history_length	(GtrHistoryEntry *entry,
-							 guint              max_saved);
+     void gtr_history_entry_set_history_length (GtrHistoryEntry * entry,
+                                                guint max_saved);
 
-guint		 gtr_history_entry_get_history_length	(GtrHistoryEntry *gentry);
+     guint gtr_history_entry_get_history_length (GtrHistoryEntry * gentry);
 
-gchar		*gtr_history_entry_get_history_id	(GtrHistoryEntry *entry);
+     gchar *gtr_history_entry_get_history_id (GtrHistoryEntry * entry);
 
-void             gtr_history_entry_set_enable_completion 
-							(GtrHistoryEntry *entry,
-							 gboolean           enable);
-							 
-gboolean         gtr_history_entry_get_enable_completion 
-							(GtrHistoryEntry *entry);
+     void gtr_history_entry_set_enable_completion
+       (GtrHistoryEntry * entry, gboolean enable);
 
-GtkWidget	*gtr_history_entry_get_entry		(GtrHistoryEntry *entry);
+     gboolean gtr_history_entry_get_enable_completion
+       (GtrHistoryEntry * entry);
 
-typedef gchar * (* GtrHistoryEntryEscapeFunc) (const gchar *str);
-void		gtr_history_entry_set_escape_func	(GtrHistoryEntry *entry,
-							 GtrHistoryEntryEscapeFunc escape_func);
+     GtkWidget *gtr_history_entry_get_entry (GtrHistoryEntry * entry);
+
+     typedef gchar *(*GtrHistoryEntryEscapeFunc) (const gchar * str);
+     void gtr_history_entry_set_escape_func (GtrHistoryEntry * entry,
+                                             GtrHistoryEntryEscapeFunc
+                                             escape_func);
 
 G_END_DECLS
-
 #endif /* __GTR_HISTORY_ENTRY_H__ */

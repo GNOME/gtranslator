@@ -39,8 +39,7 @@
 						 	GtrCommentDialogPrivate))
 
 
-G_DEFINE_TYPE (GtrCommentDialog, gtr_comment_dialog,
-	       GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (GtrCommentDialog, gtr_comment_dialog, GTK_TYPE_DIALOG)
      struct _GtrCommentDialogPrivate
      {
        GtkWidget *main_box;
@@ -91,7 +90,7 @@ gtr_comment_dialog_init (GtrCommentDialog * dlg)
   dlg->priv = GTR_COMMENT_DIALOG_GET_PRIVATE (dlg);
 
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
-			  GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE, NULL);
+                          GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE, NULL);
 
   gtk_window_set_title (GTK_WINDOW (dlg), _("Edit Comment"));
   gtk_window_set_default_size (GTK_WINDOW (dlg), 300, 200);
@@ -101,35 +100,34 @@ gtr_comment_dialog_init (GtrCommentDialog * dlg)
 
   /* HIG defaults */
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);	/* 2 * 5 + 2 = 12 */
+  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);    /* 2 * 5 + 2 = 12 */
   gtk_container_set_border_width (GTK_CONTAINER
-				  (GTK_DIALOG (dlg)->action_area), 5);
+                                  (GTK_DIALOG (dlg)->action_area), 5);
   gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 4);
 
   g_signal_connect (dlg,
-		    "response", G_CALLBACK (dialog_response_handler), NULL);
+                    "response", G_CALLBACK (dialog_response_handler), NULL);
 
   /*Glade */
   path = gtr_dirs_get_ui_file ("gtr-comment-dialog.ui");
   ret = gtr_utils_get_ui_objects (path,
-					  root_objects,
-					  &error_widget,
-					  "main_box", &dlg->priv->main_box,
-					  "comment", &dlg->priv->comment,
-					  NULL);
+                                  root_objects,
+                                  &error_widget,
+                                  "main_box", &dlg->priv->main_box,
+                                  "comment", &dlg->priv->comment, NULL);
   g_free (path);
 
   if (!ret)
     {
       gtk_widget_show (error_widget);
       gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-			  error_widget, TRUE, TRUE, 0);
+                          error_widget, TRUE, TRUE, 0);
 
       return;
     }
 
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-		      dlg->priv->main_box, TRUE, TRUE, 0);
+                      dlg->priv->main_box, TRUE, TRUE, 0);
 
   gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->main_box), 5);
 
@@ -167,9 +165,9 @@ gtr_show_comment_dialog (GtrWindow * window)
       dlg = g_object_new (GTR_TYPE_COMMENT_DIALOG, NULL);
       buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (dlg->priv->comment));
       g_signal_connect (dlg,
-			"destroy", G_CALLBACK (gtk_widget_destroyed), &dlg);
+                        "destroy", G_CALLBACK (gtk_widget_destroyed), &dlg);
       g_signal_connect (buf,
-			"changed", G_CALLBACK (comment_changed_cb), window);
+                        "changed", G_CALLBACK (comment_changed_cb), window);
 
       gtk_widget_show (GTK_WIDGET (dlg));
     }

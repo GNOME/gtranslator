@@ -38,19 +38,16 @@
 						 	GtrJumpDialogPrivate))
 
 
-G_DEFINE_TYPE (GtrJumpDialog, gtr_jump_dialog,
-	       GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (GtrJumpDialog, gtr_jump_dialog, GTK_TYPE_DIALOG)
+     struct _GtrJumpDialogPrivate
+     {
+       GtkWidget *main_box;
+       GtkWidget *jump;
 
-struct _GtrJumpDialogPrivate
-{
-  GtkWidget *main_box;
-  GtkWidget *jump;
+       GtrWindow *window;
+     };
 
-  GtrWindow *window;
-};
-
-static void
-dialog_response_handler (GtkDialog * dlg, gint res_id)
+     static void dialog_response_handler (GtkDialog * dlg, gint res_id)
 {
   GtrJumpDialog *dialog = GTR_JUMP_DIALOG (dlg);
   GtrTab *tab;
@@ -60,8 +57,8 @@ dialog_response_handler (GtkDialog * dlg, gint res_id)
     {
     case GTK_RESPONSE_OK:
       number =
-	gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
-					  (dialog->priv->jump));
+        gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
+                                          (dialog->priv->jump));
       tab = gtr_window_get_active_tab (dialog->priv->window);
       gtr_tab_go_to_number (tab, number - 1);
       gtk_widget_destroy (GTK_WIDGET (dlg));
@@ -87,9 +84,9 @@ gtr_jump_dialog_init (GtrJumpDialog * dlg)
   dlg->priv = GTR_JUMP_DIALOG_GET_PRIVATE (dlg);
 
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
-			  GTK_STOCK_OK,
-			  GTK_RESPONSE_OK,
-			  GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, NULL);
+                          GTK_STOCK_OK,
+                          GTK_RESPONSE_OK,
+                          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, NULL);
 
   gtk_window_set_title (GTK_WINDOW (dlg), _("Go to Message"));
   gtk_window_set_default_size (GTK_WINDOW (dlg), 300, 100);
@@ -99,36 +96,36 @@ gtr_jump_dialog_init (GtrJumpDialog * dlg)
 
   /* HIG defaults */
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);	/* 2 * 5 + 2 = 12 */
+  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);    /* 2 * 5 + 2 = 12 */
   gtk_container_set_border_width (GTK_CONTAINER
-				  (GTK_DIALOG (dlg)->action_area), 5);
+                                  (GTK_DIALOG (dlg)->action_area), 5);
   gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 4);
 
   gtk_dialog_set_default_response (GTK_DIALOG (dlg), GTK_RESPONSE_OK);
 
   g_signal_connect (dlg,
-		    "response", G_CALLBACK (dialog_response_handler), NULL);
+                    "response", G_CALLBACK (dialog_response_handler), NULL);
 
   /*Glade */
   path = gtr_dirs_get_ui_file ("gtr-jump-dialog.ui");
   ret = gtr_utils_get_ui_objects (path,
-					  root_objects,
-					  &error_widget,
-					  "main_box", &dlg->priv->main_box,
-					  "jump", &dlg->priv->jump, NULL);
+                                  root_objects,
+                                  &error_widget,
+                                  "main_box", &dlg->priv->main_box,
+                                  "jump", &dlg->priv->jump, NULL);
   g_free (path);
 
   if (!ret)
     {
       gtk_widget_show (error_widget);
       gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-			  error_widget, TRUE, TRUE, 0);
+                          error_widget, TRUE, TRUE, 0);
 
       return;
     }
 
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-		      dlg->priv->main_box, TRUE, TRUE, 0);
+                      dlg->priv->main_box, TRUE, TRUE, 0);
 
   gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->main_box), 5);
 }
@@ -165,7 +162,7 @@ gtr_show_jump_dialog (GtrWindow * window)
       dlg = g_object_new (GTR_TYPE_JUMP_DIALOG, NULL);
 
       g_signal_connect (dlg,
-			"destroy", G_CALLBACK (gtk_widget_destroyed), &dlg);
+                        "destroy", G_CALLBACK (gtk_widget_destroyed), &dlg);
 
       dlg->priv->window = window;
 
@@ -174,7 +171,7 @@ gtr_show_jump_dialog (GtrWindow * window)
       po = gtr_tab_get_po (tab);
       messages = gtr_po_get_messages_count (po);
       gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->jump),
-				 1.0, (gdouble) messages);
+                                 1.0, (gdouble) messages);
 
       gtk_widget_show (GTK_WIDGET (dlg));
     }

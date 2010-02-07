@@ -69,9 +69,8 @@ gtr_context_panel_get_type (void)
 
      GtkWidget *gtr_context_panel_new (GtkWidget * tab);
 
-     GtkTextView
-       *gtr_context_panel_get_context_text_view
-       (GtrContextPanel * panel);
+GtkTextView
+  * gtr_context_panel_get_context_text_view (GtrContextPanel * panel);
 
 G_END_DECLS
 #endif /* __CONTEXT_PANEL_H__ */

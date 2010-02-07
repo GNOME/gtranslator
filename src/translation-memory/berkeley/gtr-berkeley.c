@@ -22,7 +22,7 @@
 #include <config.h>
 #endif
 
-#include DB_HEADER		//This can be something like <db.h>
+#include DB_HEADER              //This can be something like <db.h>
 #include "gtr-berkeley.h"
 #include "gtr-translation-memory.h"
 #include "gtr-db-trans.h"
@@ -42,14 +42,13 @@
 						 GtrBerkeleyPrivate))
 
 static void
-gtr_translation_memory_iface_init (GtrTranslationMemoryIface *
-					   iface);
+gtr_translation_memory_iface_init (GtrTranslationMemoryIface * iface);
 
 G_DEFINE_TYPE_WITH_CODE (GtrBerkeley,
-			 gtr_berkeley,
-			 G_TYPE_OBJECT,
-			 G_IMPLEMENT_INTERFACE (GTR_TYPE_TRANSLATION_MEMORY,
-						gtr_translation_memory_iface_init))
+                         gtr_berkeley,
+                         G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (GTR_TYPE_TRANSLATION_MEMORY,
+                                                gtr_translation_memory_iface_init))
      struct _GtrBerkeleyPrivate
      {
        GtrDbOrig *orig;
@@ -63,8 +62,7 @@ G_DEFINE_TYPE_WITH_CODE (GtrBerkeley,
 
      static gboolean
        gtr_berkeley_store (GtrTranslationMemory * tm,
-				   const gchar * original,
-				   const gchar * translation)
+                           const gchar * original, const gchar * translation)
 {
   GtrBerkeley *ber = GTR_BERKELEY (tm);
   gboolean ok;
@@ -75,23 +73,21 @@ G_DEFINE_TYPE_WITH_CODE (GtrBerkeley,
   key = gtr_db_orig_read (ber->priv->orig, original);
   if (key == 0)
     {
-      key = gtr_db_trans_write_string (ber->priv->trans,
-					       translation, 0);
+      key = gtr_db_trans_write_string (ber->priv->trans, translation, 0);
 
-      ok = (key != 0)
-	&& gtr_db_orig_write (ber->priv->orig, original, key);
+      ok = (key != 0) && gtr_db_orig_write (ber->priv->orig, original, key);
       if (ok)
-	{
-	  gchar **words = NULL;
-	  gsize i;
+        {
+          gchar **words = NULL;
+          gsize i;
 
-	  words = gtr_utils_split_string_in_words (original);
-	  gsize sz = g_strv_length (words);
+          words = gtr_utils_split_string_in_words (original);
+          gsize sz = g_strv_length (words);
 
-	  for (i = 0; i < sz; i++)
-	    gtr_db_words_append (ber->priv->words, words[i], sz, key);
-	  g_strfreev (words);
-	}
+          for (i = 0; i < sz; i++)
+            gtr_db_words_append (ber->priv->words, words[i], sz, key);
+          g_strfreev (words);
+        }
       return ok;
     }
   else
@@ -100,53 +96,53 @@ G_DEFINE_TYPE_WITH_CODE (GtrBerkeley,
       gint i = 0;
       gchar *translation_collate;
       GPtrArray *t = gtr_db_trans_read (ber->priv->trans,
-						key);
+                                        key);
       if (!t)
-	return FALSE;
+        return FALSE;
 
       translation_collate = g_utf8_collate_key (translation, -1);
       // -1 because we know that last element is NULL
       while (i < t->len - 1)
-	{
-	  gchar *array_word =
-	    g_utf8_collate_key (g_ptr_array_index (t, i), -1);
+        {
+          gchar *array_word =
+            g_utf8_collate_key (g_ptr_array_index (t, i), -1);
 
-	  if (strcmp (array_word, translation_collate) == 0)
-	    {
-	      found = TRUE;
-	      g_free (array_word);
-	      break;
-	    }
+          if (strcmp (array_word, translation_collate) == 0)
+            {
+              found = TRUE;
+              g_free (array_word);
+              break;
+            }
 
-	  g_free (array_word);
-	  i++;
-	}
+          g_free (array_word);
+          i++;
+        }
       g_free (translation_collate);
 
       if (!found)
-	{
-	  gchar **translations = NULL;
+        {
+          gchar **translations = NULL;
 
-	  /*
-	   * We remove the previous NULL data and then we add the new data
-	   */
-	  g_ptr_array_remove_index (t, t->len - 1);
-	  g_ptr_array_add (t, g_strdup (translation));
-	  g_ptr_array_add (t, NULL);
+          /*
+           * We remove the previous NULL data and then we add the new data
+           */
+          g_ptr_array_remove_index (t, t->len - 1);
+          g_ptr_array_add (t, g_strdup (translation));
+          g_ptr_array_add (t, NULL);
 
-	  translations = (gchar **) g_ptr_array_free (t, FALSE);
+          translations = (gchar **) g_ptr_array_free (t, FALSE);
 
-	  db_recno_t key2 = gtr_db_trans_write (ber->priv->trans,
-							translations,
-							key);
-	  g_strfreev (translations);
-	  ok = (key2 != 0);
-	}
+          db_recno_t key2 = gtr_db_trans_write (ber->priv->trans,
+                                                translations,
+                                                key);
+          g_strfreev (translations);
+          ok = (key2 != 0);
+        }
       else
-	{
-	  ok = TRUE;
-	  g_ptr_array_free (t, TRUE);
-	}
+        {
+          ok = TRUE;
+          g_ptr_array_free (t, TRUE);
+        }
 
       return ok;
     }
@@ -154,7 +150,7 @@ G_DEFINE_TYPE_WITH_CODE (GtrBerkeley,
 
 static GtrDbKeys *
 union_of_db_keys (GtrBerkeley * ber,
-		  gsize cnt, GtrDbKeys ** keys, gboolean * mask)
+                  gsize cnt, GtrDbKeys ** keys, gboolean * mask)
 {
   gsize i, minSize;
   db_recno_t **heads = g_new (db_recno_t *, cnt);
@@ -167,20 +163,20 @@ union_of_db_keys (GtrBerkeley * ber,
   for (minSize = 0, i = 0; i < cnt; i++)
     {
       if (mask[i])
-	{
-	  gsize count = gtr_db_keys_get_count (keys[i]);
-	  db_recno_t *list = gtr_db_keys_get_list (keys[i]);
+        {
+          gsize count = gtr_db_keys_get_count (keys[i]);
+          db_recno_t *list = gtr_db_keys_get_list (keys[i]);
 
-	  counters[i] = count;
-	  heads[i] = list;
-	  if (minSize == 0 || minSize > count)
-	    minSize = count;
-	}
+          counters[i] = count;
+          heads[i] = list;
+          if (minSize == 0 || minSize > count)
+            minSize = count;
+        }
       else
-	{
-	  counters[i] = 0;
-	  heads[i] = NULL;
-	}
+        {
+          counters[i] = 0;
+          heads[i] = NULL;
+        }
     }
   if (minSize == 0)
     {
@@ -211,52 +207,52 @@ union_of_db_keys (GtrBerkeley * ber,
       smallestValue = 0;
 
       for (i = 0; i < cnt; i++)
-	{
-	  if (counters[i] == 0)
-	    continue;
-	  if (smallestValue == 0)
-	    {
-	      smallestValue = *heads[i];
-	      smallestIndex = i;
-	    }
-	  else if (smallestValue != *heads[i])
-	    {
-	      allSame = FALSE;
-	      if (smallestValue > *heads[i])
-		{
-		  smallestValue = *heads[i];
-		  smallestIndex = i;
-		}
-	    }
-	}
+        {
+          if (counters[i] == 0)
+            continue;
+          if (smallestValue == 0)
+            {
+              smallestValue = *heads[i];
+              smallestIndex = i;
+            }
+          else if (smallestValue != *heads[i])
+            {
+              allSame = FALSE;
+              if (smallestValue > *heads[i])
+                {
+                  smallestValue = *heads[i];
+                  smallestIndex = i;
+                }
+            }
+        }
 
       if (smallestValue == 0)
-	break;
+        break;
 
       if (allSame)
-	{
-	  gboolean breakMe = FALSE;
-	  res_list[res_count++] = smallestValue;
-	  for (i = 0; i < cnt; i++)
-	    {
-	      if (counters[i] == 0)
-		continue;
-	      if (--counters[i] == 0)
-		{
-		  breakMe = TRUE;
-		  break;
-		}
-	      heads[i]++;
-	    }
-	  if (breakMe)
-	    break;
-	}
+        {
+          gboolean breakMe = FALSE;
+          res_list[res_count++] = smallestValue;
+          for (i = 0; i < cnt; i++)
+            {
+              if (counters[i] == 0)
+                continue;
+              if (--counters[i] == 0)
+                {
+                  breakMe = TRUE;
+                  break;
+                }
+              heads[i]++;
+            }
+          if (breakMe)
+            break;
+        }
       else
-	{
-	  if (--counters[smallestIndex] == 0)
-	    break;
-	  heads[smallestIndex]++;
-	}
+        {
+          if (--counters[smallestIndex] == 0)
+            break;
+          heads[smallestIndex]++;
+        }
     }
 
   g_free (counters);
@@ -278,14 +274,14 @@ advance_cycle (gsize omitted[], gsize depth, gsize cnt)
   if (++omitted[depth] == cnt)
     {
       if (depth == 0)
-	return FALSE;
+        return FALSE;
       depth--;
       if (!advance_cycle (omitted, depth, cnt))
-	return FALSE;
+        return FALSE;
       depth++;
       omitted[depth] = omitted[depth - 1] + 1;
       if (omitted[depth] >= cnt)
-	return FALSE;
+        return FALSE;
       return TRUE;
     }
   else
@@ -294,7 +290,7 @@ advance_cycle (gsize omitted[], gsize depth, gsize cnt)
 
 static gboolean
 look_fuzzy (GtrBerkeley * ber,
-	    gchar ** words, GHashTable ** hash, gsize omits, gsize delta)
+            gchar ** words, GHashTable ** hash, gsize omits, gsize delta)
 {
 #define RETURN_WITH_CLEANUP(val) \
 	for (i = 0; i < cnt_orig; i++) \
@@ -325,13 +321,13 @@ look_fuzzy (GtrBerkeley * ber,
 
   for (missing = 0, slot = 0, i = 0; i < cnt; i++)
     {
-      keys[i] = NULL;		// so that unused entries are NULL
+      keys[i] = NULL;           // so that unused entries are NULL
       keys[slot] = gtr_db_words_read (ber->priv->words,
-					      words[i], cnt + delta);
+                                      words[i], cnt + delta);
       if (keys[slot])
-	slot++;
+        slot++;
       else
-	missing++;
+        missing++;
     }
 
   if (missing >= cnt || missing > omits)
@@ -343,117 +339,114 @@ look_fuzzy (GtrBerkeley * ber,
   if (omits == 0)
     {
       for (i = 0; i < cnt; i++)
-	mask[i] = TRUE;
+        mask[i] = TRUE;
 
       result = union_of_db_keys (ber, cnt, keys, mask);
       if (result != NULL)
-	{
-	  GPtrArray *array;
+        {
+          GPtrArray *array;
 
-	  db_recno_t *list = gtr_db_keys_get_list (result);
-	  for (i = 0; i < gtr_db_keys_get_count (result); i++)
-	    {
-	      array = gtr_db_trans_read (ber->priv->trans, list[i]);
-	      if (array)
-		{
-		  gint j = 0;
-		  gint score = 0;
+          db_recno_t *list = gtr_db_keys_get_list (result);
+          for (i = 0; i < gtr_db_keys_get_count (result); i++)
+            {
+              array = gtr_db_trans_read (ber->priv->trans, list[i]);
+              if (array)
+                {
+                  gint j = 0;
+                  gint score = 0;
 
-		  score = (ber->priv->max_omits - omits) * 100 /
-		    (ber->priv->max_omits + 1) +
-		    (ber->priv->max_delta - delta) * 100 /
-		    ((ber->priv->max_delta + 1) * (ber->priv->max_delta + 1));
+                  score = (ber->priv->max_omits - omits) * 100 /
+                    (ber->priv->max_omits + 1) +
+                    (ber->priv->max_delta - delta) * 100 /
+                    ((ber->priv->max_delta + 1) * (ber->priv->max_delta + 1));
 
-		  if (score == 0)
-		    score = 1;
+                  if (score == 0)
+                    score = 1;
 
-		  while (j < array->len - 1)
-		    {
-		      gchar *string;
+                  while (j < array->len - 1)
+                    {
+                      gchar *string;
 
-		      string = (gchar *) g_ptr_array_index (array, j);
+                      string = (gchar *) g_ptr_array_index (array, j);
 
-		      /* The first adding is always better */
-		      if (!g_hash_table_lookup (*hash, string))
-			g_hash_table_insert (*hash, string,
-					     GINT_TO_POINTER (score));
+                      /* The first adding is always better */
+                      if (!g_hash_table_lookup (*hash, string))
+                        g_hash_table_insert (*hash, string,
+                                             GINT_TO_POINTER (score));
 
-		      j++;
-		    }
-		  g_ptr_array_free (array, TRUE);
-		}
-	    }
-	  g_object_unref (result);
-	RETURN_WITH_CLEANUP (TRUE)}
+                      j++;
+                    }
+                  g_ptr_array_free (array, TRUE);
+                }
+            }
+          g_object_unref (result);
+        RETURN_WITH_CLEANUP (TRUE)}
     }
   else
     {
       gsize depth = omits - 1;
 
       for (i = 0; i < omits; i++)
-	omitted[i] = i;
+        omitted[i] = i;
       for (;;)
-	{
-	  for (i = 0; i < cnt; i++)
-	    mask[i] = TRUE;
-	  for (i = 0; i < omits; i++)
-	    mask[omitted[i]] = FALSE;
+        {
+          for (i = 0; i < cnt; i++)
+            mask[i] = TRUE;
+          for (i = 0; i < omits; i++)
+            mask[omitted[i]] = FALSE;
 
-	  result = union_of_db_keys (ber, cnt, keys, mask);
-	  if (result != NULL)
-	    {
-	      GPtrArray *array;
+          result = union_of_db_keys (ber, cnt, keys, mask);
+          if (result != NULL)
+            {
+              GPtrArray *array;
 
-	      db_recno_t *list = gtr_db_keys_get_list (result);
-	      for (i = 0; i < gtr_db_keys_get_count (result); i++)
-		{
-		  array = gtr_db_trans_read (ber->priv->trans,
-						     list[i]);
-		  if (array)
-		    {
-		      gint j = 0;
-		      gint score = 0;
+              db_recno_t *list = gtr_db_keys_get_list (result);
+              for (i = 0; i < gtr_db_keys_get_count (result); i++)
+                {
+                  array = gtr_db_trans_read (ber->priv->trans, list[i]);
+                  if (array)
+                    {
+                      gint j = 0;
+                      gint score = 0;
 
-		      score = (ber->priv->max_omits - omits) * 100 /
-			(ber->priv->max_omits + 1) +
-			(ber->priv->max_delta - delta) * 100 /
-			((ber->priv->max_delta + 1) *
-			 (ber->priv->max_delta + 1));
+                      score = (ber->priv->max_omits - omits) * 100 /
+                        (ber->priv->max_omits + 1) +
+                        (ber->priv->max_delta - delta) * 100 /
+                        ((ber->priv->max_delta + 1) *
+                         (ber->priv->max_delta + 1));
 
-		      if (score == 0)
-			score = 1;
+                      if (score == 0)
+                        score = 1;
 
-		      while (j < array->len - 1)
-			{
-			  gchar *string;
+                      while (j < array->len - 1)
+                        {
+                          gchar *string;
 
-			  string = (gchar *) g_ptr_array_index (array, j);
+                          string = (gchar *) g_ptr_array_index (array, j);
 
-			  if (!g_hash_table_lookup (*hash, string))
-			    g_hash_table_insert (*hash, string,
-						 GINT_TO_POINTER (score));
+                          if (!g_hash_table_lookup (*hash, string))
+                            g_hash_table_insert (*hash, string,
+                                                 GINT_TO_POINTER (score));
 
-			  j++;
-			}
-		      g_ptr_array_free (array, TRUE);
-		    }
-		}
-	      g_object_unref (result);
-	    RETURN_WITH_CLEANUP (TRUE)}
+                          j++;
+                        }
+                      g_ptr_array_free (array, TRUE);
+                    }
+                }
+              g_object_unref (result);
+            RETURN_WITH_CLEANUP (TRUE)}
 
-	  if (!advance_cycle (omitted, depth, cnt))
-	    break;
-	}
+          if (!advance_cycle (omitted, depth, cnt))
+            break;
+        }
     }
 RETURN_WITH_CLEANUP (FALSE)}
 
 static gint
 insert_match_sorted (gconstpointer a, gconstpointer b)
 {
-  GtrTranslationMemoryMatch *match1 =
-    (GtrTranslationMemoryMatch *) a;
-  GtrTranslationMemoryMatch *match2 =
-    (GtrTranslationMemoryMatch *) b;
+  GtrTranslationMemoryMatch *match1 = (GtrTranslationMemoryMatch *) a;
+  GtrTranslationMemoryMatch *match2 = (GtrTranslationMemoryMatch *) b;
 
   if (match1->level < match2->level)
     return 1;
@@ -464,8 +457,7 @@ insert_match_sorted (gconstpointer a, gconstpointer b)
 }
 
 static GList *
-gtr_berkeley_lookup (GtrTranslationMemory * tm,
-			     const gchar * phrase)
+gtr_berkeley_lookup (GtrTranslationMemory * tm, const gchar * phrase)
 {
   GPtrArray *array = NULL;
   gchar **words;
@@ -490,19 +482,19 @@ gtr_berkeley_lookup (GtrTranslationMemory * tm,
       array = gtr_db_trans_read (ber->priv->trans, key);
 
       if (array != NULL)
-	{
-	  while (i < array->len - 1 && i < ber->priv->max_items)
-	    {
-	      g_hash_table_insert (hash,
-				   g_strdup (g_ptr_array_index (array, i)),
-				   GINT_TO_POINTER (100));
-	      i++;
-	    }
+        {
+          while (i < array->len - 1 && i < ber->priv->max_items)
+            {
+              g_hash_table_insert (hash,
+                                   g_strdup (g_ptr_array_index (array, i)),
+                                   GINT_TO_POINTER (100));
+              i++;
+            }
 
-	  g_ptr_array_free (array, TRUE);
+          g_ptr_array_free (array, TRUE);
 
-	  goto list;
-	}
+          goto list;
+        }
     }
 
   // Then, try to find inexact one within defined limits
@@ -515,18 +507,17 @@ gtr_berkeley_lookup (GtrTranslationMemory * tm,
        && g_hash_table_size (hash) < ber->priv->max_items; omits++)
     {
       for (delta = 0;
-	   delta <= ber->priv->max_delta
-	   && g_hash_table_size (hash) < ber->priv->max_items; delta++)
-	{
-	  look_fuzzy (ber, words, &hash, omits, delta);
-	}
+           delta <= ber->priv->max_delta
+           && g_hash_table_size (hash) < ber->priv->max_items; delta++)
+        {
+          look_fuzzy (ber, words, &hash, omits, delta);
+        }
     }
 
 list:g_hash_table_iter_init (&iter, hash);
   while (g_hash_table_iter_next (&iter, &hkey, &value))
     {
-      GtrTranslationMemoryMatch *match =
-	g_new (GtrTranslationMemoryMatch, 1);
+      GtrTranslationMemoryMatch *match = g_new (GtrTranslationMemoryMatch, 1);
       match->match = g_strdup (hkey);
       match->level = GPOINTER_TO_INT (value);
 
@@ -540,8 +531,7 @@ list:g_hash_table_iter_init (&iter, hash);
 }
 
 static void
-gtr_berkeley_set_max_omits (GtrTranslationMemory * tm,
-				    gsize omits)
+gtr_berkeley_set_max_omits (GtrTranslationMemory * tm, gsize omits)
 {
   GtrBerkeley *ber = GTR_BERKELEY (tm);
 
@@ -549,8 +539,7 @@ gtr_berkeley_set_max_omits (GtrTranslationMemory * tm,
 }
 
 static void
-gtr_berkeley_set_max_delta (GtrTranslationMemory * tm,
-				    gsize delta)
+gtr_berkeley_set_max_delta (GtrTranslationMemory * tm, gsize delta)
 {
   GtrBerkeley *ber = GTR_BERKELEY (tm);
 
@@ -558,8 +547,7 @@ gtr_berkeley_set_max_delta (GtrTranslationMemory * tm,
 }
 
 static void
-gtr_berkeley_set_max_items (GtrTranslationMemory * tm,
-				    gint items)
+gtr_berkeley_set_max_items (GtrTranslationMemory * tm, gint items)
 {
   GtrBerkeley *ber = GTR_BERKELEY (tm);
 
@@ -567,8 +555,7 @@ gtr_berkeley_set_max_items (GtrTranslationMemory * tm,
 }
 
 static void
-gtr_translation_memory_iface_init (GtrTranslationMemoryIface *
-					   iface)
+gtr_translation_memory_iface_init (GtrTranslationMemoryIface * iface)
 {
   iface->store = gtr_berkeley_store;
   iface->lookup = gtr_berkeley_lookup;

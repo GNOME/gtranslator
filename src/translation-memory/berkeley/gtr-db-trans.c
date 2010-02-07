@@ -46,7 +46,7 @@ G_DEFINE_TYPE (GtrDbTrans, gtr_db_trans, GTR_TYPE_DB_BASE)
   //db_trans->priv = GTR_DB_TRANS_GET_PRIVATE (db_trans);
 
   gtr_db_base_create_dabatase (GTR_DB_BASE (db_trans),
-				       "translations.db", DB_RECNO);
+                               "translations.db", DB_RECNO);
 }
 
 static void
@@ -94,7 +94,7 @@ gtr_db_trans_new ()
  */
 db_recno_t
 gtr_db_trans_write_string (GtrDbTrans * db_trans,
-				   const gchar * translation, db_recno_t key)
+                           const gchar * translation, db_recno_t key)
 {
   gchar *array[2];
   db_recno_t toret;
@@ -121,7 +121,7 @@ gtr_db_trans_write_string (GtrDbTrans * db_trans,
  */
 db_recno_t
 gtr_db_trans_write (GtrDbTrans * db_trans,
-			    gchar ** translations, db_recno_t index)
+                    gchar ** translations, db_recno_t index)
 {
   DBT key, data;
   gsize bufLen;
@@ -179,15 +179,14 @@ gtr_db_trans_write (GtrDbTrans * db_trans,
   if (index == 0)
     {
       error = gtr_db_base_put (GTR_DB_BASE (db_trans),
-				       &key, &data, DB_APPEND);
+                               &key, &data, DB_APPEND);
     }
   else
     {
       key.data = &index;
       key.size = sizeof (index);
 
-      error = gtr_db_base_put (GTR_DB_BASE (db_trans),
-				       &key, &data, 0);
+      error = gtr_db_base_put (GTR_DB_BASE (db_trans), &key, &data, 0);
     }
 
   if (error != 0)

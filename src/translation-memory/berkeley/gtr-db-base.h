@@ -69,17 +69,14 @@ gtr_db_base_get_type (void)
      GType gtr_db_base_register_type (GTypeModule * module);
 
      void gtr_db_base_create_dabatase (GtrDbBase * base,
-					       const gchar * filename,
-					       DBTYPE type);
+                                       const gchar * filename, DBTYPE type);
 
-     void gtr_db_base_show_error (GtrDbBase * base,
-					  gint error);
+     void gtr_db_base_show_error (GtrDbBase * base, gint error);
 
      gint gtr_db_base_put (GtrDbBase * base,
-				   DBT * key, DBT * data, u_int32_t flags);
+                           DBT * key, DBT * data, u_int32_t flags);
 
-     gint gtr_db_base_get (GtrDbBase * base,
-				   DBT * key, DBT * data);
+     gint gtr_db_base_get (GtrDbBase * base, DBT * key, DBT * data);
 
 G_END_DECLS
 #endif /* __DB_BASE_H__ */

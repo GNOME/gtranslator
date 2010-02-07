@@ -39,33 +39,32 @@
 
 
 G_DEFINE_TYPE (GtrMsg, gtr_msg, G_TYPE_OBJECT)
+     struct _GtrMsgPrivate
+     {
+       po_message_iterator_t iterator;
 
-struct _GtrMsgPrivate
-{
-  po_message_iterator_t iterator;
+       po_message_t message;
 
-  po_message_t message;
+       GtrMsgStatus status;
 
-  GtrMsgStatus status;
+       GtkTreeRowReference *row_reference;
 
-  GtkTreeRowReference *row_reference;
+       gint po_position;
+     };
 
-  gint po_position;
-};
+     enum
+     {
+       PROP_0,
+       PROP_GETTEXT_ITER,
+       PROP_GETTEXT_MSG
+     };
 
-enum
-{
-  PROP_0,
-  PROP_GETTEXT_ITER,
-  PROP_GETTEXT_MSG
-};
+     static gchar *message_error = NULL;
 
-static gchar *message_error = NULL;
-
-static void
-gtr_msg_set_property (GObject * object,
-			      guint prop_id,
-			      const GValue * value, GParamSpec * pspec)
+     static void
+       gtr_msg_set_property (GObject * object,
+                             guint prop_id,
+                             const GValue * value, GParamSpec * pspec)
 {
   GtrMsg *msg = GTR_MSG (object);
 
@@ -85,8 +84,7 @@ gtr_msg_set_property (GObject * object,
 
 static void
 gtr_msg_get_property (GObject * object,
-			      guint prop_id,
-			      GValue * value, GParamSpec * pspec)
+                      guint prop_id, GValue * value, GParamSpec * pspec)
 {
   GtrMsg *msg = GTR_MSG (object);
 
@@ -128,18 +126,18 @@ gtr_msg_class_init (GtrMsgClass * klass)
   object_class->get_property = gtr_msg_get_property;
 
   g_object_class_install_property (object_class,
-				   PROP_GETTEXT_MSG,
-				   g_param_spec_pointer ("gettext-iter",
-							 "Gettext iterator",
-							 "The po_message_iterator_t pointer",
-							 G_PARAM_READWRITE));
+                                   PROP_GETTEXT_MSG,
+                                   g_param_spec_pointer ("gettext-iter",
+                                                         "Gettext iterator",
+                                                         "The po_message_iterator_t pointer",
+                                                         G_PARAM_READWRITE));
 
   g_object_class_install_property (object_class,
-				   PROP_GETTEXT_MSG,
-				   g_param_spec_pointer ("gettext-msg",
-							 "Gettext msg",
-							 "The po_message_t pointer",
-							 G_PARAM_READWRITE));
+                                   PROP_GETTEXT_MSG,
+                                   g_param_spec_pointer ("gettext-msg",
+                                                         "Gettext msg",
+                                                         "The po_message_t pointer",
+                                                         G_PARAM_READWRITE));
 }
 
 /***************************** Public funcs ***********************************/
@@ -196,8 +194,7 @@ gtr_msg_get_iterator (GtrMsg * msg)
  * Sets the iterator into the #GtrMsg class.
  **/
 void
-gtr_msg_set_iterator (GtrMsg * msg,
-			      po_message_iterator_t iter)
+gtr_msg_set_iterator (GtrMsg * msg, po_message_iterator_t iter)
 {
   g_return_if_fail (GTR_IS_MSG (msg));
 
@@ -261,8 +258,7 @@ gtr_msg_get_row_reference (GtrMsg * msg)
  * Sets the GtkTreeRowReference from the messages table for the given message
  **/
 void
-gtr_msg_set_row_reference (GtrMsg * msg,
-				   GtkTreeRowReference * row_reference)
+gtr_msg_set_row_reference (GtrMsg * msg, GtkTreeRowReference * row_reference)
 {
   g_return_if_fail (GTR_IS_MSG (msg));
 
@@ -287,14 +283,14 @@ gtr_msg_is_translated (GtrMsg * msg)
       gint i;
 
       for (i = 0;; i++)
-	{
-	  const gchar *str_i =
-	    po_message_msgstr_plural (msg->priv->message, i);
-	  if (str_i == NULL)
-	    break;
-	  if (str_i[0] == '\0')
-	    return FALSE;
-	}
+        {
+          const gchar *str_i =
+            po_message_msgstr_plural (msg->priv->message, i);
+          if (str_i == NULL)
+            break;
+          if (str_i[0] == '\0')
+            return FALSE;
+        }
 
       return TRUE;
     }
@@ -448,8 +444,7 @@ gtr_msg_get_msgstr_plural (GtrMsg * msg, gint index)
  * Use a NULL value at the end to reduce the number of plural forms.
  **/
 void
-gtr_msg_set_msgstr_plural (GtrMsg * msg,
-				   gint index, const gchar * msgstr)
+gtr_msg_set_msgstr_plural (GtrMsg * msg, gint index, const gchar * msgstr)
 {
   g_return_if_fail (GTR_IS_MSG (msg));
   g_return_if_fail (msgstr != NULL);
@@ -570,7 +565,7 @@ gtr_msg_get_filename (GtrMsg * msg, gint i)
 gint *
 gtr_msg_get_file_line (GtrMsg * msg, gint i)
 {
-  g_return_val_if_fail (GTR_IS_MSG (msg), (gint *)0);
+  g_return_val_if_fail (GTR_IS_MSG (msg), (gint *) 0);
 
   po_filepos_t filepos;
 
@@ -621,7 +616,7 @@ gtr_msg_get_format (GtrMsg * msg)
   for (i = 0; format_list[i] != NULL; i++)
     {
       if (po_message_is_format (msg->priv->message, format_list[i]))
-	return po_format_pretty_name (format_list[i]);
+        return po_format_pretty_name (format_list[i]);
     }
 
   return NULL;
@@ -632,9 +627,9 @@ gtr_msg_get_format (GtrMsg * msg)
  */
 static void
 on_gettext_po_xerror (gint severity,
-		      po_message_t message,
-		      const gchar * filename, size_t lineno, size_t column,
-		      gint multiline_p, const gchar * message_text)
+                      po_message_t message,
+                      const gchar * filename, size_t lineno, size_t column,
+                      gint multiline_p, const gchar * message_text)
 {
   if (message_text)
     message_error = g_strdup (message_text);
@@ -644,13 +639,13 @@ on_gettext_po_xerror (gint severity,
 
 static void
 on_gettext_po_xerror2 (gint severity,
-		       po_message_t message1,
-		       const gchar * filename1, size_t lineno1,
-		       size_t column1, gint multiline_p1,
-		       const gchar * message_text1, po_message_t message2,
-		       const gchar * filename2, size_t lineno2,
-		       size_t column2, gint multiline_p2,
-		       const gchar * message_text2)
+                       po_message_t message1,
+                       const gchar * filename1, size_t lineno1,
+                       size_t column1, gint multiline_p1,
+                       const gchar * message_text1, po_message_t message2,
+                       const gchar * filename2, size_t lineno2,
+                       size_t column2, gint multiline_p2,
+                       const gchar * message_text2)
 {
   g_warning ("Error: %s.\n %s", message_text1, message_text2);
 }
@@ -686,7 +681,7 @@ gtr_msg_check (GtrMsg * msg)
   if (gtr_msg_is_fuzzy (msg) || !gtr_msg_is_translated (msg))
     {
       if (message_error)
-	g_free (message_error);
+        g_free (message_error);
       message_error = NULL;
     }
 

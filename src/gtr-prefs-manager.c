@@ -110,7 +110,7 @@ gtr_prefs_manager_init (void)
 
       gconf_client = gconf_client_get_default ();
       if (gconf_client == NULL)
-	g_error ("Failed to initialize preferences manager");
+        g_error ("Failed to initialize preferences manager");
 
       gtr_prefs_manager = g_new0 (GtrPrefsManager, 1);
 
@@ -132,8 +132,7 @@ gtr_prefs_manager_get_bool (const gchar * key)
 {
   //gtr_debug (DEBUG_PREFS);
 
-  return gconf_client_get_bool (gtr_prefs_manager->gconf_client,
-				key, NULL);
+  return gconf_client_get_bool (gtr_prefs_manager->gconf_client, key, NULL);
 }
 
 static gint
@@ -141,8 +140,7 @@ gtr_prefs_manager_get_int (const gchar * key)
 {
   //gtr_debug (DEBUG_PREFS);
 
-  return gconf_client_get_int (gtr_prefs_manager->gconf_client,
-			       key, NULL);
+  return gconf_client_get_int (gtr_prefs_manager->gconf_client, key, NULL);
 }
 
 static gchar *
@@ -150,8 +148,7 @@ gtr_prefs_manager_get_string (const gchar * key)
 {
   //gtr_debug (DEBUG_PREFS);
 
-  return gconf_client_get_string (gtr_prefs_manager->gconf_client,
-				  key, NULL);
+  return gconf_client_get_string (gtr_prefs_manager->gconf_client, key, NULL);
 }
 
 static void
@@ -160,10 +157,9 @@ gtr_prefs_manager_set_bool (const gchar * key, gboolean value)
   //gtr_debug (DEBUG_PREFS);
 
   g_return_if_fail (gconf_client_key_is_writable
-		    (gtr_prefs_manager->gconf_client, key, NULL));
+                    (gtr_prefs_manager->gconf_client, key, NULL));
 
-  gconf_client_set_bool (gtr_prefs_manager->gconf_client, key, value,
-			 NULL);
+  gconf_client_set_bool (gtr_prefs_manager->gconf_client, key, value, NULL);
 }
 
 static void
@@ -172,10 +168,9 @@ gtr_prefs_manager_set_int (const gchar * key, gint value)
   //gtr_debug (DEBUG_PREFS);
 
   g_return_if_fail (gconf_client_key_is_writable
-		    (gtr_prefs_manager->gconf_client, key, NULL));
+                    (gtr_prefs_manager->gconf_client, key, NULL));
 
-  gconf_client_set_int (gtr_prefs_manager->gconf_client, key, value,
-			NULL);
+  gconf_client_set_int (gtr_prefs_manager->gconf_client, key, value, NULL);
 }
 
 static void
@@ -186,10 +181,9 @@ gtr_prefs_manager_set_string (const gchar * key, const gchar * value)
   g_return_if_fail (value != NULL);
 
   g_return_if_fail (gconf_client_key_is_writable
-		    (gtr_prefs_manager->gconf_client, key, NULL));
+                    (gtr_prefs_manager->gconf_client, key, NULL));
 
-  gconf_client_set_string (gtr_prefs_manager->gconf_client, key,
-			   value, NULL);
+  gconf_client_set_string (gtr_prefs_manager->gconf_client, key, value, NULL);
 }
 
 static gboolean
@@ -197,43 +191,43 @@ gtr_prefs_manager_key_is_writable (const gchar * key)
 {
   //gtr_debug (DEBUG_PREFS);
 
-  return gconf_client_key_is_writable (gtr_prefs_manager->
-				       gconf_client, key, NULL);
+  return gconf_client_key_is_writable (gtr_prefs_manager->gconf_client, key,
+                                       NULL);
 }
 
 /* Files */
 DEFINE_BOOL_PREF (warn_if_contains_fuzzy,
-		  GPM_WARN_IF_CONTAINS_FUZZY)
+                  GPM_WARN_IF_CONTAINS_FUZZY)
 DEFINE_BOOL_PREF (delete_compiled,
-		  GPM_DELETE_COMPILED)
+                  GPM_DELETE_COMPILED)
 DEFINE_BOOL_PREF (autosave,
-		  GPM_AUTOSAVE)
+                  GPM_AUTOSAVE)
 DEFINE_INT_PREF (autosave_interval,
-		 GPM_AUTOSAVE_INTERVAL)
+                 GPM_AUTOSAVE_INTERVAL)
 DEFINE_BOOL_PREF (create_backup,
-		  GPM_CREATE_BACKUP)
+                  GPM_CREATE_BACKUP)
 DEFINE_BOOL_PREF (use_profile_values, GPM_USE_PROFILE_VALUES)
 /* Editor */
   DEFINE_BOOL_PREF (highlight_syntax,
-		  GPM_HIGHLIGHT_SYNTAX)
+                  GPM_HIGHLIGHT_SYNTAX)
 DEFINE_BOOL_PREF (visible_whitespace,
-		  GPM_VISIBLE_WHITESPACE)
+                  GPM_VISIBLE_WHITESPACE)
 DEFINE_BOOL_PREF (use_custom_font,
-		  GPM_USE_CUSTOM_FONT)
+                  GPM_USE_CUSTOM_FONT)
 DEFINE_STRING_PREF (editor_font,
-		    GPM_EDITOR_FONT)
+                    GPM_EDITOR_FONT)
 DEFINE_BOOL_PREF (unmark_fuzzy_when_changed,
-		  GPM_UNMARK_FUZZY_WHEN_CHANGED)
+                  GPM_UNMARK_FUZZY_WHEN_CHANGED)
 DEFINE_BOOL_PREF (spellcheck, GPM_SPELLCHECK)
 /* Translation Memory */
   DEFINE_STRING_PREF (po_directory,
-		    GPM_PO_DIRECTORY)
+                    GPM_PO_DIRECTORY)
 DEFINE_BOOL_PREF (restrict_to_filename,
-		  GPM_RESTRICT_TO_FILENAME)
+                  GPM_RESTRICT_TO_FILENAME)
 DEFINE_STRING_PREF (filename_restriction,
-		    GPM_FILENAME_RESTRICTION)
+                    GPM_FILENAME_RESTRICTION)
 DEFINE_INT_PREF (max_missing_words,
-		 GPM_MAX_MISSING_WORDS)
+                 GPM_MAX_MISSING_WORDS)
 DEFINE_INT_PREF (max_length_diff, GPM_MAX_LENGTH_DIFF)
 /* UI */
 /* pane_switcher_style requires custom functions to deal with conversion from a
@@ -263,7 +257,7 @@ gtr_prefs_manager_get_pane_switcher_style (void)
 
 void
 gtr_prefs_manager_set_pane_switcher_style (GdlSwitcherStyle
-						   pane_switcher_style)
+                                           pane_switcher_style)
 {
   const gchar *v;
 

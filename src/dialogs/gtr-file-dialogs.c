@@ -30,23 +30,23 @@
  */
 GtkWidget *
 gtr_file_chooser_new (GtkWindow * parent,
-			      FileselMode mode,
-			      const gchar * title, const gchar * dir)
+                      FileselMode mode,
+                      const gchar * title, const gchar * dir)
 {
   GtkWidget *dialog;
   GtkFileFilter *filter;
 
   dialog = gtk_file_chooser_dialog_new (title,
-					parent,
-					(mode ==
-					 FILESEL_SAVE) ?
-					GTK_FILE_CHOOSER_ACTION_SAVE :
-					GTK_FILE_CHOOSER_ACTION_OPEN,
-					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					(mode ==
-					 FILESEL_SAVE) ? GTK_STOCK_SAVE :
-					GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-					NULL);
+                                        parent,
+                                        (mode ==
+                                         FILESEL_SAVE) ?
+                                        GTK_FILE_CHOOSER_ACTION_SAVE :
+                                        GTK_FILE_CHOOSER_ACTION_OPEN,
+                                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                        (mode ==
+                                         FILESEL_SAVE) ? GTK_STOCK_SAVE :
+                                        GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+                                        NULL);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
 
   if (dir)

@@ -35,8 +35,7 @@
 void
 gtr_cmd_help_contents (GtkAction * action, GtrWindow * window)
 {
-  gtr_utils_help_display (GTK_WINDOW (window),
-				  "gtr", "gtr.xml");
+  gtr_utils_help_display (GTK_WINDOW (window), "gtr", "gtr.xml");
 }
 
 /* Creates and shows the about box for gtranslator */
@@ -102,35 +101,34 @@ gtr_about_dialog (GtkAction * action, GtrWindow * window)
   gchar *logo_file;
 
   pixmaps_dir = gtr_dirs_get_pixmaps_dir ();
-  logo_file = g_build_filename (pixmaps_dir,
-                                "gtranslator-logo.png",
-                                NULL);
+  logo_file = g_build_filename (pixmaps_dir, "gtranslator-logo.png", NULL);
   g_free (pixmaps_dir);
   logo = gdk_pixbuf_new_from_file (logo_file, NULL);
   g_free (logo_file);
 
 
   license_trans = g_strconcat (_(license[0]), "\n\n",
-			       _(license[1]), "\n\n", _(license[2]), NULL);
+                               _(license[1]), "\n\n", _(license[2]), NULL);
 
 
   gtk_show_about_dialog (GTK_WINDOW (window),
-			 "comments",
-			 _("Translation file editing suite for localization of applications and libraries."),
-			 "authors", authors, "copyright",
-			 _("Copyright © 1999-2008 Free Software Foundation, Inc."),
-			 "documenters", documenters, "license", license_trans,
-			 "logo", logo,
-			 "title", _("About Gtranslator"),
-			 /*
-			  * Note to translators: put here your name and email so it will show
-			  * up in the "about" box
-			  */
-			 "translator-credits", _("translator-credits"),
-			 "version", PACKAGE_VERSION,
-			 "website", PACKAGE_URL,
-			 "wrap-license", TRUE,
-			 "website-label", _("Gtranslator Web Site"), NULL);
+                         "comments",
+                         _
+                         ("Translation file editing suite for localization of applications and libraries."),
+                         "authors", authors, "copyright",
+                         _
+                         ("Copyright © 1999-2008 Free Software Foundation, Inc."),
+                         "documenters", documenters, "license", license_trans,
+                         "logo", logo, "title", _("About Gtranslator"),
+                         /*
+                          * Note to translators: put here your name and email so it will show
+                          * up in the "about" box
+                          */
+                         "translator-credits", _("translator-credits"),
+                         "version", PACKAGE_VERSION,
+                         "website", PACKAGE_URL,
+                         "wrap-license", TRUE,
+                         "website-label", _("Gtranslator Web Site"), NULL);
 
   if (logo)
     g_object_unref (logo);

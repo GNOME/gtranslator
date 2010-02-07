@@ -37,8 +37,7 @@ G_BEGIN_DECLS
 #define GTR_IS_COMMENT_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_COMMENT_DIALOG))
 #define GTR_COMMENT_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_COMMENT_DIALOG, GtrCommentDialogClass))
 /* Private structure type */
-typedef struct _GtrCommentDialogPrivate
-  GtrCommentDialogPrivate;
+typedef struct _GtrCommentDialogPrivate GtrCommentDialogPrivate;
 
 /*
  * Main object structure

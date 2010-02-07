@@ -48,29 +48,27 @@
 					 GtrApplicationPrivate))
 
 G_DEFINE_TYPE (GtrApplication, gtr_application, G_TYPE_OBJECT)
+     struct _GtrApplicationPrivate
+     {
+       GList *windows;
+       GtrWindow *active_window;
 
-struct _GtrApplicationPrivate
-{
-  GList *windows;
-  GtrWindow *active_window;
+       GList *profiles;
+       GtrProfile *active_profile;
 
-  GList *profiles;
-  GtrProfile *active_profile;
+       gchar *toolbars_file;
+       EggToolbarsModel *toolbars_model;
 
-  gchar *toolbars_file;
-  EggToolbarsModel *toolbars_model;
+       GtkIconFactory *icon_factory;
 
-  GtkIconFactory *icon_factory;
+       gchar *last_dir;
 
-  gchar *last_dir;
+       GtrTranslationMemory *tm;
 
-  GtrTranslationMemory *tm;
+       gboolean first_run;
+     };
 
-  gboolean first_run;
-};
-
-static gchar *
-get_accel_file (void)
+     static gchar *get_accel_file (void)
 {
   gchar *config;
 
@@ -113,15 +111,14 @@ save_accels (void)
 
 static gboolean
 on_window_delete_event_cb (GtrWindow * window,
-			   GdkEvent * event, GtrApplication * app)
+                           GdkEvent * event, GtrApplication * app)
 {
   gtr_file_quit (NULL, window);
   return TRUE;
 }
 
 static void
-on_window_destroy_cb (GtrWindow * window,
-		      GtrApplication * app)
+on_window_destroy_cb (GtrWindow * window, GtrApplication * app)
 {
   save_accels ();
   //if(app->priv->active_window == NULL)
@@ -159,28 +156,29 @@ gtr_application_init (GtrApplication * application)
       file = g_file_new_for_path (gtr_folder);
 
       if (g_file_test (gtr_folder, G_FILE_TEST_IS_REGULAR))
-	{
-	  if (!g_file_delete (file, NULL, &error))
-	    {
-	      g_warning ("There was an error deleting the "
-			 "old gtranslator file: %s", error->message);
-	      g_error_free (error);
-	      g_object_unref (file);
-	      g_free (gtr_folder);
-	      gtr_application_shutdown (application);
-	    }
-	}
+        {
+          if (!g_file_delete (file, NULL, &error))
+            {
+              g_warning ("There was an error deleting the "
+                         "old gtranslator file: %s", error->message);
+              g_error_free (error);
+              g_object_unref (file);
+              g_free (gtr_folder);
+              gtr_application_shutdown (application);
+            }
+        }
 
       if (!g_file_make_directory (file, NULL, &error))
-	{
-	  g_warning ("There was an error making the gtranslator config directory: %s",
-                     error->message);
+        {
+          g_warning
+            ("There was an error making the gtranslator config directory: %s",
+             error->message);
 
-	  g_error_free (error);
-	  g_object_unref (file);
-	  g_free (gtr_folder);
-	  gtr_application_shutdown (application);
-	}
+          g_error_free (error);
+          g_object_unref (file);
+          g_free (gtr_folder);
+          gtr_application_shutdown (application);
+        }
 
       priv->first_run = TRUE;
       g_object_unref (file);
@@ -197,30 +195,28 @@ gtr_application_init (GtrApplication * application)
   priv->toolbars_model = egg_toolbars_model_new ();
 
   priv->toolbars_file = g_build_filename (gtr_folder,
-					  "gtr-toolbar.xml", NULL);
+                                          "gtr-toolbar.xml", NULL);
 
   g_free (gtr_folder);
 
   dir = gtr_dirs_get_gtr_data_dir ();
-  path_default_gtr_toolbar = g_build_filename (dir,
-                                               "gtr-toolbar.xml",
-                                               NULL);
+  path_default_gtr_toolbar = g_build_filename (dir, "gtr-toolbar.xml", NULL);
   g_free (dir);
 
   egg_toolbars_model_load_names (priv->toolbars_model,
-				 path_default_gtr_toolbar);
+                                 path_default_gtr_toolbar);
 
   if (!egg_toolbars_model_load_toolbars (priv->toolbars_model,
-					 priv->toolbars_file))
+                                         priv->toolbars_file))
     {
       egg_toolbars_model_load_toolbars (priv->toolbars_model,
-					path_default_gtr_toolbar);
+                                        path_default_gtr_toolbar);
     }
 
   g_free (path_default_gtr_toolbar);
 
   egg_toolbars_model_set_flags (priv->toolbars_model, 0,
-				EGG_TB_MODEL_NOT_REMOVABLE);
+                                EGG_TB_MODEL_NOT_REMOVABLE);
 
   load_accels ();
 
@@ -229,14 +225,13 @@ gtr_application_init (GtrApplication * application)
   gtk_icon_factory_add_default (application->priv->icon_factory);
 
   /* Creating translation memory */
-  application->priv->tm =
-    GTR_TRANSLATION_MEMORY (gtr_berkeley_new ());
+  application->priv->tm = GTR_TRANSLATION_MEMORY (gtr_berkeley_new ());
   gtr_translation_memory_set_max_omits (application->priv->tm,
-						gtr_prefs_manager_get_max_missing_words
-						());
+                                        gtr_prefs_manager_get_max_missing_words
+                                        ());
   gtr_translation_memory_set_max_delta (application->priv->tm,
-						gtr_prefs_manager_get_max_length_diff
-						());
+                                        gtr_prefs_manager_get_max_length_diff
+                                        ());
   gtr_translation_memory_set_max_items (application->priv->tm, 10);
 }
 
@@ -328,10 +323,10 @@ gtr_application_open_window (GtrApplication * app)
     }
 
   g_signal_connect (window, "delete-event",
-		    G_CALLBACK (on_window_delete_event_cb), app);
+                    G_CALLBACK (on_window_delete_event_cb), app);
 
   g_signal_connect (window, "destroy",
-		    G_CALLBACK (on_window_destroy_cb), app);
+                    G_CALLBACK (on_window_destroy_cb), app);
 
   gtk_widget_show (GTK_WIDGET (window));
 
@@ -354,8 +349,7 @@ gtr_application_open_window (GtrApplication * app)
  * Retuns: the toolbar model.
  */
 GObject *
-_gtr_application_get_toolbars_model (GtrApplication *
-					     application)
+_gtr_application_get_toolbars_model (GtrApplication * application)
 {
   return G_OBJECT (application->priv->toolbars_model);
 }
@@ -367,11 +361,10 @@ _gtr_application_get_toolbars_model (GtrApplication *
  * Saves the toolbar model.
  */
 void
-_gtr_application_save_toolbars_model (GtrApplication *
-					      application)
+_gtr_application_save_toolbars_model (GtrApplication * application)
 {
   egg_toolbars_model_save_toolbars (application->priv->toolbars_model,
-				    application->priv->toolbars_file, "1.0");
+                                    application->priv->toolbars_file, "1.0");
 }
 
 /**
@@ -406,18 +399,16 @@ gtr_application_shutdown (GtrApplication * app)
  */
 GList *
 gtr_application_get_views (GtrApplication * app,
-				   gboolean original, gboolean translated)
+                           gboolean original, gboolean translated)
 {
   GList *res = NULL;
 
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
   res = g_list_concat (res,
-		       gtr_window_get_all_views (GTR_WINDOW
-							 (app->priv->
-							  active_window),
-							 original,
-							 translated));
+                       gtr_window_get_all_views (GTR_WINDOW
+                                                 (app->priv->active_window),
+                                                 original, translated));
 
   return res;
 }
@@ -472,7 +463,7 @@ gtr_application_get_active_profile (GtrApplication * app)
  **/
 void
 gtr_application_set_active_profile (GtrApplication * app,
-					    GtrProfile * profile)
+                                    GtrProfile * profile)
 {
   app->priv->active_profile = profile;
 }
@@ -498,8 +489,7 @@ gtr_application_get_profiles (GtrApplication * app)
  *
  **/
 void
-gtr_application_set_profiles (GtrApplication * app,
-				      GList * profiles)
+gtr_application_set_profiles (GtrApplication * app, GList * profiles)
 {
   app->priv->profiles = profiles;
 }
@@ -514,8 +504,7 @@ gtr_application_set_profiles (GtrApplication * app,
  */
 void
 gtr_application_register_icon (GtrApplication * app,
-				       const gchar * icon,
-				       const gchar * stock_id)
+                               const gchar * icon, const gchar * stock_id)
 {
   GtkIconSet *icon_set;
   GtkIconSource *icon_source = gtk_icon_source_new ();
@@ -524,9 +513,7 @@ gtr_application_register_icon (GtrApplication * app,
   GdkPixbuf *pixbuf;
 
   pixmaps_dir = gtr_dirs_get_pixmaps_dir ();
-  path = g_build_filename (pixmaps_dir,
-                           icon,
-                           NULL);
+  path = g_build_filename (pixmaps_dir, icon, NULL);
   g_free (pixmaps_dir);
 
   pixbuf = gdk_pixbuf_new_from_file (path, NULL);
@@ -562,8 +549,7 @@ _gtr_application_get_last_dir (GtrApplication * app)
  * GtkFileChooser.
  */
 void
-_gtr_application_set_last_dir (GtrApplication * app,
-				       const gchar * last_dir)
+_gtr_application_set_last_dir (GtrApplication * app, const gchar * last_dir)
 {
   g_return_if_fail (GTR_IS_APPLICATION (app));
 

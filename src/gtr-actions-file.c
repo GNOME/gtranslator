@@ -54,8 +54,7 @@ static void load_file_list (GtrWindow * window, const GSList * uris);
  * and if not, opens it in a new tab.
  */
 gboolean
-gtr_open (GFile * location,
-	  GtrWindow * window, GError ** error)
+gtr_open (GFile * location, GtrWindow * window, GError ** error)
 {
   GtrHeader *header;
   GtrPo *po;
@@ -102,21 +101,19 @@ gtr_open (GFile * location,
   gtk_widget_grab_focus (GTK_WIDGET (active_view));
 
   gtr_statusbar_update_progress_bar (GTR_STATUSBAR
-					     (gtr_window_get_statusbar
-					      (window)),
-					     (gdouble)
-					     gtr_po_get_translated_count
-					     (po),
-					     (gdouble)
-					     gtr_po_get_messages_count
-					     (po));
+                                     (gtr_window_get_statusbar
+                                      (window)),
+                                     (gdouble)
+                                     gtr_po_get_translated_count
+                                     (po),
+                                     (gdouble)
+                                     gtr_po_get_messages_count (po));
 
   return TRUE;
 }
 
 static void
-gtr_po_parse_files_from_dialog (GtkWidget * dialog,
-					GtrWindow * window)
+gtr_po_parse_files_from_dialog (GtkWidget * dialog, GtrWindow * window)
 {
   GSList *po_files, *l;
   GSList *locations = NULL;
@@ -164,8 +161,7 @@ gtr_po_parse_files_from_dialog (GtkWidget * dialog,
 
 static void
 gtr_file_chooser_analyse (gpointer dialog,
-				  FileselMode mode,
-				  GtrWindow * window)
+                          FileselMode mode, GtrWindow * window)
 {
   gint reply;
 
@@ -174,10 +170,9 @@ gtr_file_chooser_analyse (gpointer dialog,
     {
     case GTK_RESPONSE_ACCEPT:
       if (mode == FILESEL_OPEN)
-	{
-	  gtr_po_parse_files_from_dialog (GTK_WIDGET (dialog),
-						  window);
-	}
+        {
+          gtr_po_parse_files_from_dialog (GTK_WIDGET (dialog), window);
+        }
       break;
     case GTK_RESPONSE_CANCEL:
       gtk_widget_hide (GTK_WIDGET (dialog));
@@ -205,10 +200,9 @@ gtr_open_file_dialog (GtkAction * action, GtrWindow * window)
       return;
     }
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
-					 FILESEL_OPEN,
-					 _("Open file for translation"),
-					 _gtr_application_get_last_dir
-					 (GTR_APP));
+                                 FILESEL_OPEN,
+                                 _("Open file for translation"),
+                                 _gtr_application_get_last_dir (GTR_APP));
 
   /*
    * With the gettext parser/writer API, we can't currently read/write
@@ -223,7 +217,7 @@ gtr_open_file_dialog (GtkAction * action, GtrWindow * window)
 
 static void
 save_dialog_response_cb (GtkDialog * dialog,
-			 gint response_id, GtrWindow * window)
+                         gint response_id, GtrWindow * window)
 {
   GError *error = NULL;
   GtrPo *po;
@@ -261,18 +255,18 @@ save_dialog_response_cb (GtkDialog * dialog,
       gtr_po_save_file (po, &error);
 
       if (error)
-	{
-	  GtkWidget *dialog;
-	  dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-					   GTK_DIALOG_DESTROY_WITH_PARENT,
-					   GTK_MESSAGE_WARNING,
-					   GTK_BUTTONS_OK,
-					   "%s", error->message);
-	  gtk_dialog_run (GTK_DIALOG (dialog));
-	  gtk_widget_destroy (dialog);
-	  g_clear_error (&error);
-	  return;
-	}
+        {
+          GtkWidget *dialog;
+          dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                           GTK_DIALOG_DESTROY_WITH_PARENT,
+                                           GTK_MESSAGE_WARNING,
+                                           GTK_BUTTONS_OK,
+                                           "%s", error->message);
+          gtk_dialog_run (GTK_DIALOG (dialog));
+          gtk_widget_destroy (dialog);
+          g_clear_error (&error);
+          return;
+        }
 
       /* We have to change the state of the tab */
       gtr_po_set_state (po, GTR_PO_STATE_SAVED);
@@ -308,8 +302,7 @@ confirm_overwrite_callback (GtkFileChooser * dialog, gpointer data)
  * "Save as" dialog.
  */
 void
-gtr_save_file_as_dialog (GtkAction * action,
-				 GtrWindow * window)
+gtr_save_file_as_dialog (GtkAction * action, GtrWindow * window)
 {
   GtkWidget *dialog = NULL;
   GtrTab *current_page;
@@ -328,16 +321,15 @@ gtr_save_file_as_dialog (GtkAction * action,
   po = gtr_tab_get_po (current_page);
 
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
-					 FILESEL_SAVE,
-					 _("Save file as..."),
-					 _gtr_application_get_last_dir
-					 (GTR_APP));
+                                 FILESEL_SAVE,
+                                 _("Save file as..."),
+                                 _gtr_application_get_last_dir (GTR_APP));
 
   gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog),
-						  TRUE);
+                                                  TRUE);
   g_signal_connect (dialog,
-		    "confirm-overwrite",
-		    G_CALLBACK (confirm_overwrite_callback), NULL);
+                    "confirm-overwrite",
+                    G_CALLBACK (confirm_overwrite_callback), NULL);
 
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
@@ -360,7 +352,7 @@ gtr_save_file_as_dialog (GtkAction * action,
   g_object_set_data (G_OBJECT (dialog), GTR_TAB_SAVE_AS, current_page);
 
   g_signal_connect (dialog,
-		    "response", G_CALLBACK (save_dialog_response_cb), window);
+                    "response", G_CALLBACK (save_dialog_response_cb), window);
 
   gtk_widget_show (GTK_WIDGET (dialog));
 }
@@ -369,8 +361,7 @@ gtr_save_file_as_dialog (GtkAction * action,
  * A callback for Save
  */
 void
-gtr_save_current_file_dialog (GtkWidget * widget,
-				      GtrWindow * window)
+gtr_save_current_file_dialog (GtkWidget * widget, GtrWindow * window)
 {
   GError *error = NULL;
   GtrTab *current;
@@ -386,9 +377,9 @@ gtr_save_current_file_dialog (GtkWidget * widget,
     {
       GtkWidget *dialog;
       dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-				       GTK_DIALOG_DESTROY_WITH_PARENT,
-				       GTK_MESSAGE_WARNING,
-				       GTK_BUTTONS_OK, "%s", error->message);
+                                       GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       GTK_MESSAGE_WARNING,
+                                       GTK_BUTTONS_OK, "%s", error->message);
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
       g_clear_error (&error);
@@ -411,7 +402,7 @@ is_duplicated_location (const GSList * locations, GFile * u)
   for (l = (GSList *) locations; l != NULL; l = g_slist_next (l))
     {
       if (g_file_equal (u, l->data))
-	return TRUE;
+        return TRUE;
     }
 
   return FALSE;
@@ -433,22 +424,21 @@ load_file_list (GtrWindow * window, const GSList * locations)
   while (locations != NULL)
     {
       if (!is_duplicated_location (locations_to_load, locations->data))
-	{
-	  /*We need to now if is already loaded in any tab */
-	  tab = gtr_window_get_tab_from_location (window,
-							  (GFile *)
-							  locations->data);
+        {
+          /*We need to now if is already loaded in any tab */
+          tab = gtr_window_get_tab_from_location (window,
+                                                  (GFile *) locations->data);
 
-	  if (tab != NULL)
-	    {
-	      if (locations == l)
-		gtr_window_set_active_tab (window, tab);
-	    }
-	  else
-	    locations_to_load = g_slist_prepend (locations_to_load,
-						 locations->data);
+          if (tab != NULL)
+            {
+              if (locations == l)
+                gtr_window_set_active_tab (window, tab);
+            }
+          else
+            locations_to_load = g_slist_prepend (locations_to_load,
+                                                 locations->data);
 
-	}
+        }
 
       locations = g_slist_next (locations);
     }
@@ -464,7 +454,7 @@ load_file_list (GtrWindow * window, const GSList * locations)
       g_return_if_fail (locations_to_load->data != NULL);
 
       if (!gtr_open (locations_to_load->data, window, &error))
-	break;
+        break;
 
       locations_to_load = g_slist_next (locations_to_load);
     }
@@ -480,10 +470,10 @@ load_file_list (GtrWindow * window, const GSList * locations)
        * We have to show the error in a dialog
        */
       dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-				       GTK_DIALOG_DESTROY_WITH_PARENT,
-				       GTK_MESSAGE_ERROR,
-				       GTK_BUTTONS_CLOSE,
-				       "%s", error->message);
+                                       GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       GTK_MESSAGE_ERROR,
+                                       GTK_BUTTONS_CLOSE,
+                                       "%s", error->message);
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
       g_error_free (error);
@@ -500,8 +490,7 @@ load_file_list (GtrWindow * window, const GSList * locations)
  * Ignore non-existing URIs 
  */
 void
-gtr_actions_load_locations (GtrWindow * window,
-				    const GSList * locations)
+gtr_actions_load_locations (GtrWindow * window, const GSList * locations)
 {
   g_return_if_fail (GTR_IS_WINDOW (window));
   g_return_if_fail ((locations != NULL) && (locations->data != NULL));
@@ -542,8 +531,7 @@ close_all_tabs (GtrWindow * window)
 }
 
 static void
-save_and_close_all_documents (GList * unsaved_documents,
-			      GtrWindow * window)
+save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
 {
   GtrTab *tab;
   GList *l;
@@ -554,19 +542,19 @@ save_and_close_all_documents (GList * unsaved_documents,
       gtr_po_save_file (l->data, &error);
 
       if (error)
-	{
-	  GtkWidget *dialog;
-	  dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-					   GTK_DIALOG_DESTROY_WITH_PARENT,
-					   GTK_MESSAGE_WARNING,
-					   GTK_BUTTONS_OK,
-					   "%s", error->message);
-	  gtk_dialog_run (GTK_DIALOG (dialog));
-	  gtk_widget_destroy (dialog);
-	  g_clear_error (&error);
+        {
+          GtkWidget *dialog;
+          dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                           GTK_DIALOG_DESTROY_WITH_PARENT,
+                                           GTK_MESSAGE_WARNING,
+                                           GTK_BUTTONS_OK,
+                                           "%s", error->message);
+          gtk_dialog_run (GTK_DIALOG (dialog));
+          gtk_widget_destroy (dialog);
+          g_clear_error (&error);
 
-	  return;
-	}
+          return;
+        }
 
       tab = gtr_tab_get_from_document (l->data);
 
@@ -578,8 +566,8 @@ save_and_close_all_documents (GList * unsaved_documents,
 
 static void
 close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog
-					    * dlg, gint response_id,
-					    GtrWindow * window)
+                                            * dlg, gint response_id,
+                                            GtrWindow * window)
 {
   GList *selected_documents;
   gboolean is_closing_all;
@@ -587,66 +575,66 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog
   gtk_widget_hide (GTK_WIDGET (dlg));
 
   is_closing_all = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (window),
-						       GTR_IS_CLOSING_ALL));
+                                                       GTR_IS_CLOSING_ALL));
 
   switch (response_id)
     {
-    case GTK_RESPONSE_YES:	/* Save and Close */
+    case GTK_RESPONSE_YES:     /* Save and Close */
       selected_documents =
-	gtr_close_confirmation_dialog_get_selected_documents (dlg);
+        gtr_close_confirmation_dialog_get_selected_documents (dlg);
       if (selected_documents == NULL)
-	{
-	  if (is_closing_all)
-	    {
-	      gtk_widget_destroy (GTK_WIDGET (dlg));
+        {
+          if (is_closing_all)
+            {
+              gtk_widget_destroy (GTK_WIDGET (dlg));
 
-	      close_all_tabs (window);
+              close_all_tabs (window);
 
-	      return;
-	    }
-	  else
-	    g_return_if_reached ();
-	}
+              return;
+            }
+          else
+            g_return_if_reached ();
+        }
       else
-	{
-	  if (is_closing_all)
-	    {
-	      save_and_close_all_documents (selected_documents, window);
-	    }
-	  else
-	    {
-	      save_and_close_document (selected_documents->data, window);
-	    }
-	}
+        {
+          if (is_closing_all)
+            {
+              save_and_close_all_documents (selected_documents, window);
+            }
+          else
+            {
+              save_and_close_document (selected_documents->data, window);
+            }
+        }
 
       g_list_free (selected_documents);
 
       break;
 
-    case GTK_RESPONSE_NO:	/* Close without Saving */
+    case GTK_RESPONSE_NO:      /* Close without Saving */
       if (is_closing_all)
-	{
-	  gtk_widget_destroy (GTK_WIDGET (dlg));
+        {
+          gtk_widget_destroy (GTK_WIDGET (dlg));
 
-	  close_all_tabs (window);
+          close_all_tabs (window);
 
-	  return;
-	}
+          return;
+        }
       else
-	{
-	  const GList *unsaved_documents;
+        {
+          const GList *unsaved_documents;
 
-	  unsaved_documents =
-	    gtr_close_confirmation_dialog_get_unsaved_documents (dlg);
-	  g_return_if_fail (unsaved_documents->next == NULL);
+          unsaved_documents =
+            gtr_close_confirmation_dialog_get_unsaved_documents (dlg);
+          g_return_if_fail (unsaved_documents->next == NULL);
 
-	  _gtr_window_close_tab (window,
-					 gtr_tab_get_from_document
-					 (unsaved_documents->data));
-	}
+          _gtr_window_close_tab (window,
+                                 gtr_tab_get_from_document
+                                 (unsaved_documents->data));
+        }
 
       break;
-    default:			/* Do not close */
+    default:                   /* Do not close */
       break;
     }
 
@@ -657,21 +645,21 @@ void
 gtr_close_tab (GtrTab * tab, GtrWindow * window)
 {
   g_object_set_data (G_OBJECT (window),
-		     GTR_IS_CLOSING_ALL, GINT_TO_POINTER (0));
+                     GTR_IS_CLOSING_ALL, GINT_TO_POINTER (0));
 
   if (!_gtr_tab_can_close (tab))
     {
       GtkWidget *dlg;
 
       dlg =
-	gtr_close_confirmation_dialog_new_single (GTK_WINDOW (window),
-							  gtr_tab_get_po
-							  (tab), FALSE);
+        gtr_close_confirmation_dialog_new_single (GTK_WINDOW (window),
+                                                  gtr_tab_get_po
+                                                  (tab), FALSE);
 
       g_signal_connect (dlg,
-			"response",
-			G_CALLBACK
-			(close_confirmation_dialog_response_handler), window);
+                        "response",
+                        G_CALLBACK
+                        (close_confirmation_dialog_response_handler), window);
 
       gtk_widget_show (dlg);
     }
@@ -704,11 +692,11 @@ get_modified_documents (GtrWindow * window)
   while (pages > 0)
     {
       tab = GTR_TAB (gtk_notebook_get_nth_page (GTK_NOTEBOOK (nb),
-						pages - 1));
+                                                pages - 1));
 
       po = gtr_tab_get_po (tab);
       if (gtr_po_get_state (po) == GTR_PO_STATE_MODIFIED)
-	list = g_list_prepend (list, po);
+        list = g_list_prepend (list, po);
 
       pages--;
     }
@@ -728,12 +716,12 @@ close_all_documents (GtrWindow * window, gboolean logout_mode)
       GtkWidget *dlg;
 
       dlg = gtr_close_confirmation_dialog_new (GTK_WINDOW (window),
-						       list, logout_mode);
+                                               list, logout_mode);
 
       g_signal_connect (dlg,
-			"response",
-			G_CALLBACK
-			(close_confirmation_dialog_response_handler), window);
+                        "response",
+                        G_CALLBACK
+                        (close_confirmation_dialog_response_handler), window);
 
       g_list_free (list);
 
@@ -744,9 +732,9 @@ close_all_documents (GtrWindow * window, gboolean logout_mode)
       close_all_tabs (window);
 
       if (logout_mode)
-	{
-	  gtk_widget_destroy (GTK_WIDGET (window));
-	}
+        {
+          gtk_widget_destroy (GTK_WIDGET (window));
+        }
     }
 }
 
@@ -777,46 +765,44 @@ gtr_file_quit (GtkAction * action, GtrWindow * window)
   if (profiles_list != NULL)
     {
       if (g_file_query_exists (file_temp, NULL))
-	{
-	  r = gtr_profile_save_profiles_in_xml (filename_temp);
-	}
+        {
+          r = gtr_profile_save_profiles_in_xml (filename_temp);
+        }
       else
-	{
-	  g_file_create (file_temp, G_FILE_CREATE_NONE, NULL, NULL);
-	  r = gtr_profile_save_profiles_in_xml (filename_temp);
-	}
+        {
+          g_file_create (file_temp, G_FILE_CREATE_NONE, NULL, NULL);
+          r = gtr_profile_save_profiles_in_xml (filename_temp);
+        }
       if (r != -1)
-	{
-	  g_file_move (file_temp,
-		       file, G_FILE_COPY_OVERWRITE, NULL, NULL, NULL, NULL);
-	}
+        {
+          g_file_move (file_temp,
+                       file, G_FILE_COPY_OVERWRITE, NULL, NULL, NULL, NULL);
+        }
       else
-	{
-	  g_warning (_
-		     ("Failed to write profile data into profiles file '%s'"),
-		     filename);
-	}
+        {
+          g_warning (_
+                     ("Failed to write profile data into profiles file '%s'"),
+                     filename);
+        }
     }
 
   g_object_unref (file_temp);
   g_object_unref (file);
 
   g_object_set_data (G_OBJECT (window),
-		     GTR_IS_CLOSING_ALL, GINT_TO_POINTER (1));
+                     GTR_IS_CLOSING_ALL, GINT_TO_POINTER (1));
 
   close_all_documents (window, TRUE);
 }
 
 void
-_gtr_actions_file_close_all (GtkAction * action,
-				     GtrWindow * window)
+_gtr_actions_file_close_all (GtkAction * action, GtrWindow * window)
 {
   close_all_documents (window, FALSE);
 }
 
 void
-_gtr_actions_file_save_all (GtkAction * action,
-				    GtrWindow * window)
+_gtr_actions_file_save_all (GtkAction * action, GtrWindow * window)
 {
   GList *list, *l;
 
@@ -830,20 +816,20 @@ _gtr_actions_file_save_all (GtkAction * action,
       gtr_po_save_file (GTR_PO (l->data), &error);
 
       if (error)
-	{
-	  GtkWidget *dialog;
+        {
+          GtkWidget *dialog;
 
-	  dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-					   GTK_DIALOG_DESTROY_WITH_PARENT,
-					   GTK_MESSAGE_WARNING,
-					   GTK_BUTTONS_OK,
-					   "%s", error->message);
-	  gtk_dialog_run (GTK_DIALOG (dialog));
-	  gtk_widget_destroy (dialog);
-	  g_clear_error (&error);
+          dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                           GTK_DIALOG_DESTROY_WITH_PARENT,
+                                           GTK_MESSAGE_WARNING,
+                                           GTK_BUTTONS_OK,
+                                           "%s", error->message);
+          gtk_dialog_run (GTK_DIALOG (dialog));
+          gtk_widget_destroy (dialog);
+          g_clear_error (&error);
 
-	  return;
-	}
+          return;
+        }
 
       /* We have to change the state of the tab */
       gtr_po_set_state (GTR_PO (l->data), GTR_PO_STATE_SAVED);

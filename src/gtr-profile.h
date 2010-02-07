@@ -72,71 +72,49 @@ gtr_profile_get_type (void)
 
      GType gtr_profile_register_type (GTypeModule * module);
 
-GtrProfile * gtr_profile_new (void);
+     GtrProfile *gtr_profile_new (void);
 
-     const gchar *
-     gtr_profile_get_name (GtrProfile * profile);
+     const gchar *gtr_profile_get_name (GtrProfile * profile);
+     void gtr_profile_set_name (GtrProfile * profile, const gchar * data);
+
+     const gchar *gtr_profile_get_author_name (GtrProfile * profile);
      void
-     gtr_profile_set_name (GtrProfile * profile,
-				   const gchar * data);
+       gtr_profile_set_author_name (GtrProfile * profile, const gchar * data);
 
-     const gchar *
-     gtr_profile_get_author_name (GtrProfile * profile);
+     const gchar *gtr_profile_get_author_email (GtrProfile * profile);
      void
-     gtr_profile_set_author_name (GtrProfile * profile,
-					  const gchar * data);
+       gtr_profile_set_author_email (GtrProfile * profile,
+                                     const gchar * data);
 
-     const gchar *
-     gtr_profile_get_author_email (GtrProfile * profile);
+     const gchar *gtr_profile_get_language_name (GtrProfile * profile);
      void
-     gtr_profile_set_author_email (GtrProfile * profile,
-					   const gchar * data);
+       gtr_profile_set_language_name (GtrProfile * profile,
+                                      const gchar * data);
 
-     const gchar *
-     gtr_profile_get_language_name (GtrProfile * profile);
+     const gchar *gtr_profile_get_language_code (GtrProfile * profile);
      void
-     gtr_profile_set_language_name (GtrProfile * profile,
-					    const gchar * data);
+       gtr_profile_set_language_code (GtrProfile * profile,
+                                      const gchar * data);
 
-     const gchar *
-     gtr_profile_get_language_code (GtrProfile * profile);
+     const gchar *gtr_profile_get_charset (GtrProfile * profile);
+     void gtr_profile_set_charset (GtrProfile * profile, const gchar * data);
+
+     const gchar *gtr_profile_get_encoding (GtrProfile * profile);
+     void gtr_profile_set_encoding (GtrProfile * profile, const gchar * data);
+
+     const gchar *gtr_profile_get_group_email (GtrProfile * profile);
      void
-     gtr_profile_set_language_code (GtrProfile * profile,
-					    const gchar * data);
+       gtr_profile_set_group_email (GtrProfile * profile, const gchar * data);
 
-     const gchar *
-     gtr_profile_get_charset (GtrProfile * profile);
-     void
-     gtr_profile_set_charset (GtrProfile * profile,
-				      const gchar * data);
+     const gchar *gtr_profile_get_plurals (GtrProfile * profile);
+     void gtr_profile_set_plurals (GtrProfile * profile, const gchar * data);
 
-     const gchar *
-     gtr_profile_get_encoding (GtrProfile * profile);
-     void
-     gtr_profile_set_encoding (GtrProfile * profile,
-				       const gchar * data);
+     void gtr_profile_xml_new_entry (xmlDocPtr doc, GtrProfile * profile);
+     GtrProfile *gtr_profile_xml_get_entry (xmlNodePtr child);
 
-     const gchar *
-     gtr_profile_get_group_email (GtrProfile * profile);
-     void
-     gtr_profile_set_group_email (GtrProfile * profile,
-					  const gchar * data);
+     GList *gtr_profile_get_profiles_from_xml_file (gchar * filename);
 
-     const gchar *
-     gtr_profile_get_plurals (GtrProfile * profile);
-     void
-     gtr_profile_set_plurals (GtrProfile * profile,
-				      const gchar * data);
-
-     void
-     gtr_profile_xml_new_entry (xmlDocPtr doc,
-					GtrProfile * profile);
-GtrProfile * gtr_profile_xml_get_entry (xmlNodePtr child);
-
-     GList *
-     gtr_profile_get_profiles_from_xml_file (gchar * filename);
-
-     gint
-     gtr_profile_save_profiles_in_xml (gchar * filename);
+gint
+gtr_profile_save_profiles_in_xml (gchar * filename);
 
 #endif /* __PROFILE_H__ */

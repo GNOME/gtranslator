@@ -88,65 +88,63 @@ gtr_window_get_type (void)
 
      GType gtr_window_register_type (GTypeModule * module);
 
-     GtrTab *gtr_window_create_tab (GtrWindow *
-						    window,
-						    GtrPo * po);
+     GtrTab *gtr_window_create_tab (GtrWindow * window, GtrPo * po);
 
-     GtrTab *gtr_window_get_active_tab (GtrWindow *
-							window);
+     GtrTab *gtr_window_get_active_tab (GtrWindow * window);
 
      GList *gtr_window_get_all_tabs (GtrWindow * window);
 
-     GtrNotebook *gtr_window_get_notebook (GtrWindow *
-							   window);
-     GtrHeader
-       *gtr_window_get_header_from_active_tab (GtrWindow *
-						       window);
+     GtrNotebook *gtr_window_get_notebook (GtrWindow * window);
+GtrHeader * gtr_window_get_header_from_active_tab (GtrWindow * window);
 
-     GtkWidget *gtr_window_get_statusbar (GtrWindow * window);
+     GtkWidget *
+     gtr_window_get_statusbar (GtrWindow * window);
 
-     GtkUIManager *gtr_window_get_ui_manager (GtrWindow *
-						      window);
+     GtkUIManager *
+     gtr_window_get_ui_manager (GtrWindow * window);
 
-     GtrView *gtr_window_get_active_view (GtrWindow *
-							  window);
+     GtrView *
+     gtr_window_get_active_view (GtrWindow * window);
 
-     GList *gtr_window_get_all_views (GtrWindow * window,
-					      gboolean original,
-					      gboolean translated);
+     GList *
+     gtr_window_get_all_views (GtrWindow * window,
+                               gboolean original, gboolean translated);
 
-     void set_sensitive_according_to_message (GtrWindow * window,
-					      GtrPo * po);
+     void
+     set_sensitive_according_to_message (GtrWindow * window, GtrPo * po);
 
-     void set_sensitive_according_to_window (GtrWindow * window);
+     void
+     set_sensitive_according_to_window (GtrWindow * window);
 
-     void gtr_window_add_widget (GtrWindow * window,
-					 GtkWidget * widget,
-					 const gchar * name,
-					 const gchar * title,
-					 const gchar * stock_id,
-					 GtrWindowPlacement
-					 placement);
+     void
+     gtr_window_add_widget (GtrWindow * window,
+                            GtkWidget * widget,
+                            const gchar * name,
+                            const gchar * title,
+                            const gchar * stock_id,
+                            GtrWindowPlacement placement);
 
-     void gtr_window_remove_widget (GtrWindow * window,
-					    GtkWidget * widget);
+     void
+     gtr_window_remove_widget (GtrWindow * window, GtkWidget * widget);
 
-     GObject *_gtr_window_get_layout_manager
-       (GtrWindow * window);
+     GObject *
+     _gtr_window_get_layout_manager (GtrWindow * window);
 
-     GtkWidget *gtr_window_get_tab_from_location
-       (GtrWindow * window, GFile * location);
+     GtkWidget *
+     gtr_window_get_tab_from_location (GtrWindow * window, GFile * location);
 
-     void gtr_window_set_active_tab (GtrWindow * window,
-					     GtkWidget * tab);
+     void
+     gtr_window_set_active_tab (GtrWindow * window, GtkWidget * tab);
 
-     void _gtr_window_close_tab (GtrWindow * window,
-					 GtrTab * tab);
+     void
+     _gtr_window_close_tab (GtrWindow * window, GtrTab * tab);
 
-     GtkWidget *gtr_window_get_tm_menu (GtrWindow * window);
+     GtkWidget *
+     gtr_window_get_tm_menu (GtrWindow * window);
 
-void _gtr_recent_add (GtrWindow * window,
-			GFile * location, gchar * project_id);
+     void
+     _gtr_recent_add (GtrWindow * window,
+                      GFile * location, gchar * project_id);
 
 G_END_DECLS
 #endif /* __WINDOW_H__ */

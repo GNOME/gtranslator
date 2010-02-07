@@ -26,31 +26,27 @@
 
 #include <glib.h>
 
-G_BEGIN_DECLS
+G_BEGIN_DECLS gchar * gtr_dirs_get_user_config_dir (void);
 
-gchar		*gtr_dirs_get_user_config_dir		(void);
+gchar *gtr_dirs_get_user_cache_dir (void);
 
-gchar		*gtr_dirs_get_user_cache_dir		(void);
+gchar *gtr_dirs_get_user_plugins_dir (void);
 
-gchar		*gtr_dirs_get_user_plugins_dir		(void);
+gchar *gtr_dirs_get_user_accels_file (void);
 
-gchar		*gtr_dirs_get_user_accels_file		(void);
+gchar *gtr_dirs_get_gtr_data_dir (void);
 
-gchar		*gtr_dirs_get_gtr_data_dir	(void);
+gchar *gtr_dirs_get_gtr_locale_dir (void);
 
-gchar		*gtr_dirs_get_gtr_locale_dir	(void);
+gchar *gtr_dirs_get_gtr_lib_dir (void);
 
-gchar		*gtr_dirs_get_gtr_lib_dir	(void);
+gchar *gtr_dirs_get_gtr_plugins_dir (void);
 
-gchar		*gtr_dirs_get_gtr_plugins_dir	(void);
+gchar *gtr_dirs_get_gtr_plugin_loaders_dir (void);
 
-gchar		*gtr_dirs_get_gtr_plugin_loaders_dir
-								(void);
+gchar *gtr_dirs_get_ui_file (const gchar * file);
 
-gchar		*gtr_dirs_get_ui_file			(const gchar *file);
-
-gchar           *gtr_dirs_get_pixmaps_dir               (void);
+gchar *gtr_dirs_get_pixmaps_dir (void);
 
 G_END_DECLS
-
 #endif /* __GEDIT_DIRS_H__ */

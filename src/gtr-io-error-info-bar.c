@@ -23,23 +23,22 @@
 #include <gtk/gtk.h>
 
 static void
-set_contents (GtkInfoBar *infobar,
-	      GtkWidget  *contents)
+set_contents (GtkInfoBar * infobar, GtkWidget * contents)
 {
-	GtkWidget *content_area;
-	
-	content_area = gtk_info_bar_get_content_area (infobar);
-	gtk_container_add (GTK_CONTAINER (content_area), contents);
+  GtkWidget *content_area;
+
+  content_area = gtk_info_bar_get_content_area (infobar);
+  gtk_container_add (GTK_CONTAINER (content_area), contents);
 }
 
 /*
  * Message area funcs
  */
 static void
-set_info_bar_text_and_icon (GtkInfoBar  *infobar,
-			    const gchar *icon_stock_id,
-			    const gchar *primary_text,
-			    const gchar *secondary_text)
+set_info_bar_text_and_icon (GtkInfoBar * infobar,
+                            const gchar * icon_stock_id,
+                            const gchar * primary_text,
+                            const gchar * secondary_text)
 {
   GtkWidget *hbox_content;
   GtkWidget *image;
@@ -79,7 +78,7 @@ set_info_bar_text_and_icon (GtkInfoBar  *infobar,
   if (secondary_text != NULL)
     {
       secondary_markup = g_strdup_printf ("<small>%s</small>",
-					  secondary_text);
+                                          secondary_text);
       secondary_label = gtk_label_new (secondary_markup);
       g_free (secondary_markup);
 
@@ -103,7 +102,7 @@ set_info_bar_text_and_icon (GtkInfoBar  *infobar,
  */
 void
 warning_message_button_clicked (GtkWidget * widget,
-				gint response_id, gpointer data)
+                                gint response_id, gpointer data)
 {
   if (response_id == GTK_RESPONSE_CLOSE)
     {
@@ -112,23 +111,22 @@ warning_message_button_clicked (GtkWidget * widget,
 }
 
 GtkWidget *
-create_error_info_bar (const gchar *primary_text,
-		       const gchar *secondary_text)
+create_error_info_bar (const gchar * primary_text,
+                       const gchar * secondary_text)
 {
   GtkWidget *infobar;
 
   infobar = gtk_info_bar_new_with_buttons (GTK_STOCK_CLOSE,
-					   GTK_RESPONSE_CLOSE, NULL);
+                                           GTK_RESPONSE_CLOSE, NULL);
 
-  gtk_info_bar_set_message_type (GTK_INFO_BAR (infobar),
-				 GTK_MESSAGE_WARNING);
+  gtk_info_bar_set_message_type (GTK_INFO_BAR (infobar), GTK_MESSAGE_WARNING);
 
   set_info_bar_text_and_icon (GTK_INFO_BAR (infobar),
-			      GTK_STOCK_DIALOG_ERROR,
-			      primary_text, secondary_text);
+                              GTK_STOCK_DIALOG_ERROR,
+                              primary_text, secondary_text);
 
   g_signal_connect (G_OBJECT (infobar), "response",
-		    G_CALLBACK (warning_message_button_clicked), NULL);
+                    G_CALLBACK (warning_message_button_clicked), NULL);
 
   gtk_widget_show (infobar);
 

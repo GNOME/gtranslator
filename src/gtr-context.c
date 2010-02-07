@@ -32,8 +32,7 @@
 						 GTR_TYPE_CONTEXT_PANEL,     \
 						 GtrContextPanelPrivate))
 
-G_DEFINE_TYPE (GtrContextPanel, gtr_context_panel,
-	       GTK_TYPE_VBOX)
+G_DEFINE_TYPE (GtrContextPanel, gtr_context_panel, GTK_TYPE_VBOX)
      struct _GtrContextPanelPrivate
      {
        GtkWidget *context;
@@ -42,9 +41,7 @@ G_DEFINE_TYPE (GtrContextPanel, gtr_context_panel,
      };
 
      static void
-       showed_message_cb (GtrTab * tab,
-			  GtrMsg * msg,
-			  GtrContextPanel * panel)
+       showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrContextPanel * panel)
 {
   GtkTextBuffer *buffer;
   GtkTextIter iter;
@@ -58,11 +55,10 @@ G_DEFINE_TYPE (GtrContextPanel, gtr_context_panel,
   gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
 
   format = g_strconcat (_("Format:"), gtr_msg_get_format (msg), NULL);
-  context =
-    g_strconcat (_("Context:"), gtr_msg_get_msgctxt (msg), NULL);
+  context = g_strconcat (_("Context:"), gtr_msg_get_msgctxt (msg), NULL);
   extracted =
     g_strconcat (_("Extracted comments:"),
-		 gtr_msg_get_extracted_comments (msg), NULL);
+                 gtr_msg_get_extracted_comments (msg), NULL);
 
   toset = g_strdup_printf ("%s\n%s\n%s", format, context, extracted);
 
@@ -86,13 +82,13 @@ gtr_context_panel_draw (GtrContextPanel * panel)
    */
   context_scrolled_window = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW
-				  (context_scrolled_window),
-				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+                                  (context_scrolled_window),
+                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW
-				       (context_scrolled_window),
-				       GTK_SHADOW_IN);
+                                       (context_scrolled_window),
+                                       GTK_SHADOW_IN);
   gtk_box_pack_start (GTK_BOX (panel), context_scrolled_window, TRUE, TRUE,
-		      0);
+                      0);
   gtk_widget_show (context_scrolled_window);
 
   /*
@@ -103,7 +99,7 @@ gtr_context_panel_draw (GtrContextPanel * panel)
   gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->context), FALSE);
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (priv->context), GTK_WRAP_WORD);
   gtk_container_add (GTK_CONTAINER (context_scrolled_window),
-		     GTK_WIDGET (priv->context));
+                     GTK_WIDGET (priv->context));
   gtk_widget_show (priv->context);
 }
 
@@ -148,8 +144,8 @@ gtr_context_panel_new (GtkWidget * tab)
 
   context->priv->tab = GTR_TAB (tab);
   g_signal_connect (tab,
-		    "showed-message",
-		    G_CALLBACK (showed_message_cb), context);
+                    "showed-message",
+                    G_CALLBACK (showed_message_cb), context);
 
   return GTK_WIDGET (context);
 }
@@ -161,8 +157,7 @@ gtr_context_panel_new (GtkWidget * tab)
  * Returns: the context #GtkTextView
  */
 GtkTextView *
-gtr_context_panel_get_context_text_view (GtrContextPanel *
-						 panel)
+gtr_context_panel_get_context_text_view (GtrContextPanel * panel)
 {
   g_return_val_if_fail (GTR_IS_CONTEXT_PANEL (panel), NULL);
 

@@ -70,25 +70,21 @@ struct _GtrPluginManagerPrivate
   GtkWidget *popup_menu;
 };
 
-G_DEFINE_TYPE (GtrPluginManager, gtr_plugin_manager,
-	       GTK_TYPE_VBOX)
+G_DEFINE_TYPE (GtrPluginManager, gtr_plugin_manager, GTK_TYPE_VBOX)
      static GtrPluginInfo
-       *plugin_manager_get_selected_plugin (GtrPluginManager * pm);
+       * plugin_manager_get_selected_plugin (GtrPluginManager * pm);
      static void plugin_manager_toggle_active (GtrPluginManager * pm,
-					       GtkTreeIter * iter,
-					       GtkTreeModel * model);
+                                               GtkTreeIter * iter,
+                                               GtkTreeModel * model);
      static void gtr_plugin_manager_finalize (GObject * object);
 
-     static void
-       gtr_plugin_manager_class_init (GtrPluginManagerClass *
-					      klass)
+     static void gtr_plugin_manager_class_init (GtrPluginManagerClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = gtr_plugin_manager_finalize;
 
-  g_type_class_add_private (object_class,
-			    sizeof (GtrPluginManagerPrivate));
+  g_type_class_add_private (object_class, sizeof (GtrPluginManagerPrivate));
 }
 
 static void
@@ -107,33 +103,32 @@ about_button_cb (GtkWidget * button, GtrPluginManager * pm)
     gtk_widget_destroy (pm->priv->about);
 
   pm->priv->about = g_object_new (GTK_TYPE_ABOUT_DIALOG,
-				  "program-name",
-				  gtr_plugin_info_get_name (info),
-				  "copyright",
-				  gtr_plugin_info_get_copyright
-				  (info), "authors",
-				  gtr_plugin_info_get_authors (info),
-				  "license",
-				  gtr_plugin_info_get_license (info),
-				  "comments",
-				  gtr_plugin_info_get_description
-				  (info), "website",
-				  gtr_plugin_info_get_website (info),
-				  "logo-icon-name",
-				  gtr_plugin_info_get_icon_name
-				  (info), NULL);
+                                  "program-name",
+                                  gtr_plugin_info_get_name (info),
+                                  "copyright",
+                                  gtr_plugin_info_get_copyright
+                                  (info), "authors",
+                                  gtr_plugin_info_get_authors (info),
+                                  "license",
+                                  gtr_plugin_info_get_license (info),
+                                  "comments",
+                                  gtr_plugin_info_get_description
+                                  (info), "website",
+                                  gtr_plugin_info_get_website (info),
+                                  "logo-icon-name",
+                                  gtr_plugin_info_get_icon_name (info), NULL);
 
   gtk_window_set_destroy_with_parent (GTK_WINDOW (pm->priv->about), TRUE);
 
   g_signal_connect (pm->priv->about,
-		    "response", G_CALLBACK (gtk_widget_destroy), NULL);
+                    "response", G_CALLBACK (gtk_widget_destroy), NULL);
   g_signal_connect (pm->priv->about,
-		    "destroy",
-		    G_CALLBACK (gtk_widget_destroyed), &pm->priv->about);
+                    "destroy",
+                    G_CALLBACK (gtk_widget_destroyed), &pm->priv->about);
 
   gtk_window_set_transient_for (GTK_WINDOW (pm->priv->about),
-				GTK_WINDOW (gtk_widget_get_toplevel
-					    (GTK_WIDGET (pm))));
+                                GTK_WINDOW (gtk_widget_get_toplevel
+                                            (GTK_WIDGET (pm))));
   gtk_widget_show (pm->priv->about);
 }
 
@@ -153,17 +148,16 @@ configure_button_cb (GtkWidget * button, GtrPluginManager * pm)
 
   toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (pm)));
 
-  gtr_plugins_engine_configure_plugin (pm->priv->engine,
-					       info, toplevel);
+  gtr_plugins_engine_configure_plugin (pm->priv->engine, info, toplevel);
 
   DEBUG_PRINT ("Done");
 }
 
 static void
 plugin_manager_view_info_cell_cb (GtkTreeViewColumn * tree_column,
-				  GtkCellRenderer * cell,
-				  GtkTreeModel * tree_model,
-				  GtkTreeIter * iter, gpointer data)
+                                  GtkCellRenderer * cell,
+                                  GtkTreeModel * tree_model,
+                                  GtkTreeIter * iter, gpointer data)
 {
   GtrPluginInfo *info;
   gchar *text;
@@ -177,20 +171,19 @@ plugin_manager_view_info_cell_cb (GtkTreeViewColumn * tree_column,
     return;
 
   text = g_markup_printf_escaped ("<b>%s</b>\n%s",
-				  gtr_plugin_info_get_name (info),
-				  gtr_plugin_info_get_description
-				  (info));
+                                  gtr_plugin_info_get_name (info),
+                                  gtr_plugin_info_get_description (info));
   g_object_set (G_OBJECT (cell), "markup", text, "sensitive",
-		gtr_plugin_info_is_available (info), NULL);
+                gtr_plugin_info_is_available (info), NULL);
 
   g_free (text);
 }
 
 static void
 plugin_manager_view_icon_cell_cb (GtkTreeViewColumn * tree_column,
-				  GtkCellRenderer * cell,
-				  GtkTreeModel * tree_model,
-				  GtkTreeIter * iter, gpointer data)
+                                  GtkCellRenderer * cell,
+                                  GtkTreeModel * tree_model,
+                                  GtkTreeIter * iter, gpointer data)
 {
   GtrPluginInfo *info;
 
@@ -203,15 +196,14 @@ plugin_manager_view_icon_cell_cb (GtkTreeViewColumn * tree_column,
     return;
 
   g_object_set (G_OBJECT (cell),
-		"icon-name", gtr_plugin_info_get_icon_name (info),
-		"sensitive", gtr_plugin_info_is_available (info),
-		NULL);
+                "icon-name", gtr_plugin_info_get_icon_name (info),
+                "sensitive", gtr_plugin_info_is_available (info), NULL);
 }
 
 
 static void
 active_toggled_cb (GtkCellRendererToggle * cell,
-		   gchar * path_str, GtrPluginManager * pm)
+                   gchar * path_str, GtrPluginManager * pm)
 {
   GtkTreeIter iter;
   GtkTreePath *path;
@@ -243,16 +235,16 @@ cursor_changed_cb (GtkTreeView * view, gpointer data)
   info = plugin_manager_get_selected_plugin (pm);
 
   gtk_widget_set_sensitive (GTK_WIDGET (pm->priv->about_button),
-			    info != NULL);
+                            info != NULL);
   gtk_widget_set_sensitive (GTK_WIDGET (pm->priv->configure_button),
-			    (info != NULL) &&
-			    gtr_plugin_info_is_configurable (info));
+                            (info != NULL) &&
+                            gtr_plugin_info_is_configurable (info));
 }
 
 static void
 row_activated_cb (GtkTreeView * tree_view,
-		  GtkTreePath * path,
-		  GtkTreeViewColumn * column, gpointer data)
+                  GtkTreePath * path,
+                  GtkTreeViewColumn * column, gpointer data)
 {
   GtrPluginManager *pm = data;
   GtkTreeIter iter;
@@ -292,11 +284,11 @@ plugin_manager_populate_lists (GtrPluginManager * pm)
 
       gtk_list_store_append (model, &iter);
       gtk_list_store_set (model, &iter,
-			  ACTIVE_COLUMN,
-			  gtr_plugin_info_is_active (info),
-			  AVAILABLE_COLUMN,
-			  gtr_plugin_info_is_available (info),
-			  INFO_COLUMN, info, -1);
+                          ACTIVE_COLUMN,
+                          gtr_plugin_info_is_active (info),
+                          AVAILABLE_COLUMN,
+                          gtr_plugin_info_is_available (info),
+                          INFO_COLUMN, info, -1);
 
       plugins = plugins->next;
     }
@@ -307,24 +299,23 @@ plugin_manager_populate_lists (GtrPluginManager * pm)
       GtrPluginInfo *info;
 
       selection =
-	gtk_tree_view_get_selection (GTK_TREE_VIEW (pm->priv->tree));
+        gtk_tree_view_get_selection (GTK_TREE_VIEW (pm->priv->tree));
       g_return_if_fail (selection != NULL);
 
       gtk_tree_selection_select_iter (selection, &iter);
 
       gtk_tree_model_get (GTK_TREE_MODEL (model), &iter,
-			  INFO_COLUMN, &info, -1);
+                          INFO_COLUMN, &info, -1);
 
       gtk_widget_set_sensitive (GTK_WIDGET (pm->priv->configure_button),
-				gtr_plugin_info_is_configurable
-				(info));
+                                gtr_plugin_info_is_configurable (info));
     }
 }
 
 static gboolean
 plugin_manager_set_active (GtrPluginManager * pm,
-			   GtkTreeIter * iter,
-			   GtkTreeModel * model, gboolean active)
+                           GtkTreeIter * iter,
+                           GtkTreeModel * model, gboolean active)
 {
   GtrPluginInfo *info;
   gboolean res = TRUE;
@@ -338,26 +329,24 @@ plugin_manager_set_active (GtrPluginManager * pm,
   if (active)
     {
       /* activate the plugin */
-      if (!gtr_plugins_engine_activate_plugin
-	  (pm->priv->engine, info))
-	{
-	  DEBUG_PRINT ("Could not activate %s.\n",
-		       gtr_plugin_info_get_name (info));
+      if (!gtr_plugins_engine_activate_plugin (pm->priv->engine, info))
+        {
+          DEBUG_PRINT ("Could not activate %s.\n",
+                       gtr_plugin_info_get_name (info));
 
-	  res = FALSE;
-	}
+          res = FALSE;
+        }
     }
   else
     {
       /* deactivate the plugin */
-      if (!gtr_plugins_engine_deactivate_plugin
-	  (pm->priv->engine, info))
-	{
-	  DEBUG_PRINT ("Could not deactivate %s.\n",
-		       gtr_plugin_info_get_name (info));
+      if (!gtr_plugins_engine_deactivate_plugin (pm->priv->engine, info))
+        {
+          DEBUG_PRINT ("Could not deactivate %s.\n",
+                       gtr_plugin_info_get_name (info));
 
-	  res = FALSE;
-	}
+          res = FALSE;
+        }
     }
 
   return res;
@@ -365,7 +354,7 @@ plugin_manager_set_active (GtrPluginManager * pm,
 
 static void
 plugin_manager_toggle_active (GtrPluginManager * pm,
-			      GtkTreeIter * iter, GtkTreeModel * model)
+                              GtkTreeIter * iter, GtkTreeModel * model)
 {
   gboolean active;
 
@@ -426,8 +415,8 @@ plugin_manager_set_active_all (GtrPluginManager * pm, gboolean active)
 /* Callback used as the interactive search comparison function */
 static gboolean
 name_search_cb (GtkTreeModel * model,
-		gint column,
-		const gchar * key, GtkTreeIter * iter, gpointer data)
+                gint column,
+                const gchar * key, GtkTreeIter * iter, gpointer data)
 {
   GtrPluginInfo *info;
   gchar *normalized_string;
@@ -442,8 +431,7 @@ name_search_cb (GtkTreeModel * model,
     return FALSE;
 
   normalized_string =
-    g_utf8_normalize (gtr_plugin_info_get_name (info), -1,
-		      G_NORMALIZE_ALL);
+    g_utf8_normalize (gtr_plugin_info_get_name (info), -1, G_NORMALIZE_ALL);
   normalized_key = g_utf8_normalize (key, -1, G_NORMALIZE_ALL);
   case_normalized_string = g_utf8_casefold (normalized_string, -1);
   case_normalized_key = g_utf8_casefold (normalized_key, -1);
@@ -513,18 +501,16 @@ create_tree_popup_menu (GtrPluginManager * pm)
 
   item = gtk_image_menu_item_new_with_mnemonic (_("C_onfigure"));
   image = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES,
-				    GTK_ICON_SIZE_MENU);
+                                    GTK_ICON_SIZE_MENU);
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
   g_signal_connect (item, "activate", G_CALLBACK (configure_button_cb), pm);
-  gtk_widget_set_sensitive (item,
-			    gtr_plugin_info_is_configurable (info));
+  gtk_widget_set_sensitive (item, gtr_plugin_info_is_configurable (info));
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
   item = gtk_check_menu_item_new_with_mnemonic (_("A_ctivate"));
-  gtk_widget_set_sensitive (item,
-			    gtr_plugin_info_is_available (info));
+  gtk_widget_set_sensitive (item, gtr_plugin_info_is_available (info));
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item),
-				  gtr_plugin_info_is_active (info));
+                                  gtr_plugin_info_is_active (info));
   g_signal_connect (item, "toggled", G_CALLBACK (enable_plugin_menu_cb), pm);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
@@ -552,7 +538,7 @@ tree_popup_menu_detach (GtrPluginManager * pm, GtkMenu * menu)
 
 static void
 show_tree_popup_menu (GtkTreeView * tree,
-		      GtrPluginManager * pm, GdkEventButton * event)
+                      GtrPluginManager * pm, GdkEventButton * event)
 {
   if (pm->priv->popup_menu)
     gtk_widget_destroy (pm->priv->popup_menu);
@@ -560,28 +546,28 @@ show_tree_popup_menu (GtkTreeView * tree,
   pm->priv->popup_menu = create_tree_popup_menu (pm);
 
   gtk_menu_attach_to_widget (GTK_MENU (pm->priv->popup_menu),
-			     GTK_WIDGET (pm),
-			     (GtkMenuDetachFunc) tree_popup_menu_detach);
+                             GTK_WIDGET (pm),
+                             (GtkMenuDetachFunc) tree_popup_menu_detach);
 
   if (event != NULL)
     {
       gtk_menu_popup (GTK_MENU (pm->priv->popup_menu), NULL, NULL,
-		      NULL, NULL, event->button, event->time);
+                      NULL, NULL, event->button, event->time);
     }
   else
     {
       gtk_menu_popup (GTK_MENU (pm->priv->popup_menu), NULL, NULL,
-		      gtr_utils_menu_position_under_tree_view, tree,
-		      0, gtk_get_current_event_time ());
+                      gtr_utils_menu_position_under_tree_view, tree,
+                      0, gtk_get_current_event_time ());
 
       gtk_menu_shell_select_first (GTK_MENU_SHELL (pm->priv->popup_menu),
-				   FALSE);
+                                   FALSE);
     }
 }
 
 static gboolean
 button_press_event_cb (GtkWidget * tree,
-		       GdkEventButton * event, GtrPluginManager * pm)
+                       GdkEventButton * event, GtrPluginManager * pm)
 {
   /* We want the treeview selection to be updated before showing the menu.
    * This code is evil, thanks to Federico Mena Quintero's black magic.
@@ -593,10 +579,10 @@ button_press_event_cb (GtkWidget * tree,
   gboolean handled;
 
   if (in_press)
-    return FALSE;		/* we re-entered */
+    return FALSE;               /* we re-entered */
 
   if (GDK_BUTTON_PRESS != event->type || 3 != event->button)
-    return FALSE;		/* let the normal handler run */
+    return FALSE;               /* let the normal handler run */
 
   in_press = TRUE;
   handled = gtk_widget_event (tree, (GdkEvent *) event);
@@ -619,8 +605,8 @@ popup_menu_cb (GtkTreeView * tree, GtrPluginManager * pm)
 
 static gint
 model_name_sort_func (GtkTreeModel * model,
-		      GtkTreeIter * iter1,
-		      GtkTreeIter * iter2, gpointer user_data)
+                      GtkTreeIter * iter1,
+                      GtkTreeIter * iter2, gpointer user_data)
 {
   GtrPluginInfo *info1, *info2;
 
@@ -628,7 +614,7 @@ model_name_sort_func (GtkTreeModel * model,
   gtk_tree_model_get (model, iter2, INFO_COLUMN, &info2, -1);
 
   return g_utf8_collate (gtr_plugin_info_get_name (info1),
-			 gtr_plugin_info_get_name (info2));
+                         gtr_plugin_info_get_name (info2));
 }
 
 static void
@@ -642,10 +628,10 @@ plugin_manager_construct_tree (GtrPluginManager * pm)
 
   model =
     gtk_list_store_new (N_COLUMNS, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN,
-			GTR_TYPE_PLUGIN_INFO);
+                        GTR_TYPE_PLUGIN_INFO);
 
   gtk_tree_view_set_model (GTK_TREE_VIEW (pm->priv->tree),
-			   GTK_TREE_MODEL (model));
+                           GTK_TREE_MODEL (model));
   g_object_unref (model);
 
   gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (pm->priv->tree), TRUE);
@@ -657,10 +643,10 @@ plugin_manager_construct_tree (GtrPluginManager * pm)
   g_signal_connect (cell, "toggled", G_CALLBACK (active_toggled_cb), pm);
   column =
     gtk_tree_view_column_new_with_attributes (PLUGIN_MANAGER_ACTIVE_TITLE,
-					      cell, "active", ACTIVE_COLUMN,
-					      "activatable", AVAILABLE_COLUMN,
-					      "sensitive", AVAILABLE_COLUMN,
-					      NULL);
+                                              cell, "active", ACTIVE_COLUMN,
+                                              "activatable", AVAILABLE_COLUMN,
+                                              "sensitive", AVAILABLE_COLUMN,
+                                              NULL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (pm->priv->tree), column);
 
   /* second column */
@@ -672,15 +658,15 @@ plugin_manager_construct_tree (GtrPluginManager * pm)
   gtk_tree_view_column_pack_start (column, cell, FALSE);
   g_object_set (cell, "stock-size", GTK_ICON_SIZE_SMALL_TOOLBAR, NULL);
   gtk_tree_view_column_set_cell_data_func (column, cell,
-					   plugin_manager_view_icon_cell_cb,
-					   pm, NULL);
+                                           plugin_manager_view_icon_cell_cb,
+                                           pm, NULL);
 
   cell = gtk_cell_renderer_text_new ();
   gtk_tree_view_column_pack_start (column, cell, TRUE);
   g_object_set (cell, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
   gtk_tree_view_column_set_cell_data_func (column, cell,
-					   plugin_manager_view_info_cell_cb,
-					   pm, NULL);
+                                           plugin_manager_view_info_cell_cb,
+                                           pm, NULL);
 
 
   gtk_tree_view_column_set_spacing (column, 6);
@@ -688,34 +674,33 @@ plugin_manager_construct_tree (GtrPluginManager * pm)
 
   /* Sort on the plugin names */
   gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (model),
-					   model_name_sort_func, NULL, NULL);
+                                           model_name_sort_func, NULL, NULL);
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
-					GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID,
-					GTK_SORT_ASCENDING);
+                                        GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID,
+                                        GTK_SORT_ASCENDING);
 
   /* Enable search for our non-string column */
   gtk_tree_view_set_search_column (GTK_TREE_VIEW (pm->priv->tree),
-				   INFO_COLUMN);
+                                   INFO_COLUMN);
   gtk_tree_view_set_search_equal_func (GTK_TREE_VIEW (pm->priv->tree),
-				       name_search_cb, NULL, NULL);
+                                       name_search_cb, NULL, NULL);
 
   g_signal_connect (pm->priv->tree,
-		    "cursor_changed", G_CALLBACK (cursor_changed_cb), pm);
+                    "cursor_changed", G_CALLBACK (cursor_changed_cb), pm);
   g_signal_connect (pm->priv->tree,
-		    "row_activated", G_CALLBACK (row_activated_cb), pm);
+                    "row_activated", G_CALLBACK (row_activated_cb), pm);
 
   g_signal_connect (pm->priv->tree,
-		    "button-press-event",
-		    G_CALLBACK (button_press_event_cb), pm);
+                    "button-press-event",
+                    G_CALLBACK (button_press_event_cb), pm);
   g_signal_connect (pm->priv->tree,
-		    "popup-menu", G_CALLBACK (popup_menu_cb), pm);
+                    "popup-menu", G_CALLBACK (popup_menu_cb), pm);
   gtk_widget_show (pm->priv->tree);
 }
 
 static void
 plugin_toggled_cb (GtrPluginsEngine * engine,
-		   GtrPluginInfo * info,
-		   GtrPluginManager * pm)
+                   GtrPluginInfo * info, GtrPluginManager * pm)
 {
   GtkTreeSelection *selection;
   GtkTreeModel *model;
@@ -737,24 +722,24 @@ plugin_toggled_cb (GtrPluginsEngine * engine,
       gtk_tree_model_get_iter_first (model, &iter);
 
       do
-	{
-	  GtrPluginInfo *tinfo;
-	  gtk_tree_model_get (model, &iter, INFO_COLUMN, &tinfo, -1);
-	  info_found = info == tinfo;
-	}
+        {
+          GtrPluginInfo *tinfo;
+          gtk_tree_model_get (model, &iter, INFO_COLUMN, &tinfo, -1);
+          info_found = info == tinfo;
+        }
       while (!info_found && gtk_tree_model_iter_next (model, &iter));
     }
 
   if (!info_found)
     {
       g_warning
-	("GtrPluginManager: plugin '%s' not found in the tree model",
-	 gtr_plugin_info_get_name (info));
+        ("GtrPluginManager: plugin '%s' not found in the tree model",
+         gtr_plugin_info_get_name (info));
       return;
     }
 
   gtk_list_store_set (GTK_LIST_STORE (model), &iter, ACTIVE_COLUMN,
-		      gtr_plugin_info_is_active (info), -1);
+                      gtr_plugin_info_is_active (info), -1);
 }
 
 static void
@@ -774,7 +759,7 @@ gtr_plugin_manager_init (GtrPluginManager * pm)
 
   label = gtk_label_new (NULL);
   markup = g_markup_printf_escaped ("<span weight=\"bold\">%s</span>",
-				    _("Active plugins"));
+                                    _("Active plugins"));
   gtk_label_set_markup (GTK_LABEL (label), markup);
   g_free (markup);
   gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
@@ -788,9 +773,9 @@ gtr_plugin_manager_init (GtrPluginManager * pm)
 
   viewport = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (viewport),
-				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (viewport),
-				       GTK_SHADOW_IN);
+                                       GTK_SHADOW_IN);
 
   gtk_container_add (GTK_CONTAINER (alignment), viewport);
 
@@ -803,22 +788,21 @@ gtr_plugin_manager_init (GtrPluginManager * pm)
   gtk_box_set_spacing (GTK_BOX (hbuttonbox), 8);
 
   pm->priv->about_button =
-    gtr_gtk_button_new_with_stock_icon (_("_About Plugin"),
-						GTK_STOCK_ABOUT);
+    gtr_gtk_button_new_with_stock_icon (_("_About Plugin"), GTK_STOCK_ABOUT);
   gtk_container_add (GTK_CONTAINER (hbuttonbox), pm->priv->about_button);
 
   pm->priv->configure_button =
     gtr_gtk_button_new_with_stock_icon (_("C_onfigure Plugin"),
-						GTK_STOCK_PREFERENCES);
+                                        GTK_STOCK_PREFERENCES);
   gtk_container_add (GTK_CONTAINER (hbuttonbox), pm->priv->configure_button);
 
   /* setup a window of a sane size. */
   gtk_widget_set_size_request (GTK_WIDGET (viewport), 270, 100);
 
   g_signal_connect (pm->priv->about_button,
-		    "clicked", G_CALLBACK (about_button_cb), pm);
+                    "clicked", G_CALLBACK (about_button_cb), pm);
   g_signal_connect (pm->priv->configure_button,
-		    "clicked", G_CALLBACK (configure_button_cb), pm);
+                    "clicked", G_CALLBACK (configure_button_cb), pm);
 
   plugin_manager_construct_tree (pm);
 
@@ -826,11 +810,11 @@ gtr_plugin_manager_init (GtrPluginManager * pm)
   pm->priv->engine = gtr_plugins_engine_get_default ();
 
   g_signal_connect_after (pm->priv->engine,
-			  "activate-plugin",
-			  G_CALLBACK (plugin_toggled_cb), pm);
+                          "activate-plugin",
+                          G_CALLBACK (plugin_toggled_cb), pm);
   g_signal_connect_after (pm->priv->engine,
-			  "deactivate-plugin",
-			  G_CALLBACK (plugin_toggled_cb), pm);
+                          "deactivate-plugin",
+                          G_CALLBACK (plugin_toggled_cb), pm);
 
   if (gtr_plugins_engine_get_plugin_list (pm->priv->engine) != NULL)
     {
@@ -849,7 +833,7 @@ gtr_plugin_manager_finalize (GObject * object)
   GtrPluginManager *pm = GTR_PLUGIN_MANAGER (object);
 
   g_signal_handlers_disconnect_by_func (pm->priv->engine,
-					plugin_toggled_cb, pm);
+                                        plugin_toggled_cb, pm);
 
   if (pm->priv->popup_menu)
     gtk_widget_destroy (pm->priv->popup_menu);

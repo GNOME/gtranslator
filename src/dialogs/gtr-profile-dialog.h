@@ -47,8 +47,7 @@ enum
 #define GTR_PROFILE_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_PROFILE_DIALOG, GtrProfileDialogClass))
 
 /* Private structure type */
-typedef struct _GtrProfileDialogPrivate
-  GtrProfileDialogPrivate;
+typedef struct _GtrProfileDialogPrivate GtrProfileDialogPrivate;
 
 /*
  * Main object structure
@@ -83,8 +82,6 @@ gtr_profile_dialog_get_type (void)
      GType gtr_profile_dialog_register_type (GTypeModule * module);
 
      void gtr_show_profile_dialog (GtrPreferencesDialog *
-					   dialog,
-					   GtrProfile * profile,
-					   gint action);
+                                   dialog, GtrProfile * profile, gint action);
 
 #endif

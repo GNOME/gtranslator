@@ -103,10 +103,10 @@ gtr_plugin_info_get_type (void)
 
   if (G_UNLIKELY (!the_type))
     the_type = g_boxed_type_register_static ("GtrPluginInfo",
-					     (GBoxedCopyFunc)
-					     gtr_plugin_info_copy,
-					     (GBoxedFreeFunc)
-					     _gtr_plugin_info_unref);
+                                             (GBoxedCopyFunc)
+                                             gtr_plugin_info_copy,
+                                             (GBoxedFreeFunc)
+                                             _gtr_plugin_info_unref);
 
   return the_type;
 }
@@ -149,7 +149,7 @@ _gtr_plugin_info_new (const gchar * file)
 
   /* Check IAge=2 */
   if (g_key_file_get_integer (plugin_file,
-			      "Gtranslator Plugin", "IAge", NULL) != 2)
+                              "Gtranslator Plugin", "IAge", NULL) != 2)
     {
       DEBUG_PRINT ("Wrong IAge in file: %s", file);
       goto error;
@@ -157,7 +157,7 @@ _gtr_plugin_info_new (const gchar * file)
 
   /* Get module name */
   str = g_key_file_get_string (plugin_file,
-			       "Gtranslator Plugin", "Module", NULL);
+                               "Gtranslator Plugin", "Module", NULL);
 
   if ((str != NULL) && (*str != '\0'))
     {
@@ -171,8 +171,8 @@ _gtr_plugin_info_new (const gchar * file)
 
   /* Get the dependency list */
   info->dependencies = g_key_file_get_string_list (plugin_file,
-						   "Gtranslator Plugin",
-						   "Depends", NULL, NULL);
+                                                   "Gtranslator Plugin",
+                                                   "Depends", NULL, NULL);
   if (info->dependencies == NULL)
     {
       DEBUG_PRINT ("Could not find 'Depends' in %s", file);
@@ -181,12 +181,12 @@ _gtr_plugin_info_new (const gchar * file)
 
   /* Get the loader for this plugin */
   str = g_key_file_get_string (plugin_file,
-			       "Gtranslator Plugin", "Loader", NULL);
+                               "Gtranslator Plugin", "Loader", NULL);
   if (str && strcmp (str, "python") == 0)
     {
 #ifndef ENABLE_PYTHON
       g_warning ("Cannot load Python plugin '%s' since gtranslator was not "
-		 "compiled with Python support.", file);
+                 "compiled with Python support.", file);
       goto error;
 #else
       info->module_type = GTR_TYPE_PYTHON_MODULE;
@@ -200,8 +200,8 @@ _gtr_plugin_info_new (const gchar * file)
 
   /* Get Name */
   str = g_key_file_get_locale_string (plugin_file,
-				      "Gtranslator Plugin",
-				      "Name", NULL, NULL);
+                                      "Gtranslator Plugin",
+                                      "Name", NULL, NULL);
   if (str)
     info->name = str;
   else
@@ -212,8 +212,8 @@ _gtr_plugin_info_new (const gchar * file)
 
   /* Get Description */
   str = g_key_file_get_locale_string (plugin_file,
-				      "Gtranslator Plugin",
-				      "Description", NULL, NULL);
+                                      "Gtranslator Plugin",
+                                      "Description", NULL, NULL);
   if (str)
     info->desc = str;
   else
@@ -221,8 +221,8 @@ _gtr_plugin_info_new (const gchar * file)
 
   /* Get Icon */
   str = g_key_file_get_locale_string (plugin_file,
-				      "Gtranslator Plugin",
-				      "Icon", NULL, NULL);
+                                      "Gtranslator Plugin",
+                                      "Icon", NULL, NULL);
   if (str)
     info->icon_name = str;
   else
@@ -231,15 +231,15 @@ _gtr_plugin_info_new (const gchar * file)
 
   /* Get Authors */
   info->authors = g_key_file_get_string_list (plugin_file,
-					      "Gtranslator Plugin",
-					      "Authors", NULL, NULL);
+                                              "Gtranslator Plugin",
+                                              "Authors", NULL, NULL);
   if (info->authors == NULL)
     DEBUG_PRINT ("Could not find 'Authors' in %s", file);
 
 
   /* Get Copyright */
   str = g_key_file_get_string (plugin_file,
-			       "Gtranslator Plugin", "Copyright", NULL);
+                               "Gtranslator Plugin", "Copyright", NULL);
   if (str)
     info->copyright = str;
   else
@@ -247,7 +247,7 @@ _gtr_plugin_info_new (const gchar * file)
 
   /* Get License */
   str = g_key_file_get_string (plugin_file,
-			       "Gtranslator Plugin", "License", NULL);
+                               "Gtranslator Plugin", "License", NULL);
   if (str)
     info->license = str;
   else
@@ -255,7 +255,7 @@ _gtr_plugin_info_new (const gchar * file)
 
   /* Get Website */
   str = g_key_file_get_string (plugin_file,
-			       "Gtranslator Plugin", "Website", NULL);
+                               "Gtranslator Plugin", "Website", NULL);
   if (str)
     info->website = str;
   else
@@ -333,7 +333,7 @@ gtr_plugin_info_get_icon_name (GtrPluginInfo * info)
      have its own */
   if (info->icon_name != NULL &&
       gtk_icon_theme_has_icon (gtk_icon_theme_get_default (),
-			       info->icon_name))
+                               info->icon_name))
     return info->icon_name;
   else
     return "gtranslator-plugin";

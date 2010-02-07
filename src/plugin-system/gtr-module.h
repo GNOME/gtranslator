@@ -78,13 +78,11 @@ gtr_module_get_type (void)
 
      const gchar *gtr_module_get_path (GtrModule * module);
 
-     const gchar *gtr_module_get_module_name (GtrModule *
-						      module);
+     const gchar *gtr_module_get_module_name (GtrModule * module);
 
      GObject *gtr_module_new_object (GtrModule * module);
 
-     void gtr_module_class_garbage_collect
-       (GtrModuleClass * klass);
+     void gtr_module_class_garbage_collect (GtrModuleClass * klass);
 
 G_END_DECLS
 #endif

@@ -54,40 +54,35 @@ gtr_statusbar_get_type (void)
      GtkWidget *gtr_statusbar_new (void);
 
      void gtr_statusbar_push_default (GtrStatusbar *
-					      statusbar, const gchar * text);
+                                      statusbar, const gchar * text);
 
-     void gtr_statusbar_pop_default (GtrStatusbar *
-					     statusbar);
+     void gtr_statusbar_pop_default (GtrStatusbar * statusbar);
 
      guint gtr_statusbar_push (GtrStatusbar * statusbar,
-				       guint context_id, const gchar * text);
+                               guint context_id, const gchar * text);
 
-     void gtr_statusbar_pop (GtrStatusbar * statusbar,
-				     guint context_id);
+     void gtr_statusbar_pop (GtrStatusbar * statusbar, guint context_id);
 
      guint gtr_statusbar_get_context_id (GtrStatusbar *
-						 statusbar,
-						 const gchar *
-						 context_description);
+                                         statusbar,
+                                         const gchar * context_description);
 
      void gtr_statusbar_set_overwrite (GtrStatusbar *
-					       statusbar, gboolean overwrite);
+                                       statusbar, gboolean overwrite);
 
-     void gtr_statusbar_clear_overwrite (GtrStatusbar *
-						 statusbar);
+     void gtr_statusbar_clear_overwrite (GtrStatusbar * statusbar);
 
      void gtr_statusbar_flash_message (GtrStatusbar *
-					       statusbar, guint context_id,
-					       const gchar * format,
-					       ...) G_GNUC_PRINTF (3, 4);
+                                       statusbar, guint context_id,
+                                       const gchar * format,
+                                       ...) G_GNUC_PRINTF (3, 4);
 
      void gtr_statusbar_update_progress_bar (GtrStatusbar *
-						     statusbar,
-						     gdouble translated_count,
-						     gdouble messages_count);
+                                             statusbar,
+                                             gdouble translated_count,
+                                             gdouble messages_count);
 
-     void gtr_statusbar_clear_progress_bar (GtrStatusbar *
-						    statusbar);
+     void gtr_statusbar_clear_progress_bar (GtrStatusbar * statusbar);
 
 G_END_DECLS
 #endif

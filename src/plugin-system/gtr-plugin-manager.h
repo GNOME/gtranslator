@@ -44,8 +44,7 @@ G_BEGIN_DECLS
 #define GTR_IS_PLUGIN_MANAGER_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_PLUGIN_MANAGER))
 #define GTR_PLUGIN_MANAGER_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GTR_TYPE_PLUGIN_MANAGER, GtrPluginManagerClass))
 /* Private structure type */
-typedef struct _GtrPluginManagerPrivate
-  GtrPluginManagerPrivate;
+typedef struct _GtrPluginManagerPrivate GtrPluginManagerPrivate;
 
 /*
  * Main object structure

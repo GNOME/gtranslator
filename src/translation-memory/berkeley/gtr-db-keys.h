@@ -76,8 +76,7 @@ gtr_db_keys_get_type (void)
 
      gsize gtr_db_keys_get_count (GtrDbKeys * db_keys);
 
-     void gtr_db_keys_set_count (GtrDbKeys * db_keys,
-					 gsize count);
+     void gtr_db_keys_set_count (GtrDbKeys * db_keys, gsize count);
 
 G_END_DECLS
 #endif /* __DB_KEYS_H__ */

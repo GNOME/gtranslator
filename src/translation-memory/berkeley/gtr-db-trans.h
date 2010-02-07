@@ -71,16 +71,14 @@ gtr_db_trans_get_type (void)
      GtrDbTrans *gtr_db_trans_new (void);
 
      db_recno_t gtr_db_trans_write_string (GtrDbTrans *
-						   db_trans,
-						   const gchar * translation,
-						   db_recno_t key);
+                                           db_trans,
+                                           const gchar * translation,
+                                           db_recno_t key);
 
      db_recno_t gtr_db_trans_write (GtrDbTrans * db_trans,
-					    gchar ** translations,
-					    db_recno_t index);
+                                    gchar ** translations, db_recno_t index);
 
-     GPtrArray *gtr_db_trans_read (GtrDbTrans * db_trans,
-					   db_recno_t index);
+     GPtrArray *gtr_db_trans_read (GtrDbTrans * db_trans, db_recno_t index);
 
 G_END_DECLS
 #endif /* __DB_TRANS_H__ */

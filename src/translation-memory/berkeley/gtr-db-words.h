@@ -72,14 +72,12 @@ gtr_db_words_get_type (void)
      GtrDbWords *gtr_db_words_new (void);
 
      gboolean gtr_db_words_append (GtrDbWords * db_words,
-					   const gchar * word,
-					   guint sentence_size,
-					   db_recno_t value);
+                                   const gchar * word,
+                                   guint sentence_size, db_recno_t value);
 
      GtrDbKeys *gtr_db_words_read (GtrDbWords *
-						   db_words,
-						   const gchar * word,
-						   guint sentence_size);
+                                   db_words,
+                                   const gchar * word, guint sentence_size);
 
 G_END_DECLS
 #endif /* __DB_WORDS_H__ */

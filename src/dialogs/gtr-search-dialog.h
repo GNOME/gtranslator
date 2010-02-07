@@ -81,89 +81,70 @@ gtr_search_dialog_get_type (void)
   G_GNUC_CONST;
 
      GtkWidget *gtr_search_dialog_new (GtkWindow * parent,
-					       gboolean show_replace);
+                                       gboolean show_replace);
 
      void gtr_search_dialog_present_with_time (GtrSearchDialog
-						       * dialog,
-						       guint32 timestamp);
+                                               * dialog, guint32 timestamp);
 
-     gboolean
-       gtr_search_dialog_get_show_replace (GtrSearchDialog *
-						   dialog);
+gboolean
+gtr_search_dialog_get_show_replace (GtrSearchDialog * dialog);
 
      void gtr_search_dialog_set_show_replace (GtrSearchDialog
-						      * dialog,
-						      gboolean show_replace);
+                                              * dialog,
+                                              gboolean show_replace);
 
      void gtr_search_dialog_set_search_text (GtrSearchDialog *
-						     dialog,
-						     const gchar * text);
+                                             dialog, const gchar * text);
 
      const gchar
-       *gtr_search_dialog_get_search_text (GtrSearchDialog *
-						   dialog);
+       * gtr_search_dialog_get_search_text (GtrSearchDialog * dialog);
 
      void gtr_search_dialog_set_replace_text (GtrSearchDialog
-						      * dialog,
-						      const gchar * text);
+                                              * dialog, const gchar * text);
 
      const gchar
-       *gtr_search_dialog_get_replace_text (GtrSearchDialog *
-						    dialog);
+       * gtr_search_dialog_get_replace_text (GtrSearchDialog * dialog);
 
      void gtr_search_dialog_set_original_text (GtrSearchDialog
-						       * dialog,
-						       gboolean match_case);
+                                               * dialog, gboolean match_case);
 
-     gboolean
-       gtr_search_dialog_get_original_text (GtrSearchDialog *
-						    dialog);
+gboolean
+gtr_search_dialog_get_original_text (GtrSearchDialog * dialog);
 
      void
        gtr_search_dialog_set_translated_text (GtrSearchDialog
-						      * dialog,
-						      gboolean match_case);
+                                              * dialog, gboolean match_case);
 
-     gboolean
-       gtr_search_dialog_get_translated_text (GtrSearchDialog
-						      * dialog);
+gboolean
+gtr_search_dialog_get_translated_text (GtrSearchDialog * dialog);
 
      void gtr_search_dialog_set_fuzzy (GtrSearchDialog *
-					       dialog, gboolean match_case);
+                                       dialog, gboolean match_case);
 
-     gboolean gtr_search_dialog_get_fuzzy (GtrSearchDialog *
-						   dialog);
+     gboolean gtr_search_dialog_get_fuzzy (GtrSearchDialog * dialog);
 
      void gtr_search_dialog_set_match_case (GtrSearchDialog *
-						    dialog,
-						    gboolean match_case);
+                                            dialog, gboolean match_case);
 
-     gboolean
-       gtr_search_dialog_get_match_case (GtrSearchDialog *
-						 dialog);
+gboolean
+gtr_search_dialog_get_match_case (GtrSearchDialog * dialog);
 
      void gtr_search_dialog_set_entire_word (GtrSearchDialog *
-						     dialog,
-						     gboolean entire_word);
+                                             dialog, gboolean entire_word);
 
-     gboolean
-       gtr_search_dialog_get_entire_word (GtrSearchDialog *
-						  dialog);
+gboolean
+gtr_search_dialog_get_entire_word (GtrSearchDialog * dialog);
 
      void gtr_search_dialog_set_backwards (GtrSearchDialog *
-						   dialog,
-						   gboolean backwards);
+                                           dialog, gboolean backwards);
 
-     gboolean gtr_search_dialog_get_backwards (GtrSearchDialog
-						       * dialog);
+     gboolean gtr_search_dialog_get_backwards (GtrSearchDialog * dialog);
 
      void gtr_search_dialog_set_wrap_around (GtrSearchDialog *
-						     dialog,
-						     gboolean wrap_around);
+                                             dialog, gboolean wrap_around);
 
-     gboolean
-       gtr_search_dialog_get_wrap_around (GtrSearchDialog *
-						  dialog);
+gboolean
+gtr_search_dialog_get_wrap_around (GtrSearchDialog * dialog);
 
 G_END_DECLS
 #endif /* __SEARCH_DIALOG_H__  */

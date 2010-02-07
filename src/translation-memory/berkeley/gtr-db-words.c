@@ -46,8 +46,7 @@ G_DEFINE_TYPE (GtrDbWords, gtr_db_words, GTR_TYPE_DB_BASE)
 {
   //db_words->priv = GTR_DB_WORDS_GET_PRIVATE (db_words);
 
-  gtr_db_base_create_dabatase (GTR_DB_BASE (db_words),
-				       "words.db", DB_HASH);
+  gtr_db_base_create_dabatase (GTR_DB_BASE (db_words), "words.db", DB_HASH);
 }
 
 static void
@@ -78,8 +77,8 @@ gtr_db_words_new ()
 
 gboolean
 gtr_db_words_append (GtrDbWords * db_words,
-			     const gchar * word,
-			     guint sentence_size, db_recno_t value)
+                     const gchar * word,
+                     guint sentence_size, db_recno_t value)
 {
   // VS: there is a dirty trick: it is always true that 'value' is 
   //     greater than all values already present in the db, so we may
@@ -151,7 +150,7 @@ gtr_db_words_append (GtrDbWords * db_words,
 
 GtrDbKeys *
 gtr_db_words_read (GtrDbWords * db_words,
-			   const gchar * word, guint sentence_size)
+                   const gchar * word, guint sentence_size)
 {
   DBT key, data;
   gsize len;

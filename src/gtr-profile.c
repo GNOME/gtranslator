@@ -145,8 +145,7 @@ gtr_profile_get_name (GtrProfile * profile)
 }
 
 void
-gtr_profile_set_name (GtrProfile * profile,
-			      const gchar * data)
+gtr_profile_set_name (GtrProfile * profile, const gchar * data)
 {
   if (profile->priv->name)
     g_free (profile->priv->name);
@@ -160,8 +159,7 @@ gtr_profile_get_author_name (GtrProfile * profile)
 }
 
 void
-gtr_profile_set_author_name (GtrProfile * profile,
-				     const gchar * data)
+gtr_profile_set_author_name (GtrProfile * profile, const gchar * data)
 {
   if (profile->priv->author_name)
     g_free (profile->priv->author_name);
@@ -175,8 +173,7 @@ gtr_profile_get_author_email (GtrProfile * profile)
 }
 
 void
-gtr_profile_set_author_email (GtrProfile * profile,
-				      const gchar * data)
+gtr_profile_set_author_email (GtrProfile * profile, const gchar * data)
 {
   if (profile->priv->author_email)
     g_free (profile->priv->author_email);
@@ -190,8 +187,7 @@ gtr_profile_get_language_name (GtrProfile * profile)
 }
 
 void
-gtr_profile_set_language_name (GtrProfile * profile,
-				       const gchar * data)
+gtr_profile_set_language_name (GtrProfile * profile, const gchar * data)
 {
   if (profile->priv->language_name)
     g_free (profile->priv->language_name);
@@ -205,8 +201,7 @@ gtr_profile_get_language_code (GtrProfile * profile)
 }
 
 void
-gtr_profile_set_language_code (GtrProfile * profile,
-				       const gchar * data)
+gtr_profile_set_language_code (GtrProfile * profile, const gchar * data)
 {
   if (profile->priv->language_code)
     g_free (profile->priv->language_code);
@@ -220,8 +215,7 @@ gtr_profile_get_charset (GtrProfile * profile)
 }
 
 void
-gtr_profile_set_charset (GtrProfile * profile,
-				 const gchar * data)
+gtr_profile_set_charset (GtrProfile * profile, const gchar * data)
 {
   if (profile->priv->charset)
     g_free (profile->priv->charset);
@@ -235,8 +229,7 @@ gtr_profile_get_encoding (GtrProfile * profile)
 }
 
 void
-gtr_profile_set_encoding (GtrProfile * profile,
-				  const gchar * data)
+gtr_profile_set_encoding (GtrProfile * profile, const gchar * data)
 {
   if (profile->priv->encoding)
     g_free (profile->priv->encoding);
@@ -250,8 +243,7 @@ gtr_profile_get_group_email (GtrProfile * profile)
 }
 
 void
-gtr_profile_set_group_email (GtrProfile * profile,
-				     const gchar * data)
+gtr_profile_set_group_email (GtrProfile * profile, const gchar * data)
 {
   if (profile->priv->group_email)
     g_free (profile->priv->group_email);
@@ -265,8 +257,7 @@ gtr_profile_get_plurals (GtrProfile * profile)
 }
 
 void
-gtr_profile_set_plurals (GtrProfile * profile,
-				 const gchar * data)
+gtr_profile_set_plurals (GtrProfile * profile, const gchar * data)
 {
   if (profile->priv->plurals)
     g_free (profile->priv->plurals);
@@ -282,8 +273,7 @@ gtr_profile_set_plurals (GtrProfile * profile,
  *
  */
 void
-gtr_profile_xml_new_entry (xmlDocPtr doc,
-				   GtrProfile * profile)
+gtr_profile_xml_new_entry (xmlDocPtr doc, GtrProfile * profile)
 {
   xmlNodePtr root;
   xmlNodePtr profile_node;
@@ -292,17 +282,17 @@ gtr_profile_xml_new_entry (xmlDocPtr doc,
   profile_node = xmlNewChild (root, NULL, "profile", NULL);
   xmlNewTextChild (profile_node, NULL, "profile_name", profile->priv->name);
   xmlNewTextChild (profile_node, NULL, "author_name",
-		   profile->priv->author_name);
+                   profile->priv->author_name);
   xmlNewTextChild (profile_node, NULL, "author_email",
-		   profile->priv->author_email);
+                   profile->priv->author_email);
   xmlNewTextChild (profile_node, NULL, "language_name",
-		   profile->priv->language_name);
+                   profile->priv->language_name);
   xmlNewTextChild (profile_node, NULL, "language_code",
-		   profile->priv->language_code);
+                   profile->priv->language_code);
   xmlNewTextChild (profile_node, NULL, "charset", profile->priv->charset);
   xmlNewTextChild (profile_node, NULL, "encoding", profile->priv->encoding);
   xmlNewTextChild (profile_node, NULL, "group_email",
-		   profile->priv->group_email);
+                   profile->priv->group_email);
   xmlNewTextChild (profile_node, NULL, "plurals", profile->priv->plurals);
 }
 
@@ -386,7 +376,7 @@ gtr_profile_get_profiles_from_xml_file (gchar * filename)
       GtrProfile *profile;
       profile = (GtrProfile *) l->data;
       if (!strcmp (gtr_profile_get_name (profile), active_profile))
-	gtr_application_set_active_profile (GTR_APP, profile);
+        gtr_application_set_active_profile (GTR_APP, profile);
     }
 
   return profiles_list;
@@ -408,8 +398,7 @@ gtr_profile_save_profiles_in_xml (gchar * filename)
 
   root = xmlDocGetRootElement (doc);
 
-  xmlNewChild (root, NULL, "active",
-	       gtr_profile_get_name (active_profile));
+  xmlNewChild (root, NULL, "active", gtr_profile_get_name (active_profile));
 
   for (l = profiles_list; l; l = l->next)
     {

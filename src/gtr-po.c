@@ -58,63 +58,60 @@
 
 
 G_DEFINE_TYPE (GtrPo, gtr_po, G_TYPE_OBJECT)
+     struct _GtrPoPrivate
+     {
+       GFile *location;
 
-struct _GtrPoPrivate
-{
-  GFile *location;
+       /* Gettext's file handle */
+       po_file_t gettext_po_file;
 
-  /* Gettext's file handle */
-  po_file_t gettext_po_file;
+       /* Message iter */
+       po_message_iterator_t iter;
 
-  /* Message iter */
-  po_message_iterator_t iter;
+       /* The message domains in this file */
+       GList *domains;
 
-  /* The message domains in this file */
-  GList *domains;
+       /* Parsed list of GtrMsgs for the current domains' messagelist */
+       GList *messages;
 
-  /* Parsed list of GtrMsgs for the current domains' messagelist */
-  GList *messages;
+       /* A pointer to the currently displayed message */
+       GList *current;
 
-  /* A pointer to the currently displayed message */
-  GList *current;
+       /* The obsolete messages are stored within this gchar. */
+       gchar *obsolete;
 
-  /* The obsolete messages are stored within this gchar. */
-  gchar *obsolete;
+       /* Is the file write-permitted? (read-only) */
+       gboolean no_write_perms;
 
-  /* Is the file write-permitted? (read-only) */
-  gboolean no_write_perms;
+       /* Translated entries count */
+       guint translated;
 
-  /* Translated entries count */
-  guint translated;
+       /* Fuzzy entries count */
+       guint fuzzy;
 
-  /* Fuzzy entries count */
-  guint fuzzy;
+       /* Autosave timeout timer */
+       guint autosave_timeout;
 
-  /* Autosave timeout timer */
-  guint autosave_timeout;
+       /* Header object */
+       GtrHeader *header;
 
-  /* Header object */
-  GtrHeader *header;
+       GtrPoState state;
 
-  GtrPoState state;
+       /* Marks if the file was changed;  */
+       guint file_changed:1;
+     };
 
-  /* Marks if the file was changed;  */
-  guint file_changed : 1;
-};
+     enum
+     {
+       PROP_0,
+       PROP_STATE
+     };
 
-enum
-{
-  PROP_0,
-  PROP_STATE
-};
+     static gchar *message_error = NULL;
 
-static gchar *message_error = NULL;
-
-static void
-gtr_po_get_property (GObject * object,
-			     guint prop_id,
-			     GValue * value,
-			     GParamSpec * pspec)
+     static void
+       gtr_po_get_property (GObject * object,
+                            guint prop_id, GValue * value, GParamSpec * pspec)
 {
   GtrPo *po = GTR_PO (object);
 
@@ -151,7 +148,7 @@ gtr_po_update_translated_count (GtrPo * po)
   po->priv->translated = 0;
   po->priv->fuzzy = 0;
   g_list_foreach (po->priv->messages,
-		  (GFunc) determine_translation_status, po);
+                  (GFunc) determine_translation_status, po);
 }
 
 static void
@@ -213,13 +210,13 @@ gtr_po_class_init (GtrPoClass * klass)
   object_class->get_property = gtr_po_get_property;
 
   g_object_class_install_property (object_class,
-				   PROP_STATE,
-				   g_param_spec_enum ("state",
-						      "State",
-						      "The po's state",
-						      GTR_TYPE_PO_STATE,
-						      GTR_PO_STATE_SAVED,
-						      G_PARAM_READABLE));
+                                   PROP_STATE,
+                                   g_param_spec_enum ("state",
+                                                      "State",
+                                                      "The po's state",
+                                                      GTR_TYPE_PO_STATE,
+                                                      GTR_PO_STATE_SAVED,
+                                                      G_PARAM_READABLE));
 }
 
 /*
@@ -236,22 +233,22 @@ gtr_po_error_quark (void)
 
 static void
 on_gettext_po_xerror (gint severity,
-		      po_message_t message,
-		      const gchar * filename, size_t lineno, size_t column,
-		      gint multiline_p, const gchar * message_text)
+                      po_message_t message,
+                      const gchar * filename, size_t lineno, size_t column,
+                      gint multiline_p, const gchar * message_text)
 {
   message_error = g_strdup (message_text);
 }
 
 static void
 on_gettext_po_xerror2 (gint severity,
-		       po_message_t message1,
-		       const gchar * filename1, size_t lineno1,
-		       size_t column1, gint multiline_p1,
-		       const gchar * message_text1, po_message_t message2,
-		       const gchar * filename2, size_t lineno2,
-		       size_t column2, gint multiline_p2,
-		       const gchar * message_text2)
+                       po_message_t message1,
+                       const gchar * filename1, size_t lineno1,
+                       size_t column1, gint multiline_p1,
+                       const gchar * message_text1, po_message_t message2,
+                       const gchar * filename2, size_t lineno2,
+                       size_t column2, gint multiline_p2,
+                       const gchar * message_text2)
 {
   message_error = g_strdup_printf ("%s.\n %s", message_text1, message_text2);
 }
@@ -265,10 +262,10 @@ po_file_is_empty (po_file_t file)
     {
       po_message_iterator_t iter = po_message_iterator (file, *domains);
       if (po_next_message (iter) != NULL)
-	{
-	  po_message_iterator_free (iter);
-	  return FALSE;
-	}
+        {
+          po_message_iterator_free (iter);
+          return FALSE;
+        }
       po_message_iterator_free (iter);
     }
   return TRUE;
@@ -284,33 +281,30 @@ po_file_is_empty (po_file_t file)
  * Returns: False if file is writeable. True if file doesn't exists, is read-only or read-only attribute can't be check
  */
 static gboolean
-is_read_only (const gchar *filename)
+is_read_only (const gchar * filename)
 {
-  gboolean ret = TRUE; /* default to read only */
+  gboolean ret = TRUE;          /* default to read only */
   GFileInfo *info;
   GFile *location;
 
 
   location = g_file_new_for_path (filename);
-  
+
   if (!g_file_query_exists (location, NULL))
     return FALSE;
 
   info = g_file_query_info (location,
-			    G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE,
-			    G_FILE_QUERY_INFO_NONE,
-			    NULL,
-			    NULL);
+                            G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE,
+                            G_FILE_QUERY_INFO_NONE, NULL, NULL);
   g_object_unref (location);
 
   if (info != NULL)
     {
-      if (g_file_info_has_attribute (info,
-				     G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE))
-	{
-	  ret = !g_file_info_get_attribute_boolean (info,
-						    G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE);
-	}
+      if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE))
+        {
+          ret = !g_file_info_get_attribute_boolean (info,
+                                                    G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE);
+        }
 
       g_object_unref (info);
     }
@@ -388,10 +382,10 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
   if (priv->gettext_po_file == NULL)
     {
       g_set_error (error,
-		   GTR_PO_ERROR,
-		   GTR_PO_ERROR_FILENAME,
-		   _("Failed opening file '%s': %s"),
-		   filename, g_strerror (errno));
+                   GTR_PO_ERROR,
+                   GTR_PO_ERROR_FILENAME,
+                   _("Failed opening file '%s': %s"),
+                   filename, g_strerror (errno));
       g_object_unref (po);
       g_free (filename);
       return;
@@ -404,17 +398,17 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
   if (message_error != NULL)
     {
       g_set_error (error,
-		   GTR_PO_ERROR, GTR_PO_ERROR_RECOVERY, "%s", message_error);
+                   GTR_PO_ERROR, GTR_PO_ERROR_RECOVERY, "%s", message_error);
     }
 
   if (po_file_is_empty (priv->gettext_po_file))
     {
       if (*error != NULL)
-	g_clear_error (error);
+        g_clear_error (error);
 
       g_set_error (error,
-		   GTR_PO_ERROR,
-		   GTR_PO_ERROR_FILE_EMPTY, _("The file is empty"));
+                   GTR_PO_ERROR,
+                   GTR_PO_ERROR_FILE_EMPTY, _("The file is empty"));
       g_object_unref (po);
       return;
     }
@@ -425,11 +419,11 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
   if (!(domains = po_file_domains (priv->gettext_po_file)))
     {
       if (*error != NULL)
-	g_clear_error (error);
+        g_clear_error (error);
       g_set_error (error,
-		   GTR_PO_ERROR,
-		   GTR_PO_ERROR_GETTEXT,
-		   _("Gettext returned a null message domain list."));
+                   GTR_PO_ERROR,
+                   GTR_PO_ERROR_GETTEXT,
+                   _("Gettext returned a null message domain list."));
       g_object_unref (po);
       return;
     }
@@ -462,26 +456,26 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
        * and detect if we want obsoletes messages in show message
        */
       if (!po_message_is_obsolete (message))
-	{
-	  /* Unpack into a GtrMsg */
-	  msg = gtr_msg_new (iter, message);
+        {
+          /* Unpack into a GtrMsg */
+          msg = gtr_msg_new (iter, message);
 
-	  /* Set position in PO file */
-	  gtr_msg_set_po_position (msg, pos++);
+          /* Set position in PO file */
+          gtr_msg_set_po_position (msg, pos++);
 
-	  /* Build up messages */
-	  priv->messages = g_list_prepend (priv->messages, msg);
-	}
+          /* Build up messages */
+          priv->messages = g_list_prepend (priv->messages, msg);
+        }
     }
 
   if (priv->messages == NULL)
     {
       if (*error != NULL)
-	g_clear_error (error);
+        g_clear_error (error);
       g_set_error (error,
-		   GTR_PO_ERROR,
-		   GTR_PO_ERROR_OTHER,
-		   _("No messages obtained from parser."));
+                   GTR_PO_ERROR,
+                   GTR_PO_ERROR_OTHER,
+                   _("No messages obtained from parser."));
       g_object_unref (po);
       return;
     }
@@ -528,11 +522,11 @@ gtr_po_save_file (GtrPo * po, GError ** error)
       // Remove suffix
       filename[strlen (filename) - 4] = '\0';
       g_set_error (error,
-		   GTR_PO_ERROR,
-		   GTR_PO_ERROR_FILENAME,
-		   _("You are saving a file with a .pot extension.\n"
-		     "Pot files are generated by the compilation process.\n"
-		     "Your file should likely be named '%s.po'."), filename);
+                   GTR_PO_ERROR,
+                   GTR_PO_ERROR_FILENAME,
+                   _("You are saving a file with a .pot extension.\n"
+                     "Pot files are generated by the compilation process.\n"
+                     "Your file should likely be named '%s.po'."), filename);
       g_free (filename);
       return;
     }
@@ -541,10 +535,10 @@ gtr_po_save_file (GtrPo * po, GError ** error)
   if (is_read_only (filename))
     {
       g_set_error (error,
-		   GTR_PO_ERROR,
-		   GTR_PO_ERROR_READONLY,
-		   _("The file %s is read-only, and can not be overwritten"),
-		   filename);
+                   GTR_PO_ERROR,
+                   GTR_PO_ERROR_READONLY,
+                   _("The file %s is read-only, and can not be overwritten"),
+                   filename);
       g_free (filename);
       return;
     }
@@ -572,10 +566,10 @@ gtr_po_save_file (GtrPo * po, GError ** error)
   if (!po_file_write (gtr_po_get_po_file (po), filename, &handler))
     {
       g_set_error (error,
-		   GTR_PO_ERROR,
-		   GTR_PO_ERROR_FILENAME,
-		   _("There was an error writing the PO file: %s"),
-		   message_error);
+                   GTR_PO_ERROR,
+                   GTR_PO_ERROR_FILENAME,
+                   _("There was an error writing the PO file: %s"),
+                   message_error);
       g_free (message_error);
       g_free (filename);
       return;
@@ -718,8 +712,7 @@ gtr_po_get_current_message (GtrPo * po)
  * the argument.
  **/
 void
-gtr_po_update_current_message (GtrPo * po,
-				       GtrMsg * msg)
+gtr_po_update_current_message (GtrPo * po, GtrMsg * msg)
 {
   gint i;
   i = g_list_index (po->priv->messages, msg);
@@ -765,7 +758,7 @@ gtr_po_get_next_fuzzy (GtrPo * po)
   while (msg = g_list_next (msg))
     {
       if (gtr_msg_is_fuzzy (msg->data))
-	return msg;
+        return msg;
     }
 
   return NULL;
@@ -787,7 +780,7 @@ gtr_po_get_prev_fuzzy (GtrPo * po)
   while (msg = g_list_previous (msg))
     {
       if (gtr_msg_is_fuzzy (msg->data))
-	return msg;
+        return msg;
     }
 
   return NULL;
@@ -809,7 +802,7 @@ gtr_po_get_next_untrans (GtrPo * po)
   while (msg = g_list_next (msg))
     {
       if (!gtr_msg_is_translated (msg->data))
-	return msg;
+        return msg;
     }
 
   return NULL;
@@ -832,7 +825,7 @@ gtr_po_get_prev_untrans (GtrPo * po)
   while (msg = g_list_previous (msg))
     {
       if (!gtr_msg_is_translated (msg->data))
-	return msg;
+        return msg;
     }
 
   return NULL;
@@ -853,9 +846,8 @@ gtr_po_get_next_fuzzy_or_untrans (GtrPo * po)
   msg = po->priv->current;
   while (msg = g_list_next (msg))
     {
-      if (gtr_msg_is_fuzzy (msg->data) ||
-	  !gtr_msg_is_translated (msg->data))
-	return msg;
+      if (gtr_msg_is_fuzzy (msg->data) || !gtr_msg_is_translated (msg->data))
+        return msg;
     }
 
   return NULL;
@@ -876,9 +868,8 @@ gtr_po_get_prev_fuzzy_or_untrans (GtrPo * po)
   msg = po->priv->current;
   while (msg = g_list_previous (msg))
     {
-      if (gtr_msg_is_fuzzy (msg->data) ||
-	  !gtr_msg_is_translated (msg->data))
-	return msg;
+      if (gtr_msg_is_fuzzy (msg->data) || !gtr_msg_is_translated (msg->data))
+        return msg;
     }
 
   return NULL;
@@ -939,8 +930,7 @@ gtr_po_get_translated_count (GtrPo * po)
  * This funcs must not be exported.
  */
 void
-_gtr_po_increase_decrease_translated (GtrPo * po,
-					      gboolean increase)
+_gtr_po_increase_decrease_translated (GtrPo * po, gboolean increase)
 {
   g_return_if_fail (GTR_IS_PO (po));
 
@@ -970,8 +960,7 @@ gtr_po_get_fuzzy_count (GtrPo * po)
  * This funcs must not be exported.
  */
 void
-_gtr_po_increase_decrease_fuzzy (GtrPo * po,
-					 gboolean increase)
+_gtr_po_increase_decrease_fuzzy (GtrPo * po, gboolean increase)
 {
   g_return_if_fail (GTR_IS_PO (po));
 
@@ -996,7 +985,7 @@ gtr_po_get_untranslated_count (GtrPo * po)
      po->priv->translated, po->priv->fuzzy, (g_list_length (po->priv->messages) - po->priv->translated - po->priv->fuzzy)); */
 
   return (g_list_length (po->priv->messages) - po->priv->translated -
-	  po->priv->fuzzy);
+          po->priv->fuzzy);
 }
 
 /**

@@ -39,15 +39,13 @@
 						 GtrDbBasePrivate))
 
 G_DEFINE_TYPE (GtrDbBase, gtr_db_base, G_TYPE_OBJECT)
+     struct _GtrDbBasePrivate
+     {
+       DB *db;
+       gchar *path;
+     };
 
-struct _GtrDbBasePrivate
-{
-  DB *db;
-  gchar *path;
-};
-
-static gchar *
-get_db_base_directory ()
+     static gchar *get_db_base_directory ()
 {
   gchar *config;
   gchar *db_dir;
@@ -65,16 +63,16 @@ get_db_base_directory ()
       file = g_file_new_for_path (db_dir);
 
       if (!g_file_make_directory (file, NULL, &error))
-	{
-	  g_warning
-	    ("There was an error making the gtranslator berkeley directory: %s",
-	     error->message);
+        {
+          g_warning
+            ("There was an error making the gtranslator berkeley directory: %s",
+             error->message);
 
-	  g_error_free (error);
-	  g_object_unref (file);
-	  g_free (db_dir);
-	  return NULL;
-	}
+          g_error_free (error);
+          g_object_unref (file);
+          g_free (db_dir);
+          return NULL;
+        }
 
       g_object_unref (file);
     }
@@ -116,7 +114,7 @@ gtr_db_base_class_init (GtrDbBaseClass * klass)
 
 void
 gtr_db_base_create_dabatase (GtrDbBase * base,
-				     const gchar * filename, DBTYPE type)
+                             const gchar * filename, DBTYPE type)
 {
   gint error;
   gchar *db_dir;
@@ -135,8 +133,8 @@ gtr_db_base_create_dabatase (GtrDbBase * base,
   g_free (db_dir);
 
   error = base->priv->db->open (base->priv->db,
-				NULL,
-				base->priv->path, NULL, type, DB_CREATE, 0);
+                                NULL,
+                                base->priv->path, NULL, type, DB_CREATE, 0);
 
   if (error != 0)
     {
@@ -163,19 +161,19 @@ gtr_db_base_show_error (GtrDbBase * base, int error)
       e = env->open (env, base->priv->path, DB_RECOVER_FATAL, 0);
 
       if (e != 0)
-	{
-	  err =
-	    g_strdup_printf (_
-			     ("There was an error recovering the database: %s"),
-			     db_strerror (e));
+        {
+          err =
+            g_strdup_printf (_
+                             ("There was an error recovering the database: %s"),
+                             db_strerror (e));
 
-	  g_warning ("%s", err);
-	  g_free (err);
-	}
+          g_warning ("%s", err);
+          g_free (err);
+        }
       break;
     default:
       err = g_strdup_printf (_("There was an error in database: %s"),
-			     db_strerror (error));
+                             db_strerror (error));
 
       g_warning ("%s", err);
       g_free (err);
@@ -184,8 +182,7 @@ gtr_db_base_show_error (GtrDbBase * base, int error)
 }
 
 gint
-gtr_db_base_put (GtrDbBase * base,
-			 DBT * key, DBT * data, u_int32_t flags)
+gtr_db_base_put (GtrDbBase * base, DBT * key, DBT * data, u_int32_t flags)
 {
   return base->priv->db->put (base->priv->db, NULL, key, data, flags);
 }
