@@ -35,7 +35,7 @@
 #include <ctype.h>
 
 /* Gconf keys */
-#define SOURCE_CODE_VIEW_BASE_KEY "/apps/gtr/plugins/source-view"
+#define SOURCE_CODE_VIEW_BASE_KEY "/apps/gtranslator/plugins/source-view"
 #define USE_EDITOR_KEY SOURCE_CODE_VIEW_BASE_KEY "/use_editor"
 #define PROGRAM_CMD_KEY SOURCE_CODE_VIEW_BASE_KEY "/program_cmd"
 #define LINE_CMD_KEY SOURCE_CODE_VIEW_BASE_KEY "/line_cmd"

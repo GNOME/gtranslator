@@ -49,9 +49,9 @@
 #include "gtr-python-module.h"
 #endif
 
-#define USER_GTR_PLUGINS_LOCATION ".gtr/plugins/"
+#define USER_GTR_PLUGINS_LOCATION ".config/gtranslator/plugins/"
 
-#define GTR_PLUGINS_ENGINE_BASE_KEY "/apps/gtr/plugins"
+#define GTR_PLUGINS_ENGINE_BASE_KEY "/apps/gtranslator/plugins"
 #define GTR_PLUGINS_ENGINE_KEY GTR_PLUGINS_ENGINE_BASE_KEY "/active-plugins"
 
 #define PLUGIN_EXT	".plugin"

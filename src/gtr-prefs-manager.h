@@ -48,7 +48,7 @@ typedef enum
   GTR_SORT_ORDER_TRANSLATED_TEXT
 } GtrSortOrder;
 
-#define GTR_BASE_KEY			"/apps/gtr"
+#define GTR_BASE_KEY			"/apps/gtranslator"
 #define GPM_PREFS_DIR			GTR_BASE_KEY "/preferences"
 
 /* Files */
@@ -77,7 +77,7 @@ typedef enum
 #define GPM_PO_DIRECTORY		GPM_TM_DIR "/po_directory"
 #define GPM_RESTRICT_TO_FILENAME	GPM_TM_DIR "/restrict_to_filename"
 #define GPM_FILENAME_RESTRICTION	GPM_TM_DIR "/filename_restriction"
-#define GPM_MAX_MISSING_WORDS	GPM_TM_DIR "/max_missing_words"
+#define GPM_MAX_MISSING_WORDS		GPM_TM_DIR "/max_missing_words"
 #define GPM_MAX_LENGTH_DIFF		GPM_TM_DIR "/max_length_diff"
 
 /* User Interface */

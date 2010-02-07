@@ -36,7 +36,7 @@ G_BEGIN_DECLS
 #define GTR_IS_OPEN_TRAN_PANEL_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_OPEN_TRAN_PANEL))
 #define GTR_OPEN_TRAN_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_OPEN_TRAN_PANEL, GtrOpenTranPanelClass))
 /* Gconf keys */
-#define OPEN_TRAN_BASE_KEY "/apps/gtr/plugins/open-tran"
+#define OPEN_TRAN_BASE_KEY "/apps/gtranslator/plugins/open-tran"
 #define SEARCH_CODE_KEY OPEN_TRAN_BASE_KEY "/search_code"
 #define OWN_CODE_KEY OPEN_TRAN_BASE_KEY "/own_code"
 /* Private structure type */

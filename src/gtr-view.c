@@ -52,20 +52,22 @@
 						 	GtrViewPrivate))
 
 G_DEFINE_TYPE (GtrView, gtr_view, GTK_TYPE_SOURCE_VIEW)
-     struct _GtrViewPrivate
-     {
-       GtkSourceBuffer *buffer;
 
-       guint search_flags;
-       gchar *search_text;
+struct _GtrViewPrivate
+{
+  GtkSourceBuffer *buffer;
+
+  guint search_flags;
+  gchar *search_text;
 
 #ifdef HAVE_GTKSPELL
-       GtkSpell *spell;
+  GtkSpell *spell;
 #endif
-     };
+};
 
 #ifdef HAVE_GTKSPELL
-     static void gtr_attach_gtkspell (GtrView * view)
+static void
+gtr_attach_gtkspell (GtrView * view)
 {
   gint i;
   GError *error = NULL;
@@ -116,7 +118,7 @@ gtr_view_init (GtrView * view)
   langs = (gchar **) g_ptr_array_free (dirs, FALSE);
 
   gtk_source_language_manager_set_search_path (lm, langs);
-  lang = gtk_source_language_manager_get_language (lm, "gtr");
+  lang = gtk_source_language_manager_get_language (lm, "gtranslator");
   g_strfreev (langs);
 
   priv->buffer = gtk_source_buffer_new_with_language (lang);
