@@ -1,6 +1,6 @@
 /*
  * module.h
- * This file is part of gtranslator
+ * This file is part of gtr
  *
  * Copyright (C) 2005 - Paolo Maggi 
  *
@@ -29,8 +29,8 @@
  */
 
 /*
- * Modified by the gtranslator Team, 2005. See the AUTHORS file for a 
- * list of people on the gtranslator Team.  
+ * Modified by the gtr Team, 2005. See the AUTHORS file for a 
+ * list of people on the gtr Team.  
  * See the ChangeLog files for a list of changes. 
  *
  * $Id: module.h 6263 2008-05-05 10:52:10Z sfre $
@@ -43,7 +43,7 @@
 #include <gmodule.h>
 
 G_BEGIN_DECLS
-#define GTR_TYPE_MODULE		(gtranslator_module_get_type ())
+#define GTR_TYPE_MODULE		(gtr_module_get_type ())
 #define GTR_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_MODULE, GtrModule))
 #define GTR_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTR_TYPE_MODULE, GtrModuleClass))
 #define GTR_IS_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_MODULE))
@@ -73,17 +73,17 @@ struct _GtrModuleClass
 };
 
 GType
-gtranslator_module_get_type (void)
+gtr_module_get_type (void)
   G_GNUC_CONST;
 
-     const gchar *gtranslator_module_get_path (GtrModule * module);
+     const gchar *gtr_module_get_path (GtrModule * module);
 
-     const gchar *gtranslator_module_get_module_name (GtrModule *
+     const gchar *gtr_module_get_module_name (GtrModule *
 						      module);
 
-     GObject *gtranslator_module_new_object (GtrModule * module);
+     GObject *gtr_module_new_object (GtrModule * module);
 
-     void gtranslator_module_class_garbage_collect
+     void gtr_module_class_garbage_collect
        (GtrModuleClass * klass);
 
 G_END_DECLS

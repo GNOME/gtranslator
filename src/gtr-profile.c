@@ -46,7 +46,7 @@
 					 	GTR_TYPE_PROFILE,     \
 					 	GtrProfilePrivate))
 
-G_DEFINE_TYPE (GtrProfile, gtranslator_profile, G_TYPE_OBJECT)
+G_DEFINE_TYPE (GtrProfile, gtr_profile, G_TYPE_OBJECT)
      struct _GtrProfilePrivate
      {
        /* 
@@ -91,13 +91,13 @@ G_DEFINE_TYPE (GtrProfile, gtranslator_profile, G_TYPE_OBJECT)
        gchar *plurals;
      };
 
-     static void gtranslator_profile_init (GtrProfile * profile)
+     static void gtr_profile_init (GtrProfile * profile)
 {
   profile->priv = GTR_PROFILE_GET_PRIVATE (profile);
 }
 
 static void
-gtranslator_profile_finalize (GObject * object)
+gtr_profile_finalize (GObject * object)
 {
   GtrProfile *profile = GTR_PROFILE (object);
 
@@ -111,17 +111,17 @@ gtranslator_profile_finalize (GObject * object)
   g_free (profile->priv->group_email);
   g_free (profile->priv->plurals);
 
-  G_OBJECT_CLASS (gtranslator_profile_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_profile_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_profile_class_init (GtrProfileClass * klass)
+gtr_profile_class_init (GtrProfileClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrProfilePrivate));
 
-  object_class->finalize = gtranslator_profile_finalize;
+  object_class->finalize = gtr_profile_finalize;
 }
 
 /*
@@ -129,7 +129,7 @@ gtranslator_profile_class_init (GtrProfileClass * klass)
  */
 
 GtrProfile *
-gtranslator_profile_new (void)
+gtr_profile_new (void)
 {
   GtrProfile *profile;
 
@@ -139,13 +139,13 @@ gtranslator_profile_new (void)
 }
 
 const gchar *
-gtranslator_profile_get_name (GtrProfile * profile)
+gtr_profile_get_name (GtrProfile * profile)
 {
   return profile->priv->name;
 }
 
 void
-gtranslator_profile_set_name (GtrProfile * profile,
+gtr_profile_set_name (GtrProfile * profile,
 			      const gchar * data)
 {
   if (profile->priv->name)
@@ -154,13 +154,13 @@ gtranslator_profile_set_name (GtrProfile * profile,
 }
 
 const gchar *
-gtranslator_profile_get_author_name (GtrProfile * profile)
+gtr_profile_get_author_name (GtrProfile * profile)
 {
   return profile->priv->author_name;
 }
 
 void
-gtranslator_profile_set_author_name (GtrProfile * profile,
+gtr_profile_set_author_name (GtrProfile * profile,
 				     const gchar * data)
 {
   if (profile->priv->author_name)
@@ -169,13 +169,13 @@ gtranslator_profile_set_author_name (GtrProfile * profile,
 }
 
 const gchar *
-gtranslator_profile_get_author_email (GtrProfile * profile)
+gtr_profile_get_author_email (GtrProfile * profile)
 {
   return profile->priv->author_email;
 }
 
 void
-gtranslator_profile_set_author_email (GtrProfile * profile,
+gtr_profile_set_author_email (GtrProfile * profile,
 				      const gchar * data)
 {
   if (profile->priv->author_email)
@@ -184,13 +184,13 @@ gtranslator_profile_set_author_email (GtrProfile * profile,
 }
 
 const gchar *
-gtranslator_profile_get_language_name (GtrProfile * profile)
+gtr_profile_get_language_name (GtrProfile * profile)
 {
   return profile->priv->language_name;
 }
 
 void
-gtranslator_profile_set_language_name (GtrProfile * profile,
+gtr_profile_set_language_name (GtrProfile * profile,
 				       const gchar * data)
 {
   if (profile->priv->language_name)
@@ -199,13 +199,13 @@ gtranslator_profile_set_language_name (GtrProfile * profile,
 }
 
 const gchar *
-gtranslator_profile_get_language_code (GtrProfile * profile)
+gtr_profile_get_language_code (GtrProfile * profile)
 {
   return profile->priv->language_code;
 }
 
 void
-gtranslator_profile_set_language_code (GtrProfile * profile,
+gtr_profile_set_language_code (GtrProfile * profile,
 				       const gchar * data)
 {
   if (profile->priv->language_code)
@@ -214,13 +214,13 @@ gtranslator_profile_set_language_code (GtrProfile * profile,
 }
 
 const gchar *
-gtranslator_profile_get_charset (GtrProfile * profile)
+gtr_profile_get_charset (GtrProfile * profile)
 {
   return profile->priv->charset;
 }
 
 void
-gtranslator_profile_set_charset (GtrProfile * profile,
+gtr_profile_set_charset (GtrProfile * profile,
 				 const gchar * data)
 {
   if (profile->priv->charset)
@@ -229,13 +229,13 @@ gtranslator_profile_set_charset (GtrProfile * profile,
 }
 
 const gchar *
-gtranslator_profile_get_encoding (GtrProfile * profile)
+gtr_profile_get_encoding (GtrProfile * profile)
 {
   return profile->priv->encoding;
 }
 
 void
-gtranslator_profile_set_encoding (GtrProfile * profile,
+gtr_profile_set_encoding (GtrProfile * profile,
 				  const gchar * data)
 {
   if (profile->priv->encoding)
@@ -244,13 +244,13 @@ gtranslator_profile_set_encoding (GtrProfile * profile,
 }
 
 const gchar *
-gtranslator_profile_get_group_email (GtrProfile * profile)
+gtr_profile_get_group_email (GtrProfile * profile)
 {
   return profile->priv->group_email;
 }
 
 void
-gtranslator_profile_set_group_email (GtrProfile * profile,
+gtr_profile_set_group_email (GtrProfile * profile,
 				     const gchar * data)
 {
   if (profile->priv->group_email)
@@ -259,13 +259,13 @@ gtranslator_profile_set_group_email (GtrProfile * profile,
 }
 
 const gchar *
-gtranslator_profile_get_plurals (GtrProfile * profile)
+gtr_profile_get_plurals (GtrProfile * profile)
 {
   return profile->priv->plurals;
 }
 
 void
-gtranslator_profile_set_plurals (GtrProfile * profile,
+gtr_profile_set_plurals (GtrProfile * profile,
 				 const gchar * data)
 {
   if (profile->priv->plurals)
@@ -274,7 +274,7 @@ gtranslator_profile_set_plurals (GtrProfile * profile,
 }
 
 /**
- * gtranslator_profile_xml_new_entry:
+ * gtr_profile_xml_new_entry:
  * @doc: a #xmlDocPtr.
  * @profile: a #GtrProfile object.
  *
@@ -282,7 +282,7 @@ gtranslator_profile_set_plurals (GtrProfile * profile,
  *
  */
 void
-gtranslator_profile_xml_new_entry (xmlDocPtr doc,
+gtr_profile_xml_new_entry (xmlDocPtr doc,
 				   GtrProfile * profile)
 {
   xmlNodePtr root;
@@ -307,7 +307,7 @@ gtranslator_profile_xml_new_entry (xmlDocPtr doc,
 }
 
 /**
- * gtranslator_profile_xml_get_entry:
+ * gtr_profile_xml_get_entry:
  * @child: a #xmlNodePtr.
  *
  * This function get the values of the #xmlNodePtr and save them into
@@ -316,12 +316,12 @@ gtranslator_profile_xml_new_entry (xmlDocPtr doc,
  * Returns: a #GtrProfile object.
  */
 GtrProfile *
-gtranslator_profile_xml_get_entry (xmlNodePtr child)
+gtr_profile_xml_get_entry (xmlNodePtr child)
 {
   xmlNodePtr node;
   GtrProfile *profile;
 
-  profile = gtranslator_profile_new ();
+  profile = gtr_profile_new ();
 
   node = child->xmlChildrenNode;
 
@@ -347,7 +347,7 @@ gtranslator_profile_xml_get_entry (xmlNodePtr child)
 }
 
 /**
- * gtranslator_profile_get_profiles_from_xml_file:
+ * gtr_profile_get_profiles_from_xml_file:
  * @filename: a filename path.
  *
  * This function get the profiles saved in a xml file
@@ -356,7 +356,7 @@ gtranslator_profile_xml_get_entry (xmlNodePtr child)
  * returns: a #GList
  */
 GList *
-gtranslator_profile_get_profiles_from_xml_file (gchar * filename)
+gtr_profile_get_profiles_from_xml_file (gchar * filename)
 {
   GList *profiles_list = NULL;
   GtrProfile *profile;
@@ -365,7 +365,7 @@ gtranslator_profile_get_profiles_from_xml_file (gchar * filename)
   gchar *active_profile;
   GList *l;
 
-  doc = gtranslator_xml_open_file (filename);
+  doc = gtr_xml_open_file (filename);
 
   root = xmlDocGetRootElement (doc);
   child = root->xmlChildrenNode;
@@ -376,7 +376,7 @@ gtranslator_profile_get_profiles_from_xml_file (gchar * filename)
 
   while (child != NULL)
     {
-      profile = gtranslator_profile_xml_get_entry (child);
+      profile = gtr_profile_xml_get_entry (child);
       profiles_list = g_list_append (profiles_list, profile);
       child = child->next;
     }
@@ -385,15 +385,15 @@ gtranslator_profile_get_profiles_from_xml_file (gchar * filename)
     {
       GtrProfile *profile;
       profile = (GtrProfile *) l->data;
-      if (!strcmp (gtranslator_profile_get_name (profile), active_profile))
-	gtranslator_application_set_active_profile (GTR_APP, profile);
+      if (!strcmp (gtr_profile_get_name (profile), active_profile))
+	gtr_application_set_active_profile (GTR_APP, profile);
     }
 
   return profiles_list;
 }
 
 gint
-gtranslator_profile_save_profiles_in_xml (gchar * filename)
+gtr_profile_save_profiles_in_xml (gchar * filename)
 {
 
   xmlNodePtr root;
@@ -401,21 +401,21 @@ gtranslator_profile_save_profiles_in_xml (gchar * filename)
   GList *profiles_list, *l;
   GtrProfile *active_profile;
 
-  doc = gtranslator_xml_new_doc ("list_of_profiles");
+  doc = gtr_xml_new_doc ("list_of_profiles");
 
-  profiles_list = gtranslator_application_get_profiles (GTR_APP);
-  active_profile = gtranslator_application_get_active_profile (GTR_APP);
+  profiles_list = gtr_application_get_profiles (GTR_APP);
+  active_profile = gtr_application_get_active_profile (GTR_APP);
 
   root = xmlDocGetRootElement (doc);
 
   xmlNewChild (root, NULL, "active",
-	       gtranslator_profile_get_name (active_profile));
+	       gtr_profile_get_name (active_profile));
 
   for (l = profiles_list; l; l = l->next)
     {
       GtrProfile *profile;
       profile = (GtrProfile *) l->data;
-      gtranslator_profile_xml_new_entry (doc, profile);
+      gtr_profile_xml_new_entry (doc, profile);
     }
 
   return xmlSaveFile (filename, doc);

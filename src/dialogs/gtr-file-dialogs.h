@@ -29,7 +29,7 @@ typedef enum
   FILESEL_SAVE
 } FileselMode;
 
-GtkWidget *gtranslator_file_chooser_new (GtkWindow * parent,
+GtkWidget *gtr_file_chooser_new (GtkWindow * parent,
 					 FileselMode mode,
 					 const gchar * title,
 					 const gchar * dir);

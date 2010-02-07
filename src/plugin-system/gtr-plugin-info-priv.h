@@ -1,6 +1,6 @@
 /*
  * plugin-info-priv.h
- * This file is part of gtranslator
+ * This file is part of gtr
  *
  * Copyright (C) 2002-2005 - Paolo Maggi 
  * Copyright (C) 2007 - Paolo Maggi, Steve Frécinaux
@@ -22,8 +22,8 @@
  */
 
 /*
- * Modified by the gtranslator Team, 2002-2007. See the AUTHORS file for a
- * list of people on the gtranslator Team.
+ * Modified by the gtr Team, 2002-2007. See the AUTHORS file for a
+ * list of people on the gtr Team.
  * See the ChangeLog files for a list of changes.
  *
  * $Id$
@@ -64,9 +64,9 @@ struct _GtrPluginInfo
   gint available:1;
 };
 
-GtrPluginInfo *_gtranslator_plugin_info_new (const gchar * file);
-void _gtranslator_plugin_info_ref (GtrPluginInfo * info);
-void _gtranslator_plugin_info_unref (GtrPluginInfo * info);
+GtrPluginInfo *_gtr_plugin_info_new (const gchar * file);
+void _gtr_plugin_info_ref (GtrPluginInfo * info);
+void _gtr_plugin_info_unref (GtrPluginInfo * info);
 
 
 #endif /* __GTR_PLUGIN_INFO_PRIV_H__ */

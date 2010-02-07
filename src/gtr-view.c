@@ -51,7 +51,7 @@
 						 	GTR_TYPE_VIEW,     \
 						 	GtrViewPrivate))
 
-G_DEFINE_TYPE (GtrView, gtranslator_view, GTK_TYPE_SOURCE_VIEW)
+G_DEFINE_TYPE (GtrView, gtr_view, GTK_TYPE_SOURCE_VIEW)
 
 struct _GtrViewPrivate
 {
@@ -66,7 +66,7 @@ struct _GtrViewPrivate
 };
 
 #ifdef HAVE_GTKSPELL
-     static void gtranslator_attach_gtkspell (GtrView * view)
+     static void gtr_attach_gtkspell (GtrView * view)
 {
   gint i;
   GError *error = NULL;
@@ -90,7 +90,7 @@ struct _GtrViewPrivate
 #endif
 
 static void
-gtranslator_view_init (GtrView * view)
+gtr_view_init (GtrView * view)
 {
   GtkSourceLanguageManager *lm;
   GtkSourceLanguage *lang;
@@ -111,14 +111,14 @@ gtranslator_view_init (GtrView * view)
        temp != NULL && *temp != NULL; ++temp)
     g_ptr_array_add (dirs, g_strdup (*temp));
 
-  datadir = gtranslator_dirs_get_gtranslator_data_dir ();
+  datadir = gtr_dirs_get_gtr_data_dir ();
   /* FIXME: Where pkgdatadir must be free */
   g_ptr_array_add (dirs, datadir);
   g_ptr_array_add (dirs, NULL);
   langs = (gchar **) g_ptr_array_free (dirs, FALSE);
 
   gtk_source_language_manager_set_search_path (lm, langs);
-  lang = gtk_source_language_manager_get_language (lm, "gtranslator");
+  lang = gtk_source_language_manager_get_language (lm, "gtr");
   g_strfreev (langs);
 
   priv->buffer = gtk_source_buffer_new_with_language (lang);
@@ -129,63 +129,63 @@ gtranslator_view_init (GtrView * view)
 
   //Set syntax highlight according to preferences
   gtk_source_buffer_set_highlight_syntax (priv->buffer,
-					  gtranslator_prefs_manager_get_highlight_syntax
+					  gtr_prefs_manager_get_highlight_syntax
 					  ());
 
   //Set dot char according to preferences
 
-  if (gtranslator_prefs_manager_get_visible_whitespace ())
-    gtranslator_view_enable_visible_whitespace (view, TRUE);
+  if (gtr_prefs_manager_get_visible_whitespace ())
+    gtr_view_enable_visible_whitespace (view, TRUE);
 
   /*
    *  Set fonts according to preferences 
    */
-  if (gtranslator_prefs_manager_get_use_custom_font ())
+  if (gtr_prefs_manager_get_use_custom_font ())
     {
       gchar *editor_font;
 
-      editor_font = g_strdup (gtranslator_prefs_manager_get_editor_font ());
+      editor_font = g_strdup (gtr_prefs_manager_get_editor_font ());
 
-      gtranslator_view_set_font (view, FALSE, editor_font);
+      gtr_view_set_font (view, FALSE, editor_font);
 
       g_free (editor_font);
     }
   else
     {
-      gtranslator_view_set_font (view, TRUE, NULL);
+      gtr_view_set_font (view, TRUE, NULL);
     }
 
   /*
    * Set scheme color according to preferences
    */
-  gtranslator_view_reload_scheme_color (view);
+  gtr_view_reload_scheme_color (view);
 }
 
 static void
-gtranslator_view_finalize (GObject * object)
+gtr_view_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_view_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_view_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_view_class_init (GtrViewClass * klass)
+gtr_view_class_init (GtrViewClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrViewPrivate));
 
-  object_class->finalize = gtranslator_view_finalize;
+  object_class->finalize = gtr_view_finalize;
 }
 
 /**
- * gtranslator_view_new:
+ * gtr_view_new:
  *
  * Creates a new #GtrView. An empty default buffer will be created for you.
  * 
  * Returns: a new #GtrView
  */
 GtkWidget *
-gtranslator_view_new (void)
+gtr_view_new (void)
 {
   GtkWidget *view;
 
@@ -194,7 +194,7 @@ gtranslator_view_new (void)
 }
 
 /**
- * gtranslator_view_get_selected_text:
+ * gtr_view_get_selected_text:
  * @view: a #GtrView
  * @selected_text: it stores the text selected in the #GtrView
  * @len: it stores the length of the @selected_text
@@ -204,7 +204,7 @@ gtranslator_view_new (void)
  * Returns: TRUE if the @selected_text was got correctly.
  */
 gboolean
-gtranslator_view_get_selected_text (GtrView * view,
+gtr_view_get_selected_text (GtrView * view,
 				    gchar ** selected_text, gint * len)
 {
   GtkTextIter start, end;
@@ -233,19 +233,19 @@ gtranslator_view_get_selected_text (GtrView * view,
 }
 
 /**
- * gtranslator_view_enable_spellcheck:
+ * gtr_view_enable_spellcheck:
  * @view: a #GtrView
  * @enable: TRUE if you want enable the spellcheck
  * 
  * Enables the spellcheck
  **/
 void
-gtranslator_view_enable_spellcheck (GtrView * view, gboolean enable)
+gtr_view_enable_spellcheck (GtrView * view, gboolean enable)
 {
   if (enable)
     {
 #ifdef HAVE_GTKSPELL
-      gtranslator_attach_gtkspell (view);
+      gtr_attach_gtkspell (view);
 #endif
     }
   else
@@ -259,14 +259,14 @@ gtranslator_view_enable_spellcheck (GtrView * view, gboolean enable)
 }
 
 /**
- * gtranslator_view_enable_visible_whitespace:
+ * gtr_view_enable_visible_whitespace:
  * @view: a #GtrView
  * @enable: TRUE if you want to enable special chars for white spaces
  *
  * Enables special chars for white spaces including \n and \t
 **/
 void
-gtranslator_view_enable_visible_whitespace (GtrView * view,
+gtr_view_enable_visible_whitespace (GtrView * view,
 					    gboolean enable)
 {
   g_return_if_fail (GTR_IS_VIEW (view));
@@ -279,14 +279,14 @@ gtranslator_view_enable_visible_whitespace (GtrView * view,
 }
 
 /**
- * gtranslator_view_cut_clipboard:
+ * gtr_view_cut_clipboard:
  * @view: a #GtrView
  *
  * Copies the currently-selected text to a clipboard,
  * then deletes said text if it's editable.
  */
 void
-gtranslator_view_cut_clipboard (GtrView * view)
+gtr_view_cut_clipboard (GtrView * view)
 {
   GtkTextBuffer *buffer;
   GtkClipboard *clipboard;
@@ -311,13 +311,13 @@ gtranslator_view_cut_clipboard (GtrView * view)
 }
 
 /**
- * gtranslator_view_copy_clipboard:
+ * gtr_view_copy_clipboard:
  * @view: a #GtrView
  *
  * Copies the currently-selected text to a clipboard.
  */
 void
-gtranslator_view_copy_clipboard (GtrView * view)
+gtr_view_copy_clipboard (GtrView * view)
 {
   GtkTextBuffer *buffer;
   GtkClipboard *clipboard;
@@ -336,14 +336,14 @@ gtranslator_view_copy_clipboard (GtrView * view)
 }
 
 /**
- * gtranslator_view_cut_clipboard:
+ * gtr_view_cut_clipboard:
  * @view: a #GtrView
  *
  * Pastes the contents of a clipboard at the insertion point,
  * or at override_location.
  */
 void
-gtranslator_view_paste_clipboard (GtrView * view)
+gtr_view_paste_clipboard (GtrView * view)
 {
   GtkTextBuffer *buffer;
   GtkClipboard *clipboard;
@@ -369,7 +369,7 @@ gtranslator_view_paste_clipboard (GtrView * view)
 }
 
 /**
- * gtranslator_view_set_font:
+ * gtr_view_set_font:
  * @view: a #GtrView
  * @def: TRUE if you want to use the default font
  * @font_name: The name of the font you want to use in the #GtrView
@@ -377,7 +377,7 @@ gtranslator_view_paste_clipboard (GtrView * view)
  * Sets the #GtrView font.
  **/
 void
-gtranslator_view_set_font (GtrView * view,
+gtr_view_set_font (GtrView * view,
 			   gboolean def, const gchar * font_name)
 {
   PangoFontDescription *font_desc = NULL;
@@ -399,7 +399,7 @@ gtranslator_view_set_font (GtrView * view,
 
 
 /**
- * gtranslator_view_set_search_text:
+ * gtr_view_set_search_text:
  * @view: a #GtrView
  * @text: the text to set for searching
  * @flags: a #GtrSearchFlags
@@ -407,7 +407,7 @@ gtranslator_view_set_font (GtrView * view,
  * Stores the text to search for in the @view with some specific @flags.
  */
 void
-gtranslator_view_set_search_text (GtrView * view,
+gtr_view_set_search_text (GtrView * view,
 				  const gchar * text, guint flags)
 {
   GtkSourceBuffer *doc;
@@ -426,13 +426,13 @@ gtranslator_view_set_search_text (GtrView * view,
     {
       if (*text != '\0')
 	{
-	  converted_text = gtranslator_utils_unescape_search_text (text);
-	  notify = !gtranslator_view_get_can_search_again (view);
+	  converted_text = gtr_utils_unescape_search_text (text);
+	  notify = !gtr_view_get_can_search_again (view);
 	}
       else
 	{
 	  converted_text = g_strdup ("");
-	  notify = gtranslator_view_get_can_search_again (view);
+	  notify = gtr_view_get_can_search_again (view);
 	}
 
       g_free (view->priv->search_text);
@@ -467,7 +467,7 @@ gtranslator_view_set_search_text (GtrView * view,
 }
 
 /**
- * gtranslator_view_get_search_text:
+ * gtr_view_get_search_text:
  * @view: a #GtrView
  * @flags: the #GtrSearchFlags of the stored text.
  * 
@@ -477,24 +477,24 @@ gtranslator_view_set_search_text (GtrView * view,
  * Returns: the text to search for it.
  */
 gchar *
-gtranslator_view_get_search_text (GtrView * view, guint * flags)
+gtr_view_get_search_text (GtrView * view, guint * flags)
 {
   g_return_val_if_fail (GTR_IS_VIEW (view), NULL);
 
   if (flags != NULL)
     *flags = view->priv->search_flags;
 
-  return gtranslator_utils_escape_search_text (view->priv->search_text);
+  return gtr_utils_escape_search_text (view->priv->search_text);
 }
 
 /**
- * gtranslator_view_get_can_search_again:
+ * gtr_view_get_can_search_again:
  * @view: a #GtrView
  * 
  * Returns: TRUE if it can search again
  */
 gboolean
-gtranslator_view_get_can_search_again (GtrView * view)
+gtr_view_get_can_search_again (GtrView * view)
 {
   g_return_val_if_fail (GTR_IS_VIEW (view), FALSE);
 
@@ -503,7 +503,7 @@ gtranslator_view_get_can_search_again (GtrView * view)
 }
 
 /**
- * gtranslator_view_search_forward:
+ * gtr_view_search_forward:
  * @view: a #GtrView
  * @start: start of search 
  * @end: bound for the search, or %NULL for the end of the buffer
@@ -519,7 +519,7 @@ gtranslator_view_get_can_search_again (GtrView * view)
  * Returns: whether a match was found
  */
 gboolean
-gtranslator_view_search_forward (GtrView * view,
+gtr_view_search_forward (GtrView * view,
 				 const GtkTextIter * start,
 				 const GtkTextIter * end,
 				 GtkTextIter * match_start,
@@ -592,7 +592,7 @@ gtranslator_view_search_forward (GtrView * view,
 }
 
 /**
- * gtranslator_view_search_backward:
+ * gtr_view_search_backward:
  * @view: a #GtrView
  * @start: start of search 
  * @end: bound for the search, or %NULL for the end of the buffer
@@ -608,7 +608,7 @@ gtranslator_view_search_forward (GtrView * view,
  * Returns: whether a match was found
  */
 gboolean
-gtranslator_view_search_backward (GtrView * view,
+gtr_view_search_backward (GtrView * view,
 				  const GtkTextIter * start,
 				  const GtkTextIter * end,
 				  GtkTextIter * match_start,
@@ -681,7 +681,7 @@ gtranslator_view_search_backward (GtrView * view,
 }
 
 /**
- * gtranslator_view_replace_all:
+ * gtr_view_replace_all:
  * @view: a #GtrView
  * @find: the text to find
  * @replace: the text to replace @find
@@ -693,7 +693,7 @@ gtranslator_view_search_backward (GtrView * view,
  * Returns: the number of replacements made it.
  */
 gint
-gtranslator_view_replace_all (GtrView * view,
+gtr_view_replace_all (GtrView * view,
 			      const gchar * find,
 			      const gchar * replace, guint flags)
 {
@@ -719,9 +719,9 @@ gtranslator_view_replace_all (GtrView * view,
   if (find == NULL)
     search_text = g_strdup (view->priv->search_text);
   else
-    search_text = gtranslator_utils_unescape_search_text (find);
+    search_text = gtr_utils_unescape_search_text (find);
 
-  replace_text = gtranslator_utils_unescape_search_text (replace);
+  replace_text = gtr_utils_unescape_search_text (replace);
 
   gtk_text_buffer_get_start_iter (buffer, &iter);
 
@@ -792,14 +792,14 @@ gtranslator_view_replace_all (GtrView * view,
 }
 
 /**
- * gtranslator_view_reload_scheme_color:
+ * gtr_view_reload_scheme_color:
  * @view: a #GtrView
  *
  * Reloads the gtksourceview scheme color. Neccessary when the scheme color 
  * changes.
  */
 void
-gtranslator_view_reload_scheme_color (GtrView * view)
+gtr_view_reload_scheme_color (GtrView * view)
 {
   GtkSourceBuffer *buf;
   GtkSourceStyleScheme *scheme;
@@ -809,7 +809,7 @@ gtranslator_view_reload_scheme_color (GtrView * view)
   buf = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
   manager = gtk_source_style_scheme_manager_get_default ();
 
-  scheme_id = gtranslator_prefs_manager_get_color_scheme ();
+  scheme_id = gtr_prefs_manager_get_color_scheme ();
   scheme = gtk_source_style_scheme_manager_get_scheme (manager, scheme_id);
 
   gtk_source_buffer_set_style_scheme (buf, scheme);

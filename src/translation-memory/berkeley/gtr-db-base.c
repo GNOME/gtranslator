@@ -38,7 +38,7 @@
 						 GTR_TYPE_DB_BASE,     \
 						 GtrDbBasePrivate))
 
-G_DEFINE_TYPE (GtrDbBase, gtranslator_db_base, G_TYPE_OBJECT)
+G_DEFINE_TYPE (GtrDbBase, gtr_db_base, G_TYPE_OBJECT)
 
 struct _GtrDbBasePrivate
 {
@@ -52,7 +52,7 @@ get_db_base_directory ()
   gchar *config;
   gchar *db_dir;
 
-  config = gtranslator_dirs_get_user_config_dir ();
+  config = gtr_dirs_get_user_config_dir ();
 
   db_dir = g_build_filename (config, "berkeley", NULL);
   g_free (config);
@@ -83,7 +83,7 @@ get_db_base_directory ()
 }
 
 static void
-gtranslator_db_base_init (GtrDbBase * base)
+gtr_db_base_init (GtrDbBase * base)
 {
   base->priv = GTR_DB_BASE_GET_PRIVATE (base);
 
@@ -91,31 +91,31 @@ gtranslator_db_base_init (GtrDbBase * base)
 }
 
 static void
-gtranslator_db_base_finalize (GObject * object)
+gtr_db_base_finalize (GObject * object)
 {
   GtrDbBase *base = GTR_DB_BASE (object);
   int err;
 
   if ((err = base->priv->db->close (base->priv->db, 0)) != 0)
-    gtranslator_db_base_show_error (base, err);
+    gtr_db_base_show_error (base, err);
 
   g_free (base->priv->path);
 
-  G_OBJECT_CLASS (gtranslator_db_base_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_db_base_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_db_base_class_init (GtrDbBaseClass * klass)
+gtr_db_base_class_init (GtrDbBaseClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrDbBasePrivate));
 
-  object_class->finalize = gtranslator_db_base_finalize;
+  object_class->finalize = gtr_db_base_finalize;
 }
 
 void
-gtranslator_db_base_create_dabatase (GtrDbBase * base,
+gtr_db_base_create_dabatase (GtrDbBase * base,
 				     const gchar * filename, DBTYPE type)
 {
   gint error;
@@ -126,7 +126,7 @@ gtranslator_db_base_create_dabatase (GtrDbBase * base,
   error = db_create (&base->priv->db, NULL, 0);
   if (error != 0)
     {
-      gtranslator_db_base_show_error (base, error);
+      gtr_db_base_show_error (base, error);
       return;
     }
 
@@ -140,13 +140,13 @@ gtranslator_db_base_create_dabatase (GtrDbBase * base,
 
   if (error != 0)
     {
-      gtranslator_db_base_show_error (base, error);
+      gtr_db_base_show_error (base, error);
       return;
     }
 }
 
 void
-gtranslator_db_base_show_error (GtrDbBase * base, int error)
+gtr_db_base_show_error (GtrDbBase * base, int error)
 {
   gchar *err = NULL;
   DB_ENV *env;
@@ -184,14 +184,14 @@ gtranslator_db_base_show_error (GtrDbBase * base, int error)
 }
 
 gint
-gtranslator_db_base_put (GtrDbBase * base,
+gtr_db_base_put (GtrDbBase * base,
 			 DBT * key, DBT * data, u_int32_t flags)
 {
   return base->priv->db->put (base->priv->db, NULL, key, data, flags);
 }
 
 gint
-gtranslator_db_base_get (GtrDbBase * base, DBT * key, DBT * data)
+gtr_db_base_get (GtrDbBase * base, DBT * key, DBT * data)
 {
   return base->priv->db->get (base->priv->db, NULL, key, data, 0);
 }

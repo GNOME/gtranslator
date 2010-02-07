@@ -1,6 +1,6 @@
 /*
  * plugin-info.h
- * This file is part of gtranslator
+ * This file is part of gtr
  *
  * Copyright (C) 2002-2005 - Paolo Maggi 
  * Copyright (C) 2007 - Paolo Maggi, Steve Frécinaux
@@ -22,8 +22,8 @@
  */
 
 /*
- * Modified by the gtranslator Team, 2002-2007. See the AUTHORS file for a
- * list of people on the gtranslator Team.
+ * Modified by the gtr Team, 2002-2007. See the AUTHORS file for a
+ * list of people on the gtr Team.
  * See the ChangeLog files for a list of changes.
  *
  * $Id$
@@ -37,35 +37,35 @@
 #include "gtr-module.h"
 
 G_BEGIN_DECLS
-#define GTR_TYPE_PLUGIN_INFO			(gtranslator_plugin_info_get_type ())
+#define GTR_TYPE_PLUGIN_INFO			(gtr_plugin_info_get_type ())
 #define GTR_PLUGIN_INFO(obj)			((GtrPluginInfo *) (obj))
 typedef struct _GtrPluginInfo GtrPluginInfo;
 
 GType
-gtranslator_plugin_info_get_type (void)
+gtr_plugin_info_get_type (void)
   G_GNUC_CONST;
 
-     gboolean gtranslator_plugin_info_is_active (GtrPluginInfo *
+     gboolean gtr_plugin_info_is_active (GtrPluginInfo *
 						 info);
-     gboolean gtranslator_plugin_info_is_available (GtrPluginInfo *
+     gboolean gtr_plugin_info_is_available (GtrPluginInfo *
 						    info);
-     gboolean gtranslator_plugin_info_is_configurable (GtrPluginInfo *
+     gboolean gtr_plugin_info_is_configurable (GtrPluginInfo *
 						       info);
 
-     const gchar *gtranslator_plugin_info_get_name (GtrPluginInfo *
+     const gchar *gtr_plugin_info_get_name (GtrPluginInfo *
 						    info);
      const gchar
-       *gtranslator_plugin_info_get_description (GtrPluginInfo *
+       *gtr_plugin_info_get_description (GtrPluginInfo *
 						 info);
-     const gchar *gtranslator_plugin_info_get_icon_name (GtrPluginInfo
+     const gchar *gtr_plugin_info_get_icon_name (GtrPluginInfo
 							 * info);
-     const gchar **gtranslator_plugin_info_get_authors (GtrPluginInfo
+     const gchar **gtr_plugin_info_get_authors (GtrPluginInfo
 							* info);
-     const gchar *gtranslator_plugin_info_get_website (GtrPluginInfo *
+     const gchar *gtr_plugin_info_get_website (GtrPluginInfo *
 						       info);
-     const gchar *gtranslator_plugin_info_get_copyright (GtrPluginInfo
+     const gchar *gtr_plugin_info_get_copyright (GtrPluginInfo
 							 * info);
-     const gchar *gtranslator_plugin_info_get_license (GtrPluginInfo *
+     const gchar *gtr_plugin_info_get_license (GtrPluginInfo *
 						       info);
 
 G_END_DECLS

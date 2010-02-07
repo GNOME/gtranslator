@@ -21,7 +21,7 @@
 #include <glib-object.h>
 
 G_BEGIN_DECLS
-#define GTR_TYPE_TRANSLATION_MEMORY (gtranslator_translation_memory_get_type ())
+#define GTR_TYPE_TRANSLATION_MEMORY (gtr_translation_memory_get_type ())
 #define GTR_TRANSLATION_MEMORY(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_TRANSLATION_MEMORY, GtrTranslationMemory))
 #define GTR_IS_TRANSLATION_MEMORY(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_TRANSLATION_MEMORY))
 #define GTR_TRANSLATION_MEMORY_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTR_TYPE_TRANSLATION_MEMORY, GtrTranslationMemoryIface))
@@ -50,25 +50,25 @@ struct _GtrTranslationMemoryMatch
   gint level;
 };
 
-GType gtranslator_translation_memory_get_type (void);
+GType gtr_translation_memory_get_type (void);
 
-gboolean gtranslator_translation_memory_store (GtrTranslationMemory *
+gboolean gtr_translation_memory_store (GtrTranslationMemory *
 					       obj, const gchar * original,
 					       const gchar * translation);
 
-GList *gtranslator_translation_memory_lookup (GtrTranslationMemory *
+GList *gtr_translation_memory_lookup (GtrTranslationMemory *
 					      obj, const gchar * phrase);
 
 void
-gtranslator_translation_memory_set_max_omits (GtrTranslationMemory *
+gtr_translation_memory_set_max_omits (GtrTranslationMemory *
 					      obj, gsize omits);
 
 void
-gtranslator_translation_memory_set_max_delta (GtrTranslationMemory *
+gtr_translation_memory_set_max_delta (GtrTranslationMemory *
 					      obj, gsize delta);
 
 void
-gtranslator_translation_memory_set_max_items (GtrTranslationMemory *
+gtr_translation_memory_set_max_items (GtrTranslationMemory *
 					      obj, gint items);
 
 G_END_DECLS

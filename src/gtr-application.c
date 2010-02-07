@@ -25,8 +25,11 @@
 #endif
 
 #include "dialogs/gtr-assistant.h"
+#include "gtr-actions.h"
 #include "gtr-application.h"
 #include "gtr-dirs.h"
+#include "gtr-prefs-manager.h"
+#include "gtr-prefs-manager-app.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
 #include "egg-toolbars-model.h"
@@ -44,7 +47,7 @@
 					 GTR_TYPE_APPLICATION,     \
 					 GtrApplicationPrivate))
 
-G_DEFINE_TYPE (GtrApplication, gtranslator_application, G_TYPE_OBJECT)
+G_DEFINE_TYPE (GtrApplication, gtr_application, G_TYPE_OBJECT)
 
 struct _GtrApplicationPrivate
 {
@@ -71,11 +74,11 @@ get_accel_file (void)
 {
   gchar *config;
 
-  config = gtranslator_dirs_get_user_config_dir ();
+  config = gtr_dirs_get_user_config_dir ();
 
   if (config != NULL)
     {
-      return g_build_filename (config, "gtranslator-accels", NULL);
+      return g_build_filename (config, "gtr-accels", NULL);
       g_free (config);
     }
 
@@ -112,7 +115,7 @@ static gboolean
 on_window_delete_event_cb (GtrWindow * window,
 			   GdkEvent * event, GtrApplication * app)
 {
-  gtranslator_file_quit (NULL, window);
+  gtr_file_quit (NULL, window);
   return TRUE;
 }
 
@@ -126,9 +129,9 @@ on_window_destroy_cb (GtrWindow * window,
 }
 
 static void
-gtranslator_application_init (GtrApplication * application)
+gtr_application_init (GtrApplication * application)
 {
-  gchar *gtranslator_folder;
+  gchar *gtr_folder;
   gchar *path_default_gtr_toolbar;
   gchar *profiles_file;
   gchar *dir;
@@ -146,16 +149,16 @@ gtranslator_application_init (GtrApplication * application)
   /*
    * Creating config folder
    */
-  gtranslator_folder = gtranslator_dirs_get_user_config_dir ();
+  gtr_folder = gtr_dirs_get_user_config_dir ();
 
-  if (!g_file_test (gtranslator_folder, G_FILE_TEST_IS_DIR))
+  if (!g_file_test (gtr_folder, G_FILE_TEST_IS_DIR))
     {
       GFile *file;
       GError *error = NULL;
 
-      file = g_file_new_for_path (gtranslator_folder);
+      file = g_file_new_for_path (gtr_folder);
 
-      if (g_file_test (gtranslator_folder, G_FILE_TEST_IS_REGULAR))
+      if (g_file_test (gtr_folder, G_FILE_TEST_IS_REGULAR))
 	{
 	  if (!g_file_delete (file, NULL, &error))
 	    {
@@ -163,21 +166,20 @@ gtranslator_application_init (GtrApplication * application)
 			 "old gtranslator file: %s", error->message);
 	      g_error_free (error);
 	      g_object_unref (file);
-	      g_free (gtranslator_folder);
-	      gtranslator_application_shutdown (application);
+	      g_free (gtr_folder);
+	      gtr_application_shutdown (application);
 	    }
 	}
 
       if (!g_file_make_directory (file, NULL, &error))
 	{
-	  g_warning
-	    ("There was an error making the gtranslator config directory: %s",
-	     error->message);
+	  g_warning ("There was an error making the gtranslator config directory: %s",
+                     error->message);
 
 	  g_error_free (error);
 	  g_object_unref (file);
-	  g_free (gtranslator_folder);
-	  gtranslator_application_shutdown (application);
+	  g_free (gtr_folder);
+	  gtr_application_shutdown (application);
 	}
 
       priv->first_run = TRUE;
@@ -187,19 +189,19 @@ gtranslator_application_init (GtrApplication * application)
   /*
    * If the config folder exists but there is no profile
    */
-  profiles_file = g_build_filename (gtranslator_folder, "profiles.xml", NULL);
+  profiles_file = g_build_filename (gtr_folder, "profiles.xml", NULL);
   if (!g_file_test (profiles_file, G_FILE_TEST_EXISTS))
     priv->first_run = TRUE;
   g_free (profiles_file);
 
   priv->toolbars_model = egg_toolbars_model_new ();
 
-  priv->toolbars_file = g_build_filename (gtranslator_folder,
+  priv->toolbars_file = g_build_filename (gtr_folder,
 					  "gtr-toolbar.xml", NULL);
 
-  g_free (gtranslator_folder);
+  g_free (gtr_folder);
 
-  dir = gtranslator_dirs_get_gtranslator_data_dir ();
+  dir = gtr_dirs_get_gtr_data_dir ();
   path_default_gtr_toolbar = g_build_filename (dir,
                                                "gtr-toolbar.xml",
                                                NULL);
@@ -228,19 +230,19 @@ gtranslator_application_init (GtrApplication * application)
 
   /* Creating translation memory */
   application->priv->tm =
-    GTR_TRANSLATION_MEMORY (gtranslator_berkeley_new ());
-  gtranslator_translation_memory_set_max_omits (application->priv->tm,
-						gtranslator_prefs_manager_get_max_missing_words
+    GTR_TRANSLATION_MEMORY (gtr_berkeley_new ());
+  gtr_translation_memory_set_max_omits (application->priv->tm,
+						gtr_prefs_manager_get_max_missing_words
 						());
-  gtranslator_translation_memory_set_max_delta (application->priv->tm,
-						gtranslator_prefs_manager_get_max_length_diff
+  gtr_translation_memory_set_max_delta (application->priv->tm,
+						gtr_prefs_manager_get_max_length_diff
 						());
-  gtranslator_translation_memory_set_max_items (application->priv->tm, 10);
+  gtr_translation_memory_set_max_items (application->priv->tm, 10);
 }
 
 
 static void
-gtranslator_application_finalize (GObject * object)
+gtr_application_finalize (GObject * object)
 {
   GtrApplication *app = GTR_APPLICATION (object);
 
@@ -252,17 +254,17 @@ gtranslator_application_finalize (GObject * object)
   if (app->priv->tm)
     g_object_unref (app->priv->tm);
 
-  G_OBJECT_CLASS (gtranslator_application_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_application_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_application_class_init (GtrApplicationClass * klass)
+gtr_application_class_init (GtrApplicationClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrApplicationPrivate));
 
-  object_class->finalize = gtranslator_application_finalize;
+  object_class->finalize = gtr_application_finalize;
 }
 
 static void
@@ -272,14 +274,14 @@ app_weak_notify (gpointer data, GObject * where_the_app_was)
 }
 
 /**
- * gtranslator_application_get_default:
+ * gtr_application_get_default:
  * 
  * Returns the default instance of the application.
  * 
  * Returns: the default instance of the application.
  */
 GtrApplication *
-gtranslator_application_get_default (void)
+gtr_application_get_default (void)
 {
   static GtrApplication *instance = NULL;
 
@@ -293,7 +295,7 @@ gtranslator_application_get_default (void)
 }
 
 /**
- * gtranslator_application_open_window:
+ * gtr_application_open_window:
  * @app: a #GtrApplication
  *
  * Creates a new #GtrWindow and shows it.
@@ -301,7 +303,7 @@ gtranslator_application_get_default (void)
  * Returns: the #GtrWindow to be opened
  */
 GtrWindow *
-gtranslator_application_open_window (GtrApplication * app)
+gtr_application_open_window (GtrApplication * app)
 {
   GtrWindow *window;
   GdkWindowState state;
@@ -310,17 +312,17 @@ gtranslator_application_open_window (GtrApplication * app)
   app->priv->active_window = window =
     GTR_WINDOW (g_object_new (GTR_TYPE_WINDOW, NULL));
 
-  state = gtranslator_prefs_manager_get_window_state ();
+  state = gtr_prefs_manager_get_window_state ();
 
   if ((state & GDK_WINDOW_STATE_MAXIMIZED) != 0)
     {
-      gtranslator_prefs_manager_get_default_window_size (&w, &h);
+      gtr_prefs_manager_get_default_window_size (&w, &h);
       gtk_window_set_default_size (GTK_WINDOW (window), w, h);
       gtk_window_maximize (GTK_WINDOW (window));
     }
   else
     {
-      gtranslator_prefs_manager_get_window_size (&w, &h);
+      gtr_prefs_manager_get_window_size (&w, &h);
       gtk_window_set_default_size (GTK_WINDOW (window), w, h);
       gtk_window_unmaximize (GTK_WINDOW (window));
     }
@@ -338,13 +340,13 @@ gtranslator_application_open_window (GtrApplication * app)
    * run, then we show the First run Assistant
    */
   if (app->priv->first_run)
-    gtranslator_show_assistant (window);
+    gtr_show_assistant (window);
 
   return window;
 }
 
 /**
- * _gtranslator_application_get_toolbars_model:
+ * _gtr_application_get_toolbars_model:
  * @application: a #GtrApplication
  * 
  * Returns the toolbar model.
@@ -352,20 +354,20 @@ gtranslator_application_open_window (GtrApplication * app)
  * Retuns: the toolbar model.
  */
 GObject *
-_gtranslator_application_get_toolbars_model (GtrApplication *
+_gtr_application_get_toolbars_model (GtrApplication *
 					     application)
 {
   return G_OBJECT (application->priv->toolbars_model);
 }
 
 /**
- * _gtranslator_application_save_toolbars_model:
+ * _gtr_application_save_toolbars_model:
  * @application: a #GtrApplication
  * 
  * Saves the toolbar model.
  */
 void
-_gtranslator_application_save_toolbars_model (GtrApplication *
+_gtr_application_save_toolbars_model (GtrApplication *
 					      application)
 {
   egg_toolbars_model_save_toolbars (application->priv->toolbars_model,
@@ -373,13 +375,13 @@ _gtranslator_application_save_toolbars_model (GtrApplication *
 }
 
 /**
- * gtranslator_application_shutdown:
+ * gtr_application_shutdown:
  * @app: a #GtrApplication
  * 
  * Shutdowns the application.
  */
 void
-gtranslator_application_shutdown (GtrApplication * app)
+gtr_application_shutdown (GtrApplication * app)
 {
   if (app->priv->toolbars_model)
     {
@@ -393,7 +395,7 @@ gtranslator_application_shutdown (GtrApplication * app)
 }
 
 /**
- * gtranslator_application_get_views:
+ * gtr_application_get_views:
  * @app: the #GtranslationApplication
  * @original: TRUE if you want original TextViews.
  * @translated: TRUE if you want translated TextViews.
@@ -403,7 +405,7 @@ gtranslator_application_shutdown (GtrApplication * app)
  * Return value: a newly allocated list of #GtranslationApplication objects
  */
 GList *
-gtranslator_application_get_views (GtrApplication * app,
+gtr_application_get_views (GtrApplication * app,
 				   gboolean original, gboolean translated)
 {
   GList *res = NULL;
@@ -411,7 +413,7 @@ gtranslator_application_get_views (GtrApplication * app,
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
   res = g_list_concat (res,
-		       gtranslator_window_get_all_views (GTR_WINDOW
+		       gtr_window_get_all_views (GTR_WINDOW
 							 (app->priv->
 							  active_window),
 							 original,
@@ -421,25 +423,25 @@ gtranslator_application_get_views (GtrApplication * app,
 }
 
 /**
- * gtranslator_application_get_active_window:
+ * gtr_application_get_active_window:
  * @app: a #GtrApplication
  * 
  * Return value: the active #GtrWindow
  **/
 GtrWindow *
-gtranslator_application_get_active_window (GtrApplication * app)
+gtr_application_get_active_window (GtrApplication * app)
 {
   return GTR_WINDOW (app->priv->active_window);
 }
 
 /**
- * gtranslator_application_get_windows:
+ * gtr_application_get_windows:
  * @app: a #GtrApplication
  * 
  * Return value: a list of all opened windows.
  **/
 const GList *
-gtranslator_application_get_windows (GtrApplication * app)
+gtr_application_get_windows (GtrApplication * app)
 {
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
@@ -451,38 +453,38 @@ gtranslator_application_get_windows (GtrApplication * app)
 }
 
 /**
- * gtranslator_application_get_active_profile:
+ * gtr_application_get_active_profile:
  * @app: a #GtrApplication
  * 
  * Return value: the active #GtrProfile
  **/
 GtrProfile *
-gtranslator_application_get_active_profile (GtrApplication * app)
+gtr_application_get_active_profile (GtrApplication * app)
 {
   return app->priv->active_profile;
 }
 
 /**
- * gtranslator_application_set_profiles:
+ * gtr_application_set_profiles:
  * @app: a #GtrApplication
  * @profiles: a #GList
  *
  **/
 void
-gtranslator_application_set_active_profile (GtrApplication * app,
+gtr_application_set_active_profile (GtrApplication * app,
 					    GtrProfile * profile)
 {
   app->priv->active_profile = profile;
 }
 
 /**
- * gtranslator_application_get_profiles:
+ * gtr_application_get_profiles:
  * @app: a #GtrApplication
  * 
  * Return value: a list of all profiles.
  **/
 GList *
-gtranslator_application_get_profiles (GtrApplication * app)
+gtr_application_get_profiles (GtrApplication * app)
 {
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
@@ -490,20 +492,20 @@ gtranslator_application_get_profiles (GtrApplication * app)
 }
 
 /**
- * gtranslator_application_set_profiles:
+ * gtr_application_set_profiles:
  * @app: a #GtrApplication
  * @profiles: a #GList
  *
  **/
 void
-gtranslator_application_set_profiles (GtrApplication * app,
+gtr_application_set_profiles (GtrApplication * app,
 				      GList * profiles)
 {
   app->priv->profiles = profiles;
 }
 
 /**
- * gtranslator_application_register_icon:
+ * gtr_application_register_icon:
  * @app: a #GtrApplication
  * @icon: the name of the icon
  * @stock_id: the stock id for the new icon
@@ -511,7 +513,7 @@ gtranslator_application_set_profiles (GtrApplication * app,
  * Registers a new @icon with the @stock_id.
  */
 void
-gtranslator_application_register_icon (GtrApplication * app,
+gtr_application_register_icon (GtrApplication * app,
 				       const gchar * icon,
 				       const gchar * stock_id)
 {
@@ -521,7 +523,7 @@ gtranslator_application_register_icon (GtrApplication * app,
   gchar *path;
   GdkPixbuf *pixbuf;
 
-  pixmaps_dir = gtranslator_dirs_get_pixmaps_dir ();
+  pixmaps_dir = gtr_dirs_get_pixmaps_dir ();
   path = g_build_filename (pixmaps_dir,
                            icon,
                            NULL);
@@ -540,13 +542,13 @@ gtranslator_application_register_icon (GtrApplication * app,
 }
 
 /**
- * gtranslator_application_get_last_dir:
+ * gtr_application_get_last_dir:
  * @app: a #GtrApplication
  *
  * Return value: the last dir where a file was opened in the GtkFileChooser
  */
 const gchar *
-_gtranslator_application_get_last_dir (GtrApplication * app)
+_gtr_application_get_last_dir (GtrApplication * app)
 {
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
@@ -554,13 +556,13 @@ _gtranslator_application_get_last_dir (GtrApplication * app)
 }
 
 /**
- * gtranslator_application_set_last_dir:
+ * gtr_application_set_last_dir:
  * @app: a #GtrApplication
  * @last_dir: the path of the last directory where a file was opened in the
  * GtkFileChooser.
  */
 void
-_gtranslator_application_set_last_dir (GtrApplication * app,
+_gtr_application_set_last_dir (GtrApplication * app,
 				       const gchar * last_dir)
 {
   g_return_if_fail (GTR_IS_APPLICATION (app));
@@ -569,7 +571,7 @@ _gtranslator_application_set_last_dir (GtrApplication * app,
 }
 
 GObject *
-gtranslator_application_get_translation_memory (GtrApplication * app)
+gtr_application_get_translation_memory (GtrApplication * app)
 {
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 

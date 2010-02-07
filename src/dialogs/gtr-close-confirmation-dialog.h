@@ -1,5 +1,5 @@
 /*
- * gtranslator-close-confirmation-dialog.h
+ * gtr-close-confirmation-dialog.h
  * This file is part of gtranslator
  *
  * Copyright (C) 2004-2005 GNOME Foundation 
@@ -21,8 +21,8 @@
  */
 
 /*
- * Modified by the gtranslator Team, 2004-2005. See the AUTHORS file for a 
- * list of people on the gtranslator Team.  
+ * Modified by the gedit Team, 2004-2005. See the AUTHORS file for a 
+ * list of people on the gtr Team.  
  * See the ChangeLog files for a list of changes. 
  */
 
@@ -34,7 +34,7 @@
 
 #include "gtr-po.h"
 
-#define GTR_TYPE_CLOSE_CONFIRMATION_DIALOG		(gtranslator_close_confirmation_dialog_get_type ())
+#define GTR_TYPE_CLOSE_CONFIRMATION_DIALOG		(gtr_close_confirmation_dialog_get_type ())
 #define GTR_CLOSE_CONFIRMATION_DIALOG(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_CLOSE_CONFIRMATION_DIALOG, GtrCloseConfirmationDialog))
 #define GTR_CLOSE_CONFIRMATION_DIALOG_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTR_TYPE_CLOSE_CONFIRMATION_DIALOG, GtrCloseConfirmationDialogClass))
 #define GTR_IS_CLOSE_CONFIRMATION_DIALOG(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_CLOSE_CONFIRMATION_DIALOG))
@@ -62,15 +62,15 @@ struct _GtrCloseConfirmationDialogClass
 };
 
 GType
-gtranslator_close_confirmation_dialog_get_type (void)
+gtr_close_confirmation_dialog_get_type (void)
   G_GNUC_CONST;
 
-     GtkWidget *gtranslator_close_confirmation_dialog_new (GtkWindow * parent,
+     GtkWidget *gtr_close_confirmation_dialog_new (GtkWindow * parent,
 							   GList *
 							   unsaved_documents,
 							   gboolean
 							   logout_mode);
-     GtkWidget *gtranslator_close_confirmation_dialog_new_single (GtkWindow *
+     GtkWidget *gtr_close_confirmation_dialog_new_single (GtkWindow *
 								  parent,
 								  GtrPo
 								  * doc,
@@ -78,11 +78,11 @@ gtranslator_close_confirmation_dialog_get_type (void)
 								  logout_mode);
 
      const GList
-       *gtranslator_close_confirmation_dialog_get_unsaved_documents
+       *gtr_close_confirmation_dialog_get_unsaved_documents
        (GtrCloseConfirmationDialog * dlg);
 
      GList
-       *gtranslator_close_confirmation_dialog_get_selected_documents
+       *gtr_close_confirmation_dialog_get_selected_documents
        (GtrCloseConfirmationDialog * dlg);
 
 #endif /* __GTR_CLOSE_CONFIRMATION_DIALOG_H__ */

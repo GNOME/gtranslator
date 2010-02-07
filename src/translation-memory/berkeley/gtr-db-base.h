@@ -27,7 +27,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_DB_BASE		(gtranslator_db_base_get_type ())
+#define GTR_TYPE_DB_BASE		(gtr_db_base_get_type ())
 #define GTR_DB_BASE(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_DB_BASE, GtrDbBase))
 #define GTR_DB_BASE_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_DB_BASE, GtrDbBaseClass))
 #define GTR_IS_DB_BASE(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_DB_BASE))
@@ -63,22 +63,22 @@ struct _GtrDbBaseClass
  * Public methods
  */
 GType
-gtranslator_db_base_get_type (void)
+gtr_db_base_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_db_base_register_type (GTypeModule * module);
+     GType gtr_db_base_register_type (GTypeModule * module);
 
-     void gtranslator_db_base_create_dabatase (GtrDbBase * base,
+     void gtr_db_base_create_dabatase (GtrDbBase * base,
 					       const gchar * filename,
 					       DBTYPE type);
 
-     void gtranslator_db_base_show_error (GtrDbBase * base,
+     void gtr_db_base_show_error (GtrDbBase * base,
 					  gint error);
 
-     gint gtranslator_db_base_put (GtrDbBase * base,
+     gint gtr_db_base_put (GtrDbBase * base,
 				   DBT * key, DBT * data, u_int32_t flags);
 
-     gint gtranslator_db_base_get (GtrDbBase * base,
+     gint gtr_db_base_get (GtrDbBase * base,
 				   DBT * key, DBT * data);
 
 G_END_DECLS

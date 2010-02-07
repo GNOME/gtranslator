@@ -29,7 +29,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_NOTEBOOK		(gtranslator_notebook_get_type ())
+#define GTR_TYPE_NOTEBOOK		(gtr_notebook_get_type ())
 #define GTR_NOTEBOOK(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_NOTEBOOK, GtrNotebook))
 #define GTR_NOTEBOOK_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_NOTEBOOK, GtrNotebookClass))
 #define GTR_IS_NOTEBOOK(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_NOTEBOOK))
@@ -68,20 +68,20 @@ struct _GtrNotebookClass
  * Public methods
  */
 GType
-gtranslator_notebook_get_type (void)
+gtr_notebook_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_notebook_register_type (GTypeModule * module);
+     GType gtr_notebook_register_type (GTypeModule * module);
 
-     GtkWidget *gtranslator_notebook_new (void);
+     GtkWidget *gtr_notebook_new (void);
 
-     void gtranslator_notebook_add_page (GtrNotebook * notebook,
+     void gtr_notebook_add_page (GtrNotebook * notebook,
 					 GtrTab * pax);
 
-     void gtranslator_notebook_remove_page (GtrNotebook * notebook,
+     void gtr_notebook_remove_page (GtrNotebook * notebook,
 					    gint i);
 
-     GtrTab *gtranslator_notebook_get_page (GtrNotebook *
+     GtrTab *gtr_notebook_get_page (GtrNotebook *
 						    notebook);
 
 G_END_DECLS

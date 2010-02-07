@@ -33,7 +33,7 @@
  * Utility Macros
  */
 
-#define GTR_TYPE_HEADER			(gtranslator_header_get_type ())
+#define GTR_TYPE_HEADER			(gtr_header_get_type ())
 #define GTR_HEADER(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_HEADER, GtrHeader))
 #define GTR_HEADER_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_HEADER, GtrHeaderClass))
 #define GTR_IS_HEADER(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_HEADER))
@@ -69,60 +69,60 @@ struct _GtrHeaderClass
 /*
  * Public methods
  */
-GType                 gtranslator_header_get_type            (void)G_GNUC_CONST;
+GType                 gtr_header_get_type            (void)G_GNUC_CONST;
 
-GType                 gtranslator_header_register_type       (GTypeModule * module);
+GType                 gtr_header_register_type       (GTypeModule * module);
 
-GtrHeader    *gtranslator_header_new                 (po_message_iterator_t iter,
+GtrHeader    *gtr_header_new                 (po_message_iterator_t iter,
                                                               po_message_t          message);
 
-const gchar          *gtranslator_header_get_comments        (GtrHeader *header);
-void                  gtranslator_header_set_comments        (GtrHeader *header,
+const gchar          *gtr_header_get_comments        (GtrHeader *header);
+void                  gtr_header_set_comments        (GtrHeader *header,
                                                               const gchar *comments);
 
-gchar                *gtranslator_header_get_prj_id_version  (GtrHeader *header);
-void                  gtranslator_header_set_prj_id_version  (GtrHeader *header,
+gchar                *gtr_header_get_prj_id_version  (GtrHeader *header);
+void                  gtr_header_set_prj_id_version  (GtrHeader *header,
                                                               const gchar *prj_id_version);
 
-gchar                *gtranslator_header_get_rmbt            (GtrHeader *header);
-void                  gtranslator_header_set_rmbt            (GtrHeader *header,
+gchar                *gtr_header_get_rmbt            (GtrHeader *header);
+void                  gtr_header_set_rmbt            (GtrHeader *header,
                                                               const gchar *rmbt);
 
-gchar                *gtranslator_header_get_pot_date        (GtrHeader *header);
-void                  gtranslator_header_set_pot_date        (GtrHeader *header,
+gchar                *gtr_header_get_pot_date        (GtrHeader *header);
+void                  gtr_header_set_pot_date        (GtrHeader *header,
                                                               const gchar *pot_date);
 
-gchar                *gtranslator_header_get_po_date         (GtrHeader *header);
-void                  gtranslator_header_set_po_date         (GtrHeader *header,
+gchar                *gtr_header_get_po_date         (GtrHeader *header);
+void                  gtr_header_set_po_date         (GtrHeader *header,
                                                               const gchar *po_date);
 
-gchar                *gtranslator_header_get_translator      (GtrHeader *header);
-gchar                *gtranslator_header_get_tr_email        (GtrHeader *header);
-void                  gtranslator_header_set_translator      (GtrHeader *header,
+gchar                *gtr_header_get_translator      (GtrHeader *header);
+gchar                *gtr_header_get_tr_email        (GtrHeader *header);
+void                  gtr_header_set_translator      (GtrHeader *header,
                                                               const gchar *name,
                                                               const gchar *email);
 
-gchar                *gtranslator_header_get_language        (GtrHeader *header);
-gchar                *gtranslator_header_get_lg_email        (GtrHeader *header);
-void                  gtranslator_header_set_language        (GtrHeader *header,
+gchar                *gtr_header_get_language        (GtrHeader *header);
+gchar                *gtr_header_get_lg_email        (GtrHeader *header);
+void                  gtr_header_set_language        (GtrHeader *header,
                                                               const gchar *language,
                                                               const gchar *email);
 
-gchar                *gtranslator_header_get_mime_version    (GtrHeader *header);
-void                  gtranslator_header_set_mime_version    (GtrHeader *header,
+gchar                *gtr_header_get_mime_version    (GtrHeader *header);
+void                  gtr_header_set_mime_version    (GtrHeader *header,
                                                               const gchar *mime_version);
 
-gchar                *gtranslator_header_get_charset         (GtrHeader *header);
-void                  gtranslator_header_set_charset         (GtrHeader *header,
+gchar                *gtr_header_get_charset         (GtrHeader *header);
+void                  gtr_header_set_charset         (GtrHeader *header,
                                                               const gchar *charset);
 
-gchar                *gtranslator_header_get_encoding        (GtrHeader *header);
-void                  gtranslator_header_set_encoding        (GtrHeader *header,
+gchar                *gtr_header_get_encoding        (GtrHeader *header);
+void                  gtr_header_set_encoding        (GtrHeader *header,
                                                               const gchar *encoding);
 
-gchar                *gtranslator_header_get_plural_forms    (GtrHeader *header);
-void                  gtranslator_header_set_plural_forms    (GtrHeader * header,
+gchar                *gtr_header_get_plural_forms    (GtrHeader *header);
+void                  gtr_header_set_plural_forms    (GtrHeader * header,
                                                               const gchar * plural_forms);
-gint                  gtranslator_header_get_nplurals        (GtrHeader * header);
+gint                  gtr_header_get_nplurals        (GtrHeader * header);
 
 #endif /* __HEADER_H__ */

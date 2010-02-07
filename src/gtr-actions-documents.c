@@ -22,19 +22,19 @@
 #include "gtr-actions.h"
 
 void
-gtranslator_actions_documents_next_document (GtkAction * action,
-					     GtrWindow * window)
+gtr_actions_documents_next_document (GtkAction * action,
+				     GtrWindow * window)
 {
   GtrNotebook *notebook;
-  notebook = gtranslator_window_get_notebook (window);
+  notebook = gtr_window_get_notebook (window);
   gtk_notebook_next_page (GTK_NOTEBOOK (notebook));
 }
 
 void
-gtranslator_actions_documents_previous_document (GtkAction * action,
-						 GtrWindow * window)
+gtr_actions_documents_previous_document (GtkAction * action,
+					 GtrWindow * window)
 {
   GtrNotebook *notebook;
-  notebook = gtranslator_window_get_notebook (window);
+  notebook = gtr_window_get_notebook (window);
   gtk_notebook_prev_page (GTK_NOTEBOOK (notebook));
 }

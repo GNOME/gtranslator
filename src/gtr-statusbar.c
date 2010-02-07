@@ -48,30 +48,30 @@ struct _GtrStatusbarPrivate
   guint flash_message_id;
 };
 
-G_DEFINE_TYPE (GtrStatusbar, gtranslator_statusbar, GTK_TYPE_HBOX)
-     static void gtranslator_statusbar_finalize (GObject * object)
+G_DEFINE_TYPE (GtrStatusbar, gtr_statusbar, GTK_TYPE_HBOX)
+     static void gtr_statusbar_finalize (GObject * object)
 {
   GtrStatusbar *statusbar = GTR_STATUSBAR (object);
 
   if (statusbar->priv->flash_timeout > 0)
     g_source_remove (statusbar->priv->flash_timeout);
 
-  G_OBJECT_CLASS (gtranslator_statusbar_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_statusbar_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_statusbar_class_init (GtrStatusbarClass * klass)
+gtr_statusbar_class_init (GtrStatusbarClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->finalize = gtranslator_statusbar_finalize;
+  object_class->finalize = gtr_statusbar_finalize;
 
   g_type_class_add_private (object_class,
 			    sizeof (GtrStatusbarPrivate));
 }
 
 static void
-gtranslator_statusbar_init (GtrStatusbar * statusbar)
+gtr_statusbar_init (GtrStatusbar * statusbar)
 {
   GtkWidget *frame;
   GtkShadowType shadow_type;
@@ -128,27 +128,27 @@ gtranslator_statusbar_init (GtrStatusbar * statusbar)
 }
 
 /**
- * gtranslator_statusbar_new:
+ * gtr_statusbar_new:
  *
  * Creates a new #GtrStatusbar.
  *
  * Return value: the new #GtrStatusbar object
  **/
 GtkWidget *
-gtranslator_statusbar_new (void)
+gtr_statusbar_new (void)
 {
   return GTK_WIDGET (g_object_new (GTR_TYPE_STATUSBAR, NULL));
 }
 
 /**
- * gtranslator_statusbar_push_default:
+ * gtr_statusbar_push_default:
  * @statusbar: a #GtrStatusbar
  * @text: the text to push in the statusbar
  *
  * Pushes a text onto the statusbar in the default context id.
  */
 void
-gtranslator_statusbar_push_default (GtrStatusbar * statusbar,
+gtr_statusbar_push_default (GtrStatusbar * statusbar,
 				    const gchar * text)
 {
   g_return_if_fail (GTR_IS_STATUSBAR (statusbar));
@@ -158,13 +158,13 @@ gtranslator_statusbar_push_default (GtrStatusbar * statusbar,
 }
 
 /**
- * gtranslator_statusbar_pop_default:
+ * gtr_statusbar_pop_default:
  * @statusbar: a #GtrStatusbar
  *
  * Pops the text in the statusbar of the default context id.
  */
 void
-gtranslator_statusbar_pop_default (GtrStatusbar * statusbar)
+gtr_statusbar_pop_default (GtrStatusbar * statusbar)
 {
   g_return_if_fail (GTR_IS_STATUSBAR (statusbar));
 
@@ -173,7 +173,7 @@ gtranslator_statusbar_pop_default (GtrStatusbar * statusbar)
 }
 
 /**
- * gtranslator_statusbar_push:
+ * gtr_statusbar_push:
  * @statusbar: a #GtrStatusbar
  * @context_id: the message's context id, as returned by gtk_statusbar_get_context_id()
  * @text: the text to push in the statusbar
@@ -183,7 +183,7 @@ gtranslator_statusbar_pop_default (GtrStatusbar * statusbar)
  * Returns: a message id that can be used with gtk_statusbar_remove()
  */
 guint
-gtranslator_statusbar_push (GtrStatusbar * statusbar,
+gtr_statusbar_push (GtrStatusbar * statusbar,
 			    guint context_id, const gchar * text)
 {
   g_return_val_if_fail (GTR_IS_STATUSBAR (statusbar), 0);
@@ -193,14 +193,14 @@ gtranslator_statusbar_push (GtrStatusbar * statusbar,
 }
 
 /**
- * gtranslator_statusbar_pop:
+ * gtr_statusbar_pop:
  * @statusbar: a #GtrStatusbar
  * @context_id: a context identifier
  * 
  * Removes the first message in the GtkStatusBar's stack with the given context id. 
  */
 void
-gtranslator_statusbar_pop (GtrStatusbar * statusbar, guint context_id)
+gtr_statusbar_pop (GtrStatusbar * statusbar, guint context_id)
 {
   g_return_if_fail (GTR_IS_STATUSBAR (statusbar));
 
@@ -208,7 +208,7 @@ gtranslator_statusbar_pop (GtrStatusbar * statusbar, guint context_id)
 }
 
 /**
- * gtranslator_statusbar_get_context_id:
+ * gtr_statusbar_get_context_id:
  * @statusbar: a #GtrStatusbar
  * @context_description: textual description of what context the new message is being used in
  *
@@ -218,7 +218,7 @@ gtranslator_statusbar_pop (GtrStatusbar * statusbar, guint context_id)
  * Returns: an integer id
  */
 guint
-gtranslator_statusbar_get_context_id (GtrStatusbar * statusbar,
+gtr_statusbar_get_context_id (GtrStatusbar * statusbar,
 				      const gchar * context_description)
 {
   return
@@ -227,14 +227,14 @@ gtranslator_statusbar_get_context_id (GtrStatusbar * statusbar,
 }
 
 /**
- * gtranslator_statusbar_set_overwrite:
+ * gtr_statusbar_set_overwrite:
  * @statusbar: a #GtrStatusbar
  * @overwrite: if the overwrite mode is set
  *
  * Sets the overwrite mode on the statusbar.
  **/
 void
-gtranslator_statusbar_set_overwrite (GtrStatusbar * statusbar,
+gtr_statusbar_set_overwrite (GtrStatusbar * statusbar,
 				     gboolean overwrite)
 {
   g_return_if_fail (GTR_IS_STATUSBAR (statusbar));
@@ -250,13 +250,13 @@ gtranslator_statusbar_set_overwrite (GtrStatusbar * statusbar,
 }
 
 /**
- * gtranslator_statusbar_clear_overwrite:
+ * gtr_statusbar_clear_overwrite:
  * @statusbar: a #GtrStatusbar
  *
  * Clears the statusbar overwrite label.
  */
 void
-gtranslator_statusbar_clear_overwrite (GtrStatusbar * statusbar)
+gtr_statusbar_clear_overwrite (GtrStatusbar * statusbar)
 {
   g_return_if_fail (GTR_IS_STATUSBAR (statusbar));
 
@@ -276,7 +276,7 @@ remove_message_timeout (GtrStatusbar * statusbar)
 }
 
 /**
- * gtranslator_statusbar_flash_message:
+ * gtr_statusbar_flash_message:
  * @statusbar: a #GtrStatusbar
  * @context_id: message context_id
  * @format: message to flash on the statusbar
@@ -284,7 +284,7 @@ remove_message_timeout (GtrStatusbar * statusbar)
  * Flash a temporary message on the statusbar.
  */
 void
-gtranslator_statusbar_flash_message (GtrStatusbar * statusbar,
+gtr_statusbar_flash_message (GtrStatusbar * statusbar,
 				     guint context_id,
 				     const gchar * format, ...)
 {
@@ -324,7 +324,7 @@ gtranslator_statusbar_flash_message (GtrStatusbar * statusbar,
 }
 
 /**
- * gtranslator_statusbar_update_progress_bar:
+ * gtr_statusbar_update_progress_bar:
  * @statusbar: a #GtrStatusbar
  * @translated_count: the number of translated messages
  * @messages_count: the number of messages
@@ -332,7 +332,7 @@ gtranslator_statusbar_flash_message (GtrStatusbar * statusbar,
  * Updates the state of the progress bar with the given values.
  */
 void
-gtranslator_statusbar_update_progress_bar (GtrStatusbar * statusbar,
+gtr_statusbar_update_progress_bar (GtrStatusbar * statusbar,
 					   gdouble translated_count,
 					   gdouble messages_count)
 {
@@ -365,13 +365,13 @@ gtranslator_statusbar_update_progress_bar (GtrStatusbar * statusbar,
 }
 
 /**
- * gtranslator_statusbar_clear_progress_bar:
+ * gtr_statusbar_clear_progress_bar:
  * @statusbar: a #GtrStatusbar
  *
  * Clear the progress bar
  */
 void
-gtranslator_statusbar_clear_progress_bar (GtrStatusbar * statusbar)
+gtr_statusbar_clear_progress_bar (GtrStatusbar * statusbar)
 {
   gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR
 				 (statusbar->priv->progress_bar), 0.0);

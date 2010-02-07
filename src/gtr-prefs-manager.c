@@ -44,67 +44,67 @@
 #include "gtr-prefs-manager-private.h"
 
 #define DEFINE_BOOL_PREF(name, key) gboolean 			\
-gtranslator_prefs_manager_get_ ## name (void)					\
+gtr_prefs_manager_get_ ## name (void)					\
 {									\
 									\
-	return gtranslator_prefs_manager_get_bool (key);			\
+	return gtr_prefs_manager_get_bool (key);			\
 }									\
 									\
 void 									\
-gtranslator_prefs_manager_set_ ## name (gboolean v)				\
+gtr_prefs_manager_set_ ## name (gboolean v)				\
 {									\
 									\
-	gtranslator_prefs_manager_set_bool (key,				\
+	gtr_prefs_manager_set_bool (key,				\
 				      v);				\
 }
 
 
 #define DEFINE_INT_PREF(name, key) gint	 			\
-gtranslator_prefs_manager_get_ ## name (void)			 		\
+gtr_prefs_manager_get_ ## name (void)			 		\
 {									\
 									\
-	return gtranslator_prefs_manager_get_int (key);			\
+	return gtr_prefs_manager_get_int (key);			\
 }									\
 									\
 void 									\
-gtranslator_prefs_manager_set_ ## name (gint v)				\
+gtr_prefs_manager_set_ ## name (gint v)				\
 {									\
 									\
-	gtranslator_prefs_manager_set_int (key,				\
+	gtr_prefs_manager_set_int (key,				\
 				     v);				\
 }
 
 #define DEFINE_STRING_PREF(name, key) const gchar*	 		\
-gtranslator_prefs_manager_get_ ## name (void)			 		\
+gtr_prefs_manager_get_ ## name (void)			 		\
 {									\
 									\
-	return gtranslator_prefs_manager_get_string (key);			\
+	return gtr_prefs_manager_get_string (key);			\
 }									\
 									\
 void 									\
-gtranslator_prefs_manager_set_ ## name (const gchar* v)			\
+gtr_prefs_manager_set_ ## name (const gchar* v)			\
 {									\
 									\
-	gtranslator_prefs_manager_set_string (key,				\
+	gtr_prefs_manager_set_string (key,				\
 				        v);				\
 }
 
 
-GtrPrefsManager *gtranslator_prefs_manager = NULL;
+GtrPrefsManager *gtr_prefs_manager = NULL;
 
-static gboolean gtranslator_prefs_manager_get_bool (const gchar * key);
+static gboolean gtr_prefs_manager_get_bool (const gchar * key);
 
-static gint gtranslator_prefs_manager_get_int (const gchar * key);
+static gint gtr_prefs_manager_get_int (const gchar * key);
 
-static gchar *gtranslator_prefs_manager_get_string (const gchar * key);
+static gchar *gtr_prefs_manager_get_string (const gchar * key);
 
 
 void
-gtranslator_prefs_manager_init (void)
+gtr_prefs_manager_init (void)
 {
-  //gtranslator_debug (DEBUG_PREFS);
+  //gtr_debug (DEBUG_PREFS);
 
-  if (gtranslator_prefs_manager == NULL)
+  if (gtr_prefs_manager == NULL)
     {
       GConfClient *gconf_client;
 
@@ -112,92 +112,92 @@ gtranslator_prefs_manager_init (void)
       if (gconf_client == NULL)
 	g_error ("Failed to initialize preferences manager");
 
-      gtranslator_prefs_manager = g_new0 (GtrPrefsManager, 1);
+      gtr_prefs_manager = g_new0 (GtrPrefsManager, 1);
 
-      gtranslator_prefs_manager->gconf_client = gconf_client;
+      gtr_prefs_manager->gconf_client = gconf_client;
     }
 }
 
 void
-gtranslator_prefs_manager_shutdown ()
+gtr_prefs_manager_shutdown ()
 {
-  //gtranslator_debug (DEBUG_PREFS);
+  //gtr_debug (DEBUG_PREFS);
 
-  g_object_unref (gtranslator_prefs_manager->gconf_client);
-  gtranslator_prefs_manager->gconf_client = NULL;
+  g_object_unref (gtr_prefs_manager->gconf_client);
+  gtr_prefs_manager->gconf_client = NULL;
 }
 
 static gboolean
-gtranslator_prefs_manager_get_bool (const gchar * key)
+gtr_prefs_manager_get_bool (const gchar * key)
 {
-  //gtranslator_debug (DEBUG_PREFS);
+  //gtr_debug (DEBUG_PREFS);
 
-  return gconf_client_get_bool (gtranslator_prefs_manager->gconf_client,
+  return gconf_client_get_bool (gtr_prefs_manager->gconf_client,
 				key, NULL);
 }
 
 static gint
-gtranslator_prefs_manager_get_int (const gchar * key)
+gtr_prefs_manager_get_int (const gchar * key)
 {
-  //gtranslator_debug (DEBUG_PREFS);
+  //gtr_debug (DEBUG_PREFS);
 
-  return gconf_client_get_int (gtranslator_prefs_manager->gconf_client,
+  return gconf_client_get_int (gtr_prefs_manager->gconf_client,
 			       key, NULL);
 }
 
 static gchar *
-gtranslator_prefs_manager_get_string (const gchar * key)
+gtr_prefs_manager_get_string (const gchar * key)
 {
-  //gtranslator_debug (DEBUG_PREFS);
+  //gtr_debug (DEBUG_PREFS);
 
-  return gconf_client_get_string (gtranslator_prefs_manager->gconf_client,
+  return gconf_client_get_string (gtr_prefs_manager->gconf_client,
 				  key, NULL);
 }
 
 static void
-gtranslator_prefs_manager_set_bool (const gchar * key, gboolean value)
+gtr_prefs_manager_set_bool (const gchar * key, gboolean value)
 {
-  //gtranslator_debug (DEBUG_PREFS);
+  //gtr_debug (DEBUG_PREFS);
 
   g_return_if_fail (gconf_client_key_is_writable
-		    (gtranslator_prefs_manager->gconf_client, key, NULL));
+		    (gtr_prefs_manager->gconf_client, key, NULL));
 
-  gconf_client_set_bool (gtranslator_prefs_manager->gconf_client, key, value,
+  gconf_client_set_bool (gtr_prefs_manager->gconf_client, key, value,
 			 NULL);
 }
 
 static void
-gtranslator_prefs_manager_set_int (const gchar * key, gint value)
+gtr_prefs_manager_set_int (const gchar * key, gint value)
 {
-  //gtranslator_debug (DEBUG_PREFS);
+  //gtr_debug (DEBUG_PREFS);
 
   g_return_if_fail (gconf_client_key_is_writable
-		    (gtranslator_prefs_manager->gconf_client, key, NULL));
+		    (gtr_prefs_manager->gconf_client, key, NULL));
 
-  gconf_client_set_int (gtranslator_prefs_manager->gconf_client, key, value,
+  gconf_client_set_int (gtr_prefs_manager->gconf_client, key, value,
 			NULL);
 }
 
 static void
-gtranslator_prefs_manager_set_string (const gchar * key, const gchar * value)
+gtr_prefs_manager_set_string (const gchar * key, const gchar * value)
 {
-  //gtranslator_debug (DEBUG_PREFS);
+  //gtr_debug (DEBUG_PREFS);
 
   g_return_if_fail (value != NULL);
 
   g_return_if_fail (gconf_client_key_is_writable
-		    (gtranslator_prefs_manager->gconf_client, key, NULL));
+		    (gtr_prefs_manager->gconf_client, key, NULL));
 
-  gconf_client_set_string (gtranslator_prefs_manager->gconf_client, key,
+  gconf_client_set_string (gtr_prefs_manager->gconf_client, key,
 			   value, NULL);
 }
 
 static gboolean
-gtranslator_prefs_manager_key_is_writable (const gchar * key)
+gtr_prefs_manager_key_is_writable (const gchar * key)
 {
-  //gtranslator_debug (DEBUG_PREFS);
+  //gtr_debug (DEBUG_PREFS);
 
-  return gconf_client_key_is_writable (gtranslator_prefs_manager->
+  return gconf_client_key_is_writable (gtr_prefs_manager->
 				       gconf_client, key, NULL);
 }
 
@@ -239,12 +239,12 @@ DEFINE_INT_PREF (max_length_diff, GPM_MAX_LENGTH_DIFF)
 /* pane_switcher_style requires custom functions to deal with conversion from a
    string to an enum */
   GdlSwitcherStyle
-gtranslator_prefs_manager_get_pane_switcher_style (void)
+gtr_prefs_manager_get_pane_switcher_style (void)
 {
   GdlSwitcherStyle pane_switcher_style;
   const gchar *v;
 
-  v = gtranslator_prefs_manager_get_string (GPM_PANE_SWITCHER_STYLE);
+  v = gtr_prefs_manager_get_string (GPM_PANE_SWITCHER_STYLE);
   if (!g_strcmp0 (v, "icons"))
     pane_switcher_style = GDL_SWITCHER_STYLE_ICON;
   else if (!g_strcmp0 (v, "text"))
@@ -262,7 +262,7 @@ gtranslator_prefs_manager_get_pane_switcher_style (void)
 }
 
 void
-gtranslator_prefs_manager_set_pane_switcher_style (GdlSwitcherStyle
+gtr_prefs_manager_set_pane_switcher_style (GdlSwitcherStyle
 						   pane_switcher_style)
 {
   const gchar *v;
@@ -289,19 +289,19 @@ gtranslator_prefs_manager_set_pane_switcher_style (GdlSwitcherStyle
     default:
       v = "icons_and_text";
     }
-  gtranslator_prefs_manager_set_string (GPM_PANE_SWITCHER_STYLE, v);
+  gtr_prefs_manager_set_string (GPM_PANE_SWITCHER_STYLE, v);
 }
 
 DEFINE_STRING_PREF (color_scheme, GPM_COLOR_SCHEME)
 /* sort_order requires custom functions to deal with conversion from a string to
    an enum */
   GtrSortOrder
-gtranslator_prefs_manager_get_sort_order (void)
+gtr_prefs_manager_get_sort_order (void)
 {
   GtrSortOrder sort_order;
   const gchar *v;
 
-  v = gtranslator_prefs_manager_get_string (GPM_SORT_ORDER);
+  v = gtr_prefs_manager_get_string (GPM_SORT_ORDER);
   if (!g_strcmp0 (v, "status"))
     sort_order = GTR_SORT_ORDER_STATUS;
   else if (!g_strcmp0 (v, "id"))
@@ -317,7 +317,7 @@ gtranslator_prefs_manager_get_sort_order (void)
 }
 
 void
-gtranslator_prefs_manager_set_sort_order (GtrSortOrder sort_order)
+gtr_prefs_manager_set_sort_order (GtrSortOrder sort_order)
 {
   const gchar *v;
 
@@ -339,5 +339,5 @@ gtranslator_prefs_manager_set_sort_order (GtrSortOrder sort_order)
     default:
       v = "id";
     }
-  gtranslator_prefs_manager_set_string (GPM_SORT_ORDER, v);
+  gtr_prefs_manager_set_string (GPM_SORT_ORDER, v);
 }

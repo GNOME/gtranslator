@@ -26,7 +26,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_BERKELEY		(gtranslator_berkeley_get_type ())
+#define GTR_TYPE_BERKELEY		(gtr_berkeley_get_type ())
 #define GTR_BERKELEY(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_BERKELEY, GtrBerkeley))
 #define GTR_BERKELEY_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_BERKELEY, GtrBerkeleyClass))
 #define GTR_IS_BERKELEY(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_BERKELEY))
@@ -62,12 +62,12 @@ struct _GtrBerkeleyClass
  * Public methods
  */
 GType
-gtranslator_berkeley_get_type (void)
+gtr_berkeley_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_berkeley_register_type (GTypeModule * module);
+     GType gtr_berkeley_register_type (GTypeModule * module);
 
-     GtrBerkeley *gtranslator_berkeley_new (void);
+     GtrBerkeley *gtr_berkeley_new (void);
 
 G_END_DECLS
 #endif /* __BERKELEY_H__ */

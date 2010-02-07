@@ -1,6 +1,6 @@
 /*
  * plugin.h
- * This file is part of gtranslator
+ * This file is part of gtr
  *
  * Copyright (C) 2002-2005 Paolo Maggi 
  *
@@ -21,8 +21,8 @@
  */
 
 /*
- * Modified by the gtranslator Team, 2002-2005. See the AUTHORS file for a 
- * list of people on the gtranslator Team.  
+ * Modified by the gtr Team, 2002-2005. See the AUTHORS file for a 
+ * list of people on the gtr Team.  
  * See the ChangeLog files for a list of changes. 
  *
  * $Id: plugin.c 6448 2008-08-25 10:28:33Z icq $
@@ -34,7 +34,7 @@
 
 #include "gtr-plugin.h"
 
-G_DEFINE_TYPE (GtrPlugin, gtranslator_plugin, G_TYPE_OBJECT)
+G_DEFINE_TYPE (GtrPlugin, gtr_plugin, G_TYPE_OBJECT)
      static void
        dummy (GtrPlugin * plugin, GtrWindow * window)
 {
@@ -55,7 +55,7 @@ is_configurable (GtrPlugin * plugin)
 }
 
 static void
-gtranslator_plugin_class_init (GtrPluginClass * klass)
+gtr_plugin_class_init (GtrPluginClass * klass)
 {
   klass->activate = dummy;
   klass->deactivate = dummy;
@@ -66,20 +66,20 @@ gtranslator_plugin_class_init (GtrPluginClass * klass)
 }
 
 static void
-gtranslator_plugin_init (GtrPlugin * plugin)
+gtr_plugin_init (GtrPlugin * plugin)
 {
   /* Empty */
 }
 
 /**
- * gtranslator_plugin_activate:
+ * gtr_plugin_activate:
  * @plugin: a #GtrPlugin
  * @window: a #GtrWindow
  * 
  * Activates the plugin.
  */
 void
-gtranslator_plugin_activate (GtrPlugin * plugin,
+gtr_plugin_activate (GtrPlugin * plugin,
 			     GtrWindow * window)
 {
   g_return_if_fail (GTR_IS_PLUGIN (plugin));
@@ -89,14 +89,14 @@ gtranslator_plugin_activate (GtrPlugin * plugin,
 }
 
 /**
- * gtranslator_plugin_deactivate:
+ * gtr_plugin_deactivate:
  * @plugin: a #GtrPlugin
  * @window: a #GtrWindow
  * 
  * Deactivates the plugin.
  */
 void
-gtranslator_plugin_deactivate (GtrPlugin * plugin,
+gtr_plugin_deactivate (GtrPlugin * plugin,
 			       GtrWindow * window)
 {
   g_return_if_fail (GTR_IS_PLUGIN (plugin));
@@ -106,7 +106,7 @@ gtranslator_plugin_deactivate (GtrPlugin * plugin,
 }
 
 /**
- * gtranslator_plugin_update_ui:
+ * gtr_plugin_update_ui:
  * @plugin: a #GtrPlugin
  * @window: a #GtrWindow
  *
@@ -114,7 +114,7 @@ gtranslator_plugin_deactivate (GtrPlugin * plugin,
  * caused by the plugin.
  */
 void
-gtranslator_plugin_update_ui (GtrPlugin * plugin,
+gtr_plugin_update_ui (GtrPlugin * plugin,
 			      GtrWindow * window)
 {
   g_return_if_fail (GTR_IS_PLUGIN (plugin));
@@ -124,7 +124,7 @@ gtranslator_plugin_update_ui (GtrPlugin * plugin,
 }
 
 /**
- * gtranslator_plugin_is_configurable:
+ * gtr_plugin_is_configurable:
  * @plugin: a #GtrPlugin
  *
  * Whether the plugin is configurable.
@@ -132,7 +132,7 @@ gtranslator_plugin_update_ui (GtrPlugin * plugin,
  * Returns: TRUE if the plugin is configurable:
  */
 gboolean
-gtranslator_plugin_is_configurable (GtrPlugin * plugin)
+gtr_plugin_is_configurable (GtrPlugin * plugin)
 {
   g_return_val_if_fail (GTR_IS_PLUGIN (plugin), FALSE);
 
@@ -140,7 +140,7 @@ gtranslator_plugin_is_configurable (GtrPlugin * plugin)
 }
 
 /**
- * gtranslator_plugin_create_configure_dialog:
+ * gtr_plugin_create_configure_dialog:
  * @plugin: a #GtrPlugin
  *
  * Creates the configure dialog widget for the plugin.
@@ -148,7 +148,7 @@ gtranslator_plugin_is_configurable (GtrPlugin * plugin)
  * Returns: the configure dialog widget for the plugin.
  */
 GtkWidget *
-gtranslator_plugin_create_configure_dialog (GtrPlugin * plugin)
+gtr_plugin_create_configure_dialog (GtrPlugin * plugin)
 {
   g_return_val_if_fail (GTR_IS_PLUGIN (plugin), NULL);
 

@@ -39,7 +39,7 @@
 						 	GtrCommentDialogPrivate))
 
 
-G_DEFINE_TYPE (GtrCommentDialog, gtranslator_comment_dialog,
+G_DEFINE_TYPE (GtrCommentDialog, gtr_comment_dialog,
 	       GTK_TYPE_DIALOG)
      struct _GtrCommentDialogPrivate
      {
@@ -56,15 +56,15 @@ G_DEFINE_TYPE (GtrCommentDialog, gtranslator_comment_dialog,
   GtrPo *po;
   GList *msg;
 
-  tab = gtranslator_window_get_active_tab (window);
-  po = gtranslator_tab_get_po (tab);
-  msg = gtranslator_po_get_current_message (po);
+  tab = gtr_window_get_active_tab (window);
+  po = gtr_tab_get_po (tab);
+  msg = gtr_po_get_current_message (po);
 
   gtk_text_buffer_get_bounds (buffer, &start, &end);
   text = gtk_text_buffer_get_text (buffer, &start, &end, TRUE);
 
-  gtranslator_msg_set_comment (msg->data, text);
-  gtranslator_po_set_state (po, GTR_PO_STATE_MODIFIED);
+  gtr_msg_set_comment (msg->data, text);
+  gtr_po_set_state (po, GTR_PO_STATE_MODIFIED);
 }
 
 static void
@@ -78,7 +78,7 @@ dialog_response_handler (GtkDialog * dlg, gint res_id)
 }
 
 static void
-gtranslator_comment_dialog_init (GtrCommentDialog * dlg)
+gtr_comment_dialog_init (GtrCommentDialog * dlg)
 {
   gboolean ret;
   GtkWidget *error_widget;
@@ -110,8 +110,8 @@ gtranslator_comment_dialog_init (GtrCommentDialog * dlg)
 		    "response", G_CALLBACK (dialog_response_handler), NULL);
 
   /*Glade */
-  path = gtranslator_dirs_get_ui_file ("gtr-comment-dialog.ui");
-  ret = gtranslator_utils_get_ui_objects (path,
+  path = gtr_dirs_get_ui_file ("gtr-comment-dialog.ui");
+  ret = gtr_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,
 					  "main_box", &dlg->priv->main_box,
@@ -136,29 +136,29 @@ gtranslator_comment_dialog_init (GtrCommentDialog * dlg)
 }
 
 static void
-gtranslator_comment_dialog_finalize (GObject * object)
+gtr_comment_dialog_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_comment_dialog_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_comment_dialog_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_comment_dialog_class_init (GtrCommentDialogClass * klass)
+gtr_comment_dialog_class_init (GtrCommentDialogClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrCommentDialogPrivate));
 
-  object_class->finalize = gtranslator_comment_dialog_finalize;
+  object_class->finalize = gtr_comment_dialog_finalize;
 }
 
 void
-gtranslator_show_comment_dialog (GtrWindow * window)
+gtr_show_comment_dialog (GtrWindow * window)
 {
   static GtrCommentDialog *dlg = NULL;
   static GtkTextBuffer *buf;
-  GtrTab *tab = gtranslator_window_get_active_tab (window);
-  GtrPo *po = gtranslator_tab_get_po (tab);
-  GList *msg = gtranslator_po_get_current_message (po);
+  GtrTab *tab = gtr_window_get_active_tab (window);
+  GtrPo *po = gtr_tab_get_po (tab);
+  GList *msg = gtr_po_get_current_message (po);
 
   g_return_if_fail (GTR_IS_WINDOW (window));
 
@@ -174,7 +174,7 @@ gtranslator_show_comment_dialog (GtrWindow * window)
       gtk_widget_show (GTK_WIDGET (dlg));
     }
 
-  gtk_text_buffer_set_text (buf, gtranslator_msg_get_comment (msg->data), -1);
+  gtk_text_buffer_set_text (buf, gtr_msg_get_comment (msg->data), -1);
 
   if (GTK_WINDOW (window) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
     {

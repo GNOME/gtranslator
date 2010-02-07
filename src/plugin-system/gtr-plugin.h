@@ -1,6 +1,6 @@
 /*
  * plugin.h
- * This file is part of gtranslator
+ * This file is part of gtr
  *
  * Copyright (C) 2002-2005 - Paolo Maggi 
  *
@@ -21,8 +21,8 @@
  */
 
 /*
- * Modified by the gtranslator Team, 2002-2005. See the AUTHORS file for a 
- * list of people on the gtranslator Team.  
+ * Modified by the gtr Team, 2002-2005. See the AUTHORS file for a 
+ * list of people on the gtr Team.  
  * See the ChangeLog files for a list of changes. 
  *
  * $Id: plugin.h 6448 2008-08-25 10:28:33Z icq $
@@ -43,7 +43,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_PLUGIN              (gtranslator_plugin_get_type())
+#define GTR_TYPE_PLUGIN              (gtr_plugin_get_type())
 #define GTR_PLUGIN(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GTR_TYPE_PLUGIN, GtrPlugin))
 #define GTR_PLUGIN_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GTR_TYPE_PLUGIN, GtrPluginClass))
 #define GTR_IS_PLUGIN(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GTR_TYPE_PLUGIN))
@@ -82,29 +82,29 @@ struct _GtrPluginClass
     gboolean (*is_configurable) (GtrPlugin * plugin);
 
   /* Padding for future expansion */
-  void (*_gtranslator_reserved1) (void);
-  void (*_gtranslator_reserved2) (void);
-  void (*_gtranslator_reserved3) (void);
-  void (*_gtranslator_reserved4) (void);
+  void (*_gtr_reserved1) (void);
+  void (*_gtr_reserved2) (void);
+  void (*_gtr_reserved3) (void);
+  void (*_gtr_reserved4) (void);
 };
 
 /*
  * Public methods
  */
 GType
-gtranslator_plugin_get_type (void)
+gtr_plugin_get_type (void)
   G_GNUC_CONST;
 
-     void gtranslator_plugin_activate (GtrPlugin * plugin,
+     void gtr_plugin_activate (GtrPlugin * plugin,
 				       GtrWindow * window);
-     void gtranslator_plugin_deactivate (GtrPlugin * plugin,
+     void gtr_plugin_deactivate (GtrPlugin * plugin,
 					 GtrWindow * window);
 
-     void gtranslator_plugin_update_ui (GtrPlugin * plugin,
+     void gtr_plugin_update_ui (GtrPlugin * plugin,
 					GtrWindow * window);
 
-     gboolean gtranslator_plugin_is_configurable (GtrPlugin * plugin);
-     GtkWidget *gtranslator_plugin_create_configure_dialog
+     gboolean gtr_plugin_is_configurable (GtrPlugin * plugin);
+     GtkWidget *gtr_plugin_create_configure_dialog
        (GtrPlugin * plugin);
 
 /**
@@ -132,7 +132,7 @@ static void     plugin_name##_class_intern_init (gpointer klass)		\
 }										\
 										\
 G_MODULE_EXPORT GType								\
-register_gtranslator_plugin (GTypeModule *module)					\
+register_gtr_plugin (GTypeModule *module)					\
 {										\
 	static const GTypeInfo our_info =					\
 	{									\

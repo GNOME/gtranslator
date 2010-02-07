@@ -1,6 +1,6 @@
 /*
  * plugin-manager.c
- * This file is part of gtranslator
+ * This file is part of gtr
  *
  * Copyright (C) 2002 Paolo Maggi and James Willcox
  * Copyright (C) 2003-2006 Paolo Maggi
@@ -22,8 +22,8 @@
  */
 
 /*
- * Modified by the gtranslator Team, 1998-2006. See the AUTHORS file for a 
- * list of people on the gtranslator Team.  
+ * Modified by the gtr Team, 1998-2006. See the AUTHORS file for a 
+ * list of people on the gtr Team.  
  * See the ChangeLog files for a list of changes. 
  *
  * $Id: plugin-manager.c 6406 2008-08-13 20:04:04Z pborelli $
@@ -70,22 +70,22 @@ struct _GtrPluginManagerPrivate
   GtkWidget *popup_menu;
 };
 
-G_DEFINE_TYPE (GtrPluginManager, gtranslator_plugin_manager,
+G_DEFINE_TYPE (GtrPluginManager, gtr_plugin_manager,
 	       GTK_TYPE_VBOX)
      static GtrPluginInfo
        *plugin_manager_get_selected_plugin (GtrPluginManager * pm);
      static void plugin_manager_toggle_active (GtrPluginManager * pm,
 					       GtkTreeIter * iter,
 					       GtkTreeModel * model);
-     static void gtranslator_plugin_manager_finalize (GObject * object);
+     static void gtr_plugin_manager_finalize (GObject * object);
 
      static void
-       gtranslator_plugin_manager_class_init (GtrPluginManagerClass *
+       gtr_plugin_manager_class_init (GtrPluginManagerClass *
 					      klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->finalize = gtranslator_plugin_manager_finalize;
+  object_class->finalize = gtr_plugin_manager_finalize;
 
   g_type_class_add_private (object_class,
 			    sizeof (GtrPluginManagerPrivate));
@@ -96,7 +96,7 @@ about_button_cb (GtkWidget * button, GtrPluginManager * pm)
 {
   GtrPluginInfo *info;
 
-  //gtranslator_debug (DEBUG_PLUGINS);
+  //gtr_debug (DEBUG_PLUGINS);
 
   info = plugin_manager_get_selected_plugin (pm);
 
@@ -108,19 +108,19 @@ about_button_cb (GtkWidget * button, GtrPluginManager * pm)
 
   pm->priv->about = g_object_new (GTK_TYPE_ABOUT_DIALOG,
 				  "program-name",
-				  gtranslator_plugin_info_get_name (info),
+				  gtr_plugin_info_get_name (info),
 				  "copyright",
-				  gtranslator_plugin_info_get_copyright
+				  gtr_plugin_info_get_copyright
 				  (info), "authors",
-				  gtranslator_plugin_info_get_authors (info),
+				  gtr_plugin_info_get_authors (info),
 				  "license",
-				  gtranslator_plugin_info_get_license (info),
+				  gtr_plugin_info_get_license (info),
 				  "comments",
-				  gtranslator_plugin_info_get_description
+				  gtr_plugin_info_get_description
 				  (info), "website",
-				  gtranslator_plugin_info_get_website (info),
+				  gtr_plugin_info_get_website (info),
 				  "logo-icon-name",
-				  gtranslator_plugin_info_get_icon_name
+				  gtr_plugin_info_get_icon_name
 				  (info), NULL);
 
   gtk_window_set_destroy_with_parent (GTK_WINDOW (pm->priv->about), TRUE);
@@ -143,17 +143,17 @@ configure_button_cb (GtkWidget * button, GtrPluginManager * pm)
   GtrPluginInfo *info;
   GtkWindow *toplevel;
 
-  //gtranslator_debug (DEBUG_PLUGINS);
+  //gtr_debug (DEBUG_PLUGINS);
 
   info = plugin_manager_get_selected_plugin (pm);
 
   g_return_if_fail (info != NULL);
 
-  DEBUG_PRINT ("Configuring: %s\n", gtranslator_plugin_info_get_name (info));
+  DEBUG_PRINT ("Configuring: %s\n", gtr_plugin_info_get_name (info));
 
   toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (pm)));
 
-  gtranslator_plugins_engine_configure_plugin (pm->priv->engine,
+  gtr_plugins_engine_configure_plugin (pm->priv->engine,
 					       info, toplevel);
 
   DEBUG_PRINT ("Done");
@@ -177,11 +177,11 @@ plugin_manager_view_info_cell_cb (GtkTreeViewColumn * tree_column,
     return;
 
   text = g_markup_printf_escaped ("<b>%s</b>\n%s",
-				  gtranslator_plugin_info_get_name (info),
-				  gtranslator_plugin_info_get_description
+				  gtr_plugin_info_get_name (info),
+				  gtr_plugin_info_get_description
 				  (info));
   g_object_set (G_OBJECT (cell), "markup", text, "sensitive",
-		gtranslator_plugin_info_is_available (info), NULL);
+		gtr_plugin_info_is_available (info), NULL);
 
   g_free (text);
 }
@@ -203,8 +203,8 @@ plugin_manager_view_icon_cell_cb (GtkTreeViewColumn * tree_column,
     return;
 
   g_object_set (G_OBJECT (cell),
-		"icon-name", gtranslator_plugin_info_get_icon_name (info),
-		"sensitive", gtranslator_plugin_info_is_available (info),
+		"icon-name", gtr_plugin_info_get_icon_name (info),
+		"sensitive", gtr_plugin_info_is_available (info),
 		NULL);
 }
 
@@ -217,7 +217,7 @@ active_toggled_cb (GtkCellRendererToggle * cell,
   GtkTreePath *path;
   GtkTreeModel *model;
 
-  //gtranslator_debug (DEBUG_PLUGINS);
+  //gtr_debug (DEBUG_PLUGINS);
 
   path = gtk_tree_path_new_from_string (path_str);
 
@@ -238,7 +238,7 @@ cursor_changed_cb (GtkTreeView * view, gpointer data)
   GtrPluginManager *pm = data;
   GtrPluginInfo *info;
 
-  //gtranslator_debug (DEBUG_PLUGINS);
+  //gtr_debug (DEBUG_PLUGINS);
 
   info = plugin_manager_get_selected_plugin (pm);
 
@@ -246,7 +246,7 @@ cursor_changed_cb (GtkTreeView * view, gpointer data)
 			    info != NULL);
   gtk_widget_set_sensitive (GTK_WIDGET (pm->priv->configure_button),
 			    (info != NULL) &&
-			    gtranslator_plugin_info_is_configurable (info));
+			    gtr_plugin_info_is_configurable (info));
 }
 
 static void
@@ -258,7 +258,7 @@ row_activated_cb (GtkTreeView * tree_view,
   GtkTreeIter iter;
   GtkTreeModel *model;
 
-  //gtranslator_debug (DEBUG_PLUGINS);
+  //gtr_debug (DEBUG_PLUGINS);
 
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (pm->priv->tree));
 
@@ -278,9 +278,9 @@ plugin_manager_populate_lists (GtrPluginManager * pm)
   GtkListStore *model;
   GtkTreeIter iter;
 
-  //gtranslator_debug (DEBUG_PLUGINS);
+  //gtr_debug (DEBUG_PLUGINS);
 
-  plugins = gtranslator_plugins_engine_get_plugin_list (pm->priv->engine);
+  plugins = gtr_plugins_engine_get_plugin_list (pm->priv->engine);
 
   model =
     GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (pm->priv->tree)));
@@ -293,9 +293,9 @@ plugin_manager_populate_lists (GtrPluginManager * pm)
       gtk_list_store_append (model, &iter);
       gtk_list_store_set (model, &iter,
 			  ACTIVE_COLUMN,
-			  gtranslator_plugin_info_is_active (info),
+			  gtr_plugin_info_is_active (info),
 			  AVAILABLE_COLUMN,
-			  gtranslator_plugin_info_is_available (info),
+			  gtr_plugin_info_is_available (info),
 			  INFO_COLUMN, info, -1);
 
       plugins = plugins->next;
@@ -316,7 +316,7 @@ plugin_manager_populate_lists (GtrPluginManager * pm)
 			  INFO_COLUMN, &info, -1);
 
       gtk_widget_set_sensitive (GTK_WIDGET (pm->priv->configure_button),
-				gtranslator_plugin_info_is_configurable
+				gtr_plugin_info_is_configurable
 				(info));
     }
 }
@@ -329,7 +329,7 @@ plugin_manager_set_active (GtrPluginManager * pm,
   GtrPluginInfo *info;
   gboolean res = TRUE;
 
-  //gtranslator_debug (DEBUG_PLUGINS);
+  //gtr_debug (DEBUG_PLUGINS);
 
   gtk_tree_model_get (model, iter, INFO_COLUMN, &info, -1);
 
@@ -338,11 +338,11 @@ plugin_manager_set_active (GtrPluginManager * pm,
   if (active)
     {
       /* activate the plugin */
-      if (!gtranslator_plugins_engine_activate_plugin
+      if (!gtr_plugins_engine_activate_plugin
 	  (pm->priv->engine, info))
 	{
 	  DEBUG_PRINT ("Could not activate %s.\n",
-		       gtranslator_plugin_info_get_name (info));
+		       gtr_plugin_info_get_name (info));
 
 	  res = FALSE;
 	}
@@ -350,11 +350,11 @@ plugin_manager_set_active (GtrPluginManager * pm,
   else
     {
       /* deactivate the plugin */
-      if (!gtranslator_plugins_engine_deactivate_plugin
+      if (!gtr_plugins_engine_deactivate_plugin
 	  (pm->priv->engine, info))
 	{
 	  DEBUG_PRINT ("Could not deactivate %s.\n",
-		       gtranslator_plugin_info_get_name (info));
+		       gtr_plugin_info_get_name (info));
 
 	  res = FALSE;
 	}
@@ -369,7 +369,7 @@ plugin_manager_toggle_active (GtrPluginManager * pm,
 {
   gboolean active;
 
-  //gtranslator_debug (DEBUG_PLUGINS);
+  //gtr_debug (DEBUG_PLUGINS);
 
   gtk_tree_model_get (model, iter, ACTIVE_COLUMN, &active, -1);
 
@@ -386,7 +386,7 @@ plugin_manager_get_selected_plugin (GtrPluginManager * pm)
   GtkTreeIter iter;
   GtkTreeSelection *selection;
 
-  //gtranslator_debug (DEBUG_PLUGINS);
+  //gtr_debug (DEBUG_PLUGINS);
 
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (pm->priv->tree));
   g_return_val_if_fail (model != NULL, NULL);
@@ -408,7 +408,7 @@ plugin_manager_set_active_all (GtrPluginManager * pm, gboolean active)
   GtkTreeModel *model;
   GtkTreeIter iter;
 
-  //gtranslator_debug (DEBUG_PLUGINS);
+  //gtr_debug (DEBUG_PLUGINS);
 
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (pm->priv->tree));
 
@@ -442,7 +442,7 @@ name_search_cb (GtkTreeModel * model,
     return FALSE;
 
   normalized_string =
-    g_utf8_normalize (gtranslator_plugin_info_get_name (info), -1,
+    g_utf8_normalize (gtr_plugin_info_get_name (info), -1,
 		      G_NORMALIZE_ALL);
   normalized_key = g_utf8_normalize (key, -1, G_NORMALIZE_ALL);
   case_normalized_string = g_utf8_casefold (normalized_string, -1);
@@ -517,14 +517,14 @@ create_tree_popup_menu (GtrPluginManager * pm)
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
   g_signal_connect (item, "activate", G_CALLBACK (configure_button_cb), pm);
   gtk_widget_set_sensitive (item,
-			    gtranslator_plugin_info_is_configurable (info));
+			    gtr_plugin_info_is_configurable (info));
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
   item = gtk_check_menu_item_new_with_mnemonic (_("A_ctivate"));
   gtk_widget_set_sensitive (item,
-			    gtranslator_plugin_info_is_available (info));
+			    gtr_plugin_info_is_available (info));
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item),
-				  gtranslator_plugin_info_is_active (info));
+				  gtr_plugin_info_is_active (info));
   g_signal_connect (item, "toggled", G_CALLBACK (enable_plugin_menu_cb), pm);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
@@ -571,7 +571,7 @@ show_tree_popup_menu (GtkTreeView * tree,
   else
     {
       gtk_menu_popup (GTK_MENU (pm->priv->popup_menu), NULL, NULL,
-		      gtranslator_utils_menu_position_under_tree_view, tree,
+		      gtr_utils_menu_position_under_tree_view, tree,
 		      0, gtk_get_current_event_time ());
 
       gtk_menu_shell_select_first (GTK_MENU_SHELL (pm->priv->popup_menu),
@@ -627,8 +627,8 @@ model_name_sort_func (GtkTreeModel * model,
   gtk_tree_model_get (model, iter1, INFO_COLUMN, &info1, -1);
   gtk_tree_model_get (model, iter2, INFO_COLUMN, &info2, -1);
 
-  return g_utf8_collate (gtranslator_plugin_info_get_name (info1),
-			 gtranslator_plugin_info_get_name (info2));
+  return g_utf8_collate (gtr_plugin_info_get_name (info1),
+			 gtr_plugin_info_get_name (info2));
 }
 
 static void
@@ -638,7 +638,7 @@ plugin_manager_construct_tree (GtrPluginManager * pm)
   GtkCellRenderer *cell;
   GtkListStore *model;
 
-  //gtranslator_debug (DEBUG_PLUGINS);
+  //gtr_debug (DEBUG_PLUGINS);
 
   model =
     gtk_list_store_new (N_COLUMNS, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN,
@@ -749,16 +749,16 @@ plugin_toggled_cb (GtrPluginsEngine * engine,
     {
       g_warning
 	("GtrPluginManager: plugin '%s' not found in the tree model",
-	 gtranslator_plugin_info_get_name (info));
+	 gtr_plugin_info_get_name (info));
       return;
     }
 
   gtk_list_store_set (GTK_LIST_STORE (model), &iter, ACTIVE_COLUMN,
-		      gtranslator_plugin_info_is_active (info), -1);
+		      gtr_plugin_info_is_active (info), -1);
 }
 
 static void
-gtranslator_plugin_manager_init (GtrPluginManager * pm)
+gtr_plugin_manager_init (GtrPluginManager * pm)
 {
   GtkWidget *label;
   GtkWidget *alignment;
@@ -766,7 +766,7 @@ gtranslator_plugin_manager_init (GtrPluginManager * pm)
   GtkWidget *hbuttonbox;
   gchar *markup;
 
-  //gtranslator_debug (DEBUG_PLUGINS);
+  //gtr_debug (DEBUG_PLUGINS);
 
   pm->priv = GTR_PLUGIN_MANAGER_GET_PRIVATE (pm);
 
@@ -803,12 +803,12 @@ gtranslator_plugin_manager_init (GtrPluginManager * pm)
   gtk_box_set_spacing (GTK_BOX (hbuttonbox), 8);
 
   pm->priv->about_button =
-    gtranslator_gtk_button_new_with_stock_icon (_("_About Plugin"),
+    gtr_gtk_button_new_with_stock_icon (_("_About Plugin"),
 						GTK_STOCK_ABOUT);
   gtk_container_add (GTK_CONTAINER (hbuttonbox), pm->priv->about_button);
 
   pm->priv->configure_button =
-    gtranslator_gtk_button_new_with_stock_icon (_("C_onfigure Plugin"),
+    gtr_gtk_button_new_with_stock_icon (_("C_onfigure Plugin"),
 						GTK_STOCK_PREFERENCES);
   gtk_container_add (GTK_CONTAINER (hbuttonbox), pm->priv->configure_button);
 
@@ -823,7 +823,7 @@ gtranslator_plugin_manager_init (GtrPluginManager * pm)
   plugin_manager_construct_tree (pm);
 
   /* get the plugin engine and populate the treeview */
-  pm->priv->engine = gtranslator_plugins_engine_get_default ();
+  pm->priv->engine = gtr_plugins_engine_get_default ();
 
   g_signal_connect_after (pm->priv->engine,
 			  "activate-plugin",
@@ -832,7 +832,7 @@ gtranslator_plugin_manager_init (GtrPluginManager * pm)
 			  "deactivate-plugin",
 			  G_CALLBACK (plugin_toggled_cb), pm);
 
-  if (gtranslator_plugins_engine_get_plugin_list (pm->priv->engine) != NULL)
+  if (gtr_plugins_engine_get_plugin_list (pm->priv->engine) != NULL)
     {
       plugin_manager_populate_lists (pm);
     }
@@ -844,7 +844,7 @@ gtranslator_plugin_manager_init (GtrPluginManager * pm)
 }
 
 static void
-gtranslator_plugin_manager_finalize (GObject * object)
+gtr_plugin_manager_finalize (GObject * object)
 {
   GtrPluginManager *pm = GTR_PLUGIN_MANAGER (object);
 
@@ -854,12 +854,12 @@ gtranslator_plugin_manager_finalize (GObject * object)
   if (pm->priv->popup_menu)
     gtk_widget_destroy (pm->priv->popup_menu);
 
-  G_OBJECT_CLASS (gtranslator_plugin_manager_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_plugin_manager_parent_class)->finalize (object);
 
 }
 
 GtkWidget *
-gtranslator_plugin_manager_new (void)
+gtr_plugin_manager_new (void)
 {
   return g_object_new (GTR_TYPE_PLUGIN_MANAGER, 0);
 }

@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_VIEW		(gtranslator_view_get_type ())
+#define GTR_TYPE_VIEW		(gtr_view_get_type ())
 #define GTR_VIEW(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_VIEW, GtrView))
 #define GTR_VIEW_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_VIEW, GtrViewClass))
 #define GTR_IS_VIEW(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_VIEW))
@@ -72,39 +72,39 @@ struct _GtrViewClass
  * Public methods
  */
 GType
-gtranslator_view_get_type (void)
+gtr_view_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_view_register_type (GTypeModule * module);
+     GType gtr_view_register_type (GTypeModule * module);
 
-     GtkWidget *gtranslator_view_new (void);
+     GtkWidget *gtr_view_new (void);
 
-     gboolean gtranslator_view_get_selected_text (GtrView * view,
+     gboolean gtr_view_get_selected_text (GtrView * view,
 						  gchar ** selected_text,
 						  gint * len);
 
-     void gtranslator_view_enable_spellcheck (GtrView * view,
+     void gtr_view_enable_spellcheck (GtrView * view,
 					      gboolean enable);
 
-     void gtranslator_view_enable_visible_whitespace
+     void gtr_view_enable_visible_whitespace
        (GtrView * view, gboolean enable);
 
-     void gtranslator_view_cut_clipboard (GtrView * view);
+     void gtr_view_cut_clipboard (GtrView * view);
 
-     void gtranslator_view_copy_clipboard (GtrView * view);
+     void gtr_view_copy_clipboard (GtrView * view);
 
-     void gtranslator_view_paste_clipboard (GtrView * view);
+     void gtr_view_paste_clipboard (GtrView * view);
 
-     void gtranslator_view_set_font (GtrView * view,
+     void gtr_view_set_font (GtrView * view,
 				     gboolean def, const gchar * font_name);
 
-     void gtranslator_view_set_search_text (GtrView * view,
+     void gtr_view_set_search_text (GtrView * view,
 					    const gchar * text, guint flags);
 
-     gchar *gtranslator_view_get_search_text (GtrView * view,
+     gchar *gtr_view_get_search_text (GtrView * view,
 					      guint * flags);
 
-     void gtranslator_view_reload_scheme_color (GtrView * view);
+     void gtr_view_reload_scheme_color (GtrView * view);
 
 
 /* Search macros */

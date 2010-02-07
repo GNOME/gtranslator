@@ -27,7 +27,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_DB_TRANS		(gtranslator_db_trans_get_type ())
+#define GTR_TYPE_DB_TRANS		(gtr_db_trans_get_type ())
 #define GTR_DB_TRANS(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_DB_TRANS, GtrDbTrans))
 #define GTR_DB_TRANS_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_DB_TRANS, GtrDbTransClass))
 #define GTR_IS_DB_TRANS(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_DB_TRANS))
@@ -63,23 +63,23 @@ struct _GtrDbTransClass
  * Public methods
  */
 GType
-gtranslator_db_trans_get_type (void)
+gtr_db_trans_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_db_trans_register_type (GTypeModule * module);
+     GType gtr_db_trans_register_type (GTypeModule * module);
 
-     GtrDbTrans *gtranslator_db_trans_new (void);
+     GtrDbTrans *gtr_db_trans_new (void);
 
-     db_recno_t gtranslator_db_trans_write_string (GtrDbTrans *
+     db_recno_t gtr_db_trans_write_string (GtrDbTrans *
 						   db_trans,
 						   const gchar * translation,
 						   db_recno_t key);
 
-     db_recno_t gtranslator_db_trans_write (GtrDbTrans * db_trans,
+     db_recno_t gtr_db_trans_write (GtrDbTrans * db_trans,
 					    gchar ** translations,
 					    db_recno_t index);
 
-     GPtrArray *gtranslator_db_trans_read (GtrDbTrans * db_trans,
+     GPtrArray *gtr_db_trans_read (GtrDbTrans * db_trans,
 					   db_recno_t index);
 
 G_END_DECLS

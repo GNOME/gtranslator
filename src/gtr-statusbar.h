@@ -24,7 +24,7 @@
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
-#define GTR_TYPE_STATUSBAR		(gtranslator_statusbar_get_type ())
+#define GTR_TYPE_STATUSBAR		(gtr_statusbar_get_type ())
 #define GTR_STATUSBAR(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_STATUSBAR, GtrStatusbar))
 #define GTR_STATUSBAR_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_STATUSBAR, GtrStatusbarClass))
 #define GTR_IS_STATUSBAR(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_STATUSBAR))
@@ -48,45 +48,45 @@ struct _GtrStatusbarClass
 };
 
 GType
-gtranslator_statusbar_get_type (void)
+gtr_statusbar_get_type (void)
   G_GNUC_CONST;
 
-     GtkWidget *gtranslator_statusbar_new (void);
+     GtkWidget *gtr_statusbar_new (void);
 
-     void gtranslator_statusbar_push_default (GtrStatusbar *
+     void gtr_statusbar_push_default (GtrStatusbar *
 					      statusbar, const gchar * text);
 
-     void gtranslator_statusbar_pop_default (GtrStatusbar *
+     void gtr_statusbar_pop_default (GtrStatusbar *
 					     statusbar);
 
-     guint gtranslator_statusbar_push (GtrStatusbar * statusbar,
+     guint gtr_statusbar_push (GtrStatusbar * statusbar,
 				       guint context_id, const gchar * text);
 
-     void gtranslator_statusbar_pop (GtrStatusbar * statusbar,
+     void gtr_statusbar_pop (GtrStatusbar * statusbar,
 				     guint context_id);
 
-     guint gtranslator_statusbar_get_context_id (GtrStatusbar *
+     guint gtr_statusbar_get_context_id (GtrStatusbar *
 						 statusbar,
 						 const gchar *
 						 context_description);
 
-     void gtranslator_statusbar_set_overwrite (GtrStatusbar *
+     void gtr_statusbar_set_overwrite (GtrStatusbar *
 					       statusbar, gboolean overwrite);
 
-     void gtranslator_statusbar_clear_overwrite (GtrStatusbar *
+     void gtr_statusbar_clear_overwrite (GtrStatusbar *
 						 statusbar);
 
-     void gtranslator_statusbar_flash_message (GtrStatusbar *
+     void gtr_statusbar_flash_message (GtrStatusbar *
 					       statusbar, guint context_id,
 					       const gchar * format,
 					       ...) G_GNUC_PRINTF (3, 4);
 
-     void gtranslator_statusbar_update_progress_bar (GtrStatusbar *
+     void gtr_statusbar_update_progress_bar (GtrStatusbar *
 						     statusbar,
 						     gdouble translated_count,
 						     gdouble messages_count);
 
-     void gtranslator_statusbar_clear_progress_bar (GtrStatusbar *
+     void gtr_statusbar_clear_progress_bar (GtrStatusbar *
 						    statusbar);
 
 G_END_DECLS

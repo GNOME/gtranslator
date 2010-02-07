@@ -29,7 +29,7 @@
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_HEADER_DIALOG		(gtranslator_header_dialog_get_type ())
+#define GTR_TYPE_HEADER_DIALOG		(gtr_header_dialog_get_type ())
 #define GTR_HEADER_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_HEADER_DIALOG, GtrHeaderDialog))
 #define GTR_HEADER_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_HEADER_DIALOG, GtrHeaderDialogClass))
 #define GTR_IS_HEADER_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_HEADER_DIALOG))
@@ -66,11 +66,11 @@ struct _GtrHeaderDialogClass
  * Public methods
  */
 GType
-gtranslator_header_dialog_get_type (void)
+gtr_header_dialog_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_header_dialog_register_type (GTypeModule * module);
+     GType gtr_header_dialog_register_type (GTypeModule * module);
 
-     void gtranslator_show_header_dialog (GtrWindow * window);
+     void gtr_show_header_dialog (GtrWindow * window);
 
 #endif

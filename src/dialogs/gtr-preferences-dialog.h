@@ -37,7 +37,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_PREFERENCES_DIALOG		(gtranslator_preferences_dialog_get_type ())
+#define GTR_TYPE_PREFERENCES_DIALOG		(gtr_preferences_dialog_get_type ())
 #define GTR_PREFERENCES_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_PREFERENCES_DIALOG, GtrPreferencesDialog))
 #define GTR_PREFERENCES_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_PREFERENCES_DIALOG, GtrPreferencesDialogClass))
 #define GTR_IS_PREFERENCES_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_PREFERENCES_DIALOG))
@@ -75,20 +75,20 @@ struct _GtrPreferencesDialogClass
  * Public methods
  */
 GType
-gtranslator_preferences_dialog_get_type (void)
+gtr_preferences_dialog_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_preferences_dialog_register_type (GTypeModule *
+     GType gtr_preferences_dialog_register_type (GTypeModule *
 							 module);
 
-     void gtranslator_show_preferences_dialog (GtrWindow * window);
+     void gtr_show_preferences_dialog (GtrWindow * window);
 
      GtkWidget
-       *gtranslator_preferences_dialog_get_treeview
+       *gtr_preferences_dialog_get_treeview
        (GtrPreferencesDialog * dlg);
 
      void
-       gtranslator_preferences_fill_profile_treeview
+       gtr_preferences_fill_profile_treeview
        (GtrPreferencesDialog * dlg, GtkTreeModel * model);
 
 G_END_DECLS

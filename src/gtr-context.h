@@ -26,7 +26,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_CONTEXT_PANEL		(gtranslator_context_panel_get_type ())
+#define GTR_TYPE_CONTEXT_PANEL		(gtr_context_panel_get_type ())
 #define GTR_CONTEXT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_CONTEXT_PANEL, GtrContextPanel))
 #define GTR_CONTEXT_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_CONTEXT_PANEL, GtrContextPanelClass))
 #define GTR_IS_CONTEXT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_CONTEXT_PANEL))
@@ -62,15 +62,15 @@ struct _GtrContextPanelClass
  * Public methods
  */
 GType
-gtranslator_context_panel_get_type (void)
+gtr_context_panel_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_context_panel_register_type (GTypeModule * module);
+     GType gtr_context_panel_register_type (GTypeModule * module);
 
-     GtkWidget *gtranslator_context_panel_new (GtkWidget * tab);
+     GtkWidget *gtr_context_panel_new (GtkWidget * tab);
 
      GtkTextView
-       *gtranslator_context_panel_get_context_text_view
+       *gtr_context_panel_get_context_text_view
        (GtrContextPanel * panel);
 
 G_END_DECLS

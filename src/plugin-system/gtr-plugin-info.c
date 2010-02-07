@@ -1,6 +1,6 @@
 /*
  * plugin-info.c
- * This file is part of gtranslator
+ * This file is part of gtr
  *
  * Copyright (C) 2002-2005 - Paolo Maggi 
  * Copyright (C) 2007 - Paolo Maggi, Steve Frécinaux
@@ -22,8 +22,8 @@
  */
 
 /*
- * Modified by the gtranslator Team, 2002-2007. See the AUTHORS file for a
- * list of people on the gtranslator Team.
+ * Modified by the gtr Team, 2002-2007. See the AUTHORS file for a
+ * list of people on the gtr Team.
  * See the ChangeLog files for a list of changes.
  *
  * $Id$
@@ -43,24 +43,24 @@
 #include "gtr-plugin.h"
 
 #ifdef ENABLE_PYTHON
-#include "gtranslator-python-module.h"
+#include "gtr-python-module.h"
 #endif
 
 void
-_gtranslator_plugin_info_ref (GtrPluginInfo * info)
+_gtr_plugin_info_ref (GtrPluginInfo * info)
 {
   g_atomic_int_inc (&info->refcount);
 }
 
 static GtrPluginInfo *
-gtranslator_plugin_info_copy (GtrPluginInfo * info)
+gtr_plugin_info_copy (GtrPluginInfo * info)
 {
-  _gtranslator_plugin_info_ref (info);
+  _gtr_plugin_info_ref (info);
   return info;
 }
 
 void
-_gtranslator_plugin_info_unref (GtrPluginInfo * info)
+_gtr_plugin_info_unref (GtrPluginInfo * info)
 {
   if (!g_atomic_int_dec_and_test (&info->refcount))
     return;
@@ -89,7 +89,7 @@ _gtranslator_plugin_info_unref (GtrPluginInfo * info)
 }
 
 /**
- * gtranslator_plugin_info_get_type:
+ * gtr_plugin_info_get_type:
  *
  * Retrieves the #GType object which is associated with the #GtrPluginInfo
  * class.
@@ -97,22 +97,22 @@ _gtranslator_plugin_info_unref (GtrPluginInfo * info)
  * Return value: the GType associated with #GtrPluginInfo.
  **/
 GType
-gtranslator_plugin_info_get_type (void)
+gtr_plugin_info_get_type (void)
 {
   static GType the_type = 0;
 
   if (G_UNLIKELY (!the_type))
     the_type = g_boxed_type_register_static ("GtrPluginInfo",
 					     (GBoxedCopyFunc)
-					     gtranslator_plugin_info_copy,
+					     gtr_plugin_info_copy,
 					     (GBoxedFreeFunc)
-					     _gtranslator_plugin_info_unref);
+					     _gtr_plugin_info_unref);
 
   return the_type;
 }
 
 /**
- * gtranslator_plugin_info_new:
+ * gtr_plugin_info_new:
  * @filename: the filename where to read the plugin information
  *
  * Creates a new #GtrPluginInfo from a file on the disk.
@@ -120,7 +120,7 @@ gtranslator_plugin_info_get_type (void)
  * Return value: a newly created #GtrPluginInfo.
  */
 GtrPluginInfo *
-_gtranslator_plugin_info_new (const gchar * file)
+_gtr_plugin_info_new (const gchar * file)
 {
   GtrPluginInfo *info;
   GKeyFile *plugin_file = NULL;
@@ -280,7 +280,7 @@ error:
 }
 
 gboolean
-gtranslator_plugin_info_is_active (GtrPluginInfo * info)
+gtr_plugin_info_is_active (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, FALSE);
 
@@ -288,7 +288,7 @@ gtranslator_plugin_info_is_active (GtrPluginInfo * info)
 }
 
 gboolean
-gtranslator_plugin_info_is_available (GtrPluginInfo * info)
+gtr_plugin_info_is_available (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, FALSE);
 
@@ -296,7 +296,7 @@ gtranslator_plugin_info_is_available (GtrPluginInfo * info)
 }
 
 gboolean
-gtranslator_plugin_info_is_configurable (GtrPluginInfo * info)
+gtr_plugin_info_is_configurable (GtrPluginInfo * info)
 {
   DEBUG_PRINT ("Is '%s' configurable?", info->name);
 
@@ -305,11 +305,11 @@ gtranslator_plugin_info_is_configurable (GtrPluginInfo * info)
   if (info->plugin == NULL || !info->active || !info->available)
     return FALSE;
 
-  return gtranslator_plugin_is_configurable (info->plugin);
+  return gtr_plugin_is_configurable (info->plugin);
 }
 
 const gchar *
-gtranslator_plugin_info_get_name (GtrPluginInfo * info)
+gtr_plugin_info_get_name (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, NULL);
 
@@ -317,7 +317,7 @@ gtranslator_plugin_info_get_name (GtrPluginInfo * info)
 }
 
 const gchar *
-gtranslator_plugin_info_get_description (GtrPluginInfo * info)
+gtr_plugin_info_get_description (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, NULL);
 
@@ -325,7 +325,7 @@ gtranslator_plugin_info_get_description (GtrPluginInfo * info)
 }
 
 const gchar *
-gtranslator_plugin_info_get_icon_name (GtrPluginInfo * info)
+gtr_plugin_info_get_icon_name (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, NULL);
 
@@ -340,7 +340,7 @@ gtranslator_plugin_info_get_icon_name (GtrPluginInfo * info)
 }
 
 const gchar **
-gtranslator_plugin_info_get_authors (GtrPluginInfo * info)
+gtr_plugin_info_get_authors (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, (const gchar **) NULL);
 
@@ -348,7 +348,7 @@ gtranslator_plugin_info_get_authors (GtrPluginInfo * info)
 }
 
 const gchar *
-gtranslator_plugin_info_get_website (GtrPluginInfo * info)
+gtr_plugin_info_get_website (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, NULL);
 
@@ -356,7 +356,7 @@ gtranslator_plugin_info_get_website (GtrPluginInfo * info)
 }
 
 const gchar *
-gtranslator_plugin_info_get_copyright (GtrPluginInfo * info)
+gtr_plugin_info_get_copyright (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, NULL);
 
@@ -364,7 +364,7 @@ gtranslator_plugin_info_get_copyright (GtrPluginInfo * info)
 }
 
 const gchar *
-gtranslator_plugin_info_get_license (GtrPluginInfo * info)
+gtr_plugin_info_get_license (GtrPluginInfo * info)
 {
   g_return_val_if_fail (info != NULL, NULL);
 

@@ -6,7 +6,7 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or   
  * (at your option) any later version.
- *    
+ *
  * gtranslator is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
@@ -28,79 +28,79 @@
 #include <libxml/tree.h>
 #include <gio/gio.h>
 
-gchar **gtranslator_utils_split_string_in_words (const gchar * string);
+gchar **gtr_utils_split_string_in_words (const gchar * string);
 
-xmlDocPtr gtranslator_xml_new_doc (const gchar * name);
+xmlDocPtr gtr_xml_new_doc (const gchar * name);
 
-xmlDocPtr gtranslator_xml_open_file (const gchar * filename);
+xmlDocPtr gtr_xml_open_file (const gchar * filename);
 
-GtkWidget *gtranslator_gtk_button_new_with_stock_icon (const gchar * label,
+GtkWidget *gtr_gtk_button_new_with_stock_icon (const gchar * label,
 						       const gchar *
 						       stock_id);
 
-void gtranslator_utils_menu_position_under_widget (GtkMenu * menu,
+void gtr_utils_menu_position_under_widget (GtkMenu * menu,
 						   gint * x,
 						   gint * y,
 						   gboolean * push_in,
 						   gpointer user_data);
 
-void gtranslator_utils_menu_position_under_tree_view (GtkMenu * menu,
+void gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
 						      gint * x,
 						      gint * y,
 						      gboolean * push_in,
 						      gpointer user_data);
 
 gboolean
-gtranslator_utils_get_ui_objects (const gchar * filename,
+gtr_utils_get_ui_objects (const gchar * filename,
 				  gchar ** root_objects,
 				  GtkWidget ** error_widget,
 				  const gchar * object_name, ...)
   G_GNUC_NULL_TERMINATED;
 
-     GSList *gtranslator_utils_drop_get_locations (GtkSelectionData *
+     GSList *gtr_utils_drop_get_locations (GtkSelectionData *
 						   selection_data);
 
-     gchar *gtranslator_utils_escape_search_text (const gchar * text);
+     gchar *gtr_utils_escape_search_text (const gchar * text);
 
-     gchar *gtranslator_utils_unescape_search_text (const gchar * text);
+     gchar *gtr_utils_unescape_search_text (const gchar * text);
 
      gboolean g_utf8_caselessnmatch (const gchar * s1,
 				     const gchar * s2, gssize n1, gssize n2);
 
-     void gtranslator_utils_activate_url (GtkAboutDialog * dialog,
+     void gtr_utils_activate_url (GtkAboutDialog * dialog,
 					  const gchar * url, gpointer data);
 
-     void gtranslator_utils_activate_email (GtkAboutDialog * dialog,
+     void gtr_utils_activate_email (GtkAboutDialog * dialog,
 					    const gchar * email,
 					    gpointer data);
 
-     void gtranslator_utils_help_display (GtkWindow * parent,
+     void gtr_utils_help_display (GtkWindow * parent,
 					  const gchar * doc_id,
 					  const gchar * file_name);
 
-     gchar *gtranslator_utils_get_user_config_dir (void);
+     gchar *gtr_utils_get_user_config_dir (void);
 
-     gchar *gtranslator_utils_get_current_date (void);
+     gchar *gtr_utils_get_current_date (void);
 
-     gchar *gtranslator_utils_get_current_time (void);
+     gchar *gtr_utils_get_current_time (void);
 
-     gchar *gtranslator_utils_get_current_year (void);
+     gchar *gtr_utils_get_current_year (void);
 
-     void gtranslator_utils_scan_dir (GFile * dir,
+     void gtr_utils_scan_dir (GFile * dir,
 				      GSList ** list, const gchar * po_name);
 
-     gchar *gtranslator_utils_reduce_path (const gchar * path);
+     gchar *gtr_utils_reduce_path (const gchar * path);
 
-     gchar *gtranslator_utils_escape_underscores (const gchar * text,
+     gchar *gtr_utils_escape_underscores (const gchar * text,
 						  gssize length);
 
-     gchar *gtranslator_utils_get_file_from_pixmapsdir (const gchar *
+     gchar *gtr_utils_get_file_from_pixmapsdir (const gchar *
 							filename);
 
-     gchar *gtranslator_utils_get_file_from_pkgdatadir (const gchar *
+     gchar *gtr_utils_get_file_from_pkgdatadir (const gchar *
 							filename);
 
-     gchar *gtranslator_utils_get_datadir (void);
+     gchar *gtr_utils_get_datadir (void);
 
-     gchar *gtranslator_utils_get_win32_plugindir (void);
+     gchar *gtr_utils_get_win32_plugindir (void);
 #endif

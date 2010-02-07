@@ -51,7 +51,7 @@
 						 	GtrPreferencesDialogPrivate))
 
 
-G_DEFINE_TYPE (GtrPreferencesDialog, gtranslator_preferences_dialog,
+G_DEFINE_TYPE (GtrPreferencesDialog, gtr_preferences_dialog,
 	       GTK_TYPE_DIALOG)
      struct _GtrPreferencesDialogPrivate
      {
@@ -119,7 +119,7 @@ G_DEFINE_TYPE (GtrPreferencesDialog, gtranslator_preferences_dialog,
      static void setup_profile_pages (GtrPreferencesDialog * dlg);
 
      GtkWidget
-       *gtranslator_preferences_dialog_get_treeview
+       *gtr_preferences_dialog_get_treeview
        (GtrPreferencesDialog * dlg)
 {
   g_return_val_if_fail (GTR_IS_PREFERENCES_DIALOG (dlg), NULL);
@@ -138,7 +138,7 @@ warn_if_contains_fuzzy_checkbutton_toggled (GtkToggleButton * button,
 		    GTK_TOGGLE_BUTTON (dlg->priv->
 				       warn_if_contains_fuzzy_checkbutton));
 
-  gtranslator_prefs_manager_set_warn_if_contains_fuzzy
+  gtr_prefs_manager_set_warn_if_contains_fuzzy
     (gtk_toggle_button_get_active (button));
 }
 
@@ -150,7 +150,7 @@ delete_compiled_checkbutton_toggled (GtkToggleButton * button,
 		    GTK_TOGGLE_BUTTON (dlg->priv->
 				       delete_compiled_checkbutton));
 
-  gtranslator_prefs_manager_set_delete_compiled (gtk_toggle_button_get_active
+  gtr_prefs_manager_set_delete_compiled (gtk_toggle_button_get_active
 						 (button));
 }
 
@@ -161,11 +161,11 @@ setup_files_general_page (GtrPreferencesDialog * dlg)
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				(dlg->priv->
 				 warn_if_contains_fuzzy_checkbutton),
-				gtranslator_prefs_manager_get_warn_if_contains_fuzzy
+				gtr_prefs_manager_get_warn_if_contains_fuzzy
 				());
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				(dlg->priv->delete_compiled_checkbutton),
-				gtranslator_prefs_manager_get_delete_compiled
+				gtr_prefs_manager_get_delete_compiled
 				());
 
   /*Connect signals */
@@ -189,7 +189,7 @@ autosave_checkbutton_toggled (GtkToggleButton * button,
 
   gtk_widget_set_sensitive (dlg->priv->autosave_interval_spinbutton,
 			    autosave);
-  gtranslator_prefs_manager_set_autosave (autosave);
+  gtr_prefs_manager_set_autosave (autosave);
 }
 
 static void
@@ -203,7 +203,7 @@ create_backup_checkbutton_toggled (GtkToggleButton * button,
 
   create_backup = gtk_toggle_button_get_active (button);
 
-  gtranslator_prefs_manager_set_create_backup (create_backup);
+  gtr_prefs_manager_set_create_backup (create_backup);
 }
 
 static void
@@ -215,7 +215,7 @@ autosave_interval_spinbutton_value_changed (GtkSpinButton * spin_button,
 		    GTK_SPIN_BUTTON (dlg->priv->
 				     autosave_interval_spinbutton));
 
-  gtranslator_prefs_manager_set_autosave_interval
+  gtr_prefs_manager_set_autosave_interval
     (gtk_spin_button_get_value_as_int (spin_button));
 }
 
@@ -226,15 +226,15 @@ setup_files_autosave_page (GtrPreferencesDialog * dlg)
   gint autosave_interval;
 
   /*Set initial value */
-  autosave = gtranslator_prefs_manager_get_autosave ();
+  autosave = gtr_prefs_manager_get_autosave ();
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				(dlg->priv->autosave_checkbutton), autosave);
-  backup = gtranslator_prefs_manager_get_create_backup ();
+  backup = gtr_prefs_manager_get_create_backup ();
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				(dlg->priv->create_backup_checkbutton),
 				backup);
 
-  autosave_interval = gtranslator_prefs_manager_get_autosave_interval ();
+  autosave_interval = gtr_prefs_manager_get_autosave_interval ();
 
   gtk_spin_button_set_value (GTK_SPIN_BUTTON
 			     (dlg->priv->autosave_interval_spinbutton),
@@ -272,7 +272,7 @@ highlight_syntax_checkbutton_toggled (GtkToggleButton * button,
 		    GTK_TOGGLE_BUTTON (dlg->priv->
 				       highlight_syntax_checkbutton));
 
-  gtranslator_prefs_manager_set_highlight_syntax (gtk_toggle_button_get_active
+  gtr_prefs_manager_set_highlight_syntax (gtk_toggle_button_get_active
 						  (button));
 }
 
@@ -284,7 +284,7 @@ visible_whitespace_checkbutton_toggled (GtkToggleButton * button,
 		    GTK_TOGGLE_BUTTON (dlg->priv->
 				       visible_whitespace_checkbutton));
 
-  gtranslator_prefs_manager_set_visible_whitespace
+  gtr_prefs_manager_set_visible_whitespace
     (gtk_toggle_button_get_active (button));
 }
 
@@ -300,7 +300,7 @@ use_custom_font_checkbutton_toggled (GtkToggleButton * button,
 
   use_custom_font = gtk_toggle_button_get_active (button);
 
-  gtranslator_prefs_manager_set_use_custom_font (use_custom_font);
+  gtr_prefs_manager_set_use_custom_font (use_custom_font);
 
   gtk_widget_set_sensitive (dlg->priv->editor_font_hbox, use_custom_font);
 }
@@ -318,7 +318,7 @@ editor_font_set (GtkFontButton * button, GtrPreferencesDialog * dlg)
 				   (dlg->priv->editor_font_fontbutton));
 
   if (editor_font)
-    gtranslator_prefs_manager_set_editor_font (editor_font);
+    gtr_prefs_manager_set_editor_font (editor_font);
   //FIXME:else set default font
 }
 
@@ -331,21 +331,21 @@ setup_editor_text_display_page (GtrPreferencesDialog * dlg)
   /*Set initial value */
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				(dlg->priv->highlight_syntax_checkbutton),
-				gtranslator_prefs_manager_get_highlight_syntax
+				gtr_prefs_manager_get_highlight_syntax
 				());
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				(dlg->priv->visible_whitespace_checkbutton),
-				gtranslator_prefs_manager_get_visible_whitespace
+				gtr_prefs_manager_get_visible_whitespace
 				());
 
-  use_custom_font = gtranslator_prefs_manager_get_use_custom_font ();
+  use_custom_font = gtr_prefs_manager_get_use_custom_font ();
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				(dlg->priv->use_custom_font_checkbutton),
 				use_custom_font);
 
   if (use_custom_font)
     {
-      editor_font = gtranslator_prefs_manager_get_editor_font ();
+      editor_font = gtr_prefs_manager_get_editor_font ();
       if (editor_font)
 	gtk_font_button_set_font_name (GTK_FONT_BUTTON
 				       (dlg->priv->editor_font_fontbutton),
@@ -376,7 +376,7 @@ unmark_fuzzy_when_changed_checkbutton_toggled (GtkToggleButton * button,
 		    GTK_TOGGLE_BUTTON (dlg->priv->
 				       unmark_fuzzy_when_changed_checkbutton));
 
-  gtranslator_prefs_manager_set_unmark_fuzzy_when_changed
+  gtr_prefs_manager_set_unmark_fuzzy_when_changed
     (gtk_toggle_button_get_active (button));
 }
 
@@ -387,7 +387,7 @@ spellcheck_checkbutton_toggled (GtkToggleButton * button,
   g_return_if_fail (button ==
 		    GTK_TOGGLE_BUTTON (dlg->priv->spellcheck_checkbutton));
 
-  gtranslator_prefs_manager_set_spellcheck (gtk_toggle_button_get_active
+  gtr_prefs_manager_set_spellcheck (gtk_toggle_button_get_active
 					    (button));
 }
 
@@ -398,11 +398,11 @@ setup_editor_contents (GtrPreferencesDialog * dlg)
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				(dlg->priv->
 				 unmark_fuzzy_when_changed_checkbutton),
-				gtranslator_prefs_manager_get_unmark_fuzzy_when_changed
+				gtr_prefs_manager_get_unmark_fuzzy_when_changed
 				());
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				(dlg->priv->spellcheck_checkbutton),
-				gtranslator_prefs_manager_get_spellcheck ());
+				gtr_prefs_manager_get_spellcheck ());
 
   /*Connect signals */
   g_signal_connect (dlg->priv->unmark_fuzzy_when_changed_checkbutton,
@@ -438,7 +438,7 @@ active_toggled_cb (GtkCellRendererToggle * cell_renderer,
   GFile *file;
 
 
-  config_folder = gtranslator_dirs_get_user_config_dir ();
+  config_folder = gtr_dirs_get_user_config_dir ();
   filename = g_build_filename (config_folder, "profiles.xml", NULL);
   g_free (config_folder);
 
@@ -459,32 +459,32 @@ active_toggled_cb (GtkCellRendererToggle * cell_renderer,
     {
 
       old_profile_active =
-	gtranslator_application_get_active_profile (GTR_APP);
+	gtr_application_get_active_profile (GTR_APP);
 
       gtk_list_store_set (GTK_LIST_STORE (model),
 			  &iter, TRUE, TOGGLE_COL, -1);
 
       gtk_tree_model_get (model, &iter, PROFILE_NAME_COL, &profile_row, -1);
-      profiles_list = gtranslator_application_get_profiles (GTR_APP);
+      profiles_list = gtr_application_get_profiles (GTR_APP);
 
       for (l = profiles_list; l; l = l->next)
 	{
 	  GtrProfile *profile;
 	  profile = (GtrProfile *) l->data;
-	  if (!strcmp (gtranslator_profile_get_name (profile), profile_row))
+	  if (!strcmp (gtr_profile_get_name (profile), profile_row))
 	    {
-	      gtranslator_application_set_active_profile (GTR_APP, profile);
+	      gtr_application_set_active_profile (GTR_APP, profile);
 	    }
 	}
     }
 
   gtk_list_store_clear (GTK_LIST_STORE (model));
-  gtranslator_preferences_fill_profile_treeview (dlg, model);
+  gtr_preferences_fill_profile_treeview (dlg, model);
   gtk_tree_path_free (path);
 }
 
 void
-gtranslator_preferences_fill_profile_treeview (GtrPreferencesDialog *
+gtr_preferences_fill_profile_treeview (GtrPreferencesDialog *
 					       dlg, GtkTreeModel * model)
 {
   GtkTreeIter iter;
@@ -493,10 +493,10 @@ gtranslator_preferences_fill_profile_treeview (GtrPreferencesDialog *
 
   gtk_list_store_clear (GTK_LIST_STORE (model));
 
-  profiles_list = gtranslator_application_get_profiles (GTR_APP);
+  profiles_list = gtr_application_get_profiles (GTR_APP);
 
 
-  active_profile = gtranslator_application_get_active_profile (GTR_APP);
+  active_profile = gtr_application_get_active_profile (GTR_APP);
 
   for (l = profiles_list; l; l = l->next)
     {
@@ -506,11 +506,11 @@ gtranslator_preferences_fill_profile_treeview (GtrPreferencesDialog *
 
       profile = (GtrProfile *) l->data;
 
-      profile_name = gtranslator_profile_get_name (profile);
+      profile_name = gtr_profile_get_name (profile);
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 
       if (!strcmp
-	  (gtranslator_profile_get_name (active_profile), profile_name))
+	  (gtr_profile_get_name (active_profile), profile_name))
 	{
 	  gtk_list_store_set (GTK_LIST_STORE (model),
 			      &iter,
@@ -570,7 +570,7 @@ setup_profile_pages (GtrPreferencesDialog * dlg)
 
   g_object_set (name_column, "expand", TRUE, NULL);
 
-  gtranslator_preferences_fill_profile_treeview (dlg, GTK_TREE_MODEL (model));
+  gtr_preferences_fill_profile_treeview (dlg, GTK_TREE_MODEL (model));
 }
 
 /***************Interface pages****************/
@@ -579,7 +579,7 @@ style_changed_cb (GtkComboBox * combobox, GtrPreferencesDialog * dlg)
 {
   g_return_if_fail (combobox == GTK_COMBO_BOX (dlg->priv->gdl_combobox));
 
-  gtranslator_prefs_manager_set_color_scheme (gtk_combo_box_get_active_text
+  gtr_prefs_manager_set_color_scheme (gtk_combo_box_get_active_text
 					      (combobox));
 }
 
@@ -590,7 +590,7 @@ scheme_color_changed_cb (GtkComboBox * combobox,
   g_return_if_fail (combobox ==
 		    GTK_COMBO_BOX (dlg->priv->scheme_color_combobox));
 
-  gtranslator_prefs_manager_set_color_scheme (gtk_combo_box_get_active_text
+  gtr_prefs_manager_set_color_scheme (gtk_combo_box_get_active_text
 					      (combobox));
 }
 
@@ -606,7 +606,7 @@ setup_interface_pages (GtrPreferencesDialog * dlg)
   GtkCellRenderer *cell;
 
   /*Set initial value */
-  pane_switcher_style = gtranslator_prefs_manager_get_pane_switcher_style ();
+  pane_switcher_style = gtr_prefs_manager_get_pane_switcher_style ();
   if (pane_switcher_style)
     gtk_combo_box_set_active (GTK_COMBO_BOX (dlg->priv->gdl_combobox),
 			      pane_switcher_style);
@@ -627,7 +627,7 @@ setup_interface_pages (GtrPreferencesDialog * dlg)
 
   manager = gtk_source_style_scheme_manager_get_default ();
   scheme_ids = gtk_source_style_scheme_manager_get_scheme_ids (manager);
-  scheme_active = gtranslator_prefs_manager_get_color_scheme ();
+  scheme_active = gtr_prefs_manager_get_color_scheme ();
   while (scheme_ids[i] != NULL)
     {
       gtk_combo_box_append_text (GTK_COMBO_BOX
@@ -661,7 +661,7 @@ response_filechooser_cb (GtkDialog * dialog,
       gtk_entry_set_text (GTK_ENTRY (dlg->priv->directory_entry),
 			  gtk_file_chooser_get_filename (GTK_FILE_CHOOSER
 							 (dialog)));
-      gtranslator_prefs_manager_set_po_directory
+      gtr_prefs_manager_set_po_directory
 	(gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog)));
       gtk_widget_destroy (GTK_WIDGET (dialog));
     }
@@ -721,24 +721,24 @@ add_to_database (gpointer data_pointer)
       GError *error = NULL;
       GtrPo *po;
 
-      po = gtranslator_po_new ();
+      po = gtr_po_new ();
       location = (GFile *) l->data;
 
-      gtranslator_po_parse (po, location, &error);
+      gtr_po_parse (po, location, &error);
       if (error)
 	return TRUE;
 
-      msg_list = gtranslator_po_get_messages (po);
+      msg_list = gtr_po_get_messages (po);
 
       for (l2 = msg_list; l2; l2 = l2->next)
 	{
 	  GtrMsg *msg;
 	  msg = GTR_MSG (l2->data);
-	  if (gtranslator_msg_is_translated (msg))
-	    gtranslator_translation_memory_store (data->tm,
-						  gtranslator_msg_get_msgid
+	  if (gtr_msg_is_translated (msg))
+	    gtr_translation_memory_store (data->tm,
+						  gtr_msg_get_msgid
 						  (msg),
-						  gtranslator_msg_get_msgstr
+						  gtr_msg_get_msgstr
 						  (msg));
 	}
 
@@ -806,19 +806,19 @@ on_add_database_button_pulsed (GtkButton * button,
   data = g_new0 (IdleData, 1);
   data->list = NULL;
 
-  dir_name = gtranslator_prefs_manager_get_po_directory ();
+  dir_name = gtr_prefs_manager_get_po_directory ();
 
   dir = g_file_new_for_path (dir_name);
 
-  if (gtranslator_prefs_manager_get_restrict_to_filename ())
-    gtranslator_utils_scan_dir (dir, &data->list,
-				gtranslator_prefs_manager_get_filename_restriction
+  if (gtr_prefs_manager_get_restrict_to_filename ())
+    gtr_utils_scan_dir (dir, &data->list,
+				gtr_prefs_manager_get_filename_restriction
 				());
   else
-    gtranslator_utils_scan_dir (dir, &data->list, NULL);
+    gtr_utils_scan_dir (dir, &data->list, NULL);
 
   data->tm =
-    GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory
+    GTR_TRANSLATION_MEMORY (gtr_application_get_translation_memory
 			    (GTR_APP));
   data->progress = GTK_PROGRESS_BAR (dlg->priv->add_database_progressbar);
   data->parent = GTK_WINDOW (dlg);
@@ -835,7 +835,7 @@ static void
 on_use_lang_profile_checkbutton_changed (GtkToggleButton * button,
 					 gpointer user_data)
 {
-  gtranslator_prefs_manager_set_restrict_to_filename
+  gtr_prefs_manager_set_restrict_to_filename
     (gtk_toggle_button_get_active (button));
 }
 
@@ -851,7 +851,7 @@ tm_lang_entry_changed (GObject * gobject,
   text = gtk_entry_get_text (GTK_ENTRY (gobject));
 
   if (text)
-    gtranslator_prefs_manager_set_filename_restriction (text);
+    gtr_prefs_manager_set_filename_restriction (text);
 }
 
 
@@ -863,7 +863,7 @@ on_missing_words_spinbutton_changed (GtkSpinButton * spinbutton,
 
   value = gtk_spin_button_get_value_as_int (spinbutton);
 
-  gtranslator_prefs_manager_set_max_missing_words (value);
+  gtr_prefs_manager_set_max_missing_words (value);
 }
 
 static void
@@ -874,7 +874,7 @@ on_sentence_length_spinbutton_changed (GtkSpinButton * spinbutton,
 
   value = gtk_spin_button_get_value_as_int (spinbutton);
 
-  gtranslator_prefs_manager_set_max_length_diff (value);
+  gtr_prefs_manager_set_max_length_diff (value);
 }
 
 static void
@@ -890,7 +890,7 @@ directory_entry_changed (GObject * gobject,
   text = gtk_entry_get_text (GTK_ENTRY (gobject));
 
   if (text)
-    gtranslator_prefs_manager_set_po_directory (text);
+    gtr_prefs_manager_set_po_directory (text);
 }
 
 
@@ -903,32 +903,32 @@ setup_tm_pages (GtrPreferencesDialog * dlg)
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 				(dlg->priv->use_lang_profile_in_tm),
-				gtranslator_prefs_manager_get_restrict_to_filename
+				gtr_prefs_manager_get_restrict_to_filename
 				());
 
-  profile = gtranslator_application_get_active_profile (GTR_APP);
+  profile = gtr_application_get_active_profile (GTR_APP);
 
   if (profile != NULL)
     {
-      language_code = gtranslator_profile_get_language_code (profile);
+      language_code = gtr_profile_get_language_code (profile);
       filename = (const gchar *) g_strconcat (language_code, ".po", NULL);
 
       gtk_entry_set_text (GTK_ENTRY (dlg->priv->tm_lang_entry), filename);
     }
 
   if (filename != NULL)
-    gtranslator_prefs_manager_set_filename_restriction (filename);
+    gtr_prefs_manager_set_filename_restriction (filename);
 
   gtk_spin_button_set_value (GTK_SPIN_BUTTON
 			     (dlg->priv->missing_words_spinbutton),
 			     (gdouble)
-			     gtranslator_prefs_manager_get_max_missing_words
+			     gtr_prefs_manager_get_max_missing_words
 			     ());
 
   gtk_spin_button_set_value (GTK_SPIN_BUTTON
 			     (dlg->priv->sentence_length_spinbutton),
 			     (gdouble)
-			     gtranslator_prefs_manager_get_max_length_diff
+			     gtr_prefs_manager_get_max_length_diff
 			     ());
 
   g_signal_connect (GTK_BUTTON (dlg->priv->search_button), "clicked",
@@ -969,7 +969,7 @@ setup_plugin_pages (GtrPreferencesDialog * dlg)
   alignment = gtk_alignment_new (0., 0., 1., 1.);
   gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 12, 12, 12, 12);
 
-  page_content = gtranslator_plugin_manager_new ();
+  page_content = gtr_plugin_manager_new ();
   g_return_if_fail (page_content != NULL);
 
   gtk_container_add (GTK_CONTAINER (alignment), page_content);
@@ -995,8 +995,8 @@ static void
 add_button_pulsed (GtkWidget * button, GtrPreferencesDialog * dlg)
 {
   GtrProfile *profile;
-  profile = gtranslator_profile_new ();
-  gtranslator_show_profile_dialog (dlg, profile, NEW_PROFILE);
+  profile = gtr_profile_new ();
+  gtr_show_profile_dialog (dlg, profile, NEW_PROFILE);
 }
 
 static void
@@ -1023,20 +1023,20 @@ edit_button_pulsed (GtkWidget * button, GtrPreferencesDialog * dlg)
 
       gtk_tree_model_get (model, &iter, PROFILE_NAME_COL, &profile_row, -1);
 
-      profiles_list = gtranslator_application_get_profiles (GTR_APP);
-      active_profile = gtranslator_application_get_active_profile (GTR_APP);
+      profiles_list = gtr_application_get_profiles (GTR_APP);
+      active_profile = gtr_application_get_active_profile (GTR_APP);
 
       for (l = profiles_list; l; l = l->next)
 	{
 	  GtrProfile *profile;
 	  profile = (GtrProfile *) l->data;
-	  if (!strcmp (gtranslator_profile_get_name (profile), profile_row))
+	  if (!strcmp (gtr_profile_get_name (profile), profile_row))
 	    {
-	      old_profile_name = gtranslator_profile_get_name (profile);
+	      old_profile_name = gtr_profile_get_name (profile);
 	      edited_profile = profile;
 	    }
 	}
-      gtranslator_show_profile_dialog (dlg, edited_profile, EDIT_PROFILE);
+      gtr_show_profile_dialog (dlg, edited_profile, EDIT_PROFILE);
     }
 }
 
@@ -1068,20 +1068,20 @@ delete_confirm_dialog_cb (GtkWidget * dialog,
 	  gtk_tree_model_get (model, &iter, PROFILE_NAME_COL, &profile_row,
 			      -1);
 
-	  profiles_list = gtranslator_application_get_profiles (GTR_APP);
+	  profiles_list = gtr_application_get_profiles (GTR_APP);
 
 	  for (l = profiles_list; l; l = l->next)
 	    {
 	      GtrProfile *profile;
 	      profile = (GtrProfile *) l->data;
 	      if (!strcmp
-		  (gtranslator_profile_get_name (profile), profile_row))
+		  (gtr_profile_get_name (profile), profile_row))
 		{
 		  new_list = g_list_remove (profiles_list, profile);
-		  gtranslator_application_set_profiles (GTR_APP, new_list);
+		  gtr_application_set_profiles (GTR_APP, new_list);
 		}
 	    }
-	  gtranslator_preferences_fill_profile_treeview (dlg, model);
+	  gtr_preferences_fill_profile_treeview (dlg, model);
 	}
       gtk_widget_destroy (dialog);
     }
@@ -1113,10 +1113,10 @@ delete_button_pulsed (GtkWidget * button, GtrPreferencesDialog * dlg)
 
       gtk_tree_model_get (model, &iter, PROFILE_NAME_COL, &profile_row, -1);
 
-      active_profile = gtranslator_application_get_active_profile (GTR_APP);
+      active_profile = gtr_application_get_active_profile (GTR_APP);
 
       if (!strcmp
-	  (gtranslator_profile_get_name (active_profile), profile_row))
+	  (gtr_profile_get_name (active_profile), profile_row))
 	{
 
 	  dialog = gtk_message_dialog_new (GTK_WINDOW (dlg),
@@ -1162,7 +1162,7 @@ delete_button_pulsed (GtkWidget * button, GtrPreferencesDialog * dlg)
 }
 
 static void
-gtranslator_preferences_dialog_init (GtrPreferencesDialog * dlg)
+gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
 {
   gboolean ret;
   GtkWidget *error_widget;
@@ -1200,8 +1200,8 @@ gtranslator_preferences_dialog_init (GtrPreferencesDialog * dlg)
 
   /*Glade */
 
-  path = gtranslator_dirs_get_ui_file ("gtr-preferences-dialog.ui");
-  ret = gtranslator_utils_get_ui_objects (path,
+  path = gtr_dirs_get_ui_file ("gtr-preferences-dialog.ui");
+  ret = gtr_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,
 					  "notebook", &dlg->priv->notebook,
@@ -1308,14 +1308,14 @@ gtranslator_preferences_dialog_init (GtrPreferencesDialog * dlg)
 }
 
 static void
-gtranslator_preferences_dialog_finalize (GObject * object)
+gtr_preferences_dialog_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_preferences_dialog_parent_class)->
+  G_OBJECT_CLASS (gtr_preferences_dialog_parent_class)->
     finalize (object);
 }
 
 static void
-gtranslator_preferences_dialog_class_init (GtrPreferencesDialogClass *
+gtr_preferences_dialog_class_init (GtrPreferencesDialogClass *
 					   klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -1323,11 +1323,11 @@ gtranslator_preferences_dialog_class_init (GtrPreferencesDialogClass *
   g_type_class_add_private (klass,
 			    sizeof (GtrPreferencesDialogPrivate));
 
-  object_class->finalize = gtranslator_preferences_dialog_finalize;
+  object_class->finalize = gtr_preferences_dialog_finalize;
 }
 
 void
-gtranslator_show_preferences_dialog (GtrWindow * window)
+gtr_show_preferences_dialog (GtrWindow * window)
 {
   static GtkWidget *dlg = NULL;
 

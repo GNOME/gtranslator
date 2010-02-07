@@ -36,7 +36,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_WINDOW		(gtranslator_window_get_type ())
+#define GTR_TYPE_WINDOW		(gtr_window_get_type ())
 #define GTR_WINDOW(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_WINDOW, GtrWindow))
 #define GTR_WINDOW_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_WINDOW, GtrWindowClass))
 #define GTR_IS_WINDOW(o)	(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_WINDOW))
@@ -83,35 +83,35 @@ typedef enum
  * Public methods
  */
 GType
-gtranslator_window_get_type (void)
+gtr_window_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_window_register_type (GTypeModule * module);
+     GType gtr_window_register_type (GTypeModule * module);
 
-     GtrTab *gtranslator_window_create_tab (GtrWindow *
+     GtrTab *gtr_window_create_tab (GtrWindow *
 						    window,
 						    GtrPo * po);
 
-     GtrTab *gtranslator_window_get_active_tab (GtrWindow *
+     GtrTab *gtr_window_get_active_tab (GtrWindow *
 							window);
 
-     GList *gtranslator_window_get_all_tabs (GtrWindow * window);
+     GList *gtr_window_get_all_tabs (GtrWindow * window);
 
-     GtrNotebook *gtranslator_window_get_notebook (GtrWindow *
+     GtrNotebook *gtr_window_get_notebook (GtrWindow *
 							   window);
      GtrHeader
-       *gtranslator_window_get_header_from_active_tab (GtrWindow *
+       *gtr_window_get_header_from_active_tab (GtrWindow *
 						       window);
 
-     GtkWidget *gtranslator_window_get_statusbar (GtrWindow * window);
+     GtkWidget *gtr_window_get_statusbar (GtrWindow * window);
 
-     GtkUIManager *gtranslator_window_get_ui_manager (GtrWindow *
+     GtkUIManager *gtr_window_get_ui_manager (GtrWindow *
 						      window);
 
-     GtrView *gtranslator_window_get_active_view (GtrWindow *
+     GtrView *gtr_window_get_active_view (GtrWindow *
 							  window);
 
-     GList *gtranslator_window_get_all_views (GtrWindow * window,
+     GList *gtr_window_get_all_views (GtrWindow * window,
 					      gboolean original,
 					      gboolean translated);
 
@@ -120,7 +120,7 @@ gtranslator_window_get_type (void)
 
      void set_sensitive_according_to_window (GtrWindow * window);
 
-     void gtranslator_window_add_widget (GtrWindow * window,
+     void gtr_window_add_widget (GtrWindow * window,
 					 GtkWidget * widget,
 					 const gchar * name,
 					 const gchar * title,
@@ -128,22 +128,22 @@ gtranslator_window_get_type (void)
 					 GtrWindowPlacement
 					 placement);
 
-     void gtranslator_window_remove_widget (GtrWindow * window,
+     void gtr_window_remove_widget (GtrWindow * window,
 					    GtkWidget * widget);
 
-     GObject *_gtranslator_window_get_layout_manager
+     GObject *_gtr_window_get_layout_manager
        (GtrWindow * window);
 
-     GtkWidget *gtranslator_window_get_tab_from_location
+     GtkWidget *gtr_window_get_tab_from_location
        (GtrWindow * window, GFile * location);
 
-     void gtranslator_window_set_active_tab (GtrWindow * window,
+     void gtr_window_set_active_tab (GtrWindow * window,
 					     GtkWidget * tab);
 
-     void _gtranslator_window_close_tab (GtrWindow * window,
+     void _gtr_window_close_tab (GtrWindow * window,
 					 GtrTab * tab);
 
-     GtkWidget *gtranslator_window_get_tm_menu (GtrWindow * window);
+     GtkWidget *gtr_window_get_tm_menu (GtrWindow * window);
 
 G_END_DECLS
 #endif /* __WINDOW_H__ */

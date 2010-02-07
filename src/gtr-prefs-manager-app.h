@@ -30,37 +30,37 @@
 
 /** LIFE CYCLE MANAGEMENT FUNCTIONS **/
 
-gboolean gtranslator_prefs_manager_app_init (void);
+gboolean gtr_prefs_manager_app_init (void);
 
-/* This function must be called before exiting gtranslator */
-void gtranslator_prefs_manager_app_shutdown (void);
+/* This function must be called before exiting gtr */
+void gtr_prefs_manager_app_shutdown (void);
 
 
 /* Window state */
-gint gtranslator_prefs_manager_get_window_state (void);
-void gtranslator_prefs_manager_set_window_state (gint ws);
-gboolean gtranslator_prefs_manager_window_state_can_set (void);
+gint gtr_prefs_manager_get_window_state (void);
+void gtr_prefs_manager_set_window_state (gint ws);
+gboolean gtr_prefs_manager_window_state_can_set (void);
 
 /* Window size */
-void gtranslator_prefs_manager_get_window_size (gint * width, gint * height);
-void gtranslator_prefs_manager_get_default_window_size (gint * width,
+void gtr_prefs_manager_get_window_size (gint * width, gint * height);
+void gtr_prefs_manager_get_default_window_size (gint * width,
 							gint * height);
-void gtranslator_prefs_manager_set_window_size (gint width, gint height);
-gboolean gtranslator_prefs_manager_window_size_can_set (void);
+void gtr_prefs_manager_set_window_size (gint width, gint height);
+gboolean gtr_prefs_manager_window_size_can_set (void);
 
 /* Side panel */
-gint gtranslator_prefs_manager_get_side_panel_size (void);
-gint gtranslator_prefs_manager_get_default_side_panel_size (void);
-void gtranslator_prefs_manager_set_side_panel_size (gint ps);
-gboolean gtranslator_prefs_manager_side_panel_size_can_set (void);
-gint gtranslator_prefs_manager_get_side_panel_active_page (void);
-void gtranslator_prefs_manager_set_side_panel_active_page (gint id);
-gboolean gtranslator_prefs_manager_side_panel_active_page_can_set (void);
+gint gtr_prefs_manager_get_side_panel_size (void);
+gint gtr_prefs_manager_get_default_side_panel_size (void);
+void gtr_prefs_manager_set_side_panel_size (gint ps);
+gboolean gtr_prefs_manager_side_panel_size_can_set (void);
+gint gtr_prefs_manager_get_side_panel_active_page (void);
+void gtr_prefs_manager_set_side_panel_active_page (gint id);
+gboolean gtr_prefs_manager_side_panel_active_page_can_set (void);
 
 /* Comment pane */
-gint gtranslator_prefs_manager_get_comment_pane_pos (void);
-gint gtranslator_prefs_manager_get_default_comment_pane_pos (void);
-void gtranslator_prefs_manager_set_comment_pane_pos (gint new_pane_pos);
+gint gtr_prefs_manager_get_comment_pane_pos (void);
+gint gtr_prefs_manager_get_default_comment_pane_pos (void);
+void gtr_prefs_manager_set_comment_pane_pos (gint new_pane_pos);
 
 
 #endif /* __GTR_PREFS_MANAGER_APP_H__ */

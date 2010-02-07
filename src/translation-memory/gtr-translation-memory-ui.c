@@ -45,7 +45,7 @@
 							GtrTranslationMemoryUiPrivate))
 
 G_DEFINE_TYPE (GtrTranslationMemoryUi,
-	       gtranslator_translation_memory_ui, GTK_TYPE_SCROLLED_WINDOW)
+	       gtr_translation_memory_ui, GTK_TYPE_SCROLLED_WINDOW)
      struct _GtrTranslationMemoryUiPrivate
      {
        GtkWidget *tree_view;
@@ -78,27 +78,27 @@ G_DEFINE_TYPE (GtrTranslationMemoryUi,
   gint index;
   GtrWindow *window;
 
-  window = gtranslator_application_get_active_window (GTR_APP);
+  window = gtr_application_get_active_window (GTR_APP);
 
-  view = gtranslator_window_get_active_view (window);
+  view = gtr_window_get_active_view (window);
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
   /* Possible this hack is not going to work with all languages neither, we
      are supposing the integer at the end of the string */
   index = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menuitem), "option"));
 
-  po = gtranslator_tab_get_po (tm_ui->priv->tab);
-  current_msg = gtranslator_po_get_current_message (po);
+  po = gtr_tab_get_po (tm_ui->priv->tab);
+  current_msg = gtr_po_get_current_message (po);
 
   msg = GTR_MSG (current_msg->data);
 
-  gtranslator_msg_set_msgstr (msg, tm_ui->priv->tm_list[index - 1]);
+  gtr_msg_set_msgstr (msg, tm_ui->priv->tm_list[index - 1]);
 
   gtk_text_buffer_begin_user_action (buffer);
   gtk_text_buffer_set_text (buffer, tm_ui->priv->tm_list[index - 1], -1);
   gtk_text_buffer_end_user_action (buffer);
 
-  gtranslator_po_set_state (po, GTR_PO_STATE_MODIFIED);
+  gtr_po_set_state (po, GTR_PO_STATE_MODIFIED);
 }
 
 static void
@@ -138,20 +138,20 @@ showed_message_cb (GtrTab * tab,
     GTK_LIST_STORE (gtk_tree_view_get_model
 		    (GTK_TREE_VIEW (tm_ui->priv->tree_view)));
 
-  window = gtranslator_application_get_active_window (GTR_APP);
-  tm_menu = gtranslator_window_get_tm_menu (window);
+  window = gtr_application_get_active_window (GTR_APP);
+  tm_menu = gtr_window_get_tm_menu (window);
 
   g_signal_connect (tm_ui->priv->tree_view,
 		    "size_allocate",
 		    G_CALLBACK (tree_view_size_cb), tm_ui->priv->tree_view);
 
-  msgid = gtranslator_msg_get_msgid (msg);
+  msgid = gtr_msg_get_msgid (msg);
 
   tm =
-    GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory
+    GTR_TRANSLATION_MEMORY (gtr_application_get_translation_memory
 			    (GTR_APP));
 
-  tm_list = gtranslator_translation_memory_lookup (tm, msgid);
+  tm_list = gtr_translation_memory_lookup (tm, msgid);
 
   if (tm_list == NULL)
     {
@@ -200,7 +200,7 @@ showed_message_cb (GtrTab * tab,
 
   items_menu = gtk_menu_new ();
 
-  manager = gtranslator_window_get_ui_manager (window);
+  manager = gtr_window_get_ui_manager (window);
 
   gtk_menu_set_accel_group (GTK_MENU (items_menu),
 			    gtk_ui_manager_get_accel_group (manager));
@@ -267,7 +267,7 @@ tree_view_size_cb (GtkWidget * widget,
 
 
 static void
-gtranslator_translation_memory_ui_draw (GtrTranslationMemoryUi *
+gtr_translation_memory_ui_draw (GtrTranslationMemoryUi *
 					tm_ui)
 {
   GtrTranslationMemoryUiPrivate *priv = tm_ui->priv;
@@ -320,28 +320,28 @@ gtranslator_translation_memory_ui_draw (GtrTranslationMemoryUi *
 }
 
 static void
-gtranslator_translation_memory_ui_init (GtrTranslationMemoryUi *
+gtr_translation_memory_ui_init (GtrTranslationMemoryUi *
 					tm_ui)
 {
   tm_ui->priv = GTR_TRANSLATION_MEMORY_UI_GET_PRIVATE (tm_ui);
   tm_ui->priv->tm_list = NULL;
 
-  gtranslator_translation_memory_ui_draw (tm_ui);
+  gtr_translation_memory_ui_draw (tm_ui);
 }
 
 static void
-gtranslator_translation_memory_ui_finalize (GObject * object)
+gtr_translation_memory_ui_finalize (GObject * object)
 {
   GtrTranslationMemoryUi *tm_ui = GTR_TRANSLATION_MEMORY_UI (object);
 
   g_strfreev (tm_ui->priv->tm_list);
 
-  G_OBJECT_CLASS (gtranslator_translation_memory_ui_parent_class)->
+  G_OBJECT_CLASS (gtr_translation_memory_ui_parent_class)->
     finalize (object);
 }
 
 static void
-gtranslator_translation_memory_ui_class_init
+gtr_translation_memory_ui_class_init
   (GtrTranslationMemoryUiClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -349,11 +349,11 @@ gtranslator_translation_memory_ui_class_init
   g_type_class_add_private (klass,
 			    sizeof (GtrTranslationMemoryUiPrivate));
 
-  object_class->finalize = gtranslator_translation_memory_ui_finalize;
+  object_class->finalize = gtr_translation_memory_ui_finalize;
 }
 
 GtkWidget *
-gtranslator_translation_memory_ui_new (GtkWidget * tab)
+gtr_translation_memory_ui_new (GtkWidget * tab)
 {
   GtrTranslationMemoryUi *tm_ui;
   tm_ui = g_object_new (GTR_TYPE_TRANSLATION_MEMORY_UI, NULL);

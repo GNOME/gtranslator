@@ -31,21 +31,17 @@
 
 #include <gtk/gtk.h>
 
-/*
- * Show the user's guide for gtranslator
- */
+/* Show the user's guide for gtranslator */
 void
-gtranslator_cmd_help_contents (GtkAction * action, GtrWindow * window)
+gtr_cmd_help_contents (GtkAction * action, GtrWindow * window)
 {
-  gtranslator_utils_help_display (GTK_WINDOW (window),
-				  "gtranslator", "gtranslator.xml");
+  gtr_utils_help_display (GTK_WINDOW (window),
+				  "gtr", "gtr.xml");
 }
 
-/*
- * Creates and shows the about box for gtranslator.
- */
+/* Creates and shows the about box for gtranslator */
 void
-gtranslator_about_dialog (GtkAction * action, GtrWindow * window)
+gtr_about_dialog (GtkAction * action, GtrWindow * window)
 {
   gchar *license_trans;
 
@@ -105,7 +101,7 @@ gtranslator_about_dialog (GtkAction * action, GtrWindow * window)
   gchar *pixmaps_dir;
   gchar *logo_file;
 
-  pixmaps_dir = gtranslator_dirs_get_pixmaps_dir ();
+  pixmaps_dir = gtr_dirs_get_pixmaps_dir ();
   logo_file = g_build_filename (pixmaps_dir,
                                 "gtranslator-logo.png",
                                 NULL);
@@ -120,14 +116,12 @@ gtranslator_about_dialog (GtkAction * action, GtrWindow * window)
 
   gtk_show_about_dialog (GTK_WINDOW (window),
 			 "comments",
-			 _
-			 ("Translation file editing suite for localization of applications and libraries."),
+			 _("Translation file editing suite for localization of applications and libraries."),
 			 "authors", authors, "copyright",
-			 _
-			 ("Copyright © 1999-2008 Free Software Foundation, Inc."),
+			 _("Copyright © 1999-2008 Free Software Foundation, Inc."),
 			 "documenters", documenters, "license", license_trans,
 			 "logo", logo,
-			 "title", _("About Gtr"),
+			 "title", _("About Gtranslator"),
 			 /*
 			  * Note to translators: put here your name and email so it will show
 			  * up in the "about" box
@@ -136,7 +130,7 @@ gtranslator_about_dialog (GtkAction * action, GtrWindow * window)
 			 "version", PACKAGE_VERSION,
 			 "website", PACKAGE_URL,
 			 "wrap-license", TRUE,
-			 "website-label", _("Gtr Web Site"), NULL);
+			 "website-label", _("Gtranslator Web Site"), NULL);
 
   if (logo)
     g_object_unref (logo);

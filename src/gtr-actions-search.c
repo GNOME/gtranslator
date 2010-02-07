@@ -41,8 +41,8 @@
 #include "dialogs/gtr-search-dialog.h"
 
 
-#define GTR_SEARCH_DIALOG_KEY		"gtranslator-search-dialog-key"
-#define GTR_LAST_SEARCH_DATA_KEY	"gtranslator-last-search-data-key"
+#define GTR_SEARCH_DIALOG_KEY		"gtr-search-dialog-key"
+#define GTR_LAST_SEARCH_DATA_KEY	"gtr-last-search-data-key"
 
 /* data stored in the document
  * to persist the last searched
@@ -76,28 +76,28 @@ last_search_data_set (LastSearchData * data, GtrSearchDialog * dialog)
 {
   const gchar *str;
 
-  str = gtranslator_search_dialog_get_search_text (dialog);
+  str = gtr_search_dialog_get_search_text (dialog);
   if (str != NULL && *str != '\0')
     {
       g_free (data->find_text);
-      data->find_text = gtranslator_utils_unescape_search_text (str);
+      data->find_text = gtr_utils_unescape_search_text (str);
     }
 
-  str = gtranslator_search_dialog_get_replace_text (dialog);
+  str = gtr_search_dialog_get_replace_text (dialog);
   if (str != NULL && *str != '\0')
     {
       g_free (data->replace_text);
-      data->replace_text = gtranslator_utils_unescape_search_text (str);
+      data->replace_text = gtr_utils_unescape_search_text (str);
     }
 
-  data->original_text = gtranslator_search_dialog_get_original_text (dialog);
+  data->original_text = gtr_search_dialog_get_original_text (dialog);
   data->translated_text =
-    gtranslator_search_dialog_get_translated_text (dialog);
-  data->fuzzy_messages = gtranslator_search_dialog_get_fuzzy (dialog);
-  data->match_case = gtranslator_search_dialog_get_match_case (dialog);
-  data->entire_word = gtranslator_search_dialog_get_entire_word (dialog);
-  data->backwards = gtranslator_search_dialog_get_backwards (dialog);
-  data->wrap_around = gtranslator_search_dialog_get_wrap_around (dialog);
+    gtr_search_dialog_get_translated_text (dialog);
+  data->fuzzy_messages = gtr_search_dialog_get_fuzzy (dialog);
+  data->match_case = gtr_search_dialog_get_match_case (dialog);
+  data->entire_word = gtr_search_dialog_get_entire_word (dialog);
+  data->backwards = gtr_search_dialog_get_backwards (dialog);
+  data->wrap_around = gtr_search_dialog_get_wrap_around (dialog);
 }
 
 static void
@@ -105,7 +105,7 @@ search_dialog_set_last_find_text (GtrSearchDialog * dialog,
 				  LastSearchData * data)
 {
   if (data->find_text)
-    gtranslator_search_dialog_set_search_text (dialog, data->find_text);
+    gtr_search_dialog_set_search_text (dialog, data->find_text);
 }
 
 static void
@@ -113,21 +113,21 @@ search_dialog_set_last_replace_text (GtrSearchDialog * dialog,
 				     LastSearchData * data)
 {
   if (data->replace_text)
-    gtranslator_search_dialog_set_replace_text (dialog, data->replace_text);
+    gtr_search_dialog_set_replace_text (dialog, data->replace_text);
 }
 
 static void
 search_dialog_set_last_options (GtrSearchDialog * dialog,
 				LastSearchData * data)
 {
-  gtranslator_search_dialog_set_original_text (dialog, data->original_text);
-  gtranslator_search_dialog_set_translated_text (dialog,
+  gtr_search_dialog_set_original_text (dialog, data->original_text);
+  gtr_search_dialog_set_translated_text (dialog,
 						 data->translated_text);
-  gtranslator_search_dialog_set_fuzzy (dialog, data->fuzzy_messages);
-  gtranslator_search_dialog_set_match_case (dialog, data->match_case);
-  gtranslator_search_dialog_set_entire_word (dialog, data->entire_word);
-  gtranslator_search_dialog_set_backwards (dialog, data->backwards);
-  gtranslator_search_dialog_set_wrap_around (dialog, data->wrap_around);
+  gtr_search_dialog_set_fuzzy (dialog, data->fuzzy_messages);
+  gtr_search_dialog_set_match_case (dialog, data->match_case);
+  gtr_search_dialog_set_entire_word (dialog, data->entire_word);
+  gtr_search_dialog_set_backwards (dialog, data->backwards);
+  gtr_search_dialog_set_wrap_around (dialog, data->wrap_around);
 }
 
 /*
@@ -163,11 +163,11 @@ phrase_found (GtrWindow * window, gint occurrences)
 {
   GtrStatusbar *statusbar;
 
-  statusbar = GTR_STATUSBAR (gtranslator_window_get_statusbar (window));
+  statusbar = GTR_STATUSBAR (gtr_window_get_statusbar (window));
 
   if (occurrences > 1)
     {
-      gtranslator_statusbar_flash_message (statusbar,
+      gtr_statusbar_flash_message (statusbar,
 					   0,
 					   ngettext
 					   ("Found and replaced %d occurrence",
@@ -177,12 +177,12 @@ phrase_found (GtrWindow * window, gint occurrences)
   else
     {
       if (occurrences == 1)
-	gtranslator_statusbar_flash_message (statusbar,
+	gtr_statusbar_flash_message (statusbar,
 					     0,
 					     _
 					     ("Found and replaced one occurrence"));
       else
-	gtranslator_statusbar_flash_message (statusbar, 0, " ");
+	gtr_statusbar_flash_message (statusbar, 0, " ");
     }
 }
 
@@ -191,8 +191,8 @@ phrase_not_found (GtrWindow * window)
 {
   GtrStatusbar *status;
 
-  status = GTR_STATUSBAR (gtranslator_window_get_statusbar (window));
-  gtranslator_statusbar_flash_message (status, 0, _("Phrase not found"));
+  status = GTR_STATUSBAR (gtr_window_get_statusbar (window));
+  gtr_statusbar_flash_message (status, 0, _("Phrase not found"));
 }
 
 static gboolean
@@ -214,7 +214,7 @@ run_search (GtrView * view, gboolean follow)
     gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),
 					  NULL, &start_iter);
 
-  found = gtranslator_view_search_forward (view,
+  found = gtr_view_search_forward (view,
 					   &start_iter,
 					   NULL, &match_start, &match_end);
 
@@ -239,9 +239,9 @@ find_in_list (GtrWindow * window,
 	      GList * views,
 	      gboolean fuzzy, gboolean wrap_around, gboolean search_backwards)
 {
-  GtrTab *tab = gtranslator_window_get_active_tab (window);
-  GtrPo *po = gtranslator_tab_get_po (tab);
-  GList *l = gtranslator_po_get_current_message (po);
+  GtrTab *tab = gtr_window_get_active_tab (window);
+  GtrPo *po = gtr_tab_get_po (tab);
+  GList *l = gtr_po_get_current_message (po);
   GList *current;
   static GList *viewsaux = NULL;
 
@@ -257,7 +257,7 @@ find_in_list (GtrWindow * window,
 
   do
     {
-      if (gtranslator_msg_is_fuzzy (GTR_MSG (l->data)) && !fuzzy)
+      if (gtr_msg_is_fuzzy (GTR_MSG (l->data)) && !fuzzy)
 	{
 	  if (!search_backwards)
 	    {
@@ -281,7 +281,7 @@ find_in_list (GtrWindow * window,
 	      else
 		l = l->prev;
 	    }
-	  gtranslator_tab_message_go_to (tab, l, TRUE, GTR_TAB_MOVE_NONE);
+	  gtr_tab_message_go_to (tab, l, TRUE, GTR_TAB_MOVE_NONE);
 	}
       else
 	{
@@ -292,7 +292,7 @@ find_in_list (GtrWindow * window,
 	      found = run_search (GTR_VIEW (viewsaux->data), found);
 	      if (found)
 		{
-		  gtranslator_tab_message_go_to (tab, l, FALSE,
+		  gtr_tab_message_go_to (tab, l, FALSE,
 						 GTR_TAB_MOVE_NONE);
 		  run_search (GTR_VIEW (viewsaux->data), aux);
 		  return TRUE;
@@ -321,7 +321,7 @@ find_in_list (GtrWindow * window,
 	      else
 		l = l->prev;
 	    }
-	  gtranslator_tab_message_go_to (tab, l, TRUE, GTR_TAB_MOVE_NONE);
+	  gtr_tab_message_go_to (tab, l, TRUE, GTR_TAB_MOVE_NONE);
 	  viewsaux = views;
 	}
     }
@@ -349,26 +349,26 @@ do_find (GtrSearchDialog * dialog, GtrWindow * window)
   gboolean found;
 
   /* Used to store search options */
-  tab = gtranslator_window_get_active_tab (window);
+  tab = gtr_window_get_active_tab (window);
 
-  entry_text = gtranslator_search_dialog_get_search_text (dialog);
+  entry_text = gtr_search_dialog_get_search_text (dialog);
 
   /* Views where find */
-  original_text = gtranslator_search_dialog_get_original_text (dialog);
-  translated_text = gtranslator_search_dialog_get_translated_text (dialog);
-  fuzzy = gtranslator_search_dialog_get_fuzzy (dialog);
+  original_text = gtr_search_dialog_get_original_text (dialog);
+  translated_text = gtr_search_dialog_get_translated_text (dialog);
+  fuzzy = gtr_search_dialog_get_fuzzy (dialog);
 
   /* Flags */
-  match_case = gtranslator_search_dialog_get_match_case (dialog);
-  entire_word = gtranslator_search_dialog_get_entire_word (dialog);
-  search_backwards = gtranslator_search_dialog_get_backwards (dialog);
-  wrap_around = gtranslator_search_dialog_get_wrap_around (dialog);
+  match_case = gtr_search_dialog_get_match_case (dialog);
+  entire_word = gtr_search_dialog_get_entire_word (dialog);
+  search_backwards = gtr_search_dialog_get_backwards (dialog);
+  wrap_around = gtr_search_dialog_get_wrap_around (dialog);
 
   if (!original_text && !translated_text && !fuzzy)
     return;
 
   /* Get textviews */
-  views = gtranslator_window_get_all_views (window, original_text,
+  views = gtr_window_get_all_views (window, original_text,
 					    translated_text);
 
   g_return_if_fail (views != NULL);
@@ -381,12 +381,12 @@ do_find (GtrSearchDialog * dialog, GtrWindow * window)
   while (list != NULL)
     {
       search_text =
-	gtranslator_view_get_search_text (GTR_VIEW (list->data), &old_flags);
+	gtr_view_get_search_text (GTR_VIEW (list->data), &old_flags);
 
       if ((search_text == NULL) ||
 	  (strcmp (search_text, entry_text) != 0) || (flags != old_flags))
 	{
-	  gtranslator_view_set_search_text (GTR_VIEW (list->data), entry_text,
+	  gtr_view_set_search_text (GTR_VIEW (list->data), entry_text,
 					    flags);
 	}
 
@@ -436,25 +436,25 @@ do_replace (GtrSearchDialog * dialog, GtrWindow * window)
   gboolean match_case;
   gboolean search_backwards;
 
-  view = gtranslator_window_get_active_view (window);
+  view = gtr_window_get_active_view (window);
   if (view == NULL)
     return;
 
-  search_entry_text = gtranslator_search_dialog_get_search_text (dialog);
+  search_entry_text = gtr_search_dialog_get_search_text (dialog);
   g_return_if_fail ((search_entry_text) != NULL);
   g_return_if_fail ((*search_entry_text) != '\0');
 
   /* replace text may be "", we just delete */
-  replace_entry_text = gtranslator_search_dialog_get_replace_text (dialog);
+  replace_entry_text = gtr_search_dialog_get_replace_text (dialog);
   g_return_if_fail ((replace_entry_text) != NULL);
 
   unescaped_search_text =
-    gtranslator_utils_unescape_search_text (search_entry_text);
+    gtr_utils_unescape_search_text (search_entry_text);
 
-  gtranslator_view_get_selected_text (view, &selected_text, NULL);
+  gtr_view_get_selected_text (view, &selected_text, NULL);
 
-  match_case = gtranslator_search_dialog_get_match_case (dialog);
-  search_backwards = gtranslator_search_dialog_get_backwards (dialog);
+  match_case = gtr_search_dialog_get_match_case (dialog);
+  search_backwards = gtr_search_dialog_get_backwards (dialog);
 
   if ((selected_text == NULL) ||
       (match_case && (strcmp (selected_text, unescaped_search_text) != 0)) ||
@@ -472,7 +472,7 @@ do_replace (GtrSearchDialog * dialog, GtrWindow * window)
     }
 
   unescaped_replace_text =
-    gtranslator_utils_unescape_search_text (replace_entry_text);
+    gtr_utils_unescape_search_text (replace_entry_text);
   replace_selected_text (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)),
 			 unescaped_replace_text);
 
@@ -496,13 +496,13 @@ do_replace_all (GtrSearchDialog * dialog, GtrWindow * window)
   guint flags = 0;
   gint count = 0;
 
-  tab = gtranslator_window_get_active_tab (window);
+  tab = gtr_window_get_active_tab (window);
 
   /* Get only translated textviews */
-  views = gtranslator_window_get_all_views (window, FALSE, TRUE);
+  views = gtr_window_get_all_views (window, FALSE, TRUE);
 
   current_msg =
-    gtranslator_po_get_current_message (gtranslator_tab_get_po (tab));
+    gtr_po_get_current_message (gtr_tab_get_po (tab));
 
   g_return_if_fail (views != NULL);
   g_return_if_fail (current_msg != NULL);
@@ -510,16 +510,16 @@ do_replace_all (GtrSearchDialog * dialog, GtrWindow * window)
   l = views;
   aux = current_msg;
 
-  search_entry_text = gtranslator_search_dialog_get_search_text (dialog);
+  search_entry_text = gtr_search_dialog_get_search_text (dialog);
   g_return_if_fail ((search_entry_text) != NULL);
   g_return_if_fail ((*search_entry_text) != '\0');
 
   /* replace text may be "", we just delete all occurrencies */
-  replace_entry_text = gtranslator_search_dialog_get_replace_text (dialog);
+  replace_entry_text = gtr_search_dialog_get_replace_text (dialog);
   g_return_if_fail ((replace_entry_text) != NULL);
 
-  match_case = gtranslator_search_dialog_get_match_case (dialog);
-  entire_word = gtranslator_search_dialog_get_entire_word (dialog);
+  match_case = gtr_search_dialog_get_match_case (dialog);
+  entire_word = gtr_search_dialog_get_entire_word (dialog);
 
   GTR_SEARCH_SET_CASE_SENSITIVE (flags, match_case);
   GTR_SEARCH_SET_ENTIRE_WORD (flags, entire_word);
@@ -529,7 +529,7 @@ do_replace_all (GtrSearchDialog * dialog, GtrWindow * window)
     {
       while (l)
 	{
-	  count += gtranslator_view_replace_all (GTR_VIEW (l->data),
+	  count += gtr_view_replace_all (GTR_VIEW (l->data),
 						 search_entry_text,
 						 replace_entry_text, flags);
 	  l = l->next;
@@ -541,11 +541,11 @@ do_replace_all (GtrSearchDialog * dialog, GtrWindow * window)
 	aux = g_list_first (aux);
       else
 	aux = aux->next;
-      gtranslator_tab_message_go_to (tab, aux, TRUE, GTR_TAB_MOVE_NONE);
+      gtr_tab_message_go_to (tab, aux, TRUE, GTR_TAB_MOVE_NONE);
     }
   while (current_msg != aux);
 
-  gtranslator_tab_message_go_to (tab, aux, FALSE, GTR_TAB_MOVE_NONE);
+  gtr_tab_message_go_to (tab, aux, FALSE, GTR_TAB_MOVE_NONE);
 
   if (count > 0)
     {
@@ -591,7 +591,7 @@ search_dialog_destroyed (GtrWindow * window,
 }
 
 void
-_gtranslator_actions_search_find (GtkAction * action,
+_gtr_actions_search_find (GtkAction * action,
 				  GtrWindow * window)
 {
   gpointer data;
@@ -613,34 +613,34 @@ _gtranslator_actions_search_find (GtkAction * action,
        * it is already open
        */
 
-      gtranslator_search_dialog_present_with_time (GTR_SEARCH_DIALOG (data),
+      gtr_search_dialog_present_with_time (GTR_SEARCH_DIALOG (data),
 						   GDK_CURRENT_TIME);
 
       return;
     }
 
-  search_dialog = gtranslator_search_dialog_new (GTK_WINDOW (window), FALSE);
+  search_dialog = gtr_search_dialog_new (GTK_WINDOW (window), FALSE);
 
   g_object_set_data (G_OBJECT (window), GTR_SEARCH_DIALOG_KEY, search_dialog);
 
   g_object_weak_ref (G_OBJECT (search_dialog),
 		     (GWeakNotify) search_dialog_destroyed, window);
 
-  tab = gtranslator_window_get_active_tab (window);
-  view = gtranslator_window_get_active_view (window);
+  tab = gtr_window_get_active_tab (window);
+  view = gtr_window_get_active_view (window);
   g_return_if_fail (tab != NULL);
   g_return_if_fail (view != NULL);
 
   last_search_data = g_object_get_data (G_OBJECT (tab),
 					GTR_LAST_SEARCH_DATA_KEY);
 
-  selection_exists = gtranslator_view_get_selected_text (view,
+  selection_exists = gtr_view_get_selected_text (view,
 							 &find_text,
 							 &sel_len);
 
   if (selection_exists && find_text != NULL && sel_len < 80)
     {
-      gtranslator_search_dialog_set_search_text (GTR_SEARCH_DIALOG
+      gtr_search_dialog_set_search_text (GTR_SEARCH_DIALOG
 						 (search_dialog), find_text);
       g_free (find_text);
     }
@@ -669,7 +669,7 @@ _gtranslator_actions_search_find (GtkAction * action,
 }
 
 void
-_gtranslator_actions_search_replace (GtkAction * action,
+_gtr_actions_search_replace (GtkAction * action,
 				     GtrWindow * window)
 {
   gpointer data;
@@ -688,18 +688,18 @@ _gtranslator_actions_search_replace (GtkAction * action,
       g_return_if_fail (GTR_IS_SEARCH_DIALOG (data));
 
       /* turn the dialog into a replace dialog if needed */
-      if (!gtranslator_search_dialog_get_show_replace
+      if (!gtr_search_dialog_get_show_replace
 	  (GTR_SEARCH_DIALOG (data)))
-	gtranslator_search_dialog_set_show_replace (GTR_SEARCH_DIALOG (data),
+	gtr_search_dialog_set_show_replace (GTR_SEARCH_DIALOG (data),
 						    TRUE);
 
-      gtranslator_search_dialog_present_with_time (GTR_SEARCH_DIALOG (data),
+      gtr_search_dialog_present_with_time (GTR_SEARCH_DIALOG (data),
 						   GDK_CURRENT_TIME);
 
       return;
     }
 
-  replace_dialog = gtranslator_search_dialog_new (GTK_WINDOW (window), TRUE);
+  replace_dialog = gtr_search_dialog_new (GTK_WINDOW (window), TRUE);
 
   g_object_set_data (G_OBJECT (window),
 		     GTR_SEARCH_DIALOG_KEY, replace_dialog);
@@ -707,21 +707,21 @@ _gtranslator_actions_search_replace (GtkAction * action,
   g_object_weak_ref (G_OBJECT (replace_dialog),
 		     (GWeakNotify) search_dialog_destroyed, window);
 
-  tab = gtranslator_window_get_active_tab (window);
-  view = gtranslator_window_get_active_view (window);
+  tab = gtr_window_get_active_tab (window);
+  view = gtr_window_get_active_view (window);
   g_return_if_fail (tab != NULL);
 
   last_search_data = g_object_get_data (G_OBJECT (tab),
 					GTR_LAST_SEARCH_DATA_KEY);
 
 
-  selection_exists = gtranslator_view_get_selected_text (view,
+  selection_exists = gtr_view_get_selected_text (view,
 							 &find_text,
 							 &sel_len);
 
   if (selection_exists && find_text != NULL && sel_len < 80)
     {
-      gtranslator_search_dialog_set_search_text (GTR_SEARCH_DIALOG
+      gtr_search_dialog_set_search_text (GTR_SEARCH_DIALOG
 						 (replace_dialog), find_text);
       g_free (find_text);
     }
@@ -757,7 +757,7 @@ do_find_again (GtrWindow * window, gboolean backward)
   gboolean wrap_around = TRUE;
   LastSearchData *data;
 
-  active_view = gtranslator_window_get_active_view (window);
+  active_view = gtr_window_get_active_view (window);
   g_return_if_fail (active_view != NULL);
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (active_view));
@@ -771,14 +771,14 @@ do_find_again (GtrWindow * window, gboolean backward)
 }
 
 void
-_gtranslator_actions_search_find_next (GtkAction * action,
+_gtr_actions_search_find_next (GtkAction * action,
 				       GtrWindow * window)
 {
   do_find_again (window, FALSE);
 }
 
 void
-_gtranslator_actions_search_find_prev (GtkAction * action,
+_gtr_actions_search_find_prev (GtkAction * action,
 				       GtrWindow * window)
 {
   do_find_again (window, TRUE);

@@ -32,7 +32,7 @@
 						 GTR_TYPE_CONTEXT_PANEL,     \
 						 GtrContextPanelPrivate))
 
-G_DEFINE_TYPE (GtrContextPanel, gtranslator_context_panel,
+G_DEFINE_TYPE (GtrContextPanel, gtr_context_panel,
 	       GTK_TYPE_VBOX)
      struct _GtrContextPanelPrivate
      {
@@ -57,12 +57,12 @@ G_DEFINE_TYPE (GtrContextPanel, gtranslator_context_panel,
   gtk_text_buffer_set_text (buffer, "", 0);
   gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
 
-  format = g_strconcat (_("Format:"), gtranslator_msg_get_format (msg), NULL);
+  format = g_strconcat (_("Format:"), gtr_msg_get_format (msg), NULL);
   context =
-    g_strconcat (_("Context:"), gtranslator_msg_get_msgctxt (msg), NULL);
+    g_strconcat (_("Context:"), gtr_msg_get_msgctxt (msg), NULL);
   extracted =
     g_strconcat (_("Extracted comments:"),
-		 gtranslator_msg_get_extracted_comments (msg), NULL);
+		 gtr_msg_get_extracted_comments (msg), NULL);
 
   toset = g_strdup_printf ("%s\n%s\n%s", format, context, extracted);
 
@@ -76,7 +76,7 @@ G_DEFINE_TYPE (GtrContextPanel, gtranslator_context_panel,
 }
 
 static void
-gtranslator_context_panel_draw (GtrContextPanel * panel)
+gtr_context_panel_draw (GtrContextPanel * panel)
 {
   GtrContextPanelPrivate *priv = panel->priv;
   GtkWidget *context_scrolled_window;
@@ -109,31 +109,31 @@ gtranslator_context_panel_draw (GtrContextPanel * panel)
 
 
 static void
-gtranslator_context_panel_init (GtrContextPanel * panel)
+gtr_context_panel_init (GtrContextPanel * panel)
 {
   panel->priv = GTR_CONTEXT_PANEL_GET_PRIVATE (panel);
 
-  gtranslator_context_panel_draw (panel);
+  gtr_context_panel_draw (panel);
 }
 
 static void
-gtranslator_context_panel_finalize (GObject * object)
+gtr_context_panel_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_context_panel_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_context_panel_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_context_panel_class_init (GtrContextPanelClass * klass)
+gtr_context_panel_class_init (GtrContextPanelClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrContextPanelPrivate));
 
-  object_class->finalize = gtranslator_context_panel_finalize;
+  object_class->finalize = gtr_context_panel_finalize;
 }
 
 /**
- * gtranslator_context_panel_new:
+ * gtr_context_panel_new:
  * @tab: a #GtrTab
  * 
  * Creates a new #GtrContextPanel object.
@@ -141,7 +141,7 @@ gtranslator_context_panel_class_init (GtrContextPanelClass * klass)
  * Returns: a new #GtrContextPanel object
  */
 GtkWidget *
-gtranslator_context_panel_new (GtkWidget * tab)
+gtr_context_panel_new (GtkWidget * tab)
 {
   GtrContextPanel *context;
   context = g_object_new (GTR_TYPE_CONTEXT_PANEL, NULL);
@@ -155,13 +155,13 @@ gtranslator_context_panel_new (GtkWidget * tab)
 }
 
 /**
- * gtranslator_context_panel_get_extracted_text_view:
+ * gtr_context_panel_get_extracted_text_view:
  * @panel: a #GtrContextPanel
  *
  * Returns: the context #GtkTextView
  */
 GtkTextView *
-gtranslator_context_panel_get_context_text_view (GtrContextPanel *
+gtr_context_panel_get_context_text_view (GtrContextPanel *
 						 panel)
 {
   g_return_val_if_fail (GTR_IS_CONTEXT_PANEL (panel), NULL);

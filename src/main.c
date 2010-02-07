@@ -4,12 +4,12 @@
  *			Gediminas Paulauskas <menesis@kabalak.net>
  *			Peeter Vois <peeter@kabalak.net>
  * 			Ignacio Casal <nacho.resa@gmail.com>
- * 
+ *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation; either version 2 of the License, or   
  *    (at your option) any later version.
- *    
+ *
  * gtranslator is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
@@ -111,7 +111,7 @@ setup_path (void)
   g_free (bin);
 
   if (!g_setenv ("PATH", path, TRUE))
-    g_warning ("Could not set PATH for gedit");
+    g_warning ("Could not set PATH for gtranslator");
 
   g_free (path);
 }
@@ -176,7 +176,7 @@ main (gint argc, gchar * argv[])
   g_option_context_parse (context, &argc, &argv, NULL);
 
   /* We set the default icon dir */
-  pixmaps_dir = gtranslator_dirs_get_pixmaps_dir ();
+  pixmaps_dir = gtr_dirs_get_pixmaps_dir ();
   gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
                                      pixmaps_dir);
   g_free (pixmaps_dir);
@@ -184,36 +184,36 @@ main (gint argc, gchar * argv[])
   /*
    * Init preferences manager
    */
-  gtranslator_prefs_manager_app_init ();
+  gtr_prefs_manager_app_init ();
 
   /*
    * Init plugin engine
    */
-  engine = gtranslator_plugins_engine_get_default ();
+  engine = gtr_plugins_engine_get_default ();
 
-  gtk_about_dialog_set_url_hook (gtranslator_utils_activate_url, NULL, NULL);
-  gtk_about_dialog_set_email_hook (gtranslator_utils_activate_email, NULL,
+  gtk_about_dialog_set_url_hook (gtr_utils_activate_url, NULL, NULL);
+  gtk_about_dialog_set_email_hook (gtr_utils_activate_email, NULL,
 				   NULL);
 
   /*
    * Load profiles list
    */
-  config_folder = gtranslator_dirs_get_user_config_dir ();
+  config_folder = gtr_dirs_get_user_config_dir ();
   filename = g_build_filename (config_folder, "profiles.xml", NULL);
   file = g_file_new_for_path (filename);
 
   if (g_file_query_exists (file, NULL))
     {
       profiles_list =
-	gtranslator_profile_get_profiles_from_xml_file (filename);
+	gtr_profile_get_profiles_from_xml_file (filename);
     }
 
-  gtranslator_application_set_profiles (GTR_APP, profiles_list);
+  gtr_application_set_profiles (GTR_APP, profiles_list);
 
   /* 
    * Create the main app-window. 
    */
-  window = gtranslator_application_open_window (GTR_APP);
+  window = gtr_application_open_window (GTR_APP);
 
   /*
    * Now we open the files passed as arguments
@@ -221,7 +221,7 @@ main (gint argc, gchar * argv[])
   file_list = get_command_line_data ();
   if (file_list)
     {
-      gtranslator_actions_load_locations (window, (const GSList *) file_list);
+      gtr_actions_load_locations (window, (const GSList *) file_list);
       g_slist_foreach (file_list, (GFunc) g_object_unref, NULL);
       g_slist_free (file_list);
     }
@@ -233,7 +233,7 @@ main (gint argc, gchar * argv[])
    */
   gtk_main ();
 
-  gtranslator_prefs_manager_app_shutdown ();
+  gtr_prefs_manager_app_shutdown ();
 
   return 0;
 }

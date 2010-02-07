@@ -35,45 +35,45 @@
 						 GTR_TYPE_DB_ORIG,     \
 						 GtrDbOrigPrivate))
 
-G_DEFINE_TYPE (GtrDbOrig, gtranslator_db_orig, GTR_TYPE_DB_BASE)
+G_DEFINE_TYPE (GtrDbOrig, gtr_db_orig, GTR_TYPE_DB_BASE)
      struct _GtrDbOrigPrivate
      {
 
      };
 
-     static void gtranslator_db_orig_init (GtrDbOrig * db_orig)
+     static void gtr_db_orig_init (GtrDbOrig * db_orig)
 {
   //db_orig->priv = GTR_DB_ORIG_GET_PRIVATE (db_orig);
 
-  gtranslator_db_base_create_dabatase (GTR_DB_BASE (db_orig),
+  gtr_db_base_create_dabatase (GTR_DB_BASE (db_orig),
 				       "original.db", DB_HASH);
 }
 
 static void
-gtranslator_db_orig_finalize (GObject * object)
+gtr_db_orig_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_db_orig_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_db_orig_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_db_orig_class_init (GtrDbOrigClass * klass)
+gtr_db_orig_class_init (GtrDbOrigClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   //g_type_class_add_private (klass, sizeof (GtrDbOrigPrivate));
 
-  object_class->finalize = gtranslator_db_orig_finalize;
+  object_class->finalize = gtr_db_orig_finalize;
 }
 
 /**
- * gtranslator_db_orig_new:
+ * gtr_db_orig_new:
  * 
  * Creates a new #GtrDbOrig object.
  * 
  * Returns: a newly #GtrDbOrig object
  */
 GtrDbOrig *
-gtranslator_db_orig_new ()
+gtr_db_orig_new ()
 {
   GtrDbOrig *db_orig;
 
@@ -83,7 +83,7 @@ gtranslator_db_orig_new ()
 }
 
 /**
- * gtranslator_db_orig_write:
+ * gtr_db_orig_write:
  * @orig: a #GtrDbOrig
  * @string: string to store in the database
  * @value: the foreign key from #GtrDbTrans
@@ -94,7 +94,7 @@ gtranslator_db_orig_new ()
  * Returns: TRUE if it was successfully stored.
  */
 gboolean
-gtranslator_db_orig_write (GtrDbOrig * orig,
+gtr_db_orig_write (GtrDbOrig * orig,
 			   const gchar * string, db_recno_t value)
 {
   DBT key, data;
@@ -107,10 +107,10 @@ gtranslator_db_orig_write (GtrDbOrig * orig,
   data.data = &value;
   data.size = sizeof (value);
 
-  error = gtranslator_db_base_put (GTR_DB_BASE (orig), &key, &data, 0);
+  error = gtr_db_base_put (GTR_DB_BASE (orig), &key, &data, 0);
   if (error != 0)
     {
-      gtranslator_db_base_show_error (GTR_DB_BASE (orig), error);
+      gtr_db_base_show_error (GTR_DB_BASE (orig), error);
       return FALSE;
     }
 
@@ -118,7 +118,7 @@ gtranslator_db_orig_write (GtrDbOrig * orig,
 }
 
 /**
- * gtranslator_db_orig_read:
+ * gtr_db_orig_read:
  * @orig: a #GtrDbOrig
  * @string: the primary key of the #GtrDbOrig
  *
@@ -128,7 +128,7 @@ gtranslator_db_orig_write (GtrDbOrig * orig,
  * Returns: the foreign key for #GtrDbTrans
  */
 db_recno_t
-gtranslator_db_orig_read (GtrDbOrig * orig, const gchar * string)
+gtr_db_orig_read (GtrDbOrig * orig, const gchar * string)
 {
   DBT key, data;
   gint error;
@@ -138,11 +138,11 @@ gtranslator_db_orig_read (GtrDbOrig * orig, const gchar * string)
   key.data = (gpointer) string;
   key.size = strlen (string);
 
-  error = gtranslator_db_base_get (GTR_DB_BASE (orig), &key, &data);
+  error = gtr_db_base_get (GTR_DB_BASE (orig), &key, &data);
   if (error != 0)
     {
       if (error != DB_NOTFOUND)
-	gtranslator_db_base_show_error (GTR_DB_BASE (orig), error);
+	gtr_db_base_show_error (GTR_DB_BASE (orig), error);
       return 0;
     }
 

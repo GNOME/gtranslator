@@ -21,8 +21,8 @@
  */
  
 /*
- * Modified by the gtranslator Team, 2006. See the AUTHORS file for a 
- * list of people on the gtranslator Team.  
+ * Modified by the gedit Team, 2006. See the AUTHORS file for a 
+ * list of people on the gtr Team.  
  * See the ChangeLog files for a list of changes. 
  *
  * $Id$
@@ -34,7 +34,7 @@
 
 G_BEGIN_DECLS
 
-#define GTR_TYPE_HISTORY_ENTRY             (gtranslator_history_entry_get_type ())
+#define GTR_TYPE_HISTORY_ENTRY             (gtr_history_entry_get_type ())
 #define GTR_HISTORY_ENTRY(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_HISTORY_ENTRY, GtrHistoryEntry))
 #define GTR_HISTORY_ENTRY_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTR_TYPE_HISTORY_ENTRY, GtrHistoryEntryClass))
 #define GTR_IS_HISTORY_ENTRY(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_HISTORY_ENTRY))
@@ -58,37 +58,37 @@ struct _GtrHistoryEntry
 	GtrHistoryEntryPrivate *priv;
 };
 
-GType		 gtranslator_history_entry_get_type	(void) G_GNUC_CONST;
+GType		 gtr_history_entry_get_type	(void) G_GNUC_CONST;
 
-GtkWidget	*gtranslator_history_entry_new		(const gchar       *history_id,
+GtkWidget	*gtr_history_entry_new		(const gchar       *history_id,
 							 gboolean           enable_completion);
 
-void		 gtranslator_history_entry_prepend_text	(GtrHistoryEntry *entry,
+void		 gtr_history_entry_prepend_text	(GtrHistoryEntry *entry,
 							 const gchar       *text);
 
-void		 gtranslator_history_entry_append_text	(GtrHistoryEntry *entry,
+void		 gtr_history_entry_append_text	(GtrHistoryEntry *entry,
 							 const gchar       *text);
 
-void		 gtranslator_history_entry_clear		(GtrHistoryEntry *entry);
+void		 gtr_history_entry_clear		(GtrHistoryEntry *entry);
 
-void		 gtranslator_history_entry_set_history_length	(GtrHistoryEntry *entry,
+void		 gtr_history_entry_set_history_length	(GtrHistoryEntry *entry,
 							 guint              max_saved);
 
-guint		 gtranslator_history_entry_get_history_length	(GtrHistoryEntry *gentry);
+guint		 gtr_history_entry_get_history_length	(GtrHistoryEntry *gentry);
 
-gchar		*gtranslator_history_entry_get_history_id	(GtrHistoryEntry *entry);
+gchar		*gtr_history_entry_get_history_id	(GtrHistoryEntry *entry);
 
-void             gtranslator_history_entry_set_enable_completion 
+void             gtr_history_entry_set_enable_completion 
 							(GtrHistoryEntry *entry,
 							 gboolean           enable);
 							 
-gboolean         gtranslator_history_entry_get_enable_completion 
+gboolean         gtr_history_entry_get_enable_completion 
 							(GtrHistoryEntry *entry);
 
-GtkWidget	*gtranslator_history_entry_get_entry		(GtrHistoryEntry *entry);
+GtkWidget	*gtr_history_entry_get_entry		(GtrHistoryEntry *entry);
 
 typedef gchar * (* GtrHistoryEntryEscapeFunc) (const gchar *str);
-void		gtranslator_history_entry_set_escape_func	(GtrHistoryEntry *entry,
+void		gtr_history_entry_set_escape_func	(GtrHistoryEntry *entry,
 							 GtrHistoryEntryEscapeFunc escape_func);
 
 G_END_DECLS

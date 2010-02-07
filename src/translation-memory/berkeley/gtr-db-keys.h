@@ -27,7 +27,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_DB_KEYS		(gtranslator_db_keys_get_type ())
+#define GTR_TYPE_DB_KEYS		(gtr_db_keys_get_type ())
 #define GTR_DB_KEYS(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_DB_KEYS, GtrDbKeys))
 #define GTR_DB_KEYS_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_DB_KEYS, GtrDbKeysClass))
 #define GTR_IS_DB_KEYS(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_DB_KEYS))
@@ -63,20 +63,20 @@ struct _GtrDbKeysClass
  * Public methods
  */
 GType
-gtranslator_db_keys_get_type (void)
+gtr_db_keys_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_db_keys_register_type (GTypeModule * module);
+     GType gtr_db_keys_register_type (GTypeModule * module);
 
-     GtrDbKeys *gtranslator_db_keys_new (DBT * data);
+     GtrDbKeys *gtr_db_keys_new (DBT * data);
 
-     GtrDbKeys *gtranslator_db_keys_new_with_size (gsize cnt);
+     GtrDbKeys *gtr_db_keys_new_with_size (gsize cnt);
 
-     db_recno_t *gtranslator_db_keys_get_list (GtrDbKeys * db_keys);
+     db_recno_t *gtr_db_keys_get_list (GtrDbKeys * db_keys);
 
-     gsize gtranslator_db_keys_get_count (GtrDbKeys * db_keys);
+     gsize gtr_db_keys_get_count (GtrDbKeys * db_keys);
 
-     void gtranslator_db_keys_set_count (GtrDbKeys * db_keys,
+     void gtr_db_keys_set_count (GtrDbKeys * db_keys,
 					 gsize count);
 
 G_END_DECLS

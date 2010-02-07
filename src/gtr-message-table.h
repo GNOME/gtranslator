@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_MESSAGE_TABLE		(gtranslator_message_table_get_type ())
+#define GTR_TYPE_MESSAGE_TABLE		(gtr_message_table_get_type ())
 #define GTR_MESSAGE_TABLE(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGE_TABLE, GtrMessageTable))
 #define GTR_MESSAGE_TABLE_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_MESSAGE_TABLE, GtrMessageTableClass))
 #define GTR_IS_MESSAGE_TABLE(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_MESSAGE_TABLE))
@@ -64,18 +64,18 @@ struct _GtrMessageTableClass
  * Public methods
  */
 GType
-gtranslator_message_table_get_type (void)
+gtr_message_table_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_message_table_register_type (GTypeModule * module);
+     GType gtr_message_table_register_type (GTypeModule * module);
 
-     GtkWidget *gtranslator_message_table_new (GtkWidget * tab);
+     GtkWidget *gtr_message_table_new (GtkWidget * tab);
 
-     void gtranslator_message_table_populate (GtrMessageTable * table,
+     void gtr_message_table_populate (GtrMessageTable * table,
 					      GList * messages);
 
      void
-       gtranslator_message_table_update_translation (GtrMessageTable *
+       gtr_message_table_update_translation (GtrMessageTable *
 						     table,
 						     GtrMsg * msg,
 						     gchar * translation);

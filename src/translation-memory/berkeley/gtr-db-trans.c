@@ -35,45 +35,45 @@
 						 GTR_TYPE_DB_TRANS,     \
 						 GtrDbTransPrivate))
 
-G_DEFINE_TYPE (GtrDbTrans, gtranslator_db_trans, GTR_TYPE_DB_BASE)
+G_DEFINE_TYPE (GtrDbTrans, gtr_db_trans, GTR_TYPE_DB_BASE)
      struct _GtrDbTransPrivate
      {
 
      };
 
-     static void gtranslator_db_trans_init (GtrDbTrans * db_trans)
+     static void gtr_db_trans_init (GtrDbTrans * db_trans)
 {
   //db_trans->priv = GTR_DB_TRANS_GET_PRIVATE (db_trans);
 
-  gtranslator_db_base_create_dabatase (GTR_DB_BASE (db_trans),
+  gtr_db_base_create_dabatase (GTR_DB_BASE (db_trans),
 				       "translations.db", DB_RECNO);
 }
 
 static void
-gtranslator_db_trans_finalize (GObject * object)
+gtr_db_trans_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_db_trans_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_db_trans_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_db_trans_class_init (GtrDbTransClass * klass)
+gtr_db_trans_class_init (GtrDbTransClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   //g_type_class_add_private (klass, sizeof (GtrDbTransPrivate));
 
-  object_class->finalize = gtranslator_db_trans_finalize;
+  object_class->finalize = gtr_db_trans_finalize;
 }
 
 /**
- * gtranslator_db_trans_new:
+ * gtr_db_trans_new:
  * 
  * Creates a new #GtrDbTrans object.
  * 
  * Returns: a newly #GtrDbTrans object
  */
 GtrDbTrans *
-gtranslator_db_trans_new ()
+gtr_db_trans_new ()
 {
   GtrDbTrans *db_trans;
 
@@ -83,7 +83,7 @@ gtranslator_db_trans_new ()
 }
 
 /**
- * gtranslator_db_trans_write_string:
+ * gtr_db_trans_write_string:
  * @db_trans: a #GtrDbTrans
  * @translation: string to be stored in the database
  * @key: the index record in the database to be modified
@@ -93,7 +93,7 @@ gtranslator_db_trans_new ()
  * Returns: if @index is 0 then returns the new index, else returns @index
  */
 db_recno_t
-gtranslator_db_trans_write_string (GtrDbTrans * db_trans,
+gtr_db_trans_write_string (GtrDbTrans * db_trans,
 				   const gchar * translation, db_recno_t key)
 {
   gchar *array[2];
@@ -102,7 +102,7 @@ gtranslator_db_trans_write_string (GtrDbTrans * db_trans,
   array[0] = g_strdup (translation);
   array[1] = NULL;
 
-  toret = gtranslator_db_trans_write (db_trans, array, key);
+  toret = gtr_db_trans_write (db_trans, array, key);
 
   g_free (array[0]);
 
@@ -110,7 +110,7 @@ gtranslator_db_trans_write_string (GtrDbTrans * db_trans,
 }
 
 /**
- * gtranslator_db_trans_write:
+ * gtr_db_trans_write:
  * @db_trans: a #GtrDbTrans
  * @translations: array of translations
  * @index: the index record in the database to be modified
@@ -120,7 +120,7 @@ gtranslator_db_trans_write_string (GtrDbTrans * db_trans,
  * Returns: if @index is 0 then returns the new index, else returns @index
  */
 db_recno_t
-gtranslator_db_trans_write (GtrDbTrans * db_trans,
+gtr_db_trans_write (GtrDbTrans * db_trans,
 			    gchar ** translations, db_recno_t index)
 {
   DBT key, data;
@@ -178,7 +178,7 @@ gtranslator_db_trans_write (GtrDbTrans * db_trans,
 
   if (index == 0)
     {
-      error = gtranslator_db_base_put (GTR_DB_BASE (db_trans),
+      error = gtr_db_base_put (GTR_DB_BASE (db_trans),
 				       &key, &data, DB_APPEND);
     }
   else
@@ -186,20 +186,20 @@ gtranslator_db_trans_write (GtrDbTrans * db_trans,
       key.data = &index;
       key.size = sizeof (index);
 
-      error = gtranslator_db_base_put (GTR_DB_BASE (db_trans),
+      error = gtr_db_base_put (GTR_DB_BASE (db_trans),
 				       &key, &data, 0);
     }
 
   if (error != 0)
     {
-      gtranslator_db_base_show_error (GTR_DB_BASE (db_trans), error);
+      gtr_db_base_show_error (GTR_DB_BASE (db_trans), error);
       return 0;
     }
   return (index == 0) ? *((db_recno_t *) key.data) : index;
 }
 
 /**
- * gtranslator_db_trans_read:
+ * gtr_db_trans_read:
  * @db_trans: a #GtrDbTrans
  * @index: the index record in the database
  *
@@ -208,7 +208,7 @@ gtranslator_db_trans_write (GtrDbTrans * db_trans,
  * The caller must free the #GPtrArray.
  */
 GPtrArray *
-gtranslator_db_trans_read (GtrDbTrans * db_trans, db_recno_t index)
+gtr_db_trans_read (GtrDbTrans * db_trans, db_recno_t index)
 {
   DBT key, data;
   gint error;
@@ -226,10 +226,10 @@ gtranslator_db_trans_read (GtrDbTrans * db_trans, db_recno_t index)
   /*
    * We get the data from the key
    */
-  error = gtranslator_db_base_get (GTR_DB_BASE (db_trans), &key, &data);
+  error = gtr_db_base_get (GTR_DB_BASE (db_trans), &key, &data);
   if (error != 0)
     {
-      gtranslator_db_base_show_error (GTR_DB_BASE (db_trans), error);
+      gtr_db_base_show_error (GTR_DB_BASE (db_trans), error);
       return NULL;
     }
 

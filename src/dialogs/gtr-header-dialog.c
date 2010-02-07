@@ -39,7 +39,7 @@
 						 GTR_TYPE_HEADER_DIALOG,     \
 						 GtrHeaderDialogPrivate))
 
-G_DEFINE_TYPE (GtrHeaderDialog, gtranslator_header_dialog,
+G_DEFINE_TYPE (GtrHeaderDialog, gtr_header_dialog,
 	       GTK_TYPE_DIALOG)
 
 struct _GtrHeaderDialogPrivate
@@ -69,19 +69,19 @@ struct _GtrHeaderDialogPrivate
 };
 
 static void
-gtranslator_header_dialog_finalize (GObject *object)
+gtr_header_dialog_finalize (GObject *object)
 {
-  G_OBJECT_CLASS (gtranslator_header_dialog_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_header_dialog_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_header_dialog_class_init (GtrHeaderDialogClass *klass)
+gtr_header_dialog_class_init (GtrHeaderDialogClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrHeaderDialogPrivate));
 
-  object_class->finalize = gtranslator_header_dialog_finalize;
+  object_class->finalize = gtr_header_dialog_finalize;
 }
 
 static void
@@ -94,7 +94,7 @@ take_my_options_checkbutton_toggled (GtkToggleButton *button,
 
   active = gtk_toggle_button_get_active (button);
 
-  gtranslator_prefs_manager_set_use_profile_values (active);
+  gtr_prefs_manager_set_use_profile_values (active);
 
   gtk_widget_set_sensitive (dlg->priv->translator, !active);
   gtk_widget_set_sensitive (dlg->priv->tr_email, !active);
@@ -115,7 +115,7 @@ prj_comment_changed (GtkTextBuffer * buffer,
 
   if (text)
     {
-      gtranslator_header_set_comments (dlg->priv->header, text);
+      gtr_header_set_comments (dlg->priv->header, text);
       g_free (text);
     }
 }
@@ -129,7 +129,7 @@ prj_id_version_changed (GtkWidget *widget,
   text = gtk_entry_get_text (GTK_ENTRY (widget));
 
   if (text)
-    gtranslator_header_set_prj_id_version (dlg->priv->header, text);
+    gtr_header_set_prj_id_version (dlg->priv->header, text);
 }
 
 static void
@@ -141,7 +141,7 @@ rmbt_changed (GtkWidget *widget,
   text = gtk_entry_get_text (GTK_ENTRY (widget));
 
   if (text)
-    gtranslator_header_set_rmbt (dlg->priv->header, text);
+    gtr_header_set_rmbt (dlg->priv->header, text);
 }
 
 static void
@@ -154,7 +154,7 @@ translator_changed (GtkWidget *widget,
   email = gtk_entry_get_text (GTK_ENTRY (dlg->priv->tr_email));
 
   if (name && email)
-    gtranslator_header_set_translator (dlg->priv->header, name, email);
+    gtr_header_set_translator (dlg->priv->header, name, email);
 }
 
 static void
@@ -167,11 +167,11 @@ language_changed (GtkWidget *widget,
   lg_email = gtk_entry_get_text (GTK_ENTRY (dlg->priv->lg_email));
 
   if (language && lg_email)
-    gtranslator_header_set_language (dlg->priv->header, language, lg_email);
+    gtr_header_set_language (dlg->priv->header, language, lg_email);
 }
 
 static void
-gtranslator_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
+gtr_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
 {
   GtrHeader *header;
   GtkTextBuffer *buffer;
@@ -181,63 +181,63 @@ gtranslator_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
 
   /* Project Information */
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (dlg->priv->prj_comment));
-  gtk_text_buffer_set_text (buffer, gtranslator_header_get_comments (header),
+  gtk_text_buffer_set_text (buffer, gtr_header_get_comments (header),
                             -1);
 
-  text = gtranslator_header_get_prj_id_version (header);
+  text = gtr_header_get_prj_id_version (header);
   gtk_entry_set_text (GTK_ENTRY (dlg->priv->prj_id_version),
 		      text);
   g_free (text);
 
-  text = gtranslator_header_get_pot_date (header);
+  text = gtr_header_get_pot_date (header);
   gtk_entry_set_text (GTK_ENTRY (dlg->priv->pot_date),
 		      text);
   g_free (text);
 
-  text = gtranslator_header_get_po_date (header);
+  text = gtr_header_get_po_date (header);
   gtk_entry_set_text (GTK_ENTRY (dlg->priv->po_date),
 		      text);
   g_free (text);
 
-  text = gtranslator_header_get_rmbt (header);
+  text = gtr_header_get_rmbt (header);
   gtk_entry_set_text (GTK_ENTRY (dlg->priv->rmbt),
 		      text);
   g_free (text);
 
   /* Translator and Language Information */
-  text = gtranslator_header_get_translator (header);
+  text = gtr_header_get_translator (header);
   gtk_entry_set_text (GTK_ENTRY (dlg->priv->translator),
 		      text);
   g_free (text);
 
-  text = gtranslator_header_get_tr_email (header);
+  text = gtr_header_get_tr_email (header);
   gtk_entry_set_text (GTK_ENTRY (dlg->priv->tr_email),
 		      text);
   g_free (text);
 
-  text = gtranslator_header_get_language (header);
+  text = gtr_header_get_language (header);
   gtk_entry_set_text (GTK_ENTRY (dlg->priv->language),
 		      text);
   g_free (text);
 
-  text = gtranslator_header_get_lg_email (header);
+  text = gtr_header_get_lg_email (header);
   gtk_entry_set_text (GTK_ENTRY (dlg->priv->lg_email),
 		      text);
   g_free (text);
 
-  text = gtranslator_header_get_charset (header);
+  text = gtr_header_get_charset (header);
   gtk_entry_set_text (GTK_ENTRY (dlg->priv->charset),
 		      text);
   g_free (text);
 
-  text = gtranslator_header_get_encoding (header);
+  text = gtr_header_get_encoding (header);
   gtk_entry_set_text (GTK_ENTRY (dlg->priv->encoding),
 		      text);
   g_free (text);
 }
 
 static void
-gtranslator_header_dialog_init (GtrHeaderDialog * dlg)
+gtr_header_dialog_init (GtrHeaderDialog * dlg)
 {
   gboolean ret;
   GtkWidget *error_widget;
@@ -265,8 +265,8 @@ gtranslator_header_dialog_init (GtrHeaderDialog * dlg)
 
   g_signal_connect (dlg, "response", G_CALLBACK (gtk_widget_destroy), NULL);
 
-  path = gtranslator_dirs_get_ui_file ("gtr-header-dialog.ui");
-  ret = gtranslator_utils_get_ui_objects (path,
+  path = gtr_dirs_get_ui_file ("gtr-header-dialog.ui");
+  ret = gtr_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,
 					  "main_box", &dlg->priv->main_box,
@@ -306,14 +306,14 @@ gtranslator_header_dialog_init (GtrHeaderDialog * dlg)
 
   gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);
 
-  if (gtranslator_application_get_profiles (GTR_APP) == NULL)
+  if (gtr_application_get_profiles (GTR_APP) == NULL)
     {
       gtk_widget_set_sensitive (dlg->priv->take_my_options, FALSE);
     }
   else
     {
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->take_my_options),
-                                    gtranslator_prefs_manager_get_use_profile_values ());
+                                    gtr_prefs_manager_get_use_profile_values ());
     }
   gtk_text_view_set_editable (GTK_TEXT_VIEW (dlg->priv->prj_comment), TRUE);
 
@@ -342,8 +342,8 @@ set_default_values (GtrHeaderDialog *dlg,
   GtkTextBuffer *buffer;
 
   /* Write header's values on Header dialog */
-  dlg->priv->header = gtranslator_window_get_header_from_active_tab (window);
-  gtranslator_header_dialog_fill_from_header (GTR_HEADER_DIALOG (dlg));
+  dlg->priv->header = gtr_window_get_header_from_active_tab (window);
+  gtr_header_dialog_fill_from_header (GTR_HEADER_DIALOG (dlg));
 
   /*Connect signals */
   g_signal_connect (dlg->priv->take_my_options, "toggled",
@@ -384,15 +384,15 @@ set_default_values (GtrHeaderDialog *dlg,
 }
 
 void
-gtranslator_show_header_dialog (GtrWindow * window)
+gtr_show_header_dialog (GtrWindow * window)
 {
   static GtrHeaderDialog *dlg = NULL;
   GtrPo *po;
   GtrTab *tab;
 
-  tab = gtranslator_window_get_active_tab (window);
+  tab = gtr_window_get_active_tab (window);
   g_return_if_fail (tab != NULL);
-  po = gtranslator_tab_get_po (tab);
+  po = gtr_tab_get_po (tab);
 
   g_return_if_fail (GTR_IS_WINDOW (window));
 

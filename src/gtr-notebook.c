@@ -33,7 +33,7 @@
 					 GTR_TYPE_NOTEBOOK,     \
 					 GtrNotebookPrivate))
 
-G_DEFINE_TYPE (GtrNotebook, gtranslator_notebook, GTK_TYPE_NOTEBOOK)
+G_DEFINE_TYPE (GtrNotebook, gtr_notebook, GTK_TYPE_NOTEBOOK)
      struct _GtrNotebookPrivate
      {
        GList *pages;
@@ -76,14 +76,14 @@ sync_name (GtrPo * po, GParamSpec * pspec, GtkWidget * hbox)
 
   label = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "label"));
   ebox = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "label-ebox"));
-  tab = gtranslator_tab_get_from_document (po);
+  tab = gtr_tab_get_from_document (po);
 
-  str = gtranslator_tab_get_name (tab);
+  str = gtr_tab_get_name (tab);
   g_return_if_fail (str != NULL);
 
   gtk_label_set_text (GTK_LABEL (label), str);
 
-  location = gtranslator_po_get_location (po);
+  location = gtr_po_get_location (po);
   path = g_file_get_path (location);
   g_object_unref (location);
 
@@ -180,7 +180,7 @@ build_tab_label (GtrNotebook * nb, GtrTab * tab)
 }
 
 static void
-gtranslator_notebook_init (GtrNotebook * notebook)
+gtr_notebook_init (GtrNotebook * notebook)
 {
   notebook->priv = GTR_NOTEBOOK_GET_PRIVATE (notebook);
   GtrNotebookPrivate *priv = notebook->priv;
@@ -189,24 +189,24 @@ gtranslator_notebook_init (GtrNotebook * notebook)
 }
 
 static void
-gtranslator_notebook_finalize (GObject * object)
+gtr_notebook_finalize (GObject * object)
 {
   GtrNotebook *notebook = GTR_NOTEBOOK (object);
 
   if (notebook->priv->pages)
     g_list_free (notebook->priv->pages);
 
-  G_OBJECT_CLASS (gtranslator_notebook_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_notebook_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_notebook_class_init (GtrNotebookClass * klass)
+gtr_notebook_class_init (GtrNotebookClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrNotebookPrivate));
 
-  object_class->finalize = gtranslator_notebook_finalize;
+  object_class->finalize = gtr_notebook_finalize;
 
   signals[TAB_CLOSE_REQUEST] =
     g_signal_new ("tab-close-request",
@@ -221,27 +221,27 @@ gtranslator_notebook_class_init (GtrNotebookClass * klass)
 /***************************** Public funcs ***********************************/
 
 /**
- * gtranslator_notebook_new:
+ * gtr_notebook_new:
  * 
  * Creates a new #GtrNotebook.
  * 
  * Returns: a new #GtrNotebook object
  */
 GtkWidget *
-gtranslator_notebook_new ()
+gtr_notebook_new ()
 {
   return GTK_WIDGET (g_object_new (GTR_TYPE_NOTEBOOK, NULL));
 }
 
 /**
- * gtranslator_notebook_add_page:
+ * gtr_notebook_add_page:
  * @notebook: a #GtrNotebook
  * @tab: a #GtrTab
  * 
  * Adds a new #GtrTab to @notebook.
  */
 void
-gtranslator_notebook_add_page (GtrNotebook * notebook,
+gtr_notebook_add_page (GtrNotebook * notebook,
 			       GtrTab * tab)
 {
   GtrNotebookPrivate *priv = notebook->priv;
@@ -251,7 +251,7 @@ gtranslator_notebook_add_page (GtrNotebook * notebook,
   g_return_if_fail (GTR_IS_NOTEBOOK (notebook));
   g_return_if_fail (GTR_IS_TAB (tab));
 
-  po = gtranslator_tab_get_po (tab);
+  po = gtr_tab_get_po (tab);
 
   label = build_tab_label (notebook, tab);
 
@@ -270,14 +270,14 @@ gtranslator_notebook_add_page (GtrNotebook * notebook,
 }
 
 /**
- * gtranslator_notebook_remove_page:
+ * gtr_notebook_remove_page:
  * @notebook: a #GtrNotebook
  * @page_num: the index of a notebook page, starting from 0.
  *
  * Removes a page from the notebook given its index in the notebook.
  */
 void
-gtranslator_notebook_remove_page (GtrNotebook * notebook,
+gtr_notebook_remove_page (GtrNotebook * notebook,
 				  gint page_num)
 {
   GtkWidget *tab;
@@ -296,7 +296,7 @@ gtranslator_notebook_remove_page (GtrNotebook * notebook,
 }
 
 /**
- * gtranslator_notebook_get_page:
+ * gtr_notebook_get_page:
  * @notebook: a #GtrNotebook
  * 
  * Gets the selected page in the #GtrNotebook.
@@ -304,7 +304,7 @@ gtranslator_notebook_remove_page (GtrNotebook * notebook,
  * Returns: the selected page in the @notebook
  */
 GtrTab *
-gtranslator_notebook_get_page (GtrNotebook * notebook)
+gtr_notebook_get_page (GtrNotebook * notebook)
 {
   gint num;
 

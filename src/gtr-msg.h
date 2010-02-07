@@ -32,7 +32,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_MSG		(gtranslator_msg_get_type ())
+#define GTR_TYPE_MSG		(gtr_msg_get_type ())
 #define GTR_MSG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MSG, GtrMsg))
 #define GTR_MSG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_MSG, GtrMsgClass))
 #define GTR_IS_MSG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_MSG))
@@ -75,81 +75,81 @@ typedef enum
  * Public methods
  */
 GType
-gtranslator_msg_get_type (void)
+gtr_msg_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_msg_register_type (GTypeModule * module);
+     GType gtr_msg_register_type (GTypeModule * module);
 
-     GtrMsg *gtranslator_msg_new (po_message_iterator_t iter,
+     GtrMsg *gtr_msg_new (po_message_iterator_t iter,
 					  po_message_t message);
 
 po_message_iterator_t
-gtranslator_msg_get_iterator (GtrMsg * msg);
+gtr_msg_get_iterator (GtrMsg * msg);
 
-     void gtranslator_msg_set_iterator (GtrMsg * msg,
+     void gtr_msg_set_iterator (GtrMsg * msg,
 					po_message_iterator_t iter);
 
-     po_message_t gtranslator_msg_get_message (GtrMsg * msg);
+     po_message_t gtr_msg_get_message (GtrMsg * msg);
 
-     void gtranslator_msg_set_message (GtrMsg * msg,
+     void gtr_msg_set_message (GtrMsg * msg,
 				       po_message_t message);
 
-     GtkTreeRowReference *gtranslator_msg_get_row_reference (GtrMsg *
+     GtkTreeRowReference *gtr_msg_get_row_reference (GtrMsg *
 							     msg);
 
-     void gtranslator_msg_set_row_reference (GtrMsg * msg,
+     void gtr_msg_set_row_reference (GtrMsg * msg,
 					     GtkTreeRowReference *
 					     row_reference);
 
-     gboolean gtranslator_msg_is_translated (GtrMsg * msg);
+     gboolean gtr_msg_is_translated (GtrMsg * msg);
 
-     gboolean gtranslator_msg_is_fuzzy (GtrMsg * msg);
+     gboolean gtr_msg_is_fuzzy (GtrMsg * msg);
 
-     void gtranslator_msg_set_fuzzy (GtrMsg * msg, gboolean fuzzy);
+     void gtr_msg_set_fuzzy (GtrMsg * msg, gboolean fuzzy);
 
-     void gtranslator_msg_set_status (GtrMsg * msg,
+     void gtr_msg_set_status (GtrMsg * msg,
 				      GtrMsgStatus status);
 
-     GtrMsgStatus gtranslator_msg_get_status (GtrMsg * msg);
+     GtrMsgStatus gtr_msg_get_status (GtrMsg * msg);
 
-     const gchar *gtranslator_msg_get_msgid (GtrMsg * msg);
+     const gchar *gtr_msg_get_msgid (GtrMsg * msg);
 
-     const gchar *gtranslator_msg_get_msgid_plural (GtrMsg * msg);
+     const gchar *gtr_msg_get_msgid_plural (GtrMsg * msg);
 
-     const gchar *gtranslator_msg_get_msgstr (GtrMsg * msg);
+     const gchar *gtr_msg_get_msgstr (GtrMsg * msg);
 
-     void gtranslator_msg_set_msgstr (GtrMsg * msg,
+     void gtr_msg_set_msgstr (GtrMsg * msg,
 				      const gchar * msgstr);
 
-     const gchar *gtranslator_msg_get_msgstr_plural (GtrMsg * msg,
+     const gchar *gtr_msg_get_msgstr_plural (GtrMsg * msg,
 						     gint index);
 
-     void gtranslator_msg_set_msgstr_plural (GtrMsg * msg,
+     void gtr_msg_set_msgstr_plural (GtrMsg * msg,
 					     gint index,
 					     const gchar * msgstr);
 
-     const gchar *gtranslator_msg_get_comment (GtrMsg * msg);
+     const gchar *gtr_msg_get_comment (GtrMsg * msg);
 
-     void gtranslator_msg_set_comment (GtrMsg * msg,
+     void gtr_msg_set_comment (GtrMsg * msg,
 				       const gchar * comment);
 
-     gint gtranslator_msg_get_po_position (GtrMsg * msg);
+     gint gtr_msg_get_po_position (GtrMsg * msg);
 
-     void gtranslator_msg_set_po_position (GtrMsg * msg,
+     void gtr_msg_set_po_position (GtrMsg * msg,
 					   gint po_position);
 
-     const gchar *gtranslator_msg_get_extracted_comments
+     const gchar *gtr_msg_get_extracted_comments
        (GtrMsg * msg);
 
-     const gchar *gtranslator_msg_get_filename (GtrMsg * msg, gint i);
+     const gchar *gtr_msg_get_filename (GtrMsg * msg, gint i);
 
-     gint *gtranslator_msg_get_file_line (GtrMsg * msg, gint i);
+     gint *gtr_msg_get_file_line (GtrMsg * msg, gint i);
 
-     const gchar *gtranslator_msg_get_msgctxt (GtrMsg * msg);
+     const gchar *gtr_msg_get_msgctxt (GtrMsg * msg);
 
-     const gchar *gtranslator_msg_get_format (GtrMsg * msg);
+     const gchar *gtr_msg_get_format (GtrMsg * msg);
 
-     gchar *gtranslator_msg_check (GtrMsg * msg);
+     gchar *gtr_msg_check (GtrMsg * msg);
 
 G_END_DECLS
 #endif /* __MSG_H__ */

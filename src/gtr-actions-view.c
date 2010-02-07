@@ -18,27 +18,27 @@
 #include "gtr-actions.h"
 
 void
-gtranslator_actions_view_context (GtkAction * action,
+gtr_actions_view_context (GtkAction * action,
 				  GtrWindow * window)
 {
   GtrTab *tab;
   GtkWidget *context;
 
-  tab = gtranslator_window_get_active_tab (window);
-  context = GTK_WIDGET (gtranslator_tab_get_context_panel (tab));
+  tab = gtr_window_get_active_tab (window);
+  context = GTK_WIDGET (gtr_tab_get_context_panel (tab));
 
-  gtranslator_tab_show_lateral_panel_widget (tab, context);
+  gtr_tab_show_lateral_panel_widget (tab, context);
 }
 
 void
-gtranslator_actions_view_translation_memory (GtkAction * action,
+gtr_actions_view_translation_memory (GtkAction * action,
 					     GtrWindow * window)
 {
   GtrTab *tab;
   GtkWidget *tm_ui;
 
-  tab = gtranslator_window_get_active_tab (window);
-  tm_ui = GTK_WIDGET (gtranslator_tab_get_translation_memory_ui (tab));
+  tab = gtr_window_get_active_tab (window);
+  tm_ui = GTK_WIDGET (gtr_tab_get_translation_memory_ui (tab));
 
-  gtranslator_tab_show_lateral_panel_widget (tab, tm_ui);
+  gtr_tab_show_lateral_panel_widget (tab, tm_ui);
 }

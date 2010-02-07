@@ -1,6 +1,6 @@
 /*
  * plugins-engine.h
- * This file is part of gtranslator
+ * This file is part of gtr
  *
  * Copyright (C) 2002-2005 - Paolo Maggi 
  *
@@ -21,8 +21,8 @@
  */
 
 /*
- * Modified by the gtranslator Team, 2002-2005. See the AUTHORS file for a 
- * list of people on the gtranslator Team.  
+ * Modified by the gtr Team, 2002-2005. See the AUTHORS file for a 
+ * list of people on the gtr Team.  
  * See the ChangeLog files for a list of changes. 
  *
  * $Id: plugins-engine.h 6264 2008-05-05 11:00:38Z sfre $
@@ -37,7 +37,7 @@
 #include "gtr-plugin.h"
 
 G_BEGIN_DECLS
-#define GTR_TYPE_PLUGINS_ENGINE              (gtranslator_plugins_engine_get_type ())
+#define GTR_TYPE_PLUGINS_ENGINE              (gtr_plugins_engine_get_type ())
 #define GTR_PLUGINS_ENGINE(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GTR_TYPE_PLUGINS_ENGINE, GtrPluginsEngine))
 #define GTR_PLUGINS_ENGINE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GTR_TYPE_PLUGINS_ENGINE, GtrPluginsEngineClass))
 #define GTR_IS_PLUGINS_ENGINE(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GTR_TYPE_PLUGINS_ENGINE))
@@ -67,36 +67,36 @@ struct _GtrPluginsEngineClass
 };
 
 GType
-gtranslator_plugins_engine_get_type (void)
+gtr_plugins_engine_get_type (void)
   G_GNUC_CONST;
 
-     GtrPluginsEngine *gtranslator_plugins_engine_get_default (void);
+     GtrPluginsEngine *gtr_plugins_engine_get_default (void);
 
-     void gtranslator_plugins_engine_garbage_collect (GtrPluginsEngine
+     void gtr_plugins_engine_garbage_collect (GtrPluginsEngine
 						      * engine);
 
      const GList
-       *gtranslator_plugins_engine_get_plugin_list (GtrPluginsEngine *
+       *gtr_plugins_engine_get_plugin_list (GtrPluginsEngine *
 						    engine);
 
      GtrPluginInfo
-       *gtranslator_plugins_engine_get_plugin_info (GtrPluginsEngine *
+       *gtr_plugins_engine_get_plugin_info (GtrPluginsEngine *
 						    engine,
 						    const gchar * name);
 
      gboolean
-       gtranslator_plugins_engine_activate_plugin (GtrPluginsEngine *
+       gtr_plugins_engine_activate_plugin (GtrPluginsEngine *
 						   engine,
 						   GtrPluginInfo *
 						   info);
      gboolean
-       gtranslator_plugins_engine_deactivate_plugin (GtrPluginsEngine
+       gtr_plugins_engine_deactivate_plugin (GtrPluginsEngine
 						     * engine,
 						     GtrPluginInfo *
 						     info);
 
      void
-       gtranslator_plugins_engine_configure_plugin (GtrPluginsEngine *
+       gtr_plugins_engine_configure_plugin (GtrPluginsEngine *
 						    engine,
 						    GtrPluginInfo *
 						    info, GtkWindow * parent);
@@ -106,7 +106,7 @@ gtranslator_plugins_engine_get_type (void)
  * has been created
  */
      void
-       gtranslator_plugins_engine_update_plugins_ui (GtrPluginsEngine
+       gtr_plugins_engine_update_plugins_ui (GtrPluginsEngine
 						     * engine,
 						     GtrWindow *
 						     window,

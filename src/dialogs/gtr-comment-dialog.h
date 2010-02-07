@@ -30,7 +30,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_COMMENT_DIALOG		(gtranslator_comment_dialog_get_type ())
+#define GTR_TYPE_COMMENT_DIALOG		(gtr_comment_dialog_get_type ())
 #define GTR_COMMENT_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_COMMENT_DIALOG, GtrCommentDialog))
 #define GTR_COMMENT_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_COMMENT_DIALOG, GtrCommentDialogClass))
 #define GTR_IS_COMMENT_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_COMMENT_DIALOG))
@@ -67,12 +67,12 @@ struct _GtrCommentDialogClass
  * Public methods
  */
 GType
-gtranslator_comment_dialog_get_type (void)
+gtr_comment_dialog_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_comment_dialog_register_type (GTypeModule * module);
+     GType gtr_comment_dialog_register_type (GTypeModule * module);
 
-     void gtranslator_show_comment_dialog (GtrWindow * window);
+     void gtr_show_comment_dialog (GtrWindow * window);
 
 G_END_DECLS
 #endif /* __COMMENT_DIALOG_H__ */

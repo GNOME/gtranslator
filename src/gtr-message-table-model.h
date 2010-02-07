@@ -30,7 +30,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_MESSAGE_TABLE_MODEL		(gtranslator_message_table_model_get_type ())
+#define GTR_TYPE_MESSAGE_TABLE_MODEL		(gtr_message_table_model_get_type ())
 #define GTR_MESSAGE_TABLE_MODEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGE_TABLE_MODEL, GtrMessageTableModel))
 #define GTR_MESSAGE_TABLE_MODEL_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_MESSAGE_TABLE_MODEL, GtrMessageTableModelClass))
 #define GTR_IS_MESSAGE_TABLE_MODEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_MESSAGE_TABLE_MODEL))
@@ -83,21 +83,21 @@ enum _GtrMessageTableModelColumn
  * Public methods
  */
 GType
-gtranslator_message_table_model_get_type (void)
+gtr_message_table_model_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_message_table_model_register_type (GTypeModule *
+     GType gtr_message_table_model_register_type (GTypeModule *
 							  module);
 
-     GtrMessageTableModel *gtranslator_message_table_model_new (void);
+     GtrMessageTableModel *gtr_message_table_model_new (void);
 
-     void gtranslator_message_table_model_append (GtrMessageTableModel
+     void gtr_message_table_model_append (GtrMessageTableModel
 						  * model,
 						  GtrMsg * msg,
 						  GtkTreeIter * iter);
 
      void
-       gtranslator_message_table_model_update_row
+       gtr_message_table_model_update_row
        (GtrMessageTableModel * model, GtkTreePath * path);
 
 G_END_DECLS

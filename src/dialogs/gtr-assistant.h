@@ -29,7 +29,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_ASSISTANT		(gtranslator_assistant_get_type ())
+#define GTR_TYPE_ASSISTANT		(gtr_assistant_get_type ())
 #define GTR_ASSISTANT(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_ASSISTANT, GtrAssistant))
 #define GTR_ASSISTANT_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_ASSISTANT, GtrAssistantClass))
 #define GTR_IS_ASSISTANT(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_ASSISTANT))
@@ -65,12 +65,12 @@ struct _GtrAssistantClass
  * Public methods
  */
 GType
-gtranslator_assistant_get_type (void)
+gtr_assistant_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_assistant_register_type (GTypeModule * module);
+     GType gtr_assistant_register_type (GTypeModule * module);
 
-     void gtranslator_show_assistant (GtrWindow * window);
+     void gtr_show_assistant (GtrWindow * window);
 
 G_END_DECLS
 #endif /* __ASSISTANT_H__ */

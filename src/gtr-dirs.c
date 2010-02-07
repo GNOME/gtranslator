@@ -1,5 +1,5 @@
 /*
- * gtranslator-dirs.c
+ * gtr-dirs.c
  * This file is part of gtranslator
  *
  * Copyright (C) 2008 Ignacio Casal Quinteiro
@@ -27,7 +27,7 @@
 #include "gtr-dirs.h"
 
 gchar *
-gtranslator_dirs_get_user_config_dir (void)
+gtr_dirs_get_user_config_dir (void)
 {
 	gchar *config_dir = NULL;
 
@@ -39,7 +39,7 @@ gtranslator_dirs_get_user_config_dir (void)
 }
 
 gchar *
-gtranslator_dirs_get_user_cache_dir (void)
+gtr_dirs_get_user_cache_dir (void)
 {
 	const gchar *cache_dir;
 
@@ -51,12 +51,12 @@ gtranslator_dirs_get_user_cache_dir (void)
 }
 
 gchar *
-gtranslator_dirs_get_user_plugins_dir (void)
+gtr_dirs_get_user_plugins_dir (void)
 {
 	gchar *config_dir;
 	gchar *plugin_dir;
 
-	config_dir = gtranslator_dirs_get_user_config_dir ();
+	config_dir = gtr_dirs_get_user_config_dir ();
 
 	plugin_dir = g_build_filename (config_dir,
 				       "plugins",
@@ -67,12 +67,12 @@ gtranslator_dirs_get_user_plugins_dir (void)
 }
 
 gchar *
-gtranslator_dirs_get_user_accels_file (void)
+gtr_dirs_get_user_accels_file (void)
 {
 	gchar *accels = NULL;
 	gchar *config_dir = NULL;
 
-	config_dir = gtranslator_dirs_get_user_config_dir ();
+	config_dir = gtr_dirs_get_user_config_dir ();
 	accels = g_build_filename (config_dir,
 				   "accels",
 				   "gtranslator",
@@ -84,7 +84,7 @@ gtranslator_dirs_get_user_accels_file (void)
 }
 
 gchar *
-gtranslator_dirs_get_gtranslator_data_dir (void)
+gtr_dirs_get_gtr_data_dir (void)
 {
 	gchar *data_dir;
 
@@ -109,7 +109,7 @@ gtranslator_dirs_get_gtranslator_data_dir (void)
 }
 
 gchar *
-gtranslator_dirs_get_gtranslator_locale_dir (void)
+gtr_dirs_get_gtr_locale_dir (void)
 {
 	gchar *locale_dir;
 
@@ -134,7 +134,7 @@ gtranslator_dirs_get_gtranslator_locale_dir (void)
 }
 
 gchar *
-gtranslator_dirs_get_gtranslator_lib_dir (void)
+gtr_dirs_get_gtr_lib_dir (void)
 {
 	gchar *lib_dir;
 
@@ -159,12 +159,12 @@ gtranslator_dirs_get_gtranslator_lib_dir (void)
 }
 
 gchar *
-gtranslator_dirs_get_gtranslator_plugins_dir (void)
+gtr_dirs_get_gtr_plugins_dir (void)
 {
 	gchar *lib_dir;
 	gchar *plugin_dir;
 	
-	lib_dir = gtranslator_dirs_get_gtranslator_lib_dir ();
+	lib_dir = gtr_dirs_get_gtr_lib_dir ();
 	
 	plugin_dir = g_build_filename (lib_dir,
 				       "plugins",
@@ -175,14 +175,14 @@ gtranslator_dirs_get_gtranslator_plugins_dir (void)
 }
 
 gchar *
-gtranslator_dirs_get_ui_file (const gchar *file)
+gtr_dirs_get_ui_file (const gchar *file)
 {
 	gchar *datadir;
 	gchar *ui_file;
 
 	g_return_val_if_fail (file != NULL, NULL);
 	
-	datadir = gtranslator_dirs_get_gtranslator_data_dir ();
+	datadir = gtr_dirs_get_gtr_data_dir ();
 	ui_file = g_build_filename (datadir,
 				    "ui",
 				    file,
@@ -193,12 +193,12 @@ gtranslator_dirs_get_ui_file (const gchar *file)
 }
 
 gchar *
-gtranslator_dirs_get_pixmaps_dir (void)
+gtr_dirs_get_pixmaps_dir (void)
 {
 	gchar *datadir;
 	gchar *pixmapsdir;
 	
-	datadir = gtranslator_dirs_get_gtranslator_data_dir ();
+	datadir = gtr_dirs_get_gtr_data_dir ();
 	pixmapsdir = g_build_filename (datadir,
 				       "pixmaps",
 				       NULL);

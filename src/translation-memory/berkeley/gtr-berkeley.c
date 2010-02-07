@@ -42,14 +42,14 @@
 						 GtrBerkeleyPrivate))
 
 static void
-gtranslator_translation_memory_iface_init (GtrTranslationMemoryIface *
+gtr_translation_memory_iface_init (GtrTranslationMemoryIface *
 					   iface);
 
 G_DEFINE_TYPE_WITH_CODE (GtrBerkeley,
-			 gtranslator_berkeley,
+			 gtr_berkeley,
 			 G_TYPE_OBJECT,
 			 G_IMPLEMENT_INTERFACE (GTR_TYPE_TRANSLATION_MEMORY,
-						gtranslator_translation_memory_iface_init))
+						gtr_translation_memory_iface_init))
      struct _GtrBerkeleyPrivate
      {
        GtrDbOrig *orig;
@@ -62,7 +62,7 @@ G_DEFINE_TYPE_WITH_CODE (GtrBerkeley,
      };
 
      static gboolean
-       gtranslator_berkeley_store (GtrTranslationMemory * tm,
+       gtr_berkeley_store (GtrTranslationMemory * tm,
 				   const gchar * original,
 				   const gchar * translation)
 {
@@ -72,24 +72,24 @@ G_DEFINE_TYPE_WITH_CODE (GtrBerkeley,
 
   g_return_val_if_fail (GTR_IS_BERKELEY (ber), FALSE);
 
-  key = gtranslator_db_orig_read (ber->priv->orig, original);
+  key = gtr_db_orig_read (ber->priv->orig, original);
   if (key == 0)
     {
-      key = gtranslator_db_trans_write_string (ber->priv->trans,
+      key = gtr_db_trans_write_string (ber->priv->trans,
 					       translation, 0);
 
       ok = (key != 0)
-	&& gtranslator_db_orig_write (ber->priv->orig, original, key);
+	&& gtr_db_orig_write (ber->priv->orig, original, key);
       if (ok)
 	{
 	  gchar **words = NULL;
 	  gsize i;
 
-	  words = gtranslator_utils_split_string_in_words (original);
+	  words = gtr_utils_split_string_in_words (original);
 	  gsize sz = g_strv_length (words);
 
 	  for (i = 0; i < sz; i++)
-	    gtranslator_db_words_append (ber->priv->words, words[i], sz, key);
+	    gtr_db_words_append (ber->priv->words, words[i], sz, key);
 	  g_strfreev (words);
 	}
       return ok;
@@ -99,7 +99,7 @@ G_DEFINE_TYPE_WITH_CODE (GtrBerkeley,
       gboolean found = FALSE;
       gint i = 0;
       gchar *translation_collate;
-      GPtrArray *t = gtranslator_db_trans_read (ber->priv->trans,
+      GPtrArray *t = gtr_db_trans_read (ber->priv->trans,
 						key);
       if (!t)
 	return FALSE;
@@ -136,7 +136,7 @@ G_DEFINE_TYPE_WITH_CODE (GtrBerkeley,
 
 	  translations = (gchar **) g_ptr_array_free (t, FALSE);
 
-	  db_recno_t key2 = gtranslator_db_trans_write (ber->priv->trans,
+	  db_recno_t key2 = gtr_db_trans_write (ber->priv->trans,
 							translations,
 							key);
 	  g_strfreev (translations);
@@ -168,8 +168,8 @@ union_of_db_keys (GtrBerkeley * ber,
     {
       if (mask[i])
 	{
-	  gsize count = gtranslator_db_keys_get_count (keys[i]);
-	  db_recno_t *list = gtranslator_db_keys_get_list (keys[i]);
+	  gsize count = gtr_db_keys_get_count (keys[i]);
+	  db_recno_t *list = gtr_db_keys_get_list (keys[i]);
 
 	  counters[i] = count;
 	  heads[i] = list;
@@ -190,8 +190,8 @@ union_of_db_keys (GtrBerkeley * ber,
       return NULL;
     }
 
-  result = gtranslator_db_keys_new_with_size (minSize);
-  res_list = gtranslator_db_keys_get_list (result);
+  result = gtr_db_keys_new_with_size (minSize);
+  res_list = gtr_db_keys_get_list (result);
   gsize res_count = 0;
 
   // Do union of 'cnt' sorted arrays. Algorithm: treat arrays as lists,
@@ -267,7 +267,7 @@ union_of_db_keys (GtrBerkeley * ber,
       result = NULL;
     }
   else
-    gtranslator_db_keys_set_count (result, res_count);
+    gtr_db_keys_set_count (result, res_count);
 
   return result;
 }
@@ -326,7 +326,7 @@ look_fuzzy (GtrBerkeley * ber,
   for (missing = 0, slot = 0, i = 0; i < cnt; i++)
     {
       keys[i] = NULL;		// so that unused entries are NULL
-      keys[slot] = gtranslator_db_words_read (ber->priv->words,
+      keys[slot] = gtr_db_words_read (ber->priv->words,
 					      words[i], cnt + delta);
       if (keys[slot])
 	slot++;
@@ -350,10 +350,10 @@ look_fuzzy (GtrBerkeley * ber,
 	{
 	  GPtrArray *array;
 
-	  db_recno_t *list = gtranslator_db_keys_get_list (result);
-	  for (i = 0; i < gtranslator_db_keys_get_count (result); i++)
+	  db_recno_t *list = gtr_db_keys_get_list (result);
+	  for (i = 0; i < gtr_db_keys_get_count (result); i++)
 	    {
-	      array = gtranslator_db_trans_read (ber->priv->trans, list[i]);
+	      array = gtr_db_trans_read (ber->priv->trans, list[i]);
 	      if (array)
 		{
 		  gint j = 0;
@@ -404,10 +404,10 @@ look_fuzzy (GtrBerkeley * ber,
 	    {
 	      GPtrArray *array;
 
-	      db_recno_t *list = gtranslator_db_keys_get_list (result);
-	      for (i = 0; i < gtranslator_db_keys_get_count (result); i++)
+	      db_recno_t *list = gtr_db_keys_get_list (result);
+	      for (i = 0; i < gtr_db_keys_get_count (result); i++)
 		{
-		  array = gtranslator_db_trans_read (ber->priv->trans,
+		  array = gtr_db_trans_read (ber->priv->trans,
 						     list[i]);
 		  if (array)
 		    {
@@ -464,7 +464,7 @@ insert_match_sorted (gconstpointer a, gconstpointer b)
 }
 
 static GList *
-gtranslator_berkeley_lookup (GtrTranslationMemory * tm,
+gtr_berkeley_lookup (GtrTranslationMemory * tm,
 			     const gchar * phrase)
 {
   GPtrArray *array = NULL;
@@ -482,12 +482,12 @@ gtranslator_berkeley_lookup (GtrTranslationMemory * tm,
   hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
   // First of all, try exact match:
-  db_recno_t key = gtranslator_db_orig_read (ber->priv->orig, phrase);
+  db_recno_t key = gtr_db_orig_read (ber->priv->orig, phrase);
   if (key != 0)
     {
       gint i = 0;
 
-      array = gtranslator_db_trans_read (ber->priv->trans, key);
+      array = gtr_db_trans_read (ber->priv->trans, key);
 
       if (array != NULL)
 	{
@@ -509,7 +509,7 @@ gtranslator_berkeley_lookup (GtrTranslationMemory * tm,
   // (MAX_OMITS is max permitted number of unmatched words,
   // MAX_DELTA is max difference in sentences lengths).
   // Start with best matches first, continue to worse ones.
-  words = gtranslator_utils_split_string_in_words (phrase);
+  words = gtr_utils_split_string_in_words (phrase);
   for (omits = 0;
        omits <= ber->priv->max_omits
        && g_hash_table_size (hash) < ber->priv->max_items; omits++)
@@ -540,7 +540,7 @@ list:g_hash_table_iter_init (&iter, hash);
 }
 
 static void
-gtranslator_berkeley_set_max_omits (GtrTranslationMemory * tm,
+gtr_berkeley_set_max_omits (GtrTranslationMemory * tm,
 				    gsize omits)
 {
   GtrBerkeley *ber = GTR_BERKELEY (tm);
@@ -549,7 +549,7 @@ gtranslator_berkeley_set_max_omits (GtrTranslationMemory * tm,
 }
 
 static void
-gtranslator_berkeley_set_max_delta (GtrTranslationMemory * tm,
+gtr_berkeley_set_max_delta (GtrTranslationMemory * tm,
 				    gsize delta)
 {
   GtrBerkeley *ber = GTR_BERKELEY (tm);
@@ -558,7 +558,7 @@ gtranslator_berkeley_set_max_delta (GtrTranslationMemory * tm,
 }
 
 static void
-gtranslator_berkeley_set_max_items (GtrTranslationMemory * tm,
+gtr_berkeley_set_max_items (GtrTranslationMemory * tm,
 				    gint items)
 {
   GtrBerkeley *ber = GTR_BERKELEY (tm);
@@ -567,31 +567,31 @@ gtranslator_berkeley_set_max_items (GtrTranslationMemory * tm,
 }
 
 static void
-gtranslator_translation_memory_iface_init (GtrTranslationMemoryIface *
+gtr_translation_memory_iface_init (GtrTranslationMemoryIface *
 					   iface)
 {
-  iface->store = gtranslator_berkeley_store;
-  iface->lookup = gtranslator_berkeley_lookup;
-  iface->set_max_omits = gtranslator_berkeley_set_max_omits;
-  iface->set_max_delta = gtranslator_berkeley_set_max_delta;
-  iface->set_max_items = gtranslator_berkeley_set_max_items;
+  iface->store = gtr_berkeley_store;
+  iface->lookup = gtr_berkeley_lookup;
+  iface->set_max_omits = gtr_berkeley_set_max_omits;
+  iface->set_max_delta = gtr_berkeley_set_max_delta;
+  iface->set_max_items = gtr_berkeley_set_max_items;
 }
 
 static void
-gtranslator_berkeley_init (GtrBerkeley * pf)
+gtr_berkeley_init (GtrBerkeley * pf)
 {
   pf->priv = GTR_BERKELEY_GET_PRIVATE (pf);
 
-  pf->priv->orig = gtranslator_db_orig_new ();
-  pf->priv->trans = gtranslator_db_trans_new ();
-  pf->priv->words = gtranslator_db_words_new ();
+  pf->priv->orig = gtr_db_orig_new ();
+  pf->priv->trans = gtr_db_trans_new ();
+  pf->priv->words = gtr_db_words_new ();
   pf->priv->max_omits = 0;
   pf->priv->max_delta = 0;
   pf->priv->max_items = 0;
 }
 
 static void
-gtranslator_berkeley_finalize (GObject * object)
+gtr_berkeley_finalize (GObject * object)
 {
   GtrBerkeley *ber = GTR_BERKELEY (object);
 
@@ -599,28 +599,28 @@ gtranslator_berkeley_finalize (GObject * object)
   g_object_unref (ber->priv->trans);
   g_object_unref (ber->priv->words);
 
-  G_OBJECT_CLASS (gtranslator_berkeley_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_berkeley_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_berkeley_class_init (GtrBerkeleyClass * klass)
+gtr_berkeley_class_init (GtrBerkeleyClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrBerkeleyPrivate));
 
-  object_class->finalize = gtranslator_berkeley_finalize;
+  object_class->finalize = gtr_berkeley_finalize;
 }
 
 /**
- * gtranslator_berkeley_new:
+ * gtr_berkeley_new:
  * 
  * Creates a new #GtrBerkeley object.
  *
  * Returns: a new #GtrBerkeley object
  */
 GtrBerkeley *
-gtranslator_berkeley_new ()
+gtr_berkeley_new ()
 {
   GtrBerkeley *berkeley;
 

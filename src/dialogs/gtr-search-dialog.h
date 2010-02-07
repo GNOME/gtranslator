@@ -1,6 +1,6 @@
 /*
  * search-dialog.h
- * This file is part of gtranslator
+ * This file is part of gtranslator based on gedit
  *
  * Copyright (C) 2005 Paolo Maggi
  *
@@ -30,7 +30,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_SEARCH_DIALOG              (gtranslator_search_dialog_get_type())
+#define GTR_TYPE_SEARCH_DIALOG              (gtr_search_dialog_get_type())
 #define GTR_SEARCH_DIALOG(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GTR_TYPE_SEARCH_DIALOG, GtrSearchDialog))
 #define GTR_SEARCH_DIALOG_CONST(obj)        (G_TYPE_CHECK_INSTANCE_CAST((obj), GTR_TYPE_SEARCH_DIALOG, GtrSearchDialog const))
 #define GTR_SEARCH_DIALOG_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GTR_TYPE_SEARCH_DIALOG, GtrSearchDialogClass))
@@ -77,92 +77,92 @@ enum
  * Public methods
  */
 GType
-gtranslator_search_dialog_get_type (void)
+gtr_search_dialog_get_type (void)
   G_GNUC_CONST;
 
-     GtkWidget *gtranslator_search_dialog_new (GtkWindow * parent,
+     GtkWidget *gtr_search_dialog_new (GtkWindow * parent,
 					       gboolean show_replace);
 
-     void gtranslator_search_dialog_present_with_time (GtrSearchDialog
+     void gtr_search_dialog_present_with_time (GtrSearchDialog
 						       * dialog,
 						       guint32 timestamp);
 
      gboolean
-       gtranslator_search_dialog_get_show_replace (GtrSearchDialog *
+       gtr_search_dialog_get_show_replace (GtrSearchDialog *
 						   dialog);
 
-     void gtranslator_search_dialog_set_show_replace (GtrSearchDialog
+     void gtr_search_dialog_set_show_replace (GtrSearchDialog
 						      * dialog,
 						      gboolean show_replace);
 
-     void gtranslator_search_dialog_set_search_text (GtrSearchDialog *
+     void gtr_search_dialog_set_search_text (GtrSearchDialog *
 						     dialog,
 						     const gchar * text);
 
      const gchar
-       *gtranslator_search_dialog_get_search_text (GtrSearchDialog *
+       *gtr_search_dialog_get_search_text (GtrSearchDialog *
 						   dialog);
 
-     void gtranslator_search_dialog_set_replace_text (GtrSearchDialog
+     void gtr_search_dialog_set_replace_text (GtrSearchDialog
 						      * dialog,
 						      const gchar * text);
 
      const gchar
-       *gtranslator_search_dialog_get_replace_text (GtrSearchDialog *
+       *gtr_search_dialog_get_replace_text (GtrSearchDialog *
 						    dialog);
 
-     void gtranslator_search_dialog_set_original_text (GtrSearchDialog
+     void gtr_search_dialog_set_original_text (GtrSearchDialog
 						       * dialog,
 						       gboolean match_case);
 
      gboolean
-       gtranslator_search_dialog_get_original_text (GtrSearchDialog *
+       gtr_search_dialog_get_original_text (GtrSearchDialog *
 						    dialog);
 
      void
-       gtranslator_search_dialog_set_translated_text (GtrSearchDialog
+       gtr_search_dialog_set_translated_text (GtrSearchDialog
 						      * dialog,
 						      gboolean match_case);
 
      gboolean
-       gtranslator_search_dialog_get_translated_text (GtrSearchDialog
+       gtr_search_dialog_get_translated_text (GtrSearchDialog
 						      * dialog);
 
-     void gtranslator_search_dialog_set_fuzzy (GtrSearchDialog *
+     void gtr_search_dialog_set_fuzzy (GtrSearchDialog *
 					       dialog, gboolean match_case);
 
-     gboolean gtranslator_search_dialog_get_fuzzy (GtrSearchDialog *
+     gboolean gtr_search_dialog_get_fuzzy (GtrSearchDialog *
 						   dialog);
 
-     void gtranslator_search_dialog_set_match_case (GtrSearchDialog *
+     void gtr_search_dialog_set_match_case (GtrSearchDialog *
 						    dialog,
 						    gboolean match_case);
 
      gboolean
-       gtranslator_search_dialog_get_match_case (GtrSearchDialog *
+       gtr_search_dialog_get_match_case (GtrSearchDialog *
 						 dialog);
 
-     void gtranslator_search_dialog_set_entire_word (GtrSearchDialog *
+     void gtr_search_dialog_set_entire_word (GtrSearchDialog *
 						     dialog,
 						     gboolean entire_word);
 
      gboolean
-       gtranslator_search_dialog_get_entire_word (GtrSearchDialog *
+       gtr_search_dialog_get_entire_word (GtrSearchDialog *
 						  dialog);
 
-     void gtranslator_search_dialog_set_backwards (GtrSearchDialog *
+     void gtr_search_dialog_set_backwards (GtrSearchDialog *
 						   dialog,
 						   gboolean backwards);
 
-     gboolean gtranslator_search_dialog_get_backwards (GtrSearchDialog
+     gboolean gtr_search_dialog_get_backwards (GtrSearchDialog
 						       * dialog);
 
-     void gtranslator_search_dialog_set_wrap_around (GtrSearchDialog *
+     void gtr_search_dialog_set_wrap_around (GtrSearchDialog *
 						     dialog,
 						     gboolean wrap_around);
 
      gboolean
-       gtranslator_search_dialog_get_wrap_around (GtrSearchDialog *
+       gtr_search_dialog_get_wrap_around (GtrSearchDialog *
 						  dialog);
 
 G_END_DECLS

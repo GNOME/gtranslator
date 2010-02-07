@@ -36,40 +36,40 @@
 						 GTR_TYPE_DB_KEYS,     \
 						 GtrDbKeysPrivate))
 
-G_DEFINE_TYPE (GtrDbKeys, gtranslator_db_keys, G_TYPE_OBJECT)
+G_DEFINE_TYPE (GtrDbKeys, gtr_db_keys, G_TYPE_OBJECT)
      struct _GtrDbKeysPrivate
      {
        db_recno_t *list;
        gsize count;
      };
 
-     static void gtranslator_db_keys_init (GtrDbKeys * db_keys)
+     static void gtr_db_keys_init (GtrDbKeys * db_keys)
 {
   db_keys->priv = GTR_DB_KEYS_GET_PRIVATE (db_keys);
 }
 
 static void
-gtranslator_db_keys_finalize (GObject * object)
+gtr_db_keys_finalize (GObject * object)
 {
   GtrDbKeys *keys = GTR_DB_KEYS (object);
 
   g_free (keys->priv->list);
 
-  G_OBJECT_CLASS (gtranslator_db_keys_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_db_keys_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_db_keys_class_init (GtrDbKeysClass * klass)
+gtr_db_keys_class_init (GtrDbKeysClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrDbKeysPrivate));
 
-  object_class->finalize = gtranslator_db_keys_finalize;
+  object_class->finalize = gtr_db_keys_finalize;
 }
 
 /**
- * gtranslator_db_keys_new:
+ * gtr_db_keys_new:
  * @data: the db_recno_t with the list of keys stored into it
  *
  * Creates a new #GtrDbKeys object.
@@ -77,7 +77,7 @@ gtranslator_db_keys_class_init (GtrDbKeysClass * klass)
  * Returns: a new #GtrDbKeys object
  */
 GtrDbKeys *
-gtranslator_db_keys_new (DBT * data)
+gtr_db_keys_new (DBT * data)
 {
   GtrDbKeys *db_keys;
 
@@ -91,7 +91,7 @@ gtranslator_db_keys_new (DBT * data)
 }
 
 /**
- * gtranslator_db_keys_new_with_size:
+ * gtr_db_keys_new_with_size:
  * @cnt: the number of element for the list
  *
  * Creates a new #GtrDbKeys object with #cnt elements.
@@ -99,7 +99,7 @@ gtranslator_db_keys_new (DBT * data)
  * Returns: a new #GtrDbKeys object
  */
 GtrDbKeys *
-gtranslator_db_keys_new_with_size (gsize cnt)
+gtr_db_keys_new_with_size (gsize cnt)
 {
   GtrDbKeys *db_keys;
 
@@ -112,7 +112,7 @@ gtranslator_db_keys_new_with_size (gsize cnt)
 }
 
 /**
- * gtranslator_db_keys_get_list:
+ * gtr_db_keys_get_list:
  * @db_keys: a #GtrDbKeys
  * 
  * Gets the list of keys.
@@ -120,7 +120,7 @@ gtranslator_db_keys_new_with_size (gsize cnt)
  * Returns: the list of keys
  */
 db_recno_t *
-gtranslator_db_keys_get_list (GtrDbKeys * db_keys)
+gtr_db_keys_get_list (GtrDbKeys * db_keys)
 {
   g_return_val_if_fail (GTR_IS_DB_KEYS (db_keys), NULL);
 
@@ -128,7 +128,7 @@ gtranslator_db_keys_get_list (GtrDbKeys * db_keys)
 }
 
 /**
- * gtranslator_db_keys_get_count:
+ * gtr_db_keys_get_count:
  * @db_keys: a #GtrDbKeys
  *
  * Gets the number of elements in the list.
@@ -136,7 +136,7 @@ gtranslator_db_keys_get_list (GtrDbKeys * db_keys)
  * Returns: the number of elements in the list
  */
 gsize
-gtranslator_db_keys_get_count (GtrDbKeys * db_keys)
+gtr_db_keys_get_count (GtrDbKeys * db_keys)
 {
   g_return_val_if_fail (GTR_IS_DB_KEYS (db_keys), 0);
 
@@ -144,7 +144,7 @@ gtranslator_db_keys_get_count (GtrDbKeys * db_keys)
 }
 
 void
-gtranslator_db_keys_set_count (GtrDbKeys * db_keys, gsize count)
+gtr_db_keys_set_count (GtrDbKeys * db_keys, gsize count)
 {
   g_return_if_fail (GTR_IS_DB_KEYS (db_keys));
 

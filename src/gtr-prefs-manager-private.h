@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gtranslator-prefs-manager-private.h
+ * gtr-prefs-manager-private.h
  * This file is part of gtranslator based in gedit
  *
  * Copyright (C) 2002  Paolo Maggi 
@@ -35,6 +35,6 @@ struct _GtrPrefsManager
   GConfClient *gconf_client;
 };
 
-extern GtrPrefsManager *gtranslator_prefs_manager;
+extern GtrPrefsManager *gtr_prefs_manager;
 
 #endif /* __GTR_PREFS_MANAGER_PRIVATE_H__ */

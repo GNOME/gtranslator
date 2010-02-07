@@ -45,7 +45,7 @@
 						 GtrAssistantPrivate))
 
 
-G_DEFINE_TYPE (GtrAssistant, gtranslator_assistant,
+G_DEFINE_TYPE (GtrAssistant, gtr_assistant,
 	       GTK_TYPE_ASSISTANT)
 
 struct _GtrAssistantPrivate
@@ -102,25 +102,25 @@ add_to_database (gpointer data_pointer)
       GError *error = NULL;
       GtrPo *po;
 
-      po = gtranslator_po_new ();
+      po = gtr_po_new ();
       location = (GFile *) l->data;
 
-      gtranslator_po_parse (po, location, &error);
+      gtr_po_parse (po, location, &error);
       if (error)
 	return TRUE;
 
-      msg_list = gtranslator_po_get_messages (po);
+      msg_list = gtr_po_get_messages (po);
 
       for (l2 = msg_list; l2; l2 = g_list_next (l2))
 	{
 	  GtrMsg *msg;
 
 	  msg = GTR_MSG (l2->data);
-	  if (gtranslator_msg_is_translated (msg))
-	    gtranslator_translation_memory_store (data->tm,
-						  gtranslator_msg_get_msgid
+	  if (gtr_msg_is_translated (msg))
+	    gtr_translation_memory_store (data->tm,
+						  gtr_msg_get_msgid
 						  (msg),
-						  gtranslator_msg_get_msgstr
+						  gtr_msg_get_msgstr
 						  (msg));
 	}
 
@@ -197,56 +197,56 @@ on_assistant_apply (GtkAssistant * assistant)
   GList *profiles_list;
   gulong close_signal_id;
 
-  profile = gtranslator_profile_new ();
+  profile = gtr_profile_new ();
 
-  gtranslator_profile_set_name (profile,
+  gtr_profile_set_name (profile,
 				gtk_entry_get_text (GTK_ENTRY
 						    (as->priv->
 						     profile_name)));
 
-  gtranslator_profile_set_author_name (profile,
+  gtr_profile_set_author_name (profile,
 				       gtk_entry_get_text (GTK_ENTRY
 							   (as->priv->name)));
 
-  gtranslator_profile_set_author_email (profile,
+  gtr_profile_set_author_email (profile,
 					gtk_entry_get_text (GTK_ENTRY
 							    (as->priv->
 							     email)));
 
-  gtranslator_profile_set_language_name (profile,
+  gtr_profile_set_language_name (profile,
 					 gtk_entry_get_text (GTK_ENTRY
 							     (as->priv->
 							      language)));
 
-  gtranslator_profile_set_language_code (profile,
+  gtr_profile_set_language_code (profile,
 					 gtk_entry_get_text (GTK_ENTRY
 							     (as->priv->
 							      lang_code)));
 
-  gtranslator_profile_set_group_email (profile,
+  gtr_profile_set_group_email (profile,
 				       gtk_entry_get_text (GTK_ENTRY
 							   (as->priv->
 							    team_email)));
 
-  gtranslator_profile_set_charset (profile,
+  gtr_profile_set_charset (profile,
 				   gtk_entry_get_text (GTK_ENTRY
 						       (as->priv->charset)));
 
-  gtranslator_profile_set_encoding (profile,
+  gtr_profile_set_encoding (profile,
 				    gtk_entry_get_text (GTK_ENTRY
 							(as->priv->
 							 trans_enc)));
 
-  gtranslator_profile_set_plurals (profile,
+  gtr_profile_set_plurals (profile,
 				   gtk_entry_get_text (GTK_ENTRY
 						       (as->priv->
 							plural_form)));
 
-  gtranslator_application_set_active_profile (GTR_APP, profile);
+  gtr_application_set_active_profile (GTR_APP, profile);
 
-  profiles_list = gtranslator_application_get_profiles (GTR_APP);
+  profiles_list = gtr_application_get_profiles (GTR_APP);
 
-  gtranslator_application_set_profiles (GTR_APP,
+  gtr_application_set_profiles (GTR_APP,
 					g_list_append (profiles_list,
 						       profile));
 
@@ -267,10 +267,10 @@ on_assistant_apply (GtkAssistant * assistant)
 
   po_name = gtk_entry_get_text (GTK_ENTRY (as->priv->po_name));
 
-  gtranslator_utils_scan_dir (dir, &data->list, po_name);
+  gtr_utils_scan_dir (dir, &data->list, po_name);
 
   data->tm =
-    GTR_TRANSLATION_MEMORY (gtranslator_application_get_translation_memory
+    GTR_TRANSLATION_MEMORY (gtr_application_get_translation_memory
 			    (GTR_APP));
   data->progress = GTK_PROGRESS_BAR (as->priv->add_db_progressbar);
   data->parent = GTK_WINDOW (as);
@@ -796,7 +796,7 @@ create_finish_page (GtrAssistant * as)
 }
 
 static void
-gtranslator_assistant_init (GtrAssistant * as)
+gtr_assistant_init (GtrAssistant * as)
 {
   as->priv = GTR_ASSISTANT_GET_PRIVATE (as);
 
@@ -812,20 +812,20 @@ gtranslator_assistant_init (GtrAssistant * as)
 }
 
 static void
-gtranslator_assistant_finalize (GObject * object)
+gtr_assistant_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_assistant_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_assistant_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_assistant_class_init (GtrAssistantClass * klass)
+gtr_assistant_class_init (GtrAssistantClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkAssistantClass *assistant_class = GTK_ASSISTANT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrAssistantPrivate));
 
-  object_class->finalize = gtranslator_assistant_finalize;
+  object_class->finalize = gtr_assistant_finalize;
   assistant_class->prepare = on_assistant_prepare;
   assistant_class->apply = on_assistant_apply;
   assistant_class->cancel = on_assistant_cancel;
@@ -833,7 +833,7 @@ gtranslator_assistant_class_init (GtrAssistantClass * klass)
 }
 
 void
-gtranslator_show_assistant (GtrWindow * window)
+gtr_show_assistant (GtrWindow * window)
 {
   static GtrAssistant *assist = NULL;
 

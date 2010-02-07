@@ -37,19 +37,19 @@
 static GObjectClass *parent_class;
 
 static guint
-gtranslator_message_table_model_get_flags (GtkTreeModel * self)
+gtr_message_table_model_get_flags (GtkTreeModel * self)
 {
   return 0;
 }
 
 static gint
-gtranslator_message_table_model_get_n_columns (GtkTreeModel * self)
+gtr_message_table_model_get_n_columns (GtkTreeModel * self)
 {
   return GTR_MESSAGE_TABLE_MODEL_N_COLUMNS;
 }
 
 static GType
-gtranslator_message_table_model_get_column_type (GtkTreeModel * self,
+gtr_message_table_model_get_column_type (GtkTreeModel * self,
 						 gint column)
 {
   GType retval;
@@ -78,7 +78,7 @@ gtranslator_message_table_model_get_column_type (GtkTreeModel * self,
 }
 
 static gboolean
-gtranslator_message_table_model_get_iter (GtkTreeModel * self,
+gtr_message_table_model_get_iter (GtkTreeModel * self,
 					  GtkTreeIter * iter,
 					  GtkTreePath * path)
 {
@@ -104,7 +104,7 @@ gtranslator_message_table_model_get_iter (GtkTreeModel * self,
 }
 
 static GtkTreePath *
-gtranslator_message_table_model_get_path (GtkTreeModel * tree_model,
+gtr_message_table_model_get_path (GtkTreeModel * tree_model,
 					  GtkTreeIter * iter)
 {
   GList *list;
@@ -131,7 +131,7 @@ gtranslator_message_table_model_get_path (GtkTreeModel * tree_model,
 }
 
 static void
-gtranslator_message_table_model_get_value (GtkTreeModel * self,
+gtr_message_table_model_get_value (GtkTreeModel * self,
 					   GtkTreeIter * iter,
 					   gint column, GValue * value)
 {
@@ -152,7 +152,7 @@ gtranslator_message_table_model_get_value (GtkTreeModel * self,
     case GTR_MESSAGE_TABLE_MODEL_ICON_COLUMN:
       g_value_init (value, G_TYPE_STRING);
 
-      status = gtranslator_msg_get_status (msg);
+      status = gtr_msg_get_status (msg);
 
       if (status == GTR_MSG_STATUS_UNTRANSLATED)
 	text = TABLE_UNTRANSLATED_ICON;
@@ -174,7 +174,7 @@ gtranslator_message_table_model_get_value (GtkTreeModel * self,
     case GTR_MESSAGE_TABLE_MODEL_ORIGINAL_COLUMN:
       g_value_init (value, G_TYPE_STRING);
 
-      text = g_strdup (gtranslator_msg_get_msgid (msg));
+      text = g_strdup (gtr_msg_get_msgid (msg));
       g_value_set_string (value, text);
       g_free (text);
       break;
@@ -182,7 +182,7 @@ gtranslator_message_table_model_get_value (GtkTreeModel * self,
     case GTR_MESSAGE_TABLE_MODEL_TRANSLATION_COLUMN:
       g_value_init (value, G_TYPE_STRING);
 
-      text = g_strdup (gtranslator_msg_get_msgstr (msg));
+      text = g_strdup (gtr_msg_get_msgstr (msg));
       g_value_set_string (value, text);
       g_free (text);
       break;
@@ -190,7 +190,7 @@ gtranslator_message_table_model_get_value (GtkTreeModel * self,
     case GTR_MESSAGE_TABLE_MODEL_STATUS_COLUMN:
       g_value_init (value, G_TYPE_INT);
 
-      status = gtranslator_msg_get_status (msg);
+      status = gtr_msg_get_status (msg);
       g_value_set_int (value, status);
       break;
 
@@ -207,7 +207,7 @@ gtranslator_message_table_model_get_value (GtkTreeModel * self,
 }
 
 static gboolean
-gtranslator_message_table_model_iter_next (GtkTreeModel * tree_model,
+gtr_message_table_model_iter_next (GtkTreeModel * tree_model,
 					   GtkTreeIter * iter)
 {
   g_return_val_if_fail (iter->stamp ==
@@ -219,14 +219,14 @@ gtranslator_message_table_model_iter_next (GtkTreeModel * tree_model,
 }
 
 static gboolean
-gtranslator_message_table_model_iter_has_child (GtkTreeModel * tree_model,
+gtr_message_table_model_iter_has_child (GtkTreeModel * tree_model,
 						GtkTreeIter * iter)
 {
   return FALSE;
 }
 
 static gint
-gtranslator_message_table_model_iter_n_children (GtkTreeModel * tree_model,
+gtr_message_table_model_iter_n_children (GtkTreeModel * tree_model,
 						 GtkTreeIter * iter)
 {
   /* it should ask for the root node, because we're a list */
@@ -237,7 +237,7 @@ gtranslator_message_table_model_iter_n_children (GtkTreeModel * tree_model,
 }
 
 static gboolean
-gtranslator_message_table_model_iter_nth_child (GtkTreeModel * tree_model,
+gtr_message_table_model_iter_nth_child (GtkTreeModel * tree_model,
 						GtkTreeIter * iter,
 						GtkTreeIter * parent, gint n)
 {
@@ -259,7 +259,7 @@ gtranslator_message_table_model_iter_nth_child (GtkTreeModel * tree_model,
 }
 
 static gboolean
-gtranslator_message_table_model_iter_children (GtkTreeModel * tree_model,
+gtr_message_table_model_iter_children (GtkTreeModel * tree_model,
 					       GtkTreeIter * iter,
 					       GtkTreeIter * parent)
 {
@@ -280,41 +280,41 @@ gtranslator_message_table_model_iter_children (GtkTreeModel * tree_model,
 }
 
 static void
-gtranslator_message_table_model_tree_model_init (GtkTreeModelIface * iface)
+gtr_message_table_model_tree_model_init (GtkTreeModelIface * iface)
 {
-  iface->get_flags = gtranslator_message_table_model_get_flags;
-  iface->get_n_columns = gtranslator_message_table_model_get_n_columns;
-  iface->get_column_type = gtranslator_message_table_model_get_column_type;
-  iface->get_iter = gtranslator_message_table_model_get_iter;
-  iface->get_path = gtranslator_message_table_model_get_path;
-  iface->get_value = gtranslator_message_table_model_get_value;
-  iface->iter_next = gtranslator_message_table_model_iter_next;
-  iface->iter_has_child = gtranslator_message_table_model_iter_has_child;
-  iface->iter_n_children = gtranslator_message_table_model_iter_n_children;
-  iface->iter_nth_child = gtranslator_message_table_model_iter_nth_child;
-  iface->iter_children = gtranslator_message_table_model_iter_children;
+  iface->get_flags = gtr_message_table_model_get_flags;
+  iface->get_n_columns = gtr_message_table_model_get_n_columns;
+  iface->get_column_type = gtr_message_table_model_get_column_type;
+  iface->get_iter = gtr_message_table_model_get_iter;
+  iface->get_path = gtr_message_table_model_get_path;
+  iface->get_value = gtr_message_table_model_get_value;
+  iface->iter_next = gtr_message_table_model_iter_next;
+  iface->iter_has_child = gtr_message_table_model_iter_has_child;
+  iface->iter_n_children = gtr_message_table_model_iter_n_children;
+  iface->iter_nth_child = gtr_message_table_model_iter_nth_child;
+  iface->iter_children = gtr_message_table_model_iter_children;
 }
 
 static void
-gtranslator_message_table_model_init (GtrMessageTableModel * model)
+gtr_message_table_model_init (GtrMessageTableModel * model)
 {
   model->length = 0;
   model->stamp = g_random_int ();
 }
 
 static void
-gtranslator_message_table_model_finalize (GObject * object)
+gtr_message_table_model_finalize (GObject * object)
 {
   parent_class->finalize (object);
 }
 
 static void
-gtranslator_message_table_model_class_init (GtrMessageTableModelClass
+gtr_message_table_model_class_init (GtrMessageTableModelClass
 					    * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->finalize = gtranslator_message_table_model_finalize;
+  object_class->finalize = gtr_message_table_model_finalize;
 
   parent_class = g_type_class_peek_parent (klass);
 }
@@ -322,12 +322,12 @@ gtranslator_message_table_model_class_init (GtrMessageTableModelClass
 /***************************** Public funcs ***********************************/
 
 /**
- * gtranslator_message_table_model_new:
+ * gtr_message_table_model_new:
  * 
  * Return value: a new #GtrMessageTableModel object
  **/
 GtrMessageTableModel *
-gtranslator_message_table_model_new (void)
+gtr_message_table_model_new (void)
 {
   GtrMessageTableModel *model;
 
@@ -337,11 +337,10 @@ gtranslator_message_table_model_new (void)
 }
 
 void
-gtranslator_message_table_model_append (GtrMessageTableModel * model,
+gtr_message_table_model_append (GtrMessageTableModel * model,
 					GtrMsg * msg,
 					GtkTreeIter * iter)
 {
-  GList *list;
   GtkTreePath *path;
 
   //The sort stuff can be improved using a GPtrArray or gsecuence instead of a GList
@@ -359,19 +358,19 @@ gtranslator_message_table_model_append (GtrMessageTableModel * model,
 }
 
 void
-gtranslator_message_table_model_update_row (GtrMessageTableModel *
+gtr_message_table_model_update_row (GtrMessageTableModel *
 					    model, GtkTreePath * path)
 {
   GtkTreeIter iter;
 
-  gtranslator_message_table_model_get_iter (GTK_TREE_MODEL (model),
+  gtr_message_table_model_get_iter (GTK_TREE_MODEL (model),
 					    &iter, path);
 
   gtk_tree_model_row_changed (GTK_TREE_MODEL (model), path, &iter);
 }
 
 GType
-gtranslator_message_table_model_get_type (void)
+gtr_message_table_model_get_type (void)
 {
   static GType object_type = 0;
 
@@ -381,17 +380,17 @@ gtranslator_message_table_model_get_type (void)
 	sizeof (GtrMessageTableModelClass),
 	NULL,			/* base_init */
 	NULL,			/* base_finalize */
-	(GClassInitFunc) gtranslator_message_table_model_class_init,
+	(GClassInitFunc) gtr_message_table_model_class_init,
 	NULL,			/* class_finalize */
 	NULL,			/* class_data */
 	sizeof (GtrMessageTableModel),
 	0,			/* n_preallocs */
-	(GInstanceInitFunc) gtranslator_message_table_model_init,
+	(GInstanceInitFunc) gtr_message_table_model_init,
 	NULL
       };
 
       static const GInterfaceInfo tree_model_info = {
-	(GInterfaceInitFunc) gtranslator_message_table_model_tree_model_init,
+	(GInterfaceInitFunc) gtr_message_table_model_tree_model_init,
 	NULL,
 	NULL
       };

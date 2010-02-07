@@ -39,7 +39,7 @@ enum
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_PROFILE_DIALOG		(gtranslator_profile_dialog_get_type ())
+#define GTR_TYPE_PROFILE_DIALOG		(gtr_profile_dialog_get_type ())
 #define GTR_PROFILE_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_PROFILE_DIALOG, GtrProfileDialog))
 #define GTR_PROFILE_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_PROFILE_DIALOG, GtrProfileDialogClass))
 #define GTR_IS_PROFILE_DIALOG(o)	(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_PROFILE_DIALOG))
@@ -77,12 +77,12 @@ struct _GtrProfileDialogClass
  * Public methods
  */
 GType
-gtranslator_profile_dialog_get_type (void)
+gtr_profile_dialog_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_profile_dialog_register_type (GTypeModule * module);
+     GType gtr_profile_dialog_register_type (GTypeModule * module);
 
-     void gtranslator_show_profile_dialog (GtrPreferencesDialog *
+     void gtr_show_profile_dialog (GtrPreferencesDialog *
 					   dialog,
 					   GtrProfile * profile,
 					   gint action);

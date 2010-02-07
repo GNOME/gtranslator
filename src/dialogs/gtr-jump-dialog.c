@@ -38,7 +38,7 @@
 						 	GtrJumpDialogPrivate))
 
 
-G_DEFINE_TYPE (GtrJumpDialog, gtranslator_jump_dialog,
+G_DEFINE_TYPE (GtrJumpDialog, gtr_jump_dialog,
 	       GTK_TYPE_DIALOG)
 
 struct _GtrJumpDialogPrivate
@@ -62,8 +62,8 @@ dialog_response_handler (GtkDialog * dlg, gint res_id)
       number =
 	gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
 					  (dialog->priv->jump));
-      tab = gtranslator_window_get_active_tab (dialog->priv->window);
-      gtranslator_tab_go_to_number (tab, number - 1);
+      tab = gtr_window_get_active_tab (dialog->priv->window);
+      gtr_tab_go_to_number (tab, number - 1);
       gtk_widget_destroy (GTK_WIDGET (dlg));
       break;
 
@@ -73,7 +73,7 @@ dialog_response_handler (GtkDialog * dlg, gint res_id)
 }
 
 static void
-gtranslator_jump_dialog_init (GtrJumpDialog * dlg)
+gtr_jump_dialog_init (GtrJumpDialog * dlg)
 {
   gboolean ret;
   GtkWidget *error_widget;
@@ -110,8 +110,8 @@ gtranslator_jump_dialog_init (GtrJumpDialog * dlg)
 		    "response", G_CALLBACK (dialog_response_handler), NULL);
 
   /*Glade */
-  path = gtranslator_dirs_get_ui_file ("gtr-jump-dialog.ui");
-  ret = gtranslator_utils_get_ui_objects (path,
+  path = gtr_dirs_get_ui_file ("gtr-jump-dialog.ui");
+  ret = gtr_utils_get_ui_objects (path,
 					  root_objects,
 					  &error_widget,
 					  "main_box", &dlg->priv->main_box,
@@ -134,23 +134,23 @@ gtranslator_jump_dialog_init (GtrJumpDialog * dlg)
 }
 
 static void
-gtranslator_jump_dialog_finalize (GObject * object)
+gtr_jump_dialog_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_jump_dialog_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_jump_dialog_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_jump_dialog_class_init (GtrJumpDialogClass * klass)
+gtr_jump_dialog_class_init (GtrJumpDialogClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrJumpDialogPrivate));
 
-  object_class->finalize = gtranslator_jump_dialog_finalize;
+  object_class->finalize = gtr_jump_dialog_finalize;
 }
 
 void
-gtranslator_show_jump_dialog (GtrWindow * window)
+gtr_show_jump_dialog (GtrWindow * window)
 {
   static GtrJumpDialog *dlg = NULL;
 
@@ -170,9 +170,9 @@ gtranslator_show_jump_dialog (GtrWindow * window)
       dlg->priv->window = window;
 
       /* Set the maximum number of the spin button */
-      tab = gtranslator_window_get_active_tab (window);
-      po = gtranslator_tab_get_po (tab);
-      messages = gtranslator_po_get_messages_count (po);
+      tab = gtr_window_get_active_tab (window);
+      po = gtr_tab_get_po (tab);
+      messages = gtr_po_get_messages_count (po);
       gtk_spin_button_set_range (GTK_SPIN_BUTTON (dlg->priv->jump),
 				 1.0, (gdouble) messages);
 

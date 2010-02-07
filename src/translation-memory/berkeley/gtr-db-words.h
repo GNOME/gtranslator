@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_DB_WORDS		(gtranslator_db_words_get_type ())
+#define GTR_TYPE_DB_WORDS		(gtr_db_words_get_type ())
 #define GTR_DB_WORDS(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_DB_WORDS, GtrDbWords))
 #define GTR_DB_WORDS_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_DB_WORDS, GtrDbWordsClass))
 #define GTR_IS_DB_WORDS(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_DB_WORDS))
@@ -64,19 +64,19 @@ struct _GtrDbWordsClass
  * Public methods
  */
 GType
-gtranslator_db_words_get_type (void)
+gtr_db_words_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_db_words_register_type (GTypeModule * module);
+     GType gtr_db_words_register_type (GTypeModule * module);
 
-     GtrDbWords *gtranslator_db_words_new (void);
+     GtrDbWords *gtr_db_words_new (void);
 
-     gboolean gtranslator_db_words_append (GtrDbWords * db_words,
+     gboolean gtr_db_words_append (GtrDbWords * db_words,
 					   const gchar * word,
 					   guint sentence_size,
 					   db_recno_t value);
 
-     GtrDbKeys *gtranslator_db_words_read (GtrDbWords *
+     GtrDbKeys *gtr_db_words_read (GtrDbWords *
 						   db_words,
 						   const gchar * word,
 						   guint sentence_size);

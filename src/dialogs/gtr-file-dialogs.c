@@ -29,7 +29,7 @@
  * File chooser dialog
  */
 GtkWidget *
-gtranslator_file_chooser_new (GtkWindow * parent,
+gtr_file_chooser_new (GtkWindow * parent,
 			      FileselMode mode,
 			      const gchar * title, const gchar * dir)
 {

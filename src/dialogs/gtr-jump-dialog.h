@@ -29,7 +29,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_JUMP_DIALOG		(gtranslator_jump_dialog_get_type ())
+#define GTR_TYPE_JUMP_DIALOG		(gtr_jump_dialog_get_type ())
 #define GTR_JUMP_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_JUMP_DIALOG, GtrJumpDialog))
 #define GTR_JUMP_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_JUMP_DIALOG, GtrJumpDialogClass))
 #define GTR_IS_JUMP_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_JUMP_DIALOG))
@@ -65,12 +65,12 @@ struct _GtrJumpDialogClass
  * Public methods
  */
 GType
-gtranslator_jump_dialog_get_type (void)
+gtr_jump_dialog_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_jump_dialog_register_type (GTypeModule * module);
+     GType gtr_jump_dialog_register_type (GTypeModule * module);
 
-     void gtranslator_show_jump_dialog (GtrWindow * window);
+     void gtr_show_jump_dialog (GtrWindow * window);
 
 G_END_DECLS
 #endif /* __JUMP_DIALOG_H__ */

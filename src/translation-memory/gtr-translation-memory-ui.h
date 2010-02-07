@@ -29,7 +29,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GTR_TYPE_TRANSLATION_MEMORY_UI	        (gtranslator_translation_memory_ui_get_type ())
+#define GTR_TYPE_TRANSLATION_MEMORY_UI	        (gtr_translation_memory_ui_get_type ())
 #define GTR_TRANSLATION_MEMORY_UI(o)	        (G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_TRANSLATION_MEMORY_UI, GtrTranslationMemoryUi))
 #define GTR_TRANSLATION_MEMORY_UI_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_TRANSLATION_MEMORY_UI, GtrTranslationMemoryUiClass))
 #define GTR_IS_TRANSLATION_MEMORY_UI(o)	        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_TRANSLATION_MEMORY_UI))
@@ -67,13 +67,13 @@ struct _GtrTranslationMemoryUiClass
  * Public methods
  */
 GType
-gtranslator_translation_memory_ui_get_type (void)
+gtr_translation_memory_ui_get_type (void)
   G_GNUC_CONST;
 
-     GType gtranslator_translation_memory_ui_register_type (GTypeModule *
+     GType gtr_translation_memory_ui_register_type (GTypeModule *
 							    module);
 
-     GtkWidget *gtranslator_translation_memory_ui_new (GtkWidget * tab);
+     GtkWidget *gtr_translation_memory_ui_new (GtkWidget * tab);
 
 G_END_DECLS
 #endif /* __TRANSLATION_MEMORY_UI_H__ */

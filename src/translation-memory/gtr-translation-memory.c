@@ -18,7 +18,7 @@
 #include "gtr-translation-memory.h"
 
 /**
- * gtranslator_translation_memory_store:
+ * gtr_translation_memory_store:
  * @obj: a #GtrTranslationMemory
  * @original: the untranslated text
  * @translation: the @original text translated
@@ -26,7 +26,7 @@
  * Stores the @original and @translation strings in the database.
  */
 gboolean
-gtranslator_translation_memory_store (GtrTranslationMemory * obj,
+gtr_translation_memory_store (GtrTranslationMemory * obj,
 				      const gchar * original,
 				      const gchar * translation)
 {
@@ -37,7 +37,7 @@ gtranslator_translation_memory_store (GtrTranslationMemory * obj,
 
 /* Default implementation */
 static gboolean
-gtranslator_translation_memory_store_default (GtrTranslationMemory *
+gtr_translation_memory_store_default (GtrTranslationMemory *
 					      obj, const gchar * original,
 					      const gchar * translation)
 {
@@ -45,7 +45,7 @@ gtranslator_translation_memory_store_default (GtrTranslationMemory *
 }
 
 /**
- * gtranslator_translation_memory_lookup:
+ * gtr_translation_memory_lookup:
  * @obj: a #GtrTranslationMemory
  * @phrase: the unstranslated text to search for translations.
  *
@@ -54,7 +54,7 @@ gtranslator_translation_memory_store_default (GtrTranslationMemory *
  * Returns: a list of #GtrTranslationMemoryMatch.
  */
 GList *
-gtranslator_translation_memory_lookup (GtrTranslationMemory * obj,
+gtr_translation_memory_lookup (GtrTranslationMemory * obj,
 				       const gchar * phrase)
 {
   g_return_val_if_fail (GTR_IS_TRANSLATION_MEMORY (obj), 0);
@@ -63,20 +63,20 @@ gtranslator_translation_memory_lookup (GtrTranslationMemory * obj,
 
 /* Default implementation */
 static GList *
-gtranslator_translation_memory_lookup_default (GtrTranslationMemory *
+gtr_translation_memory_lookup_default (GtrTranslationMemory *
 					       obj, const gchar * phrase)
 {
   g_return_val_if_reached (0);
 }
 
 /**
- * gtranslator_translation_memory_set_max_omits:
+ * gtr_translation_memory_set_max_omits:
  * @omits: the number of omits
  *
  * Sets the number of omits used in the search.
  */
 void
-gtranslator_translation_memory_set_max_omits (GtrTranslationMemory *
+gtr_translation_memory_set_max_omits (GtrTranslationMemory *
 					      obj, gsize omits)
 {
   g_return_if_fail (GTR_IS_TRANSLATION_MEMORY (obj));
@@ -85,20 +85,20 @@ gtranslator_translation_memory_set_max_omits (GtrTranslationMemory *
 
 /* Default implementation */
 static void
-gtranslator_translation_memory_set_max_omits_default
+gtr_translation_memory_set_max_omits_default
   (GtrTranslationMemory * obj, gsize omits)
 {
   g_return_if_reached ();
 }
 
 /**
- * gtranslator_translation_memory_set_max_delta:
+ * gtr_translation_memory_set_max_delta:
  * @delta: the difference in the length of strings
  *
  * Sets the difference in the length of string for searching in the database.
  */
 void
-gtranslator_translation_memory_set_max_delta (GtrTranslationMemory *
+gtr_translation_memory_set_max_delta (GtrTranslationMemory *
 					      obj, gsize delta)
 {
   g_return_if_fail (GTR_IS_TRANSLATION_MEMORY (obj));
@@ -107,20 +107,20 @@ gtranslator_translation_memory_set_max_delta (GtrTranslationMemory *
 
 /* Default implementation */
 static void
-gtranslator_translation_memory_set_max_delta_default
+gtr_translation_memory_set_max_delta_default
   (GtrTranslationMemory * obj, gsize omits)
 {
   g_return_if_reached ();
 }
 
 /**
- * gtranslator_translation_memory_set_max_items:
+ * gtr_translation_memory_set_max_items:
  * @items: the max item to return in lookup
  *
- * Sets the number of item to return in gtranslator_translation_memory_lookup().
+ * Sets the number of item to return in gtr_translation_memory_lookup().
  */
 void
-gtranslator_translation_memory_set_max_items (GtrTranslationMemory *
+gtr_translation_memory_set_max_items (GtrTranslationMemory *
 					      obj, gint items)
 {
   g_return_if_fail (GTR_IS_TRANSLATION_MEMORY (obj));
@@ -129,23 +129,23 @@ gtranslator_translation_memory_set_max_items (GtrTranslationMemory *
 
 /* Default implementation */
 static void
-gtranslator_translation_memory_set_max_items_default
+gtr_translation_memory_set_max_items_default
   (GtrTranslationMemory * obj, gint items)
 {
   g_return_if_reached ();
 }
 
 static void
-gtranslator_translation_memory_base_init (GtrTranslationMemoryIface *
+gtr_translation_memory_base_init (GtrTranslationMemoryIface *
 					  klass)
 {
   static gboolean initialized = FALSE;
 
-  klass->store = gtranslator_translation_memory_store_default;
-  klass->lookup = gtranslator_translation_memory_lookup_default;
-  klass->set_max_omits = gtranslator_translation_memory_set_max_omits_default;
-  klass->set_max_delta = gtranslator_translation_memory_set_max_delta_default;
-  klass->set_max_items = gtranslator_translation_memory_set_max_items_default;
+  klass->store = gtr_translation_memory_store_default;
+  klass->lookup = gtr_translation_memory_lookup_default;
+  klass->set_max_omits = gtr_translation_memory_set_max_omits_default;
+  klass->set_max_delta = gtr_translation_memory_set_max_delta_default;
+  klass->set_max_items = gtr_translation_memory_set_max_items_default;
 
   if (!initialized)
     {
@@ -155,14 +155,14 @@ gtranslator_translation_memory_base_init (GtrTranslationMemoryIface *
 }
 
 GType
-gtranslator_translation_memory_get_type (void)
+gtr_translation_memory_get_type (void)
 {
   static GType type = 0;
   if (!type)
     {
       static const GTypeInfo info = {
 	sizeof (GtrTranslationMemoryIface),
-	(GBaseInitFunc) gtranslator_translation_memory_base_init,
+	(GBaseInitFunc) gtr_translation_memory_base_init,
 	NULL,
 	NULL,
 	NULL,

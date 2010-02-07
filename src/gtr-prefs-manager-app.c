@@ -43,25 +43,25 @@
 #include "gtr-view.h"
 #include "gtr-window.h"
 
-static void gtranslator_prefs_manager_editor_font_changed (GConfClient *
+static void gtr_prefs_manager_editor_font_changed (GConfClient *
 							   client,
 							   guint cnxn_id,
 							   GConfEntry * entry,
 							   gpointer
 							   user_data);
 
-static void gtranslator_prefs_manager_spellcheck_changed (GConfClient *
+static void gtr_prefs_manager_spellcheck_changed (GConfClient *
 							  client,
 							  guint cnxn_id,
 							  GConfEntry * entry,
 							  gpointer user_data);
 
-static void gtranslator_prefs_manager_highlight_changed (GConfClient * client,
+static void gtr_prefs_manager_highlight_changed (GConfClient * client,
 							 guint cnxn_id,
 							 GConfEntry * entry,
 							 gpointer user_data);
 
-static void gtranslator_prefs_manager_visible_whitespace_changed (GConfClient
+static void gtr_prefs_manager_visible_whitespace_changed (GConfClient
 								  * client,
 								  guint
 								  cnxn_id,
@@ -70,17 +70,17 @@ static void gtranslator_prefs_manager_visible_whitespace_changed (GConfClient
 								  gpointer
 								  user_data);
 
-static void gtranslator_prefs_manager_gdl_style_changed (GConfClient * client,
+static void gtr_prefs_manager_gdl_style_changed (GConfClient * client,
 							 guint cnxn_id,
 							 GConfEntry * entry,
 							 gpointer user_data);
 
-static void gtranslator_prefs_manager_autosave_changed (GConfClient * client,
+static void gtr_prefs_manager_autosave_changed (GConfClient * client,
 							guint cnxn_id,
 							GConfEntry * entry,
 							gpointer user_data);
 
-static void gtranslator_prefs_manager_scheme_color_changed (GConfClient *
+static void gtr_prefs_manager_scheme_color_changed (GConfClient *
 							    client,
 							    guint cnxn_id,
 							    GConfEntry *
@@ -112,7 +112,7 @@ static gint content_pane_pos = -1;
 static gint comment_pane_pos = -1;
 
 static GKeyFile *
-get_gtranslator_state_file ()
+get_gtr_state_file ()
 {
   static GKeyFile *state_file = NULL;
 
@@ -124,7 +124,7 @@ get_gtranslator_state_file ()
 
       state_file = g_key_file_new ();
 
-      config_folder = gtranslator_dirs_get_user_config_dir ();
+      config_folder = gtr_dirs_get_user_config_dir ();
       path = g_build_filename (config_folder, GTR_STATE_FILE_NAME, NULL);
       g_free (config_folder);
 
@@ -146,14 +146,14 @@ get_gtranslator_state_file ()
 }
 
 static void
-gtranslator_state_get_int (const gchar * group,
+gtr_state_get_int (const gchar * group,
 			   const gchar * key, gint defval, gint * result)
 {
   GKeyFile *state_file;
   gint res;
   GError *err = NULL;
 
-  state_file = get_gtranslator_state_file ();
+  state_file = get_gtr_state_file ();
   res = g_key_file_get_integer (state_file, group, key, &err);
 
   if (err != NULL)
@@ -178,16 +178,16 @@ gtranslator_state_get_int (const gchar * group,
 }
 
 static void
-gtranslator_state_set_int (const gchar * group, const gchar * key, gint value)
+gtr_state_set_int (const gchar * group, const gchar * key, gint value)
 {
   GKeyFile *state_file;
 
-  state_file = get_gtranslator_state_file ();
+  state_file = get_gtr_state_file ();
   g_key_file_set_integer (state_file, group, key, value);
 }
 
 static gboolean
-gtranslator_state_file_sync ()
+gtr_state_file_sync ()
 {
   GKeyFile *state_file;
   gchar *config_folder;
@@ -197,10 +197,10 @@ gtranslator_state_file_sync ()
   GError *err = NULL;
   gboolean ret = FALSE;
 
-  state_file = get_gtranslator_state_file ();
+  state_file = get_gtr_state_file ();
   g_return_val_if_fail (state_file != NULL, FALSE);
 
-  config_folder = gtranslator_dirs_get_user_config_dir ();
+  config_folder = gtr_dirs_get_user_config_dir ();
   path = g_build_filename (config_folder, GTR_STATE_FILE_NAME, NULL);
   g_free (config_folder);
 
@@ -215,7 +215,7 @@ gtranslator_state_file_sync ()
   if ((content != NULL) &&
       (!g_file_set_contents (path, content, length, &err)))
     {
-      g_warning ("Could not write gtranslator state file: %s\n",
+      g_warning ("Could not write gtr state file: %s\n",
 		 err->message);
       goto out;
     }
@@ -234,11 +234,11 @@ out:
 
 /* Window state */
 gint
-gtranslator_prefs_manager_get_window_state (void)
+gtr_prefs_manager_get_window_state (void)
 {
   if (window_state == -1)
     {
-      gtranslator_state_get_int (GTR_STATE_WINDOW_GROUP,
+      gtr_state_get_int (GTR_STATE_WINDOW_GROUP,
 				 GTR_STATE_WINDOW_STATE,
 				 GTR_STATE_DEFAULT_WINDOW_STATE,
 				 &window_state);
@@ -248,31 +248,31 @@ gtranslator_prefs_manager_get_window_state (void)
 }
 
 void
-gtranslator_prefs_manager_set_window_state (gint ws)
+gtr_prefs_manager_set_window_state (gint ws)
 {
   g_return_if_fail (ws > -1);
 
   window_state = ws;
 
-  gtranslator_state_set_int (GTR_STATE_WINDOW_GROUP,
+  gtr_state_set_int (GTR_STATE_WINDOW_GROUP,
 			     GTR_STATE_WINDOW_STATE, ws);
 }
 
 gboolean
-gtranslator_prefs_manager_window_state_can_set (void)
+gtr_prefs_manager_window_state_can_set (void)
 {
   return TRUE;
 }
 
 /* Window size */
 void
-gtranslator_prefs_manager_get_window_size (gint * width, gint * height)
+gtr_prefs_manager_get_window_size (gint * width, gint * height)
 {
   g_return_if_fail (width != NULL && height != NULL);
 
   if (window_width == -1)
     {
-      gtranslator_state_get_int (GTR_STATE_WINDOW_GROUP,
+      gtr_state_get_int (GTR_STATE_WINDOW_GROUP,
 				 GTR_STATE_WINDOW_WIDTH,
 				 GTR_STATE_DEFAULT_WINDOW_WIDTH,
 				 &window_width);
@@ -280,7 +280,7 @@ gtranslator_prefs_manager_get_window_size (gint * width, gint * height)
 
   if (window_height == -1)
     {
-      gtranslator_state_get_int (GTR_STATE_WINDOW_GROUP,
+      gtr_state_get_int (GTR_STATE_WINDOW_GROUP,
 				 GTR_STATE_WINDOW_HEIGHT,
 				 GTR_STATE_DEFAULT_WINDOW_HEIGHT,
 				 &window_height);
@@ -291,7 +291,7 @@ gtranslator_prefs_manager_get_window_size (gint * width, gint * height)
 }
 
 void
-gtranslator_prefs_manager_get_default_window_size (gint * width,
+gtr_prefs_manager_get_default_window_size (gint * width,
 						   gint * height)
 {
   g_return_if_fail (width != NULL && height != NULL);
@@ -301,32 +301,32 @@ gtranslator_prefs_manager_get_default_window_size (gint * width,
 }
 
 void
-gtranslator_prefs_manager_set_window_size (gint width, gint height)
+gtr_prefs_manager_set_window_size (gint width, gint height)
 {
   g_return_if_fail (width > -1 && height > -1);
 
   window_width = width;
   window_height = height;
 
-  gtranslator_state_set_int (GTR_STATE_WINDOW_GROUP,
+  gtr_state_set_int (GTR_STATE_WINDOW_GROUP,
 			     GTR_STATE_WINDOW_WIDTH, width);
-  gtranslator_state_set_int (GTR_STATE_WINDOW_GROUP,
+  gtr_state_set_int (GTR_STATE_WINDOW_GROUP,
 			     GTR_STATE_WINDOW_HEIGHT, height);
 }
 
 gboolean
-gtranslator_prefs_manager_window_size_can_set (void)
+gtr_prefs_manager_window_size_can_set (void)
 {
   return TRUE;
 }
 
 /* Content pane */
 gint
-gtranslator_prefs_manager_get_content_pane_pos (void)
+gtr_prefs_manager_get_content_pane_pos (void)
 {
   if (content_pane_pos == -1)
     {
-      gtranslator_state_get_int (GTR_STATE_WINDOW_GROUP,
+      gtr_state_get_int (GTR_STATE_WINDOW_GROUP,
 				 GTR_STATE_CONTENT_PANE_POS,
 				 GTR_STATE_DEFAULT_CONTENT_PANE_POS,
 				 &content_pane_pos);
@@ -336,13 +336,13 @@ gtranslator_prefs_manager_get_content_pane_pos (void)
 }
 
 gint
-gtranslator_prefs_manager_get_default_content_pane_pos (void)
+gtr_prefs_manager_get_default_content_pane_pos (void)
 {
   return GTR_STATE_DEFAULT_CONTENT_PANE_POS;
 }
 
 void
-gtranslator_prefs_manager_set_content_pane_pos (gint new_pane_pos)
+gtr_prefs_manager_set_content_pane_pos (gint new_pane_pos)
 {
   g_return_if_fail (new_pane_pos > -1);
 
@@ -350,17 +350,17 @@ gtranslator_prefs_manager_set_content_pane_pos (gint new_pane_pos)
     return;
 
   content_pane_pos = new_pane_pos;
-  gtranslator_state_set_int (GTR_STATE_WINDOW_GROUP,
+  gtr_state_set_int (GTR_STATE_WINDOW_GROUP,
 			     GTR_STATE_CONTENT_PANE_POS, new_pane_pos);
 }
 
 /* Comment pane */
 gint
-gtranslator_prefs_manager_get_comment_pane_pos (void)
+gtr_prefs_manager_get_comment_pane_pos (void)
 {
   if (comment_pane_pos == -1)
     {
-      gtranslator_state_get_int (GTR_STATE_WINDOW_GROUP,
+      gtr_state_get_int (GTR_STATE_WINDOW_GROUP,
 				 GTR_STATE_COMMENT_PANE_POS,
 				 GTR_STATE_DEFAULT_COMMENT_PANE_POS,
 				 &comment_pane_pos);
@@ -370,13 +370,13 @@ gtranslator_prefs_manager_get_comment_pane_pos (void)
 }
 
 gint
-gtranslator_prefs_manager_get_default_comment_pane_pos (void)
+gtr_prefs_manager_get_default_comment_pane_pos (void)
 {
   return GTR_STATE_DEFAULT_COMMENT_PANE_POS;
 }
 
 void
-gtranslator_prefs_manager_set_comment_pane_pos (gint new_pane_pos)
+gtr_prefs_manager_set_comment_pane_pos (gint new_pane_pos)
 {
   g_return_if_fail (new_pane_pos > -1);
 
@@ -384,78 +384,78 @@ gtranslator_prefs_manager_set_comment_pane_pos (gint new_pane_pos)
     return;
 
   comment_pane_pos = new_pane_pos;
-  gtranslator_state_set_int (GTR_STATE_WINDOW_GROUP,
+  gtr_state_set_int (GTR_STATE_WINDOW_GROUP,
 			     GTR_STATE_COMMENT_PANE_POS, new_pane_pos);
 }
 
 /* Normal prefs are stored in GConf */
 
 gboolean
-gtranslator_prefs_manager_app_init (void)
+gtr_prefs_manager_app_init (void)
 {
 
-  g_return_val_if_fail (gtranslator_prefs_manager == NULL, FALSE);
+  g_return_val_if_fail (gtr_prefs_manager == NULL, FALSE);
 
-  gtranslator_prefs_manager_init ();
+  gtr_prefs_manager_init ();
 
-  if (gtranslator_prefs_manager != NULL)
+  if (gtr_prefs_manager != NULL)
     {
       /* TODO: notify, add dirs */
-      gconf_client_add_dir (gtranslator_prefs_manager->gconf_client,
+      gconf_client_add_dir (gtr_prefs_manager->gconf_client,
 			    GPM_PREFS_DIR,
 			    GCONF_CLIENT_PRELOAD_RECURSIVE, NULL);
 
-      gconf_client_notify_add (gtranslator_prefs_manager->gconf_client,
+      gconf_client_notify_add (gtr_prefs_manager->gconf_client,
 			       GPM_EDITOR_FONT,
-			       gtranslator_prefs_manager_editor_font_changed,
+			       gtr_prefs_manager_editor_font_changed,
 			       NULL, NULL, NULL);
 
-      gconf_client_notify_add (gtranslator_prefs_manager->gconf_client,
+      gconf_client_notify_add (gtr_prefs_manager->gconf_client,
 			       GPM_SPELLCHECK,
-			       gtranslator_prefs_manager_spellcheck_changed,
+			       gtr_prefs_manager_spellcheck_changed,
 			       NULL, NULL, NULL);
 
-      gconf_client_notify_add (gtranslator_prefs_manager->gconf_client,
+      gconf_client_notify_add (gtr_prefs_manager->gconf_client,
 			       GPM_HIGHLIGHT_SYNTAX,
-			       gtranslator_prefs_manager_highlight_changed,
+			       gtr_prefs_manager_highlight_changed,
 			       NULL, NULL, NULL);
 
-      gconf_client_notify_add (gtranslator_prefs_manager->gconf_client,
+      gconf_client_notify_add (gtr_prefs_manager->gconf_client,
 			       GPM_VISIBLE_WHITESPACE,
-			       gtranslator_prefs_manager_visible_whitespace_changed,
+			       gtr_prefs_manager_visible_whitespace_changed,
 			       NULL, NULL, NULL);
 
-      gconf_client_notify_add (gtranslator_prefs_manager->gconf_client,
+      gconf_client_notify_add (gtr_prefs_manager->gconf_client,
 			       GPM_PANE_SWITCHER_STYLE,
-			       gtranslator_prefs_manager_gdl_style_changed,
+			       gtr_prefs_manager_gdl_style_changed,
 			       NULL, NULL, NULL);
 
-      gconf_client_notify_add (gtranslator_prefs_manager->gconf_client,
+      gconf_client_notify_add (gtr_prefs_manager->gconf_client,
 			       GPM_AUTOSAVE,
-			       gtranslator_prefs_manager_autosave_changed,
+			       gtr_prefs_manager_autosave_changed,
 			       NULL, NULL, NULL);
 
-      gconf_client_notify_add (gtranslator_prefs_manager->gconf_client,
+      gconf_client_notify_add (gtr_prefs_manager->gconf_client,
 			       GPM_COLOR_SCHEME,
-			       gtranslator_prefs_manager_scheme_color_changed,
+			       gtr_prefs_manager_scheme_color_changed,
 			       NULL, NULL, NULL);
     }
 
-  return gtranslator_prefs_manager != NULL;
+  return gtr_prefs_manager != NULL;
 }
 
-/* This function must be called before exiting gtranslator */
+/* This function must be called before exiting gtr */
 void
-gtranslator_prefs_manager_app_shutdown ()
+gtr_prefs_manager_app_shutdown ()
 {
-  gtranslator_prefs_manager_shutdown ();
+  gtr_prefs_manager_shutdown ();
 
-  gtranslator_state_file_sync ();
+  gtr_state_file_sync ();
 }
 
 
 static void
-gtranslator_prefs_manager_editor_font_changed (GConfClient * client,
+gtr_prefs_manager_editor_font_changed (GConfClient * client,
 					       guint cnxn_id,
 					       GConfEntry * entry,
 					       gpointer user_data)
@@ -475,26 +475,26 @@ gtranslator_prefs_manager_editor_font_changed (GConfClient * client,
       if (!def)
 	font = g_strdup ("Sans 10");	// Fix to use system font
       else
-	font = g_strdup (gtranslator_prefs_manager_get_editor_font ());
+	font = g_strdup (gtr_prefs_manager_get_editor_font ());
     }
   else if (strcmp (entry->key, GPM_EDITOR_FONT) == 0)
     {
       font = g_strdup (gconf_value_get_string (entry->value));
 
-      def = gtranslator_prefs_manager_get_use_custom_font ();
+      def = gtr_prefs_manager_get_use_custom_font ();
     }
   else
     return;
 
   g_return_if_fail (font != NULL);
 
-  views = gtranslator_application_get_views (GTR_APP, TRUE, TRUE);
+  views = gtr_application_get_views (GTR_APP, TRUE, TRUE);
   l = views;
 
   while (l != NULL)
     {
       /* Note: we use def=FALSE to avoid GtrView to query gconf */
-      gtranslator_view_set_font (GTR_VIEW (l->data), FALSE, font);
+      gtr_view_set_font (GTR_VIEW (l->data), FALSE, font);
       l = l->next;
     }
 
@@ -504,7 +504,7 @@ gtranslator_prefs_manager_editor_font_changed (GConfClient * client,
 
 
 static void
-gtranslator_prefs_manager_spellcheck_changed (GConfClient * client,
+gtr_prefs_manager_spellcheck_changed (GConfClient * client,
 					      guint cnxn_id,
 					      GConfEntry * entry,
 					      gpointer user_data)
@@ -515,12 +515,12 @@ gtranslator_prefs_manager_spellcheck_changed (GConfClient * client,
   g_return_if_fail (entry->key != NULL);
   g_return_if_fail (entry->value != NULL);
 
-  l = views = gtranslator_application_get_views (GTR_APP, FALSE, TRUE);
+  l = views = gtr_application_get_views (GTR_APP, FALSE, TRUE);
 
   while (l != NULL)
     {
-      gtranslator_view_enable_spellcheck (GTR_VIEW (l->data),
-					  gtranslator_prefs_manager_get_spellcheck
+      gtr_view_enable_spellcheck (GTR_VIEW (l->data),
+					  gtr_prefs_manager_get_spellcheck
 					  ());
       l = l->next;
     }
@@ -529,7 +529,7 @@ gtranslator_prefs_manager_spellcheck_changed (GConfClient * client,
 
 
 static void
-gtranslator_prefs_manager_highlight_changed (GConfClient * client,
+gtr_prefs_manager_highlight_changed (GConfClient * client,
 					     guint cnxn_id,
 					     GConfEntry * entry,
 					     gpointer user_data)
@@ -546,7 +546,7 @@ gtranslator_prefs_manager_highlight_changed (GConfClient * client,
 
       enable = gconf_value_get_bool (entry->value);
 
-      views = gtranslator_application_get_views (GTR_APP, TRUE, TRUE);
+      views = gtr_application_get_views (GTR_APP, TRUE, TRUE);
       l = views;
 
       while (l != NULL)
@@ -566,7 +566,7 @@ gtranslator_prefs_manager_highlight_changed (GConfClient * client,
 }
 
 static void
-gtranslator_prefs_manager_visible_whitespace_changed (GConfClient * client,
+gtr_prefs_manager_visible_whitespace_changed (GConfClient * client,
 						      guint cnxn_id,
 						      GConfEntry * entry,
 						      gpointer user_data)
@@ -582,12 +582,12 @@ gtranslator_prefs_manager_visible_whitespace_changed (GConfClient * client,
 
       enable = gconf_value_get_bool (entry->value);
 
-      views = gtranslator_application_get_views (GTR_APP, TRUE, TRUE);
+      views = gtr_application_get_views (GTR_APP, TRUE, TRUE);
       l = views;
 
       while (l != NULL)
 	{
-	  gtranslator_view_enable_visible_whitespace (GTR_VIEW (l->data),
+	  gtr_view_enable_visible_whitespace (GTR_VIEW (l->data),
 						      enable);
 
 	  l = l->next;
@@ -598,7 +598,7 @@ gtranslator_prefs_manager_visible_whitespace_changed (GConfClient * client,
 }
 
 static void
-gtranslator_prefs_manager_gdl_style_changed (GConfClient * client,
+gtr_prefs_manager_gdl_style_changed (GConfClient * client,
 					     guint cnxn_id,
 					     GConfEntry * entry,
 					     gpointer user_data)
@@ -607,19 +607,19 @@ gtranslator_prefs_manager_gdl_style_changed (GConfClient * client,
   GdlSwitcherStyle style;
   GdlDockLayout *layout_manager;
 
-  window = gtranslator_application_get_active_window (GTR_APP);
+  window = gtr_application_get_active_window (GTR_APP);
 
-  style = gtranslator_prefs_manager_get_pane_switcher_style ();
+  style = gtr_prefs_manager_get_pane_switcher_style ();
 
   layout_manager =
-    GDL_DOCK_LAYOUT (_gtranslator_window_get_layout_manager (window));
+    GDL_DOCK_LAYOUT (_gtr_window_get_layout_manager (window));
 
   g_object_set (G_OBJECT (layout_manager->master),
 		"switcher-style", style, NULL);
 }
 
 static void
-gtranslator_prefs_manager_autosave_changed (GConfClient * client,
+gtr_prefs_manager_autosave_changed (GConfClient * client,
 					    guint cnxn_id,
 					    GConfEntry * entry,
 					    gpointer user_data)
@@ -631,7 +631,7 @@ gtranslator_prefs_manager_autosave_changed (GConfClient * client,
   g_return_if_fail (entry->key != NULL);
   g_return_if_fail (entry->value != NULL);
 
-  window = gtranslator_application_get_active_window (GTR_APP);
+  window = gtr_application_get_active_window (GTR_APP);
 
   if (strcmp (entry->key, GPM_AUTOSAVE) == 0)
     {
@@ -639,13 +639,13 @@ gtranslator_prefs_manager_autosave_changed (GConfClient * client,
 
       autosave = gconf_value_get_bool (entry->value);
 
-      tabs = gtranslator_window_get_all_tabs (window);
+      tabs = gtr_window_get_all_tabs (window);
 
       for (l = tabs; l != NULL; l = g_list_next (l))
 	{
 	  GtrTab *tab = GTR_TAB (l->data);
 
-	  gtranslator_tab_set_autosave_enabled (tab, autosave);
+	  gtr_tab_set_autosave_enabled (tab, autosave);
 	}
 
       g_list_free (tabs);
@@ -659,13 +659,13 @@ gtranslator_prefs_manager_autosave_changed (GConfClient * client,
       if (autosave_interval <= 0)
 	autosave_interval = 1;
 
-      tabs = gtranslator_window_get_all_tabs (window);
+      tabs = gtr_window_get_all_tabs (window);
 
       for (l = tabs; l != NULL; l = g_list_next (l))
 	{
 	  GtrTab *tab = GTR_TAB (l->data);
 
-	  gtranslator_tab_set_autosave_interval (tab, autosave_interval);
+	  gtr_tab_set_autosave_interval (tab, autosave_interval);
 	}
 
       g_list_free (tabs);
@@ -673,17 +673,17 @@ gtranslator_prefs_manager_autosave_changed (GConfClient * client,
 }
 
 static void
-gtranslator_prefs_manager_scheme_color_changed (GConfClient * client,
+gtr_prefs_manager_scheme_color_changed (GConfClient * client,
 						guint cnxn_id,
 						GConfEntry * entry,
 						gpointer user_data)
 {
   GList *views, *l;
 
-  views = gtranslator_application_get_views (GTR_APP, TRUE, TRUE);
+  views = gtr_application_get_views (GTR_APP, TRUE, TRUE);
 
   for (l = views; l != NULL; l = g_list_next (l))
     {
-      gtranslator_view_reload_scheme_color (GTR_VIEW (l->data));
+      gtr_view_reload_scheme_color (GTR_VIEW (l->data));
     }
 }

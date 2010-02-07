@@ -36,38 +36,38 @@
 						 GTR_TYPE_DB_WORDS,     \
 						 GtrDbWordsPrivate))
 
-G_DEFINE_TYPE (GtrDbWords, gtranslator_db_words, GTR_TYPE_DB_BASE)
+G_DEFINE_TYPE (GtrDbWords, gtr_db_words, GTR_TYPE_DB_BASE)
      struct _GtrDbWordsPrivate
      {
 
      };
 
-     static void gtranslator_db_words_init (GtrDbWords * db_words)
+     static void gtr_db_words_init (GtrDbWords * db_words)
 {
   //db_words->priv = GTR_DB_WORDS_GET_PRIVATE (db_words);
 
-  gtranslator_db_base_create_dabatase (GTR_DB_BASE (db_words),
+  gtr_db_base_create_dabatase (GTR_DB_BASE (db_words),
 				       "words.db", DB_HASH);
 }
 
 static void
-gtranslator_db_words_finalize (GObject * object)
+gtr_db_words_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtranslator_db_words_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_db_words_parent_class)->finalize (object);
 }
 
 static void
-gtranslator_db_words_class_init (GtrDbWordsClass * klass)
+gtr_db_words_class_init (GtrDbWordsClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   //g_type_class_add_private (klass, sizeof (GtrDbWordsPrivate));
 
-  object_class->finalize = gtranslator_db_words_finalize;
+  object_class->finalize = gtr_db_words_finalize;
 }
 
 GtrDbWords *
-gtranslator_db_words_new ()
+gtr_db_words_new ()
 {
   GtrDbWords *db_words;
 
@@ -77,7 +77,7 @@ gtranslator_db_words_new ()
 }
 
 gboolean
-gtranslator_db_words_append (GtrDbWords * db_words,
+gtr_db_words_append (GtrDbWords * db_words,
 			     const gchar * word,
 			     guint sentence_size, db_recno_t value)
 {
@@ -117,7 +117,7 @@ gtranslator_db_words_append (GtrDbWords * db_words,
   key.data = buf;
   key.size = buf_len;
 
-  keys = gtranslator_db_words_read (db_words, word, sentence_size);
+  keys = gtr_db_words_read (db_words, word, sentence_size);
   if (keys == NULL)
     {
       data.data = &value;
@@ -125,8 +125,8 @@ gtranslator_db_words_append (GtrDbWords * db_words,
     }
   else
     {
-      gsize count = gtranslator_db_keys_get_count (keys);
-      db_recno_t *list = gtranslator_db_keys_get_list (keys);
+      gsize count = gtr_db_keys_get_count (keys);
+      db_recno_t *list = gtr_db_keys_get_list (keys);
 
       value_buf = g_new (db_recno_t, count + 1);
       memcpy (value_buf, list, count * sizeof (db_recno_t));
@@ -137,12 +137,12 @@ gtranslator_db_words_append (GtrDbWords * db_words,
       g_object_unref (keys);
     }
 
-  error = gtranslator_db_base_put (GTR_DB_BASE (db_words), &key, &data, 0);
+  error = gtr_db_base_put (GTR_DB_BASE (db_words), &key, &data, 0);
   g_free (value_buf);
 
   if (error != 0)
     {
-      gtranslator_db_base_show_error (GTR_DB_BASE (db_words), error);
+      gtr_db_base_show_error (GTR_DB_BASE (db_words), error);
       return FALSE;
     }
 
@@ -150,7 +150,7 @@ gtranslator_db_words_append (GtrDbWords * db_words,
 }
 
 GtrDbKeys *
-gtranslator_db_words_read (GtrDbWords * db_words,
+gtr_db_words_read (GtrDbWords * db_words,
 			   const gchar * word, guint sentence_size)
 {
   DBT key, data;
@@ -184,14 +184,14 @@ gtranslator_db_words_read (GtrDbWords * db_words,
   key.data = buf;
   key.size = buf_len;
 
-  error = gtranslator_db_base_get (GTR_DB_BASE (db_words), &key, &data);
+  error = gtr_db_base_get (GTR_DB_BASE (db_words), &key, &data);
   if (error != 0)
     {
-      gtranslator_db_base_show_error (GTR_DB_BASE (db_words), error);
+      gtr_db_base_show_error (GTR_DB_BASE (db_words), error);
       return NULL;
     }
 
-  keys = gtranslator_db_keys_new (&data);
+  keys = gtr_db_keys_new (&data);
 
   return keys;
 }

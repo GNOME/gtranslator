@@ -85,7 +85,7 @@ check_good_word (const gchar * word, gchar ** badwords)
 }
 
 /**
- * gtranslator_utils_split_string_in_words:
+ * gtr_utils_split_string_in_words:
  * @string: the text to process
  *
  * Process a text and split it in words using pango.
@@ -93,7 +93,7 @@ check_good_word (const gchar * word, gchar ** badwords)
  * Returns: an array of words of the processed text
  */
 gchar **
-gtranslator_utils_split_string_in_words (const gchar * string)
+gtr_utils_split_string_in_words (const gchar * string)
 {
   PangoLanguage *lang = pango_language_from_string ("en");
   PangoLogAttr *attrs;
@@ -155,7 +155,7 @@ gtranslator_utils_split_string_in_words (const gchar * string)
 }
 
 xmlDocPtr
-gtranslator_xml_new_doc (const gchar * name)
+gtr_xml_new_doc (const gchar * name)
 {
   xmlNodePtr root;
   xmlDocPtr doc;
@@ -166,7 +166,7 @@ gtranslator_xml_new_doc (const gchar * name)
 }
 
 xmlDocPtr
-gtranslator_xml_open_file (const gchar * filename)
+gtr_xml_open_file (const gchar * filename)
 {
   xmlDocPtr doc;
   g_return_val_if_fail (filename != NULL, NULL);
@@ -175,7 +175,7 @@ gtranslator_xml_open_file (const gchar * filename)
 }
 
 /**
- * gtranslator_gtk_button_new_with_stock_icon:
+ * gtr_gtk_button_new_with_stock_icon:
  * @label: the label of the button
  * @stock_id: the id of the stock image
  * 
@@ -184,7 +184,7 @@ gtranslator_xml_open_file (const gchar * filename)
  * Returns: a new #GtkButton
  */
 GtkWidget *
-gtranslator_gtk_button_new_with_stock_icon (const gchar * label,
+gtr_gtk_button_new_with_stock_icon (const gchar * label,
 					    const gchar * stock_id)
 {
   GtkWidget *button;
@@ -198,7 +198,7 @@ gtranslator_gtk_button_new_with_stock_icon (const gchar * label,
 }
 
 /**
- * gtranslator_utils_menu_position_under_widget:
+ * gtr_utils_menu_position_under_widget:
  * @menu: a #GtkMenu
  * @x: the x position of the widget
  * @y: the y position of the widget
@@ -208,7 +208,7 @@ gtranslator_gtk_button_new_with_stock_icon (const gchar * label,
  * It returns the position to popup a menu in a specific widget.
  */
 void
-gtranslator_utils_menu_position_under_widget (GtkMenu * menu,
+gtr_utils_menu_position_under_widget (GtkMenu * menu,
 					      gint * x,
 					      gint * y,
 					      gboolean * push_in,
@@ -235,7 +235,7 @@ gtranslator_utils_menu_position_under_widget (GtkMenu * menu,
 }
 
 /**
- * gtranslator_utils_menu_position_under_widget:
+ * gtr_utils_menu_position_under_widget:
  * @menu: a #GtkMenu
  * @x: the x position of the widget
  * @y: the y position of the widget
@@ -245,7 +245,7 @@ gtranslator_utils_menu_position_under_widget (GtkMenu * menu,
  * It returns the position to popup a menu in a TreeView.
  */
 void
-gtranslator_utils_menu_position_under_tree_view (GtkMenu * menu,
+gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
 						 gint * x,
 						 gint * y,
 						 gboolean * push_in,
@@ -287,7 +287,7 @@ gtranslator_utils_menu_position_under_tree_view (GtkMenu * menu,
   else
     {
       /* no selection -> regular "under widget" positioning */
-      gtranslator_utils_menu_position_under_widget (menu,
+      gtr_utils_menu_position_under_widget (menu,
 						    x, y, push_in, tree);
     }
 }
@@ -320,7 +320,7 @@ handle_builder_error (const gchar * message, ...)
 }
 
 /**
- * gtranslator_utils_get_ui_objects:
+ * gtr_utils_get_ui_objects:
  * @filename: the path to the gtk builder file
  * @root_objects: a NULL terminated list of root objects to load or NULL to
  *                load all objects
@@ -336,7 +336,7 @@ handle_builder_error (const gchar * message, ...)
  * Returns FALSE if an error occurs, TRUE on success.
  */
 gboolean
-gtranslator_utils_get_ui_objects (const gchar * filename,
+gtr_utils_get_ui_objects (const gchar * filename,
 				  gchar ** root_objects,
 				  GtkWidget ** error_widget,
 				  const gchar * object_name, ...)
@@ -442,7 +442,7 @@ has_valid_scheme (const gchar * uri)
 }
 
 gboolean
-gtranslator_utils_is_valid_uri (const gchar * uri)
+gtr_utils_is_valid_uri (const gchar * uri)
 {
   const guchar *p;
 
@@ -476,7 +476,7 @@ gtranslator_utils_is_valid_uri (const gchar * uri)
 }
 
 /**
- * gtranslator_utils_drop_get_uris:
+ * gtr_utils_drop_get_uris:
  * @selection_data: the #GtkSelectionData from drag_data_received
  *
  * Create a list of valid uri's from a uri-list drop.
@@ -486,7 +486,7 @@ gtranslator_utils_is_valid_uri (const gchar * uri)
  *		 string array is no longer used
  */
 GSList *
-gtranslator_utils_drop_get_locations (GtkSelectionData * selection_data)
+gtr_utils_drop_get_locations (GtkSelectionData * selection_data)
 {
   gchar **uris;
   gint i;
@@ -498,7 +498,7 @@ gtranslator_utils_drop_get_locations (GtkSelectionData * selection_data)
     {
       GFile *file;
       /* Silently ignore malformed URI/filename */
-      if (gtranslator_utils_is_valid_uri (uris[i]))
+      if (gtr_utils_is_valid_uri (uris[i]))
 	{
 	  file = g_file_new_for_uri (uris[i]);
 	  locations = g_slist_prepend (locations, file);
@@ -509,7 +509,7 @@ gtranslator_utils_drop_get_locations (GtkSelectionData * selection_data)
 }
 
 gchar *
-gtranslator_utils_escape_search_text (const gchar * text)
+gtr_utils_escape_search_text (const gchar * text)
 {
   GString *str;
   gint length;
@@ -563,7 +563,7 @@ gtranslator_utils_escape_search_text (const gchar * text)
 }
 
 gchar *
-gtranslator_utils_unescape_search_text (const gchar * text)
+gtr_utils_unescape_search_text (const gchar * text)
 {
   GString *str;
   gint length;
@@ -679,7 +679,7 @@ finally_2:
 }
 
 /**
- * gtranslator_utils_activate_url:
+ * gtr_utils_activate_url:
  * @dialog: a #GtkAboutDialog
  * @url: the url to show
  * @data: useless data variable
@@ -687,7 +687,7 @@ finally_2:
  * Shows the corresponding @url in the default browser.
  */
 void
-gtranslator_utils_activate_url (GtkAboutDialog * dialog,
+gtr_utils_activate_url (GtkAboutDialog * dialog,
 				const gchar * url, gpointer data)
 {
   //FIXME: gtk_url_show deprecates this func.
@@ -710,7 +710,7 @@ gtranslator_utils_activate_url (GtkAboutDialog * dialog,
 }
 
 /**
- * gtranslator_utils_activate_email:
+ * gtr_utils_activate_email:
  * @dialog: a #GtkAboutDialog
  * @email: the email to show
  * @data: useless data variable
@@ -718,7 +718,7 @@ gtranslator_utils_activate_url (GtkAboutDialog * dialog,
  * Shows the corresponding @email in the default mailer.
  */
 void
-gtranslator_utils_activate_email (GtkAboutDialog * dialog,
+gtr_utils_activate_email (GtkAboutDialog * dialog,
 				  const gchar * email, gpointer data)
 {
   //FIXME: gtk_url_show deprecates this func.
@@ -741,7 +741,7 @@ gtranslator_utils_activate_email (GtkAboutDialog * dialog,
 }
 
 /**
- * gtranslator_utils_help_display:
+ * gtr_utils_help_display:
  * @parent: a #GtkWindow
  * @doc_id: the name of the type of doc
  * @file_name: the name of the doc
@@ -749,7 +749,7 @@ gtranslator_utils_activate_email (GtkAboutDialog * dialog,
  * Shows the help for an specific document in the default help browser.
  */
 void
-gtranslator_utils_help_display (GtkWindow * parent,
+gtr_utils_help_display (GtkWindow * parent,
 				const gchar * doc_id, const gchar * file_name)
 {
 
@@ -789,7 +789,7 @@ gtranslator_utils_help_display (GtkWindow * parent,
       if (strchr (lang, '.'))
 	continue;
 
-      path = gtranslator_dirs_get_gtranslator_data_dir ();
+      path = gtr_dirs_get_gtr_data_dir ();
       uri = g_build_filename (path, "gnome", "help", doc_id,
 			      lang, file_name, NULL);
       g_free (path);
@@ -837,7 +837,7 @@ gtranslator_utils_help_display (GtkWindow * parent,
 }
 
 gchar *
-gtranslator_utils_get_current_date (void)
+gtr_utils_get_current_date (void)
 {
   time_t now;
   struct tm *now_here;
@@ -851,7 +851,7 @@ gtranslator_utils_get_current_date (void)
 }
 
 gchar *
-gtranslator_utils_get_current_time (void)
+gtr_utils_get_current_time (void)
 {
   time_t now;
   struct tm *now_here;
@@ -865,7 +865,7 @@ gtranslator_utils_get_current_time (void)
 }
 
 gchar *
-gtranslator_utils_get_current_year (void)
+gtr_utils_get_current_year (void)
 {
   time_t now;
   struct tm *now_here;
@@ -879,7 +879,7 @@ gtranslator_utils_get_current_year (void)
 }
 
 /**
- * gtranslator_utils_scan_dir:
+ * gtr_utils_scan_dir:
  * @dir: the dir to parse
  * @list: the list where to store the GFiles
  * @po_name: the name of the specific po file to search or NULL.
@@ -889,7 +889,7 @@ gtranslator_utils_get_current_year (void)
  * g_slist_foreach (list, (GFunc)g_object_unref, NULL).
  */
 void
-gtranslator_utils_scan_dir (GFile * dir,
+gtr_utils_scan_dir (GFile * dir,
 			    GSList ** list, const gchar * po_name)
 {
   GFileInfo *info;
@@ -929,7 +929,7 @@ gtranslator_utils_scan_dir (GFile * dir,
 	    *list = g_slist_prepend (*list, file);
 	  g_free (filename);
 
-	  gtranslator_utils_scan_dir (file, list, po_name);
+	  gtr_utils_scan_dir (file, list, po_name);
 	  g_object_unref (info);
 	}
       g_file_enumerator_close (enumerator, NULL, NULL);
@@ -943,7 +943,7 @@ gtranslator_utils_scan_dir (GFile * dir,
 }
 
 gchar *
-gtranslator_utils_reduce_path (const gchar * path)
+gtr_utils_reduce_path (const gchar * path)
 {
   gchar *new_str;
   gchar **array;
@@ -968,7 +968,7 @@ gtranslator_utils_reduce_path (const gchar * path)
  * Got from gedit
  */
 gchar *
-gtranslator_utils_escape_underscores (const gchar * text, gssize length)
+gtr_utils_escape_underscores (const gchar * text, gssize length)
 {
   GString *str;
   const gchar *p;

@@ -33,12 +33,12 @@
 #include "gtr-window.h"
 
 void
-gtranslator_actions_edit_undo (GtkAction * action, GtrWindow * window)
+gtr_actions_edit_undo (GtkAction * action, GtrWindow * window)
 {
   GtrView *active_view;
   GtkSourceBuffer *active_document;
 
-  active_view = gtranslator_window_get_active_view (window);
+  active_view = gtr_window_get_active_view (window);
   g_return_if_fail (active_view);
 
   active_document =
@@ -53,12 +53,12 @@ gtranslator_actions_edit_undo (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtranslator_actions_edit_redo (GtkAction * action, GtrWindow * window)
+gtr_actions_edit_redo (GtkAction * action, GtrWindow * window)
 {
   GtrView *active_view;
   GtkSourceBuffer *active_document;
 
-  active_view = gtranslator_window_get_active_view (window);
+  active_view = gtr_window_get_active_view (window);
   g_return_if_fail (active_view);
 
   active_document =
@@ -73,41 +73,41 @@ gtranslator_actions_edit_redo (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtranslator_actions_edit_cut (GtkAction * action, GtrWindow * window)
+gtr_actions_edit_cut (GtkAction * action, GtrWindow * window)
 {
   GtrView *active_view;
 
-  active_view = gtranslator_window_get_active_view (window);
+  active_view = gtr_window_get_active_view (window);
   g_return_if_fail (active_view);
 
-  gtranslator_view_cut_clipboard (active_view);
+  gtr_view_cut_clipboard (active_view);
 
   gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
 
 void
-gtranslator_actions_edit_copy (GtkAction * action, GtrWindow * window)
+gtr_actions_edit_copy (GtkAction * action, GtrWindow * window)
 {
   GtrView *active_view;
 
-  active_view = gtranslator_window_get_active_view (window);
+  active_view = gtr_window_get_active_view (window);
   g_return_if_fail (active_view);
 
-  gtranslator_view_copy_clipboard (active_view);
+  gtr_view_copy_clipboard (active_view);
 
   gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
 
 void
-gtranslator_actions_edit_paste (GtkAction * action,
+gtr_actions_edit_paste (GtkAction * action,
 				GtrWindow * window)
 {
   GtrView *active_view;
 
-  active_view = gtranslator_window_get_active_view (window);
+  active_view = gtr_window_get_active_view (window);
   g_return_if_fail (active_view);
 
-  gtranslator_view_paste_clipboard (active_view);
+  gtr_view_paste_clipboard (active_view);
 
   gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
@@ -117,35 +117,35 @@ gtranslator_actions_edit_paste (GtkAction * action,
  * Use the untranslated message as the translation.
  */
 void
-gtranslator_message_copy_to_translation (GtkAction * action,
+gtr_message_copy_to_translation (GtkAction * action,
 					 GtrWindow * window)
 {
   GtrTab *current;
 
-  current = gtranslator_window_get_active_tab (window);
+  current = gtr_window_get_active_tab (window);
 
-  gtranslator_tab_copy_to_translation (current);
+  gtr_tab_copy_to_translation (current);
 }
 
 /*
  * Toggle the sticky status
  */
 void
-gtranslator_message_status_toggle_fuzzy (GtkAction * action,
+gtr_message_status_toggle_fuzzy (GtkAction * action,
 					 GtrWindow * window)
 {
   GtrTab *current;
   GtrPo *po;
   GList *msg;
 
-  current = gtranslator_window_get_active_tab (window);
-  po = gtranslator_tab_get_po (current);
-  msg = gtranslator_po_get_current_message (po);
+  current = gtr_window_get_active_tab (window);
+  po = gtr_tab_get_po (current);
+  msg = gtr_po_get_current_message (po);
 
-  if (gtranslator_msg_is_fuzzy (msg->data))
-    gtranslator_msg_set_fuzzy (msg->data, FALSE);
+  if (gtr_msg_is_fuzzy (msg->data))
+    gtr_msg_set_fuzzy (msg->data, FALSE);
   else
-    gtranslator_msg_set_fuzzy (msg->data, TRUE);
+    gtr_msg_set_fuzzy (msg->data, TRUE);
 
   /*
    * Emit that message was changed.
@@ -154,35 +154,35 @@ gtranslator_message_status_toggle_fuzzy (GtkAction * action,
 }
 
 void
-gtranslator_actions_edit_preferences (GtkAction * action,
+gtr_actions_edit_preferences (GtkAction * action,
 				      GtrWindow * window)
 {
-  gtranslator_show_preferences_dialog (window);
+  gtr_show_preferences_dialog (window);
 }
 
 void
-gtranslator_actions_edit_header (GtkAction * action,
+gtr_actions_edit_header (GtkAction * action,
 				 GtrWindow * window)
 {
-  gtranslator_show_header_dialog (window);
+  gtr_show_header_dialog (window);
 }
 
 void
-gtranslator_edit_message_comment (GtkAction * action,
+gtr_edit_message_comment (GtkAction * action,
 				  GtrWindow * window)
 {
-  gtranslator_show_comment_dialog (window);
+  gtr_show_comment_dialog (window);
 }
 
 void
-gtranslator_actions_edit_clear (GtkAction * action,
+gtr_actions_edit_clear (GtkAction * action,
 				GtrWindow * window)
 {
   GtrTab *tab;
 
   g_return_if_fail (GTR_IS_WINDOW (window));
 
-  tab = gtranslator_window_get_active_tab (window);
+  tab = gtr_window_get_active_tab (window);
 
-  gtranslator_tab_clear_msgstr_views (tab);
+  gtr_tab_clear_msgstr_views (tab);
 }
