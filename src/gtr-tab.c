@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 
+#include "dialogs/gtr-comment-dialog.h"
 #include "gtr-application.h"
 #include "gtr-context.h"
 #include "gtr-io-error-info-bar.h"
@@ -40,6 +41,7 @@
 #include "gtr-tab.h"
 #include "gtr-po.h"
 #include "gtr-prefs-manager.h"
+#include "gtr-prefs-manager-app.h"
 #include "gtr-view.h"
 #include "gtr-translation-memory.h"
 #include "gtr-translation-memory-ui.h"
@@ -424,7 +426,7 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
   GtrPo *po;
   GtkTextBuffer *buf;
   const gchar *msgid, *msgid_plural;
-  const gchar *msgstr, *msgstr_plural;
+  const gchar *msgstr;
 
   g_return_if_fail (GTR_IS_TAB (tab));
 
@@ -594,15 +596,10 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
 static void
 gtr_tab_draw (GtrTab * tab)
 {
-  gint current_page_num;
-  GtkWidget *image;
   GtkWidget *vertical_box;
   GtkWidget *label_widget;
   GtkWidget *msgid_label;
-  GtkWidget *current_page;
-  GtkWidget *notebook, *tm_layout, *tm, *comments_label, *tm_label, *scroll;
-  GtkWidget *hbox;
-  GtkWidget *label;
+  GtkWidget *scroll;
   GtrTabPrivate *priv = tab->priv;
 
   /*

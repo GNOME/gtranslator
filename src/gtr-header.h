@@ -125,4 +125,6 @@ void                  gtr_header_set_plural_forms    (GtrHeader * header,
                                                               const gchar * plural_forms);
 gint                  gtr_header_get_nplurals        (GtrHeader * header);
 
+void gtr_header_update_header (GtrHeader *header);
+
 #endif /* __HEADER_H__ */

@@ -104,6 +104,24 @@ gtr_view_get_type (void)
      gchar *gtr_view_get_search_text (GtrView * view,
 					      guint * flags);
 
+     gboolean gtr_view_get_can_search_again (GtrView * view);
+
+     gboolean gtr_view_search_forward (GtrView * view,
+				 const GtkTextIter * start,
+				 const GtkTextIter * end,
+				 GtkTextIter * match_start,
+				 GtkTextIter * match_end);
+
+     gboolean gtr_view_search_backward (GtrView * view,
+				  const GtkTextIter * start,
+				  const GtkTextIter * end,
+				  GtkTextIter * match_start,
+				  GtkTextIter * match_end);
+
+      gint gtr_view_replace_all (GtrView * view,
+			      const gchar * find,
+			      const gchar * replace, guint flags);
+
      void gtr_view_reload_scheme_color (GtrView * view);
 
 

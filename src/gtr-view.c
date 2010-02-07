@@ -97,7 +97,6 @@ gtr_view_init (GtrView * view)
   GPtrArray *dirs;
   gchar **langs;
   const gchar *const *temp;
-  gint i;
   gchar *datadir;
 
   view->priv = GTR_VIEW_GET_PRIVATE (view);

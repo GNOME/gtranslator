@@ -52,8 +52,8 @@ G_DEFINE_TYPE (GtrMessageTable, gtr_message_table,
        GtrTab *tab;
      };
 
-     static void
-       gtr_message_table_selection_changed (GtkTreeSelection *
+static void
+gtr_message_table_selection_changed (GtkTreeSelection *
 						    selection,
 						    GtrMessageTable *
 						    table)
@@ -88,10 +88,9 @@ static void
 showed_message_cb (GtrTab * tab,
 		   GtrMsg * msg, GtrMessageTable * table)
 {
-  GtkTreeModel *model, *sort_model;
-  GtkTreePath *path, *sort_path;
+  GtkTreePath *path;
   GtkTreeSelection *selection;
-  GtkTreeIter iter, sort_iter;
+  GtkTreeIter iter;
 
   selection =
     gtk_tree_view_get_selection (GTK_TREE_VIEW (table->priv->treeview));
@@ -128,7 +127,7 @@ message_changed_cb (GtrTab * tab,
   gtr_message_table_model_update_row (table->priv->store, path);
 }
 
-gint
+static gint
 compare_by_status (gint a_status, gint b_status, gint a_pos, gint b_pos)
 {
   if (a_status == b_status)
@@ -137,7 +136,7 @@ compare_by_status (gint a_status, gint b_status, gint a_pos, gint b_pos)
     return a_status - b_status;
 }
 
-gint
+static gint
 model_compare_by_status (GtkTreeModel * model,
 			 GtkTreeIter * a, GtkTreeIter * b, gpointer user_data)
 {
@@ -155,7 +154,7 @@ model_compare_by_status (GtkTreeModel * model,
   return compare_by_status (a_status, b_status, a_pos, b_pos);
 }
 
-gint
+static gint
 list_compare_by_status (gconstpointer a, gconstpointer b)
 {
   gint a_status, b_status, a_pos, b_pos;
@@ -169,7 +168,7 @@ list_compare_by_status (gconstpointer a, gconstpointer b)
   return compare_by_status (a_status, b_status, a_pos, b_pos);
 }
 
-gint
+static gint
 list_compare_by_position (gconstpointer a, gconstpointer b)
 {
   gint a_pos, b_pos;
@@ -179,7 +178,7 @@ list_compare_by_position (gconstpointer a, gconstpointer b)
   return a_pos - b_pos;
 }
 
-gint
+static gint
 list_compare_by_original (gconstpointer a, gconstpointer b)
 {
   const gchar *a_original, *b_original;
@@ -190,7 +189,7 @@ list_compare_by_original (gconstpointer a, gconstpointer b)
   return g_utf8_collate (a_original, b_original);
 }
 
-gint
+static gint
 list_compare_by_translation (gconstpointer a, gconstpointer b)
 {
   const gchar *a_translated, *b_translated;

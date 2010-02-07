@@ -113,7 +113,6 @@ build_tab_label (GtrNotebook * nb, GtrTab * tab)
   GtkWidget *close_button;
   GtkRcStyle *rcstyle;
   GtkWidget *image;
-  GtkWidget *spinner;
   GtkWidget *icon;
 
   hbox = gtk_hbox_new (FALSE, 4);

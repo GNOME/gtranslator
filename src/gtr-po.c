@@ -357,7 +357,6 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
   po_message_iterator_t iter;
   const gchar *msgstr;
   const gchar *const *domains;
-  gchar *base;
   gint i = 0;
   gint pos = 1;
 

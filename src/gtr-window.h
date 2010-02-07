@@ -145,5 +145,8 @@ gtr_window_get_type (void)
 
      GtkWidget *gtr_window_get_tm_menu (GtrWindow * window);
 
+void _gtr_recent_add (GtrWindow * window,
+			GFile * location, gchar * project_id);
+
 G_END_DECLS
 #endif /* __WINDOW_H__ */

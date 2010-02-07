@@ -62,5 +62,9 @@ gint gtr_prefs_manager_get_comment_pane_pos (void);
 gint gtr_prefs_manager_get_default_comment_pane_pos (void);
 void gtr_prefs_manager_set_comment_pane_pos (gint new_pane_pos);
 
+/* Content pane */
+gint gtr_prefs_manager_get_content_pane_pos (void);
+gint gtr_prefs_manager_get_default_content_pane_pos (void);
+void gtr_prefs_manager_set_content_pane_pos (gint new_pane_pos);
 
 #endif /* __GTR_PREFS_MANAGER_APP_H__ */

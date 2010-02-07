@@ -81,7 +81,7 @@ gtr_open (GFile * location,
   /*
    * If not a crash/temporary file, add to the history.
    */
-  gtr_recent_add (window, location, project_id);
+  _gtr_recent_add (window, location, project_id);
 
   /*
    * Create a page to add to our list of open files

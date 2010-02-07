@@ -124,6 +124,10 @@ gtr_po_get_type (void)
 
      GList *gtr_po_get_current_message (GtrPo * po);
 
+void
+gtr_po_update_current_message (GtrPo * po,
+				       GtrMsg * msg);
+
      GList *gtr_po_get_domains (GtrPo * po);
 
      po_file_t gtr_po_get_po_file (GtrPo * po);

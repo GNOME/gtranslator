@@ -33,6 +33,7 @@
 #include "gtr-tab.h"
 #include "gtr-plugins-engine.h"
 #include "gtr-po.h"
+#include "gtr-prefs-manager-app.h"
 #include "gtr-statusbar.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
@@ -715,8 +716,8 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
 						   GtrWindow * window)
 {
   GtrPo *po;
-  const gchar *status;
   gchar *msg;
+  const gchar *status;
   gchar *status_msg;
   gchar *current;
   gchar *total;
@@ -734,6 +735,7 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
   translated = gtr_po_get_translated_count (po);
   fuzzy = gtr_po_get_fuzzy_count (po);
   untranslated = gtr_po_get_untranslated_count (po);
+  status = NULL;
 
   switch (gtr_msg_get_status (message))
     {
@@ -808,7 +810,6 @@ get_menu_tip_for_tab (GtrTab * tab)
 {
   GtrPo *doc;
   gchar *uri;
-  gchar *ruri;
   gchar *tip;
   GFile *file;
 
@@ -1226,12 +1227,11 @@ notebook_tab_added (GtkNotebook * notebook,
 }
 
 void
-gtr_recent_add (GtrWindow * window,
+_gtr_recent_add (GtrWindow * window,
 			GFile * location, gchar * project_id)
 {
   GtkRecentData *recent_data;
   gchar *uri;
-  GError *error = NULL;
   gchar *path;
   gchar *display_name;
 
@@ -1263,7 +1263,7 @@ gtr_recent_add (GtrWindow * window,
   g_slice_free (GtkRecentData, recent_data);
 }
 
-void
+static void
 gtr_recent_remove (GtrWindow * window, const gchar * path)
 {
   gchar *uri;
@@ -1294,8 +1294,6 @@ gtr_recent_chooser_item_activated_cb (GtkRecentChooser * chooser,
 					      GtrWindow * window)
 {
   gchar *uri;
-  GError *error = NULL;
-  GtkWidget *dialog;
   GSList *list = NULL;
   GFile *location;
 
@@ -1332,16 +1330,6 @@ create_recent_chooser_menu (GtrWindow * window,
   gtk_recent_chooser_set_filter (GTK_RECENT_CHOOSER (recent_menu), filter);
 
   return recent_menu;
-}
-
-static void
-gtr_window_set_action_sensitive (GtrWindow * window,
-					 const gchar * name,
-					 gboolean sensitive)
-{
-  GtkAction *action = gtk_action_group_get_action (window->priv->action_group,
-						   name);
-  gtk_action_set_sensitive (action, sensitive);
 }
 
 static void
@@ -1450,8 +1438,6 @@ gtr_window_draw (GtrWindow * window)
   GtkWidget *widget;
   GError *error = NULL;
   GtkWidget *dockbar;
-  GtkWidget *hbox_dock;
-  GtkWidget *tm_widget;
   GtkActionGroup *action_group;
   gchar *datadir;
   gchar *path;
@@ -1602,7 +1588,6 @@ static void
 gtr_window_init (GtrWindow * window)
 {
   GtkTargetList *tl;
-  gint active_page;
   GtkWidget *view_menu;
   gchar *filename;
   gchar *config_folder;

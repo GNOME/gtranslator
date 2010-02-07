@@ -133,7 +133,6 @@ main (gint argc, gchar * argv[])
   GList *profiles_list = NULL;
   GFile *file;
   gchar *pixmaps_dir;
-  gchar *window_icon;
 
   /*
    * Initialize gettext.
