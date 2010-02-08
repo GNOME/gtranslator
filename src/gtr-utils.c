@@ -770,7 +770,7 @@ gtr_utils_help_display (GtkWindow * parent,
      GTK_DIALOG_DESTROY_WITH_PARENT,
      GTK_MESSAGE_ERROR,
      GTK_BUTTONS_CLOSE,
-     _("Sorry, Gtr for windows is unable to display help yet."));
+     _("Sorry, Gtranslator for windows is unable to display help yet."));
      gtk_dialog_run (GTK_DIALOG (dialog));
      gtk_widget_destroy (dialog);
 
@@ -809,7 +809,7 @@ gtr_utils_help_display (GtkWindow * parent,
                                        GTK_MESSAGE_ERROR,
                                        GTK_BUTTONS_CLOSE,
                                        _("Unable to display help. "
-                                         "Please make sure the Gtr "
+                                         "Please make sure the Gtranslator "
                                          "documentation package is installed."));
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);

@@ -1159,7 +1159,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
                           GTK_RESPONSE_CLOSE,
                           GTK_STOCK_HELP, GTK_RESPONSE_HELP, NULL);
 
-  gtk_window_set_title (GTK_WINDOW (dlg), _("Gtr Preferences"));
+  gtk_window_set_title (GTK_WINDOW (dlg), _("Gtranslator Preferences"));
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
   gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);

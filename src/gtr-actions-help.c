@@ -37,7 +37,7 @@
 void
 gtr_cmd_help_contents (GtkAction * action, GtrWindow * window)
 {
-  gtr_utils_help_display (GTK_WINDOW (window), "gtr", "gtr.xml");
+  gtr_utils_help_display (GTK_WINDOW (window), "gtranslator", "gtranslator.xml");
 }
 
 /* Creates and shows the about box for gtranslator */
