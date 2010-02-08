@@ -279,21 +279,21 @@ gtr_profile_xml_new_entry (xmlDocPtr doc, GtrProfile * profile)
   xmlNodePtr profile_node;
 
   root = xmlDocGetRootElement (doc);
-  profile_node = xmlNewChild (root, NULL, "profile", NULL);
-  xmlNewTextChild (profile_node, NULL, "profile_name", profile->priv->name);
-  xmlNewTextChild (profile_node, NULL, "author_name",
-                   profile->priv->author_name);
-  xmlNewTextChild (profile_node, NULL, "author_email",
-                   profile->priv->author_email);
-  xmlNewTextChild (profile_node, NULL, "language_name",
-                   profile->priv->language_name);
-  xmlNewTextChild (profile_node, NULL, "language_code",
-                   profile->priv->language_code);
-  xmlNewTextChild (profile_node, NULL, "charset", profile->priv->charset);
-  xmlNewTextChild (profile_node, NULL, "encoding", profile->priv->encoding);
-  xmlNewTextChild (profile_node, NULL, "group_email",
-                   profile->priv->group_email);
-  xmlNewTextChild (profile_node, NULL, "plurals", profile->priv->plurals);
+  profile_node = xmlNewChild (root, NULL, (const xmlChar *)"profile", NULL);
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"profile_name", (const xmlChar *)profile->priv->name);
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"author_name",
+                   (const xmlChar *)profile->priv->author_name);
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"author_email",
+                   (const xmlChar *)profile->priv->author_email);
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"language_name",
+                   (const xmlChar *)profile->priv->language_name);
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"language_code",
+                   (const xmlChar *)profile->priv->language_code);
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"charset", (const xmlChar *)profile->priv->charset);
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"encoding", (const xmlChar *)profile->priv->encoding);
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"group_email",
+                   (const xmlChar *)profile->priv->group_email);
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"plurals", (const xmlChar *)profile->priv->plurals);
 }
 
 /**
@@ -315,23 +315,23 @@ gtr_profile_xml_get_entry (xmlNodePtr child)
 
   node = child->xmlChildrenNode;
 
-  profile->priv->name = xmlNodeGetContent (node);
+  profile->priv->name = (gchar *)xmlNodeGetContent (node);
   node = node->next;
-  profile->priv->author_name = xmlNodeGetContent (node);
+  profile->priv->author_name = (gchar *)xmlNodeGetContent (node);
   node = node->next;
-  profile->priv->author_email = xmlNodeGetContent (node);
+  profile->priv->author_email = (gchar *)xmlNodeGetContent (node);
   node = node->next;
-  profile->priv->language_name = xmlNodeGetContent (node);
+  profile->priv->language_name = (gchar *)xmlNodeGetContent (node);
   node = node->next;
-  profile->priv->language_code = xmlNodeGetContent (node);
+  profile->priv->language_code = (gchar *)xmlNodeGetContent (node);
   node = node->next;
-  profile->priv->charset = xmlNodeGetContent (node);
+  profile->priv->charset = (gchar *)xmlNodeGetContent (node);
   node = node->next;
-  profile->priv->encoding = xmlNodeGetContent (node);
+  profile->priv->encoding = (gchar *)xmlNodeGetContent (node);
   node = node->next;
-  profile->priv->group_email = xmlNodeGetContent (node);
+  profile->priv->group_email = (gchar *)xmlNodeGetContent (node);
   node = node->next;
-  profile->priv->plurals = xmlNodeGetContent (node);
+  profile->priv->plurals = (gchar *)xmlNodeGetContent (node);
 
   return profile;
 }
@@ -361,7 +361,7 @@ gtr_profile_get_profiles_from_xml_file (gchar * filename)
   child = root->xmlChildrenNode;
   active = child->xmlChildrenNode;
 
-  active_profile = xmlNodeGetContent (active);
+  active_profile = (gchar *)xmlNodeGetContent (active);
   child = child->next;
 
   while (child != NULL)
@@ -398,7 +398,7 @@ gtr_profile_save_profiles_in_xml (gchar * filename)
 
   root = xmlDocGetRootElement (doc);
 
-  xmlNewChild (root, NULL, "active", gtr_profile_get_name (active_profile));
+  xmlNewChild (root, NULL, (const xmlChar *)"active", (const xmlChar *)gtr_profile_get_name (active_profile));
 
   for (l = profiles_list; l; l = l->next)
     {

@@ -159,8 +159,8 @@ gtr_xml_new_doc (const gchar * name)
 {
   xmlNodePtr root;
   xmlDocPtr doc;
-  doc = xmlNewDoc ("1.0");
-  root = xmlNewDocNode (doc, NULL, name, NULL);
+  doc = xmlNewDoc ((const xmlChar *)"1.0");
+  root = xmlNewDocNode (doc, NULL, (const xmlChar *)name, NULL);
   xmlDocSetRootElement (doc, root);
   return doc;
 }
@@ -439,7 +439,7 @@ has_valid_scheme (const gchar * uri)
   return *p == ':';
 }
 
-gboolean
+static gboolean
 gtr_utils_is_valid_uri (const gchar * uri)
 {
   const guchar *p;

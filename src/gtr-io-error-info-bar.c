@@ -100,7 +100,7 @@ set_info_bar_text_and_icon (GtkInfoBar * infobar,
 /*
  * Callback func called when warning button is clicked
  */
-void
+static void
 warning_message_button_clicked (GtkWidget * widget,
                                 gint response_id, gpointer data)
 {

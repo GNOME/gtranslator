@@ -505,7 +505,6 @@ void
 gtr_po_save_file (GtrPo * po, GError ** error)
 {
   struct po_xerror_handler handler;
-  gchar *msg_error;
   gchar *filename;
   GtrHeader *header;
 
@@ -755,7 +754,7 @@ gtr_po_get_next_fuzzy (GtrPo * po)
   GList *msg;
 
   msg = po->priv->current;
-  while (msg = g_list_next (msg))
+  while ((msg = g_list_next (msg)))
     {
       if (gtr_msg_is_fuzzy (msg->data))
         return msg;
@@ -777,7 +776,7 @@ gtr_po_get_prev_fuzzy (GtrPo * po)
   GList *msg;
 
   msg = po->priv->current;
-  while (msg = g_list_previous (msg))
+  while ((msg = g_list_previous (msg)))
     {
       if (gtr_msg_is_fuzzy (msg->data))
         return msg;
@@ -799,7 +798,7 @@ gtr_po_get_next_untrans (GtrPo * po)
   GList *msg;
 
   msg = po->priv->current;
-  while (msg = g_list_next (msg))
+  while ((msg = g_list_next (msg)))
     {
       if (!gtr_msg_is_translated (msg->data))
         return msg;
@@ -822,7 +821,7 @@ gtr_po_get_prev_untrans (GtrPo * po)
   GList *msg;
 
   msg = po->priv->current;
-  while (msg = g_list_previous (msg))
+  while ((msg = g_list_previous (msg)))
     {
       if (!gtr_msg_is_translated (msg->data))
         return msg;
@@ -844,7 +843,7 @@ gtr_po_get_next_fuzzy_or_untrans (GtrPo * po)
   GList *msg;
 
   msg = po->priv->current;
-  while (msg = g_list_next (msg))
+  while ((msg = g_list_next (msg)))
     {
       if (gtr_msg_is_fuzzy (msg->data) || !gtr_msg_is_translated (msg->data))
         return msg;
@@ -866,7 +865,7 @@ gtr_po_get_prev_fuzzy_or_untrans (GtrPo * po)
   GList *msg;
 
   msg = po->priv->current;
-  while (msg = g_list_previous (msg))
+  while ((msg = g_list_previous (msg)))
     {
       if (gtr_msg_is_fuzzy (msg->data) || !gtr_msg_is_translated (msg->data))
         return msg;

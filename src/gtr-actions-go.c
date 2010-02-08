@@ -108,7 +108,6 @@ gtr_message_go_to_next_untranslated (GtkAction * action, GtrWindow * window)
 {
   GtrTab *current;
   GtrPo *po;
-  GList *msg;
 
   current = gtr_window_get_active_tab (window);
   po = gtr_tab_get_po (current);
@@ -121,7 +120,6 @@ gtr_message_go_to_prev_untranslated (GtkAction * action, GtrWindow * window)
 {
   GtrTab *current;
   GtrPo *po;
-  GList *msg;
 
   current = gtr_window_get_active_tab (window);
   po = gtr_tab_get_po (current);
@@ -135,7 +133,6 @@ gtr_message_go_to_next_fuzzy_or_untranslated (GtkAction * action,
 {
   GtrTab *current;
   GtrPo *po;
-  GList *msg;
 
   current = gtr_window_get_active_tab (window);
   po = gtr_tab_get_po (current);
@@ -149,7 +146,6 @@ gtr_message_go_to_prev_fuzzy_or_untranslated (GtkAction * action,
 {
   GtrTab *current;
   GtrPo *po;
-  GList *msg;
 
   current = gtr_window_get_active_tab (window);
   po = gtr_tab_get_po (current);

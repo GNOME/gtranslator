@@ -23,7 +23,9 @@
 #include <config.h>
 #endif
 
+#include "gtr-actions.h"
 #include "gtr-dirs.h"
+#include "gtr-utils.h"
 #include "gtr-window.h"
 
 #include <glib.h>

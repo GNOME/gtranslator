@@ -484,8 +484,6 @@ gtr_header_set_plural_forms (GtrHeader * header, const gchar * plural_forms)
 gint
 gtr_header_get_nplurals (GtrHeader * header)
 {
-  const gchar *plural_form;
-
   g_return_val_if_fail (GTR_IS_HEADER (header), 1);
 
   if (header->priv->nplurals > -1)

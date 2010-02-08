@@ -69,7 +69,6 @@ struct _GtrViewPrivate
 static void
 gtr_attach_gtkspell (GtrView * view)
 {
-  gint i;
   GError *error = NULL;
   gchar *errortext = NULL;
   view->priv->spell = NULL;

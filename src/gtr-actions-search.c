@@ -730,36 +730,3 @@ _gtr_actions_search_replace (GtkAction * action, GtrWindow * window)
 
   gtk_widget_show (replace_dialog);
 }
-
-static void
-do_find_again (GtrWindow * window, gboolean backward)
-{
-  GtrView *active_view;
-  GtkTextBuffer *buffer;
-  gboolean wrap_around = TRUE;
-  LastSearchData *data;
-
-  active_view = gtr_window_get_active_view (window);
-  g_return_if_fail (active_view != NULL);
-
-  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (active_view));
-
-  data = g_object_get_data (G_OBJECT (buffer), GTR_LAST_SEARCH_DATA_KEY);
-
-  if (data != NULL)
-    wrap_around = data->wrap_around;
-
-  //run_search (active_view);
-}
-
-void
-_gtr_actions_search_find_next (GtkAction * action, GtrWindow * window)
-{
-  do_find_again (window, FALSE);
-}
-
-void
-_gtr_actions_search_find_prev (GtkAction * action, GtrWindow * window)
-{
-  do_find_again (window, TRUE);
-}

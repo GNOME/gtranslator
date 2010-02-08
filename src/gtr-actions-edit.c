@@ -26,6 +26,7 @@
 
 #include "dialogs/gtr-header-dialog.h"
 #include "dialogs/gtr-comment-dialog.h"
+#include "dialogs/gtr-preferences-dialog.h"
 #include "gtr-actions.h"
 #include "gtr-msg.h"
 #include "gtr-po.h"

@@ -532,41 +532,6 @@ remove_widget (GtrWindow * window, GtkWidget * widget, GError ** error)
   g_object_unref (widget);
 }
 
-static void
-gtr_app_present_widget (GtrWindow * window,
-                        GtkWidget * widget, GError ** error)
-{
-  GdlDockItem *dock_item;
-  GtkWidget *parent;
-
-  g_return_if_fail (GTR_IS_WINDOW (window));
-  g_return_if_fail (GTK_IS_WIDGET (widget));
-
-  g_return_if_fail (window->priv->widgets != NULL);
-
-  dock_item = g_object_get_data (G_OBJECT (widget), "dockitem");
-  g_return_if_fail (dock_item != NULL);
-
-  /* Hack to present the dock item if it's in a notebook dock item */
-  parent = gtk_widget_get_parent (GTK_WIDGET (dock_item));
-  if (GTK_IS_NOTEBOOK (parent))
-    {
-      gint pagenum;
-      pagenum =
-        gtk_notebook_page_num (GTK_NOTEBOOK (parent), GTK_WIDGET (dock_item));
-      gtk_notebook_set_current_page (GTK_NOTEBOOK (parent), pagenum);
-    }
-  else if (!GDL_DOCK_OBJECT_ATTACHED (dock_item))
-    {
-      gdl_dock_item_show_item (GDL_DOCK_ITEM (dock_item));
-    }
-
-  /* FIXME: If the item is floating, present the window */
-  /* FIXME: There is no way to detect if a widget was floating before it was
-     detached since it no longer has a parent there is no way to access the
-     floating property of the GdlDock structure. */
-}
-
 void
 set_sensitive_according_to_message (GtrWindow * window, GtrPo * po)
 {
@@ -1233,6 +1198,7 @@ _gtr_recent_add (GtrWindow * window, GFile * location, gchar * project_id)
   g_slice_free (GtkRecentData, recent_data);
 }
 
+/*
 static void
 gtr_recent_remove (GtrWindow * window, const gchar * path)
 {
@@ -1258,6 +1224,7 @@ gtr_recent_remove (GtrWindow * window, const gchar * path)
 
   g_free (uri);
 }
+*/
 
 static void
 gtr_recent_chooser_item_activated_cb (GtkRecentChooser * chooser,

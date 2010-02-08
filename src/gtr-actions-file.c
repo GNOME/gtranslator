@@ -80,7 +80,7 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
   /*
    * If not a crash/temporary file, add to the history.
    */
-  _gtr_recent_add (window, location, project_id);
+  _gtr_recent_add (window, location, (gchar *)project_id);
 
   /*
    * Create a page to add to our list of open files
@@ -741,11 +741,6 @@ close_all_documents (GtrWindow * window, gboolean logout_mode)
 void
 gtr_file_quit (GtkAction * action, GtrWindow * window)
 {
-  GtrNotebook *nb;
-  GtrTab *tab;
-  GtrPo *po;
-  gint pages;
-  GList *list = NULL;
   GList *profiles_list = NULL;
   gchar *config_folder;
   gchar *filename, *filename_temp;

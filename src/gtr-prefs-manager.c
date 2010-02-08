@@ -186,15 +186,6 @@ gtr_prefs_manager_set_string (const gchar * key, const gchar * value)
   gconf_client_set_string (gtr_prefs_manager->gconf_client, key, value, NULL);
 }
 
-static gboolean
-gtr_prefs_manager_key_is_writable (const gchar * key)
-{
-  //gtr_debug (DEBUG_PREFS);
-
-  return gconf_client_key_is_writable (gtr_prefs_manager->gconf_client, key,
-                                       NULL);
-}
-
 /* Files */
 DEFINE_BOOL_PREF (warn_if_contains_fuzzy,
                   GPM_WARN_IF_CONTAINS_FUZZY)
