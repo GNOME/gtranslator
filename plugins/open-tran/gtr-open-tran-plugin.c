@@ -59,19 +59,19 @@ typedef struct
 } WindowData;
 
 GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrOpenTranPlugin,
-				    gtr_open_tran_plugin,
-				    gtr_open_tran_panel_register_type
-				    (module);)
-     static void gtr_open_tran_plugin_init (GtrOpenTranPlugin
-						    * plugin)
+                                    gtr_open_tran_plugin,
+                                    gtr_open_tran_panel_register_type
+                                    (module);
+  )
+     static void gtr_open_tran_plugin_init (GtrOpenTranPlugin * plugin)
 {
   plugin->priv = GTR_OPEN_TRAN_PLUGIN_GET_PRIVATE (plugin);
 
   plugin->priv->gconf_client = gconf_client_get_default ();
 
   gconf_client_add_dir (plugin->priv->gconf_client,
-			OPEN_TRAN_BASE_KEY,
-			GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+                        OPEN_TRAN_BASE_KEY,
+                        GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 }
 
 static void
@@ -83,8 +83,7 @@ gtr_open_tran_plugin_finalize (GObject * object)
 
   g_object_unref (G_OBJECT (plugin->priv->gconf_client));
 
-  G_OBJECT_CLASS (gtr_open_tran_plugin_parent_class)->
-    finalize (object);
+  G_OBJECT_CLASS (gtr_open_tran_plugin_parent_class)->finalize (object);
 }
 
 
@@ -94,17 +93,16 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
   GtkWidget *opentran;
 
   gtr_application_register_icon (GTR_APP, "open-tran.png",
-					 "open-tran-plugin-icon");
+                                 "open-tran-plugin-icon");
 
   opentran = gtr_open_tran_panel_new (window);
   gtk_widget_show (opentran);
 
   gtr_window_add_widget (window,
-				 opentran,
-				 "GtrOpenTranPlugin",
-				 _("Open Tran"),
-				 "open-tran-plugin-icon",
-				 GTR_WINDOW_PLACEMENT_LEFT);
+                         opentran,
+                         "GtrOpenTranPlugin",
+                         _("Open Tran"),
+                         "open-tran-plugin-icon", GTR_WINDOW_PLACEMENT_LEFT);
 
   g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, opentran);
 }
@@ -115,7 +113,7 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
   GtkWidget *opentran;
 
   opentran = (GtkWidget *) g_object_get_data (G_OBJECT (window),
-					      WINDOW_DATA_KEY);
+                                              WINDOW_DATA_KEY);
   g_return_if_fail (opentran != NULL);
 
   gtr_window_remove_widget (window, opentran);
@@ -141,7 +139,7 @@ get_custom_code (GtrOpenTranPlugin * plugin, gboolean own_code)
   if (!code && !own_code)
     code = g_strdup ("en");
   else if (!code && own_code)
-    code = g_strdup ("gl");	//Why gl? Just because i want.
+    code = g_strdup ("gl");     //Why gl? Just because i want.
 
   if (!own_code)
     gtk_entry_set_text (GTK_ENTRY (plugin->priv->search_code_entry), code);
@@ -165,15 +163,14 @@ get_configuration_dialog (GtrOpenTranPlugin * plugin)
 
   path = gtr_dirs_get_ui_file ("gtr-open-tran-dialog.ui");
   ret = gtr_utils_get_ui_objects (path,
-					  root_objects,
-					  &error_widget,
-					  "dialog", &plugin->priv->dialog,
-					  "main_box", &plugin->priv->main_box,
-					  "search_code",
-					  &plugin->priv->search_code_entry,
-					  "own_code",
-					  &plugin->priv->own_code_entry,
-					  NULL);
+                                  root_objects,
+                                  &error_widget,
+                                  "dialog", &plugin->priv->dialog,
+                                  "main_box", &plugin->priv->main_box,
+                                  "search_code",
+                                  &plugin->priv->search_code_entry,
+                                  "own_code",
+                                  &plugin->priv->own_code_entry, NULL);
   g_free (path);
 
   if (!ret)
@@ -200,37 +197,36 @@ ok_button_pressed (GtrOpenTranPlugin * plugin)
 
   /* Now we store the data in gconf */
   if (!gconf_client_key_is_writable (plugin->priv->gconf_client,
-				     SEARCH_CODE_KEY, NULL))
+                                     SEARCH_CODE_KEY, NULL))
     return;
 
   gconf_client_set_string (plugin->priv->gconf_client,
-			   SEARCH_CODE_KEY, search_code, NULL);
+                           SEARCH_CODE_KEY, search_code, NULL);
 
   if (!gconf_client_key_is_writable (plugin->priv->gconf_client,
-				     OWN_CODE_KEY, NULL))
+                                     OWN_CODE_KEY, NULL))
     return;
 
   gconf_client_set_string (plugin->priv->gconf_client,
-			   OWN_CODE_KEY, own_code, NULL);
+                           OWN_CODE_KEY, own_code, NULL);
 }
 
 static void
 configure_dialog_response_cb (GtkWidget * widget,
-			      gint response,
-			      GtrOpenTranPlugin * plugin)
+                              gint response, GtrOpenTranPlugin * plugin)
 {
   switch (response)
     {
     case GTK_RESPONSE_OK:
       {
-	ok_button_pressed (plugin);
+        ok_button_pressed (plugin);
 
-	gtk_widget_destroy (plugin->priv->dialog);
-	break;
+        gtk_widget_destroy (plugin->priv->dialog);
+        break;
       }
     case GTK_RESPONSE_CANCEL:
       {
-	gtk_widget_destroy (plugin->priv->dialog);
+        gtk_widget_destroy (plugin->priv->dialog);
       }
     }
 }
@@ -243,18 +239,17 @@ impl_create_configure_dialog (GtrPlugin * plugin)
   dialog = get_configuration_dialog (GTR_OPEN_TRAN_PLUGIN (plugin));
 
   g_signal_connect (dialog,
-		    "response",
-		    G_CALLBACK (configure_dialog_response_cb),
-		    GTR_OPEN_TRAN_PLUGIN (plugin));
+                    "response",
+                    G_CALLBACK (configure_dialog_response_cb),
+                    GTR_OPEN_TRAN_PLUGIN (plugin));
   g_signal_connect (dialog,
-		    "destroy", G_CALLBACK (gtk_widget_destroy), &dialog);
+                    "destroy", G_CALLBACK (gtk_widget_destroy), &dialog);
 
   return dialog;
 }
 
 static void
-gtr_open_tran_plugin_class_init (GtrOpenTranPluginClass *
-					 klass)
+gtr_open_tran_plugin_class_init (GtrOpenTranPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
@@ -265,6 +260,5 @@ gtr_open_tran_plugin_class_init (GtrOpenTranPluginClass *
   plugin_class->deactivate = impl_deactivate;
   plugin_class->create_configure_dialog = impl_create_configure_dialog;
 
-  g_type_class_add_private (object_class,
-			    sizeof (GtrOpenTranPluginPrivate));
+  g_type_class_add_private (object_class, sizeof (GtrOpenTranPluginPrivate));
 }

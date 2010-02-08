@@ -31,17 +31,16 @@
 
 #define WINDOW_DATA_KEY "GtrInsertParamsPluginWindowData"
 
-GTR_PLUGIN_REGISTER_TYPE (GtrInsertParamsPlugin,
-			  gtr_insert_params_plugin)
+GTR_PLUGIN_REGISTER_TYPE (GtrInsertParamsPlugin, gtr_insert_params_plugin)
      static GSList *params = NULL;
      static gint param_position;
 
-     static const gchar param_regex[] = "\\%\\%|\\%" "(?:[1-9][0-9]*\\$)?"	// argument
-       "[#0\\-\\ \\+\\'I]*"	// flags
-       "(?:[1-9][0-9]*|\\*)?"	// width
-       "(?:\\.\\-?(?:[0-9]+|\\*))?"	// precision
-       "(?:hh|ll|[hlLqjzt])?"	// length modifier
-       "[diouxXeEfFgGaAcsCSpnm]";	// conversion specifier
+     static const gchar param_regex[] = "\\%\\%|\\%" "(?:[1-9][0-9]*\\$)?"      // argument
+       "[#0\\-\\ \\+\\'I]*"     // flags
+       "(?:[1-9][0-9]*|\\*)?"   // width
+       "(?:\\.\\-?(?:[0-9]+|\\*))?"     // precision
+       "(?:hh|ll|[hlLqjzt])?"   // length modifier
+       "[diouxXeEfFgGaAcsCSpnm]";       // conversion specifier
 
      static void
        on_next_tag_activated (GtkAction * action, GtrWindow * window)
@@ -64,8 +63,8 @@ GTR_PLUGIN_REGISTER_TYPE (GtrInsertParamsPlugin,
 
   gtk_text_buffer_begin_user_action (buffer);
   gtk_text_buffer_insert_at_cursor (buffer,
-				    (const gchar *) param->data,
-				    strlen (param->data));
+                                    (const gchar *) param->data,
+                                    strlen (param->data));
   gtk_text_buffer_end_user_action (buffer);
 
   param_position++;
@@ -111,18 +110,17 @@ update_ui_real (GtrWindow * window, WindowData * data)
 
   action = gtk_action_group_get_action (data->action_group, "InsertParams");
   gtk_action_set_sensitive (action,
-			    (view != NULL) &&
-			    gtk_text_view_get_editable (view));
+                            (view != NULL) &&
+                            gtk_text_view_get_editable (view));
 
   action = gtk_action_group_get_action (data->action_group, "NextParam");
   gtk_action_set_sensitive (action,
-			    (view != NULL) &&
-			    gtk_text_view_get_editable (view));
+                            (view != NULL) &&
+                            gtk_text_view_get_editable (view));
 }
 
 static void
-gtr_insert_params_plugin_init (GtrInsertParamsPlugin *
-				       message_table)
+gtr_insert_params_plugin_init (GtrInsertParamsPlugin * message_table)
 {
 }
 
@@ -135,8 +133,7 @@ gtr_insert_params_plugin_finalize (GObject * object)
       params = NULL;
     }
 
-  G_OBJECT_CLASS (gtr_insert_params_plugin_parent_class)->
-    finalize (object);
+  G_OBJECT_CLASS (gtr_insert_params_plugin_parent_class)->finalize (object);
 }
 
 static void
@@ -171,9 +168,9 @@ parse_list (GtrWindow * window)
   manager = gtr_window_get_ui_manager (window);
 
   insert_params = gtk_ui_manager_get_widget (manager,
-					     "/MainMenu/EditMenu/EditOps_1/EditInsertParams");
+                                             "/MainMenu/EditMenu/EditOps_1/EditInsertParams");
   next_param = gtk_ui_manager_get_widget (manager,
-					  "/MainMenu/EditMenu/EditOps_1/EditNextParam");
+                                          "/MainMenu/EditMenu/EditOps_1/EditNextParam");
 
   if (params == NULL)
     {
@@ -193,7 +190,7 @@ parse_list (GtrWindow * window)
       gtk_widget_show (menuitem);
 
       g_signal_connect (menuitem, "activate",
-			G_CALLBACK (on_menuitem_activated), window);
+                        G_CALLBACK (on_menuitem_activated), window);
 
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
     }
@@ -203,8 +200,7 @@ parse_list (GtrWindow * window)
 }
 
 static void
-showed_message_cb (GtrTab * tab,
-		   GtrMsg * msg, GtrWindow * window)
+showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrWindow * window)
 {
   const gchar *msgid;
   GRegex *regex;
@@ -239,22 +235,22 @@ showed_message_cb (GtrTab * tab,
       word = g_match_info_fetch (match_info, 0);
       word_collate = g_utf8_collate_key (word, -1);
       for (i = 0; i < g_slist_length (params); i++)
-	{
-	  gchar *param_collate;
-	  gchar *param = g_slist_nth_data (params, i);
+        {
+          gchar *param_collate;
+          gchar *param = g_slist_nth_data (params, i);
 
-	  param_collate = g_utf8_collate_key (param, -1);
-	  if (strcmp (param_collate, word_collate) == 0)
-	    {
-	      g_free (word);
-	      word = NULL;
-	    }
-	  g_free (param_collate);
-	}
+          param_collate = g_utf8_collate_key (param, -1);
+          if (strcmp (param_collate, word_collate) == 0)
+            {
+              g_free (word);
+              word = NULL;
+            }
+          g_free (param_collate);
+        }
       g_free (word_collate);
 
       if (word != NULL)
-	params = g_slist_append (params, word);
+        params = g_slist_append (params, word);
       g_match_info_next (match_info, NULL);
     }
   g_match_info_free (match_info);
@@ -266,10 +262,10 @@ showed_message_cb (GtrTab * tab,
 
 static void
 page_added_cb (GtkNotebook * notebook,
-	       GtkWidget * child, guint page_num, GtrWindow * window)
+               GtkWidget * child, guint page_num, GtrWindow * window)
 {
   g_signal_connect (child, "showed-message",
-		    G_CALLBACK (showed_message_cb), window);
+                    G_CALLBACK (showed_message_cb), window);
 }
 
 static void
@@ -287,17 +283,16 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
 
   manager = gtr_window_get_ui_manager (window);
 
-  data->action_group =
-    gtk_action_group_new ("GtrInsertParamsPluginActions");
+  data->action_group = gtk_action_group_new ("GtrInsertParamsPluginActions");
   gtk_action_group_set_translation_domain (data->action_group,
-					   GETTEXT_PACKAGE);
+                                           GETTEXT_PACKAGE);
   gtk_action_group_add_actions (data->action_group, action_entries,
-				G_N_ELEMENTS (action_entries), window);
+                                G_N_ELEMENTS (action_entries), window);
 
   gtk_ui_manager_insert_action_group (manager, data->action_group, -1);
 
   data->ui_id = gtk_ui_manager_add_ui_from_string (manager,
-						   submenu, -1, &error);
+                                                   submenu, -1, &error);
   if (error)
     {
       g_warning ("%s", error->message);
@@ -307,8 +302,8 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
     }
 
   g_object_set_data_full (G_OBJECT (window),
-			  WINDOW_DATA_KEY,
-			  data, (GDestroyNotify) free_window_data);
+                          WINDOW_DATA_KEY,
+                          data, (GDestroyNotify) free_window_data);
 
   update_ui_real (window, data);
 
@@ -317,7 +312,7 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
   notebook = gtr_window_get_notebook (window);
 
   g_signal_connect (GTK_NOTEBOOK (notebook),
-		    "page-added", G_CALLBACK (page_added_cb), window);
+                    "page-added", G_CALLBACK (page_added_cb), window);
 
   tabs = gtr_window_get_all_tabs (window);
 
@@ -326,7 +321,7 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
   do
     {
       g_signal_connect (tabs->data, "showed-message",
-			G_CALLBACK (showed_message_cb), window);
+                        G_CALLBACK (showed_message_cb), window);
     }
   while ((tabs = g_list_next (tabs)));
 }
@@ -373,8 +368,7 @@ impl_update_ui (GtrPlugin * plugin, GtrWindow * window)
 }
 
 static void
-gtr_insert_params_plugin_class_init
-  (GtrInsertParamsPluginClass * klass)
+  gtr_insert_params_plugin_class_init (GtrInsertParamsPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);

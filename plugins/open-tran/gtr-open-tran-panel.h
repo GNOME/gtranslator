@@ -40,8 +40,7 @@ G_BEGIN_DECLS
 #define SEARCH_CODE_KEY OPEN_TRAN_BASE_KEY "/search_code"
 #define OWN_CODE_KEY OPEN_TRAN_BASE_KEY "/own_code"
 /* Private structure type */
-typedef struct _GtrOpenTranPanelPrivate
-  GtrOpenTranPanelPrivate;
+typedef struct _GtrOpenTranPanelPrivate GtrOpenTranPanelPrivate;
 
 /*
  * Main object structure

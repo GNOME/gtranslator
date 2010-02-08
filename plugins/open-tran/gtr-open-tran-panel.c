@@ -49,36 +49,33 @@
 #define OPEN_OFFICE_ICON PIXMAPSDIR"/oo-logo.png"
 #define FEDORA_ICON PIXMAPSDIR"/fedora.png"
 
-GTR_PLUGIN_DEFINE_TYPE (GtrOpenTranPanel, gtr_open_tran_panel,
-			GTK_TYPE_VBOX)
+GTR_PLUGIN_DEFINE_TYPE (GtrOpenTranPanel, gtr_open_tran_panel, GTK_TYPE_VBOX)
+     struct _GtrOpenTranPanelPrivate
+     {
+       GConfClient *gconf_client;
 
-struct _GtrOpenTranPanelPrivate
-{
-  GConfClient *gconf_client;
+       GtkWidget *treeview;
+       GtkListStore *store;
 
-  GtkWidget *treeview;
-  GtkListStore *store;
+       GtkWidget *entry;
 
-  GtkWidget *entry;
+       SoupSession *session;
 
-  SoupSession *session;
+       GtrWindow *window;
 
-  GtrWindow *window;
+       gchar *text;
+     };
 
-  gchar *text;
-};
+     enum
+     {
+       ICON_COLUMN,
+       TEXT_COLUMN,
+       N_COLUMNS
+     };
 
-enum
-{
-  ICON_COLUMN,
-  TEXT_COLUMN,
-  N_COLUMNS
-};
-
-static void
-show_error_dialog (GtrWindow * parent,
-		   const gchar * message_format,
-		   ...)
+     static void
+       show_error_dialog (GtrWindow * parent,
+                          const gchar * message_format, ...)
 {
   gchar *msg = NULL;
   va_list args;
@@ -89,13 +86,13 @@ show_error_dialog (GtrWindow * parent,
   va_end (args);
 
   dialog = gtk_message_dialog_new (GTK_WINDOW (parent),
-				   GTK_DIALOG_DESTROY_WITH_PARENT,
-				   GTK_MESSAGE_ERROR,
-				   GTK_BUTTONS_CLOSE, "%s", msg);
+                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   GTK_MESSAGE_ERROR,
+                                   GTK_BUTTONS_CLOSE, "%s", msg);
   g_free (msg);
 
   g_signal_connect (dialog, "response",
-		    G_CALLBACK (gtk_widget_destroy), &dialog);
+                    G_CALLBACK (gtk_widget_destroy), &dialog);
   gtk_widget_show (dialog);
 }
 
@@ -118,8 +115,7 @@ create_pixbuf (const gchar * path)
 }
 
 static void
-print_struct_to_tree_view (const gchar * str,
-			   GtrOpenTranPanel * panel)
+print_struct_to_tree_view (const gchar * str, GtrOpenTranPanel * panel)
 {
   GdkPixbuf *icon;
   GtkTreeIter iter;
@@ -150,7 +146,7 @@ print_struct_to_tree_view (const gchar * str,
 
   gtk_list_store_append (panel->priv->store, &iter);
   gtk_list_store_set (panel->priv->store, &iter,
-		      ICON_COLUMN, icon, TEXT_COLUMN, panel->priv->text, -1);
+                      ICON_COLUMN, icon, TEXT_COLUMN, panel->priv->text, -1);
 
   g_free (panel->priv->text);
 
@@ -180,17 +176,17 @@ print_struct_field (gpointer key, gpointer value, gpointer data)
       array = g_value_get_boxed (value);
 
       if (G_VALUE_HOLDS (array->values, G_TYPE_HASH_TABLE))
-	{
-	  gpointer name;
+        {
+          gpointer name;
 
-	  hash = g_value_get_boxed (array->values);
-	  name = g_hash_table_lookup (hash, "name");
+          hash = g_value_get_boxed (array->values);
+          name = g_hash_table_lookup (hash, "name");
 
-	  if (name != NULL)
-	    {
-	      print_struct_to_tree_view (g_value_get_string (name), panel);
-	    }
-	}
+          if (name != NULL)
+            {
+              print_struct_to_tree_view (g_value_get_string (name), panel);
+            }
+        }
 
       /*
        * It's important freeing the array after the use of its contents
@@ -216,8 +212,8 @@ check_xmlrpc (GValue * value, GType type, ...)
 
 static void
 open_connection (GtrOpenTranPanel * panel,
-		 const gchar * text,
-		 const gchar * search_code, const gchar * own_code)
+                 const gchar * text,
+                 const gchar * search_code, const gchar * own_code)
 {
   const gchar *uri = "http://open-tran.eu/RPC2";
   SoupMessage *msg;
@@ -230,11 +226,11 @@ open_connection (GtrOpenTranPanel * panel,
   gint i;
 
   array = soup_value_array_new_with_vals (G_TYPE_STRING, text,
-					  G_TYPE_STRING, search_code,
-					  G_TYPE_STRING, own_code, NULL);
+                                          G_TYPE_STRING, search_code,
+                                          G_TYPE_STRING, own_code, NULL);
 
   body = soup_xmlrpc_build_method_call ("suggest2", array->values,
-					array->n_values);
+                                        array->n_values);
 
   g_value_array_free (array);
 
@@ -243,31 +239,31 @@ open_connection (GtrOpenTranPanel * panel,
 
   msg = soup_message_new ("POST", uri);
   soup_message_set_request (msg, "text/xml", SOUP_MEMORY_TAKE,
-			    body, strlen (body));
+                            body, strlen (body));
   soup_session_send_message (panel->priv->session, msg);
 
   if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
     {
       show_error_dialog (panel->priv->window,
-			 _("ERROR: %d %s\n"), msg->status_code,
-			 msg->reason_phrase);
+                         _("ERROR: %d %s\n"), msg->status_code,
+                         msg->reason_phrase);
       g_object_unref (msg);
       return;
     }
 
   if (!soup_xmlrpc_parse_method_response (msg->response_body->data,
-					  msg->response_body->length,
-					  &retval, &err))
+                                          msg->response_body->length,
+                                          &retval, &err))
     {
       if (err)
-	{
-	  show_error_dialog (panel->priv->window,
-			     _("FAULT: %d %s\n"), err->code, err->message);
-	  g_error_free (err);
-	}
+        {
+          show_error_dialog (panel->priv->window,
+                             _("FAULT: %d %s\n"), err->code, err->message);
+          g_error_free (err);
+        }
       else
-	show_error_dialog (panel->priv->window,
-			   _("ERROR: could not parse response\n"));
+        show_error_dialog (panel->priv->window,
+                           _("ERROR: could not parse response\n"));
 
       g_object_unref (msg);
       return;
@@ -284,24 +280,24 @@ open_connection (GtrOpenTranPanel * panel,
   for (i = 0; i < array->n_values; i++)
     {
       if (!soup_value_array_get_nth (array, i, G_TYPE_HASH_TABLE, &result))
-	{
-	  show_error_dialog (panel->priv->window,
-			     _("WRONG! Can't get result element %d\n"),
-			     i + 1);
-	  break;
-	}
+        {
+          show_error_dialog (panel->priv->window,
+                             _("WRONG! Can't get result element %d\n"),
+                             i + 1);
+          break;
+        }
 
       g_hash_table_foreach (result, print_struct_field, panel);
     }
 
   /* We have to check if we didn't find any text */
   if (!gtk_tree_model_get_iter_first (GTK_TREE_MODEL (panel->priv->store),
-				      &treeiter))
+                                      &treeiter))
     {
       gtk_list_store_append (panel->priv->store, &treeiter);
       gtk_list_store_set (panel->priv->store, &treeiter,
-			  ICON_COLUMN, NULL,
-			  TEXT_COLUMN, _("Phrase not found"), -1);
+                          ICON_COLUMN, NULL,
+                          TEXT_COLUMN, _("Phrase not found"), -1);
     }
 
   soup_session_abort (panel->priv->session);
@@ -320,26 +316,26 @@ entry_activate_cb (GtkEntry * entry, GtrOpenTranPanel * panel)
   if (!entry_text)
     {
       show_error_dialog (panel->priv->window,
-			 _("You have to provide a phrase to search"));
+                         _("You have to provide a phrase to search"));
       return;
     }
 
   search_code = gconf_client_get_string (panel->priv->gconf_client,
-					 SEARCH_CODE_KEY, NULL);
+                                         SEARCH_CODE_KEY, NULL);
   if (!search_code)
     {
       show_error_dialog (panel->priv->window,
-			 _("You have to provide a search language code"));
+                         _("You have to provide a search language code"));
       return;
     }
 
   own_code = gconf_client_get_string (panel->priv->gconf_client,
-				      OWN_CODE_KEY, NULL);
+                                      OWN_CODE_KEY, NULL);
   if (!own_code)
     {
       show_error_dialog (panel->priv->window,
-			 _
-			 ("You have to provide a language code for your language"));
+                         _
+                         ("You have to provide a language code for your language"));
       return;
     }
 
@@ -355,7 +351,7 @@ gtr_open_tran_panel_draw_treeview (GtrOpenTranPanel * panel)
   GtrOpenTranPanelPrivate *priv = panel->priv;
 
   priv->store = gtk_list_store_new (N_COLUMNS,
-				    GDK_TYPE_PIXBUF, G_TYPE_STRING);
+                                    GDK_TYPE_PIXBUF, G_TYPE_STRING);
 
   priv->treeview =
     gtk_tree_view_new_with_model (GTK_TREE_MODEL (priv->store));
@@ -368,8 +364,8 @@ gtr_open_tran_panel_draw_treeview (GtrOpenTranPanel * panel)
 
   renderer = gtk_cell_renderer_pixbuf_new ();
   column = gtk_tree_view_column_new_with_attributes (_("Type"),
-						     renderer, "pixbuf",
-						     ICON_COLUMN, NULL);
+                                                     renderer, "pixbuf",
+                                                     ICON_COLUMN, NULL);
   gtk_tree_view_column_set_resizable (column, FALSE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (priv->treeview), column);
 
@@ -379,9 +375,9 @@ gtr_open_tran_panel_draw_treeview (GtrOpenTranPanel * panel)
   column = gtk_tree_view_column_new ();
   renderer = gtk_cell_renderer_text_new ();
   column = gtk_tree_view_column_new_with_attributes (_("Open-Tran.eu"),
-						     renderer,
-						     "text", TEXT_COLUMN,
-						     NULL);
+                                                     renderer,
+                                                     "text", TEXT_COLUMN,
+                                                     NULL);
 
   gtk_tree_view_column_set_resizable (column, FALSE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (priv->treeview), column);
@@ -399,9 +395,9 @@ gtr_open_tran_panel_draw (GtrOpenTranPanel * panel)
    */
   scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow),
-				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow),
-				       GTK_SHADOW_IN);
+                                       GTK_SHADOW_IN);
   gtk_box_pack_start (GTK_BOX (panel), scrolledwindow, TRUE, TRUE, 0);
 
   /*
@@ -424,7 +420,7 @@ gtr_open_tran_panel_draw (GtrOpenTranPanel * panel)
   panel->priv->entry = gtk_entry_new ();
   gtk_box_pack_start (GTK_BOX (hbox), panel->priv->entry, TRUE, TRUE, 0);
   g_signal_connect (panel->priv->entry, "activate",
-		    G_CALLBACK (entry_activate_cb), panel);
+                    G_CALLBACK (entry_activate_cb), panel);
 
   gtk_box_pack_start (GTK_BOX (panel), hbox, FALSE, TRUE, 0);
 }

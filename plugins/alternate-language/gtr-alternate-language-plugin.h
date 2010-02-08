@@ -36,8 +36,7 @@ G_BEGIN_DECLS
 #define GTR_IS_ALTERNATE_LANG_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_ALTERNATE_LANG_PLUGIN))
 #define GTR_ALTERNATE_LANG_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_ALTERNATE_LANG_PLUGIN_PLUGIN, GtrAlternateLangPluginClass))
 /* Private structure type */
-typedef struct _GtrAlternateLangPluginPrivate
-  GtrAlternateLangPluginPrivate;
+typedef struct _GtrAlternateLangPluginPrivate GtrAlternateLangPluginPrivate;
 
 /*
  * Main object structure
@@ -52,8 +51,7 @@ struct _GtrAlternateLangPlugin
 /*
  * Class definition
  */
-typedef struct _GtrAlternateLangPluginClass
-  GtrAlternateLangPluginClass;
+typedef struct _GtrAlternateLangPluginClass GtrAlternateLangPluginClass;
 
 struct _GtrAlternateLangPluginClass
 {

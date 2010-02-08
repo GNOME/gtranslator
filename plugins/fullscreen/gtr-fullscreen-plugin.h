@@ -35,8 +35,7 @@ G_BEGIN_DECLS
 #define GTR_IS_FULLSCREEN_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_FULLSCREEN_PLUGIN))
 #define GTR_FULLSCREEN_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_FULLSCREEN_PLUGIN_PLUGIN, GtrFullscreenPluginClass))
 /* Private structure type */
-typedef struct _GtrFullscreenPluginPrivate
-  GtrFullscreenPluginPrivate;
+typedef struct _GtrFullscreenPluginPrivate GtrFullscreenPluginPrivate;
 
 /*
  * Main object structure
@@ -51,8 +50,7 @@ struct _GtrFullscreenPlugin
 /*
  * Class definition
  */
-typedef struct _GtrFullscreenPluginClass
-  GtrFullscreenPluginClass;
+typedef struct _GtrFullscreenPluginClass GtrFullscreenPluginClass;
 
 struct _GtrFullscreenPluginClass
 {

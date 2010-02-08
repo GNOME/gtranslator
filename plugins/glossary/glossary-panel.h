@@ -39,8 +39,7 @@ G_BEGIN_DECLS
 #define GTR_IS_GLOSSARY_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_GLOSSARY_PANEL))
 #define GTR_GLOSSARY_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_GLOSSARY_PANEL, GtrGlossaryPanelClass))
 /* Private structure type */
-typedef struct _GtrGlossaryPanelPrivate
-  GtrGlossaryPanelPrivate;
+typedef struct _GtrGlossaryPanelPrivate GtrGlossaryPanelPrivate;
 
 /*
  * Main object structure

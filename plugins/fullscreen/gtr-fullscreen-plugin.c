@@ -30,10 +30,9 @@
 #define WINDOW_DATA_KEY "GtrFullscreenPluginWindowData"
 #define MENU_PATH "/MainMenu/ViewMenu/ViewOps_1"
 
-GTR_PLUGIN_REGISTER_TYPE (GtrFullscreenPlugin,
-			  gtr_fullscreen_plugin)
+GTR_PLUGIN_REGISTER_TYPE (GtrFullscreenPlugin, gtr_fullscreen_plugin)
      static void on_fullscreen_activated (GtkToggleAction * action,
-					  GtrWindow * window)
+                                          GtrWindow * window)
 {
   if (gtk_toggle_action_get_active (action))
     gtk_window_fullscreen (GTK_WINDOW (window));
@@ -62,16 +61,14 @@ free_window_data (WindowData * data)
 }
 
 static void
-gtr_fullscreen_plugin_init (GtrFullscreenPlugin *
-				    message_table)
+gtr_fullscreen_plugin_init (GtrFullscreenPlugin * message_table)
 {
 }
 
 static void
 gtr_fullscreen_plugin_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtr_fullscreen_plugin_parent_class)->
-    finalize (object);
+  G_OBJECT_CLASS (gtr_fullscreen_plugin_parent_class)->finalize (object);
 }
 
 static void
@@ -87,12 +84,11 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
 
   manager = gtr_window_get_ui_manager (window);
 
-  data->action_group =
-    gtk_action_group_new ("GtrFullscreenPluginActions");
+  data->action_group = gtk_action_group_new ("GtrFullscreenPluginActions");
   gtk_action_group_set_translation_domain (data->action_group,
-					   GETTEXT_PACKAGE);
+                                           GETTEXT_PACKAGE);
   gtk_action_group_add_toggle_actions (data->action_group, action_entries,
-				       G_N_ELEMENTS (action_entries), window);
+                                       G_N_ELEMENTS (action_entries), window);
 
   gtk_ui_manager_insert_action_group (manager, data->action_group, -1);
 
@@ -107,14 +103,14 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
     }
 
   g_object_set_data_full (G_OBJECT (window),
-			  WINDOW_DATA_KEY,
-			  data, (GDestroyNotify) free_window_data);
+                          WINDOW_DATA_KEY,
+                          data, (GDestroyNotify) free_window_data);
 
   gtk_ui_manager_add_ui (manager,
-			 data->ui_id,
-			 MENU_PATH,
-			 "Fullscreen",
-			 "Fullscreen", GTK_UI_MANAGER_MENUITEM, FALSE);
+                         data->ui_id,
+                         MENU_PATH,
+                         "Fullscreen",
+                         "Fullscreen", GTK_UI_MANAGER_MENUITEM, FALSE);
 }
 
 static void
@@ -136,8 +132,7 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
 }
 
 static void
-gtr_fullscreen_plugin_class_init (GtrFullscreenPluginClass *
-					  klass)
+gtr_fullscreen_plugin_class_init (GtrFullscreenPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);

@@ -71,8 +71,7 @@ gtr_dict_panel_get_type (void)
 
      GtkWidget *gtr_dict_panel_new (GtrWindow * window);
 
-     void gtr_dict_panel_set_position (GtrDictPanel * panel,
-					       gint pos);
+     void gtr_dict_panel_set_position (GtrDictPanel * panel, gint pos);
 
 G_END_DECLS
 #endif /* __DICT_PANEL_H__ */

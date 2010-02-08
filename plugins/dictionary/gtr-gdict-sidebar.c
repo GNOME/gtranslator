@@ -138,9 +138,9 @@ gdict_sidebar_dispose (GObject * object)
 
 static void
 gdict_sidebar_menu_position_function (GtkMenu * menu,
-				      gint * x,
-				      gint * y,
-				      gboolean * push_in, gpointer user_data)
+                                      gint * x,
+                                      gint * y,
+                                      gboolean * push_in, gpointer user_data)
 {
   GtkWidget *widget;
 
@@ -158,8 +158,8 @@ gdict_sidebar_menu_position_function (GtkMenu * menu,
 
 static gboolean
 gdict_sidebar_select_button_press_cb (GtkWidget * widget,
-				      GdkEventButton * event,
-				      gpointer user_data)
+                                      GdkEventButton * event,
+                                      gpointer user_data)
 {
   GdictSidebar *sidebar = GDICT_SIDEBAR (user_data);
 
@@ -172,14 +172,14 @@ gdict_sidebar_select_button_press_cb (GtkWidget * widget,
       gtk_widget_set_size_request (sidebar->priv->menu, -1, -1);
       gtk_widget_size_request (sidebar->priv->menu, &req);
       gtk_widget_set_size_request (sidebar->priv->menu,
-				   MAX (width, req.width), -1);
+                                   MAX (width, req.width), -1);
       gtk_widget_grab_focus (widget);
 
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
       gtk_menu_popup (GTK_MENU (sidebar->priv->menu),
-		      NULL, NULL,
-		      gdict_sidebar_menu_position_function, widget,
-		      event->button, event->time);
+                      NULL, NULL,
+                      gdict_sidebar_menu_position_function, widget,
+                      event->button, event->time);
 
       return TRUE;
     }
@@ -189,7 +189,7 @@ gdict_sidebar_select_button_press_cb (GtkWidget * widget,
 
 static gboolean
 gdict_sidebar_select_key_press_cb (GtkWidget * widget,
-				   GdkEventKey * event, gpointer user_data)
+                                   GdkEventKey * event, gpointer user_data)
 {
   GdictSidebar *sidebar = GDICT_SIDEBAR (user_data);
 
@@ -199,9 +199,9 @@ gdict_sidebar_select_key_press_cb (GtkWidget * widget,
     {
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
       gtk_menu_popup (GTK_MENU (sidebar->priv->menu),
-		      NULL, NULL,
-		      gdict_sidebar_menu_position_function, widget,
-		      1, event->time);
+                      NULL, NULL,
+                      gdict_sidebar_menu_position_function, widget,
+                      1, event->time);
 
       return TRUE;
     }
@@ -270,16 +270,16 @@ gdict_sidebar_class_init (GdictSidebarClass * klass)
 
   sidebar_signals[PAGE_CHANGED] =
     g_signal_new ("page-changed",
-		  G_TYPE_FROM_CLASS (gobject_class),
-		  G_SIGNAL_RUN_LAST,
-		  G_STRUCT_OFFSET (GdictSidebarClass, page_changed),
-		  NULL, NULL, g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
+                  G_TYPE_FROM_CLASS (gobject_class),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (GdictSidebarClass, page_changed),
+                  NULL, NULL, g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
   sidebar_signals[CLOSED] =
     g_signal_new ("closed",
-		  G_TYPE_FROM_CLASS (gobject_class),
-		  G_SIGNAL_RUN_LAST,
-		  G_STRUCT_OFFSET (GdictSidebarClass, closed),
-		  NULL, NULL, g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
+                  G_TYPE_FROM_CLASS (gobject_class),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (GdictSidebarClass, closed),
+                  NULL, NULL, g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
 }
 
 static void
@@ -311,10 +311,10 @@ gdict_sidebar_init (GdictSidebar * sidebar)
   select_button = gtk_toggle_button_new ();
   gtk_button_set_relief (GTK_BUTTON (select_button), GTK_RELIEF_NONE);
   g_signal_connect (select_button, "button-press-event",
-		    G_CALLBACK (gdict_sidebar_select_button_press_cb),
-		    sidebar);
+                    G_CALLBACK (gdict_sidebar_select_button_press_cb),
+                    sidebar);
   g_signal_connect (select_button, "key-press-event",
-		    G_CALLBACK (gdict_sidebar_select_key_press_cb), sidebar);
+                    G_CALLBACK (gdict_sidebar_select_key_press_cb), sidebar);
   priv->select_button = select_button;
 
   select_hbox = gtk_hbox_new (FALSE, 0);
@@ -336,18 +336,18 @@ gdict_sidebar_init (GdictSidebar * sidebar)
 
   sidebar->priv->menu = gtk_menu_new ();
   g_signal_connect (sidebar->priv->menu, "deactivate",
-		    G_CALLBACK (gdict_sidebar_menu_deactivate_cb), sidebar);
+                    G_CALLBACK (gdict_sidebar_menu_deactivate_cb), sidebar);
   gtk_menu_attach_to_widget (GTK_MENU (sidebar->priv->menu),
-			     GTK_WIDGET (sidebar),
-			     gdict_sidebar_menu_detach_cb);
+                             GTK_WIDGET (sidebar),
+                             gdict_sidebar_menu_detach_cb);
   gtk_widget_show (sidebar->priv->menu);
 
   sidebar->priv->notebook = gtk_notebook_new ();
   gtk_notebook_set_show_border (GTK_NOTEBOOK (sidebar->priv->notebook),
-				FALSE);
+                                FALSE);
   gtk_notebook_set_show_tabs (GTK_NOTEBOOK (sidebar->priv->notebook), FALSE);
   gtk_box_pack_start (GTK_BOX (sidebar), sidebar->priv->notebook, TRUE, TRUE,
-		      6);
+                      6);
   gtk_widget_show (sidebar->priv->notebook);
 }
 
@@ -363,8 +363,8 @@ gdict_sidebar_new (void)
 
 void
 gdict_sidebar_add_page (GdictSidebar * sidebar,
-			const gchar * page_id,
-			const gchar * page_name, GtkWidget * page_widget)
+                        const gchar * page_id,
+                        const gchar * page_name, GtkWidget * page_widget)
 {
   GdictSidebarPrivate *priv;
   SidebarPage *page;
@@ -380,8 +380,8 @@ gdict_sidebar_add_page (GdictSidebar * sidebar,
   if (g_hash_table_lookup (priv->pages_by_id, page_id))
     {
       g_warning ("Attempting to add a page to the sidebar with "
-		 "id `%s', but there already is a page with the "
-		 "same id.  Aborting...", page_id);
+                 "id `%s', but there already is a page with the "
+                 "same id.  Aborting...", page_id);
       return;
     }
 
@@ -392,15 +392,15 @@ gdict_sidebar_add_page (GdictSidebar * sidebar,
   g_hash_table_insert (priv->pages_by_id, page->id, page);
 
   page->index = gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook),
-					  page_widget, NULL);
+                                          page_widget, NULL);
 
   /* add the menu item for the page */
   menu_item = gtk_image_menu_item_new_with_label (page_name);
   g_object_set_qdata_full (G_OBJECT (menu_item),
-			   sidebar_page_id_quark,
-			   g_strdup (page_id), (GDestroyNotify) g_free);
+                           sidebar_page_id_quark,
+                           g_strdup (page_id), (GDestroyNotify) g_free);
   g_signal_connect (menu_item, "activate",
-		    G_CALLBACK (gdict_sidebar_menu_item_activate), sidebar);
+                    G_CALLBACK (gdict_sidebar_menu_item_activate), sidebar);
   gtk_menu_shell_append (GTK_MENU_SHELL (priv->menu), menu_item);
   gtk_widget_show (menu_item);
   page->menu_item = menu_item;
@@ -425,8 +425,8 @@ gdict_sidebar_remove_page (GdictSidebar * sidebar, const gchar * page_id)
   if ((page = g_hash_table_lookup (priv->pages_by_id, page_id)) == NULL)
     {
       g_warning ("Attempting to remove a page from the sidebar with "
-		 "id `%s', but there is no page with this id. Aborting...",
-		 page_id);
+                 "id `%s', but there is no page with this id. Aborting...",
+                 page_id);
       return;
     }
 
@@ -436,10 +436,10 @@ gdict_sidebar_remove_page (GdictSidebar * sidebar, const gchar * page_id)
       GtkWidget *menu_item = l->data;
 
       if (menu_item == page->menu_item)
-	{
-	  gtk_container_remove (GTK_CONTAINER (priv->menu), menu_item);
-	  break;
-	}
+        {
+          gtk_container_remove (GTK_CONTAINER (priv->menu), menu_item);
+          break;
+        }
     }
   g_list_free (children);
 
@@ -455,10 +455,10 @@ gdict_sidebar_remove_page (GdictSidebar * sidebar, const gchar * page_id)
   if (page)
     {
       gtk_menu_shell_select_item (GTK_MENU_SHELL (priv->menu),
-				  page->menu_item);
+                                  page->menu_item);
       gtk_label_set_text (GTK_LABEL (priv->label), page->name);
       gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook),
-				     page->index);
+                                     page->index);
     }
   else
     gtk_widget_hide (GTK_WIDGET (sidebar));

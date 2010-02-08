@@ -35,14 +35,12 @@ G_BEGIN_DECLS
 #define GTR_IS_SOURCE_CODE_VIEW_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN))
 #define GTR_SOURCE_CODE_VIEW_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_SOURCE_CODE_VIEW_PLUGIN_PLUGIN, GtrSourceCodeViewPluginClass))
 /* Private structure type */
-typedef struct _GtrSourceCodeViewPluginPrivate
-  GtrSourceCodeViewPluginPrivate;
+typedef struct _GtrSourceCodeViewPluginPrivate GtrSourceCodeViewPluginPrivate;
 
 /*
  * Main object structure
  */
-typedef struct _GtrSourceCodeViewPlugin
-  GtrSourceCodeViewPlugin;
+typedef struct _GtrSourceCodeViewPlugin GtrSourceCodeViewPlugin;
 
 struct _GtrSourceCodeViewPlugin
 {
@@ -55,8 +53,7 @@ struct _GtrSourceCodeViewPlugin
 /*
  * Class definition
  */
-typedef struct _GtrSourceCodeViewPluginClass
-  GtrSourceCodeViewPluginClass;
+typedef struct _GtrSourceCodeViewPluginClass GtrSourceCodeViewPluginClass;
 
 struct _GtrSourceCodeViewPluginClass
 {

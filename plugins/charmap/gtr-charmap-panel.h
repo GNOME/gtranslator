@@ -79,12 +79,10 @@ gtr_charmap_panel_get_type (void)
      GtkWidget *gtr_charmap_panel_new (void);
 
 #ifdef HAVE_GUCHARMAP_2
-     GucharmapChartable
-       *gtr_charmap_panel_get_chartable (GtrCharmapPanel *
-						 panel);
+GucharmapChartable
+  * gtr_charmap_panel_get_chartable (GtrCharmapPanel * panel);
 #else
-     GucharmapTable
-       *gtr_charmap_panel_get_table (GtrCharmapPanel * panel);
+GucharmapTable * gtr_charmap_panel_get_table (GtrCharmapPanel * panel);
 #endif
 
 G_END_DECLS

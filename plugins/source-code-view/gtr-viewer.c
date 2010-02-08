@@ -71,7 +71,7 @@ gtr_viewer_init (GtrViewer * dlg)
   dlg->priv = GTR_VIEWER_GET_PRIVATE (dlg);
 
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
-			  GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE, NULL);
+                          GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE, NULL);
 
   gtk_window_set_title (GTK_WINDOW (dlg), _("Source Viewer"));
   gtk_window_set_default_size (GTK_WINDOW (dlg), 800, 600);
@@ -81,36 +81,36 @@ gtr_viewer_init (GtrViewer * dlg)
 
   /* HIG defaults */
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);	/* 2 * 5 + 2 = 12 */
+  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);    /* 2 * 5 + 2 = 12 */
   gtk_container_set_border_width (GTK_CONTAINER
-				  (GTK_DIALOG (dlg)->action_area), 5);
+                                  (GTK_DIALOG (dlg)->action_area), 5);
   gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 4);
 
   g_signal_connect (dlg,
-		    "response", G_CALLBACK (dialog_response_handler), NULL);
+                    "response", G_CALLBACK (dialog_response_handler), NULL);
 
   /*Builder */
   path = gtr_dirs_get_ui_file ("gtr-viewer.ui");
   ret = gtr_utils_get_ui_objects (path,
-					  root_objects,
-					  &error_widget,
-					  "main_box", &dlg->priv->main_box,
-					  "scrolledwindow", &sw,
-					  "filename_label",
-					  &dlg->priv->filename_label, NULL);
+                                  root_objects,
+                                  &error_widget,
+                                  "main_box", &dlg->priv->main_box,
+                                  "scrolledwindow", &sw,
+                                  "filename_label",
+                                  &dlg->priv->filename_label, NULL);
   g_free (path);
 
   if (!ret)
     {
       gtk_widget_show (error_widget);
       gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-			  error_widget, TRUE, TRUE, 0);
+                          error_widget, TRUE, TRUE, 0);
 
       return;
     }
 
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-		      dlg->priv->main_box, TRUE, TRUE, 0);
+                      dlg->priv->main_box, TRUE, TRUE, 0);
 
   gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->main_box), 5);
 
@@ -121,13 +121,13 @@ gtr_viewer_init (GtrViewer * dlg)
   gtk_container_add (GTK_CONTAINER (sw), dlg->priv->view);
 
   gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW
-					      (dlg->priv->view), TRUE);
+                                              (dlg->priv->view), TRUE);
 
   gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (dlg->priv->view),
-					 TRUE);
+                                         TRUE);
 
   gtk_source_view_set_show_right_margin (GTK_SOURCE_VIEW (dlg->priv->view),
-					 TRUE);
+                                         TRUE);
 }
 
 static void
@@ -160,9 +160,9 @@ error_dialog (GtkWindow * parent, const gchar * msg, ...)
   va_end (ap);
 
   dialog = gtk_message_dialog_new (parent,
-				   GTK_DIALOG_DESTROY_WITH_PARENT,
-				   GTK_MESSAGE_ERROR,
-				   GTK_BUTTONS_OK, "%s", tmp);
+                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   GTK_MESSAGE_ERROR,
+                                   GTK_BUTTONS_OK, "%s", tmp);
   g_free (tmp);
 
   gtk_dialog_run (GTK_DIALOG (dialog));
@@ -171,7 +171,7 @@ error_dialog (GtkWindow * parent, const gchar * msg, ...)
 
 static gboolean
 gtk_source_buffer_load_file (GtkSourceBuffer * source_buffer,
-			     const gchar * filename, GError ** error)
+                             const gchar * filename, GError ** error)
 {
   GtkTextIter iter;
   gchar *buffer;
@@ -200,10 +200,10 @@ gtk_source_buffer_load_file (GtkSourceBuffer * source_buffer,
     GtkTextIter start, end;
     char *text;
     gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (source_buffer), &start,
-				&end);
+                                &end);
     text =
       gtk_text_buffer_get_text (GTK_TEXT_BUFFER (source_buffer), &start, &end,
-				TRUE);
+                                TRUE);
     g_assert (!strcmp (text, buffer));
     g_free (text);
   }
@@ -248,18 +248,18 @@ get_language_for_filename (const gchar * filename)
 
       globs = gtk_source_language_get_globs (lang);
       if (globs == NULL)
-	continue;
+        continue;
 
       for (p = globs; *p != NULL; p++)
-	{
-	  if (g_pattern_match_simple (*p, filename_utf8))
-	    {
-	      g_strfreev (globs);
-	      g_free (filename_utf8);
+        {
+          if (g_pattern_match_simple (*p, filename_utf8))
+            {
+              g_strfreev (globs);
+              g_free (filename_utf8);
 
-	      return lang;
-	    }
-	}
+              return lang;
+            }
+        }
 
       g_strfreev (globs);
     }
@@ -312,7 +312,7 @@ get_language (GtkTextBuffer * buffer, const gchar * filename)
       tokens = g_strsplit_set (lang_string, " \t\n", 2);
 
       if (tokens != NULL && tokens[0] != NULL)
-	language = get_language_by_id (tokens[0]);
+        language = get_language_by_id (tokens[0]);
 
       g_strfreev (tokens);
     }
@@ -351,8 +351,8 @@ open_file (GtkSourceBuffer * buffer, const gchar * filename)
 
   gtk_source_buffer_set_language (buffer, language);
   g_object_set_data_full (G_OBJECT (buffer),
-			  "filename", g_strdup (filename),
-			  (GDestroyNotify) g_free);
+                          "filename", g_strdup (filename),
+                          (GDestroyNotify) g_free);
 
   if (language != NULL)
     {
@@ -361,29 +361,29 @@ open_file (GtkSourceBuffer * buffer, const gchar * filename)
       styles = gtk_source_language_get_style_ids (language);
 
       if (styles == NULL)
-	g_print ("No styles in language '%s'\n",
-		 gtk_source_language_get_name (language));
+        g_print ("No styles in language '%s'\n",
+                 gtk_source_language_get_name (language));
       else
-	{
-	  gchar **ids;
-	  g_print ("Styles in in language '%s':\n",
-		   gtk_source_language_get_name (language));
+        {
+          gchar **ids;
+          g_print ("Styles in in language '%s':\n",
+                   gtk_source_language_get_name (language));
 
-	  ids = styles;
+          ids = styles;
 
-	  while (*ids != NULL)
-	    {
-	      const gchar *name;
+          while (*ids != NULL)
+            {
+              const gchar *name;
 
-	      name = gtk_source_language_get_style_name (language, *ids);
+              name = gtk_source_language_get_style_name (language, *ids);
 
-	      g_print ("- %s (name: '%s')\n", *ids, name);
+              g_print ("- %s (name: '%s')\n", *ids, name);
 
-	      ++ids;
-	    }
+              ++ids;
+            }
 
-	  g_strfreev (styles);
-	}
+          g_strfreev (styles);
+        }
 
       g_print ("\n");
     }
@@ -411,13 +411,12 @@ jump_to_line (GtkTextView * view, gint line)
   gtk_text_buffer_place_cursor (buffer, &iter);
 
   gtk_text_view_scroll_to_mark (view,
-				gtk_text_buffer_get_insert (buffer),
-				0.25, FALSE, 0.0, 0.0);
+                                gtk_text_buffer_get_insert (buffer),
+                                0.25, FALSE, 0.0, 0.0);
 }
 
 void
-gtr_show_viewer (GtrWindow * window,
-			 const gchar * path, gint line)
+gtr_show_viewer (GtrWindow * window, const gchar * path, gint line)
 {
   static GtrViewer *dlg = NULL;
 
@@ -431,8 +430,8 @@ gtr_show_viewer (GtrWindow * window,
       dlg = g_object_new (GTR_TYPE_VIEWER, NULL);
 
       buffer =
-	GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
-			   (GTK_TEXT_VIEW (dlg->priv->view)));
+        GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
+                           (GTK_TEXT_VIEW (dlg->priv->view)));
 
       open_file (buffer, path);
       jump_to_line (GTK_TEXT_VIEW (dlg->priv->view), line);
@@ -442,7 +441,7 @@ gtr_show_viewer (GtrWindow * window,
       g_free (label);
 
       g_signal_connect (dlg,
-			"destroy", G_CALLBACK (gtk_widget_destroyed), &dlg);
+                        "destroy", G_CALLBACK (gtk_widget_destroyed), &dlg);
       gtk_widget_show (GTK_WIDGET (dlg));
     }
 

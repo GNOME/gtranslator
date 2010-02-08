@@ -40,9 +40,9 @@ typedef struct
 } WindowData;
 
 GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrDictPlugin,
-				    gtr_dict_plugin,
-				    gtr_dict_panel_register_type
-				    (module);)
+                                    gtr_dict_plugin,
+                                    gtr_dict_panel_register_type (module);
+  )
      static void gtr_dict_plugin_init (GtrDictPlugin * plugin)
 {
 }
@@ -84,18 +84,17 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
   data->panel = create_dict_panel (window);
 
   gtr_application_register_icon (GTR_APP, "gnome-dictionary.png",
-					 "dictionary-icon");
+                                 "dictionary-icon");
 
   gtr_window_add_widget (window,
-				 data->panel,
-				 "GtrDictionaryPlugin",
-				 _("Dictionary"),
-				 "dictionary-icon",
-				 GTR_WINDOW_PLACEMENT_LEFT);
+                         data->panel,
+                         "GtrDictionaryPlugin",
+                         _("Dictionary"),
+                         "dictionary-icon", GTR_WINDOW_PLACEMENT_LEFT);
 
   g_object_set_data_full (G_OBJECT (window),
-			  WINDOW_DATA_KEY,
-			  data, (GDestroyNotify) free_window_data);
+                          WINDOW_DATA_KEY,
+                          data, (GDestroyNotify) free_window_data);
 }
 
 static void
@@ -104,7 +103,7 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
   WindowData *data;
 
   data = (WindowData *) g_object_get_data (G_OBJECT (window),
-					   WINDOW_DATA_KEY);
+                                           WINDOW_DATA_KEY);
   g_return_if_fail (data != NULL);
 
   gtr_window_remove_widget (window, data->panel);

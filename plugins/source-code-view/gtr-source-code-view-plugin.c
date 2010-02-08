@@ -64,19 +64,19 @@ struct _GtrSourceCodeViewPluginPrivate
 };
 
 GTR_PLUGIN_REGISTER_TYPE (GtrSourceCodeViewPlugin,
-			  gtr_source_code_view_plugin)
+                          gtr_source_code_view_plugin)
      static void insert_link (GtkTextBuffer * buffer, GtkTextIter * iter,
-			      const gchar * path, gint * line,
-			      GtrSourceCodeViewPlugin * plugin,
-			      const gchar * msgid)
+                              const gchar * path, gint * line,
+                              GtrSourceCodeViewPlugin * plugin,
+                              const gchar * msgid)
 {
   GtkTextTag *tag;
   gchar *text;
 
   tag = gtk_text_buffer_create_tag (buffer, NULL,
-				    "foreground", "blue",
-				    "underline", PANGO_UNDERLINE_SINGLE,
-				    NULL);
+                                    "foreground", "blue",
+                                    "underline", PANGO_UNDERLINE_SINGLE,
+                                    NULL);
   g_object_set_data (G_OBJECT (tag), "path", g_strdup (path));
   g_object_set_data (G_OBJECT (tag), "line", line);
   g_object_set_data (G_OBJECT (tag), "msgid", g_strdup (msgid));
@@ -90,7 +90,7 @@ GTR_PLUGIN_REGISTER_TYPE (GtrSourceCodeViewPlugin,
 
 static void
 show_in_editor (const gchar * program_name,
-		const gchar * line_cmd, const gchar * path, gint line)
+                const gchar * line_cmd, const gchar * path, gint line)
 {
   gchar *open[4];
 
@@ -103,11 +103,11 @@ show_in_editor (const gchar * program_name,
       GtkWidget *dialog;
 
       dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
-				       GTK_DIALOG_MODAL,
-				       GTK_BUTTONS_CLOSE,
-				       _
-				       ("Please install %s to be able to show the file"),
-				       program_name);
+                                       GTK_DIALOG_MODAL,
+                                       GTK_BUTTONS_CLOSE,
+                                       _
+                                       ("Please install %s to be able to show the file"),
+                                       program_name);
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
     }
@@ -117,22 +117,21 @@ show_in_editor (const gchar * program_name,
   open[3] = NULL;
 
   gdk_spawn_on_screen (gdk_screen_get_default (),
-		       NULL,
-		       open,
-		       NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
+                       NULL,
+                       open,
+                       NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
   g_free (open[0]);
   g_free (open[1]);
   g_free (open[2]);
 }
 
 static void
-show_source (GtrSourceCodeViewPlugin * plugin,
-	     const gchar * path, gint line)
+show_source (GtrSourceCodeViewPlugin * plugin, const gchar * path, gint line)
 {
   gboolean use_editor;
 
   use_editor = gconf_client_get_bool (plugin->priv->gconf_client,
-				      USE_EDITOR_KEY, NULL);
+                                      USE_EDITOR_KEY, NULL);
 
   if (use_editor)
     {
@@ -141,11 +140,11 @@ show_source (GtrSourceCodeViewPlugin * plugin,
 
       //Program cmd
       program_cmd = gconf_client_get_string (plugin->priv->gconf_client,
-					     PROGRAM_CMD_KEY, NULL);
+                                             PROGRAM_CMD_KEY, NULL);
 
       //Line cmd
       line_cmd = gconf_client_get_string (plugin->priv->gconf_client,
-					  LINE_CMD_KEY, NULL);
+                                          LINE_CMD_KEY, NULL);
 
       show_in_editor (program_cmd, line_cmd, path, line);
 
@@ -195,8 +194,8 @@ get_line_for_text (const gchar * path, const gchar * msgid)
       i = str_found + strlen (escaped);
       c = *i;
       if (!isalpha (c) &&
-	  !isalpha (*(str_found - 1)) && !(c == ':') && !(c == '_'))
-	break;
+          !isalpha (*(str_found - 1)) && !(c == ':') && !(c == '_'))
+        break;
     }
   if (!str_found)
     goto out;
@@ -214,7 +213,7 @@ out:
 
 static void
 follow_if_link (GtrSourceCodeViewPlugin * plugin,
-		GtkWidget * text_view, GtkTextIter * iter)
+                GtkWidget * text_view, GtkTextIter * iter)
 {
   GSList *tags = NULL, *tagp = NULL;
   GtrTab *tab;
@@ -242,21 +241,21 @@ follow_if_link (GtrSourceCodeViewPlugin * plugin,
       GtkTextTag *tag = tagp->data;
       gchar *path = g_object_get_data (G_OBJECT (tag), "path");
       gint line =
-	GPOINTER_TO_INT (g_object_get_data (G_OBJECT (tag), "line"));
+        GPOINTER_TO_INT (g_object_get_data (G_OBJECT (tag), "line"));
 
       fullpath = g_build_filename (dirname, path, NULL);
 
       if (path_is_fake (fullpath))
-	{
-	  gchar *msgid = g_object_get_data (G_OBJECT (tag), "msgid");
+        {
+          gchar *msgid = g_object_get_data (G_OBJECT (tag), "msgid");
 
-	  path = g_strdup (fullpath);
-	  g_free (fullpath);
-	  fullpath = real_path (path);
-	  g_free (path);
+          path = g_strdup (fullpath);
+          g_free (fullpath);
+          fullpath = real_path (path);
+          g_free (path);
 
-	  line = get_line_for_text (fullpath, msgid);
-	}
+          line = get_line_for_text (fullpath, msgid);
+        }
 
       show_source (plugin, fullpath, line);
 
@@ -271,7 +270,7 @@ follow_if_link (GtrSourceCodeViewPlugin * plugin,
 
 static gboolean
 event_after (GtkWidget * text_view,
-	     GdkEvent * ev, GtrSourceCodeViewPlugin * plugin)
+             GdkEvent * ev, GtrSourceCodeViewPlugin * plugin)
 {
   GtkTextIter start, end, iter;
   GtkTextBuffer *buffer;
@@ -294,8 +293,8 @@ event_after (GtkWidget * text_view,
     return FALSE;
 
   gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view),
-					 GTK_TEXT_WINDOW_WIDGET,
-					 event->x, event->y, &x, &y);
+                                         GTK_TEXT_WINDOW_WIDGET,
+                                         event->x, event->y, &x, &y);
 
   gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (text_view), &iter, x, y);
 
@@ -328,10 +327,10 @@ set_cursor_if_appropriate (GtkTextView * text_view, gint x, gint y)
       gchar *path = g_object_get_data (G_OBJECT (tag), "path");
 
       if (path)
-	{
-	  hovering = TRUE;
-	  break;
-	}
+        {
+          hovering = TRUE;
+          break;
+        }
     }
 
   if (hovering != hovering_over_link)
@@ -339,13 +338,13 @@ set_cursor_if_appropriate (GtkTextView * text_view, gint x, gint y)
       hovering_over_link = hovering;
 
       if (hovering_over_link)
-	gdk_window_set_cursor (gtk_text_view_get_window (text_view,
-							 GTK_TEXT_WINDOW_TEXT),
-			       hand_cursor);
+        gdk_window_set_cursor (gtk_text_view_get_window (text_view,
+                                                         GTK_TEXT_WINDOW_TEXT),
+                               hand_cursor);
       else
-	gdk_window_set_cursor (gtk_text_view_get_window (text_view,
-							 GTK_TEXT_WINDOW_TEXT),
-			       regular_cursor);
+        gdk_window_set_cursor (gtk_text_view_get_window (text_view,
+                                                         GTK_TEXT_WINDOW_TEXT),
+                               regular_cursor);
     }
 
   if (tags)
@@ -361,8 +360,8 @@ motion_notify_event (GtkWidget * text_view, GdkEventMotion * event)
   gint x, y;
 
   gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view),
-					 GTK_TEXT_WINDOW_WIDGET,
-					 event->x, event->y, &x, &y);
+                                         GTK_TEXT_WINDOW_WIDGET,
+                                         event->x, event->y, &x, &y);
 
   set_cursor_if_appropriate (GTK_TEXT_VIEW (text_view), x, y);
 
@@ -381,8 +380,8 @@ visibility_notify_event (GtkWidget * text_view, GdkEventVisibility * event)
   gdk_window_get_pointer (text_view->window, &wx, &wy, NULL);
 
   gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view),
-					 GTK_TEXT_WINDOW_WIDGET,
-					 wx, wy, &bx, &by);
+                                         GTK_TEXT_WINDOW_WIDGET,
+                                         wx, wy, &bx, &by);
 
   set_cursor_if_appropriate (GTK_TEXT_VIEW (text_view), bx, by);
 
@@ -390,16 +389,15 @@ visibility_notify_event (GtkWidget * text_view, GdkEventVisibility * event)
 }
 
 static void
-gtr_source_code_view_plugin_init (GtrSourceCodeViewPlugin *
-					  plugin)
+gtr_source_code_view_plugin_init (GtrSourceCodeViewPlugin * plugin)
 {
   plugin->priv = GTR_SOURCE_CODE_VIEW_PLUGIN_GET_PRIVATE (plugin);
 
   plugin->priv->gconf_client = gconf_client_get_default ();
 
   gconf_client_add_dir (plugin->priv->gconf_client,
-			SOURCE_CODE_VIEW_BASE_KEY,
-			GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+                        SOURCE_CODE_VIEW_BASE_KEY,
+                        GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
 
   plugin->priv->tags = NULL;
 }
@@ -407,21 +405,19 @@ gtr_source_code_view_plugin_init (GtrSourceCodeViewPlugin *
 static void
 gtr_source_code_view_plugin_finalize (GObject * object)
 {
-  GtrSourceCodeViewPlugin *plugin =
-    GTR_SOURCE_CODE_VIEW_PLUGIN (object);
+  GtrSourceCodeViewPlugin *plugin = GTR_SOURCE_CODE_VIEW_PLUGIN (object);
 
   gconf_client_suggest_sync (plugin->priv->gconf_client, NULL);
 
   g_object_unref (G_OBJECT (plugin->priv->gconf_client));
 
-  G_OBJECT_CLASS (gtr_source_code_view_plugin_parent_class)->
-    finalize (object);
+  G_OBJECT_CLASS (gtr_source_code_view_plugin_parent_class)->finalize
+    (object);
 }
 
 static void
 showed_message_cb (GtrTab * tab,
-		   GtrMsg * msg,
-		   GtrSourceCodeViewPlugin * plugin)
+                   GtrMsg * msg, GtrSourceCodeViewPlugin * plugin)
 {
   const gchar *filename = NULL;
   gint i = 0;
@@ -440,7 +436,7 @@ showed_message_cb (GtrTab * tab,
   gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
 
   path_start = gtk_text_buffer_create_mark (buffer,
-					    "path_start", &iter, TRUE);
+                                            "path_start", &iter, TRUE);
   gtk_text_buffer_insert (buffer, &iter, _("Paths:\n"), -1);
 
   filename = gtr_msg_get_filename (msg, i);
@@ -448,7 +444,7 @@ showed_message_cb (GtrTab * tab,
     {
       line = gtr_msg_get_file_line (msg, i);
       insert_link (buffer, &iter, filename, line, plugin,
-		   gtr_msg_get_msgid (msg));
+                   gtr_msg_get_msgid (msg));
       i++;
       filename = gtr_msg_get_filename (msg, i);
     }
@@ -463,8 +459,7 @@ showed_message_cb (GtrTab * tab,
 }
 
 static void
-delete_text_and_tags (GtrTab * tab,
-		      GtrSourceCodeViewPlugin * plugin)
+delete_text_and_tags (GtrTab * tab, GtrSourceCodeViewPlugin * plugin)
 {
   GSList *tagp = NULL, *tags;
   GtkTextBuffer *buffer;
@@ -492,9 +487,9 @@ delete_text_and_tags (GtrTab * tab,
       gchar *msgid = g_object_get_data (G_OBJECT (tag), "msgid");
 
       if (path)
-	g_free (path);
+        g_free (path);
       if (msgid)
-	g_free (msgid);
+        g_free (msgid);
     }
   g_slist_free (tags);
 
@@ -514,16 +509,15 @@ delete_text_and_tags (GtrTab * tab,
 
 static void
 message_edition_finished_cb (GtrTab * tab,
-			     GtrMsg * msg,
-			     GtrSourceCodeViewPlugin * plugin)
+                             GtrMsg * msg, GtrSourceCodeViewPlugin * plugin)
 {
   delete_text_and_tags (tab, plugin);
 }
 
 static void
 page_added_cb (GtkNotebook * notebook,
-	       GtkWidget * child,
-	       guint page_num, GtrSourceCodeViewPlugin * plugin)
+               GtkWidget * child,
+               guint page_num, GtrSourceCodeViewPlugin * plugin)
 {
   GtrContextPanel *panel;
   GtkTextView *view;
@@ -534,23 +528,23 @@ page_added_cb (GtkNotebook * notebook,
   g_return_if_fail (GTK_IS_TEXT_VIEW (view));
 
   g_signal_connect_after (child, "showed-message",
-			  G_CALLBACK (showed_message_cb), plugin);
+                          G_CALLBACK (showed_message_cb), plugin);
   g_signal_connect (child, "message-edition-finished",
-		    G_CALLBACK (message_edition_finished_cb), plugin);
+                    G_CALLBACK (message_edition_finished_cb), plugin);
 
   g_signal_connect (view, "event-after", G_CALLBACK (event_after), plugin);
   g_signal_connect (view, "motion-notify-event",
-		    G_CALLBACK (motion_notify_event), NULL);
+                    G_CALLBACK (motion_notify_event), NULL);
   g_signal_connect (view, "visibility-notify-event",
-		    G_CALLBACK (visibility_notify_event), NULL);
+                    G_CALLBACK (visibility_notify_event), NULL);
 }
 
 static void
 use_editor_toggled (GtkToggleButton * button,
-		    GtrSourceCodeViewPlugin * plugin)
+                    GtrSourceCodeViewPlugin * plugin)
 {
   gtk_widget_set_sensitive (plugin->priv->program_box,
-			    gtk_toggle_button_get_active (button));
+                            gtk_toggle_button_get_active (button));
 }
 
 static GtkWidget *
@@ -569,20 +563,18 @@ get_configuration_dialog (GtrSourceCodeViewPlugin * plugin)
 
   path = gtr_dirs_get_ui_file ("gtr-source-code-view-dialog.ui");
   ret = gtr_utils_get_ui_objects (path,
-					  root_objects,
-					  &error_widget,
-					  "dialog", &plugin->priv->dialog,
-					  "main_box", &plugin->priv->main_box,
-					  "use_editor",
-					  &plugin->priv->
-					  use_editor_checkbutton,
-					  "program_box",
-					  &plugin->priv->program_box,
-					  "program_cmd",
-					  &plugin->priv->program_cmd_entry,
-					  "line_cmd",
-					  &plugin->priv->line_cmd_entry,
-					  NULL);
+                                  root_objects,
+                                  &error_widget,
+                                  "dialog", &plugin->priv->dialog,
+                                  "main_box", &plugin->priv->main_box,
+                                  "use_editor",
+                                  &plugin->priv->use_editor_checkbutton,
+                                  "program_box",
+                                  &plugin->priv->program_box,
+                                  "program_cmd",
+                                  &plugin->priv->program_cmd_entry,
+                                  "line_cmd",
+                                  &plugin->priv->line_cmd_entry, NULL);
   g_free (path);
 
   if (!ret)
@@ -594,21 +586,21 @@ get_configuration_dialog (GtrSourceCodeViewPlugin * plugin)
 
   //Use editor
   use_editor = gconf_client_get_bool (plugin->priv->gconf_client,
-				      USE_EDITOR_KEY, NULL);
+                                      USE_EDITOR_KEY, NULL);
 
   g_signal_connect (plugin->priv->use_editor_checkbutton, "toggled",
-		    G_CALLBACK (use_editor_toggled), plugin);
+                    G_CALLBACK (use_editor_toggled), plugin);
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-				(plugin->priv->use_editor_checkbutton),
-				use_editor);
+                                (plugin->priv->use_editor_checkbutton),
+                                use_editor);
 
   use_editor_toggled (GTK_TOGGLE_BUTTON
-		      (plugin->priv->use_editor_checkbutton), plugin);
+                      (plugin->priv->use_editor_checkbutton), plugin);
 
   //Program cmd
   value = gconf_client_get_string (plugin->priv->gconf_client,
-				   PROGRAM_CMD_KEY, NULL);
+                                   PROGRAM_CMD_KEY, NULL);
 
   gtk_entry_set_text (GTK_ENTRY (plugin->priv->program_cmd_entry), value);
 
@@ -616,7 +608,7 @@ get_configuration_dialog (GtrSourceCodeViewPlugin * plugin)
 
   //Line cmd
   value = gconf_client_get_string (plugin->priv->gconf_client,
-				   LINE_CMD_KEY, NULL);
+                                   LINE_CMD_KEY, NULL);
 
   gtk_entry_set_text (GTK_ENTRY (plugin->priv->line_cmd_entry), value);
 
@@ -644,7 +636,7 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
   source_code_view->priv->window = window;
 
   g_signal_connect (notebook, "page-added",
-		    G_CALLBACK (page_added_cb), plugin);
+                    G_CALLBACK (page_added_cb), plugin);
 
   /*
    * If we already have tabs opened we have to add them
@@ -656,13 +648,13 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
       GList *msg;
 
       page_added_cb (GTK_NOTEBOOK (notebook),
-		     l->data, 0, GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
+                     l->data, 0, GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
 
       po = gtr_tab_get_po (GTR_TAB (l->data));
       msg = gtr_po_get_current_message (po);
 
       showed_message_cb (GTR_TAB (l->data),
-			 msg->data, GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
+                         msg->data, GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
     }
 }
 
@@ -683,15 +675,15 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
       view = gtr_context_panel_get_context_text_view (panel);
 
       delete_text_and_tags (GTR_TAB (l->data),
-			    GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
+                            GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
 
       g_signal_handlers_disconnect_by_func (l->data,
-					    showed_message_cb, plugin);
+                                            showed_message_cb, plugin);
 
       g_signal_handlers_disconnect_by_func (view, event_after, window);
       g_signal_handlers_disconnect_by_func (view, motion_notify_event, NULL);
       g_signal_handlers_disconnect_by_func (view,
-					    visibility_notify_event, NULL);
+                                            visibility_notify_event, NULL);
     }
 
   g_signal_handlers_disconnect_by_func (notebook, page_added_cb, plugin);
@@ -707,51 +699,50 @@ ok_button_pressed (GtrSourceCodeViewPlugin * plugin)
   /* We have to get the text from the entries */
   use_editor =
     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-				  (plugin->priv->use_editor_checkbutton));
+                                  (plugin->priv->use_editor_checkbutton));
   program_cmd =
     gtk_entry_get_text (GTK_ENTRY (plugin->priv->program_cmd_entry));
   line_cmd = gtk_entry_get_text (GTK_ENTRY (plugin->priv->line_cmd_entry));
 
   /* Now we store the data in gconf */
   if (!gconf_client_key_is_writable (plugin->priv->gconf_client,
-				     USE_EDITOR_KEY, NULL))
+                                     USE_EDITOR_KEY, NULL))
     return;
 
   gconf_client_set_bool (plugin->priv->gconf_client,
-			 USE_EDITOR_KEY, use_editor, NULL);
+                         USE_EDITOR_KEY, use_editor, NULL);
 
   if (!gconf_client_key_is_writable (plugin->priv->gconf_client,
-				     PROGRAM_CMD_KEY, NULL))
+                                     PROGRAM_CMD_KEY, NULL))
     return;
 
   gconf_client_set_string (plugin->priv->gconf_client,
-			   PROGRAM_CMD_KEY, program_cmd, NULL);
+                           PROGRAM_CMD_KEY, program_cmd, NULL);
 
   if (!gconf_client_key_is_writable (plugin->priv->gconf_client,
-				     LINE_CMD_KEY, NULL))
+                                     LINE_CMD_KEY, NULL))
     return;
 
   gconf_client_set_string (plugin->priv->gconf_client,
-			   LINE_CMD_KEY, line_cmd, NULL);
+                           LINE_CMD_KEY, line_cmd, NULL);
 }
 
 static void
 configure_dialog_response_cb (GtkWidget * widget,
-			      gint response,
-			      GtrSourceCodeViewPlugin * plugin)
+                              gint response, GtrSourceCodeViewPlugin * plugin)
 {
   switch (response)
     {
     case GTK_RESPONSE_OK:
       {
-	ok_button_pressed (plugin);
+        ok_button_pressed (plugin);
 
-	gtk_widget_destroy (plugin->priv->dialog);
-	break;
+        gtk_widget_destroy (plugin->priv->dialog);
+        break;
       }
     case GTK_RESPONSE_CANCEL:
       {
-	gtk_widget_destroy (plugin->priv->dialog);
+        gtk_widget_destroy (plugin->priv->dialog);
       }
     }
 }
@@ -764,17 +755,17 @@ impl_create_configure_dialog (GtrPlugin * plugin)
   dialog = get_configuration_dialog (GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
 
   g_signal_connect (dialog,
-		    "response",
-		    G_CALLBACK (configure_dialog_response_cb),
-		    GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
+                    "response",
+                    G_CALLBACK (configure_dialog_response_cb),
+                    GTR_SOURCE_CODE_VIEW_PLUGIN (plugin));
   g_signal_connect (dialog,
-		    "destroy", G_CALLBACK (gtk_widget_destroy), &dialog);
+                    "destroy", G_CALLBACK (gtk_widget_destroy), &dialog);
 
   return dialog;
 }
 
 static void
-gtr_source_code_view_plugin_class_init
+  gtr_source_code_view_plugin_class_init
   (GtrSourceCodeViewPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -787,5 +778,5 @@ gtr_source_code_view_plugin_class_init
   plugin_class->create_configure_dialog = impl_create_configure_dialog;
 
   g_type_class_add_private (object_class,
-			    sizeof (GtrSourceCodeViewPluginPrivate));
+                            sizeof (GtrSourceCodeViewPluginPrivate));
 }

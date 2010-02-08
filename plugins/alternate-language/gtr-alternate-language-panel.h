@@ -33,8 +33,7 @@ G_BEGIN_DECLS
 #define GTR_IS_ALTERNATE_LANG_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_ALTERNATE_LANG_PANEL))
 #define GTR_ALTERNATE_LANG_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_ALTERNATE_LANG_PANEL, GtrAlternateLangPanelClass))
 /* Private structure type */
-typedef struct _GtrAlternateLangPanelPrivate
-  GtrAlternateLangPanelPrivate;
+typedef struct _GtrAlternateLangPanelPrivate GtrAlternateLangPanelPrivate;
 
 /*
  * Main object structure
@@ -52,8 +51,7 @@ struct _GtrAlternateLangPanel
 /*
  * Class definition
  */
-typedef struct _GtrAlternateLangPanelClass
-  GtrAlternateLangPanelClass;
+typedef struct _GtrAlternateLangPanelClass GtrAlternateLangPanelClass;
 
 struct _GtrAlternateLangPanelClass
 {
@@ -66,8 +64,7 @@ struct _GtrAlternateLangPanelClass
 GType
 gtr_alternate_lang_panel_get_type (void)
   G_GNUC_CONST;
-     GType gtr_alternate_lang_panel_register_type (GTypeModule *
-							   module);
+     GType gtr_alternate_lang_panel_register_type (GTypeModule * module);
      GtkWidget *gtr_alternate_lang_panel_new (GtkWidget * tab);
 
 G_END_DECLS

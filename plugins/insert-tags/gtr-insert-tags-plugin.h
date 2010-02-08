@@ -35,8 +35,7 @@ G_BEGIN_DECLS
 #define GTR_IS_INSERT_TAGS_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_INSERT_TAGS_PLUGIN))
 #define GTR_INSERT_TAGS_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_INSERT_TAGS_PLUGIN_PLUGIN, GtrInsertTagsPluginClass))
 /* Private structure type */
-typedef struct _GtrInsertTagsPluginPrivate
-  GtrInsertTagsPluginPrivate;
+typedef struct _GtrInsertTagsPluginPrivate GtrInsertTagsPluginPrivate;
 
 /*
  * Main object structure
@@ -51,8 +50,7 @@ struct _GtrInsertTagsPlugin
 /*
  * Class definition
  */
-typedef struct _GtrInsertTagsPluginClass
-  GtrInsertTagsPluginClass;
+typedef struct _GtrInsertTagsPluginClass GtrInsertTagsPluginClass;
 
 struct _GtrInsertTagsPluginClass
 {

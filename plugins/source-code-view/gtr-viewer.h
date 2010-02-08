@@ -70,8 +70,7 @@ gtr_viewer_get_type (void)
 
      GType gtr_viewer_register_type (GTypeModule * module);
 
-     void gtr_show_viewer (GtrWindow * window,
-				   const gchar * path, gint line);
+     void gtr_show_viewer (GtrWindow * window, const gchar * path, gint line);
 
 G_END_DECLS
 #endif /* __VIEWER_H__ */

@@ -35,8 +35,7 @@ G_BEGIN_DECLS
 #define GTR_IS_INSERT_PARAMS_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_INSERT_PARAMS_PLUGIN))
 #define GTR_INSERT_PARAMS_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_INSERT_PARAMS_PLUGIN_PLUGIN, GtrInsertParamsPluginClass))
 /* Private structure type */
-typedef struct _GtrInsertParamsPluginPrivate
-  GtrInsertParamsPluginPrivate;
+typedef struct _GtrInsertParamsPluginPrivate GtrInsertParamsPluginPrivate;
 
 /*
  * Main object structure
@@ -51,8 +50,7 @@ struct _GtrInsertParamsPlugin
 /*
  * Class definition
  */
-typedef struct _GtrInsertParamsPluginClass
-  GtrInsertParamsPluginClass;
+typedef struct _GtrInsertParamsPluginClass GtrInsertParamsPluginClass;
 
 struct _GtrInsertParamsPluginClass
 {

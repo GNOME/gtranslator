@@ -47,12 +47,11 @@ struct _GtrCharmapPanelPrivate
 #endif
 };
 
-GTR_PLUGIN_DEFINE_TYPE (GtrCharmapPanel, gtr_charmap_panel,
-			GTK_TYPE_VBOX)
+GTR_PLUGIN_DEFINE_TYPE (GtrCharmapPanel, gtr_charmap_panel, GTK_TYPE_VBOX)
 #ifdef HAVE_GUCHARMAP_2
      static void
        on_chapter_view_selection_changed (GtkTreeSelection * selection,
-					  GtrCharmapPanel * panel)
+                                          GtrCharmapPanel * panel)
 {
   GtrCharmapPanelPrivate *priv = panel->priv;
   GucharmapCodepointList *codepoint_list;
@@ -70,11 +69,11 @@ GTR_PLUGIN_DEFINE_TYPE (GtrCharmapPanel, gtr_charmap_panel,
 #else
      static void
        on_chapter_changed (GucharmapChapters * chapters,
-			   GtrCharmapPanel * panel)
+                           GtrCharmapPanel * panel)
 {
   gucharmap_table_set_codepoint_list (GUCHARMAP_TABLE (panel->priv->table),
-				      gucharmap_chapters_get_codepoint_list
-				      (chapters));
+                                      gucharmap_chapters_get_codepoint_list
+                                      (chapters));
 }
 #endif /* HAVE_GUCHARMAP_2 */
 
@@ -98,9 +97,9 @@ gtr_charmap_panel_init (GtrCharmapPanel * panel)
 #ifdef HAVE_GUCHARMAP_2
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-				  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+                                  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window),
-				       GTK_SHADOW_ETCHED_IN);
+                                       GTK_SHADOW_ETCHED_IN);
 
   view = gucharmap_chapters_view_new ();
   priv->chapters_view = GUCHARMAP_CHAPTERS_VIEW (view);
@@ -112,7 +111,7 @@ gtr_charmap_panel_init (GtrCharmapPanel * panel)
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (view));
   g_signal_connect (selection, "changed",
-		    G_CALLBACK (on_chapter_view_selection_changed), panel);
+                    G_CALLBACK (on_chapter_view_selection_changed), panel);
 
   gtk_container_add (GTK_CONTAINER (scrolled_window), view);
   gtk_widget_show (view);
@@ -122,9 +121,9 @@ gtr_charmap_panel_init (GtrCharmapPanel * panel)
 
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-				  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+                                  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window),
-				       GTK_SHADOW_ETCHED_IN);
+                                       GTK_SHADOW_ETCHED_IN);
 
   chartable = gucharmap_chartable_new ();
   priv->chartable = GUCHARMAP_CHARTABLE (chartable);
@@ -138,11 +137,11 @@ gtr_charmap_panel_init (GtrCharmapPanel * panel)
 #else
   priv->chapters = gucharmap_script_chapters_new ();
   g_signal_connect (priv->chapters,
-		    "changed", G_CALLBACK (on_chapter_changed), panel);
+                    "changed", G_CALLBACK (on_chapter_changed), panel);
 
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW
-				     (GUCHARMAP_CHAPTERS (priv->chapters)->
-				      tree_view), FALSE);
+                                     (GUCHARMAP_CHAPTERS
+                                      (priv->chapters)->tree_view), FALSE);
 
   codepoint_list = gucharmap_chapters_get_codepoint_list
     (GUCHARMAP_CHAPTERS (priv->chapters));
@@ -150,7 +149,7 @@ gtr_charmap_panel_init (GtrCharmapPanel * panel)
   priv->table = gucharmap_table_new ();
 
   gucharmap_table_set_codepoint_list (GUCHARMAP_TABLE (priv->table),
-				      codepoint_list);
+                                      codepoint_list);
 
   gtk_paned_pack1 (paned, priv->chapters, FALSE, TRUE);
   gtk_paned_pack2 (paned, priv->table, TRUE, TRUE);

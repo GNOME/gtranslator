@@ -42,7 +42,7 @@
 						 GtrAlternateLangPanelPrivate))
 
 GTR_PLUGIN_DEFINE_TYPE (GtrAlternateLangPanel,
-			gtr_alternate_lang_panel, GTK_TYPE_VBOX)
+                        gtr_alternate_lang_panel, GTK_TYPE_VBOX)
      struct _GtrAlternateLangPanelPrivate
      {
        GtkWidget *open_button;
@@ -86,29 +86,28 @@ search_message (GtrAlternateLangPanel * panel, GtrMsg * msg)
       string = gtr_msg_get_msgid (l->data);
       string_collate = g_utf8_collate_key (string, -1);
       if (strcmp (string_collate, msgid_collate) == 0)
-	{
-	  gtr_alternate_lang_panel_set_text (panel,
-						     gtr_msg_get_msgstr
-						     (l->data));
-	  status = gtr_msg_get_status (GTR_MSG (l->data));
-	  switch (status)
-	    {
-	    case GTR_MSG_STATUS_TRANSLATED:
-	      gtk_image_clear (GTK_IMAGE (panel->priv->status));
-	      break;
-	    case GTR_MSG_STATUS_FUZZY:
-	      gtk_image_set_from_stock (GTK_IMAGE (panel->priv->status),
-					FUZZY_ICON,
-					GTK_ICON_SIZE_SMALL_TOOLBAR);
-	      break;
-	    default:
-	      break;
-	    }
+        {
+          gtr_alternate_lang_panel_set_text (panel,
+                                             gtr_msg_get_msgstr (l->data));
+          status = gtr_msg_get_status (GTR_MSG (l->data));
+          switch (status)
+            {
+            case GTR_MSG_STATUS_TRANSLATED:
+              gtk_image_clear (GTK_IMAGE (panel->priv->status));
+              break;
+            case GTR_MSG_STATUS_FUZZY:
+              gtk_image_set_from_stock (GTK_IMAGE (panel->priv->status),
+                                        FUZZY_ICON,
+                                        GTK_ICON_SIZE_SMALL_TOOLBAR);
+              break;
+            default:
+              break;
+            }
 
-	  g_free (string_collate);
-	  g_free (msgid_collate);
-	  return;
-	}
+          g_free (string_collate);
+          g_free (msgid_collate);
+          return;
+        }
       g_free (string_collate);
     }
   while ((l = g_list_next (l)));
@@ -120,13 +119,11 @@ search_message (GtrAlternateLangPanel * panel, GtrMsg * msg)
    * If we are here the status is untranslated
    */
   gtk_image_set_from_stock (GTK_IMAGE (panel->priv->status),
-			    UNTRANSLATED_ICON, GTK_ICON_SIZE_SMALL_TOOLBAR);
+                            UNTRANSLATED_ICON, GTK_ICON_SIZE_SMALL_TOOLBAR);
 }
 
 static void
-showed_message_cb (GtrTab * tab,
-		   GtrMsg * msg,
-		   GtrAlternateLangPanel * panel)
+showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrAlternateLangPanel * panel)
 {
   if (panel->priv->po == NULL)
     {
@@ -158,10 +155,10 @@ open_file (GtkWidget * dialog, GtrAlternateLangPanel * panel)
        * FIXME: We have to get the window
        */
       erdialog = gtk_message_dialog_new (NULL,
-					 GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_MESSAGE_ERROR,
-					 GTK_BUTTONS_CLOSE,
-					 "%s", error->message);
+                                         GTK_DIALOG_DESTROY_WITH_PARENT,
+                                         GTK_MESSAGE_ERROR,
+                                         GTK_BUTTONS_CLOSE,
+                                         "%s", error->message);
       gtk_dialog_run (GTK_DIALOG (erdialog));
       gtk_widget_destroy (erdialog);
       g_error_free (error);
@@ -175,8 +172,7 @@ open_file (GtkWidget * dialog, GtrAlternateLangPanel * panel)
 
 
 static void
-gtr_file_chooser_analyse (gpointer dialog,
-				  GtrAlternateLangPanel * panel)
+gtr_file_chooser_analyse (gpointer dialog, GtrAlternateLangPanel * panel)
 {
   gint reply;
 
@@ -199,7 +195,7 @@ gtr_file_chooser_analyse (gpointer dialog,
 
 static void
 open_button_clicked_cb (GtkWidget * open_button,
-			GtrAlternateLangPanel * panel)
+                        GtrAlternateLangPanel * panel)
 {
   GtkWidget *dialog = NULL;
   gchar *dir;
@@ -216,10 +212,8 @@ open_button_clicked_cb (GtkWidget * open_button,
    * I need a way here to get the window
    */
   dialog = gtr_file_chooser_new (NULL,
-					 FILESEL_OPEN,
-					 _
-					 ("Open file for alternate language"),
-					 NULL);
+                                 FILESEL_OPEN,
+                                 _("Open file for alternate language"), NULL);
 
   tab_po = gtr_tab_get_po (panel->priv->tab);
   location = gtr_po_get_location (tab_po);
@@ -239,7 +233,7 @@ open_button_clicked_cb (GtkWidget * open_button,
 
 static void
 close_button_clicked_cb (GtkWidget * close_button,
-			 GtrAlternateLangPanel * panel)
+                         GtrAlternateLangPanel * panel)
 {
   if (panel->priv->po != NULL)
     {
@@ -276,18 +270,18 @@ gtr_alternate_lang_panel_draw (GtrAlternateLangPanel * panel)
 
   panel->priv->open_button = gtk_button_new_from_stock (GTK_STOCK_OPEN);
   g_signal_connect (panel->priv->open_button,
-		    "clicked", G_CALLBACK (open_button_clicked_cb), panel);
+                    "clicked", G_CALLBACK (open_button_clicked_cb), panel);
   gtk_widget_show (panel->priv->open_button);
 
   panel->priv->close_button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
   g_signal_connect (panel->priv->close_button,
-		    "clicked", G_CALLBACK (close_button_clicked_cb), panel);
+                    "clicked", G_CALLBACK (close_button_clicked_cb), panel);
   gtk_widget_show (panel->priv->close_button);
 
   gtk_box_pack_start (GTK_BOX (buttonbox),
-		      panel->priv->open_button, TRUE, TRUE, 0);
+                      panel->priv->open_button, TRUE, TRUE, 0);
   gtk_box_pack_start (GTK_BOX (buttonbox),
-		      panel->priv->close_button, TRUE, TRUE, 0);
+                      panel->priv->close_button, TRUE, TRUE, 0);
 
   gtk_box_pack_start (GTK_BOX (hbox), buttonbox, FALSE, TRUE, 0);
 
@@ -307,21 +301,19 @@ gtr_alternate_lang_panel_draw (GtrAlternateLangPanel * panel)
 
   panel->priv->textview = gtr_view_new ();
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (panel->priv->textview),
-			       GTK_WRAP_WORD);
+                               GTK_WRAP_WORD);
   gtk_text_view_set_editable (GTK_TEXT_VIEW (panel->priv->textview), FALSE);
-  gtr_alternate_lang_panel_set_text (panel,
-					     _
-					     ("There isn't any file loaded"));
+  gtr_alternate_lang_panel_set_text (panel, _("There isn't any file loaded"));
   gtk_widget_set_sensitive (panel->priv->textview, FALSE);
   gtk_widget_show (panel->priv->textview);
 
   gtk_container_add (GTK_CONTAINER (scroll), panel->priv->textview);
 
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
-				       GTK_SHADOW_IN);
+                                       GTK_SHADOW_IN);
 
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroll),
-				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
   gtk_box_pack_start (GTK_BOX (panel), scroll, TRUE, TRUE, 0);
 }
@@ -339,18 +331,15 @@ gtr_alternate_lang_panel_init (GtrAlternateLangPanel * panel)
 static void
 gtr_alternate_lang_panel_finalize (GObject * object)
 {
-  G_OBJECT_CLASS (gtr_alternate_lang_panel_parent_class)->
-    finalize (object);
+  G_OBJECT_CLASS (gtr_alternate_lang_panel_parent_class)->finalize (object);
 }
 
 static void
-gtr_alternate_lang_panel_class_init
-  (GtrAlternateLangPanelClass * klass)
+  gtr_alternate_lang_panel_class_init (GtrAlternateLangPanelClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass,
-			    sizeof (GtrAlternateLangPanelPrivate));
+  g_type_class_add_private (klass, sizeof (GtrAlternateLangPanelPrivate));
 
   object_class->finalize = gtr_alternate_lang_panel_finalize;
 }
@@ -366,7 +355,7 @@ gtr_alternate_lang_panel_new (GtkWidget * tab)
   panel->priv->tab = GTR_TAB (tab);
 
   g_signal_connect (tab, "showed-message",
-		    G_CALLBACK (showed_message_cb), panel);
+                    G_CALLBACK (showed_message_cb), panel);
 
   return GTK_WIDGET (panel);
 }

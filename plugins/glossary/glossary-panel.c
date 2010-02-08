@@ -37,8 +37,7 @@
 						 GTR_TYPE_GLOSSARY_PANEL,     \
 						 GtrGlossaryPanelPrivate))
 
-G_DEFINE_TYPE (GtrGlossaryPanel, gtr_glossary_panel,
-	       GTK_TYPE_VBOX)
+G_DEFINE_TYPE (GtrGlossaryPanel, gtr_glossary_panel, GTK_TYPE_VBOX)
 #define XML_FILE_NAME "glossary.xml"
 /*
  * TreeItem structure
@@ -102,11 +101,11 @@ G_DEFINE_TYPE (GtrGlossaryPanel, gtr_glossary_panel,
   while (cur != NULL)
     {
       if ((!xmlStrcmp (cur->name, (const xmlChar *) "Person")) &&
-	  (cur->ns == ns))
-	ret->name = xmlNodeListGetString (doc, cur->xmlChildrenNode, 1);
+          (cur->ns == ns))
+        ret->name = xmlNodeListGetString (doc, cur->xmlChildrenNode, 1);
       if ((!xmlStrcmp (cur->name, (const xmlChar *) "Email")) &&
-	  (cur->ns == ns))
-	ret->email = xmlNodeListGetString (doc, cur->xmlChildrenNode, 1);
+          (cur->ns == ns))
+        ret->email = xmlNodeListGetString (doc, cur->xmlChildrenNode, 1);
       cur = cur->next;
     }
 

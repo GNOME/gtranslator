@@ -35,8 +35,7 @@ G_BEGIN_DECLS
 #define GTR_IS_OPEN_TRAN_PLUGIN_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_OPEN_TRAN_PLUGIN))
 #define GTR_OPEN_TRAN_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_OPEN_TRAN_PLUGIN, GtrOpenTranPluginClass))
 /* Private structure type */
-typedef struct _GtrOpenTranPluginPrivate
-  GtrOpenTranPluginPrivate;
+typedef struct _GtrOpenTranPluginPrivate GtrOpenTranPluginPrivate;
 
 /*
  * Main object structure

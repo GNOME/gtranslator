@@ -38,8 +38,7 @@ G_BEGIN_DECLS
 #define GTR_IS_CHARMAP_PLUGIN_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_CHARMAP_PLUGIN))
 #define GTR_CHARMAP_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_CHARMAP_PLUGIN, GtrCharmapPluginClass))
 /* Private structure type */
-typedef struct _GtrCharmapPluginPrivate
-  GtrCharmapPluginPrivate;
+typedef struct _GtrCharmapPluginPrivate GtrCharmapPluginPrivate;
 
 /*
  * Main object structure
