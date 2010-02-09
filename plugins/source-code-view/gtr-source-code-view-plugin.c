@@ -65,10 +65,12 @@ struct _GtrSourceCodeViewPluginPrivate
 
 GTR_PLUGIN_REGISTER_TYPE (GtrSourceCodeViewPlugin,
                           gtr_source_code_view_plugin)
-     static void insert_link (GtkTextBuffer * buffer, GtkTextIter * iter,
-                              const gchar * path, gint * line,
-                              GtrSourceCodeViewPlugin * plugin,
-                              const gchar * msgid)
+
+static void
+insert_link (GtkTextBuffer * buffer, GtkTextIter * iter,
+             const gchar * path, gint * line,
+             GtrSourceCodeViewPlugin * plugin,
+             const gchar * msgid)
 {
   GtkTextTag *tag;
   gchar *text;
@@ -77,9 +79,10 @@ GTR_PLUGIN_REGISTER_TYPE (GtrSourceCodeViewPlugin,
                                     "foreground", "blue",
                                     "underline", PANGO_UNDERLINE_SINGLE,
                                     NULL);
-  g_object_set_data (G_OBJECT (tag), "path", g_strdup (path));
+
   g_object_set_data (G_OBJECT (tag), "line", line);
-  g_object_set_data (G_OBJECT (tag), "msgid", g_strdup (msgid));
+  g_object_set_data_full (G_OBJECT (tag), "path", g_strdup (path), g_free);
+  g_object_set_data_full (G_OBJECT (tag), "msgid", g_strdup (msgid), g_free);
 
   text = g_strdup_printf ("%s:%d\n", path, GPOINTER_TO_INT (line));
   gtk_text_buffer_insert_with_tags (buffer, iter, text, -1, tag, NULL);
@@ -105,11 +108,11 @@ show_in_editor (const gchar * program_name,
       dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
                                        GTK_DIALOG_MODAL,
                                        GTK_BUTTONS_CLOSE,
-                                       _
-                                       ("Please install %s to be able to show the file"),
+                                       _("Please install \"%s\" to be able to show the file"),
                                        program_name);
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
+      return;
     }
 
   open[1] = g_strdup (path);
@@ -138,11 +141,11 @@ show_source (GtrSourceCodeViewPlugin * plugin, const gchar * path, gint line)
       gchar *program_cmd;
       gchar *line_cmd;
 
-      //Program cmd
+      /* Program cmd */
       program_cmd = gconf_client_get_string (plugin->priv->gconf_client,
                                              PROGRAM_CMD_KEY, NULL);
 
-      //Line cmd
+      /* Line cmd */
       line_cmd = gconf_client_get_string (plugin->priv->gconf_client,
                                           LINE_CMD_KEY, NULL);
 
@@ -411,8 +414,7 @@ gtr_source_code_view_plugin_finalize (GObject * object)
 
   g_object_unref (G_OBJECT (plugin->priv->gconf_client));
 
-  G_OBJECT_CLASS (gtr_source_code_view_plugin_parent_class)->finalize
-    (object);
+  G_OBJECT_CLASS (gtr_source_code_view_plugin_parent_class)->finalize (object);
 }
 
 static void
@@ -483,13 +485,9 @@ delete_text_and_tags (GtrTab * tab, GtrSourceCodeViewPlugin * plugin)
   for (tagp = tags; tagp != NULL; tagp = tagp->next)
     {
       GtkTextTag *tag = tagp->data;
-      gchar *path = g_object_get_data (G_OBJECT (tag), "path");
-      gchar *msgid = g_object_get_data (G_OBJECT (tag), "msgid");
 
-      if (path)
-        g_free (path);
-      if (msgid)
-        g_free (msgid);
+      g_object_set_data (G_OBJECT (tag), "path", NULL);
+      g_object_set_data (G_OBJECT (tag), "msgid", NULL);
     }
   g_slist_free (tags);
 
@@ -621,9 +619,8 @@ static void
 impl_activate (GtrPlugin * plugin, GtrWindow * window)
 {
   GtkWidget *notebook;
-  GtrSourceCodeViewPlugin *source_code_view =
-    GTR_SOURCE_CODE_VIEW_PLUGIN (plugin);
   GList *tabs, *l;
+  GtrSourceCodeViewPlugin *source_code_view = GTR_SOURCE_CODE_VIEW_PLUGIN (plugin);
 
   /*
    * Cursors
@@ -765,8 +762,7 @@ impl_create_configure_dialog (GtrPlugin * plugin)
 }
 
 static void
-  gtr_source_code_view_plugin_class_init
-  (GtrSourceCodeViewPluginClass * klass)
+gtr_source_code_view_plugin_class_init (GtrSourceCodeViewPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
