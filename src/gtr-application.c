@@ -48,47 +48,33 @@
 					 GtrApplicationPrivate))
 
 G_DEFINE_TYPE (GtrApplication, gtr_application, G_TYPE_OBJECT)
-     struct _GtrApplicationPrivate
-     {
-       GList *windows;
-       GtrWindow *active_window;
 
-       GList *profiles;
-       GtrProfile *active_profile;
-
-       gchar *toolbars_file;
-       EggToolbarsModel *toolbars_model;
-
-       GtkIconFactory *icon_factory;
-
-       gchar *last_dir;
-
-       GtrTranslationMemory *tm;
-
-       gboolean first_run;
-     };
-
-     static gchar *get_accel_file (void)
+struct _GtrApplicationPrivate
 {
-  gchar *config;
+  GList *windows;
+  GtrWindow *active_window;
 
-  config = gtr_dirs_get_user_config_dir ();
+  GList *profiles;
+  GtrProfile *active_profile;
 
-  if (config != NULL)
-    {
-      return g_build_filename (config, "gtr-accels", NULL);
-      g_free (config);
-    }
+  gchar *toolbars_file;
+  EggToolbarsModel *toolbars_model;
 
-  return NULL;
-}
+  GtkIconFactory *icon_factory;
+
+  gchar *last_dir;
+
+  GtrTranslationMemory *tm;
+
+  gboolean first_run;
+};
 
 static void
 load_accels (void)
 {
   gchar *filename;
 
-  filename = get_accel_file ();
+  filename = gtr_dirs_get_user_accels_file ();
   if (filename != NULL)
     {
       gtk_accel_map_load (filename);
@@ -101,7 +87,7 @@ save_accels (void)
 {
   gchar *filename;
 
-  filename = get_accel_file ();
+  filename = gtr_dirs_get_user_accels_file ();
   if (filename != NULL)
     {
       gtk_accel_map_save (filename);
