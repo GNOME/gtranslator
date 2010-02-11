@@ -325,12 +325,11 @@ gtr_application_create_window (GtrApplication *app)
    * is never NULL when at least a window exists.
    */
   if (app->priv->windows == NULL)
-    {
-      window = g_object_new (GTR_TYPE_WINDOW, NULL);
-      set_active_window (app, window);
-    }
+    window = g_object_new (GTR_TYPE_WINDOW, NULL);
   else
     window = g_object_new (GTR_TYPE_WINDOW, NULL);
+
+  set_active_window (app, window);
 
   app->priv->windows = g_list_prepend (app->priv->windows,
                                        window);

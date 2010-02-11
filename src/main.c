@@ -32,12 +32,18 @@
 #include "gtr-utils.h"
 #include "gtr-dirs.h"
 
+#include <errno.h>
 #include <locale.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 
 #include <gconf/gconf.h>
+
+#ifdef GDK_WINDOWING_X11
+#include <gdk/gdkx.h>
+#endif
+
 #ifdef G_OS_WIN32
 #define SAVE_DATADIR DATADIR
 #undef DATADIR
@@ -140,9 +146,24 @@ unique_app_message_cb (UniqueApp *unique_app,
         }
     }
 
-    gtk_window_present (GTK_WINDOW (window));
+  /* set the proper interaction time on the window.
+   * Fall back to roundtripping to the X server when we
+   * don't have the timestamp, e.g. when launched from
+   * terminal. We also need to make sure that the window
+   * has been realized otherwise it will not work. lame.
+   */
+  if (!GTK_WIDGET_REALIZED (window))
+    gtk_widget_realize (GTK_WIDGET (window));
 
-    return UNIQUE_RESPONSE_OK;
+#ifdef GDK_WINDOWING_X11
+  timestamp = gdk_x11_get_server_time (gtk_widget_get_window (GTK_WIDGET (window)));
+#else
+  timestamp = GDK_CURRENT_TIME;
+#endif
+
+  gtk_window_present_with_time (GTK_WINDOW (window), timestamp);
+
+  return UNIQUE_RESPONSE_OK;
 }
 
 static void
@@ -209,6 +230,10 @@ main (gint argc, gchar * argv[])
   gchar *pixmaps_dir;
   gchar **uris;
 
+  /* Init type system and threads as soon as possible */
+  g_type_init ();
+  g_thread_init (NULL);
+
   /* Initialize gettext. */
   setlocale (LC_ALL, "");
 
@@ -239,11 +264,17 @@ main (gint argc, gchar * argv[])
       g_clear_error (&error);
     }
 
-  if (!g_thread_supported ())
-    g_thread_init (NULL);
   gtk_init (&argc, &argv);
 
-  g_option_context_parse (context, &argc, &argv, NULL);
+  if (!g_option_context_parse (context, &argc, &argv, &error))
+    {
+       g_print(_("%s\nRun '%s --help' to see a full list of available command line options.\n"),
+               error->message, argv[0]);
+       g_error_free (error);
+       return 1;
+    }
+
+  g_option_context_free (context);
 
   /* Init preferences manager */
   gtr_prefs_manager_app_init ();
@@ -305,11 +336,10 @@ main (gint argc, gchar * argv[])
       g_slist_free (file_list);
     }
 
-  g_option_context_free (context);
-
   /* Enter main GTK loop */
   gtk_main ();
 
+  g_object_unref (engine);
   gtr_prefs_manager_app_shutdown ();
   g_object_unref (app);
 
