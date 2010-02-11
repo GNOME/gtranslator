@@ -495,12 +495,12 @@ gtr_header_get_nplurals (GtrHeader * header)
 static void
 set_profile_values (GtrHeader * header)
 {
-  if (gtr_prefs_manager_get_use_profile_values ())
+  GtrProfile *active_profile;
+
+  active_profile = gtr_application_get_active_profile (GTR_APP);
+
+  if (gtr_prefs_manager_get_use_profile_values () && active_profile != NULL)
     {
-      GtrProfile *active_profile;
-
-      active_profile = gtr_application_get_active_profile (GTR_APP);
-
       gtr_header_set_translator (header,
                                  gtr_profile_get_author_name (active_profile),
                                  gtr_profile_get_author_email
@@ -540,6 +540,7 @@ update_po_date (GtrHeader * header)
 static void
 update_comments (GtrHeader * header, const gchar * comments)
 {
+  GtrProfile *active_profile;
   GString *new_comments;
   GString *years;
   gchar **comment_lines;
@@ -548,15 +549,12 @@ update_comments (GtrHeader * header, const gchar * comments)
   gchar *current_year;
   gint i;
 
+  active_profile = gtr_application_get_active_profile (GTR_APP);
   current_year = gtr_utils_get_current_year ();
 
   /* Save the previous translator to update the header's comment */
-  if (gtr_prefs_manager_get_use_profile_values ())
+  if (gtr_prefs_manager_get_use_profile_values () && active_profile != NULL)
     {
-      GtrProfile *active_profile;
-
-      active_profile = gtr_application_get_active_profile (GTR_APP);
-
       translator = g_strdup (gtr_profile_get_author_name (active_profile));
       email = g_strdup (gtr_profile_get_author_email (active_profile));
     }
