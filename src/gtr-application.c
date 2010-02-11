@@ -139,6 +139,19 @@ set_active_window (GtrApplication *app,
   app->priv->active_window = window;
 }
 
+static gboolean
+window_focus_in_event (GtrWindow      *window,
+		       GdkEventFocus  *event,
+		       GtrApplication *app)
+{
+  /* updates active_view and active_child when a new toplevel receives focus */
+  g_return_val_if_fail (GTR_IS_WINDOW (window), FALSE);
+
+  set_active_window (app, window);
+
+  return FALSE;
+}
+
 static void
 on_window_destroy_cb (GtrWindow *window, GtrApplication *app)
 {
@@ -348,6 +361,9 @@ gtr_application_create_window (GtrApplication *app)
       gtk_window_set_default_size (GTK_WINDOW (window), w, h);
       gtk_window_unmaximize (GTK_WINDOW (window));
     }
+
+  g_signal_connect (window, "focus_in_event",
+                    G_CALLBACK (window_focus_in_event), app);
 
   g_signal_connect (window, "delete-event",
                     G_CALLBACK (on_window_delete_event_cb), app);
