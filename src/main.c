@@ -119,13 +119,9 @@ unique_app_message_cb (UniqueApp *unique_app,
   GtrWindow *window;
 
   if (command == UNIQUE_NEW)
-    {
-      window = gtr_application_create_window (GTR_APPLICATION (unique_app));
-
-      return UNIQUE_RESPONSE_OK;
-    }
-
-  window = gtr_application_get_active_window (GTR_APPLICATION (unique_app));
+    window = gtr_application_create_window (GTR_APPLICATION (unique_app));
+  else
+    window = gtr_application_get_active_window (GTR_APPLICATION (unique_app));
 
   if (command == UNIQUE_OPEN)
     {
