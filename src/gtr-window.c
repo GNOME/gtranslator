@@ -71,80 +71,81 @@ static void gtr_window_cmd_edit_toolbar (GtkAction * action,
 
 
 G_DEFINE_TYPE (GtrWindow, gtr_window, GTK_TYPE_WINDOW)
-     struct _GtrWindowPrivate
-     {
-       GtkWidget *main_box;
 
-       GtkWidget *menubar;
-       GtkWidget *view_menu;
-       GtkWidget *toolbar;
-       GtkActionGroup *always_sensitive_action_group;
-       GtkActionGroup *action_group;
-       GtkActionGroup *documents_list_action_group;
-       guint documents_list_menu_ui_id;
+struct _GtrWindowPrivate
+{
+  GtkWidget *main_box;
 
-       GtkWidget *notebook;
-       GtrTab *active_tab;
+  GtkWidget *menubar;
+  GtkWidget *view_menu;
+  GtkWidget *toolbar;
+  GtkActionGroup *always_sensitive_action_group;
+  GtkActionGroup *action_group;
+  GtkActionGroup *documents_list_action_group;
+  guint documents_list_menu_ui_id;
 
-       GtkWidget *dock;
-       GdlDockLayout *layout_manager;
-       GHashTable *widgets;
+  GtkWidget *notebook;
+  GtrTab *active_tab;
 
-       GtkWidget *statusbar;
+  GtkWidget *dock;
+  GdlDockLayout *layout_manager;
+  GHashTable *widgets;
 
-       GtkUIManager *ui_manager;
-       GtkRecentManager *recent_manager;
-       GtkWidget *recent_menu;
+  GtkWidget *statusbar;
 
-       GtkWidget *tm_menu;
+  GtkUIManager *ui_manager;
+  GtkRecentManager *recent_manager;
+  GtkWidget *recent_menu;
 
-       gint width;
-       gint height;
-       GdkWindowState window_state;
+  GtkWidget *tm_menu;
 
-       gboolean destroy_has_run:1;
-     };
+  gint width;
+  gint height;
+  GdkWindowState window_state;
 
-     enum
-     {
-       TARGET_URI_LIST = 100
-     };
+  gboolean destroy_has_run : 1;
+};
 
-     static const GtkActionEntry always_sensitive_entries[] = {
+enum
+{
+  TARGET_URI_LIST = 100
+};
 
-       {"File", NULL, N_("_File")},
-       {"Edit", NULL, N_("_Edit")},
-       {"View", NULL, N_("_View")},
-       {"Search", NULL, N_("_Search")},
-       {"Go", NULL, N_("_Go")},
-       {"Documents", NULL, N_("_Documents")},
-       {"Help", NULL, N_("_Help")},
+static const GtkActionEntry always_sensitive_entries[] = {
 
-       /* File menu */
-       {"FileOpen", GTK_STOCK_OPEN, NULL, "<control>O",
-        N_("Open a PO file"),
-        G_CALLBACK (gtr_open_file_dialog)},
-       {"FileRecentFiles", NULL, N_("_Recent Files"), NULL,
-        NULL, NULL},
-       {"FileQuitWindow", GTK_STOCK_QUIT, NULL, "<control>Q",
-        N_("Quit the program"),
-        G_CALLBACK (gtr_file_quit)},
+  {"File", NULL, N_("_File")},
+  {"Edit", NULL, N_("_Edit")},
+  {"View", NULL, N_("_View")},
+  {"Search", NULL, N_("_Search")},
+  {"Go", NULL, N_("_Go")},
+  {"Documents", NULL, N_("_Documents")},
+  {"Help", NULL, N_("_Help")},
 
-       /* Edit menu */
-       {"EditToolbar", NULL, N_("T_oolbar"), NULL, NULL,
-        G_CALLBACK (gtr_window_cmd_edit_toolbar)},
-       {"EditPreferences", GTK_STOCK_PREFERENCES, NULL, NULL,
-        N_("Edit gtr preferences"),
-        G_CALLBACK (gtr_actions_edit_preferences)},
-       {"EditHeader", GTK_STOCK_PROPERTIES, N_("_Header..."), NULL, NULL,
-        G_CALLBACK (gtr_actions_edit_header)},
+  /* File menu */
+  {"FileOpen", GTK_STOCK_OPEN, NULL, "<control>O",
+   N_("Open a PO file"),
+   G_CALLBACK (gtr_open_file_dialog)},
+  {"FileRecentFiles", NULL, N_("_Recent Files"), NULL,
+   NULL, NULL},
+  {"FileQuitWindow", GTK_STOCK_QUIT, NULL, "<control>Q",
+   N_("Quit the program"),
+   G_CALLBACK (gtr_file_quit)},
 
-       /* Help menu */
-       {"HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1", NULL,
-        G_CALLBACK (gtr_cmd_help_contents)},
-       {"HelpAbout", GTK_STOCK_ABOUT, NULL, NULL, NULL,
-        G_CALLBACK (gtr_about_dialog)},
-     };
+  /* Edit menu */
+  {"EditToolbar", NULL, N_("T_oolbar"), NULL, NULL,
+   G_CALLBACK (gtr_window_cmd_edit_toolbar)},
+  {"EditPreferences", GTK_STOCK_PREFERENCES, NULL, NULL,
+   N_("Edit gtr preferences"),
+   G_CALLBACK (gtr_actions_edit_preferences)},
+  {"EditHeader", GTK_STOCK_PROPERTIES, N_("_Header..."), NULL, NULL,
+   G_CALLBACK (gtr_actions_edit_header)},
+
+  /* Help menu */
+  {"HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1", NULL,
+   G_CALLBACK (gtr_cmd_help_contents)},
+  {"HelpAbout", GTK_STOCK_ABOUT, NULL, NULL, NULL,
+   G_CALLBACK (gtr_about_dialog)},
+};
 
 /* Normal items */
 static const GtkActionEntry entries[] = {
@@ -312,6 +313,8 @@ static void
 on_layout_dirty_notify (GObject * object,
                         GParamSpec * pspec, GtrWindow * window)
 {
+  g_return_if_fail (GTR_IS_WINDOW (window));
+
   if (!strcmp (pspec->name, "dirty"))
     {
       gboolean dirty;
@@ -378,7 +381,7 @@ remove_from_widgets_hash (gpointer name,
 static void
 on_widget_destroy (GtkWidget * widget, GtrWindow * window)
 {
-  //DEBUG_PRINT ("Widget about to be destroyed");
+  DEBUG_PRINT ("Widget about to be destroyed");
   g_hash_table_foreach_remove (window->priv->widgets,
                                remove_from_widgets_hash, widget);
 }
@@ -403,7 +406,7 @@ on_widget_remove (GtkWidget * container,
   if (g_hash_table_foreach_remove (window->priv->widgets,
                                    remove_from_widgets_hash, widget))
     {
-      //DEBUG_PRINT ("Widget removed from container");
+      DEBUG_PRINT ("Widget removed from container");
     }
 }
 
@@ -414,7 +417,7 @@ on_widget_removed_from_hash (gpointer widget)
   GtkWidget *menuitem;
   GdlDockItem *dockitem;
 
-  //DEBUG_PRINT ("Removing widget from hash");
+  DEBUG_PRINT ("Removing widget from hash");
 
   window = g_object_get_data (G_OBJECT (widget), "window-object");
   dockitem = g_object_get_data (G_OBJECT (widget), "dockitem");
@@ -1588,6 +1591,8 @@ gtr_window_dispose (GObject * object)
   GtrWindow *window = GTR_WINDOW (object);
   GtrWindowPrivate *priv = window->priv;
 
+  DEBUG_PRINT ("window dispose");
+
   if (priv->ui_manager)
     {
       g_object_unref (priv->ui_manager);
@@ -1598,6 +1603,11 @@ gtr_window_dispose (GObject * object)
       g_object_unref (priv->action_group);
       priv->action_group = NULL;
     }
+
+  /* Now that there have broken some reference loops,
+   * force collection again.
+   */
+  gtr_plugins_engine_garbage_collect (gtr_plugins_engine_get_default ());
 
   G_OBJECT_CLASS (gtr_window_parent_class)->dispose (object);
 }
@@ -1636,9 +1646,23 @@ gtr_window_destroy (GtkObject * object)
 
   window = GTR_WINDOW (object);
 
+  DEBUG_PRINT ("Destroy window");
+
   if (!window->priv->destroy_has_run)
     {
       save_panes_state (window);
+
+      if (window->priv->widgets)
+        {
+          g_hash_table_destroy (window->priv->widgets);
+          window->priv->widgets = NULL;
+        }
+
+      if (window->priv->layout_manager)
+        {
+          g_object_unref (window->priv->layout_manager);
+          window->priv->layout_manager = NULL;
+        }
       window->priv->destroy_has_run = TRUE;
     }
 

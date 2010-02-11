@@ -47,20 +47,25 @@
 #undef SAVE_DATADIR
 #endif
 
-
 static gchar **file_arguments = NULL;
+static gboolean option_new_window = FALSE;
 
 static const GOptionEntry options[] = {
-  {G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &file_arguments,
-   NULL, N_("[FILE...]")},      /* collects file arguments */
+  { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &file_arguments,
+    NULL, N_("[FILE...]")},      /* collects file arguments */
+
+  { "new-window", 'n',  0, G_OPTION_ARG_NONE, &option_new_window,
+    NULL, N_("Create a new toplevel window in an existing instance of Gtranslator")},
 
   {NULL}
 };
 
-static GSList *
+static gchar **
 get_command_line_data ()
 {
-  GSList *file_list = NULL;
+  GPtrArray *array;
+
+  array = g_ptr_array_new ();
 
   if (file_arguments)
     {
@@ -74,21 +79,99 @@ get_command_line_data ()
 
           if (file != NULL)
             {
-              file_list = g_slist_prepend (file_list, file);
-
+              g_ptr_array_add (array, g_file_get_uri (file));
+              g_object_unref (file);
             }
           else
             g_print (_("%s: malformed file name or URI.\n"),
                      file_arguments[i]);
         }
-
-      file_list = g_slist_reverse (file_list);
     }
 
-  return file_list;
+  g_ptr_array_add (array, NULL);
+
+  return (gchar **)g_ptr_array_free (array, FALSE);
 }
 
-/* This method is from the file gedit.c which is part of gedit */
+static GSList *
+get_files_from_command_line_data (const gchar **data)
+{
+  const gchar **ptr;
+  GSList *l = NULL;
+
+  for (ptr = data; ptr != NULL && *ptr != NULL; ptr++)
+    {
+      l = g_slist_prepend (l, g_file_new_for_uri (*ptr));
+    }
+
+  l = g_slist_reverse (l);
+
+  return l;
+}
+
+static UniqueResponse
+unique_app_message_cb (UniqueApp *unique_app,
+                       gint command,
+                       UniqueMessageData *data,
+                       guint timestamp,
+                       gpointer user_data)
+{
+  GtrWindow *window;
+
+  if (command == UNIQUE_NEW)
+    {
+      window = gtr_application_create_window (GTR_APPLICATION (unique_app));
+
+      return UNIQUE_RESPONSE_OK;
+    }
+
+  window = gtr_application_get_active_window (GTR_APPLICATION (unique_app));
+
+  if (command == UNIQUE_OPEN)
+    {
+      gchar **uris;
+      GSList *files;
+
+      uris = unique_message_data_get_uris (data);
+      files = get_files_from_command_line_data ((const gchar **)uris);
+      g_strfreev (uris);
+
+      if (files != NULL)
+        {
+          gtr_actions_load_locations (window, files);
+          g_slist_foreach (files, (GFunc) g_object_unref, NULL);
+          g_slist_free (files);
+        }
+    }
+
+    gtk_window_present (GTK_WINDOW (window));
+
+    return UNIQUE_RESPONSE_OK;
+}
+
+static void
+send_unique_data (GtrApplication *app)
+{
+  UniqueMessageData *message_data = NULL;
+
+  if (option_new_window)
+    unique_app_send_message (UNIQUE_APP (app), UNIQUE_NEW, NULL);
+
+  if (file_arguments != NULL)
+    {
+      gchar **uris;
+
+      uris = get_command_line_data ();
+      message_data = unique_message_data_new ();
+      unique_message_data_set_uris (message_data, uris);
+      g_strfreev (uris);
+      unique_app_send_message (UNIQUE_APP (app), UNIQUE_OPEN, message_data);
+      unique_message_data_free (message_data);
+    }
+  else
+    unique_app_send_message (UNIQUE_APP (app), UNIQUE_ACTIVATE, NULL);
+}
+
 #ifdef G_OS_WIN32
 static void
 setup_path (void)
@@ -113,12 +196,11 @@ setup_path (void)
 }
 #endif
 
-/*
- * The ubiquitous main function...
- */
+/* The ubiquitous main function... */
 gint
 main (gint argc, gchar * argv[])
 {
+  GtrApplication *app;
   GError *error = NULL;
   GtrPluginsEngine *engine;
   GtrWindow *window;
@@ -129,10 +211,9 @@ main (gint argc, gchar * argv[])
   GList *profiles_list = NULL;
   GFile *file;
   gchar *pixmaps_dir;
+  gchar **uris;
 
-  /*
-   * Initialize gettext.
-   */
+  /* Initialize gettext. */
   setlocale (LC_ALL, "");
 
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
@@ -150,9 +231,7 @@ main (gint argc, gchar * argv[])
   setup_path ();
 #endif
 
-  /*
-   * Initialize the GConf library.
-   */
+  /* Initialize the GConf library. */
   if (!(gconf_init (argc, argv, &error)))
     {
       if (error)
@@ -170,28 +249,41 @@ main (gint argc, gchar * argv[])
 
   g_option_context_parse (context, &argc, &argv, NULL);
 
+  /* Init preferences manager */
+  gtr_prefs_manager_app_init ();
+
+  app = _gtr_application_new ();
+
+  if (unique_app_is_running (UNIQUE_APP (app)))
+    {
+      send_unique_data (app);
+
+      /* we never popup a window... tell startup-notification
+       * that we are done. */
+      gdk_notify_startup_complete ();
+
+      g_object_unref (app);
+      exit (0);
+    }
+  else
+    {
+      g_signal_connect (app, "message-received",
+                        G_CALLBACK (unique_app_message_cb), NULL);
+    }
+
   /* We set the default icon dir */
   pixmaps_dir = gtr_dirs_get_pixmaps_dir ();
   gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
                                      pixmaps_dir);
   g_free (pixmaps_dir);
 
-  /*
-   * Init preferences manager
-   */
-  gtr_prefs_manager_app_init ();
-
-  /*
-   * Init plugin engine
-   */
+  /* Init plugin engine */
   engine = gtr_plugins_engine_get_default ();
 
   gtk_about_dialog_set_url_hook (gtr_utils_activate_url, NULL, NULL);
   gtk_about_dialog_set_email_hook (gtr_utils_activate_email, NULL, NULL);
 
-  /*
-   * Load profiles list
-   */
+  /* Load profiles list */
   config_folder = gtr_dirs_get_user_config_dir ();
   filename = g_build_filename (config_folder, "profiles.xml", NULL);
   file = g_file_new_for_path (filename);
@@ -201,17 +293,15 @@ main (gint argc, gchar * argv[])
       profiles_list = gtr_profile_get_profiles_from_xml_file (filename);
     }
 
-  gtr_application_set_profiles (GTR_APP, profiles_list);
+  gtr_application_set_profiles (app, profiles_list);
 
-  /* 
-   * Create the main app-window. 
-   */
-  window = gtr_application_open_window (GTR_APP);
+  /* Create the main app-window. */
+  window = gtr_application_create_window (app);
 
-  /*
-   * Now we open the files passed as arguments
-   */
-  file_list = get_command_line_data ();
+  /* Now we open the files passed as arguments */
+  uris = get_command_line_data ();
+  file_list = get_files_from_command_line_data ((const gchar **)uris);
+  g_strfreev (uris);
   if (file_list)
     {
       gtr_actions_load_locations (window, (const GSList *) file_list);
@@ -221,12 +311,11 @@ main (gint argc, gchar * argv[])
 
   g_option_context_free (context);
 
-  /*
-   * Enter main GTK loop
-   */
+  /* Enter main GTK loop */
   gtk_main ();
 
   gtr_prefs_manager_app_shutdown ();
+  g_object_unref (app);
 
   return 0;
 }

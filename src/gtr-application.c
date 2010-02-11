@@ -27,6 +27,7 @@
 #include "dialogs/gtr-assistant.h"
 #include "gtr-actions.h"
 #include "gtr-application.h"
+#include "gtr-debug.h"
 #include "gtr-dirs.h"
 #include "gtr-prefs-manager.h"
 #include "gtr-prefs-manager-app.h"
@@ -47,7 +48,7 @@
 					 GTR_TYPE_APPLICATION,     \
 					 GtrApplicationPrivate))
 
-G_DEFINE_TYPE (GtrApplication, gtr_application, G_TYPE_OBJECT)
+G_DEFINE_TYPE (GtrApplication, gtr_application, UNIQUE_TYPE_APP)
 
 struct _GtrApplicationPrivate
 {
@@ -66,8 +67,36 @@ struct _GtrApplicationPrivate
 
   GtrTranslationMemory *tm;
 
-  gboolean first_run;
+  guint first_run : 1;
 };
+
+static GtrApplication *instance = NULL;
+
+static gboolean
+ensure_user_config_dir (void)
+{
+  gchar *config_dir;
+  gboolean ret = TRUE;
+  gint res;
+
+  config_dir = gtr_dirs_get_user_config_dir ();
+  if (config_dir == NULL)
+    {
+      g_warning ("Could not get config directory\n");
+      return FALSE;
+    }
+
+  res = g_mkdir_with_parents (config_dir, 0755);
+  if (res < 0)
+    {
+      g_warning ("Could not create config directory\n");
+      ret = FALSE;
+    }
+
+  g_free (config_dir);
+
+  return ret;
+}
 
 static void
 load_accels (void)
@@ -104,75 +133,52 @@ on_window_delete_event_cb (GtrWindow * window,
 }
 
 static void
-on_window_destroy_cb (GtrWindow * window, GtrApplication * app)
+set_active_window (GtrApplication *app,
+                   GtrWindow      *window)
 {
-  save_accels ();
-  //if(app->priv->active_window == NULL)
-  g_object_unref (app);
+  app->priv->active_window = window;
 }
 
 static void
-gtr_application_init (GtrApplication * application)
+on_window_destroy_cb (GtrWindow *window, GtrApplication *app)
+{
+  app->priv->windows = g_list_remove (app->priv->windows,
+                                      window);
+
+  if (window == app->priv->active_window)
+    set_active_window (app, app->priv->windows != NULL ? app->priv->windows->data : NULL);
+
+  if(app->priv->active_window == NULL)
+    {
+      ensure_user_config_dir ();
+      save_accels ();
+      gtk_main_quit ();
+    }
+}
+
+static void
+gtr_application_init (GtrApplication *application)
 {
   gchar *gtr_folder;
   gchar *path_default_gtr_toolbar;
   gchar *profiles_file;
   gchar *dir;
-
   GtrApplicationPrivate *priv;
 
   application->priv = GTR_APPLICATION_GET_PRIVATE (application);
   priv = application->priv;
 
+  priv->active_window = NULL;
   priv->windows = NULL;
   priv->last_dir = NULL;
   priv->first_run = FALSE;
   priv->profiles = NULL;
 
-  /*
-   * Creating config folder
-   */
+  /* Creating config folder */
+  ensure_user_config_dir (); /* FIXME: is this really needed ? */
+
+  /* If the config folder exists but there is no profile */
   gtr_folder = gtr_dirs_get_user_config_dir ();
-
-  if (!g_file_test (gtr_folder, G_FILE_TEST_IS_DIR))
-    {
-      GFile *file;
-      GError *error = NULL;
-
-      file = g_file_new_for_path (gtr_folder);
-
-      if (g_file_test (gtr_folder, G_FILE_TEST_IS_REGULAR))
-        {
-          if (!g_file_delete (file, NULL, &error))
-            {
-              g_warning ("There was an error deleting the "
-                         "old gtranslator file: %s", error->message);
-              g_error_free (error);
-              g_object_unref (file);
-              g_free (gtr_folder);
-              gtr_application_shutdown (application);
-            }
-        }
-
-      if (!g_file_make_directory (file, NULL, &error))
-        {
-          g_warning
-            ("There was an error making the gtranslator config directory: %s",
-             error->message);
-
-          g_error_free (error);
-          g_object_unref (file);
-          g_free (gtr_folder);
-          gtr_application_shutdown (application);
-        }
-
-      priv->first_run = TRUE;
-      g_object_unref (file);
-    }
-
-  /*
-   * If the config folder exists but there is no profile
-   */
   profiles_file = g_build_filename (gtr_folder, "profiles.xml", NULL);
   if (!g_file_test (profiles_file, G_FILE_TEST_EXISTS))
     priv->first_run = TRUE;
@@ -223,35 +229,63 @@ gtr_application_init (GtrApplication * application)
 
 
 static void
-gtr_application_finalize (GObject * object)
+gtr_application_dispose (GObject * object)
 {
   GtrApplication *app = GTR_APPLICATION (object);
 
-  if (app->priv->icon_factory)
-    g_object_unref (app->priv->icon_factory);
+  DEBUG_PRINT ("Disposing app");
 
-  g_free (app->priv->last_dir);
+  if (app->priv->icon_factory != NULL)
+    {
+      g_object_unref (app->priv->icon_factory);
+      app->priv->icon_factory = NULL;
+    }
 
   if (app->priv->tm)
-    g_object_unref (app->priv->tm);
+    {
+      g_object_unref (app->priv->tm);
+      app->priv->tm = NULL;
+    }
+
+  if (app->priv->toolbars_model)
+    {
+      g_object_unref (app->priv->toolbars_model);
+      app->priv->toolbars_model = NULL;
+    }
+
+  G_OBJECT_CLASS (gtr_application_parent_class)->dispose (object);
+}
+
+static void
+gtr_application_finalize (GObject *object)
+{
+  GtrApplication *app = GTR_APPLICATION (object);
+
+  g_free (app->priv->last_dir);
+  g_free (app->priv->toolbars_file);
 
   G_OBJECT_CLASS (gtr_application_parent_class)->finalize (object);
 }
 
 static void
-gtr_application_class_init (GtrApplicationClass * klass)
+gtr_application_class_init (GtrApplicationClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrApplicationPrivate));
 
+  object_class->dispose = gtr_application_dispose;
   object_class->finalize = gtr_application_finalize;
 }
 
-static void
-app_weak_notify (gpointer data, GObject * where_the_app_was)
+GtrApplication *
+_gtr_application_new ()
 {
-  gtk_main_quit ();
+  instance = GTR_APPLICATION (g_object_new (GTR_TYPE_APPLICATION,
+                                            "name", "org.gnome.Gtranslator",
+                                            "startup-id", NULL, NULL));
+
+  return instance;
 }
 
 /**
@@ -264,14 +298,6 @@ app_weak_notify (gpointer data, GObject * where_the_app_was)
 GtrApplication *
 gtr_application_get_default (void)
 {
-  static GtrApplication *instance = NULL;
-
-  if (!instance)
-    {
-      instance = GTR_APPLICATION (g_object_new (GTR_TYPE_APPLICATION, NULL));
-
-      g_object_weak_ref (G_OBJECT (instance), app_weak_notify, NULL);
-    }
   return instance;
 }
 
@@ -284,14 +310,30 @@ gtr_application_get_default (void)
  * Returns: the #GtrWindow to be opened
  */
 GtrWindow *
-gtr_application_open_window (GtrApplication * app)
+gtr_application_create_window (GtrApplication *app)
 {
   GtrWindow *window;
   GdkWindowState state;
   gint w, h;
 
-  app->priv->active_window = window =
-    GTR_WINDOW (g_object_new (GTR_TYPE_WINDOW, NULL));
+  g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
+
+  /*
+   * We need to be careful here, there is a race condition:
+   * when another gedit is launched it checks active_window,
+   * so we must do our best to ensure that active_window
+   * is never NULL when at least a window exists.
+   */
+  if (app->priv->windows == NULL)
+    {
+      window = g_object_new (GTR_TYPE_WINDOW, NULL);
+      set_active_window (app, window);
+    }
+  else
+    window = g_object_new (GTR_TYPE_WINDOW, NULL);
+
+  app->priv->windows = g_list_prepend (app->priv->windows,
+                                       window);
 
   state = gtr_prefs_manager_get_window_state ();
 
@@ -320,7 +362,7 @@ gtr_application_open_window (GtrApplication * app)
    * If it is the first run, the default directory was created in this
    * run, then we show the First run Assistant
    */
-  if (app->priv->first_run)
+  if (app->priv->first_run && app->priv->windows->next == NULL)
     gtr_show_assistant (window);
 
   return window;
@@ -351,26 +393,6 @@ _gtr_application_save_toolbars_model (GtrApplication * application)
 {
   egg_toolbars_model_save_toolbars (application->priv->toolbars_model,
                                     application->priv->toolbars_file, "1.0");
-}
-
-/**
- * gtr_application_shutdown:
- * @app: a #GtrApplication
- * 
- * Shutdowns the application.
- */
-void
-gtr_application_shutdown (GtrApplication * app)
-{
-  if (app->priv->toolbars_model)
-    {
-      g_object_unref (app->priv->toolbars_model);
-      g_free (app->priv->toolbars_file);
-      app->priv->toolbars_model = NULL;
-      app->priv->toolbars_file = NULL;
-    }
-
-  g_object_unref (app);
 }
 
 /**
@@ -408,6 +430,8 @@ gtr_application_get_views (GtrApplication * app,
 GtrWindow *
 gtr_application_get_active_window (GtrApplication * app)
 {
+  g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
+
   return GTR_WINDOW (app->priv->active_window);
 }
 
@@ -475,8 +499,11 @@ gtr_application_get_profiles (GtrApplication * app)
  *
  **/
 void
-gtr_application_set_profiles (GtrApplication * app, GList * profiles)
+gtr_application_set_profiles (GtrApplication *app, GList *profiles)
 {
+  g_return_if_fail (GTR_IS_APPLICATION (app));
+  g_return_if_fail (profiles != NULL);
+
   app->priv->profiles = profiles;
 }
 
@@ -489,15 +516,19 @@ gtr_application_set_profiles (GtrApplication * app, GList * profiles)
  * Registers a new @icon with the @stock_id.
  */
 void
-gtr_application_register_icon (GtrApplication * app,
-                               const gchar * icon, const gchar * stock_id)
+gtr_application_register_icon (GtrApplication *app,
+                               const gchar *icon, const gchar *stock_id)
 {
   GtkIconSet *icon_set;
-  GtkIconSource *icon_source = gtk_icon_source_new ();
+  GtkIconSource *icon_source;
   gchar *pixmaps_dir;
   gchar *path;
   GdkPixbuf *pixbuf;
 
+  g_return_if_fail (GTR_IS_APPLICATION (app));
+  g_return_if_fail (icon != NULL && stock_id != NULL);
+
+  icon_source = gtk_icon_source_new ();
   pixmaps_dir = gtr_dirs_get_pixmaps_dir ();
   path = g_build_filename (pixmaps_dir, icon, NULL);
   g_free (pixmaps_dir);

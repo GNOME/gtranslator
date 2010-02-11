@@ -26,6 +26,7 @@
 #include <glib.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
+#include <unique/uniqueapp.h>
 
 #include "gtr-profile.h"
 #include "gtr-window.h"
@@ -51,7 +52,7 @@ typedef struct _GtrApplication GtrApplication;
 
 struct _GtrApplication
 {
-  GObject base_instance;
+  UniqueApp base_instance;
 
   /*< private > */
   GtrApplicationPrivate *priv;
@@ -64,63 +65,53 @@ typedef struct _GtrApplicationClass GtrApplicationClass;
 
 struct _GtrApplicationClass
 {
-  GObjectClass parent_class;
+  UniqueAppClass parent_class;
 };
 
 /*
  * Public methods
  */
-GType
-gtr_application_get_type (void)
-  G_GNUC_CONST;
-     GtrApplication *gtr_application_get_default (void);
+GType             gtr_application_get_type               (void)G_GNUC_CONST;
 
-     void gtr_application_shutdown (GtrApplication * app);
+GtrApplication  *_gtr_application_new                    (void);
 
-     GList *gtr_application_get_views (GtrApplication * app,
-                                       gboolean original,
-                                       gboolean translated);
+GtrApplication   *gtr_application_get_default            (void);
 
-GtrWindow * gtr_application_open_window (GtrApplication * app);
+GList *           gtr_application_get_views              (GtrApplication *app,
+                                                          gboolean        original,
+                                                          gboolean        translated);
 
-GtrWindow * gtr_application_get_active_window (GtrApplication * app);
+GtrWindow        *gtr_application_create_window          (GtrApplication *app);
 
-     const GList *
-     gtr_application_get_windows (GtrApplication * app);
+GtrWindow        *gtr_application_get_active_window      (GtrApplication *app);
 
-GtrProfile * gtr_application_get_active_profile (GtrApplication * app);
+const GList      *gtr_application_get_windows            (GtrApplication *app);
 
-     void
-     gtr_application_set_active_profile (GtrApplication *
-                                         app, GtrProfile * profile);
+GtrProfile       *gtr_application_get_active_profile     (GtrApplication *app);
 
-     GList *
-     gtr_application_get_profiles (GtrApplication * app);
+void              gtr_application_set_active_profile     (GtrApplication *app,
+                                                          GtrProfile * profile);
 
-     void
-     gtr_application_set_profiles (GtrApplication * app, GList * profiles);
+GList            *gtr_application_get_profiles           (GtrApplication *app);
 
-     void
-     gtr_application_register_icon (GtrApplication * app,
-                                    const gchar * icon,
-                                    const gchar * stock_id);
+void              gtr_application_set_profiles           (GtrApplication *app,
+                                                          GList * profiles);
 
-GObject * gtr_application_get_translation_memory (GtrApplication * app);
+void              gtr_application_register_icon          (GtrApplication *app,
+                                                          const gchar    *icon,
+                                                          const gchar    *stock_id);
+
+GObject          *gtr_application_get_translation_memory (GtrApplication *app);
 
 /* Non exported funcs */
+GObject         *_gtr_application_get_toolbars_model     (GtrApplication *application);
 
-GObject * _gtr_application_get_toolbars_model (GtrApplication * application);
+void             _gtr_application_save_toolbars_model    (GtrApplication *application);
 
-     void
-     _gtr_application_save_toolbars_model (GtrApplication * application);
+const gchar     *_gtr_application_get_last_dir           (GtrApplication *app);
 
-     const
-       gchar *
-     _gtr_application_get_last_dir (GtrApplication * app);
-
-     void
-     _gtr_application_set_last_dir (GtrApplication * app,
-                                    const gchar * last_dir);
+void             _gtr_application_set_last_dir           (GtrApplication *app,
+                                                          const gchar    *last_dir);
 
 G_END_DECLS
 #endif /* __APPLICATION_H__ */
