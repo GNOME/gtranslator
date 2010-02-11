@@ -934,21 +934,25 @@ set_window_title (GtrWindow * window, gboolean with_path)
 
   if (with_path)
     {
-      po = gtr_tab_get_po (GTR_TAB (gtr_window_get_active_tab (window)));
+      gchar *path;
+
       active_tab = gtr_window_get_active_tab (window);
+      po = gtr_tab_get_po (active_tab);
       state = gtr_po_get_state (gtr_tab_get_po (active_tab));
       po = gtr_tab_get_po (active_tab);
       file = gtr_po_get_location (po);
+      path = g_file_get_path (file);
 
       if (state == GTR_PO_STATE_MODIFIED)
-        title = g_strdup_printf (_("gtr - *%s"), g_file_get_path (file));
+        title = g_strdup_printf (_("gtranslator - *%s"), path);
       else
-        title = g_strdup_printf (_("gtr - %s"), g_file_get_path (file));
+        title = g_strdup_printf (_("gtranslator - %s"), path);
 
+      g_free (path);
       g_object_unref (file);
     }
   else
-    title = g_strdup (_("gtr"));
+    title = g_strdup (_("gtranslator"));
 
   gtk_window_set_title (GTK_WINDOW (window), title);
   g_free (title);
