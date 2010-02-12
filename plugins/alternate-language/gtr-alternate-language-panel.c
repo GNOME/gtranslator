@@ -26,6 +26,7 @@
 #include "gtr-po.h"
 #include "gtr-tab.h"
 #include "gtr-view.h"
+#include "gtr-debug.h"
 
 #include <string.h>
 #include <glib.h>
@@ -43,22 +44,24 @@
 
 GTR_PLUGIN_DEFINE_TYPE (GtrAlternateLangPanel,
                         gtr_alternate_lang_panel, GTK_TYPE_VBOX)
-     struct _GtrAlternateLangPanelPrivate
-     {
-       GtkWidget *open_button;
-       GtkWidget *close_button;
-       GtkWidget *textview;
 
-       GtkWidget *status;
+struct _GtrAlternateLangPanelPrivate
+{
+  GtkWidget *open_button;
+  GtkWidget *close_button;
+  GtkWidget *textview;
 
-       GtrPo *po;
-       GtrMsg *first;
-       GtrTab *tab;
-     };
+  GtkWidget *status;
 
-     static void
-       gtr_alternate_lang_panel_set_text
-       (GtrAlternateLangPanel * panel, const gchar * text)
+  GtrPo *po;
+  GtrTab *tab;
+
+  gulong showed_message_id;
+};
+
+static void
+gtr_alternate_lang_panel_set_text (GtrAlternateLangPanel *panel,
+                                   const gchar           *text)
 {
   GtkTextBuffer *buf;
 
@@ -68,19 +71,23 @@ GTR_PLUGIN_DEFINE_TYPE (GtrAlternateLangPanel,
 }
 
 static void
-search_message (GtrAlternateLangPanel * panel, GtrMsg * msg)
+showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrAlternateLangPanel * panel)
 {
   GList *messages;
   GList *l;
-  const gchar *msgid = gtr_msg_get_msgid (msg);
+  const gchar *msgid;
   gchar *msgid_collate;
   const gchar *string;
   gchar *string_collate;
   GtrMsgStatus status;
 
+  g_return_if_fail (GTR_IS_MSG (msg));
+
+  msgid = gtr_msg_get_msgid (msg);
   msgid_collate = g_utf8_collate_key (msgid, -1);
   messages = gtr_po_get_messages (panel->priv->po);
   l = messages;
+
   do
     {
       string = gtr_msg_get_msgid (l->data);
@@ -115,34 +122,27 @@ search_message (GtrAlternateLangPanel * panel, GtrMsg * msg)
   g_free (msgid_collate);
   gtr_alternate_lang_panel_set_text (panel, _("Message not found"));
 
-  /*
-   * If we are here the status is untranslated
-   */
+  /* If we are here the status is untranslated */
   gtk_image_set_from_stock (GTK_IMAGE (panel->priv->status),
                             UNTRANSLATED_ICON, GTK_ICON_SIZE_SMALL_TOOLBAR);
 }
 
 static void
-showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrAlternateLangPanel * panel)
+open_file (GtkWidget *dialog, GtrAlternateLangPanel *panel)
 {
-  if (panel->priv->po == NULL)
-    {
-      panel->priv->first = msg;
-      return;
-    }
-  search_message (panel, msg);
-}
-
-static void
-open_file (GtkWidget * dialog, GtrAlternateLangPanel * panel)
-{
-  GError *error = NULL;
   GFile *file;
-  gchar *po_file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+  gchar *po_file;
+  GtrMsg *current;
+  GtrPo *current_po;
+  GList *l;
+  GError *error = NULL;
 
+  po_file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
   file = g_file_new_for_path (po_file);
   g_free (po_file);
 
+  if (panel->priv->po != NULL)
+    g_object_unref (panel->priv->po);
   panel->priv->po = gtr_po_new ();
   gtr_po_parse (panel->priv->po, file, &error);
 
@@ -162,9 +162,18 @@ open_file (GtkWidget * dialog, GtrAlternateLangPanel * panel)
       gtk_dialog_run (GTK_DIALOG (erdialog));
       gtk_widget_destroy (erdialog);
       g_error_free (error);
+      return;
     }
 
-  search_message (panel, panel->priv->first);
+  panel->priv->showed_message_id =
+    g_signal_connect (panel->priv->tab, "showed-message",
+                      G_CALLBACK (showed_message_cb), panel);
+
+  current_po = gtr_tab_get_po (panel->priv->tab);
+  l = gtr_po_get_current_message (current_po);
+  current = GTR_MSG (l->data);
+
+  showed_message_cb (panel->priv->tab, current, panel);
   gtk_widget_set_sensitive (panel->priv->textview, TRUE);
 
   gtk_widget_destroy (dialog);
@@ -245,6 +254,13 @@ close_button_clicked_cb (GtkWidget * close_button,
 
       panel->priv->po = NULL;
     }
+
+  if (panel->priv->showed_message_id)
+    {
+      g_signal_handler_disconnect (panel->priv->tab,
+                                   panel->priv->showed_message_id);
+      panel->priv->showed_message_id = 0;
+    }
 }
 
 static void
@@ -254,16 +270,12 @@ gtr_alternate_lang_panel_draw (GtrAlternateLangPanel * panel)
   GtkWidget *buttonbox;
   GtkWidget *scroll;
 
-  /*
-   * Hbox
-   */
+  /* Hbox */
   hbox = gtk_hbox_new (FALSE, 6);
   gtk_widget_show (hbox);
   gtk_box_pack_start (GTK_BOX (panel), hbox, FALSE, TRUE, 0);
 
-  /*
-   * Button box
-   */
+  /* Button box */
   buttonbox = gtk_hbutton_box_new ();
   gtk_button_box_set_layout (GTK_BUTTON_BOX (buttonbox), GTK_BUTTONBOX_START);
   gtk_widget_show (buttonbox);
@@ -285,17 +297,13 @@ gtr_alternate_lang_panel_draw (GtrAlternateLangPanel * panel)
 
   gtk_box_pack_start (GTK_BOX (hbox), buttonbox, FALSE, TRUE, 0);
 
-  /*
-   * Radio buttons
-   */
+  /* Status image */
   panel->priv->status = gtk_image_new ();
   gtk_widget_show (panel->priv->status);
 
   gtk_box_pack_start (GTK_BOX (hbox), panel->priv->status, FALSE, FALSE, 0);
 
-  /*
-   * Text view
-   */
+  /* Text view */
   scroll = gtk_scrolled_window_new (NULL, NULL);
   gtk_widget_show (scroll);
 
@@ -323,25 +331,43 @@ gtr_alternate_lang_panel_init (GtrAlternateLangPanel * panel)
 {
   panel->priv = GTR_ALTERNATE_LANG_PANEL_GET_PRIVATE (panel);
 
-  gtr_alternate_lang_panel_draw (panel);
-
+  panel->priv->showed_message_id = 0;
   panel->priv->po = NULL;
+
+  gtr_alternate_lang_panel_draw (panel);
 }
 
 static void
-gtr_alternate_lang_panel_finalize (GObject * object)
+gtr_alternate_lang_panel_dispose (GObject *object)
 {
-  G_OBJECT_CLASS (gtr_alternate_lang_panel_parent_class)->finalize (object);
+  GtrAlternateLangPanel *panel = GTR_ALTERNATE_LANG_PANEL (object);
+
+  DEBUG_PRINT ("Disposing alternate lang panel");
+
+  if (panel->priv->showed_message_id != 0)
+    {
+      g_signal_handler_disconnect (panel->priv->tab,
+                                   panel->priv->showed_message_id);
+      panel->priv->showed_message_id = 0;
+    }
+
+  if (panel->priv->po != NULL)
+    {
+      g_object_unref (panel->priv->po);
+      panel->priv->po = NULL;
+    }
+
+  G_OBJECT_CLASS (gtr_alternate_lang_panel_parent_class)->dispose (object);
 }
 
 static void
-  gtr_alternate_lang_panel_class_init (GtrAlternateLangPanelClass * klass)
+gtr_alternate_lang_panel_class_init (GtrAlternateLangPanelClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrAlternateLangPanelPrivate));
 
-  object_class->finalize = gtr_alternate_lang_panel_finalize;
+  object_class->dispose = gtr_alternate_lang_panel_dispose;
 }
 
 /***************************** Public funcs ***********************************/
@@ -353,9 +379,6 @@ gtr_alternate_lang_panel_new (GtkWidget * tab)
   panel = g_object_new (GTR_TYPE_ALTERNATE_LANG_PANEL, NULL);
 
   panel->priv->tab = GTR_TAB (tab);
-
-  g_signal_connect (tab, "showed-message",
-                    G_CALLBACK (showed_message_cb), panel);
 
   return GTK_WIDGET (panel);
 }

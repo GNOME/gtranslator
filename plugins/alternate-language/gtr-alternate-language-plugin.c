@@ -39,10 +39,11 @@
 GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrAlternateLangPlugin,
                                     gtr_alternate_lang_plugin,
                                     gtr_alternate_lang_panel_register_type
-                                    (module);
-  )
-     static void on_alternate_lang_activated (GtkAction * action,
-                                              GtrWindow * window)
+                                    (module);)
+
+static void
+on_alternate_lang_activated (GtkAction *action,
+                             GtrWindow * window)
 {
   GtrTab *tab;
   GtkWidget *alternatelang;
@@ -70,7 +71,7 @@ free_window_data (WindowData * data)
 {
   g_return_if_fail (data != NULL);
 
-  g_free (data);
+  g_slice_free (WindowData, data);
 }
 
 static void
@@ -127,7 +128,7 @@ impl_activate (GtrPlugin * plugin, GtrWindow * window)
   GtkUIManager *manager;
   WindowData *data;
 
-  data = g_new (WindowData, 1);
+  data = g_slice_new (WindowData);
 
   manager = gtr_window_get_ui_manager (window);
 
