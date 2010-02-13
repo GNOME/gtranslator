@@ -135,7 +135,7 @@ static const GtkActionEntry always_sensitive_entries[] = {
   {"EditToolbar", NULL, N_("T_oolbar"), NULL, NULL,
    G_CALLBACK (gtr_window_cmd_edit_toolbar)},
   {"EditPreferences", GTK_STOCK_PREFERENCES, NULL, NULL,
-   N_("Edit gtr preferences"),
+   N_("Edit gtranslator preferences"),
    G_CALLBACK (gtr_actions_edit_preferences)},
   {"EditHeader", GTK_STOCK_PROPERTIES, N_("_Header..."), NULL, NULL,
    G_CALLBACK (gtr_actions_edit_header)},

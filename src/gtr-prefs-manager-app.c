@@ -212,7 +212,7 @@ gtr_state_file_sync ()
   if ((content != NULL) &&
       (!g_file_set_contents (path, content, length, &err)))
     {
-      g_warning ("Could not write gtr state file: %s\n", err->message);
+      g_warning ("Could not write gtranslator state file: %s\n", err->message);
       goto out;
     }
 
@@ -433,7 +433,7 @@ gtr_prefs_manager_app_init (void)
   return gtr_prefs_manager != NULL;
 }
 
-/* This function must be called before exiting gtr */
+/* This function must be called before exiting gtranslator */
 void
 gtr_prefs_manager_app_shutdown ()
 {
