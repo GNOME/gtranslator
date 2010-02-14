@@ -1324,17 +1324,16 @@ static void
 menu_item_select_cb (GtkMenuItem * proxy, GtrWindow * window)
 {
   GtkAction *action;
-  char *message;
+  const gchar *message;
 
   action = gtk_activatable_get_related_action (GTK_ACTIVATABLE (proxy));
   g_return_if_fail (action != NULL);
 
-  g_object_get (G_OBJECT (action), "tooltip", &message, NULL);
+  message = gtk_action_get_tooltip (action);
   if (message)
     {
-      gtr_statusbar_push_default (GTR_STATUSBAR
-                                  (window->priv->statusbar), message);
-      g_free (message);
+      gtr_statusbar_push_default (GTR_STATUSBAR (window->priv->statusbar),
+                                  message);
     }
 }
 
