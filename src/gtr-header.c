@@ -70,7 +70,7 @@ parse_nplurals (GtrHeader * header)
 
   if (gtr_prefs_manager_get_use_profile_values () || !plural_forms)
     {
-      const gchar *plural_form;
+      const gchar *plural_form = NULL;
       GtrProfile *profile;
 
       profile = gtr_application_get_active_profile (GTR_APP);
