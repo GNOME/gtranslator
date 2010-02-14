@@ -101,6 +101,7 @@ gtr_utils_split_string_in_words (const gchar * string)
   gint char_len;
   gint i = 0;
   gchar *s;
+  gchar *start = NULL;
   static gchar **badwords_collate = NULL;
 
   if (badwords_collate == NULL)
@@ -129,7 +130,7 @@ gtr_utils_split_string_in_words (const gchar * string)
   s = (gchar *) string;
   while (i <= char_len)
     {
-      gchar *start, *end;
+      gchar *end;
 
       if (attrs[i].is_word_start)
         start = s;
