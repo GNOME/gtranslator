@@ -122,7 +122,9 @@ libgtranslator_la_SOURCES = \
 	gtr-header.c \
 	gtr-statusbar.c \
 	gtr-context.c \
-	$(INST_H_FILES) 
+	gtr-profile-manager.h \
+	gtr-profile-manager.c \
+	$(INST_H_FILES)
 
 libgtranslator_la_LIBADD = \
 	$(GTRANSLATOR_LIBS) \
@@ -130,16 +132,6 @@ libgtranslator_la_LIBADD = \
 	toolbareditor/libtoolbareditor.la \
 	plugin-system/libpluginsystem.la \
 	translation-memory/libtranslationmemory.la
-	
-#gtranslator_auto_learn_SOURCES = \
-#	auto-learn.c
-#	
-#gtranslator_auto_translate_SOURCES = \
-#	auto-translate.c
-#	
-#gtranslator_export_learn_buffer_SOURCES = \
-#	export-learn-buffer.c
-#	
 
 gtr-enum-types.h: gtr-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
 	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gtr-enum-types.h.template $(INST_H_FILES)) > $@

@@ -59,10 +59,18 @@ GSList                *gtr_profile_manager_get_profiles       (GtrProfileManager
 
 GtrProfile            *gtr_profile_manager_get_active_profile (GtrProfileManager *manager);
 
+void                   gtr_profile_manager_set_active_profile (GtrProfileManager *manager,
+                                                               GtrProfile        *profile);
+
 void                   gtr_profile_manager_add_profile        (GtrProfileManager *manager,
                                                                GtrProfile        *profile);
 
-void                   gtr_profile_manager_save               (GtrProfileManager *manager);
+void                   gtr_profile_manager_remove_profile     (GtrProfileManager *manager,
+                                                               GtrProfile        *profile);
+
+void                   gtr_profile_manager_modify_profile     (GtrProfileManager *manager,
+                                                               GtrProfile        *old_profile,
+                                                               GtrProfile        *new_profile);
 
 G_END_DECLS
 

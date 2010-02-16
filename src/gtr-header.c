@@ -26,6 +26,7 @@
 #include "gtr-header.h"
 #include "gtr-prefs-manager.h"
 #include "gtr-profile.h"
+#include "gtr-profile-manager.h"
 #include "gtr-utils.h"
 
 #include <glib.h>
@@ -71,12 +72,16 @@ parse_nplurals (GtrHeader * header)
   if (gtr_prefs_manager_get_use_profile_values () || !plural_forms)
     {
       const gchar *plural_form = NULL;
+      GtrProfileManager *prof_manager;
       GtrProfile *profile;
 
-      profile = gtr_application_get_active_profile (GTR_APP);
+      /* TODO: Manage this also per document */
+      prof_manager = gtr_profile_manager_get_default ();
+      profile = gtr_profile_manager_get_active_profile (prof_manager);
+      g_object_unref (prof_manager);
 
       if (profile)
-        plural_form = gtr_profile_get_plurals (profile);
+        plural_form = gtr_profile_get_plural_forms (profile);
       else if (!plural_forms)
         return;
 
@@ -493,11 +498,11 @@ gtr_header_get_nplurals (GtrHeader * header)
 }
 
 static void
-set_profile_values (GtrHeader * header)
+set_profile_values (GtrHeader *header, GtrProfileManager *prof_manager)
 {
   GtrProfile *active_profile;
 
-  active_profile = gtr_application_get_active_profile (GTR_APP);
+  active_profile = gtr_profile_manager_get_active_profile (prof_manager);
 
   if (gtr_prefs_manager_get_use_profile_values () && active_profile != NULL)
     {
@@ -513,7 +518,7 @@ set_profile_values (GtrHeader * header)
       gtr_header_set_encoding (header,
                                gtr_profile_get_encoding (active_profile));
       gtr_header_set_plural_forms (header,
-                                   gtr_profile_get_plurals (active_profile));
+                                   gtr_profile_get_plural_forms (active_profile));
     }
 }
 
@@ -538,7 +543,8 @@ update_po_date (GtrHeader * header)
 }
 
 static void
-update_comments (GtrHeader * header, const gchar * comments)
+update_comments (GtrHeader *header, const gchar *comments,
+                 GtrProfileManager *prof_manager)
 {
   GtrProfile *active_profile;
   GString *new_comments;
@@ -549,7 +555,7 @@ update_comments (GtrHeader * header, const gchar * comments)
   gchar *current_year;
   gint i;
 
-  active_profile = gtr_application_get_active_profile (GTR_APP);
+  active_profile = gtr_profile_manager_get_active_profile (prof_manager);
   current_year = gtr_utils_get_current_year ();
 
   /* Save the previous translator to update the header's comment */
@@ -637,10 +643,13 @@ add_default_comments (GtrHeader * header)
 void
 gtr_header_update_header (GtrHeader * header)
 {
+  GtrProfileManager *prof_manager;
   const gchar *comments;
 
+  prof_manager = gtr_profile_manager_get_default ();
+
   /* If needed update the header with the profile values */
-  set_profile_values (header);
+  set_profile_values (header, prof_manager);
 
   /* Update the po date */
   update_po_date (header);
@@ -649,7 +658,9 @@ gtr_header_update_header (GtrHeader * header)
   comments = gtr_header_get_comments (header);
 
   if (comments != NULL)
-    update_comments (header, comments);
+    update_comments (header, comments, prof_manager);
   else
     add_default_comments (header);
+
+  g_object_unref (prof_manager);
 }

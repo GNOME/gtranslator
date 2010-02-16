@@ -29,6 +29,8 @@
 
 #include "gtr-msg.h"
 
+G_BEGIN_DECLS
+
 /*
  * Utility Macros
  */
@@ -124,5 +126,7 @@ gtr_header_get_type (void)
      gint gtr_header_get_nplurals (GtrHeader * header);
 
      void gtr_header_update_header (GtrHeader * header);
+
+G_END_DECLS
 
 #endif /* __HEADER_H__ */

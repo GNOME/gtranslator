@@ -37,6 +37,7 @@
 #include "gtr-statusbar.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
+#include "gtr-profile-manager.h"
 
 #include "egg-toolbars-model.h"
 #include "egg-toolbar-editor.h"
@@ -102,6 +103,8 @@ struct _GtrWindowPrivate
   gint width;
   gint height;
   GdkWindowState window_state;
+
+  GtrProfileManager *prof_manager;
 
   gboolean destroy_has_run : 1;
 };
@@ -1532,6 +1535,7 @@ gtr_window_init (GtrWindow * window)
   window->priv = GTR_WINDOW_GET_PRIVATE (window);
 
   window->priv->destroy_has_run = FALSE;
+  window->priv->prof_manager = gtr_profile_manager_get_default ();
 
   gtr_window_draw (window);
 
@@ -1605,6 +1609,12 @@ gtr_window_dispose (GObject * object)
     {
       g_object_unref (priv->action_group);
       priv->action_group = NULL;
+    }
+
+  if (priv->prof_manager != NULL)
+    {
+      g_object_unref (priv->prof_manager);
+      priv->prof_manager = NULL;
     }
 
   /* Now that there have broken some reference loops,

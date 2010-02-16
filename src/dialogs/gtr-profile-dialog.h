@@ -27,14 +27,8 @@
 #include <gtk/gtk.h>
 
 #include "gtr-profile.h"
-#include "gtr-window.h"
-#include "gtr-preferences-dialog.h"
 
-enum
-{
-  NEW_PROFILE,
-  EDIT_PROFILE
-};
+G_BEGIN_DECLS
 
 /*
  * Type checking and casting macros
@@ -75,13 +69,13 @@ struct _GtrProfileDialogClass
 /*
  * Public methods
  */
-GType
-gtr_profile_dialog_get_type (void)
-  G_GNUC_CONST;
+GType               gtr_profile_dialog_get_type         (void) G_GNUC_CONST;
 
-     GType gtr_profile_dialog_register_type (GTypeModule * module);
+GtrProfileDialog   *gtr_profile_dialog_new              (GtkWidget  *parent,
+                                                         GtrProfile *profile);
 
-     void gtr_show_profile_dialog (GtrPreferencesDialog *
-                                   dialog, GtrProfile * profile, gint action);
+GtrProfile         *gtr_profile_dialog_get_profile      (GtrProfileDialog *dlg);
+
+G_END_DECLS
 
 #endif

@@ -37,7 +37,6 @@
 #include "gtr-file-dialogs.h"
 #include "gtr-notebook.h"
 #include "gtr-po.h"
-#include "gtr-profile.h"
 #include "gtr-statusbar.h"
 #include "gtr-tab.h"
 #include "gtr-utils.h"
@@ -741,49 +740,6 @@ close_all_documents (GtrWindow * window, gboolean logout_mode)
 void
 gtr_file_quit (GtkAction * action, GtrWindow * window)
 {
-  GList *profiles_list = NULL;
-  gchar *config_folder;
-  gchar *filename, *filename_temp;
-  GFile *file, *file_temp;
-  gint r;
-
-  config_folder = gtr_dirs_get_user_config_dir ();
-  filename = g_build_filename (config_folder, "profiles.xml", NULL);
-  g_free (config_folder);
-  filename_temp = g_build_filename (g_get_tmp_dir (), "profiles.xml", NULL);
-
-  file = g_file_new_for_path (filename);
-  file_temp = g_file_new_for_path (filename_temp);
-
-  profiles_list = gtr_application_get_profiles (GTR_APP);
-
-  if (profiles_list != NULL)
-    {
-      if (g_file_query_exists (file_temp, NULL))
-        {
-          r = gtr_profile_save_profiles_in_xml (filename_temp);
-        }
-      else
-        {
-          g_file_create (file_temp, G_FILE_CREATE_NONE, NULL, NULL);
-          r = gtr_profile_save_profiles_in_xml (filename_temp);
-        }
-      if (r != -1)
-        {
-          g_file_move (file_temp,
-                       file, G_FILE_COPY_OVERWRITE, NULL, NULL, NULL, NULL);
-        }
-      else
-        {
-          g_warning (_
-                     ("Failed to write profile data into profiles file '%s'"),
-                     filename);
-        }
-    }
-
-  g_object_unref (file_temp);
-  g_object_unref (file);
-
   g_object_set_data (G_OBJECT (window),
                      GTR_IS_CLOSING_ALL, GINT_TO_POINTER (1));
 

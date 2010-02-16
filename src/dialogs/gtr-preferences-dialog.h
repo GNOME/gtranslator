@@ -23,32 +23,22 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-#include "gtr-application.h"
 #include "gtr-window.h"
 
-enum
-{
-  PROFILE_NAME_COL,
-  TOGGLE_COL,
-  N_COLUMNS_PROFILES
-};
-
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
+
+/* Type checking and casting macros */
 #define GTR_TYPE_PREFERENCES_DIALOG		(gtr_preferences_dialog_get_type ())
 #define GTR_PREFERENCES_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_PREFERENCES_DIALOG, GtrPreferencesDialog))
-#define GTR_PREFERENCES_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_PREFERENCES_DIALOG, GtrPreferencesDialogClass))
+#define GTR_PREFERENCES_DIALOG_CLASS(k)	        (G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_PREFERENCES_DIALOG, GtrPreferencesDialogClass))
 #define GTR_IS_PREFERENCES_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_PREFERENCES_DIALOG))
 #define GTR_IS_PREFERENCES_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_PREFERENCES_DIALOG))
 #define GTR_PREFERENCES_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_PREFERENCES_DIALOG, GtrPreferencesDialogClass))
+
 /* Private structure type */
 typedef struct _GtrPreferencesDialogPrivate GtrPreferencesDialogPrivate;
 
-/*
- * Main object structure
- */
+/* Main object structure */
 typedef struct _GtrPreferencesDialog GtrPreferencesDialog;
 
 struct _GtrPreferencesDialog
@@ -59,9 +49,7 @@ struct _GtrPreferencesDialog
   GtrPreferencesDialogPrivate *priv;
 };
 
-/*
- * Class definition
- */
+/* Class definition */
 typedef struct _GtrPreferencesDialogClass GtrPreferencesDialogClass;
 
 struct _GtrPreferencesDialogClass
@@ -69,22 +57,11 @@ struct _GtrPreferencesDialogClass
   GtkDialogClass parent_class;
 };
 
-/*
- * Public methods
- */
-GType
-gtr_preferences_dialog_get_type (void)
-  G_GNUC_CONST;
+/* Public methods */
+GType           gtr_preferences_dialog_get_type         (void)G_GNUC_CONST;
 
-     GType gtr_preferences_dialog_register_type (GTypeModule * module);
-
-     void gtr_show_preferences_dialog (GtrWindow * window);
-
-GtkWidget * gtr_preferences_dialog_get_treeview (GtrPreferencesDialog * dlg);
-
-     void
-       gtr_preferences_fill_profile_treeview
-       (GtrPreferencesDialog * dlg, GtkTreeModel * model);
+void            gtr_show_preferences_dialog             (GtrWindow *window);
 
 G_END_DECLS
+
 #endif /* __PREFERENCES_DIALOG_H__ */

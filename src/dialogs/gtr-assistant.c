@@ -28,6 +28,7 @@
 #include "gtr-application.h"
 #include "gtr-assistant.h"
 #include "gtr-profile.h"
+#include "gtr-profile-manager.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
 
@@ -190,10 +191,11 @@ on_assistant_apply (GtkAssistant * assistant)
   GtrAssistant *as = GTR_ASSISTANT (assistant);
   const gchar *po_name;
   GtrProfile *profile;
-  GList *profiles_list;
   gulong close_signal_id;
+  GtrProfileManager *prof_manager;
 
   profile = gtr_profile_new ();
+  prof_manager = gtr_profile_manager_get_default ();
 
   gtr_profile_set_name (profile,
                         gtk_entry_get_text (GTK_ENTRY
@@ -227,16 +229,13 @@ on_assistant_apply (GtkAssistant * assistant)
                             gtk_entry_get_text (GTK_ENTRY
                                                 (as->priv->trans_enc)));
 
-  gtr_profile_set_plurals (profile,
-                           gtk_entry_get_text (GTK_ENTRY
-                                               (as->priv->plural_form)));
+  gtr_profile_set_plural_forms (profile,
+                                gtk_entry_get_text (GTK_ENTRY (as->priv->plural_form)));
 
-  gtr_application_set_active_profile (GTR_APP, profile);
+  /* Add profile to profile manager and save it */
+  gtr_profile_manager_add_profile (prof_manager, profile);
 
-  profiles_list = gtr_application_get_profiles (GTR_APP);
-
-  gtr_application_set_profiles (GTR_APP,
-                                g_list_append (profiles_list, profile));
+  g_object_unref (prof_manager);
 
   close_signal_id = g_signal_connect (as,
                                       "close",

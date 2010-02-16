@@ -26,7 +26,9 @@
 
 #include <glib.h>
 
-G_BEGIN_DECLS gchar * gtr_dirs_get_user_config_dir (void);
+G_BEGIN_DECLS
+
+gchar *gtr_dirs_get_user_config_dir (void);
 
 gchar *gtr_dirs_get_user_cache_dir (void);
 

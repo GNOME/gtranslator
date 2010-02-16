@@ -30,6 +30,7 @@
 #include "gtr-preferences-dialog.h"
 #include "gtr-prefs-manager.h"
 #include "gtr-profile.h"
+#include "gtr-profile-manager.h"
 #include "gtr-utils.h"
 #include "gtr-plugin-manager.h"
 #include "gtr-profile-dialog.h"
@@ -45,84 +46,84 @@
 #include <string.h>
 #include <gtksourceview/gtksourcestyleschememanager.h>
 
-#define GTR_PREFERENCES_DIALOG_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
-						 	(object),	\
-						 	GTR_TYPE_PREFERENCES_DIALOG,     \
-						 	GtrPreferencesDialogPrivate))
+#define GTR_PREFERENCES_DIALOG_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ( \
+                                                    (object), \
+                                                    GTR_TYPE_PREFERENCES_DIALOG, \
+                                                    GtrPreferencesDialogPrivate))
 
 
 G_DEFINE_TYPE (GtrPreferencesDialog, gtr_preferences_dialog, GTK_TYPE_DIALOG)
-     struct _GtrPreferencesDialogPrivate
-     {
-       GtkWidget *notebook;
 
-       /* Files->General */
-       GtkWidget *warn_if_contains_fuzzy_checkbutton;
-       GtkWidget *delete_compiled_checkbutton;
-
-       /* Files->Autosave */
-       GtkWidget *autosave_checkbutton;
-       GtkWidget *autosave_interval_spinbutton;
-       GtkWidget *autosave_hbox;
-       GtkWidget *create_backup_checkbutton;
-
-       /* Editor->Text display */
-       GtkWidget *highlight_syntax_checkbutton;
-       GtkWidget *visible_whitespace_checkbutton;
-       GtkWidget *use_custom_font_checkbutton;
-       GtkWidget *editor_font_fontbutton;
-       GtkWidget *editor_font_hbox;
-
-       /* Editor->Contents */
-       GtkWidget *unmark_fuzzy_when_changed_checkbutton;
-       GtkWidget *spellcheck_checkbutton;
-
-       /*Profiles */
-       GtkWidget *profile_treeview;
-       GtkWidget *add_button;
-       GtkWidget *edit_button;
-       GtkWidget *delete_button;
-
-       /*Translation Memory */
-       GtkWidget *directory_entry;
-       GtkWidget *search_button;
-       GtkWidget *add_database_button;
-       GtkWidget *add_database_progressbar;
-
-       GtkWidget *use_lang_profile_in_tm;
-       GtkWidget *tm_lang_entry;
-       GtkWidget *missing_words_spinbutton;
-       GtkWidget *sentence_length_spinbutton;
-
-       /*PO header->Personal information */
-       GtkWidget *name_entry;
-       GtkWidget *email_entry;
-
-       /*PO header->Language settings */
-       GtkWidget *language_comboentry;
-       GtkWidget *langcode_comboentry;
-       GtkWidget *charset_comboentry;
-       GtkWidget *encoding_comboentry;
-       GtkWidget *team_email_comboentry;
-       GtkWidget *plurals_entry;
-       GtkWidget *number_plurals_spinbutton;
-
-       /*Inteface */
-       GtkWidget *gdl_combobox;
-       GtkWidget *scheme_color_combobox;
-
-       /*Plugins */
-       GtkWidget *plugins_box;
-     };
-
-     static void setup_profile_pages (GtrPreferencesDialog * dlg);
-
-GtkWidget * gtr_preferences_dialog_get_treeview (GtrPreferencesDialog * dlg)
+struct _GtrPreferencesDialogPrivate
 {
-  g_return_val_if_fail (GTR_IS_PREFERENCES_DIALOG (dlg), NULL);
+  GtkWidget *notebook;
 
-  return dlg->priv->profile_treeview;
-}
+  /* Files->General */
+  GtkWidget *warn_if_contains_fuzzy_checkbutton;
+  GtkWidget *delete_compiled_checkbutton;
+
+  /* Files->Autosave */
+  GtkWidget *autosave_checkbutton;
+  GtkWidget *autosave_interval_spinbutton;
+  GtkWidget *autosave_hbox;
+  GtkWidget *create_backup_checkbutton;
+
+  /* Editor->Text display */
+  GtkWidget *highlight_syntax_checkbutton;
+  GtkWidget *visible_whitespace_checkbutton;
+  GtkWidget *use_custom_font_checkbutton;
+  GtkWidget *editor_font_fontbutton;
+  GtkWidget *editor_font_hbox;
+
+  /* Editor->Contents */
+  GtkWidget *unmark_fuzzy_when_changed_checkbutton;
+  GtkWidget *spellcheck_checkbutton;
+
+  /*Profiles */
+  GtkWidget *profile_treeview;
+  GtkWidget *add_button;
+  GtkWidget *edit_button;
+  GtkWidget *delete_button;
+
+  /*Translation Memory */
+  GtkWidget *directory_entry;
+  GtkWidget *search_button;
+  GtkWidget *add_database_button;
+  GtkWidget *add_database_progressbar;
+
+  GtkWidget *use_lang_profile_in_tm;
+  GtkWidget *tm_lang_entry;
+  GtkWidget *missing_words_spinbutton;
+  GtkWidget *sentence_length_spinbutton;
+
+  /*PO header->Personal information */
+  GtkWidget *name_entry;
+  GtkWidget *email_entry;
+
+  /*PO header->Language settings */
+  GtkWidget *language_comboentry;
+  GtkWidget *langcode_comboentry;
+  GtkWidget *charset_comboentry;
+  GtkWidget *encoding_comboentry;
+  GtkWidget *team_email_comboentry;
+  GtkWidget *plurals_entry;
+  GtkWidget *number_plurals_spinbutton;
+
+  /*Inteface */
+  GtkWidget *gdl_combobox;
+  GtkWidget *scheme_color_combobox;
+
+  /*Plugins */
+  GtkWidget *plugins_box;
+};
+
+enum
+{
+  PROFILE_NAME_COLUMN,
+  ACTIVE_PROFILE_COLUMN,
+  PROFILE_COLUMN,
+  PROFILE_N_COLUMNS
+};
 
 /***************Files pages****************/
 
@@ -413,116 +414,302 @@ setup_editor_pages (GtrPreferencesDialog * dlg)
 
 /***************Profile pages****************/
 static void
-active_toggled_cb (GtkCellRendererToggle * cell_renderer,
-                   gchar * path_str, GtrPreferencesDialog * dlg)
+on_profile_dialog_response_cb (GtrProfileDialog     *profile_dialog,
+                               gint                  response_id,
+                               GtrPreferencesDialog *dlg)
 {
-  GtkTreeIter iter;
-  GtkTreePath *path;
+  GtrProfileManager *prof_manager;
   GtkTreeModel *model;
-  gboolean active;
-  gchar *profile_row;
-  GtrProfile *old_profile_active;
-  GList *l = NULL, *profiles_list = NULL;
-  gchar *filename;
-  gchar *config_folder;
-  GFile *file;
+  GtrProfile *profile;
+  GtrProfile *active_profile;
+  GtkTreeIter iter;
 
-
-  config_folder = gtr_dirs_get_user_config_dir ();
-  filename = g_build_filename (config_folder, "profiles.xml", NULL);
-  g_free (config_folder);
-
-  file = g_file_new_for_path (filename);
-  g_free (filename);
-
-  path = gtk_tree_path_new_from_string (path_str);
-
-  model =
-    gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->profile_treeview));
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->profile_treeview));
   g_return_if_fail (model != NULL);
 
-  gtk_tree_model_get_iter (model, &iter, path);
+  prof_manager = gtr_profile_manager_get_default ();
+  profile = gtr_profile_dialog_get_profile (profile_dialog);
 
-  gtk_tree_model_get (model, &iter, TOGGLE_COL, &active, -1);
-
-  if (!active)
+  /* add new profile */
+  if (response_id == GTK_RESPONSE_ACCEPT)
     {
+      gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+      gtr_profile_manager_add_profile (prof_manager, profile);
 
-      old_profile_active = gtr_application_get_active_profile (GTR_APP);
+      active_profile = gtr_profile_manager_get_active_profile (prof_manager);
 
       gtk_list_store_set (GTK_LIST_STORE (model),
-                          &iter, TRUE, TOGGLE_COL, -1);
+                          &iter,
+                          PROFILE_NAME_COLUMN, gtr_profile_get_name (profile),
+                          ACTIVE_PROFILE_COLUMN, (profile == active_profile),
+                          PROFILE_COLUMN, profile,
+                          -1);
+    }
+  /* modify profile */
+  else if (response_id == GTK_RESPONSE_YES)
+    {
+      GtkTreeSelection *selection;
 
-      gtk_tree_model_get (model, &iter, PROFILE_NAME_COL, &profile_row, -1);
-      profiles_list = gtr_application_get_profiles (GTR_APP);
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->profile_treeview));
 
-      for (l = profiles_list; l; l = l->next)
+      if (gtk_tree_selection_get_selected (selection, &model, &iter))
         {
+          GtrProfile *old;
+
+          gtk_tree_model_get (model, &iter,
+                              PROFILE_COLUMN, &old,
+                              -1);
+
+          gtr_profile_manager_modify_profile (prof_manager, old, profile);
+          active_profile = gtr_profile_manager_get_active_profile (prof_manager);
+
+          gtk_list_store_set (GTK_LIST_STORE (model),
+                              &iter,
+                              PROFILE_NAME_COLUMN, gtr_profile_get_name (profile),
+                              ACTIVE_PROFILE_COLUMN, (profile == active_profile),
+                              PROFILE_COLUMN, profile,
+                              -1);
+        }
+    }
+
+  g_object_unref (prof_manager);
+  gtk_widget_destroy (GTK_WIDGET (profile_dialog));
+}
+
+static void
+add_button_clicked (GtkWidget *button, GtrPreferencesDialog *dlg)
+{
+  GtrProfileDialog *profile_dialog;
+
+  profile_dialog = gtr_profile_dialog_new (GTK_WIDGET (dlg), NULL);
+
+  g_signal_connect (profile_dialog, "response",
+                    G_CALLBACK (on_profile_dialog_response_cb), dlg);
+
+  gtk_widget_show (GTK_WIDGET (profile_dialog));
+  gtk_window_present (GTK_WINDOW (profile_dialog));
+}
+
+static void
+edit_button_clicked (GtkWidget *button, GtrPreferencesDialog *dlg)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GtkTreeSelection *selection;
+  GtrProfile *profile;
+
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->profile_treeview));
+  g_return_if_fail (model != NULL);
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->profile_treeview));
+
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+    {
+      GtrProfileDialog *profile_dialog;
+
+      gtk_tree_model_get (model, &iter, PROFILE_COLUMN, &profile, -1);
+
+      profile_dialog = gtr_profile_dialog_new (GTK_WIDGET (dlg), profile);
+
+      g_signal_connect (profile_dialog, "response",
+                        G_CALLBACK (on_profile_dialog_response_cb), dlg);
+
+      gtk_widget_show (GTK_WIDGET (profile_dialog));
+      gtk_window_present (GTK_WINDOW (profile_dialog));
+    }
+}
+
+static void
+delete_confirm_dialog_cb (GtkWidget *dialog,
+                          gint response_id, GtrPreferencesDialog *dlg)
+{
+  if (response_id == GTK_RESPONSE_YES)
+    {
+      GtkTreeIter iter;
+      GtkTreeModel *model;
+      GtkTreeSelection *selection;
+
+      model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->profile_treeview));
+      g_return_if_fail (model != NULL);
+
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->profile_treeview));
+
+      if (gtk_tree_selection_get_selected (selection, &model, &iter))
+        {
+          GtrProfileManager *prof_manager;
           GtrProfile *profile;
-          profile = (GtrProfile *) l->data;
-          if (!strcmp (gtr_profile_get_name (profile), profile_row))
+
+          gtk_tree_model_get (model, &iter, PROFILE_COLUMN, &profile,
+                              -1);
+
+          if (profile != NULL)
             {
-              gtr_application_set_active_profile (GTR_APP, profile);
+              prof_manager = gtr_profile_manager_get_default ();
+              gtr_profile_manager_remove_profile (prof_manager, profile);
+              g_object_unref (prof_manager);
+
+              gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
             }
         }
     }
 
-  gtk_list_store_clear (GTK_LIST_STORE (model));
-  gtr_preferences_fill_profile_treeview (dlg, model);
-  gtk_tree_path_free (path);
+  gtk_widget_destroy (dialog);
 }
 
-void
-gtr_preferences_fill_profile_treeview (GtrPreferencesDialog *
-                                       dlg, GtkTreeModel * model)
+static void
+delete_button_clicked (GtkWidget *button, GtrPreferencesDialog *dlg)
 {
   GtkTreeIter iter;
-  GtrProfile *active_profile;
-  GList *l = NULL, *profiles_list = NULL;
+  GtkTreeModel *model;
+  GtkTreeSelection *selection;
+  gboolean active;
+  GtkWidget *dialog;
 
-  gtk_list_store_clear (GTK_LIST_STORE (model));
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->profile_treeview));
+  g_return_if_fail (model != NULL);
 
-  profiles_list = gtr_application_get_profiles (GTR_APP);
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->profile_treeview));
 
-
-  active_profile = gtr_application_get_active_profile (GTR_APP);
-
-  for (l = profiles_list; l; l = l->next)
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
+      gtk_tree_model_get (model, &iter, ACTIVE_PROFILE_COLUMN, &active, -1);
 
-      GtrProfile *profile;
-      const gchar *profile_name;
-
-      profile = (GtrProfile *) l->data;
-
-      profile_name = gtr_profile_get_name (profile);
-      gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-
-      if (!strcmp (gtr_profile_get_name (active_profile), profile_name))
+      if (active)
         {
-          gtk_list_store_set (GTK_LIST_STORE (model),
-                              &iter,
-                              PROFILE_NAME_COL,
-                              profile_name, TOGGLE_COL, TRUE, -1);
+          dialog = gtk_message_dialog_new (GTK_WINDOW (dlg),
+                                           GTK_DIALOG_MODAL,
+                                           GTK_MESSAGE_ERROR,
+                                           GTK_BUTTONS_CLOSE, NULL);
+
+          gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
+                                         _("<span weight=\"bold\" size=\"large\">Impossible to remove the active profile</span>"));
+
+          gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG
+                                                    (dialog),
+                                                    _("Another profile should be selected as active before"));
+
+          gtk_dialog_run (GTK_DIALOG (dialog));
+          gtk_widget_destroy (dialog);
         }
       else
         {
-          gtk_list_store_set (GTK_LIST_STORE (model),
-                              &iter, PROFILE_NAME_COL, profile_name, -1);
+          dialog = gtk_message_dialog_new (GTK_WINDOW (dlg),
+                                           GTK_DIALOG_MODAL,
+                                           GTK_MESSAGE_QUESTION,
+                                           GTK_BUTTONS_NONE, NULL);
+
+          gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
+                                         _("<span weight=\"bold\" size=\"large\">Are you sure you want to delete this profile?</span>"));
+
+          gtk_dialog_add_button (GTK_DIALOG (dialog),
+                                 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+
+          gtk_dialog_add_button (GTK_DIALOG (dialog),
+                                 GTK_STOCK_DELETE, GTK_RESPONSE_YES);
+
+          gtk_dialog_run (GTK_DIALOG (dialog));
+
+          g_signal_connect (GTK_DIALOG (dialog), "response",
+                            G_CALLBACK (delete_confirm_dialog_cb), dlg);
         }
     }
 }
 
 static void
-setup_profile_pages (GtrPreferencesDialog * dlg)
+active_toggled_cb (GtkCellRendererToggle *cell_renderer,
+                   gchar *path_str, GtrPreferencesDialog *dlg)
+{
+  GtkTreeIter iter, first;
+  GtkTreePath *path;
+  GtkTreeModel *model;
+  GtrProfile *active_profile;
+
+  path = gtk_tree_path_new_from_string (path_str);
+
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->profile_treeview));
+  g_return_if_fail (model != NULL);
+
+  gtk_tree_model_get_iter (model, &iter, path);
+
+  gtk_tree_model_get (model, &iter, PROFILE_COLUMN, &active_profile, -1);
+
+  if (active_profile != NULL)
+    {
+      GtrProfileManager *prof_manager;
+
+      prof_manager = gtr_profile_manager_get_default ();
+
+      if (gtr_profile_manager_get_active_profile (prof_manager) != active_profile)
+        {
+          gtr_profile_manager_set_active_profile (prof_manager, active_profile);
+
+          gtk_tree_model_get_iter_first (model, &first);
+
+          do
+          {
+            gtk_list_store_set (GTK_LIST_STORE (model),
+                                &first,
+                                ACTIVE_PROFILE_COLUMN, FALSE,
+                                -1);
+          } while (gtk_tree_model_iter_next (model, &first));
+
+          gtk_list_store_set (GTK_LIST_STORE (model),
+                              &iter,
+                              ACTIVE_PROFILE_COLUMN, TRUE,
+                              -1);
+        }
+
+      g_object_unref (prof_manager);
+    }
+
+  gtk_tree_path_free (path);
+}
+
+static void
+fill_profile_treeview (GtrPreferencesDialog *dlg, GtkTreeModel *model)
+{
+  GtrProfileManager *prof_manager;
+  GtkTreeIter iter;
+  GtrProfile *active_profile;
+  GSList *l, *profiles;
+
+  gtk_list_store_clear (GTK_LIST_STORE (model));
+
+  prof_manager = gtr_profile_manager_get_default ();
+  profiles = gtr_profile_manager_get_profiles (prof_manager);
+  active_profile = gtr_profile_manager_get_active_profile (prof_manager);
+
+  for (l = profiles; l != NULL; l = g_slist_next (l))
+    {
+      GtrProfile *profile = GTR_PROFILE (l->data);
+      const gchar *profile_name;
+
+      profile_name = gtr_profile_get_name (profile);
+      gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+
+      gtk_list_store_set (GTK_LIST_STORE (model),
+                          &iter,
+                          PROFILE_NAME_COLUMN, profile_name,
+                          ACTIVE_PROFILE_COLUMN, (profile == active_profile),
+                          PROFILE_COLUMN, profile,
+                          -1);
+    }
+
+  g_object_unref (prof_manager);
+}
+
+static void
+setup_profile_pages (GtrPreferencesDialog *dlg)
 {
 
   GtkTreeViewColumn *name_column, *toggle_column;
   GtkCellRenderer *text_renderer, *toggle_renderer;
   GtkListStore *model;
 
-  model =
-    gtk_list_store_new (N_COLUMNS_PROFILES, G_TYPE_STRING, G_TYPE_BOOLEAN);
+  model = gtk_list_store_new (PROFILE_N_COLUMNS,
+                              G_TYPE_STRING,
+                              G_TYPE_BOOLEAN,
+                              G_TYPE_POINTER);
 
   gtk_tree_view_set_model (GTK_TREE_VIEW (dlg->priv->profile_treeview),
                            GTK_TREE_MODEL (model));
@@ -535,19 +722,22 @@ setup_profile_pages (GtrPreferencesDialog * dlg)
   g_signal_connect (toggle_renderer,
                     "toggled", G_CALLBACK (active_toggled_cb), dlg);
 
-  g_object_set (toggle_renderer,
-                "mode", GTK_CELL_RENDERER_MODE_ACTIVATABLE, NULL);
+  gtk_cell_renderer_toggle_set_activatable (GTK_CELL_RENDERER_TOGGLE (toggle_renderer),
+                                            TRUE);
+  gtk_cell_renderer_toggle_set_radio (GTK_CELL_RENDERER_TOGGLE (toggle_renderer),
+                                      TRUE);
 
   name_column = gtk_tree_view_column_new_with_attributes (_("Profile"),
                                                           text_renderer,
                                                           "text",
-                                                          PROFILE_NAME_COL,
+                                                          PROFILE_NAME_COLUMN,
                                                           NULL);
 
   toggle_column = gtk_tree_view_column_new_with_attributes (_("Active"),
                                                             toggle_renderer,
                                                             "active",
-                                                            TOGGLE_COL, NULL);
+                                                            ACTIVE_PROFILE_COLUMN,
+                                                            NULL);
 
   gtk_tree_view_column_set_resizable (toggle_column, TRUE);
   gtk_tree_view_column_set_resizable (name_column, TRUE);
@@ -556,9 +746,9 @@ setup_profile_pages (GtrPreferencesDialog * dlg)
   gtk_tree_view_append_column (GTK_TREE_VIEW (dlg->priv->profile_treeview),
                                toggle_column);
 
-  g_object_set (name_column, "expand", TRUE, NULL);
+  gtk_tree_view_column_set_expand (name_column, TRUE);
 
-  gtr_preferences_fill_profile_treeview (dlg, GTK_TREE_MODEL (model));
+  fill_profile_treeview (dlg, GTK_TREE_MODEL (model));
 }
 
 /***************Interface pages****************/
@@ -659,7 +849,7 @@ response_filechooser_cb (GtkDialog * dialog,
 }
 
 static void
-on_search_button_pulsed (GtkButton * button, gpointer data)
+on_search_button_clicked (GtkButton * button, gpointer data)
 {
   GtkWidget *filechooser;
   GtrPreferencesDialog *dlg;
@@ -781,7 +971,7 @@ destroy_idle_data (gpointer data)
 }
 
 static void
-on_add_database_button_pulsed (GtkButton * button, GtrPreferencesDialog * dlg)
+on_add_database_button_clicked (GtkButton * button, GtrPreferencesDialog * dlg)
 {
   GFile *dir;
   const gchar *dir_name;
@@ -878,6 +1068,7 @@ directory_entry_changed (GObject * gobject,
 static void
 setup_tm_pages (GtrPreferencesDialog * dlg)
 {
+  GtrProfileManager *prof_manager;
   GtrProfile *profile;
   const gchar *language_code;
   const gchar *filename = NULL;
@@ -887,7 +1078,8 @@ setup_tm_pages (GtrPreferencesDialog * dlg)
                                 gtr_prefs_manager_get_restrict_to_filename
                                 ());
 
-  profile = gtr_application_get_active_profile (GTR_APP);
+  prof_manager = gtr_profile_manager_get_default ();
+  profile = gtr_profile_manager_get_active_profile (prof_manager);
 
   if (profile != NULL)
     {
@@ -896,6 +1088,7 @@ setup_tm_pages (GtrPreferencesDialog * dlg)
 
       gtk_entry_set_text (GTK_ENTRY (dlg->priv->tm_lang_entry), filename);
     }
+  g_object_unref (prof_manager);
 
   if (filename != NULL)
     gtr_prefs_manager_set_filename_restriction (filename);
@@ -911,7 +1104,7 @@ setup_tm_pages (GtrPreferencesDialog * dlg)
                              gtr_prefs_manager_get_max_length_diff ());
 
   g_signal_connect (GTK_BUTTON (dlg->priv->search_button), "clicked",
-                    G_CALLBACK (on_search_button_pulsed), dlg);
+                    G_CALLBACK (on_search_button_clicked), dlg);
 
   g_signal_connect (dlg->priv->directory_entry, "notify::text",
                     G_CALLBACK (directory_entry_changed), dlg);
@@ -920,7 +1113,7 @@ setup_tm_pages (GtrPreferencesDialog * dlg)
                     G_CALLBACK (tm_lang_entry_changed), dlg);
 
   g_signal_connect (GTK_BUTTON (dlg->priv->add_database_button), "clicked",
-                    G_CALLBACK (on_add_database_button_pulsed), dlg);
+                    G_CALLBACK (on_add_database_button_clicked), dlg);
 
   g_signal_connect (GTK_TOGGLE_BUTTON (dlg->priv->use_lang_profile_in_tm),
                     "toggled",
@@ -967,173 +1160,6 @@ dialog_response_handler (GtkDialog * dlg, gint res_id)
     {
     default:
       gtk_widget_destroy (GTK_WIDGET (dlg));
-    }
-}
-
-static void
-add_button_pulsed (GtkWidget * button, GtrPreferencesDialog * dlg)
-{
-  GtrProfile *profile;
-  profile = gtr_profile_new ();
-  gtr_show_profile_dialog (dlg, profile, NEW_PROFILE);
-}
-
-static void
-edit_button_pulsed (GtkWidget * button, GtrPreferencesDialog * dlg)
-{
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  GtkTreeSelection *selection;
-  gchar *profile_row;
-  const gchar *old_profile_name;
-  GtrProfile *edited_profile = NULL;
-  GtrProfile *active_profile;
-  GList *profiles_list = NULL, *l = NULL;
-
-  model =
-    gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->profile_treeview));
-  g_return_if_fail (model != NULL);
-
-  selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->profile_treeview));
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-
-      gtk_tree_model_get (model, &iter, PROFILE_NAME_COL, &profile_row, -1);
-
-      profiles_list = gtr_application_get_profiles (GTR_APP);
-      active_profile = gtr_application_get_active_profile (GTR_APP);
-
-      for (l = profiles_list; l; l = l->next)
-        {
-          GtrProfile *profile;
-          profile = (GtrProfile *) l->data;
-          if (!strcmp (gtr_profile_get_name (profile), profile_row))
-            {
-              old_profile_name = gtr_profile_get_name (profile);
-              edited_profile = profile;
-            }
-        }
-      gtr_show_profile_dialog (dlg, edited_profile, EDIT_PROFILE);
-    }
-}
-
-static void
-delete_confirm_dialog_cb (GtkWidget * dialog,
-                          gint response_id, GtrPreferencesDialog * dlg)
-{
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  GtkTreeSelection *selection;
-  gchar *profile_row;
-  GList *profiles_list = NULL, *l = NULL;
-  GList *new_list = NULL;
-
-  if (response_id == GTK_RESPONSE_YES)
-    {
-      model =
-        gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->profile_treeview));
-      g_return_if_fail (model != NULL);
-
-      selection =
-        gtk_tree_view_get_selection (GTK_TREE_VIEW
-                                     (dlg->priv->profile_treeview));
-
-      if (gtk_tree_selection_get_selected (selection, &model, &iter))
-        {
-
-          gtk_tree_model_get (model, &iter, PROFILE_NAME_COL, &profile_row,
-                              -1);
-
-          profiles_list = gtr_application_get_profiles (GTR_APP);
-
-          for (l = profiles_list; l; l = l->next)
-            {
-              GtrProfile *profile;
-              profile = (GtrProfile *) l->data;
-              if (!strcmp (gtr_profile_get_name (profile), profile_row))
-                {
-                  new_list = g_list_remove (profiles_list, profile);
-                  gtr_application_set_profiles (GTR_APP, new_list);
-                }
-            }
-          gtr_preferences_fill_profile_treeview (dlg, model);
-        }
-      gtk_widget_destroy (dialog);
-    }
-  else
-    {
-      gtk_widget_destroy (dialog);
-    }
-}
-
-static void
-delete_button_pulsed (GtkWidget * button, GtrPreferencesDialog * dlg)
-{
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  GtkTreeSelection *selection;
-  gchar *profile_row;
-  GtrProfile *active_profile;
-  GtkWidget *dialog;
-
-  model =
-    gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->profile_treeview));
-  g_return_if_fail (model != NULL);
-
-  selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->profile_treeview));
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-
-      gtk_tree_model_get (model, &iter, PROFILE_NAME_COL, &profile_row, -1);
-
-      active_profile = gtr_application_get_active_profile (GTR_APP);
-
-      if (!strcmp (gtr_profile_get_name (active_profile), profile_row))
-        {
-
-          dialog = gtk_message_dialog_new (GTK_WINDOW (dlg),
-                                           GTK_DIALOG_MODAL,
-                                           GTK_MESSAGE_ERROR,
-                                           GTK_BUTTONS_CLOSE, NULL);
-
-          gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
-                                         _
-                                         ("<span weight=\"bold\" size=\"large\">Impossible to remove the active profile</span>"));
-
-          gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG
-                                                    (dialog),
-                                                    _
-                                                    ("Another profile should be selected as active before"));
-
-          gtk_dialog_run (GTK_DIALOG (dialog));
-          gtk_widget_destroy (dialog);
-        }
-      else
-        {
-          dialog = gtk_message_dialog_new (GTK_WINDOW (dlg),
-                                           GTK_DIALOG_MODAL,
-                                           GTK_MESSAGE_QUESTION,
-                                           GTK_BUTTONS_NONE, NULL);
-
-          gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
-                                         _
-                                         ("<span weight=\"bold\" size=\"large\">Are you sure you want to delete this profile?</span>"));
-
-          gtk_dialog_add_button (GTK_DIALOG (dialog),
-                                 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
-
-          gtk_dialog_add_button (GTK_DIALOG (dialog),
-                                 GTK_STOCK_DELETE, GTK_RESPONSE_YES);
-
-          gtk_dialog_run (GTK_DIALOG (dialog));
-
-          g_signal_connect (GTK_DIALOG (dialog), "response",
-                            G_CALLBACK (delete_confirm_dialog_cb), dlg);
-        }
     }
 }
 
@@ -1251,13 +1277,13 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);
 
   g_signal_connect (dlg->priv->add_button,
-                    "clicked", G_CALLBACK (add_button_pulsed), dlg);
+                    "clicked", G_CALLBACK (add_button_clicked), dlg);
 
   g_signal_connect (dlg->priv->delete_button,
-                    "clicked", G_CALLBACK (delete_button_pulsed), dlg);
+                    "clicked", G_CALLBACK (delete_button_clicked), dlg);
 
   g_signal_connect (dlg->priv->edit_button,
-                    "clicked", G_CALLBACK (edit_button_pulsed), dlg);
+                    "clicked", G_CALLBACK (edit_button_clicked), dlg);
 
   setup_files_pages (dlg);
   setup_editor_pages (dlg);

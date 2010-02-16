@@ -287,17 +287,9 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
 
   gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);
 
-  if (gtr_application_get_profiles (GTR_APP) == NULL)
-    {
-      gtk_widget_set_sensitive (dlg->priv->take_my_options, FALSE);
-    }
-  else
-    {
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                    (dlg->priv->take_my_options),
-                                    gtr_prefs_manager_get_use_profile_values
-                                    ());
-    }
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->take_my_options),
+                                gtr_prefs_manager_get_use_profile_values ());
+
   gtk_text_view_set_editable (GTK_TEXT_VIEW (dlg->priv->prj_comment), TRUE);
 
   gtk_widget_set_sensitive (dlg->priv->pot_date, FALSE);

@@ -223,10 +223,6 @@ main (gint argc, gchar * argv[])
   GtrWindow *window;
   GSList *file_list = NULL;
   GOptionContext *context;
-  gchar *filename;
-  gchar *config_folder;
-  GList *profiles_list = NULL;
-  GFile *file;
   gchar *pixmaps_dir;
   gchar **uris;
 

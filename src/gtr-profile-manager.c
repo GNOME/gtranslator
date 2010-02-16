@@ -211,6 +211,80 @@ load_profiles (GtrProfileManager *manager)
 }
 
 static void
+save_profile (GtrProfileManager *manager,
+              GtrProfile        *profile,
+              xmlNodePtr         parent)
+{
+  xmlNodePtr profile_node;
+
+  profile_node = xmlNewChild (parent, NULL, (const xmlChar *)"profile", NULL);
+
+  if (manager->priv->active_profile == profile)
+    xmlSetProp (profile_node, (const xmlChar *)"active", (const xmlChar *)"TRUE");
+
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"profile_name",
+                   (const xmlChar *)gtr_profile_get_name (profile));
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"author_name",
+                   (const xmlChar *)gtr_profile_get_author_name (profile));
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"author_email",
+                   (const xmlChar *)gtr_profile_get_author_email (profile));
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"language_name",
+                   (const xmlChar *)gtr_profile_get_language_name (profile));
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"language_code",
+                   (const xmlChar *)gtr_profile_get_language_code (profile));
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"charset",
+                   (const xmlChar *)gtr_profile_get_charset (profile));
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"encoding",
+                   (const xmlChar *)gtr_profile_get_encoding (profile));
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"group_email",
+                   (const xmlChar *)gtr_profile_get_group_email (profile));
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"plural_forms",
+                   (const xmlChar *)gtr_profile_get_plural_forms (profile));
+}
+
+static void
+save_profiles (GtrProfileManager *manager)
+{
+  xmlDocPtr  doc;
+  xmlNodePtr root;
+  gchar *file_name;
+  GSList *l;
+
+  g_return_if_fail (GTR_IS_PROFILE_MANAGER (manager));
+
+  xmlIndentTreeOutput = TRUE;
+
+  doc = xmlNewDoc ((const xmlChar *)"1.0");
+  if (doc == NULL)
+    return;
+
+  /* Create metadata root */
+  root = xmlNewDocNode (doc, NULL, (const xmlChar *)"profiles", NULL);
+  xmlDocSetRootElement (doc, root);
+
+  for (l = manager->priv->profiles; l != NULL; l = g_slist_next (l))
+    save_profile (manager, GTR_PROFILE (l->data), root);
+
+  file_name = get_profile_filename ();
+  if (file_name != NULL)
+    {
+      gchar *config_dir;
+      int res;
+
+      /* make sure the config dir exists */
+      config_dir = gtr_dirs_get_user_config_dir ();
+      res = g_mkdir_with_parents (config_dir, 0755);
+      if (res != -1)
+        xmlSaveFormatFile (file_name, doc, 1);
+
+      g_free (config_dir);
+      g_free (file_name);
+    }
+
+  xmlFreeDoc (doc);
+}
+
+static void
 gtr_profile_manager_init (GtrProfileManager *manager)
 {
   manager->priv = GTR_PROFILE_MANAGER_GET_PRIVATE (manager);
@@ -252,86 +326,65 @@ gtr_profile_manager_get_active_profile (GtrProfileManager *manager)
 }
 
 void
+gtr_profile_manager_set_active_profile (GtrProfileManager *manager,
+                                        GtrProfile        *profile)
+{
+  g_return_if_fail (GTR_IS_PROFILE_MANAGER (manager));
+  g_return_if_fail (GTR_IS_PROFILE (profile));
+
+  manager->priv->active_profile = profile;
+  save_profiles (manager);
+}
+
+void
 gtr_profile_manager_add_profile (GtrProfileManager *manager,
                                  GtrProfile        *profile)
 {
   g_return_if_fail (GTR_IS_PROFILE_MANAGER (manager));
   g_return_if_fail (profile != NULL);
 
+  if (manager->priv->profiles == NULL)
+    manager->priv->active_profile = profile;
+
   manager->priv->profiles = g_slist_append (manager->priv->profiles,
                                             profile);
-}
 
-static void
-save_profile (GtrProfileManager *manager,
-              GtrProfile        *profile,
-              xmlNodePtr         parent)
-{
-  xmlNodePtr profile_node;
-
-  profile_node = xmlNewChild (parent, NULL, (const xmlChar *)"profile", NULL);
-
-  if (manager->priv->active_profile == profile)
-    xmlSetProp (profile_node, (const xmlChar *)"active", (const xmlChar *)"TRUE");
-
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"profile_name",
-                   (const xmlChar *)gtr_profile_get_name (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"author_name",
-                   (const xmlChar *)gtr_profile_get_author_name (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"author_email",
-                   (const xmlChar *)gtr_profile_get_author_email (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"language_name",
-                   (const xmlChar *)gtr_profile_get_language_name (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"language_code",
-                   (const xmlChar *)gtr_profile_get_language_code (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"charset",
-                   (const xmlChar *)gtr_profile_get_charset (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"encoding",
-                   (const xmlChar *)gtr_profile_get_encoding (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"group_email",
-                   (const xmlChar *)gtr_profile_get_group_email (profile));
-  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"plural_forms",
-                   (const xmlChar *)gtr_profile_get_plural_forms (profile));
+  save_profiles (manager);
 }
 
 void
-gtr_profile_manager_save (GtrProfileManager *manager)
+gtr_profile_manager_remove_profile (GtrProfileManager *manager,
+                                    GtrProfile        *profile)
 {
-  xmlDocPtr  doc;
-  xmlNodePtr root;
-  gchar *file_name;
-  GSList *l;
+  g_return_if_fail (GTR_IS_PROFILE_MANAGER (manager));
+  g_return_if_fail (profile != NULL);
+
+  manager->priv->profiles = g_slist_remove (manager->priv->profiles,
+                                            profile);
+
+  save_profiles (manager);
+}
+
+void
+gtr_profile_manager_modify_profile (GtrProfileManager *manager,
+                                    GtrProfile        *old_profile,
+                                    GtrProfile        *new_profile)
+{
+  GSList *p;
 
   g_return_if_fail (GTR_IS_PROFILE_MANAGER (manager));
+  g_return_if_fail (old_profile != NULL);
+  g_return_if_fail (new_profile != NULL);
 
-  xmlIndentTreeOutput = TRUE;
+  p = g_slist_find (manager->priv->profiles,
+                    old_profile);
 
-  doc = xmlNewDoc ((const xmlChar *)"1.0");
-  if (doc == NULL)
-    return;
+  p->data = new_profile;
 
-  /* Create metadata root */
-  root = xmlNewDocNode (doc, NULL, (const xmlChar *)"profiles", NULL);
-  xmlDocSetRootElement (doc, root);
+  if (manager->priv->active_profile == old_profile)
+    manager->priv->active_profile = new_profile;
 
-  for (l = manager->priv->profiles; l != NULL; l = g_slist_next (l))
-    save_profile (manager, GTR_PROFILE (l->data), root);
+  g_object_unref (old_profile);
 
-  file_name = get_profile_filename ();
-  if (file_name != NULL)
-    {
-      gchar *config_dir;
-      int res;
-
-      /* make sure the config dir exists */
-      config_dir = gtr_dirs_get_user_config_dir ();
-      res = g_mkdir_with_parents (config_dir, 0755);
-      if (res != -1)
-        xmlSaveFormatFile (file_name, doc, 1);
-
-      g_free (config_dir);
-      g_free (file_name);
-    }
-
-  xmlFreeDoc (doc);
+  save_profiles (manager);
 }
