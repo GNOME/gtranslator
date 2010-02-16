@@ -310,18 +310,6 @@ main (gint argc, gchar * argv[])
   gtk_about_dialog_set_url_hook (gtr_utils_activate_url, NULL, NULL);
   gtk_about_dialog_set_email_hook (gtr_utils_activate_email, NULL, NULL);
 
-  /* Load profiles list */
-  config_folder = gtr_dirs_get_user_config_dir ();
-  filename = g_build_filename (config_folder, "profiles.xml", NULL);
-  file = g_file_new_for_path (filename);
-
-  if (g_file_query_exists (file, NULL))
-    {
-      profiles_list = gtr_profile_get_profiles_from_xml_file (filename);
-    }
-
-  gtr_application_set_profiles (app, profiles_list);
-
   /* Create the main app-window. */
   window = gtr_application_create_window (app);
 
