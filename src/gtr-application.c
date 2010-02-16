@@ -55,9 +55,6 @@ struct _GtrApplicationPrivate
   GList *windows;
   GtrWindow *active_window;
 
-  GList *profiles;
-  GtrProfile *active_profile;
-
   gchar *toolbars_file;
   EggToolbarsModel *toolbars_model;
 
@@ -185,7 +182,6 @@ gtr_application_init (GtrApplication *application)
   priv->windows = NULL;
   priv->last_dir = NULL;
   priv->first_run = FALSE;
-  priv->profiles = NULL;
 
   /* Creating config folder */
   ensure_user_config_dir (); /* FIXME: is this really needed ? */
@@ -466,60 +462,6 @@ gtr_application_get_windows (GtrApplication * app)
       g_list_prepend (app->priv->windows, app->priv->active_window);
 
   return app->priv->windows;
-}
-
-/**
- * gtr_application_get_active_profile:
- * @app: a #GtrApplication
- * 
- * Return value: the active #GtrProfile
- **/
-GtrProfile *
-gtr_application_get_active_profile (GtrApplication * app)
-{
-  return app->priv->active_profile;
-}
-
-/**
- * gtr_application_set_profiles:
- * @app: a #GtrApplication
- * @profiles: a #GList
- *
- **/
-void
-gtr_application_set_active_profile (GtrApplication * app,
-                                    GtrProfile * profile)
-{
-  app->priv->active_profile = profile;
-}
-
-/**
- * gtr_application_get_profiles:
- * @app: a #GtrApplication
- * 
- * Return value: a list of all profiles.
- **/
-GList *
-gtr_application_get_profiles (GtrApplication * app)
-{
-  g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
-
-  return app->priv->profiles;
-}
-
-/**
- * gtr_application_set_profiles:
- * @app: a #GtrApplication
- * @profiles: a #GList
- *
- **/
-void
-gtr_application_set_profiles (GtrApplication *app, GList *profiles)
-{
-  g_return_if_fail (GTR_IS_APPLICATION (app));
-  g_return_if_fail (profiles != NULL);
-
-  app->priv->profiles = profiles;
 }
 
 /**

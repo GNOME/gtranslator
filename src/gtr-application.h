@@ -28,7 +28,6 @@
 #include <gtk/gtk.h>
 #include <unique/uniqueapp.h>
 
-#include "gtr-profile.h"
 #include "gtr-window.h"
 
 G_BEGIN_DECLS
@@ -86,16 +85,6 @@ GtrWindow        *gtr_application_create_window          (GtrApplication *app);
 GtrWindow        *gtr_application_get_active_window      (GtrApplication *app);
 
 const GList      *gtr_application_get_windows            (GtrApplication *app);
-
-GtrProfile       *gtr_application_get_active_profile     (GtrApplication *app);
-
-void              gtr_application_set_active_profile     (GtrApplication *app,
-                                                          GtrProfile * profile);
-
-GList            *gtr_application_get_profiles           (GtrApplication *app);
-
-void              gtr_application_set_profiles           (GtrApplication *app,
-                                                          GList * profiles);
 
 void              gtr_application_register_icon          (GtrApplication *app,
                                                           const gchar    *icon,
