@@ -947,9 +947,11 @@ set_window_title (GtrWindow * window, gboolean with_path)
       path = g_file_get_path (file);
 
       if (state == GTR_PO_STATE_MODIFIED)
-        title = g_strdup_printf (_("gtranslator - *%s"), path);
+        /* Translators: this is the title of the window with a modified document */
+        title = g_strdup_printf (_("*%s - gtranslator"), path);
       else
-        title = g_strdup_printf (_("gtranslator - %s"), path);
+        /* Translators: this is the title of the window with a document opened */
+        title = g_strdup_printf (_("%s - gtranslator"), path);
 
       g_free (path);
       g_object_unref (file);
