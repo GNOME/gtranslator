@@ -749,6 +749,16 @@ setup_profile_pages (GtrPreferencesDialog *dlg)
   gtk_tree_view_column_set_expand (name_column, TRUE);
 
   fill_profile_treeview (dlg, GTK_TREE_MODEL (model));
+
+  /* Connect the signals */
+  g_signal_connect (dlg->priv->add_button,
+                    "clicked", G_CALLBACK (add_button_clicked), dlg);
+
+  g_signal_connect (dlg->priv->delete_button,
+                    "clicked", G_CALLBACK (delete_button_clicked), dlg);
+
+  g_signal_connect (dlg->priv->edit_button,
+                    "clicked", G_CALLBACK (edit_button_clicked), dlg);
 }
 
 /***************Interface pages****************/
@@ -1275,15 +1285,6 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
                       dlg->priv->notebook, FALSE, FALSE, 0);
 
   gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);
-
-  g_signal_connect (dlg->priv->add_button,
-                    "clicked", G_CALLBACK (add_button_clicked), dlg);
-
-  g_signal_connect (dlg->priv->delete_button,
-                    "clicked", G_CALLBACK (delete_button_clicked), dlg);
-
-  g_signal_connect (dlg->priv->edit_button,
-                    "clicked", G_CALLBACK (edit_button_clicked), dlg);
 
   setup_files_pages (dlg);
   setup_editor_pages (dlg);
