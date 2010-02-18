@@ -18,10 +18,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
+#include "gtr-dirs.h"
+#include "gtr-marshal.h"
 #include "gtr-profile-manager.h"
 #include "gtr-profile.h"
-#include "gtr-dirs.h"
 
 #include <libxml/xmlreader.h>
 #include <libxml/tree.h>
@@ -36,7 +36,18 @@ struct _GtrProfileManagerPrivate
   GtrProfile *active_profile;
 };
 
+enum
+{
+  ACTIVE_PROFILE_CHANGED,
+  PROFILE_ADDED,
+  PROFILE_REMOVED,
+  PROFILE_MODIFIED,
+  LAST_SIGNAL
+};
+
 G_DEFINE_TYPE (GtrProfileManager, gtr_profile_manager, G_TYPE_OBJECT)
+
+static guint signals[LAST_SIGNAL];
 
 static gchar *
 get_profile_filename ()
@@ -74,6 +85,41 @@ gtr_profile_manager_class_init (GtrProfileManagerClass *klass)
   object_class->dispose = gtr_profile_manager_dispose;
 
   g_type_class_add_private (object_class, sizeof (GtrProfileManagerPrivate));
+
+  /* Signals */
+  signals[ACTIVE_PROFILE_CHANGED] =
+    g_signal_new ("active-profile-changed",
+                  G_OBJECT_CLASS_TYPE (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (GtrProfileManagerClass, active_profile_changed),
+                  NULL, NULL,
+                  g_cclosure_marshal_VOID__OBJECT,
+                  G_TYPE_NONE, 1, GTR_TYPE_PROFILE);
+  signals[PROFILE_ADDED] =
+    g_signal_new ("profile-added",
+                  G_OBJECT_CLASS_TYPE (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (GtrProfileManagerClass, profile_added),
+                  NULL, NULL,
+                  g_cclosure_marshal_VOID__OBJECT,
+                  G_TYPE_NONE, 1, GTR_TYPE_PROFILE);
+  signals[PROFILE_REMOVED] =
+    g_signal_new ("profile-removed",
+                  G_OBJECT_CLASS_TYPE (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (GtrProfileManagerClass, profile_removed),
+                  NULL, NULL,
+                  g_cclosure_marshal_VOID__OBJECT,
+                  G_TYPE_NONE, 1, GTR_TYPE_PROFILE);
+  signals[PROFILE_MODIFIED] =
+    g_signal_new ("profile-modified",
+                  G_OBJECT_CLASS_TYPE (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (GtrProfileManagerClass, profile_modified),
+                  NULL, NULL,
+                  gtr_marshal_VOID__OBJECT_OBJECT,
+                  G_TYPE_NONE,
+                  2, GTR_TYPE_PROFILE, GTR_TYPE_PROFILE);
 }
 
 static void
@@ -333,6 +379,9 @@ gtr_profile_manager_set_active_profile (GtrProfileManager *manager,
   g_return_if_fail (GTR_IS_PROFILE (profile));
 
   manager->priv->active_profile = profile;
+
+  g_signal_emit (G_OBJECT (manager), signals[ACTIVE_PROFILE_CHANGED], 0, profile);
+
   save_profiles (manager);
 }
 
@@ -349,6 +398,8 @@ gtr_profile_manager_add_profile (GtrProfileManager *manager,
   manager->priv->profiles = g_slist_append (manager->priv->profiles,
                                             profile);
 
+  g_signal_emit (G_OBJECT (manager), signals[PROFILE_ADDED], 0, profile);
+
   save_profiles (manager);
 }
 
@@ -361,6 +412,9 @@ gtr_profile_manager_remove_profile (GtrProfileManager *manager,
 
   manager->priv->profiles = g_slist_remove (manager->priv->profiles,
                                             profile);
+
+  g_signal_emit (G_OBJECT (manager), signals[PROFILE_REMOVED], 0, profile);
+  g_object_unref (profile);
 
   save_profiles (manager);
 }
@@ -383,6 +437,9 @@ gtr_profile_manager_modify_profile (GtrProfileManager *manager,
 
   if (manager->priv->active_profile == old_profile)
     manager->priv->active_profile = new_profile;
+
+  g_signal_emit (G_OBJECT (manager), signals[PROFILE_MODIFIED], 0,
+                 old_profile, new_profile);
 
   g_object_unref (old_profile);
 

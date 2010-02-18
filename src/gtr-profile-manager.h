@@ -49,6 +49,16 @@ struct _GtrProfileManager
 struct _GtrProfileManagerClass
 {
   GObjectClass parent_class;
+
+  void (* active_profile_changed) (GtrProfileManager *manager,
+                                   GtrProfile        *profile);
+  void (* profile_added) (GtrProfileManager *manager,
+                          GtrProfile        *profile);
+  void (* profile_removed) (GtrProfileManager *manager,
+                            GtrProfile        *profile);
+  void (* profile_modified) (GtrProfileManager *manager,
+                             GtrProfile        *old_profile,
+                             GtrProfile        *new_profile);
 };
 
 GType                  gtr_profile_manager_get_type           (void) G_GNUC_CONST;
