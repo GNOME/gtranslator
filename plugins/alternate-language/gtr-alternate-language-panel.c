@@ -27,6 +27,7 @@
 #include "gtr-tab.h"
 #include "gtr-view.h"
 #include "gtr-debug.h"
+#include "gtr-utils.h"
 
 #include <string.h>
 #include <glib.h>
@@ -37,10 +38,10 @@
 #define FUZZY_ICON		"gtk-dialog-warning"
 #define UNTRANSLATED_ICON	"gtk-dialog-error"
 
-#define GTR_ALTERNATE_LANG_PANEL_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
-						 (object),		       \
-						 GTR_TYPE_ALTERNATE_LANG_PANEL,     \
-						 GtrAlternateLangPanelPrivate))
+#define GTR_ALTERNATE_LANG_PANEL_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ( \
+                                                      (object), \
+                                                      GTR_TYPE_ALTERNATE_LANG_PANEL, \
+                                                      GtrAlternateLangPanelPrivate))
 
 GTR_PLUGIN_DEFINE_TYPE (GtrAlternateLangPanel,
                         gtr_alternate_lang_panel, GTK_TYPE_VBOX)
@@ -49,6 +50,7 @@ struct _GtrAlternateLangPanelPrivate
 {
   GtkWidget *open_button;
   GtkWidget *close_button;
+  GtkWidget *copy_button;
   GtkWidget *textview;
 
   GtkWidget *status;
@@ -57,6 +59,8 @@ struct _GtrAlternateLangPanelPrivate
   GtrTab *tab;
 
   gulong showed_message_id;
+
+  guint text_found : 1;
 };
 
 static void
@@ -113,6 +117,7 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrAlternateLangPanel * panel)
 
           g_free (string_collate);
           g_free (msgid_collate);
+          panel->priv->text_found = TRUE;
           return;
         }
       g_free (string_collate);
@@ -121,6 +126,7 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrAlternateLangPanel * panel)
 
   g_free (msgid_collate);
   gtr_alternate_lang_panel_set_text (panel, _("Message not found"));
+  panel->priv->text_found = FALSE;
 
   /* If we are here the status is untranslated */
   gtk_image_set_from_stock (GTK_IMAGE (panel->priv->status),
@@ -241,18 +247,19 @@ open_button_clicked_cb (GtkWidget * open_button,
 }
 
 static void
-close_button_clicked_cb (GtkWidget * close_button,
-                         GtrAlternateLangPanel * panel)
+close_button_clicked_cb (GtkWidget             *close_button,
+                         GtrAlternateLangPanel *panel)
 {
   if (panel->priv->po != NULL)
     {
+      gtk_image_clear (GTK_IMAGE (panel->priv->status));
       gtr_alternate_lang_panel_set_text (panel, _("File closed"));
 
       gtk_widget_set_sensitive (panel->priv->textview, FALSE);
 
       g_object_unref (panel->priv->po);
-
       panel->priv->po = NULL;
+      panel->priv->text_found = FALSE;
     }
 
   if (panel->priv->showed_message_id)
@@ -261,6 +268,32 @@ close_button_clicked_cb (GtkWidget * close_button,
                                    panel->priv->showed_message_id);
       panel->priv->showed_message_id = 0;
     }
+}
+
+static void
+copy_button_clicked_cb (GtkWidget             *copy_button,
+                        GtrAlternateLangPanel *panel)
+{
+  GtkTextBuffer *panel_buf, *buf;
+  GtkTextIter start, end;
+  GtrView *view;
+  gchar *text;
+
+  if (!panel->priv->text_found)
+    return;
+
+  panel_buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (panel->priv->textview));
+  gtk_text_buffer_get_bounds (panel_buf, &start, &end);
+
+  text = gtk_text_buffer_get_text (panel_buf, &start, &end, FALSE);
+
+  view = gtr_tab_get_active_view (panel->priv->tab);
+  buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+  gtk_text_buffer_begin_user_action (buf);
+  gtk_text_buffer_set_text (buf, text, -1);
+  gtk_text_buffer_end_user_action (buf);
+
+  g_free (text);
 }
 
 static void
@@ -280,20 +313,30 @@ gtr_alternate_lang_panel_draw (GtrAlternateLangPanel * panel)
   gtk_button_box_set_layout (GTK_BUTTON_BOX (buttonbox), GTK_BUTTONBOX_START);
   gtk_widget_show (buttonbox);
 
-  panel->priv->open_button = gtk_button_new_from_stock (GTK_STOCK_OPEN);
+  panel->priv->open_button = gtr_gtk_button_new_with_stock_icon (C_("alternate lang", "_Open"),
+                                                                 GTK_STOCK_OPEN);
   g_signal_connect (panel->priv->open_button,
                     "clicked", G_CALLBACK (open_button_clicked_cb), panel);
   gtk_widget_show (panel->priv->open_button);
 
-  panel->priv->close_button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
+  panel->priv->close_button = gtr_gtk_button_new_with_stock_icon (C_("alternate lang", "Cl_ose"),
+                                                                  GTK_STOCK_CLOSE);
   g_signal_connect (panel->priv->close_button,
                     "clicked", G_CALLBACK (close_button_clicked_cb), panel);
   gtk_widget_show (panel->priv->close_button);
+
+  panel->priv->copy_button = gtr_gtk_button_new_with_stock_icon (C_("alternate lang", "_Copy"),
+                                                                 GTK_STOCK_COPY);
+  g_signal_connect (panel->priv->copy_button,
+                    "clicked", G_CALLBACK (copy_button_clicked_cb), panel);
+  gtk_widget_show (panel->priv->copy_button);
 
   gtk_box_pack_start (GTK_BOX (buttonbox),
                       panel->priv->open_button, TRUE, TRUE, 0);
   gtk_box_pack_start (GTK_BOX (buttonbox),
                       panel->priv->close_button, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (buttonbox),
+                      panel->priv->copy_button, TRUE, TRUE, 0);
 
   gtk_box_pack_start (GTK_BOX (hbox), buttonbox, FALSE, TRUE, 0);
 
