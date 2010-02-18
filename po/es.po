@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: gtranslator.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&component=general\n"
-"POT-Creation-Date: 2010-02-17 18:03+0000\n"
-"PO-Revision-Date: 2010-02-17 22:37+0100\n"
+"POT-Creation-Date: 2010-02-18 14:06+0000\n"
+"PO-Revision-Date: 2010-02-18 15:25+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -256,19 +256,35 @@ msgstr "Etiqueta"
 msgid "gtranslator highlight"
 msgstr "resaltado de Gtranslator"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:123
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:128
 msgid "Message not found"
 msgstr "No se encontró el mensaje"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:225
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:231
 msgid "Open file for alternate language"
 msgstr "Abrir archivo para idioma alternativo"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:249
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:256
 msgid "File closed"
 msgstr "Archivo cerrado"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:314
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:316
+msgctxt "alternate lang"
+msgid "_Open"
+msgstr "Ab_rir"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:322
+#| msgid "_Close All"
+msgctxt "alternate lang"
+msgid "_Close"
+msgstr "_Cerrar"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:328
+msgctxt "alternate lang"
+msgid "Co_py"
+msgstr "C_opiar"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:357
 msgid "There isn't any file loaded"
 msgstr "No hay ningún archivo cargado"
 
@@ -678,7 +694,7 @@ msgid "Extracted comments:"
 msgstr "Comentarios extraídos:"
 
 #: ../src/dialogs/gtr-assistant.c:138
-#: ../src/dialogs/gtr-preferences-dialog.c:935
+#: ../src/dialogs/gtr-preferences-dialog.c:945
 msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
 msgstr ""
 "<span weight=\"bold\" size=\"large\">Cadenas añadidas a la base de datos</"
@@ -951,7 +967,7 @@ msgstr ""
 msgid "Active"
 msgstr "Activo"
 
-#: ../src/dialogs/gtr-preferences-dialog.c:1188
+#: ../src/dialogs/gtr-preferences-dialog.c:1198
 #: ../src/dialogs/gtr-preferences-dialog.ui.h:14
 msgid "Gtranslator Preferences"
 msgstr "Preferencias de Gtranslator"
@@ -1791,14 +1807,12 @@ msgstr "Activar «%s»"
 #. Translators: this is the title of the window with a modified document
 #: ../src/gtr-window.c:951
 #, c-format
-#| msgid "gtranslator"
 msgid "*%s - gtranslator"
 msgstr "*%s: gtranslator"
 
 #. Translators: this is the title of the window with a document opened
 #: ../src/gtr-window.c:954
 #, c-format
-#| msgid "gtranslator"
 msgid "%s - gtranslator"
 msgstr "%s: gtranslator"
 
