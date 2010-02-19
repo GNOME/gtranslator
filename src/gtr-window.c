@@ -1467,6 +1467,8 @@ fill_profile_combo (GtrWindow *window)
     {
       name = _("No profile");
 
+      menu_item = gtk_menu_item_new_with_label (name);
+
       g_object_set_data (G_OBJECT (menu_item), PROFILE_DATA, NULL);
       gtr_status_combo_box_add_item (GTR_STATUS_COMBO_BOX (window->priv->profile_combo),
                                      GTK_MENU_ITEM (menu_item),
