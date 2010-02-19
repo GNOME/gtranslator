@@ -42,8 +42,9 @@ G_DEFINE_TYPE (GtrHeader, gtr_header, GTR_TYPE_MSG)
 
 struct _GtrHeaderPrivate
 {
-  gint nplurals;
+  GtrProfileManager *prof_manager;
   GtrProfile *profile;
+  gint nplurals;
 };
 
 static void
@@ -129,18 +130,38 @@ parse_nplurals (GtrHeader * header)
 }
 
 static void
+profile_removed_cb (GtrProfileManager *prof_manager,
+                    GtrProfile        *profile,
+                    GtrHeader         *header)
+{
+  if (profile == header->priv->profile)
+    header->priv->profile = NULL;
+}
+
+static void
 gtr_header_init (GtrHeader * header)
 {
   header->priv = GTR_HEADER_GET_PRIVATE (header);
 
   header->priv->nplurals = -1;
   header->priv->profile = NULL;
+
+  header->priv->prof_manager = gtr_profile_manager_get_default ();
+
+  g_signal_connect (header->priv->prof_manager, "profile-removed",
+                    G_CALLBACK (profile_removed_cb), header);
 }
 
 static void
 gtr_header_dispose (GObject * object)
 {
   GtrHeader *header = GTR_HEADER (object);
+
+  if (header->priv->prof_manager != NULL)
+    {
+      g_object_unref (header->priv->prof_manager);
+      header->priv->prof_manager = NULL;
+    }
 
   if (header->priv->profile != NULL)
     {
@@ -514,14 +535,14 @@ gtr_header_get_nplurals (GtrHeader * header)
 }
 
 static void
-set_profile_values (GtrHeader *header, GtrProfileManager *prof_manager)
+set_profile_values (GtrHeader *header)
 {
   GtrProfile *active_profile;
 
   if (header->priv->profile != NULL)
     active_profile = header->priv->profile;
   else
-    active_profile = gtr_profile_manager_get_active_profile (prof_manager);
+    active_profile = gtr_profile_manager_get_active_profile (header->priv->prof_manager);
 
   if (gtr_prefs_manager_get_use_profile_values () && active_profile != NULL)
     {
@@ -562,8 +583,7 @@ update_po_date (GtrHeader * header)
 }
 
 static void
-update_comments (GtrHeader *header, const gchar *comments,
-                 GtrProfileManager *prof_manager)
+update_comments (GtrHeader *header, const gchar *comments)
 {
   GtrProfile *active_profile;
   GString *new_comments;
@@ -577,7 +597,7 @@ update_comments (GtrHeader *header, const gchar *comments,
   if (header->priv->profile != NULL)
     active_profile = header->priv->profile;
   else
-    active_profile = gtr_profile_manager_get_active_profile (prof_manager);
+    active_profile = gtr_profile_manager_get_active_profile (header->priv->prof_manager);
 
   current_year = gtr_utils_get_current_year ();
 
@@ -666,13 +686,10 @@ add_default_comments (GtrHeader * header)
 void
 gtr_header_update_header (GtrHeader * header)
 {
-  GtrProfileManager *prof_manager;
   const gchar *comments;
 
-  prof_manager = gtr_profile_manager_get_default ();
-
   /* If needed update the header with the profile values */
-  set_profile_values (header, prof_manager);
+  set_profile_values (header);
 
   /* Update the po date */
   update_po_date (header);
@@ -681,11 +698,9 @@ gtr_header_update_header (GtrHeader * header)
   comments = gtr_header_get_comments (header);
 
   if (comments != NULL)
-    update_comments (header, comments, prof_manager);
+    update_comments (header, comments);
   else
     add_default_comments (header);
-
-  g_object_unref (prof_manager);
 }
 
 void
