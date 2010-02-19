@@ -38,6 +38,7 @@
 #include "gtr-utils.h"
 #include "gtr-window.h"
 #include "gtr-profile-manager.h"
+#include "gtr-status-combo-box.h"
 
 #include "egg-toolbars-model.h"
 #include "egg-toolbar-editor.h"
@@ -61,6 +62,8 @@
 #define GTR_STOCK_UNTRANS_PREV "gtranslator-untranslated-prev"
 #define GTR_STOCK_FUZZY_UNTRANS_NEXT "gtranslator-fuzzy-untranslated-next"
 #define GTR_STOCK_FUZZY_UNTRANS_PREV "gtranslator-fuzzy-untranslated-prev"
+
+#define PROFILE_DATA "GtrWidnowProfileData"
 
 #define GTR_WINDOW_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 					 (object),	\
@@ -105,6 +108,7 @@ struct _GtrWindowPrivate
   GdkWindowState window_state;
 
   GtrProfileManager *prof_manager;
+  GtkWidget *profile_combo;
 
   gboolean destroy_has_run : 1;
 };
@@ -274,6 +278,10 @@ static const GtkActionEntry entries[] = {
    N_("Activate next document"),
    G_CALLBACK (gtr_actions_documents_next_document)}
 };
+
+static void          profile_combo_changed            (GtrStatusComboBox *combo,
+                                                       GtkMenuItem       *item,
+                                                       GtrWindow         *window);
 
 /*
  * Dock funcs
@@ -972,9 +980,12 @@ notebook_switch_page (GtkNotebook * nb,
   GList *msg;
   GtrView *view;
   GtrPo *po;
+  GtrHeader *header;
+  GtrProfile *profile;
   gint n_pages;
   GtkAction *action;
   gchar *action_name;
+  GList *profile_items, *l;
 
   tab = GTR_TAB (gtk_notebook_get_nth_page (nb, page_num));
   if (tab == window->priv->active_tab)
@@ -1005,6 +1016,34 @@ notebook_switch_page (GtkNotebook * nb,
   msg = gtr_po_get_current_message (po);
   gtr_window_update_statusbar_message_count (tab, msg->data, window);
 
+  header = gtr_po_get_header (po);
+  profile = gtr_header_get_profile (header);
+
+  if (profile == NULL)
+    profile = gtr_profile_manager_get_active_profile (window->priv->prof_manager);
+
+  profile_items = gtr_status_combo_box_get_items (GTR_STATUS_COMBO_BOX (window->priv->profile_combo));
+
+  for (l = profile_items; l != NULL; l = g_list_next (l))
+    {
+      GtrProfile *item_profile;
+
+      item_profile = GTR_PROFILE (g_object_get_data (G_OBJECT (l->data),
+                                                     PROFILE_DATA));
+
+      if (item_profile == profile)
+        {
+          g_signal_handlers_block_by_func (window->priv->profile_combo,
+                                           profile_combo_changed,
+                                           window);
+          gtr_status_combo_box_set_item (GTR_STATUS_COMBO_BOX (window->priv->profile_combo),
+                                         GTK_MENU_ITEM (l->data));
+          g_signal_handlers_unblock_by_func (window->priv->profile_combo,
+                                             profile_combo_changed,
+                                             window);
+        }
+    }
+
   /* activate the right item in the documents menu */
   action_name = g_strdup_printf ("Tab_%d", page_num);
   action =
@@ -1029,14 +1068,16 @@ notebook_page_removed (GtkNotebook * notebook,
 {
   gint n_pages;
 
-  /*
-   * Set the window title
-   */
+  /* Set the window title */
   n_pages = gtk_notebook_get_n_pages (notebook);
   if (n_pages == 1)
     set_window_title (window, TRUE);
   else
     set_window_title (window, FALSE);
+
+  /* Hide the profile combo */
+  if (n_pages == 0)
+    gtk_widget_hide (window->priv->profile_combo);
 
   update_documents_list_menu (window);
 }
@@ -1128,14 +1169,15 @@ notebook_tab_added (GtkNotebook * notebook,
 
   g_return_if_fail (GTR_IS_TAB (tab));
 
-  /*
-   * Set the window title
-   */
+  /* Set the window title */
   n_pages = gtk_notebook_get_n_pages (notebook);
   if (n_pages == 1)
     set_window_title (window, TRUE);
   else
     set_window_title (window, FALSE);
+
+  /* Show the profile combo */
+  gtk_widget_show (window->priv->profile_combo);
 
   views = gtr_tab_get_all_views (tab, FALSE, TRUE);
 
@@ -1170,8 +1212,8 @@ notebook_tab_added (GtkNotebook * notebook,
 
   update_documents_list_menu (window);
 
-  gtr_plugins_engine_update_plugins_ui
-    (gtr_plugins_engine_get_default (), window, FALSE);
+  gtr_plugins_engine_update_plugins_ui (gtr_plugins_engine_get_default (),
+                                        window, FALSE);
 }
 
 void
@@ -1376,6 +1418,206 @@ disconnect_proxy_cb (GtkUIManager * manager,
 }
 
 static void
+profile_combo_changed (GtrStatusComboBox *combo,
+                       GtkMenuItem       *item,
+                       GtrWindow         *window)
+{
+  GtrTab *tab;
+  GtrPo *po;
+  GtrHeader *header;
+  GtrProfile *profile;
+
+  tab = gtr_window_get_active_tab (window);
+
+  if (tab == NULL)
+    return;
+
+  po = gtr_tab_get_po (tab);
+  header = gtr_po_get_header (po);
+
+  profile = GTR_PROFILE (g_object_get_data (G_OBJECT (item), PROFILE_DATA));
+
+  gtr_header_set_profile (header, profile);
+}
+
+static void
+fill_profile_combo (GtrWindow *window)
+{
+  GSList *profiles, *l;
+  GtkWidget *menu_item;
+  const gchar *name;
+
+  profiles = gtr_profile_manager_get_profiles (window->priv->prof_manager);
+
+  for (l = profiles; l != NULL; l = g_slist_next (l))
+    {
+      GtrProfile *profile = GTR_PROFILE (l->data);
+
+      name = gtr_profile_get_name (profile);
+      menu_item = gtk_menu_item_new_with_label (name);
+      gtk_widget_show (menu_item);
+
+      g_object_set_data (G_OBJECT (menu_item), PROFILE_DATA, profile);
+      gtr_status_combo_box_add_item (GTR_STATUS_COMBO_BOX (window->priv->profile_combo),
+                                     GTK_MENU_ITEM (menu_item),
+                                     name);
+    }
+
+  if (profiles == NULL)
+    {
+      name = _("No profile");
+
+      g_object_set_data (G_OBJECT (menu_item), PROFILE_DATA, NULL);
+      gtr_status_combo_box_add_item (GTR_STATUS_COMBO_BOX (window->priv->profile_combo),
+                                     GTK_MENU_ITEM (menu_item),
+                                     name);
+    }
+}
+
+static void
+create_statusbar (GtrWindow *window,
+                  GtkWidget *box)
+{
+  window->priv->statusbar = gtr_statusbar_new ();
+
+  gtk_box_pack_end (GTK_BOX (box), window->priv->statusbar, TRUE, TRUE, 0);
+
+  gtk_widget_show (window->priv->statusbar);
+
+  window->priv->profile_combo = gtr_status_combo_box_new (_("Profile"));
+  gtk_box_pack_start (GTK_BOX (window->priv->statusbar),
+                      window->priv->profile_combo, FALSE, TRUE, 0);
+
+  g_signal_connect (window->priv->profile_combo, "changed",
+                    G_CALLBACK (profile_combo_changed), window);
+
+  fill_profile_combo (window);
+}
+
+static void
+on_active_profile_changed (GtrProfileManager *manager,
+                           GtrProfile        *profile,
+                           GtrWindow         *window)
+{
+  GList *items, *l;
+  GtrTab *tab;
+  GtrPo *po;
+  GtrHeader *header;
+
+  tab = gtr_window_get_active_tab (window);
+
+  if (tab == NULL)
+    return;
+
+  po = gtr_tab_get_po (tab);
+  header = gtr_po_get_header (po);
+
+  items = gtr_status_combo_box_get_items (GTR_STATUS_COMBO_BOX (window->priv->profile_combo));
+
+  for (l = items; l != NULL; l = g_list_next (l))
+    {
+      GtkMenuItem *menu_item;
+      GtrProfile *item_profile;
+
+      menu_item = GTK_MENU_ITEM (l->data);
+
+      item_profile = GTR_PROFILE (g_object_get_data (G_OBJECT (menu_item),
+                                  PROFILE_DATA));
+
+      if (item_profile == profile && gtr_header_get_profile (header) == NULL)
+        {
+          g_signal_handlers_block_by_func (window->priv->profile_combo,
+                                           profile_combo_changed, window);
+          gtr_status_combo_box_set_item (GTR_STATUS_COMBO_BOX (window->priv->profile_combo),
+                                         menu_item);
+          g_signal_handlers_unblock_by_func (window->priv->profile_combo,
+                                             profile_combo_changed, window);
+        }
+    }
+}
+
+static void
+on_profile_added (GtrProfileManager *manager,
+                  GtrProfile        *profile,
+                  GtrWindow         *window)
+{
+  GtkMenuItem *menu_item;
+  GList *items;
+
+  /* check that the item is not a "No profile" item */
+  items = gtr_status_combo_box_get_items (GTR_STATUS_COMBO_BOX (window->priv->profile_combo));
+
+  if (items->next == NULL &&
+      (g_object_get_data (G_OBJECT (items->data), PROFILE_DATA) == NULL))
+    {
+      menu_item = GTK_MENU_ITEM (items->data);
+
+      gtk_menu_item_set_label (menu_item,
+                               gtr_profile_get_name (profile));
+
+      g_object_set_data (G_OBJECT (menu_item), PROFILE_DATA, profile);
+    }
+  else
+    {
+      const gchar *name;
+
+      name = gtr_profile_get_name (profile);
+      menu_item = GTK_MENU_ITEM (gtk_menu_item_new_with_label (name));
+      gtk_widget_show (GTK_WIDGET (menu_item));
+
+      g_object_set_data (G_OBJECT (menu_item), PROFILE_DATA, profile);
+      gtr_status_combo_box_add_item (GTR_STATUS_COMBO_BOX (window->priv->profile_combo),
+                                     menu_item, name);
+    }
+}
+
+static void
+on_profile_removed (GtrProfileManager *manager,
+                    GtrProfile        *profile,
+                    GtrWindow         *window)
+{
+  GList *items, *l;
+
+  items = gtr_status_combo_box_get_items (GTR_STATUS_COMBO_BOX (window->priv->profile_combo));
+
+  for (l = items; l != NULL; l = g_list_next (l))
+    {
+      GtrProfile *prof;
+
+      prof = GTR_PROFILE (g_object_get_data (G_OBJECT (l->data), PROFILE_DATA));
+      if (prof == profile)
+        gtr_status_combo_box_remove_item (GTR_STATUS_COMBO_BOX (window->priv->profile_combo),
+                                          GTK_MENU_ITEM (l->data));
+    }
+}
+
+static void
+on_profile_modified (GtrProfileManager *manager,
+                     GtrProfile        *old_profile,
+                     GtrProfile        *new_profile,
+                     GtrWindow         *window)
+{
+  GList *items, *l;
+
+  items = gtr_status_combo_box_get_items (GTR_STATUS_COMBO_BOX (window->priv->profile_combo));
+
+  for (l = items; l != NULL; l = g_list_next (l))
+    {
+      GtrProfile *profile;
+
+      profile = GTR_PROFILE (g_object_get_data (G_OBJECT (l->data), PROFILE_DATA));
+      if (profile == old_profile)
+        {
+          gtk_menu_item_set_label (GTK_MENU_ITEM (l->data),
+                                   gtr_profile_get_name (new_profile));
+          g_object_set_data (G_OBJECT (l->data), PROFILE_DATA, new_profile);
+
+          return;
+        }
+    }
+}
+
+static void
 gtr_window_draw (GtrWindow * window)
 {
   GtkWidget *hbox;              //Statusbar and progressbar
@@ -1519,11 +1761,7 @@ gtr_window_draw (GtrWindow * window)
   gtk_widget_show (hbox);
 
   /* statusbar & progress bar */
-  window->priv->statusbar = gtr_statusbar_new ();
-
-  gtk_box_pack_end (GTK_BOX (hbox), window->priv->statusbar, TRUE, TRUE, 0);
-
-  gtk_widget_show (priv->statusbar);
+  create_statusbar (window, hbox);
 }
 
 static void
@@ -1537,8 +1775,20 @@ gtr_window_init (GtrWindow * window)
   window->priv = GTR_WINDOW_GET_PRIVATE (window);
 
   window->priv->destroy_has_run = FALSE;
+
+  /* Profile manager */
   window->priv->prof_manager = gtr_profile_manager_get_default ();
 
+  g_signal_connect (window->priv->prof_manager, "active-profile-changed",
+                    G_CALLBACK (on_active_profile_changed), window);
+  g_signal_connect (window->priv->prof_manager, "profile-added",
+                    G_CALLBACK (on_profile_added), window);
+  g_signal_connect (window->priv->prof_manager, "profile-removed",
+                    G_CALLBACK (on_profile_removed), window);
+  g_signal_connect (window->priv->prof_manager, "profile-modified",
+                    G_CALLBACK (on_profile_modified), window);
+
+  /* set up the window widgets */
   gtr_window_draw (window);
 
   set_sensitive_according_to_window (window);

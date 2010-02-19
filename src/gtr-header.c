@@ -39,14 +39,16 @@
                                          GtrHeaderPrivate))
 
 G_DEFINE_TYPE (GtrHeader, gtr_header, GTR_TYPE_MSG)
-     struct _GtrHeaderPrivate
-     {
-       gint nplurals;
-     };
 
-     static void
-       gtr_header_set_field (GtrHeader * header,
-                             const gchar * field, const gchar * data)
+struct _GtrHeaderPrivate
+{
+  gint nplurals;
+  GtrProfile *profile;
+};
+
+static void
+gtr_header_set_field (GtrHeader * header,
+                      const gchar * field, const gchar * data)
 {
   gchar *msgstr;
 
@@ -72,13 +74,18 @@ parse_nplurals (GtrHeader * header)
   if (gtr_prefs_manager_get_use_profile_values () || !plural_forms)
     {
       const gchar *plural_form = NULL;
-      GtrProfileManager *prof_manager;
       GtrProfile *profile;
 
-      /* TODO: Manage this also per document */
-      prof_manager = gtr_profile_manager_get_default ();
-      profile = gtr_profile_manager_get_active_profile (prof_manager);
-      g_object_unref (prof_manager);
+      if (header->priv->profile != NULL)
+        profile = header->priv->profile;
+      else
+        {
+          GtrProfileManager *prof_manager;
+
+          prof_manager = gtr_profile_manager_get_default ();
+          profile = gtr_profile_manager_get_active_profile (prof_manager);
+          g_object_unref (prof_manager);
+        }
 
       if (profile)
         plural_form = gtr_profile_get_plural_forms (profile);
@@ -127,12 +134,21 @@ gtr_header_init (GtrHeader * header)
   header->priv = GTR_HEADER_GET_PRIVATE (header);
 
   header->priv->nplurals = -1;
+  header->priv->profile = NULL;
 }
 
 static void
-gtr_header_finalize (GObject * object)
+gtr_header_dispose (GObject * object)
 {
-  G_OBJECT_CLASS (gtr_header_parent_class)->finalize (object);
+  GtrHeader *header = GTR_HEADER (object);
+
+  if (header->priv->profile != NULL)
+    {
+      g_object_unref (header->priv->profile);
+      header->priv->profile = NULL;
+    }
+
+  G_OBJECT_CLASS (gtr_header_parent_class)->dispose (object);
 }
 
 static void
@@ -142,7 +158,7 @@ gtr_header_class_init (GtrHeaderClass * klass)
 
   g_type_class_add_private (klass, sizeof (GtrHeaderPrivate));
 
-  object_class->finalize = gtr_header_finalize;
+  object_class->dispose = gtr_header_dispose;
 }
 
 /* Public methods */
@@ -502,7 +518,10 @@ set_profile_values (GtrHeader *header, GtrProfileManager *prof_manager)
 {
   GtrProfile *active_profile;
 
-  active_profile = gtr_profile_manager_get_active_profile (prof_manager);
+  if (header->priv->profile != NULL)
+    active_profile = header->priv->profile;
+  else
+    active_profile = gtr_profile_manager_get_active_profile (prof_manager);
 
   if (gtr_prefs_manager_get_use_profile_values () && active_profile != NULL)
     {
@@ -555,7 +574,11 @@ update_comments (GtrHeader *header, const gchar *comments,
   gchar *current_year;
   gint i;
 
-  active_profile = gtr_profile_manager_get_active_profile (prof_manager);
+  if (header->priv->profile != NULL)
+    active_profile = header->priv->profile;
+  else
+    active_profile = gtr_profile_manager_get_active_profile (prof_manager);
+
   current_year = gtr_utils_get_current_year ();
 
   /* Save the previous translator to update the header's comment */
@@ -663,4 +686,21 @@ gtr_header_update_header (GtrHeader * header)
     add_default_comments (header);
 
   g_object_unref (prof_manager);
+}
+
+void
+gtr_header_set_profile (GtrHeader  *header,
+                        GtrProfile *profile)
+{
+  g_return_if_fail (GTR_IS_HEADER (header));
+
+  header->priv->profile = g_object_ref (profile);
+}
+
+GtrProfile *
+gtr_header_get_profile (GtrHeader *header)
+{
+  g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
+
+  return header->priv->profile;
 }

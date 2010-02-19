@@ -124,6 +124,8 @@ libgtranslator_la_SOURCES = \
 	gtr-context.c \
 	gtr-profile-manager.h \
 	gtr-profile-manager.c \
+	gtr-status-combo-box.h \
+	gtr-status-combo-box.c \
 	$(INST_H_FILES)
 
 libgtranslator_la_LIBADD = \
