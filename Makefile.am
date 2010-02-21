@@ -4,7 +4,6 @@ ACLOCAL_AMFLAGS  = -I m4 ${ACLOCAL_FLAGS}
 SUBDIRS = data help man src doc plugins po
 
 EXTRA_DIST= \
-		DEPENDS \
 		HACKING \
 		ChangeLog-20090817 \
 		gtranslator.spec.in \
