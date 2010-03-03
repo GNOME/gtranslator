@@ -62,74 +62,76 @@
 #define GTR_TAB_KEY "GtrTabFromDocument"
 
 G_DEFINE_TYPE (GtrTab, gtr_tab, GTK_TYPE_VBOX)
-     struct _GtrTabPrivate
-     {
-       GtrPo *po;
 
-       GtkWidget *table_pane;
-       GtkWidget *content_pane;
-       GtkWidget *panel;
-       GtkWidget *message_table;
-       GtkWidget *lateral_panel;        //TM, Context, etc.
+struct _GtrTabPrivate
+{
+  GtrPo *po;
 
-       GtkWidget *comment_pane;
-       GtkWidget *context;
-       GtkWidget *translation_memory;
+  GtkWidget *table_pane;
+  GtkWidget *content_pane;
+  GtkWidget *panel;
+  GtkWidget *message_table;
+  GtkWidget *lateral_panel;        //TM, Context, etc.
 
-       /*Comment button */
-       GtkWidget *comment_button;
+  GtkWidget *comment_pane;
+  GtkWidget *context;
+  GtkWidget *translation_memory;
 
-       /*Info bar */
-       GtkWidget *infobar;
+  /*Comment button */
+  GtkWidget *comment_button;
 
-       /*Original text */
-       GtkWidget *msgid_hbox;
-       GtkWidget *text_vbox;
-       GtkWidget *text_msgid;
-       GtkWidget *text_plural_scroll;
-       GtkWidget *text_msgid_plural;
+  /*Info bar */
+  GtkWidget *infobar;
 
-       /*Translated text */
-       GtkWidget *msgstr_label;
-       GtkWidget *msgstr_hbox;
-       GtkWidget *trans_notebook;
-       GtkWidget *trans_msgstr[MAX_PLURALS];
+  /*Original text */
+  GtkWidget *msgid_hbox;
+  GtkWidget *text_vbox;
+  GtkWidget *text_msgid;
+  GtkWidget *text_plural_scroll;
+  GtkWidget *text_msgid_plural;
 
-       /*Status widgets */
-       GtkWidget *translated;
-       GtkWidget *fuzzy;
-       GtkWidget *untranslated;
+  /*Translated text */
+  GtkWidget *msgstr_label;
+  GtkWidget *msgstr_hbox;
+  GtkWidget *trans_notebook;
+  GtkWidget *trans_msgstr[MAX_PLURALS];
 
-       /* Autosave */
-       GTimer *timer;
-       gint autosave_interval;
-       guint autosave_timeout;
-       guint autosave:1;
+  /*Status widgets */
+  GtkWidget *translated;
+  GtkWidget *fuzzy;
+  GtkWidget *untranslated;
 
-       /*Blocking movement */
-       guint blocking:1;
-     };
+  /* Autosave */
+  GTimer *timer;
+  gint autosave_interval;
+  guint autosave_timeout;
+  guint autosave : 1;
 
-     enum
-     {
-       SHOWED_MESSAGE,
-       MESSAGE_CHANGED,
-       MESSAGE_EDITION_FINISHED,
-       LAST_SIGNAL
-     };
+  /*Blocking movement */
+  guint blocking : 1;
+};
 
-     enum
-     {
-       PROP_0,
-       PROP_AUTOSAVE,
-       PROP_AUTOSAVE_INTERVAL
-     };
+enum
+{
+  SHOWED_MESSAGE,
+  MESSAGE_CHANGED,
+  MESSAGE_EDITION_FINISHED,
+  LAST_SIGNAL
+};
 
-     static guint signals[LAST_SIGNAL];
+enum
+{
+  PROP_0,
+  PROP_AUTOSAVE,
+  PROP_AUTOSAVE_INTERVAL
+};
 
-     static gboolean gtr_tab_autosave (GtrTab * tab);
+static guint signals[LAST_SIGNAL];
 
-     static void install_autosave_timeout (GtrTab * tab)
+static gboolean gtr_tab_autosave (GtrTab * tab);
+
+static void
+install_autosave_timeout (GtrTab * tab)
 {
   gint timeout;
 
@@ -312,9 +314,6 @@ gtr_message_translation_update (GtkTextBuffer * textbuffer, GtrTab * tab)
   /* Shouldn't get here */
   g_return_if_reached ();
 }
-
-
-
 
 static GtkWidget *
 gtr_tab_append_msgstr_page (const gchar * tab_label,
