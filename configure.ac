@@ -275,7 +275,6 @@ dnl Put out the configured files.
 dnl -------------------------------------------------------------------
 AC_CONFIG_FILES([
 Makefile
-gtranslator.spec
 data/Makefile
 data/gtranslator.pc
 data/desktop/Makefile
