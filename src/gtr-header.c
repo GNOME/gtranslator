@@ -701,6 +701,9 @@ gtr_header_update_header (GtrHeader * header)
     update_comments (header, comments);
   else
     add_default_comments (header);
+
+  /* We need to unfuzzy the header to not produce errors */
+  gtr_msg_set_fuzzy (GTR_MSG (header), FALSE);
 }
 
 void
