@@ -33,42 +33,52 @@
 						 GtrContextPanelPrivate))
 
 G_DEFINE_TYPE (GtrContextPanel, gtr_context_panel, GTK_TYPE_VBOX)
-     struct _GtrContextPanelPrivate
-     {
-       GtkWidget *context;
 
-       GtrTab *tab;
-     };
+struct _GtrContextPanelPrivate
+{
+  GtkWidget *context;
 
-     static void
-       showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrContextPanel * panel)
+  GtrTab *tab;
+};
+
+static void
+add_text (GtkTextBuffer *buffer, GtkTextTag *tag, GtkTextIter *pos,
+          const gchar *header, const gchar *text)
+{
+  if (text && *text != '\0')
+    {
+      gtk_text_buffer_insert_with_tags (buffer, pos, header, -1, tag, NULL);
+      gtk_text_buffer_insert (buffer, pos, "\n", 1);
+      gtk_text_buffer_insert (buffer, pos, text, -1);
+    }
+}
+
+static void
+showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrContextPanel * panel)
 {
   GtkTextBuffer *buffer;
   GtkTextIter iter;
-  gchar *extracted;
-  gchar *context;
-  gchar *format;
-  gchar *toset;
+  GtkTextTag *bold;
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (panel->priv->context));
   gtk_text_buffer_set_text (buffer, "", 0);
-  gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
+  gtk_text_buffer_get_start_iter (buffer, &iter);
 
-  format = g_strconcat (_("Format:"), gtr_msg_get_format (msg), NULL);
-  context = g_strconcat (_("Context:"), gtr_msg_get_msgctxt (msg), NULL);
-  extracted =
-    g_strconcat (_("Extracted comments:"),
-                 gtr_msg_get_extracted_comments (msg), NULL);
+  /* Create the bold tag for headers */
+  bold = gtk_text_buffer_create_tag (buffer, NULL, "weight", PANGO_WEIGHT_BOLD,
+                                     "weight-set", TRUE, NULL);
 
-  toset = g_strdup_printf ("%s\n%s\n%s", format, context, extracted);
+  /* Extracted comments */
+  add_text (buffer, bold, &iter, _("Extracted comments:"),
+            gtr_msg_get_extracted_comments (msg));
 
-  g_free (format);
-  g_free (context);
-  g_free (extracted);
+  /* Context */
+  add_text (buffer, bold, &iter, _("Context:"),
+            gtr_msg_get_msgctxt (msg));
 
-  gtk_text_buffer_insert (buffer, &iter, toset, -1);
-
-  g_free (toset);
+  /* Format */
+  add_text (buffer, bold, &iter, _("Format:"),
+            gtr_msg_get_format (msg));
 }
 
 static void
