@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: gtranslator.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&component=general\n"
-"POT-Creation-Date: 2010-02-19 17:57+0000\n"
-"PO-Revision-Date: 2010-02-20 12:47+0100\n"
+"POT-Creation-Date: 2010-04-14 14:20+0000\n"
+"PO-Revision-Date: 2010-04-14 19:53+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -551,9 +551,10 @@ msgstr "Usar editor externo"
 msgid "Please install \"%s\" to be able to show the file"
 msgstr "Instale «%s» para poder mostrar el archivo"
 
-#: ../plugins/source-code-view/gtr-source-code-view-plugin.c:442
-msgid "Paths:\n"
-msgstr "Rutas:\n"
+#: ../plugins/source-code-view/gtr-source-code-view-plugin.c:450
+#| msgid "Paths:\n"
+msgid "Paths:"
+msgstr "Rutas:"
 
 #: ../plugins/source-code-view/gtr-source-code-view.gtranslator-plugin.desktop.in.h:1
 msgid "Show the message in the source code."
@@ -680,17 +681,20 @@ msgstr[1] "Encontradas y reemplazadas %d apariciones"
 msgid "Found and replaced one occurrence"
 msgstr "Encontrada y reemplazada una ocurrencia"
 
-#: ../src/gtr-context.c:57
-msgid "Format:"
-msgstr "Formato:"
+#. Extracted comments
+#: ../src/gtr-context.c:72
+msgid "Extracted comments:"
+msgstr "Comentarios extraídos:"
 
-#: ../src/gtr-context.c:58
+#. Context
+#: ../src/gtr-context.c:76
 msgid "Context:"
 msgstr "Contexto:"
 
-#: ../src/gtr-context.c:60
-msgid "Extracted comments:"
-msgstr "Comentarios extraídos:"
+#. Format
+#: ../src/gtr-context.c:80
+msgid "Format:"
+msgstr "Formato:"
 
 #: ../src/dialogs/gtr-assistant.c:138
 #: ../src/dialogs/gtr-preferences-dialog.c:945
@@ -1059,7 +1063,7 @@ msgstr "Seleccionar el directorio que contiene los archivos PO:"
 msgid "Text Display"
 msgstr "Mostrado de texto"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:24 ../src/gtr-tab.c:650
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:24 ../src/gtr-tab.c:649
 msgid "Translation Memory"
 msgstr "Memoria de traducción"
 
@@ -1353,32 +1357,32 @@ msgstr "INS"
 msgid "OVR"
 msgstr "SOB"
 
-#: ../src/gtr-tab.c:222
+#: ../src/gtr-tab.c:224
 msgid "There is an error in the message:"
 msgstr "Hay un error en el mensaje:"
 
-#: ../src/gtr-tab.c:396
+#: ../src/gtr-tab.c:395
 msgid "Open comment dialog"
 msgstr "Abrir el diálogo del comentario"
 
-#: ../src/gtr-tab.c:573
+#: ../src/gtr-tab.c:572
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
-#: ../src/gtr-tab.c:611
+#: ../src/gtr-tab.c:610
 msgid "Message Table"
 msgstr "Tabla de mensajes"
 
-#: ../src/gtr-tab.c:642
+#: ../src/gtr-tab.c:641
 msgid "Context"
 msgstr "Contexto"
 
-#: ../src/gtr-tab.c:680
+#: ../src/gtr-tab.c:679
 msgid "<b>Original Text:</b>"
 msgstr "<b>Texto original:</b>"
 
-#: ../src/gtr-tab.c:741
+#: ../src/gtr-tab.c:740
 msgid "<b>Translate_d Text:</b>"
 msgstr "<b>Texto _traducido</b>"
 
@@ -1389,36 +1393,36 @@ msgstr "<b>Texto _traducido</b>"
 #. * produce duplicates, but don't worry about it. If your language
 #. * normally has a mnemonic at the start, please use the _. If not,
 #. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:939
+#: ../src/toolbareditor/egg-editable-toolbar.c:934
 #, c-format
 msgid "Show “_%s”"
 msgstr "Mostrar «_%s»"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1405
+#: ../src/toolbareditor/egg-editable-toolbar.c:1397
 msgid "_Move on Toolbar"
 msgstr "_Mover en la barra de herramientas"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1406
+#: ../src/toolbareditor/egg-editable-toolbar.c:1398
 msgid "Move the selected item on the toolbar"
 msgstr "Mover el elemento seleccionado en la barra de herramientas"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1407
+#: ../src/toolbareditor/egg-editable-toolbar.c:1399
 msgid "_Remove from Toolbar"
 msgstr "_Quitar de la barra de herramientas"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1408
+#: ../src/toolbareditor/egg-editable-toolbar.c:1400
 msgid "Remove the selected item from the toolbar"
 msgstr "Quitar el elemento seleccionado de la barra de herramientas"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1410
+#: ../src/toolbareditor/egg-editable-toolbar.c:1401
 msgid "_Delete Toolbar"
 msgstr "_Borrar la barra de herramientas"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1411
+#: ../src/toolbareditor/egg-editable-toolbar.c:1402
 msgid "Remove the selected toolbar"
 msgstr "Quitar la barra de herramientas seleccionada"
 
-#: ../src/toolbareditor/egg-toolbar-editor.c:475
+#: ../src/toolbareditor/egg-toolbar-editor.c:485
 msgid "Separator"
 msgstr "Separador"
 
