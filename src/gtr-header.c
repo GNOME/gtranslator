@@ -667,7 +667,8 @@ update_comments (GtrHeader *header, const gchar *comments)
   while (new_comments->str[new_comments->len - 1] == '\n')
     new_comments = g_string_truncate (new_comments, new_comments->len - 1);
 
-  g_string_append_printf (new_comments, "\n%s <%s>,%s",
+  /* Add \n\n for an extra newline at the end of the comments */
+  g_string_append_printf (new_comments, "\n%s <%s>,%s\n\n",
                           translator, email, years->str);
 
   g_string_free (years, TRUE);
