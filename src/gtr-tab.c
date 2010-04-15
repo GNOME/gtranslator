@@ -32,7 +32,6 @@
 #include <config.h>
 #endif
 
-#include "dialogs/gtr-comment-dialog.h"
 #include "gtr-application.h"
 #include "gtr-context.h"
 #include "gtr-io-error-info-bar.h"
@@ -76,9 +75,6 @@ struct _GtrTabPrivate
   GtkWidget *comment_pane;
   GtkWidget *context;
   GtkWidget *translation_memory;
-
-  /*Comment button */
-  GtkWidget *comment_button;
 
   /*Info bar */
   GtkWidget *infobar;
@@ -186,15 +182,6 @@ remove_autosave_timeout (GtrTab * tab)
 
   g_source_remove (tab->priv->autosave_timeout);
   tab->priv->autosave_timeout = 0;
-}
-
-static void
-gtr_tab_showed_message (GtrTab * tab, GtrMsg * msg)
-{
-  if (strcmp (gtr_msg_get_comment (msg), "") != 0)
-    gtk_widget_show (tab->priv->comment_button);
-  else
-    gtk_widget_hide (tab->priv->comment_button);
 }
 
 static void
@@ -374,35 +361,6 @@ gtr_message_plural_forms (GtrTab * tab, GtrMsg * msg)
           gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (buf));
         }
     }
-}
-
-static GtkWidget *
-gtr_tab_create_comment_button ()
-{
-  GtkWidget *button;
-  GtkWidget *image;
-
-  /* setup close button */
-  button = gtk_button_new ();
-  gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
-  /* don't allow focus on the close button */
-  gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
-
-  image = gtk_image_new_from_stock (GTK_STOCK_INDEX, GTK_ICON_SIZE_MENU);
-  gtk_widget_show (image);
-  gtk_container_add (GTK_CONTAINER (button), image);
-
-  gtk_widget_set_tooltip_text (button, _("Open comment dialog"));
-
-  return button;
-}
-
-static void
-on_comment_button_clicked (GtkButton * button, gpointer useless)
-{
-  GtrWindow *window = gtr_application_get_active_window (GTR_APP);
-
-  gtr_show_comment_dialog (window);
 }
 
 /*
@@ -732,9 +690,6 @@ gtr_tab_draw (GtrTab * tab)
   /*
    * Translation widgets
    */
-  priv->msgstr_hbox = gtk_hbox_new (FALSE, 0);
-  gtk_widget_show (priv->msgstr_hbox);
-
   priv->msgstr_label = gtk_label_new (NULL);
   gtk_label_set_markup_with_mnemonic (GTK_LABEL (priv->msgstr_label),
                                       _("<b>Translate_d Text:</b>"));
@@ -742,20 +697,11 @@ gtr_tab_draw (GtrTab * tab)
   gtk_misc_set_alignment (GTK_MISC (priv->msgstr_label), 0, 0.5);
   gtk_widget_show (priv->msgstr_label);
 
-  gtk_box_pack_start (GTK_BOX (priv->msgstr_hbox), priv->msgstr_label, TRUE,
-                      TRUE, 0);
-
-  priv->comment_button = gtr_tab_create_comment_button ();
-  gtk_box_pack_start (GTK_BOX (priv->msgstr_hbox), priv->comment_button,
-                      FALSE, FALSE, 0);
-  g_signal_connect (priv->comment_button, "clicked",
-                    G_CALLBACK (on_comment_button_clicked), NULL);
-
   priv->trans_notebook = gtk_notebook_new ();
   gtk_notebook_set_show_border (GTK_NOTEBOOK (priv->trans_notebook), FALSE);
   gtk_widget_show (priv->trans_notebook);
 
-  gtk_box_pack_start (GTK_BOX (vertical_box), priv->msgstr_hbox, FALSE, FALSE,
+  gtk_box_pack_start (GTK_BOX (vertical_box), priv->msgstr_label, FALSE, FALSE,
                       0);
   gtk_box_pack_start (GTK_BOX (vertical_box), priv->trans_notebook, TRUE,
                       TRUE, 0);
@@ -851,7 +797,6 @@ gtr_tab_class_init (GtrTabClass * klass)
   object_class->finalize = gtr_tab_finalize;
   object_class->set_property = gtr_tab_set_property;
   object_class->get_property = gtr_tab_get_property;
-  klass->showed_message = gtr_tab_showed_message;
   klass->message_edition_finished = gtr_tab_edition_finished;
 
   /* Signals */

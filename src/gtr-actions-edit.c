@@ -25,7 +25,6 @@
 #include <glib/gi18n.h>
 
 #include "dialogs/gtr-header-dialog.h"
-#include "dialogs/gtr-comment-dialog.h"
 #include "dialogs/gtr-preferences-dialog.h"
 #include "gtr-actions.h"
 #include "gtr-msg.h"
@@ -161,12 +160,6 @@ void
 gtr_actions_edit_header (GtkAction * action, GtrWindow * window)
 {
   gtr_show_header_dialog (window);
-}
-
-void
-gtr_edit_message_comment (GtkAction * action, GtrWindow * window)
-{
-  gtr_show_comment_dialog (window);
 }
 
 void

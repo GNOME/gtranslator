@@ -24,8 +24,6 @@ libdialogs_la_SOURCES = \
 	gtr-search-dialog.h \
 	gtr-header-dialog.c \
 	gtr-header-dialog.h \
-	gtr-comment-dialog.c \
-	gtr-comment-dialog.h \
 	gtr-profile-dialog.c \
 	gtr-profile-dialog.h \
 	gtr-assistant.c \
@@ -38,7 +36,6 @@ ui_DATA =  \
 		gtr-preferences-dialog.ui \
 		gtr-search-dialog.ui \
 		gtr-header-dialog.ui \
-		gtr-comment-dialog.ui \
 		gtr-profile-dialog.ui \
 		gtr-jump-dialog.ui
 

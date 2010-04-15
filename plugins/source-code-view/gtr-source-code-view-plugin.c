@@ -445,8 +445,7 @@ showed_message_cb (GtrTab * tab,
   path_start = gtk_text_buffer_create_mark (buffer,
                                             "path_start", &iter, TRUE);
 
-  if (gtk_text_buffer_get_char_count (buffer) != 0)
-    gtk_text_buffer_insert (buffer, &iter, "\n", 1);
+  gtk_text_buffer_insert (buffer, &iter, "\n", 1);
   gtk_text_buffer_insert_with_tags (buffer, &iter, _("Paths:"), -1, bold, NULL);
   gtk_text_buffer_insert (buffer, &iter, "\n", 1);
 
@@ -522,6 +521,18 @@ message_edition_finished_cb (GtrTab * tab,
 }
 
 static void
+on_context_panel_reloaded (GtrContextPanel         *panel,
+                           GtrMsg                  *msg,
+                           GtrSourceCodeViewPlugin *plugin)
+{
+  GtrTab *tab;
+
+  tab = gtr_window_get_active_tab (plugin->priv->window);
+
+  showed_message_cb (tab, msg, plugin);
+}
+
+static void
 page_added_cb (GtkNotebook * notebook,
                GtkWidget * child,
                guint page_num, GtrSourceCodeViewPlugin * plugin)
@@ -544,6 +555,8 @@ page_added_cb (GtkNotebook * notebook,
                     G_CALLBACK (motion_notify_event), NULL);
   g_signal_connect (view, "visibility-notify-event",
                     G_CALLBACK (visibility_notify_event), NULL);
+  g_signal_connect (panel, "reloaded",
+                    G_CALLBACK (on_context_panel_reloaded), plugin);
 }
 
 static void

@@ -60,8 +60,6 @@ void gtr_actions_edit_paste (GtkAction * action, GtrWindow * window);
 
 void gtr_actions_edit_header (GtkAction * action, GtrWindow * window);
 
-void gtr_edit_message_comment (GtkAction * action, GtrWindow * window);
-
 void gtr_message_copy_to_translation (GtkAction * action, GtrWindow * window);
 
 void gtr_message_status_toggle_fuzzy (GtkAction * action, GtrWindow * window);

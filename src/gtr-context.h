@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
+ * Copyright (C) 2007  Ignacio Casal Quinteiro <icq@gnome.org>
  * 
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -21,6 +21,8 @@
 #include <glib.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
+
+#include "gtr-msg.h"
 
 G_BEGIN_DECLS
 /*
@@ -56,21 +58,19 @@ typedef struct _GtrContextPanelClass GtrContextPanelClass;
 struct _GtrContextPanelClass
 {
   GtkVBoxClass parent_class;
+
+  void (* reloaded) (GtrContextPanel *panel,
+                     GtrMsg          *msg);
 };
 
 /*
  * Public methods
  */
-GType
-gtr_context_panel_get_type (void)
-  G_GNUC_CONST;
+GType             gtr_context_panel_get_type              (void) G_GNUC_CONST;
 
-     GType gtr_context_panel_register_type (GTypeModule * module);
+GtkWidget        *gtr_context_panel_new                   (GtkWidget *tab);
 
-     GtkWidget *gtr_context_panel_new (GtkWidget * tab);
-
-GtkTextView
-  * gtr_context_panel_get_context_text_view (GtrContextPanel * panel);
+GtkTextView      *gtr_context_panel_get_context_text_view (GtrContextPanel *panel);
 
 G_END_DECLS
 #endif /* __CONTEXT_PANEL_H__ */
