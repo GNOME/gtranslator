@@ -835,7 +835,7 @@ update_documents_list_menu (GtrWindow * window)
        * get the same accel.
        */
       action_name = g_strdup_printf ("Tab_%d", i);
-      tab_name = gtr_tab_get_name (GTR_TAB (tab));
+      tab_name = _gtr_tab_get_name (GTR_TAB (tab));
       name = gtr_utils_escape_underscores (tab_name, -1);
       tip = get_menu_tip_for_tab (GTR_TAB (tab));
 

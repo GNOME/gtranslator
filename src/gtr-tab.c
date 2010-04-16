@@ -118,6 +118,7 @@ enum
 enum
 {
   PROP_0,
+  PROP_NAME,
   PROP_AUTOSAVE,
   PROP_AUTOSAVE_INTERVAL
 };
@@ -544,6 +545,22 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
 }
 
 static void
+on_location_notify (GtrPo      *po,
+                    GParamSpec *pspec,
+                    GtrTab     *tab)
+{
+  g_object_notify (G_OBJECT (tab), "name");
+}
+
+static void
+on_state_notify (GtrPo      *po,
+                 GParamSpec *pspec,
+                 GtrTab     *tab)
+{
+  g_object_notify (G_OBJECT (tab), "name");
+}
+
+static void
 gtr_tab_draw (GtrTab * tab)
 {
   GtkWidget *vertical_box;
@@ -552,16 +569,12 @@ gtr_tab_draw (GtrTab * tab)
   GtkWidget *scroll;
   GtrTabPrivate *priv = tab->priv;
 
-  /*
-   * Panel
-   */
+  /* Panel */
   priv->panel = gtk_notebook_new ();
   gtk_notebook_set_tab_pos (GTK_NOTEBOOK (priv->panel), GTK_POS_BOTTOM);
   gtk_widget_show (priv->panel);
 
-  /*
-   * Message table
-   */
+  /* Message table */
   priv->message_table = gtr_message_table_new (GTK_WIDGET (tab));
   gtk_widget_show (priv->message_table);
 
@@ -572,9 +585,7 @@ gtr_tab_draw (GtrTab * tab)
 
   gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->panel), FALSE);
 
-  /*
-   * Comment pane
-   */
+  /* Comment pane */
   priv->comment_pane = gtk_hpaned_new ();
   gtk_paned_set_position (GTK_PANED (priv->comment_pane),
                           gtr_prefs_manager_get_comment_pane_pos ());
@@ -582,33 +593,25 @@ gtr_tab_draw (GtrTab * tab)
                     G_CALLBACK (comment_pane_position_changed), tab);
   gtk_widget_show (priv->comment_pane);
 
-  /*
-   * Lateral panel
-   */
+  /* Lateral panel */
   tab->priv->lateral_panel = gtk_notebook_new ();
   gtk_widget_show (tab->priv->lateral_panel);
 
   gtk_paned_pack2 (GTK_PANED (priv->comment_pane), tab->priv->lateral_panel,
                    TRUE, TRUE);
 
-  /*
-   * Context
-   */
+  /* Context */
   priv->context = gtr_context_panel_new (GTK_WIDGET (tab));
   gtk_widget_show (priv->context);
   gtr_tab_add_widget_to_lateral_panel (tab, priv->context, _("Context"));
 
-  /*
-   * TM
-   */
+  /* TM */
   priv->translation_memory = gtr_translation_memory_ui_new (GTK_WIDGET (tab));
   gtk_widget_show (priv->translation_memory);
   gtr_tab_add_widget_to_lateral_panel (tab, priv->translation_memory,
                                        _("Translation Memory"));
 
-  /*
-   * Content pane; this is where the message table and message area go
-   */
+  /* Content pane; this is where the message table and message area go */
   priv->content_pane = gtk_vpaned_new ();
   gtk_paned_set_position (GTK_PANED (priv->content_pane),
                           gtr_prefs_manager_get_content_pane_pos ());
@@ -617,9 +620,7 @@ gtr_tab_draw (GtrTab * tab)
                     G_CALLBACK (content_pane_position_changed), tab);
   gtk_widget_show (priv->content_pane);
 
-  /*
-   * Pack the comments pane and the main content
-   */
+  /* Pack the comments pane and the main content */
   vertical_box = gtk_vbox_new (FALSE, 0);
   gtk_paned_pack1 (GTK_PANED (priv->content_pane), GTK_WIDGET (priv->panel),
                    TRUE, FALSE);
@@ -627,9 +628,7 @@ gtr_tab_draw (GtrTab * tab)
                    TRUE);
   gtk_widget_show (vertical_box);
 
-  /*
-   * Orignal text widgets
-   */
+  /* Orignal text widgets */
   priv->msgid_hbox = gtk_hbox_new (FALSE, 0);
   gtk_widget_show (priv->msgid_hbox);
 
@@ -687,9 +686,7 @@ gtr_tab_draw (GtrTab * tab)
   gtk_box_pack_start (GTK_BOX (vertical_box), priv->text_vbox, TRUE, TRUE, 0);
 
 
-  /*
-   * Translation widgets
-   */
+  /* Translation widgets */
   priv->msgstr_label = gtk_label_new (NULL);
   gtk_label_set_markup_with_mnemonic (GTK_LABEL (priv->msgstr_label),
                                       _("<b>Translate_d Text:</b>"));
@@ -829,6 +826,15 @@ gtr_tab_class_init (GtrTabClass * klass)
 
   /* Properties */
   g_object_class_install_property (object_class,
+                                   PROP_NAME,
+                                   g_param_spec_string ("name",
+                                                        "Name",
+                                                        "The tab's name",
+                                                        NULL,
+                                                        G_PARAM_READABLE |
+                                                        G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (object_class,
                                    PROP_AUTOSAVE,
                                    g_param_spec_boolean ("autosave",
                                                          "Autosave",
@@ -868,17 +874,22 @@ gtr_tab_new (GtrPo * po)
 
   tab = g_object_new (GTR_TYPE_TAB, NULL);
 
+  /* FIXME: make the po a property */
   tab->priv->po = po;
   g_object_set_data (G_OBJECT (po), GTR_TAB_KEY, tab);
+
+  g_signal_connect (po, "notify::location",
+                    G_CALLBACK (on_location_notify), tab);
+
+  g_signal_connect (po, "notify::state",
+                    G_CALLBACK (on_state_notify), tab);
+
   install_autosave_timeout_if_needed (tab);
 
-  /*
-   * Now we have to initialize the number of msgstr tabs
-   */
+  /* Now we have to initialize the number of msgstr tabs */
   gtr_tab_add_msgstr_tabs (tab);
 
-  gtr_message_table_populate (GTR_MESSAGE_TABLE
-                              (tab->priv->message_table),
+  gtr_message_table_populate (GTR_MESSAGE_TABLE (tab->priv->message_table),
                               gtr_po_get_messages (tab->priv->po));
 
   gtk_widget_show (GTK_WIDGET (tab));
@@ -1006,34 +1017,6 @@ gtr_tab_get_all_views (GtrTab * tab, gboolean original, gboolean translated)
 }
 
 /**
- * gtr_tab_get_name:
- * @tab: a #GtrTab 
- * 
- * Return value: a new allocated string with the name of the @tab.
- */
-gchar *
-gtr_tab_get_name (GtrTab * tab)
-{
-  GtrHeader *header;
-  GtrPoState state;
-  const gchar *str;
-  gchar *tab_name;
-
-  header = gtr_po_get_header (tab->priv->po);
-  state = gtr_po_get_state (tab->priv->po);
-
-  str = gtr_header_get_prj_id_version (header);
-
-  if (state == GTR_PO_STATE_MODIFIED)
-    {
-      tab_name = g_strdup_printf ("*%s", str);
-      return tab_name;
-    }
-
-  return g_strdup (str);
-}
-
-/**
  * gtr_tab_message_go_to:
  * @tab: a #GtrTab
  * @to_go: the #GtrMsg you want to jump
@@ -1129,6 +1112,52 @@ gtr_tab_message_go_to (GtrTab * tab,
   if (!searching)
     g_signal_emit (G_OBJECT (tab), signals[SHOWED_MESSAGE], 0,
                    GTR_MSG (to_go->data));
+}
+
+/**
+ * _gtr_tab_get_name:
+ * @tab: a #GtrTab 
+ * 
+ * Return value: a new allocated string with the name of the @tab.
+ */
+gchar *
+_gtr_tab_get_name (GtrTab *tab)
+{
+  GtrHeader *header;
+  GtrPoState state;
+  const gchar *str;
+  gchar *tab_name;
+
+  header = gtr_po_get_header (tab->priv->po);
+  state = gtr_po_get_state (tab->priv->po);
+
+  str = gtr_header_get_prj_id_version (header);
+
+  if (state == GTR_PO_STATE_MODIFIED)
+    {
+      tab_name = g_strdup_printf ("*%s", str);
+      return tab_name;
+    }
+
+  return g_strdup (str);
+}
+
+gchar *
+_gtr_tab_get_tooltips (GtrTab *tab)
+{
+  GFile *location;
+  gchar *tooltips;
+  gchar *path;
+
+  location = gtr_po_get_location (tab->priv->po);
+  path = g_file_get_path (location);
+  g_object_unref (location);
+
+  /* Translators: Path to the document opened */
+  tooltips = g_strdup_printf ("<b>%s</b> %s", _("Path:"), path);
+  g_free (path);
+
+  return tooltips;
 }
 
 /**

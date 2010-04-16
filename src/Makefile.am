@@ -97,6 +97,10 @@ libgtranslator_la_SOURCES = \
 	gtr-message-table-model.h \
 	gtr-notebook.c \
 	gtr-tab.c \
+	gtr-tab-label.h \
+	gtr-tab-label.c \
+	gtr-close-button.h \
+	gtr-close-button.c \
 	gtr-view.c \
 	gtr-window.c \
 	gtr-po.c \

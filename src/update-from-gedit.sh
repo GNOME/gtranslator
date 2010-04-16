@@ -3,12 +3,12 @@
 FILES="gedit-history-entry.h \
        gedit-history-entry.c \
        gedit-status-combo-box.h \
-       gedit-status-combo-box.c"
+       gedit-status-combo-box.c \
+       gedit-close-button.h \
+       gedit-close-button.c"
 
 sed_it () {
 	sed \
-	-e 's/gedit-history-entry/gtr-history-entry/g' \
-	-e 's/gedit-window.h/gtr-window.h/g' \
 	-e 's/#include "gedit-debug.h"/\/\/#include "gedit-debug.h"/g' \
 	-e 's/gedit/gtr/g' \
 	-e 's/Gedit/Gtr/g' \

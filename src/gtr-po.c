@@ -58,65 +58,89 @@
 
 
 G_DEFINE_TYPE (GtrPo, gtr_po, G_TYPE_OBJECT)
-     struct _GtrPoPrivate
-     {
-       GFile *location;
 
-       /* Gettext's file handle */
-       po_file_t gettext_po_file;
+struct _GtrPoPrivate
+{
+  GFile *location;
 
-       /* Message iter */
-       po_message_iterator_t iter;
+  /* Gettext's file handle */
+  po_file_t gettext_po_file;
 
-       /* The message domains in this file */
-       GList *domains;
+  /* Message iter */
+  po_message_iterator_t iter;
 
-       /* Parsed list of GtrMsgs for the current domains' messagelist */
-       GList *messages;
+  /* The message domains in this file */
+  GList *domains;
 
-       /* A pointer to the currently displayed message */
-       GList *current;
+  /* Parsed list of GtrMsgs for the current domains' messagelist */
+  GList *messages;
 
-       /* The obsolete messages are stored within this gchar. */
-       gchar *obsolete;
+  /* A pointer to the currently displayed message */
+  GList *current;
 
-       /* Is the file write-permitted? (read-only) */
-       gboolean no_write_perms;
+  /* The obsolete messages are stored within this gchar. */
+  gchar *obsolete;
 
-       /* Translated entries count */
-       guint translated;
+  /* Is the file write-permitted? (read-only) */
+  gboolean no_write_perms;
 
-       /* Fuzzy entries count */
-       guint fuzzy;
+  /* Translated entries count */
+  guint translated;
 
-       /* Autosave timeout timer */
-       guint autosave_timeout;
+  /* Fuzzy entries count */
+  guint fuzzy;
 
-       /* Header object */
-       GtrHeader *header;
+  /* Autosave timeout timer */
+  guint autosave_timeout;
 
-       GtrPoState state;
+  /* Header object */
+  GtrHeader *header;
 
-       /* Marks if the file was changed;  */
-       guint file_changed:1;
-     };
+  GtrPoState state;
 
-     enum
-     {
-       PROP_0,
-       PROP_STATE
-     };
+  /* Marks if the file was changed;  */
+  guint file_changed : 1;
+};
 
-     static gchar *message_error = NULL;
+enum
+{
+  PROP_0,
+  PROP_LOCATION,
+  PROP_STATE
+};
 
-     static void
-       gtr_po_get_property (GObject * object,
-                            guint prop_id, GValue * value, GParamSpec * pspec)
+static gchar *message_error = NULL;
+
+static void
+gtr_po_set_property (GObject      *object,
+                     guint         prop_id,
+                     const GValue *value,
+                     GParamSpec   *pspec)
 {
   GtrPo *po = GTR_PO (object);
 
   switch (prop_id)
     {
+    case PROP_LOCATION:
+      gtr_po_set_location (po, G_FILE (g_value_get_object (value)));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
+}
+
+static void
+gtr_po_get_property (GObject * object,
+                     guint prop_id, GValue * value, GParamSpec * pspec)
+{
+  GtrPo *po = GTR_PO (object);
+
+  switch (prop_id)
+    {
+    case PROP_LOCATION:
+      g_value_take_object (value, gtr_po_get_location (po));
+      break;
     case PROP_STATE:
       g_value_set_enum (value, gtr_po_get_state (po));
       break;
@@ -208,6 +232,15 @@ gtr_po_class_init (GtrPoClass * klass)
   object_class->finalize = gtr_po_finalize;
   object_class->dispose = gtr_po_dispose;
   object_class->get_property = gtr_po_get_property;
+  object_class->set_property = gtr_po_set_property;
+
+  g_object_class_install_property (object_class,
+                                   PROP_LOCATION,
+                                   g_param_spec_object ("location",
+                                                        "Location",
+                                                        "The po's location",
+                                                        G_TYPE_FILE,
+                                                        G_PARAM_READWRITE));
 
   g_object_class_install_property (object_class,
                                    PROP_STATE,
@@ -623,9 +656,15 @@ gtr_po_set_location (GtrPo * po, GFile * location)
   g_return_if_fail (GTR_IS_PO (po));
 
   if (po->priv->location)
-    g_object_unref (po->priv->location);
+    {
+      if (g_file_equal (po->priv->location, location))
+        return;
+      g_object_unref (po->priv->location);
+    }
 
   po->priv->location = g_file_dup (location);
+
+  g_object_notify (G_OBJECT (po), "location");
 }
 
 /**
