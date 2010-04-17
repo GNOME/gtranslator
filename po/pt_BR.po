@@ -6,13 +6,14 @@
 # Afonso Celso Medina <medina@maua.br>, 2004, 2005.
 # Leonardo Ferreira Fontenelle <leonardof@gnome.org>, 2007, 2008.
 # Jonh Wendell <jwendell@gnome.org>, 2009, 2010.
+# Antonio Fernandes C. Neto <fernandes@pelivre.org>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-29 09:35-0300\n"
-"PO-Revision-Date: 2010-01-29 09:31-0300\n"
-"Last-Translator: Jonh Wendell <jwendell@gnome.org>\n"
+"POT-Creation-Date: 2010-04-17 18:08-0400\n"
+"PO-Revision-Date: 2010-04-17 14:58-0300\n"
+"Last-Translator: Vladimir Melo <vmelo@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -256,740 +257,359 @@ msgid "gtranslator highlight"
 msgstr "Destaque do gtranslator"
 
 # src/gui.c:220
-#: ../plugins/alternate-language/alternate-language-panel.c:117
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:128
 msgid "Message not found"
 msgstr "Mensagem não localizada"
 
-#: ../plugins/alternate-language/alternate-language-panel.c:221
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:231
 msgid "Open file for alternate language"
 msgstr "Abrir o arquivo para idioma alternativo"
 
-#: ../plugins/alternate-language/alternate-language-panel.c:246
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:256
 msgid "File closed"
 msgstr "Arquivo fechado"
 
-#: ../plugins/alternate-language/alternate-language-panel.c:314
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:316
+msgctxt "alternate lang"
+msgid "_Open"
+msgstr "_Abrir"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:322
+msgctxt "alternate lang"
+msgid "_Close"
+msgstr "_Fechar"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:328
+msgctxt "alternate lang"
+msgid "Co_py"
+msgstr "_Copiar"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:357
 msgid "There isn't any file loaded"
 msgstr "Não há qualquer arquivo carregado"
 
 # src/header_stuff.c:256
-#: ../plugins/alternate-language/alternate-language-plugin.c:56
+#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:58
 msgid "_Alternate Language"
 msgstr "_Idioma alternativo"
 
-#: ../plugins/alternate-language/alternate-language-plugin.c:57
+#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:59
 msgid "Show the Alternate Language panel"
 msgstr "Mostra o painel de idioma alternativo"
 
 # src/header_stuff.c:256
-#: ../plugins/alternate-language/alternate-language-plugin.c:119
-#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:118
+#: ../plugins/alternate-language/gtr-alternate-language.gtranslator-plugin.desktop.in.h:1
 msgid "Alternate Language"
 msgstr "Idioma alternativo"
 
-#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/alternate-language/gtr-alternate-language.gtranslator-plugin.desktop.in.h:2
 msgid "Load an alternate language."
 msgstr "Carrega um idioma alternativo."
 
-#: ../plugins/charmap/charmap-plugin.c:283
-#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/charmap/gtr-charmap-plugin.c:280
+#: ../plugins/charmap/gtr-charmap.gtranslator-plugin.desktop.in.h:1
 msgid "Character Map"
 msgstr "Mapa de caracteres"
 
-#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/charmap/gtr-charmap.gtranslator-plugin.desktop.in.h:2
 msgid "Insert special characters just by clicking on them."
 msgstr "Insere caracteres especiais quando você clica neles."
 
-#: ../plugins/dictionary/dict-panel.c:183
+#: ../plugins/dictionary/gtr-dict-panel.c:179
 #, c-format
 msgid "No dictionary source available with name '%s'"
 msgstr "Nenhuma fonte de dicionário disponível com o nome \"%s\""
 
-#: ../plugins/dictionary/dict-panel.c:187
+#: ../plugins/dictionary/gtr-dict-panel.c:183
 msgid "Unable to find dictionary source"
 msgstr "Não foi possível localizar a fonte de dicionário"
 
-#: ../plugins/dictionary/dict-panel.c:204
+#: ../plugins/dictionary/gtr-dict-panel.c:198
 #, c-format
 msgid "No context available for source '%s'"
 msgstr "Nenhum contexto disponível para a fonte \"%s\""
 
-#: ../plugins/dictionary/dict-panel.c:208
+#: ../plugins/dictionary/gtr-dict-panel.c:202
 msgid "Unable to create a context"
 msgstr "Não foi possível criar um contexto"
 
-#: ../plugins/dictionary/dict-panel.c:294
+#: ../plugins/dictionary/gtr-dict-panel.c:287
 #, c-format
 msgid "Dictionary source '%s' selected"
 msgstr "Fonte de dicionário \"%s\" selecionanda"
 
-#: ../plugins/dictionary/dict-panel.c:314
+#: ../plugins/dictionary/gtr-dict-panel.c:306
 #, c-format
 msgid "Strategy '%s' selected"
 msgstr "Estratégia \"%s\" selecionada"
 
-#: ../plugins/dictionary/dict-panel.c:333
+#: ../plugins/dictionary/gtr-dict-panel.c:324
 #, c-format
 msgid "Database '%s' selected"
 msgstr "Banco de dados \"%s\" selecionado"
 
-#: ../plugins/dictionary/dict-panel.c:379
+#: ../plugins/dictionary/gtr-dict-panel.c:368
 #, c-format
 msgid "Word '%s' selected"
 msgstr "Palavra \"%s\" selecionada"
 
 #. speller
-#: ../plugins/dictionary/dict-panel.c:402
+#: ../plugins/dictionary/gtr-dict-panel.c:390
 msgid "Double-click on the word to look up"
 msgstr "Dê um clique duplo na palavra para pesquisá-la"
 
 #. strat-chooser
-#: ../plugins/dictionary/dict-panel.c:407
+#: ../plugins/dictionary/gtr-dict-panel.c:395
 msgid "Double-click on the matching strategy to use"
 msgstr "Dê um clique duplo na estratégia para usá-la"
 
 #. source-chooser
-#: ../plugins/dictionary/dict-panel.c:413
+#: ../plugins/dictionary/gtr-dict-panel.c:401
 msgid "Double-click on the source to use"
 msgstr "Dê um clique duplo na fonte para usá-la"
 
 #. db-chooser
-#: ../plugins/dictionary/dict-panel.c:423
+#: ../plugins/dictionary/gtr-dict-panel.c:411
 msgid "Double-click on the database to use"
 msgstr "Dê um clique duplo no banco de dados para usá-lo"
 
 #.
 #. * Look up Button
 #.
-#: ../plugins/dictionary/dict-panel.c:487
+#: ../plugins/dictionary/gtr-dict-panel.c:473
 msgid "Look _up:"
 msgstr "Consultar:"
 
-#: ../plugins/dictionary/dict-panel.c:559
+#: ../plugins/dictionary/gtr-dict-panel.c:543
 msgid "Similar words"
 msgstr "Palavras semelhantes"
 
-#: ../plugins/dictionary/dict-panel.c:574
+#: ../plugins/dictionary/gtr-dict-panel.c:558
 msgid "Available dictionaries"
 msgstr "Dicionários disponíveis"
 
-#: ../plugins/dictionary/dict-panel.c:590
+#: ../plugins/dictionary/gtr-dict-panel.c:574
 msgid "Available strategies"
 msgstr "Estratégias disponíveis"
 
-#: ../plugins/dictionary/dict-panel.c:600
+#: ../plugins/dictionary/gtr-dict-panel.c:584
 msgid "Dictionary sources"
 msgstr "Fontes de dicionário"
 
-#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:1
-#: ../plugins/dictionary/dictionary-plugin.c:92
+#: ../plugins/dictionary/gtr-dict.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/dictionary/gtr-dictionary-plugin.c:92
 msgid "Dictionary"
 msgstr "Dicionário"
 
-#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/dictionary/gtr-dict.gtranslator-plugin.desktop.in.h:2
 msgid "Look up words in a dictionary."
 msgstr "Consulta palavras em um dicionário."
 
-#: ../plugins/fullscreen/fullscreen-plugin.c:45
+#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:44
 msgid "_Fullscreen"
 msgstr "_Tela cheia"
 
-#: ../plugins/fullscreen/fullscreen-plugin.c:46
+#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:45
 msgid "Place window on fullscreen state"
 msgstr "Coloca a janela em estado de tela cheia"
 
-#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/fullscreen/gtr-fullscreen.gtranslator-plugin.desktop.in.h:1
 msgid "Fullscreen"
 msgstr "Tela cheia"
 
-#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/fullscreen/gtr-fullscreen.gtranslator-plugin.desktop.in.h:2
 msgid "Place window in the fullscreen state."
 msgstr "Coloca a janela em estado de tela cheia."
 
 # src/gui.c:140
-#: ../plugins/insert-params/insert-params-plugin.c:75
+#: ../plugins/insert-params/gtr-insert-params-plugin.c:74
 msgid "_Next Param"
 msgstr "Pró_ximo parâmetro"
 
-#: ../plugins/insert-params/insert-params-plugin.c:76
+#: ../plugins/insert-params/gtr-insert-params-plugin.c:75
 msgid "Insert the next param of the message"
 msgstr "Insere o próximo parâmetro na mensagem"
 
-#: ../plugins/insert-params/insert-params-plugin.c:78
+#: ../plugins/insert-params/gtr-insert-params-plugin.c:77
 msgid "_Insert Params"
 msgstr "_Inserir parâmetros"
 
-#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/insert-params/gtr-insert-params.gtranslator-plugin.desktop.in.h:1
 msgid "Insert Params"
 msgstr "Inserir parâmetros"
 
-#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/insert-params/gtr-insert-params.gtranslator-plugin.desktop.in.h:2
 msgid "Parameters detection and easy insertion."
 msgstr "Facilita a detecção e inserção de parâmetros."
 
 # src/gui.c:140
-#: ../plugins/insert-tags/insert-tags-plugin.c:68
+#: ../plugins/insert-tags/gtr-insert-tags-plugin.c:67
 msgid "_Next Tag"
 msgstr "Pró_xima marca"
 
-#: ../plugins/insert-tags/insert-tags-plugin.c:69
+#: ../plugins/insert-tags/gtr-insert-tags-plugin.c:68
 msgid "Insert the next tag of the message"
 msgstr "Insere a próxima marca na mensagem"
 
-#: ../plugins/insert-tags/insert-tags-plugin.c:71
+#: ../plugins/insert-tags/gtr-insert-tags-plugin.c:70
 msgid "_Insert Tags"
 msgstr "_Inserir marcas"
 
-#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/insert-tags/gtr-insert-tags.gtranslator-plugin.desktop.in.h:1
 msgid "Insert Tags"
 msgstr "Inserir marcas"
 
-#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/insert-tags/gtr-insert-tags.gtranslator-plugin.desktop.in.h:2
 msgid "Tags detection and easy insertion."
 msgstr "Facilita a detecção e inserção de marcas."
 
-#: ../plugins/open-tran/open-tran-dialog.ui.h:1
-#: ../plugins/source-code-view/source-code-view-dialog.ui.h:1
-#: ../plugins/subversion/subversion.ui.h:2
-#: ../src/dialogs/preferences-dialog.ui.h:1
-msgid "    "
-msgstr "    "
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
+msgid "Code language of the results:"
+msgstr "Código do idioma dos resultados:"
 
-#: ../plugins/open-tran/open-tran-dialog.ui.h:2
-#: ../plugins/source-code-view/source-code-view-dialog.ui.h:2
-msgid "     "
-msgstr "     "
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
+msgid "Code language to query open-tran:"
+msgstr "Código do idioma para consultar no open-tran:"
 
-#: ../plugins/open-tran/open-tran-dialog.ui.h:3
-msgid "<b>Code language of the results:</b>"
-msgstr "<b>Código do idioma dos resultados</b>"
-
-#: ../plugins/open-tran/open-tran-dialog.ui.h:4
-msgid "<b>Code language to query open-tran:</b>"
-msgstr "<b>Código do idioma para consultar no open-tran:</b>"
-
-#: ../plugins/open-tran/open-tran-dialog.ui.h:5
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
 msgid "Open Tran Settings"
 msgstr "Configurações do Open Tran"
 
-#: ../plugins/open-tran/open-tran-panel.c:207
-#: ../plugins/open-tran/open-tran-panel.c:272
-msgid "ERROR: could not parse response\n"
-msgstr "ERRO: não foi possível analisar a resposta\n"
-
-#: ../plugins/open-tran/open-tran-panel.c:254
+#: ../plugins/open-tran/gtr-open-tran-panel.c:248
 #, c-format
 msgid "ERROR: %d %s\n"
 msgstr "ERRO: %d %s\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:267
+#: ../plugins/open-tran/gtr-open-tran-panel.c:261
 #, c-format
 msgid "FAULT: %d %s\n"
 msgstr "FALHA: %d %s\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:283
+#: ../plugins/open-tran/gtr-open-tran-panel.c:266
+#: ../plugins/open-tran/gtr-open-tran-panel.c:276
+msgid "ERROR: could not parse response\n"
+msgstr "ERRO: não foi possível analisar a resposta\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:285
 #, c-format
 msgid "WRONG! Can't get result element %d\n"
 msgstr "ERRADO! Não é possível obter resultado para o elemento %d\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:300 ../src/actions-search.c:195
+#: ../plugins/open-tran/gtr-open-tran-panel.c:300
+#: ../src/gtr-actions-search.c:191
 msgid "Phrase not found"
 msgstr "Frase não localizada"
 
-#: ../plugins/open-tran/open-tran-panel.c:320
+#: ../plugins/open-tran/gtr-open-tran-panel.c:319
 msgid "You have to provide a phrase to search"
 msgstr "Você precisa informar uma frase a ser pesquisada"
 
-#: ../plugins/open-tran/open-tran-panel.c:329
+#: ../plugins/open-tran/gtr-open-tran-panel.c:328
 msgid "You have to provide a search language code"
 msgstr "Você precisa informar um código de idioma para a pesquisa"
 
-#: ../plugins/open-tran/open-tran-panel.c:339
+#: ../plugins/open-tran/gtr-open-tran-panel.c:338
 msgid "You have to provide a language code for your language"
 msgstr "Você precisa informar um código de idioma para o seu idioma"
 
-#: ../plugins/open-tran/open-tran-panel.c:367
+#: ../plugins/open-tran/gtr-open-tran-panel.c:366
 msgid "Type"
 msgstr "Tipo"
 
-#: ../plugins/open-tran/open-tran-panel.c:378
+#: ../plugins/open-tran/gtr-open-tran-panel.c:377
 msgid "Open-Tran.eu"
 msgstr "Open-Tran.eu"
 
-#: ../plugins/open-tran/open-tran-panel.c:415
+#: ../plugins/open-tran/gtr-open-tran-panel.c:414
 msgid "Look for:"
 msgstr "Consultar:"
 
 # src/parse.c:698
-#: ../plugins/open-tran/open-tran-plugin.c:106
-#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/open-tran/gtr-open-tran-plugin.c:104
+#: ../plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in.h:2
 msgid "Open Tran"
 msgstr "Open Tran"
 
-#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in.h:1
 msgid "Look for phrases in Open tran memory translation database."
 msgstr "Consulta frases no banco de dados de memória de tradução do Open Tran."
 
-#: ../plugins/source-code-view/source-code-view-dialog.ui.h:3
-msgid "<b>Line command:</b>"
-msgstr "<b>Linha de comando:</b>"
+#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:1
+msgid "Line command:"
+msgstr "Linha de comando:"
 
-#: ../plugins/source-code-view/source-code-view-dialog.ui.h:4
-msgid "<b>Program command:</b>"
-msgstr "<b>Comando do programa:</b>"
+#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:2
+msgid "Program command:"
+msgstr "Comando do programa:"
 
-#: ../plugins/source-code-view/source-code-view-dialog.ui.h:5
+#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:3
 msgid "Source View Settings"
 msgstr "Configurações da visualização de código-fonte"
 
-#: ../plugins/source-code-view/source-code-view-dialog.ui.h:6
+#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:4
 msgid "Use external editor"
 msgstr "Usar editor externo"
 
-#: ../plugins/source-code-view/source-code-view-plugin.c:111
+#: ../plugins/source-code-view/gtr-source-code-view-plugin.c:111
 #, c-format
-msgid "Please install %s to be able to show the file"
-msgstr "Por favor, instale %s para poder mostrar o arquivo"
+msgid "Please install \"%s\" to be able to show the file"
+msgstr "Por favor, instale \"%s\" para poder mostrar o arquivo"
 
-#: ../plugins/source-code-view/source-code-view-plugin.c:446
-msgid "Paths:\n"
-msgstr "Caminhos:\n"
+#: ../plugins/source-code-view/gtr-source-code-view-plugin.c:449
+msgid "Paths:"
+msgstr "Caminhos:"
 
-#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/source-code-view/gtr-source-code-view.gtranslator-plugin.desktop.in.h:1
 msgid "Show the message in the source code."
 msgstr "Mostra a mensagem no código-fonte."
 
-#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/source-code-view/gtr-source-code-view.gtranslator-plugin.desktop.in.h:2
 msgid "Source Code View"
 msgstr "Visualização de código fonte"
 
-#: ../plugins/source-code-view/viewer.c:74
+#: ../plugins/source-code-view/gtr-viewer.c:76
 msgid "Source Viewer"
 msgstr "Visualizador de código-fonte"
 
-#: ../plugins/source-code-view/viewer.ui.h:1
-msgid "<b>Source code</b>"
-msgstr "<b>Código-fonte</b>"
-
-#: ../plugins/subversion/checkout-dialog.c:77
-msgid "Subversion: Checkout complete."
-msgstr "Subversion: Checkout concluído."
-
-#: ../plugins/subversion/checkout-dialog.c:124
-msgid "Please add a directory path to make the checkout"
-msgstr "Por favor, adicione um caminho de diretório para fazer o checkout"
-
-#: ../plugins/subversion/checkout-dialog.c:138
-msgid "Please add a Subversion URL"
-msgstr "Por favor, adicione uma URL do Subversion"
-
-#: ../plugins/subversion/checkout-dialog.c:170 ../src/dialogs/assistant.c:689
-msgid "Checkout directory"
-msgstr "Diretório de checkout"
-
-#: ../plugins/subversion/checkout-dialog.c:252
-msgid "Checkout repository"
-msgstr "Repositório de checkout"
-
-#: ../plugins/subversion/commit-dialog.c:221
-msgid "Subversion: Commit complete."
-msgstr "Subversion: Commit concluído."
-
-#.
-#. * Translators: Please change LANGUAGE for your language name in English.
-#. * This string is used to fill the ChangeLog entry
-#. * For example: "Updated Galician translation"
-#. * where LANGUAGE = Galician.
-#.
-#: ../plugins/subversion/commit-dialog.c:262
-msgctxt "ChangeLog entry"
-msgid "LANGUAGE"
-msgstr "Brazilian Portuguese"
-
-#: ../plugins/subversion/commit-dialog.c:286
-#, c-format
-msgid "The ChangeLog file '%s' does not exist"
-msgstr "O arquivo de mudanças (ChangeLog) \"%s\" não existe"
-
-#: ../plugins/subversion/commit-dialog.c:400
-msgid "Are you sure that you want to pass an empty log message?"
-msgstr "Você tem certeza de que deseja passar uma mensagem de log vazia?"
-
-#: ../plugins/subversion/commit-dialog.c:422
-msgid "You have to select at least one file to send"
-msgstr "Você precisa selecionar ao menos um arquivo para enviar"
-
-#: ../plugins/subversion/commit-dialog.c:562
-msgid "Commit Changes"
-msgstr "Alterações do commit"
-
-#: ../plugins/subversion/diff-dialog.c:80
-msgid "Subversion: Diff complete."
-msgstr "Subversion: Diff concluído."
-
-#: ../plugins/subversion/diff-dialog.c:109
-#, c-format
-msgid "Please install %s to be able to diff the file"
-msgstr "Por favor, instale %s para poder gerar um diff do arquivo"
-
-#: ../plugins/subversion/diff-dialog.c:390
-msgid "Diff file"
-msgstr "Arquivo de diff"
-
-#: ../plugins/subversion/diff-dialog.c:455
-msgid "Diff"
-msgstr "Diff"
-
-#: ../plugins/subversion/subversion-plugin.c:82
-msgid "Subversion: File will be added on next commit."
-msgstr "Subversion: O arquivo será adicionado no próximo commit."
-
-#: ../plugins/subversion/subversion-plugin.c:129
-msgid "_Update"
-msgstr "_Atualizar"
-
-#: ../plugins/subversion/subversion-plugin.c:130
-msgid "Sync your local copy with the Subversion tree"
-msgstr "Sincroniza sua cópia local com a árvore de Subversion"
-
-# src/header_stuff.c:265
-#: ../plugins/subversion/subversion-plugin.c:133
-msgid "_Commit"
-msgstr "_Commit"
-
-#: ../plugins/subversion/subversion-plugin.c:134
-msgid "Commit your changes to the Subversion tree"
-msgstr "Envia suas alterações para a árvore de Subversion"
-
-#: ../plugins/subversion/subversion-plugin.c:137
-msgid "_Add"
-msgstr "_Adicionar"
-
-#: ../plugins/subversion/subversion-plugin.c:138
-msgid "Add a new file/directory to the Subversion tree"
-msgstr "Adiciona um novo arquivo ou diretório à árvore de Subversion"
-
-#: ../plugins/subversion/subversion-plugin.c:141
-msgid "_Diff"
-msgstr "_Diff"
-
-#: ../plugins/subversion/subversion-plugin.c:142
-msgid "Diff local PO file with repository PO file"
-msgstr "Compara o arquivo PO local com a versão no repositório de Subversion"
-
-#: ../plugins/subversion/subversion-plugin.c:145
-msgid "C_heckout"
-msgstr "C_heckout"
-
-#: ../plugins/subversion/subversion-plugin.c:146
-msgid "Get a new repository copy"
-msgstr "Obtém uma nova cópia do repositório"
-
-#: ../plugins/subversion/subversion-plugin.c:149
-msgid "S_ubversion"
-msgstr "_Subversion"
-
-#: ../plugins/subversion/subversion.ui.h:1
-msgid "  "
-msgstr "  "
-
-#: ../plugins/subversion/subversion.ui.h:3
-msgid "        "
-msgstr "        "
-
-# src/header_stuff.c:265
-#: ../plugins/subversion/subversion.ui.h:4
-msgid "<b>Diff options:</b>"
-msgstr "<b>Opções de diff:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:5
-msgid "<b>Diff program:</b>"
-msgstr "<b>Programa de diff:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:6
-msgid "<b>Directory to checkout:</b>"
-msgstr "<b>Fazer checkout no diretório:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:7
-msgid "<b>Directory to update:</b>"
-msgstr "<b>Diretório para atualizar:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:8
-msgid "<b>Information:</b>"
-msgstr "<b>Informações:</b>"
-
-# src/gui.c:220
-#: ../plugins/subversion/subversion.ui.h:9
-msgid "<b>Log Message:</b>"
-msgstr "<b>Mensagen de log:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:10
-msgid "<b>Password:</b>"
-msgstr "<b>Senha:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:11
-msgid "<b>Realm:</b>"
-msgstr "<b>Área:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:12
-msgid "<b>Select files to Commit:</b>"
-msgstr "<b>Selecionar arquivos para commit:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:13
-msgid "<b>Subversion URL:</b>"
-msgstr "<b>URL do repositório Subversion:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:14
-msgid "<b>Username:</b>"
-msgstr "<b>Nome de usuário:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:15
-msgid "Add Log Message to ChangeLog file"
-msgstr "Adicionar mensagem de log ao arquivo ChangeLog"
-
-#: ../plugins/subversion/subversion.ui.h:16
-msgid "Line argument:"
-msgstr "Argumentos:"
-
-# src/header_stuff.c:269
-#: ../plugins/subversion/subversion.ui.h:17
-msgid "Program name:"
-msgstr "Programa:"
-
-#: ../plugins/subversion/subversion.ui.h:18
-msgid "Remember Password"
-msgstr "Lembrar senha"
-
-#: ../plugins/subversion/subversion.ui.h:19
-msgid "Remember this decision"
-msgstr "Lembrar essa decisão"
-
-#: ../plugins/subversion/subversion.ui.h:20
-msgid "Repository authorization"
-msgstr "Autorização do repositório"
-
-#: ../plugins/subversion/subversion.ui.h:21
-msgid "Retrieving status..."
-msgstr "Recuperando status..."
-
-# src/gui.c:244
-#: ../plugins/subversion/subversion.ui.h:22
-msgid "Save the diff file"
-msgstr "Salvar o arquivo diff"
-
-#: ../plugins/subversion/subversion.ui.h:23
-msgid "Send Changes"
-msgstr "Enviar alterações"
-
-#: ../plugins/subversion/subversion.ui.h:24
-#: ../plugins/subversion/update-dialog.c:222
-msgid "Update repository"
-msgstr "Atualizar repositório"
-
-#: ../plugins/subversion/subversion.ui.h:25
-msgid "Use configured program to view the diff"
-msgstr "Usar programa configurado para ver o diff"
-
-#: ../plugins/subversion/subversion.ui.h:26
-msgid "label"
-msgstr "rótulo"
-
-#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:1
-msgid "A Subversion client plugin based on libsvn."
-msgstr "Um plug-in cliente de Subversion baseado no libsvn."
-
-#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:2
-msgid "Subversion"
-msgstr "Subversion"
-
-#: ../plugins/subversion/svn-command.c:176
-#: ../plugins/subversion/svn-command.c:258
-msgid "Authentication canceled"
-msgstr "Autenticação cancelada"
-
-#: ../plugins/subversion/svn-command.c:231
-msgid "Hostname:"
-msgstr "Nome da máquina:"
-
-#: ../plugins/subversion/svn-command.c:232
-msgid "Fingerprint:"
-msgstr "Impressão digital:"
-
-#: ../plugins/subversion/svn-command.c:233
-msgid "Valid from:"
-msgstr "Válida a partir de:"
-
-#: ../plugins/subversion/svn-command.c:234
-msgid "Valid until:"
-msgstr "Válida até:"
-
-#: ../plugins/subversion/svn-command.c:235
-msgid "Issuer DN:"
-msgstr "DN do emissor:"
-
-#: ../plugins/subversion/svn-command.c:236
-msgid "DER certificate:"
-msgstr "Certificado DER:"
-
-#: ../plugins/subversion/svn-command.c:385
-#: ../plugins/subversion/svn-command.c:400
-#, c-format
-msgid "Deleted: %s"
-msgstr "Excluído: %s"
-
-#: ../plugins/subversion/svn-command.c:388
-#: ../plugins/subversion/svn-command.c:406
-#, c-format
-msgid "Added: %s"
-msgstr "Adicionado: %s"
-
-#: ../plugins/subversion/svn-command.c:391
-#, c-format
-msgid "Reverted: %s"
-msgstr "Revertido: %s"
-
-#: ../plugins/subversion/svn-command.c:394
-#, c-format
-msgid "Revert failed: %s"
-msgstr "Reversão falhou: %s"
-
-#: ../plugins/subversion/svn-command.c:397
-#, c-format
-msgid "Resolved: %s"
-msgstr "Resolvido: %s"
-
-# src/gui.c:239
-#: ../plugins/subversion/svn-command.c:403
-#, c-format
-msgid "Updated: %s"
-msgstr "Atualizado: %s"
-
-#: ../plugins/subversion/svn-command.c:409
-#, c-format
-msgid "Externally Updated: %s"
-msgstr "Atualizado externamente: %s"
-
-#: ../plugins/subversion/svn-command.c:413
-#, c-format
-msgid "Commit Modified: %s"
-msgstr "Commit modificou: %s"
-
-#: ../plugins/subversion/svn-command.c:417
-#, c-format
-msgid "Commit Added: %s"
-msgstr "Commit adicionou: %s"
-
-#: ../plugins/subversion/svn-command.c:420
-#, c-format
-msgid "Commit Deleted: %s"
-msgstr "Commit excluiu: %s"
-
-#: ../plugins/subversion/svn-command.c:424
-#, c-format
-msgid "Commit Replaced: %s"
-msgstr "Commit substituiu: %s"
-
-#: ../plugins/subversion/svn-command.c:428
-#, c-format
-msgid "Created File: %s"
-msgstr "Arquivo criado: %s"
-
-#: ../plugins/subversion/svn-command.c:443
-#, c-format
-msgid "Modified: %s"
-msgstr "Modificado: %s"
-
-#: ../plugins/subversion/svn-command.c:446
-#, c-format
-msgid "Merged: %s"
-msgstr "Mesclado: %s"
-
-#: ../plugins/subversion/svn-command.c:449
-#, c-format
-msgid "Conflicted: %s"
-msgstr "Em conflito: %s"
-
-# src/gui.c:284
-#: ../plugins/subversion/svn-command.c:452
-#, c-format
-msgid "Missing: %s"
-msgstr "Ausente: %s"
-
-#: ../plugins/subversion/svn-command.c:455
-#, c-format
-msgid "Obstructed: %s"
-msgstr "Obstruído: %s"
-
-#: ../plugins/subversion/svn-update-command.c:104
-#, c-format
-msgid "Updated to revision %ld."
-msgstr "Atualizado para a revisão %ld."
-
-#: ../plugins/subversion/update-dialog.c:75
-msgid "Subversion: Update complete."
-msgstr "Subversion: Atualização concluída."
-
-#: ../plugins/subversion/vcs-status-tree-view.c:290
-msgid "Modified"
-msgstr "Modificado"
-
-#: ../plugins/subversion/vcs-status-tree-view.c:294
-msgid "Added"
-msgstr "Adicionado"
-
-#: ../plugins/subversion/vcs-status-tree-view.c:298
-msgid "Deleted"
-msgstr "Excluído"
-
-#: ../plugins/subversion/vcs-status-tree-view.c:302
-msgid "Conflicted"
-msgstr "Em conflito"
-
-# src/gui.c:284
-#: ../plugins/subversion/vcs-status-tree-view.c:306
-msgid "Missing"
-msgstr "Ausente"
-
-#: ../src/actions-file.c:209
+#: ../plugins/source-code-view/gtr-viewer.ui.h:1
+msgid "Source code"
+msgstr "Código fonte"
+
+#: ../src/gtr-actions-file.c:203
 msgid "Open file for translation"
 msgstr "Abrir arquivo para tradução"
 
-#: ../src/actions-file.c:282 ../src/actions-file.c:403
+#: ../src/gtr-actions-file.c:275 ../src/gtr-actions-file.c:393
 msgid "File saved."
 msgstr "Arquivo salvo."
 
 # src/gui.c:244
-#: ../src/actions-file.c:332
+#: ../src/gtr-actions-file.c:324
 msgid "Save file as..."
 msgstr "Salvar arquivo como..."
 
-#: ../src/actions-file.c:796
-#, c-format
-msgid "Failed to write profile data into profiles file '%s'"
-msgstr ""
-"Não foi possível escrever os dados do perfil no arquivo de perfis \"%s\""
-
-#: ../src/actions-file.c:853
+#: ../src/gtr-actions-file.c:790
 msgid "Files saved."
 msgstr "Arquivos salvos."
 
-#: ../src/actions-help.c:52
+#: ../src/gtr-actions-help.c:50
 msgid "Current Maintainers"
 msgstr "Mantenedores atuais"
 
-#: ../src/actions-help.c:57
+#: ../src/gtr-actions-help.c:55
 msgid "Current Developers"
 msgstr "Desenvolvedores atuais"
 
-#: ../src/actions-help.c:63
+#: ../src/gtr-actions-help.c:61
 msgid "Previous Developers"
 msgstr "Desenvolvedores anteriores"
 
-#: ../src/actions-help.c:71
+#: ../src/gtr-actions-help.c:69
 msgid "Contributors"
 msgstr "Colaboradores"
 
-#: ../src/actions-help.c:91
+#: ../src/gtr-actions-help.c:89
 msgid ""
 "This program is free software: you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -1001,7 +621,7 @@ msgstr ""
 "Software Foundation; tanto a versão 3 da Licença, como (a seu critério) "
 "qualquer versão posterior."
 
-#: ../src/actions-help.c:95
+#: ../src/gtr-actions-help.c:93
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -1013,7 +633,7 @@ msgstr ""
 "ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA. Consulte a Licença Pública Geral do "
 "GNU para mais detalhes."
 
-#: ../src/actions-help.c:99
+#: ../src/gtr-actions-help.c:97
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see <http://www.gnu.org/licenses/>."
@@ -1021,7 +641,7 @@ msgstr ""
 "Você deve ter recebido uma cópia da Licença Pública Geral do GNU junto com "
 "este programa. Se não, veja <http://www.gnu.org/licenses/>."
 
-#: ../src/actions-help.c:111
+#: ../src/gtr-actions-help.c:119
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -1029,11 +649,11 @@ msgstr ""
 "Suíte de edição de arquivos de tradução para localização de aplicativos e "
 "bibliotecas."
 
-#: ../src/actions-help.c:114
+#: ../src/gtr-actions-help.c:122
 msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
 msgstr "Copyright © 1999-2008 Free Software Foundation, Inc."
 
-#: ../src/actions-help.c:117
+#: ../src/gtr-actions-help.c:124
 msgid "About Gtranslator"
 msgstr "Sobre o Gtranslator"
 
@@ -1042,50 +662,68 @@ msgstr "Sobre o Gtranslator"
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/actions-help.c:122
+#: ../src/gtr-actions-help.c:129
 msgid "translator-credits"
 msgstr ""
 "João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>\n"
 "Raphael Higino <raphaelh@uai.com.br>\n"
 "Afonso Celso Medina <medina@maua.br>\n"
 "Leonardo Ferreira Fontenelle <leonardof@gnome.org>\n"
-"Jonh Wendell <jwendell@gnome.org>"
+"Jonh Wendell <jwendell@gnome.org>\n"
+"Antonio Fernandes C. Neto <fernandes@pelivre.org>"
 
 # src/gui.c:210
-#: ../src/actions-help.c:126
+#: ../src/gtr-actions-help.c:133
 msgid "Gtranslator Web Site"
 msgstr "Website do Gtranslator"
 
-#: ../src/actions-search.c:173
+#: ../src/gtr-actions-search.c:170
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
 msgstr[0] "%d ocorrência localizada e substituída"
 msgstr[1] "%d ocorrências localizadas e substituídas"
 
-#: ../src/actions-search.c:183
+#: ../src/gtr-actions-search.c:179
 msgid "Found and replaced one occurrence"
 msgstr "Uma ocorrência localizada e substituída"
 
-#: ../src/context.c:60
-msgid "Format:"
-msgstr "Formato:"
+#: ../src/gtr-context.c:228
+msgid "Notes:"
+msgstr "Notas:"
 
-#: ../src/context.c:62
-msgid "Context:"
-msgstr "Contexto:"
+#: ../src/gtr-context.c:236
+msgid "Add Note"
+msgstr "Adicionar nota"
 
-#: ../src/context.c:64
+# src/gui.c:260 src/gui.c:261
+#: ../src/gtr-context.c:241
+msgid "Edit"
+msgstr "Editar"
+
+#. Extracted comments
+#: ../src/gtr-context.c:284
 msgid "Extracted comments:"
 msgstr "Comentários extraídos:"
 
-#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:760
+#. Context
+#: ../src/gtr-context.c:288
+msgid "Context:"
+msgstr "Contexto:"
+
+#. Format
+#: ../src/gtr-context.c:292
+msgid "Format:"
+msgstr "Formato:"
+
+#: ../src/dialogs/gtr-assistant.c:138
+#: ../src/dialogs/gtr-preferences-dialog.c:945
 msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
 msgstr ""
 "<span weight=\"bold\" size=\"large\">Strings adicionadas ao banco de dados</"
 "span>"
 
-#: ../src/dialogs/assistant.c:298
+#: ../src/dialogs/gtr-assistant.c:285
 #, c-format
 msgid ""
 "Profile name: %s\n"
@@ -1110,11 +748,11 @@ msgstr ""
 "Formas de plural: %s\n"
 "Caminho do bando de dados: %s"
 
-#: ../src/dialogs/assistant.c:325
+#: ../src/dialogs/gtr-assistant.c:312
 msgid "None"
 msgstr "Nenhum"
 
-#: ../src/dialogs/assistant.c:348
+#: ../src/dialogs/gtr-assistant.c:335
 msgid ""
 "This assistant will help you to create the main profile\n"
 "and generate your translation memory database."
@@ -1123,97 +761,101 @@ msgstr ""
 "e gerar seu banco de dados de memória de tradução."
 
 # src/languages.h:153
-#: ../src/dialogs/assistant.c:354
+#: ../src/dialogs/gtr-assistant.c:341
 msgid "Assistant"
 msgstr "Assistente"
 
-#: ../src/dialogs/assistant.c:446
+#: ../src/dialogs/gtr-assistant.c:433
 msgid "<b>Profile name:</b>"
 msgstr "<b>Nome do perfil:</b>"
 
 # src/header_stuff.c:301
-#: ../src/dialogs/assistant.c:465
+#: ../src/dialogs/gtr-assistant.c:452
 msgid "<b>Translator name:</b>"
 msgstr "<b>Nome do tradutor:</b>"
 
-#: ../src/dialogs/assistant.c:484
+#: ../src/dialogs/gtr-assistant.c:471
 msgid "<b>Translator email:</b>"
 msgstr "<b>E-mail do tradutor:</b>"
 
 # src/prefs.c:203
-#: ../src/dialogs/assistant.c:503
+#: ../src/dialogs/gtr-assistant.c:490
 msgid "<b>Language:</b>"
 msgstr "<b>Idioma:</b>"
 
-#: ../src/dialogs/assistant.c:522
+#: ../src/dialogs/gtr-assistant.c:509
 msgid "<b>Team email:</b>"
 msgstr "<b>E-mail da equipe:</b>"
 
-#: ../src/dialogs/assistant.c:534 ../src/dialogs/assistant.c:680
-#: ../src/dialogs/preferences-dialog.c:553
+#: ../src/dialogs/gtr-assistant.c:521 ../src/dialogs/gtr-assistant.c:667
+#: ../src/dialogs/gtr-preferences-dialog.c:730 ../src/gtr-window.c:1483
 msgid "Profile"
 msgstr "Perfil"
 
 #
-#: ../src/dialogs/assistant.c:611
+#: ../src/dialogs/gtr-assistant.c:598
 msgid "<b>Language code:</b>"
 msgstr "<b>Código do idioma:</b>"
 
 # src/prefs.c:203
-#: ../src/dialogs/assistant.c:630
+#: ../src/dialogs/gtr-assistant.c:617
 msgid "<b>Character set:</b>"
 msgstr "<b>Codificação de caracteres:</b>"
 
-#: ../src/dialogs/assistant.c:649
+#: ../src/dialogs/gtr-assistant.c:636
 msgid "<b>Transfer encoding:</b>"
 msgstr "<b>Codificação da transferência:</b>"
 
 # src/prefs.c:202
-#: ../src/dialogs/assistant.c:668
+#: ../src/dialogs/gtr-assistant.c:655
 msgid "<b>Plural forms:</b>"
 msgstr "<b>Formas de plural:</b>"
 
-#: ../src/dialogs/assistant.c:727
+#: ../src/dialogs/gtr-assistant.c:676
+msgid "Checkout directory"
+msgstr "Diretório de checkout"
+
+#: ../src/dialogs/gtr-assistant.c:714
 msgid "<b>Select the path to generate the database:</b>"
 msgstr "<b>Selecione o caminho para gerar o banco de dados:</b>"
 
-#: ../src/dialogs/assistant.c:756
+#: ../src/dialogs/gtr-assistant.c:743
 msgid "<b>Look for a specific PO filename:</b>"
 msgstr "<b>Consultar um nome de arquivo PO específico:</b>"
 
-#: ../src/dialogs/assistant.c:765
+#: ../src/dialogs/gtr-assistant.c:752
 msgid "E.g.: gl.po"
 msgstr "Por exemplo: pt_BR.po"
 
-#: ../src/dialogs/assistant.c:769
+#: ../src/dialogs/gtr-assistant.c:756
 msgid "Generate Database"
 msgstr "Gerar banco de dados"
 
-#: ../src/dialogs/assistant.c:795
+#: ../src/dialogs/gtr-assistant.c:782
 msgid "Confirmation"
 msgstr "Confirmação"
 
-#: ../src/dialogs/close-confirmation-dialog.c:128
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:127
 msgid "Close _without Saving"
 msgstr "_Fechar sem salvar"
 
-#: ../src/dialogs/close-confirmation-dialog.c:159
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:157
 msgid "Question"
 msgstr "Pergunta"
 
-#: ../src/dialogs/close-confirmation-dialog.c:380
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:372
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Salvar as alterações do documento \"%s\" antes de fechar?"
 
-#: ../src/dialogs/close-confirmation-dialog.c:543
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:535
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] "Alterações em %d documento serão perdidas para sempre."
 msgstr[1] "Alterações em %d documentos serão perdidas para sempre."
 
-#: ../src/dialogs/close-confirmation-dialog.c:550
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:542
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -1225,123 +867,112 @@ msgstr[1] ""
 "Existem %d documentos com alterações não salvas. Salvar as alterações antes "
 "de fechar?"
 
-#: ../src/dialogs/close-confirmation-dialog.c:571
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:563
 msgid "Docum_ents with unsaved changes:"
 msgstr "_Documentos com alterações não salvas:"
 
-#: ../src/dialogs/close-confirmation-dialog.c:575
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:567
 msgid "S_elect the documents you want to save:"
 msgstr "Selecione os _documentos que você quer salvar:"
 
-#: ../src/dialogs/close-confirmation-dialog.c:595
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:587
 msgid "Saving has been disabled by the system administrator."
 msgstr "O salvamento foi desabilitado pelo administrador do sistema."
 
-#: ../src/dialogs/close-confirmation-dialog.c:597
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:589
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr ""
 "Se você não salvar, todas as suas alterações serão perdidas para sempre."
 
-#: ../src/dialogs/comment-dialog.c:96
-msgid "Edit Comment"
-msgstr "Editar comentário"
-
-#: ../src/dialogs/comment-dialog.ui.h:1
-msgid "Write your comments below:"
-msgstr "Escreva seus comentários abaixo:"
-
-#: ../src/dialogs/file-dialogs.c:62
+#: ../src/dialogs/gtr-file-dialogs.c:62
 msgid "Gettext translation"
 msgstr "Catálogo de mensagens"
 
-#: ../src/dialogs/file-dialogs.c:71
+#: ../src/dialogs/gtr-file-dialogs.c:71
 msgid "Gettext translation template"
 msgstr "Modelo de catálogo de mensagens"
 
-#: ../src/dialogs/file-dialogs.c:76
+#: ../src/dialogs/gtr-file-dialogs.c:76
 msgid "All files"
 msgstr "Todos os arquivos"
 
-#: ../src/dialogs/header-dialog.c:255
+#: ../src/dialogs/gtr-header-dialog.c:236
 msgid "Edit Header"
 msgstr "Editar cabeçalho"
 
 # src/header_stuff.c:316 src/prefs.c:235
-#: ../src/dialogs/header-dialog.ui.h:1
+#: ../src/dialogs/gtr-header-dialog.ui.h:1
 msgid "Char_set:"
 msgstr "_Codificação:"
 
-#: ../src/dialogs/header-dialog.ui.h:2
+#: ../src/dialogs/gtr-header-dialog.ui.h:2
 msgid "Comment"
 msgstr "Comentário"
 
 # Esse é o campo "Content-Transfer-Encoding"
-#: ../src/dialogs/header-dialog.ui.h:3
+#: ../src/dialogs/gtr-header-dialog.ui.h:3
 msgid "Enc_oding:"
 msgstr "Transferência:"
 
-#: ../src/dialogs/header-dialog.ui.h:4
+#: ../src/dialogs/gtr-header-dialog.ui.h:4
 msgid "Language gro_up email:"
 msgstr "E-mail da equipe de tradução:"
 
-#: ../src/dialogs/header-dialog.ui.h:5
+#: ../src/dialogs/gtr-header-dialog.ui.h:5
 msgid "Po file _revision date:"
 msgstr "Revisão do arquivo PO:"
 
-#: ../src/dialogs/header-dialog.ui.h:6
+#: ../src/dialogs/gtr-header-dialog.ui.h:6
 msgid "Pot _file creation date:"
 msgstr "Criação do arquivo POT:"
 
 # src/header_stuff.c:255
-#: ../src/dialogs/header-dialog.ui.h:7
+#: ../src/dialogs/gtr-header-dialog.ui.h:7
 msgid "Project"
 msgstr "Projeto"
 
-#: ../src/dialogs/header-dialog.ui.h:8
+#: ../src/dialogs/gtr-header-dialog.ui.h:8
 msgid "Project Id _version:"
 msgstr "Nome e versão:"
 
-#: ../src/dialogs/header-dialog.ui.h:9
+#: ../src/dialogs/gtr-header-dialog.ui.h:9
 msgid "Report message _bugs to:"
 msgstr "Relatar erros em mensagem original para:"
 
-#: ../src/dialogs/header-dialog.ui.h:10
+#: ../src/dialogs/gtr-header-dialog.ui.h:10
 msgid "Translator and Language"
 msgstr "Tradução"
 
 # src/header_stuff.c:304
-#: ../src/dialogs/header-dialog.ui.h:11
+#: ../src/dialogs/gtr-header-dialog.ui.h:11
 msgid "Translator's _email:"
 msgstr "E-mail do tradutor:"
 
 # src/header_stuff.c:301
-#: ../src/dialogs/header-dialog.ui.h:12
+#: ../src/dialogs/gtr-header-dialog.ui.h:12
 msgid "Translator's _name:"
 msgstr "Nome do tradutor:"
 
-#: ../src/dialogs/header-dialog.ui.h:13
+#: ../src/dialogs/gtr-header-dialog.ui.h:13
 msgid "Use my options to complete the following entries:"
 msgstr "Usar minhas opções para preencher as seguintes entradas:"
 
 # src/header_stuff.c:307 src/prefs.c:222
-#: ../src/dialogs/header-dialog.ui.h:14 ../src/dialogs/profile-dialog.ui.h:9
+#: ../src/dialogs/gtr-header-dialog.ui.h:14
+#: ../src/dialogs/gtr-profile-dialog.ui.h:9
 msgid "_Language:"
 msgstr "_Idioma:"
 
 # src/gui.c:147 src/gui.c:281
-#: ../src/dialogs/jump-dialog.c:94
+#: ../src/dialogs/gtr-jump-dialog.c:91
 msgid "Go to Message"
 msgstr "Ir para a mensagem"
 
-#: ../src/dialogs/jump-dialog.ui.h:1
+#: ../src/dialogs/gtr-jump-dialog.ui.h:1
 msgid "Enter message number:"
 msgstr "Digite o número da mensagem:"
 
-#: ../src/dialogs/preferences-dialog.c:559
-msgid "Active"
-msgstr "Ativo"
-
-#: ../src/dialogs/preferences-dialog.c:1129
+#: ../src/dialogs/gtr-preferences-dialog.c:585
 msgid ""
 "<span weight=\"bold\" size=\"large\">Impossible to remove the active "
 "profile</span>"
@@ -1349,11 +980,11 @@ msgstr ""
 "<span weight=\"bold\" size=\"large\">Não e possível remover o perfil ativo</"
 "span>"
 
-#: ../src/dialogs/preferences-dialog.c:1134
+#: ../src/dialogs/gtr-preferences-dialog.c:589
 msgid "Another profile should be selected as active before"
 msgstr "Ative outro perfil antes"
 
-#: ../src/dialogs/preferences-dialog.c:1148
+#: ../src/dialogs/gtr-preferences-dialog.c:602
 msgid ""
 "<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
 "profile?</span>"
@@ -1361,325 +992,325 @@ msgstr ""
 "<span weight=\"bold\" size=\"large\">Você tem certeza de que deseja excluir "
 "esse perfil?</span>"
 
-#: ../src/dialogs/preferences-dialog.c:1186
-#: ../src/dialogs/preferences-dialog.ui.h:14
+#: ../src/dialogs/gtr-preferences-dialog.c:736
+msgid "Active"
+msgstr "Ativo"
+
+#: ../src/dialogs/gtr-preferences-dialog.c:1198
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:14
 msgid "Gtranslator Preferences"
 msgstr "Preferências do Gtranslator"
 
-#: ../src/dialogs/preferences-dialog.ui.h:2
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:1
+msgid "    "
+msgstr "    "
+
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:2
 msgid "Add to Database"
 msgstr "Adicionar ao banco de dados"
 
-#: ../src/dialogs/preferences-dialog.ui.h:3
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:3
 msgid "Anchor style:"
 msgstr "Estilo da âncora"
 
-#: ../src/dialogs/preferences-dialog.ui.h:4
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:4
 msgid "Autosave"
 msgstr "Salvamento automático"
 
-#: ../src/dialogs/preferences-dialog.ui.h:5
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:5
 msgid "Check _spelling"
 msgstr "_Verificar ortografia"
 
-#: ../src/dialogs/preferences-dialog.ui.h:6
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:6
 msgid "Configuration:"
 msgstr "Configuração"
 
 # src/header_stuff.c:265
-#: ../src/dialogs/preferences-dialog.ui.h:7
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:7
 msgid "Contents"
 msgstr "Conteúdo"
 
-#: ../src/dialogs/preferences-dialog.ui.h:8
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:8
 msgid "Create a _backup copy of files before saving"
 msgstr "Criar uma cópia de _backup dos arquivos antes de salvar"
 
-#: ../src/dialogs/preferences-dialog.ui.h:9
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:9
 msgid "Database:"
 msgstr "Banco de dados"
 
 # src/gui.c:260 src/gui.c:261
-#: ../src/dialogs/preferences-dialog.ui.h:10
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:10
 msgid "Editor"
 msgstr "Editor"
 
-#: ../src/dialogs/preferences-dialog.ui.h:11
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:11
 msgid "Editor _font:"
 msgstr "F_onte do editor"
 
-#: ../src/dialogs/preferences-dialog.ui.h:12
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:12
 msgid "Files"
 msgstr "Arquivos"
 
-#: ../src/dialogs/preferences-dialog.ui.h:13
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:13
 msgid "General"
 msgstr "Geral"
 
-#: ../src/dialogs/preferences-dialog.ui.h:15
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:15
 msgid "Interface"
 msgstr "Interface"
 
-#: ../src/dialogs/preferences-dialog.ui.h:16
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:16
 msgid "Make _whitespace visible"
 msgstr "Tornar o _espaço em branco visível"
 
-#: ../src/dialogs/preferences-dialog.ui.h:17
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:17
 msgid "Max. # of missing words:"
 msgstr "Nº máx. de palavras ausentes:"
 
-#: ../src/dialogs/preferences-dialog.ui.h:18
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:18
 msgid "Max. difference in sentence length:"
 msgstr "Diferença máx. no comprimento da frase:"
 
-#: ../src/dialogs/preferences-dialog.ui.h:19
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:19
 msgid "Plugins"
 msgstr "Plug-ins"
 
-#: ../src/dialogs/preferences-dialog.ui.h:20
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:20
 msgid "Profiles"
 msgstr "Perfis"
 
-#: ../src/dialogs/preferences-dialog.ui.h:21
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:21
 msgid "Scheme color:"
 msgstr "Esquema de cores"
 
-#: ../src/dialogs/preferences-dialog.ui.h:22
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:22
 msgid "Select the directory which contains PO files:"
 msgstr "Escolha o diretório contendo os arquivos PO:"
 
-#: ../src/dialogs/preferences-dialog.ui.h:23
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:23
 msgid "Text Display"
 msgstr "Exibição do texto"
 
-#: ../src/dialogs/preferences-dialog.ui.h:24 ../src/tab.c:662
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:24
 msgid "Translation Memory"
 msgstr "Memória de tradução"
 
-#: ../src/dialogs/preferences-dialog.ui.h:25
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:25
 msgid "Use _custom font"
 msgstr "Usar fonte _personalizada"
 
-#: ../src/dialogs/preferences-dialog.ui.h:26
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:26
 msgid "Use only files with this name:"
 msgstr "Usar apenas arquivos com esse nome:"
 
-#: ../src/dialogs/preferences-dialog.ui.h:27
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:27
 msgid "_Autosave files every"
 msgstr "_Salvar automaticamente a cada"
 
-#: ../src/dialogs/preferences-dialog.ui.h:28
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:28
 msgid "_Delete compiled GMO files"
 msgstr "E_xcluir arquivos GMO compilados"
 
-#: ../src/dialogs/preferences-dialog.ui.h:29
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:29
 msgid "_Highlight message syntax"
 msgstr "_Destacar sintaxe nas mensagens"
 
 # src/prefs.c:247
-#: ../src/dialogs/preferences-dialog.ui.h:30
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:30
 msgid "_Remove fuzzy status if message is changed"
 msgstr "_Remover status de \"aproximada\" ao editar a mensagem"
 
 # src/prefs.c:251
-#: ../src/dialogs/preferences-dialog.ui.h:31
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:31
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "_Avisar se o arquivo PO contiver traduções aproximadas"
 
-#: ../src/dialogs/preferences-dialog.ui.h:32
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:32
 msgid "_minutes"
 msgstr "_minutos"
 
-#: ../src/dialogs/profile-dialog.c:265
-msgid ""
-"<span weight=\"bold\" size=\"large\">The profile name already exists</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"large\">O nome do perfil já existe.</span>"
-
-#: ../src/dialogs/profile-dialog.c:378
+#: ../src/dialogs/gtr-profile-dialog.c:85
 msgid "Gtranslator Profile"
 msgstr "Perfil do Gtranslator"
 
-#: ../src/dialogs/profile-dialog.c:423
-msgid "Example: nplurals=2; plural=(n != 1);"
-msgstr "Exemplo: nplurals=2; plural=(n >= 1);"
-
-#: ../src/dialogs/profile-dialog.ui.h:1
+#: ../src/dialogs/gtr-profile-dialog.ui.h:1
 msgid "Character _set"
 msgstr "Codificação:"
 
-#: ../src/dialogs/profile-dialog.ui.h:2
+#: ../src/dialogs/gtr-profile-dialog.ui.h:2
 msgid "Language Settings"
 msgstr "Configurações de idioma"
 
 # src/prefs.c:226
-#: ../src/dialogs/profile-dialog.ui.h:3
+#: ../src/dialogs/gtr-profile-dialog.ui.h:3
 msgid "Language _code:"
 msgstr "_Código do idioma:"
 
-#: ../src/dialogs/profile-dialog.ui.h:4
+#: ../src/dialogs/gtr-profile-dialog.ui.h:4
 msgid "N_ame:"
 msgstr "No_me:"
 
-#: ../src/dialogs/profile-dialog.ui.h:5
+#: ../src/dialogs/gtr-profile-dialog.ui.h:5
 msgid "Profile Information"
 msgstr "Informações do perfil"
 
-#: ../src/dialogs/profile-dialog.ui.h:6
+#: ../src/dialogs/gtr-profile-dialog.ui.h:6
 msgid "Transfer en_coding:"
 msgstr "_Transferência:"
 
-#: ../src/dialogs/profile-dialog.ui.h:7
+#: ../src/dialogs/gtr-profile-dialog.ui.h:7
 msgid "Translator Information"
 msgstr "Informações do tradutor"
 
-#: ../src/dialogs/profile-dialog.ui.h:8
+#: ../src/dialogs/gtr-profile-dialog.ui.h:8
 msgid "_Email:"
 msgstr "_E-mail:"
 
-#: ../src/dialogs/profile-dialog.ui.h:10
+#: ../src/dialogs/gtr-profile-dialog.ui.h:10
 msgid "_Name:"
 msgstr "_Nome:"
 
-#: ../src/dialogs/profile-dialog.ui.h:11
+#: ../src/dialogs/gtr-profile-dialog.ui.h:11
 msgid "_Plural forms:"
 msgstr "Formas de _plural:"
 
-#: ../src/dialogs/profile-dialog.ui.h:12
+#: ../src/dialogs/gtr-profile-dialog.ui.h:12
 msgid "_Team email:"
 msgstr "E-mail da e_quipe:"
 
-#: ../src/dialogs/search-dialog.c:333 ../src/dialogs/search-dialog.ui.h:3
+#: ../src/dialogs/gtr-search-dialog.c:328
+#: ../src/dialogs/gtr-search-dialog.ui.h:3
 msgid "Replace"
 msgstr "Substituir"
 
-#: ../src/dialogs/search-dialog.c:357
+#: ../src/dialogs/gtr-search-dialog.c:352
 msgid "Find"
 msgstr "Localizar"
 
-#: ../src/dialogs/search-dialog.c:472
+#: ../src/dialogs/gtr-search-dialog.c:463
 msgid "Replace _All"
 msgstr "Substituir _todas"
 
-#: ../src/dialogs/search-dialog.c:476
+#: ../src/dialogs/gtr-search-dialog.c:467
 msgid "_Replace"
 msgstr "Substitui_r"
 
-#: ../src/dialogs/search-dialog.ui.h:1
+#: ../src/dialogs/gtr-search-dialog.ui.h:1
 msgid "Include fu_zzy strings"
 msgstr "Incluir traduções apro_ximadas"
 
-#: ../src/dialogs/search-dialog.ui.h:2
+#: ../src/dialogs/gtr-search-dialog.ui.h:2
 msgid "Match _entire word only"
 msgstr "Coincidir apenas palavra _completa"
 
-#: ../src/dialogs/search-dialog.ui.h:4
+#: ../src/dialogs/gtr-search-dialog.ui.h:4
 msgid "Replace All"
 msgstr "Substituir todas"
 
-#: ../src/dialogs/search-dialog.ui.h:5
+#: ../src/dialogs/gtr-search-dialog.ui.h:5
 msgid "Replace _with: "
 msgstr "Substituir _com: "
 
-#: ../src/dialogs/search-dialog.ui.h:6
+#: ../src/dialogs/gtr-search-dialog.ui.h:6
 msgid "Search _backwards"
 msgstr "Pesquisar para _trás"
 
-#: ../src/dialogs/search-dialog.ui.h:7
+#: ../src/dialogs/gtr-search-dialog.ui.h:7
 msgid "_Match case"
 msgstr "_Diferenciar maiúsculas de minúsculas"
 
-#: ../src/dialogs/search-dialog.ui.h:8
+#: ../src/dialogs/gtr-search-dialog.ui.h:8
 msgid "_Original text"
 msgstr "Texto _original"
 
-#: ../src/dialogs/search-dialog.ui.h:9
+#: ../src/dialogs/gtr-search-dialog.ui.h:9
 msgid "_Search for: "
 msgstr "_Pesquisar: "
 
-#: ../src/dialogs/search-dialog.ui.h:10
+#: ../src/dialogs/gtr-search-dialog.ui.h:10
 msgid "_Translated text"
 msgstr "Texto tradu_zido"
 
-#: ../src/dialogs/search-dialog.ui.h:11
+#: ../src/dialogs/gtr-search-dialog.ui.h:11
 msgid "_Wrap around"
 msgstr "_Voltar ao início"
 
-#: ../src/main.c:55
+#: ../src/main.c:61
 msgid "[FILE...]"
 msgstr "[ARQUIVO...]"
 
-#: ../src/main.c:81
+#: ../src/main.c:64
+msgid "Create a new toplevel window in an existing instance of Gtranslator"
+msgstr ""
+"Cria uma nova janela de nível superior na instância existente do Gtranslator"
+
+#: ../src/main.c:92
 #, c-format
 msgid "%s: malformed file name or URI.\n"
 msgstr "%s: nome de arquivo ou URI com defeito.\n"
 
 # src/gui.c:451
-#: ../src/main.c:147
+#: ../src/main.c:240
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
 #. Setup command line options
-#: ../src/main.c:150
+#: ../src/main.c:244
 msgid "- Edit PO files"
 msgstr "- Edite arquivos PO"
 
-#: ../src/main.c:164
+#: ../src/main.c:256
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Erro durante inicialização do GConf: %s."
 
-#: ../src/main.c:188
+#: ../src/main.c:267
 #, c-format
-msgid "Error setting the default window icon: %s"
-msgstr "Erro ao definir o ícone padrão da janela: %s"
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Execute \"%s --help\" para ver uma lista completa das opções disponíveis na "
+"linha de comando.\n"
 
-#: ../src/message-table.c:273
+#: ../src/gtr-message-table.c:263
 msgid "Status"
 msgstr "Status"
 
-#: ../src/message-table.c:289
+#: ../src/gtr-message-table.c:279
 msgid "ID"
 msgstr "ID"
 
-#: ../src/message-table.c:308
+#: ../src/gtr-message-table.c:298
 msgid "Original Text"
 msgstr "Texto original"
 
-#: ../src/message-table.c:327
+#: ../src/gtr-message-table.c:317
 msgid "Translated Text"
 msgstr "Texto traduzido"
 
-#: ../src/notebook.c:90
-#, c-format
-msgid "<b>Path:</b> %s"
-msgstr "<b>Caminho:</b> %s"
-
-#: ../src/notebook.c:143
-msgid "Close document"
-msgstr "Fecha o arquivo"
-
-#: ../src/po.c:394
+#: ../src/gtr-po.c:420
 #, c-format
 msgid "Failed opening file '%s': %s"
 msgstr "Falha ao abrir o arquivo \"%s\": %s"
 
-#: ../src/po.c:418
+#: ../src/gtr-po.c:444
 #, c-format
 msgid "The file is empty"
 msgstr "O arquivo está vazio"
 
-#: ../src/po.c:433
+#: ../src/gtr-po.c:459
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "O gettext retornou uma lista nula de mensagens do domínio."
 
-#: ../src/po.c:485
+#: ../src/gtr-po.c:511
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Nenhuma mensagem obtida do interpretador."
 
-#: ../src/po.c:534
+#: ../src/gtr-po.c:559
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1690,93 +1321,94 @@ msgstr ""
 "Os arquivos POT são criados no processo de compilação.\n"
 "Seu arquivo deveria ser nomeado como \"%s.po\"."
 
-#: ../src/po.c:547
+#: ../src/gtr-po.c:572
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "O arquivo %s é somente-leitura, e não pode ser sobrescrito"
 
-#: ../src/po.c:578
+#: ../src/gtr-po.c:603
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Houve um erro ao escrever o arquivo PO: %s"
 
-#: ../src/plugin-system/plugin-manager.c:54
+#: ../src/plugin-system/gtr-plugin-manager.c:54
 msgid "Plugin"
 msgstr "Plug-in"
 
-#: ../src/plugin-system/plugin-manager.c:55
+#: ../src/plugin-system/gtr-plugin-manager.c:55
 msgid "Enabled"
 msgstr "Habilitado"
 
-#: ../src/plugin-system/plugin-manager.c:508
+#: ../src/plugin-system/gtr-plugin-manager.c:496
 msgid "_About"
 msgstr "_Sobre"
 
-#: ../src/plugin-system/plugin-manager.c:514
+#: ../src/plugin-system/gtr-plugin-manager.c:502
 msgid "C_onfigure"
 msgstr "_Configurar"
 
-#: ../src/plugin-system/plugin-manager.c:523
+#: ../src/plugin-system/gtr-plugin-manager.c:510
 msgid "A_ctivate"
 msgstr "_Ativar"
 
-#: ../src/plugin-system/plugin-manager.c:534
+#: ../src/plugin-system/gtr-plugin-manager.c:520
 msgid "Ac_tivate All"
 msgstr "Ativar _todos"
 
-#: ../src/plugin-system/plugin-manager.c:538
+#: ../src/plugin-system/gtr-plugin-manager.c:524
 msgid "_Deactivate All"
 msgstr "_Desativar todos"
 
-#: ../src/plugin-system/plugin-manager.c:777
+#: ../src/plugin-system/gtr-plugin-manager.c:762
 msgid "Active plugins"
 msgstr "Plug-ins ativos"
 
-#: ../src/plugin-system/plugin-manager.c:806
+#: ../src/plugin-system/gtr-plugin-manager.c:791
 msgid "_About Plugin"
 msgstr "_Sobre o plug-in"
 
-#: ../src/plugin-system/plugin-manager.c:811
+#: ../src/plugin-system/gtr-plugin-manager.c:795
 msgid "C_onfigure Plugin"
 msgstr "_Configurar plug-in"
 
-#: ../src/statusbar.c:118 ../src/statusbar.c:249
+#: ../src/gtr-statusbar.c:117 ../src/gtr-statusbar.c:246
 msgid "INS"
 msgstr "INS"
 
-#: ../src/statusbar.c:119 ../src/statusbar.c:245
+#: ../src/gtr-statusbar.c:118 ../src/gtr-statusbar.c:242
 msgid "OVR"
 msgstr "SBR"
 
-#: ../src/tab.c:223
+#: ../src/gtr-tab.c:211
 msgid "There is an error in the message:"
 msgstr "Há um erro na mensagem:"
 
-#: ../src/tab.c:398
-msgid "Open comment dialog"
-msgstr "Abre o diálogo de comentário"
-
-#: ../src/tab.c:576
+#: ../src/gtr-tab.c:529
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
-#: ../src/tab.c:621
-msgid "Message Table"
-msgstr "Tabela de mensagens"
-
-# src/header_stuff.c:265
-#: ../src/tab.c:653
-msgid "Context"
-msgstr "Contexto"
-
-#: ../src/tab.c:692
+#: ../src/gtr-tab.c:591
 msgid "<b>Original Text:</b>"
 msgstr "<b>Texto original:</b>"
 
-#: ../src/tab.c:753
+#: ../src/gtr-tab.c:650
 msgid "<b>Translate_d Text:</b>"
 msgstr "<b>Texto _traduzido</b>"
+
+# src/header_stuff.c:265
+#: ../src/gtr-tab.c:700
+msgid "Context"
+msgstr "Contexto"
+
+#. Translators: Path to the document opened
+#: ../src/gtr-tab.c:1134
+msgid "Path:"
+msgstr "Caminho:"
+
+#: ../src/gtr-tab-label.c:275
+msgid "Close document"
+msgstr "Fecha o arquivo"
 
 #. Translaters: This string is for a toggle to display a toolbar.
 #. * The name of the toolbar is automatically computed from the widgets
@@ -1818,52 +1450,52 @@ msgstr "Remove a barra de ferramentas selecionada"
 msgid "Separator"
 msgstr "Separador"
 
-#: ../src/translation-memory/berkeley/db-base.c:160
+#: ../src/translation-memory/berkeley/gtr-db-base.c:158
 msgid "Running recovery..."
 msgstr "Executando recuperação..."
 
-#: ../src/translation-memory/berkeley/db-base.c:169
+#: ../src/translation-memory/berkeley/gtr-db-base.c:167
 #, c-format
 msgid "There was an error recovering the database: %s"
 msgstr "Houve um erro ao recuperar o banco de dados: %s"
 
-#: ../src/translation-memory/berkeley/db-base.c:177
+#: ../src/translation-memory/berkeley/gtr-db-base.c:175
 #, c-format
 msgid "There was an error in database: %s"
 msgstr "Havia um erro no banco de dados: %s"
 
-#: ../src/translation-memory/translation-memory-ui.c:212
+#: ../src/translation-memory/gtr-translation-memory-ui.c:209
 #, c-format
 msgid "Insert Option nº %d"
 msgstr "Inserir opção nº %d"
 
-#: ../src/translation-memory/translation-memory-ui.c:290
+#: ../src/translation-memory/gtr-translation-memory-ui.c:286
 msgid "Shortcut"
 msgstr "Atalho"
 
-#: ../src/translation-memory/translation-memory-ui.c:299
+#: ../src/translation-memory/gtr-translation-memory-ui.c:295
 msgid "Level"
 msgstr "Nível"
 
-#: ../src/translation-memory/translation-memory-ui.c:308
+#: ../src/translation-memory/gtr-translation-memory-ui.c:304
 msgid "String"
 msgstr "Mensagem"
 
-#: ../src/utils.c:308
+#: ../src/gtr-utils.c:307
 msgid "Please check your installation."
 msgstr "Por favor, verifique sua instalação."
 
-#: ../src/utils.c:369
+#: ../src/gtr-utils.c:368
 #, c-format
 msgid "Unable to open ui file %s. Error: %s"
 msgstr "Não foi possível abrir o arquivo de interface gráfica %s. Erro: %s"
 
-#: ../src/utils.c:389
+#: ../src/gtr-utils.c:388
 #, c-format
 msgid "Unable to find the object '%s' inside file %s."
 msgstr "Não foi possível localizar o objeto '%s' dentro do arquivo %s."
 
-#: ../src/utils.c:813
+#: ../src/gtr-utils.c:812
 msgid ""
 "Unable to display help. Please make sure the Gtranslator documentation "
 "package is installed."
@@ -1871,12 +1503,12 @@ msgstr ""
 "Não foi possível exibir a ajuda. Por favor, certifique-se de que a "
 "documentação do Gtranslator esteja instalada."
 
-#: ../src/view.c:80
+#: ../src/gtr-view.c:80
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "erro do gtkspell: %s\n"
 
-#: ../src/view.c:82
+#: ../src/gtr-view.c:82
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1885,356 +1517,321 @@ msgstr ""
 "O GtkSpell não conseguiu inicializar.\n"
 " %s"
 
-#: ../src/window.c:114
+#: ../src/gtr-window.c:123
 msgid "_File"
 msgstr "_Arquivo"
 
 # src/gui.c:260 src/gui.c:261
-#: ../src/window.c:115
+#: ../src/gtr-window.c:124
 msgid "_Edit"
 msgstr "_Editar"
 
-#: ../src/window.c:116
+#: ../src/gtr-window.c:125
 msgid "_View"
 msgstr "_Ver"
 
-#. { "Bookmarks", NULL, N_("_Bookmarks") },
-#. { "Actions", NULL, N_("_Actions") },
-#: ../src/window.c:119
+#: ../src/gtr-window.c:126
 msgid "_Search"
 msgstr "_Pesquisar"
 
 # src/dialogs.c:142
-#: ../src/window.c:120
+#: ../src/gtr-window.c:127
 msgid "_Go"
 msgstr "_Ir"
 
 # src/header_stuff.c:265
-#: ../src/window.c:121
+#: ../src/gtr-window.c:128
 msgid "_Documents"
 msgstr "_Documentos"
 
-#: ../src/window.c:122
+#: ../src/gtr-window.c:129
 msgid "_Help"
 msgstr "Aj_uda"
 
-#: ../src/window.c:126
+#: ../src/gtr-window.c:133
 msgid "Open a PO file"
 msgstr "Abre um arquivo PO"
 
 # src/gui.c:98
-#: ../src/window.c:128
+#: ../src/gtr-window.c:135
 msgid "_Recent Files"
 msgstr "Arquivos r_ecentes"
 
-#: ../src/window.c:131
+#: ../src/gtr-window.c:138
 msgid "Quit the program"
 msgstr "Sai do programa"
 
 #. Edit menu
-#: ../src/window.c:135
+#: ../src/gtr-window.c:142
 msgid "T_oolbar"
 msgstr "_Barra de ferramentas"
 
 # src/parse.c:282
-#: ../src/window.c:138
+#: ../src/gtr-window.c:145
 msgid "Edit gtranslator preferences"
 msgstr "Edita as preferências do gtranslator"
 
 # src/gui.c:115
-#: ../src/window.c:140 ../src/window.c:187
+#: ../src/gtr-window.c:147 ../src/gtr-window.c:193
 msgid "_Header..."
 msgstr "C_abeçalho..."
 
 # src/header_stuff.c:265
 #. Help menu
-#: ../src/window.c:144
+#: ../src/gtr-window.c:151
 msgid "_Contents"
 msgstr "S_umário"
 
 # src/gui.c:78 src/gui.c:232
-#: ../src/window.c:156
+#: ../src/gtr-window.c:162
 msgid "Save the current file"
 msgstr "Salva o arquivo atual"
 
 # src/gui.c:248
-#: ../src/window.c:159
+#: ../src/gtr-window.c:165
 msgid "Save the current file with another name"
 msgstr "Salva o arquivo atual com outro nome"
 
 # src/gui.c:78 src/gui.c:232
-#: ../src/window.c:165
+#: ../src/gtr-window.c:171
 msgid "Close the current file"
 msgstr "Fecha o arquivo atual"
 
-#: ../src/window.c:170
+#: ../src/gtr-window.c:176
 msgid "Undo last operation"
 msgstr "Desfaz a última operação"
 
-#: ../src/window.c:173
+#: ../src/gtr-window.c:179
 msgid "Redo last undone operation"
 msgstr "Refaz a última operação desfeita"
 
-#: ../src/window.c:176
+#: ../src/gtr-window.c:182
 msgid "Cut the selected text"
 msgstr "Corta o texto selecionado"
 
-#: ../src/window.c:179
+#: ../src/gtr-window.c:185
 msgid "Copy the selected text"
 msgstr "Copia o texto selecionado"
 
-#: ../src/window.c:182
+#: ../src/gtr-window.c:188
 msgid "Paste the contents of the clipboard"
 msgstr "Cola o conteúdo da área de transferência"
 
-#: ../src/window.c:185
+#: ../src/gtr-window.c:191
 msgid "Clear the selected translation"
 msgstr "Limpa a tradução selecionada"
 
-# src/header_stuff.c:265
-#: ../src/window.c:189
-msgid "C_omment..."
-msgstr "Come_ntário..."
-
-#: ../src/window.c:190
-msgid "Edit message comment"
-msgstr "Edita o comentário da mensagem"
-
-#: ../src/window.c:192
+#: ../src/gtr-window.c:195
 msgid "Copy _Message to Translation"
 msgstr "Copiar do original para a tra_dução"
 
-#: ../src/window.c:194
+#: ../src/gtr-window.c:197
 msgid "Copy original message contents to the translation field"
 msgstr "Copia o conteúdo da mensagem original para o campo da tradução"
 
 # src/gui.c:184
-#: ../src/window.c:196
+#: ../src/gtr-window.c:199
 msgid "Toggle _Fuzzy Status"
 msgstr "Alternar stat_us de aproximada"
 
 # src/gui.c:184
-#: ../src/window.c:197
+#: ../src/gtr-window.c:200
 msgid "Toggle fuzzy status of a message"
 msgstr "Marca ou desmarca uma tradução como aproximada"
 
 # src/header_stuff.c:301
-#: ../src/window.c:199 ../src/window.c:207
+#: ../src/gtr-window.c:202
 msgid "_Translation Memory"
 msgstr "_Memórias de tradução"
 
 # src/header_stuff.c:265
 #. View menu
-#: ../src/window.c:204
+#: ../src/gtr-window.c:207
 msgid "_Context"
 msgstr "_Contexto"
 
-#: ../src/window.c:205
+#: ../src/gtr-window.c:208
 msgid "Show the Context panel"
 msgstr "Mostra o painel de contexto"
 
-#: ../src/window.c:208
-msgid "Show the Translation Memory panel"
-msgstr "Mostra o painel de memória de tradução"
-
 # src/gui.c:165
-#. { "ViewSidePane", NULL, N_("Side _Pane"), "F9",
-#. N_("Show or hide the side pane in the current window"),
-#. NULL },
-#. Bookmarks menu
-#. { "BookmarksAdd", GTK_STOCK_ADD, N_("_Add Bookmark"), "<control>D",
-#. N_("Add a bookmark to the current message"), NULL},
-#. { "BookmarksEdit", GTK_STOCK_EDIT, N_("_Edit Bookmarks"), "<control>B",
-#. N_("Edit stored bookmarks"), NULL},
-#. Action menu
-#. { "ActionsCompile", GTK_STOCK_CONVERT, N_("_Compile"), NULL,
-#. N_("Compile the current file to a MO file"), NULL },
-#. { "ActionsRefresh", GTK_STOCK_REFRESH, NULL, NULL,
-#. N_("  "), NULL },
-#. //G_CALLBACK(gtranslator_bookmark_adding_dialog) },
-#. { "ActionsAutotranslate", NULL, N_("Aut_otranslate..."), NULL,
-#. N_("Autotranslate the current file using a translation memory"), NULL},
-#. //G_CALLBACK(gtranslator_auto_translation_dialog) },
-#. { "ActionsRemoveTranslations", GTK_STOCK_REMOVE, N_("Remo_ve All Translations..."), NULL,
-#. N_("Remove all existing translations"), NULL},
-#. //G_CALLBACK(gtranslator_remove_all_translations_dialog) },
 #. Go menu
-#: ../src/window.c:234
+#: ../src/gtr-window.c:212
 msgid "_Previous Message"
 msgstr "_Mensagem anterior"
 
 # Fiz uma tradução menos literal para explicar o comando com outras palavras
-#: ../src/window.c:235
+#: ../src/gtr-window.c:213
 msgid "Move back one message"
 msgstr "Vai para a mensagem anterior"
 
 # src/gui.c:160
-#: ../src/window.c:237
+#: ../src/gtr-window.c:215
 msgid "_Next Message"
 msgstr "_Próxima mensagem"
 
 # Fiz uma tradução menos literal para explicar o comando com outras palavras
-#: ../src/window.c:238
+#: ../src/gtr-window.c:216
 msgid "Move forward one message"
 msgstr "Vai para a mensagem seguinte"
 
 # src/gui.c:153
-#: ../src/window.c:240
+#: ../src/gtr-window.c:218
 msgid "_Go to Message..."
 msgstr "_Ir para mensagem..."
 
-#: ../src/window.c:241
+#: ../src/gtr-window.c:219
 msgid "Jumps to a specific message"
 msgstr "Vai para uma determinada mensagem"
 
 # src/gui.c:129 src/gui.c:269
-#: ../src/window.c:243
+#: ../src/gtr-window.c:221
 msgid "_First Message"
 msgstr "P_rimeira mensagem"
 
 # src/gui.c:129 src/gui.c:269
-#: ../src/window.c:244
+#: ../src/gtr-window.c:222
 msgid "Go to the first message"
 msgstr "Vai para a primeira mensagem"
 
 # src/gui.c:147 src/gui.c:281
-#: ../src/window.c:246
+#: ../src/gtr-window.c:224
 msgid "_Last Message"
 msgstr "Úl_tima mensagem"
 
 # src/gui.c:147 src/gui.c:281
-#: ../src/window.c:247
+#: ../src/gtr-window.c:225
 msgid "Go to the last message"
 msgstr "Vai para a última mensagem"
 
 # src/gui.c:159
-#: ../src/window.c:249
+#: ../src/gtr-window.c:227
 msgid "Next Fuz_zy"
 msgstr "Pró_xima aproximada"
 
 # Fiz uma tradução menos literal para explicar o comando com outras palavras
-#: ../src/window.c:250
+#: ../src/gtr-window.c:228
 msgid "Go to the next fuzzy message"
 msgstr "Vai para para a próxima mensagem aproximada"
 
-#: ../src/window.c:252
+#: ../src/gtr-window.c:230
 msgid "Previous Fuzz_y"
 msgstr "Aproximada anterior"
 
 # Fiz uma tradução menos literal para explicar o comando com outras palavras
-#: ../src/window.c:253
+#: ../src/gtr-window.c:231
 msgid "Go to the previous fuzzy message"
 msgstr "Vai para a tradução aproximada anterior"
 
-#: ../src/window.c:255
+#: ../src/gtr-window.c:233
 msgid "Next _Untranslated"
 msgstr "Próxima não traduzida"
 
 # Fiz uma tradução menos literal para explicar o comando com outras palavras
-#: ../src/window.c:256
+#: ../src/gtr-window.c:234
 msgid "Go to the next untranslated message"
 msgstr "Vai para a mensagem não traduzida seguinte"
 
 # src/gui.c:165
-#: ../src/window.c:259
+#: ../src/gtr-window.c:237
 msgid "Previ_ous Untranslated"
 msgstr "Não traduzida anterior"
 
 # Fiz uma tradução menos literal para explicar o comando com outras palavras
-#: ../src/window.c:260
+#: ../src/gtr-window.c:238
 msgid "Go to the previous untranslated message"
 msgstr "Vai para a mensagem não traduzida anterior"
 
 # src/gui.c:165
-#: ../src/window.c:263
+#: ../src/gtr-window.c:241
 msgid "Next Fu_zzy or Untranslated"
 msgstr "Pró_xima não traduzida ou aproximada"
 
 # src/gui.c:166 src/gui.c:285
-#: ../src/window.c:265
+#: ../src/gtr-window.c:243
 msgid "Go to the next fuzzy or untranslated message"
 msgstr "Vai para a próxima mensagem aproximada ou não traduzida"
 
 # src/gui.c:165
-#: ../src/window.c:268
+#: ../src/gtr-window.c:246
 msgid "Pre_vious Fuzzy or Untranslated"
 msgstr "Aproximada ou não traduzida a_nterior"
 
 # Fiz uma tradução menos literal para explicar o comando com outras palavras
-#: ../src/window.c:270
+#: ../src/gtr-window.c:248
 msgid "Go to the previous fuzzy or untranslated message"
 msgstr "Vai para a mensagem aproximada ou não traduzida anterior"
 
-#: ../src/window.c:275
+#: ../src/gtr-window.c:253
 msgid "Search for text"
 msgstr "Pesquisa texto"
 
-#: ../src/window.c:284
+#: ../src/gtr-window.c:256
 msgid "Search for and replace text"
 msgstr "Pesquisa e substitui texto"
 
 #. Documents menu
-#: ../src/window.c:288
+#: ../src/gtr-window.c:260
 msgid "_Save All"
 msgstr "_Salvar todos"
 
-#: ../src/window.c:289
+#: ../src/gtr-window.c:261
 msgid "Save all open files"
 msgstr "Salva todos os arquivos abertos"
 
-#: ../src/window.c:291
+#: ../src/gtr-window.c:263
 msgid "_Close All"
 msgstr "_Fechar todos"
 
 # src/gui.c:78 src/gui.c:232
-#: ../src/window.c:292
+#: ../src/gtr-window.c:264
 msgid "Close all open files"
 msgstr "Fecha todos os arquivos abertos"
 
-#: ../src/window.c:294
+#: ../src/gtr-window.c:266
 msgid "_Previous Document"
 msgstr "_Documento anterior"
 
-#: ../src/window.c:296
+#: ../src/gtr-window.c:268
 msgid "Activate previous document"
 msgstr "Ativa o documento anterior"
 
 # src/header_stuff.c:265
-#: ../src/window.c:298
+#: ../src/gtr-window.c:270
 msgid "_Next Document"
 msgstr "_Próximo documento"
 
-#: ../src/window.c:300
+#: ../src/gtr-window.c:272
 msgid "Activate next document"
 msgstr "Ativa o próximo documento"
 
 # src/gui.c:722
-#: ../src/window.c:770
+#: ../src/gtr-window.c:705
 msgid "Untranslated"
 msgstr "Não traduzida"
 
 # src/dialogs.c:217 src/gui.c:712
-#: ../src/window.c:773
+#: ../src/gtr-window.c:708
 msgid "Translated"
 msgstr "Traduzida"
 
 # src/gui.c:288 src/gui.c:708
-#: ../src/window.c:776
+#: ../src/gtr-window.c:711
 msgid "Fuzzy"
 msgstr "Aproximada"
 
-#: ../src/window.c:783
+#: ../src/gtr-window.c:718
 #, c-format
 msgid "Current: %d"
 msgstr "Atual: %d"
 
-#: ../src/window.c:784
+#: ../src/gtr-window.c:719
 #, c-format
 msgid "Total: %d"
 msgstr "Total: %d"
 
 # src/gui.c:722
-#: ../src/window.c:785
+#: ../src/gtr-window.c:720
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
@@ -2242,7 +1839,7 @@ msgstr[0] "%d traduzida"
 msgstr[1] "%d traduzidas"
 
 # src/gui.c:288 src/gui.c:708
-#: ../src/window.c:789
+#: ../src/gtr-window.c:723
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
@@ -2250,7 +1847,7 @@ msgstr[0] "%d aproximada"
 msgstr[1] "%d aproximadas"
 
 # src/gui.c:722
-#: ../src/window.c:793
+#: ../src/gtr-window.c:725
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -2258,47 +1855,54 @@ msgstr[0] "%d não traduzida"
 msgstr[1] "%d não traduzidas"
 
 #. Translators: %s is a URI
-#: ../src/window.c:853
+#: ../src/gtr-window.c:779
 #, c-format
 msgid "Activate '%s'"
 msgstr "Ativa '%s'"
 
-# src/parse.c:282
-#. FIXME: We are leaking a lot here
-#.
-#. * Translators: The title of the window when there is only one tab
-#.
-#: ../src/window.c:1030 ../src/window.c:1036
+# src/gui.c:451
+#. Translators: this is the title of the window with a modified document
+#: ../src/gtr-window.c:953
 #, c-format
-msgid "gtranslator - %s"
-msgstr "gtranslator - %s"
-
-# src/parse.c:282
-#: ../src/window.c:1033
-#, c-format
-msgid "gtranslator - *%s"
-msgstr "gtranslator - *%s"
+msgid "*%s - gtranslator"
+msgstr "*%s - gtranslator"
 
 # src/gui.c:451
-#: ../src/window.c:1041
+#. Translators: this is the title of the window with a document opened
+#: ../src/gtr-window.c:956
+#, c-format
+msgid "%s - gtranslator"
+msgstr "%s - gtranslator"
+
+# src/gui.c:451
+#: ../src/gtr-window.c:962
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/window.c:1403
+#: ../src/gtr-window.c:1336
 msgid "Toolbar Editor"
 msgstr "Editor da barra de ferramentas"
 
+#: ../src/gtr-window.c:1462
+msgid "No profile"
+msgstr "Sem perfil"
+
 # src/header_stuff.c:265
-#: ../src/window.c:1718
+#: ../src/gtr-window.c:1831
 msgid "Documents"
 msgstr "Documentos"
 
-#~ msgid "<b>Autosave</b>"
-#~ msgstr "<b>Salvar automaticamente</b>"
+#~ msgid "Edit Comment"
+#~ msgstr "Editar comentário"
 
-#~ msgid "<b>Configuration:</b>"
-#~ msgstr "<b>Configurações</b>"
+#~ msgid "Write your comments below:"
+#~ msgstr "Escreva seus comentários abaixo:"
 
-# src/header_stuff.c:265
-#~ msgid "<b>Contents</b>"
-#~ msgstr "<b>Conteúdo</b>"
+#~ msgid "<b>Path:</b> %s"
+#~ msgstr "<b>Caminho:</b> %s"
+
+#~ msgid "Open comment dialog"
+#~ msgstr "Abre o diálogo de comentário"
+
+#~ msgid "Message Table"
+#~ msgstr "Tabela de mensagens"
