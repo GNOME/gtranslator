@@ -57,9 +57,9 @@ void gtr_prefs_manager_set_side_panel_active_page (gint id);
 gboolean gtr_prefs_manager_side_panel_active_page_can_set (void);
 
 /* Comment pane */
-gint gtr_prefs_manager_get_comment_pane_pos (void);
-gint gtr_prefs_manager_get_default_comment_pane_pos (void);
-void gtr_prefs_manager_set_comment_pane_pos (gint new_pane_pos);
+gint gtr_prefs_manager_get_context_pane_pos (void);
+gint gtr_prefs_manager_get_default_context_pane_pos (void);
+void gtr_prefs_manager_set_context_pane_pos (gint new_pane_pos);
 
 /* Content pane */
 gint gtr_prefs_manager_get_content_pane_pos (void);

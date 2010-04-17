@@ -88,8 +88,6 @@ GtrTab *gtr_tab_new (GtrPo * po);
 
 GtrPo *gtr_tab_get_po (GtrTab * tab);
 
-GtkWidget *gtr_tab_get_panel (GtrTab * tab);
-
 gint gtr_tab_get_active_trans_tab (GtrTab * tab);
 
 GtrContextPanel *gtr_tab_get_context_panel (GtrTab * tab);

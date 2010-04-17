@@ -207,9 +207,6 @@ static const GtkActionEntry entries[] = {
   {"ViewContext", NULL, N_("_Context"), "<control>J",
    N_("Show the Context panel"),
    G_CALLBACK (gtr_actions_view_context)},
-  {"ViewTranslationMemory", NULL, N_("_Translation Memory"), "<control>K",
-   N_("Show the Translation Memory panel"),
-   G_CALLBACK (gtr_actions_view_translation_memory)},
 
   /* Go menu */
   {"GoPrevious", GTK_STOCK_GO_BACK, N_("_Previous Message"),

@@ -91,7 +91,7 @@ static void gtr_prefs_manager_scheme_color_changed (GConfClient *
 #define GTR_STATE_DEFAULT_WINDOW_WIDTH		775
 #define GTR_STATE_DEFAULT_WINDOW_HEIGHT		500
 #define GTR_STATE_DEFAULT_CONTENT_PANE_POS	325
-#define GTR_STATE_DEFAULT_COMMENT_PANE_POS	525
+#define GTR_STATE_DEFAULT_CONTEXT_PANE_POS	525
 
 #define GTR_STATE_FILE_NAME "gtranslator.config"
 
@@ -100,13 +100,13 @@ static void gtr_prefs_manager_scheme_color_changed (GConfClient *
 #define GTR_STATE_WINDOW_HEIGHT "height"
 #define GTR_STATE_WINDOW_WIDTH "width"
 #define GTR_STATE_CONTENT_PANE_POS "content_pane_pos"
-#define GTR_STATE_COMMENT_PANE_POS "comment_pane_pos"
+#define GTR_STATE_CONTEXT_PANE_POS "context_pane_pos"
 
 static gint window_state = -1;
 static gint window_height = -1;
 static gint window_width = -1;
 static gint content_pane_pos = -1;
-static gint comment_pane_pos = -1;
+static gint context_pane_pos = -1;
 
 static GKeyFile *
 get_gtr_state_file ()
@@ -343,38 +343,38 @@ gtr_prefs_manager_set_content_pane_pos (gint new_pane_pos)
                      GTR_STATE_CONTENT_PANE_POS, new_pane_pos);
 }
 
-/* Comment pane */
+/* Context pane */
 gint
-gtr_prefs_manager_get_comment_pane_pos (void)
+gtr_prefs_manager_get_context_pane_pos (void)
 {
-  if (comment_pane_pos == -1)
+  if (context_pane_pos == -1)
     {
       gtr_state_get_int (GTR_STATE_WINDOW_GROUP,
-                         GTR_STATE_COMMENT_PANE_POS,
-                         GTR_STATE_DEFAULT_COMMENT_PANE_POS,
-                         &comment_pane_pos);
+                         GTR_STATE_CONTEXT_PANE_POS,
+                         GTR_STATE_DEFAULT_CONTEXT_PANE_POS,
+                         &context_pane_pos);
     }
 
-  return comment_pane_pos;
+  return context_pane_pos;
 }
 
 gint
-gtr_prefs_manager_get_default_comment_pane_pos (void)
+gtr_prefs_manager_get_default_context_pane_pos (void)
 {
-  return GTR_STATE_DEFAULT_COMMENT_PANE_POS;
+  return GTR_STATE_DEFAULT_CONTEXT_PANE_POS;
 }
 
 void
-gtr_prefs_manager_set_comment_pane_pos (gint new_pane_pos)
+gtr_prefs_manager_set_context_pane_pos (gint new_pane_pos)
 {
   g_return_if_fail (new_pane_pos > -1);
 
-  if (comment_pane_pos == new_pane_pos)
+  if (context_pane_pos == new_pane_pos)
     return;
 
-  comment_pane_pos = new_pane_pos;
+  context_pane_pos = new_pane_pos;
   gtr_state_set_int (GTR_STATE_WINDOW_GROUP,
-                     GTR_STATE_COMMENT_PANE_POS, new_pane_pos);
+                     GTR_STATE_CONTEXT_PANE_POS, new_pane_pos);
 }
 
 /* Normal prefs are stored in GConf */

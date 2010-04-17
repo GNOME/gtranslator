@@ -71,9 +71,6 @@ void gtr_actions_edit_clear (GtkAction * action, GtrWindow * window);
 /* View */
 void gtr_actions_view_context (GtkAction * action, GtrWindow * window);
 
-void gtr_actions_view_translation_memory
-  (GtkAction * action, GtrWindow * window);
-
 /*Go*/
 void gtr_message_go_to_first (GtkAction * action, GtrWindow * window);
 

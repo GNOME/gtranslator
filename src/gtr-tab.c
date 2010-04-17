@@ -68,11 +68,10 @@ struct _GtrTabPrivate
 
   GtkWidget *table_pane;
   GtkWidget *content_pane;
-  GtkWidget *panel;
   GtkWidget *message_table;
   GtkWidget *lateral_panel;        //TM, Context, etc.
 
-  GtkWidget *comment_pane;
+  GtkWidget *context_pane;
   GtkWidget *context;
   GtkWidget *translation_memory;
 
@@ -497,11 +496,10 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
 }
 
 static void
-comment_pane_position_changed (GObject * tab_gobject,
+context_pane_position_changed (GObject * tab_gobject,
                                GParamSpec * arg1, GtrTab * tab)
 {
-  gtr_prefs_manager_set_comment_pane_pos (gtk_paned_get_position
-                                          (GTK_PANED (tab_gobject)));
+  gtr_prefs_manager_set_context_pane_pos (gtk_paned_get_position (GTK_PANED (tab_gobject)));
 }
 
 static void
@@ -564,52 +562,10 @@ static void
 gtr_tab_draw (GtrTab * tab)
 {
   GtkWidget *vertical_box;
-  GtkWidget *label_widget;
+  GtkWidget *vcontext_box;
   GtkWidget *msgid_label;
   GtkWidget *scroll;
   GtrTabPrivate *priv = tab->priv;
-
-  /* Panel */
-  priv->panel = gtk_notebook_new ();
-  gtk_notebook_set_tab_pos (GTK_NOTEBOOK (priv->panel), GTK_POS_BOTTOM);
-  gtk_widget_show (priv->panel);
-
-  /* Message table */
-  priv->message_table = gtr_message_table_new (GTK_WIDGET (tab));
-  gtk_widget_show (priv->message_table);
-
-  label_widget = gtk_label_new (_("Message Table"));
-
-  gtk_notebook_append_page (GTK_NOTEBOOK (priv->panel),
-                            priv->message_table, label_widget);
-
-  gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->panel), FALSE);
-
-  /* Comment pane */
-  priv->comment_pane = gtk_hpaned_new ();
-  gtk_paned_set_position (GTK_PANED (priv->comment_pane),
-                          gtr_prefs_manager_get_comment_pane_pos ());
-  g_signal_connect (priv->comment_pane, "notify::position",
-                    G_CALLBACK (comment_pane_position_changed), tab);
-  gtk_widget_show (priv->comment_pane);
-
-  /* Lateral panel */
-  tab->priv->lateral_panel = gtk_notebook_new ();
-  gtk_widget_show (tab->priv->lateral_panel);
-
-  gtk_paned_pack2 (GTK_PANED (priv->comment_pane), tab->priv->lateral_panel,
-                   TRUE, TRUE);
-
-  /* Context */
-  priv->context = gtr_context_panel_new (GTK_WIDGET (tab));
-  gtk_widget_show (priv->context);
-  gtr_tab_add_widget_to_lateral_panel (tab, priv->context, _("Context"));
-
-  /* TM */
-  priv->translation_memory = gtr_translation_memory_ui_new (GTK_WIDGET (tab));
-  gtk_widget_show (priv->translation_memory);
-  gtr_tab_add_widget_to_lateral_panel (tab, priv->translation_memory,
-                                       _("Translation Memory"));
 
   /* Content pane; this is where the message table and message area go */
   priv->content_pane = gtk_vpaned_new ();
@@ -620,13 +576,12 @@ gtr_tab_draw (GtrTab * tab)
                     G_CALLBACK (content_pane_position_changed), tab);
   gtk_widget_show (priv->content_pane);
 
-  /* Pack the comments pane and the main content */
-  vertical_box = gtk_vbox_new (FALSE, 0);
-  gtk_paned_pack1 (GTK_PANED (priv->content_pane), GTK_WIDGET (priv->panel),
+  /* Message table */
+  priv->message_table = gtr_message_table_new (GTK_WIDGET (tab));
+  gtk_widget_show (priv->message_table);
+
+  gtk_paned_pack1 (GTK_PANED (priv->content_pane), GTK_WIDGET (priv->message_table),
                    TRUE, FALSE);
-  gtk_paned_pack2 (GTK_PANED (priv->content_pane), priv->comment_pane, FALSE,
-                   TRUE);
-  gtk_widget_show (vertical_box);
 
   /* Orignal text widgets */
   priv->msgid_hbox = gtk_hbox_new (FALSE, 0);
@@ -681,6 +636,9 @@ gtr_tab_draw (GtrTab * tab)
   gtk_box_pack_start (GTK_BOX (priv->text_vbox), priv->text_plural_scroll,
                       TRUE, TRUE, 0);
 
+  vertical_box = gtk_vbox_new (FALSE, 0);
+  gtk_widget_show (vertical_box);
+
   gtk_box_pack_start (GTK_BOX (vertical_box), priv->msgid_hbox, FALSE, FALSE,
                       0);
   gtk_box_pack_start (GTK_BOX (vertical_box), priv->text_vbox, TRUE, TRUE, 0);
@@ -703,10 +661,43 @@ gtr_tab_draw (GtrTab * tab)
   gtk_box_pack_start (GTK_BOX (vertical_box), priv->trans_notebook, TRUE,
                       TRUE, 0);
 
-  gtk_paned_pack1 (GTK_PANED (priv->comment_pane), vertical_box, FALSE,
-                   FALSE);
+  gtk_paned_pack2 (GTK_PANED (priv->content_pane), vertical_box, FALSE,
+                   TRUE);
 
-  gtk_box_pack_start (GTK_BOX (tab), priv->content_pane, TRUE, TRUE, 0);
+  /* Context pane */
+  priv->context_pane = gtk_hpaned_new ();
+  gtk_paned_set_position (GTK_PANED (priv->context_pane),
+                          gtr_prefs_manager_get_context_pane_pos ());
+  g_signal_connect (priv->context_pane, "notify::position",
+                    G_CALLBACK (context_pane_position_changed), tab);
+  gtk_widget_show (priv->context_pane);
+
+  gtk_paned_pack1 (GTK_PANED (priv->context_pane), priv->content_pane,
+                   FALSE, TRUE);
+  gtk_box_pack_start (GTK_BOX (tab), priv->context_pane, TRUE, TRUE, 0);
+
+  /* Vertical context box (TM, context etc ) */
+  vcontext_box = gtk_vbox_new (FALSE, 6);
+  gtk_widget_show (vcontext_box);
+  gtk_paned_pack2 (GTK_PANED (priv->context_pane), vcontext_box,
+                   TRUE, TRUE);
+
+  /* TM */
+  priv->translation_memory = gtr_translation_memory_ui_new (GTK_WIDGET (tab));
+  gtk_widget_show (priv->translation_memory);
+  gtk_box_pack_start (GTK_BOX (vcontext_box), priv->translation_memory,
+                      TRUE, TRUE, 0);
+
+  /* Lateral panel */
+  tab->priv->lateral_panel = gtk_notebook_new ();
+  gtk_widget_show (tab->priv->lateral_panel);
+  gtk_box_pack_start (GTK_BOX (vcontext_box), tab->priv->lateral_panel,
+                      TRUE, TRUE, 0);
+
+  /* Context */
+  priv->context = gtr_context_panel_new (GTK_WIDGET (tab));
+  gtk_widget_show (priv->context);
+  gtr_tab_add_widget_to_lateral_panel (tab, priv->context, _("Context"));
 }
 
 static void
@@ -906,20 +897,6 @@ GtrPo *
 gtr_tab_get_po (GtrTab * tab)
 {
   return tab->priv->po;
-}
-
-/**
- * gtr_tab_get_panel:
- * @tab: a #GtranslationTab
- * 
- * Return value: the horizontal notebook of the #GtranslationTab
-**/
-GtkWidget *
-gtr_tab_get_panel (GtrTab * tab)
-{
-  g_return_val_if_fail (tab != NULL, NULL);
-
-  return tab->priv->panel;
 }
 
 /**

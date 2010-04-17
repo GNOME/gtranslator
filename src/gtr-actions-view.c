@@ -28,15 +28,3 @@ gtr_actions_view_context (GtkAction * action, GtrWindow * window)
 
   gtr_tab_show_lateral_panel_widget (tab, context);
 }
-
-void
-gtr_actions_view_translation_memory (GtkAction * action, GtrWindow * window)
-{
-  GtrTab *tab;
-  GtkWidget *tm_ui;
-
-  tab = gtr_window_get_active_tab (window);
-  tm_ui = GTK_WIDGET (gtr_tab_get_translation_memory_ui (tab));
-
-  gtr_tab_show_lateral_panel_widget (tab, tm_ui);
-}
