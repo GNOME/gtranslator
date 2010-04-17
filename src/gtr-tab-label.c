@@ -50,7 +50,6 @@ struct _GtrTabLabelPrivate
 
   GtkWidget *ebox;
   GtkWidget *close_button;
-  GtkWidget *spinner;
   GtkWidget *icon;
   GtkWidget *label;
 
@@ -256,7 +255,6 @@ gtr_tab_label_init (GtrTabLabel *tab_label)
   GtkWidget *ebox;
   GtkWidget *hbox;
   GtkWidget *close_button;
-  GtkWidget *spinner;
   GtkWidget *icon;
   GtkWidget *label;
   GtkWidget *dummy_label;
@@ -282,10 +280,6 @@ gtr_tab_label_init (GtrTabLabel *tab_label)
                     "clicked",
                     G_CALLBACK (close_button_clicked_cb),
                     tab_label);
-
-  spinner = gtk_spinner_new ();
-  gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, FALSE, 0);
-  tab_label->priv->spinner = spinner;
 
   /* setup icon, empty by default */
   icon = gtk_image_new ();
