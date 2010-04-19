@@ -6,8 +6,6 @@ SUBDIRS = data help man src doc plugins po
 EXTRA_DIST= \
 		HACKING \
 		ChangeLog-20090817 \
-		gtranslator.spec.in \
-		gtranslator.spec \
 		omf.make \
 		xmldocs.make \
 		gnome-doc-utils.make
