@@ -42,19 +42,40 @@
 							GtrMessageTablePrivate))
 
 G_DEFINE_TYPE (GtrMessageTable, gtr_message_table, GTK_TYPE_VBOX)
-     struct _GtrMessageTablePrivate
-     {
-       GtkWidget *treeview;
-       GtrMessageTableModel *store;
-       GtkTreeModel *sort_model;
 
-       GtrTab *tab;
-     };
+struct _GtrMessageTablePrivate
+{
+  GtkWidget *treeview;
+  GtrMessageTableModel *store;
+  GtkTreeModel *sort_model;
 
-     static void
-       gtr_message_table_selection_changed (GtkTreeSelection *
-                                            selection,
-                                            GtrMessageTable * table)
+  GtrTab *tab;
+};
+
+static void
+showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrMessageTable * table)
+{
+  GtkTreePath *path;
+  GtkTreeSelection *selection;
+  GtkTreeIter iter;
+
+  selection =
+    gtk_tree_view_get_selection (GTK_TREE_VIEW (table->priv->treeview));
+
+  path = gtk_tree_row_reference_get_path (gtr_msg_get_row_reference (msg));
+
+  gtk_tree_model_get_iter (table->priv->sort_model, &iter, path);
+
+  gtk_tree_selection_select_iter (selection, &iter);
+
+  gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (table->priv->treeview),
+                                path, NULL, TRUE, 0.5, 0.0);
+  gtk_tree_path_free (path);
+}
+
+static void
+gtr_message_table_selection_changed (GtkTreeSelection *selection,
+                                     GtrMessageTable *table)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
@@ -76,31 +97,12 @@ G_DEFINE_TYPE (GtrMessageTable, gtr_message_table, GTK_TYPE_VBOX)
           && g_utf8_collate (gtr_msg_get_msgid (msg->data),
                              gtr_msg_get_msgid (current_msg->data)))
         {
+          g_signal_handlers_block_by_func (table->priv->tab, showed_message_cb, table);
           gtr_tab_message_go_to (table->priv->tab, msg,
                                  FALSE, GTR_TAB_MOVE_NONE);
+          g_signal_handlers_unblock_by_func (table->priv->tab, showed_message_cb, table);
         }
     }
-}
-
-static void
-showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrMessageTable * table)
-{
-  GtkTreePath *path;
-  GtkTreeSelection *selection;
-  GtkTreeIter iter;
-
-  selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (table->priv->treeview));
-
-  path = gtk_tree_row_reference_get_path (gtr_msg_get_row_reference (msg));
-
-  gtk_tree_model_get_iter (table->priv->sort_model, &iter, path);
-
-  gtk_tree_selection_select_iter (selection, &iter);
-
-  gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (table->priv->treeview),
-                                path, NULL, TRUE, 0.5, 0.0);
-  gtk_tree_path_free (path);
 }
 
 static void
