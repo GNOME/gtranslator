@@ -35,7 +35,6 @@
 #include "gtr-window.h"
 #include "egg-toolbars-model.h"
 #include "./translation-memory/gtr-translation-memory.h"
-#include "./translation-memory/berkeley/gtr-berkeley.h"
 #include "./translation-memory/gda/gtr-gda.h"
 
 #include <glib.h>
@@ -227,7 +226,6 @@ gtr_application_init (GtrApplication *application)
   gtk_icon_factory_add_default (application->priv->icon_factory);
 
   /* Creating translation memory */
-  // application->priv->tm = GTR_TRANSLATION_MEMORY (gtr_berkeley_new ());
   application->priv->tm = GTR_TRANSLATION_MEMORY (gtr_gda_new ());
   gtr_translation_memory_set_max_omits (application->priv->tm,
                                         gtr_prefs_manager_get_max_missing_words

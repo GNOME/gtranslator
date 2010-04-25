@@ -149,17 +149,6 @@ if test "$GCONFTOOL" = "no"; then
 fi 
 
 dnl -------------------------------------------------------------------
-dnl Check for libdb >= 4.3
-dnl -------------------------------------------------------------------
-AX_BERKELEY_DB(4.3, [
-	AC_DEFINE([HAVE_DB_BERKELEY], 1, [A usable libdb library was found])
-	AC_DEFINE_UNQUOTED(DB_HEADER, ["$DB_HEADER"])
-	LDFLAGS="$LDFLAGS $DB_LIBS"
-],[
-	AC_MSG_ERROR([Cannot find Berkeley DB >= 4.3])
-])
-
-dnl -------------------------------------------------------------------
 dnl Check for gtkspell >= 2.0 and use it if found
 dnl -------------------------------------------------------------------
 have_gtkspell=no
@@ -304,7 +293,6 @@ src/dialogs/Makefile
 src/toolbareditor/Makefile
 src/plugin-system/Makefile
 src/translation-memory/Makefile
-src/translation-memory/berkeley/Makefile
 src/translation-memory/gda/Makefile
 ])
 AC_OUTPUT

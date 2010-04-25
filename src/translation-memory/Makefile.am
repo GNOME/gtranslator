@@ -1,4 +1,4 @@
-SUBDIRS = berkeley gda
+SUBDIRS = gda
 
 INCLUDES =                                                      \
         -I$(top_srcdir)                                         \
@@ -39,7 +39,6 @@ libtranslationmemory_la_LDFLAGS = \
 	-export-dynamic
 
 libtranslationmemory_la_LIBADD = \
-	berkeley/libberkeley.la \
 	gda/libgda.la
 
 EXTRA_DIST = $(pixmaps__DATA)
