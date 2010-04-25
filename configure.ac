@@ -101,6 +101,7 @@ PKG_CHECK_MODULES(GTRANSLATOR, [
 	gdl-1.0 >= $GDL_REQUIRED
 	gconf-2.0 >= $GCONF_REQUIRED
 	unique-1.0
+	libgda-4.0
 ])
 
 AC_SUBST(GTRANSLATOR_CFLAGS)
@@ -304,6 +305,7 @@ src/toolbareditor/Makefile
 src/plugin-system/Makefile
 src/translation-memory/Makefile
 src/translation-memory/berkeley/Makefile
+src/translation-memory/gda/Makefile
 ])
 AC_OUTPUT
 
