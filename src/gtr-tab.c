@@ -195,9 +195,7 @@ gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
     GTR_TRANSLATION_MEMORY (gtr_application_get_translation_memory (GTR_APP));
 
   if (gtr_msg_is_translated (msg) && !gtr_msg_is_fuzzy (msg))
-    gtr_translation_memory_store (tm,
-                                  gtr_msg_get_msgid (msg),
-                                  gtr_msg_get_msgstr (msg));
+    gtr_translation_memory_store (tm, msg);
 
   /*
    * Checking message

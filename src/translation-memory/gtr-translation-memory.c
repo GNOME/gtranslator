@@ -1,16 +1,16 @@
 /*
  * Copyright (C) 2008  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
- * 
+ *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
  *     the Free Software Foundation, either version 3 of the License, or
  *     (at your option) any later version.
- * 
+ *
  *     This program is distributed in the hope that it will be useful,
  *     but WITHOUT ANY WARRANTY; without even the implied warranty of
  *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *     GNU General Public License for more details.
- * 
+ *
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -20,28 +20,59 @@
 /**
  * gtr_translation_memory_store:
  * @obj: a #GtrTranslationMemory
- * @original: the untranslated text
- * @translation: the @original text translated
+ * @msg: message
  *
- * Stores the @original and @translation strings in the database.
+ * Stores the @msg in the database.
  */
 gboolean
-gtr_translation_memory_store (GtrTranslationMemory * obj,
-                              const gchar * original,
-                              const gchar * translation)
+gtr_translation_memory_store (GtrTranslationMemory * obj, GtrMsg * msg)
 {
   g_return_val_if_fail (GTR_IS_TRANSLATION_MEMORY (obj), FALSE);
-  return GTR_TRANSLATION_MEMORY_GET_IFACE (obj)->store (obj, original,
-                                                        translation);
+  return GTR_TRANSLATION_MEMORY_GET_IFACE (obj)->store (obj, msg);
 }
 
 /* Default implementation */
 static gboolean
-gtr_translation_memory_store_default (GtrTranslationMemory *
-                                      obj, const gchar * original,
-                                      const gchar * translation)
+gtr_translation_memory_store_default (GtrTranslationMemory * obj, GtrMsg * msg)
 {
   g_return_val_if_reached (FALSE);
+}
+
+/**
+ * gtr_translation_memory_store_list:
+ * @obj: a #GtrTranslationMemory
+ * @msgs: list of messages (#GtrMsg)
+ *
+ * Stores the messages from @msgs in the database.
+ */
+gboolean
+gtr_translation_memory_store_list (GtrTranslationMemory * obj, GList * msgs)
+{
+  g_return_val_if_fail (GTR_IS_TRANSLATION_MEMORY (obj), FALSE);
+  return GTR_TRANSLATION_MEMORY_GET_IFACE (obj)->store_list (obj, msgs);
+}
+
+/* Default implementation */
+static gboolean
+gtr_translation_memory_store_list_default (GtrTranslationMemory * obj,
+                                           GList * msgs)
+{
+  GList * l;
+
+  for (l = msgs; l; l = g_list_next (l))
+    {
+      GtrMsg *msg = GTR_MSG (l->data);
+      gboolean result;
+
+      if (!gtr_msg_is_translated (msg))
+        continue;
+
+      result = gtr_translation_memory_store (obj, msg);
+      if (!result)
+        return FALSE;
+    }
+
+  return TRUE;
 }
 
 /**
@@ -138,6 +169,7 @@ gtr_translation_memory_base_init (GtrTranslationMemoryIface * klass)
   static gboolean initialized = FALSE;
 
   klass->store = gtr_translation_memory_store_default;
+  klass->store_list = gtr_translation_memory_store_list_default;
   klass->lookup = gtr_translation_memory_lookup_default;
   klass->set_max_omits = gtr_translation_memory_set_max_omits_default;
   klass->set_max_delta = gtr_translation_memory_set_max_delta_default;

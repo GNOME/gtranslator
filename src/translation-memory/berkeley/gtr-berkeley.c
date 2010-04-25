@@ -60,15 +60,19 @@ G_DEFINE_TYPE_WITH_CODE (GtrBerkeley,
        gint max_items;
      };
 
-     static gboolean
-       gtr_berkeley_store (GtrTranslationMemory * tm,
-                           const gchar * original, const gchar * translation)
+static gboolean
+gtr_berkeley_store (GtrTranslationMemory * tm, GtrMsg * msg)
 {
   GtrBerkeley *ber = GTR_BERKELEY (tm);
   gboolean ok;
   db_recno_t key;
-
+  const gchar * original;
+  const gchar * translation;
+  
   g_return_val_if_fail (GTR_IS_BERKELEY (ber), FALSE);
+
+  original = gtr_msg_get_msgid (msg);
+  translation = gtr_msg_get_msgstr (msg);
 
   key = gtr_db_orig_read (ber->priv->orig, original);
   if (key == 0)
@@ -517,7 +521,7 @@ gtr_berkeley_lookup (GtrTranslationMemory * tm, const gchar * phrase)
 list:g_hash_table_iter_init (&iter, hash);
   while (g_hash_table_iter_next (&iter, &hkey, &value))
     {
-      GtrTranslationMemoryMatch *match = g_new (GtrTranslationMemoryMatch, 1);
+      GtrTranslationMemoryMatch *match = g_slice_new (GtrTranslationMemoryMatch);
       match->match = g_strdup (hkey);
       match->level = GPOINTER_TO_INT (value);
 

@@ -107,7 +107,7 @@ free_list (gpointer data, gpointer useless)
   GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) data;
 
   g_free (match->match);
-  g_free (match);
+  g_slice_free (GtrTranslationMemoryMatch, match);
 }
 
 static void

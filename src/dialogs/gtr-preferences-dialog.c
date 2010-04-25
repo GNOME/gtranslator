@@ -903,7 +903,6 @@ add_to_database (gpointer data_pointer)
   if (l)
     {
       GList *msg_list = NULL;
-      GList *l2 = NULL;
       GFile *location;
       GError *error = NULL;
       GtrPo *po;
@@ -917,15 +916,7 @@ add_to_database (gpointer data_pointer)
 
       msg_list = gtr_po_get_messages (po);
 
-      for (l2 = msg_list; l2; l2 = l2->next)
-        {
-          GtrMsg *msg;
-          msg = GTR_MSG (l2->data);
-          if (gtr_msg_is_translated (msg))
-            gtr_translation_memory_store (data->tm,
-                                          gtr_msg_get_msgid
-                                          (msg), gtr_msg_get_msgstr (msg));
-        }
+      gtr_translation_memory_store_list (data->tm, msg_list);
 
       g_object_unref (po);
     }
