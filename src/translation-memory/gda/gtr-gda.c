@@ -64,6 +64,8 @@ struct _GtrGdaPrivate
   guint max_omits;
   guint max_delta;
   gint max_items;
+
+  GHashTable *lookup_query_cache;
 };
 
 static gint
@@ -459,13 +461,38 @@ build_lookup_query (GtrGda *self, guint word_count)
   return g_string_free (query, FALSE);
 }
 
+static GdaStatement *
+gtr_gda_get_lookup_statement (GtrGda *self, guint word_count, GError **error)
+{
+  GdaStatement *stmt;
+  gchar *query;
+
+  stmt = GDA_STATEMENT (g_hash_table_lookup (self->priv->lookup_query_cache,
+					     GUINT_TO_POINTER (word_count)));
+
+  if (stmt)
+    return stmt;
+
+  query = build_lookup_query (self, word_count);
+  stmt = gda_sql_parser_parse_string (self->priv->parser,
+                                      query,
+                                      NULL,
+                                      error);
+  g_free (query);
+
+  g_hash_table_insert (self->priv->lookup_query_cache,
+		       GUINT_TO_POINTER (word_count),
+		       stmt);
+
+  return stmt;
+}
+
 static GList *
 gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
 {
   GtrGda *self = GTR_GDA (tm);
   gchar **words = NULL;
   guint cnt = 0;
-  gchar *query = NULL;
   GList *matches = NULL;
   GError *inner_error;
   GdaStatement *stmt = NULL;
@@ -484,13 +511,8 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
   words = gtr_gda_split_string_in_words (phrase);
   cnt = g_strv_length (words);
 
-  query = build_lookup_query (self, cnt);
-
   inner_error = NULL;
-  stmt = gda_sql_parser_parse_string (self->priv->parser,
-                                      query,
-                                      NULL,
-                                      &inner_error);
+  stmt = gtr_gda_get_lookup_statement (self, cnt, &inner_error);
   if (inner_error)
     goto end;
 
@@ -576,10 +598,6 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
     g_object_unref (model);
   if (params)
     g_object_unref (params);
-  if (stmt)
-    g_object_unref (stmt);
-  if (query)
-    g_free (query);
 
   gda_connection_rollback_transaction (self->priv->db, NULL, NULL);
 
@@ -605,6 +623,7 @@ gtr_gda_set_max_omits (GtrTranslationMemory * tm, gsize omits)
   GtrGda *self = GTR_GDA (tm);
 
   self->priv->max_omits = omits;
+  g_hash_table_remove_all (self->priv->lookup_query_cache);
 }
 
 static void
@@ -613,6 +632,7 @@ gtr_gda_set_max_delta (GtrTranslationMemory * tm, gsize delta)
   GtrGda *self = GTR_GDA (tm);
 
   self->priv->max_delta = delta;
+  g_hash_table_remove_all (self->priv->lookup_query_cache);
 }
 
 static void
@@ -621,6 +641,7 @@ gtr_gda_set_max_items (GtrTranslationMemory * tm, gint items)
   GtrGda *self = GTR_GDA (tm);
 
   self->priv->max_items = items;
+  g_hash_table_remove_all (self->priv->lookup_query_cache);
 }
 
 static void
@@ -776,6 +797,11 @@ gtr_gda_init (GtrGda * self)
   self->priv->max_omits = 0;
   self->priv->max_delta = 0;
   self->priv->max_items = 0;
+
+  self->priv->lookup_query_cache = g_hash_table_new_full (g_direct_hash,
+							  g_direct_equal,
+							  NULL,
+							  g_object_unref);
 }
 
 static void
@@ -841,6 +867,12 @@ gtr_gda_dispose (GObject * object)
     {
       g_object_unref (self->priv->db);
       self->priv->db = NULL;
+    }
+
+  if (self->priv->lookup_query_cache != NULL)
+    {
+      g_hash_table_unref (self->priv->lookup_query_cache);
+      self->priv->lookup_query_cache = NULL;
     }
 
   G_OBJECT_CLASS (gtr_gda_parent_class)->dispose (object);
