@@ -218,7 +218,7 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrWindow * window)
   /*
    * Regular expression
    */
-  regex = g_regex_new ("<[-0-9a-zA-Z=.:;_#?'\"/ ]+>", 0, 0, NULL);
+  regex = g_regex_new ("<[-0-9a-zA-Z=.:;_#?%()'\"/ ]+>", 0, 0, NULL);
   g_regex_match (regex, msgid, 0, &match_info);
   while (g_match_info_matches (match_info))
     {
