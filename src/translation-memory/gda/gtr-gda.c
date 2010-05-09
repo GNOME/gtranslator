@@ -141,12 +141,16 @@ insert_row (GdaConnection *db,
   val = gda_set_get_holder_value (last_row, "+0");
   if (val)
     result = g_value_get_int (val);
-  else
-    g_propagate_error (error, inner_error);
 
   g_object_unref (last_row);
 
   return result;
+}
+
+static int
+string_comparator (const void *s1, const void *s2)
+{
+  return strcmp (*(const gchar **) s1, *(const gchar **) s2);
 }
 
 static gchar **
@@ -160,8 +164,7 @@ gtr_gda_split_string_in_words (const gchar *phrase)
   if (count <= 1)
     return words;
 
-  qsort (words, count, sizeof (gchar *),
-         (int(*)(const void *, const void *)) strcmp);
+  qsort (words, count, sizeof (gchar *), string_comparator);
 
   w = 1;
   r = 1;
@@ -224,15 +227,21 @@ gtr_gda_words_append (GtrGda *self,
 
   /* insert link */
   {
+    GdaSet *params;
+
+    params = gda_set_new_inline (2,
+                                 "word_id", G_TYPE_INT, word_id,
+                                 "orig_id", G_TYPE_INT, orig_id);
+
     inner_error = NULL;
-    insert_row (self->priv->db,
-                self->priv->stmt_insert_link,
-                gda_set_new_inline (2,
-                                    "word_id", G_TYPE_INT, word_id,
-                                    "orig_id", G_TYPE_INT, orig_id),
-                &inner_error);
-    if (inner_error)
+    if (-1 == gda_connection_statement_execute_non_select (self->priv->db,
+                                                           self->priv->stmt_insert_link,
+                                                           params,
+                                                           NULL,
+                                                           &inner_error))
       g_propagate_error (error, inner_error);
+
+    g_object_unref (params);
   }
 }
 
@@ -341,19 +350,32 @@ gtr_gda_store (GtrTranslationMemory * tm, GtrMsg * msg)
 {
   GtrGda *self = GTR_GDA (tm);
   gboolean result;
+  GError *error;
 
   g_return_val_if_fail (GTR_IS_GDA (self), FALSE);
 
+  error = NULL;
   if (!gda_connection_begin_transaction (self->priv->db,
                                          NULL,
                                          GDA_TRANSACTION_ISOLATION_READ_COMMITTED,
-                                         NULL))
-    return FALSE;
+                                         &error))
+    {
+      g_warning ("starting transaction failed: %s", error->message);
+      g_error_free (error);
+      return FALSE;
+    }
 
+  error = NULL;
   result = gtr_gda_store_impl (self,
                                gtr_msg_get_msgid (msg),
                                gtr_msg_get_msgstr (msg),
-                               NULL);
+                               &error);
+
+  if (error)
+    {
+      g_warning ("storing message failed: %s", error->message);
+      g_error_free (error);
+    }
 
   if (result)
     gda_connection_commit_transaction (self->priv->db, NULL, NULL);
@@ -369,14 +391,20 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
   GtrGda *self = GTR_GDA (tm);
   gboolean result = TRUE;
   GList *l;
+  GError *error;
 
   g_return_val_if_fail (GTR_IS_GDA (self), FALSE);
 
+  error = NULL;
   if (!gda_connection_begin_transaction (self->priv->db,
                                          NULL,
                                          GDA_TRANSACTION_ISOLATION_READ_COMMITTED,
-                                         NULL))
-    return FALSE;
+                                         &error))
+    {
+      g_warning ("starting transaction failed: %s", error->message);
+      g_error_free (error);
+      return FALSE;
+    }
 
   for (l = msgs; l; l = g_list_next (l))
     {
@@ -385,12 +413,17 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
       if (!gtr_msg_is_translated (msg))
         continue;
 
+      error = NULL;
       result = gtr_gda_store_impl (self,
                                    gtr_msg_get_msgid (msg),
                                    gtr_msg_get_msgstr (msg),
-                                   NULL);
+                                   &error);
       if (!result)
-        break;
+        {
+          g_warning ("storing message failed: %s", error->message);
+          g_error_free (error);
+          break;
+        }
     }
 
   if (result)
@@ -409,6 +442,7 @@ gtr_gda_remove (GtrTranslationMemory *tm,
   GtrGda *self = GTR_GDA (tm);
   gchar *norm_translation;
   GdaSet *params;
+  GError *error;
 
   norm_translation = g_utf8_normalize (translation, -1,
                                        G_NORMALIZE_DEFAULT);
@@ -417,10 +451,17 @@ gtr_gda_remove (GtrTranslationMemory *tm,
                                "original", G_TYPE_STRING, original,
                                "value", G_TYPE_STRING, norm_translation);
 
+  error = NULL;
   gda_connection_statement_execute_non_select (self->priv->db,
                                                self->priv->stmt_delete_trans,
                                                params,
-                                               NULL, NULL);
+                                               NULL,
+                                               &error);
+  if (error)
+    {
+      g_warning ("removing translation failed: %s", error->message);
+      g_error_free (error);
+    }
 
   g_object_unref (params);
   g_free (norm_translation);
