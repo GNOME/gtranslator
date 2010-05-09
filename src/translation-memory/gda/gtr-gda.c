@@ -61,6 +61,8 @@ struct _GtrGdaPrivate
   GdaStatement *stmt_insert_link;
   GdaStatement *stmt_insert_trans;
 
+  GdaStatement *stmt_delete_trans;
+
   guint max_omits;
   guint max_delta;
   gint max_items;
@@ -400,6 +402,31 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
 }
 
 static void
+gtr_gda_remove (GtrTranslationMemory *tm,
+                const gchar *original,
+                const gchar *translation)
+{
+  GtrGda *self = GTR_GDA (tm);
+  gchar *norm_translation;
+  GdaSet *params;
+
+  norm_translation = g_utf8_normalize (translation, -1,
+                                       G_NORMALIZE_DEFAULT);
+
+  params = gda_set_new_inline (2,
+                               "original", G_TYPE_STRING, original,
+                               "value", G_TYPE_STRING, norm_translation);
+
+  gda_connection_statement_execute_non_select (self->priv->db,
+                                               self->priv->stmt_delete_trans,
+                                               params,
+                                               NULL, NULL);
+
+  g_object_unref (params);
+  g_free (norm_translation);
+}
+
+static void
 free_match (GtrTranslationMemoryMatch *match, gpointer dummy)
 {
   g_free (match->match);
@@ -468,7 +495,7 @@ gtr_gda_get_lookup_statement (GtrGda *self, guint word_count, GError **error)
   gchar *query;
 
   stmt = GDA_STATEMENT (g_hash_table_lookup (self->priv->lookup_query_cache,
-					     GUINT_TO_POINTER (word_count)));
+                                             GUINT_TO_POINTER (word_count)));
 
   if (stmt)
     return stmt;
@@ -481,8 +508,8 @@ gtr_gda_get_lookup_statement (GtrGda *self, guint word_count, GError **error)
   g_free (query);
 
   g_hash_table_insert (self->priv->lookup_query_cache,
-		       GUINT_TO_POINTER (word_count),
-		       stmt);
+                       GUINT_TO_POINTER (word_count),
+                       stmt);
 
   return stmt;
 }
@@ -649,6 +676,7 @@ gtr_translation_memory_iface_init (GtrTranslationMemoryIface * iface)
 {
   iface->store = gtr_gda_store;
   iface->store_list = gtr_gda_store_list;
+  iface->remove = gtr_gda_remove;
   iface->lookup = gtr_gda_lookup;
   iface->set_max_omits = gtr_gda_set_max_omits;
   iface->set_max_delta = gtr_gda_set_max_delta;
@@ -794,14 +822,21 @@ gtr_gda_init (GtrGda * self)
                        "values "
                        "(##orig_id::int, ##value::string)");
 
+  self->priv->stmt_delete_trans =
+    prepare_statement (self->priv->parser,
+                       "delete from TRANS "
+                       "where ORIG_ID= "
+                       "(select ID from ORIG where VALUE=##original::string) "
+                       "and VALUE=##value::string");
+
   self->priv->max_omits = 0;
   self->priv->max_delta = 0;
   self->priv->max_items = 0;
 
   self->priv->lookup_query_cache = g_hash_table_new_full (g_direct_hash,
-							  g_direct_equal,
-							  NULL,
-							  g_object_unref);
+                                                          g_direct_equal,
+                                                          NULL,
+                                                          g_object_unref);
 }
 
 static void
@@ -855,6 +890,12 @@ gtr_gda_dispose (GObject * object)
     {
       g_object_unref (self->priv->stmt_insert_trans);
       self->priv->stmt_insert_trans = NULL;
+    }
+
+  if (self->priv->stmt_delete_trans != NULL)
+    {
+      g_object_unref (self->priv->stmt_delete_trans);
+      self->priv->stmt_delete_trans = NULL;
     }
 
   if (self->priv->parser != NULL)
