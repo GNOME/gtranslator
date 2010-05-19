@@ -1481,6 +1481,8 @@ create_statusbar (GtrWindow *window,
   gtk_widget_show (window->priv->statusbar);
 
   window->priv->profile_combo = gtr_status_combo_box_new (_("Profile"));
+  gtk_widget_set_tooltip_text (window->priv->profile_combo,
+                               _("Profile for the active document"));
   gtk_box_pack_start (GTK_BOX (window->priv->statusbar),
                       window->priv->profile_combo, FALSE, TRUE, 0);
 
