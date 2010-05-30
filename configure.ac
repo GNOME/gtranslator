@@ -4,7 +4,7 @@ dnl -------------------------------------------------------------------
 dnl (C) 2000-2004 Fatih Demir <kabalak@kabalak.net>
 dnl -------------------------------------------------------------------
 AC_PREREQ(2.64)
-AC_INIT([gtranslator],[1.9.11],[http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator],[gtranslator],[http://gtranslator.sourceforge.net/])
+AC_INIT([gtranslator],[1.9.11],[http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator],[gtranslator],[http://projects.gnome.org/gtranslator/])
 
 AC_CONFIG_SRCDIR([src/main.c])
 AC_CONFIG_HEADER([config.h])
@@ -348,7 +348,7 @@ echo "
 
 
 Thanks for your attention and braveness in compiling gtranslator!
--- The website for gtranslator is http://gtranslator.sourceforge.net
+-- The website for gtranslator is http://projects.gnome.org/gtranslator
 
 ------------------------------------------------------------------
 "
