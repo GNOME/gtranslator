@@ -24,7 +24,7 @@
 #include "gtr-plugin.h"
 #include "gtr-window.h"
 #include "gtr-statusbar.h"
-#include "gtr-utils.h"
+#include "gtr-dirs.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -639,7 +639,7 @@ gtr_dict_panel_init (GtrDictPanel * panel)
     panel->priv->loader = gdict_source_loader_new ();
 
   /* add our data dir inside $HOME to the loader's search paths */
-  data_dir = gtr_utils_get_user_config_dir ();
+  data_dir = gtr_dirs_get_user_config_dir ();
   gdict_source_loader_add_search_path (priv->loader, data_dir);
   g_free (data_dir);
 
