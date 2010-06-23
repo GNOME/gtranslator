@@ -39,13 +39,15 @@ typedef struct _GtrStatusComboBox		GtrStatusComboBox;
 typedef struct _GtrStatusComboBoxClass	GtrStatusComboBoxClass;
 typedef struct _GtrStatusComboBoxPrivate	GtrStatusComboBoxPrivate;
 
-struct _GtrStatusComboBox {
+struct _GtrStatusComboBox
+{
 	GtkEventBox parent;
 	
 	GtrStatusComboBoxPrivate *priv;
 };
 
-struct _GtrStatusComboBoxClass {
+struct _GtrStatusComboBoxClass
+{
 	GtkEventBoxClass parent_class;
 	
 	void (*changed) (GtrStatusComboBox *combo,
@@ -80,3 +82,5 @@ GtkLabel *gtr_status_combo_box_get_item_label		(GtrStatusComboBox	*combo);
 G_END_DECLS
 
 #endif /* __GTR_STATUS_COMBO_BOX_H__ */
+
+/* ex:ts=8:noet: */

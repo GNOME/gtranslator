@@ -22,6 +22,8 @@
 
 #include "gtr-status-combo-box.h"
 
+#include <gdk/gdkkeysyms.h>
+
 #define COMBO_BOX_TEXT_DATA "GtrStatusComboBoxTextData"
 
 #define GTR_STATUS_COMBO_BOX_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GTR_TYPE_STATUS_COMBO_BOX, GtrStatusComboBoxPrivate))
@@ -155,7 +157,7 @@ gtr_status_combo_box_class_init (GtrStatusComboBoxClass *klass)
 		"}\n"
 		"widget \"*.gtr-status-combo-button\" style \"gtr-status-combo-button-style\"");
 
-	g_type_class_add_private (object_class, sizeof(GtrStatusComboBoxPrivate));
+	g_type_class_add_private (object_class, sizeof (GtrStatusComboBoxPrivate));
 }
 
 static void
@@ -173,18 +175,20 @@ menu_position_func (GtkMenu		*menu,
 		    GtrStatusComboBox *combo)
 {
 	GtkRequisition request;
+	GtkAllocation allocation;
 	
 	*push_in = FALSE;
 	
 	gtk_widget_size_request (gtk_widget_get_toplevel (GTK_WIDGET (menu)), &request);
 	
 	/* get the origin... */
-	gdk_window_get_origin (GTK_WIDGET (combo)->window, x, y);
+	gdk_window_get_origin (gtk_widget_get_window (GTK_WIDGET (combo)), x, y);
 	
 	/* make the menu as wide as the widget */
-	if (request.width < GTK_WIDGET (combo)->allocation.width)
+	gtk_widget_get_allocation (GTK_WIDGET (combo), &allocation);
+	if (request.width < allocation.width)
 	{
-		gtk_widget_set_size_request (GTK_WIDGET (menu), GTK_WIDGET (combo)->allocation.width, -1);
+		gtk_widget_set_size_request (GTK_WIDGET (menu), allocation.width, -1);
 	}
 	
 	/* position it above the widget */
@@ -192,17 +196,19 @@ menu_position_func (GtkMenu		*menu,
 }
 
 static void
-button_press_event (GtkWidget           *widget,
-		    GdkEventButton      *event,
-		    GtrStatusComboBox *combo)
+show_menu (GtrStatusComboBox *combo,
+	   guint                button,
+	   guint32              time)
 {
 	GtkRequisition request;
 	gint max_height;
+	GtkAllocation allocation;
 	
 	gtk_widget_size_request (combo->priv->menu, &request);
 
 	/* do something relative to our own height here, maybe we can do better */
-	max_height = GTK_WIDGET (combo)->allocation.height * 20;
+	gtk_widget_get_allocation (GTK_WIDGET (combo), &allocation);
+	max_height = allocation.height * 20;
 	
 	if (request.height > max_height)
 	{
@@ -210,13 +216,13 @@ button_press_event (GtkWidget           *widget,
 		gtk_widget_set_size_request (gtk_widget_get_toplevel (combo->priv->menu), -1, max_height);
 	}
 	
-	gtk_menu_popup (GTK_MENU (combo->priv->menu), 
-			NULL, 
-			NULL, 
-			(GtkMenuPositionFunc)menu_position_func, 
-			combo, 
-			event->button, 
-			event->time);
+	gtk_menu_popup (GTK_MENU (combo->priv->menu),
+			NULL,
+			NULL,
+			(GtkMenuPositionFunc)menu_position_func,
+			combo,
+			button,
+			time);
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (combo->priv->button), TRUE);
 
@@ -225,6 +231,36 @@ button_press_event (GtkWidget           *widget,
 		gtk_menu_shell_select_item (GTK_MENU_SHELL (combo->priv->menu), 
 					    combo->priv->current_item);
 	}
+}
+
+static gboolean
+button_press_event (GtkWidget           *widget,
+		    GdkEventButton      *event,
+		    GtrStatusComboBox *combo)
+{
+	if (event->type == GDK_BUTTON_PRESS && event->button == 1)
+	{
+		show_menu (combo, event->button,event->time);
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+static gboolean
+key_press_event (GtkWidget           *widget,
+		 GdkEventKey         *event,
+		 GtrStatusComboBox *combo)
+{
+	if (event->keyval == GDK_Return || event->keyval == GDK_ISO_Enter ||
+	    event->keyval == GDK_KP_Enter || event->keyval == GDK_space ||
+	    event->keyval == GDK_KP_Space)
+	{
+		show_menu (combo, 0, event->time);
+		return TRUE;
+	}
+
+	return FALSE;
 }
 
 static void
@@ -292,9 +328,13 @@ gtr_status_combo_box_init (GtrStatusComboBox *self)
 	self->priv->menu = gtk_menu_new ();
 	g_object_ref_sink (self->priv->menu);
 
-	g_signal_connect (self->priv->button, 
-			  "button-press-event", 
-			  G_CALLBACK (button_press_event), 
+	g_signal_connect (self->priv->button,
+			  "button-press-event",
+			  G_CALLBACK (button_press_event),
+			  self);
+	g_signal_connect (self->priv->button,
+			  "key-press-event",
+			  G_CALLBACK (key_press_event),
 			  self);
 	g_signal_connect (self->priv->menu,
 			  "deactivate",
@@ -303,12 +343,22 @@ gtr_status_combo_box_init (GtrStatusComboBox *self)
 }
 
 /* public functions */
+
+/**
+ * gtr_status_combo_box_new:
+ * @label: (allow-none):
+ */
 GtkWidget *
 gtr_status_combo_box_new (const gchar *label)
 {
 	return g_object_new (GTR_TYPE_STATUS_COMBO_BOX, "label", label, NULL);
 }
 
+/**
+ * gtr_status_combo_box_set_label:
+ * @combo:
+ * @label: (allow-none):
+ */
 void
 gtr_status_combo_box_set_label (GtrStatusComboBox *combo, 
 				  const gchar         *label)
@@ -337,6 +387,12 @@ item_activated (GtkMenuItem         *item,
 	gtr_status_combo_box_set_item (combo, item);
 }
 
+/**
+ * gtr_status_combo_box_add_item:
+ * @combo:
+ * @item:
+ * @text: (allow-none):
+ */
 void
 gtr_status_combo_box_add_item (GtrStatusComboBox *combo,
 				 GtkMenuItem         *item,
@@ -362,6 +418,12 @@ gtr_status_combo_box_remove_item (GtrStatusComboBox *combo,
 			      GTK_WIDGET (item));
 }
 
+/**
+ * gtr_status_combo_box_get_items:
+ * @combo:
+ *
+ * Returns: (element-type Gtk.Widget) (transfer container):
+ */
 GList *
 gtr_status_combo_box_get_items (GtrStatusComboBox *combo)
 {
@@ -384,6 +446,12 @@ gtr_status_combo_box_get_item_text (GtrStatusComboBox *combo,
 	return ret;
 }
 
+/**
+ * gtr_status_combo_box_set_item_text:
+ * @combo:
+ * @item:
+ * @text: (allow-none):
+ */
 void 
 gtr_status_combo_box_set_item_text (GtrStatusComboBox *combo,
 				      GtkMenuItem	  *item,
@@ -416,3 +484,4 @@ gtr_status_combo_box_get_item_label (GtrStatusComboBox *combo)
 	return GTK_LABEL (combo->priv->item);
 }
 
+/* ex:ts=8:noet: */
