@@ -8,16 +8,18 @@
 # nikos: 242 messages, review and update fuzzy entries 13Sep2003.
 # Haris: review and update translation 18May2005.
 # Thanos Lefteris <alefteris@gmail.com>, 2009.
+# Fotis Tsamis <ftsamis@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-11 12:33+0100\n"
-"PO-Revision-Date: 2009-05-11 06:28+0300\n"
-"Last-Translator: Μάριος Ζηντίλης <m.zindilis@dmajor.org>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gtranslator&component=general\n"
+"POT-Creation-Date: 2010-05-19 19:21+0000\n"
+"PO-Revision-Date: 2010-07-02 21:14+0300\n"
+"Last-Translator: Fotis Tsamis <ftsamis@gmail.com>\n"
 "Language-Team: Greek <team@gnome.gr>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -27,7 +29,7 @@ msgstr "Επεξεργαστής αρχείων PO (Gtranslator)"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:2
 msgid "Translate and localize applications and libraries"
-msgstr "Μεταφράστε και τοπικοποιείστε εφαρμογές και βιβλιοθήκες"
+msgstr "Μεταφράστε και τοπικοποιήστε εφαρμογές και βιβλιοθήκες"
 
 #: ../data/gtranslator.schemas.in.h:1
 msgid "Autosave files"
@@ -43,7 +45,7 @@ msgstr "Έλεγχος ορθογραφίας"
 
 #: ../data/gtranslator.schemas.in.h:4
 msgid "Color scheme"
-msgstr "Παραλλαγές χρώματος"
+msgstr "Θέμα χρωμάτων"
 
 #: ../data/gtranslator.schemas.in.h:5
 msgid "Create backup before saving"
@@ -59,17 +61,15 @@ msgstr "Διαγραφή μεταγλωττισμένων αρχείων GMO"
 
 #: ../data/gtranslator.schemas.in.h:8
 msgid "Directory containing PO files to add to the translation memory."
-msgstr ""
-"Κατάλογος που περιέχει αρχεία PO για να προστεθούν στη μεταφραστική μνήμη."
+msgstr "Κατάλογος που περιέχει αρχεία PO για προσθήκη στη μεταφραστική μνήμη."
 
-#
 #: ../data/gtranslator.schemas.in.h:9
 msgid "Editor font"
 msgstr "Γραμματοσειρά επεξεργαστή"
 
 #: ../data/gtranslator.schemas.in.h:10
 msgid "Filename to restrict search to"
-msgstr "Όνομα αρχείου για τον περιορισμό της αναζήτησης προς αυτό"
+msgstr "Όνομα αρχείου για τον περιορισμό της αναζήτησης σε αυτό"
 
 #: ../data/gtranslator.schemas.in.h:11
 msgid ""
@@ -255,716 +255,365 @@ msgstr "Ετικέτα"
 msgid "gtranslator highlight"
 msgstr "επισήμανση gtranslator"
 
-#: ../plugins/alternate-language/alternate-language-panel.c:117
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:128
 msgid "Message not found"
 msgstr "Το μήνυμα δεν βρέθηκε"
 
-#: ../plugins/alternate-language/alternate-language-panel.c:221
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:231
 msgid "Open file for alternate language"
 msgstr "Άνοιγμα αρχείου για εναλλακτική γλώσσα"
 
-#: ../plugins/alternate-language/alternate-language-panel.c:246
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:256
 msgid "File closed"
 msgstr "Το αρχείο έκλεισε"
 
-#: ../plugins/alternate-language/alternate-language-panel.c:319
+#
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:316
+#| msgid "Open"
+msgctxt "alternate lang"
+msgid "_Open"
+msgstr "Ά_νοιγμα"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:322
+msgctxt "alternate lang"
+msgid "_Close"
+msgstr "_Κλείσιμο"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:328
+msgctxt "alternate lang"
+msgid "Co_py"
+msgstr "Αν_τιγραφή"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:357
 msgid "There isn't any file loaded"
 msgstr "Δεν υπάρχει φορτωμένο αρχείο"
 
-#: ../plugins/alternate-language/alternate-language-plugin.c:59
+#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:58
 msgid "_Alternate Language"
 msgstr "_Εναλλακτική γλώσσα"
 
-#: ../plugins/alternate-language/alternate-language-plugin.c:60
+#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:59
 msgid "Show the Alternate Language panel"
 msgstr "Εμφάνιση της στήλης Εναλλακτικής γλώσσας"
 
-#: ../plugins/alternate-language/alternate-language-plugin.c:123
-#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:118
+#: ../plugins/alternate-language/gtr-alternate-language.gtranslator-plugin.desktop.in.h:1
 msgid "Alternate Language"
 msgstr "Εναλλακτική γλώσσα"
 
-#: ../plugins/alternate-language/alternate-language.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/alternate-language/gtr-alternate-language.gtranslator-plugin.desktop.in.h:2
 msgid "Load an alternate language."
 msgstr "Φόρτωση εναλλακτικής γλώσσας."
 
-#: ../plugins/charmap/charmap-plugin.c:299
-#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/charmap/gtr-charmap-plugin.c:280
+#: ../plugins/charmap/gtr-charmap.gtranslator-plugin.desktop.in.h:1
 msgid "Character Map"
 msgstr "Πίνακας χαρακτήρων"
 
-#: ../plugins/charmap/charmap.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/charmap/gtr-charmap.gtranslator-plugin.desktop.in.h:2
 msgid "Insert special characters just by clicking on them."
 msgstr "Εισαγωγή ειδικών χαρακτήρων κάνοντας απλά κλικ πάνω τους."
 
-#: ../plugins/dictionary/dict-panel.c:186
+#: ../plugins/dictionary/gtr-dict-panel.c:179
 #, c-format
 msgid "No dictionary source available with name '%s'"
 msgstr "Δεν βρέθηκε διαθέσιμη πηγή λεξικού με το όνομα '%s'"
 
-#: ../plugins/dictionary/dict-panel.c:189
+#: ../plugins/dictionary/gtr-dict-panel.c:183
 msgid "Unable to find dictionary source"
 msgstr "Αδυναμία εύρεσης πηγής λεξικού"
 
-#: ../plugins/dictionary/dict-panel.c:204
+#: ../plugins/dictionary/gtr-dict-panel.c:198
 #, c-format
 msgid "No context available for source '%s'"
 msgstr "Δεν υπάρχει διαθέσιμος συσχετισμός για την πηγή '%s'"
 
-#: ../plugins/dictionary/dict-panel.c:207
+#: ../plugins/dictionary/gtr-dict-panel.c:202
 msgid "Unable to create a context"
 msgstr "Αδύνατη η δημιουργία συσχετισμού"
 
-#: ../plugins/dictionary/dict-panel.c:290
+#: ../plugins/dictionary/gtr-dict-panel.c:287
 #, c-format
 msgid "Dictionary source '%s' selected"
 msgstr "Επιλέχθηκε η πηγή λεξικού '%s'"
 
-#: ../plugins/dictionary/dict-panel.c:310
+#: ../plugins/dictionary/gtr-dict-panel.c:306
 #, c-format
 msgid "Strategy '%s' selected"
 msgstr "Επιλέχθηκε η στρατηγική '%s'"
 
-#: ../plugins/dictionary/dict-panel.c:329
+#: ../plugins/dictionary/gtr-dict-panel.c:324
 #, c-format
 msgid "Database '%s' selected"
 msgstr "Επιλέχθηκε η βάση δεδομένων '%s'"
 
-#: ../plugins/dictionary/dict-panel.c:375
+#: ../plugins/dictionary/gtr-dict-panel.c:368
 #, c-format
 msgid "Word '%s' selected"
 msgstr "Επιλέχθηκε η λέξη '%s'"
 
 #. speller
-#: ../plugins/dictionary/dict-panel.c:398
+#: ../plugins/dictionary/gtr-dict-panel.c:390
 msgid "Double-click on the word to look up"
 msgstr "Κάντε διπλό κλικ πάνω στην λέξη για να την αναζητήσετε τον ορισμό της"
 
 #. strat-chooser
-#: ../plugins/dictionary/dict-panel.c:404
+#: ../plugins/dictionary/gtr-dict-panel.c:395
 msgid "Double-click on the matching strategy to use"
 msgstr "Κάντε διπλό κλικ πάνω στην ταιριαστή στρατηγική προς χρησιμοποίηση"
 
 #. source-chooser
-#: ../plugins/dictionary/dict-panel.c:409
+#: ../plugins/dictionary/gtr-dict-panel.c:401
 msgid "Double-click on the source to use"
 msgstr "Κάντε διπλό κλικ στην πηγή προς χρησιμοποίηση"
 
 #. db-chooser
-#: ../plugins/dictionary/dict-panel.c:418
+#: ../plugins/dictionary/gtr-dict-panel.c:411
 msgid "Double-click on the database to use"
 msgstr "Κάντε διπλό κλικ στην βάση δεδομένων προς χρησιμοποίηση"
 
 #.
 #. * Look up Button
 #.
-#: ../plugins/dictionary/dict-panel.c:481
+#: ../plugins/dictionary/gtr-dict-panel.c:473
 msgid "Look _up:"
 msgstr "_Αναζήτηση ορισμού:"
 
-#: ../plugins/dictionary/dict-panel.c:554
+#: ../plugins/dictionary/gtr-dict-panel.c:543
 msgid "Similar words"
 msgstr "Παρόμοιες λέξεις"
 
-#: ../plugins/dictionary/dict-panel.c:570
+#: ../plugins/dictionary/gtr-dict-panel.c:558
 msgid "Available dictionaries"
 msgstr "Διαθέσιμα λεξικά"
 
-#: ../plugins/dictionary/dict-panel.c:586
+#: ../plugins/dictionary/gtr-dict-panel.c:574
 msgid "Available strategies"
 msgstr "Διαθέσιμες στρατηγικές"
 
-#: ../plugins/dictionary/dict-panel.c:597
+#: ../plugins/dictionary/gtr-dict-panel.c:584
 msgid "Dictionary sources"
 msgstr "Πηγές λεξικού"
 
-#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:1
-#: ../plugins/dictionary/dictionary-plugin.c:94
+#: ../plugins/dictionary/gtr-dict.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/dictionary/gtr-dictionary-plugin.c:92
 msgid "Dictionary"
 msgstr "Λεξικό"
 
-#: ../plugins/dictionary/dict.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/dictionary/gtr-dict.gtranslator-plugin.desktop.in.h:2
 msgid "Look up words in a dictionary."
 msgstr "Αναζήτηση ορισμού λέξεων στο λεξικό."
 
-#: ../plugins/fullscreen/fullscreen-plugin.c:46
+#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:44
 msgid "_Fullscreen"
 msgstr "_Πλήρης οθόνη"
 
-#: ../plugins/fullscreen/fullscreen-plugin.c:47
+#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:45
 msgid "Place window on fullscreen state"
 msgstr "Τοποθεσία παραθύρου σε κατάσταση πλήρης οθόνης"
 
-#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/fullscreen/gtr-fullscreen.gtranslator-plugin.desktop.in.h:1
 msgid "Fullscreen"
 msgstr "Πλήρης οθόνη"
 
-#: ../plugins/fullscreen/fullscreen.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/fullscreen/gtr-fullscreen.gtranslator-plugin.desktop.in.h:2
 msgid "Place window in the fullscreen state."
 msgstr "Τοποθεσία παραθύρου σε κατάσταση πλήρους οθόνης"
 
-#: ../plugins/insert-params/insert-params-plugin.c:79
+#: ../plugins/insert-params/gtr-insert-params-plugin.c:74
 msgid "_Next Param"
 msgstr "_Επόμενη παράμετρος"
 
-#: ../plugins/insert-params/insert-params-plugin.c:80
+#: ../plugins/insert-params/gtr-insert-params-plugin.c:75
 msgid "Insert the next param of the message"
 msgstr "Εισαγωγή της επόμενης παραμέτρου του μηνύματος"
 
-#: ../plugins/insert-params/insert-params-plugin.c:82
+#: ../plugins/insert-params/gtr-insert-params-plugin.c:77
 msgid "_Insert Params"
 msgstr "_Εισαγωγή παραμέτρων"
 
-#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/insert-params/gtr-insert-params.gtranslator-plugin.desktop.in.h:1
 msgid "Insert Params"
 msgstr "Εισαγωγή παραμέτρων"
 
-#: ../plugins/insert-params/insert-params.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/insert-params/gtr-insert-params.gtranslator-plugin.desktop.in.h:2
 msgid "Parameters detection and easy insertion."
 msgstr "Εντοπισμός παραμέτρων και εύκολη εισαγωγή τους."
 
-#: ../plugins/insert-tags/insert-tags-plugin.c:70
+#: ../plugins/insert-tags/gtr-insert-tags-plugin.c:67
 msgid "_Next Tag"
 msgstr "_Επόμενη ετικέτα"
 
-#: ../plugins/insert-tags/insert-tags-plugin.c:71
+#: ../plugins/insert-tags/gtr-insert-tags-plugin.c:68
 msgid "Insert the next tag of the message"
 msgstr "Εισαγωγή της επόμενης ετικέτας του μηνύματος"
 
-#: ../plugins/insert-tags/insert-tags-plugin.c:73
+#: ../plugins/insert-tags/gtr-insert-tags-plugin.c:70
 msgid "_Insert Tags"
 msgstr "_Εισαγωγή ετικετών"
 
-#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/insert-tags/gtr-insert-tags.gtranslator-plugin.desktop.in.h:1
 msgid "Insert Tags"
 msgstr "Εισαγωγή ετικετών"
 
-#: ../plugins/insert-tags/insert-tags.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/insert-tags/gtr-insert-tags.gtranslator-plugin.desktop.in.h:2
 msgid "Tags detection and easy insertion."
 msgstr "Εντοπισμός ετικετών και εύκολη εισαγωγή τους."
 
-#: ../plugins/open-tran/open-tran-dialog.ui.h:1
-#: ../plugins/source-code-view/source-code-view-dialog.ui.h:1
-#: ../plugins/subversion/subversion.ui.h:2
-#: ../src/dialogs/preferences-dialog.ui.h:1
-msgid "    "
-msgstr "    "
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
+#| msgid "<b>Code language of the results:</b>"
+msgid "Code language of the results:"
+msgstr "Κωδικός γλώσσας για τα αποτελέσματα:"
 
-#: ../plugins/open-tran/open-tran-dialog.ui.h:2
-#: ../plugins/source-code-view/source-code-view-dialog.ui.h:2
-msgid "     "
-msgstr "     "
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
+#| msgid "<b>Code language to query open-tran:</b>"
+msgid "Code language to query open-tran:"
+msgstr "Κωδικός γλώσσας που θα ερωτηθεί το open-tran:"
 
-#: ../plugins/open-tran/open-tran-dialog.ui.h:3
-msgid "<b>Code language of the results:</b>"
-msgstr "<b>Κωδικός γλώσσας για τα αποτελέσματα:</b>"
-
-#: ../plugins/open-tran/open-tran-dialog.ui.h:4
-msgid "<b>Code language to query open-tran:</b>"
-msgstr "<b>Κωδικός γλώσσας που θα ερωτηθεί το open-tran:</b>"
-
-#: ../plugins/open-tran/open-tran-dialog.ui.h:5
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
 msgid "Open Tran Settings"
 msgstr "Ρυθμίσεις Open Tran"
 
-#: ../plugins/open-tran/open-tran-panel.c:213
-#: ../plugins/open-tran/open-tran-panel.c:277
-msgid "ERROR: could not parse response\n"
-msgstr "ΣΦΑΛΜΑ: δεν είναι δυνατή η ανάλυση της απάντησης\n"
-
-#: ../plugins/open-tran/open-tran-panel.c:261
+#: ../plugins/open-tran/gtr-open-tran-panel.c:248
 #, c-format
 msgid "ERROR: %d %s\n"
 msgstr "ΣΦΑΛΜΑ: %d %s\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:272
+#: ../plugins/open-tran/gtr-open-tran-panel.c:261
 #, c-format
 msgid "FAULT: %d %s\n"
 msgstr "ΣΦΑΛΜΑ: %d %s\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:288
+#: ../plugins/open-tran/gtr-open-tran-panel.c:266
+#: ../plugins/open-tran/gtr-open-tran-panel.c:276
+msgid "ERROR: could not parse response\n"
+msgstr "ΣΦΑΛΜΑ: δεν είναι δυνατή η ανάλυση της απάντησης\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:285
 #, c-format
 msgid "WRONG! Can't get result element %d\n"
 msgstr "ΣΦΑΛΜΑ! Δεν είναι δυνατή η λήψη του αποτελέσματος %d\n"
 
-#: ../plugins/open-tran/open-tran-panel.c:304 ../src/actions-search.c:200
+#: ../plugins/open-tran/gtr-open-tran-panel.c:300
+#: ../src/gtr-actions-search.c:191
 msgid "Phrase not found"
 msgstr "Δε βρέθηκε η φράση"
 
-#: ../plugins/open-tran/open-tran-panel.c:326
+#: ../plugins/open-tran/gtr-open-tran-panel.c:319
 msgid "You have to provide a phrase to search"
 msgstr "Θα πρέπει να δώσετε μια φράση προς αναζήτηση"
 
-#: ../plugins/open-tran/open-tran-panel.c:336
+#: ../plugins/open-tran/gtr-open-tran-panel.c:328
 msgid "You have to provide a search language code"
 msgstr "Θα πρέπει να δώσετε ένα κωδικό γλώσσας για αναζήτηση"
 
-#: ../plugins/open-tran/open-tran-panel.c:346
+#: ../plugins/open-tran/gtr-open-tran-panel.c:338
 msgid "You have to provide a language code for your language"
 msgstr "Θα πρέπει να δώσετε τον κωδικό της γλώσσας σας"
 
-#: ../plugins/open-tran/open-tran-panel.c:375
+#: ../plugins/open-tran/gtr-open-tran-panel.c:366
 msgid "Type"
 msgstr "Τύπος"
 
-#: ../plugins/open-tran/open-tran-panel.c:386
+#: ../plugins/open-tran/gtr-open-tran-panel.c:377
 msgid "Open-Tran.eu"
 msgstr "Open-Tran.eu"
 
-#: ../plugins/open-tran/open-tran-panel.c:425
+#: ../plugins/open-tran/gtr-open-tran-panel.c:414
 msgid "Look for:"
 msgstr "Αναζήτηση για:"
 
-#: ../plugins/open-tran/open-tran-plugin.c:107
-#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/open-tran/gtr-open-tran-plugin.c:104
+#: ../plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in.h:2
 msgid "Open Tran"
 msgstr "Open Tran"
 
-#: ../plugins/open-tran/open-tran.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in.h:1
 msgid "Look for phrases in Open tran memory translation database."
 msgstr ""
-"Αναζητήστε φράσεις στη βάση δεδομένων της μεταφραστικής μνήμης του Open tran."
+"Αναζήτηση φράσεων στη βάση δεδομένων της μεταφραστικής μνήμης του Open tran."
 
-#: ../plugins/source-code-view/source-code-view-dialog.ui.h:3
-msgid "<b>Line command:</b>"
-msgstr "<b>Γραμμή εντολής:</b>"
+#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:1
+#| msgid "<b>Line command:</b>"
+msgid "Line command:"
+msgstr "Εντολή γραμμής:"
 
-#: ../plugins/source-code-view/source-code-view-dialog.ui.h:4
-msgid "<b>Program command:</b>"
-msgstr "<b>Εντολή προγράμματος:</b>"
+#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:2
+#| msgid "<b>Program command:</b>"
+msgid "Program command:"
+msgstr "Εντολή προγράμματος:"
 
-#: ../plugins/source-code-view/source-code-view-dialog.ui.h:5
+#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:3
 msgid "Source View Settings"
 msgstr "Ρυθμίσεις προβολής πηγαίου κώδικα"
 
-#: ../plugins/source-code-view/source-code-view-dialog.ui.h:6
+#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:4
 msgid "Use external editor"
 msgstr "Χρήση εξωτερικού επεξεργαστή κειμένου"
 
-#: ../plugins/source-code-view/source-code-view-plugin.c:115
+#: ../plugins/source-code-view/gtr-source-code-view-plugin.c:111
 #, c-format
-msgid "Please install %s to be able to show the file"
-msgstr "Παρακαλώ εγκαταστήστε το %s για να είναι δυνατή η εμφάνιση του αρχείου"
+#| msgid "Please install %s to be able to show the file"
+msgid "Please install \"%s\" to be able to show the file"
+msgstr ""
+"Παρακαλούμε εγκαταστήστε το \"%s\" για να είναι δυνατή η εμφάνιση του αρχείου"
 
-#: ../plugins/source-code-view/source-code-view-plugin.c:466
-msgid "Paths:\n"
-msgstr "Διαδρομές:\n"
+#: ../plugins/source-code-view/gtr-source-code-view-plugin.c:449
+#| msgid "Paths:\n"
+msgid "Paths:"
+msgstr "Διαδρομές:"
 
-#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/source-code-view/gtr-source-code-view.gtranslator-plugin.desktop.in.h:1
 msgid "Show the message in the source code."
 msgstr "Εμφάνιση του μηνύματος στον πηγαίο κώδικα."
 
-#: ../plugins/source-code-view/source-code-view.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/source-code-view/gtr-source-code-view.gtranslator-plugin.desktop.in.h:2
 msgid "Source Code View"
 msgstr "Προβολή πηγαίου κώδικα"
 
-#: ../plugins/source-code-view/viewer.c:79
+#: ../plugins/source-code-view/gtr-viewer.c:76
 msgid "Source Viewer"
 msgstr "Προβολή πηγαίου κώδικα"
 
-#: ../plugins/source-code-view/viewer.ui.h:1
-msgid "<b>Source code</b>"
-msgstr "<b>Πηγαίος κώδικας</b>"
-
-#: ../plugins/subversion/checkout-dialog.c:76
-msgid "Subversion: Checkout complete."
-msgstr "Subversion: Το checkout ολοκληρώθηκε"
-
-#: ../plugins/subversion/checkout-dialog.c:125
-msgid "Please add a directory path to make the checkout"
-msgstr "Παρακαλώ εισάγετε την διαδρομή του καταλόγου που θα γίνει το checkout"
-
-#: ../plugins/subversion/checkout-dialog.c:138
-msgid "Please add a Subversion URL"
-msgstr "Παρακαλώ εισάγετε ένα Subversion URL"
-
-#: ../plugins/subversion/checkout-dialog.c:172 ../src/dialogs/assistant.c:666
-msgid "Checkout directory"
-msgstr "Κατάλογος checkout"
-
-#: ../plugins/subversion/checkout-dialog.c:264
-msgid "Checkout repository"
-msgstr "Αποθετήριο checkout"
-
-#: ../plugins/subversion/commit-dialog.c:226
-msgid "Subversion: Commit complete."
-msgstr "Subversion: Η υποβολή ολοκληρώθηκε."
-
-#.
-#. * Translators: Please change LANGUAGE for your language name in English.
-#. * This string is used to fill the ChangeLog entry
-#. * For example: "Updated Galician translation"
-#. * where LANGUAGE = Galician.
-#.
-#: ../plugins/subversion/commit-dialog.c:269
-msgctxt "ChangeLog entry"
-msgid "LANGUAGE"
-msgstr "Greek"
-
-#: ../plugins/subversion/commit-dialog.c:295
-#, c-format
-msgid "The ChangeLog file '%s' does not exist"
-msgstr "Το αρχείο ChangeLog '%s' δεν υπάρχει"
-
-#: ../plugins/subversion/commit-dialog.c:407
-msgid "Are you sure that you want to pass an empty log message?"
-msgstr "Είστε βέβαιος ότι θέλετε να περάσετε ένα κενό μήνυμα καταγραφής;"
-
-#: ../plugins/subversion/commit-dialog.c:424
-msgid "You have to select at least one file to send"
-msgstr "Θα πρέπει να επιλέξετε ένα τουλάχιστον αρχείο για αποστολή"
-
-#: ../plugins/subversion/commit-dialog.c:574
-msgid "Commit Changes"
-msgstr "Υποβολή αλλαγών"
-
-#: ../plugins/subversion/diff-dialog.c:79
-msgid "Subversion: Diff complete."
-msgstr "Subversion: Το diff ολοκληρώθηκε"
-
-#: ../plugins/subversion/diff-dialog.c:108
-#, c-format
-msgid "Please install %s to be able to diff the file"
-msgstr "Παρακαλώ εγκαταστήστε το %s για να μπορέσετε να κάνετε diff το αρχείο"
-
-#: ../plugins/subversion/diff-dialog.c:411
-msgid "Diff file"
-msgstr "Diff αρχείου"
-
-#: ../plugins/subversion/diff-dialog.c:483
-msgid "Diff"
-msgstr "Diff"
-
-#: ../plugins/subversion/subversion-plugin.c:84
-msgid "Subversion: File will be added on next commit."
-msgstr "Subversion: Το αρχείο θα προστεθεί στην επόμενη υποβολή."
-
-#: ../plugins/subversion/subversion-plugin.c:138
-msgid "_Update"
-msgstr "_Ενημέρωση"
-
-#: ../plugins/subversion/subversion-plugin.c:139
-msgid "Sync your local copy with the Subversion tree"
-msgstr "Συγχρονισμός του τοπικού αντίγραφου με το δέντρο στο Subversion"
-
-#
-#: ../plugins/subversion/subversion-plugin.c:142
-msgid "_Commit"
-msgstr "_Υποβολή"
-
-#: ../plugins/subversion/subversion-plugin.c:143
-msgid "Commit your changes to the Subversion tree"
-msgstr "Υποβολή των αλλαγών σας στο δέντρο του Subversion"
-
-#: ../plugins/subversion/subversion-plugin.c:146
-msgid "_Add"
-msgstr "_Προσθήκη"
-
-#: ../plugins/subversion/subversion-plugin.c:147
-msgid "Add a new file/directory to the Subversion tree"
-msgstr "Προσθήκη νέου αρχείου/καταλόγου στο δέντρο του Subversion"
-
-#: ../plugins/subversion/subversion-plugin.c:150
-msgid "_Diff"
-msgstr "_Diff"
-
-#: ../plugins/subversion/subversion-plugin.c:151
-msgid "Diff local PO file with repository PO file"
-msgstr "Εκτέλεση diff στο τοπικό αρχείο PO με το PO στο αποθετήριο"
-
-#: ../plugins/subversion/subversion-plugin.c:154
-msgid "C_heckout"
-msgstr "C_heckout"
-
-#: ../plugins/subversion/subversion-plugin.c:155
-msgid "Get a new repository copy"
-msgstr "Λήψη νέου αντίγραφου αποθετηρίου"
-
-#: ../plugins/subversion/subversion-plugin.c:158
-msgid "S_ubversion"
-msgstr "S_ubversion"
-
-#: ../plugins/subversion/subversion.ui.h:1
-msgid "  "
-msgstr "  "
-
-#: ../plugins/subversion/subversion.ui.h:3
-msgid "        "
-msgstr "        "
-
-#: ../plugins/subversion/subversion.ui.h:4
-msgid "<b>Diff options:</b>"
-msgstr "<b>Επιλογές diff:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:5
-msgid "<b>Diff program:</b>"
-msgstr "<b>Πρόγραμμα diff:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:6
-msgid "<b>Directory to checkout:</b>"
-msgstr "<b>Κατάλογος για checkout:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:7
-msgid "<b>Directory to update:</b>"
-msgstr "<b>Κατάλογος προς ανανέωση:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:8
-msgid "<b>Information:</b>"
-msgstr "<b>Πληροφορίες:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:9
-msgid "<b>Log Message:</b>"
-msgstr "<b>Μήνυμα αρχείου καταγραφής:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:10
-msgid "<b>Password:</b>"
-msgstr "<b>Συνθηματικό:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:11
-msgid "<b>Realm:</b>"
-msgstr "<b>Realm:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:12
-msgid "<b>Select files to Commit:</b>"
-msgstr "<b>Επιλογή αρχείων για Υποβολή:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:13
-msgid "<b>Subversion URL:</b>"
-msgstr "<b>Subversion URL:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:14
-msgid "<b>Username:</b>"
-msgstr "<b>Όνομα χρήστη:</b>"
-
-#: ../plugins/subversion/subversion.ui.h:15
-msgid "Add Log Message to ChangeLog file"
-msgstr "Προσθήκη Μηνύματος αρχείου καταγραφής στο αρχείο Changelog"
-
-#: ../plugins/subversion/subversion.ui.h:16
-msgid "Line argument:"
-msgstr "Γραμμή ορίσματος:"
-
-#: ../plugins/subversion/subversion.ui.h:17
-msgid "Program name:"
-msgstr "Όνομα προγράμματος:"
-
-#: ../plugins/subversion/subversion.ui.h:18
-msgid "Remember Password"
-msgstr "Απομνημόνευση συνθηματικού"
-
-#: ../plugins/subversion/subversion.ui.h:19
-msgid "Remember this decision"
-msgstr "Απομνημόνευση αυτής της απόφασης"
-
-#: ../plugins/subversion/subversion.ui.h:20
-msgid "Repository authorization"
-msgstr "Πιστοποίηση αποθετηρίου"
-
-#: ../plugins/subversion/subversion.ui.h:21
-msgid "Retrieving status..."
-msgstr "Λήψη κατάστασης..."
-
-#: ../plugins/subversion/subversion.ui.h:22
-msgid "Save the diff file"
-msgstr "Αποθήκευση αρχείου diff"
-
-#: ../plugins/subversion/subversion.ui.h:23
-msgid "Send Changes"
-msgstr "Αποστολή αλλαγών"
-
-#: ../plugins/subversion/subversion.ui.h:24
-#: ../plugins/subversion/update-dialog.c:234
-msgid "Update repository"
-msgstr "Ενημέρωση αποθετηρίου"
-
-#: ../plugins/subversion/subversion.ui.h:25
-msgid "Use configured program to view the diff"
-msgstr "Χρήση του ρυθμισμένου προγράμματος για προβολή του diff"
-
-#: ../plugins/subversion/subversion.ui.h:26
-msgid "label"
-msgstr "ετικέτα"
-
-#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:1
-msgid "A Subversion client plugin based on libsvn."
-msgstr "Μια πρόσθετη λειτουργία πελάτη Subversion βασισμένο στη libsvn."
-
-#: ../plugins/subversion/subversion.gtranslator-plugin.desktop.in.h:2
-msgid "Subversion"
-msgstr "Subversion"
-
-#: ../plugins/subversion/svn-command.c:177
-#: ../plugins/subversion/svn-command.c:262
-msgid "Authentication canceled"
-msgstr "Η πιστοποίηση ακυρώθηκε"
-
-#: ../plugins/subversion/svn-command.c:235
-msgid "Hostname:"
-msgstr "Hostname:"
-
-#: ../plugins/subversion/svn-command.c:236
-msgid "Fingerprint:"
-msgstr "Fingerprint:"
-
-#: ../plugins/subversion/svn-command.c:237
-msgid "Valid from:"
-msgstr "Έγκυρο από:"
-
-#: ../plugins/subversion/svn-command.c:238
-msgid "Valid until:"
-msgstr "Έγκυρο μέχρι:"
-
-#: ../plugins/subversion/svn-command.c:239
-msgid "Issuer DN:"
-msgstr "Issuer DN:"
-
-#: ../plugins/subversion/svn-command.c:240
-msgid "DER certificate:"
-msgstr "Πιστοποιητικό DER:"
-
-#: ../plugins/subversion/svn-command.c:387
-#: ../plugins/subversion/svn-command.c:403
-#, c-format
-msgid "Deleted: %s"
-msgstr "Διαγράφηκε: %s"
-
-#: ../plugins/subversion/svn-command.c:390
-#: ../plugins/subversion/svn-command.c:409
-#, c-format
-msgid "Added: %s"
-msgstr "Προστέθηκε: %s"
-
-#: ../plugins/subversion/svn-command.c:393
-#, c-format
-msgid "Reverted: %s"
-msgstr "Επαναφέρθηκε: %s"
-
-#: ../plugins/subversion/svn-command.c:396
-#, c-format
-msgid "Revert failed: %s"
-msgstr "Η επαναφορά απέτυχε: %s"
-
-#: ../plugins/subversion/svn-command.c:400
-#, c-format
-msgid "Resolved: %s"
-msgstr "Επιλύθηκε: %s"
-
-#
-#: ../plugins/subversion/svn-command.c:406
-#, c-format
-msgid "Updated: %s"
-msgstr "Ενημερώθηκε: %s"
-
-#: ../plugins/subversion/svn-command.c:412
-#, c-format
-msgid "Externally Updated: %s"
-msgstr "Ενημερώθηκε εξωτερικά: %s"
-
-#: ../plugins/subversion/svn-command.c:416
-#, c-format
-msgid "Commit Modified: %s"
-msgstr "Η υποβολή τροποποιήθηκε: %s"
-
-#: ../plugins/subversion/svn-command.c:420
-#, c-format
-msgid "Commit Added: %s"
-msgstr "Η υποβολή προστέθηκε: %s"
-
-#: ../plugins/subversion/svn-command.c:423
-#, c-format
-msgid "Commit Deleted: %s"
-msgstr "Η υποβολή διαγράφηκε: %s"
-
-#: ../plugins/subversion/svn-command.c:427
-#, c-format
-msgid "Commit Replaced: %s"
-msgstr "Η υποβολή αντικαταστάθηκε: %s"
-
-#: ../plugins/subversion/svn-command.c:431
-#, c-format
-msgid "Created File: %s"
-msgstr "Το αρχείο δημιουργήθηκε: %s"
-
-#: ../plugins/subversion/svn-command.c:446
-#, c-format
-msgid "Modified: %s"
-msgstr "Τροποποιήθηκε: %s"
-
-#: ../plugins/subversion/svn-command.c:449
-#, c-format
-msgid "Merged: %s"
-msgstr "Συγχωνεύθηκε: %s"
-
-#: ../plugins/subversion/svn-command.c:452
-#, c-format
-msgid "Conflicted: %s"
-msgstr "Συγκρούστηκε: %s"
-
-#: ../plugins/subversion/svn-command.c:456
-#, c-format
-msgid "Missing: %s"
-msgstr "Απουσιάζει: %s"
-
-#: ../plugins/subversion/svn-command.c:459
-#, c-format
-msgid "Obstructed: %s"
-msgstr "Εμποδίστηκε: %s"
-
-#: ../plugins/subversion/svn-update-command.c:103
-#, c-format
-msgid "Updated to revision %ld."
-msgstr "Ενημερώθηκε στην αναθεώρηση %ld."
-
-#: ../plugins/subversion/update-dialog.c:74
-msgid "Subversion: Update complete."
-msgstr "Subversion: Ολοκληρώθηκε η ενημέρωση."
-
-#: ../plugins/subversion/vcs-status-tree-view.c:293
-msgid "Modified"
-msgstr "Τροποποιήθηκε"
-
-#: ../plugins/subversion/vcs-status-tree-view.c:297
-msgid "Added"
-msgstr "Προστέθηκε"
-
-#: ../plugins/subversion/vcs-status-tree-view.c:301
-msgid "Deleted"
-msgstr "Διαγράφηκε"
-
-#: ../plugins/subversion/vcs-status-tree-view.c:305
-msgid "Conflicted"
-msgstr "Συγκρούστηκε"
-
-#: ../plugins/subversion/vcs-status-tree-view.c:309
-msgid "Missing"
-msgstr "Απουσιάζει"
-
-#: ../src/actions-file.c:202
+#: ../plugins/source-code-view/gtr-viewer.ui.h:1
+#| msgid "<b>Source code</b>"
+msgid "Source code"
+msgstr "Πηγαίος κώδικας"
+
+#: ../src/gtr-actions-file.c:203
 msgid "Open file for translation"
 msgstr "Άνοιγμα αρχείου για μετάφραση"
 
-#: ../src/actions-file.c:276 ../src/actions-file.c:403
+#: ../src/gtr-actions-file.c:275 ../src/gtr-actions-file.c:393
 msgid "File saved."
 msgstr "Το αρχείο αποθηκεύτηκε."
 
-#: ../src/actions-file.c:326
+#: ../src/gtr-actions-file.c:324
 msgid "Save file as..."
 msgstr "Αποθήκευση αρχείου ως..."
 
-#: ../src/actions-file.c:747
-#, c-format
-msgid "Failed to write profile data into profiles file '%s'"
-msgstr "Απέτυχε η εγγραφή των δεδομένων προφίλ στο αρχείο προφίλ '%s'"
+#: ../src/gtr-actions-file.c:790
+#| msgid "File saved."
+msgid "Files saved."
+msgstr "Τα αρχεία αποθηκεύτηκαν."
 
-#: ../src/actions-help.c:55
+#: ../src/gtr-actions-help.c:50
+msgid "Current Maintainers"
+msgstr ""
+
+#: ../src/gtr-actions-help.c:55
 msgid "Current Developers"
-msgstr "Τωρινοί προγραμματιστές"
+msgstr "Τρέχοντες προγραμματιστές"
 
-#: ../src/actions-help.c:61
+#: ../src/gtr-actions-help.c:61
 msgid "Previous Developers"
 msgstr "Παλιότεροι προγραμματιστές"
 
-#: ../src/actions-help.c:80
+#: ../src/gtr-actions-help.c:69
+msgid "Contributors"
+msgstr "Συντελεστές"
+
+#: ../src/gtr-actions-help.c:89
 msgid ""
 "This program is free software: you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -977,7 +626,7 @@ msgstr ""
 "Λογισμικού (Free Software Foundation) –είτε της έκδοσης 3 της Άδειας, είτε "
 "(κατ' επιλογήν) οποιασδήποτε μεταγενέστερης έκδοσης."
 
-#: ../src/actions-help.c:84
+#: ../src/gtr-actions-help.c:93
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -990,7 +639,7 @@ msgstr ""
 "λεπτομέρειες ανατρέξτε στη Γενική Άδεια Δημόσιας Χρήσης GNU (GNU General "
 "Public License)."
 
-#: ../src/actions-help.c:88
+#: ../src/gtr-actions-help.c:97
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program.  If not, see <http://www.gnu.org/licenses/>."
@@ -999,7 +648,7 @@ msgstr ""
 "GNU (GNU General Public License) μαζί με αυτό το πρόγραμμα. Εάν όχι, δείτε "
 "εδώ: <http://www.gnu.org/licenses/>."
 
-#: ../src/actions-help.c:100
+#: ../src/gtr-actions-help.c:119
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -1007,13 +656,13 @@ msgstr ""
 "Σειρά εργαλείων επεξεργασίας αρχείων μεταφράσεων για την τοπικοποίηση "
 "εφαρμογών και βιβλιοθηκών."
 
-#: ../src/actions-help.c:102
+#: ../src/gtr-actions-help.c:122
 msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
 msgstr ""
 "Copyright © 1999-2008 Ίδρυμα Ελεύθερου Λογισμικού (Free Software "
 "Foundation), Inc."
 
-#: ../src/actions-help.c:106
+#: ../src/gtr-actions-help.c:124
 msgid "About Gtranslator"
 msgstr "Περί Gtranslator"
 
@@ -1021,7 +670,7 @@ msgstr "Περί Gtranslator"
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/actions-help.c:111
+#: ../src/gtr-actions-help.c:129
 msgid "translator-credits"
 msgstr ""
 "Ελληνική μεταφραστική ομάδα GNOME\n"
@@ -1030,44 +679,63 @@ msgstr ""
 " Haris Kouzinipoulos <haris@mpa.gr>\n"
 " Thanos Lefteris <alefteris@gmail.com>\n"
 " Μάριος Ζηντίλης <m.zindilis@dmajor.org>\n"
+" Φώτης Τσάμης <ftsamis@gmail.com>\n"
 "\n"
 "Για περισσότερα δείτε http://www.gnome.gr/"
 
-#
-#: ../src/actions-help.c:115
+#: ../src/gtr-actions-help.c:133
 msgid "Gtranslator Web Site"
-msgstr "Ιστοσελίδα του gtranslator"
+msgstr "Ιστοσελίδα του Gtranslator"
 
-#: ../src/actions-search.c:175
+#: ../src/gtr-actions-search.c:170
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
 msgstr[0] "Βρέθηκε και αντικαταστάθηκε %d εμφάνιση"
 msgstr[1] "Βρέθηκαν και αντικαταστάθηκαν %d εμφανίσεις"
 
-#: ../src/actions-search.c:185
+#: ../src/gtr-actions-search.c:179
 msgid "Found and replaced one occurrence"
 msgstr "Βρέθηκε και αντικαταστάθηκε μια εμφάνιση"
 
-#: ../src/context.c:61
-msgid "Format:"
-msgstr "Μορφή:"
+#: ../src/gtr-context.c:228
+#| msgid "None"
+msgid "Notes:"
+msgstr "Σημειώσεις:"
 
-#: ../src/context.c:62
-msgid "Context:"
-msgstr "Σχετικά:"
+#: ../src/gtr-context.c:236
+#| msgid "Added"
+msgid "Add Note"
+msgstr "Προσθήκη σημείωσης"
 
-#: ../src/context.c:63
+#: ../src/gtr-context.c:241
+#| msgid "_Edit"
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+#. Extracted comments
+#: ../src/gtr-context.c:284
 msgid "Extracted comments:"
 msgstr "Εξαγμένα σχόλια:"
 
-#: ../src/dialogs/assistant.c:140 ../src/dialogs/preferences-dialog.c:716
+#. Context
+#: ../src/gtr-context.c:288
+msgid "Context:"
+msgstr "Σχετικά:"
+
+#. Format
+#: ../src/gtr-context.c:292
+msgid "Format:"
+msgstr "Μορφή:"
+
+#: ../src/dialogs/gtr-assistant.c:128
+#: ../src/dialogs/gtr-preferences-dialog.c:936
 msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
 msgstr ""
 "<span weight=\"bold\" size=\"large\">Οι συμβολοσειρές προστέθηκαν στην βάση "
 "δεδομένων</span>"
 
-#: ../src/dialogs/assistant.c:281
+#: ../src/dialogs/gtr-assistant.c:275
 #, c-format
 msgid ""
 "Profile name: %s\n"
@@ -1092,11 +760,11 @@ msgstr ""
 "Μορφές πληθυντικού: %s\n"
 "Διαδρομή βάσης δεδομένων: %s"
 
-#: ../src/dialogs/assistant.c:300
+#: ../src/dialogs/gtr-assistant.c:302
 msgid "None"
 msgstr "Κανένα"
 
-#: ../src/dialogs/assistant.c:321
+#: ../src/dialogs/gtr-assistant.c:325
 msgid ""
 "This assistant will help you to create the main profile\n"
 "and generate your translation memory database."
@@ -1104,93 +772,97 @@ msgstr ""
 "Αυτός ο βοηθός θα σας βοηθήσει να φτιάξετε το βασικό προφίλ και\n"
 "να δημιουργήσετε τη βάση δεδομένων της μεταφραστικής μνήμης."
 
-#: ../src/dialogs/assistant.c:327
+#: ../src/dialogs/gtr-assistant.c:331
 msgid "Assistant"
 msgstr "Βοηθός"
 
-#: ../src/dialogs/assistant.c:416
+#: ../src/dialogs/gtr-assistant.c:423
 msgid "<b>Profile name:</b>"
 msgstr "<b>Όνομα προφίλ:</b>"
 
-#: ../src/dialogs/assistant.c:436
+#: ../src/dialogs/gtr-assistant.c:442
 msgid "<b>Translator name:</b>"
 msgstr "<b>Όνομα μεταφραστή:</b>"
 
-#: ../src/dialogs/assistant.c:456
+#: ../src/dialogs/gtr-assistant.c:461
 msgid "<b>Translator email:</b>"
 msgstr "<b>Ηλ. διεύθυνση μεταφραστή:</b>"
 
-#: ../src/dialogs/assistant.c:476
+#: ../src/dialogs/gtr-assistant.c:480
 msgid "<b>Language:</b>"
 msgstr "<b>Γλώσσα:</b>"
 
-#: ../src/dialogs/assistant.c:496
+#: ../src/dialogs/gtr-assistant.c:499
 msgid "<b>Team email:</b>"
 msgstr "<b>Ηλ. διεύθυνση ομάδας:</b>"
 
-#: ../src/dialogs/assistant.c:508 ../src/dialogs/assistant.c:656
-#: ../src/dialogs/preferences-dialog.c:511
+#: ../src/dialogs/gtr-assistant.c:511 ../src/dialogs/gtr-assistant.c:657
+#: ../src/dialogs/gtr-preferences-dialog.c:730 ../src/gtr-window.c:1483
 msgid "Profile"
 msgstr "Προφίλ"
 
-#: ../src/dialogs/assistant.c:584
+#: ../src/dialogs/gtr-assistant.c:588
 msgid "<b>Language code:</b>"
 msgstr "<b>Κωδικός γλώσσας:</b>"
 
-#: ../src/dialogs/assistant.c:604
+#: ../src/dialogs/gtr-assistant.c:607
 msgid "<b>Character set:</b>"
 msgstr "<b>Σετ χαρακτήρων:</b>"
 
-#: ../src/dialogs/assistant.c:624
+#: ../src/dialogs/gtr-assistant.c:626
 msgid "<b>Transfer encoding:</b>"
 msgstr "<b>Κωδικοποίηση μεταφοράς:</b>"
 
-#: ../src/dialogs/assistant.c:644
+#: ../src/dialogs/gtr-assistant.c:645
 msgid "<b>Plural forms:</b>"
 msgstr "<b>Μορφές πληθυντικού:</b>"
 
-#: ../src/dialogs/assistant.c:706
+#: ../src/dialogs/gtr-assistant.c:666
+msgid "Checkout directory"
+msgstr "Κατάλογος checkout"
+
+#: ../src/dialogs/gtr-assistant.c:704
 msgid "<b>Select the path to generate the database:</b>"
 msgstr "<b>Επιλέξτε την διαδρομή για την δημιουργία της βάσης δεδομένων:</b>"
 
-#: ../src/dialogs/assistant.c:736
+#: ../src/dialogs/gtr-assistant.c:733
 msgid "<b>Look for a specific PO filename:</b>"
 msgstr "<b>Αναζήτηση για συγκεκριμένο όνομα αρχείου PO:</b>"
 
-#: ../src/dialogs/assistant.c:745
+#: ../src/dialogs/gtr-assistant.c:742
 msgid "E.g.: gl.po"
 msgstr "Π.χ.: el.po"
 
-#: ../src/dialogs/assistant.c:748
+#: ../src/dialogs/gtr-assistant.c:746
 msgid "Generate Database"
 msgstr "Δημιουργία βάσης δεδομένων"
 
 # sysdeps/names/sysdeps.c:68 sysdeps/names/sysdeps.c:97
-#: ../src/dialogs/assistant.c:772
+#: ../src/dialogs/gtr-assistant.c:772
 msgid "Confirmation"
 msgstr "Επιβεβαίωση"
 
-#: ../src/dialogs/close-confirmation-dialog.c:131
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:127
 msgid "Close _without Saving"
 msgstr "Κλείσιμο _χωρίς αποθήκευση"
 
-#: ../src/dialogs/close-confirmation-dialog.c:165
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:157
 msgid "Question"
 msgstr "Ερώτηση"
 
-#: ../src/dialogs/close-confirmation-dialog.c:383
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:372
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Αποθήκευση των αλλαγών στο έγγραφο \"%s\" πριν το κλείσιμο;"
 
-#: ../src/dialogs/close-confirmation-dialog.c:555
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:535
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] "Οι αλλαγές σε %d έγγραφο θα χαθούν οριστικά."
 msgstr[1] "Οι αλλαγές σε %d έγγραφα θα χαθούν οριστικά."
 
-#: ../src/dialogs/close-confirmation-dialog.c:561
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:542
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -1202,124 +874,105 @@ msgstr[1] ""
 "Υπάρχουν %d έγγραφα με μη αποθηκευμένες αλλαγές. Να αποθηκευτούν οι αλλαγές "
 "πριν το κλείσιμο;"
 
-#: ../src/dialogs/close-confirmation-dialog.c:579
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:563
 msgid "Docum_ents with unsaved changes:"
 msgstr "Έγγρα_φα με μη αποθηκευμένες αλλαγές:"
 
-#: ../src/dialogs/close-confirmation-dialog.c:581
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:567
 msgid "S_elect the documents you want to save:"
 msgstr "Επιλέ_ξτε τα έγγραφα που θέλετε να αποθηκεύσετε:"
 
-#: ../src/dialogs/close-confirmation-dialog.c:600
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:587
 msgid "Saving has been disabled by the system administrator."
 msgstr "Η αποθήκευση απενεργοποιήθηκε από το διαχειριστή του συστήματος."
 
-#: ../src/dialogs/close-confirmation-dialog.c:602
+#: ../src/dialogs/gtr-close-confirmation-dialog.c:589
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Αν δεν αποθηκεύσετε, όλες οι αλλαγές σας θα χαθούν μόνιμα."
 
-#: ../src/dialogs/comment-dialog.c:98
-msgid "Edit Comment"
-msgstr "Επεξεργασία σχολίου"
-
-#: ../src/dialogs/comment-dialog.ui.h:1
-msgid "<b>Write your comments bellow:</b>"
-msgstr "<b>Γράψτε τα σχόλιά σας πιο κάτω:</b>"
-
-#: ../src/dialogs/file-dialogs.c:60
+#: ../src/dialogs/gtr-file-dialogs.c:62
 msgid "Gettext translation"
 msgstr "Μετάφραση Gettext"
 
-#: ../src/dialogs/file-dialogs.c:65
+#: ../src/dialogs/gtr-file-dialogs.c:71
 msgid "Gettext translation template"
 msgstr "Πρότυπο μετάφρασης Gettext"
 
-#: ../src/dialogs/file-dialogs.c:70
+#: ../src/dialogs/gtr-file-dialogs.c:76
 msgid "All files"
 msgstr "Όλα τα αρχεία"
 
-#: ../src/dialogs/header-dialog.c:259
+#: ../src/dialogs/gtr-header-dialog.c:236
 msgid "Edit Header"
 msgstr "Επεξεργασία κεφαλίδας"
 
-#: ../src/dialogs/header-dialog.ui.h:1
+#: ../src/dialogs/gtr-header-dialog.ui.h:1
 msgid "Char_set:"
 msgstr "Κωδικο_σελίδα:"
 
-#
-#: ../src/dialogs/header-dialog.ui.h:2
+#: ../src/dialogs/gtr-header-dialog.ui.h:2
 msgid "Comment"
 msgstr "Σχόλιο"
 
-#: ../src/dialogs/header-dialog.ui.h:3
+#: ../src/dialogs/gtr-header-dialog.ui.h:3
 msgid "Enc_oding:"
 msgstr "Κωδικο_ποίηση"
 
-#: ../src/dialogs/header-dialog.ui.h:4
+#: ../src/dialogs/gtr-header-dialog.ui.h:4
 msgid "Language gro_up email:"
 msgstr "Ηλ. διεύθυνση μεταφραστικής ομάδας:"
 
-#: ../src/dialogs/header-dialog.ui.h:5
+#: ../src/dialogs/gtr-header-dialog.ui.h:5
 msgid "Po file _revision date:"
 msgstr "Ημερομηνία ανα_θεώρησης αρχείου po:"
 
-#: ../src/dialogs/header-dialog.ui.h:6
+#: ../src/dialogs/gtr-header-dialog.ui.h:6
 msgid "Pot _file creation date:"
 msgstr "Ημερομηνία _δημιουργίας αρχείου pot:"
 
-#: ../src/dialogs/header-dialog.ui.h:7
+#: ../src/dialogs/gtr-header-dialog.ui.h:7
 msgid "Project"
 msgstr "Έργο"
 
-#: ../src/dialogs/header-dialog.ui.h:8
+#: ../src/dialogs/gtr-header-dialog.ui.h:8
 msgid "Project Id _version:"
 msgstr "Έκ_δοση ID έργου:"
 
-#: ../src/dialogs/header-dialog.ui.h:9
+#: ../src/dialogs/gtr-header-dialog.ui.h:9
 msgid "Report message _bugs to:"
 msgstr "Ανα_φορά σφαλμάτων μηνύματος σε:"
 
-#: ../src/dialogs/header-dialog.ui.h:10
+#: ../src/dialogs/gtr-header-dialog.ui.h:10
 msgid "Translator and Language"
 msgstr "Μεταφραστής και Γλώσσα"
 
-#: ../src/dialogs/header-dialog.ui.h:11
+#: ../src/dialogs/gtr-header-dialog.ui.h:11
 msgid "Translator's _email:"
 msgstr "_Ηλ. διεύθυνση μεταφραστή:"
 
-#: ../src/dialogs/header-dialog.ui.h:12
+#: ../src/dialogs/gtr-header-dialog.ui.h:12
 msgid "Translator's _name:"
 msgstr "Ό_νομα μεταφραστή:"
 
-#: ../src/dialogs/header-dialog.ui.h:13
+#: ../src/dialogs/gtr-header-dialog.ui.h:13
 msgid "Use my options to complete the following entries:"
 msgstr "Χρήση των επιλογών μου για τη συμπλήρωση των παρακάτω εγγραφών:"
 
-#: ../src/dialogs/header-dialog.ui.h:14 ../src/dialogs/profile-dialog.ui.h:9
+#: ../src/dialogs/gtr-header-dialog.ui.h:14
+#: ../src/dialogs/gtr-profile-dialog.ui.h:9
 msgid "_Language:"
 msgstr "_Γλώσσα:"
 
-#: ../src/dialogs/jump-dialog.c:92
+#: ../src/dialogs/gtr-jump-dialog.c:91
 msgid "Go to Message"
 msgstr "Μετάβαση σε μήνυμα"
 
-#: ../src/dialogs/jump-dialog.ui.h:1
-msgid "<b>Enter message number:</b>"
-msgstr "<b>Εισαγωγή αριθμού μηνύματος:</b>"
+#: ../src/dialogs/gtr-jump-dialog.ui.h:1
+#| msgid "<b>Enter message number:</b>"
+msgid "Enter message number:"
+msgstr "Εισαγωγή αριθμού μηνύματος:"
 
-#: ../src/dialogs/jump-dialog.ui.h:2
-msgid "gtk-cancel"
-msgstr "gtk-cancel"
-
-#: ../src/dialogs/jump-dialog.ui.h:3
-msgid "gtk-ok"
-msgstr "gtk-ok"
-
-#: ../src/dialogs/preferences-dialog.c:517
-msgid "Active"
-msgstr "Ενεργό"
-
-#: ../src/dialogs/preferences-dialog.c:1060
+#: ../src/dialogs/gtr-preferences-dialog.c:585
 msgid ""
 "<span weight=\"bold\" size=\"large\">Impossible to remove the active "
 "profile</span>"
@@ -1327,11 +980,11 @@ msgstr ""
 "<span weight=\"bold\" size=\"large\">Αδύνατη η απομάκρυνση του ενεργού "
 "προφίλ</span>"
 
-#: ../src/dialogs/preferences-dialog.c:1063
+#: ../src/dialogs/gtr-preferences-dialog.c:589
 msgid "Another profile should be selected as active before"
 msgstr "Ένα άλλο προφίλ θα πρέπει να επιλεγεί πρώτα ως ενεργό"
 
-#: ../src/dialogs/preferences-dialog.c:1075
+#: ../src/dialogs/gtr-preferences-dialog.c:602
 msgid ""
 "<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
 "profile?</span>"
@@ -1339,321 +992,336 @@ msgstr ""
 "<span weight=\"bold\" size=\"large\">Είστε σίγουροι ότι θέλετε να διαγράψετε "
 "αυτό το προφίλ;</span>"
 
-#: ../src/dialogs/preferences-dialog.c:1117
-#: ../src/dialogs/preferences-dialog.ui.h:16
+#: ../src/dialogs/gtr-preferences-dialog.c:736
+msgid "Active"
+msgstr "Ενεργό"
+
+#: ../src/dialogs/gtr-preferences-dialog.c:1189
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:14
 msgid "Gtranslator Preferences"
 msgstr "Προτιμήσεις Gtranslator"
 
-#: ../src/dialogs/preferences-dialog.ui.h:2
-msgid "<b>Anchor style:</b>"
-msgstr "<b>Στυλ αγκύρωσης:</b>"
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:1
+msgid "    "
+msgstr "    "
 
-#: ../src/dialogs/preferences-dialog.ui.h:3
-msgid "<b>Autosave</b>"
-msgstr "<b>Αυτόματη αποθήκευση</b>"
-
-#: ../src/dialogs/preferences-dialog.ui.h:4
-msgid "<b>Configuration:</b>"
-msgstr "<b>Ρύθμιση:</b>"
-
-#: ../src/dialogs/preferences-dialog.ui.h:5
-msgid "<b>Contents</b>"
-msgstr "<b>Περιεχόμενα</b>"
-
-#: ../src/dialogs/preferences-dialog.ui.h:6
-msgid "<b>Database:</b>"
-msgstr "<b>Βάση δεδομένων:</b>"
-
-#: ../src/dialogs/preferences-dialog.ui.h:7
-msgid "<b>General</b>"
-msgstr "<b>Γενικά</b>"
-
-#: ../src/dialogs/preferences-dialog.ui.h:8
-msgid "<b>Scheme color:</b>"
-msgstr "<b>Συνδυασμοί χρωμάτων:</b>"
-
-#: ../src/dialogs/preferences-dialog.ui.h:9
-msgid "<b>Text Display</b>"
-msgstr "<b>Εμφάνιση κειμένου</b>"
-
-#: ../src/dialogs/preferences-dialog.ui.h:10
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:2
 msgid "Add to Database"
 msgstr "Προσθήκη στη βάση δεδομένων"
 
-#: ../src/dialogs/preferences-dialog.ui.h:11
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:3
+#| msgid "<b>Anchor style:</b>"
+msgid "Anchor style:"
+msgstr "Στυλ αγκύρωσης:"
+
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:4
+#| msgid "Autosave files"
+msgid "Autosave"
+msgstr "Αυτόματη αποθήκευση"
+
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:5
 msgid "Check _spelling"
 msgstr "_Ορθογραφικός έλεγχος"
 
-#: ../src/dialogs/preferences-dialog.ui.h:12
+# sysdeps/names/sysdeps.c:68 sysdeps/names/sysdeps.c:97
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:6
+#| msgid "Confirmation"
+msgid "Configuration:"
+msgstr "Ρυθμίσεις:"
+
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:7
+#| msgid "_Contents"
+msgid "Contents"
+msgstr "Περιεχόμενα"
+
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:8
 msgid "Create a _backup copy of files before saving"
 msgstr "Δημιουρ_γία αντιγράφου ασφαλείας αρχείων πριν την αποθήκευση"
 
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:9
+#| msgid "<b>Database:</b>"
+msgid "Database:"
+msgstr "Βάση δεδομένων:"
+
 #
-#: ../src/dialogs/preferences-dialog.ui.h:13
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:10
 msgid "Editor"
 msgstr "Επεξεργαστής"
 
-#: ../src/dialogs/preferences-dialog.ui.h:14
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:11
 msgid "Editor _font:"
 msgstr "_Γραμματοσειρά επεξεργαστή: "
 
-#: ../src/dialogs/preferences-dialog.ui.h:15
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:12
 msgid "Files"
 msgstr "Αρχεία"
 
-#: ../src/dialogs/preferences-dialog.ui.h:17
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:13
+#| msgid "<b>General</b>"
+msgid "General"
+msgstr "Γενικά"
+
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:15
 msgid "Interface"
 msgstr "Διεπαφή"
 
-#: ../src/dialogs/preferences-dialog.ui.h:18
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:16
 msgid "Make _whitespace visible"
 msgstr "_Τα κενά να είναι ορατά"
 
-#: ../src/dialogs/preferences-dialog.ui.h:19
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:17
 msgid "Max. # of missing words:"
 msgstr "Μέγιστος αριθμός λέξεων που λείπουν:"
 
-#: ../src/dialogs/preferences-dialog.ui.h:20
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:18
 msgid "Max. difference in sentence length:"
 msgstr "Μέγιστη διαφορά στο μήκος της πρότασης:"
 
-#: ../src/dialogs/preferences-dialog.ui.h:21
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:19
 msgid "Plugins"
 msgstr "Πρόσθετες λειτουργίες"
 
-#: ../src/dialogs/preferences-dialog.ui.h:22
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:20
 msgid "Profiles"
 msgstr "Προφίλ"
 
-#: ../src/dialogs/preferences-dialog.ui.h:23
-msgid "Select directory contains PO files:"
-msgstr "Επιλέξτε τον κατάλογο που περιέχει τα αρχεία PO:"
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:21
+#| msgid "<b>Scheme color:</b>"
+msgid "Scheme color:"
+msgstr "Συνδυασμοί χρωμάτων:"
 
-#: ../src/dialogs/preferences-dialog.ui.h:24 ../src/tab.c:658
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:22
+#| msgid "Select directory contains PO files:"
+msgid "Select the directory which contains PO files:"
+msgstr "Επιλέξτε τον κατάλογο που περιέχει αρχεία PO:"
+
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:23
+#| msgid "<b>Text Display</b>"
+msgid "Text Display"
+msgstr "Εμφάνιση κειμένου"
+
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:24
 msgid "Translation Memory"
 msgstr "Μεταφραστική μνήμη"
 
-#: ../src/dialogs/preferences-dialog.ui.h:25
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:25
 msgid "Use _custom font"
 msgstr "_Χρήση προσαρμοσμένης γραμματοσειράς"
 
-#: ../src/dialogs/preferences-dialog.ui.h:26
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:26
 msgid "Use only files with this name:"
 msgstr "Χρήση μόνο αρχείων με αυτό το όνομα:"
 
-#: ../src/dialogs/preferences-dialog.ui.h:27
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:27
 msgid "_Autosave files every"
 msgstr "_Αυτόματη αποθήκευση κάθε"
 
-#: ../src/dialogs/preferences-dialog.ui.h:28
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:28
 msgid "_Delete compiled GMO files"
 msgstr "_Διαγραφή μεταγλωττισμένων αρχείων GMO"
 
-#: ../src/dialogs/preferences-dialog.ui.h:29
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:29
 msgid "_Highlight message syntax"
 msgstr "_Επισήμανση σύνταξης μηνύματος"
 
-#: ../src/dialogs/preferences-dialog.ui.h:30
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:30
 msgid "_Remove fuzzy status if message is changed"
-msgstr "_Απομάκρυνση ασαφούς κατάστασης εάν το μήνυμα αλλαχτεί"
+msgstr "_Αφαίρεση ασαφούς κατάστασης εάν το μήνυμα αλλαχτεί"
 
-#: ../src/dialogs/preferences-dialog.ui.h:31
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:31
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "_Προειδοποίηση εάν το αρχείο PO περιέχει ασαφείς μεταφράσεις"
 
-#: ../src/dialogs/preferences-dialog.ui.h:32
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:32
 msgid "_minutes"
 msgstr "_λεπτά"
 
-#: ../src/dialogs/profile-dialog.c:257
-msgid ""
-"<span weight=\"bold\" size=\"large\">The profile name already exists</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"large\">Το όνομα προφίλ υπάρχει ήδη</span>"
-
-#: ../src/dialogs/profile-dialog.c:345
+#: ../src/dialogs/gtr-profile-dialog.c:85
 msgid "Gtranslator Profile"
 msgstr "Προφίλ Gtranslator"
 
-#: ../src/dialogs/profile-dialog.c:381
-msgid "Example: nplurals=2; plural=(n != 1);"
-msgstr "Παράδειγμα: nplurals=2; plural=(n != 1);"
-
-#: ../src/dialogs/profile-dialog.ui.h:1
-msgid "<b>Language Settings</b>"
-msgstr "<b>Ρυθμίσεις γλώσσας</b>"
-
-# sysdeps/names/sysdeps.c:68 sysdeps/names/sysdeps.c:97
-#: ../src/dialogs/profile-dialog.ui.h:2
-msgid "<b>Profile Information</b>"
-msgstr "<b>Πληροφορίες προφίλ</b>"
-
-#: ../src/dialogs/profile-dialog.ui.h:3
-msgid "<b>Translator Information</b>"
-msgstr "<b>Πληροφορίες μεταφραστή</b>"
-
-#: ../src/dialogs/profile-dialog.ui.h:4
+#: ../src/dialogs/gtr-profile-dialog.ui.h:1
 msgid "Character _set"
 msgstr "Κωδικο_σελίδα"
 
-#: ../src/dialogs/profile-dialog.ui.h:5
+#: ../src/dialogs/gtr-profile-dialog.ui.h:2
+#| msgid "<b>Language Settings</b>"
+msgid "Language Settings"
+msgstr "Ρυθμίσεις γλώσσας"
+
+#: ../src/dialogs/gtr-profile-dialog.ui.h:3
 msgid "Language _code:"
 msgstr "_Κωδικός γλώσσας:"
 
-#: ../src/dialogs/profile-dialog.ui.h:6
+#: ../src/dialogs/gtr-profile-dialog.ui.h:4
 msgid "N_ame:"
 msgstr "Ό_νομα"
 
-#: ../src/dialogs/profile-dialog.ui.h:7
+# sysdeps/names/sysdeps.c:68 sysdeps/names/sysdeps.c:97
+#: ../src/dialogs/gtr-profile-dialog.ui.h:5
+#| msgid "<b>Profile Information</b>"
+msgid "Profile Information"
+msgstr "Πληροφορίες προφίλ"
+
+#: ../src/dialogs/gtr-profile-dialog.ui.h:6
 msgid "Transfer en_coding:"
 msgstr "Κωδικοποίηση _μεταφοράς:"
 
-#: ../src/dialogs/profile-dialog.ui.h:8
+#: ../src/dialogs/gtr-profile-dialog.ui.h:7
+#| msgid "<b>Translator Information</b>"
+msgid "Translator Information"
+msgstr "Πληροφορίες μεταφραστή"
+
+#: ../src/dialogs/gtr-profile-dialog.ui.h:8
 msgid "_Email:"
 msgstr "_Ηλ. αλληλογραφία:"
 
-#: ../src/dialogs/profile-dialog.ui.h:10
+#: ../src/dialogs/gtr-profile-dialog.ui.h:10
 msgid "_Name:"
 msgstr "Όν_ομα"
 
-#: ../src/dialogs/profile-dialog.ui.h:11
+#: ../src/dialogs/gtr-profile-dialog.ui.h:11
 msgid "_Plural forms:"
 msgstr "Μορφές _πληθυντικού:"
 
-#: ../src/dialogs/profile-dialog.ui.h:12
+#: ../src/dialogs/gtr-profile-dialog.ui.h:12
 msgid "_Team email:"
 msgstr "Η_λ. αλληλογραφία ομάδας:"
 
-#: ../src/dialogs/search-dialog.c:323 ../src/dialogs/search-dialog.ui.h:4
+#: ../src/dialogs/gtr-search-dialog.c:328
+#: ../src/dialogs/gtr-search-dialog.ui.h:3
 msgid "Replace"
 msgstr "Αντικατάσταση"
 
-#: ../src/dialogs/search-dialog.c:343
+#: ../src/dialogs/gtr-search-dialog.c:352
 msgid "Find"
 msgstr "Εύρεση"
 
-#: ../src/dialogs/search-dialog.c:443
+#: ../src/dialogs/gtr-search-dialog.c:463
 msgid "Replace _All"
 msgstr "Αντικατάσταση ό_λων"
 
-#: ../src/dialogs/search-dialog.c:446
+#: ../src/dialogs/gtr-search-dialog.c:467
 msgid "_Replace"
 msgstr "Αντικατάστα_ση"
 
-#: ../src/dialogs/search-dialog.ui.h:1
-msgid "Include fuzzy strings"
-msgstr "Περίληψη ασαφών συμβολοσειρών"
+#: ../src/dialogs/gtr-search-dialog.ui.h:1
+#| msgid "Include fuzzy strings"
+msgid "Include fu_zzy strings"
+msgstr "Περίληψη α_σαφών συμβολοσειρών"
 
-#: ../src/dialogs/search-dialog.ui.h:2
+#: ../src/dialogs/gtr-search-dialog.ui.h:2
 msgid "Match _entire word only"
 msgstr "Ταίριασμα μόνο _ολόκληρης λέξης"
 
-#: ../src/dialogs/search-dialog.ui.h:3
-msgid "Original text"
-msgstr "Αρχικό κείμενο"
-
-#: ../src/dialogs/search-dialog.ui.h:5
+#: ../src/dialogs/gtr-search-dialog.ui.h:4
 msgid "Replace All"
 msgstr "Αντικατάσταση όλων"
 
-#: ../src/dialogs/search-dialog.ui.h:6
+#: ../src/dialogs/gtr-search-dialog.ui.h:5
 msgid "Replace _with: "
 msgstr "Αντικατάσταση _με:"
 
-#: ../src/dialogs/search-dialog.ui.h:7
+#: ../src/dialogs/gtr-search-dialog.ui.h:6
 msgid "Search _backwards"
 msgstr "Αναζήτηση προς τα _πίσω"
 
-#: ../src/dialogs/search-dialog.ui.h:8
-msgid "Translated text"
-msgstr "Μεταφρασμένο κείμενο"
-
-#: ../src/dialogs/search-dialog.ui.h:9
+#: ../src/dialogs/gtr-search-dialog.ui.h:7
 msgid "_Match case"
 msgstr "_Ταίριασμα κεφαλαίων"
 
-#: ../src/dialogs/search-dialog.ui.h:10
+#: ../src/dialogs/gtr-search-dialog.ui.h:8
+#| msgid "Original text"
+msgid "_Original text"
+msgstr "_Αρχικό κείμενο"
+
+#: ../src/dialogs/gtr-search-dialog.ui.h:9
 msgid "_Search for: "
 msgstr "_Αναζήτηση για:"
 
-#: ../src/dialogs/search-dialog.ui.h:11
+#: ../src/dialogs/gtr-search-dialog.ui.h:10
+#| msgid "Translated text"
+msgid "_Translated text"
+msgstr "_Μεταφρασμένο κείμενο"
+
+#: ../src/dialogs/gtr-search-dialog.ui.h:11
 msgid "_Wrap around"
 msgstr "Αναδίπλωση _γύρω"
 
-#: ../src/main.c:46
+#: ../src/main.c:61
 msgid "[FILE...]"
 msgstr "[ΑΡΧΕΙΟ...]"
 
-#: ../src/main.c:72
+#: ../src/main.c:64
+msgid "Create a new toplevel window in an existing instance of Gtranslator"
+msgstr ""
+
+#: ../src/main.c:92
 #, c-format
 msgid "%s: malformed file name or URI.\n"
 msgstr "%s: κακοδιαμορφωμένο όνομα αρχείου ή URI\n"
 
-#: ../src/main.c:108
+#: ../src/main.c:240
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
 #. Setup command line options
-#: ../src/main.c:111
+#: ../src/main.c:244
 msgid "- Edit PO files"
 msgstr "- Επεξεργασία αρχείων PO"
 
-#: ../src/main.c:121
+#: ../src/main.c:256
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Σφάλμα κατά την αρχικοποίηση του GConf: %s."
 
-#: ../src/main.c:139
+#: ../src/main.c:267
 #, c-format
-msgid "Error setting the default window icon: %s"
-msgstr "Σφάλμα κατά τον ορισμό του προεπιλεγμένου εικονιδίου του παραθύρου: %s"
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Εκτελέστε '%s --help' για να δείτε μια πλήρη λίστα των διαθέσιμων επιλογών "
+"γραμμής εντολών.\n"
 
-#: ../src/message-table.c:284
+#: ../src/gtr-message-table.c:265
 msgid "Status"
 msgstr "Κατάσταση"
 
-#: ../src/message-table.c:297
+#: ../src/gtr-message-table.c:281
 msgid "ID"
 msgstr "ID"
 
-#: ../src/message-table.c:313
+#: ../src/gtr-message-table.c:300
 msgid "Original Text"
 msgstr "Αρχικό κείμενο"
 
-#: ../src/message-table.c:329
+#: ../src/gtr-message-table.c:319
 msgid "Translated Text"
 msgstr "Μεταφρασμένο κείμενο"
 
-#: ../src/notebook.c:94
-#, c-format
-msgid "<b>Path:</b> %s"
-msgstr "<b>Διαδρομή:</b> %s"
-
-#: ../src/notebook.c:153
-msgid "Close document"
-msgstr "Κλείσιμο εγγράφου"
-
-#: ../src/po.c:365
+#: ../src/gtr-po.c:420
 #, c-format
 msgid "Failed opening file '%s': %s"
 msgstr "Αδυναμία ανοίγματος αρχείου '%s': %s"
 
-#: ../src/po.c:391
+#: ../src/gtr-po.c:444
 #, c-format
 msgid "The file is empty"
 msgstr "Το αρχείο είναι κενό"
 
-#: ../src/po.c:405
+#: ../src/gtr-po.c:459
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Το Gettext επέστρεψε μια μηδενική λίστα τομέων."
 
-#: ../src/po.c:552
+#: ../src/gtr-po.c:511
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Δεν αποκτήθηκαν καθόλου μηνύματα από την ανάλυση."
 
-#: ../src/po.c:793
+#: ../src/gtr-po.c:559
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1664,90 +1332,94 @@ msgstr ""
 "Τα αρχεία pot δημιουργούνται κατά τη διαδικασία μεταγλώττισης.\n"
 "Το αρχείο σας θα πρέπει να ονομάζεται '%s.po'."
 
-#: ../src/po.c:828
+#: ../src/gtr-po.c:572
+#, c-format
+msgid "The file %s is read-only, and can not be overwritten"
+msgstr "Το αρχείο %s είναι μόνο για ανάγνωση, και δεν μπορεί να αντικατασταθεί"
+
+#: ../src/gtr-po.c:603
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Εμφανίστηκε ένα σφάλμα κατά την εγγραφή του αρχείου PO: %s"
 
-#: ../src/plugin-system/plugin-manager.c:54
+#: ../src/plugin-system/gtr-plugin-manager.c:54
 msgid "Plugin"
 msgstr "Πρόσθετη λειτουργία"
 
-#: ../src/plugin-system/plugin-manager.c:55
+#: ../src/plugin-system/gtr-plugin-manager.c:55
 msgid "Enabled"
 msgstr "Ενεργοποιημένη"
 
-#: ../src/plugin-system/plugin-manager.c:504
+#: ../src/plugin-system/gtr-plugin-manager.c:496
 msgid "_About"
 msgstr "Π_ερί"
 
-#: ../src/plugin-system/plugin-manager.c:512
+#: ../src/plugin-system/gtr-plugin-manager.c:502
 msgid "C_onfigure"
 msgstr "_Ρύθμιση"
 
-#: ../src/plugin-system/plugin-manager.c:521
+#: ../src/plugin-system/gtr-plugin-manager.c:510
 msgid "A_ctivate"
 msgstr "_Ενεργοποίηση"
 
-#: ../src/plugin-system/plugin-manager.c:532
+#: ../src/plugin-system/gtr-plugin-manager.c:520
 msgid "Ac_tivate All"
 msgstr "Ενεργ_οποίηση όλων"
 
-#: ../src/plugin-system/plugin-manager.c:537
+#: ../src/plugin-system/gtr-plugin-manager.c:524
 msgid "_Deactivate All"
 msgstr "_Απενεργοποίηση όλων"
 
-#: ../src/plugin-system/plugin-manager.c:796
+#: ../src/plugin-system/gtr-plugin-manager.c:762
 msgid "Active plugins"
 msgstr "Ενεργές πρόσθετες λειτουργίες"
 
-#: ../src/plugin-system/plugin-manager.c:825
+#: ../src/plugin-system/gtr-plugin-manager.c:791
 msgid "_About Plugin"
 msgstr "_Περί πρόσθετης λειτουργίας"
 
-#: ../src/plugin-system/plugin-manager.c:829
+#: ../src/plugin-system/gtr-plugin-manager.c:795
 msgid "C_onfigure Plugin"
 msgstr "_Ρύθμιση πρόσθετης λειτουργίας"
 
-#. Translators: Insert mode
-#: ../src/statusbar.c:114 ../src/statusbar.c:242
+#: ../src/gtr-statusbar.c:117 ../src/gtr-statusbar.c:246
 msgid "INS"
 msgstr "ΕΙΣ"
 
-#. Translators: Overwrite mode
-#: ../src/statusbar.c:114 ../src/statusbar.c:240
+#: ../src/gtr-statusbar.c:118 ../src/gtr-statusbar.c:242
 msgid "OVR"
 msgstr "ΑΝΤ"
 
-#: ../src/tab.c:224
+#: ../src/gtr-tab.c:209
 msgid "There is an error in the message:"
 msgstr "Υπάρχει ένα σφάλμα στο μήνυμα:"
 
-#: ../src/tab.c:397
-msgid "Open comment dialog"
-msgstr "Άνοιγμα διαλόγου σχολίου"
-
-#: ../src/tab.c:570
+#: ../src/gtr-tab.c:527
 #, c-format
 msgid "Plural %d"
 msgstr "Πληθυντικός %d"
 
-#
-#: ../src/tab.c:615
-msgid "Message Table"
-msgstr "Πίνακας μηνυμάτων"
-
-#: ../src/tab.c:650
-msgid "Context"
-msgstr "Περιεχόμενο"
-
-#: ../src/tab.c:688
+#: ../src/gtr-tab.c:589
 msgid "<b>Original Text:</b>"
 msgstr "<b>Αρχικό κείμενο:</b>"
 
-#: ../src/tab.c:749
+#: ../src/gtr-tab.c:648
 msgid "<b>Translate_d Text:</b>"
 msgstr "<b>Μεταφρασμένο _κείμενο:</b>"
+
+#: ../src/gtr-tab.c:698
+msgid "Context"
+msgstr "Περιεχόμενο"
+
+#. Translators: Path to the document opened
+#: ../src/gtr-tab.c:1132
+#| msgid "Paths:\n"
+msgid "Path:"
+msgstr "Διαδρομή:"
+
+#: ../src/gtr-tab-label.c:275
+msgid "Close document"
+msgstr "Κλείσιμο εγγράφου"
 
 #. Translaters: This string is for a toggle to display a toolbar.
 #. * The name of the toolbar is automatically computed from the widgets
@@ -1756,32 +1428,32 @@ msgstr "<b>Μεταφρασμένο _κείμενο:</b>"
 #. * produce duplicates, but don't worry about it. If your language
 #. * normally has a mnemonic at the start, please use the _. If not,
 #. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:918
+#: ../src/toolbareditor/egg-editable-toolbar.c:934
 #, c-format
 msgid "Show “_%s”"
-msgstr "Εμφάνιση \"_%s”"
+msgstr "Εμφάνιση “_%s”"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1381
+#: ../src/toolbareditor/egg-editable-toolbar.c:1397
 msgid "_Move on Toolbar"
 msgstr "_Μετακίνηση στην Εργαλειοθήκη"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1382
+#: ../src/toolbareditor/egg-editable-toolbar.c:1398
 msgid "Move the selected item on the toolbar"
 msgstr "Μετακίνηση του επιλεγμένου αντικειμένου στην εργαλειοθήκη"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1383
+#: ../src/toolbareditor/egg-editable-toolbar.c:1399
 msgid "_Remove from Toolbar"
 msgstr "_Απομάκρυνση από την εργαλειοθήκη"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1384
+#: ../src/toolbareditor/egg-editable-toolbar.c:1400
 msgid "Remove the selected item from the toolbar"
 msgstr "Απομάκρυνση του επιλεγμένου αντικειμένου από την εργαλειοθήκη"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1385
+#: ../src/toolbareditor/egg-editable-toolbar.c:1401
 msgid "_Delete Toolbar"
 msgstr "_Διαγραφή εργαλειοθήκης"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1386
+#: ../src/toolbareditor/egg-editable-toolbar.c:1402
 msgid "Remove the selected toolbar"
 msgstr "Απομάκρυνση της επιλεγμένης εργαλειοθήκης"
 
@@ -1789,52 +1461,47 @@ msgstr "Απομάκρυνση της επιλεγμένης εργαλειοθ�
 msgid "Separator"
 msgstr "Διαχωριστικό"
 
-#: ../src/translation-memory/berkeley/db-base.c:165
-msgid "Running recovery..."
-msgstr "Εκτελείται επαναφορά..."
-
-#: ../src/translation-memory/berkeley/db-base.c:173
-#, c-format
-msgid "There was an error recovering the database: %s"
-msgstr "Εμφανίστηκε ένα σφάλμα κατά την επαναφορά της βάσης δεδομένων: %s"
-
-#: ../src/translation-memory/berkeley/db-base.c:181
-#, c-format
-msgid "There was an error in database: %s"
-msgstr "Υπήρξε ένα σφάλμα στη βάση δεδομένων: %s"
-
-#: ../src/translation-memory/translation-memory-ui.c:209
+#: ../src/translation-memory/gtr-translation-memory-ui.c:227
 #, c-format
 msgid "Insert Option nº %d"
-msgstr "Εισαγωγή επιλογής Νο. %d"
+msgstr "Εισαγωγή επιλογής nº %d"
 
-#: ../src/translation-memory/translation-memory-ui.c:286
+#: ../src/translation-memory/gtr-translation-memory-ui.c:381
+#| msgid "Gettext translation"
+msgid "_Use this translation"
+msgstr "_Χρήση αυτής της μετάφρασης"
+
+#: ../src/translation-memory/gtr-translation-memory-ui.c:386
+msgid "_Remove"
+msgstr "_Αφαίρεση"
+
+#: ../src/translation-memory/gtr-translation-memory-ui.c:503
 msgid "Shortcut"
 msgstr "Συντόμευση"
 
-#: ../src/translation-memory/translation-memory-ui.c:297
+#: ../src/translation-memory/gtr-translation-memory-ui.c:512
 msgid "Level"
 msgstr "Επίπεδο"
 
-#: ../src/translation-memory/translation-memory-ui.c:308
+#: ../src/translation-memory/gtr-translation-memory-ui.c:521
 msgid "String"
 msgstr "Συμβολοσειρά"
 
-#: ../src/utils.c:316
+#: ../src/gtr-utils.c:307
 msgid "Please check your installation."
 msgstr "Παρακαλώ ελέγξτε την εγκατάστασή σας."
 
-#: ../src/utils.c:381
+#: ../src/gtr-utils.c:368
 #, c-format
 msgid "Unable to open ui file %s. Error: %s"
 msgstr "Δεν ήταν δυνατό το άνοιγμα του αρχείου διαπεφής χρήστη %s. Σφάλμα: %s"
 
-#: ../src/utils.c:400
+#: ../src/gtr-utils.c:388
 #, c-format
 msgid "Unable to find the object '%s' inside file %s."
 msgstr "Αδύνατη η εύρεση του αντικειμένου '%s' μέσα στο αρχείο %s."
 
-#: ../src/utils.c:808
+#: ../src/gtr-utils.c:812
 msgid ""
 "Unable to display help. Please make sure the Gtranslator documentation "
 "package is installed."
@@ -1842,12 +1509,12 @@ msgstr ""
 "Αδύνατη η εμφάνιση της βοήθειας. Παρακαλώ βεβαιωθείτε ότι είναι "
 "εγκατεστημένο το πακέτο τεκμηρίωσης του Gtranslator."
 
-#: ../src/view.c:81
+#: ../src/gtr-view.c:80
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "σφάλμα gtkspell: %s\n"
 
-#: ../src/view.c:82
+#: ../src/gtr-view.c:82
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1856,332 +1523,699 @@ msgstr ""
 "Αδύνατη η αρχικοποίηση του GtkSpell.\n"
 " %s"
 
-#: ../src/window.c:109
+#: ../src/gtr-window.c:123
 msgid "_File"
 msgstr "_Αρχείο"
 
 #
-#: ../src/window.c:110
+#: ../src/gtr-window.c:124
 msgid "_Edit"
 msgstr "_Επεξεργασία"
 
-#: ../src/window.c:111
+#: ../src/gtr-window.c:125
 msgid "_View"
 msgstr "_Προβολή"
 
-#. { "Bookmarks", NULL, N_("_Bookmarks") },
-#. { "Actions", NULL, N_("_Actions") },
-#: ../src/window.c:114
+#: ../src/gtr-window.c:126
 msgid "_Search"
 msgstr "Ανα_ζήτηση"
 
-#: ../src/window.c:115
+#: ../src/gtr-window.c:127
 msgid "_Go"
 msgstr "_Μετάβαση"
 
-#: ../src/window.c:116
+#: ../src/gtr-window.c:128
+#| msgid "Documents"
+msgid "_Documents"
+msgstr "Έ_γγραφα"
+
+#: ../src/gtr-window.c:129
 msgid "_Help"
 msgstr "_Βοήθεια"
 
-#: ../src/window.c:120
+#: ../src/gtr-window.c:133
 msgid "Open a PO file"
 msgstr "Άνοιγμα αρχείου PO"
 
-#: ../src/window.c:122
+#: ../src/gtr-window.c:135
 msgid "_Recent Files"
 msgstr "_Πρόσφατα αρχεία"
 
-#: ../src/window.c:125
+#: ../src/gtr-window.c:138
 msgid "Quit the program"
 msgstr "Έξοδος από το πρόγραμμα"
 
 #. Edit menu
-#: ../src/window.c:129
+#: ../src/gtr-window.c:142
 msgid "T_oolbar"
 msgstr "Εργαλειοθήκ_η"
 
-#: ../src/window.c:132
+#: ../src/gtr-window.c:145
 msgid "Edit gtranslator preferences"
 msgstr "Επεξεργασία προτιμήσεων gtranslator"
 
-#: ../src/window.c:134 ../src/window.c:181
+#: ../src/gtr-window.c:147 ../src/gtr-window.c:193
 msgid "_Header..."
 msgstr "Κεφαλί_δα..."
 
 #. Help menu
-#: ../src/window.c:138
+#: ../src/gtr-window.c:151
 msgid "_Contents"
 msgstr "_Περιεχόμενα"
 
-#: ../src/window.c:150
+#: ../src/gtr-window.c:162
 msgid "Save the current file"
 msgstr "Αποθήκευση του τρέχοντος αρχείου"
 
-#: ../src/window.c:153
+#: ../src/gtr-window.c:165
 msgid "Save the current file with another name"
 msgstr "Αποθήκευση αρχείου με ένα διαφορετικό όνομα"
 
-#: ../src/window.c:159
+#: ../src/gtr-window.c:171
 msgid "Close the current file"
 msgstr "Κλείσιμο του τρέχοντος αρχείου"
 
-#: ../src/window.c:164
+#: ../src/gtr-window.c:176
 msgid "Undo last operation"
 msgstr "Αναίρεση της τελευταίας ενέργειας"
 
-#: ../src/window.c:167
+#: ../src/gtr-window.c:179
 msgid "Redo last undone operation"
 msgstr "Ακύρωση της αναίρεσης της τελευταίας ενέργειας"
 
-#: ../src/window.c:170
+#: ../src/gtr-window.c:182
 msgid "Cut the selected text"
 msgstr "Αποκοπή του επιλεγμένου κειμένου"
 
-#: ../src/window.c:173
+#: ../src/gtr-window.c:185
 msgid "Copy the selected text"
 msgstr "Αντιγραφή του επιλεγμένου κειμένου"
 
-#: ../src/window.c:176
+#: ../src/gtr-window.c:188
 msgid "Paste the contents of the clipboard"
 msgstr "Επικόλληση των περιεχομένων του πρόχειρου"
 
-#: ../src/window.c:179
+#: ../src/gtr-window.c:191
 msgid "Clear the selected translation"
 msgstr "Καθαρισμός της επιλεγμένης μετάφρασης"
 
-#: ../src/window.c:183
-msgid "C_omment..."
-msgstr "_Σχόλιο..."
-
-#: ../src/window.c:184
-msgid "Edit message comment"
-msgstr "Επεξεργασία σχολίου μηνύματος"
-
-#: ../src/window.c:186
+#: ../src/gtr-window.c:195
 msgid "Copy _Message to Translation"
-msgstr "Α_ντιγραφή του Αρχικού κείμενου στη μετάφραση"
+msgstr "Α_ντιγραφή του μηνύματος στη μετάφραση"
 
-#: ../src/window.c:187
+#: ../src/gtr-window.c:197
 msgid "Copy original message contents to the translation field"
 msgstr ""
 "Αντιγραφή των περιεχομένων του αρχικού μηνύματος στο πεδίο της μετάφρασης"
 
-#: ../src/window.c:189
+#: ../src/gtr-window.c:199
 msgid "Toggle _Fuzzy Status"
 msgstr "Εναλλαγή ασα_φούς κατάστασης"
 
-#: ../src/window.c:190
+#: ../src/gtr-window.c:200
 msgid "Toggle fuzzy status of a message"
 msgstr "Αλλαγή κατάστασης ασαφούς μηνύματος"
 
-#: ../src/window.c:192 ../src/window.c:199
+#: ../src/gtr-window.c:202
 msgid "_Translation Memory"
 msgstr "_Μεταφραστική μνήμη"
 
 #. View menu
-#: ../src/window.c:196
+#: ../src/gtr-window.c:207
 msgid "_Context"
 msgstr "_Περιεχόμενο"
 
-#: ../src/window.c:197
+#: ../src/gtr-window.c:208
 msgid "Show the Context panel"
 msgstr "Εμφάνιση του πλαισίου περιεχομένου"
 
-#: ../src/window.c:200
-msgid "Show the Translation Memory panel"
-msgstr "Εμφάνιση του πλαισίου μεταφραστικής μνήμης"
-
-#. { "ViewSidePane", NULL, N_("Side _Pane"), "F9",
-#. N_("Show or hide the side pane in the current window"),
-#. NULL },
-#. Bookmarks menu
-#. { "BookmarksAdd", GTK_STOCK_ADD, N_("_Add Bookmark"), "<control>D",
-#. N_("Add a bookmark to the current message"), NULL},
-#. { "BookmarksEdit", GTK_STOCK_EDIT, N_("_Edit Bookmarks"), "<control>B",
-#. N_("Edit stored bookmarks"), NULL},
-#. Action menu
-#. { "ActionsCompile", GTK_STOCK_CONVERT, N_("_Compile"), NULL,
-#. N_("Compile the current file to a MO file"), NULL },
-#. { "ActionsRefresh", GTK_STOCK_REFRESH, NULL, NULL,
-#. N_("  "), NULL },
-#. //G_CALLBACK(gtranslator_bookmark_adding_dialog) },
-#. { "ActionsAutotranslate", NULL, N_("Aut_otranslate..."), NULL,
-#. N_("Autotranslate the current file using a translation memory"), NULL},
-#. //G_CALLBACK(gtranslator_auto_translation_dialog) },
-#. { "ActionsRemoveTranslations", GTK_STOCK_REMOVE, N_("Remo_ve All Translations..."), NULL,
-#. N_("Remove all existing translations"), NULL},
-#. //G_CALLBACK(gtranslator_remove_all_translations_dialog) },
 #. Go menu
-#: ../src/window.c:226
-msgid "Prev F_ile"
-msgstr "Προηγούμενο αρ_χείο"
-
-#: ../src/window.c:227 ../src/window.c:230
-msgid "Go to the next file"
-msgstr "Μετάβαση στο επόμενο αρχείο"
-
-#: ../src/window.c:229
-msgid "Next Fi_le"
-msgstr "_Επόμενο αρχείο"
-
-#: ../src/window.c:232
+#: ../src/gtr-window.c:212
 msgid "_Previous Message"
 msgstr "_Προηγούμενο μήνυμα"
 
-#: ../src/window.c:233
+#: ../src/gtr-window.c:213
 msgid "Move back one message"
 msgstr "Μετακίνηση ένα μήνυμα πίσω"
 
-#: ../src/window.c:235
+#: ../src/gtr-window.c:215
 msgid "_Next Message"
 msgstr "Επόμε_νο μήνυμα"
 
-#: ../src/window.c:236
+#: ../src/gtr-window.c:216
 msgid "Move forward one message"
 msgstr "Μετακίνηση ένα μήνυμα μπροστά"
 
-#: ../src/window.c:238
+#: ../src/gtr-window.c:218
 msgid "_Go to Message..."
-msgstr "Πή_γαινε στο μήνυμα..."
+msgstr "Μ_ετάβαση στο μήνυμα..."
 
-#: ../src/window.c:239
+#: ../src/gtr-window.c:219
 msgid "Jumps to a specific message"
 msgstr "Μετάβαση σε συγκεκριμένο μήνυμα"
 
-#: ../src/window.c:241
+#: ../src/gtr-window.c:221
 msgid "_First Message"
 msgstr "Πρώ_το μήνυμα"
 
-#: ../src/window.c:242
+#: ../src/gtr-window.c:222
 msgid "Go to the first message"
 msgstr "Μετάβαση στο πρώτο μήνυμα"
 
-#: ../src/window.c:244
+#: ../src/gtr-window.c:224
 msgid "_Last Message"
 msgstr "Τε_λευταίο μήνυμα"
 
-#: ../src/window.c:245
+#: ../src/gtr-window.c:225
 msgid "Go to the last message"
 msgstr "Μετάβαση στο τελευταίο μήμυμα"
 
-#: ../src/window.c:247
+#: ../src/gtr-window.c:227
 msgid "Next Fuz_zy"
 msgstr "Επό_μενο ασαφές"
 
-#: ../src/window.c:248
+#: ../src/gtr-window.c:228
 msgid "Go to the next fuzzy message"
 msgstr "Μετάβαση στο επόμενο ασαφές μήνυμα"
 
-#: ../src/window.c:250
+#: ../src/gtr-window.c:230
 msgid "Previous Fuzz_y"
 msgstr "Προηγούμενο α_σαφές"
 
-#: ../src/window.c:251
+#: ../src/gtr-window.c:231
 msgid "Go to the previous fuzzy message"
 msgstr "Μετάβαση στο προηγούμενο ασαφές μήνυμα"
 
-#: ../src/window.c:253
+#: ../src/gtr-window.c:233
 msgid "Next _Untranslated"
 msgstr "Επόμενο _αμετάφραστο"
 
-#: ../src/window.c:254
+#: ../src/gtr-window.c:234
 msgid "Go to the next untranslated message"
 msgstr "Μετάβαση στο επόμενο αμετάφραστο μήνυμα"
 
-#: ../src/window.c:256
+#: ../src/gtr-window.c:237
 msgid "Previ_ous Untranslated"
 msgstr "Π_ροηγούμενο αμετάφραστο"
 
-#: ../src/window.c:257
+#: ../src/gtr-window.c:238
 msgid "Go to the previous untranslated message"
 msgstr "Μετάβαση στο προηγούμενο αμετάφραστο μήνυμα"
 
-#: ../src/window.c:259
+#: ../src/gtr-window.c:241
 msgid "Next Fu_zzy or Untranslated"
 msgstr "Επόμεν_ο ασαφές ή αμετάφραστο"
 
-#: ../src/window.c:260
+#: ../src/gtr-window.c:243
 msgid "Go to the next fuzzy or untranslated message"
 msgstr "Μετάναση στο επόμενο ασαφές ή αμετάφραστο μήνυμα"
 
-#: ../src/window.c:262
+#: ../src/gtr-window.c:246
 msgid "Pre_vious Fuzzy or Untranslated"
 msgstr "Προ_ηγούμενο ασαφές ή αμετάφραστο"
 
-#: ../src/window.c:263
+#: ../src/gtr-window.c:248
 msgid "Go to the previous fuzzy or untranslated message"
 msgstr "Μετάβαση στο προηγούμενο ασαφές ή αμετάφραστο μήνυμα"
 
-#: ../src/window.c:268
+#: ../src/gtr-window.c:253
 msgid "Search for text"
 msgstr "Αναζήτηση για κείμενο"
 
-#: ../src/window.c:277
+#: ../src/gtr-window.c:256
 msgid "Search for and replace text"
 msgstr "Αναζήτηση και αντικατάσταση κειμένου"
 
-#: ../src/window.c:752
+#. Documents menu
+#: ../src/gtr-window.c:260
+#| msgid "_Deactivate All"
+msgid "_Save All"
+msgstr "_Αποθήκευση όλων"
+
+#: ../src/gtr-window.c:261
+msgid "Save all open files"
+msgstr "Αποθήκευση όλων των ανοιγμένων αρχείων"
+
+#: ../src/gtr-window.c:263
+msgid "_Close All"
+msgstr "_Κλείσιμο όλων"
+
+#: ../src/gtr-window.c:264
+#| msgid "Close the current file"
+msgid "Close all open files"
+msgstr "Κλείσιμο όλων των ανοιγμένων αρχείων"
+
+#: ../src/gtr-window.c:266
+#| msgid "Previous Developers"
+msgid "_Previous Document"
+msgstr "_Προηγούμενο έγγραφο"
+
+#: ../src/gtr-window.c:268
+msgid "Activate previous document"
+msgstr "Ενεργοποίηση προηγούμενου εγγράφου"
+
+#: ../src/gtr-window.c:270
+#| msgid "Documents"
+msgid "_Next Document"
+msgstr "_Επόμενο έγγραφο"
+
+#: ../src/gtr-window.c:272
+msgid "Activate next document"
+msgstr "Ενεργοποίηση επόμενου εγγράφου"
+
+#: ../src/gtr-window.c:705
 msgid "Untranslated"
 msgstr "Αμετάφραστο"
 
-#: ../src/window.c:754
+#: ../src/gtr-window.c:708
 msgid "Translated"
 msgstr "Μεταφρασμένο"
 
-#: ../src/window.c:756
+#: ../src/gtr-window.c:711
 msgid "Fuzzy"
 msgstr "Ασαφές"
 
-#: ../src/window.c:761
-#, c-format
-msgid "Status: %s"
-msgstr "Κατάσταση: %s"
-
-#: ../src/window.c:762
+#: ../src/gtr-window.c:718
 #, c-format
 msgid "Current: %d"
 msgstr "Τρέχον: %d"
 
-#: ../src/window.c:763
+#: ../src/gtr-window.c:719
 #, c-format
 msgid "Total: %d"
 msgstr "Σύνολο: %d"
 
-#: ../src/window.c:764
+#: ../src/gtr-window.c:720
 #, c-format
-msgid "Fuzzy: %d"
-msgstr "Ασαφή: %d"
+#| msgid "Untranslated"
+msgid "%d translated"
+msgid_plural "%d translated"
+msgstr[0] "%d μεταφρασμένο"
+msgstr[1] "%d μεταφρασμένα"
 
-#: ../src/window.c:765
+#: ../src/gtr-window.c:723
 #, c-format
-msgid "Untranslated: %d"
-msgstr "Αμετάφραστα: %d"
+#| msgid "Fuzzy"
+msgid "%d fuzzy"
+msgid_plural "%d fuzzy"
+msgstr[0] "%d ασαφές"
+msgstr[1] "%d ασαφή"
 
-#.
-#. * Translators: The title of the window when there is only one tab
-#.
-#: ../src/window.c:869 ../src/window.c:873
+#: ../src/gtr-window.c:725
 #, c-format
-msgid "gtranslator - %s"
-msgstr "gtranslator - %s"
+#| msgid "Untranslated"
+msgid "%d untranslated"
+msgid_plural "%d untranslated"
+msgstr[0] "%d αμετάφραστο"
+msgstr[1] "%d αμετάφραστα"
 
-#: ../src/window.c:871
+#. Translators: %s is a URI
+#: ../src/gtr-window.c:779
 #, c-format
-msgid "gtranslator - *%s"
-msgstr "gtranslator - *%s"
+#| msgid "A_ctivate"
+msgid "Activate '%s'"
+msgstr "Ενεργοποίηση του '%s'"
 
-#: ../src/window.c:878
+#. Translators: this is the title of the window with a modified document
+#: ../src/gtr-window.c:953
+#, c-format
+#| msgid "gtranslator"
+msgid "*%s - gtranslator"
+msgstr "*%s - gtranslator"
+
+#. Translators: this is the title of the window with a document opened
+#: ../src/gtr-window.c:956
+#, c-format
+#| msgid "gtranslator"
+msgid "%s - gtranslator"
+msgstr "%s - gtranslator"
+
+#: ../src/gtr-window.c:962
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#
-#: ../src/window.c:1234
+#: ../src/gtr-window.c:1336
 msgid "Toolbar Editor"
 msgstr "Επεξεργαστής εργαλειοθήκης"
 
-#: ../src/window.c:1552
+#: ../src/gtr-window.c:1462
+#| msgid "Profile"
+msgid "No profile"
+msgstr "Κανένα προφίλ"
+
+#: ../src/gtr-window.c:1485
+msgid "Profile for the active document"
+msgstr "Προφίλ για το ενεργό έγγραφο"
+
+#: ../src/gtr-window.c:1833
 msgid "Documents"
 msgstr "Έγγραφα"
+
+#~ msgid "     "
+#~ msgstr "     "
+
+#~ msgid "Subversion: Checkout complete."
+#~ msgstr "Subversion: Το checkout ολοκληρώθηκε"
+
+#~ msgid "Please add a directory path to make the checkout"
+#~ msgstr ""
+#~ "Παρακαλώ εισάγετε την διαδρομή του καταλόγου που θα γίνει το checkout"
+
+#~ msgid "Please add a Subversion URL"
+#~ msgstr "Παρακαλώ εισάγετε ένα Subversion URL"
+
+#~ msgid "Checkout repository"
+#~ msgstr "Αποθετήριο checkout"
+
+#~ msgid "Subversion: Commit complete."
+#~ msgstr "Subversion: Η υποβολή ολοκληρώθηκε."
+
+#~ msgctxt "ChangeLog entry"
+#~ msgid "LANGUAGE"
+#~ msgstr "Greek"
+
+#~ msgid "The ChangeLog file '%s' does not exist"
+#~ msgstr "Το αρχείο ChangeLog '%s' δεν υπάρχει"
+
+#~ msgid "Are you sure that you want to pass an empty log message?"
+#~ msgstr "Είστε βέβαιος ότι θέλετε να περάσετε ένα κενό μήνυμα καταγραφής;"
+
+#~ msgid "You have to select at least one file to send"
+#~ msgstr "Θα πρέπει να επιλέξετε ένα τουλάχιστον αρχείο για αποστολή"
+
+#~ msgid "Commit Changes"
+#~ msgstr "Υποβολή αλλαγών"
+
+#~ msgid "Subversion: Diff complete."
+#~ msgstr "Subversion: Το diff ολοκληρώθηκε"
+
+#~ msgid "Please install %s to be able to diff the file"
+#~ msgstr ""
+#~ "Παρακαλώ εγκαταστήστε το %s για να μπορέσετε να κάνετε diff το αρχείο"
+
+#~ msgid "Diff file"
+#~ msgstr "Diff αρχείου"
+
+#~ msgid "Diff"
+#~ msgstr "Diff"
+
+#~ msgid "Subversion: File will be added on next commit."
+#~ msgstr "Subversion: Το αρχείο θα προστεθεί στην επόμενη υποβολή."
+
+#~ msgid "_Update"
+#~ msgstr "_Ενημέρωση"
+
+#~ msgid "Sync your local copy with the Subversion tree"
+#~ msgstr "Συγχρονισμός του τοπικού αντίγραφου με το δέντρο στο Subversion"
+
+#
+#~ msgid "_Commit"
+#~ msgstr "_Υποβολή"
+
+#~ msgid "Commit your changes to the Subversion tree"
+#~ msgstr "Υποβολή των αλλαγών σας στο δέντρο του Subversion"
+
+#~ msgid "_Add"
+#~ msgstr "_Προσθήκη"
+
+#~ msgid "Add a new file/directory to the Subversion tree"
+#~ msgstr "Προσθήκη νέου αρχείου/καταλόγου στο δέντρο του Subversion"
+
+#~ msgid "_Diff"
+#~ msgstr "_Diff"
+
+#~ msgid "Diff local PO file with repository PO file"
+#~ msgstr "Εκτέλεση diff στο τοπικό αρχείο PO με το PO στο αποθετήριο"
+
+#~ msgid "C_heckout"
+#~ msgstr "C_heckout"
+
+#~ msgid "Get a new repository copy"
+#~ msgstr "Λήψη νέου αντίγραφου αποθετηρίου"
+
+#~ msgid "S_ubversion"
+#~ msgstr "S_ubversion"
+
+#~ msgid "  "
+#~ msgstr "  "
+
+#~ msgid "        "
+#~ msgstr "        "
+
+#~ msgid "<b>Diff options:</b>"
+#~ msgstr "<b>Επιλογές diff:</b>"
+
+#~ msgid "<b>Diff program:</b>"
+#~ msgstr "<b>Πρόγραμμα diff:</b>"
+
+#~ msgid "<b>Directory to checkout:</b>"
+#~ msgstr "<b>Κατάλογος για checkout:</b>"
+
+#~ msgid "<b>Directory to update:</b>"
+#~ msgstr "<b>Κατάλογος προς ανανέωση:</b>"
+
+#~ msgid "<b>Information:</b>"
+#~ msgstr "<b>Πληροφορίες:</b>"
+
+#~ msgid "<b>Log Message:</b>"
+#~ msgstr "<b>Μήνυμα αρχείου καταγραφής:</b>"
+
+#~ msgid "<b>Password:</b>"
+#~ msgstr "<b>Συνθηματικό:</b>"
+
+#~ msgid "<b>Realm:</b>"
+#~ msgstr "<b>Realm:</b>"
+
+#~ msgid "<b>Select files to Commit:</b>"
+#~ msgstr "<b>Επιλογή αρχείων για Υποβολή:</b>"
+
+#~ msgid "<b>Subversion URL:</b>"
+#~ msgstr "<b>Subversion URL:</b>"
+
+#~ msgid "<b>Username:</b>"
+#~ msgstr "<b>Όνομα χρήστη:</b>"
+
+#~ msgid "Add Log Message to ChangeLog file"
+#~ msgstr "Προσθήκη Μηνύματος αρχείου καταγραφής στο αρχείο Changelog"
+
+#~ msgid "Line argument:"
+#~ msgstr "Γραμμή ορίσματος:"
+
+#~ msgid "Program name:"
+#~ msgstr "Όνομα προγράμματος:"
+
+#~ msgid "Remember Password"
+#~ msgstr "Απομνημόνευση συνθηματικού"
+
+#~ msgid "Remember this decision"
+#~ msgstr "Απομνημόνευση αυτής της απόφασης"
+
+#~ msgid "Repository authorization"
+#~ msgstr "Πιστοποίηση αποθετηρίου"
+
+#~ msgid "Retrieving status..."
+#~ msgstr "Λήψη κατάστασης..."
+
+#~ msgid "Save the diff file"
+#~ msgstr "Αποθήκευση αρχείου diff"
+
+#~ msgid "Send Changes"
+#~ msgstr "Αποστολή αλλαγών"
+
+#~ msgid "Update repository"
+#~ msgstr "Ενημέρωση αποθετηρίου"
+
+#~ msgid "Use configured program to view the diff"
+#~ msgstr "Χρήση του ρυθμισμένου προγράμματος για προβολή του diff"
+
+#~ msgid "label"
+#~ msgstr "ετικέτα"
+
+#~ msgid "A Subversion client plugin based on libsvn."
+#~ msgstr "Μια πρόσθετη λειτουργία πελάτη Subversion βασισμένο στη libsvn."
+
+#~ msgid "Subversion"
+#~ msgstr "Subversion"
+
+#~ msgid "Authentication canceled"
+#~ msgstr "Η πιστοποίηση ακυρώθηκε"
+
+#~ msgid "Hostname:"
+#~ msgstr "Hostname:"
+
+#~ msgid "Fingerprint:"
+#~ msgstr "Fingerprint:"
+
+#~ msgid "Valid from:"
+#~ msgstr "Έγκυρο από:"
+
+#~ msgid "Valid until:"
+#~ msgstr "Έγκυρο μέχρι:"
+
+#~ msgid "Issuer DN:"
+#~ msgstr "Issuer DN:"
+
+#~ msgid "DER certificate:"
+#~ msgstr "Πιστοποιητικό DER:"
+
+#~ msgid "Deleted: %s"
+#~ msgstr "Διαγράφηκε: %s"
+
+#~ msgid "Added: %s"
+#~ msgstr "Προστέθηκε: %s"
+
+#~ msgid "Reverted: %s"
+#~ msgstr "Επαναφέρθηκε: %s"
+
+#~ msgid "Revert failed: %s"
+#~ msgstr "Η επαναφορά απέτυχε: %s"
+
+#~ msgid "Resolved: %s"
+#~ msgstr "Επιλύθηκε: %s"
+
+#
+#~ msgid "Updated: %s"
+#~ msgstr "Ενημερώθηκε: %s"
+
+#~ msgid "Externally Updated: %s"
+#~ msgstr "Ενημερώθηκε εξωτερικά: %s"
+
+#~ msgid "Commit Modified: %s"
+#~ msgstr "Η υποβολή τροποποιήθηκε: %s"
+
+#~ msgid "Commit Added: %s"
+#~ msgstr "Η υποβολή προστέθηκε: %s"
+
+#~ msgid "Commit Deleted: %s"
+#~ msgstr "Η υποβολή διαγράφηκε: %s"
+
+#~ msgid "Commit Replaced: %s"
+#~ msgstr "Η υποβολή αντικαταστάθηκε: %s"
+
+#~ msgid "Created File: %s"
+#~ msgstr "Το αρχείο δημιουργήθηκε: %s"
+
+#~ msgid "Modified: %s"
+#~ msgstr "Τροποποιήθηκε: %s"
+
+#~ msgid "Merged: %s"
+#~ msgstr "Συγχωνεύθηκε: %s"
+
+#~ msgid "Conflicted: %s"
+#~ msgstr "Συγκρούστηκε: %s"
+
+#~ msgid "Missing: %s"
+#~ msgstr "Απουσιάζει: %s"
+
+#~ msgid "Obstructed: %s"
+#~ msgstr "Εμποδίστηκε: %s"
+
+#~ msgid "Updated to revision %ld."
+#~ msgstr "Ενημερώθηκε στην αναθεώρηση %ld."
+
+#~ msgid "Subversion: Update complete."
+#~ msgstr "Subversion: Ολοκληρώθηκε η ενημέρωση."
+
+#~ msgid "Modified"
+#~ msgstr "Τροποποιήθηκε"
+
+#~ msgid "Deleted"
+#~ msgstr "Διαγράφηκε"
+
+#~ msgid "Conflicted"
+#~ msgstr "Συγκρούστηκε"
+
+#~ msgid "Missing"
+#~ msgstr "Απουσιάζει"
+
+#~ msgid "Failed to write profile data into profiles file '%s'"
+#~ msgstr "Απέτυχε η εγγραφή των δεδομένων προφίλ στο αρχείο προφίλ '%s'"
+
+#~ msgid "Edit Comment"
+#~ msgstr "Επεξεργασία σχολίου"
+
+#~ msgid "<b>Write your comments bellow:</b>"
+#~ msgstr "<b>Γράψτε τα σχόλιά σας πιο κάτω:</b>"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-cancel"
+
+#~ msgid "gtk-ok"
+#~ msgstr "gtk-ok"
+
+#~ msgid "<b>Autosave</b>"
+#~ msgstr "<b>Αυτόματη αποθήκευση</b>"
+
+#~ msgid "<b>Configuration:</b>"
+#~ msgstr "<b>Ρύθμιση:</b>"
+
+#~ msgid "<b>Contents</b>"
+#~ msgstr "<b>Περιεχόμενα</b>"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"large\">The profile name already exists</"
+#~ "span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"large\">Το όνομα προφίλ υπάρχει ήδη</span>"
+
+#~ msgid "Example: nplurals=2; plural=(n != 1);"
+#~ msgstr "Παράδειγμα: nplurals=2; plural=(n != 1);"
+
+#~ msgid "Error setting the default window icon: %s"
+#~ msgstr ""
+#~ "Σφάλμα κατά τον ορισμό του προεπιλεγμένου εικονιδίου του παραθύρου: %s"
+
+#~ msgid "<b>Path:</b> %s"
+#~ msgstr "<b>Διαδρομή:</b> %s"
+
+#~ msgid "Open comment dialog"
+#~ msgstr "Άνοιγμα διαλόγου σχολίου"
+
+#
+#~ msgid "Message Table"
+#~ msgstr "Πίνακας μηνυμάτων"
+
+#~ msgid "Running recovery..."
+#~ msgstr "Εκτελείται επαναφορά..."
+
+#~ msgid "There was an error recovering the database: %s"
+#~ msgstr "Εμφανίστηκε ένα σφάλμα κατά την επαναφορά της βάσης δεδομένων: %s"
+
+#~ msgid "There was an error in database: %s"
+#~ msgstr "Υπήρξε ένα σφάλμα στη βάση δεδομένων: %s"
+
+#~ msgid "C_omment..."
+#~ msgstr "_Σχόλιο..."
+
+#~ msgid "Edit message comment"
+#~ msgstr "Επεξεργασία σχολίου μηνύματος"
+
+#~ msgid "Show the Translation Memory panel"
+#~ msgstr "Εμφάνιση του πλαισίου μεταφραστικής μνήμης"
+
+#~ msgid "Prev F_ile"
+#~ msgstr "Προηγούμενο αρ_χείο"
+
+#~ msgid "Go to the next file"
+#~ msgstr "Μετάβαση στο επόμενο αρχείο"
+
+#~ msgid "Next Fi_le"
+#~ msgstr "_Επόμενο αρχείο"
+
+#~ msgid "Status: %s"
+#~ msgstr "Κατάσταση: %s"
+
+#~ msgid "Fuzzy: %d"
+#~ msgstr "Ασαφή: %d"
+
+#~ msgid "Untranslated: %d"
+#~ msgstr "Αμετάφραστα: %d"
+
+#~ msgid "gtranslator - %s"
+#~ msgstr "gtranslator - %s"
+
+#~ msgid "gtranslator - *%s"
+#~ msgstr "gtranslator - *%s"
 
 #~ msgid "Select Folder"
 #~ msgstr "Επιλογή φακέλλου"
@@ -2255,10 +2289,6 @@ msgstr "Έγγραφα"
 #~ "Compile successful:\n"
 #~ "%s"
 #~ msgstr "Η δέσμευση εκτελέστηκε"
-
-#, fuzzy
-#~ msgid "Save local copy of file as..."
-#~ msgstr "gtranslator -- αποθήκευση τοπικού αντιγράφου αρχείου ως.."
 
 #~ msgid ""
 #~ "File %s\n"
@@ -2655,10 +2685,6 @@ msgstr "Έγγραφα"
 
 #~ msgid "gtranslator's homepage on the web"
 #~ msgstr "Η αρχική σελίδα του gtranslator στο Web"
-
-#
-#~ msgid "Open"
-#~ msgstr "Άνοιγμα"
 
 #~ msgid "Save"
 #~ msgstr "Αποθήκευση"
