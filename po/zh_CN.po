@@ -1,5 +1,6 @@
 # zh_CN translation of gtranslator.
 # Copyright (C) 2001-2009 Free Software Foundation, Inc.
+# This file is distributed under the same license as the gtranslator package.
 # Wang Jian <lark@linux.net.cn>, 2001,2003.
 # Zhang Miao <mymzhang@gmail.com>, 2009.
 # Ming Yang <yamisoe@gmail.com>, 2009.
@@ -11,10 +12,10 @@ msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&component=general\n"
-"POT-Creation-Date: 2010-02-19 13:54+0000\n"
-"PO-Revision-Date: 2010-02-24 16:44+0800\n"
+"POT-Creation-Date: 2010-07-19 00:10+0000\n"
+"PO-Revision-Date: 2010-07-27 17:02+0800\n"
 "Last-Translator: YunQiang Su <wzssyqa@gmail.com>\n"
-"Language-Team: Simplified Chinese <i18n-zh@googlegroups.com>\n"
+"Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -238,19 +239,17 @@ msgstr "文件已关闭"
 #: ../plugins/alternate-language/gtr-alternate-language-panel.c:316
 msgctxt "alternate lang"
 msgid "_Open"
-msgstr ""
+msgstr "打开(_O)"
 
 #: ../plugins/alternate-language/gtr-alternate-language-panel.c:322
-#, fuzzy
-#| msgid "_Close All"
 msgctxt "alternate lang"
 msgid "_Close"
-msgstr "全部关闭(_C)"
+msgstr "关闭(_C)"
 
 #: ../plugins/alternate-language/gtr-alternate-language-panel.c:328
 msgctxt "alternate lang"
 msgid "Co_py"
-msgstr ""
+msgstr "复制(_P)"
 
 #: ../plugins/alternate-language/gtr-alternate-language-panel.c:357
 msgid "There isn't any file loaded"
@@ -519,9 +518,9 @@ msgstr "使用外部编辑器"
 msgid "Please install \"%s\" to be able to show the file"
 msgstr "请安装 %s 以可以显示该文件"
 
-#: ../plugins/source-code-view/gtr-source-code-view-plugin.c:442
-msgid "Paths:\n"
-msgstr "路径：\n"
+#: ../plugins/source-code-view/gtr-source-code-view-plugin.c:449
+msgid "Paths:"
+msgstr "路径："
 
 #: ../plugins/source-code-view/gtr-source-code-view.gtranslator-plugin.desktop.in.h:1
 msgid "Show the message in the source code."
@@ -642,24 +641,39 @@ msgstr[0] "找到并替换了 %d 个匹配项"
 msgid "Found and replaced one occurrence"
 msgstr "找到并替换了一个匹配项"
 
-#: ../src/gtr-context.c:57
-msgid "Format:"
-msgstr "格式："
+#: ../src/gtr-context.c:228
+msgid "Notes:"
+msgstr "注释："
 
-#: ../src/gtr-context.c:58
+#: ../src/gtr-context.c:236
+msgid "Add Note"
+msgstr "添加注释"
+
+#: ../src/gtr-context.c:241
+msgid "Edit"
+msgstr "编辑"
+
+#. Extracted comments
+#: ../src/gtr-context.c:284
+msgid "Extracted comments:"
+msgstr "提取的注释："
+
+#. Context
+#: ../src/gtr-context.c:288
 msgid "Context:"
 msgstr "上下文："
 
-#: ../src/gtr-context.c:60
-msgid "Extracted comments:"
-msgstr "注释："
+#. Format
+#: ../src/gtr-context.c:292
+msgid "Format:"
+msgstr "格式："
 
-#: ../src/dialogs/gtr-assistant.c:138
-#: ../src/dialogs/gtr-preferences-dialog.c:945
+#: ../src/dialogs/gtr-assistant.c:128
+#: ../src/dialogs/gtr-preferences-dialog.c:936
 msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
 msgstr "<span weight=\"bold\" size=\"large\">字符串已添加到数据库</span>"
 
-#: ../src/dialogs/gtr-assistant.c:285
+#: ../src/dialogs/gtr-assistant.c:275
 #, c-format
 msgid ""
 "Profile name: %s\n"
@@ -684,11 +698,11 @@ msgstr ""
 "复数形式：%s\n"
 "数据库路径：%s"
 
-#: ../src/dialogs/gtr-assistant.c:312
+#: ../src/dialogs/gtr-assistant.c:302
 msgid "None"
 msgstr "无"
 
-#: ../src/dialogs/gtr-assistant.c:335
+#: ../src/dialogs/gtr-assistant.c:325
 msgid ""
 "This assistant will help you to create the main profile\n"
 "and generate your translation memory database."
@@ -696,72 +710,72 @@ msgstr ""
 "该助手将帮助您创建主配置文件\n"
 "以及生成您的翻译记忆数据库。"
 
-#: ../src/dialogs/gtr-assistant.c:341
+#: ../src/dialogs/gtr-assistant.c:331
 msgid "Assistant"
 msgstr "创建助手"
 
-#: ../src/dialogs/gtr-assistant.c:433
+#: ../src/dialogs/gtr-assistant.c:423
 msgid "<b>Profile name:</b>"
 msgstr "<b>配置名称：</b>"
 
-#: ../src/dialogs/gtr-assistant.c:452
+#: ../src/dialogs/gtr-assistant.c:442
 msgid "<b>Translator name:</b>"
 msgstr "<b>翻译者姓名：</b>"
 
-#: ../src/dialogs/gtr-assistant.c:471
+#: ../src/dialogs/gtr-assistant.c:461
 msgid "<b>Translator email:</b>"
 msgstr "<b>翻译者电子邮件：</b>"
 
-#: ../src/dialogs/gtr-assistant.c:490
+#: ../src/dialogs/gtr-assistant.c:480
 msgid "<b>Language:</b>"
 msgstr "<b>语言：</b>"
 
-#: ../src/dialogs/gtr-assistant.c:509
+#: ../src/dialogs/gtr-assistant.c:499
 msgid "<b>Team email:</b>"
 msgstr "<b>团队电子邮件:</b>"
 
-#: ../src/dialogs/gtr-assistant.c:521 ../src/dialogs/gtr-assistant.c:667
-#: ../src/dialogs/gtr-preferences-dialog.c:730 ../src/gtr-window.c:1489
+#: ../src/dialogs/gtr-assistant.c:511 ../src/dialogs/gtr-assistant.c:657
+#: ../src/dialogs/gtr-preferences-dialog.c:730 ../src/gtr-window.c:1483
 msgid "Profile"
 msgstr "配置"
 
-#: ../src/dialogs/gtr-assistant.c:598
+#: ../src/dialogs/gtr-assistant.c:588
 msgid "<b>Language code:</b>"
 msgstr "<b>语言代码：</b>"
 
-#: ../src/dialogs/gtr-assistant.c:617
+#: ../src/dialogs/gtr-assistant.c:607
 msgid "<b>Character set:</b>"
 msgstr "<b>字符集：</b>"
 
-#: ../src/dialogs/gtr-assistant.c:636
+#: ../src/dialogs/gtr-assistant.c:626
 msgid "<b>Transfer encoding:</b>"
 msgstr "<b>传输编码：</b>"
 
-#: ../src/dialogs/gtr-assistant.c:655
+#: ../src/dialogs/gtr-assistant.c:645
 msgid "<b>Plural forms:</b>"
 msgstr "<b>复数形式:</b>"
 
-#: ../src/dialogs/gtr-assistant.c:676
+#: ../src/dialogs/gtr-assistant.c:666
 msgid "Checkout directory"
 msgstr "取出目录"
 
-#: ../src/dialogs/gtr-assistant.c:714
+#: ../src/dialogs/gtr-assistant.c:704
 msgid "<b>Select the path to generate the database:</b>"
 msgstr "<b>选择路径以生成数据库：</b>"
 
-#: ../src/dialogs/gtr-assistant.c:743
+#: ../src/dialogs/gtr-assistant.c:733
 msgid "<b>Look for a specific PO filename:</b>"
 msgstr "<b>查找指定的 PO 文件名：</b>"
 
-#: ../src/dialogs/gtr-assistant.c:752
+#: ../src/dialogs/gtr-assistant.c:742
 msgid "E.g.: gl.po"
 msgstr "例如：gl.po"
 
-#: ../src/dialogs/gtr-assistant.c:756
+#: ../src/dialogs/gtr-assistant.c:746
 msgid "Generate Database"
 msgstr "生成数据库"
 
-#: ../src/dialogs/gtr-assistant.c:782
+#: ../src/dialogs/gtr-assistant.c:772
 msgid "Confirmation"
 msgstr "确认"
 
@@ -806,14 +820,6 @@ msgstr "保存已被系统管理员禁用。"
 #: ../src/dialogs/gtr-close-confirmation-dialog.c:589
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "如果您不保存，所有的更改将会永久丢失。"
-
-#: ../src/dialogs/gtr-comment-dialog.c:95
-msgid "Edit Comment"
-msgstr "编辑注释"
-
-#: ../src/dialogs/gtr-comment-dialog.ui.h:1
-msgid "Write your comments below:"
-msgstr "请在下方写入您的注释："
 
 #: ../src/dialogs/gtr-file-dialogs.c:62
 msgid "Gettext translation"
@@ -916,7 +922,7 @@ msgstr "<span weight=\"bold\" size=\"large\">您确定要删除此配置文件�
 msgid "Active"
 msgstr "活动的"
 
-#: ../src/dialogs/gtr-preferences-dialog.c:1198
+#: ../src/dialogs/gtr-preferences-dialog.c:1189
 #: ../src/dialogs/gtr-preferences-dialog.ui.h:14
 msgid "Gtranslator Preferences"
 msgstr "Gtranslator 首选项"
@@ -1009,7 +1015,7 @@ msgstr "选择包含 PO 文件的目录："
 msgid "Text Display"
 msgstr "文本显示"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:24 ../src/gtr-tab.c:650
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:24
 msgid "Translation Memory"
 msgstr "翻译记忆"
 
@@ -1202,36 +1208,27 @@ msgstr "原始文本"
 msgid "Translated Text"
 msgstr "翻译文本"
 
-#: ../src/gtr-notebook.c:90
-#, c-format
-msgid "<b>Path:</b> %s"
-msgstr "<b>路径：</b> %s"
-
-#: ../src/gtr-notebook.c:142
-msgid "Close document"
-msgstr "关闭文档"
-
-#: ../src/gtr-po.c:387
+#: ../src/gtr-po.c:420
 #, c-format
 msgid "Failed opening file '%s': %s"
 msgstr "打开文件“%s”失败：%s "
 
-#: ../src/gtr-po.c:411
+#: ../src/gtr-po.c:444
 #, c-format
 msgid "The file is empty"
 msgstr "文件为空"
 
-#: ../src/gtr-po.c:426
+#: ../src/gtr-po.c:459
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext 返回了一个空的消息域列表。"
 
-#: ../src/gtr-po.c:478
+#: ../src/gtr-po.c:511
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "没有从解析器获得任何消息。"
 
-#: ../src/gtr-po.c:526
+#: ../src/gtr-po.c:559
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1242,12 +1239,12 @@ msgstr ""
 "POT 文件是在编译过程中生成的。\n"
 "您的文件应该命名为“%s.po”。"
 
-#: ../src/gtr-po.c:539
+#: ../src/gtr-po.c:572
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "%s 是只读文件，无法覆盖。"
 
-#: ../src/gtr-po.c:570
+#: ../src/gtr-po.c:603
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "写入 PO 文件时发生错误：%s"
@@ -1300,34 +1297,35 @@ msgstr "插入"
 msgid "OVR"
 msgstr "改写"
 
-#: ../src/gtr-tab.c:222
+#: ../src/gtr-tab.c:209
 msgid "There is an error in the message:"
 msgstr "信息中有一个错误："
 
-#: ../src/gtr-tab.c:396
-msgid "Open comment dialog"
-msgstr "打开注释对话框"
-
-#: ../src/gtr-tab.c:573
+#: ../src/gtr-tab.c:527
 #, c-format
 msgid "Plural %d"
 msgstr "复数 %d"
 
-#: ../src/gtr-tab.c:611
-msgid "Message Table"
-msgstr "消息表"
-
-#: ../src/gtr-tab.c:642
-msgid "Context"
-msgstr "上下文"
-
-#: ../src/gtr-tab.c:680
+#: ../src/gtr-tab.c:589
 msgid "<b>Original Text:</b>"
 msgstr "<b>原始文本：</b>"
 
-#: ../src/gtr-tab.c:741
+#: ../src/gtr-tab.c:648
 msgid "<b>Translate_d Text:</b>"
 msgstr "<b>已翻译文本：</b>"
+
+#: ../src/gtr-tab.c:698
+msgid "Context"
+msgstr "上下文"
+
+#. Translators: Path to the document opened
+#: ../src/gtr-tab.c:1132
+msgid "Path:"
+msgstr "路径："
+
+#: ../src/gtr-tab-label.c:275
+msgid "Close document"
+msgstr "关闭文档"
 
 #. Translaters: This string is for a toggle to display a toolbar.
 #. * The name of the toolbar is automatically computed from the widgets
@@ -1336,67 +1334,61 @@ msgstr "<b>已翻译文本：</b>"
 #. * produce duplicates, but don't worry about it. If your language
 #. * normally has a mnemonic at the start, please use the _. If not,
 #. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:939
+#: ../src/toolbareditor/egg-editable-toolbar.c:934
 #, c-format
 msgid "Show “_%s”"
 msgstr "显示 “_%s”"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1405
+#: ../src/toolbareditor/egg-editable-toolbar.c:1397
 msgid "_Move on Toolbar"
 msgstr "在工具条上移动(_M)"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1406
+#: ../src/toolbareditor/egg-editable-toolbar.c:1398
 msgid "Move the selected item on the toolbar"
 msgstr "移动工具条上选定的项目"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1407
+#: ../src/toolbareditor/egg-editable-toolbar.c:1399
 msgid "_Remove from Toolbar"
 msgstr "从工具条移除(_R)"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1408
+#: ../src/toolbareditor/egg-editable-toolbar.c:1400
 msgid "Remove the selected item from the toolbar"
 msgstr "从工具条上移除选定的项目"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1410
+#: ../src/toolbareditor/egg-editable-toolbar.c:1401
 msgid "_Delete Toolbar"
 msgstr "删除工具条(_D)"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1411
+#: ../src/toolbareditor/egg-editable-toolbar.c:1402
 msgid "Remove the selected toolbar"
 msgstr "移除选定的工具条"
 
-#: ../src/toolbareditor/egg-toolbar-editor.c:475
+#: ../src/toolbareditor/egg-toolbar-editor.c:485
 msgid "Separator"
 msgstr "分割符"
 
-#: ../src/translation-memory/berkeley/gtr-db-base.c:158
-msgid "Running recovery..."
-msgstr "恢复中..."
-
-#: ../src/translation-memory/berkeley/gtr-db-base.c:167
-#, c-format
-msgid "There was an error recovering the database: %s"
-msgstr "恢复数据出错：%s"
-
-#: ../src/translation-memory/berkeley/gtr-db-base.c:175
-#, c-format
-msgid "There was an error in database: %s"
-msgstr "数据库出错：%s"
-
-#: ../src/translation-memory/gtr-translation-memory-ui.c:209
+#: ../src/translation-memory/gtr-translation-memory-ui.c:227
 #, c-format
 msgid "Insert Option nº %d"
 msgstr "插入选项 nº %d"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:286
+#: ../src/translation-memory/gtr-translation-memory-ui.c:381
+msgid "_Use this translation"
+msgstr "使用此翻译(_U)"
+
+#: ../src/translation-memory/gtr-translation-memory-ui.c:386
+msgid "_Remove"
+msgstr "移除(_R)"
+
+#: ../src/translation-memory/gtr-translation-memory-ui.c:503
 msgid "Shortcut"
 msgstr "快捷键"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:295
+#: ../src/translation-memory/gtr-translation-memory-ui.c:512
 msgid "Level"
 msgstr "级别"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:304
+#: ../src/translation-memory/gtr-translation-memory-ui.c:521
 msgid "String"
 msgstr "字符串"
 
@@ -1529,253 +1521,274 @@ msgid "Clear the selected translation"
 msgstr "清除选定的翻译"
 
 #: ../src/gtr-window.c:195
-msgid "C_omment..."
-msgstr "注释(_O)..."
-
-#: ../src/gtr-window.c:196
-msgid "Edit message comment"
-msgstr "编辑消息注释"
-
-#: ../src/gtr-window.c:198
 msgid "Copy _Message to Translation"
 msgstr "复制消息到翻译中(_M)"
 
-#: ../src/gtr-window.c:200
+#: ../src/gtr-window.c:197
 msgid "Copy original message contents to the translation field"
 msgstr "将原始消息复制到翻译编辑框中"
 
-#: ../src/gtr-window.c:202
+#: ../src/gtr-window.c:199
 msgid "Toggle _Fuzzy Status"
 msgstr "切换模糊状态(_F)"
 
-#: ../src/gtr-window.c:203
+#: ../src/gtr-window.c:200
 msgid "Toggle fuzzy status of a message"
 msgstr "切换一条消息的模糊状态"
 
-#: ../src/gtr-window.c:205 ../src/gtr-window.c:213
+#: ../src/gtr-window.c:202
 msgid "_Translation Memory"
 msgstr "翻译记忆(_T)"
 
 #. View menu
-#: ../src/gtr-window.c:210
+#: ../src/gtr-window.c:207
 msgid "_Context"
 msgstr "上下文(_C)"
 
-#: ../src/gtr-window.c:211
+#: ../src/gtr-window.c:208
 msgid "Show the Context panel"
 msgstr "显示上下文面板"
 
-#: ../src/gtr-window.c:214
-msgid "Show the Translation Memory panel"
-msgstr "显示翻译记忆面板"
-
 #. Go menu
-#: ../src/gtr-window.c:218
+#: ../src/gtr-window.c:212
 msgid "_Previous Message"
 msgstr "前一条消息(_P)"
 
-#: ../src/gtr-window.c:219
+#: ../src/gtr-window.c:213
 msgid "Move back one message"
 msgstr "转到上一条消息"
 
-#: ../src/gtr-window.c:221
+#: ../src/gtr-window.c:215
 msgid "_Next Message"
 msgstr "下一条消息(_N)"
 
-#: ../src/gtr-window.c:222
+#: ../src/gtr-window.c:216
 msgid "Move forward one message"
 msgstr "转到下一条消息"
 
-#: ../src/gtr-window.c:224
+#: ../src/gtr-window.c:218
 msgid "_Go to Message..."
 msgstr "转到消息(_G)..."
 
-#: ../src/gtr-window.c:225
+#: ../src/gtr-window.c:219
 msgid "Jumps to a specific message"
 msgstr "转到指定的消息"
 
-#: ../src/gtr-window.c:227
+#: ../src/gtr-window.c:221
 msgid "_First Message"
 msgstr "第一条信息(_F)"
 
-#: ../src/gtr-window.c:228
+#: ../src/gtr-window.c:222
 msgid "Go to the first message"
 msgstr "转到第一条消息"
 
-#: ../src/gtr-window.c:230
+#: ../src/gtr-window.c:224
 msgid "_Last Message"
 msgstr "最后一条消息(_L)"
 
-#: ../src/gtr-window.c:231
+#: ../src/gtr-window.c:225
 msgid "Go to the last message"
 msgstr "转到最后一条消息"
 
-#: ../src/gtr-window.c:233
+#: ../src/gtr-window.c:227
 msgid "Next Fuz_zy"
 msgstr "下一条模糊翻译(_Z)"
 
-#: ../src/gtr-window.c:234
+#: ../src/gtr-window.c:228
 msgid "Go to the next fuzzy message"
 msgstr "转到下一条模糊翻译的消息"
 
-#: ../src/gtr-window.c:236
+#: ../src/gtr-window.c:230
 msgid "Previous Fuzz_y"
 msgstr "前一条模糊翻译(_Y)"
 
-#: ../src/gtr-window.c:237
+#: ../src/gtr-window.c:231
 msgid "Go to the previous fuzzy message"
 msgstr "转到前一条模糊翻译的消息"
 
-#: ../src/gtr-window.c:239
+#: ../src/gtr-window.c:233
 msgid "Next _Untranslated"
 msgstr "下一条未翻译的消息(_U)"
 
-#: ../src/gtr-window.c:240
+#: ../src/gtr-window.c:234
 msgid "Go to the next untranslated message"
 msgstr "转到下一条未翻译的消息"
 
-#: ../src/gtr-window.c:243
+#: ../src/gtr-window.c:237
 msgid "Previ_ous Untranslated"
 msgstr "前一条未翻译的消息(_O)"
 
-#: ../src/gtr-window.c:244
+#: ../src/gtr-window.c:238
 msgid "Go to the previous untranslated message"
 msgstr "转到前一条未翻译的消息"
 
-#: ../src/gtr-window.c:247
+#: ../src/gtr-window.c:241
 msgid "Next Fu_zzy or Untranslated"
 msgstr "下一条模糊翻译或未翻译的消息(_Z)"
 
-#: ../src/gtr-window.c:249
+#: ../src/gtr-window.c:243
 msgid "Go to the next fuzzy or untranslated message"
 msgstr "转到下一条模糊翻译或未翻译的消息"
 
-#: ../src/gtr-window.c:252
+#: ../src/gtr-window.c:246
 msgid "Pre_vious Fuzzy or Untranslated"
 msgstr "前一条模糊翻译或未翻译的消息(_V)"
 
-#: ../src/gtr-window.c:254
+#: ../src/gtr-window.c:248
 msgid "Go to the previous fuzzy or untranslated message"
 msgstr "转到前一条模糊翻译或未翻译的消息"
 
-#: ../src/gtr-window.c:259
+#: ../src/gtr-window.c:253
 msgid "Search for text"
 msgstr "查找文本"
 
-#: ../src/gtr-window.c:262
+#: ../src/gtr-window.c:256
 msgid "Search for and replace text"
 msgstr "查找和替换文本"
 
 #. Documents menu
-#: ../src/gtr-window.c:266
+#: ../src/gtr-window.c:260
 msgid "_Save All"
 msgstr "全部保存(_S)"
 
-#: ../src/gtr-window.c:267
+#: ../src/gtr-window.c:261
 msgid "Save all open files"
 msgstr "保存所有已打开文件"
 
-#: ../src/gtr-window.c:269
+#: ../src/gtr-window.c:263
 msgid "_Close All"
 msgstr "全部关闭(_C)"
 
-#: ../src/gtr-window.c:270
+#: ../src/gtr-window.c:264
 msgid "Close all open files"
 msgstr "关闭所有已打开文件"
 
-#: ../src/gtr-window.c:272
+#: ../src/gtr-window.c:266
 msgid "_Previous Document"
 msgstr "上一个文档(_P)"
 
-#: ../src/gtr-window.c:274
+#: ../src/gtr-window.c:268
 msgid "Activate previous document"
 msgstr "激活上一篇文档"
 
-#: ../src/gtr-window.c:276
+#: ../src/gtr-window.c:270
 msgid "_Next Document"
 msgstr "下一个文档(_N)"
 
-#: ../src/gtr-window.c:278
+#: ../src/gtr-window.c:272
 msgid "Activate next document"
 msgstr "激活下一篇文档"
 
-#: ../src/gtr-window.c:711
+#: ../src/gtr-window.c:705
 msgid "Untranslated"
 msgstr "未翻译的"
 
-#: ../src/gtr-window.c:714
+#: ../src/gtr-window.c:708
 msgid "Translated"
 msgstr "已翻译"
 
-#: ../src/gtr-window.c:717
+#: ../src/gtr-window.c:711
 msgid "Fuzzy"
 msgstr "模糊翻译"
 
-#: ../src/gtr-window.c:724
+#: ../src/gtr-window.c:718
 #, c-format
 msgid "Current: %d"
 msgstr "当前：%d"
 
-#: ../src/gtr-window.c:725
+#: ../src/gtr-window.c:719
 #, c-format
 msgid "Total: %d"
 msgstr "全部：%d"
 
-#: ../src/gtr-window.c:726
+#: ../src/gtr-window.c:720
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "%d 条已翻译"
 
-#: ../src/gtr-window.c:729
+#: ../src/gtr-window.c:723
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "%d 条模糊翻译"
 
-#: ../src/gtr-window.c:731
+#: ../src/gtr-window.c:725
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
 msgstr[0] "%d 条尚未翻译"
 
 #. Translators: %s is a URI
-#: ../src/gtr-window.c:785
+#: ../src/gtr-window.c:779
 #, c-format
 msgid "Activate '%s'"
 msgstr "激活“%s”"
 
 #. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:959
-#, fuzzy, c-format
-#| msgid "gtranslator"
+#: ../src/gtr-window.c:953
+#, c-format
 msgid "*%s - gtranslator"
-msgstr "gtranslator"
+msgstr "*%s - gtranslator"
 
 #. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:962
-#, fuzzy, c-format
-#| msgid "gtranslator"
+#: ../src/gtr-window.c:956
+#, c-format
 msgid "%s - gtranslator"
-msgstr "gtranslator"
+msgstr "%s - gtranslator"
 
-#: ../src/gtr-window.c:968
+#: ../src/gtr-window.c:962
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/gtr-window.c:1342
+#: ../src/gtr-window.c:1336
 msgid "Toolbar Editor"
 msgstr "工具条编辑器"
 
-#: ../src/gtr-window.c:1468
-#, fuzzy
-#| msgid "Profile"
+#: ../src/gtr-window.c:1462
 msgid "No profile"
-msgstr "配置"
+msgstr "未配置"
 
-#: ../src/gtr-window.c:1837
+#: ../src/gtr-window.c:1485
+msgid "Profile for the active document"
+msgstr "活动文档的配置文件"
+
+#: ../src/gtr-window.c:1833
 msgid "Documents"
 msgstr "文档"
+
+#~ msgid "Edit Comment"
+#~ msgstr "编辑注释"
+
+#~ msgid "Write your comments below:"
+#~ msgstr "请在下方写入您的注释："
+
+#~ msgid "<b>Path:</b> %s"
+#~ msgstr "<b>路径：</b> %s"
+
+#~ msgid "Open comment dialog"
+#~ msgstr "打开注释对话框"
+
+#~ msgid "Message Table"
+#~ msgstr "消息表"
+
+#~ msgid "Running recovery..."
+#~ msgstr "恢复中..."
+
+#~ msgid "There was an error recovering the database: %s"
+#~ msgstr "恢复数据出错：%s"
+
+#~ msgid "There was an error in database: %s"
+#~ msgstr "数据库出错：%s"
+
+#~ msgid "C_omment..."
+#~ msgstr "注释(_O)..."
+
+#~ msgid "Edit message comment"
+#~ msgstr "编辑消息注释"
+
+#~ msgid "Show the Translation Memory panel"
+#~ msgstr "显示翻译记忆面板"
 
 #~ msgid "Failed to write profile data into profiles file '%s'"
 #~ msgstr "无法将配置数据写入配置文件“%s”"
@@ -2037,9 +2050,6 @@ msgstr "文档"
 
 #~ msgid "Modified"
 #~ msgstr "已更改"
-
-#~ msgid "Added"
-#~ msgstr "已添加"
 
 #~ msgid "Deleted"
 #~ msgstr "已删除"
