@@ -524,7 +524,7 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
 
   do
     {
-      label = g_strdup_printf (_("Plural %d"), i + 1);
+      label = g_strdup_printf (_("Plural %d"), i);
       priv->trans_msgstr[i] = gtr_tab_append_msgstr_page (label,
                                                           priv->trans_notebook,
                                                           TRUE);
