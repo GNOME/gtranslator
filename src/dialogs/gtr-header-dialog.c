@@ -221,7 +221,8 @@ static void
 gtr_header_dialog_init (GtrHeaderDialog * dlg)
 {
   gboolean ret;
-  GtkWidget *error_widget;
+  GtkWidget *error_widget, *action_area;
+  GtkBox *content_area;
   gchar *path;
   gchar *root_objects[] = {
     "main_box",
@@ -238,11 +239,13 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
   gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
+  action_area = gtk_dialog_get_action_area (GTK_DIALOG (dlg));
+  content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
+
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);
-  gtk_container_set_border_width (GTK_CONTAINER
-                                  (GTK_DIALOG (dlg)->action_area), 5);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 4);
+  gtk_box_set_spacing (content_area, 2);
+  gtk_container_set_border_width (GTK_CONTAINER (action_area), 5);
+  gtk_box_set_spacing (GTK_BOX (action_area), 4);
 
   g_signal_connect (dlg, "response", G_CALLBACK (gtk_widget_destroy), NULL);
 
@@ -276,14 +279,12 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
   if (!ret)
     {
       gtk_widget_show (error_widget);
-      gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-                          error_widget, TRUE, TRUE, 0);
+      gtk_box_pack_start (content_area, error_widget, TRUE, TRUE, 0);
 
       return;
     }
 
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-                      dlg->priv->main_box, FALSE, FALSE, 0);
+  gtk_box_pack_start (content_area, dlg->priv->main_box, FALSE, FALSE, 0);
 
   gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);
 

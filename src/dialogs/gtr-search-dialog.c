@@ -359,7 +359,8 @@ static void
 gtr_search_dialog_init (GtrSearchDialog * dlg)
 {
   GtkWidget *content;
-  GtkWidget *error_widget;
+  GtkWidget *error_widget, *action_area;
+  GtkBox *content_area;
   gboolean ret;
   gchar *path;
   gchar *root_objects[] = {
@@ -376,12 +377,14 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
                           GTK_STOCK_CLOSE, GTK_RESPONSE_CANCEL, NULL);
 
+  action_area = gtk_dialog_get_action_area (GTK_DIALOG (dlg));
+  content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
+
   /* HIG defaults */
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);    /* 2 * 5 + 2 = 12 */
-  gtk_container_set_border_width (GTK_CONTAINER
-                                  (GTK_DIALOG (dlg)->action_area), 5);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);
+  gtk_box_set_spacing (content_area, 2);    /* 2 * 5 + 2 = 12 */
+  gtk_container_set_border_width (GTK_CONTAINER (action_area), 5);
+  gtk_box_set_spacing (GTK_BOX (action_area), 6);
 
   path = gtr_dirs_get_ui_file ("gtr-search-dialog.ui");
   ret = gtr_utils_get_ui_objects (path,
@@ -413,8 +416,7 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
     {
       gtk_widget_show (error_widget);
 
-      gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-                          error_widget, TRUE, TRUE, 0);
+      gtk_box_pack_start (content_area, error_widget, TRUE, TRUE, 0);
 
       gtk_container_set_border_width (GTK_CONTAINER (error_widget), 5);
 
@@ -490,8 +492,7 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
                                      GTR_SEARCH_DIALOG_REPLACE_ALL_RESPONSE,
                                      FALSE);
 
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-                      content, FALSE, FALSE, 0);
+  gtk_box_pack_start (content_area, content, FALSE, FALSE, 0);
   gtk_container_set_border_width (GTK_CONTAINER (content), 5);
 
   g_signal_connect (dlg->priv->search_text_entry,
