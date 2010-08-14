@@ -143,15 +143,17 @@ gdict_sidebar_menu_position_function (GtkMenu * menu,
                                       gboolean * push_in, gpointer user_data)
 {
   GtkWidget *widget;
+  GtkAllocation allocation;
 
   g_assert (GTK_IS_BUTTON (user_data));
 
   widget = GTK_WIDGET (user_data);
 
-  gdk_window_get_origin (widget->window, x, y);
+  gdk_window_get_origin (gtk_widget_get_window (widget), x, y);
+  gtk_widget_get_allocation (widget, &allocation);
 
-  *x += widget->allocation.x;
-  *y += widget->allocation.y + widget->allocation.height;
+  *x += allocation.x;
+  *y += allocation.y + allocation.height;
 
   *push_in = FALSE;
 }
@@ -166,9 +168,11 @@ gdict_sidebar_select_button_press_cb (GtkWidget * widget,
   if (event->button == 1)
     {
       GtkRequisition req;
+      GtkAllocation allocation;
       gint width;
 
-      width = widget->allocation.width;
+      gtk_widget_get_allocation (widget, &allocation);
+      width = allocation.width;
       gtk_widget_set_size_request (sidebar->priv->menu, -1, -1);
       gtk_widget_size_request (sidebar->priv->menu, &req);
       gtk_widget_set_size_request (sidebar->priv->menu,
