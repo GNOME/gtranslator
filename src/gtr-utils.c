@@ -216,20 +216,22 @@ gtr_utils_menu_position_under_widget (GtkMenu * menu,
 {
   GtkWidget *w = GTK_WIDGET (user_data);
   GtkRequisition requisition;
+  GtkAllocation allocation;
 
-  gdk_window_get_origin (w->window, x, y);
+  gdk_window_get_origin (gtk_widget_get_window (w), x, y);
   gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
+  gtk_widget_get_allocation (w, &allocation);
 
   if (gtk_widget_get_direction (w) == GTK_TEXT_DIR_RTL)
     {
-      *x += w->allocation.x + w->allocation.width - requisition.width;
+      *x += allocation.x + allocation.width - requisition.width;
     }
   else
     {
-      *x += w->allocation.x;
+      *x += allocation.x;
     }
 
-  *y += w->allocation.y + w->allocation.height;
+  *y += allocation.y + allocation.height;
 
   *push_in = TRUE;
 }
@@ -267,7 +269,7 @@ gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
       GtkTreePath *path;
       GdkRectangle rect;
 
-      gdk_window_get_origin (GTK_WIDGET (tree)->window, x, y);
+      gdk_window_get_origin (gtk_widget_get_window (GTK_WIDGET (tree)), x, y);
 
       path = gtk_tree_model_get_path (model, &iter);
       gtk_tree_view_get_cell_area (tree, path, gtk_tree_view_get_column (tree, 0),      /* FIXME 0 for RTL ? */
@@ -491,7 +493,7 @@ gtr_utils_drop_get_locations (GtkSelectionData * selection_data)
   gint i;
   GSList *locations = NULL;
 
-  uris = g_uri_list_extract_uris ((gchar *) selection_data->data);
+  uris = g_uri_list_extract_uris ((gchar *) gtk_selection_data_get_data (selection_data));
 
   for (i = 0; uris[i] != NULL; i++)
     {

@@ -1332,15 +1332,17 @@ gtr_window_cmd_edit_toolbar (GtkAction * action, GtrWindow * window)
 {
   GtkWidget *dialog;
   GtkWidget *editor;
+  GtkWidget *content_area;
 
   dialog = gtk_dialog_new_with_buttons (_("Toolbar Editor"),
                                         GTK_WINDOW (window),
                                         GTK_DIALOG_DESTROY_WITH_PARENT,
                                         GTK_STOCK_CLOSE,
                                         GTK_RESPONSE_CLOSE, NULL);
+  content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE);
   gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog)), 5);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 2);
+  gtk_box_set_spacing (GTK_BOX (content_area), 2);
   gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
   gtk_window_set_default_size (GTK_WINDOW (dialog), 500, 400);
 
@@ -1351,7 +1353,7 @@ gtr_window_cmd_edit_toolbar (GtkAction * action, GtrWindow * window)
   gtk_container_set_border_width (GTK_CONTAINER (editor), 5);
   gtk_box_set_spacing (GTK_BOX (EGG_TOOLBAR_EDITOR (editor)), 5);
 
-  gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), editor);
+  gtk_container_add (GTK_CONTAINER (content_area), editor);
 
   egg_editable_toolbar_set_edit_mode
     (EGG_EDITABLE_TOOLBAR (window->priv->toolbar), TRUE);

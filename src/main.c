@@ -152,7 +152,7 @@ unique_app_message_cb (UniqueApp *unique_app,
    * terminal. We also need to make sure that the window
    * has been realized otherwise it will not work. lame.
    */
-  if (!GTK_WIDGET_REALIZED (window))
+  if (!gtk_widget_get_realized (GTK_WIDGET (window)))
     gtk_widget_realize (GTK_WIDGET (window));
 
 #ifdef GDK_WINDOWING_X11
