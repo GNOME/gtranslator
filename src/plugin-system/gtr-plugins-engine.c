@@ -584,13 +584,8 @@ gtr_plugins_engine_configure_plugin (GtrPluginsEngine *
   g_return_if_fail (conf_dlg != NULL);
   gtk_window_set_transient_for (GTK_WINDOW (conf_dlg), parent);
 
-  wg = parent->group;
-  if (wg == NULL)
-    {
-      wg = gtk_window_group_new ();
-      gtk_window_group_add_window (wg, parent);
-    }
-
+  wg = gtk_window_get_group (parent);
+  gtk_window_group_add_window (wg, parent);
   gtk_window_group_add_window (wg, GTK_WINDOW (conf_dlg));
 
   gtk_window_set_modal (GTK_WINDOW (conf_dlg), TRUE);
