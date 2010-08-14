@@ -29,16 +29,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#define GTR_NOTEBOOK_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ( \
-					  (object), \
-					  GTR_TYPE_NOTEBOOK, \
-					  GtrNotebookPrivate))
-
 G_DEFINE_TYPE (GtrNotebook, gtr_notebook, GTK_TYPE_NOTEBOOK)
-
-struct _GtrNotebookPrivate
-{
-};
 
 /* Signals */
 enum
@@ -107,7 +98,6 @@ update_tabs_visibility (GtrNotebook *nb)
 static void
 gtr_notebook_init (GtrNotebook * notebook)
 {
-  notebook->priv = GTR_NOTEBOOK_GET_PRIVATE (notebook);
 }
 
 static void
@@ -120,8 +110,6 @@ static void
 gtr_notebook_class_init (GtrNotebookClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  //g_type_class_add_private (klass, sizeof (GtrNotebookPrivate));
 
   object_class->finalize = gtr_notebook_finalize;
 

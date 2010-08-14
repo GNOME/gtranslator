@@ -35,8 +35,6 @@ G_BEGIN_DECLS
 #define GTR_IS_NOTEBOOK(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_NOTEBOOK))
 #define GTR_IS_NOTEBOOK_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_NOTEBOOK))
 #define GTR_NOTEBOOK_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_NOTEBOOK, GtrNotebookClass))
-/* Private structure type */
-typedef struct _GtrNotebookPrivate GtrNotebookPrivate;
 
 /*
  * Main object structure
@@ -46,9 +44,6 @@ typedef struct _GtrNotebook GtrNotebook;
 struct _GtrNotebook
 {
   GtkNotebook parent_instance;
-
-  /*< private > */
-  GtrNotebookPrivate *priv;
 };
 
 /*
