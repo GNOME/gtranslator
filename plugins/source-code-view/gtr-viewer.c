@@ -60,7 +60,8 @@ static void
 gtr_viewer_init (GtrViewer * dlg)
 {
   gboolean ret;
-  GtkWidget *error_widget;
+  GtkWidget *error_widget, *action_area;
+  GtkBox *content_area;
   GtkWidget *sw;
   gchar *path;
   gchar *root_objects[] = {
@@ -79,12 +80,14 @@ gtr_viewer_init (GtrViewer * dlg)
   gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
+  action_area = gtk_dialog_get_action_area (GTK_DIALOG (dlg));
+  content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
+
   /* HIG defaults */
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2);    /* 2 * 5 + 2 = 12 */
-  gtk_container_set_border_width (GTK_CONTAINER
-                                  (GTK_DIALOG (dlg)->action_area), 5);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 4);
+  gtk_box_set_spacing (content_area, 2);    /* 2 * 5 + 2 = 12 */
+  gtk_container_set_border_width (GTK_CONTAINER (action_area), 5);
+  gtk_box_set_spacing (GTK_BOX (action_area), 4);
 
   g_signal_connect (dlg,
                     "response", G_CALLBACK (dialog_response_handler), NULL);
@@ -103,14 +106,12 @@ gtr_viewer_init (GtrViewer * dlg)
   if (!ret)
     {
       gtk_widget_show (error_widget);
-      gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-                          error_widget, TRUE, TRUE, 0);
+      gtk_box_pack_start (content_area, error_widget, TRUE, TRUE, 0);
 
       return;
     }
 
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-                      dlg->priv->main_box, TRUE, TRUE, 0);
+  gtk_box_pack_start (content_area, dlg->priv->main_box, TRUE, TRUE, 0);
 
   gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->main_box), 5);
 
