@@ -72,7 +72,7 @@ dnl
 dnl ==========================================================================
 
 GTHREAD_REQUIRED=2.13.0
-GTK_REQUIRED=2.18.0
+GTK_REQUIRED=2.21.5
 GLIB_REQUIRED=2.15.5
 GCONF_REQUIRED=2.18.0
 LIBXML_REQUIRED=2.4.12
