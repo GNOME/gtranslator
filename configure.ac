@@ -64,6 +64,12 @@ GNOME_COMPILE_WARNINGS([maximum])
 AC_PATH_PROG([GLIB_GENMARSHAL], [glib-genmarshal])
 AC_PATH_PROG([GLIB_MKENUMS], [glib-mkenums])
 
+dnl ================================================================
+dnl GSettings stuff
+dnl ================================================================
+
+GLIB_GSETTINGS
+
 dnl ==========================================================================
 dnl
 dnl If you add a version number here, you *must* add an AC_SUBST line for
@@ -73,8 +79,7 @@ dnl ==========================================================================
 
 GTHREAD_REQUIRED=2.13.0
 GTK_REQUIRED=2.21.5
-GLIB_REQUIRED=2.15.5
-GCONF_REQUIRED=2.18.0
+GLIB_REQUIRED=2.25.10
 LIBXML_REQUIRED=2.4.12
 SOURCEVIEW_REQUIRED=2.4.0
 GDL_REQUIRED=2.26.0
@@ -84,7 +89,6 @@ LIBSOUP_OPTIONAL=2.4.0
 
 AC_SUBST(GTK_REQUIRED)
 AC_SUBST(GLIB_REQUIRED)
-AC_SUBST(GCONF_REQUIRED)
 AC_SUBST(LIBXML_REQUIRED)
 AC_SUBST(SOURCEVIEW_REQUIRED)
 AC_SUBST(GDL_REQUIDED)
@@ -99,7 +103,6 @@ PKG_CHECK_MODULES(GTRANSLATOR, [
 	gtk+-2.0 >= $GTK_REQUIRED
 	gtksourceview-2.0 >= $SOURCEVIEW_REQUIRED
 	gdl-1.0 >= $GDL_REQUIRED
-	gconf-2.0 >= $GCONF_REQUIRED
 	unique-1.0
 	libgda-4.0
 ])
@@ -135,18 +138,6 @@ else
 	PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
 fi
 AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
-
-
-dnl ------
-dnl GCONF
-dnl ------
-AM_GCONF_SOURCE_2
- 	
-AC_PATH_PROG([GCONFTOOL], [gconftool-2], [no])
- 	
-if test "$GCONFTOOL" = "no"; then
-   AC_MSG_ERROR([gconftool-2 not found])
-fi 
 
 dnl -------------------------------------------------------------------
 dnl Check for gtkspell >= 2.0 and use it if found
@@ -270,6 +261,7 @@ data/gtranslator.pc
 data/desktop/Makefile
 data/desktop/gtranslator.desktop.in
 data/desktop/icons/Makefile
+data/org.gnome.gtranslator.gschema.xml.in
 data/pixmaps/Makefile
 doc/Makefile
 doc/reference/Makefile

@@ -37,7 +37,6 @@
 #include "gtr-po.h"
 #include "gtr-msg.h"
 #include "gtr-enum-types.h"
-#include "gtr-prefs-manager.h"
 #include "gtr-profile.h"
 #include "gtr-utils.h"
 

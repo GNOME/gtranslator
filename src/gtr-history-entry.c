@@ -1,6 +1,6 @@
 /*
- * history-entry.c
- * This file is part of gtranslator
+ * gtr-history-entry.c
+ * This file is part of gtr
  *
  * Copyright (C) 2006 - Paolo Borelli
  *
@@ -21,7 +21,7 @@
  */
 
 /*
- * Modified by the gedit Team, 2006. See the AUTHORS file for a 
+ * Modified by the gtr Team, 2006. See the AUTHORS file for a 
  * list of people on the gtr Team.  
  * See the ChangeLog files for a list of changes. 
  *
@@ -35,7 +35,6 @@
 #include <string.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <gconf/gconf-client.h>
 
 #include "gtr-history-entry.h"
 
@@ -61,7 +60,7 @@ struct _GtrHistoryEntryPrivate
 
   GtkEntryCompletion *completion;
 
-  GConfClient *gconf_client;
+  GSettings *settings;
 };
 
 G_DEFINE_TYPE (GtrHistoryEntry, gtr_history_entry, GTK_TYPE_COMBO_BOX_ENTRY)
@@ -86,7 +85,7 @@ G_DEFINE_TYPE (GtrHistoryEntry, gtr_history_entry, GTK_TYPE_COMBO_BOX_ENTRY)
       gtr_history_entry_set_history_length (entry, g_value_get_uint (value));
       break;
     default:
-      break;
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
     }
 }
 
@@ -131,10 +130,10 @@ gtr_history_entry_finalize (GObject * object)
 
   g_free (priv->history_id);
 
-  if (priv->gconf_client != NULL)
+  if (priv->settings != NULL)
     {
-      g_object_unref (G_OBJECT (priv->gconf_client));
-      priv->gconf_client = NULL;
+      g_object_unref (G_OBJECT (priv->settings));
+      priv->settings = NULL;
     }
 
   G_OBJECT_CLASS (gtr_history_entry_parent_class)->finalize (object);
@@ -187,38 +186,21 @@ get_history_store (GtrHistoryEntry * entry)
   return (GtkListStore *) store;
 }
 
-static char *
-get_history_key (GtrHistoryEntry * entry)
-{
-  gchar *tmp;
-  gchar *key;
-
-  /*
-   * We store the data under /apps/gnome-settings/
-   * like the old GnomeEntry did. Maybe we should
-   * consider moving it to the /gtranslator GConf prefix...
-   * Or maybe we should just switch away from GConf.
-   */
-
-  tmp = gconf_escape_key (entry->priv->history_id, -1);
-  key = g_strconcat ("/apps/gnome-settings/",
-                     "gtranslator", "/history-", tmp, NULL);
-  g_free (tmp);
-
-  return key;
-}
-
-static GSList *
-get_history_list (GtrHistoryEntry * entry)
+static gchar **
+get_history_items (GtrHistoryEntry * entry)
 {
   GtkListStore *store;
   GtkTreeIter iter;
+  GPtrArray *array;
   gboolean valid;
-  GSList *list = NULL;
+  gint n_children;
 
   store = get_history_store (entry);
 
   valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter);
+  n_children = gtk_tree_model_iter_n_children (GTK_TREE_MODEL (store), NULL);
+
+  array = g_ptr_array_sized_new (n_children + 1);
 
   while (valid)
     {
@@ -226,31 +208,30 @@ get_history_list (GtrHistoryEntry * entry)
 
       gtk_tree_model_get (GTK_TREE_MODEL (store), &iter, 0, &str, -1);
 
-      list = g_slist_prepend (list, str);
+      g_ptr_array_add (array, str);
 
       valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (store), &iter);
     }
 
-  return g_slist_reverse (list);
+  g_ptr_array_add (array, NULL);
+
+  return (gchar **) g_ptr_array_free (array, FALSE);
 }
 
 static void
 gtr_history_entry_save_history (GtrHistoryEntry * entry)
 {
-  GSList *gconf_items;
-  gchar *key;
+  gchar **items;
 
   g_return_if_fail (GTR_IS_HISTORY_ENTRY (entry));
 
-  gconf_items = get_history_list (entry);
-  key = get_history_key (entry);
+  items = get_history_items (entry);
 
-  gconf_client_set_list (entry->priv->gconf_client,
-                         key, GCONF_VALUE_STRING, gconf_items, NULL);
+  g_settings_set_strv (entry->priv->settings,
+                       entry->priv->history_id,
+                       (const gchar * const *) items);
 
-  g_slist_foreach (gconf_items, (GFunc) g_free, NULL);
-  g_slist_free (gconf_items);
-  g_free (key);
+  g_strfreev (items);
 }
 
 static gboolean
@@ -295,7 +276,7 @@ clamp_list_store (GtkListStore * store, guint max)
 
   if (gtk_tree_model_get_iter (GTK_TREE_MODEL (store), &iter, path))
     {
-      while (1)
+      while (TRUE)
         {
           if (!gtk_list_store_remove (store, &iter))
             break;
@@ -356,32 +337,32 @@ gtr_history_entry_append_text (GtrHistoryEntry * entry, const gchar * text)
 static void
 gtr_history_entry_load_history (GtrHistoryEntry * entry)
 {
-  GSList *gconf_items, *l;
+  gchar **items;
   GtkListStore *store;
   GtkTreeIter iter;
-  gchar *key;
-  guint i;
+  gsize i;
 
   g_return_if_fail (GTR_IS_HISTORY_ENTRY (entry));
 
   store = get_history_store (entry);
-  key = get_history_key (entry);
 
-  gconf_items = gconf_client_get_list (entry->priv->gconf_client,
-                                       key, GCONF_VALUE_STRING, NULL);
+  items = g_settings_get_strv (entry->priv->settings,
+                               entry->priv->history_id);
+  i = 0;
 
   gtk_list_store_clear (store);
 
-  for (l = gconf_items, i = 0;
-       l != NULL && i < entry->priv->history_length; l = l->next, i++)
+  /* Now the default value is an empty string so we have to take care
+     of it to not add the empty string in the search list */
+  while (items[i] != NULL && *items[i] != '\0' &&
+         i < entry->priv->history_length)
     {
       gtk_list_store_append (store, &iter);
-      gtk_list_store_set (store, &iter, 0, l->data, -1);
+      gtk_list_store_set (store, &iter, 0, items[i], -1);
+      i++;
     }
 
-  g_slist_foreach (gconf_items, (GFunc) g_free, NULL);
-  g_slist_free (gconf_items);
-  g_free (key);
+  g_strfreev (items);
 }
 
 void
@@ -410,7 +391,8 @@ gtr_history_entry_init (GtrHistoryEntry * entry)
 
   priv->completion = NULL;
 
-  priv->gconf_client = gconf_client_get_default ();
+  priv->settings =
+    g_settings_new ("org.gnome.gtranslator.state.history-entry");
 }
 
 void
@@ -584,15 +566,21 @@ gtr_history_entry_set_escape_func (GtrHistoryEntry * entry,
   g_return_if_fail (cells->data != NULL && cells->next == NULL);
 
   if (escape_func != NULL)
-    gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (entry),
-                                        GTK_CELL_RENDERER (cells->data),
-                                        (GtkCellLayoutDataFunc)
-                                        escape_cell_data_func, escape_func,
-                                        NULL);
+    {
+      gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (entry),
+                                          GTK_CELL_RENDERER (cells->data),
+                                          (GtkCellLayoutDataFunc)
+                                          escape_cell_data_func, escape_func,
+                                          NULL);
+    }
   else
-    gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (entry),
-                                        GTK_CELL_RENDERER (cells->data),
-                                        NULL, NULL, NULL);
+    {
+      gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (entry),
+                                          GTK_CELL_RENDERER (cells->data),
+                                          NULL, NULL, NULL);
+    }
 
   g_list_free (cells);
 }
+
+/* ex:ts=8:noet: */

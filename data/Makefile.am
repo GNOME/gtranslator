@@ -4,35 +4,33 @@ SUBDIRS = \
 	desktop \
 	pixmaps
 
-schemasdir	 = $(GCONF_SCHEMA_FILE_DIR)
-schemas_in_files = gtranslator.schemas.in
-schemas_DATA 	 = $(schemas_in_files:.schemas.in=.schemas)
-@INTLTOOL_SCHEMAS_RULE@
-
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gtranslator.pc
 
 uidir = $(pkgdatadir)
-ui_DATA = \
-		gtranslator-ui.xml \
-		gtr-toolbar.xml \
-		po.lang \
-		layout.xml
+ui_DATA =			\
+	gtranslator-ui.xml	\
+	gtr-toolbar.xml		\
+	po.lang			\
+	layout.xml
 
-install-data-local:
-	        if test -z "$(DESTDIR)" ; then \
-	                for p in $(schemas_DATA) ; do \
-	                        GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(top_builddir)/data/$$p; \
-	                done \
-	        fi
+gsettings_SCHEMAS = org.gnome.gtranslator.gschema.xml
 
-EXTRA_DIST =			\
-	$(schemas_in_files)	\
-	$(ui_DATA)		\
+@INTLTOOL_XML_NOMERGE_RULE@
+
+@GSETTINGS_RULES@
+
+EXTRA_DIST =					\
+	$(ui_DATA)				\
+	org.gnome.gtranslator.gschema.xml.in	\
 	gtranslator.pc.in
 
-CLEANFILES =	 		\
-	$(schemas_DATA)		\
+CLEANFILES =			\
+	$(gsettings_SCHEMAS)	\
+	$(pkgconfig_DATA)
+
+DISTCLEANFILES =		\
+	$(gsettings_SCHEMAS)	\
 	$(pkgconfig_DATA)
 
 -include $(top_srcdir)/git.mk

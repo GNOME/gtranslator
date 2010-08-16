@@ -1,6 +1,6 @@
 /*
- * history-entry.h
- * This file is part of gtranslator
+ * gtr-history-entry.h
+ * This file is part of gtr
  *
  * Copyright (C) 2006 - Paolo Borelli
  *
@@ -21,7 +21,7 @@
  */
 
 /*
- * Modified by the gedit Team, 2006. See the AUTHORS file for a 
+ * Modified by the gtr Team, 2006. See the AUTHORS file for a 
  * list of people on the gtr Team.  
  * See the ChangeLog files for a list of changes. 
  *
@@ -92,3 +92,4 @@ gtr_history_entry_get_type (void)
 
 G_END_DECLS
 #endif /* __GTR_HISTORY_ENTRY_H__ */
+/* ex:ts=8:noet: */

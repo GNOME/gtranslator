@@ -33,7 +33,7 @@
 #include "gtr-tab.h"
 #include "gtr-plugins-engine.h"
 #include "gtr-po.h"
-#include "gtr-prefs-manager-app.h"
+#include "gtr-settings.h"
 #include "gtr-statusbar.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
@@ -78,6 +78,9 @@ G_DEFINE_TYPE (GtrWindow, gtr_window, GTK_TYPE_WINDOW)
 
 struct _GtrWindowPrivate
 {
+  GSettings *ui_settings;
+  GSettings *state_settings;
+
   GtkWidget *main_box;
 
   GtkWidget *menubar;
@@ -1738,7 +1741,9 @@ gtr_window_draw (GtrWindow * window)
   priv->layout_manager = gdl_dock_layout_new (GDL_DOCK (priv->dock));
   g_object_set (priv->layout_manager->master,
                 "switcher-style",
-                gtr_prefs_manager_get_pane_switcher_style (), NULL);
+                g_settings_get_enum (priv->ui_settings,
+                                     GTR_SETTINGS_PANEL_SWITCHER_STYLE),
+                NULL);
   g_signal_connect (priv->layout_manager,
                     "notify::dirty",
                     G_CALLBACK (on_layout_dirty_notify), window);
@@ -1773,6 +1778,9 @@ gtr_window_init (GtrWindow * window)
   gchar *config_folder;
 
   window->priv = GTR_WINDOW_GET_PRIVATE (window);
+
+  window->priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
+  window->priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
 
   window->priv->destroy_has_run = FALSE;
 
@@ -1852,6 +1860,18 @@ gtr_window_dispose (GObject * object)
 
   DEBUG_PRINT ("window dispose");
 
+  if (priv->ui_settings)
+    {
+      g_object_unref (priv->ui_settings);
+      priv->ui_settings = NULL;
+    }
+
+  if (priv->state_settings)
+    {
+      g_object_unref (priv->state_settings);
+      priv->state_settings = NULL;
+    }
+
   if (priv->ui_manager)
     {
       g_object_unref (priv->ui_manager);
@@ -1889,12 +1909,10 @@ save_panes_state (GtrWindow * window)
   gchar *filename;
   gchar *config_folder;
 
-  if (gtr_prefs_manager_window_size_can_set ())
-    gtr_prefs_manager_set_window_size (window->priv->width,
-                                       window->priv->height);
-
-  if (gtr_prefs_manager_window_state_can_set ())
-    gtr_prefs_manager_set_window_state (window->priv->window_state);
+  g_settings_set (window->priv->state_settings, GTR_SETTINGS_WINDOW_SIZE, "(ii)",
+                  window->priv->width, window->priv->height);
+  g_settings_set_int (window->priv->state_settings, GTR_SETTINGS_WINDOW_STATE,
+                      window->priv->window_state);
 
   config_folder = gtr_dirs_get_user_config_dir ();
   filename = g_build_filename (config_folder, "gtr-layout.xml", NULL);

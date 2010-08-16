@@ -28,9 +28,10 @@
 #include <string.h>
 
 #include "gtr-dirs.h"
-#include "gtr-prefs-manager.h"
+#include "gtr-settings.h"
 #include "gtr-utils.h"
 #include "gtr-view.h"
+#include "gtr-application.h"
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -55,6 +56,9 @@ G_DEFINE_TYPE (GtrView, gtr_view, GTK_TYPE_SOURCE_VIEW)
 
 struct _GtrViewPrivate
 {
+  GSettings *editor_settings;
+  GSettings *ui_settings;
+
   GtkSourceBuffer *buffer;
 
   guint search_flags;
@@ -98,10 +102,14 @@ gtr_view_init (GtrView * view)
   gchar **langs;
   const gchar *const *temp;
   gchar *datadir;
+  GtrViewPrivate *priv;
 
   view->priv = GTR_VIEW_GET_PRIVATE (view);
 
-  GtrViewPrivate *priv = view->priv;
+  priv = view->priv;
+
+  priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
+  priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
 
   lm = gtk_source_language_manager_new ();
   dirs = g_ptr_array_new ();
@@ -111,7 +119,6 @@ gtr_view_init (GtrView * view)
     g_ptr_array_add (dirs, g_strdup (*temp));
 
   datadir = gtr_dirs_get_gtr_data_dir ();
-  /* FIXME: Where pkgdatadir must be free */
   g_ptr_array_add (dirs, datadir);
   g_ptr_array_add (dirs, NULL);
   langs = (gchar **) g_ptr_array_free (dirs, FALSE);
@@ -126,24 +133,23 @@ gtr_view_init (GtrView * view)
                             GTK_TEXT_BUFFER (priv->buffer));
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), GTK_WRAP_WORD);
 
-  //Set syntax highlight according to preferences
+  /* Set syntax highlight according to preferences */
   gtk_source_buffer_set_highlight_syntax (priv->buffer,
-                                          gtr_prefs_manager_get_highlight_syntax
-                                          ());
+                                          g_settings_get_boolean (priv->editor_settings,
+                                                                  GTR_SETTINGS_HIGHLIGHT_SYNTAX));
 
-  //Set dot char according to preferences
+  /* Set dot char according to preferences */
+  gtr_view_enable_visible_whitespace (view,
+                                      g_settings_get_boolean (priv->editor_settings,
+                                                              GTR_SETTINGS_VISIBLE_WHITESPACE));
 
-  if (gtr_prefs_manager_get_visible_whitespace ())
-    gtr_view_enable_visible_whitespace (view, TRUE);
-
-  /*
-   *  Set fonts according to preferences 
-   */
-  if (gtr_prefs_manager_get_use_custom_font ())
+  /* Set fonts according to preferences */
+  if (g_settings_get_boolean (priv->editor_settings, GTR_SETTINGS_USE_CUSTOM_FONT))
     {
       gchar *editor_font;
 
-      editor_font = g_strdup (gtr_prefs_manager_get_editor_font ());
+      editor_font = g_settings_get_string (priv->editor_settings,
+                                           GTR_SETTINGS_EDITOR_FONT);
 
       gtr_view_set_font (view, FALSE, editor_font);
 
@@ -154,16 +160,28 @@ gtr_view_init (GtrView * view)
       gtr_view_set_font (view, TRUE, NULL);
     }
 
-  /*
-   * Set scheme color according to preferences
-   */
+  /* Set scheme color according to preferences */
   gtr_view_reload_scheme_color (view);
 }
 
 static void
-gtr_view_finalize (GObject * object)
+gtr_view_dispose (GObject * object)
 {
-  G_OBJECT_CLASS (gtr_view_parent_class)->finalize (object);
+  GtrView *view = GTR_VIEW (object);
+
+  if (view->priv->editor_settings)
+    {
+      g_object_unref (view->priv->editor_settings);
+      view->priv->editor_settings = NULL;
+    }
+
+  if (view->priv->ui_settings)
+    {
+      g_object_unref (view->priv->ui_settings);
+      view->priv->ui_settings = NULL;
+    }
+
+  G_OBJECT_CLASS (gtr_view_parent_class)->dispose (object);
 }
 
 static void
@@ -173,7 +191,7 @@ gtr_view_class_init (GtrViewClass * klass)
 
   g_type_class_add_private (klass, sizeof (GtrViewPrivate));
 
-  object_class->finalize = gtr_view_finalize;
+  object_class->dispose = gtr_view_dispose;
 }
 
 /**
@@ -382,11 +400,21 @@ gtr_view_set_font (GtrView * view, gboolean def, const gchar * font_name)
   g_return_if_fail (GTR_IS_VIEW (view));
 
   if (def)
-    font_name = g_strdup ("Sans 10");
+    {
+      GSettings *gtr_settings;
+      gchar *font;
 
-  g_return_if_fail (font_name != NULL);
+      gtr_settings = _gtr_application_get_settings (GTR_APP);
+      font = gtr_settings_get_system_font (GTR_SETTINGS (gtr_settings));
 
-  font_desc = pango_font_description_from_string (font_name);
+      font_desc = pango_font_description_from_string (font);
+      g_free (font);
+    }
+  else
+    {
+      font_desc = pango_font_description_from_string (font_name);
+    }
+
   g_return_if_fail (font_desc != NULL);
 
   gtk_widget_modify_font (GTK_WIDGET (view), font_desc);
@@ -797,13 +825,15 @@ gtr_view_reload_scheme_color (GtrView * view)
   GtkSourceBuffer *buf;
   GtkSourceStyleScheme *scheme;
   GtkSourceStyleSchemeManager *manager;
-  const gchar *scheme_id;
+  gchar *scheme_id;
 
   buf = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
   manager = gtk_source_style_scheme_manager_get_default ();
 
-  scheme_id = gtr_prefs_manager_get_color_scheme ();
+  scheme_id = g_settings_get_string (view->priv->ui_settings,
+                                     GTR_SETTINGS_COLOR_SCHEME);
   scheme = gtk_source_style_scheme_manager_get_scheme (manager, scheme_id);
+  g_free (scheme_id);
 
   gtk_source_buffer_set_style_scheme (buf, scheme);
 }

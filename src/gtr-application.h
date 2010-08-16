@@ -102,5 +102,7 @@ const gchar     *_gtr_application_get_last_dir           (GtrApplication *app);
 void             _gtr_application_set_last_dir           (GtrApplication *app,
                                                           const gchar    *last_dir);
 
+GSettings       *_gtr_application_get_settings           (GtrApplication *app);
+
 G_END_DECLS
 #endif /* __APPLICATION_H__ */

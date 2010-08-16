@@ -3,7 +3,7 @@
  *			Ross Golder <ross@golder.org>
  *			Gediminas Paulauskas <menesis@kabalak.net>
  *			Peeter Vois <peeter@kabalak.net>
- * 			Ignacio Casal <nacho.resa@gmail.com>
+ * 			Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
  * gtranslator is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,7 +27,6 @@
 
 #include "gtr-actions.h"
 #include "gtr-application.h"
-#include "gtr-prefs-manager-app.h"
 #include "gtr-plugins-engine.h"
 #include "gtr-utils.h"
 #include "gtr-dirs.h"
@@ -37,8 +36,6 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
-
-#include <gconf/gconf.h>
 
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
@@ -248,18 +245,6 @@ main (gint argc, gchar * argv[])
   setup_path ();
 #endif
 
-  /* Initialize the GConf library. */
-  if (!(gconf_init (argc, argv, &error)))
-    {
-      if (error)
-        {
-          g_warning (_("Error during GConf initialization: %s."),
-                     error->message);
-        }
-
-      g_clear_error (&error);
-    }
-
   gtk_init (&argc, &argv);
 
   if (!g_option_context_parse (context, &argc, &argv, &error))
@@ -271,9 +256,6 @@ main (gint argc, gchar * argv[])
     }
 
   g_option_context_free (context);
-
-  /* Init preferences manager */
-  gtr_prefs_manager_app_init ();
 
   app = _gtr_application_new ();
 
@@ -324,7 +306,6 @@ main (gint argc, gchar * argv[])
   gtk_main ();
 
   g_object_unref (engine);
-  gtr_prefs_manager_app_shutdown ();
   g_object_unref (app);
 
   return 0;

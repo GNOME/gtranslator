@@ -39,8 +39,7 @@
 #include "gtr-msg.h"
 #include "gtr-tab.h"
 #include "gtr-po.h"
-#include "gtr-prefs-manager.h"
-#include "gtr-prefs-manager-app.h"
+#include "gtr-settings.h"
 #include "gtr-view.h"
 #include "gtr-translation-memory.h"
 #include "gtr-translation-memory-ui.h"
@@ -64,6 +63,10 @@ G_DEFINE_TYPE (GtrTab, gtr_tab, GTK_TYPE_VBOX)
 
 struct _GtrTabPrivate
 {
+  GSettings *files_settings;
+  GSettings *editor_settings;
+  GSettings *state_settings;
+
   GtrPo *po;
 
   GtkWidget *table_pane;
@@ -232,6 +235,7 @@ gtr_message_translation_update (GtkTextBuffer * textbuffer, GtrTab * tab)
   GtrMsg *msg;
   const gchar *check;
   gchar *translation;
+  gboolean unmark_fuzzy;
   gint i;
 
   /* Work out which message this is associated with */
@@ -241,9 +245,10 @@ gtr_message_translation_update (GtkTextBuffer * textbuffer, GtrTab * tab)
   msg_aux = gtr_po_get_current_message (tab->priv->po);
   msg = msg_aux->data;
   buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (tab->priv->trans_msgstr[0]));
+  unmark_fuzzy = g_settings_get_boolean (tab->priv->editor_settings,
+                                         GTR_SETTINGS_UNMARK_FUZZY_WHEN_CHANGED);
 
-  if (gtr_msg_is_fuzzy (msg)
-      && gtr_prefs_manager_get_unmark_fuzzy_when_changed ())
+  if (gtr_msg_is_fuzzy (msg) && unmark_fuzzy)
     gtr_msg_set_fuzzy (msg, FALSE);
 
   if (textbuffer == buf)
@@ -302,7 +307,8 @@ gtr_message_translation_update (GtkTextBuffer * textbuffer, GtrTab * tab)
 
 static GtkWidget *
 gtr_tab_append_msgstr_page (const gchar * tab_label,
-                            GtkWidget * box, gboolean spellcheck)
+                            GtkWidget * box, gboolean spellcheck,
+                            GtrTab *tab)
 {
   GtkWidget *scroll;
   GtkWidget *label;
@@ -316,7 +322,9 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
   widget = gtr_view_new ();
   gtk_widget_show (widget);
 
-  if (spellcheck && gtr_prefs_manager_get_spellcheck ())
+  if (spellcheck &&
+      g_settings_get_boolean (tab->priv->editor_settings,
+                              GTR_SETTINGS_SPELLCHECK))
     gtr_view_enable_spellcheck (GTR_VIEW (widget), spellcheck);
 
   gtk_container_add (GTK_CONTAINER (scroll), widget);
@@ -494,21 +502,6 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
 }
 
 static void
-context_pane_position_changed (GObject * tab_gobject,
-                               GParamSpec * arg1, GtrTab * tab)
-{
-  gtr_prefs_manager_set_context_pane_pos (gtk_paned_get_position (GTK_PANED (tab_gobject)));
-}
-
-static void
-content_pane_position_changed (GObject * tab_gobject,
-                               GParamSpec * arg1, GtrTab * tab)
-{
-  gtr_prefs_manager_set_content_pane_pos (gtk_paned_get_position
-                                          (GTK_PANED (tab_gobject)));
-}
-
-static void
 gtr_tab_add_msgstr_tabs (GtrTab * tab)
 {
   GtrHeader *header;
@@ -527,7 +520,8 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
       label = g_strdup_printf (_("Plural %d"), i);
       priv->trans_msgstr[i] = gtr_tab_append_msgstr_page (label,
                                                           priv->trans_notebook,
-                                                          TRUE);
+                                                          TRUE,
+                                                          tab);
       buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[i]));
       g_signal_connect (buf, "end-user-action",
                         G_CALLBACK (gtr_message_translation_update), tab);
@@ -567,11 +561,11 @@ gtr_tab_draw (GtrTab * tab)
 
   /* Content pane; this is where the message table and message area go */
   priv->content_pane = gtk_vpaned_new ();
-  gtk_paned_set_position (GTK_PANED (priv->content_pane),
-                          gtr_prefs_manager_get_content_pane_pos ());
-  g_signal_connect (priv->content_pane,
-                    "notify::position",
-                    G_CALLBACK (content_pane_position_changed), tab);
+  g_settings_bind (tab->priv->state_settings,
+                   GTR_SETTINGS_CONTENT_PANEL_SIZE,
+                   priv->content_pane,
+                   "position",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
   gtk_widget_show (priv->content_pane);
 
   /* Message table */
@@ -664,10 +658,11 @@ gtr_tab_draw (GtrTab * tab)
 
   /* Context pane */
   priv->context_pane = gtk_hpaned_new ();
-  gtk_paned_set_position (GTK_PANED (priv->context_pane),
-                          gtr_prefs_manager_get_context_pane_pos ());
-  g_signal_connect (priv->context_pane, "notify::position",
-                    G_CALLBACK (context_pane_position_changed), tab);
+  g_settings_bind (tab->priv->state_settings,
+                   GTR_SETTINGS_CONTEXT_PANEL_SIZE,
+                   priv->context_pane,
+                   "position",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
   gtk_widget_show (priv->context_pane);
 
   gtk_paned_pack1 (GTK_PANED (priv->context_pane), priv->content_pane,
@@ -703,15 +698,21 @@ gtr_tab_init (GtrTab * tab)
 {
   tab->priv = GTR_TAB_GET_PRIVATE (tab);
 
+  tab->priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
+  tab->priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
+  tab->priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
+
   g_signal_connect (tab, "message-changed", G_CALLBACK (update_status), NULL);
 
   gtr_tab_draw (tab);
 
   /* Manage auto save data */
-  tab->priv->autosave = gtr_prefs_manager_get_autosave ();
+  tab->priv->autosave = g_settings_get_boolean (tab->priv->files_settings,
+                                                GTR_SETTINGS_AUTO_SAVE);
   tab->priv->autosave = (tab->priv->autosave != FALSE);
 
-  tab->priv->autosave_interval = gtr_prefs_manager_get_autosave_interval ();
+  tab->priv->autosave_interval = g_settings_get_int (tab->priv->files_settings,
+                                                     GTR_SETTINGS_AUTO_SAVE_INTERVAL);
   if (tab->priv->autosave_interval <= 0)
     tab->priv->autosave_interval = 1;
 }
@@ -721,9 +722,6 @@ gtr_tab_finalize (GObject * object)
 {
   GtrTab *tab = GTR_TAB (object);
 
-  if (tab->priv->po)
-    g_object_unref (tab->priv->po);
-
   if (tab->priv->timer != NULL)
     g_timer_destroy (tab->priv->timer);
 
@@ -731,6 +729,38 @@ gtr_tab_finalize (GObject * object)
     remove_autosave_timeout (tab);
 
   G_OBJECT_CLASS (gtr_tab_parent_class)->finalize (object);
+}
+
+static void
+gtr_tab_dispose (GObject * object)
+{
+  GtrTab *tab = GTR_TAB (object);
+
+  if (tab->priv->po != NULL)
+    {
+      g_object_unref (tab->priv->po);
+      tab->priv->po = NULL;
+    }
+
+  if (tab->priv->files_settings != NULL)
+    {
+      g_object_unref (tab->priv->files_settings);
+      tab->priv->files_settings = NULL;
+    }
+
+  if (tab->priv->editor_settings != NULL)
+    {
+      g_object_unref (tab->priv->editor_settings);
+      tab->priv->editor_settings = NULL;
+    }
+
+  if (tab->priv->state_settings != NULL)
+    {
+      g_object_unref (tab->priv->state_settings);
+      tab->priv->state_settings = NULL;
+    }
+
+  G_OBJECT_CLASS (gtr_tab_parent_class)->dispose (object);
 }
 
 static void
@@ -781,6 +811,7 @@ gtr_tab_class_init (GtrTabClass * klass)
   g_type_class_add_private (klass, sizeof (GtrTabPrivate));
 
   object_class->finalize = gtr_tab_finalize;
+  object_class->dispose = gtr_tab_dispose;
   object_class->set_property = gtr_tab_set_property;
   object_class->get_property = gtr_tab_get_property;
   klass->message_edition_finished = gtr_tab_edition_finished;

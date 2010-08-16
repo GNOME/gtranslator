@@ -1,6 +1,6 @@
 /*
  * (C) 2007 Pablo Sanxiao <psanxiao@gmail.com>
- *          Ignacio Casal Quinteiro <nacho.resa@gmail.com>
+ *          Ignacio Casal Quinteiro <icq@gnome.org>
  *     2008 Igalia
  *
  * gtranslator is free software; you can redistribute it and/or modify
@@ -19,12 +19,12 @@
  *
  * Authors:
  *   Pablo Sanxiao <psanxiao@gmail.com>
- *   Ignacio Casal Quinteiro <nacho.resa@gmail.com>
+ *   Ignacio Casal Quinteiro <icq@gnome.org>
  */
 
 #include "gtr-application.h"
 #include "gtr-header.h"
-#include "gtr-prefs-manager.h"
+#include "gtr-settings.h"
 #include "gtr-profile.h"
 #include "gtr-profile-manager.h"
 #include "gtr-utils.h"
@@ -42,6 +42,8 @@ G_DEFINE_TYPE (GtrHeader, gtr_header, GTR_TYPE_MSG)
 
 struct _GtrHeaderPrivate
 {
+  GSettings *settings;
+
   GtrProfileManager *prof_manager;
   GtrProfile *profile;
   gint nplurals;
@@ -68,11 +70,14 @@ static void
 parse_nplurals (GtrHeader * header)
 {
   gchar *pointer, *plural_forms;
+  gboolean use_profile_values;
 
   plural_forms = gtr_header_get_plural_forms (header);
   header->priv->nplurals = -1;
+  use_profile_values = g_settings_get_boolean (header->priv->settings,
+                                               GTR_SETTINGS_USE_PROFILE_VALUES);
 
-  if (gtr_prefs_manager_get_use_profile_values () || !plural_forms)
+  if (use_profile_values || !plural_forms)
     {
       const gchar *plural_form = NULL;
       GtrProfile *profile;
@@ -146,6 +151,7 @@ gtr_header_init (GtrHeader * header)
   header->priv->nplurals = -1;
   header->priv->profile = NULL;
 
+  header->priv->settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
   header->priv->prof_manager = gtr_profile_manager_get_default ();
 
   g_signal_connect (header->priv->prof_manager, "profile-removed",
@@ -156,6 +162,12 @@ static void
 gtr_header_dispose (GObject * object)
 {
   GtrHeader *header = GTR_HEADER (object);
+
+  if (header->priv->settings != NULL)
+    {
+      g_object_unref (header->priv->settings);
+      header->priv->settings = NULL;
+    }
 
   if (header->priv->prof_manager != NULL)
     {
@@ -538,13 +550,17 @@ static void
 set_profile_values (GtrHeader *header)
 {
   GtrProfile *active_profile;
+  gboolean use_profile_values;
 
   if (header->priv->profile != NULL)
     active_profile = header->priv->profile;
   else
     active_profile = gtr_profile_manager_get_active_profile (header->priv->prof_manager);
 
-  if (gtr_prefs_manager_get_use_profile_values () && active_profile != NULL)
+  use_profile_values = g_settings_get_boolean (header->priv->settings,
+                                               GTR_SETTINGS_USE_PROFILE_VALUES);
+
+  if (use_profile_values && active_profile != NULL)
     {
       gtr_header_set_translator (header,
                                  gtr_profile_get_author_name (active_profile),
@@ -592,6 +608,7 @@ update_comments (GtrHeader *header, const gchar *comments)
   gchar *translator;
   gchar *email;
   gchar *current_year;
+  gboolean use_profile_values;
   gint i;
 
   if (header->priv->profile != NULL)
@@ -601,8 +618,11 @@ update_comments (GtrHeader *header, const gchar *comments)
 
   current_year = gtr_utils_get_current_year ();
 
+  use_profile_values = g_settings_get_boolean (header->priv->settings,
+                                               GTR_SETTINGS_USE_PROFILE_VALUES);
+
   /* Save the previous translator to update the header's comment */
-  if (gtr_prefs_manager_get_use_profile_values () && active_profile != NULL)
+  if (use_profile_values && active_profile != NULL)
     {
       translator = g_strdup (gtr_profile_get_author_name (active_profile));
       email = g_strdup (gtr_profile_get_author_email (active_profile));

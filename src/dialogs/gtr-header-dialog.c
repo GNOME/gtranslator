@@ -31,7 +31,7 @@
 #include "gtr-dirs.h"
 #include "gtr-header-dialog.h"
 #include "gtr-utils.h"
-#include "gtr-prefs-manager.h"
+#include "gtr-settings.h"
 #include "gtr-po.h"
 
 #define GTR_HEADER_DIALOG_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
@@ -40,35 +40,47 @@
 						 GtrHeaderDialogPrivate))
 
 G_DEFINE_TYPE (GtrHeaderDialog, gtr_header_dialog, GTK_TYPE_DIALOG)
-     struct _GtrHeaderDialogPrivate
-     {
-       GtkWidget *main_box;
-       GtkWidget *notebook;
 
-       GtkWidget *prj_page;
-       GtkWidget *lang_page;
-       GtkWidget *lang_vbox;
-
-       GtkWidget *prj_id_version;
-       GtkWidget *rmbt;
-       GtkWidget *prj_comment;
-       GtkWidget *take_my_options;
-
-       GtkWidget *translator;
-       GtkWidget *tr_email;
-       GtkWidget *pot_date;
-       GtkWidget *po_date;
-       GtkWidget *language;
-       GtkWidget *lg_email;
-       GtkWidget *charset;
-       GtkWidget *encoding;
-
-       GtrHeader *header;
-     };
-
-     static void gtr_header_dialog_finalize (GObject * object)
+struct _GtrHeaderDialogPrivate
 {
-  G_OBJECT_CLASS (gtr_header_dialog_parent_class)->finalize (object);
+  GSettings *settings;
+
+  GtkWidget *main_box;
+  GtkWidget *notebook;
+
+  GtkWidget *prj_page;
+  GtkWidget *lang_page;
+  GtkWidget *lang_vbox;
+
+  GtkWidget *prj_id_version;
+  GtkWidget *rmbt;
+  GtkWidget *prj_comment;
+  GtkWidget *take_my_options;
+
+  GtkWidget *translator;
+  GtkWidget *tr_email;
+  GtkWidget *pot_date;
+  GtkWidget *po_date;
+  GtkWidget *language;
+  GtkWidget *lg_email;
+  GtkWidget *charset;
+  GtkWidget *encoding;
+
+  GtrHeader *header;
+};
+
+static void
+gtr_header_dialog_dispose (GObject * object)
+{
+  GtrHeaderDialog *dlg = GTR_HEADER_DIALOG (object);
+
+  if (dlg->priv->settings != NULL)
+    {
+      g_object_unref (dlg->priv->settings);
+      dlg->priv->settings = NULL;
+    }
+
+  G_OBJECT_CLASS (gtr_header_dialog_parent_class)->dispose (object);
 }
 
 static void
@@ -78,7 +90,7 @@ gtr_header_dialog_class_init (GtrHeaderDialogClass * klass)
 
   g_type_class_add_private (klass, sizeof (GtrHeaderDialogPrivate));
 
-  object_class->finalize = gtr_header_dialog_finalize;
+  object_class->dispose = gtr_header_dialog_dispose;
 }
 
 static void
@@ -91,7 +103,8 @@ take_my_options_checkbutton_toggled (GtkToggleButton * button,
 
   active = gtk_toggle_button_get_active (button);
 
-  gtr_prefs_manager_set_use_profile_values (active);
+  g_settings_set_boolean (dlg->priv->settings, GTR_SETTINGS_USE_PROFILE_VALUES,
+                          active);
 
   gtk_widget_set_sensitive (dlg->priv->translator, !active);
   gtk_widget_set_sensitive (dlg->priv->tr_email, !active);
@@ -231,6 +244,8 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
 
   dlg->priv = GTR_HEADER_DIALOG_GET_PRIVATE (dlg);
 
+  dlg->priv->settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
+
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
                           GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE, NULL);
 
@@ -289,7 +304,8 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
   gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->take_my_options),
-                                gtr_prefs_manager_get_use_profile_values ());
+                                g_settings_get_boolean (dlg->priv->settings,
+                                                        GTR_SETTINGS_USE_PROFILE_VALUES));
 
   gtk_text_view_set_editable (GTK_TEXT_VIEW (dlg->priv->prj_comment), TRUE);
 

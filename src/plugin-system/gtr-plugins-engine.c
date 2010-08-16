@@ -35,7 +35,6 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include <gconf/gconf-client.h>
 
 #include "gtr-plugins-engine.h"
 #include "gtr-plugin-info-priv.h"
@@ -43,6 +42,7 @@
 #include "gtr-debug.h"
 #include "gtr-application.h"
 #include "gtr-utils.h"
+#include "gtr-settings.h"
 
 #include "gtr-module.h"
 #ifdef ENABLE_PYTHON
@@ -50,9 +50,6 @@
 #endif
 
 #define USER_GTR_PLUGINS_LOCATION ".config/gtranslator/plugins/"
-
-#define GTR_PLUGINS_ENGINE_BASE_KEY "/apps/gtranslator/plugins"
-#define GTR_PLUGINS_ENGINE_KEY GTR_PLUGINS_ENGINE_BASE_KEY "/active-plugins"
 
 #define PLUGIN_EXT	".plugin"
 
@@ -67,20 +64,15 @@ enum
 static guint signals[LAST_SIGNAL];
 
 G_DEFINE_TYPE (GtrPluginsEngine, gtr_plugins_engine, G_TYPE_OBJECT)
-     struct _GtrPluginsEnginePrivate
-     {
-       GList *plugin_list;
-       GConfClient *gconf_client;
-     };
 
-     GtrPluginsEngine *default_engine = NULL;
+struct _GtrPluginsEnginePrivate
+{
+  GList *plugin_list;
+  GSettings *settings;
+};
 
-     static void
-       gtr_plugins_engine_active_plugins_changed (GConfClient *
-                                                  client,
-                                                  guint cnxn_id,
-                                                  GConfEntry * entry,
-                                                  gpointer user_data);
+GtrPluginsEngine *default_engine = NULL;
+
      static void
        gtr_plugins_engine_activate_plugin_real
        (GtrPluginsEngine * engine, GtrPluginInfo * info);
@@ -88,16 +80,15 @@ G_DEFINE_TYPE (GtrPluginsEngine, gtr_plugins_engine, G_TYPE_OBJECT)
        gtr_plugins_engine_deactivate_plugin_real
        (GtrPluginsEngine * engine, GtrPluginInfo * info);
 
-     static void
-       gtr_plugins_engine_load_dir (GtrPluginsEngine * engine,
-                                    const gchar * dir,
-                                    GSList * active_plugins)
+static void
+gtr_plugins_engine_load_dir (GtrPluginsEngine * engine,
+                             const gchar * dir,
+                             GSList * active_plugins)
 {
   GError *error = NULL;
   GDir *d;
   const gchar *dirent;
 
-  g_return_if_fail (engine->priv->gconf_client != NULL);
   g_return_if_fail (dir != NULL);
 
   DEBUG_PRINT ("DIR: %s", dir);
@@ -163,9 +154,8 @@ gtr_plugins_engine_load_all (GtrPluginsEngine * engine)
   gchar **pdirs;
   int i;
 
-  active_plugins = gconf_client_get_list (engine->priv->gconf_client,
-                                          GTR_PLUGINS_ENGINE_KEY,
-                                          GCONF_VALUE_STRING, NULL);
+  active_plugins = gtr_settings_get_list (engine->priv->settings,
+                                          GTR_SETTINGS_ACTIVE_PLUGINS);
 
   /* load user's plugins */
   home = g_get_home_dir ();
@@ -207,6 +197,40 @@ gtr_plugins_engine_load_all (GtrPluginsEngine * engine)
 }
 
 static void
+on_active_plugins_changed (GSettings        *settings,
+                           const gchar      *key,
+                           GtrPluginsEngine *engine)
+{
+  GList *pl;
+  gboolean to_activate;
+  GSList *active_plugins;
+
+  //gtr_debug (DEBUG_PLUGINS);
+
+  active_plugins = gtr_settings_get_list (settings, key);
+
+  for (pl = engine->priv->plugin_list; pl; pl = pl->next)
+    {
+      GtrPluginInfo *info = (GtrPluginInfo *) pl->data;
+
+      if (!info->available)
+        continue;
+
+      to_activate = (g_slist_find_custom (active_plugins,
+                                          info->module_name,
+                                          (GCompareFunc) strcmp) != NULL);
+
+      if (!info->active && to_activate)
+        g_signal_emit (engine, signals[ACTIVATE_PLUGIN], 0, info);
+      else if (info->active && !to_activate)
+        g_signal_emit (engine, signals[DEACTIVATE_PLUGIN], 0, info);
+    }
+
+  g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
+  g_slist_free (active_plugins);
+}
+
+static void
 gtr_plugins_engine_init (GtrPluginsEngine * engine)
 {
   //gtr_debug (DEBUG_PLUGINS);
@@ -221,17 +245,12 @@ gtr_plugins_engine_init (GtrPluginsEngine * engine)
                                               GTR_TYPE_PLUGINS_ENGINE,
                                               GtrPluginsEnginePrivate);
 
-  engine->priv->gconf_client = gconf_client_get_default ();
-  g_return_if_fail (engine->priv->gconf_client != NULL);
+  engine->priv->settings = g_settings_new ("org.gnome.gtranslator.plugins");
 
-  gconf_client_add_dir (engine->priv->gconf_client,
-                        GTR_PLUGINS_ENGINE_BASE_KEY,
-                        GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-
-  gconf_client_notify_add (engine->priv->gconf_client,
-                           GTR_PLUGINS_ENGINE_KEY,
-                           gtr_plugins_engine_active_plugins_changed,
-                           engine, NULL, NULL);
+  g_signal_connect (engine->priv->settings,
+                    "changed::active-plugins",
+                    G_CALLBACK (on_active_plugins_changed),
+                    engine);
 
   gtr_plugins_engine_load_all (engine);
 }
@@ -267,13 +286,12 @@ gtr_plugins_engine_finalize (GObject * object)
   gtr_python_shutdown ();
 #endif
 
-  g_return_if_fail (engine->priv->gconf_client != NULL);
-
   g_list_foreach (engine->priv->plugin_list,
                   (GFunc) _gtr_plugin_info_unref, NULL);
   g_list_free (engine->priv->plugin_list);
 
-  g_object_unref (engine->priv->gconf_client);
+  if (engine->priv->settings)
+    g_object_unref (engine->priv->settings);
 }
 
 static void
@@ -410,7 +428,6 @@ save_active_plugin_list (GtrPluginsEngine * engine)
 {
   GSList *active_plugins = NULL;
   GList *l;
-  gboolean res;
 
   for (l = engine->priv->plugin_list; l != NULL; l = l->next)
     {
@@ -422,12 +439,9 @@ save_active_plugin_list (GtrPluginsEngine * engine)
         }
     }
 
-  res = gconf_client_set_list (engine->priv->gconf_client,
-                               GTR_PLUGINS_ENGINE_KEY,
-                               GCONF_VALUE_STRING, active_plugins, NULL);
-
-  if (!res)
-    g_warning ("Error saving the list of active plugins.");
+  gtr_settings_set_list (engine->priv->settings,
+                         GTR_SETTINGS_ACTIVE_PLUGINS,
+                         active_plugins);
 
   g_slist_free (active_plugins);
 }
@@ -590,55 +604,4 @@ gtr_plugins_engine_configure_plugin (GtrPluginsEngine *
 
   gtk_window_set_modal (GTK_WINDOW (conf_dlg), TRUE);
   gtk_widget_show (conf_dlg);
-}
-
-static void
-gtr_plugins_engine_active_plugins_changed (GConfClient * client,
-                                           guint cnxn_id,
-                                           GConfEntry * entry,
-                                           gpointer user_data)
-{
-  GtrPluginsEngine *engine;
-  GList *pl;
-  gboolean to_activate;
-  GSList *active_plugins;
-
-  //gtr_debug (DEBUG_PLUGINS);
-
-  g_return_if_fail (entry->key != NULL);
-  g_return_if_fail (entry->value != NULL);
-
-  engine = GTR_PLUGINS_ENGINE (user_data);
-
-  if (!((entry->value->type == GCONF_VALUE_LIST) &&
-        (gconf_value_get_list_type (entry->value) == GCONF_VALUE_STRING)))
-    {
-      g_warning ("The gconf key '%s' may be corrupted.",
-                 GTR_PLUGINS_ENGINE_KEY);
-      return;
-    }
-
-  active_plugins = gconf_client_get_list (engine->priv->gconf_client,
-                                          GTR_PLUGINS_ENGINE_KEY,
-                                          GCONF_VALUE_STRING, NULL);
-
-  for (pl = engine->priv->plugin_list; pl; pl = pl->next)
-    {
-      GtrPluginInfo *info = (GtrPluginInfo *) pl->data;
-
-      if (!info->available)
-        continue;
-
-      to_activate = (g_slist_find_custom (active_plugins,
-                                          info->module_name,
-                                          (GCompareFunc) strcmp) != NULL);
-
-      if (!info->active && to_activate)
-        g_signal_emit (engine, signals[ACTIVATE_PLUGIN], 0, info);
-      else if (info->active && !to_activate)
-        g_signal_emit (engine, signals[DEACTIVATE_PLUGIN], 0, info);
-    }
-
-  g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
-  g_slist_free (active_plugins);
 }

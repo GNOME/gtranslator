@@ -28,7 +28,7 @@
 #include "gtr-application.h"
 #include "gtr-dirs.h"
 #include "gtr-preferences-dialog.h"
-#include "gtr-prefs-manager.h"
+#include "gtr-settings.h"
 #include "gtr-profile.h"
 #include "gtr-profile-manager.h"
 #include "gtr-utils.h"
@@ -56,6 +56,11 @@ G_DEFINE_TYPE (GtrPreferencesDialog, gtr_preferences_dialog, GTK_TYPE_DIALOG)
 
 struct _GtrPreferencesDialogPrivate
 {
+  GSettings *ui_settings;
+  GSettings *tm_settings;
+  GSettings *editor_settings;
+  GSettings *files_settings;
+
   GtkWidget *notebook;
 
   /* Files->General */
@@ -128,125 +133,63 @@ enum
 /***************Files pages****************/
 
 static void
-warn_if_contains_fuzzy_checkbutton_toggled (GtkToggleButton * button,
-                                            GtrPreferencesDialog * dlg)
-{
-  g_return_if_fail (button ==
-                    GTK_TOGGLE_BUTTON (dlg->
-                                       priv->warn_if_contains_fuzzy_checkbutton));
-
-  gtr_prefs_manager_set_warn_if_contains_fuzzy
-    (gtk_toggle_button_get_active (button));
-}
-
-static void
-delete_compiled_checkbutton_toggled (GtkToggleButton * button,
-                                     GtrPreferencesDialog * dlg)
-{
-  g_return_if_fail (button ==
-                    GTK_TOGGLE_BUTTON (dlg->
-                                       priv->delete_compiled_checkbutton));
-
-  gtr_prefs_manager_set_delete_compiled (gtk_toggle_button_get_active
-                                         (button));
-}
-
-static void
 setup_files_general_page (GtrPreferencesDialog * dlg)
 {
-  /*Set initial value */
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (dlg->
-                                 priv->warn_if_contains_fuzzy_checkbutton),
-                                gtr_prefs_manager_get_warn_if_contains_fuzzy
-                                ());
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (dlg->priv->delete_compiled_checkbutton),
-                                gtr_prefs_manager_get_delete_compiled ());
-
-  /*Connect signals */
-  g_signal_connect (dlg->priv->warn_if_contains_fuzzy_checkbutton, "toggled",
-                    G_CALLBACK (warn_if_contains_fuzzy_checkbutton_toggled),
-                    dlg);
-  g_signal_connect (dlg->priv->delete_compiled_checkbutton, "toggled",
-                    G_CALLBACK (delete_compiled_checkbutton_toggled), dlg);
+  g_settings_bind (dlg->priv->files_settings,
+                   GTR_SETTINGS_WARN_IF_CONTAINS_FUZZY,
+                   dlg->priv->warn_if_contains_fuzzy_checkbutton,
+                   "active",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+  g_settings_bind (dlg->priv->files_settings,
+                   GTR_SETTINGS_DELETE_COMPILED,
+                   dlg->priv->delete_compiled_checkbutton,
+                   "active",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 }
 
 static void
-autosave_checkbutton_toggled (GtkToggleButton * button,
-                              GtrPreferencesDialog * dlg)
+on_auto_save_changed (GSettings            *settings,
+                      const gchar          *key,
+                      GtrPreferencesDialog *dlg)
 {
-  gboolean autosave;
-
-  g_return_if_fail (button ==
-                    GTK_TOGGLE_BUTTON (dlg->priv->autosave_checkbutton));
-
-  autosave = gtk_toggle_button_get_active (button);
-
   gtk_widget_set_sensitive (dlg->priv->autosave_interval_spinbutton,
-                            autosave);
-  gtr_prefs_manager_set_autosave (autosave);
-}
-
-static void
-create_backup_checkbutton_toggled (GtkToggleButton * button,
-                                   GtrPreferencesDialog * dlg)
-{
-  gboolean create_backup;
-
-  g_return_if_fail (button ==
-                    GTK_TOGGLE_BUTTON (dlg->priv->create_backup_checkbutton));
-
-  create_backup = gtk_toggle_button_get_active (button);
-
-  gtr_prefs_manager_set_create_backup (create_backup);
-}
-
-static void
-autosave_interval_spinbutton_value_changed (GtkSpinButton * spin_button,
-                                            GtrPreferencesDialog * dlg)
-{
-  g_return_if_fail (spin_button ==
-                    GTK_SPIN_BUTTON (dlg->
-                                     priv->autosave_interval_spinbutton));
-
-  gtr_prefs_manager_set_autosave_interval
-    (gtk_spin_button_get_value_as_int (spin_button));
+                            g_settings_get_boolean (settings, key));
 }
 
 static void
 setup_files_autosave_page (GtrPreferencesDialog * dlg)
 {
-  gboolean autosave, backup;
-  gint autosave_interval;
+  gboolean autosave;
 
   /*Set initial value */
-  autosave = gtr_prefs_manager_get_autosave ();
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (dlg->priv->autosave_checkbutton), autosave);
-  backup = gtr_prefs_manager_get_create_backup ();
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (dlg->priv->create_backup_checkbutton),
-                                backup);
-
-  autosave_interval = gtr_prefs_manager_get_autosave_interval ();
-
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON
-                             (dlg->priv->autosave_interval_spinbutton),
-                             autosave_interval);
+  autosave = g_settings_get_boolean (dlg->priv->files_settings,
+                                     GTR_SETTINGS_AUTO_SAVE);
 
   /*Set sensitive */
   gtk_widget_set_sensitive (dlg->priv->autosave_interval_spinbutton,
                             autosave);
 
-  /*Connect signals */
-  g_signal_connect (dlg->priv->autosave_checkbutton, "toggled",
-                    G_CALLBACK (autosave_checkbutton_toggled), dlg);
-  g_signal_connect (dlg->priv->create_backup_checkbutton, "toggled",
-                    G_CALLBACK (create_backup_checkbutton_toggled), dlg);
-  g_signal_connect (dlg->priv->autosave_interval_spinbutton, "value-changed",
-                    G_CALLBACK (autosave_interval_spinbutton_value_changed),
+  g_settings_bind (dlg->priv->files_settings,
+                   GTR_SETTINGS_AUTO_SAVE_INTERVAL,
+                   dlg->priv->autosave_interval_spinbutton,
+                   "value",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+
+  g_settings_bind (dlg->priv->files_settings,
+                   GTR_SETTINGS_AUTO_SAVE,
+                   dlg->priv->autosave_checkbutton,
+                   "active",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+  g_signal_connect (dlg->priv->files_settings,
+                    "changed::auto-save",
+                    G_CALLBACK (on_auto_save_changed),
                     dlg);
+
+  g_settings_bind (dlg->priv->files_settings,
+                   GTR_SETTINGS_CREATE_BACKUP,
+                   dlg->priv->create_backup_checkbutton,
+                   "active",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 }
 
 static void
@@ -259,149 +202,58 @@ setup_files_pages (GtrPreferencesDialog * dlg)
 
 
 /***************Editor pages****************/
-static void
-highlight_syntax_checkbutton_toggled (GtkToggleButton * button,
-                                      GtrPreferencesDialog * dlg)
-{
-  g_return_if_fail (button ==
-                    GTK_TOGGLE_BUTTON (dlg->
-                                       priv->highlight_syntax_checkbutton));
-
-  gtr_prefs_manager_set_highlight_syntax (gtk_toggle_button_get_active
-                                          (button));
-}
-
-static void
-visible_whitespace_checkbutton_toggled (GtkToggleButton * button,
-                                        GtrPreferencesDialog * dlg)
-{
-  g_return_if_fail (button ==
-                    GTK_TOGGLE_BUTTON (dlg->
-                                       priv->visible_whitespace_checkbutton));
-
-  gtr_prefs_manager_set_visible_whitespace
-    (gtk_toggle_button_get_active (button));
-}
 
 static void
 use_custom_font_checkbutton_toggled (GtkToggleButton * button,
                                      GtrPreferencesDialog * dlg)
 {
-  gboolean use_custom_font;
-
-  g_return_if_fail (button ==
-                    GTK_TOGGLE_BUTTON (dlg->
-                                       priv->use_custom_font_checkbutton));
-
-  use_custom_font = gtk_toggle_button_get_active (button);
-
-  gtr_prefs_manager_set_use_custom_font (use_custom_font);
-
-  gtk_widget_set_sensitive (dlg->priv->editor_font_hbox, use_custom_font);
-}
-
-static void
-editor_font_set (GtkFontButton * button, GtrPreferencesDialog * dlg)
-{
-  const gchar *editor_font;
-
-  g_return_if_fail (button ==
-                    GTK_FONT_BUTTON (dlg->priv->editor_font_fontbutton));
-
-  editor_font =
-    gtk_font_button_get_font_name (GTK_FONT_BUTTON
-                                   (dlg->priv->editor_font_fontbutton));
-
-  if (editor_font)
-    gtr_prefs_manager_set_editor_font (editor_font);
-  //FIXME:else set default font
+  gtk_widget_set_sensitive (dlg->priv->editor_font_hbox,
+                            gtk_toggle_button_get_active (button));
 }
 
 static void
 setup_editor_text_display_page (GtrPreferencesDialog * dlg)
 {
-  gboolean use_custom_font;
-  const gchar *editor_font;
+  g_settings_bind (dlg->priv->editor_settings,
+                   GTR_SETTINGS_HIGHLIGHT_SYNTAX,
+                   dlg->priv->highlight_syntax_checkbutton,
+                   "active",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+  g_settings_bind (dlg->priv->editor_settings,
+                   GTR_SETTINGS_VISIBLE_WHITESPACE,
+                   dlg->priv->visible_whitespace_checkbutton,
+                   "active",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
-  /*Set initial value */
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (dlg->priv->highlight_syntax_checkbutton),
-                                gtr_prefs_manager_get_highlight_syntax ());
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (dlg->priv->visible_whitespace_checkbutton),
-                                gtr_prefs_manager_get_visible_whitespace ());
-
-  use_custom_font = gtr_prefs_manager_get_use_custom_font ();
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (dlg->priv->use_custom_font_checkbutton),
-                                use_custom_font);
-
-  if (use_custom_font)
-    {
-      editor_font = gtr_prefs_manager_get_editor_font ();
-      if (editor_font)
-        gtk_font_button_set_font_name (GTK_FONT_BUTTON
-                                       (dlg->priv->editor_font_fontbutton),
-                                       editor_font);
-      //else FIXME: I think i need to set the system font (maybe Sans 12?)
-    }
-
-  /*Set sensitive */
-  gtk_widget_set_sensitive (dlg->priv->editor_font_hbox, use_custom_font);
-
-  /*Connect signals */
-  g_signal_connect (dlg->priv->highlight_syntax_checkbutton, "toggled",
-                    G_CALLBACK (highlight_syntax_checkbutton_toggled), dlg);
-  g_signal_connect (dlg->priv->visible_whitespace_checkbutton, "toggled",
-                    G_CALLBACK (visible_whitespace_checkbutton_toggled), dlg);
+  /* Connect before binding to set the sensitivity */
   g_signal_connect (dlg->priv->use_custom_font_checkbutton, "toggled",
                     G_CALLBACK (use_custom_font_checkbutton_toggled), dlg);
-  g_signal_connect (dlg->priv->editor_font_fontbutton, "font-set",
-                    G_CALLBACK (editor_font_set), dlg);
-}
+  g_settings_bind (dlg->priv->editor_settings,
+                   GTR_SETTINGS_USE_CUSTOM_FONT,
+                   dlg->priv->use_custom_font_checkbutton,
+                   "active",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
-static void
-unmark_fuzzy_when_changed_checkbutton_toggled (GtkToggleButton * button,
-                                               GtrPreferencesDialog * dlg)
-{
-  g_return_if_fail (button ==
-                    GTK_TOGGLE_BUTTON (dlg->
-                                       priv->unmark_fuzzy_when_changed_checkbutton));
-
-  gtr_prefs_manager_set_unmark_fuzzy_when_changed
-    (gtk_toggle_button_get_active (button));
-}
-
-static void
-spellcheck_checkbutton_toggled (GtkToggleButton * button,
-                                GtrPreferencesDialog * dlg)
-{
-  g_return_if_fail (button ==
-                    GTK_TOGGLE_BUTTON (dlg->priv->spellcheck_checkbutton));
-
-  gtr_prefs_manager_set_spellcheck (gtk_toggle_button_get_active (button));
+  g_settings_bind (dlg->priv->editor_settings,
+                   GTR_SETTINGS_EDITOR_FONT,
+                   dlg->priv->editor_font_fontbutton,
+                   "font-name",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 }
 
 static void
 setup_editor_contents (GtrPreferencesDialog * dlg)
 {
-  /*Set initial values */
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (dlg->
-                                 priv->unmark_fuzzy_when_changed_checkbutton),
-                                gtr_prefs_manager_get_unmark_fuzzy_when_changed
-                                ());
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (dlg->priv->spellcheck_checkbutton),
-                                gtr_prefs_manager_get_spellcheck ());
-
-  /*Connect signals */
-  g_signal_connect (dlg->priv->unmark_fuzzy_when_changed_checkbutton,
-                    "toggled",
-                    G_CALLBACK
-                    (unmark_fuzzy_when_changed_checkbutton_toggled), dlg);
-  g_signal_connect (dlg->priv->spellcheck_checkbutton, "toggled",
-                    G_CALLBACK (spellcheck_checkbutton_toggled), dlg);
+  g_settings_bind (dlg->priv->editor_settings,
+                   GTR_SETTINGS_UNMARK_FUZZY_WHEN_CHANGED,
+                   dlg->priv->unmark_fuzzy_when_changed_checkbutton,
+                   "active",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+  g_settings_bind (dlg->priv->editor_settings,
+                   GTR_SETTINGS_SPELLCHECK,
+                   dlg->priv->spellcheck_checkbutton,
+                   "active",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 }
 
 static void
@@ -763,43 +615,30 @@ setup_profile_pages (GtrPreferencesDialog *dlg)
 
 /***************Interface pages****************/
 static void
-style_changed_cb (GtkComboBox * combobox, GtrPreferencesDialog * dlg)
-{
-  g_return_if_fail (combobox == GTK_COMBO_BOX (dlg->priv->gdl_combobox));
-
-  gtr_prefs_manager_set_color_scheme (gtk_combo_box_get_active_text
-                                      (combobox));
-}
-
-static void
 scheme_color_changed_cb (GtkComboBox * combobox, GtrPreferencesDialog * dlg)
 {
-  g_return_if_fail (combobox ==
-                    GTK_COMBO_BOX (dlg->priv->scheme_color_combobox));
-
-  gtr_prefs_manager_set_color_scheme (gtk_combo_box_get_active_text
-                                      (combobox));
+  g_settings_set_string (dlg->priv->ui_settings,
+                         GTR_SETTINGS_COLOR_SCHEME,
+                         gtk_combo_box_get_active_text (combobox));
 }
 
 static void
 setup_interface_pages (GtrPreferencesDialog * dlg)
 {
-  gint pane_switcher_style;
   GtkSourceStyleSchemeManager *manager;
   const gchar *const *scheme_ids;
-  const gchar *scheme_active;
+  gchar *scheme_active;
   gint i = 0;
   GtkListStore *store;
   GtkCellRenderer *cell;
 
-  /*Set initial value */
-  pane_switcher_style = gtr_prefs_manager_get_pane_switcher_style ();
-  if (pane_switcher_style)
-    gtk_combo_box_set_active (GTK_COMBO_BOX (dlg->priv->gdl_combobox),
-                              pane_switcher_style);
-  /*
-   * Scheme color
-   */
+  g_settings_bind (dlg->priv->ui_settings,
+                   GTR_SETTINGS_PANEL_SWITCHER_STYLE,
+                   dlg->priv->gdl_combobox,
+                   "active",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+
+  /* Scheme color */
   store = gtk_list_store_new (1, G_TYPE_STRING);
   gtk_combo_box_set_model (GTK_COMBO_BOX (dlg->priv->scheme_color_combobox),
                            GTK_TREE_MODEL (store));
@@ -814,7 +653,8 @@ setup_interface_pages (GtrPreferencesDialog * dlg)
 
   manager = gtk_source_style_scheme_manager_get_default ();
   scheme_ids = gtk_source_style_scheme_manager_get_scheme_ids (manager);
-  scheme_active = gtr_prefs_manager_get_color_scheme ();
+  scheme_active = g_settings_get_string (dlg->priv->ui_settings,
+                                         GTR_SETTINGS_COLOR_SCHEME);
   while (scheme_ids[i] != NULL)
     {
       gtk_combo_box_append_text (GTK_COMBO_BOX
@@ -826,9 +666,9 @@ setup_interface_pages (GtrPreferencesDialog * dlg)
       i++;
     }
 
+  g_free (scheme_active);
+
   /*Connect signals */
-  g_signal_connect (dlg->priv->gdl_combobox, "changed",
-                    G_CALLBACK (style_changed_cb), dlg);
   g_signal_connect (dlg->priv->scheme_color_combobox, "changed",
                     G_CALLBACK (scheme_color_changed_cb), dlg);
 }
@@ -836,35 +676,28 @@ setup_interface_pages (GtrPreferencesDialog * dlg)
 /***************Translation Memory pages****************/
 static void
 response_filechooser_cb (GtkDialog * dialog,
-                         gint response_id, gpointer user_data)
+                         gint response_id, GtrPreferencesDialog *dlg)
 {
-  GtrPreferencesDialog *dlg;
-
-  dlg = (GtrPreferencesDialog *) user_data;
-
-
   if (response_id == GTK_RESPONSE_YES)
     {
+      gchar *filename;
+
+      filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
       gtk_entry_set_text (GTK_ENTRY (dlg->priv->directory_entry),
-                          gtk_file_chooser_get_filename (GTK_FILE_CHOOSER
-                                                         (dialog)));
-      gtr_prefs_manager_set_po_directory
-        (gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog)));
-      gtk_widget_destroy (GTK_WIDGET (dialog));
+                          filename);
+      g_settings_set_string (dlg->priv->tm_settings,
+                             GTR_SETTINGS_PO_DIRECTORY,
+                             filename);
+      g_free (filename);
     }
-  else
-    {
-      gtk_widget_destroy (GTK_WIDGET (dialog));
-    }
+
+  gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
 static void
-on_search_button_clicked (GtkButton * button, gpointer data)
+on_search_button_clicked (GtkButton * button, GtrPreferencesDialog *dlg)
 {
   GtkWidget *filechooser;
-  GtrPreferencesDialog *dlg;
-
-  dlg = (GtrPreferencesDialog *) data;
 
   filechooser = gtk_file_chooser_dialog_new ("Select PO directory",
                                              GTK_WINDOW (dlg),
@@ -975,19 +808,28 @@ static void
 on_add_database_button_clicked (GtkButton * button, GtrPreferencesDialog * dlg)
 {
   GFile *dir;
-  const gchar *dir_name;
+  gchar *dir_name;
   IdleData *data;
 
   data = g_new0 (IdleData, 1);
   data->list = NULL;
 
-  dir_name = gtr_prefs_manager_get_po_directory ();
+  dir_name = g_settings_get_string (dlg->priv->tm_settings,
+                                    GTR_SETTINGS_PO_DIRECTORY);
 
   dir = g_file_new_for_path (dir_name);
+  g_free (dir_name);
 
-  if (gtr_prefs_manager_get_restrict_to_filename ())
-    gtr_utils_scan_dir (dir, &data->list,
-                        gtr_prefs_manager_get_filename_restriction ());
+  if (g_settings_get_boolean (dlg->priv->tm_settings,
+                              GTR_SETTINGS_RESTRICT_TO_FILENAME))
+    {
+      gchar *restriction;
+
+      restriction = g_settings_get_string (dlg->priv->tm_settings,
+                                           GTR_SETTINGS_FILENAME_RESTRICTION);
+      gtr_utils_scan_dir (dir, &data->list, restriction);
+      g_free (restriction);
+    }
   else
     gtr_utils_scan_dir (dir, &data->list, NULL);
 
@@ -1005,79 +847,12 @@ on_add_database_button_clicked (GtkButton * button, GtrPreferencesDialog * dlg)
 }
 
 static void
-on_use_lang_profile_checkbutton_changed (GtkToggleButton * button,
-                                         gpointer user_data)
-{
-  gtr_prefs_manager_set_restrict_to_filename
-    (gtk_toggle_button_get_active (button));
-}
-
-static void
-tm_lang_entry_changed (GObject * gobject,
-                       GParamSpec * arg1, GtrPreferencesDialog * dlg)
-{
-  const gchar *text;
-
-  g_return_if_fail (GTK_ENTRY (gobject) ==
-                    GTK_ENTRY (dlg->priv->tm_lang_entry));
-
-  text = gtk_entry_get_text (GTK_ENTRY (gobject));
-
-  if (text)
-    gtr_prefs_manager_set_filename_restriction (text);
-}
-
-
-static void
-on_missing_words_spinbutton_changed (GtkSpinButton * spinbutton,
-                                     gpointer data)
-{
-  gint value;
-
-  value = gtk_spin_button_get_value_as_int (spinbutton);
-
-  gtr_prefs_manager_set_max_missing_words (value);
-}
-
-static void
-on_sentence_length_spinbutton_changed (GtkSpinButton * spinbutton,
-                                       gpointer data)
-{
-  gint value;
-
-  value = gtk_spin_button_get_value_as_int (spinbutton);
-
-  gtr_prefs_manager_set_max_length_diff (value);
-}
-
-static void
-directory_entry_changed (GObject * gobject,
-                         GParamSpec * arg1, GtrPreferencesDialog * dlg)
-{
-  const gchar *text;
-
-  g_return_if_fail (GTK_ENTRY (gobject) ==
-                    GTK_ENTRY (dlg->priv->directory_entry));
-
-  text = gtk_entry_get_text (GTK_ENTRY (gobject));
-
-  if (text)
-    gtr_prefs_manager_set_po_directory (text);
-}
-
-
-static void
 setup_tm_pages (GtrPreferencesDialog * dlg)
 {
   GtrProfileManager *prof_manager;
   GtrProfile *profile;
   const gchar *language_code;
-  const gchar *filename = NULL;
-
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (dlg->priv->use_lang_profile_in_tm),
-                                gtr_prefs_manager_get_restrict_to_filename
-                                ());
+  gchar *filename = NULL;
 
   prof_manager = gtr_profile_manager_get_default ();
   profile = gtr_profile_manager_get_active_profile (prof_manager);
@@ -1085,51 +860,50 @@ setup_tm_pages (GtrPreferencesDialog * dlg)
   if (profile != NULL)
     {
       language_code = gtr_profile_get_language_code (profile);
-      filename = (const gchar *) g_strconcat (language_code, ".po", NULL);
+      filename = g_strconcat (language_code, ".po", NULL);
 
       gtk_entry_set_text (GTK_ENTRY (dlg->priv->tm_lang_entry), filename);
     }
   g_object_unref (prof_manager);
 
   if (filename != NULL)
-    gtr_prefs_manager_set_filename_restriction (filename);
+    g_settings_set_string (dlg->priv->tm_settings,
+                           GTR_SETTINGS_FILENAME_RESTRICTION,
+                           filename);
 
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON
-                             (dlg->priv->missing_words_spinbutton),
-                             (gdouble)
-                             gtr_prefs_manager_get_max_missing_words ());
+  g_free (filename);
 
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON
-                             (dlg->priv->sentence_length_spinbutton),
-                             (gdouble)
-                             gtr_prefs_manager_get_max_length_diff ());
+  g_settings_bind (dlg->priv->tm_settings,
+                   GTR_SETTINGS_RESTRICT_TO_FILENAME,
+                   dlg->priv->use_lang_profile_in_tm,
+                   "active",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+  g_settings_bind (dlg->priv->tm_settings,
+                   GTR_SETTINGS_MAX_MISSING_WORDS,
+                   dlg->priv->missing_words_spinbutton,
+                   "value",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+  g_settings_bind (dlg->priv->tm_settings,
+                   GTR_SETTINGS_MAX_LENGTH_DIFF,
+                   dlg->priv->sentence_length_spinbutton,
+                   "value",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+  g_settings_bind (dlg->priv->tm_settings,
+                   GTR_SETTINGS_PO_DIRECTORY,
+                   dlg->priv->directory_entry,
+                   "text",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+  g_settings_bind (dlg->priv->tm_settings,
+                   GTR_SETTINGS_FILENAME_RESTRICTION,
+                   dlg->priv->tm_lang_entry,
+                   "text",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
   g_signal_connect (GTK_BUTTON (dlg->priv->search_button), "clicked",
                     G_CALLBACK (on_search_button_clicked), dlg);
 
-  g_signal_connect (dlg->priv->directory_entry, "notify::text",
-                    G_CALLBACK (directory_entry_changed), dlg);
-
-  g_signal_connect (dlg->priv->tm_lang_entry, "notify::text",
-                    G_CALLBACK (tm_lang_entry_changed), dlg);
-
   g_signal_connect (GTK_BUTTON (dlg->priv->add_database_button), "clicked",
                     G_CALLBACK (on_add_database_button_clicked), dlg);
-
-  g_signal_connect (GTK_TOGGLE_BUTTON (dlg->priv->use_lang_profile_in_tm),
-                    "toggled",
-                    G_CALLBACK (on_use_lang_profile_checkbutton_changed),
-                    dlg);
-
-  g_signal_connect (GTK_SPIN_BUTTON (dlg->priv->missing_words_spinbutton),
-                    "value-changed",
-                    G_CALLBACK (on_missing_words_spinbutton_changed), dlg);
-
-  g_signal_connect (GTK_SPIN_BUTTON (dlg->priv->sentence_length_spinbutton),
-                    "value-changed",
-                    G_CALLBACK (on_sentence_length_spinbutton_changed), dlg);
-
-  g_free ((gpointer) filename);
 }
 
 /***************Plugins pages****************/
@@ -1181,6 +955,11 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   gchar *path;
 
   dlg->priv = GTR_PREFERENCES_DIALOG_GET_PRIVATE (dlg);
+
+  dlg->priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
+  dlg->priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
+  dlg->priv->tm_settings = g_settings_new ("org.gnome.gtranslator.preferences.tm");
+  dlg->priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
 
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
                           GTK_STOCK_CLOSE,
@@ -1272,8 +1051,6 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
       return;
     }
 
-
-
   gtk_box_pack_start (content_area, dlg->priv->notebook, FALSE, FALSE, 0);
 
   gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);
@@ -1287,9 +1064,35 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
 }
 
 static void
-gtr_preferences_dialog_finalize (GObject * object)
+gtr_preferences_dialog_dispose (GObject * object)
 {
-  G_OBJECT_CLASS (gtr_preferences_dialog_parent_class)->finalize (object);
+  GtrPreferencesDialog *dlg = GTR_PREFERENCES_DIALOG (object);
+
+  if (dlg->priv->ui_settings != NULL)
+    {
+      g_object_unref (dlg->priv->ui_settings);
+      dlg->priv->ui_settings = NULL;
+    }
+
+  if (dlg->priv->tm_settings != NULL)
+    {
+      g_object_unref (dlg->priv->tm_settings);
+      dlg->priv->tm_settings = NULL;
+    }
+
+  if (dlg->priv->editor_settings != NULL)
+    {
+      g_object_unref (dlg->priv->editor_settings);
+      dlg->priv->editor_settings = NULL;
+    }
+
+  if (dlg->priv->files_settings != NULL)
+    {
+      g_object_unref (dlg->priv->files_settings);
+      dlg->priv->files_settings = NULL;
+    }
+
+  G_OBJECT_CLASS (gtr_preferences_dialog_parent_class)->dispose (object);
 }
 
 static void
@@ -1299,7 +1102,7 @@ gtr_preferences_dialog_class_init (GtrPreferencesDialogClass * klass)
 
   g_type_class_add_private (klass, sizeof (GtrPreferencesDialogPrivate));
 
-  object_class->finalize = gtr_preferences_dialog_finalize;
+  object_class->dispose = gtr_preferences_dialog_dispose;
 }
 
 void

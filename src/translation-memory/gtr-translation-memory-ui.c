@@ -24,7 +24,6 @@
 
 #include "gtr-application.h"
 #include "gtr-po.h"
-#include "gtr-prefs-manager.h"
 #include "gtr-translation-memory.h"
 #include "gtr-translation-memory-ui.h"
 #include "gtr-tab.h"

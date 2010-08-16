@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
+ * Copyright (C) 2007  Ignacio Casal Quinteiro <icq@gnome.org>
  *               2008  Igalia 
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- *   Ignacio Casal Quinteiro <nacho.resa@gmail.com>
+ *   Ignacio Casal Quinteiro <icq@gnome.org>
  *   Pablo Sanxiao <psanxiao@gmail.com>
  */
 
@@ -29,8 +29,7 @@
 #include "gtr-application.h"
 #include "gtr-debug.h"
 #include "gtr-dirs.h"
-#include "gtr-prefs-manager.h"
-#include "gtr-prefs-manager-app.h"
+#include "gtr-settings.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
 #include "egg-toolbars-model.h"
@@ -52,6 +51,10 @@ G_DEFINE_TYPE (GtrApplication, gtr_application, UNIQUE_TYPE_APP)
 
 struct _GtrApplicationPrivate
 {
+  GSettings *settings;
+  GSettings *tm_settings;
+  GSettings *window_settings;
+
   GList *windows;
   GtrWindow *active_window;
 
@@ -186,6 +189,11 @@ gtr_application_init (GtrApplication *application)
   /* Creating config folder */
   ensure_user_config_dir (); /* FIXME: is this really needed ? */
 
+  /* Load settings */
+  priv->settings = gtr_settings_new ();
+  priv->tm_settings = g_settings_new ("org.gnome.gtranslator.preferences.tm");
+  priv->window_settings = g_settings_new ("org.gnome.gtranslator.state.window");
+
   /* If the config folder exists but there is no profile */
   gtr_folder = gtr_dirs_get_user_config_dir ();
   profiles_file = g_build_filename (gtr_folder, "profiles.xml", NULL);
@@ -228,14 +236,13 @@ gtr_application_init (GtrApplication *application)
   /* Creating translation memory */
   application->priv->tm = GTR_TRANSLATION_MEMORY (gtr_gda_new ());
   gtr_translation_memory_set_max_omits (application->priv->tm,
-                                        gtr_prefs_manager_get_max_missing_words
-                                        ());
+                                        g_settings_get_int (priv->tm_settings,
+                                                            GTR_SETTINGS_MAX_MISSING_WORDS));
   gtr_translation_memory_set_max_delta (application->priv->tm,
-                                        gtr_prefs_manager_get_max_length_diff
-                                        ());
+                                        g_settings_get_int (priv->tm_settings,
+                                                            GTR_SETTINGS_MAX_LENGTH_DIFF));
   gtr_translation_memory_set_max_items (application->priv->tm, 10);
 }
-
 
 static void
 gtr_application_dispose (GObject * object)
@@ -243,6 +250,24 @@ gtr_application_dispose (GObject * object)
   GtrApplication *app = GTR_APPLICATION (object);
 
   DEBUG_PRINT ("Disposing app");
+
+  if (app->priv->settings != NULL)
+    {
+      g_object_unref (app->priv->settings);
+      app->priv->settings = NULL;
+    }
+
+  if (app->priv->tm_settings != NULL)
+    {
+      g_object_unref (app->priv->tm_settings);
+      app->priv->tm_settings = NULL;
+    }
+
+  if (app->priv->window_settings != NULL)
+    {
+      g_object_unref (app->priv->window_settings);
+      app->priv->window_settings = NULL;
+    }
 
   if (app->priv->icon_factory != NULL)
     {
@@ -327,36 +352,30 @@ gtr_application_create_window (GtrApplication *app)
 
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
-  /*
-   * We need to be careful here, there is a race condition:
-   * when another gedit is launched it checks active_window,
-   * so we must do our best to ensure that active_window
-   * is never NULL when at least a window exists.
-   */
-  if (app->priv->windows == NULL)
-    window = g_object_new (GTR_TYPE_WINDOW, NULL);
-  else
-    window = g_object_new (GTR_TYPE_WINDOW, NULL);
-
+  window = g_object_new (GTR_TYPE_WINDOW, NULL);
   set_active_window (app, window);
 
   app->priv->windows = g_list_prepend (app->priv->windows,
                                        window);
 
-  state = gtr_prefs_manager_get_window_state ();
+  state = g_settings_get_int (app->priv->window_settings,
+                              GTR_SETTINGS_WINDOW_STATE);
+
+  g_settings_get (app->priv->window_settings,
+                  GTR_SETTINGS_WINDOW_SIZE,
+                  "(ii)", &w, &h);
+
+  gtk_window_set_default_size (GTK_WINDOW (window), w, h);
 
   if ((state & GDK_WINDOW_STATE_MAXIMIZED) != 0)
-    {
-      gtr_prefs_manager_get_default_window_size (&w, &h);
-      gtk_window_set_default_size (GTK_WINDOW (window), w, h);
-      gtk_window_maximize (GTK_WINDOW (window));
-    }
+    gtk_window_maximize (GTK_WINDOW (window));
   else
-    {
-      gtr_prefs_manager_get_window_size (&w, &h);
-      gtk_window_set_default_size (GTK_WINDOW (window), w, h);
-      gtk_window_unmaximize (GTK_WINDOW (window));
-    }
+    gtk_window_unmaximize (GTK_WINDOW (window));
+
+  if ((state & GDK_WINDOW_STATE_STICKY ) != 0)
+    gtk_window_stick (GTK_WINDOW (window));
+  else
+    gtk_window_unstick (GTK_WINDOW (window));
 
   g_signal_connect (window, "focus_in_event",
                     G_CALLBACK (window_focus_in_event), app);
@@ -536,4 +555,12 @@ gtr_application_get_translation_memory (GtrApplication * app)
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
   return G_OBJECT (app->priv->tm);
+}
+
+GSettings *
+_gtr_application_get_settings (GtrApplication *app)
+{
+	g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
+
+	return app->priv->settings;
 }

@@ -29,8 +29,6 @@ INCLUDES = \
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED)                                   \
 	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"                         \
-	-DSCRIPTSDIR=\""$(pkgdatadir)"/scripts\"	\
-	-DWINDOW_ICON=\""$(datadir)"/pixmaps/gtranslator.png\"  \
 	-DPIXMAPSDIR=\""$(datadir)"/pixmaps/gtranslator\"
 
 bin_PROGRAMS = \
@@ -52,9 +50,9 @@ endif
 
 libgtranslator_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
-BUILT_SOURCES =                         \
-	gtr-marshal.h  \
-	gtr-marshal.c	\
+BUILT_SOURCES = \
+	gtr-marshal.h \
+	gtr-marshal.c \
 	gtr-enum-types.h \
 	gtr-enum-types.c
 
@@ -65,7 +63,7 @@ gtranslator-res.o: gtranslator.rc
 gtranslator_LDADD += gtranslator-res.o
 endif
 
-INST_H_FILES =				\
+INST_H_FILES = \
 	gtr-application.h \
 	gtr-context.h \
 	gtr-debug.h \
@@ -115,11 +113,6 @@ libgtranslator_la_SOURCES = \
 	gtr-actions-view.c \
 	gtr-actions-help.c \
 	gtr-io-error-info-bar.c \
-	gtr-prefs-manager.c \
-	gtr-prefs-manager.h \
-	gtr-prefs-manager-private.h \
-	gtr-prefs-manager-app.c \
-	gtr-prefs-manager-app.h \
 	gtr-history-entry.c \
 	gtr-history-entry.h \
 	gtr-actions-search.c \
@@ -128,6 +121,8 @@ libgtranslator_la_SOURCES = \
 	gtr-context.c \
 	gtr-profile-manager.h \
 	gtr-profile-manager.c \
+	gtr-settings.h \
+	gtr-settings.c \
 	gtr-status-combo-box.h \
 	gtr-status-combo-box.c \
 	$(INST_H_FILES)
