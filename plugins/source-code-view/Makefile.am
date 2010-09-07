@@ -38,6 +38,12 @@ plugin_in_files = gtr-source-code-view.gtranslator-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gtranslator-plugin.desktop.in=.gtranslator.plugin)
 
+gsettings_SCHEMAS = org.gnome.gtranslator.plugins.source-code-view.gschema.xml
+
+@INTLTOOL_XML_NOMERGE_RULE@
+
+@GSETTINGS_RULES@
+
 EXTRA_DIST =	\
 	$(plugin_in_files)	\
 	$(ui_DATA)

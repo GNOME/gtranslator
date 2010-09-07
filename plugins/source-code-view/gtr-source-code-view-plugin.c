@@ -31,14 +31,11 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include <gio/gio.h>
-#include <gconf/gconf-client.h>
 #include <ctype.h>
 
-/* Gconf keys */
-#define SOURCE_CODE_VIEW_BASE_KEY "/apps/gtranslator/plugins/source-view"
-#define USE_EDITOR_KEY SOURCE_CODE_VIEW_BASE_KEY "/use_editor"
-#define PROGRAM_CMD_KEY SOURCE_CODE_VIEW_BASE_KEY "/program_cmd"
-#define LINE_CMD_KEY SOURCE_CODE_VIEW_BASE_KEY "/line_cmd"
+#define GTR_SETTINGS_USE_EDITOR "use-editor"
+#define GTR_SETTINGS_PROGRAM_CMD "program-cmd"
+#define GTR_SETTINGS_LINE_CMD "line-cmd"
 
 #define GTR_SOURCE_CODE_VIEW_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
@@ -47,7 +44,7 @@
 
 struct _GtrSourceCodeViewPluginPrivate
 {
-  GConfClient *gconf_client;
+  GSettings *settings;
 
   /* Dialog stuff */
   GtkWidget *dialog;
@@ -133,8 +130,8 @@ show_source (GtrSourceCodeViewPlugin * plugin, const gchar * path, gint line)
 {
   gboolean use_editor;
 
-  use_editor = gconf_client_get_bool (plugin->priv->gconf_client,
-                                      USE_EDITOR_KEY, NULL);
+  use_editor = g_settings_get_boolean (plugin->priv->settings,
+                                       GTR_SETTINGS_USE_EDITOR);
 
   if (use_editor)
     {
@@ -142,12 +139,12 @@ show_source (GtrSourceCodeViewPlugin * plugin, const gchar * path, gint line)
       gchar *line_cmd;
 
       /* Program cmd */
-      program_cmd = gconf_client_get_string (plugin->priv->gconf_client,
-                                             PROGRAM_CMD_KEY, NULL);
+      program_cmd = g_settings_get_string (plugin->priv->settings,
+                                           GTR_SETTINGS_PROGRAM_CMD);
 
       /* Line cmd */
-      line_cmd = gconf_client_get_string (plugin->priv->gconf_client,
-                                          LINE_CMD_KEY, NULL);
+      line_cmd = g_settings_get_string (plugin->priv->settings,
+                                        GTR_SETTINGS_LINE_CMD);
 
       show_in_editor (program_cmd, line_cmd, path, line);
 
@@ -396,25 +393,22 @@ gtr_source_code_view_plugin_init (GtrSourceCodeViewPlugin * plugin)
 {
   plugin->priv = GTR_SOURCE_CODE_VIEW_PLUGIN_GET_PRIVATE (plugin);
 
-  plugin->priv->gconf_client = gconf_client_get_default ();
-
-  gconf_client_add_dir (plugin->priv->gconf_client,
-                        SOURCE_CODE_VIEW_BASE_KEY,
-                        GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-
+  plugin->priv->settings = g_settings_new ("org.gnome.gtranslator.plugins.source-code-view");
   plugin->priv->tags = NULL;
 }
 
 static void
-gtr_source_code_view_plugin_finalize (GObject * object)
+gtr_source_code_view_plugin_dispose (GObject * object)
 {
   GtrSourceCodeViewPlugin *plugin = GTR_SOURCE_CODE_VIEW_PLUGIN (object);
 
-  gconf_client_suggest_sync (plugin->priv->gconf_client, NULL);
+  if (plugin->priv->settings != NULL)
+    {
+      g_object_unref (plugin->priv->settings);
+      plugin->priv->settings = NULL;
+    }
 
-  g_object_unref (G_OBJECT (plugin->priv->gconf_client));
-
-  G_OBJECT_CLASS (gtr_source_code_view_plugin_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_source_code_view_plugin_parent_class)->dispose (object);
 }
 
 static void
@@ -573,8 +567,6 @@ get_configuration_dialog (GtrSourceCodeViewPlugin * plugin)
 
   gboolean ret;
   GtkWidget *error_widget;
-  gchar *value;
-  gboolean use_editor;
   gchar *path;
   gchar *root_objects[] = {
     "dialog",
@@ -602,37 +594,27 @@ get_configuration_dialog (GtrSourceCodeViewPlugin * plugin)
       //FIXME: We have to show a dialog
     }
 
-  /* Set default values */
-
   //Use editor
-  use_editor = gconf_client_get_bool (plugin->priv->gconf_client,
-                                      USE_EDITOR_KEY, NULL);
-
   g_signal_connect (plugin->priv->use_editor_checkbutton, "toggled",
                     G_CALLBACK (use_editor_toggled), plugin);
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (plugin->priv->use_editor_checkbutton),
-                                use_editor);
+  g_settings_bind (plugin->priv->settings,
+                   GTR_SETTINGS_USE_EDITOR,
+                   plugin->priv->use_editor_checkbutton,
+                   "active",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
-  use_editor_toggled (GTK_TOGGLE_BUTTON
-                      (plugin->priv->use_editor_checkbutton), plugin);
+  g_settings_bind (plugin->priv->settings,
+                   GTR_SETTINGS_PROGRAM_CMD,
+                   plugin->priv->program_cmd_entry,
+                   "text",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
-  //Program cmd
-  value = gconf_client_get_string (plugin->priv->gconf_client,
-                                   PROGRAM_CMD_KEY, NULL);
-
-  gtk_entry_set_text (GTK_ENTRY (plugin->priv->program_cmd_entry), value);
-
-  g_free (value);
-
-  //Line cmd
-  value = gconf_client_get_string (plugin->priv->gconf_client,
-                                   LINE_CMD_KEY, NULL);
-
-  gtk_entry_set_text (GTK_ENTRY (plugin->priv->line_cmd_entry), value);
-
-  g_free (value);
+  g_settings_bind (plugin->priv->settings,
+                   GTR_SETTINGS_LINE_CMD,
+                   plugin->priv->line_cmd_entry,
+                   "text",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
   return plugin->priv->dialog;
 }
@@ -709,61 +691,10 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
 }
 
 static void
-ok_button_pressed (GtrSourceCodeViewPlugin * plugin)
-{
-  const gchar *program_cmd;
-  const gchar *line_cmd;
-  gboolean use_editor;
-
-  /* We have to get the text from the entries */
-  use_editor =
-    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-                                  (plugin->priv->use_editor_checkbutton));
-  program_cmd =
-    gtk_entry_get_text (GTK_ENTRY (plugin->priv->program_cmd_entry));
-  line_cmd = gtk_entry_get_text (GTK_ENTRY (plugin->priv->line_cmd_entry));
-
-  /* Now we store the data in gconf */
-  if (!gconf_client_key_is_writable (plugin->priv->gconf_client,
-                                     USE_EDITOR_KEY, NULL))
-    return;
-
-  gconf_client_set_bool (plugin->priv->gconf_client,
-                         USE_EDITOR_KEY, use_editor, NULL);
-
-  if (!gconf_client_key_is_writable (plugin->priv->gconf_client,
-                                     PROGRAM_CMD_KEY, NULL))
-    return;
-
-  gconf_client_set_string (plugin->priv->gconf_client,
-                           PROGRAM_CMD_KEY, program_cmd, NULL);
-
-  if (!gconf_client_key_is_writable (plugin->priv->gconf_client,
-                                     LINE_CMD_KEY, NULL))
-    return;
-
-  gconf_client_set_string (plugin->priv->gconf_client,
-                           LINE_CMD_KEY, line_cmd, NULL);
-}
-
-static void
 configure_dialog_response_cb (GtkWidget * widget,
                               gint response, GtrSourceCodeViewPlugin * plugin)
 {
-  switch (response)
-    {
-    case GTK_RESPONSE_OK:
-      {
-        ok_button_pressed (plugin);
-
-        gtk_widget_destroy (plugin->priv->dialog);
-        break;
-      }
-    case GTK_RESPONSE_CANCEL:
-      {
-        gtk_widget_destroy (plugin->priv->dialog);
-      }
-    }
+  gtk_widget_destroy (plugin->priv->dialog);
 }
 
 static GtkWidget *
@@ -789,7 +720,7 @@ gtr_source_code_view_plugin_class_init (GtrSourceCodeViewPluginClass * klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
-  object_class->finalize = gtr_source_code_view_plugin_finalize;
+  object_class->dispose = gtr_source_code_view_plugin_dispose;
 
   plugin_class->activate = impl_activate;
   plugin_class->deactivate = impl_deactivate;
