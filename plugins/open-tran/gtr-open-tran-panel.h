@@ -37,8 +37,8 @@ G_BEGIN_DECLS
 #define GTR_OPEN_TRAN_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_OPEN_TRAN_PANEL, GtrOpenTranPanelClass))
 
 /* GSettings keys */
-#define GTR_SETTINGS_SEARCH_CODE "search_code"
-#define GTR_SETTINGS_OWN_CODE "own_code"
+#define GTR_SETTINGS_SEARCH_CODE "search-code"
+#define GTR_SETTINGS_OWN_CODE "own-code"
 
 /* Private structure type */
 typedef struct _GtrOpenTranPanelPrivate GtrOpenTranPanelPrivate;
