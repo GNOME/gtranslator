@@ -53,6 +53,12 @@ plugin_in_files = gtr-open-tran.gtranslator-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gtranslator-plugin.desktop.in=.gtranslator.plugin)
 
+gsettings_SCHEMAS = org.gnome.gtranslator.plugins.open-tran.gschema.xml
+
+@INTLTOOL_XML_NOMERGE_RULE@
+
+@GSETTINGS_RULES@
+
 EXTRA_DIST = $(ui_DATA) $(pixmaps__DATA) $(plugin_in_files)
 
 CLEANFILES = $(plugin_DATA)

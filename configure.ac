@@ -279,6 +279,7 @@ plugins/fullscreen/Makefile
 plugins/insert-params/Makefile
 plugins/insert-tags/Makefile
 plugins/open-tran/Makefile
+plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in
 plugins/source-code-view/Makefile
 plugins/source-code-view/org.gnome.gtranslator.plugins.source-code-view.gschema.xml.in
 src/Makefile

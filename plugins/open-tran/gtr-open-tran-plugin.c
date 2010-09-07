@@ -29,7 +29,6 @@
 #include "gtr-utils.h"
 
 #include <glib/gi18n-lib.h>
-#include <gconf/gconf-client.h>
 #include <gtk/gtk.h>
 
 #define OPEN_TRAN_PLUGIN_ICON "open-tran.png"
@@ -42,7 +41,7 @@
 
 struct _GtrOpenTranPluginPrivate
 {
-  GConfClient *gconf_client;
+  GSettings *settings;
 
   /* Dialog stuff */
   GtkWidget *dialog;
@@ -63,27 +62,27 @@ GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrOpenTranPlugin,
                                     gtr_open_tran_panel_register_type
                                     (module);
   )
-     static void gtr_open_tran_plugin_init (GtrOpenTranPlugin * plugin)
+
+static void
+gtr_open_tran_plugin_init (GtrOpenTranPlugin * plugin)
 {
   plugin->priv = GTR_OPEN_TRAN_PLUGIN_GET_PRIVATE (plugin);
 
-  plugin->priv->gconf_client = gconf_client_get_default ();
-
-  gconf_client_add_dir (plugin->priv->gconf_client,
-                        OPEN_TRAN_BASE_KEY,
-                        GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+  plugin->priv->settings = g_settings_new ("org.gnome.gtranslator.plugins.open-tran");
 }
 
 static void
-gtr_open_tran_plugin_finalize (GObject * object)
+gtr_open_tran_plugin_dispose (GObject * object)
 {
   GtrOpenTranPlugin *plugin = GTR_OPEN_TRAN_PLUGIN (object);
 
-  gconf_client_suggest_sync (plugin->priv->gconf_client, NULL);
+  if (plugin->priv->settings)
+    {
+      g_object_unref (plugin->priv->settings);
+      plugin->priv->settings = NULL;
+    }
 
-  g_object_unref (G_OBJECT (plugin->priv->gconf_client));
-
-  G_OBJECT_CLASS (gtr_open_tran_plugin_parent_class)->finalize (object);
+  G_OBJECT_CLASS (gtr_open_tran_plugin_parent_class)->dispose (object);
 }
 
 
@@ -121,34 +120,6 @@ impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
   g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
 }
 
-static void
-get_custom_code (GtrOpenTranPlugin * plugin, gboolean own_code)
-{
-  gchar *type;
-  gchar *code;
-
-  if (own_code)
-    type = g_strdup (OWN_CODE_KEY);
-  else
-    type = g_strdup (SEARCH_CODE_KEY);
-
-  code = gconf_client_get_string (plugin->priv->gconf_client, type, NULL);
-
-  g_free (type);
-
-  if (!code && !own_code)
-    code = g_strdup ("en");
-  else if (!code && own_code)
-    code = g_strdup ("gl");     //Why gl? Just because i want.
-
-  if (!own_code)
-    gtk_entry_set_text (GTK_ENTRY (plugin->priv->search_code_entry), code);
-  else
-    gtk_entry_set_text (GTK_ENTRY (plugin->priv->own_code_entry), code);
-
-  g_free (code);
-}
-
 static GtkWidget *
 get_configuration_dialog (GtrOpenTranPlugin * plugin)
 {
@@ -178,57 +149,26 @@ get_configuration_dialog (GtrOpenTranPlugin * plugin)
       //FIXME: We have to show a dialog
     }
 
-  get_custom_code (plugin, FALSE);
-  get_custom_code (plugin, TRUE);
+  g_settings_bind (plugin->priv->settings,
+                   GTR_SETTINGS_OWN_CODE,
+                   plugin->priv->own_code_entry,
+                   "text",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+
+  g_settings_bind (plugin->priv->settings,
+                   GTR_SETTINGS_SEARCH_CODE,
+                   plugin->priv->search_code_entry,
+                   "text",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
   return plugin->priv->dialog;
-}
-
-static void
-ok_button_pressed (GtrOpenTranPlugin * plugin)
-{
-  const gchar *search_code;
-  const gchar *own_code;
-
-  /* We have to get the text from the entries */
-  search_code =
-    gtk_entry_get_text (GTK_ENTRY (plugin->priv->search_code_entry));
-  own_code = gtk_entry_get_text (GTK_ENTRY (plugin->priv->own_code_entry));
-
-  /* Now we store the data in gconf */
-  if (!gconf_client_key_is_writable (plugin->priv->gconf_client,
-                                     SEARCH_CODE_KEY, NULL))
-    return;
-
-  gconf_client_set_string (plugin->priv->gconf_client,
-                           SEARCH_CODE_KEY, search_code, NULL);
-
-  if (!gconf_client_key_is_writable (plugin->priv->gconf_client,
-                                     OWN_CODE_KEY, NULL))
-    return;
-
-  gconf_client_set_string (plugin->priv->gconf_client,
-                           OWN_CODE_KEY, own_code, NULL);
 }
 
 static void
 configure_dialog_response_cb (GtkWidget * widget,
                               gint response, GtrOpenTranPlugin * plugin)
 {
-  switch (response)
-    {
-    case GTK_RESPONSE_OK:
-      {
-        ok_button_pressed (plugin);
-
-        gtk_widget_destroy (plugin->priv->dialog);
-        break;
-      }
-    case GTK_RESPONSE_CANCEL:
-      {
-        gtk_widget_destroy (plugin->priv->dialog);
-      }
-    }
+  gtk_widget_destroy (plugin->priv->dialog);
 }
 
 static GtkWidget *
@@ -254,7 +194,7 @@ gtr_open_tran_plugin_class_init (GtrOpenTranPluginClass * klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
-  object_class->finalize = gtr_open_tran_plugin_finalize;
+  object_class->dispose = gtr_open_tran_plugin_dispose;
 
   plugin_class->activate = impl_activate;
   plugin_class->deactivate = impl_deactivate;

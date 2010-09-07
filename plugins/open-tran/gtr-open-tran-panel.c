@@ -30,7 +30,6 @@
 #include <glib.h>
 #include <glib/gi18n-lib.h>
 #include <glib-object.h>
-#include <gconf/gconf-client.h>
 #include <gtk/gtk.h>
 #include <libsoup/soup.h>
 
@@ -50,32 +49,33 @@
 #define FEDORA_ICON PIXMAPSDIR"/fedora.png"
 
 GTR_PLUGIN_DEFINE_TYPE (GtrOpenTranPanel, gtr_open_tran_panel, GTK_TYPE_VBOX)
-     struct _GtrOpenTranPanelPrivate
-     {
-       GConfClient *gconf_client;
 
-       GtkWidget *treeview;
-       GtkListStore *store;
+struct _GtrOpenTranPanelPrivate
+{
+  GSettings *settings;
 
-       GtkWidget *entry;
+  GtkWidget *treeview;
+  GtkListStore *store;
 
-       SoupSession *session;
+  GtkWidget *entry;
 
-       GtrWindow *window;
+  SoupSession *session;
 
-       gchar *text;
-     };
+  GtrWindow *window;
 
-     enum
-     {
-       ICON_COLUMN,
-       TEXT_COLUMN,
-       N_COLUMNS
-     };
+  gchar *text;
+};
 
-     static void
-       show_error_dialog (GtrWindow * parent,
-                          const gchar * message_format, ...)
+enum
+{
+  ICON_COLUMN,
+  TEXT_COLUMN,
+  N_COLUMNS
+};
+
+static void
+show_error_dialog (GtrWindow * parent,
+                   const gchar * message_format, ...)
 {
   gchar *msg = NULL;
   va_list args;
@@ -306,9 +306,9 @@ open_connection (GtrOpenTranPanel * panel,
 static void
 entry_activate_cb (GtkEntry * entry, GtrOpenTranPanel * panel)
 {
-  const gchar *entry_text = NULL;
-  const gchar *search_code = NULL;
-  const gchar *own_code = NULL;
+  const gchar *entry_text;
+  gchar *search_code;
+  gchar *own_code;
 
   gtk_list_store_clear (panel->priv->store);
 
@@ -320,8 +320,8 @@ entry_activate_cb (GtkEntry * entry, GtrOpenTranPanel * panel)
       return;
     }
 
-  search_code = gconf_client_get_string (panel->priv->gconf_client,
-                                         SEARCH_CODE_KEY, NULL);
+  search_code = g_settings_get_string (panel->priv->settings,
+                                       GTR_SETTINGS_SEARCH_CODE);
   if (!search_code)
     {
       show_error_dialog (panel->priv->window,
@@ -329,8 +329,10 @@ entry_activate_cb (GtkEntry * entry, GtrOpenTranPanel * panel)
       return;
     }
 
-  own_code = gconf_client_get_string (panel->priv->gconf_client,
-                                      OWN_CODE_KEY, NULL);
+  g_free (search_code);
+
+  own_code = g_settings_get_string (panel->priv->settings,
+                                    GTR_SETTINGS_OWN_CODE);
   if (!own_code)
     {
       show_error_dialog (panel->priv->window,
@@ -338,6 +340,8 @@ entry_activate_cb (GtkEntry * entry, GtrOpenTranPanel * panel)
                          ("You have to provide a language code for your language"));
       return;
     }
+
+  g_free (own_code);
 
   open_connection (panel, entry_text, search_code, own_code);
 }
@@ -431,7 +435,7 @@ gtr_open_tran_panel_init (GtrOpenTranPanel * panel)
 
   panel->priv = GTR_OPEN_TRAN_PANEL_GET_PRIVATE (panel);
 
-  panel->priv->gconf_client = gconf_client_get_default ();
+  panel->priv->settings = g_settings_new ("org.gnome.gtranslator.plugins.open-tran");
   panel->priv->session = soup_session_async_new ();
 
   gtr_open_tran_panel_draw (panel);
@@ -447,6 +451,13 @@ gtr_open_tran_panel_dispose (GObject * object)
       g_object_unref (panel->priv->session);
       panel->priv->session = NULL;
     }
+
+  if (panel->priv->settings != NULL)
+    {
+      g_object_unref (panel->priv->settings);
+      panel->priv->settings = NULL;
+    }
+
   G_OBJECT_CLASS (gtr_open_tran_panel_parent_class)->dispose (object);
 }
 
