@@ -113,7 +113,8 @@ struct _GtrWindowPrivate
   GtrProfileManager *prof_manager;
   GtkWidget *profile_combo;
 
-  gboolean destroy_has_run : 1;
+  guint destroy_has_run : 1;
+  guint dispose_has_run : 1;
 };
 
 enum
@@ -1783,6 +1784,7 @@ gtr_window_init (GtrWindow * window)
   window->priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
 
   window->priv->destroy_has_run = FALSE;
+  window->priv->dispose_has_run = FALSE;
 
   /* Profile manager */
   window->priv->prof_manager = gtr_profile_manager_get_default ();
@@ -1853,12 +1855,37 @@ gtr_window_init (GtrWindow * window)
 }
 
 static void
+save_panes_state (GtrWindow * window)
+{
+  gchar *filename;
+  gchar *config_folder;
+
+  g_settings_set (window->priv->state_settings, GTR_SETTINGS_WINDOW_SIZE, "(ii)",
+                  window->priv->width, window->priv->height);
+  g_settings_set_int (window->priv->state_settings, GTR_SETTINGS_WINDOW_STATE,
+                      window->priv->window_state);
+
+  config_folder = gtr_dirs_get_user_config_dir ();
+  filename = g_build_filename (config_folder, "gtr-layout.xml", NULL);
+  g_free (config_folder);
+
+  gtr_window_layout_save (window, filename, NULL);
+  g_free (filename);
+}
+
+static void
 gtr_window_dispose (GObject * object)
 {
   GtrWindow *window = GTR_WINDOW (object);
   GtrWindowPrivate *priv = window->priv;
 
   DEBUG_PRINT ("window dispose");
+
+  if (!priv->dispose_has_run)
+    {
+      save_panes_state (window);
+      priv->dispose_has_run = TRUE;
+    }
 
   if (priv->ui_settings)
     {
@@ -1904,25 +1931,6 @@ gtr_window_finalize (GObject * object)
 }
 
 static void
-save_panes_state (GtrWindow * window)
-{
-  gchar *filename;
-  gchar *config_folder;
-
-  g_settings_set (window->priv->state_settings, GTR_SETTINGS_WINDOW_SIZE, "(ii)",
-                  window->priv->width, window->priv->height);
-  g_settings_set_int (window->priv->state_settings, GTR_SETTINGS_WINDOW_STATE,
-                      window->priv->window_state);
-
-  config_folder = gtr_dirs_get_user_config_dir ();
-  filename = g_build_filename (config_folder, "gtr-layout.xml", NULL);
-  g_free (config_folder);
-
-  gtr_window_layout_save (window, filename, NULL);
-  g_free (filename);
-}
-
-static void
 gtr_window_destroy (GtkObject * object)
 {
   GtrWindow *window;
@@ -1933,8 +1941,6 @@ gtr_window_destroy (GtkObject * object)
 
   if (!window->priv->destroy_has_run)
     {
-      save_panes_state (window);
-
       if (window->priv->widgets)
         {
           g_hash_table_destroy (window->priv->widgets);

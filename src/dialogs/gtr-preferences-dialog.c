@@ -45,6 +45,7 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include <gtksourceview/gtksourcestyleschememanager.h>
+#include <gdl/gdl.h>
 
 #define GTR_PREFERENCES_DIALOG_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ( \
                                                     (object), \
@@ -159,16 +160,6 @@ on_auto_save_changed (GSettings            *settings,
 static void
 setup_files_autosave_page (GtrPreferencesDialog * dlg)
 {
-  gboolean autosave;
-
-  /*Set initial value */
-  autosave = g_settings_get_boolean (dlg->priv->files_settings,
-                                     GTR_SETTINGS_AUTO_SAVE);
-
-  /*Set sensitive */
-  gtk_widget_set_sensitive (dlg->priv->autosave_interval_spinbutton,
-                            autosave);
-
   g_settings_bind (dlg->priv->files_settings,
                    GTR_SETTINGS_AUTO_SAVE_INTERVAL,
                    dlg->priv->autosave_interval_spinbutton,
@@ -181,9 +172,13 @@ setup_files_autosave_page (GtrPreferencesDialog * dlg)
                    "active",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
   g_signal_connect (dlg->priv->files_settings,
-                    "changed::auto-save",
+                    "changed::" GTR_SETTINGS_AUTO_SAVE,
                     G_CALLBACK (on_auto_save_changed),
                     dlg);
+  /*Set sensitive */
+  on_auto_save_changed (dlg->priv->files_settings,
+                        GTR_SETTINGS_AUTO_SAVE,
+                        dlg);
 
   g_settings_bind (dlg->priv->files_settings,
                    GTR_SETTINGS_CREATE_BACKUP,
@@ -204,11 +199,12 @@ setup_files_pages (GtrPreferencesDialog * dlg)
 /***************Editor pages****************/
 
 static void
-use_custom_font_checkbutton_toggled (GtkToggleButton * button,
-                                     GtrPreferencesDialog * dlg)
+use_custom_font_changed (GSettings            *settings,
+                         const gchar          *key,
+                         GtrPreferencesDialog *dlg)
 {
   gtk_widget_set_sensitive (dlg->priv->editor_font_hbox,
-                            gtk_toggle_button_get_active (button));
+                            g_settings_get_boolean (settings, key));
 }
 
 static void
@@ -225,14 +221,18 @@ setup_editor_text_display_page (GtrPreferencesDialog * dlg)
                    "active",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
-  /* Connect before binding to set the sensitivity */
-  g_signal_connect (dlg->priv->use_custom_font_checkbutton, "toggled",
-                    G_CALLBACK (use_custom_font_checkbutton_toggled), dlg);
   g_settings_bind (dlg->priv->editor_settings,
                    GTR_SETTINGS_USE_CUSTOM_FONT,
                    dlg->priv->use_custom_font_checkbutton,
                    "active",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+  g_signal_connect (dlg->priv->editor_settings,
+                    "changed::" GTR_SETTINGS_USE_CUSTOM_FONT,
+                    G_CALLBACK (use_custom_font_changed), dlg);
+  /*Set sensitive */
+  use_custom_font_changed (dlg->priv->editor_settings,
+                           GTR_SETTINGS_USE_CUSTOM_FONT,
+                           dlg);
 
   g_settings_bind (dlg->priv->editor_settings,
                    GTR_SETTINGS_EDITOR_FONT,
@@ -617,9 +617,23 @@ setup_profile_pages (GtrPreferencesDialog *dlg)
 static void
 scheme_color_changed_cb (GtkComboBox * combobox, GtrPreferencesDialog * dlg)
 {
+  gchar *active_text;
+
+  active_text = gtk_combo_box_get_active_text (combobox);
+
   g_settings_set_string (dlg->priv->ui_settings,
                          GTR_SETTINGS_COLOR_SCHEME,
-                         gtk_combo_box_get_active_text (combobox));
+                         active_text);
+  g_free (active_text);
+}
+
+static void
+on_gdl_combobox_changed (GtkComboBox          *combobox,
+                         GtrPreferencesDialog *dlg)
+{
+  g_settings_set_enum (dlg->priv->ui_settings,
+                       GTR_SETTINGS_PANEL_SWITCHER_STYLE,
+                       gtk_combo_box_get_active (combobox));
 }
 
 static void
@@ -631,12 +645,17 @@ setup_interface_pages (GtrPreferencesDialog * dlg)
   gint i = 0;
   GtkListStore *store;
   GtkCellRenderer *cell;
+  GdlSwitcherStyle style;
 
-  g_settings_bind (dlg->priv->ui_settings,
-                   GTR_SETTINGS_PANEL_SWITCHER_STYLE,
-                   dlg->priv->gdl_combobox,
-                   "active",
-                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+  style = g_settings_get_enum (dlg->priv->ui_settings,
+                               GTR_SETTINGS_PANEL_SWITCHER_STYLE);
+
+  gtk_combo_box_set_active (GTK_COMBO_BOX (dlg->priv->gdl_combobox),
+                            style);
+  g_signal_connect (dlg->priv->gdl_combobox,
+                    "changed",
+                    G_CALLBACK (on_gdl_combobox_changed),
+                    dlg);
 
   /* Scheme color */
   store = gtk_list_store_new (1, G_TYPE_STRING);
