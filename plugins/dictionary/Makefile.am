@@ -19,19 +19,18 @@ libdict_la_SOURCES = \
 	gtr-dict-panel.c			\
 	gtr-gdict-sidebar.c			\
 	gtr-gdict-sidebar.h			\
-	gtr-dictionary-plugin.h		\
+	gtr-dictionary-plugin.h			\
 	gtr-dictionary-plugin.c
 	
 
 libdict_la_LDFLAGS = \
 	$(PLUGIN_LIBTOOL_FLAGS)				\
-	$(GTRANSLATOR_LIBS)					\
+	$(GTRANSLATOR_LIBS)				\
 	$(DICTIONARY_LIBS)
 
 pixmaps_dir = $(datadir)/pixmaps/gtranslator
 pixmaps__DATA = \
-        gnome-dictionary.png
-
+	gnome-dictionary.png
 
 # Plugin Info
 
@@ -41,9 +40,20 @@ plugin_in_files = gtr-dict.gtranslator-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gtranslator-plugin.desktop.in=.gtranslator.plugin)
 
-EXTRA_DIST = $(pixmaps__DATA) $(plugin_in_files)
+gsettings_SCHEMAS = org.gnome.gtranslator.plugins.dictionary.gschema.xml
 
-CLEANFILES = $(plugin_DATA)
-DISTCLEANFILES = $(plugin_DATA)
+@INTLTOOL_XML_NOMERGE_RULE@
+
+@GSETTINGS_RULES@
+
+EXTRA_DIST =			\
+	$(pixmaps__DATA)	\
+	$(plugin_in_files)	\
+	org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in
+
+CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
+DISTCLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
+
+MAINTAINERCLEANFILES = $(gsettings_SCHEMAS:.xml=.valid)
 
 -include $(top_srcdir)/git.mk

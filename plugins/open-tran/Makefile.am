@@ -59,10 +59,15 @@ gsettings_SCHEMAS = org.gnome.gtranslator.plugins.open-tran.gschema.xml
 
 @GSETTINGS_RULES@
 
-EXTRA_DIST = $(ui_DATA) $(pixmaps__DATA) $(plugin_in_files)
+EXTRA_DIST =	\
+	$(ui_DATA)		\
+	$(pixmaps__DATA)	\
+	$(plugin_in_files)	\
+	org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in
 
-CLEANFILES = $(plugin_DATA)
-DISTCLEANFILES = $(plugin_DATA)
+CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
+DISTCLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
 
+MAINTAINERCLEANFILES = $(gsettings_SCHEMAS:.xml=.valid)
 
 -include $(top_srcdir)/git.mk
