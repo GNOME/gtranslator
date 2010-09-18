@@ -38,6 +38,8 @@
 						 GTR_TYPE_DICT_PANEL,     \
 						 GtrDictPanelPrivate))
 
+#define DICTIONARY_DEFAULT_SOURCE_NAME "Default"
+
 #define DICTIONARY_SETTINGS_DATABASE_KEY         "database"
 #define DICTIONARY_SETTINGS_STRATEGY_KEY         "strategy"
 #define DICTIONARY_SETTINGS_SOURCE_KEY           "source-name"
@@ -630,7 +632,7 @@ gtr_dict_panel_dispose (GObject * object)
       panel->priv->settings = NULL;
     }
 
-  G_OBJECT_CLASS (gtr_dict_panel_parent_class)->dipose (object);
+  G_OBJECT_CLASS (gtr_dict_panel_parent_class)->dispose (object);
 }
 
 static void
