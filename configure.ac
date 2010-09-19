@@ -275,6 +275,7 @@ plugins/Makefile
 plugins/alternate-language/Makefile
 plugins/charmap/Makefile
 plugins/dictionary/Makefile
+plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in
 plugins/fullscreen/Makefile
 plugins/insert-params/Makefile
 plugins/insert-tags/Makefile
