@@ -428,7 +428,6 @@ gtr_dict_panel_draw (GtrDictPanel * panel)
 {
   GtkWidget *vbox;
   GtkWidget *hbox;
-  gint position;
 
   vbox = gtk_vbox_new (FALSE, 6);
   gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
