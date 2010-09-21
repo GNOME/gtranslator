@@ -32,7 +32,8 @@ MAINTAINERCLEANFILES = 		\
 	m4/ltsugar.m4		\
 	m4/ltversion.m4		\
 	m4/lt~obsolete.m4	\
-	`find "$(srcdir)" -type f -name Makefile.in -print`
+	`find "$(srcdir)" -type f -name Makefile.in -print`	\
+	`find help/ -type f -name *.mo -print`
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --enable-gtk-doc
 
