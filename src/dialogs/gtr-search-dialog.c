@@ -426,7 +426,7 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
     }
 
   dlg->priv->search_entry =
-    gtr_history_entry_new ("gtr_search_for_entry", TRUE);
+    gtr_history_entry_new ("search-for-entry", TRUE);
   gtk_widget_set_size_request (dlg->priv->search_entry, 300, -1);
   gtr_history_entry_set_escape_func
     (GTR_HISTORY_ENTRY (dlg->priv->search_entry),
@@ -441,7 +441,7 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
                              dlg->priv->search_entry, 1, 2, 0, 1);
 
   dlg->priv->replace_entry =
-    gtr_history_entry_new ("gtr_replace_with_entry", TRUE);
+    gtr_history_entry_new ("replace-with-entry", TRUE);
   gtr_history_entry_set_escape_func (GTR_HISTORY_ENTRY
                                      (dlg->priv->replace_entry),
                                      (GtrHistoryEntryEscapeFunc)
