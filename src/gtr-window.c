@@ -971,7 +971,7 @@ set_window_title (GtrWindow * window, gboolean with_path)
 
 static void
 notebook_switch_page (GtkNotebook * nb,
-                      GtkNotebookPage * page,
+                      GtkWidget * page,
                       gint page_num, GtrWindow * window)
 {
   GtrTab *tab;
