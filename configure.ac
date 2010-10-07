@@ -282,8 +282,8 @@ plugins/insert-params/Makefile
 plugins/insert-tags/Makefile
 plugins/open-tran/Makefile
 plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in
-plugins/source-code-view/Makefile
-plugins/source-code-view/org.gnome.gtranslator.plugins.source-code-view.gschema.xml.in
+plugins/codeview/Makefile
+plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in
 src/Makefile
 src/dialogs/Makefile
 src/toolbareditor/Makefile

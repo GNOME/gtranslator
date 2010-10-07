@@ -38,7 +38,7 @@ plugin_in_files = gtr-source-code-view.gtranslator-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gtranslator-plugin.desktop.in=.gtranslator.plugin)
 
-gsettings_SCHEMAS = org.gnome.gtranslator.plugins.source-code-view.gschema.xml
+gsettings_SCHEMAS = org.gnome.gtranslator.plugins.codeview.gschema.xml
 
 @INTLTOOL_XML_NOMERGE_RULE@
 
@@ -47,7 +47,7 @@ gsettings_SCHEMAS = org.gnome.gtranslator.plugins.source-code-view.gschema.xml
 EXTRA_DIST =	\
 	$(plugin_in_files)	\
 	$(ui_DATA)		\
-	org.gnome.gtranslator.plugins.source-code-view.gschema.xml.in.in
+	org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in
 
 CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
 DISTCLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)

@@ -1,9 +1,9 @@
 SUBDIRS = 					\
 	alternate-language			\
+	codeview				\
 	fullscreen				\
 	insert-tags				\
-	insert-params				\
-	source-code-view
+	insert-params
 
 if USE_CHARMAP
 SUBDIRS += charmap

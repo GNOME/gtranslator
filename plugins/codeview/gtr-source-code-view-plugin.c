@@ -393,7 +393,7 @@ gtr_source_code_view_plugin_init (GtrSourceCodeViewPlugin * plugin)
 {
   plugin->priv = GTR_SOURCE_CODE_VIEW_PLUGIN_GET_PRIVATE (plugin);
 
-  plugin->priv->settings = g_settings_new ("org.gnome.gtranslator.plugins.source-code-view");
+  plugin->priv->settings = g_settings_new ("org.gnome.gtranslator.plugins.codeview");
   plugin->priv->tags = NULL;
 }
 
