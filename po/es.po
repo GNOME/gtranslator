@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&component=general\n"
-"POT-Creation-Date: 2010-09-09 18:32+0000\n"
-"PO-Revision-Date: 2010-09-10 15:08+0200\n"
+"POT-Creation-Date: 2010-10-07 10:57+0000\n"
+"PO-Revision-Date: 2010-10-07 14:26+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -325,82 +325,82 @@ msgstr "Mapa de caracteres"
 msgid "Insert special characters just by clicking on them."
 msgstr "Inserte caracteres especiales simplemente pulsando sobre ellos."
 
-#: ../plugins/dictionary/gtr-dict-panel.c:165
+#: ../plugins/dictionary/gtr-dict-panel.c:167
 #, c-format
 msgid "No dictionary source available with name '%s'"
 msgstr "No hay ninguna fuente de diccionario con el nombre «%s»"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:169
+#: ../plugins/dictionary/gtr-dict-panel.c:171
 msgid "Unable to find dictionary source"
 msgstr "No es posible encontrar la fuente del diccionario"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:184
+#: ../plugins/dictionary/gtr-dict-panel.c:186
 #, c-format
 msgid "No context available for source '%s'"
 msgstr "No hay contexto disponible para la fuente «%s»"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:188
+#: ../plugins/dictionary/gtr-dict-panel.c:190
 msgid "Unable to create a context"
 msgstr "Imposible crear un contexto"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:271
+#: ../plugins/dictionary/gtr-dict-panel.c:273
 #, c-format
 msgid "Dictionary source '%s' selected"
 msgstr "Diccionario fuente «%s» seleccionado"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:290
+#: ../plugins/dictionary/gtr-dict-panel.c:292
 #, c-format
 msgid "Strategy '%s' selected"
 msgstr "Estrategia «%s» seleccionada"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:308
+#: ../plugins/dictionary/gtr-dict-panel.c:310
 #, c-format
 msgid "Database '%s' selected"
 msgstr "Base de datos «%s» seleccionada"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:352
+#: ../plugins/dictionary/gtr-dict-panel.c:354
 #, c-format
 msgid "Word '%s' selected"
 msgstr "Palabra «%s» seleccionada"
 
 #. speller
-#: ../plugins/dictionary/gtr-dict-panel.c:374
+#: ../plugins/dictionary/gtr-dict-panel.c:376
 msgid "Double-click on the word to look up"
 msgstr "Pulse dos veces en la palabra que quiere buscar"
 
 #. strat-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:379
+#: ../plugins/dictionary/gtr-dict-panel.c:381
 msgid "Double-click on the matching strategy to use"
 msgstr "Pulse dos veces en la estrategia que usar"
 
 #. source-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:385
+#: ../plugins/dictionary/gtr-dict-panel.c:387
 msgid "Double-click on the source to use"
 msgstr "Pulse dos veces en la duente que usar"
 
 #. db-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:395
+#: ../plugins/dictionary/gtr-dict-panel.c:397
 msgid "Double-click on the database to use"
 msgstr "Pulse dos veces en la base de datos que usar"
 
 #. Look up Button
-#: ../plugins/dictionary/gtr-dict-panel.c:440
+#: ../plugins/dictionary/gtr-dict-panel.c:441
 msgid "Look _up:"
 msgstr "_Buscar:"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:497
+#: ../plugins/dictionary/gtr-dict-panel.c:498
 msgid "Similar words"
 msgstr "Palabras similares"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:510
+#: ../plugins/dictionary/gtr-dict-panel.c:511
 msgid "Available dictionaries"
 msgstr "Diccionarios disponibles"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:524
+#: ../plugins/dictionary/gtr-dict-panel.c:525
 msgid "Available strategies"
 msgstr "Estrategias disponibles"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:534
+#: ../plugins/dictionary/gtr-dict-panel.c:535
 msgid "Dictionary sources"
 msgstr "Fuentes de diccionarios"
 
@@ -412,6 +412,29 @@ msgstr "Diccionario"
 #: ../plugins/dictionary/gtr-dict.gtranslator-plugin.desktop.in.h:2
 msgid "Look up words in a dictionary."
 msgstr "Buscar palabras en un diccionario."
+
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:1
+#| msgid "Database:"
+msgid "Database"
+msgstr "Base de datos"
+
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:2
+msgid "Panel Position"
+msgstr "Posición del panel"
+
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:3
+#| msgid "Source code"
+msgid "Source Name"
+msgstr "Nombre de origen"
+
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:4
+msgid "Strategy"
+msgstr "Estrategia"
+
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:5
+#| msgid "Add to Database"
+msgid "Word database"
+msgstr "Base de datos de palabras"
 
 #: ../plugins/fullscreen/gtr-fullscreen-plugin.c:44
 msgid "_Fullscreen"
@@ -556,68 +579,68 @@ msgstr "El lenguaje del código en el que quiere los resultados"
 msgid "The language code to search for"
 msgstr "El código de lenguaje que buscar"
 
-#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:1
+#: ../plugins/codeview/gtr-source-code-view-dialog.ui.h:1
 msgid "Line command:"
 msgstr "Comando:"
 
-#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:2
+#: ../plugins/codeview/gtr-source-code-view-dialog.ui.h:2
 msgid "Program command:"
 msgstr "Comando del programa:"
 
-#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:3
+#: ../plugins/codeview/gtr-source-code-view-dialog.ui.h:3
 msgid "Source View Settings"
 msgstr "Ajustes de vista de fuentes"
 
-#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:4
+#: ../plugins/codeview/gtr-source-code-view-dialog.ui.h:4
 msgid "Use external editor"
 msgstr "Usar editor externo"
 
-#: ../plugins/source-code-view/gtr-source-code-view-plugin.c:108
+#: ../plugins/codeview/gtr-source-code-view-plugin.c:108
 #, c-format
 msgid "Please install \"%s\" to be able to show the file"
 msgstr "Instale «%s» para poder mostrar el archivo"
 
-#: ../plugins/source-code-view/gtr-source-code-view-plugin.c:443
+#: ../plugins/codeview/gtr-source-code-view-plugin.c:443
 msgid "Paths:"
 msgstr "Rutas:"
 
-#: ../plugins/source-code-view/gtr-source-code-view.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/codeview/gtr-source-code-view.gtranslator-plugin.desktop.in.h:1
 msgid "Show the message in the source code."
 msgstr "Mostrar el mensaje en el código fuente."
 
-#: ../plugins/source-code-view/gtr-source-code-view.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/codeview/gtr-source-code-view.gtranslator-plugin.desktop.in.h:2
 msgid "Source Code View"
 msgstr "Visor de código fuente"
 
-#: ../plugins/source-code-view/gtr-viewer.c:77
+#: ../plugins/codeview/gtr-viewer.c:77
 msgid "Source Viewer"
 msgstr "Visor de código fuente"
 
-#: ../plugins/source-code-view/gtr-viewer.ui.h:1
+#: ../plugins/codeview/gtr-viewer.ui.h:1
 msgid "Source code"
 msgstr "Código fuente"
 
-#: ../plugins/source-code-view/org.gnome.gtranslator.plugins.source-code-view.gschema.xml.in.in.h:1
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:1
 msgid "Arguments for the Command"
 msgstr "Argumentos para el comando"
 
-#: ../plugins/source-code-view/org.gnome.gtranslator.plugins.source-code-view.gschema.xml.in.in.h:2
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:2
 msgid "Arguments to pass to the program command and select the line"
 msgstr "Argumentos que pasar al comando de programa y seleccionar la línea"
 
-#: ../plugins/source-code-view/org.gnome.gtranslator.plugins.source-code-view.gschema.xml.in.in.h:3
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:3
 msgid "The Editor to Launch"
 msgstr "El editor que lanzar"
 
-#: ../plugins/source-code-view/org.gnome.gtranslator.plugins.source-code-view.gschema.xml.in.in.h:4
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:4
 msgid "The command to launch the editor you want to use"
 msgstr "El comando que quiere usar para lanzar el editor"
 
-#: ../plugins/source-code-view/org.gnome.gtranslator.plugins.source-code-view.gschema.xml.in.in.h:5
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:5
 msgid "Use the System Editor"
 msgstr "Usar un editor externo"
 
-#: ../plugins/source-code-view/org.gnome.gtranslator.plugins.source-code-view.gschema.xml.in.in.h:6
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:6
 msgid "Whether use the system editor to show the source code"
 msgstr "Indica si usar el editor del sistema para mostrar el código fuente"
 
@@ -1429,32 +1452,32 @@ msgstr "Cerrar el documento"
 #. * produce duplicates, but don't worry about it. If your language
 #. * normally has a mnemonic at the start, please use the _. If not,
 #. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:944
+#: ../src/toolbareditor/egg-editable-toolbar.c:943
 #, c-format
 msgid "Show “_%s”"
 msgstr "Mostrar «_%s»"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1412
+#: ../src/toolbareditor/egg-editable-toolbar.c:1411
 msgid "_Move on Toolbar"
 msgstr "_Mover en la barra de herramientas"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1413
+#: ../src/toolbareditor/egg-editable-toolbar.c:1412
 msgid "Move the selected item on the toolbar"
 msgstr "Mover el elemento seleccionado en la barra de herramientas"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1414
+#: ../src/toolbareditor/egg-editable-toolbar.c:1413
 msgid "_Remove from Toolbar"
 msgstr "_Quitar de la barra de herramientas"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1415
+#: ../src/toolbareditor/egg-editable-toolbar.c:1414
 msgid "Remove the selected item from the toolbar"
 msgstr "Quitar el elemento seleccionado de la barra de herramientas"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1416
+#: ../src/toolbareditor/egg-editable-toolbar.c:1415
 msgid "_Delete Toolbar"
 msgstr "_Borrar la barra de herramientas"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1417
+#: ../src/toolbareditor/egg-editable-toolbar.c:1416
 msgid "Remove the selected toolbar"
 msgstr "Quitar la barra de herramientas seleccionada"
 
