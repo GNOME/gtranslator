@@ -7,21 +7,20 @@
 # Frank Arnold <frank@scirocco-5v-turbo.de>, 2005.
 # Hendrik Richter <hendrikr@gnome.org>, 2008.
 # Mario Blättermann <mariobl@gnome.org>, 2009, 2010.
-# Christian Kirbach <Christian.Kirbach@googlemail.com>, 2008-2010.
+# Christian Kirbach  <Christian.Kirbach@googlemail.com>, 2008-2010, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=gtranslator&component=general\n"
-"POT-Creation-Date: 2010-10-01 14:46+0000\n"
-"PO-Revision-Date: 2010-10-03 14:59+0200\n"
-"Last-Translator: Christian Kirbach <Christian.Kirbach@googlemail.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-10-13 13:43+0200\n"
+"PO-Revision-Date: 2010-10-13 13:46+0200\n"
+"Last-Translator: Christian Kirbach  <Christian.Kirbach@googlemail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:1
@@ -168,8 +167,8 @@ msgid ""
 "plugin."
 msgstr ""
 "Liste der aktiven Plugins. Sie enthält den »Ort« aktiver Plugins. Lesen Sie "
-"in der Datei ».gtranslator-plugin« nach, um den Ort (»Location«) eines Plugins "
-"zu erfahren."
+"in der Datei ».gtranslator-plugin« nach, um den Ort (»Location«) eines "
+"Plugins zu erfahren."
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:27
 msgid "Make whitespace visible"
@@ -230,8 +229,8 @@ msgid ""
 "Sort order to use in the message list. Possible values are \"status\", \"id"
 "\", \"original-text\" and \"translated-text\"."
 msgstr ""
-"Sortierreihenfolge der Übersetzungsliste. Mögliche Werte sind »status«, »id«, "
-"»original-text« und »translated-text«."
+"Sortierreihenfolge der Übersetzungsliste. Mögliche Werte sind »status«, "
+"»id«, »original-text« und »translated-text«."
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:39
 msgid "Style for switchers in the side panel."
@@ -410,6 +409,26 @@ msgstr "Wörterbuch"
 msgid "Look up words in a dictionary."
 msgstr "Wörter in einem Wörterbuch nachschlagen"
 
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:1
+msgid "Database"
+msgstr "Datenbank"
+
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:2
+msgid "Panel Position"
+msgstr "Panel-Position"
+
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:3
+msgid "Source Name"
+msgstr "Quellname"
+
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:4
+msgid "Strategy"
+msgstr "Strategie"
+
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:5
+msgid "Word database"
+msgstr "Wörter-Datenbank"
+
 #: ../plugins/fullscreen/gtr-fullscreen-plugin.c:44
 msgid "_Fullscreen"
 msgstr "_Vollbild"
@@ -552,70 +571,70 @@ msgstr "Sprachcode, in dem Sie die Ergebnisse wünschen"
 msgid "The language code to search for"
 msgstr "Der zu suchende Sprachcode"
 
-#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:1
+#: ../plugins/codeview/gtr-source-code-view-dialog.ui.h:1
 msgid "Line command:"
 msgstr "Zeilenbefehl:"
 
-#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:2
+#: ../plugins/codeview/gtr-source-code-view-dialog.ui.h:2
 msgid "Program command:"
 msgstr "Programmbefehl:"
 
-#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:3
+#: ../plugins/codeview/gtr-source-code-view-dialog.ui.h:3
 msgid "Source View Settings"
 msgstr "Einstellungen der Quellansicht"
 
-#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:4
+#: ../plugins/codeview/gtr-source-code-view-dialog.ui.h:4
 msgid "Use external editor"
 msgstr "Externen Texteditor verwenden"
 
-#: ../plugins/source-code-view/gtr-source-code-view-plugin.c:108
+#: ../plugins/codeview/gtr-source-code-view-plugin.c:108
 #, c-format
 msgid "Please install \"%s\" to be able to show the file"
 msgstr "Bitte installieren Sie »%s«, um die Datei anzeigen zu können"
 
-#: ../plugins/source-code-view/gtr-source-code-view-plugin.c:443
+#: ../plugins/codeview/gtr-source-code-view-plugin.c:443
 msgid "Paths:"
 msgstr "Pfade:"
 
-#: ../plugins/source-code-view/gtr-source-code-view.gtranslator-plugin.desktop.in.h:1
+#: ../plugins/codeview/gtr-source-code-view.gtranslator-plugin.desktop.in.h:1
 msgid "Show the message in the source code."
 msgstr "Den Originaltext im Quellcode zeigen."
 
-#: ../plugins/source-code-view/gtr-source-code-view.gtranslator-plugin.desktop.in.h:2
+#: ../plugins/codeview/gtr-source-code-view.gtranslator-plugin.desktop.in.h:2
 msgid "Source Code View"
 msgstr "Quelltextansicht"
 
-#: ../plugins/source-code-view/gtr-viewer.c:77
+#: ../plugins/codeview/gtr-viewer.c:77
 msgid "Source Viewer"
 msgstr "Quelltextanzeige"
 
-#: ../plugins/source-code-view/gtr-viewer.ui.h:1
+#: ../plugins/codeview/gtr-viewer.ui.h:1
 msgid "Source code"
 msgstr "Quelltext"
 
-#: ../plugins/source-code-view/org.gnome.gtranslator.plugins.source-code-view.gschema.xml.in.in.h:1
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:1
 msgid "Arguments for the Command"
 msgstr "Argumente für den Befehl"
 
-#: ../plugins/source-code-view/org.gnome.gtranslator.plugins.source-code-view.gschema.xml.in.in.h:2
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:2
 msgid "Arguments to pass to the program command and select the line"
 msgstr ""
 "Argumente, die an den Programmbefehl übergeben werden sollen und die Zeile "
 "wählen"
 
-#: ../plugins/source-code-view/org.gnome.gtranslator.plugins.source-code-view.gschema.xml.in.in.h:3
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:3
 msgid "The Editor to Launch"
 msgstr "Der zu startende Editor"
 
-#: ../plugins/source-code-view/org.gnome.gtranslator.plugins.source-code-view.gschema.xml.in.in.h:4
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:4
 msgid "The command to launch the editor you want to use"
 msgstr "Der Befehl zum Starten des gewünschten Editors"
 
-#: ../plugins/source-code-view/org.gnome.gtranslator.plugins.source-code-view.gschema.xml.in.in.h:5
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:5
 msgid "Use the System Editor"
 msgstr "Den Systemeditor verwenden"
 
-#: ../plugins/source-code-view/org.gnome.gtranslator.plugins.source-code-view.gschema.xml.in.in.h:6
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:6
 msgid "Whether use the system editor to show the source code"
 msgstr ""
 "Legt fest, ob der Systemeditor zum Anzeigen von Quellcode verwendet wird"
@@ -1498,8 +1517,8 @@ msgstr "Bitte überprüfen Sie Ihre Installation."
 #, c-format
 msgid "Unable to open ui file %s. Error: %s"
 msgstr ""
-"Die Datei »%s« für die Benutzeroberfläche kann nicht geöffnet werden. Fehler: "
-"%s"
+"Die Datei »%s« für die Benutzeroberfläche kann nicht geöffnet werden. "
+"Fehler: %s"
 
 #: ../src/gtr-utils.c:390
 #, c-format
