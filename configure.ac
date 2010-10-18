@@ -86,7 +86,7 @@ SOURCEVIEW_REQUIRED=2.4.0
 GDL_REQUIRED=2.26.0
 GDICT_OPTIONAL=0.11.0
 GTKSPELL_OPTIONAL=2.0.2
-LIBSOUP_OPTIONAL=2.4.0
+JSON_GLIB_OPTIONAL=0.7.6
 
 AC_SUBST(GTK_REQUIRED)
 AC_SUBST(GLIB_REQUIRED)
@@ -168,27 +168,19 @@ AC_SUBST(GTKSPELL_CFLAGS)
 AC_SUBST(GTKSPELL_LIBS)
 
 dnl -------------------------------------------------------------------
-dnl Check for libsoup, needed for Open-tran
+dnl Check for json-glib, needed for Open-tran
 dnl -------------------------------------------------------------------
 if test "x$enable_opentran" != "xno"; then
-	PKG_CHECK_MODULES(SOUP,                            \
-		libsoup-2.4,
-		have_libsoup=yes,
-		have_libsoup=no)
-	if test x"$have_libsoup" = "xno"; then
-		PKG_CHECK_MODULES(SOUP,
-			libsoup-2.4,
-			have_libsoup=yes,
-			have_libsoup=no)
-		if test x"$have_libsoup" = "xyes"; then
-			AC_DEFINE(LIBSOUP_2_4, 1, [Define if libsoup support is enabled])
-		fi
-	else
-		AC_DEFINE(LIBSOUP_2_2, 1, [Define if libsoup support is enabled])
+	PKG_CHECK_MODULES(JSON_GLIB,                            \
+		json-glib-1.0,
+		have_json_glib=yes,
+		have_json_glib=no)
+	if test x"$have_json_glib" = "xyes"; then
+		AC_DEFINE(LIBJSON_GLIB_1_0, 1, [Define if libjson-glib support is enabled])
 	fi
 fi
 
-AM_CONDITIONAL(USE_LIBSOUP, test x"$have_libsoup" = "xyes")
+AM_CONDITIONAL(USE_LIBJSON_GLIB, test x"$have_json_glib" = "xyes")
 
 # ================================================================
 # gdict
@@ -317,11 +309,11 @@ else
 		echo "        Requires gucharmap >= $GUCHARMAP_OPTIONAL"
 fi
 
-if [ test x"$have_libsoup" = "xyes" ]; then
+if [ test x"$have_json_glib" = "xyes" ]; then
 	echo "Building open-tran plugin: .............................YES"
 else
 	echo "Building open-tran plugin: .............................NO"
-		echo "        Requires libsoup >= $LIBSOUP_OPTIONAL"
+		echo "        Requires libjson-glib >= $JSON_GLIB_OPTIONAL"
 fi
 
 if [ test x"$have_gdict" = "xyes" ]; then

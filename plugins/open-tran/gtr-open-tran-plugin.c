@@ -30,9 +30,10 @@
 
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
+#include <libxml/nanohttp.h>
 
 #define OPEN_TRAN_PLUGIN_ICON "open-tran.png"
-#define WINDOW_DATA_KEY	"GtrOpenTranPluginWindowData"
+#define WINDOW_DATA_KEY "GtrOpenTranPluginWindowData"
 
 #define GTR_OPEN_TRAN_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
@@ -69,12 +70,16 @@ gtr_open_tran_plugin_init (GtrOpenTranPlugin * plugin)
   plugin->priv = GTR_OPEN_TRAN_PLUGIN_GET_PRIVATE (plugin);
 
   plugin->priv->settings = g_settings_new ("org.gnome.gtranslator.plugins.open-tran");
+
+  xmlNanoHTTPInit ();
 }
 
 static void
 gtr_open_tran_plugin_dispose (GObject * object)
 {
   GtrOpenTranPlugin *plugin = GTR_OPEN_TRAN_PLUGIN (object);
+
+  xmlNanoHTTPCleanup ();
 
   if (plugin->priv->settings)
     {
@@ -142,12 +147,12 @@ get_configuration_dialog (GtrOpenTranPlugin * plugin)
                                   &plugin->priv->search_code_entry,
                                   "own_code",
                                   &plugin->priv->own_code_entry, NULL);
-  g_free (path);
-
   if (!ret)
     {
-      //FIXME: We have to show a dialog
+      g_error (_("Error from configuration dialog %s"), path);
     }
+
+  g_free (path);
 
   g_settings_bind (plugin->priv->settings,
                    GTR_SETTINGS_OWN_CODE,

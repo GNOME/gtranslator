@@ -9,7 +9,7 @@ INCLUDES =                                                      \
 	-DPIXMAPSDIR=\""$(datadir)"/pixmaps/gtranslator\"       \
 	-DDATADIR=\""$(pkgdatadir)"\"                           \
 	$(GTRANSLATOR_CFLAGS) 				\
-	$(SOUP_CFLAGS)				\
+	$(JSON_GLIB_CFLAGS)				\
 	$(WARN_CFLAGS)					\
 	$(DISABLE_DEPRECATED)				\
 	-DGTR_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"
@@ -25,7 +25,7 @@ libopentran_la_SOURCES = \
 libopentran_la_LDFLAGS = \
 	$(PLUGIN_LIBTOOL_FLAGS)				\
 	$(GTRANSLATOR_LIBS)					\
-	$(SOUP_LIBS)
+	$(JSON_GLIB_LIBS)
 
 uidir = $(pkgdatadir)/ui
 
@@ -43,7 +43,8 @@ pixmaps__DATA = \
 	xfce.png \
 	inkscape.png \
 	oo-logo.png \
-	fedora.png
+	fedora.png \
+	mandriva.png
 
 # Plugin Info
 

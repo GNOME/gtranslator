@@ -9,7 +9,7 @@ if USE_CHARMAP
 SUBDIRS += charmap
 endif
 
-if USE_LIBSOUP
+if USE_LIBJSON_GLIB
 SUBDIRS += open-tran
 endif
 

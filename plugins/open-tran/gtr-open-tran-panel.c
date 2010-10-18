@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
+ *               2010  Yaron Sheffer <yaronf@gmx.com>
  * 
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -31,38 +32,44 @@
 #include <glib/gi18n-lib.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
-#include <libsoup/soup.h>
 
-#define GTR_OPEN_TRAN_PANEL_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
-						 (object),		       \
-						 GTR_TYPE_OPEN_TRAN_PANEL,     \
-						 GtrOpenTranPanelPrivate))
+#include <json-glib/json-glib.h>
+#include <libxml/nanohttp.h>
+#include <libxml/uri.h>
 
-#define GNOME_ICON   PIXMAPSDIR"/gnome.png"
-#define KDE_ICON     PIXMAPSDIR"/kde.ico"
-#define MOZILLA_ICON PIXMAPSDIR"/mozilla.png"
-#define DEBIAN_ICON  PIXMAPSDIR"/debian.png"
-#define SUSE_ICON    PIXMAPSDIR"/suse.png"
-#define XFCE_ICON    PIXMAPSDIR"/xfce.png"
-#define INKSCAPE_ICON PIXMAPSDIR"/inkscape.png"
+#define JSON_LENGTH 65536 /* max length of returned JSON structure.
+                             Only recent versions of the library allow
+                             for streaming. */
+
+#define GTR_OPEN_TRAN_PANEL_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE \
+						 ((object),		\
+						  GTR_TYPE_OPEN_TRAN_PANEL, \
+						  GtrOpenTranPanelPrivate))
+
+#define GNOME_ICON       PIXMAPSDIR"/gnome.png"
+#define KDE_ICON         PIXMAPSDIR"/kde.ico"
+#define MOZILLA_ICON     PIXMAPSDIR"/mozilla.png"
+#define DEBIAN_ICON      PIXMAPSDIR"/debian.png"
+#define SUSE_ICON        PIXMAPSDIR"/suse.png"
+#define XFCE_ICON        PIXMAPSDIR"/xfce.png"
+#define INKSCAPE_ICON    PIXMAPSDIR"/inkscape.png"
 #define OPEN_OFFICE_ICON PIXMAPSDIR"/oo-logo.png"
-#define FEDORA_ICON PIXMAPSDIR"/fedora.png"
+#define FEDORA_ICON      PIXMAPSDIR"/fedora.png"
+#define MANDRIVA_ICON    PIXMAPSDIR"/mandriva.png"
 
 GTR_PLUGIN_DEFINE_TYPE (GtrOpenTranPanel, gtr_open_tran_panel, GTK_TYPE_VBOX)
 
 struct _GtrOpenTranPanelPrivate
 {
   GSettings *settings;
-
+  
   GtkWidget *treeview;
-  GtkListStore *store;
-
+  GtkTreeStore *store;
+  
   GtkWidget *entry;
 
-  SoupSession *session;
-
   GtrWindow *window;
-
+  
   gchar *text;
 };
 
@@ -70,6 +77,7 @@ enum
 {
   ICON_COLUMN,
   TEXT_COLUMN,
+  TOOLTIP_COLUMN,
   N_COLUMNS
 };
 
@@ -106,7 +114,7 @@ create_pixbuf (const gchar * path)
 
   if (error)
     {
-      g_warning ("Could not load icon: %s\n", error->message);
+      g_warning ("Could not load icon: %s", error->message);
       g_error_free (error);
       return NULL;
     }
@@ -115,99 +123,49 @@ create_pixbuf (const gchar * path)
 }
 
 static void
-print_struct_to_tree_view (const gchar * str, GtrOpenTranPanel * panel)
+print_string_to_tree_view (const gchar *iconname, const gchar * str,
+                           const gchar *tooltip,
+                           GtkTreeIter *parent, GtrOpenTranPanel * panel)
 {
   GdkPixbuf *icon;
   GtkTreeIter iter;
 
-  /*
-   * Text value
-   */
-  if (strcmp ("GNOME", str) == 0)
+  /* Text value */
+  if (strcmp ("GNOME", iconname) == 0)
     icon = create_pixbuf (GNOME_ICON);
-  else if (strcmp ("KDE", str) == 0)
+  else if (strcmp ("KDE", iconname) == 0)
     icon = create_pixbuf (KDE_ICON);
-  else if (strcmp ("MOZILLA", str) == 0)
+  else if (strcmp ("MOZILLA", iconname) == 0)
     icon = create_pixbuf (MOZILLA_ICON);
-  else if (strcmp ("DEBIAN", str) == 0)
+  else if (strcmp ("Mozilla", iconname) == 0)
+    icon = create_pixbuf (MOZILLA_ICON);
+  else if (strcmp ("DEBIAN", iconname) == 0)
     icon = create_pixbuf (DEBIAN_ICON);
-  else if (strcmp ("SUSE", str) == 0)
+  else if (strcmp ("Debian Installer", iconname) == 0)
+    icon = create_pixbuf (DEBIAN_ICON);
+  else if (strcmp ("SUSE", iconname) == 0)
     icon = create_pixbuf (SUSE_ICON);
-  else if (strcmp ("XFCE", str) == 0)
+  else if (strcmp ("XFCE", iconname) == 0)
     icon = create_pixbuf (XFCE_ICON);
-  else if (strcmp ("Inkscape", str) == 0)
+  else if (strcmp ("Inkscape", iconname) == 0)
     icon = create_pixbuf (INKSCAPE_ICON);
-  else if (strcmp ("OpenOffice.org", str) == 0)
+  else if (strcmp ("OpenOffice.org", iconname) == 0)
     icon = create_pixbuf (OPEN_OFFICE_ICON);
-  else if (strcmp ("Fedora", str) == 0)
+  else if (strcmp ("Fedora", iconname) == 0)
     icon = create_pixbuf (FEDORA_ICON);
+  else if (strcmp ("Mandriva", iconname) == 0)
+    icon = create_pixbuf (MANDRIVA_ICON);
   else
     icon = NULL;
 
-  gtk_list_store_append (panel->priv->store, &iter);
-  gtk_list_store_set (panel->priv->store, &iter,
-                      ICON_COLUMN, icon, TEXT_COLUMN, panel->priv->text, -1);
-
-  g_free (panel->priv->text);
+  gtk_tree_store_append (panel->priv->store, &iter, parent);
+  gtk_tree_store_set (panel->priv->store, &iter,
+                      ICON_COLUMN, icon, TEXT_COLUMN, str,
+                      TOOLTIP_COLUMN, tooltip,
+                      -1);
 
   if (icon)
     g_object_unref (icon);
-}
-
-/*
- * To see the protocol spec:
- *  http://bugzilla.gnome.org/show_bug.cgi?id=506469
- */
-static void
-print_struct_field (gpointer key, gpointer value, gpointer data)
-{
-  GtrOpenTranPanel *panel = GTR_OPEN_TRAN_PANEL (data);
-  GHashTable *hash;
-  GValueArray *array;
-  const gchar *str;
-
-  if (G_VALUE_HOLDS_STRING (value))
-    {
-      str = g_value_get_string (value);
-      panel->priv->text = g_strdup (str);
-    }
-  else if (G_VALUE_HOLDS (value, G_TYPE_VALUE_ARRAY))
-    {
-      array = g_value_get_boxed (value);
-
-      if (G_VALUE_HOLDS (array->values, G_TYPE_HASH_TABLE))
-        {
-          gpointer name;
-
-          hash = g_value_get_boxed (array->values);
-          name = g_hash_table_lookup (hash, "name");
-
-          if (name != NULL)
-            {
-              print_struct_to_tree_view (g_value_get_string (name), panel);
-            }
-        }
-
-      /*
-       * It's important freeing the array after the use of its contents
-       */
-      g_value_array_free (array);
-    }
-}
-
-static gboolean
-check_xmlrpc (GValue * value, GType type, ...)
-{
-  va_list args;
-
-  if (!G_VALUE_HOLDS (value, type))
-    return FALSE;
-
-  va_start (args, type);
-  SOUP_VALUE_GETV (value, type, args);
-  va_end (args);
-
-  return TRUE;
 }
 
 static void
@@ -215,92 +173,175 @@ open_connection (GtrOpenTranPanel * panel,
                  const gchar * text,
                  const gchar * search_code, const gchar * own_code)
 {
-  const gchar *uri = "http://open-tran.eu/RPC2";
-  SoupMessage *msg;
-  gchar *body;
-  GValueArray *array;
+  gchar * open_tran_url = "http://%s.%s.open-tran.eu/json/suggest/%s";
+  /* URL placeholders: source lang, target lang, phrase */
+  gchar *url_buf;
   GError *err = NULL;
-  GValue retval;
-  GHashTable *result;
   GtkTreeIter treeiter;
-  gint i;
+  void * ctx;
+  xmlChar *escaped;
+  unsigned int offset = 0;
+  int ret;
+  gchar * json_buf;
+  JsonParser *parser;
+  JsonNode *root;
+  JsonArray *array;
+  int idx;
 
-  array = soup_value_array_new_with_vals (G_TYPE_STRING, text,
-                                          G_TYPE_STRING, search_code,
-                                          G_TYPE_STRING, own_code, NULL);
+  escaped = xmlURIEscapeStr ((const xmlChar *) text, (const xmlChar *) "");
+  url_buf = g_strdup_printf (open_tran_url, search_code, own_code, escaped);
 
-  body = soup_xmlrpc_build_method_call ("suggest2", array->values,
-                                        array->n_values);
+  if (escaped)
+    xmlFree (escaped);
 
-  g_value_array_free (array);
-
-  if (!body)
-    return;
-
-  msg = soup_message_new ("POST", uri);
-  soup_message_set_request (msg, "text/xml", SOUP_MEMORY_TAKE,
-                            body, strlen (body));
-  soup_session_send_message (panel->priv->session, msg);
-
-  if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
+  ctx = xmlNanoHTTPOpen (url_buf, NULL);
+  if (!ctx)
     {
       show_error_dialog (panel->priv->window,
-                         _("ERROR: %d %s\n"), msg->status_code,
-                         msg->reason_phrase);
-      g_object_unref (msg);
+                         _("ERROR: Cannot access %s\n"), url_buf);
       return;
     }
 
-  if (!soup_xmlrpc_parse_method_response (msg->response_body->data,
-                                          msg->response_body->length,
-                                          &retval, &err))
+  g_free (url_buf);
+  json_buf = g_malloc (JSON_LENGTH);
+
+  do
     {
-      if (err)
-        {
-          show_error_dialog (panel->priv->window,
-                             _("FAULT: %d %s\n"), err->code, err->message);
-          g_error_free (err);
-        }
-      else
-        show_error_dialog (panel->priv->window,
-                           _("ERROR: could not parse response\n"));
+      ret = xmlNanoHTTPRead (ctx, json_buf, JSON_LENGTH-offset);
+      if (ret > 0)
+        offset += ret;
+    } while (ret > 0);
 
-      g_object_unref (msg);
-      return;
-    }
-  g_object_unref (msg);
-
-  if (!check_xmlrpc (&retval, G_TYPE_VALUE_ARRAY, &array))
+  if (ret == -1)
     {
       show_error_dialog (panel->priv->window,
-                         _("ERROR: could not parse response\n"));
+                         _("Error in server response, GET failed\n"));
+      g_free (json_buf);
       return;
     }
 
-  for (i = 0; i < array->n_values; i++)
+  xmlNanoHTTPClose (ctx);
+
+  parser = json_parser_new ();
+  json_parser_load_from_data (parser, json_buf, offset, &err);
+  if (err)
     {
-      if (!soup_value_array_get_nth (array, i, G_TYPE_HASH_TABLE, &result))
+      show_error_dialog (panel->priv->window,
+                         _("Cannot parse server response, %s\n"),
+                         err->message);
+      g_error_free (err);
+      g_free (json_buf);
+      if (parser)
+        g_object_unref (parser);
+      return;
+    }
+
+  root = json_parser_get_root (parser);
+  array = json_node_get_array (root);
+  if (!array)
+    {
+      show_error_dialog (panel->priv->window,
+                         _("Cannot parse server response, not an array? %s\n"),
+                         err->message);
+      g_error_free (err);
+      g_free (json_buf);
+      if (parser)
+        g_object_unref (parser);
+      return;
+    }
+
+  for (idx = 0; idx < json_array_get_length (array); idx++)
+    {
+      JsonNode *elem;
+      JsonObject *obj;
+      const gchar *text;
+      GtkTreeIter iter;
+      GtkTreeIter project_tree_iter;
+      JsonArray *projects;
+      int j;
+
+      elem = json_array_get_element (array, idx);
+      if (!elem)
         {
           show_error_dialog (panel->priv->window,
                              _("WRONG! Can't get result element %d\n"),
-                             i + 1);
+                             idx + 1);
           break;
         }
 
-      g_hash_table_foreach (result, print_struct_field, panel);
+      obj = json_node_get_object (elem);
+
+      if (!obj)
+        {
+          show_error_dialog (panel->priv->window,
+                             _("WRONG! Can't parse result element %d as object\n"),
+                             idx + 1);
+          break;
+        }
+
+      text = json_object_get_string_member (obj, "text");
+      gtk_tree_store_append (panel->priv->store, &iter, NULL);
+      gtk_tree_store_set (panel->priv->store, &iter,
+                      TEXT_COLUMN, text, -1);
+      project_tree_iter = iter;
+      projects = json_object_get_array_member (obj, "projects");
+      if (!projects)
+        {
+          show_error_dialog (panel->priv->window,
+                             _("WRONG! Can't read projects for result element %d\n"),
+                             idx + 1);
+          break;
+        }
+
+      for (j = 0; j < json_array_get_length (projects); j++)
+        {
+          JsonObject *project = json_array_get_object_element (projects, j);
+
+          const gchar *orig_phrase = json_object_get_string_member (project, "orig_phrase");
+          const gchar *project_name = json_object_get_string_member (project, "name");
+          const int count = json_object_get_int_member (project, "count");
+
+          const gchar *path_name = json_object_get_string_member (project, "path");
+          /* format: X/subproject, where X stands for the project, e.g. G for GNOME */
+          gchar *tooltip;
+
+          if (path_name != NULL)
+            {
+              path_name = g_strrstr (path_name, "/");
+              if (path_name != NULL)
+                path_name++;
+            }
+
+          tooltip = g_strdup_printf (_("%s[%s] Count:%d"),
+                                     project_name, path_name, count);
+
+          print_string_to_tree_view (project_name, orig_phrase, tooltip,
+                                     &project_tree_iter, panel);
+          g_free (tooltip);
+
+          if (!project || !orig_phrase || !project_name)
+            {
+              show_error_dialog (panel->priv->window,
+                                 _("WRONG! Malformed project: %d\n"),j + 1);
+              break;
+            }
+        }
     }
+
 
   /* We have to check if we didn't find any text */
   if (!gtk_tree_model_get_iter_first (GTK_TREE_MODEL (panel->priv->store),
                                       &treeiter))
     {
-      gtk_list_store_append (panel->priv->store, &treeiter);
-      gtk_list_store_set (panel->priv->store, &treeiter,
+      gtk_tree_store_append (panel->priv->store, &treeiter, NULL);
+      gtk_tree_store_set (panel->priv->store, &treeiter,
                           ICON_COLUMN, NULL,
                           TEXT_COLUMN, _("Phrase not found"), -1);
     }
 
-  soup_session_abort (panel->priv->session);
+  g_free (json_buf);
+  if (parser)
+    g_object_unref (parser);
 }
 
 static void
@@ -310,10 +351,10 @@ entry_activate_cb (GtkEntry * entry, GtrOpenTranPanel * panel)
   gchar *search_code;
   gchar *own_code;
 
-  gtk_list_store_clear (panel->priv->store);
+  gtk_tree_store_clear (panel->priv->store);
 
   entry_text = gtk_entry_get_text (GTK_ENTRY (panel->priv->entry));
-  if (!entry_text)
+  if (!entry_text || strlen (entry_text) == 0)
     {
       show_error_dialog (panel->priv->window,
                          _("You have to provide a phrase to search"));
@@ -329,19 +370,15 @@ entry_activate_cb (GtkEntry * entry, GtrOpenTranPanel * panel)
       return;
     }
 
-  g_free (search_code);
-
   own_code = g_settings_get_string (panel->priv->settings,
                                     GTR_SETTINGS_OWN_CODE);
+
   if (!own_code)
     {
       show_error_dialog (panel->priv->window,
-                         _
-                         ("You have to provide a language code for your language"));
+                         _("You have to provide a language code for your language"));
       return;
     }
-
-  g_free (own_code);
 
   open_connection (panel, entry_text, search_code, own_code);
 }
@@ -354,8 +391,8 @@ gtr_open_tran_panel_draw_treeview (GtrOpenTranPanel * panel)
 
   GtrOpenTranPanelPrivate *priv = panel->priv;
 
-  priv->store = gtk_list_store_new (N_COLUMNS,
-                                    GDK_TYPE_PIXBUF, G_TYPE_STRING);
+  priv->store = gtk_tree_store_new (N_COLUMNS,
+                                    GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING);
 
   priv->treeview =
     gtk_tree_view_new_with_model (GTK_TREE_MODEL (priv->store));
@@ -382,6 +419,10 @@ gtr_open_tran_panel_draw_treeview (GtrOpenTranPanel * panel)
                                                      renderer,
                                                      "text", TEXT_COLUMN,
                                                      NULL);
+  /*
+   * Row-wide tooltip
+   */
+  gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (priv->treeview), TOOLTIP_COLUMN);
 
   gtk_tree_view_column_set_resizable (column, FALSE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (priv->treeview), column);
@@ -395,7 +436,7 @@ gtr_open_tran_panel_draw (GtrOpenTranPanel * panel)
   GtkWidget *hbox;
 
   /*
-   * Set up the scrolling window for the extracted comments display
+   * Set up the scrolling window
    */
   scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow),
@@ -416,7 +457,7 @@ gtr_open_tran_panel_draw (GtrOpenTranPanel * panel)
   hbox = gtk_hbox_new (FALSE, 6);
 
   button = gtk_button_new_with_label (_("Look for:"));
-  gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+  gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_HALF);
   g_signal_connect (button, "clicked", G_CALLBACK (entry_activate_cb), panel);
 
   gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
@@ -436,7 +477,6 @@ gtr_open_tran_panel_init (GtrOpenTranPanel * panel)
   panel->priv = GTR_OPEN_TRAN_PANEL_GET_PRIVATE (panel);
 
   panel->priv->settings = g_settings_new ("org.gnome.gtranslator.plugins.open-tran");
-  panel->priv->session = soup_session_async_new ();
 
   gtr_open_tran_panel_draw (panel);
 }
@@ -446,11 +486,6 @@ gtr_open_tran_panel_dispose (GObject * object)
 {
   GtrOpenTranPanel *panel = GTR_OPEN_TRAN_PANEL (object);
 
-  if (panel->priv->session != NULL)
-    {
-      g_object_unref (panel->priv->session);
-      panel->priv->session = NULL;
-    }
 
   if (panel->priv->settings != NULL)
     {
