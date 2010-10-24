@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&component=general\n"
-"POT-Creation-Date: 2010-10-07 10:57+0000\n"
-"PO-Revision-Date: 2010-10-07 14:26+0200\n"
+"POT-Creation-Date: 2010-10-24 09:19+0000\n"
+"PO-Revision-Date: 2010-10-24 11:58+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -171,8 +171,8 @@ msgid ""
 "plugin."
 msgstr ""
 "Lista de complementos activos. Contiene la «Location» de los complementos "
-"activos. Consulte el archivo gtranslator-plugin para obtener la «Location» de "
-"un complemento dado."
+"activos. Consulte el archivo gtranslator-plugin para obtener la «Location» "
+"de un complemento dado."
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:27
 msgid "Make whitespace visible"
@@ -414,7 +414,6 @@ msgid "Look up words in a dictionary."
 msgstr "Buscar palabras en un diccionario."
 
 #: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:1
-#| msgid "Database:"
 msgid "Database"
 msgstr "Base de datos"
 
@@ -423,7 +422,6 @@ msgid "Panel Position"
 msgstr "Posición del panel"
 
 #: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:3
-#| msgid "Source code"
 msgid "Source Name"
 msgstr "Nombre de origen"
 
@@ -432,7 +430,6 @@ msgid "Strategy"
 msgstr "Estrategia"
 
 #: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:5
-#| msgid "Add to Database"
 msgid "Word database"
 msgstr "Base de datos de palabras"
 
@@ -504,59 +501,96 @@ msgstr "Código del idioma para consultar a Open Tran:"
 msgid "Open Tran Settings"
 msgstr "Ajustes de Open Tran"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:248
+#: ../plugins/open-tran/gtr-open-tran-panel.c:201
 #, c-format
-msgid "ERROR: %d %s\n"
-msgstr "ERROR: %d %s\n"
+msgid "ERROR: Cannot access %s\n"
+msgstr "Error: no se puede acceder a %s\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:261
+#: ../plugins/open-tran/gtr-open-tran-panel.c:218
+msgid "Error in server response, GET failed\n"
+msgstr "Error en la respuesta del servidor, falló el GET\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:230
 #, c-format
-msgid "FAULT: %d %s\n"
-msgstr "FALLO: %d %s\n"
+#| msgid "Could not parse XMLRPC response\n"
+msgid "Cannot parse server response, %s\n"
+msgstr ""
+"No se puede analizar la respuesta del servidor, %s\n"
+"\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:266
-#: ../plugins/open-tran/gtr-open-tran-panel.c:276
-msgid "ERROR: could not parse response\n"
-msgstr "ERROR: no se pudo analizar la respuesta\n"
+#: ../plugins/open-tran/gtr-open-tran-panel.c:244
+#, c-format
+msgid "Cannot parse server response, not an array? %s\n"
+msgstr "No se puede analizar la respuesta del servidor, ¿no es un vector? %s\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:285
+#: ../plugins/open-tran/gtr-open-tran-panel.c:267
 #, c-format
 msgid "WRONG! Can't get result element %d\n"
 msgstr "ERROR: No se puede obtener el elemento resultado %d\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:300
+#: ../plugins/open-tran/gtr-open-tran-panel.c:277
+#, c-format
+#| msgid "WRONG! Can't get result element %d\n"
+msgid "WRONG! Can't parse result element %d as object\n"
+msgstr ""
+"ERROR: No se puede analizar el elemento del resultado %d como un objeto\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:291
+#, c-format
+#| msgid "WRONG! Can't get result element %d\n"
+msgid "WRONG! Can't read projects for result element %d\n"
+msgstr ""
+"ERROR: No se pueden leer los proyectos para obtener el elemento del "
+"resultado %d\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:315
+#, c-format
+msgid "%s[%s] Count:%d"
+msgstr "%s[%s] Conteo:%d"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:325
+#, c-format
+msgid "WRONG! Malformed project: %d\n"
+msgstr "ERROR: proyecto mal formado: %d\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:339
 #: ../src/gtr-actions-search.c:191
 msgid "Phrase not found"
 msgstr "No se encontró la frase"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:319
+#: ../plugins/open-tran/gtr-open-tran-panel.c:360
 msgid "You have to provide a phrase to search"
 msgstr "Debe proporcionar una frase para buscar"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:328
+#: ../plugins/open-tran/gtr-open-tran-panel.c:369
 msgid "You have to provide a search language code"
 msgstr "Debe proporcionar un código de idioma de búsqueda"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:340
+#: ../plugins/open-tran/gtr-open-tran-panel.c:379
 msgid "You have to provide a language code for your language"
 msgstr "Debe proporcionar un código de idioma para su idioma"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:370
+#: ../plugins/open-tran/gtr-open-tran-panel.c:407
 msgid "Type"
 msgstr "Tipo"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:381
+#: ../plugins/open-tran/gtr-open-tran-panel.c:418
 msgid "Open-Tran.eu"
 msgstr "Open-Tran.eu"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:418
+#: ../plugins/open-tran/gtr-open-tran-panel.c:459
 msgid "Look for:"
 msgstr "_Buscar:"
 
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:103
+#: ../plugins/open-tran/gtr-open-tran-plugin.c:108
 #: ../plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in.h:2
 msgid "Open Tran"
 msgstr "Open Tran"
+
+#: ../plugins/open-tran/gtr-open-tran-plugin.c:152
+#, c-format
+msgid "Error from configuration dialog %s"
+msgstr "Error en el diálogo de configuración %s"
 
 #: ../plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in.h:1
 msgid "Look for phrases in Open tran memory translation database."
@@ -1880,6 +1914,15 @@ msgstr "Perfil para el documento activo"
 msgid "Documents"
 msgstr "Documentos"
 
+#~ msgid "ERROR: %d %s\n"
+#~ msgstr "ERROR: %d %s\n"
+
+#~ msgid "FAULT: %d %s\n"
+#~ msgstr "FALLO: %d %s\n"
+
+#~ msgid "ERROR: could not parse response\n"
+#~ msgstr "ERROR: no se pudo analizar la respuesta\n"
+
 #~ msgid ""
 #~ "Style for switchers in the side pane. Possible values are \"icons\", "
 #~ "\"text\", \"icons_and_text\", \"tabs\" and \"system\"."
@@ -2286,9 +2329,6 @@ msgstr "Documentos"
 
 #~ msgid "Error: %d %s\n"
 #~ msgstr "Error: %d %s\n"
-
-#~ msgid "Could not parse XMLRPC response\n"
-#~ msgstr "No se pudo analizar la respuesta XMLRPC\n"
 
 #~ msgid "No response value in XMLRPC response\n"
 #~ msgstr "No hay un valor en la respuesta XMLRPC\n"
