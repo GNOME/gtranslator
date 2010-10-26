@@ -50,6 +50,9 @@ struct _GtrOpenTranPluginPrivate
   GtkWidget *main_box;
   GtkWidget *search_code_entry;
   GtkWidget *own_code_entry;
+  GtkWidget *use_mirror_server_entry;
+  GtkWidget *mirror_server_url_entry;
+  GtkWidget *mirror_server_frame_entry;
 };
 
 typedef struct
@@ -146,7 +149,14 @@ get_configuration_dialog (GtrOpenTranPlugin * plugin)
                                   "search_code",
                                   &plugin->priv->search_code_entry,
                                   "own_code",
-                                  &plugin->priv->own_code_entry, NULL);
+                                  &plugin->priv->own_code_entry,
+                                  "use_mirror_server",
+                                  &plugin->priv->use_mirror_server_entry,
+                                  "mirror_server_url",
+                                  &plugin->priv->mirror_server_url_entry,
+                                  "mirror_server_frame",
+                                  &plugin->priv->mirror_server_frame_entry,
+				  NULL);
   if (!ret)
     {
       g_error (_("Error from configuration dialog %s"), path);
@@ -166,6 +176,18 @@ get_configuration_dialog (GtrOpenTranPlugin * plugin)
                    "text",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
+  g_settings_bind (plugin->priv->settings,
+                   GTR_SETTINGS_USE_MIRROR_SERVER,
+                   plugin->priv->use_mirror_server_entry,
+                   "active",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+
+  g_settings_bind (plugin->priv->settings,
+                   GTR_SETTINGS_MIRROR_SERVER_URL,
+                   plugin->priv->mirror_server_url_entry,
+                   "text",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+
   return plugin->priv->dialog;
 }
 
@@ -176,19 +198,45 @@ configure_dialog_response_cb (GtkWidget * widget,
   gtk_widget_destroy (plugin->priv->dialog);
 }
 
+static void
+use_mirror_server_toggled_cb (GtkWidget *widget,
+			      GtrOpenTranPlugin * plugin)
+{
+  GtkWidget *mirror_server_url_entry;
+  GtkWidget *mirror_server_frame_entry;
+  gboolean use_mirror_server;
+
+  mirror_server_url_entry = plugin->priv->mirror_server_url_entry;
+  mirror_server_frame_entry = plugin->priv->mirror_server_frame_entry;
+  use_mirror_server = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+  gtk_widget_set_sensitive (mirror_server_frame_entry, use_mirror_server);
+}
+
 static GtkWidget *
 impl_create_configure_dialog (GtrPlugin * plugin)
 {
   GtkWidget *dialog;
+  GtrOpenTranPluginPrivate *priv = GTR_OPEN_TRAN_PLUGIN (plugin)->priv;
+  gboolean use_mirror_server;
 
   dialog = get_configuration_dialog (GTR_OPEN_TRAN_PLUGIN (plugin));
 
   g_signal_connect (dialog,
                     "response",
                     G_CALLBACK (configure_dialog_response_cb),
-                    GTR_OPEN_TRAN_PLUGIN (plugin));
+                    plugin);
   g_signal_connect (dialog,
                     "destroy", G_CALLBACK (gtk_widget_destroy), &dialog);
+
+  g_signal_connect (priv->use_mirror_server_entry,
+                    "toggled",
+                    G_CALLBACK (use_mirror_server_toggled_cb),
+                    plugin);
+
+  /* Set the sensitivity of the mirror server area */
+  use_mirror_server = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->use_mirror_server_entry));
+  gtk_widget_set_sensitive (priv->mirror_server_frame_entry,
+			    use_mirror_server);
 
   return dialog;
 }

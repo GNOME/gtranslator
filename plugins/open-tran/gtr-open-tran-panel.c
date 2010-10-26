@@ -104,6 +104,32 @@ show_error_dialog (GtrWindow * parent,
   gtk_widget_show (dialog);
 }
 
+static gchar *
+get_service_url (gboolean use_mirror_server, gchar *mirror_server_url,
+		 const gchar * search_text,
+                 const gchar * search_code, const gchar * own_code)
+{
+  const gchar *base_url;
+  gchar *url, *full_url, *escaped_text;
+  const gchar * open_tran_url = "http://%s.%s.open-tran.eu/json/suggest/";
+  /* URL placeholders: source lang, target lang. Search string is appended. */
+
+  if (!use_mirror_server)
+    base_url = open_tran_url;
+  else
+    base_url = mirror_server_url;
+
+  escaped_text = (gchar *) xmlURIEscapeStr ((const xmlChar *) search_text, (const xmlChar *) "");
+  url = g_strdup_printf (base_url, search_code, own_code);
+  full_url = g_strconcat (url, escaped_text, NULL);
+
+  g_free (url);
+  if (escaped_text)
+    xmlFree (escaped_text);
+
+  return full_url;
+}
+
 static GdkPixbuf *
 create_pixbuf (const gchar * path)
 {
@@ -170,16 +196,12 @@ print_string_to_tree_view (const gchar *iconname, const gchar * str,
 
 static void
 open_connection (GtrOpenTranPanel * panel,
-                 const gchar * text,
-                 const gchar * search_code, const gchar * own_code)
+		 const gchar *service_url,
+                 const gchar * text)
 {
-  gchar * open_tran_url = "http://%s.%s.open-tran.eu/json/suggest/%s";
-  /* URL placeholders: source lang, target lang, phrase */
-  gchar *url_buf;
   GError *err = NULL;
   GtkTreeIter treeiter;
   void * ctx;
-  xmlChar *escaped;
   unsigned int offset = 0;
   int ret;
   gchar * json_buf;
@@ -188,21 +210,14 @@ open_connection (GtrOpenTranPanel * panel,
   JsonArray *array;
   int idx;
 
-  escaped = xmlURIEscapeStr ((const xmlChar *) text, (const xmlChar *) "");
-  url_buf = g_strdup_printf (open_tran_url, search_code, own_code, escaped);
-
-  if (escaped)
-    xmlFree (escaped);
-
-  ctx = xmlNanoHTTPOpen (url_buf, NULL);
+  ctx = xmlNanoHTTPOpen (service_url, NULL);
   if (!ctx)
     {
       show_error_dialog (panel->priv->window,
-                         _("ERROR: Cannot access %s\n"), url_buf);
+                         _("ERROR: Cannot access %s\n"), service_url);
       return;
     }
 
-  g_free (url_buf);
   json_buf = g_malloc (JSON_LENGTH);
 
   do
@@ -348,8 +363,11 @@ static void
 entry_activate_cb (GtkEntry * entry, GtrOpenTranPanel * panel)
 {
   const gchar *entry_text;
-  gchar *search_code;
-  gchar *own_code;
+  gchar *search_code = NULL;
+  gchar *own_code = NULL;
+  gboolean use_mirror_server;
+  gchar *mirror_server_url = NULL;
+  gchar *service_url = NULL;
 
   gtk_tree_store_clear (panel->priv->store);
 
@@ -358,29 +376,52 @@ entry_activate_cb (GtkEntry * entry, GtrOpenTranPanel * panel)
     {
       show_error_dialog (panel->priv->window,
                          _("You have to provide a phrase to search"));
-      return;
+      goto cleanup;
     }
 
   search_code = g_settings_get_string (panel->priv->settings,
                                        GTR_SETTINGS_SEARCH_CODE);
-  if (!search_code)
+  if (!search_code || strlen (search_code) == 0)
     {
       show_error_dialog (panel->priv->window,
-                         _("You have to provide a search language code"));
-      return;
+                         _("You have to provide a search language code in the plugin configuration"));
+      goto cleanup;
     }
 
   own_code = g_settings_get_string (panel->priv->settings,
                                     GTR_SETTINGS_OWN_CODE);
 
-  if (!own_code)
+  if (!own_code || strlen (own_code) == 0)
     {
       show_error_dialog (panel->priv->window,
-                         _("You have to provide a language code for your language"));
-      return;
+                         _("You have to provide a language code for your language in the plugin configuration"));
+      goto cleanup;
     }
 
-  open_connection (panel, entry_text, search_code, own_code);
+  use_mirror_server = g_settings_get_boolean (panel->priv->settings,
+                                       GTR_SETTINGS_USE_MIRROR_SERVER);
+  mirror_server_url = g_settings_get_string (panel->priv->settings,
+                                       GTR_SETTINGS_MIRROR_SERVER_URL);
+  
+  if (use_mirror_server && (!mirror_server_url || strlen (mirror_server_url) == 0))
+    {
+      /* Note: the two "%s" in the next string are not interpolated */
+      show_error_dialog (panel->priv->window,
+                         _("Either use the main open-tran.eu server,"
+			   " or enter a server URL in the plugin configuration,"));
+      goto cleanup;
+    }
+
+  service_url = get_service_url (use_mirror_server, mirror_server_url,
+				 entry_text,
+				 search_code, own_code);
+  open_connection (panel, service_url, entry_text);
+
+ cleanup:
+  g_free (search_code);
+  g_free (own_code);
+  g_free (service_url);
+  g_free (mirror_server_url);
 }
 
 static void

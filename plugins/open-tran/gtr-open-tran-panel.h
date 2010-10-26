@@ -39,6 +39,8 @@ G_BEGIN_DECLS
 /* GSettings keys */
 #define GTR_SETTINGS_SEARCH_CODE "search-code"
 #define GTR_SETTINGS_OWN_CODE "own-code"
+#define GTR_SETTINGS_USE_MIRROR_SERVER "use-mirror-server"
+#define GTR_SETTINGS_MIRROR_SERVER_URL "mirror-server-url"
 
 /* Private structure type */
 typedef struct _GtrOpenTranPanelPrivate GtrOpenTranPanelPrivate;
