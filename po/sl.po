@@ -9,10 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator&component=general\n"
-"POT-Creation-Date: 2010-10-09 09:58+0000\n"
-"PO-Revision-Date: 2010-10-09 15:05+0100\n"
+"POT-Creation-Date: 2010-10-25 12:43+0000\n"
+"PO-Revision-Date: 2010-10-30 08:03+0100\n"
 "Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -436,70 +437,99 @@ msgid "Tags detection and easy insertion."
 msgstr "Zaznavanje oznak in preprosto vstavljanje."
 
 #: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
-msgid "Code language of the results:"
-msgstr "Jezikovna koda rezultatov:"
+msgid "Language code for the Open-Tran query:"
+msgstr "Jezikovna koda poizvedbe v Open-Tran:"
 
 #: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
-msgid "Code language to query open-tran:"
-msgstr "Jezikovna koda za poizvedbo v open-tran:"
+msgid "Language code of the translated results:"
+msgstr "Koda jezika prevedenih rezultatov"
 
 #: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
 msgid "Open Tran Settings"
 msgstr "Nastavitve Open Tran"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:248
+#: ../plugins/open-tran/gtr-open-tran-panel.c:201
 #, c-format
-msgid "ERROR: %d %s\n"
-msgstr "NAPAKA: %d %s\n"
+msgid "ERROR: Cannot access %s\n"
+msgstr "NAPAKA: Ni mogoč dostop do %s\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:261
+#: ../plugins/open-tran/gtr-open-tran-panel.c:218
+msgid "Error in server response, GET failed\n"
+msgstr "Napaka v odzivu strežnika, GET je spodletel\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:230
 #, c-format
-msgid "FAULT: %d %s\n"
-msgstr "OKVARA:%d %s\n"
+msgid "Cannot parse server response, %s\n"
+msgstr "Ni mogoče razčleniti odziva strežnika, %s\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:266
-#: ../plugins/open-tran/gtr-open-tran-panel.c:276
-msgid "ERROR: could not parse response\n"
-msgstr "NAPAKA: Ni mogoče razčleniti odziva\n"
+#: ../plugins/open-tran/gtr-open-tran-panel.c:244
+#, c-format
+msgid "Cannot parse server response, not an array? %s\n"
+msgstr "Ni mogoče razčleniti odziva strežnika. Morda ni polje? %s\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:285
+#: ../plugins/open-tran/gtr-open-tran-panel.c:267
 #, c-format
 msgid "WRONG! Can't get result element %d\n"
 msgstr "NAROBE! Ni mogoče dobiti rezultata elementa %d\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:300
+#: ../plugins/open-tran/gtr-open-tran-panel.c:277
+#, c-format
+msgid "WRONG! Can't parse result element %d as object\n"
+msgstr "NAROBE! Rezultata elementa %d ni mogoče razčleniti kot predmet \n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:291
+#, c-format
+msgid "WRONG! Can't read projects for result element %d\n"
+msgstr "NAROBE! Ni mogoče brati projektov za rezultat elementa %d\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:315
+#, c-format
+msgid "%s[%s] Count:%d"
+msgstr "%s[%s] Število:%d"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:325
+#, c-format
+msgid "WRONG! Malformed project: %d\n"
+msgstr "NAROBE! Slabo oblikovan projekt: %d\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:339
 #: ../src/gtr-actions-search.c:191
 msgid "Phrase not found"
 msgstr "Fraze ni mogoče najti"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:319
+#: ../plugins/open-tran/gtr-open-tran-panel.c:360
 msgid "You have to provide a phrase to search"
 msgstr "Navesti je treba frazo za iskanje"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:328
+#: ../plugins/open-tran/gtr-open-tran-panel.c:369
 msgid "You have to provide a search language code"
 msgstr "Navesti je treba kodo jezika iskanja"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:340
+#: ../plugins/open-tran/gtr-open-tran-panel.c:379
 msgid "You have to provide a language code for your language"
 msgstr "Navesti je treba jezikovno kodo jezika"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:370
+#: ../plugins/open-tran/gtr-open-tran-panel.c:407
 msgid "Type"
 msgstr "Vrsta"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:381
+#: ../plugins/open-tran/gtr-open-tran-panel.c:418
 msgid "Open-Tran.eu"
 msgstr "Open-Tran.eu"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:418
+#: ../plugins/open-tran/gtr-open-tran-panel.c:459
 msgid "Look for:"
 msgstr "Išči za:"
 
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:103
+#: ../plugins/open-tran/gtr-open-tran-plugin.c:108
 #: ../plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in.h:2
 msgid "Open Tran"
 msgstr "Open Tran"
+
+#: ../plugins/open-tran/gtr-open-tran-plugin.c:152
+#, c-format
+msgid "Error from configuration dialog %s"
+msgstr "Napaka iz nastavitvenega pogovornega okna %s"
 
 #: ../plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in.h:1
 msgid "Look for phrases in Open tran memory translation database."
@@ -1790,6 +1820,14 @@ msgstr "Profil za dejaven dokument"
 msgid "Documents"
 msgstr "Dokumenti"
 
+#~ msgid "Code language to query open-tran:"
+#~ msgstr "Jezikovna koda za poizvedbo v open-tran:"
+#~ msgid "ERROR: %d %s\n"
+#~ msgstr "NAPAKA: %d %s\n"
+#~ msgid "FAULT: %d %s\n"
+#~ msgstr "OKVARA:%d %s\n"
+#~ msgid "ERROR: could not parse response\n"
+#~ msgstr "NAPAKA: Ni mogoče razčleniti odziva\n"
 #~ msgid ""
 #~ "Style for switchers in the side pane. Possible values are \"icons\", "
 #~ "\"text\", \"icons_and_text\", \"tabs\" and \"system\"."
@@ -1828,8 +1866,8 @@ msgstr "Dokumenti"
 #~ msgstr "<span weight=\"bold\" size=\"large\">Ime profila že obstaja</span>"
 #~ msgid "Example: nplurals=2; plural=(n != 1);"
 #~ msgstr ""
-#~ "Primer: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%"
-#~ "100==4 ? 3 : 0);"
+#~ "Primer: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+#~ "%100==4 ? 3 : 0);"
 #~ msgid "gtranslator - *%s"
 #~ msgstr "gtranslator - *%s"
 #~ msgid "gtranslator - %s"
@@ -1843,7 +1881,7 @@ msgstr "Dokumenti"
 #~ msgid "Please add a Subversion URL"
 #~ msgstr "Dodajte Subversion URL"
 #~ msgid "Checkout repository"
-#~ msgstr "Odjavi skladišče"
+#~ msgstr "Odjavi odložišče"
 #~ msgid "Subversion: Commit complete."
 #~ msgstr "Subversion: uveljavitev je končana."
 #~ msgctxt "ChangeLog entry"
@@ -1882,11 +1920,11 @@ msgstr "Dokumenti"
 #~ msgid "_Diff"
 #~ msgstr "_Primerjava"
 #~ msgid "Diff local PO file with repository PO file"
-#~ msgstr "Primerjava krajevnih in skladiščnih PO datotek"
+#~ msgstr "Primerjava krajevnih in odložiščih PO datotek"
 #~ msgid "C_heckout"
 #~ msgstr "O_djavi"
 #~ msgid "Get a new repository copy"
-#~ msgstr "Dobi novo kopijo skladišča"
+#~ msgstr "Dobi novo kopijo odložišča"
 #~ msgid "S_ubversion"
 #~ msgstr "S_ubversion"
 #~ msgid "  "
@@ -1926,7 +1964,7 @@ msgstr "Dokumenti"
 #~ msgid "Remember this decision"
 #~ msgstr "Zapomni si odločitev"
 #~ msgid "Repository authorization"
-#~ msgstr "Overitev skladišča"
+#~ msgstr "Overitev odložišča"
 #~ msgid "Retrieving status..."
 #~ msgstr "Pridobivanje stanja ..."
 #~ msgid "Save the diff file"
@@ -1934,7 +1972,7 @@ msgstr "Dokumenti"
 #~ msgid "Send Changes"
 #~ msgstr "Pošlji spremembe"
 #~ msgid "Update repository"
-#~ msgstr "Posodobi skladišče"
+#~ msgstr "Posodobi odložišče"
 #~ msgid "Use configured program to view the diff"
 #~ msgstr "Uporabi nastavljen program za primerjavo"
 #~ msgid "label"
