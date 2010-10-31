@@ -2,6 +2,7 @@
 # Copyright (C) 2003, 2009, 2010 the author(s) of gtranslator.
 # Copyright (C) 2004, 2005 Miloslav Trmac <mitr@volny.cz>.
 # This file is distributed under the same license as the gtranslator package.
+#
 # Jaroslav Jiricka <jiricka@mujbox.cz>, 2003.
 # Miloslav Trmac <mitr@volny.cz>, 2004, 2005.
 # Petr Kovar <pknbe@volny.cz>, 2010.
@@ -11,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-09 11:57+0200\n"
-"PO-Revision-Date: 2010-10-08 11:58+0200\n"
+"POT-Creation-Date: 2010-10-31 12:34+0100\n"
+"PO-Revision-Date: 2010-10-29 12:13+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -476,70 +477,99 @@ msgid "Tags detection and easy insertion."
 msgstr "Detekce značek a jejich snadné vkládání."
 
 #: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
-msgid "Code language of the results:"
-msgstr "Kód jazyka výsledků:"
+msgid "Language code for the Open-Tran query:"
+msgstr "Kód jazyka pro dotaz do Open-Tran:"
 
 #: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
-msgid "Code language to query open-tran:"
-msgstr "Kód jazyka pro dotaz open-tran:"
+msgid "Language code of the translated results:"
+msgstr "Kód jazyka pro výsledky překladů:"
 
 #: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
 msgid "Open Tran Settings"
 msgstr "Nastavení Open Tran"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:248
+#: ../plugins/open-tran/gtr-open-tran-panel.c:201
 #, c-format
-msgid "ERROR: %d %s\n"
-msgstr "CHYBA: %d %s\n"
+msgid "ERROR: Cannot access %s\n"
+msgstr "CHYBA: Nelze přistupovat k %s\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:261
+#: ../plugins/open-tran/gtr-open-tran-panel.c:218
+msgid "Error in server response, GET failed\n"
+msgstr "Chyba v odpovědi serveru, selhala funkce GET\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:230
 #, c-format
-msgid "FAULT: %d %s\n"
-msgstr "SELHÁNÍ: %d %s\n"
+msgid "Cannot parse server response, %s\n"
+msgstr "Nelze analyzovat odpověď serveru, %s\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:266
-#: ../plugins/open-tran/gtr-open-tran-panel.c:276
-msgid "ERROR: could not parse response\n"
-msgstr "CHYBA: odezvu nelze analyzovat\n"
+#: ../plugins/open-tran/gtr-open-tran-panel.c:244
+#, c-format
+msgid "Cannot parse server response, not an array? %s\n"
+msgstr "Nelze analyzovat odpověď serveru, nejedná se o pole? %s\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:285
+#: ../plugins/open-tran/gtr-open-tran-panel.c:267
 #, c-format
 msgid "WRONG! Can't get result element %d\n"
-msgstr "CHYBA! Nelze získat výsledný element %d\n"
+msgstr "CHYBA! Nelze získat výsledný prvek %d\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:300
+#: ../plugins/open-tran/gtr-open-tran-panel.c:277
+#, c-format
+msgid "WRONG! Can't parse result element %d as object\n"
+msgstr "CHYBA! Nelze zpracovat výsledný prvek %d jako objekt\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:291
+#, c-format
+msgid "WRONG! Can't read projects for result element %d\n"
+msgstr "CHYBA! Nelze číst projekty pro výsledné prvky %d\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:315
+#, c-format
+msgid "%s[%s] Count:%d"
+msgstr "%s[%s] Počet:%d"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:325
+#, c-format
+msgid "WRONG! Malformed project: %d\n"
+msgstr "CHYBA! Poškozený projekt: %d\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:339
 #: ../src/gtr-actions-search.c:191
 msgid "Phrase not found"
 msgstr "Fráze nenalezena"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:319
+#: ../plugins/open-tran/gtr-open-tran-panel.c:360
 msgid "You have to provide a phrase to search"
 msgstr "Musíte zadat frázi, kterou chcete najít"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:328
+#: ../plugins/open-tran/gtr-open-tran-panel.c:369
 msgid "You have to provide a search language code"
 msgstr "Musíte uvést kód prohledávaného jazyka"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:340
+#: ../plugins/open-tran/gtr-open-tran-panel.c:379
 msgid "You have to provide a language code for your language"
 msgstr "Musíte uvést kód jazyka pro svůj jazyk"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:370
+#: ../plugins/open-tran/gtr-open-tran-panel.c:407
 msgid "Type"
 msgstr "Typ"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:381
+#: ../plugins/open-tran/gtr-open-tran-panel.c:418
 msgid "Open-Tran.eu"
 msgstr "Open-Tran.eu"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:418
+#: ../plugins/open-tran/gtr-open-tran-panel.c:459
 msgid "Look for:"
 msgstr "Hledat:"
 
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:103
+#: ../plugins/open-tran/gtr-open-tran-plugin.c:108
 #: ../plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in.h:2
 msgid "Open Tran"
 msgstr "Open Tran"
+
+#: ../plugins/open-tran/gtr-open-tran-plugin.c:152
+#, c-format
+msgid "Error from configuration dialog %s"
+msgstr "Chyba z dialogu nastavení %s"
 
 #: ../plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in.h:1
 msgid "Look for phrases in Open tran memory translation database."
@@ -1858,6 +1888,18 @@ msgstr "Profil pro aktivní dokument"
 #: ../src/gtr-window.c:1845
 msgid "Documents"
 msgstr "Dokumenty"
+
+#~ msgid "Code language to query open-tran:"
+#~ msgstr "Kód jazyka pro dotaz open-tran:"
+
+#~ msgid "ERROR: %d %s\n"
+#~ msgstr "CHYBA: %d %s\n"
+
+#~ msgid "FAULT: %d %s\n"
+#~ msgstr "SELHÁNÍ: %d %s\n"
+
+#~ msgid "ERROR: could not parse response\n"
+#~ msgstr "CHYBA: odezvu nelze analyzovat\n"
 
 #~ msgid ""
 #~ "Style for switchers in the side pane. Possible values are \"icons\", "
