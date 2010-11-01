@@ -1971,6 +1971,40 @@ gtr_window_configure_event (GtkWidget * widget, GdkEventConfigure * event)
                                                                       event);
 }
 
+/*
+ * GtkWindow catches keybindings for the menu items _before_ passing them to
+ * the focused widget. This is unfortunate and means that pressing ctrl+V
+ * in an entry on a panel ends up pasting text in the TextView.
+ * Here we override GtkWindow's handler to do the same things that it
+ * does, but in the opposite order and then we chain up to the grand
+ * parent handler, skipping gtk_window_key_press_event.
+ */
+static gboolean
+gtr_window_key_press_event (GtkWidget   *widget,
+                            GdkEventKey *event)
+{
+  static gpointer grand_parent_class = NULL;
+  GtkWindow *window = GTK_WINDOW (widget);
+  gboolean handled = FALSE;
+
+  if (grand_parent_class == NULL)
+    grand_parent_class = g_type_class_peek_parent (gtr_window_parent_class);
+
+  /* handle focus widget key events */
+  if (!handled)
+    handled = gtk_window_propagate_key_event (window, event);
+
+  /* handle mnemonics and accelerators */
+  if (!handled)
+    handled = gtk_window_activate_key (window, event);
+
+  /* Chain up, invokes binding set */
+  if (!handled)
+    handled = GTK_WIDGET_CLASS (grand_parent_class)->key_press_event (widget, event);
+
+  return handled;
+}
+
 static void
 gtr_window_class_init (GtrWindowClass * klass)
 {
@@ -1986,6 +2020,7 @@ gtr_window_class_init (GtrWindowClass * klass)
   gobject_class->destroy = gtr_window_destroy;
 
   widget_class->configure_event = gtr_window_configure_event;
+  widget_class->key_press_event = gtr_window_key_press_event;
 }
 
 /***************************** Public funcs ***********************************/
