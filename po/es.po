@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&component=general\n"
-"POT-Creation-Date: 2010-10-24 19:49+0000\n"
-"PO-Revision-Date: 2010-10-25 10:40+0200\n"
+"POT-Creation-Date: 2010-11-01 10:51+0000\n"
+"PO-Revision-Date: 2010-11-01 12:06+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -489,103 +489,141 @@ msgstr "Insertar etiquetas"
 msgid "Tags detection and easy insertion."
 msgstr "Detección e inserción fácil de etiquetas."
 
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
+#, no-c-format
+msgid ""
+"<i>The URL should be of the form:\n"
+"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+"The two \"%s\" markers and the final slash must not be omitted.</i>"
+msgstr ""
+"<i>El URL debería ser de la forma:\n"
+"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+"No se deben omitir los dos marcadores «%s» y la barra final.</i>"
+
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:5
 msgid "Language code for the Open-Tran query:"
 msgstr "Código de idioma para la consulta a Open Tran:"
 
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
-#| msgid "Code language of the results:"
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:6
 msgid "Language code of the translated results:"
 msgstr "Código del idioma para el resultado traducido:"
 
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:7
+msgid "Mirror Server"
+msgstr "Servidor"
+
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:8
+msgid "Mirror server URL:"
+msgstr "URL del servidor:"
+
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:9
 msgid "Open Tran Settings"
 msgstr "Ajustes de Open Tran"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:201
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:10
+msgid "Use a local \"mirror\" copy of the Open-Tran server"
+msgstr "Usar una copia local del servidor de Open-Tran"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:217
 #, c-format
 msgid "ERROR: Cannot access %s\n"
 msgstr "Error: no se puede acceder a %s\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:218
+#: ../plugins/open-tran/gtr-open-tran-panel.c:233
 msgid "Error in server response, GET failed\n"
 msgstr "Error en la respuesta del servidor, falló el GET\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:230
+#: ../plugins/open-tran/gtr-open-tran-panel.c:245
 #, c-format
 msgid "Cannot parse server response, %s\n"
 msgstr ""
 "No se puede analizar la respuesta del servidor, %s\n"
 "\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:244
+#: ../plugins/open-tran/gtr-open-tran-panel.c:259
 #, c-format
 msgid "Cannot parse server response, not an array? %s\n"
 msgstr "No se puede analizar la respuesta del servidor, ¿no es un vector? %s\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:267
+#: ../plugins/open-tran/gtr-open-tran-panel.c:282
 #, c-format
 msgid "WRONG! Can't get result element %d\n"
 msgstr "ERROR: No se puede obtener el elemento resultado %d\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:277
+#: ../plugins/open-tran/gtr-open-tran-panel.c:292
 #, c-format
 msgid "WRONG! Can't parse result element %d as object\n"
 msgstr ""
 "ERROR: No se puede analizar el elemento del resultado %d como un objeto\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:291
+#: ../plugins/open-tran/gtr-open-tran-panel.c:306
 #, c-format
 msgid "WRONG! Can't read projects for result element %d\n"
 msgstr ""
 "ERROR: No se pueden leer los proyectos para obtener el elemento del "
 "resultado %d\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:315
+#: ../plugins/open-tran/gtr-open-tran-panel.c:330
 #, c-format
 msgid "%s[%s] Count:%d"
 msgstr "%s[%s] Conteo:%d"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:325
+#: ../plugins/open-tran/gtr-open-tran-panel.c:340
 #, c-format
 msgid "WRONG! Malformed project: %d\n"
 msgstr "ERROR: proyecto mal formado: %d\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:339
+#: ../plugins/open-tran/gtr-open-tran-panel.c:354
 #: ../src/gtr-actions-search.c:191
 msgid "Phrase not found"
 msgstr "No se encontró la frase"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:360
+#: ../plugins/open-tran/gtr-open-tran-panel.c:378
 msgid "You have to provide a phrase to search"
 msgstr "Debe proporcionar una frase para buscar"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:369
-msgid "You have to provide a search language code"
-msgstr "Debe proporcionar un código de idioma de búsqueda"
+#: ../plugins/open-tran/gtr-open-tran-panel.c:387
+#| msgid "You have to provide a search language code"
+msgid "You have to provide a search language code in the plugin configuration"
+msgstr ""
+"Debe proporcionar un código de idioma de búsqueda en la configuración del "
+"complemento"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:379
-msgid "You have to provide a language code for your language"
-msgstr "Debe proporcionar un código de idioma para su idioma"
+#: ../plugins/open-tran/gtr-open-tran-panel.c:397
+#| msgid "You have to provide a language code for your language"
+msgid ""
+"You have to provide a language code for your language in the plugin "
+"configuration"
+msgstr ""
+"Debe proporcionar un código de idioma para su idioma en la configuración del "
+"complemento"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:407
+#: ../plugins/open-tran/gtr-open-tran-panel.c:410
+msgid ""
+"Either use the main open-tran.eu server, or enter a server URL in the plugin "
+"configuration,"
+msgstr ""
+"Usar el servidor principal open-tran.eu o introducir un URL de servidor en "
+"la configuración del complemento."
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:448
 msgid "Type"
 msgstr "Tipo"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:418
+#: ../plugins/open-tran/gtr-open-tran-panel.c:459
 msgid "Open-Tran.eu"
 msgstr "Open-Tran.eu"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:459
+#: ../plugins/open-tran/gtr-open-tran-panel.c:500
 msgid "Look for:"
 msgstr "_Buscar:"
 
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:108
+#: ../plugins/open-tran/gtr-open-tran-plugin.c:111
 #: ../plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in.h:2
 msgid "Open Tran"
 msgstr "Open Tran"
 
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:152
+#: ../plugins/open-tran/gtr-open-tran-plugin.c:162
 #, c-format
 msgid "Error from configuration dialog %s"
 msgstr "Error en el diálogo de configuración %s"
@@ -596,20 +634,36 @@ msgstr ""
 "Buscar frases en la base de datos de la memoria de traducción de Open Tran."
 
 #: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:1
+msgid "Mirror Server URL"
+msgstr "URL del servidor"
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:2
 msgid "Own Code"
 msgstr "Código propio"
 
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:2
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:3
 msgid "Search Code"
 msgstr "Buscar código"
 
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:3
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:4
 msgid "The language code in which you want the results"
 msgstr "El lenguaje del código en el que quiere los resultados"
 
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:4
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:5
 msgid "The language code to search for"
 msgstr "El código de lenguaje que buscar"
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:6
+msgid "URL of an Open-Tran mirror server"
+msgstr "URL de un servidor de Open-Tran"
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:7
+msgid "Use Mirror Server"
+msgstr "Usar un servidor"
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:8
+msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
+msgstr "Usar una copia local del servidor principal Open-Tran en open-tran.eu"
 
 #: ../plugins/codeview/gtr-source-code-view-dialog.ui.h:1
 msgid "Line command:"
