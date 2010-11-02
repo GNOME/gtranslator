@@ -45,12 +45,12 @@ typedef struct _GtrHistoryEntryPrivate GtrHistoryEntryPrivate;
 
 struct _GtrHistoryEntryClass
 {
-  GtkComboBoxEntryClass parent_class;
+  GtkComboBoxClass parent_class;
 };
 
 struct _GtrHistoryEntry
 {
-  GtkComboBoxEntry parent_instance;
+  GtkComboBox parent_instance;
 
   GtrHistoryEntryPrivate *priv;
 };

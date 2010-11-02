@@ -16,14 +16,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA 02111-1307, USA.
  */
 
 /*
- * Modified by the gtr Team, 2006. See the AUTHORS file for a 
- * list of people on the gtr Team.  
- * See the ChangeLog files for a list of changes. 
+ * Modified by the gtr Team, 2006. See the AUTHORS file for a
+ * list of people on the gtr Team.
+ * See the ChangeLog files for a list of changes.
  *
  * $Id$
  */
@@ -63,7 +63,7 @@ struct _GtrHistoryEntryPrivate
   GSettings *settings;
 };
 
-G_DEFINE_TYPE (GtrHistoryEntry, gtr_history_entry, GTK_TYPE_COMBO_BOX_ENTRY)
+G_DEFINE_TYPE (GtrHistoryEntry, gtr_history_entry, GTK_TYPE_COMBO_BOX)
      static void
        gtr_history_entry_set_property (GObject * object,
                                        guint prop_id,
@@ -114,11 +114,11 @@ gtr_history_entry_get_property (GObject * object,
 }
 
 static void
-gtr_history_entry_destroy (GtkObject * object)
+gtr_history_entry_dispose (GObject * object)
 {
   gtr_history_entry_set_enable_completion (GTR_HISTORY_ENTRY (object), FALSE);
 
-  GTK_OBJECT_CLASS (gtr_history_entry_parent_class)->destroy (object);
+  G_OBJECT_CLASS (gtr_history_entry_parent_class)->dispose (object);
 }
 
 static void
@@ -143,12 +143,11 @@ static void
 gtr_history_entry_class_init (GtrHistoryEntryClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkObjectClass *gtkobject_class = GTK_OBJECT_CLASS (klass);
 
   object_class->set_property = gtr_history_entry_set_property;
   object_class->get_property = gtr_history_entry_get_property;
+  object_class->dispose = gtr_history_entry_dispose;
   object_class->finalize = gtr_history_entry_finalize;
-  gtkobject_class->destroy = gtr_history_entry_destroy;
 
   g_object_class_install_property (object_class,
                                    PROP_HISTORY_ID,
@@ -391,8 +390,7 @@ gtr_history_entry_init (GtrHistoryEntry * entry)
 
   priv->completion = NULL;
 
-  priv->settings =
-    g_settings_new ("org.gnome.gtranslator.state.history-entry");
+  priv->settings = g_settings_new ("org.gnome.gtranslator.state.history-entry");
 }
 
 void
@@ -494,18 +492,19 @@ gtr_history_entry_new (const gchar * history_id, gboolean enable_completion)
   store = gtk_list_store_new (1, G_TYPE_STRING);
 
   ret = g_object_new (GTR_TYPE_HISTORY_ENTRY,
+                      "has-entry", TRUE,
                       "history-id", history_id,
                       "model", store, "text-column", 0, NULL);
 
   g_object_unref (store);
 
   /* loading has to happen after the model
-   * has been set. However the model is not a 
+   * has been set. However the model is not a
    * G_PARAM_CONSTRUCT property of GtkComboBox
    * so we cannot do this in the constructor.
-   * For now we simply do here since this widget is 
+   * For now we simply do here since this widget is
    * not bound to other programming languages.
-   * A maybe better alternative is to override the 
+   * A maybe better alternative is to override the
    * model property of combobox and mark CONTRUCT_ONLY.
    * This would also ensure that the model cannot be
    * set explicitely at a later time.
@@ -520,8 +519,8 @@ gtr_history_entry_new (const gchar * history_id, gboolean enable_completion)
 
 /*
  * Utility function to get the editable text entry internal widget.
- * I would prefer to not expose this implementation detail and 
- * simply make the GtrHistoryEntry widget implement the 
+ * I would prefer to not expose this implementation detail and
+ * simply make the GtrHistoryEntry widget implement the
  * GtkEditable interface. Unfortunately both GtkEditable and
  * GtkComboBox have a "changed" signal and I am not sure how to
  * handle the conflict.
