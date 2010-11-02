@@ -5,7 +5,11 @@ FILES="gedit-history-entry.h \
        gedit-status-combo-box.h \
        gedit-status-combo-box.c \
        gedit-close-button.h \
-       gedit-close-button.c"
+       gedit-close-button.c \
+       gedit-plugins-engine.h \
+       gedit-plugins-engine.c \
+       gedit-window-activatable.h \
+       gedit-window-activatable.c"
 
 sed_it () {
 	sed \

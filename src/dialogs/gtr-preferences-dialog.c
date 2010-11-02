@@ -32,7 +32,6 @@
 #include "gtr-profile.h"
 #include "gtr-profile-manager.h"
 #include "gtr-utils.h"
-#include "gtr-plugin-manager.h"
 #include "gtr-profile-dialog.h"
 #include "gtr-po.h"
 #include "gtr-utils.h"
@@ -46,6 +45,7 @@
 #include <string.h>
 #include <gtksourceview/gtksourcestyleschememanager.h>
 #include <gdl/gdl.h>
+#include <libpeas-gtk/peas-gtk-plugin-manager.h>
 
 #define GTR_PREFERENCES_DIALOG_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ( \
                                                     (object), \
@@ -934,7 +934,7 @@ setup_plugin_pages (GtrPreferencesDialog * dlg)
   alignment = gtk_alignment_new (0., 0., 1., 1.);
   gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 12, 12, 12, 12);
 
-  page_content = gtr_plugin_manager_new ();
+  page_content = peas_gtk_plugin_manager_new ();
   g_return_if_fail (page_content != NULL);
 
   gtk_container_add (GTK_CONTAINER (alignment), page_content);

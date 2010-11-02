@@ -4,17 +4,17 @@
 
 SUBDIRS = toolbareditor \
 	  dialogs \
-	  plugin-system \
 	  translation-memory
 
 noinst_LTLIBRARIES = libgtranslator.la
+
+lib_LTLIBRARIES = libgtranslator-private.la
 
 INCLUDES = \
 	-I$(top_srcdir)						\
 	-I$(includedir)						\
 	-I$(top_srcdir)/src/dialogs				\
 	-I$(top_srcdir)/src/toolbareditor			\
-	-I$(top_srcdir)/src/plugin-system			\
 	-I$(top_srcdir)/src/translation-memory			\
 	-I$(top_srcdir)/src/translation-memory/berkeley		\
 	-DGNOMELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\"	\
@@ -36,7 +36,7 @@ bin_PROGRAMS = \
 
 gtranslator_SOURCES = main.c
 
-gtranslator_LDADD = libgtranslator.la $(GTRANSLATOR_LIBS) $(GTKSPELL_LIBS) $(INTLLIBS) -lgettextpo
+gtranslator_LDADD = libgtranslator.la libgtranslator-private.la $(GTRANSLATOR_LIBS) $(GTKSPELL_LIBS) $(INTLLIBS) -lgettextpo
 
 if PLATFORM_WIN32
 gtranslator_LDFLAGS = -Wl,--export-all-symbols -mwindows -Wl,--out-implib,libgedit-$(GTR_API_VERSION).a
@@ -73,6 +73,7 @@ INST_H_FILES = \
 	gtr-statusbar.h \
 	gtr-tab.h \
 	gtr-view.h \
+	gtr-window-activatable.h \
 	gtr-window.h
 
 NOINST_H_FILES = \
@@ -93,6 +94,9 @@ headerdir = $(prefix)/include/gtranslator-@GTR_API_VERSION@/gtranslator
 header_DATA = \
 	$(INST_H_FILES)
 
+libgtranslator_private_la_SOURCES =	\
+	gtr-window-activatable.c
+
 libgtranslator_c_files = \
 	gtr-actions-documents.c \
 	gtr-actions-edit.c \
@@ -112,6 +116,7 @@ libgtranslator_c_files = \
 	gtr-message-table-model.c \
 	gtr-msg.c \
 	gtr-notebook.c \
+	gtr-plugins-engine.c \
 	gtr-po.c \
 	gtr-profile.c \
 	gtr-profile-manager.c \
@@ -134,7 +139,6 @@ libgtranslator_la_LIBADD = \
 	$(GTRANSLATOR_LIBS) \
 	dialogs/libdialogs.la \
 	toolbareditor/libtoolbareditor.la \
-	plugin-system/libpluginsystem.la \
 	translation-memory/libtranslationmemory.la
 
 gtr-enum-types.h: gtr-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)

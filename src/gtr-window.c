@@ -26,6 +26,7 @@
 
 #include "gtr-actions.h"
 #include "gtr-application.h"
+#include "gtr-debug.h"
 #include "gtr-dirs.h"
 #include "gtr-header.h"
 #include "gtr-msg.h"
@@ -37,6 +38,7 @@
 #include "gtr-statusbar.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
+#include "gtr-window-activatable.h"
 #include "gtr-profile-manager.h"
 #include "gtr-status-combo-box.h"
 
@@ -55,6 +57,7 @@
 #include <glib-object.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <libpeas/peas-extension-set.h>
 
 #define GTR_STOCK_FUZZY_NEXT "gtranslator-fuzzy-next"
 #define GTR_STOCK_FUZZY_PREV "gtranslator-fuzzy-prev"
@@ -112,6 +115,8 @@ struct _GtrWindowPrivate
 
   GtrProfileManager *prof_manager;
   GtkWidget *profile_combo;
+
+  PeasExtensionSet *extensions;
 
   guint destroy_has_run : 1;
   guint dispose_has_run : 1;
@@ -658,6 +663,8 @@ set_sensitive_according_to_tab (GtrWindow * window, GtrTab * tab)
   gtk_action_set_sensitive (action, current_page < pages - 1);
 
   _gtr_window_set_sensitive_according_to_message (window, po);
+
+  peas_extension_set_call (window->priv->extensions, "update_state", window);
 }
 
 static void
@@ -1056,8 +1063,7 @@ notebook_switch_page (GtkNotebook * nb,
   if (action != NULL)
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
 
-  gtr_plugins_engine_update_plugins_ui
-    (gtr_plugins_engine_get_default (), window, FALSE);
+  peas_extension_set_call (window->priv->extensions, "update_state", window);
 }
 
 static void
@@ -1078,6 +1084,8 @@ notebook_page_removed (GtkNotebook * notebook,
     gtk_widget_hide (window->priv->profile_combo);
 
   update_documents_list_menu (window);
+
+  peas_engine_garbage_collect (PEAS_ENGINE (gtr_plugins_engine_get_default ()));
 }
 
 static void
@@ -1088,8 +1096,7 @@ notebook_tab_close_request (GtrNotebook * notebook,
    * seems to be ok, but we need to keep an eye on this. */
   gtr_close_tab (tab, window);
 
-  gtr_plugins_engine_update_plugins_ui
-    (gtr_plugins_engine_get_default (), window, FALSE);
+  peas_extension_set_call (window->priv->extensions, "update_state", window);
 }
 
 static void
@@ -1210,8 +1217,7 @@ notebook_tab_added (GtkNotebook * notebook,
 
   update_documents_list_menu (window);
 
-  gtr_plugins_engine_update_plugins_ui (gtr_plugins_engine_get_default (),
-                                        window, FALSE);
+  peas_extension_set_call (window->priv->extensions, "update_state", window);
 }
 
 void
@@ -1769,6 +1775,30 @@ gtr_window_draw (GtrWindow * window)
 }
 
 static void
+extension_added (PeasExtensionSet *extensions,
+                 PeasPluginInfo   *info,
+                 PeasExtension    *exten,
+                 GtrWindow        *window)
+{
+  peas_extension_call (exten, "activate");
+}
+
+static void
+extension_removed (PeasExtensionSet *extensions,
+                   PeasPluginInfo   *info,
+                   PeasExtension    *exten,
+                   GtrWindow        *window)
+{
+  peas_extension_call (exten, "deactivate");
+
+  /* Ensure update of ui manager, because we suspect it does something
+   * with expected static strings in the type module (when unloaded the
+   * strings don't exist anymore, and ui manager updates in an idle
+   * func) */
+  gtk_ui_manager_ensure_update (window->priv->ui_manager);
+}
+
+static void
 gtr_window_init (GtrWindow * window)
 {
   GtkTargetList *tl;
@@ -1832,10 +1862,6 @@ gtr_window_init (GtrWindow * window)
   window->priv->view_menu =
     gtk_menu_item_get_submenu (GTK_MENU_ITEM (view_menu));
 
-  /* Plugins */
-  gtr_plugins_engine_update_plugins_ui
-    (gtr_plugins_engine_get_default (), window, TRUE);
-
   /* Adding notebook to dock */
   add_widget_full (window,
                    window->priv->notebook,
@@ -1849,6 +1875,21 @@ gtr_window_init (GtrWindow * window)
 
   gtr_window_layout_load (window, filename, NULL);
   g_free (filename);
+
+  /* Plugins */
+  window->priv->extensions = peas_extension_set_new (PEAS_ENGINE (gtr_plugins_engine_get_default ()),
+                                                     GTR_TYPE_WINDOW_ACTIVATABLE,
+                                                     "window", window,
+                                                     NULL);
+  g_signal_connect (window->priv->extensions,
+                    "extension-added",
+                    G_CALLBACK (extension_added),
+                    window);
+  g_signal_connect (window->priv->extensions,
+                    "extension-removed",
+                    G_CALLBACK (extension_removed),
+                    window);
+  peas_extension_set_call (window->priv->extensions, "activate");
 }
 
 static void
@@ -1877,9 +1918,23 @@ gtr_window_dispose (GObject * object)
 
   DEBUG_PRINT ("window dispose");
 
+  /* First of all, force collection so that plugins
+   * really drop some of the references.
+   */
+  peas_engine_garbage_collect (PEAS_ENGINE (gtr_plugins_engine_get_default ()));
+
   if (!priv->dispose_has_run)
     {
       save_panes_state (window);
+
+      peas_extension_set_call (priv->extensions,
+                               "deactivate",
+                               window);
+
+      g_object_unref (priv->extensions);
+
+      peas_engine_garbage_collect (PEAS_ENGINE (gtr_plugins_engine_get_default ()));
+
       priv->dispose_has_run = TRUE;
     }
 
@@ -1921,7 +1976,7 @@ gtr_window_dispose (GObject * object)
   /* Now that there have broken some reference loops,
    * force collection again.
    */
-  gtr_plugins_engine_garbage_collect (gtr_plugins_engine_get_default ());
+  peas_engine_garbage_collect (PEAS_ENGINE (gtr_plugins_engine_get_default ()));
 
   G_OBJECT_CLASS (gtr_window_parent_class)->dispose (object);
 }

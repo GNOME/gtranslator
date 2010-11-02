@@ -1,8 +1,9 @@
 /*
- * plugins-engine.h
+ * gtr-plugins-engine.h
  * This file is part of gtr
  *
  * Copyright (C) 2002-2005 - Paolo Maggi 
+ * Copyright (C) 2010 - Steve Frécinaux
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,16 +26,14 @@
  * list of people on the gtr Team.  
  * See the ChangeLog files for a list of changes. 
  *
- * $Id: plugins-engine.h 6264 2008-05-05 11:00:38Z sfre $
+ * $Id$
  */
 
 #ifndef __GTR_PLUGINS_ENGINE_H__
 #define __GTR_PLUGINS_ENGINE_H__
 
 #include <glib.h>
-#include "gtr-window.h"
-#include "gtr-plugin-info.h"
-#include "gtr-plugin.h"
+#include <libpeas/peas-engine.h>
 
 G_BEGIN_DECLS
 #define GTR_TYPE_PLUGINS_ENGINE              (gtr_plugins_engine_get_type ())
@@ -48,7 +47,7 @@ typedef struct _GtrPluginsEnginePrivate GtrPluginsEnginePrivate;
 
 struct _GtrPluginsEngine
 {
-  GObject parent;
+  PeasEngine parent;
   GtrPluginsEnginePrivate *priv;
 };
 
@@ -56,50 +55,13 @@ typedef struct _GtrPluginsEngineClass GtrPluginsEngineClass;
 
 struct _GtrPluginsEngineClass
 {
-  GObjectClass parent_class;
-
-  void (*activate_plugin) (GtrPluginsEngine * engine, GtrPluginInfo * info);
-
-  void (*deactivate_plugin) (GtrPluginsEngine * engine, GtrPluginInfo * info);
+  PeasEngineClass parent_class;
 };
 
-GType
-gtr_plugins_engine_get_type (void)
-  G_GNUC_CONST;
+GType gtr_plugins_engine_get_type (void) G_GNUC_CONST;
 
-     GtrPluginsEngine *gtr_plugins_engine_get_default (void);
-
-     void gtr_plugins_engine_garbage_collect (GtrPluginsEngine * engine);
-
-     const GList
-       * gtr_plugins_engine_get_plugin_list (GtrPluginsEngine * engine);
-
-GtrPluginInfo
-  * gtr_plugins_engine_get_plugin_info (GtrPluginsEngine *
-                                        engine, const gchar * name);
-
-gboolean
-gtr_plugins_engine_activate_plugin (GtrPluginsEngine *
-                                    engine, GtrPluginInfo * info);
-gboolean
-gtr_plugins_engine_deactivate_plugin (GtrPluginsEngine
-                                      * engine, GtrPluginInfo * info);
-
-     void
-       gtr_plugins_engine_configure_plugin (GtrPluginsEngine *
-                                            engine,
-                                            GtrPluginInfo *
-                                            info, GtkWindow * parent);
-
-/* 
- * new_window == TRUE if this function is called because a new top window
- * has been created
- */
-     void
-       gtr_plugins_engine_update_plugins_ui (GtrPluginsEngine
-                                             * engine,
-                                             GtrWindow *
-                                             window, gboolean new_window);
+GtrPluginsEngine *gtr_plugins_engine_get_default (void);
 
 G_END_DECLS
 #endif /* __GTR_PLUGINS_ENGINE_H__ */
+/* ex:ts=8:noet: */
