@@ -111,12 +111,6 @@ GtrHeader * gtr_window_get_header_from_active_tab (GtrWindow * window);
                                gboolean original, gboolean translated);
 
      void
-     set_sensitive_according_to_message (GtrWindow * window, GtrPo * po);
-
-     void
-     set_sensitive_according_to_window (GtrWindow * window);
-
-     void
      gtr_window_add_widget (GtrWindow * window,
                             GtkWidget * widget,
                             const gchar * name,
@@ -145,6 +139,11 @@ GtrHeader * gtr_window_get_header_from_active_tab (GtrWindow * window);
      void
      _gtr_recent_add (GtrWindow * window,
                       GFile * location, gchar * project_id);
+
+/* FIXME: this is wrong. we should have some signal in the po and set this and
+          have this as private api */
+void       _gtr_window_set_sensitive_according_to_message      (GtrWindow * window,
+                                                                GtrPo * po);
 
 G_END_DECLS
 #endif /* __WINDOW_H__ */

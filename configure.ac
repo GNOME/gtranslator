@@ -239,6 +239,16 @@ MY_DATE=`date +%Y-%m-%d`
 
 AC_SUBST(MY_DATE)
 
+# Introspection
+GOBJECT_INTROSPECTION_CHECK([0.9.3])
+
+if test "$found_introspection" = "yes"; then
+	enable_introspection=yes
+	AC_DEFINE([ENABLE_INTROSPECTION], [1], [Define to enable GObject Introspection])
+else
+	enable_introspection=no
+fi
+
 dnl -------------------------------------------------------------------
 dnl Put out the configured files.
 dnl -------------------------------------------------------------------
@@ -293,6 +303,7 @@ gtranslator version	  :	${PACKAGE_VERSION}
 debug friendly build	  :	${enable_debug:-no}
 compilation flags	  :	${CFLAGS}
 compilation warnings	  :	${WARN_CFLAGS}
+GObject Introspection	  :	$enable_introspection
 ------------------------------------------------------------------
 "
 

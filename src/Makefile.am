@@ -33,9 +33,6 @@ INCLUDES = \
 
 bin_PROGRAMS = \
 	gtranslator
-#	gtranslator-auto-translate \
-#	gtranslator-auto-learn \
-#	gtranslator-export-learn-buffer
 
 gtranslator_SOURCES = main.c
 
@@ -68,7 +65,6 @@ INST_H_FILES = \
 	gtr-context.h \
 	gtr-debug.h \
 	gtr-header.h \
-	gtr-io-error-info-bar.h \
 	gtr-message-table.h \
 	gtr-msg.h \
 	gtr-notebook.h \
@@ -76,55 +72,62 @@ INST_H_FILES = \
 	gtr-profile.h \
 	gtr-statusbar.h \
 	gtr-tab.h \
-	gtr-utils.h \
 	gtr-view.h \
 	gtr-window.h
+
+NOINST_H_FILES = \
+	gtr-actions.h \
+	gtr-close-button.h \
+	gtr-dirs.h \
+	gtr-history-entry.h \
+	gtr-io-error-info-bar.h \
+	gtr-message-table-model.h \
+	gtr-profile-manager.h \
+	gtr-settings.h \
+	gtr-status-combo-box.h \
+	gtr-tab-label.h \
+	gtr-utils.h
 
 headerdir = $(prefix)/include/gtranslator-@GTR_API_VERSION@/gtranslator
 
 header_DATA = \
 	$(INST_H_FILES)
 
-libgtranslator_la_SOURCES = \
-	$(BUILT_SOURCES) \
-	gtr-application.c \
-	gtr-dirs.h \
-	gtr-dirs.c \
-	gtr-message-table.c \
-	gtr-message-table-model.c \
-	gtr-message-table-model.h \
-	gtr-notebook.c \
-	gtr-tab.c \
-	gtr-tab-label.h \
-	gtr-tab-label.c \
-	gtr-close-button.h \
-	gtr-close-button.c \
-	gtr-view.c \
-	gtr-window.c \
-	gtr-po.c \
-	gtr-profile.c \
-	gtr-utils.c \
-	gtr-msg.c \
-	gtr-actions.h \
+libgtranslator_c_files = \
 	gtr-actions-documents.c \
+	gtr-actions-edit.c \
 	gtr-actions-file.c \
 	gtr-actions-go.c \
-	gtr-actions-edit.c \
-	gtr-actions-view.c \
 	gtr-actions-help.c \
-	gtr-io-error-info-bar.c \
-	gtr-history-entry.c \
-	gtr-history-entry.h \
 	gtr-actions-search.c \
-	gtr-header.c \
-	gtr-statusbar.c \
+	gtr-actions-view.c \
+	gtr-application.c \
+	gtr-close-button.c \
 	gtr-context.c \
-	gtr-profile-manager.h \
+	gtr-dirs.c \
+	gtr-header.c \
+	gtr-history-entry.c \
+	gtr-io-error-info-bar.c \
+	gtr-message-table.c \
+	gtr-message-table-model.c \
+	gtr-msg.c \
+	gtr-notebook.c \
+	gtr-po.c \
+	gtr-profile.c \
 	gtr-profile-manager.c \
-	gtr-settings.h \
 	gtr-settings.c \
-	gtr-status-combo-box.h \
+	gtr-statusbar.c \
 	gtr-status-combo-box.c \
+	gtr-tab.c \
+	gtr-tab-label.c \
+	gtr-utils.c \
+	gtr-view.c \
+	gtr-window.c
+
+libgtranslator_la_SOURCES = \
+	$(BUILT_SOURCES) \
+	$(libgtranslator_c_files) \
+	$(NOINST_H_FILES) \
 	$(INST_H_FILES)
 
 libgtranslator_la_LIBADD = \
@@ -152,5 +155,28 @@ EXTRA_DIST =	\
 	gtr-enum-types.c.template
 
 CLEANFILES = $(BUILT_SOURCES)
+
+if HAVE_INTROSPECTION
+-include $(INTROSPECTION_MAKEFILE)
+INTROSPECTION_GIRS = Gtranslator-2.0.gir
+
+Gtranslator-2.0.gir: gtranslator
+INTROSPECTION_SCANNER_ARGS = -I$(top_srcdir) --warn-all
+Gtranslator_2_0_gir_NAMESPACE = Gtr
+Gtranslator_2_0_gir_VERSION = 2.0
+Gtranslator_2_0_gir_PROGRAM = $(builddir)/src
+Gtranslator_2_0_gir_FILES = $(INST_H_FILES) $(libgtranslator_c_files)
+Gtranslator_2_0_gir_INCLUDES = Gtk-3.0 GtkSource-3.0
+
+girdir = $(datadir)/gtranslator/gir-1.0
+gir_DATA = $(INTROSPECTION_GIRS)
+
+typelibdir = $(libdir)/gtranslator/girepository-1.0
+typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
+
+CLEANFILES +=			\
+	$(gir_DATA)	\
+	$(typelib_DATA)
+endif
 
 -include $(top_srcdir)/git.mk

@@ -545,7 +545,8 @@ remove_widget (GtrWindow * window, GtkWidget * widget, GError ** error)
 }
 
 void
-set_sensitive_according_to_message (GtrWindow * window, GtrPo * po)
+_gtr_window_set_sensitive_according_to_message (GtrWindow * window,
+                                                GtrPo * po)
 {
   GList *current;
   GtkAction *action;
@@ -657,10 +658,10 @@ set_sensitive_according_to_tab (GtrWindow * window, GtrTab * tab)
                                         "DocumentsNextDocument");
   gtk_action_set_sensitive (action, current_page < pages - 1);
 
-  set_sensitive_according_to_message (window, po);
+  _gtr_window_set_sensitive_according_to_message (window, po);
 }
 
-void
+static void
 set_sensitive_according_to_window (GtrWindow * window)
 {
   gint pages;
@@ -1153,7 +1154,7 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrWindow * window)
 
   gtr_window_update_statusbar_message_count (tab, msg, window);
 
-  set_sensitive_according_to_message (window, gtr_tab_get_po (tab));
+  _gtr_window_set_sensitive_according_to_message (window, gtr_tab_get_po (tab));
 }
 
 static void
