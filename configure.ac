@@ -79,11 +79,11 @@ dnl
 dnl ==========================================================================
 
 GTHREAD_REQUIRED=2.13.0
-GTK_REQUIRED=2.21.5
+GTK_REQUIRED=2.91.3
 GLIB_REQUIRED=2.25.10
 LIBXML_REQUIRED=2.4.12
-SOURCEVIEW_REQUIRED=2.4.0
-GDL_REQUIRED=2.26.0
+SOURCEVIEW_REQUIRED=2.90.0
+GDL_REQUIRED=2.91.1
 GDICT_OPTIONAL=0.11.0
 GTKSPELL_OPTIONAL=2.0.2
 JSON_GLIB_OPTIONAL=0.7.6
@@ -101,12 +101,12 @@ PKG_CHECK_MODULES(GTRANSLATOR, [
 	gthread-2.0 >= $GTHREAD_REQUIRED
 	glib-2.0 >= $GLIB_REQUIRED
 	gio-2.0 >= $GLIB_REQUIRED
-	gtk+-2.0 >= $GTK_REQUIRED
-	gtksourceview-2.0 >= $SOURCEVIEW_REQUIRED
-	gdl-1.0 >= $GDL_REQUIRED
+	gtk+-3.0 >= $GTK_REQUIRED
+	gtksourceview-3.0 >= $SOURCEVIEW_REQUIRED
+	gdl-3.0 >= $GDL_REQUIRED
 	gsettings-desktop-schemas
-	unique-1.0
-	libgda-4.0
+	unique-3.0 >= 2.90.1
+	libgda-4.0 >= 4.2.0
 ])
 
 AC_SUBST(GTRANSLATOR_CFLAGS)
