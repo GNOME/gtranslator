@@ -252,9 +252,9 @@ key_press_event (GtkWidget           *widget,
 		 GdkEventKey         *event,
 		 GtrStatusComboBox *combo)
 {
-	if (event->keyval == GDK_Return || event->keyval == GDK_ISO_Enter ||
-	    event->keyval == GDK_KP_Enter || event->keyval == GDK_space ||
-	    event->keyval == GDK_KP_Space)
+	if (event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_ISO_Enter ||
+	    event->keyval == GDK_KEY_KP_Enter || event->keyval == GDK_KEY_space ||
+	    event->keyval == GDK_KEY_KP_Space)
 	{
 		show_menu (combo, 0, event->time);
 		return TRUE;

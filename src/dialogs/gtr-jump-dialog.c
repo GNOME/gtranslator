@@ -92,7 +92,6 @@ gtr_jump_dialog_init (GtrJumpDialog * dlg)
   gtk_window_set_title (GTK_WINDOW (dlg), _("Go to Message"));
   gtk_window_set_default_size (GTK_WINDOW (dlg), 300, 100);
   gtk_window_set_resizable (GTK_WINDOW (dlg), TRUE);
-  gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
   action_area = gtk_dialog_get_action_area (GTK_DIALOG (dlg));

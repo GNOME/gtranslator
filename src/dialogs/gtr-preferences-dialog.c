@@ -615,11 +615,11 @@ setup_profile_pages (GtrPreferencesDialog *dlg)
 
 /***************Interface pages****************/
 static void
-scheme_color_changed_cb (GtkComboBox * combobox, GtrPreferencesDialog * dlg)
+scheme_color_changed_cb (GtkComboBoxText * combobox, GtrPreferencesDialog * dlg)
 {
   gchar *active_text;
 
-  active_text = gtk_combo_box_get_active_text (combobox);
+  active_text = gtk_combo_box_text_get_active_text (combobox);
 
   g_settings_set_string (dlg->priv->ui_settings,
                          GTR_SETTINGS_COLOR_SCHEME,
@@ -676,9 +676,8 @@ setup_interface_pages (GtrPreferencesDialog * dlg)
                                          GTR_SETTINGS_COLOR_SCHEME);
   while (scheme_ids[i] != NULL)
     {
-      gtk_combo_box_append_text (GTK_COMBO_BOX
-                                 (dlg->priv->scheme_color_combobox),
-                                 scheme_ids[i]);
+      gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (dlg->priv->scheme_color_combobox),
+                                      scheme_ids[i]);
       if (g_strcmp0 (scheme_ids[i], scheme_active) == 0)
         gtk_combo_box_set_active (GTK_COMBO_BOX
                                   (dlg->priv->scheme_color_combobox), i);
@@ -987,7 +986,6 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
 
   gtk_window_set_title (GTK_WINDOW (dlg), _("Gtranslator Preferences"));
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
-  gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
   action_area = gtk_dialog_get_action_area (GTK_DIALOG (dlg));

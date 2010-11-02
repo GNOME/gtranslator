@@ -65,12 +65,6 @@ gtr_utils_get_ui_objects (const gchar * filename,
      gboolean g_utf8_caselessnmatch (const gchar * s1,
                                      const gchar * s2, gssize n1, gssize n2);
 
-     void gtr_utils_activate_url (GtkAboutDialog * dialog,
-                                  const gchar * url, gpointer data);
-
-     void gtr_utils_activate_email (GtkAboutDialog * dialog,
-                                    const gchar * email, gpointer data);
-
      void gtr_utils_help_display (GtkWindow * parent,
                                   const gchar * doc_id,
                                   const gchar * file_name);

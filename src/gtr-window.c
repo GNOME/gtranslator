@@ -1347,7 +1347,6 @@ gtr_window_cmd_edit_toolbar (GtkAction * action, GtrWindow * window)
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE);
   gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog)), 5);
   gtk_box_set_spacing (GTK_BOX (content_area), 2);
-  gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
   gtk_window_set_default_size (GTK_WINDOW (dialog), 500, 400);
 
   editor = egg_toolbar_editor_new (window->priv->ui_manager,
@@ -1916,6 +1915,12 @@ gtr_window_dispose (GObject * object)
       priv->prof_manager = NULL;
     }
 
+  if (priv->layout_manager)
+    {
+      g_object_unref (priv->layout_manager);
+      priv->layout_manager = NULL;
+    }
+
   /* Now that there have broken some reference loops,
    * force collection again.
    */
@@ -1931,31 +1936,25 @@ gtr_window_finalize (GObject * object)
 }
 
 static void
-gtr_window_destroy (GtkObject * object)
+gtr_window_destroy (GtkWidget * widget)
 {
-  GtrWindow *window;
+  GtrWindowPrivate *priv;
 
-  window = GTR_WINDOW (object);
+  priv = GTR_WINDOW (widget)->priv;
 
   DEBUG_PRINT ("Destroy window");
 
-  if (!window->priv->destroy_has_run)
+  if (!priv->destroy_has_run)
     {
-      if (window->priv->widgets)
+      if (priv->widgets)
         {
-          g_hash_table_destroy (window->priv->widgets);
-          window->priv->widgets = NULL;
+          g_hash_table_destroy (priv->widgets);
+          priv->widgets = NULL;
         }
-
-      if (window->priv->layout_manager)
-        {
-          g_object_unref (window->priv->layout_manager);
-          window->priv->layout_manager = NULL;
-        }
-      window->priv->destroy_has_run = TRUE;
+      priv->destroy_has_run = TRUE;
     }
 
-  GTK_OBJECT_CLASS (gtr_window_parent_class)->destroy (object);
+  GTK_WIDGET_CLASS (gtr_window_parent_class)->destroy (widget);
 }
 
 
@@ -2009,7 +2008,6 @@ static void
 gtr_window_class_init (GtrWindowClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkObjectClass *gobject_class = GTK_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrWindowPrivate));
@@ -2017,10 +2015,9 @@ gtr_window_class_init (GtrWindowClass * klass)
   object_class->finalize = gtr_window_finalize;
   object_class->dispose = gtr_window_dispose;
 
-  gobject_class->destroy = gtr_window_destroy;
-
   widget_class->configure_event = gtr_window_configure_event;
   widget_class->key_press_event = gtr_window_key_press_event;
+  widget_class->destroy = gtr_window_destroy;
 }
 
 /***************************** Public funcs ***********************************/

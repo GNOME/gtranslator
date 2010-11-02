@@ -285,9 +285,6 @@ main (gint argc, gchar * argv[])
   /* Init plugin engine */
   engine = gtr_plugins_engine_get_default ();
 
-  gtk_about_dialog_set_url_hook (gtr_utils_activate_url, NULL, NULL);
-  gtk_about_dialog_set_email_hook (gtr_utils_activate_email, NULL, NULL);
-
   /* Create the main app-window. */
   window = gtr_application_create_window (app);
 

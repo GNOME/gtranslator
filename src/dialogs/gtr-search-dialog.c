@@ -166,9 +166,9 @@ gtr_search_dialog_class_init (GtrSearchDialogClass * klass)
   /* Note: we cannot use the keyval/modifier associated with the 
    * GTK_STOCK_FIND_AND_REPLACE stock item since GNOME HIG suggests Ctrl+h
    * for Replace while gtk+ uses Ctrl+r */
-  gtk_binding_entry_add_signal (binding_set, GDK_h, GDK_CONTROL_MASK,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY_h, GDK_CONTROL_MASK,
                                 "show_replace", 0);
-  gtk_binding_entry_add_signal (binding_set, GDK_H, GDK_CONTROL_MASK,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY_H, GDK_CONTROL_MASK,
                                 "show_replace", 0);
 }
 
@@ -371,7 +371,6 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
   dlg->priv = GTR_SEARCH_DIALOG_GET_PRIVATE (dlg);
 
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
-  gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
