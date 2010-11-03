@@ -39,7 +39,6 @@
 #include <gtk/gtk.h>
 
 #include <gtksourceview/gtksourcelanguagemanager.h>
-#include <gtksourceview/gtksourceiter.h>
 #include <gtksourceview/gtksourcebuffer.h>
 #include <gtksourceview/gtksourcestyleschememanager.h>
 
@@ -550,7 +549,7 @@ gtr_view_search_forward (GtrView * view,
 {
   GtkSourceBuffer *doc;
   GtkTextIter iter;
-  GtkSourceSearchFlags search_flags;
+  GtkTextSearchFlags search_flags;
   gboolean found = FALSE;
   GtkTextIter m_start;
   GtkTextIter m_end;
@@ -579,19 +578,19 @@ gtr_view_search_forward (GtrView * view,
   else
     iter = *start;
 
-  search_flags = GTK_SOURCE_SEARCH_VISIBLE_ONLY | GTK_SOURCE_SEARCH_TEXT_ONLY;
+  search_flags = GTK_TEXT_SEARCH_VISIBLE_ONLY | GTK_TEXT_SEARCH_TEXT_ONLY;
 
   if (!GTR_SEARCH_IS_CASE_SENSITIVE (view->priv->search_flags))
     {
-      search_flags = search_flags | GTK_SOURCE_SEARCH_CASE_INSENSITIVE;
+      search_flags = search_flags | GTK_TEXT_SEARCH_CASE_INSENSITIVE;
     }
 
   while (!found)
     {
-      found = gtk_source_iter_forward_search (&iter,
-                                              view->priv->search_text,
-                                              search_flags,
-                                              &m_start, &m_end, end);
+      found = gtk_text_iter_forward_search (&iter,
+                                            view->priv->search_text,
+                                            search_flags,
+                                            &m_start, &m_end, end);
 
       if (found && GTR_SEARCH_IS_ENTIRE_WORD (view->priv->search_flags))
         {
@@ -638,7 +637,7 @@ gtr_view_search_backward (GtrView * view,
 {
   GtkSourceBuffer *doc;
   GtkTextIter iter;
-  GtkSourceSearchFlags search_flags;
+  GtkTextSearchFlags search_flags;
   gboolean found = FALSE;
   GtkTextIter m_start;
   GtkTextIter m_end;
@@ -667,19 +666,19 @@ gtr_view_search_backward (GtrView * view,
   else
     iter = *end;
 
-  search_flags = GTK_SOURCE_SEARCH_VISIBLE_ONLY | GTK_SOURCE_SEARCH_TEXT_ONLY;
+  search_flags = GTK_TEXT_SEARCH_VISIBLE_ONLY | GTK_TEXT_SEARCH_TEXT_ONLY;
 
   if (!GTR_SEARCH_IS_CASE_SENSITIVE (view->priv->search_flags))
     {
-      search_flags = search_flags | GTK_SOURCE_SEARCH_CASE_INSENSITIVE;
+      search_flags = search_flags | GTK_TEXT_SEARCH_CASE_INSENSITIVE;
     }
 
   while (!found)
     {
-      found = gtk_source_iter_backward_search (&iter,
-                                               view->priv->search_text,
-                                               search_flags,
-                                               &m_start, &m_end, start);
+      found = gtk_text_iter_backward_search (&iter,
+                                             view->priv->search_text,
+                                             search_flags,
+                                             &m_start, &m_end, start);
 
       if (found && GTR_SEARCH_IS_ENTIRE_WORD (view->priv->search_flags))
         {
@@ -721,7 +720,7 @@ gtr_view_replace_all (GtrView * view,
   GtkTextIter iter;
   GtkTextIter m_start;
   GtkTextIter m_end;
-  GtkSourceSearchFlags search_flags = 0;
+  GtkTextSearchFlags search_flags = 0;
   gboolean found = TRUE;
   gint cont = 0;
   gchar *search_text;
@@ -746,11 +745,11 @@ gtr_view_replace_all (GtrView * view,
 
   gtk_text_buffer_get_start_iter (buffer, &iter);
 
-  search_flags = GTK_SOURCE_SEARCH_VISIBLE_ONLY | GTK_SOURCE_SEARCH_TEXT_ONLY;
+  search_flags = GTK_TEXT_SEARCH_VISIBLE_ONLY | GTK_TEXT_SEARCH_TEXT_ONLY;
 
   if (!GTR_SEARCH_IS_CASE_SENSITIVE (flags))
     {
-      search_flags = search_flags | GTK_SOURCE_SEARCH_CASE_INSENSITIVE;
+      search_flags = search_flags | GTK_TEXT_SEARCH_CASE_INSENSITIVE;
     }
 
   replace_text_len = strlen (replace_text);
@@ -765,10 +764,10 @@ gtr_view_replace_all (GtrView * view,
 
   do
     {
-      found = gtk_source_iter_forward_search (&iter,
-                                              search_text,
-                                              search_flags,
-                                              &m_start, &m_end, NULL);
+      found = gtk_text_iter_forward_search (&iter,
+                                            search_text,
+                                            search_flags,
+                                            &m_start, &m_end, NULL);
 
       if (found && GTR_SEARCH_IS_ENTIRE_WORD (flags))
         {
