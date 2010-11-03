@@ -461,7 +461,7 @@ gtr_plugins_engine_activate_plugin_real (GtrPluginsEngine *
   if (res)
     {
       const GList *wins =
-        gtr_application_get_windows (gtr_application_get_default ());
+        gtk_application_get_windows (GTK_APPLICATION (GTR_APP));
       for (; wins != NULL; wins = wins->next)
         gtr_plugin_activate (info->plugin, GTR_WINDOW (wins->data));
 
@@ -501,7 +501,7 @@ gtr_plugins_engine_deactivate_plugin_real (GtrPluginsEngine *
   if (!info->active || !info->available)
     return;
 
-  wins = gtr_application_get_windows (gtr_application_get_default ());
+  wins = gtk_application_get_windows (GTK_APPLICATION (GTR_APP));
   for (; wins != NULL; wins = wins->next)
     gtr_plugin_deactivate (info->plugin, GTR_WINDOW (wins->data));
 

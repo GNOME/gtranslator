@@ -173,7 +173,7 @@ on_auto_save_changed (GSettings * settings,
 
   auto_save = g_settings_get_boolean (settings, key);
 
-  windows = gtr_application_get_windows (GTR_APP);
+  windows = gtk_application_get_windows (GTK_APPLICATION (GTR_APP));
 
   for (l = windows; l != NULL; l = g_list_next (l))
     {
@@ -199,7 +199,7 @@ on_auto_save_interval_changed (GSettings * settings,
 
   g_settings_get (settings, key, "u", &auto_save_interval);
 
-  windows = gtr_application_get_windows (GTR_APP);
+  windows = gtk_application_get_windows (GTK_APPLICATION (GTR_APP));
 
   for (l = windows; l != NULL; l = g_list_next (l))
     {
@@ -285,7 +285,7 @@ on_pane_switcher_style_changed (GSettings * settings, const gchar * key,
 
   style = g_settings_get_enum (settings, key);
 
-  windows = gtr_application_get_windows (GTR_APP);
+  windows = gtk_application_get_windows (GTK_APPLICATION (GTR_APP));
 
   for (l = windows; l != NULL; l = g_list_next (l))
     {

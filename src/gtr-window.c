@@ -1932,6 +1932,8 @@ gtr_window_dispose (GObject * object)
 static void
 gtr_window_finalize (GObject * object)
 {
+  DEBUG_PRINT ("Finalize window");
+
   G_OBJECT_CLASS (gtr_window_parent_class)->finalize (object);
 }
 

@@ -105,7 +105,6 @@ PKG_CHECK_MODULES(GTRANSLATOR, [
 	gtksourceview-3.0 >= $SOURCEVIEW_REQUIRED
 	gdl-3.0 >= $GDL_REQUIRED
 	gsettings-desktop-schemas
-	unique-3.0 >= 2.90.1
 	libgda-4.0 >= 4.2.0
 ])
 

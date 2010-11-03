@@ -26,7 +26,6 @@
 #include <glib.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
-#include <unique/uniqueapp.h>
 
 #include "gtr-window.h"
 
@@ -51,7 +50,7 @@ typedef struct _GtrApplication GtrApplication;
 
 struct _GtrApplication
 {
-  UniqueApp base_instance;
+  GtkApplication base_instance;
 
   /*< private > */
   GtrApplicationPrivate *priv;
@@ -64,7 +63,7 @@ typedef struct _GtrApplicationClass GtrApplicationClass;
 
 struct _GtrApplicationClass
 {
-  UniqueAppClass parent_class;
+  GtkApplicationClass parent_class;
 };
 
 /*
