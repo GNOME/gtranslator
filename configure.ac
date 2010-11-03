@@ -84,9 +84,9 @@ GLIB_REQUIRED=2.25.10
 LIBXML_REQUIRED=2.4.12
 SOURCEVIEW_REQUIRED=2.90.0
 GDL_REQUIRED=2.91.1
-GDICT_OPTIONAL=0.11.0
-GTKSPELL_OPTIONAL=2.0.2
-JSON_GLIB_OPTIONAL=0.7.6
+GDICT_OPTIONAL=100
+GTKSPELL_OPTIONAL=100
+JSON_GLIB_OPTIONAL=100
 
 AC_SUBST(GTK_REQUIRED)
 AC_SUBST(GLIB_REQUIRED)
@@ -171,7 +171,7 @@ dnl Check for json-glib, needed for Open-tran
 dnl -------------------------------------------------------------------
 if test "x$enable_opentran" != "xno"; then
 	PKG_CHECK_MODULES(JSON_GLIB,                            \
-		json-glib-1.0,
+		json-glib-1.0 >= JSON_GLIB_OPTIONAL,
 		have_json_glib=yes,
 		have_json_glib=no)
 	if test x"$have_json_glib" = "xyes"; then
@@ -208,20 +208,15 @@ AM_CONDITIONAL(USE_DICTIONARY, test x"$have_gdict" = "xyes")
 # gucharmap
 # ================================================================
 have_gucharmap=no
-GUCHARMAP2_OPTIONAL=2.23.0
-GUCHARMAP_OPTIONAL=1.6.0
+GUCHARMAP2_OPTIONAL=100
 PKG_CHECK_MODULES([GUCHARMAP],[gucharmap-2 >= $GUCHARMAP2_OPTIONAL],
-                  [have_gucharmap=yes have_gucharmap_2=yes],[have_gucharmap_2=no])
-if test "$have_gucharmap_2" = "no"; then
-	PKG_CHECK_MODULES([GUCHARMAP], [gucharmap >= $GUCHARMAP_OPTIONAL],
-        		[have_gucharmap=yes],[have_gucharmap=no])
-fi
+                  [have_gucharmap_2=yes],[have_gucharmap_2=no])
 
 if test "$have_gucharmap_2" = "yes"; then
 	AC_DEFINE([HAVE_GUCHARMAP_2],[1],[Define if gucharmap API is version 2])
 fi
 
-AM_CONDITIONAL(USE_CHARMAP, test x"$have_gucharmap" = "xyes")
+AM_CONDITIONAL(USE_CHARMAP, test x"$have_gucharmap2" = "xyes")
 
 dnl -------------------------------------------------------------------
 dnl Enable debug builds.
