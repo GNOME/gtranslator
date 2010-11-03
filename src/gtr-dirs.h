@@ -21,34 +21,38 @@
  */
 
 
-#ifndef __GEDIT_DIRS_H__
-#define __GEDIT_DIRS_H__
+#ifndef __GTR_DIRS_H__
+#define __GTR_DIRS_H__
 
 #include <glib.h>
 
 G_BEGIN_DECLS
+/* This function must be called before starting gtranslator */
+void gtr_dirs_init (void);
+/* This function must be called before exiting gtranslator */
+void gtr_dirs_shutdown (void);
 
-gchar *gtr_dirs_get_user_config_dir (void);
 
-gchar *gtr_dirs_get_user_cache_dir (void);
+const gchar *gtr_dirs_get_user_config_dir (void);
 
-gchar *gtr_dirs_get_user_plugins_dir (void);
+const gchar *gtr_dirs_get_user_cache_dir (void);
 
-gchar *gtr_dirs_get_user_accels_file (void);
+const gchar *gtr_dirs_get_user_plugins_dir (void);
 
-gchar *gtr_dirs_get_gtr_data_dir (void);
+const gchar *gtr_dirs_get_gtr_data_dir (void);
 
-gchar *gtr_dirs_get_gtr_locale_dir (void);
+const gchar *gtr_dirs_get_gtr_locale_dir (void);
 
-gchar *gtr_dirs_get_gtr_lib_dir (void);
+const gchar *gtr_dirs_get_gtr_lib_dir (void);
 
-gchar *gtr_dirs_get_gtr_plugins_dir (void);
+const gchar *gtr_dirs_get_gtr_plugins_dir (void);
 
-gchar *gtr_dirs_get_gtr_plugin_loaders_dir (void);
+const gchar *gtr_dirs_get_gtr_plugins_data_dir (void);
+
+const gchar *gtr_dirs_get_gtr_pixmaps_dir (void);
 
 gchar *gtr_dirs_get_ui_file (const gchar * file);
 
-gchar *gtr_dirs_get_pixmaps_dir (void);
-
 G_END_DECLS
-#endif /* __GEDIT_DIRS_H__ */
+#endif /* __GTR_DIRS_H__ */
+/* ex:ts=8:noet: */
