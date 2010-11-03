@@ -755,7 +755,7 @@ gtr_gda_init (GtrGda * self)
   gda_init ();
 
   {
-    gchar *config_dir;
+    const gchar *config_dir;
     gchar *encoded_config_dir;
 
     config_dir = gtr_dirs_get_user_config_dir ();
@@ -766,7 +766,6 @@ gtr_gda_init (GtrGda * self)
                                          encoded_config_dir);
 
     g_free (encoded_config_dir);
-    g_free (config_dir);
   }
 
   self->priv->db = gda_connection_open_from_string ("Sqlite",

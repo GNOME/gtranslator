@@ -359,12 +359,11 @@ gtr_window_layout_load (GtrWindow * window,
       !gdl_dock_layout_load_from_file (window->priv->layout_manager,
                                        layout_filename))
     {
+      const gchar *datadir;
       gchar *path;
-      gchar *datadir;
 
       datadir = gtr_dirs_get_gtr_data_dir ();
       path = g_build_filename (datadir, "layout.xml", NULL);
-      g_free (datadir);
 
       //DEBUG_PRINT ("Layout = %s", path);
       if (!gdl_dock_layout_load_from_file (window->priv->layout_manager,
@@ -1629,7 +1628,7 @@ gtr_window_draw (GtrWindow * window)
   GError *error = NULL;
   GtkWidget *dockbar;
   GtkActionGroup *action_group;
-  gchar *datadir;
+  const gchar *datadir;
   gchar *path;
 
   GtrWindowPrivate *priv = window->priv;
@@ -1675,7 +1674,6 @@ gtr_window_draw (GtrWindow * window)
 
   datadir = gtr_dirs_get_gtr_data_dir ();
   path = g_build_filename (datadir, "gtranslator-ui.xml", NULL);
-  g_free (datadir);
 
   if (!gtk_ui_manager_add_ui_from_file (priv->ui_manager, path, &error))
     {
@@ -1775,8 +1773,8 @@ gtr_window_init (GtrWindow * window)
 {
   GtkTargetList *tl;
   GtkWidget *view_menu;
+  const gchar *config_folder;
   gchar *filename;
-  gchar *config_folder;
 
   window->priv = GTR_WINDOW_GET_PRIVATE (window);
 
@@ -1848,7 +1846,6 @@ gtr_window_init (GtrWindow * window)
   /* Loading dock layout */
   config_folder = gtr_dirs_get_user_config_dir ();
   filename = g_build_filename (config_folder, "gtr-layout.xml", NULL);
-  g_free (config_folder);
 
   gtr_window_layout_load (window, filename, NULL);
   g_free (filename);
@@ -1857,8 +1854,8 @@ gtr_window_init (GtrWindow * window)
 static void
 save_panes_state (GtrWindow * window)
 {
+  const gchar *config_folder;
   gchar *filename;
-  gchar *config_folder;
 
   g_settings_set (window->priv->state_settings, GTR_SETTINGS_WINDOW_SIZE, "(ii)",
                   window->priv->width, window->priv->height);
@@ -1867,7 +1864,6 @@ save_panes_state (GtrWindow * window)
 
   config_folder = gtr_dirs_get_user_config_dir ();
   filename = g_build_filename (config_folder, "gtr-layout.xml", NULL);
-  g_free (config_folder);
 
   gtr_window_layout_save (window, filename, NULL);
   g_free (filename);

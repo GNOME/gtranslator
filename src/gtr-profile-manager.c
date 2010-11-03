@@ -52,12 +52,11 @@ static guint signals[LAST_SIGNAL];
 static gchar *
 get_profile_filename ()
 {
-  gchar *user_dir;
+  const gchar *user_dir;
   gchar *file_name;
 
   user_dir = gtr_dirs_get_user_config_dir ();
   file_name = g_build_filename (user_dir, "profiles.xml", NULL);
-  g_free (user_dir);
 
   return file_name;
 }
@@ -314,7 +313,7 @@ save_profiles (GtrProfileManager *manager)
   file_name = get_profile_filename ();
   if (file_name != NULL)
     {
-      gchar *config_dir;
+      const gchar *config_dir;
       int res;
 
       /* make sure the config dir exists */
@@ -323,7 +322,6 @@ save_profiles (GtrProfileManager *manager)
       if (res != -1)
         xmlSaveFormatFile (file_name, doc, 1);
 
-      g_free (config_dir);
       g_free (file_name);
     }
 

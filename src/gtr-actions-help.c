@@ -99,12 +99,11 @@ gtr_about_dialog (GtkAction * action, GtrWindow * window)
   };
 
   GdkPixbuf *logo;
-  gchar *pixmaps_dir;
+  const gchar *pixmaps_dir;
   gchar *logo_file;
 
-  pixmaps_dir = gtr_dirs_get_pixmaps_dir ();
+  pixmaps_dir = gtr_dirs_get_gtr_pixmaps_dir ();
   logo_file = g_build_filename (pixmaps_dir, "gtranslator-logo.png", NULL);
-  g_free (pixmaps_dir);
   logo = gdk_pixbuf_new_from_file (logo_file, NULL);
   g_free (logo_file);
 

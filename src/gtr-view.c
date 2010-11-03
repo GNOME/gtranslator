@@ -101,7 +101,7 @@ gtr_view_init (GtrView * view)
   GPtrArray *dirs;
   gchar **langs;
   const gchar *const *temp;
-  gchar *datadir;
+  const gchar *datadir;
   GtrViewPrivate *priv;
 
   view->priv = GTR_VIEW_GET_PRIVATE (view);
@@ -119,7 +119,7 @@ gtr_view_init (GtrView * view)
     g_ptr_array_add (dirs, g_strdup (*temp));
 
   datadir = gtr_dirs_get_gtr_data_dir ();
-  g_ptr_array_add (dirs, datadir);
+  g_ptr_array_add (dirs, g_strdup (datadir));
   g_ptr_array_add (dirs, NULL);
   langs = (gchar **) g_ptr_array_free (dirs, FALSE);
 

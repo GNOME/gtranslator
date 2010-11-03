@@ -85,6 +85,8 @@ main (gint argc, gchar * argv[])
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
+  gtr_dirs_init ();
+
 #ifdef G_OS_WIN32
   setup_path ();
 #endif
@@ -94,6 +96,7 @@ main (gint argc, gchar * argv[])
   status = g_application_run (G_APPLICATION (app), argc, argv);
 
   g_object_unref (app);
+  gtr_dirs_shutdown ();
 
   return 0;
 }

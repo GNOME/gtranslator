@@ -90,7 +90,7 @@ static const GOptionEntry options[] = {
 static gboolean
 ensure_user_config_dir (void)
 {
-  gchar *config_dir;
+  const gchar *config_dir;
   gboolean ret = TRUE;
   gint res;
 
@@ -108,8 +108,6 @@ ensure_user_config_dir (void)
       ret = FALSE;
     }
 
-  g_free (config_dir);
-
   return ret;
 }
 
@@ -118,7 +116,9 @@ load_accels (void)
 {
   gchar *filename;
 
-  filename = gtr_dirs_get_user_accels_file ();
+  filename = g_build_filename (gtr_dirs_get_user_config_dir (),
+                               "accels",
+                               NULL);
   if (filename != NULL)
     {
       gtk_accel_map_load (filename);
@@ -131,7 +131,9 @@ save_accels (void)
 {
   gchar *filename;
 
-  filename = gtr_dirs_get_user_accels_file ();
+  filename = g_build_filename (gtr_dirs_get_user_config_dir (),
+                               "accels",
+                               NULL);
   if (filename != NULL)
     {
       gtk_accel_map_save (filename);
@@ -182,11 +184,11 @@ static void
 gtr_application_init (GtrApplication *application)
 {
   GtrApplicationPrivate *priv;
-  gchar *gtr_folder;
+  const gchar *gtr_folder;
+  const gchar *pixmaps_dir;
+  const gchar *data_dir;
   gchar *path_default_gtr_toolbar;
   gchar *profiles_file;
-  gchar *dir;
-  gchar *pixmaps_dir;
 
   application->priv = GTR_APPLICATION_GET_PRIVATE (application);
   priv = application->priv;
@@ -199,10 +201,9 @@ gtr_application_init (GtrApplication *application)
   gtk_window_set_default_icon_name ("gtranslator");
 
   /* We set the default icon dir */
-  pixmaps_dir = gtr_dirs_get_pixmaps_dir ();
+  pixmaps_dir = gtr_dirs_get_gtr_pixmaps_dir ();
   gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
                                      pixmaps_dir);
-  g_free (pixmaps_dir);
 
   /* Creating config folder */
   ensure_user_config_dir (); /* FIXME: is this really needed ? */
@@ -224,11 +225,8 @@ gtr_application_init (GtrApplication *application)
   priv->toolbars_file = g_build_filename (gtr_folder,
                                           "gtr-toolbar.xml", NULL);
 
-  g_free (gtr_folder);
-
-  dir = gtr_dirs_get_gtr_data_dir ();
-  path_default_gtr_toolbar = g_build_filename (dir, "gtr-toolbar.xml", NULL);
-  g_free (dir);
+  data_dir = gtr_dirs_get_gtr_data_dir ();
+  path_default_gtr_toolbar = g_build_filename (data_dir, "gtr-toolbar.xml", NULL);
 
   egg_toolbars_model_load_names (priv->toolbars_model,
                                  path_default_gtr_toolbar);
@@ -592,7 +590,7 @@ gtr_application_register_icon (GtrApplication *app,
 {
   GtkIconSet *icon_set;
   GtkIconSource *icon_source;
-  gchar *pixmaps_dir;
+  const gchar *pixmaps_dir;
   gchar *path;
   GdkPixbuf *pixbuf;
 
@@ -600,9 +598,8 @@ gtr_application_register_icon (GtrApplication *app,
   g_return_if_fail (icon != NULL && stock_id != NULL);
 
   icon_source = gtk_icon_source_new ();
-  pixmaps_dir = gtr_dirs_get_pixmaps_dir ();
+  pixmaps_dir = gtr_dirs_get_gtr_pixmaps_dir ();
   path = g_build_filename (pixmaps_dir, icon, NULL);
-  g_free (pixmaps_dir);
 
   pixbuf = gdk_pixbuf_new_from_file (path, NULL);
   if (pixbuf)
