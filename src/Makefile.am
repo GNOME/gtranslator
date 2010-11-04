@@ -165,8 +165,8 @@ if HAVE_INTROSPECTION
 INTROSPECTION_GIRS = Gtranslator-2.0.gir
 
 Gtranslator-2.0.gir: gtranslator
-INTROSPECTION_SCANNER_ARGS = -I$(top_srcdir) --warn-all
-Gtranslator_2_0_gir_NAMESPACE = Gtr
+INTROSPECTION_SCANNER_ARGS = -I$(top_srcdir) --warn-all --identifier-prefix=Gtr
+Gtranslator_2_0_gir_NAMESPACE = Gtranslator
 Gtranslator_2_0_gir_VERSION = 2.0
 Gtranslator_2_0_gir_PROGRAM = $(builddir)/gtranslator
 Gtranslator_2_0_gir_FILES = $(INST_H_FILES) $(libgtranslator_c_files)
