@@ -168,7 +168,7 @@ Gtranslator-2.0.gir: gtranslator
 INTROSPECTION_SCANNER_ARGS = -I$(top_srcdir) --warn-all
 Gtranslator_2_0_gir_NAMESPACE = Gtr
 Gtranslator_2_0_gir_VERSION = 2.0
-Gtranslator_2_0_gir_PROGRAM = $(builddir)/src
+Gtranslator_2_0_gir_PROGRAM = $(builddir)/gtranslator
 Gtranslator_2_0_gir_FILES = $(INST_H_FILES) $(libgtranslator_c_files)
 Gtranslator_2_0_gir_INCLUDES = Gtk-3.0 GtkSource-3.0
 

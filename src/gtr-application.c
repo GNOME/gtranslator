@@ -42,6 +42,10 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
+#ifdef ENABLE_INTROSPECTION
+#include <girepository.h>
+#endif
+
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
 #endif
@@ -363,6 +367,10 @@ gtr_application_command_line (GApplication            *application,
   context = g_option_context_new (_("- Edit PO files"));
   g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
+
+#ifdef ENABLE_INTROSPECTION
+  g_option_context_add_group (context, g_irepository_get_option_group ());
+#endif
 
   if (!g_option_context_parse (context, &argc, &argv, &error))
     {
