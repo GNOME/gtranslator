@@ -286,7 +286,6 @@ plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in
 src/Makefile
 src/dialogs/Makefile
 src/toolbareditor/Makefile
-src/plugin-system/Makefile
 src/translation-memory/Makefile
 src/translation-memory/gda/Makefile
 ])
