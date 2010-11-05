@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator&component=general\n"
-"POT-Creation-Date: 2010-10-25 12:43+0000\n"
-"PO-Revision-Date: 2010-10-30 08:03+0100\n"
+"POT-Creation-Date: 2010-11-03 17:48+0000\n"
+"PO-Revision-Date: 2010-11-05 10:00+0100\n"
 "Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
@@ -436,97 +436,124 @@ msgstr "Vstavi oznake"
 msgid "Tags detection and easy insertion."
 msgstr "Zaznavanje oznak in preprosto vstavljanje."
 
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
+#, no-c-format
+msgid ""
+"<i>The URL should be of the form:\n"
+"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+"The two \"%s\" markers and the final slash must not be omitted.</i>"
+msgstr ""
+"<i>URL mora biti v obliki:\n"
+"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+"Dveh označevalnikov \"%s\" in zadnje desne poševnice ne smete izpustiti.</i>"
+
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:5
 msgid "Language code for the Open-Tran query:"
 msgstr "Jezikovna koda poizvedbe v Open-Tran:"
 
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:6
 msgid "Language code of the translated results:"
 msgstr "Koda jezika prevedenih rezultatov"
 
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:7
+msgid "Mirror Server"
+msgstr "Zrcalni strežnik"
+
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:8
+msgid "Mirror server URL:"
+msgstr "URL zrcalnega strežnika:"
+
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:9
 msgid "Open Tran Settings"
 msgstr "Nastavitve Open Tran"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:201
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:10
+msgid "Use a local \"mirror\" copy of the Open-Tran server"
+msgstr "Uporabite krajevno \"zrcalno\" kopijo strežnika Open-Tran"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:217
 #, c-format
 msgid "ERROR: Cannot access %s\n"
 msgstr "NAPAKA: Ni mogoč dostop do %s\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:218
+#: ../plugins/open-tran/gtr-open-tran-panel.c:233
 msgid "Error in server response, GET failed\n"
 msgstr "Napaka v odzivu strežnika, GET je spodletel\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:230
+#: ../plugins/open-tran/gtr-open-tran-panel.c:245
 #, c-format
 msgid "Cannot parse server response, %s\n"
 msgstr "Ni mogoče razčleniti odziva strežnika, %s\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:244
+#: ../plugins/open-tran/gtr-open-tran-panel.c:259
 #, c-format
 msgid "Cannot parse server response, not an array? %s\n"
 msgstr "Ni mogoče razčleniti odziva strežnika. Morda ni polje? %s\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:267
+#: ../plugins/open-tran/gtr-open-tran-panel.c:282
 #, c-format
 msgid "WRONG! Can't get result element %d\n"
 msgstr "NAROBE! Ni mogoče dobiti rezultata elementa %d\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:277
+#: ../plugins/open-tran/gtr-open-tran-panel.c:292
 #, c-format
 msgid "WRONG! Can't parse result element %d as object\n"
 msgstr "NAROBE! Rezultata elementa %d ni mogoče razčleniti kot predmet \n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:291
+#: ../plugins/open-tran/gtr-open-tran-panel.c:306
 #, c-format
 msgid "WRONG! Can't read projects for result element %d\n"
 msgstr "NAROBE! Ni mogoče brati projektov za rezultat elementa %d\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:315
+#: ../plugins/open-tran/gtr-open-tran-panel.c:330
 #, c-format
 msgid "%s[%s] Count:%d"
 msgstr "%s[%s] Število:%d"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:325
+#: ../plugins/open-tran/gtr-open-tran-panel.c:340
 #, c-format
 msgid "WRONG! Malformed project: %d\n"
 msgstr "NAROBE! Slabo oblikovan projekt: %d\n"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:339
+#: ../plugins/open-tran/gtr-open-tran-panel.c:354
 #: ../src/gtr-actions-search.c:191
 msgid "Phrase not found"
 msgstr "Fraze ni mogoče najti"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:360
+#: ../plugins/open-tran/gtr-open-tran-panel.c:378
 msgid "You have to provide a phrase to search"
 msgstr "Navesti je treba frazo za iskanje"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:369
-msgid "You have to provide a search language code"
-msgstr "Navesti je treba kodo jezika iskanja"
+#: ../plugins/open-tran/gtr-open-tran-panel.c:387
+msgid "You have to provide a search language code in the plugin configuration"
+msgstr "V nastavitvah vstavka je treba navesti jezikovno kodo jezika iskanja"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:379
-msgid "You have to provide a language code for your language"
-msgstr "Navesti je treba jezikovno kodo jezika"
+#: ../plugins/open-tran/gtr-open-tran-panel.c:397
+msgid "You have to provide a language code for your language in the plugin configuration"
+msgstr "V nastavitvah vstavka je treba navesti jezikovno kodo jezika"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:407
+#: ../plugins/open-tran/gtr-open-tran-panel.c:410
+msgid "Either use the main open-tran.eu server, or enter a server URL in the plugin configuration,"
+msgstr "Uporabite glavni strežnik open-tran.eu ali vnesite URL strežnika v nastavitvah vstavka."
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:448
 msgid "Type"
 msgstr "Vrsta"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:418
+#: ../plugins/open-tran/gtr-open-tran-panel.c:459
 msgid "Open-Tran.eu"
 msgstr "Open-Tran.eu"
 
-#: ../plugins/open-tran/gtr-open-tran-panel.c:459
+#: ../plugins/open-tran/gtr-open-tran-panel.c:500
 msgid "Look for:"
 msgstr "Išči za:"
 
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:108
+#: ../plugins/open-tran/gtr-open-tran-plugin.c:111
 #: ../plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in.h:2
 msgid "Open Tran"
 msgstr "Open Tran"
 
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:152
+#: ../plugins/open-tran/gtr-open-tran-plugin.c:162
 #, c-format
 msgid "Error from configuration dialog %s"
 msgstr "Napaka iz nastavitvenega pogovornega okna %s"
@@ -536,20 +563,36 @@ msgid "Look for phrases in Open tran memory translation database."
 msgstr "Iskanje fraz v podatkovni zbirki prevodov Open tran. "
 
 #: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:1
+msgid "Mirror Server URL"
+msgstr "URL zrcalnega strežnika"
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:2
 msgid "Own Code"
 msgstr "Lastna koda"
 
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:2
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:3
 msgid "Search Code"
 msgstr "Koda iskanja"
 
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:3
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:4
 msgid "The language code in which you want the results"
 msgstr "Jezikovna koda v kateri bodo izpisani rezultati."
 
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:4
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:5
 msgid "The language code to search for"
 msgstr "Jezikovna koda za iskanje"
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:6
+msgid "URL of an Open-Tran mirror server"
+msgstr "URL zrcalnega strežnika Open-Tran"
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:7
+msgid "Use Mirror Server"
+msgstr "Uporabite zrcalni strežnik"
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:8
+msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
+msgstr "Uporabite krajevno kopijo glavnega strežnika Open-Tran na open-tran.eu"
 
 #: ../plugins/codeview/gtr-source-code-view-dialog.ui.h:1
 msgid "Line command:"
@@ -597,8 +640,8 @@ msgid "Arguments for the Command"
 msgstr "Argumenti za ukaz"
 
 #: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:2
-msgid "Arguments to pass to the program command and select the line"
-msgstr "Argumenti za podajanje ukaza programa in izbiro vrstice"
+msgid "Arguments to pass to the program command line to select the line"
+msgstr "Argumenti za podajanje ukazne vrstice programa za izbiro vrstice"
 
 #: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:3
 msgid "The Editor to Launch"
