@@ -560,7 +560,7 @@ gtr_tab_draw (GtrTab * tab)
   GtrTabPrivate *priv = tab->priv;
 
   /* Content pane; this is where the message table and message area go */
-  priv->content_pane = gtk_vpaned_new ();
+  priv->content_pane = gtk_paned_new (GTK_ORIENTATION_VERTICAL);
   g_settings_bind (tab->priv->state_settings,
                    GTR_SETTINGS_CONTENT_PANEL_SIZE,
                    priv->content_pane,
@@ -657,7 +657,7 @@ gtr_tab_draw (GtrTab * tab)
                    TRUE);
 
   /* Context pane */
-  priv->context_pane = gtk_hpaned_new ();
+  priv->context_pane = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
   g_settings_bind (tab->priv->state_settings,
                    GTR_SETTINGS_CONTEXT_PANEL_SIZE,
                    priv->context_pane,
