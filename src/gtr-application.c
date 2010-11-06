@@ -189,7 +189,6 @@ gtr_application_init (GtrApplication *application)
 {
   GtrApplicationPrivate *priv;
   const gchar *gtr_folder;
-  const gchar *pixmaps_dir;
   const gchar *data_dir;
   gchar *path_default_gtr_toolbar;
   gchar *profiles_file;
@@ -202,12 +201,6 @@ gtr_application_init (GtrApplication *application)
   priv->first_run = FALSE;
 
   g_set_application_name (_("Gtranslator"));
-  gtk_window_set_default_icon_name ("gtranslator");
-
-  /* We set the default icon dir */
-  pixmaps_dir = gtr_dirs_get_gtr_pixmaps_dir ();
-  gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
-                                     pixmaps_dir);
 
   /* Creating config folder */
   ensure_user_config_dir (); /* FIXME: is this really needed ? */
@@ -319,6 +312,18 @@ gtr_application_finalize (GObject *object)
   g_free (app->priv->toolbars_file);
 
   G_OBJECT_CLASS (gtr_application_parent_class)->finalize (object);
+}
+
+static void
+gtr_application_startup (GApplication *application)
+{
+  G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
+
+  gtk_window_set_default_icon_name ("gtranslator");
+
+  /* We set the default icon dir */
+  gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
+                                     gtr_dirs_get_gtr_pixmaps_dir ());
 }
 
 static GSList *
@@ -435,6 +440,7 @@ gtr_application_class_init (GtrApplicationClass *klass)
   object_class->dispose = gtr_application_dispose;
   object_class->finalize = gtr_application_finalize;
 
+  application_class->startup = gtr_application_startup;
   application_class->command_line = gtr_application_command_line;
   application_class->quit_mainloop = gtr_application_quit_mainloop;
 }
