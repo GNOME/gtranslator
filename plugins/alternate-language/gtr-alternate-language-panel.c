@@ -22,7 +22,6 @@
 #include "gtr-alternate-language-panel.h"
 #include "gtr-file-dialogs.h"
 #include "gtr-msg.h"
-#include "gtr-plugin.h"
 #include "gtr-po.h"
 #include "gtr-tab.h"
 #include "gtr-view.h"
@@ -43,8 +42,7 @@
                                                       GTR_TYPE_ALTERNATE_LANG_PANEL, \
                                                       GtrAlternateLangPanelPrivate))
 
-GTR_PLUGIN_DEFINE_TYPE (GtrAlternateLangPanel,
-                        gtr_alternate_lang_panel, GTK_TYPE_VBOX)
+G_DEFINE_DYNAMIC_TYPE (GtrAlternateLangPanel, gtr_alternate_lang_panel, GTK_TYPE_VBOX)
 
 struct _GtrAlternateLangPanelPrivate
 {
@@ -413,6 +411,11 @@ gtr_alternate_lang_panel_class_init (GtrAlternateLangPanelClass * klass)
   object_class->dispose = gtr_alternate_lang_panel_dispose;
 }
 
+static void
+gtr_alternate_lang_panel_class_finalize (GtrAlternateLangPanelClass *klass)
+{
+}
+
 /***************************** Public funcs ***********************************/
 
 GtkWidget *
@@ -424,4 +427,10 @@ gtr_alternate_lang_panel_new (GtkWidget * tab)
   panel->priv->tab = GTR_TAB (tab);
 
   return GTK_WIDGET (panel);
+}
+
+void
+_gtr_alternate_lang_panel_register_type (GTypeModule *type_module)
+{
+  gtr_alternate_lang_panel_register_type (type_module);
 }

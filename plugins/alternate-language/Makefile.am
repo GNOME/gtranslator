@@ -4,7 +4,6 @@ plugindir = $(libdir)/gtranslator/plugins
 INCLUDES = \
 	-I$(top_srcdir) 				\
 	-I$(top_srcdir)/src				\
-	-I$(top_srcdir)/src/plugin-system		\
 	-I$(top_srcdir)/src/dialogs			\
 	$(GTRANSLATOR_CFLAGS) 				\
 	$(WARN_CFLAGS)					\
@@ -27,11 +26,11 @@ libalternatelang_la_LDFLAGS = \
 
 # Plugin Info
 
-plugin_in_files = gtr-alternate-language.gtranslator-plugin.desktop.in
+plugin_in_files = gtr-alternate-language.plugin.desktop.in
 
-%.gtranslator.plugin: %.gtranslator-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+%.plugin: %.plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
-plugin_DATA = $(plugin_in_files:.gtranslator-plugin.desktop.in=.gtranslator.plugin)
+plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
 EXTRA_DIST = $(plugin_in_files)
 

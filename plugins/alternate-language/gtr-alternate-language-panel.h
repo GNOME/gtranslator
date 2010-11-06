@@ -23,22 +23,17 @@
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
+
 #define GTR_TYPE_ALTERNATE_LANG_PANEL		(gtr_alternate_lang_panel_get_type ())
 #define GTR_ALTERNATE_LANG_PANEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_ALTERNATE_LANG_PANEL, GtrAlternateLangPanel))
 #define GTR_ALTERNATE_LANG_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_ALTERNATE_LANG_PANEL, GtrAlternateLangPanelClass))
 #define GTR_IS_ALTERNATE_LANG_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_ALTERNATE_LANG_PANEL))
 #define GTR_IS_ALTERNATE_LANG_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_ALTERNATE_LANG_PANEL))
 #define GTR_ALTERNATE_LANG_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_ALTERNATE_LANG_PANEL, GtrAlternateLangPanelClass))
-/* Private structure type */
-typedef struct _GtrAlternateLangPanelPrivate GtrAlternateLangPanelPrivate;
 
-/*
- * Main object structure
- */
-typedef struct _GtrAlternateLangPanel GtrAlternateLangPanel;
+typedef struct _GtrAlternateLangPanel        GtrAlternateLangPanel;
+typedef struct _GtrAlternateLangPanelPrivate GtrAlternateLangPanelPrivate;
+typedef struct _GtrAlternateLangPanelClass   GtrAlternateLangPanelClass;
 
 struct _GtrAlternateLangPanel
 {
@@ -48,24 +43,16 @@ struct _GtrAlternateLangPanel
   GtrAlternateLangPanelPrivate *priv;
 };
 
-/*
- * Class definition
- */
-typedef struct _GtrAlternateLangPanelClass GtrAlternateLangPanelClass;
-
 struct _GtrAlternateLangPanelClass
 {
   GtkVBoxClass parent_class;
 };
 
-/*
- * Public methods
- */
-GType
-gtr_alternate_lang_panel_get_type (void)
-  G_GNUC_CONST;
-     GType gtr_alternate_lang_panel_register_type (GTypeModule * module);
-     GtkWidget *gtr_alternate_lang_panel_new (GtkWidget * tab);
+GType gtr_alternate_lang_panel_get_type (void) G_GNUC_CONST;
+
+GtkWidget *gtr_alternate_lang_panel_new (GtkWidget *tab);
+
+void _gtr_alternate_lang_panel_register_type (GTypeModule *type_module);
 
 G_END_DECLS
 #endif /* __ALTERNATE_LANG_PANEL_H__ */
