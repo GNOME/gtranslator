@@ -45,29 +45,21 @@ typedef struct _GtrSettingsPrivate	GtrSettingsPrivate;
 
 struct _GtrSettings
 {
-	GSettings parent;
+  GObject parent;
 
-	GtrSettingsPrivate *priv;
+  GtrSettingsPrivate *priv;
 };
 
 struct _GtrSettingsClass
 {
-	GSettingsClass parent_class;
+  GObjectClass parent_class;
 };
 
-GType			 gtr_settings_get_type			(void) G_GNUC_CONST;
+GType                    gtr_settings_get_type                  (void) G_GNUC_CONST;
 
-GSettings		*gtr_settings_new			(void);
+GSettings               *gtr_settings_new                       (void);
 
-gchar			*gtr_settings_get_system_font		(GtrSettings *gs);
-
-/* Utility functions */
-GSList			*gtr_settings_get_list			(GSettings     *settings,
-								 const gchar   *key);
-
-void			 gtr_settings_set_list			(GSettings     *settings,
-								 const gchar   *key,
-								 const GSList  *list);
+gchar                   *gtr_settings_get_system_font           (GtrSettings *gs);
 
 /* key constants: IMPORTANT: keep them in the same order as the schema */
 #define GTR_SETTINGS_WARN_IF_CONTAINS_FUZZY		"warn-if-contains-fuzzy"

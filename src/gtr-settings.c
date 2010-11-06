@@ -46,7 +46,7 @@ struct _GtrSettingsPrivate
   gchar *old_scheme;
 };
 
-G_DEFINE_TYPE (GtrSettings, gtr_settings, G_TYPE_SETTINGS)
+G_DEFINE_TYPE (GtrSettings, gtr_settings, G_TYPE_OBJECT)
 
 static void
 gtr_settings_finalize (GObject * object)
@@ -319,18 +319,10 @@ gtr_settings_init (GtrSettings * gs)
   gs->priv = GTR_SETTINGS_GET_PRIVATE (gs);
 
   gs->priv->old_scheme = NULL;
-}
 
-static void
-initialize (GtrSettings * gs)
-{
-  GSettings *prefs;
-
-  prefs = g_settings_get_child (G_SETTINGS (gs), "preferences");
-  gs->priv->files = g_settings_get_child (prefs, "files");
-  gs->priv->editor = g_settings_get_child (prefs, "editor");
-  gs->priv->ui = g_settings_get_child (prefs, "ui");
-  g_object_unref (prefs);
+  gs->priv->files = g_settings_new ("org.gnome.gtranslator.preferences.files");
+  gs->priv->editor = g_settings_new ("org.gnome.gtranslator.preferences.editor");
+  gs->priv->ui = g_settings_new ("org.gnome.gtranslator.preferences.ui");
 
   /* Load settings */
   gs->priv->interface = g_settings_new ("org.gnome.desktop.interface");
@@ -383,14 +375,7 @@ gtr_settings_class_init (GtrSettingsClass * klass)
 GSettings *
 gtr_settings_new ()
 {
-  GtrSettings *settings;
-
-  settings = g_object_new (GTR_TYPE_SETTINGS,
-                           "schema", "org.gnome.gtranslator", NULL);
-
-  initialize (settings);
-
-  return G_SETTINGS (settings);
+  return g_object_new (GTR_TYPE_SETTINGS, NULL);
 }
 
 gchar *
@@ -404,58 +389,6 @@ gtr_settings_get_system_font (GtrSettings * gs)
                                        "monospace-font-name");
 
   return system_font;
-}
-
-GSList *
-gtr_settings_get_list (GSettings * settings, const gchar * key)
-{
-  GSList *list = NULL;
-  gchar **values;
-  gsize i;
-
-  g_return_val_if_fail (G_IS_SETTINGS (settings), NULL);
-  g_return_val_if_fail (key != NULL, NULL);
-
-  values = g_settings_get_strv (settings, key);
-  i = 0;
-
-  while (values[i] != NULL)
-    {
-      list = g_slist_prepend (list, values[i]);
-      i++;
-    }
-
-  g_free (values);
-
-  return g_slist_reverse (list);
-}
-
-void
-gtr_settings_set_list (GSettings * settings,
-                       const gchar * key, const GSList * list)
-{
-  gchar **values = NULL;
-  const GSList *l;
-
-  g_return_if_fail (G_IS_SETTINGS (settings));
-  g_return_if_fail (key != NULL);
-
-  if (list != NULL)
-    {
-      gint i, len;
-
-      len = g_slist_length ((GSList *) list);
-      values = g_new (gchar *, len + 1);
-
-      for (l = list, i = 0; l != NULL; l = g_slist_next (l), i++)
-        {
-          values[i] = l->data;
-        }
-      values[i] = NULL;
-    }
-
-  g_settings_set_strv (settings, key, (const gchar * const *) values);
-  g_free (values);
 }
 
 /* ex:ts=8:noet: */
