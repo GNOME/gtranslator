@@ -115,7 +115,7 @@ on_activate_item_cb (GtkMenuItem * menuitem,
 }
 
 static void
-free_list (gpointer data, gpointer useless)
+free_match (gpointer data)
 {
   GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) data;
 
@@ -253,9 +253,7 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrTranslationMemoryUi * tm_ui)
 
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (tm_menu), items_menu);
 
-  /* Freeing the list */
-  g_list_foreach (tm_list, (GFunc) free_list, NULL);
-  g_list_free (tm_list);
+  g_list_free_full (tm_list, free_match);
 }
 
 static void

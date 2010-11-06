@@ -132,8 +132,7 @@ gtr_po_parse_files_from_dialog (GtkWidget * dialog, GtrWindow * window)
    * We store latest directory
    */
   file = g_file_new_for_uri (po_files->data);
-  g_slist_foreach (po_files, (GFunc) g_free, NULL);
-  g_slist_free (po_files);
+  g_slist_free_full (po_files, g_free);
 
   parent = g_file_get_parent (file);
   g_object_unref (file);
@@ -148,8 +147,7 @@ gtr_po_parse_files_from_dialog (GtkWidget * dialog, GtrWindow * window)
    * Open the file via our centralized opening function.
    */
   load_file_list (window, (const GSList *) locations);
-  g_slist_foreach (locations, (GFunc) g_object_unref, NULL);
-  g_slist_free (locations);
+  g_slist_free_full (locations, g_object_unref);
 
   /*
    * Destroy the dialog 

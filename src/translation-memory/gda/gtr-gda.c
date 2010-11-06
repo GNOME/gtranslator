@@ -468,8 +468,10 @@ gtr_gda_remove (GtrTranslationMemory *tm,
 }
 
 static void
-free_match (GtrTranslationMemoryMatch *match, gpointer dummy)
+free_match (gpointer data)
 {
+  GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) data;
+
   g_free (match->match);
   g_slice_free (GtrTranslationMemoryMatch, match);
 }
@@ -671,8 +673,7 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
 
   if (inner_error)
     {
-      g_list_foreach (matches, (GFunc) free_match, NULL);
-      g_list_free (matches);
+      g_list_free_full (matches, free_match);
 
       g_warning ("%s\n", inner_error->message);
 

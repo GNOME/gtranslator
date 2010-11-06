@@ -823,8 +823,8 @@ gtr_utils_get_current_year (void)
  * @po_name: the name of the specific po file to search or NULL.
  *
  * Scans the directory and subdirectories of @dir looking for filenames remained
- * with .po or files that matches @po_name. The contents of @list must be freed with
- * g_slist_foreach (list, (GFunc)g_object_unref, NULL).
+ * with .po or files that matches @po_name. @list must be freed with
+ * g_slist_free_full (list, g_object_unref).
  */
 void
 gtr_utils_scan_dir (GFile * dir, GSList ** list, const gchar * po_name)

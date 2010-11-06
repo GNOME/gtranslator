@@ -816,8 +816,8 @@ destroy_idle_data (gpointer data)
   IdleData *d = (IdleData *) data;
 
   gtk_widget_hide (GTK_WIDGET (d->progress));
-  g_slist_foreach (d->list, (GFunc) g_object_unref, NULL);
-  g_slist_free (d->list);
+
+  g_slist_free_full (d->list, g_object_unref);
 
   g_free (d);
 }

@@ -188,17 +188,8 @@ gtr_po_finalize (GObject * object)
 {
   GtrPo *po = GTR_PO (object);
 
-  if (po->priv->messages)
-    {
-      g_list_foreach (po->priv->messages, (GFunc) g_object_unref, NULL);
-      g_list_free (po->priv->messages);
-    }
-  if (po->priv->domains)
-    {
-      g_list_foreach (po->priv->domains, (GFunc) g_free, NULL);
-      g_list_free (po->priv->domains);
-    }
-
+  g_list_free_full (po->priv->messages, g_object_unref);
+  g_list_free_full (po->priv->domains, g_free);
   g_free (po->priv->obsolete);
 
   if (po->priv->gettext_po_file)

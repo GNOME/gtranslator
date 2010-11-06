@@ -62,18 +62,13 @@ get_profile_filename ()
 }
 
 static void
-gtr_profile_manager_dispose (GObject *object)
+gtr_profile_manager_finalize (GObject *object)
 {
   GtrProfileManager *manager = GTR_PROFILE_MANAGER (object);
 
-  if (manager->priv->profiles != NULL)
-    {
-      g_slist_foreach (manager->priv->profiles, (GFunc) g_object_unref, NULL);
-      g_slist_free (manager->priv->profiles);
-      manager->priv->profiles = NULL;
-    }
+  g_slist_free_full (manager->priv->profiles, g_object_unref);
 
-  G_OBJECT_CLASS (gtr_profile_manager_parent_class)->dispose (object);
+  G_OBJECT_CLASS (gtr_profile_manager_parent_class)->finalize (object);
 }
 
 static void
@@ -81,7 +76,7 @@ gtr_profile_manager_class_init (GtrProfileManagerClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->dispose = gtr_profile_manager_dispose;
+  object_class->finalize = gtr_profile_manager_finalize;
 
   g_type_class_add_private (object_class, sizeof (GtrProfileManagerPrivate));
 

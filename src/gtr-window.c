@@ -919,8 +919,7 @@ drag_data_received_cb (GtkWidget * widget,
       locations = gtr_utils_drop_get_locations (selection_data);
       gtr_actions_load_locations (window, locations);
 
-      g_slist_foreach (locations, (GFunc) g_object_unref, NULL);
-      g_slist_free (locations);
+      g_slist_free_full (locations, g_object_unref);
     }
 }
 
@@ -1299,8 +1298,7 @@ gtr_recent_chooser_item_activated_cb (GtkRecentChooser * chooser,
   list = g_slist_prepend (list, location);
 
   gtr_actions_load_locations (window, list);
-  g_slist_foreach (list, (GFunc) g_object_unref, NULL);
-  g_slist_free (list);
+  g_slist_free_full (list, g_object_unref);
 }
 
 static GtkWidget *
