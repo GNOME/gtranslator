@@ -1,34 +1,14 @@
 SUBDIRS = icons
 
-##
-## the dirs where all the DATA should go ..
-##
-Applicationdir = $(datadir)/applications
-
-##
-## and the DATA
-##
-Application_predata = gtranslator.desktop.in
-Application_DATA = $(Application_predata:.desktop.in=.desktop)
-
+desktopdir 	 = $(datadir)/applications
+desktop_in_files = gtranslator.desktop.in
+desktop_DATA 	 = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-EXTRA_DIST = $(Application_DATA) \
-	$(Applicationicon_DATA) \
-	$(Application_predata)
+EXTRA_DIST = $(desktop_in_files)
 
-CLEANFILES = $(Application_DATA)
+CLEANFILES = $(desktop_DATA)
 
-UPDATE_DESKTOP = \
-	if [ -f $(Applicationdir)/defaults.list ] ; then \
-		if which update-desktop-database>/dev/null 2>&1 ; then \
-			update-desktop-database $(Applicationdir); \
-		fi \
-	fi
+DISTCLEANFILES = $(desktop_DATA)
 
-install-data-hook:
-	$(UPDATE_DESKTOP)
-
-uninstall-hook:
-	$(UPDATE_DESKTOP) 
 -include $(top_srcdir)/git.mk
