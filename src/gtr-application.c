@@ -327,9 +327,12 @@ gtr_application_startup (GApplication *application)
 }
 
 static GSList *
-get_command_line_files ()
+get_command_line_files (const gchar *cwd)
 {
-  GSList *files;
+  GSList *files = NULL;
+
+  if (!cwd)
+    return NULL;
 
   if (file_arguments)
     {
@@ -337,9 +340,12 @@ get_command_line_files ()
 
       for (i = 0; file_arguments[i]; i++)
         {
-          GFile *file;
+          GFile *file = NULL;
+          gchar *path;
 
-          file = g_file_new_for_commandline_arg (file_arguments[i]);
+          path = g_build_filename (cwd, file_arguments[i], NULL);
+          file = g_file_new_for_path (path);
+          g_free (path);
 
           if (file != NULL)
             files = g_slist_prepend (files, file);
@@ -349,7 +355,7 @@ get_command_line_files ()
         }
     }
 
-  return g_slist_reverse (files);
+  return files ? g_slist_reverse (files) : NULL;
 }
 
 static gint
@@ -407,7 +413,7 @@ gtr_application_command_line (GApplication            *application,
     {
       GSList *files;
 
-      files = get_command_line_files ();
+      files = get_command_line_files (g_application_command_line_get_cwd (command_line));
       if (files != NULL)
         {
           gtr_actions_load_locations (window, files);
