@@ -200,8 +200,6 @@ gtr_application_init (GtrApplication *application)
   priv->last_dir = NULL;
   priv->first_run = FALSE;
 
-  g_set_application_name (_("Gtranslator"));
-
   /* Creating config folder */
   ensure_user_config_dir (); /* FIXME: is this really needed ? */
 
@@ -319,6 +317,7 @@ gtr_application_startup (GApplication *application)
 {
   G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
 
+  g_set_application_name (_("Gtranslator"));
   gtk_window_set_default_icon_name ("gtranslator");
 
   /* We set the default icon dir */
