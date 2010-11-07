@@ -21,51 +21,38 @@
 
 #include <glib.h>
 #include <glib-object.h>
-
-#include "gtr-plugin.h"
+#include <libpeas/peas-extension-base.h>
+#include <libpeas/peas-object-module.h>
 
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
-#define GTR_TYPE_INSERT_PARAMS_PLUGIN		(gtr_insert_params_get_type ())
-#define GTR_INSERT_PARAMS_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGEINSERT_PARAMS_PLUGIN, GtrInsertParamsPlugin))
-#define GTR_INSERT_PARAMS_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_INSERT_PARAMS_PLUGIN, GtrInsertParamsPluginClass))
-#define GTR_IS_INSERT_PARAMS_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_INSERT_PARAMS_PLUGIN))
-#define GTR_IS_INSERT_PARAMS_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_INSERT_PARAMS_PLUGIN))
-#define GTR_INSERT_PARAMS_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_INSERT_PARAMS_PLUGIN_PLUGIN, GtrInsertParamsPluginClass))
-/* Private structure type */
-typedef struct _GtrInsertParamsPluginPrivate GtrInsertParamsPluginPrivate;
 
-/*
- * Main object structure
- */
-typedef struct _GtrInsertParamsPlugin GtrInsertParamsPlugin;
+#define GTR_TYPE_INSERT_PARAMS_PLUGIN		(gtr_insert_params_plugin_get_type ())
+#define GTR_INSERT_PARAMS_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_INSERT_PARAMS_PLUGIN, GtrInsertParamsPlugin))
+#define GTR_INSERT_PARAMS_PLUGIN_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_INSERT_PARAMS_PLUGIN, GtrInsertParamsPluginClass))
+#define GTR_IS_INSERT_PARAMS_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_INSERT_PARAMS_PLUGIN))
+#define GTR_IS_INSERT_PARAMS_PLUGIN_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_INSERT_PARAMS_PLUGIN))
+#define GTR_INSERT_PARAMS_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_INSERT_PARAMS_PLUGIN_PLUGIN, GtrInsertParamsPluginClass))
+
+typedef struct _GtrInsertParamsPlugin        GtrInsertParamsPlugin;
+typedef struct _GtrInsertParamsPluginPrivate GtrInsertParamsPluginPrivate;
+typedef struct _GtrInsertParamsPluginClass   GtrInsertParamsPluginClass;
 
 struct _GtrInsertParamsPlugin
 {
-  GtrPlugin parent_instance;
-};
+  PeasExtensionBase parent_instance;
 
-/*
- * Class definition
- */
-typedef struct _GtrInsertParamsPluginClass GtrInsertParamsPluginClass;
+  /*< private >*/
+  GtrInsertParamsPluginPrivate *priv;
+};
 
 struct _GtrInsertParamsPluginClass
 {
-  GtrPluginClass parent_class;
+  PeasExtensionBaseClass parent_class;
 };
 
-/*
- * Public methods
- */
-GType
-gtr_insert_params_plugin_get_type (void)
-  G_GNUC_CONST;
+GType gtr_insert_params_plugin_get_type (void) G_GNUC_CONST;
 
-/* All the plugins must implement this function */
-     G_MODULE_EXPORT GType register_gtr_plugin (GTypeModule * module);
+G_MODULE_EXPORT void peas_register_types (PeasObjectModule *module);
 
 G_END_DECLS
 #endif /* __GTR_INSERT_PARAMS_PLUGIN_H__ */
