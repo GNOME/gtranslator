@@ -1402,7 +1402,7 @@ gtr_tab_copy_to_translation (GtrTab * tab)
 {
   GtkTextBuffer *msgstr, *msgid;
   gint page_index;
-  const gchar *text;
+  gchar *text;
   GtkTextIter start, end;
 
   g_return_if_fail (GTR_IS_TAB (tab));
@@ -1418,6 +1418,7 @@ gtr_tab_copy_to_translation (GtrTab * tab)
   gtk_text_buffer_get_bounds (msgid, &start, &end);
   text = gtk_text_buffer_get_text (msgid, &start, &end, FALSE);
   gtk_text_buffer_set_text (msgstr, text, -1);
+  g_free (text);
   gtk_text_buffer_end_user_action (msgstr);
 }
 
