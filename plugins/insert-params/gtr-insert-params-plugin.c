@@ -162,7 +162,7 @@ gtr_insert_params_plugin_dispose (GObject *object)
 static void
 gtr_insert_params_plugin_finalize (GObject *object)
 {
-  g_slist_free (params);
+  g_slist_free_full (params, g_free);
   params = NULL;
 
   G_OBJECT_CLASS (gtr_insert_params_plugin_parent_class)->finalize (object);
@@ -280,12 +280,8 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrWindow * window)
   gchar *word;
   gint i;
 
-  if (params != NULL)
-    {
-      g_slist_foreach (params, (GFunc) g_free, NULL);
-      g_slist_free (params);
-      params = NULL;
-    }
+  g_slist_free_full (params, g_free);
+  params = NULL;
 
   /*
    * If we show another message we have to restart the index
