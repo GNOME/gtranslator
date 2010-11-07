@@ -21,51 +21,38 @@
 
 #include <glib.h>
 #include <glib-object.h>
-
-#include "gtr-plugin.h"
+#include <libpeas/peas-extension-base.h>
+#include <libpeas/peas-object-module.h>
 
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
-#define GTR_TYPE_INSERT_TAGS_PLUGIN		(gtr_insert_tags_get_type ())
-#define GTR_INSERT_TAGS_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGEINSERT_TAGS_PLUGIN, GtrInsertTagsPlugin))
+
+#define GTR_TYPE_INSERT_TAGS_PLUGIN		(gtr_insert_tags_plugin_get_type ())
+#define GTR_INSERT_TAGS_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_INSERT_TAGS_PLUGIN, GtrInsertTagsPlugin))
 #define GTR_INSERT_TAGS_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_INSERT_TAGS_PLUGIN, GtrInsertTagsPluginClass))
 #define GTR_IS_INSERT_TAGS_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_INSERT_TAGS_PLUGIN))
-#define GTR_IS_INSERT_TAGS_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_INSERT_TAGS_PLUGIN))
+#define GTR_IS_INSERT_TAGS_PLUGIN_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_INSERT_TAGS_PLUGIN))
 #define GTR_INSERT_TAGS_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_INSERT_TAGS_PLUGIN_PLUGIN, GtrInsertTagsPluginClass))
-/* Private structure type */
-typedef struct _GtrInsertTagsPluginPrivate GtrInsertTagsPluginPrivate;
 
-/*
- * Main object structure
- */
-typedef struct _GtrInsertTagsPlugin GtrInsertTagsPlugin;
+typedef struct _GtrInsertTagsPlugin        GtrInsertTagsPlugin;
+typedef struct _GtrInsertTagsPluginPrivate GtrInsertTagsPluginPrivate;
+typedef struct _GtrInsertTagsPluginClass   GtrInsertTagsPluginClass;
 
 struct _GtrInsertTagsPlugin
 {
-  GtrPlugin parent_instance;
-};
+  PeasExtensionBase parent_instance;
 
-/*
- * Class definition
- */
-typedef struct _GtrInsertTagsPluginClass GtrInsertTagsPluginClass;
+  /*< private >*/
+  GtrInsertTagsPluginPrivate *priv;
+};
 
 struct _GtrInsertTagsPluginClass
 {
-  GtrPluginClass parent_class;
+  PeasExtensionBaseClass parent_class;
 };
 
-/*
- * Public methods
- */
-GType
-gtr_insert_tags_plugin_get_type (void)
-  G_GNUC_CONST;
+GType gtr_insert_tags_plugin_get_type (void) G_GNUC_CONST;
 
-/* All the plugins must implement this function */
-     G_MODULE_EXPORT GType register_gtr_plugin (GTypeModule * module);
+G_MODULE_EXPORT void peas_register_types (PeasObjectModule *module);
 
 G_END_DECLS
 #endif /* __GTR_INSERT_TAGS_PLUGIN_H__ */

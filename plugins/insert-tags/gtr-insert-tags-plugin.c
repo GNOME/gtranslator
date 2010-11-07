@@ -24,19 +24,40 @@
 #include "gtr-msg.h"
 #include "gtr-notebook.h"
 #include "gtr-window.h"
+#include "gtr-window-activatable.h"
 
-#include <glib/gi18n-lib.h>
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <string.h>
 
-#define WINDOW_DATA_KEY "GtrInsertTagsPluginWindowData"
+struct _GtrInsertTagsPluginPrivate
+{
+  GtrWindow      *window;
 
-GTR_PLUGIN_REGISTER_TYPE (GtrInsertTagsPlugin, gtr_insert_tags_plugin)
-     static GSList *tags = NULL;
-     static gint tag_position;
+  GtkActionGroup *action_group;
+  guint           ui_id;
+};
 
-     static void
-       on_next_tag_activated (GtkAction * action, GtrWindow * window)
+enum
+{
+  PROP_0,
+  PROP_WINDOW
+};
+
+static void gtr_window_activatable_iface_init (GtrWindowActivatableInterface *iface);
+
+G_DEFINE_DYNAMIC_TYPE_EXTENDED (GtrInsertTagsPlugin,
+                                gtr_insert_tags_plugin,
+                                PEAS_TYPE_EXTENSION_BASE,
+                                0,
+                                G_IMPLEMENT_INTERFACE_DYNAMIC (GTR_TYPE_WINDOW_ACTIVATABLE,
+                                                               gtr_window_activatable_iface_init))
+
+static GSList *tags = NULL;
+static gint tag_position;
+
+static void
+on_next_tag_activated (GtkAction * action, GtrWindow * window)
 {
   GtrView *view;
   GtkTextBuffer *buffer;
@@ -77,56 +98,106 @@ static const gchar submenu[] =
   "      <placeholder name='EditOps_1'>"
   "        <menuitem name='EditNextTag' action='NextTag' />"
   "        <menuitem name='EditInsertTags' action='InsertTags' />"
-  "      </placeholder>" "    </menu>" "  </menubar>" "</ui>";
-
-typedef struct
-{
-  GtkActionGroup *action_group;
-  guint ui_id;
-} WindowData;
+  "      </placeholder>"
+  "    </menu>"
+  "  </menubar>"
+  "</ui>";
 
 static void
-free_window_data (WindowData * data)
+update_ui (GtrInsertTagsPlugin *plugin)
 {
-  g_return_if_fail (data != NULL);
-
-  g_free (data);
-}
-
-static void
-update_ui_real (GtrWindow * window, WindowData * data)
-{
+  GtrInsertTagsPluginPrivate *priv = plugin->priv;
   GtkTextView *view;
   GtkAction *action;
 
-  view = GTK_TEXT_VIEW (gtr_window_get_active_view (window));
+  view = GTK_TEXT_VIEW (gtr_window_get_active_view (priv->window));
 
-  action = gtk_action_group_get_action (data->action_group, "InsertTags");
+  action = gtk_action_group_get_action (priv->action_group, "InsertTags");
   gtk_action_set_sensitive (action,
                             (view != NULL) &&
                             gtk_text_view_get_editable (view));
 
-  action = gtk_action_group_get_action (data->action_group, "NextTag");
+  action = gtk_action_group_get_action (priv->action_group, "NextTag");
   gtk_action_set_sensitive (action,
                             (view != NULL) &&
                             gtk_text_view_get_editable (view));
 }
 
 static void
-gtr_insert_tags_plugin_init (GtrInsertTagsPlugin * message_table)
+gtr_insert_tags_plugin_init (GtrInsertTagsPlugin *plugin)
 {
+  plugin->priv = G_TYPE_INSTANCE_GET_PRIVATE (plugin,
+                                              GTR_TYPE_INSERT_TAGS_PLUGIN,
+                                              GtrInsertTagsPluginPrivate);
 }
 
 static void
-gtr_insert_tags_plugin_finalize (GObject * object)
+gtr_insert_tags_plugin_dispose (GObject *object)
 {
-  if (tags != NULL)
+  GtrInsertTagsPluginPrivate *priv = GTR_INSERT_TAGS_PLUGIN (object)->priv;
+
+  if (priv->window != NULL)
     {
-      g_slist_free (tags);
-      tags = NULL;
+      g_object_unref (priv->window);
+      priv->window = NULL;
     }
 
+  if (priv->action_group != NULL)
+    {
+      g_object_unref (priv->action_group);
+      priv->action_group = NULL;
+    }
+
+  G_OBJECT_CLASS (gtr_insert_tags_plugin_parent_class)->dispose (object);
+}
+
+static void
+gtr_insert_tags_plugin_finalize (GObject *object)
+{
+  g_slist_free_full (tags, g_free);
+  tags = NULL;
+
   G_OBJECT_CLASS (gtr_insert_tags_plugin_parent_class)->finalize (object);
+}
+
+static void
+gtr_insert_tags_plugin_set_property (GObject      *object,
+                                     guint         prop_id,
+                                     const GValue *value,
+                                     GParamSpec   *pspec)
+{
+  GtrInsertTagsPluginPrivate *priv = GTR_INSERT_TAGS_PLUGIN (object)->priv;
+
+  switch (prop_id)
+    {
+      case PROP_WINDOW:
+        priv->window = GTR_WINDOW (g_value_dup_object (value));
+        break;
+
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
+    }
+}
+
+static void
+gtr_insert_tags_plugin_get_property (GObject    *object,
+                                     guint       prop_id,
+                                     GValue     *value,
+                                     GParamSpec *pspec)
+{
+  GtrInsertTagsPluginPrivate *priv = GTR_INSERT_TAGS_PLUGIN (object)->priv;
+
+  switch (prop_id)
+    {
+      case PROP_WINDOW:
+        g_value_set_object (value, priv->window);
+        break;
+
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
+    }
 }
 
 static void
@@ -200,12 +271,8 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrWindow * window)
   GRegex *regex;
   GMatchInfo *match_info;
 
-  if (tags != NULL)
-    {
-      g_slist_foreach (tags, (GFunc) g_free, NULL);
-      g_slist_free (tags);
-      tags = NULL;
-    }
+  g_slist_free_full (tags, g_free);
+  tags = NULL;
 
   /*
    * If we show another message we have to restart the index
@@ -244,113 +311,111 @@ page_added_cb (GtkNotebook * notebook,
 }
 
 static void
-impl_activate (GtrPlugin * plugin, GtrWindow * window)
+gtr_insert_tags_plugin_activate (GtrWindowActivatable *activatable)
 {
+  GtrInsertTagsPluginPrivate *priv = GTR_INSERT_TAGS_PLUGIN (activatable)->priv;
   GtkUIManager *manager;
-  WindowData *data;
   GError *error = NULL;
   GtrNotebook *notebook;
   GList *tabs = NULL;
 
-  g_return_if_fail (GTR_IS_WINDOW (window));
+  manager = gtr_window_get_ui_manager (priv->window);
 
-  data = g_new (WindowData, 1);
-
-  manager = gtr_window_get_ui_manager (window);
-
-  data->action_group = gtk_action_group_new ("GtrInsertTagsPluginActions");
-  gtk_action_group_set_translation_domain (data->action_group,
+  priv->action_group = gtk_action_group_new ("GtrInsertTagsPluginActions");
+  gtk_action_group_set_translation_domain (priv->action_group,
                                            GETTEXT_PACKAGE);
-  gtk_action_group_add_actions (data->action_group, action_entries,
-                                G_N_ELEMENTS (action_entries), window);
+  gtk_action_group_add_actions (priv->action_group, action_entries,
+                                G_N_ELEMENTS (action_entries), priv->window);
 
-  gtk_ui_manager_insert_action_group (manager, data->action_group, -1);
+  gtk_ui_manager_insert_action_group (manager, priv->action_group, -1);
 
-  data->ui_id = gtk_ui_manager_add_ui_from_string (manager,
+  priv->ui_id = gtk_ui_manager_add_ui_from_string (manager,
                                                    submenu, -1, &error);
   if (error)
     {
       g_warning ("%s", error->message);
       g_error_free (error);
-      g_free (data);
       return;
     }
 
-  g_object_set_data_full (G_OBJECT (window),
-                          WINDOW_DATA_KEY,
-                          data, (GDestroyNotify) free_window_data);
-
-  update_ui_real (window, data);
+  update_ui (GTR_INSERT_TAGS_PLUGIN (activatable));
 
   /*Adding menuitems */
 
-  notebook = gtr_window_get_notebook (window);
+  notebook = gtr_window_get_notebook (priv->window);
 
   g_signal_connect (GTK_NOTEBOOK (notebook),
-                    "page-added", G_CALLBACK (page_added_cb), window);
+                    "page-added", G_CALLBACK (page_added_cb), priv->window);
 
-  tabs = gtr_window_get_all_tabs (window);
+  tabs = gtr_window_get_all_tabs (priv->window);
 
   if (tabs == NULL)
     return;
   do
     {
       g_signal_connect (tabs->data, "showed-message",
-                        G_CALLBACK (showed_message_cb), window);
+                        G_CALLBACK (showed_message_cb), priv->window);
     }
   while ((tabs = g_list_next (tabs)));
 }
 
 static void
-impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
+gtr_insert_tags_plugin_deactivate (GtrWindowActivatable *activatable)
 {
+  GtrInsertTagsPluginPrivate *priv = GTR_INSERT_TAGS_PLUGIN (activatable)->priv;
   GtrNotebook *notebook;
   GtkUIManager *manager;
-  WindowData *data;
 
-  manager = gtr_window_get_ui_manager (window);
+  manager = gtr_window_get_ui_manager (priv->window);
 
-  data =
-    (WindowData *) g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
-  g_return_if_fail (data != NULL);
+  gtk_ui_manager_remove_ui (manager, priv->ui_id);
+  gtk_ui_manager_remove_action_group (manager, priv->action_group);
 
-  gtk_ui_manager_remove_ui (manager, data->ui_id);
-  gtk_ui_manager_remove_action_group (manager, data->action_group);
+  notebook = gtr_window_get_notebook (priv->window);
 
-  g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
-
-  notebook = gtr_window_get_notebook (window);
-
-  g_signal_handlers_disconnect_by_func (notebook, page_added_cb, window);
-
-  if (tags != NULL)
-    {
-      g_slist_free (tags);
-      tags = NULL;
-    }
+  g_signal_handlers_disconnect_by_func (notebook, page_added_cb, priv->window);
 }
 
 static void
-impl_update_ui (GtrPlugin * plugin, GtrWindow * window)
+gtr_insert_tags_plugin_update_state (GtrWindowActivatable *activatable)
 {
-  WindowData *data;
-
-  data =
-    (WindowData *) g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
-  g_return_if_fail (data != NULL);
-
-  update_ui_real (window, data);
+  update_ui (GTR_INSERT_TAGS_PLUGIN (activatable));
 }
 
 static void
 gtr_insert_tags_plugin_class_init (GtrInsertTagsPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
+  object_class->dispose = gtr_insert_tags_plugin_dispose;
   object_class->finalize = gtr_insert_tags_plugin_finalize;
+  object_class->set_property = gtr_insert_tags_plugin_set_property;
+  object_class->get_property = gtr_insert_tags_plugin_get_property;
 
-  plugin_class->activate = impl_activate;
-  plugin_class->deactivate = impl_deactivate;
-  plugin_class->update_ui = impl_update_ui;
+  g_object_class_override_property (object_class, PROP_WINDOW, "window");
+
+  g_type_class_add_private (klass, sizeof (GtrInsertTagsPluginPrivate));
+}
+
+static void
+gtr_insert_tags_plugin_class_finalize (GtrInsertTagsPluginClass * klass)
+{
+}
+
+static void
+gtr_window_activatable_iface_init (GtrWindowActivatableInterface *iface)
+{
+  iface->activate = gtr_insert_tags_plugin_activate;
+  iface->deactivate = gtr_insert_tags_plugin_deactivate;
+  iface->update_state = gtr_insert_tags_plugin_update_state;
+}
+
+G_MODULE_EXPORT void
+peas_register_types (PeasObjectModule *module)
+{
+  gtr_insert_tags_plugin_register_type (G_TYPE_MODULE (module));
+
+  peas_object_module_register_extension_type (module,
+                                              GTR_TYPE_WINDOW_ACTIVATABLE,
+                                              GTR_TYPE_INSERT_TAGS_PLUGIN);
 }
