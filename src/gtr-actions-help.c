@@ -44,8 +44,6 @@ gtr_cmd_help_contents (GtkAction * action, GtrWindow * window)
 void
 gtr_about_dialog (GtkAction * action, GtrWindow * window)
 {
-  gchar *license_trans;
-
   const gchar *authors[] = {
     N_("Current Maintainers"),
     "---------------------------------------------------------",
@@ -84,42 +82,22 @@ gtr_about_dialog (GtkAction * action, GtrWindow * window)
     NULL
   };
 
-
-  const gchar *license[] = {
-    N_("This program is free software: you can redistribute it and/or modify "
-       "it under the terms of the GNU General Public License as published by "
-       "the Free Software Foundation, either version 3 of the License, or "
-       "(at your option) any later version."),
-    N_("This program is distributed in the hope that it will be useful, "
-       "but WITHOUT ANY WARRANTY; without even the implied warranty of "
-       "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
-       "GNU General Public License for more details."),
-    N_("You should have received a copy of the GNU General Public License "
-       "along with this program.  If not, see <http://www.gnu.org/licenses/>.")
-  };
-
   GdkPixbuf *logo;
-  const gchar *pixmaps_dir;
   gchar *logo_file;
 
-  pixmaps_dir = gtr_dirs_get_gtr_pixmaps_dir ();
-  logo_file = g_build_filename (pixmaps_dir, "gtranslator-logo.png", NULL);
+  logo_file = g_build_filename (gtr_dirs_get_gtr_pixmaps_dir (),
+                                "gtranslator-logo.png", NULL);
   logo = gdk_pixbuf_new_from_file (logo_file, NULL);
   g_free (logo_file);
-
-
-  license_trans = g_strconcat (_(license[0]), "\n\n",
-                               _(license[1]), "\n\n", _(license[2]), NULL);
-
 
   gtk_show_about_dialog (GTK_WINDOW (window),
                          "comments",
                          _
                          ("Translation file editing suite for localization of applications and libraries."),
-                         "authors", authors, "copyright",
-                         _
-                         ("Copyright © 1999-2008 Free Software Foundation, Inc."),
-                         "documenters", documenters, "license", license_trans,
+                         "authors", authors,
+                         "copyright", _("Copyright © 1999-2008 Free Software Foundation, Inc."),
+                         "license-type", GTK_LICENSE_GPL_3_0,
+                         "documenters", documenters,
                          "logo", logo, "title", _("About Gtranslator"),
                          /*
                           * Note to translators: put here your name and email so it will show
@@ -133,5 +111,4 @@ gtr_about_dialog (GtkAction * action, GtrWindow * window)
 
   if (logo)
     g_object_unref (logo);
-  g_free (license_trans);
 }
