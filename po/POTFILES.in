@@ -6,7 +6,7 @@ data/org.gnome.gtranslator.gschema.xml.in.in
 data/po.lang
 plugins/alternate-language/gtr-alternate-language-panel.c
 plugins/alternate-language/gtr-alternate-language-plugin.c
-plugins/alternate-language/gtr-alternate-language.gtranslator-plugin.desktop.in
+plugins/alternate-language/gtr-alternate-language.plugin.desktop.in
 plugins/charmap/gtr-charmap-plugin.c
 plugins/charmap/gtr-charmap.gtranslator-plugin.desktop.in
 plugins/dictionary/gtr-dict-panel.c
@@ -14,19 +14,19 @@ plugins/dictionary/gtr-dict.gtranslator-plugin.desktop.in
 plugins/dictionary/gtr-dictionary-plugin.c
 plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in
 plugins/fullscreen/gtr-fullscreen-plugin.c
-plugins/fullscreen/gtr-fullscreen.gtranslator-plugin.desktop.in
+plugins/fullscreen/gtr-fullscreen.plugin.desktop.in
 plugins/insert-params/gtr-insert-params-plugin.c
-plugins/insert-params/gtr-insert-params.gtranslator-plugin.desktop.in
+plugins/insert-params/gtr-insert-params.plugin.desktop.in
 plugins/insert-tags/gtr-insert-tags-plugin.c
-plugins/insert-tags/gtr-insert-tags.gtranslator-plugin.desktop.in
+plugins/insert-tags/gtr-insert-tags.plugin.desktop.in
 [type: gettext/glade]plugins/open-tran/gtr-open-tran-dialog.ui
 plugins/open-tran/gtr-open-tran-panel.c
 plugins/open-tran/gtr-open-tran-plugin.c
 plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in
 plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in
-[type: gettext/glade]plugins/codeview/gtr-source-code-view-dialog.ui
-plugins/codeview/gtr-source-code-view-plugin.c
-plugins/codeview/gtr-source-code-view.gtranslator-plugin.desktop.in
+[type: gettext/glade]plugins/codeview/gtr-codeview-dialog.ui
+plugins/codeview/gtr-codeview-plugin.c
+plugins/codeview/gtr-codeview.plugin.desktop.in
 plugins/codeview/gtr-viewer.c
 [type: gettext/glade]plugins/codeview/gtr-viewer.ui
 plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in
@@ -47,11 +47,10 @@ src/dialogs/gtr-profile-dialog.c
 [type: gettext/glade]src/dialogs/gtr-profile-dialog.ui
 src/dialogs/gtr-search-dialog.c
 [type: gettext/glade]src/dialogs/gtr-search-dialog.ui
-src/main.c
+src/gtr-application.c
 src/gtr-message-table.c
 src/gtr-notebook.c
 src/gtr-po.c
-src/plugin-system/gtr-plugin-manager.c
 src/gtr-statusbar.c
 src/gtr-tab.c
 src/gtr-tab-label.c
