@@ -79,7 +79,6 @@ gtr_viewer_init (GtrViewer * dlg)
   gtk_window_set_title (GTK_WINDOW (dlg), _("Source Viewer"));
   gtk_window_set_default_size (GTK_WINDOW (dlg), 800, 600);
   gtk_window_set_resizable (GTK_WINDOW (dlg), TRUE);
-  gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
   action_area = gtk_dialog_get_action_area (GTK_DIALOG (dlg));
