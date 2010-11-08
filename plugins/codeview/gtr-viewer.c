@@ -40,14 +40,16 @@
 
 
 G_DEFINE_TYPE (GtrViewer, gtr_viewer, GTK_TYPE_DIALOG)
-     struct _GtrViewerPrivate
-     {
-       GtkWidget *main_box;
-       GtkWidget *view;
-       GtkWidget *filename_label;
-     };
 
-     static void dialog_response_handler (GtkDialog * dlg, gint res_id)
+struct _GtrViewerPrivate
+{
+  GtkWidget *main_box;
+  GtkWidget *view;
+  GtkWidget *filename_label;
+};
+
+static void
+dialog_response_handler (GtkDialog * dlg, gint res_id)
 {
   switch (res_id)
     {
