@@ -86,7 +86,7 @@ SOURCEVIEW_REQUIRED=2.90.0
 GDL_REQUIRED=2.91.1
 GDICT_OPTIONAL=100
 GTKSPELL_OPTIONAL=100
-JSON_GLIB_OPTIONAL=100
+JSON_GLIB_OPTIONAL=0.12.0
 
 AC_SUBST(GTK_REQUIRED)
 AC_SUBST(GLIB_REQUIRED)
@@ -172,10 +172,9 @@ dnl -------------------------------------------------------------------
 dnl Check for json-glib, needed for Open-tran
 dnl -------------------------------------------------------------------
 if test "x$enable_opentran" != "xno"; then
-	PKG_CHECK_MODULES(JSON_GLIB,                            \
-		json-glib-1.0 >= JSON_GLIB_OPTIONAL,
-		have_json_glib=yes,
-		have_json_glib=no)
+	PKG_CHECK_MODULES(JSON_GLIB, [
+		json-glib-1.0 >= $JSON_GLIB_OPTIONAL
+		], have_json_glib=yes, have_json_glib=no)
 	if test x"$have_json_glib" = "xyes"; then
 		AC_DEFINE(LIBJSON_GLIB_1_0, 1, [Define if libjson-glib support is enabled])
 	fi

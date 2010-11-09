@@ -24,7 +24,6 @@
 #include "gtr-application.h"
 #include "gtr-window.h"
 #include "gtr-header.h"
-#include "gtr-plugin.h"
 
 #include <string.h>
 
@@ -57,7 +56,7 @@
 #define FEDORA_ICON      PIXMAPSDIR"/fedora.png"
 #define MANDRIVA_ICON    PIXMAPSDIR"/mandriva.png"
 
-GTR_PLUGIN_DEFINE_TYPE (GtrOpenTranPanel, gtr_open_tran_panel, GTK_TYPE_VBOX)
+G_DEFINE_DYNAMIC_TYPE (GtrOpenTranPanel, gtr_open_tran_panel, GTK_TYPE_VBOX)
 
 struct _GtrOpenTranPanelPrivate
 {
@@ -538,13 +537,18 @@ gtr_open_tran_panel_dispose (GObject * object)
 }
 
 static void
-gtr_open_tran_panel_class_init (GtrOpenTranPanelClass * klass)
+gtr_open_tran_panel_class_init (GtrOpenTranPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrOpenTranPanelPrivate));
 
   object_class->dispose = gtr_open_tran_panel_dispose;
+}
+
+static void
+gtr_open_tran_panel_class_finalize (GtrOpenTranPanelClass *klass)
+{
 }
 
 GtkWidget *
@@ -557,4 +561,10 @@ gtr_open_tran_panel_new (GtrWindow * window)
   panel->priv->window = window;
 
   return GTK_WIDGET (panel);
+}
+
+void
+_gtr_open_tran_panel_register_type (GTypeModule *type_module)
+{
+  gtr_open_tran_panel_register_type (type_module);
 }

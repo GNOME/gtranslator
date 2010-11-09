@@ -26,9 +26,7 @@
 #include "gtr-window.h"
 
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
+
 #define GTR_TYPE_OPEN_TRAN_PANEL		(gtr_open_tran_panel_get_type ())
 #define GTR_OPEN_TRAN_PANEL(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_OPEN_TRAN_PANEL, GtrOpenTranPanel))
 #define GTR_OPEN_TRAN_PANEL_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_OPEN_TRAN_PANEL, GtrOpenTranPanelClass))
@@ -42,13 +40,9 @@ G_BEGIN_DECLS
 #define GTR_SETTINGS_USE_MIRROR_SERVER "use-mirror-server"
 #define GTR_SETTINGS_MIRROR_SERVER_URL "mirror-server-url"
 
-/* Private structure type */
+typedef struct _GtrOpenTranPanel        GtrOpenTranPanel;
 typedef struct _GtrOpenTranPanelPrivate GtrOpenTranPanelPrivate;
-
-/*
- * Main object structure
- */
-typedef struct _GtrOpenTranPanel GtrOpenTranPanel;
+typedef struct _GtrOpenTranPanelClass   GtrOpenTranPanelClass;
 
 struct _GtrOpenTranPanel
 {
@@ -58,24 +52,16 @@ struct _GtrOpenTranPanel
   GtrOpenTranPanelPrivate *priv;
 };
 
-/*
- * Class definition
- */
-typedef struct _GtrOpenTranPanelClass GtrOpenTranPanelClass;
-
 struct _GtrOpenTranPanelClass
 {
   GtkVBoxClass parent_class;
 };
 
-/*
- * Public methods
- */
-GType
-gtr_open_tran_panel_get_type (void)
-  G_GNUC_CONST;
-     GType gtr_open_tran_panel_register_type (GTypeModule * module);
-     GtkWidget *gtr_open_tran_panel_new (GtrWindow * window);
+GType gtr_open_tran_panel_get_type (void) G_GNUC_CONST;
+
+GtkWidget *gtr_open_tran_panel_new (GtrWindow * window);
+
+void _gtr_open_tran_panel_register_type (GTypeModule *type_module);
 
 G_END_DECLS
 #endif /* __OPEN_TRAN_PANEL_H__ */

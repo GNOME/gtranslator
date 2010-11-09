@@ -26,14 +26,15 @@
 #include "gtr-application.h"
 #include "gtr-dirs.h"
 #include "gtr-window.h"
+#include "gtr-window-activatable.h"
 #include "gtr-utils.h"
 
+#include <libpeas-gtk/peas-gtk-configurable.h>
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 #include <libxml/nanohttp.h>
 
 #define OPEN_TRAN_PLUGIN_ICON "open-tran.png"
-#define WINDOW_DATA_KEY "GtrOpenTranPluginWindowData"
 
 #define GTR_OPEN_TRAN_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
@@ -44,8 +45,8 @@ struct _GtrOpenTranPluginPrivate
 {
   GSettings *settings;
 
-  /* Dialog stuff */
-  GtkWidget *dialog;
+  GtrWindow *window;
+  GtkWidget *opentran;
 
   GtkWidget *main_box;
   GtkWidget *search_code_entry;
@@ -55,17 +56,26 @@ struct _GtrOpenTranPluginPrivate
   GtkWidget *mirror_server_frame_entry;
 };
 
-typedef struct
+enum
 {
-  GtkWidget *panel;
-  guint context_id;
-} WindowData;
+  PROP_0,
+  PROP_WINDOW
+};
 
-GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrOpenTranPlugin,
-                                    gtr_open_tran_plugin,
-                                    gtr_open_tran_panel_register_type
-                                    (module);
-  )
+static void gtr_window_activatable_iface_init (GtrWindowActivatableInterface *iface);
+static void peas_gtk_configurable_iface_init (PeasGtkConfigurableInterface *iface);
+
+G_DEFINE_DYNAMIC_TYPE_EXTENDED (GtrOpenTranPlugin,
+                                gtr_open_tran_plugin,
+                                PEAS_TYPE_EXTENSION_BASE,
+                                0,
+                                G_IMPLEMENT_INTERFACE_DYNAMIC (GTR_TYPE_WINDOW_ACTIVATABLE,
+                                                               gtr_window_activatable_iface_init)
+                                G_IMPLEMENT_INTERFACE_DYNAMIC (PEAS_GTK_TYPE_CONFIGURABLE,
+                                                               peas_gtk_configurable_iface_init) \
+                                                                                                 \
+                                _gtr_open_tran_panel_register_type (type_module)                 \
+)
 
 static void
 gtr_open_tran_plugin_init (GtrOpenTranPlugin * plugin)
@@ -80,63 +90,109 @@ gtr_open_tran_plugin_init (GtrOpenTranPlugin * plugin)
 static void
 gtr_open_tran_plugin_dispose (GObject * object)
 {
-  GtrOpenTranPlugin *plugin = GTR_OPEN_TRAN_PLUGIN (object);
+  GtrOpenTranPluginPrivate *priv = GTR_OPEN_TRAN_PLUGIN (object)->priv;
 
   xmlNanoHTTPCleanup ();
 
-  if (plugin->priv->settings)
+  if (priv->settings)
     {
-      g_object_unref (plugin->priv->settings);
-      plugin->priv->settings = NULL;
+      g_object_unref (priv->settings);
+      priv->settings = NULL;
+    }
+
+  if (priv->window != NULL)
+    {
+      g_object_unref (priv->window);
+      priv->window = NULL;
     }
 
   G_OBJECT_CLASS (gtr_open_tran_plugin_parent_class)->dispose (object);
 }
 
+static void
+gtr_open_tran_plugin_set_property (GObject      *object,
+                                   guint         prop_id,
+                                   const GValue *value,
+                                   GParamSpec   *pspec)
+{
+  GtrOpenTranPluginPrivate *priv = GTR_OPEN_TRAN_PLUGIN (object)->priv;
+
+  switch (prop_id)
+    {
+      case PROP_WINDOW:
+        priv->window = GTR_WINDOW (g_value_dup_object (value));
+        break;
+
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
+    }
+}
 
 static void
-impl_activate (GtrPlugin * plugin, GtrWindow * window)
+gtr_open_tran_plugin_get_property (GObject    *object,
+                                   guint       prop_id,
+                                   GValue     *value,
+                                   GParamSpec *pspec)
 {
-  GtkWidget *opentran;
+  GtrOpenTranPluginPrivate *priv = GTR_OPEN_TRAN_PLUGIN (object)->priv;
+
+  switch (prop_id)
+    {
+      case PROP_WINDOW:
+        g_value_set_object (value, priv->window);
+        break;
+
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
+    }
+}
+
+static void
+gtr_open_tran_plugin_activate (GtrWindowActivatable *activatable)
+{
+  GtrOpenTranPluginPrivate *priv = GTR_OPEN_TRAN_PLUGIN (activatable)->priv;
 
   gtr_application_register_icon (GTR_APP, "open-tran.png",
                                  "open-tran-plugin-icon");
 
-  opentran = gtr_open_tran_panel_new (window);
-  gtk_widget_show (opentran);
+  priv->opentran = gtr_open_tran_panel_new (priv->window);
+  gtk_widget_show (priv->opentran);
 
-  gtr_window_add_widget (window,
-                         opentran,
+  gtr_window_add_widget (priv->window,
+                         priv->opentran,
                          "GtrOpenTranPlugin",
                          _("Open Tran"),
-                         "open-tran-plugin-icon", GTR_WINDOW_PLACEMENT_LEFT);
-
-  g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, opentran);
+                         "open-tran-plugin-icon",
+                         GTR_WINDOW_PLACEMENT_LEFT);
 }
 
 static void
-impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
+gtr_open_tran_plugin_deactivate (GtrWindowActivatable *activatable)
 {
-  GtkWidget *opentran;
+  GtrOpenTranPluginPrivate *priv = GTR_OPEN_TRAN_PLUGIN (activatable)->priv;
 
-  opentran = (GtkWidget *) g_object_get_data (G_OBJECT (window),
-                                              WINDOW_DATA_KEY);
-  g_return_if_fail (opentran != NULL);
+  gtr_window_remove_widget (priv->window, priv->opentran);
+}
 
-  gtr_window_remove_widget (window, opentran);
-
-  g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
+static void
+use_mirror_server_toggled_cb (GtkWidget         *widget,
+                              GtrOpenTranPlugin *plugin)
+{
+  gtk_widget_set_sensitive (plugin->priv->mirror_server_frame_entry,
+                            gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)));
 }
 
 static GtkWidget *
 get_configuration_dialog (GtrOpenTranPlugin * plugin)
 {
-
+  GtrOpenTranPluginPrivate *priv = plugin->priv;
   gboolean ret;
   GtkWidget *error_widget;
   gchar *path;
   gchar *root_objects[] = {
-    "dialog",
+    "main_box",
     NULL
   };
 
@@ -144,19 +200,13 @@ get_configuration_dialog (GtrOpenTranPlugin * plugin)
   ret = gtr_utils_get_ui_objects (path,
                                   root_objects,
                                   &error_widget,
-                                  "dialog", &plugin->priv->dialog,
-                                  "main_box", &plugin->priv->main_box,
-                                  "search_code",
-                                  &plugin->priv->search_code_entry,
-                                  "own_code",
-                                  &plugin->priv->own_code_entry,
-                                  "use_mirror_server",
-                                  &plugin->priv->use_mirror_server_entry,
-                                  "mirror_server_url",
-                                  &plugin->priv->mirror_server_url_entry,
-                                  "mirror_server_frame",
-                                  &plugin->priv->mirror_server_frame_entry,
-				  NULL);
+                                  "main_box", &priv->main_box,
+                                  "search_code", &priv->search_code_entry,
+                                  "own_code", &priv->own_code_entry,
+                                  "use_mirror_server", &priv->use_mirror_server_entry,
+                                  "mirror_server_url", &priv->mirror_server_url_entry,
+                                  "mirror_server_frame", &priv->mirror_server_frame_entry,
+                                  NULL);
   if (!ret)
     {
       g_error (_("Error from configuration dialog %s"), path);
@@ -164,94 +214,89 @@ get_configuration_dialog (GtrOpenTranPlugin * plugin)
 
   g_free (path);
 
-  g_settings_bind (plugin->priv->settings,
+  g_settings_bind (priv->settings,
                    GTR_SETTINGS_OWN_CODE,
-                   plugin->priv->own_code_entry,
+                   priv->own_code_entry,
                    "text",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
-  g_settings_bind (plugin->priv->settings,
+  g_settings_bind (priv->settings,
                    GTR_SETTINGS_SEARCH_CODE,
-                   plugin->priv->search_code_entry,
+                   priv->search_code_entry,
                    "text",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
-  g_settings_bind (plugin->priv->settings,
+  g_settings_bind (priv->settings,
                    GTR_SETTINGS_USE_MIRROR_SERVER,
-                   plugin->priv->use_mirror_server_entry,
+                   priv->use_mirror_server_entry,
                    "active",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
-  g_settings_bind (plugin->priv->settings,
+  g_settings_bind (priv->settings,
                    GTR_SETTINGS_MIRROR_SERVER_URL,
-                   plugin->priv->mirror_server_url_entry,
+                   priv->mirror_server_url_entry,
                    "text",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
-  return plugin->priv->dialog;
-}
-
-static void
-configure_dialog_response_cb (GtkWidget * widget,
-                              gint response, GtrOpenTranPlugin * plugin)
-{
-  gtk_widget_destroy (plugin->priv->dialog);
-}
-
-static void
-use_mirror_server_toggled_cb (GtkWidget *widget,
-			      GtrOpenTranPlugin * plugin)
-{
-  GtkWidget *mirror_server_url_entry;
-  GtkWidget *mirror_server_frame_entry;
-  gboolean use_mirror_server;
-
-  mirror_server_url_entry = plugin->priv->mirror_server_url_entry;
-  mirror_server_frame_entry = plugin->priv->mirror_server_frame_entry;
-  use_mirror_server = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-  gtk_widget_set_sensitive (mirror_server_frame_entry, use_mirror_server);
-}
-
-static GtkWidget *
-impl_create_configure_dialog (GtrPlugin * plugin)
-{
-  GtkWidget *dialog;
-  GtrOpenTranPluginPrivate *priv = GTR_OPEN_TRAN_PLUGIN (plugin)->priv;
-  gboolean use_mirror_server;
-
-  dialog = get_configuration_dialog (GTR_OPEN_TRAN_PLUGIN (plugin));
-
-  g_signal_connect (dialog,
-                    "response",
-                    G_CALLBACK (configure_dialog_response_cb),
-                    plugin);
-  g_signal_connect (dialog,
-                    "destroy", G_CALLBACK (gtk_widget_destroy), &dialog);
+  /* Set the sensitivity of the mirror server area */
+  gtk_widget_set_sensitive (priv->mirror_server_frame_entry,
+                            gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->use_mirror_server_entry)));
 
   g_signal_connect (priv->use_mirror_server_entry,
                     "toggled",
                     G_CALLBACK (use_mirror_server_toggled_cb),
                     plugin);
 
-  /* Set the sensitivity of the mirror server area */
-  use_mirror_server = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->use_mirror_server_entry));
-  gtk_widget_set_sensitive (priv->mirror_server_frame_entry,
-			    use_mirror_server);
+  return plugin->priv->main_box;
+}
 
-  return dialog;
+static GtkWidget *
+gtr_open_tran_create_configure_widget (PeasGtkConfigurable *configurable)
+{
+  return get_configuration_dialog (GTR_OPEN_TRAN_PLUGIN (configurable));
 }
 
 static void
 gtr_open_tran_plugin_class_init (GtrOpenTranPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
   object_class->dispose = gtr_open_tran_plugin_dispose;
+  object_class->set_property = gtr_open_tran_plugin_set_property;
+  object_class->get_property = gtr_open_tran_plugin_get_property;
 
-  plugin_class->activate = impl_activate;
-  plugin_class->deactivate = impl_deactivate;
-  plugin_class->create_configure_dialog = impl_create_configure_dialog;
+  g_object_class_override_property (object_class, PROP_WINDOW, "window");
 
   g_type_class_add_private (object_class, sizeof (GtrOpenTranPluginPrivate));
+}
+
+static void
+gtr_open_tran_plugin_class_finalize (GtrOpenTranPluginClass *klass)
+{
+}
+
+static void
+peas_gtk_configurable_iface_init (PeasGtkConfigurableInterface *iface)
+{
+  iface->create_configure_widget = gtr_open_tran_create_configure_widget;
+}
+
+static void
+gtr_window_activatable_iface_init (GtrWindowActivatableInterface *iface)
+{
+  iface->activate = gtr_open_tran_plugin_activate;
+  iface->deactivate = gtr_open_tran_plugin_deactivate;
+}
+
+G_MODULE_EXPORT void
+peas_register_types (PeasObjectModule *module)
+{
+  gtr_open_tran_plugin_register_type (G_TYPE_MODULE (module));
+
+  peas_object_module_register_extension_type (module,
+                                              GTR_TYPE_WINDOW_ACTIVATABLE,
+                                              GTR_TYPE_OPEN_TRAN_PLUGIN);
+  peas_object_module_register_extension_type (module,
+                                              PEAS_GTK_TYPE_CONFIGURABLE,
+                                              GTR_TYPE_OPEN_TRAN_PLUGIN);
 }

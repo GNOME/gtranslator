@@ -1,18 +1,13 @@
 # Open-tran Panel plugin
 plugindir = $(libdir)/gtranslator/plugins
 
-INCLUDES =                                                      \
-	-I$(top_srcdir) 				\
+INCLUDES =						\
+	-I$(top_srcdir)					\
 	-I$(top_srcdir)/src				\
-	-I$(top_srcdir)/src/plugin-system		\
-	-I$(top_srcdir)/src/toolbareditor		\
-	-DPIXMAPSDIR=\""$(datadir)"/pixmaps/gtranslator\"       \
-	-DDATADIR=\""$(pkgdatadir)"\"                           \
-	$(GTRANSLATOR_CFLAGS) 				\
+	$(GTRANSLATOR_CFLAGS)				\
 	$(JSON_GLIB_CFLAGS)				\
 	$(WARN_CFLAGS)					\
-	$(DISABLE_DEPRECATED)				\
-	-DGTR_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"
+	$(DISABLE_DEPRECATED)
 
 plugin_LTLIBRARIES = libopentran.la
 
@@ -24,7 +19,7 @@ libopentran_la_SOURCES = \
 
 libopentran_la_LDFLAGS = \
 	$(PLUGIN_LIBTOOL_FLAGS)				\
-	$(GTRANSLATOR_LIBS)					\
+	$(GTRANSLATOR_LIBS)				\
 	$(JSON_GLIB_LIBS)
 
 uidir = $(pkgdatadir)/ui
@@ -34,10 +29,10 @@ ui_DATA =  \
 
 pixmaps_dir = $(datadir)/pixmaps/gtranslator
 pixmaps__DATA = \
-        gnome.png \
-        kde.ico \
-        mozilla.png \
-        debian.png \
+	gnome.png \
+	kde.ico \
+	mozilla.png \
+	debian.png \
 	open-tran.png \
 	suse.png \
 	xfce.png \
@@ -48,11 +43,11 @@ pixmaps__DATA = \
 
 # Plugin Info
 
-plugin_in_files = gtr-open-tran.gtranslator-plugin.desktop.in
+plugin_in_files = gtr-open-tran.plugin.desktop.in
 
-%.gtranslator.plugin: %.gtranslator-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+%.plugin: %.plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
-plugin_DATA = $(plugin_in_files:.gtranslator-plugin.desktop.in=.gtranslator.plugin)
+plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
 gsettings_SCHEMAS = org.gnome.gtranslator.plugins.open-tran.gschema.xml
 
