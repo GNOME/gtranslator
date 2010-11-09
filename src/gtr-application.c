@@ -456,7 +456,6 @@ _gtr_application_new ()
   instance = GTR_APPLICATION (g_object_new (GTR_TYPE_APPLICATION,
                                             "application-id", "org.gnome.Gtranslator",
                                             "flags", G_APPLICATION_HANDLES_COMMAND_LINE,
-                                            "inactivity-timeout", 10000,
                                             NULL));
 
   return instance;
