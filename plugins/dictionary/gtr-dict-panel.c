@@ -472,7 +472,7 @@ gtr_dict_panel_draw (GtrDictPanel * panel)
                     G_CALLBACK (sidebar_page_changed_cb), panel);
 
   /* Paned */
-  panel->priv->paned = GTK_PANED (gtk_vpaned_new ());
+  panel->priv->paned = GTK_PANED (gtk_paned_new (GTK_ORIENTATION_VERTICAL));
   gtk_box_pack_start (GTK_BOX (panel), GTK_WIDGET (panel->priv->paned), TRUE,
                       TRUE, 0);
   gtk_paned_pack1 (panel->priv->paned, vbox, FALSE, TRUE);

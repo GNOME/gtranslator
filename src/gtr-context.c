@@ -370,7 +370,7 @@ gtr_context_panel_init (GtrContextPanel *panel)
                     G_CALLBACK (visibility_notify_event), panel);
 
   /* Buttons */
-  priv->button_box = gtk_hbutton_box_new ();
+  priv->button_box = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
   gtk_box_pack_start (GTK_BOX (panel), priv->button_box, FALSE, FALSE, 0);
 
   button = gtk_button_new_from_stock (GTK_STOCK_OK);

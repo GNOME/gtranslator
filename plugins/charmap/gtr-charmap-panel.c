@@ -92,7 +92,7 @@ gtr_charmap_panel_init (GtrCharmapPanel * panel)
 
   priv = panel->priv = GTR_CHARMAP_PANEL_GET_PRIVATE (panel);
 
-  paned = GTK_PANED (gtk_vpaned_new ());
+  paned = GTK_PANED (gtk_paned_new (GTK_ORIENTATION_VERTICAL));
 
 #ifdef HAVE_GUCHARMAP_2
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
