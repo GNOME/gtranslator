@@ -312,8 +312,7 @@ gtr_statusbar_flash_message (GtrStatusbar * statusbar,
                         context_id, msg);
 
   statusbar->priv->flash_timeout = g_timeout_add (flash_length,
-                                                  (GtkFunction)
-                                                  remove_message_timeout,
+                                                  (GSourceFunc) remove_message_timeout,
                                                   statusbar);
 
   g_free (msg);
