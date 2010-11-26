@@ -34,13 +34,10 @@ G_BEGIN_DECLS
 #define GTR_IS_DICT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_DICT_PANEL))
 #define GTR_IS_DICT_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_DICT_PANEL))
 #define GTR_DICT_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_DICT_PANEL, GtrDictPanelClass))
-/* Private structure type */
-typedef struct _GtrDictPanelPrivate GtrDictPanelPrivate;
 
-/*
- * Main object structure
- */
-typedef struct _GtrDictPanel GtrDictPanel;
+typedef struct _GtrDictPanel            GtrDictPanel;
+typedef struct _GtrDictPanelClass       GtrDictPanelClass;
+typedef struct _GtrDictPanelPrivate     GtrDictPanelPrivate;
 
 struct _GtrDictPanel
 {
@@ -50,11 +47,6 @@ struct _GtrDictPanel
   GtrDictPanelPrivate *priv;
 };
 
-/*
- * Class definition
- */
-typedef struct _GtrDictPanelClass GtrDictPanelClass;
-
 struct _GtrDictPanelClass
 {
   GtkVBoxClass parent_class;
@@ -63,15 +55,13 @@ struct _GtrDictPanelClass
 /*
  * Public methods
  */
-GType
-gtr_dict_panel_get_type (void)
-  G_GNUC_CONST;
+GType gtr_dict_panel_get_type (void) G_GNUC_CONST;
 
-     GType gtr_dict_panel_register_type (GTypeModule * module);
+GtkWidget *gtr_dict_panel_new (GtrWindow * window);
 
-     GtkWidget *gtr_dict_panel_new (GtrWindow * window);
+void _gtr_dict_panel_register_type (GTypeModule *type_module);
 
-     void gtr_dict_panel_set_position (GtrDictPanel * panel, gint pos);
+void gtr_dict_panel_set_position (GtrDictPanel * panel, gint pos);
 
 G_END_DECLS
 #endif /* __DICT_PANEL_H__ */

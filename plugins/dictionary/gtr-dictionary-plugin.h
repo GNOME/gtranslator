@@ -18,10 +18,11 @@
 #ifndef __GTR_Dict_PLUGIN_H__
 #define __GTR_Dict_PLUGIN_H__
 
-#include "gtr-plugin.h"
-
 #include <glib.h>
 #include <glib-object.h>
+#include <libpeas/peas-extension-base.h>
+#include <libpeas/peas-object-module.h>
+
 
 G_BEGIN_DECLS
 /*
@@ -29,42 +30,32 @@ G_BEGIN_DECLS
  */
 #define GTR_TYPE_DICT_PLUGIN		(gtr_dict_plugin_get_type ())
 #define GTR_DICT_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_DICT_PLUGIN, GtrDictPlugin))
-#define GTR_DICT_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_Dict_PLUGIN, GtrDictPluginClass))
-#define GTR_IS_DICT_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_Dict_PLUGIN))
+#define GTR_DICT_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_DICT_PLUGIN, GtrDictPluginClass))
+#define GTR_IS_DICT_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_DICT_PLUGIN))
 #define GTR_IS_DICT_PLUGIN_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_Dict_PLUGIN))
-#define GTR_Dict_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_Dict_PLUGIN, GtrDictPluginClass))
-/* Private structure type */
-typedef struct _GtrDictPluginPrivate GtrDictPluginPrivate;
+#define GTR_DICT_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_DICT_PLUGIN, GtrDictPluginClass))
 
-/*
- * Main object structure
- */
 typedef struct _GtrDictPlugin GtrDictPlugin;
+typedef struct _GtrDictPluginPrivate GtrDictPluginPrivate;
+typedef struct _GtrDictPluginClass GtrDictPluginClass;
 
 struct _GtrDictPlugin
 {
-  GtrPlugin parent_instance;
-};
+  PeasExtensionBase parent_instance;
 
-/*
- * Class definition
- */
-typedef struct _GtrDictPluginClass GtrDictPluginClass;
+  /*< private > */
+  GtrDictPluginPrivate *priv;
+
+};
 
 struct _GtrDictPluginClass
 {
-  GtrPluginClass parent_class;
+  PeasExtensionBaseClass parent_class;
 };
 
-/*
- * Public methods
- */
-GType
-gtr_dict_plugin_get_type (void)
-  G_GNUC_CONST;
+GType gtr_dict_plugin_get_type (void) G_GNUC_CONST;
 
-/* All the plugins must implement this function */
-     G_MODULE_EXPORT GType register_gtr_plugin (GTypeModule * module);
+G_MODULE_EXPORT void peas_register_types (PeasObjectModule * module);
 
 G_END_DECLS
 #endif /* __GTR_Dict_PLUGIN_H__ */

@@ -23,44 +23,39 @@
 #include "gtr-dictionary-plugin.h"
 #include "gtr-dict-panel.h"
 #include "gtr-window.h"
+#include "gtr-window-activatable.h"
 
+#include <libpeas-gtk/peas-gtk-configurable.h>
 #include <glib/gi18n-lib.h>
-
-#define WINDOW_DATA_KEY	"GtrDictPluginWindowData"
 
 #define GTR_DICT_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
 				GTR_TYPE_DICT_PLUGIN,		\
 				GtrDictPluginPrivate))
 
-typedef struct
+
+struct _GtrDictPluginPrivate
 {
-  GtkWidget *panel;
-  guint context_id;
-} WindowData;
+  GtrWindow *window;
+  GtkWidget *dict;
+};
 
-GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrDictPlugin,
-                                    gtr_dict_plugin,
-                                    gtr_dict_panel_register_type (module);
-  )
-     static void gtr_dict_plugin_init (GtrDictPlugin * plugin)
+enum
 {
-}
+  PROP_0,
+  PROP_WINDOW
+};
 
-static void
-gtr_dict_plugin_finalize (GObject * object)
-{
-  G_OBJECT_CLASS (gtr_dict_plugin_parent_class)->finalize (object);
-}
+static void gtr_window_activatable_iface_init (GtrWindowActivatableInterface *iface);
 
-static void
-free_window_data (WindowData * data)
-{
-  g_return_if_fail (data != NULL);
-
-  g_free (data);
-}
-
+G_DEFINE_DYNAMIC_TYPE_EXTENDED (GtrDictPlugin,
+                                gtr_dict_plugin,
+                                PEAS_TYPE_EXTENSION_BASE,
+                                0,
+                                G_IMPLEMENT_INTERFACE_DYNAMIC
+                                (GTR_TYPE_WINDOW_ACTIVATABLE,
+                                 gtr_window_activatable_iface_init)
+                                _gtr_dict_panel_register_type (type_module))
 
 static GtkWidget *
 create_dict_panel (GtrWindow * window)
@@ -74,51 +69,124 @@ create_dict_panel (GtrWindow * window)
   return panel;
 }
 
+
 static void
-impl_activate (GtrPlugin * plugin, GtrWindow * window)
+gtr_dict_plugin_set_property (GObject * object,
+                              guint prop_id,
+                              const GValue * value,
+                              GParamSpec * pspec)
 {
-  WindowData *data;
+  GtrDictPluginPrivate *priv = GTR_DICT_PLUGIN (object)->priv;
 
-  data = g_new (WindowData, 1);
+  switch (prop_id)
+    {
+    case PROP_WINDOW:
+      priv->window = GTR_WINDOW (g_value_dup_object (value));
+      break;
 
-  data->panel = create_dict_panel (window);
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
+}
+
+static void
+gtr_dict_plugin_get_property (GObject * object,
+                              guint prop_id,
+                              GValue * value, GParamSpec * pspec)
+{
+  GtrDictPluginPrivate *priv = GTR_DICT_PLUGIN (object)->priv;
+
+  switch (prop_id)
+    {
+    case PROP_WINDOW:
+      g_value_set_object (value, priv->window);
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
+}
+
+
+static void
+gtr_dict_plugin_init (GtrDictPlugin * plugin)
+{
+  plugin->priv = GTR_DICT_PLUGIN_GET_PRIVATE (plugin);
+}
+
+static void
+gtr_dict_plugin_dispose (GObject * object)
+{
+  GtrDictPluginPrivate *priv = GTR_DICT_PLUGIN (object)->priv;
+
+  if (priv->window != NULL)
+    {
+      g_object_unref (priv->window);
+      priv->window = NULL;
+    }
+
+  G_OBJECT_CLASS (gtr_dict_plugin_parent_class)->dispose (object);
+}
+
+static void
+gtr_dict_plugin_activate (GtrWindowActivatable * activatable)
+{
+  GtrDictPluginPrivate *priv = GTR_DICT_PLUGIN (activatable)->priv;
 
   gtr_application_register_icon (GTR_APP, "gnome-dictionary.png",
                                  "dictionary-icon");
 
-  gtr_window_add_widget (window,
-                         data->panel,
+  priv->dict = create_dict_panel (priv->window);
+
+  gtr_window_add_widget (priv->window,
+                         priv->dict,
                          "GtrDictionaryPlugin",
                          _("Dictionary"),
-                         "dictionary-icon", GTR_WINDOW_PLACEMENT_LEFT);
-
-  g_object_set_data_full (G_OBJECT (window),
-                          WINDOW_DATA_KEY,
-                          data, (GDestroyNotify) free_window_data);
+                         "dictionary-icon",
+                         GTR_WINDOW_PLACEMENT_LEFT);
 }
 
 static void
-impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
+gtr_dict_plugin_deactivate (GtrWindowActivatable * activatable)
 {
-  WindowData *data;
+  GtrDictPluginPrivate *priv = GTR_DICT_PLUGIN (activatable)->priv;
 
-  data = (WindowData *) g_object_get_data (G_OBJECT (window),
-                                           WINDOW_DATA_KEY);
-  g_return_if_fail (data != NULL);
-
-  gtr_window_remove_widget (window, data->panel);
-
-  g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
+  gtr_window_remove_widget (priv->window, priv->dict);
 }
 
 static void
 gtr_dict_plugin_class_init (GtrDictPluginClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
-  object_class->finalize = gtr_dict_plugin_finalize;
+  object_class->dispose = gtr_dict_plugin_dispose;
+  object_class->set_property = gtr_dict_plugin_set_property;
+  object_class->get_property = gtr_dict_plugin_get_property;
 
-  plugin_class->activate = impl_activate;
-  plugin_class->deactivate = impl_deactivate;
+  g_object_class_override_property (object_class, PROP_WINDOW, "window");
+  g_type_class_add_private (object_class, sizeof (GtrDictPluginPrivate));
+}
+
+static void
+gtr_dict_plugin_class_finalize (GtrDictPluginClass * klass)
+{
+}
+
+static void
+gtr_window_activatable_iface_init (GtrWindowActivatableInterface * iface)
+{
+  iface->activate = gtr_dict_plugin_activate;
+  iface->deactivate = gtr_dict_plugin_deactivate;
+}
+
+G_MODULE_EXPORT void
+peas_register_types (PeasObjectModule * module)
+{
+  gtr_dict_plugin_register_type (G_TYPE_MODULE (module));
+
+  peas_object_module_register_extension_type (module,
+      GTR_TYPE_WINDOW_ACTIVATABLE,
+      GTR_TYPE_DICT_PLUGIN);
 }

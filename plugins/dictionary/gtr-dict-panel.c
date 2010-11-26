@@ -21,7 +21,6 @@
 
 #include "gtr-dict-panel.h"
 #include "gtr-gdict-sidebar.h"
-#include "gtr-plugin.h"
 #include "gtr-window.h"
 #include "gtr-statusbar.h"
 #include "gtr-dirs.h"
@@ -51,7 +50,7 @@
 #define GDICT_SIDEBAR_STRATEGIES_PAGE   "strat-chooser"
 #define GDICT_SIDEBAR_SOURCES_PAGE      "source-chooser"
 
-GTR_PLUGIN_DEFINE_TYPE (GtrDictPanel, gtr_dict_panel, GTK_TYPE_VBOX)
+G_DEFINE_DYNAMIC_TYPE (GtrDictPanel, gtr_dict_panel, GTK_TYPE_VBOX)
 
 struct _GtrDictPanelPrivate
 {
@@ -576,7 +575,6 @@ on_settings_changed (GSettings    *settings,
 static void
 gtr_dict_panel_init (GtrDictPanel * panel)
 {
-  gchar *data_dir;
   GtrDictPanelPrivate *priv;
 
   panel->priv = GTR_DICT_PANEL_GET_PRIVATE (panel);
@@ -588,9 +586,8 @@ gtr_dict_panel_init (GtrDictPanel * panel)
     panel->priv->loader = gdict_source_loader_new ();
 
   /* add our data dir inside $HOME to the loader's search paths */
-  data_dir = gtr_dirs_get_user_config_dir ();
-  gdict_source_loader_add_search_path (priv->loader, data_dir);
-  g_free (data_dir);
+  gdict_source_loader_add_search_path (priv->loader,
+                                       gtr_dirs_get_user_config_dir ());
 
   /* settings */
   priv->settings = g_settings_new ("org.gnome.gtranslator.plugins.dictionary");
@@ -635,7 +632,7 @@ gtr_dict_panel_dispose (GObject * object)
 }
 
 static void
-gtr_dict_panel_class_init (GtrDictPanelClass * klass)
+gtr_dict_panel_class_init (GtrDictPanelClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
@@ -643,6 +640,11 @@ gtr_dict_panel_class_init (GtrDictPanelClass * klass)
 
   gobject_class->finalize = gtr_dict_panel_finalize;
   gobject_class->dispose = gtr_dict_panel_dispose;
+}
+
+static void
+gtr_dict_panel_class_finalize (GtrDictPanelClass *klass)
+{
 }
 
 GtkWidget *
@@ -654,4 +656,10 @@ gtr_dict_panel_new (GtrWindow * window)
   panel->priv->status = GTR_STATUSBAR (gtr_window_get_statusbar (window));
 
   return GTK_WIDGET (panel);
+}
+
+void
+_gtr_dict_panel_register_type (GTypeModule *type_module)
+{
+  gtr_dict_panel_register_type (type_module);
 }

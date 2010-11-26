@@ -32,7 +32,6 @@
 
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
-#include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
 #include "gtr-gdict-sidebar.h"
@@ -65,7 +64,6 @@ struct _GdictSidebarPrivate
 enum
 {
   PAGE_CHANGED,
-  CLOSED,
 
   LAST_SIGNAL
 };
@@ -150,8 +148,8 @@ gdict_sidebar_menu_position_function (GtkMenu * menu,
   widget = GTK_WIDGET (user_data);
 
   gdk_window_get_origin (gtk_widget_get_window (widget), x, y);
-  gtk_widget_get_allocation (widget, &allocation);
 
+  gtk_widget_get_allocation (widget, &allocation);
   *x += allocation.x;
   *y += allocation.y + allocation.height;
 
@@ -164,11 +162,11 @@ gdict_sidebar_select_button_press_cb (GtkWidget * widget,
                                       gpointer user_data)
 {
   GdictSidebar *sidebar = GDICT_SIDEBAR (user_data);
+  GtkAllocation allocation;
 
   if (event->button == 1)
     {
       GtkRequisition req;
-      GtkAllocation allocation;
       gint width;
 
       gtk_widget_get_allocation (widget, &allocation);
@@ -197,9 +195,9 @@ gdict_sidebar_select_key_press_cb (GtkWidget * widget,
 {
   GdictSidebar *sidebar = GDICT_SIDEBAR (user_data);
 
-  if (event->keyval == GDK_space ||
-      event->keyval == GDK_KP_Space ||
-      event->keyval == GDK_Return || event->keyval == GDK_KP_Enter)
+  if (event->keyval == GDK_KEY_space ||
+      event->keyval == GDK_KEY_KP_Space ||
+      event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter)
     {
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
       gtk_menu_popup (GTK_MENU (sidebar->priv->menu),
@@ -277,12 +275,6 @@ gdict_sidebar_class_init (GdictSidebarClass * klass)
                   G_TYPE_FROM_CLASS (gobject_class),
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (GdictSidebarClass, page_changed),
-                  NULL, NULL, g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
-  sidebar_signals[CLOSED] =
-    g_signal_new ("closed",
-                  G_TYPE_FROM_CLASS (gobject_class),
-                  G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (GdictSidebarClass, closed),
                   NULL, NULL, g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
 }
 
