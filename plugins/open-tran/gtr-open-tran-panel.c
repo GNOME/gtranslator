@@ -24,6 +24,7 @@
 #include "gtr-application.h"
 #include "gtr-window.h"
 #include "gtr-header.h"
+#include "gtr-dirs.h"
 
 #include <string.h>
 
@@ -45,16 +46,16 @@
 						  GTR_TYPE_OPEN_TRAN_PANEL, \
 						  GtrOpenTranPanelPrivate))
 
-#define GNOME_ICON       PIXMAPSDIR"/gnome.png"
-#define KDE_ICON         PIXMAPSDIR"/kde.ico"
-#define MOZILLA_ICON     PIXMAPSDIR"/mozilla.png"
-#define DEBIAN_ICON      PIXMAPSDIR"/debian.png"
-#define SUSE_ICON        PIXMAPSDIR"/suse.png"
-#define XFCE_ICON        PIXMAPSDIR"/xfce.png"
-#define INKSCAPE_ICON    PIXMAPSDIR"/inkscape.png"
-#define OPEN_OFFICE_ICON PIXMAPSDIR"/oo-logo.png"
-#define FEDORA_ICON      PIXMAPSDIR"/fedora.png"
-#define MANDRIVA_ICON    PIXMAPSDIR"/mandriva.png"
+#define GNOME_ICON       "gnome.png"
+#define KDE_ICON         "kde.ico"
+#define MOZILLA_ICON     "mozilla.png"
+#define DEBIAN_ICON      "debian.png"
+#define SUSE_ICON        "suse.png"
+#define XFCE_ICON        "xfce.png"
+#define INKSCAPE_ICON    "inkscape.png"
+#define OPEN_OFFICE_ICON "oo-logo.png"
+#define FEDORA_ICON      "fedora.png"
+#define MANDRIVA_ICON    "mandriva.png"
 
 G_DEFINE_DYNAMIC_TYPE (GtrOpenTranPanel, gtr_open_tran_panel, GTK_TYPE_VBOX)
 
@@ -105,7 +106,7 @@ show_error_dialog (GtrWindow * parent,
 
 static gchar *
 get_service_url (gboolean use_mirror_server, gchar *mirror_server_url,
-		 const gchar * search_text,
+                 const gchar * search_text,
                  const gchar * search_code, const gchar * own_code)
 {
   const gchar *base_url;
@@ -130,12 +131,17 @@ get_service_url (gboolean use_mirror_server, gchar *mirror_server_url,
 }
 
 static GdkPixbuf *
-create_pixbuf (const gchar * path)
+create_pixbuf (const gchar *filename)
 {
   GdkPixbuf *icon;
+  gchar *path;
   GError *error = NULL;
 
+  path = g_build_filename (gtr_dirs_get_gtr_pixmaps_dir (),
+                           filename,
+                           NULL);
   icon = gdk_pixbuf_new_from_file (path, &error);
+  g_free (path);
 
   if (error)
     {
