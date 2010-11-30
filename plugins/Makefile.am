@@ -2,7 +2,6 @@ SUBDIRS = 					\
 	alternate-language			\
 	codeview				\
 	fullscreen				\
-	insert-tags				\
 	insert-params
 
 if USE_CHARMAP

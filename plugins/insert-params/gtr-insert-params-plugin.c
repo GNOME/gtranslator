@@ -53,6 +53,8 @@ G_DEFINE_DYNAMIC_TYPE_EXTENDED (GtrInsertParamsPlugin,
                                 G_IMPLEMENT_INTERFACE_DYNAMIC (GTR_TYPE_WINDOW_ACTIVATABLE,
                                                                gtr_window_activatable_iface_init))
 
+static GSList *tags = NULL;
+static gint tag_position;
 static GSList *params = NULL;
 static gint param_position;
 
@@ -64,20 +66,23 @@ static const gchar param_regex[] =
   "(?:hh|ll|[hlLqjzt])?"              /* length modifier */
   "[diouxXeEfFgGaAcsCSpnm]";          /* conversion specifier */
 
+static const gchar tags_regex[] =
+  "<[-0-9a-zA-Z=.:;_#?%()'\"/ ]+>";
+
 static void
-on_next_tag_activated (GtkAction * action, GtrWindow * window)
+process_item (GtrWindow * window, GSList * items, gint * item_position)
 {
   GtrView *view;
   GtkTextBuffer *buffer;
-  GSList *param;
+  GSList *item;
 
-  if (params == NULL)
+  if (items == NULL)
     return;
 
-  if (param_position >= g_slist_length (params))
-    param_position = 0;
+  if (*item_position >= g_slist_length (items))
+    *item_position = 0;
 
-  param = g_slist_nth (params, param_position);
+  item = g_slist_nth (items, *item_position);
 
   view = gtr_window_get_active_view (window);
 
@@ -85,18 +90,34 @@ on_next_tag_activated (GtkAction * action, GtrWindow * window)
 
   gtk_text_buffer_begin_user_action (buffer);
   gtk_text_buffer_insert_at_cursor (buffer,
-                                    (const gchar *) param->data,
-                                    strlen (param->data));
+                                    (const gchar *) item->data,
+                                    -1);
   gtk_text_buffer_end_user_action (buffer);
 
-  param_position++;
+  *item_position = *item_position + 1;
+}
+
+static void
+on_next_param_activated (GtkAction * action, GtrWindow * window)
+{
+  process_item (window, params, &param_position);
+}
+
+static void
+on_next_tag_activated (GtkAction * action, GtrWindow * window)
+{
+  process_item (window, tags, &tag_position);
 }
 
 static const GtkActionEntry action_entries[] = {
   {"NextParam", NULL, N_("_Next Param"), "<control><shift>K",
    N_("Insert the next param of the message"),
+   G_CALLBACK (on_next_param_activated)},
+  {"InsertParam", NULL, N_("_Insert Params")},
+  {"NextTag", NULL, N_("_Next Tag"), "<control><shift>I",
+   N_("Insert the next tag of the message"),
    G_CALLBACK (on_next_tag_activated)},
-  {"InsertParams", NULL, N_("_Insert Params")}
+  {"InsertTag", NULL, N_("_Insert Tags")}
 };
 
 static const gchar submenu[] =
@@ -104,8 +125,10 @@ static const gchar submenu[] =
   "  <menubar name='MainMenu'>"
   "    <menu name='EditMenu' action='Edit'>"
   "      <placeholder name='EditOps_1'>"
+  "        <menuitem name='EditNextTag' action='NextTag' />"
+  "        <menuitem name='EditInsertTag' action='InsertTag' />"
   "        <menuitem name='EditNextParam' action='NextParam' />"
-  "        <menuitem name='EditInsertParams' action='InsertParams' />"
+  "        <menuitem name='EditInsertParam' action='InsertParam' />"
   "      </placeholder>"
   "    </menu>"
   "  </menubar>"
@@ -120,12 +143,21 @@ update_ui (GtrInsertParamsPlugin *plugin)
 
   view = GTK_TEXT_VIEW (gtr_window_get_active_view (priv->window));
 
-  action = gtk_action_group_get_action (priv->action_group, "InsertParams");
+  action = gtk_action_group_get_action (priv->action_group, "InsertParam");
   gtk_action_set_sensitive (action,
                             (view != NULL) &&
                             gtk_text_view_get_editable (view));
 
   action = gtk_action_group_get_action (priv->action_group, "NextParam");
+  gtk_action_set_sensitive (action,
+                            (view != NULL) &&
+                            gtk_text_view_get_editable (view));
+  action = gtk_action_group_get_action (priv->action_group, "InsertTag");
+  gtk_action_set_sensitive (action,
+                            (view != NULL) &&
+                            gtk_text_view_get_editable (view));
+
+  action = gtk_action_group_get_action (priv->action_group, "NextTag");
   gtk_action_set_sensitive (action,
                             (view != NULL) &&
                             gtk_text_view_get_editable (view));
@@ -164,6 +196,8 @@ gtr_insert_params_plugin_finalize (GObject *object)
 {
   g_slist_free_full (params, g_free);
   params = NULL;
+  g_slist_free_full (tags, g_free);
+  tags = NULL;
 
   G_OBJECT_CLASS (gtr_insert_params_plugin_parent_class)->finalize (object);
 }
@@ -224,41 +258,49 @@ on_menuitem_activated (GtkMenuItem * item, GtrWindow * window)
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
   gtk_text_buffer_begin_user_action (buffer);
-  gtk_text_buffer_insert_at_cursor (buffer, name, strlen (name));
+  gtk_text_buffer_insert_at_cursor (buffer, name, -1);
   gtk_text_buffer_end_user_action (buffer);
 }
 
 static void
-parse_list (GtrWindow * window)
+parse_item_list (GtrWindow * window, GSList * items, const char * name)
 {
   GtkUIManager *manager;
-  GtkWidget *insert_params, *next_param;
+  GtkWidget *insert_items, *next_item;
   GtkWidget *menuitem;
   GtkWidget *menu;
-  GSList *l = params;
+  GSList *i = items;
+  gchar *insert_items_string;
+  gchar *next_item_string;
+
+  insert_items_string = g_strdup_printf ("/MainMenu/EditMenu/EditOps_1/EditInsert%s",
+                                         name);
+  next_item_string = g_strdup_printf ("/MainMenu/EditMenu/EditOps_1/EditNext%s",
+                                      name);
 
   manager = gtr_window_get_ui_manager (window);
 
-  insert_params = gtk_ui_manager_get_widget (manager,
-                                             "/MainMenu/EditMenu/EditOps_1/EditInsertParams");
-  next_param = gtk_ui_manager_get_widget (manager,
-                                          "/MainMenu/EditMenu/EditOps_1/EditNextParam");
+  insert_items = gtk_ui_manager_get_widget (manager, insert_items_string);
+  next_item = gtk_ui_manager_get_widget (manager, next_item_string);
 
-  if (params == NULL)
+  g_free (insert_items_string);
+  g_free (next_item_string);
+
+  if (items == NULL)
     {
-      gtk_menu_item_set_submenu (GTK_MENU_ITEM (insert_params), NULL);
-      gtk_widget_set_sensitive (insert_params, FALSE);
-      gtk_widget_set_sensitive (next_param, FALSE);
+      gtk_menu_item_set_submenu (GTK_MENU_ITEM (insert_items), NULL);
+      gtk_widget_set_sensitive (insert_items, FALSE);
+      gtk_widget_set_sensitive (next_item, FALSE);
       return;
     }
 
-  gtk_widget_set_sensitive (insert_params, TRUE);
-  gtk_widget_set_sensitive (next_param, TRUE);
+  gtk_widget_set_sensitive (insert_items, TRUE);
+  gtk_widget_set_sensitive (next_item, TRUE);
 
   menu = gtk_menu_new ();
   do
     {
-      menuitem = gtk_menu_item_new_with_label ((const gchar *) l->data);
+      menuitem = gtk_menu_item_new_with_label ((const gchar *) i->data);
       gtk_widget_show (menuitem);
 
       g_signal_connect (menuitem, "activate",
@@ -266,9 +308,21 @@ parse_list (GtrWindow * window)
 
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
     }
-  while ((l = g_slist_next (l)));
+  while ((i = g_slist_next (i)));
 
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (insert_params), menu);
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (insert_items), menu);
+}
+
+static void
+parse_param_list (GtrWindow * window)
+{
+  parse_item_list (window, params, "Param");
+}
+
+static void
+parse_tag_list (GtrWindow * window)
+{
+  parse_item_list (window, tags, "Tag");
 }
 
 static void
@@ -282,17 +336,20 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrWindow * window)
 
   g_slist_free_full (params, g_free);
   params = NULL;
+  g_slist_free_full (tags, g_free);
+  tags = NULL;
 
   /*
    * If we show another message we have to restart the index
-   * of the params
+   * of the params and tags
    */
   param_position = 0;
+  tag_position = 0;
 
   msgid = gtr_msg_get_msgid (msg);
 
   /*
-   * Regular expression
+   * Regular expression for params
    */
   regex = g_regex_new (param_regex, 0, 0, NULL);
   g_regex_match (regex, msgid, 0, &match_info);
@@ -318,15 +375,35 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrWindow * window)
       g_free (word_collate);
 
       if (word != NULL)
-        params = g_slist_append (params, word);
+        params = g_slist_prepend (params, word);
       g_match_info_next (match_info, NULL);
     }
+  params = g_slist_reverse (params);
+
   g_match_info_free (match_info);
   g_regex_unref (regex);
 
-  parse_list (window);
-}
+  /*
+   * Regular expression for tags
+   */
+  regex = g_regex_new (tags_regex, 0, 0, NULL);
+  g_regex_match (regex, msgid, 0, &match_info);
+  while (g_match_info_matches (match_info))
+    {
+      gchar *word;
 
+      word = g_match_info_fetch (match_info, 0);
+      tags = g_slist_prepend (tags, word);
+      g_match_info_next (match_info, NULL);
+    }
+  tags = g_slist_reverse (tags);
+
+  g_match_info_free (match_info);
+  g_regex_unref (regex);
+
+  parse_param_list (window);
+  parse_tag_list (window);
+}
 
 static void
 page_added_cb (GtkNotebook * notebook,
@@ -367,7 +444,7 @@ gtr_insert_params_plugin_activate (GtrWindowActivatable *activatable)
 
   update_ui (GTR_INSERT_PARAMS_PLUGIN (activatable));
 
-  /*Adding menuitems */
+  /* Adding menuitems */
 
   notebook = gtr_window_get_notebook (priv->window);
 
