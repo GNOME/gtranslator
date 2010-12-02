@@ -162,10 +162,6 @@ gtr_po_get_message_position (GtrPo * po);
 
      gchar *gtr_po_check_po_file (GtrPo * po);
 
-     extern char *gtr_po_header_set_field (const char *header,
-                                           const char *field,
-                                           const char *value);
-
 
 /* Unexported funcs */
      void
