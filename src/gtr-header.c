@@ -736,6 +736,14 @@ gtr_header_set_profile (GtrHeader  *header,
   header->priv->profile = g_object_ref (profile);
 }
 
+/**
+ * gtr_header_get_profile:
+ * @header: a #GtrHeader
+ *
+ * Gets the profile of the header
+ *
+ * Return value: (transfer none): the profile of the header.
+ */
 GtrProfile *
 gtr_header_get_profile (GtrHeader *header)
 {

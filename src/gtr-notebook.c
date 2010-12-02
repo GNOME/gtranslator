@@ -194,7 +194,7 @@ gtr_notebook_remove_page (GtrNotebook * notebook, gint page_num)
  * 
  * Gets the selected page in the #GtrNotebook.
  * 
- * Returns: the selected page in the @notebook
+ * Returns: (transfer none): the selected page in the @notebook
  */
 GtrTab *
 gtr_notebook_get_page (GtrNotebook * notebook)

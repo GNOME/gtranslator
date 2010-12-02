@@ -466,7 +466,7 @@ _gtr_application_new ()
  * 
  * Returns the default instance of the application.
  * 
- * Returns: the default instance of the application.
+ * Returns: (transfer none): the default instance of the application.
  */
 GtrApplication *
 gtr_application_get_default (void)
@@ -475,12 +475,12 @@ gtr_application_get_default (void)
 }
 
 /**
- * gtr_application_open_window:
+ * gtr_application_create_window:
  * @app: a #GtrApplication
  *
  * Creates a new #GtrWindow and shows it.
  * 
- * Returns: the #GtrWindow to be opened
+ * Returns: (transfer none):  the #GtrWindow to be opened
  */
 GtrWindow *
 gtr_application_create_window (GtrApplication *app)
@@ -533,7 +533,7 @@ gtr_application_create_window (GtrApplication *app)
  * 
  * Returns the toolbar model.
  * 
- * Retuns: the toolbar model.
+ * Returns: the toolbar model.
  */
 GObject *
 _gtr_application_get_toolbars_model (GtrApplication * application)
@@ -562,7 +562,7 @@ _gtr_application_save_toolbars_model (GtrApplication * application)
  *
  * Returns all the views currently present in #GtranslationApplication.
  *
- * Return value: a newly allocated list of #GtranslationApplication objects
+ * Return value: (transfer container): a newly allocated list of #GtranslationApplication objects
  */
 GList *
 gtr_application_get_views (GtrApplication * app,
@@ -584,7 +584,7 @@ gtr_application_get_views (GtrApplication * app,
  * gtr_application_get_active_window:
  * @app: a #GtrApplication
  * 
- * Return value: the active #GtrWindow
+ * Return value: (transfer none): the active #GtrWindow
  **/
 GtrWindow *
 gtr_application_get_active_window (GtrApplication * app)
@@ -659,6 +659,14 @@ _gtr_application_set_last_dir (GtrApplication * app, const gchar * last_dir)
   app->priv->last_dir = g_strdup (last_dir);
 }
 
+/**
+ * gtr_application_get_translation_memory:
+ * @app: a #GtrApplication
+ *
+ * Gets the translation memory.
+ *
+ * Returns: (transfer none): Get the translation memory.
+ */
 GObject *
 gtr_application_get_translation_memory (GtrApplication * app)
 {

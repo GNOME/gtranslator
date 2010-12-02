@@ -69,9 +69,9 @@ gtr_notebook_get_type (void)
 
      GtkWidget *gtr_notebook_new (void);
 
-     void gtr_notebook_add_page (GtrNotebook * notebook, GtrTab * pax);
+     void gtr_notebook_add_page (GtrNotebook * notebook, GtrTab * tab);
 
-     void gtr_notebook_remove_page (GtrNotebook * notebook, gint i);
+     void gtr_notebook_remove_page (GtrNotebook * notebook, gint page_num);
 
      GtrTab *gtr_notebook_get_page (GtrNotebook * notebook);
 

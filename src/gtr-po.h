@@ -99,7 +99,7 @@ gtr_po_get_type (void)
 
      GtrPo *gtr_po_new (void);
 
-     void gtr_po_parse (GtrPo * po, GFile * filename, GError ** error);
+     void gtr_po_parse (GtrPo * po, GFile * location, GError ** error);
 
      void gtr_po_save_header_in_msg (GtrPo * po, GtrHeader * header);
 

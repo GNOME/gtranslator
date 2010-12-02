@@ -144,10 +144,12 @@ gtr_msg_class_init (GtrMsgClass * klass)
 
 /**
  * gtr_msg_new:
- * 
+ * @iter: the po_message_iterator_t to set into the @msg
+ * @message: the
+ *
  * Creates a new #GtrMsg.
- * 
- * Return value: a new #GtrMsg object
+ *
+ * Return value: (transfer full): a new #GtrMsg object
  **/
 GtrMsg *
 gtr_msg_new (po_message_iterator_t iter, po_message_t message)
@@ -189,7 +191,7 @@ gtr_msg_get_iterator (GtrMsg * msg)
 /**
  * gtr_msg_set_iterator:
  * @msg: a #GtrMsg
- * @message: the po_message_iterator_t to set into the @msg
+ * @iter: the po_message_iterator_t to set into the @msg
  *
  * Sets the iterator into the #GtrMsg class.
  **/
@@ -253,7 +255,7 @@ gtr_msg_get_row_reference (GtrMsg * msg)
 /**
  * gtr_msg_set_row_reference:
  * @msg: a #GtrMsg
- * @tree_iter: the GtkTreeRowReference corresponding to position in the message table
+ * @row_reference: the GtkTreeRowReference corresponding to position in the message table
  *
  * Sets the GtkTreeRowReference from the messages table for the given message
  **/
@@ -374,8 +376,8 @@ gtr_msg_get_msgid (GtrMsg * msg)
  * gtr_msg_get_msgid_plural:
  * @msg: a #GtrMsg
  * 
- * Return value: the msgid_plural (untranslated English plural string) of a
- * message, or NULL for a message without plural.
+ * Return value: (transfer none): the msgid_plural (untranslated English plural
+ *               string) of a message, or NULL for a message without plural.
  **/
 const gchar *
 gtr_msg_get_msgid_plural (GtrMsg * msg)
@@ -388,7 +390,7 @@ gtr_msg_get_msgid_plural (GtrMsg * msg)
  * gtr_msg_get_msgstr:
  * @msg: a #GtrMsg
  * 
- * Return value: the msgstr (translation) of a message.
+ * Return value: (transfer none): the msgstr (translation) of a message.
  * Return the empty string for an untranslated message.
  **/
 const gchar *
@@ -423,8 +425,9 @@ gtr_msg_set_msgstr (GtrMsg * msg, const gchar * msgstr)
  * @msg: a #GtrMsg
  * @index: the index of the plural array
  *
- * Return value: the msgstr[index] for a message with plural handling, or
- * NULL when the index is out of range or for a message without plural.
+ * Return value: (transfer none): the msgstr[index] for a message with plural
+ *               handling, or NULL when the index is out of range or for a
+ *               message without plural.
  **/
 const gchar *
 gtr_msg_get_msgstr_plural (GtrMsg * msg, gint index)
@@ -457,7 +460,7 @@ gtr_msg_set_msgstr_plural (GtrMsg * msg, gint index, const gchar * msgstr)
  * gtr_msg_get_comment:
  * @msg: a #GtrMsg
  *
- * Return value: the comments for a message.
+ * Return value: (transfer none) the comments for a message.
  **/
 const gchar *
 gtr_msg_get_comment (GtrMsg * msg)
@@ -521,7 +524,7 @@ gtr_msg_set_po_position (GtrMsg * msg, gint po_position)
  * gtr_msg_get_extracted_comments:
  * @msg: a #GtrMsg
  *
- * Return value: the extracted comments for a message.
+ * Return value: (transfer none): the extracted comments for a message.
  **/
 const gchar *
 gtr_msg_get_extracted_comments (GtrMsg * msg)
@@ -536,8 +539,8 @@ gtr_msg_get_extracted_comments (GtrMsg * msg)
  * @msg: a #GtrMsg
  * @i: the i-th file for a message.
  *
- * Return value: the i-th filename for a message, or NULL if @i is out
- * of range.
+ * Return value: (transfer none): the i-th filename for a message, or NULL if
+ *               @i is out of range.
  */
 const gchar *
 gtr_msg_get_filename (GtrMsg * msg, gint i)
@@ -559,8 +562,8 @@ gtr_msg_get_filename (GtrMsg * msg, gint i)
  * @msg: a #GtrMsg
  * @i: the i-th file for a message.
  *
- * Return value: the i-th file line for a message, or NULL if @i is out
- * of range.
+ * Return value: (transfer none): the i-th file line for a message, or NULL if
+ *               @i is out of range.
  */
 gint *
 gtr_msg_get_file_line (GtrMsg * msg, gint i)
@@ -581,8 +584,8 @@ gtr_msg_get_file_line (GtrMsg * msg, gint i)
  * gtr_msg_get_msgctxt:
  * @msg: a #GtrMsg
  *
- * Return value: the context of a message, or NULL for a 
- * message not restricted to a context.
+ * Return value: (transfer none): the context of a message, or NULL for a
+ *               message not restricted to a context.
  */
 const gchar *
 gtr_msg_get_msgctxt (GtrMsg * msg)
@@ -600,8 +603,8 @@ gtr_msg_get_msgctxt (GtrMsg * msg)
  * For example, for "csharp-format", return "C#".
  * Return NULL if the are no format type in the message.
  * 
- * Return value: the pretty name associated with a format type or NULL
- * if the message hasn't any format type.
+ * Return value: (transfer none): the pretty name associated with a format type
+ *               or NULL if the message hasn't any format type.
  */
 const gchar *
 gtr_msg_get_format (GtrMsg * msg)
@@ -655,11 +658,11 @@ on_gettext_po_xerror2 (gint severity,
  * gtr_msg_check:
  * @msg: a #GtrMsg
  * 
- * Return value: the message error or NULL if there is not any error. Must be
- * freed with g_free.
- *
  * Test whether the message translation is a valid format string if the message
  * is marked as being a format string.  
+ *
+ * Return value: (transfer full): the message error or NULL if there is not any
+ *               error. Must be freed with g_free.
  **/
 gchar *
 gtr_msg_check (GtrMsg * msg)

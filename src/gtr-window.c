@@ -2082,7 +2082,7 @@ gtr_window_class_init (GtrWindowClass * klass)
  * Adds a new #GtrTab to the #GtrNotebook and returns the
  * #GtrTab.
  * 
- * Returns: a new #GtrTab object
+ * Returns: (transfer none): a new #GtrTab object
  */
 GtrTab *
 gtr_window_create_tab (GtrWindow * window, GtrPo * po)
@@ -2103,7 +2103,7 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
  * 
  * Gets the active #GtrTab of the @window.
  *
- * Returns: the active #GtrTab of the @window.
+ * Returns: (transfer none): the active #GtrTab of the @window.
  */
 GtrTab *
 gtr_window_get_active_tab (GtrWindow * window)
@@ -2117,7 +2117,8 @@ gtr_window_get_active_tab (GtrWindow * window)
  *
  * Gets a list of all tabs in the @window or NULL if there is no tab opened.
  *
- * Returns: a list of all tabs in the @window or NULL if there is no tab opened.
+ * Returns: (transfer container): a list of all tabs in the @window or NULL if there
+ * is no tab opened.
  */
 GList *
 gtr_window_get_all_tabs (GtrWindow * window)
@@ -2148,7 +2149,7 @@ gtr_window_get_all_tabs (GtrWindow * window)
  * Gets the #GtrHeader of the #GtrPo of in the active
  * #GtrTab.
  *
- * Returns: the #GtrHeader of the #GtrPo of in the active
+ * Returns: (transfer none): the #GtrHeader of the #GtrPo of in the active
  * #GtrTab
  */
 GtrHeader *
@@ -2176,7 +2177,7 @@ gtr_window_get_header_from_active_tab (GtrWindow * window)
  * 
  * Gets the main #GtrNotebook of the @window.
  *
- * Returns: the #GtrNotebook of the @window
+ * Returns: (transfer none): the #GtrNotebook of the @window
  */
 GtrNotebook *
 gtr_window_get_notebook (GtrWindow * window)
@@ -2190,7 +2191,7 @@ gtr_window_get_notebook (GtrWindow * window)
  *
  * Gets the statusbar widget of the window.
  *
- * Returns: the statusbar widget of the window
+ * Returns: (transfer none): the statusbar widget of the window
  */
 GtkWidget *
 gtr_window_get_statusbar (GtrWindow * window)
@@ -2204,7 +2205,7 @@ gtr_window_get_statusbar (GtrWindow * window)
  *
  * Gets the #GtkUIManager of the window.
  *
- * Returns: the #GtkUIManager of the @window
+ * Returns: (transfer none): the #GtkUIManager of the @window
  */
 GtkUIManager *
 gtr_window_get_ui_manager (GtrWindow * window)
@@ -2219,8 +2220,8 @@ gtr_window_get_ui_manager (GtrWindow * window)
  * Gets the active translation view in the #GtranslationWindow or
  * NULL if there is not tab opened.
  *
- * Returns: the active translation view in the #GtranslationWindow or
- * NULL if there is not tab opened.
+ * Returns: (transfer none): the active translation view in the
+ *          #GtranslationWindow or %NULL if there is not tab opened.
  **/
 GtrView *
 gtr_window_get_active_view (GtrWindow * window)
@@ -2242,7 +2243,7 @@ gtr_window_get_active_view (GtrWindow * window)
  *
  * Returns all the views currently present in #GtranslationWindow
  *
- * Return value: a newly allocated list of #GtranslationWindow objects
+ * Return value: (transfer container): a newly allocated list of #GtranslationWindow objects
  **/
 GList *
 gtr_window_get_all_views (GtrWindow * window,
@@ -2327,14 +2328,14 @@ _gtr_window_get_layout_manager (GtrWindow * window)
 }
 
 /**
- * gtr_window_get_tab_from_uri:
+ * gtr_window_get_tab_from_location:
  * @window: a #GtrWindow
  * @location: the GFile of the po file of the #GtrTab
  *
  * Gets the #GtrTab of the #GtrWindows that matches with the
  * @location.
  *
- * Returns: the #GtrTab which @location matches with its po file.
+ * Returns: (transfer none): the #GtrTab which @location matches with its po file.
  */
 GtkWidget *
 gtr_window_get_tab_from_location (GtrWindow * window, GFile * location)
@@ -2414,6 +2415,12 @@ _gtr_window_close_tab (GtrWindow * window, GtrTab * tab)
   set_sensitive_according_to_window (window);
 }
 
+/**
+ * gtr_window_get_tm_menu:
+ * @window: a #GtrWindow
+ *
+ * Returns: (transfer none): get the tm_menu GtkWidget instance.
+ */
 GtkWidget *
 gtr_window_get_tm_menu (GtrWindow * window)
 {

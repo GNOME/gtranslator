@@ -60,6 +60,7 @@ G_DEFINE_TYPE (GtrPo, gtr_po, G_TYPE_OBJECT)
 
 struct _GtrPoPrivate
 {
+  /* The location of the file to open */
   GFile *location;
 
   /* Gettext's file handle */
@@ -617,13 +618,13 @@ gtr_po_save_file (GtrPo * po, GError ** error)
 }
 
 /**
- * gtr_po_get_filename:
+ * gtr_po_get_location:
  * @po: a #GtrPo
  *
  * Gets the GFile of the po file.
  *
- * Returns: the GFile associated with the @po. The returned location must be freed
- * with g_object_unref.
+ * Returns: (transfer full): the GFile associated with the @po. The returned
+ *          location must be freed with g_object_unref.
  **/
 GFile *
 gtr_po_get_location (GtrPo * po)
@@ -697,7 +698,7 @@ gtr_po_get_write_perms (GtrPo * po)
  * gtr_po_get_messages:
  * @po: a #GtrPo
  *
- * Return value: a pointer to the messages list
+ * Return value: (transfer container): a pointer to the messages list
  **/
 GList *
 gtr_po_get_messages (GtrPo * po)
@@ -722,7 +723,7 @@ gtr_po_set_messages (GtrPo * po, GList * messages)
  * gtr_po_get_current_message:
  * @po: a #GtrPo
  *
- * Return value: a pointer to the current message
+ * Return value: (transfer none): a pointer to the current message
  **/
 GList *
 gtr_po_get_current_message (GtrPo * po)
@@ -751,7 +752,7 @@ gtr_po_update_current_message (GtrPo * po, GtrMsg * msg)
  * gtr_po_get_domains:
  * @po: a #GtrPo
  *
- * Return value: a pointer to the domains list
+ * Return value: (transfer none): a pointer to the domains list
  **/
 GList *
 gtr_po_get_domains (GtrPo * po)
@@ -762,6 +763,8 @@ gtr_po_get_domains (GtrPo * po)
 /**
  * gtr_po_get_po_file:
  * @po: a #GtrPo
+ *
+ * Gets the gettext file.
  *
  * Return value: the gettext file
  **/
@@ -775,7 +778,7 @@ gtr_po_get_po_file (GtrPo * po)
  * gtr_po_get_next_fuzzy:
  * @po: a #GtrPo
  *
- * Return value: a pointer to the next fuzzy message
+ * Return value: (transfer none): a pointer to the next fuzzy message
  **/
 GList *
 gtr_po_get_next_fuzzy (GtrPo * po)
@@ -797,7 +800,7 @@ gtr_po_get_next_fuzzy (GtrPo * po)
  * gtr_po_get_prev_fuzzy:
  * @po: a #GtrPo
  *
- * Return value: a pointer to the previously fuzzy message
+ * Return value: (transfer none): a pointer to the previously fuzzy message
  **/
 GList *
 gtr_po_get_prev_fuzzy (GtrPo * po)
@@ -819,7 +822,7 @@ gtr_po_get_prev_fuzzy (GtrPo * po)
  * gtr_po_get_next_untrans:
  * @po: a #GtrPo
  *
- * Return value: a pointer to the next untranslated message
+ * Return value: (transfer none): a pointer to the next untranslated message
  **/
 GList *
 gtr_po_get_next_untrans (GtrPo * po)
@@ -841,8 +844,9 @@ gtr_po_get_next_untrans (GtrPo * po)
  * gtr_po_get_prev_untrans:
  * @po: a #GtrPo
  *
- * Return value: a pointer to the previously untranslated message
- * or NULL if there are not previously untranslated message.
+ * Return value: (transfer none): a pointer to the previously untranslated
+ *                message or NULL if there are not previously untranslated
+ *                message.
  **/
 GList *
 gtr_po_get_prev_untrans (GtrPo * po)
@@ -863,8 +867,9 @@ gtr_po_get_prev_untrans (GtrPo * po)
  * gtr_po_get_next_fuzzy_or_untrans:
  * @po: a #GtrPo
  *
- * Return value: a pointer to the next fuzzy or untranslated message
- * or NULL if there is not next fuzzy or untranslated message.
+ * Return value: (transfer none): a pointer to the next fuzzy or untranslated
+ *               message or NULL if there is not next fuzzy or untranslated
+ *               message.
  **/
 GList *
 gtr_po_get_next_fuzzy_or_untrans (GtrPo * po)
@@ -885,8 +890,9 @@ gtr_po_get_next_fuzzy_or_untrans (GtrPo * po)
  * gtr_po_get_prev_fuzzy_or_untrans:
  * @po: a #GtrPo
  *
- * Return value: a pointer to the previously fuzzy or untranslated message
- * or NULL if there is not previously fuzzy or untranslated message.
+ * Return value: (transfer none): a pointer to the previously fuzzy or
+ *               untranslated message or NULL if there is not previously 
+ *               fuzzy or untranslated message.
  **/
 GList *
 gtr_po_get_prev_fuzzy_or_untrans (GtrPo * po)
@@ -909,6 +915,8 @@ gtr_po_get_prev_fuzzy_or_untrans (GtrPo * po)
  * @number: the message to jump
  *
  * Gets the message at the given position.
+ *
+ * Returns: (transfer none): the message at the given position.
  */
 GList *
 gtr_po_get_msg_from_number (GtrPo * po, gint number)
@@ -922,7 +930,7 @@ gtr_po_get_msg_from_number (GtrPo * po, gint number)
  * gtr_po_get_header:
  * @po: a #GtrPo
  *
- * Return value: The #GtrHeader of the @po.
+ * Return value: (transfer none): The #GtrHeader of the @po.
  **/
 GtrHeader *
 gtr_po_get_header (GtrPo * po)

@@ -920,7 +920,7 @@ gtr_tab_new (GtrPo * po)
  * gtr_tab_get_po:
  * @tab: a #GtrTab
  *
- * Return value: the #GtrPo stored in the #GtrTab
+ * Return value: (transfer none): the #GtrPo stored in the #GtrTab
 **/
 GtrPo *
 gtr_tab_get_po (GtrTab * tab)
@@ -945,7 +945,7 @@ gtr_tab_get_active_trans_tab (GtrTab * tab)
  * gtr_tab_get_context_panel:
  * @tab: a #GtrTab
  *
- * Return value: the #GtranslaorContextPanel
+ * Return value: (transfer none): the #GtranslaorContextPanel
  */
 GtrContextPanel *
 gtr_tab_get_context_panel (GtrTab * tab)
@@ -957,7 +957,7 @@ gtr_tab_get_context_panel (GtrTab * tab)
  * gtr_tab_get_translation_memory_ui:
  * @tab: a #GtrTab
  *
- * Returns: the #GtrTranslationMemoryUi panel.
+ * Returns: (transfer none): the #GtrTranslationMemoryUi panel.
  */
 GtkWidget *
 gtr_tab_get_translation_memory_ui (GtrTab * tab)
@@ -971,7 +971,7 @@ gtr_tab_get_translation_memory_ui (GtrTab * tab)
  * gtr_tab_get_active_view:
  * @tab: a #GtranslationTab
  *
- * Return value: the active page of the translation notebook.
+ * Return value: (transfer none): the active page of the translation notebook.
 **/
 GtrView *
 gtr_tab_get_active_view (GtrTab * tab)
@@ -991,7 +991,7 @@ gtr_tab_get_active_view (GtrTab * tab)
  *
  * Returns all the views currently present in #GtranslationTab
  *
- * Return value: a newly allocated list of #GtranslationTab objects
+ * Return: (transfer container): a newly allocated list of #GtranslationTab objects
  */
 GList *
 gtr_tab_get_all_views (GtrTab * tab, gboolean original, gboolean translated)
@@ -1186,7 +1186,7 @@ _gtr_tab_can_close (GtrTab * tab)
  *
  * Returns the #GtrTab for a specific #GtrPo.
  *
- * Returns: the #GtrTab for a specific #GtrPo
+ * Returns: (transfer none): the #GtrTab for a specific #GtrPo
  */
 GtrTab *
 gtr_tab_get_from_document (GtrPo * po)

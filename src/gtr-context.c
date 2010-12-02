@@ -512,10 +512,10 @@ gtr_context_panel_new (GtkWidget *tab)
 }
 
 /**
- * gtr_context_panel_get_extracted_text_view:
+ * gtr_context_panel_get_context_text_view:
  * @panel: a #GtrContextPanel
  *
- * Returns: the context #GtkTextView
+ * Returns: (transfer none): the context #GtkTextView
  */
 GtkTextView *
 gtr_context_panel_get_context_text_view (GtrContextPanel * panel)
