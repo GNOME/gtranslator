@@ -27,29 +27,20 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-#ifdef HAVE_GUCHARMAP_2
 #include <gucharmap/gucharmap.h>
-#else
-#include <gucharmap/gucharmap-table.h>
-#endif
 
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
-#define GTR_TYPE_CHARMAP_PANEL		(gtr_charmap_panel_get_type ())
-#define GTR_CHARMAP_PANEL(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_CHARMAP_PANEL, GtrCharmapPanel))
-#define GTR_CHARMAP_PANEL_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_CHARMAP_PANEL, GtrCharmapPanelClass))
-#define GTR_IS_CHARMAP_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_CHARMAP_PANEL))
-#define GTR_IS_CHARMAP_PANEL_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_CHARMAP_PANEL))
-#define GTR_CHARMAP_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_CHARMAP_PANEL, GtrCharmapPanelClass))
-/* Private structure type */
-typedef struct _GtrCharmapPanelPrivate GtrCharmapPanelPrivate;
 
-/*
- * Main object structure
- */
-typedef struct _GtrCharmapPanel GtrCharmapPanel;
+#define GTR_TYPE_CHARMAP_PANEL          (gtr_charmap_panel_get_type ())
+#define GTR_CHARMAP_PANEL(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_CHARMAP_PANEL, GtrCharmapPanel))
+#define GTR_CHARMAP_PANEL_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_CHARMAP_PANEL, GtrCharmapPanelClass))
+#define GTR_IS_CHARMAP_PANEL(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_CHARMAP_PANEL))
+#define GTR_IS_CHARMAP_PANEL_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_CHARMAP_PANEL))
+#define GTR_CHARMAP_PANEL_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_CHARMAP_PANEL, GtrCharmapPanelClass))
+
+typedef struct _GtrCharmapPanel         GtrCharmapPanel;
+typedef struct _GtrCharmapPanelClass    GtrCharmapPanelClass;
+typedef struct _GtrCharmapPanelPrivate  GtrCharmapPanelPrivate;
 
 struct _GtrCharmapPanel
 {
@@ -59,31 +50,18 @@ struct _GtrCharmapPanel
   GtrCharmapPanelPrivate *priv;
 };
 
-/*
- * Class definition
- */
-typedef struct _GtrCharmapPanelClass GtrCharmapPanelClass;
-
 struct _GtrCharmapPanelClass
 {
   GtkVBoxClass parent_class;
 };
 
-/*
- * Public methods
- */
-GType
-gtr_charmap_panel_get_type (void)
-  G_GNUC_CONST;
-     GType gtr_charmap_panel_register_type (GTypeModule * module);
-     GtkWidget *gtr_charmap_panel_new (void);
+GType           gtr_charmap_panel_get_type (void) G_GNUC_CONST;
+GtkWidget      *gtr_charmap_panel_new      (void);
 
-#ifdef HAVE_GUCHARMAP_2
-GucharmapChartable
-  * gtr_charmap_panel_get_chartable (GtrCharmapPanel * panel);
-#else
-GucharmapTable * gtr_charmap_panel_get_table (GtrCharmapPanel * panel);
-#endif
+GucharmapChartable * gtr_charmap_panel_get_chartable (GtrCharmapPanel *panel);
+
+void            _gtr_charmap_panel_register_type (GTypeModule *type_module);
 
 G_END_DECLS
+
 #endif /* __CHARMAP_PANEL_H__ */

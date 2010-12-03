@@ -4,13 +4,10 @@ plugindir = $(libdir)/gtranslator/plugins
 INCLUDES = \
 	-I$(top_srcdir) 				\
 	-I$(top_srcdir)/src				\
-	-I$(top_srcdir)/src/toolbareditor               \
-	-I$(top_srcdir)/src/plugin-system		\
 	$(GTRANSLATOR_CFLAGS) 				\
 	$(GUCHARMAP_CFLAGS)				\
 	$(WARN_CFLAGS)					\
-	$(DISABLE_DEPRECATED)				\
-	-DGTR_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"
+	$(DISABLE_DEPRECATED)
 
 plugin_LTLIBRARIES = libcharmap.la
 
@@ -31,11 +28,11 @@ pixmaps__DATA = \
 
 # Plugin Info
 
-plugin_in_files = gtr-charmap.gtranslator-plugin.desktop.in
+plugin_in_files = gtr-charmap.plugin.desktop.in
 
-%.gtranslator.plugin: %.gtranslator-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+%.plugin: %.plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
-plugin_DATA = $(plugin_in_files:.gtranslator-plugin.desktop.in=.gtranslator.plugin)
+plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
 EXTRA_DIST = $(pixmaps__DATA) $(plugin_in_files)
 

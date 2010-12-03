@@ -22,14 +22,9 @@
 #include <config.h>
 #endif
 
-#include "gtr-plugin.h"
 #include "gtr-charmap-panel.h"
 
-#ifdef HAVE_GUCHARMAP_2
 #include <gucharmap/gucharmap.h>
-#else
-#include <gucharmap/gucharmap-script-chapters.h>
-#endif
 
 #define GTR_CHARMAP_PANEL_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 (object),		       \
@@ -38,20 +33,15 @@
 
 struct _GtrCharmapPanelPrivate
 {
-#ifdef HAVE_GUCHARMAP_2
   GucharmapChaptersView *chapters_view;
   GucharmapChartable *chartable;
-#else
-  GtkWidget *table;
-  GtkWidget *chapters;
-#endif
 };
 
-GTR_PLUGIN_DEFINE_TYPE (GtrCharmapPanel, gtr_charmap_panel, GTK_TYPE_VBOX)
-#ifdef HAVE_GUCHARMAP_2
-     static void
-       on_chapter_view_selection_changed (GtkTreeSelection * selection,
-                                          GtrCharmapPanel * panel)
+G_DEFINE_DYNAMIC_TYPE (GtrCharmapPanel, gtr_charmap_panel, GTK_TYPE_VBOX)
+
+static void
+on_chapter_view_selection_changed (GtkTreeSelection *selection,
+                                   GtrCharmapPanel  *panel)
 {
   GtrCharmapPanelPrivate *priv = panel->priv;
   GucharmapCodepointList *codepoint_list;
@@ -60,41 +50,24 @@ GTR_PLUGIN_DEFINE_TYPE (GtrCharmapPanel, gtr_charmap_panel, GTK_TYPE_VBOX)
   if (!gtk_tree_selection_get_selected (selection, NULL, &iter))
     return;
 
-  codepoint_list =
-    gucharmap_chapters_view_get_codepoint_list (priv->chapters_view);
+  codepoint_list = gucharmap_chapters_view_get_codepoint_list (priv->chapters_view);
   gucharmap_chartable_set_codepoint_list (priv->chartable, codepoint_list);
   g_object_unref (codepoint_list);
 }
 
-#else
-     static void
-       on_chapter_changed (GucharmapChapters * chapters,
-                           GtrCharmapPanel * panel)
-{
-  gucharmap_table_set_codepoint_list (GUCHARMAP_TABLE (panel->priv->table),
-                                      gucharmap_chapters_get_codepoint_list
-                                      (chapters));
-}
-#endif /* HAVE_GUCHARMAP_2 */
-
 static void
-gtr_charmap_panel_init (GtrCharmapPanel * panel)
+gtr_charmap_panel_init (GtrCharmapPanel *panel)
 {
   GtrCharmapPanelPrivate *priv;
   GtkPaned *paned;
-#ifdef HAVE_GUCHARMAP_2
   GtkWidget *scrolled_window, *view, *chartable;
   GtkTreeSelection *selection;
   GucharmapChaptersModel *model;
-#else
-  GucharmapCodepointList *codepoint_list;
-#endif
 
   priv = panel->priv = GTR_CHARMAP_PANEL_GET_PRIVATE (panel);
 
   paned = GTK_PANED (gtk_paned_new (GTK_ORIENTATION_VERTICAL));
 
-#ifdef HAVE_GUCHARMAP_2
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
@@ -134,26 +107,6 @@ gtr_charmap_panel_init (GtrCharmapPanel * panel)
   gtk_widget_show (scrolled_window);
 
   gucharmap_chapters_view_select_locale (priv->chapters_view);
-#else
-  priv->chapters = gucharmap_script_chapters_new ();
-  g_signal_connect (priv->chapters,
-                    "changed", G_CALLBACK (on_chapter_changed), panel);
-
-  gtk_tree_view_set_headers_visible (GTK_TREE_VIEW
-                                     (GUCHARMAP_CHAPTERS
-                                      (priv->chapters)->tree_view), FALSE);
-
-  codepoint_list = gucharmap_chapters_get_codepoint_list
-    (GUCHARMAP_CHAPTERS (priv->chapters));
-
-  priv->table = gucharmap_table_new ();
-
-  gucharmap_table_set_codepoint_list (GUCHARMAP_TABLE (priv->table),
-                                      codepoint_list);
-
-  gtk_paned_pack1 (paned, priv->chapters, FALSE, TRUE);
-  gtk_paned_pack2 (paned, priv->table, TRUE, TRUE);
-#endif /* HAVE_GUCHARMAP_2 */
 
   gtk_paned_set_position (paned, 150);
 
@@ -176,22 +129,25 @@ gtr_charmap_panel_class_init (GtrCharmapPanelClass * klass)
   object_class->finalize = gtr_charmap_panel_finalize;
 }
 
+static void
+gtr_charmap_panel_class_finalize (GtrCharmapPanelClass *klass)
+{
+}
+
 GtkWidget *
 gtr_charmap_panel_new (void)
 {
   return GTK_WIDGET (g_object_new (GTR_TYPE_CHARMAP_PANEL, NULL));
 }
 
-#ifdef HAVE_GUCHARMAP_2
 GucharmapChartable *
 gtr_charmap_panel_get_chartable (GtrCharmapPanel * panel)
 {
   return panel->priv->chartable;
 }
-#else
-GucharmapTable *
-gtr_charmap_panel_get_table (GtrCharmapPanel * panel)
+
+void
+_gtr_charmap_panel_register_type (GTypeModule * type_module)
 {
-  return GUCHARMAP_TABLE (panel->priv->table);
+  gtr_charmap_panel_register_type (type_module);
 }
-#endif

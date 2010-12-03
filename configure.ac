@@ -209,15 +209,11 @@ AM_CONDITIONAL(USE_DICTIONARY, test x"$have_gdict" = "xyes")
 # gucharmap
 # ================================================================
 have_gucharmap=no
-GUCHARMAP2_OPTIONAL=100
-PKG_CHECK_MODULES([GUCHARMAP],[gucharmap-2 >= $GUCHARMAP2_OPTIONAL],
-                  [have_gucharmap_2=yes],[have_gucharmap_2=no])
+GUCHARMAP_OPTIONAL=2.33.0
+PKG_CHECK_MODULES([GUCHARMAP],[gucharmap-2.90 >= $GUCHARMAP_OPTIONAL],
+                  [have_gucharmap=yes],[have_gucharmap=no])
 
-if test "$have_gucharmap_2" = "yes"; then
-	AC_DEFINE([HAVE_GUCHARMAP_2],[1],[Define if gucharmap API is version 2])
-fi
-
-AM_CONDITIONAL(USE_CHARMAP, test x"$have_gucharmap2" = "xyes")
+AM_CONDITIONAL(USE_CHARMAP, test x"$have_gucharmap" = "xyes")
 
 dnl -------------------------------------------------------------------
 dnl Enable debug builds.

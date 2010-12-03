@@ -22,97 +22,137 @@
 #include <config.h>
 #endif
 
-#include <glib/gi18n-lib.h>
-
 #include "gtr-charmap-plugin.h"
 #include "gtr-charmap-panel.h"
-#include "gtr-debug.h"
+
+#include <glib/gi18n-lib.h>
 #include "gtr-application.h"
 #include "gtr-statusbar.h"
 #include "gtr-window.h"
+#include "gtr-window-activatable.h"
 
-#ifdef HAVE_GUCHARMAP_2
+#include <libpeas-gtk/peas-gtk-configurable.h>
 #include <gucharmap/gucharmap.h>
-#else
-#include <gucharmap/gucharmap-table.h>
-#include <gucharmap/gucharmap-unicode-info.h>
-#endif
-
-#define WINDOW_DATA_KEY	"GtrCharmapPluginWindowData"
 
 #define GTR_CHARMAP_PLUGIN_GET_PRIVATE(object) \
-				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
-				GTR_TYPE_CHARMAP_PLUGIN,		\
-				GtrCharmapPluginPrivate))
+                                (G_TYPE_INSTANCE_GET_PRIVATE ((object), \
+                                GTR_TYPE_CHARMAP_PLUGIN,                \
+                                GtrCharmapPluginPrivate))
 
-typedef struct
+struct _GtrCharmapPluginPrivate
 {
-  GtkWidget *panel;
-  guint context_id;
-} WindowData;
+  GtrWindow *window;
+  GtkWidget *charmap;
 
-GTR_PLUGIN_REGISTER_TYPE_WITH_CODE (GtrCharmapPlugin,
-                                    gtr_charmap_plugin,
-                                    gtr_charmap_panel_register_type (module);
-  )
-     static void gtr_charmap_plugin_init (GtrCharmapPlugin * plugin)
+  guint      context_id;
+};
+
+enum
 {
-  //gtr_debug_message (DEBUG_PLUGINS, "GtrCharmapPlugin initializing");
+  PROP_0,
+  PROP_WINDOW
+};
+
+static void gtr_window_activatable_iface_init (GtrWindowActivatableInterface *iface);
+
+G_DEFINE_DYNAMIC_TYPE_EXTENDED (GtrCharmapPlugin,
+                                gtr_charmap_plugin,
+                                PEAS_TYPE_EXTENSION_BASE,
+                                0,
+                                G_IMPLEMENT_INTERFACE_DYNAMIC (GTR_TYPE_WINDOW_ACTIVATABLE,
+                                                               gtr_window_activatable_iface_init)                       \
+                                                                                                                        \
+                                                               _gtr_charmap_panel_register_type (type_module);          \
+)
+
+static void
+gtr_charmap_plugin_init (GtrCharmapPlugin * plugin)
+{
+
+  plugin->priv = GTR_CHARMAP_PLUGIN_GET_PRIVATE (plugin);
 }
 
 static void
-gtr_charmap_plugin_finalize (GObject * object)
+gtr_charmap_plugin_dispose (GObject * object)
 {
-  //gtr_debug_message (DEBUG_PLUGINS, "GtrCharmapPlugin finalizing");
 
-  G_OBJECT_CLASS (gtr_charmap_plugin_parent_class)->finalize (object);
+  GtrCharmapPlugin *plugin = GTR_CHARMAP_PLUGIN (object);
+
+  if (plugin->priv->window != NULL)
+  {
+    g_object_unref (plugin->priv->window);
+    plugin->priv->window = NULL;
+  }
+
+  G_OBJECT_CLASS (gtr_charmap_plugin_parent_class)->dispose (object);
 }
 
 static void
-free_window_data (WindowData * data)
+gtr_charmap_plugin_set_property (GObject      *object,
+                                 guint         prop_id,
+                                 const GValue *value,
+                                 GParamSpec   *pspec)
 {
-  g_slice_free (WindowData, data);
+  GtrCharmapPlugin *plugin = GTR_CHARMAP_PLUGIN (object);
+
+  switch (prop_id)
+  {
+    case PROP_WINDOW:
+      plugin->priv->window = GTR_WINDOW (g_value_dup_object (value));
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+  }
 }
 
 static void
-#ifdef HAVE_GUCHARMAP_2
-  on_table_status_message (GucharmapChartable * chartable,
-#else
-on_table_status_message (GucharmapTable * chartable,
-#endif
-                         const gchar * message, GtrWindow * window)
+gtr_charmap_plugin_get_property (GObject    *object,
+                                 guint       prop_id,
+                                 GValue     *value,
+                                 GParamSpec *pspec)
+{
+  GtrCharmapPlugin *plugin = GTR_CHARMAP_PLUGIN (object);
+
+  switch (prop_id)
+  {
+    case PROP_WINDOW:
+      g_value_set_object (value, plugin->priv->window);
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+  }
+}
+
+static void
+on_table_status_message (GucharmapChartable *chartable,
+                         const gchar        *message,
+                         GtrCharmapPlugin   *plugin)
 {
   GtrStatusbar *statusbar;
-  WindowData *data;
 
-  statusbar = GTR_STATUSBAR (gtr_window_get_statusbar (window));
-  data = (WindowData *) g_object_get_data (G_OBJECT (window),
-                                           WINDOW_DATA_KEY);
-  g_return_if_fail (data != NULL);
+  statusbar = GTR_STATUSBAR (gtr_window_get_statusbar (plugin->priv->window));
 
-  gtr_statusbar_pop (statusbar, data->context_id);
+  gtr_statusbar_pop (statusbar, plugin->priv->context_id);
 
   if (message)
-    gtr_statusbar_push (statusbar, data->context_id, message);
+    gtr_statusbar_push (statusbar, plugin->priv->context_id, message);
 }
 
 static void
-#ifdef HAVE_GUCHARMAP_2
-on_table_sync_active_char (GucharmapChartable * chartable,
-                           GParamSpec * psepc, GtrWindow * window)
-#else
-on_table_set_active_char (GucharmapTable * chartable,
-                          gunichar wc, GtrWindow * window)
-#endif
+on_table_sync_active_char (GucharmapChartable *chartable,
+                           GParamSpec         *psepc,
+                           GtrCharmapPlugin   *plugin)
 {
   GString *gs;
   const gchar **temps;
   gint i;
-#ifdef HAVE_GUCHARMAP_2
   gunichar wc;
 
   wc = gucharmap_chartable_get_active_character (chartable);
-#endif
 
   gs = g_string_new (NULL);
   g_string_append_printf (gs, "U+%4.4X %s", wc,
@@ -136,55 +176,35 @@ on_table_set_active_char (GucharmapTable * chartable,
       g_free (temps);
     }
 
-  on_table_status_message (chartable, gs->str, window);
+  on_table_status_message (chartable, gs->str, plugin);
   g_string_free (gs, TRUE);
 }
 
 static gboolean
-on_table_focus_out_event (GtkWidget * drawing_area,
-                          GdkEventFocus * event, GtrWindow * window)
+on_table_focus_out_event (GtkWidget             *drawing_area,
+                          GdkEventFocus         *event, 
+                          GtrCharmapPlugin      *plugin)
 {
-#ifdef HAVE_GUCHARMAP_2
   GucharmapChartable *chartable;
-#else
-  GucharmapTable *chartable;
-#endif
-  WindowData *data;
 
-  data = (WindowData *) g_object_get_data (G_OBJECT (window),
-                                           WINDOW_DATA_KEY);
-  g_return_val_if_fail (data != NULL, FALSE);
+  chartable = gtr_charmap_panel_get_chartable (GTR_CHARMAP_PANEL (plugin->priv->charmap));
 
-#ifdef HAVE_GUCHARMAP_2
-  chartable = gtr_charmap_panel_get_chartable
-    (GTR_CHARMAP_PANEL (data->panel));
-#else
-  chartable = gtr_charmap_panel_get_table (GTR_CHARMAP_PANEL (data->panel));
-#endif
-
-  on_table_status_message (chartable, NULL, window);
+  on_table_status_message (chartable, NULL, plugin);
   return FALSE;
 }
 
-#ifdef HAVE_GUCHARMAP_2
 static void
-on_table_activate (GucharmapChartable * chartable, GtrWindow * window)
-#else
-static void
-on_table_activate (GucharmapTable * chartable,
-                   gunichar wc, GtrWindow * window)
-#endif
+on_table_activate (GucharmapChartable   *chartable,
+                   GtrWindow            *window)
 {
   GtkTextView *view;
   GtkTextBuffer *document;
   GtkTextIter start, end;
   gchar buffer[6];
   gchar length;
-#ifdef HAVE_GUCHARMAP_2
   gunichar wc;
 
   wc = gucharmap_chartable_get_active_character (chartable);
-#endif
 
   g_return_if_fail (gucharmap_unichar_validate (wc));
 
@@ -211,50 +231,30 @@ on_table_activate (GucharmapTable * chartable,
 }
 
 static GtkWidget *
-create_charmap_panel (GtrWindow * window)
+create_charmap_panel (GtrCharmapPlugin *plugin)
 {
   GtkWidget *panel;
-#ifdef HAVE_GUCHARMAP_2
   GucharmapChartable *chartable;
-#else
-  GucharmapTable *table;
-#endif
 
   panel = gtr_charmap_panel_new ();
 
-#ifdef HAVE_GUCHARMAP_2
   chartable = gtr_charmap_panel_get_chartable (GTR_CHARMAP_PANEL (panel));
-#else
-  table = gtr_charmap_panel_get_table (GTR_CHARMAP_PANEL (panel));
-#endif
 
-#ifdef HAVE_GUCHARMAP_2
   g_signal_connect (chartable,
                     "notify::active-character",
-                    G_CALLBACK (on_table_sync_active_char), window);
+                    G_CALLBACK (on_table_sync_active_char),
+                    plugin);
   g_signal_connect (chartable,
                     "focus-out-event",
-                    G_CALLBACK (on_table_focus_out_event), window);
+                    G_CALLBACK (on_table_focus_out_event),
+                    plugin);
   g_signal_connect (chartable,
                     "status-message",
-                    G_CALLBACK (on_table_status_message), window);
+                    G_CALLBACK (on_table_status_message),
+                    plugin);
   g_signal_connect (chartable,
-                    "activate", G_CALLBACK (on_table_activate), window);
-
-#else
-  g_signal_connect (table,
-                    "set-active-char",
-                    G_CALLBACK (on_table_set_active_char), window);
-  /* Note: GucharmapTable does not provide focus-out-event ... */
-  g_signal_connect (table->drawing_area,
-                    "focus-out-event",
-                    G_CALLBACK (on_table_focus_out_event), window);
-  g_signal_connect (table,
-                    "status-message",
-                    G_CALLBACK (on_table_status_message), window);
-  g_signal_connect (table,
-                    "activate", G_CALLBACK (on_table_activate), window);
-#endif /* HAVE_GUCHARMAP_2 */
+                    "activate", G_CALLBACK (on_table_activate),
+                    plugin->priv->window);
 
   gtk_widget_show_all (panel);
 
@@ -262,69 +262,77 @@ create_charmap_panel (GtrWindow * window)
 }
 
 static void
-impl_activate (GtrPlugin * plugin, GtrWindow * window)
+gtr_charmap_plugin_activate (GtrWindowActivatable *activatable)
 {
+  GtrCharmapPluginPrivate *priv;
   GtrStatusbar *statusbar;
-  WindowData *data;
 
-  data = g_new (WindowData, 1);
+  priv = GTR_CHARMAP_PLUGIN (activatable)->priv;
 
   gtr_application_register_icon (GTR_APP, "gucharmap.ico",
                                  "charmap-plugin-icon");
 
-  data->panel = create_charmap_panel (window);
+  priv->charmap = create_charmap_panel (GTR_CHARMAP_PLUGIN (activatable));
 
-  gtr_window_add_widget (window,
-                         data->panel,
+  gtr_window_add_widget (priv->window,
+                         priv->charmap,
                          "GtrCharmapPlugin",
                          _("Character Map"),
-                         "charmap-plugin-icon", GTR_WINDOW_PLACEMENT_LEFT);
+                         "charmap-plugin-icon",
+                         GTR_WINDOW_PLACEMENT_LEFT);
 
-  statusbar = GTR_STATUSBAR (gtr_window_get_statusbar (window));
-  data->context_id = gtr_statusbar_get_context_id (statusbar,
+  statusbar = GTR_STATUSBAR (gtr_window_get_statusbar (priv->window));
+  priv->context_id = gtr_statusbar_get_context_id (statusbar,
                                                    "Character Description");
-
-  g_object_set_data_full (G_OBJECT (window),
-                          WINDOW_DATA_KEY,
-                          data, (GDestroyNotify) free_window_data);
 }
 
 static void
-impl_deactivate (GtrPlugin * plugin, GtrWindow * window)
+gtr_charmap_plugin_deactivate (GtrWindowActivatable *activatable)
 {
-  WindowData *data;
-#ifdef HAVE_GUCHARMAP_2
+  GtrCharmapPluginPrivate *priv;
   GucharmapChartable *chartable;
-#else
-  GucharmapTable *chartable;
-#endif
 
-  data = (WindowData *) g_object_get_data (G_OBJECT (window),
-                                           WINDOW_DATA_KEY);
-  g_return_if_fail (data != NULL);
+  priv = GTR_CHARMAP_PLUGIN (activatable)->priv;
 
-#ifdef HAVE_GUCHARMAP_2
-  chartable = gtr_charmap_panel_get_chartable
-    (GTR_CHARMAP_PANEL (data->panel));
-#else
-  chartable = gtr_charmap_panel_get_table (GTR_CHARMAP_PANEL (data->panel));
-#endif
-  on_table_status_message (chartable, NULL, window);
+  chartable = gtr_charmap_panel_get_chartable (GTR_CHARMAP_PANEL (priv->charmap));
+  on_table_status_message (chartable, NULL, 
+                           GTR_CHARMAP_PLUGIN (activatable));
 
-  gtr_window_remove_widget (window, data->panel);
-
-  g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
-
+  gtr_window_remove_widget (priv->window, priv->charmap);
 }
 
 static void
-gtr_charmap_plugin_class_init (GtrCharmapPluginClass * klass)
+gtr_charmap_plugin_class_init (GtrCharmapPluginClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtrPluginClass *plugin_class = GTR_PLUGIN_CLASS (klass);
 
-  object_class->finalize = gtr_charmap_plugin_finalize;
+  object_class->dispose = gtr_charmap_plugin_dispose;
+  object_class->set_property = gtr_charmap_plugin_set_property;
+  object_class->get_property = gtr_charmap_plugin_get_property;
 
-  plugin_class->activate = impl_activate;
-  plugin_class->deactivate = impl_deactivate;
+  g_object_class_override_property (object_class, PROP_WINDOW, "window");
+
+  g_type_class_add_private (object_class, sizeof (GtrCharmapPluginPrivate));
+}
+
+static void
+gtr_charmap_plugin_class_finalize (GtrCharmapPluginClass *klass)
+{
+}
+
+static void
+gtr_window_activatable_iface_init (GtrWindowActivatableInterface *iface)
+{
+  iface->activate = gtr_charmap_plugin_activate;
+  iface->deactivate = gtr_charmap_plugin_deactivate;
+}
+
+G_MODULE_EXPORT void
+peas_register_types (PeasObjectModule *module)
+{
+  gtr_charmap_plugin_register_type (G_TYPE_MODULE (module));
+
+  peas_object_module_register_extension_type (module,
+                                              GTR_TYPE_WINDOW_ACTIVATABLE,
+                                              GTR_TYPE_CHARMAP_PLUGIN);
 }
