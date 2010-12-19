@@ -118,7 +118,6 @@ struct _GtrWindowPrivate
 
   PeasExtensionSet *extensions;
 
-  guint destroy_has_run : 1;
   guint dispose_has_run : 1;
 };
 
@@ -1809,7 +1808,6 @@ gtr_window_init (GtrWindow * window)
   window->priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
   window->priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
 
-  window->priv->destroy_has_run = FALSE;
   window->priv->dispose_has_run = FALSE;
 
   /* Profile manager */
@@ -1963,6 +1961,12 @@ gtr_window_dispose (GObject * object)
       priv->prof_manager = NULL;
     }
 
+  if (priv->widgets)
+    {
+      g_hash_table_unref (priv->widgets);
+      priv->widgets = NULL;
+    }
+
   if (priv->layout_manager)
     {
       g_object_unref (priv->layout_manager);
@@ -1984,29 +1988,6 @@ gtr_window_finalize (GObject * object)
 
   G_OBJECT_CLASS (gtr_window_parent_class)->finalize (object);
 }
-
-static void
-gtr_window_destroy (GtkWidget * widget)
-{
-  GtrWindowPrivate *priv;
-
-  priv = GTR_WINDOW (widget)->priv;
-
-  DEBUG_PRINT ("Destroy window");
-
-  if (!priv->destroy_has_run)
-    {
-      if (priv->widgets)
-        {
-          g_hash_table_destroy (priv->widgets);
-          priv->widgets = NULL;
-        }
-      priv->destroy_has_run = TRUE;
-    }
-
-  GTK_WIDGET_CLASS (gtr_window_parent_class)->destroy (widget);
-}
-
 
 static gboolean
 gtr_window_configure_event (GtkWidget * widget, GdkEventConfigure * event)
@@ -2067,7 +2048,6 @@ gtr_window_class_init (GtrWindowClass * klass)
 
   widget_class->configure_event = gtr_window_configure_event;
   widget_class->key_press_event = gtr_window_key_press_event;
-  widget_class->destroy = gtr_window_destroy;
 }
 
 /***************************** Public funcs ***********************************/
