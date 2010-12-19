@@ -1925,10 +1925,8 @@ gtr_window_dispose (GObject * object)
     {
       save_panes_state (window);
 
-      peas_extension_set_call (priv->extensions,
-                               "deactivate",
-                               window);
-
+      /* Note that unreffing the extensions will automatically remove
+         all extensions which in turn will deactivate the extension */
       g_object_unref (priv->extensions);
 
       peas_engine_garbage_collect (PEAS_ENGINE (gtr_plugins_engine_get_default ()));
