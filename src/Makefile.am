@@ -12,38 +12,36 @@ lib_LTLIBRARIES = libgtranslator-private.la
 
 INCLUDES = \
 	-I$(top_srcdir)						\
-	-I$(includedir)						\
 	-I$(top_srcdir)/src/dialogs				\
 	-I$(top_srcdir)/src/toolbareditor			\
 	-I$(top_srcdir)/src/translation-memory			\
-	-I$(top_srcdir)/src/translation-memory/berkeley		\
-	-DGNOMELOCALEDIR=\""$(prefix)/${DATADIRNAME}/locale"\"	\
-	-DPREFIX=\""$(prefix)"\"                                \
-	-DSYSCONFDIR=\""$(sysconfdir)"\"                        \
-	-DPKGDATADIR=\""$(pkgdatadir)"\"                        \
-	-DDATADIR=\""$(datadir)"\"                              \
-	-DLIBDIR=\""$(libdir)"\"                                \
-	$(GTRANSLATOR_CFLAGS)                                   \
-	$(GTKSPELL_CFLAGS)                                      \
-	$(SPELLCHECK_CFLAGS)					\
+	$(GTRANSLATOR_CFLAGS)					\
+	$(GTKSPELL_CFLAGS)					\
 	$(WARN_CFLAGS)						\
-	$(DISABLE_DEPRECATED)                                   \
-	-DG_LOG_DOMAIN=\""$(PACKAGE)"\"                         \
-	-DPIXMAPSDIR=\""$(datadir)"/pixmaps/gtranslator\"
+	$(DISABLE_DEPRECATED_CFLAGS)				\
+	$(INTROSPECTION_CFLAGS)					\
+	-DDATADIR=\""$(datadir)"\"				\
+	-DLIBDIR=\""$(libdir)"\"
 
 bin_PROGRAMS = \
 	gtranslator
 
 gtranslator_SOURCES = main.c
 
-gtranslator_LDADD = libgtranslator.la libgtranslator-private.la $(GTRANSLATOR_LIBS) $(GTKSPELL_LIBS) $(INTLLIBS) -lgettextpo
+gtranslator_LDADD =			\
+	libgtranslator.la		\
+	libgtranslator-private.la	\
+	$(GTRANSLATOR_LIBS)		\
+	$(GTKSPELL_LIBS)		\
+	$(INTLLIBS)			\
+	$(INTROSPECTION_LIBS)		\
+	-lgettextpo
 
 if PLATFORM_WIN32
 gtranslator_LDFLAGS = -Wl,--export-all-symbols -mwindows -Wl,--out-implib,libgedit-$(GTR_API_VERSION).a
 else
 gtranslator_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 endif
-
 
 libgtranslator_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
@@ -136,10 +134,10 @@ libgtranslator_la_SOURCES = \
 	$(INST_H_FILES)
 
 libgtranslator_la_LIBADD = \
-	$(GTRANSLATOR_LIBS) \
 	dialogs/libdialogs.la \
 	toolbareditor/libtoolbareditor.la \
-	translation-memory/libtranslationmemory.la
+	translation-memory/libtranslationmemory.la \
+	$(GTRANSLATOR_LIBS)
 
 gtr-enum-types.h: gtr-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
 	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gtr-enum-types.h.template $(INST_H_FILES)) > $@
