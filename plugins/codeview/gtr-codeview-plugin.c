@@ -130,10 +130,7 @@ show_in_editor (const gchar * program_name,
   open[2] = g_strdup_printf ("%s%d", line_cmd, line);
   open[3] = NULL;
 
-  gdk_spawn_on_screen (gdk_screen_get_default (),
-                       NULL,
-                       open,
-                       NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
+  g_spawn_async (NULL, open, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
   g_free (open[0]);
   g_free (open[1]);
   g_free (open[2]);
