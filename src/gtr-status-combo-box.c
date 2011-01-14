@@ -146,17 +146,6 @@ gtr_status_combo_box_class_init (GtrStatusComboBoxClass *klass)
 					 		      NULL,
 					 		      G_PARAM_READWRITE));
 
-	/* Set up a style for the button to decrease spacing. */
-	gtk_rc_parse_string (
-		"style \"gtr-status-combo-button-style\"\n"
-		"{\n"
-		"  GtkWidget::focus-padding = 0\n"
-		"  GtkWidget::focus-line-width = 0\n"
-		"  xthickness = 0\n"
-		"  ythickness = 0\n"
-		"}\n"
-		"widget \"*.gtr-status-combo-button\" style \"gtr-status-combo-button-style\"");
-
 	g_type_class_add_private (object_class, sizeof (GtrStatusComboBoxPrivate));
 }
 
@@ -178,8 +167,9 @@ menu_position_func (GtkMenu		*menu,
 	GtkAllocation allocation;
 	
 	*push_in = FALSE;
-	
-	gtk_widget_size_request (gtk_widget_get_toplevel (GTK_WIDGET (menu)), &request);
+
+	gtk_widget_get_preferred_size (gtk_widget_get_toplevel (GTK_WIDGET (menu)),
+	                               &request, NULL);
 	
 	/* get the origin... */
 	gdk_window_get_origin (gtk_widget_get_window (GTK_WIDGET (combo)), x, y);
@@ -203,8 +193,9 @@ show_menu (GtrStatusComboBox *combo,
 	GtkRequisition request;
 	gint max_height;
 	GtkAllocation allocation;
-	
-	gtk_widget_size_request (combo->priv->menu, &request);
+
+	gtk_widget_get_preferred_size (combo->priv->menu,
+	                               &request, NULL);
 
 	/* do something relative to our own height here, maybe we can do better */
 	gtk_widget_get_allocation (GTK_WIDGET (combo), &allocation);
@@ -266,14 +257,15 @@ key_press_event (GtkWidget           *widget,
 static void
 set_shadow_type (GtrStatusComboBox *combo)
 {
+	GtkStyleContext *context;
 	GtkShadowType shadow_type;
 	GtkWidget *statusbar;
 
 	/* This is a hack needed to use the shadow type of a statusbar */
 	statusbar = gtk_statusbar_new ();
-	gtk_widget_ensure_style (statusbar);
+	context = gtk_widget_get_style_context (statusbar);
 
-	gtk_widget_style_get (statusbar, "shadow-type", &shadow_type, NULL);
+	gtk_style_context_get_style (context, "shadow-type", &shadow_type, NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (combo->priv->frame), shadow_type);
 
 	gtk_widget_destroy (statusbar);
@@ -282,23 +274,35 @@ set_shadow_type (GtrStatusComboBox *combo)
 static void
 gtr_status_combo_box_init (GtrStatusComboBox *self)
 {
+	GtkStyleContext *context;
+	GtkCssProvider *css;
+	GError *error = NULL;
+	const gchar style[] =
+		"* {\n"
+		"	-GtkButton-default-border : 0;\n"
+		"	-GtkButton-default-outside-border : 0;\n"
+		"	-GtkButton-inner-border: 0;\n"
+		"	-GtkWidget-focus-line-width: 0;\n"
+		"	-GtkWidget-focus-padding: 0;\n"
+		"	padding: 0;\n"
+		"}\n";
+
 	self->priv = GTR_STATUS_COMBO_BOX_GET_PRIVATE (self);
-	
+
 	gtk_event_box_set_visible_window (GTK_EVENT_BOX (self), TRUE);
 
 	self->priv->frame = gtk_frame_new (NULL);
 	gtk_widget_show (self->priv->frame);
 	
 	self->priv->button = gtk_toggle_button_new ();
-	gtk_widget_set_name (self->priv->button, "gtr-status-combo-button");
 	gtk_button_set_relief (GTK_BUTTON (self->priv->button), GTK_RELIEF_NONE);
 	gtk_widget_show (self->priv->button);
 
 	set_shadow_type (self);
 
-	self->priv->hbox = gtk_hbox_new (FALSE, 3);
+	self->priv->hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
 	gtk_widget_show (self->priv->hbox);
-	
+
 	gtk_container_add (GTK_CONTAINER (self), self->priv->frame);
 	gtk_container_add (GTK_CONTAINER (self->priv->frame), self->priv->button);
 	gtk_container_add (GTK_CONTAINER (self->priv->button), self->priv->hbox);
@@ -340,6 +344,25 @@ gtr_status_combo_box_init (GtrStatusComboBox *self)
 			  "deactivate",
 			  G_CALLBACK (menu_deactivate),
 			  self);
+
+	/* make it as small as possible */
+	css = gtk_css_provider_new ();
+	if (gtk_css_provider_load_from_data (css, style, -1, &error))
+	{
+		context = gtk_widget_get_style_context (GTK_WIDGET (self->priv->button));
+		gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
+		                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+		context = gtk_widget_get_style_context (GTK_WIDGET (self->priv->frame));
+		gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
+		                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+	}
+	else
+	{
+		g_warning ("%s", error->message);
+		g_error_free (error);
+	}
+
+	g_object_unref (css);
 }
 
 /* public functions */
@@ -484,4 +507,4 @@ gtr_status_combo_box_get_item_label (GtrStatusComboBox *combo)
 	return GTK_LABEL (combo->priv->item);
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */
