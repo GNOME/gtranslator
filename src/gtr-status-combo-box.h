@@ -36,8 +36,9 @@ G_BEGIN_DECLS
 #define GTR_STATUS_COMBO_BOX_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), GTR_TYPE_STATUS_COMBO_BOX, GtrStatusComboBoxClass))
 
 typedef struct _GtrStatusComboBox		GtrStatusComboBox;
-typedef struct _GtrStatusComboBoxClass	GtrStatusComboBoxClass;
 typedef struct _GtrStatusComboBoxPrivate	GtrStatusComboBoxPrivate;
+typedef struct _GtrStatusComboBoxClass	GtrStatusComboBoxClass;
+typedef struct _GtrStatusComboBoxClassPrivate	GtrStatusComboBoxClassPrivate;
 
 struct _GtrStatusComboBox
 {
@@ -49,6 +50,8 @@ struct _GtrStatusComboBox
 struct _GtrStatusComboBoxClass
 {
 	GtkEventBoxClass parent_class;
+
+	GtrStatusComboBoxClassPrivate *priv;
 	
 	void (*changed) (GtrStatusComboBox *combo,
 			 GtkMenuItem         *item);
@@ -83,4 +86,4 @@ G_END_DECLS
 
 #endif /* __GTR_STATUS_COMBO_BOX_H__ */
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */
