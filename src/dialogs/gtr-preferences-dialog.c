@@ -934,7 +934,7 @@ setup_plugin_pages (GtrPreferencesDialog * dlg)
   alignment = gtk_alignment_new (0., 0., 1., 1.);
   gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 12, 12, 12, 12);
 
-  page_content = peas_gtk_plugin_manager_new ();
+  page_content = peas_gtk_plugin_manager_new (NULL);
   g_return_if_fail (page_content != NULL);
 
   gtk_container_add (GTK_CONTAINER (alignment), page_content);

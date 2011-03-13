@@ -106,8 +106,8 @@ PKG_CHECK_MODULES(GTRANSLATOR, [
 	gdl-3.0 >= $GDL_REQUIRED
 	gsettings-desktop-schemas
 	libgda-4.0 >= 4.2.0
-	libpeas-1.0 >= 0.7.0
-	libpeas-gtk-1.0 >= 0.7.0
+	libpeas-1.0 >= 0.7.3
+	libpeas-gtk-1.0 >= 0.7.3
 ])
 
 AC_SUBST(GTRANSLATOR_CFLAGS)
