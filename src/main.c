@@ -78,14 +78,14 @@ main (gint argc, gchar * argv[])
   g_type_init ();
   g_thread_init (NULL);
 
+  gtr_dirs_init ();
+
   /* Initialize gettext. */
   setlocale (LC_ALL, "");
 
-  bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+  bindtextdomain (GETTEXT_PACKAGE, gtr_dirs_get_gtr_locale_dir ());
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
-
-  gtr_dirs_init ();
 
 #ifdef G_OS_WIN32
   setup_path ();
