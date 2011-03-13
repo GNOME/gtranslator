@@ -1,12 +1,9 @@
 SUBDIRS = 					\
 	alternate-language			\
+	charmap					\
 	codeview				\
 	fullscreen				\
 	insert-params
-
-if USE_CHARMAP
-SUBDIRS += charmap
-endif
 
 if USE_LIBJSON_GLIB
 SUBDIRS += open-tran

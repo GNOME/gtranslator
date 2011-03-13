@@ -64,6 +64,8 @@ gtr_plugins_engine_init (GtrPluginsEngine * engine)
                                               GTR_TYPE_PLUGINS_ENGINE,
                                               GtrPluginsEnginePrivate);
 
+  peas_engine_enable_loader (PEAS_ENGINE (engine), "python");
+
   engine->priv->plugin_settings = g_settings_new ("org.gnome.gtranslator.plugins");
 
   /* Require gtr's typelib. */

@@ -24,6 +24,8 @@ dnl -------------------------------------------------------------------
 AC_PROG_CC
 AC_PROG_INSTALL
 
+AM_PATH_PYTHON
+
 # Initialize libtool
 LT_PREREQ([2.2.6])
 LT_INIT
@@ -205,16 +207,6 @@ fi
 
 AM_CONDITIONAL(USE_DICTIONARY, test x"$have_gdict" = "xyes")
 
-# ================================================================
-# gucharmap
-# ================================================================
-have_gucharmap=no
-GUCHARMAP_OPTIONAL=2.33.0
-PKG_CHECK_MODULES([GUCHARMAP],[gucharmap-2.90 >= $GUCHARMAP_OPTIONAL],
-                  [have_gucharmap=yes],[have_gucharmap=no])
-
-AM_CONDITIONAL(USE_CHARMAP, test x"$have_gucharmap" = "xyes")
-
 dnl -------------------------------------------------------------------
 dnl Enable debug builds.
 dnl -------------------------------------------------------------------
@@ -269,6 +261,7 @@ po/Makefile.in
 plugins/Makefile
 plugins/alternate-language/Makefile
 plugins/charmap/Makefile
+plugins/charmap/charmap/Makefile
 plugins/dictionary/Makefile
 plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in
 plugins/fullscreen/Makefile
@@ -301,13 +294,6 @@ compilation warnings	  :	${WARN_CFLAGS}
 GObject Introspection	  :	$enable_introspection
 ------------------------------------------------------------------
 "
-
-if [ test x"$have_gucharmap" = "xyes" ]; then
-	echo "Building charmap plugin: ...............................YES"
-else
-	echo "Building charmap plugin: ...............................NO"
-		echo "        Requires gucharmap >= $GUCHARMAP_OPTIONAL"
-fi
 
 if [ test x"$have_json_glib" = "xyes" ]; then
 	echo "Building open-tran plugin: .............................YES"
