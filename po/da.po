@@ -1,8 +1,8 @@
 # Danish translation of gtranslator.
-# Copyright (C) 2009 Free Software Foundation, Inc. & nedenstående oversættere.
+# Copyright (C) 2011 Free Software Foundation, Inc. & nedenstående oversættere.
 # Kenneth Christiansen <kenneth@ripen.dk>, 2000.
 # Keld Simonsen <keld@dkuug.dk>, 2000.
-# Joe Hansen (joedalton2@yahoo.dk), 2009, 2010.
+# Joe Hansen (joedalton2@yahoo.dk), 2009, 2010, 2011.
 #
 # Fejlrapport Bug 608380 oprettet
 # Bug 633593 oprettet
@@ -13,10 +13,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.9.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 19:33+0100\n"
-"PO-Revision-Date: 2010-12-03 22:24+0100\n"
+"POT-Creation-Date: 2011-03-26 15:12+0100\n"
+"PO-Revision-Date: 2011-03-17 22:24+0100\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -302,8 +303,8 @@ msgstr "Alternativt sprog"
 msgid "Load an alternate language."
 msgstr "Indlæs et alternativt sprog."
 
-#: ../plugins/charmap/gtr-charmap-plugin.c:280
 #: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:1
+#: ../plugins/charmap/charmap/__init__.py:41
 msgid "Character Map"
 msgstr "Tegnkort"
 
@@ -469,14 +470,12 @@ msgid "_Insert Tags"
 msgstr "_Indsæt mærker"
 
 #: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:1
-#, fuzzy
 msgid "Insert Params or Tags"
-msgstr "Indsæt parametre"
+msgstr "Indsæt parametre eller mærker"
 
 #: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:2
-#, fuzzy
 msgid "Parameters and tags detection featuring easy insertion."
-msgstr "Parametergenkendelse og nem indsættelse."
+msgstr "Parameter- og mærkegenkendelse med nem indsættelse."
 
 #: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
 #, no-c-format
@@ -669,7 +668,7 @@ msgstr "Brug ekstern redigering"
 msgid "Please install \"%s\" to be able to show the file"
 msgstr "Installer \"%s\" for at kunne vise filen"
 
-#: ../plugins/codeview/gtr-codeview-plugin.c:503
+#: ../plugins/codeview/gtr-codeview-plugin.c:500
 msgid "Paths:"
 msgstr "Stier:"
 
@@ -771,7 +770,7 @@ msgstr "Om Gtranslator"
 #: ../src/gtr-actions-help.c:106
 msgid "translator-credits"
 msgstr ""
-"Joe Hansen, 2009, 2010.\n"
+"Joe Hansen, 2009, 2010, 2011.\n"
 "\n"
 "Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Mere info: http://www.dansk-gruppen.dk"
@@ -1523,7 +1522,7 @@ msgstr "Kunne ikke åbne ui-fil %s. Fejl: %s"
 msgid "Unable to find the object '%s' inside file %s."
 msgstr "Kunne ikke finde objekt '%s' i filen %s."
 
-#: ../src/gtr-utils.c:751
+#: ../src/gtr-utils.c:750
 msgid ""
 "Unable to display help. Please make sure the Gtranslator documentation "
 "package is installed."
@@ -1877,68 +1876,6 @@ msgstr "Ingen profil"
 msgid "Profile for the active document"
 msgstr "Profil for det aktive dokument"
 
-#: ../src/gtr-window.c:1865
+#: ../src/gtr-window.c:1868
 msgid "Documents"
 msgstr "Dokumenter"
-
-#~ msgid "Insert Tags"
-#~ msgstr "Indsæt mærker"
-
-#~ msgid "Tags detection and easy insertion."
-#~ msgstr "Mærkegenkendelse og nem indsættelse."
-
-#~ msgid ""
-#~ "This program is free software: you can redistribute it and/or modify it "
-#~ "under the terms of the GNU General Public License as published by the "
-#~ "Free Software Foundation, either version 3 of the License, or (at your "
-#~ "option) any later version."
-#~ msgstr ""
-#~ "Dette program er fri software. Du kan redistribuere og/eller modificere "
-#~ "det, under de betingelser som er angivet i GNU General Public License, "
-#~ "som udgivet af Free Software Foundation. Enten version 3 af licensen "
-#~ "eller (efter eget valg) enhver senere version."
-
-#~ msgid ""
-#~ "This program is distributed in the hope that it will be useful, but "
-#~ "WITHOUT ANY WARRANTY; without even the implied warranty of "
-#~ "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General "
-#~ "Public License for more details."
-#~ msgstr ""
-#~ "Dette program distribueres i håb om, at det vil vise sig nyttigt, men "
-#~ "UDEN NOGEN FORM FOR GARANTI, uden selv de underforståede garantier "
-#~ "omkring SALGBARHED eller EGNETHED TIL ET BESTEMT FORMÅL. Yderligere "
-#~ "detaljer kan læses i GNU General Public License."
-
-#~ msgid ""
-#~ "You should have received a copy of the GNU General Public License along "
-#~ "with this program.  If not, see <http://www.gnu.org/licenses/>."
-#~ msgstr ""
-#~ "Du bør have modtaget en kopi af GNU General Public License sammen med "
-#~ "dette program. Hvis ikke, så se <http://www.gnu.org/licenses/>."
-
-#~ msgid "Plugin"
-#~ msgstr "Udvidelsesmodul"
-
-#~ msgid "Enabled"
-#~ msgstr "Slået til"
-
-#~ msgid "_About"
-#~ msgstr "_Om"
-
-#~ msgid "C_onfigure"
-#~ msgstr "_Konfigurer"
-
-#~ msgid "A_ctivate"
-#~ msgstr "_Aktiver"
-
-#~ msgid "Ac_tivate All"
-#~ msgstr "Aktiver a_lle"
-
-#~ msgid "_Deactivate All"
-#~ msgstr "_Deaktiver alle"
-
-#~ msgid "_About Plugin"
-#~ msgstr "_Om udvidelsesmodul"
-
-#~ msgid "C_onfigure Plugin"
-#~ msgstr "Konfigurer _udvidelsesmodul"
