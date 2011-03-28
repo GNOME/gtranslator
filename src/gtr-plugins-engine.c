@@ -73,7 +73,7 @@ gtr_plugins_engine_init (GtrPluginsEngine * engine)
                                   "girepository-1.0", NULL);
 
   if (!g_irepository_require_private (g_irepository_get_default (),
-                                      typelib_dir, "Gtranslator", "2.0", 0, &error))
+                                      typelib_dir, "Gtranslator", "3.0", 0, &error))
     {
       g_warning ("Could not load Gtr repository: %s", error->message);
       g_error_free (error);

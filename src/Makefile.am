@@ -160,15 +160,15 @@ CLEANFILES = $(BUILT_SOURCES)
 
 if HAVE_INTROSPECTION
 -include $(INTROSPECTION_MAKEFILE)
-INTROSPECTION_GIRS = Gtranslator-2.0.gir
+INTROSPECTION_GIRS = Gtranslator-3.0.gir
 
-Gtranslator-2.0.gir: gtranslator
+Gtranslator-3.0.gir: gtranslator
 INTROSPECTION_SCANNER_ARGS = -I$(top_srcdir) --warn-all --identifier-prefix=Gtr
-Gtranslator_2_0_gir_NAMESPACE = Gtranslator
-Gtranslator_2_0_gir_VERSION = 2.0
-Gtranslator_2_0_gir_PROGRAM = $(builddir)/gtranslator
-Gtranslator_2_0_gir_FILES = $(INST_H_FILES) $(libgtranslator_c_files)
-Gtranslator_2_0_gir_INCLUDES = Gtk-3.0 GtkSource-3.0
+Gtranslator_3_0_gir_NAMESPACE = Gtranslator
+Gtranslator_3_0_gir_VERSION = 3.0
+Gtranslator_3_0_gir_PROGRAM = $(builddir)/gtranslator
+Gtranslator_3_0_gir_FILES = $(INST_H_FILES) $(libgtranslator_c_files)
+Gtranslator_3_0_gir_INCLUDES = Gtk-3.0 GtkSource-3.0
 
 girdir = $(datadir)/gtranslator/gir-1.0
 gir_DATA = $(INTROSPECTION_GIRS)
