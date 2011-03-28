@@ -193,12 +193,17 @@ gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
   GtrTranslationMemory *tm;
   gchar *message_error;
   GtkWidget *infobar;
+  GtrHeader *header;
 
-  tm =
-    GTR_TRANSLATION_MEMORY (gtr_application_get_translation_memory (GTR_APP));
+  header = gtr_po_get_header (tab->priv->po);
 
-  if (gtr_msg_is_translated (msg) && !gtr_msg_is_fuzzy (msg))
-    gtr_translation_memory_store (tm, msg);
+  if (gtr_header_get_profile (header) != NULL)
+    {
+      tm = GTR_TRANSLATION_MEMORY (gtr_application_get_translation_memory (GTR_APP));
+
+      if (gtr_msg_is_translated (msg) && !gtr_msg_is_fuzzy (msg))
+        gtr_translation_memory_store (tm, msg);
+    }
 
   /*
    * Checking message
