@@ -479,7 +479,6 @@ showed_message_cb (GtrTab * tab,
   GtkTextBuffer *buffer;
   GtkTextView *view;
   GtrContextPanel *panel;
-  GtkTextMark *path_start, *path_end;
   GtkTextTag *bold;
 
   panel = gtr_tab_get_context_panel (tab);
@@ -492,9 +491,6 @@ showed_message_cb (GtrTab * tab,
   /* Create the bold tag for header */
   bold = gtk_text_buffer_create_tag (buffer, NULL, "weight", PANGO_WEIGHT_BOLD,
                                      "weight-set", TRUE, NULL);
-
-  path_start = gtk_text_buffer_create_mark (buffer,
-                                            "path_start", &iter, TRUE);
 
   gtk_text_buffer_insert (buffer, &iter, "\n", 1);
   gtk_text_buffer_insert_with_tags (buffer, &iter, _("Paths:"), -1, bold, NULL);
@@ -515,8 +511,6 @@ showed_message_cb (GtrTab * tab,
    */
   g_object_set_data (G_OBJECT (buffer), "link_tags", plugin->priv->tags);
   plugin->priv->tags = NULL;
-
-  path_end = gtk_text_buffer_create_mark (buffer, "path_end", &iter, TRUE);
 }
 
 static void

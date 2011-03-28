@@ -148,13 +148,10 @@ gtr_notebook_new ()
 void
 gtr_notebook_add_page (GtrNotebook * notebook, GtrTab * tab)
 {
-  GtrPo *po;
   GtkWidget *label;
 
   g_return_if_fail (GTR_IS_NOTEBOOK (notebook));
   g_return_if_fail (GTR_IS_TAB (tab));
-
-  po = gtr_tab_get_po (tab);
 
   label = create_tab_label (notebook, tab);
 

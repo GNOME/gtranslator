@@ -606,7 +606,6 @@ set_sensitive_according_to_tab (GtrWindow * window, GtrTab * tab)
   GtrPo *po;
   GtkSourceBuffer *buf;
   GtkAction *action;
-  GList *current;
   GtrPoState state;
   gint pages;
   gint current_page;
@@ -615,7 +614,6 @@ set_sensitive_according_to_tab (GtrWindow * window, GtrTab * tab)
   pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (window->priv->notebook));
   view = gtr_tab_get_active_view (tab);
   po = gtr_tab_get_po (tab);
-  current = gtr_po_get_current_message (po);
   buf = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
 
   if (gtk_action_group_get_sensitive (window->priv->action_group) == FALSE)

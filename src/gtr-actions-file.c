@@ -306,7 +306,6 @@ gtr_save_file_as_dialog (GtkAction * action, GtrWindow * window)
   GtrPo *po;
   GFile *location;
   gchar *uri = NULL;
-  gboolean uri_set = FALSE;
 
   if (dialog != NULL)
     {
@@ -338,7 +337,7 @@ gtr_save_file_as_dialog (GtkAction * action, GtrWindow * window)
   g_object_unref (location);
 
   if (uri)
-    uri_set = gtk_file_chooser_set_uri (GTK_FILE_CHOOSER (dialog), uri);
+    gtk_file_chooser_set_uri (GTK_FILE_CHOOSER (dialog), uri);
 
   g_free (uri);
 

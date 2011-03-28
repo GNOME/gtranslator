@@ -371,12 +371,10 @@ void
 gtr_show_header_dialog (GtrWindow * window)
 {
   static GtrHeaderDialog *dlg = NULL;
-  GtrPo *po;
   GtrTab *tab;
 
   tab = gtr_window_get_active_tab (window);
   g_return_if_fail (tab != NULL);
-  po = gtr_tab_get_po (tab);
 
   g_return_if_fail (GTR_IS_WINDOW (window));
 

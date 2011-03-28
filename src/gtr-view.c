@@ -51,7 +51,7 @@
 						 	GTR_TYPE_VIEW,     \
 						 	GtrViewPrivate))
 
-G_DEFINE_TYPE (GtrView, gtr_view, GTK_TYPE_SOURCE_VIEW)
+G_DEFINE_TYPE (GtrView, gtr_view, GTK_SOURCE_TYPE_VIEW)
 
 struct _GtrViewPrivate
 {
@@ -433,29 +433,23 @@ gtr_view_set_font (GtrView * view, gboolean def, const gchar * font_name)
 void
 gtr_view_set_search_text (GtrView * view, const gchar * text, guint flags)
 {
-  GtkSourceBuffer *doc;
   gchar *converted_text;
-  gboolean notify = FALSE;
-  //gboolean update_to_search_region = FALSE;
 
   g_return_if_fail (GTR_IS_VIEW (view));
   g_return_if_fail ((text == NULL) || (view->priv->search_text != text));
   g_return_if_fail ((text == NULL) || g_utf8_validate (text, -1, NULL));
 
   //gedit_debug_message (DEBUG_DOCUMENT, "text = %s", text);
-  doc = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
 
   if (text != NULL)
     {
       if (*text != '\0')
         {
           converted_text = gtr_utils_unescape_search_text (text);
-          notify = !gtr_view_get_can_search_again (view);
         }
       else
         {
           converted_text = g_strdup ("");
-          notify = gtr_view_get_can_search_again (view);
         }
 
       g_free (view->priv->search_text);

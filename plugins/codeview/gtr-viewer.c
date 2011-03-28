@@ -179,7 +179,7 @@ gtk_source_buffer_load_file (GtkSourceBuffer * source_buffer,
   gchar *buffer;
   GError *error_here = NULL;
 
-  g_return_val_if_fail (GTK_IS_SOURCE_BUFFER (source_buffer), FALSE);
+  g_return_val_if_fail (GTK_SOURCE_IS_BUFFER (source_buffer), FALSE);
   g_return_val_if_fail (filename != NULL, FALSE);
 
   if (!g_file_get_contents (filename, &buffer, NULL, &error_here))
@@ -245,7 +245,7 @@ get_language_for_filename (const gchar * filename)
       gchar **globs, **p;
 
       lang = gtk_source_language_manager_get_language (manager, *languages);
-      g_return_val_if_fail (GTK_IS_SOURCE_LANGUAGE (lang), NULL);
+      g_return_val_if_fail (GTK_SOURCE_IS_LANGUAGE (lang), NULL);
       ++languages;
 
       globs = gtk_source_language_get_globs (lang);

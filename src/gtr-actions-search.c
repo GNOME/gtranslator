@@ -427,7 +427,6 @@ do_replace (GtrSearchDialog * dialog, GtrWindow * window)
   gchar *unescaped_replace_text;
   gchar *selected_text = NULL;
   gboolean match_case;
-  gboolean search_backwards;
 
   view = gtr_window_get_active_view (window);
   if (view == NULL)
@@ -446,7 +445,6 @@ do_replace (GtrSearchDialog * dialog, GtrWindow * window)
   gtr_view_get_selected_text (view, &selected_text, NULL);
 
   match_case = gtr_search_dialog_get_match_case (dialog);
-  search_backwards = gtr_search_dialog_get_backwards (dialog);
 
   if ((selected_text == NULL) ||
       (match_case && (strcmp (selected_text, unescaped_search_text) != 0)) ||

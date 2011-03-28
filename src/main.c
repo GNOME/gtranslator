@@ -98,5 +98,5 @@ main (gint argc, gchar * argv[])
   g_object_unref (app);
   gtr_dirs_shutdown ();
 
-  return 0;
+  return status;
 }
