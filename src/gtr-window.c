@@ -1999,6 +1999,8 @@ gtr_window_configure_event (GtkWidget * widget, GdkEventConfigure * event)
                                                                       event);
 }
 
+#if 0
+FIXME: for now we are giving priority to the window accels
 /*
  * GtkWindow catches keybindings for the menu items _before_ passing them to
  * the focused widget. This is unfortunate and means that pressing ctrl+V
@@ -2032,6 +2034,7 @@ gtr_window_key_press_event (GtkWidget   *widget,
 
   return handled;
 }
+#endif
 
 static void
 gtr_window_class_init (GtrWindowClass * klass)
@@ -2045,7 +2048,7 @@ gtr_window_class_init (GtrWindowClass * klass)
   object_class->dispose = gtr_window_dispose;
 
   widget_class->configure_event = gtr_window_configure_event;
-  widget_class->key_press_event = gtr_window_key_press_event;
+  /*widget_class->key_press_event = gtr_window_key_press_event;*/
 }
 
 /***************************** Public funcs ***********************************/
