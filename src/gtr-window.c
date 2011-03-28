@@ -1357,7 +1357,7 @@ gtr_window_cmd_edit_toolbar (GtkAction * action, GtrWindow * window)
   gtk_container_set_border_width (GTK_CONTAINER (editor), 5);
   gtk_box_set_spacing (GTK_BOX (EGG_TOOLBAR_EDITOR (editor)), 5);
 
-  gtk_container_add (GTK_CONTAINER (content_area), editor);
+  gtk_box_pack_start (GTK_BOX (content_area), editor, TRUE, TRUE, 0);
 
   egg_editable_toolbar_set_edit_mode
     (EGG_EDITABLE_TOOLBAR (window->priv->toolbar), TRUE);
