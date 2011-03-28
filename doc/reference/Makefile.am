@@ -37,26 +37,21 @@ FIXXREF_OPTIONS=
 # Used for dependencies. The docs will be rebuilt if any of these change.
 HFILE_GLOB= 					\
 	$(top_srcdir)/src/*.h			\
-	$(top_srcdir)/src/plugin-system/*.h	\
 	$(top_srcdir)/src/translation-memory/*.h
 	
 CFILE_GLOB=					\
 	$(top_srcdir)/src/*.c			\
-	$(top_srcdir)/src/plugin-system/*.c	\
 	$(top_srcdir)/src/translation-memory/*.c
 
 # Header files to ignore when scanning (These are internal to gedit).
 IGNORE_HFILES=			\
-	actions.h		\
-	preferences-dialog.h	\
-	draw-spaces.h		\
-	module.h		\
-	gtranslator-marshall.h	\
-	gtranslator-enum-types.h\
-	prefs-manager-private.h \
-	search-dialog.h		\
-	header-dialog.h		\
-	comment-dialog.h	
+	gtr-actions.h		\
+	gtr-preferences-dialog.h\
+	gtr-marshall.h	\
+	gtr-enum-types.h\
+	gtr-search-dialog.h	\
+	gtr-header-dialog.h	\
+	gtr-comment-dialog.h
 
 # Images to copy into HTML directory.
 HTML_IMAGES= figures/ExtendedClassDiagram.png figures/SingleClassDiagram.png
@@ -75,7 +70,6 @@ expand_content_files=
 # signals and properties.
 GTKDOC_CFLAGS=	\
 	-I$(top_srcdir)/src			\
-	-I$(top_srcdir)/src/plugin-system	\
 	-I$(top_srcdir)/src/toolbareditor	\
 	-I$(top_srcdir)/src/translation-memory	\
 	-I$(top_builddir)/src			\
