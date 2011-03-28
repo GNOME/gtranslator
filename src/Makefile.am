@@ -81,6 +81,7 @@ NOINST_H_FILES = \
 	gtr-history-entry.h \
 	gtr-io-error-info-bar.h \
 	gtr-message-table-model.h \
+	gtr-plugins-engine.h \
 	gtr-profile-manager.h \
 	gtr-settings.h \
 	gtr-status-combo-box.h \
