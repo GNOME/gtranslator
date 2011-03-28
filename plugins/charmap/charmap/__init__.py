@@ -48,7 +48,7 @@ class CharmapPlugin(GObject.Object, Gtranslator.WindowActivatable):
         self.window.remove_widget(self.panel)
 
     def do_update_state(self):
-        self.panel.set_sensitive(len(self.window.get_documents()) >= 1)
+        self.panel.set_sensitive(len(self.window.get_all_tabs()) >= 1)
 
     def get_document_font(self):
         if self.editor_settings.get_boolean("use-custom-font"):
