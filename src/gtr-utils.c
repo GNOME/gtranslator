@@ -28,6 +28,10 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "gtr-utils.h"
 #include "gtr-dirs.h"
 
