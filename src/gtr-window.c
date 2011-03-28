@@ -1722,9 +1722,6 @@ gtr_window_draw (GtrWindow * window)
                    "model",
                    _gtr_application_get_toolbars_model (GTR_APP), NULL));
 
-  gtk_style_context_add_class (gtk_widget_get_style_context (priv->toolbar),
-                               GTK_STYLE_CLASS_PRIMARY_TOOLBAR);
-
   egg_editable_toolbar_show (EGG_EDITABLE_TOOLBAR (priv->toolbar),
                              "DefaultToolBar");
   gtk_box_pack_start (GTK_BOX (priv->main_box),
