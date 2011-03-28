@@ -48,15 +48,22 @@ struct _GtrCodeViewPluginPrivate
 {
   GSettings *settings;
 
+  GtrWindow *window;
+
+  GSList *tags;
+};
+
+typedef struct _GtrCodeViewConfigureWidget GtrCodeViewConfigureWidget;
+
+struct _GtrCodeViewConfigureWidget
+{
+  GSettings *settings;
+
   GtkWidget *main_box;
   GtkWidget *use_editor_checkbutton;
   GtkWidget *program_box;
   GtkWidget *program_cmd_entry;
   GtkWidget *line_cmd_entry;
-
-  GtrWindow *window;
-
-  GSList *tags;
 };
 
 enum
@@ -605,16 +612,28 @@ page_added_cb (GtkNotebook * notebook,
 }
 
 static void
-use_editor_toggled (GtkToggleButton * button,
-                    GtrCodeViewPlugin * plugin)
+use_editor_toggled (GSettings                  *settings,
+                    const gchar                *key,
+                    GtrCodeViewConfigureWidget *widget)
 {
-  gtk_widget_set_sensitive (plugin->priv->program_box,
-                            gtk_toggle_button_get_active (button));
+  gtk_widget_set_sensitive (widget->program_box,
+                            g_settings_get_boolean (settings, key));
+}
+
+static void
+configure_widget_destroyed (GtkWidget *widget,
+			    gpointer   data)
+{
+  GtrCodeViewConfigureWidget *conf_widget = (GtrCodeViewConfigureWidget *)data;
+
+  g_object_unref (conf_widget->settings);
+  g_slice_free (GtrCodeViewConfigureWidget, conf_widget);
 }
 
 static GtkWidget *
 get_configuration_dialog (GtrCodeViewPlugin *plugin)
 {
+  GtrCodeViewConfigureWidget *widget;
   gboolean ret;
   GtkWidget *error_widget;
   gchar *path;
@@ -623,50 +642,60 @@ get_configuration_dialog (GtrCodeViewPlugin *plugin)
     NULL
   };
 
+  widget = g_slice_new (GtrCodeViewConfigureWidget);
+  widget->settings = g_object_ref (plugin->priv->settings);
+
   path = gtr_dirs_get_ui_file ("gtr-codeview-dialog.ui");
   ret = gtr_utils_get_ui_objects (path,
                                   root_objects,
                                   &error_widget,
-                                  "main_box", &plugin->priv->main_box,
-                                  "use_editor",
-                                  &plugin->priv->use_editor_checkbutton,
-                                  "program_box",
-                                  &plugin->priv->program_box,
-                                  "program_cmd",
-                                  &plugin->priv->program_cmd_entry,
-                                  "line_cmd",
-                                  &plugin->priv->line_cmd_entry, NULL);
+                                  "main_box", &widget->main_box,
+                                  "use_editor", &widget->use_editor_checkbutton,
+                                  "program_box", &widget->program_box,
+                                  "program_cmd", &widget->program_cmd_entry,
+                                  "line_cmd", &widget->line_cmd_entry, NULL);
 
   if (!ret)
     {
       g_error ("Error loading file \"%s\"", path);
+      g_free (path);
+      return NULL;
     }
 
   g_free (path);
 
   /* Use editor */
-  g_signal_connect (plugin->priv->use_editor_checkbutton, "toggled",
-                    G_CALLBACK (use_editor_toggled), plugin);
+  gtk_widget_set_sensitive (widget->program_box,
+                            g_settings_get_boolean (plugin->priv->settings,
+                                                    GTR_SETTINGS_USE_EDITOR));
 
   g_settings_bind (plugin->priv->settings,
                    GTR_SETTINGS_USE_EDITOR,
-                   plugin->priv->use_editor_checkbutton,
+                   widget->use_editor_checkbutton,
                    "active",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
   g_settings_bind (plugin->priv->settings,
                    GTR_SETTINGS_PROGRAM_CMD,
-                   plugin->priv->program_cmd_entry,
+                   widget->program_cmd_entry,
                    "text",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
   g_settings_bind (plugin->priv->settings,
                    GTR_SETTINGS_LINE_CMD,
-                   plugin->priv->line_cmd_entry,
+                   widget->line_cmd_entry,
                    "text",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
-  return plugin->priv->main_box;
+  g_signal_connect (plugin->priv->settings, "changed::"GTR_SETTINGS_USE_EDITOR,
+                    G_CALLBACK (use_editor_toggled), widget);
+
+  g_signal_connect (widget->main_box,
+                    "destroy",
+                    G_CALLBACK (configure_widget_destroyed),
+                    widget);
+
+  return widget->main_box;
 }
 
 static void
