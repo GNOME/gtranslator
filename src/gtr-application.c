@@ -78,18 +78,6 @@ struct _GtrApplicationPrivate
 };
 
 static GtrApplication *instance = NULL;
-static gchar **file_arguments = NULL;
-static gboolean option_new_window = FALSE;
-
-static const GOptionEntry options[] = {
-  { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &file_arguments,
-    NULL, N_("[FILE...]")},      /* collects file arguments */
-
-  { "new-window", 'n',  0, G_OPTION_ARG_NONE, &option_new_window,
-    NULL, N_("Create a new toplevel window in an existing instance of Gtranslator")},
-
-  {NULL}
-};
 
 static gboolean
 ensure_user_config_dir (void)
@@ -325,104 +313,55 @@ gtr_application_startup (GApplication *application)
                                      gtr_dirs_get_gtr_pixmaps_dir ());
 }
 
-static GSList *
-get_command_line_files (const gchar *cwd)
-{
-  GSList *files = NULL;
-
-  if (!cwd)
-    return NULL;
-
-  if (file_arguments)
-    {
-      gint i;
-
-      for (i = 0; file_arguments[i]; i++)
-        {
-          GFile *file = NULL;
-          gchar *path;
-
-          path = g_build_filename (cwd, file_arguments[i], NULL);
-          file = g_file_new_for_path (path);
-          g_free (path);
-
-          if (file != NULL)
-            files = g_slist_prepend (files, file);
-          else
-            g_print (_("%s: malformed file name or URI.\n"),
-                     file_arguments[i]);
-        }
-    }
-
-  return files ? g_slist_reverse (files) : NULL;
-}
-
-static gint
-gtr_application_command_line (GApplication            *application,
-                              GApplicationCommandLine *command_line)
+static void
+gtr_application_setup_window (GApplication *application,
+                              GFile       **files,
+                              gint          n_files)
 {
   GtrApplicationPrivate *priv = GTR_APPLICATION (application)->priv;
   GtrWindow *window;
-  GList *windows;
-  GOptionContext *context;
-  GError *error = NULL;
-  gint argc;
-  gchar **argv;
+  GSList *file_list = NULL;
 
-  windows = gtk_application_get_windows (GTK_APPLICATION (application));
-
-  argv = g_application_command_line_get_arguments (command_line, &argc);
-
-  /* Setup command line options */
-  context = g_option_context_new (_("- Edit PO files"));
-  g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
-  g_option_context_add_group (context, gtk_get_option_group (TRUE));
-
-#ifdef ENABLE_INTROSPECTION
-  g_option_context_add_group (context, g_irepository_get_option_group ());
-#endif
-
-  if (!g_option_context_parse (context, &argc, &argv, &error))
+  if (files != NULL)
     {
-       g_print(_("%s\nRun '%s --help' to see a full list of available command line options.\n"),
-               error->message, argv[0]);
-       g_error_free (error);
-       g_option_context_free (context);
-       return 1;
+      gint i;
+      for (i = 0; i < n_files; ++i)
+        /* I don't know whether GApplication gets rid of
+         * malformed files passed on the command-line.
+         */
+        if (files[i] != NULL)
+          file_list = g_slist_prepend (file_list, files[i]);
     }
+  window = gtr_application_create_window (GTR_APPLICATION (application));
+  gtk_application_add_window (GTK_APPLICATION (application), GTK_WINDOW (window));
 
-  g_option_context_free (context);
+  /* If it is the first run, the default directory was created in this
+   * run, then we show the First run Assistant
+   */
+  if (priv->first_run)
+    gtr_show_assistant (window);
 
-  if (option_new_window || windows == NULL)
+  if (file_list != NULL)
     {
-      window = gtr_application_create_window (GTR_APPLICATION (application));
-      gtk_application_add_window (GTK_APPLICATION (application),
-                                  GTK_WINDOW (window));
-
-      /* If it is the first run, the default directory was created in this
-       * run, then we show the First run Assistant
-       */
-      if (priv->first_run)
-        gtr_show_assistant (window);
+      file_list = g_slist_reverse (file_list);
+      gtr_actions_load_locations (window, file_list);
+      g_slist_free_full (file_list, g_object_unref);
     }
-  else
-    window = gtr_application_get_active_window (GTR_APPLICATION (application));
+}
 
-  if (file_arguments != NULL)
-    {
-      GSList *files;
+static void
+gtr_application_open (GApplication *application,
+                      GFile       **files,
+                      gint          n_files,
+                      const gchar  *hint)
+{
+  gtr_application_setup_window (application, files, n_files);
+}
 
-      files = get_command_line_files (g_application_command_line_get_cwd (command_line));
-      if (files != NULL)
-        {
-          gtr_actions_load_locations (window, files);
-          g_slist_free_full (files, g_object_unref);
-        }
-    }
-
-  g_strfreev (argv);
-
-  return 0;
+static void
+gtr_application_activate (GApplication *application)
+{
+  gtr_application_setup_window (application, NULL, 0);
 }
 
 static void
@@ -446,7 +385,8 @@ gtr_application_class_init (GtrApplicationClass *klass)
   object_class->finalize = gtr_application_finalize;
 
   application_class->startup = gtr_application_startup;
-  application_class->command_line = gtr_application_command_line;
+  application_class->open = gtr_application_open;
+  application_class->activate = gtr_application_activate;
   application_class->quit_mainloop = gtr_application_quit_mainloop;
 }
 
@@ -455,7 +395,7 @@ _gtr_application_new ()
 {
   instance = GTR_APPLICATION (g_object_new (GTR_TYPE_APPLICATION,
                                             "application-id", "org.gnome.Gtranslator",
-                                            "flags", G_APPLICATION_HANDLES_COMMAND_LINE,
+                                            "flags", G_APPLICATION_HANDLES_OPEN,
                                             NULL));
 
   return instance;
