@@ -623,7 +623,7 @@ get_configuration_dialog (GtrCodeViewPlugin *plugin)
     NULL
   };
 
-  path = gtr_dirs_get_ui_file ("gtr-source-code-view-dialog.ui");
+  path = gtr_dirs_get_ui_file ("gtr-codeview-dialog.ui");
   ret = gtr_utils_get_ui_objects (path,
                                   root_objects,
                                   &error_widget,
