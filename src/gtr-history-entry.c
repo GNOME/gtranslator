@@ -42,7 +42,8 @@ enum
 {
   PROP_0,
   PROP_HISTORY_ID,
-  PROP_HISTORY_LENGTH
+  PROP_HISTORY_LENGTH,
+  PROP_ENABLE_COMPLETION
 };
 
 #define MIN_ITEM_LEN 3
@@ -63,7 +64,7 @@ struct _GtrHistoryEntryPrivate
   GSettings *settings;
 };
 
-G_DEFINE_TYPE (GtrHistoryEntry, gtr_history_entry, GTK_TYPE_COMBO_BOX)
+G_DEFINE_TYPE (GtrHistoryEntry, gtr_history_entry, GTK_TYPE_COMBO_BOX_TEXT)
      static void
        gtr_history_entry_set_property (GObject * object,
                                        guint prop_id,
@@ -83,6 +84,10 @@ G_DEFINE_TYPE (GtrHistoryEntry, gtr_history_entry, GTK_TYPE_COMBO_BOX)
       break;
     case PROP_HISTORY_LENGTH:
       gtr_history_entry_set_history_length (entry, g_value_get_uint (value));
+      break;
+    case PROP_ENABLE_COMPLETION:
+      gtr_history_entry_set_enable_completion (entry,
+                                               g_value_get_boolean (value));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
@@ -108,6 +113,11 @@ gtr_history_entry_get_property (GObject * object,
     case PROP_HISTORY_LENGTH:
       g_value_set_uint (value, priv->history_length);
       break;
+    case PROP_ENABLE_COMPLETION:
+      g_value_set_boolean (value,
+                           gtr_history_entry_get_enable_completion
+                           (GTR_HISTORY_ENTRY (object)));
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
     }
@@ -116,7 +126,17 @@ gtr_history_entry_get_property (GObject * object,
 static void
 gtr_history_entry_dispose (GObject * object)
 {
+  GtrHistoryEntryPrivate *priv;
+
+  priv = GTR_HISTORY_ENTRY (object)->priv;
+
   gtr_history_entry_set_enable_completion (GTR_HISTORY_ENTRY (object), FALSE);
+
+  if (priv->settings != NULL)
+    {
+      g_object_unref (G_OBJECT (priv->settings));
+      priv->settings = NULL;
+    }
 
   G_OBJECT_CLASS (gtr_history_entry_parent_class)->dispose (object);
 }
@@ -130,13 +150,31 @@ gtr_history_entry_finalize (GObject * object)
 
   g_free (priv->history_id);
 
-  if (priv->settings != NULL)
+  G_OBJECT_CLASS (gtr_history_entry_parent_class)->finalize (object);
+}
+
+static void
+gtr_history_entry_load_history (GtrHistoryEntry * entry)
+{
+  gchar **items;
+  gsize i;
+
+  items = g_settings_get_strv (entry->priv->settings,
+                               entry->priv->history_id);
+  i = 0;
+
+  gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (entry));
+
+  /* Now the default value is an empty string so we have to take care
+     of it to not add the empty string in the search list */
+  while (items[i] != NULL && *items[i] != '\0' &&
+         i < entry->priv->history_length)
     {
-      g_object_unref (G_OBJECT (priv->settings));
-      priv->settings = NULL;
+      gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (entry), items[i]);
+      i++;
     }
 
-  G_OBJECT_CLASS (gtr_history_entry_parent_class)->finalize (object);
+  g_strfreev (items);
 }
 
 static void
@@ -156,6 +194,8 @@ gtr_history_entry_class_init (GtrHistoryEntryClass * klass)
                                                         "History ID",
                                                         NULL,
                                                         G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT_ONLY
+                                                        |
                                                         G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
@@ -169,7 +209,14 @@ gtr_history_entry_class_init (GtrHistoryEntryClass * klass)
                                                       G_PARAM_READWRITE |
                                                       G_PARAM_STATIC_STRINGS));
 
-  /* TODO: Add enable-completion property */
+  g_object_class_install_property (object_class,
+                                   PROP_ENABLE_COMPLETION,
+                                   g_param_spec_boolean ("enable-completion",
+                                                         "Enable Completion",
+                                                         "Wether the completion is enabled",
+                                                         TRUE,
+                                                         G_PARAM_READWRITE |
+                                                         G_PARAM_STATIC_STRINGS));
 
   g_type_class_add_private (object_class, sizeof (GtrHistoryEntryPrivate));
 }
@@ -193,8 +240,10 @@ get_history_items (GtrHistoryEntry * entry)
   GPtrArray *array;
   gboolean valid;
   gint n_children;
+  gint text_column;
 
   store = get_history_store (entry);
+  text_column = gtk_combo_box_get_entry_text_column (GTK_COMBO_BOX (entry));
 
   valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter);
   n_children = gtk_tree_model_iter_n_children (GTK_TREE_MODEL (store), NULL);
@@ -205,7 +254,8 @@ get_history_items (GtrHistoryEntry * entry)
     {
       gchar *str;
 
-      gtk_tree_model_get (GTK_TREE_MODEL (store), &iter, 0, &str, -1);
+      gtk_tree_model_get (GTK_TREE_MODEL (store),
+                          &iter, text_column, &str, -1);
 
       g_ptr_array_add (array, str);
 
@@ -234,11 +284,16 @@ gtr_history_entry_save_history (GtrHistoryEntry * entry)
 }
 
 static gboolean
-remove_item (GtkListStore * store, const gchar * text)
+remove_item (GtrHistoryEntry * entry, const gchar * text)
 {
+  GtkListStore *store;
   GtkTreeIter iter;
+  gint text_column;
 
   g_return_val_if_fail (text != NULL, FALSE);
+
+  store = get_history_store (entry);
+  text_column = gtk_combo_box_get_entry_text_column (GTK_COMBO_BOX (entry));
 
   if (!gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter))
     return FALSE;
@@ -247,7 +302,8 @@ remove_item (GtkListStore * store, const gchar * text)
     {
       gchar *item_text;
 
-      gtk_tree_model_get (GTK_TREE_MODEL (store), &iter, 0, &item_text, -1);
+      gtk_tree_model_get (GTK_TREE_MODEL (store),
+                          &iter, text_column, &item_text, -1);
 
       if (item_text != NULL && strcmp (item_text, text) == 0)
         {
@@ -290,7 +346,6 @@ insert_history_item (GtrHistoryEntry * entry,
                      const gchar * text, gboolean prepend)
 {
   GtkListStore *store;
-  GtkTreeIter iter;
 
   if (g_utf8_strlen (text, -1) <= MIN_ITEM_LEN)
     return;
@@ -302,15 +357,13 @@ insert_history_item (GtrHistoryEntry * entry,
    * before inserting the new row, otherwise appending
    * would not work */
 
-  if (!remove_item (store, text))
+  if (!remove_item (entry, text))
     clamp_list_store (store, entry->priv->history_length - 1);
 
   if (prepend)
-    gtk_list_store_insert (store, &iter, 0);
+    gtk_combo_box_text_prepend_text (GTK_COMBO_BOX_TEXT (entry), text);
   else
-    gtk_list_store_append (store, &iter);
-
-  gtk_list_store_set (store, &iter, 0, text, -1);
+    gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (entry), text);
 
   gtr_history_entry_save_history (entry);
 }
@@ -333,46 +386,12 @@ gtr_history_entry_append_text (GtrHistoryEntry * entry, const gchar * text)
   insert_history_item (entry, text, FALSE);
 }
 
-static void
-gtr_history_entry_load_history (GtrHistoryEntry * entry)
-{
-  gchar **items;
-  GtkListStore *store;
-  GtkTreeIter iter;
-  gsize i;
-
-  g_return_if_fail (GTR_IS_HISTORY_ENTRY (entry));
-
-  store = get_history_store (entry);
-
-  items = g_settings_get_strv (entry->priv->settings,
-                               entry->priv->history_id);
-  i = 0;
-
-  gtk_list_store_clear (store);
-
-  /* Now the default value is an empty string so we have to take care
-     of it to not add the empty string in the search list */
-  while (items[i] != NULL && *items[i] != '\0' &&
-         i < entry->priv->history_length)
-    {
-      gtk_list_store_append (store, &iter);
-      gtk_list_store_set (store, &iter, 0, items[i], -1);
-      i++;
-    }
-
-  g_strfreev (items);
-}
-
 void
 gtr_history_entry_clear (GtrHistoryEntry * entry)
 {
-  GtkListStore *store;
-
   g_return_if_fail (GTR_IS_HISTORY_ENTRY (entry));
 
-  store = get_history_store (entry);
-  gtk_list_store_clear (store);
+  gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (entry));
 
   gtr_history_entry_save_history (entry);
 }
@@ -411,14 +430,6 @@ gtr_history_entry_get_history_length (GtrHistoryEntry * entry)
   g_return_val_if_fail (GTR_IS_HISTORY_ENTRY (entry), 0);
 
   return entry->priv->history_length;
-}
-
-gchar *
-gtr_history_entry_get_history_id (GtrHistoryEntry * entry)
-{
-  g_return_val_if_fail (GTR_IS_HISTORY_ENTRY (entry), NULL);
-
-  return g_strdup (entry->priv->history_id);
 }
 
 void
@@ -478,43 +489,25 @@ gtr_history_entry_get_enable_completion (GtrHistoryEntry * entry)
 GtkWidget *
 gtr_history_entry_new (const gchar * history_id, gboolean enable_completion)
 {
-  GtkWidget *ret;
-  GtkListStore *store;
+  GtrHistoryEntry *entry;
 
   g_return_val_if_fail (history_id != NULL, NULL);
 
-  /* Note that we are setting the model, so
-   * user must be careful to always manipulate
-   * data in the history through gtr_history_entry_
-   * functions.
+  enable_completion = (enable_completion != FALSE);
+
+  entry = g_object_new (GTR_TYPE_HISTORY_ENTRY,
+                        "has-entry", TRUE,
+                        "entry-text-column", 0,
+                        "id-column", 1,
+                        "history-id", history_id,
+                        "enable-completion", enable_completion, NULL);
+
+  /* We must load the history after the object has been constructed,
+   * to ensure that the model is set properly.
    */
+  gtr_history_entry_load_history (entry);
 
-  store = gtk_list_store_new (1, G_TYPE_STRING);
-
-  ret = g_object_new (GTR_TYPE_HISTORY_ENTRY,
-                      "has-entry", TRUE,
-                      "history-id", history_id,
-                      "model", store, "text-column", 0, NULL);
-
-  g_object_unref (store);
-
-  /* loading has to happen after the model
-   * has been set. However the model is not a
-   * G_PARAM_CONSTRUCT property of GtkComboBox
-   * so we cannot do this in the constructor.
-   * For now we simply do here since this widget is
-   * not bound to other programming languages.
-   * A maybe better alternative is to override the
-   * model property of combobox and mark CONTRUCT_ONLY.
-   * This would also ensure that the model cannot be
-   * set explicitely at a later time.
-   */
-  gtr_history_entry_load_history (GTR_HISTORY_ENTRY (ret));
-
-  gtr_history_entry_set_enable_completion (GTR_HISTORY_ENTRY (ret),
-                                           enable_completion);
-
-  return ret;
+  return GTK_WIDGET (entry);
 }
 
 /*
@@ -582,4 +575,4 @@ gtr_history_entry_set_escape_func (GtrHistoryEntry * entry,
   g_list_free (cells);
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

@@ -45,12 +45,12 @@ typedef struct _GtrHistoryEntryPrivate GtrHistoryEntryPrivate;
 
 struct _GtrHistoryEntryClass
 {
-  GtkComboBoxClass parent_class;
+  GtkComboBoxTextClass parent_class;
 };
 
 struct _GtrHistoryEntry
 {
-  GtkComboBox parent_instance;
+  GtkComboBoxText parent_instance;
 
   GtrHistoryEntryPrivate *priv;
 };
@@ -75,8 +75,6 @@ gtr_history_entry_get_type (void)
 
      guint gtr_history_entry_get_history_length (GtrHistoryEntry * gentry);
 
-     gchar *gtr_history_entry_get_history_id (GtrHistoryEntry * entry);
-
      void gtr_history_entry_set_enable_completion
        (GtrHistoryEntry * entry, gboolean enable);
 
@@ -92,4 +90,4 @@ gtr_history_entry_get_type (void)
 
 G_END_DECLS
 #endif /* __GTR_HISTORY_ENTRY_H__ */
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */
