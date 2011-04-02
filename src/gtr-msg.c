@@ -39,32 +39,34 @@
 
 
 G_DEFINE_TYPE (GtrMsg, gtr_msg, G_TYPE_OBJECT)
-     struct _GtrMsgPrivate
-     {
-       po_message_iterator_t iterator;
 
-       po_message_t message;
+struct _GtrMsgPrivate
+{
+  po_message_iterator_t iterator;
 
-       GtrMsgStatus status;
+  po_message_t message;
 
-       GtkTreeRowReference *row_reference;
+  GtrMsgStatus status;
 
-       gint po_position;
-     };
+  GtkTreeRowReference *row_reference;
 
-     enum
-     {
-       PROP_0,
-       PROP_GETTEXT_ITER,
-       PROP_GETTEXT_MSG
-     };
+  gint po_position;
+};
 
-     static gchar *message_error = NULL;
+enum
+{
+  PROP_0,
+  PROP_GETTEXT_ITER,
+  PROP_GETTEXT_MSG
+};
 
-     static void
-       gtr_msg_set_property (GObject * object,
-                             guint prop_id,
-                             const GValue * value, GParamSpec * pspec)
+static gchar *message_error = NULL;
+
+static void
+gtr_msg_set_property (GObject * object,
+                      guint prop_id,
+                      const GValue * value,
+                      GParamSpec * pspec)
 {
   GtrMsg *msg = GTR_MSG (object);
 
@@ -652,7 +654,6 @@ on_gettext_po_xerror2 (gint severity,
 {
   g_warning ("Error: %s.\n %s", message_text1, message_text2);
 }
-
 
 /**
  * gtr_msg_check:

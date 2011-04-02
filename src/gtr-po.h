@@ -143,8 +143,6 @@ gtr_po_get_type (void)
 
      GtrHeader *gtr_po_get_header (GtrPo * po);
 
-     void gtr_po_set_header (GtrPo * po, GtrHeader * header);
-
 gint
 gtr_po_get_translated_count (GtrPo * po);
 

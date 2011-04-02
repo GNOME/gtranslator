@@ -295,7 +295,6 @@ po_file_is_empty (po_file_t file)
   return TRUE;
 }
 
-
 /**
  * is_read_only:
  * @location: a GFile Object that represents the file to check
@@ -310,7 +309,6 @@ is_read_only (const gchar * filename)
   gboolean ret = TRUE;          /* default to read only */
   GFileInfo *info;
   GFile *location;
-
 
   location = g_file_new_for_path (filename);
 
@@ -667,6 +665,8 @@ gtr_po_set_location (GtrPo * po, GFile * location)
 GtrPoState
 gtr_po_get_state (GtrPo * po)
 {
+  g_return_val_if_fail (GTR_IS_PO (po), 0);
+
   return po->priv->state;
 }
 
@@ -680,6 +680,8 @@ gtr_po_get_state (GtrPo * po)
 void
 gtr_po_set_state (GtrPo * po, GtrPoState state)
 {
+  g_return_if_fail (GTR_IS_PO (po));
+
   po->priv->state = state;
 
   g_object_notify (G_OBJECT (po), "state");
@@ -703,10 +705,13 @@ gtr_po_get_write_perms (GtrPo * po)
 GList *
 gtr_po_get_messages (GtrPo * po)
 {
+  g_return_val_if_fail (GTR_IS_PO (po), NULL);
+
   return po->priv->messages;
 }
 
 /**
+ * FIXME: this is hack, we should fix it
  * gtr_po_set_messages:
  * @po: a #GtrPo
  * @messages: a pointer to a new messages list.
@@ -716,6 +721,8 @@ gtr_po_get_messages (GtrPo * po)
 void
 gtr_po_set_messages (GtrPo * po, GList * messages)
 {
+  g_return_if_fail (GTR_IS_PO (po));
+
   po->priv->messages = messages;
 }
 
@@ -730,7 +737,6 @@ gtr_po_get_current_message (GtrPo * po)
 {
   return po->priv->current;
 }
-
 
 /**
  * gtr_po_update_current_message:
@@ -938,12 +944,6 @@ gtr_po_get_header (GtrPo * po)
   g_return_val_if_fail (GTR_IS_PO (po), NULL);
 
   return po->priv->header;
-}
-
-void
-gtr_po_set_header (GtrPo * po, GtrHeader * header)
-{
-  po->priv->header = header;
 }
 
 /**
