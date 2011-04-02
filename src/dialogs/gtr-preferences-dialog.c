@@ -115,10 +115,6 @@ struct _GtrPreferencesDialogPrivate
   GtkWidget *plurals_entry;
   GtkWidget *number_plurals_spinbutton;
 
-  /*Inteface */
-  GtkWidget *gdl_combobox;
-  GtkWidget *scheme_color_combobox;
-
   /*Plugins */
   GtkWidget *plugins_box;
 };
@@ -613,84 +609,6 @@ setup_profile_pages (GtrPreferencesDialog *dlg)
                     "clicked", G_CALLBACK (edit_button_clicked), dlg);
 }
 
-/***************Interface pages****************/
-static void
-scheme_color_changed_cb (GtkComboBoxText * combobox, GtrPreferencesDialog * dlg)
-{
-  gchar *active_text;
-
-  active_text = gtk_combo_box_text_get_active_text (combobox);
-
-  g_settings_set_string (dlg->priv->ui_settings,
-                         GTR_SETTINGS_COLOR_SCHEME,
-                         active_text);
-  g_free (active_text);
-}
-
-static void
-on_gdl_combobox_changed (GtkComboBox          *combobox,
-                         GtrPreferencesDialog *dlg)
-{
-  g_settings_set_enum (dlg->priv->ui_settings,
-                       GTR_SETTINGS_PANEL_SWITCHER_STYLE,
-                       gtk_combo_box_get_active (combobox));
-}
-
-static void
-setup_interface_pages (GtrPreferencesDialog * dlg)
-{
-  GtkSourceStyleSchemeManager *manager;
-  const gchar *const *scheme_ids;
-  gchar *scheme_active;
-  gint i = 0;
-  GtkListStore *store;
-  GtkCellRenderer *cell;
-  GdlSwitcherStyle style;
-
-  style = g_settings_get_enum (dlg->priv->ui_settings,
-                               GTR_SETTINGS_PANEL_SWITCHER_STYLE);
-
-  gtk_combo_box_set_active (GTK_COMBO_BOX (dlg->priv->gdl_combobox),
-                            style);
-  g_signal_connect (dlg->priv->gdl_combobox,
-                    "changed",
-                    G_CALLBACK (on_gdl_combobox_changed),
-                    dlg);
-
-  /* Scheme color */
-  store = gtk_list_store_new (1, G_TYPE_STRING);
-  gtk_combo_box_set_model (GTK_COMBO_BOX (dlg->priv->scheme_color_combobox),
-                           GTK_TREE_MODEL (store));
-  g_object_unref (store);
-
-  cell = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT
-                              (dlg->priv->scheme_color_combobox), cell, TRUE);
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT
-                                  (dlg->priv->scheme_color_combobox), cell,
-                                  "text", 0, NULL);
-
-  manager = gtk_source_style_scheme_manager_get_default ();
-  scheme_ids = gtk_source_style_scheme_manager_get_scheme_ids (manager);
-  scheme_active = g_settings_get_string (dlg->priv->ui_settings,
-                                         GTR_SETTINGS_COLOR_SCHEME);
-  while (scheme_ids[i] != NULL)
-    {
-      gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (dlg->priv->scheme_color_combobox),
-                                      scheme_ids[i]);
-      if (g_strcmp0 (scheme_ids[i], scheme_active) == 0)
-        gtk_combo_box_set_active (GTK_COMBO_BOX
-                                  (dlg->priv->scheme_color_combobox), i);
-      i++;
-    }
-
-  g_free (scheme_active);
-
-  /*Connect signals */
-  g_signal_connect (dlg->priv->scheme_color_combobox, "changed",
-                    G_CALLBACK (scheme_color_changed_cb), dlg);
-}
-
 /***************Translation Memory pages****************/
 static void
 response_filechooser_cb (GtkDialog * dialog,
@@ -1053,9 +971,6 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
                                   &dlg->priv->missing_words_spinbutton,
                                   "sentence_length_spinbutton",
                                   &dlg->priv->sentence_length_spinbutton,
-                                  "gdl_combobox", &dlg->priv->gdl_combobox,
-                                  "scheme_color_combobox",
-                                  &dlg->priv->scheme_color_combobox,
                                   "plugins_box", &dlg->priv->plugins_box,
                                   NULL);
   g_free (path);
@@ -1075,7 +990,6 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   setup_files_pages (dlg);
   setup_editor_pages (dlg);
   setup_profile_pages (dlg);
-  setup_interface_pages (dlg);
   setup_tm_pages (dlg);
   setup_plugin_pages (dlg);
 }
