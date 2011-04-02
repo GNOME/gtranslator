@@ -1720,6 +1720,9 @@ gtr_window_draw (GtrWindow * window)
                    "model",
                    _gtr_application_get_toolbars_model (GTR_APP), NULL));
 
+  egg_editable_toolbar_set_primary_class (EGG_EDITABLE_TOOLBAR (priv->toolbar),
+                                          TRUE, NULL);
+
   egg_editable_toolbar_show (EGG_EDITABLE_TOOLBAR (priv->toolbar),
                              "DefaultToolBar");
   gtk_box_pack_start (GTK_BOX (priv->main_box),
