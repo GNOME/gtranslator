@@ -44,21 +44,21 @@ gtr_cmd_help_contents (GtkAction * action, GtrWindow * window)
 void
 gtr_about_dialog (GtkAction * action, GtrWindow * window)
 {
-  const gchar *authors[] = {
+  static const gchar *authors[] = {
     N_("Current Maintainers"),
-    "---------------------------------------------------------",
+    "------------------------",
     "Juan José Sánchez Penas <jjsanchez@igalia.com>",
     "Pablo Sanxiao <psanxiao@gnome.org>",
     "Ignacio Casal Quinteiro <icq@gnome.org>",
     "",
     N_("Current Developers"),
-    "---------------------------------------------------------",
+    "------------------------",
     "Pablo Sanxiao <psanxiao@gnome.org>",
     "Ignacio Casal Quinteiro <icq@gnome.org>",
     "Seán de Búrca <leftmostcat@gmail.com>",
     "",
     N_("Previous Developers"),
-    "---------------------------------------------------------",
+    "------------------------",
     "Fatih Demir <kabalak@kabalak.net> (Founder)",
     "Ross Golder <ross@golder.org>",
     "Gediminas Paulauskas <menesis@delfi.lt>",
@@ -66,7 +66,7 @@ gtr_about_dialog (GtkAction * action, GtrWindow * window)
     "Peeter Vois <peeter@kabalak.net>",
     "",
     N_("Contributors"),
-    "---------------------------------------------------------",
+    "------------------------",
     "Christian Kirbach <christian.kirbach@googlemail.com>",
     "Luca Ferreti <elle.uca@libero.it>",
     "Jordi Mallach <jordi@sindominio.net>",
@@ -76,12 +76,19 @@ gtr_about_dialog (GtkAction * action, GtrWindow * window)
     "Yuri Penkin",
     NULL
   };
-  const gchar *documenters[] = {
+  static const gchar *documenters[] = {
     "Abel Cheung <deaddog@deaddog.org>",
     "Emese Kovacs <emese@gnome.hu>",
     "Pablo Sanxiao <psanxiao@gmail.org>",
     NULL
   };
+
+  static const gchar copyright[] =
+    "Copyright © 1999-2008 Free Software Foundation, Inc.\n"
+    "Copyright © 2007-2011 Ignacio Casal Quinteiro";
+
+  static const gchar comments[] =
+    N_("Translation file editing suite for localization of applications and libraries.");
 
   GdkPixbuf *logo;
   gchar *logo_file;
@@ -92,11 +99,9 @@ gtr_about_dialog (GtkAction * action, GtrWindow * window)
   g_free (logo_file);
 
   gtk_show_about_dialog (GTK_WINDOW (window),
-                         "comments",
-                         _
-                         ("Translation file editing suite for localization of applications and libraries."),
+                         "comments", _(comments),
                          "authors", authors,
-                         "copyright", _("Copyright © 1999-2008 Free Software Foundation, Inc."),
+                         "copyright", copyright,
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "documenters", documenters,
                          "logo", logo, "title", _("About Gtranslator"),
@@ -107,8 +112,8 @@ gtr_about_dialog (GtkAction * action, GtrWindow * window)
                          "translator-credits", _("translator-credits"),
                          "version", PACKAGE_VERSION,
                          "website", PACKAGE_URL,
-                         "wrap-license", TRUE,
-                         "website-label", _("Gtranslator Web Site"), NULL);
+                         "website-label", _("Gtranslator Web Site"),
+                         NULL);
 
   if (logo)
     g_object_unref (logo);
