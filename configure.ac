@@ -144,6 +144,32 @@ else
 fi
 AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
 
+dnl ================================================================
+dnl iso-codes
+dnl ================================================================
+
+ISO_CODES_REQUIRED=0.35
+
+PKG_CHECK_EXISTS([iso-codes >= $ISO_CODES_REQUIRED],
+		 [have_iso_codes=yes],[have_iso_codes=no])
+
+if test "x$have_iso_codes" = "xyes"; then
+	AC_MSG_CHECKING([whether iso-codes has iso-639 domain])
+	if $PKG_CONFIG --variable=domains iso-codes | grep 639 > /dev/null; then
+		result=yes
+	else
+		result=no
+		have_iso_codes=no
+	fi
+	AC_MSG_RESULT([$result])
+fi
+
+if test "x$have_iso_codes" = "xyes"; then
+	AC_DEFINE_UNQUOTED([ISO_CODES_PREFIX],["`$PKG_CONFIG --variable=prefix iso-codes`"],[ISO codes prefix])
+else
+	AC_MSG_ERROR([iso-codes is required to build gtranslator.])
+fi
+
 dnl -------------------------------------------------------------------
 dnl Check for gtkspell >= 2.0 and use it if found
 dnl -------------------------------------------------------------------

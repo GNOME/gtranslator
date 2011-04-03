@@ -11,6 +11,7 @@ uidir = $(pkgdatadir)
 ui_DATA =			\
 	gtranslator-ui.xml	\
 	gtr-toolbar.xml		\
+	gtr-plural-forms.ini	\
 	po.lang			\
 	layout.xml
 
