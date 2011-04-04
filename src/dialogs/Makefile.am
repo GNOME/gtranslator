@@ -1,14 +1,11 @@
 INCLUDES =                                                      \
-        -I$(top_srcdir)                                         \
-        -I$(top_builddir)                                       \
-        -I$(top_srcdir)/src                                     \
-        -I$(top_builddir)/src                                   \
-	-I$(top_srcdir)/src/plugin-system			\
-	-DPKGDATADIR=\""$(pkgdatadir)"\"			\
-	-DPIXMAPSDIR=\""$(datadir)"/pixmaps/gtranslator\"	\
-        $(GTRANSLATOR_CFLAGS)                                   \
-        $(WARN_CFLAGS)                                          \
-        $(DISABLE_DEPRECATED)
+	-I$(top_srcdir)                                         \
+	-I$(top_builddir)                                       \
+	-I$(top_srcdir)/src                                     \
+	-I$(top_builddir)/src                                   \
+	$(GTRANSLATOR_CFLAGS)                                   \
+	$(WARN_CFLAGS)                                          \
+	$(DISABLE_DEPRECATED)
 
 noinst_LTLIBRARIES = \
 	libdialogs.la
@@ -18,6 +15,8 @@ libdialogs_la_SOURCES = \
 	gtr-close-confirmation-dialog.h \
 	gtr-file-dialogs.c \
 	gtr-file-dialogs.h \
+	gtr-languages-fetcher.c \
+	gtr-languages-fetcher.h \
 	gtr-preferences-dialog.c \
 	gtr-preferences-dialog.h \
 	gtr-search-dialog.c \
@@ -33,13 +32,14 @@ libdialogs_la_SOURCES = \
 
 uidir = $(pkgdatadir)/ui
 ui_DATA =  \
-		gtr-preferences-dialog.ui \
-		gtr-search-dialog.ui \
-		gtr-header-dialog.ui \
-		gtr-profile-dialog.ui \
-		gtr-jump-dialog.ui
+	gtr-preferences-dialog.ui \
+	gtr-search-dialog.ui \
+	gtr-header-dialog.ui \
+	gtr-profile-dialog.ui \
+	gtr-jump-dialog.ui \
+	gtr-languages-fetcher.ui
 
 EXTRA_DIST = \
-		$(ui_DATA)
+	$(ui_DATA)
 
 -include $(top_srcdir)/git.mk
