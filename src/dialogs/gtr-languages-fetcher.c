@@ -39,7 +39,16 @@ struct _GtrLanguagesFetcherPrivate
   GtkListStore *code_store;
 };
 
+/* Signals */
+enum
+{
+  CHANGED,
+  LAST_SIGNAL
+};
+
 G_DEFINE_TYPE (GtrLanguagesFetcher, gtr_languages_fetcher, GTK_TYPE_VBOX)
+
+static guint signals[LAST_SIGNAL] = { 0 };
 
 static void
 gtr_languages_fetcher_finalize (GObject *object)
@@ -53,6 +62,16 @@ gtr_languages_fetcher_class_init (GtrLanguagesFetcherClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = gtr_languages_fetcher_finalize;
+
+  signals[CHANGED] =
+    g_signal_new ("changed",
+                  G_OBJECT_CLASS_TYPE (object_class),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (GtrLanguagesFetcherClass, changed),
+                  NULL, NULL,
+                  g_cclosure_marshal_VOID__VOID,
+                  G_TYPE_NONE,
+                  0);
 
   g_type_class_add_private (object_class, sizeof (GtrLanguagesFetcherPrivate));
 }
@@ -265,6 +284,13 @@ on_language_code_focus_out_event (GtkEntry         *entry,
 }
 
 static void
+on_combo_box_changed (GtkWidget           *widget,
+                      GtrLanguagesFetcher *fetcher)
+{
+  g_signal_emit (fetcher, signals[CHANGED], 0, NULL);
+}
+
+static void
 gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
 {
   GtkWidget *error_widget;
@@ -325,6 +351,26 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
   g_signal_connect (gtk_bin_get_child (GTK_BIN (fetcher->priv->language_code)),
                     "focus-out-event",
                     G_CALLBACK (on_language_code_focus_out_event),
+                    fetcher);
+
+  /* To emit the changed signal */
+  g_signal_connect (fetcher->priv->language, "changed",
+                    G_CALLBACK (on_combo_box_changed),
+                    fetcher);
+  g_signal_connect (fetcher->priv->language_code, "changed",
+                    G_CALLBACK (on_combo_box_changed),
+                    fetcher);
+  g_signal_connect (fetcher->priv->charset, "changed",
+                    G_CALLBACK (on_combo_box_changed),
+                    fetcher);
+  g_signal_connect (fetcher->priv->encoding, "changed",
+                    G_CALLBACK (on_combo_box_changed),
+                    fetcher);
+  g_signal_connect (fetcher->priv->team_email, "changed",
+                    G_CALLBACK (on_combo_box_changed),
+                    fetcher);
+  g_signal_connect (fetcher->priv->plural_forms, "changed",
+                    G_CALLBACK (on_combo_box_changed),
                     fetcher);
 }
 

@@ -47,6 +47,8 @@ struct _GtrLanguagesFetcher
 struct _GtrLanguagesFetcherClass
 {
   GtkVBoxClass parent_class;
+
+  void (* changed) (GtrLanguagesFetcher *fetcher);
 };
 
 GType                  gtr_languages_fetcher_get_type             (void) G_GNUC_CONST;
