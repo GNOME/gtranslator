@@ -13,7 +13,7 @@ AC_CONFIG_MACRO_DIR([m4])
 GTR_API_VERSION=3.0
 AC_SUBST(GTR_API_VERSION)
 
-AM_INIT_AUTOMAKE([1.10 check-news])
+AM_INIT_AUTOMAKE([1.10 dist-bzip2 no-dist-gzip -Wno-portability])
 AM_MAINTAINER_MODE
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
