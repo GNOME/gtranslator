@@ -96,24 +96,8 @@ struct _GtrPreferencesDialogPrivate
   GtkWidget *search_button;
   GtkWidget *add_database_button;
   GtkWidget *add_database_progressbar;
-
-  GtkWidget *use_lang_profile_in_tm;
   GtkWidget *tm_lang_entry;
-  GtkWidget *missing_words_spinbutton;
-  GtkWidget *sentence_length_spinbutton;
-
-  /*PO header->Personal information */
-  GtkWidget *name_entry;
-  GtkWidget *email_entry;
-
-  /*PO header->Language settings */
-  GtkWidget *language_comboentry;
-  GtkWidget *langcode_comboentry;
-  GtkWidget *charset_comboentry;
-  GtkWidget *encoding_comboentry;
-  GtkWidget *team_email_comboentry;
-  GtkWidget *plurals_entry;
-  GtkWidget *number_plurals_spinbutton;
+  GtkWidget *use_lang_profile_in_tm;
 
   /*Plugins */
   GtkWidget *plugins_box;
@@ -815,16 +799,6 @@ setup_tm_pages (GtrPreferencesDialog * dlg)
                    "active",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
   g_settings_bind (dlg->priv->tm_settings,
-                   GTR_SETTINGS_MAX_MISSING_WORDS,
-                   dlg->priv->missing_words_spinbutton,
-                   "value",
-                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
-  g_settings_bind (dlg->priv->tm_settings,
-                   GTR_SETTINGS_MAX_LENGTH_DIFF,
-                   dlg->priv->sentence_length_spinbutton,
-                   "value",
-                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
-  g_settings_bind (dlg->priv->tm_settings,
                    GTR_SETTINGS_PO_DIRECTORY,
                    dlg->priv->directory_entry,
                    "text",
@@ -967,10 +941,6 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
                                   "use_lang_profile_in_tm",
                                   &dlg->priv->use_lang_profile_in_tm,
                                   "tm_lang_entry", &dlg->priv->tm_lang_entry,
-                                  "missing_words_spinbutton",
-                                  &dlg->priv->missing_words_spinbutton,
-                                  "sentence_length_spinbutton",
-                                  &dlg->priv->sentence_length_spinbutton,
                                   "plugins_box", &dlg->priv->plugins_box,
                                   NULL);
   g_free (path);
