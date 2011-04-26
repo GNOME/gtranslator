@@ -4,7 +4,7 @@ dnl -------------------------------------------------------------------
 dnl (C) 2000-2004 Fatih Demir <kabalak@kabalak.net>
 dnl -------------------------------------------------------------------
 AC_PREREQ(2.64)
-AC_INIT([gtranslator],[2.90.1],[http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator],[gtranslator],[http://projects.gnome.org/gtranslator/])
+AC_INIT([gtranslator],[2.90.2],[http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator],[gtranslator],[http://projects.gnome.org/gtranslator/])
 
 AC_CONFIG_SRCDIR([src/main.c])
 AC_CONFIG_HEADER([config.h])
@@ -108,8 +108,8 @@ PKG_CHECK_MODULES(GTRANSLATOR, [
 	gdl-3.0 >= $GDL_REQUIRED
 	gsettings-desktop-schemas
 	libgda-4.0 >= 4.2.0
-	libpeas-1.0 >= 0.7.3
-	libpeas-gtk-1.0 >= 0.7.3
+	libpeas-1.0 >= 1.0.0
+	libpeas-gtk-1.0 >= 1.0.0
 ])
 
 AC_SUBST(GTRANSLATOR_CFLAGS)
