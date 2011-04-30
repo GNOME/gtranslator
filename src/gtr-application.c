@@ -177,7 +177,6 @@ gtr_application_init (GtrApplication *application)
 {
   GtrApplicationPrivate *priv;
   const gchar *gtr_folder;
-  const gchar *data_dir;
   gchar *path_default_gtr_toolbar;
   gchar *profiles_file;
 
@@ -208,8 +207,7 @@ gtr_application_init (GtrApplication *application)
   priv->toolbars_file = g_build_filename (gtr_folder,
                                           "gtr-toolbar.xml", NULL);
 
-  data_dir = gtr_dirs_get_gtr_data_dir ();
-  path_default_gtr_toolbar = g_build_filename (data_dir, "gtr-toolbar.xml", NULL);
+  path_default_gtr_toolbar = gtr_dirs_get_ui_file ("gtr-toolbar.xml");
 
   egg_toolbars_model_load_names (priv->toolbars_model,
                                  path_default_gtr_toolbar);

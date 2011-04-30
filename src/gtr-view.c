@@ -100,7 +100,7 @@ gtr_view_init (GtrView * view)
   GPtrArray *dirs;
   gchar **langs;
   const gchar *const *temp;
-  const gchar *datadir;
+  gchar *ui_dir;
   GtrViewPrivate *priv;
 
   view->priv = GTR_VIEW_GET_PRIVATE (view);
@@ -117,10 +117,12 @@ gtr_view_init (GtrView * view)
        temp != NULL && *temp != NULL; ++temp)
     g_ptr_array_add (dirs, g_strdup (*temp));
 
-  datadir = gtr_dirs_get_gtr_data_dir ();
-  g_ptr_array_add (dirs, g_strdup (datadir));
+  ui_dir = g_build_filename (gtr_dirs_get_gtr_data_dir (), "ui", NULL);
+  g_ptr_array_add (dirs, g_strdup (ui_dir));
   g_ptr_array_add (dirs, NULL);
   langs = (gchar **) g_ptr_array_free (dirs, FALSE);
+
+  g_free (ui_dir);
 
   gtk_source_language_manager_set_search_path (lm, langs);
   lang = gtk_source_language_manager_get_language (lm, "gtranslator");

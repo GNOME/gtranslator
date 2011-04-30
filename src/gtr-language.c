@@ -217,9 +217,7 @@ gtr_language_lazy_init (void)
     return;
 
   plurals_file = g_key_file_new ();
-  filename = g_build_filename (gtr_dirs_get_gtr_data_dir (),
-                               GTR_PLURAL_FORMS_FILENAME,
-                               NULL);
+  filename = gtr_dirs_get_ui_file (GTR_PLURAL_FORMS_FILENAME);
   if (!g_key_file_load_from_file (plurals_file, filename, G_KEY_FILE_NONE, NULL))
     {
       g_warning ("Bad plugin file: '%s'", filename);

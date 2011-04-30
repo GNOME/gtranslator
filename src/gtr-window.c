@@ -363,11 +363,9 @@ gtr_window_layout_load (GtrWindow * window,
       !gdl_dock_layout_load_from_file (window->priv->layout_manager,
                                        layout_filename))
     {
-      const gchar *datadir;
       gchar *path;
 
-      datadir = gtr_dirs_get_gtr_data_dir ();
-      path = g_build_filename (datadir, "layout.xml", NULL);
+      path = gtr_dirs_get_ui_file ("layout.xml");
 
       //DEBUG_PRINT ("Layout = %s", path);
       if (!gdl_dock_layout_load_from_file (window->priv->layout_manager,
@@ -1629,7 +1627,6 @@ gtr_window_draw (GtrWindow * window)
   GError *error = NULL;
   GtkWidget *dockbar;
   GtkActionGroup *action_group;
-  const gchar *datadir;
   gchar *path;
 
   GtrWindowPrivate *priv = window->priv;
@@ -1673,8 +1670,7 @@ gtr_window_draw (GtrWindow * window)
   gtk_ui_manager_insert_action_group (priv->ui_manager, action_group, 0);
   g_object_unref (action_group);
 
-  datadir = gtr_dirs_get_gtr_data_dir ();
-  path = g_build_filename (datadir, "gtranslator-ui.xml", NULL);
+  path = gtr_dirs_get_ui_file ("gtranslator-ui.xml");
 
   if (!gtk_ui_manager_add_ui_from_file (priv->ui_manager, path, &error))
     {

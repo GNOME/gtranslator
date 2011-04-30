@@ -7,7 +7,7 @@ SUBDIRS = \
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gtranslator.pc
 
-uidir = $(pkgdatadir)
+uidir = $(pkgdatadir)/ui
 ui_DATA =			\
 	gtranslator-ui.xml	\
 	gtr-toolbar.xml		\
