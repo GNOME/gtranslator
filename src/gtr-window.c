@@ -46,13 +46,6 @@
 #include "egg-toolbar-editor.h"
 #include "egg-editable-toolbar.h"
 
-#ifdef G_OS_WIN32
-#include <gdl/libgdltypebuiltins.h>
-#else
-#include <gdl/gdl.h>
-#endif
-
-
 #include <glib.h>
 #include <glib-object.h>
 #include <glib/gi18n.h>
@@ -81,13 +74,11 @@ G_DEFINE_TYPE (GtrWindow, gtr_window, GTK_TYPE_WINDOW)
 
 struct _GtrWindowPrivate
 {
-  GSettings *ui_settings;
   GSettings *state_settings;
 
   GtkWidget *main_box;
 
   GtkWidget *menubar;
-  GtkWidget *view_menu;
   GtkWidget *toolbar;
   GtkActionGroup *always_sensitive_action_group;
   GtkActionGroup *action_group;
@@ -96,10 +87,6 @@ struct _GtrWindowPrivate
 
   GtkWidget *notebook;
   GtrTab *active_tab;
-
-  GtkWidget *dock;
-  GdlDockLayout *layout_manager;
-  GHashTable *widgets;
 
   GtkWidget *statusbar;
 
@@ -284,266 +271,6 @@ static const GtkActionEntry entries[] = {
 static void          profile_combo_changed            (GtrStatusComboBox *combo,
                                                        GtkMenuItem       *item,
                                                        GtrWindow         *window);
-
-/*
- * Dock funcs
- */
-static void
-on_toggle_widget_view (GtkCheckMenuItem * menuitem, GtkWidget * dockitem)
-{
-  gboolean state;
-  state = gtk_check_menu_item_get_active (menuitem);
-  if (state)
-    gdl_dock_item_show_item (GDL_DOCK_ITEM (dockitem));
-  else
-    gdl_dock_item_hide_item (GDL_DOCK_ITEM (dockitem));
-}
-
-static void
-on_update_widget_view_menuitem (gpointer key, gpointer wid, gpointer data)
-{
-  GtkCheckMenuItem *menuitem;
-  GdlDockItem *dockitem;
-
-  dockitem = g_object_get_data (G_OBJECT (wid), "dockitem");
-  menuitem = g_object_get_data (G_OBJECT (wid), "menuitem");
-
-  g_signal_handlers_block_by_func (menuitem,
-                                   G_CALLBACK (on_toggle_widget_view),
-                                   dockitem);
-
-  if (GDL_DOCK_OBJECT_ATTACHED (dockitem))
-    gtk_check_menu_item_set_active (menuitem, TRUE);
-  else
-    gtk_check_menu_item_set_active (menuitem, FALSE);
-
-  g_signal_handlers_unblock_by_func (menuitem,
-                                     G_CALLBACK (on_toggle_widget_view),
-                                     dockitem);
-}
-
-static void
-on_layout_dirty_notify (GObject * object,
-                        GParamSpec * pspec, GtrWindow * window)
-{
-  g_return_if_fail (GTR_IS_WINDOW (window));
-
-  if (!strcmp (pspec->name, "dirty"))
-    {
-      gboolean dirty;
-      g_object_get (object, "dirty", &dirty, NULL);
-      if (dirty)
-        {
-          /* Update UI toggle buttons */
-          g_hash_table_foreach (window->priv->widgets,
-                                on_update_widget_view_menuitem, NULL);
-        }
-    }
-}
-
-static void
-gtr_window_layout_save (GtrWindow * window,
-                        const gchar * filename, const gchar * name)
-{
-  g_return_if_fail (GTR_IS_WINDOW (window));
-  g_return_if_fail (filename != NULL);
-
-  gdl_dock_layout_save_layout (window->priv->layout_manager, name);
-  if (!gdl_dock_layout_save_to_file (window->priv->layout_manager, filename))
-    g_warning ("Saving dock layout to '%s' failed!", filename);
-}
-
-static void
-gtr_window_layout_load (GtrWindow * window,
-                        const gchar * layout_filename, const gchar * name)
-{
-  g_return_if_fail (GTR_IS_WINDOW (window));
-
-  if (!layout_filename ||
-      !gdl_dock_layout_load_from_file (window->priv->layout_manager,
-                                       layout_filename))
-    {
-      gchar *path;
-
-      path = gtr_dirs_get_ui_file ("layout.xml");
-
-      //DEBUG_PRINT ("Layout = %s", path);
-      if (!gdl_dock_layout_load_from_file (window->priv->layout_manager,
-                                           path))
-        g_warning ("Loading layout from '%s' failed!!", path);
-      g_free (path);
-    }
-
-  if (!gdl_dock_layout_load_layout (window->priv->layout_manager, name))
-    g_warning ("Loading layout failed!!");
-}
-
-
-static gboolean
-remove_from_widgets_hash (gpointer name,
-                          gpointer hash_widget, gpointer widget)
-{
-  if (hash_widget == widget)
-    return TRUE;
-  return FALSE;
-}
-
-static void
-on_widget_destroy (GtkWidget * widget, GtrWindow * window)
-{
-  DEBUG_PRINT ("Widget about to be destroyed");
-  g_hash_table_foreach_remove (window->priv->widgets,
-                               remove_from_widgets_hash, widget);
-}
-
-static void
-on_widget_remove (GtkWidget * container,
-                  GtkWidget * widget, GtrWindow * window)
-{
-  GtkWidget *dock_item;
-
-  dock_item = g_object_get_data (G_OBJECT (widget), "dockitem");
-  if (dock_item)
-    {
-      gchar *unique_name =
-        g_object_get_data (G_OBJECT (dock_item), "unique_name");
-      g_free (unique_name);
-      g_signal_handlers_disconnect_by_func (G_OBJECT (dock_item),
-                                            G_CALLBACK (on_widget_remove),
-                                            window);
-      gdl_dock_item_unbind (GDL_DOCK_ITEM (dock_item));
-    }
-  if (g_hash_table_foreach_remove (window->priv->widgets,
-                                   remove_from_widgets_hash, widget))
-    {
-      DEBUG_PRINT ("Widget removed from container");
-    }
-}
-
-static void
-on_widget_removed_from_hash (gpointer widget)
-{
-  GtrWindow *window;
-  GtkWidget *menuitem;
-  GdlDockItem *dockitem;
-
-  DEBUG_PRINT ("Removing widget from hash");
-
-  window = g_object_get_data (G_OBJECT (widget), "window-object");
-  dockitem = g_object_get_data (G_OBJECT (widget), "dockitem");
-  menuitem = g_object_get_data (G_OBJECT (widget), "menuitem");
-
-  gtk_widget_destroy (menuitem);
-
-  g_object_set_data (G_OBJECT (widget), "dockitem", NULL);
-  g_object_set_data (G_OBJECT (widget), "menuitem", NULL);
-
-  g_signal_handlers_disconnect_by_func (G_OBJECT (widget),
-                                        G_CALLBACK (on_widget_destroy),
-                                        window);
-  g_signal_handlers_disconnect_by_func (G_OBJECT (dockitem),
-                                        G_CALLBACK (on_widget_remove),
-                                        window);
-
-  g_object_unref (G_OBJECT (widget));
-}
-
-static void
-add_widget_full (GtrWindow * window,
-                 GtkWidget * widget,
-                 const char *name,
-                 const char *title,
-                 const char *stock_id,
-                 GtrWindowPlacement placement,
-                 gboolean locked, GError ** error)
-{
-  GtkWidget *item;
-  GtkCheckMenuItem *menuitem;
-
-  g_return_if_fail (GTR_IS_WINDOW (window));
-  g_return_if_fail (GTK_IS_WIDGET (widget));
-  g_return_if_fail (name != NULL);
-  g_return_if_fail (title != NULL);
-
-  /* Add the widget to hash */
-  if (window->priv->widgets == NULL)
-    {
-      window->priv->widgets = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                     g_free,
-                                                     on_widget_removed_from_hash);
-    }
-  g_hash_table_insert (window->priv->widgets, g_strdup (name), widget);
-  g_object_ref (widget);
-
-  /* Add the widget to dock */
-  if (stock_id == NULL)
-    item = gdl_dock_item_new (name, title, GDL_DOCK_ITEM_BEH_NORMAL);
-  else
-    item = gdl_dock_item_new_with_stock (name, title, stock_id,
-                                         GDL_DOCK_ITEM_BEH_NORMAL);
-  if (locked)
-    {
-      guint flags = 0;
-      flags |= GDL_DOCK_ITEM_BEH_NEVER_FLOATING;
-      flags |= GDL_DOCK_ITEM_BEH_CANT_CLOSE;
-      flags |= GDL_DOCK_ITEM_BEH_CANT_ICONIFY;
-      flags |= GDL_DOCK_ITEM_BEH_NO_GRIP;
-      g_object_set (G_OBJECT (item), "behavior", flags, NULL);
-    }
-
-  gtk_container_add (GTK_CONTAINER (item), widget);
-  gdl_dock_add_item (GDL_DOCK (window->priv->dock),
-                     GDL_DOCK_ITEM (item), placement);
-  gtk_widget_show_all (item);
-
-  /* Add toggle button for the widget */
-  menuitem = GTK_CHECK_MENU_ITEM (gtk_check_menu_item_new_with_label (title));
-  gtk_widget_show (GTK_WIDGET (menuitem));
-  gtk_check_menu_item_set_active (menuitem, TRUE);
-  gtk_menu_shell_append (GTK_MENU_SHELL (window->priv->view_menu),
-                         GTK_WIDGET (menuitem));
-
-  if (locked)
-    g_object_set (G_OBJECT (menuitem), "visible", FALSE, NULL);
-
-
-  g_object_set_data (G_OBJECT (widget), "window-object", window);
-  g_object_set_data (G_OBJECT (widget), "menuitem", menuitem);
-  g_object_set_data (G_OBJECT (widget), "dockitem", item);
-
-  /* For toggling widget view on/off */
-  g_signal_connect (G_OBJECT (menuitem), "toggled",
-                    G_CALLBACK (on_toggle_widget_view), item);
-
-  /*
-     Watch for widget removal/destruction so that it could be
-     removed from widgets hash.
-   */
-  g_signal_connect (G_OBJECT (item), "remove",
-                    G_CALLBACK (on_widget_remove), window);
-  g_signal_connect_after (G_OBJECT (widget), "destroy",
-                          G_CALLBACK (on_widget_destroy), window);
-}
-
-static void
-remove_widget (GtrWindow * window, GtkWidget * widget, GError ** error)
-{
-  GtkWidget *dock_item;
-
-  g_return_if_fail (GTR_IS_WINDOW (window));
-  g_return_if_fail (GTK_IS_WIDGET (widget));
-
-  g_return_if_fail (window->priv->widgets != NULL);
-
-  dock_item = g_object_get_data (G_OBJECT (widget), "dockitem");
-  g_return_if_fail (dock_item != NULL);
-
-  /* Remove the widget from container */
-  g_object_ref (widget);
-  /* It should call on_widget_remove() and clean up should happen */
-  gtk_container_remove (GTK_CONTAINER (dock_item), widget);
-  g_object_unref (widget);
-}
 
 void
 _gtr_window_set_sensitive_according_to_message (GtrWindow * window,
@@ -1475,12 +1202,18 @@ fill_profile_combo (GtrWindow *window)
 }
 
 static void
-create_statusbar (GtrWindow *window,
-                  GtkWidget *box)
+create_statusbar (GtrWindow *window)
 {
+  GtkWidget *hbox;
+
+  /* hbox */
+  hbox = gtk_hbox_new (FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (window->priv->main_box), hbox, FALSE, FALSE, 0);
+  gtk_widget_show (hbox);
+
   window->priv->statusbar = gtr_statusbar_new ();
 
-  gtk_box_pack_end (GTK_BOX (box), window->priv->statusbar, TRUE, TRUE, 0);
+  gtk_box_pack_end (GTK_BOX (hbox), window->priv->statusbar, TRUE, TRUE, 0);
 
   gtk_widget_show (window->priv->statusbar);
 
@@ -1622,10 +1355,8 @@ on_profile_modified (GtrProfileManager *manager,
 static void
 gtr_window_draw (GtrWindow * window)
 {
-  GtkWidget *hbox;              //Statusbar and progressbar
   GtkWidget *widget;
   GError *error = NULL;
-  GtkWidget *dockbar;
   GtkActionGroup *action_group;
   gchar *path;
 
@@ -1725,30 +1456,10 @@ gtr_window_draw (GtrWindow * window)
                       priv->toolbar, FALSE, FALSE, 0);
   gtk_widget_show (priv->toolbar);
 
-  /* Docker */
-  hbox = gtk_hbox_new (FALSE, 0);
-  priv->dock = gdl_dock_new ();
-  gtk_widget_show (priv->dock);
-  gtk_box_pack_end (GTK_BOX (hbox), priv->dock, TRUE, TRUE, 0);
-
-  dockbar = gdl_dock_bar_new (GDL_DOCK (priv->dock));
-  gtk_widget_show (dockbar);
-  gtk_box_pack_start (GTK_BOX (hbox), dockbar, FALSE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (priv->main_box), hbox, TRUE, TRUE, 0);
-  gtk_widget_show (hbox);
-
-  priv->layout_manager = gdl_dock_layout_new (GDL_DOCK (priv->dock));
-  g_object_set (priv->layout_manager->master,
-                "switcher-style",
-                g_settings_get_enum (priv->ui_settings,
-                                     GTR_SETTINGS_PANEL_SWITCHER_STYLE),
-                NULL);
-  g_signal_connect (priv->layout_manager,
-                    "notify::dirty",
-                    G_CALLBACK (on_layout_dirty_notify), window);
-
   /* notebook */
   priv->notebook = GTK_WIDGET (gtr_notebook_new ());
+  gtk_widget_show (priv->notebook);
+  gtk_box_pack_start (GTK_BOX (priv->main_box), priv->notebook, TRUE, TRUE, 0);
   g_signal_connect (priv->notebook, "switch-page",
                     G_CALLBACK (notebook_switch_page), window);
   g_signal_connect (priv->notebook, "page-added",
@@ -1759,13 +1470,8 @@ gtr_window_draw (GtrWindow * window)
                     "tab_close_request",
                     G_CALLBACK (notebook_tab_close_request), window);
 
-  /* hbox */
-  hbox = gtk_hbox_new (FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (priv->main_box), hbox, FALSE, FALSE, 0);
-  gtk_widget_show (hbox);
-
   /* statusbar & progress bar */
-  create_statusbar (window, hbox);
+  create_statusbar (window);
 }
 
 static void
@@ -1796,13 +1502,9 @@ static void
 gtr_window_init (GtrWindow * window)
 {
   GtkTargetList *tl;
-  GtkWidget *view_menu;
-  const gchar *config_folder;
-  gchar *filename;
 
   window->priv = GTR_WINDOW_GET_PRIVATE (window);
 
-  window->priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
   window->priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
 
   window->priv->dispose_has_run = FALSE;
@@ -1848,27 +1550,6 @@ gtr_window_init (GtrWindow * window)
                     "drag_data_received",
                     G_CALLBACK (drag_data_received_cb), NULL);
 
-  /* Create widgets menu */
-  view_menu =
-    gtk_ui_manager_get_widget (window->priv->ui_manager,
-                               "/MainMenu/ViewMenu");
-  window->priv->view_menu =
-    gtk_menu_item_get_submenu (GTK_MENU_ITEM (view_menu));
-
-  /* Adding notebook to dock */
-  add_widget_full (window,
-                   window->priv->notebook,
-                   "GtrNotebook",
-                   _("Documents"),
-                   NULL, GTR_WINDOW_PLACEMENT_CENTER, TRUE, NULL);
-
-  /* Loading dock layout */
-  config_folder = gtr_dirs_get_user_config_dir ();
-  filename = g_build_filename (config_folder, "gtr-layout.xml", NULL);
-
-  gtr_window_layout_load (window, filename, NULL);
-  g_free (filename);
-
   /* Plugins */
   window->priv->extensions = peas_extension_set_new (PEAS_ENGINE (gtr_plugins_engine_get_default ()),
                                                      GTR_TYPE_WINDOW_ACTIVATABLE,
@@ -1888,19 +1569,10 @@ gtr_window_init (GtrWindow * window)
 static void
 save_panes_state (GtrWindow * window)
 {
-  const gchar *config_folder;
-  gchar *filename;
-
   g_settings_set (window->priv->state_settings, GTR_SETTINGS_WINDOW_SIZE, "(ii)",
                   window->priv->width, window->priv->height);
   g_settings_set_int (window->priv->state_settings, GTR_SETTINGS_WINDOW_STATE,
                       window->priv->window_state);
-
-  config_folder = gtr_dirs_get_user_config_dir ();
-  filename = g_build_filename (config_folder, "gtr-layout.xml", NULL);
-
-  gtr_window_layout_save (window, filename, NULL);
-  g_free (filename);
 }
 
 static void
@@ -1929,12 +1601,6 @@ gtr_window_dispose (GObject * object)
       priv->dispose_has_run = TRUE;
     }
 
-  if (priv->ui_settings)
-    {
-      g_object_unref (priv->ui_settings);
-      priv->ui_settings = NULL;
-    }
-
   if (priv->state_settings)
     {
       g_object_unref (priv->state_settings);
@@ -1956,18 +1622,6 @@ gtr_window_dispose (GObject * object)
     {
       g_object_unref (priv->prof_manager);
       priv->prof_manager = NULL;
-    }
-
-  if (priv->widgets)
-    {
-      g_hash_table_unref (priv->widgets);
-      priv->widgets = NULL;
-    }
-
-  if (priv->layout_manager)
-    {
-      g_object_unref (priv->layout_manager);
-      priv->layout_manager = NULL;
     }
 
   /* Now that there have broken some reference loops,
@@ -2249,60 +1903,6 @@ gtr_window_get_all_views (GtrWindow * window,
     }
 
   return views;
-}
-
-/**
- * gtr_window_add_widget:
- * @window: a #GtrWindow
- * @widget: the widget to add in the window
- * @name: the name of the widged
- * @title: the title
- * @stock_id: the stock id for the icon
- * @placement: a #GtrWindowPlacement
- *
- * Adds a new widget to the @window in the placement you prefer with and 
- * specific name, title and icon you want.
- */
-void
-gtr_window_add_widget (GtrWindow * window,
-                       GtkWidget * widget,
-                       const gchar * name,
-                       const gchar * title,
-                       const gchar * stock_id, GtrWindowPlacement placement)
-{
-  /*FIXME: We have to manage the error */
-  add_widget_full (window, widget,
-                   name, title, stock_id, placement, FALSE, NULL);
-}
-
-/**
- * gtr_window_remove_widget:
- * @window: a #GtrWindow
- * @widget: the widget to remove
- *
- * Removes from the @window the @widget if it exists.
- */
-void
-gtr_window_remove_widget (GtrWindow * window, GtkWidget * widget)
-{
-  /*FIXME: We have to manage the error */
-  remove_widget (window, widget, NULL);
-}
-
-/**
- * _gtr_window_get_layout_manager:
- * @window: a #GtrWindow
- * 
- * Gets the GDL layout manager of the window.
- * 
- * Returns: the GDL layout manager of the window.
- */
-GObject *
-_gtr_window_get_layout_manager (GtrWindow * window)
-{
-  g_return_val_if_fail (GTR_IS_WINDOW (window), NULL);
-
-  return G_OBJECT (window->priv->layout_manager);
 }
 
 /**

@@ -79,6 +79,17 @@ typedef enum
   GTR_TAB_MOVE_PREV
 } GtrTabMove;
 
+typedef enum
+{
+  GTR_TAB_PLACEMENT_NONE = 0,
+  GTR_TAB_PLACEMENT_TOP,
+  GTR_TAB_PLACEMENT_BOTTOM,
+  GTR_TAB_PLACEMENT_RIGHT,
+  GTR_TAB_PLACEMENT_LEFT,
+  GTR_TAB_PLACEMENT_CENTER,
+  GTR_TAB_PLACEMENT_FLOATING
+} GtrTabPlacement;
+
 /*
  * Public methods
  */
@@ -113,14 +124,17 @@ gint gtr_tab_get_autosave_interval (GtrTab * tab);
 
 void gtr_tab_set_autosave_interval (GtrTab * tab, gint interval);
 
-void gtr_tab_add_widget_to_lateral_panel (GtrTab * tab,
-                                          GtkWidget * widget,
-                                          const gchar * tab_name);
+void gtr_tab_add_widget (GtrTab         *tab,
+                         GtkWidget      *widget,
+                         const gchar    *unique_name,
+                         const gchar    *name,
+                         const gchar    *stock_id,
+                         GtrTabPlacement placement);
 
-void gtr_tab_remove_widget_from_lateral_panel (GtrTab *
-                                               tab, GtkWidget * widget);
+void gtr_tab_remove_widget (GtrTab *tab,
+                            GtkWidget * widget);
 
-void gtr_tab_show_lateral_panel_widget (GtrTab * tab, GtkWidget * widget);
+void gtr_tab_show_widget (GtrTab * tab, GtkWidget * widget);
 
 void gtr_tab_clear_msgstr_views (GtrTab * tab);
 

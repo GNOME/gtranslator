@@ -277,28 +277,6 @@ on_spellcheck_changed (GSettings * settings,
 }
 
 static void
-on_pane_switcher_style_changed (GSettings * settings, const gchar * key,
-                                GtrSettings * gs)
-{
-  const GList *windows, *l;
-  GdlSwitcherStyle style;
-
-  style = g_settings_get_enum (settings, key);
-
-  windows = gtk_application_get_windows (GTK_APPLICATION (GTR_APP));
-
-  for (l = windows; l != NULL; l = g_list_next (l))
-    {
-      GdlDockLayout *layout_manager;
-
-      layout_manager = GDL_DOCK_LAYOUT (_gtr_window_get_layout_manager (GTR_WINDOW (l->data)));
-
-      g_object_set (G_OBJECT (layout_manager->master),
-                    "switcher-style", style, NULL);
-    }
-}
-
-static void
 on_scheme_changed (GSettings * settings, const gchar * key, GtrSettings * gs)
 {
   GList *views, *l;
@@ -353,9 +331,6 @@ gtr_settings_init (GtrSettings * gs)
   g_signal_connect (gs->priv->editor,
                     "changed::spellcheck",
                     G_CALLBACK (on_spellcheck_changed), gs);
-  g_signal_connect (gs->priv->ui,
-                    "changed::pane-switcher-style",
-                    G_CALLBACK (on_pane_switcher_style_changed), gs);
   g_signal_connect (gs->priv->ui,
                     "changed::color-scheme",
                     G_CALLBACK (on_scheme_changed), gs);

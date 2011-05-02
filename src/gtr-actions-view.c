@@ -26,5 +26,5 @@ gtr_actions_view_context (GtkAction * action, GtrWindow * window)
   tab = gtr_window_get_active_tab (window);
   context = GTK_WIDGET (gtr_tab_get_context_panel (tab));
 
-  gtr_tab_show_lateral_panel_widget (tab, context);
+  gtr_tab_show_widget (tab, context);
 }

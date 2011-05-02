@@ -43,12 +43,18 @@
 #include "gtr-view.h"
 #include "gtr-translation-memory.h"
 #include "gtr-translation-memory-ui.h"
-#include "gtr-window.h"
+#include "gtr-dirs.h"
 
 #include <glib.h>
 #include <glib-object.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+
+#ifdef G_OS_WIN32
+#include <gdl/libgdltypebuiltins.h>
+#else
+#include <gdl/gdl.h>
+#endif
 
 #define GTR_TAB_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 					 (object),	\
@@ -63,18 +69,17 @@ G_DEFINE_TYPE (GtrTab, gtr_tab, GTK_TYPE_VBOX)
 
 struct _GtrTabPrivate
 {
+  GSettings *ui_settings;
   GSettings *files_settings;
   GSettings *editor_settings;
   GSettings *state_settings;
 
   GtrPo *po;
 
-  GtkWidget *table_pane;
-  GtkWidget *content_pane;
-  GtkWidget *message_table;
-  GtkWidget *lateral_panel;        //TM, Context, etc.
+  GtkWidget *dock;
+  GdlDockLayout *layout_manager;
 
-  GtkWidget *context_pane;
+  GtkWidget *message_table;
   GtkWidget *context;
   GtkWidget *translation_memory;
 
@@ -128,6 +133,104 @@ enum
 static guint signals[LAST_SIGNAL];
 
 static gboolean gtr_tab_autosave (GtrTab * tab);
+
+static void
+gtr_tab_layout_save (GtrTab      *tab,
+                     const gchar *filename,
+                     const gchar *name)
+{
+  g_return_if_fail (GTR_IS_TAB (tab));
+  g_return_if_fail (filename != NULL);
+
+  gdl_dock_layout_save_layout (tab->priv->layout_manager, name);
+  if (!gdl_dock_layout_save_to_file (tab->priv->layout_manager, filename))
+    g_warning ("Saving dock layout to '%s' failed!", filename);
+}
+
+static void
+gtr_tab_layout_load (GtrTab      *tab,
+                     const gchar *layout_filename,
+                     const gchar *name)
+{
+  g_return_if_fail (GTR_IS_TAB (tab));
+
+  if (!layout_filename ||
+      !gdl_dock_layout_load_from_file (tab->priv->layout_manager,
+                                       layout_filename))
+    {
+      gchar *path;
+
+      path = gtr_dirs_get_ui_file ("layout.xml");
+
+      if (!gdl_dock_layout_load_from_file (tab->priv->layout_manager,
+                                           path))
+        g_warning ("Loading layout from '%s' failed!!", path);
+      g_free (path);
+    }
+
+  if (!gdl_dock_layout_load_layout (tab->priv->layout_manager, name))
+    g_warning ("Loading layout failed!!");
+}
+
+static void
+add_widget_to_dock (GtrTab      *tab,
+                    GtkWidget   *widget,
+                    const gchar *name,
+                    const gchar *title,
+                    const gchar *stock_id,
+                    GtrTabPlacement placement,
+                    gboolean locked)
+{
+  GtkWidget *item;
+  guint flags = 0;
+
+  g_return_if_fail (GTR_IS_TAB (tab));
+  g_return_if_fail (GTK_IS_WIDGET (widget));
+  g_return_if_fail (name != NULL);
+  g_return_if_fail (title != NULL);
+
+  /* Add the widget to dock */
+  if (stock_id == NULL)
+    item = gdl_dock_item_new (name, title, GDL_DOCK_ITEM_BEH_NORMAL);
+  else
+    item = gdl_dock_item_new_with_stock (name, title, stock_id,
+                                         GDL_DOCK_ITEM_BEH_NORMAL);
+
+  if (locked)
+    {
+      flags |= 
+               GDL_DOCK_ITEM_BEH_NO_GRIP;
+    }
+
+  flags |= GDL_DOCK_ITEM_BEH_CANT_CLOSE |
+           GDL_DOCK_ITEM_BEH_CANT_ICONIFY |
+           GDL_DOCK_ITEM_BEH_NEVER_FLOATING;
+  g_object_set (G_OBJECT (item), "behavior", flags, NULL);
+
+  gtk_container_add (GTK_CONTAINER (item), widget);
+  gdl_dock_add_item (GDL_DOCK (tab->priv->dock),
+                     GDL_DOCK_ITEM (item), placement);
+  gtk_widget_show (item);
+
+  /* To remove it */
+  g_object_set_data (G_OBJECT (widget), "dockitem", item);
+}
+
+static void
+remove_widget_from_dock (GtrTab    *tab,
+                         GtkWidget *widget)
+{
+  GtkWidget *dock_item;
+
+  g_return_if_fail (GTR_IS_TAB (tab));
+  g_return_if_fail (GTK_IS_WIDGET (widget));
+
+  dock_item = g_object_get_data (G_OBJECT (widget), "dockitem");
+  g_return_if_fail (dock_item != NULL);
+
+  /* Remove the widget from container */
+  gtk_container_remove (GTK_CONTAINER (dock_item), widget);
+}
 
 static void
 install_autosave_timeout (GtrTab * tab)
@@ -556,29 +659,64 @@ on_state_notify (GtrPo      *po,
 }
 
 static void
-gtr_tab_draw (GtrTab * tab)
+on_layout_changed (GdlDockMaster *master,
+                   GtrTab        *tab)
 {
+  gchar *filename;
+
+  filename = g_build_filename (gtr_dirs_get_user_config_dir (),
+                               "gtr-layout.xml", NULL);
+
+  gtr_tab_layout_save (tab, filename, NULL);
+  g_free (filename);
+}
+
+static void
+gtr_tab_draw (GtrTab *tab)
+{
+  GtkWidget *hbox;
   GtkWidget *vertical_box;
-  GtkWidget *vcontext_box;
   GtkWidget *msgid_label;
   GtkWidget *scroll;
+  GtkWidget *dockbar;
   GtrTabPrivate *priv = tab->priv;
+  gchar *filename;
 
-  /* Content pane; this is where the message table and message area go */
-  priv->content_pane = gtk_paned_new (GTK_ORIENTATION_VERTICAL);
-  g_settings_bind (tab->priv->state_settings,
-                   GTR_SETTINGS_CONTENT_PANEL_SIZE,
-                   priv->content_pane,
-                   "position",
+  /* Docker */
+  hbox = gtk_hbox_new (FALSE, 0);
+  gtk_widget_show (hbox);
+  gtk_box_pack_start (GTK_BOX (tab), hbox, TRUE, TRUE, 0);
+
+  priv->dock = gdl_dock_new ();
+  gtk_widget_show (priv->dock);
+  gtk_box_pack_end (GTK_BOX (hbox), priv->dock, TRUE, TRUE, 0);
+
+  dockbar = gdl_dock_bar_new (GDL_DOCK (priv->dock));
+  gtk_widget_show (dockbar);
+  gtk_box_pack_start (GTK_BOX (hbox), dockbar, FALSE, FALSE, 0);
+
+  priv->layout_manager = gdl_dock_layout_new (GDL_DOCK (priv->dock));
+  g_signal_connect (priv->layout_manager->master,
+                    "layout-changed",
+                    G_CALLBACK (on_layout_changed),
+                    tab);
+
+  g_settings_bind (priv->ui_settings,
+                   GTR_SETTINGS_PANEL_SWITCHER_STYLE,
+                   priv->layout_manager->master,
+                   "switcher-style",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
-  gtk_widget_show (priv->content_pane);
 
   /* Message table */
   priv->message_table = gtr_message_table_new (GTK_WIDGET (tab));
   gtk_widget_show (priv->message_table);
 
-  gtk_paned_pack1 (GTK_PANED (priv->content_pane), GTK_WIDGET (priv->message_table),
-                   TRUE, FALSE);
+  add_widget_to_dock (tab, priv->message_table,
+                      "GtrMessageTable",
+                      _("Message Table"),
+                      NULL,
+                      GTR_TAB_PLACEMENT_CENTER,
+                      FALSE);
 
   /* Orignal text widgets */
   priv->msgid_hbox = gtk_hbox_new (FALSE, 0);
@@ -640,7 +778,6 @@ gtr_tab_draw (GtrTab * tab)
                       0);
   gtk_box_pack_start (GTK_BOX (vertical_box), priv->text_vbox, TRUE, TRUE, 0);
 
-
   /* Translation widgets */
   priv->msgstr_label = gtk_label_new (NULL);
   gtk_label_set_markup_with_mnemonic (GTK_LABEL (priv->msgstr_label),
@@ -658,44 +795,39 @@ gtr_tab_draw (GtrTab * tab)
   gtk_box_pack_start (GTK_BOX (vertical_box), priv->trans_notebook, TRUE,
                       TRUE, 0);
 
-  gtk_paned_pack2 (GTK_PANED (priv->content_pane), vertical_box, FALSE,
-                   TRUE);
-
-  /* Context pane */
-  priv->context_pane = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
-  g_settings_bind (tab->priv->state_settings,
-                   GTR_SETTINGS_CONTEXT_PANEL_SIZE,
-                   priv->context_pane,
-                   "position",
-                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
-  gtk_widget_show (priv->context_pane);
-
-  gtk_paned_pack1 (GTK_PANED (priv->context_pane), priv->content_pane,
-                   FALSE, TRUE);
-  gtk_box_pack_start (GTK_BOX (tab), priv->context_pane, TRUE, TRUE, 0);
-
-  /* Vertical context box (TM, context etc ) */
-  vcontext_box = gtk_vbox_new (FALSE, 6);
-  gtk_widget_show (vcontext_box);
-  gtk_paned_pack2 (GTK_PANED (priv->context_pane), vcontext_box,
-                   TRUE, TRUE);
+  add_widget_to_dock (tab, vertical_box,
+                      "GtrTranslationFields",
+                      _("Translation Fields"),
+                      NULL,
+                      GTR_TAB_PLACEMENT_BOTTOM,
+                      TRUE);
 
   /* TM */
   priv->translation_memory = gtr_translation_memory_ui_new (GTK_WIDGET (tab));
   gtk_widget_show (priv->translation_memory);
-  gtk_box_pack_start (GTK_BOX (vcontext_box), priv->translation_memory,
-                      TRUE, TRUE, 0);
-
-  /* Lateral panel */
-  tab->priv->lateral_panel = gtk_notebook_new ();
-  gtk_widget_show (tab->priv->lateral_panel);
-  gtk_box_pack_start (GTK_BOX (vcontext_box), tab->priv->lateral_panel,
-                      TRUE, TRUE, 0);
+  add_widget_to_dock (tab, priv->translation_memory,
+                      "GtrTranslationMemoryUI",
+                      _("Translation Memory"),
+                      NULL,
+                      GTR_TAB_PLACEMENT_RIGHT,
+                      FALSE);
 
   /* Context */
   priv->context = gtr_context_panel_new (GTK_WIDGET (tab));
   gtk_widget_show (priv->context);
-  gtr_tab_add_widget_to_lateral_panel (tab, priv->context, _("Context"));
+  add_widget_to_dock (tab, priv->context,
+                      "GtrContextPanel",
+                      _("Context"),
+                      NULL,
+                      GTR_TAB_PLACEMENT_RIGHT,
+                      FALSE);
+
+  /* Loading dock layout */
+  filename = g_build_filename (gtr_dirs_get_user_config_dir (),
+                               "gtr-layout.xml", NULL);
+
+  gtr_tab_layout_load (tab, filename, NULL);
+  g_free (filename);
 }
 
 static void
@@ -703,6 +835,7 @@ gtr_tab_init (GtrTab * tab)
 {
   tab->priv = GTR_TAB_GET_PRIVATE (tab);
 
+  tab->priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
   tab->priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
   tab->priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
   tab->priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
@@ -739,30 +872,42 @@ gtr_tab_finalize (GObject * object)
 static void
 gtr_tab_dispose (GObject * object)
 {
-  GtrTab *tab = GTR_TAB (object);
+  GtrTabPrivate *priv = GTR_TAB (object)->priv;
 
-  if (tab->priv->po != NULL)
+  if (priv->po != NULL)
     {
-      g_object_unref (tab->priv->po);
-      tab->priv->po = NULL;
+      g_object_unref (priv->po);
+      priv->po = NULL;
     }
 
-  if (tab->priv->files_settings != NULL)
+  if (priv->ui_settings)
     {
-      g_object_unref (tab->priv->files_settings);
-      tab->priv->files_settings = NULL;
+      g_object_unref (priv->ui_settings);
+      priv->ui_settings = NULL;
     }
 
-  if (tab->priv->editor_settings != NULL)
+  if (priv->files_settings != NULL)
     {
-      g_object_unref (tab->priv->editor_settings);
-      tab->priv->editor_settings = NULL;
+      g_object_unref (priv->files_settings);
+      priv->files_settings = NULL;
     }
 
-  if (tab->priv->state_settings != NULL)
+  if (priv->editor_settings != NULL)
     {
-      g_object_unref (tab->priv->state_settings);
-      tab->priv->state_settings = NULL;
+      g_object_unref (priv->editor_settings);
+      priv->editor_settings = NULL;
+    }
+
+  if (priv->state_settings != NULL)
+    {
+      g_object_unref (priv->state_settings);
+      priv->state_settings = NULL;
+    }
+
+  if (priv->layout_manager)
+    {
+      g_object_unref (priv->layout_manager);
+      priv->layout_manager = NULL;
     }
 
   G_OBJECT_CLASS (gtr_tab_parent_class)->dispose (object);
@@ -1308,24 +1453,22 @@ gtr_tab_set_autosave_interval (GtrTab * tab, gint interval)
  * gtr_tab_add_widget_to_lateral_panel:
  * @tab: a #GtrTab
  * @widget: a #GtkWidget
- * @tab_name: the tab name in the notebook
+ * @name: the tab name in the notebook
  *
  * Adds a new widget to the laberal panel notebook.
  */
 void
-gtr_tab_add_widget_to_lateral_panel (GtrTab * tab,
-                                     GtkWidget * widget,
-                                     const gchar * tab_name)
+gtr_tab_add_widget (GtrTab         *tab,
+                    GtkWidget      *widget,
+                    const gchar    *unique_name,
+                    const gchar    *name,
+                    const gchar    *stock_id,
+                    GtrTabPlacement placement)
 {
-  GtkWidget *label;
-
   g_return_if_fail (GTR_IS_TAB (tab));
   g_return_if_fail (GTK_IS_WIDGET (widget));
 
-  label = gtk_label_new (tab_name);
-
-  gtk_notebook_append_page (GTK_NOTEBOOK (tab->priv->lateral_panel),
-                            widget, label);
+  add_widget_to_dock (tab, widget, unique_name, name, NULL, placement, FALSE);
 }
 
 /**
@@ -1336,35 +1479,36 @@ gtr_tab_add_widget_to_lateral_panel (GtrTab * tab,
  * Removes the @widget from the lateral panel notebook of @tab.
  */
 void
-gtr_tab_remove_widget_from_lateral_panel (GtrTab * tab, GtkWidget * widget)
+gtr_tab_remove_widget (GtrTab    *tab,
+                       GtkWidget *widget)
 {
-  gint page;
+  g_return_if_fail (GTR_IS_TAB (tab));
+  g_return_if_fail (GTK_IS_WIDGET (widget));
+
+  remove_widget_from_dock (tab, widget);
+}
+
+void
+gtr_tab_show_widget (GtrTab    *tab,
+                     GtkWidget *widget)
+{
+  GtkWidget *item;
+  GtkWidget *parent;
 
   g_return_if_fail (GTR_IS_TAB (tab));
   g_return_if_fail (GTK_IS_WIDGET (widget));
 
-  page = gtk_notebook_page_num (GTK_NOTEBOOK (tab->priv->lateral_panel),
-                                widget);
+  item = g_object_get_data (G_OBJECT (widget), "dockitem");
+  g_return_if_fail (item != NULL);
 
-  gtk_notebook_remove_page (GTK_NOTEBOOK (tab->priv->lateral_panel), page);
-}
-
-/**
- * gtr_tab_show_lateral_panel_widget:
- * @tab: a #GtrTab
- * @widget: the widget to be shown.
- *
- * Shows the notebook page of the @widget.
- */
-void
-gtr_tab_show_lateral_panel_widget (GtrTab * tab, GtkWidget * widget)
-{
-  gint page;
-
-  page = gtk_notebook_page_num (GTK_NOTEBOOK (tab->priv->lateral_panel),
-                                widget);
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (tab->priv->lateral_panel),
-                                 page);
+  /* FIXME: Hack to present the dock item if it's in a notebook dock item */
+  parent = gtk_widget_get_parent (GTK_WIDGET(item) );
+  if (GTK_IS_NOTEBOOK (parent))
+    {
+      gint pagenum;
+      pagenum = gtk_notebook_page_num (GTK_NOTEBOOK (parent), item);
+      gtk_notebook_set_current_page (GTK_NOTEBOOK (parent), pagenum);
+    }
 }
 
 /**

@@ -68,17 +68,6 @@ struct _GtrWindowClass
   GtkWindowClass parent_class;
 };
 
-typedef enum
-{
-  GTR_WINDOW_PLACEMENT_NONE = 0,
-  GTR_WINDOW_PLACEMENT_TOP,
-  GTR_WINDOW_PLACEMENT_BOTTOM,
-  GTR_WINDOW_PLACEMENT_RIGHT,
-  GTR_WINDOW_PLACEMENT_LEFT,
-  GTR_WINDOW_PLACEMENT_CENTER,
-  GTR_WINDOW_PLACEMENT_FLOATING
-} GtrWindowPlacement;
-
 /*
  * Public methods
  */
@@ -109,20 +98,6 @@ GtrHeader * gtr_window_get_header_from_active_tab (GtrWindow * window);
      GList *
      gtr_window_get_all_views (GtrWindow * window,
                                gboolean original, gboolean translated);
-
-     void
-     gtr_window_add_widget (GtrWindow * window,
-                            GtkWidget * widget,
-                            const gchar * name,
-                            const gchar * title,
-                            const gchar * stock_id,
-                            GtrWindowPlacement placement);
-
-     void
-     gtr_window_remove_widget (GtrWindow * window, GtkWidget * widget);
-
-     GObject *
-     _gtr_window_get_layout_manager (GtrWindow * window);
 
      GtkWidget *
      gtr_window_get_tab_from_location (GtrWindow * window, GFile * location);
