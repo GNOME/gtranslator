@@ -205,8 +205,7 @@ add_widget_to_dock (GtrTab      *tab,
 
   if (locked)
     {
-      flags |= 
-               GDL_DOCK_ITEM_BEH_NO_GRIP;
+      flags |= GDL_DOCK_ITEM_BEH_NO_GRIP;
     }
 
   flags |= GDL_DOCK_ITEM_BEH_CANT_CLOSE |
@@ -237,6 +236,7 @@ remove_widget_from_dock (GtrTab    *tab,
 
   /* Remove the widget from container */
   gtk_container_remove (GTK_CONTAINER (dock_item), widget);
+  gdl_dock_item_unbind (GDL_DOCK_ITEM (dock_item));
 }
 
 static void
