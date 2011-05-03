@@ -25,6 +25,8 @@
 #include "gtr-notebook.h"
 #include "gtr-window.h"
 #include "gtr-window-activatable.h"
+#include "gtr-tab.h"
+#include "gtr-tab-activatable.h"
 
 #include <glib/gi18n.h>
 
@@ -34,6 +36,7 @@
 struct _GtrAlternateLangPluginPrivate
 {
   GtrWindow *window;
+  GtrTab *tab;
 
   GtkActionGroup *action_group;
   guint ui_id;
@@ -42,10 +45,12 @@ struct _GtrAlternateLangPluginPrivate
 enum
 {
   PROP_0,
-  PROP_WINDOW
+  PROP_WINDOW,
+  PROP_TAB
 };
 
 static void gtr_window_activatable_iface_init (GtrWindowActivatableInterface *iface);
+static void gtr_tab_activatable_iface_init (GtrTabActivatableInterface *iface);
 
 G_DEFINE_DYNAMIC_TYPE_EXTENDED (GtrAlternateLangPlugin,
                                 gtr_alternate_lang_plugin,
@@ -53,6 +58,8 @@ G_DEFINE_DYNAMIC_TYPE_EXTENDED (GtrAlternateLangPlugin,
                                 0,
                                 G_IMPLEMENT_INTERFACE_DYNAMIC (GTR_TYPE_WINDOW_ACTIVATABLE,
                                                                gtr_window_activatable_iface_init) \
+                                G_IMPLEMENT_INTERFACE_DYNAMIC (GTR_TYPE_TAB_ACTIVATABLE,
+                                                               gtr_tab_activatable_iface_init)    \
                                                                                                   \
                                 _gtr_alternate_lang_panel_register_type (type_module);            \
 )
@@ -95,6 +102,12 @@ gtr_alternate_lang_plugin_dispose (GObject *object)
       priv->window = NULL;
     }
 
+  if (priv->tab != NULL)
+    {
+      g_object_unref (priv->tab);
+      priv->tab = NULL;
+    }
+
   if (priv->action_group != NULL)
     {
       g_object_unref (priv->action_group);
@@ -118,6 +131,10 @@ gtr_alternate_lang_plugin_set_property (GObject      *object,
         priv->window = GTR_WINDOW (g_value_dup_object (value));
         break;
 
+      case PROP_TAB:
+        priv->tab = GTR_TAB (g_value_dup_object (value));
+        break;
+
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
         break;
@@ -136,6 +153,10 @@ gtr_alternate_lang_plugin_get_property (GObject    *object,
     {
       case PROP_WINDOW:
         g_value_set_object (value, priv->window);
+        break;
+
+      case PROP_TAB:
+        g_value_set_object (value, priv->tab);
         break;
 
       default:
@@ -157,37 +178,10 @@ update_ui (GtrAlternateLangPlugin *plugin)
 }
 
 static void
-create_alternate_lang_plugin_panel (GtkNotebook * notebook,
-                                    GtkWidget * child,
-                                    guint page_num, GtrWindow * window)
-{
-  GtkWidget *alternatelang;
-  GtrPo *po;
-
-  po = gtr_tab_get_po (GTR_TAB (child));
-
-  g_return_if_fail (po != NULL);
-
-  alternatelang = gtr_alternate_lang_panel_new (child);
-  gtk_widget_show (alternatelang);
-
-  gtr_tab_add_widget (GTR_TAB (child),
-                      alternatelang,
-                      "GtrAlternateLangPluginPanel",
-                      _("Alternate Language"),
-                      NULL,
-                      GTR_TAB_PLACEMENT_RIGHT);
-
-  g_object_set_data (G_OBJECT (child), TAB_DATA_KEY, alternatelang);
-}
-
-static void
-gtr_alternate_lang_plugin_activate (GtrWindowActivatable *activatable)
+gtr_alternate_lang_plugin_window_activate (GtrWindowActivatable *activatable)
 {
   GtrAlternateLangPluginPrivate *priv = GTR_ALTERNATE_LANG_PLUGIN (activatable)->priv;
-  GtrNotebook *notebook;
   GtkUIManager *manager;
-  GList *tabs = NULL;
 
   manager = gtr_window_get_ui_manager (priv->window);
 
@@ -206,53 +200,13 @@ gtr_alternate_lang_plugin_activate (GtrWindowActivatable *activatable)
                          MENU_PATH,
                          "AlternateLang",
                          "AlternateLang", GTK_UI_MANAGER_MENUITEM, FALSE);
-
-  notebook = gtr_window_get_notebook (priv->window);
-
-  g_signal_connect (GTK_NOTEBOOK (notebook),
-                    "page-added",
-                    G_CALLBACK (create_alternate_lang_plugin_panel),
-                    priv->window);
-
-  tabs = gtr_window_get_all_tabs (priv->window);
-
-  if (tabs == NULL)
-    return;
-  do
-    {
-      create_alternate_lang_plugin_panel (GTK_NOTEBOOK (notebook),
-                                          tabs->data, 0, priv->window);
-    }
-  while ((tabs = g_list_next (tabs)));
 }
 
 static void
-gtr_alternate_lang_plugin_deactivate (GtrWindowActivatable *activatable)
+gtr_alternate_lang_plugin_window_deactivate (GtrWindowActivatable *activatable)
 {
   GtrAlternateLangPluginPrivate *priv = GTR_ALTERNATE_LANG_PLUGIN (activatable)->priv;
-  GtrNotebook *notebook;
-  GtkWidget *alternatelang;
-  GList *tabs;
   GtkUIManager *manager;
-
-  tabs = gtr_window_get_all_tabs (priv->window);
-  notebook = gtr_window_get_notebook (priv->window);
-
-  if (tabs != NULL)
-    {
-      do
-        {
-          alternatelang = g_object_get_data (G_OBJECT (tabs->data), TAB_DATA_KEY);
-          gtr_tab_remove_widget (GTR_TAB (tabs->data), alternatelang);
-
-          g_object_set_data (G_OBJECT (tabs->data), TAB_DATA_KEY, NULL);
-        }
-      while ((tabs = g_list_next (tabs)));
-    }
-
-  g_signal_handlers_disconnect_by_func (notebook,
-                                        create_alternate_lang_plugin_panel,
-                                        priv->window);
 
   /* Remove menuitem */
   manager = gtr_window_get_ui_manager (priv->window);
@@ -262,9 +216,41 @@ gtr_alternate_lang_plugin_deactivate (GtrWindowActivatable *activatable)
 }
 
 static void
-gtr_alternate_lang_plugin_update_state (GtrWindowActivatable *activatable)
+gtr_alternate_lang_plugin_window_update_state (GtrWindowActivatable *activatable)
 {
   update_ui (GTR_ALTERNATE_LANG_PLUGIN (activatable));
+}
+
+static void
+gtr_alternate_lang_plugin_tab_activate (GtrTabActivatable *activatable)
+{
+  GtrAlternateLangPluginPrivate *priv = GTR_ALTERNATE_LANG_PLUGIN (activatable)->priv;
+  GtkWidget *alternatelang;
+
+  alternatelang = gtr_alternate_lang_panel_new (priv->tab);
+  gtk_widget_show (alternatelang);
+
+  gtr_tab_add_widget (GTR_TAB (priv->tab),
+                      alternatelang,
+                      "GtrAlternateLangPluginPanel",
+                      _("Alternate Language"),
+                      NULL,
+                      GTR_TAB_PLACEMENT_RIGHT);
+
+  g_object_set_data (G_OBJECT (priv->tab), TAB_DATA_KEY, alternatelang);
+}
+
+static void
+gtr_alternate_lang_plugin_tab_deactivate (GtrTabActivatable *activatable)
+{
+  GtrAlternateLangPluginPrivate *priv = GTR_ALTERNATE_LANG_PLUGIN (activatable)->priv;
+  GtkWidget *alternatelang;
+
+  alternatelang = g_object_get_data (G_OBJECT (priv->tab), TAB_DATA_KEY);
+  g_return_if_fail (alternatelang != NULL);
+
+  gtr_tab_remove_widget (priv->tab, alternatelang);
+  g_object_set_data (G_OBJECT (priv->tab), TAB_DATA_KEY, NULL);
 }
 
 static void
@@ -277,6 +263,7 @@ gtr_alternate_lang_plugin_class_init (GtrAlternateLangPluginClass * klass)
   object_class->get_property = gtr_alternate_lang_plugin_get_property;
 
   g_object_class_override_property (object_class, PROP_WINDOW, "window");
+  g_object_class_override_property (object_class, PROP_TAB, "tab");
 
   g_type_class_add_private (klass, sizeof (GtrAlternateLangPluginPrivate));
 }
@@ -289,9 +276,16 @@ gtr_alternate_lang_plugin_class_finalize (GtrAlternateLangPluginClass *klass)
 static void
 gtr_window_activatable_iface_init (GtrWindowActivatableInterface *iface)
 {
-  iface->activate = gtr_alternate_lang_plugin_activate;
-  iface->deactivate = gtr_alternate_lang_plugin_deactivate;
-  iface->update_state = gtr_alternate_lang_plugin_update_state;
+  iface->activate = gtr_alternate_lang_plugin_window_activate;
+  iface->deactivate = gtr_alternate_lang_plugin_window_deactivate;
+  iface->update_state = gtr_alternate_lang_plugin_window_update_state;
+}
+
+static void
+gtr_tab_activatable_iface_init (GtrTabActivatableInterface *iface)
+{
+  iface->activate = gtr_alternate_lang_plugin_tab_activate;
+  iface->deactivate = gtr_alternate_lang_plugin_tab_deactivate;
 }
 
 G_MODULE_EXPORT void
@@ -301,5 +295,8 @@ peas_register_types (PeasObjectModule *module)
 
   peas_object_module_register_extension_type (module,
                                               GTR_TYPE_WINDOW_ACTIVATABLE,
+                                              GTR_TYPE_ALTERNATE_LANG_PLUGIN);
+  peas_object_module_register_extension_type (module,
+                                              GTR_TYPE_TAB_ACTIVATABLE,
                                               GTR_TYPE_ALTERNATE_LANG_PLUGIN);
 }

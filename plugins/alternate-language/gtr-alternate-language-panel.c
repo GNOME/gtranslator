@@ -419,12 +419,12 @@ gtr_alternate_lang_panel_class_finalize (GtrAlternateLangPanelClass *klass)
 /***************************** Public funcs ***********************************/
 
 GtkWidget *
-gtr_alternate_lang_panel_new (GtkWidget * tab)
+gtr_alternate_lang_panel_new (GtrTab *tab)
 {
   GtrAlternateLangPanel *panel;
   panel = g_object_new (GTR_TYPE_ALTERNATE_LANG_PANEL, NULL);
 
-  panel->priv->tab = GTR_TAB (tab);
+  panel->priv->tab = tab;
 
   return GTK_WIDGET (panel);
 }

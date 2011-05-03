@@ -21,6 +21,7 @@
 #include <glib.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
+#include "gtr-tab.h"
 
 G_BEGIN_DECLS
 
@@ -50,7 +51,7 @@ struct _GtrAlternateLangPanelClass
 
 GType gtr_alternate_lang_panel_get_type (void) G_GNUC_CONST;
 
-GtkWidget *gtr_alternate_lang_panel_new (GtkWidget *tab);
+GtkWidget *gtr_alternate_lang_panel_new (GtrTab *tab);
 
 void _gtr_alternate_lang_panel_register_type (GTypeModule *type_module);
 
