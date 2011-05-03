@@ -3,20 +3,31 @@
 <dock-layout>
   <layout name="__default__">
     <dock name="__dock_1" floating="no" width="-1" height="-1" floatx="0" floaty="0">
-      <paned orientation="horizontal" locked="no" position="487">
-        <paned orientation="vertical" locked="no">
-          <placeholder name="ph_left" next-placement="center"/>
+      <paned orientation="horizontal" locked="no" position="1164">
+        <paned orientation="horizontal" locked="no" position="244">
+          <notebook orientation="vertical" locked="no" page="0">
+            <item name="GtrOpenTranPlugin" orientation="vertical" locked="no"/>
+            <item name="GtrCharmapPanel" orientation="vertical" locked="no"/>
+            <placeholder name="ph_left" next-placement="center"/>
+          </notebook>
+          <paned orientation="vertical" locked="no" position="416">
+            <notebook orientation="vertical" locked="no" page="0">
+              <item name="GtrMessageTable" orientation="vertical" locked="no"/>
+              <placeholder name="ph_top" next-placement="center"/>
+            </notebook>
+            <notebook orientation="vertical" locked="no" page="0">
+              <item name="GtrTranslationFields" orientation="vertical" locked="no"/>
+              <placeholder name="ph_center" next-placement="bottom"/>
+            </notebook>
+          </paned>
         </paned>
-        <paned orientation="vertical" locked="no" position="168">
-          <placeholder name="ph_top" next-placement="center"/>
-          <item name="GtrMessageTable" orientation="vertical" locked="no"/>
-          <item name="GtrTranslationFields" orientation="vertical" locked="no"/>
-          <placeholder name="ph_bottom" next-placement="center"/>
-        </paned>
-        <paned orientation="vertical" locked="no" position="216">
+        <paned orientation="vertical" locked="no" position="387">
           <item name="GtrTranslationMemoryUI" orientation="vertical" locked="no"/>
-          <item name="GtrContextPanel" orientation="vertical" locked="no"/>
-          <placeholder name="ph_right" next-placement="center"/>
+          <notebook orientation="vertical" locked="no" page="0">
+            <item name="GtrContextPanel" orientation="vertical" locked="no"/>
+            <item name="GtrAlternateLangPluginPanel" orientation="vertical" locked="no"/>
+            <placeholder name="ph_right" next-placement="center"/>
+          </notebook>
         </paned>
       </paned>
     </dock>
