@@ -69,6 +69,7 @@ INST_H_FILES = \
 	gtr-po.h \
 	gtr-profile.h \
 	gtr-statusbar.h \
+	gtr-tab-activatable.h \
 	gtr-tab.h \
 	gtr-view.h \
 	gtr-window-activatable.h \
@@ -95,6 +96,7 @@ header_DATA = \
 	$(INST_H_FILES)
 
 libgtranslator_private_la_SOURCES =	\
+	gtr-tab-activatable.c \
 	gtr-window-activatable.c
 
 libgtranslator_c_files = \

@@ -37,6 +37,7 @@
 #include "gtr-io-error-info-bar.h"
 #include "gtr-message-table.h"
 #include "gtr-msg.h"
+#include "gtr-tab-activatable.h"
 #include "gtr-tab.h"
 #include "gtr-po.h"
 #include "gtr-settings.h"
@@ -44,11 +45,13 @@
 #include "gtr-translation-memory.h"
 #include "gtr-translation-memory-ui.h"
 #include "gtr-dirs.h"
+#include "gtr-plugins-engine.h"
 
 #include <glib.h>
 #include <glib-object.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <libpeas/peas-extension-set.h>
 
 #ifdef G_OS_WIN32
 #include <gdl/libgdltypebuiltins.h>
@@ -103,6 +106,8 @@ struct _GtrTabPrivate
   GtkWidget *translated;
   GtkWidget *fuzzy;
   GtkWidget *untranslated;
+
+  PeasExtensionSet *extensions;
 
   /* Autosave */
   GTimer *timer;
@@ -831,6 +836,24 @@ gtr_tab_draw (GtrTab *tab)
 }
 
 static void
+extension_added (PeasExtensionSet *extensions,
+                 PeasPluginInfo   *info,
+                 PeasExtension    *exten,
+                 GtrTab           *tab)
+{
+  peas_extension_call (exten, "activate");
+}
+
+static void
+extension_removed (PeasExtensionSet *extensions,
+                   PeasPluginInfo   *info,
+                   PeasExtension    *exten,
+                   GtrTab           *tab)
+{
+  peas_extension_call (exten, "deactivate");
+}
+
+static void
 gtr_tab_init (GtrTab * tab)
 {
   tab->priv = GTR_TAB_GET_PRIVATE (tab);
@@ -853,6 +876,21 @@ gtr_tab_init (GtrTab * tab)
                                                      GTR_SETTINGS_AUTO_SAVE_INTERVAL);
   if (tab->priv->autosave_interval <= 0)
     tab->priv->autosave_interval = 1;
+
+  /* Plugins */
+  tab->priv->extensions = peas_extension_set_new (PEAS_ENGINE (gtr_plugins_engine_get_default ()),
+                                                  GTR_TYPE_TAB_ACTIVATABLE,
+                                                  "tab", tab,
+                                                  NULL);
+  g_signal_connect (tab->priv->extensions,
+                    "extension-added",
+                    G_CALLBACK (extension_added),
+                    tab);
+  g_signal_connect (tab->priv->extensions,
+                    "extension-removed",
+                    G_CALLBACK (extension_removed),
+                    tab);
+  peas_extension_set_call (tab->priv->extensions, "activate");
 }
 
 static void
@@ -873,6 +911,12 @@ static void
 gtr_tab_dispose (GObject * object)
 {
   GtrTabPrivate *priv = GTR_TAB (object)->priv;
+
+  if (priv->extensions != NULL)
+    {
+      g_object_unref (priv->extensions);
+      priv->extensions = NULL;
+    }
 
   if (priv->po != NULL)
     {
