@@ -117,6 +117,8 @@ struct _GtrTabPrivate
 
   /*Blocking movement */
   guint blocking : 1;
+
+  guint tab_realized : 1;
 };
 
 enum
@@ -890,7 +892,6 @@ gtr_tab_init (GtrTab * tab)
                     "extension-removed",
                     G_CALLBACK (extension_removed),
                     tab);
-  peas_extension_set_call (tab->priv->extensions, "activate");
 }
 
 static void
@@ -998,9 +999,26 @@ gtr_tab_set_property (GObject * object,
 }
 
 static void
+gtr_tab_realize (GtkWidget *widget)
+{
+  GtrTab *tab = GTR_TAB (widget);
+
+  if (!tab->priv->tab_realized)
+    {
+      /* We only activate the extensions when the tab is realized,
+       * because most plugins will expect this behaviour. */
+      peas_extension_set_call (tab->priv->extensions, "activate");
+      tab->priv->tab_realized = TRUE;
+    }
+
+  GTK_WIDGET_CLASS (gtr_tab_parent_class)->realize (widget);
+}
+
+static void
 gtr_tab_class_init (GtrTabClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrTabPrivate));
 
@@ -1008,6 +1026,9 @@ gtr_tab_class_init (GtrTabClass * klass)
   object_class->dispose = gtr_tab_dispose;
   object_class->set_property = gtr_tab_set_property;
   object_class->get_property = gtr_tab_get_property;
+
+  widget_class->realize = gtr_tab_realize;
+
   klass->message_edition_finished = gtr_tab_edition_finished;
 
   /* Signals */

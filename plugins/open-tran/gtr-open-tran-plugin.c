@@ -158,7 +158,7 @@ gtr_open_tran_plugin_activate (GtrTabActivatable *activatable)
                                  "open-tran-plugin-icon");
 
   priv->opentran = gtr_open_tran_panel_new (priv->tab);
-  gtk_widget_show (priv->opentran);
+  gtk_widget_show_all (priv->opentran);
 
   gtr_tab_add_widget (priv->tab,
                       priv->opentran,
