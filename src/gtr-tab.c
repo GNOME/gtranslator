@@ -687,7 +687,6 @@ gtr_tab_draw (GtrTab *tab)
   GtkWidget *scroll;
   GtkWidget *dockbar;
   GtrTabPrivate *priv = tab->priv;
-  gchar *filename;
 
   /* Docker */
   hbox = gtk_hbox_new (FALSE, 0);
@@ -828,13 +827,6 @@ gtr_tab_draw (GtrTab *tab)
                       NULL,
                       GTR_TAB_PLACEMENT_RIGHT,
                       FALSE);
-
-  /* Loading dock layout */
-  filename = g_build_filename (gtr_dirs_get_user_config_dir (),
-                               "gtr-layout.xml", NULL);
-
-  gtr_tab_layout_load (tab, filename, NULL);
-  g_free (filename);
 }
 
 static void
@@ -1003,15 +995,25 @@ gtr_tab_realize (GtkWidget *widget)
 {
   GtrTab *tab = GTR_TAB (widget);
 
+  GTK_WIDGET_CLASS (gtr_tab_parent_class)->realize (widget);
+
   if (!tab->priv->tab_realized)
     {
+      gchar *filename;
+
       /* We only activate the extensions when the tab is realized,
        * because most plugins will expect this behaviour. */
       peas_extension_set_call (tab->priv->extensions, "activate");
+
+      /* Loading dock layout */
+      filename = g_build_filename (gtr_dirs_get_user_config_dir (),
+                                   "gtr-layout.xml", NULL);
+
+      gtr_tab_layout_load (tab, filename, NULL);
+      g_free (filename);
+
       tab->priv->tab_realized = TRUE;
     }
-
-  GTK_WIDGET_CLASS (gtr_tab_parent_class)->realize (widget);
 }
 
 static void
