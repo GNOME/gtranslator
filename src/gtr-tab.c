@@ -1515,12 +1515,15 @@ gtr_tab_set_autosave_interval (GtrTab * tab, gint interval)
 }
 
 /**
- * gtr_tab_add_widget_to_lateral_panel:
+ * gtr_tab_add_widget:
  * @tab: a #GtrTab
  * @widget: a #GtkWidget
- * @name: the tab name in the notebook
+ * @unique_name: an unique name for the widget
+ * @name: the name of @widget
+ * @stock_id: (allow-none): stock id for the icon of @widget or %NULL
+ * @placement: where to place @widget in the tab
  *
- * Adds a new widget to the laberal panel notebook.
+ * Adds a new widget to place in @tab.
  */
 void
 gtr_tab_add_widget (GtrTab         *tab,
@@ -1537,11 +1540,11 @@ gtr_tab_add_widget (GtrTab         *tab,
 }
 
 /**
- * gtr_tab_remove_widget_from_lateral_panel:
+ * gtr_tab_remove_widget:
  * @tab: a #GtrTab
  * @widget: a #GtkWidget
  *
- * Removes the @widget from the lateral panel notebook of @tab.
+ * Removes the @widget from @tab.
  */
 void
 gtr_tab_remove_widget (GtrTab    *tab,
@@ -1553,6 +1556,13 @@ gtr_tab_remove_widget (GtrTab    *tab,
   remove_widget_from_dock (tab, widget);
 }
 
+/**
+ * gtr_tab_show_widget:
+ * @tab: a #GtrTab
+ * @widget: a #GtkWidget
+ *
+ * Presents the widget if it is not visible
+ */
 void
 gtr_tab_show_widget (GtrTab    *tab,
                      GtkWidget *widget)
