@@ -67,7 +67,7 @@ on_alternate_lang_activated (GtkAction *action,
   tab = gtr_window_get_active_tab (window);
   alternatelang = g_object_get_data (G_OBJECT (tab), TAB_DATA_KEY);
 
-  gtr_tab_show_lateral_panel_widget (GTR_TAB (tab), alternatelang);
+  gtr_tab_show_widget (GTR_TAB (tab), alternatelang);
 }
 
 static const GtkActionEntry action_entries[] = {
@@ -171,9 +171,12 @@ create_alternate_lang_plugin_panel (GtkNotebook * notebook,
   alternatelang = gtr_alternate_lang_panel_new (child);
   gtk_widget_show (alternatelang);
 
-  gtr_tab_add_widget_to_lateral_panel (GTR_TAB (child),
-                                       alternatelang,
-                                       _("Alternate Language"));
+  gtr_tab_add_widget (GTR_TAB (child),
+                      alternatelang,
+                      "GtrAlternateLangPluginPanel",
+                      _("Alternate Language"),
+                      NULL,
+                      GTR_TAB_PLACEMENT_RIGHT);
 
   g_object_set_data (G_OBJECT (child), TAB_DATA_KEY, alternatelang);
 }
@@ -239,11 +242,8 @@ gtr_alternate_lang_plugin_deactivate (GtrWindowActivatable *activatable)
     {
       do
         {
-          alternatelang =
-            g_object_get_data (G_OBJECT (tabs->data), TAB_DATA_KEY);
-          gtr_tab_remove_widget_from_lateral_panel (GTR_TAB
-                                                    (tabs->data),
-                                                    alternatelang);
+          alternatelang = g_object_get_data (G_OBJECT (tabs->data), TAB_DATA_KEY);
+          gtr_tab_remove_widget (GTR_TAB (tabs->data), alternatelang);
 
           g_object_set_data (G_OBJECT (tabs->data), TAB_DATA_KEY, NULL);
         }

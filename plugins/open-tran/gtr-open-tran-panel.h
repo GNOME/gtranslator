@@ -59,7 +59,7 @@ struct _GtrOpenTranPanelClass
 
 GType gtr_open_tran_panel_get_type (void) G_GNUC_CONST;
 
-GtkWidget *gtr_open_tran_panel_new (GtrWindow * window);
+GtkWidget *gtr_open_tran_panel_new (GtrTab * window);
 
 void _gtr_open_tran_panel_register_type (GTypeModule *type_module);
 

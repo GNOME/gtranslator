@@ -57,7 +57,7 @@ struct _GtrDictPanelClass
  */
 GType gtr_dict_panel_get_type (void) G_GNUC_CONST;
 
-GtkWidget *gtr_dict_panel_new (GtrWindow * window);
+GtkWidget *gtr_dict_panel_new (GtrWindow *window);
 
 void _gtr_dict_panel_register_type (GTypeModule *type_module);
 

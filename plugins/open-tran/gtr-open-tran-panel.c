@@ -68,8 +68,8 @@ struct _GtrOpenTranPanelPrivate
   
   GtkWidget *entry;
 
-  GtrWindow *window;
-  
+  GtkWidget *window;
+
   gchar *text;
 };
 
@@ -82,7 +82,7 @@ enum
 };
 
 static void
-show_error_dialog (GtrWindow * parent,
+show_error_dialog (GtkWidget * parent,
                    const gchar * message_format, ...)
 {
   gchar *msg = NULL;
@@ -558,13 +558,13 @@ gtr_open_tran_panel_class_finalize (GtrOpenTranPanelClass *klass)
 }
 
 GtkWidget *
-gtr_open_tran_panel_new (GtrWindow * window)
+gtr_open_tran_panel_new (GtrTab *tab)
 {
   GtrOpenTranPanel *panel;
 
   panel = g_object_new (GTR_TYPE_OPEN_TRAN_PANEL, NULL);
 
-  panel->priv->window = window;
+  panel->priv->window = gtk_widget_get_toplevel (GTK_WIDGET (tab));
 
   return GTK_WIDGET (panel);
 }

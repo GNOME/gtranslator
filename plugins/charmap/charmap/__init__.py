@@ -22,10 +22,10 @@ from panel import CharmapPanel
 import sys
 import gettext
 
-class CharmapPlugin(GObject.Object, Gtranslator.WindowActivatable):
+class CharmapPlugin(GObject.Object, Gtranslator.TabActivatable):
     __gtype_name__ = "CharmapPlugin"
 
-    window = GObject.property(type=Gtranslator.Window)
+    tab = GObject.property(type=Gtranslator.Tab)
 
     def __init__(self):
         GObject.Object.__init__(self)
@@ -37,18 +37,20 @@ class CharmapPlugin(GObject.Object, Gtranslator.WindowActivatable):
         self.system_settings = Gio.Settings.new("org.gnome.desktop.interface")
         self.system_settings.connect("changed::monospace-font-name", self.font_changed)
 
+        self.window = self.tab.get_toplevel()
+
         self.create_charmap_panel()
-        self.window.add_widget(self.panel, "GtranslatorCharmapPanel", _("Character Map"),
-                               "accessories-character-map", Gtranslator.WindowPlacement.LEFT)
+        self.tab.add_widget(self.panel, "GtrCharmapPanel", _("Character Map"),
+                            "accessories-character-map", Gtranslator.TabPlacement.LEFT)
 
         statusbar = self.window.get_statusbar()
         self.context_id = statusbar.get_context_id("Character Description")
 
     def do_deactivate(self):
-        self.window.remove_widget(self.panel)
+        self.tab.remove_widget(self.panel)
 
     def do_update_state(self):
-        self.panel.set_sensitive(len(self.window.get_all_tabs()) >= 1)
+        pass
 
     def get_document_font(self):
         if self.editor_settings.get_boolean("use-custom-font"):

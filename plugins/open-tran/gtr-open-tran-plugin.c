@@ -25,8 +25,8 @@
 #include "gtr-open-tran-panel.h"
 #include "gtr-application.h"
 #include "gtr-dirs.h"
-#include "gtr-window.h"
-#include "gtr-window-activatable.h"
+#include "gtr-tab.h"
+#include "gtr-tab-activatable.h"
 #include "gtr-utils.h"
 
 #include <libpeas-gtk/peas-gtk-configurable.h>
@@ -45,7 +45,7 @@ struct _GtrOpenTranPluginPrivate
 {
   GSettings *settings;
 
-  GtrWindow *window;
+  GtrTab *tab;
   GtkWidget *opentran;
 
   GtkWidget *main_box;
@@ -59,18 +59,18 @@ struct _GtrOpenTranPluginPrivate
 enum
 {
   PROP_0,
-  PROP_WINDOW
+  PROP_TAB
 };
 
-static void gtr_window_activatable_iface_init (GtrWindowActivatableInterface *iface);
+static void gtr_tab_activatable_iface_init (GtrTabActivatableInterface *iface);
 static void peas_gtk_configurable_iface_init (PeasGtkConfigurableInterface *iface);
 
 G_DEFINE_DYNAMIC_TYPE_EXTENDED (GtrOpenTranPlugin,
                                 gtr_open_tran_plugin,
                                 PEAS_TYPE_EXTENSION_BASE,
                                 0,
-                                G_IMPLEMENT_INTERFACE_DYNAMIC (GTR_TYPE_WINDOW_ACTIVATABLE,
-                                                               gtr_window_activatable_iface_init)
+                                G_IMPLEMENT_INTERFACE_DYNAMIC (GTR_TYPE_TAB_ACTIVATABLE,
+                                                               gtr_tab_activatable_iface_init)
                                 G_IMPLEMENT_INTERFACE_DYNAMIC (PEAS_GTK_TYPE_CONFIGURABLE,
                                                                peas_gtk_configurable_iface_init) \
                                                                                                  \
@@ -100,10 +100,10 @@ gtr_open_tran_plugin_dispose (GObject * object)
       priv->settings = NULL;
     }
 
-  if (priv->window != NULL)
+  if (priv->tab != NULL)
     {
-      g_object_unref (priv->window);
-      priv->window = NULL;
+      g_object_unref (priv->tab);
+      priv->tab = NULL;
     }
 
   G_OBJECT_CLASS (gtr_open_tran_plugin_parent_class)->dispose (object);
@@ -119,8 +119,8 @@ gtr_open_tran_plugin_set_property (GObject      *object,
 
   switch (prop_id)
     {
-      case PROP_WINDOW:
-        priv->window = GTR_WINDOW (g_value_dup_object (value));
+      case PROP_TAB:
+        priv->tab = GTR_TAB (g_value_dup_object (value));
         break;
 
       default:
@@ -139,8 +139,8 @@ gtr_open_tran_plugin_get_property (GObject    *object,
 
   switch (prop_id)
     {
-      case PROP_WINDOW:
-        g_value_set_object (value, priv->window);
+      case PROP_TAB:
+        g_value_set_object (value, priv->tab);
         break;
 
       default:
@@ -150,30 +150,30 @@ gtr_open_tran_plugin_get_property (GObject    *object,
 }
 
 static void
-gtr_open_tran_plugin_activate (GtrWindowActivatable *activatable)
+gtr_open_tran_plugin_activate (GtrTabActivatable *activatable)
 {
   GtrOpenTranPluginPrivate *priv = GTR_OPEN_TRAN_PLUGIN (activatable)->priv;
 
   gtr_application_register_icon (GTR_APP, "open-tran.png",
                                  "open-tran-plugin-icon");
 
-  priv->opentran = gtr_open_tran_panel_new (priv->window);
+  priv->opentran = gtr_open_tran_panel_new (priv->tab);
   gtk_widget_show (priv->opentran);
 
-  gtr_window_add_widget (priv->window,
-                         priv->opentran,
-                         "GtrOpenTranPlugin",
-                         _("Open Tran"),
-                         "open-tran-plugin-icon",
-                         GTR_WINDOW_PLACEMENT_LEFT);
+  gtr_tab_add_widget (priv->tab,
+                      priv->opentran,
+                      "GtrOpenTranPlugin",
+                      _("Open Tran"),
+                      "open-tran-plugin-icon",
+                      GTR_TAB_PLACEMENT_LEFT);
 }
 
 static void
-gtr_open_tran_plugin_deactivate (GtrWindowActivatable *activatable)
+gtr_open_tran_plugin_deactivate (GtrTabActivatable *activatable)
 {
   GtrOpenTranPluginPrivate *priv = GTR_OPEN_TRAN_PLUGIN (activatable)->priv;
 
-  gtr_window_remove_widget (priv->window, priv->opentran);
+  gtr_tab_remove_widget (priv->tab, priv->opentran);
 }
 
 static void
@@ -265,7 +265,7 @@ gtr_open_tran_plugin_class_init (GtrOpenTranPluginClass * klass)
   object_class->set_property = gtr_open_tran_plugin_set_property;
   object_class->get_property = gtr_open_tran_plugin_get_property;
 
-  g_object_class_override_property (object_class, PROP_WINDOW, "window");
+  g_object_class_override_property (object_class, PROP_TAB, "tab");
 
   g_type_class_add_private (object_class, sizeof (GtrOpenTranPluginPrivate));
 }
@@ -282,7 +282,7 @@ peas_gtk_configurable_iface_init (PeasGtkConfigurableInterface *iface)
 }
 
 static void
-gtr_window_activatable_iface_init (GtrWindowActivatableInterface *iface)
+gtr_tab_activatable_iface_init (GtrTabActivatableInterface *iface)
 {
   iface->activate = gtr_open_tran_plugin_activate;
   iface->deactivate = gtr_open_tran_plugin_deactivate;
@@ -294,7 +294,7 @@ peas_register_types (PeasObjectModule *module)
   gtr_open_tran_plugin_register_type (G_TYPE_MODULE (module));
 
   peas_object_module_register_extension_type (module,
-                                              GTR_TYPE_WINDOW_ACTIVATABLE,
+                                              GTR_TYPE_TAB_ACTIVATABLE,
                                               GTR_TYPE_OPEN_TRAN_PLUGIN);
   peas_object_module_register_extension_type (module,
                                               PEAS_GTK_TYPE_CONFIGURABLE,
