@@ -4,7 +4,7 @@ dnl -------------------------------------------------------------------
 dnl (C) 2000-2004 Fatih Demir <kabalak@kabalak.net>
 dnl -------------------------------------------------------------------
 AC_PREREQ(2.64)
-AC_INIT([gtranslator],[2.90.2],[http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator],[gtranslator],[http://projects.gnome.org/gtranslator/])
+AC_INIT([gtranslator],[2.90.3],[http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator],[gtranslator],[http://projects.gnome.org/gtranslator/])
 
 AC_CONFIG_SRCDIR([src/main.c])
 AC_CONFIG_HEADER([config.h])
@@ -92,18 +92,6 @@ PEAS_REQUIRED=1.0.0
 GDICT_OPTIONAL=0.11.0
 GTKSPELL_OPTIONAL=100
 JSON_GLIB_OPTIONAL=0.12.0
-
-AC_SUBST(GTHREAD_REQUIRED)
-AC_SUBST(GTK_REQUIRED)
-AC_SUBST(GLIB_REQUIRED)
-AC_SUBST(LIBXML_REQUIRED)
-AC_SUBST(SOURCEVIEW_REQUIRED)
-AC_SUBST(GDL_REQUIDED)
-AC_SUBST(GDA_REQUIDED)
-AC_SUBST(PEAS_REQUIDED)
-AC_SUBST(GDICT_OPTIONAL)
-AC_SUBST(GTKSPELL_OPTIONAL)
-AC_SUBST(JSON_GLIB_OPTIONAL)
 
 PKG_CHECK_MODULES(GTRANSLATOR, [
 	libxml-2.0 >= $LIBXML_REQUIRED
