@@ -29,6 +29,7 @@
 #include "gtr-tab.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
+#include "gtr-debug.h"
 
 #include <string.h>
 #include <glib.h>
@@ -556,6 +557,8 @@ gtr_translation_memory_ui_dispose (GObject * object)
 {
   GtrTranslationMemoryUi *tm_ui = GTR_TRANSLATION_MEMORY_UI (object);
 
+  DEBUG_PRINT ("Dispose translation memory ui");
+
   if (tm_ui->priv->msg)
     {
       g_object_unref (tm_ui->priv->msg);
@@ -569,6 +572,8 @@ static void
 gtr_translation_memory_ui_finalize (GObject * object)
 {
   GtrTranslationMemoryUi *tm_ui = GTR_TRANSLATION_MEMORY_UI (object);
+
+  DEBUG_PRINT ("Finalize translation memory ui");
 
   g_strfreev (tm_ui->priv->tm_list);
 

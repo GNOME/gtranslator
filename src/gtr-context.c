@@ -21,6 +21,7 @@
 
 #include "gtr-context.h"
 #include "gtr-tab.h"
+#include "gtr-debug.h"
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -448,6 +449,8 @@ static void
 gtr_context_panel_dispose (GObject *object)
 {
   GtrContextPanel *panel = GTR_CONTEXT_PANEL (object);
+
+  DEBUG_PRINT ("Dispose context");
 
   if (panel->priv->hand_cursor != NULL)
     {

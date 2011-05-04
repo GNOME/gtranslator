@@ -30,6 +30,7 @@
 #include "gtr-msg.h"
 #include "gtr-po.h"
 #include "gtr-tab.h"
+#include "gtr-debug.h"
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -362,6 +363,8 @@ gtr_message_table_init (GtrMessageTable * table)
 static void
 gtr_message_table_finalize (GObject * object)
 {
+  DEBUG_PRINT ("Finalize message table");
+
   G_OBJECT_CLASS (gtr_message_table_parent_class)->finalize (object);
 }
 
