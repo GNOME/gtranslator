@@ -74,7 +74,8 @@ remove_tab_label (GtrNotebook *nb,
 {
   GtkWidget *tab_label;
 
-  tab_label = gtr_tab_label_new (tab);
+  tab_label = g_object_get_data (G_OBJECT (tab), "tab-label");
+  g_return_if_fail (tab_label != NULL);
 
   g_signal_handlers_disconnect_by_func (tab_label,
                                         G_CALLBACK (close_button_clicked_cb),
