@@ -23,6 +23,7 @@
 #include "gtr-notebook.h"
 #include "gtr-tab.h"
 #include "gtr-tab-label.h"
+#include "gtr-debug.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -103,6 +104,8 @@ gtr_notebook_init (GtrNotebook * notebook)
 static void
 gtr_notebook_finalize (GObject * object)
 {
+  DEBUG_PRINT ("Finalize notebook");
+
   G_OBJECT_CLASS (gtr_notebook_parent_class)->finalize (object);
 }
 

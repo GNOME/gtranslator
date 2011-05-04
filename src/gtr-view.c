@@ -32,6 +32,7 @@
 #include "gtr-utils.h"
 #include "gtr-view.h"
 #include "gtr-application.h"
+#include "gtr-debug.h"
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -167,6 +168,8 @@ static void
 gtr_view_dispose (GObject * object)
 {
   GtrView *view = GTR_VIEW (object);
+
+  DEBUG_PRINT ("Dispose view");
 
   if (view->priv->editor_settings)
     {

@@ -46,6 +46,7 @@
 #include "gtr-translation-memory-ui.h"
 #include "gtr-dirs.h"
 #include "gtr-plugins-engine.h"
+#include "gtr-debug.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -119,6 +120,7 @@ struct _GtrTabPrivate
   guint blocking : 1;
 
   guint tab_realized : 1;
+  guint dispose_has_run : 1;
 };
 
 enum
@@ -666,8 +668,7 @@ on_state_notify (GtrPo      *po,
 }
 
 static void
-on_layout_changed (GdlDockMaster *master,
-                   GtrTab        *tab)
+save_layout (GtrTab *tab)
 {
   gchar *filename;
 
@@ -676,6 +677,13 @@ on_layout_changed (GdlDockMaster *master,
 
   gtr_tab_layout_save (tab, filename, NULL);
   g_free (filename);
+}
+
+static void
+on_layout_changed (GdlDockMaster *master,
+                   GtrTab        *tab)
+{
+  save_layout (tab);
 }
 
 static void
@@ -891,6 +899,8 @@ gtr_tab_finalize (GObject * object)
 {
   GtrTab *tab = GTR_TAB (object);
 
+  DEBUG_PRINT ("Finalize tab");
+
   if (tab->priv->timer != NULL)
     g_timer_destroy (tab->priv->timer);
 
@@ -904,6 +914,14 @@ static void
 gtr_tab_dispose (GObject * object)
 {
   GtrTabPrivate *priv = GTR_TAB (object)->priv;
+
+  DEBUG_PRINT ("Dispose tab");
+
+  if (!priv->dispose_has_run)
+    {
+      save_layout (GTR_TAB (object));
+      priv->dispose_has_run = TRUE;
+    }
 
   if (priv->extensions != NULL)
     {
