@@ -164,6 +164,18 @@ gtr_notebook_add_page (GtrNotebook * notebook, GtrTab * tab)
   update_tabs_visibility (notebook);
 }
 
+static void
+remove_tab (GtrTab *tab,
+            GtrNotebook *notebook)
+{
+  remove_tab_label (notebook, tab);
+
+  /* Destroy the tab to break circular refs */
+  gtk_widget_destroy (GTK_WIDGET (tab));
+
+  update_tabs_visibility (notebook);
+}
+
 /**
  * gtr_notebook_remove_page:
  * @notebook: a #GtrNotebook
@@ -174,19 +186,29 @@ gtr_notebook_add_page (GtrNotebook * notebook, GtrTab * tab)
 void
 gtr_notebook_remove_page (GtrNotebook * notebook, gint page_num)
 {
-  GtkWidget *tab;
+  GtrTab *tab;
 
   g_return_if_fail (GTR_IS_NOTEBOOK (notebook));
 
-  tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), page_num);
+  tab = GTR_TAB (gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), page_num));
 
-  if (page_num != -1)
-    {
-      remove_tab_label (notebook, GTR_TAB (tab));
-      gtk_notebook_remove_page (GTK_NOTEBOOK (notebook), page_num);
-    }
+  remove_tab (tab, notebook);
+}
 
-  update_tabs_visibility (notebook);
+/**
+ * gtr_notebook_remove_all_pages:
+ * @notebook: a #GtrNotebook
+ *
+ * Removes all tabs from from @notebook
+ */
+void
+gtr_notebook_remove_all_pages (GtrNotebook *notebook)
+{
+  g_return_if_fail (GTR_IS_NOTEBOOK (notebook));
+
+  gtk_container_foreach (GTK_CONTAINER (notebook),
+                         (GtkCallback)remove_tab,
+                         notebook);
 }
 
 /**

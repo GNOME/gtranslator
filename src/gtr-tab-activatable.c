@@ -102,24 +102,3 @@ gtr_tab_activatable_deactivate (GtrTabActivatable * activatable)
       iface->deactivate (activatable);
     }
 }
-
-/**
- * gtr_tab_activatable_update_state:
- * @activatable: A #GtrTabActivatable.
- *
- * Triggers an update of the extension internal state to take into account
- * state changes in the tab, due to some event or user action.
- */
-void
-gtr_tab_activatable_update_state (GtrTabActivatable * activatable)
-{
-  GtrTabActivatableInterface *iface;
-
-  g_return_if_fail (GTR_IS_TAB_ACTIVATABLE (activatable));
-
-  iface = GTR_TAB_ACTIVATABLE_GET_IFACE (activatable);
-  if (iface->update_state != NULL)
-    {
-      iface->update_state (activatable);
-    }
-}

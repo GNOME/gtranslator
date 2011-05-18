@@ -510,17 +510,9 @@ static void
 close_all_tabs (GtrWindow * window)
 {
   GtrNotebook *nb;
-  gint pages;
 
   nb = gtr_window_get_notebook (window);
-  pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (nb));
-
-  while (pages >= 0)
-    {
-      gtk_notebook_remove_page (GTK_NOTEBOOK (nb), pages);
-
-      pages--;
-    }
+  gtr_notebook_remove_all_pages (nb);
 
   //FIXME: This has to change once we add the close all documents menuitem
   gtk_widget_destroy (GTK_WIDGET (window));

@@ -43,7 +43,6 @@ struct _GtrTabActivatableInterface
   /* Virtual public methods */
   void (*activate) (GtrTabActivatable * activatable);
   void (*deactivate) (GtrTabActivatable * activatable);
-  void (*update_state) (GtrTabActivatable * activatable);
 };
 
 /*
@@ -57,8 +56,6 @@ gtr_tab_activatable_get_type (void)
                                            activatable);
      void gtr_tab_activatable_deactivate (GtrTabActivatable *
                                              activatable);
-     void gtr_tab_activatable_update_state (GtrTabActivatable *
-                                               activatable);
 
 G_END_DECLS
 #endif /* __GTR_TAB_ACTIVATABLE_H__ */

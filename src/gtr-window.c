@@ -1990,6 +1990,7 @@ _gtr_window_close_tab (GtrWindow * window, GtrTab * tab)
       gtr_statusbar_clear_progress_bar (GTR_STATUSBAR
                                         (window->priv->statusbar));
     }
+
   set_sensitive_according_to_window (window);
 }
 
