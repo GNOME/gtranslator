@@ -5,22 +5,22 @@
 # Maintainer: Милош Поповић <gpopac@gmail.com>, 2009.
 # Милош Поповић <gpopac@gmail.com>, 2010.
 # Мирослав Николић <miroslavnikolic@rocketmail.com>, 2010, 06.02.2011.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=gtranslator&component=general\n"
-"POT-Creation-Date: 2011-01-28 15:27+0000\n"
-"PO-Revision-Date: 2011-02-06 09:57+0100\n"
+"product=gtranslator&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-05-18 09:22+0000\n"
+"PO-Revision-Date: 2011-05-16 21:45+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sr\n"
+"Language: Serbian (sr)\n"
 "Plural-Forms: nplurals=4;    plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 :    n"
-"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\\n\n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Virtaal 0.5.2\n"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:1
 msgid "Gtranslator PO Editor"
@@ -284,15 +284,15 @@ msgstr "_Умножи"
 msgid "There isn't any file loaded"
 msgstr "Није учитана ниједна датотека"
 
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:74
+#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:81
 msgid "_Alternate Language"
 msgstr "_Језик замене"
 
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:75
+#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:82
 msgid "Show the Alternate Language panel"
 msgstr "Приказује панел језика замене"
 
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:176
+#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:236
 #: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:1
 msgid "Alternate Language"
 msgstr "Језик замене"
@@ -301,8 +301,8 @@ msgstr "Језик замене"
 msgid "Load an alternate language."
 msgstr "Учитава језик замене."
 
-#: ../plugins/charmap/gtr-charmap-plugin.c:280
 #: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:1
+#: ../plugins/charmap/charmap/__init__.py:43
 msgid "Character Map"
 msgstr "Таблица знакова"
 
@@ -390,7 +390,7 @@ msgid "Dictionary sources"
 msgstr "Извори речника"
 
 #: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:1
-#: ../plugins/dictionary/gtr-dictionary-plugin.c:146
+#: ../plugins/dictionary/gtr-dictionary-plugin.c:144
 msgid "Dictionary"
 msgstr "Речник"
 
@@ -647,12 +647,12 @@ msgstr "Подешавања прегледа извора"
 msgid "Use external editor"
 msgstr "Користи спољни програм за уређивање"
 
-#: ../plugins/codeview/gtr-codeview-plugin.c:122
+#: ../plugins/codeview/gtr-codeview-plugin.c:129
 #, c-format
 msgid "Please install \"%s\" to be able to show the file"
 msgstr "Инсталирајте „%s“ за приказ ове датотеке"
 
-#: ../plugins/codeview/gtr-codeview-plugin.c:500
+#: ../plugins/codeview/gtr-codeview-plugin.c:503
 msgid "Paths:"
 msgstr "Путање:"
 
@@ -701,15 +701,15 @@ msgstr "Да ли ће бити коришћен уређивач система
 msgid "Open file for translation"
 msgstr "Отворите датотеку за превођење"
 
-#: ../src/gtr-actions-file.c:273 ../src/gtr-actions-file.c:391
+#: ../src/gtr-actions-file.c:273 ../src/gtr-actions-file.c:390
 msgid "File saved."
 msgstr "Датотека је сачувана."
 
-#: ../src/gtr-actions-file.c:322
+#: ../src/gtr-actions-file.c:321
 msgid "Save file as..."
 msgstr "Сачувај као..."
 
-#: ../src/gtr-actions-file.c:788
+#: ../src/gtr-actions-file.c:779
 msgid "Files saved."
 msgstr "Датотеке су сачуване."
 
@@ -717,29 +717,25 @@ msgstr "Датотеке су сачуване."
 msgid "Current Maintainers"
 msgstr "Програм тренутно одржавају"
 
-#: ../src/gtr-actions-help.c:53
+#: ../src/gtr-actions-help.c:54
 msgid "Current Developers"
 msgstr "Тренутни развојни тим"
 
-#: ../src/gtr-actions-help.c:59
+#: ../src/gtr-actions-help.c:60
 msgid "Previous Developers"
 msgstr "Претходни програмери"
 
-#: ../src/gtr-actions-help.c:67
+#: ../src/gtr-actions-help.c:68
 msgid "Contributors"
 msgstr "Програму су допринели"
 
-#: ../src/gtr-actions-help.c:96
+#: ../src/gtr-actions-help.c:91
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
 msgstr "Програм за уређивање датотека са преводима програма и библиотека."
 
-#: ../src/gtr-actions-help.c:98
-msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
-msgstr "Сва права задржана, 1999-2008. Задужбина слободног софтвера"
-
-#: ../src/gtr-actions-help.c:101
+#: ../src/gtr-actions-help.c:107
 msgid "About Gtranslator"
 msgstr "О програму"
 
@@ -747,15 +743,16 @@ msgstr "О програму"
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/gtr-actions-help.c:106
+#: ../src/gtr-actions-help.c:112
 msgid "translator-credits"
 msgstr ""
 "Вељко М. Станојевић <veljko@vms.homelinux.net>\n"
 "Милош Поповић <gpopac@gmail.com>\n"
+"Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "\n"
 "Prevod.org — превод на српски језик."
 
-#: ../src/gtr-actions-help.c:110
+#: ../src/gtr-actions-help.c:115
 msgid "Gtranslator Web Site"
 msgstr "Интернет страница Гномовог преводиоца"
 
@@ -772,40 +769,40 @@ msgstr[3] "Пронашао сам и заменио појаву"
 msgid "Found and replaced one occurrence"
 msgstr "Пронашао сам и заменио једну појаву"
 
-#: ../src/gtr-context.c:228
+#: ../src/gtr-context.c:229
 msgid "Notes:"
 msgstr "Белешке:"
 
-#: ../src/gtr-context.c:236
+#: ../src/gtr-context.c:237
 msgid "Add Note"
 msgstr "Додај белешку"
 
-#: ../src/gtr-context.c:241
+#: ../src/gtr-context.c:242
 msgid "Edit"
 msgstr "Измени"
 
 #. Extracted comments
-#: ../src/gtr-context.c:284
+#: ../src/gtr-context.c:285
 msgid "Extracted comments:"
 msgstr "Извучене напомене:"
 
 #. Context
-#: ../src/gtr-context.c:288
+#: ../src/gtr-context.c:289
 msgid "Context:"
 msgstr "Појава:"
 
 #. Format
-#: ../src/gtr-context.c:292
+#: ../src/gtr-context.c:293
 msgid "Format:"
 msgstr "Формат:"
 
-#: ../src/dialogs/gtr-assistant.c:128
-#: ../src/dialogs/gtr-preferences-dialog.c:787
+#: ../src/dialogs/gtr-assistant.c:126
+#: ../src/dialogs/gtr-preferences-dialog.c:689
 msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
 msgstr ""
 "<span weight=\"bold\" size=\"large\">Ниске додате у базу података</span>"
 
-#: ../src/dialogs/gtr-assistant.c:274
+#: ../src/dialogs/gtr-assistant.c:267
 #, c-format
 msgid ""
 "Profile name: %s\n"
@@ -830,11 +827,11 @@ msgstr ""
 "Облици множине: %s\n"
 "Путања базе података: %s"
 
-#: ../src/dialogs/gtr-assistant.c:301
+#: ../src/dialogs/gtr-assistant.c:288
 msgid "None"
 msgstr "Ништа"
 
-#: ../src/dialogs/gtr-assistant.c:324
+#: ../src/dialogs/gtr-assistant.c:311
 msgid ""
 "This assistant will help you to create the main profile\n"
 "and generate your translation memory database."
@@ -842,72 +839,48 @@ msgstr ""
 "Овај асистент ће вам помоћи да направите главни профил\n"
 "и да изградите базу података преводилачке меморије."
 
-#: ../src/dialogs/gtr-assistant.c:330
+#: ../src/dialogs/gtr-assistant.c:317
 msgid "Assistant"
 msgstr "Асистент"
 
-#: ../src/dialogs/gtr-assistant.c:422
+#: ../src/dialogs/gtr-assistant.c:389
 msgid "<b>Profile name:</b>"
 msgstr "<b>Назив профила:</b>"
 
-#: ../src/dialogs/gtr-assistant.c:441
+#: ../src/dialogs/gtr-assistant.c:408
 msgid "<b>Translator name:</b>"
 msgstr "<b>Име преводиоца:</b>"
 
-#: ../src/dialogs/gtr-assistant.c:460
+#: ../src/dialogs/gtr-assistant.c:427
 msgid "<b>Translator email:</b>"
 msgstr "<b>Е-поштa преводиоца:</b>"
 
-#: ../src/dialogs/gtr-assistant.c:479
-msgid "<b>Language:</b>"
-msgstr "<b>Језик:</b>"
-
-#: ../src/dialogs/gtr-assistant.c:498
-msgid "<b>Team email:</b>"
-msgstr "<b>Е-пошта тима:</b>"
-
-#: ../src/dialogs/gtr-assistant.c:510 ../src/dialogs/gtr-assistant.c:656
-#: ../src/dialogs/gtr-preferences-dialog.c:582 ../src/gtr-window.c:1491
+#: ../src/dialogs/gtr-assistant.c:439 ../src/dialogs/gtr-assistant.c:531
+#: ../src/dialogs/gtr-preferences-dialog.c:562 ../src/gtr-window.c:1220
 msgid "Profile"
 msgstr "Профил"
 
-#: ../src/dialogs/gtr-assistant.c:587
-msgid "<b>Language code:</b>"
-msgstr "<b>Шифра језика:</b>"
-
-#: ../src/dialogs/gtr-assistant.c:606
-msgid "<b>Character set:</b>"
-msgstr "<b>Скуп знакова:</b>"
-
-#: ../src/dialogs/gtr-assistant.c:625
-msgid "<b>Transfer encoding:</b>"
-msgstr "<b>Кодирање:</b>"
-
-#: ../src/dialogs/gtr-assistant.c:644
-msgid "<b>Plural forms:</b>"
-msgstr "<b>Облици множине:</b>"
-
-#: ../src/dialogs/gtr-assistant.c:665
+#: ../src/dialogs/gtr-assistant.c:540
 msgid "Checkout directory"
 msgstr "Директоријум усклађивања"
 
-#: ../src/dialogs/gtr-assistant.c:703
+#: ../src/dialogs/gtr-assistant.c:578
 msgid "<b>Select the path to generate the database:</b>"
 msgstr "<b>Изаберите путању за стварање базе података:</b>"
 
-#: ../src/dialogs/gtr-assistant.c:732
+#: ../src/dialogs/gtr-assistant.c:607
 msgid "<b>Look for a specific PO filename:</b>"
 msgstr "<b>Нађи само задато име ПО датотеке:</b>"
 
-#: ../src/dialogs/gtr-assistant.c:741
+#: ../src/dialogs/gtr-assistant.c:616
 msgid "E.g.: gl.po"
 msgstr "На пример: sr.po"
 
-#: ../src/dialogs/gtr-assistant.c:745
+#: ../src/dialogs/gtr-assistant.c:620
 msgid "Generate Database"
 msgstr "Изгради базу података"
 
-#: ../src/dialogs/gtr-assistant.c:771
+#: ../src/dialogs/gtr-assistant.c:646
 msgid "Confirmation"
 msgstr "Потврда"
 
@@ -1031,7 +1004,7 @@ msgid "Use my options to complete the following entries:"
 msgstr "Користи моје опције за довршавање следећих уноса:"
 
 #: ../src/dialogs/gtr-header-dialog.ui.h:14
-#: ../src/dialogs/gtr-profile-dialog.ui.h:9
+#: ../src/dialogs/gtr-languages-fetcher.ui.h:4
 msgid "_Language:"
 msgstr "_Језик:"
 
@@ -1043,18 +1016,38 @@ msgstr "Иди на поруку"
 msgid "Enter message number:"
 msgstr "Унесите број поруке:"
 
-#: ../src/dialogs/gtr-preferences-dialog.c:437
+#: ../src/dialogs/gtr-languages-fetcher.ui.h:1
+msgid "Character _set"
+msgstr "Скуп _знакова:"
+
+#: ../src/dialogs/gtr-languages-fetcher.ui.h:2
+msgid "Language _code:"
+msgstr "Шифра _језика:"
+
+#: ../src/dialogs/gtr-languages-fetcher.ui.h:3
+msgid "Transfer en_coding:"
+msgstr "_Коридање:"
+
+#: ../src/dialogs/gtr-languages-fetcher.ui.h:5
+msgid "_Plural forms:"
+msgstr "Облици _множине:"
+
+#: ../src/dialogs/gtr-languages-fetcher.ui.h:6
+msgid "_Team email:"
+msgstr "Е-_пошта тима:"
+
+#: ../src/dialogs/gtr-preferences-dialog.c:417
 msgid ""
 "<span weight=\"bold\" size=\"large\">Impossible to remove the active "
 "profile</span>"
 msgstr ""
 "<span weight=\"bold\" size=\"large\">Не могу да уклоним активни профил</span>"
 
-#: ../src/dialogs/gtr-preferences-dialog.c:441
+#: ../src/dialogs/gtr-preferences-dialog.c:421
 msgid "Another profile should be selected as active before"
 msgstr "Морате најпре активирати неки други профил"
 
-#: ../src/dialogs/gtr-preferences-dialog.c:454
+#: ../src/dialogs/gtr-preferences-dialog.c:434
 msgid ""
 "<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
 "profile?</span>"
@@ -1062,186 +1055,142 @@ msgstr ""
 "<span weight=\"bold\" size=\"large\">Да ли сте сигурни да желите да обришете "
 "овај профил?</span>"
 
-#: ../src/dialogs/gtr-preferences-dialog.c:588
+#: ../src/dialogs/gtr-preferences-dialog.c:568
 msgid "Active"
 msgstr "Активан"
 
-#: ../src/dialogs/gtr-preferences-dialog.c:987
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:14
+#: ../src/dialogs/gtr-preferences-dialog.c:879
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:12
 msgid "Gtranslator Preferences"
 msgstr "Поставке Гномовог преводиоца"
 
 #: ../src/dialogs/gtr-preferences-dialog.ui.h:1
-msgid "    "
-msgstr "    "
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:2
 msgid "Add to Database"
 msgstr "Додај у базу података"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:3
-msgid "Anchor style:"
-msgstr "Стил алатнице:"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:4
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:2
 msgid "Autosave"
 msgstr "Аутоматско чување"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:5
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:3
 msgid "Check _spelling"
 msgstr "_Провери писање"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:6
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:4
 msgid "Configuration:"
 msgstr "Подешавање:"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:7
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:5
 msgid "Contents"
 msgstr "Садржај"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:8
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:6
 msgid "Create a _backup copy of files before saving"
 msgstr "Направи _резервну копију пре чувања"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:9
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:7
 msgid "Database:"
 msgstr "База података:"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:10
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:8
 msgid "Editor"
 msgstr "Уређивање"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:11
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:9
 msgid "Editor _font:"
 msgstr "_Фонт текста:"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:12
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:10
 msgid "Files"
 msgstr "Датотеке"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:13
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:11
 msgid "General"
 msgstr "Опште"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:15
-msgid "Interface"
-msgstr "Сучеље"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:16
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:13
 msgid "Make _whitespace visible"
 msgstr "Прикажи _размаке између речи"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:17
-msgid "Max. # of missing words:"
-msgstr "Највећи број недостајућих речи:"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:18
-msgid "Max. difference in sentence length:"
-msgstr "Највећа разлика у дужини реченице:"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:19
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:14
 msgid "Plugins"
 msgstr "Додаци"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:20
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:15
 msgid "Profiles"
 msgstr "Профили"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:21
-msgid "Scheme color:"
-msgstr "Боја шеме:"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:22
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:16
 msgid "Select the directory which contains PO files:"
 msgstr "Изаберите директоријум са ПО датотекама:"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:23
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:17
 msgid "Text Display"
 msgstr "Приказивање текста"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:24
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:18 ../src/gtr-tab.c:824
 msgid "Translation Memory"
 msgstr "Преводилачка меморија"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:25
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:19
 msgid "Use _custom font"
 msgstr "_Користи произвољан фонт"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:26
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:20
 msgid "Use only files with this name:"
 msgstr "Користи само датотеке са овим именом:"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:27
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:21
 msgid "_Autosave files every"
 msgstr "_Сам сачувај датотеке након"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:28
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:22
 msgid "_Delete compiled GMO files"
 msgstr "Уклони _бинарне (GMO) датотеке"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:29
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:23
 msgid "_Highlight message syntax"
 msgstr "Ис_такни синтаксу поруке"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:30
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:24
 msgid "_Remove fuzzy status if message is changed"
 msgstr "У_клони стање нејасне поруке ако је измењена"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:31
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:25
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "_Упозори уколико ПО датотека садржи нејасне поруке"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:32
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:26
 msgid "_minutes"
 msgstr "_минута"
 
-#: ../src/dialogs/gtr-profile-dialog.c:86
+#: ../src/dialogs/gtr-profile-dialog.c:81
 msgid "Gtranslator Profile"
 msgstr "Профил Гномовог преводиоца"
 
 #: ../src/dialogs/gtr-profile-dialog.ui.h:1
-msgid "Character _set"
-msgstr "Скуп _знакова:"
-
-#: ../src/dialogs/gtr-profile-dialog.ui.h:2
 msgid "Language Settings"
 msgstr "Подешавање језика"
 
-#: ../src/dialogs/gtr-profile-dialog.ui.h:3
-msgid "Language _code:"
-msgstr "Шифра _језика:"
-
-#: ../src/dialogs/gtr-profile-dialog.ui.h:4
+#: ../src/dialogs/gtr-profile-dialog.ui.h:2
 msgid "N_ame:"
 msgstr "_Име:"
 
-#: ../src/dialogs/gtr-profile-dialog.ui.h:5
+#: ../src/dialogs/gtr-profile-dialog.ui.h:3
 msgid "Profile Information"
 msgstr "Подаци о профилу"
 
-#: ../src/dialogs/gtr-profile-dialog.ui.h:6
-msgid "Transfer en_coding:"
-msgstr "_Коридање:"
-
-#: ../src/dialogs/gtr-profile-dialog.ui.h:7
+#: ../src/dialogs/gtr-profile-dialog.ui.h:4
 msgid "Translator Information"
 msgstr "Подаци о преводиоцу"
 
-#: ../src/dialogs/gtr-profile-dialog.ui.h:8
+#: ../src/dialogs/gtr-profile-dialog.ui.h:5
 msgid "_Email:"
 msgstr "_Е-пошта:"
 
-#: ../src/dialogs/gtr-profile-dialog.ui.h:10
+#: ../src/dialogs/gtr-profile-dialog.ui.h:6
 msgid "_Name:"
 msgstr "_Име:"
-
-#: ../src/dialogs/gtr-profile-dialog.ui.h:11
-msgid "_Plural forms:"
-msgstr "Облици _множине:"
-
-#: ../src/dialogs/gtr-profile-dialog.ui.h:12
-msgid "_Team email:"
-msgstr "Е-_пошта тима:"
 
 #: ../src/dialogs/gtr-search-dialog.c:328
 #: ../src/dialogs/gtr-search-dialog.ui.h:3
@@ -1300,74 +1249,47 @@ msgstr "У пре_веденом тексту"
 msgid "_Wrap around"
 msgstr "П_реламај"
 
-#: ../src/gtr-application.c:86
-msgid "[FILE...]"
-msgstr "[ДАТОТЕКА...]"
-
-#: ../src/gtr-application.c:89
-msgid "Create a new toplevel window in an existing instance of Gtranslator"
-msgstr "Образује нови главни прозор Гномовог преводиоца"
-
-#: ../src/gtr-application.c:320
+#: ../src/gtr-application.c:306
 msgid "Gtranslator"
 msgstr "Гномов преводилац"
 
-#: ../src/gtr-application.c:352
-#, c-format
-msgid "%s: malformed file name or URI.\n"
-msgstr "%s: лоше задато име датотеке или адреса.\n"
-
-#. Setup command line options
-#: ../src/gtr-application.c:377
-msgid "- Edit PO files"
-msgstr "— уређује ПО датотеке"
-
-#: ../src/gtr-application.c:387
-#, c-format
-msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"Покрените „%s --help“ за списак свих доступних опција командне линије.\n"
-
-#: ../src/gtr-message-table.c:265
+#: ../src/gtr-message-table.c:266
 msgid "Status"
 msgstr "Стање"
 
-#: ../src/gtr-message-table.c:281
+#: ../src/gtr-message-table.c:282
 msgid "ID"
 msgstr "ИБ"
 
-#: ../src/gtr-message-table.c:300
+#: ../src/gtr-message-table.c:301
 msgid "Original Text"
 msgstr "Изворни текст"
 
-#: ../src/gtr-message-table.c:319
+#: ../src/gtr-message-table.c:320
 msgid "Translated Text"
 msgstr "Преведени текст"
 
-#: ../src/gtr-po.c:411
+#: ../src/gtr-po.c:409
 #, c-format
 msgid "Failed opening file '%s': %s"
 msgstr "Нисам успео да отворим датотеку „%s“: %s"
 
-#: ../src/gtr-po.c:435
+#: ../src/gtr-po.c:433
 #, c-format
 msgid "The file is empty"
 msgstr "Датотека је празна"
 
-#: ../src/gtr-po.c:450
+#: ../src/gtr-po.c:448
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Геттекст је вратио празну поруку са списком домена."
 
-#: ../src/gtr-po.c:502
+#: ../src/gtr-po.c:500
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Нису добивене поруке из програма за обраду."
 
-#: ../src/gtr-po.c:550
+#: ../src/gtr-po.c:548
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1378,12 +1300,12 @@ msgstr ""
 "Пот датотеке се стварају у процесу попуњавања.\n"
 "Ваша датотека би требала бити названа „%s.po“."
 
-#: ../src/gtr-po.c:563
+#: ../src/gtr-po.c:561
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Датотека „%s“ се може само читати и не можете је преписати другом"
 
-#: ../src/gtr-po.c:594
+#: ../src/gtr-po.c:592
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Дошло је до грешке приликом писања ПО датотеке: %s"
@@ -1396,29 +1318,37 @@ msgstr "УМЕТНИ"
 msgid "OVR"
 msgstr "ПРЕПИШИ"
 
-#: ../src/gtr-tab.c:212
+#: ../src/gtr-tab.c:329
 msgid "There is an error in the message:"
 msgstr "Постоји грешка у поруци:"
 
-#: ../src/gtr-tab.c:520
+#: ../src/gtr-tab.c:637
 #, c-format
 msgid "Plural %d"
 msgstr "Множина %d"
 
-#: ../src/gtr-tab.c:583
+#: ../src/gtr-tab.c:730
+msgid "Message Table"
+msgstr "Табела поруке"
+
+#: ../src/gtr-tab.c:740
 msgid "<b>Original Text:</b>"
 msgstr "<b>Изворни текст:</b>"
 
-#: ../src/gtr-tab.c:642
+#: ../src/gtr-tab.c:798
 msgid "<b>Translate_d Text:</b>"
 msgstr "<b>Преведени _текст:</b>"
 
-#: ../src/gtr-tab.c:693
+#: ../src/gtr-tab.c:814
+msgid "Translation Fields"
+msgstr "Преводилачка меморија"
+
+#: ../src/gtr-tab.c:834
 msgid "Context"
 msgstr "Појава"
 
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1163
+#: ../src/gtr-tab.c:1398
 msgid "Path:"
 msgstr "Путања:"
 
@@ -1433,79 +1363,79 @@ msgstr "Затвори документ"
 #. * produce duplicates, but don't worry about it. If your language
 #. * normally has a mnemonic at the start, please use the _. If not,
 #. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:943
+#: ../src/toolbareditor/egg-editable-toolbar.c:957
 #, c-format
 msgid "Show “_%s”"
 msgstr "Прикажи „_%s“"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1411
+#: ../src/toolbareditor/egg-editable-toolbar.c:1447
 msgid "_Move on Toolbar"
 msgstr "_Премести на палету алатки"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1412
+#: ../src/toolbareditor/egg-editable-toolbar.c:1448
 msgid "Move the selected item on the toolbar"
 msgstr "Премешта означену ставку на палету са алаткама"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1413
+#: ../src/toolbareditor/egg-editable-toolbar.c:1449
 msgid "_Remove from Toolbar"
 msgstr "_Уклони са палете алатки"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1414
+#: ../src/toolbareditor/egg-editable-toolbar.c:1450
 msgid "Remove the selected item from the toolbar"
 msgstr "Уклања изабрану ставку из палете са алаткама"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1415
+#: ../src/toolbareditor/egg-editable-toolbar.c:1451
 msgid "_Delete Toolbar"
 msgstr "_Обриши палету алатки"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1416
+#: ../src/toolbareditor/egg-editable-toolbar.c:1452
 msgid "Remove the selected toolbar"
 msgstr "Уклања изабрану палету са алаткама"
 
-#: ../src/toolbareditor/egg-toolbar-editor.c:485
+#: ../src/toolbareditor/egg-toolbar-editor.c:489
 msgid "Separator"
 msgstr "Раздвајач"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:226
+#: ../src/translation-memory/gtr-translation-memory-ui.c:227
 #, c-format
 msgid "Insert Option nº %d"
 msgstr "Уметни опцију бр. %d"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:378
+#: ../src/translation-memory/gtr-translation-memory-ui.c:379
 msgid "_Use this translation"
 msgstr "_Користи овај превод"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:383
+#: ../src/translation-memory/gtr-translation-memory-ui.c:384
 msgid "_Remove"
 msgstr "_Уклони"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:500
+#: ../src/translation-memory/gtr-translation-memory-ui.c:501
 msgid "Shortcut"
 msgstr "Пречица"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:509
+#: ../src/translation-memory/gtr-translation-memory-ui.c:510
 msgid "Level"
 msgstr "Ниво"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:518
+#: ../src/translation-memory/gtr-translation-memory-ui.c:519
 msgid "String"
 msgstr "Ниска"
 
-#: ../src/gtr-utils.c:309
+#: ../src/gtr-utils.c:313
 msgid "Please check your installation."
 msgstr "Проверите вашу инсталацију."
 
-#: ../src/gtr-utils.c:370
+#: ../src/gtr-utils.c:374
 #, c-format
 msgid "Unable to open ui file %s. Error: %s"
 msgstr "Не могу да отворим датотеку сучеља %s. Грешка: %s"
 
-#: ../src/gtr-utils.c:390
+#: ../src/gtr-utils.c:394
 #, c-format
 msgid "Unable to find the object '%s' inside file %s."
 msgstr "Не могу да пронађем објекат „%s“ унутар датотеке %s."
 
-#: ../src/gtr-utils.c:750
+#: ../src/gtr-utils.c:754
 msgid ""
 "Unable to display help. Please make sure the Gtranslator documentation "
 "package is installed."
@@ -1513,12 +1443,12 @@ msgstr ""
 "Не могу да прикажем помоћ. Проверите да ли је инсталиран пакет за помоћ у "
 "Гномовом преводиоцу."
 
-#: ../src/gtr-view.c:83
+#: ../src/gtr-view.c:84
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "„gtkspell“ грешка: %s\n"
 
-#: ../src/gtr-view.c:85
+#: ../src/gtr-view.c:86
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1527,282 +1457,282 @@ msgstr ""
 "Не могу да покренем „GtkSpell“.\n"
 " %s"
 
-#: ../src/gtr-window.c:131
+#: ../src/gtr-window.c:118
 msgid "_File"
 msgstr "_Датотека"
 
-#: ../src/gtr-window.c:132
+#: ../src/gtr-window.c:119
 msgid "_Edit"
 msgstr "_Уређивање"
 
-#: ../src/gtr-window.c:133
+#: ../src/gtr-window.c:120
 msgid "_View"
 msgstr "П_реглед"
 
-#: ../src/gtr-window.c:134
+#: ../src/gtr-window.c:121
 msgid "_Search"
 msgstr "_Претражи"
 
-#: ../src/gtr-window.c:135
+#: ../src/gtr-window.c:122
 msgid "_Go"
 msgstr "_Иди"
 
-#: ../src/gtr-window.c:136
+#: ../src/gtr-window.c:123
 msgid "_Documents"
 msgstr "Доку_менти"
 
-#: ../src/gtr-window.c:137
+#: ../src/gtr-window.c:124
 msgid "_Help"
 msgstr "_Помоћ"
 
-#: ../src/gtr-window.c:141
+#: ../src/gtr-window.c:128
 msgid "Open a PO file"
 msgstr "Отвара ПО датотеку"
 
-#: ../src/gtr-window.c:143
+#: ../src/gtr-window.c:130
 msgid "_Recent Files"
 msgstr "_Скорашње датотеке"
 
-#: ../src/gtr-window.c:146
+#: ../src/gtr-window.c:133
 msgid "Quit the program"
 msgstr "Излази из програма"
 
 #. Edit menu
-#: ../src/gtr-window.c:150
+#: ../src/gtr-window.c:137
 msgid "T_oolbar"
 msgstr "_Алатница"
 
-#: ../src/gtr-window.c:153
+#: ../src/gtr-window.c:140
 msgid "Edit gtranslator preferences"
 msgstr "Уређује подешавања Гномовог преводиоца"
 
-#: ../src/gtr-window.c:155 ../src/gtr-window.c:201
+#: ../src/gtr-window.c:142 ../src/gtr-window.c:188
 msgid "_Header..."
 msgstr "Заглавље..."
 
 #. Help menu
-#: ../src/gtr-window.c:159
+#: ../src/gtr-window.c:146
 msgid "_Contents"
 msgstr "_Садржај"
 
-#: ../src/gtr-window.c:170
+#: ../src/gtr-window.c:157
 msgid "Save the current file"
 msgstr "Чува тренутну датотеку"
 
-#: ../src/gtr-window.c:173
+#: ../src/gtr-window.c:160
 msgid "Save the current file with another name"
 msgstr "Чува тренутну датотеку под другим именом"
 
-#: ../src/gtr-window.c:179
+#: ../src/gtr-window.c:166
 msgid "Close the current file"
 msgstr "Затвара тренутну датотеку"
 
-#: ../src/gtr-window.c:184
+#: ../src/gtr-window.c:171
 msgid "Undo last operation"
 msgstr "Поништава последњу радњу"
 
-#: ../src/gtr-window.c:187
+#: ../src/gtr-window.c:174
 msgid "Redo last undone operation"
 msgstr "Враћа последњу поништену радњу"
 
-#: ../src/gtr-window.c:190
+#: ../src/gtr-window.c:177
 msgid "Cut the selected text"
 msgstr "Исеца изабрани текст"
 
-#: ../src/gtr-window.c:193
+#: ../src/gtr-window.c:180
 msgid "Copy the selected text"
 msgstr "Умножава изабрани текст"
 
-#: ../src/gtr-window.c:196
+#: ../src/gtr-window.c:183
 msgid "Paste the contents of the clipboard"
 msgstr "Умеће садржај из оставе"
 
-#: ../src/gtr-window.c:199
+#: ../src/gtr-window.c:186
 msgid "Clear the selected translation"
 msgstr "Брише изабрану поруку превода"
 
-#: ../src/gtr-window.c:203
+#: ../src/gtr-window.c:190
 msgid "Copy _Message to Translation"
 msgstr "Препи_ши поруку у превод"
 
-#: ../src/gtr-window.c:205
+#: ../src/gtr-window.c:192
 msgid "Copy original message contents to the translation field"
 msgstr "Преписује садржај изворне поруке у поље превода"
 
-#: ../src/gtr-window.c:207
+#: ../src/gtr-window.c:194
 msgid "Toggle _Fuzzy Status"
 msgstr "П_ромени стање нејасне поруке"
 
-#: ../src/gtr-window.c:208
+#: ../src/gtr-window.c:195
 msgid "Toggle fuzzy status of a message"
 msgstr "Мења статус нејасне поруке"
 
-#: ../src/gtr-window.c:210
+#: ../src/gtr-window.c:197
 msgid "_Translation Memory"
 msgstr "Преводилачка _меморија"
 
 #. View menu
-#: ../src/gtr-window.c:215
+#: ../src/gtr-window.c:202
 msgid "_Context"
 msgstr "_Појава"
 
-#: ../src/gtr-window.c:216
+#: ../src/gtr-window.c:203
 msgid "Show the Context panel"
 msgstr "Приказује површ са местом где се превод јавља у програму"
 
 #. Go menu
-#: ../src/gtr-window.c:220
+#: ../src/gtr-window.c:207
 msgid "_Previous Message"
 msgstr "Претходна пор_ука"
 
-#: ../src/gtr-window.c:221
+#: ../src/gtr-window.c:208
 msgid "Move back one message"
 msgstr "Иде на претходну поруку"
 
-#: ../src/gtr-window.c:223
+#: ../src/gtr-window.c:210
 msgid "_Next Message"
 msgstr "Следећа пору_ка"
 
-#: ../src/gtr-window.c:224
+#: ../src/gtr-window.c:211
 msgid "Move forward one message"
 msgstr "Иде на следећу поруку"
 
-#: ../src/gtr-window.c:226
+#: ../src/gtr-window.c:213
 msgid "_Go to Message..."
 msgstr "_Иди на поруку..."
 
-#: ../src/gtr-window.c:227
+#: ../src/gtr-window.c:214
 msgid "Jumps to a specific message"
 msgstr "Иде до одређене поруке"
 
-#: ../src/gtr-window.c:229
+#: ../src/gtr-window.c:216
 msgid "_First Message"
 msgstr "Пр_ва порука"
 
-#: ../src/gtr-window.c:230
+#: ../src/gtr-window.c:217
 msgid "Go to the first message"
 msgstr "Иде на прву поруку"
 
-#: ../src/gtr-window.c:232
+#: ../src/gtr-window.c:219
 msgid "_Last Message"
 msgstr "После_дња порука"
 
-#: ../src/gtr-window.c:233
+#: ../src/gtr-window.c:220
 msgid "Go to the last message"
 msgstr "Иде на последњу поруку"
 
-#: ../src/gtr-window.c:235
+#: ../src/gtr-window.c:222
 msgid "Next Fuz_zy"
 msgstr "Следећа _нејасна"
 
-#: ../src/gtr-window.c:236
+#: ../src/gtr-window.c:223
 msgid "Go to the next fuzzy message"
 msgstr "Иде на следећу нејасну поруку"
 
-#: ../src/gtr-window.c:238
+#: ../src/gtr-window.c:225
 msgid "Previous Fuzz_y"
 msgstr "Претходна н_ејасна"
 
-#: ../src/gtr-window.c:239
+#: ../src/gtr-window.c:226
 msgid "Go to the previous fuzzy message"
 msgstr "Иде на претходну нејасну поруку"
 
-#: ../src/gtr-window.c:241
+#: ../src/gtr-window.c:228
 msgid "Next _Untranslated"
 msgstr "С_ледећа непреведена"
 
-#: ../src/gtr-window.c:242
+#: ../src/gtr-window.c:229
 msgid "Go to the next untranslated message"
 msgstr "Иде на следећу непреведену поруку"
 
-#: ../src/gtr-window.c:245
+#: ../src/gtr-window.c:232
 msgid "Previ_ous Untranslated"
 msgstr "П_ретходна непреведена"
 
-#: ../src/gtr-window.c:246
+#: ../src/gtr-window.c:233
 msgid "Go to the previous untranslated message"
 msgstr "Иде на претходну непреведену поруку"
 
-#: ../src/gtr-window.c:249
+#: ../src/gtr-window.c:236
 msgid "Next Fu_zzy or Untranslated"
 msgstr "_Следећа нејасна или непреведена"
 
-#: ../src/gtr-window.c:251
+#: ../src/gtr-window.c:238
 msgid "Go to the next fuzzy or untranslated message"
 msgstr "Иде на следећу нејасну или непреведену поруку"
 
-#: ../src/gtr-window.c:254
+#: ../src/gtr-window.c:241
 msgid "Pre_vious Fuzzy or Untranslated"
 msgstr "_Претходна нејасна или непреведена"
 
-#: ../src/gtr-window.c:256
+#: ../src/gtr-window.c:243
 msgid "Go to the previous fuzzy or untranslated message"
 msgstr "Иде на претходну нејасну или непреведену поруку"
 
-#: ../src/gtr-window.c:261
+#: ../src/gtr-window.c:248
 msgid "Search for text"
 msgstr "Тражи жељени текст у преводу"
 
-#: ../src/gtr-window.c:264
+#: ../src/gtr-window.c:251
 msgid "Search for and replace text"
 msgstr "Тражи жељени текст у преводу и замењује га"
 
 #. Documents menu
-#: ../src/gtr-window.c:268
+#: ../src/gtr-window.c:255
 msgid "_Save All"
 msgstr "_Сачувај све"
 
-#: ../src/gtr-window.c:269
+#: ../src/gtr-window.c:256
 msgid "Save all open files"
 msgstr "Чува све отворене датотеке"
 
-#: ../src/gtr-window.c:271
+#: ../src/gtr-window.c:258
 msgid "_Close All"
 msgstr "_Затвори све"
 
-#: ../src/gtr-window.c:272
+#: ../src/gtr-window.c:259
 msgid "Close all open files"
 msgstr "Затвара све отворене датотеке"
 
-#: ../src/gtr-window.c:274
+#: ../src/gtr-window.c:261
 msgid "_Previous Document"
 msgstr "_Претходни документ"
 
-#: ../src/gtr-window.c:276
+#: ../src/gtr-window.c:263
 msgid "Activate previous document"
 msgstr "Приказује претходни документ"
 
-#: ../src/gtr-window.c:278
+#: ../src/gtr-window.c:265
 msgid "_Next Document"
 msgstr "_Наредни документ"
 
-#: ../src/gtr-window.c:280
+#: ../src/gtr-window.c:267
 msgid "Activate next document"
 msgstr "Приказује наредни документ"
 
-#: ../src/gtr-window.c:715
+#: ../src/gtr-window.c:438
 msgid "Untranslated"
 msgstr "непреведена"
 
-#: ../src/gtr-window.c:718
+#: ../src/gtr-window.c:441
 msgid "Translated"
 msgstr "преведена"
 
-#: ../src/gtr-window.c:721
+#: ../src/gtr-window.c:444
 msgid "Fuzzy"
 msgstr "нејасна"
 
-#: ../src/gtr-window.c:728
+#: ../src/gtr-window.c:451
 #, c-format
 msgid "Current: %d"
 msgstr "Порука бр. %d"
 
-#: ../src/gtr-window.c:729
+#: ../src/gtr-window.c:452
 #, c-format
 msgid "Total: %d"
 msgstr "Укупан бр. порука: %d"
 
-#: ../src/gtr-window.c:730
+#: ../src/gtr-window.c:453
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
@@ -1811,7 +1741,7 @@ msgstr[1] "%d преведене"
 msgstr[2] "%d преведених"
 msgstr[3] "Једна преведена"
 
-#: ../src/gtr-window.c:733
+#: ../src/gtr-window.c:456
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
@@ -1820,7 +1750,7 @@ msgstr[1] "%d нејасне"
 msgstr[2] "%d нејасних"
 msgstr[3] "Једна нејасна"
 
-#: ../src/gtr-window.c:735
+#: ../src/gtr-window.c:458
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1830,42 +1760,102 @@ msgstr[2] "%d непреведених"
 msgstr[3] "Једна непреведена"
 
 #. Translators: %s is a URI
-#: ../src/gtr-window.c:789
+#: ../src/gtr-window.c:512
 #, c-format
 msgid "Activate '%s'"
 msgstr "Прикажи „%s“"
 
 #. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:962
+#: ../src/gtr-window.c:685
 #, c-format
 msgid "*%s - gtranslator"
 msgstr "*%s — Гномов преводилац"
 
 #. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:965
+#: ../src/gtr-window.c:688
 #, c-format
 msgid "%s - gtranslator"
 msgstr "%s — Гномов преводилац"
 
-#: ../src/gtr-window.c:971
+#: ../src/gtr-window.c:694
 msgid "gtranslator"
 msgstr "Гномов преводилац"
 
-#: ../src/gtr-window.c:1344
+#: ../src/gtr-window.c:1067
 msgid "Toolbar Editor"
 msgstr "Уредник палете са алатима"
 
-#: ../src/gtr-window.c:1470
+#: ../src/gtr-window.c:1193
 msgid "No profile"
 msgstr "Нема профила"
 
-#: ../src/gtr-window.c:1493
+#: ../src/gtr-window.c:1222
 msgid "Profile for the active document"
 msgstr "Профил за тренутни документ"
 
-#: ../src/gtr-window.c:1865
-msgid "Documents"
-msgstr "Документи"
+#: ../src/main.c:102
+msgid "- Edit PO files"
+msgstr "— уређује ПО датотеке"
+
+#: ../src/main.c:106
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Покрените „%s --help“ за списак свих доступних опција командне линије.\n"
+
+#~ msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
+#~ msgstr "Сва права задржана, 1999-2008. Задужбина слободног софтвера"
+
+#~ msgid "<b>Language:</b>"
+#~ msgstr "<b>Језик:</b>"
+
+#~ msgid "<b>Team email:</b>"
+#~ msgstr "<b>Е-пошта тима:</b>"
+
+#~ msgid "<b>Language code:</b>"
+#~ msgstr "<b>Шифра језика:</b>"
+
+#~ msgid "<b>Character set:</b>"
+#~ msgstr "<b>Скуп знакова:</b>"
+
+#~ msgid "<b>Transfer encoding:</b>"
+#~ msgstr "<b>Кодирање:</b>"
+
+#~ msgid "<b>Plural forms:</b>"
+#~ msgstr "<b>Облици множине:</b>"
+
+#~ msgid "    "
+#~ msgstr "    "
+
+#~ msgid "Anchor style:"
+#~ msgstr "Стил алатнице:"
+
+#~ msgid "Interface"
+#~ msgstr "Сучеље"
+
+#~ msgid "Max. # of missing words:"
+#~ msgstr "Највећи број недостајућих речи:"
+
+#~ msgid "Max. difference in sentence length:"
+#~ msgstr "Највећа разлика у дужини реченице:"
+
+#~ msgid "Scheme color:"
+#~ msgstr "Боја шеме:"
+
+#~ msgid "[FILE...]"
+#~ msgstr "[ДАТОТЕКА...]"
+
+#~ msgid "Create a new toplevel window in an existing instance of Gtranslator"
+#~ msgstr "Образује нови главни прозор Гномовог преводиоца"
+
+#~ msgid "%s: malformed file name or URI.\n"
+#~ msgstr "%s: лоше задато име датотеке или адреса.\n"
+
+#~ msgid "Documents"
+#~ msgstr "Документи"
 
 #~ msgid ""
 #~ "Style for switchers in the side pane. Possible values are \"icons\", "
