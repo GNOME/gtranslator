@@ -479,7 +479,7 @@ gdict_sidebar_view_page (GdictSidebar * sidebar, const gchar * page_id)
   gtk_menu_shell_select_item (GTK_MENU_SHELL (priv->menu), page->menu_item);
 }
 
-G_CONST_RETURN gchar *
+const gchar *
 gdict_sidebar_current_page (GdictSidebar * sidebar)
 {
   GdictSidebarPrivate *priv;
