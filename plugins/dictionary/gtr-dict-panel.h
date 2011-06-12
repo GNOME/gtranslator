@@ -41,7 +41,7 @@ typedef struct _GtrDictPanelPrivate     GtrDictPanelPrivate;
 
 struct _GtrDictPanel
 {
-  GtkVBox parent_instance;
+  GtkBox parent_instance;
 
   /*< private > */
   GtrDictPanelPrivate *priv;
@@ -49,7 +49,7 @@ struct _GtrDictPanel
 
 struct _GtrDictPanelClass
 {
-  GtkVBoxClass parent_class;
+  GtkBoxClass parent_class;
 };
 
 /*

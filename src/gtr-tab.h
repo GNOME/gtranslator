@@ -52,7 +52,7 @@ typedef struct _GtrTab GtrTab;
 
 struct _GtrTab
 {
-  GtkVBox parent_instance;
+  GtkBox parent_instance;
 
   /*< private > */
   GtrTabPrivate *priv;
@@ -65,7 +65,7 @@ typedef struct _GtrTabClass GtrTabClass;
 
 struct _GtrTabClass
 {
-  GtkVBoxClass parent_class;
+  GtkBoxClass parent_class;
 
   void (*showed_message) (GtrTab * tab, GtrMsg * msg);
   void (*message_changed) (GtrTab * tab, GtrMsg * msg);

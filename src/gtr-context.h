@@ -44,7 +44,7 @@ typedef struct _GtrContextPanel GtrContextPanel;
 
 struct _GtrContextPanel
 {
-  GtkVBox parent_instance;
+  GtkBox parent_instance;
 
   /*< private > */
   GtrContextPanelPrivate *priv;
@@ -57,7 +57,7 @@ typedef struct _GtrContextPanelClass GtrContextPanelClass;
 
 struct _GtrContextPanelClass
 {
-  GtkVBoxClass parent_class;
+  GtkBoxClass parent_class;
 
   void (* reloaded) (GtrContextPanel *panel,
                      GtrMsg          *msg);

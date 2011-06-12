@@ -41,13 +41,13 @@ typedef struct _GtrTabLabelClass	GtrTabLabelClass;
 typedef struct _GtrTabLabelPrivate	GtrTabLabelPrivate;
 
 struct _GtrTabLabel {
-	GtkHBox parent;
+	GtkBox parent;
 	
 	GtrTabLabelPrivate *priv;
 };
 
 struct _GtrTabLabelClass {
-	GtkHBoxClass parent_class;
+	GtkBoxClass parent_class;
 
 	void (* close_clicked)  (GtrTabLabel *tab_label);
 };

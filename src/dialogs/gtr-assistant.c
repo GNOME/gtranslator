@@ -302,7 +302,7 @@ create_start_page (GtrAssistant * as)
 {
   GtkWidget *box, *label;
 
-  box = gtk_hbox_new (FALSE, 12);
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_show (box);
   gtk_container_set_border_width (GTK_CONTAINER (box), 12);
 
@@ -374,14 +374,14 @@ create_profiles_page1 (GtrAssistant * as)
   GtkWidget *label;
   GtrAssistantPrivate *priv = as->priv;
 
-  box = gtk_vbox_new (FALSE, 6);
+  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_widget_show (box);
   gtk_container_set_border_width (GTK_CONTAINER (box), 5);
 
   /*
    * Profile name:
    */
-  hbox = gtk_hbox_new (FALSE, 12);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_show (hbox);
   gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
 
@@ -400,7 +400,7 @@ create_profiles_page1 (GtrAssistant * as)
   /*
    * Translator name:
    */
-  hbox = gtk_hbox_new (FALSE, 12);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_show (hbox);
   gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
 
@@ -419,7 +419,7 @@ create_profiles_page1 (GtrAssistant * as)
   /*
    * Translator email:
    */
-  hbox = gtk_hbox_new (FALSE, 12);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_show (hbox);
   gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
 
@@ -568,7 +568,7 @@ create_database_page (GtrAssistant * as)
   GtkWidget *label;
   GtrAssistantPrivate *priv = as->priv;
 
-  box = gtk_vbox_new (FALSE, 6);
+  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_widget_show (box);
   gtk_container_set_border_width (GTK_CONTAINER (box), 5);
 
@@ -581,7 +581,7 @@ create_database_page (GtrAssistant * as)
   gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
 
   /* hbox */
-  hbox = gtk_hbox_new (FALSE, 12);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_show (hbox);
   gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
 
@@ -598,7 +598,7 @@ create_database_page (GtrAssistant * as)
                     G_CALLBACK (on_dir_find_button_clicked), as);
 
   /* Po name label */
-  hbox = gtk_hbox_new (FALSE, 12);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_show (hbox);
   gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
 
@@ -624,7 +624,7 @@ create_database_page (GtrAssistant * as)
 static void
 create_finish_page (GtrAssistant * as)
 {
-  as->priv->finish_box = gtk_vbox_new (FALSE, 0);
+  as->priv->finish_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (as->priv->finish_box);
 
   as->priv->confirm_label = gtk_label_new (NULL);

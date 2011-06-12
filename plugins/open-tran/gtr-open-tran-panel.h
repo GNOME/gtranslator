@@ -46,7 +46,7 @@ typedef struct _GtrOpenTranPanelClass   GtrOpenTranPanelClass;
 
 struct _GtrOpenTranPanel
 {
-  GtkVBox parent_instance;
+  GtkBox parent_instance;
 
   /*< private > */
   GtrOpenTranPanelPrivate *priv;
@@ -54,7 +54,7 @@ struct _GtrOpenTranPanel
 
 struct _GtrOpenTranPanelClass
 {
-  GtkVBoxClass parent_class;
+  GtkBoxClass parent_class;
 };
 
 GType gtr_open_tran_panel_get_type (void) G_GNUC_CONST;

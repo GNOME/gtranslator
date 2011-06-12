@@ -72,7 +72,7 @@ static guint sidebar_signals[LAST_SIGNAL] = { 0 };
 
 static GQuark sidebar_page_id_quark = 0;
 
-G_DEFINE_TYPE (GdictSidebar, gdict_sidebar, GTK_TYPE_VBOX);
+G_DEFINE_TYPE (GdictSidebar, gdict_sidebar, GTK_TYPE_BOX);
 
 static SidebarPage *
 sidebar_page_new (const gchar * id, const gchar * name, GtkWidget * widget)
@@ -298,8 +298,11 @@ gdict_sidebar_init (GdictSidebar * sidebar)
   priv->pages = NULL;
   priv->pages_by_id = g_hash_table_new (g_str_hash, g_str_equal);
 
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (sidebar),
+                                  GTK_ORIENTATION_VERTICAL);
+
   /* top option menu */
-  hbox = gtk_hbox_new (FALSE, 0);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_box_pack_start (GTK_BOX (sidebar), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
   priv->hbox = hbox;
@@ -313,7 +316,7 @@ gdict_sidebar_init (GdictSidebar * sidebar)
                     G_CALLBACK (gdict_sidebar_select_key_press_cb), sidebar);
   priv->select_button = select_button;
 
-  select_hbox = gtk_hbox_new (FALSE, 0);
+  select_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 
   priv->label = gtk_label_new (NULL);
   gtk_misc_set_alignment (GTK_MISC (priv->label), 0.0, 0.5);

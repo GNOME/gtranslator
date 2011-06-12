@@ -58,7 +58,7 @@ struct _GtrTabLabelPrivate
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE (GtrTabLabel, gtr_tab_label, GTK_TYPE_HBOX)
+G_DEFINE_TYPE (GtrTabLabel, gtr_tab_label, GTK_TYPE_BOX)
 
 static void
 gtr_tab_label_finalize (GObject *object)
@@ -263,12 +263,15 @@ gtr_tab_label_init (GtrTabLabel *tab_label)
 
   tab_label->priv->close_button_sensitive = TRUE;
 
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (tab_label),
+                                  GTK_ORIENTATION_HORIZONTAL);
+
   ebox = gtk_event_box_new ();
   gtk_event_box_set_visible_window (GTK_EVENT_BOX (ebox), FALSE);
   gtk_box_pack_start (GTK_BOX (tab_label), ebox, TRUE, TRUE, 0);
   tab_label->priv->ebox = ebox;
 
-  hbox = gtk_hbox_new (FALSE, 4);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
   gtk_container_add (GTK_CONTAINER (ebox), hbox);
 
   close_button = gtr_close_button_new ();

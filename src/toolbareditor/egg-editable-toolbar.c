@@ -84,7 +84,7 @@ struct _EggEditableToolbarPrivate
   gchar *primary_name;
 };
 
-G_DEFINE_TYPE (EggEditableToolbar, egg_editable_toolbar, GTK_TYPE_VBOX);
+G_DEFINE_TYPE (EggEditableToolbar, egg_editable_toolbar, GTK_TYPE_BOX);
 
 static int
 get_dock_position (EggEditableToolbar *etoolbar,
@@ -1385,6 +1385,9 @@ egg_editable_toolbar_init (EggEditableToolbar *etoolbar)
   priv = etoolbar->priv = EGG_EDITABLE_TOOLBAR_GET_PRIVATE (etoolbar);
 
   priv->save_hidden = TRUE;
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (etoolbar),
+                                  GTK_ORIENTATION_VERTICAL);
 
   g_signal_connect (etoolbar, "notify::visible",
 		    G_CALLBACK (toolbar_visibility_refresh), NULL);

@@ -1207,7 +1207,7 @@ create_statusbar (GtrWindow *window)
   GtkWidget *hbox;
 
   /* hbox */
-  hbox = gtk_hbox_new (FALSE, 0);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_box_pack_start (GTK_BOX (window->priv->main_box), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
 
@@ -1363,7 +1363,7 @@ gtr_window_draw (GtrWindow * window)
   GtrWindowPrivate *priv = window->priv;
 
   /* Main box */
-  priv->main_box = gtk_vbox_new (FALSE, 0);
+  priv->main_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_container_add (GTK_CONTAINER (window), priv->main_box);
   gtk_widget_show (priv->main_box);
 

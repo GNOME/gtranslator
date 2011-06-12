@@ -50,7 +50,7 @@
 #define GDICT_SIDEBAR_STRATEGIES_PAGE   "strat-chooser"
 #define GDICT_SIDEBAR_SOURCES_PAGE      "source-chooser"
 
-G_DEFINE_DYNAMIC_TYPE (GtrDictPanel, gtr_dict_panel, GTK_TYPE_VBOX)
+G_DEFINE_DYNAMIC_TYPE (GtrDictPanel, gtr_dict_panel, GTK_TYPE_BOX)
 
 struct _GtrDictPanelPrivate
 {
@@ -428,11 +428,11 @@ gtr_dict_panel_draw (GtrDictPanel * panel)
   GtkWidget *vbox;
   GtkWidget *hbox;
 
-  vbox = gtk_vbox_new (FALSE, 6);
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
   gtk_widget_show (vbox);
 
-  hbox = gtk_hbox_new (FALSE, 12);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
 
@@ -584,6 +584,9 @@ gtr_dict_panel_init (GtrDictPanel * panel)
 
   if (!priv->loader)
     panel->priv->loader = gdict_source_loader_new ();
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (panel),
+                                  GTK_ORIENTATION_VERTICAL);
 
   /* add our data dir inside $HOME to the loader's search paths */
   gdict_source_loader_add_search_path (priv->loader,

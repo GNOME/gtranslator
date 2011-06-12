@@ -69,7 +69,7 @@
 
 #define GTR_TAB_KEY "GtrTabFromDocument"
 
-G_DEFINE_TYPE (GtrTab, gtr_tab, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (GtrTab, gtr_tab, GTK_TYPE_BOX)
 
 struct _GtrTabPrivate
 {
@@ -697,7 +697,7 @@ gtr_tab_draw (GtrTab *tab)
   GtrTabPrivate *priv = tab->priv;
 
   /* Docker */
-  hbox = gtk_hbox_new (FALSE, 0);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_widget_show (hbox);
   gtk_box_pack_start (GTK_BOX (tab), hbox, TRUE, TRUE, 0);
 
@@ -733,7 +733,7 @@ gtr_tab_draw (GtrTab *tab)
                       FALSE);
 
   /* Orignal text widgets */
-  priv->msgid_hbox = gtk_hbox_new (FALSE, 0);
+  priv->msgid_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_widget_show (priv->msgid_hbox);
 
   msgid_label = gtk_label_new (NULL);
@@ -744,7 +744,7 @@ gtr_tab_draw (GtrTab *tab)
   gtk_box_pack_start (GTK_BOX (priv->msgid_hbox), msgid_label, FALSE, FALSE,
                       0);
 
-  priv->text_vbox = gtk_vbox_new (FALSE, 0);
+  priv->text_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (priv->text_vbox);
 
   /* Singular */
@@ -785,7 +785,7 @@ gtr_tab_draw (GtrTab *tab)
   gtk_box_pack_start (GTK_BOX (priv->text_vbox), priv->text_plural_scroll,
                       TRUE, TRUE, 0);
 
-  vertical_box = gtk_vbox_new (FALSE, 0);
+  vertical_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_show (vertical_box);
 
   gtk_box_pack_start (GTK_BOX (vertical_box), priv->msgid_hbox, FALSE, FALSE,
@@ -866,6 +866,9 @@ gtr_tab_init (GtrTab * tab)
   tab->priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
 
   g_signal_connect (tab, "message-changed", G_CALLBACK (update_status), NULL);
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (tab),
+                                  GTK_ORIENTATION_VERTICAL);
 
   gtr_tab_draw (tab);
 

@@ -38,7 +38,7 @@ typedef struct _GtrAlternateLangPanelClass   GtrAlternateLangPanelClass;
 
 struct _GtrAlternateLangPanel
 {
-  GtkVBox parent_instance;
+  GtkBox parent_instance;
 
   /*< private > */
   GtrAlternateLangPanelPrivate *priv;
@@ -46,7 +46,7 @@ struct _GtrAlternateLangPanel
 
 struct _GtrAlternateLangPanelClass
 {
-  GtkVBoxClass parent_class;
+  GtkBoxClass parent_class;
 };
 
 GType gtr_alternate_lang_panel_get_type (void) G_GNUC_CONST;

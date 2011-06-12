@@ -36,7 +36,7 @@ typedef struct _GtrStatusbarClass GtrStatusbarClass;
 
 struct _GtrStatusbar
 {
-  GtkHBox parent;
+  GtkBox parent;
 
   /* <private/> */
   GtrStatusbarPrivate *priv;
@@ -44,7 +44,7 @@ struct _GtrStatusbar
 
 struct _GtrStatusbarClass
 {
-  GtkHBoxClass parent_class;
+  GtkBoxClass parent_class;
 };
 
 GType

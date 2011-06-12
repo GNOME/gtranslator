@@ -42,7 +42,7 @@
                                                       GTR_TYPE_ALTERNATE_LANG_PANEL, \
                                                       GtrAlternateLangPanelPrivate))
 
-G_DEFINE_DYNAMIC_TYPE (GtrAlternateLangPanel, gtr_alternate_lang_panel, GTK_TYPE_VBOX)
+G_DEFINE_DYNAMIC_TYPE (GtrAlternateLangPanel, gtr_alternate_lang_panel, GTK_TYPE_BOX)
 
 struct _GtrAlternateLangPanelPrivate
 {
@@ -302,7 +302,7 @@ gtr_alternate_lang_panel_draw (GtrAlternateLangPanel * panel)
   GtkWidget *scroll;
 
   /* Hbox */
-  hbox = gtk_hbox_new (FALSE, 6);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
   gtk_widget_show (hbox);
   gtk_box_pack_start (GTK_BOX (panel), hbox, FALSE, TRUE, 0);
 
@@ -374,6 +374,9 @@ gtr_alternate_lang_panel_init (GtrAlternateLangPanel * panel)
 
   panel->priv->showed_message_id = 0;
   panel->priv->po = NULL;
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (panel),
+                                  GTK_ORIENTATION_VERTICAL);
 
   gtr_alternate_lang_panel_draw (panel);
 }

@@ -46,7 +46,7 @@ enum
   LAST_SIGNAL
 };
 
-G_DEFINE_TYPE (GtrLanguagesFetcher, gtr_languages_fetcher, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (GtrLanguagesFetcher, gtr_languages_fetcher, GTK_TYPE_BOX)
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
@@ -305,6 +305,9 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
   };
 
   fetcher->priv = GTR_LANGUAGES_FETCHER_GET_PRIVATE (fetcher);
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (fetcher),
+                                  GTK_ORIENTATION_VERTICAL);
 
   path = gtr_dirs_get_ui_file ("gtr-languages-fetcher.ui");
   ret = gtr_utils_get_ui_objects (path,

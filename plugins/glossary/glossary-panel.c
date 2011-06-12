@@ -37,7 +37,7 @@
 						 GTR_TYPE_GLOSSARY_PANEL,     \
 						 GtrGlossaryPanelPrivate))
 
-G_DEFINE_TYPE (GtrGlossaryPanel, gtr_glossary_panel, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (GtrGlossaryPanel, gtr_glossary_panel, GTK_TYPE_BOX)
 #define XML_FILE_NAME "glossary.xml"
 /*
  * TreeItem structure
@@ -143,6 +143,9 @@ static void
 gtr_glossary_panel_init (GtrGlossaryPanel * panel)
 {
   panel->priv = GTR_GLOSSARY_PANEL_GET_PRIVATE (panel);
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (panel),
+                                  GTK_ORIENTATION_VERTICAL);
 
 
 }

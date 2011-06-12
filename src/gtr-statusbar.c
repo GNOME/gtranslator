@@ -48,7 +48,7 @@ struct _GtrStatusbarPrivate
   guint flash_message_id;
 };
 
-G_DEFINE_TYPE (GtrStatusbar, gtr_statusbar, GTK_TYPE_HBOX)
+G_DEFINE_TYPE (GtrStatusbar, gtr_statusbar, GTK_TYPE_BOX)
      static void gtr_statusbar_finalize (GObject * object)
 {
   GtrStatusbar *statusbar = GTR_STATUSBAR (object);
@@ -76,6 +76,9 @@ gtr_statusbar_init (GtrStatusbar * statusbar)
   GtkShadowType shadow_type;
 
   statusbar->priv = GTR_STATUSBAR_GET_PRIVATE (statusbar);
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (statusbar),
+                                  GTK_ORIENTATION_HORIZONTAL);
 
   /*
    * Statusbar

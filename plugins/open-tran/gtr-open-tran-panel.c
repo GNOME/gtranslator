@@ -57,7 +57,7 @@
 #define FEDORA_ICON      "fedora.png"
 #define MANDRIVA_ICON    "mandriva.png"
 
-G_DEFINE_DYNAMIC_TYPE (GtrOpenTranPanel, gtr_open_tran_panel, GTK_TYPE_VBOX)
+G_DEFINE_DYNAMIC_TYPE (GtrOpenTranPanel, gtr_open_tran_panel, GTK_TYPE_BOX)
 
 struct _GtrOpenTranPanelPrivate
 {
@@ -500,7 +500,7 @@ gtr_open_tran_panel_draw (GtrOpenTranPanel * panel)
   /*
    * Entry
    */
-  hbox = gtk_hbox_new (FALSE, 6);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
   button = gtk_button_new_with_label (_("Look for:"));
   gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_HALF);
@@ -523,6 +523,9 @@ gtr_open_tran_panel_init (GtrOpenTranPanel * panel)
   panel->priv = GTR_OPEN_TRAN_PANEL_GET_PRIVATE (panel);
 
   panel->priv->settings = g_settings_new ("org.gnome.gtranslator.plugins.open-tran");
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (panel),
+                                  GTK_ORIENTATION_VERTICAL);
 
   gtr_open_tran_panel_draw (panel);
 }

@@ -42,7 +42,7 @@
 							GTR_TYPE_MESSAGE_TABLE,	\
 							GtrMessageTablePrivate))
 
-G_DEFINE_TYPE (GtrMessageTable, gtr_message_table, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (GtrMessageTable, gtr_message_table, GTK_TYPE_BOX)
 
 struct _GtrMessageTablePrivate
 {
@@ -347,6 +347,9 @@ gtr_message_table_init (GtrMessageTable * table)
   GtkWidget *scrolledwindow;
 
   table->priv = GTR_MESSAGE_TABLE_GET_PRIVATE (table);
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (table),
+                                  GTK_ORIENTATION_VERTICAL);
 
   gtr_message_table_draw (table);
 

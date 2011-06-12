@@ -71,7 +71,7 @@ struct EggToolbarEditorPrivate
   gulong     sig_handlers[SIGNAL_HANDLER_LIST_SIZE];
 };
 
-G_DEFINE_TYPE (EggToolbarEditor, egg_toolbar_editor, GTK_TYPE_VBOX);
+G_DEFINE_TYPE (EggToolbarEditor, egg_toolbar_editor, GTK_TYPE_BOX);
 
 static gint
 compare_items (gconstpointer a,
@@ -669,6 +669,9 @@ egg_toolbar_editor_init (EggToolbarEditor *t)
 
   t->priv->manager = NULL;
   t->priv->actions_list = NULL;
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (t),
+                                  GTK_ORIENTATION_VERTICAL);
 
   setup_editor (t);
 }

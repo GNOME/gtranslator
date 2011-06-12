@@ -33,7 +33,7 @@
 						 GTR_TYPE_CONTEXT_PANEL,     \
 						 GtrContextPanelPrivate))
 
-G_DEFINE_TYPE (GtrContextPanel, gtr_context_panel, GTK_TYPE_VBOX)
+G_DEFINE_TYPE (GtrContextPanel, gtr_context_panel, GTK_TYPE_BOX)
 
 struct _GtrContextPanelPrivate
 {
@@ -343,6 +343,9 @@ gtr_context_panel_init (GtrContextPanel *panel)
 
   priv->hand_cursor = gdk_cursor_new (GDK_HAND2);
   priv->regular_cursor = gdk_cursor_new (GDK_XTERM);
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (panel),
+                                  GTK_ORIENTATION_VERTICAL);
 
   /* Set up the scrolling window for the extracted context display */
   priv->sw = gtk_scrolled_window_new (NULL, NULL);

@@ -48,7 +48,7 @@ typedef struct _GtrGlossaryPanel GtrGlossaryPanel;
 
 struct _GtrGlossaryPanel
 {
-  GtkVBox parent_instance;
+  GtkBox parent_instance;
 
   /*< private > */
   GtrGlossaryPanelPrivate *priv;
@@ -61,7 +61,7 @@ typedef struct _GtrGlossaryPanelClass GtrGlossaryPanelClass;
 
 struct _GtrGlossaryPanelClass
 {
-  GtkVBoxClass parent_class;
+  GtkBoxClass parent_class;
 };
 
 /*

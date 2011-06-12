@@ -44,7 +44,7 @@ typedef struct _GtrMessageTable GtrMessageTable;
 
 struct _GtrMessageTable
 {
-  GtkVBox parent_instance;
+  GtkBox parent_instance;
 
   /* < private > */
   GtrMessageTablePrivate *priv;
@@ -57,7 +57,7 @@ typedef struct _GtrMessageTableClass GtrMessageTableClass;
 
 struct _GtrMessageTableClass
 {
-  GtkVBoxClass parent_class;
+  GtkBoxClass parent_class;
 };
 
 /*

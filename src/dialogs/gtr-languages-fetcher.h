@@ -39,14 +39,14 @@ typedef struct _GtrLanguagesFetcherPrivate	GtrLanguagesFetcherPrivate;
 
 struct _GtrLanguagesFetcher
 {
-  GtkVBox parent;
+  GtkBox parent;
 
   GtrLanguagesFetcherPrivate *priv;
 };
 
 struct _GtrLanguagesFetcherClass
 {
-  GtkVBoxClass parent_class;
+  GtkBoxClass parent_class;
 
   void (* changed) (GtrLanguagesFetcher *fetcher);
 };
