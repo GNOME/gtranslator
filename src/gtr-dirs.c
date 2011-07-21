@@ -71,7 +71,7 @@ gtr_dirs_init ()
                                        "gtranslator", "help" NULL);
       gtr_locale_dir = g_strdup (ige_mac_bundle_get_localedir (bundle));
       gtr_lib_dir = g_build_filename (bundle_resource_dir,
-                                        "lib", "gtranslator", NULL);
+                                      "lib", "gtranslator", NULL);
     }
 #endif /* !OS_OSX */
   if (gtr_data_dir == NULL)
