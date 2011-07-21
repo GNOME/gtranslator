@@ -34,6 +34,7 @@ static gchar *user_config_dir = NULL;
 static gchar *user_cache_dir = NULL;
 static gchar *user_plugins_dir = NULL;
 static gchar *gtr_data_dir = NULL;
+static gchar *gtr_help_dir = NULL;
 static gchar *gtr_locale_dir = NULL;
 static gchar *gtr_lib_dir = NULL;
 static gchar *gtr_plugins_dir = NULL;
@@ -49,6 +50,8 @@ gtr_dirs_init ()
   win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
 
   gtr_data_dir = g_build_filename (win32_dir, "share", "gtranslator", NULL);
+  gtr_help_dir = g_build_filename (win32_dir,
+                                   "share", "gtranslator", "help", NULL);
   gtr_locale_dir = g_build_filename (win32_dir, "share", "locale", NULL);
   gtr_lib_dir = g_build_filename (win32_dir, "lib", "gtranslator", NULL);
 
@@ -64,6 +67,8 @@ gtr_dirs_init ()
         ige_mac_bundle_get_resourcesdir (bundle);
 
       gtr_data_dir = g_build_filename (bundle_data_dir, "gtranslator", NULL);
+      gtr_help_dir = g_build_filename (bundle_data_dir,
+                                       "gtranslator", "help" NULL);
       gtr_locale_dir = g_strdup (ige_mac_bundle_get_localedir (bundle));
       gtr_lib_dir = g_build_filename (bundle_resource_dir,
                                         "lib", "gtranslator", NULL);
@@ -72,6 +77,7 @@ gtr_dirs_init ()
   if (gtr_data_dir == NULL)
     {
       gtr_data_dir = g_build_filename (DATADIR, "gtranslator", NULL);
+      gtr_help_dir = g_build_filename (DATADIR, "gnome", "help", NULL);
       gtr_locale_dir = g_build_filename (DATADIR, "locale", NULL);
       gtr_lib_dir = g_build_filename (LIBDIR, "gtranslator", NULL);
     }
@@ -95,6 +101,7 @@ gtr_dirs_shutdown ()
   g_free (user_cache_dir);
   g_free (user_plugins_dir);
   g_free (gtr_data_dir);
+  g_free (gtr_help_dir);
   g_free (gtr_locale_dir);
   g_free (gtr_lib_dir);
   g_free (gtr_plugins_dir);
@@ -124,6 +131,12 @@ const gchar *
 gtr_dirs_get_gtr_data_dir (void)
 {
   return gtr_data_dir;
+}
+
+const gchar *
+gtr_dirs_get_gtr_help_dir (void)
+{
+  return gtr_help_dir;
 }
 
 const gchar *

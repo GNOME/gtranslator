@@ -731,8 +731,8 @@ gtr_utils_help_display (GtkWindow * parent,
       if (strchr (lang, '.'))
         continue;
 
-      path = gtr_dirs_get_gtr_data_dir ();
-      uri = g_build_filename (path, "gnome", "help", doc_id,
+      path = gtr_dirs_get_gtr_help_dir ();
+      uri = g_build_filename (path, doc_id,
                               lang, file_name, NULL);
 
       if (g_file_test (uri, G_FILE_TEST_EXISTS))
