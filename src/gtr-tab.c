@@ -673,7 +673,7 @@ save_layout (GtrTab *tab)
   gchar *filename;
 
   filename = g_build_filename (gtr_dirs_get_user_config_dir (),
-                               "gtr-layout.xml", NULL);
+                               "layout.xml", NULL);
 
   gtr_tab_layout_save (tab, filename, NULL);
   g_free (filename);
@@ -1028,7 +1028,7 @@ gtr_tab_realize (GtkWidget *widget)
 
       /* Loading dock layout */
       filename = g_build_filename (gtr_dirs_get_user_config_dir (),
-                                   "gtr-layout.xml", NULL);
+                                   "layout.xml", NULL);
 
       gtr_tab_layout_load (tab, filename, NULL);
       g_free (filename);
