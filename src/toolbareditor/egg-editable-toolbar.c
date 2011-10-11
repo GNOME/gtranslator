@@ -296,17 +296,18 @@ move_item_cb (GtkAction          *action,
   GtkTargetList *list = gtk_target_list_new (dest_drag_types, G_N_ELEMENTS (dest_drag_types));
 
   GdkEvent *realevent = gtk_get_current_event();
-  GdkEventMotion event;
-  event.type = GDK_MOTION_NOTIFY;
-  event.window = realevent->any.window;
-  event.send_event = FALSE;
-  event.axes = NULL;
-  event.time = gdk_event_get_time (realevent);
-  gdk_event_get_state (realevent, &event.state);
-  gdk_event_get_coords (realevent, &event.x, &event.y);
-  gdk_event_get_root_coords (realevent, &event.x_root, &event.y_root);
+  GdkEvent *event = gdk_event_new (GDK_MOTION_NOTIFY);
+  event->motion.window = g_object_ref (realevent->any.window);
+  event->motion.send_event = FALSE;
+  event->motion.axes = NULL;
+  event->motion.time = gdk_event_get_time (realevent);
+  gdk_event_set_device (event, gdk_event_get_device (realevent));
+  gdk_event_get_state (realevent, &event->motion.state);
+  gdk_event_get_coords (realevent, &event->motion.x, &event->motion.y);
+  gdk_event_get_root_coords (realevent, &event->motion.x_root, &event->motion.y_root);
 
-  gtk_drag_begin (toolitem, list, GDK_ACTION_MOVE, 1, (GdkEvent *)&event);
+  gtk_drag_begin (toolitem, list, GDK_ACTION_MOVE, 1, event);
+  gdk_event_free (event);
   gtk_target_list_unref (list);
 }
 
@@ -376,6 +377,19 @@ popup_context_menu_cb (GtkWidget          *toolbar,
 }
 
 static gboolean
+edit_mode_button_press_event_cb (GtkWidget          *widget,
+                                 GdkEventButton     *event,
+                                 EggEditableToolbar *etoolbar)
+{
+  if (event->button == 1)
+    {
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+static gboolean
 button_press_event_cb (GtkWidget *widget,
                        GdkEventButton *event,
                        EggEditableToolbar *etoolbar)
@@ -419,6 +433,23 @@ configure_item_sensitivity (GtkToolItem *item, EggEditableToolbar *etoolbar)
 				     (etoolbar->priv->edit_mode > 0) ||
 				     GTK_IS_SEPARATOR_TOOL_ITEM (item));
 
+}
+
+static void
+configure_item_window_drag (GtkToolItem        *item,
+                            EggEditableToolbar *etoolbar)
+{
+  if (etoolbar->priv->edit_mode > 0)
+    {
+      g_signal_connect (item, "button-press-event",
+                        G_CALLBACK (edit_mode_button_press_event_cb), NULL);
+    }
+  else
+    {
+      g_signal_handlers_disconnect_by_func (item,
+                                            G_CALLBACK (edit_mode_button_press_event_cb),
+                                            NULL);
+    }
 }
 
 static void
@@ -1030,7 +1061,7 @@ create_dock (EggEditableToolbar *etoolbar)
 {
   GtkWidget *toolbar, *hbox;
 
-  hbox = gtk_hbox_new (0, FALSE);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 
   toolbar = gtk_toolbar_new ();
   gtk_toolbar_set_show_arrow (GTK_TOOLBAR (toolbar), TRUE);
@@ -1214,6 +1245,7 @@ item_added_cb (EggToolbarsModel   *model,
   connect_widget_signals (GTK_WIDGET (item), etoolbar);
   configure_item_tooltip (item);
   configure_item_cursor (item, etoolbar);
+  configure_item_window_drag (item, etoolbar);
   configure_item_sensitivity (item, etoolbar);
 
   dock = get_dock_nth (etoolbar, tpos);
@@ -1384,10 +1416,9 @@ egg_editable_toolbar_init (EggEditableToolbar *etoolbar)
 
   priv = etoolbar->priv = EGG_EDITABLE_TOOLBAR_GET_PRIVATE (etoolbar);
 
-  priv->save_hidden = TRUE;
-
   gtk_orientable_set_orientation (GTK_ORIENTABLE (etoolbar),
                                   GTK_ORIENTATION_VERTICAL);
+  priv->save_hidden = TRUE;
 
   g_signal_connect (etoolbar, "notify::visible",
 		    G_CALLBACK (toolbar_visibility_refresh), NULL);
@@ -1546,6 +1577,7 @@ set_edit_mode (EggEditableToolbar *etoolbar,
                   item = gtk_toolbar_get_nth_item (GTK_TOOLBAR (toolbar), l);
 
                   configure_item_cursor (item, etoolbar);
+                  configure_item_window_drag (item, etoolbar);
                   configure_item_sensitivity (item, etoolbar);
                 }
             }
@@ -1829,7 +1861,7 @@ new_separator_pixbuf (void)
   GtkWidget *separator;
   GdkPixbuf *pixbuf;
 
-  separator = gtk_vseparator_new ();
+  separator = gtk_separator_new (GTK_ORIENTATION_VERTICAL);
   pixbuf = new_pixbuf_from_widget (separator);
   return pixbuf;
 }
