@@ -253,7 +253,6 @@ gtr_gda_store_impl (GtrGda *self,
 {
   gint orig_id;
   gboolean found_translation = FALSE;
-  gchar *norm_translation = NULL;
   gchar **words = NULL;
   GError *inner_error;
 
@@ -269,9 +268,6 @@ gtr_gda_store_impl (GtrGda *self,
       g_propagate_error (error, inner_error);
       return FALSE;
     }
-
-  norm_translation = g_utf8_normalize (translation, -1,
-                                       G_NORMALIZE_DEFAULT);
 
   if (orig_id == 0)
     {
@@ -314,7 +310,7 @@ gtr_gda_store_impl (GtrGda *self,
                                                               orig_id,
                                                               "value",
                                                               G_TYPE_STRING,
-                                                              norm_translation),
+                                                              translation),
                                           &inner_error);
       if (inner_error)
         goto error;
@@ -329,17 +325,15 @@ gtr_gda_store_impl (GtrGda *self,
                                       "orig_id", G_TYPE_INT,
                                       orig_id,
                                       "value", G_TYPE_STRING,
-                                      norm_translation),
+                                      translation),
                   &inner_error);
       if (inner_error)
         goto error;
     }
 
-  g_free (norm_translation);
   return TRUE;
 
  error:
-  g_free (norm_translation);
   g_strfreev (words);
   g_propagate_error (error, inner_error);
   return FALSE;
@@ -440,16 +434,12 @@ gtr_gda_remove (GtrTranslationMemory *tm,
                 const gchar *translation)
 {
   GtrGda *self = GTR_GDA (tm);
-  gchar *norm_translation;
   GdaSet *params;
   GError *error;
 
-  norm_translation = g_utf8_normalize (translation, -1,
-                                       G_NORMALIZE_DEFAULT);
-
   params = gda_set_new_inline (2,
                                "original", G_TYPE_STRING, original,
-                               "value", G_TYPE_STRING, norm_translation);
+                               "value", G_TYPE_STRING, translation);
 
   error = NULL;
   gda_connection_statement_execute_non_select (self->priv->db,
@@ -464,7 +454,6 @@ gtr_gda_remove (GtrTranslationMemory *tm,
     }
 
   g_object_unref (params);
-  g_free (norm_translation);
 }
 
 static void
