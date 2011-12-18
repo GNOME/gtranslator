@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gtranslator gnome-master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-05-03 12:51+0000\n"
-"PO-Revision-Date: 2011-05-06 08:00+0200\n"
+"POT-Creation-Date: 2011-12-17 21:24+0000\n"
+"PO-Revision-Date: 2011-12-18 17:58+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,11 +23,19 @@ msgstr ""
 "Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
 
-#: ../data/desktop/gtranslator.desktop.in.in.h:1
-msgid "Gtranslator PO Editor"
-msgstr "Editor PO Gtranslator"
+#: ../data/desktop/gtranslator.desktop.in.in.h:1 ../src/gtr-application.c:306
+msgid "Gtranslator"
+msgstr "Gtranslator"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:2
+msgid "Gtranslator PO File Editor"
+msgstr "Editor souborů PO Gtranslator"
+
+#: ../data/desktop/gtranslator.desktop.in.in.h:3
+msgid "PO File Editor"
+msgstr "Editor souborů PO"
+
+#: ../data/desktop/gtranslator.desktop.in.in.h:4
 msgid "Translate and localize applications and libraries"
 msgstr "Překládání a lokalizace aplikací a knihoven"
 
@@ -198,7 +206,7 @@ msgstr ""
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:34
 msgid "PO directory"
-msgstr "Adresář PO"
+msgstr "Složka PO"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:35
 msgid "Remove fuzzy status when message is changed"
@@ -284,15 +292,15 @@ msgstr "_Kopírovat"
 msgid "There isn't any file loaded"
 msgstr "Není načtený žádný soubor"
 
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:74
+#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:81
 msgid "_Alternate Language"
 msgstr "_Alternativní jazyk"
 
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:75
+#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:82
 msgid "Show the Alternate Language panel"
 msgstr "Zobrazit panel s alternativním jazykem"
 
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:176
+#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:236
 #: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:1
 msgid "Alternate Language"
 msgstr "Alternativní jazyk"
@@ -302,7 +310,7 @@ msgid "Load an alternate language."
 msgstr "Načtení alternativního jazyka."
 
 #: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:1
-#: ../plugins/charmap/charmap/__init__.py:41
+#: ../plugins/charmap/charmap/__init__.py:42
 msgid "Character Map"
 msgstr "Mapa znaků"
 
@@ -390,7 +398,7 @@ msgid "Dictionary sources"
 msgstr "Zdroje slovníků"
 
 #: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:1
-#: ../plugins/dictionary/gtr-dictionary-plugin.c:146
+#: ../plugins/dictionary/gtr-dictionary-plugin.c:144
 msgid "Dictionary"
 msgstr "Slovník"
 
@@ -709,7 +717,7 @@ msgstr "Soubor uložen."
 msgid "Save file as..."
 msgstr "Uložit soubor jako…"
 
-#: ../src/gtr-actions-file.c:787
+#: ../src/gtr-actions-file.c:779
 msgid "Files saved."
 msgstr "Soubory uloženy."
 
@@ -767,30 +775,30 @@ msgstr[2] "Nalezeno a nahrazeno %d výskytů"
 msgid "Found and replaced one occurrence"
 msgstr "Nalezen a zaměněn jeden výskyt"
 
-#: ../src/gtr-context.c:228
+#: ../src/gtr-context.c:229
 msgid "Notes:"
 msgstr "Poznámky:"
 
-#: ../src/gtr-context.c:236
+#: ../src/gtr-context.c:237
 msgid "Add Note"
 msgstr "Přidat poznámku"
 
-#: ../src/gtr-context.c:241
+#: ../src/gtr-context.c:242
 msgid "Edit"
 msgstr "Upravit"
 
 #. Extracted comments
-#: ../src/gtr-context.c:284
+#: ../src/gtr-context.c:285
 msgid "Extracted comments:"
 msgstr "Vybalené komentáře:"
 
 #. Context
-#: ../src/gtr-context.c:288
+#: ../src/gtr-context.c:289
 msgid "Context:"
 msgstr "Kontext:"
 
 #. Format
-#: ../src/gtr-context.c:292
+#: ../src/gtr-context.c:293
 msgid "Format:"
 msgstr "Formát:"
 
@@ -1124,7 +1132,7 @@ msgstr "Vyberte složku obsahující soubory PO:"
 msgid "Text Display"
 msgstr "Zobrazení textu"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:18 ../src/gtr-tab.c:810
+#: ../src/dialogs/gtr-preferences-dialog.ui.h:18 ../src/gtr-tab.c:824
 msgid "Translation Memory"
 msgstr "Paměť překladů"
 
@@ -1245,23 +1253,19 @@ msgstr "Přeložený _text"
 msgid "_Wrap around"
 msgstr "Přecházet přes _okraj"
 
-#: ../src/gtr-application.c:306
-msgid "Gtranslator"
-msgstr "Gtranslator"
-
-#: ../src/gtr-message-table.c:265
+#: ../src/gtr-message-table.c:266
 msgid "Status"
 msgstr "Stav"
 
-#: ../src/gtr-message-table.c:281
+#: ../src/gtr-message-table.c:282
 msgid "ID"
 msgstr "ID"
 
-#: ../src/gtr-message-table.c:300
+#: ../src/gtr-message-table.c:301
 msgid "Original Text"
 msgstr "Originální text"
 
-#: ../src/gtr-message-table.c:319
+#: ../src/gtr-message-table.c:320
 msgid "Translated Text"
 msgstr "Přeložený text"
 
@@ -1306,50 +1310,49 @@ msgstr "Soubor %s je pouze pro čtení a nelze jej přepsat"
 msgid "There was an error writing the PO file: %s"
 msgstr "Vyskytla se chyba při zápisu souboru PO: %s"
 
-#: ../src/gtr-statusbar.c:117 ../src/gtr-statusbar.c:246
+#: ../src/gtr-statusbar.c:118 ../src/gtr-statusbar.c:247
 msgid "INS"
 msgstr "VKL"
 
-#: ../src/gtr-statusbar.c:118 ../src/gtr-statusbar.c:242
+#: ../src/gtr-statusbar.c:119 ../src/gtr-statusbar.c:243
 msgid "OVR"
 msgstr "PRE"
 
-#: ../src/gtr-tab.c:320
+#: ../src/gtr-tab.c:329
 msgid "There is an error in the message:"
 msgstr "Ve zprávě se vyskytla chyba:"
 
-#: ../src/gtr-tab.c:628
+#: ../src/gtr-tab.c:637
 #, c-format
 msgid "Plural %d"
 msgstr "Množné číslo %d"
 
-#: ../src/gtr-tab.c:716
+#: ../src/gtr-tab.c:730
 msgid "Message Table"
 msgstr "Tabulka zpráv"
 
-#: ../src/gtr-tab.c:726
+#: ../src/gtr-tab.c:740
 msgid "<b>Original Text:</b>"
 msgstr "<b>Originální text:</b>"
 
-#: ../src/gtr-tab.c:784
+#: ../src/gtr-tab.c:798
 msgid "<b>Translate_d Text:</b>"
 msgstr "<b>_Přeložený text:</b>"
 
-#: ../src/gtr-tab.c:800
-#| msgid "Translation Memory"
+#: ../src/gtr-tab.c:814
 msgid "Translation Fields"
 msgstr "Překladová pole"
 
-#: ../src/gtr-tab.c:820
+#: ../src/gtr-tab.c:834
 msgid "Context"
 msgstr "Kontext"
 
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1313
+#: ../src/gtr-tab.c:1401
 msgid "Path:"
 msgstr "Cesta:"
 
-#: ../src/gtr-tab-label.c:275
+#: ../src/gtr-tab-label.c:278
 msgid "Close document"
 msgstr "Zavřít dokument"
 
@@ -1360,32 +1363,32 @@ msgstr "Zavřít dokument"
 #. * produce duplicates, but don't worry about it. If your language
 #. * normally has a mnemonic at the start, please use the _. If not,
 #. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:957
+#: ../src/toolbareditor/egg-editable-toolbar.c:988
 #, c-format
 msgid "Show “_%s”"
 msgstr "Zobrazit „_%s“"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1447
+#: ../src/toolbareditor/egg-editable-toolbar.c:1481
 msgid "_Move on Toolbar"
 msgstr "_Přesunou na panelu nástrojů"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1448
+#: ../src/toolbareditor/egg-editable-toolbar.c:1482
 msgid "Move the selected item on the toolbar"
 msgstr "Přesunout vybrané položky na panelu nástrojů"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1449
+#: ../src/toolbareditor/egg-editable-toolbar.c:1483
 msgid "_Remove from Toolbar"
 msgstr "Odeb_rat z panelu nástrojů"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1450
+#: ../src/toolbareditor/egg-editable-toolbar.c:1484
 msgid "Remove the selected item from the toolbar"
 msgstr "Odebrat vybrané položky z panelu nástrojů"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1451
+#: ../src/toolbareditor/egg-editable-toolbar.c:1485
 msgid "_Delete Toolbar"
 msgstr "_Smazat panel nástrojů"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1452
+#: ../src/toolbareditor/egg-editable-toolbar.c:1486
 msgid "Remove the selected toolbar"
 msgstr "Odebrat vybraný panel nástrojů"
 
@@ -1393,28 +1396,28 @@ msgstr "Odebrat vybraný panel nástrojů"
 msgid "Separator"
 msgstr "Oddělovač"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:226
+#: ../src/translation-memory/gtr-translation-memory-ui.c:227
 #, c-format
 msgid "Insert Option nº %d"
 msgstr "Vložit volbu číslo %d"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:378
+#: ../src/translation-memory/gtr-translation-memory-ui.c:379
 msgid "_Use this translation"
 msgstr "P_užít tento překlad"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:383
+#: ../src/translation-memory/gtr-translation-memory-ui.c:384
 msgid "_Remove"
 msgstr "Odst_ranit"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:500
+#: ../src/translation-memory/gtr-translation-memory-ui.c:501
 msgid "Shortcut"
 msgstr "Zkratka"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:509
+#: ../src/translation-memory/gtr-translation-memory-ui.c:510
 msgid "Level"
 msgstr "Úroveň"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:518
+#: ../src/translation-memory/gtr-translation-memory-ui.c:519
 msgid "String"
 msgstr "Řetězec"
 
@@ -1440,12 +1443,12 @@ msgstr ""
 "Nelze zobrazit nápovědu. Ujistěte se prosím, že je nainstalovaný balíček s "
 "dokumentací Gtranslator."
 
-#: ../src/gtr-view.c:83
+#: ../src/gtr-view.c:84
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "Chyba gtkspell: %s\n"
 
-#: ../src/gtr-view.c:85
+#: ../src/gtr-view.c:86
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1800,4 +1803,3 @@ msgstr ""
 "%s\n"
 "Spuštěním „%s --help“ se zobrazí úplný seznam dostupných přepínačů "
 "příkazového řádku.\n"
-
