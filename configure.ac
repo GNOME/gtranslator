@@ -56,8 +56,6 @@ GTK_DOC_CHECK([1.0])
 dnl -------------------------------------------------------------------
 dnl The standard extended GNOME compile warning options ...
 dnl -------------------------------------------------------------------
-# Uncomment this when GtkSourceView uses single includes: GB#563786
-#GNOME_MAINTAINER_MODE_DEFINES
 GNOME_COMPILE_WARNINGS([maximum])
 
 
