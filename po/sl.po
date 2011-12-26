@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-05-06 06:02+0000\n"
-"PO-Revision-Date: 2011-05-07 17:46+0100\n"
-"Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
+"POT-Creation-Date: 2011-12-26 16:27+0000\n"
+"PO-Revision-Date: 2011-12-26 17:38+0100\n"
+"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -23,10 +23,19 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:1
-msgid "Gtranslator PO Editor"
-msgstr "Gtranslator PO urejevalnik"
+#: ../src/gtr-application.c:306
+msgid "Gtranslator"
+msgstr "Gtranslator"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:2
+msgid "Gtranslator PO File Editor"
+msgstr "Gtranslator - urejevalnik datotek .po"
+
+#: ../data/desktop/gtranslator.desktop.in.in.h:3
+msgid "PO File Editor"
+msgstr "Urejevanje datotek .po"
+
+#: ../data/desktop/gtranslator.desktop.in.in.h:4
 msgid "Translate and localize applications and libraries"
 msgstr "Prevajanje programov in knjižnic"
 
@@ -263,7 +272,7 @@ msgid "Load an alternate language."
 msgstr "Naloži dodatni jezik"
 
 #: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:1
-#: ../plugins/charmap/charmap/__init__.py:43
+#: ../plugins/charmap/charmap/__init__.py:42
 msgid "Character Map"
 msgstr "Razpredelnica znakov"
 
@@ -663,7 +672,7 @@ msgstr "Datoteka je shranjena."
 msgid "Save file as..."
 msgstr "Shrani datoteko kot ..."
 
-#: ../src/gtr-actions-file.c:787
+#: ../src/gtr-actions-file.c:779
 msgid "Files saved."
 msgstr "Datoteke so shranjene."
 
@@ -1189,10 +1198,6 @@ msgstr "_Prevedeno besedilo"
 msgid "_Wrap around"
 msgstr "_Oblik okoli"
 
-#: ../src/gtr-application.c:306
-msgid "Gtranslator"
-msgstr "Gtranslator"
-
 #: ../src/gtr-message-table.c:266
 msgid "Status"
 msgstr "Stanje"
@@ -1250,13 +1255,13 @@ msgstr "Datoteka %s je dostopna le za branje in je ni mogoče prepisati"
 msgid "There was an error writing the PO file: %s"
 msgstr "Prišlo je do napake med zapisovanjem datoteke PO: %s"
 
-#: ../src/gtr-statusbar.c:117
-#: ../src/gtr-statusbar.c:246
+#: ../src/gtr-statusbar.c:118
+#: ../src/gtr-statusbar.c:247
 msgid "INS"
 msgstr "VST"
 
-#: ../src/gtr-statusbar.c:118
-#: ../src/gtr-statusbar.c:242
+#: ../src/gtr-statusbar.c:119
+#: ../src/gtr-statusbar.c:243
 msgid "OVR"
 msgstr "PRE"
 
@@ -1290,11 +1295,11 @@ msgid "Context"
 msgstr "Vsebina"
 
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1398
+#: ../src/gtr-tab.c:1401
 msgid "Path:"
 msgstr "Pot:"
 
-#: ../src/gtr-tab-label.c:275
+#: ../src/gtr-tab-label.c:278
 msgid "Close document"
 msgstr "Zapri dokument"
 
@@ -1305,32 +1310,32 @@ msgstr "Zapri dokument"
 #. * produce duplicates, but don't worry about it. If your language
 #. * normally has a mnemonic at the start, please use the _. If not,
 #. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:957
+#: ../src/toolbareditor/egg-editable-toolbar.c:988
 #, c-format
 msgid "Show “_%s”"
 msgstr "Pokaži “_%s“"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1447
+#: ../src/toolbareditor/egg-editable-toolbar.c:1481
 msgid "_Move on Toolbar"
 msgstr "_Premakni na orodni vrstici"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1448
+#: ../src/toolbareditor/egg-editable-toolbar.c:1482
 msgid "Move the selected item on the toolbar"
 msgstr "Premakne izbrani predmet na orodni vrstici"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1449
+#: ../src/toolbareditor/egg-editable-toolbar.c:1483
 msgid "_Remove from Toolbar"
 msgstr "_Odstrani iz orodne vrstice"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1450
+#: ../src/toolbareditor/egg-editable-toolbar.c:1484
 msgid "Remove the selected item from the toolbar"
 msgstr "Odstrani izbrani predmet iz orodne vrstice"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1451
+#: ../src/toolbareditor/egg-editable-toolbar.c:1485
 msgid "_Delete Toolbar"
 msgstr "_Izbriši orodno vrstico"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1452
+#: ../src/toolbareditor/egg-editable-toolbar.c:1486
 msgid "Remove the selected toolbar"
 msgstr "Odstrani izbrano orodno vrstico"
 
@@ -1943,7 +1948,7 @@ msgstr ""
 #~ msgstr "Dodajte Subversion URL"
 
 #~ msgid "Checkout repository"
-#~ msgstr "Odjavi odložišče"
+#~ msgstr "Odjavi skladišče"
 
 #~ msgid "Subversion: Commit complete."
 #~ msgstr "Subversion: uveljavitev je končana."
@@ -2001,13 +2006,13 @@ msgstr ""
 #~ msgstr "_Primerjava"
 
 #~ msgid "Diff local PO file with repository PO file"
-#~ msgstr "Primerjava krajevnih in odložiščih PO datotek"
+#~ msgstr "Primerjava krajevnih in skladiščih datotek PO"
 
 #~ msgid "C_heckout"
 #~ msgstr "O_djavi"
 
 #~ msgid "Get a new repository copy"
-#~ msgstr "Dobi novo kopijo odložišča"
+#~ msgstr "Dobi novo kopijo skladišča"
 
 #~ msgid "S_ubversion"
 #~ msgstr "S_ubversion"
@@ -2067,7 +2072,7 @@ msgstr ""
 #~ msgstr "Zapomni si odločitev"
 
 #~ msgid "Repository authorization"
-#~ msgstr "Overitev odložišča"
+#~ msgstr "Overitev skladišča"
 
 #~ msgid "Retrieving status..."
 #~ msgstr "Pridobivanje stanja ..."
@@ -2079,7 +2084,7 @@ msgstr ""
 #~ msgstr "Pošlji spremembe"
 
 #~ msgid "Update repository"
-#~ msgstr "Posodobi odložišče"
+#~ msgstr "Posodobi skladišče"
 
 #~ msgid "Use configured program to view the diff"
 #~ msgstr "Uporabi nastavljen program za primerjavo"
