@@ -84,7 +84,7 @@ GDL_REQUIRED=2.91.1
 GDA_REQUIRED=4.2.0
 PEAS_REQUIRED=1.0.0
 GDICT_OPTIONAL=0.11.0
-GTKSPELL_OPTIONAL=2.0.16
+GTKSPELL_OPTIONAL=2.99.99
 JSON_GLIB_OPTIONAL=0.12.0
 
 PKG_CHECK_MODULES(GTRANSLATOR, [
@@ -160,7 +160,7 @@ else
 fi
 
 dnl -------------------------------------------------------------------
-dnl Check for gtkspell >= 2.0 and use it if found
+dnl Check for gtkspell >= 3.0 and use it if found
 dnl -------------------------------------------------------------------
 have_gtkspell=no
 AC_ARG_WITH(gtkspell3,
@@ -170,7 +170,7 @@ AC_ARG_WITH(gtkspell3,
 if test x"$with_gtkspell" != "xno"
 then
         PKG_CHECK_MODULES([GTKSPELL], [
-                gtkspell3-2.0 >= $GTKSPELL_OPTIONAL
+                gtkspell-3.0 >= $GTKSPELL_OPTIONAL
         ], have_gtkspell=yes, have_gtkspell=no)
 
         if test x"$have_gtkspell" = "xyes"
