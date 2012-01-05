@@ -764,38 +764,38 @@ gtr_gda_init (GtrGda * self)
                                                     GDA_CONNECTION_OPTIONS_NONE,
                                                     NULL);
 
-  gda_execute_non_select_command (self->priv->db,
-                                  "create table WORD ("
-                                  "ID integer primary key autoincrement,"
-                                  "VALUE text unique)",
-                                  NULL);
+  gda_connection_execute_non_select_command (self->priv->db,
+                                             "create table WORD ("
+                                             "ID integer primary key autoincrement,"
+                                             "VALUE text unique)",
+                                             NULL);
 
-  gda_execute_non_select_command (self->priv->db,
-                                  "create table WORD_ORIG_LINK ("
-                                  "WORD_ID integer,"
-                                  "ORIG_ID integer,"
-                                  "primary key (WORD_ID, ORIG_ID))",
-                                  NULL);
+  gda_connection_execute_non_select_command (self->priv->db,
+                                             "create table WORD_ORIG_LINK ("
+                                             "WORD_ID integer,"
+                                             "ORIG_ID integer,"
+                                             "primary key (WORD_ID, ORIG_ID))",
+                                             NULL);
 
-  gda_execute_non_select_command (self->priv->db,
-                                  "create table ORIG ("
-                                  "ID integer primary key autoincrement,"
-                                  "VALUE text unique,"
-                                  "SENTENCE_SIZE integer)",
-                                  NULL);
+  gda_connection_execute_non_select_command (self->priv->db,
+                                             "create table ORIG ("
+                                             "ID integer primary key autoincrement,"
+                                             "VALUE text unique,"
+                                             "SENTENCE_SIZE integer)",
+                                             NULL);
 
-  gda_execute_non_select_command (self->priv->db,
-                                  "create table TRANS ("
-                                  "ID integer primary key autoincrement,"
-                                  "ORIG_ID integer,"
-                                  "VALUE text)",
-                                  NULL);
+  gda_connection_execute_non_select_command (self->priv->db,
+                                             "create table TRANS ("
+                                             "ID integer primary key autoincrement,"
+                                             "ORIG_ID integer,"
+                                             "VALUE text)",
+                                             NULL);
 
-  gda_execute_non_select_command (self->priv->db,
-                                  "create index "
-                                  "if not exists IDX_TRANS_ORIG_ID "
-                                  "on TRANS (ORIG_ID)",
-                                  NULL);
+  gda_connection_execute_non_select_command (self->priv->db,
+                                             "create index "
+                                             "if not exists IDX_TRANS_ORIG_ID "
+                                             "on TRANS (ORIG_ID)",
+                                             NULL);
 
   /* prepare statements */
 
