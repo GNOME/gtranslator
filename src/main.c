@@ -80,7 +80,6 @@ main (gint argc, gchar * argv[])
 
   /* Init type system and threads as soon as possible */
   g_type_init ();
-  g_thread_init (NULL);
 
   gtr_dirs_init ();
 
