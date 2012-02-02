@@ -455,17 +455,8 @@ gtr_context_panel_dispose (GObject *object)
 
   DEBUG_PRINT ("Dispose context");
 
-  if (panel->priv->hand_cursor != NULL)
-    {
-      gdk_cursor_unref (panel->priv->hand_cursor);
-      panel->priv->hand_cursor = NULL;
-    }
-
-  if (panel->priv->regular_cursor != NULL)
-    {
-      gdk_cursor_unref (panel->priv->regular_cursor);
-      panel->priv->regular_cursor = NULL;
-    }
+  g_clear_object (&panel->priv->hand_cursor);
+  g_clear_object (&panel->priv->regular_cursor);
 
   G_OBJECT_CLASS (gtr_context_panel_parent_class)->dispose (object);
 }
