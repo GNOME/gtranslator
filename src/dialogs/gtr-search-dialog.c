@@ -60,7 +60,7 @@ struct _GtrSearchDialogPrivate
 {
   gboolean show_replace;
 
-  GtkWidget *table;
+  GtkWidget *grid;
   GtkWidget *search_label;
   GtkWidget *search_entry;
   GtkWidget *search_text_entry;
@@ -323,8 +323,6 @@ show_replace_widgets (GtrSearchDialog * dlg, gboolean show_replace)
       gtk_widget_show (dlg->priv->replace_all_button);
       gtk_widget_show (dlg->priv->replace_button);
 
-      gtk_table_set_row_spacings (GTK_TABLE (dlg->priv->table), 12);
-
       gtk_window_set_title (GTK_WINDOW (dlg), _("Replace"));
     }
   else
@@ -346,8 +344,6 @@ show_replace_widgets (GtrSearchDialog * dlg, gboolean show_replace)
       gtk_widget_hide (dlg->priv->replace_entry);
       gtk_widget_hide (dlg->priv->replace_all_button);
       gtk_widget_hide (dlg->priv->replace_button);
-
-      gtk_table_set_row_spacings (GTK_TABLE (dlg->priv->table), 0);
 
       gtk_window_set_title (GTK_WINDOW (dlg), _("Find"));
     }
@@ -390,7 +386,7 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
                                   root_objects,
                                   &error_widget,
                                   "search_dialog_content", &content,
-                                  "table", &dlg->priv->table,
+                                  "grid", &dlg->priv->grid,
                                   "search_label",
                                   &dlg->priv->search_label,
                                   "replace_with_label",
@@ -424,35 +420,35 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
       return;
     }
 
-  dlg->priv->search_entry =
-    gtr_history_entry_new ("search-for-entry", TRUE);
+  dlg->priv->search_entry = gtr_history_entry_new ("search-for-entry", TRUE);
   gtk_widget_set_size_request (dlg->priv->search_entry, 300, -1);
   gtr_history_entry_set_escape_func
     (GTR_HISTORY_ENTRY (dlg->priv->search_entry),
      (GtrHistoryEntryEscapeFunc) gtr_utils_escape_search_text);
+  gtk_widget_set_hexpand (GTK_WIDGET (dlg->priv->search_entry), TRUE);
 
-  dlg->priv->search_text_entry = gtr_history_entry_get_entry
-    (GTR_HISTORY_ENTRY (dlg->priv->search_entry));
-  gtk_entry_set_activates_default (GTK_ENTRY (dlg->priv->search_text_entry),
-                                   TRUE);
+  dlg->priv->search_text_entry = gtr_history_entry_get_entry (GTR_HISTORY_ENTRY (dlg->priv->search_entry));
+  gtk_entry_set_activates_default (GTK_ENTRY (dlg->priv->search_text_entry), TRUE);
   gtk_widget_show (dlg->priv->search_entry);
-  gtk_table_attach_defaults (GTK_TABLE (dlg->priv->table),
-                             dlg->priv->search_entry, 1, 2, 0, 1);
+  gtk_grid_attach_next_to (GTK_GRID (dlg->priv->grid),
+                           dlg->priv->search_entry,
+                           dlg->priv->search_label,
+                           GTK_POS_RIGHT, 1, 1);
 
-  dlg->priv->replace_entry =
-    gtr_history_entry_new ("replace-with-entry", TRUE);
+  dlg->priv->replace_entry = gtr_history_entry_new ("replace-with-entry", TRUE);
   gtr_history_entry_set_escape_func (GTR_HISTORY_ENTRY
                                      (dlg->priv->replace_entry),
                                      (GtrHistoryEntryEscapeFunc)
                                      gtr_utils_escape_search_text);
+  gtk_widget_set_hexpand (GTK_WIDGET (dlg->priv->replace_entry), TRUE);
 
-  dlg->priv->replace_text_entry = gtr_history_entry_get_entry
-    (GTR_HISTORY_ENTRY (dlg->priv->replace_entry));
-  gtk_entry_set_activates_default (GTK_ENTRY (dlg->priv->replace_text_entry),
-                                   TRUE);
+  dlg->priv->replace_text_entry = gtr_history_entry_get_entry (GTR_HISTORY_ENTRY (dlg->priv->replace_entry));
+  gtk_entry_set_activates_default (GTK_ENTRY (dlg->priv->replace_text_entry), TRUE);
   gtk_widget_show (dlg->priv->replace_entry);
-  gtk_table_attach_defaults (GTK_TABLE (dlg->priv->table),
-                             dlg->priv->replace_entry, 1, 2, 1, 2);
+  gtk_grid_attach_next_to (GTK_GRID (dlg->priv->grid),
+                           dlg->priv->replace_entry,
+                           dlg->priv->replace_label,
+                           GTK_POS_RIGHT, 1, 1);
 
   gtk_label_set_mnemonic_widget (GTK_LABEL (dlg->priv->search_label),
                                  dlg->priv->search_entry);
