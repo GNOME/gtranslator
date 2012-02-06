@@ -89,7 +89,7 @@ JSON_GLIB_OPTIONAL=0.12.0
 
 AC_ARG_WITH(gda,
 	AS_HELP_STRING([--with-gda={4.0|5.0}],[Define which version of libgda to use]),,
-	with_gda=4.0)
+	with_gda=5.0)
 
 PKG_CHECK_MODULES(GTRANSLATOR, [
 	libxml-2.0 >= $LIBXML_REQUIRED
