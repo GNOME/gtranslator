@@ -93,6 +93,7 @@ gtr_statusbar_init (GtrStatusbar * statusbar)
    * Progress bar
    */
   statusbar->priv->progress_bar = gtk_progress_bar_new ();
+  gtk_progress_bar_set_show_text(GTK_PROGRESS_BAR(statusbar->priv->progress_bar), TRUE);
   gtk_widget_show (statusbar->priv->progress_bar);
   gtk_box_pack_start (GTK_BOX (statusbar), statusbar->priv->progress_bar,
                       FALSE, FALSE, 0);
