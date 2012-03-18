@@ -47,18 +47,16 @@ gtr_about_dialog (GtkAction * action, GtrWindow * window)
   static const gchar *authors[] = {
     N_("Current Maintainers"),
     "------------------------",
-    "Juan José Sánchez Penas <jjsanchez@igalia.com>",
-    "Pablo Sanxiao <psanxiao@gnome.org>",
     "Ignacio Casal Quinteiro <icq@gnome.org>",
     "",
     N_("Current Developers"),
     "------------------------",
-    "Pablo Sanxiao <psanxiao@gnome.org>",
     "Ignacio Casal Quinteiro <icq@gnome.org>",
-    "Seán de Búrca <leftmostcat@gmail.com>",
     "",
     N_("Previous Developers"),
     "------------------------",
+    "Pablo Sanxiao <psanxiao@gnome.org>",
+    "Seán de Búrca <leftmostcat@gmail.com>",
     "Fatih Demir <kabalak@kabalak.net> (Founder)",
     "Ross Golder <ross@golder.org>",
     "Gediminas Paulauskas <menesis@delfi.lt>",
@@ -67,6 +65,7 @@ gtr_about_dialog (GtkAction * action, GtrWindow * window)
     "",
     N_("Contributors"),
     "------------------------",
+    "Juan José Sánchez Penas <jjsanchez@igalia.com>",
     "Christian Kirbach <christian.kirbach@googlemail.com>",
     "Luca Ferreti <elle.uca@libero.it>",
     "Jordi Mallach <jordi@sindominio.net>",
@@ -85,7 +84,7 @@ gtr_about_dialog (GtkAction * action, GtrWindow * window)
 
   static const gchar copyright[] =
     "Copyright © 1999-2008 Free Software Foundation, Inc.\n"
-    "Copyright © 2007-2011 Ignacio Casal Quinteiro";
+    "Copyright © 2007-2012 Ignacio Casal Quinteiro";
 
   static const gchar comments[] =
     N_("Translation file editing suite for localization of applications and libraries.");
