@@ -36,7 +36,7 @@
                                 GtrGdaPrivate))
 
 static void
-gtr_translation_memory_iface_init (GtrTranslationMemoryIface * iface);
+gtr_translation_memory_iface_init (GtrTranslationMemoryInterface * iface);
 
 G_DEFINE_TYPE_WITH_CODE (GtrGda,
                          gtr_gda,
@@ -703,7 +703,7 @@ gtr_gda_set_max_items (GtrTranslationMemory * tm, gint items)
 }
 
 static void
-gtr_translation_memory_iface_init (GtrTranslationMemoryIface * iface)
+gtr_translation_memory_iface_init (GtrTranslationMemoryInterface * iface)
 {
   iface->store = gtr_gda_store;
   iface->store_list = gtr_gda_store_list;

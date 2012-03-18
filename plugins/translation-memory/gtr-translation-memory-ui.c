@@ -45,12 +45,11 @@
                                 GTR_TYPE_TRANSLATION_MEMORY_UI, \
                                 GtrTranslationMemoryUiPrivate))
 
-G_DEFINE_TYPE (GtrTranslationMemoryUi,
-               gtr_translation_memory_ui,
-               GTK_TYPE_SCROLLED_WINDOW)
+G_DEFINE_TYPE (GtrTranslationMemoryUi, gtr_translation_memory_ui, GTK_TYPE_SCROLLED_WINDOW)
 
 struct _GtrTranslationMemoryUiPrivate
 {
+  GtrTranslationMemory *translation_memory;
   GtkWidget *tree_view;
   GtrTab *tab;
 
@@ -61,12 +60,12 @@ struct _GtrTranslationMemoryUiPrivate
 };
 
 enum
-  {
-    SHORTCUT_COLUMN,
-    LEVEL_COLUMN,
-    STRING_COLUMN,
-    N_COLUMNS
-  };
+{
+  SHORTCUT_COLUMN,
+  LEVEL_COLUMN,
+  STRING_COLUMN,
+  N_COLUMNS
+};
 
 static void
 tree_view_size_cb (GtkWidget * widget,
@@ -81,11 +80,8 @@ choose_translation (GtrTranslationMemoryUi *tm_ui, const gchar *translation)
   GtrPo *po;
   GList *current_msg = NULL;
   GtrMsg *msg;
-  GtrWindow *window;
 
-  window = gtr_application_get_active_window (GTR_APP);
-
-  view = gtr_window_get_active_view (window);
+  view = gtr_tab_get_active_view (tm_ui->priv->tab);
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
   po = gtr_tab_get_po (tm_ui->priv->tab);
@@ -103,8 +99,8 @@ choose_translation (GtrTranslationMemoryUi *tm_ui, const gchar *translation)
 }
 
 static void
-on_activate_item_cb (GtkMenuItem * menuitem,
-                     GtrTranslationMemoryUi * tm_ui)
+on_activate_item_cb (GtkMenuItem            *menuitem,
+                     GtrTranslationMemoryUi *tm_ui)
 {
   gint index;
 
@@ -125,9 +121,8 @@ free_match (gpointer data)
 }
 
 static void
-showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrTranslationMemoryUi * tm_ui)
+showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
 {
-  GtrTranslationMemory *tm;
   GtkListStore *model;
   GtkTreeIter iter;
   GtkTreeViewColumn *level_column;
@@ -141,16 +136,15 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrTranslationMemoryUi * tm_ui)
   GtkWidget *tm_item;
   GtkWidget *tm_menu;
   GtkWidget *items_menu;
-  GtrWindow *window;
+  GtkWidget *window;
   GtkUIManager *manager;
   gchar *item_name;
 
-  model =
-    GTK_LIST_STORE (gtk_tree_view_get_model
-                    (GTK_TREE_VIEW (tm_ui->priv->tree_view)));
+  model = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (tm_ui->priv->tree_view)));
 
-  window = gtr_application_get_active_window (GTR_APP);
-  tm_menu = gtr_window_get_tm_menu (window);
+  window = gtk_widget_get_toplevel (GTK_WIDGET (tm_ui));
+  manager = gtr_window_get_ui_manager (GTR_WINDOW (window));
+  tm_menu = gtk_ui_manager_get_widget (manager, "/MainMenu/EditMenu/EditOps_1/EditTranslationMemory");
 
   g_signal_connect (tm_ui->priv->tree_view,
                     "size_allocate",
@@ -163,10 +157,7 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrTranslationMemoryUi * tm_ui)
 
   msgid = gtr_msg_get_msgid (msg);
 
-  tm =
-    GTR_TRANSLATION_MEMORY (gtr_application_get_translation_memory (GTR_APP));
-
-  tm_list = gtr_translation_memory_lookup (tm, msgid);
+  tm_list = gtr_translation_memory_lookup (tm_ui->priv->translation_memory, msgid);
 
   if (tm_list == NULL)
     {
@@ -230,9 +221,8 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrTranslationMemoryUi * tm_ui)
       g_object_set_data (G_OBJECT (tm_item), "option", GINT_TO_POINTER (j));
       gtk_widget_show (tm_item);
 
-      accel_path =
-        g_strdup_printf ("<Gtr-sheet>/Edit/_Translation Memory/%s",
-                         item_name);
+      accel_path = g_strdup_printf ("<Gtr-sheet>/Edit/Translation Memory/%s",
+                                    item_name);
 
       gtk_menu_item_set_accel_path (GTK_MENU_ITEM (tm_item), accel_path);
       gtk_accel_map_add_entry (accel_path, GDK_KEY_0 + (j - 1), GDK_CONTROL_MASK);
@@ -313,7 +303,6 @@ popup_menu_remove_from_memory (GtkMenuItem *menuitem,
   GtkTreeSelection *selection;
   GtkTreeModel *model;
   GtkTreeIter iter;
-  GtrTranslationMemory *tm;
   gint level;
   const gchar *original;
   gchar *translation;
@@ -336,11 +325,8 @@ popup_menu_remove_from_memory (GtkMenuItem *menuitem,
                       STRING_COLUMN, &translation,
                       -1);
 
-  tm =
-    GTR_TRANSLATION_MEMORY (gtr_application_get_translation_memory (GTR_APP));
-
   original = gtr_msg_get_msgid (tm_ui->priv->msg);
-  gtr_translation_memory_remove (tm, original, translation);
+  gtr_translation_memory_remove (tm_ui->priv->translation_memory, original, translation);
 
   g_free (translation);
 
@@ -592,12 +578,15 @@ gtr_translation_memory_ui_class_init (GtrTranslationMemoryUiClass * klass)
 }
 
 GtkWidget *
-gtr_translation_memory_ui_new (GtkWidget * tab)
+gtr_translation_memory_ui_new (GtkWidget *tab,
+                               GtrTranslationMemory *translation_memory)
 {
   GtrTranslationMemoryUi *tm_ui;
   tm_ui = g_object_new (GTR_TYPE_TRANSLATION_MEMORY_UI, NULL);
 
   tm_ui->priv->tab = GTR_TAB (tab);
+  tm_ui->priv->translation_memory = translation_memory;
+
   g_signal_connect (tab,
                     "showed-message", G_CALLBACK (showed_message_cb), tm_ui);
 

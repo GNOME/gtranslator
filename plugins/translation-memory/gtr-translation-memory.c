@@ -1,21 +1,23 @@
 /*
  * Copyright (C) 2008  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include "gtr-translation-memory.h"
+
+G_DEFINE_INTERFACE (GtrTranslationMemory, gtr_translation_memory, G_TYPE_OBJECT)
 
 /**
  * gtr_translation_memory_store:
@@ -121,8 +123,8 @@ gtr_translation_memory_lookup (GtrTranslationMemory * obj,
 
 /* Default implementation */
 static GList *
-gtr_translation_memory_lookup_default (GtrTranslationMemory *
-                                       obj, const gchar * phrase)
+gtr_translation_memory_lookup_default (GtrTranslationMemory *obj,
+                                       const gchar * phrase)
 {
   g_return_val_if_reached (0);
 }
@@ -142,8 +144,8 @@ gtr_translation_memory_set_max_omits (GtrTranslationMemory * obj, gsize omits)
 
 /* Default implementation */
 static void
-  gtr_translation_memory_set_max_omits_default
-  (GtrTranslationMemory * obj, gsize omits)
+gtr_translation_memory_set_max_omits_default (GtrTranslationMemory * obj,
+                                              gsize omits)
 {
   g_return_if_reached ();
 }
@@ -184,53 +186,26 @@ gtr_translation_memory_set_max_items (GtrTranslationMemory * obj, gint items)
 
 /* Default implementation */
 static void
-  gtr_translation_memory_set_max_items_default
-  (GtrTranslationMemory * obj, gint items)
+gtr_translation_memory_set_max_items_default (GtrTranslationMemory * obj, gint items)
 {
   g_return_if_reached ();
 }
 
 static void
-gtr_translation_memory_base_init (GtrTranslationMemoryIface * klass)
+gtr_translation_memory_default_init (GtrTranslationMemoryInterface *iface)
 {
   static gboolean initialized = FALSE;
 
-  klass->store = gtr_translation_memory_store_default;
-  klass->store_list = gtr_translation_memory_store_list_default;
-  klass->remove = gtr_translation_memory_remove_default;
-  klass->lookup = gtr_translation_memory_lookup_default;
-  klass->set_max_omits = gtr_translation_memory_set_max_omits_default;
-  klass->set_max_delta = gtr_translation_memory_set_max_delta_default;
-  klass->set_max_items = gtr_translation_memory_set_max_items_default;
+  iface->store = gtr_translation_memory_store_default;
+  iface->store_list = gtr_translation_memory_store_list_default;
+  iface->remove = gtr_translation_memory_remove_default;
+  iface->lookup = gtr_translation_memory_lookup_default;
+  iface->set_max_omits = gtr_translation_memory_set_max_omits_default;
+  iface->set_max_delta = gtr_translation_memory_set_max_delta_default;
+  iface->set_max_items = gtr_translation_memory_set_max_items_default;
 
   if (!initialized)
-    {
-
-      initialized = TRUE;
-    }
+    initialized = TRUE;
 }
 
-GType
-gtr_translation_memory_get_type (void)
-{
-  static GType type = 0;
-  if (!type)
-    {
-      static const GTypeInfo info = {
-        sizeof (GtrTranslationMemoryIface),
-        (GBaseInitFunc) gtr_translation_memory_base_init,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        0,
-        0,
-        NULL
-      };
-      type =
-        g_type_register_static (G_TYPE_INTERFACE,
-                                "GtrTranslationMemory", &info, 0);
-      g_type_interface_add_prerequisite (type, G_TYPE_OBJECT);
-    }
-  return type;
-}
+

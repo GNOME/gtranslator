@@ -35,7 +35,6 @@
 #include "gtr-profile-dialog.h"
 #include "gtr-po.h"
 #include "gtr-utils.h"
-#include "../translation-memory/gtr-translation-memory.h"
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -58,7 +57,6 @@ G_DEFINE_TYPE (GtrPreferencesDialog, gtr_preferences_dialog, GTK_TYPE_DIALOG)
 struct _GtrPreferencesDialogPrivate
 {
   GSettings *ui_settings;
-  GSettings *tm_settings;
   GSettings *editor_settings;
   GSettings *files_settings;
 
@@ -90,14 +88,6 @@ struct _GtrPreferencesDialogPrivate
   GtkWidget *add_button;
   GtkWidget *edit_button;
   GtkWidget *delete_button;
-
-  /*Translation Memory */
-  GtkWidget *directory_entry;
-  GtkWidget *search_button;
-  GtkWidget *add_database_button;
-  GtkWidget *add_database_progressbar;
-  GtkWidget *tm_lang_entry;
-  GtkWidget *use_lang_profile_in_tm;
 
   /*Plugins */
   GtkWidget *plugins_box;
@@ -593,229 +583,6 @@ setup_profile_pages (GtrPreferencesDialog *dlg)
                     "clicked", G_CALLBACK (edit_button_clicked), dlg);
 }
 
-/***************Translation Memory pages****************/
-static void
-response_filechooser_cb (GtkDialog * dialog,
-                         gint response_id, GtrPreferencesDialog *dlg)
-{
-  if (response_id == GTK_RESPONSE_YES)
-    {
-      gchar *filename;
-
-      filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-      gtk_entry_set_text (GTK_ENTRY (dlg->priv->directory_entry),
-                          filename);
-      g_settings_set_string (dlg->priv->tm_settings,
-                             GTR_SETTINGS_PO_DIRECTORY,
-                             filename);
-      g_free (filename);
-    }
-
-  gtk_widget_destroy (GTK_WIDGET (dialog));
-}
-
-static void
-on_search_button_clicked (GtkButton * button, GtrPreferencesDialog *dlg)
-{
-  GtkWidget *filechooser;
-
-  filechooser = gtk_file_chooser_dialog_new ("Select PO directory",
-                                             GTK_WINDOW (dlg),
-                                             GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-                                             GTK_STOCK_CANCEL,
-                                             GTK_RESPONSE_CANCEL,
-                                             GTK_STOCK_OK,
-                                             GTK_RESPONSE_YES, NULL);
-
-  g_signal_connect (GTK_DIALOG (filechooser), "response",
-                    G_CALLBACK (response_filechooser_cb), dlg);
-
-  gtk_dialog_run (GTK_DIALOG (filechooser));
-}
-
-typedef struct _IdleData
-{
-  GSList *list;
-  GtkProgressBar *progress;
-  GtrTranslationMemory *tm;
-  GtkWindow *parent;
-} IdleData;
-
-static gboolean
-add_to_database (gpointer data_pointer)
-{
-  IdleData *data = (IdleData *) data_pointer;
-  static GSList *l = NULL;
-  gdouble percentage;
-
-  if (l == NULL)
-    l = data->list;
-  else
-    l = g_slist_next (l);
-
-  if (l)
-    {
-      GList *msg_list = NULL;
-      GFile *location;
-      GError *error = NULL;
-      GtrPo *po;
-
-      po = gtr_po_new ();
-      location = (GFile *) l->data;
-
-      gtr_po_parse (po, location, &error);
-      if (error)
-        return TRUE;
-
-      msg_list = gtr_po_get_messages (po);
-
-      gtr_translation_memory_store_list (data->tm, msg_list);
-
-      g_object_unref (po);
-    }
-  else
-    {
-      GtkWidget *dialog;
-
-      gtk_progress_bar_set_fraction (data->progress, 1.0);
-
-      dialog = gtk_message_dialog_new (data->parent,
-                                       GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_INFO,
-                                       GTK_BUTTONS_CLOSE, NULL);
-
-      gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
-                                     _
-                                     ("<span weight=\"bold\" size=\"large\">Strings added to database</span>"));
-
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-
-      return FALSE;
-    }
-
-  percentage =
-    (gdouble) g_slist_position (data->list,
-                                l) / (gdouble) g_slist_length (data->list);
-
-  /*
-   * Set the progress only if the values are reasonable.
-   */
-  if (percentage > 0.0 || percentage < 1.0)
-    {
-      /*
-       * Set the progressbar status.
-       */
-      gtk_progress_bar_set_fraction (data->progress, percentage);
-    }
-
-  return TRUE;
-}
-
-static void
-destroy_idle_data (gpointer data)
-{
-  IdleData *d = (IdleData *) data;
-
-  gtk_widget_hide (GTK_WIDGET (d->progress));
-
-  g_slist_free_full (d->list, g_object_unref);
-
-  g_free (d);
-}
-
-static void
-on_add_database_button_clicked (GtkButton * button, GtrPreferencesDialog * dlg)
-{
-  GFile *dir;
-  gchar *dir_name;
-  IdleData *data;
-
-  data = g_new0 (IdleData, 1);
-  data->list = NULL;
-
-  dir_name = g_settings_get_string (dlg->priv->tm_settings,
-                                    GTR_SETTINGS_PO_DIRECTORY);
-
-  dir = g_file_new_for_path (dir_name);
-  g_free (dir_name);
-
-  if (g_settings_get_boolean (dlg->priv->tm_settings,
-                              GTR_SETTINGS_RESTRICT_TO_FILENAME))
-    {
-      gchar *restriction;
-
-      restriction = g_settings_get_string (dlg->priv->tm_settings,
-                                           GTR_SETTINGS_FILENAME_RESTRICTION);
-      gtr_utils_scan_dir (dir, &data->list, restriction);
-      g_free (restriction);
-    }
-  else
-    gtr_utils_scan_dir (dir, &data->list, NULL);
-
-  data->tm =
-    GTR_TRANSLATION_MEMORY (gtr_application_get_translation_memory (GTR_APP));
-  data->progress = GTK_PROGRESS_BAR (dlg->priv->add_database_progressbar);
-  data->parent = GTK_WINDOW (dlg);
-
-  gtk_widget_show (dlg->priv->add_database_progressbar);
-  g_idle_add_full (G_PRIORITY_HIGH_IDLE + 30,
-                   (GSourceFunc) add_to_database,
-                   data, (GDestroyNotify) destroy_idle_data);
-
-  g_object_unref (dir);
-}
-
-static void
-setup_tm_pages (GtrPreferencesDialog * dlg)
-{
-  GtrProfileManager *prof_manager;
-  GtrProfile *profile;
-  const gchar *language_code;
-  gchar *filename = NULL;
-
-  prof_manager = gtr_profile_manager_get_default ();
-  profile = gtr_profile_manager_get_active_profile (prof_manager);
-
-  if (profile != NULL)
-    {
-      language_code = gtr_profile_get_language_code (profile);
-      filename = g_strconcat (language_code, ".po", NULL);
-
-      gtk_entry_set_text (GTK_ENTRY (dlg->priv->tm_lang_entry), filename);
-    }
-  g_object_unref (prof_manager);
-
-  if (filename != NULL)
-    g_settings_set_string (dlg->priv->tm_settings,
-                           GTR_SETTINGS_FILENAME_RESTRICTION,
-                           filename);
-
-  g_free (filename);
-
-  g_settings_bind (dlg->priv->tm_settings,
-                   GTR_SETTINGS_RESTRICT_TO_FILENAME,
-                   dlg->priv->use_lang_profile_in_tm,
-                   "active",
-                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
-  g_settings_bind (dlg->priv->tm_settings,
-                   GTR_SETTINGS_PO_DIRECTORY,
-                   dlg->priv->directory_entry,
-                   "text",
-                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
-  g_settings_bind (dlg->priv->tm_settings,
-                   GTR_SETTINGS_FILENAME_RESTRICTION,
-                   dlg->priv->tm_lang_entry,
-                   "text",
-                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
-
-  g_signal_connect (GTK_BUTTON (dlg->priv->search_button), "clicked",
-                    G_CALLBACK (on_search_button_clicked), dlg);
-
-  g_signal_connect (GTK_BUTTON (dlg->priv->add_database_button), "clicked",
-                    G_CALLBACK (on_add_database_button_clicked), dlg);
-}
-
 /***************Plugins pages****************/
 static void
 setup_plugin_pages (GtrPreferencesDialog * dlg)
@@ -868,7 +635,6 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
 
   dlg->priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
   dlg->priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
-  dlg->priv->tm_settings = g_settings_new ("org.gnome.gtranslator.preferences.tm");
   dlg->priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
 
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
@@ -931,16 +697,6 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
                                   &dlg->priv->add_button, "edit_button",
                                   &dlg->priv->edit_button, "delete_button",
                                   &dlg->priv->delete_button,
-                                  "directory_entry",
-                                  &dlg->priv->directory_entry,
-                                  "search_button", &dlg->priv->search_button,
-                                  "add_database_button",
-                                  &dlg->priv->add_database_button,
-                                  "add_database_progressbar",
-                                  &dlg->priv->add_database_progressbar,
-                                  "use_lang_profile_in_tm",
-                                  &dlg->priv->use_lang_profile_in_tm,
-                                  "tm_lang_entry", &dlg->priv->tm_lang_entry,
                                   "plugins_box", &dlg->priv->plugins_box,
                                   NULL);
   g_free (path);
@@ -960,7 +716,6 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   setup_files_pages (dlg);
   setup_editor_pages (dlg);
   setup_profile_pages (dlg);
-  setup_tm_pages (dlg);
   setup_plugin_pages (dlg);
 }
 
@@ -973,12 +728,6 @@ gtr_preferences_dialog_dispose (GObject * object)
     {
       g_object_unref (dlg->priv->ui_settings);
       dlg->priv->ui_settings = NULL;
-    }
-
-  if (dlg->priv->tm_settings != NULL)
-    {
-      g_object_unref (dlg->priv->tm_settings);
-      dlg->priv->tm_settings = NULL;
     }
 
   if (dlg->priv->editor_settings != NULL)

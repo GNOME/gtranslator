@@ -3,8 +3,7 @@
 # --------------------------------------------------------
 
 SUBDIRS = toolbareditor \
-	  dialogs \
-	  translation-memory
+	  dialogs
 
 noinst_LTLIBRARIES = libgtranslator.la
 
@@ -14,7 +13,6 @@ INCLUDES = \
 	-I$(top_srcdir)						\
 	-I$(top_srcdir)/src/dialogs				\
 	-I$(top_srcdir)/src/toolbareditor			\
-	-I$(top_srcdir)/src/translation-memory			\
 	$(GTRANSLATOR_CFLAGS)					\
 	$(GTKSPELL_CFLAGS)					\
 	$(WARN_CFLAGS)						\
@@ -141,7 +139,6 @@ libgtranslator_la_SOURCES = \
 libgtranslator_la_LIBADD = \
 	dialogs/libdialogs.la \
 	toolbareditor/libtoolbareditor.la \
-	translation-memory/libtranslationmemory.la \
 	$(GTRANSLATOR_LIBS)
 
 gtr-enum-types.h: gtr-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)

@@ -89,8 +89,6 @@ void              gtr_application_register_icon          (GtrApplication *app,
                                                           const gchar    *icon,
                                                           const gchar    *stock_id);
 
-GObject          *gtr_application_get_translation_memory (GtrApplication *app);
-
 /* Non exported funcs */
 GObject         *_gtr_application_get_toolbars_model     (GtrApplication *application);
 

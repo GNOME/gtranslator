@@ -109,47 +109,6 @@
       </_description>
     </key>
   </schema>
-  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gtranslator.preferences.tm" path="/org/gnome/gtranslator/preferences/tm/">
-    <key name="po-directory" type="s">
-      <default>''</default>
-      <_summary>PO directory</_summary>
-      <_description>
-        Directory containing PO files to add to the translation memory.
-      </_description>
-    </key>
-    <key name="restrict-to-filename" type="b">
-      <default>false</default>
-      <_summary>Restrict search by filename</_summary>
-      <_description>
-        If true, only include files with a specified filename when searching 
-        the translation memory.
-      </_description>
-    </key>
-    <key name="filename-restriction" type="s">
-      <default>''</default>
-      <_summary>Filename to restrict search to</_summary>
-      <_description>
-        Filename to which searching of the translation memory should be 
-        restricted.
-      </_description>
-    </key>
-    <key name="max-missing-words" type="i">
-      <default>2</default>
-      <_summary>Maximum number of missing words</_summary>
-      <_description>
-        Maximum number of words that can be missing from a message displayed as 
-        a match by the translation memory.
-      </_description>
-    </key>
-    <key name="max-length-diff" type="i">
-      <default>2</default>
-      <_summary>Maximum difference in message length</_summary>
-      <_description>
-        Maximum difference in length between messages displayed as matches by 
-        the translation memory.
-      </_description>
-    </key>
-  </schema>
   <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gtranslator.preferences.ui" path="/org/gnome/gtranslator/preferences/ui/">
     <key name="panel-switcher-style" enum="org.gnome.gtranslator.SwitcherStyle">
       <default>'both'</default>

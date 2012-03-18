@@ -94,8 +94,6 @@ struct _GtrWindowPrivate
   GtkRecentManager *recent_manager;
   GtkWidget *recent_menu;
 
-  GtkWidget *tm_menu;
-
   gint width;
   gint height;
   GdkWindowState window_state;
@@ -120,6 +118,7 @@ static const GtkActionEntry always_sensitive_entries[] = {
   {"View", NULL, N_("_View")},
   {"Search", NULL, N_("_Search")},
   {"Go", NULL, N_("_Go")},
+  {"Tools", NULL, N_("_Tools")},
   {"Documents", NULL, N_("_Documents")},
   {"Help", NULL, N_("_Help")},
 
@@ -1436,10 +1435,6 @@ gtr_window_draw (GtrWindow * window)
                                       "/MainMenu/FileMenu/FileRecentFilesMenu");
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (widget), priv->recent_menu);
 
-  /* Translation Memory */
-  priv->tm_menu = gtk_ui_manager_get_widget (priv->ui_manager,
-                                             "/MainMenu/EditMenu/EditTranslationMemory");
-
   /* Toolbar */
   priv->toolbar = GTK_WIDGET
     (g_object_new (EGG_TYPE_EDITABLE_TOOLBAR,
@@ -1992,16 +1987,4 @@ _gtr_window_close_tab (GtrWindow * window, GtrTab * tab)
     }
 
   set_sensitive_according_to_window (window);
-}
-
-/**
- * gtr_window_get_tm_menu:
- * @window: a #GtrWindow
- *
- * Returns: (transfer none): get the tm_menu GtkWidget instance.
- */
-GtkWidget *
-gtr_window_get_tm_menu (GtrWindow * window)
-{
-  return window->priv->tm_menu;
 }

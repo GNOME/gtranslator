@@ -24,7 +24,6 @@
 #include <config.h>
 #endif
 
-#include "../translation-memory/gtr-translation-memory.h"
 #include "gtr-application.h"
 #include "gtr-assistant.h"
 #include "gtr-profile.h"
@@ -59,109 +58,10 @@ struct _GtrAssistantPrivate
   /* Profiles Page 2 */
   GtkWidget *languages_fetcher;
 
-  /* Database Page */
-  GtkWidget *path;
-  GtkWidget *search_button;
-  GtkWidget *po_name;
-
   /* Confirmation Page */
   GtkWidget *finish_box;
   GtkWidget *confirm_label;
-  GtkWidget *add_db_progressbar;
 };
-
-typedef struct _IdleData
-{
-  GSList *list;
-  GtkProgressBar *progress;
-  GtrTranslationMemory *tm;
-  GtkWindow *parent;
-} IdleData;
-
-static gboolean
-add_to_database (gpointer data_pointer)
-{
-  IdleData *data = (IdleData *) data_pointer;
-  static GSList *l = NULL;
-  gdouble percentage;
-
-  if (l == NULL)
-    l = data->list;
-  else
-    l = g_slist_next (l);
-
-  if (l)
-    {
-      GList *msg_list = NULL;
-      GFile *location;
-      GError *error = NULL;
-      GtrPo *po;
-
-      po = gtr_po_new ();
-      location = (GFile *) l->data;
-
-      gtr_po_parse (po, location, &error);
-      if (error)
-        return TRUE;
-
-      msg_list = gtr_po_get_messages (po);
-
-      gtr_translation_memory_store_list (data->tm, msg_list);
-
-      g_object_unref (po);
-    }
-  else
-    {
-      GtkWidget *dialog;
-
-      gtk_progress_bar_set_fraction (data->progress, 1.0);
-
-      dialog = gtk_message_dialog_new (data->parent,
-                                       GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_INFO,
-                                       GTK_BUTTONS_CLOSE, NULL);
-
-      gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
-                                     _
-                                     ("<span weight=\"bold\" size=\"large\">Strings added to database</span>"));
-
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-
-      return FALSE;
-    }
-
-  percentage =
-    (gdouble) g_slist_position (data->list,
-                                l) / (gdouble) g_slist_length (data->list);
-
-  /*
-   * Set the progress only if the values are reasonable.
-   */
-  if (percentage > 0.0 || percentage < 1.0)
-    {
-      /*
-       * Set the progressbar status.
-       */
-      gtk_progress_bar_set_fraction (data->progress, percentage);
-    }
-
-  return TRUE;
-}
-
-static void
-destroy_idle_data (gpointer data)
-{
-  IdleData *d = (IdleData *) data;
-
-  gtk_widget_hide (GTK_WIDGET (d->progress));
-
-  g_slist_free_full (d->list, g_object_unref);
-
-  gtk_widget_destroy (GTK_WIDGET (d->parent));
-
-  g_free (d);
-}
 
 static void
 on_assistant_close (GtkAssistant * assistant)
@@ -172,13 +72,8 @@ on_assistant_close (GtkAssistant * assistant)
 static void
 on_assistant_apply (GtkAssistant * assistant)
 {
-  GFile *dir;
-  const gchar *dir_name;
-  IdleData *data;
   GtrAssistant *as = GTR_ASSISTANT (assistant);
-  const gchar *po_name;
   GtrProfile *profile;
-  gulong close_signal_id;
   GtrProfileManager *prof_manager;
 
   profile = gtr_profile_new ();
@@ -219,37 +114,8 @@ on_assistant_apply (GtkAssistant * assistant)
 
   g_object_unref (prof_manager);
 
-  close_signal_id = g_signal_connect (as,
-                                      "close",
-                                      G_CALLBACK (on_assistant_close), NULL);
-
-  dir_name = gtk_entry_get_text (GTK_ENTRY (as->priv->path));
-  if (strcmp (dir_name, "") == 0)
-    return;
-
-  g_signal_handler_block (as, close_signal_id);
-
-  data = g_new0 (IdleData, 1);
-  data->list = NULL;
-
-  dir = g_file_new_for_path (dir_name);
-
-  po_name = gtk_entry_get_text (GTK_ENTRY (as->priv->po_name));
-
-  gtr_utils_scan_dir (dir, &data->list, po_name);
-
-  data->tm =
-    GTR_TRANSLATION_MEMORY (gtr_application_get_translation_memory (GTR_APP));
-  data->progress = GTK_PROGRESS_BAR (as->priv->add_db_progressbar);
-  data->parent = GTK_WINDOW (as);
-
-  gtk_widget_show (as->priv->add_db_progressbar);
-
-  g_idle_add_full (G_PRIORITY_HIGH_IDLE + 30,
-                   (GSourceFunc) add_to_database,
-                   data, (GDestroyNotify) destroy_idle_data);
-
-  g_object_unref (dir);
+  g_signal_connect (as, "close",
+                    G_CALLBACK (on_assistant_close), NULL);
 }
 
 static void
@@ -257,12 +123,9 @@ on_assistant_prepare (GtkAssistant * assistant, GtkWidget * page)
 {
   GtrAssistant *as = GTR_ASSISTANT (assistant);
   gchar *string;
-  const gchar *database_path;
 
   if (page != as->priv->finish_box)
     return;
-
-  database_path = gtk_entry_get_text (GTK_ENTRY (as->priv->path));
 
   string = g_strdup_printf (_("Profile name: %s\n"
                               "Translator name: %s\n"
@@ -272,8 +135,7 @@ on_assistant_prepare (GtkAssistant * assistant, GtkWidget * page)
                               "Language code: %s\n"
                               "Character set: %s\n"
                               "Transfer encoding: %s\n"
-                              "Plural form: %s\n"
-                              "Database path: %s"),
+                              "Plural form: %s\n"),
                             gtk_entry_get_text (GTK_ENTRY
                                                 (as->priv->profile_name)),
                             gtk_entry_get_text (GTK_ENTRY (as->priv->name)),
@@ -283,9 +145,7 @@ on_assistant_prepare (GtkAssistant * assistant, GtkWidget * page)
                             gtr_languages_fetcher_get_language_code (GTR_LANGUAGES_FETCHER (as->priv->languages_fetcher)),
                             gtr_languages_fetcher_get_charset (GTR_LANGUAGES_FETCHER (as->priv->languages_fetcher)),
                             gtr_languages_fetcher_get_encoding (GTR_LANGUAGES_FETCHER (as->priv->languages_fetcher)),
-                            gtr_languages_fetcher_get_plural_form (GTR_LANGUAGES_FETCHER (as->priv->languages_fetcher)),
-                            (strcmp (database_path, "") !=
-                             0) ? database_path : _("None"));
+                            gtr_languages_fetcher_get_plural_form (GTR_LANGUAGES_FETCHER (as->priv->languages_fetcher)));
 
   gtk_label_set_text (GTK_LABEL (as->priv->confirm_label), string);
   g_free (string);
@@ -306,10 +166,7 @@ create_start_page (GtrAssistant * as)
   gtk_widget_show (box);
   gtk_container_set_border_width (GTK_CONTAINER (box), 12);
 
-  label =
-    gtk_label_new (_
-                   ("This assistant will help you to create the main profile\n"
-                    "and generate your translation memory database."));
+  label = gtk_label_new (_("This assistant will help you to create the main profile."));
   gtk_widget_show (label);
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
@@ -532,96 +389,6 @@ create_profiles_page2 (GtrAssistant * as)
 }
 
 static void
-on_dir_find_button_clicked (GtkButton * button, GtrAssistant * as)
-{
-  GtkWidget *dialog;
-  gint res;
-
-  dialog = gtk_file_chooser_dialog_new (_("Checkout directory"),
-                                        GTK_WINDOW (as),
-                                        GTK_FILE_CHOOSER_ACTION_CREATE_FOLDER,
-                                        GTK_STOCK_CANCEL,
-                                        GTK_RESPONSE_CANCEL,
-                                        GTK_STOCK_OK, GTK_RESPONSE_OK, NULL);
-  res = gtk_dialog_run (GTK_DIALOG (dialog));
-  switch (res)
-    {
-    case GTK_RESPONSE_OK:
-      {
-        gchar *filename;
-
-        filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-        gtk_entry_set_text (GTK_ENTRY (as->priv->path), filename);
-        g_free (filename);
-        break;
-      }
-    default:
-      break;
-    }
-  gtk_widget_destroy (dialog);
-}
-
-static void
-create_database_page (GtrAssistant * as)
-{
-  GtkWidget *box, *hbox;
-  GtkWidget *label;
-  GtrAssistantPrivate *priv = as->priv;
-
-  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-  gtk_widget_show (box);
-  gtk_container_set_border_width (GTK_CONTAINER (box), 5);
-
-  label = gtk_label_new (NULL);
-  gtk_label_set_markup (GTK_LABEL (label),
-                        _
-                        ("<b>Select the path to generate the database:</b>"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_widget_show (label);
-  gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
-
-  /* hbox */
-  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_show (hbox);
-  gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
-
-  /* Path entry */
-  priv->path = gtk_entry_new ();
-  gtk_widget_show (priv->path);
-  gtk_box_pack_start (GTK_BOX (hbox), priv->path, TRUE, TRUE, 0);
-
-  /* Search button */
-  priv->search_button = gtk_button_new_from_stock (GTK_STOCK_FIND);
-  gtk_widget_show (priv->search_button);
-  gtk_box_pack_start (GTK_BOX (hbox), priv->search_button, FALSE, FALSE, 0);
-  g_signal_connect (priv->search_button, "clicked",
-                    G_CALLBACK (on_dir_find_button_clicked), as);
-
-  /* Po name label */
-  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_show (hbox);
-  gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
-
-  label = gtk_label_new (NULL);
-  gtk_label_set_markup (GTK_LABEL (label),
-                        _("<b>Look for a specific PO filename:</b>"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_widget_show (label);
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-
-  /* Po name entry */
-  priv->po_name = gtk_entry_new ();
-  gtk_widget_show (priv->po_name);
-  gtk_box_pack_start (GTK_BOX (hbox), priv->po_name, TRUE, TRUE, 0);
-  gtk_widget_set_tooltip_text (priv->po_name, _("E.g.: gl.po"));
-
-  gtk_assistant_append_page (GTK_ASSISTANT (as), box);
-  gtk_assistant_set_page_title (GTK_ASSISTANT (as), box,
-                                _("Generate Database"));
-  gtk_assistant_set_page_complete (GTK_ASSISTANT (as), box, TRUE);
-}
-
-static void
 create_finish_page (GtrAssistant * as)
 {
   as->priv->finish_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -631,11 +398,6 @@ create_finish_page (GtrAssistant * as)
   gtk_widget_show (as->priv->confirm_label);
   gtk_box_pack_start (GTK_BOX (as->priv->finish_box), as->priv->confirm_label,
                       TRUE, TRUE, 0);
-
-  as->priv->add_db_progressbar = gtk_progress_bar_new ();
-  gtk_widget_show (as->priv->add_db_progressbar);
-  gtk_box_pack_start (GTK_BOX (as->priv->finish_box),
-                      as->priv->add_db_progressbar, FALSE, FALSE, 0);
 
   gtk_assistant_append_page (GTK_ASSISTANT (as), as->priv->finish_box);
   gtk_assistant_set_page_type (GTK_ASSISTANT (as), as->priv->finish_box,
@@ -658,7 +420,6 @@ gtr_assistant_init (GtrAssistant * as)
   create_start_page (as);
   create_profiles_page1 (as);
   create_profiles_page2 (as);
-  create_database_page (as);
   create_finish_page (as);
 }
 

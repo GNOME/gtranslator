@@ -3,7 +3,8 @@ SUBDIRS = 					\
 	charmap					\
 	codeview				\
 	fullscreen				\
-	insert-params
+	insert-params				\
+	translation-memory
 
 if USE_LIBJSON_GLIB
 SUBDIRS += open-tran

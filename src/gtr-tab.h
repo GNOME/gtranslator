@@ -103,8 +103,6 @@ gint gtr_tab_get_active_trans_tab (GtrTab * tab);
 
 GtrContextPanel *gtr_tab_get_context_panel (GtrTab * tab);
 
-GtkWidget *gtr_tab_get_translation_memory_ui (GtrTab * tab);
-
 GtrView *gtr_tab_get_active_view (GtrTab * tab);
 
 GList *gtr_tab_get_all_views (GtrTab * tab,

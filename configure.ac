@@ -65,8 +65,13 @@ AC_PATH_PROG([GLIB_MKENUMS], [glib-mkenums])
 dnl ================================================================
 dnl GSettings stuff
 dnl ================================================================
-
 GLIB_GSETTINGS
+
+dnl ================================================================
+dnl GResource stuff
+dnl ================================================================
+GLIB_COMPILE_RESOURCES=`$PKG_CONFIG --variable glib_compile_resources gio-2.0`
+AC_SUBST(GLIB_COMPILE_RESOURCES)
 
 dnl ==========================================================================
 dnl
@@ -76,7 +81,7 @@ dnl
 dnl ==========================================================================
 
 GTHREAD_REQUIRED=2.13.0
-GTK_REQUIRED=3.0.3
+GTK_REQUIRED=3.3.15
 GLIB_REQUIRED=2.28.0
 LIBXML_REQUIRED=2.4.12
 SOURCEVIEW_REQUIRED=3.0.0
@@ -289,11 +294,12 @@ plugins/open-tran/Makefile
 plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in
 plugins/codeview/Makefile
 plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in
+plugins/translation-memory/Makefile
+plugins/translation-memory/gda/Makefile
+plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in
 src/Makefile
 src/dialogs/Makefile
 src/toolbareditor/Makefile
-src/translation-memory/Makefile
-src/translation-memory/gda/Makefile
 ])
 AC_OUTPUT
 

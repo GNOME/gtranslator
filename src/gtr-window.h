@@ -71,48 +71,36 @@ struct _GtrWindowClass
 /*
  * Public methods
  */
-GType
-gtr_window_get_type (void)
-  G_GNUC_CONST;
+GType gtr_window_get_type (void) G_GNUC_CONST;
 
-     GType gtr_window_register_type (GTypeModule * module);
+GType gtr_window_register_type (GTypeModule * module);
 
-     GtrTab *gtr_window_create_tab (GtrWindow * window, GtrPo * po);
+GtrTab *gtr_window_create_tab (GtrWindow * window, GtrPo * po);
 
-     GtrTab *gtr_window_get_active_tab (GtrWindow * window);
+GtrTab *gtr_window_get_active_tab (GtrWindow * window);
 
-     GList *gtr_window_get_all_tabs (GtrWindow * window);
+GList *gtr_window_get_all_tabs (GtrWindow * window);
 
-     GtrNotebook *gtr_window_get_notebook (GtrWindow * window);
+GtrNotebook *gtr_window_get_notebook (GtrWindow * window);
+
 GtrHeader * gtr_window_get_header_from_active_tab (GtrWindow * window);
 
-     GtkWidget *
-     gtr_window_get_statusbar (GtrWindow * window);
+GtkWidget *gtr_window_get_statusbar (GtrWindow * window);
 
-     GtkUIManager *
-     gtr_window_get_ui_manager (GtrWindow * window);
+GtkUIManager *gtr_window_get_ui_manager (GtrWindow * window);
 
-     GtrView *
-     gtr_window_get_active_view (GtrWindow * window);
+GtrView *gtr_window_get_active_view (GtrWindow * window);
 
-     GList *
-     gtr_window_get_all_views (GtrWindow * window,
+GList *gtr_window_get_all_views (GtrWindow * window,
                                gboolean original, gboolean translated);
 
-     GtkWidget *
-     gtr_window_get_tab_from_location (GtrWindow * window, GFile * location);
+GtkWidget *gtr_window_get_tab_from_location (GtrWindow * window, GFile * location);
 
-     void
-     gtr_window_set_active_tab (GtrWindow * window, GtkWidget * tab);
+void gtr_window_set_active_tab (GtrWindow * window, GtkWidget * tab);
 
-     void
-     _gtr_window_close_tab (GtrWindow * window, GtrTab * tab);
+void _gtr_window_close_tab (GtrWindow * window, GtrTab * tab);
 
-     GtkWidget *
-     gtr_window_get_tm_menu (GtrWindow * window);
-
-     void
-     _gtr_recent_add (GtrWindow * window,
+void _gtr_recent_add (GtrWindow * window,
                       GFile * location, gchar * project_id);
 
 /* FIXME: this is wrong. we should have some signal in the po and set this and

@@ -64,13 +64,11 @@ struct _GtrTranslationMemoryUiClass
 /*
  * Public methods
  */
-GType
-gtr_translation_memory_ui_get_type (void)
-  G_GNUC_CONST;
+GType gtr_translation_memory_ui_get_type (void) G_GNUC_CONST;
 
-     GType gtr_translation_memory_ui_register_type (GTypeModule * module);
+GType gtr_translation_memory_ui_register_type (GTypeModule * module);
 
-     GtkWidget *gtr_translation_memory_ui_new (GtkWidget * tab);
+GtkWidget *gtr_translation_memory_ui_new (GtkWidget *tab, GtrTranslationMemory *translation_memory);
 
 G_END_DECLS
 #endif /* __TRANSLATION_MEMORY_UI_H__ */

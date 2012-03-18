@@ -42,8 +42,6 @@
 #include "gtr-po.h"
 #include "gtr-settings.h"
 #include "gtr-view.h"
-#include "gtr-translation-memory.h"
-#include "gtr-translation-memory-ui.h"
 #include "gtr-dirs.h"
 #include "gtr-plugins-engine.h"
 #include "gtr-debug.h"
@@ -85,7 +83,6 @@ struct _GtrTabPrivate
 
   GtkWidget *message_table;
   GtkWidget *context;
-  GtkWidget *translation_memory;
 
   /*Info bar */
   GtkWidget *infobar;
@@ -302,20 +299,8 @@ remove_autosave_timeout (GtrTab * tab)
 static void
 gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
 {
-  GtrTranslationMemory *tm;
   gchar *message_error;
   GtkWidget *infobar;
-  GtrHeader *header;
-
-  header = gtr_po_get_header (tab->priv->po);
-
-  if (gtr_header_get_profile (header) != NULL)
-    {
-      tm = GTR_TRANSLATION_MEMORY (gtr_application_get_translation_memory (GTR_APP));
-
-      if (gtr_msg_is_translated (msg) && !gtr_msg_is_fuzzy (msg))
-        gtr_translation_memory_store (tm, msg);
-    }
 
   /*
    * Checking message
@@ -816,16 +801,6 @@ gtr_tab_draw (GtrTab *tab)
                       GTR_TAB_PLACEMENT_BOTTOM,
                       TRUE);
 
-  /* TM */
-  priv->translation_memory = gtr_translation_memory_ui_new (GTK_WIDGET (tab));
-  gtk_widget_show (priv->translation_memory);
-  add_widget_to_dock (tab, priv->translation_memory,
-                      "GtrTranslationMemoryUI",
-                      _("Translation Memory"),
-                      NULL,
-                      GTR_TAB_PLACEMENT_RIGHT,
-                      FALSE);
-
   /* Context */
   priv->context = gtr_context_panel_new (GTK_WIDGET (tab));
   gtk_widget_show (priv->context);
@@ -1189,20 +1164,6 @@ GtrContextPanel *
 gtr_tab_get_context_panel (GtrTab * tab)
 {
   return GTR_CONTEXT_PANEL (tab->priv->context);
-}
-
-/**
- * gtr_tab_get_translation_memory_ui:
- * @tab: a #GtrTab
- *
- * Returns: (transfer none): the #GtrTranslationMemoryUi panel.
- */
-GtkWidget *
-gtr_tab_get_translation_memory_ui (GtrTab * tab)
-{
-  g_return_val_if_fail (GTR_IS_TAB (tab), NULL);
-
-  return tab->priv->translation_memory;
 }
 
 /**

@@ -64,13 +64,9 @@ struct _GtrAssistantClass
 /*
  * Public methods
  */
-GType
-gtr_assistant_get_type (void)
-  G_GNUC_CONST;
+GType gtr_assistant_get_type (void) G_GNUC_CONST;
 
-     GType gtr_assistant_register_type (GTypeModule * module);
-
-     void gtr_show_assistant (GtrWindow * window);
+void gtr_show_assistant (GtrWindow * window);
 
 G_END_DECLS
 #endif /* __ASSISTANT_H__ */

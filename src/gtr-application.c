@@ -33,8 +33,6 @@
 #include "gtr-utils.h"
 #include "gtr-window.h"
 #include "egg-toolbars-model.h"
-#include "./translation-memory/gtr-translation-memory.h"
-#include "./translation-memory/gda/gtr-gda.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -60,7 +58,6 @@ G_DEFINE_TYPE (GtrApplication, gtr_application, GTK_TYPE_APPLICATION)
 struct _GtrApplicationPrivate
 {
   GSettings *settings;
-  GSettings *tm_settings;
   GSettings *window_settings;
 
   GtrWindow *active_window;
@@ -71,8 +68,6 @@ struct _GtrApplicationPrivate
   GtkIconFactory *icon_factory;
 
   gchar *last_dir;
-
-  GtrTranslationMemory *tm;
 
   guint first_run : 1;
 };
@@ -192,7 +187,6 @@ gtr_application_init (GtrApplication *application)
 
   /* Load settings */
   priv->settings = gtr_settings_new ();
-  priv->tm_settings = g_settings_new ("org.gnome.gtranslator.preferences.tm");
   priv->window_settings = g_settings_new ("org.gnome.gtranslator.state.window");
 
   /* If the config folder exists but there is no profile */
@@ -229,16 +223,6 @@ gtr_application_init (GtrApplication *application)
   /* Create Icon factory */
   application->priv->icon_factory = gtk_icon_factory_new ();
   gtk_icon_factory_add_default (application->priv->icon_factory);
-
-  /* Creating translation memory */
-  application->priv->tm = GTR_TRANSLATION_MEMORY (gtr_gda_new ());
-  gtr_translation_memory_set_max_omits (application->priv->tm,
-                                        g_settings_get_int (priv->tm_settings,
-                                                            GTR_SETTINGS_MAX_MISSING_WORDS));
-  gtr_translation_memory_set_max_delta (application->priv->tm,
-                                        g_settings_get_int (priv->tm_settings,
-                                                            GTR_SETTINGS_MAX_LENGTH_DIFF));
-  gtr_translation_memory_set_max_items (application->priv->tm, 10);
 }
 
 static void
@@ -254,12 +238,6 @@ gtr_application_dispose (GObject * object)
       priv->settings = NULL;
     }
 
-  if (priv->tm_settings != NULL)
-    {
-      g_object_unref (priv->tm_settings);
-      priv->tm_settings = NULL;
-    }
-
   if (priv->window_settings != NULL)
     {
       g_object_unref (priv->window_settings);
@@ -270,12 +248,6 @@ gtr_application_dispose (GObject * object)
     {
       g_object_unref (priv->icon_factory);
       priv->icon_factory = NULL;
-    }
-
-  if (priv->tm)
-    {
-      g_object_unref (priv->tm);
-      priv->tm = NULL;
     }
 
   if (priv->toolbars_model)
@@ -597,26 +569,10 @@ _gtr_application_set_last_dir (GtrApplication * app, const gchar * last_dir)
   app->priv->last_dir = g_strdup (last_dir);
 }
 
-/**
- * gtr_application_get_translation_memory:
- * @app: a #GtrApplication
- *
- * Gets the translation memory.
- *
- * Returns: (transfer none): Get the translation memory.
- */
-GObject *
-gtr_application_get_translation_memory (GtrApplication * app)
-{
-  g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
-
-  return G_OBJECT (app->priv->tm);
-}
-
 GSettings *
 _gtr_application_get_settings (GtrApplication *app)
 {
-	g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
+  g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
-	return app->priv->settings;
+  return app->priv->settings;
 }
