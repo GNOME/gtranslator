@@ -722,7 +722,7 @@ gtr_tab_draw (GtrTab *tab)
   gtk_widget_show (priv->msgid_hbox);
 
   msgid_label = gtk_label_new (NULL);
-  gtk_label_set_markup (GTK_LABEL (msgid_label), _("<b>Original Text:</b>"));
+  gtk_label_set_markup (GTK_LABEL (msgid_label), _("<b>Original Message:</b>"));
   gtk_misc_set_padding (GTK_MISC (msgid_label), 0, 5);
   gtk_widget_show (msgid_label);
 
@@ -806,7 +806,7 @@ gtr_tab_draw (GtrTab *tab)
   gtk_widget_show (priv->context);
   add_widget_to_dock (tab, priv->context,
                       "GtrContextPanel",
-                      _("Context"),
+                      _("Message Details"),
                       NULL,
                       GTR_TAB_PLACEMENT_RIGHT,
                       FALSE);

@@ -298,7 +298,7 @@ gtr_message_table_draw (GtrMessageTable * table)
   g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
   if (gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL)
     g_object_set (renderer, "xalign", 1.0, NULL);
-  column = gtk_tree_view_column_new_with_attributes (_("Original Text"),
+  column = gtk_tree_view_column_new_with_attributes (_("Original Message"),
                                                      renderer,
                                                      "text",
                                                      GTR_MESSAGE_TABLE_MODEL_ORIGINAL_COLUMN,
@@ -317,7 +317,7 @@ gtr_message_table_draw (GtrMessageTable * table)
   renderer = gtk_cell_renderer_text_new ();
   g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
 
-  column = gtk_tree_view_column_new_with_attributes (_("Translated Text"),
+  column = gtk_tree_view_column_new_with_attributes (_("Translated Message"),
                                                      renderer,
                                                      "text",
                                                      GTR_MESSAGE_TABLE_MODEL_TRANSLATION_COLUMN,

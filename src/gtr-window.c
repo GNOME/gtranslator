@@ -198,7 +198,7 @@ static const GtkActionEntry entries[] = {
 
 
   /* View menu */
-  {"ViewContext", NULL, N_("_Context"), "<control>J",
+  {"ViewContext", NULL, N_("_Message Details"), "<control>J",
    N_("Show the Context panel"),
    G_CALLBACK (gtr_actions_view_context)},
 
