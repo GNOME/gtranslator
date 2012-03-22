@@ -78,8 +78,8 @@ on_import_translation_memory_activated (GtkToggleAction                       *a
 }
 
 static const GtkActionEntry action_entries[] = {
-  {"TranslationMemoryManager", NULL, N_("_Import Translation Memories"), NULL,
-   N_("Import translation memories"),
+  {"TranslationMemoryManager", NULL, N_("_Build Translation Memory"), NULL,
+   N_("Build translation memory"),
    G_CALLBACK (on_import_translation_memory_activated)},
   {"EditTranslationMemory", NULL, N_("_Translation Memory"), NULL, NULL, NULL}
 };
