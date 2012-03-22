@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-03-19 12:27+0000\n"
-"PO-Revision-Date: 2012-03-19 18:28+0100\n"
+"POT-Creation-Date: 2012-03-19 18:56+0000\n"
+"PO-Revision-Date: 2012-03-22 11:09+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgstr "Traduzca y localice aplicaciones y bibliotecas"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:1
 msgid "Warn if file contains fuzzy translations"
-msgstr "Avisar si el archivo PO contiene traducciones dudosas"
+msgstr "Avisar si el archivo PO contiene traducciones difusas"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:2
 msgid ""
@@ -53,7 +53,7 @@ msgid ""
 "strings."
 msgstr ""
 "Si está activado, avisa al usuario antes de guardar un archivo PO traducido "
-"que contenga mensajes dudosos."
+"que contenga mensajes difusos."
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:3
 msgid "Delete compiled GMO files"
@@ -143,12 +143,12 @@ msgstr "Tipografía personalizada que usar para editar campos."
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:21
 msgid "Remove fuzzy status when message is changed"
-msgstr "Quitar el estado dudoso si se modifica el mensaje"
+msgstr "Quitar el estado difuso si se modifica el mensaje"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:22
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr ""
-"Si está activado, elimina el estado dudoso de los mensajes traducidos cuando "
+"Si está activado, elimina el estado difuso de los mensajes traducidos cuando "
 "se modifican."
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:23
@@ -200,8 +200,8 @@ msgid ""
 "plugin."
 msgstr ""
 "Lista de complementos activos. Contiene la «Location» de los complementos "
-"activos. Consulte el archivo gtranslator-plugin para obtener la «Location» "
-"de un complemento dado."
+"activos. Consulte el archivo gtranslator-plugin para obtener la «Location» de "
+"un complemento dado."
 
 #: ../data/po.lang.h:1
 msgid "Others"
@@ -680,7 +680,6 @@ msgstr ""
 "span>"
 
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:274
-#| msgid "Show the Translation Memory panel"
 msgid "Gtranslator Translation Memory Manager"
 msgstr "Gestor de la memoria de traducción de Gtranslator"
 
@@ -735,12 +734,10 @@ msgid "String"
 msgstr "Cadena"
 
 #: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:81
-#| msgid "_Translation Memory"
 msgid "_Import Translation Memories"
 msgstr "_Importar memoria de traducción"
 
 #: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:82
-#| msgid "Translation Memory"
 msgid "Import translation memories"
 msgstr "Importar memoria de traducción"
 
@@ -912,17 +909,6 @@ msgstr "Formato:"
 
 #: ../src/dialogs/gtr-assistant.c:130
 #, c-format
-#| msgid ""
-#| "Profile name: %s\n"
-#| "Translator name: %s\n"
-#| "Translator email: %s\n"
-#| "Language name: %s\n"
-#| "Team email: %s\n"
-#| "Language code: %s\n"
-#| "Character set: %s\n"
-#| "Transfer encoding: %s\n"
-#| "Plural form: %s\n"
-#| "Database path: %s"
 msgid ""
 "Profile name: %s\n"
 "Translator name: %s\n"
@@ -945,9 +931,6 @@ msgstr ""
 "Formas plurales: %s\n"
 
 #: ../src/dialogs/gtr-assistant.c:169
-#| msgid ""
-#| "This assistant will help you to create the main profile\n"
-#| "and generate your translation memory database."
 msgid "This assistant will help you to create the main profile."
 msgstr "Este asistente le ayudará a crear el perfil principal."
 
@@ -1212,7 +1195,7 @@ msgstr "Índice"
 
 #: ../src/dialogs/gtr-preferences-dialog.ui.h:16
 msgid "_Remove fuzzy status if message is changed"
-msgstr "_Quitar el estado dusoso si se modifica el mensaje"
+msgstr "_Quitar el estado difuso si se modifica el mensaje"
 
 #: ../src/dialogs/gtr-preferences-dialog.ui.h:17
 msgid "Check _spelling"
@@ -1324,12 +1307,10 @@ msgid "ID"
 msgstr "ID"
 
 #: ../src/gtr-message-table.c:301
-#| msgid "Original Text"
 msgid "Original Message"
-msgstr "Mensaje riginal"
+msgstr "Mensaje original"
 
 #: ../src/gtr-message-table.c:320
-#| msgid "Translated Text"
 msgid "Translated Message"
 msgstr "Mensaje traducido"
 
@@ -1396,7 +1377,6 @@ msgid "Message Table"
 msgstr "Tabla de mensajes"
 
 #: ../src/gtr-tab.c:725
-#| msgid "<b>Original Text:</b>"
 msgid "<b>Original Message:</b>"
 msgstr "<b>Mensaje original:</b>"
 
@@ -1409,7 +1389,6 @@ msgid "Translation Fields"
 msgstr "Campos de traducción"
 
 #: ../src/gtr-tab.c:809
-#| msgid "Message Table"
 msgid "Message Details"
 msgstr "Detalles del mensaje"
 
@@ -1610,11 +1589,10 @@ msgstr "Conmutar el estado di_fuso"
 
 #: ../src/gtr-window.c:194
 msgid "Toggle fuzzy status of a message"
-msgstr "Conmutar el estado dudoso de un mensaje"
+msgstr "Conmutar el estado difuso de un mensaje"
 
 #. View menu
 #: ../src/gtr-window.c:201
-#| msgid "Message Table"
 msgid "_Message Details"
 msgstr "_Detalles del mensaje"
 
@@ -1669,7 +1647,7 @@ msgstr "Siguiente di_fuso"
 
 #: ../src/gtr-window.c:222
 msgid "Go to the next fuzzy message"
-msgstr "Ir al siguiente mensaje dudoso"
+msgstr "Ir al siguiente mensaje difuso"
 
 #: ../src/gtr-window.c:224
 msgid "Previous Fuzz_y"
@@ -1677,7 +1655,7 @@ msgstr "Anterior difus_o"
 
 #: ../src/gtr-window.c:225
 msgid "Go to the previous fuzzy message"
-msgstr "Ir al anterior mensaje dudoso"
+msgstr "Ir al anterior mensaje difuso"
 
 #: ../src/gtr-window.c:227
 msgid "Next _Untranslated"
@@ -1697,19 +1675,19 @@ msgstr "Ir al anterior mensaje sin traducir"
 
 #: ../src/gtr-window.c:235
 msgid "Next Fu_zzy or Untranslated"
-msgstr "Siguiente _dudoso o sin traducir"
+msgstr "Siguiente _difuso o sin traducir"
 
 #: ../src/gtr-window.c:237
 msgid "Go to the next fuzzy or untranslated message"
-msgstr "Ir al siguiente mensaje dudoso o sin traducir"
+msgstr "Ir al siguiente mensaje difuso o sin traducir"
 
 #: ../src/gtr-window.c:240
 msgid "Pre_vious Fuzzy or Untranslated"
-msgstr "An_terior dudoso o sin traducir"
+msgstr "An_terior difuso o sin traducir"
 
 #: ../src/gtr-window.c:242
 msgid "Go to the previous fuzzy or untranslated message"
-msgstr "Ir al mensaje dudoso o sin traducir anterior"
+msgstr "Ir al mensaje difuso o sin traducir anterior"
 
 #: ../src/gtr-window.c:247
 msgid "Search for text"
@@ -1762,7 +1740,7 @@ msgstr "Traducido"
 
 #: ../src/gtr-window.c:443
 msgid "Fuzzy"
-msgstr "Dudoso"
+msgstr "Difuso"
 
 #: ../src/gtr-window.c:450
 #, c-format
