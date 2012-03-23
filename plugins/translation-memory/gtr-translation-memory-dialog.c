@@ -165,8 +165,7 @@ add_to_database (gpointer data_pointer)
                                        GTK_BUTTONS_CLOSE, NULL);
 
       gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
-                                     _
-                                     ("<span weight=\"bold\" size=\"large\">Strings added to database</span>"));
+                                     _("<span weight=\"bold\" size=\"large\">Strings added to database</span>"));
 
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
@@ -209,14 +208,31 @@ on_add_database_button_clicked (GtkButton                  *button,
   gchar *dir_name;
   IdleData *data;
 
-  data = g_new0 (IdleData, 1);
-  data->list = NULL;
-
   dir_name = g_settings_get_string (dlg->priv->tm_settings,
                                     "po-directory");
 
+  /* If dir name is empty, show a warning message */
+  if (*dir_name == '\0')
+    {
+      GtkWidget *dialog;
+      dialog = gtk_message_dialog_new (GTK_WINDOW (dlg),
+                                       GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       GTK_MESSAGE_WARNING,
+                                       GTK_BUTTONS_CLOSE,
+                                       _("Please specify a valid path to build the translation memory"));
+
+      gtk_widget_show (dialog);
+      g_signal_connect (dialog, "response",
+                        G_CALLBACK (gtk_widget_destroy), NULL);
+      g_free (dir_name);
+      return;
+    }
+
   dir = g_file_new_for_path (dir_name);
   g_free (dir_name);
+
+  data = g_new0 (IdleData, 1);
+  data->list = NULL;
 
   if (g_settings_get_boolean (dlg->priv->tm_settings,
                               "restrict-to-filename"))
