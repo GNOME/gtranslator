@@ -730,7 +730,7 @@ gtr_po_set_messages (GtrPo * po, GList * messages)
  * gtr_po_get_current_message:
  * @po: a #GtrPo
  *
- * Return value: (transfer none): a pointer to the current message
+ * Return value: (transfer none) (element-type GtrMsg): a pointer to the current message
  **/
 GList *
 gtr_po_get_current_message (GtrPo * po)
