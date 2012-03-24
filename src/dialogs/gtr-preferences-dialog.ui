@@ -108,9 +108,10 @@
               <object class="GtkBox" id="vbox1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
                 <property name="border_width">12</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">18</property>
+                <property name="spacing">6</property>
                 <child>
                   <object class="GtkBox" id="vbox2">
                     <property name="visible">True</property>
@@ -134,21 +135,10 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="hbox1">
+                      <object class="GtkAlignment" id="alignment2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkLabel" id="label5">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label">    </property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
+                        <property name="left_padding">12</property>
                         <child>
                           <object class="GtkBox" id="vbox3">
                             <property name="visible">True</property>
@@ -162,6 +152,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
@@ -178,6 +169,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
@@ -187,16 +179,11 @@
                               </packing>
                             </child>
                           </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
                         </child>
                       </object>
                       <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -230,21 +217,10 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="hbox3">
+                      <object class="GtkAlignment" id="alignment3">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkLabel" id="label9">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label">    </property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
+                        <property name="left_padding">12</property>
                         <child>
                           <object class="GtkBox" id="vbox7">
                             <property name="visible">True</property>
@@ -263,6 +239,7 @@
                                     <property name="receives_default">False</property>
                                     <property name="use_action_appearance">False</property>
                                     <property name="use_underline">True</property>
+                                    <property name="xalign">0</property>
                                     <property name="draw_indicator">True</property>
                                   </object>
                                   <packing>
@@ -280,6 +257,7 @@
                                       <object class="GtkSpinButton" id="autosave_interval_spinbutton">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
+                                        <property name="invisible_char">●</property>
                                         <property name="adjustment">adjustment1</property>
                                       </object>
                                       <packing>
@@ -324,6 +302,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
@@ -333,16 +312,11 @@
                               </packing>
                             </child>
                           </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
                         </child>
                       </object>
                       <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -371,7 +345,7 @@
                 <property name="can_focus">False</property>
                 <property name="border_width">12</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">18</property>
+                <property name="spacing">6</property>
                 <child>
                   <object class="GtkBox" id="vbox17">
                     <property name="visible">True</property>
@@ -395,21 +369,10 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="hbox13">
+                      <object class="GtkAlignment" id="alignment4">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkLabel" id="label17">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label">    </property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
+                        <property name="left_padding">12</property>
                         <child>
                           <object class="GtkBox" id="vbox18">
                             <property name="visible">True</property>
@@ -423,6 +386,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
@@ -439,6 +403,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
@@ -455,6 +420,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
@@ -488,6 +454,9 @@
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="use_action_appearance">False</property>
+                                    <property name="font">Sans 12</property>
+                                    <property name="preview_text"></property>
+                                    <property name="show_preview_entry">False</property>
                                     <property name="use_font">True</property>
                                   </object>
                                   <packing>
@@ -504,15 +473,10 @@
                               </packing>
                             </child>
                           </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
                         </child>
                       </object>
                       <packing>
-                        <property name="expand">True</property>
+                        <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
@@ -547,21 +511,10 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="hbox14">
+                      <object class="GtkAlignment" id="alignment5">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkLabel" id="label19">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label">    </property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
+                        <property name="left_padding">12</property>
                         <child>
                           <object class="GtkBox" id="vbox20">
                             <property name="visible">True</property>
@@ -575,6 +528,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
@@ -591,6 +545,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
+                                <property name="xalign">0</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
@@ -600,15 +555,10 @@
                               </packing>
                             </child>
                           </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
                         </child>
                       </object>
                       <packing>
-                        <property name="expand">True</property>
+                        <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
