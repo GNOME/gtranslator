@@ -620,7 +620,10 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
 {
   gboolean ret;
   GtkWidget *error_widget, *action_area;
+  GtkWidget *profiles_toolbar;
+  GtkWidget *profiles_scrolled_window;
   GtkBox *content_area;
+  GtkStyleContext *context;
   gchar *root_objects[] = {
     "notebook",
     "adjustment1",
@@ -693,10 +696,12 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
                                   "spellcheck_checkbutton",
                                   &dlg->priv->spellcheck_checkbutton,
                                   "profile_treeview",
-                                  &dlg->priv->profile_treeview, "add_button",
-                                  &dlg->priv->add_button, "edit_button",
-                                  &dlg->priv->edit_button, "delete_button",
+                                  &dlg->priv->profile_treeview, "add-button",
+                                  &dlg->priv->add_button, "edit-button",
+                                  &dlg->priv->edit_button, "delete-button",
                                   &dlg->priv->delete_button,
+                                  "profiles-toolbar", &profiles_toolbar,
+                                  "profiles-scrolledwindow", &profiles_scrolled_window,
                                   "plugins_box", &dlg->priv->plugins_box,
                                   NULL);
   g_free (path);
@@ -712,6 +717,12 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   gtk_box_pack_start (content_area, dlg->priv->notebook, FALSE, FALSE, 0);
 
   gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);
+
+  context = gtk_widget_get_style_context (profiles_toolbar);
+  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
+
+  context = gtk_widget_get_style_context (profiles_scrolled_window);
+  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
 
   setup_files_pages (dlg);
   setup_editor_pages (dlg);
