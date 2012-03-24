@@ -74,8 +74,9 @@ gtr_translation_memory_dialog_class_init (GtrTranslationMemoryDialogClass *klass
 
 /***************Translation Memory pages****************/
 static void
-response_filechooser_cb (GtkDialog                                    *dialog,
-                         gint response_id, GtrTranslationMemoryDialog *dlg)
+response_filechooser_cb (GtkDialog                  *dialog,
+                         gint                        response_id,
+                         GtrTranslationMemoryDialog *dlg)
 {
   if (response_id == GTK_RESPONSE_YES)
     {
@@ -110,7 +111,7 @@ on_search_button_clicked (GtkButton                  *button,
   g_signal_connect (GTK_DIALOG (filechooser), "response",
                     G_CALLBACK (response_filechooser_cb), dlg);
 
-  gtk_dialog_run (GTK_DIALOG (filechooser));
+  gtk_widget_show (filechooser);
 }
 
 typedef struct _IdleData
@@ -167,8 +168,9 @@ add_to_database (gpointer data_pointer)
       gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
                                      _("<span weight=\"bold\" size=\"large\">Strings added to database</span>"));
 
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
+      g_signal_connect (dialog, "response",
+                        G_CALLBACK (gtk_widget_destroy), NULL);
+      gtk_widget_show (dialog);
 
       return FALSE;
     }
