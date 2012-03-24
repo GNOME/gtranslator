@@ -56,10 +56,11 @@ gsettings_SCHEMAS = org.gnome.gtranslator.plugins.translation-memory.gschema.xml
 EXTRA_DIST = \
 	$(plugin_in_files) \
 	gtr-translation-memory.gresource.xml \
-	org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in
+	org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in \
+	gtr-translation-memory-dialog.ui
 
-CLEANFILES = $(plugin_DATA) $(BUILT_SOURCES)
-DISTCLEANFILES = $(plugin_DATA) $(BUILT_SOURCES)
+CLEANFILES = $(plugin_DATA) $(BUILT_SOURCES) $(gsettings_SCHEMAS)
+DISTCLEANFILES = $(plugin_DATA) $(BUILT_SOURCES) $(gsettings_SCHEMAS)
 
 MAINTAINERCLEANFILES = $(gsettings_SCHEMAS:.xml=.valid)
 
