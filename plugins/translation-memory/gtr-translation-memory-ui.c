@@ -129,7 +129,7 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
   const gchar *msgid;
   gint i = 1;
   gint j = 1;
-  gint k = 0;
+  gint k = 1;
   GList *tm_list = NULL;
   GList *l = NULL;
   GList *renderers_list = NULL;
