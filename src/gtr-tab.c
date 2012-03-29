@@ -1036,8 +1036,8 @@ gtr_tab_class_init (GtrTabClass * klass)
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (GtrTabClass, showed_message),
                   NULL, NULL,
-                  g_cclosure_marshal_VOID__POINTER,
-                  G_TYPE_NONE, 1, G_TYPE_POINTER);
+                  g_cclosure_marshal_VOID__OBJECT,
+                  G_TYPE_NONE, 1, GTR_TYPE_MSG);
 
   signals[MESSAGE_CHANGED] =
     g_signal_new ("message-changed",
@@ -1045,17 +1045,17 @@ gtr_tab_class_init (GtrTabClass * klass)
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (GtrTabClass, message_changed),
                   NULL, NULL,
-                  g_cclosure_marshal_VOID__POINTER,
-                  G_TYPE_NONE, 1, G_TYPE_POINTER);
+                  g_cclosure_marshal_VOID__OBJECT,
+                  G_TYPE_NONE, 1, GTR_TYPE_MSG);
 
   signals[MESSAGE_EDITION_FINISHED] =
     g_signal_new ("message-edition-finished",
                   G_OBJECT_CLASS_TYPE (klass),
                   G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (GtrTabClass,
-                                   message_edition_finished), NULL, NULL,
-                  g_cclosure_marshal_VOID__POINTER, G_TYPE_NONE, 1,
-                  G_TYPE_POINTER);
+                  G_STRUCT_OFFSET (GtrTabClass, message_edition_finished),
+                  NULL, NULL,
+                  g_cclosure_marshal_VOID__OBJECT,
+                  G_TYPE_NONE, 1, GTR_TYPE_MSG);
 
   /* Properties */
   g_object_class_install_property (object_class,
