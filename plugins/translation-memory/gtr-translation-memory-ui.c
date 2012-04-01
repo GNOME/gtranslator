@@ -195,7 +195,7 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
                           -1);
       i++;
       k++;
-      if (k == MAX_ELEMENTS)
+      if (k == MAX_ELEMENTS - 1)
         break;
     }
 
