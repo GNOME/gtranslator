@@ -128,8 +128,8 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
   GtkTreeViewColumn *level_column;
   const gchar *msgid;
   gint i = 1;
-  gint j = 0;
-  gint k = 1;
+  gint j = 1;
+  gint k = 0;
   GList *tm_list = NULL;
   GList *l = NULL;
   GList *renderers_list = NULL;
@@ -189,7 +189,7 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
 
       gtk_list_store_append (model, &iter);
       gtk_list_store_set (model, &iter,
-                          SHORTCUT_COLUMN, GDK_KEY_0 + k,
+                          SHORTCUT_COLUMN, GDK_KEY_1 + k,
                           STRING_COLUMN, match->match,
                           LEVEL_COLUMN, match->level,
                           -1);
@@ -225,7 +225,7 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
                                     item_name);
 
       gtk_menu_item_set_accel_path (GTK_MENU_ITEM (tm_item), accel_path);
-      gtk_accel_map_add_entry (accel_path, GDK_KEY_0 + (j), GDK_CONTROL_MASK);
+      gtk_accel_map_add_entry (accel_path, GDK_KEY_1 + (j - 1), GDK_CONTROL_MASK);
 
       g_free (accel_path);
       g_free (item_name);
