@@ -280,11 +280,8 @@ popup_menu_translation_activate (GtkMenuItem *menuitem,
   GtkTreeIter iter;
   gchar *translation;
 
-  selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (tm_ui->priv->tree_view));
-  if (!gtk_tree_selection_get_selected (selection,
-                                        &model,
-                                        &iter))
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tm_ui->priv->tree_view));
+  if (!selection || !gtk_tree_selection_get_selected (selection, &model, &iter))
     return;
 
   gtk_tree_model_get (model, &iter,
@@ -307,11 +304,8 @@ popup_menu_remove_from_memory (GtkMenuItem *menuitem,
   const gchar *original;
   gchar *translation;
 
-  selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (tm_ui->priv->tree_view));
-  if (!gtk_tree_selection_get_selected (selection,
-                                        &model,
-                                        &iter))
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tm_ui->priv->tree_view));
+  if (!selection || !gtk_tree_selection_get_selected (selection, &model, &iter))
     return;
 
   gtk_tree_model_get (model, &iter,
@@ -345,11 +339,8 @@ create_tree_popup_menu (GtrTranslationMemoryUi *self)
   GtkWidget *item;
   GtkWidget *image;
 
-  selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (self->priv->tree_view));
-  if (gtk_tree_selection_get_selected (selection,
-                                       &model,
-                                       &iter))
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->priv->tree_view));
+  if (selection && gtk_tree_selection_get_selected (selection, &model, &iter))
     {
       gint level;
 
@@ -400,18 +391,14 @@ gtr_translation_memory_ui_show_menu (GtrTranslationMemoryUi *self,
                              (GtkMenuDetachFunc) tree_popup_menu_detach);
 
   if (event != NULL)
-    {
-      gtk_menu_popup (GTK_MENU (self->priv->popup_menu), NULL, NULL,
-                      NULL, NULL,
-                      event->button, event->time);
-    }
+    gtk_menu_popup (GTK_MENU (self->priv->popup_menu), NULL, NULL,
+                    NULL, NULL,
+                    event->button, event->time);
   else
-    {
-      gtk_menu_popup (GTK_MENU (self->priv->popup_menu), NULL, NULL,
-                      gtr_utils_menu_position_under_tree_view,
-                      self->priv->tree_view,
-                      0, gtk_get_current_event_time ());
-    }
+    gtk_menu_popup (GTK_MENU (self->priv->popup_menu), NULL, NULL,
+                    gtr_utils_menu_position_under_tree_view,
+                    self->priv->tree_view,
+                    0, gtk_get_current_event_time ());
 }
 
 static void
