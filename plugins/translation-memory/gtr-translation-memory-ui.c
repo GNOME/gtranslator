@@ -465,12 +465,18 @@ tree_view_popup_menu (GtkTreeView *tree, GtrTranslationMemoryUi *tm_ui)
 }
 
 static void
-gtr_translation_memory_ui_draw (GtrTranslationMemoryUi * tm_ui)
+gtr_translation_memory_ui_init (GtrTranslationMemoryUi * tm_ui)
 {
-  GtrTranslationMemoryUiPrivate *priv = tm_ui->priv;
+  GtrTranslationMemoryUiPrivate *priv;
   GtkListStore *model;
   GtkCellRenderer *level_renderer, *string_renderer, *shortcut_renderer;
   GtkTreeViewColumn *shortcut, *string, *level;
+
+  tm_ui->priv = GTR_TRANSLATION_MEMORY_UI_GET_PRIVATE (tm_ui);
+  priv = tm_ui->priv;
+  tm_ui->priv->tm_list = NULL;
+  tm_ui->priv->popup_menu = NULL;
+  tm_ui->priv->msg = NULL;
 
   priv->tree_view = gtk_tree_view_new ();
   gtk_widget_show (priv->tree_view);
@@ -478,8 +484,7 @@ gtr_translation_memory_ui_draw (GtrTranslationMemoryUi * tm_ui)
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (tm_ui),
                                   GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
-  model =
-    gtk_list_store_new (N_COLUMNS, G_TYPE_INT, G_TYPE_INT, G_TYPE_STRING);
+  model = gtk_list_store_new (N_COLUMNS, G_TYPE_INT, G_TYPE_INT, G_TYPE_STRING);
   gtk_tree_view_set_model (GTK_TREE_VIEW (priv->tree_view),
                            GTK_TREE_MODEL (model));
 
@@ -525,17 +530,6 @@ gtr_translation_memory_ui_draw (GtrTranslationMemoryUi * tm_ui)
 
   g_signal_connect (priv->tree_view, "row-activated",
                     G_CALLBACK (tree_view_row_activated), tm_ui);
-}
-
-static void
-gtr_translation_memory_ui_init (GtrTranslationMemoryUi * tm_ui)
-{
-  tm_ui->priv = GTR_TRANSLATION_MEMORY_UI_GET_PRIVATE (tm_ui);
-  tm_ui->priv->tm_list = NULL;
-  tm_ui->priv->popup_menu = NULL;
-  tm_ui->priv->msg = NULL;
-
-  gtr_translation_memory_ui_draw (tm_ui);
 }
 
 static void
