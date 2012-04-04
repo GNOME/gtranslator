@@ -89,7 +89,7 @@ static const gchar ui_data[] =
   "<menubar name=\"MainMenu\">"
     "<menu name=\"EditMenu\" action=\"Edit\">"
       "<placeholder name=\"EditOps_1\">"
-        "<menu action=\"EditTranslationMemory\" />"
+        "<menu name=\"EditTranslationMemoryMenu\" action=\"EditTranslationMemory\"/>"
       "</placeholder>"
     "</menu>"
     "<menu name=\"ToolsMenu\" action=\"Tools\">"

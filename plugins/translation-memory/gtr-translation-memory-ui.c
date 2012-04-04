@@ -38,7 +38,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 
-#define MAX_ELEMENTS 10
+#define MAX_ELEMENTS 9
 
 #define GTR_TRANSLATION_MEMORY_UI_GET_PRIVATE(object)           \
   (G_TYPE_INSTANCE_GET_PRIVATE ((object),                       \
@@ -108,7 +108,7 @@ on_activate_item_cb (GtkMenuItem            *menuitem,
      are supposing the integer at the end of the string */
   index = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menuitem), "option"));
 
-  choose_translation (tm_ui, tm_ui->priv->tm_list[index - 1]);
+  choose_translation (tm_ui, tm_ui->priv->tm_list[index]);
 }
 
 static void
@@ -127,9 +127,8 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
   GtkTreeIter iter;
   GtkTreeViewColumn *level_column;
   const gchar *msgid;
-  gint i = 1;
-  gint j = 1;
-  gint k = 0;
+  gint i;
+  gint j;
   GList *tm_list = NULL;
   GList *l = NULL;
   GList *renderers_list = NULL;
@@ -144,44 +143,33 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
 
   window = gtk_widget_get_toplevel (GTK_WIDGET (tm_ui));
   manager = gtr_window_get_ui_manager (GTR_WINDOW (window));
-  tm_menu = gtk_ui_manager_get_widget (manager, "/MainMenu/EditMenu/EditOps_1/EditTranslationMemory");
+  tm_menu = gtk_ui_manager_get_widget (manager, "/MainMenu/EditMenu/EditOps_1/EditTranslationMemoryMenu");
 
   g_signal_connect (tm_ui->priv->tree_view,
                     "size_allocate",
                     G_CALLBACK (tree_view_size_cb), tm_ui->priv->tree_view);
 
-  g_object_ref (msg);
   if (tm_ui->priv->msg)
     g_object_unref (tm_ui->priv->msg);
-  tm_ui->priv->msg = msg;
+  tm_ui->priv->msg = g_object_ref (msg);
 
   msgid = gtr_msg_get_msgid (msg);
 
   tm_list = gtr_translation_memory_lookup (tm_ui->priv->translation_memory, msgid);
-
-  if (tm_list == NULL)
-    {
-      gtk_widget_set_sensitive (tm_menu, FALSE);
-    }
-  else
-    {
-      gtk_widget_set_sensitive (tm_menu, TRUE);
-    }
+  gtk_widget_set_sensitive (tm_menu, tm_list != NULL);
+  g_strfreev (tm_ui->priv->tm_list);
 
   gtk_list_store_clear (model);
-
-  g_strfreev (tm_ui->priv->tm_list);
   tm_ui->priv->tm_list = g_new (gchar *, MAX_ELEMENTS + 1);
 
-  for (l = tm_list; l; l = l->next)
+  i = 0;
+  for (l = tm_list; l && i < MAX_ELEMENTS; l = l->next)
     {
-      GtrTranslationMemoryMatch *match;
-      match = (GtrTranslationMemoryMatch *) l->data;
-      tm_ui->priv->tm_list[i - 1] = g_strdup (match->match);
-      level_column =
-        gtk_tree_view_get_column (GTK_TREE_VIEW (tm_ui->priv->tree_view), 0);
-      renderers_list =
-        gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (level_column));
+      GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) l->data;
+
+      tm_ui->priv->tm_list[i] = g_strdup (match->match);
+      level_column = gtk_tree_view_get_column (GTK_TREE_VIEW (tm_ui->priv->tree_view), 0);
+      renderers_list = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (level_column));
 
       g_object_set (renderers_list->data,
                     "accel-mods", GDK_CONTROL_MASK, NULL);
@@ -189,43 +177,41 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
 
       gtk_list_store_append (model, &iter);
       gtk_list_store_set (model, &iter,
-                          SHORTCUT_COLUMN, GDK_KEY_1 + k,
+                          SHORTCUT_COLUMN, GDK_KEY_1 + i,
                           STRING_COLUMN, match->match,
                           LEVEL_COLUMN, match->level,
                           -1);
       i++;
-      k++;
-      if (k == MAX_ELEMENTS - 1)
-        break;
     }
 
   /* Ensure last element is NULL */
-  tm_ui->priv->tm_list[i - 1] = NULL;
+  tm_ui->priv->tm_list[i] = NULL;
 
   /* MenuBar stuff */
 
   items_menu = gtk_menu_new ();
 
-  manager = gtr_window_get_ui_manager (window);
+  manager = gtr_window_get_ui_manager (GTR_WINDOW (window));
 
   gtk_menu_set_accel_group (GTK_MENU (items_menu),
                             gtk_ui_manager_get_accel_group (manager));
 
+  j = 0;
   do
     {
       gchar *accel_path;
 
-      item_name = g_strdup_printf (_("Insert Option nº %d"), j);
+      item_name = g_strdup_printf (_("Insert Option nº %d"), j + 1);
 
       tm_item = gtk_menu_item_new_with_label (item_name);
       g_object_set_data (G_OBJECT (tm_item), "option", GINT_TO_POINTER (j));
       gtk_widget_show (tm_item);
 
-      accel_path = g_strdup_printf ("<Gtr-sheet>/Edit/Translation Memory/%s",
+      accel_path = g_strdup_printf ("<Gtranslator-sheet>/Edit/Translation Memory/%s",
                                     item_name);
 
       gtk_menu_item_set_accel_path (GTK_MENU_ITEM (tm_item), accel_path);
-      gtk_accel_map_add_entry (accel_path, GDK_KEY_1 + (j - 1), GDK_CONTROL_MASK);
+      gtk_accel_map_add_entry (accel_path, GDK_KEY_1 + j, GDK_CONTROL_MASK);
 
       g_free (accel_path);
       g_free (item_name);
@@ -236,13 +222,11 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
       gtk_menu_shell_append (GTK_MENU_SHELL (items_menu), tm_item);
 
       j++;
-      if (j > MAX_ELEMENTS)
-        break;
-
     }
-  while ((tm_list = g_list_next (tm_list)));
+  while (j < MAX_ELEMENTS && (tm_list = g_list_next (tm_list)));
 
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (tm_menu), items_menu);
+  gtk_widget_show (tm_menu);
 
   g_list_free_full (tm_list, free_match);
 }
@@ -418,7 +402,7 @@ tree_view_size_cb (GtkWidget * widget,
 
   size = gtk_tree_view_column_get_width (column);
 
-  g_object_set (renderers_list->data, "wrap-width", size - 10, NULL);
+  g_object_set (renderers_list->data, "wrap-width", MAX(1, size - 10), NULL);
 
   g_list_free (renderers_list);
 }
