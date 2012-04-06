@@ -64,7 +64,6 @@ struct _GtrPreferencesDialogPrivate
 
   /* Files->General */
   GtkWidget *warn_if_contains_fuzzy_checkbutton;
-  GtkWidget *delete_compiled_checkbutton;
 
   /* Files->Autosave */
   GtkWidget *autosave_checkbutton;
@@ -109,11 +108,6 @@ setup_files_general_page (GtrPreferencesDialog * dlg)
   g_settings_bind (dlg->priv->files_settings,
                    GTR_SETTINGS_WARN_IF_CONTAINS_FUZZY,
                    dlg->priv->warn_if_contains_fuzzy_checkbutton,
-                   "active",
-                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
-  g_settings_bind (dlg->priv->files_settings,
-                   GTR_SETTINGS_DELETE_COMPILED,
-                   dlg->priv->delete_compiled_checkbutton,
                    "active",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 }
@@ -671,8 +665,6 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
                                   "warn_if_fuzzy_checkbutton",
                                   &dlg->
                                   priv->warn_if_contains_fuzzy_checkbutton,
-                                  "delete_compiled_checkbutton",
-                                  &dlg->priv->delete_compiled_checkbutton,
                                   "autosave_checkbutton",
                                   &dlg->priv->autosave_checkbutton,
                                   "autosave_interval_spinbutton",
