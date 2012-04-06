@@ -223,7 +223,7 @@ gtr_header_get_comments (GtrHeader * header)
 {
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
 
-  return po_message_comments (gtr_msg_get_message (GTR_MSG (header)));
+  return po_message_comments (_gtr_msg_get_message (GTR_MSG (header)));
 }
 
 void
@@ -232,7 +232,7 @@ gtr_header_set_comments (GtrHeader * header, const gchar * comments)
   g_return_if_fail (GTR_IS_HEADER (header));
   g_return_if_fail (comments != NULL);
 
-  po_message_set_comments (gtr_msg_get_message (GTR_MSG (header)), comments);
+  po_message_set_comments (_gtr_msg_get_message (GTR_MSG (header)), comments);
 }
 
 gchar *

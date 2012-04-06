@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
+ * Copyright (C) 2007-2012 Ignacio Casal Quinteiro <icq@gnome.org>
  *               2008  Igalia
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,8 +20,8 @@
  *   Pablo Sanxiao <psanxiao@gmail.com>
  */
 
-#ifndef __MSG_H__
-#define __MSG_H__
+#ifndef __GTR_MSG_H__
+#define __GTR_MSG_H__
 
 #include <glib.h>
 #include <glib-object.h>
@@ -29,22 +29,17 @@
 #include <gettext-po.h>
 
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
+
 #define GTR_TYPE_MSG		(gtr_msg_get_type ())
 #define GTR_MSG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MSG, GtrMsg))
 #define GTR_MSG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_MSG, GtrMsgClass))
 #define GTR_IS_MSG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_MSG))
 #define GTR_IS_MSG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_MSG))
 #define GTR_MSG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_MSG, GtrMsgClass))
-/* Private structure type */
-typedef struct _GtrMsgPrivate GtrMsgPrivate;
 
-/*
- * Main object structure
- */
-typedef struct _GtrMsg GtrMsg;
+typedef struct _GtrMsg        GtrMsg;
+typedef struct _GtrMsgClass   GtrMsgClass;
+typedef struct _GtrMsgPrivate GtrMsgPrivate;
 
 struct _GtrMsg
 {
@@ -53,11 +48,6 @@ struct _GtrMsg
   /*< private > */
   GtrMsgPrivate *priv;
 };
-
-/*
- * Class definition
- */
-typedef struct _GtrMsgClass GtrMsgClass;
 
 struct _GtrMsgClass
 {
@@ -71,73 +61,72 @@ typedef enum
   GTR_MSG_STATUS_TRANSLATED
 } GtrMsgStatus;
 
-/*
- * Public methods
- */
-GType
-gtr_msg_get_type (void)
-  G_GNUC_CONST;
+/* Public methods */
+GType                      gtr_msg_get_type                 (void) G_GNUC_CONST;
 
-     GType gtr_msg_register_type (GTypeModule * module);
+gboolean                   gtr_msg_is_translated            (GtrMsg     *msg);
 
-     GtrMsg *gtr_msg_new (po_message_iterator_t iter, po_message_t message);
+gboolean                   gtr_msg_is_fuzzy                 (GtrMsg     *msg);
+void                       gtr_msg_set_fuzzy                (GtrMsg     *msg,
+                                                             gboolean    fuzzy);
 
-po_message_iterator_t
-gtr_msg_get_iterator (GtrMsg * msg);
+GtrMsgStatus               gtr_msg_get_status               (GtrMsg      *msg);
+void                       gtr_msg_set_status               (GtrMsg      *msg,
+                                                             GtrMsgStatus status);
 
-     void gtr_msg_set_iterator (GtrMsg * msg, po_message_iterator_t iter);
+const gchar               *gtr_msg_get_msgid                (GtrMsg      *msg);
 
-     po_message_t gtr_msg_get_message (GtrMsg * msg);
+const gchar               *gtr_msg_get_msgid_plural         (GtrMsg      *msg);
 
-     void gtr_msg_set_message (GtrMsg * msg, po_message_t message);
+const gchar               *gtr_msg_get_msgstr               (GtrMsg      *msg);
+void                       gtr_msg_set_msgstr               (GtrMsg      *msg,
+                                                             const gchar *msgstr);
 
-     GtkTreeRowReference *gtr_msg_get_row_reference (GtrMsg * msg);
+const gchar               *gtr_msg_get_msgstr_plural        (GtrMsg      *msg,
+                                                             gint         index);
+void                       gtr_msg_set_msgstr_plural        (GtrMsg      *msg,
+                                                             gint         index,
+                                                             const gchar *msgstr);
 
-     void gtr_msg_set_row_reference (GtrMsg * msg,
-                                     GtkTreeRowReference * row_reference);
+const gchar               *gtr_msg_get_comment              (GtrMsg      *msg);
+void                       gtr_msg_set_comment              (GtrMsg      *msg,
+                                                             const gchar *comment);
 
-     gboolean gtr_msg_is_translated (GtrMsg * msg);
+gint                       gtr_msg_get_po_position          (GtrMsg      *msg);
+void                       gtr_msg_set_po_position          (GtrMsg      *msg,
+                                                             gint         po_position);
 
-     gboolean gtr_msg_is_fuzzy (GtrMsg * msg);
+const gchar               *gtr_msg_get_extracted_comments   (GtrMsg      *msg);
 
-     void gtr_msg_set_fuzzy (GtrMsg * msg, gboolean fuzzy);
+const gchar               *gtr_msg_get_filename             (GtrMsg      *msg,
+                                                             gint         i);
 
-     void gtr_msg_set_status (GtrMsg * msg, GtrMsgStatus status);
+gint                      *gtr_msg_get_file_line            (GtrMsg      *msg,
+                                                             gint         i);
 
-     GtrMsgStatus gtr_msg_get_status (GtrMsg * msg);
+const gchar               *gtr_msg_get_msgctxt              (GtrMsg      *msg);
 
-     const gchar *gtr_msg_get_msgid (GtrMsg * msg);
+const gchar               *gtr_msg_get_format               (GtrMsg      *msg);
 
-     const gchar *gtr_msg_get_msgid_plural (GtrMsg * msg);
+gchar                     *gtr_msg_check                    (GtrMsg      *msg);
 
-     const gchar *gtr_msg_get_msgstr (GtrMsg * msg);
+/* Semi-private methods */
+GtrMsg                   *_gtr_msg_new                      (po_message_iterator_t iter,
+                                                             po_message_t          message);
 
-     void gtr_msg_set_msgstr (GtrMsg * msg, const gchar * msgstr);
+po_message_iterator_t     _gtr_msg_get_iterator             (GtrMsg *msg);
+void                      _gtr_msg_set_iterator             (GtrMsg               *msg,
+                                                             po_message_iterator_t iter);
 
-     const gchar *gtr_msg_get_msgstr_plural (GtrMsg * msg, gint index);
+po_message_t              _gtr_msg_get_message              (GtrMsg               *msg);
 
-     void gtr_msg_set_msgstr_plural (GtrMsg * msg,
-                                     gint index, const gchar * msgstr);
+void                      _gtr_msg_set_message              (GtrMsg               *msg,
+                                                             po_message_t          message);
 
-     const gchar *gtr_msg_get_comment (GtrMsg * msg);
+GtkTreeRowReference      *_gtr_msg_get_row_reference        (GtrMsg               *msg);
 
-     void gtr_msg_set_comment (GtrMsg * msg, const gchar * comment);
-
-     gint gtr_msg_get_po_position (GtrMsg * msg);
-
-     void gtr_msg_set_po_position (GtrMsg * msg, gint po_position);
-
-     const gchar *gtr_msg_get_extracted_comments (GtrMsg * msg);
-
-     const gchar *gtr_msg_get_filename (GtrMsg * msg, gint i);
-
-     gint *gtr_msg_get_file_line (GtrMsg * msg, gint i);
-
-     const gchar *gtr_msg_get_msgctxt (GtrMsg * msg);
-
-     const gchar *gtr_msg_get_format (GtrMsg * msg);
-
-     gchar *gtr_msg_check (GtrMsg * msg);
+void                      _gtr_msg_set_row_reference        (GtrMsg               *msg,
+                                                             GtkTreeRowReference  *row_reference);
 
 G_END_DECLS
-#endif /* __MSG_H__ */
+#endif /* __GTR_MSG_H__ */

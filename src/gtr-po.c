@@ -480,7 +480,7 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
       if (!po_message_is_obsolete (message))
         {
           /* Unpack into a GtrMsg */
-          msg = gtr_msg_new (iter, message);
+          msg = _gtr_msg_new (iter, message);
 
           /* Set position in PO file */
           gtr_msg_set_po_position (msg, pos++);

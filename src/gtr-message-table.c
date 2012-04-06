@@ -60,10 +60,9 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrMessageTable * table)
   GtkTreeSelection *selection;
   GtkTreeIter iter;
 
-  selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (table->priv->treeview));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (table->priv->treeview));
 
-  path = gtk_tree_row_reference_get_path (gtr_msg_get_row_reference (msg));
+  path = gtk_tree_row_reference_get_path (_gtr_msg_get_row_reference (msg));
 
   gtk_tree_model_get_iter (table->priv->sort_model, &iter, path);
 
@@ -112,7 +111,7 @@ message_changed_cb (GtrTab * tab, GtrMsg * msg, GtrMessageTable * table)
   GtkTreePath *sort_path, *path;
   GtkTreeRowReference *row;
 
-  row = gtr_msg_get_row_reference (msg);
+  row = _gtr_msg_get_row_reference (msg);
   sort_path = gtk_tree_row_reference_get_path (row);
 
   path =
@@ -434,7 +433,7 @@ gtr_message_table_populate (GtrMessageTable * table, GList * messages)
       row = gtk_tree_row_reference_new (table->priv->sort_model, path);
       gtk_tree_path_free (path);
 
-      gtr_msg_set_row_reference (GTR_MSG (messages->data), row);
+      _gtr_msg_set_row_reference (GTR_MSG (messages->data), row);
 
       messages = g_list_next (messages);
     }

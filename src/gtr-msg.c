@@ -53,56 +53,7 @@ struct _GtrMsgPrivate
   gint po_position;
 };
 
-enum
-{
-  PROP_0,
-  PROP_GETTEXT_ITER,
-  PROP_GETTEXT_MSG
-};
-
 static gchar *message_error = NULL;
-
-static void
-gtr_msg_set_property (GObject * object,
-                      guint prop_id,
-                      const GValue * value,
-                      GParamSpec * pspec)
-{
-  GtrMsg *msg = GTR_MSG (object);
-
-  switch (prop_id)
-    {
-    case PROP_GETTEXT_ITER:
-      gtr_msg_set_iterator (msg, g_value_get_pointer (value));
-      break;
-    case PROP_GETTEXT_MSG:
-      gtr_msg_set_message (msg, g_value_get_pointer (value));
-      break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-      break;
-    }
-}
-
-static void
-gtr_msg_get_property (GObject * object,
-                      guint prop_id, GValue * value, GParamSpec * pspec)
-{
-  GtrMsg *msg = GTR_MSG (object);
-
-  switch (prop_id)
-    {
-    case PROP_GETTEXT_ITER:
-      g_value_set_pointer (value, gtr_msg_get_iterator (msg));
-      break;
-    case PROP_GETTEXT_MSG:
-      g_value_set_pointer (value, gtr_msg_get_message (msg));
-      break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-      break;
-    }
-}
 
 static void
 gtr_msg_init (GtrMsg * msg)
@@ -124,22 +75,6 @@ gtr_msg_class_init (GtrMsgClass * klass)
   g_type_class_add_private (klass, sizeof (GtrMsgPrivate));
 
   object_class->finalize = gtr_msg_finalize;
-  object_class->set_property = gtr_msg_set_property;
-  object_class->get_property = gtr_msg_get_property;
-
-  g_object_class_install_property (object_class,
-                                   PROP_GETTEXT_MSG,
-                                   g_param_spec_pointer ("gettext-iter",
-                                                         "Gettext iterator",
-                                                         "The po_message_iterator_t pointer",
-                                                         G_PARAM_READWRITE));
-
-  g_object_class_install_property (object_class,
-                                   PROP_GETTEXT_MSG,
-                                   g_param_spec_pointer ("gettext-msg",
-                                                         "Gettext msg",
-                                                         "The po_message_t pointer",
-                                                         G_PARAM_READWRITE));
 }
 
 /***************************** Public funcs ***********************************/
@@ -154,7 +89,7 @@ gtr_msg_class_init (GtrMsgClass * klass)
  * Return value: (transfer full): a new #GtrMsg object
  **/
 GtrMsg *
-gtr_msg_new (po_message_iterator_t iter, po_message_t message)
+_gtr_msg_new (po_message_iterator_t iter, po_message_t message)
 {
   GtrMsg *msg;
 
@@ -162,8 +97,8 @@ gtr_msg_new (po_message_iterator_t iter, po_message_t message)
 
   msg = g_object_new (GTR_TYPE_MSG, NULL);
 
-  gtr_msg_set_iterator (msg, iter);
-  gtr_msg_set_message (msg, message);
+  _gtr_msg_set_iterator (msg, iter);
+  _gtr_msg_set_message (msg, message);
 
   /* Set the status */
   if (gtr_msg_is_fuzzy (msg))
@@ -183,7 +118,7 @@ gtr_msg_new (po_message_iterator_t iter, po_message_t message)
  * Return value: the message iterator in gettext format
  **/
 po_message_iterator_t
-gtr_msg_get_iterator (GtrMsg * msg)
+_gtr_msg_get_iterator (GtrMsg * msg)
 {
   g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
 
@@ -198,13 +133,11 @@ gtr_msg_get_iterator (GtrMsg * msg)
  * Sets the iterator into the #GtrMsg class.
  **/
 void
-gtr_msg_set_iterator (GtrMsg * msg, po_message_iterator_t iter)
+_gtr_msg_set_iterator (GtrMsg * msg, po_message_iterator_t iter)
 {
   g_return_if_fail (GTR_IS_MSG (msg));
 
   msg->priv->iterator = iter;
-
-  g_object_notify (G_OBJECT (msg), "gettext-iter");
 }
 
 /**
@@ -214,7 +147,7 @@ gtr_msg_set_iterator (GtrMsg * msg, po_message_iterator_t iter)
  * Return value: the message in gettext format
  **/
 po_message_t
-gtr_msg_get_message (GtrMsg * msg)
+_gtr_msg_get_message (GtrMsg * msg)
 {
   g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
 
@@ -229,14 +162,12 @@ gtr_msg_get_message (GtrMsg * msg)
  * Sets the message into the #GtrMsg class.
  **/
 void
-gtr_msg_set_message (GtrMsg * msg, po_message_t message)
+_gtr_msg_set_message (GtrMsg * msg, po_message_t message)
 {
   g_return_if_fail (GTR_IS_MSG (msg));
   g_return_if_fail (message != NULL);
 
   msg->priv->message = message;
-
-  g_object_notify (G_OBJECT (msg), "gettext-msg");
 }
 
 /**
@@ -247,7 +178,7 @@ gtr_msg_set_message (GtrMsg * msg, po_message_t message)
  * in the message table
  */
 GtkTreeRowReference *
-gtr_msg_get_row_reference (GtrMsg * msg)
+_gtr_msg_get_row_reference (GtrMsg * msg)
 {
   g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
 
@@ -255,14 +186,14 @@ gtr_msg_get_row_reference (GtrMsg * msg)
 }
 
 /**
- * gtr_msg_set_row_reference:
+ * _gtr_msg_set_row_reference:
  * @msg: a #GtrMsg
  * @row_reference: the GtkTreeRowReference corresponding to position in the message table
  *
  * Sets the GtkTreeRowReference from the messages table for the given message
  **/
 void
-gtr_msg_set_row_reference (GtrMsg * msg, GtkTreeRowReference * row_reference)
+_gtr_msg_set_row_reference (GtrMsg * msg, GtkTreeRowReference * row_reference)
 {
   g_return_if_fail (GTR_IS_MSG (msg));
 
@@ -270,29 +201,32 @@ gtr_msg_set_row_reference (GtrMsg * msg, GtkTreeRowReference * row_reference)
 }
 
 /**
- * po_message_is_translated:
+ * gtr_msg_is_translated:
  * @msg: a #GtrMsg
- * 
- * Return value: TRUE if the message is translated
+ *
+ * Gets whether or not the message is translated. See that a fuzzy message
+ * is also counted as translated so it must be checked first that the message
+ * is fuzzy.
+ *
+ * Return value: %TRUE if the message is translated
  **/
 gboolean
-gtr_msg_is_translated (GtrMsg * msg)
+gtr_msg_is_translated (GtrMsg *msg)
 {
   g_return_val_if_fail (GTR_IS_MSG (msg), FALSE);
 
-  if (po_message_msgid_plural (msg->priv->message) == NULL)
-    return po_message_msgstr (msg->priv->message)[0] != '\0';
+  if (gtr_msg_get_msgid_plural (msg) == NULL)
+    return gtr_msg_get_msgstr (msg)[0] != '\0';
   else
     {
       gint i;
 
       for (i = 0;; i++)
         {
-          const gchar *str_i =
-            po_message_msgstr_plural (msg->priv->message, i);
-          if (str_i == NULL)
+          const gchar *msgstr_i = gtr_msg_get_msgstr_plural (msg, i);
+          if (msgstr_i == NULL)
             break;
-          if (str_i[0] == '\0')
+          if (msgstr_i[0] == '\0')
             return FALSE;
         }
 
