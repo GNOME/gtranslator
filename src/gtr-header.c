@@ -201,8 +201,10 @@ gtr_header_new (po_message_iterator_t iter, po_message_t message)
 {
   GtrHeader *header;
 
-  header = g_object_new (GTR_TYPE_HEADER, "gettext-iter", iter,
-                         "gettext-msg", message, NULL);
+  header = g_object_new (GTR_TYPE_HEADER, NULL);
+
+  _gtr_msg_set_iterator (GTR_MSG (header), iter);
+  _gtr_msg_set_message (GTR_MSG (header), message);
 
   /* We have to parse the number of plurals */
   parse_nplurals (header);
