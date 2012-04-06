@@ -404,7 +404,7 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
     {
       GtrMsg *msg = GTR_MSG (l->data);
 
-      if (!gtr_msg_is_translated (msg))
+      if (!gtr_msg_is_translated (msg) || gtr_msg_is_fuzzy (msg))
         continue;
 
       error = NULL;
