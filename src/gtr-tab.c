@@ -818,7 +818,7 @@ extension_added (PeasExtensionSet *extensions,
                  PeasExtension    *exten,
                  GtrTab           *tab)
 {
-  peas_extension_call (exten, "activate");
+  gtr_tab_activatable_activate (GTR_TAB_ACTIVATABLE (exten));
 }
 
 static void
@@ -827,7 +827,7 @@ extension_removed (PeasExtensionSet *extensions,
                    PeasExtension    *exten,
                    GtrTab           *tab)
 {
-  peas_extension_call (exten, "deactivate");
+  gtr_tab_activatable_deactivate (GTR_TAB_ACTIVATABLE (exten));
 }
 
 static void
@@ -862,6 +862,7 @@ gtr_tab_init (GtrTab * tab)
                                                   GTR_TYPE_TAB_ACTIVATABLE,
                                                   "tab", tab,
                                                   NULL);
+
   g_signal_connect (tab->priv->extensions,
                     "extension-added",
                     G_CALLBACK (extension_added),
@@ -999,7 +1000,9 @@ gtr_tab_realize (GtkWidget *widget)
 
       /* We only activate the extensions when the tab is realized,
        * because most plugins will expect this behaviour. */
-      peas_extension_set_call (tab->priv->extensions, "activate");
+      peas_extension_set_foreach (tab->priv->extensions,
+                                  (PeasExtensionSetForeachFunc) extension_added,
+                                  tab);
 
       /* Loading dock layout */
       filename = g_build_filename (gtr_dirs_get_user_config_dir (),

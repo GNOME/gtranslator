@@ -271,6 +271,23 @@ static void          profile_combo_changed            (GtrStatusComboBox *combo,
                                                        GtkMenuItem       *item,
                                                        GtrWindow         *window);
 
+static void
+extension_update_state (PeasExtensionSet *extensions,
+                        PeasPluginInfo   *info,
+                        PeasExtension    *exten,
+                        GtrWindow        *window)
+{
+  gtr_window_activatable_update_state (GTR_WINDOW_ACTIVATABLE (exten));
+}
+
+static void
+extensions_update_state (GtrWindow *window)
+{
+  peas_extension_set_foreach (window->priv->extensions,
+                              (PeasExtensionSetForeachFunc) extension_update_state,
+                              window);
+}
+
 void
 _gtr_window_set_sensitive_according_to_message (GtrWindow * window,
                                                 GtrPo * po)
@@ -385,7 +402,7 @@ set_sensitive_according_to_tab (GtrWindow * window, GtrTab * tab)
 
   _gtr_window_set_sensitive_according_to_message (window, po);
 
-  peas_extension_set_call (window->priv->extensions, "update_state", window);
+  extensions_update_state (window);
 }
 
 static void
@@ -783,7 +800,7 @@ notebook_switch_page (GtkNotebook * nb,
   if (action != NULL)
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
 
-  peas_extension_set_call (window->priv->extensions, "update_state", window);
+  extensions_update_state (window);
 }
 
 static void
@@ -816,7 +833,7 @@ notebook_tab_close_request (GtrNotebook * notebook,
    * seems to be ok, but we need to keep an eye on this. */
   gtr_close_tab (tab, window);
 
-  peas_extension_set_call (window->priv->extensions, "update_state", window);
+  extensions_update_state (window);
 }
 
 static void
@@ -937,7 +954,7 @@ notebook_tab_added (GtkNotebook * notebook,
 
   update_documents_list_menu (window);
 
-  peas_extension_set_call (window->priv->extensions, "update_state", window);
+  extensions_update_state (window);
 }
 
 void
@@ -1475,7 +1492,7 @@ extension_added (PeasExtensionSet *extensions,
                  PeasExtension    *exten,
                  GtrWindow        *window)
 {
-  peas_extension_call (exten, "activate");
+  gtr_window_activatable_activate (GTR_WINDOW_ACTIVATABLE (exten));
 }
 
 static void
@@ -1484,7 +1501,7 @@ extension_removed (PeasExtensionSet *extensions,
                    PeasExtension    *exten,
                    GtrWindow        *window)
 {
-  peas_extension_call (exten, "deactivate");
+  gtr_window_activatable_deactivate (GTR_WINDOW_ACTIVATABLE (exten));
 
   /* Ensure update of ui manager, because we suspect it does something
    * with expected static strings in the type module (when unloaded the
@@ -1550,6 +1567,10 @@ gtr_window_init (GtrWindow * window)
                                                      GTR_TYPE_WINDOW_ACTIVATABLE,
                                                      "window", window,
                                                      NULL);
+  peas_extension_set_foreach (window->priv->extensions,
+                              (PeasExtensionSetForeachFunc) extension_added,
+                              window);
+
   g_signal_connect (window->priv->extensions,
                     "extension-added",
                     G_CALLBACK (extension_added),
@@ -1558,7 +1579,6 @@ gtr_window_init (GtrWindow * window)
                     "extension-removed",
                     G_CALLBACK (extension_removed),
                     window);
-  peas_extension_set_call (window->priv->extensions, "activate");
 }
 
 static void
