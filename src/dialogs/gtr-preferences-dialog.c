@@ -710,11 +710,11 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
 
   gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);
 
-  context = gtk_widget_get_style_context (profiles_toolbar);
-  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
-
   context = gtk_widget_get_style_context (profiles_scrolled_window);
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+
+  context = gtk_widget_get_style_context (profiles_toolbar);
+  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
   setup_files_pages (dlg);
   setup_editor_pages (dlg);
