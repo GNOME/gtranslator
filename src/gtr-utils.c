@@ -242,7 +242,7 @@ gtr_utils_menu_position_under_widget (GtkMenu * menu,
 }
 
 /**
- * gtr_utils_menu_position_under_widget:
+ * gtr_utils_menu_position_under_tree_view:
  * @menu: a #GtkMenu
  * @x: the x position of the widget
  * @y: the y position of the widget

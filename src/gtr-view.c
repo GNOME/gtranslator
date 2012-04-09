@@ -354,7 +354,7 @@ gtr_view_copy_clipboard (GtrView * view)
 }
 
 /**
- * gtr_view_cut_clipboard:
+ * gtr_view_paste_clipboard:
  * @view: a #GtrView
  *
  * Pastes the contents of a clipboard at the insertion point,
