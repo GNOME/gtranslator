@@ -57,15 +57,15 @@ G_DEFINE_BOXED_TYPE (GtrLanguage, gtr_language,
 GtrLanguage *
 gtr_language_copy (const GtrLanguage *lang)
 {
-	g_return_val_if_fail (lang != NULL, NULL);
+  g_return_val_if_fail (lang != NULL, NULL);
 
-	return (GtrLanguage *) lang;
+  return (GtrLanguage *) lang;
 }
 
-void 
+void
 gtr_language_free (GtrLanguage *lang)
 {
-	g_return_if_fail (lang != NULL);
+  g_return_if_fail (lang != NULL);
 }
 
 static void
@@ -90,13 +90,9 @@ load_plural_form (GtrLanguage *lang)
   plural_form = g_key_file_get_string (plurals_file, "Plural Forms", lang->code, NULL);
 
   if (plural_form != NULL && *plural_form != '\0')
-    {
-      lang->plural_form = plural_form;
-    }
+    lang->plural_form = plural_form;
   else
-    {
-      lang->plural_form = NULL;
-    }
+    lang->plural_form = NULL;
 }
 
 static void
@@ -220,7 +216,7 @@ gtr_language_lazy_init (void)
   filename = gtr_dirs_get_ui_file (GTR_PLURAL_FORMS_FILENAME);
   if (!g_key_file_load_from_file (plurals_file, filename, G_KEY_FILE_NONE, NULL))
     {
-      g_warning ("Bad plugin file: '%s'", filename);
+      g_warning ("Bad plural form file: '%s'", filename);
       g_free (filename);
       return;
     }
