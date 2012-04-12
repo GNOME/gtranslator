@@ -27,7 +27,7 @@ libopentran_la_LDFLAGS = \
 	$(JSON_GLIB_LIBS)
 
 gtr-open-tran-resources.c: gtr-open-tran.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies gtr-open-tran.gresource.xml)
-			$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-source gtr-open-tran.gresource.xml
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-source gtr-open-tran.gresource.xml
 
 
 pixmaps_dir = $(datadir)/pixmaps/gtranslator

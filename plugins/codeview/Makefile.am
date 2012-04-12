@@ -27,7 +27,7 @@ libsourcecodeview_la_LDFLAGS = \
 
 
 gtr-codeview-resources.c: gtr-codeview.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies gtr-codeview.gresource.xml)
-			$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-source gtr-codeview.gresource.xml
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-source gtr-codeview.gresource.xml
 
 # Plugin Info
 
