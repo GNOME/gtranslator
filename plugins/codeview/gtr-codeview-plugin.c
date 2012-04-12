@@ -636,10 +636,9 @@ configure_widget_destroyed (GtkWidget *widget,
 static GtkWidget *
 get_configuration_dialog (GtrCodeViewPlugin *plugin)
 {
+
   GtrCodeViewConfigureWidget *widget;
-  gboolean ret;
-  GtkWidget *error_widget;
-  gchar *path;
+  GtkBuilder *builder;
   gchar *root_objects[] = {
     "main_box",
     NULL
@@ -648,24 +647,16 @@ get_configuration_dialog (GtrCodeViewPlugin *plugin)
   widget = g_slice_new (GtrCodeViewConfigureWidget);
   widget->settings = g_object_ref (plugin->priv->settings);
 
-  path = gtr_dirs_get_ui_file ("gtr-codeview-dialog.ui");
-  ret = gtr_utils_get_ui_objects (path,
-                                  root_objects,
-                                  &error_widget,
-                                  "main_box", &widget->main_box,
-                                  "use_editor", &widget->use_editor_checkbutton,
-                                  "program_box", &widget->program_box,
-                                  "program_cmd", &widget->program_cmd_entry,
-                                  "line_cmd", &widget->line_cmd_entry, NULL);
-
-  if (!ret)
-    {
-      g_error ("Error loading file \"%s\"", path);
-      g_free (path);
-      return NULL;
-    }
-
-  g_free (path);
+  builder = gtk_builder_new ();
+  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/plugins/codeview/ui/gtr-codeview-dialog.ui",
+					 root_objects, NULL);
+  widget->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
+  g_object_ref (widget->main_box);
+  widget->use_editor_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "use_editor"));
+  widget->program_box = GTK_WIDGET (gtk_builder_get_object (builder, "program_box"));
+  widget->program_cmd_entry = GTK_WIDGET (gtk_builder_get_object (builder, "program_cmd"));
+  widget->line_cmd_entry = GTK_WIDGET (gtk_builder_get_object (builder, "line_cmd"));
+  g_object_unref (builder);
 
   /* Use editor */
   gtk_widget_set_sensitive (widget->program_box,

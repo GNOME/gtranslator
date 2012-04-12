@@ -8,6 +8,9 @@ INCLUDES = \
 	$(WARN_CFLAGS)					\
 	$(DISABLE_DEPRECATED)
 
+BUILT_SOURCES = \
+	gtr-codeview-resources.c
+
 plugin_LTLIBRARIES = \
 	libsourcecodeview.la
 
@@ -15,17 +18,16 @@ libsourcecodeview_la_SOURCES = \
 	gtr-codeview-plugin.c \
 	gtr-codeview-plugin.h \
 	gtr-viewer.c \
-	gtr-viewer.h
+	gtr-viewer.h \
+	$(BUILT_SOURCES)
 
 libsourcecodeview_la_LDFLAGS = \
 	$(PLUGIN_LIBTOOL_FLAGS)				\
 	$(GTRANSLATOR_LIBS)
 
-uidir = $(pkgdatadir)/ui
 
-ui_DATA =  \
-	gtr-viewer.ui \
-	gtr-codeview-dialog.ui
+gtr-codeview-resources.c: gtr-codeview.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies gtr-codeview.gresource.xml)
+			$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-source gtr-codeview.gresource.xml
 
 # Plugin Info
 
@@ -43,11 +45,12 @@ gsettings_SCHEMAS = org.gnome.gtranslator.plugins.codeview.gschema.xml
 
 EXTRA_DIST =	\
 	$(plugin_in_files)	\
-	$(ui_DATA)		\
+	gtr-codeview.gresource.xml	\
+	gtr-codeview-dialog.ui	\
 	org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in
 
-CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
-DISTCLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
+CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS) $(BUILT_SOURCES)
+DISTCLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS) $(BUILT_SOURCES)
 
 MAINTAINERCLEANFILES = $(gsettings_SCHEMAS:.xml=.valid)
 
