@@ -204,9 +204,7 @@ get_configuration_dialog (GtrOpenTranPlugin * plugin)
 {
   GtrOpenTranPluginPrivate *priv = plugin->priv;
   GtrOpenTranConfigureDialog *dlg;
-  gboolean ret;
-  GtkWidget *error_widget;
-  gchar *path;
+  GtkBuilder *builder;
   gchar *root_objects[] = {
     "main_box",
     NULL
@@ -215,23 +213,17 @@ get_configuration_dialog (GtrOpenTranPlugin * plugin)
   dlg = g_slice_new (GtrOpenTranConfigureDialog);
   dlg->settings = g_object_ref (priv->settings);
 
-  path = gtr_dirs_get_ui_file ("gtr-open-tran-dialog.ui");
-  ret = gtr_utils_get_ui_objects (path,
-                                  root_objects,
-                                  &error_widget,
-                                  "main_box", &dlg->main_box,
-                                  "search_code", &dlg->search_code_entry,
-                                  "own_code", &dlg->own_code_entry,
-                                  "use_mirror_server", &dlg->use_mirror_server_entry,
-                                  "mirror_server_url", &dlg->mirror_server_url_entry,
-                                  "mirror_server_frame", &dlg->mirror_server_frame_entry,
-                                  NULL);
-  if (!ret)
-    {
-      g_error (_("Error from configuration dialog %s"), path);
-    }
-
-  g_free (path);
+  builder = gtk_builder_new ();
+  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/plugins/open-tran/ui/gtr-open-tran-dialog.ui",
+  root_objects, NULL);
+  dlg->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
+  g_object_ref (dlg->main_box);
+  dlg->search_code_entry = GTK_WIDGET (gtk_builder_get_object (builder, "search_code"));
+  dlg->own_code_entry = GTK_WIDGET (gtk_builder_get_object (builder, "own_code"));
+  dlg->use_mirror_server_entry = GTK_WIDGET (gtk_builder_get_object (builder, "use_mirror_server"));
+  dlg->mirror_server_url_entry = GTK_WIDGET (gtk_builder_get_object (builder, "mirror_server_url"));
+  dlg->mirror_server_frame_entry = GTK_WIDGET (gtk_builder_get_object (builder, "mirror_server_frame"));
+  g_object_unref (builder);
 
   g_settings_bind (dlg->settings,
                    GTR_SETTINGS_OWN_CODE,

@@ -9,23 +9,26 @@ INCLUDES =						\
 	$(WARN_CFLAGS)					\
 	$(DISABLE_DEPRECATED)
 
+BUILT_SOURCES = \
+	gtr-open-tran-resources.c
+
 plugin_LTLIBRARIES = libopentran.la
 
 libopentran_la_SOURCES = \
 	gtr-open-tran-panel.c \
 	gtr-open-tran-panel.h\
 	gtr-open-tran-plugin.c \
-	gtr-open-tran-plugin.h
+	gtr-open-tran-plugin.h \
+	$(BUILT_SOURCES)
 
 libopentran_la_LDFLAGS = \
 	$(PLUGIN_LIBTOOL_FLAGS)				\
 	$(GTRANSLATOR_LIBS)				\
 	$(JSON_GLIB_LIBS)
 
-uidir = $(pkgdatadir)/ui
+gtr-open-tran-resources.c: gtr-open-tran.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies gtr-open-tran.gresource.xml)
+			$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-source gtr-open-tran.gresource.xml
 
-ui_DATA =  \
-	gtr-open-tran-dialog.ui
 
 pixmaps_dir = $(datadir)/pixmaps/gtranslator
 pixmaps__DATA = \
@@ -56,13 +59,14 @@ gsettings_SCHEMAS = org.gnome.gtranslator.plugins.open-tran.gschema.xml
 @GSETTINGS_RULES@
 
 EXTRA_DIST =	\
-	$(ui_DATA)		\
 	$(pixmaps__DATA)	\
 	$(plugin_in_files)	\
+	gtr-open-tran.gresource.xml	\
+	gtr-ope-tran-dialog-ui	\
 	org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in
 
-CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
-DISTCLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
+CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS) $(BUILT_SOURCES)
+DISTCLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS) $(BUILT_SOURCES)
 
 MAINTAINERCLEANFILES = $(gsettings_SCHEMAS:.xml=.valid)
 
