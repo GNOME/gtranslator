@@ -168,6 +168,8 @@ libgtranslator_la_LIBADD = \
 	toolbareditor/libtoolbareditor.la \
 	$(GTRANSLATOR_LIBS)
 
+libgtranslator_private_la_LIBADD = libgtranslator.la $(GTRANSLATOR_LIBS)
+
 gtr-enum-types.h: gtr-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
 	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gtr-enum-types.h.template $(INST_H_FILES)) > $@
 
