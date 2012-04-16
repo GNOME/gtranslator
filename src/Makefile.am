@@ -2,17 +2,17 @@
 # Welcome to the gtranslator-automake-autoconf Wonderland!
 # --------------------------------------------------------
 
-SUBDIRS = toolbareditor \
-	  dialogs
+SUBDIRS = toolbareditor
 
-noinst_LTLIBRARIES = libgtranslator.la
+noinst_LTLIBRARIES = \
+	libgtranslator.la
 
 lib_LTLIBRARIES = libgtranslator-private.la
 
 INCLUDES = \
 	-I$(top_srcdir)						\
-	-I$(top_srcdir)/src/dialogs				\
 	-I$(top_srcdir)/src/toolbareditor			\
+	-I$(top_builddir)/src					\
 	$(GTRANSLATOR_CFLAGS)					\
 	$(GTKSPELL_CFLAGS)					\
 	$(WARN_CFLAGS)						\
@@ -21,10 +21,20 @@ INCLUDES = \
 	-DDATADIR=\""$(datadir)"\"				\
 	-DLIBDIR=\""$(libdir)"\"
 
+uidir = $(pkgdatadir)/ui
+ui_DATA =  \
+	gtr-preferences-dialog.ui \
+	gtr-search-dialog.ui \
+	gtr-header-dialog.ui \
+	gtr-profile-dialog.ui \
+	gtr-jump-dialog.ui \
+	gtr-languages-fetcher.ui
+
 bin_PROGRAMS = \
 	gtranslator
 
 gtranslator_SOURCES = main.c
+
 
 gtranslator_LDADD =			\
 	libgtranslator.la		\
@@ -75,14 +85,23 @@ INST_H_FILES = \
 
 NOINST_H_FILES = \
 	gtr-actions.h \
+	gtr-assistant.h \
 	gtr-close-button.h \
+	gtr-close-confirmation-dialog.h \
 	gtr-dirs.h \
+	gtr-file-dialogs.h \
+	gtr-header-dialog.h \
 	gtr-history-entry.h \
 	gtr-io-error-info-bar.h \
-	gtr-message-table-model.h \
+	gtr-jump-dialog.h \
 	gtr-language.h \
+	gtr-languages-fetcher.h \
+	gtr-message-table-model.h \
 	gtr-plugins-engine.h \
+	gtr-preferences-dialog.h \
+	gtr-profile-dialog.h \
 	gtr-profile-manager.h \
+	gtr-search-dialog.h \
 	gtr-settings.h \
 	gtr-status-combo-box.h \
 	gtr-tab-label.h \
@@ -106,21 +125,30 @@ libgtranslator_c_files = \
 	gtr-actions-search.c \
 	gtr-actions-view.c \
 	gtr-application.c \
+	gtr-assistant.c \
 	gtr-close-button.c \
+	gtr-close-confirmation-dialog.c \
 	gtr-context.c \
 	gtr-dirs.c \
+	gtr-file-dialogs.c \
 	gtr-header.c \
+	gtr-header-dialog.c \
 	gtr-history-entry.c \
 	gtr-io-error-info-bar.c \
+	gtr-jump-dialog.c \
+	gtr-language.c \
+	gtr-languages-fetcher.c \
 	gtr-message-table.c \
 	gtr-message-table-model.c \
 	gtr-msg.c \
 	gtr-notebook.c \
-	gtr-language.c \
 	gtr-plugins-engine.c \
 	gtr-po.c \
+	gtr-preferences-dialog.c \
 	gtr-profile.c \
+	gtr-profile-dialog.c \
 	gtr-profile-manager.c \
+	gtr-search-dialog.c \
 	gtr-settings.c \
 	gtr-statusbar.c \
 	gtr-status-combo-box.c \
@@ -137,13 +165,12 @@ libgtranslator_la_SOURCES = \
 	$(INST_H_FILES)
 
 libgtranslator_la_LIBADD = \
-	dialogs/libdialogs.la \
 	toolbareditor/libtoolbareditor.la \
 	$(GTRANSLATOR_LIBS)
 
 gtr-enum-types.h: gtr-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
 	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gtr-enum-types.h.template $(INST_H_FILES)) > $@
-	
+
 gtr-enum-types.c: gtr-enum-types.c.template $(INST_H_FILES) $(GLIB_MKENUMS)
 	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gtr-enum-types.c.template $(INST_H_FILES)) > $@
 
@@ -154,11 +181,11 @@ gtr-marshal.c: gtr-marshal.list $(GLIB_GENMARSHAL)
 	$(AM_V_GEN) $(GLIB_GENMARSHAL) $< --body --header --prefix=gtr_marshal > $@
 
 EXTRA_DIST =	\
+	$(ui_DATA)	\
 	gtr-marshal.list	\
 	gtr-enum-types.h.template	\
 	gtr-enum-types.c.template
 
-CLEANFILES = $(BUILT_SOURCES)
 
 if HAVE_INTROSPECTION
 -include $(INTROSPECTION_MAKEFILE)
@@ -178,9 +205,10 @@ gir_DATA = $(INTROSPECTION_GIRS)
 typelibdir = $(libdir)/gtranslator/girepository-1.0
 typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 
-CLEANFILES +=			\
+CLEANFILES =	\
 	$(gir_DATA)	\
-	$(typelib_DATA)
+	$(typelib_DATA)	\
+	$(BUILT_SOURCES)
 endif
 
 -include $(top_srcdir)/git.mk

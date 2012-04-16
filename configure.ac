@@ -293,7 +293,6 @@ plugins/translation-memory/Makefile
 plugins/translation-memory/gda/Makefile
 plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in
 src/Makefile
-src/dialogs/Makefile
 src/toolbareditor/Makefile
 ])
 AC_OUTPUT
