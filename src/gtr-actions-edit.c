@@ -24,8 +24,8 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 
-#include "gtr-header-dialog.h"
-#include "gtr-preferences-dialog.h"
+#include "dialogs/gtr-header-dialog.h"
+#include "dialogs/gtr-preferences-dialog.h"
 #include "gtr-actions.h"
 #include "gtr-msg.h"
 #include "gtr-po.h"

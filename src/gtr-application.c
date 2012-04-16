@@ -24,7 +24,7 @@
 #include <config.h>
 #endif
 
-#include "gtr-assistant.h"
+#include "dialogs/gtr-assistant.h"
 #include "gtr-actions.h"
 #include "gtr-application.h"
 #include "gtr-debug.h"

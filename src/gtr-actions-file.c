@@ -30,7 +30,7 @@
 #include <string.h>
 #include <gio/gio.h>
 
-#include "gtr-close-confirmation-dialog.h"
+#include "dialogs/gtr-close-confirmation-dialog.h"
 #include "gtr-actions.h"
 #include "gtr-application.h"
 #include "gtr-dirs.h"
