@@ -38,7 +38,7 @@
 #include "gtr-utils.h"
 #include "gtr-view.h"
 #include "gtr-window.h"
-#include "dialogs/gtr-search-dialog.h"
+#include "gtr-search-dialog.h"
 
 
 #define GTR_SEARCH_DIALOG_KEY		"gtr-search-dialog-key"
