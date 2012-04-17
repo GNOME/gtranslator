@@ -72,10 +72,10 @@ G_DEFINE_TYPE (GtrJumpDialog, gtr_jump_dialog, GTK_TYPE_DIALOG)
 static void
 gtr_jump_dialog_init (GtrJumpDialog * dlg)
 {
-  gboolean ret;
-  GtkWidget *error_widget, *action_area;
+  GtrJumpDialogPrivate *priv;
+  GtkWidget *action_area;
   GtkBox *content_area;
-  gchar *path;
+  GtkBuilder *builder;
   gchar *root_objects[] = {
     "adjustment1",
     "main_box",
@@ -83,6 +83,7 @@ gtr_jump_dialog_init (GtrJumpDialog * dlg)
   };
 
   dlg->priv = GTR_JUMP_DIALOG_GET_PRIVATE (dlg);
+  priv = dlg->priv;
 
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
                           GTK_STOCK_OK,
@@ -108,26 +109,17 @@ gtr_jump_dialog_init (GtrJumpDialog * dlg)
   g_signal_connect (dlg,
                     "response", G_CALLBACK (dialog_response_handler), NULL);
 
-  /*Glade */
-  path = gtr_dirs_get_ui_file ("gtr-jump-dialog.ui");
-  ret = gtr_utils_get_ui_objects (path,
-                                  root_objects,
-                                  &error_widget,
-                                  "main_box", &dlg->priv->main_box,
-                                  "jump", &dlg->priv->jump, NULL);
-  g_free (path);
+  builder = gtk_builder_new ();
+  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/ui/gtr-jump-dialog.ui",
+                                         root_objects, NULL);
+  priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
+  g_object_ref (priv->main_box);
+  priv->jump = GTK_WIDGET (gtk_builder_get_object (builder, "jump"));
+  g_object_unref (builder);
 
-  if (!ret)
-    {
-      gtk_widget_show (error_widget);
-      gtk_box_pack_start (content_area, error_widget, TRUE, TRUE, 0);
+  gtk_box_pack_start (content_area, priv->main_box, TRUE, TRUE, 0);
 
-      return;
-    }
-
-  gtk_box_pack_start (content_area, dlg->priv->main_box, TRUE, TRUE, 0);
-
-  gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->main_box), 5);
+  gtk_container_set_border_width (GTK_CONTAINER (priv->main_box), 5);
 }
 
 static void

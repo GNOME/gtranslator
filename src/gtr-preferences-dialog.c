@@ -612,10 +612,11 @@ dialog_response_handler (GtkDialog * dlg, gint res_id)
 static void
 gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
 {
-  gboolean ret;
-  GtkWidget *error_widget, *action_area;
+  GtrPreferencesDialogPrivate *priv;
+  GtkWidget *action_area;
   GtkWidget *profiles_toolbar;
   GtkWidget *profiles_scrolled_window;
+  GtkBuilder *builder;
   GtkBox *content_area;
   GtkStyleContext *context;
   gchar *root_objects[] = {
@@ -626,13 +627,13 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
     "model1",
     NULL
   };
-  gchar *path;
 
   dlg->priv = GTR_PREFERENCES_DIALOG_GET_PRIVATE (dlg);
+  priv = dlg->priv;
 
-  dlg->priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
-  dlg->priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
-  dlg->priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
+  priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
+  priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
+  priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
 
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
                           GTK_STOCK_CLOSE,
@@ -655,60 +656,35 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   g_signal_connect (dlg,
                     "response", G_CALLBACK (dialog_response_handler), NULL);
 
-  /*Glade */
+  builder = gtk_builder_new ();
+  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/ui/gtr-preferences-dialog.ui",
+                                         root_objects, NULL);
+  priv->notebook = GTK_WIDGET (gtk_builder_get_object (builder, "notebook"));
+  g_object_ref (priv->notebook);
+  priv->warn_if_contains_fuzzy_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "warn_if_fuzzy_checkbutton"));
+  priv->autosave_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "autosave_checkbutton"));
+  priv->autosave_interval_spinbutton = GTK_WIDGET (gtk_builder_get_object (builder, "autosave_interval_spinbutton"));
+  priv->autosave_hbox = GTK_WIDGET (gtk_builder_get_object (builder, "autosave_hbox"));
+  priv->create_backup_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "create_backup_checkbutton"));
+  priv->highlight_syntax_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "highlight_checkbutton"));
+  priv->visible_whitespace_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "visible_whitespace_checkbutton"));
+  priv->use_custom_font_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "use_custom_font_checkbutton"));
+  priv->editor_font_fontbutton = GTK_WIDGET (gtk_builder_get_object (builder, "editor_font_fontbutton"));
+  priv->editor_font_hbox = GTK_WIDGET (gtk_builder_get_object (builder, "editor_font_hbox"));
+  priv->unmark_fuzzy_when_changed_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "unmark_fuzzy_checkbutton"));
+  priv->spellcheck_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "spellcheck_checkbutton"));
+  priv->profile_treeview = GTK_WIDGET (gtk_builder_get_object (builder, "profile_treeview"));
+  priv->add_button = GTK_WIDGET (gtk_builder_get_object (builder, "add-button"));
+  priv->edit_button = GTK_WIDGET (gtk_builder_get_object (builder, "edit-button"));
+  priv->delete_button = GTK_WIDGET (gtk_builder_get_object (builder, "delete-button"));
+  profiles_toolbar = GTK_WIDGET (gtk_builder_get_object (builder, "profiles-toolbar"));
+  profiles_scrolled_window = GTK_WIDGET (gtk_builder_get_object (builder, "profiles-scrolledwindow"));
+  priv->plugins_box = GTK_WIDGET (gtk_builder_get_object (builder, "plugins_box"));
+  g_object_unref (builder);
 
-  path = gtr_dirs_get_ui_file ("gtr-preferences-dialog.ui");
-  ret = gtr_utils_get_ui_objects (path,
-                                  root_objects,
-                                  &error_widget,
-                                  "notebook", &dlg->priv->notebook,
-                                  "warn_if_fuzzy_checkbutton",
-                                  &dlg->
-                                  priv->warn_if_contains_fuzzy_checkbutton,
-                                  "autosave_checkbutton",
-                                  &dlg->priv->autosave_checkbutton,
-                                  "autosave_interval_spinbutton",
-                                  &dlg->priv->autosave_interval_spinbutton,
-                                  "autosave_hbox", &dlg->priv->autosave_hbox,
-                                  "create_backup_checkbutton",
-                                  &dlg->priv->create_backup_checkbutton,
-                                  "highlight_checkbutton",
-                                  &dlg->priv->highlight_syntax_checkbutton,
-                                  "visible_whitespace_checkbutton",
-                                  &dlg->priv->visible_whitespace_checkbutton,
-                                  "use_custom_font_checkbutton",
-                                  &dlg->priv->use_custom_font_checkbutton,
-                                  "editor_font_fontbutton",
-                                  &dlg->priv->editor_font_fontbutton,
-                                  "editor_font_hbox",
-                                  &dlg->priv->editor_font_hbox,
-                                  "unmark_fuzzy_checkbutton",
-                                  &dlg->
-                                  priv->unmark_fuzzy_when_changed_checkbutton,
-                                  "spellcheck_checkbutton",
-                                  &dlg->priv->spellcheck_checkbutton,
-                                  "profile_treeview",
-                                  &dlg->priv->profile_treeview, "add-button",
-                                  &dlg->priv->add_button, "edit-button",
-                                  &dlg->priv->edit_button, "delete-button",
-                                  &dlg->priv->delete_button,
-                                  "profiles-toolbar", &profiles_toolbar,
-                                  "profiles-scrolledwindow", &profiles_scrolled_window,
-                                  "plugins_box", &dlg->priv->plugins_box,
-                                  NULL);
-  g_free (path);
+  gtk_box_pack_start (content_area, priv->notebook, FALSE, FALSE, 0);
 
-  if (!ret)
-    {
-      gtk_widget_show (error_widget);
-      gtk_box_pack_start (content_area, error_widget, TRUE, TRUE, 0);
-
-      return;
-    }
-
-  gtk_box_pack_start (content_area, dlg->priv->notebook, FALSE, FALSE, 0);
-
-  gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);
+  gtk_container_set_border_width (GTK_CONTAINER (priv->notebook), 5);
 
   context = gtk_widget_get_style_context (profiles_scrolled_window);
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);

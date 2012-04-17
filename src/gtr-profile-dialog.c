@@ -63,17 +63,18 @@ gtr_profile_dialog_class_init (GtrProfileDialogClass *klass)
 static void
 gtr_profile_dialog_init (GtrProfileDialog *dlg)
 {
-  gboolean ret;
-  GtkWidget *error_widget, *action_area;
+  GtrProfileDialogPrivate *priv;
+  GtkWidget *action_area;
   GtkBox *content_area;
   GtkWidget *fetcher_box;
-  gchar *path;
+  GtkBuilder *builder;
   gchar *root_objects[] = {
     "main_box",
     NULL
   };
 
   dlg->priv = GTR_PROFILE_DIALOG_GET_PRIVATE (dlg);
+  priv = dlg->priv;
 
   gtk_dialog_add_button (GTK_DIALOG (dlg),
                          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
@@ -92,31 +93,27 @@ gtr_profile_dialog_init (GtrProfileDialog *dlg)
   gtk_container_set_border_width (GTK_CONTAINER (action_area), 5);
   gtk_box_set_spacing (GTK_BOX (action_area), 4);
 
-  path = gtr_dirs_get_ui_file ("gtr-profile-dialog.ui");
-  ret = gtr_utils_get_ui_objects (path,
-                                  root_objects,
-                                  &error_widget,
-                                  "main_box", &dlg->priv->main_box,
-                                  "profile_name", &dlg->priv->profile_name,
-                                  "name", &dlg->priv->author_name,
-                                  "email", &dlg->priv->author_email,
-                                  "fetcher_box", &fetcher_box,
-                                  NULL);
-  g_free (path);
+  builder = gtk_builder_new ();
+  GError *error = NULL;
+  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/ui/gtr-profile-dialog.ui",
+                                         root_objects, &error);
+  if (error)
+  {
+    g_message(error->message);
+  }
+  priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
+  g_object_ref (priv->main_box);
+  priv->profile_name = GTK_WIDGET (gtk_builder_get_object (builder, "profile_name"));
+  priv->author_name = GTK_WIDGET (gtk_builder_get_object (builder, "name"));
+  priv->author_email = GTK_WIDGET (gtk_builder_get_object (builder, "email"));
+  fetcher_box = GTK_WIDGET (gtk_builder_get_object (builder, "fetcher_box"));
+  g_object_unref (builder);
 
-  if (!ret)
-    {
-      gtk_widget_show (error_widget);
-      gtk_box_pack_start (content_area, error_widget, TRUE, TRUE, 0);
-
-      return;
-    }
-
-  gtk_box_pack_start (content_area, dlg->priv->main_box, FALSE, FALSE, 0);
+  gtk_box_pack_start (content_area, priv->main_box, FALSE, FALSE, 0);
 
   dlg->priv->languages_fetcher = gtr_languages_fetcher_new ();
-  gtk_widget_show (dlg->priv->languages_fetcher);
-  gtk_box_pack_start (GTK_BOX (fetcher_box), dlg->priv->languages_fetcher,
+  gtk_widget_show (priv->languages_fetcher);
+  gtk_box_pack_start (GTK_BOX (fetcher_box), priv->languages_fetcher,
                       TRUE, TRUE, 0);
 }
 

@@ -4,8 +4,7 @@
 
 SUBDIRS = toolbareditor
 
-noinst_LTLIBRARIES = \
-	libgtranslator.la
+noinst_LTLIBRARIES = libgtranslator.la
 
 lib_LTLIBRARIES = libgtranslator-private.la
 
@@ -21,20 +20,10 @@ INCLUDES = \
 	-DDATADIR=\""$(datadir)"\"				\
 	-DLIBDIR=\""$(libdir)"\"
 
-uidir = $(pkgdatadir)/ui
-ui_DATA =  \
-	gtr-preferences-dialog.ui \
-	gtr-search-dialog.ui \
-	gtr-header-dialog.ui \
-	gtr-profile-dialog.ui \
-	gtr-jump-dialog.ui \
-	gtr-languages-fetcher.ui
-
 bin_PROGRAMS = \
 	gtranslator
 
 gtranslator_SOURCES = main.c
-
 
 gtranslator_LDADD =			\
 	libgtranslator.la		\
@@ -58,6 +47,9 @@ BUILT_SOURCES = \
 	gtr-marshal.c \
 	gtr-enum-types.h \
 	gtr-enum-types.c
+
+BUILT_SOURCES_PRIVATE = \
+	gtr-resources.c
 
 if PLATFORM_WIN32
 gtranslator-res.o: gtranslator.rc
@@ -112,9 +104,10 @@ headerdir = $(prefix)/include/gtranslator-@GTR_API_VERSION@/gtranslator
 header_DATA = \
 	$(INST_H_FILES)
 
-libgtranslator_private_la_SOURCES =	\
+libgtranslator_private_la_SOURCES = \
 	gtr-tab-activatable.c \
-	gtr-window-activatable.c
+	gtr-window-activatable.c \
+	gtr-resources.c
 
 libgtranslator_c_files = \
 	gtr-actions-documents.c \
@@ -182,11 +175,20 @@ gtr-marshal.h: gtr-marshal.list $(GLIB_GENMARSHAL)
 gtr-marshal.c: gtr-marshal.list $(GLIB_GENMARSHAL)
 	$(AM_V_GEN) $(GLIB_GENMARSHAL) $< --body --header --prefix=gtr_marshal > $@
 
+gtr-resources.c: gtranslator.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies $(srcdir)/gtranslator.gresource.xml)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-source $(srcdir)/gtranslator.gresource.xml
+
 EXTRA_DIST =	\
-	$(ui_DATA)	\
 	gtr-marshal.list	\
 	gtr-enum-types.h.template	\
-	gtr-enum-types.c.template
+	gtr-enum-types.c.template	\
+	gtranslator.gresource.xml	\
+	gtr-header-dialog.ui	\
+	gtr-jump-dialog.ui	\
+	gtr-languages-fetcher.ui	\
+	gtr-preferences-dialog.ui	\
+	gtr-profile-dialog.ui	\
+	gtr-search-dialog.ui
 
 
 if HAVE_INTROSPECTION
@@ -210,7 +212,8 @@ typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 CLEANFILES =	\
 	$(gir_DATA)	\
 	$(typelib_DATA)	\
-	$(BUILT_SOURCES)
+	$(BUILT_SOURCES) \
+	$(BUILT_SOURCES_PRIVATE)
 endif
 
 -include $(top_srcdir)/git.mk

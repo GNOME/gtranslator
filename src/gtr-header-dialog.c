@@ -233,16 +233,17 @@ gtr_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
 static void
 gtr_header_dialog_init (GtrHeaderDialog * dlg)
 {
-  gboolean ret;
-  GtkWidget *error_widget, *action_area;
+  GtrHeaderDialogPrivate *priv;
+  GtkWidget *action_area;
   GtkBox *content_area;
-  gchar *path;
+  GtkBuilder *builder;
   gchar *root_objects[] = {
     "main_box",
     NULL
   };
 
   dlg->priv = GTR_HEADER_DIALOG_GET_PRIVATE (dlg);
+  priv = dlg->priv;
 
   dlg->priv->settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
 
@@ -263,40 +264,27 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
 
   g_signal_connect (dlg, "response", G_CALLBACK (gtk_widget_destroy), NULL);
 
-  path = gtr_dirs_get_ui_file ("gtr-header-dialog.ui");
-  ret = gtr_utils_get_ui_objects (path,
-                                  root_objects,
-                                  &error_widget,
-                                  "main_box", &dlg->priv->main_box,
-                                  "notebook", &dlg->priv->notebook,
-                                  "lang_vbox", &dlg->priv->lang_vbox,
-                                  "prj_id_version",
-                                  &dlg->priv->prj_id_version, "rmbt",
-                                  &dlg->priv->rmbt, "prj_comment",
-                                  &dlg->priv->prj_comment,
-                                  "take_my_options",
-                                  &dlg->priv->take_my_options,
-                                  "tr_name", &dlg->priv->translator,
-                                  "tr_email", &dlg->priv->tr_email,
-                                  "pot_date", &dlg->priv->pot_date,
-                                  "po_date", &dlg->priv->po_date,
-                                  "language_entry",
-                                  &dlg->priv->language,
-                                  "lg_email_entry",
-                                  &dlg->priv->lg_email,
-                                  "charset_entry",
-                                  &dlg->priv->charset,
-                                  "encoding_entry",
-                                  &dlg->priv->encoding, NULL);
-  g_free (path);
+  builder = gtk_builder_new ();
+  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/ui/gtr-header-dialog.ui",
+                                         root_objects, NULL);
 
-  if (!ret)
-    {
-      gtk_widget_show (error_widget);
-      gtk_box_pack_start (content_area, error_widget, TRUE, TRUE, 0);
-
-      return;
-    }
+  priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
+  g_object_ref (priv->main_box);
+  dlg->priv->notebook = GTK_WIDGET (gtk_builder_get_object (builder, "notebook"));
+  dlg->priv->lang_vbox = GTK_WIDGET (gtk_builder_get_object (builder, "lang_vbox"));
+  dlg->priv->prj_id_version = GTK_WIDGET (gtk_builder_get_object (builder, "prj_id_version"));
+  dlg->priv->rmbt = GTK_WIDGET (gtk_builder_get_object (builder, "rmbt"));
+  dlg->priv->prj_comment = GTK_WIDGET (gtk_builder_get_object (builder, "prj_comment"));
+  dlg->priv->take_my_options = GTK_WIDGET (gtk_builder_get_object (builder, "take_my_options"));
+  dlg->priv->translator = GTK_WIDGET (gtk_builder_get_object (builder, "tr_name"));
+  dlg->priv->tr_email = GTK_WIDGET (gtk_builder_get_object (builder, "tr_email"));
+  dlg->priv->pot_date = GTK_WIDGET (gtk_builder_get_object (builder, "pot_date"));
+  dlg->priv->po_date = GTK_WIDGET (gtk_builder_get_object (builder, "po_date"));
+  dlg->priv->language = GTK_WIDGET (gtk_builder_get_object (builder, "language_entry"));
+  dlg->priv->lg_email = GTK_WIDGET (gtk_builder_get_object (builder, "lg_email_entry"));
+  dlg->priv->charset = GTK_WIDGET (gtk_builder_get_object (builder, "charset_entry"));
+  dlg->priv->encoding = GTK_WIDGET (gtk_builder_get_object (builder, "encoding_entry"));
+  g_object_unref (builder);
 
   gtk_box_pack_start (content_area, dlg->priv->main_box, FALSE, FALSE, 0);
 

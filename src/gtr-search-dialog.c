@@ -355,10 +355,9 @@ static void
 gtr_search_dialog_init (GtrSearchDialog * dlg)
 {
   GtkWidget *content;
-  GtkWidget *error_widget, *action_area;
+  GtkWidget *action_area;
+  GtkBuilder *builder;
   GtkBox *content_area;
-  gboolean ret;
-  gchar *path;
   gchar *root_objects[] = {
     "search_dialog_content",
     NULL
@@ -381,50 +380,27 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
   gtk_container_set_border_width (GTK_CONTAINER (action_area), 5);
   gtk_box_set_spacing (GTK_BOX (action_area), 6);
 
-  path = gtr_dirs_get_ui_file ("gtr-search-dialog.ui");
-  ret = gtr_utils_get_ui_objects (path,
-                                  root_objects,
-                                  &error_widget,
-                                  "search_dialog_content", &content,
-                                  "grid", &dlg->priv->grid,
-                                  "search_label",
-                                  &dlg->priv->search_label,
-                                  "replace_with_label",
-                                  &dlg->priv->replace_label,
-                                  "original_text_checkbutton",
-                                  &dlg->priv->original_text_checkbutton,
-                                  "translated_text_checkbutton",
-                                  &dlg->priv->translated_text_checkbutton,
-                                  "fuzzy_checkbutton",
-                                  &dlg->priv->fuzzy_checkbutton,
-                                  "match_case_checkbutton",
-                                  &dlg->priv->match_case_checkbutton,
-                                  "entire_word_checkbutton",
-                                  &dlg->priv->entire_word_checkbutton,
-                                  "search_backwards_checkbutton",
-                                  &dlg->priv->backwards_checkbutton,
-                                  "wrap_around_checkbutton",
-                                  &dlg->priv->wrap_around_checkbutton, NULL);
-  g_free (path);
-
-  if (!ret)
-    {
-      gtk_widget_show (error_widget);
-
-      gtk_box_pack_start (content_area, error_widget, TRUE, TRUE, 0);
-
-      gtk_container_set_border_width (GTK_CONTAINER (error_widget), 5);
-
-      dlg->priv->glade_error = TRUE;
-
-      return;
-    }
+  builder = gtk_builder_new ();
+  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/ui/gtr-search-dialog.ui",
+                                         root_objects, NULL);
+  content = GTK_WIDGET (gtk_builder_get_object (builder, "search_dialog_content"));
+  g_object_ref (content);
+  dlg->priv->grid = GTK_WIDGET (gtk_builder_get_object (builder, "grid"));
+  dlg->priv->search_label = GTK_WIDGET (gtk_builder_get_object (builder, "search_label"));
+  dlg->priv->replace_label = GTK_WIDGET (gtk_builder_get_object (builder, "replace_with_label"));
+  dlg->priv->original_text_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "original_text_checkbutton"));
+  dlg->priv->translated_text_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "translated_text_checkbutton"));
+  dlg->priv->fuzzy_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "fuzzy_checkbutton"));
+  dlg->priv->match_case_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "match_case_checkbutton"));
+  dlg->priv->entire_word_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "entire_word_checkbutton"));
+  dlg->priv->backwards_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "search_backwards_checkbutton"));
+  dlg->priv->wrap_around_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "wrap_around_checkbutton"));
+  g_object_unref (builder);
 
   dlg->priv->search_entry = gtr_history_entry_new ("search-for-entry", TRUE);
   gtk_widget_set_size_request (dlg->priv->search_entry, 300, -1);
-  gtr_history_entry_set_escape_func
-    (GTR_HISTORY_ENTRY (dlg->priv->search_entry),
-     (GtrHistoryEntryEscapeFunc) gtr_utils_escape_search_text);
+  gtr_history_entry_set_escape_func (GTR_HISTORY_ENTRY (dlg->priv->search_entry),
+                                     (GtrHistoryEntryEscapeFunc) gtr_utils_escape_search_text);
   gtk_widget_set_hexpand (GTK_WIDGET (dlg->priv->search_entry), TRUE);
 
   dlg->priv->search_text_entry = gtr_history_entry_get_entry (GTR_HISTORY_ENTRY (dlg->priv->search_entry));

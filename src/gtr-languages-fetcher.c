@@ -293,10 +293,9 @@ on_combo_box_changed (GtkWidget           *widget,
 static void
 gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
 {
-  GtkWidget *error_widget;
-  GtkWidget *main_box;
-  gboolean ret;
-  gchar *path;
+  GtrLanguagesFetcherPrivate *priv;
+  GtkWidget *content;
+  GtkBuilder *builder;
   gchar *root_objects[] = {
     "main_box",
     "language_store",
@@ -305,74 +304,65 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
   };
 
   fetcher->priv = GTR_LANGUAGES_FETCHER_GET_PRIVATE (fetcher);
+  priv = fetcher->priv;
 
   gtk_orientable_set_orientation (GTK_ORIENTABLE (fetcher),
                                   GTK_ORIENTATION_VERTICAL);
 
-  path = gtr_dirs_get_ui_file ("gtr-languages-fetcher.ui");
-  ret = gtr_utils_get_ui_objects (path,
-                                  root_objects,
-                                  &error_widget,
-                                  "main_box", &main_box,
-                                  "language", &fetcher->priv->language,
-                                  "language_code", &fetcher->priv->language_code,
-                                  "charset", &fetcher->priv->charset,
-                                  "encoding", &fetcher->priv->encoding,
-                                  "team_email", &fetcher->priv->team_email,
-                                  "plural_forms", &fetcher->priv->plural_forms,
+  builder = gtk_builder_new ();
+  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/ui/gtr-languages-fetcher.ui",
+                                         root_objects, NULL);
+  content = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
+  g_object_ref (content);
+  priv->language = GTK_WIDGET (gtk_builder_get_object (builder, "language"));
+  priv->language_code = GTK_WIDGET (gtk_builder_get_object (builder, "language_code"));
+  priv->charset = GTK_WIDGET (gtk_builder_get_object (builder, "charset"));
+  priv->encoding = GTK_WIDGET (gtk_builder_get_object (builder, "encoding"));
+  priv->team_email = GTK_WIDGET (gtk_builder_get_object (builder, "team_email"));
+  priv->plural_forms = GTK_WIDGET (gtk_builder_get_object (builder, "plural_forms"));
+  priv->language_store = GTK_LIST_STORE (gtk_builder_get_object (builder, "language_store"));
+  priv->code_store = GTK_LIST_STORE (gtk_builder_get_object (builder, "code_store"));
+  g_object_unref (builder);
 
-                                  "language_store", &fetcher->priv->language_store,
-                                  "code_store", &fetcher->priv->code_store,
-                                  NULL);
-  g_free (path);
-
-  if (!ret)
-    {
-      gtk_widget_show (error_widget);
-      gtk_box_pack_start (GTK_BOX (fetcher), error_widget, TRUE, TRUE, 0);
-
-      return;
-    }
-
-  gtk_box_pack_start (GTK_BOX (fetcher), main_box, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (fetcher), content, FALSE, FALSE, 0);
 
   /* add items to comboboxes */
   append_from_languages (fetcher);
 
-  g_signal_connect (gtk_bin_get_child (GTK_BIN (fetcher->priv->language)),
+  g_signal_connect (gtk_bin_get_child (GTK_BIN (priv->language)),
                     "activate",
                     G_CALLBACK (on_language_activate),
                     fetcher);
-  g_signal_connect (gtk_bin_get_child (GTK_BIN (fetcher->priv->language)),
+  g_signal_connect (gtk_bin_get_child (GTK_BIN (priv->language)),
                     "focus-out-event",
                     G_CALLBACK (on_language_focus_out_event),
                     fetcher);
-  g_signal_connect (gtk_bin_get_child (GTK_BIN (fetcher->priv->language_code)),
+  g_signal_connect (gtk_bin_get_child (GTK_BIN (priv->language_code)),
                     "activate",
                     G_CALLBACK (on_language_code_activate),
                     fetcher);
-  g_signal_connect (gtk_bin_get_child (GTK_BIN (fetcher->priv->language_code)),
+  g_signal_connect (gtk_bin_get_child (GTK_BIN (priv->language_code)),
                     "focus-out-event",
                     G_CALLBACK (on_language_code_focus_out_event),
                     fetcher);
 
   /* To emit the changed signal */
-  g_signal_connect (fetcher->priv->language, "changed",
+  g_signal_connect (priv->language, "changed",
                     G_CALLBACK (on_combo_box_changed),
                     fetcher);
-  g_signal_connect (fetcher->priv->language_code, "changed",
+  g_signal_connect (priv->language_code, "changed",
                     G_CALLBACK (on_combo_box_changed),
                     fetcher);
-  g_signal_connect (fetcher->priv->charset, "changed",
+  g_signal_connect (priv->charset, "changed",
                     G_CALLBACK (on_combo_box_changed),
                     fetcher);
-  g_signal_connect (fetcher->priv->encoding, "changed",
+  g_signal_connect (priv->encoding, "changed",
                     G_CALLBACK (on_combo_box_changed),
                     fetcher);
-  g_signal_connect (fetcher->priv->team_email, "changed",
+  g_signal_connect (priv->team_email, "changed",
                     G_CALLBACK (on_combo_box_changed),
                     fetcher);
-  g_signal_connect (fetcher->priv->plural_forms, "changed",
+  g_signal_connect (priv->plural_forms, "changed",
                     G_CALLBACK (on_combo_box_changed),
                     fetcher);
 }
