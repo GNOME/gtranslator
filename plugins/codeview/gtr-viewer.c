@@ -61,17 +61,18 @@ dialog_response_handler (GtkDialog * dlg, gint res_id)
 static void
 gtr_viewer_init (GtrViewer * dlg)
 {
-  gboolean ret;
-  GtkWidget *error_widget, *action_area;
+  GtrViewerPrivate *priv;
+  GtkWidget *action_area;
   GtkBox *content_area;
   GtkWidget *sw;
-  gchar *path;
+  GtkBuilder *builder;
   gchar *root_objects[] = {
     "main_box",
     NULL
   };
 
   dlg->priv = GTR_VIEWER_GET_PRIVATE (dlg);
+  priv = dlg->priv;
 
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
                           GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE, NULL);
@@ -94,41 +95,33 @@ gtr_viewer_init (GtrViewer * dlg)
                     "response", G_CALLBACK (dialog_response_handler), NULL);
 
   /*Builder */
-  path = gtr_dirs_get_ui_file ("gtr-viewer.ui");
-  ret = gtr_utils_get_ui_objects (path,
-                                  root_objects,
-                                  &error_widget,
-                                  "main_box", &dlg->priv->main_box,
-                                  "scrolledwindow", &sw,
-                                  "filename_label",
-                                  &dlg->priv->filename_label, NULL);
-  g_free (path);
+  builder = gtk_builder_new ();
+  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/plugins/codeview/ui/gtr-viewer.ui",
+  root_objects, NULL);
+ 
+  priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
+  g_object_ref (priv->main_box);
+  sw = GTK_WIDGET (gtk_builder_get_object (builder, "scrolledwindow"));
+  priv->filename_label = GTK_WIDGET (gtk_builder_get_object (builder, "filename_label"));
+  g_object_unref (builder);
 
-  if (!ret)
-    {
-      gtk_widget_show (error_widget);
-      gtk_box_pack_start (content_area, error_widget, TRUE, TRUE, 0);
+  gtk_box_pack_start (content_area, priv->main_box, TRUE, TRUE, 0);
 
-      return;
-    }
-
-  gtk_box_pack_start (content_area, dlg->priv->main_box, TRUE, TRUE, 0);
-
-  gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->main_box), 5);
+  gtk_container_set_border_width (GTK_CONTAINER (priv->main_box), 5);
 
   /* Source view */
   dlg->priv->view = gtk_source_view_new ();
-  gtk_text_view_set_editable (GTK_TEXT_VIEW (dlg->priv->view), FALSE);
-  gtk_widget_show (dlg->priv->view);
-  gtk_container_add (GTK_CONTAINER (sw), dlg->priv->view);
+  gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->view), FALSE);
+  gtk_widget_show (priv->view);
+  gtk_container_add (GTK_CONTAINER (sw), priv->view);
 
   gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW
-                                              (dlg->priv->view), TRUE);
+                                              (priv->view), TRUE);
 
-  gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (dlg->priv->view),
+  gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (priv->view),
                                          TRUE);
 
-  gtk_source_view_set_show_right_margin (GTK_SOURCE_VIEW (dlg->priv->view),
+  gtk_source_view_set_show_right_margin (GTK_SOURCE_VIEW (priv->view),
                                          TRUE);
 }
 

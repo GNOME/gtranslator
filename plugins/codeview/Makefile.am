@@ -47,6 +47,7 @@ EXTRA_DIST =	\
 	$(plugin_in_files)	\
 	gtr-codeview.gresource.xml	\
 	gtr-codeview-dialog.ui	\
+	gtr-viewer.ui	\
 	org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in
 
 CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS) $(BUILT_SOURCES)
