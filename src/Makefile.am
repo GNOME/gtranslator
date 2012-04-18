@@ -35,7 +35,7 @@ gtranslator_LDADD =			\
 	-lgettextpo
 
 if PLATFORM_WIN32
-gtranslator_LDFLAGS = -Wl,--export-all-symbols -mwindows -Wl,--out-implib,libgedit-$(GTR_API_VERSION).a
+gtranslator_LDFLAGS = -Wl,--export-all-symbols -mwindows -Wl,--out-implib,libgtranslator-$(GTR_API_VERSION).a
 else
 gtranslator_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 endif
