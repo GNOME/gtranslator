@@ -1374,8 +1374,6 @@ gtr_window_draw (GtrWindow * window)
   GtkWidget *widget;
   GError *error = NULL;
   GtkActionGroup *action_group;
-  gchar *path;
-
   GtrWindowPrivate *priv = window->priv;
 
   /* Main box */
@@ -1417,14 +1415,15 @@ gtr_window_draw (GtrWindow * window)
   gtk_ui_manager_insert_action_group (priv->ui_manager, action_group, 0);
   g_object_unref (action_group);
 
-  path = gtr_dirs_get_ui_file ("gtranslator-ui.xml");
+  gtk_ui_manager_add_ui_from_resource (priv->ui_manager,
+				       "/org/gnome/gtranslator/ui/gtranslator-ui.xml",
+				       &error);
 
-  if (!gtk_ui_manager_add_ui_from_file (priv->ui_manager, path, &error))
+  if (error != NULL)
     {
-      g_warning ("building menus failed: %s", error->message);
+      g_warning ("Could not add ui definition: %s", error->message);
       g_error_free (error);
     }
-  g_free (path);
 
   /* show tooltips in the statusbar */
   g_signal_connect (priv->ui_manager,

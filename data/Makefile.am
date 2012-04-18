@@ -9,7 +9,6 @@ pkgconfig_DATA = gtranslator.pc
 
 uidir = $(pkgdatadir)/ui
 ui_DATA =			\
-	gtranslator-ui.xml	\
 	gtr-toolbar.xml		\
 	gtr-plural-forms.ini	\
 	po.lang			\
