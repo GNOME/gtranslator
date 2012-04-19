@@ -49,13 +49,6 @@ void gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
                                               gboolean * push_in,
                                               gpointer user_data);
 
-gboolean
-gtr_utils_get_ui_objects (const gchar * filename,
-                          gchar ** root_objects,
-                          GtkWidget ** error_widget,
-                          const gchar * object_name, ...)
-  G_GNUC_NULL_TERMINATED;
-
      GSList *gtr_utils_drop_get_locations (GtkSelectionData * selection_data);
 
      gchar *gtr_utils_escape_search_text (const gchar * text);
