@@ -108,6 +108,13 @@ PKG_CHECK_MODULES(GTRANSLATOR, [
 AC_SUBST(GTRANSLATOR_CFLAGS)
 AC_SUBST(GTRANSLATOR_LIBS)
 
+dnl gettext library
+AC_CHECK_LIB([gettextpo], [po_message_is_format],
+             [GETTEXT_LIBS=-lgettextpo], [
+              AC_MSG_ERROR(Missing gettext library)])
+
+AC_SUBST([GETTEXT_LIBS])
+
 dnl ------------------------
 dnl Check for win32 platform
 dnl ------------------------

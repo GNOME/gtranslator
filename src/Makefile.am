@@ -32,7 +32,7 @@ gtranslator_LDADD =			\
 	$(GTKSPELL_LIBS)		\
 	$(INTLLIBS)			\
 	$(INTROSPECTION_LIBS)		\
-	-lgettextpo
+	$(GETTEXT_LIBS)
 
 if PLATFORM_WIN32
 gtranslator_LDFLAGS = -Wl,--export-all-symbols -mwindows -Wl,--out-implib,libgtranslator-$(GTR_API_VERSION).a
@@ -161,7 +161,7 @@ libgtranslator_la_LIBADD = \
 	toolbareditor/libtoolbareditor.la \
 	$(GTRANSLATOR_LIBS)
 
-libgtranslator_private_la_LIBADD = libgtranslator.la $(GTRANSLATOR_LIBS)
+libgtranslator_private_la_LIBADD = libgtranslator.la $(GTRANSLATOR_LIBS) $(GETTEXT_LIBS)
 
 gtr-enum-types.h: gtr-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
 	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gtr-enum-types.h.template $(INST_H_FILES)) > $@
