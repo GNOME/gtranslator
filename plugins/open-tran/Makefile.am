@@ -62,7 +62,7 @@ EXTRA_DIST =	\
 	$(pixmaps__DATA)	\
 	$(plugin_in_files)	\
 	gtr-open-tran.gresource.xml	\
-	gtr-ope-tran-dialog-ui	\
+	gtr-open-tran-dialog.ui	\
 	org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in
 
 CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS) $(BUILT_SOURCES)

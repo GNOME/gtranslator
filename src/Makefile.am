@@ -107,7 +107,7 @@ header_DATA = \
 libgtranslator_private_la_SOURCES = \
 	gtr-tab-activatable.c \
 	gtr-window-activatable.c \
-	gtr-resources.c
+	$(BUILT_SOURCES_PRIVATE)
 
 libgtranslator_c_files = \
 	gtr-actions-documents.c \
@@ -175,19 +175,20 @@ gtr-marshal.h: gtr-marshal.list $(GLIB_GENMARSHAL)
 gtr-marshal.c: gtr-marshal.list $(GLIB_GENMARSHAL)
 	$(AM_V_GEN) $(GLIB_GENMARSHAL) $< --body --header --prefix=gtr_marshal > $@
 
-gtr-resources.c: gtranslator.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies $(srcdir)/gtranslator.gresource.xml)
+gtr-resources.c: gtranslator.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/gtranslator.gresource.xml)
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-source $(srcdir)/gtranslator.gresource.xml
 
-EXTRA_DIST =	\
-	gtr-marshal.list	\
-	gtr-enum-types.h.template	\
-	gtr-enum-types.c.template	\
-	gtranslator.gresource.xml	\
-	gtr-header-dialog.ui	\
-	gtr-jump-dialog.ui	\
-	gtr-languages-fetcher.ui	\
-	gtr-preferences-dialog.ui	\
-	gtr-profile-dialog.ui	\
+EXTRA_DIST = \
+	gtr-marshal.list \
+	gtr-enum-types.h.template \
+	gtr-enum-types.c.template \
+	gtranslator.gresource.xml \
+	gtranslator-ui.xml \
+	gtr-header-dialog.ui \
+	gtr-jump-dialog.ui \
+	gtr-languages-fetcher.ui \
+	gtr-preferences-dialog.ui \
+	gtr-profile-dialog.ui \
 	gtr-search-dialog.ui
 
 
