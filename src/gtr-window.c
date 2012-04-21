@@ -1369,55 +1369,12 @@ on_profile_modified (GtrProfileManager *manager,
 }
 
 static void
-extension_added (PeasExtensionSet *extensions,
-                 PeasPluginInfo   *info,
-                 PeasExtension    *exten,
-                 GtrWindow        *window)
+gtr_window_draw (GtrWindow * window)
 {
-  gtr_window_activatable_activate (GTR_WINDOW_ACTIVATABLE (exten));
-}
-
-static void
-extension_removed (PeasExtensionSet *extensions,
-                   PeasPluginInfo   *info,
-                   PeasExtension    *exten,
-                   GtrWindow        *window)
-{
-  gtr_window_activatable_deactivate (GTR_WINDOW_ACTIVATABLE (exten));
-
-  /* Ensure update of ui manager, because we suspect it does something
-   * with expected static strings in the type module (when unloaded the
-   * strings don't exist anymore, and ui manager updates in an idle
-   * func) */
-  gtk_ui_manager_ensure_update (window->priv->ui_manager);
-}
-
-static void
-gtr_window_init (GtrWindow * window)
-{
-  GtkTargetList *tl;
   GtkWidget *widget;
   GError *error = NULL;
   GtkActionGroup *action_group;
   GtrWindowPrivate *priv = window->priv;
-
-  window->priv = GTR_WINDOW_GET_PRIVATE (window);
-
-  window->priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
-
-  window->priv->dispose_has_run = FALSE;
-
-  /* Profile manager */
-  window->priv->prof_manager = gtr_profile_manager_get_default ();
-
-  g_signal_connect (window->priv->prof_manager, "active-profile-changed",
-                    G_CALLBACK (on_active_profile_changed), window);
-  g_signal_connect (window->priv->prof_manager, "profile-added",
-                    G_CALLBACK (on_profile_added), window);
-  g_signal_connect (window->priv->prof_manager, "profile-removed",
-                    G_CALLBACK (on_profile_removed), window);
-  g_signal_connect (window->priv->prof_manager, "profile-modified",
-                    G_CALLBACK (on_profile_modified), window);
 
   /* Main box */
   priv->main_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -1526,7 +1483,57 @@ gtr_window_init (GtrWindow * window)
 
   /* statusbar & progress bar */
   create_statusbar (window);
+}
 
+static void
+extension_added (PeasExtensionSet *extensions,
+                 PeasPluginInfo   *info,
+                 PeasExtension    *exten,
+                 GtrWindow        *window)
+{
+  gtr_window_activatable_activate (GTR_WINDOW_ACTIVATABLE (exten));
+}
+
+static void
+extension_removed (PeasExtensionSet *extensions,
+                   PeasPluginInfo   *info,
+                   PeasExtension    *exten,
+                   GtrWindow        *window)
+{
+  gtr_window_activatable_deactivate (GTR_WINDOW_ACTIVATABLE (exten));
+
+  /* Ensure update of ui manager, because we suspect it does something
+   * with expected static strings in the type module (when unloaded the
+   * strings don't exist anymore, and ui manager updates in an idle
+   * func) */
+  gtk_ui_manager_ensure_update (window->priv->ui_manager);
+}
+
+static void
+gtr_window_init (GtrWindow * window)
+{
+  GtkTargetList *tl;
+
+  window->priv = GTR_WINDOW_GET_PRIVATE (window);
+
+  window->priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
+
+  window->priv->dispose_has_run = FALSE;
+
+  /* Profile manager */
+  window->priv->prof_manager = gtr_profile_manager_get_default ();
+
+  g_signal_connect (window->priv->prof_manager, "active-profile-changed",
+                    G_CALLBACK (on_active_profile_changed), window);
+  g_signal_connect (window->priv->prof_manager, "profile-added",
+                    G_CALLBACK (on_profile_added), window);
+  g_signal_connect (window->priv->prof_manager, "profile-removed",
+                    G_CALLBACK (on_profile_removed), window);
+  g_signal_connect (window->priv->prof_manager, "profile-modified",
+                    G_CALLBACK (on_profile_modified), window);
+
+  /* set up the window widgets */
+  gtr_window_draw (window);
 
   set_sensitive_according_to_window (window);
 

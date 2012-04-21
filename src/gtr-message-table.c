@@ -231,21 +231,14 @@ sort_message_list (GtkTreeViewColumn * column, GtrMessageTable * table)
                          g_list_first (messages), FALSE, GTR_TAB_MOVE_NONE);
 }
 
-  
 static void
-gtr_message_table_init (GtrMessageTable * table)
+gtr_message_table_draw (GtrMessageTable * table)
 {
-  GtkWidget *scrolledwindow;
+  GtrMessageTablePrivate *priv = table->priv;
+
   GtkTreeViewColumn *column;
   GtkCellRenderer *renderer;
   GtkTreeSelection *selection;
-
-  table->priv = GTR_MESSAGE_TABLE_GET_PRIVATE (table);
-
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (table),
-                                  GTK_ORIENTATION_VERTICAL);
-
-  GtrMessageTablePrivate *priv = table->priv;
 
   priv->store = gtr_message_table_model_new ();
 
@@ -344,6 +337,20 @@ gtr_message_table_init (GtrMessageTable * table)
 
   g_signal_connect (G_OBJECT (selection), "changed",
                     G_CALLBACK (gtr_message_table_selection_changed), table);
+}
+
+
+static void
+gtr_message_table_init (GtrMessageTable * table)
+{
+  GtkWidget *scrolledwindow;
+
+  table->priv = GTR_MESSAGE_TABLE_GET_PRIVATE (table);
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (table),
+                                  GTK_ORIENTATION_VERTICAL);
+
+  gtr_message_table_draw (table);
 
   scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
   gtk_box_pack_start (GTK_BOX (table), scrolledwindow, TRUE, TRUE, 0);

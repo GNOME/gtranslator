@@ -295,19 +295,11 @@ copy_button_clicked_cb (GtkWidget             *copy_button,
 }
 
 static void
-gtr_alternate_lang_panel_init (GtrAlternateLangPanel * panel)
+gtr_alternate_lang_panel_draw (GtrAlternateLangPanel * panel)
 {
   GtkWidget *hbox;
   GtkWidget *buttonbox;
   GtkWidget *scroll;
-
-  panel->priv = GTR_ALTERNATE_LANG_PANEL_GET_PRIVATE (panel);
-
-  panel->priv->showed_message_id = 0;
-  panel->priv->po = NULL;
-
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (panel),
-                                  GTK_ORIENTATION_VERTICAL);
 
   /* Hbox */
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
@@ -370,7 +362,20 @@ gtr_alternate_lang_panel_init (GtrAlternateLangPanel * panel)
                                        GTK_SHADOW_IN);
 
   gtk_box_pack_start (GTK_BOX (panel), scroll, TRUE, TRUE, 0);
+}
 
+static void
+gtr_alternate_lang_panel_init (GtrAlternateLangPanel * panel)
+{
+  panel->priv = GTR_ALTERNATE_LANG_PANEL_GET_PRIVATE (panel);
+
+  panel->priv->showed_message_id = 0;
+  panel->priv->po = NULL;
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (panel),
+                                  GTK_ORIENTATION_VERTICAL);
+
+  gtr_alternate_lang_panel_draw (panel);
 }
 
 static void

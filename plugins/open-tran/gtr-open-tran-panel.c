@@ -475,18 +475,11 @@ gtr_open_tran_panel_draw_treeview (GtrOpenTranPanel * panel)
 }
 
 static void
-gtr_open_tran_panel_init (GtrOpenTranPanel * panel)
+gtr_open_tran_panel_draw (GtrOpenTranPanel * panel)
 {
   GtkWidget *scrolledwindow;
   GtkWidget *button;
   GtkWidget *hbox;
-
-  panel->priv = GTR_OPEN_TRAN_PANEL_GET_PRIVATE (panel);
-
-  panel->priv->settings = g_settings_new ("org.gnome.gtranslator.plugins.open-tran");
-
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (panel),
-                                  GTK_ORIENTATION_VERTICAL);
 
   /*
    * Set up the scrolling window
@@ -519,7 +512,20 @@ gtr_open_tran_panel_init (GtrOpenTranPanel * panel)
                     G_CALLBACK (entry_activate_cb), panel);
 
   gtk_box_pack_start (GTK_BOX (panel), hbox, FALSE, TRUE, 0);
+}
 
+static void
+gtr_open_tran_panel_init (GtrOpenTranPanel * panel)
+{
+
+  panel->priv = GTR_OPEN_TRAN_PANEL_GET_PRIVATE (panel);
+
+  panel->priv->settings = g_settings_new ("org.gnome.gtranslator.plugins.open-tran");
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (panel),
+                                  GTK_ORIENTATION_VERTICAL);
+
+  gtr_open_tran_panel_draw (panel);
 }
 
 static void
