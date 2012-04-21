@@ -423,11 +423,73 @@ gtr_dict_panel_link_clicked (GtkWidget * defbox,
 }
 
 static void
-gtr_dict_panel_draw (GtrDictPanel * panel)
+on_settings_changed (GSettings    *settings,
+                     const gchar  *key,
+                     GtrDictPanel *panel)
 {
+  if (strcmp (key, DICTIONARY_SETTINGS_SOURCE_KEY) == 0)
+    {
+      gchar *source_name;
+
+      source_name = g_settings_get_string (settings, key);
+      gtr_dict_panel_set_source_name (panel, source_name);
+
+      g_free (source_name);
+    }
+  else if (strcmp (key, DICTIONARY_SETTINGS_DATABASE_KEY) == 0)
+    {
+      gchar *database;
+
+      database = g_settings_get_string (settings, key);
+      gtr_dict_panel_set_database (panel, database);
+
+      g_free (database);
+    }
+  else if (strcmp (key, DICTIONARY_SETTINGS_STRATEGY_KEY) == 0)
+    {
+      gchar *strategy;
+
+      strategy = g_settings_get_string (settings, key);
+      gtr_dict_panel_set_strategy (panel, strategy);
+
+      g_free (strategy);
+    }
+}
+
+static void
+gtr_dict_panel_init (GtrDictPanel * panel)
+{
+  GtrDictPanelPrivate *priv;
   GtkWidget *vbox;
   GtkWidget *hbox;
 
+  panel->priv = GTR_DICT_PANEL_GET_PRIVATE (panel);
+  priv = panel->priv;
+
+  priv->status = NULL;
+
+  if (!priv->loader)
+    panel->priv->loader = gdict_source_loader_new ();
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (panel),
+                                  GTK_ORIENTATION_VERTICAL);
+
+  /* add our data dir inside $HOME to the loader's search paths */
+  gdict_source_loader_add_search_path (priv->loader,
+                                       gtr_dirs_get_user_config_dir ());
+
+  /* settings */
+  priv->settings = g_settings_new ("org.gnome.gtranslator.plugins.dictionary");
+
+  g_signal_connect (priv->settings,
+                    "changed",
+                    G_CALLBACK (on_settings_changed),
+                    panel);
+
+  /* force retrieval of the configuration from gsettings */
+  gtr_dict_panel_set_source_name (panel, NULL);
+
+  /* Draw widgets */
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
   gtk_widget_show (vbox);
@@ -536,75 +598,7 @@ gtr_dict_panel_draw (GtrDictPanel * panel)
   gtk_widget_show (panel->priv->source_chooser);
 
   gtk_widget_show (panel->priv->sidebar);
-}
 
-static void
-on_settings_changed (GSettings    *settings,
-                     const gchar  *key,
-                     GtrDictPanel *panel)
-{
-  if (strcmp (key, DICTIONARY_SETTINGS_SOURCE_KEY) == 0)
-    {
-      gchar *source_name;
-
-      source_name = g_settings_get_string (settings, key);
-      gtr_dict_panel_set_source_name (panel, source_name);
-
-      g_free (source_name);
-    }
-  else if (strcmp (key, DICTIONARY_SETTINGS_DATABASE_KEY) == 0)
-    {
-      gchar *database;
-
-      database = g_settings_get_string (settings, key);
-      gtr_dict_panel_set_database (panel, database);
-
-      g_free (database);
-    }
-  else if (strcmp (key, DICTIONARY_SETTINGS_STRATEGY_KEY) == 0)
-    {
-      gchar *strategy;
-
-      strategy = g_settings_get_string (settings, key);
-      gtr_dict_panel_set_strategy (panel, strategy);
-
-      g_free (strategy);
-    }
-}
-
-static void
-gtr_dict_panel_init (GtrDictPanel * panel)
-{
-  GtrDictPanelPrivate *priv;
-
-  panel->priv = GTR_DICT_PANEL_GET_PRIVATE (panel);
-  priv = panel->priv;
-
-  priv->status = NULL;
-
-  if (!priv->loader)
-    panel->priv->loader = gdict_source_loader_new ();
-
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (panel),
-                                  GTK_ORIENTATION_VERTICAL);
-
-  /* add our data dir inside $HOME to the loader's search paths */
-  gdict_source_loader_add_search_path (priv->loader,
-                                       gtr_dirs_get_user_config_dir ());
-
-  /* settings */
-  priv->settings = g_settings_new ("org.gnome.gtranslator.plugins.dictionary");
-
-  g_signal_connect (priv->settings,
-                    "changed",
-                    G_CALLBACK (on_settings_changed),
-                    panel);
-
-  /* force retrieval of the configuration from gsettings */
-  gtr_dict_panel_set_source_name (panel, NULL);
-
-  /* Draw widgets */
-  gtr_dict_panel_draw (panel);
 }
 
 static void

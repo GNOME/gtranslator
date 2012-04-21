@@ -132,16 +132,12 @@ gtr_glossary_panel_load_items (GtrGlossaryPanel * panel)
 }
 
 static void
-gtr_glossary_panel_draw (GtrGlossaryPanel * panel)
+gtr_glossary_panel_init (GtrGlossaryPanel * panel)
 {
   GtrGlossaryPanelPrivate *priv = panel->priv;
 
   priv->tree = gtk_tree_view_new ();
-}
 
-static void
-gtr_glossary_panel_init (GtrGlossaryPanel * panel)
-{
   panel->priv = GTR_GLOSSARY_PANEL_GET_PRIVATE (panel);
 
   gtk_orientable_set_orientation (GTK_ORIENTABLE (panel),

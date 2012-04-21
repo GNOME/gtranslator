@@ -669,14 +669,45 @@ on_layout_changed (GdlDockMaster *master,
 }
 
 static void
-gtr_tab_draw (GtrTab *tab)
+extension_added (PeasExtensionSet *extensions,
+                 PeasPluginInfo   *info,
+                 PeasExtension    *exten,
+                 GtrTab           *tab)
+{
+  gtr_tab_activatable_activate (GTR_TAB_ACTIVATABLE (exten));
+}
+
+static void
+extension_removed (PeasExtensionSet *extensions,
+                   PeasPluginInfo   *info,
+                   PeasExtension    *exten,
+                   GtrTab           *tab)
+{
+  gtr_tab_activatable_deactivate (GTR_TAB_ACTIVATABLE (exten));
+}
+
+static void
+gtr_tab_init (GtrTab * tab)
 {
   GtkWidget *hbox;
   GtkWidget *vertical_box;
   GtkWidget *msgid_label;
   GtkWidget *scroll;
   GtkWidget *dockbar;
-  GtrTabPrivate *priv = tab->priv;
+  GtrTabPrivate *priv;
+
+  tab->priv = GTR_TAB_GET_PRIVATE (tab);
+  priv = tab->priv;
+
+  priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
+  priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
+  priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
+  priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
+
+  g_signal_connect (tab, "message-changed", G_CALLBACK (update_status), NULL);
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (tab),
+                                  GTK_ORIENTATION_VERTICAL);
 
   /* Docker */
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -802,64 +833,28 @@ gtr_tab_draw (GtrTab *tab)
                       NULL,
                       GTR_TAB_PLACEMENT_RIGHT,
                       FALSE);
-}
-
-static void
-extension_added (PeasExtensionSet *extensions,
-                 PeasPluginInfo   *info,
-                 PeasExtension    *exten,
-                 GtrTab           *tab)
-{
-  gtr_tab_activatable_activate (GTR_TAB_ACTIVATABLE (exten));
-}
-
-static void
-extension_removed (PeasExtensionSet *extensions,
-                   PeasPluginInfo   *info,
-                   PeasExtension    *exten,
-                   GtrTab           *tab)
-{
-  gtr_tab_activatable_deactivate (GTR_TAB_ACTIVATABLE (exten));
-}
-
-static void
-gtr_tab_init (GtrTab * tab)
-{
-  tab->priv = GTR_TAB_GET_PRIVATE (tab);
-
-  tab->priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
-  tab->priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
-  tab->priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
-  tab->priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
-
-  g_signal_connect (tab, "message-changed", G_CALLBACK (update_status), NULL);
-
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (tab),
-                                  GTK_ORIENTATION_VERTICAL);
-
-  gtr_tab_draw (tab);
 
   /* Manage auto save data */
-  tab->priv->autosave = g_settings_get_boolean (tab->priv->files_settings,
-                                                GTR_SETTINGS_AUTO_SAVE);
-  tab->priv->autosave = (tab->priv->autosave != FALSE);
+  priv->autosave = g_settings_get_boolean (priv->files_settings,
+                                           GTR_SETTINGS_AUTO_SAVE);
+  priv->autosave = (priv->autosave != FALSE);
 
-  tab->priv->autosave_interval = g_settings_get_int (tab->priv->files_settings,
-                                                     GTR_SETTINGS_AUTO_SAVE_INTERVAL);
-  if (tab->priv->autosave_interval <= 0)
-    tab->priv->autosave_interval = 1;
+  priv->autosave_interval = g_settings_get_int (priv->files_settings,
+                                                GTR_SETTINGS_AUTO_SAVE_INTERVAL);
+  if (priv->autosave_interval <= 0)
+    priv->autosave_interval = 1;
 
   /* Plugins */
-  tab->priv->extensions = peas_extension_set_new (PEAS_ENGINE (gtr_plugins_engine_get_default ()),
-                                                  GTR_TYPE_TAB_ACTIVATABLE,
-                                                  "tab", tab,
-                                                  NULL);
+  priv->extensions = peas_extension_set_new (PEAS_ENGINE (gtr_plugins_engine_get_default ()),
+                                             GTR_TYPE_TAB_ACTIVATABLE,
+                                             "tab", tab,
+                                             NULL);
 
-  g_signal_connect (tab->priv->extensions,
+  g_signal_connect (priv->extensions,
                     "extension-added",
                     G_CALLBACK (extension_added),
                     tab);
-  g_signal_connect (tab->priv->extensions,
+  g_signal_connect (priv->extensions,
                     "extension-removed",
                     G_CALLBACK (extension_removed),
                     tab);
