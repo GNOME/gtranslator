@@ -308,9 +308,8 @@ reload_values (GtrContextPanel *panel)
 }
 
 static void
-on_accept_button_clicked (GtkButton *button, GtrContextPanel *panel)
+buffer_end_user_action (GtkTextBuffer *buffer, GtrContextPanel *panel)
 {
-  GtkTextBuffer *buffer;
   GtkTextIter start, end;
   gchar *text;
   GtrPo *po;
@@ -331,12 +330,10 @@ on_accept_button_clicked (GtkButton *button, GtrContextPanel *panel)
   po_state = gtr_po_get_state (po);
   if (po_state != GTR_PO_STATE_MODIFIED)
     gtr_po_set_state (po, GTR_PO_STATE_MODIFIED);
-
-  reload_values (panel);
 }
 
 static void
-on_cancel_button_clicked (GtkButton *button, GtrContextPanel *panel)
+on_done_button_clicked (GtkButton *button, GtrContextPanel *panel)
 {
   reload_values (panel);
 }
@@ -346,6 +343,7 @@ gtr_context_panel_init (GtrContextPanel *panel)
 {
   GtrContextPanelPrivate *priv;
   GtkWidget *button;
+  GtkTextBuffer *buffer;
 
   panel->priv = GTR_CONTEXT_PANEL_GET_PRIVATE (panel);
   priv = panel->priv;
@@ -382,22 +380,19 @@ gtr_context_panel_init (GtrContextPanel *panel)
   g_signal_connect (priv->context, "visibility-notify-event",
                     G_CALLBACK (visibility_notify_event), panel);
 
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->context));
+  g_signal_connect (buffer, "end-user-action",
+                    G_CALLBACK (buffer_end_user_action), panel);
+
   /* Buttons */
   priv->button_box = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (priv->button_box), GTK_BUTTONBOX_END);
   gtk_box_pack_start (GTK_BOX (panel), priv->button_box, FALSE, FALSE, 0);
 
-  button = gtk_button_new_from_stock (GTK_STOCK_OK);
+  button = gtk_button_new_with_mnemonic (_("D_one"));
   gtk_widget_show (button);
   g_signal_connect (button, "clicked",
-                    G_CALLBACK (on_accept_button_clicked), panel);
-
-  gtk_box_pack_start (GTK_BOX (priv->button_box), button, FALSE, FALSE, 0);
-
-  button = gtk_button_new_from_stock (GTK_STOCK_CANCEL);
-  gtk_widget_show (button);
-  g_signal_connect (button, "clicked",
-                    G_CALLBACK (on_cancel_button_clicked), panel);
-
+                    G_CALLBACK (on_done_button_clicked), panel);
   gtk_box_pack_start (GTK_BOX (priv->button_box), button, FALSE, FALSE, 0);
 }
 
