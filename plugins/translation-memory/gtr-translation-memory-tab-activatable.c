@@ -110,6 +110,14 @@ gtr_translation_memory_tab_activatable_get_property (GObject    *object,
 }
 
 static void
+store_message (GtrTranslationMemoryTabActivatable *activatable,
+               GtrMsg                             *msg)
+{
+  if (gtr_msg_is_translated (msg) && !gtr_msg_is_fuzzy (msg))
+    gtr_translation_memory_store (activatable->priv->translation_memory, msg);
+}
+
+static void
 on_message_edition_finished (GtrTab                             *tab,
                              GtrMsg                             *msg,
                              GtrTranslationMemoryTabActivatable *activatable)
@@ -121,10 +129,34 @@ on_message_edition_finished (GtrTab                             *tab,
   header = gtr_po_get_header (po);
 
   if (gtr_header_get_profile (header) != NULL)
-    {
-      if (gtr_msg_is_translated (msg) && !gtr_msg_is_fuzzy (msg))
-        gtr_translation_memory_store (activatable->priv->translation_memory, msg);
-    }
+    store_message (activatable, msg);
+}
+
+typedef struct {
+  GtrTranslationMemoryTabActivatable *activatable;
+  GList *messages;
+} GtrPopulateData;
+
+static gboolean
+gtr_translation_memory_populate (GtrPopulateData *data)
+{
+  GtrMsg *msg;
+
+  if (!data->messages)
+    return FALSE;
+
+  msg = (GtrMsg *)data->messages->data;
+  store_message (data->activatable, msg);
+  data->messages = g_list_next (data->messages);
+
+  return TRUE;
+}
+
+static void
+gtr_populate_data_free (GtrPopulateData *data)
+{
+  g_object_unref (data->activatable);
+  g_slice_free (GtrPopulateData, data);
 }
 
 static void
@@ -132,6 +164,7 @@ gtr_translation_memory_tab_activatable_activate (GtrTabActivatable *activatable)
 {
   GtrTranslationMemoryTabActivatablePrivate *priv = GTR_TRANSLATION_MEMORY_TAB_ACTIVATABLE (activatable)->priv;
   GtkWidget *window;
+  GtrPo *po;
 
   window = gtk_widget_get_toplevel (GTK_WIDGET (priv->tab));
 
@@ -149,6 +182,18 @@ gtr_translation_memory_tab_activatable_activate (GtrTabActivatable *activatable)
   g_signal_connect (priv->tab, "message-edition-finished",
                     G_CALLBACK (on_message_edition_finished),
                     activatable);
+
+  po = gtr_tab_get_po (priv->tab);
+  if (gtr_header_get_profile (gtr_po_get_header (po)) != NULL)
+    {
+      GtrPopulateData *data = g_slice_new0 (GtrPopulateData);
+
+      data->activatable = g_object_ref (activatable);
+      data->messages = gtr_po_get_messages (po);
+      g_idle_add_full (G_PRIORITY_HIGH_IDLE + 30,
+                       (GSourceFunc)gtr_translation_memory_populate,
+                       data, (GDestroyNotify)gtr_populate_data_free);
+    }
 }
 
 static void
