@@ -349,6 +349,218 @@ gtr_po_new (void)
   return po;
 }
 
+static gboolean
+_gtr_po_load (GtrPo * po, GFile * location, GError ** error)
+{
+  GtrPoPrivate *priv = po->priv;
+  struct po_xerror_handler handler;
+  po_message_iterator_t iter;
+  po_message_t message;
+  const gchar *msgstr;
+  gchar *filename;
+
+  /*
+   * Initialize the handler error.
+   */
+  handler.xerror = &on_gettext_po_xerror;
+  handler.xerror2 = &on_gettext_po_xerror2;
+
+  if (message_error != NULL)
+    {
+      g_free (message_error);
+      message_error = NULL;
+    }
+
+  filename = g_file_get_path (location);
+
+  if (po->priv->gettext_po_file)
+    po_file_free (po->priv->gettext_po_file);
+
+  if (priv->header)
+    {
+      g_object_unref (priv->header);
+      priv->header = NULL;
+    }
+
+  if (priv->iter)
+    {
+      po_message_iterator_free (priv->iter);
+      priv->iter = NULL;
+    }
+
+  priv->gettext_po_file = po_file_read (filename, &handler);
+  g_free (filename);
+
+  if (po_file_is_empty (priv->gettext_po_file))
+    {
+      g_set_error (error,
+                   GTR_PO_ERROR,
+                   GTR_PO_ERROR_FILE_EMPTY, _("The file is empty"));
+      return FALSE;
+    }
+
+  if (!po->priv->gettext_po_file)
+    {
+      g_set_error (error,
+                   GTR_PO_ERROR,
+                   GTR_PO_ERROR_FILENAME,
+                   _("Failed opening file '%s': %s"),
+                   filename, g_strerror (errno));
+      g_free (filename);
+      return FALSE;
+    }
+
+  iter = po_message_iterator (priv->gettext_po_file, NULL);
+  message = po_next_message (iter);
+  msgstr = po_message_msgstr (message);
+
+  if (!strncmp (msgstr, "Project-Id-Version: ", 20))
+    priv->header = gtr_header_new (iter, message);
+  else
+    {
+      /* FIXME: add a header with default values */
+      po_message_iterator_free (iter);
+      iter = po_message_iterator (priv->gettext_po_file, NULL);
+    }
+
+  priv->iter = iter;
+
+  return TRUE;
+}
+
+static gboolean
+_gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
+{
+  GMappedFile *mapped;
+  const gchar *content;
+  gboolean utf8_valid;
+  gchar *filename;
+  gsize size;
+
+  filename = g_file_get_path (po->priv->location);
+  mapped = g_mapped_file_new (filename, FALSE, error);
+  g_free (filename);
+
+  if (!mapped)
+    return FALSE;
+
+  content = g_mapped_file_get_contents (mapped);
+  size = g_mapped_file_get_length (mapped);
+
+  utf8_valid = g_utf8_validate (content, size, NULL);
+
+  if (!_gtr_po_load (po, po->priv->location, error))
+    {
+      g_mapped_file_unref (mapped);
+      return FALSE;
+    }
+
+  if (!utf8_valid &&
+      po->priv->header)
+    {
+      gchar *charset = NULL;
+
+      if (po->priv->header)
+        charset = gtr_header_get_charset (po->priv->header);
+
+      if (charset && *charset && strcmp (charset, "UTF-8") != 0)
+        {
+          GOutputStream *converter_stream, *stream;
+          GCharsetConverter *converter;
+          GIOStream *iostream;
+          GFile *tmp;
+
+          /* Store UTF-8 converted file in $TMP */
+          converter = g_charset_converter_new ("UTF-8", charset, NULL);
+
+          if (!converter)
+            {
+              g_set_error (error,
+                           GTR_PO_ERROR,
+                           GTR_PO_ERROR_ENCODING,
+                           _("Could not convert from charset '%s' to UTF-8"),
+                           charset);
+              g_mapped_file_unref (mapped);
+              g_free (charset);
+              return FALSE;
+            }
+
+          g_free (charset);
+          tmp = g_file_new_tmp ("gtranslator-XXXXXX.po",
+                                (GFileIOStream **) &iostream,
+                                NULL);
+
+          if (!tmp)
+            {
+              g_set_error (error,
+                           GTR_PO_ERROR,
+                           GTR_PO_ERROR_ENCODING,
+                           _("Could not store temporary "
+                             "file for encoding conversion"));
+              g_mapped_file_unref (mapped);
+              g_object_unref (converter);
+              return FALSE;
+            }
+
+          stream = g_io_stream_get_output_stream (iostream);
+          converter_stream =
+            g_converter_output_stream_new (stream,
+                                           G_CONVERTER (converter));
+
+
+          if (!g_output_stream_write_all (converter_stream,
+                                          content, size, NULL,
+                                          NULL, NULL))
+            {
+              g_set_error (error,
+                           GTR_PO_ERROR,
+                           GTR_PO_ERROR_ENCODING,
+                           _("Could not store temporary "
+                             "file for encoding conversion"));
+              g_object_unref (converter_stream);
+              g_object_unref (iostream);
+              g_object_unref (converter);
+              g_mapped_file_unref (mapped);
+              return FALSE;
+            }
+
+          g_object_unref (converter_stream);
+          g_object_unref (iostream);
+          g_object_unref (converter);
+
+          /* Now load again the converted file */
+          if (!_gtr_po_load (po, tmp, error))
+            {
+              g_mapped_file_unref (mapped);
+              return FALSE;
+            }
+
+          /* Ensure Content-Type is set correctly
+           * in the header as per the content
+           */
+          if (po->priv->header)
+            gtr_header_set_charset (po->priv->header, "UTF-8");
+
+          utf8_valid = TRUE;
+        }
+    }
+
+  g_mapped_file_unref (mapped);
+
+  if (!utf8_valid)
+    {
+      g_set_error (error,
+                   GTR_PO_ERROR,
+                   GTR_PO_ERROR_ENCODING,
+                   _("All attempt to convert the file to UTF-8 has failed, "
+                     "use the msgconv or iconv command line tools before "
+                     "opening this file with gtranslator"));
+      return FALSE;
+    }
+
+  return TRUE;
+}
+
 /**
  * gtr_po_parse:
  * @po: a #GtrPo
@@ -362,24 +574,15 @@ void
 gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
 {
   GtrPoPrivate *priv = po->priv;
-  gchar *filename;
   GtrMsg *msg;
-  struct po_xerror_handler handler;
   po_message_t message;
   po_message_iterator_t iter;
-  const gchar *msgstr;
   const gchar *const *domains;
   gint i = 0;
   gint pos = 1;
 
   g_return_if_fail (GTR_IS_PO (po));
   g_return_if_fail (location != NULL);
-
-  /*
-   * Initialice the handler error.
-   */
-  handler.xerror = &on_gettext_po_xerror;
-  handler.xerror2 = &on_gettext_po_xerror2;
 
   if (message_error != NULL)
     {
@@ -391,24 +594,12 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
    * Get filename path.
    */
   po->priv->location = g_file_dup (location);
-  filename = g_file_get_path (location);
 
-  if (po->priv->gettext_po_file)
-    po_file_free (po->priv->gettext_po_file);
-
-  priv->gettext_po_file = po_file_read (filename, &handler);
-  if (priv->gettext_po_file == NULL)
+  if (!_gtr_po_load_ensure_utf8 (po, error))
     {
-      g_set_error (error,
-                   GTR_PO_ERROR,
-                   GTR_PO_ERROR_FILENAME,
-                   _("Failed opening file '%s': %s"),
-                   filename, g_strerror (errno));
       g_object_unref (po);
-      g_free (filename);
       return;
     }
-  g_free (filename);
 
   /*
    * No need to return; this can be corrected by the user
@@ -417,18 +608,6 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
     {
       g_set_error (error,
                    GTR_PO_ERROR, GTR_PO_ERROR_RECOVERY, "%s", message_error);
-    }
-
-  if (po_file_is_empty (priv->gettext_po_file))
-    {
-      if (*error != NULL)
-        g_clear_error (error);
-
-      g_set_error (error,
-                   GTR_PO_ERROR,
-                   GTR_PO_ERROR_FILE_EMPTY, _("The file is empty"));
-      g_object_unref (po);
-      return;
     }
 
   /*
@@ -457,14 +636,7 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
    * message.
    */
   priv->messages = NULL;
-  priv->iter = iter = po_message_iterator (priv->gettext_po_file, NULL);
-  message = po_next_message (iter);
-  msgstr = po_message_msgstr (message);
-  if (!strncmp (msgstr, "Project-Id-Version: ", 20))
-    priv->header = gtr_header_new (iter, message);
-  else
-    /* FIXME: add a header with default values */
-    iter = po_message_iterator (priv->gettext_po_file, NULL);
+  iter = priv->iter;
 
   /* Post-process these into a linked list of GtrMsgs. */
   while ((message = po_next_message (iter)))
