@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-21 16:40+0200\n"
-"PO-Revision-Date: 2012-04-21 16:41+0200\n"
+"POT-Creation-Date: 2012-04-21 18:12+0200\n"
+"PO-Revision-Date: 2012-04-21 18:13+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>>\n"
 "Language: pl\n"
@@ -677,7 +677,7 @@ msgstr "Konfiguracja:"
 msgid "Use only files with this name:"
 msgstr "Używanie tylko plików o tej nazwie:"
 
-#: ../plugins/translation-memory/gtr-translation-memory-tab-activatable.c:145
+#: ../plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
 #: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:1
 msgid "Translation Memory"
 msgstr "Pamięć tłumaczeń"
@@ -1283,27 +1283,47 @@ msgstr "Pierwotny komunikat"
 msgid "Translated Message"
 msgstr "Przetłumaczony komunikat"
 
-#: ../src/gtr-po.c:405
-#, c-format
-msgid "Failed opening file '%s': %s"
-msgstr "Otwarcie pliku \"%s\" się nie powiodło: %s"
-
-#: ../src/gtr-po.c:429
+#: ../src/gtr-po.c:398
 #, c-format
 msgid "The file is empty"
 msgstr "Plik jest pusty"
 
-#: ../src/gtr-po.c:444
+#: ../src/gtr-po.c:407
+#, c-format
+msgid "Failed opening file '%s': %s"
+msgstr "Otwarcie pliku \"%s\" się nie powiodło: %s"
+
+#: ../src/gtr-po.c:481
+#, c-format
+msgid "Could not convert from charset '%s' to UTF-8"
+msgstr "Nie można przekonwertować z zestawu znaków \"%s\" na UTF-8"
+
+#: ../src/gtr-po.c:498 ../src/gtr-po.c:518
+#, c-format
+msgid "Could not store temporary file for encoding conversion"
+msgstr "Nie można przechować pliku tymczasowego do konwersji kodowania"
+
+#: ../src/gtr-po.c:555
+#, c-format
+msgid ""
+"All attempt to convert the file to UTF-8 has failed, use the msgconv or "
+"iconv command line tools before opening this file with gtranslator"
+msgstr ""
+"Żadna próba konwersji pliku do UTF-8 się nie powiodła. Proszę użyć narzędzi "
+"wiersza poleceń msgconv lub iconv przed otwarciem tego pliku za pomocą "
+"programu gtranslator"
+
+#: ../src/gtr-po.c:623
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Program gettext zwrócił pustą listę domen komunikatów."
 
-#: ../src/gtr-po.c:496
+#: ../src/gtr-po.c:668
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Brak komunikatów uzyskanych z parsera."
 
-#: ../src/gtr-po.c:544
+#: ../src/gtr-po.c:716
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1314,12 +1334,12 @@ msgstr ""
 "Pliki .pot są tworzone w procesie kompilacji.\n"
 "Plik powinien prawdopodobnie nosić nazwę \"%s.po\"."
 
-#: ../src/gtr-po.c:557
+#: ../src/gtr-po.c:729
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Plik %s jest tylko do odczytu i nie może zostać zastąpiony"
 
-#: ../src/gtr-po.c:588
+#: ../src/gtr-po.c:760
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Wystąpił błąd podczas zapisywania pliku PO: %s"
