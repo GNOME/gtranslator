@@ -669,7 +669,25 @@ on_layout_changed (GdlDockMaster *master,
 }
 
 static void
-gtr_tab_draw (GtrTab *tab)
+extension_added (PeasExtensionSet *extensions,
+                 PeasPluginInfo   *info,
+                 PeasExtension    *exten,
+                 GtrTab           *tab)
+{
+  gtr_tab_activatable_activate (GTR_TAB_ACTIVATABLE (exten));
+}
+
+static void
+extension_removed (PeasExtensionSet *extensions,
+                   PeasPluginInfo   *info,
+                   PeasExtension    *exten,
+                   GtrTab           *tab)
+{
+  gtr_tab_activatable_deactivate (GTR_TAB_ACTIVATABLE (exten));
+}
+
+static void
+gtr_tab_init (GtrTab * tab)
 {
   GtkWidget *hbox;
   GtkWidget *vertical_box;
@@ -677,6 +695,18 @@ gtr_tab_draw (GtrTab *tab)
   GtkWidget *scroll;
   GtkWidget *dockbar;
   GtrTabPrivate *priv = tab->priv;
+
+  tab->priv = GTR_TAB_GET_PRIVATE (tab);
+
+  tab->priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
+  tab->priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
+  tab->priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
+  tab->priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
+
+  g_signal_connect (tab, "message-changed", G_CALLBACK (update_status), NULL);
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (tab),
+                                  GTK_ORIENTATION_VERTICAL);
 
   /* Docker */
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -802,42 +832,6 @@ gtr_tab_draw (GtrTab *tab)
                       NULL,
                       GTR_TAB_PLACEMENT_RIGHT,
                       FALSE);
-}
-
-static void
-extension_added (PeasExtensionSet *extensions,
-                 PeasPluginInfo   *info,
-                 PeasExtension    *exten,
-                 GtrTab           *tab)
-{
-  gtr_tab_activatable_activate (GTR_TAB_ACTIVATABLE (exten));
-}
-
-static void
-extension_removed (PeasExtensionSet *extensions,
-                   PeasPluginInfo   *info,
-                   PeasExtension    *exten,
-                   GtrTab           *tab)
-{
-  gtr_tab_activatable_deactivate (GTR_TAB_ACTIVATABLE (exten));
-}
-
-static void
-gtr_tab_init (GtrTab * tab)
-{
-  tab->priv = GTR_TAB_GET_PRIVATE (tab);
-
-  tab->priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
-  tab->priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
-  tab->priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
-  tab->priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
-
-  g_signal_connect (tab, "message-changed", G_CALLBACK (update_status), NULL);
-
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (tab),
-                                  GTK_ORIENTATION_VERTICAL);
-
-  gtr_tab_draw (tab);
 
   /* Manage auto save data */
   tab->priv->autosave = g_settings_get_boolean (tab->priv->files_settings,
