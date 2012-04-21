@@ -20,6 +20,8 @@ libtranslation_memory_la_SOURCES = \
 	gtr-translation-memory-window-activatable.c \
 	gtr-translation-memory-window-activatable.h \
 	gtr-translation-memory-tab-activatable.c \
+	gtr-translation-memory-utils.c \
+	gtr-translation-memory-utils.h \
 	gtr-translation-memory-tab-activatable.h \
 	gtr-translation-memory-ui.c \
 	gtr-translation-memory-ui.h \

@@ -28,8 +28,6 @@
 #include <libxml/tree.h>
 #include <gio/gio.h>
 
-gchar **gtr_utils_split_string_in_words (const gchar * string);
-
 xmlDocPtr gtr_xml_new_doc (const gchar * name);
 
 xmlDocPtr gtr_xml_open_file (const gchar * filename);
@@ -69,9 +67,6 @@ void gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
      gchar *gtr_utils_get_current_time (void);
 
      gchar *gtr_utils_get_current_year (void);
-
-     void gtr_utils_scan_dir (GFile * dir,
-                              GSList ** list, const gchar * po_name);
 
      gchar *gtr_utils_reduce_path (const gchar * path);
 

@@ -24,7 +24,7 @@
 #include "gtr-gda.h"
 #include "gtr-translation-memory.h"
 #include "gtr-dirs.h"
-#include "gtr-utils.h"
+#include "gda-utils.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -156,7 +156,7 @@ string_comparator (const void *s1, const void *s2)
 static gchar **
 gtr_gda_split_string_in_words (const gchar *phrase)
 {
-  gchar **words = gtr_utils_split_string_in_words (phrase);
+  gchar **words = gtr_gda_utils_split_string_in_words (phrase);
   gsize count = g_strv_length (words);
   gint w;
   gint r;

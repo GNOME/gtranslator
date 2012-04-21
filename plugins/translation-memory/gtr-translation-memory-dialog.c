@@ -17,7 +17,7 @@
 
 #include "gtr-translation-memory-dialog.h"
 #include "gtr-profile-manager.h"
-#include "gtr-utils.h"
+#include "gtr-translation-memory-utils.h"
 #include "gtr-po.h"
 
 #include <glib/gi18n.h>
@@ -239,11 +239,11 @@ on_add_database_button_clicked (GtkButton                  *button,
 
       restriction = g_settings_get_string (dlg->priv->tm_settings,
                                            "filename-restriction");
-      gtr_utils_scan_dir (dir, &data->list, restriction);
+      gtr_scan_dir (dir, &data->list, restriction);
       g_free (restriction);
     }
   else
-    gtr_utils_scan_dir (dir, &data->list, NULL);
+    gtr_scan_dir (dir, &data->list, NULL);
 
   data->tm = dlg->priv->translation_memory;
   data->progress = GTK_PROGRESS_BAR (dlg->priv->add_database_progressbar);
