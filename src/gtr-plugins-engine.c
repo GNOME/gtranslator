@@ -117,11 +117,7 @@ gtr_plugins_engine_dispose (GObject * object)
 {
   GtrPluginsEngine *engine = GTR_PLUGINS_ENGINE (object);
 
-  if (engine->priv->plugin_settings != NULL)
-    {
-      g_object_unref (engine->priv->plugin_settings);
-      engine->priv->plugin_settings = NULL;
-    }
+  g_clear_object (&engine->priv->plugin_settings);
 
   G_OBJECT_CLASS (gtr_plugins_engine_parent_class)->dispose (object);
 }

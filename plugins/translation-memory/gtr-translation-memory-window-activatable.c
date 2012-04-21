@@ -130,29 +130,10 @@ gtr_translation_memory_window_activatable_dispose (GObject *object)
 {
   GtrTranslationMemoryWindowActivatablePrivate *priv = GTR_TRANSLATION_MEMORY_WINDOW_ACTIVATABLE (object)->priv;
 
-  if (priv->window != NULL)
-    {
-      g_object_unref (priv->window);
-      priv->window = NULL;
-    }
-
-  if (priv->action_group != NULL)
-    {
-      g_object_unref (priv->action_group);
-      priv->action_group = NULL;
-    }
-
-  if (priv->translation_memory != NULL)
-    {
-      g_object_unref (priv->translation_memory);
-      priv->translation_memory = NULL;
-    }
-
-  if (priv->tm_settings != NULL)
-    {
-      g_object_unref (priv->tm_settings);
-      priv->tm_settings = NULL;
-    }
+  g_clear_object (&priv->window);
+  g_clear_object (&priv->action_group);
+  g_clear_object (&priv->translation_memory);
+  g_clear_object (&priv->tm_settings);
 
   G_OBJECT_CLASS (gtr_translation_memory_window_activatable_parent_class)->dispose (object);
 }

@@ -423,17 +423,8 @@ gtr_code_view_plugin_dispose (GObject *object)
 {
   GtrCodeViewPluginPrivate *priv = GTR_CODE_VIEW_PLUGIN (object)->priv;
 
-  if (priv->settings != NULL)
-    {
-      g_object_unref (priv->settings);
-      priv->settings = NULL;
-    }
-
-  if (priv->window != NULL)
-    {
-      g_object_unref (priv->window);
-      priv->window = NULL;
-    }
+  g_clear_object (&priv->settings);
+  g_clear_object (&priv->window);
 
   G_OBJECT_CLASS (gtr_code_view_plugin_parent_class)->dispose (object);
 }

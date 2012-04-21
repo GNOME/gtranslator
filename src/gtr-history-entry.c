@@ -132,11 +132,7 @@ gtr_history_entry_dispose (GObject * object)
 
   gtr_history_entry_set_enable_completion (GTR_HISTORY_ENTRY (object), FALSE);
 
-  if (priv->settings != NULL)
-    {
-      g_object_unref (G_OBJECT (priv->settings));
-      priv->settings = NULL;
-    }
+  g_clear_object (&priv->settings);
 
   G_OBJECT_CLASS (gtr_history_entry_parent_class)->dispose (object);
 }

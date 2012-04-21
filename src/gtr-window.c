@@ -1615,28 +1615,10 @@ gtr_window_dispose (GObject * object)
       priv->dispose_has_run = TRUE;
     }
 
-  if (priv->state_settings)
-    {
-      g_object_unref (priv->state_settings);
-      priv->state_settings = NULL;
-    }
-
-  if (priv->ui_manager)
-    {
-      g_object_unref (priv->ui_manager);
-      priv->ui_manager = NULL;
-    }
-  if (priv->action_group)
-    {
-      g_object_unref (priv->action_group);
-      priv->action_group = NULL;
-    }
-
-  if (priv->prof_manager != NULL)
-    {
-      g_object_unref (priv->prof_manager);
-      priv->prof_manager = NULL;
-    }
+  g_clear_object (&priv->state_settings);
+  g_clear_object (&priv->ui_manager);
+  g_clear_object (&priv->action_group);
+  g_clear_object (&priv->prof_manager);
 
   /* Now that there have broken some reference loops,
    * force collection again.

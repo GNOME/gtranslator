@@ -96,23 +96,9 @@ gtr_alternate_lang_plugin_dispose (GObject *object)
 {
   GtrAlternateLangPluginPrivate *priv = GTR_ALTERNATE_LANG_PLUGIN (object)->priv;
 
-  if (priv->window != NULL)
-    {
-      g_object_unref (priv->window);
-      priv->window = NULL;
-    }
-
-  if (priv->tab != NULL)
-    {
-      g_object_unref (priv->tab);
-      priv->tab = NULL;
-    }
-
-  if (priv->action_group != NULL)
-    {
-      g_object_unref (priv->action_group);
-      priv->action_group = NULL;
-    }
+  g_clear_object (&priv->window);
+  g_clear_object (&priv->tab);
+  g_clear_object (&priv->action_group);
 
   G_OBJECT_CLASS (gtr_alternate_lang_plugin_parent_class)->dispose (object);
 }

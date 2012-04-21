@@ -232,29 +232,10 @@ gtr_application_dispose (GObject * object)
 
   DEBUG_PRINT ("Disposing app");
 
-  if (priv->settings != NULL)
-    {
-      g_object_unref (priv->settings);
-      priv->settings = NULL;
-    }
-
-  if (priv->window_settings != NULL)
-    {
-      g_object_unref (priv->window_settings);
-      priv->window_settings = NULL;
-    }
-
-  if (priv->icon_factory != NULL)
-    {
-      g_object_unref (priv->icon_factory);
-      priv->icon_factory = NULL;
-    }
-
-  if (priv->toolbars_model)
-    {
-      g_object_unref (priv->toolbars_model);
-      priv->toolbars_model = NULL;
-    }
+  g_clear_object (&priv->settings);
+  g_clear_object (&priv->window_settings);
+  g_clear_object (&priv->icon_factory);
+  g_clear_object (&priv->toolbars_model);
 
   G_OBJECT_CLASS (gtr_application_parent_class)->dispose (object);
 }

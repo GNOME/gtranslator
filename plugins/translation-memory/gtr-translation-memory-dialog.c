@@ -52,11 +52,7 @@ gtr_translation_memory_dialog_dispose (GObject *object)
 {
   GtrTranslationMemoryDialogPrivate *priv = GTR_TRANSLATION_MEMORY_DIALOG (object)->priv;
 
-  if (priv->tm_settings != NULL)
-    {
-      g_object_unref (priv->tm_settings);
-      priv->tm_settings = NULL;
-    }
+  g_clear_object (&priv->tm_settings);
 
   G_OBJECT_CLASS (gtr_translation_memory_dialog_parent_class)->dispose (object);
 }

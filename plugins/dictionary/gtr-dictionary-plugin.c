@@ -119,11 +119,7 @@ gtr_dict_plugin_dispose (GObject * object)
 {
   GtrDictPluginPrivate *priv = GTR_DICT_PLUGIN (object)->priv;
 
-  if (priv->tab != NULL)
-    {
-      g_object_unref (priv->tab);
-      priv->tab = NULL;
-    }
+  g_clear_object (&priv->tab);
 
   G_OBJECT_CLASS (gtr_dict_plugin_parent_class)->dispose (object);
 }

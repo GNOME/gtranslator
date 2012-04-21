@@ -510,11 +510,7 @@ gtr_translation_memory_ui_dispose (GObject * object)
 
   DEBUG_PRINT ("Dispose translation memory ui");
 
-  if (tm_ui->priv->msg)
-    {
-      g_object_unref (tm_ui->priv->msg);
-      tm_ui->priv->msg = NULL;
-    }
+  g_clear_object (&tm_ui->priv->msg);
 
   G_OBJECT_CLASS (gtr_translation_memory_ui_parent_class)->dispose (object);
 }

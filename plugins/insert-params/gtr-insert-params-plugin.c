@@ -176,17 +176,8 @@ gtr_insert_params_plugin_dispose (GObject *object)
 {
   GtrInsertParamsPluginPrivate *priv = GTR_INSERT_PARAMS_PLUGIN (object)->priv;
 
-  if (priv->window != NULL)
-    {
-      g_object_unref (priv->window);
-      priv->window = NULL;
-    }
-
-  if (priv->action_group != NULL)
-    {
-      g_object_unref (priv->action_group);
-      priv->action_group = NULL;
-    }
+  g_clear_object (&priv->window);
+  g_clear_object (&priv->action_group);
 
   G_OBJECT_CLASS (gtr_insert_params_plugin_parent_class)->dispose (object);
 }

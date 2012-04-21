@@ -64,11 +64,7 @@ gtr_translation_memory_tab_activatable_dispose (GObject *object)
 {
   GtrTranslationMemoryTabActivatablePrivate *priv = GTR_TRANSLATION_MEMORY_TAB_ACTIVATABLE (object)->priv;
 
-  if (priv->tab != NULL)
-    {
-      g_object_unref (priv->tab);
-      priv->tab = NULL;
-    }
+  g_clear_object (&priv->tab);
 
   G_OBJECT_CLASS (gtr_translation_memory_tab_activatable_parent_class)->dispose (object);
 }

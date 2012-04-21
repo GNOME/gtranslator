@@ -395,11 +395,7 @@ gtr_alternate_lang_panel_dispose (GObject *object)
       panel->priv->showed_message_id = 0;
     }
 
-  if (panel->priv->po != NULL)
-    {
-      g_object_unref (panel->priv->po);
-      panel->priv->po = NULL;
-    }
+  g_clear_object (&panel->priv->po);
 
   G_OBJECT_CLASS (gtr_alternate_lang_panel_parent_class)->dispose (object);
 }

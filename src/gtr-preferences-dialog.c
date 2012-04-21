@@ -703,23 +703,9 @@ gtr_preferences_dialog_dispose (GObject * object)
 {
   GtrPreferencesDialog *dlg = GTR_PREFERENCES_DIALOG (object);
 
-  if (dlg->priv->ui_settings != NULL)
-    {
-      g_object_unref (dlg->priv->ui_settings);
-      dlg->priv->ui_settings = NULL;
-    }
-
-  if (dlg->priv->editor_settings != NULL)
-    {
-      g_object_unref (dlg->priv->editor_settings);
-      dlg->priv->editor_settings = NULL;
-    }
-
-  if (dlg->priv->files_settings != NULL)
-    {
-      g_object_unref (dlg->priv->files_settings);
-      dlg->priv->files_settings = NULL;
-    }
+  g_clear_object (&dlg->priv->ui_settings);
+  g_clear_object (&dlg->priv->editor_settings);
+  g_clear_object (&dlg->priv->files_settings);
 
   G_OBJECT_CLASS (gtr_preferences_dialog_parent_class)->dispose (object);
 }

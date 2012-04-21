@@ -535,12 +535,7 @@ gtr_open_tran_panel_dispose (GObject * object)
 {
   GtrOpenTranPanel *panel = GTR_OPEN_TRAN_PANEL (object);
 
-
-  if (panel->priv->settings != NULL)
-    {
-      g_object_unref (panel->priv->settings);
-      panel->priv->settings = NULL;
-    }
+  g_clear_object (&panel->priv->settings);
 
   G_OBJECT_CLASS (gtr_open_tran_panel_parent_class)->dispose (object);
 }

@@ -163,23 +163,9 @@ gtr_header_dispose (GObject * object)
 {
   GtrHeader *header = GTR_HEADER (object);
 
-  if (header->priv->settings != NULL)
-    {
-      g_object_unref (header->priv->settings);
-      header->priv->settings = NULL;
-    }
-
-  if (header->priv->prof_manager != NULL)
-    {
-      g_object_unref (header->priv->prof_manager);
-      header->priv->prof_manager = NULL;
-    }
-
-  if (header->priv->profile != NULL)
-    {
-      g_object_unref (header->priv->profile);
-      header->priv->profile = NULL;
-    }
+  g_clear_object (&header->priv->settings);
+  g_clear_object (&header->priv->prof_manager);
+  g_clear_object (&header->priv->profile);
 
   G_OBJECT_CLASS (gtr_header_parent_class)->dispose (object);
 }

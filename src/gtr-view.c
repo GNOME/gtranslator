@@ -171,17 +171,8 @@ gtr_view_dispose (GObject * object)
 
   DEBUG_PRINT ("Dispose view");
 
-  if (view->priv->editor_settings)
-    {
-      g_object_unref (view->priv->editor_settings);
-      view->priv->editor_settings = NULL;
-    }
-
-  if (view->priv->ui_settings)
-    {
-      g_object_unref (view->priv->ui_settings);
-      view->priv->ui_settings = NULL;
-    }
+  g_clear_object (&view->priv->editor_settings);
+  g_clear_object (&view->priv->ui_settings);
 
   G_OBJECT_CLASS (gtr_view_parent_class)->dispose (object);
 }

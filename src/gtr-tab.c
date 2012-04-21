@@ -902,47 +902,13 @@ gtr_tab_dispose (GObject * object)
       priv->dispose_has_run = TRUE;
     }
 
-  if (priv->extensions != NULL)
-    {
-      g_object_unref (priv->extensions);
-      priv->extensions = NULL;
-    }
-
-  if (priv->po != NULL)
-    {
-      g_object_unref (priv->po);
-      priv->po = NULL;
-    }
-
-  if (priv->ui_settings)
-    {
-      g_object_unref (priv->ui_settings);
-      priv->ui_settings = NULL;
-    }
-
-  if (priv->files_settings != NULL)
-    {
-      g_object_unref (priv->files_settings);
-      priv->files_settings = NULL;
-    }
-
-  if (priv->editor_settings != NULL)
-    {
-      g_object_unref (priv->editor_settings);
-      priv->editor_settings = NULL;
-    }
-
-  if (priv->state_settings != NULL)
-    {
-      g_object_unref (priv->state_settings);
-      priv->state_settings = NULL;
-    }
-
-  if (priv->layout_manager)
-    {
-      g_object_unref (priv->layout_manager);
-      priv->layout_manager = NULL;
-    }
+  g_clear_object (&priv->extensions);
+  g_clear_object (&priv->po);
+  g_clear_object (&priv->ui_settings);
+  g_clear_object (&priv->files_settings);
+  g_clear_object (&priv->editor_settings);
+  g_clear_object (&priv->state_settings);
+  g_clear_object (&priv->layout_manager);
 
   G_OBJECT_CLASS (gtr_tab_parent_class)->dispose (object);
 }

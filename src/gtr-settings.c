@@ -63,23 +63,9 @@ gtr_settings_dispose (GObject * object)
 {
   GtrSettings *gs = GTR_SETTINGS (object);
 
-  if (gs->priv->interface != NULL)
-    {
-      g_object_unref (gs->priv->interface);
-      gs->priv->interface = NULL;
-    }
-
-  if (gs->priv->editor != NULL)
-    {
-      g_object_unref (gs->priv->editor);
-      gs->priv->editor = NULL;
-    }
-
-  if (gs->priv->ui != NULL)
-    {
-      g_object_unref (gs->priv->ui);
-      gs->priv->ui = NULL;
-    }
+  g_clear_object (&gs->priv->interface);
+  g_clear_object (&gs->priv->editor);
+  g_clear_object (&gs->priv->ui);
 
   G_OBJECT_CLASS (gtr_settings_parent_class)->dispose (object);
 }

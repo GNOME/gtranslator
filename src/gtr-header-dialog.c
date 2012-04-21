@@ -74,11 +74,7 @@ gtr_header_dialog_dispose (GObject * object)
 {
   GtrHeaderDialog *dlg = GTR_HEADER_DIALOG (object);
 
-  if (dlg->priv->settings != NULL)
-    {
-      g_object_unref (dlg->priv->settings);
-      dlg->priv->settings = NULL;
-    }
+  g_clear_object (&dlg->priv->settings);
 
   G_OBJECT_CLASS (gtr_header_dialog_parent_class)->dispose (object);
 }

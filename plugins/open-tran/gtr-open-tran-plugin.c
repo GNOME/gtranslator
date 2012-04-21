@@ -99,17 +99,8 @@ gtr_open_tran_plugin_dispose (GObject * object)
 
   xmlNanoHTTPCleanup ();
 
-  if (priv->settings)
-    {
-      g_object_unref (priv->settings);
-      priv->settings = NULL;
-    }
-
-  if (priv->tab != NULL)
-    {
-      g_object_unref (priv->tab);
-      priv->tab = NULL;
-    }
+  g_clear_object (&priv->settings);
+  g_clear_object (&priv->tab);
 
   G_OBJECT_CLASS (gtr_open_tran_plugin_parent_class)->dispose (object);
 }

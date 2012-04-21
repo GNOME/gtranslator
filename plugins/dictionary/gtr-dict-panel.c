@@ -625,11 +625,7 @@ gtr_dict_panel_dispose (GObject * object)
 {
   GtrDictPanel *panel = GTR_DICT_PANEL (object);
 
-  if (panel->priv->settings != NULL)
-    {
-      g_object_unref (panel->priv->settings);
-      panel->priv->settings = NULL;
-    }
+  g_clear_object (&panel->priv->settings);
 
   G_OBJECT_CLASS (gtr_dict_panel_parent_class)->dispose (object);
 }

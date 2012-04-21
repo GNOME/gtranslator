@@ -204,11 +204,7 @@ gtr_po_dispose (GObject * object)
 {
   GtrPo *po = GTR_PO (object);
 
-  if (po->priv->location != NULL)
-    {
-      g_object_unref (po->priv->location);
-      po->priv->location = NULL;
-    }
+  g_clear_object (&po->priv->location);
 
   G_OBJECT_CLASS (gtr_po_parent_class)->dispose (object);
 }
