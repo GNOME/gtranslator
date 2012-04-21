@@ -353,8 +353,6 @@ gtr_message_table_init (GtrMessageTable * table)
   gtr_message_table_draw (table);
 
   scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow),
-                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_box_pack_start (GTK_BOX (table), scrolledwindow, TRUE, TRUE, 0);
   gtk_widget_show (scrolledwindow);
 

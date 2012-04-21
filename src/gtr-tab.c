@@ -431,9 +431,6 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
 
   gtk_container_add (GTK_CONTAINER (scroll), widget);
 
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroll),
-                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
                                        GTK_SHADOW_IN);
 
@@ -742,8 +739,6 @@ gtr_tab_draw (GtrTab *tab)
 
   gtk_container_add (GTK_CONTAINER (scroll), priv->text_msgid);
 
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroll),
-                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
                                        GTK_SHADOW_IN);
 
@@ -760,9 +755,6 @@ gtr_tab_draw (GtrTab *tab)
   gtk_container_add (GTK_CONTAINER (priv->text_plural_scroll),
                      priv->text_msgid_plural);
 
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW
-                                  (priv->text_plural_scroll),
-                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW
                                        (priv->text_plural_scroll),
                                        GTK_SHADOW_IN);

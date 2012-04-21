@@ -352,8 +352,6 @@ gtr_context_panel_init (GtrContextPanel *panel)
 
   /* Set up the scrolling window for the extracted context display */
   priv->sw = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->sw),
-                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (priv->sw),
                                        GTK_SHADOW_IN);
   gtk_box_pack_start (GTK_BOX (panel), priv->sw, TRUE, TRUE,
