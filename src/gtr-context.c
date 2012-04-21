@@ -313,6 +313,8 @@ on_accept_button_clicked (GtkButton *button, GtrContextPanel *panel)
   GtkTextBuffer *buffer;
   GtkTextIter start, end;
   gchar *text;
+  GtrPo *po;
+  GtrPoState po_state;
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (panel->priv->context));
 
@@ -323,6 +325,12 @@ on_accept_button_clicked (GtkButton *button, GtrContextPanel *panel)
   gtr_msg_set_comment (panel->priv->current_msg, text);
 
   g_free (text);
+
+  /* Update the po state if needed after adding a comment */
+  po = gtr_tab_get_po (panel->priv->tab);
+  po_state = gtr_po_get_state (po);
+  if (po_state != GTR_PO_STATE_MODIFIED)
+    gtr_po_set_state (po, GTR_PO_STATE_MODIFIED);
 
   reload_values (panel);
 }
