@@ -172,7 +172,7 @@ gdict_sidebar_select_button_press_cb (GtkWidget * widget,
       gtk_widget_get_allocation (widget, &allocation);
       width = allocation.width;
       gtk_widget_set_size_request (sidebar->priv->menu, -1, -1);
-      gtk_widget_size_request (sidebar->priv->menu, &req);
+      gtk_widget_get_preferred_size (sidebar->priv->menu, NULL, &req);
       gtk_widget_set_size_request (sidebar->priv->menu,
                                    MAX (width, req.width), -1);
       gtk_widget_grab_focus (widget);
