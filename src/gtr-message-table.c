@@ -114,18 +114,17 @@ gtr_message_table_selection_changed (GtkTreeSelection *selection,
 static void
 message_changed_cb (GtrTab * tab, GtrMsg * msg, GtrMessageTable * table)
 {
-  GtkTreePath *sort_path, *path;
-  GtkTreeRowReference *row;
+  GtkTreePath *path;
+  GtkTreeIter iter;
 
-  row = _gtr_msg_get_row_reference (msg);
-  sort_path = gtk_tree_row_reference_get_path (row);
+  if (!gtr_message_table_get_message_iter (GTR_MESSAGE_TABLE_MODEL (table->priv->store),
+                                           msg, &iter))
+    return;
 
-  path =
-    gtk_tree_model_sort_convert_path_to_child_path (GTK_TREE_MODEL_SORT
-                                                    (table->priv->sort_model),
-                                                    sort_path);
-
-  gtr_message_table_model_update_row (table->priv->store, path);
+  path = gtk_tree_model_get_path (GTK_TREE_MODEL (table->priv->store), &iter);
+  gtr_message_table_model_update_row (GTR_MESSAGE_TABLE_MODEL (table->priv->store),
+                                      path);
+  gtk_tree_path_free (path);
 }
 
 static gint
