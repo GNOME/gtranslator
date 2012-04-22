@@ -39,6 +39,7 @@
 #include "gtr-enum-types.h"
 #include "gtr-profile.h"
 #include "gtr-utils.h"
+#include "gtr-message-container.h"
 
 #include <string.h>
 #include <errno.h>
@@ -50,13 +51,17 @@
 #include <gettext-po.h>
 #include <gio/gio.h>
 
+static void gtr_po_message_container_init (GtrMessageContainerInterface *iface);
+
 #define GTR_PO_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 					 (object),	\
 					 GTR_TYPE_PO,     \
 					 GtrPoPrivate))
 
 
-G_DEFINE_TYPE (GtrPo, gtr_po, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_CODE (GtrPo, gtr_po, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (GTR_TYPE_MESSAGE_CONTAINER,
+                                                gtr_po_message_container_init))
 
 struct _GtrPoPrivate
 {
@@ -207,6 +212,42 @@ gtr_po_dispose (GObject * object)
   g_clear_object (&po->priv->location);
 
   G_OBJECT_CLASS (gtr_po_parent_class)->dispose (object);
+}
+
+static GtrMsg *
+gtr_po_message_container_get_message (GtrMessageContainer *container,
+                                      gint number)
+{
+  GtrPo *po = GTR_PO (container);
+
+  return g_list_nth_data (po->priv->messages, number);
+}
+
+static gint
+gtr_po_message_container_get_message_number (GtrMessageContainer * container,
+                                             GtrMsg * msg)
+{
+  GtrPo *po = GTR_PO (container);
+  GList *list;
+
+  list = g_list_find (po->priv->messages, msg);
+  return g_list_position (po->priv->messages, list);
+}
+
+static gint
+gtr_po_message_container_get_count (GtrMessageContainer * container)
+{
+  GtrPo *po = GTR_PO (container);
+
+  return g_list_length (po->priv->messages);
+}
+
+static void
+gtr_po_message_container_init (GtrMessageContainerInterface * iface)
+{
+  iface->get_message = gtr_po_message_container_get_message;
+  iface->get_message_number = gtr_po_message_container_get_message_number;
+  iface->get_count = gtr_po_message_container_get_count;
 }
 
 static void
