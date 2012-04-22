@@ -88,6 +88,7 @@ NOINST_H_FILES = \
 	gtr-jump-dialog.h \
 	gtr-language.h \
 	gtr-languages-fetcher.h \
+	gtr-message-container.h \
 	gtr-message-table-model.h \
 	gtr-plugins-engine.h \
 	gtr-preferences-dialog.h \
@@ -131,6 +132,7 @@ libgtranslator_c_files = \
 	gtr-jump-dialog.c \
 	gtr-language.c \
 	gtr-languages-fetcher.c \
+	gtr-message-container.c \
 	gtr-message-table.c \
 	gtr-message-table-model.c \
 	gtr-msg.c \
