@@ -102,10 +102,8 @@ gtr_message_table_selection_changed (GtkTreeSelection *selection,
                              gtr_msg_get_msgid (current_msg->data)))
         {
           g_signal_handlers_block_by_func (table->priv->tab, showed_message_cb, table);
-#if 0
           gtr_tab_message_go_to (table->priv->tab, msg,
                                  FALSE, GTR_TAB_MOVE_NONE);
-#endif
           g_signal_handlers_unblock_by_func (table->priv->tab, showed_message_cb, table);
         }
     }
