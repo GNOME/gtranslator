@@ -22,6 +22,7 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
+#include "gtr-message-container.h"
 #include "gtr-msg.h"
 
 G_BEGIN_DECLS
@@ -72,7 +73,7 @@ gtr_message_table_get_type (void)
      GtkWidget *gtr_message_table_new (GtkWidget * tab);
 
      void gtr_message_table_populate (GtrMessageTable * table,
-                                      GList * messages);
+                                      GtrMessageContainer * container);
 
      void
        gtr_message_table_update_translation (GtrMessageTable *

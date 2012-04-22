@@ -1096,7 +1096,7 @@ gtr_tab_new (GtrPo * po)
   gtr_tab_add_msgstr_tabs (tab);
 
   gtr_message_table_populate (GTR_MESSAGE_TABLE (tab->priv->message_table),
-                              gtr_po_get_messages (tab->priv->po));
+                              GTR_MESSAGE_CONTAINER (tab->priv->po));
 
   gtk_widget_show (GTK_WIDGET (tab));
   return tab;

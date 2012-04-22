@@ -21,6 +21,7 @@
 #endif
 
 #include "gtr-message-table-model.h"
+#include "gtr-message-container.h"
 #include "gtr-msg.h"
 
 #include <glib.h>
@@ -33,6 +34,11 @@
 #define TABLE_FUZZY_ICON	"gtk-dialog-warning"
 #define TABLE_UNTRANSLATED_ICON	"gtk-dialog-error"
 #define TABLE_TRANSLATED_ICON	NULL
+
+enum {
+  PROP_0,
+  PROP_CONTAINER
+};
 
 static GObjectClass *parent_class;
 
@@ -82,7 +88,6 @@ gtr_message_table_model_get_iter (GtkTreeModel * self,
 {
   GtrMessageTableModel *list_model = GTR_MESSAGE_TABLE_MODEL (self);
   gint i;
-  GList *list;
 
   g_return_val_if_fail (gtk_tree_path_get_depth (path) > 0, FALSE);
 
@@ -90,36 +95,32 @@ gtr_message_table_model_get_iter (GtkTreeModel * self,
 
   i = gtk_tree_path_get_indices (path)[0];
 
-  if (G_UNLIKELY (i >= list_model->length))
+  if (G_UNLIKELY (i >= gtr_message_container_get_count (list_model->container)))
     return FALSE;
 
-  list = g_list_nth (list_model->values, i);
-
   iter->stamp = list_model->stamp;
-  iter->user_data = list;
+  iter->user_data = gtr_message_container_get_message (list_model->container, i);
+  iter->user_data2 = GINT_TO_POINTER (i);
 
   return TRUE;
 }
 
 static GtkTreePath *
 gtr_message_table_model_get_path (GtkTreeModel * tree_model,
-                                  GtkTreeIter * iter)
+                                  GtkTreeIter  * iter)
 {
-  GList *list;
+  GtrMessageTableModel *model = GTR_MESSAGE_TABLE_MODEL (tree_model);
   GtkTreePath *tree_path;
-  gint i = 0;
+  GtrMsg *msg;
+  gint i;
 
-  g_return_val_if_fail (iter->stamp ==
-                        GTR_MESSAGE_TABLE_MODEL (tree_model)->stamp, NULL);
+  g_return_val_if_fail (iter->stamp == model->stamp, NULL);
 
-  for (list = GTR_MESSAGE_TABLE_MODEL (tree_model)->values; list;
-       list = list->next)
-    {
-      if (list == iter->user_data)
-        break;
-      i++;
-    }
-  if (list == NULL)
+  /* ensure iter is valid */
+  i = GPOINTER_TO_INT (iter->user_data2);
+  msg = gtr_message_container_get_message (model->container, i);
+
+  if (msg != iter->user_data)
     return NULL;
 
   tree_path = gtk_tree_path_new ();
@@ -133,17 +134,14 @@ gtr_message_table_model_get_value (GtkTreeModel * self,
                                    GtkTreeIter * iter,
                                    gint column, GValue * value)
 {
-  GtrMessageTableModel *model = GTR_MESSAGE_TABLE_MODEL (self);
   GtrMsg *msg;
   gchar *text;
   GtrMsgStatus status;
   gint i;
-  GList *list;
 
   g_return_if_fail (iter->stamp == GTR_MESSAGE_TABLE_MODEL (self)->stamp);
 
-  list = G_LIST (iter->user_data);
-  msg = GTR_MSG (list->data);
+  msg = GTR_MSG (iter->user_data);
 
   switch (column)
     {
@@ -165,7 +163,7 @@ gtr_message_table_model_get_value (GtkTreeModel * self,
     case GTR_MESSAGE_TABLE_MODEL_ID_COLUMN:
       g_value_init (value, G_TYPE_INT);
 
-      i = g_list_position (model->values, list);
+      i = GPOINTER_TO_INT (iter->user_data2);
       g_value_set_int (value, i + 1);
       break;
 
@@ -195,7 +193,7 @@ gtr_message_table_model_get_value (GtkTreeModel * self,
     case GTR_MESSAGE_TABLE_MODEL_POINTER_COLUMN:
       g_value_init (value, G_TYPE_POINTER);
 
-      g_value_set_pointer (value, iter->user_data);
+      g_value_set_pointer (value, msg);
       break;
 
     default:
@@ -205,15 +203,43 @@ gtr_message_table_model_get_value (GtkTreeModel * self,
 }
 
 static gboolean
+gtr_message_table_model_iter_previous (GtkTreeModel * tree_model,
+                                       GtkTreeIter * iter)
+{
+  GtrMessageTableModel *model = GTR_MESSAGE_TABLE_MODEL (tree_model);
+  gint i;
+
+  g_return_val_if_fail (iter->stamp == model->stamp, FALSE);
+
+  i = GPOINTER_TO_INT (iter->user_data2) - 1;
+
+  if (i < 0)
+    return FALSE;
+
+  iter->user_data = gtr_message_container_get_message (model->container, i);
+  iter->user_data2 = GINT_TO_POINTER (i);
+
+  return TRUE;
+}
+
+static gboolean
 gtr_message_table_model_iter_next (GtkTreeModel * tree_model,
                                    GtkTreeIter * iter)
 {
-  g_return_val_if_fail (iter->stamp ==
-                        GTR_MESSAGE_TABLE_MODEL (tree_model)->stamp, FALSE);
+  GtrMessageTableModel *model = GTR_MESSAGE_TABLE_MODEL (tree_model);
+  gint i;
 
-  iter->user_data = G_LIST (iter->user_data)->next;
+  g_return_val_if_fail (iter->stamp == model->stamp, FALSE);
 
-  return (iter->user_data != NULL);
+  i = GPOINTER_TO_INT (iter->user_data2) + 1;
+
+  if (i >= gtr_message_container_get_count (model->container))
+    return FALSE;
+
+  iter->user_data = gtr_message_container_get_message (model->container, i);
+  iter->user_data2 = GINT_TO_POINTER (i);
+
+  return TRUE;
 }
 
 static gboolean
@@ -227,9 +253,11 @@ static gint
 gtr_message_table_model_iter_n_children (GtkTreeModel * tree_model,
                                          GtkTreeIter * iter)
 {
+  GtrMessageTableModel *model = GTR_MESSAGE_TABLE_MODEL (tree_model);
+
   /* it should ask for the root node, because we're a list */
   if (!iter)
-    return g_list_length (GTR_MESSAGE_TABLE_MODEL (tree_model)->values);
+    return gtr_message_container_get_count (model->container);
 
   return -1;
 }
@@ -239,21 +267,19 @@ gtr_message_table_model_iter_nth_child (GtkTreeModel * tree_model,
                                         GtkTreeIter * iter,
                                         GtkTreeIter * parent, gint n)
 {
-  GList *child;
+  GtrMessageTableModel *model = GTR_MESSAGE_TABLE_MODEL (tree_model);
 
   if (parent)
     return FALSE;
 
-  child = g_list_nth (GTR_MESSAGE_TABLE_MODEL (tree_model)->values, n);
-
-  if (child)
-    {
-      iter->stamp = GTR_MESSAGE_TABLE_MODEL (tree_model)->stamp;
-      iter->user_data = child;
-      return TRUE;
-    }
-  else
+  if (n < 0 || n >= gtr_message_container_get_count (model->container))
     return FALSE;
+
+  iter->stamp = GTR_MESSAGE_TABLE_MODEL (tree_model)->stamp;
+  iter->user_data = gtr_message_container_get_message (model->container, n);
+  iter->user_data2 = GINT_TO_POINTER (n);
+
+  return TRUE;
 }
 
 static gboolean
@@ -267,14 +293,14 @@ gtr_message_table_model_iter_children (GtkTreeModel * tree_model,
   if (parent)
     return FALSE;
 
-  if (g_list_length (model->values) > 0)
-    {
-      iter->stamp = model->stamp;
-      iter->user_data = g_list_first (model->values);
-      return TRUE;
-    }
-  else
+  if (gtr_message_container_get_count (model->container) == 0)
     return FALSE;
+
+  iter->stamp = model->stamp;
+  iter->user_data = gtr_message_container_get_message (model->container, 0);
+  iter->user_data2 = 0;
+
+  return TRUE;
 }
 
 static void
@@ -287,6 +313,7 @@ gtr_message_table_model_tree_model_init (GtkTreeModelIface * iface)
   iface->get_path = gtr_message_table_model_get_path;
   iface->get_value = gtr_message_table_model_get_value;
   iface->iter_next = gtr_message_table_model_iter_next;
+  iface->iter_previous = gtr_message_table_model_iter_previous;
   iface->iter_has_child = gtr_message_table_model_iter_has_child;
   iface->iter_n_children = gtr_message_table_model_iter_n_children;
   iface->iter_nth_child = gtr_message_table_model_iter_nth_child;
@@ -296,7 +323,6 @@ gtr_message_table_model_tree_model_init (GtkTreeModelIface * iface)
 static void
 gtr_message_table_model_init (GtrMessageTableModel * model)
 {
-  model->length = 0;
   model->stamp = g_random_int ();
 }
 
@@ -307,11 +333,60 @@ gtr_message_table_model_finalize (GObject * object)
 }
 
 static void
+gtr_message_table_set_property (GObject      * object,
+                                guint          prop_id,
+                                const GValue * value,
+                                GParamSpec   * pspec)
+{
+  GtrMessageTableModel * model = GTR_MESSAGE_TABLE_MODEL (object);
+
+  switch (prop_id)
+    {
+    case PROP_CONTAINER:
+      model->container = g_value_get_object (value);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
+}
+
+static void
+gtr_message_table_get_property (GObject    * object,
+                                guint        prop_id,
+                                GValue     * value,
+                                GParamSpec * pspec)
+{
+  GtrMessageTableModel * model = GTR_MESSAGE_TABLE_MODEL (object);
+
+  switch (prop_id)
+    {
+    case PROP_CONTAINER:
+      g_value_set_object (value, model->container);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
+}
+
+static void
 gtr_message_table_model_class_init (GtrMessageTableModelClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = gtr_message_table_model_finalize;
+  object_class->set_property = gtr_message_table_set_property;
+  object_class->get_property = gtr_message_table_get_property;
+
+  g_object_class_install_property (object_class,
+                                   PROP_CONTAINER,
+                                   g_param_spec_object ("container",
+                                                        "container",
+                                                        "message container",
+                                                        GTR_TYPE_MESSAGE_CONTAINER,
+                                                        G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT_ONLY));
 
   parent_class = g_type_class_peek_parent (klass);
 }
@@ -324,33 +399,36 @@ gtr_message_table_model_class_init (GtrMessageTableModelClass * klass)
  * Return value: a new #GtrMessageTableModel object
  **/
 GtrMessageTableModel *
-gtr_message_table_model_new (void)
+gtr_message_table_model_new (GtrMessageContainer *container)
 {
   GtrMessageTableModel *model;
 
-  model = g_object_new (GTR_TYPE_MESSAGE_TABLE_MODEL, NULL);
+  model = g_object_new (GTR_TYPE_MESSAGE_TABLE_MODEL,
+                        "container", container,
+                        NULL);
 
   return model;
 }
 
-void
-gtr_message_table_model_append (GtrMessageTableModel * model,
-                                GtrMsg * msg, GtkTreeIter * iter)
+gboolean
+gtr_message_table_get_message_iter (GtrMessageTableModel * model,
+                                    GtrMsg * msg, GtkTreeIter * iter)
 {
-  GtkTreePath *path;
+  gint n_msg;
 
-  //The sort stuff can be improved using a GPtrArray or gsecuence instead of a GList
-  model->values = g_list_append (model->values, msg);
-  model->length++;
+  g_return_val_if_fail (model != NULL, FALSE);
+  g_return_val_if_fail (iter != NULL, FALSE);
 
-  model->stamp++;
+  n_msg = gtr_message_container_get_message_number (model->container, msg);
+
+  if (n_msg < 0)
+    return FALSE;
 
   iter->stamp = model->stamp;
-  iter->user_data = g_list_last (model->values);
+  iter->user_data = msg;
+  iter->user_data2 = GINT_TO_POINTER (n_msg);
 
-  path = gtk_tree_model_get_path (GTK_TREE_MODEL (model), iter);
-  gtk_tree_model_row_inserted (GTK_TREE_MODEL (model), path, iter);
-  gtk_tree_path_free (path);
+  return TRUE;
 }
 
 void

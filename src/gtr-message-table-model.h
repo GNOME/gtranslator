@@ -25,6 +25,7 @@
 #include <gtk/gtk.h>
 
 #include "gtr-msg.h"
+#include "gtr-message-container.h"
 
 G_BEGIN_DECLS
 /*
@@ -48,9 +49,8 @@ struct _GtrMessageTableModel
 {
   GObject parent_instance;
 
-  GList *values;
+  GtrMessageContainer *container;
   gint stamp;
-  gint length;
 };
 
 /*
@@ -85,12 +85,11 @@ gtr_message_table_model_get_type (void)
 
      GType gtr_message_table_model_register_type (GTypeModule * module);
 
-     GtrMessageTableModel *gtr_message_table_model_new (void);
+     GtrMessageTableModel *gtr_message_table_model_new (GtrMessageContainer * container);
 
-     void gtr_message_table_model_append (GtrMessageTableModel
-                                          * model,
-                                          GtrMsg * msg, GtkTreeIter * iter);
-
+     gboolean gtr_message_table_get_message_iter (GtrMessageTableModel * model,
+                                                  GtrMsg * msg,
+                                                  GtkTreeIter * iter);
      void
        gtr_message_table_model_update_row
        (GtrMessageTableModel * model, GtkTreePath * path);

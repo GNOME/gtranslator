@@ -79,7 +79,7 @@ gtr_message_table_selection_changed (GtkTreeSelection *selection,
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
-  GList *msg = NULL;
+  GtrMsg *msg;
   GList *current_msg = NULL;
   GtrPo *po;
 
@@ -94,12 +94,14 @@ gtr_message_table_selection_changed (GtkTreeSelection *selection,
                           GTR_MESSAGE_TABLE_MODEL_POINTER_COLUMN, &msg, -1);
 
       if (msg != NULL
-          && g_utf8_collate (gtr_msg_get_msgid (msg->data),
+          && g_utf8_collate (gtr_msg_get_msgid (msg),
                              gtr_msg_get_msgid (current_msg->data)))
         {
           g_signal_handlers_block_by_func (table->priv->tab, showed_message_cb, table);
+#if 0
           gtr_tab_message_go_to (table->priv->tab, msg,
                                  FALSE, GTR_TAB_MOVE_NONE);
+#endif
           g_signal_handlers_unblock_by_func (table->priv->tab, showed_message_cb, table);
         }
     }
@@ -247,24 +249,7 @@ gtr_message_table_init (GtrMessageTable * table)
 
   GtrMessageTablePrivate *priv = table->priv;
 
-  priv->store = gtr_message_table_model_new ();
-
-  priv->sort_model =
-    gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (priv->store));
-
   priv->treeview = gtk_tree_view_new ();
-
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (priv->sort_model),
-                                        GTR_MESSAGE_TABLE_MODEL_ID_COLUMN,
-                                        GTK_SORT_ASCENDING);
-
-  gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE
-                                           (priv->sort_model), NULL, NULL,
-                                           NULL);
-
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (priv->sort_model),
-                                   GTR_MESSAGE_TABLE_MODEL_STATUS_COLUMN,
-                                   model_compare_by_status, NULL, NULL);
 
   gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (priv->treeview), TRUE);
 
@@ -402,35 +387,35 @@ gtr_message_table_new (GtkWidget * tab)
  * sort them.
  */
 void
-gtr_message_table_populate (GtrMessageTable * table, GList * messages)
+gtr_message_table_populate (GtrMessageTable * table, GtrMessageContainer * container)
 {
-  GtkTreeIter iter, sort_iter;
-  GtkTreePath *path;
-  GtkTreeRowReference *row;
-
   g_return_if_fail (table != NULL);
-  g_return_if_fail (messages != NULL);
+  g_return_if_fail (container != NULL);
 
-  while (messages)
+  if (table->priv->store)
     {
-      gtr_message_table_model_append (table->priv->store,
-                                      messages->data, &iter);
-
-      gtk_tree_model_sort_convert_child_iter_to_iter (GTK_TREE_MODEL_SORT
-                                                      (table->
-                                                       priv->sort_model),
-                                                      &sort_iter, &iter);
-      path = gtk_tree_model_get_path (table->priv->sort_model, &sort_iter);
-      row = gtk_tree_row_reference_new (table->priv->sort_model, path);
-      gtk_tree_path_free (path);
-
-      _gtr_msg_set_row_reference (GTR_MSG (messages->data), row);
-
-      messages = g_list_next (messages);
+      gtk_tree_view_set_model (GTK_TREE_VIEW (table->priv->treeview), NULL);
+      g_object_unref (table->priv->sort_model);
+      g_object_unref (table->priv->store);
     }
-  /*
-   * It is much faster set the model after list population
-   */
+
+  table->priv->store = gtr_message_table_model_new (container);
+  table->priv->sort_model =
+    gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (table->priv->store));
+
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
+                                        (table->priv->sort_model),
+                                        GTR_MESSAGE_TABLE_MODEL_ID_COLUMN,
+                                        GTK_SORT_ASCENDING);
+
+  gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE
+                                           (table->priv->sort_model),
+                                           NULL, NULL, NULL);
+
+  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (table->priv->sort_model),
+                                   GTR_MESSAGE_TABLE_MODEL_STATUS_COLUMN,
+                                   model_compare_by_status, NULL, NULL);
+
   gtk_tree_view_set_model (GTK_TREE_VIEW (table->priv->treeview),
                            table->priv->sort_model);
 }
