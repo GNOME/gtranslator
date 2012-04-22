@@ -397,7 +397,7 @@ _gtr_po_load (GtrPo * po, GFile * location, GError ** error)
   struct po_xerror_handler handler;
   po_message_iterator_t iter;
   po_message_t message;
-  const gchar *msgstr;
+  const gchar *msgid;
   gchar *filename;
 
   /*
@@ -453,9 +453,9 @@ _gtr_po_load (GtrPo * po, GFile * location, GError ** error)
 
   iter = po_message_iterator (priv->gettext_po_file, NULL);
   message = po_next_message (iter);
-  msgstr = po_message_msgstr (message);
+  msgid = po_message_msgid (message);
 
-  if (!strncmp (msgstr, "Project-Id-Version: ", 20))
+  if (!strcmp (msgid, ""))
     priv->header = gtr_header_new (iter, message);
   else
     {
