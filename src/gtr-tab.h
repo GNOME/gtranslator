@@ -70,6 +70,7 @@ struct _GtrTabClass
   void (*showed_message) (GtrTab * tab, GtrMsg * msg);
   void (*message_changed) (GtrTab * tab, GtrMsg * msg);
   void (*message_edition_finished) (GtrTab * tab, GtrMsg * msg);
+  void (*selection_changed) (GtrTab * tab);
 };
 
 typedef enum

@@ -901,6 +901,12 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrWindow * window)
 }
 
 static void
+selection_changed_cb (GtrTab * tab, GtrWindow * window)
+{
+  set_sensitive_according_to_tab (window, tab);
+}
+
+static void
 notebook_tab_added (GtkNotebook * notebook,
                     GtkWidget * child, guint page_num, GtrWindow * window)
 {
@@ -948,6 +954,8 @@ notebook_tab_added (GtkNotebook * notebook,
                           window);
   g_signal_connect_after (child, "showed_message",
                           G_CALLBACK (showed_message_cb), window);
+  g_signal_connect (child, "selection-changed",
+                    G_CALLBACK (selection_changed_cb), window);
 
   g_signal_connect (gtr_tab_get_po (tab),
                     "notify::state", G_CALLBACK (sync_state), window);

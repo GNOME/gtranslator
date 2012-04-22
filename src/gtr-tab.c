@@ -125,6 +125,7 @@ enum
   SHOWED_MESSAGE,
   MESSAGE_CHANGED,
   MESSAGE_EDITION_FINISHED,
+  SELECTION_CHANGED,
   LAST_SIGNAL
 };
 
@@ -543,6 +544,12 @@ emit_message_changed_signal (GtkTextBuffer * buf, GtrTab * tab)
 }
 
 static void
+emit_selection_changed (GtkTextBuffer * buf, GParamSpec * spec, GtrTab * tab)
+{
+  g_signal_emit (G_OBJECT (tab), signals[SELECTION_CHANGED], 0);
+}
+
+static void
 update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
 {
   GtrMsgStatus status;
@@ -627,6 +634,8 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
 
       g_signal_connect_after (buf, "end_user_action",
                               G_CALLBACK (emit_message_changed_signal), tab);
+      g_signal_connect (buf, "notify::has-selection",
+                        G_CALLBACK (emit_selection_changed), tab);
       i++;
       g_free (label);
     }
@@ -1012,6 +1021,14 @@ gtr_tab_class_init (GtrTabClass * klass)
                   NULL, NULL,
                   g_cclosure_marshal_VOID__OBJECT,
                   G_TYPE_NONE, 1, GTR_TYPE_MSG);
+  signals[SELECTION_CHANGED] =
+    g_signal_new ("selection-changed",
+                  G_OBJECT_CLASS_TYPE (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (GtrTabClass, selection_changed),
+                  NULL, NULL,
+                  g_cclosure_marshal_VOID__VOID,
+                  G_TYPE_NONE, 0);
 
   /* Properties */
   g_object_class_install_property (object_class,
