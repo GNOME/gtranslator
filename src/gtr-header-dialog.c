@@ -66,7 +66,7 @@ struct _GtrHeaderDialogPrivate
   GtkWidget *charset;
   GtkWidget *encoding;
 
-  GtrHeader *header;
+  GtrPo     *po;
 };
 
 static void
@@ -110,6 +110,13 @@ take_my_options_checkbutton_toggled (GtkToggleButton * button,
 }
 
 static void
+po_state_set_modified (GtrPo * po)
+{
+  if (gtr_po_get_state (po) != GTR_PO_STATE_MODIFIED)
+    gtr_po_set_state (po, GTR_PO_STATE_MODIFIED);
+}
+
+static void
 prj_comment_changed (GtkTextBuffer * buffer, GtrHeaderDialog * dlg)
 {
   GtkTextIter start, end;
@@ -120,8 +127,9 @@ prj_comment_changed (GtkTextBuffer * buffer, GtrHeaderDialog * dlg)
 
   if (text)
     {
-      gtr_header_set_comments (dlg->priv->header, text);
+      gtr_header_set_comments (gtr_po_get_header (dlg->priv->po), text);
       g_free (text);
+      po_state_set_modified (dlg->priv->po);
     }
 }
 
@@ -133,7 +141,10 @@ prj_id_version_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
   text = gtk_entry_get_text (GTK_ENTRY (widget));
 
   if (text)
-    gtr_header_set_prj_id_version (dlg->priv->header, text);
+    {
+      gtr_header_set_prj_id_version (gtr_po_get_header (dlg->priv->po), text);
+      po_state_set_modified (dlg->priv->po);
+    }
 }
 
 static void
@@ -144,7 +155,10 @@ rmbt_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
   text = gtk_entry_get_text (GTK_ENTRY (widget));
 
   if (text)
-    gtr_header_set_rmbt (dlg->priv->header, text);
+    {
+      gtr_header_set_rmbt (gtr_po_get_header (dlg->priv->po), text);
+      po_state_set_modified (dlg->priv->po);
+    }
 }
 
 static void
@@ -156,7 +170,10 @@ translator_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
   email = gtk_entry_get_text (GTK_ENTRY (dlg->priv->tr_email));
 
   if (name && email)
-    gtr_header_set_translator (dlg->priv->header, name, email);
+    {
+      gtr_header_set_translator (gtr_po_get_header (dlg->priv->po), name, email);
+      po_state_set_modified (dlg->priv->po);
+    }
 }
 
 static void
@@ -168,7 +185,10 @@ language_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
   lg_email = gtk_entry_get_text (GTK_ENTRY (dlg->priv->lg_email));
 
   if (language && lg_email)
-    gtr_header_set_language (dlg->priv->header, language, lg_email);
+    {
+      gtr_header_set_language (gtr_po_get_header (dlg->priv->po), language, lg_email);
+      po_state_set_modified (dlg->priv->po);
+    }
 }
 
 static void
@@ -178,7 +198,7 @@ gtr_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
   GtkTextBuffer *buffer;
   gchar *text;
 
-  header = dlg->priv->header;
+  header = gtr_po_get_header (dlg->priv->po);
 
   /* Project Information */
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (dlg->priv->prj_comment));
@@ -317,9 +337,11 @@ static void
 set_default_values (GtrHeaderDialog * dlg, GtrWindow * window)
 {
   GtkTextBuffer *buffer;
+  GtrTab *tab;
 
   /* Write header's values on Header dialog */
-  dlg->priv->header = gtr_window_get_header_from_active_tab (window);
+  tab = gtr_window_get_active_tab (window);
+  dlg->priv->po = gtr_tab_get_po (tab);
   gtr_header_dialog_fill_from_header (GTR_HEADER_DIALOG (dlg));
 
   /*Connect signals */
