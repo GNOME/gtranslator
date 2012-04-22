@@ -48,8 +48,6 @@ struct _GtrMsgPrivate
 
   GtrMsgStatus status;
 
-  GtkTreeRowReference *row_reference;
-
   gint po_position;
 };
 
@@ -168,36 +166,6 @@ _gtr_msg_set_message (GtrMsg * msg, po_message_t message)
   g_return_if_fail (message != NULL);
 
   msg->priv->message = message;
-}
-
-/**
- * gtr_msg_get_row_reference:
- * @msg: a #GtrMsg
- *
- * Returns: the #GtkTreeRowReference corresponding to the message's place
- * in the message table
- */
-GtkTreeRowReference *
-_gtr_msg_get_row_reference (GtrMsg * msg)
-{
-  g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
-
-  return msg->priv->row_reference;
-}
-
-/**
- * _gtr_msg_set_row_reference:
- * @msg: a #GtrMsg
- * @row_reference: the GtkTreeRowReference corresponding to position in the message table
- *
- * Sets the GtkTreeRowReference from the messages table for the given message
- **/
-void
-_gtr_msg_set_row_reference (GtrMsg * msg, GtkTreeRowReference * row_reference)
-{
-  g_return_if_fail (GTR_IS_MSG (msg));
-
-  msg->priv->row_reference = row_reference;
 }
 
 /**

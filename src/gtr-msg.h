@@ -123,10 +123,5 @@ po_message_t              _gtr_msg_get_message              (GtrMsg             
 void                      _gtr_msg_set_message              (GtrMsg               *msg,
                                                              po_message_t          message);
 
-GtkTreeRowReference      *_gtr_msg_get_row_reference        (GtrMsg               *msg);
-
-void                      _gtr_msg_set_row_reference        (GtrMsg               *msg,
-                                                             GtkTreeRowReference  *row_reference);
-
 G_END_DECLS
 #endif /* __GTR_MSG_H__ */
