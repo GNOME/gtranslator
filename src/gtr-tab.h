@@ -110,7 +110,7 @@ GList *gtr_tab_get_all_views (GtrTab * tab,
                             gboolean original, gboolean translated);
 
 void gtr_tab_message_go_to (GtrTab * tab,
-                            GList * to_go,
+                            GtrMsg * to_go,
                             gboolean searching, GtrTabMove move);
 
 GtrTab *gtr_tab_get_from_document (GtrPo * po);

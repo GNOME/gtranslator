@@ -1205,15 +1205,14 @@ gtr_tab_get_all_views (GtrTab * tab, gboolean original, gboolean translated)
 **/
 void
 gtr_tab_message_go_to (GtrTab * tab,
-                       GList * to_go, gboolean searching, GtrTabMove move)
+                       GtrMsg * to_go, gboolean searching, GtrTabMove move)
 {
   GtrPo *po;
   GList *current_msg;
   static gboolean first_msg = TRUE;
 
   g_return_if_fail (tab != NULL);
-  g_return_if_fail (to_go != NULL);
-  g_return_if_fail (GTR_IS_MSG (to_go->data));
+  g_return_if_fail (GTR_IS_MSG (to_go));
 
   po = tab->priv->po;
 
@@ -1255,14 +1254,14 @@ gtr_tab_message_go_to (GtrTab * tab,
             {
               gtk_notebook_set_current_page (GTK_NOTEBOOK
                                              (tab->priv->trans_notebook), 0);
-              gtr_tab_show_message (tab, to_go->data);
+              gtr_tab_show_message (tab, to_go);
             }
           else if (current_page == 0 && move == GTR_TAB_MOVE_PREV)
             {
               gtk_notebook_set_current_page (GTK_NOTEBOOK
                                              (tab->priv->trans_notebook),
                                              n_pages - 1);
-              gtr_tab_show_message (tab, to_go->data);
+              gtr_tab_show_message (tab, to_go);
             }
           else
             {
@@ -1278,7 +1277,7 @@ gtr_tab_message_go_to (GtrTab * tab,
             }
         }
       else
-        gtr_tab_show_message (tab, to_go->data);
+        gtr_tab_show_message (tab, to_go);
       first_msg = FALSE;
     }
   else
@@ -1289,7 +1288,7 @@ gtr_tab_message_go_to (GtrTab * tab,
    */
   if (!searching)
     g_signal_emit (G_OBJECT (tab), signals[SHOWED_MESSAGE], 0,
-                   GTR_MSG (to_go->data));
+                   GTR_MSG (to_go));
 }
 
 /**
@@ -1640,13 +1639,12 @@ gtr_tab_unblock_movement (GtrTab * tab)
 void
 gtr_tab_go_to_next (GtrTab * tab)
 {
-  GtrPo *po;
+  GtrMsg *msg;
 
-  po = gtr_tab_get_po (tab);
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+                                    GTR_NAVIGATE_NEXT, NULL);
 
-  gtr_tab_message_go_to (tab,
-                         g_list_next
-                         (gtr_po_get_current_message (po)),
+  gtr_tab_message_go_to (tab, msg,
                          FALSE, GTR_TAB_MOVE_NEXT);
 }
 
@@ -1659,13 +1657,12 @@ gtr_tab_go_to_next (GtrTab * tab)
 void
 gtr_tab_go_to_prev (GtrTab * tab)
 {
-  GtrPo *po;
+  GtrMsg *msg;
 
-  po = gtr_tab_get_po (tab);
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+                                    GTR_NAVIGATE_PREV, NULL);
 
-  gtr_tab_message_go_to (tab,
-                         g_list_previous
-                         (gtr_po_get_current_message (po)),
+  gtr_tab_message_go_to (tab, msg,
                          FALSE, GTR_TAB_MOVE_PREV);
 }
 
@@ -1678,13 +1675,11 @@ gtr_tab_go_to_prev (GtrTab * tab)
 void
 gtr_tab_go_to_first (GtrTab * tab)
 {
-  GtrPo *po;
+  GtrMsg *msg;
 
-  po = gtr_tab_get_po (tab);
-
-  gtr_tab_message_go_to (tab,
-                         g_list_first
-                         (gtr_po_get_current_message (po)),
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+                                    GTR_NAVIGATE_FIRST, NULL);
+  gtr_tab_message_go_to (tab, msg,
                          FALSE, GTR_TAB_MOVE_NONE);
 }
 
@@ -1697,13 +1692,12 @@ gtr_tab_go_to_first (GtrTab * tab)
 void
 gtr_tab_go_to_last (GtrTab * tab)
 {
-  GtrPo *po;
+  GtrMsg *msg;
 
-  po = gtr_tab_get_po (tab);
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+                                    GTR_NAVIGATE_LAST, NULL);
 
-  gtr_tab_message_go_to (tab,
-                         g_list_last
-                         (gtr_po_get_current_message (po)),
+  gtr_tab_message_go_to (tab, msg,
                          FALSE, GTR_TAB_MOVE_NONE);
 }
 
@@ -1718,12 +1712,12 @@ gtr_tab_go_to_last (GtrTab * tab)
 gboolean
 gtr_tab_go_to_next_fuzzy (GtrTab * tab)
 {
-  GtrPo *po;
-  GList *msg;
+  GtrMsg *msg;
 
-  po = gtr_tab_get_po (tab);
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+                                    GTR_NAVIGATE_NEXT,
+                                    gtr_msg_is_fuzzy);
 
-  msg = gtr_po_get_next_fuzzy (po);
   if (msg != NULL)
     {
       gtr_tab_message_go_to (tab, msg, FALSE, GTR_TAB_MOVE_NONE);
@@ -1744,12 +1738,11 @@ gtr_tab_go_to_next_fuzzy (GtrTab * tab)
 gboolean
 gtr_tab_go_to_prev_fuzzy (GtrTab * tab)
 {
-  GtrPo *po;
-  GList *msg;
+  GtrMsg *msg;
 
-  po = gtr_tab_get_po (tab);
-
-  msg = gtr_po_get_prev_fuzzy (po);
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+                                    GTR_NAVIGATE_PREV,
+                                    gtr_msg_is_fuzzy);
   if (msg != NULL)
     {
       gtr_tab_message_go_to (tab, msg, FALSE, GTR_TAB_MOVE_NONE);
@@ -1757,6 +1750,18 @@ gtr_tab_go_to_prev_fuzzy (GtrTab * tab)
     }
 
   return FALSE;
+}
+
+static gboolean
+message_is_untranslated (GtrMsg * msg)
+{
+  return !gtr_msg_is_translated (msg);
+}
+
+static gboolean
+message_is_fuzzy_or_untranslated (GtrMsg * msg)
+{
+  return gtr_msg_is_fuzzy (msg) || !gtr_msg_is_translated (msg);
 }
 
 /**
@@ -1770,12 +1775,11 @@ gtr_tab_go_to_prev_fuzzy (GtrTab * tab)
 gboolean
 gtr_tab_go_to_next_untrans (GtrTab * tab)
 {
-  GtrPo *po;
-  GList *msg;
+  GtrMsg *msg;
 
-  po = gtr_tab_get_po (tab);
-
-  msg = gtr_po_get_next_untrans (po);
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+                                    GTR_NAVIGATE_NEXT,
+                                    message_is_untranslated);
   if (msg != NULL)
     {
       gtr_tab_message_go_to (tab, msg, FALSE, GTR_TAB_MOVE_NONE);
@@ -1796,12 +1800,11 @@ gtr_tab_go_to_next_untrans (GtrTab * tab)
 gboolean
 gtr_tab_go_to_prev_untrans (GtrTab * tab)
 {
-  GtrPo *po;
-  GList *msg;
+  GtrMsg *msg;
 
-  po = gtr_tab_get_po (tab);
-
-  msg = gtr_po_get_prev_untrans (po);
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+                                    GTR_NAVIGATE_PREV,
+                                    message_is_untranslated);
   if (msg != NULL)
     {
       gtr_tab_message_go_to (tab, msg, FALSE, GTR_TAB_MOVE_NONE);
@@ -1822,12 +1825,11 @@ gtr_tab_go_to_prev_untrans (GtrTab * tab)
 gboolean
 gtr_tab_go_to_next_fuzzy_or_untrans (GtrTab * tab)
 {
-  GtrPo *po;
-  GList *msg;
+  GtrMsg *msg;
 
-  po = gtr_tab_get_po (tab);
-
-  msg = gtr_po_get_next_fuzzy_or_untrans (po);
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+                                    GTR_NAVIGATE_PREV,
+                                    message_is_fuzzy_or_untranslated);
   if (msg != NULL)
     {
       gtr_tab_message_go_to (tab, msg, FALSE, GTR_TAB_MOVE_NONE);
@@ -1848,12 +1850,11 @@ gtr_tab_go_to_next_fuzzy_or_untrans (GtrTab * tab)
 gboolean
 gtr_tab_go_to_prev_fuzzy_or_untrans (GtrTab * tab)
 {
-  GtrPo *po;
-  GList *msg;
+  GtrMsg *msg;
 
-  po = gtr_tab_get_po (tab);
-
-  msg = gtr_po_get_prev_fuzzy_or_untrans (po);
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+                                    GTR_NAVIGATE_PREV,
+                                    message_is_fuzzy_or_untranslated);
   if (msg != NULL)
     {
       gtr_tab_message_go_to (tab, msg, FALSE, GTR_TAB_MOVE_NONE);
@@ -1878,11 +1879,10 @@ gtr_tab_go_to_number (GtrTab * tab, gint number)
   GList *msg;
 
   po = gtr_tab_get_po (tab);
-
   msg = gtr_po_get_msg_from_number (po, number);
   if (msg != NULL)
     {
-      gtr_tab_message_go_to (tab, msg, FALSE, GTR_TAB_MOVE_NONE);
+      gtr_tab_message_go_to (tab, msg->data, FALSE, GTR_TAB_MOVE_NONE);
     }
 }
 

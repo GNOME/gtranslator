@@ -91,7 +91,7 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
    * Show the current message.
    */
   current = gtr_po_get_current_message (po);
-  gtr_tab_message_go_to (tab, current, FALSE, GTR_TAB_MOVE_NONE);
+  gtr_tab_message_go_to (tab, current->data, FALSE, GTR_TAB_MOVE_NONE);
 
   /*
    * Grab the focus
