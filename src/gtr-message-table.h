@@ -55,11 +55,19 @@ struct _GtrMessageTable
  * Class definition
  */
 typedef struct _GtrMessageTableClass GtrMessageTableClass;
+typedef gboolean (* GtrMessageTableNavigationFunc) (GtrMsg * msg);
 
 struct _GtrMessageTableClass
 {
   GtkBoxClass parent_class;
 };
+
+typedef enum {
+  GTR_NAVIGATE_PREV,
+  GTR_NAVIGATE_NEXT,
+  GTR_NAVIGATE_FIRST,
+  GTR_NAVIGATE_LAST
+} GtrMessageTableNavigation;
 
 /*
  * Public methods
@@ -74,6 +82,11 @@ gtr_message_table_get_type (void)
 
      void gtr_message_table_populate (GtrMessageTable * table,
                                       GtrMessageContainer * container);
+
+     GtrMsg * gtr_message_table_navigate (GtrMessageTable * table,
+                                          GtrMessageTableNavigation navigation,
+                                          GtrMessageTableNavigationFunc func);
+
 
      void
        gtr_message_table_update_translation (GtrMessageTable *
