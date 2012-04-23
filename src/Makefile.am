@@ -6,7 +6,7 @@ SUBDIRS = toolbareditor
 
 noinst_LTLIBRARIES = libgtranslator.la
 
-lib_LTLIBRARIES = libgtranslator-private.la
+pkglib_LTLIBRARIES = libgtranslator-private.la
 
 INCLUDES = \
 	-I$(top_srcdir)						\
@@ -164,6 +164,8 @@ libgtranslator_la_LIBADD = \
 	$(GTRANSLATOR_LIBS)
 
 libgtranslator_private_la_LIBADD = libgtranslator.la $(GTRANSLATOR_LIBS) $(GETTEXT_LIBS)
+
+libgtranslator_private_la_LDFLAGS = -avoid-version
 
 gtr-enum-types.h: gtr-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
 	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gtr-enum-types.h.template $(INST_H_FILES)) > $@
