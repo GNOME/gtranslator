@@ -455,7 +455,7 @@ _gtr_po_load (GtrPo * po, GFile * location, GError ** error)
   message = po_next_message (iter);
   msgid = po_message_msgid (message);
 
-  if (!strcmp (msgid, ""))
+  if (*msgid == '\0')
     priv->header = gtr_header_new (iter, message);
   else
     {
