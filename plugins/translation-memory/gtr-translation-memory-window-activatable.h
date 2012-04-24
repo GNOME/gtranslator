@@ -49,9 +49,9 @@ struct _GtrTranslationMemoryWindowActivatableClass
   PeasExtensionBaseClass parent_class;
 };
 
-GType gtr_translation_memory_window_activatable_get_type (void) G_GNUC_CONST;
+GType   gtr_translation_memory_window_activatable_get_type      (void) G_GNUC_CONST;
 
-void gtr_window_activatable_register_peas_type (PeasObjectModule *module);
+void    gtr_window_activatable_register_peas_type               (PeasObjectModule *module);
 
 G_END_DECLS
 #endif /* __GTR_TRANSLATION_MEMORY_WINDOW_ACTIVATABLE_H__ */

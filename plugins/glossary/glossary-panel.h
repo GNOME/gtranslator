@@ -29,22 +29,17 @@
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
-#define GTR_TYPE_GLOSSARY_PANEL		(gtr_glossary_panel_get_type ())
-#define GTR_GLOSSARY_PANEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_GLOSSARY_PANEL, GtrGlossaryPanel))
-#define GTR_GLOSSARY_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_GLOSSARY_PANEL, GtrGlossaryPanelClass))
-#define GTR_IS_GLOSSARY_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_GLOSSARY_PANEL))
-#define GTR_IS_GLOSSARY_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_GLOSSARY_PANEL))
-#define GTR_GLOSSARY_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_GLOSSARY_PANEL, GtrGlossaryPanelClass))
-/* Private structure type */
-typedef struct _GtrGlossaryPanelPrivate GtrGlossaryPanelPrivate;
 
-/*
- * Main object structure
- */
-typedef struct _GtrGlossaryPanel GtrGlossaryPanel;
+#define GTR_TYPE_GLOSSARY_PANEL         (gtr_glossary_panel_get_type ())
+#define GTR_GLOSSARY_PANEL(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_GLOSSARY_PANEL, GtrGlossaryPanel))
+#define GTR_GLOSSARY_PANEL_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_GLOSSARY_PANEL, GtrGlossaryPanelClass))
+#define GTR_IS_GLOSSARY_PANEL(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_GLOSSARY_PANEL))
+#define GTR_IS_GLOSSARY_PANEL_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_GLOSSARY_PANEL))
+#define GTR_GLOSSARY_PANEL_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_GLOSSARY_PANEL, GtrGlossaryPanelClass))
+
+typedef struct _GtrGlossaryPanel        GtrGlossaryPanel;
+typedef struct _GtrGlossaryPanelClass   GtrGlossaryPanelClass;
+typedef struct _GtrGlossaryPanelPrivate GtrGlossaryPanelPrivate;
 
 struct _GtrGlossaryPanel
 {
@@ -54,24 +49,16 @@ struct _GtrGlossaryPanel
   GtrGlossaryPanelPrivate *priv;
 };
 
-/*
- * Class definition
- */
-typedef struct _GtrGlossaryPanelClass GtrGlossaryPanelClass;
-
 struct _GtrGlossaryPanelClass
 {
   GtkBoxClass parent_class;
 };
 
-/*
- * Public methods
- */
-GType
-gtr_glossary_panel_get_type (void)
-  G_GNUC_CONST;
-     GType gtr_glossary_panel_register_type (GTypeModule * module);
-     GtkWidget *gtr_glossary_panel_new (void);
+GType            gtr_glossary_panel_get_type            (void) G_GNUC_CONST;
+
+GType            gtr_glossary_panel_register_type       (GTypeModule *module);
+
+GtkWidget       *gtr_glossary_panel_new                 (void);
 
 G_END_DECLS
 #endif /* __GLOSSARY_PANEL_H__ */

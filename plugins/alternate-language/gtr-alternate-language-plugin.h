@@ -49,9 +49,9 @@ struct _GtrAlternateLangPluginClass
   PeasExtensionBaseClass parent_class;
 };
 
-GType gtr_alternate_lang_plugin_get_type (void) G_GNUC_CONST;
+GType                   gtr_alternate_lang_plugin_get_type      (void) G_GNUC_CONST;
 
-G_MODULE_EXPORT void peas_register_types (PeasObjectModule *module);
+G_MODULE_EXPORT void    peas_register_types                     (PeasObjectModule *module);
 
 G_END_DECLS
 #endif /* __GTR_ALTERNATE_LANG_PLUGIN_H__ */

@@ -35,9 +35,9 @@ G_BEGIN_DECLS
 #define GTR_IS_DICT_PLUGIN_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_Dict_PLUGIN))
 #define GTR_DICT_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_DICT_PLUGIN, GtrDictPluginClass))
 
-typedef struct _GtrDictPlugin GtrDictPlugin;
-typedef struct _GtrDictPluginPrivate GtrDictPluginPrivate;
-typedef struct _GtrDictPluginClass GtrDictPluginClass;
+typedef struct _GtrDictPlugin		GtrDictPlugin;
+typedef struct _GtrDictPluginPrivate	GtrDictPluginPrivate;
+typedef struct _GtrDictPluginClass	GtrDictPluginClass;
 
 struct _GtrDictPlugin
 {
@@ -53,9 +53,9 @@ struct _GtrDictPluginClass
   PeasExtensionBaseClass parent_class;
 };
 
-GType gtr_dict_plugin_get_type (void) G_GNUC_CONST;
+GType                   gtr_dict_plugin_get_type        (void) G_GNUC_CONST;
 
-G_MODULE_EXPORT void peas_register_types (PeasObjectModule * module);
+G_MODULE_EXPORT void    peas_register_types             (PeasObjectModule *module);
 
 G_END_DECLS
 #endif /* __GTR_Dict_PLUGIN_H__ */

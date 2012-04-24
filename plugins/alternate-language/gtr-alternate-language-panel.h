@@ -49,11 +49,11 @@ struct _GtrAlternateLangPanelClass
   GtkBoxClass parent_class;
 };
 
-GType gtr_alternate_lang_panel_get_type (void) G_GNUC_CONST;
+GType            gtr_alternate_lang_panel_get_type      (void) G_GNUC_CONST;
 
-GtkWidget *gtr_alternate_lang_panel_new (GtrTab *tab);
+GtkWidget       *gtr_alternate_lang_panel_new           (GtrTab      *tab);
 
-void _gtr_alternate_lang_panel_register_type (GTypeModule *type_module);
+void            _gtr_alternate_lang_panel_register_type (GTypeModule *type_module);
 
 G_END_DECLS
 #endif /* __ALTERNATE_LANG_PANEL_H__ */

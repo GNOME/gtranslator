@@ -26,22 +26,17 @@
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
-#define GTR_TYPE_TRANSLATION_MEMORY_UI	        (gtr_translation_memory_ui_get_type ())
-#define GTR_TRANSLATION_MEMORY_UI(o)	        (G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_TRANSLATION_MEMORY_UI, GtrTranslationMemoryUi))
-#define GTR_TRANSLATION_MEMORY_UI_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_TRANSLATION_MEMORY_UI, GtrTranslationMemoryUiClass))
-#define GTR_IS_TRANSLATION_MEMORY_UI(o)	        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_TRANSLATION_MEMORY_UI))
-#define GTR_IS_TRANSLATION_MEMORY_UI_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_TRANSLATION_MEMORY_UI))
-#define GTR_TRANSLATION_MEMORY_UI_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_TRANSLATION_MEMORY_UI, GtrTranslationMemoryUiClass))
-/* Private structure type */
-typedef struct _GtrTranslationMemoryUiPrivate GtrTranslationMemoryUiPrivate;
 
-/*
- * Main object structure
- */
-typedef struct _GtrTranslationMemoryUi GtrTranslationMemoryUi;
+#define GTR_TYPE_TRANSLATION_MEMORY_UI          (gtr_translation_memory_ui_get_type ())
+#define GTR_TRANSLATION_MEMORY_UI(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_TRANSLATION_MEMORY_UI, GtrTranslationMemoryUi))
+#define GTR_TRANSLATION_MEMORY_UI_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_TRANSLATION_MEMORY_UI, GtrTranslationMemoryUiClass))
+#define GTR_IS_TRANSLATION_MEMORY_UI(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_TRANSLATION_MEMORY_UI))
+#define GTR_IS_TRANSLATION_MEMORY_UI_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_TRANSLATION_MEMORY_UI))
+#define GTR_TRANSLATION_MEMORY_UI_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_TRANSLATION_MEMORY_UI, GtrTranslationMemoryUiClass))
+
+typedef struct _GtrTranslationMemoryUi        GtrTranslationMemoryUi;
+typedef struct _GtrTranslationMemoryUiClass   GtrTranslationMemoryUiClass;
+typedef struct _GtrTranslationMemoryUiPrivate GtrTranslationMemoryUiPrivate;
 
 struct _GtrTranslationMemoryUi
 {
@@ -51,24 +46,17 @@ struct _GtrTranslationMemoryUi
   GtrTranslationMemoryUiPrivate *priv;
 };
 
-/*
- * Class definition
- */
-typedef struct _GtrTranslationMemoryUiClass GtrTranslationMemoryUiClass;
-
 struct _GtrTranslationMemoryUiClass
 {
   GtkScrolledWindowClass parent_class;
 };
 
-/*
- * Public methods
- */
-GType gtr_translation_memory_ui_get_type (void) G_GNUC_CONST;
+GType            gtr_translation_memory_ui_get_type             (void) G_GNUC_CONST;
 
-GType gtr_translation_memory_ui_register_type (GTypeModule * module);
+GType            gtr_translation_memory_ui_register_type        (GTypeModule            *module);
 
-GtkWidget *gtr_translation_memory_ui_new (GtkWidget *tab, GtrTranslationMemory *translation_memory);
+GtkWidget       *gtr_translation_memory_ui_new                  (GtkWidget              *tab,
+                                                                 GtrTranslationMemory   *translation_memory);
 
 G_END_DECLS
 #endif /* __TRANSLATION_MEMORY_UI_H__ */

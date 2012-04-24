@@ -50,9 +50,9 @@ struct _GtrInsertParamsPluginClass
   PeasExtensionBaseClass parent_class;
 };
 
-GType gtr_insert_params_plugin_get_type (void) G_GNUC_CONST;
+GType                   gtr_insert_params_plugin_get_type       (void) G_GNUC_CONST;
 
-G_MODULE_EXPORT void peas_register_types (PeasObjectModule *module);
+G_MODULE_EXPORT void    peas_register_types                     (PeasObjectModule *module);
 
 G_END_DECLS
 #endif /* __GTR_INSERT_PARAMS_PLUGIN_H__ */

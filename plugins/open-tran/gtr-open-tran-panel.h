@@ -57,11 +57,11 @@ struct _GtrOpenTranPanelClass
   GtkBoxClass parent_class;
 };
 
-GType gtr_open_tran_panel_get_type (void) G_GNUC_CONST;
+GType            gtr_open_tran_panel_get_type           (void) G_GNUC_CONST;
 
-GtkWidget *gtr_open_tran_panel_new (GtrTab * window);
+GtkWidget       *gtr_open_tran_panel_new                (GtrTab      *window);
 
-void _gtr_open_tran_panel_register_type (GTypeModule *type_module);
+void            _gtr_open_tran_panel_register_type      (GTypeModule *type_module);
 
 G_END_DECLS
 #endif /* __OPEN_TRAN_PANEL_H__ */

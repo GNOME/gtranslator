@@ -53,24 +53,29 @@ struct _GtrTranslationMemoryMatch
   gint level;
 };
 
-GType gtr_translation_memory_get_type (void);
+GType           gtr_translation_memory_get_type         (void);
 
-gboolean gtr_translation_memory_store (GtrTranslationMemory * obj, GtrMsg * msg);
+gboolean        gtr_translation_memory_store            (GtrTranslationMemory   *obj,
+                                                         GtrMsg                 *msg);
 
-gboolean gtr_translation_memory_store_list (GtrTranslationMemory * obj, GList * msg);
+gboolean        gtr_translation_memory_store_list       (GtrTranslationMemory   *obj,
+                                                         GList                  *msg);
 
-void gtr_translation_memory_remove (GtrTranslationMemory * obj,
-                                    const gchar * original,
-                                    const gchar * translation);
+void            gtr_translation_memory_remove           (GtrTranslationMemory   *obj,
+                                                         const gchar            *original,
+                                                         const gchar            *translation);
 
-GList *gtr_translation_memory_lookup (GtrTranslationMemory * obj,
-                                      const gchar * phrase);
+GList          *gtr_translation_memory_lookup           (GtrTranslationMemory   *obj,
+                                                         const gchar            *phrase);
 
-void gtr_translation_memory_set_max_omits (GtrTranslationMemory * obj, gsize omits);
+void            gtr_translation_memory_set_max_omits    (GtrTranslationMemory   *obj,
+                                                         gsize                   omits);
 
-void gtr_translation_memory_set_max_delta (GtrTranslationMemory * obj, gsize delta);
+void            gtr_translation_memory_set_max_delta    (GtrTranslationMemory   *obj,
+                                                         gsize                   delta);
 
-void gtr_translation_memory_set_max_items (GtrTranslationMemory * obj, gint items);
+void            gtr_translation_memory_set_max_items    (GtrTranslationMemory   *obj,
+                                                         gint                    items);
 
 G_END_DECLS
 #endif

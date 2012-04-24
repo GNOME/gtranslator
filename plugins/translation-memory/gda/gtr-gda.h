@@ -23,22 +23,17 @@
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
+
 #define GTR_TYPE_GDA		(gtr_gda_get_type ())
 #define GTR_GDA(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_GDA, GtrGda))
 #define GTR_GDA_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_GDA, GtrGdaClass))
 #define GTR_IS_GDA(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_GDA))
 #define GTR_IS_GDA_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_GDA))
 #define GTR_GDA_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_GDA, GtrGdaClass))
-/* Private structure type */
-typedef struct _GtrGdaPrivate GtrGdaPrivate;
 
-/*
- * Main object structure
- */
-typedef struct _GtrGda GtrGda;
+typedef struct _GtrGdaPrivate GtrGdaPrivate;
+typedef struct _GtrGda        GtrGda;
+typedef struct _GtrGdaClass   GtrGdaClass;
 
 struct _GtrGda
 {
@@ -48,26 +43,16 @@ struct _GtrGda
   GtrGdaPrivate *priv;
 };
 
-/*
- * Class definition
- */
-typedef struct _GtrGdaClass GtrGdaClass;
-
 struct _GtrGdaClass
 {
   GObjectClass parent_class;
 };
 
-/*
- * Public methods
- */
-GType
-gtr_gda_get_type (void)
-  G_GNUC_CONST;
+GType                   gtr_gda_get_type                (void) G_GNUC_CONST;
 
-GType gtr_gda_register_type (GTypeModule * module);
+GType                   gtr_gda_register_type           (GTypeModule *module);
 
-GtrGda *gtr_gda_new (void);
+GtrGda                 *gtr_gda_new                     (void);
 
 G_END_DECLS
 #endif /* __GDA_BACKEND_H__ */

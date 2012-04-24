@@ -50,9 +50,9 @@ struct _GtrCodeViewPluginClass
   PeasExtensionBaseClass parent_class;
 };
 
-GType gtr_code_view_plugin_get_type (void) G_GNUC_CONST;
+GType                   gtr_code_view_plugin_get_type   (void) G_GNUC_CONST;
 
-G_MODULE_EXPORT void peas_register_types (PeasObjectModule *module);
+G_MODULE_EXPORT void    peas_register_types             (PeasObjectModule *module);
 
 G_END_DECLS
 #endif /* __GTR_CODE_VIEW_PLUGIN_H__ */

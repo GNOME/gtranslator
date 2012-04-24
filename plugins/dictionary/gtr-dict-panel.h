@@ -55,13 +55,14 @@ struct _GtrDictPanelClass
 /*
  * Public methods
  */
-GType gtr_dict_panel_get_type (void) G_GNUC_CONST;
+GType            gtr_dict_panel_get_type        (void) G_GNUC_CONST;
 
-GtkWidget *gtr_dict_panel_new (GtrWindow *window);
+GtkWidget       *gtr_dict_panel_new             (GtrWindow     *window);
 
-void _gtr_dict_panel_register_type (GTypeModule *type_module);
+void            _gtr_dict_panel_register_type   (GTypeModule   *type_module);
 
-void gtr_dict_panel_set_position (GtrDictPanel * panel, gint pos);
+void             gtr_dict_panel_set_position    (GtrDictPanel  *panel,
+                                                 gint           pos);
 
 G_END_DECLS
 #endif /* __DICT_PANEL_H__ */
