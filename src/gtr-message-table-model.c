@@ -329,6 +329,7 @@ gtr_message_table_model_init (GtrMessageTableModel * model)
 static void
 gtr_message_table_model_finalize (GObject * object)
 {
+  g_object_unref (GTR_MESSAGE_TABLE_MODEL (object)->container);
   parent_class->finalize (object);
 }
 
@@ -343,7 +344,7 @@ gtr_message_table_set_property (GObject      * object,
   switch (prop_id)
     {
     case PROP_CONTAINER:
-      model->container = g_value_get_object (value);
+      model->container = g_value_dup_object (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
