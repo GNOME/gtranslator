@@ -1,19 +1,18 @@
 /*
  * Copyright (C) 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
- * 
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
- * 
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANMsgILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
- * 
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANMsgILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -31,16 +30,21 @@
 
 #define G_LIST(x) ((GList *) x)
 
-#define TABLE_FUZZY_ICON	"gtk-dialog-warning"
-#define TABLE_UNTRANSLATED_ICON	"gtk-dialog-error"
-#define TABLE_TRANSLATED_ICON	NULL
+#define TABLE_FUZZY_ICON "gtk-dialog-warning"
+#define TABLE_UNTRANSLATED_ICON "gtk-dialog-error"
+#define TABLE_TRANSLATED_ICON NULL
 
 enum {
   PROP_0,
   PROP_CONTAINER
 };
 
-static GObjectClass *parent_class;
+static void gtr_message_table_model_tree_model_init (GtkTreeModelIface *iface);
+
+G_DEFINE_TYPE_EXTENDED (GtrMessageTableModel, gtr_message_table_model, G_TYPE_OBJECT,
+                        0,
+                        G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_MODEL,
+                                               gtr_message_table_model_tree_model_init))
 
 static guint
 gtr_message_table_model_get_flags (GtkTreeModel * self)
@@ -330,7 +334,8 @@ static void
 gtr_message_table_model_finalize (GObject * object)
 {
   g_object_unref (GTR_MESSAGE_TABLE_MODEL (object)->container);
-  parent_class->finalize (object);
+
+  G_OBJECT_CLASS (gtr_message_table_model_parent_class)->finalize (object);
 }
 
 static void
@@ -388,8 +393,6 @@ gtr_message_table_model_class_init (GtrMessageTableModelClass * klass)
                                                         GTR_TYPE_MESSAGE_CONTAINER,
                                                         G_PARAM_READWRITE |
                                                         G_PARAM_CONSTRUCT_ONLY));
-
-  parent_class = g_type_class_peek_parent (klass);
 }
 
 /***************************** Public funcs ***********************************/
@@ -433,50 +436,12 @@ gtr_message_table_get_message_iter (GtrMessageTableModel * model,
 }
 
 void
-gtr_message_table_model_update_row (GtrMessageTableModel *
-                                    model, GtkTreePath * path)
+gtr_message_table_model_update_row (GtrMessageTableModel *model,
+                                    GtkTreePath          *path)
 {
   GtkTreeIter iter;
 
   gtr_message_table_model_get_iter (GTK_TREE_MODEL (model), &iter, path);
 
   gtk_tree_model_row_changed (GTK_TREE_MODEL (model), path, &iter);
-}
-
-GType
-gtr_message_table_model_get_type (void)
-{
-  static GType object_type = 0;
-
-  if (G_UNLIKELY (object_type == 0))
-    {
-      static const GTypeInfo object_info = {
-        sizeof (GtrMessageTableModelClass),
-        NULL,                   /* base_init */
-        NULL,                   /* base_finalize */
-        (GClassInitFunc) gtr_message_table_model_class_init,
-        NULL,                   /* class_finalize */
-        NULL,                   /* class_data */
-        sizeof (GtrMessageTableModel),
-        0,                      /* n_preallocs */
-        (GInstanceInitFunc) gtr_message_table_model_init,
-        NULL
-      };
-
-      static const GInterfaceInfo tree_model_info = {
-        (GInterfaceInitFunc) gtr_message_table_model_tree_model_init,
-        NULL,
-        NULL
-      };
-
-      object_type = g_type_register_static (G_TYPE_OBJECT,
-                                            "GtrMessageTableModel",
-                                            &object_info, 0);
-
-      g_type_add_interface_static (object_type, GTK_TYPE_TREE_MODEL,
-                                   &tree_model_info);
-
-    }
-
-  return object_type;
 }
