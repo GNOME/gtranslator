@@ -70,7 +70,7 @@ static void gtr_window_cmd_edit_toolbar (GtkAction * action,
                                          GtrWindow * window);
 
 
-G_DEFINE_TYPE (GtrWindow, gtr_window, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE (GtrWindow, gtr_window, GTK_TYPE_APPLICATION_WINDOW)
 
 struct _GtrWindowPrivate
 {

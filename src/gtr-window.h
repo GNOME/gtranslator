@@ -33,44 +33,31 @@
 #include "gtr-view.h"
 
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
+
 #define GTR_TYPE_WINDOW		(gtr_window_get_type ())
 #define GTR_WINDOW(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_WINDOW, GtrWindow))
 #define GTR_WINDOW_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_WINDOW, GtrWindowClass))
 #define GTR_IS_WINDOW(o)	(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_WINDOW))
 #define GTR_IS_WINDOW_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_WINDOW))
 #define GTR_WINDOW_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_WINDOW, GtrWindowClass))
-/* Private structure type */
-typedef struct _GtrWindowPrivate GtrWindowPrivate;
 
-/*
- * Main object structure
- */
-typedef struct _GtrWindow GtrWindow;
+typedef struct _GtrWindow        GtrWindow;
+typedef struct _GtrWindowClass   GtrWindowClass;
+typedef struct _GtrWindowPrivate GtrWindowPrivate;
 
 struct _GtrWindow
 {
-  GtkWindow parent_instance;
+  GtkApplicationWindow parent_instance;
 
   /*< private > */
   GtrWindowPrivate *priv;
 };
 
-/*
- * Class definition
- */
-typedef struct _GtrWindowClass GtrWindowClass;
-
 struct _GtrWindowClass
 {
-  GtkWindowClass parent_class;
+  GtkApplicationWindowClass parent_class;
 };
 
-/*
- * Public methods
- */
 GType gtr_window_get_type (void) G_GNUC_CONST;
 
 GType gtr_window_register_type (GTypeModule * module);

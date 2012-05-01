@@ -382,7 +382,7 @@ gtr_application_create_window (GtrApplication *app)
 
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
-  window = g_object_new (GTR_TYPE_WINDOW, NULL);
+  window = g_object_new (GTR_TYPE_WINDOW, "application", app, NULL);
   set_active_window (app, window);
 
   state = g_settings_get_int (app->priv->window_settings,
