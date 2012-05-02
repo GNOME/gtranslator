@@ -30,23 +30,19 @@
 #include "gtr-window.h"
 
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
+
 #define GTR_TYPE_APPLICATION		(gtr_application_get_type ())
 #define GTR_APPLICATION(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_APPLICATION, GtrApplication))
 #define GTR_APPLICATION_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_APPLICATION, GtrApplicationClass))
 #define GTR_IS_APPLICATION(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_APPLICATION))
 #define GTR_IS_APPLICATION_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_APPLICATION))
 #define GTR_APPLICATION_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_APPLIAPPLICATION, GtrApplicationClass))
-#define GTR_APP			        (gtr_application_get_default())
-/* Private structure type */
-typedef struct _GtrApplicationPrivate GtrApplicationPrivate;
 
-/*
- * Main object structure
- */
-typedef struct _GtrApplication GtrApplication;
+#define GTR_APP                         (GTR_APPLICATION (g_application_get_default()))
+
+typedef struct _GtrApplication        GtrApplication;
+typedef struct _GtrApplicationClass   GtrApplicationClass;
+typedef struct _GtrApplicationPrivate GtrApplicationPrivate;
 
 struct _GtrApplication
 {
@@ -56,24 +52,14 @@ struct _GtrApplication
   GtrApplicationPrivate *priv;
 };
 
-/*
- * Class definition
- */
-typedef struct _GtrApplicationClass GtrApplicationClass;
-
 struct _GtrApplicationClass
 {
   GtkApplicationClass parent_class;
 };
 
-/*
- * Public methods
- */
 GType             gtr_application_get_type               (void)G_GNUC_CONST;
 
 GtrApplication  *_gtr_application_new                    (void);
-
-GtrApplication   *gtr_application_get_default            (void);
 
 GList *           gtr_application_get_views              (GtrApplication *app,
                                                           gboolean        original,

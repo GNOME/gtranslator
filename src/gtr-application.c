@@ -72,8 +72,6 @@ struct _GtrApplicationPrivate
   guint first_run : 1;
 };
 
-static GtrApplication *instance = NULL;
-
 static gboolean
 ensure_user_config_dir (void)
 {
@@ -344,25 +342,10 @@ gtr_application_class_init (GtrApplicationClass *klass)
 GtrApplication *
 _gtr_application_new ()
 {
-  instance = GTR_APPLICATION (g_object_new (GTR_TYPE_APPLICATION,
-                                            "application-id", "org.gnome.Gtranslator",
-                                            "flags", G_APPLICATION_HANDLES_OPEN,
-                                            NULL));
-
-  return instance;
-}
-
-/**
- * gtr_application_get_default:
- * 
- * Returns the default instance of the application.
- * 
- * Returns: (transfer none): the default instance of the application.
- */
-GtrApplication *
-gtr_application_get_default (void)
-{
-  return instance;
+  return GTR_APPLICATION (g_object_new (GTR_TYPE_APPLICATION,
+                                        "application-id", "org.gnome.Gtranslator",
+                                        "flags", G_APPLICATION_HANDLES_OPEN,
+                                        NULL));
 }
 
 /**
