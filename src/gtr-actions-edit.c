@@ -25,7 +25,6 @@
 #include <glib/gi18n.h>
 
 #include "gtr-header-dialog.h"
-#include "gtr-preferences-dialog.h"
 #include "gtr-actions.h"
 #include "gtr-msg.h"
 #include "gtr-po.h"
@@ -148,12 +147,6 @@ gtr_message_status_toggle_fuzzy (GtkAction * action, GtrWindow * window)
    * Emit that message was changed.
    */
   g_signal_emit_by_name (current, "message_changed", msg->data);
-}
-
-void
-gtr_actions_edit_preferences (GtkAction * action, GtrWindow * window)
-{
-  gtr_show_preferences_dialog (window);
 }
 
 void

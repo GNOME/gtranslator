@@ -26,12 +26,14 @@
 
 #include "gtr-assistant.h"
 #include "gtr-actions.h"
+#include "gtr-actions-app.h"
 #include "gtr-application.h"
 #include "gtr-debug.h"
 #include "gtr-dirs.h"
 #include "gtr-settings.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
+#include "gtr-preferences-dialog.h"
 #include "egg-toolbars-model.h"
 
 #include <glib.h>
@@ -250,8 +252,77 @@ gtr_application_finalize (GObject *object)
 }
 
 static void
+new_window_activated (GSimpleAction *action,
+                      GVariant      *parameter,
+                      gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrWindow *window;
+
+  window = gtr_application_create_window (app);
+  gtk_application_add_window (GTK_APPLICATION (app), GTK_WINDOW (window));
+}
+
+static void
+preferences_activated (GSimpleAction *action,
+                       GVariant      *parameter,
+                       gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  gtr_show_preferences_dialog (app->priv->active_window);
+}
+
+static void
+help_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  gtr_show_help (app->priv->active_window);
+}
+
+static void
+about_activated (GSimpleAction *action,
+                 GVariant      *parameter,
+                 gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  gtr_about_dialog (app->priv->active_window);
+}
+
+static void
+quit_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GtkApplication *app = GTK_APPLICATION (user_data);
+  GList *windows, *l;
+
+  // FIXME: this sucks, we need a way to deal with this in a better way
+  windows = gtk_application_get_windows (app);
+
+  for (l = windows; l != NULL; l = g_list_next (l))
+    {
+      gtr_file_quit (NULL, l->data);
+    }
+
+  // FIXME: we may want to continue editing
+  g_application_quit (G_APPLICATION (app));
+}
+
+static GActionEntry app_entries[] = {
+  { "new_window", new_window_activated, NULL, NULL, NULL },
+  { "preferences", preferences_activated, NULL, NULL, NULL },
+  { "help", help_activated, NULL, NULL, NULL },
+  { "about", about_activated, NULL, NULL, NULL },
+  { "quit", quit_activated, NULL, NULL, NULL }
+};
+
+static void
 gtr_application_startup (GApplication *application)
 {
+  GtkBuilder *builder;
+
   G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
 
   g_set_application_name (_("Gtranslator"));
@@ -260,6 +331,15 @@ gtr_application_startup (GApplication *application)
   /* We set the default icon dir */
   gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
                                      gtr_dirs_get_gtr_pixmaps_dir ());
+
+  g_action_map_add_action_entries (G_ACTION_MAP (application), app_entries,
+                                   G_N_ELEMENTS (app_entries), application);
+
+  builder = gtk_builder_new ();
+  gtk_builder_add_from_resource (builder, "/org/gnome/gtranslator/ui/gtranslator-menu.ui", NULL);
+  gtk_application_set_app_menu (GTK_APPLICATION (application),
+                                G_MENU_MODEL (gtk_builder_get_object (builder, "appmenu")));
+  g_object_unref (builder);
 }
 
 static void
@@ -314,12 +394,12 @@ gtr_application_activate (GApplication *application)
 }
 
 static void
-gtr_application_quit_mainloop (GApplication *application)
+gtr_application_shutdown (GApplication *application)
 {
   ensure_user_config_dir ();
   save_accels ();
 
-  G_APPLICATION_CLASS (gtr_application_parent_class)->quit_mainloop (application);
+  G_APPLICATION_CLASS (gtr_application_parent_class)->shutdown (application);
 }
 
 static void
@@ -336,7 +416,7 @@ gtr_application_class_init (GtrApplicationClass *klass)
   application_class->startup = gtr_application_startup;
   application_class->open = gtr_application_open;
   application_class->activate = gtr_application_activate;
-  application_class->quit_mainloop = gtr_application_quit_mainloop;
+  application_class->shutdown = gtr_application_shutdown;
 }
 
 GtrApplication *
@@ -447,8 +527,7 @@ gtr_application_get_views (GtrApplication * app,
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
   res = g_list_concat (res,
-                       gtr_window_get_all_views (GTR_WINDOW
-                                                 (app->priv->active_window),
+                       gtr_window_get_all_views (GTR_WINDOW (app->priv->active_window),
                                                  original, translated));
 
   return res;

@@ -120,7 +120,6 @@ static const GtkActionEntry always_sensitive_entries[] = {
   {"Go", NULL, N_("_Go")},
   {"Tools", NULL, N_("_Tools")},
   {"Documents", NULL, N_("_Documents")},
-  {"Help", NULL, N_("_Help")},
 
   /* File menu */
   {"FileOpen", GTK_STOCK_OPEN, NULL, "<control>O",
@@ -135,17 +134,8 @@ static const GtkActionEntry always_sensitive_entries[] = {
   /* Edit menu */
   {"EditToolbar", NULL, N_("T_oolbar"), NULL, NULL,
    G_CALLBACK (gtr_window_cmd_edit_toolbar)},
-  {"EditPreferences", GTK_STOCK_PREFERENCES, NULL, NULL,
-   N_("Edit gtranslator preferences"),
-   G_CALLBACK (gtr_actions_edit_preferences)},
   {"EditHeader", GTK_STOCK_PROPERTIES, N_("_Header..."), NULL, NULL,
    G_CALLBACK (gtr_actions_edit_header)},
-
-  /* Help menu */
-  {"HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1", NULL,
-   G_CALLBACK (gtr_cmd_help_contents)},
-  {"HelpAbout", GTK_STOCK_ABOUT, NULL, NULL, NULL,
-   G_CALLBACK (gtr_about_dialog)},
 };
 
 /* Normal items */

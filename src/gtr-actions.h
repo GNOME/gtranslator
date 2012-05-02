@@ -64,8 +64,6 @@ void gtr_message_copy_to_translation (GtkAction * action, GtrWindow * window);
 
 void gtr_message_status_toggle_fuzzy (GtkAction * action, GtrWindow * window);
 
-void gtr_actions_edit_preferences (GtkAction * action, GtrWindow * window);
-
 void gtr_actions_edit_clear (GtkAction * action, GtrWindow * window);
 
 /* View */
@@ -112,12 +110,6 @@ void gtr_actions_documents_previous_document
 
 /*Help*/
 void gtr_window_show_home_page (GtkAction * action, gpointer useless);
-
-void gtr_cmd_help_contents (GtkAction * action, GtrWindow * window);
-
-void gtr_about_dialog (GtkAction * action, GtrWindow * window);
-
-
 
 G_END_DECLS
 #endif

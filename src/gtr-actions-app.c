@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include "gtr-actions.h"
+#include "gtr-actions-app.h"
 #include "gtr-dirs.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
@@ -35,14 +35,14 @@
 
 /* Show the user's guide for gtranslator */
 void
-gtr_cmd_help_contents (GtkAction * action, GtrWindow * window)
+gtr_show_help (GtrWindow *window)
 {
   gtr_utils_help_display (GTK_WINDOW (window), "gtranslator", "gtranslator.xml");
 }
 
 /* Creates and shows the about box for gtranslator */
 void
-gtr_about_dialog (GtkAction * action, GtrWindow * window)
+gtr_about_dialog (GtrWindow *window)
 {
   static const gchar *authors[] = {
     N_("Current Maintainers"),

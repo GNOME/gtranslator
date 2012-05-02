@@ -77,6 +77,7 @@ INST_H_FILES = \
 
 NOINST_H_FILES = \
 	gtr-actions.h \
+	gtr-actions-app.h \
 	gtr-assistant.h \
 	gtr-close-button.h \
 	gtr-close-confirmation-dialog.h \
@@ -111,11 +112,11 @@ libgtranslator_private_la_SOURCES = \
 	$(BUILT_SOURCES_PRIVATE)
 
 libgtranslator_c_files = \
+	gtr-actions-app.c \
 	gtr-actions-documents.c \
 	gtr-actions-edit.c \
 	gtr-actions-file.c \
 	gtr-actions-go.c \
-	gtr-actions-help.c \
 	gtr-actions-search.c \
 	gtr-actions-view.c \
 	gtr-application.c \
