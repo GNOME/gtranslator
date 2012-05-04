@@ -7,11 +7,17 @@ data/po.lang
 plugins/alternate-language/gtr-alternate-language-panel.c
 plugins/alternate-language/gtr-alternate-language-plugin.c
 plugins/alternate-language/gtr-alternate-language.plugin.desktop.in
-plugins/charmap/gtr-charmap.plugin.desktop.in
 plugins/charmap/charmap/__init__.py
+plugins/charmap/gtr-charmap.plugin.desktop.in
+[type: gettext/glade]plugins/codeview/gtr-codeview-dialog.ui
+plugins/codeview/gtr-codeview-plugin.c
+plugins/codeview/gtr-codeview.plugin.desktop.in
+plugins/codeview/gtr-viewer.c
+[type: gettext/glade]plugins/codeview/gtr-viewer.ui
+plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in
+plugins/dictionary/gtr-dictionary-plugin.c
 plugins/dictionary/gtr-dict-panel.c
 plugins/dictionary/gtr-dict.plugin.desktop.in
-plugins/dictionary/gtr-dictionary-plugin.c
 plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in
 plugins/fullscreen/gtr-fullscreen-plugin.c
 plugins/fullscreen/gtr-fullscreen.plugin.desktop.in
@@ -22,47 +28,43 @@ plugins/open-tran/gtr-open-tran-panel.c
 plugins/open-tran/gtr-open-tran-plugin.c
 plugins/open-tran/gtr-open-tran.plugin.desktop.in
 plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in
-[type: gettext/glade]plugins/codeview/gtr-codeview-dialog.ui
-plugins/codeview/gtr-codeview-plugin.c
-plugins/codeview/gtr-codeview.plugin.desktop.in
-plugins/codeview/gtr-viewer.c
-[type: gettext/glade]plugins/codeview/gtr-viewer.ui
-plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in
 plugins/translation-memory/gtr-translation-memory-dialog.c
 [type: gettext/glade]plugins/translation-memory/gtr-translation-memory-dialog.ui
+plugins/translation-memory/gtr-translation-memory.plugin.desktop.in
 plugins/translation-memory/gtr-translation-memory-tab-activatable.c
 plugins/translation-memory/gtr-translation-memory-ui.c
 plugins/translation-memory/gtr-translation-memory-window-activatable.c
-plugins/translation-memory/gtr-translation-memory.plugin.desktop.in
 plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in
+src/gtr-actions-app.c
 src/gtr-actions-file.c
 src/gtr-actions-help.c
 src/gtr-actions-search.c
-src/gtr-context.c
+[type: gettext/glade]src/gtranslator-menu.ui
+src/gtr-application.c
 src/gtr-assistant.c
 src/gtr-close-confirmation-dialog.c
+src/gtr-context.c
 src/gtr-file-dialogs.c
 src/gtr-header-dialog.c
 [type: gettext/glade]src/gtr-header-dialog.ui
 src/gtr-jump-dialog.c
 [type: gettext/glade]src/gtr-jump-dialog.ui
 [type: gettext/glade]src/gtr-languages-fetcher.ui
+src/gtr-message-table.c
+src/gtr-notebook.c
+src/gtr-po.c
 src/gtr-preferences-dialog.c
 [type: gettext/glade]src/gtr-preferences-dialog.ui
 src/gtr-profile-dialog.c
 [type: gettext/glade]src/gtr-profile-dialog.ui
 src/gtr-search-dialog.c
 [type: gettext/glade]src/gtr-search-dialog.ui
-src/gtr-application.c
-src/gtr-message-table.c
-src/gtr-notebook.c
-src/gtr-po.c
 src/gtr-statusbar.c
 src/gtr-tab.c
 src/gtr-tab-label.c
-src/toolbareditor/egg-editable-toolbar.c
-src/toolbareditor/egg-toolbar-editor.c
 src/gtr-utils.c
 src/gtr-view.c
 src/gtr-window.c
 src/main.c
+src/toolbareditor/egg-editable-toolbar.c
+src/toolbareditor/egg-toolbar-editor.c
