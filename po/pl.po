@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-21 18:12+0200\n"
-"PO-Revision-Date: 2012-04-21 18:13+0200\n"
+"POT-Creation-Date: 2012-05-04 23:06+0200\n"
+"PO-Revision-Date: 2012-05-04 23:07+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>>\n"
 "Language: pl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Poedit-Language: Polish\n"
 "X-Poedit-Country: Poland\n"
 
-#: ../data/desktop/gtranslator.desktop.in.in.h:1 ../src/gtr-application.c:259
+#: ../data/desktop/gtranslator.desktop.in.in.h:1 ../src/gtr-application.c:328
 msgid "Gtranslator"
 msgstr "gtranslator"
 
@@ -253,14 +253,87 @@ msgstr "Alternatywny język"
 msgid "Load an alternate language."
 msgstr "Wczytywanie alternatywnego języka."
 
-#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:1
+#. ex:et:ts=4:
 #: ../plugins/charmap/charmap/__init__.py:42
+#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:1
 msgid "Character Map"
 msgstr "Mapa znaków"
 
 #: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:2
 msgid "Insert special characters just by clicking on them."
 msgstr "Wstawianie znaków specjalnych przez kliknięcie na nich."
+
+#: ../plugins/codeview/gtr-codeview-dialog.ui.h:1
+msgid "Source View Settings"
+msgstr "Ustawienia widoku źródła"
+
+#: ../plugins/codeview/gtr-codeview-dialog.ui.h:2
+msgid "Use external editor"
+msgstr "Użycie zewnętrznego serwera"
+
+#: ../plugins/codeview/gtr-codeview-dialog.ui.h:3
+msgid "Program command:"
+msgstr "Polecenie programu:"
+
+#: ../plugins/codeview/gtr-codeview-dialog.ui.h:4
+msgid "Line command:"
+msgstr "Polecenie wiersza:"
+
+#: ../plugins/codeview/gtr-codeview-plugin.c:129
+#, c-format
+msgid "Please install \"%s\" to be able to show the file"
+msgstr "Proszę zainstalować \"%s\", aby wyświetlić plik"
+
+#: ../plugins/codeview/gtr-codeview-plugin.c:497
+msgid "Paths:"
+msgstr "Ścieżki:"
+
+#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:1
+msgid "Source Code View"
+msgstr "Widok kodu źródłowego"
+
+#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:2
+msgid "Show the message in the source code."
+msgstr "Wyświetlanie komunikatu w kodzie źródłowym."
+
+#: ../plugins/codeview/gtr-viewer.c:80
+msgid "Source Viewer"
+msgstr "Przeglądarka źródeł"
+
+#: ../plugins/codeview/gtr-viewer.ui.h:1
+msgid "Source code"
+msgstr "Kod źródłowy"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:1
+msgid "Use the System Editor"
+msgstr "Używanie edytora systemowego"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:2
+msgid "Whether use the system editor to show the source code"
+msgstr ""
+"Określa, czy używać edytora systemowego do wyświetlania kodu źródłowego"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:3
+msgid "The Editor to Launch"
+msgstr "Edytor do uruchomienia"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:4
+msgid "The command to launch the editor you want to use"
+msgstr "Polecenie do uruchomienia edytora"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:5
+msgid "Arguments for the Command"
+msgstr "Parametry dla polecenia"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:6
+msgid "Arguments to pass to the program command line to select the line"
+msgstr ""
+"Parametry do przekazania programowi w wierszu poleceń do wybrania wiersza"
+
+#: ../plugins/dictionary/gtr-dictionary-plugin.c:140
+#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:1
+msgid "Dictionary"
+msgstr "Słownik"
 
 #: ../plugins/dictionary/gtr-dict-panel.c:166
 #, c-format
@@ -340,11 +413,6 @@ msgstr "Dostępne strategie"
 #: ../plugins/dictionary/gtr-dict-panel.c:596
 msgid "Dictionary sources"
 msgstr "Źródła słowników"
-
-#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:1
-#: ../plugins/dictionary/gtr-dictionary-plugin.c:140
-msgid "Dictionary"
-msgstr "Słownik"
 
 #: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:2
 msgid "Look up words in a dictionary."
@@ -577,73 +645,6 @@ msgstr "Adres URL serwera lustrzanego"
 msgid "URL of an Open-Tran mirror server"
 msgstr "Adres URL serwera lustrzanego Open-Tran"
 
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:1
-msgid "Source View Settings"
-msgstr "Ustawienia widoku źródła"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:2
-msgid "Use external editor"
-msgstr "Użycie zewnętrznego serwera"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:3
-msgid "Program command:"
-msgstr "Polecenie programu:"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:4
-msgid "Line command:"
-msgstr "Polecenie wiersza:"
-
-#: ../plugins/codeview/gtr-codeview-plugin.c:129
-#, c-format
-msgid "Please install \"%s\" to be able to show the file"
-msgstr "Proszę zainstalować \"%s\", aby wyświetlić plik"
-
-#: ../plugins/codeview/gtr-codeview-plugin.c:497
-msgid "Paths:"
-msgstr "Ścieżki:"
-
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:1
-msgid "Source Code View"
-msgstr "Widok kodu źródłowego"
-
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:2
-msgid "Show the message in the source code."
-msgstr "Wyświetlanie komunikatu w kodzie źródłowym."
-
-#: ../plugins/codeview/gtr-viewer.c:80
-msgid "Source Viewer"
-msgstr "Przeglądarka źródeł"
-
-#: ../plugins/codeview/gtr-viewer.ui.h:1
-msgid "Source code"
-msgstr "Kod źródłowy"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:1
-msgid "Use the System Editor"
-msgstr "Używanie edytora systemowego"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:2
-msgid "Whether use the system editor to show the source code"
-msgstr ""
-"Określa, czy używać edytora systemowego do wyświetlania kodu źródłowego"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:3
-msgid "The Editor to Launch"
-msgstr "Edytor do uruchomienia"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:4
-msgid "The command to launch the editor you want to use"
-msgstr "Polecenie do uruchomienia edytora"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:5
-msgid "Arguments for the Command"
-msgstr "Parametry dla polecenia"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:6
-msgid "Arguments to pass to the program command line to select the line"
-msgstr ""
-"Parametry do przekazania programowi w wierszu poleceń do wybrania wiersza"
-
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:165
 msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
 msgstr ""
@@ -677,10 +678,14 @@ msgstr "Konfiguracja:"
 msgid "Use only files with this name:"
 msgstr "Używanie tylko plików o tej nazwie:"
 
-#: ../plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
 #: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:1
+#: ../plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
 msgid "Translation Memory"
 msgstr "Pamięć tłumaczeń"
+
+#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:2
+msgid "Get translation suggestions from a data base."
+msgstr "Pobiera sugestie tłumaczenia z bazy danych."
 
 #: ../plugins/translation-memory/gtr-translation-memory-ui.c:204
 #, c-format
@@ -716,13 +721,9 @@ msgid "Build translation memory"
 msgstr "Buduje pamięć tłumaczeń"
 
 #: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
-#: ../src/gtr-window.c:196
+#: ../src/gtr-window.c:186
 msgid "_Translation Memory"
 msgstr "_Pamięć tłumaczeń"
-
-#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:2
-msgid "Get translation suggestions from a data base."
-msgstr "Pobiera sugestie tłumaczenia z bazy danych."
 
 #: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:1
 msgid "PO directory"
@@ -777,6 +778,46 @@ msgstr ""
 "Maksymalna różnica w długości między komunikatami wyświetlanymi jako "
 "pasujące przez pamięć tłumaczeń."
 
+#: ../src/gtr-actions-app.c:48
+msgid "Current Maintainers"
+msgstr "Obecni opiekunowie"
+
+#: ../src/gtr-actions-app.c:52
+msgid "Current Developers"
+msgstr "Obecni programiści"
+
+#: ../src/gtr-actions-app.c:56
+msgid "Previous Developers"
+msgstr "Poprzedni programiści"
+
+#: ../src/gtr-actions-app.c:66
+msgid "Contributors"
+msgstr "Współtwórcy"
+
+#: ../src/gtr-actions-app.c:90
+msgid ""
+"Translation file editing suite for localization of applications and "
+"libraries."
+msgstr ""
+"Program do modyfikowania plików tłumaczeń do lokalizacji programów i "
+"bibliotek."
+
+#: ../src/gtr-actions-app.c:106
+msgid "About Gtranslator"
+msgstr "O programie gtranslator"
+
+#.
+#. * Note to translators: put here your name and email so it will show
+#. * up in the "about" box
+#.
+#: ../src/gtr-actions-app.c:111
+msgid "translator-credits"
+msgstr "Aviary.pl <gnomepl@aviary.pl>, 2011, 2012"
+
+#: ../src/gtr-actions-app.c:114
+msgid "Gtranslator Web Site"
+msgstr "Witryna programu gtranslator"
+
 #: ../src/gtr-actions-file.c:201
 msgid "Open file for translation"
 msgstr "Otwiera plik do tłumaczenia"
@@ -793,46 +834,6 @@ msgstr "Zapisz plik jako..."
 msgid "Files saved."
 msgstr "Zapisano pliki."
 
-#: ../src/gtr-actions-help.c:48
-msgid "Current Maintainers"
-msgstr "Obecni opiekunowie"
-
-#: ../src/gtr-actions-help.c:52
-msgid "Current Developers"
-msgstr "Obecni programiści"
-
-#: ../src/gtr-actions-help.c:56
-msgid "Previous Developers"
-msgstr "Poprzedni programiści"
-
-#: ../src/gtr-actions-help.c:66
-msgid "Contributors"
-msgstr "Współtwórcy"
-
-#: ../src/gtr-actions-help.c:90
-msgid ""
-"Translation file editing suite for localization of applications and "
-"libraries."
-msgstr ""
-"Program do modyfikowania plików tłumaczeń do lokalizacji programów i "
-"bibliotek."
-
-#: ../src/gtr-actions-help.c:106
-msgid "About Gtranslator"
-msgstr "O programie gtranslator"
-
-#.
-#. * Note to translators: put here your name and email so it will show
-#. * up in the "about" box
-#.
-#: ../src/gtr-actions-help.c:111
-msgid "translator-credits"
-msgstr "Aviary.pl <gnomepl@aviary.pl>, 2011, 2012"
-
-#: ../src/gtr-actions-help.c:114
-msgid "Gtranslator Web Site"
-msgstr "Witryna programu gtranslator"
-
 #: ../src/gtr-actions-search.c:170
 #, c-format
 msgid "Found and replaced %d occurrence"
@@ -845,35 +846,24 @@ msgstr[2] "Odnaleziono i zmieniono %d wystąpień"
 msgid "Found and replaced one occurrence"
 msgstr "Odnaleziono i zmieniono jedno wystąpienie"
 
-#: ../src/gtr-context.c:232
-msgid "Notes:"
-msgstr "Notatki:"
+#: ../src/gtranslator-menu.ui.h:1
+msgid "_New Window"
+msgstr "_Nowe okno"
 
-#: ../src/gtr-context.c:240
-msgid "Add Note"
-msgstr "Dodaj notatkę"
+#: ../src/gtranslator-menu.ui.h:2
+msgid "_Preferences"
+msgstr "_Preferencje"
 
-#: ../src/gtr-context.c:245
-msgid "Edit"
-msgstr "Edycja"
+#: ../src/gtranslator-menu.ui.h:3
+msgid "_Help"
+msgstr "Pomo_c"
 
-#. Extracted comments
-#: ../src/gtr-context.c:288
-msgid "Extracted comments:"
-msgstr "Wydobyte komentarze:"
+#: ../src/gtranslator-menu.ui.h:4
+msgid "_About"
+msgstr "_O programie"
 
-#. Context
-#: ../src/gtr-context.c:292
-msgid "Context:"
-msgstr "Kontekst:"
-
-#. Format
-#: ../src/gtr-context.c:296
-msgid "Format:"
-msgstr "Format:"
-
-#: ../src/gtr-context.c:392
-msgid "D_one"
+#: ../src/gtranslator-menu.ui.h:5
+msgid "_Quit"
 msgstr "Za_kończ"
 
 #: ../src/gtr-assistant.c:130
@@ -920,7 +910,7 @@ msgid "<b>Translator email:</b>"
 msgstr "<a>Adres e-mail tłumacza:</b>"
 
 #: ../src/gtr-assistant.c:296 ../src/gtr-assistant.c:388
-#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:1236
+#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:1234
 msgid "Profile"
 msgstr "Profil"
 
@@ -980,6 +970,37 @@ msgstr ""
 "Jeżeli dokument nie zostanie zapisany, wszystkie zmiany zostaną bezpowrotnie "
 "utracone."
 
+#: ../src/gtr-context.c:232
+msgid "Notes:"
+msgstr "Notatki:"
+
+#: ../src/gtr-context.c:240
+msgid "Add Note"
+msgstr "Dodaj notatkę"
+
+#: ../src/gtr-context.c:245
+msgid "Edit"
+msgstr "Edycja"
+
+#. Extracted comments
+#: ../src/gtr-context.c:288
+msgid "Extracted comments:"
+msgstr "Wydobyte komentarze:"
+
+#. Context
+#: ../src/gtr-context.c:292
+msgid "Context:"
+msgstr "Kontekst:"
+
+#. Format
+#: ../src/gtr-context.c:296
+msgid "Format:"
+msgstr "Format:"
+
+#: ../src/gtr-context.c:392
+msgid "D_one"
+msgstr "Za_kończ"
+
 #: ../src/gtr-file-dialogs.c:62
 msgid "Gettext translation"
 msgstr "Tłumaczenie gettext"
@@ -992,7 +1013,7 @@ msgstr "Szablon tłumaczenia gettext"
 msgid "All files"
 msgstr "Wszystkie pliki"
 
-#: ../src/gtr-header-dialog.c:249
+#: ../src/gtr-header-dialog.c:269
 msgid "Edit Header"
 msgstr "Modyfikowanie nagłówka"
 
@@ -1079,6 +1100,83 @@ msgstr "_Kod języka:"
 #: ../src/gtr-languages-fetcher.ui.h:6
 msgid "_Plural forms:"
 msgstr "_Formy liczby mnogiej:"
+
+#: ../src/gtr-message-table.c:175
+msgid "Status"
+msgstr "Stan"
+
+#: ../src/gtr-message-table.c:187
+msgid "ID"
+msgstr "Identyfikator"
+
+#: ../src/gtr-message-table.c:202
+msgid "Original Message"
+msgstr "Pierwotny komunikat"
+
+#: ../src/gtr-message-table.c:217
+msgid "Translated Message"
+msgstr "Przetłumaczony komunikat"
+
+#: ../src/gtr-po.c:439
+#, c-format
+msgid "The file is empty"
+msgstr "Plik jest pusty"
+
+#: ../src/gtr-po.c:448
+#, c-format
+msgid "Failed opening file '%s': %s"
+msgstr "Otwarcie pliku \"%s\" się nie powiodło: %s"
+
+#: ../src/gtr-po.c:522
+#, c-format
+msgid "Could not convert from charset '%s' to UTF-8"
+msgstr "Nie można przekonwertować z zestawu znaków \"%s\" na UTF-8"
+
+#: ../src/gtr-po.c:539 ../src/gtr-po.c:559
+#, c-format
+msgid "Could not store temporary file for encoding conversion"
+msgstr "Nie można przechować pliku tymczasowego do konwersji kodowania"
+
+#: ../src/gtr-po.c:596
+#, c-format
+msgid ""
+"All attempt to convert the file to UTF-8 has failed, use the msgconv or "
+"iconv command line tools before opening this file with gtranslator"
+msgstr ""
+"Żadna próba konwersji pliku do UTF-8 się nie powiodła. Proszę użyć narzędzi "
+"wiersza poleceń msgconv lub iconv przed otwarciem tego pliku za pomocą "
+"programu gtranslator"
+
+#: ../src/gtr-po.c:664
+#, c-format
+msgid "Gettext returned a null message domain list."
+msgstr "Program gettext zwrócił pustą listę domen komunikatów."
+
+#: ../src/gtr-po.c:709
+#, c-format
+msgid "No messages obtained from parser."
+msgstr "Brak komunikatów uzyskanych z parsera."
+
+#: ../src/gtr-po.c:757
+#, c-format
+msgid ""
+"You are saving a file with a .pot extension.\n"
+"Pot files are generated by the compilation process.\n"
+"Your file should likely be named '%s.po'."
+msgstr ""
+"Zapisywany jest plik z rozszerzeniem .pot.\n"
+"Pliki .pot są tworzone w procesie kompilacji.\n"
+"Plik powinien prawdopodobnie nosić nazwę \"%s.po\"."
+
+#: ../src/gtr-po.c:770
+#, c-format
+msgid "The file %s is read-only, and can not be overwritten"
+msgstr "Plik %s jest tylko do odczytu i nie może zostać zastąpiony"
+
+#: ../src/gtr-po.c:801
+#, c-format
+msgid "There was an error writing the PO file: %s"
+msgstr "Wystąpił błąd podczas zapisywania pliku PO: %s"
 
 #: ../src/gtr-preferences-dialog.c:401
 msgid ""
@@ -1267,83 +1365,6 @@ msgstr "Wyszukiwanie _wstecz"
 msgid "_Wrap around"
 msgstr "_Zawijanie tekstu"
 
-#: ../src/gtr-message-table.c:272
-msgid "Status"
-msgstr "Stan"
-
-#: ../src/gtr-message-table.c:288
-msgid "ID"
-msgstr "Identyfikator"
-
-#: ../src/gtr-message-table.c:307
-msgid "Original Message"
-msgstr "Pierwotny komunikat"
-
-#: ../src/gtr-message-table.c:326
-msgid "Translated Message"
-msgstr "Przetłumaczony komunikat"
-
-#: ../src/gtr-po.c:398
-#, c-format
-msgid "The file is empty"
-msgstr "Plik jest pusty"
-
-#: ../src/gtr-po.c:407
-#, c-format
-msgid "Failed opening file '%s': %s"
-msgstr "Otwarcie pliku \"%s\" się nie powiodło: %s"
-
-#: ../src/gtr-po.c:481
-#, c-format
-msgid "Could not convert from charset '%s' to UTF-8"
-msgstr "Nie można przekonwertować z zestawu znaków \"%s\" na UTF-8"
-
-#: ../src/gtr-po.c:498 ../src/gtr-po.c:518
-#, c-format
-msgid "Could not store temporary file for encoding conversion"
-msgstr "Nie można przechować pliku tymczasowego do konwersji kodowania"
-
-#: ../src/gtr-po.c:555
-#, c-format
-msgid ""
-"All attempt to convert the file to UTF-8 has failed, use the msgconv or "
-"iconv command line tools before opening this file with gtranslator"
-msgstr ""
-"Żadna próba konwersji pliku do UTF-8 się nie powiodła. Proszę użyć narzędzi "
-"wiersza poleceń msgconv lub iconv przed otwarciem tego pliku za pomocą "
-"programu gtranslator"
-
-#: ../src/gtr-po.c:623
-#, c-format
-msgid "Gettext returned a null message domain list."
-msgstr "Program gettext zwrócił pustą listę domen komunikatów."
-
-#: ../src/gtr-po.c:668
-#, c-format
-msgid "No messages obtained from parser."
-msgstr "Brak komunikatów uzyskanych z parsera."
-
-#: ../src/gtr-po.c:716
-#, c-format
-msgid ""
-"You are saving a file with a .pot extension.\n"
-"Pot files are generated by the compilation process.\n"
-"Your file should likely be named '%s.po'."
-msgstr ""
-"Zapisywany jest plik z rozszerzeniem .pot.\n"
-"Pliki .pot są tworzone w procesie kompilacji.\n"
-"Plik powinien prawdopodobnie nosić nazwę \"%s.po\"."
-
-#: ../src/gtr-po.c:729
-#, c-format
-msgid "The file %s is read-only, and can not be overwritten"
-msgstr "Plik %s jest tylko do odczytu i nie może zostać zastąpiony"
-
-#: ../src/gtr-po.c:760
-#, c-format
-msgid "There was an error writing the PO file: %s"
-msgstr "Wystąpił błąd podczas zapisywania pliku PO: %s"
-
 #: ../src/gtr-statusbar.c:119 ../src/gtr-statusbar.c:248
 msgid "INS"
 msgstr "WST"
@@ -1352,37 +1373,37 @@ msgstr "WST"
 msgid "OVR"
 msgstr "ZAS"
 
-#: ../src/gtr-tab.c:314
+#: ../src/gtr-tab.c:315
 msgid "There is an error in the message:"
 msgstr "Wystąpił błąd w komunikacie:"
 
-#: ../src/gtr-tab.c:619
+#: ../src/gtr-tab.c:626
 #, c-format
 msgid "Plural %d"
 msgstr "Liczba mnoga %d"
 
-#: ../src/gtr-tab.c:743
+#: ../src/gtr-tab.c:752
 msgid "Message Table"
 msgstr "Tablica komunikatów"
 
-#: ../src/gtr-tab.c:753
+#: ../src/gtr-tab.c:762
 msgid "<b>Original Message:</b>"
 msgstr "<b>Pierwotny komunikat:</b>"
 
-#: ../src/gtr-tab.c:806
+#: ../src/gtr-tab.c:815
 msgid "<b>Translate_d Text:</b>"
 msgstr "<b>Przetłumaczony te_kst:</b>"
 
-#: ../src/gtr-tab.c:822
+#: ../src/gtr-tab.c:831
 msgid "Translation Fields"
 msgstr "Pola tłumaczeń"
 
-#: ../src/gtr-tab.c:832
+#: ../src/gtr-tab.c:841
 msgid "Message Details"
 msgstr "Szczegóły komunikatu"
 
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1318
+#: ../src/gtr-tab.c:1321
 msgid "Path:"
 msgstr "Ścieżka:"
 
@@ -1390,47 +1411,7 @@ msgstr "Ścieżka:"
 msgid "Close document"
 msgstr "Zamknij dokument"
 
-#. Translaters: This string is for a toggle to display a toolbar.
-#. * The name of the toolbar is automatically computed from the widgets
-#. * on the toolbar, and is placed at the %s. Note the _ before the %s
-#. * which is used to add mnemonics. We know that this is likely to
-#. * produce duplicates, but don't worry about it. If your language
-#. * normally has a mnemonic at the start, please use the _. If not,
-#. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:992
-#, c-format
-msgid "Show “_%s”"
-msgstr "Wyświetl \"_%s\""
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1485
-msgid "_Move on Toolbar"
-msgstr "_Przenieś na pasek narzędziowy"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1486
-msgid "Move the selected item on the toolbar"
-msgstr "Przenosi zaznaczony element na pasek narzędziowy"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1487
-msgid "_Remove from Toolbar"
-msgstr "_Usuń z paska narzędziowego"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1488
-msgid "Remove the selected item from the toolbar"
-msgstr "Usuwa zaznaczony element z paska narzędziowego"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1489
-msgid "_Delete Toolbar"
-msgstr "_Usuń pasek narzędziowy"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1490
-msgid "Remove the selected toolbar"
-msgstr "Usuwa zaznaczony pasek narzędziowy"
-
-#: ../src/toolbareditor/egg-toolbar-editor.c:489
-msgid "Separator"
-msgstr "Separator"
-
-#: ../src/gtr-utils.c:635
+#: ../src/gtr-utils.c:517
 msgid ""
 "Unable to display help. Please make sure the Gtranslator documentation "
 "package is installed."
@@ -1480,255 +1461,242 @@ msgstr "_Narzędzia"
 msgid "_Documents"
 msgstr "_Dokumenty"
 
-#: ../src/gtr-window.c:123
-msgid "_Help"
-msgstr "Pomo_c"
-
-#: ../src/gtr-window.c:127
+#: ../src/gtr-window.c:126
 msgid "Open a PO file"
 msgstr "Otwiera plik PO"
 
-#: ../src/gtr-window.c:129
+#: ../src/gtr-window.c:128
 msgid "_Recent Files"
 msgstr "_Ostatnie pliki"
 
-#: ../src/gtr-window.c:132
+#: ../src/gtr-window.c:131
 msgid "Quit the program"
 msgstr "Kończy działanie programu"
 
 #. Edit menu
-#: ../src/gtr-window.c:136
+#: ../src/gtr-window.c:135
 msgid "T_oolbar"
 msgstr "Pasek _narzędziowy"
 
-#: ../src/gtr-window.c:139
-msgid "Edit gtranslator preferences"
-msgstr "Modyfikuje preferencje programu gtranslator"
-
-#: ../src/gtr-window.c:141 ../src/gtr-window.c:187
+#: ../src/gtr-window.c:137 ../src/gtr-window.c:177
 msgid "_Header..."
 msgstr "Nagłów_ek..."
 
-#. Help menu
-#: ../src/gtr-window.c:145
-msgid "_Contents"
-msgstr "_Spis treści"
-
-#: ../src/gtr-window.c:156
+#: ../src/gtr-window.c:146
 msgid "Save the current file"
 msgstr "Zapisuje bieżący plik"
 
-#: ../src/gtr-window.c:159
+#: ../src/gtr-window.c:149
 msgid "Save the current file with another name"
 msgstr "Zapisuje bieżący plik pod inną nazwą"
 
-#: ../src/gtr-window.c:165
+#: ../src/gtr-window.c:155
 msgid "Close the current file"
 msgstr "Zamyka bieżący plik"
 
-#: ../src/gtr-window.c:170
+#: ../src/gtr-window.c:160
 msgid "Undo last operation"
 msgstr "Cofa ostatnie działanie"
 
-#: ../src/gtr-window.c:173
+#: ../src/gtr-window.c:163
 msgid "Redo last undone operation"
 msgstr "Ponawia cofnięte działanie"
 
-#: ../src/gtr-window.c:176
+#: ../src/gtr-window.c:166
 msgid "Cut the selected text"
 msgstr "Wycina zaznaczony tekst"
 
-#: ../src/gtr-window.c:179
+#: ../src/gtr-window.c:169
 msgid "Copy the selected text"
 msgstr "Kopiuje zaznaczony tekst"
 
-#: ../src/gtr-window.c:182
+#: ../src/gtr-window.c:172
 msgid "Paste the contents of the clipboard"
 msgstr "Wkleja zawartość schowka"
 
-#: ../src/gtr-window.c:185
+#: ../src/gtr-window.c:175
 msgid "Clear the selected translation"
 msgstr "Czyści zaznaczone tłumaczenie"
 
-#: ../src/gtr-window.c:189
+#: ../src/gtr-window.c:179
 msgid "Copy _Message to Translation"
 msgstr "Skopiuj ko_munikat do tłumaczenia"
 
-#: ../src/gtr-window.c:191
+#: ../src/gtr-window.c:181
 msgid "Copy original message contents to the translation field"
 msgstr "Kopiuje treść pierwotnego komunikatu i wstawia ją do pola tłumaczenia"
 
-#: ../src/gtr-window.c:193
+#: ../src/gtr-window.c:183
 msgid "Toggle _Fuzzy Status"
 msgstr "Oznacz komunikat jako _niepewny"
 
-#: ../src/gtr-window.c:194
+#: ../src/gtr-window.c:184
 msgid "Toggle fuzzy status of a message"
 msgstr "Oznacza komunikat jako niepewny"
 
 #. View menu
-#: ../src/gtr-window.c:201
+#: ../src/gtr-window.c:191
 msgid "_Message Details"
 msgstr "_Szczegóły komunikatu"
 
-#: ../src/gtr-window.c:202
+#: ../src/gtr-window.c:192
 msgid "Show the Context panel"
 msgstr "Wyświetla panel kontekstu"
 
 #. Go menu
-#: ../src/gtr-window.c:206
+#: ../src/gtr-window.c:196
 msgid "_Previous Message"
 msgstr "_Poprzedni komunikat"
 
-#: ../src/gtr-window.c:207
+#: ../src/gtr-window.c:197
 msgid "Move back one message"
 msgstr "Przechodzi do poprzedniego komunikatu"
 
-#: ../src/gtr-window.c:209
+#: ../src/gtr-window.c:199
 msgid "_Next Message"
 msgstr "_Następny komunikat"
 
-#: ../src/gtr-window.c:210
+#: ../src/gtr-window.c:200
 msgid "Move forward one message"
 msgstr "Przechodzi do następnego komunikatu"
 
-#: ../src/gtr-window.c:212
+#: ../src/gtr-window.c:202
 msgid "_Go to Message..."
 msgstr "Przej_dź do komunikatu..."
 
-#: ../src/gtr-window.c:213
+#: ../src/gtr-window.c:203
 msgid "Jumps to a specific message"
 msgstr "Przechodzi do podanego komunikatu"
 
-#: ../src/gtr-window.c:215
+#: ../src/gtr-window.c:205
 msgid "_First Message"
 msgstr "_Pierwszy komunikat"
 
-#: ../src/gtr-window.c:216
+#: ../src/gtr-window.c:206
 msgid "Go to the first message"
 msgstr "Przechodzi do pierwszego komunikatu"
 
-#: ../src/gtr-window.c:218
+#: ../src/gtr-window.c:208
 msgid "_Last Message"
 msgstr "_Ostatni komunikat"
 
-#: ../src/gtr-window.c:219
+#: ../src/gtr-window.c:209
 msgid "Go to the last message"
 msgstr "Przechodzi do ostatniego komunikatu"
 
-#: ../src/gtr-window.c:221
+#: ../src/gtr-window.c:211
 msgid "Next Fuz_zy"
 msgstr "Następny n_iepewny"
 
-#: ../src/gtr-window.c:222
+#: ../src/gtr-window.c:212
 msgid "Go to the next fuzzy message"
 msgstr "Przechodzi do następnego niepewnego komunikatu"
 
-#: ../src/gtr-window.c:224
+#: ../src/gtr-window.c:214
 msgid "Previous Fuzz_y"
 msgstr "Poprze_dni niepewny"
 
-#: ../src/gtr-window.c:225
+#: ../src/gtr-window.c:215
 msgid "Go to the previous fuzzy message"
 msgstr "Przechodzi do poprzedniego niepewnego komunikatu"
 
-#: ../src/gtr-window.c:227
+#: ../src/gtr-window.c:217
 msgid "Next _Untranslated"
 msgstr "_Następny nieprzetłumaczony"
 
-#: ../src/gtr-window.c:228
+#: ../src/gtr-window.c:218
 msgid "Go to the next untranslated message"
 msgstr "Przechodzi do następnego nieprzetłumaczonego komunikatu"
 
-#: ../src/gtr-window.c:231
+#: ../src/gtr-window.c:221
 msgid "Previ_ous Untranslated"
 msgstr "P_oprzedni nieprzetłumaczony"
 
-#: ../src/gtr-window.c:232
+#: ../src/gtr-window.c:222
 msgid "Go to the previous untranslated message"
 msgstr "Przechodzi do poprzedniego nieprzetłumaczonego komunikatu"
 
-#: ../src/gtr-window.c:235
+#: ../src/gtr-window.c:225
 msgid "Next Fu_zzy or Untranslated"
 msgstr "Następny ni_epewny lub nieprzetłumaczony"
 
-#: ../src/gtr-window.c:237
+#: ../src/gtr-window.c:227
 msgid "Go to the next fuzzy or untranslated message"
 msgstr "Przechodzi do następnego niepewnego lub nieprzetłumaczonego komunikatu"
 
-#: ../src/gtr-window.c:240
+#: ../src/gtr-window.c:230
 msgid "Pre_vious Fuzzy or Untranslated"
 msgstr "Poprzedni niepe_wny lub nieprzetłumaczony"
 
-#: ../src/gtr-window.c:242
+#: ../src/gtr-window.c:232
 msgid "Go to the previous fuzzy or untranslated message"
 msgstr ""
 "Przechodzi do poprzedniego niepewnego lub nieprzetłumaczonego komunikatu"
 
-#: ../src/gtr-window.c:247
+#: ../src/gtr-window.c:237
 msgid "Search for text"
 msgstr "Wyszukuje tekst"
 
-#: ../src/gtr-window.c:250
+#: ../src/gtr-window.c:240
 msgid "Search for and replace text"
 msgstr "Wyszukuje i zamienia tekst"
 
 #. Documents menu
-#: ../src/gtr-window.c:254
+#: ../src/gtr-window.c:244
 msgid "_Save All"
 msgstr "Zapi_sz wszystkie"
 
-#: ../src/gtr-window.c:255
+#: ../src/gtr-window.c:245
 msgid "Save all open files"
 msgstr "Zapisuje wszystkie otwarte pliki"
 
-#: ../src/gtr-window.c:257
+#: ../src/gtr-window.c:247
 msgid "_Close All"
 msgstr "Zam_knij wszystkie"
 
-#: ../src/gtr-window.c:258
+#: ../src/gtr-window.c:248
 msgid "Close all open files"
 msgstr "Zamyka wszystkie otwarte pliki"
 
-#: ../src/gtr-window.c:260
+#: ../src/gtr-window.c:250
 msgid "_Previous Document"
 msgstr "_Poprzedni dokument"
 
-#: ../src/gtr-window.c:262
+#: ../src/gtr-window.c:252
 msgid "Activate previous document"
 msgstr "Aktywuje poprzedni dokument"
 
-#: ../src/gtr-window.c:264
+#: ../src/gtr-window.c:254
 msgid "_Next Document"
 msgstr "_Następny dokument"
 
-#: ../src/gtr-window.c:266
+#: ../src/gtr-window.c:256
 msgid "Activate next document"
 msgstr "Aktywuje następny dokument"
 
-#: ../src/gtr-window.c:454
+#: ../src/gtr-window.c:444
 msgid "Untranslated"
 msgstr "Nieprzetłumaczone"
 
-#: ../src/gtr-window.c:457
+#: ../src/gtr-window.c:447
 msgid "Translated"
 msgstr "Przetłumaczone"
 
-#: ../src/gtr-window.c:460
+#: ../src/gtr-window.c:450
 msgid "Fuzzy"
 msgstr "Niepewne"
 
-#: ../src/gtr-window.c:467
+#: ../src/gtr-window.c:457
 #, c-format
 msgid "Current: %d"
 msgstr "Bieżący: %d"
 
-#: ../src/gtr-window.c:468
+#: ../src/gtr-window.c:458
 #, c-format
 msgid "Total: %d"
 msgstr "Razem: %d"
 
-#: ../src/gtr-window.c:469
+#: ../src/gtr-window.c:459
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
@@ -1736,7 +1704,7 @@ msgstr[0] "%d przetłumaczony"
 msgstr[1] "%d przetłumaczone"
 msgstr[2] "%d przetłumaczonych"
 
-#: ../src/gtr-window.c:472
+#: ../src/gtr-window.c:462
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
@@ -1744,7 +1712,7 @@ msgstr[0] "%d niepewny"
 msgstr[1] "%d niepewne"
 msgstr[2] "%d niepewnych"
 
-#: ../src/gtr-window.c:474
+#: ../src/gtr-window.c:464
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1753,36 +1721,36 @@ msgstr[1] "%d nieprzetłumaczone"
 msgstr[2] "%d nieprzetłumaczonych"
 
 #. Translators: %s is a URI
-#: ../src/gtr-window.c:528
+#: ../src/gtr-window.c:518
 #, c-format
 msgid "Activate '%s'"
 msgstr "Aktywuj \"%s\""
 
 #. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:701
+#: ../src/gtr-window.c:691
 #, c-format
 msgid "*%s - gtranslator"
 msgstr "*%s - gtranslator"
 
 #. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:704
+#: ../src/gtr-window.c:694
 #, c-format
 msgid "%s - gtranslator"
 msgstr "%s - gtranslator"
 
-#: ../src/gtr-window.c:710
+#: ../src/gtr-window.c:700
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/gtr-window.c:1083
+#: ../src/gtr-window.c:1081
 msgid "Toolbar Editor"
 msgstr "Edytor paska narzędziowego"
 
-#: ../src/gtr-window.c:1209
+#: ../src/gtr-window.c:1207
 msgid "No profile"
 msgstr "Brak profilu"
 
-#: ../src/gtr-window.c:1238
+#: ../src/gtr-window.c:1236
 msgid "Profile for the active document"
 msgstr "Profil dla aktywnego dokumentu"
 
@@ -1799,3 +1767,43 @@ msgstr ""
 "%s\n"
 "Polecenie \"%s --help\" wyświetli pełną listę dostępnych opcji wiersza "
 "poleceń.\n"
+
+#. Translaters: This string is for a toggle to display a toolbar.
+#. * The name of the toolbar is automatically computed from the widgets
+#. * on the toolbar, and is placed at the %s. Note the _ before the %s
+#. * which is used to add mnemonics. We know that this is likely to
+#. * produce duplicates, but don't worry about it. If your language
+#. * normally has a mnemonic at the start, please use the _. If not,
+#. * please remove.
+#: ../src/toolbareditor/egg-editable-toolbar.c:992
+#, c-format
+msgid "Show “_%s”"
+msgstr "Wyświetl \"_%s\""
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1485
+msgid "_Move on Toolbar"
+msgstr "_Przenieś na pasek narzędziowy"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1486
+msgid "Move the selected item on the toolbar"
+msgstr "Przenosi zaznaczony element na pasek narzędziowy"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1487
+msgid "_Remove from Toolbar"
+msgstr "_Usuń z paska narzędziowego"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1488
+msgid "Remove the selected item from the toolbar"
+msgstr "Usuwa zaznaczony element z paska narzędziowego"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1489
+msgid "_Delete Toolbar"
+msgstr "_Usuń pasek narzędziowy"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1490
+msgid "Remove the selected toolbar"
+msgstr "Usuwa zaznaczony pasek narzędziowy"
+
+#: ../src/toolbareditor/egg-toolbar-editor.c:489
+msgid "Separator"
+msgstr "Separator"
