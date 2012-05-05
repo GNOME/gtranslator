@@ -68,7 +68,7 @@ struct _GtrPreferencesDialogPrivate
   /* Files->Autosave */
   GtkWidget *autosave_checkbutton;
   GtkWidget *autosave_interval_spinbutton;
-  GtkWidget *autosave_hbox;
+  GtkWidget *autosave_grid;
   GtkWidget *create_backup_checkbutton;
 
   /* Editor->Text display */
@@ -664,7 +664,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   priv->warn_if_contains_fuzzy_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "warn_if_fuzzy_checkbutton"));
   priv->autosave_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "autosave_checkbutton"));
   priv->autosave_interval_spinbutton = GTK_WIDGET (gtk_builder_get_object (builder, "autosave_interval_spinbutton"));
-  priv->autosave_hbox = GTK_WIDGET (gtk_builder_get_object (builder, "autosave_hbox"));
+  priv->autosave_grid = GTK_WIDGET (gtk_builder_get_object (builder, "autosave_grid"));
   priv->create_backup_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "create_backup_checkbutton"));
   priv->highlight_syntax_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "highlight_checkbutton"));
   priv->visible_whitespace_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "visible_whitespace_checkbutton"));
