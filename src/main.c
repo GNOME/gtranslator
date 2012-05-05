@@ -118,5 +118,8 @@ main (gint argc, gchar * argv[])
   g_object_unref (app);
   gtr_dirs_shutdown ();
 
+  /* Make sure settings are saved */
+  g_settings_sync ();
+
   return status;
 }
