@@ -14,7 +14,7 @@ noinst_LTLIBRARIES = \
 
 libgda_la_SOURCES = \
 	gda-utils.c \
-	gda-utils-h \
+	gda-utils.h \
 	gtr-gda.c \
 	gtr-gda.h
 

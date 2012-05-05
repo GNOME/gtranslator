@@ -189,6 +189,7 @@ EXTRA_DIST = \
 	gtr-enum-types.c.template \
 	gtranslator.gresource.xml \
 	gtranslator-ui.xml \
+	gtranslator-menu.ui \
 	gtr-header-dialog.ui \
 	gtr-jump-dialog.ui \
 	gtr-languages-fetcher.ui \
