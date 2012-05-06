@@ -100,7 +100,7 @@ PKG_CHECK_MODULES(GTRANSLATOR, [
 	gtksourceview-3.0 >= $SOURCEVIEW_REQUIRED
 	gdl-3.0 >= $GDL_REQUIRED
 	gsettings-desktop-schemas
-	libgda-$with_gda >= $GDA_REQUIRED
+	libgda-sqlite-$with_gda >= $GDA_REQUIRED
 	libpeas-1.0 >= $PEAS_REQUIRED
 	libpeas-gtk-1.0 >= $PEAS_REQUIRED
 ])
