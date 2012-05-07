@@ -127,9 +127,6 @@ static const GtkActionEntry always_sensitive_entries[] = {
    G_CALLBACK (gtr_open_file_dialog)},
   {"FileRecentFiles", NULL, N_("_Recent Files"), NULL,
    NULL, NULL},
-  {"FileQuitWindow", GTK_STOCK_QUIT, NULL, "<control>Q",
-   N_("Quit the program"),
-   G_CALLBACK (gtr_file_quit)},
 
   /* Edit menu */
   {"EditToolbar", NULL, N_("T_oolbar"), NULL, NULL,
