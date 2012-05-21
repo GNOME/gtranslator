@@ -22,6 +22,10 @@
  *   Ignacio Casal Quinteiro <icq@gnome.org>
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "gtr-application.h"
 #include "gtr-header.h"
 #include "gtr-settings.h"
@@ -713,6 +717,9 @@ gtr_header_update_header (GtrHeader * header)
 
   /* We need to unfuzzy the header to not produce errors */
   gtr_msg_set_fuzzy (GTR_MSG (header), FALSE);
+
+  /* Update X-Generator field */
+  gtr_header_set_field (header, "X-Generator", "Gtranslator "PACKAGE_VERSION);
 }
 
 void
