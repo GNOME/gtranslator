@@ -31,6 +31,13 @@ gtr_message_container_default_init (GtrMessageContainerInterface * iface)
 {
 }
 
+/**
+ * gtr_message_container_get_message:
+ * @container:
+ * @number:
+ *
+ * Returns: (transfer none):
+ */
 GtrMsg *
 gtr_message_container_get_message (GtrMessageContainer * container,
                                    gint number)

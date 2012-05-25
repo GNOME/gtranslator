@@ -283,7 +283,7 @@ gtr_message_table_new (GtkWidget * tab)
 /**
  * gtr_message_table_populate:
  * @table: a #GtrMessageTable
- * @messages: a list of #GtrMsg
+ * @container: a list of #GtrMsg
  *
  * Populates the #GtrMessageTable with the list of #GtrMsg and
  * sort them.
@@ -322,6 +322,14 @@ gtr_message_table_populate (GtrMessageTable * table, GtrMessageContainer * conta
                            table->priv->sort_model);
 }
 
+/**
+ * gtr_message_table_navigate:
+ * @table:
+ * @navigation:
+ * @func: (scope call):
+ *
+ * Returns: (transfer none):
+ */
 GtrMsg *
 gtr_message_table_navigate (GtrMessageTable * table,
                             GtrMessageTableNavigation navigation,

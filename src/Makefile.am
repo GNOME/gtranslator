@@ -63,6 +63,7 @@ INST_H_FILES = \
 	gtr-context.h \
 	gtr-debug.h \
 	gtr-header.h \
+	gtr-message-container.h \
 	gtr-message-table.h \
 	gtr-msg.h \
 	gtr-notebook.h \
@@ -89,7 +90,6 @@ NOINST_H_FILES = \
 	gtr-jump-dialog.h \
 	gtr-language.h \
 	gtr-languages-fetcher.h \
-	gtr-message-container.h \
 	gtr-message-table-model.h \
 	gtr-plugins-engine.h \
 	gtr-preferences-dialog.h \

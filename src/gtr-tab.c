@@ -1163,7 +1163,8 @@ gtr_tab_get_active_view (GtrTab * tab)
  *
  * Returns all the views currently present in #GtranslationTab
  *
- * Return: (transfer container): a newly allocated list of #GtranslationTab objects
+ * Returns: (transfer container) (element-type Gtranslator.View):
+ *          a newly allocated list of #GtranslationTab objects
  */
 GList *
 gtr_tab_get_all_views (GtrTab * tab, gboolean original, gboolean translated)

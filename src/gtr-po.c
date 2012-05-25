@@ -909,7 +909,8 @@ gtr_po_get_write_perms (GtrPo * po)
  * gtr_po_get_messages:
  * @po: a #GtrPo
  *
- * Return value: (transfer container): a pointer to the messages list
+ * Return value: (transfer container) (element-type Gtranslator.Msg):
+ *               a pointer to the messages list
  **/
 GList *
 gtr_po_get_messages (GtrPo * po)
@@ -919,11 +920,11 @@ gtr_po_get_messages (GtrPo * po)
   return po->priv->messages;
 }
 
+/* FIXME: this is hack, we should fix it */
 /**
- * FIXME: this is hack, we should fix it
  * gtr_po_set_messages:
  * @po: a #GtrPo
- * @messages: a pointer to a new messages list.
+ * @messages: (element-type Gtranslator.Msg): a pointer to a new messages list.
  *
  * Sets an updated list of messages.
  **/
@@ -939,7 +940,8 @@ gtr_po_set_messages (GtrPo * po, GList * messages)
  * gtr_po_get_current_message:
  * @po: a #GtrPo
  *
- * Return value: (transfer none) (element-type GtrMsg): a pointer to the current message
+ * Return value: (transfer none) (element-type Gtranslator.Msg):
+ *               a pointer to the current message
  **/
 GList *
 gtr_po_get_current_message (GtrPo * po)
@@ -967,7 +969,8 @@ gtr_po_update_current_message (GtrPo * po, GtrMsg * msg)
  * gtr_po_get_domains:
  * @po: a #GtrPo
  *
- * Return value: (transfer none): a pointer to the domains list
+ * Return value: (transfer none) (element-type utf8):
+ *               a pointer to the domains list
  **/
 GList *
 gtr_po_get_domains (GtrPo * po)
@@ -976,7 +979,7 @@ gtr_po_get_domains (GtrPo * po)
 }
 
 /**
- * gtr_po_get_po_file:
+ * gtr_po_get_po_file: (skip)
  * @po: a #GtrPo
  *
  * Gets the gettext file.
@@ -993,7 +996,8 @@ gtr_po_get_po_file (GtrPo * po)
  * gtr_po_get_next_fuzzy:
  * @po: a #GtrPo
  *
- * Return value: (transfer none): a pointer to the next fuzzy message
+ * Return value: (transfer none) (element-type Gtranslator.Msg):
+ *               a pointer to the next fuzzy message
  **/
 GList *
 gtr_po_get_next_fuzzy (GtrPo * po)
@@ -1015,7 +1019,8 @@ gtr_po_get_next_fuzzy (GtrPo * po)
  * gtr_po_get_prev_fuzzy:
  * @po: a #GtrPo
  *
- * Return value: (transfer none): a pointer to the previously fuzzy message
+ * Return value: (transfer none) (element-type Gtranslator.Msg):
+ *               a pointer to the previously fuzzy message
  **/
 GList *
 gtr_po_get_prev_fuzzy (GtrPo * po)
@@ -1037,7 +1042,8 @@ gtr_po_get_prev_fuzzy (GtrPo * po)
  * gtr_po_get_next_untrans:
  * @po: a #GtrPo
  *
- * Return value: (transfer none): a pointer to the next untranslated message
+ * Return value: (transfer none) (element-type Gtranslator.Msg):
+ *               a pointer to the next untranslated message
  **/
 GList *
 gtr_po_get_next_untrans (GtrPo * po)
@@ -1059,7 +1065,8 @@ gtr_po_get_next_untrans (GtrPo * po)
  * gtr_po_get_prev_untrans:
  * @po: a #GtrPo
  *
- * Return value: (transfer none): a pointer to the previously untranslated
+ * Return value: (transfer none) (element-type Gtranslator.Msg):
+ *                a pointer to the previously untranslated
  *                message or NULL if there are not previously untranslated
  *                message.
  **/
@@ -1082,7 +1089,8 @@ gtr_po_get_prev_untrans (GtrPo * po)
  * gtr_po_get_next_fuzzy_or_untrans:
  * @po: a #GtrPo
  *
- * Return value: (transfer none): a pointer to the next fuzzy or untranslated
+ * Return value: (transfer none) (element-type Gtranslator.Msg):
+ *               a pointer to the next fuzzy or untranslated
  *               message or NULL if there is not next fuzzy or untranslated
  *               message.
  **/
@@ -1105,7 +1113,8 @@ gtr_po_get_next_fuzzy_or_untrans (GtrPo * po)
  * gtr_po_get_prev_fuzzy_or_untrans:
  * @po: a #GtrPo
  *
- * Return value: (transfer none): a pointer to the previously fuzzy or
+ * Return value: (transfer none) (element-type Gtranslator.Msg):
+ *               a pointer to the previously fuzzy or
  *               untranslated message or NULL if there is not previously 
  *               fuzzy or untranslated message.
  **/
@@ -1131,7 +1140,8 @@ gtr_po_get_prev_fuzzy_or_untrans (GtrPo * po)
  *
  * Gets the message at the given position.
  *
- * Returns: (transfer none): the message at the given position.
+ * Returns: (transfer none) (element-type Gtranslator.Msg):
+ *          the message at the given position.
  */
 GList *
 gtr_po_get_msg_from_number (GtrPo * po, gint number)

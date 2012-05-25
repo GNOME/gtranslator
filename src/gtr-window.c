@@ -1732,8 +1732,8 @@ gtr_window_get_active_tab (GtrWindow * window)
  *
  * Gets a list of all tabs in the @window or NULL if there is no tab opened.
  *
- * Returns: (transfer container): a list of all tabs in the @window or NULL if there
- * is no tab opened.
+ * Returns: (transfer container) (element-type Gtranslator.Tab):
+ * a list of all tabs in the @window or NULL if there is no tab opened.
  */
 GList *
 gtr_window_get_all_tabs (GtrWindow * window)
@@ -1858,7 +1858,8 @@ gtr_window_get_active_view (GtrWindow * window)
  *
  * Returns all the views currently present in #GtranslationWindow
  *
- * Return value: (transfer container): a newly allocated list of #GtranslationWindow objects
+ * Return value: (transfer container) (element-type Gtranslator.View):
+ * a newly allocated list of #GtranslationWindow objects
  **/
 GList *
 gtr_window_get_all_views (GtrWindow * window,

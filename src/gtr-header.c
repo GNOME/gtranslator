@@ -186,6 +186,13 @@ gtr_header_class_init (GtrHeaderClass * klass)
 
 /* Public methods */
 
+/**
+ * gtr_header_new: (skip)
+ * @iter:
+ * @message:
+ *
+ * Return value:
+ */
 GtrHeader *
 gtr_header_new (po_message_iterator_t iter, po_message_t message)
 {

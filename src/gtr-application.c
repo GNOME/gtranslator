@@ -516,7 +516,8 @@ _gtr_application_save_toolbars_model (GtrApplication * application)
  *
  * Returns all the views currently present in #GtranslationApplication.
  *
- * Return value: (transfer container): a newly allocated list of #GtranslationApplication objects
+ * Return value: (transfer container) (element-type Gtranslator.View):
+ * a newly allocated list of #GtranslationApplication objects
  */
 GList *
 gtr_application_get_views (GtrApplication * app,
