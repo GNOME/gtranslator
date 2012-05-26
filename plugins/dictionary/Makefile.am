@@ -24,7 +24,7 @@ libdict_la_LDFLAGS = \
 	$(GTRANSLATOR_LIBS)         \
 	$(DICTIONARY_LIBS)
 
-pixmaps_dir = $(datadir)/pixmaps/gtranslator
+pixmaps_dir = $(datadir)/gtranslator/pixmaps
 pixmaps__DATA = \
 	gnome-dictionary.png
 

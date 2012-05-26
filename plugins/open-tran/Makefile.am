@@ -30,7 +30,7 @@ gtr-open-tran-resources.c: gtr-open-tran.gresource.xml $(shell $(GLIB_COMPILE_RE
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-source gtr-open-tran.gresource.xml
 
 
-pixmaps_dir = $(datadir)/pixmaps/gtranslator
+pixmaps_dir = $(datadir)/gtranslator/pixmaps
 pixmaps__DATA = \
 	gnome.png \
 	kde.ico \
