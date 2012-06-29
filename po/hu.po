@@ -1,1561 +1,1780 @@
-# Hungarian translation of gtranslator.
-# Copyright (C) 2000, 2001, 2003, 2004 Free Software Foundation, Inc.
+# Hungarian translation of gtranslator
+# Copyright (C) 2012. Free Software Foundation, Inc.
 # This file is distributed under the same license as the gtranslator package.
-# Emese Kovacs <emese@gnome.hu>, 2000, 2001.
-# Andras Timar <timar@gnome.hu>, 2001, 2003.
-# Gabor Kelemen <kelemeng@gnome.hu>, 2004, 2005.
 #
+# Kristóf Kiszel <ulysses at kubuntu dot org>, 2012.
+# Erika Griechisch <griechisch.erika at gmail dot com>, 2012.
+# Bence Lukács <lukacs.bence1 at gmail dot com>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-15 05:42+0200\n"
-"PO-Revision-Date: 2005-08-31 09:22+0200\n"
-"Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
-"Language-Team: Hungarian <gnome@gnome.hu>\n"
+"Project-Id-Version: gtranslator master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gtranslator&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-06-13 21:18+0000\n"
+"PO-Revision-Date: 2012-06-24 19:07+0200\n"
+"Last-Translator: Kristóf Kiszel <ulysses at kubuntu dot org>\n"
+"Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:   nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.10.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: hu\n"
+"X-Generator: Lokalize 1.4\n"
 
-#: ../data/desktop/gtranslator.desktop.in.h:1
-msgid "The GNOME translation program"
-msgstr "A GNOME fordítóprogramja"
+#: ../data/desktop/gtranslator.desktop.in.in.h:1 ../src/gtr-application.c:328
+msgid "Gtranslator"
+msgstr "Gtranslator"
 
-#: ../data/desktop/gtranslator.desktop.in.h:2
-msgid "gtranslator"
-msgstr "gtranslator"
+#: ../data/desktop/gtranslator.desktop.in.in.h:2
+msgid "PO File Editor"
+msgstr "PO fájl szerkesztő"
 
-#: ../src/about.c:63
-#, fuzzy
-msgid "(C) 1999-2005 The Free Software Foundation, Inc."
-msgstr "© 1999 The Free Software Foundation, Inc."
+#: ../data/desktop/gtranslator.desktop.in.in.h:3
+msgid "Gtranslator PO File Editor"
+msgstr "Gtranslator PO fájl szerkesztő"
 
-#: ../src/about.c:64
-msgid "gtranslator is a po file editing suite with many bells and whistles."
-msgstr "A Gtranslator egy PO-fájlszerkesztő program, sok extrával."
+#: ../data/desktop/gtranslator.desktop.in.in.h:4
+msgid "Translate and localize applications and libraries"
+msgstr "Gyüjtemények és programok fordítása és honosítása"
 
-#: ../src/about.c:67
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:1
+msgid "Warn if file contains fuzzy translations"
+msgstr "Figyelmeztetés, ha a fájl tartalmaz bizonytalan fordításokat"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:2
+msgid ""
+"If true, warn the user when saving a PO translation file containing fuzzy "
+"strings."
+msgstr ""
+"Ha be van állítva, figyelmeztet, ha a PO fájl mentésénél vannak bizonytalan "
+"karakterláncok."
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:3
+msgid "Auto save files"
+msgstr "Fájlok automatikus mentése"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:4
+msgid "If true, automatically save files at specified intervals."
+msgstr ""
+"Ha be van állítva, automatikusan menti a fájlokat meghatározott időközönként."
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:5
+msgid "Auto save interval"
+msgstr "Automatikus mentés időköze"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:6
+msgid "Interval in minutes at which to automatically save files."
+msgstr "Időköz percben, hogy mikor mentse automatikusan a fájlokat."
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:7
+msgid "Create backup before saving"
+msgstr "Biztonsági mentés készítése mentés előtt"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:8
+msgid "If true, create a backup copy of a file before saving it."
+msgstr "Ha be van állítva, biztonsági mentést készít a fájl mentése előtt."
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:9
+msgid "Use profile values for header"
+msgstr "Használja a profil értékeit fejlécnek"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:10
+msgid ""
+"If true, overwrite the values in the PO header with those in the active "
+"profile."
+msgstr ""
+"Ha be van állítva, felülírja a PO fájl fejlécében lévő adatokat az aktuális "
+"profil adataival"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:11
+msgid "Highlight syntax in edit fields"
+msgstr "Szintaxisok kiemelése a szerkesztés mezőben"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:12
+msgid "If true, apply syntax highlighting to strings in edit fields."
+msgstr ""
+"Ha be van állítva, engedélyezi a karakterláncok szintaxis kiemelését a "
+"szerkesztés mezőben."
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:13
+msgid "Make whitespace visible"
+msgstr "Üres helyek láthatóvá tétele"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:14
+msgid "If true, display whitespace in strings as representative symbols."
+msgstr ""
+"Ha be van állítva, az üres helyeket jellegzetes karakterekkel helyettesíti a "
+"karakterláncokban."
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:15
+msgid "Use custom font"
+msgstr "Egyéni betűtípus használata"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:16
+msgid "If true, use a custom font for edit fields."
+msgstr "Ha be van állítva, egyéni betűtípust használ a szerkesztés mezőben."
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:17
+msgid "Editor font"
+msgstr "Szerkesztő betűtípus"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:18
+msgid "Custom font to use for edit fields."
+msgstr "Egyéni betűtípus használata a szerkesztés mezőben."
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:19
+msgid "Remove fuzzy status when message is changed"
+msgstr "Bizonytalan állapot megváltoztatása ha az üzenet megváltozott"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:20
+msgid "If true, remove fuzzy status from translations when they are changed."
+msgstr ""
+"Ha be van állítva, eltávolítja a bizonytalan állapotot a fordításról ha az "
+"megváltozott."
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:21
+msgid "Check spelling"
+msgstr "Helyesírás ellenőrzése"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:22
+msgid "If true, check the spelling of translated messages."
+msgstr "Ha be van állítva, ellenőrzi a helyesírást a lefordított üzenetekben."
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:23
+msgid "Side panel switcher style"
+msgstr "Oldalsáv kapcsolóinak stílusa"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:24
+msgid "Style for switchers in the side panel."
+msgstr "Az oldalsávban lévő kapcsolók stílusa."
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:25
+msgid "Color scheme"
+msgstr "Színséma"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:26
+msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
+msgstr "Egy gtksourceview színséma neve a szintaxiskiemelés használatához."
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:27
+msgid "Message list sort order"
+msgstr "Üzenetlista rendezési elve"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:28
+msgid ""
+"Sort order to use in the message list. Possible values are \"status\", \"id"
+"\", \"original-text\" and \"translated-text\"."
+msgstr ""
+"Az üzenetlista rendezési elve. Lehetséges értékek az „állapot”, „id”, "
+"„eredeti szöveg” és „fordított szöveg”."
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:29
+msgid "Active plugins"
+msgstr "Aktív beépülők"
+
+#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:30
+msgid ""
+"List of active plugins. It contains the \"Location\" of the active plugins. "
+"See the .gtranslator-plugin file for obtaining the \"Location\" of a given "
+"plugin."
+msgstr ""
+"Aktív beépülők listája. Tartalmazza az aktív beépülők „elérési útját”. "
+"Az adott beépülő „elérési útjáért” nyissa meg a .gtranslator-plugin fájlt."
+
+#: ../data/po.lang.h:1
+msgid "Others"
+msgstr "Egyebek"
+
+#: ../data/po.lang.h:2
+msgid "gtranslator highlight"
+msgstr "gtranslator kiemelés"
+
+#: ../data/po.lang.h:3
+msgid "Tag"
+msgstr "Címke"
+
+#: ../data/po.lang.h:4
+msgid "Special variable"
+msgstr "Speciális változó"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:126
+msgid "Message not found"
+msgstr "Üzenet nem található"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:229
+msgid "Open file for alternate language"
+msgstr "Fájl megnyitása alternatív nyelvhez"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:254
+msgid "File closed"
+msgstr "Fájl bezárva"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:322
+msgctxt "alternate lang"
+msgid "_Open"
+msgstr "_Megnyitás"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:328
+msgctxt "alternate lang"
+msgid "_Close"
+msgstr "_Bezárás"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:334
+msgctxt "alternate lang"
+msgid "Co_py"
+msgstr "Má_solás"
+
+#: ../plugins/alternate-language/gtr-alternate-language-panel.c:363
+msgid "There isn't any file loaded"
+msgstr "Nincs fájl megnyitva"
+
+#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:81
+msgid "_Alternate Language"
+msgstr "_Alternatív nyelv"
+
+#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:82
+msgid "Show the Alternate Language panel"
+msgstr "Alternatív nyelv sáv megjelenítése"
+
+#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:222
+#: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:1
+msgid "Alternate Language"
+msgstr "Alternatív nyelv"
+
+#: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:2
+msgid "Load an alternate language."
+msgstr "Alternatív nyelv betöltése."
+
+#. ex:et:ts=4:
+#: ../plugins/charmap/charmap/__init__.py:42
+#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:1
+msgid "Character Map"
+msgstr "Karaktertábla"
+
+#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:2
+msgid "Insert special characters just by clicking on them."
+msgstr "Speciális karakterek beillesztése kattintással."
+
+#: ../plugins/codeview/gtr-codeview-dialog.ui.h:1
+msgid "Source View Settings"
+msgstr "Forrás nézet beállításai"
+
+#: ../plugins/codeview/gtr-codeview-dialog.ui.h:2
+msgid "Use external editor"
+msgstr "Külső szerkesztő használata"
+
+#: ../plugins/codeview/gtr-codeview-dialog.ui.h:3
+msgid "Program command:"
+msgstr "Program parancs:"
+
+#: ../plugins/codeview/gtr-codeview-dialog.ui.h:4
+msgid "Line command:"
+msgstr "Sor parancs:"
+
+#: ../plugins/codeview/gtr-codeview-plugin.c:129
+#, c-format
+msgid "Please install \"%s\" to be able to show the file"
+msgstr "Kérem telepítse a(z) „%s”-t, hogy meg tudja nézni a fájlt"
+
+#: ../plugins/codeview/gtr-codeview-plugin.c:497
+msgid "Paths:"
+msgstr "Útvonalak:"
+
+#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:1
+msgid "Source Code View"
+msgstr "Forráskód nézet"
+
+#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:2
+msgid "Show the message in the source code."
+msgstr "Mutassa az üzenetet a forráskódban."
+
+#: ../plugins/codeview/gtr-viewer.c:80
+msgid "Source Viewer"
+msgstr "Forrás megjelenítő"
+
+#: ../plugins/codeview/gtr-viewer.ui.h:1
+msgid "Source code"
+msgstr "Forráskód"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:1
+msgid "Use the System Editor"
+msgstr "Használja a Rendszer szerkesztőt"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:2
+msgid "Whether use the system editor to show the source code"
+msgstr "Használja-e a rendszer szerkesztőt a forráskód megjelenítéséhez"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:3
+msgid "The Editor to Launch"
+msgstr "A szerkesztő az indításhoz"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:4
+msgid "The command to launch the editor you want to use"
+msgstr "A parancs a szerkesztő indításához amit használni szeretne"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:5
+msgid "Arguments for the Command"
+msgstr "Parancs paraméterei"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:6
+msgid "Arguments to pass to the program command line to select the line"
+msgstr "Paraméterek"
+
+#: ../plugins/dictionary/gtr-dictionary-plugin.c:140
+#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:1
+msgid "Dictionary"
+msgstr "Szótár"
+
+#: ../plugins/dictionary/gtr-dict-panel.c:166
+#, c-format
+msgid "No dictionary source available with name '%s'"
+msgstr "Nem található „%s” néven szótár forrás"
+
+#: ../plugins/dictionary/gtr-dict-panel.c:170
+msgid "Unable to find dictionary source"
+msgstr "Nem található a szótár forrása"
+
+#: ../plugins/dictionary/gtr-dict-panel.c:185
+#, c-format
+msgid "No context available for source '%s'"
+msgstr "Nem található elérhető környezet a(z) „%s” forráshoz"
+
+#: ../plugins/dictionary/gtr-dict-panel.c:189
+msgid "Unable to create a context"
+msgstr "Nem lehet létrehozni környezetet"
+
+#: ../plugins/dictionary/gtr-dict-panel.c:272
+#, c-format
+msgid "Dictionary source '%s' selected"
+msgstr "„%s” szótár forrás kiválasztva"
+
+#: ../plugins/dictionary/gtr-dict-panel.c:291
+#, c-format
+msgid "Strategy '%s' selected"
+msgstr "„%s” stratégia kiválasztva"
+
+#: ../plugins/dictionary/gtr-dict-panel.c:309
+#, c-format
+msgid "Database '%s' selected"
+msgstr "„%s” adatbázis kiválasztva"
+
+#: ../plugins/dictionary/gtr-dict-panel.c:353
+#, c-format
+msgid "Word '%s' selected"
+msgstr "„%s” szó kiválasztva"
+
+#. speller
+#: ../plugins/dictionary/gtr-dict-panel.c:375
+msgid "Double-click on the word to look up"
+msgstr "Dupla kattintás a szóra kikereséshez"
+
+#. strat-chooser
+#: ../plugins/dictionary/gtr-dict-panel.c:380
+msgid "Double-click on the matching strategy to use"
+msgstr "Dupla kattintás a párosító stratégiára a használathoz"
+
+#. source-chooser
+#: ../plugins/dictionary/gtr-dict-panel.c:386
+msgid "Double-click on the source to use"
+msgstr "Dupla kattintás a forrásra a használathoz"
+
+#. db-chooser
+#: ../plugins/dictionary/gtr-dict-panel.c:396
+msgid "Double-click on the database to use"
+msgstr "Dupla kattintás az adatbázisra a használathoz"
+
+#. Look up Button
+#: ../plugins/dictionary/gtr-dict-panel.c:502
+msgid "Look _up:"
+msgstr "_Kikeresés:"
+
+#: ../plugins/dictionary/gtr-dict-panel.c:559
+msgid "Similar words"
+msgstr "Hasonló szavak"
+
+#: ../plugins/dictionary/gtr-dict-panel.c:572
+msgid "Available dictionaries"
+msgstr "Elérhető szótárak"
+
+#: ../plugins/dictionary/gtr-dict-panel.c:586
+msgid "Available strategies"
+msgstr "Elérhető stratégiák"
+
+#: ../plugins/dictionary/gtr-dict-panel.c:596
+msgid "Dictionary sources"
+msgstr "Szótár források"
+
+#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:2
+msgid "Look up words in a dictionary."
+msgstr "Szavak kikeresése szótárból."
+
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:1
+msgid "Database"
+msgstr "Adatbázis"
+
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:2
+msgid "Word database"
+msgstr "Szó adatbázis"
+
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:3
+msgid "Source Name"
+msgstr "Forrás neve"
+
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:4
+msgid "Strategy"
+msgstr "Stratégia"
+
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:5
+msgid "Panel Position"
+msgstr "Panel helyzete"
+
+#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:67
+msgid "_Fullscreen"
+msgstr "_Teljes képernyő"
+
+#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:68
+msgid "Place window on fullscreen state"
+msgstr "Ablak elhelyezése teljes képernyős módban"
+
+#: ../plugins/fullscreen/gtr-fullscreen.plugin.desktop.in.h:1
+msgid "Fullscreen"
+msgstr "Teljes képernyő"
+
+#: ../plugins/fullscreen/gtr-fullscreen.plugin.desktop.in.h:2
+msgid "Place window in the fullscreen state."
+msgstr "Ablak elhelyezése teljes képernyős módban"
+
+#: ../plugins/insert-params/gtr-insert-params-plugin.c:113
+msgid "_Next Param"
+msgstr "_Következő paraméter"
+
+#: ../plugins/insert-params/gtr-insert-params-plugin.c:114
+msgid "Insert the next param of the message"
+msgstr "Következő paraméter beillesztése az üzenetbe"
+
+#: ../plugins/insert-params/gtr-insert-params-plugin.c:116
+msgid "_Insert Params"
+msgstr "Paraméter _beillesztése"
+
+#: ../plugins/insert-params/gtr-insert-params-plugin.c:117
+msgid "_Next Tag"
+msgstr "_Következő cimke"
+
+#: ../plugins/insert-params/gtr-insert-params-plugin.c:118
+msgid "Insert the next tag of the message"
+msgstr "Szúrja be az üzenet következő címkéjét"
+
+#: ../plugins/insert-params/gtr-insert-params-plugin.c:120
+msgid "_Insert Tags"
+msgstr "Címke _beszúrása"
+
+#: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:1
+msgid "Insert Params or Tags"
+msgstr "Paraméterek vagy címkék beszúrása"
+
+#: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:2
+msgid "Parameters and tags detection featuring easy insertion."
+msgstr "Paraméterek és címkék azonosítása a beszúrás megkönnyítéséért."
+
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
+msgid "Open Tran Settings"
+msgstr "Open Tran beállítások"
+
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
+msgid "Language code for the Open-Tran query:"
+msgstr "Az Open-Tran lekérdezés nyelvi kódja:"
+
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
+msgid "Language code of the translated results:"
+msgstr "A lefordított eredménye nyelvi kódja: "
+
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:4
+msgid "Use a local \"mirror\" copy of the Open-Tran server"
+msgstr "Az Open-Tran szerver helyi \"tükör\"szerver másolatának használata "
+
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:5
+msgid "Mirror server URL:"
+msgstr "Tükörszerver URL:"
+
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:7
+#, no-c-format
+msgid ""
+"<i>The URL should be of the form:\n"
+"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+"The two \"%s\" markers and the final slash must not be omitted.</i>"
+msgstr ""
+
+#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:10
+msgid "Mirror Server"
+msgstr "Tükörszerver"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:222
+#, c-format
+msgid "ERROR: Cannot access %s\n"
+msgstr "HIBA: %s nem elérhető\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:238
+msgid "Error in server response, GET failed\n"
+msgstr "Hiba a szerver válaszában, GET meghiúsult\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:250
+#, c-format
+msgid "Cannot parse server response, %s\n"
+msgstr "A szerver válaszának feldolgozása sikertelen, %s\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:264
+#, c-format
+msgid "Cannot parse server response, not an array? %s\n"
+msgstr "A szerver válaszának feldolgozása sikertelen, nem tömb? %s\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:287
+#, c-format
+msgid "WRONG! Can't get result element %d\n"
+msgstr "HIBÁS! Nem lehet az eredmény %d\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:297
+#, c-format
+msgid "WRONG! Can't parse result element %d as object\n"
+msgstr "HIBÁS! Nem lehet az eredmény %d objektum\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:311
+#, c-format
+msgid "WRONG! Can't read projects for result element %d\n"
+msgstr ""
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:335
+#, c-format
+msgid "%s[%s] Count:%d"
+msgstr ""
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:345
+#, c-format
+msgid "WRONG! Malformed project: %d\n"
+msgstr "HIBÁS! Helytelenül formázott projekt: %d\n"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:359
+#: ../src/gtr-actions-search.c:191
+msgid "Phrase not found"
+msgstr "A kifejezés nem található"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:383
+msgid "You have to provide a phrase to search"
+msgstr "Meg kell adnia egy kifejezést a kereséshez"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:392
+msgid "You have to provide a search language code in the plugin configuration"
+msgstr "Meg kell adnia a keresés nyelvének kódját a bővítmény beállításainál"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:402
+msgid ""
+"You have to provide a language code for your language in the plugin "
+"configuration"
+msgstr "Meg kell adnia a nyelvének kódját a bővítmény beállításainál"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:415
+msgid ""
+"Either use the main open-tran.eu server, or enter a server URL in the plugin "
+"configuration,"
+msgstr ""
+"Használja a fő open-tran.eu szervert vagy adja meg a szerver URL-címét a "
+"bővítmény beállításainál,"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:453
+msgid "Type"
+msgstr "Típus"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:464
+msgid "Open-Tran.eu"
+msgstr "Open-Tran.eu"
+
+#: ../plugins/open-tran/gtr-open-tran-panel.c:510
+msgid "Look for:"
+msgstr "Keresés erre:"
+
+#: ../plugins/open-tran/gtr-open-tran-plugin.c:162
+#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:1
+msgid "Open Tran"
+msgstr "Open Tran"
+
+#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:2
+msgid "Look for phrases in Open tran memory translation database."
+msgstr "Kifejezések keresése az Open Tran adatbázisban"
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:1
+msgid "Search Code"
+msgstr "Keresési kód"
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:2
+msgid "The language code to search for"
+msgstr ""
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:3
+msgid "Own Code"
+msgstr "Saját kód"
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:4
+msgid "The language code in which you want the results"
+msgstr "Az eredmények nyelvi kódja"
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:5
+msgid "Use Mirror Server"
+msgstr "Tükörszerver használata"
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:6
+msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
+msgstr "Használja a fő Open-Tran szerver (open-tran.eu) helyi másolatát"
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:7
+msgid "Mirror Server URL"
+msgstr "Tükörszerver URL"
+
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:8
+msgid "URL of an Open-Tran mirror server"
+msgstr "Az Open-Tran tükörszerver URL-címe"
+
+#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:165
+msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"large\">Az adatbázishoz hozzáadott  "
+"karakterláncok</span>"
+
+#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:220
+msgid "Please specify a valid path to build the translation memory"
+msgstr "Adjon meg egy érvényes útvonalat a fordítási memóriának"
+
+#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:287
+msgid "Gtranslator Translation Memory Manager"
+msgstr "Gtranslator Fordítási Memória Kezelő"
+
+#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:1
+msgid "Database:"
+msgstr "Adatbázis:"
+
+#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:2
+msgid "Select the directory which contains PO files:"
+msgstr "Válassza ki a PO fájlokat tartalmazó könyvtárat:"
+
+#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:3
+msgid "Add to Database"
+msgstr "Hozzáadás az adatbázishoz"
+
+#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:4
+msgid "Configuration:"
+msgstr "Beállítás:"
+
+#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:5
+msgid "Use only files with this name:"
+msgstr "Csak ilyen nevű fájlok használata:"
+
+#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:1
+#: ../plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
+msgid "Translation Memory"
+msgstr "Fordítási memória"
+
+#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:2
+msgid "Get translation suggestions from a data base."
+msgstr "Fordítási javaslatok szerzése az adatbázisból."
+
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:204
+#, c-format
+msgid "Insert Option nº %d"
+msgstr ""
+
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:340
+msgid "_Use this translation"
+msgstr "_Használja ezt a fordítást"
+
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:345
+msgid "_Remove"
+msgstr "_Törlés"
+
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:460
+msgid "Shortcut"
+msgstr "Gyorsbillentyű"
+
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:469
+msgid "Level"
+msgstr "Szint"
+
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:478
+msgid "String"
+msgstr "Karakterlánc"
+
+#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:81
+msgid "_Build Translation Memory"
+msgstr "_Fordítási memória építése"
+
+#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:82
+msgid "Build translation memory"
+msgstr "Fordítási memória építése"
+
+#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
+#: ../src/gtr-window.c:183
+msgid "_Translation Memory"
+msgstr "_Fordítási memória"
+
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:1
+msgid "PO directory"
+msgstr "PO könyvtár"
+
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:2
+msgid "Directory containing PO files to add to the translation memory."
+msgstr ""
+
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:3
+msgid "Restrict search by filename"
+msgstr "Fájlnévre szűkített keresés"
+
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:4
+msgid ""
+"If true, only include files with a specified filename when searching the "
+"translation memory."
+msgstr ""
+
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:5
+msgid "Filename to restrict search to"
+msgstr ""
+
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:6
+msgid ""
+"Filename to which searching of the translation memory should be restricted."
+msgstr ""
+
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:7
+msgid "Maximum number of missing words"
+msgstr "A hiányzó szavak maximális száma"
+
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:8
+msgid ""
+"Maximum number of words that can be missing from a message displayed as a "
+"match by the translation memory."
+msgstr ""
+
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:9
+msgid "Maximum difference in message length"
+msgstr "Az üzenetek hosszának maximális különbsége"
+
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:10
+msgid ""
+"Maximum difference in length between messages displayed as matches by the "
+"translation memory."
+msgstr ""
+
+#: ../src/gtr-actions-app.c:48
+msgid "Current Maintainers"
+msgstr "Jelenlegi karbantartók"
+
+#: ../src/gtr-actions-app.c:52
+msgid "Current Developers"
+msgstr "Jelenlegi fejlesztők"
+
+#: ../src/gtr-actions-app.c:56
+msgid "Previous Developers"
+msgstr "Korábbi fejlesztők"
+
+#: ../src/gtr-actions-app.c:66
+msgid "Contributors"
+msgstr "Közreműködők"
+
+#: ../src/gtr-actions-app.c:90
+msgid ""
+"Translation file editing suite for localization of applications and "
+"libraries."
+msgstr ""
+
+#: ../src/gtr-actions-app.c:106
+msgid "About Gtranslator"
+msgstr "A GTranslator névjegye"
+
+#.
+#. * Note to translators: put here your name and email so it will show
+#. * up in the "about" box
+#.
+#: ../src/gtr-actions-app.c:111
 msgid "translator-credits"
 msgstr ""
-"Kelemen Gábor <kelemeng@gnome.hu>\n"
-"Kovács Emese <emese@gnome.hu>\n"
-"Tímár András <timar@gnome.hu>"
 
-#: ../src/bookmark.c:525
-msgid "_View/_Bookmarks/"
-msgstr "_Nézet/_Könyvjelzők/"
+#: ../src/gtr-actions-app.c:114
+msgid "Gtranslator Web Site"
+msgstr "Gtranslator honlapja"
 
-#: ../src/bookmark.c:562
+#: ../src/gtr-actions-file.c:201
+msgid "Open file for translation"
+msgstr "Fájl megnyitása fordításhoz"
+
+#: ../src/gtr-actions-file.c:273 ../src/gtr-actions-file.c:390
+msgid "File saved."
+msgstr "Fájl elmentve."
+
+#: ../src/gtr-actions-file.c:321
+msgid "Save file as..."
+msgstr "Mentés mint..."
+
+#: ../src/gtr-actions-file.c:779
+msgid "Files saved."
+msgstr "Fájl elmentve."
+
+#: ../src/gtr-actions-search.c:170
 #, c-format
-msgid "Open %s (%s)"
-msgstr "%s (%s) megnyitása"
+msgid "Found and replaced %d occurrence"
+msgid_plural "Found and replaced %d occurrences"
+msgstr[0] "Egy talált és cserélt előfordulás"
+msgstr[1] "%d talált és cserélt előfordulás"
 
-#: ../src/color-schemes.c:195
-#, c-format
-msgid "Can't apply color scheme file `%s'!"
-msgstr "Nem sikerült alkalmazni a következő színsémafájlt: \"%s\"!"
+#: ../src/gtr-actions-search.c:179
+msgid "Found and replaced one occurrence"
+msgstr "Egy talált és cserélt előfordulás"
 
-#: ../src/color-schemes.c:317
-msgid "Couldn't retrieve author information!"
-msgstr "Nem sikerült betölteni a fordító adatait!"
+#: ../src/gtranslator-menu.ui.h:1
+msgid "_New Window"
+msgstr "_Új ablak"
 
-#.
-#. * Translators: These strings are used as author informations if
-#. *  no author informations could be retrieved:
-#.
-#: ../src/color-schemes.c:323 ../src/translator.c:334
-msgid "Unknown"
-msgstr "Ismeretlen"
+#: ../src/gtranslator-menu.ui.h:2
+msgid "_Preferences"
+msgstr "_Beállítások"
 
-#: ../src/color-schemes.c:324
-msgid "<Not Given>"
-msgstr "<Nincs megadva>"
+#: ../src/gtranslator-menu.ui.h:3
+msgid "_Help"
+msgstr "_Súgó"
 
-#: ../src/color-schemes.c:471
-msgid "_View/_Colorschemes/"
-msgstr "Né_zet/_Színsémák/"
+#: ../src/gtranslator-menu.ui.h:4
+msgid "_About"
+msgstr "_Névjegy"
 
-#: ../src/color-schemes.c:501
-#, c-format
-msgid "Activate colorscheme %s"
-msgstr "Színséma aktivizálása: %s"
+#: ../src/gtranslator-menu.ui.h:5
+msgid "_Quit"
+msgstr "_Kilépés"
 
-#: ../src/compile.c:80
-msgid "An error occurred while msgfmt was executed:\n"
-msgstr "Hiba történt az msgfmt futtatása közben:\n"
-
-#: ../src/compile.c:157
-msgid "Sorry, msgfmt isn't available on your system!"
-msgstr "Sajnálom, de nincs msgfmt a rendszerén!"
-
-#: ../src/compile.c:197
+#: ../src/gtr-assistant.c:130
 #, c-format
 msgid ""
-"Compile successful:\n"
-"%s"
+"Profile name: %s\n"
+"Translator name: %s\n"
+"Translator email: %s\n"
+"Language name: %s\n"
+"Team email: %s\n"
+"Language code: %s\n"
+"Character set: %s\n"
+"Transfer encoding: %s\n"
+"Plural form: %s\n"
 msgstr ""
-"Sikeres fordítás:\n"
-"%s"
+"Profil név: %s\n"
+"Fordító név: %s\n"
+"Fordító e-mail: %s\n"
+"Nyelv: %s\n"
+"Csoport e-mail: %s\n"
+"Nyelvi kód: %s\n"
+"Karakterkészlet: %s\n"
+"Átviteli kódolás: %s\n"
+"Többesszám: %s\n"
 
-#: ../src/dialogs.c:109
+#: ../src/gtr-assistant.c:169
+msgid "This assistant will help you to create the main profile."
+msgstr "A varázsló segítségével elkészítheti profilját."
+
+#: ../src/gtr-assistant.c:174
+msgid "Assistant"
+msgstr "Varázsló"
+
+#: ../src/gtr-assistant.c:246
+msgid "<b>Profile name:</b>"
+msgstr "<b>Profil név:</b>"
+
+#: ../src/gtr-assistant.c:265
+msgid "<b>Translator name:</b>"
+msgstr "<b>Fordító név:</b>"
+
+#: ../src/gtr-assistant.c:284
+msgid "<b>Translator email:</b>"
+msgstr "<b>Fordító e-mail:</b>"
+
+#: ../src/gtr-assistant.c:296 ../src/gtr-assistant.c:388
+#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:1231
+msgid "Profile"
+msgstr "Profil"
+
+#: ../src/gtr-assistant.c:408
+msgid "Confirmation"
+msgstr "Megerősítés"
+
+#: ../src/gtr-close-confirmation-dialog.c:127
+msgid "Close _without Saving"
+msgstr "Bezárás mentés _nélkül"
+
+#: ../src/gtr-close-confirmation-dialog.c:156
+msgid "Question"
+msgstr "Kérdés"
+
+#: ../src/gtr-close-confirmation-dialog.c:371
+#, c-format
+msgid "Save the changes to document \"%s\" before closing?"
+msgstr "Változtatások mentése a(z) \"%s\" dokumentum bezárása előtt?"
+
+#: ../src/gtr-close-confirmation-dialog.c:534
+#, c-format
+msgid "Changes to %d document will be permanently lost."
+msgid_plural "Changes to %d documents will be permanently lost."
+msgstr[0] "%d dokumentum változtatásai végleg elvesztek."
+msgstr[1] "%d dokumentum változtatásai végleg elvesztek."
+
+#: ../src/gtr-close-confirmation-dialog.c:541
+#, c-format
+msgid "There is %d document with unsaved changes. Save changes before closing?"
+msgid_plural ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr[0] ""
+"%d dokumentum nem mentett módosításokat tartalmaz. El szeretné menteni a "
+"változásokat bezárás előtt?"
+msgstr[1] ""
+"%d dokumentum nem mentett módosításokat tartalmaz. El szeretné menteni a "
+"változásokat bezárás előtt?"
+
+#: ../src/gtr-close-confirmation-dialog.c:562
+msgid "Docum_ents with unsaved changes:"
+msgstr "Dokum_entumok nem mentett változásokkal:"
+
+#: ../src/gtr-close-confirmation-dialog.c:566
+msgid "S_elect the documents you want to save:"
+msgstr "Válassza ki a dokum_entumokat amiket el szeretne menteni:"
+
+#: ../src/gtr-close-confirmation-dialog.c:584
+msgid "Saving has been disabled by the system administrator."
+msgstr "A mentés ki van kapcsolva egy rendszergazda által."
+
+#: ../src/gtr-close-confirmation-dialog.c:586
+msgid "If you don't save, all your changes will be permanently lost."
+msgstr "Ha nem ment, az összes változtatása véglegesen el fog veszni."
+
+#: ../src/gtr-context.c:232
+msgid "Notes:"
+msgstr "Jegyzetek:"
+
+#: ../src/gtr-context.c:240
+msgid "Add Note"
+msgstr "Jegyzet hozzáadása"
+
+#: ../src/gtr-context.c:245
+msgid "Edit"
+msgstr "Szerkesztés"
+
+#. Extracted comments
+#: ../src/gtr-context.c:288
+msgid "Extracted comments:"
+msgstr "Kibontott jegyzetek:"
+
+#. Context
+#: ../src/gtr-context.c:292
+msgid "Context:"
+msgstr "Környezet:"
+
+#. Format
+#: ../src/gtr-context.c:296
+msgid "Format:"
+msgstr "Formátum:"
+
+#: ../src/gtr-context.c:392
+msgid "D_one"
+msgstr "K_ész"
+
+#: ../src/gtr-file-dialogs.c:62
 msgid "Gettext translation"
 msgstr "Gettext fordítás"
 
-#: ../src/dialogs.c:114
+#: ../src/gtr-file-dialogs.c:71
 msgid "Gettext translation template"
-msgstr "Gettext fordítási sablon"
+msgstr "Gettext fordítás sablon"
 
-#: ../src/dialogs.c:119
+#: ../src/gtr-file-dialogs.c:76
 msgid "All files"
 msgstr "Minden fájl"
 
-#: ../src/dialogs.c:176
-msgid "Open file for translation"
-msgstr "Fájl megnyitása fordításra"
+#: ../src/gtr-header-dialog.c:269
+msgid "Edit Header"
+msgstr "Fejléc szerkesztése"
 
-#: ../src/dialogs.c:204
-msgid "Save file as..."
-msgstr "Fájl mentése másként..."
-
-#: ../src/dialogs.c:210
-msgid "Save local copy of file as..."
-msgstr "Fájl helyi másolatának mentése másként..."
-
-#: ../src/dialogs.c:253
-#, c-format
-msgid ""
-"File %s\n"
-"was changed. Save?"
-msgstr ""
-"%s fájl megváltozott.\n"
-"Mentsem a változásokat?"
-
-#: ../src/dialogs.c:295 ../src/dialogs.c:328
-msgid "gtranslator -- edit comment"
-msgstr "gtranslator -- megjegyzés szerkesztése"
-
-#: ../src/dialogs.c:320
-msgid "Comment:"
-msgstr "Megjegyzés:"
-
-#: ../src/dialogs.c:437
-#, c-format
-msgid "Should ALL translations from `%s' be removed?"
-msgstr "Tényleg el akarja távolítani az ÖSSZES fordítást \"%s\" fájlból?"
-
-#: ../src/dialogs.c:510
-msgid "gtranslator -- go to"
-msgstr "gtranslator -- ugrás"
-
-#: ../src/dialogs.c:518
-msgid "Go to message number:"
-msgstr "A megadott számú üzenetre ugrás:"
-
-#: ../src/dialogs.c:576
-msgid "Find in the po file"
-msgstr "Keresés a po fájlban"
-
-#: ../src/dialogs.c:585
-msgid "Enter search string:"
-msgstr "Adja meg a keresendő karakterláncot:"
-
-#: ../src/dialogs.c:590
-msgid "Case sensitive"
-msgstr "Kis- és nagybetű megkülönböztetése"
-
-#: ../src/dialogs.c:595
-msgid "Find in:"
-msgstr "Ebben keres:"
-
-#: ../src/dialogs.c:599 ../src/dialogs.c:728
-msgid "Comments"
+#: ../src/gtr-header-dialog.ui.h:1
+msgid "Comment"
 msgstr "Megjegyzés"
 
-#: ../src/dialogs.c:602 ../src/dialogs.c:731 ../src/languages.c:101
-msgid "English"
-msgstr "Angol"
+#: ../src/gtr-header-dialog.ui.h:2
+msgid "Project Id _version:"
+msgstr "Projekt Id _verzió:"
 
-#: ../src/dialogs.c:605 ../src/dialogs.c:734 ../src/messages-table.c:222
-msgid "Translation"
-msgstr "Fordítás"
+#: ../src/gtr-header-dialog.ui.h:3
+msgid "Pot _file creation date:"
+msgstr "Pot _fájl létrejötte:"
 
-#.
-#. * Translators: this means that the hotkeys ("_" etc.) are ignored
-#. *  during the search action.
-#.
-#: ../src/dialogs.c:616
-msgid "Ignore hotkeys"
-msgstr "Forróbillentyű jelének mellőzése"
+#: ../src/gtr-header-dialog.ui.h:4
+msgid "Po file _revision date:"
+msgstr "Po fájl _felülvizsgálatának időpontja:"
 
-#: ../src/dialogs.c:707
-msgid "gtranslator -- replace"
-msgstr "gtranslator -- csere"
+#: ../src/gtr-header-dialog.ui.h:5
+msgid "Report message _bugs to:"
+msgstr "Üzenet _hibák küldése ide?"
 
-#: ../src/dialogs.c:711 ../src/menus.c:332
-msgid "Replace"
-msgstr "Csere"
-
-#: ../src/dialogs.c:712
-msgid "Replace all"
-msgstr "Mindet cseréli"
-
-#: ../src/dialogs.c:717
-msgid "String to replace:"
-msgstr "A karakterlánc, amelyet cserél:"
-
-#: ../src/dialogs.c:720
-msgid "Replace string:"
-msgstr "A karakterlánc, amire cserél:"
-
-#: ../src/dialogs.c:725
-msgid "Replace in:"
-msgstr "Csere ebben:"
-
-#: ../src/dialogs.c:795
-msgid "Please enter a string to replace!"
-msgstr "Adja meg a cserélendő karakterláncot!"
-
-#: ../src/dialogs.c:852
-#, c-format
-msgid ""
-"The file\n"
-"\n"
-"   %s\n"
-"\n"
-"is already open in another instance of gtranslator!\n"
-"Please close the other instance of gtranslator handling\n"
-"this file currently to re-gain access to this file.\n"
-"\n"
-"Shall fool gtranslator open this file anyway ?"
-msgstr ""
-"A\n"
-"\n"
-"   %s\n"
-"\n"
-"fájl már meg van nyitva a gtranslator egy másik példányában!\n"
-"Kérem zárja be a gtranslator ezen fájlt kezelő másik példányát,\n"
-" hogy hozzáférhessen ehhez a fájlhoz.\n"
-"\n"
-"Mégis megpróbáljam megnyitni?"
-
-#: ../src/dialogs.c:893
-#, c-format
-msgid ""
-"File %s\n"
-"was changed. Do you want to revert to saved copy?"
-msgstr ""
-"A %s\n"
-"fájl változott. Vissza akarja állítani a mentett változatot?"
-
-#: ../src/dialogs.c:922
-msgid "gtranslator -- open from URI"
-msgstr "gtranslator -- megnyitás URI-ból"
-
-#: ../src/dialogs.c:934
-msgid "Enter URI:"
-msgstr "Adja meg az URI-t:"
-
-#: ../src/dialogs.c:971
-msgid "No URI given!"
-msgstr "Nincs URI megadva!"
-
-#: ../src/dialogs.c:989
-msgid ""
-"URIs are used to locate files uniquely on different systems.\n"
-"The standard Internet addresses (URLs) are also URIs -- you can\n"
-"use them to open remote po files lying on servers with standard protocols\n"
-"like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
-"Some example URIs for clarification (these ones are supported):\n"
-"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
-"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
-"\n"
-"file:///<PO-FILE> or\n"
-"http://www.DOMAIN.COM/PO-FILE"
-msgstr ""
-"Az URI segítségével egyértelműen meghatározható egy fájl helye \n"
-"tetszőleges rendszeren. A szabványos internetcímek (URL-ek) szintén\n"
-"URI-k, használhatja ezeket távoli po fájlok elérésére a GnomeVFS \n"
-"által támogatott szabványos protokollokon keresztül (pl. \"http\" vagy \n"
-"\"ftp\"). Néhány példa az érthetőség kedvéért (ezek támogatottak):\n"
-"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
-"ftp://anonymous@ftp.somewhere.com/<TÁVOLI-PO-FÁJL>\n"
-"\n"
-"file:///<PO-FÁJL> vagy \n"
-"http://www.DOMAIN.COM/PO-FÁJL"
-
-#: ../src/dialogs.c:1029
-#, c-format
-msgid ""
-"Open recovery file for `%s'?\n"
-"It was saved by gtranslator before gtranslator last closed\n"
-"and may contain your hard work!\n"
-msgstr ""
-"Megnyitja \"%s helyreállítófájlját?\n"
-"Ezt a gtranslator mentette el, mielőtt a program legutóbb bezáródott.\n"
-"Lehet, hogy az Ön kemény munkáját tartalmazza!\n"
-
-#.
-#. * Translators: All this is about recovering a po file after
-#. *  a crash or something; postbone means that the user will
-#. *   get asked the next time he starts up gtranslator again
-#. *    if he/she wants to recover file.
-#.
-#: ../src/dialogs.c:1041
-msgid "Postpone decision"
-msgstr "Döntés felfüggesztése"
-
-#: ../src/dialogs.c:1043
-msgid "Ignore recovery file"
-msgstr "Visszaállítási fájl melllőzése"
-
-#: ../src/dialogs.c:1045
-msgid "Recover file"
-msgstr "Fájl visszaállítása"
-
-#: ../src/dialogs.c:1101
-msgid ""
-"Should gtranslator autotranslate the file using information\n"
-"from your personal learn buffer?"
-msgstr ""
-"Megpróbálja-e a gtranslator a fájl automatikus fordítását\n"
-"a saját fordítási memória információiból?"
-
-#: ../src/dialogs.c:1141 ../src/dialogs.c:1169
-msgid "gtranslator -- add bookmark with comment?"
-msgstr "gtranslator -- könyvjelző hozzáadása megjegyzéssel?"
-
-#: ../src/dialogs.c:1161
-msgid "Comment for the bookmark:"
-msgstr "Megjegyzés a könyvjelzőhöz:"
-
-#: ../src/dialogs.c:1161
-msgid "No comment"
-msgstr "Nincs megjegyzés"
-
-#: ../src/find.c:216
-msgid "Please enter a search string"
-msgstr "Adja meg a keresendő karakterláncot"
-
-#: ../src/find.c:232
-#, c-format
-msgid ""
-"Could not find\n"
-"\"%s\""
-msgstr ""
-"Nem található:\n"
-"\"%s\""
-
-#: ../src/gui.c:405
-#, c-format
-msgid "%s [ %i Fuzzy left ]"
-msgid_plural "%s [ %i Fuzzy left ]"
-msgstr[0] "%s [ %i Ellenőrzendő maradt ]"
-msgstr[1] "%s [ %i Ellenőrzendő maradt ]"
-
-#: ../src/gui.c:405 ../src/gui.c:409 ../src/menus.c:318
-#: ../src/messages-table.c:252
-msgid "Fuzzy"
-msgstr "Ellenőrzendő"
-
-#: ../src/gui.c:409
-#, c-format
-msgid "%s [ No fuzzy left ]"
-msgstr "%s [ Nem maradt ellenőrzendő ]"
-
-#: ../src/gui.c:418 ../src/messages-table.c:260
-msgid "Translated"
-msgstr "Lefordított"
-
-#: ../src/gui.c:426
-#, c-format
-msgid "%s [ %i Untranslated left ]"
-msgid_plural "%s [ %i Untranslated left ]"
-msgstr[0] "%s [ Nincs lefordítva: %i ]"
-msgstr[1] "%s [ Nincs lefordítva: %i ]"
-
-#: ../src/gui.c:426 ../src/gui.c:428 ../src/messages-table.c:244
-msgid "Untranslated"
-msgstr "Nincs lefordítva"
-
-#: ../src/gui.c:428
-#, c-format
-msgid "%s [ No untranslated left ]"
-msgstr "%s [ Mind lefordítva ]"
-
-#: ../src/gui.c:447
-#, c-format
-msgid "Message %d / %d / Status: %s (Message contains plural forms)"
-msgstr "%d / %d üzenet / Állapot: %s (üzenet többesszámot tartalmaz)"
-
-#: ../src/gui.c:451
-#, c-format
-msgid "Message %d / %d / Status: %s"
-msgstr "%d / %d üzenet / Állapot: %s"
-
-#: ../src/gui.c:754 ../src/page.c:99
-msgid "Edit comment"
-msgstr "Megjegyzés szerkesztése"
-
-#: ../src/header_stuff.c:406
-msgid "No header for this file/domain"
-msgstr "Nincs fejléc ehhez a fájlhoz/tartományhoz"
-
-#: ../src/header_stuff.c:445
-msgid "gtranslator -- edit header"
-msgstr "gtranslator -- fejléc szerkesztése"
-
-#. gtk_text_buffer_set_text(buffer, ph->comment, -1);
-#: ../src/header_stuff.c:469
-msgid "Comments:"
-msgstr "Megjegyzés:"
-
-#: ../src/header_stuff.c:476
-msgid "Project name:"
-msgstr "Projekt neve:"
-
-#: ../src/header_stuff.c:482
-msgid "Project version:"
-msgstr "Projekt verziója:"
-
-#: ../src/header_stuff.c:489
-msgid "Pot file creation date:"
-msgstr "A pot fájl létrehozásának időpontja:"
-
-#: ../src/header_stuff.c:495
-msgid "Po file revision date:"
-msgstr "A po fájl utolsó módosításának időpontja:"
-
-#: ../src/header_stuff.c:502
-msgid "Report message string bugs to:"
-msgstr "Üzenetszöveg hibák jelentése:"
-
-#: ../src/header_stuff.c:516
-msgid "Generator:"
-msgstr "Létrehozta:"
-
-#: ../src/header_stuff.c:521
+#: ../src/gtr-header-dialog.ui.h:6
 msgid "Project"
 msgstr "Projekt"
 
-#: ../src/header_stuff.c:527
+#: ../src/gtr-header-dialog.ui.h:7
 msgid "Use my options to complete the following entries:"
-msgstr "Használd az én beállításaimat a fennmaradó rész kitöltéséhez:"
+msgstr "Használja a beállításaimat a következő bejegyzések kitöltéséhez:"
 
-#: ../src/header_stuff.c:540
-msgid "Translator's name:"
-msgstr "Fordító neve:"
+#: ../src/gtr-header-dialog.ui.h:8
+msgid "Translator's _name:"
+msgstr "Fordító _neve:"
 
-#: ../src/header_stuff.c:546
-msgid "Translator's e-mail:"
-msgstr "Fordító e-mail címe:"
+#: ../src/gtr-header-dialog.ui.h:9
+msgid "Translator's _email:"
+msgstr "Fordító _e-mail címe:"
 
-#: ../src/header_stuff.c:553 ../src/prefs.c:872
-msgid "Language:"
-msgstr "Nyelv:"
+#: ../src/gtr-header-dialog.ui.h:10 ../src/gtr-languages-fetcher.ui.h:5
+msgid "_Language:"
+msgstr "N_yelv:"
 
-#: ../src/header_stuff.c:560 ../src/prefs.c:901
-msgid "Language group's email:"
-msgstr "Fordítócsapat e-mail címe:"
+#: ../src/gtr-header-dialog.ui.h:11
+msgid "Language gro_up email:"
+msgstr "Nyelv cso_port e-mailje:"
 
-#: ../src/header_stuff.c:567 ../src/prefs.c:887
-msgid "Charset:"
-msgstr "Karakterkészlet:"
+#: ../src/gtr-header-dialog.ui.h:12
+msgid "Char_set:"
+msgstr "Karaterké_szlet"
 
-#: ../src/header_stuff.c:574 ../src/prefs.c:894
-msgid "Encoding:"
-msgstr "Kódolás:"
+#: ../src/gtr-header-dialog.ui.h:13
+msgid "Enc_oding:"
+msgstr "Kód_olás:"
 
-#: ../src/header_stuff.c:582
+#: ../src/gtr-header-dialog.ui.h:14
 msgid "Translator and Language"
 msgstr "Fordító és nyelv"
 
-#: ../src/history.c:189
-msgid "_File/Recen_t files/"
-msgstr "_Fájl/_Legutóbbi fájlok/"
+#: ../src/gtr-jump-dialog.c:93
+msgid "Go to Message"
+msgstr "Ugrás az üzenethez"
 
-#: ../src/history.c:226
+#: ../src/gtr-jump-dialog.ui.h:1
+msgid "Enter message number:"
+msgstr "Üzenet számának beírása:"
+
+#: ../src/gtr-languages-fetcher.ui.h:1
+msgid "_Team email:"
+msgstr "Csapa_t e-mail:"
+
+#: ../src/gtr-languages-fetcher.ui.h:2
+msgid "Transfer en_coding:"
+msgstr "Átvitel_i kódolás:"
+
+#: ../src/gtr-languages-fetcher.ui.h:3
+msgid "Character _set"
+msgstr "Karakterkészlet beállítá_sa:"
+
+#: ../src/gtr-languages-fetcher.ui.h:4
+msgid "Language _code:"
+msgstr "Nyelv _kódja:"
+
+#: ../src/gtr-languages-fetcher.ui.h:6
+msgid "_Plural forms:"
+msgstr "Tö_bbesszám alakja:"
+
+#: ../src/gtr-message-table.c:175
+msgid "Status"
+msgstr "Állapot"
+
+#: ../src/gtr-message-table.c:187
+msgid "ID"
+msgstr "ID"
+
+#: ../src/gtr-message-table.c:202
+msgid "Original Message"
+msgstr "Eredeti üzenet"
+
+#: ../src/gtr-message-table.c:217
+msgid "Translated Message"
+msgstr "Lefordított üzenet"
+
+#: ../src/gtr-po.c:439
 #, c-format
-msgid "Open %s"
-msgstr "%s megnyitása"
+msgid "The file is empty"
+msgstr "Ez a fájl üres"
 
-#: ../src/languages.c:37
-msgid "Afrikaans"
-msgstr "Afrikaans"
-
-#: ../src/languages.c:41
-msgid "Albanian"
-msgstr "Albán"
-
-#: ../src/languages.c:45
-msgid "Arabic"
-msgstr "Arab"
-
-#: ../src/languages.c:49
-msgid "Azerbaijani Turkish"
-msgstr "Azerbajdzsáni török"
-
-#: ../src/languages.c:53
-msgid "Basque"
-msgstr "Baszk"
-
-#: ../src/languages.c:57
-msgid "Belarusian"
-msgstr "Fehérorosz"
-
-#: ../src/languages.c:61
-msgid "Bengali"
-msgstr "Bengali"
-
-#: ../src/languages.c:65
-msgid "Britton"
-msgstr "Breton"
-
-#: ../src/languages.c:69
-msgid "Bulgarian"
-msgstr "Bolgár"
-
-#: ../src/languages.c:73
-msgid "Catalan"
-msgstr "Katalán"
-
-#: ../src/languages.c:77
-msgid "Chinese/Simplified"
-msgstr "Kínai/Egyszerűsített"
-
-#: ../src/languages.c:81
-msgid "Chinese/Traditional"
-msgstr "Kínai/Tradicionális"
-
-#: ../src/languages.c:85
-msgid "Croatian"
-msgstr "Horvát"
-
-#: ../src/languages.c:89
-msgid "Czech"
-msgstr "Cseh"
-
-#: ../src/languages.c:93
-msgid "Danish"
-msgstr "Dán"
-
-#: ../src/languages.c:97
-msgid "Dutch"
-msgstr "Holland"
-
-#: ../src/languages.c:105
-msgid "English/Canada"
-msgstr "Angol/Kanada"
-
-#: ../src/languages.c:109
-msgid "English/GB"
-msgstr "Angol/Brit"
-
-#: ../src/languages.c:113
-msgid "English/USA"
-msgstr "Angol/USA"
-
-#: ../src/languages.c:117
-msgid "Esperanto"
-msgstr "Eszperantó"
-
-#: ../src/languages.c:121
-msgid "Estonian"
-msgstr "Észt"
-
-#: ../src/languages.c:125
-msgid "Persian"
-msgstr "Perzsa"
-
-#: ../src/languages.c:129
-msgid "Finnish"
-msgstr "Finn"
-
-#: ../src/languages.c:133
-msgid "French"
-msgstr "Francia"
-
-#: ../src/languages.c:137
-msgid "Galician"
-msgstr "Galíciai"
-
-#: ../src/languages.c:141
-msgid "German"
-msgstr "Német"
-
-#: ../src/languages.c:145
-msgid "Greek"
-msgstr "Görög"
-
-#: ../src/languages.c:149
-msgid "Gujarati"
-msgstr "Gujarati"
-
-#: ../src/languages.c:153
-msgid "Hebrew"
-msgstr "Héber"
-
-#: ../src/languages.c:157
-msgid "Hindi"
-msgstr "Hindi"
-
-#: ../src/languages.c:161
-msgid "Hungarian"
-msgstr "Magyar"
-
-#: ../src/languages.c:165
-msgid "Icelandic"
-msgstr "Izlandi"
-
-#: ../src/languages.c:169
-msgid "Indonesian"
-msgstr "Indonéz"
-
-#: ../src/languages.c:173
-msgid "Italian"
-msgstr "Olasz"
-
-#: ../src/languages.c:177
-msgid "Irish"
-msgstr "Ír"
-
-#: ../src/languages.c:181
-msgid "Japanese"
-msgstr "Japán"
-
-#: ../src/languages.c:185
-msgid "Kannada"
-msgstr "Kannada"
-
-#: ../src/languages.c:189
-msgid "Korean"
-msgstr "Koreai"
-
-#: ../src/languages.c:193
-msgid "Latvian"
-msgstr "Lett"
-
-#: ../src/languages.c:197
-msgid "Lithuanian"
-msgstr "Litván"
-
-#: ../src/languages.c:201
-msgid "Malay/Bahasa Melayu"
-msgstr "Maláj/Bahasa Melaju"
-
-#: ../src/languages.c:205
-msgid "Maltese"
-msgstr "Máltai"
-
-#: ../src/languages.c:209
-msgid "Marathi"
-msgstr "Marathi"
-
-#: ../src/languages.c:213
-msgid "Mongolian"
-msgstr ""
-
-#: ../src/languages.c:217
-msgid "Norwegian/Bokmaal"
-msgstr "Norvég/Bokmaal"
-
-#: ../src/languages.c:221
-msgid "Norwegian/Nynorsk"
-msgstr "Norvég/Nynorsk"
-
-#: ../src/languages.c:225
-msgid "Punjabi"
-msgstr "Pandzsábi"
-
-#: ../src/languages.c:229
-msgid "Polish"
-msgstr "Lengyel"
-
-#: ../src/languages.c:233
-msgid "Portuguese"
-msgstr "Portugál"
-
-#: ../src/languages.c:237
-msgid "Portuguese/Brazil"
-msgstr "Portugál/Brazil"
-
-#: ../src/languages.c:241
-msgid "Romanian"
-msgstr "Román"
-
-#: ../src/languages.c:245
-msgid "Russian"
-msgstr "Orosz"
-
-#: ../src/languages.c:249
-msgid "Serbian/Cyrillic"
-msgstr "Szerb/Cirill"
-
-#: ../src/languages.c:253
-msgid "Serbian/Latin"
-msgstr "Szerb/Latin"
-
-#: ../src/languages.c:257
-msgid "Slovak"
-msgstr "Szlovák"
-
-#: ../src/languages.c:261
-msgid "Slovenian"
-msgstr "Szlovén"
-
-#: ../src/languages.c:265
-msgid "Spanish"
-msgstr "Spanyol"
-
-#: ../src/languages.c:269
-msgid "Spanish/Spain"
-msgstr "Spanyol/Spanyolország"
-
-#: ../src/languages.c:273
-msgid "Spanish/Mexico"
-msgstr "Spanyol/Mexikó"
-
-#: ../src/languages.c:277
-msgid "Swedish"
-msgstr "Svéd"
-
-#: ../src/languages.c:281
-msgid "Tagalog"
-msgstr "Tagalog"
-
-#: ../src/languages.c:285
-msgid "Tamil"
-msgstr "Tamil"
-
-#: ../src/languages.c:289
-msgid "Telugu"
-msgstr "Telugu"
-
-#: ../src/languages.c:293
-msgid "Thai"
-msgstr "Thai"
-
-#: ../src/languages.c:297
-msgid "Turkish"
-msgstr "Török"
-
-#: ../src/languages.c:301
-msgid "Ukrainian"
-msgstr "Ukrán"
-
-#: ../src/languages.c:305
-msgid "Uzbekian"
-msgstr "Üzbég"
-
-#: ../src/languages.c:309
-msgid "Vietnamese"
-msgstr "Vietnami"
-
-#: ../src/languages.c:313
-msgid "Walloon"
-msgstr "Vallon"
-
-#: ../src/languages.c:317
-msgid "Welsh"
-msgstr "Velszi"
-
-#: ../src/learn.c:380
-msgid "gtranslator learn buffer statistics:"
-msgstr "gtranslator fordítási memória statisztikák:"
-
-#: ../src/learn.c:383
-#, c-format
-msgid "Learn buffer filename: `%s`"
-msgstr "Fordítási memória-fájl neve: \"%s\""
-
-#.
-#. * Translators: This means the encoding of the learn buffer (XML) file.
-#.
-#: ../src/learn.c:389
-#, c-format
-msgid "Encoding: `%s'"
-msgstr "Kódolás: \"%s\""
-
-#.
-#. * Translators: "Serial number" of the learn buffer - means # of file updates.
-#.
-#: ../src/learn.c:395
-#, c-format
-msgid "Serial: `%i'"
-msgstr "Sorszám: \"%i\""
-
-#.
-#. * Translators: That's the number of message entries in the learn buffer.
-#.
-#: ../src/learn.c:401
-#, c-format
-msgid "Number of entries: `%i'"
-msgstr "Bejegyzések száma: \"%i\""
-
-#: ../src/main.c:71
-msgid "Specify main window geometry"
-msgstr "A főablak geometriájának megadása"
-
-#: ../src/main.c:71
-msgid "GEOMETRY"
-msgstr "GEOMETRY"
-
-#: ../src/main.c:119
-#, c-format
-msgid "Error during GConf initialization: %s."
-msgstr "Hiba a GConf inicializálásakor: %s."
-
-#: ../src/main.c:250
-#, c-format
-msgid "Couldn't open '%s': %s\n"
-msgstr "Nem sikerült megnyitni ezt: \"%s\": %s\n"
-
-#: ../src/menus.c:51
-msgid "_Go"
-msgstr "_Menj"
-
-#: ../src/menus.c:61
-msgid "_Compile"
-msgstr "F_ordítás"
-
-#: ../src/menus.c:62 ../src/menus.c:273
-msgid "Compile the po file"
-msgstr "A po fájl fordítása"
-
-#: ../src/menus.c:68
-msgid "_Update"
-msgstr "_Frissítés"
-
-#: ../src/menus.c:69 ../src/menus.c:277
-msgid "Update the po file"
-msgstr "A po fájl frissítése"
-
-#: ../src/menus.c:76
-msgid "Add bookmark"
-msgstr "Könyvjelző hozzáadása"
-
-#: ../src/menus.c:77
-msgid "Add a bookmark for this message in this po file"
-msgstr "Könyvjelző hozzáadása ehhez az üzenethez ebben a po fájlban"
-
-#: ../src/menus.c:84
-msgid "Aut_otranslate..."
-msgstr "_Automatikus fordítás..."
-
-#: ../src/menus.c:85
-msgid "Autotranslate the file with information from your learn buffer"
-msgstr ""
-"Automatikusan fordítás a saját fordítási memóriaból vett információival"
-
-#: ../src/menus.c:92
-msgid "Remove all translations..."
-msgstr "Az összes fordítás törlése..."
-
-#: ../src/menus.c:93
-msgid "Remove all existing translations from the po file"
-msgstr "Minden meglévő fordítást töröl a po fájlból"
-
-#: ../src/menus.c:101
-msgid "Open from _URI..."
-msgstr "Megnyitás _URI-ból..."
-
-#: ../src/menus.c:102
-msgid "Open a po file from a given URI"
-msgstr "Po fájl megnyitása megadott URI-ból"
-
-#: ../src/menus.c:112
-msgid "Recen_t files"
-msgstr "_Legutóbbi fájlok"
-
-#: ../src/menus.c:139
-msgid "_Header..."
-msgstr "_Fejléc..."
-
-#: ../src/menus.c:140
-msgid "Edit po file header"
-msgstr "po fájl fejlécének szerkesztése"
-
-#: ../src/menus.c:147
-msgid "C_omment..."
-msgstr "Meg_jegyzés..."
-
-#: ../src/menus.c:148
-msgid "Edit message comment"
-msgstr "Üzenet megjegyzésének szerkesztése"
-
-#: ../src/menus.c:155
-msgid "Copy _message -> translation"
-msgstr "Üzenet át_másolása a fordításba"
-
-#: ../src/menus.c:156
-msgid "Copy the original message contents and paste them as translation"
-msgstr "Az eredeti üzenet tartalmának másolása és fordításként beillesztése"
-
-#: ../src/menus.c:163
-msgid "Fu_zzy"
-msgstr "_Ellenőrzendő"
-
-#: ../src/menus.c:164
-msgid "Toggle fuzzy status of a message"
-msgstr "Az üzenet ellenőrzendő állapotát állítja"
-
-#: ../src/menus.c:177
-msgid "_First"
-msgstr "_Első"
-
-#: ../src/menus.c:178 ../src/menus.c:294
-msgid "Go to the first message"
-msgstr "Az első üzenetre ugrik"
-
-#: ../src/menus.c:184
-msgid "_Back"
-msgstr "_Vissza"
-
-#: ../src/menus.c:185 ../src/menus.c:298
-msgid "Move back one message"
-msgstr "Az előző üzenetre ugrik"
-
-#: ../src/menus.c:192
-msgid "_Next"
-msgstr "_Következő"
-
-#: ../src/menus.c:193 ../src/menus.c:303
-msgid "Move forward one message"
-msgstr "A következő üzenetre ugrik"
-
-#: ../src/menus.c:199
-msgid "_Last"
-msgstr "_Utolsó"
-
-#: ../src/menus.c:200 ../src/menus.c:307
-msgid "Go to the last message"
-msgstr "Az utolsó üzenetre ugrik"
-
-#: ../src/menus.c:207
-msgid "_Go to..."
-msgstr "_Ugrás..."
-
-#: ../src/menus.c:208
-msgid "Goto specified message number"
-msgstr "A megadott számú üzenetre ugrik"
-
-#: ../src/menus.c:214
-msgid "Next fuz_zy"
-msgstr "_Következő ellenőrzendő"
-
-#: ../src/menus.c:215
-msgid "Go to next fuzzy message"
-msgstr "A következő ellenőrzendő üzenetre ugrik"
-
-#: ../src/menus.c:221
-msgid "Next _untranslated"
-msgstr "Következő le _nem fordított"
-
-#: ../src/menus.c:222 ../src/menus.c:312
-msgid "Go to next untranslated message"
-msgstr "A következő le nem fordított üzenetre ugrik"
-
-#: ../src/menus.c:232
-msgid "_Bookmarks"
-msgstr "_Könyvjelzők"
-
-#: ../src/menus.c:233
-msgid "_Colorschemes"
-msgstr "_Színsémák"
-
-#: ../src/menus.c:247
-msgid "gtranslator _website"
-msgstr "gtranslator _weblapja"
-
-#: ../src/menus.c:248
-msgid "gtranslator's homepage on the web"
-msgstr "A gtranslator honlapja a Web-en"
-
-#: ../src/menus.c:259
-msgid "Open"
-msgstr "Megnyitás"
-
-#: ../src/menus.c:260
-msgid "Open a po file"
-msgstr "Po fájl megnyitása"
-
-#: ../src/menus.c:263
-msgid "Save"
-msgstr "Mentés"
-
-#: ../src/menus.c:264
-msgid "Save File"
-msgstr "Fájl mentése"
-
-#: ../src/menus.c:267
-msgid "Save as"
-msgstr "Mentés másként"
-
-#: ../src/menus.c:268
-msgid "Save file with a different name"
-msgstr "Más néven menti el a fájlt"
-
-#: ../src/menus.c:272
-msgid "Compile"
-msgstr "Fordítás"
-
-#: ../src/menus.c:276
-msgid "Update"
-msgstr "Frissítés"
-
-#: ../src/menus.c:280
-msgid "Header"
-msgstr "Fejléc"
-
-#: ../src/menus.c:281
-msgid "Edit the header"
-msgstr "Fejléc szerkesztése"
-
-#: ../src/menus.c:285
-msgid "Undo"
-msgstr "Visszavonás"
-
-#: ../src/menus.c:286
-msgid "Undo the last performed action"
-msgstr "Visszavonja az utolsó műveletet"
-
-#: ../src/menus.c:293
-msgid "First"
-msgstr "Első"
-
-#: ../src/menus.c:297
-msgid "Back"
-msgstr "Vissza"
-
-#: ../src/menus.c:302
-msgid "Next"
-msgstr "Következő"
-
-#: ../src/menus.c:306
-msgid "Last"
-msgstr "Utolsó"
-
-#: ../src/menus.c:311
-msgid "Missing"
-msgstr "Hiányzik"
-
-#: ../src/menus.c:319
-msgid "Go to the next fuzzy translation"
-msgstr "A következő ellenőrzendő fordításra ugrik"
-
-#: ../src/menus.c:324
-msgid "Go to"
-msgstr "Ugrás"
-
-#: ../src/menus.c:325
-msgid "Go to specified message number"
-msgstr "Az adott sorszámú üzenetre ugrik"
-
-#: ../src/menus.c:328
-msgid "Find"
-msgstr "Keresés"
-
-#: ../src/menus.c:329
-msgid "Find string in po file"
-msgstr "Karakterlánc keresése a po fájlban"
-
-#: ../src/menus.c:333
-msgid "Replace string in po file"
-msgstr "Karakterlánc cseréje a po fájlban"
-
-#: ../src/message.c:94
-msgid "Couldn't get the message!"
-msgstr "Az üzenet nem található!"
-
-#: ../src/message.c:116
-msgid "There are no fuzzy messages left."
-msgstr "Nincs több ellenőrzendő üzenet."
-
-#: ../src/message.c:140
-msgid "All messages seem to be translated."
-msgstr "Úgy tűnik, minden üzenet le van fordítva."
-
-#: ../src/message.c:272
-#, c-format
-msgid "gtkspell error: %s\n"
-msgstr "gtkspell hiba: %s\n"
-
-#: ../src/message.c:273
-#, c-format
-msgid ""
-"GtkSpell was unable to initialize.\n"
-" %s"
-msgstr ""
-"GtkSpell-t nem sikerült inicializálni.\n"
-" %s"
-
-#: ../src/messages-table.c:210
-msgid "Original"
-msgstr "Eredeti"
-
-#: ../src/page.c:199
-#, c-format
-msgid "Error autosaving file: %s"
-msgstr "Hiba a fájl automatikus mentése közben: %s"
-
-#: ../src/parse.c:86
-msgid "Parser output"
-msgstr "Elemző kimenete"
-
-#: ../src/parse.c:254
+#: ../src/gtr-po.c:448
 #, c-format
 msgid "Failed opening file '%s': %s"
-msgstr "\"%s\" fájl megnyitása sikertelen: %s"
+msgstr "Nem sikerült megnyitni a fájlt: „%s”: %s"
 
-#: ../src/parse.c:275
-msgid "Gettext returned a null message domain list."
-msgstr "A Gettext üres üzenettartomány-listát adott vissza."
-
-#: ../src/parse.c:317
-msgid "No messages obtained from parser."
-msgstr "Nem sikerült üzeneteket beszerezni az elemzőtől."
-
-#: ../src/parse.c:379 ../src/parse.c:383
-msgid "N/A"
-msgstr "N/A"
-
-#.
-#. * Set window title
-#.
-#: ../src/parse.c:417
+#: ../src/gtr-po.c:522
 #, c-format
-msgid "gtranslator -- %s"
-msgstr "gtranslator -- %s"
+msgid "Could not convert from charset '%s' to UTF-8"
+msgstr "Nem sikerült konvertálni a „%s” kódolást UTF-8-ba"
 
-#: ../src/parse.c:539
+#: ../src/gtr-po.c:539 ../src/gtr-po.c:559
+#, c-format
+msgid "Could not store temporary file for encoding conversion"
+msgstr "Nem sikerült tárolni az ideiglenes fájlt a kódolás átalakításához"
+
+#: ../src/gtr-po.c:596
+#, c-format
+msgid ""
+"All attempt to convert the file to UTF-8 has failed, use the msgconv or "
+"iconv command line tools before opening this file with gtranslator"
+msgstr ""
+"Minden kísérlet meghiúsult a fájl UTF-8-ba való kódolásához, használja az "
+"msgconv vagy az iconv parancssori eszközt mielőtt megnyitja a fájlt a "
+"gtranslatorral."
+
+#: ../src/gtr-po.c:664
+#, c-format
+msgid "Gettext returned a null message domain list."
+msgstr "A gettext üres üzenettartomány-listát adott vissza."
+
+#: ../src/gtr-po.c:709
+#, c-format
+msgid "No messages obtained from parser."
+msgstr "Nincs megszerezve üzenet az értelmezőtől."
+
+#: ../src/gtr-po.c:757
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
 "Pot files are generated by the compilation process.\n"
 "Your file should likely be named '%s.po'."
 msgstr ""
-".pot kiterjesztéssel próbálta elmenteni a fájlt.\n"
-"Ezeket a fájlokat a fordítási folyamat generálja.\n"
-"A fájl neve \"%s.po\" legyen."
+"Ön .pot kiterjesztésben menti most el a fájlt.\n"
+"A pot fájlok a fordítási folyamat eredményeként jönnek létre\n"
+"A fájlt „%s.po” néven kellene elmentenie."
 
-#: ../src/parse.c:579
+#: ../src/gtr-po.c:770
 #, c-format
+msgid "The file %s is read-only, and can not be overwritten"
+msgstr "A(z) „%s” fájl csak olvasható, nem lehet felülírni"
+
+#: ../src/gtr-po.c:801
+#, c-format
+msgid "There was an error writing the PO file: %s"
+msgstr "Hiba történet a PO file írásakor: %s"
+
+#: ../src/gtr-preferences-dialog.c:401
 msgid ""
-"File %s\n"
-"contains %d fuzzy message"
-msgid_plural ""
-"File %s\n"
-"contains %d fuzzy messages"
-msgstr[0] ""
-"%s fájl\n"
-"%d ellenőrzendő üzenetet tartalmaz"
-msgstr[1] ""
-"%s fájl\n"
-"%d ellenőrzendő üzenetet tartalmaz"
-
-#: ../src/preferences.c:180
-msgid "Couldn't generate the current date!"
-msgstr "Nem lehet generálni a jelenlegi dátumot!"
-
-#: ../src/prefs.c:464 ../src/prefs.c:567
-msgid " Categories: "
+"<span weight=\"bold\" size=\"large\">Impossible to remove the active "
+"profile</span>"
 msgstr ""
+"<span weight=\"bold\" size=\"large\">Az aktív profilt nem lehet eltávolítani<"
+"/span>"
 
-#: ../src/prefs.c:483
+#: ../src/gtr-preferences-dialog.c:405
+msgid "Another profile should be selected as active before"
+msgstr "Ki kell választani egy másik profilt aktívként előbb"
+
+#: ../src/gtr-preferences-dialog.c:418
 msgid ""
-"Note: It was not possible to determine GNU header for plural forms. Your GNU "
-"gettext tools may be too old or they do not contain a suggested value for "
-"your language."
+"<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
+"profile?</span>"
 msgstr ""
+"<span weight=\"bold\" size=\"large\">Biztosan törölni szeretné ezt a "
+"profilt?</span>"
 
-#: ../src/prefs.c:492
-msgid ""
-"Note: Your settings do not contain a plural forms string. These data "
-"retrieved from GNU gettext tools."
-msgstr ""
+#: ../src/gtr-preferences-dialog.c:552
+msgid "Active"
+msgstr "Aktív"
 
-#: ../src/prefs.c:497
-msgid ""
-"Note: Your settings contain an invalid plural forms string. These data "
-"retrieved from GNU gettext tools."
-msgstr ""
+#: ../src/gtr-preferences-dialog.c:643 ../src/gtr-preferences-dialog.ui.h:1
+msgid "Gtranslator Preferences"
+msgstr "A Gtranslator beállításai"
 
-#: ../src/prefs.c:546
-msgid "gtranslator -- options"
-msgstr "gtranslator -- beállítások"
-
-#: ../src/prefs.c:598
-msgid "Files"
-msgstr "Fájlok"
-
-#. General item
-#: ../src/prefs.c:605
+#: ../src/gtr-preferences-dialog.ui.h:2
 msgid "General"
 msgstr "Általános"
 
-#: ../src/prefs.c:613
-msgid "Warn if po file contains fuzzy translations"
-msgstr "Figyelmeztetés, ha a po fájlban ellenőrzendő bejegyzések vannak"
+#: ../src/gtr-preferences-dialog.ui.h:3
+msgid "_Warn if PO file contains fuzzy translations"
+msgstr "Figyelmeztetés, ha a PO fájl tartalmaz ellenőrzendő fordításokat"
 
-#: ../src/prefs.c:617
-msgid "Delete compiled files (e.g. \"project.gmo\")"
-msgstr "A \"<project>.gmo\" eredményfájlok törlése"
-
-#. Autosave item
-#: ../src/prefs.c:623
+#: ../src/gtr-preferences-dialog.ui.h:4
 msgid "Autosave"
 msgstr "Automatikus mentés"
 
-#: ../src/prefs.c:631
-msgid "Automatically save at regular intervals"
-msgstr "Automatikus mentés megadott időközönként"
+#: ../src/gtr-preferences-dialog.ui.h:5
+msgid "Create a _backup copy of files before saving"
+msgstr "_Biztonsági mentés készítése a fájlok mentése előtt"
 
-#: ../src/prefs.c:639
-msgid "Autosave interval:"
-msgstr "Automatikus mentés időköze:"
+#: ../src/gtr-preferences-dialog.ui.h:6
+msgid "_Autosave files every"
+msgstr "_Automatikus mentés minden"
 
-#: ../src/prefs.c:640
-msgid "Append a suffix to automatically saved files"
-msgstr "Kiterjesztés hozzáírása az automatikusan mentett fájlok neveihez"
+#: ../src/gtr-preferences-dialog.ui.h:7
+msgid "_minutes"
+msgstr "_percben"
 
-#: ../src/prefs.c:647
-msgid "Suffix:"
-msgstr "Kiterjesztés:"
+#: ../src/gtr-preferences-dialog.ui.h:8
+msgid "Files"
+msgstr "Fájlok"
 
-#. Recent item
-#: ../src/prefs.c:649
-msgid "Recent files"
-msgstr "Legutóbbi fájlok"
+#: ../src/gtr-preferences-dialog.ui.h:9
+msgid "Text Display"
+msgstr "Szövegmegjelenítés"
 
-#: ../src/prefs.c:664
-msgid "Maximum number of entries in the recent files list:"
-msgstr "A legutóbbi fájlok listája elemeinek maximális száma:"
+#: ../src/gtr-preferences-dialog.ui.h:10
+msgid "_Highlight message syntax"
+msgstr "Üzenetszintaxis _kiemelése"
 
-#: ../src/prefs.c:665
-msgid "Check recent files before showing in recent files list"
-msgstr "Ellenőrizze, hogy a legutóbbi fájlok listájának elemei léteznek-e"
+#: ../src/gtr-preferences-dialog.ui.h:11
+msgid "Make _whitespace visible"
+msgstr "Üres h_elyek láthatóvá tétele"
 
-#: ../src/prefs.c:676
-msgid "Editor"
-msgstr "Szerkesztő"
+#: ../src/gtr-preferences-dialog.ui.h:12
+msgid "Use _custom font"
+msgstr "E_gyéni betűtípus használata"
 
-#. Text item
-#: ../src/prefs.c:681
-msgid "Text display"
-msgstr "Szöveg megjelenítése"
+#: ../src/gtr-preferences-dialog.ui.h:13
+msgid "Editor _font:"
+msgstr "Szerkesztő be_tűtípusa:"
 
-#: ../src/prefs.c:695
-msgid "Highlight syntax of the translation message"
-msgstr "Fordítandó üzenet szintaxisának kiemelése"
-
-#: ../src/prefs.c:700
-msgid "Use special character to indicate white space"
-msgstr "Különleges karakter használata az üres hely jelölésére"
-
-#: ../src/prefs.c:705
-msgid "Hotkey indicating character:"
-msgstr "Forróbillentyűt jelző karakter:"
-
-#: ../src/prefs.c:714
-msgid "Apply own fonts"
-msgstr "Saját betűkészletek alkalmazása"
-
-#: ../src/prefs.c:718
-msgid "gtranslator -- font selection/msgid font"
-msgstr "gtranslator -- betűkészlet-kiválasztó/msgid betűkészlete"
-
-#: ../src/prefs.c:722
-msgid "Original text font:"
-msgstr "Eredeti szöveg betűkészlete:"
-
-#: ../src/prefs.c:723
-msgid "gtranslator -- font selection/msgstr font"
-msgstr "gtranslator -- betűkészlet-kiválasztó/msgstr betűkészlete"
-
-#: ../src/prefs.c:727
-msgid "Translation font:"
-msgstr "Fordítás betűkészlete:"
-
-#. Contents item
-#: ../src/prefs.c:730
+#: ../src/gtr-preferences-dialog.ui.h:14
 msgid "Contents"
 msgstr "Tartalom"
 
-#: ../src/prefs.c:743
-msgid "Remove fuzzy status if message is changed"
-msgstr "Ellenőrzendő állapot megszüntetése, ha az üzenet változott"
+#: ../src/gtr-preferences-dialog.ui.h:15
+msgid "_Remove fuzzy status if message is changed"
+msgstr "Ellenő_rzendő állapot eltávolítása, ha az üzenet módosult"
 
-#: ../src/prefs.c:747
-msgid "Keep obsolete messages in the po files"
-msgstr "Az elavult üzenetek megtartása a po fájlban"
+#: ../src/gtr-preferences-dialog.ui.h:16
+msgid "Check _spelling"
+msgstr "Helyesírás-ellenőrzé_s"
 
-#: ../src/prefs.c:752
-msgid "Instant spell checking"
-msgstr "Helyesírás-ellenőrzés beíráskor"
+#: ../src/gtr-preferences-dialog.ui.h:17
+msgid "Editor"
+msgstr "Szerkesztő"
 
-#: ../src/prefs.c:763 ../src/prefs.c:778
-msgid "PO header"
-msgstr "PO-fejléc"
+#: ../src/gtr-preferences-dialog.ui.h:18
+msgid "Edit Profile"
+msgstr "Profil szerkesztése"
 
-#: ../src/prefs.c:772
-msgid "Personal Information"
-msgstr "Személyes adatok"
+#: ../src/gtr-preferences-dialog.ui.h:19
+msgid "Profiles"
+msgstr "Profilok"
 
-#: ../src/prefs.c:789
-msgid "Use self contact info from Evolution Data Server"
-msgstr ""
+#: ../src/gtr-preferences-dialog.ui.h:20
+msgid "Plugins"
+msgstr "Bővítmények"
 
-#: ../src/prefs.c:799
-msgid "<i>Unable to get email from Evolution Data Server.</i>"
-msgstr ""
+#: ../src/gtr-profile-dialog.c:82
+msgid "Gtranslator Profile"
+msgstr "Gtranslator profil"
 
-#: ../src/prefs.c:804
-msgid "My name:"
-msgstr ""
+#: ../src/gtr-profile-dialog.ui.h:1
+msgid "Profile Information"
+msgstr "Profiladatok"
 
-#: ../src/prefs.c:809
-msgid "My Email:"
-msgstr ""
+#: ../src/gtr-profile-dialog.ui.h:2
+msgid "_Name:"
+msgstr "_Név:"
 
-#: ../src/prefs.c:813
-msgid "<b>Author's info</b>"
-msgstr ""
+#: ../src/gtr-profile-dialog.ui.h:3
+msgid "Translator Information"
+msgstr "A fordító adatai"
 
-#: ../src/prefs.c:817
-msgid "<i>Unable to get personal info from Evolution Data Server.</i>"
-msgstr ""
+#: ../src/gtr-profile-dialog.ui.h:4
+msgid "_Email:"
+msgstr "_E-mail:"
 
-#: ../src/prefs.c:835
-msgid "Author's name:"
-msgstr "Fordító neve:"
+#: ../src/gtr-profile-dialog.ui.h:5
+msgid "N_ame:"
+msgstr "N_év:"
 
-#: ../src/prefs.c:841
-msgid "Author's email:"
-msgstr "Fordító e-mail címe:"
-
-#. Language item
-#: ../src/prefs.c:852
-msgid "Language settings"
+#: ../src/gtr-profile-dialog.ui.h:6
+msgid "Language Settings"
 msgstr "Nyelvi beállítások"
 
-#: ../src/prefs.c:879
-msgid "Language code:"
-msgstr "Nyelv kódja:"
+#: ../src/gtr-search-dialog.c:326 ../src/gtr-search-dialog.ui.h:1
+msgid "Replace"
+msgstr "Csere"
 
-#: ../src/prefs.c:905
-#, fuzzy
-msgid "Plural forms string:"
-msgstr "Személyes adatok"
+#: ../src/gtr-search-dialog.c:348
+msgid "Find"
+msgstr "Keresés"
 
-#: ../src/prefs.c:920
-msgid "Functionality"
-msgstr "Használhatóság"
+#: ../src/gtr-search-dialog.c:436
+msgid "Replace _All"
+msgstr "Ö_sszes cseréje"
 
-#: ../src/prefs.c:935
-#, fuzzy
-msgid "The Possibility to update a po file from within gtranslator"
-msgstr "A po fájl frissítésének engedélyezése a gtranslator-on belül"
+#: ../src/gtr-search-dialog.c:440
+msgid "_Replace"
+msgstr "Cse_re"
 
-#: ../src/prefs.c:939
-#, fuzzy
-msgid "The Possibility to remove all translations from a po file"
-msgstr "A po fájlban található fordítások törlésének engedélyezése"
+#: ../src/gtr-search-dialog.ui.h:2
+msgid "Replace All"
+msgstr "Összes cseréje"
 
-#: ../src/prefs.c:943
-msgid "Show instant comment view in main pane"
-msgstr "Azonnali megjegyzés nézet megjelenítése a főmezőben"
+#: ../src/gtr-search-dialog.ui.h:3
+msgid "_Search for: "
+msgstr "Keresé_s: "
 
-#: ../src/prefs.c:947
-msgid "Save geometry on exit and restore it on startup"
-msgstr "Geometria mentése kilépéskor és visszaállítása induláskor"
+#: ../src/gtr-search-dialog.ui.h:4
+msgid "Replace _with: "
+msgstr "Csere e_zzel: "
 
-#. Messages table item
-#: ../src/prefs.c:953
-msgid "Messages table"
-msgstr "Üzenetek táblázata"
+#: ../src/gtr-search-dialog.ui.h:5
+msgid "_Original text"
+msgstr "Ere_deti szöveg"
 
-#: ../src/prefs.c:961
-msgid "Show the messages table (requires restart)"
+#: ../src/gtr-search-dialog.ui.h:6
+msgid "_Translated text"
+msgstr "Lefordí_tott szöveg"
+
+#: ../src/gtr-search-dialog.ui.h:7
+msgid "Include fu_zzy strings"
+msgstr "Ellenőr_zendő szövegek belefoglalása"
+
+#: ../src/gtr-search-dialog.ui.h:8
+msgid "_Match case"
+msgstr "_Nagybetűérzékeny"
+
+#: ../src/gtr-search-dialog.ui.h:9
+msgid "Match _entire word only"
+msgstr "Csak t_eljes szavak"
+
+#: ../src/gtr-search-dialog.ui.h:10
+msgid "Search _backwards"
+msgstr "Keresés _visszafelé"
+
+#: ../src/gtr-search-dialog.ui.h:11
+msgid "_Wrap around"
+msgstr "K_eresés elölről"
+
+#: ../src/gtr-statusbar.c:119 ../src/gtr-statusbar.c:248
+msgid "INS"
+msgstr "BESZ"
+
+#: ../src/gtr-statusbar.c:120 ../src/gtr-statusbar.c:244
+msgid "OVR"
+msgstr "ÁTÍR"
+
+#: ../src/gtr-tab.c:315
+msgid "There is an error in the message:"
+msgstr "Egy hiba van az üzenetben:"
+
+#: ../src/gtr-tab.c:626
+#, c-format
+msgid "Plural %d"
+msgstr "%d. többes szám"
+
+#: ../src/gtr-tab.c:752
+msgid "Message Table"
+msgstr "Üzenettáblázat"
+
+#: ../src/gtr-tab.c:762
+msgid "<b>Original Message:</b>"
+msgstr "<b>Eredeti üzenet:</b>"
+
+#: ../src/gtr-tab.c:815
+msgid "<b>Translate_d Text:</b>"
+msgstr "<b>Lefor_dított szöveg:</b>"
+
+#: ../src/gtr-tab.c:831
+msgid "Translation Fields"
+msgstr "Fordítási mezők"
+
+#: ../src/gtr-tab.c:841
+msgid "Message Details"
+msgstr "Üzenet részletei"
+
+#. Translators: Path to the document opened
+#: ../src/gtr-tab.c:1322
+msgid "Path:"
+msgstr "Elérési út:"
+
+#: ../src/gtr-tab-label.c:278
+msgid "Close document"
+msgstr "Dokumentum bezárása"
+
+#: ../src/gtr-utils.c:517
+msgid ""
+"Unable to display help. Please make sure the Gtranslator documentation "
+"package is installed."
 msgstr ""
-"Az üzenetek táblázatának mutatása (a gtranslator újraindítása szükséges)"
+"Nem lehet megjeleníteni a súgót. Ellenőrizze, hogy a Gtranslator "
+"dokumentációja "
+"telepítve van-e."
 
-#: ../src/prefs.c:965
-msgid "Collapse all entries by default"
-msgstr "Minden bejegyzés összecsukása alapértelmezés szerint"
+#: ../src/gtr-view.c:84
+#, c-format
+msgid "gtkspell error: %s\n"
+msgstr "gtkspell hiba: %s\n"
 
-#: ../src/prefs.c:976
-msgid "Autotranslation"
-msgstr "Automatikus fordítás"
-
-#: ../src/prefs.c:988
-#, fuzzy
-msgid "Query the personal learn buffer while autotranslating"
-msgstr "A saját fordítási memória lekérdezése az automatikus fordítás közben"
-
-#: ../src/prefs.c:992
-msgid "Automatically learn a newly translated message"
-msgstr "Újonnan fordított üzenetek automatikus megtanulása"
-
-#. Fuzzy item
-#: ../src/prefs.c:998
-msgid "Fuzzy matching"
-msgstr "Fuzzy illesztés"
-
-#: ../src/prefs.c:1012
-msgid "Use \"fuzzy\" matching routines for learn buffer queries"
+#: ../src/gtr-view.c:86
+#, c-format
+msgid ""
+"GtkSpell was unable to initialize.\n"
+" %s"
 msgstr ""
-"\"Fuzzy\" illesztési rutinok használata a fordítási memória lekérdezéseihez"
+"A GtkSpell nem tudott inicializálni.\n"
+" %s"
 
-#: ../src/prefs.c:1019
-msgid "Minimal required similarity persentage for fuzzy queries:"
-msgstr "Fuzzy lekérdezések minimálisan szükséges hasonlósága:"
+#: ../src/gtr-window.c:116
+msgid "_File"
+msgstr "_Fájl"
 
-#: ../src/prefs.c:1076
-msgid "Please enter your name!"
-msgstr "Adja meg a nevét!"
+#: ../src/gtr-window.c:117
+msgid "_Edit"
+msgstr "Sz_erkesztés"
 
-#: ../src/prefs.c:1105
-msgid "Please enter your EMail address!"
-msgstr "Adja meg az e-mail címét!"
+#: ../src/gtr-window.c:118
+msgid "_View"
+msgstr "_Nézet"
 
-#: ../src/prefs.c:1125
-msgid "Please enter a valid EMail address!"
-msgstr "Létező e-mail címet kell megadnia!"
+#: ../src/gtr-window.c:119
+msgid "_Search"
+msgstr "Kere_sés"
 
-#: ../src/replace.c:162
-msgid "No replacements made!"
-msgstr "Nem történt csere!"
+#: ../src/gtr-window.c:120
+msgid "_Go"
+msgstr "U_grás"
 
-#.
-#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
-#. *
-#. * Translators: you should translate this foo'sh string into something
-#. *  another than a 'Y' to avoid the usage of the mid dot (U+00B7) in the
-#. *   text displaying routines of gtranslator.
-#.
-#: ../src/runtime-config.c:72
-msgid "Y"
-msgstr "I"
+#: ../src/gtr-window.c:121
+msgid "_Tools"
+msgstr "Esz_közök"
 
-#.
-#. * Translators: this character is used if the middle dot
-#. *  can't be used under your locale.
-#.
-#: ../src/runtime-config.c:88 ../src/runtime-config.c:93
-msgid "^"
-msgstr "^"
+#: ../src/gtr-window.c:122
+msgid "_Documents"
+msgstr "_Dokumentumok"
 
-#: ../src/save.c:116
+#: ../src/gtr-window.c:126
+msgid "Open a PO file"
+msgstr "PO fájl megnyitása"
+
+#: ../src/gtr-window.c:128
+msgid "_Recent Files"
+msgstr "_Legutóbbi fájlok"
+
+#. Edit menu
+#: ../src/gtr-window.c:132
+msgid "T_oolbar"
+msgstr "Eszköz_tár"
+
+#: ../src/gtr-window.c:134 ../src/gtr-window.c:174
+msgid "_Header..."
+msgstr "_Fejléc…"
+
+#: ../src/gtr-window.c:143
+msgid "Save the current file"
+msgstr "Jelenlegi fájl mentése"
+
+#: ../src/gtr-window.c:146
+msgid "Save the current file with another name"
+msgstr "Jelenlegi fájl mentése más néven"
+
+#: ../src/gtr-window.c:152
+msgid "Close the current file"
+msgstr "Jelenlegi fájl bezárása"
+
+#: ../src/gtr-window.c:157
+msgid "Undo last operation"
+msgstr "Utolsó művelet visszavonása"
+
+#: ../src/gtr-window.c:160
+msgid "Redo last undone operation"
+msgstr "Utolsó visszavont művelet újra végrehajtása"
+
+#: ../src/gtr-window.c:163
+msgid "Cut the selected text"
+msgstr "A kijelölt szöveg kivágása"
+
+#: ../src/gtr-window.c:166
+msgid "Copy the selected text"
+msgstr "A kijelölt szöveg másolása"
+
+#: ../src/gtr-window.c:169
+msgid "Paste the contents of the clipboard"
+msgstr "A vágólap tartalmának beillesztése"
+
+#: ../src/gtr-window.c:172
+msgid "Clear the selected translation"
+msgstr "A kijelölt fordítás törlése"
+
+#: ../src/gtr-window.c:176
+msgid "Copy _Message to Translation"
+msgstr "Üzenet _másolása a fordításba"
+
+#: ../src/gtr-window.c:178
+msgid "Copy original message contents to the translation field"
+msgstr "Eredeti üzenet tartalmának másolása a fordítás mezőbe"
+
+#: ../src/gtr-window.c:180
+msgid "Toggle _Fuzzy Status"
+msgstr "Ellenőr_zendő állapot átváltása"
+
+#: ../src/gtr-window.c:181
+msgid "Toggle fuzzy status of a message"
+msgstr "Egy üzenet ellenőrzendő állapotának átváltása"
+
+#. View menu
+#: ../src/gtr-window.c:188
+msgid "_Message Details"
+msgstr "Üze_net részletei"
+
+#: ../src/gtr-window.c:189
+msgid "Show the Context panel"
+msgstr "Kontextus panel megjelenítése"
+
+#. Go menu
+#: ../src/gtr-window.c:193
+msgid "_Previous Message"
+msgstr "_Előző üzenet"
+
+#: ../src/gtr-window.c:194
+msgid "Move back one message"
+msgstr "Visszalépés egy üzenettel"
+
+#: ../src/gtr-window.c:196
+msgid "_Next Message"
+msgstr "_Következő üzenet"
+
+#: ../src/gtr-window.c:197
+msgid "Move forward one message"
+msgstr "Előrelépés egy üzenettel"
+
+#: ../src/gtr-window.c:199
+msgid "_Go to Message..."
+msgstr "U_grás üzenetre…"
+
+#: ../src/gtr-window.c:200
+msgid "Jumps to a specific message"
+msgstr "Ugrás egy megadott üzenetre"
+
+#: ../src/gtr-window.c:202
+msgid "_First Message"
+msgstr "E_lső üzenet"
+
+#: ../src/gtr-window.c:203
+msgid "Go to the first message"
+msgstr "Ugrás az első üzenetre"
+
+#: ../src/gtr-window.c:205
+msgid "_Last Message"
+msgstr "_Utolsó üzenet"
+
+#: ../src/gtr-window.c:206
+msgid "Go to the last message"
+msgstr "Ugrás az utolsó üzenetre"
+
+#: ../src/gtr-window.c:208
+msgid "Next Fuz_zy"
+msgstr "Következő ellenőr_zendő"
+
+#: ../src/gtr-window.c:209
+msgid "Go to the next fuzzy message"
+msgstr "Ugrás a következő ellenőrzendő üzenetre"
+
+#: ../src/gtr-window.c:211
+msgid "Previous Fuzz_y"
+msgstr "Előző ellenőrz_endő"
+
+#: ../src/gtr-window.c:212
+msgid "Go to the previous fuzzy message"
+msgstr "Ugrás az előző ellenőrzendő üzenetre"
+
+#: ../src/gtr-window.c:214
+msgid "Next _Untranslated"
+msgstr "Következő le_fordítatlan"
+
+#: ../src/gtr-window.c:215
+msgid "Go to the next untranslated message"
+msgstr "Ugrás a következő lefordítatlan üzenetre"
+
+#: ../src/gtr-window.c:218
+msgid "Previ_ous Untranslated"
+msgstr "Előző lef_ordítatlan"
+
+#: ../src/gtr-window.c:219
+msgid "Go to the previous untranslated message"
+msgstr "Ugrás az előző lefordítatlan üzenetre"
+
+#: ../src/gtr-window.c:222
+msgid "Next Fu_zzy or Untranslated"
+msgstr "Következő ellenőr_zendő vagy lefordítatlan"
+
+#: ../src/gtr-window.c:224
+msgid "Go to the next fuzzy or untranslated message"
+msgstr "Ugrás a következő ellenőrzendő vagy lefordítatlan üzenetre"
+
+#: ../src/gtr-window.c:227
+msgid "Pre_vious Fuzzy or Untranslated"
+msgstr "Előző ellenőrzendő _vagy lefordítatlan"
+
+#: ../src/gtr-window.c:229
+msgid "Go to the previous fuzzy or untranslated message"
+msgstr "Ugrás az előző ellenőrzendő vagy lefordítatlan üzenetre"
+
+#: ../src/gtr-window.c:234
+msgid "Search for text"
+msgstr "Szöveg keresése"
+
+#: ../src/gtr-window.c:237
+msgid "Search for and replace text"
+msgstr "Szöveg keresése és cseréje"
+
+#. Documents menu
+#: ../src/gtr-window.c:241
+msgid "_Save All"
+msgstr "Összes menté_se"
+
+#: ../src/gtr-window.c:242
+msgid "Save all open files"
+msgstr "Összes megnyitott fájl mentése"
+
+#: ../src/gtr-window.c:244
+msgid "_Close All"
+msgstr "Összes _bezárása"
+
+#: ../src/gtr-window.c:245
+msgid "Close all open files"
+msgstr "Összes megnyitott fájl bezárása"
+
+#: ../src/gtr-window.c:247
+msgid "_Previous Document"
+msgstr "_Előző dokumentum"
+
+#: ../src/gtr-window.c:249
+msgid "Activate previous document"
+msgstr "Előző dokumentum aktiválása"
+
+#: ../src/gtr-window.c:251
+msgid "_Next Document"
+msgstr "_Következő dokumentum"
+
+#: ../src/gtr-window.c:253
+msgid "Activate next document"
+msgstr "Következő dokumentum aktiválása"
+
+#: ../src/gtr-window.c:441
+msgid "Untranslated"
+msgstr "Lefordítatlan"
+
+#: ../src/gtr-window.c:444
+msgid "Translated"
+msgstr "Lefordított"
+
+#: ../src/gtr-window.c:447
+msgid "Fuzzy"
+msgstr "Ellenőrzendő"
+
+#: ../src/gtr-window.c:454
 #, c-format
-msgid "Couldn't save compiled gettext file `%s'!"
-msgstr "Nem sikerült menteni a lefordított gettext fájlt: \"%s\"!"
+msgid "Current: %d"
+msgstr "Jelenlegi: %d"
 
-#: ../src/save.c:159
+#: ../src/gtr-window.c:455
 #, c-format
-msgid "Couldn't save compressed gettext file `%s'!"
-msgstr "Nem sikerült menteni a tömörített gettext fájlt: \"%s\"!"
+msgid "Total: %d"
+msgstr "Összesen: %d"
 
-#.
-#. * The %s format here stands for the used
-#. *  compressions program (gzip, bzip2 etc.)
-#.
-#: ../src/save.c:169
+#: ../src/gtr-window.c:456
 #, c-format
-msgid "Couldn't save %s'd gettext file `%s'!"
+msgid "%d translated"
+msgid_plural "%d translated"
+msgstr[0] "%d lefordított"
+msgstr[1] "%d lefordított"
+
+#: ../src/gtr-window.c:459
+#, c-format
+msgid "%d fuzzy"
+msgid_plural "%d fuzzy"
+msgstr[0] "%d ellenőrzendő"
+msgstr[1] "%d ellenőrzendő"
+
+#: ../src/gtr-window.c:461
+#, c-format
+msgid "%d untranslated"
+msgid_plural "%d untranslated"
+msgstr[0] "%d lefordítatlan"
+msgstr[1] "%d lefordítatlan"
+
+#. Translators: %s is a URI
+#: ../src/gtr-window.c:515
+#, c-format
+msgid "Activate '%s'"
+msgstr "„%s” aktiválása"
+
+#. Translators: this is the title of the window with a modified document
+#: ../src/gtr-window.c:688
+#, c-format
+msgid "*%s - gtranslator"
+msgstr "*%s - gtranslator"
+
+#. Translators: this is the title of the window with a document opened
+#: ../src/gtr-window.c:691
+#, c-format
+msgid "%s - gtranslator"
+msgstr "%s - gtranslator"
+
+#: ../src/gtr-window.c:697
+msgid "gtranslator"
+msgstr "gtranslator"
+
+#: ../src/gtr-window.c:1078
+msgid "Toolbar Editor"
+msgstr "Eszköztárszerkesztő"
+
+#: ../src/gtr-window.c:1204
+msgid "No profile"
+msgstr "Nincs profil"
+
+#: ../src/gtr-window.c:1233
+msgid "Profile for the active document"
+msgstr "Profil az aktív dokumentumhoz"
+
+#: ../src/main.c:101
+msgid "- Edit PO files"
+msgstr "- PO fájlok szerkesztése"
+
+#: ../src/main.c:105
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
-"Nem sikerült menteni ezt a %s programmal tömörített gettext fájlt: \"%s\"!"
+"%s\n"
+"Futtassa a(z) „%s --help” parancsot az elérhető parancssori kapcsolók teljes "
+"listájának megtekintéséhez.\n"
 
-#: ../src/save.c:227
+#. Translaters: This string is for a toggle to display a toolbar.
+#. * The name of the toolbar is automatically computed from the widgets
+#. * on the toolbar, and is placed at the %s. Note the _ before the %s
+#. * which is used to add mnemonics. We know that this is likely to
+#. * produce duplicates, but don't worry about it. If your language
+#. * normally has a mnemonic at the start, please use the _. If not,
+#. * please remove.
+#: ../src/toolbareditor/egg-editable-toolbar.c:992
 #, c-format
-msgid "Couldn't save zip'ed po file `%s'!"
-msgstr "Nem sikerült menteni ezt a zippelt po fájlt: \"%s\"!"
+msgid "Show “_%s”"
+msgstr "„_%s” megjelenítése"
 
-#: ../src/session.c:85
-msgid "Session restored successfully."
-msgstr "A munkafolyamat visszaállítása sikerült."
+#: ../src/toolbareditor/egg-editable-toolbar.c:1485
+msgid "_Move on Toolbar"
+msgstr "_Mozgatás az eszköztáron"
 
-#: ../src/sighandling.c:65
-#, c-format
-msgid "Saving file failed: %s"
-msgstr "Fájl mentése sikertelen: %s"
+#: ../src/toolbareditor/egg-editable-toolbar.c:1486
+msgid "Move the selected item on the toolbar"
+msgstr "A kijelölt elem mozgatása az eszköztáron"
 
-#: ../src/stylistics.c:265
-msgid "No font set! Using default font"
-msgstr "Nincs betűkészlet beállítva, használom az alapértelmezettet"
+#: ../src/toolbareditor/egg-editable-toolbar.c:1487
+msgid "_Remove from Toolbar"
+msgstr "Eltávolítás az eszköztá_rból"
 
-#.
-#. * Use gtranslator's font in this case -- should be a fallback font
-#. *  for your language.
-#.
-#: ../src/stylistics.c:271
-msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
-msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-2"
+#: ../src/toolbareditor/egg-editable-toolbar.c:1488
+msgid "Remove the selected item from the toolbar"
+msgstr "A kijelölt elem eltávolítása az eszköztárból"
 
-#: ../src/utils.c:274 ../src/utils.c:291
-#, c-format
-msgid "Can't create directory `%s'!"
-msgstr "Nem sikerült létrehozni a következő könyvtárat: %s!"
+#: ../src/toolbareditor/egg-editable-toolbar.c:1489
+msgid "_Delete Toolbar"
+msgstr "Eszköztár _eltávolítása"
 
-#: ../src/utils.c:874
-#, fuzzy
-msgid "Sorry, msginit isn't available on your system!"
-msgstr "Sajnálom, de nincs msgfmt a rendszerén!"
+#: ../src/toolbareditor/egg-editable-toolbar.c:1490
+msgid "Remove the selected toolbar"
+msgstr "A kijelölt eszköztár eltávolítása"
 
-#: ../src/utils_gui.c:141
-#, c-format
-msgid "The geometry string \"%s\" couldn't be parsed!"
-msgstr "A \"%s\" geometria karakterláncot nem sikerült értelmezni!"
+#: ../src/toolbareditor/egg-toolbar-editor.c:489
+msgid "Separator"
+msgstr "Elválasztó"
 
-#: ../src/utils_gui.c:355
-#, c-format
-msgid "The necessary decompression program `%s' is not installed!"
-msgstr "Nincs telepítve a szükséges kitömörítő program: \"%s\"!"
 
-#: ../src/utils_gui.c:360
-#, c-format
-msgid "The necessary compression program `%s' is not installed!"
-msgstr "Nincs telepítve a szükséges tömörítőprogram: \"%s\"!"
-
-#: ../src/vfs-handle.c:121
-#, c-format
-msgid "Couldn't create temporary directory `%s'!"
-msgstr "Nem sikerült létrehozni a következő átmeneti könyvtárat: %s!"
-
-#: ../src/vfs-handle.c:149
-#, c-format
-msgid "File `%s' couldn't be found!"
-msgstr "A következő fájl nem található: %s"
-
-#: ../src/vfs-handle.c:154
-#, c-format
-msgid "Malformed URI `%s' entered!"
-msgstr "A következő URI szintaktikailag helytelen: %s"
-
-#: ../src/vfs-handle.c:159
-#, c-format
-msgid "Host `%s' couldn't be found!"
-msgstr "A következő gép nem található: \"%s\""
-
-#: ../src/vfs-handle.c:164
-#, c-format
-msgid "Hostname `%s' is not valid!"
-msgstr "A következő gépnév érvénytelen: \"%s\""
-
-#: ../src/vfs-handle.c:169
-#, c-format
-msgid "Host `%s' has no address!"
-msgstr "A következő gépnek nincs címe: \"%s\""
-
-#: ../src/vfs-handle.c:174
-msgid "Transfer interrupted!"
-msgstr "Átvitel megszakítva!"
-
-#~ msgid "Spell checking"
-#~ msgstr "Helyesírás-ellenőrzés"
-
-#~ msgid "Use special dictionary:"
-#~ msgstr "Saját szótár használata:"
-
-#~ msgid "Display special dialog for messages with plural forms"
-#~ msgstr "Többesszámú üzenetekhez külön párbeszédablak megnyitása"
