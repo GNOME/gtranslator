@@ -4,10 +4,8 @@
       id="gtr-shortcut-keys">
 
   <info>
-    <link type="guide" xref="index"/>
-    <link type="seealso" xref="gtr-quickstart"/>
-    <link type="seealso" xref="gtr-main-window"/>
-    <revision pkgversion="0.1" version="0.1" date="2012-08-08" status="review"/>
+    <link type="guide" xref="index#gtr-advanced"/>
+    <revision pkgversion="0.1" version="0.1" date="2012-08-12" status="review"/>
     <credit type="author">
       <name>Radina Matic</name>
      <email>radina.matic@gmail.com</email>
@@ -29,25 +27,19 @@
       </thead>
       <tbody>
         <tr>
-          <td><p>Open PO file</p></td>  <td><p>Ctrl + O</p></td>
+          <td><p>Open PO file</p></td>  <td><p><keyseq><key>Ctrl</key><key>O</key></keyseq></p></td>
         </tr>
         <tr>
-          <td><p>Save PO file</p></td>  <td><p>Ctrl + S</p></td>
+          <td><p>Save PO file</p></td>  <td><p><keyseq><key>Ctrl</key><key>S</key></keyseq></p></td>
         </tr>
 	<tr>
-          <td><p>Save PO file As...</p></td>  <td><p>Ctrl + Shift + S</p></td>
+          <td><p>Save PO file As...</p></td>  <td><p><keyseq><key>Ctrl</key><key>Shift</key><key>S</key></keyseq></p></td>
         </tr>
 	<tr>
-          <td><p>Close PO file</p></td>  <td><p>Ctrl + W</p></td>
+          <td><p>Close PO file</p></td>  <td><p><keyseq><key>Ctrl</key><key>W</key></keyseq></p></td>
         </tr>
-        <tr>
-          <td><p>Quit</p></td>  <td><p>Ctrl + Q</p></td>
-        </tr>
-        <tr>
-          <td><p>Toggle Sidebar</p></td> <td><p>F9</p></td>
-        </tr>
-        <tr>
-          <td><p>Toggle Closed Tasks Pane</p></td>  <td><p>Ctrl + F9</p></td>
+         <tr>
+          <td><p>Quit</p></td>  <td><p><keyseq><key>Ctrl</key><key>Q</key></keyseq></p></td>
         </tr>
       </tbody>
     </table>
@@ -61,22 +53,50 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><p>Paste original string to translated string</p></td> <td><p>Ctrl + Space</p></td>
+       <tr>
+          <td><p>View Message Details</p></td>  <td><p><keyseq><key>Ctrl</key><key>J</key></keyseq></p></td>
         </tr>
         <tr>
-          <td><p>Toggle Fuzzy Status</p></td>  <td><p>Ctrl + U</p></td>
+          <td><p>Paste original string to translated string</p></td> <td><p><keyseq><key>Ctrl</key><key>Space</key></keyseq></p></td>
         </tr>
         <tr>
-          <td><p>Move one string down</p></td>  <td><p>Down arrow</p></td>
+          <td><p>Toggle Fuzzy Status</p></td>  <td><p><keyseq><key>Ctrl</key><key>U</key></keyseq></p></td>
         </tr>
         <tr>
-          <td><p>Move one string up</p></td>  <td><p>Up arrow</p></td>
+          <td><p>Move one string down</p></td>  <td><p><key>&#8595;</key> or <keyseq><key>Alt</key><key>&#8592;</key></keyseq> </p></td>
+        </tr>
+        <tr>
+          <td><p>Move one string up</p></td>  <td><p><key>&#8593;</key> or <keyseq><key>Alt</key><key>&#8594;</key></keyseq></p></td>
+        </tr>
+         <tr>
+          <td><p>Go to string</p></td>  <td><p><keyseq><key>Ctrl</key><key>G</key></keyseq></p></td>
+        </tr>
+         <tr>
+          <td><p>First string</p></td>  <td><p><keyseq><key>Alt</key><key>Home</key></keyseq></p></td>
+        </tr>
+         <tr>
+          <td><p>Last string</p></td>  <td><p><keyseq><key>Alt</key><key>End</key></keyseq></p></td>
+        </tr>
+         <tr>
+          <td><p>Next Fuzzy</p></td>  <td><p><keyseq><key>Ctrl</key><key>Alt</key><key>Page down</key></keyseq></p></td>
+        </tr>
+         <tr>
+          <td><p>Previous Fuzzy</p></td>  <td><p><keyseq><key>Ctrl</key><key>Alt</key><key>Page up</key></keyseq></p></td>
+          </tr>
+          <tr>
+          <td><p>Next Untranslated</p></td>  <td><p><keyseq><key>Alt</key><key>Page down</key></keyseq></p></td>
+        </tr>
+         <tr>
+          <td><p>Previous Untranslated</p></td>  <td><p><keyseq><key>Alt</key><key>Page up</key></keyseq></p></td>
+        </tr>
+         <tr>
+          <td><p>Next Fuzzy or Untranslated</p></td>  <td><p><keyseq><key>Shift</key><key>Ctrl</key><key>&#8595;</key></keyseq></p></td>
+        </tr>
+         <tr>
+          <td><p>Previous Fuzzy or Untranslated</p></td>  <td><p><keyseq><key>Shift</key><key>Ctrl</key><key>&#8593;</key></keyseq></p></td>
         </tr>
       </tbody>
     </table>
-
-<p>       </p><p>       </p>
 
     <table rules="rows" frame="top bottom"  ui:expanded="yes">
     <title>TM related shortcuts</title>
@@ -87,13 +107,13 @@
       </thead>
       <tbody>
         <tr>
-          <td><p>Paste the first suggestion from the Translation Memory</p></td>  <td><p>Ctrl + 0</p></td>
+          <td><p>Paste the first suggestion from the Translation Memory</p></td>  <td><p><keyseq><key>Ctrl</key><key>1</key></keyseq></p></td>
         </tr>
         <tr>
-          <td><p>Paste the second suggestion from the Translation Memory</p></td>  <td><p>Ctrl + 1</p></td>
+          <td><p>Paste the second suggestion from the Translation Memory</p></td>  <td><p><keyseq><key>Ctrl</key><key>2</key></keyseq></p></td>
         </tr>
         <tr>
-          <td><p>Paste the third suggestion from the Translation Memory</p></td>  <td><p>Ctrl + 2</p></td>
+          <td><p>Paste the third suggestion from the Translation Memory</p></td>  <td><p><keyseq><key>Ctrl</key><key>3</key></keyseq></p></td>
         </tr>
       </tbody>
     </table>

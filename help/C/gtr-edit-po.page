@@ -3,12 +3,13 @@
       id="gtr-edit-po">
 
   <info>
-    <link type="guide" xref="index#gtr-po"/>
+    <link type="guide" xref="index#gtr-po" group="third"/>
     <link type="seealso" xref="gtr-open-po"/>
     <link type="seealso" xref="gtr-save-po"/>
     <link type="seealso" xref="gtr-add-comment-po"/>
+    <link type="seealso" xref="gtr-goto-string-po"/>
        
-    <revision pkgversion="0.1" version="0.1" date="2012-08-10" status="review"/>
+    <revision pkgversion="0.1" version="0.1" date="2012-08-12" status="review"/>
     <credit type="author">
       <name>Radina Matic</name>
      <email>radina.matic@gmail.com</email>
@@ -17,21 +18,15 @@
 
   <title>Edit PO file</title>
 
-  <p>To add or edit the translation of a specific string you first need to select it from the list in the upper part of the workspace (<gui>Message Table</gui>). There are several ways you can move among the strings in the PO file:</p>
-
-<list type="numbered">
-      <item><p>Click directly on the desired string in the message table.</p></item>
-      <item><p>Use up and down arrows on your keyboard.</p></item> 
-      <item><p>To jump between Fuzzy, Untranslated (or both Fuzzy and Untranslated strings), you can use the toolbar buttons, menu options <guiseq><gui>Go</gui><gui>Next...</gui></guiseq> or <guiseq><gui>Go</gui><gui>Previous...</gui></guiseq>, or their corresponding shortcuts.</p></item>
-</list>
-
+  <p>When you select the string in the <gui>Message Table</gui>, in the bottom part of the <app>Gtranslator</app> window you can see the two fields which display the full content of the string. The field <gui>Original Text</gui> is not editable but allows you to see the the entire content of the string in the source language, and the field <gui>Translated Text</gui> is where you type or edit the translation in the target language.</p>
+  
 <figure>
-  <title>Gtranslator Go to menu options</title>
+  <title>Gtranslator source and target language fields</title>
   <desc> </desc>
- <media type="image" mime="image/png" src="figures/gtrans_go_to_string_menu.png"/>
+ <media type="image" mime="image/png" src="figures/edit-text.png"/>
 </figure>
 
-<p>Once you have edited the text in the target language field (<gui>Translated Text</gui>), select the next string and continue with the translation.</p>
+<p>Once you edit the text in the target language field (<gui>Translated Text</gui>), select the next string to continue with the translation.</p>
  
 </page>
 
