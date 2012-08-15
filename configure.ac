@@ -50,7 +50,7 @@ AC_DEFINE([GETTEXT_PACKAGE], [PACKAGE_TARNAME], [Define to the gettext package n
 dnl -------------------------------------------------------------------
 dnl Documentation
 dnl -------------------------------------------------------------------
-GNOME_DOC_INIT
+YELP_HELP_INIT
 GTK_DOC_CHECK([1.0])
 
 dnl -------------------------------------------------------------------

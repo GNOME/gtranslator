@@ -7,11 +7,7 @@ EXTRA_DIST= \
 		HACKING \
 		ChangeLog-20090817 \
 		omf.make \
-		xmldocs.make \
-		gnome-doc-utils.make
-
-DISTCLEANFILES = 		\
-	gnome-doc-utils.make    
+		xmldocs.make
 
 MAINTAINERCLEANFILES = 		\
 	aclocal.m4		\

@@ -523,7 +523,7 @@ gtr_utils_help_display (GtkWindow * parent,
       return;
     }
 
-  command = g_strconcat ("gnome-help ghelp://", uri, NULL);
+  command = g_strconcat ("gnome-help help://", uri, NULL);
   g_free (uri);
 
   g_spawn_command_line_async (command, &error);
