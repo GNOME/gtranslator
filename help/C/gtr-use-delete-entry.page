@@ -7,16 +7,52 @@
     <link type="seealso" xref="gtr-create-tm"/>
     <link type="seealso" xref="gtr-shortcut-keys"/>
            
-    <revision pkgversion="0.1" version="0.1" date="2012-07-23" status="draft"/>
-    <credit type="author">
+   
+    <revision pkgversion="2.91.5" date="2012-08-14" status="review"/>
+    <credit type="author copyright">
       <name>Radina Matic</name>
      <email>radina.matic@gmail.com</email>
+     <years>2012</years>
     </credit>
   </info>
 
-  <title>Use or delete a specific translation</title>
+  <title>Use or delete translations from TM</title>
 
-  <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
+  <p>When <app>Gtranslator</app> finds string(s) in the TM that partially o completely match the one that you have selected in the <gui>Message Table</gui>, it will display them in the <gui>Translation Memory</gui> panel.</p>
+  
+<note style="warning">
+  <p>To be able to view the <gui>Translation Memory</gui> panel, you need to activate the <em style="strong">Translation Memory plugin</em>: click the <gui>Gtranslator</gui> app menu in the top bar, select <guiseq><gui>Preferences</gui><gui>Plugins</gui></guiseq> tab, and activate the corresponding check box.</p>
+</note> 
+
+<figure>
+  <title>Gtranslator TM panel</title>
+  <desc> </desc>
+ <media type="image" mime="image/png" src="figures/gtranslator_tm_strings.png"/>
+</figure>
+
+<terms>
+  <title>TM panel terms</title>
+  <item><p><em style="strong">Level</em> - indicates the percentage of the match (correspondence between the original/source string in the <gui>Message Table</gui> and those found in the TM.</p></item>
+  <item><p><em style="strong">String</em> - translated string in the target language as it appears in the TM.</p></item>
+  <item><p><em style="strong">Shortcut</em> - use it to insert the translated string that most closely match the selected string in the <gui>Message Table</gui>.</p></item>
+</terms>
+
+<p>If you are satisfied with the match that <app>Gtranslator</app> found in the TM database, <em style="strong">right-click it</em> and select <gui>Use this translation</gui> from the contextual menu.</p>	
+
+<figure>
+  <title>Gtranslator TM panel</title>
+  <desc> </desc>
+ <media type="image" mime="image/png" src="figures/use-tm-entry.png"/>
+</figure>
+
+<p>Once you have inserted the translation from the TM, you can further edit it in the <gui>Translated Text</gui> field to match your original string.</p>  
+
+<p>If there are no matches in the TM for the string in the selected <gui>Original Message</gui>, you have to translate it manually in the <gui>Translated Text</gui> field. The newly translated strings are stored in the TM database and can be used for future translations, as well as repetitions of the string in the current PO file.</p>
+
+
+<p>To delete a specific match from the <gui>Translation Memory</gui> panel, <em style="strong">right-click it</em> and select <gui>Remove</gui> from the contextual menu.</p>	
+
+
 
 </page>
 
