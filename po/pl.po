@@ -4,12 +4,17 @@
 # pomóc w jego rozwijaniu i pielęgnowaniu, napisz do nas:
 # gnomepl@aviary.pl
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# Grzegorz Kowal <g_kowal@poczta.onet.pl>, 2001.
+# Zbigniew Chyla <chyla@alice.ci.pwr.wroc.pl>, 2001-2003.
+# Artur Flinta <aflinta@at.kernel.pl>, 2003.
+# Piotr Drąg <piotrdrag@gmail.com>, 2011-2012.
+# Aviary.pl <gnomepl@aviary.pl>, 2011-2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-04 23:06+0200\n"
-"PO-Revision-Date: 2012-05-04 23:07+0200\n"
+"POT-Creation-Date: 2012-09-04 01:34+0200\n"
+"PO-Revision-Date: 2012-09-04 01:38+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>>\n"
 "Language: pl\n"
@@ -721,7 +726,7 @@ msgid "Build translation memory"
 msgstr "Buduje pamięć tłumaczeń"
 
 #: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
-#: ../src/gtr-window.c:186
+#: ../src/gtr-window.c:183
 msgid "_Translation Memory"
 msgstr "_Pamięć tłumaczeń"
 
@@ -812,7 +817,12 @@ msgstr "O programie gtranslator"
 #.
 #: ../src/gtr-actions-app.c:111
 msgid "translator-credits"
-msgstr "Aviary.pl <gnomepl@aviary.pl>, 2011, 2012"
+msgstr ""
+"Grzegorz Kowal <g_kowal@poczta.onet.pl>, 2001\n"
+"Zbigniew Chyla <chyla@alice.ci.pwr.wroc.pl>, 2001-2003\n"
+"Artur Flinta <aflinta@at.kernel.pl>, 2003\n"
+"Piotr Drąg <piotrdrag@gmail.com>, 2011-2012\n"
+"Aviary.pl <gnomepl@aviary.pl>, 2011-2012"
 
 #: ../src/gtr-actions-app.c:114
 msgid "Gtranslator Web Site"
@@ -910,7 +920,7 @@ msgid "<b>Translator email:</b>"
 msgstr "<a>Adres e-mail tłumacza:</b>"
 
 #: ../src/gtr-assistant.c:296 ../src/gtr-assistant.c:388
-#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:1234
+#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:1231
 msgid "Profile"
 msgstr "Profil"
 
@@ -1218,16 +1228,16 @@ msgid "Autosave"
 msgstr "Automatyczne zapisywanie"
 
 #: ../src/gtr-preferences-dialog.ui.h:5
+msgid "Create a _backup copy of files before saving"
+msgstr "Tworzenie _kopii zapasowej plików przed zapisaniem"
+
+#: ../src/gtr-preferences-dialog.ui.h:6
 msgid "_Autosave files every"
 msgstr "_Automatyczne zapisywanie plików co"
 
-#: ../src/gtr-preferences-dialog.ui.h:6
+#: ../src/gtr-preferences-dialog.ui.h:7
 msgid "_minutes"
 msgstr "_minut"
-
-#: ../src/gtr-preferences-dialog.ui.h:7
-msgid "Create a _backup copy of files before saving"
-msgstr "Tworzenie _kopii zapasowej plików przed zapisaniem"
 
 #: ../src/gtr-preferences-dialog.ui.h:8
 msgid "Files"
@@ -1403,7 +1413,7 @@ msgid "Message Details"
 msgstr "Szczegóły komunikatu"
 
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1321
+#: ../src/gtr-tab.c:1322
 msgid "Path:"
 msgstr "Ścieżka:"
 
@@ -1469,234 +1479,230 @@ msgstr "Otwiera plik PO"
 msgid "_Recent Files"
 msgstr "_Ostatnie pliki"
 
-#: ../src/gtr-window.c:131
-msgid "Quit the program"
-msgstr "Kończy działanie programu"
-
 #. Edit menu
-#: ../src/gtr-window.c:135
+#: ../src/gtr-window.c:132
 msgid "T_oolbar"
 msgstr "Pasek _narzędziowy"
 
-#: ../src/gtr-window.c:137 ../src/gtr-window.c:177
+#: ../src/gtr-window.c:134 ../src/gtr-window.c:174
 msgid "_Header..."
 msgstr "Nagłów_ek..."
 
-#: ../src/gtr-window.c:146
+#: ../src/gtr-window.c:143
 msgid "Save the current file"
 msgstr "Zapisuje bieżący plik"
 
-#: ../src/gtr-window.c:149
+#: ../src/gtr-window.c:146
 msgid "Save the current file with another name"
 msgstr "Zapisuje bieżący plik pod inną nazwą"
 
-#: ../src/gtr-window.c:155
+#: ../src/gtr-window.c:152
 msgid "Close the current file"
 msgstr "Zamyka bieżący plik"
 
-#: ../src/gtr-window.c:160
+#: ../src/gtr-window.c:157
 msgid "Undo last operation"
 msgstr "Cofa ostatnie działanie"
 
-#: ../src/gtr-window.c:163
+#: ../src/gtr-window.c:160
 msgid "Redo last undone operation"
 msgstr "Ponawia cofnięte działanie"
 
-#: ../src/gtr-window.c:166
+#: ../src/gtr-window.c:163
 msgid "Cut the selected text"
 msgstr "Wycina zaznaczony tekst"
 
-#: ../src/gtr-window.c:169
+#: ../src/gtr-window.c:166
 msgid "Copy the selected text"
 msgstr "Kopiuje zaznaczony tekst"
 
-#: ../src/gtr-window.c:172
+#: ../src/gtr-window.c:169
 msgid "Paste the contents of the clipboard"
 msgstr "Wkleja zawartość schowka"
 
-#: ../src/gtr-window.c:175
+#: ../src/gtr-window.c:172
 msgid "Clear the selected translation"
 msgstr "Czyści zaznaczone tłumaczenie"
 
-#: ../src/gtr-window.c:179
+#: ../src/gtr-window.c:176
 msgid "Copy _Message to Translation"
 msgstr "Skopiuj ko_munikat do tłumaczenia"
 
-#: ../src/gtr-window.c:181
+#: ../src/gtr-window.c:178
 msgid "Copy original message contents to the translation field"
 msgstr "Kopiuje treść pierwotnego komunikatu i wstawia ją do pola tłumaczenia"
 
-#: ../src/gtr-window.c:183
+#: ../src/gtr-window.c:180
 msgid "Toggle _Fuzzy Status"
 msgstr "Oznacz komunikat jako _niepewny"
 
-#: ../src/gtr-window.c:184
+#: ../src/gtr-window.c:181
 msgid "Toggle fuzzy status of a message"
 msgstr "Oznacza komunikat jako niepewny"
 
 #. View menu
-#: ../src/gtr-window.c:191
+#: ../src/gtr-window.c:188
 msgid "_Message Details"
 msgstr "_Szczegóły komunikatu"
 
-#: ../src/gtr-window.c:192
+#: ../src/gtr-window.c:189
 msgid "Show the Context panel"
 msgstr "Wyświetla panel kontekstu"
 
 #. Go menu
-#: ../src/gtr-window.c:196
+#: ../src/gtr-window.c:193
 msgid "_Previous Message"
 msgstr "_Poprzedni komunikat"
 
-#: ../src/gtr-window.c:197
+#: ../src/gtr-window.c:194
 msgid "Move back one message"
 msgstr "Przechodzi do poprzedniego komunikatu"
 
-#: ../src/gtr-window.c:199
+#: ../src/gtr-window.c:196
 msgid "_Next Message"
 msgstr "_Następny komunikat"
 
-#: ../src/gtr-window.c:200
+#: ../src/gtr-window.c:197
 msgid "Move forward one message"
 msgstr "Przechodzi do następnego komunikatu"
 
-#: ../src/gtr-window.c:202
+#: ../src/gtr-window.c:199
 msgid "_Go to Message..."
 msgstr "Przej_dź do komunikatu..."
 
-#: ../src/gtr-window.c:203
+#: ../src/gtr-window.c:200
 msgid "Jumps to a specific message"
 msgstr "Przechodzi do podanego komunikatu"
 
-#: ../src/gtr-window.c:205
+#: ../src/gtr-window.c:202
 msgid "_First Message"
 msgstr "_Pierwszy komunikat"
 
-#: ../src/gtr-window.c:206
+#: ../src/gtr-window.c:203
 msgid "Go to the first message"
 msgstr "Przechodzi do pierwszego komunikatu"
 
-#: ../src/gtr-window.c:208
+#: ../src/gtr-window.c:205
 msgid "_Last Message"
 msgstr "_Ostatni komunikat"
 
-#: ../src/gtr-window.c:209
+#: ../src/gtr-window.c:206
 msgid "Go to the last message"
 msgstr "Przechodzi do ostatniego komunikatu"
 
-#: ../src/gtr-window.c:211
+#: ../src/gtr-window.c:208
 msgid "Next Fuz_zy"
 msgstr "Następny n_iepewny"
 
-#: ../src/gtr-window.c:212
+#: ../src/gtr-window.c:209
 msgid "Go to the next fuzzy message"
 msgstr "Przechodzi do następnego niepewnego komunikatu"
 
-#: ../src/gtr-window.c:214
+#: ../src/gtr-window.c:211
 msgid "Previous Fuzz_y"
 msgstr "Poprze_dni niepewny"
 
-#: ../src/gtr-window.c:215
+#: ../src/gtr-window.c:212
 msgid "Go to the previous fuzzy message"
 msgstr "Przechodzi do poprzedniego niepewnego komunikatu"
 
-#: ../src/gtr-window.c:217
+#: ../src/gtr-window.c:214
 msgid "Next _Untranslated"
 msgstr "_Następny nieprzetłumaczony"
 
-#: ../src/gtr-window.c:218
+#: ../src/gtr-window.c:215
 msgid "Go to the next untranslated message"
 msgstr "Przechodzi do następnego nieprzetłumaczonego komunikatu"
 
-#: ../src/gtr-window.c:221
+#: ../src/gtr-window.c:218
 msgid "Previ_ous Untranslated"
 msgstr "P_oprzedni nieprzetłumaczony"
 
-#: ../src/gtr-window.c:222
+#: ../src/gtr-window.c:219
 msgid "Go to the previous untranslated message"
 msgstr "Przechodzi do poprzedniego nieprzetłumaczonego komunikatu"
 
-#: ../src/gtr-window.c:225
+#: ../src/gtr-window.c:222
 msgid "Next Fu_zzy or Untranslated"
 msgstr "Następny ni_epewny lub nieprzetłumaczony"
 
-#: ../src/gtr-window.c:227
+#: ../src/gtr-window.c:224
 msgid "Go to the next fuzzy or untranslated message"
 msgstr "Przechodzi do następnego niepewnego lub nieprzetłumaczonego komunikatu"
 
-#: ../src/gtr-window.c:230
+#: ../src/gtr-window.c:227
 msgid "Pre_vious Fuzzy or Untranslated"
 msgstr "Poprzedni niepe_wny lub nieprzetłumaczony"
 
-#: ../src/gtr-window.c:232
+#: ../src/gtr-window.c:229
 msgid "Go to the previous fuzzy or untranslated message"
 msgstr ""
 "Przechodzi do poprzedniego niepewnego lub nieprzetłumaczonego komunikatu"
 
-#: ../src/gtr-window.c:237
+#: ../src/gtr-window.c:234
 msgid "Search for text"
 msgstr "Wyszukuje tekst"
 
-#: ../src/gtr-window.c:240
+#: ../src/gtr-window.c:237
 msgid "Search for and replace text"
 msgstr "Wyszukuje i zamienia tekst"
 
 #. Documents menu
-#: ../src/gtr-window.c:244
+#: ../src/gtr-window.c:241
 msgid "_Save All"
 msgstr "Zapi_sz wszystkie"
 
-#: ../src/gtr-window.c:245
+#: ../src/gtr-window.c:242
 msgid "Save all open files"
 msgstr "Zapisuje wszystkie otwarte pliki"
 
-#: ../src/gtr-window.c:247
+#: ../src/gtr-window.c:244
 msgid "_Close All"
 msgstr "Zam_knij wszystkie"
 
-#: ../src/gtr-window.c:248
+#: ../src/gtr-window.c:245
 msgid "Close all open files"
 msgstr "Zamyka wszystkie otwarte pliki"
 
-#: ../src/gtr-window.c:250
+#: ../src/gtr-window.c:247
 msgid "_Previous Document"
 msgstr "_Poprzedni dokument"
 
-#: ../src/gtr-window.c:252
+#: ../src/gtr-window.c:249
 msgid "Activate previous document"
 msgstr "Aktywuje poprzedni dokument"
 
-#: ../src/gtr-window.c:254
+#: ../src/gtr-window.c:251
 msgid "_Next Document"
 msgstr "_Następny dokument"
 
-#: ../src/gtr-window.c:256
+#: ../src/gtr-window.c:253
 msgid "Activate next document"
 msgstr "Aktywuje następny dokument"
 
-#: ../src/gtr-window.c:444
+#: ../src/gtr-window.c:441
 msgid "Untranslated"
 msgstr "Nieprzetłumaczone"
 
-#: ../src/gtr-window.c:447
+#: ../src/gtr-window.c:444
 msgid "Translated"
 msgstr "Przetłumaczone"
 
-#: ../src/gtr-window.c:450
+#: ../src/gtr-window.c:447
 msgid "Fuzzy"
 msgstr "Niepewne"
 
-#: ../src/gtr-window.c:457
+#: ../src/gtr-window.c:454
 #, c-format
 msgid "Current: %d"
 msgstr "Bieżący: %d"
 
-#: ../src/gtr-window.c:458
+#: ../src/gtr-window.c:455
 #, c-format
 msgid "Total: %d"
 msgstr "Razem: %d"
 
-#: ../src/gtr-window.c:459
+#: ../src/gtr-window.c:456
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
@@ -1704,7 +1710,7 @@ msgstr[0] "%d przetłumaczony"
 msgstr[1] "%d przetłumaczone"
 msgstr[2] "%d przetłumaczonych"
 
-#: ../src/gtr-window.c:462
+#: ../src/gtr-window.c:459
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
@@ -1712,7 +1718,7 @@ msgstr[0] "%d niepewny"
 msgstr[1] "%d niepewne"
 msgstr[2] "%d niepewnych"
 
-#: ../src/gtr-window.c:464
+#: ../src/gtr-window.c:461
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1721,36 +1727,36 @@ msgstr[1] "%d nieprzetłumaczone"
 msgstr[2] "%d nieprzetłumaczonych"
 
 #. Translators: %s is a URI
-#: ../src/gtr-window.c:518
+#: ../src/gtr-window.c:515
 #, c-format
 msgid "Activate '%s'"
 msgstr "Aktywuj \"%s\""
 
 #. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:691
+#: ../src/gtr-window.c:688
 #, c-format
 msgid "*%s - gtranslator"
 msgstr "*%s - gtranslator"
 
 #. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:694
+#: ../src/gtr-window.c:691
 #, c-format
 msgid "%s - gtranslator"
 msgstr "%s - gtranslator"
 
-#: ../src/gtr-window.c:700
+#: ../src/gtr-window.c:697
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/gtr-window.c:1081
+#: ../src/gtr-window.c:1078
 msgid "Toolbar Editor"
 msgstr "Edytor paska narzędziowego"
 
-#: ../src/gtr-window.c:1207
+#: ../src/gtr-window.c:1204
 msgid "No profile"
 msgstr "Brak profilu"
 
-#: ../src/gtr-window.c:1236
+#: ../src/gtr-window.c:1233
 msgid "Profile for the active document"
 msgstr "Profil dla aktywnego dokumentu"
 
