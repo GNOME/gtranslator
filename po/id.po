@@ -7,20 +7,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-24 03:28+0000\n"
-"PO-Revision-Date: 2012-04-24 03:37+0000\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gtranslator&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-05-07 16:11+0000\n"
+"PO-Revision-Date: 2012-09-08 23:12+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Poedit-Language: Indonesian\n"
-"X-Poedit-Country: Indonesia\n"
 
-#: ../data/desktop/gtranslator.desktop.in.in.h:1 ../src/gtr-application.c:259
+#: ../data/desktop/gtranslator.desktop.in.in.h:1 ../src/gtr-application.c:328
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
@@ -238,14 +237,85 @@ msgstr "Bahasa Alternatif"
 msgid "Load an alternate language."
 msgstr "Muat suatu bahasa alternatif."
 
-#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:1
+#. ex:et:ts=4:
 #: ../plugins/charmap/charmap/__init__.py:42
+#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:1
 msgid "Character Map"
 msgstr "Tabel Karakter"
 
 #: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:2
 msgid "Insert special characters just by clicking on them."
 msgstr "Sisipkan karakter khusus hanya dengan mengklik mereka."
+
+#: ../plugins/codeview/gtr-codeview-dialog.ui.h:1
+msgid "Source View Settings"
+msgstr "Penataan Tampilan Sumber"
+
+#: ../plugins/codeview/gtr-codeview-dialog.ui.h:2
+msgid "Use external editor"
+msgstr "Gunakan penyunting eksternal"
+
+#: ../plugins/codeview/gtr-codeview-dialog.ui.h:3
+msgid "Program command:"
+msgstr "Perintah program:"
+
+#: ../plugins/codeview/gtr-codeview-dialog.ui.h:4
+msgid "Line command:"
+msgstr "Perintah baris:"
+
+#: ../plugins/codeview/gtr-codeview-plugin.c:129
+#, c-format
+msgid "Please install \"%s\" to be able to show the file"
+msgstr "Silahkan pasang \"%s\" untuk dapat menampilkan berkas"
+
+#: ../plugins/codeview/gtr-codeview-plugin.c:497
+msgid "Paths:"
+msgstr "Path:"
+
+#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:1
+msgid "Source Code View"
+msgstr "Tampilan Kode Sumber"
+
+#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:2
+msgid "Show the message in the source code."
+msgstr "Tampilkan pesan dalam kode sumber."
+
+#: ../plugins/codeview/gtr-viewer.c:80
+msgid "Source Viewer"
+msgstr "Penampil Sumber"
+
+#: ../plugins/codeview/gtr-viewer.ui.h:1
+msgid "Source code"
+msgstr "Kode sumber"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:1
+msgid "Use the System Editor"
+msgstr "Gunakan Penyunting Sistem"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:2
+msgid "Whether use the system editor to show the source code"
+msgstr "Apakah memakai penyunting sistem untuk menampilkan kode sumber"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:3
+msgid "The Editor to Launch"
+msgstr "Penyunting yang Diluncurkan"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:4
+msgid "The command to launch the editor you want to use"
+msgstr "Perintah untuk meluncurkan penyunting yang ingin Anda pakai"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:5
+msgid "Arguments for the Command"
+msgstr "Argumen bagi Perintah"
+
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:6
+msgid "Arguments to pass to the program command line to select the line"
+msgstr "Argumen untuk diteruskan ke perintah program untuk memilih baris"
+
+#: ../plugins/dictionary/gtr-dictionary-plugin.c:140
+#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:1
+msgid "Dictionary"
+msgstr "Kamus"
 
 #: ../plugins/dictionary/gtr-dict-panel.c:166
 #, c-format
@@ -325,11 +395,6 @@ msgstr "Strategi tersedia"
 #: ../plugins/dictionary/gtr-dict-panel.c:596
 msgid "Dictionary sources"
 msgstr "Sumber kamus"
-
-#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:1
-#: ../plugins/dictionary/gtr-dictionary-plugin.c:140
-msgid "Dictionary"
-msgstr "Kamus"
 
 #: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:2
 msgid "Look up words in a dictionary."
@@ -563,71 +628,6 @@ msgstr "URL Server Cermin"
 msgid "URL of an Open-Tran mirror server"
 msgstr "URL dari server cermin Open-Tran"
 
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:1
-msgid "Source View Settings"
-msgstr "Penataan Tampilan Sumber"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:2
-msgid "Use external editor"
-msgstr "Gunakan penyunting eksternal"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:3
-msgid "Program command:"
-msgstr "Perintah program:"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:4
-msgid "Line command:"
-msgstr "Perintah baris:"
-
-#: ../plugins/codeview/gtr-codeview-plugin.c:129
-#, c-format
-msgid "Please install \"%s\" to be able to show the file"
-msgstr "Silahkan pasang \"%s\" untuk dapat menampilkan berkas"
-
-#: ../plugins/codeview/gtr-codeview-plugin.c:497
-msgid "Paths:"
-msgstr "Path:"
-
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:1
-msgid "Source Code View"
-msgstr "Tampilan Kode Sumber"
-
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:2
-msgid "Show the message in the source code."
-msgstr "Tampilkan pesan dalam kode sumber."
-
-#: ../plugins/codeview/gtr-viewer.c:80
-msgid "Source Viewer"
-msgstr "Penampil Sumber"
-
-#: ../plugins/codeview/gtr-viewer.ui.h:1
-msgid "Source code"
-msgstr "Kode sumber"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:1
-msgid "Use the System Editor"
-msgstr "Gunakan Penyunting Sistem"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:2
-msgid "Whether use the system editor to show the source code"
-msgstr "Apakah memakai penyunting sistem untuk menampilkan kode sumber"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:3
-msgid "The Editor to Launch"
-msgstr "Penyunting yang Diluncurkan"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:4
-msgid "The command to launch the editor you want to use"
-msgstr "Perintah untuk meluncurkan penyunting yang ingin Anda pakai"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:5
-msgid "Arguments for the Command"
-msgstr "Argumen bagi Perintah"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:6
-msgid "Arguments to pass to the program command line to select the line"
-msgstr "Argumen untuk diteruskan ke perintah program untuk memilih baris"
-
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:165
 msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
 msgstr ""
@@ -662,10 +662,14 @@ msgstr "Konfigurasi:"
 msgid "Use only files with this name:"
 msgstr "Gunakan hanya berkas dengan nama ini:"
 
-#: ../plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
 #: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:1
+#: ../plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
 msgid "Translation Memory"
 msgstr "Ingatan Terjemahan"
+
+#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:2
+msgid "Get translation suggestions from a data base."
+msgstr "Dapatkan saran terjemahan dari suatu basis data"
 
 #: ../plugins/translation-memory/gtr-translation-memory-ui.c:204
 #, c-format
@@ -701,13 +705,9 @@ msgid "Build translation memory"
 msgstr "Bangun Ingatan Terjemahan"
 
 #: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
-#: ../src/gtr-window.c:196
+#: ../src/gtr-window.c:183
 msgid "_Translation Memory"
 msgstr "Ing_atan Terjemahan"
-
-#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:2
-msgid "Get translation suggestions from a data base."
-msgstr "Dapatkan saran terjemahan dari suatu basis data"
 
 #: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:1
 msgid "PO directory"
@@ -762,6 +762,46 @@ msgstr ""
 "Perbedaan panjang maksimum antar pesan yang ditampilkan sebagai cocok oleh "
 "ingatan terjemahan."
 
+#: ../src/gtr-actions-app.c:48
+msgid "Current Maintainers"
+msgstr "Para Pemelihara Kini"
+
+#: ../src/gtr-actions-app.c:52
+msgid "Current Developers"
+msgstr "Para Pengembang Kini"
+
+#: ../src/gtr-actions-app.c:56
+msgid "Previous Developers"
+msgstr "Para Pengembang Sebelumnya"
+
+#: ../src/gtr-actions-app.c:66
+msgid "Contributors"
+msgstr "Para Kontributor"
+
+#: ../src/gtr-actions-app.c:90
+msgid ""
+"Translation file editing suite for localization of applications and "
+"libraries."
+msgstr "Penyunting berkas terjemahan untuk lokalisasi aplikasi dan pustaka."
+
+#: ../src/gtr-actions-app.c:106
+msgid "About Gtranslator"
+msgstr "Tentang Gtranslator"
+
+#.
+#. * Note to translators: put here your name and email so it will show
+#. * up in the "about" box
+#.
+#: ../src/gtr-actions-app.c:111
+msgid "translator-credits"
+msgstr ""
+"Mohammad DAMT <mdamt@bisnisweb.com>, 2003\n"
+"Andika Triwidada <andika@gmail.com>, 2009-2012"
+
+#: ../src/gtr-actions-app.c:114
+msgid "Gtranslator Web Site"
+msgstr "Situs Web Gtranslator"
+
 #: ../src/gtr-actions-file.c:201
 msgid "Open file for translation"
 msgstr "Buka berkas untuk diterjemahkan"
@@ -778,46 +818,6 @@ msgstr "Simpan berkas sebagai..."
 msgid "Files saved."
 msgstr "Berkas disimpan."
 
-#: ../src/gtr-actions-help.c:48
-msgid "Current Maintainers"
-msgstr "Para Pemelihara Kini"
-
-#: ../src/gtr-actions-help.c:52
-msgid "Current Developers"
-msgstr "Para Pengembang Kini"
-
-#: ../src/gtr-actions-help.c:56
-msgid "Previous Developers"
-msgstr "Para Pengembang Sebelumnya"
-
-#: ../src/gtr-actions-help.c:66
-msgid "Contributors"
-msgstr "Para Kontributor"
-
-#: ../src/gtr-actions-help.c:90
-msgid ""
-"Translation file editing suite for localization of applications and "
-"libraries."
-msgstr "Penyunting berkas terjemahan untuk lokalisasi aplikasi dan pustaka."
-
-#: ../src/gtr-actions-help.c:106
-msgid "About Gtranslator"
-msgstr "Tentang Gtranslator"
-
-#.
-#. * Note to translators: put here your name and email so it will show
-#. * up in the "about" box
-#.
-#: ../src/gtr-actions-help.c:111
-msgid "translator-credits"
-msgstr ""
-"Mohammad DAMT <mdamt@bisnisweb.com>, 2003\n"
-"Andika Triwidada <andika@gmail.com>, 2009-2012"
-
-#: ../src/gtr-actions-help.c:114
-msgid "Gtranslator Web Site"
-msgstr "Situs Web Gtranslator"
-
 #: ../src/gtr-actions-search.c:170
 #, c-format
 msgid "Found and replaced %d occurrence"
@@ -828,36 +828,27 @@ msgstr[0] "Ditemukan dan diganti %d kali"
 msgid "Found and replaced one occurrence"
 msgstr "Ditemukan dan diganti satu kali"
 
-#: ../src/gtr-context.c:232
-msgid "Notes:"
-msgstr "Catatan:"
+#: ../src/gtranslator-menu.ui.h:1
+msgid "_New Window"
+msgstr "Je_ndela Baru"
 
-#: ../src/gtr-context.c:240
-msgid "Add Note"
-msgstr "Tambah Catatan"
+#: ../src/gtranslator-menu.ui.h:2
+#| msgid "Gtranslator Preferences"
+msgid "_Preferences"
+msgstr "_Preferensi"
 
-#: ../src/gtr-context.c:245
-msgid "Edit"
-msgstr "Edit"
+#: ../src/gtranslator-menu.ui.h:3
+msgid "_Help"
+msgstr "Bantua_n"
 
-#. Extracted comments
-#: ../src/gtr-context.c:288
-msgid "Extracted comments:"
-msgstr "Komentar terekstrak:"
+#: ../src/gtranslator-menu.ui.h:4
+msgid "_About"
+msgstr "Tent_ang"
 
-#. Context
-#: ../src/gtr-context.c:292
-msgid "Context:"
-msgstr "Context:"
-
-#. Format
-#: ../src/gtr-context.c:296
-msgid "Format:"
-msgstr "Format:"
-
-#: ../src/gtr-context.c:392
-msgid "D_one"
-msgstr "_Selesai"
+#: ../src/gtranslator-menu.ui.h:5
+#| msgid "_Edit"
+msgid "_Quit"
+msgstr "_Keluar"
 
 #: ../src/gtr-assistant.c:130
 #, c-format
@@ -903,7 +894,7 @@ msgid "<b>Translator email:</b>"
 msgstr "<b>Email penerjemah:</b>"
 
 #: ../src/gtr-assistant.c:296 ../src/gtr-assistant.c:388
-#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:1244
+#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:1231
 msgid "Profile"
 msgstr "Profil"
 
@@ -954,6 +945,37 @@ msgstr "Penyimpanan telah dimatikan oleh administrator sistem."
 #: ../src/gtr-close-confirmation-dialog.c:586
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Bila Anda tidak menyimpan, semua perubahan Anda akan hilang permanen."
+
+#: ../src/gtr-context.c:232
+msgid "Notes:"
+msgstr "Catatan:"
+
+#: ../src/gtr-context.c:240
+msgid "Add Note"
+msgstr "Tambah Catatan"
+
+#: ../src/gtr-context.c:245
+msgid "Edit"
+msgstr "Edit"
+
+#. Extracted comments
+#: ../src/gtr-context.c:288
+msgid "Extracted comments:"
+msgstr "Komentar terekstrak:"
+
+#. Context
+#: ../src/gtr-context.c:292
+msgid "Context:"
+msgstr "Context:"
+
+#. Format
+#: ../src/gtr-context.c:296
+msgid "Format:"
+msgstr "Format:"
+
+#: ../src/gtr-context.c:392
+msgid "D_one"
+msgstr "_Selesai"
 
 #: ../src/gtr-file-dialogs.c:62
 msgid "Gettext translation"
@@ -1055,6 +1077,82 @@ msgstr "Kode bahasa:"
 msgid "_Plural forms:"
 msgstr "Bentuk jamak:"
 
+#: ../src/gtr-message-table.c:175
+msgid "Status"
+msgstr "Kondisi"
+
+#: ../src/gtr-message-table.c:187
+msgid "ID"
+msgstr "ID"
+
+#: ../src/gtr-message-table.c:202
+msgid "Original Message"
+msgstr "Teks Asli"
+
+#: ../src/gtr-message-table.c:217
+msgid "Translated Message"
+msgstr "Teks Terjemahan"
+
+#: ../src/gtr-po.c:439
+#, c-format
+msgid "The file is empty"
+msgstr "Berkas ini kosong"
+
+#: ../src/gtr-po.c:448
+#, c-format
+msgid "Failed opening file '%s': %s"
+msgstr "Gagal membuka berkas '%s': %s"
+
+#: ../src/gtr-po.c:522
+#, c-format
+msgid "Could not convert from charset '%s' to UTF-8"
+msgstr "Tak bisa mengubah dari gugus karakter '%s' ke UTF-8"
+
+#: ../src/gtr-po.c:539 ../src/gtr-po.c:559
+#, c-format
+msgid "Could not store temporary file for encoding conversion"
+msgstr "Tak bisa menyimpan berkas temporer bagi pengubahan pengodean"
+
+#: ../src/gtr-po.c:596
+#, c-format
+msgid ""
+"All attempt to convert the file to UTF-8 has failed, use the msgconv or "
+"iconv command line tools before opening this file with gtranslator"
+msgstr ""
+"Semua upaya mengubah berkas ke UTF-8 telah gagal, gunakan perkakas perintah "
+"baris msgconf atau iconv sebelum membuka berkas ini dengan gtranslator"
+
+#: ../src/gtr-po.c:664
+#, c-format
+msgid "Gettext returned a null message domain list."
+msgstr "Gettext mengembalikan daftar domain pesan null."
+
+#: ../src/gtr-po.c:709
+#, c-format
+msgid "No messages obtained from parser."
+msgstr "Tidak ada pesan diperoleh dari pengurai."
+
+#: ../src/gtr-po.c:757
+#, c-format
+msgid ""
+"You are saving a file with a .pot extension.\n"
+"Pot files are generated by the compilation process.\n"
+"Your file should likely be named '%s.po'."
+msgstr ""
+"Anda menyimpan berkas dengan akhiran .pot.\n"
+"Berkas pot dibuat oleh proses kompilasi \n"
+"Berkas Anda mungkin perlu dinamai '%s.po'."
+
+#: ../src/gtr-po.c:770
+#, c-format
+msgid "The file %s is read-only, and can not be overwritten"
+msgstr "Berkas %s hanya dapat dibaca, dan tak bisa ditimpa"
+
+#: ../src/gtr-po.c:801
+#, c-format
+msgid "There was an error writing the PO file: %s"
+msgstr "Ada galat menulis berkas PO: %s"
+
 #: ../src/gtr-preferences-dialog.c:401
 msgid ""
 "<span weight=\"bold\" size=\"large\">Impossible to remove the active "
@@ -1095,16 +1193,16 @@ msgid "Autosave"
 msgstr "Simpan sendiri"
 
 #: ../src/gtr-preferences-dialog.ui.h:5
+msgid "Create a _backup copy of files before saving"
+msgstr "_Buat salinan cadangan dari berkas sebelum menyimpan"
+
+#: ../src/gtr-preferences-dialog.ui.h:6
 msgid "_Autosave files every"
 msgstr "Simp_an sendiri berkas setiap"
 
-#: ../src/gtr-preferences-dialog.ui.h:6
+#: ../src/gtr-preferences-dialog.ui.h:7
 msgid "_minutes"
 msgstr "_menit"
-
-#: ../src/gtr-preferences-dialog.ui.h:7
-msgid "Create a _backup copy of files before saving"
-msgstr "_Buat salinan cadangan dari berkas sebelum menyimpan"
 
 #: ../src/gtr-preferences-dialog.ui.h:8
 msgid "Files"
@@ -1242,82 +1340,6 @@ msgstr "Cari mundur"
 msgid "_Wrap around"
 msgstr "_Melipat"
 
-#: ../src/gtr-message-table.c:175
-msgid "Status"
-msgstr "Kondisi"
-
-#: ../src/gtr-message-table.c:187
-msgid "ID"
-msgstr "ID"
-
-#: ../src/gtr-message-table.c:202
-msgid "Original Message"
-msgstr "Teks Asli"
-
-#: ../src/gtr-message-table.c:217
-msgid "Translated Message"
-msgstr "Teks Terjemahan"
-
-#: ../src/gtr-po.c:439
-#, c-format
-msgid "The file is empty"
-msgstr "Berkas ini kosong"
-
-#: ../src/gtr-po.c:448
-#, c-format
-msgid "Failed opening file '%s': %s"
-msgstr "Gagal membuka berkas '%s': %s"
-
-#: ../src/gtr-po.c:522
-#, c-format
-msgid "Could not convert from charset '%s' to UTF-8"
-msgstr "Tak bisa mengubah dari gugus karakter '%s' ke UTF-8"
-
-#: ../src/gtr-po.c:539 ../src/gtr-po.c:559
-#, c-format
-msgid "Could not store temporary file for encoding conversion"
-msgstr "Tak bisa menyimpan berkas temporer bagi pengubahan pengodean"
-
-#: ../src/gtr-po.c:596
-#, c-format
-msgid ""
-"All attempt to convert the file to UTF-8 has failed, use the msgconv or "
-"iconv command line tools before opening this file with gtranslator"
-msgstr ""
-"Semua upaya mengubah berkas ke UTF-8 telah gagal, gunakan perkakas perintah "
-"baris msgconf atau iconv sebelum membuka berkas ini dengan gtranslator"
-
-#: ../src/gtr-po.c:664
-#, c-format
-msgid "Gettext returned a null message domain list."
-msgstr "Gettext mengembalikan daftar domain pesan null."
-
-#: ../src/gtr-po.c:709
-#, c-format
-msgid "No messages obtained from parser."
-msgstr "Tidak ada pesan diperoleh dari pengurai."
-
-#: ../src/gtr-po.c:757
-#, c-format
-msgid ""
-"You are saving a file with a .pot extension.\n"
-"Pot files are generated by the compilation process.\n"
-"Your file should likely be named '%s.po'."
-msgstr ""
-"Anda menyimpan berkas dengan akhiran .pot.\n"
-"Berkas pot dibuat oleh proses kompilasi \n"
-"Berkas Anda mungkin perlu dinamai '%s.po'."
-
-#: ../src/gtr-po.c:770
-#, c-format
-msgid "The file %s is read-only, and can not be overwritten"
-msgstr "Berkas %s hanya dapat dibaca, dan tak bisa ditimpa"
-
-#: ../src/gtr-po.c:801
-#, c-format
-msgid "There was an error writing the PO file: %s"
-msgstr "Ada galat menulis berkas PO: %s"
-
 #: ../src/gtr-statusbar.c:119 ../src/gtr-statusbar.c:248
 msgid "INS"
 msgstr "INS"
@@ -1356,53 +1378,13 @@ msgid "Message Details"
 msgstr "Rincian Pesan"
 
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1334
+#: ../src/gtr-tab.c:1321
 msgid "Path:"
 msgstr "Path:"
 
 #: ../src/gtr-tab-label.c:278
 msgid "Close document"
 msgstr "Tutup dokumen"
-
-#. Translaters: This string is for a toggle to display a toolbar.
-#. * The name of the toolbar is automatically computed from the widgets
-#. * on the toolbar, and is placed at the %s. Note the _ before the %s
-#. * which is used to add mnemonics. We know that this is likely to
-#. * produce duplicates, but don't worry about it. If your language
-#. * normally has a mnemonic at the start, please use the _. If not,
-#. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:992
-#, c-format
-msgid "Show “_%s”"
-msgstr "Tampilkan “_%s”"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1485
-msgid "_Move on Toolbar"
-msgstr "_Pindah pada Toolbar"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1486
-msgid "Move the selected item on the toolbar"
-msgstr "Pindah objek yang dipilih pada toolbar"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1487
-msgid "_Remove from Toolbar"
-msgstr "_Hapus dari Toolbar"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1488
-msgid "Remove the selected item from the toolbar"
-msgstr "Hapus objek yang dipilih dari toolbar"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1489
-msgid "_Delete Toolbar"
-msgstr "Ha_pus Toolbar"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1490
-msgid "Remove the selected toolbar"
-msgstr "Hapus toolbar yang dipilih"
-
-#: ../src/toolbareditor/egg-toolbar-editor.c:489
-msgid "Separator"
-msgstr "Pemisah"
 
 #: ../src/gtr-utils.c:517
 msgid ""
@@ -1454,302 +1436,285 @@ msgstr "_Perkakas"
 msgid "_Documents"
 msgstr "_Dokumen"
 
-#: ../src/gtr-window.c:123
-msgid "_Help"
-msgstr "Bantua_n"
-
-#: ../src/gtr-window.c:127
+#: ../src/gtr-window.c:126
 msgid "Open a PO file"
 msgstr "Buka suatu berkas PO"
 
-#: ../src/gtr-window.c:129
+#: ../src/gtr-window.c:128
 msgid "_Recent Files"
 msgstr "Be_rkas Terkini"
 
-#: ../src/gtr-window.c:132
-msgid "Quit the program"
-msgstr "Keluar dari program"
-
 #. Edit menu
-#: ../src/gtr-window.c:136
+#: ../src/gtr-window.c:132
 msgid "T_oolbar"
 msgstr "T_oolbar"
 
-#: ../src/gtr-window.c:139
-msgid "Edit gtranslator preferences"
-msgstr "Sunting preferensi gtranslator"
-
-#: ../src/gtr-window.c:141 ../src/gtr-window.c:187
+#: ../src/gtr-window.c:134 ../src/gtr-window.c:174
 msgid "_Header..."
 msgstr "_Header..."
 
-#. Help menu
-#: ../src/gtr-window.c:145
-msgid "_Contents"
-msgstr "_Isi"
-
-#: ../src/gtr-window.c:156
+#: ../src/gtr-window.c:143
 msgid "Save the current file"
 msgstr "Simpan berkas kini"
 
-#: ../src/gtr-window.c:159
+#: ../src/gtr-window.c:146
 msgid "Save the current file with another name"
 msgstr "Simpan berkas kini dengan nama berbeda"
 
-#: ../src/gtr-window.c:165
+#: ../src/gtr-window.c:152
 msgid "Close the current file"
 msgstr "Tutup berkas kini"
 
-#: ../src/gtr-window.c:170
+#: ../src/gtr-window.c:157
 msgid "Undo last operation"
 msgstr "Batalkan operasi terakhir"
 
-#: ../src/gtr-window.c:173
+#: ../src/gtr-window.c:160
 msgid "Redo last undone operation"
 msgstr "Lakukan lagi operasi terakhir yang dibatalkan"
 
-#: ../src/gtr-window.c:176
+#: ../src/gtr-window.c:163
 msgid "Cut the selected text"
 msgstr "Potong teks yang dipilih"
 
-#: ../src/gtr-window.c:179
+#: ../src/gtr-window.c:166
 msgid "Copy the selected text"
 msgstr "Salin teks yang dipilih"
 
-#: ../src/gtr-window.c:182
+#: ../src/gtr-window.c:169
 msgid "Paste the contents of the clipboard"
 msgstr "Tempel isi clipboard"
 
-#: ../src/gtr-window.c:185
+#: ../src/gtr-window.c:172
 msgid "Clear the selected translation"
 msgstr "Bersihkan terjemahan yang dipilih"
 
-#: ../src/gtr-window.c:189
+#: ../src/gtr-window.c:176
 msgid "Copy _Message to Translation"
 msgstr "Salin Pesan ke Terje_mahan"
 
-#: ../src/gtr-window.c:191
+#: ../src/gtr-window.c:178
 msgid "Copy original message contents to the translation field"
 msgstr "Salin isi pesan asli dan tempelkan sebagai terjemahan"
 
-#: ../src/gtr-window.c:193
+#: ../src/gtr-window.c:180
 msgid "Toggle _Fuzzy Status"
 msgstr "_Jungkit Status Keraguan"
 
-#: ../src/gtr-window.c:194
+#: ../src/gtr-window.c:181
 msgid "Toggle fuzzy status of a message"
 msgstr "Bolak-balik status keraguan dari suatu pesan"
 
 #. View menu
-#: ../src/gtr-window.c:201
+#: ../src/gtr-window.c:188
 msgid "_Message Details"
 msgstr "Rincian Pesa_n"
 
-#: ../src/gtr-window.c:202
+#: ../src/gtr-window.c:189
 msgid "Show the Context panel"
 msgstr "Tampilkan panel Konteks"
 
 #. Go menu
-#: ../src/gtr-window.c:206
+#: ../src/gtr-window.c:193
 msgid "_Previous Message"
 msgstr "_Pesan Sebelumnya"
 
-#: ../src/gtr-window.c:207
+#: ../src/gtr-window.c:194
 msgid "Move back one message"
 msgstr "Mundur satu pesan"
 
-#: ../src/gtr-window.c:209
+#: ../src/gtr-window.c:196
 msgid "_Next Message"
 msgstr "Pesa_n Berikutnya"
 
-#: ../src/gtr-window.c:210
+#: ../src/gtr-window.c:197
 msgid "Move forward one message"
 msgstr "Maju satu pesan"
 
-#: ../src/gtr-window.c:212
+#: ../src/gtr-window.c:199
 msgid "_Go to Message..."
 msgstr "_Lompat ke Pesan..."
 
-#: ../src/gtr-window.c:213
+#: ../src/gtr-window.c:200
 msgid "Jumps to a specific message"
 msgstr "Lompat ke nomor pesan tertentu"
 
-#: ../src/gtr-window.c:215
+#: ../src/gtr-window.c:202
 msgid "_First Message"
 msgstr "_Pesan Pertama"
 
-#: ../src/gtr-window.c:216
+#: ../src/gtr-window.c:203
 msgid "Go to the first message"
 msgstr "Pergi ke pesan pertama"
 
-#: ../src/gtr-window.c:218
+#: ../src/gtr-window.c:205
 msgid "_Last Message"
 msgstr "Pesan _Terakhir"
 
-#: ../src/gtr-window.c:219
+#: ../src/gtr-window.c:206
 msgid "Go to the last message"
 msgstr "Pergi ke pesan terakhir"
 
-#: ../src/gtr-window.c:221
+#: ../src/gtr-window.c:208
 msgid "Next Fuz_zy"
 msgstr "Ragu Beriku_tnya"
 
-#: ../src/gtr-window.c:222
+#: ../src/gtr-window.c:209
 msgid "Go to the next fuzzy message"
 msgstr "Pergi ke pesan ragu berikutnya"
 
-#: ../src/gtr-window.c:224
+#: ../src/gtr-window.c:211
 msgid "Previous Fuzz_y"
 msgstr "Ragu Sebelumn_ya"
 
-#: ../src/gtr-window.c:225
+#: ../src/gtr-window.c:212
 msgid "Go to the previous fuzzy message"
 msgstr "Pergi ke pesan ragu sebelumnya"
 
-#: ../src/gtr-window.c:227
+#: ../src/gtr-window.c:214
 msgid "Next _Untranslated"
 msgstr "Bel_um Terjemah Berikutnya"
 
-#: ../src/gtr-window.c:228
+#: ../src/gtr-window.c:215
 msgid "Go to the next untranslated message"
 msgstr "Lompat ke pesan berikutnya yang belum diterjemahkan"
 
-#: ../src/gtr-window.c:231
+#: ../src/gtr-window.c:218
 msgid "Previ_ous Untranslated"
 msgstr "Belum Terjemah _Sebelumnya"
 
-#: ../src/gtr-window.c:232
+#: ../src/gtr-window.c:219
 msgid "Go to the previous untranslated message"
 msgstr "Lompat ke pesan sebelumnya yang belum diterjemahkan"
 
-#: ../src/gtr-window.c:235
+#: ../src/gtr-window.c:222
 msgid "Next Fu_zzy or Untranslated"
 msgstr "Belum Terjemah _atau Ragu Berikutnya"
 
-#: ../src/gtr-window.c:237
+#: ../src/gtr-window.c:224
 msgid "Go to the next fuzzy or untranslated message"
 msgstr "Lompat ke pesan berikutnya yang belum diterjemahkan atau ragu"
 
-#: ../src/gtr-window.c:240
+#: ../src/gtr-window.c:227
 msgid "Pre_vious Fuzzy or Untranslated"
 msgstr "Ragu atau Belum Terjema_h Sebelumnya"
 
-#: ../src/gtr-window.c:242
+#: ../src/gtr-window.c:229
 msgid "Go to the previous fuzzy or untranslated message"
 msgstr "Lompat ke pesan berikutnya yang belum diterjemahkan atau ragu"
 
-#: ../src/gtr-window.c:247
+#: ../src/gtr-window.c:234
 msgid "Search for text"
 msgstr "Cari teks"
 
-#: ../src/gtr-window.c:250
+#: ../src/gtr-window.c:237
 msgid "Search for and replace text"
 msgstr "Cari dan ganti teks"
 
 #. Documents menu
-#: ../src/gtr-window.c:254
+#: ../src/gtr-window.c:241
 msgid "_Save All"
 msgstr "_Simpan Semua"
 
-#: ../src/gtr-window.c:255
+#: ../src/gtr-window.c:242
 msgid "Save all open files"
 msgstr "Simpan semua berkas terbuka"
 
-#: ../src/gtr-window.c:257
+#: ../src/gtr-window.c:244
 msgid "_Close All"
 msgstr "_Tutup Semua"
 
-#: ../src/gtr-window.c:258
+#: ../src/gtr-window.c:245
 msgid "Close all open files"
 msgstr "Tutup semua berkas terbuka"
 
-#: ../src/gtr-window.c:260
+#: ../src/gtr-window.c:247
 msgid "_Previous Document"
 msgstr "Dokumen Se_belumnya"
 
-#: ../src/gtr-window.c:262
+#: ../src/gtr-window.c:249
 msgid "Activate previous document"
 msgstr "Aktifkan dokumen sebelumnya"
 
-#: ../src/gtr-window.c:264
+#: ../src/gtr-window.c:251
 msgid "_Next Document"
 msgstr "Dokumen Sela_njutnya"
 
-#: ../src/gtr-window.c:266
+#: ../src/gtr-window.c:253
 msgid "Activate next document"
 msgstr "Aktifkan dokumen selanjutnya"
 
-#: ../src/gtr-window.c:454
+#: ../src/gtr-window.c:441
 msgid "Untranslated"
 msgstr "Belum diterjemahkan"
 
-#: ../src/gtr-window.c:457
+#: ../src/gtr-window.c:444
 msgid "Translated"
 msgstr "Diterjemahkan"
 
-#: ../src/gtr-window.c:460
+#: ../src/gtr-window.c:447
 msgid "Fuzzy"
 msgstr "Ragu"
 
-#: ../src/gtr-window.c:467
+#: ../src/gtr-window.c:454
 #, c-format
 msgid "Current: %d"
 msgstr "Kini: %d"
 
-#: ../src/gtr-window.c:468
+#: ../src/gtr-window.c:455
 #, c-format
 msgid "Total: %d"
 msgstr "Total: %d"
 
-#: ../src/gtr-window.c:469
+#: ../src/gtr-window.c:456
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "%d diterjemahkan"
 
-#: ../src/gtr-window.c:472
+#: ../src/gtr-window.c:459
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "%d ragu"
 
-#: ../src/gtr-window.c:474
+#: ../src/gtr-window.c:461
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
 msgstr[0] "%d belum diterjemahkan"
 
 #. Translators: %s is a URI
-#: ../src/gtr-window.c:528
+#: ../src/gtr-window.c:515
 #, c-format
 msgid "Activate '%s'"
 msgstr "Aktifkan '%s'"
 
 #. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:701
+#: ../src/gtr-window.c:688
 #, c-format
 msgid "*%s - gtranslator"
 msgstr "*%s - gtranslator"
 
 #. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:704
+#: ../src/gtr-window.c:691
 #, c-format
 msgid "%s - gtranslator"
 msgstr "%s - gtranslator"
 
-#: ../src/gtr-window.c:710
+#: ../src/gtr-window.c:697
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/gtr-window.c:1091
+#: ../src/gtr-window.c:1078
 msgid "Toolbar Editor"
 msgstr "Penyunting Toolbar"
 
-#: ../src/gtr-window.c:1217
+#: ../src/gtr-window.c:1204
 msgid "No profile"
 msgstr "Tiada profil"
 
-#: ../src/gtr-window.c:1246
+#: ../src/gtr-window.c:1233
 msgid "Profile for the active document"
 msgstr "Profil dokumen aktif"
 
@@ -1767,3 +1732,42 @@ msgstr ""
 "Jalankan '%s·--help' untuk melihat daftar lengkap dari pilihan perintah "
 "baris yang tersedia.\n"
 
+#. Translaters: This string is for a toggle to display a toolbar.
+#. * The name of the toolbar is automatically computed from the widgets
+#. * on the toolbar, and is placed at the %s. Note the _ before the %s
+#. * which is used to add mnemonics. We know that this is likely to
+#. * produce duplicates, but don't worry about it. If your language
+#. * normally has a mnemonic at the start, please use the _. If not,
+#. * please remove.
+#: ../src/toolbareditor/egg-editable-toolbar.c:992
+#, c-format
+msgid "Show “_%s”"
+msgstr "Tampilkan “_%s”"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1485
+msgid "_Move on Toolbar"
+msgstr "_Pindah pada Toolbar"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1486
+msgid "Move the selected item on the toolbar"
+msgstr "Pindah objek yang dipilih pada toolbar"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1487
+msgid "_Remove from Toolbar"
+msgstr "_Hapus dari Toolbar"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1488
+msgid "Remove the selected item from the toolbar"
+msgstr "Hapus objek yang dipilih dari toolbar"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1489
+msgid "_Delete Toolbar"
+msgstr "Ha_pus Toolbar"
+
+#: ../src/toolbareditor/egg-editable-toolbar.c:1490
+msgid "Remove the selected toolbar"
+msgstr "Hapus toolbar yang dipilih"
+
+#: ../src/toolbareditor/egg-toolbar-editor.c:489
+msgid "Separator"
+msgstr "Pemisah"
