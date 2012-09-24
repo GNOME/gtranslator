@@ -1,12 +1,13 @@
 # translation of gtranslator.help.HEAD.po to Español
 # Jorge González <jorgegonz@svn.gnome.org>, 200, 2009, 2010, 2011.
+# Miguel Rodríguez Núñez <bokerones.fritos@gmail.com>, 2012.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2011, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.help.HEAD\n"
-"POT-Creation-Date: 2012-08-24 14:30+0000\n"
-"PO-Revision-Date: 2012-08-25 18:58+0200\n"
+"POT-Creation-Date: 2012-09-08 21:56+0000\n"
+"PO-Revision-Date: 2012-09-24 12:32+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -14,10 +15,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Gtranslator 2.91.5\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
-#| msgid "translator-credits"
 msgctxt "_"
 msgid "translator-credits"
 msgstr ""
@@ -43,7 +43,6 @@ msgstr ""
 "md5='05c3f2c6b4fe4de3056d481d4427c68b'"
 
 #: C/index.page:8(info/title)
-#| msgid "Using Gtranslator"
 msgctxt "text"
 msgid "Gtranslator"
 msgstr "Gtranslator"
@@ -93,7 +92,7 @@ msgstr ""
 
 #: C/index.page:31(page/p)
 msgid "Welcome to the <app>Gtranslator</app> user documentation."
-msgstr ""
+msgstr "Bienvenido a la documentación del usuario de <app>Gtranslator</app>."
 
 #: C/index.page:32(page/p)
 msgid ""
@@ -102,6 +101,10 @@ msgid ""
 "\">gettext PO files</link> used in localization process of various GNOME and "
 "web applications."
 msgstr ""
+"<app>Gtranslator</app> es un editor versátil con interfaz de usuario para "
+"los <link href=\"https://live.gnome.org/TranslationProject/"
+"LocalisationGuide#po_files\">archivos PO de gettext</link> que se utiliza en "
+"procesos de traducción de varias aplicaciones y páginas web de GNOME."
 
 #: C/index.page:42(page/p)
 msgid ""
@@ -111,6 +114,11 @@ msgid ""
 "profile</link> for your <app>Gtranslator</app>. Other help topics are "
 "grouped together into sections below. Enjoy using <app>Gtranslator</app>!"
 msgstr ""
+"Si es nuevo en el mundo de la traducción de aplicaciones, lea primero la "
+"sección <link xref=\"gtr-concepts\">Comprender los conceptos básicos de la "
+"traducción</link> y luego continúe con <link xref=\"gtr-wizzard\">Configurar "
+"el perfil inicial</link> para <app>Gtranslator</app>. Otros temas de ayuda "
+"se agrupan en secciones siguientes. Disfrute con <app>Gtranslator</app>."
 
 #: C/index.page:45(section/title)
 #, fuzzy
@@ -129,6 +137,8 @@ msgid ""
 "Translation Memory (TM) is a database that allows you to reuse previously "
 "translated strings."
 msgstr ""
+"La memoria de la traducción (MT) es una base de datos que le permite "
+"reutilizar cadenas traducidas anteriormente."
 
 #: C/index.page:53(section/p)
 msgid ""
@@ -137,9 +147,13 @@ msgid ""
 "app menu in the top bar, select <guiseq><gui>Preferences</gui><gui>Plugins</"
 "gui></guiseq> tab, and activate the corresponding check box."
 msgstr ""
+"Para ver el panel de la memoria de traducción necesita activar el <em style="
+"\"strong\">Complemento memoria de traducción</em>: pulse en el menú de "
+"aplicaciones de <gui>Gtranslator</gui> en la barra superior, seleccione "
+"<guiseq><gui>Preferencias</gui><gui>Complementos</gui></guiseq> , y active "
+"la correspondiente casilla."
 
 #: C/index.page:58(section/title)
-#| msgid "Advanced features"
 msgid "Advanced Topics"
 msgstr "Temas avanzados"
 
@@ -179,7 +193,7 @@ msgstr ""
 
 #: C/gtr-add-comment-po.page:21(page/title)
 msgid "Add comments to PO file"
-msgstr ""
+msgstr "Añadir comentarios al archivo PO"
 
 #: C/gtr-add-comment-po.page:23(page/p)
 msgid ""
@@ -187,47 +201,56 @@ msgid ""
 "in the <gui>Message Detail</gui> panel located inside the sidebar on the "
 "right."
 msgstr ""
+"<app>Gtranslator</app> le da la oportunidad de añadir comentarios a las "
+"cadenas en el panel <gui>Detalles del mensaje</gui> situado a la derecha "
+"dentro de la barra lateral."
 
 #: C/gtr-add-comment-po.page:26(note/p) C/gtr-main-window.page:45(note/p)
 msgid ""
 "To view the <gui>Message Details</gui> panel, use the shortcut "
 "<keyseq><key>Ctrl</key><key>J</key></keyseq>."
 msgstr ""
+"Para ver el panel <gui>Detalles del mensaje</gui>, utilice la combinación de "
+"teclas <keyseq><key>Ctrl</key><key>J</key></keyseq>."
 
 #: C/gtr-add-comment-po.page:30(figure/title)
 msgid "Message Detail sidebar"
-msgstr ""
+msgstr "Barra lateral de detalles del mensaje"
 
 #: C/gtr-add-comment-po.page:36(list/title)
 msgid "To add comments to the selected string:"
-msgstr ""
+msgstr "Para añadir comentarios a la cadena seleccionada:"
 
 #: C/gtr-add-comment-po.page:37(item/p)
 msgid ""
 "Click the <gui>Add Note</gui> link in the <gui>Message Detail</gui> panel."
 msgstr ""
+"Pulse el enlace <gui>Añadir una nota</gui> en el panel <gui>Detalles del "
+"mensaje</gui>."
 
 #: C/gtr-add-comment-po.page:38(item/p)
 msgid "Write the text in the comment field."
-msgstr ""
+msgstr "Escriba el texto en el campo de comentarios."
 
 #: C/gtr-add-comment-po.page:39(item/p)
 msgid "Click the button <gui>Done</gui> to save and exit."
-msgstr ""
+msgstr "Pulse el botón <gui>Hecho</gui> para guardar y salir."
 
 #: C/gtr-add-comment-po.page:43(figure/title)
 msgid "Comment in Message Detail sidebar"
-msgstr ""
+msgstr "Comentarios en la barra lateral de detalles del mensaje"
 
 #: C/gtr-concepts.page:19(page/title)
 msgid "Understand basic localization concepts"
-msgstr ""
+msgstr "Comprender los conceptos básicos de la traducción"
 
 #: C/gtr-concepts.page:21(page/p)
 msgid ""
 "Here are some localization concepts that you should understand to be able to "
 "work with Gtranslator."
 msgstr ""
+"Aquí se detallan algunos conceptos de traducción que debe entender para "
+"poder trabajar con Gtranslator."
 
 #: C/gtr-concepts.page:23(page/p)
 msgid ""
@@ -235,6 +258,9 @@ msgid ""
 "internationalization and localization of programs on Unix-like operating "
 "systems, and in web applications."
 msgstr ""
+"<em style=\"strong\">archivo PO</em>: tipo de archivo que utiliza el sistema "
+"gettext para la internacionalización y traducción de programas en sistemas "
+"operativos tipo Unix, y en aplicaciones web."
 
 #: C/gtr-concepts.page:25(page/p)
 msgid ""
@@ -244,22 +270,25 @@ msgid ""
 "web pages and applications. Strings in Gtranslator can have one of these 3 "
 "states:"
 msgstr ""
+"<em style=\"strong\">Cadena o segmento</em>: sentencias o unidades (palabras "
+"sencillas, frases y párrafos) que son parte de la interfaz gráfica del "
+"usuario (IGU) en programas informáticos independientes, o la interfaz de las "
+"páginas y aplicaciones web. Las cadenas en Gtranslator pueden tener uno de "
+"estos 3 estados:"
 
 #: C/gtr-concepts.page:27(item/p)
-#, fuzzy
-#| msgid "Translator Name"
 msgid "Translated"
-msgstr "Nombre del traductor"
+msgstr "Traducida"
 
 #: C/gtr-concepts.page:28(item/p)
-#, fuzzy
-#| msgid "Next Untranslated"
 msgid "Untranslated"
-msgstr "Siguiente sin traducir"
+msgstr "Sin traducir"
 
 #: C/gtr-concepts.page:29(item/p)
 msgid "Fuzzy (string with a partial match in translation memory)"
 msgstr ""
+"Difusa (cadena con una coincidencia parcial con respecto a su traducción "
+"anterior)"
 
 #: C/gtr-concepts.page:32(page/p)
 msgid ""
@@ -424,7 +453,6 @@ msgid "Click the <gui>Close</gui> button to save your new toolbar and exit."
 msgstr ""
 
 #: C/gtr-custom.page:31(figure/title)
-#| msgid "Gtranslator Tool Bar"
 msgid "Gtranslator Toolbar Editor"
 msgstr "Editor de la barra de herramientas de Gtranslator"
 
@@ -615,7 +643,6 @@ msgid "Gtranslator \"Go to...\" menu options"
 msgstr ""
 
 #: C/gtr-goto-string-po.page:39(item/p)
-#| msgid "Toolbar"
 msgid "Toolbar buttons"
 msgstr "Botones de la barra de herramientas"
 
@@ -705,7 +732,6 @@ msgid ""
 msgstr ""
 
 #: C/gtr-main-window.page:24(figure/title)
-#| msgid "Gtranslator Main Window"
 msgid "Gtranslator window"
 msgstr "Ventana Gtranslator"
 
@@ -901,7 +927,6 @@ msgid ""
 msgstr ""
 
 #: C/gtr-plugins.page:80(section/p)
-#| msgid "Translation Memory"
 msgid "<em>Translation Memory</em>"
 msgstr "<em>Memoria de traducción</em>"
 
@@ -1001,7 +1026,6 @@ msgid ""
 msgstr ""
 
 #: C/gtr-profiles.page:50(figure/title)
-#| msgid "Gtranslator Preferences Dialog"
 msgid "Gtranslator Preferences"
 msgstr "Preferencias de Gtranslator"
 
@@ -1616,7 +1640,6 @@ msgid ""
 msgstr ""
 
 #: C/license.page:8(info/desc)
-#| msgid "Feedback Information"
 msgid "Legal information."
 msgstr "Información legal."
 
