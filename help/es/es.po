@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.help.HEAD\n"
-"POT-Creation-Date: 2012-09-08 21:56+0000\n"
-"PO-Revision-Date: 2012-09-24 12:32+0200\n"
+"POT-Creation-Date: 2012-09-24 10:33+0000\n"
+"PO-Revision-Date: 2012-09-27 14:41+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -121,24 +121,20 @@ msgstr ""
 "se agrupan en secciones siguientes. Disfrute con <app>Gtranslator</app>."
 
 #: C/index.page:45(section/title)
-#, fuzzy
-#| msgid "Loading a PO file"
 msgid "Working with PO files"
 msgstr "Cargar un archivo PO"
 
 #: C/index.page:50(section/title)
-#, fuzzy
-#| msgid "Translation Memory"
 msgid "Working with Translation Memory"
-msgstr "Memoria de traducción"
+msgstr "Trabajar con la memoria de traducción"
 
 #: C/index.page:51(section/p)
 msgid ""
 "Translation Memory (TM) is a database that allows you to reuse previously "
 "translated strings."
 msgstr ""
-"La memoria de la traducción (MT) es una base de datos que le permite "
-"reutilizar cadenas traducidas anteriormente."
+"La memoria de traducción (MT) es una base de datos que le permite reutilizar "
+"cadenas traducidas anteriormente."
 
 #: C/index.page:53(section/p)
 msgid ""
@@ -298,6 +294,12 @@ msgid ""
 "least a language identifier and a region identifier, for example es_ES for "
 "Spanish (Spain) or ca_ES for Catalan (Spain)."
 msgstr ""
+"<em style=\"strong\">Configuración regional</em>: conjunto de parámetros que "
+"definen el idioma del usuario, país y cualquiera de las preferencias "
+"variantes especiales que el usuario quiere ver en su interfaz de usuario. "
+"Normalmente un identificador de configuración regional consiste en, por lo "
+"menos, un identificador del idioma y un identificador de región, por ejemplo "
+"es_ES para español (España) o ca_ES para el catalán (España)."
 
 #: C/gtr-concepts.page:34(page/p)
 msgid ""
@@ -305,6 +307,10 @@ msgid ""
 "header of the PO file (target language and translator information). You can "
 "have a separate profile for each language and/or translator team."
 msgstr ""
+"<em style=\"strong\">Perfil</em>: grupo específico de configuraciones "
+"almacenadas en la cabecera del archivo PO (información sobre el idioma y el "
+"traductor). Puede tener un perfil independiente para cada idioma y/o equipo "
+"de traducción."
 
 #: C/gtr-concepts.page:37(page/p)
 msgid ""
@@ -312,6 +318,9 @@ msgid ""
 "so-called \"segments\", which can be sentences or sentence-like units "
 "(words, phrases and paragraphs) that have previously been translated."
 msgstr ""
+"<em style=\"strong\">Memoria de traducción (MT)</em>: una base de datos que "
+"almacena los llamados «segmentos» que pueden ser sentencias o unidades "
+"(palabras, frases y párrafos) que previamente se han traducido."
 
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
@@ -343,10 +352,8 @@ msgstr ""
 "external ref='figures/tm-manager.png' md5='d7b9db8a6fc8665c696830acaf49ca60'"
 
 #: C/gtr-create-tm.page:18(page/title)
-#, fuzzy
-#| msgid "Translation Memory"
 msgid "Build Translation Memory"
-msgstr "Memoria de traducción"
+msgstr "Construir la memoria de traducción"
 
 #: C/gtr-create-tm.page:20(page/p)
 msgid ""
@@ -354,6 +361,9 @@ msgid ""
 "(TM), and each time you translate a string it will be added as a new entry "
 "in the TM database."
 msgstr ""
+"Con <app>Gtranslator</app> puede empezar con una memoria de traducción (MT) "
+"vacía, y cada vez que traduzca una cadena se añadirá como una nueva entrada "
+"a la base de datos de la MT."
 
 #: C/gtr-create-tm.page:22(page/p)
 msgid ""
@@ -364,6 +374,13 @@ msgid ""
 "app> will display them in the TM panel and you can choose to use them as it "
 "is, or change/adapt them for the string you are translating."
 msgstr ""
+"Puede también construir la base de datos de la memoria de traducción "
+"importando cadenas desde un archivo PO ya existente (por ejemplo uno que se "
+"ha creado por la versión anterior del programa o aplicación web en la que "
+"está trabajando). De esta manera, si hay cadenas similares en el archivo PO "
+"sobre el que está trabajando, <app>Gtranslator</app> las mostrará en el "
+"panel de la memoria de traducción y puede escoger entre utilizarla tal cual, "
+"o adaptarla a la cadena que está traduciendo."
 
 #: C/gtr-create-tm.page:25(note/p) C/gtr-use-delete-entry.page:23(note/p)
 msgid ""
@@ -373,42 +390,46 @@ msgid ""
 "<guiseq><gui>Preferences</gui><gui>Plugins</gui></guiseq> tab, and activate "
 "the TM plugin check box."
 msgstr ""
+"Para poder ver el panel de la <gui>Memoria de traducción</gui>, necesita "
+"activar el <em style=\"strong\">Complemento de memoria de traducción</em>: "
+"pulse en la barra de menú de <gui>Gtranslator</gui> situada en la parte "
+"superior, seleccione <guiseq><gui>Preferencias</gui><gui>Complementos</gui></"
+"guiseq>, y active la casilla del complemento de memoria de traducción."
 
 #: C/gtr-create-tm.page:29(figure/title)
 #: C/gtr-use-delete-entry.page:27(figure/title)
 #: C/gtr-use-delete-entry.page:41(figure/title)
-#, fuzzy
-#| msgid "Gtranslator Manual"
 msgid "Gtranslator TM panel"
-msgstr "Manual de Gtranslator"
+msgstr "Panel de memoria de traducción de Gtranslator"
 
 #: C/gtr-create-tm.page:34(page/p)
-#, fuzzy
-#| msgid "The <guilabel>Translation Memory</guilabel> tab contains:"
 msgid "To create <gui>Translation Memory</gui> from an existing PO file:"
-msgstr "La pestaña <guilabel>Memoria de traducción</guilabel> contiene:"
+msgstr ""
+"Para crear la <gui>Memoria de traducción</gui> desde un archivo PO existente:"
 
 #: C/gtr-create-tm.page:37(item/p)
 msgid ""
 "In the main Gtranslator menu go to <guiseq><gui>Tools</gui><gui>Build "
 "Translation Memory</gui></guiseq>."
 msgstr ""
+"En el menú principal de Gtranslator vaya a <guiseq><gui>Herramientas</"
+"gui><gui>Construir memoria de traducción</gui></guiseq>."
 
 #: C/gtr-create-tm.page:38(item/p)
 msgid ""
 "Select the folder where the PO files are stored, and click the <gui>Add to "
 "Database</gui> button."
 msgstr ""
+"Seleccione la carpeta donde los archivos PO están almacenados, y pulse  el "
+"botón <gui>Añadir a la base de datos</gui>."
 
 #: C/gtr-create-tm.page:39(item/p)
 msgid "Click the <gui>Close</gui> button to finish."
-msgstr ""
+msgstr "Pulse el botón <gui>Cerrar</gui> para terminar."
 
 #: C/gtr-create-tm.page:43(figure/title)
-#, fuzzy
-#| msgid "Gtranslator Manual"
 msgid "Gtranslator TM manager"
-msgstr "Manual de Gtranslator"
+msgstr "Gestor de memoria de traducción de Gtranslator"
 
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
@@ -424,22 +445,24 @@ msgstr ""
 "md5='e6d34b8ad6b14c3e4df5233526b602c5'"
 
 #: C/gtr-custom.page:19(page/title)
-#, fuzzy
-#| msgid "Gtranslator Main Window"
 msgid "Customize Gtranslator window"
-msgstr "Ventana principal de Gtranslator"
+msgstr "Personalizar la ventana de Gtranslator"
 
 #: C/gtr-custom.page:21(page/p)
 msgid ""
 "You can customize <app>Gtranslator</app> toolbar to include buttons that you "
 "use most frequently."
 msgstr ""
+"Puede personalizar la barra de herramientas de <app>Gtranslator</app> para "
+"incluir los botones que más utilice."
 
 #: C/gtr-custom.page:25(item/p)
 msgid ""
 "In the <gui>Gtranslator</gui> main menu select <guiseq><gui>Edit</"
 "gui><gui>Toolbar</gui></guiseq>."
 msgstr ""
+"En el menú principal de <gui>Gtranslator</gui> seleccione "
+"<guiseq><gui>Editar</gui><gui>Barra de herramientas</gui></guiseq>."
 
 #: C/gtr-custom.page:26(item/p)
 msgid ""
@@ -447,10 +470,15 @@ msgid ""
 "<gui>Gtranslator</gui> toolbar, or the other way around if you want to "
 "remove the icons from the toolbar."
 msgstr ""
+"Arrastre y suelte los iconos que quiera desde el <gui>Editor de la barra de "
+"herramientas</gui> hacia la barra de herramientas de <gui>Gtranslator</gui>, "
+"o al revés si quiere quitar los iconos desde la barra de herramientas."
 
 #: C/gtr-custom.page:27(item/p)
 msgid "Click the <gui>Close</gui> button to save your new toolbar and exit."
 msgstr ""
+"Pulse el botón <gui>Cerrar</gui> para guardar su barra de herramientas nueva "
+"y salir."
 
 #: C/gtr-custom.page:31(figure/title)
 msgid "Gtranslator Toolbar Editor"
@@ -481,10 +509,8 @@ msgstr ""
 "md5='01c3fd398b15ea7e124b47d6d392c3b1'"
 
 #: C/gtr-edit-header.page:21(page/title)
-#, fuzzy
-#| msgid "Editing PO file"
 msgid "Edit PO file header"
-msgstr "Editar un archivo PO"
+msgstr "Editar la cabecera del archivo PO"
 
 #: C/gtr-edit-header.page:23(page/p)
 msgid ""
@@ -524,8 +550,6 @@ msgstr ""
 "external ref='figures/edit-text.png' md5='d3ebad59d1e57ae6fb19d6dcb2b7f35d'"
 
 #: C/gtr-edit-po.page:21(page/title)
-#, fuzzy
-#| msgid "Editing PO file"
 msgid "Edit PO file"
 msgstr "Editar un archivo PO"
 
@@ -775,16 +799,12 @@ msgid "Open <gui>Preferences</gui> from the top bar"
 msgstr ""
 
 #: C/gtr-main-window.page:58(figure/title)
-#, fuzzy
-#| msgid "Translation Memory"
 msgid "Activate Translation Memory plugin"
-msgstr "Memoria de traducción"
+msgstr "Activar complemento memoria de traducción"
 
 #: C/gtr-open-po.page:21(page/title) C/gtr-shortcut-keys.page:34(td/p)
-#, fuzzy
-#| msgid "Saving PO file"
 msgid "Open PO file"
-msgstr "Guardar un archivo PO"
+msgstr "Abrir un archivo PO"
 
 #: C/gtr-open-po.page:23(page/p)
 msgid ""
