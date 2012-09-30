@@ -6,16 +6,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.help.HEAD\n"
-"POT-Creation-Date: 2012-09-24 10:33+0000\n"
-"PO-Revision-Date: 2012-09-27 14:41+0200\n"
+"POT-Creation-Date: 2012-09-28 09:07+0000\n"
+"PO-Revision-Date: 2012-09-30 12:16+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
-"Language-Team: Español <gnome-es-list@gnome.org>\n"
+"Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Gtranslator 2.91.5\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -522,10 +522,17 @@ msgid ""
 "<guiseq><gui>Edit</gui><gui>Header...</gui></guiseq> in the main "
 "<app>Gtranslator</app> menu."
 msgstr ""
+"<app>Gtranslator</app> obtiene la información requerida por la cabecera del "
+"archivo PO desde su perfil activo (se visualiza en la barra de estado de la "
+"ventana de <app>Gtranslator</app>). Puede editar el dato guardado en la "
+"cabecera del archivo PO en el que está trabajando en estos instantes, por "
+"ejemplo cuando necesite cambiar la dirección de correo o añadir otro "
+"traductor. Vaya a <guiseq><gui>Editar</gui><gui>Cabecera...</gui></guiseq> "
+"en el menú principal de <app>Gtranslator</app>."
 
 #: C/gtr-edit-header.page:25(figure/title)
 msgid "Edit PO header window"
-msgstr ""
+msgstr "Ventana del editor de cabecera del archivo PO"
 
 #: C/gtr-edit-header.page:31(note/p)
 msgid ""
@@ -533,10 +540,13 @@ msgid ""
 "gui>, uncheck the <gui>Use my options to complete the following entries</"
 "gui> checkbox."
 msgstr ""
+"Para poder editar la información en la pestaña <gui>Traductor e idioma</gui>,"
+"desactive la casilla <gui>Usar mis opciones para completar las siguientes "
+"entradas</gui>."
 
 #: C/gtr-edit-header.page:33(figure/title)
 msgid "Edit PO header - Translator and Language tab"
-msgstr ""
+msgstr "Editar la cabecera del archivo PO: pestaña Traductor e idioma"
 
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
@@ -562,30 +572,43 @@ msgid ""
 "string in the source language, and the field <gui>Translated Text</gui> is "
 "where you type or edit the translation in the target language."
 msgstr ""
+"Cuando selecciona la cadena en la <gui>Tabla de mensajes</gui>, en la parte "
+"de abajo de la ventana de <app>Gtranslator</app> puede ver dos campos que "
+"muestran el contenido al completo de la cadena. El campo <gui>Mensaje "
+"original</gui> no es editable pero le permite ver el contenido al completo "
+"de la cadena en el idioma original, y el campo <gui>Texto traducido</gui> es "
+"donde escribe o edita la traducción en el idioma final."
 
 #: C/gtr-edit-po.page:26(figure/title)
 msgid "Gtranslator source and target language fields"
-msgstr ""
+msgstr "Campos de idioma original y final de Gtranslator"
 
 #: C/gtr-edit-po.page:31(page/p)
 msgid ""
 "Once you edit the text in the target language field (<gui>Translated Text</"
 "gui>), select the next string to continue with the translation."
 msgstr ""
+"Cuando edite el texto en el campo de idioma final (<gui>Texto traducido</"
+"gui>), seleccione la próxima cadena para continuar con la traducción."
 
 #: C/gtr-faq.page:16(page/title)
 msgid "Frequently Asked Questions"
-msgstr ""
+msgstr "Preguntas más frecuentes"
 
 #: C/gtr-faq.page:20(item/p)
 msgid ""
 "<em>Is there a fast way to copy the contents of the original string to "
 "translated string (code lines that do not need to be translated)?</em>"
 msgstr ""
+"<em>¿Existe una manera más rápida de copiar los contenidos de la cadena "
+"original a la cadena traducida (las líneas de código que no se traducen)?</"
+"em>"
 
 #: C/gtr-faq.page:21(item/p)
 msgid "Yes, use the shortcut <keyseq><key>Ctrl</key><key>Space</key></keyseq>."
 msgstr ""
+"Sí, utilice la combinación de teclas <keyseq><key>Ctrl</key><key>Barra "
+"espaciadora</key></keyseq>."
 
 #: C/gtr-faq.page:24(item/p)
 msgid ""
@@ -593,12 +616,18 @@ msgid ""
 "the following error: \".po file does not pass 'msgfmt -vc'. Please correct "
 "the file and try again.\" How can I solve this problem?</em>"
 msgstr ""
+"<em>He terminado de traducir el archivo PO, pero cuando intento subirlo, "
+"obtengo el mensaje de error: «El archivo \".po\" no pasa \"msgfmt -vc\". Por "
+"favor corrija el archivo e inténtelo de nuevo». ¿Cómo puedo resolver este "
+"problema?</em>"
 
 #: C/gtr-faq.page:25(item/p)
 msgid ""
 "Open the <app>Terminal</app> and use the command \"msgfmt -cv\" with the "
 "name of the PO file:"
 msgstr ""
+"Abre la <app>Terminal</app> y utilice el comando «msgfmt -cv» con el nombre "
+"del archivo PO:"
 
 #: C/gtr-faq.page:27(item/code)
 #, no-wrap
@@ -633,7 +662,7 @@ msgstr ""
 
 #: C/gtr-goto-string-po.page:21(page/title)
 msgid "Move between strings in PO file"
-msgstr ""
+msgstr "Moverse entre las cadenas del archivo PO"
 
 #: C/gtr-goto-string-po.page:23(page/p)
 msgid ""
@@ -641,30 +670,39 @@ msgid ""
 "you need first to select it in the <gui>Message Table</gui>. There are "
 "several ways you can move among the strings in the PO file:"
 msgstr ""
+"Para empezar la traducción de una cadena específica (o editar una "
+"existente), necesita primero seleccionarla en la <gui>Tabla de mensajes</"
+"gui>. Existen varias maneras para moverse entre las cadenas del archivo PO:"
 
 #: C/gtr-goto-string-po.page:26(item/p)
 msgid "Click directly on the desired string in the <gui>Message Table</gui>."
 msgstr ""
+"Pulse directamente en la cadena que quiera en la <gui>Tabla de mensajes</"
+"gui>."
 
 #: C/gtr-goto-string-po.page:27(item/p)
 msgid "Use the <key>↑</key> and <key>↓</key> keys on your keyboard."
-msgstr ""
+msgstr "Utilice las teclas <key>↑</key> y <key>↓</key> de su teclado."
 
 #: C/gtr-goto-string-po.page:28(item/p)
 msgid ""
 "Jump between only <gui>Fuzzy</gui>, only <gui>Untranslated</gui>, or both "
 "<gui>Fuzzy and Untranslated</gui> strings with:"
 msgstr ""
+"Saltar solo entre las cadenas <gui>Difusas</gui>, <gui>Sin traducir</gui>, o "
+"ambos <gui>Difusas y sin traducir</gui> con:"
 
 #: C/gtr-goto-string-po.page:30(item/p)
 msgid ""
 "Menu options <guiseq><gui>Go</gui><gui>Next...</gui></guiseq> or "
 "<guiseq><gui>Go</gui><gui>Previous...</gui></guiseq>"
 msgstr ""
+"Opciones del menú <guiseq><gui>Ir</gui><gui>Siguiente...</gui></guiseq> o "
+"<guiseq><gui>Ir</gui><gui>Anterior...</gui></guiseq>"
 
 #: C/gtr-goto-string-po.page:33(figure/title)
 msgid "Gtranslator \"Go to...\" menu options"
-msgstr ""
+msgstr "Opciones del menú «Ir a...» de Gtranslator"
 
 #: C/gtr-goto-string-po.page:39(item/p)
 msgid "Toolbar buttons"
@@ -672,7 +710,7 @@ msgstr "Botones de la barra de herramientas"
 
 #: C/gtr-goto-string-po.page:42(figure/title)
 msgid "Gtranslator \"Go to...\" toolbar options"
-msgstr ""
+msgstr "Opciones de la barra de herramientas «Ir a...»"
 
 #: C/gtr-goto-string-po.page:47(item/p)
 msgid "<link xref=\"gtr-shortcut-keys\">Shortcut keys</link>"
