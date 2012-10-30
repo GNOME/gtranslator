@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gtranslator 0.51\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-03-01 21:11+0000\n"
-"PO-Revision-Date: 2012-03-02 14:34+0200\n"
+"POT-Creation-Date: 2012-10-16 19:05+0000\n"
+"PO-Revision-Date: 2012-10-30 01:24+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz@gmail.com>\n"
 "Language-Team: Estonian <>\n"
 "Language: et\n"
@@ -46,13 +46,6 @@ msgid ""
 msgstr ""
 "Kui märgitud, siis hoiatatakse kasutajat hägusaks märgitud tõlkevastetega PO-"
 "faili salvestamisel."
-
-msgid "Delete compiled GMO files"
-msgstr "Kompileeritud GMO failid kustutatakse"
-
-msgid "If true, remove compiled GMO binary files when saving."
-msgstr ""
-"Kui märgitud, siis eemaldatakse salvestamisel kompileeritud GMO binaarfailid."
 
 msgid "Auto save files"
 msgstr "Automaatsalvestus"
@@ -123,49 +116,6 @@ msgstr "Õigekirjakontroll"
 
 msgid "If true, check the spelling of translated messages."
 msgstr "Kui märgitud, siis kontrollitakse tõlgitud tekstide õigekirja."
-
-msgid "PO directory"
-msgstr "PO-failide kataloog"
-
-msgid "Directory containing PO files to add to the translation memory."
-msgstr "Tõlkemällu lisatavaid PO-faile sisaldav kataloog."
-
-msgid "Restrict search by filename"
-msgstr "Otsingu piiramine failinimega"
-
-msgid ""
-"If true, only include files with a specified filename when searching the "
-"translation memory."
-msgstr ""
-"Kui märgitud, siis kaasatakse tõlkemälust otsimisel ainult määratud nimele "
-"vastavad failid."
-
-msgid "Filename to restrict search to"
-msgstr "Failinimi, millega otsing piirata"
-
-msgid ""
-"Filename to which searching of the translation memory should be restricted."
-msgstr "Failinimi, millega tõlkemälust otsimine peaks piirduma."
-
-msgid "Maximum number of missing words"
-msgstr "Puuduvate sõnade ülempiir"
-
-msgid ""
-"Maximum number of words that can be missing from a message displayed as a "
-"match by the translation memory."
-msgstr ""
-"Ülempiir sõnade hulgale, mis võivad puududa tekstist, mida näidatakse "
-"tõlkemälu poolt sobiva tõlkevastena."
-
-msgid "Maximum difference in message length"
-msgstr "Erineva teksti pikkuse ülempiir"
-
-msgid ""
-"Maximum difference in length between messages displayed as matches by the "
-"translation memory."
-msgstr ""
-"Erineva teksti pikkuse ülempiir, mille ületamisel tõlkemälust leitud teksti "
-"enam ei kuvata."
 
 msgid "Side panel switcher style"
 msgstr "Külgpaneeli lülitusstiil"
@@ -249,11 +199,64 @@ msgstr "Võrdluskeel"
 msgid "Load an alternate language."
 msgstr "Võrdluskeele laadimine."
 
+#. ex:et:ts=4:
 msgid "Character Map"
 msgstr "Märgikaart"
 
 msgid "Insert special characters just by clicking on them."
 msgstr "Erimärkide sisestamine lihtsalt neil klõpsates."
+
+msgid "Source View Settings"
+msgstr "Lähtekoodi näitamise sätted"
+
+msgid "Use external editor"
+msgstr "Välise redaktori kasutamine"
+
+msgid "Program command:"
+msgstr "Programmikäsk:"
+
+msgid "Line command:"
+msgstr "Reakäsk:"
+
+#, c-format
+msgid "Please install \"%s\" to be able to show the file"
+msgstr "Faili näitamiseks paigalda palun \"%s\""
+
+msgid "Paths:"
+msgstr "Asukohad:"
+
+msgid "Source Code View"
+msgstr "Lähtekoodi vaatamine"
+
+msgid "Show the message in the source code."
+msgstr "Teksti kuvamine lähtekoodis."
+
+msgid "Source Viewer"
+msgstr "Lähtekoodi näitaja"
+
+msgid "Source code"
+msgstr "Lähtekood"
+
+msgid "Use the System Editor"
+msgstr "Süsteemse redaktori kasutamine"
+
+msgid "Whether use the system editor to show the source code"
+msgstr "Kas kasutada lähtekoodi näitamiseks süsteemset redaktorit"
+
+msgid "The Editor to Launch"
+msgstr "Käivitatav redaktor"
+
+msgid "The command to launch the editor you want to use"
+msgstr "Käsk soovitud redaktori käivitamiseks"
+
+msgid "Arguments for the Command"
+msgstr "Argumendid käsule"
+
+msgid "Arguments to pass to the program command line to select the line"
+msgstr "Programmi käsureaargumendid, mida rea valimiseks kasutada"
+
+msgid "Dictionary"
+msgstr "Sõnaraamat"
 
 #, c-format
 msgid "No dictionary source available with name '%s'"
@@ -316,9 +319,6 @@ msgstr "Saadaolevad strateegiad"
 
 msgid "Dictionary sources"
 msgstr "Sõnaraamatuallikad"
-
-msgid "Dictionary"
-msgstr "Sõnaraamat"
 
 msgid "Look up words in a dictionary."
 msgstr "Sõnade otsimine sõnaraamatust."
@@ -470,10 +470,6 @@ msgstr "Otsi:"
 msgid "Open Tran"
 msgstr "Open-Tran"
 
-#, c-format
-msgid "Error from configuration dialog %s"
-msgstr "Viga seadistusdialoogist %s"
-
 msgid "Look for phrases in Open tran memory translation database."
 msgstr "Fraaside otsimine Open-Tran'i tõlkebaasist."
 
@@ -501,66 +497,107 @@ msgstr "Peegelserveri URL"
 msgid "URL of an Open-Tran mirror server"
 msgstr "Open-Tran'i peegelserveri URL"
 
-msgid "Source View Settings"
-msgstr "Lähtekoodi näitamise sätted"
+msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"large\">Stringid lisatud andmebaasi</span>"
 
-msgid "Use external editor"
-msgstr "Välise redaktori kasutamine"
+msgid "Please specify a valid path to build the translation memory"
+msgstr "Palun määra sobiv asukoht, kuhu luua tõlkemälu"
 
-msgid "Program command:"
-msgstr "Programmikäsk:"
+msgid "Gtranslator Translation Memory Manager"
+msgstr "Gtranslatori tõlkemälu haldur"
 
-msgid "Line command:"
-msgstr "Reakäsk:"
+msgid "Database:"
+msgstr "Andmebaas:"
+
+msgid "Select the directory which contains PO files:"
+msgstr "PO-faile sisaldava kataloogi valimine:"
+
+msgid "Add to Database"
+msgstr "Lisa andmebaasi"
+
+msgid "Configuration:"
+msgstr "Seadistused:"
+
+msgid "Use only files with this name:"
+msgstr "Kasuta ainult selle nimega faile:"
+
+msgid "Translation Memory"
+msgstr "Tõlkemälu"
+
+msgid "Get translation suggestions from a data base."
+msgstr "Tõlkesoovituste hankimine andmebaasist."
 
 #, c-format
-msgid "Please install \"%s\" to be able to show the file"
-msgstr "Faili näitamiseks paigalda palun \"%s\""
+msgid "Insert Option nº %d"
+msgstr "Lisa valik nr %d"
 
-msgid "Paths:"
-msgstr "Asukohad:"
+msgid "_Use this translation"
+msgstr "_Kasuta seda tõlget"
 
-msgid "Source Code View"
-msgstr "Lähtekoodi vaatamine"
+msgid "_Remove"
+msgstr "_Eemalda"
 
-msgid "Show the message in the source code."
-msgstr "Teksti kuvamine lähtekoodis."
+msgid "Shortcut"
+msgstr "Sõrmis"
 
-msgid "Source Viewer"
-msgstr "Lähtekoodi näitaja"
+msgid "Level"
+msgstr "Klapp"
 
-msgid "Source code"
-msgstr "Lähtekood"
+msgid "String"
+msgstr "String"
 
-msgid "Use the System Editor"
-msgstr "Süsteemse redaktori kasutamine"
+msgid "_Build Translation Memory"
+msgstr "_Tõlkemälu koostamine"
 
-msgid "Whether use the system editor to show the source code"
-msgstr "Kas kasutada lähtekoodi näitamiseks süsteemset redaktorit"
+msgid "Build translation memory"
+msgstr "Tõlkemälu koostamine"
 
-msgid "The Editor to Launch"
-msgstr "Käivitatav redaktor"
+msgid "_Translation Memory"
+msgstr "_Tõlkemälu"
 
-msgid "The command to launch the editor you want to use"
-msgstr "Käsk soovitud redaktori käivitamiseks"
+msgid "PO directory"
+msgstr "PO-failide kataloog"
 
-msgid "Arguments for the Command"
-msgstr "Argumendid käsule"
+msgid "Directory containing PO files to add to the translation memory."
+msgstr "Tõlkemällu lisatavaid PO-faile sisaldav kataloog."
 
-msgid "Arguments to pass to the program command line to select the line"
-msgstr "Programmi käsureaargumendid, mida rea valimiseks kasutada"
+msgid "Restrict search by filename"
+msgstr "Otsingu piiramine failinimega"
 
-msgid "Open file for translation"
-msgstr "Tõlkefaili avamine"
+msgid ""
+"If true, only include files with a specified filename when searching the "
+"translation memory."
+msgstr ""
+"Kui märgitud, siis kaasatakse tõlkemälust otsimisel ainult määratud nimele "
+"vastavad failid."
 
-msgid "File saved."
-msgstr "Fail salvestatud."
+msgid "Filename to restrict search to"
+msgstr "Failinimi, millega otsing piirata"
 
-msgid "Save file as..."
-msgstr "Salveta fail nimega..."
+msgid ""
+"Filename to which searching of the translation memory should be restricted."
+msgstr "Failinimi, millega tõlkemälust otsimine peaks piirduma."
 
-msgid "Files saved."
-msgstr "Failid salvestatud."
+msgid "Maximum number of missing words"
+msgstr "Puuduvate sõnade ülempiir"
+
+msgid ""
+"Maximum number of words that can be missing from a message displayed as a "
+"match by the translation memory."
+msgstr ""
+"Ülempiir sõnade hulgale, mis võivad puududa tekstist, mida näidatakse "
+"tõlkemälu poolt sobiva tõlkevastena."
+
+msgid "Maximum difference in message length"
+msgstr "Erineva teksti pikkuse ülempiir"
+
+msgid ""
+"Maximum difference in length between messages displayed as matches by the "
+"translation memory."
+msgstr ""
+"Erineva teksti pikkuse ülempiir, mille ületamisel tõlkemälust leitud teksti "
+"enam ei kuvata."
 
 msgid "Current Maintainers"
 msgstr "Praegused haldajad"
@@ -594,6 +631,18 @@ msgstr ""
 msgid "Gtranslator Web Site"
 msgstr "Gtranslatori veebileht"
 
+msgid "Open file for translation"
+msgstr "Tõlkefaili avamine"
+
+msgid "File saved."
+msgstr "Fail salvestatud."
+
+msgid "Save file as..."
+msgstr "Salveta fail nimega..."
+
+msgid "Files saved."
+msgstr "Failid salvestatud."
+
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
@@ -603,30 +652,20 @@ msgstr[1] "Leitud ja asendatud %d vastavust"
 msgid "Found and replaced one occurrence"
 msgstr "Leitud ja asendatud üks vastavus"
 
-msgid "Notes:"
-msgstr "Märkused:"
+msgid "_New Window"
+msgstr "_Uus aken"
 
-msgid "Add Note"
-msgstr "Lisa märkus"
+msgid "_Preferences"
+msgstr "_Eelistused"
 
-msgid "Edit"
-msgstr "Muuda"
+msgid "_Help"
+msgstr "_Abi"
 
-#. Extracted comments
-msgid "Extracted comments:"
-msgstr "Kommentaarid:"
+msgid "_About"
+msgstr "_Rakendusest lähemalt"
 
-#. Context
-msgid "Context:"
-msgstr "Kontekst:"
-
-#. Format
-msgid "Format:"
-msgstr "Vorming:"
-
-msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"large\">Stringid lisatud andmebaasi</span>"
+msgid "_Quit"
+msgstr "_Lõpeta"
 
 #, c-format
 msgid ""
@@ -639,9 +678,8 @@ msgid ""
 "Character set: %s\n"
 "Transfer encoding: %s\n"
 "Plural form: %s\n"
-"Database path: %s"
 msgstr ""
-"Prfiili nimi: %s\n"
+"Profiili nimi: %s\n"
 "Tõlkija nimi: %s\n"
 "Tõlkija meil: %s\n"
 "Keele nimetus: %s\n"
@@ -649,18 +687,10 @@ msgstr ""
 "Keelekood: %s\n"
 "Märgistik: %s\n"
 "Ülekandemärgistik: %s\n"
-"Mitmuse vorme: %s\n"
-"Andmebaasi asukoht: %s"
+"Mitmuse vormid: %s\n"
 
-msgid "None"
-msgstr "Puudub"
-
-msgid ""
-"This assistant will help you to create the main profile\n"
-"and generate your translation memory database."
-msgstr ""
-"See abiline aitab sul luua tõlkerakenduse põhiprofiili\n"
-"ja genereerida oma tõlkemälu andmebaasi."
+msgid "This assistant will help you to create the main profile."
+msgstr "See abiline aitab sul luua tõlkerakenduse põhiprofiili."
 
 msgid "Assistant"
 msgstr "Abiline"
@@ -676,21 +706,6 @@ msgstr "<b>Tõlkija meil:</b>"
 
 msgid "Profile"
 msgstr "Profiil"
-
-msgid "Checkout directory"
-msgstr "Väljastuskataloog"
-
-msgid "<b>Select the path to generate the database:</b>"
-msgstr "<b>Määra andmebaasi aluseks olev kataloog:</b>"
-
-msgid "<b>Look for a specific PO filename:</b>"
-msgstr "<b>Kindla nimega PO-failide kasutamine:</b>"
-
-msgid "E.g.: gl.po"
-msgstr "Nt \"et.po\""
-
-msgid "Generate Database"
-msgstr "Loo andmebaas"
 
 msgid "Confirmation"
 msgstr "Kinnitus"
@@ -733,6 +748,30 @@ msgstr "Salvestamine on süsteemiülema poolt keelatud."
 
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Kui Sa ei salvesta, siis lähevad kõik muudatused kaotsi."
+
+msgid "Notes:"
+msgstr "Märkused:"
+
+msgid "Add Note"
+msgstr "Lisa märkus"
+
+msgid "Edit"
+msgstr "Muuda"
+
+#. Extracted comments
+msgid "Extracted comments:"
+msgstr "Kommentaarid:"
+
+#. Context
+msgid "Context:"
+msgstr "Kontekst:"
+
+#. Format
+msgid "Format:"
+msgstr "Vorming:"
+
+msgid "D_one"
+msgstr "_Valmis"
 
 msgid "Gettext translation"
 msgstr "Gettext'i tõlge"
@@ -809,6 +848,68 @@ msgstr "Keele _kood:"
 msgid "_Plural forms:"
 msgstr "_Mitmuse vormid:"
 
+msgid "Status"
+msgstr "Olek"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Original Message"
+msgstr "Originaaltekst"
+
+msgid "Translated Message"
+msgstr "Tõlgitud tekst"
+
+#, c-format
+msgid "The file is empty"
+msgstr "Fail on tühi"
+
+#, c-format
+msgid "Failed opening file '%s': %s"
+msgstr "Viga faili '%s' avamisel: %s"
+
+#, c-format
+msgid "Could not convert from charset '%s' to UTF-8"
+msgstr "Pole võimalik teisendada kooditabelist '%s' tabelisse UTF-8"
+
+#, c-format
+msgid "Could not store temporary file for encoding conversion"
+msgstr "Pole võimalik salvestada ajutist faili kodeeringu teisendamiseks"
+
+#, c-format
+msgid ""
+"All attempt to convert the file to UTF-8 has failed, use the msgconv or "
+"iconv command line tools before opening this file with gtranslator"
+msgstr ""
+"Katse teisendada fail UTF-8 kodeeringusse nurjus, kasuta msgconv või iconv "
+"käsureatööriistu enne selle faili avamist gtranslator-iga."
+
+#, c-format
+msgid "Gettext returned a null message domain list."
+msgstr "Gettext tagastas tühja domeeminimekirja."
+
+#, c-format
+msgid "No messages obtained from parser."
+msgstr "Parser ei tagastanud ühtegi teadet."
+
+#, c-format
+msgid ""
+"You are saving a file with a .pot extension.\n"
+"Pot files are generated by the compilation process.\n"
+"Your file should likely be named '%s.po'."
+msgstr ""
+"Te salvestate faili laiendiga .pot\n"
+"Pot failid luuakse programmi kompileerimise käigus.\n"
+"Teie fail tuleks nimetada kui '%s.po'."
+
+#, c-format
+msgid "The file %s is read-only, and can not be overwritten"
+msgstr "Fail %s on kirjutuskaitstud ja seda pole võimalik üle kirjutada"
+
+#, c-format
+msgid "There was an error writing the PO file: %s"
+msgstr "PO-faili kirjutamisel leidis aset viga: %s"
+
 msgid ""
 "<span weight=\"bold\" size=\"large\">Impossible to remove the active "
 "profile</span>"
@@ -838,20 +939,17 @@ msgstr "Üldine"
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "_Hoiatus, kui PO-fail sisaldab hägusaid tõlkevasteid"
 
-msgid "_Delete compiled GMO files"
-msgstr "_Kustuta kompileeritud GMO failid"
-
 msgid "Autosave"
 msgstr "Automaatsalvestus"
+
+msgid "Create a _backup copy of files before saving"
+msgstr "Failist tehakse enne salvestamist _varukoopia"
 
 msgid "_Autosave files every"
 msgstr "_Automaatsalvestus iga"
 
 msgid "_minutes"
 msgstr "minuti _järel"
-
-msgid "Create a _backup copy of files before saving"
-msgstr "Failist tehakse enne salvestamist _varukoopia"
 
 msgid "Files"
 msgstr "Failid"
@@ -883,26 +981,11 @@ msgstr "Õigekirja_kontroll"
 msgid "Editor"
 msgstr "Redaktor"
 
+msgid "Edit Profile"
+msgstr "Profiili muutmine"
+
 msgid "Profiles"
 msgstr "Profiilid"
-
-msgid "Database:"
-msgstr "Andmebaas:"
-
-msgid "Select the directory which contains PO files:"
-msgstr "PO-faile sisaldava kataloogi valimine:"
-
-msgid "Add to Database"
-msgstr "Lisa andmebaasi"
-
-msgid "Configuration:"
-msgstr "Seadistused:"
-
-msgid "Use only files with this name:"
-msgstr "Kasuta ainult selle nimega faile:"
-
-msgid "Translation Memory"
-msgstr "Tõlkemälu"
 
 msgid "Plugins"
 msgstr "Pluginad"
@@ -970,52 +1053,6 @@ msgstr "Otsi _tagasisuunas"
 msgid "_Wrap around"
 msgstr "_Korduv otsing"
 
-msgid "Status"
-msgstr "Olek"
-
-msgid "ID"
-msgstr "ID"
-
-msgid "Original Text"
-msgstr "Originaal"
-
-msgid "Translated Text"
-msgstr "Tõlge"
-
-#, c-format
-msgid "Failed opening file '%s': %s"
-msgstr "Viga faili '%s' avamisel: %s"
-
-#, c-format
-msgid "The file is empty"
-msgstr "Fail on tühi"
-
-#, c-format
-msgid "Gettext returned a null message domain list."
-msgstr "Gettext tagastas tühja domeeminimekirja."
-
-#, c-format
-msgid "No messages obtained from parser."
-msgstr "Parser ei tagastanud ühtegi teadet."
-
-#, c-format
-msgid ""
-"You are saving a file with a .pot extension.\n"
-"Pot files are generated by the compilation process.\n"
-"Your file should likely be named '%s.po'."
-msgstr ""
-"Te salvestate faili laiendiga .pot\n"
-"Pot failid luuakse programmi kompileerimise käigus.\n"
-"Teie fail tuleks nimetada kui '%s.po'."
-
-#, c-format
-msgid "The file %s is read-only, and can not be overwritten"
-msgstr "Fail %s on kirjutuskaitstud ja seda pole võimalik üle kirjutada"
-
-#, c-format
-msgid "There was an error writing the PO file: %s"
-msgstr "PO-faili kirjutamisel leidis aset viga: %s"
-
 msgid "INS"
 msgstr "LISAM"
 
@@ -1032,8 +1069,8 @@ msgstr "Mitmus %d"
 msgid "Message Table"
 msgstr "Tekstide tabel"
 
-msgid "<b>Original Text:</b>"
-msgstr "<b>Originaal:</b>"
+msgid "<b>Original Message:</b>"
+msgstr "<b>Originaaltekst:</b>"
 
 msgid "<b>Translate_d Text:</b>"
 msgstr "<b>_Tõlge:</b>"
@@ -1045,8 +1082,8 @@ msgstr ""
 "       Tõivo Leedjärv <toivo@linux.ee>, 2002.\n"
 "       Mattias Põldaru <mahfiaz@gmail.com>, 2012."
 
-msgid "Context"
-msgstr "Kontekst"
+msgid "Message Details"
+msgstr "Tekstide üksikasjad"
 
 #. Translators: Path to the document opened
 msgid "Path:"
@@ -1054,68 +1091,6 @@ msgstr "Asukoht:"
 
 msgid "Close document"
 msgstr "Sulge dokument"
-
-#. Translaters: This string is for a toggle to display a toolbar.
-#. * The name of the toolbar is automatically computed from the widgets
-#. * on the toolbar, and is placed at the %s. Note the _ before the %s
-#. * which is used to add mnemonics. We know that this is likely to
-#. * produce duplicates, but don't worry about it. If your language
-#. * normally has a mnemonic at the start, please use the _. If not,
-#. * please remove.
-#, c-format
-msgid "Show “_%s”"
-msgstr "Näita „_%s”"
-
-msgid "_Move on Toolbar"
-msgstr "_Liiguta tööriistaribal"
-
-msgid "Move the selected item on the toolbar"
-msgstr "Valitud kirje liigutamine tööriistaribal"
-
-msgid "_Remove from Toolbar"
-msgstr "_Eemalda tööriistaribalt"
-
-msgid "Remove the selected item from the toolbar"
-msgstr "Valitud kirje eemaldamine tööriistaribalt"
-
-msgid "_Delete Toolbar"
-msgstr "_Kustuta tööriistariba"
-
-msgid "Remove the selected toolbar"
-msgstr "Valitud tööriistariba eemaldamine"
-
-msgid "Separator"
-msgstr "Eraldaja"
-
-#, c-format
-msgid "Insert Option nº %d"
-msgstr "Lisa valik nr %d"
-
-msgid "_Use this translation"
-msgstr "_Kasuta seda tõlget"
-
-msgid "_Remove"
-msgstr "_Eemalda"
-
-msgid "Shortcut"
-msgstr "Sõrmis"
-
-msgid "Level"
-msgstr "Klapp"
-
-msgid "String"
-msgstr "String"
-
-msgid "Please check your installation."
-msgstr "Palun kontrolli oma paigaldust."
-
-#, c-format
-msgid "Unable to open ui file %s. Error: %s"
-msgstr "Kasutajaliidese faili %s pole võimalik avada. Viga: %s"
-
-#, c-format
-msgid "Unable to find the object '%s' inside file %s."
-msgstr "Objekti '%s' pole võimalik failist %s leida."
 
 msgid ""
 "Unable to display help. Please make sure the Gtranslator documentation "
@@ -1151,11 +1126,11 @@ msgstr "Ot_sing"
 msgid "_Go"
 msgstr "_Liikumine"
 
+msgid "_Tools"
+msgstr "_Tööriistad"
+
 msgid "_Documents"
 msgstr "_Dokumendid"
-
-msgid "_Help"
-msgstr "_Abi"
 
 msgid "Open a PO file"
 msgstr "PO-faili avamine"
@@ -1163,22 +1138,12 @@ msgstr "PO-faili avamine"
 msgid "_Recent Files"
 msgstr "_Hiljuti kasutatud"
 
-msgid "Quit the program"
-msgstr "Rakendusest väljumine"
-
 #. Edit menu
 msgid "T_oolbar"
 msgstr "Töö_riistariba"
 
-msgid "Edit gtranslator preferences"
-msgstr "Gtranslatori eelistuste muutmine"
-
 msgid "_Header..."
 msgstr "_Päis..."
-
-#. Help menu
-msgid "_Contents"
-msgstr "_Sisu"
 
 msgid "Save the current file"
 msgstr "Avatud faili salvestamine"
@@ -1219,12 +1184,9 @@ msgstr "_Hägususe lüliti"
 msgid "Toggle fuzzy status of a message"
 msgstr "Teksti hägususe muutmine"
 
-msgid "_Translation Memory"
-msgstr "_Tõlkemälu"
-
 #. View menu
-msgid "_Context"
-msgstr "_Kontekst"
+msgid "_Message Details"
+msgstr "_Tekstide üksikasjad"
 
 msgid "Show the Context panel"
 msgstr "Kontekstipaneeli näitamine"
@@ -1399,3 +1361,91 @@ msgid ""
 msgstr ""
 "%s\n"
 "Käsuvõtmete täisnimekirja nägemiseks käivita '%s --help'.\n"
+
+#. Translaters: This string is for a toggle to display a toolbar.
+#. * The name of the toolbar is automatically computed from the widgets
+#. * on the toolbar, and is placed at the %s. Note the _ before the %s
+#. * which is used to add mnemonics. We know that this is likely to
+#. * produce duplicates, but don't worry about it. If your language
+#. * normally has a mnemonic at the start, please use the _. If not,
+#. * please remove.
+#, c-format
+msgid "Show “_%s”"
+msgstr "Näita „_%s”"
+
+msgid "_Move on Toolbar"
+msgstr "_Liiguta tööriistaribal"
+
+msgid "Move the selected item on the toolbar"
+msgstr "Valitud kirje liigutamine tööriistaribal"
+
+msgid "_Remove from Toolbar"
+msgstr "_Eemalda tööriistaribalt"
+
+msgid "Remove the selected item from the toolbar"
+msgstr "Valitud kirje eemaldamine tööriistaribalt"
+
+msgid "_Delete Toolbar"
+msgstr "_Kustuta tööriistariba"
+
+msgid "Remove the selected toolbar"
+msgstr "Valitud tööriistariba eemaldamine"
+
+msgid "Separator"
+msgstr "Eraldaja"
+
+#~ msgid "Delete compiled GMO files"
+#~ msgstr "Kompileeritud GMO failid kustutatakse"
+
+#~ msgid "If true, remove compiled GMO binary files when saving."
+#~ msgstr ""
+#~ "Kui märgitud, siis eemaldatakse salvestamisel kompileeritud GMO "
+#~ "binaarfailid."
+
+#~ msgid "Error from configuration dialog %s"
+#~ msgstr "Viga seadistusdialoogist %s"
+
+#~ msgid "None"
+#~ msgstr "Puudub"
+
+#~ msgid "Checkout directory"
+#~ msgstr "Väljastuskataloog"
+
+#~ msgid "<b>Select the path to generate the database:</b>"
+#~ msgstr "<b>Määra andmebaasi aluseks olev kataloog:</b>"
+
+#~ msgid "<b>Look for a specific PO filename:</b>"
+#~ msgstr "<b>Kindla nimega PO-failide kasutamine:</b>"
+
+#~ msgid "E.g.: gl.po"
+#~ msgstr "Nt \"et.po\""
+
+#~ msgid "Generate Database"
+#~ msgstr "Loo andmebaas"
+
+#~ msgid "_Delete compiled GMO files"
+#~ msgstr "_Kustuta kompileeritud GMO failid"
+
+#~ msgid "Context"
+#~ msgstr "Kontekst"
+
+#~ msgid "Please check your installation."
+#~ msgstr "Palun kontrolli oma paigaldust."
+
+#~ msgid "Unable to open ui file %s. Error: %s"
+#~ msgstr "Kasutajaliidese faili %s pole võimalik avada. Viga: %s"
+
+#~ msgid "Unable to find the object '%s' inside file %s."
+#~ msgstr "Objekti '%s' pole võimalik failist %s leida."
+
+#~ msgid "Quit the program"
+#~ msgstr "Rakendusest väljumine"
+
+#~ msgid "Edit gtranslator preferences"
+#~ msgstr "Gtranslatori eelistuste muutmine"
+
+#~ msgid "_Contents"
+#~ msgstr "_Sisu"
+
+#~ msgid "_Context"
+#~ msgstr "_Kontekst"
