@@ -727,11 +727,11 @@ gtr_tab_init (GtrTab * tab)
   gtk_widget_show (priv->dock);
   gtk_box_pack_end (GTK_BOX (hbox), priv->dock, TRUE, TRUE, 0);
 
-  dockbar = gdl_dock_bar_new (gdl_dock_layout_get_master (priv->layout_manager));
+  dockbar = gdl_dock_bar_new (GDL_DOCK (priv->dock));
   gtk_widget_show (dockbar);
   gtk_box_pack_start (GTK_BOX (hbox), dockbar, FALSE, FALSE, 0);
 
-  priv->layout_manager = gdl_dock_layout_new (gdl_dock_layout_get_master (priv->layout_manager));
+  priv->layout_manager = gdl_dock_layout_new (GDL_DOCK (priv->dock));
   g_signal_connect (priv->layout_manager->master,
                     "layout-changed",
                     G_CALLBACK (on_layout_changed),
