@@ -1,5 +1,5 @@
 # Slovak translation for gtranslator.
-# Copyright (C) 2002, 2005, 2009, 2010, 2011, 2012 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2005, 2009-2012 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gtranslator package.
 # Martin Lacko <lacko@host.sk>, 2002.
 # Ivan Noris <vix@vazka.sk>, 2005.
@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-10-30 10:20+0000\n"
-"PO-Revision-Date: 2011-09-15 15:07+0200\n"
+"POT-Creation-Date: 2012-11-02 12:34+0000\n"
+"PO-Revision-Date: 2012-11-04 21:30+0000\n"
 "Last-Translator: Ondrej Mosnáček <omosnacek@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -642,6 +642,7 @@ msgstr ""
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:220
 msgid "Please specify a valid path to build the translation memory"
 msgstr ""
+"Prosím, určite platnú cestu, do ktorej sa má vygenerovať pamäť prekladov"
 
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:287
 msgid "Gtranslator Translation Memory Manager"
@@ -843,13 +844,11 @@ msgstr "Nájdený a nahradený jeden výskyt"
 
 #: ../src/gtranslator-menu.ui.h:1
 msgid "_New Window"
-msgstr ""
+msgstr "_Nové okno"
 
 #: ../src/gtranslator-menu.ui.h:2
-#, fuzzy
-#| msgid "Gtranslator Preferences"
 msgid "_Preferences"
-msgstr "Nastavenia programu Gtranslator"
+msgstr "Nas_tavenia"
 
 #: ../src/gtranslator-menu.ui.h:3
 msgid "_Help"
@@ -857,11 +856,11 @@ msgstr "_Pomocník"
 
 #: ../src/gtranslator-menu.ui.h:4
 msgid "_About"
-msgstr ""
+msgstr "_O programe"
 
 #: ../src/gtranslator-menu.ui.h:5
 msgid "_Quit"
-msgstr ""
+msgstr "U_končiť"
 
 #: ../src/gtr-assistant.c:130
 #, c-format
@@ -878,9 +877,9 @@ msgid ""
 msgstr ""
 "Názov profilu: %s\n"
 "Meno prekladateľa: %s\n"
-"E-mail prekladateľa: %s\n"
+"Email prekladateľa: %s\n"
 "Názov jazyka: %s\n"
-"E-mail tímu: %s\n"
+"Email tímu: %s\n"
 "Kód jazyka: %s\n"
 "Znaková sada: %s\n"
 "Kódovanie prenosu: %s\n"
@@ -904,7 +903,7 @@ msgstr "<b>Meno prekladateľa:</b>"
 
 #: ../src/gtr-assistant.c:284
 msgid "<b>Translator email:</b>"
-msgstr "<b>E-mail prekladateľa:</b>"
+msgstr "<b>Email prekladateľa:</b>"
 
 #: ../src/gtr-assistant.c:296 ../src/gtr-assistant.c:388
 #: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:1231
@@ -990,7 +989,7 @@ msgstr "Formát:"
 
 #: ../src/gtr-context.c:392
 msgid "D_one"
-msgstr ""
+msgstr "_Hotovo"
 
 #: ../src/gtr-file-dialogs.c:62
 msgid "Gettext translation"
@@ -1042,7 +1041,7 @@ msgstr "_Meno prekladateľa:"
 
 #: ../src/gtr-header-dialog.ui.h:9
 msgid "Translator's _email:"
-msgstr "Prekladateľov _e-mail:"
+msgstr "Prekladateľov _email:"
 
 #: ../src/gtr-header-dialog.ui.h:10 ../src/gtr-languages-fetcher.ui.h:5
 msgid "_Language:"
@@ -1050,7 +1049,7 @@ msgstr "_Jazyk:"
 
 #: ../src/gtr-header-dialog.ui.h:11
 msgid "Language gro_up email:"
-msgstr "E-mail prekladateľského _tímu:"
+msgstr "Email prekladateľského _tímu:"
 
 #: ../src/gtr-header-dialog.ui.h:12
 msgid "Char_set:"
@@ -1064,9 +1063,10 @@ msgstr "_Kódovanie:"
 msgid "Translator and Language"
 msgstr "Prekladateľ a jazyk"
 
+#  window title
 #: ../src/gtr-jump-dialog.c:93
 msgid "Go to Message"
-msgstr "Prejsť na správu"
+msgstr "Prechod na správu"
 
 #: ../src/gtr-jump-dialog.ui.h:1
 msgid "Enter message number:"
@@ -1074,7 +1074,7 @@ msgstr "Zadajte číslo správy:"
 
 #: ../src/gtr-languages-fetcher.ui.h:1
 msgid "_Team email:"
-msgstr "_E-mail týmu:"
+msgstr "_Email týmu:"
 
 #: ../src/gtr-languages-fetcher.ui.h:2
 msgid "Transfer en_coding:"
@@ -1121,12 +1121,12 @@ msgstr "Nepodarilo sa otvoriť súbor „%s“: %s"
 #: ../src/gtr-po.c:522
 #, c-format
 msgid "Could not convert from charset '%s' to UTF-8"
-msgstr ""
+msgstr "Nepodarilo sa previesť zo znakovej sady „%s“ na UTF-8"
 
 #: ../src/gtr-po.c:539 ../src/gtr-po.c:559
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
-msgstr ""
+msgstr "Nepodarilo sa uložiť dočasný súbor na prevod kódovania"
 
 #: ../src/gtr-po.c:596
 #, c-format
@@ -1134,6 +1134,9 @@ msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
 "iconv command line tools before opening this file with gtranslator"
 msgstr ""
+"Všetky pokusy previesť súbor do UTF-8 zlyhali, použite nástoje príkazového "
+"riadka „msgconv“ alebo „iconv“ pred otvorením tohto súboru v programe "
+"GTranslator"
 
 #: ../src/gtr-po.c:664
 #, c-format
@@ -1259,10 +1262,8 @@ msgid "Editor"
 msgstr "Editor"
 
 #: ../src/gtr-preferences-dialog.ui.h:18
-#, fuzzy
-#| msgid "- Edit PO files"
 msgid "Edit Profile"
-msgstr "- úprava PO súborov"
+msgstr "Upraviť profil"
 
 #: ../src/gtr-preferences-dialog.ui.h:19
 msgid "Profiles"
@@ -1300,13 +1301,15 @@ msgstr "_Názov"
 msgid "Language Settings"
 msgstr "Nastavenia jazyka"
 
+# window title
 #: ../src/gtr-search-dialog.c:326 ../src/gtr-search-dialog.ui.h:1
 msgid "Replace"
-msgstr "Nahradiť"
+msgstr "Nahradenie"
 
+# window title
 #: ../src/gtr-search-dialog.c:348
 msgid "Find"
-msgstr "Nájsť"
+msgstr "Vyhľadávanie"
 
 #: ../src/gtr-search-dialog.c:436
 msgid "Replace _All"
