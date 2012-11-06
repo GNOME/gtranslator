@@ -727,19 +727,19 @@ gtr_tab_init (GtrTab * tab)
   gtk_widget_show (priv->dock);
   gtk_box_pack_end (GTK_BOX (hbox), priv->dock, TRUE, TRUE, 0);
 
-  dockbar = gdl_dock_bar_new (GDL_DOCK (priv->dock));
+  dockbar = gdl_dock_bar_new (G_OBJECT (priv->dock));
   gtk_widget_show (dockbar);
   gtk_box_pack_start (GTK_BOX (hbox), dockbar, FALSE, FALSE, 0);
 
-  priv->layout_manager = gdl_dock_layout_new (GDL_DOCK (priv->dock));
-  g_signal_connect (priv->layout_manager->master,
+  priv->layout_manager = gdl_dock_layout_new (G_OBJECT (priv->dock));
+  g_signal_connect (gdl_dock_layout_get_master (priv->layout_manager),
                     "layout-changed",
                     G_CALLBACK (on_layout_changed),
                     tab);
 
   g_settings_bind (priv->ui_settings,
                    GTR_SETTINGS_PANEL_SWITCHER_STYLE,
-                   priv->layout_manager->master,
+                   gdl_dock_layout_get_master (priv->layout_manager),
                    "switcher-style",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
@@ -967,11 +967,17 @@ gtr_tab_realize (GtkWidget *widget)
                                   tab);
 
       /* Loading dock layout */
+      g_signal_handlers_block_by_func (gdl_dock_layout_get_master (tab->priv->layout_manager),
+                                       G_CALLBACK (on_layout_changed),
+                                       tab);
       filename = g_build_filename (gtr_dirs_get_user_config_dir (),
                                    "layout.xml", NULL);
 
       gtr_tab_layout_load (tab, filename, NULL);
       g_free (filename);
+      g_signal_handlers_unblock_by_func (gdl_dock_layout_get_master (tab->priv->layout_manager),
+                                         G_CALLBACK (on_layout_changed),
+                                         tab);
 
       tab->priv->tab_realized = TRUE;
     }
