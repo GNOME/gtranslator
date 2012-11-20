@@ -671,6 +671,13 @@ save_layout (GtrTab *tab)
 }
 
 static void
+on_layout_changed (GdlDockMaster *master,
+                   GtrTab        *tab)
+{
+  save_layout (tab);
+}
+
+static void
 extension_added (PeasExtensionSet *extensions,
                  PeasPluginInfo   *info,
                  PeasExtension    *exten,
@@ -882,6 +889,9 @@ gtr_tab_dispose (GObject * object)
 
   if (!priv->dispose_has_run)
     {
+      g_signal_handlers_disconnect_by_func (gdl_dock_layout_get_master (priv->layout_manager),
+                                            G_CALLBACK (on_layout_changed),
+                                            object);
       save_layout (GTR_TAB (object));
       priv->dispose_has_run = TRUE;
     }
@@ -962,6 +972,11 @@ gtr_tab_realize (GtkWidget *widget)
       g_free (filename);
 
       tab->priv->tab_realized = TRUE;
+
+      g_signal_connect (gdl_dock_layout_get_master (tab->priv->layout_manager),
+                        "layout-changed",
+                        G_CALLBACK (on_layout_changed),
+                        tab);
     }
 }
 
