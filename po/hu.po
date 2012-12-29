@@ -1,66 +1,71 @@
 # Hungarian translation of gtranslator.
 # Copyright (C) 2000, 2001, 2003, 2004 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gtranslator package.
+#
 # Emese Kovacs <emese@gnome.hu>, 2000, 2001.
 # Andras Timar <timar@gnome.hu>, 2001, 2003.
 # Gabor Kelemen <kelemeng@gnome.hu>, 2004.
-#
+# Balázs Úr <urbalazs at gmail dot com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-31 12:00+0200\n"
-"PO-Revision-Date: 2004-07-31 19:35+0200\n"
-"Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gtranslator&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-02-05 19:42+0000\n"
+"PO-Revision-Date: 2012-12-29 16:45+0100\n"
+"Last-Translator: Balázs Úr <urbalazs at gmail dot com>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"Language: hu\n"
+"X-Generator: Lokalize 1.2\n"
 
-#: data/desktop/gtranslator.desktop.in.h:1
+#: ../data/desktop/gtranslator.desktop.in.h:1
 msgid "The GNOME translation program"
 msgstr "A GNOME fordítóprogramja"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1141
+#: ../data/desktop/gtranslator.desktop.in.h:2 ../src/parse.c:1164
 msgid "gtranslator"
 msgstr "gtranslator"
 
 #. Translator credits
-#: src/about.c:60
+#: ../src/about.c:60
 msgid "translator_credits"
 msgstr ""
 "Kelemen Gábor <kelemeng@gnome.hu>\n"
 "Kovács Emese <emese@gnome.hu>\n"
-"Tímár András <timar@gnome.hu>"
+"Tímár András <timar@gnome.hu>\n"
+"Úr Balázs <urbalazs@gmail.com>"
 
-#: src/about.c:80
+#: ../src/about.c:80
 msgid "(C) 1999 The Free Software Foundation, Inc."
 msgstr "© 1999 The Free Software Foundation, Inc."
 
-#: src/about.c:81
+#: ../src/about.c:81
 msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr "A Gtranslator egy PO-fájlszerkesztő program, sok extrával."
 
-#: src/bookmark.c:67 src/bookmark.c:93 src/dialogs.c:1497
+#: ../src/bookmark.c:67 ../src/bookmark.c:93 ../src/dialogs.c:1400
 msgid "No comment"
 msgstr "Nincs megjegyzés"
 
-#: src/bookmark.c:598
+#: ../src/bookmark.c:598
 msgid "_View/_Bookmarks/"
 msgstr "_Nézet/_Könyvjelzők/"
 
-#: src/bookmark.c:635
+#: ../src/bookmark.c:635
 #, c-format
 msgid "Open %s (%s)"
 msgstr "%s (%s) megnyitása"
 
-#: src/color-schemes.c:196
+#: ../src/color-schemes.c:195
 #, c-format
 msgid "Can't apply color scheme file `%s'!"
-msgstr "Nem sikerült alkalmazni a következő színsémafájlt: `%s'!"
+msgstr "Nem sikerült alkalmazni a következő színsémafájlt: „%s”!"
 
-#: src/color-schemes.c:318
+#: ../src/color-schemes.c:317
 msgid "Couldn't retrieve author information!"
 msgstr "Nem sikerült betölteni a fordító adatait!"
 
@@ -68,36 +73,36 @@ msgstr "Nem sikerült betölteni a fordító adatait!"
 #. * Translators: These strings are used as author informations if
 #. *  no author informations could be retrieved:
 #.
-#: src/color-schemes.c:324 src/translator.c:318
+#: ../src/color-schemes.c:323 ../src/translator.c:318
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: src/color-schemes.c:325
+#: ../src/color-schemes.c:324
 msgid "<Not Given>"
 msgstr "<Nincs megadva>"
 
-#: src/color-schemes.c:472
+#: ../src/color-schemes.c:471
 msgid "_View/_Colorschemes/"
 msgstr "Né_zet/_Színsémák/"
 
-#: src/color-schemes.c:502
+#: ../src/color-schemes.c:501
 #, c-format
 msgid "Activate colorscheme %s"
 msgstr "Színséma aktivizálása: %s"
 
-#: src/dialogs.c:115
+#: ../src/dialogs.c:103
 msgid "gtranslator -- open po file"
 msgstr "gtranslator -- po fájl megnyitása"
 
-#: src/dialogs.c:157
+#: ../src/dialogs.c:145
 msgid "gtranslator -- save file as.."
 msgstr "gtranslator -- fájl mentése másként..."
 
-#: src/dialogs.c:177
+#: ../src/dialogs.c:165
 msgid "gtranslator -- save local copy of file as.."
 msgstr "gtranslator -- fájl helyi másolatának mentése másként..."
 
-#: src/dialogs.c:227
+#: ../src/dialogs.c:215
 #, c-format
 msgid ""
 "File %s\n"
@@ -106,64 +111,56 @@ msgstr ""
 "%s fájl megváltozott.\n"
 "Mentsem a változásokat?"
 
-#: src/dialogs.c:233
+#: ../src/dialogs.c:221
 msgid "Don't save"
 msgstr "Ne mentse"
 
-#: src/dialogs.c:277
-msgid "gtranslator -- import po file"
-msgstr "gtranslator -- po fájl importálása"
-
-#: src/dialogs.c:324
-msgid "gtranslator -- export po file"
-msgstr "gtranslator -- po fájl exportálása"
-
-#: src/dialogs.c:372 src/dialogs.c:405
+#: ../src/dialogs.c:257 ../src/dialogs.c:290
 msgid "gtranslator -- edit comment"
 msgstr "gtranslator -- megjegyzés szerkesztése"
 
-#: src/dialogs.c:397
+#: ../src/dialogs.c:282
 msgid "Comment:"
 msgstr "Megjegyzés:"
 
-#: src/dialogs.c:512
+#: ../src/dialogs.c:399
 #, c-format
 msgid "Should ALL translations from `%s' be removed?"
-msgstr "Tényleg el akarja távolítani az ÖSSZES fordítást `%s' fájlból?"
+msgstr "Tényleg el akarja távolítani az ÖSSZES fordítást „%s” fájlból?"
 
-#: src/dialogs.c:615
+#: ../src/dialogs.c:506
 msgid "gtranslator -- go to"
 msgstr "gtranslator -- ugrás"
 
-#: src/dialogs.c:623
+#: ../src/dialogs.c:514
 msgid "Go to message number:"
 msgstr "A megadott számú üzenetre ugrás:"
 
-#: src/dialogs.c:681
+#: ../src/dialogs.c:572
 msgid "Find in the po file"
 msgstr "Keresés a po fájlban"
 
-#: src/dialogs.c:690
+#: ../src/dialogs.c:581
 msgid "Enter search string:"
 msgstr "Adja meg a keresendő karakterláncot:"
 
-#: src/dialogs.c:695
+#: ../src/dialogs.c:586
 msgid "Case sensitive"
 msgstr "Kis- és nagybetű megkülönböztetése"
 
-#: src/dialogs.c:700
+#: ../src/dialogs.c:591
 msgid "Find in:"
 msgstr "Ebben keres:"
 
-#: src/dialogs.c:704 src/dialogs.c:835
+#: ../src/dialogs.c:595 ../src/dialogs.c:730
 msgid "Comments"
 msgstr "Megjegyzés"
 
-#: src/dialogs.c:707 src/dialogs.c:838 src/languages.c:101
+#: ../src/dialogs.c:598 ../src/dialogs.c:733 ../src/languages.c:101
 msgid "English"
 msgstr "Angol"
 
-#: src/dialogs.c:710 src/dialogs.c:841 src/messages-table.c:263
+#: ../src/dialogs.c:601 ../src/dialogs.c:736 ../src/messages-table.c:229
 msgid "Translation"
 msgstr "Fordítás"
 
@@ -171,43 +168,43 @@ msgstr "Fordítás"
 #. * Translators: this means that the hotkeys ("_" etc.) are ignored
 #. *  during the search action.
 #.
-#: src/dialogs.c:721
+#: ../src/dialogs.c:612
 msgid "Ignore hotkeys"
 msgstr "Forróbillentyű jelének mellőzése"
 
-#: src/dialogs.c:814
+#: ../src/dialogs.c:709
 msgid "gtranslator -- replace"
 msgstr "gtranslator -- csere"
 
-#: src/dialogs.c:818 src/menus.c:355
+#: ../src/dialogs.c:713 ../src/menus.c:337
 msgid "Replace"
 msgstr "Csere"
 
-#: src/dialogs.c:819
+#: ../src/dialogs.c:714
 msgid "Replace all"
 msgstr "Mindet cseréli"
 
-#: src/dialogs.c:824
+#: ../src/dialogs.c:719
 msgid "String to replace:"
 msgstr "A karakterlánc, amelyet cserél:"
 
-#: src/dialogs.c:827
+#: ../src/dialogs.c:722
 msgid "Replace string:"
 msgstr "A karakterlánc, amire cserél:"
 
-#: src/dialogs.c:832
+#: ../src/dialogs.c:727
 msgid "Replace in:"
 msgstr "Csere ebben:"
 
-#: src/dialogs.c:902
+#: ../src/dialogs.c:805
 msgid "Please enter a string to replace!"
 msgstr "Adja meg a cserélendő karakterláncot!"
 
-#: src/dialogs.c:953
+#: ../src/dialogs.c:856
 msgid "An error occurred while msgfmt was executed:\n"
 msgstr "Hiba történt az msgfmt futtatása közben:\n"
 
-#: src/dialogs.c:994
+#: ../src/dialogs.c:897
 #, c-format
 msgid ""
 "The file\n"
@@ -230,7 +227,7 @@ msgstr ""
 "\n"
 "Mégis megpróbáljam megnyitni?"
 
-#: src/dialogs.c:1035
+#: ../src/dialogs.c:938
 #, c-format
 msgid ""
 "File %s\n"
@@ -239,23 +236,23 @@ msgstr ""
 "A %s\n"
 "fájl változott. Vissza akarja állítani a mentett változatot?"
 
-#: src/dialogs.c:1064
+#: ../src/dialogs.c:967
 msgid "gtranslator -- open from URI"
 msgstr "gtranslator -- megnyitás URI-ból"
 
-#: src/dialogs.c:1076
+#: ../src/dialogs.c:979
 msgid "Enter URI:"
 msgstr "Adja meg az URI-t:"
 
-#: src/dialogs.c:1112
+#: ../src/dialogs.c:1015
 msgid "No URI given!"
 msgstr "Nincs URI megadva!"
 
-#: src/dialogs.c:1127
+#: ../src/dialogs.c:1030
 msgid "No supported URI protocol (like \"ftp://\") given!"
-msgstr "Nincs megadva támogatott URI protokoll (pl. \"ftp://\")!"
+msgstr "Nincs megadva támogatott URI protokoll (például „ftp://”)!"
 
-#: src/dialogs.c:1135
+#: ../src/dialogs.c:1038
 msgid ""
 "URIs are used to locate files uniquely on different systems.\n"
 "The standard Internet addresses (URLs) are also URIs -- you can\n"
@@ -271,22 +268,22 @@ msgstr ""
 "Az URI segítségével egyértelműen meghatározható egy fájl helye \n"
 "tetszőleges rendszeren. A szabványos internetcímek (URL-ek) szintén\n"
 "URI-k, használhatja ezeket távoli po fájlok elérésére a GnomeVFS \n"
-"által támogatott szabványos protokollokon keresztül (pl. \"http\" vagy \n"
-"\"ftp\"). Néhány példa az érthetőség kedvéért (ezek támogatottak):\n"
+"által támogatott szabványos protokollokon keresztül (pl. „http” vagy \n"
+"„ftp”). Néhány példa az érthetőség kedvéért (ezek támogatottak):\n"
 "http://www.gtranslator.org/remote-po/gtranslator.pot\n"
 "ftp://anonymous@ftp.somewhere.com/<TÁVOLI-PO-FÁJL>\n"
 "\n"
 "file:///<PO-FÁJL> vagy \n"
 "http://www.DOMAIN.COM/PO-FÁJL"
 
-#: src/dialogs.c:1174
+#: ../src/dialogs.c:1077
 #, c-format
 msgid ""
 "Open recovery file for `%s'?\n"
 "It was saved by gtranslator before gtranslator last closed\n"
 "and may contain your hard work!\n"
 msgstr ""
-"Megnyitja `%s helyreállítófájlját?\n"
+"Megnyitja a(z) „%s” helyreállítófájlját?\n"
 "Ezt a gtranslator mentette el, mielőtt a program legutóbb bezáródott.\n"
 "Lehet, hogy az Ön kemény munkáját tartalmazza!\n"
 
@@ -296,67 +293,67 @@ msgstr ""
 #. *   get asked the next time he starts up gtranslator again
 #. *    if he/she wants to recover file.
 #.
-#: src/dialogs.c:1186
+#: ../src/dialogs.c:1089
 msgid "Postpone decision"
 msgstr "Döntés felfüggesztése"
 
-#: src/dialogs.c:1188
+#: ../src/dialogs.c:1091
 msgid "Ignore recovery file"
 msgstr "Visszaállítási fájl melllőzése"
 
-#: src/dialogs.c:1190
+#: ../src/dialogs.c:1093
 msgid "Recover file"
 msgstr "Fájl visszaállítása"
 
 #.
 #. * A half-baken dialog for the query functionality.
 #.
-#: src/dialogs.c:1249
+#: ../src/dialogs.c:1152
 msgid "Here you can query existing translations from your learn buffer."
 msgstr "Lekérdezheti a létező fordításokat a fordítási memóriából."
 
-#: src/dialogs.c:1252
+#: ../src/dialogs.c:1155
 msgid "gtranslator -- query your personal learn buffer"
 msgstr "gtranslator -- személyes fordítási memória exportálása"
 
-#: src/dialogs.c:1256 src/menus.c:360
+#: ../src/dialogs.c:1159 ../src/menus.c:342
 msgid "Query"
 msgstr "Lekérdezés"
 
-#: src/dialogs.c:1257
+#: ../src/dialogs.c:1160
 msgid "Query message content"
 msgstr "Üzenet összetevőinek lekérdezése"
 
-#: src/dialogs.c:1267
+#: ../src/dialogs.c:1170
 msgid "Query string:"
 msgstr "Lekérdezendő karakterlánc:"
 
-#: src/dialogs.c:1305
+#: ../src/dialogs.c:1208
 msgid "No query string given!"
 msgstr "Nincs megadva lekérdezendő karakterlánc!"
 
-#: src/dialogs.c:1327
+#: ../src/dialogs.c:1230
 msgid "Couldn't find any result for the query in your learn buffer!"
 msgstr "A lekérdezésre nem található eredmény a fordítási memóriában!"
 
-#: src/dialogs.c:1339
+#: ../src/dialogs.c:1242
 #, c-format
 msgid ""
 "Found \"%s\" as a translation for \"%s\".\n"
 "Would you like to insert it into the translation?"
 msgstr ""
-"Megtaláltam \"%s\"-t a(z) \"%s\" fordításaként.\n"
+"Megtaláltam „%s” bejegyzést a(z) „%s” fordításaként.\n"
 "Szeretné beilleszteni ezt a fordításba?"
 
 #.
 #. * Translators: This means that the query result string is
 #. *  already translated.
 #.
-#: src/dialogs.c:1409
+#: ../src/dialogs.c:1312
 msgid "Query's result translation is already there!"
 msgstr "A lekérdezés eredménye már eleve ott van!"
 
-#: src/dialogs.c:1441
+#: ../src/dialogs.c:1344
 msgid ""
 "Should gtranslator autotranslate the file using information\n"
 "from your personal learn buffer?"
@@ -364,435 +361,458 @@ msgstr ""
 "Megpróbálja-e a gtranslator a fájl automatikus fordítását\n"
 "a saját fordítási memória információiból?"
 
-#: src/dialogs.c:1477 src/dialogs.c:1505
+#: ../src/dialogs.c:1380 ../src/dialogs.c:1408
 msgid "gtranslator -- add bookmark with comment?"
 msgstr "gtranslator -- könyvjelző hozzáadása megjegyzéssel?"
 
-#: src/dialogs.c:1497
+#: ../src/dialogs.c:1400
 msgid "Comment for the bookmark:"
 msgstr "Megjegyzés a könyvjelzőhöz:"
 
-#: src/find.c:217
+#: ../src/find.c:218
+#, c-format
 msgid "Please enter a search string"
 msgstr "Adja meg a keresendő karakterláncot"
 
-#: src/find.c:233
+#: ../src/find.c:236
 #, c-format
 msgid ""
 "Could not find\n"
 "\"%s\""
 msgstr ""
 "Nem található:\n"
-"\"%s\""
+"„%s”"
 
-#: src/gui.c:182
+#: ../src/gui.c:176
 msgid "Edit comment"
 msgstr "Megjegyzés szerkesztése"
 
-#: src/gui.c:493
+#: ../src/gui.c:494
 #, c-format
 msgid "%s [ %i Fuzzy left ]"
 msgid_plural "%s [ %i Fuzzy left ]"
 msgstr[0] "%s [ %i Ellenőrzendő maradt ]"
-msgstr[1] "%s [ %i Ellenőrzendő maradt ]"
 
-#: src/gui.c:493 src/gui.c:497 src/menus.c:341 src/messages-table.c:324
+#: ../src/gui.c:494 ../src/gui.c:498 ../src/menus.c:323
+#: ../src/messages-table.c:291
 msgid "Fuzzy"
 msgstr "Ellenőrzendő"
 
-#: src/gui.c:497
+#: ../src/gui.c:498
 #, c-format
 msgid "%s [ No fuzzy left ]"
 msgstr "%s [ Nem maradt ellenőrzendő ]"
 
-#: src/gui.c:505
+#: ../src/gui.c:506
 msgid "Sticky (Message & translation are the same)"
 msgstr "Ragadós (Az üzenet azonos a fordítással)"
 
-#: src/gui.c:507 src/messages-table.c:332
+#: ../src/gui.c:508 ../src/messages-table.c:299
 msgid "Translated"
 msgstr "Lefordított"
 
-#: src/gui.c:516
+#: ../src/gui.c:517
 #, c-format
 msgid "%s [ %i Untranslated left ]"
 msgid_plural "%s [ %i Untranslated left ]"
 msgstr[0] "%s [ Nincs lefordítva: %i ]"
-msgstr[1] "%s [ Nincs lefordítva: %i ]"
 
-#: src/gui.c:516 src/gui.c:518 src/messages-table.c:315
+#: ../src/gui.c:517 ../src/gui.c:519 ../src/messages-table.c:282
 msgid "Untranslated"
-msgstr "Nincs lefordítva"
+msgstr "Lefordítatlan"
 
-#: src/gui.c:518
+#: ../src/gui.c:519
 #, c-format
 msgid "%s [ No untranslated left ]"
 msgstr "%s [ Mind lefordítva ]"
 
-#: src/gui.c:537
+#: ../src/gui.c:538
 #, c-format
 msgid "Message %d / %d / Status: %s (Message contains plural forms)"
 msgstr "%d / %d üzenet / Állapot: %s (üzenet többesszámot tartalmaz)"
 
-#: src/gui.c:541
+#: ../src/gui.c:542
 #, c-format
 msgid "Message %d / %d / Status: %s"
 msgstr "%d / %d üzenet / Állapot: %s"
 
-#: src/header_stuff.c:495
+#: ../src/header_stuff.c:544
 msgid "gtranslator -- edit header"
 msgstr "gtranslator -- fejléc szerkesztése"
 
-#: src/header_stuff.c:519
+#: ../src/header_stuff.c:568
 msgid "Comments:"
 msgstr "Megjegyzés:"
 
-#: src/header_stuff.c:526
+#: ../src/header_stuff.c:575
 msgid "Project name:"
 msgstr "Projekt neve:"
 
-#: src/header_stuff.c:532
+#: ../src/header_stuff.c:581
 msgid "Project version:"
 msgstr "Projekt verziója:"
 
-#: src/header_stuff.c:539
+#: ../src/header_stuff.c:588
 msgid "Pot file creation date:"
 msgstr "A pot fájl létrehozásának időpontja:"
 
-#: src/header_stuff.c:545
+#: ../src/header_stuff.c:594
 msgid "Po file revision date:"
 msgstr "A po fájl utolsó módosításának időpontja:"
 
-#: src/header_stuff.c:559
+#: ../src/header_stuff.c:608
 msgid "Report message string bugs to:"
 msgstr "Üzenetszöveg hibák jelentése:"
 
-#: src/header_stuff.c:572
+#: ../src/header_stuff.c:621
 msgid "Generator:"
 msgstr "Létrehozta:"
 
-#: src/header_stuff.c:576
+#: ../src/header_stuff.c:625
 msgid "Project"
 msgstr "Projekt"
 
-#: src/header_stuff.c:582
+#: ../src/header_stuff.c:631
 msgid "Use my options to complete the following entries:"
-msgstr "Használd az én beállításaimat a fennmaradó rész kitöltéséhez:"
+msgstr "Használja a beállításaimat a következő bejegyzések kitöltéséhez:"
 
-#: src/header_stuff.c:595
+#: ../src/header_stuff.c:644
 msgid "Translator's name:"
 msgstr "Fordító neve:"
 
-#: src/header_stuff.c:601
+#: ../src/header_stuff.c:650
 msgid "Translator's e-mail:"
 msgstr "Fordító e-mail címe:"
 
-#: src/header_stuff.c:608 src/prefs.c:501
+#: ../src/header_stuff.c:657 ../src/prefs.c:500
 msgid "Language:"
 msgstr "Nyelv:"
 
-#: src/header_stuff.c:615 src/prefs.c:513
+#: ../src/header_stuff.c:664 ../src/prefs.c:512
 msgid "Language group's email:"
 msgstr "Fordítócsapat e-mail címe:"
 
-#: src/header_stuff.c:622 src/prefs.c:519
+#: ../src/header_stuff.c:671 ../src/prefs.c:518
 msgid "Charset:"
 msgstr "Karakterkészlet:"
 
-#: src/header_stuff.c:629 src/prefs.c:524
+#: ../src/header_stuff.c:678 ../src/prefs.c:523
 msgid "Encoding:"
 msgstr "Kódolás:"
 
-#: src/header_stuff.c:637
+#: ../src/header_stuff.c:686
 msgid "Translator and Language"
 msgstr "Fordító és nyelv"
 
-#: src/history.c:195
+#: ../src/history.c:195
 msgid "_File/Recen_t files/"
 msgstr "_Fájl/_Legutóbbi fájlok/"
 
-#: src/history.c:243
+#: ../src/history.c:243
 #, c-format
 msgid "Open %s"
 msgstr "%s megnyitása"
 
-#: src/languages.c:37
+#: ../src/languages.c:37
 msgid "Afrikaans"
 msgstr "Afrikaans"
 
-#: src/languages.c:41
+#: ../src/languages.c:41
 msgid "Albanian"
 msgstr "Albán"
 
-#: src/languages.c:45
+#: ../src/languages.c:45
 msgid "Arabic"
 msgstr "Arab"
 
-#: src/languages.c:49
+#: ../src/languages.c:49
 msgid "Azerbaijani Turkish"
 msgstr "Azerbajdzsáni török"
 
-#: src/languages.c:53
+#: ../src/languages.c:53
 msgid "Basque"
 msgstr "Baszk"
 
-#: src/languages.c:57
+#: ../src/languages.c:57
 msgid "Belarusian"
 msgstr "Fehérorosz"
 
-#: src/languages.c:61
+#: ../src/languages.c:61
 msgid "Bengali"
 msgstr "Bengali"
 
-#: src/languages.c:65
+#: ../src/languages.c:65
 msgid "Britton"
 msgstr "Breton"
 
-#: src/languages.c:69
+#: ../src/languages.c:69
 msgid "Bulgarian"
 msgstr "Bolgár"
 
-#: src/languages.c:73
+#: ../src/languages.c:73
 msgid "Catalan"
 msgstr "Katalán"
 
-#: src/languages.c:77
+#: ../src/languages.c:77
 msgid "Chinese/Simplified"
 msgstr "Kínai/Egyszerűsített"
 
-#: src/languages.c:81
+#: ../src/languages.c:81
 msgid "Chinese/Traditional"
 msgstr "Kínai/Tradicionális"
 
-#: src/languages.c:85
+#: ../src/languages.c:85
 msgid "Croatian"
 msgstr "Horvát"
 
-#: src/languages.c:89
+#: ../src/languages.c:89
 msgid "Czech"
 msgstr "Cseh"
 
-#: src/languages.c:93
+#: ../src/languages.c:93
 msgid "Danish"
 msgstr "Dán"
 
-#: src/languages.c:97
+#: ../src/languages.c:97
 msgid "Dutch"
 msgstr "Holland"
 
-#: src/languages.c:105
+#: ../src/languages.c:105
 msgid "English/Canada"
 msgstr "Angol/Kanada"
 
-#: src/languages.c:109
+#: ../src/languages.c:109
 msgid "English/GB"
 msgstr "Angol/Brit"
 
-#: src/languages.c:113
+#: ../src/languages.c:113
 msgid "English/USA"
 msgstr "Angol/USA"
 
-#: src/languages.c:117
+#: ../src/languages.c:117
 msgid "Esperanto"
 msgstr "Eszperantó"
 
-#: src/languages.c:121
+#: ../src/languages.c:121
 msgid "Estonian"
 msgstr "Észt"
 
-#: src/languages.c:125
+#: ../src/languages.c:125
 msgid "Persian"
 msgstr "Perzsa"
 
-#: src/languages.c:129
+#: ../src/languages.c:129
 msgid "Finnish"
 msgstr "Finn"
 
-#: src/languages.c:133
+#: ../src/languages.c:133
 msgid "French"
 msgstr "Francia"
 
-#: src/languages.c:137
+#: ../src/languages.c:137
 msgid "Galician"
 msgstr "Galíciai"
 
-#: src/languages.c:141
+#: ../src/languages.c:141
 msgid "German"
 msgstr "Német"
 
-#: src/languages.c:145
+#: ../src/languages.c:145
 msgid "Greek"
 msgstr "Görög"
 
-#: src/languages.c:149
+#: ../src/languages.c:149
 msgid "Gujarati"
 msgstr "Gujarati"
 
-#: src/languages.c:153
+#: ../src/languages.c:153
 msgid "Hebrew"
 msgstr "Héber"
 
-#: src/languages.c:157
+#: ../src/languages.c:157
 msgid "Hindi"
 msgstr "Hindi"
 
-#: src/languages.c:161
+#: ../src/languages.c:161
 msgid "Hungarian"
 msgstr "Magyar"
 
-#: src/languages.c:165
+#: ../src/languages.c:165
 msgid "Icelandic"
 msgstr "Izlandi"
 
-#: src/languages.c:169
+#: ../src/languages.c:169
 msgid "Indonesian"
 msgstr "Indonéz"
 
-#: src/languages.c:173
+#: ../src/languages.c:173
 msgid "Italian"
 msgstr "Olasz"
 
-#: src/languages.c:177
+#: ../src/languages.c:177
 msgid "Irish"
 msgstr "Ír"
 
-#: src/languages.c:181
+#: ../src/languages.c:181
 msgid "Japanese"
 msgstr "Japán"
 
-#: src/languages.c:185
+#: ../src/languages.c:185
 msgid "Kannada"
 msgstr "Kannada"
 
-#: src/languages.c:189
+#: ../src/languages.c:189
 msgid "Korean"
 msgstr "Koreai"
 
-#: src/languages.c:193
+#: ../src/languages.c:193
+#| msgid "Turkish"
+msgid "Kurdish"
+msgstr "Kurd"
+
+#: ../src/languages.c:197
 msgid "Latvian"
 msgstr "Lett"
 
-#: src/languages.c:197
+#: ../src/languages.c:201
 msgid "Lithuanian"
 msgstr "Litván"
 
-#: src/languages.c:201
+#: ../src/languages.c:205
+#| msgid "Indonesian"
+msgid "Macedonian"
+msgstr "Macedón"
+
+#: ../src/languages.c:209
 msgid "Malay/Bahasa Melayu"
 msgstr "Maláj/Bahasa Melaju"
 
-#: src/languages.c:205
+#: ../src/languages.c:213
 msgid "Maltese"
 msgstr "Máltai"
 
-#: src/languages.c:209
+#: ../src/languages.c:217
+msgid "Mongolian"
+msgstr "Mongol"
+
+#: ../src/languages.c:221
 msgid "Marathi"
 msgstr "Marathi"
 
-#: src/languages.c:213
+#: ../src/languages.c:225
 msgid "Norwegian/Bokmaal"
 msgstr "Norvég/Bokmaal"
 
-#: src/languages.c:217
+#: ../src/languages.c:229
 msgid "Norwegian/Nynorsk"
 msgstr "Norvég/Nynorsk"
 
-#: src/languages.c:221
+#: ../src/languages.c:233
 msgid "Punjabi"
 msgstr "Pandzsábi"
 
-#: src/languages.c:225
+#: ../src/languages.c:237
 msgid "Polish"
 msgstr "Lengyel"
 
-#: src/languages.c:229
+#: ../src/languages.c:241
 msgid "Portuguese"
 msgstr "Portugál"
 
-#: src/languages.c:233
+#: ../src/languages.c:245
 msgid "Portuguese/Brazil"
 msgstr "Portugál/Brazil"
 
-#: src/languages.c:237
+#: ../src/languages.c:249
 msgid "Romanian"
 msgstr "Román"
 
-#: src/languages.c:241
+#: ../src/languages.c:253
 msgid "Russian"
 msgstr "Orosz"
 
-#: src/languages.c:245
+#: ../src/languages.c:257
 msgid "Serbian/Cyrillic"
 msgstr "Szerb/Cirill"
 
-#: src/languages.c:249
+#: ../src/languages.c:261
 msgid "Serbian/Latin"
 msgstr "Szerb/Latin"
 
-#: src/languages.c:253
+#: ../src/languages.c:265
 msgid "Slovak"
 msgstr "Szlovák"
 
-#: src/languages.c:257
+#: ../src/languages.c:269
 msgid "Slovenian"
 msgstr "Szlovén"
 
-#: src/languages.c:261
+#: ../src/languages.c:273
 msgid "Spanish"
 msgstr "Spanyol"
 
-#: src/languages.c:265
+#: ../src/languages.c:277
 msgid "Spanish/Spain"
 msgstr "Spanyol/Spanyolország"
 
-#: src/languages.c:269
+#: ../src/languages.c:281
 msgid "Spanish/Mexico"
 msgstr "Spanyol/Mexikó"
 
-#: src/languages.c:273
+#: ../src/languages.c:285
 msgid "Swedish"
 msgstr "Svéd"
 
-#: src/languages.c:277
+#: ../src/languages.c:289
+msgid "Tagalog"
+msgstr "Tagalog"
+
+#: ../src/languages.c:293
 msgid "Tamil"
 msgstr "Tamil"
 
-#: src/languages.c:281
+#: ../src/languages.c:297
 msgid "Telugu"
 msgstr "Telugu"
 
-#: src/languages.c:285
+#: ../src/languages.c:301
 msgid "Thai"
 msgstr "Thai"
 
-#: src/languages.c:289
+#: ../src/languages.c:305
 msgid "Turkish"
 msgstr "Török"
 
-#: src/languages.c:293
+#: ../src/languages.c:309
 msgid "Ukrainian"
 msgstr "Ukrán"
 
-#: src/languages.c:297
+#: ../src/languages.c:313
+msgid "Urdu"
+msgstr "Urdu"
+
+#: ../src/languages.c:317
 msgid "Uzbekian"
 msgstr "Üzbég"
 
-#: src/languages.c:301
+#: ../src/languages.c:321
 msgid "Vietnamese"
 msgstr "Vietnami"
 
-#: src/languages.c:305
+#: ../src/languages.c:325
 msgid "Walloon"
 msgstr "Vallon"
 
-#: src/languages.c:309
+#: ../src/languages.c:329
 msgid "Welsh"
 msgstr "Velszi"
 
-#: src/learn.c:379
+#: ../src/learn.c:379
+#, c-format
 msgid "gtranslator learn buffer statistics:"
 msgstr "gtranslator fordítási memória statisztikák:"
 
-#: src/learn.c:382
+#: ../src/learn.c:382
 #, c-format
 msgid "Learn buffer filename: `%s`"
 msgstr "Fordítási memória-fájl neve: `%s`"
@@ -800,7 +820,7 @@ msgstr "Fordítási memória-fájl neve: `%s`"
 #.
 #. * Translators: This means the encoding of the learn buffer (XML) file.
 #.
-#: src/learn.c:388
+#: ../src/learn.c:388
 #, c-format
 msgid "Encoding: `%s'"
 msgstr "Kódolás: `%s'"
@@ -808,7 +828,7 @@ msgstr "Kódolás: `%s'"
 #.
 #. * Translators: "Serial number" of the learn buffer - means # of file updates.
 #.
-#: src/learn.c:394
+#: ../src/learn.c:394
 #, c-format
 msgid "Serial: `%i'"
 msgstr "Sorszám: `%i'"
@@ -816,89 +836,53 @@ msgstr "Sorszám: `%i'"
 #.
 #. * Translators: That's the number of message entries in the learn buffer.
 #.
-#: src/learn.c:400
+#: ../src/learn.c:400
 #, c-format
 msgid "Number of entries: `%i'"
 msgstr "Bejegyzések száma: `%i'"
 
-#: src/main.c:85
+#: ../src/main.c:81
 msgid "Auto translate the po file"
 msgstr "po fájl automatikus fordítása"
 
-#: src/main.c:85 src/main.c:101
+#: ../src/main.c:81 ../src/main.c:93
 msgid "FILENAME"
 msgstr "FILENAME"
 
-#: src/main.c:89
-msgid "Show build specifications"
-msgstr "Fordítási specifikációk mutatása"
-
-#: src/main.c:93
+#: ../src/main.c:85
 msgid "Export learn buffer to a plain po file"
 msgstr "Fordítási memória exportálása egyszerű po fájlba"
 
-#: src/main.c:93
+#: ../src/main.c:85
 msgid "PO_FILE"
 msgstr "PO_FILE"
 
-#: src/main.c:97
+#: ../src/main.c:89
 msgid "Specify main window geometry"
 msgstr "A főablak geometriájának megadása"
 
-#: src/main.c:97
+#: ../src/main.c:89
 msgid "GEOMETRY"
 msgstr "GEOMETRY"
 
-#: src/main.c:101
+#: ../src/main.c:93
 msgid "Learn the file completely"
 msgstr "Fájl teljes megtanulása"
 
-#: src/main.c:105
+#: ../src/main.c:97
 msgid "Show learn buffer statistics"
 msgstr "Fordítási memória statisztika mutatása"
 
-#: src/main.c:148
+#: ../src/main.c:140
 #, c-format
 msgid "Error during GConf initialization: %s."
 msgstr "Hiba a GConf inicializálásakor: %s."
-
-#: src/main.c:180
-msgid "gtranslator build information/specs:"
-msgstr "gtranslator fordítási információk/specifikációk:"
-
-#: src/main.c:182
-msgid "Version and build date:"
-msgstr "Verziószám és a fordítás dátuma:"
-
-#: src/main.c:184
-msgid "Build GLib / Gtk+ / GNOME / XML versions:"
-msgstr "Fordításhoz használt Glib/Gtk+/GNOME / XML verziók:"
-
-#: src/main.c:186
-msgid "Colorschemes directory:"
-msgstr "Színsémák könyvtára:"
-
-#: src/main.c:188
-msgid "Scripts directory:"
-msgstr "Parancsfájlok könyvtára:"
-
-#: src/main.c:190
-msgid "Window icon:"
-msgstr "Ablak ikonja:"
-
-#: src/main.c:192
-msgid "Own locale directory:"
-msgstr "Saját locale könyvtára:"
-
-#: src/main.c:194
-msgid "Default learn buffer file location:"
-msgstr "Alapértelmezett fordítási memória-fájl helye:"
 
 #.
 #. * As everything seemed to went fine, print out a nice
 #. *  message informing the user about the success.
 #.
-#: src/main.c:459
+#: ../src/main.c:419
 #, c-format
 msgid "Learned file `%s' successfully for your learn buffer.\n"
 msgstr "`%s' megtanulása sikerült.\n"
@@ -906,329 +890,312 @@ msgstr "`%s' megtanulása sikerült.\n"
 #.
 #. * Give us another small status feedback about the export.
 #.
-#: src/main.c:501
+#: ../src/main.c:461
 #, c-format
 msgid "Exported learn buffer to file `%s'.\n"
 msgstr "Fordítási memória exportálva `%s' fájlba.\n"
 
-#: src/menus.c:48
+#: ../src/menus.c:47
 msgid "_Go"
-msgstr "_Menj"
+msgstr "_Ugrás"
 
-#: src/menus.c:58
+#: ../src/menus.c:57
 msgid "_Compile"
 msgstr "F_ordítás"
 
-#: src/menus.c:59 src/menus.c:296
+#: ../src/menus.c:58 ../src/menus.c:278
 msgid "Compile the po file"
 msgstr "A po fájl fordítása"
 
-#: src/menus.c:65
+#: ../src/menus.c:64
 msgid "_Update"
 msgstr "_Frissítés"
 
-#: src/menus.c:66 src/menus.c:300
+#: ../src/menus.c:65 ../src/menus.c:282
 msgid "Update the po file"
 msgstr "A po fájl frissítése"
 
-#: src/menus.c:73
+#: ../src/menus.c:72
 msgid "Add bookmark"
 msgstr "Könyvjelző hozzáadása"
 
-#: src/menus.c:74
+#: ../src/menus.c:73
 msgid "Add a bookmark for this message in this po file"
 msgstr "Könyvjelző hozzáadása ehhez az üzenethez ebben a po fájlban"
 
-#: src/menus.c:81
+#: ../src/menus.c:80
 msgid "Aut_otranslate..."
 msgstr "_Automatikus fordítás..."
 
-#: src/menus.c:82
+#: ../src/menus.c:81
 msgid "Autotranslate the file with information from your learn buffer"
 msgstr ""
 "Automatikusan fordítás a saját fordítási memóriaból vett információival"
 
-#: src/menus.c:89
+#: ../src/menus.c:88
 msgid "Remove all translations..."
 msgstr "Az összes fordítás törlése..."
 
-#: src/menus.c:90
+#: ../src/menus.c:89
 msgid "Remove all existing translations from the po file"
 msgstr "Minden meglévő fordítást töröl a po fájlból"
 
-#: src/menus.c:98
+#: ../src/menus.c:97
 msgid "Open from _URI..."
 msgstr "Megnyitás _URI-ból..."
 
-#: src/menus.c:99
+#: ../src/menus.c:98
 msgid "Open a po file from a given URI"
 msgstr "Po fájl megnyitása megadott URI-ból"
 
-#: src/menus.c:109
+#: ../src/menus.c:108
 msgid "Recen_t files"
 msgstr "_Legutóbbi fájlok"
 
-#: src/menus.c:113
-msgid "_Export to UTF-8..."
-msgstr "_Exportálás UTF-8-ba..."
-
-#: src/menus.c:114
-msgid "Export the current po file to UTF-8"
-msgstr "A jelenlegi po fájlt UTF-8 kódolással exportálja"
-
-#: src/menus.c:120
-msgid "_Import from UTF-8..."
-msgstr "_Importálás UTF-8-ból..."
-
-#: src/menus.c:121
-msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
-msgstr ""
-"Egy UTF-8 kódolású po fájlt a neki megfelelő egyszerű kódolásba importál"
-
-#: src/menus.c:153
+#: ../src/menus.c:135
 msgid "_Query..."
 msgstr "_Lekérdezés..."
 
-#: src/menus.c:154 src/menus.c:361
+#: ../src/menus.c:136 ../src/menus.c:343
 msgid "Query for a string"
 msgstr "Karakterlánc lekérdezése"
 
-#: src/menus.c:161
+#: ../src/menus.c:143
 msgid "_Header..."
-msgstr "_Fejléc..."
+msgstr "_Fejléc…"
 
-#: src/menus.c:162
+#: ../src/menus.c:144
 msgid "Edit po file header"
 msgstr "po fájl fejlécének szerkesztése"
 
-#: src/menus.c:169
+#: ../src/menus.c:151
 msgid "C_omment..."
 msgstr "Meg_jegyzés..."
 
-#: src/menus.c:170
+#: ../src/menus.c:152
 msgid "Edit message comment"
 msgstr "Üzenet megjegyzésének szerkesztése"
 
-#: src/menus.c:177
+#: ../src/menus.c:159
 msgid "Copy _message -> translation"
 msgstr "Üzenet át_másolása a fordításba"
 
-#: src/menus.c:178
+#: ../src/menus.c:160
 msgid "Copy the original message contents and paste them as translation"
 msgstr "Az eredeti üzenet tartalmának másolása és fordításként beillesztése"
 
-#: src/menus.c:185
+#: ../src/menus.c:167
 msgid "Fu_zzy"
 msgstr "_Ellenőrzendő"
 
-#: src/menus.c:186
+#: ../src/menus.c:168
 msgid "Toggle fuzzy status of a message"
-msgstr "Az üzenet ellenőrzendő állapotát állítja"
+msgstr "Egy üzenet ellenőrzendő állapotának átváltása"
 
-#: src/menus.c:200
+#: ../src/menus.c:182
 msgid "_First"
 msgstr "_Első"
 
-#: src/menus.c:201 src/menus.c:317
+#: ../src/menus.c:183 ../src/menus.c:299
 msgid "Go to the first message"
-msgstr "Az első üzenetre ugrik"
+msgstr "Ugrás az első üzenetre"
 
-#: src/menus.c:207
+#: ../src/menus.c:189
 msgid "_Back"
 msgstr "_Vissza"
 
-#: src/menus.c:208 src/menus.c:321
+#: ../src/menus.c:190 ../src/menus.c:303
 msgid "Move back one message"
-msgstr "Az előző üzenetre ugrik"
+msgstr "Visszalépés egy üzenettel"
 
-#: src/menus.c:215
+#: ../src/menus.c:197
 msgid "_Next"
 msgstr "_Következő"
 
-#: src/menus.c:216 src/menus.c:326
+#: ../src/menus.c:198 ../src/menus.c:308
 msgid "Move forward one message"
-msgstr "A következő üzenetre ugrik"
+msgstr "Előrelépés egy üzenettel"
 
-#: src/menus.c:222
+#: ../src/menus.c:204
 msgid "_Last"
 msgstr "_Utolsó"
 
-#: src/menus.c:223 src/menus.c:330
+#: ../src/menus.c:205 ../src/menus.c:312
 msgid "Go to the last message"
-msgstr "Az utolsó üzenetre ugrik"
+msgstr "Ugrás az utolsó üzenetre"
 
-#: src/menus.c:230
+#: ../src/menus.c:212
 msgid "_Go to..."
 msgstr "_Ugrás..."
 
-#: src/menus.c:231
+#: ../src/menus.c:213
 msgid "Goto specified message number"
 msgstr "A megadott számú üzenetre ugrik"
 
-#: src/menus.c:237
+#: ../src/menus.c:219
 msgid "Next fuz_zy"
 msgstr "_Következő ellenőrzendő"
 
-#: src/menus.c:238
+#: ../src/menus.c:220
 msgid "Go to next fuzzy message"
 msgstr "A következő ellenőrzendő üzenetre ugrik"
 
-#: src/menus.c:244
+#: ../src/menus.c:226
 msgid "Next _untranslated"
 msgstr "Következő le _nem fordított"
 
-#: src/menus.c:245 src/menus.c:335
+#: ../src/menus.c:227 ../src/menus.c:317
 msgid "Go to next untranslated message"
 msgstr "A következő le nem fordított üzenetre ugrik"
 
-#: src/menus.c:255
+#: ../src/menus.c:237
 msgid "_Bookmarks"
 msgstr "_Könyvjelzők"
 
-#: src/menus.c:256
+#: ../src/menus.c:238
 msgid "_Colorschemes"
 msgstr "_Színsémák"
 
-#: src/menus.c:270
+#: ../src/menus.c:252
 msgid "gtranslator _website"
 msgstr "gtranslator _weblapja"
 
-#: src/menus.c:271
+#: ../src/menus.c:253
 msgid "gtranslator's homepage on the web"
 msgstr "A gtranslator honlapja a Web-en"
 
-#: src/menus.c:282
+#: ../src/menus.c:264
 msgid "Open"
 msgstr "Megnyitás"
 
-#: src/menus.c:283
+#: ../src/menus.c:265
 msgid "Open a po file"
 msgstr "Po fájl megnyitása"
 
-#: src/menus.c:286
+#: ../src/menus.c:268
 msgid "Save"
 msgstr "Mentés"
 
-#: src/menus.c:287
+#: ../src/menus.c:269
 msgid "Save File"
 msgstr "Fájl mentése"
 
-#: src/menus.c:290
+#: ../src/menus.c:272
 msgid "Save as"
 msgstr "Mentés másként"
 
-#: src/menus.c:291
+#: ../src/menus.c:273
 msgid "Save file with a different name"
 msgstr "Más néven menti el a fájlt"
 
-#: src/menus.c:295
+#: ../src/menus.c:277
 msgid "Compile"
 msgstr "Fordítás"
 
-#: src/menus.c:299
+#: ../src/menus.c:281
 msgid "Update"
 msgstr "Frissítés"
 
-#: src/menus.c:303
+#: ../src/menus.c:285
 msgid "Header"
 msgstr "Fejléc"
 
-#: src/menus.c:304
+#: ../src/menus.c:286
 msgid "Edit the header"
 msgstr "Fejléc szerkesztése"
 
-#: src/menus.c:308
+#: ../src/menus.c:290
 msgid "Undo"
 msgstr "Visszavonás"
 
-#: src/menus.c:309
+#: ../src/menus.c:291
 msgid "Undo the last performed action"
 msgstr "Visszavonja az utolsó műveletet"
 
-#: src/menus.c:316
+#: ../src/menus.c:298
 msgid "First"
 msgstr "Első"
 
-#: src/menus.c:320
+#: ../src/menus.c:302
 msgid "Back"
 msgstr "Vissza"
 
-#: src/menus.c:325
+#: ../src/menus.c:307
 msgid "Next"
 msgstr "Következő"
 
-#: src/menus.c:329
+#: ../src/menus.c:311
 msgid "Last"
 msgstr "Utolsó"
 
-#: src/menus.c:334
+#: ../src/menus.c:316
 msgid "Missing"
 msgstr "Hiányzik"
 
-#: src/menus.c:342
+#: ../src/menus.c:324
 msgid "Go to the next fuzzy translation"
 msgstr "A következő ellenőrzendő fordításra ugrik"
 
-#: src/menus.c:347
+#: ../src/menus.c:329
 msgid "Go to"
 msgstr "Ugrás"
 
-#: src/menus.c:348
+#: ../src/menus.c:330
 msgid "Go to specified message number"
 msgstr "Az adott sorszámú üzenetre ugrik"
 
-#: src/menus.c:351
+#: ../src/menus.c:333
 msgid "Find"
 msgstr "Keresés"
 
-#: src/menus.c:352
+#: ../src/menus.c:334
 msgid "Find string in po file"
 msgstr "Karakterlánc keresése a po fájlban"
 
-#: src/menus.c:356
+#: ../src/menus.c:338
 msgid "Replace string in po file"
 msgstr "Karakterlánc cseréje a po fájlban"
 
-#: src/message.c:95
+#: ../src/message.c:96
 msgid "Couldn't get the message!"
 msgstr "Az üzenet nem található!"
 
-#: src/message.c:117
+#: ../src/message.c:118
 msgid "There are no fuzzy messages left."
 msgstr "Nincs több ellenőrzendő üzenet."
 
-#: src/message.c:141
+#: ../src/message.c:142
 msgid "All messages seem to be translated."
 msgstr "Úgy tűnik, minden üzenet le van fordítva."
 
-#: src/message.c:270
+#: ../src/message.c:277
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "gtkspell hiba: %s\n"
 
-#: src/message.c:271
+#: ../src/message.c:278
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
 " %s"
 msgstr ""
-"GtkSpell-t nem sikerült inicializálni.\n"
+"A GtkSpell előkészítése sikertelen.\n"
 " %s"
 
-#: src/message.c:311
+#: ../src/message.c:319
 msgid "gtranslator -- edit plural forms of message translation"
 msgstr "gtranslator -- Üzenet többesszámú alakjai fordításának szerkesztése"
 
-#: src/messages-table.c:252
+#: ../src/messages-table.c:216
 msgid "Original"
 msgstr "Eredeti"
 
-#: src/open.c:144
+#: ../src/open.c:144
 #, c-format
 msgid "Couldn't open compiled gettext file `%s'!"
 msgstr "Nem sikerült megnyitni a lefordított gettext fájlt: `%s'!"
 
-#: src/open.c:192
+#: ../src/open.c:192
 #, c-format
 msgid "Couldn't open compressed gettext file `%s'!"
 msgstr "Nem sikerült megnyitni a tömörített gettext fájlt: `%s'!"
@@ -1237,18 +1204,18 @@ msgstr "Nem sikerült megnyitni a tömörített gettext fájlt: `%s'!"
 #. * The %s format here stands for the used
 #. *  compressions program (gzip, bzip2 etc.)
 #.
-#: src/open.c:202
+#: ../src/open.c:202
 #, c-format
 msgid "Couldn't open %s'd gettext file `%s'!"
 msgstr ""
 "Nem sikerült megnyitni ezt a %s programmal tömörített gettext fájlt: `%s'!"
 
-#: src/open.c:271
+#: ../src/open.c:271
 #, c-format
 msgid "Couldn't open zip'ed po file `%s'!"
 msgstr "Nem sikerült megnyitni ezt a zippelt po fájlt: `%s'!"
 
-#: src/parse.c:485
+#: ../src/parse.c:464
 #, c-format
 msgid ""
 "Error in file \"%s\"\n"
@@ -1259,7 +1226,7 @@ msgstr ""
 "a(z) %d. sornál.\n"
 "Ellenőrizze a fájlt és próbálja újra."
 
-#: src/parse.c:540
+#: ../src/parse.c:519
 #, c-format
 msgid ""
 "The file is empty:\n"
@@ -1268,7 +1235,7 @@ msgstr ""
 "A fájl üres:\n"
 "%s"
 
-#: src/parse.c:562
+#: ../src/parse.c:541
 #, c-format
 msgid "The file `%s' doesn't exist at all!"
 msgstr "A \"%s\" fájl egyáltalán nem létezik!"
@@ -1276,34 +1243,34 @@ msgstr "A \"%s\" fájl egyáltalán nem létezik!"
 #.
 #. * Provide a default po->header to avoid segfaults (#62244)
 #.
-#: src/parse.c:694
+#: ../src/parse.c:673
 msgid "Header record not found - defaulting from preferences"
 msgstr ""
 "Fejléc rekord nem található - alapértelmezésre állítom a beállításokok "
 "alapján"
 
-#: src/parse.c:710
+#: ../src/parse.c:689
 #, c-format
 msgid "gtranslator -- %s"
 msgstr "gtranslator -- %s"
 
-#: src/parse.c:922
+#: ../src/parse.c:914
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
 "Pot files are generated by the compilation process.\n"
 "Your file should likely be named '%s.po'."
 msgstr ""
-".pot kiterjesztéssel próbálta elmenteni a fájlt.\n"
-"Ezeket a fájlokat a fordítási folyamat generálja.\n"
-"A fájl neve '%s.po' legyen."
+"Ön .pot kiterjesztéssel menti el a fájlt.\n"
+"A pot fájlok a binárissá fordítás során jönnek létre\n"
+"A fájlt „%s.po” néven kellene elmentenie."
 
-#: src/parse.c:984
+#: ../src/parse.c:976
 #, c-format
 msgid "Could not open file `%s' for writing!"
 msgstr "Nem lehet megnyitni a írásra a következő fájlt: %s"
 
-#: src/parse.c:1036
+#: ../src/parse.c:1028
 #, c-format
 msgid ""
 "File %s\n"
@@ -1314,15 +1281,17 @@ msgid_plural ""
 msgstr[0] ""
 "%s fájl\n"
 "%d ellenőrzendő üzenetet tartalmaz"
-msgstr[1] ""
-"%s fájl\n"
-"%d ellenőrzendő üzenetet tartalmaz"
 
-#: src/parse.c:1308
+#: ../src/parse.c:1068
+#, c-format
+msgid "The file '%s' already exists, Do you want overwrite it?"
+msgstr "A(z) %s nevű fájl már létezik. Szeretné felülírni?"
+
+#: ../src/parse.c:1331
 msgid "Sorry, msgfmt isn't available on your system!"
 msgstr "Sajnálom, de nincs msgfmt a rendszerén!"
 
-#: src/parse.c:1343
+#: ../src/parse.c:1366
 #, c-format
 msgid ""
 "Compile successful:\n"
@@ -1331,283 +1300,283 @@ msgstr ""
 "Sikeres fordítás:\n"
 "%s"
 
-#: src/preferences.c:180
+#: ../src/preferences.c:180
 msgid "Couldn't generate the current date!"
 msgstr "Nem lehet generálni a jelenlegi dátumot!"
 
-#: src/prefs.c:212
+#: ../src/prefs.c:211
 msgid "Hotkey indicating character:"
 msgstr "Forróbillentyűt jelző karakter:"
 
-#: src/prefs.c:332
+#: ../src/prefs.c:331
 msgid "gtranslator -- options"
 msgstr "gtranslator -- beállítások"
 
 #.
 #. * Files page
 #.
-#: src/prefs.c:351
+#: ../src/prefs.c:350
 msgid "Files"
 msgstr "Fájlok"
 
-#: src/prefs.c:352 src/prefs.c:531 src/prefs.c:588
+#: ../src/prefs.c:351 ../src/prefs.c:530 ../src/prefs.c:587
 msgid "General"
 msgstr "Általános"
 
-#: src/prefs.c:353
+#: ../src/prefs.c:352
 msgid "Warn if po file contains fuzzy translations"
 msgstr "Figyelmeztetés, ha a po fájlban ellenőrzendő bejegyzések vannak"
 
-#: src/prefs.c:357
+#: ../src/prefs.c:356
 msgid "Delete compiled files (e.g. \"project.gmo\")"
 msgstr "A \"<project>.gmo\" eredményfájlok törlése"
 
-#: src/prefs.c:361
+#: ../src/prefs.c:360
 msgid "Autosave"
 msgstr "Automatikus mentés"
 
-#: src/prefs.c:362
+#: ../src/prefs.c:361
 msgid "Automatically save at regular intervals"
 msgstr "Automatikus mentés megadott időközönként"
 
-#: src/prefs.c:370
+#: ../src/prefs.c:369
 msgid "Autosave interval:"
 msgstr "Automatikus mentés időköze:"
 
-#: src/prefs.c:371
+#: ../src/prefs.c:370
 msgid "Append a suffix to automatically saved files"
 msgstr "Kiterjesztés hozzáírása az automatikusan mentett fájlok neveihez"
 
-#: src/prefs.c:378
+#: ../src/prefs.c:377
 msgid "Suffix:"
 msgstr "Kiterjesztés:"
 
-#: src/prefs.c:379
+#: ../src/prefs.c:378
 msgid "Recent files"
 msgstr "Legutóbbi fájlok"
 
-#: src/prefs.c:387
+#: ../src/prefs.c:386
 msgid "Maximum number of entries in the recent files list:"
 msgstr "A legutóbbi fájlok listája elemeinek maximális száma:"
 
-#: src/prefs.c:388
+#: ../src/prefs.c:387
 msgid "Check recent files before showing in recent files list"
 msgstr "Ellenőrizze, hogy a legutóbbi fájlok listájának elemei léteznek-e"
 
 #.
 #. * Editor page
 #.
-#: src/prefs.c:396
+#: ../src/prefs.c:395
 msgid "Editor"
 msgstr "Szerkesztő"
 
-#: src/prefs.c:399
+#: ../src/prefs.c:398
 msgid "Text display"
 msgstr "Szöveg megjelenítése"
 
-#: src/prefs.c:400
+#: ../src/prefs.c:399
 msgid "Highlight syntax of the translation message"
 msgstr "Fordítandó üzenet szintaxisának kiemelése"
 
-#: src/prefs.c:411
+#: ../src/prefs.c:410
 msgid "Syntax color scheme to use:"
 msgstr "Nyelvtani elemek kiemelésére alkalmazott színséma:"
 
-#: src/prefs.c:412
+#: ../src/prefs.c:411
 msgid "Use special character to indicate white space"
 msgstr "Különleges karakter használata az üres hely jelölésére"
 
-#: src/prefs.c:420
+#: ../src/prefs.c:419
 msgid "Apply own fonts"
 msgstr "Saját betűkészletek alkalmazása"
 
-#: src/prefs.c:424
+#: ../src/prefs.c:423
 msgid "gtranslator -- font selection/msgid font"
 msgstr "gtranslator -- betűkészlet-kiválasztó/msgid betűkészlete"
 
-#: src/prefs.c:428
+#: ../src/prefs.c:427
 msgid "Original text font:"
 msgstr "Eredeti szöveg betűkészlete:"
 
-#: src/prefs.c:429
+#: ../src/prefs.c:428
 msgid "gtranslator -- font selection/msgstr font"
 msgstr "gtranslator -- betűkészlet-kiválasztó/msgstr betűkészlete"
 
-#: src/prefs.c:433
+#: ../src/prefs.c:432
 msgid "Translation font:"
 msgstr "Fordítás betűkészlete:"
 
-#: src/prefs.c:434
+#: ../src/prefs.c:433
 msgid "Apply own colors:"
 msgstr "Saját színek alkalmazása:"
 
-#: src/prefs.c:438
+#: ../src/prefs.c:437
 msgid "gtranslator -- foreground color"
 msgstr "gtranslator -- előtérszín"
 
-#: src/prefs.c:442
+#: ../src/prefs.c:441
 msgid "Foreground color:"
 msgstr "Előtérszín:"
 
-#: src/prefs.c:443
+#: ../src/prefs.c:442
 msgid "gtranslator -- background color"
 msgstr "gtranslator -- háttérszín"
 
-#: src/prefs.c:447
+#: ../src/prefs.c:446
 msgid "Background:"
 msgstr "Háttér:"
 
-#: src/prefs.c:448
+#: ../src/prefs.c:447
 msgid "Contents"
 msgstr "Tartalom"
 
-#: src/prefs.c:449
+#: ../src/prefs.c:448
 msgid "Remove fuzzy status if message is changed"
 msgstr "Ellenőrzendő állapot megszüntetése, ha az üzenet változott"
 
-#: src/prefs.c:453
+#: ../src/prefs.c:452
 msgid "Keep obsolete messages in the po files"
 msgstr "Az elavult üzenetek megtartása a po fájlban"
 
-#: src/prefs.c:457
+#: ../src/prefs.c:456
 msgid "Spell checking"
 msgstr "Helyesírás-ellenőrzés"
 
-#: src/prefs.c:458
+#: ../src/prefs.c:457
 msgid "Instant spell checking"
 msgstr "Helyesírás-ellenőrzés beíráskor"
 
-#: src/prefs.c:464
+#: ../src/prefs.c:463
 msgid "Use special dictionary:"
 msgstr "Saját szótár használata:"
 
 #.
 #. * PO header page
 #.
-#: src/prefs.c:482
+#: ../src/prefs.c:481
 msgid "PO header"
 msgstr "PO-fejléc"
 
-#: src/prefs.c:485
+#: ../src/prefs.c:484
 msgid "Personal Information"
 msgstr "Személyes adatok"
 
-#: src/prefs.c:489
+#: ../src/prefs.c:488
 msgid "Author's name:"
 msgstr "Fordító neve:"
 
-#: src/prefs.c:493
+#: ../src/prefs.c:492
 msgid "Author's email:"
 msgstr "Fordító e-mail címe:"
 
-#: src/prefs.c:494
+#: ../src/prefs.c:493
 msgid "Language settings"
 msgstr "Nyelvi beállítások"
 
-#: src/prefs.c:507
+#: ../src/prefs.c:506
 msgid "Language code:"
 msgstr "Nyelv kódja:"
 
 #.
 #. * Functionality page
 #.
-#: src/prefs.c:529
+#: ../src/prefs.c:528
 msgid "Functionality"
 msgstr "Használhatóság"
 
-#: src/prefs.c:532
+#: ../src/prefs.c:531
 msgid "Enable the functionality to update a po file from within gtranslator"
 msgstr "A po fájl frissítésének engedélyezése a gtranslator-on belül"
 
-#: src/prefs.c:536
+#: ../src/prefs.c:535
 msgid "Enable the functionality to remove all translations from a po file"
 msgstr "A po fájlban található fordítások törlésének engedélyezése"
 
-#: src/prefs.c:540
+#: ../src/prefs.c:539
 msgid "Show instant comment view in main pane"
 msgstr "Azonnali megjegyzés nézet megjelenítése a főmezőben"
 
-#: src/prefs.c:544
+#: ../src/prefs.c:543
 msgid "Display special dialog for messages with plural forms"
 msgstr "Többesszámú üzenetekhez külön párbeszédablak megnyitása"
 
-#: src/prefs.c:548
+#: ../src/prefs.c:547
 msgid "Save geometry on exit and restore it on startup"
 msgstr "Geometria mentése kilépéskor és visszaállítása induláskor"
 
-#: src/prefs.c:552
+#: ../src/prefs.c:551
 msgid "Messages table"
 msgstr "Üzenetek táblázata"
 
-#: src/prefs.c:553
+#: ../src/prefs.c:552
 msgid "Show the messages table (requires restart)"
 msgstr ""
 "Az üzenetek táblázatának mutatása (a gtranslator újraindítása szükséges)"
 
-#: src/prefs.c:557
+#: ../src/prefs.c:556
 msgid "Collapse all entries by default"
 msgstr "Minden bejegyzés összecsukása alapértelmezés szerint"
 
-#: src/prefs.c:561
+#: ../src/prefs.c:560
 msgid "Use own colors for messages table groups"
 msgstr "Saját színek használata az üzenetek táblázatának csoportjaihoz"
 
-#: src/prefs.c:570
+#: ../src/prefs.c:569
 msgid "Fuzzy entries color:"
 msgstr "Ellenőrzendő bejegyzések színe:"
 
-#: src/prefs.c:576
+#: ../src/prefs.c:575
 msgid "Untranslated entries color:"
 msgstr "Le nem fordított bejegyzések színe:"
 
-#: src/prefs.c:582
+#: ../src/prefs.c:581
 msgid "Translated entries color:"
 msgstr "Lefordított bejegyzések színe:"
 
 #.
 #. * Autotranslate page
 #.
-#: src/prefs.c:587
+#: ../src/prefs.c:586
 msgid "Autotranslation"
 msgstr "Automatikus fordítás"
 
-#: src/prefs.c:589
+#: ../src/prefs.c:588
 msgid ""
 "Also query the personal learn buffer while autotranslating untranslated "
 "messages"
 msgstr "A saját fordítási memória lekérdezése az automatikus fordítás közben"
 
-#: src/prefs.c:593
+#: ../src/prefs.c:592
 msgid "Automatically learn a newly translated message"
 msgstr "Újonnan fordított üzenetek automatikus megtanulása"
 
-#: src/prefs.c:597
+#: ../src/prefs.c:596
 msgid "Fuzzy matching"
 msgstr "Ellenőrzendők illesztése"
 
-#: src/prefs.c:604
+#: ../src/prefs.c:603
 msgid "Use \"fuzzy\" matching routines for learn buffer queries"
 msgstr ""
 "\"ellenőrzendő\" illesztési rutinok használata a fordítási memória "
 "lekérdezéseihez"
 
-#: src/prefs.c:611
+#: ../src/prefs.c:610
 msgid "Minimal required similarity persentage for fuzzy queries:"
 msgstr "Ellenőrzendő lekérdezések minimálisan szükséges hasonlósága:"
 
-#: src/prefs.c:660
+#: ../src/prefs.c:659
 msgid "Please enter your name!"
 msgstr "Adja meg a nevét!"
 
-#: src/prefs.c:680
+#: ../src/prefs.c:679
 msgid "Please enter your EMail address!"
 msgstr "Adja meg az e-mail címét!"
 
-#: src/prefs.c:700
+#: ../src/prefs.c:699
 msgid "Please enter a valid EMail address!"
 msgstr "Létező e-mail címet kell megadnia!"
 
-#: src/replace.c:175
+#: ../src/replace.c:175
 msgid "No replacements made!"
 msgstr "Nem történt csere!"
 
@@ -1618,7 +1587,7 @@ msgstr "Nem történt csere!"
 #. *  another than a 'Y' to avoid the usage of the mid dot (U+00B7) in the
 #. *   text displaying routines of gtranslator.
 #.
-#: src/runtime-config.c:72
+#: ../src/runtime-config.c:72
 msgid "Y"
 msgstr "I"
 
@@ -1626,16 +1595,16 @@ msgstr "I"
 #. * Translators: this character is used if the middle dot
 #. *  can't be used under your locale.
 #.
-#: src/runtime-config.c:88 src/runtime-config.c:93
+#: ../src/runtime-config.c:88 ../src/runtime-config.c:93
 msgid "^"
 msgstr "^"
 
-#: src/save.c:116
+#: ../src/save.c:116
 #, c-format
 msgid "Couldn't save compiled gettext file `%s'!"
 msgstr "Nem sikerült menteni a lefordított gettext fájlt: `%s'!"
 
-#: src/save.c:159
+#: ../src/save.c:159
 #, c-format
 msgid "Couldn't save compressed gettext file `%s'!"
 msgstr "Nem sikerült menteni a tömörített gettext fájlt: `%s'!"
@@ -1644,72 +1613,53 @@ msgstr "Nem sikerült menteni a tömörített gettext fájlt: `%s'!"
 #. * The %s format here stands for the used
 #. *  compressions program (gzip, bzip2 etc.)
 #.
-#: src/save.c:169
+#: ../src/save.c:169
 #, c-format
 msgid "Couldn't save %s'd gettext file `%s'!"
 msgstr ""
 "Nem sikerült menteni ezt a %s programmal tömörített gettext fájlt: `%s'!"
 
-#: src/save.c:228
+#: ../src/save.c:228
 #, c-format
 msgid "Couldn't save zip'ed po file `%s'!"
 msgstr "Nem sikerült menteni ezt a zippelt po fájlt: `%s'!"
 
-#: src/session.c:86
+#: ../src/session.c:86
 msgid "Session restored successfully."
 msgstr "A munkafolyamat visszaállítása sikerült."
 
-#: src/stylistics.c:265
-msgid "No font set! Using default font"
-msgstr "Nincs betűkészlet beállítva, használom az alapértelmezettet"
-
-#.
-#. * Use gtranslator's font in this case -- should be a fallback font
-#. *  for your language.
-#.
-#: src/stylistics.c:271
-msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
-msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-2"
-
-#: src/update.c:102
+#: ../src/update.c:101
 msgid "No POTFILES.in found!"
 msgstr "POTFILES.in nem található!"
 
-#: src/update.c:113
+#: ../src/update.c:112
 msgid "Po file is uptodate."
 msgstr "A PO-fájl naprakész."
 
-#: src/update.c:120
+#: ../src/update.c:119
 msgid "The update was successfull."
 msgstr "A frissítés sikeresen befejeződött."
 
-#: src/update.c:125
+#: ../src/update.c:124
 msgid "An error occurred while updating the po file."
 msgstr "Hiba történt a po fájl frissítése közben."
 
-#: src/utils.c:308 src/utils.c:325
+#: ../src/utils.c:308 ../src/utils.c:325
 #, c-format
 msgid "Can't create directory `%s'!"
 msgstr "Nem sikerült létrehozni a következő könyvtárat: %s!"
 
-#.
-#. * Again return the fallback default locale value given by the translator.
-#.
-#: src/utils.c:794
-msgid "iso-8859-1"
-msgstr "UTF-8"
-
-#: src/utils_gui.c:144
+#: ../src/utils_gui.c:144
 #, c-format
 msgid "The geometry string \"%s\" couldn't be parsed!"
 msgstr "A \"%s\" geometria karakterláncot nem sikerült értelmezni!"
 
-#: src/utils_gui.c:360
+#: ../src/utils_gui.c:360
 #, c-format
 msgid "You are not permitted to access file '%s'."
 msgstr "Nincs hozzáférési joga a következő fájlhoz: %s."
 
-#: src/utils_gui.c:378
+#: ../src/utils_gui.c:378
 #, c-format
 msgid ""
 "You do not have permission to modify file '%s'.\n"
@@ -1720,46 +1670,102 @@ msgstr ""
 "Kérem mentsen belőle az Ön által választott helyre egy másolatot \n"
 " ahova van írási joga."
 
-#: src/utils_gui.c:467
+#: ../src/utils_gui.c:467
 #, c-format
 msgid "The necessary decompression program `%s' is not installed!"
 msgstr "Nincs telepítve a szükséges kitömörítő program: `%s'!"
 
-#: src/utils_gui.c:472
+#: ../src/utils_gui.c:472
 #, c-format
 msgid "The necessary compression program `%s' is not installed!"
 msgstr "Nincs telepítve a szükséges tömörítőprogram: `%s'!"
 
-#: src/vfs-handle.c:121
+#: ../src/vfs-handle.c:121
 #, c-format
 msgid "Couldn't create temporary directory `%s'!"
 msgstr "Nem sikerült létrehozni a következő átmeneti könyvtárat: %s!"
 
-#: src/vfs-handle.c:149
+#: ../src/vfs-handle.c:149
 #, c-format
 msgid "File `%s' couldn't be found!"
 msgstr "A következő fájl nem található: %s"
 
-#: src/vfs-handle.c:154
+#: ../src/vfs-handle.c:154
 #, c-format
 msgid "Malformed URI `%s' entered!"
 msgstr "A következő URI szintaktikailag helytelen: %s"
 
-#: src/vfs-handle.c:159
+#: ../src/vfs-handle.c:159
 #, c-format
 msgid "Host `%s' couldn't be found!"
 msgstr "A következő gép nem található: `%s'"
 
-#: src/vfs-handle.c:164
+#: ../src/vfs-handle.c:164
 #, c-format
 msgid "Hostname `%s' is not valid!"
 msgstr "A következő gépnév érvénytelen: `%s'"
 
-#: src/vfs-handle.c:169
+#: ../src/vfs-handle.c:169
 #, c-format
 msgid "Host `%s' has no address!"
 msgstr "A következő gépnek nincs címe: `%s'"
 
-#: src/vfs-handle.c:174
+#: ../src/vfs-handle.c:174
 msgid "Transfer interrupted!"
 msgstr "Átvitel megszakítva!"
+
+#~ msgid "gtranslator -- import po file"
+#~ msgstr "gtranslator -- po fájl importálása"
+
+#~ msgid "gtranslator -- export po file"
+#~ msgstr "gtranslator -- po fájl exportálása"
+
+#~ msgid "Show build specifications"
+#~ msgstr "Fordítási specifikációk mutatása"
+
+#~ msgid "gtranslator build information/specs:"
+#~ msgstr "gtranslator fordítási információk/specifikációk:"
+
+#~ msgid "Version and build date:"
+#~ msgstr "Verziószám és a fordítás dátuma:"
+
+#~ msgid "Build GLib / Gtk+ / GNOME / XML versions:"
+#~ msgstr "Fordításhoz használt Glib/Gtk+/GNOME / XML verziók:"
+
+#~ msgid "Colorschemes directory:"
+#~ msgstr "Színsémák könyvtára:"
+
+#~ msgid "Scripts directory:"
+#~ msgstr "Parancsfájlok könyvtára:"
+
+#~ msgid "Window icon:"
+#~ msgstr "Ablak ikonja:"
+
+#~ msgid "Own locale directory:"
+#~ msgstr "Saját locale könyvtára:"
+
+#~ msgid "Default learn buffer file location:"
+#~ msgstr "Alapértelmezett fordítási memória-fájl helye:"
+
+#~ msgid "_Export to UTF-8..."
+#~ msgstr "_Exportálás UTF-8-ba..."
+
+#~ msgid "Export the current po file to UTF-8"
+#~ msgstr "A jelenlegi po fájlt UTF-8 kódolással exportálja"
+
+#~ msgid "_Import from UTF-8..."
+#~ msgstr "_Importálás UTF-8-ból..."
+
+#~ msgid ""
+#~ "Import a UTF-8 encoded po file into it's corresponding plain encoding"
+#~ msgstr ""
+#~ "Egy UTF-8 kódolású po fájlt a neki megfelelő egyszerű kódolásba importál"
+
+#~ msgid "No font set! Using default font"
+#~ msgstr "Nincs betűkészlet beállítva, használom az alapértelmezettet"
+
+#~ msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
+#~ msgstr "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-2"
+
+#~ msgid "iso-8859-1"
+#~ msgstr "UTF-8"
