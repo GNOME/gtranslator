@@ -50,6 +50,7 @@
 #include <glib-object.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <gtksourceview/gtksource.h>
 #include <libpeas/peas-extension-set.h>
 
 #ifdef G_OS_WIN32

@@ -4,7 +4,6 @@ plugindir = $(libdir)/gtranslator/plugins
 INCLUDES = \
 	-I$(top_srcdir) 				\
 	-I$(top_srcdir)/src				\
-	-I$(top_srcdir)/src/dialogs			\
 	$(GTRANSLATOR_CFLAGS) 				\
 	$(WARN_CFLAGS)					\
 	$(DISABLE_DEPRECATED)				\

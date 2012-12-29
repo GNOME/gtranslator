@@ -21,6 +21,7 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <gtksourceview/gtksource.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 

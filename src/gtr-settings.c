@@ -23,6 +23,7 @@
 
 #include <string.h>
 #include <gdl/gdl.h>
+#include <gtksourceview/gtksource.h>
 
 #include "gtr-settings.h"
 #include "gtr-application.h"

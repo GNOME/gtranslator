@@ -50,6 +50,7 @@
 #include <glib-object.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <gtksourceview/gtksource.h>
 #include <libpeas/peas-extension-set.h>
 
 #define GTR_STOCK_FUZZY_NEXT "gtranslator-fuzzy-next"

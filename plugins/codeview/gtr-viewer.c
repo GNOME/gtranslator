@@ -31,7 +31,7 @@
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 #include <string.h>
-#include <gtksourceview/gtksourcelanguagemanager.h>
+#include <gtksourceview/gtksource.h>
 
 #define GTR_VIEWER_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
 						 	(object),	\
