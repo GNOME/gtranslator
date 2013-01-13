@@ -65,7 +65,7 @@ struct _GtrViewPrivate
   gchar *search_text;
 
 #ifdef HAVE_GTKSPELL
-  GtkSpell *spell;
+  GtkSpellChecker *spell;
 #endif
 };
 
@@ -75,11 +75,10 @@ gtr_attach_gtkspell (GtrView * view)
 {
   GError *error = NULL;
   gchar *errortext = NULL;
-  view->priv->spell = NULL;
 
-  view->priv->spell =
-    gtkspell_new_attach (GTK_TEXT_VIEW (view), NULL, &error);
-  if (view->priv->spell == NULL)
+  view->priv->spell = gtk_spell_checker_new ();
+  gtk_spell_checker_set_language (view->priv->spell, NULL, &error);
+  if (error)
     {
       g_warning (_("gtkspell error: %s\n"), error->message);
       errortext =
@@ -89,6 +88,11 @@ gtr_attach_gtkspell (GtrView * view)
 
       g_error_free (error);
       g_free (errortext);
+    }
+  else
+    {
+      gtk_spell_checker_attach (view->priv->spell,
+                                GTK_TEXT_VIEW (view));
     }
 }
 #endif
@@ -263,7 +267,7 @@ gtr_view_enable_spellcheck (GtrView * view, gboolean enable)
 #ifdef HAVE_GTKSPELL
       if (!view->priv->spell)
         return;
-      gtkspell_detach (view->priv->spell);
+      gtk_spell_checker_detach (view->priv->spell);
 #endif
     }
 }

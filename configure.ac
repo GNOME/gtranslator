@@ -84,7 +84,7 @@ GDL_REQUIRED=3.6.0
 GDA_REQUIRED=4.2.3
 PEAS_REQUIRED=1.2.0
 GDICT_OPTIONAL=0.11.0
-GTKSPELL_OPTIONAL=2.99.99
+GTKSPELL_OPTIONAL=3.0.0
 JSON_GLIB_OPTIONAL=0.12.0
 
 AC_ARG_WITH(gda,
@@ -174,14 +174,14 @@ dnl -------------------------------------------------------------------
 dnl Check for gtkspell >= 3.0 and use it if found
 dnl -------------------------------------------------------------------
 have_gtkspell=no
-AC_ARG_WITH(gtkspell3,
+AC_ARG_WITH(gtkspell,
             AS_HELP_STRING([--with-gtkspell],[Build with spell support]),,
             with_gtkspell=auto)
 
 if test x"$with_gtkspell" != "xno"
 then
         PKG_CHECK_MODULES([GTKSPELL], [
-                gtkspell-3.0 >= $GTKSPELL_OPTIONAL
+                gtkspell3-3.0 >= $GTKSPELL_OPTIONAL
         ], have_gtkspell=yes, have_gtkspell=no)
 
         if test x"$have_gtkspell" = "xyes"
@@ -339,7 +339,7 @@ if [ test x"$have_gtkspell" = "xyes" ]; then
 	echo "Building spell support: ................................YES"
 else
 	echo "Building spell support: ................................NO"
-		echo "        Requires gtkspell >= $GTKSPELL_OPTIONAL"
+		echo "        Requires gtkspell3 >= $GTKSPELL_OPTIONAL"
 fi
 
 echo "
