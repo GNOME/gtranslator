@@ -1857,11 +1857,11 @@ gtr_tab_go_to_next_fuzzy_or_untrans (GtrTab * tab)
 {
   GtrMsg *msg;
 
-  if (_gtr_tab_finish_edition (tab))
+  if (!_gtr_tab_finish_edition (tab))
     return FALSE;
 
   msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
-                                    GTR_NAVIGATE_PREV,
+                                    GTR_NAVIGATE_NEXT,
                                     message_is_fuzzy_or_untranslated);
   if (msg != NULL)
     {
