@@ -380,6 +380,7 @@ delete_button_clicked (GtkWidget *button, GtrPreferencesDialog *dlg)
   GtkTreeSelection *selection;
   gboolean active;
   GtkWidget *dialog;
+  gchar *markup;
 
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->profile_treeview));
   g_return_if_fail (model != NULL);
@@ -397,8 +398,10 @@ delete_button_clicked (GtkWidget *button, GtrPreferencesDialog *dlg)
                                            GTK_MESSAGE_ERROR,
                                            GTK_BUTTONS_CLOSE, NULL);
 
-          gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
-                                         _("<span weight=\"bold\" size=\"large\">Impossible to remove the active profile</span>"));
+          markup = g_strdup_printf("<span weight=\"bold\" size=\"large\">%s</span>",
+                                   _("Impossible to remove the active profile"));
+          gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog), markup);
+          g_free(markup);
 
           gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG
                                                     (dialog),
@@ -414,8 +417,10 @@ delete_button_clicked (GtkWidget *button, GtrPreferencesDialog *dlg)
                                            GTK_MESSAGE_QUESTION,
                                            GTK_BUTTONS_NONE, NULL);
 
-          gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
-                                         _("<span weight=\"bold\" size=\"large\">Are you sure you want to delete this profile?</span>"));
+          markup = g_strdup_printf("<span weight=\"bold\" size=\"large\">%s</span>",
+                                   _("Are you sure you want to delete this profile?"));
+          gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog), markup);
+          g_free(markup);
 
           gtk_dialog_add_button (GTK_DIALOG (dialog),
                                  GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);

@@ -705,6 +705,7 @@ gtr_tab_init (GtrTab * tab)
   GtkWidget *scroll;
   GtkWidget *dockbar;
   GtrTabPrivate *priv;
+  gchar *markup;
 
   tab->priv = GTR_TAB_GET_PRIVATE (tab);
   priv = tab->priv;
@@ -755,7 +756,9 @@ gtr_tab_init (GtrTab * tab)
   gtk_widget_show (priv->msgid_hbox);
 
   msgid_label = gtk_label_new (NULL);
-  gtk_label_set_markup (GTK_LABEL (msgid_label), _("<b>Original Message:</b>"));
+  markup = g_strdup_printf("<b>%s</b>", _("Original Message:"));
+  gtk_label_set_markup (GTK_LABEL (msgid_label), markup);
+  g_free(markup);
   gtk_misc_set_padding (GTK_MISC (msgid_label), 0, 5);
   gtk_widget_show (msgid_label);
 
@@ -807,8 +810,10 @@ gtr_tab_init (GtrTab * tab)
 
   /* Translation widgets */
   priv->msgstr_label = gtk_label_new (NULL);
+  markup = g_strdup_printf("<b>%s</b>", _("Translate_d Text:"));
   gtk_label_set_markup_with_mnemonic (GTK_LABEL (priv->msgstr_label),
-                                      _("<b>Translate_d Text:</b>"));
+                                      markup);
+  g_free(markup);
   gtk_misc_set_padding (GTK_MISC (priv->msgstr_label), 0, 5);
   gtk_misc_set_alignment (GTK_MISC (priv->msgstr_label), 0, 0.5);
   gtk_widget_show (priv->msgstr_label);

@@ -153,6 +153,7 @@ add_to_database (gpointer data_pointer)
   else
     {
       GtkWidget *dialog;
+      gchar *markup;
 
       gtk_progress_bar_set_fraction (data->progress, 1.0);
 
@@ -161,8 +162,11 @@ add_to_database (gpointer data_pointer)
                                        GTK_MESSAGE_INFO,
                                        GTK_BUTTONS_CLOSE, NULL);
 
-      gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
-                                     _("<span weight=\"bold\" size=\"large\">Strings added to database</span>"));
+      markup =
+        g_strdup_printf("<span weight=\"bold\" size=\"large\">%s</span>",
+                        _("Strings added to database"));
+      gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog), markup);
+      g_free(markup);
 
       g_signal_connect (dialog, "response",
                         G_CALLBACK (gtk_widget_destroy), NULL);
