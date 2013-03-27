@@ -240,10 +240,11 @@ search_entry_changed (GtkComboBox * combo, GtrSearchDialog * dialog)
 }
 
 /*
- * Function to manage the sensitive of fuzzy checkbutton.
+ * Functions to make sure either translated or original checkbutton
+ * is selected at any time. Anything else does not make any sense.
  */
 static void
-original_translated_checkbutton_toggled (GtkToggleButton * button,
+translated_checkbutton_toggled (GtkToggleButton * button,
                                          GtrSearchDialog * dialog)
 {
   gboolean original_text;
@@ -260,11 +261,32 @@ original_translated_checkbutton_toggled (GtkToggleButton * button,
   if (!original_text && !translated_text)
     {
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                    (dialog->priv->fuzzy_checkbutton), FALSE);
-      gtk_widget_set_sensitive (dialog->priv->fuzzy_checkbutton, FALSE);
+                                    (dialog->priv->original_text_checkbutton),
+                                     TRUE);
     }
-  else
-    gtk_widget_set_sensitive (dialog->priv->fuzzy_checkbutton, TRUE);
+}
+
+static void
+original_checkbutton_toggled (GtkToggleButton * button,
+                                         GtrSearchDialog * dialog)
+{
+  gboolean original_text;
+  gboolean translated_text;
+
+  original_text =
+    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
+                                  (dialog->priv->original_text_checkbutton));
+  translated_text =
+    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
+                                  (dialog->
+                                   priv->translated_text_checkbutton));
+
+  if (!original_text && !translated_text)
+    {
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
+                                    (dialog->priv->translated_text_checkbutton),
+                                     TRUE);
+    }
 }
 
 static void
@@ -475,12 +497,12 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
 
   g_signal_connect (dlg->priv->original_text_checkbutton,
                     "toggled",
-                    G_CALLBACK (original_translated_checkbutton_toggled),
+                    G_CALLBACK (original_checkbutton_toggled),
                     dlg);
 
   g_signal_connect (dlg->priv->translated_text_checkbutton,
                     "toggled",
-                    G_CALLBACK (original_translated_checkbutton_toggled),
+                    G_CALLBACK (translated_checkbutton_toggled),
                     dlg);
 
   g_signal_connect (dlg, "response", G_CALLBACK (response_handler), NULL);
