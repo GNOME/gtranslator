@@ -259,12 +259,14 @@ on_language_activate (GtkEntry         *entry,
               fill_from_language_entry);
 }
 
-static void
+static gboolean
 on_language_focus_out_event (GtkEntry         *entry,
                              GdkEvent         *event,
                              GtrLanguagesFetcher *fetcher)
 {
   on_language_activate (entry, fetcher);
+
+  return FALSE;
 }
 
 static void
@@ -275,12 +277,14 @@ on_language_code_activate (GtkEntry         *entry,
               fill_from_language_code_entry);
 }
 
-static void
+static gboolean
 on_language_code_focus_out_event (GtkEntry         *entry,
                                   GdkEvent         *event,
                                   GtrLanguagesFetcher *fetcher)
 {
   on_language_code_activate (entry, fetcher);
+
+  return FALSE;
 }
 
 static void
