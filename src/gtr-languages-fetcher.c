@@ -76,6 +76,38 @@ gtr_languages_fetcher_class_init (GtrLanguagesFetcherClass *klass)
   g_type_class_add_private (object_class, sizeof (GtrLanguagesFetcherPrivate));
 }
 
+static gint
+compare_languages_name (gconstpointer a,
+                        gconstpointer b)
+{
+  GtrLanguage *lang1, *lang2;
+  const gchar *name1, *name2;
+
+  lang1 = (GtrLanguage *) a;
+  lang2 = (GtrLanguage *) b;
+
+  name1 = gtr_language_get_name (lang1);
+  name2 = gtr_language_get_name (lang2);
+
+  return g_utf8_collate (name1, name2);
+}
+
+static gint
+compare_languages_code (gconstpointer a,
+                        gconstpointer b)
+{
+  GtrLanguage *lang1, *lang2;
+  const gchar *name1, *name2;
+
+  lang1 = (GtrLanguage *) a;
+  lang2 = (GtrLanguage *) b;
+
+  name1 = gtr_language_get_code (lang1);
+  name2 = gtr_language_get_code (lang2);
+
+  return g_utf8_collate (name1, name2);
+}
+
 static void
 append_from_languages (GtrLanguagesFetcher *fetcher)
 {
@@ -85,18 +117,27 @@ append_from_languages (GtrLanguagesFetcher *fetcher)
   plurals = g_hash_table_new (g_str_hash, g_int_equal);
 
   languages = gtr_language_get_languages ();
+  languages = g_slist_sort (languages, compare_languages_name);
 
-  for (l = languages; l != NULL; l = (const GSList *)g_list_next (l))
+  for (l = languages; l != NULL; l = g_slist_next (l))
     {
       GtrLanguage *lang = (GtrLanguage *)l->data;
-      GtkTreeIter iter1, iter2;
-      const gchar *plural_form;
+      GtkTreeIter iter1;
 
       gtk_list_store_append (fetcher->priv->language_store, &iter1);
       gtk_list_store_set (fetcher->priv->language_store, &iter1,
                           0, gtr_language_get_name (lang),
                           1, lang,
-                          -1);
+                           -1);
+    }
+
+  languages = g_slist_sort (languages, compare_languages_code);
+
+  for (l = languages; l != NULL; l = g_slist_next (l))
+    {
+      GtrLanguage *lang = (GtrLanguage *)l->data;
+      GtkTreeIter iter2;
+      const gchar *plural_form;
 
       gtk_list_store_append (fetcher->priv->code_store, &iter2);
       gtk_list_store_set (fetcher->priv->code_store, &iter2,
