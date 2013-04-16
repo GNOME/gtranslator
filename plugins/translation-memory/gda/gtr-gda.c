@@ -430,16 +430,16 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
 
 static void
 gtr_gda_remove (GtrTranslationMemory *tm,
-                const gchar *original,
-                const gchar *translation)
+                gint translation_id)
 {
   GtrGda *self = GTR_GDA (tm);
   GdaSet *params;
   GError *error;
 
-  params = gda_set_new_inline (2,
-                               "original", G_TYPE_STRING, original,
-                               "value", G_TYPE_STRING, translation);
+  params = gda_set_new_inline (1,
+                               "id_trans",
+                               G_TYPE_INT,
+                               translation_id);
 
   error = NULL;
   gda_connection_statement_execute_non_select (self->priv->db,
@@ -474,7 +474,8 @@ build_lookup_query (GtrGda *self, guint word_count)
   g_string_append_printf (query,
                           "select "
                           "    TRANS.VALUE, "
-                          "    100 SCORE "
+                          "    100 SCORE, "
+			  "    TRANS.ID "
                           "from "
                           "     TRANS, ORIG "
                           "where ORIG.ID = TRANS.ORIG_ID "
@@ -482,7 +483,8 @@ build_lookup_query (GtrGda *self, guint word_count)
                           "union "
                           "select "
                           "    TRANS.VALUE, "
-                          "    SC SCORE "
+                          "    SC SCORE, "
+                          "    TRANS.ID "
                           "from TRANS, "
                           "     (select "
                           "          ORIG.ID ORID, "
@@ -616,6 +618,7 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
         const GValue * val;
         gchar *suggestion;
         gint score;
+        gint id;
         GtrTranslationMemoryMatch *match;
 
         inner_error = NULL;
@@ -643,9 +646,24 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
 
         score = g_value_get_int (val);
 
+        inner_error = NULL;
+        val = gda_data_model_get_typed_value_at (model,
+                                                 2, i,
+                                                 G_TYPE_INT,
+                                                 FALSE,
+                                                 &inner_error);
+        if (!val)
+          {
+            g_free (suggestion);
+            goto end;
+          }
+
+        id = g_value_get_int (val);
+
         match = g_slice_new (GtrTranslationMemoryMatch);
         match->match = suggestion;
         match->level = score;
+        match->id = id;
 
         matches = g_list_prepend (matches, match);
       }
@@ -861,9 +879,7 @@ gtr_gda_init (GtrGda * self)
   self->priv->stmt_delete_trans =
     prepare_statement (self->priv->parser,
                        "delete from TRANS "
-                       "where ORIG_ID= "
-                       "(select ID from ORIG where VALUE=##original::string) "
-                       "and VALUE=##value::string");
+                       "where id = ##id_trans::int");
 
   self->priv->max_omits = 0;
   self->priv->max_delta = 0;

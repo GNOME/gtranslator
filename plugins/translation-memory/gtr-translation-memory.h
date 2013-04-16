@@ -37,8 +37,7 @@ struct _GtrTranslationMemoryInterface
   gboolean (*store) (GtrTranslationMemory * obj, GtrMsg * msg);
   gboolean (*store_list) (GtrTranslationMemory * obj, GList * msgs);
   void (*remove) (GtrTranslationMemory *obj,
-                  const gchar          *original,
-                  const gchar          *translation);
+                  gint                 translation_id);
 
   GList *(*lookup) (GtrTranslationMemory * obj, const gchar * phrase);
   void (*set_max_omits) (GtrTranslationMemory * obj, gsize omits);
@@ -51,6 +50,7 @@ struct _GtrTranslationMemoryMatch
 {
   gchar *match;
   gint level;
+  gint id;
 };
 
 GType           gtr_translation_memory_get_type         (void);
@@ -62,8 +62,7 @@ gboolean        gtr_translation_memory_store_list       (GtrTranslationMemory   
                                                          GList                  *msg);
 
 void            gtr_translation_memory_remove           (GtrTranslationMemory   *obj,
-                                                         const gchar            *original,
-                                                         const gchar            *translation);
+                                                         gint            	translation_id);
 
 GList          *gtr_translation_memory_lookup           (GtrTranslationMemory   *obj,
                                                          const gchar            *phrase);

@@ -87,20 +87,17 @@ gtr_translation_memory_store_list_default (GtrTranslationMemory * obj,
  */
 void
 gtr_translation_memory_remove (GtrTranslationMemory * obj,
-			       const gchar * original,
-			       const gchar * translation)
+			                         gint  translation_id)
 {
   g_return_if_fail (GTR_IS_TRANSLATION_MEMORY (obj));
   return GTR_TRANSLATION_MEMORY_GET_IFACE (obj)->remove (obj,
-							 original,
-							 translation);
+							 translation_id);
 }
 
 /* Default implementation */
 static void
 gtr_translation_memory_remove_default (GtrTranslationMemory * obj,
-                                       const gchar * original,
-                                       const gchar * translation)
+			                                 gint translation_id)
 {
 }
 

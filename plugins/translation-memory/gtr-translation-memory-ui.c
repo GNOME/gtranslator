@@ -54,6 +54,7 @@ struct _GtrTranslationMemoryUiPrivate
   GtrTab *tab;
 
   gchar **tm_list;
+  gint *tm_list_id;
 
   GtkWidget *popup_menu;
   GtrMsg *msg;
@@ -161,12 +162,14 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
 
   gtk_list_store_clear (model);
   tm_ui->priv->tm_list = g_new (gchar *, MAX_ELEMENTS + 1);
+  tm_ui->priv->tm_list_id = g_new (gint, MAX_ELEMENTS + 1);
 
   i = 0;
   for (l = tm_list; l && i < MAX_ELEMENTS; l = l->next)
     {
       GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) l->data;
 
+      tm_ui->priv->tm_list_id[i] = match->id;
       tm_ui->priv->tm_list[i] = g_strdup (match->match);
       level_column = gtk_tree_view_get_column (GTK_TREE_VIEW (tm_ui->priv->tree_view), 0);
       renderers_list = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (level_column));
@@ -284,8 +287,7 @@ popup_menu_remove_from_memory (GtkMenuItem *menuitem,
   GtkTreeSelection *selection;
   GtkTreeModel *model;
   GtkTreeIter iter;
-  gint level;
-  const gchar *original;
+  gint i;
   gchar *translation;
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tm_ui->priv->tree_view));
@@ -293,18 +295,14 @@ popup_menu_remove_from_memory (GtkMenuItem *menuitem,
     return;
 
   gtk_tree_model_get (model, &iter,
-                      LEVEL_COLUMN, &level,
-                      -1);
-
-  if (level != 100)
-    return;
-
-  gtk_tree_model_get (model, &iter,
                       STRING_COLUMN, &translation,
                       -1);
 
-  original = gtr_msg_get_msgid (tm_ui->priv->msg);
-  gtr_translation_memory_remove (tm_ui->priv->translation_memory, original, translation);
+  for (i = 0; tm_ui->priv->tm_list[i]; i++)
+    if (!strcmp (tm_ui->priv->tm_list[i], translation))
+      break;
+
+  gtr_translation_memory_remove (tm_ui->priv->translation_memory, tm_ui->priv->tm_list_id[i]);
 
   g_free (translation);
 
@@ -316,24 +314,11 @@ static GtkWidget *
 create_tree_popup_menu (GtrTranslationMemoryUi *self)
 {
   GtkTreeSelection *selection;
-  GtkTreeModel *model;
-  GtkTreeIter iter;
-  gboolean remove_available = FALSE;
   GtkWidget *menu;
   GtkWidget *item;
   GtkWidget *image;
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->priv->tree_view));
-  if (selection && gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      gint level;
-
-      gtk_tree_model_get (model, &iter,
-                          LEVEL_COLUMN, &level,
-                          -1);
-
-      remove_available = (level == 100);
-    }
 
   menu = gtk_menu_new ();
 
@@ -348,7 +333,7 @@ create_tree_popup_menu (GtrTranslationMemoryUi *self)
   g_signal_connect (item, "activate",
                     G_CALLBACK (popup_menu_remove_from_memory), self);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-  gtk_widget_set_sensitive (item, remove_available);
+  gtk_widget_set_sensitive (item, TRUE);
 
   gtk_widget_show_all (menu);
 
