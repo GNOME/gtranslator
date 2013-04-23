@@ -192,7 +192,7 @@ phrase_not_found (GtrWindow * window)
 }
 
 static gboolean
-run_search (GtrView * view, gboolean follow)
+run_search (GtrView * view)
 {
   GtkSourceBuffer *doc;
   GtkTextIter start_iter;
@@ -204,121 +204,86 @@ run_search (GtrView * view, gboolean follow)
 
   doc = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
 
-  if (!follow)
+  if(!gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),
+                                  NULL, &start_iter))
     gtk_text_buffer_get_start_iter (GTK_TEXT_BUFFER (doc), &start_iter);
-  else
-    gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),
-                                          NULL, &start_iter);
 
-  found = gtr_view_search_forward (view,
-                                   &start_iter,
+  found = gtr_view_search_forward (view, &start_iter,
                                    NULL, &match_start, &match_end);
 
   if (found)
-    {
-      gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &match_start);
-
-      gtk_text_buffer_move_mark_by_name (GTK_TEXT_BUFFER (doc),
-                                         "selection_bound", &match_end);
-
-    }
+    gtk_text_buffer_select_range(GTK_TEXT_BUFFER(doc), &match_start, &match_end);
   else
-    {
-      gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &start_iter);
-    }
+    gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &start_iter);
 
   return found;
 }
 
 static gboolean
 find_in_list (GtrWindow * window,
-              GList * views,
+              gboolean original_text, gboolean translated_text,
               gboolean fuzzy, gboolean wrap_around, gboolean search_backwards)
 {
   GtrTab *tab = gtr_window_get_active_tab (window);
   GtrPo *po = gtr_tab_get_po (tab);
   GList *l = gtr_po_get_current_message (po);
-  GList *current;
-  static GList *viewsaux = NULL;
-
-  current = l;
-
-  if (viewsaux == NULL)
-    viewsaux = views;
-
-  /*
-   * Variable used to know when start search in from the beggining of the view
-   */
-  static gboolean found = FALSE;
+  GList *current = l;
 
   do
     {
-      if (gtr_msg_is_fuzzy (GTR_MSG (l->data)) && !fuzzy)
+      if (!gtr_msg_is_fuzzy (GTR_MSG (l->data)) || fuzzy)
         {
-          if (!search_backwards)
-            {
-              if (l->next == NULL)
-                {
-                  if (!wrap_around)
-                    return FALSE;
-                  l = g_list_first (l);
-                }
-              else
-                l = l->next;
-            }
-          else
-            {
-              if (l->prev == NULL)
-                {
-                  if (!wrap_around)
-                    return FALSE;
-                  l = g_list_last (l);
-                }
-              else
-                l = l->prev;
-            }
-          gtr_tab_message_go_to (tab, l->data, TRUE, GTR_TAB_MOVE_NONE);
-        }
-      else
-        {
-          while (viewsaux != NULL)
-            {
-              gboolean aux = found;
+          GtrView *translated_view = gtr_tab_get_active_view(tab);
+          GtrView *original_view = gtr_tab_get_active_original_view(tab);
 
-              found = run_search (GTR_VIEW (viewsaux->data), found);
-              if (found)
-                {
-                  gtr_tab_message_go_to (tab, l->data, FALSE, GTR_TAB_MOVE_NONE);
-                  run_search (GTR_VIEW (viewsaux->data), aux);
-                  return TRUE;
-                }
-              viewsaux = viewsaux->next;
-            }
-          if (!search_backwards)
+          if (original_text)
+          {
+            if (run_search(original_view))
+              return TRUE;
+            else if (translated_text)
             {
-              if (l->next == NULL)
-                {
-                  if (!wrap_around)
-                    return FALSE;
-                  l = g_list_first (l);
-                }
-              else
-                l = l->next;
+              if (run_search(translated_view))
+                return TRUE;
             }
-          else
-            {
-              if (l->prev == NULL)
-                {
-                  if (!wrap_around)
-                    return FALSE;
-                  l = g_list_last (l);
-                }
-              else
-                l = l->prev;
-            }
-          gtr_tab_message_go_to (tab, l->data, TRUE, GTR_TAB_MOVE_NONE);
-          viewsaux = views;
+          }
+          else if (translated_text)
+          {
+            if (run_search(translated_view))
+              return TRUE;
+          }
         }
+
+        if (!search_backwards)
+          {
+            if (l->next == NULL)
+              {
+                if (!wrap_around)
+                  return FALSE;
+
+                l = g_list_first (l);
+                gtr_tab_go_to_first(tab, TRUE);
+              }
+            else
+            {
+              l = l->next;
+              gtr_tab_go_to_next(tab, TRUE);
+            }
+          }
+          else
+          {
+            if (l->prev == NULL)
+              {
+                if (!wrap_around)
+                  return FALSE;
+                l = g_list_last (l);
+                gtr_tab_go_to_last(tab, TRUE);
+              }
+            else
+            {
+              l = l->prev;
+              gtr_tab_go_to_prev(tab, TRUE);
+            }
+          }
     }
   while (l != current);
 
@@ -329,7 +294,7 @@ static void
 do_find (GtrSearchDialog * dialog, GtrWindow * window)
 {
   GtrTab *tab;
-  GList *views, *list;
+  GList *views;
   gchar *search_text;
   const gchar *entry_text;
   gboolean original_text;
@@ -367,27 +332,25 @@ do_find (GtrSearchDialog * dialog, GtrWindow * window)
 
   g_return_if_fail (views != NULL);
 
-  list = views;
-
   GTR_SEARCH_SET_CASE_SENSITIVE (flags, match_case);
   GTR_SEARCH_SET_ENTIRE_WORD (flags, entire_word);
 
-  while (list != NULL)
+  while (views != NULL)
     {
       search_text =
-        gtr_view_get_search_text (GTR_VIEW (list->data), &old_flags);
+        gtr_view_get_search_text (GTR_VIEW (views->data), &old_flags);
 
       if ((search_text == NULL) ||
           (strcmp (search_text, entry_text) != 0) || (flags != old_flags))
         {
-          gtr_view_set_search_text (GTR_VIEW (list->data), entry_text, flags);
+          gtr_view_set_search_text (GTR_VIEW (views->data), entry_text, flags);
         }
 
       g_free (search_text);
-      list = list->next;
+      views = views->next;
     }
 
-  found = find_in_list (window, views, fuzzy, wrap_around, search_backwards);
+  found = find_in_list (window, original_text, translated_text, fuzzy, wrap_around, search_backwards);
 
   if (found)
     phrase_found (window, 0);

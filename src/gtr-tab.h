@@ -1,17 +1,17 @@
 /*
  * Copyright (C) 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
- *               2008  Igalia 
+ *               2008  Igalia
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -106,6 +106,8 @@ GtrContextPanel *gtr_tab_get_context_panel (GtrTab * tab);
 
 GtrView *gtr_tab_get_active_view (GtrTab * tab);
 
+GtrView *gtr_tab_get_active_original_view (GtrTab * tab);
+
 GList *gtr_tab_get_all_views (GtrTab * tab,
                             gboolean original, gboolean translated);
 
@@ -143,13 +145,13 @@ void gtr_tab_block_movement (GtrTab * tab);
 
 void gtr_tab_unblock_movement (GtrTab * tab);
 
-void gtr_tab_go_to_next (GtrTab * tab);
+void gtr_tab_go_to_next (GtrTab * tab, gboolean searching);
 
-void gtr_tab_go_to_prev (GtrTab * tab);
+void gtr_tab_go_to_prev (GtrTab * tab, gboolean searching);
 
-void gtr_tab_go_to_first (GtrTab * tab);
+void gtr_tab_go_to_first (GtrTab * tab, gboolean searching);
 
-void gtr_tab_go_to_last (GtrTab * tab);
+void gtr_tab_go_to_last (GtrTab * tab, gboolean searching);
 
 gboolean gtr_tab_go_to_next_fuzzy (GtrTab * tab);
 
