@@ -78,7 +78,7 @@ gtr_about_dialog (GtrWindow *window)
   static const gchar *documenters[] = {
     "Abel Cheung <deaddog@deaddog.org>",
     "Emese Kovacs <emese@gnome.hu>",
-    "Pablo Sanxiao <psanxiao@gmail.org>",
+    "Pablo Sanxiao <psanxiao@gnome.org>",
     NULL
   };
 
