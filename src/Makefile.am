@@ -13,7 +13,6 @@ INCLUDES = \
 	-I$(top_srcdir)/src/toolbareditor			\
 	-I$(top_builddir)/src					\
 	$(GTRANSLATOR_CFLAGS)					\
-	$(GTKSPELL_CFLAGS)					\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	$(INTROSPECTION_CFLAGS)					\
@@ -29,7 +28,6 @@ gtranslator_LDADD =			\
 	libgtranslator.la		\
 	libgtranslator-private.la	\
 	$(GTRANSLATOR_LIBS)		\
-	$(GTKSPELL_LIBS)		\
 	$(INTLLIBS)			\
 	$(INTROSPECTION_LIBS)		\
 	$(GETTEXT_LIBS)

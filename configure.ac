@@ -149,69 +149,6 @@ else
 fi
 
 dnl -------------------------------------------------------------------
-dnl Check for gtkspell >= 3.0 and use it if found
-dnl -------------------------------------------------------------------
-have_gtkspell=no
-AC_ARG_WITH(gtkspell,
-            AS_HELP_STRING([--with-gtkspell],[Build with spell support]),,
-            with_gtkspell=auto)
-
-if test x"$with_gtkspell" != "xno"
-then
-        PKG_CHECK_MODULES([GTKSPELL], [
-                gtkspell3-3.0 >= $GTKSPELL_OPTIONAL
-        ], have_gtkspell=yes, have_gtkspell=no)
-
-        if test x"$have_gtkspell" = "xyes"
-        then
-                AC_DEFINE([HAVE_GTKSPELL], 1, [A usable GtkSpell library was found])
-        fi
-
-fi
-
-AM_CONDITIONAL(USE_GTKSPELL, test x"$have_gtkspell" = "xyes")
-
-AC_SUBST(GTKSPELL_CFLAGS)
-AC_SUBST(GTKSPELL_LIBS)
-
-dnl -------------------------------------------------------------------
-dnl Check for json-glib, needed for Open-tran
-dnl -------------------------------------------------------------------
-if test "x$enable_opentran" != "xno"; then
-	PKG_CHECK_MODULES(JSON_GLIB, [
-		json-glib-1.0 >= $JSON_GLIB_OPTIONAL
-		], have_json_glib=yes, have_json_glib=no)
-	if test x"$have_json_glib" = "xyes"; then
-		AC_DEFINE(LIBJSON_GLIB_1_0, 1, [Define if libjson-glib support is enabled])
-	fi
-fi
-
-AM_CONDITIONAL(USE_LIBJSON_GLIB, test x"$have_json_glib" = "xyes")
-
-# ================================================================
-# gdict
-# ================================================================
-have_gdict=no
-AC_ARG_WITH(dictionary,
-	    AS_HELP_STRING([--with-dictionary],[Build with dictionary support]),,
-	    with_dictionary=auto)
-
-if test x"$with_dictionary" != "xno"
-then
-	PKG_CHECK_MODULES([DICTIONARY], [
-		gdict-1.0 >= $GDICT_OPTIONAL
-	], have_gdict=yes, have_gdict=no)
-	
-	if test x"$have_gdict" = "xyes"
-	then
-		AC_DEFINE([HAVE_DICTIONARY], 1, [Have gdict])
-	fi
-
-fi
-
-AM_CONDITIONAL(USE_DICTIONARY, test x"$have_gdict" = "xyes")
-
-dnl -------------------------------------------------------------------
 dnl Enable debug builds.
 dnl -------------------------------------------------------------------
 AC_ARG_ENABLE(debug,
