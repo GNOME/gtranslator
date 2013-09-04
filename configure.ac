@@ -80,12 +80,6 @@ GTK_REQUIRED=3.4.2
 GLIB_REQUIRED=2.32.0
 LIBXML_REQUIRED=2.4.12
 SOURCEVIEW_REQUIRED=3.0.0
-GDL_REQUIRED=3.6.0
-GDA_REQUIRED=4.2.3
-PEAS_REQUIRED=1.2.0
-GDICT_OPTIONAL=0.11.0
-GTKSPELL_OPTIONAL=3.0.0
-JSON_GLIB_OPTIONAL=0.12.0
 
 AC_ARG_WITH(gda,
 	AS_HELP_STRING([--with-gda={4.0|5.0}],[Define which version of libgda to use]),,
@@ -98,11 +92,7 @@ PKG_CHECK_MODULES(GTRANSLATOR, [
 	gio-2.0 >= $GLIB_REQUIRED
 	gtk+-3.0 >= $GTK_REQUIRED
 	gtksourceview-3.0 >= $SOURCEVIEW_REQUIRED
-	gdl-3.0 >= $GDL_REQUIRED
 	gsettings-desktop-schemas
-	libgda-sqlite-$with_gda >= $GDA_REQUIRED
-	libpeas-1.0 >= $PEAS_REQUIRED
-	libpeas-gtk-1.0 >= $PEAS_REQUIRED
 ])
 
 AC_SUBST(GTRANSLATOR_CFLAGS)
@@ -131,18 +121,6 @@ esac
 AC_MSG_RESULT([$platform_win32])
 AM_CONDITIONAL(PLATFORM_WIN32, test "$platform_win32" = "yes")
 
-
-dnl -----------------------------------
-dnl Plugins libraries compilation flags
-dnl -----------------------------------
-# on win32 plugins must be able to resolve all symbols at link time
-# so we create a lib
-if test "$platform_win32" = yes; then
-	PLUGIN_LIBTOOL_FLAGS="-module -avoid-version -no-undefined -mwindows -Wl,\$(top_builddir)/src/libgtranslator-\$(GTR_API_VERSION).a"
-else
-	PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
-fi
-AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
 
 dnl ================================================================
 dnl iso-codes
@@ -239,7 +217,6 @@ dnl -------------------------------------------------------------------
 AC_ARG_ENABLE(debug,
 	AS_HELP_STRING([--enable-debug],[Turn on debugging flags (default=yes)]),
 	,enable_debug=yes)
-AC_MSG_CHECKING([if a debug friendly version should be build])
 if test "x$enable_debug" = "xyes" ; then
 	CFLAGS="$CFLAGS -ggdb -DDEBUG"
 else
@@ -284,21 +261,6 @@ help/Makefile
 man/Makefile
 man/gtranslator.1
 po/Makefile.in
-plugins/Makefile
-plugins/alternate-language/Makefile
-plugins/charmap/Makefile
-plugins/charmap/charmap/Makefile
-plugins/dictionary/Makefile
-plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in
-plugins/fullscreen/Makefile
-plugins/insert-params/Makefile
-plugins/open-tran/Makefile
-plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in
-plugins/codeview/Makefile
-plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in
-plugins/translation-memory/Makefile
-plugins/translation-memory/gda/Makefile
-plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in
 src/Makefile
 src/toolbareditor/Makefile
 ])
@@ -320,27 +282,6 @@ compilation warnings	  :	${WARN_CFLAGS}
 GObject Introspection	  :	$enable_introspection
 ------------------------------------------------------------------
 "
-
-if [ test x"$have_json_glib" = "xyes" ]; then
-	echo "Building open-tran plugin: .............................YES"
-else
-	echo "Building open-tran plugin: .............................NO"
-		echo "        Requires libjson-glib >= $JSON_GLIB_OPTIONAL"
-fi
-
-if [ test x"$have_gdict" = "xyes" ]; then
-	echo "Building dictionary plugin: ............................YES"
-else
-	echo "Building dictionary plugin: ............................NO"
-		echo "        Requires gdict-1.0 >= $GDICT_OPTIONAL"
-fi
-
-if [ test x"$have_gtkspell" = "xyes" ]; then
-	echo "Building spell support: ................................YES"
-else
-	echo "Building spell support: ................................NO"
-		echo "        Requires gtkspell3 >= $GTKSPELL_OPTIONAL"
-fi
 
 echo "
 ------------------------------------------------------------------

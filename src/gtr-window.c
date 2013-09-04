@@ -32,7 +32,6 @@
 #include "gtr-msg.h"
 #include "gtr-notebook.h"
 #include "gtr-tab.h"
-#include "gtr-plugins-engine.h"
 #include "gtr-po.h"
 #include "gtr-settings.h"
 #include "gtr-statusbar.h"
@@ -51,7 +50,6 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
-#include <libpeas/peas-extension-set.h>
 
 #define GTR_STOCK_FUZZY_NEXT "gtranslator-fuzzy-next"
 #define GTR_STOCK_FUZZY_PREV "gtranslator-fuzzy-prev"
@@ -101,8 +99,6 @@ struct _GtrWindowPrivate
 
   GtrProfileManager *prof_manager;
   GtkWidget *profile_combo;
-
-  PeasExtensionSet *extensions;
 
   guint dispose_has_run : 1;
 };
@@ -259,23 +255,6 @@ static void          profile_combo_changed            (GtrStatusComboBox *combo,
                                                        GtkMenuItem       *item,
                                                        GtrWindow         *window);
 
-static void
-extension_update_state (PeasExtensionSet *extensions,
-                        PeasPluginInfo   *info,
-                        PeasExtension    *exten,
-                        GtrWindow        *window)
-{
-  gtr_window_activatable_update_state (GTR_WINDOW_ACTIVATABLE (exten));
-}
-
-static void
-extensions_update_state (GtrWindow *window)
-{
-  peas_extension_set_foreach (window->priv->extensions,
-                              (PeasExtensionSetForeachFunc) extension_update_state,
-                              window);
-}
-
 void
 _gtr_window_set_sensitive_according_to_message (GtrWindow * window,
                                                 GtrPo * po)
@@ -389,8 +368,6 @@ set_sensitive_according_to_tab (GtrWindow * window, GtrTab * tab)
   gtk_action_set_sensitive (action, current_page < pages - 1);
 
   _gtr_window_set_sensitive_according_to_message (window, po);
-
-  extensions_update_state (window);
 }
 
 static void
@@ -787,8 +764,6 @@ notebook_switch_page (GtkNotebook * nb,
    */
   if (action != NULL)
     gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
-
-  extensions_update_state (window);
 }
 
 static void
@@ -809,19 +784,6 @@ notebook_page_removed (GtkNotebook * notebook,
     gtk_widget_hide (window->priv->profile_combo);
 
   update_documents_list_menu (window);
-
-  peas_engine_garbage_collect (PEAS_ENGINE (gtr_plugins_engine_get_default ()));
-}
-
-static void
-notebook_tab_close_request (GtrNotebook * notebook,
-                            GtrTab * tab, GtrWindow * window)
-{
-  /* Note: we are destroying the tab before the default handler
-   * seems to be ok, but we need to keep an eye on this. */
-  gtr_close_tab (tab, window);
-
-  extensions_update_state (window);
 }
 
 static void
@@ -949,8 +911,6 @@ notebook_tab_added (GtkNotebook * notebook,
                     "notify::state", G_CALLBACK (sync_state), window);
 
   update_documents_list_menu (window);
-
-  extensions_update_state (window);
 }
 
 void
@@ -1365,30 +1325,6 @@ on_profile_modified (GtrProfileManager *manager,
 }
 
 static void
-extension_added (PeasExtensionSet *extensions,
-                 PeasPluginInfo   *info,
-                 PeasExtension    *exten,
-                 GtrWindow        *window)
-{
-  gtr_window_activatable_activate (GTR_WINDOW_ACTIVATABLE (exten));
-}
-
-static void
-extension_removed (PeasExtensionSet *extensions,
-                   PeasPluginInfo   *info,
-                   PeasExtension    *exten,
-                   GtrWindow        *window)
-{
-  gtr_window_activatable_deactivate (GTR_WINDOW_ACTIVATABLE (exten));
-
-  /* Ensure update of ui manager, because we suspect it does something
-   * with expected static strings in the type module (when unloaded the
-   * strings don't exist anymore, and ui manager updates in an idle
-   * func) */
-  gtk_ui_manager_ensure_update (window->priv->ui_manager);
-}
-
-static void
 gtr_window_init (GtrWindow * window)
 {
   GtkTargetList *tl;
@@ -1517,7 +1453,7 @@ gtr_window_init (GtrWindow * window)
                     G_CALLBACK (notebook_page_removed), window);
   g_signal_connect (priv->notebook,
                     "tab_close_request",
-                    G_CALLBACK (notebook_tab_close_request), window);
+                    G_CALLBACK (gtr_close_tab), window);
 
   /* statusbar & progress bar */
   create_statusbar (window);
@@ -1548,24 +1484,6 @@ gtr_window_init (GtrWindow * window)
   g_signal_connect (window,
                     "drag_data_received",
                     G_CALLBACK (drag_data_received_cb), NULL);
-
-  /* Plugins */
-  window->priv->extensions = peas_extension_set_new (PEAS_ENGINE (gtr_plugins_engine_get_default ()),
-                                                     GTR_TYPE_WINDOW_ACTIVATABLE,
-                                                     "window", window,
-                                                     NULL);
-  peas_extension_set_foreach (window->priv->extensions,
-                              (PeasExtensionSetForeachFunc) extension_added,
-                              window);
-
-  g_signal_connect (window->priv->extensions,
-                    "extension-added",
-                    G_CALLBACK (extension_added),
-                    window);
-  g_signal_connect (window->priv->extensions,
-                    "extension-removed",
-                    G_CALLBACK (extension_removed),
-                    window);
 }
 
 static void
@@ -1585,20 +1503,9 @@ gtr_window_dispose (GObject * object)
 
   DEBUG_PRINT ("window dispose");
 
-  /* First of all, force collection so that plugins
-   * really drop some of the references.
-   */
-  peas_engine_garbage_collect (PEAS_ENGINE (gtr_plugins_engine_get_default ()));
-
   if (!priv->dispose_has_run)
     {
       save_panes_state (window);
-
-      /* Note that unreffing the extensions will automatically remove
-         all extensions which in turn will deactivate the extension */
-      g_object_unref (priv->extensions);
-
-      peas_engine_garbage_collect (PEAS_ENGINE (gtr_plugins_engine_get_default ()));
 
       priv->dispose_has_run = TRUE;
     }
@@ -1607,11 +1514,6 @@ gtr_window_dispose (GObject * object)
   g_clear_object (&priv->ui_manager);
   g_clear_object (&priv->action_group);
   g_clear_object (&priv->prof_manager);
-
-  /* Now that there have broken some reference loops,
-   * force collection again.
-   */
-  peas_engine_garbage_collect (PEAS_ENGINE (gtr_plugins_engine_get_default ()));
 
   G_OBJECT_CLASS (gtr_window_parent_class)->dispose (object);
 }

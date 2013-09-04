@@ -123,18 +123,6 @@ gint gtr_tab_get_autosave_interval (GtrTab * tab);
 
 void gtr_tab_set_autosave_interval (GtrTab * tab, gint interval);
 
-void gtr_tab_add_widget (GtrTab         *tab,
-                         GtkWidget      *widget,
-                         const gchar    *unique_name,
-                         const gchar    *name,
-                         const gchar    *stock_id,
-                         GtrTabPlacement placement);
-
-void gtr_tab_remove_widget (GtrTab *tab,
-                            GtkWidget * widget);
-
-void gtr_tab_show_widget (GtrTab * tab, GtkWidget * widget);
-
 void gtr_tab_clear_msgstr_views (GtrTab * tab);
 
 void gtr_tab_copy_to_translation (GtrTab * tab);

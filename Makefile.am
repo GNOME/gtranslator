@@ -1,7 +1,7 @@
 # Point to our macro directory and pick up user flags from the environment
 ACLOCAL_AMFLAGS  = -I m4 ${ACLOCAL_FLAGS}
 
-SUBDIRS = data help man src doc plugins po
+SUBDIRS = data help man src doc po
 
 EXTRA_DIST= \
 		HACKING \

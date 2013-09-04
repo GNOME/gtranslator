@@ -91,7 +91,6 @@ NOINST_H_FILES = \
 	gtr-language.h \
 	gtr-languages-fetcher.h \
 	gtr-message-table-model.h \
-	gtr-plugins-engine.h \
 	gtr-preferences-dialog.h \
 	gtr-profile-dialog.h \
 	gtr-profile-manager.h \
@@ -138,7 +137,6 @@ libgtranslator_c_files = \
 	gtr-message-table-model.c \
 	gtr-msg.c \
 	gtr-notebook.c \
-	gtr-plugins-engine.c \
 	gtr-po.c \
 	gtr-preferences-dialog.c \
 	gtr-profile.c \

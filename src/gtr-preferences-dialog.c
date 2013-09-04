@@ -43,8 +43,6 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include <gtksourceview/gtksourcestyleschememanager.h>
-#include <gdl/gdl.h>
-#include <libpeas-gtk/peas-gtk-plugin-manager.h>
 
 #define GTR_PREFERENCES_DIALOG_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ( \
                                                     (object), \
@@ -87,9 +85,6 @@ struct _GtrPreferencesDialogPrivate
   GtkWidget *add_button;
   GtkWidget *edit_button;
   GtkWidget *delete_button;
-
-  /*Plugins */
-  GtkWidget *plugins_box;
 };
 
 enum
@@ -582,28 +577,6 @@ setup_profile_pages (GtrPreferencesDialog *dlg)
                     "clicked", G_CALLBACK (edit_button_clicked), dlg);
 }
 
-/***************Plugins pages****************/
-static void
-setup_plugin_pages (GtrPreferencesDialog * dlg)
-{
-  GtkWidget *alignment;
-  GtkWidget *page_content;
-
-  alignment = gtk_alignment_new (0., 0., 1., 1.);
-  gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 12, 12, 12, 12);
-
-  page_content = peas_gtk_plugin_manager_new (NULL);
-  g_return_if_fail (page_content != NULL);
-
-  gtk_container_add (GTK_CONTAINER (alignment), page_content);
-
-  gtk_box_pack_start (GTK_BOX (dlg->priv->plugins_box),
-                      alignment, TRUE, TRUE, 0);
-
-  gtk_widget_show_all (page_content);
-}
-
-
 static void
 dialog_response_handler (GtkDialog * dlg, gint res_id)
 {
@@ -684,7 +657,6 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   priv->delete_button = GTK_WIDGET (gtk_builder_get_object (builder, "delete-button"));
   profiles_toolbar = GTK_WIDGET (gtk_builder_get_object (builder, "profiles-toolbar"));
   profiles_scrolled_window = GTK_WIDGET (gtk_builder_get_object (builder, "profiles-scrolledwindow"));
-  priv->plugins_box = GTK_WIDGET (gtk_builder_get_object (builder, "plugins_box"));
   g_object_unref (builder);
 
   gtk_box_pack_start (content_area, priv->notebook, FALSE, FALSE, 0);
@@ -700,7 +672,6 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   setup_files_pages (dlg);
   setup_editor_pages (dlg);
   setup_profile_pages (dlg);
-  setup_plugin_pages (dlg);
 }
 
 static void
