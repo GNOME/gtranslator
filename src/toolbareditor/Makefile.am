@@ -20,7 +20,6 @@ libtoolbareditor_la_SOURCES = 	\
 	$(EGGHEADERS) 
 
 libtoolbareditor_la_CPPFLAGS = \
-	-I$(top_builddir)/lib/egg		\
 	$(AM_CPPFLAGS)
 
 INCLUDES = \
