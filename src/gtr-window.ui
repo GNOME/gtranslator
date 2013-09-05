@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.15.3 on Wed Sep  4 19:13:46 2013 -->
 <interface>
   <!-- interface-requires gtk+ 3.10 -->
   <object class="GtkImage" id="image1">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-properties</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image2">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-go-back</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image3">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-go-forward</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image4">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-jump-to</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image5">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-goto-first</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image6">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-goto-last</property>
-    <property name="icon-size">1</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image7">
     <property name="visible">True</property>
@@ -381,7 +382,7 @@
                         <property name="tooltip_text" translatable="yes">Go to the next fuzzy message</property>
                         <property name="label" translatable="yes">Next Fuz_zy</property>
                         <property name="use_underline">True</property>
-                        <accelerator key="Page_Down" signal="activate" modifiers="GDK_CONTROL_MASK | GDK_MOD1_MASK"/>
+                        <accelerator key="Next" signal="activate" modifiers="GDK_CONTROL_MASK | GDK_MOD1_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -407,7 +408,7 @@
                         <property name="tooltip_text" translatable="yes">Go to the next untranslated message</property>
                         <property name="label" translatable="yes">Next _Untranslated</property>
                         <property name="use_underline">True</property>
-                        <accelerator key="Page_Down" signal="activate" modifiers="GDK_MOD1_MASK"/>
+                        <accelerator key="Next" signal="activate" modifiers="GDK_MOD1_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -433,7 +434,7 @@
                         <property name="tooltip_text" translatable="yes">Go to the next fuzzy or untranslated message</property>
                         <property name="label" translatable="yes">Next Fu_zzy or Untranslated</property>
                         <property name="use_underline">True</property>
-                        <accelerator key="Page_Down" signal="activate" modifiers="GDK_SHIFT_MASK | GDK_CONTROL_MASK"/>
+                        <accelerator key="Next" signal="activate" modifiers="GDK_SHIFT_MASK | GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                   </object>
@@ -533,7 +534,7 @@
                         <property name="tooltip_text" translatable="yes">Activate next document</property>
                         <property name="label" translatable="yes">_Next Document</property>
                         <property name="use_underline">True</property>
-                        <accelerator key="Page_Down" signal="activate" modifiers="GDK_CONTROL_MASK | GDK_MOD1_MASK"/>
+                        <accelerator key="Next" signal="activate" modifiers="GDK_CONTROL_MASK | GDK_MOD1_MASK"/>
                       </object>
                     </child>
                   </object>
@@ -668,7 +669,23 @@
           </packing>
         </child>
         <child>
-          <placeholder/>
+          <object class="GtkBox" id="hbox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtrStatusbar" id="statusbar"/>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">3</property>
+          </packing>
         </child>
       </object>
     </child>
