@@ -37,14 +37,14 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-struct _GtrMessageTablePrivate
+typedef struct
 {
   GtkWidget *treeview;
   GtrMessageTableModel *store;
   GtkTreeModel *sort_model;
 
   GtrTab *tab;
-};
+} GtrMessageTablePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrMessageTable, gtr_message_table, GTK_TYPE_BOX)
 
@@ -62,8 +62,7 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrMessageTable * table)
   gtr_message_table_get_message_iter (priv->store, msg, &child_iter);
 
   gtk_tree_model_sort_convert_child_iter_to_iter (GTK_TREE_MODEL_SORT
-                                                  (table->
-                                                   priv->sort_model),
+                                                  (priv->sort_model),
                                                   &iter, &child_iter);
 
   gtk_tree_selection_select_iter (selection, &iter);
