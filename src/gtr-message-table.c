@@ -155,7 +155,6 @@ model_compare_by_status (GtkTreeModel * model,
 static void
 gtr_message_table_init (GtrMessageTable * table)
 {
-  GtkWidget *scrolledwindow;
   GtkTreeViewColumn *column;
   GtkCellRenderer *renderer;
   GtkTreeSelection *selection;
@@ -167,9 +166,7 @@ gtr_message_table_init (GtrMessageTable * table)
 
   GtrMessageTablePrivate *priv = table->priv;
 
-  priv->treeview = gtk_tree_view_new ();
-
-  gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (priv->treeview), TRUE);
+  gtk_widget_init_template (GTK_WIDGET (table));
 
   renderer = gtk_cell_renderer_pixbuf_new ();
   column = gtk_tree_view_column_new_with_attributes (_("Status"),
@@ -231,13 +228,6 @@ gtr_message_table_init (GtrMessageTable * table)
 
   g_signal_connect (G_OBJECT (selection), "changed",
                     G_CALLBACK (gtr_message_table_selection_changed), table);
-
-  scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-  gtk_box_pack_start (GTK_BOX (table), scrolledwindow, TRUE, TRUE, 0);
-  gtk_widget_show (scrolledwindow);
-
-  gtk_container_add (GTK_CONTAINER (scrolledwindow), table->priv->treeview);
-  gtk_widget_show (table->priv->treeview);
 }
 
 static void
@@ -252,32 +242,43 @@ static void
 gtr_message_table_class_init (GtrMessageTableClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (GtrMessageTablePrivate));
 
   object_class->finalize = gtr_message_table_finalize;
+
+  gtk_widget_class_set_template_from_resource (widget_class,
+                                               "/org/gnome/gtranslator/ui/gtr-message-table.ui");
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrMessageTable, treeview);
 }
 
 /**
  * gtr_message_table_new:
- * @tab: a #GtrTab
  *
  * Creates a new #GtrMessageTable object.
  *
  * Returns: the newly created #GtrMessageTable
  */
 GtkWidget *
-gtr_message_table_new (GtkWidget * tab)
+gtr_message_table_new (void)
 {
   GtrMessageTable *obj =
     GTR_MESSAGE_TABLE (g_object_new (GTR_TYPE_MESSAGE_TABLE, NULL));
-  obj->priv->tab = GTR_TAB (tab);
+
   g_signal_connect (obj->priv->tab,
                     "showed-message", G_CALLBACK (showed_message_cb), obj);
   g_signal_connect (obj->priv->tab,
                     "message-changed", G_CALLBACK (message_changed_cb), obj);
 
   return GTK_WIDGET (obj);
+}
+
+void
+gtr_message_table_set_tab (GtrMessageTable *table, GtrTab *tab)
+{
+  table->priv->tab = tab;
 }
 
 /**

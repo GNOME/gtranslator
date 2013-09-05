@@ -781,6 +781,8 @@ gtr_tab_new (GtrPo * po)
   /* Now we have to initialize the number of msgstr tabs */
   gtr_tab_add_msgstr_tabs (tab);
 
+  gtr_message_table_set_tab (GTR_MESSAGE_TABLE (tab->priv->message_table), tab);
+
   gtr_message_table_populate (GTR_MESSAGE_TABLE (tab->priv->message_table),
                               GTR_MESSAGE_CONTAINER (tab->priv->po));
 

@@ -24,6 +24,7 @@
 
 #include "gtr-message-container.h"
 #include "gtr-msg.h"
+#include "gtr-tab.h"
 
 G_BEGIN_DECLS
 /*
@@ -78,7 +79,9 @@ gtr_message_table_get_type (void)
 
      GType gtr_message_table_register_type (GTypeModule * module);
 
-     GtkWidget *gtr_message_table_new (GtkWidget * tab);
+     GtkWidget *gtr_message_table_new (void);
+
+     void gtr_message_table_set_tab (GtrMessageTable *table, GtrTab *tab);
 
      void gtr_message_table_populate (GtrMessageTable * table,
                                       GtrMessageContainer * container);

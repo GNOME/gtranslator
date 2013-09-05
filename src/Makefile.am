@@ -189,6 +189,7 @@ EXTRA_DIST = \
 	gtr-header-dialog.ui \
 	gtr-jump-dialog.ui \
 	gtr-languages-fetcher.ui \
+	gtr-message-table.ui \
 	gtr-notebook.ui \
 	gtr-preferences-dialog.ui \
 	gtr-profile-dialog.ui \
