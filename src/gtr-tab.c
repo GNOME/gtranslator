@@ -766,6 +766,7 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, text_msgid);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, text_plural_scroll);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, text_msgid_plural);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, msgstr_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, trans_notebook);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, context);
 }
