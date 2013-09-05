@@ -189,9 +189,13 @@ EXTRA_DIST = \
 	gtr-header-dialog.ui \
 	gtr-jump-dialog.ui \
 	gtr-languages-fetcher.ui \
+	gtr-notebook.ui \
 	gtr-preferences-dialog.ui \
 	gtr-profile-dialog.ui \
-	gtr-search-dialog.ui
+	gtr-search-dialog.ui \
+	gtr-statusbar.ui \
+	gtr-tab.ui \
+	gtr-window.ui
 
 
 if HAVE_INTROSPECTION
