@@ -51,18 +51,11 @@
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
 
-#define GTR_TAB_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
-					 (object),	\
-					 GTR_TYPE_TAB,     \
-					 GtrTabPrivate))
-
 #define MAX_PLURALS 6
 
 #define GTR_TAB_KEY "GtrTabFromDocument"
 
-G_DEFINE_TYPE (GtrTab, gtr_tab, GTK_TYPE_BOX)
-
-struct _GtrTabPrivate
+typedef struct
 {
   GSettings *ui_settings;
   GSettings *files_settings;
@@ -105,7 +98,9 @@ struct _GtrTabPrivate
 
   guint tab_realized : 1;
   guint dispose_has_run : 1;
-};
+} GtrTabPrivate;
+
+G_DEFINE_TYPE_WITH_PRIVATE (GtrTab, gtr_tab, GTK_TYPE_BOX)
 
 enum
 {
@@ -131,30 +126,35 @@ static gboolean gtr_tab_autosave (GtrTab * tab);
 static void
 install_autosave_timeout (GtrTab * tab)
 {
+  GtrTabPrivate *priv;
   gint timeout;
 
-  g_return_if_fail (tab->priv->autosave_timeout <= 0);
-  g_return_if_fail (tab->priv->autosave);
-  g_return_if_fail (tab->priv->autosave_interval > 0);
+  priv = gtr_tab_get_instance_private (tab);
+  g_return_if_fail (priv->autosave_timeout <= 0);
+  g_return_if_fail (priv->autosave);
+  g_return_if_fail (priv->autosave_interval > 0);
 
   /* Add a new timeout */
-  timeout = g_timeout_add (tab->priv->autosave_interval * 1000 * 60,
+  timeout = g_timeout_add (priv->autosave_interval * 1000 * 60,
                            (GSourceFunc) gtr_tab_autosave, tab);
 
-  tab->priv->autosave_timeout = timeout;
+  priv->autosave_timeout = timeout;
 }
 
 static gboolean
 install_autosave_timeout_if_needed (GtrTab * tab)
 {
-  g_return_val_if_fail (tab->priv->autosave_timeout <= 0, FALSE);
+  GtrTabPrivate *priv;
 
-  if (tab->priv->autosave)
-    {
+  priv = gtr_tab_get_instance_private (tab);
+  g_return_val_if_fail (priv->autosave_timeout <= 0, FALSE);
+
+  if (priv->autosave)
+  {
       install_autosave_timeout (tab);
 
       return TRUE;
-    }
+  }
 
   return FALSE;
 }
@@ -163,11 +163,13 @@ static gboolean
 gtr_tab_autosave (GtrTab * tab)
 {
   GError *error = NULL;
+  GtrTabPrivate *priv;
 
-  if (!gtr_po_get_state (tab->priv->po) == GTR_PO_STATE_MODIFIED)
+  priv = gtr_tab_get_instance_private (tab);
+  if (!gtr_po_get_state (priv->po) == GTR_PO_STATE_MODIFIED)
     return TRUE;
 
-  gtr_po_save_file (tab->priv->po, &error);
+  gtr_po_save_file (priv->po, &error);
   if (error)
     {
       g_warning ("%s", error->message);
@@ -180,10 +182,13 @@ gtr_tab_autosave (GtrTab * tab)
 static void
 remove_autosave_timeout (GtrTab * tab)
 {
-  g_return_if_fail (tab->priv->autosave_timeout > 0);
+  GtrTabPrivate *priv;
 
-  g_source_remove (tab->priv->autosave_timeout);
-  tab->priv->autosave_timeout = 0;
+  priv = gtr_tab_get_instance_private (tab);
+  g_return_if_fail (priv->autosave_timeout > 0);
+
+  g_source_remove (priv->autosave_timeout);
+  priv->autosave_timeout = 0;
 }
 
 static void
@@ -225,19 +230,21 @@ gtr_message_translation_update (GtkTextBuffer * textbuffer, GtrTab * tab)
   GtkTextBuffer *buf;
   GList *msg_aux;
   GtrMsg *msg;
+  GtrTabPrivate *priv;
   const gchar *check;
   gchar *translation;
   gboolean unmark_fuzzy;
   gint i;
 
+  priv = gtr_tab_get_instance_private (tab);
+
   /* Work out which message this is associated with */
+  header = gtr_po_get_header (priv->po);
 
-  header = gtr_po_get_header (tab->priv->po);
-
-  msg_aux = gtr_po_get_current_message (tab->priv->po);
+  msg_aux = gtr_po_get_current_message (priv->po);
   msg = msg_aux->data;
-  buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (tab->priv->trans_msgstr[0]));
-  unmark_fuzzy = g_settings_get_boolean (tab->priv->editor_settings,
+  buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[0]));
+  unmark_fuzzy = g_settings_get_boolean (priv->editor_settings,
                                          GTR_SETTINGS_UNMARK_FUZZY_WHEN_CHANGED);
 
   if (gtr_msg_is_fuzzy (msg) && unmark_fuzzy)
@@ -268,14 +275,14 @@ gtr_message_translation_update (GtkTextBuffer * textbuffer, GtrTab * tab)
   while (i < gtr_header_get_nplurals (header))
     {
       /* Know when to break out of the loop */
-      if (!tab->priv->trans_msgstr[i])
+      if (!priv->trans_msgstr[i])
         {
           break;
         }
 
       /* Have we reached the one we want yet? */
       buf =
-        gtk_text_view_get_buffer (GTK_TEXT_VIEW (tab->priv->trans_msgstr[i]));
+        gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[i]));
       if (textbuffer != buf)
         {
           i++;
@@ -305,6 +312,7 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
   GtkWidget *scroll;
   GtkWidget *label;
   GtkWidget *widget;
+  GtrTabPrivate *priv;
 
   label = gtk_label_new (tab_label);
 
@@ -314,8 +322,10 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
   widget = gtr_view_new ();
   gtk_widget_show (widget);
 
+  priv = gtr_tab_get_instance_private (tab);
+
   if (spellcheck &&
-      g_settings_get_boolean (tab->priv->editor_settings,
+      g_settings_get_boolean (priv->editor_settings,
                               GTR_SETTINGS_SPELLCHECK))
     gtr_view_enable_spellcheck (GTR_VIEW (widget), spellcheck);
 
@@ -334,13 +344,16 @@ gtr_message_plural_forms (GtrTab * tab, GtrMsg * msg)
 {
   GtrHeader *header;
   GtkTextBuffer *buf;
+  GtrTabPrivate *priv;
   const gchar *msgstr_plural;
   gint i;
 
   g_return_if_fail (tab != NULL);
   g_return_if_fail (msg != NULL);
 
-  header = gtr_po_get_header (tab->priv->po);
+  priv = gtr_tab_get_instance_private (tab);
+
+  header = gtr_po_get_header (priv->po);
 
   for (i = 0; i < gtr_header_get_nplurals (header); i++)
     {
@@ -349,7 +362,7 @@ gtr_message_plural_forms (GtrTab * tab, GtrMsg * msg)
         {
           buf =
             gtk_text_view_get_buffer (GTK_TEXT_VIEW
-                                      (tab->priv->trans_msgstr[i]));
+                                      (priv->trans_msgstr[i]));
           gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER
                                                        (buf));
           gtk_text_buffer_set_text (buf, (gchar *) msgstr_plural, -1);
@@ -369,13 +382,15 @@ gtr_message_plural_forms (GtrTab * tab, GtrMsg * msg)
 static void
 gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
 {
-  GtrTabPrivate *priv = tab->priv;
+  GtrTabPrivate *priv;
   GtrPo *po;
   GtkTextBuffer *buf;
   const gchar *msgid, *msgid_plural;
   const gchar *msgstr;
 
   g_return_if_fail (GTR_IS_TAB (tab));
+
+  priv = gtr_tab_get_instance_private (tab);
 
   po = priv->po;
   gtr_po_update_current_message (po, msg);
@@ -412,11 +427,11 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
   else
     {
       gtk_widget_show (priv->text_plural_scroll);
-      gtk_notebook_set_show_tabs (GTK_NOTEBOOK (tab->priv->trans_notebook),
+      gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->trans_notebook),
                                   TRUE);
       buf =
         gtk_text_view_get_buffer (GTK_TEXT_VIEW
-                                  (tab->priv->text_msgid_plural));
+                                  (priv->text_msgid_plural));
       gtk_text_buffer_set_text (buf, (gchar *) msgid_plural, -1);
       gtr_message_plural_forms (tab, msg);
     }
@@ -426,8 +441,10 @@ static void
 emit_message_changed_signal (GtkTextBuffer * buf, GtrTab * tab)
 {
   GList *msg;
+  GtrTabPrivate *priv;
 
-  msg = gtr_po_get_current_message (tab->priv->po);
+  priv = gtr_tab_get_instance_private (tab);
+  msg = gtr_po_get_current_message (priv->po);
 
   g_signal_emit (G_OBJECT (tab), signals[MESSAGE_CHANGED], 0, msg->data);
 }
@@ -443,21 +460,24 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
 {
   GtrMsgStatus status;
   GtrPoState po_state;
+  GtrTabPrivate *priv;
   gboolean fuzzy, translated;
 
+  priv = gtr_tab_get_instance_private (tab);
+
   status = gtr_msg_get_status (msg);
-  po_state = gtr_po_get_state (tab->priv->po);
+  po_state = gtr_po_get_state (priv->po);
 
   fuzzy = gtr_msg_is_fuzzy (msg);
   translated = gtr_msg_is_translated (msg);
 
   if ((status == GTR_MSG_STATUS_FUZZY) && !fuzzy)
     {
-      _gtr_po_increase_decrease_fuzzy (tab->priv->po, FALSE);
+      _gtr_po_increase_decrease_fuzzy (priv->po, FALSE);
       if (translated)
         {
           status = GTR_MSG_STATUS_TRANSLATED;
-          _gtr_po_increase_decrease_translated (tab->priv->po, TRUE);
+          _gtr_po_increase_decrease_translated (priv->po, TRUE);
         }
       else
         {
@@ -467,25 +487,25 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
   else if ((status == GTR_MSG_STATUS_TRANSLATED) && !translated)
     {
       status = GTR_MSG_STATUS_UNTRANSLATED;
-      _gtr_po_increase_decrease_translated (tab->priv->po, FALSE);
+      _gtr_po_increase_decrease_translated (priv->po, FALSE);
     }
   else if ((status == GTR_MSG_STATUS_TRANSLATED) && fuzzy)
     {
       status = GTR_MSG_STATUS_FUZZY;
-      _gtr_po_increase_decrease_translated (tab->priv->po, FALSE);
-      _gtr_po_increase_decrease_fuzzy (tab->priv->po, TRUE);
+      _gtr_po_increase_decrease_translated (priv->po, FALSE);
+      _gtr_po_increase_decrease_fuzzy (priv->po, TRUE);
     }
   else if ((status == GTR_MSG_STATUS_UNTRANSLATED) && translated)
     {
       if (fuzzy)
         {
           status = GTR_MSG_STATUS_FUZZY;
-          _gtr_po_increase_decrease_fuzzy (tab->priv->po, TRUE);
+          _gtr_po_increase_decrease_fuzzy (priv->po, TRUE);
         }
       else
         {
           status = GTR_MSG_STATUS_TRANSLATED;
-          _gtr_po_increase_decrease_translated (tab->priv->po, TRUE);
+          _gtr_po_increase_decrease_translated (priv->po, TRUE);
         }
     }
 
@@ -493,22 +513,24 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
 
   /* We need to update the tab state too if is neccessary */
   if (po_state != GTR_PO_STATE_MODIFIED)
-    gtr_po_set_state (tab->priv->po, GTR_PO_STATE_MODIFIED);
+    gtr_po_set_state (priv->po, GTR_PO_STATE_MODIFIED);
 }
 
 static void
 gtr_tab_add_msgstr_tabs (GtrTab * tab)
 {
   GtrHeader *header;
-  GtrTabPrivate *priv = tab->priv;
+  GtrTabPrivate *priv;
   gchar *label;
   GtkTextBuffer *buf;
   gint i = 0;
 
+  priv = gtr_tab_get_instance_private (tab);
+
   /*
    * We get the header of the po file
    */
-  header = gtr_po_get_header (tab->priv->po);
+  header = gtr_po_get_header (priv->po);
 
   do
     {
@@ -552,8 +574,7 @@ gtr_tab_init (GtrTab * tab)
 {
   GtrTabPrivate *priv;
 
-  tab->priv = GTR_TAB_GET_PRIVATE (tab);
-  priv = tab->priv;
+  priv = gtr_tab_get_instance_private (tab);
 
   gtk_widget_init_template (GTK_WIDGET (tab));
 
@@ -579,13 +600,15 @@ static void
 gtr_tab_finalize (GObject * object)
 {
   GtrTab *tab = GTR_TAB (object);
+  GtrTabPrivate *priv;
 
+  priv = gtr_tab_get_instance_private (tab);
   DEBUG_PRINT ("Finalize tab");
 
-  if (tab->priv->timer != NULL)
-    g_timer_destroy (tab->priv->timer);
+  if (priv->timer != NULL)
+    g_timer_destroy (priv->timer);
 
-  if (tab->priv->autosave_timeout > 0)
+  if (priv->autosave_timeout > 0)
     remove_autosave_timeout (tab);
 
   G_OBJECT_CLASS (gtr_tab_parent_class)->finalize (object);
@@ -594,9 +617,11 @@ gtr_tab_finalize (GObject * object)
 static void
 gtr_tab_dispose (GObject * object)
 {
-  GtrTabPrivate *priv = GTR_TAB (object)->priv;
+  GtrTabPrivate *priv;
 
   DEBUG_PRINT ("Dispose tab");
+
+  priv = gtr_tab_get_instance_private (GTR_TAB (object));
 
   g_clear_object (&priv->po);
   g_clear_object (&priv->ui_settings);
@@ -658,8 +683,6 @@ gtr_tab_class_init (GtrTabClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (GtrTabPrivate));
 
   object_class->finalize = gtr_tab_finalize;
   object_class->dispose = gtr_tab_dispose;
@@ -761,13 +784,16 @@ GtrTab *
 gtr_tab_new (GtrPo * po)
 {
   GtrTab *tab;
+  GtrTabPrivate *priv;
 
   g_return_val_if_fail (po != NULL, NULL);
 
   tab = g_object_new (GTR_TYPE_TAB, NULL);
 
+  priv = gtr_tab_get_instance_private (tab);
+
   /* FIXME: make the po a property */
-  tab->priv->po = po;
+  priv->po = po;
   g_object_set_data (G_OBJECT (po), GTR_TAB_KEY, tab);
 
   g_signal_connect (po, "notify::location",
@@ -781,10 +807,10 @@ gtr_tab_new (GtrPo * po)
   /* Now we have to initialize the number of msgstr tabs */
   gtr_tab_add_msgstr_tabs (tab);
 
-  gtr_message_table_set_tab (GTR_MESSAGE_TABLE (tab->priv->message_table), tab);
+  gtr_message_table_set_tab (GTR_MESSAGE_TABLE (priv->message_table), tab);
 
-  gtr_message_table_populate (GTR_MESSAGE_TABLE (tab->priv->message_table),
-                              GTR_MESSAGE_CONTAINER (tab->priv->po));
+  gtr_message_table_populate (GTR_MESSAGE_TABLE (priv->message_table),
+                              GTR_MESSAGE_CONTAINER (priv->po));
 
   gtk_widget_show (GTK_WIDGET (tab));
   return tab;
@@ -799,7 +825,10 @@ gtr_tab_new (GtrPo * po)
 GtrPo *
 gtr_tab_get_po (GtrTab * tab)
 {
-  return tab->priv->po;
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
+  return priv->po;
 }
 
 /**
@@ -811,8 +840,11 @@ gtr_tab_get_po (GtrTab * tab)
 gint
 gtr_tab_get_active_trans_tab (GtrTab * tab)
 {
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
   return
-    gtk_notebook_get_current_page (GTK_NOTEBOOK (tab->priv->trans_notebook));
+    gtk_notebook_get_current_page (GTK_NOTEBOOK (priv->trans_notebook));
 }
 
 /**
@@ -824,7 +856,10 @@ gtr_tab_get_active_trans_tab (GtrTab * tab)
 GtrContextPanel *
 gtr_tab_get_context_panel (GtrTab * tab)
 {
-  return GTR_CONTEXT_PANEL (tab->priv->context);
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
+  return GTR_CONTEXT_PANEL (priv->context);
 }
 
 /**
@@ -836,11 +871,14 @@ gtr_tab_get_context_panel (GtrTab * tab)
 GtrView *
 gtr_tab_get_active_view (GtrTab * tab)
 {
+  GtrTabPrivate *priv;
   gint num;
 
+  priv = gtr_tab_get_instance_private (tab);
+
   num =
-    gtk_notebook_get_current_page (GTK_NOTEBOOK (tab->priv->trans_notebook));
-  return GTR_VIEW (tab->priv->trans_msgstr[num]);
+    gtk_notebook_get_current_page (GTK_NOTEBOOK (priv->trans_notebook));
+  return GTR_VIEW (priv->trans_msgstr[num]);
 }
 
 /**
@@ -858,22 +896,24 @@ GList *
 gtr_tab_get_all_views (GtrTab * tab, gboolean original, gboolean translated)
 {
   GList *ret = NULL;
+  GtrTabPrivate *priv;
   gint i = 0;
 
   g_return_val_if_fail (GTR_IS_TAB (tab), NULL);
 
+  priv = gtr_tab_get_instance_private (tab);
   if (original)
     {
-      ret = g_list_append (ret, tab->priv->text_msgid);
-      ret = g_list_append (ret, tab->priv->text_msgid_plural);
+      ret = g_list_append (ret, priv->text_msgid);
+      ret = g_list_append (ret, priv->text_msgid_plural);
     }
 
   if (translated)
     {
       while (i < MAX_PLURALS)
         {
-          if (tab->priv->trans_msgstr[i])
-            ret = g_list_append (ret, tab->priv->trans_msgstr[i]);
+          if (priv->trans_msgstr[i])
+            ret = g_list_append (ret, priv->trans_msgstr[i]);
           else
             break;
           i++;
@@ -897,11 +937,14 @@ gtr_tab_message_go_to (GtrTab * tab,
                        GtrMsg * to_go, gboolean searching, GtrTabMove move)
 {
   static gboolean first_msg = TRUE;
+  GtrTabPrivate *priv;
 
   g_return_if_fail (tab != NULL);
   g_return_if_fail (GTR_IS_MSG (to_go));
 
-  if (!tab->priv->blocking || first_msg)
+  priv = gtr_tab_get_instance_private (tab);
+
+  if (priv->blocking || first_msg)
     {
       gboolean plurals;
       gint current_page, n_pages;
@@ -918,24 +961,24 @@ gtr_tab_message_go_to (GtrTab * tab,
        * rewrite this is a better way would be great.
        */
       plurals =
-        gtk_notebook_get_show_tabs (GTK_NOTEBOOK (tab->priv->trans_notebook));
+        gtk_notebook_get_show_tabs (GTK_NOTEBOOK (priv->trans_notebook));
       current_page =
         gtk_notebook_get_current_page (GTK_NOTEBOOK
-                                       (tab->priv->trans_notebook));
+                                       (priv->trans_notebook));
       n_pages =
-        gtk_notebook_get_n_pages (GTK_NOTEBOOK (tab->priv->trans_notebook));
+        gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->trans_notebook));
       if ((plurals == TRUE) && (move != GTR_TAB_MOVE_NONE))
         {
           if ((n_pages - 1) == current_page && move == GTR_TAB_MOVE_NEXT)
             {
               gtk_notebook_set_current_page (GTK_NOTEBOOK
-                                             (tab->priv->trans_notebook), 0);
+                                             (priv->trans_notebook), 0);
               gtr_tab_show_message (tab, to_go);
             }
           else if (current_page == 0 && move == GTR_TAB_MOVE_PREV)
             {
               gtk_notebook_set_current_page (GTK_NOTEBOOK
-                                             (tab->priv->trans_notebook),
+                                             (priv->trans_notebook),
                                              n_pages - 1);
               gtr_tab_show_message (tab, to_go);
             }
@@ -943,11 +986,11 @@ gtr_tab_message_go_to (GtrTab * tab,
             {
               if (move == GTR_TAB_MOVE_NEXT)
                 gtk_notebook_set_current_page (GTK_NOTEBOOK
-                                               (tab->priv->trans_notebook),
+                                               (priv->trans_notebook),
                                                current_page + 1);
               else
                 gtk_notebook_set_current_page (GTK_NOTEBOOK
-                                               (tab->priv->trans_notebook),
+                                               (priv->trans_notebook),
                                                current_page - 1);
               return;
             }
@@ -978,11 +1021,14 @@ _gtr_tab_get_name (GtrTab *tab)
 {
   GtrHeader *header;
   GtrPoState state;
+  GtrTabPrivate *priv;
   const gchar *str;
   gchar *tab_name;
 
-  header = gtr_po_get_header (tab->priv->po);
-  state = gtr_po_get_state (tab->priv->po);
+  priv = gtr_tab_get_instance_private (tab);
+
+  header = gtr_po_get_header (priv->po);
+  state = gtr_po_get_state (priv->po);
 
   str = gtr_header_get_prj_id_version (header);
 
@@ -999,10 +1045,13 @@ gchar *
 _gtr_tab_get_tooltips (GtrTab *tab)
 {
   GFile *location;
+  GtrTabPrivate *priv;
   gchar *tooltips;
   gchar *path;
 
-  location = gtr_po_get_location (tab->priv->po);
+  priv = gtr_tab_get_instance_private (tab);
+
+  location = gtr_po_get_location (priv->po);
   path = g_file_get_path (location);
   g_object_unref (location);
 
@@ -1024,7 +1073,10 @@ _gtr_tab_get_tooltips (GtrTab *tab)
 gboolean
 _gtr_tab_can_close (GtrTab * tab)
 {
-  return gtr_po_get_state (tab->priv->po) == GTR_PO_STATE_SAVED;
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
+  return gtr_po_get_state (priv->po) == GTR_PO_STATE_SAVED;
 }
 
 /**
@@ -1058,9 +1110,12 @@ gtr_tab_get_from_document (GtrPo * po)
 gboolean
 gtr_tab_get_autosave_enabled (GtrTab * tab)
 {
+  GtrTabPrivate *priv;
+
   g_return_val_if_fail (GTR_IS_TAB (tab), FALSE);
 
-  return tab->priv->autosave;
+  priv = gtr_tab_get_instance_private (tab);
+  return priv->autosave;
 }
 
 /**
@@ -1074,28 +1129,32 @@ gtr_tab_get_autosave_enabled (GtrTab * tab)
 void
 gtr_tab_set_autosave_enabled (GtrTab * tab, gboolean enable)
 {
+  GtrTabPrivate *priv;
+
   g_return_if_fail (GTR_IS_TAB (tab));
 
-  if (tab->priv->autosave == enable)
+  priv = gtr_tab_get_instance_private (tab);
+
+  if (priv->autosave == enable)
     return;
 
-  tab->priv->autosave = enable;
+  priv->autosave = enable;
 
-  if (enable && (tab->priv->autosave_timeout <= 0))
+  if (enable && (priv->autosave_timeout <= 0))
     {
       install_autosave_timeout (tab);
 
       return;
     }
 
-  if (!enable && (tab->priv->autosave_timeout > 0))
+  if (!enable && (priv->autosave_timeout > 0))
     {
       remove_autosave_timeout (tab);
 
       return;
     }
 
-  g_return_if_fail (!enable && (tab->priv->autosave_timeout <= 0));
+  g_return_if_fail (!enable && (priv->autosave_timeout <= 0));
 }
 
 /**
@@ -1109,9 +1168,12 @@ gtr_tab_set_autosave_enabled (GtrTab * tab, gboolean enable)
 gint
 gtr_tab_get_autosave_interval (GtrTab * tab)
 {
+  GtrTabPrivate *priv;
+
   g_return_val_if_fail (GTR_IS_TAB (tab), 0);
 
-  return tab->priv->autosave_interval;
+  priv = gtr_tab_get_instance_private (tab);
+  return priv->autosave_interval;
 }
 
 /**
@@ -1127,18 +1189,22 @@ gtr_tab_get_autosave_interval (GtrTab * tab)
 void
 gtr_tab_set_autosave_interval (GtrTab * tab, gint interval)
 {
+  GtrTabPrivate *priv;
+
   g_return_if_fail (GTR_IS_TAB (tab));
   g_return_if_fail (interval > 0);
 
-  if (tab->priv->autosave_interval == interval)
+  priv = gtr_tab_get_instance_private (tab);
+
+  if (priv->autosave_interval == interval)
     return;
 
-  tab->priv->autosave_interval = interval;
+  priv->autosave_interval = interval;
 
-  if (!tab->priv->autosave)
+  if (!priv->autosave)
     return;
 
-  if (tab->priv->autosave_timeout > 0)
+  if (priv->autosave_timeout > 0)
     {
       remove_autosave_timeout (tab);
 
@@ -1158,15 +1224,18 @@ gtr_tab_clear_msgstr_views (GtrTab * tab)
   gint i = 0;
   GtrHeader *header;
   GtkTextBuffer *buf;
+  GtrTabPrivate *priv;
 
   g_return_if_fail (GTR_IS_TAB (tab));
 
-  header = gtr_po_get_header (tab->priv->po);
+  priv = gtr_tab_get_instance_private (tab);
+
+  header = gtr_po_get_header (priv->po);
 
   do
     {
       buf =
-        gtk_text_view_get_buffer (GTK_TEXT_VIEW (tab->priv->trans_msgstr[i]));
+        gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[i]));
       gtk_text_buffer_begin_user_action (buf);
       gtk_text_buffer_set_text (buf, "", -1);
       gtk_text_buffer_end_user_action (buf);
@@ -1188,15 +1257,18 @@ gtr_tab_copy_to_translation (GtrTab * tab)
   gint page_index;
   gchar *text;
   GtkTextIter start, end;
+  GtrTabPrivate *priv;
 
   g_return_if_fail (GTR_IS_TAB (tab));
+
+  priv = gtr_tab_get_instance_private (tab);
 
   page_index = gtr_tab_get_active_trans_tab (tab);
 
   msgstr =
     gtk_text_view_get_buffer (GTK_TEXT_VIEW
-                              (tab->priv->trans_msgstr[page_index]));
-  msgid = gtk_text_view_get_buffer (GTK_TEXT_VIEW (tab->priv->text_msgid));
+                              (priv->trans_msgstr[page_index]));
+  msgid = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->text_msgid));
 
   gtk_text_buffer_begin_user_action (msgstr);
   gtk_text_buffer_get_bounds (msgid, &start, &end);
@@ -1215,9 +1287,12 @@ gtr_tab_copy_to_translation (GtrTab * tab)
 void
 gtr_tab_block_movement (GtrTab * tab)
 {
+  GtrTabPrivate *priv;
+
   g_return_if_fail (GTR_IS_TAB (tab));
 
-  tab->priv->blocking = TRUE;
+  priv = gtr_tab_get_instance_private (tab);
+  priv->blocking = TRUE;
 }
 
 /**
@@ -1229,23 +1304,29 @@ gtr_tab_block_movement (GtrTab * tab)
 void
 gtr_tab_unblock_movement (GtrTab * tab)
 {
+  GtrTabPrivate *priv;
+
   g_return_if_fail (GTR_IS_TAB (tab));
 
-  tab->priv->blocking = FALSE;
+  priv = gtr_tab_get_instance_private (tab);
+  priv->blocking = FALSE;
 }
 
 static gboolean
 _gtr_tab_finish_edition (GtrTab * tab)
 {
   GList *current_msg;
+  GtrTabPrivate *priv;
 
-  current_msg = gtr_po_get_current_message (tab->priv->po);
+  priv = gtr_tab_get_instance_private (tab);
+
+  current_msg = gtr_po_get_current_message (priv->po);
 
   /* movement is blocked/unblocked within the handler */
   g_signal_emit (G_OBJECT (tab), signals[MESSAGE_EDITION_FINISHED],
 		 0, GTR_MSG (current_msg->data));
 
-  return !tab->priv->blocking;
+  return !priv->blocking;
 }
 
 /**
@@ -1258,10 +1339,13 @@ void
 gtr_tab_go_to_next (GtrTab * tab)
 {
   GtrMsg *msg;
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
 
   if (_gtr_tab_finish_edition (tab))
     {
-      msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+      msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (priv->message_table),
                                         GTR_NAVIGATE_NEXT, NULL);
       if (msg)
         gtr_tab_message_go_to (tab, msg,
@@ -1279,10 +1363,13 @@ void
 gtr_tab_go_to_prev (GtrTab * tab)
 {
   GtrMsg *msg;
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
 
   if (_gtr_tab_finish_edition (tab))
     {
-      msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+      msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (priv->message_table),
                                         GTR_NAVIGATE_PREV, NULL);
       if (msg)
         gtr_tab_message_go_to (tab, msg,
@@ -1300,10 +1387,13 @@ void
 gtr_tab_go_to_first (GtrTab * tab)
 {
   GtrMsg *msg;
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
 
   if (_gtr_tab_finish_edition (tab))
     {
-      msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+      msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (priv->message_table),
                                         GTR_NAVIGATE_FIRST, NULL);
       if (msg)
         gtr_tab_message_go_to (tab, msg,
@@ -1321,10 +1411,13 @@ void
 gtr_tab_go_to_last (GtrTab * tab)
 {
   GtrMsg *msg;
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
 
   if (_gtr_tab_finish_edition (tab))
     {
-      msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+      msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (priv->message_table),
                                         GTR_NAVIGATE_LAST, NULL);
       if (msg)
         gtr_tab_message_go_to (tab, msg,
@@ -1344,11 +1437,14 @@ gboolean
 gtr_tab_go_to_next_fuzzy (GtrTab * tab)
 {
   GtrMsg *msg;
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
 
   if (!_gtr_tab_finish_edition (tab))
     return FALSE;
 
-  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (priv->message_table),
                                     GTR_NAVIGATE_NEXT,
                                     gtr_msg_is_fuzzy);
   if (msg != NULL)
@@ -1372,11 +1468,14 @@ gboolean
 gtr_tab_go_to_prev_fuzzy (GtrTab * tab)
 {
   GtrMsg *msg;
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
 
   if (!_gtr_tab_finish_edition (tab))
     return FALSE;
 
-  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (priv->message_table),
                                     GTR_NAVIGATE_PREV,
                                     gtr_msg_is_fuzzy);
   if (msg != NULL)
@@ -1412,11 +1511,14 @@ gboolean
 gtr_tab_go_to_next_untrans (GtrTab * tab)
 {
   GtrMsg *msg;
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
 
   if (!_gtr_tab_finish_edition (tab))
     return FALSE;
 
-  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (priv->message_table),
                                     GTR_NAVIGATE_NEXT,
                                     message_is_untranslated);
   if (msg != NULL)
@@ -1440,11 +1542,14 @@ gboolean
 gtr_tab_go_to_prev_untrans (GtrTab * tab)
 {
   GtrMsg *msg;
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
 
   if (!_gtr_tab_finish_edition (tab))
     return FALSE;
 
-  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (priv->message_table),
                                     GTR_NAVIGATE_PREV,
                                     message_is_untranslated);
   if (msg != NULL)
@@ -1468,11 +1573,14 @@ gboolean
 gtr_tab_go_to_next_fuzzy_or_untrans (GtrTab * tab)
 {
   GtrMsg *msg;
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
 
   if (!_gtr_tab_finish_edition (tab))
     return FALSE;
 
-  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (priv->message_table),
                                     GTR_NAVIGATE_NEXT,
                                     message_is_fuzzy_or_untranslated);
   if (msg != NULL)
@@ -1496,11 +1604,14 @@ gboolean
 gtr_tab_go_to_prev_fuzzy_or_untrans (GtrTab * tab)
 {
   GtrMsg *msg;
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
 
   if (!_gtr_tab_finish_edition (tab))
     return FALSE;
 
-  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (tab->priv->message_table),
+  msg = gtr_message_table_navigate (GTR_MESSAGE_TABLE (priv->message_table),
                                     GTR_NAVIGATE_PREV,
                                     message_is_fuzzy_or_untranslated);
   if (msg != NULL)
@@ -1547,21 +1658,25 @@ gtr_tab_go_to_number (GtrTab * tab, gint number)
 void
 gtr_tab_set_info_bar (GtrTab * tab, GtkWidget * infobar)
 {
+  GtrTabPrivate *priv;
+
   g_return_if_fail (GTR_IS_TAB (tab));
 
-  if (tab->priv->infobar == infobar)
+  priv = gtr_tab_get_instance_private (tab);
+
+  if (priv->infobar == infobar)
     return;
 
-  if (tab->priv->infobar != NULL)
-    gtk_widget_destroy (tab->priv->infobar);
+  if (priv->infobar != NULL)
+    gtk_widget_destroy (priv->infobar);
 
-  tab->priv->infobar = infobar;
+  priv->infobar = infobar;
 
   if (infobar == NULL)
     return;
 
-  gtk_box_pack_start (GTK_BOX (tab), tab->priv->infobar, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (tab), priv->infobar, FALSE, FALSE, 0);
 
-  g_object_add_weak_pointer (G_OBJECT (tab->priv->infobar),
-                             (gpointer *) & tab->priv->infobar);
+  g_object_add_weak_pointer (G_OBJECT (priv->infobar),
+                             (gpointer *) & priv->infobar);
 }

@@ -42,8 +42,6 @@ G_BEGIN_DECLS
 #define GTR_IS_TAB(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_TAB))
 #define GTR_IS_TAB_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_TAB))
 #define GTR_TAB_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_TAB, GtrTabClass))
-/* Private structure type */
-typedef struct _GtrTabPrivate GtrTabPrivate;
 
 /*
  * Main object structure
@@ -53,9 +51,6 @@ typedef struct _GtrTab GtrTab;
 struct _GtrTab
 {
   GtkBox parent_instance;
-
-  /*< private > */
-  GtrTabPrivate *priv;
 };
 
 /*
