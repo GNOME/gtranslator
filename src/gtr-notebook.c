@@ -100,6 +100,7 @@ update_tabs_visibility (GtrNotebook *nb)
 static void
 gtr_notebook_init (GtrNotebook * notebook)
 {
+  gtk_widget_init_template (GTK_WIDGET (notebook));
 }
 
 static void
@@ -114,6 +115,7 @@ static void
 gtr_notebook_class_init (GtrNotebookClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->finalize = gtr_notebook_finalize;
 
@@ -125,6 +127,9 @@ gtr_notebook_class_init (GtrNotebookClass * klass)
                                    tab_close_request), NULL, NULL,
                   g_cclosure_marshal_VOID__OBJECT, G_TYPE_NONE, 1,
                   GTR_TYPE_TAB);
+
+  gtk_widget_class_set_template_from_resource (widget_class,
+                                               "/org/gnome/gtranslator/ui/gtr-notebook.ui");
 }
 
 /***************************** Public funcs ***********************************/
