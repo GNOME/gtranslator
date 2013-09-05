@@ -80,15 +80,12 @@ struct _GtrTabPrivate
   GtkWidget *infobar;
 
   /*Original text */
-  GtkWidget *msgid_hbox;
-  GtkWidget *text_vbox;
   GtkWidget *text_msgid;
   GtkWidget *text_plural_scroll;
   GtkWidget *text_msgid_plural;
 
   /*Translated text */
   GtkWidget *msgstr_label;
-  GtkWidget *msgstr_hbox;
   GtkWidget *trans_notebook;
   GtkWidget *trans_msgstr[MAX_PLURALS];
 
@@ -553,14 +550,12 @@ on_state_notify (GtrPo      *po,
 static void
 gtr_tab_init (GtrTab * tab)
 {
-  GtkWidget *vertical_box;
-  GtkWidget *msgid_label;
-  GtkWidget *scroll;
   GtrTabPrivate *priv;
-  gchar *markup;
 
   tab->priv = GTR_TAB_GET_PRIVATE (tab);
   priv = tab->priv;
+
+  gtk_widget_init_template (GTK_WIDGET (tab));
 
   priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
   priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
@@ -568,99 +563,6 @@ gtr_tab_init (GtrTab * tab)
   priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
 
   g_signal_connect (tab, "message-changed", G_CALLBACK (update_status), NULL);
-
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (tab),
-                                  GTK_ORIENTATION_HORIZONTAL);
-
-  /* Orignal text widgets */
-  priv->msgid_hbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_widget_show (priv->msgid_hbox);
-
-  msgid_label = gtk_label_new (NULL);
-  markup = g_strdup_printf("<b>%s</b>", _("Original Message:"));
-  gtk_label_set_markup (GTK_LABEL (msgid_label), markup);
-  g_free(markup);
-  gtk_misc_set_padding (GTK_MISC (msgid_label), 0, 5);
-  gtk_widget_show (msgid_label);
-
-  gtk_box_pack_start (GTK_BOX (priv->msgid_hbox), msgid_label, FALSE, FALSE,
-                      0);
-
-  priv->text_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_widget_show (priv->text_vbox);
-
-  /* Singular */
-  scroll = gtk_scrolled_window_new (NULL, NULL);
-  gtk_widget_show (scroll);
-
-  priv->text_msgid = gtr_view_new ();
-  gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->text_msgid), FALSE);
-  gtk_widget_show (priv->text_msgid);
-
-  gtk_container_add (GTK_CONTAINER (scroll), priv->text_msgid);
-
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
-                                       GTK_SHADOW_IN);
-
-  gtk_box_pack_start (GTK_BOX (priv->text_vbox), scroll, TRUE, TRUE, 0);
-
-  /* Plural */
-  priv->text_plural_scroll = gtk_scrolled_window_new (NULL, NULL);
-  gtk_widget_show (priv->text_plural_scroll);
-
-  priv->text_msgid_plural = gtr_view_new ();
-  gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->text_msgid_plural), FALSE);
-  gtk_widget_show (priv->text_msgid_plural);
-
-  gtk_container_add (GTK_CONTAINER (priv->text_plural_scroll),
-                     priv->text_msgid_plural);
-
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW
-                                       (priv->text_plural_scroll),
-                                       GTK_SHADOW_IN);
-
-  gtk_box_pack_start (GTK_BOX (priv->text_vbox), priv->text_plural_scroll,
-                      TRUE, TRUE, 0);
-
-  vertical_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_widget_show (vertical_box);
-
-  gtk_box_pack_start (GTK_BOX (tab), vertical_box, TRUE, TRUE, 0);
-
-  /* Message table */
-  priv->message_table = gtr_message_table_new (GTK_WIDGET (tab));
-  gtk_widget_show (priv->message_table);
-
-  gtk_box_pack_start (GTK_BOX (vertical_box), priv->message_table, TRUE, TRUE, 0);
-
-  gtk_box_pack_start (GTK_BOX (vertical_box), priv->msgid_hbox, FALSE, FALSE,
-                      0);
-  gtk_box_pack_start (GTK_BOX (vertical_box), priv->text_vbox, FALSE, FALSE, 0);
-
-  /* Translation widgets */
-  priv->msgstr_label = gtk_label_new (NULL);
-  markup = g_strdup_printf("<b>%s</b>", _("Translate_d Text:"));
-  gtk_label_set_markup_with_mnemonic (GTK_LABEL (priv->msgstr_label),
-                                      markup);
-  g_free(markup);
-  gtk_misc_set_padding (GTK_MISC (priv->msgstr_label), 0, 5);
-  gtk_misc_set_alignment (GTK_MISC (priv->msgstr_label), 0, 0.5);
-  gtk_widget_show (priv->msgstr_label);
-
-  priv->trans_notebook = gtk_notebook_new ();
-  gtk_notebook_set_show_border (GTK_NOTEBOOK (priv->trans_notebook), FALSE);
-  gtk_widget_show (priv->trans_notebook);
-
-  gtk_box_pack_start (GTK_BOX (vertical_box), priv->msgstr_label, FALSE, FALSE,
-                      0);
-  gtk_box_pack_start (GTK_BOX (vertical_box), priv->trans_notebook, FALSE,
-                      FALSE, 0);
-
-  /* Context */
-  priv->context = gtr_context_panel_new (GTK_WIDGET (tab));
-  gtk_widget_show (priv->context);
-
-  gtk_box_pack_start (GTK_BOX (tab), priv->context, FALSE, FALSE, 0);
 
   /* Manage auto save data */
   priv->autosave = g_settings_get_boolean (priv->files_settings,
@@ -833,6 +735,16 @@ gtr_tab_class_init (GtrTabClass * klass)
                                                      0,
                                                      G_PARAM_READWRITE |
                                                      G_PARAM_STATIC_STRINGS));
+
+  gtk_widget_class_set_template_from_resource (widget_class,
+                                               "/org/gnome/gtranslator/ui/gtr-tab.ui");
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, message_table);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, text_msgid);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, text_plural_scroll);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, text_msgid_plural);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, trans_notebook);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, context);
 }
 
 /***************************** Public funcs ***********************************/
