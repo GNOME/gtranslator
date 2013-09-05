@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.15.3 on Wed Sep  4 19:13:46 2013 -->
+<!-- Generated with glade 3.15.3 on Thu Sep  5 02:04:42 2013 -->
 <interface>
   <!-- interface-requires gtk+ 3.10 -->
   <object class="GtkImage" id="image1">
@@ -48,15 +48,15 @@
     <property name="can_focus">False</property>
     <property name="stock">gtk-close</property>
   </object>
-  <object class="GtkWindow" id="GtrWindow">
+  <template class="GtrWindow" parent="GtkWindow">
     <property name="can_focus">False</property>
     <child>
-      <object class="GtkBox" id="vbox">
+      <object class="GtkBox" id="main_box">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkMenuBar" id="menubar1">
+          <object class="GtkMenuBar" id="menubar">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
@@ -549,7 +549,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkToolbar" id="toolbar1">
+          <object class="GtkToolbar" id="toolbar">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
@@ -689,5 +689,5 @@
         </child>
       </object>
     </child>
-  </object>
+  </template>
 </interface>
