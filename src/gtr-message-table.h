@@ -36,8 +36,6 @@ G_BEGIN_DECLS
 #define GTR_IS_MESSAGE_TABLE(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_MESSAGE_TABLE))
 #define GTR_IS_MESSAGE_TABLE_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_MESSAGE_TABLE))
 #define GTR_MESSAGE_TABLE_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_MESSAGE_TABLE, GtrMessageTableClass))
-/* Private structure type */
-typedef struct _GtrMessageTablePrivate GtrMessageTablePrivate;
 
 /*
  * Main object structure
@@ -47,9 +45,6 @@ typedef struct _GtrMessageTable GtrMessageTable;
 struct _GtrMessageTable
 {
   GtkBox parent_instance;
-
-  /* < private > */
-  GtrMessageTablePrivate *priv;
 };
 
 /*

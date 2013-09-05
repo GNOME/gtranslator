@@ -37,13 +37,6 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-#define GTR_MESSAGE_TABLE_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE (	\
-							(object),		\
-							GTR_TYPE_MESSAGE_TABLE,	\
-							GtrMessageTablePrivate))
-
-G_DEFINE_TYPE (GtrMessageTable, gtr_message_table, GTK_TYPE_BOX)
-
 struct _GtrMessageTablePrivate
 {
   GtkWidget *treeview;
@@ -53,15 +46,20 @@ struct _GtrMessageTablePrivate
   GtrTab *tab;
 };
 
+G_DEFINE_TYPE_WITH_PRIVATE (GtrMessageTable, gtr_message_table, GTK_TYPE_BOX)
+
 static void
 showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrMessageTable * table)
 {
   GtkTreePath *path;
   GtkTreeSelection *selection;
   GtkTreeIter iter, child_iter;
+  GtrMessageTablePrivate *priv;
 
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (table->priv->treeview));
-  gtr_message_table_get_message_iter (table->priv->store, msg, &child_iter);
+  priv = gtr_message_table_get_instance_private (table);
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->treeview));
+  gtr_message_table_get_message_iter (priv->store, msg, &child_iter);
 
   gtk_tree_model_sort_convert_child_iter_to_iter (GTK_TREE_MODEL_SORT
                                                   (table->
@@ -69,9 +67,9 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrMessageTable * table)
                                                   &iter, &child_iter);
 
   gtk_tree_selection_select_iter (selection, &iter);
-  path = gtk_tree_model_get_path (table->priv->sort_model, &iter);
+  path = gtk_tree_model_get_path (priv->sort_model, &iter);
 
-  gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (table->priv->treeview),
+  gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (priv->treeview),
                                 path, NULL, TRUE, 0.5, 0.0);
 
   gtk_tree_path_free (path);
@@ -85,11 +83,14 @@ gtr_message_table_selection_changed (GtkTreeSelection *selection,
   GtkTreeModel *model;
   GtrMsg *msg;
   GList *current_msg = NULL;
+  GtrMessageTablePrivate *priv;
   GtrPo *po;
 
   g_return_if_fail (selection != NULL);
 
-  po = gtr_tab_get_po (table->priv->tab);
+  priv = gtr_message_table_get_instance_private (table);
+
+  po = gtr_tab_get_po (priv->tab);
   current_msg = gtr_po_get_current_message (po);
 
   if (gtk_tree_selection_get_selected (selection, &model, &iter) == TRUE)
@@ -101,10 +102,10 @@ gtr_message_table_selection_changed (GtkTreeSelection *selection,
           && g_utf8_collate (gtr_msg_get_msgid (msg),
                              gtr_msg_get_msgid (current_msg->data)))
         {
-          g_signal_handlers_block_by_func (table->priv->tab, showed_message_cb, table);
-          gtr_tab_message_go_to (table->priv->tab, msg,
+          g_signal_handlers_block_by_func (priv->tab, showed_message_cb, table);
+          gtr_tab_message_go_to (priv->tab, msg,
                                  FALSE, GTR_TAB_MOVE_NONE);
-          g_signal_handlers_unblock_by_func (table->priv->tab, showed_message_cb, table);
+          g_signal_handlers_unblock_by_func (priv->tab, showed_message_cb, table);
         }
     }
 }
@@ -114,13 +115,16 @@ message_changed_cb (GtrTab * tab, GtrMsg * msg, GtrMessageTable * table)
 {
   GtkTreePath *path;
   GtkTreeIter iter;
+  GtrMessageTablePrivate *priv;
 
-  if (!gtr_message_table_get_message_iter (GTR_MESSAGE_TABLE_MODEL (table->priv->store),
+  priv = gtr_message_table_get_instance_private (table);
+
+  if (!gtr_message_table_get_message_iter (GTR_MESSAGE_TABLE_MODEL (priv->store),
                                            msg, &iter))
     return;
 
-  path = gtk_tree_model_get_path (GTK_TREE_MODEL (table->priv->store), &iter);
-  gtr_message_table_model_update_row (GTR_MESSAGE_TABLE_MODEL (table->priv->store),
+  path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
+  gtr_message_table_model_update_row (GTR_MESSAGE_TABLE_MODEL (priv->store),
                                       path);
   gtk_tree_path_free (path);
 }
@@ -158,13 +162,12 @@ gtr_message_table_init (GtrMessageTable * table)
   GtkTreeViewColumn *column;
   GtkCellRenderer *renderer;
   GtkTreeSelection *selection;
+  GtrMessageTablePrivate *priv;
 
-  table->priv = GTR_MESSAGE_TABLE_GET_PRIVATE (table);
+  priv = gtr_message_table_get_instance_private (table);
 
   gtk_orientable_set_orientation (GTK_ORIENTABLE (table),
                                   GTK_ORIENTATION_VERTICAL);
-
-  GtrMessageTablePrivate *priv = table->priv;
 
   gtk_widget_init_template (GTK_WIDGET (table));
 
@@ -244,8 +247,6 @@ gtr_message_table_class_init (GtrMessageTableClass * klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtrMessageTablePrivate));
-
   object_class->finalize = gtr_message_table_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class,
@@ -266,10 +267,13 @@ gtr_message_table_new (void)
 {
   GtrMessageTable *obj =
     GTR_MESSAGE_TABLE (g_object_new (GTR_TYPE_MESSAGE_TABLE, NULL));
+  GtrMessageTablePrivate *priv;
 
-  g_signal_connect (obj->priv->tab,
+  priv = gtr_message_table_get_instance_private (obj);
+
+  g_signal_connect (priv->tab,
                     "showed-message", G_CALLBACK (showed_message_cb), obj);
-  g_signal_connect (obj->priv->tab,
+  g_signal_connect (priv->tab,
                     "message-changed", G_CALLBACK (message_changed_cb), obj);
 
   return GTK_WIDGET (obj);
@@ -278,7 +282,10 @@ gtr_message_table_new (void)
 void
 gtr_message_table_set_tab (GtrMessageTable *table, GtrTab *tab)
 {
-  table->priv->tab = tab;
+  GtrMessageTablePrivate *priv;
+
+  priv = gtr_message_table_get_instance_private (table);
+  priv->tab = tab;
 }
 
 /**
@@ -292,35 +299,39 @@ gtr_message_table_set_tab (GtrMessageTable *table, GtrTab *tab)
 void
 gtr_message_table_populate (GtrMessageTable * table, GtrMessageContainer * container)
 {
+  GtrMessageTablePrivate *priv;
+
   g_return_if_fail (table != NULL);
   g_return_if_fail (container != NULL);
 
-  if (table->priv->store)
+  priv = gtr_message_table_get_instance_private (table);
+
+  if (priv->store)
     {
-      gtk_tree_view_set_model (GTK_TREE_VIEW (table->priv->treeview), NULL);
-      g_object_unref (table->priv->sort_model);
-      g_object_unref (table->priv->store);
+      gtk_tree_view_set_model (GTK_TREE_VIEW (priv->treeview), NULL);
+      g_object_unref (priv->sort_model);
+      g_object_unref (priv->store);
     }
 
-  table->priv->store = gtr_message_table_model_new (container);
-  table->priv->sort_model =
-    gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (table->priv->store));
+  priv->store = gtr_message_table_model_new (container);
+  priv->sort_model =
+    gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (priv->store));
 
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
-                                        (table->priv->sort_model),
+                                        (priv->sort_model),
                                         GTR_MESSAGE_TABLE_MODEL_ID_COLUMN,
                                         GTK_SORT_ASCENDING);
 
   gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE
-                                           (table->priv->sort_model),
+                                           (priv->sort_model),
                                            NULL, NULL, NULL);
 
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (table->priv->sort_model),
+  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (priv->sort_model),
                                    GTR_MESSAGE_TABLE_MODEL_STATUS_COLUMN,
                                    model_compare_by_status, NULL, NULL);
 
-  gtk_tree_view_set_model (GTK_TREE_VIEW (table->priv->treeview),
-                           table->priv->sort_model);
+  gtk_tree_view_set_model (GTK_TREE_VIEW (priv->treeview),
+                           priv->sort_model);
 }
 
 /**
@@ -340,10 +351,13 @@ gtr_message_table_navigate (GtrMessageTable * table,
   GtkTreeModel *model;
   GtkTreePath *path;
   GtkTreeIter iter;
+  GtrMessageTablePrivate *priv;
   GtrMsg *msg;
   gboolean cont = TRUE;
 
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (table->priv->treeview));
+  priv = gtr_message_table_get_instance_private (table);
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->treeview));
 
   if (!gtk_tree_selection_get_selected (selection, &model, &iter))
     return NULL;
@@ -410,7 +424,7 @@ gtr_message_table_navigate (GtrMessageTable * table,
 
   gtk_tree_selection_select_iter (selection, &iter);
   path = gtk_tree_model_get_path (model, &iter);
-  gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (table->priv->treeview),
+  gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (priv->treeview),
                                 path, NULL, TRUE, 0.5, 0.0);
 
   gtk_tree_model_get (model, &iter,
