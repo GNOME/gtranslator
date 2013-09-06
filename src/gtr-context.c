@@ -28,18 +28,12 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-#define GTR_CONTEXT_PANEL_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
-						 (object),		       \
-						 GTR_TYPE_CONTEXT_PANEL,     \
-						 GtrContextPanelPrivate))
-
-G_DEFINE_TYPE (GtrContextPanel, gtr_context_panel, GTK_TYPE_BOX)
-
-struct _GtrContextPanelPrivate
+typedef struct
 {
   GtkWidget *sw;
   GtkWidget *context;
   GtkWidget *button_box;
+  GtkWidget *button;
 
   GdkCursor *hand_cursor;
   GdkCursor *regular_cursor;
@@ -47,7 +41,9 @@ struct _GtrContextPanelPrivate
 
   GtrTab *tab;
   GtrMsg *current_msg;
-};
+} GtrContextPanelPrivate;
+
+G_DEFINE_TYPE_WITH_PRIVATE (GtrContextPanel, gtr_context_panel, GTK_TYPE_BOX)
 
 enum
 {
@@ -68,12 +64,15 @@ static void
 setup_notes_edition (GtrContextPanel *panel)
 {
   GtkTextBuffer *buffer;
+  GtrContextPanelPrivate *priv;
 
-  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (panel->priv->context));
-  gtk_text_buffer_set_text (buffer, gtr_msg_get_comment (panel->priv->current_msg), -1);
+  priv = gtr_context_panel_get_instance_private(panel);
 
-  gtk_text_view_set_editable (GTK_TEXT_VIEW (panel->priv->context), TRUE);
-  gtk_widget_show (panel->priv->button_box);
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->context));
+  gtk_text_buffer_set_text (buffer, gtr_msg_get_comment (priv->current_msg), -1);
+
+  gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->context), TRUE);
+  gtk_widget_show (priv->button_box);
 }
 
 static void
@@ -143,7 +142,10 @@ set_cursor_if_appropriate (GtkTextView * text_view, gint x, gint y,
 {
   GSList *tags = NULL, *tagp = NULL;
   GtkTextIter iter;
+  GtrContextPanelPrivate *priv;
   gboolean hovering = FALSE;
+
+  priv = gtr_context_panel_get_instance_private(panel);
 
   gtk_text_view_get_iter_at_location (text_view, &iter, x, y);
 
@@ -160,18 +162,18 @@ set_cursor_if_appropriate (GtkTextView * text_view, gint x, gint y,
         }
     }
 
-  if (hovering != panel->priv->hovering_over_link)
+  if (hovering != priv->hovering_over_link)
     {
-      panel->priv->hovering_over_link = hovering;
+      priv->hovering_over_link = hovering;
 
-      if (panel->priv->hovering_over_link)
+      if (priv->hovering_over_link)
         gdk_window_set_cursor (gtk_text_view_get_window (text_view,
                                                          GTK_TEXT_WINDOW_TEXT),
-                               panel->priv->hand_cursor);
+                               priv->hand_cursor);
       else
         gdk_window_set_cursor (gtk_text_view_get_window (text_view,
                                                          GTK_TEXT_WINDOW_TEXT),
-                               panel->priv->regular_cursor);
+                               priv->regular_cursor);
     }
 
   if (tags)
@@ -269,11 +271,14 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrContextPanel *panel)
   GtkTextBuffer *buffer;
   GtkTextIter iter;
   GtkTextTag *bold;
+  GtrContextPanelPrivate *priv;
+
+  priv = gtr_context_panel_get_instance_private(panel);
 
   /* Update current msg */
-  panel->priv->current_msg = msg;
+  priv->current_msg = msg;
 
-  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (panel->priv->context));
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->context));
   gtk_text_buffer_set_text (buffer, "", 0);
   gtk_text_buffer_get_start_iter (buffer, &iter);
 
@@ -300,11 +305,15 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrContextPanel *panel)
 static void
 reload_values (GtrContextPanel *panel)
 {
-  showed_message_cb (panel->priv->tab, panel->priv->current_msg, panel);
-  gtk_widget_hide (panel->priv->button_box);
-  gtk_text_view_set_editable (GTK_TEXT_VIEW (panel->priv->context), FALSE);
+  GtrContextPanelPrivate *priv;
 
-  g_signal_emit (G_OBJECT (panel), signals[RELOADED], 0, panel->priv->current_msg);
+  priv = gtr_context_panel_get_instance_private(panel);
+
+  showed_message_cb (priv->tab, priv->current_msg, panel);
+  gtk_widget_hide (priv->button_box);
+  gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->context), FALSE);
+
+  g_signal_emit (G_OBJECT (panel), signals[RELOADED], 0, priv->current_msg);
 }
 
 static void
@@ -312,21 +321,24 @@ buffer_end_user_action (GtkTextBuffer *buffer, GtrContextPanel *panel)
 {
   GtkTextIter start, end;
   gchar *text;
+  GtrContextPanelPrivate *priv;
   GtrPo *po;
   GtrPoState po_state;
 
-  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (panel->priv->context));
+  priv = gtr_context_panel_get_instance_private(panel);
+
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->context));
 
   gtk_text_buffer_get_bounds (buffer, &start, &end);
 
   text = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);
 
-  gtr_msg_set_comment (panel->priv->current_msg, text);
+  gtr_msg_set_comment (priv->current_msg, text);
 
   g_free (text);
 
   /* Update the po state if needed after adding a comment */
-  po = gtr_tab_get_po (panel->priv->tab);
+  po = gtr_tab_get_po (priv->tab);
   po_state = gtr_po_get_state (po);
   if (po_state != GTR_PO_STATE_MODIFIED)
     gtr_po_set_state (po, GTR_PO_STATE_MODIFIED);
@@ -342,36 +354,16 @@ static void
 gtr_context_panel_init (GtrContextPanel *panel)
 {
   GtrContextPanelPrivate *priv;
-  GtkWidget *button;
   GtkTextBuffer *buffer;
 
-  panel->priv = GTR_CONTEXT_PANEL_GET_PRIVATE (panel);
-  priv = panel->priv;
+  priv = gtr_context_panel_get_instance_private(panel);
+
+  gtk_widget_init_template (GTK_WIDGET (panel));
 
   priv->hovering_over_link = FALSE;
 
   priv->hand_cursor = gdk_cursor_new (GDK_HAND2);
   priv->regular_cursor = gdk_cursor_new (GDK_XTERM);
-
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (panel),
-                                  GTK_ORIENTATION_VERTICAL);
-
-  /* Set up the scrolling window for the extracted context display */
-  priv->sw = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (priv->sw),
-                                       GTK_SHADOW_IN);
-  gtk_box_pack_start (GTK_BOX (panel), priv->sw, TRUE, TRUE,
-                      0);
-  gtk_widget_show (priv->sw);
-
-  /* Context text view */
-  priv->context = gtk_text_view_new ();
-
-  gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->context), FALSE);
-  gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (priv->context), GTK_WRAP_WORD);
-  gtk_container_add (GTK_CONTAINER (priv->sw),
-                     GTK_WIDGET (priv->context));
-  gtk_widget_show (priv->context);
 
   g_signal_connect (priv->context, "event-after",
                     G_CALLBACK (event_after), panel);
@@ -384,16 +376,8 @@ gtr_context_panel_init (GtrContextPanel *panel)
   g_signal_connect (buffer, "end-user-action",
                     G_CALLBACK (buffer_end_user_action), panel);
 
-  /* Buttons */
-  priv->button_box = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
-  gtk_button_box_set_layout (GTK_BUTTON_BOX (priv->button_box), GTK_BUTTONBOX_END);
-  gtk_box_pack_start (GTK_BOX (panel), priv->button_box, FALSE, FALSE, 0);
-
-  button = gtk_button_new_with_mnemonic (_("D_one"));
-  gtk_widget_show (button);
-  g_signal_connect (button, "clicked",
+  g_signal_connect (priv->button, "clicked",
                     G_CALLBACK (on_done_button_clicked), panel);
-  gtk_box_pack_start (GTK_BOX (priv->button_box), button, FALSE, FALSE, 0);
 }
 
 static void
@@ -403,11 +387,14 @@ gtr_context_panel_set_property (GObject      *object,
                                 GParamSpec   *pspec)
 {
   GtrContextPanel *panel = GTR_CONTEXT_PANEL (object);
+  GtrContextPanelPrivate *priv;
+
+  priv = gtr_context_panel_get_instance_private(panel);
 
   switch (prop_id)
     {
     case PROP_TAB:
-      panel->priv->tab = GTR_TAB (g_value_get_object (value));
+      priv->tab = GTR_TAB (g_value_get_object (value));
       break;
 
     default:
@@ -423,11 +410,14 @@ gtr_context_panel_get_property (GObject    *object,
                                 GParamSpec *pspec)
 {
   GtrContextPanel *panel = GTR_CONTEXT_PANEL (object);
+  GtrContextPanelPrivate *priv;
+
+  priv = gtr_context_panel_get_instance_private(panel);
 
   switch (prop_id)
     {
     case PROP_TAB:
-      g_value_set_object (value, panel->priv->tab);
+      g_value_set_object (value, priv->tab);
       break;
 
     default:
@@ -440,14 +430,17 @@ static void
 gtr_context_panel_constructed (GObject *object)
 {
   GtrContextPanel *panel = GTR_CONTEXT_PANEL (object);
+  GtrContextPanelPrivate *priv;
 
-  if (!panel->priv->tab)
+  priv = gtr_context_panel_get_instance_private(panel);
+
+  if (!priv->tab)
     {
       g_critical ("The context was not constructed well, this shouldn't happen!");
       return;
     }
 
-  g_signal_connect (panel->priv->tab,
+  g_signal_connect (priv->tab,
                     "showed-message",
                     G_CALLBACK (showed_message_cb), panel);
 }
@@ -456,11 +449,14 @@ static void
 gtr_context_panel_dispose (GObject *object)
 {
   GtrContextPanel *panel = GTR_CONTEXT_PANEL (object);
+  GtrContextPanelPrivate *priv;
+
+  priv = gtr_context_panel_get_instance_private(panel);
 
   DEBUG_PRINT ("Dispose context");
 
-  g_clear_object (&panel->priv->hand_cursor);
-  g_clear_object (&panel->priv->regular_cursor);
+  g_clear_object (&priv->hand_cursor);
+  g_clear_object (&priv->regular_cursor);
 
   G_OBJECT_CLASS (gtr_context_panel_parent_class)->dispose (object);
 }
@@ -469,8 +465,7 @@ static void
 gtr_context_panel_class_init (GtrContextPanelClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (GtrContextPanelPrivate));
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->dispose = gtr_context_panel_dispose;
   object_class->set_property = gtr_context_panel_set_property;
@@ -496,6 +491,14 @@ gtr_context_panel_class_init (GtrContextPanelClass * klass)
                                                         GTR_TYPE_TAB,
                                                         G_PARAM_READWRITE |
                                                         G_PARAM_CONSTRUCT_ONLY));
+
+  gtk_widget_class_set_template_from_resource (widget_class,
+                                               "/org/gnome/gtranslator/ui/gtr-context.ui");
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, sw);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, context);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, button_box);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, button);
 }
 
 /**
@@ -520,7 +523,10 @@ gtr_context_panel_new (void)
 GtkTextView *
 gtr_context_panel_get_context_text_view (GtrContextPanel * panel)
 {
+  GtrContextPanelPrivate *priv;
+
   g_return_val_if_fail (GTR_IS_CONTEXT_PANEL (panel), NULL);
 
-  return GTK_TEXT_VIEW (panel->priv->context);
+  priv = gtr_context_panel_get_instance_private(panel);
+  return GTK_TEXT_VIEW (priv->context);
 }

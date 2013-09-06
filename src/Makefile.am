@@ -186,6 +186,7 @@ EXTRA_DIST = \
 	gtranslator.gresource.xml \
 	gtranslator-ui.xml \
 	gtranslator-menu.ui \
+	gtr-context.ui \
 	gtr-header-dialog.ui \
 	gtr-jump-dialog.ui \
 	gtr-languages-fetcher.ui \

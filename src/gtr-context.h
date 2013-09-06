@@ -34,8 +34,6 @@ G_BEGIN_DECLS
 #define GTR_IS_CONTEXT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_CONTEXT_PANEL))
 #define GTR_IS_CONTEXT_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_CONTEXT_PANEL))
 #define GTR_CONTEXT_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_CONTEXT_PANEL, GtrContextPanelClass))
-/* Private structure type */
-typedef struct _GtrContextPanelPrivate GtrContextPanelPrivate;
 
 /*
  * Main object structure
@@ -45,9 +43,6 @@ typedef struct _GtrContextPanel GtrContextPanel;
 struct _GtrContextPanel
 {
   GtkBox parent_instance;
-
-  /*< private > */
-  GtrContextPanelPrivate *priv;
 };
 
 /*
