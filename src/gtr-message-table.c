@@ -37,6 +37,12 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
+enum
+{
+  PROP_0,
+  PROP_TAB
+};
+
 typedef struct
 {
   GtkWidget *treeview;
@@ -241,12 +247,70 @@ gtr_message_table_finalize (GObject * object)
 }
 
 static void
+gtr_message_table_set_property (GObject      *object,
+                                guint         prop_id,
+                                const GValue *value,
+                                GParamSpec   *pspec)
+{
+  GtrMessageTable *table = GTR_MESSAGE_TABLE (object);
+  GtrMessageTablePrivate *priv;
+
+  priv = gtr_message_table_get_instance_private (table);
+
+  switch (prop_id)
+    {
+    case PROP_TAB:
+      priv->tab = GTR_TAB (g_value_get_object (value));
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
+}
+
+static void
+gtr_message_table_get_property (GObject    *object,
+                                guint       prop_id,
+                                GValue     *value,
+                                GParamSpec *pspec)
+{
+  GtrMessageTable *table = GTR_MESSAGE_TABLE (object);
+  GtrMessageTablePrivate *priv;
+
+  priv = gtr_message_table_get_instance_private (table);
+
+  switch (prop_id)
+    {
+    case PROP_TAB:
+      g_value_set_object (value, priv->tab);
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
+}
+
+
+static void
 gtr_message_table_class_init (GtrMessageTableClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->finalize = gtr_message_table_finalize;
+  object_class->set_property = gtr_message_table_set_property;
+  object_class->get_property = gtr_message_table_get_property;
+
+  g_object_class_install_property (object_class,
+                                   PROP_TAB,
+                                   g_param_spec_object ("tab",
+                                                        "TAB",
+                                                        "The active tab",
+                                                        GTR_TYPE_TAB,
+                                                        G_PARAM_READWRITE |
+                                                        G_PARAM_CONSTRUCT_ONLY));
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/gtranslator/ui/gtr-message-table.ui");
@@ -276,15 +340,6 @@ gtr_message_table_new (void)
                     "message-changed", G_CALLBACK (message_changed_cb), obj);
 
   return GTK_WIDGET (obj);
-}
-
-void
-gtr_message_table_set_tab (GtrMessageTable *table, GtrTab *tab)
-{
-  GtrMessageTablePrivate *priv;
-
-  priv = gtr_message_table_get_instance_private (table);
-  priv->tab = tab;
 }
 
 /**

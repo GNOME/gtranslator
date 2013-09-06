@@ -76,8 +76,6 @@ gtr_message_table_get_type (void)
 
      GtkWidget *gtr_message_table_new (void);
 
-     void gtr_message_table_set_tab (GtrMessageTable *table, GtrTab *tab);
-
      void gtr_message_table_populate (GtrMessageTable * table,
                                       GtrMessageContainer * container);
 
