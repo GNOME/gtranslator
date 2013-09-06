@@ -68,7 +68,7 @@ struct _GtrContextPanelClass
  */
 GType             gtr_context_panel_get_type              (void) G_GNUC_CONST;
 
-GtkWidget        *gtr_context_panel_new                   (GtkWidget *tab);
+GtkWidget        *gtr_context_panel_new                   (void);
 
 GtkTextView      *gtr_context_panel_get_context_text_view (GtrContextPanel *panel);
 

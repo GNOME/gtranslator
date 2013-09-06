@@ -500,16 +500,15 @@ gtr_context_panel_class_init (GtrContextPanelClass * klass)
 
 /**
  * gtr_context_panel_new:
- * @tab: a #GtrTab
  * 
  * Creates a new #GtrContextPanel object.
  * 
  * Returns: a new #GtrContextPanel object
  */
 GtkWidget *
-gtr_context_panel_new (GtkWidget *tab)
+gtr_context_panel_new (void)
 {
-  return g_object_new (GTR_TYPE_CONTEXT_PANEL, "tab", tab, NULL);
+  return g_object_new (GTR_TYPE_CONTEXT_PANEL, NULL);
 }
 
 /**
