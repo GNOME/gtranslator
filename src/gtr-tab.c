@@ -943,7 +943,7 @@ gtr_tab_message_go_to (GtrTab * tab,
 
   priv = gtr_tab_get_instance_private (tab);
 
-  if (priv->blocking || first_msg)
+  if (!priv->blocking || first_msg)
     {
       gboolean plurals;
       gint current_page, n_pages;
