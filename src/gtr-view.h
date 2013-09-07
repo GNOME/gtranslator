@@ -41,9 +41,6 @@ G_BEGIN_DECLS
   GTR_SEARCH_CASE_SENSITIVE = 1 << 2
 } GtrSearchFlags;
 
-/* Private structure type */
-typedef struct _GtrViewPrivate GtrViewPrivate;
-
 /*
  * Main object structure
  */
@@ -52,9 +49,6 @@ typedef struct _GtrView GtrView;
 struct _GtrView
 {
   GtkSourceView parent_instance;
-
-  /*< private > */
-  GtrViewPrivate *priv;
 };
 
 /*

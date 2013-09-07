@@ -47,14 +47,7 @@
 #include <gtkspell/gtkspell.h>
 #endif
 
-#define GTR_VIEW_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
-						 	(object),	\
-						 	GTR_TYPE_VIEW,     \
-						 	GtrViewPrivate))
-
-G_DEFINE_TYPE (GtrView, gtr_view, GTK_SOURCE_TYPE_VIEW)
-
-struct _GtrViewPrivate
+typedef struct
 {
   GSettings *editor_settings;
   GSettings *ui_settings;
@@ -67,17 +60,22 @@ struct _GtrViewPrivate
 #ifdef HAVE_GTKSPELL
   GtkSpellChecker *spell;
 #endif
-};
+} GtrViewPrivate;
+
+G_DEFINE_TYPE_WITH_PRIVATE (GtrView, gtr_view, GTK_SOURCE_TYPE_VIEW)
 
 #ifdef HAVE_GTKSPELL
 static void
 gtr_attach_gtkspell (GtrView * view)
 {
   GError *error = NULL;
+  GtrViewPrivate *priv;
   gchar *errortext = NULL;
 
-  view->priv->spell = gtk_spell_checker_new ();
-  gtk_spell_checker_set_language (view->priv->spell, NULL, &error);
+  priv = gtr_view_get_instance_private (view);
+
+  priv->spell = gtk_spell_checker_new ();
+  gtk_spell_checker_set_language (priv->spell, NULL, &error);
   if (error)
     {
       g_warning (_("gtkspell error: %s\n"), error->message);
@@ -91,7 +89,7 @@ gtr_attach_gtkspell (GtrView * view)
     }
   else
     {
-      gtk_spell_checker_attach (view->priv->spell,
+      gtk_spell_checker_attach (priv->spell,
                                 GTK_TEXT_VIEW (view));
     }
 }
@@ -108,9 +106,7 @@ gtr_view_init (GtrView * view)
   gchar *ui_dir;
   GtrViewPrivate *priv;
 
-  view->priv = GTR_VIEW_GET_PRIVATE (view);
-
-  priv = view->priv;
+  priv = gtr_view_get_instance_private (view);
 
   priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
   priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
@@ -172,11 +168,14 @@ static void
 gtr_view_dispose (GObject * object)
 {
   GtrView *view = GTR_VIEW (object);
+  GtrViewPrivate *priv;
 
   DEBUG_PRINT ("Dispose view");
 
-  g_clear_object (&view->priv->editor_settings);
-  g_clear_object (&view->priv->ui_settings);
+  priv = gtr_view_get_instance_private (view);
+
+  g_clear_object (&priv->editor_settings);
+  g_clear_object (&priv->ui_settings);
 
   G_OBJECT_CLASS (gtr_view_parent_class)->dispose (object);
 }
@@ -185,8 +184,6 @@ static void
 gtr_view_class_init (GtrViewClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (GtrViewPrivate));
 
   object_class->dispose = gtr_view_dispose;
 }
@@ -256,6 +253,10 @@ gtr_view_get_selected_text (GtrView * view,
 void
 gtr_view_enable_spellcheck (GtrView * view, gboolean enable)
 {
+#ifdef HAVE_GTKSPELL
+  GtrViewPrivate *priv;
+#endif
+
   if (enable)
     {
 #ifdef HAVE_GTKSPELL
@@ -265,9 +266,11 @@ gtr_view_enable_spellcheck (GtrView * view, gboolean enable)
   else
     {
 #ifdef HAVE_GTKSPELL
-      if (!view->priv->spell)
+      priv = gtr_view_get_instance_private (view);
+
+      if (!priv->spell)
         return;
-      gtk_spell_checker_detach (view->priv->spell);
+      gtk_spell_checker_detach (priv->spell);
 #endif
     }
 }
@@ -431,10 +434,13 @@ gtr_view_set_font (GtrView * view, gboolean def, const gchar * font_name)
 void
 gtr_view_set_search_text (GtrView * view, const gchar * text, guint flags)
 {
+  GtrViewPrivate *priv;
   gchar *converted_text;
 
   g_return_if_fail (GTR_IS_VIEW (view));
-  g_return_if_fail ((text == NULL) || (view->priv->search_text != text));
+
+  priv = gtr_view_get_instance_private (view);
+  g_return_if_fail ((text == NULL) || (priv->search_text != text));
   g_return_if_fail ((text == NULL) || g_utf8_validate (text, -1, NULL));
 
   //gedit_debug_message (DEBUG_DOCUMENT, "text = %s", text);
@@ -450,19 +456,19 @@ gtr_view_set_search_text (GtrView * view, const gchar * text, guint flags)
           converted_text = g_strdup ("");
         }
 
-      g_free (view->priv->search_text);
+      g_free (priv->search_text);
 
-      view->priv->search_text = converted_text;
-      //view->priv->num_of_lines_search_text = compute_num_of_lines (view->priv->search_text);
+      priv->search_text = converted_text;
+      //priv->num_of_lines_search_text = compute_num_of_lines (priv->search_text);
       //update_to_search_region = TRUE;
     }
 
   if (!GTR_SEARCH_IS_DONT_SET_FLAGS (flags))
     {
-      /*if (view->priv->search_flags != flags)
+      /*if (priv->search_flags != flags)
          update_to_search_region = TRUE; */
 
-      view->priv->search_flags = flags;
+      priv->search_flags = flags;
 
     }
 
@@ -494,12 +500,16 @@ gtr_view_set_search_text (GtrView * view, const gchar * text, guint flags)
 gchar *
 gtr_view_get_search_text (GtrView * view, guint * flags)
 {
+  GtrViewPrivate *priv;
+
   g_return_val_if_fail (GTR_IS_VIEW (view), NULL);
 
-  if (flags != NULL)
-    *flags = view->priv->search_flags;
+  priv = gtr_view_get_instance_private (view);
 
-  return gtr_utils_escape_search_text (view->priv->search_text);
+  if (flags != NULL)
+    *flags = priv->search_flags;
+
+  return gtr_utils_escape_search_text (priv->search_text);
 }
 
 /**
@@ -511,10 +521,13 @@ gtr_view_get_search_text (GtrView * view, guint * flags)
 gboolean
 gtr_view_get_can_search_again (GtrView * view)
 {
+  GtrViewPrivate *priv;
+
   g_return_val_if_fail (GTR_IS_VIEW (view), FALSE);
 
-  return ((view->priv->search_text != NULL) &&
-          (*view->priv->search_text != '\0'));
+  priv = gtr_view_get_instance_private (view);
+  return ((priv->search_text != NULL) &&
+          (*priv->search_text != '\0'));
 }
 
 /**
@@ -545,6 +558,7 @@ gtr_view_search_forward (GtrView * view,
   gboolean found = FALSE;
   GtkTextIter m_start;
   GtkTextIter m_end;
+  GtrViewPrivate *priv;
 
   g_return_val_if_fail (GTR_IS_VIEW (view), FALSE);
 
@@ -557,7 +571,9 @@ gtr_view_search_forward (GtrView * view,
                         || (gtk_text_iter_get_buffer (end) ==
                             GTK_TEXT_BUFFER (doc)), FALSE);
 
-  if (view->priv->search_text == NULL)
+  priv = gtr_view_get_instance_private (view);
+
+  if (priv->search_text == NULL)
     {
       //gedit_debug_message (DEBUG_DOCUMENT, "doc->priv->search_text == NULL\n");
       return FALSE;
@@ -572,7 +588,7 @@ gtr_view_search_forward (GtrView * view,
 
   search_flags = GTK_TEXT_SEARCH_VISIBLE_ONLY | GTK_TEXT_SEARCH_TEXT_ONLY;
 
-  if (!GTR_SEARCH_IS_CASE_SENSITIVE (view->priv->search_flags))
+  if (!GTR_SEARCH_IS_CASE_SENSITIVE (priv->search_flags))
     {
       search_flags = search_flags | GTK_TEXT_SEARCH_CASE_INSENSITIVE;
     }
@@ -580,11 +596,11 @@ gtr_view_search_forward (GtrView * view,
   while (!found)
     {
       found = gtk_text_iter_forward_search (&iter,
-                                            view->priv->search_text,
+                                            priv->search_text,
                                             search_flags,
                                             &m_start, &m_end, end);
 
-      if (found && GTR_SEARCH_IS_ENTIRE_WORD (view->priv->search_flags))
+      if (found && GTR_SEARCH_IS_ENTIRE_WORD (priv->search_flags))
         {
           found = gtk_text_iter_starts_word (&m_start) &&
             gtk_text_iter_ends_word (&m_end);
@@ -633,6 +649,7 @@ gtr_view_search_backward (GtrView * view,
   gboolean found = FALSE;
   GtkTextIter m_start;
   GtkTextIter m_end;
+  GtrViewPrivate *priv;
 
   g_return_val_if_fail (GTR_IS_VIEW (view), FALSE);
 
@@ -645,7 +662,9 @@ gtr_view_search_backward (GtrView * view,
                         || (gtk_text_iter_get_buffer (end) ==
                             GTK_TEXT_BUFFER (doc)), FALSE);
 
-  if (view->priv->search_text == NULL)
+  priv = gtr_view_get_instance_private (view);
+
+  if (priv->search_text == NULL)
     {
       //gedit_debug_message (DEBUG_DOCUMENT, "doc->priv->search_text == NULL\n");
       return FALSE;
@@ -660,7 +679,7 @@ gtr_view_search_backward (GtrView * view,
 
   search_flags = GTK_TEXT_SEARCH_VISIBLE_ONLY | GTK_TEXT_SEARCH_TEXT_ONLY;
 
-  if (!GTR_SEARCH_IS_CASE_SENSITIVE (view->priv->search_flags))
+  if (!GTR_SEARCH_IS_CASE_SENSITIVE (priv->search_flags))
     {
       search_flags = search_flags | GTK_TEXT_SEARCH_CASE_INSENSITIVE;
     }
@@ -668,11 +687,11 @@ gtr_view_search_backward (GtrView * view,
   while (!found)
     {
       found = gtk_text_iter_backward_search (&iter,
-                                             view->priv->search_text,
+                                             priv->search_text,
                                              search_flags,
                                              &m_start, &m_end, start);
 
-      if (found && GTR_SEARCH_IS_ENTIRE_WORD (view->priv->search_flags))
+      if (found && GTR_SEARCH_IS_ENTIRE_WORD (priv->search_flags))
         {
           found = gtk_text_iter_starts_word (&m_start) &&
             gtk_text_iter_ends_word (&m_end);
@@ -713,6 +732,7 @@ gtr_view_replace_all (GtrView * view,
   GtkTextIter m_start;
   GtkTextIter m_end;
   GtkTextSearchFlags search_flags = 0;
+  GtrViewPrivate *priv;
   gboolean found = TRUE;
   gint cont = 0;
   gchar *search_text;
@@ -724,12 +744,14 @@ gtr_view_replace_all (GtrView * view,
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
+  priv = gtr_view_get_instance_private (view);
+
   g_return_val_if_fail (replace != NULL, 0);
   g_return_val_if_fail ((find != NULL)
-                        || (view->priv->search_text != NULL), 0);
+                        || (priv->search_text != NULL), 0);
 
   if (find == NULL)
-    search_text = g_strdup (view->priv->search_text);
+    search_text = g_strdup (priv->search_text);
   else
     search_text = gtr_utils_unescape_search_text (find);
 
@@ -750,7 +772,7 @@ gtr_view_replace_all (GtrView * view,
    * replace_all so that we don't spend all the time
    * updating the position in the statusbar
    */
-  //view->priv->stop_cursor_moved_emission = TRUE;
+  //priv->stop_cursor_moved_emission = TRUE;
 
   gtk_text_buffer_begin_user_action (buffer);
 
@@ -794,7 +816,7 @@ gtr_view_replace_all (GtrView * view,
   /* re-enable cursor_moved emission and notify
    * the current position 
    */
-  //view->priv->stop_cursor_moved_emission = FALSE;
+  //priv->stop_cursor_moved_emission = FALSE;
   //emit_cursor_moved (GTK_SOURCE_BUFFER(buffer));
 
   g_free (search_text);
@@ -816,12 +838,15 @@ gtr_view_reload_scheme_color (GtrView * view)
   GtkSourceBuffer *buf;
   GtkSourceStyleScheme *scheme;
   GtkSourceStyleSchemeManager *manager;
+  GtrViewPrivate *priv;
   gchar *scheme_id;
+
+  priv = gtr_view_get_instance_private (view);
 
   buf = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
   manager = gtk_source_style_scheme_manager_get_default ();
 
-  scheme_id = g_settings_get_string (view->priv->ui_settings,
+  scheme_id = g_settings_get_string (priv->ui_settings,
                                      GTR_SETTINGS_COLOR_SCHEME);
   scheme = gtk_source_style_scheme_manager_get_scheme (manager, scheme_id);
   g_free (scheme_id);
