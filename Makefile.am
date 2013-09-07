@@ -10,6 +10,7 @@ EXTRA_DIST= \
 		xmldocs.make
 
 MAINTAINERCLEANFILES = 		\
+	INSTALL			\
 	aclocal.m4		\
 	config.guess		\
 	config.h.in		\
