@@ -78,9 +78,6 @@ main (gint argc, gchar * argv[])
   GtrApplication *app;
   gint status;
 
-  /* Init type system and threads as soon as possible */
-  g_type_init ();
-
   gtr_dirs_init ();
 
   /* Initialize gettext. */
