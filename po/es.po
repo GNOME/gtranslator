@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-05 09:44+0000\n"
-"PO-Revision-Date: 2013-09-06 10:11+0200\n"
+"POT-Creation-Date: 2013-09-25 14:50+0000\n"
+"PO-Revision-Date: 2013-09-25 17:03+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -27,6 +27,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Gtranslator 2.91.5\n"
+
+#: ../data/gtranslator.appdata.xml.in.h:1
+msgid ""
+"Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
+"environment. It handles all forms of gettext po files and includes very "
+"useful features like find/replace, translation memory, different translator "
+"profiles, messages table (for having an overview of the translations/"
+"messages in the po file), easy navigation and editing of translation "
+"messages and comments of the translation where accurate."
+msgstr ""
+"Gtranslator es un editor de archivos PO de gettext mejorado para el entorno "
+"de escritorio GNOME. Manejja todos los tipos de archivos PO e incluye "
+"características muy útiles, tales como buscar y reemplazar, memoria de "
+"traducción, diferentes perfiles de traductor, tabla de mensajes (para tener "
+"una visión general de las cadenas del archivo PO), navegación sencilla,"
+"edición y traducción de mensajes y comentarios precisos sobre la traducción."
+
+#: ../data/gtranslator.appdata.xml.in.h:2
+msgid ""
+"Gtranslator includes also a plugin system with many interesting plugins like "
+"alternate language, insert tags, open tran, integration with subversion and "
+"a source code viewer."
+msgstr ""
+"Gtranslator también incluye un sistema de complementos que incluyen idioma "
+"alternativo, insertar etiquetas, OpenTran, integración con subversion y un "
+"visor de código fuente."
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:1 ../src/gtr-application.c:328
 msgid "Gtranslator"
@@ -987,34 +1013,34 @@ msgstr "El administrador del sistema ha desactivado el guardado."
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Si no guarda perderá todos los cambios permanentemente."
 
-#: ../src/gtr-context.c:232
+#: ../src/gtr-context.c:234
 msgid "Notes:"
 msgstr "Notas:"
 
-#: ../src/gtr-context.c:240
+#: ../src/gtr-context.c:242
 msgid "Add Note"
 msgstr "Añadir una nota"
 
-#: ../src/gtr-context.c:245
+#: ../src/gtr-context.c:247
 msgid "Edit"
 msgstr "Editar"
 
 #. Extracted comments
-#: ../src/gtr-context.c:288
+#: ../src/gtr-context.c:293
 msgid "Extracted comments:"
 msgstr "Comentarios extraídos:"
 
 #. Context
-#: ../src/gtr-context.c:292
+#: ../src/gtr-context.c:297
 msgid "Context:"
 msgstr "Contexto:"
 
 #. Format
-#: ../src/gtr-context.c:296
+#: ../src/gtr-context.c:301
 msgid "Format:"
 msgstr "Formato:"
 
-#: ../src/gtr-context.c:392
+#: ../src/gtr-context.ui.h:1
 msgid "D_one"
 msgstr "Terminad_o"
 
@@ -1118,19 +1144,19 @@ msgstr "_Código del idioma:"
 msgid "_Plural forms:"
 msgstr "Formas _plurales:"
 
-#: ../src/gtr-message-table.c:175
+#: ../src/gtr-message-table.c:180
 msgid "Status"
 msgstr "Estado"
 
-#: ../src/gtr-message-table.c:187
+#: ../src/gtr-message-table.c:192
 msgid "ID"
 msgstr "ID"
 
-#: ../src/gtr-message-table.c:202
+#: ../src/gtr-message-table.c:207
 msgid "Original Message"
 msgstr "Mensaje original"
 
-#: ../src/gtr-message-table.c:217
+#: ../src/gtr-message-table.c:222
 msgid "Translated Message"
 msgstr "Mensaje traducido"
 
@@ -1381,17 +1407,17 @@ msgstr "INS"
 msgid "OVR"
 msgstr "SOB"
 
-#: ../src/gtr-tab.c:204
+#: ../src/gtr-tab.c:209
 msgid "There is an error in the message:"
 msgstr "Hay un error en el mensaje:"
 
-#: ../src/gtr-tab.c:515
+#: ../src/gtr-tab.c:537
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1008
+#: ../src/gtr-tab.c:1058
 msgid "Path:"
 msgstr "Ruta:"
 
@@ -1400,7 +1426,6 @@ msgid "Close document"
 msgstr "Cerrar el documento"
 
 #: ../src/gtr-tab.ui.h:1
-#| msgid "Original Message:"
 msgid "_Original Message:"
 msgstr "Mensaje _original:"
 
@@ -1416,12 +1441,12 @@ msgstr ""
 "No se pudo mostrar la ayuda. Asegúrese de que el paquete de documentación de "
 "Gtranslator está instalado."
 
-#: ../src/gtr-view.c:83
+#: ../src/gtr-view.c:81
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "error de gtkspell: %s\n"
 
-#: ../src/gtr-view.c:85
+#: ../src/gtr-view.c:83
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1771,11 +1796,11 @@ msgstr "_Deshacer"
 msgid "_Redo"
 msgstr "_Rehacer"
 
-#: ../src/main.c:101
+#: ../src/main.c:98
 msgid "- Edit PO files"
 msgstr "- Editar archivos PO"
 
-#: ../src/main.c:105
+#: ../src/main.c:102
 #, c-format
 msgid ""
 "%s\n"
