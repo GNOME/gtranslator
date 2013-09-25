@@ -4,7 +4,7 @@ SUBDIRS = \
 	desktop \
 	pixmaps
 
-@INTLTOOL_XML_NOMERGE_RULE@
+@INTLTOOL_XML_RULE@
 appdatadir = $(datadir)/appdata
 dist_appdata_DATA = $(appdata_in_files:.xml.in=.xml)
 appdata_in_files = gtranslator.appdata.xml.in
