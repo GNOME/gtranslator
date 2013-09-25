@@ -4,6 +4,11 @@ SUBDIRS = \
 	desktop \
 	pixmaps
 
+@INTLTOOL_XML_NOMERGE_RULE@
+appdatadir = $(datadir)/appdata
+dist_appdata_DATA = $(appdata_in_files:.xml.in=.xml)
+appdata_in_files = gtranslator.appdata.xml.in
+
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gtranslator.pc
 
@@ -20,12 +25,14 @@ gsettings_SCHEMAS = org.gnome.gtranslator.gschema.xml
 
 @GSETTINGS_RULES@
 
+
 EXTRA_DIST =					\
 	$(ui_DATA)				\
 	org.gnome.gtranslator.gschema.xml.in	\
 	gtranslator.pc.in
 
 CLEANFILES =			\
+	gtranslator.appdata.xml \
 	$(gsettings_SCHEMAS)	\
 	$(pkgconfig_DATA)
 
