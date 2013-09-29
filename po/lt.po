@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gtranslator HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-05 09:30+0000\n"
-"PO-Revision-Date: 2013-09-05 21:10+0300\n"
+"POT-Creation-Date: 2013-09-27 03:36+0000\n"
+"PO-Revision-Date: 2013-09-29 21:02+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -21,6 +21,32 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Gtranslator 2.91.6\n"
+
+#: ../data/gtranslator.appdata.xml.in.h:1
+msgid ""
+"Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
+"environment. It handles all forms of gettext po files and includes very "
+"useful features like find/replace, translation memory, different translator "
+"profiles, messages table (for having an overview of the translations/"
+"messages in the po file), easy navigation and editing of translation "
+"messages and comments of the translation where accurate."
+msgstr ""
+"Gtranslator yra galingas gettext po failų redaktorius GNOME darbastalio "
+"aplinkai. Jis apdorojo visų tipų gettext po failus ir turi naudingų "
+"funkcijų, tokių kaip paieška ir pakeitimas, vertimų atmintis, skirtingi "
+"vertėjo profiliai, eilučių lentelė (eilučių ir jų vertimų apžvalgai po "
+"faile), lengvas judėjimas tarp eilučių ir jų redagavimas bei vertimų "
+"komentarai, kur tikslu."
+
+#: ../data/gtranslator.appdata.xml.in.h:2
+msgid ""
+"Gtranslator includes also a plugin system with many interesting plugins like "
+"alternate language, insert tags, open tran, integration with subversion and "
+"a source code viewer."
+msgstr ""
+"Gtranslator taip pat turi įskiepių sistemą su daug įdomių įskiepių, tokių "
+"kaip papildoma kalba, žymų įterpimas, open tran, integracija su subversion "
+"bei pradinio kodo žiūryklė."
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:1 ../src/gtr-application.c:328
 msgid "Gtranslator"
@@ -953,34 +979,34 @@ msgstr "Įrašymo galimybę išjungė sistemos administratorius."
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Jei neįrašysite, visų jūsų pakeitimai bus negrįžtamai prarasti."
 
-#: ../src/gtr-context.c:232
+#: ../src/gtr-context.c:234
 msgid "Notes:"
 msgstr "Pastabos:"
 
-#: ../src/gtr-context.c:240
+#: ../src/gtr-context.c:242
 msgid "Add Note"
 msgstr "Pridėti pastabą"
 
-#: ../src/gtr-context.c:245
+#: ../src/gtr-context.c:247
 msgid "Edit"
 msgstr "Keisti"
 
 #. Extracted comments
-#: ../src/gtr-context.c:288
+#: ../src/gtr-context.c:293
 msgid "Extracted comments:"
 msgstr "Gauti komentarai:"
 
 #. Context
-#: ../src/gtr-context.c:292
+#: ../src/gtr-context.c:297
 msgid "Context:"
 msgstr "Kontekstas:"
 
 #. Format
-#: ../src/gtr-context.c:296
+#: ../src/gtr-context.c:301
 msgid "Format:"
 msgstr "Formatas:"
 
-#: ../src/gtr-context.c:392
+#: ../src/gtr-context.ui.h:1
 msgid "D_one"
 msgstr "_Atlikta"
 
@@ -1084,19 +1110,19 @@ msgstr "Kalbos k_odas:"
 msgid "_Plural forms:"
 msgstr "_Daugiskaitos formos:"
 
-#: ../src/gtr-message-table.c:175
+#: ../src/gtr-message-table.c:180
 msgid "Status"
 msgstr "Būsena"
 
-#: ../src/gtr-message-table.c:187
+#: ../src/gtr-message-table.c:192
 msgid "ID"
 msgstr "ID"
 
-#: ../src/gtr-message-table.c:202
+#: ../src/gtr-message-table.c:207
 msgid "Original Message"
 msgstr "Originalus tekstas"
 
-#: ../src/gtr-message-table.c:217
+#: ../src/gtr-message-table.c:222
 msgid "Translated Message"
 msgstr "Išverstas tekstas"
 
@@ -1345,17 +1371,17 @@ msgstr "ĮTERP"
 msgid "OVR"
 msgstr "PERR"
 
-#: ../src/gtr-tab.c:204
+#: ../src/gtr-tab.c:209
 msgid "There is an error in the message:"
 msgstr "Užraše yra klaida:"
 
-#: ../src/gtr-tab.c:515
+#: ../src/gtr-tab.c:537
 #, c-format
 msgid "Plural %d"
 msgstr "Daug. forma %d"
 
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1008
+#: ../src/gtr-tab.c:1058
 msgid "Path:"
 msgstr "Kelias:"
 
@@ -1364,7 +1390,6 @@ msgid "Close document"
 msgstr "Užverti dokumentą"
 
 #: ../src/gtr-tab.ui.h:1
-#| msgid "Original Message:"
 msgid "_Original Message:"
 msgstr "_Originalus tekstas:"
 
@@ -1380,12 +1405,12 @@ msgstr ""
 "Nepavyko parodyti pagalbos. Patikrinkite, ar įdiegtas GTranslator "
 "dokumentacijos paketas."
 
-#: ../src/gtr-view.c:83
+#: ../src/gtr-view.c:81
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "gtkspell klaida: %s\n"
 
-#: ../src/gtr-view.c:85
+#: ../src/gtr-view.c:83
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1711,28 +1736,22 @@ msgid "Profile for the active document"
 msgstr "Profilis aktyviam dokumentui"
 
 #: ../src/gtr-window.ui.h:14
-#| msgid "_Header..."
 msgid "_Header…"
 msgstr "_Antraštė…"
 
 #: ../src/gtr-window.ui.h:20
-#| msgid "Show the Context panel"
 msgid "Show the context panel"
 msgstr "Rodyti konteksto skydelį"
 
 #: ../src/gtr-window.ui.h:27
-#| msgid "Go to Message"
 msgid "_Go to Message…"
 msgstr "_Eiti į užrašą…"
 
 #: ../src/gtr-window.ui.h:57
-#| msgctxt "alternate lang"
-#| msgid "_Open"
 msgid "_Open"
 msgstr "_Atverti"
 
 #: ../src/gtr-window.ui.h:58
-#| msgid "_Save All"
 msgid "_Save"
 msgstr "Į_rašyti"
 
@@ -1744,11 +1763,11 @@ msgstr "_Atšaukti"
 msgid "_Redo"
 msgstr "Paka_rtoti"
 
-#: ../src/main.c:101
+#: ../src/main.c:98
 msgid "- Edit PO files"
 msgstr "– Redaguoti PO failus"
 
-#: ../src/main.c:105
+#: ../src/main.c:102
 #, c-format
 msgid ""
 "%s\n"
@@ -1796,4 +1815,3 @@ msgstr "Pašalinti pasirinktą įrankinę"
 #: ../src/toolbareditor/egg-toolbar-editor.c:489
 msgid "Separator"
 msgstr "Skirtukas"
-
