@@ -3,13 +3,14 @@
 #
 # Peteris Krisjanis <peteris.krisjanis@os.lv>, 2002.
 # a <a>, 2012.
-# Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2012.
+# Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2012, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-05 00:33+0300\n"
-"PO-Revision-Date: 2012-06-05 15:47+0300\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gtranslator&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-09-25 14:50+0000\n"
+"PO-Revision-Date: 2013-10-05 14:11+0300\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "Language: lv\n"
@@ -18,7 +19,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: ../data/gtranslator.appdata.xml.in.h:1
+msgid ""
+"Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
+"environment. It handles all forms of gettext po files and includes very "
+"useful features like find/replace, translation memory, different translator "
+"profiles, messages table (for having an overview of the translations/"
+"messages in the po file), easy navigation and editing of translation "
+"messages and comments of the translation where accurate."
+msgstr ""
+"Gtranslator ir po datņu redaktors GNOME darbvirsmas videi. Tas strādā ar visa "
+"veida gettext po datnēm un iekļauj noderīgas iespējas, piemēram, "
+"meklēšanu/aizvietošanu, tulkošanas atmiņu, dažādus tulkošanas profilus, "
+"ziņojumu tabulas (pārskats pār tulkojumiem/ziņojumiem po datnē), vieglu "
+"tulkošanas ziņojumu rediģēšanu un navigāciju, kā arī tulkojumu komentārus."
+
+#: ../data/gtranslator.appdata.xml.in.h:2
+msgid ""
+"Gtranslator includes also a plugin system with many interesting plugins like "
+"alternate language, insert tags, open tran, integration with subversion and "
+"a source code viewer."
+msgstr ""
+"Gtranslator iekļauj arī spraudņu sistēmu, kur ir daudzi interesanti spraudņi, "
+"piemēram, papildu valoda, birku ievietošana, open-tran, integrācija ar "
+"subversion un pirmkoda skatītājs."
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:1 ../src/gtr-application.c:328
 msgid "Gtranslator"
@@ -551,7 +577,7 @@ msgid "WRONG! Malformed project: %d\n"
 msgstr "NEPAREIZI! Slikti formatēts projekts: %d\n"
 
 #: ../plugins/open-tran/gtr-open-tran-panel.c:359
-#: ../src/gtr-actions-search.c:191
+#: ../src/gtr-actions-search.c:192
 msgid "Phrase not found"
 msgstr "Frāze nav atrasta"
 
@@ -630,16 +656,16 @@ msgstr "Spoguļservera URL"
 msgid "URL of an Open-Tran mirror server"
 msgstr "Open-Tran spoguļservera URL"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:165
-msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"large\">Virknes, ko pievienot datubāzei</span>"
+#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
+#| msgid "Add to Database"
+msgid "Strings added to database"
+msgstr "Virknes, ko pievienot datubāzei"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:220
+#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:224
 msgid "Please specify a valid path to build the translation memory"
 msgstr "Lūdzu, norādiet derīgu ceļu, no kā būvēt tulkošanas atmiņu"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:287
+#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:291
 msgid "Gtranslator Translation Memory Manager"
 msgstr "Gtranslator tulkošanas atmiņas pārvaldnieks"
 
@@ -672,28 +698,28 @@ msgstr "Tulkošanas atmiņa"
 msgid "Get translation suggestions from a data base."
 msgstr "Saņemt tulkošanas ieteikumus no datubāzes."
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:204
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:207
 #, c-format
 msgid "Insert Option nº %d"
 msgstr "Ievietot opciju nº %d"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:340
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:325
 msgid "_Use this translation"
 msgstr "Lietot šo t_ulkojumu"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:345
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:330
 msgid "_Remove"
 msgstr "_Izņemt"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:460
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:445
 msgid "Shortcut"
 msgstr "Saīsne"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:469
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:454
 msgid "Level"
 msgstr "Līmenis"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:478
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:463
 msgid "String"
 msgstr "Virkne"
 
@@ -706,7 +732,7 @@ msgid "Build translation memory"
 msgstr "Būvēt tulkošanas atmiņu"
 
 #: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
-#: ../src/gtr-window.c:183
+#: ../src/gtr-window.c:180
 msgid "_Translation Memory"
 msgstr "_Tulkošanas atmiņa"
 
@@ -772,7 +798,7 @@ msgstr "Pašreizējie uzturētāji"
 msgid "Current Developers"
 msgstr "Pašreizējie izstrādātāji"
 
-#: ../src/gtr-actions-app.c:56
+#: ../src/gtr-actions-app.c:57
 msgid "Previous Developers"
 msgstr "Iepriekšējie izstrādātāji"
 
@@ -822,7 +848,7 @@ msgstr "Saglabāt datni kā..."
 msgid "Files saved."
 msgstr "Datnes saglabātas."
 
-#: ../src/gtr-actions-search.c:170
+#: ../src/gtr-actions-search.c:171
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
@@ -830,7 +856,7 @@ msgstr[0] "Atrada un aizvietoja %d vietā"
 msgstr[1] "Atrada un aizvietoja %d vietās"
 msgstr[2] "Atrada un aizvietoja %d vietās"
 
-#: ../src/gtr-actions-search.c:179
+#: ../src/gtr-actions-search.c:180
 msgid "Found and replaced one occurrence"
 msgstr "Atrada un aizvietoja vienā vietā"
 
@@ -885,24 +911,22 @@ msgstr "Šis asistents palīdzēs jums izveidot galveno profilu."
 msgid "Assistant"
 msgstr "Asistents"
 
-#: ../src/gtr-assistant.c:246
-msgid "<b>Profile name:</b>"
-msgstr "<b>Profila nosaukums:</b>"
+#: ../src/gtr-assistant.c:247
+#| msgid "<b>Profile name:</b>"
+msgid "Profile name:"
+msgstr "Profila nosaukums:"
 
-#: ../src/gtr-assistant.c:265
-msgid "<b>Translator name:</b>"
-msgstr "<b>Tulkotāja vārds:</b>"
+#: ../src/gtr-assistant.c:289
+#| msgid "Translator's _email:"
+msgid "Translator email:"
+msgstr "Tulkotāja e-pasts:"
 
-#: ../src/gtr-assistant.c:284
-msgid "<b>Translator email:</b>"
-msgstr "<b>Tulkotāja e-pasts:</b>"
-
-#: ../src/gtr-assistant.c:296 ../src/gtr-assistant.c:388
-#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:1231
+#: ../src/gtr-assistant.c:303 ../src/gtr-assistant.c:395
+#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:1192
 msgid "Profile"
 msgstr "Profils"
 
-#: ../src/gtr-assistant.c:408
+#: ../src/gtr-assistant.c:415
 msgid "Confirmation"
 msgstr "Apstiprinājums"
 
@@ -958,34 +982,34 @@ msgstr "Sistēmas administrators ir deaktivējis saglabāšanu."
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Ja nesaglabāsiet, visas izmaiņas tiks neatgriezeniski zaudētas."
 
-#: ../src/gtr-context.c:232
+#: ../src/gtr-context.c:234
 msgid "Notes:"
 msgstr "Piezīmes:"
 
-#: ../src/gtr-context.c:240
+#: ../src/gtr-context.c:242
 msgid "Add Note"
 msgstr "Pievienot piezīmi"
 
-#: ../src/gtr-context.c:245
+#: ../src/gtr-context.c:247
 msgid "Edit"
 msgstr "Rediģēt"
 
 #. Extracted comments
-#: ../src/gtr-context.c:288
+#: ../src/gtr-context.c:293
 msgid "Extracted comments:"
 msgstr "Izvilktie komentāri:"
 
 #. Context
-#: ../src/gtr-context.c:292
+#: ../src/gtr-context.c:297
 msgid "Context:"
 msgstr "Konteksts:"
 
 #. Format
-#: ../src/gtr-context.c:296
+#: ../src/gtr-context.c:301
 msgid "Format:"
 msgstr "Formāts:"
 
-#: ../src/gtr-context.c:392
+#: ../src/gtr-context.ui.h:1
 msgid "D_one"
 msgstr "Pa_beigts"
 
@@ -1089,19 +1113,19 @@ msgstr "Valodas _kods:"
 msgid "_Plural forms:"
 msgstr "Daudzskaitļu _formas:"
 
-#: ../src/gtr-message-table.c:175
+#: ../src/gtr-message-table.c:180
 msgid "Status"
 msgstr "Statuss"
 
-#: ../src/gtr-message-table.c:187
+#: ../src/gtr-message-table.c:192
 msgid "ID"
 msgstr "ID"
 
-#: ../src/gtr-message-table.c:202
+#: ../src/gtr-message-table.c:207
 msgid "Original Message"
 msgstr "Sākotnējā virkne"
 
-#: ../src/gtr-message-table.c:217
+#: ../src/gtr-message-table.c:222
 msgid "Translated Message"
 msgstr "Iztulkotā virkne"
 
@@ -1165,30 +1189,27 @@ msgstr "Datne %s ir tikai lasāma un to nevar pārrakstīt"
 msgid "There was an error writing the PO file: %s"
 msgstr "Gadījās kļūda, rakstot PO datni — %s"
 
-#: ../src/gtr-preferences-dialog.c:401
-msgid ""
-"<span weight=\"bold\" size=\"large\">Impossible to remove the active "
-"profile</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"large\">Nevar izņemt aktīvo profilu</span>"
+#: ../src/gtr-preferences-dialog.c:397
+#| msgid ""
+#| "<span weight=\"bold\" size=\"large\">Impossible to remove the active "
+#| "profile</span>"
+msgid "Impossible to remove the active profile"
+msgstr "Nevar izņemt aktīvo profilu"
 
-#: ../src/gtr-preferences-dialog.c:405
+#: ../src/gtr-preferences-dialog.c:403
 msgid "Another profile should be selected as active before"
 msgstr "Pirms tam jāizvēlas kāds cits profils kā aktīvs"
 
-#: ../src/gtr-preferences-dialog.c:418
-msgid ""
-"<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
-"profile?</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"large\">Vai tiešām vēlaties dzēst šo profilu?</"
-"span>"
+#: ../src/gtr-preferences-dialog.c:416
+#| msgid "Are you sure you want to remove ALL translations from this po file?"
+msgid "Are you sure you want to delete this profile?"
+msgstr "Vai tiešām vēlaties dzēst šo profilu?"
 
 #: ../src/gtr-preferences-dialog.c:552
 msgid "Active"
 msgstr "Aktīvs"
 
-#: ../src/gtr-preferences-dialog.c:643 ../src/gtr-preferences-dialog.ui.h:1
+#: ../src/gtr-preferences-dialog.c:621 ../src/gtr-preferences-dialog.ui.h:1
 msgid "Gtranslator Preferences"
 msgstr "Gtranslator iestatījumi"
 
@@ -1264,10 +1285,6 @@ msgstr "Rediģēt profilu"
 msgid "Profiles"
 msgstr "Profili"
 
-#: ../src/gtr-preferences-dialog.ui.h:20
-msgid "Plugins"
-msgstr "Spraudņi"
-
 #: ../src/gtr-profile-dialog.c:82
 msgid "Gtranslator Profile"
 msgstr "Gtranslator profils"
@@ -1296,19 +1313,19 @@ msgstr "Vā_rds:"
 msgid "Language Settings"
 msgstr "Valodas iestatījumi"
 
-#: ../src/gtr-search-dialog.c:326 ../src/gtr-search-dialog.ui.h:1
+#: ../src/gtr-search-dialog.c:348 ../src/gtr-search-dialog.ui.h:1
 msgid "Replace"
 msgstr "Aizvietot"
 
-#: ../src/gtr-search-dialog.c:348
+#: ../src/gtr-search-dialog.c:370
 msgid "Find"
 msgstr "Meklēt"
 
-#: ../src/gtr-search-dialog.c:436
+#: ../src/gtr-search-dialog.c:458
 msgid "Replace _All"
 msgstr "_Aizvietot visus"
 
-#: ../src/gtr-search-dialog.c:440
+#: ../src/gtr-search-dialog.c:462
 msgid "_Replace"
 msgstr "Ai_zvietot"
 
@@ -1360,43 +1377,33 @@ msgstr "IEV"
 msgid "OVR"
 msgstr "PĀR"
 
-#: ../src/gtr-tab.c:315
+#: ../src/gtr-tab.c:209
 msgid "There is an error in the message:"
 msgstr "Šis ir kļūdas ziņojums:"
 
-#: ../src/gtr-tab.c:626
+#: ../src/gtr-tab.c:537
 #, c-format
 msgid "Plural %d"
 msgstr "Daudzskaitlis %d"
 
-#: ../src/gtr-tab.c:752
-msgid "Message Table"
-msgstr "Virkņu tabula"
-
-#: ../src/gtr-tab.c:762
-msgid "<b>Original Message:</b>"
-msgstr "<b>Sākotnējā virkne:</b>"
-
-#: ../src/gtr-tab.c:815
-msgid "<b>Translate_d Text:</b>"
-msgstr "<b>Iztu_lkotais teksts:</b>"
-
-#: ../src/gtr-tab.c:831
-msgid "Translation Fields"
-msgstr "Tulkošanas lauki"
-
-#: ../src/gtr-tab.c:841
-msgid "Message Details"
-msgstr "Sīkāk par virkni"
-
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1322
+#: ../src/gtr-tab.c:1058
 msgid "Path:"
 msgstr "Ceļš:"
 
 #: ../src/gtr-tab-label.c:278
 msgid "Close document"
 msgstr "Aizvērt dokumentu"
+
+#: ../src/gtr-tab.ui.h:1
+#| msgid "Original Message"
+msgid "_Original Message:"
+msgstr "Sāk_otnējā virkne:"
+
+#: ../src/gtr-tab.ui.h:2
+#| msgid "_Translated text"
+msgid "Translate_d Text:"
+msgstr "Iz_tulkotais teksts:"
 
 #: ../src/gtr-utils.c:517
 msgid ""
@@ -1406,12 +1413,12 @@ msgstr ""
 "Nevar parādīt palīdzību. Lūdzu, pārliecinieties, ka ir uzinstalēta "
 "Gtranslator palīdzības pakotne."
 
-#: ../src/gtr-view.c:84
+#: ../src/gtr-view.c:81
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "gtkspell kļūda — %s\n"
 
-#: ../src/gtr-view.c:86
+#: ../src/gtr-view.c:83
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1420,265 +1427,265 @@ msgstr ""
 "GtkSpell nevarēja inicializēties.\n"
 " %s"
 
-#: ../src/gtr-window.c:116
+#: ../src/gtr-window.c:113 ../src/gtr-window.ui.h:1
 msgid "_File"
 msgstr "D_atne"
 
-#: ../src/gtr-window.c:117
+#: ../src/gtr-window.c:114 ../src/gtr-window.ui.h:7
 msgid "_Edit"
 msgstr "R_ediģēt"
 
-#: ../src/gtr-window.c:118
+#: ../src/gtr-window.c:115 ../src/gtr-window.ui.h:19
 msgid "_View"
 msgstr "_Skats"
 
-#: ../src/gtr-window.c:119
+#: ../src/gtr-window.c:116 ../src/gtr-window.ui.h:45
 msgid "_Search"
 msgstr "_Meklēt"
 
-#: ../src/gtr-window.c:120
+#: ../src/gtr-window.c:117 ../src/gtr-window.ui.h:22
 msgid "_Go"
 msgstr "_Iet"
 
-#: ../src/gtr-window.c:121
+#: ../src/gtr-window.c:118
 msgid "_Tools"
 msgstr "_Rīki"
 
-#: ../src/gtr-window.c:122
+#: ../src/gtr-window.c:119 ../src/gtr-window.ui.h:48
 msgid "_Documents"
 msgstr "_Dokumenti"
 
-#: ../src/gtr-window.c:126
+#: ../src/gtr-window.c:123 ../src/gtr-window.ui.h:2
 msgid "Open a PO file"
 msgstr "Atvērt PO datni"
 
-#: ../src/gtr-window.c:128
+#: ../src/gtr-window.c:125 ../src/gtr-window.ui.h:3
 msgid "_Recent Files"
 msgstr "_Nesenās datnes"
 
 #. Edit menu
-#: ../src/gtr-window.c:132
+#: ../src/gtr-window.c:129
 msgid "T_oolbar"
 msgstr "Rīkj_osla"
 
-#: ../src/gtr-window.c:134 ../src/gtr-window.c:174
+#: ../src/gtr-window.c:131 ../src/gtr-window.c:171
 msgid "_Header..."
 msgstr "_Galvene..."
 
-#: ../src/gtr-window.c:143
+#: ../src/gtr-window.c:140 ../src/gtr-window.ui.h:4
 msgid "Save the current file"
 msgstr "Saglabāt pašreizējo datni"
 
-#: ../src/gtr-window.c:146
+#: ../src/gtr-window.c:143 ../src/gtr-window.ui.h:5
 msgid "Save the current file with another name"
 msgstr "Saglabāt pašreizējo datni ar citu nosaukumu"
 
-#: ../src/gtr-window.c:152
+#: ../src/gtr-window.c:149 ../src/gtr-window.ui.h:6
 msgid "Close the current file"
 msgstr "Aizvērt pašreizējo datni"
 
-#: ../src/gtr-window.c:157
+#: ../src/gtr-window.c:154 ../src/gtr-window.ui.h:8
 msgid "Undo last operation"
 msgstr "Atsaukt pēdējo darbību"
 
-#: ../src/gtr-window.c:160
+#: ../src/gtr-window.c:157 ../src/gtr-window.ui.h:9
 msgid "Redo last undone operation"
 msgstr "Atsaukt pēdējās darbības atsaukšanu"
 
-#: ../src/gtr-window.c:163
+#: ../src/gtr-window.c:160 ../src/gtr-window.ui.h:10
 msgid "Cut the selected text"
 msgstr "Izgriezt izvēlēto tekstu"
 
-#: ../src/gtr-window.c:166
+#: ../src/gtr-window.c:163 ../src/gtr-window.ui.h:11
 msgid "Copy the selected text"
 msgstr "Kopēt izvēlēto tekstu"
 
-#: ../src/gtr-window.c:169
+#: ../src/gtr-window.c:166 ../src/gtr-window.ui.h:12
 msgid "Paste the contents of the clipboard"
 msgstr "Ielīmēt starpliktuves saturu"
 
-#: ../src/gtr-window.c:172
+#: ../src/gtr-window.c:169 ../src/gtr-window.ui.h:13
 msgid "Clear the selected translation"
 msgstr "Attīrīt izvēlēto tulkojumu"
 
-#: ../src/gtr-window.c:176
+#: ../src/gtr-window.c:173 ../src/gtr-window.ui.h:16
 msgid "Copy _Message to Translation"
 msgstr "Kopēt _virkni uz tulkojumu"
 
-#: ../src/gtr-window.c:178
+#: ../src/gtr-window.c:175 ../src/gtr-window.ui.h:15
 msgid "Copy original message contents to the translation field"
 msgstr "Kopēt sākotnējās virknes saturu tulkojuma laukā"
 
-#: ../src/gtr-window.c:180
+#: ../src/gtr-window.c:177 ../src/gtr-window.ui.h:18
 msgid "Toggle _Fuzzy Status"
 msgstr "Pārslēgt _virknes nepilnības statusu"
 
-#: ../src/gtr-window.c:181
+#: ../src/gtr-window.c:178 ../src/gtr-window.ui.h:17
 msgid "Toggle fuzzy status of a message"
 msgstr "Pārslēgt virknes nepilnības statusu"
 
 #. View menu
-#: ../src/gtr-window.c:188
+#: ../src/gtr-window.c:185 ../src/gtr-window.ui.h:21
 msgid "_Message Details"
 msgstr "_Sīkāk par virkni"
 
-#: ../src/gtr-window.c:189
+#: ../src/gtr-window.c:186
 msgid "Show the Context panel"
 msgstr "Rādīt konteksta rūti"
 
 #. Go menu
-#: ../src/gtr-window.c:193
+#: ../src/gtr-window.c:190 ../src/gtr-window.ui.h:23
 msgid "_Previous Message"
 msgstr "Ie_priekšējā virkne"
 
-#: ../src/gtr-window.c:194
+#: ../src/gtr-window.c:191 ../src/gtr-window.ui.h:24
 msgid "Move back one message"
 msgstr "Paiet vienu virkni atpakaļ"
 
-#: ../src/gtr-window.c:196
+#: ../src/gtr-window.c:193 ../src/gtr-window.ui.h:25
 msgid "_Next Message"
 msgstr "_Nākamā virkne"
 
-#: ../src/gtr-window.c:197
+#: ../src/gtr-window.c:194 ../src/gtr-window.ui.h:26
 msgid "Move forward one message"
 msgstr "Paiet vienu virkni uz priekšu"
 
-#: ../src/gtr-window.c:199
+#: ../src/gtr-window.c:196
 msgid "_Go to Message..."
 msgstr "_Iet uz virkni..."
 
-#: ../src/gtr-window.c:200
+#: ../src/gtr-window.c:197 ../src/gtr-window.ui.h:28
 msgid "Jumps to a specific message"
 msgstr "Pāriet uz noteikto virkni"
 
-#: ../src/gtr-window.c:202
+#: ../src/gtr-window.c:199 ../src/gtr-window.ui.h:29
 msgid "_First Message"
 msgstr "Pi_rmā virkne"
 
-#: ../src/gtr-window.c:203
+#: ../src/gtr-window.c:200 ../src/gtr-window.ui.h:30
 msgid "Go to the first message"
 msgstr "Iet uz pirmo virkni"
 
-#: ../src/gtr-window.c:205
+#: ../src/gtr-window.c:202 ../src/gtr-window.ui.h:31
 msgid "_Last Message"
 msgstr "Pēdē_jā virkne"
 
-#: ../src/gtr-window.c:206
+#: ../src/gtr-window.c:203 ../src/gtr-window.ui.h:32
 msgid "Go to the last message"
 msgstr "Iet uz pēdējo virkni"
 
-#: ../src/gtr-window.c:208
+#: ../src/gtr-window.c:205 ../src/gtr-window.ui.h:36
 msgid "Next Fuz_zy"
 msgstr "Nākamā nepilnī_gā"
 
-#: ../src/gtr-window.c:209
+#: ../src/gtr-window.c:206 ../src/gtr-window.ui.h:35
 msgid "Go to the next fuzzy message"
 msgstr "Iet uz nākamo nepilnīgo virkni"
 
-#: ../src/gtr-window.c:211
+#: ../src/gtr-window.c:208 ../src/gtr-window.ui.h:34
 msgid "Previous Fuzz_y"
 msgstr "I_epriekšējā nepilnīgā"
 
-#: ../src/gtr-window.c:212
+#: ../src/gtr-window.c:209 ../src/gtr-window.ui.h:33
 msgid "Go to the previous fuzzy message"
 msgstr "Iet uz iepriekšējo nepilnīgo virkni"
 
-#: ../src/gtr-window.c:214
+#: ../src/gtr-window.c:211 ../src/gtr-window.ui.h:40
 msgid "Next _Untranslated"
 msgstr "Nākamā neizt_ulkotā"
 
-#: ../src/gtr-window.c:215
+#: ../src/gtr-window.c:212 ../src/gtr-window.ui.h:39
 msgid "Go to the next untranslated message"
 msgstr "Iet uz nākamo neiztulkoto virkni"
 
-#: ../src/gtr-window.c:218
+#: ../src/gtr-window.c:215 ../src/gtr-window.ui.h:38
 msgid "Previ_ous Untranslated"
 msgstr "Iepriekšējā neiztulk_otā"
 
-#: ../src/gtr-window.c:219
+#: ../src/gtr-window.c:216 ../src/gtr-window.ui.h:37
 msgid "Go to the previous untranslated message"
 msgstr "Iet uz iepriekšējo neiztulkoto virkni"
 
-#: ../src/gtr-window.c:222
+#: ../src/gtr-window.c:219 ../src/gtr-window.ui.h:44
 msgid "Next Fu_zzy or Untranslated"
 msgstr "Nākošā nepilnīgā vai nei_ztulkotā"
 
-#: ../src/gtr-window.c:224
+#: ../src/gtr-window.c:221 ../src/gtr-window.ui.h:43
 msgid "Go to the next fuzzy or untranslated message"
 msgstr "Iet uz nākamo aptuveno vai neiztulkoto virkni"
 
-#: ../src/gtr-window.c:227
+#: ../src/gtr-window.c:224 ../src/gtr-window.ui.h:42
 msgid "Pre_vious Fuzzy or Untranslated"
 msgstr "Iepriekšējā aptu_venā vai neiztulkotā"
 
-#: ../src/gtr-window.c:229
+#: ../src/gtr-window.c:226 ../src/gtr-window.ui.h:41
 msgid "Go to the previous fuzzy or untranslated message"
 msgstr "Iet uz iepriekšējo nepilnīgo vai neiztulkoto virkni"
 
-#: ../src/gtr-window.c:234
+#: ../src/gtr-window.c:231 ../src/gtr-window.ui.h:46
 msgid "Search for text"
 msgstr "Meklēt tekstu"
 
-#: ../src/gtr-window.c:237
+#: ../src/gtr-window.c:234 ../src/gtr-window.ui.h:47
 msgid "Search for and replace text"
 msgstr "Meklēt un aizvietot tekstu"
 
 #. Documents menu
-#: ../src/gtr-window.c:241
+#: ../src/gtr-window.c:238 ../src/gtr-window.ui.h:49
 msgid "_Save All"
 msgstr "_Saglabāt visas"
 
-#: ../src/gtr-window.c:242
+#: ../src/gtr-window.c:239 ../src/gtr-window.ui.h:50
 msgid "Save all open files"
 msgstr "Saglabāt visas atvērtās datnes"
 
-#: ../src/gtr-window.c:244
+#: ../src/gtr-window.c:241 ../src/gtr-window.ui.h:51
 msgid "_Close All"
 msgstr "_Aizvērt visas"
 
-#: ../src/gtr-window.c:245
+#: ../src/gtr-window.c:242 ../src/gtr-window.ui.h:52
 msgid "Close all open files"
 msgstr "Aizvērt visas atvērtās datnes"
 
-#: ../src/gtr-window.c:247
+#: ../src/gtr-window.c:244 ../src/gtr-window.ui.h:54
 msgid "_Previous Document"
 msgstr "Ie_priekšējais dokuments"
 
-#: ../src/gtr-window.c:249
+#: ../src/gtr-window.c:246 ../src/gtr-window.ui.h:53
 msgid "Activate previous document"
 msgstr "Aktivizēt iepriekšējo dokumentu"
 
-#: ../src/gtr-window.c:251
+#: ../src/gtr-window.c:248 ../src/gtr-window.ui.h:56
 msgid "_Next Document"
 msgstr "_Nākamais dokuments"
 
-#: ../src/gtr-window.c:253
+#: ../src/gtr-window.c:250 ../src/gtr-window.ui.h:55
 msgid "Activate next document"
 msgstr "Aktivizēt nākamo dokumentu"
 
-#: ../src/gtr-window.c:441
+#: ../src/gtr-window.c:419
 msgid "Untranslated"
 msgstr "nav iztulkota"
 
-#: ../src/gtr-window.c:444
+#: ../src/gtr-window.c:422
 msgid "Translated"
 msgstr "iztulkota"
 
-#: ../src/gtr-window.c:447
+#: ../src/gtr-window.c:425
 msgid "Fuzzy"
 msgstr "nepilnīga"
 
-#: ../src/gtr-window.c:454
+#: ../src/gtr-window.c:432
 #, c-format
 msgid "Current: %d"
 msgstr "Pašreizējā: %d"
 
-#: ../src/gtr-window.c:455
+#: ../src/gtr-window.c:433
 #, c-format
 msgid "Total: %d"
 msgstr "Kopā: %d"
 
-#: ../src/gtr-window.c:456
+#: ../src/gtr-window.c:434
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
@@ -1686,7 +1693,7 @@ msgstr[0] "%d iztulkota"
 msgstr[1] "%d iztulkotas"
 msgstr[2] "%d iztulkotu"
 
-#: ../src/gtr-window.c:459
+#: ../src/gtr-window.c:437
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
@@ -1694,7 +1701,7 @@ msgstr[0] "%d nepilnīga"
 msgstr[1] "%d nepilnīgas"
 msgstr[2] "%d nepilnīgu"
 
-#: ../src/gtr-window.c:461
+#: ../src/gtr-window.c:439
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1703,44 +1710,79 @@ msgstr[1] "%d neiztulkotas"
 msgstr[2] "%d neiztulkotu"
 
 #. Translators: %s is a URI
-#: ../src/gtr-window.c:515
+#: ../src/gtr-window.c:493
 #, c-format
 msgid "Activate '%s'"
 msgstr "Aktivizēt “%s”"
 
 #. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:688
+#: ../src/gtr-window.c:666
 #, c-format
 msgid "*%s - gtranslator"
 msgstr "*%s — gtranslator"
 
 #. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:691
+#: ../src/gtr-window.c:669
 #, c-format
 msgid "%s - gtranslator"
 msgstr "%s — gtranslator"
 
-#: ../src/gtr-window.c:697
+#: ../src/gtr-window.c:675
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/gtr-window.c:1078
+#: ../src/gtr-window.c:1039
 msgid "Toolbar Editor"
 msgstr "Rīkjoslas redaktors"
 
-#: ../src/gtr-window.c:1204
+#: ../src/gtr-window.c:1165
 msgid "No profile"
 msgstr "Nav profila"
 
-#: ../src/gtr-window.c:1233
+#: ../src/gtr-window.c:1194
 msgid "Profile for the active document"
 msgstr "Aktīvā dokumenta profils"
 
-#: ../src/main.c:101
+#: ../src/gtr-window.ui.h:14
+#| msgid "Header"
+msgid "_Header…"
+msgstr "_Galvene…"
+
+#: ../src/gtr-window.ui.h:20
+#| msgid "Show the Context panel"
+msgid "Show the context panel"
+msgstr "Rādīt konteksta rūti"
+
+#: ../src/gtr-window.ui.h:27
+#| msgid "Go to Message"
+msgid "_Go to Message…"
+msgstr "_Iet uz virkni…"
+
+#: ../src/gtr-window.ui.h:57
+#| msgctxt "alternate lang"
+#| msgid "_Open"
+msgid "_Open"
+msgstr "_Atvērt"
+
+#: ../src/gtr-window.ui.h:58
+#| msgid "Save"
+msgid "_Save"
+msgstr "_Saglabāt"
+
+#: ../src/gtr-window.ui.h:59
+#| msgid "Undo"
+msgid "_Undo"
+msgstr "_Atsaukt"
+
+#: ../src/gtr-window.ui.h:60
+msgid "_Redo"
+msgstr "Ata_tsaukt"
+
+#: ../src/main.c:98
 msgid "- Edit PO files"
 msgstr "- Rediģēt PO datnes"
 
-#: ../src/main.c:105
+#: ../src/main.c:102
 #, c-format
 msgid ""
 "%s\n"
@@ -1788,6 +1830,43 @@ msgstr "Izņemt izvēlēto rīkjoslu"
 #: ../src/toolbareditor/egg-toolbar-editor.c:489
 msgid "Separator"
 msgstr "Atdalītājs"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"large\">Virknes, ko pievienot datubāzei</"
+#~ "span>"
+
+#~ msgid "<b>Translator name:</b>"
+#~ msgstr "<b>Tulkotāja vārds:</b>"
+
+#~ msgid "<b>Translator email:</b>"
+#~ msgstr "<b>Tulkotāja e-pasts:</b>"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
+#~ "profile?</span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"large\">Vai tiešām vēlaties dzēst šo profilu?"
+#~ "</span>"
+
+#~ msgid "Plugins"
+#~ msgstr "Spraudņi"
+
+#~ msgid "Message Table"
+#~ msgstr "Virkņu tabula"
+
+#~ msgid "<b>Original Message:</b>"
+#~ msgstr "<b>Sākotnējā virkne:</b>"
+
+#~ msgid "<b>Translate_d Text:</b>"
+#~ msgstr "<b>Iztu_lkotais teksts:</b>"
+
+#~ msgid "Translation Fields"
+#~ msgstr "Tulkošanas lauki"
+
+#~ msgid "Message Details"
+#~ msgstr "Sīkāk par virkni"
 
 #, fuzzy
 #~ msgid "The GNOME translation program"
@@ -2386,9 +2465,6 @@ msgstr "Atdalītājs"
 #~ msgid "gtranslator's homepage on the web"
 #~ msgstr "gtranslator mājas lapa tīmeklī"
 
-#~ msgid "Save"
-#~ msgstr "Saglabāt"
-
 #~ msgid "Save as"
 #~ msgstr "Saglabāt kā"
 
@@ -2397,12 +2473,6 @@ msgstr "Atdalītājs"
 
 #~ msgid "Update"
 #~ msgstr "Atjaunināt"
-
-#~ msgid "Header"
-#~ msgstr "Galvene"
-
-#~ msgid "Undo"
-#~ msgstr "Atsaukt"
 
 #~ msgid "First"
 #~ msgstr "Pirmā"
@@ -2709,9 +2779,6 @@ msgstr "Atdalītājs"
 
 #~ msgid "Farsi"
 #~ msgstr "Farsu"
-
-#~ msgid "Are you sure you want to remove ALL translations from this po file?"
-#~ msgstr "Vai jūs tiešām vēlaties dzēst VISUS tūlkojumus no šī po faila?"
 
 #~ msgid "Go!"
 #~ msgstr "Iet!"
