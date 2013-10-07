@@ -6,7 +6,7 @@ SUBDIRS = \
 
 @INTLTOOL_XML_RULE@
 appdatadir = $(datadir)/appdata
-dist_appdata_DATA = $(appdata_in_files:.xml.in=.xml)
+appdata_DATA = $(appdata_in_files:.xml.in=.xml)
 appdata_in_files = gtranslator.appdata.xml.in
 
 pkgconfigdir = $(libdir)/pkgconfig
@@ -33,6 +33,7 @@ EXTRA_DIST =					\
 
 CLEANFILES =			\
 	gtranslator.appdata.xml \
+	$(appdata_DATA)		\
 	$(gsettings_SCHEMAS)	\
 	$(pkgconfig_DATA)
 
