@@ -21,13 +21,12 @@ ui_DATA =			\
 
 gsettings_SCHEMAS = org.gnome.gtranslator.gschema.xml
 
-@INTLTOOL_XML_NOMERGE_RULE@
-
 @GSETTINGS_RULES@
 
 
 EXTRA_DIST =					\
 	$(ui_DATA)				\
+	$(appdata_in_files)			\
 	org.gnome.gtranslator.gschema.xml.in	\
 	gtranslator.pc.in
 
