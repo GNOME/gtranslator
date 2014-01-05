@@ -6,7 +6,8 @@
  *			Kevin Vandersloot <kfv101@psu.edu>
  *			Thomas Ziehmer <thomas@kabalak.net>
  *			Peeter Vois <peeter@kabalak.net>
-			Seán de Búrca <leftmostcat@gmail.com>
+ *			Seán de Búrca <leftmostcat@gmail.com>
+ *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
  *     the Free Software Foundation, either version 3 of the License, or
