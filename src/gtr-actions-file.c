@@ -3,7 +3,7 @@
  * 			Fatih Demir <kabalak@kabalak.net>
  *			Ross Golder <ross@golder.org>
  *			Gediminas Paulauskas <menesis@kabalak.net>
-			Pablo Sanxiao <psanxiao@gmail.com>
+ *			Pablo Sanxiao <psanxiao@gmail.com>
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
