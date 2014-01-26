@@ -9,23 +9,23 @@
 # Mario Blättermann <mariobl@freenet.de>, 2009, 2010.
 # Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2010, 2011.
 # Christian Kirbach <christian.kirbach@gmail.com>, 2008-2010, 2010, 2012, 2013.
-# Simon Linden <xhi2018@gmail.com>, 2013.
+# Simon Linden <xhi2018@gmail.com>, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-19 14:16+0000\n"
-"PO-Revision-Date: 2013-12-28 10:12+0100\n"
-"Last-Translator: Simon Linden <xhi2018@gmail.com>\n"
+"POT-Creation-Date: 2014-01-08 22:55+0000\n"
+"PO-Revision-Date: 2014-01-19 14:03+0100\n"
+"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: ../data/gtranslator.appdata.xml.in.h:1
 msgid ""
@@ -36,13 +36,13 @@ msgid ""
 "messages in the po file), easy navigation and editing of translation "
 "messages and comments of the translation where accurate."
 msgstr ""
-"Gtranslator ist ein erweiterter gettext po-Datei Editor für die GNOME "
-"Desktop-Umgebung. Er kann sämtliche gettext po-Dateien bearbeiten und "
-"beinhaltet sehr nützliche Funktionen wie Suchen/Ersetzen, einen "
-"Übersetzungsspeicher, unterschiedliche Übersetzungsprofile, "
-"Zeichenkettentabelle (für eine Übersicht der Übersetzungen/Zeichenketten in "
-"der po-Datei), einfache Navigation und Bearbeitung von übersetzten "
-"Textstellen und Kommentieren von Übersetzungen."
+"Gtranslator ist ein erweitertes gettext po-Datei Bearbeitungsprogramm für "
+"die GNOME Arbeitsumgebung. Er kann sämtliche gettext po-Dateien bearbeiten "
+"und enthält sehr nützliche Funktionen wie Suchen/Ersetzen, einen "
+"Übersetzungsspeicher, unterschiedliche Übersetzungsprofile, eine "
+"Übersetzungsliste (für eine Übersicht der Übersetzungen/Zeichenketten in der "
+"po-Datei), einfache Navigation und Bearbeitung von übersetzten Textstellen "
+"und Kommentieren von Übersetzungen."
 
 #: ../data/gtranslator.appdata.xml.in.h:2
 msgid ""
@@ -51,8 +51,8 @@ msgid ""
 "a source code viewer."
 msgstr ""
 "Gtranslator bietet zudem ein Plugin-System mit vielen interessanten Plugins "
-"wie alternative Sprachen, Marken einfügen, Open-Tran, Subversion-Integration "
-"und einer Quelltextansicht."
+"wie alternative Sprachen, einfügen von XML-Elementen, Open Tran, Subversion-"
+"Integration und einer Quelltextansicht."
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:1 ../src/gtr-application.c:328
 msgid "Gtranslator"
@@ -60,11 +60,11 @@ msgstr "Gtranslator"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:2
 msgid "PO File Editor"
-msgstr "Editor für PO-Dateien"
+msgstr "Bearbeitungsprogramm für PO-Dateien"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:3
 msgid "Gtranslator PO File Editor"
-msgstr "Gtranslator Anwendungsübersetzer"
+msgstr "Gtranslator Bearbeitungsprogramm für PO-Dateien"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:4
 msgid "Translate and localize applications and libraries"
@@ -154,7 +154,7 @@ msgstr ""
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:17
 msgid "Editor font"
-msgstr "Schriftart des Editors"
+msgstr "Schriftart des Bearbeitungsprogramms"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:18
 msgid "Custom font to use for edit fields."
@@ -233,7 +233,7 @@ msgstr "Besonderheit von Gtranslator"
 
 #: ../data/po.lang.h:3
 msgid "Tag"
-msgstr "Marke"
+msgstr "XML-Element"
 
 #: ../data/po.lang.h:4
 msgid "Special variable"
@@ -345,7 +345,7 @@ msgstr "Den Systemeditor verwenden"
 #: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:2
 msgid "Whether use the system editor to show the source code"
 msgstr ""
-"Legt fest, ob der Systemeditor zum Anzeigen von Quellcode verwendet wird"
+"Legt fest, ob der Systemeditor zum Anzeigen von Quelltext verwendet wird"
 
 #: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:3
 msgid "The Editor to Launch"
@@ -353,7 +353,7 @@ msgstr "Der zu startende Editor"
 
 #: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:4
 msgid "The command to launch the editor you want to use"
-msgstr "Der Befehl zum Starten des gewünschten Editors"
+msgstr "Der Befehl zum Starten des gewünschten Bearbeitungsprogramms"
 
 #: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:5
 msgid "Arguments for the Command"
@@ -491,35 +491,36 @@ msgstr "Fenster in den Vollbildmodus schalten"
 
 #: ../plugins/insert-params/gtr-insert-params-plugin.c:113
 msgid "_Next Param"
-msgstr "_Nächster Platzhalter"
+msgstr "_Nächste Platzhaltervariable"
 
 #: ../plugins/insert-params/gtr-insert-params-plugin.c:114
 msgid "Insert the next param of the message"
-msgstr "Den nächsten Platzhalter in die Zeichenkette einfügen"
+msgstr "Nächste Platzhaltervariable in die Zeichenkette einfügen"
 
 #: ../plugins/insert-params/gtr-insert-params-plugin.c:116
 msgid "_Insert Params"
-msgstr "Platzhalter _einfügen"
+msgstr "Platzhaltervariable _einfügen"
 
 #: ../plugins/insert-params/gtr-insert-params-plugin.c:117
 msgid "_Next Tag"
-msgstr "_Nächste Marke"
+msgstr "_Nächstes XML-Element"
 
 #: ../plugins/insert-params/gtr-insert-params-plugin.c:118
 msgid "Insert the next tag of the message"
-msgstr "Die nächste Marke der Übersetzung einfügen"
+msgstr "Nächstes XML-Element in die Übersetzung einfügen"
 
 #: ../plugins/insert-params/gtr-insert-params-plugin.c:120
 msgid "_Insert Tags"
-msgstr "Marken _einfügen"
+msgstr "XML-Element _einfügen"
 
 #: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:1
 msgid "Insert Params or Tags"
-msgstr "Platzhalter oder Marken einfügen"
+msgstr "Platzhaltervariablen oder XML-Elemente einfügen"
 
 #: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:2
 msgid "Parameters and tags detection featuring easy insertion."
-msgstr "Platzhalter und Marken erkennen mit einfachem Einfügen."
+msgstr ""
+"Einfaches Erkennen und Einfügen von Platzhaltervariablen und XML-Elementen."
 
 #: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
 msgid "Open Tran Settings"
@@ -578,7 +579,7 @@ msgstr "Antwort des Servers kann nicht verarbeitet werden, kein Array? %s\n"
 #: ../plugins/open-tran/gtr-open-tran-panel.c:287
 #, c-format
 msgid "WRONG! Can't get result element %d\n"
-msgstr "FALSCH! Ergebniselement »%d« kann nicht geholt werden\n"
+msgstr "FEHLER! Ergebniselement »%d« kann nicht geholt werden\n"
 
 #: ../plugins/open-tran/gtr-open-tran-panel.c:297
 #, c-format
@@ -603,7 +604,7 @@ msgid "WRONG! Malformed project: %d\n"
 msgstr "FEHLER! Ungültiges Projekt: %d\n"
 
 #: ../plugins/open-tran/gtr-open-tran-panel.c:359
-#: ../src/gtr-actions-search.c:192
+#: ../src/gtr-actions-search.c:191
 msgid "Phrase not found"
 msgstr "Begriff nicht gefunden"
 
@@ -642,7 +643,7 @@ msgstr "Open-Tran.eu"
 
 #: ../plugins/open-tran/gtr-open-tran-panel.c:510
 msgid "Look for:"
-msgstr "Nach_schlagen:"
+msgstr "Nachschlagen:"
 
 #: ../plugins/open-tran/gtr-open-tran-plugin.c:162
 #: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:1
@@ -829,7 +830,7 @@ msgstr "Derzeitige Entwickler"
 
 #: ../src/gtr-actions-app.c:57
 msgid "Previous Developers"
-msgstr "Vorhergehende Entwickler"
+msgstr "Vorherige Entwickler"
 
 #: ../src/gtr-actions-app.c:66
 msgid "Contributors"
@@ -840,8 +841,8 @@ msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
 msgstr ""
-"Programmgarnitur zum Bearbeiten von Übersetzungen und der Lokalisierung\n"
-"von Programmen und Bibliotheken"
+"Programm zum Bearbeiten von Übersetzungsdateien zur Lokalisierung von "
+"Programmen und Bibliotheken."
 
 #: ../src/gtr-actions-app.c:106
 msgid "About Gtranslator"
@@ -882,14 +883,14 @@ msgstr "Datei speichern unter …"
 msgid "Files saved."
 msgstr "Dateien wurden gespeichert."
 
-#: ../src/gtr-actions-search.c:171
+#: ../src/gtr-actions-search.c:170
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
 msgstr[0] "%d Übereinstimmung wurde gefunden und ersetzt"
 msgstr[1] "%d Übereinstimmungen wurden gefunden und ersetzt"
 
-#: ../src/gtr-actions-search.c:180
+#: ../src/gtr-actions-search.c:179
 msgid "Found and replaced one occurrence"
 msgstr "Eine Übereinstimmung wurde gefunden und ersetzt"
 
@@ -961,28 +962,28 @@ msgstr "Profil"
 msgid "Confirmation"
 msgstr "Bestätigung"
 
-#: ../src/gtr-close-confirmation-dialog.c:127
+#: ../src/gtr-close-confirmation-dialog.c:126
 msgid "Close _without Saving"
 msgstr "_Ohne Abspeichern schließen"
 
-#: ../src/gtr-close-confirmation-dialog.c:156
+#: ../src/gtr-close-confirmation-dialog.c:155
 msgid "Question"
 msgstr "Frage"
 
-#: ../src/gtr-close-confirmation-dialog.c:371
+#: ../src/gtr-close-confirmation-dialog.c:370
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr ""
 "Möchten Sie die Änderungen am Dokument »%s« vor dem Schließen speichern?"
 
-#: ../src/gtr-close-confirmation-dialog.c:534
+#: ../src/gtr-close-confirmation-dialog.c:533
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] "Änderungen an %d Dokument werden unwiderruflich verloren gehen"
 msgstr[1] "Änderungen an %d Dokumenten werden unwiderruflich verloren gehen"
 
-#: ../src/gtr-close-confirmation-dialog.c:541
+#: ../src/gtr-close-confirmation-dialog.c:540
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -994,19 +995,19 @@ msgstr[1] ""
 "Es gibt %d Dokumente mit ungesicherten Änderungen. Möchten Sie die "
 "Änderungen vor dem Schließen speichern?"
 
-#: ../src/gtr-close-confirmation-dialog.c:562
+#: ../src/gtr-close-confirmation-dialog.c:561
 msgid "Docum_ents with unsaved changes:"
 msgstr "_Dokumente mit ungesicherten Änderungen:"
 
-#: ../src/gtr-close-confirmation-dialog.c:566
+#: ../src/gtr-close-confirmation-dialog.c:565
 msgid "S_elect the documents you want to save:"
 msgstr "_Wählen Sie die Dokumente, die Sie speichern möchten:"
 
-#: ../src/gtr-close-confirmation-dialog.c:584
+#: ../src/gtr-close-confirmation-dialog.c:583
 msgid "Saving has been disabled by the system administrator."
 msgstr "Das Abspeichern ist vom Systemadministrator deaktiviert worden."
 
-#: ../src/gtr-close-confirmation-dialog.c:586
+#: ../src/gtr-close-confirmation-dialog.c:585
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Alle Änderungen gehen verloren, wenn Sie nicht abspeichern."
 
@@ -1141,19 +1142,19 @@ msgstr "_Sprachkürzel:"
 msgid "_Plural forms:"
 msgstr "Anweisung für _Pluralformen"
 
-#: ../src/gtr-message-table.c:180
+#: ../src/gtr-message-table.c:181
 msgid "Status"
 msgstr "Status"
 
-#: ../src/gtr-message-table.c:192
+#: ../src/gtr-message-table.c:193
 msgid "ID"
 msgstr "Nr."
 
-#: ../src/gtr-message-table.c:207
+#: ../src/gtr-message-table.c:208
 msgid "Original Message"
 msgstr "Ursprüngliche Nachricht"
 
-#: ../src/gtr-message-table.c:222
+#: ../src/gtr-message-table.c:223
 msgid "Translated Message"
 msgstr "Übersetzte Nachricht"
 
@@ -1285,7 +1286,7 @@ msgstr "_Angepasste Schrift verwenden"
 
 #: ../src/gtr-preferences-dialog.ui.h:13
 msgid "Editor _font:"
-msgstr "_Schriftart"
+msgstr "_Schriftart:"
 
 #: ../src/gtr-preferences-dialog.ui.h:14
 msgid "Contents"
@@ -1301,7 +1302,7 @@ msgstr "_Rechtschreibung überprüfen"
 
 #: ../src/gtr-preferences-dialog.ui.h:17
 msgid "Editor"
-msgstr "Editor"
+msgstr "Bearbeitungsprogramm"
 
 #: ../src/gtr-preferences-dialog.ui.h:18
 msgid "Edit Profile"
@@ -1339,19 +1340,19 @@ msgstr "_Name:"
 msgid "Language Settings"
 msgstr "Einstellungen zur Sprache"
 
-#: ../src/gtr-search-dialog.c:348 ../src/gtr-search-dialog.ui.h:1
+#: ../src/gtr-search-dialog.c:347 ../src/gtr-search-dialog.ui.h:1
 msgid "Replace"
 msgstr "Ersetzen"
 
-#: ../src/gtr-search-dialog.c:370
+#: ../src/gtr-search-dialog.c:369
 msgid "Find"
 msgstr "Suchen"
 
-#: ../src/gtr-search-dialog.c:458
+#: ../src/gtr-search-dialog.c:457
 msgid "Replace _All"
 msgstr "_Alle ersetzen"
 
-#: ../src/gtr-search-dialog.c:462
+#: ../src/gtr-search-dialog.c:461
 msgid "_Replace"
 msgstr "_Ersetzen"
 
@@ -1417,7 +1418,7 @@ msgstr "Plural %d"
 msgid "Path:"
 msgstr "Pfad:"
 
-#: ../src/gtr-tab-label.c:278
+#: ../src/gtr-tab-label.c:277
 msgid "Close document"
 msgstr "Dokument schließen"
 
@@ -1429,7 +1430,7 @@ msgstr "_Ursprüngliche Nachricht:"
 msgid "Translate_d Text:"
 msgstr "_Übersetzter Text:"
 
-#: ../src/gtr-utils.c:517
+#: ../src/gtr-utils.c:516
 msgid ""
 "Unable to display help. Please make sure the Gtranslator documentation "
 "package is installed."
@@ -1794,11 +1795,11 @@ msgstr "_Rückgängig"
 msgid "_Redo"
 msgstr "_Wiederholen"
 
-#: ../src/main.c:98
+#: ../src/main.c:97
 msgid "- Edit PO files"
 msgstr "- PO-Dateien bearbeiten"
 
-#: ../src/main.c:102
+#: ../src/main.c:101
 #, c-format
 msgid ""
 "%s\n"
@@ -1815,38 +1816,38 @@ msgstr ""
 #. * produce duplicates, but don't worry about it. If your language
 #. * normally has a mnemonic at the start, please use the _. If not,
 #. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:992
+#: ../src/toolbareditor/egg-editable-toolbar.c:991
 #, c-format
 msgid "Show “_%s”"
 msgstr "»_%s« anzeigen"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1485
+#: ../src/toolbareditor/egg-editable-toolbar.c:1484
 msgid "_Move on Toolbar"
 msgstr "_Auf der Werkzeugleiste verschieben"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1486
+#: ../src/toolbareditor/egg-editable-toolbar.c:1485
 msgid "Move the selected item on the toolbar"
 msgstr "Das markierte Element auf der Werkzeugleiste verschieben"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1487
+#: ../src/toolbareditor/egg-editable-toolbar.c:1486
 msgid "_Remove from Toolbar"
 msgstr "Aus Werkzeugleiste _entfernen"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1488
+#: ../src/toolbareditor/egg-editable-toolbar.c:1487
 msgid "Remove the selected item from the toolbar"
 msgstr "Auswahl aus Werkzeugleiste _entfernen"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1489
+#: ../src/toolbareditor/egg-editable-toolbar.c:1488
 msgid "_Delete Toolbar"
 msgstr "Werkzeugleiste _löschen"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1490
+#: ../src/toolbareditor/egg-editable-toolbar.c:1489
 msgid "Remove the selected toolbar"
 msgstr "Die markierte Werkzeugleiste entfernen"
 
-#: ../src/toolbareditor/egg-toolbar-editor.c:489
+#: ../src/toolbareditor/egg-toolbar-editor.c:488
 msgid "Separator"
-msgstr "Trennelement:"
+msgstr "Trennzeichen"
 
 #~ msgid "Plugins"
 #~ msgstr "Plugins"
