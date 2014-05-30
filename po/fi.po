@@ -6,14 +6,15 @@
 # Ilkka Tuohela <hile@iki.fi>, 2006-2008.
 # Jarkko Ranta <jjranta@cc.joensuu.fi>, 2000-2004.
 # Jiri Grönroos <jiri.gronroos@iki.fi>, 2012, 2013.
+# Lasse Liehu <lasse.liehu@gmail.com>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-12-29 22:08+0000\n"
-"PO-Revision-Date: 2013-03-23 18:19+0200\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
+"cgi?product=gtranslator&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-05-03 09:00+0000\n"
+"PO-Revision-Date: 2014-05-04 02:06+0300\n"
+"Last-Translator: Lasse Liehu <lasse.liehu@gmail.com>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -104,19 +105,19 @@ msgstr "Jos tosi, tekstissä oleva tyhjätila esitetään soveltuvin symbolein."
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:15
 msgid "Use custom font"
-msgstr "Käytä omavalintaista kirjasinta"
+msgstr "Käytä omavalintaista fonttia"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:16
 msgid "If true, use a custom font for edit fields."
-msgstr "Jos tosi, muokkauskentissä käytetään omavalintaista kirjaisinta."
+msgstr "Jos tosi, muokkauskentissä käytetään omavalintaista fonttia."
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:17
 msgid "Editor font"
-msgstr "Muokkaimen kirjasin"
+msgstr "Muokkaimen fontti"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:18
 msgid "Custom font to use for edit fields."
-msgstr "Muokkauskentissä käytettävä omavalintainen kirjasin."
+msgstr "Muokkauskentissä käytettävä omavalintainen fontti."
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:19
 msgid "Remove fuzzy status when message is changed"
@@ -157,8 +158,8 @@ msgstr "Tekstiä ei löydy"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:28
 msgid ""
-"Sort order to use in the message list. Possible values are \"status\", \"id"
-"\", \"original-text\" and \"translated-text\"."
+"Sort order to use in the message list. Possible values are \"status\", "
+"\"id\", \"original-text\" and \"translated-text\"."
 msgstr ""
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:29
@@ -629,15 +630,17 @@ msgstr "Peilipalvelimen osoite"
 msgid "URL of an Open-Tran mirror server"
 msgstr "Open-Tran-peilipalvelimen osoite"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:165
-msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
-msgstr "<span weight=\"bold\" size=\"large\">Sanat lisätty tietokantaa</span>"
+#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
+#, fuzzy
+#| msgid "Add to Database"
+msgid "Strings added to database"
+msgstr "Lisää tietokantaan"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:220
+#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:224
 msgid "Please specify a valid path to build the translation memory"
 msgstr ""
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:287
+#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:291
 msgid "Gtranslator Translation Memory Manager"
 msgstr "Gtranslatorin käännösmuistin hallinta"
 
@@ -670,28 +673,28 @@ msgstr "Käännösmuisti"
 msgid "Get translation suggestions from a data base."
 msgstr "Vastaanota käännösehdotuksia tietokannasta."
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:204
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:207
 #, c-format
 msgid "Insert Option nº %d"
 msgstr "Sisällytä valinta nro %d"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:340
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:325
 msgid "_Use this translation"
 msgstr "_Käytä tätä käännöstä"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:345
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:330
 msgid "_Remove"
 msgstr "_Poista"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:460
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:445
 msgid "Shortcut"
 msgstr "Pikanäppäin"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:469
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:454
 msgid "Level"
 msgstr "Vastaavuus"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:478
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:463
 msgid "String"
 msgstr "Käännös"
 
@@ -763,7 +766,7 @@ msgstr "Nykyiset ylläpitäjät"
 msgid "Current Developers"
 msgstr "Nykyiset kehittäjät"
 
-#: ../src/gtr-actions-app.c:56
+#: ../src/gtr-actions-app.c:57
 msgid "Previous Developers"
 msgstr "Aikaisemmat kehittäjät"
 
@@ -830,7 +833,6 @@ msgid "_New Window"
 msgstr "_Uusi ikkuna"
 
 #: ../src/gtranslator-menu.ui.h:2
-#| msgid "Gtranslator Preferences"
 msgid "_Preferences"
 msgstr "_Asetukset"
 
@@ -877,24 +879,24 @@ msgstr "Tämä avustaja auttaa pääprofiilin luomisessa."
 msgid "Assistant"
 msgstr "Avustaja"
 
-#: ../src/gtr-assistant.c:246
-msgid "<b>Profile name:</b>"
+#: ../src/gtr-assistant.c:247
+#, fuzzy
+#| msgid "<b>Profile name:</b>"
+msgid "Profile name:"
 msgstr "<b>Profiilin nimi:</b>"
 
-#: ../src/gtr-assistant.c:265
-msgid "<b>Translator name:</b>"
-msgstr "<b>Kääntäjän nimi:</b>"
+#: ../src/gtr-assistant.c:289
+#, fuzzy
+#| msgid "Translator's _email:"
+msgid "Translator email:"
+msgstr "Kääntäjän _sähköposti:"
 
-#: ../src/gtr-assistant.c:284
-msgid "<b>Translator email:</b>"
-msgstr "<b>Kääntäjän sähköposti:</b>"
-
-#: ../src/gtr-assistant.c:296 ../src/gtr-assistant.c:388
-#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:1232
+#: ../src/gtr-assistant.c:303 ../src/gtr-assistant.c:395
+#: ../src/gtr-preferences-dialog.c:551 ../src/gtr-window.c:1232
 msgid "Profile"
 msgstr "Profiili"
 
-#: ../src/gtr-assistant.c:408
+#: ../src/gtr-assistant.c:415
 msgid "Confirmation"
 msgstr "Vahvistus"
 
@@ -1151,32 +1153,36 @@ msgstr "Tiedosto %s on vain lukumuodossa, joten sitä ei voi korvata"
 msgid "There was an error writing the PO file: %s"
 msgstr "Virhe tallennettaessa po-tiedostoa: %s"
 
-#: ../src/gtr-preferences-dialog.c:401
-msgid ""
-"<span weight=\"bold\" size=\"large\">Impossible to remove the active "
-"profile</span>"
+#: ../src/gtr-preferences-dialog.c:402
+#, fuzzy
+#| msgid ""
+#| "<span weight=\"bold\" size=\"large\">Impossible to remove the active "
+#| "profile</span>"
+msgid "Impossible to remove the active profile"
 msgstr ""
 "<span weight=\"bold\" size=\"large\">Käytössä olevaa profiilia ei voi "
 "poistaa</span>"
 
-#: ../src/gtr-preferences-dialog.c:405
+#: ../src/gtr-preferences-dialog.c:408
 msgid "Another profile should be selected as active before"
 msgstr ""
 "Jokin toinen profiili tulee ottaa käyttöön ennen nykyisen profiilin poistoa"
 
-#: ../src/gtr-preferences-dialog.c:418
-msgid ""
-"<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
-"profile?</span>"
+#: ../src/gtr-preferences-dialog.c:421
+#, fuzzy
+#| msgid ""
+#| "<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
+#| "profile?</span>"
+msgid "Are you sure you want to delete this profile?"
 msgstr ""
 "<span weight=\"bold\" size=\"large\">Haluatko varmasti poistaa tämän "
 "profiilin?</span>"
 
-#: ../src/gtr-preferences-dialog.c:552
+#: ../src/gtr-preferences-dialog.c:557
 msgid "Active"
 msgstr "Käytössä"
 
-#: ../src/gtr-preferences-dialog.c:643 ../src/gtr-preferences-dialog.ui.h:1
+#: ../src/gtr-preferences-dialog.c:648 ../src/gtr-preferences-dialog.ui.h:1
 msgid "Gtranslator Preferences"
 msgstr "Gtranslatorin asetukset"
 
@@ -1222,11 +1228,11 @@ msgstr "Tee ty_hjätilasta näkyvä"
 
 #: ../src/gtr-preferences-dialog.ui.h:12
 msgid "Use _custom font"
-msgstr "Käytä _omaa kirjasinta"
+msgstr "Käytä _omaa fonttia"
 
 #: ../src/gtr-preferences-dialog.ui.h:13
 msgid "Editor _font:"
-msgstr "Muokkaimen _kirjasin:"
+msgstr "Muokkaimen _fontti:"
 
 #: ../src/gtr-preferences-dialog.ui.h:14
 msgid "Contents"
@@ -1284,19 +1290,19 @@ msgstr "N_imi:"
 msgid "Language Settings"
 msgstr "Kieliasetukset"
 
-#: ../src/gtr-search-dialog.c:326 ../src/gtr-search-dialog.ui.h:1
+#: ../src/gtr-search-dialog.c:348 ../src/gtr-search-dialog.ui.h:1
 msgid "Replace"
 msgstr "Korvaa"
 
-#: ../src/gtr-search-dialog.c:348
+#: ../src/gtr-search-dialog.c:370
 msgid "Find"
 msgstr "Etsi"
 
-#: ../src/gtr-search-dialog.c:436
+#: ../src/gtr-search-dialog.c:458
 msgid "Replace _All"
 msgstr "Korvaa k_aikki"
 
-#: ../src/gtr-search-dialog.c:440
+#: ../src/gtr-search-dialog.c:462
 msgid "_Replace"
 msgstr "Ko_rvaa"
 
@@ -1357,28 +1363,32 @@ msgstr "Tekstissä on virhe:"
 msgid "Plural %d"
 msgstr "Monikko %d"
 
-#: ../src/gtr-tab.c:748
+#: ../src/gtr-tab.c:749
 msgid "Message Table"
 msgstr "Viestitaulu"
 
-#: ../src/gtr-tab.c:758
-msgid "<b>Original Message:</b>"
-msgstr "<b>Alkuperäinen viesti:</b>"
+#: ../src/gtr-tab.c:759
+#, fuzzy
+#| msgid "Original Message"
+msgid "Original Message:"
+msgstr "Alkuperäisen viesti"
 
-#: ../src/gtr-tab.c:811
-msgid "<b>Translate_d Text:</b>"
-msgstr "<b>_Käännetty teksti:</b>"
+#: ../src/gtr-tab.c:813
+#, fuzzy
+#| msgid "_Translated text"
+msgid "Translate_d Text:"
+msgstr "_Käännetty teksti"
 
-#: ../src/gtr-tab.c:827
+#: ../src/gtr-tab.c:832
 msgid "Translation Fields"
 msgstr "Käännöskentät"
 
-#: ../src/gtr-tab.c:837
+#: ../src/gtr-tab.c:842
 msgid "Message Details"
 msgstr "Viestin tiedot"
 
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1326
+#: ../src/gtr-tab.c:1331
 msgid "Path:"
 msgstr "Polku:"
 
@@ -1394,12 +1404,12 @@ msgstr ""
 "Ohjeen näyttäminen epäonnistui. Varmista, että Gtranslatorin ohjepaketti on "
 "asennettu."
 
-#: ../src/gtr-view.c:84
+#: ../src/gtr-view.c:83
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "gtkspell-virhe: %s\n"
 
-#: ../src/gtr-view.c:86
+#: ../src/gtr-view.c:85
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1773,390 +1783,3 @@ msgstr "Poista valittu työkalupalkki"
 #: ../src/toolbareditor/egg-toolbar-editor.c:489
 msgid "Separator"
 msgstr "Erotin"
-
-#~ msgid "Delete compiled GMO files"
-#~ msgstr "Poista binäärimuotoiset GMO-tiedostot"
-
-#~ msgid "If true, remove compiled GMO binary files when saving."
-#~ msgstr ""
-#~ "Jos tosi, tallennettaessa poistetaan konekäännetyt GMO-binääritiedostot."
-
-#~ msgid "Error from configuration dialog %s"
-#~ msgstr "Virhe asetusikkunasta %s"
-
-#~ msgid "_Delete compiled GMO files"
-#~ msgstr "Poista GMO-binääritiedostot"
-
-#~ msgid "Please check your installation."
-#~ msgstr "Tarkista asennuksesi."
-
-#~ msgid "Unable to open ui file %s. Error: %s"
-#~ msgstr "Käyttöliittymätiedoston %s avaus epäonnistui. Virhe: %s"
-
-#~ msgid "Unable to find the object '%s' inside file %s."
-#~ msgstr "Kohdetta '%s' ei löytynyt tiedostosta %s."
-
-#~ msgid "Quit the program"
-#~ msgstr "Lopeta ohjelma"
-
-#~ msgid "Edit gtranslator preferences"
-#~ msgstr "Muuta gtranslatorin asetuksia"
-
-#~ msgid "_Contents"
-#~ msgstr "_Sisältö"
-
-#~ msgid "    "
-#~ msgstr "    "
-
-#~ msgid "     "
-#~ msgstr "     "
-
-#~ msgid "ERROR: %d %s\n"
-#~ msgstr "VIRHE: %d %s\n"
-
-#~ msgctxt "ChangeLog entry"
-#~ msgid "LANGUAGE"
-#~ msgstr "KIELI"
-
-#~ msgid "Commit Changes"
-#~ msgstr "Toteuta muutokset"
-
-#~ msgid "_Update"
-#~ msgstr "_Päivitä"
-
-#~ msgid "Sync your local copy with the Subversion tree"
-#~ msgstr "Päivitä paikallinen kopio subversion-puusta"
-
-#~ msgid "_Commit"
-#~ msgstr "_Toteuta"
-
-#~ msgid "Commit your changes to the Subversion tree"
-#~ msgstr "Toteuta muutoket subversion-puuhun"
-
-#~ msgid "_Add"
-#~ msgstr "_Lisää"
-
-#~ msgid "Add a new file/directory to the Subversion tree"
-#~ msgstr "Lisää tiedosto tai kansio subversion-puuhun"
-
-#~ msgid "_Diff"
-#~ msgstr "_Vertaa"
-
-#~ msgid "C_heckout"
-#~ msgstr "_Nouda"
-
-#~ msgid "Get a new repository copy"
-#~ msgstr "Hae uusi kopio versiohallinnasta"
-
-#~ msgid "S_ubversion"
-#~ msgstr "S_ubversion"
-
-#~ msgid "  "
-#~ msgstr "  "
-
-#~ msgid "        "
-#~ msgstr "        "
-
-#~ msgid "<b>Diff options:</b>"
-#~ msgstr "<b>Diff-ohjelman valitsimet:</b>"
-
-#~ msgid "<b>Diff program:</b>"
-#~ msgstr "<b>Diff-ohjelma:</b>"
-
-#~ msgid "<b>Directory to checkout:</b>"
-#~ msgstr "<b>Tuotava kansio:</b>"
-
-#~ msgid "<b>Directory to update:</b>"
-#~ msgstr "<b>Päivitettävä kansio:</b>"
-
-#~ msgid "<b>Information:</b>"
-#~ msgstr "<b>Tiedot:</b>"
-
-#~ msgid "<b>Password:</b>"
-#~ msgstr "<b>Salasana:</b>"
-
-#~ msgid "<b>Select files to Commit:</b>"
-#~ msgstr "<b>Valitse vietävät tiedostot:</b>"
-
-#~ msgid "<b>Subversion URL:</b>"
-#~ msgstr "<b>Subversion-URL:</b>"
-
-#~ msgid "<b>Username:</b>"
-#~ msgstr "<b>Käyttäjätunnus:</b>"
-
-#~ msgid "Remember Password"
-#~ msgstr "Muista salasana"
-
-#~ msgid "Remember this decision"
-#~ msgstr "Muista tämä valinta"
-
-#~ msgid "Retrieving status..."
-#~ msgstr "Noudetaan tilaa..."
-
-#~ msgid "Save the diff file"
-#~ msgstr "Tallenna diff-tiedosto"
-
-#~ msgid "Send Changes"
-#~ msgstr "Lähetä muutokset"
-
-#~ msgid "Update repository"
-#~ msgstr "Päivitä versiohallinnasta"
-
-#~ msgid "label"
-#~ msgstr "otsake"
-
-#~ msgid "A Subversion client plugin based on libsvn."
-#~ msgstr "Libsvn-kirjastoon perustuva subversion-asiakas."
-
-#~ msgid "Subversion"
-#~ msgstr "Subversion"
-
-#~ msgid "Authentication canceled"
-#~ msgstr "Tunnistautuminen peruttu"
-
-#~ msgid "Hostname: "
-#~ msgstr "Palvelin: "
-
-#~ msgid "Fingerprint: "
-#~ msgstr "Sormenjälki: "
-
-#~ msgid "Valid from: "
-#~ msgstr "Voimassa alkaen: "
-
-#~ msgid "Valid until: "
-#~ msgstr "Voimassa saakka: "
-
-#~ msgid "Issuer DN: "
-#~ msgstr "Myöntäjän DN: "
-
-#~ msgid "DER certificate: "
-#~ msgstr "DER-varmenne: "
-
-#~ msgid "Deleted: %s"
-#~ msgstr "Poistettu: %s"
-
-#~ msgid "Added: %s"
-#~ msgstr "Lisätty: %s"
-
-#~ msgid "Reverted: %s"
-#~ msgstr "Palautettu: %s"
-
-#~ msgid "Revert failed: %s"
-#~ msgstr "Palautus epäonnistui: %s"
-
-#~ msgid "Updated: %s"
-#~ msgstr "Päivitetty: %s"
-
-#~ msgid "Externally Updated: %s"
-#~ msgstr "Päivitetty muualta: %s"
-
-#~ msgid "Updated to revision %ld."
-#~ msgstr "Päivitettiin revisioon %ld."
-
-#~ msgid "Subversion: Update complete."
-#~ msgstr "Subversion: päivitys valmistui."
-
-#~ msgid "Modified"
-#~ msgstr "Muokattu"
-
-#~ msgid "Deleted"
-#~ msgstr "Poistettu"
-
-#~ msgid "Conflicted"
-#~ msgstr "Ristiriidassa"
-
-#~ msgid "Missing"
-#~ msgstr "Puuttuu"
-
-#~ msgid "Unable to open help file for gtranslator"
-#~ msgstr "Gtranslatorin ohjetiedostoa ei voi avata"
-
-#~ msgid ""
-#~ "This program is free software: you can redistribute it and/or modify it "
-#~ "under the terms of the GNU General Public License as published by the "
-#~ "Free Software Foundation, either version 3 of the License, or (at your "
-#~ "option) any later version."
-#~ msgstr ""
-#~ "Tämä on vapaa ohjelma; sitä on sallittu levittää edelleen ja muuttaa GNU "
-#~ "yleisen lisenssin (GPL lisenssin) ehtojen mukaan  sellaisina kuin Free "
-#~ "Software Foundation on ne julkaissut; joko lisenssin version 3, tai "
-#~ "(valinnan mukaan) minkä tahansa myöhemmän version mukaisesti."
-
-#~ msgid ""
-#~ "This program is distributed in the hope that it will be useful, but "
-#~ "WITHOUT ANY WARRANTY; without even the implied warranty of "
-#~ "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General "
-#~ "Public License for more details."
-#~ msgstr ""
-#~ "Tätä ohjelmaa levitetään siinä toivossa, että se olisi hyödyllinen, mutta "
-#~ "ilman mitään takuuta; ilman edes hiljaista takuuta kaupallisesti "
-#~ "hyväksyttävästä laadusta tai soveltuvuudesta tiettyyn tarkoitukseen. "
-#~ "Katso GPL lisenssistä lisää yksityiskohtia."
-
-#~ msgid ""
-#~ "You should have received a copy of the GNU General Public License along "
-#~ "with this program.  If not, see <http://www.gnu.org/licenses/>."
-#~ msgstr ""
-#~ "Gtranslatorin mukana pitäisi tulla kopio GPL-lisenssistä; jos näin ei "
-#~ "ole, lue lisää sivulta <http://www.gnu.org/licenses/>."
-
-#~ msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
-#~ msgstr "© 1999-2008 The Free Software Foundation, Inc."
-
-#~ msgid "<b>Language:</b>"
-#~ msgstr "<b>Kieli:</b>"
-
-#~ msgid "<b>Team email:</b>"
-#~ msgstr "<b>Kääntäjäryhmän sähköpostiosoite:</b>"
-
-#~ msgid "<b>Language code:</b>"
-#~ msgstr "<b>Kielikoodi:</b>"
-
-#~ msgid "<b>Character set:</b>"
-#~ msgstr "<b>Merkistö:</b>"
-
-#~ msgid "<b>Transfer encoding:</b>"
-#~ msgstr "<b>Muunnoksen merkistökoodaus:</b>"
-
-#~ msgid "<b>Plural forms:</b>"
-#~ msgstr "<b>Monikkomuodot:</b>"
-
-#~ msgid "<b>Select the path to generate the database:</b>"
-#~ msgstr "<b>Valitse polku tietokannan luontia varten:</b>"
-
-#~ msgid "<b>Look for a specific PO filename:</b>"
-#~ msgstr "<b>Etsi tiettyä po-tiedostonimeä:</b>"
-
-#~ msgid "E.g.: gl.po"
-#~ msgstr "Esim gl.po"
-
-#~ msgid "Generate Database"
-#~ msgstr "Luo tietokanta"
-
-#~ msgid "Edit Comment"
-#~ msgstr "Muokkaa kommenttia"
-
-#~ msgid "<b>Write your comments bellow:</b>"
-#~ msgstr "<b>Kirjoita omat kommenttisi alle:</b>"
-
-#~ msgid "Jump To"
-#~ msgstr "Siirry kohtaan"
-
-#~ msgid "gtk-cancel"
-#~ msgstr "gtk-cancel"
-
-#~ msgid "gtk-ok"
-#~ msgstr "gtk-ok"
-
-#~ msgid "<b>Anchor style:</b>"
-#~ msgstr "<b>Ankkurin tyyli:</b>"
-
-#~ msgid "<b>Configuration:</b>"
-#~ msgstr "<b>Asetukset:</b>"
-
-#~ msgid "<b>Contents</b>"
-#~ msgstr "<b>Sisältö</b>"
-
-#~ msgid "Interface"
-#~ msgstr "Käyttöliittymä"
-
-#~ msgid "Show options in translated messages"
-#~ msgstr "Näytä valinnat käännetyissä viesteissä"
-
-#~ msgid ""
-#~ "Text\n"
-#~ "Icons\n"
-#~ "Text + Icons\n"
-#~ "Gnome toolbar setting\n"
-#~ "Tabs"
-#~ msgstr ""
-#~ "Teksti\n"
-#~ "Kuvakkeet\n"
-#~ "Teksti ja kuvakkeet\n"
-#~ "Gnomen työkalupalkin asetukset\n"
-#~ "Välilehdet"
-
-#~ msgid ""
-#~ "<span weight=\"bold\" size=\"large\">The profile name already exists</"
-#~ "span>"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"large\">Tämänniminen profiili on jo "
-#~ "olemassa</span>"
-
-#~ msgid "Example: nplurals=2; plural=(n != 1);"
-#~ msgstr "Esimerkki: nplurals=2; plural=(n != 1);"
-
-#~ msgid "[FILE...]"
-#~ msgstr "[TIEDOSTO...]"
-
-#~ msgid "%s: malformed file name or URI.\n"
-#~ msgstr "%s: virheellinen tiedostonimi tai URI.\n"
-
-#~ msgid "Error during GConf initialization: %s."
-#~ msgstr "Virhe GConfin alustuksessa : %s."
-
-#~ msgid "Error setting the default window icon: %s"
-#~ msgstr "Virhe asettaessa ikkunan oletuskuvaketta: %s"
-
-#~ msgid "Original Text"
-#~ msgstr "Alkuperäinen teksti"
-
-#~ msgid "<b>Path:</b> %s"
-#~ msgstr "<b>Polku:</b> %s"
-
-#~ msgid "Plugin"
-#~ msgstr "Lisäosa"
-
-#~ msgid "Enabled"
-#~ msgstr "Käytössä"
-
-#~ msgid "C_onfigure"
-#~ msgstr "_Asetukset"
-
-#~ msgid "Ac_tivate All"
-#~ msgstr "_Ota kaikki käyttöön"
-
-#~ msgid "_About Plugin"
-#~ msgstr "_Tietoja lisäosasta"
-
-#~ msgid "C_onfigure Plugin"
-#~ msgstr "_Lisäosan asetukset"
-
-#~ msgid "Cannot initialize preferences manager."
-#~ msgstr "Asetusten hallintaa ei voi käynnistää."
-
-#~ msgid "Context"
-#~ msgstr "Konteksti"
-
-#~ msgid "original.db"
-#~ msgstr "original.db"
-
-#~ msgid "translations.db"
-#~ msgstr "translations.db"
-
-#~ msgid "words.db"
-#~ msgstr "words.db"
-
-#~ msgid "C_omment..."
-#~ msgstr "K_ommentti..."
-
-#~ msgid "Edit message comment"
-#~ msgstr "Muokkaa tekstin kommenttia"
-
-#~ msgid "_Context"
-#~ msgstr "_Konteksti"
-
-#~ msgid "Status: %s"
-#~ msgstr "Tila: %s"
-
-#~ msgid "Fuzzy: %d"
-#~ msgstr "Sumeita: %d"
-
-#~ msgid "Untranslated: %d"
-#~ msgstr "Kääntämättä: %d"
-
-#~ msgid "gtranslator - %s"
-#~ msgstr "gtranslator - %s"
-
-#~ msgid "gtranslator - *%s"
-#~ msgstr "gtranslator - *%s"
