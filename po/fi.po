@@ -6,23 +6,24 @@
 #
 # Ilkka Tuohela <hile@iki.fi>, 2006-2008.
 # Jarkko Ranta <jjranta@cc.joensuu.fi>, 2000-2004.
-# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2012, 2013.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2014.
+# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2012, 2013, 2014.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
-"cgi?product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-05-03 09:00+0000\n"
-"PO-Revision-Date: 2014-05-04 02:56+0300\n"
-"Last-Translator: Lasse Liehu <lasse.liehu@gmail.com>\n"
-"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gtranslator&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-09-11 09:12+0000\n"
+"PO-Revision-Date: 2014-09-11 23:01+0300\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
+"Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
 #: ../data/gtranslator.appdata.xml.in.h:1
 msgid ""
@@ -33,6 +34,11 @@ msgid ""
 "messages in the po file), easy navigation and editing of translation "
 "messages and comments of the translation where accurate."
 msgstr ""
+"Gtranslator on gettext-po-tiedostojen muokkain Gnome-työpöydälle. Se "
+"hallitsee kaikenlaisia gettextin mukaisia po-tiedostoja ja sisältää "
+"hyödyllisiä ominaisuuksia, kuten \"etsi ja korvaa\"-toiminnon, "
+"käännösmuistin, useita eri käännösprofiileja, viestitaulun, kommenttien "
+"esittämisen ja ennen kaikkea helpon tavan muokata käännettäviä viestejä. "
 
 #: ../data/gtranslator.appdata.xml.in.h:2
 msgid ""
@@ -40,6 +46,10 @@ msgid ""
 "alternate language, insert tags, open tran, integration with subversion and "
 "a source code viewer."
 msgstr ""
+"Gtranslator sisältää myös liitännäisjärjestelmän. Liitännäisistä "
+"mainittakoon vaihtoehtoiskielten liitännäinen, merkintöjen lisäys, "
+"integraatio Subversion-versionhallintajärjestelmään kanssa sekä "
+"lähdekoodikatselin."
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:1 ../src/gtr-application.c:328
 msgid "Gtranslator"
@@ -175,8 +185,8 @@ msgstr "Viestilistan lajittelujärjestys"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:28
 msgid ""
-"Sort order to use in the message list. Possible values are \"status\", "
-"\"id\", \"original-text\" and \"translated-text\"."
+"Sort order to use in the message list. Possible values are \"status\", \"id"
+"\", \"original-text\" and \"translated-text\"."
 msgstr ""
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:29
@@ -278,7 +288,7 @@ msgstr "Ohjelman komento:"
 
 #: ../plugins/codeview/gtr-codeview-dialog.ui.h:4
 msgid "Line command:"
-msgstr ""
+msgstr "Rivikomento:"
 
 #: ../plugins/codeview/gtr-codeview-plugin.c:129
 #, c-format
@@ -454,17 +464,14 @@ msgid "Place window in the fullscreen state."
 msgstr "Aseta ikkuna koko näytön tilaan."
 
 #: ../plugins/insert-params/gtr-insert-params-plugin.c:113
-#, fuzzy
 msgid "_Next Param"
 msgstr "_Seuraava merkintä"
 
 #: ../plugins/insert-params/gtr-insert-params-plugin.c:114
-#, fuzzy
 msgid "Insert the next param of the message"
 msgstr "Lisää viestin seuraava merkintä"
 
 #: ../plugins/insert-params/gtr-insert-params-plugin.c:116
-#, fuzzy
 msgid "_Insert Params"
 msgstr "_Lisää merkinnät"
 
@@ -481,12 +488,10 @@ msgid "_Insert Tags"
 msgstr "_Lisää merkinnät"
 
 #: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:1
-#, fuzzy
 msgid "Insert Params or Tags"
-msgstr "Lisää merkinnät"
+msgstr "Lisää merkintöjä"
 
 #: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:2
-#, fuzzy
 msgid "Parameters and tags detection featuring easy insertion."
 msgstr "Merkintöjen tunnistus ja helppo lisäys."
 
@@ -764,7 +769,7 @@ msgstr ""
 
 #: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:9
 msgid "Maximum difference in message length"
-msgstr ""
+msgstr "Enimmäiseroavaisuus viestin pituudessa"
 
 #: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:10
 msgid ""
@@ -1123,7 +1128,7 @@ msgstr "Muunnos merkistöstä \"%s\" UTF-8-muotoon ei onnistu"
 #: ../src/gtr-po.c:539 ../src/gtr-po.c:559
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
-msgstr ""
+msgstr "Väliaikaistiedoston tallennus merkistömuunnosta varten epäonnistui"
 
 #: ../src/gtr-po.c:596
 #, c-format
