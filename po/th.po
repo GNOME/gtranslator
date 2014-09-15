@@ -1,19 +1,19 @@
 # Thai translation of gtranslator.
-# Copyright (C) 1999-2012 Free Software Foundation, Inc.
+# Copyright (C) 1999-2014 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gtranslator package.
 #
 # Ross Golder <ross@golder.org>, 1999.
 # Theppitak Karoonboonyanan <thep@linux.thai.net>, 2005-2008.
 # Sira Nokyoongtong <gumaraa@gmail.com>, 2008.
-# Akom Chotiphantawanon <knight2000@gmail.com>, 2011-2013.
+# Akom Chotiphantawanon <knight2000@gmail.com>, 2011-2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-06 16:56+0000\n"
-"PO-Revision-Date: 2013-09-07 22:42+0700\n"
+"POT-Creation-Date: 2014-08-13 09:13+0000\n"
+"PO-Revision-Date: 2014-09-15 20:56+0700\n"
 "Last-Translator: Akom Chotiphantawanon <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "Language: th\n"
@@ -21,6 +21,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../data/gtranslator.appdata.xml.in.h:1
+msgid ""
+"Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
+"environment. It handles all forms of gettext po files and includes very "
+"useful features like find/replace, translation memory, different translator "
+"profiles, messages table (for having an overview of the translations/"
+"messages in the po file), easy navigation and editing of translation "
+"messages and comments of the translation where accurate."
+msgstr ""
+"Gtranslator เป็นเครื่องมือแก้ไขแฟ้ม po ของ gettext แบบพิเศษสำหรับสภาพแวดล้อมเดสก์ท็อป "
+"GNOME สามารถจัดการกับแฟ้ม po ของ gettext ได้ทุกรูปแบบ และมีความสามารถที่เป็นประโยชน์ "
+"เช่น การหา/แทนที่, คลังคำแปล, โพรไฟล์นักแปลหลายคน, ตารางข้อความ "
+"(เพื่อให้เห็นภาพรวมของการแปล/ข้อความในแฟ้ม po), "
+"การเลื่อนและแก้ไขที่ง่ายดายสำหรับข้อความแปลและหมายเหตุของการแปลในจุดที่ถูกต้อง"
+
+#: ../data/gtranslator.appdata.xml.in.h:2
+msgid ""
+"Gtranslator includes also a plugin system with many interesting plugins like "
+"alternate language, insert tags, open tran, integration with subversion and "
+"a source code viewer."
+msgstr ""
+"Gtranslator ยังมีระบบปลั๊กอิน พร้อมกับมีปลั๊กอินที่น่าสนใจมากมาย เช่น ภาษาอื่น, แทรกแท็ก, open "
+"tran, การเชื่อมรวมกับ subversion และเครื่องมือดูซอร์สโค้ด"
 
 #: ../data/desktop/gtranslator.desktop.in.in.h:1 ../src/gtr-application.c:328
 msgid "Gtranslator"
@@ -546,7 +570,7 @@ msgid "WRONG! Malformed project: %d\n"
 msgstr "ผิด! โครงการผิดรูปแบบ: %d\n"
 
 #: ../plugins/open-tran/gtr-open-tran-panel.c:359
-#: ../src/gtr-actions-search.c:192
+#: ../src/gtr-actions-search.c:191
 msgid "Phrase not found"
 msgstr "ไม่พบวลี"
 
@@ -807,13 +831,13 @@ msgstr "บันทึกแฟ้มเป็น..."
 msgid "Files saved."
 msgstr "บันทึกแฟ้มแล้ว"
 
-#: ../src/gtr-actions-search.c:171
+#: ../src/gtr-actions-search.c:170
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
 msgstr[0] "พบและแทนที่ %d แห่ง"
 
-#: ../src/gtr-actions-search.c:180
+#: ../src/gtr-actions-search.c:179
 msgid "Found and replaced one occurrence"
 msgstr "พบและแทนที่แห่งเดียว"
 
@@ -885,45 +909,45 @@ msgstr "โพรไฟล์"
 msgid "Confirmation"
 msgstr "การยืนยัน"
 
-#: ../src/gtr-close-confirmation-dialog.c:127
+#: ../src/gtr-close-confirmation-dialog.c:126
 msgid "Close _without Saving"
 msgstr "_ปิดโดยไม่บันทึก"
 
-#: ../src/gtr-close-confirmation-dialog.c:156
+#: ../src/gtr-close-confirmation-dialog.c:155
 msgid "Question"
 msgstr "คำถาม"
 
-#: ../src/gtr-close-confirmation-dialog.c:371
+#: ../src/gtr-close-confirmation-dialog.c:370
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "บันทึกการเปลี่ยนแปลงในเอกสาร \"%s\" ก่อนปิดหรือไม่?"
 
-#: ../src/gtr-close-confirmation-dialog.c:534
+#: ../src/gtr-close-confirmation-dialog.c:533
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] "การเปลี่ยนแปลงในเอกสารทั้ง %d ฉบับจะสูญหายอย่างถาวร"
 
-#: ../src/gtr-close-confirmation-dialog.c:541
+#: ../src/gtr-close-confirmation-dialog.c:540
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] "มีเอกสาร %d ฉบับที่ยังไม่บันทึก จะบันทึกก่อนปิดหรือไม่?"
 
-#: ../src/gtr-close-confirmation-dialog.c:562
+#: ../src/gtr-close-confirmation-dialog.c:561
 msgid "Docum_ents with unsaved changes:"
 msgstr "เ_อกสารที่มีการแก้ไขแต่ยังไม่บันทึก:"
 
-#: ../src/gtr-close-confirmation-dialog.c:566
+#: ../src/gtr-close-confirmation-dialog.c:565
 msgid "S_elect the documents you want to save:"
 msgstr "เ_ลือกเอกสารที่ต้องการบันทึก:"
 
-#: ../src/gtr-close-confirmation-dialog.c:584
+#: ../src/gtr-close-confirmation-dialog.c:583
 msgid "Saving has been disabled by the system administrator."
 msgstr "การบันทึกถูกผู้ดูแลระบบห้ามไว้"
 
-#: ../src/gtr-close-confirmation-dialog.c:586
+#: ../src/gtr-close-confirmation-dialog.c:585
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "ถ้าคุณไม่บันทึก การแก้ไขทั้งหมดจะสูญหายอย่างถาวร"
 
@@ -1058,19 +1082,19 @@ msgstr "รหัส_ภาษา:"
 msgid "_Plural forms:"
 msgstr "รูป_พหูพจน์:"
 
-#: ../src/gtr-message-table.c:180
+#: ../src/gtr-message-table.c:181
 msgid "Status"
 msgstr "สถานะ"
 
-#: ../src/gtr-message-table.c:192
+#: ../src/gtr-message-table.c:193
 msgid "ID"
 msgstr "เลขที่"
 
-#: ../src/gtr-message-table.c:207
+#: ../src/gtr-message-table.c:208
 msgid "Original Message"
 msgstr "ข้อความต้นฉบับ"
 
-#: ../src/gtr-message-table.c:222
+#: ../src/gtr-message-table.c:223
 msgid "Translated Message"
 msgstr "คำแปล"
 
@@ -1254,19 +1278,19 @@ msgstr "ชื่_อ:"
 msgid "Language Settings"
 msgstr "ค่าตั้งของภาษา"
 
-#: ../src/gtr-search-dialog.c:348 ../src/gtr-search-dialog.ui.h:1
+#: ../src/gtr-search-dialog.c:347 ../src/gtr-search-dialog.ui.h:1
 msgid "Replace"
 msgstr "แทนที่"
 
-#: ../src/gtr-search-dialog.c:370
+#: ../src/gtr-search-dialog.c:369
 msgid "Find"
 msgstr "หา"
 
-#: ../src/gtr-search-dialog.c:458
+#: ../src/gtr-search-dialog.c:457
 msgid "Replace _All"
 msgstr "แทนที่ทั้งห_มด"
 
-#: ../src/gtr-search-dialog.c:462
+#: ../src/gtr-search-dialog.c:461
 msgid "_Replace"
 msgstr "แ_ทนที่"
 
@@ -1332,7 +1356,7 @@ msgstr "พหูพจน์ %d"
 msgid "Path:"
 msgstr "พาธ:"
 
-#: ../src/gtr-tab-label.c:278
+#: ../src/gtr-tab-label.c:277
 msgid "Close document"
 msgstr "ปิดเอกสาร"
 
@@ -1344,19 +1368,19 @@ msgstr "ข้อความ_ต้นฉบับ:"
 msgid "Translate_d Text:"
 msgstr "คำแ_ปล:"
 
-#: ../src/gtr-utils.c:517
+#: ../src/gtr-utils.c:516
 msgid ""
 "Unable to display help. Please make sure the Gtranslator documentation "
 "package is installed."
 msgstr ""
 "ไม่สามารถแสดงวิธีใช้ กรุณาตรวจสอบให้แน่ใจว่าได้ติดตั้งแพกเกจเอกสารของ Gtranslator แล้ว"
 
-#: ../src/gtr-view.c:83
+#: ../src/gtr-view.c:81
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "ข้อผิดพลาด gtkspell: %s\n"
 
-#: ../src/gtr-view.c:85
+#: ../src/gtr-view.c:83
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1703,11 +1727,11 @@ msgstr "เรี_ยกคืน"
 msgid "_Redo"
 msgstr "_ทำซ้ำ"
 
-#: ../src/main.c:101
+#: ../src/main.c:97
 msgid "- Edit PO files"
 msgstr "- แก้ไขแฟ้ม PO"
 
-#: ../src/main.c:105
+#: ../src/main.c:101
 #, c-format
 msgid ""
 "%s\n"
@@ -1723,36 +1747,36 @@ msgstr ""
 #. * produce duplicates, but don't worry about it. If your language
 #. * normally has a mnemonic at the start, please use the _. If not,
 #. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:992
+#: ../src/toolbareditor/egg-editable-toolbar.c:991
 #, c-format
 msgid "Show “_%s”"
 msgstr "แสดงแถบ “_%s”"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1485
+#: ../src/toolbareditor/egg-editable-toolbar.c:1484
 msgid "_Move on Toolbar"
 msgstr "_ย้ายที่ในแถบเครื่องมือ"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1486
+#: ../src/toolbareditor/egg-editable-toolbar.c:1485
 msgid "Move the selected item on the toolbar"
 msgstr "ย้ายรายการที่เลือกในแถบเครื่องมือ"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1487
+#: ../src/toolbareditor/egg-editable-toolbar.c:1486
 msgid "_Remove from Toolbar"
 msgstr "_ลบออกจากแถบเครื่องมือ"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1488
+#: ../src/toolbareditor/egg-editable-toolbar.c:1487
 msgid "Remove the selected item from the toolbar"
 msgstr "ลบรายการที่เลือกออกจากแถบเครื่องมือ"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1489
+#: ../src/toolbareditor/egg-editable-toolbar.c:1488
 msgid "_Delete Toolbar"
 msgstr "_ลบแถบเครื่องมือ"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1490
+#: ../src/toolbareditor/egg-editable-toolbar.c:1489
 msgid "Remove the selected toolbar"
 msgstr "ลบแถบเครื่องมือที่เลือก"
 
-#: ../src/toolbareditor/egg-toolbar-editor.c:489
+#: ../src/toolbareditor/egg-toolbar-editor.c:488
 msgid "Separator"
 msgstr "เส้นแบ่ง"
 
