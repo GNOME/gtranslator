@@ -1,21 +1,21 @@
 /*
  * Copyright (C) 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *		 1998, 1999 Alex Roberts, Evan Lawrence
- * 		 2000  2002 Chema Celorio, Paolo Maggi 
- * 		 2003  2005 Paolo Maggi  
- * 
+ * 		 2000  2002 Chema Celorio, Paolo Maggi
+ * 		 2003  2005 Paolo Maggi
+ *
  * Some funcs based in gedit-view.c file.
- * 
+ *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
  *     the Free Software Foundation, either version 3 of the License, or
  *     (at your option) any later version.
- * 
+ *
  *     This program is distributed in the hope that it will be useful,
  *     but WITHOUT ANY WARRANTY; without even the implied warranty of
  *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *     GNU General Public License for more details.
- * 
+ *
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -192,7 +192,7 @@ gtr_view_class_init (GtrViewClass * klass)
  * gtr_view_new:
  *
  * Creates a new #GtrView. An empty default buffer will be created for you.
- * 
+ *
  * Returns: a new #GtrView
  */
 GtkWidget *
@@ -247,7 +247,7 @@ gtr_view_get_selected_text (GtrView * view,
  * gtr_view_enable_spellcheck:
  * @view: a #GtrView
  * @enable: TRUE if you want enable the spellcheck
- * 
+ *
  * Enables the spellcheck
  **/
 void
@@ -389,7 +389,7 @@ gtr_view_paste_clipboard (GtrView * view)
  * @view: a #GtrView
  * @def: TRUE if you want to use the default font
  * @font_name: The name of the font you want to use in the #GtrView
- * 
+ *
  * Sets the #GtrView font.
  **/
 void
@@ -491,10 +491,10 @@ gtr_view_set_search_text (GtrView * view, const gchar * text, guint flags)
  * gtr_view_get_search_text:
  * @view: a #GtrView
  * @flags: the #GtrSearchFlags of the stored text.
- * 
+ *
  * Returns the text to search for it and the #GtrSearchFlags of that
  * text.
- * 
+ *
  * Returns: the text to search for it.
  */
 gchar *
@@ -515,7 +515,7 @@ gtr_view_get_search_text (GtrView * view, guint * flags)
 /**
  * gtr_view_get_can_search_again:
  * @view: a #GtrView
- * 
+ *
  * Returns: TRUE if it can search again
  */
 gboolean
@@ -533,17 +533,17 @@ gtr_view_get_can_search_again (GtrView * view)
 /**
  * gtr_view_search_forward:
  * @view: a #GtrView
- * @start: start of search 
+ * @start: start of search
  * @end: bound for the search, or %NULL for the end of the buffer
  * @match_start: return location for start of match, or %NULL
  * @match_end: return location for end of match, or %NULL
- * 
+ *
  * Searches forward for str. Any match is returned by setting match_start to the
  * first character of the match and match_end to the first character after the match.
  * The search will not continue past limit.
  * Note that a search is a linear or O(n) operation, so you may wish to use limit
- * to avoid locking up your UI on large buffers. 
- * 
+ * to avoid locking up your UI on large buffers.
+ *
  * Returns: whether a match was found
  */
 gboolean
@@ -624,17 +624,17 @@ gtr_view_search_forward (GtrView * view,
 /**
  * gtr_view_search_backward:
  * @view: a #GtrView
- * @start: start of search 
+ * @start: start of search
  * @end: bound for the search, or %NULL for the end of the buffer
  * @match_start: return location for start of match, or %NULL
  * @match_end: return location for end of match, or %NULL
- * 
+ *
  * Searches backward for str. Any match is returned by setting match_start to the
  * first character of the match and match_end to the first character after the match.
  * The search will not continue past limit.
  * Note that a search is a linear or O(n) operation, so you may wish to use limit
- * to avoid locking up your UI on large buffers. 
- * 
+ * to avoid locking up your UI on large buffers.
+ *
  * Returns: whether a match was found
  */
 gboolean
@@ -718,10 +718,10 @@ gtr_view_search_backward (GtrView * view,
  * @find: the text to find
  * @replace: the text to replace @find
  * @flags: a #GtrSearchFlags
- * 
- * Replaces all matches of @find with @replace and returns the number of 
+ *
+ * Replaces all matches of @find with @replace and returns the number of
  * replacements.
- * 
+ *
  * Returns: the number of replacements made it.
  */
 gint
@@ -774,47 +774,48 @@ gtr_view_replace_all (GtrView * view,
    */
   //priv->stop_cursor_moved_emission = TRUE;
 
-  gtk_text_buffer_begin_user_action (buffer);
-
-  do
-    {
-      found = gtk_text_iter_forward_search (&iter,
+	found = gtk_text_iter_forward_search (&iter,
                                             search_text,
                                             search_flags,
                                             &m_start, &m_end, NULL);
+	if (found)
+		{
+  		gtk_text_buffer_begin_user_action (buffer);
 
-      if (found && GTR_SEARCH_IS_ENTIRE_WORD (flags))
-        {
-          gboolean word;
+  		while (found)
+    		{
+      		if (GTR_SEARCH_IS_ENTIRE_WORD (flags))
+        		{
+          		gboolean word;
 
-          word = gtk_text_iter_starts_word (&m_start) &&
-            gtk_text_iter_ends_word (&m_end);
+          		word = gtk_text_iter_starts_word (&m_start) &&
+            		gtk_text_iter_ends_word (&m_end);
 
-          if (!word)
-            {
-              iter = m_end;
-              continue;
-            }
-        }
+          		if (!word)
+            		{
+             		 	iter = m_end;
+              		continue;
+            		}
+        		}
 
-      if (found)
-        {
-          ++cont;
+        		++cont;
+        		gtk_text_buffer_delete (buffer, &m_start, &m_end);
+        		gtk_text_buffer_insert (buffer, &m_start, replace_text, replace_text_len);
+        		iter = m_start;
 
-          gtk_text_buffer_delete (buffer, &m_start, &m_end);
-          gtk_text_buffer_insert (buffer,
-                                  &m_start, replace_text, replace_text_len);
+  					found = gtk_text_iter_forward_search (&iter,
+                                        		search_text,
+                                        		search_flags,
+                                        		&m_start, &m_end, NULL);
+    		}
 
-          iter = m_start;
-        }
 
-    }
-  while (found);
+  		gtk_text_buffer_end_user_action (buffer);
+		}
 
-  gtk_text_buffer_end_user_action (buffer);
 
   /* re-enable cursor_moved emission and notify
-   * the current position 
+   * the current position
    */
   //priv->stop_cursor_moved_emission = FALSE;
   //emit_cursor_moved (GTK_SOURCE_BUFFER(buffer));
@@ -829,7 +830,7 @@ gtr_view_replace_all (GtrView * view,
  * gtr_view_reload_scheme_color:
  * @view: a #GtrView
  *
- * Reloads the gtksourceview scheme color. Neccessary when the scheme color 
+ * Reloads the gtksourceview scheme color. Neccessary when the scheme color
  * changes.
  */
 void
