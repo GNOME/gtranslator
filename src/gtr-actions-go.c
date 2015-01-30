@@ -26,7 +26,6 @@
 
 #include "gtr-actions.h"
 #include "gtr-jump-dialog.h"
-#include "gtr-po.h"
 #include "gtr-tab.h"
 #include "gtr-window.h"
 
@@ -35,96 +34,72 @@ void
 gtr_message_go_to_first (GtkAction * action, GtrWindow * window)
 {
   GtrTab *current;
-  GtrPo *po;
 
   current = gtr_window_get_active_tab (window);
-  po = gtr_tab_get_po (current);
   gtr_tab_go_to_first (current);
-  _gtr_window_set_sensitive_according_to_message (window, po);
 }
 
 void
 gtr_message_go_to_previous (GtkAction * action, GtrWindow * window)
 {
   GtrTab *current;
-  GtrPo *po;
 
   current = gtr_window_get_active_tab (window);
-  po = gtr_tab_get_po (current);
   gtr_tab_go_to_prev (current);
-  _gtr_window_set_sensitive_according_to_message (window, po);
 }
 
 void
 gtr_message_go_to_next (GtkAction * action, GtrWindow * window)
 {
   GtrTab *current;
-  GtrPo *po;
 
   current = gtr_window_get_active_tab (window);
-  po = gtr_tab_get_po (current);
   gtr_tab_go_to_next (current);
-  _gtr_window_set_sensitive_according_to_message (window, po);
 }
 
 void
 gtr_message_go_to_last (GtkAction * action, GtrWindow * window)
 {
   GtrTab *current;
-  GtrPo *po;
 
   current = gtr_window_get_active_tab (window);
-  po = gtr_tab_get_po (current);
   gtr_tab_go_to_last (current);
-  _gtr_window_set_sensitive_according_to_message (window, po);
 }
 
 void
 gtr_message_go_to_next_fuzzy (GtkAction * action, GtrWindow * window)
 {
   GtrTab *current;
-  GtrPo *po;
 
   current = gtr_window_get_active_tab (window);
-  po = gtr_tab_get_po (current);
-  if (gtr_tab_go_to_next_fuzzy (current))
-    _gtr_window_set_sensitive_according_to_message (window, po);
+  gtr_tab_go_to_next_fuzzy (current);
 }
 
 void
 gtr_message_go_to_prev_fuzzy (GtkAction * action, GtrWindow * window)
 {
   GtrTab *current;
-  GtrPo *po;
 
   current = gtr_window_get_active_tab (window);
-  po = gtr_tab_get_po (current);
-  if (gtr_tab_go_to_prev_fuzzy (current))
-    _gtr_window_set_sensitive_according_to_message (window, po);
+  gtr_tab_go_to_prev_fuzzy (current);
 }
 
 void
 gtr_message_go_to_next_untranslated (GtkAction * action, GtrWindow * window)
 {
   GtrTab *current;
-  GtrPo *po;
 
   current = gtr_window_get_active_tab (window);
-  po = gtr_tab_get_po (current);
-  if (gtr_tab_go_to_next_untrans (current))
-    _gtr_window_set_sensitive_according_to_message (window, po);
+  gtr_tab_go_to_next_untrans (current);
 }
 
 void
 gtr_message_go_to_prev_untranslated (GtkAction * action, GtrWindow * window)
 {
   GtrTab *current;
-  GtrPo *po;
 
   current = gtr_window_get_active_tab (window);
-  po = gtr_tab_get_po (current);
-  if (gtr_tab_go_to_prev_untrans (current))
-    _gtr_window_set_sensitive_according_to_message (window, po);
+  gtr_tab_go_to_prev_untrans (current);
 }
 
 void
@@ -132,12 +107,9 @@ gtr_message_go_to_next_fuzzy_or_untranslated (GtkAction * action,
                                               GtrWindow * window)
 {
   GtrTab *current;
-  GtrPo *po;
 
   current = gtr_window_get_active_tab (window);
-  po = gtr_tab_get_po (current);
-  if (gtr_tab_go_to_next_fuzzy_or_untrans (current))
-    _gtr_window_set_sensitive_according_to_message (window, po);
+  gtr_tab_go_to_next_fuzzy_or_untrans (current);
 }
 
 void
@@ -145,12 +117,9 @@ gtr_message_go_to_prev_fuzzy_or_untranslated (GtkAction * action,
                                               GtrWindow * window)
 {
   GtrTab *current;
-  GtrPo *po;
 
   current = gtr_window_get_active_tab (window);
-  po = gtr_tab_get_po (current);
-  if (gtr_tab_go_to_prev_fuzzy_or_untrans (current))
-    _gtr_window_set_sensitive_according_to_message (window, po);
+  gtr_tab_go_to_prev_fuzzy_or_untrans (current);
 }
 
 void

@@ -70,8 +70,6 @@ GtrHeader * gtr_window_get_header_from_active_tab (GtrWindow * window);
 
 GtkWidget *gtr_window_get_statusbar (GtrWindow * window);
 
-GtkUIManager *gtr_window_get_ui_manager (GtrWindow * window);
-
 GtrView *gtr_window_get_active_view (GtrWindow * window);
 
 GList *gtr_window_get_all_views (GtrWindow * window,
@@ -82,14 +80,6 @@ GtkWidget *gtr_window_get_tab_from_location (GtrWindow * window, GFile * locatio
 void gtr_window_set_active_tab (GtrWindow * window, GtkWidget * tab);
 
 void _gtr_window_close_tab (GtrWindow * window, GtrTab * tab);
-
-void _gtr_recent_add (GtrWindow * window,
-                      GFile * location, gchar * project_id);
-
-/* FIXME: this is wrong. we should have some signal in the po and set this and
-          have this as private api */
-void       _gtr_window_set_sensitive_according_to_message      (GtrWindow * window,
-                                                                GtrPo * po);
 
 G_END_DECLS
 #endif /* __WINDOW_H__ */

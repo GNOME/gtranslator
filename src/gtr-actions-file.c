@@ -55,12 +55,10 @@ static void load_file_list (GtrWindow * window, const GSList * uris);
 gboolean
 gtr_open (GFile * location, GtrWindow * window, GError ** error)
 {
-  GtrHeader *header;
   GtrPo *po;
   GtrTab *tab;
   GList *current;
   GtrView *active_view;
-  const gchar *project_id;
 
   /*
    * If the filename can't be opened, pass the error back to the caller
@@ -72,14 +70,6 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
   if ((*error != NULL)
       && (((GError *) * error)->code != GTR_PO_ERROR_RECOVERY))
     return FALSE;
-
-  header = gtr_po_get_header (po);
-  project_id = gtr_header_get_prj_id_version (header);
-
-  /*
-   * If not a crash/temporary file, add to the history.
-   */
-  _gtr_recent_add (window, location, (gchar *)project_id);
 
   /*
    * Create a page to add to our list of open files
