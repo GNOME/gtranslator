@@ -60,18 +60,10 @@
 
 #define PROFILE_DATA "GtrWidnowProfileData"
 
-#define GTR_WINDOW_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
-					 (object),	\
-					 GTR_TYPE_WINDOW,     \
-					 GtrWindowPrivate))
-
 static void gtr_window_cmd_edit_toolbar (GtkAction * action,
                                          GtrWindow * window);
 
-
-G_DEFINE_TYPE (GtrWindow, gtr_window, GTK_TYPE_APPLICATION_WINDOW)
-
-struct _GtrWindowPrivate
+typedef struct
 {
   GSettings *state_settings;
 
@@ -101,7 +93,9 @@ struct _GtrWindowPrivate
   GtkWidget *profile_combo;
 
   guint dispose_has_run : 1;
-};
+} GtrWindowPrivate;
+
+G_DEFINE_TYPE_WITH_PRIVATE(GtrWindow, gtr_window, GTK_TYPE_APPLICATION_WINDOW)
 
 enum
 {
@@ -259,48 +253,49 @@ void
 _gtr_window_set_sensitive_according_to_message (GtrWindow * window,
                                                 GtrPo * po)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GList *current;
   GtkAction *action;
 
   current = gtr_po_get_current_message (po);
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "GoForward");
   gtk_action_set_sensitive (action, g_list_next (current) != NULL);
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "GoPrevious");
   gtk_action_set_sensitive (action, g_list_previous (current) != NULL);
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "GoFirst");
   gtk_action_set_sensitive (action, g_list_first (current) != current);
 
-  action = gtk_action_group_get_action (window->priv->action_group, "GoLast");
+  action = gtk_action_group_get_action (priv->action_group, "GoLast");
   gtk_action_set_sensitive (action, g_list_last (current) != current);
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "GoNextFuzzy");
   gtk_action_set_sensitive (action, gtr_po_get_next_fuzzy (po) != NULL);
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "GoPreviousFuzzy");
   gtk_action_set_sensitive (action, gtr_po_get_prev_fuzzy (po) != NULL);
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "GoNextUntranslated");
   gtk_action_set_sensitive (action, gtr_po_get_next_untrans (po) != NULL);
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "GoPreviousUntranslated");
   gtk_action_set_sensitive (action, gtr_po_get_prev_untrans (po) != NULL);
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "GoNextFuzzyUntranslated");
   gtk_action_set_sensitive (action,
                             gtr_po_get_next_fuzzy_or_untrans (po) != NULL);
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "GoPreviousFuzzyUntranslated");
   gtk_action_set_sensitive (action,
                             gtr_po_get_prev_fuzzy_or_untrans (po) != NULL);
@@ -309,6 +304,7 @@ _gtr_window_set_sensitive_according_to_message (GtrWindow * window,
 static void
 set_sensitive_according_to_tab (GtrWindow * window, GtrTab * tab)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtrNotebook *notebook;
   GtrView *view;
   GtrPo *po;
@@ -319,36 +315,36 @@ set_sensitive_according_to_tab (GtrWindow * window, GtrTab * tab)
   gint current_page;
 
   notebook = gtr_window_get_notebook (window);
-  pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (window->priv->notebook));
+  pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook));
   view = gtr_tab_get_active_view (tab);
   po = gtr_tab_get_po (tab);
   buf = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
 
-  if (gtk_action_group_get_sensitive (window->priv->action_group) == FALSE)
-    gtk_action_group_set_sensitive (window->priv->action_group, TRUE);
+  if (gtk_action_group_get_sensitive (priv->action_group) == FALSE)
+    gtk_action_group_set_sensitive (priv->action_group, TRUE);
 
   /*File */
   state = gtr_po_get_state (po);
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "FileSave");
   gtk_action_set_sensitive (action, state == GTR_PO_STATE_MODIFIED);
 
   /*Edit */
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "EditUndo");
   gtk_action_set_sensitive (action, gtk_source_buffer_can_undo (buf));
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "EditRedo");
   gtk_action_set_sensitive (action, gtk_source_buffer_can_redo (buf));
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "EditCut");
   gtk_action_set_sensitive (action,
                             gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER
                                                                (buf)));
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "EditCopy");
   gtk_action_set_sensitive (action,
                             gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER
@@ -359,11 +355,11 @@ set_sensitive_according_to_tab (GtrWindow * window, GtrTab * tab)
     gtk_notebook_page_num (GTK_NOTEBOOK (notebook), GTK_WIDGET (tab));
   g_return_if_fail (current_page >= 0);
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "DocumentsPreviousDocument");
   gtk_action_set_sensitive (action, current_page != 0);
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "DocumentsNextDocument");
   gtk_action_set_sensitive (action, current_page < pages - 1);
 
@@ -373,11 +369,12 @@ set_sensitive_according_to_tab (GtrWindow * window, GtrTab * tab)
 static void
 set_sensitive_according_to_window (GtrWindow * window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   gint pages;
 
-  pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (window->priv->notebook));
+  pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook));
 
-  gtk_action_group_set_sensitive (window->priv->action_group, pages > 0);
+  gtk_action_group_set_sensitive (priv->action_group, pages > 0);
 }
 
 /*
@@ -391,6 +388,7 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
                                            GtrMsg * message,
                                            GtrWindow * window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtrPo *po;
   gchar *msg;
   const gchar *status;
@@ -444,9 +442,9 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
                      " (", translated_msg, ", ", fuzzy_msg, ", ",
                      untranslated_msg, ")", NULL);
 
-  gtr_statusbar_pop (GTR_STATUSBAR (window->priv->statusbar), 0);
+  gtr_statusbar_pop (GTR_STATUSBAR (priv->statusbar), 0);
 
-  gtr_statusbar_push (GTR_STATUSBAR (window->priv->statusbar), 0, msg);
+  gtr_statusbar_push (GTR_STATUSBAR (priv->statusbar), 0, msg);
 
   g_free (msg);
   g_free (current);
@@ -458,7 +456,7 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
 
   /* We have to update the progress bar too */
   gtr_statusbar_update_progress_bar (GTR_STATUSBAR
-                                     (window->priv->statusbar),
+                                     (priv->statusbar),
                                      (gdouble) translated,
                                      (gdouble) message_count);
 }
@@ -466,13 +464,14 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
 static void
 documents_list_menu_activate (GtkToggleAction * action, GtrWindow * window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   gint n;
 
   if (gtk_toggle_action_get_active (action) == FALSE)
     return;
 
   n = gtk_radio_action_get_current_value (GTK_RADIO_ACTION (action));
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (window->priv->notebook), n);
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), n);
 }
 
 static gchar *
@@ -499,32 +498,32 @@ get_menu_tip_for_tab (GtrTab * tab)
 static void
 update_documents_list_menu (GtrWindow * window)
 {
-  GtrWindowPrivate *p = window->priv;
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GList *actions, *l;
   gint n, i;
   guint id;
   GSList *group = NULL;
 
-  g_return_if_fail (p->documents_list_action_group != NULL);
+  g_return_if_fail (priv->documents_list_action_group != NULL);
 
-  if (p->documents_list_menu_ui_id != 0)
-    gtk_ui_manager_remove_ui (p->ui_manager, p->documents_list_menu_ui_id);
+  if (priv->documents_list_menu_ui_id != 0)
+    gtk_ui_manager_remove_ui (priv->ui_manager, priv->documents_list_menu_ui_id);
 
-  actions = gtk_action_group_list_actions (p->documents_list_action_group);
+  actions = gtk_action_group_list_actions (priv->documents_list_action_group);
   for (l = actions; l != NULL; l = l->next)
     {
       g_signal_handlers_disconnect_by_func (GTK_ACTION (l->data),
                                             G_CALLBACK
                                             (documents_list_menu_activate),
                                             window);
-      gtk_action_group_remove_action (p->documents_list_action_group,
+      gtk_action_group_remove_action (priv->documents_list_action_group,
                                       GTK_ACTION (l->data));
     }
   g_list_free (actions);
 
-  n = gtk_notebook_get_n_pages (GTK_NOTEBOOK (p->notebook));
+  n = gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook));
 
-  id = (n > 0) ? gtk_ui_manager_new_merge_id (p->ui_manager) : 0;
+  id = (n > 0) ? gtk_ui_manager_new_merge_id (priv->ui_manager) : 0;
 
   for (i = 0; i < n; i++)
     {
@@ -536,7 +535,7 @@ update_documents_list_menu (GtrWindow * window)
       gchar *tip;
       gchar *accel;
 
-      tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (p->notebook), i);
+      tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (priv->notebook), i);
 
       /* NOTE: the action is associated to the position of the tab in
        * the notebook not to the tab itself! This is needed to work
@@ -561,20 +560,20 @@ update_documents_list_menu (GtrWindow * window)
       /* note that group changes each time we add an action, so it must be updated */
       group = gtk_radio_action_get_group (action);
 
-      gtk_action_group_add_action_with_accel (p->documents_list_action_group,
+      gtk_action_group_add_action_with_accel (priv->documents_list_action_group,
                                               GTK_ACTION (action), accel);
 
       g_signal_connect (action,
                         "activate",
                         G_CALLBACK (documents_list_menu_activate), window);
 
-      gtk_ui_manager_add_ui (p->ui_manager,
+      gtk_ui_manager_add_ui (priv->ui_manager,
                              id,
                              "/MainMenu/DocumentsMenu/DocumentsListPlaceholder",
                              action_name, action_name,
                              GTK_UI_MANAGER_MENUITEM, FALSE);
 
-      if (GTR_TAB (tab) == p->active_tab)
+      if (GTR_TAB (tab) == priv->active_tab)
         gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
 
       g_object_unref (action);
@@ -586,7 +585,7 @@ update_documents_list_menu (GtrWindow * window)
       g_free (accel);
     }
 
-  p->documents_list_menu_ui_id = id;
+  priv->documents_list_menu_ui_id = id;
 }
 
 static GtrWindow *
@@ -629,6 +628,8 @@ drag_data_received_cb (GtkWidget * widget,
 static void
 update_overwrite_mode_statusbar (GtkTextView * view, GtrWindow * window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+
   if (view != GTK_TEXT_VIEW (gtr_window_get_active_view (window)))
     return;
 
@@ -637,7 +638,7 @@ update_overwrite_mode_statusbar (GtkTextView * view, GtrWindow * window)
      G_SIGNAL_RUN_LAST
    */
   gtr_statusbar_set_overwrite (GTR_STATUSBAR
-                               (window->priv->statusbar),
+                               (priv->statusbar),
                                !gtk_text_view_get_overwrite (view));
 }
 
@@ -683,6 +684,7 @@ notebook_switch_page (GtkNotebook * nb,
                       GtkWidget * page,
                       gint page_num, GtrWindow * window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtrTab *tab;
   GList *msg;
   GtrView *view;
@@ -695,7 +697,7 @@ notebook_switch_page (GtkNotebook * nb,
   GList *profile_items, *l;
 
   tab = GTR_TAB (gtk_notebook_get_nth_page (nb, page_num));
-  if (tab == window->priv->active_tab)
+  if (tab == priv->active_tab)
     return;
 
   /*
@@ -707,7 +709,7 @@ notebook_switch_page (GtkNotebook * nb,
   else
     set_window_title (window, FALSE);
 
-  window->priv->active_tab = tab;
+  priv->active_tab = tab;
   view = gtr_tab_get_active_view (tab);
 
   set_sensitive_according_to_tab (window, tab);
@@ -715,7 +717,7 @@ notebook_switch_page (GtkNotebook * nb,
 
   /* sync the statusbar */
   gtr_statusbar_set_overwrite (GTR_STATUSBAR
-                               (window->priv->statusbar),
+                               (priv->statusbar),
                                gtk_text_view_get_overwrite
                                (GTK_TEXT_VIEW (view)));
 
@@ -727,9 +729,9 @@ notebook_switch_page (GtkNotebook * nb,
   profile = gtr_header_get_profile (header);
 
   if (profile == NULL)
-    profile = gtr_profile_manager_get_active_profile (window->priv->prof_manager);
+    profile = gtr_profile_manager_get_active_profile (priv->prof_manager);
 
-  profile_items = gtr_status_combo_box_get_items (GTR_STATUS_COMBO_BOX (window->priv->profile_combo));
+  profile_items = gtr_status_combo_box_get_items (GTR_STATUS_COMBO_BOX (priv->profile_combo));
 
   for (l = profile_items; l != NULL; l = g_list_next (l))
     {
@@ -740,12 +742,12 @@ notebook_switch_page (GtkNotebook * nb,
 
       if (item_profile == profile)
         {
-          g_signal_handlers_block_by_func (window->priv->profile_combo,
+          g_signal_handlers_block_by_func (priv->profile_combo,
                                            profile_combo_changed,
                                            window);
-          gtr_status_combo_box_set_item (GTR_STATUS_COMBO_BOX (window->priv->profile_combo),
+          gtr_status_combo_box_set_item (GTR_STATUS_COMBO_BOX (priv->profile_combo),
                                          GTK_MENU_ITEM (l->data));
-          g_signal_handlers_unblock_by_func (window->priv->profile_combo,
+          g_signal_handlers_unblock_by_func (priv->profile_combo,
                                              profile_combo_changed,
                                              window);
         }
@@ -754,7 +756,7 @@ notebook_switch_page (GtkNotebook * nb,
   /* activate the right item in the documents menu */
   action_name = g_strdup_printf ("Tab_%d", page_num);
   action =
-    gtk_action_group_get_action (window->priv->documents_list_action_group,
+    gtk_action_group_get_action (priv->documents_list_action_group,
                                  action_name);
   g_free (action_name);
 
@@ -770,6 +772,7 @@ static void
 notebook_page_removed (GtkNotebook * notebook,
                        GtkWidget * child, guint page_num, GtrWindow * window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   gint n_pages;
 
   /* Set the window title */
@@ -781,7 +784,7 @@ notebook_page_removed (GtkNotebook * notebook,
 
   /* Hide the profile combo */
   if (n_pages == 0)
-    gtk_widget_hide (window->priv->profile_combo);
+    gtk_widget_hide (priv->profile_combo);
 
   update_documents_list_menu (window);
 }
@@ -789,6 +792,7 @@ notebook_page_removed (GtkNotebook * notebook,
 static void
 can_undo (GtkSourceBuffer * doc, GParamSpec * pspec, GtrWindow * window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtkAction *action;
   gboolean sensitive;
   GtrView *view;
@@ -802,7 +806,7 @@ can_undo (GtkSourceBuffer * doc, GParamSpec * pspec, GtrWindow * window)
   if (doc != buf)
     return;
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "EditUndo");
   gtk_action_set_sensitive (action, sensitive);
 }
@@ -810,6 +814,7 @@ can_undo (GtkSourceBuffer * doc, GParamSpec * pspec, GtrWindow * window)
 static void
 can_redo (GtkSourceBuffer * doc, GParamSpec * spec, GtrWindow * window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtkAction *action;
   gboolean sensitive;
   GtrView *view;
@@ -823,7 +828,7 @@ can_redo (GtkSourceBuffer * doc, GParamSpec * spec, GtrWindow * window)
   if (doc != buf)
     return;
 
-  action = gtk_action_group_get_action (window->priv->action_group,
+  action = gtk_action_group_get_action (priv->action_group,
                                         "EditRedo");
   gtk_action_set_sensitive (action, sensitive);
 }
@@ -831,10 +836,11 @@ can_redo (GtkSourceBuffer * doc, GParamSpec * spec, GtrWindow * window)
 static void
 sync_state (GtrPo * po, GParamSpec * pspec, GtrWindow * window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   int n_pages = 0;
 
   set_sensitive_according_to_tab (window, gtr_tab_get_from_document (po));
-  n_pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (window->priv->notebook));
+  n_pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook));
 
   if (n_pages == 1)
     set_window_title (window, TRUE);
@@ -860,6 +866,7 @@ static void
 notebook_tab_added (GtkNotebook * notebook,
                     GtkWidget * child, guint page_num, GtrWindow * window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GList *views;
   GtrTab *tab = GTR_TAB (child);
   GtkTextBuffer *buffer;
@@ -875,7 +882,7 @@ notebook_tab_added (GtkNotebook * notebook,
     set_window_title (window, FALSE);
 
   /* Show the profile combo */
-  gtk_widget_show (window->priv->profile_combo);
+  gtk_widget_show (priv->profile_combo);
 
   views = gtr_tab_get_all_views (tab, FALSE, TRUE);
 
@@ -916,6 +923,7 @@ notebook_tab_added (GtkNotebook * notebook,
 void
 _gtr_recent_add (GtrWindow * window, GFile * location, gchar * project_id)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtkRecentData *recent_data;
   gchar *uri;
   gchar *path;
@@ -935,7 +943,7 @@ _gtr_recent_add (GtrWindow * window, GFile * location, gchar * project_id)
   recent_data->groups = NULL;
   recent_data->is_private = FALSE;
 
-  if (!gtk_recent_manager_add_full (window->priv->recent_manager,
+  if (!gtk_recent_manager_add_full (priv->recent_manager,
                                     uri, recent_data))
     {
       g_warning ("Unable to add '%s' to the list of recently used documents",
@@ -1023,8 +1031,10 @@ gtr_window_cmd_edit_toolbar_cb (GtkDialog * dialog,
                                 gint response, gpointer data)
 {
   GtrWindow *window = GTR_WINDOW (data);
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+
   egg_editable_toolbar_set_edit_mode
-    (EGG_EDITABLE_TOOLBAR (window->priv->toolbar), FALSE);
+    (EGG_EDITABLE_TOOLBAR (priv->toolbar), FALSE);
   _gtr_application_save_toolbars_model (GTR_APP);
   gtk_widget_destroy (GTK_WIDGET (dialog));
 }
@@ -1032,6 +1042,7 @@ gtr_window_cmd_edit_toolbar_cb (GtkDialog * dialog,
 static void
 gtr_window_cmd_edit_toolbar (GtkAction * action, GtrWindow * window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtkWidget *dialog;
   GtkWidget *editor;
   GtkWidget *content_area;
@@ -1047,7 +1058,7 @@ gtr_window_cmd_edit_toolbar (GtkAction * action, GtrWindow * window)
   gtk_box_set_spacing (GTK_BOX (content_area), 2);
   gtk_window_set_default_size (GTK_WINDOW (dialog), 500, 400);
 
-  editor = egg_toolbar_editor_new (window->priv->ui_manager,
+  editor = egg_toolbar_editor_new (priv->ui_manager,
                                    EGG_TOOLBARS_MODEL
                                    (_gtr_application_get_toolbars_model
                                     (GTR_APP)));
@@ -1057,7 +1068,7 @@ gtr_window_cmd_edit_toolbar (GtkAction * action, GtrWindow * window)
   gtk_box_pack_start (GTK_BOX (content_area), editor, TRUE, TRUE, 0);
 
   egg_editable_toolbar_set_edit_mode
-    (EGG_EDITABLE_TOOLBAR (window->priv->toolbar), TRUE);
+    (EGG_EDITABLE_TOOLBAR (priv->toolbar), TRUE);
 
   g_signal_connect (dialog, "response",
                     G_CALLBACK (gtr_window_cmd_edit_toolbar_cb), window);
@@ -1067,6 +1078,7 @@ gtr_window_cmd_edit_toolbar (GtkAction * action, GtrWindow * window)
 static void
 menu_item_select_cb (GtkMenuItem * proxy, GtrWindow * window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtkAction *action;
   const gchar *message;
 
@@ -1076,7 +1088,7 @@ menu_item_select_cb (GtkMenuItem * proxy, GtrWindow * window)
   message = gtk_action_get_tooltip (action);
   if (message)
     {
-      gtr_statusbar_push_default (GTR_STATUSBAR (window->priv->statusbar),
+      gtr_statusbar_push_default (GTR_STATUSBAR (priv->statusbar),
                                   message);
     }
 }
@@ -1084,7 +1096,9 @@ menu_item_select_cb (GtkMenuItem * proxy, GtrWindow * window)
 static void
 menu_item_deselect_cb (GtkMenuItem * proxy, GtrWindow * window)
 {
-  gtr_statusbar_pop_default (GTR_STATUSBAR (window->priv->statusbar));
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+
+  gtr_statusbar_pop_default (GTR_STATUSBAR (priv->statusbar));
 }
 
 static void
@@ -1140,11 +1154,12 @@ profile_combo_changed (GtrStatusComboBox *combo,
 static void
 fill_profile_combo (GtrWindow *window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GSList *profiles, *l;
   GtkWidget *menu_item;
   const gchar *name;
 
-  profiles = gtr_profile_manager_get_profiles (window->priv->prof_manager);
+  profiles = gtr_profile_manager_get_profiles (priv->prof_manager);
 
   for (l = profiles; l != NULL; l = g_slist_next (l))
     {
@@ -1155,7 +1170,7 @@ fill_profile_combo (GtrWindow *window)
       gtk_widget_show (menu_item);
 
       g_object_set_data (G_OBJECT (menu_item), PROFILE_DATA, profile);
-      gtr_status_combo_box_add_item (GTR_STATUS_COMBO_BOX (window->priv->profile_combo),
+      gtr_status_combo_box_add_item (GTR_STATUS_COMBO_BOX (priv->profile_combo),
                                      GTK_MENU_ITEM (menu_item),
                                      name);
     }
@@ -1167,7 +1182,7 @@ fill_profile_combo (GtrWindow *window)
       menu_item = gtk_menu_item_new_with_label (name);
 
       g_object_set_data (G_OBJECT (menu_item), PROFILE_DATA, NULL);
-      gtr_status_combo_box_add_item (GTR_STATUS_COMBO_BOX (window->priv->profile_combo),
+      gtr_status_combo_box_add_item (GTR_STATUS_COMBO_BOX (priv->profile_combo),
                                      GTK_MENU_ITEM (menu_item),
                                      name);
     }
@@ -1176,26 +1191,27 @@ fill_profile_combo (GtrWindow *window)
 static void
 create_statusbar (GtrWindow *window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtkWidget *hbox;
 
   /* hbox */
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_box_pack_start (GTK_BOX (window->priv->main_box), hbox, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (priv->main_box), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
 
-  window->priv->statusbar = gtr_statusbar_new ();
+  priv->statusbar = gtr_statusbar_new ();
 
-  gtk_box_pack_end (GTK_BOX (hbox), window->priv->statusbar, TRUE, TRUE, 0);
+  gtk_box_pack_end (GTK_BOX (hbox), priv->statusbar, TRUE, TRUE, 0);
 
-  gtk_widget_show (window->priv->statusbar);
+  gtk_widget_show (priv->statusbar);
 
-  window->priv->profile_combo = gtr_status_combo_box_new (_("Profile"));
-  gtk_widget_set_tooltip_text (window->priv->profile_combo,
+  priv->profile_combo = gtr_status_combo_box_new (_("Profile"));
+  gtk_widget_set_tooltip_text (priv->profile_combo,
                                _("Profile for the active document"));
-  gtk_box_pack_start (GTK_BOX (window->priv->statusbar),
-                      window->priv->profile_combo, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (priv->statusbar),
+                      priv->profile_combo, FALSE, TRUE, 0);
 
-  g_signal_connect (window->priv->profile_combo, "changed",
+  g_signal_connect (priv->profile_combo, "changed",
                     G_CALLBACK (profile_combo_changed), window);
 
   fill_profile_combo (window);
@@ -1206,6 +1222,7 @@ on_active_profile_changed (GtrProfileManager *manager,
                            GtrProfile        *profile,
                            GtrWindow         *window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GList *items, *l;
   GtrTab *tab;
   GtrPo *po;
@@ -1219,7 +1236,7 @@ on_active_profile_changed (GtrProfileManager *manager,
   po = gtr_tab_get_po (tab);
   header = gtr_po_get_header (po);
 
-  items = gtr_status_combo_box_get_items (GTR_STATUS_COMBO_BOX (window->priv->profile_combo));
+  items = gtr_status_combo_box_get_items (GTR_STATUS_COMBO_BOX (priv->profile_combo));
 
   for (l = items; l != NULL; l = g_list_next (l))
     {
@@ -1233,11 +1250,11 @@ on_active_profile_changed (GtrProfileManager *manager,
 
       if (item_profile == profile && gtr_header_get_profile (header) == NULL)
         {
-          g_signal_handlers_block_by_func (window->priv->profile_combo,
+          g_signal_handlers_block_by_func (priv->profile_combo,
                                            profile_combo_changed, window);
-          gtr_status_combo_box_set_item (GTR_STATUS_COMBO_BOX (window->priv->profile_combo),
+          gtr_status_combo_box_set_item (GTR_STATUS_COMBO_BOX (priv->profile_combo),
                                          menu_item);
-          g_signal_handlers_unblock_by_func (window->priv->profile_combo,
+          g_signal_handlers_unblock_by_func (priv->profile_combo,
                                              profile_combo_changed, window);
         }
     }
@@ -1248,11 +1265,12 @@ on_profile_added (GtrProfileManager *manager,
                   GtrProfile        *profile,
                   GtrWindow         *window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtkMenuItem *menu_item;
   GList *items;
 
   /* check that the item is not a "No profile" item */
-  items = gtr_status_combo_box_get_items (GTR_STATUS_COMBO_BOX (window->priv->profile_combo));
+  items = gtr_status_combo_box_get_items (GTR_STATUS_COMBO_BOX (priv->profile_combo));
 
   if (items->next == NULL &&
       (g_object_get_data (G_OBJECT (items->data), PROFILE_DATA) == NULL))
@@ -1273,7 +1291,7 @@ on_profile_added (GtrProfileManager *manager,
       gtk_widget_show (GTK_WIDGET (menu_item));
 
       g_object_set_data (G_OBJECT (menu_item), PROFILE_DATA, profile);
-      gtr_status_combo_box_add_item (GTR_STATUS_COMBO_BOX (window->priv->profile_combo),
+      gtr_status_combo_box_add_item (GTR_STATUS_COMBO_BOX (priv->profile_combo),
                                      menu_item, name);
     }
 }
@@ -1283,9 +1301,10 @@ on_profile_removed (GtrProfileManager *manager,
                     GtrProfile        *profile,
                     GtrWindow         *window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GList *items, *l;
 
-  items = gtr_status_combo_box_get_items (GTR_STATUS_COMBO_BOX (window->priv->profile_combo));
+  items = gtr_status_combo_box_get_items (GTR_STATUS_COMBO_BOX (priv->profile_combo));
 
   for (l = items; l != NULL; l = g_list_next (l))
     {
@@ -1293,7 +1312,7 @@ on_profile_removed (GtrProfileManager *manager,
 
       prof = GTR_PROFILE (g_object_get_data (G_OBJECT (l->data), PROFILE_DATA));
       if (prof == profile)
-        gtr_status_combo_box_remove_item (GTR_STATUS_COMBO_BOX (window->priv->profile_combo),
+        gtr_status_combo_box_remove_item (GTR_STATUS_COMBO_BOX (priv->profile_combo),
                                           GTK_MENU_ITEM (l->data));
     }
 }
@@ -1304,9 +1323,10 @@ on_profile_modified (GtrProfileManager *manager,
                      GtrProfile        *new_profile,
                      GtrWindow         *window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GList *items, *l;
 
-  items = gtr_status_combo_box_get_items (GTR_STATUS_COMBO_BOX (window->priv->profile_combo));
+  items = gtr_status_combo_box_get_items (GTR_STATUS_COMBO_BOX (priv->profile_combo));
 
   for (l = items; l != NULL; l = g_list_next (l))
     {
@@ -1331,10 +1351,7 @@ gtr_window_init (GtrWindow * window)
   GtkWidget *widget;
   GError *error = NULL;
   GtkActionGroup *action_group;
-  GtrWindowPrivate *priv;
-
-  window->priv = GTR_WINDOW_GET_PRIVATE (window);
-  priv = window->priv;
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
   priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
 
@@ -1489,17 +1506,19 @@ gtr_window_init (GtrWindow * window)
 static void
 save_panes_state (GtrWindow * window)
 {
-  g_settings_set (window->priv->state_settings, GTR_SETTINGS_WINDOW_SIZE, "(ii)",
-                  window->priv->width, window->priv->height);
-  g_settings_set_int (window->priv->state_settings, GTR_SETTINGS_WINDOW_STATE,
-                      window->priv->window_state);
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+
+  g_settings_set (priv->state_settings, GTR_SETTINGS_WINDOW_SIZE, "(ii)",
+                  priv->width, priv->height);
+  g_settings_set_int (priv->state_settings, GTR_SETTINGS_WINDOW_STATE,
+                      priv->window_state);
 }
 
 static void
 gtr_window_dispose (GObject * object)
 {
   GtrWindow *window = GTR_WINDOW (object);
-  GtrWindowPrivate *priv = window->priv;
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
   DEBUG_PRINT ("window dispose");
 
@@ -1530,9 +1549,10 @@ static gboolean
 gtr_window_configure_event (GtkWidget * widget, GdkEventConfigure * event)
 {
   GtrWindow *window = GTR_WINDOW (widget);
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
-  window->priv->width = event->width;
-  window->priv->height = event->height;
+  priv->width = event->width;
+  priv->height = event->height;
 
   return GTK_WIDGET_CLASS (gtr_window_parent_class)->configure_event (widget,
                                                                       event);
@@ -1581,8 +1601,6 @@ gtr_window_class_init (GtrWindowClass * klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtrWindowPrivate));
-
   object_class->finalize = gtr_window_finalize;
   object_class->dispose = gtr_window_dispose;
 
@@ -1605,12 +1623,13 @@ gtr_window_class_init (GtrWindowClass * klass)
 GtrTab *
 gtr_window_create_tab (GtrWindow * window, GtrPo * po)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtrTab *tab;
 
   tab = gtr_tab_new (po);
   gtk_widget_show (GTK_WIDGET (tab));
 
-  gtr_notebook_add_page (GTR_NOTEBOOK (window->priv->notebook), tab);
+  gtr_notebook_add_page (GTR_NOTEBOOK (priv->notebook), tab);
 
   return tab;
 }
@@ -1626,7 +1645,9 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
 GtrTab *
 gtr_window_get_active_tab (GtrWindow * window)
 {
-  return gtr_notebook_get_page (GTR_NOTEBOOK (window->priv->notebook));
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+
+  return gtr_notebook_get_page (GTR_NOTEBOOK (priv->notebook));
 }
 
 /**
@@ -1641,19 +1662,19 @@ gtr_window_get_active_tab (GtrWindow * window)
 GList *
 gtr_window_get_all_tabs (GtrWindow * window)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   gint num_pages;
   gint i = 0;
   GList *toret = NULL;
 
   num_pages =
-    gtk_notebook_get_n_pages (GTK_NOTEBOOK (window->priv->notebook));
+    gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook));
 
   while (i < num_pages)
     {
       toret = g_list_append (toret,
                              gtk_notebook_get_nth_page (GTK_NOTEBOOK
-                                                        (window->
-                                                         priv->notebook), i));
+                                                        (priv->notebook), i));
       i++;
     }
 
@@ -1700,7 +1721,9 @@ gtr_window_get_header_from_active_tab (GtrWindow * window)
 GtrNotebook *
 gtr_window_get_notebook (GtrWindow * window)
 {
-  return GTR_NOTEBOOK (window->priv->notebook);
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+
+  return GTR_NOTEBOOK (priv->notebook);
 }
 
 /**
@@ -1714,7 +1737,9 @@ gtr_window_get_notebook (GtrWindow * window)
 GtkWidget *
 gtr_window_get_statusbar (GtrWindow * window)
 {
-  return window->priv->statusbar;
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+
+  return priv->statusbar;
 }
 
 /**
@@ -1728,7 +1753,9 @@ gtr_window_get_statusbar (GtrWindow * window)
 GtkUIManager *
 gtr_window_get_ui_manager (GtrWindow * window)
 {
-  return window->priv->ui_manager;
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+
+  return priv->ui_manager;
 }
 
 /**
@@ -1768,6 +1795,7 @@ GList *
 gtr_window_get_all_views (GtrWindow * window,
                           gboolean original, gboolean translated)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   gint numtabs;
   gint i;
   GList *views = NULL;
@@ -1775,12 +1803,12 @@ gtr_window_get_all_views (GtrWindow * window,
 
   g_return_val_if_fail (GTR_IS_WINDOW (window), NULL);
 
-  numtabs = gtk_notebook_get_n_pages (GTK_NOTEBOOK (window->priv->notebook));
+  numtabs = gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook));
   i = numtabs - 1;
 
   while (i >= 0 && numtabs != 0)
     {
-      tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (window->priv->notebook),
+      tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (priv->notebook),
                                        i);
       views =
         g_list_concat (views,
@@ -1841,11 +1869,12 @@ gtr_window_get_tab_from_location (GtrWindow * window, GFile * location)
 void
 gtr_window_set_active_tab (GtrWindow * window, GtkWidget * tab)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   gint page;
 
-  page = gtk_notebook_page_num (GTK_NOTEBOOK (window->priv->notebook), tab);
+  page = gtk_notebook_page_num (GTK_NOTEBOOK (priv->notebook), tab);
 
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (window->priv->notebook), page);
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), page);
 }
 
 /**
@@ -1859,23 +1888,24 @@ gtr_window_set_active_tab (GtrWindow * window, GtkWidget * tab)
 void
 _gtr_window_close_tab (GtrWindow * window, GtrTab * tab)
 {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   gint i;
 
   g_return_if_fail (GTR_IS_TAB (tab));
 
-  i = gtk_notebook_page_num (GTK_NOTEBOOK (window->priv->notebook),
+  i = gtk_notebook_page_num (GTK_NOTEBOOK (priv->notebook),
                              GTK_WIDGET (tab));
   if (i != -1)
-    gtr_notebook_remove_page (GTR_NOTEBOOK (window->priv->notebook), i);
+    gtr_notebook_remove_page (GTR_NOTEBOOK (priv->notebook), i);
 
   /*
    * If there is only one file opened, we have to clear the statusbar
    */
   if (i == 0)
     {
-      gtr_statusbar_push (GTR_STATUSBAR (window->priv->statusbar), 0, " ");
+      gtr_statusbar_push (GTR_STATUSBAR (priv->statusbar), 0, " ");
       gtr_statusbar_clear_progress_bar (GTR_STATUSBAR
-                                        (window->priv->statusbar));
+                                        (priv->statusbar));
     }
 
   set_sensitive_according_to_window (window);

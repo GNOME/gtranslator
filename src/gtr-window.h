@@ -43,14 +43,10 @@ G_BEGIN_DECLS
 
 typedef struct _GtrWindow        GtrWindow;
 typedef struct _GtrWindowClass   GtrWindowClass;
-typedef struct _GtrWindowPrivate GtrWindowPrivate;
 
 struct _GtrWindow
 {
   GtkApplicationWindow parent_instance;
-
-  /*< private > */
-  GtrWindowPrivate *priv;
 };
 
 struct _GtrWindowClass
