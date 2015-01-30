@@ -314,7 +314,7 @@ gtr_message_table_class_init (GtrMessageTableClass * klass)
                                                         G_PARAM_CONSTRUCT_ONLY));
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/gtranslator/ui/gtr-message-table.ui");
+                                               "/org/gnome/translator/gtr-message-table.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrMessageTable, treeview);
 }

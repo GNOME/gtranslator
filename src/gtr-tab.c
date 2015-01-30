@@ -760,7 +760,7 @@ gtr_tab_class_init (GtrTabClass * klass)
                                                      G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/gtranslator/ui/gtr-tab.ui");
+                                               "/org/gnome/translator/gtr-tab.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, message_table);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, text_msgid);

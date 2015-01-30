@@ -129,7 +129,7 @@ gtr_notebook_class_init (GtrNotebookClass * klass)
                   GTR_TYPE_TAB);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/gtranslator/ui/gtr-notebook.ui");
+                                               "/org/gnome/translator/gtr-notebook.ui");
 }
 
 /***************************** Public funcs ***********************************/
