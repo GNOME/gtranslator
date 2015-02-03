@@ -20,8 +20,8 @@
  *   Pablo Sanxiao <psanxiao@gmail.com>
  */
 
-#ifndef __WINDOW_H__
-#define __WINDOW_H__
+#ifndef __GTR_WINDOW_H__
+#define __GTR_WINDOW_H__
 
 #include <glib.h>
 #include <glib-object.h>
@@ -82,4 +82,4 @@ void gtr_window_set_active_tab (GtrWindow * window, GtkWidget * tab);
 void _gtr_window_close_tab (GtrWindow * window, GtrTab * tab);
 
 G_END_DECLS
-#endif /* __WINDOW_H__ */
+#endif /* __GTR_WINDOW_H__ */
