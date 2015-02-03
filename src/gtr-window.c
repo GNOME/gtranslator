@@ -666,8 +666,6 @@ gtr_window_dispose (GObject * object)
   GtrWindow *window = GTR_WINDOW (object);
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
-  DEBUG_PRINT ("window dispose");
-
   if (!priv->dispose_has_run)
     {
       save_panes_state (window);
@@ -684,8 +682,6 @@ gtr_window_dispose (GObject * object)
 static void
 gtr_window_finalize (GObject * object)
 {
-  DEBUG_PRINT ("Finalize window");
-
   G_OBJECT_CLASS (gtr_window_parent_class)->finalize (object);
 }
 

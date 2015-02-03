@@ -230,8 +230,6 @@ gtr_application_dispose (GObject * object)
 {
   GtrApplicationPrivate *priv = GTR_APPLICATION (object)->priv;
 
-  DEBUG_PRINT ("Disposing app");
-
   g_clear_object (&priv->settings);
   g_clear_object (&priv->window_settings);
   g_clear_object (&priv->icon_factory);

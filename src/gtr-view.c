@@ -170,8 +170,6 @@ gtr_view_dispose (GObject * object)
   GtrView *view = GTR_VIEW (object);
   GtrViewPrivate *priv;
 
-  DEBUG_PRINT ("Dispose view");
-
   priv = gtr_view_get_instance_private (view);
 
   g_clear_object (&priv->editor_settings);

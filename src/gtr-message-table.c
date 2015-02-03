@@ -242,8 +242,6 @@ gtr_message_table_init (GtrMessageTable * table)
 static void
 gtr_message_table_finalize (GObject * object)
 {
-  DEBUG_PRINT ("Finalize message table");
-
   G_OBJECT_CLASS (gtr_message_table_parent_class)->finalize (object);
 }
 

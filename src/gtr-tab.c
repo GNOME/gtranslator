@@ -603,7 +603,6 @@ gtr_tab_finalize (GObject * object)
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
-  DEBUG_PRINT ("Finalize tab");
 
   if (priv->timer != NULL)
     g_timer_destroy (priv->timer);
@@ -618,8 +617,6 @@ static void
 gtr_tab_dispose (GObject * object)
 {
   GtrTabPrivate *priv;
-
-  DEBUG_PRINT ("Dispose tab");
 
   priv = gtr_tab_get_instance_private (GTR_TAB (object));
 

@@ -453,8 +453,6 @@ gtr_context_panel_dispose (GObject *object)
 
   priv = gtr_context_panel_get_instance_private(panel);
 
-  DEBUG_PRINT ("Dispose context");
-
   g_clear_object (&priv->hand_cursor);
   g_clear_object (&priv->regular_cursor);
 
