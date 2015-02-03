@@ -60,6 +60,8 @@ typedef struct
 {
   GSettings *state_settings;
 
+  GtkWidget *header_bar;
+
   GtkWidget *main_box;
 
   GtkWidget *notebook;
@@ -459,8 +461,10 @@ init_statusbar (GtrWindow *window)
   priv->profile_combo = gtr_status_combo_box_new (_("Profile"));
   gtk_widget_set_tooltip_text (priv->profile_combo,
                                _("Profile for the active document"));
+#if 0
   gtk_box_pack_start (GTK_BOX (priv->statusbar),
                       priv->profile_combo, FALSE, TRUE, 0);
+#endif
 
   g_signal_connect (priv->profile_combo, "changed",
                     G_CALLBACK (profile_combo_changed), window);
@@ -617,17 +621,6 @@ gtr_window_init (GtrWindow *window)
   g_signal_connect (priv->prof_manager, "profile-modified",
                     G_CALLBACK (on_profile_modified), window);
 
-  /* notebook */
-  g_signal_connect (priv->notebook, "switch-page",
-                    G_CALLBACK (notebook_switch_page), window);
-  g_signal_connect (priv->notebook, "page-added",
-                    G_CALLBACK (notebook_tab_added), window);
-  g_signal_connect (priv->notebook, "page-removed",
-                    G_CALLBACK (notebook_page_removed), window);
-  g_signal_connect (priv->notebook,
-                    "tab_close_request",
-                    G_CALLBACK (gtr_close_tab), window);
-
   /* statusbar & progress bar */
   init_statusbar (window);
 
@@ -723,9 +716,7 @@ gtr_window_class_init (GtrWindowClass *klass)
   gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass),
                                                "/org/gnome/translator/gtr-window.ui");
 
-  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, main_box);
-  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, notebook);
-  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, statusbar);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, header_bar);
 }
 
 /***************************** Public funcs ***********************************/
