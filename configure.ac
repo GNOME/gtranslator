@@ -272,7 +272,6 @@ Makefile
 data/Makefile
 data/gtranslator.pc
 data/desktop/Makefile
-data/desktop/gtranslator.desktop.in
 data/desktop/icons/Makefile
 data/org.gnome.gtranslator.gschema.xml
 data/pixmaps/Makefile
