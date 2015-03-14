@@ -42,7 +42,7 @@ AC_CHECK_FUNCS([memset setlocale strchr strdup strstr])
 dnl -------------------------------------------------------------------
 dnl Use intltools.
 dnl -------------------------------------------------------------------
-IT_PROG_INTLTOOL([0.40.0])
+IT_PROG_INTLTOOL([0.50.1])
 
 AC_SUBST([GETTEXT_PACKAGE], [gtranslator])
 AC_DEFINE([GETTEXT_PACKAGE], [PACKAGE_TARNAME], [Define to the gettext package name.])
@@ -274,7 +274,7 @@ data/gtranslator.pc
 data/desktop/Makefile
 data/desktop/gtranslator.desktop.in
 data/desktop/icons/Makefile
-data/org.gnome.gtranslator.gschema.xml.in
+data/org.gnome.gtranslator.gschema.xml
 data/pixmaps/Makefile
 doc/Makefile
 doc/reference/Makefile
@@ -289,16 +289,16 @@ plugins/alternate-language/Makefile
 plugins/charmap/Makefile
 plugins/charmap/charmap/Makefile
 plugins/dictionary/Makefile
-plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in
+plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml
 plugins/fullscreen/Makefile
 plugins/insert-params/Makefile
 plugins/open-tran/Makefile
-plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in
+plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml
 plugins/codeview/Makefile
-plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in
+plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml
 plugins/translation-memory/Makefile
 plugins/translation-memory/gda/Makefile
-plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in
+plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml
 src/Makefile
 src/toolbareditor/Makefile
 ])

@@ -38,21 +38,15 @@ plugin_in_files = gtr-codeview.plugin.desktop.in
 plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
 gsettings_SCHEMAS = org.gnome.gtranslator.plugins.codeview.gschema.xml
-
-@INTLTOOL_XML_NOMERGE_RULE@
-
 @GSETTINGS_RULES@
 
 EXTRA_DIST =	\
 	$(plugin_in_files)	\
 	gtr-codeview.gresource.xml	\
 	gtr-codeview-dialog.ui	\
-	gtr-viewer.ui	\
-	org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in
+	gtr-viewer.ui
 
-CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS) $(BUILT_SOURCES)
-DISTCLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS) $(BUILT_SOURCES)
-
-MAINTAINERCLEANFILES = $(gsettings_SCHEMAS:.xml=.valid)
+CLEANFILES = $(plugin_DATA) $(BUILT_SOURCES)
+DISTCLEANFILES = $(plugin_DATA) $(BUILT_SOURCES)
 
 -include $(top_srcdir)/git.mk

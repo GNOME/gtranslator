@@ -37,19 +37,13 @@ plugin_in_files = gtr-dict.plugin.desktop.in
 plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
 gsettings_SCHEMAS = org.gnome.gtranslator.plugins.dictionary.gschema.xml
-
-@INTLTOOL_XML_NOMERGE_RULE@
-
 @GSETTINGS_RULES@
 
 EXTRA_DIST = \
 	$(pixmaps__DATA)    \
-	$(plugin_in_files)  \
-	org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in
+	$(plugin_in_files)
 
-CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
-DISTCLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
-
-MAINTAINERCLEANFILES = $(gsettings_SCHEMAS:.xml=.valid)
+CLEANFILES = $(plugin_DATA)
+DISTCLEANFILES = $(plugin_DATA)
 
 -include $(top_srcdir)/git.mk

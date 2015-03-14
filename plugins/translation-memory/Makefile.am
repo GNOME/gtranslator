@@ -50,20 +50,14 @@ plugin_in_files = gtr-translation-memory.plugin.desktop.in
 plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
 gsettings_SCHEMAS = org.gnome.gtranslator.plugins.translation-memory.gschema.xml
-
-@INTLTOOL_XML_NOMERGE_RULE@
-
 @GSETTINGS_RULES@
 
 EXTRA_DIST = \
 	$(plugin_in_files) \
 	gtr-translation-memory.gresource.xml \
-	org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in \
 	gtr-translation-memory-dialog.ui
 
-CLEANFILES = $(plugin_DATA) $(BUILT_SOURCES) $(gsettings_SCHEMAS)
-DISTCLEANFILES = $(plugin_DATA) $(BUILT_SOURCES) $(gsettings_SCHEMAS)
-
-MAINTAINERCLEANFILES = $(gsettings_SCHEMAS:.xml=.valid)
+CLEANFILES = $(plugin_DATA) $(BUILT_SOURCES)
+DISTCLEANFILES = $(plugin_DATA) $(BUILT_SOURCES)
 
 -include $(top_srcdir)/git.mk
