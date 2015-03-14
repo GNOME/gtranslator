@@ -20,24 +20,19 @@ ui_DATA =			\
 	layout.xml
 
 gsettings_SCHEMAS = org.gnome.gtranslator.gschema.xml
-
 @GSETTINGS_RULES@
-
 
 EXTRA_DIST =					\
 	$(ui_DATA)				\
 	$(appdata_in_files)			\
-	org.gnome.gtranslator.gschema.xml.in	\
 	gtranslator.pc.in
 
 CLEANFILES =			\
 	gtranslator.appdata.xml \
 	$(appdata_DATA)		\
-	$(gsettings_SCHEMAS)	\
 	$(pkgconfig_DATA)
 
 DISTCLEANFILES =		\
-	$(gsettings_SCHEMAS)	\
 	$(pkgconfig_DATA)
 
 -include $(top_srcdir)/git.mk

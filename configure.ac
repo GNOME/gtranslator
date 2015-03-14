@@ -42,7 +42,7 @@ AC_CHECK_FUNCS([memset setlocale strchr strdup strstr])
 dnl -------------------------------------------------------------------
 dnl Use intltools.
 dnl -------------------------------------------------------------------
-IT_PROG_INTLTOOL([0.40.0])
+IT_PROG_INTLTOOL([0.50.1])
 
 AC_SUBST([GETTEXT_PACKAGE], [gtranslator])
 AC_DEFINE([GETTEXT_PACKAGE], [PACKAGE_TARNAME], [Define to the gettext package name.])
@@ -188,7 +188,7 @@ data/gtranslator.pc
 data/desktop/Makefile
 data/desktop/gtranslator.desktop.in
 data/desktop/icons/Makefile
-data/org.gnome.gtranslator.gschema.xml.in
+data/org.gnome.gtranslator.gschema.xml
 data/pixmaps/Makefile
 doc/Makefile
 doc/reference/Makefile

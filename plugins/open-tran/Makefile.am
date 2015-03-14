@@ -53,21 +53,15 @@ plugin_in_files = gtr-open-tran.plugin.desktop.in
 plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
 gsettings_SCHEMAS = org.gnome.gtranslator.plugins.open-tran.gschema.xml
-
-@INTLTOOL_XML_NOMERGE_RULE@
-
 @GSETTINGS_RULES@
 
 EXTRA_DIST =	\
 	$(pixmaps__DATA)	\
 	$(plugin_in_files)	\
 	gtr-open-tran.gresource.xml	\
-	gtr-open-tran-dialog.ui	\
-	org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in
+	gtr-open-tran-dialog.ui
 
-CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS) $(BUILT_SOURCES)
-DISTCLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS) $(BUILT_SOURCES)
-
-MAINTAINERCLEANFILES = $(gsettings_SCHEMAS:.xml=.valid)
+CLEANFILES = $(plugin_DATA) $(BUILT_SOURCES)
+DISTCLEANFILES = $(plugin_DATA) $(BUILT_SOURCES)
 
 -include $(top_srcdir)/git.mk
