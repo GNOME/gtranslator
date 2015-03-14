@@ -4,7 +4,6 @@ INCLUDES = \
 	-I$(top_srcdir)/src \
 	-I$(top_builddir)/src \
 	-I$(top_srcdir)/plugins/translation-memory \
-	-I$(headerdir) \
 	$(GTRANSLATOR_CFLAGS) \
 	$(WARN_CFLAGS) \
 	$(DISABLE_DEPRECATED)
