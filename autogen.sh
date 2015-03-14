@@ -4,8 +4,6 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="gtranslator"
-
 (test -f $srcdir/configure.ac \
   && test -d $srcdir/src \
   && test -f $srcdir/src/main.c) || {
@@ -20,4 +18,4 @@ which gnome-autogen.sh || {
     exit 1
 }
 
-USE_GNOME2_MACROS=1 . gnome-autogen.sh
+. gnome-autogen.sh
