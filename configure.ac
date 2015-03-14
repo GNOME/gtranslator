@@ -156,8 +156,6 @@ AC_ARG_ENABLE(debug,
 	,enable_debug=yes)
 if test "x$enable_debug" = "xyes" ; then
 	CFLAGS="$CFLAGS -ggdb -DDEBUG"
-else
-	CFLAGS="`echo $CFLAGS|sed -e s/-g.//g -e s/-ggdb//g`"
 fi
 AC_MSG_RESULT($enable_debug)
 
