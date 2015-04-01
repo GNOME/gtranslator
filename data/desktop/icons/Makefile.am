@@ -14,7 +14,9 @@ icon48dir = $(datadir)/icons/hicolor/48x48/apps
 icon48_DATA = 48x48/gtranslator.png
 
 svgicondir = $(datadir)/icons/hicolor/scalable/apps
-svgicon_DATA = scalable/gtranslator.svg
+svgicon_DATA = \
+  scalable/gtranslator.svg \
+  scalable/gtranslator-symbolic.svg
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
 
