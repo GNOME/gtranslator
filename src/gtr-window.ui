@@ -12,6 +12,7 @@
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="show-close-button">True</property>
+        <property name="title" translatable="yes">Projects</property>
         <child>
           <object class="GtkMenuButton" id="menu_button">
             <property name="visible">True</property>
@@ -24,9 +25,96 @@
         </child>
       </object>
     </child>
+    <child>
+      <object class="GtkBox" id="main_box">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="margin-start">134</property>
+        <property name="margin-end">134</property>
+        <property name="margin-top">24</property>
+        <property name="margin-bottom">24</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkFrame" id="project_frame">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="shadow-type">in</property>
+            <child>
+              <object class="GtkListBox" id="project_list">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkToolbar" id="project_toolbar">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="toolbar-style">icons</property>
+            <property name="show-arrow">False</property>
+            <property name="icon-size">1</property>
+            <style>
+              <class name="inline-toolbar"/>
+            </style>
+            <child>
+              <object class="GtkToolItem" id="project_add_remove_item">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <child>
+                  <object class="GtkBox" id="project_add_remove_box">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <child>
+                      <object class="GtkButton" id="project_add">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="receives-default">True</property>
+                        <property name="image">add_image</property>
+                        <child internal-child="accessible">
+                          <object class="AtkObject">
+                            <property name="accessible-name" translatable="yes">Add project</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="project_remove">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="receives-default">True</property>
+                        <property name="image">remove_image</property>
+                        <child internal-child="accessible">
+                          <object class="AtkObject">
+                            <property name="accessible-name" translatable="yes">Remove project</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
   </template>
+  <object class="GtkImage" id="add_image">
+    <property name="visible">True</property>
+    <property name="icon-name">list-add-symbolic</property>
+  </object>
   <object class="GtkImage" id="menu_image">
     <property name="visible">True</property>
     <property name="icon-name">open-menu-symbolic</property>
+  </object>
+  <object class="GtkImage" id="remove_image">
+    <property name="visible">True</property>
+    <property name="icon-name">list-remove-symbolic</property>
   </object>
 </interface>

@@ -61,7 +61,6 @@ typedef struct
   GSettings *state_settings;
 
   GtkWidget *header_bar;
-
   GtkWidget *main_box;
 
   GtkWidget *notebook;
@@ -712,7 +711,9 @@ gtr_window_class_init (GtrWindowClass *klass)
   gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass),
                                                "/org/gnome/translator/gtr-window.ui");
 
+  /* Main layout widgets */
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, header_bar);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, main_box);
 }
 
 /***************************** Public funcs ***********************************/
