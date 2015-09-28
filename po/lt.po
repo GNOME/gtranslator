@@ -3,15 +3,15 @@
 # Gediminas Paulauskas <menesis@delfi.lt>, 2001-2003.
 # Žygimantas Beručka <zygis@gnome.org>, 20, 2010.
 # Algimantas Margevičius <margevicius.algimantas@gmail.com>, 2011, 2012.
-# Aurimas Černius <aurisc4@gmail.com>, 2010, 2013.
+# Aurimas Černius <aurisc4@gmail.com>, 2010, 2013, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-03-27 16:52+0000\n"
-"PO-Revision-Date: 2013-04-01 20:21+0300\n"
+"POT-Creation-Date: 2015-09-27 22:37+0000\n"
+"PO-Revision-Date: 2015-09-28 13:43+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -20,64 +20,89 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
-#: ../data/desktop/gtranslator.desktop.in.in.h:1 ../src/gtr-application.c:328
+#: ../data/gtranslator.appdata.xml.in.h:1
+msgid ""
+"Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
+"environment. It handles all forms of gettext po files and includes very "
+"useful features like find/replace, translation memory, different translator "
+"profiles, messages table (for having an overview of the translations/"
+"messages in the po file), easy navigation and editing of translation "
+"messages and comments of the translation where accurate."
+msgstr ""
+"Gtranslator yra gettext po failų redaktorius GNOME darbastalio aplinkai. Jis "
+"apdoroja visų formų gettext po failus ir turi labai naudingų galimybių, "
+"tokių kaip suradimas ir keitimas, vertimo atmintis, skirtingi vertėjų "
+"profiliai, eilučių lentelė (eilučių/vertimų apžvalgai po faile), lengvas "
+"judėjimas ir vertimų eilučių keitimas bei vertimų komentarai."
+
+#: ../data/gtranslator.appdata.xml.in.h:2
+msgid ""
+"Gtranslator includes also a plugin system with many interesting plugins like "
+"alternate language, insert tags, open tran, integration with subversion and "
+"a source code viewer."
+msgstr ""
+"Gtranslator taip pat turi įskiepių sistemą su daug įdomių įskiepių, tokių "
+"kaip alternatyvi kalba, žymų įterpimas, open tran, integracija su subversion "
+"ir programos kodo vaizdu."
+
+#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:328
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
-#: ../data/desktop/gtranslator.desktop.in.in.h:2
+#: ../data/desktop/gtranslator.desktop.in.h:2
 msgid "PO File Editor"
 msgstr "PO failų redaktorius"
 
-#: ../data/desktop/gtranslator.desktop.in.in.h:3
+#: ../data/desktop/gtranslator.desktop.in.h:3
 msgid "Gtranslator PO File Editor"
 msgstr "Gtranslator PO failų redaktorius"
 
-#: ../data/desktop/gtranslator.desktop.in.in.h:4
+#: ../data/desktop/gtranslator.desktop.in.h:4
 msgid "Translate and localize applications and libraries"
 msgstr "Verskite ir lokalizuokite programas ir bibliotekas"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:1
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:1
 msgid "Warn if file contains fuzzy translations"
 msgstr "Įspėti, jei byloje yra neaiškių vertimų"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:2
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:2
 msgid ""
 "If true, warn the user when saving a PO translation file containing fuzzy "
 "strings."
 msgstr ""
 "Jei teigiama, įspėti naudotoją įrašant PO vertimą, turintį neaiškių eilučių."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:3
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:3
 msgid "Auto save files"
 msgstr "Automatiškai išsaugoti failus"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:4
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:4
 msgid "If true, automatically save files at specified intervals."
 msgstr "Jei teigiama, reguliariai automatiškai įrašyti failus."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:5
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:5
 msgid "Auto save interval"
 msgstr "Automatinio išsaugojimo intervalas"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:6
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:6
 msgid "Interval in minutes at which to automatically save files."
 msgstr "Laiko tarpas minutėmis, po kurio automatiškai įrašyti failus."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:7
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:7
 msgid "Create backup before saving"
 msgstr "Padaryti atsarginę kopiją prieš įrašant"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:8
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:8
 msgid "If true, create a backup copy of a file before saving it."
 msgstr "Jei teigiama, sukurti atsarginę failo kopiją prieš įrašant."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:9
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:9
 msgid "Use profile values for header"
 msgstr "Naudoti profilio reikšmes antraštei"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:10
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:10
 msgid ""
 "If true, overwrite the values in the PO header with those in the active "
 "profile."
@@ -85,76 +110,76 @@ msgstr ""
 "Jei teigiama, perrašyti PO antraštės reikšmes reikšmėmis iš aktyvaus "
 "profilio."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:11
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:11
 msgid "Highlight syntax in edit fields"
 msgstr "Paryškinti sintaksę redagavimo laukuose"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:12
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:12
 msgid "If true, apply syntax highlighting to strings in edit fields."
 msgstr "Jei teigiama, pritaikyti sintaksės paryškinimą redagavimo laukuose"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:13
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:13
 msgid "Make whitespace visible"
 msgstr "Vaizduoti nematomus simbolius"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:14
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:14
 msgid "If true, display whitespace in strings as representative symbols."
 msgstr "Jei teigiama, rodyti nematomus simbolius specialiais simboliais."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:15
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:15
 msgid "Use custom font"
 msgstr "Naudoti pasirinktąjį šriftą"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:16
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:16
 msgid "If true, use a custom font for edit fields."
 msgstr "Jei teigiama, naudoti pasirinktą šriftą redagavimo laukams."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:17
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:17
 msgid "Editor font"
 msgstr "Redaktoriaus šriftas"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:18
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:18
 msgid "Custom font to use for edit fields."
 msgstr "Pasirinktinis šriftas redagavimo laukams"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:19
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:19
 msgid "Remove fuzzy status when message is changed"
 msgstr "Nuimti neaiškumo būseną užrašui pasikeitus"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:20
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:20
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr "Jei teigiama, nuimti neaiškumo būseną užrašui pasikeitus."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:21
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:21
 msgid "Check spelling"
 msgstr "Tikrinti rašybą"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:22
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:22
 msgid "If true, check the spelling of translated messages."
 msgstr "Jei teigiama, tikrinti išverstų užrašų rašybą."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:23
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:23
 msgid "Side panel switcher style"
 msgstr "Šoninio polangio jungiklio stilius"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:24
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:24
 msgid "Style for switchers in the side panel."
 msgstr "Jungiklių stilius šoniniame polangyje."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:25
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:25
 msgid "Color scheme"
 msgstr "Spalvų schema"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:26
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:26
 msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
 msgstr ""
 "Sintaksės paryškinimui naudojamos gtksourceview spalvų schemos pavadinimas."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:27
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:27
 msgid "Message list sort order"
 msgstr "Užrašų sąrašo rikiavimo tvarka"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:28
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:28
 msgid ""
 "Sort order to use in the message list. Possible values are \"status\", \"id"
 "\", \"original-text\" and \"translated-text\"."
@@ -162,11 +187,11 @@ msgstr ""
 "Rikiavimo tvarka užrašų sąraše. Galimos reikšmės yra „status“, „id“, "
 "„original-text“ ir „translated-text“."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:29
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:29
 msgid "Active plugins"
 msgstr "Įjungti įskiepiai"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:30
+#: ../data/org.gnome.gtranslator.gschema.xml.in.h:30
 msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gtranslator-plugin file for obtaining the \"Location\" of a given "
@@ -290,27 +315,27 @@ msgstr "Pradinio programos teksto peržiūra"
 msgid "Source code"
 msgstr "Pradinis programos tekstas"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:1
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:1
 msgid "Use the System Editor"
 msgstr "Naudoti sistemos redaktorių"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:2
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:2
 msgid "Whether use the system editor to show the source code"
 msgstr "Ar naudoti sistemos redaktorių išeities teksto rodymui"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:3
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:3
 msgid "The Editor to Launch"
 msgstr "Paleistinas redaktorius"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:4
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:4
 msgid "The command to launch the editor you want to use"
 msgstr "Komanda jūsų pageidaujamo redaktoriaus paleidimui"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:5
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:5
 msgid "Arguments for the Command"
 msgstr "Komandos argumentai"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:6
+#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:6
 msgid "Arguments to pass to the program command line to select the line"
 msgstr "Argumentai programos komandų eilutei, eilutės pasirinkimui"
 
@@ -402,23 +427,23 @@ msgstr "Žodynų šaltiniai"
 msgid "Look up words in a dictionary."
 msgstr "Ieškoti žodžių žodyne."
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:1
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:1
 msgid "Database"
 msgstr "Duomenų bazė"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:2
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:2
 msgid "Word database"
 msgstr "Žodžių duomenų bazė"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:3
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:3
 msgid "Source Name"
 msgstr "Šaltinio pavadinimas"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:4
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:4
 msgid "Strategy"
 msgstr "Strategija"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:5
+#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:5
 msgid "Panel Position"
 msgstr "Skydelio padėtis"
 
@@ -550,7 +575,7 @@ msgid "WRONG! Malformed project: %d\n"
 msgstr "NETEISINGAI! Blogai suformuotas projektas: %d\n"
 
 #: ../plugins/open-tran/gtr-open-tran-panel.c:359
-#: ../src/gtr-actions-search.c:192
+#: ../src/gtr-actions-search.c:191
 msgid "Phrase not found"
 msgstr "Frazė nerasta"
 
@@ -597,40 +622,39 @@ msgstr "Open Tran"
 msgid "Look for phrases in Open tran memory translation database."
 msgstr "Ieškoti frazių Open tran vertimų atminties duomenų bazėje."
 
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:1
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:1
 msgid "Search Code"
 msgstr "Paieškos kodas"
 
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:2
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:2
 msgid "The language code to search for"
 msgstr "Ieškomas kalbos kodas"
 
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:3
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:3
 msgid "Own Code"
 msgstr "Savas kodas"
 
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:4
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:4
 msgid "The language code in which you want the results"
 msgstr "Kalbos kodas, kuriai jūs norite rezultatų"
 
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:5
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:5
 msgid "Use Mirror Server"
 msgstr "Naudoti veidrodžio serverį"
 
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:6
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:6
 msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
 msgstr "Naudoti vietinę pagrindinio Open-Tran serverio - open-tran.eu - kopiją"
 
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:7
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:7
 msgid "Mirror Server URL"
 msgstr "Veidrodžio serverio URL"
 
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:8
+#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:8
 msgid "URL of an Open-Tran mirror server"
 msgstr "Open-Tran veidrodžio serverio URL"
 
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
-#| msgid "Add to Database"
 msgid "Strings added to database"
 msgstr "Eilutės pridėtos į duomenų bazę"
 
@@ -671,28 +695,28 @@ msgstr "Vertimų atmintis"
 msgid "Get translation suggestions from a data base."
 msgstr "Gaukite vertimo pasiūlymus iš duomenų bazės."
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:204
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:207
 #, c-format
 msgid "Insert Option nº %d"
 msgstr "Įterpti parinktį nº %d"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:340
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:325
 msgid "_Use this translation"
 msgstr "Na_udoti šį vertimą"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:345
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:330
 msgid "_Remove"
 msgstr "Pa_šalinti"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:460
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:445
 msgid "Shortcut"
 msgstr "Trumpinys"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:469
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:454
 msgid "Level"
 msgstr "Lygmuo"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:478
+#: ../plugins/translation-memory/gtr-translation-memory-ui.c:463
 msgid "String"
 msgstr "Eilutė"
 
@@ -709,19 +733,19 @@ msgstr "Sukurti vertimų atmintį"
 msgid "_Translation Memory"
 msgstr "_Vertimų atmintis"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:1
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:1
 msgid "PO directory"
 msgstr "PO katalogas"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:2
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:2
 msgid "Directory containing PO files to add to the translation memory."
 msgstr "Katalogas, kuriame yra PO failai, įtrauktini į vertimo atmintį."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:3
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:3
 msgid "Restrict search by filename"
 msgstr "Riboti paiešką failo vardu"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:4
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:4
 msgid ""
 "If true, only include files with a specified filename when searching the "
 "translation memory."
@@ -729,21 +753,21 @@ msgstr ""
 "Jei teigiama, įtraukti tik nurodyto pavadinimo failus ieškant vertimų "
 "atmintyje."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:5
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:5
 msgid "Filename to restrict search to"
 msgstr "Failo vardas paieškai apriboti"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:6
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:6
 msgid ""
 "Filename to which searching of the translation memory should be restricted."
 msgstr ""
 "Failo vardas, iki kurio turėtų būti apribota vertimo atminties paieška."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:7
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:7
 msgid "Maximum number of missing words"
 msgstr "Didžiausias trūkstamų žodžių skaičius"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:8
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:8
 msgid ""
 "Maximum number of words that can be missing from a message displayed as a "
 "match by the translation memory."
@@ -751,11 +775,11 @@ msgstr ""
 "Didžiausias žodžių, kurių gali trūkti, skaičius užraše, rodomame kaip "
 "sutapimas su vertimų atmintimi."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:9
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:9
 msgid "Maximum difference in message length"
 msgstr "Didžiausias užrašų ilgio skirtumas"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:10
+#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:10
 msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
@@ -771,7 +795,7 @@ msgstr "Dabartiniai prižiūrėtojai"
 msgid "Current Developers"
 msgstr "Dabartiniai kūrėjai"
 
-#: ../src/gtr-actions-app.c:56
+#: ../src/gtr-actions-app.c:57
 msgid "Previous Developers"
 msgstr "Ankstesni kūrėjai"
 
@@ -822,7 +846,7 @@ msgstr "Įrašyti failą kaip..."
 msgid "Files saved."
 msgstr "Failai įrašyti."
 
-#: ../src/gtr-actions-search.c:171
+#: ../src/gtr-actions-search.c:170
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
@@ -830,7 +854,7 @@ msgstr[0] "Rastas ir pakeistas %d pasikartojimas"
 msgstr[1] "Rasti ir pakeisti %d pasikartojimai"
 msgstr[2] "Rasta ir pakeista %d pasikartojimų"
 
-#: ../src/gtr-actions-search.c:180
+#: ../src/gtr-actions-search.c:179
 msgid "Found and replaced one occurrence"
 msgstr "Rastas ir pakeistas vienas pasikartojimas"
 
@@ -886,12 +910,10 @@ msgid "Assistant"
 msgstr "Pagalbininkas"
 
 #: ../src/gtr-assistant.c:247
-#| msgid "<b>Profile name:</b>"
 msgid "Profile name:"
 msgstr "Profilio pavadinimas:"
 
 #: ../src/gtr-assistant.c:289
-#| msgid "Translator's _email:"
 msgid "Translator email:"
 msgstr "Vertėjo _el. paštas:"
 
@@ -904,20 +926,20 @@ msgstr "Profilis"
 msgid "Confirmation"
 msgstr "Patvirtinimas"
 
-#: ../src/gtr-close-confirmation-dialog.c:127
+#: ../src/gtr-close-confirmation-dialog.c:126
 msgid "Close _without Saving"
 msgstr "Užverti _neįrašant"
 
-#: ../src/gtr-close-confirmation-dialog.c:156
+#: ../src/gtr-close-confirmation-dialog.c:155
 msgid "Question"
 msgstr "Klausimas"
 
-#: ../src/gtr-close-confirmation-dialog.c:371
+#: ../src/gtr-close-confirmation-dialog.c:370
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Įrašyti dokumento „%s“ pakeitimus prieš užveriant?"
 
-#: ../src/gtr-close-confirmation-dialog.c:534
+#: ../src/gtr-close-confirmation-dialog.c:533
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
@@ -925,7 +947,7 @@ msgstr[0] "Pakeitimai %d dokumente bus negrįžtamai prarasti."
 msgstr[1] "Pakeitimai %d dokumentuose bus negrįžtamai prarasti."
 msgstr[2] "Pakeitimai %d dokumentų bus negrįžtamai prarasti."
 
-#: ../src/gtr-close-confirmation-dialog.c:541
+#: ../src/gtr-close-confirmation-dialog.c:540
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -940,19 +962,19 @@ msgstr[2] ""
 "Yra %d dokumentų su neįrašytais pakeitimais. Įrašyti pakeitimus prie "
 "užveriant?"
 
-#: ../src/gtr-close-confirmation-dialog.c:562
+#: ../src/gtr-close-confirmation-dialog.c:561
 msgid "Docum_ents with unsaved changes:"
 msgstr "Dokum_entai su neįrašytais pakeitimais:"
 
-#: ../src/gtr-close-confirmation-dialog.c:566
+#: ../src/gtr-close-confirmation-dialog.c:565
 msgid "S_elect the documents you want to save:"
 msgstr "_Pasirinkite dokumentus, kuriuos norite įrašyti:"
 
-#: ../src/gtr-close-confirmation-dialog.c:584
+#: ../src/gtr-close-confirmation-dialog.c:583
 msgid "Saving has been disabled by the system administrator."
 msgstr "Įrašymo galimybę išjungė sistemos administratorius."
 
-#: ../src/gtr-close-confirmation-dialog.c:586
+#: ../src/gtr-close-confirmation-dialog.c:585
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Jei neįrašysite, visų jūsų pakeitimai bus negrįžtamai prarasti."
 
@@ -1087,19 +1109,19 @@ msgstr "Kalbos k_odas:"
 msgid "_Plural forms:"
 msgstr "_Daugiskaitos formos:"
 
-#: ../src/gtr-message-table.c:175
+#: ../src/gtr-message-table.c:176
 msgid "Status"
 msgstr "Būsena"
 
-#: ../src/gtr-message-table.c:187
+#: ../src/gtr-message-table.c:188
 msgid "ID"
 msgstr "ID"
 
-#: ../src/gtr-message-table.c:202
+#: ../src/gtr-message-table.c:203
 msgid "Original Message"
 msgstr "Originalus tekstas"
 
-#: ../src/gtr-message-table.c:217
+#: ../src/gtr-message-table.c:218
 msgid "Translated Message"
 msgstr "Išverstas tekstas"
 
@@ -1165,9 +1187,6 @@ msgid "There was an error writing the PO file: %s"
 msgstr "Įvyko klaida įrašant PO failą: %s"
 
 #: ../src/gtr-preferences-dialog.c:402
-#| msgid ""
-#| "<span weight=\"bold\" size=\"large\">Impossible to remove the active "
-#| "profile</span>"
 msgid "Impossible to remove the active profile"
 msgstr "Nepavyko pašalinti aktyvaus profilio"
 
@@ -1176,9 +1195,6 @@ msgid "Another profile should be selected as active before"
 msgstr "Prieš tai reikia pasirinkti kitą profilį"
 
 #: ../src/gtr-preferences-dialog.c:421
-#| msgid ""
-#| "<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
-#| "profile?</span>"
 msgid "Are you sure you want to delete this profile?"
 msgstr "Ar tikrai norite ištrinti šį profilį?"
 
@@ -1294,19 +1310,19 @@ msgstr "_Pavadinimas:"
 msgid "Language Settings"
 msgstr "Kalbos parametrai"
 
-#: ../src/gtr-search-dialog.c:326 ../src/gtr-search-dialog.ui.h:1
+#: ../src/gtr-search-dialog.c:347 ../src/gtr-search-dialog.ui.h:1
 msgid "Replace"
 msgstr "Pakeisti"
 
-#: ../src/gtr-search-dialog.c:348
+#: ../src/gtr-search-dialog.c:369
 msgid "Find"
 msgstr "Ieškoti"
 
-#: ../src/gtr-search-dialog.c:436
+#: ../src/gtr-search-dialog.c:457
 msgid "Replace _All"
 msgstr "Pakeisti _visus"
 
-#: ../src/gtr-search-dialog.c:440
+#: ../src/gtr-search-dialog.c:461
 msgid "_Replace"
 msgstr "_Pakeisti"
 
@@ -1372,12 +1388,10 @@ msgid "Message Table"
 msgstr "Užrašų lentelė"
 
 #: ../src/gtr-tab.c:759
-#| msgid "Original Message"
 msgid "Original Message:"
 msgstr "Originalus tekstas:"
 
 #: ../src/gtr-tab.c:813
-#| msgid "_Translated text"
 msgid "Translate_d Text:"
 msgstr "Iš_verstas tekstas:"
 
@@ -1394,11 +1408,11 @@ msgstr "Pranešimo detalės"
 msgid "Path:"
 msgstr "Kelias:"
 
-#: ../src/gtr-tab-label.c:278
+#: ../src/gtr-tab-label.c:277
 msgid "Close document"
 msgstr "Užverti dokumentą"
 
-#: ../src/gtr-utils.c:517
+#: ../src/gtr-utils.c:516
 msgid ""
 "Unable to display help. Please make sure the Gtranslator documentation "
 "package is installed."
@@ -1736,11 +1750,11 @@ msgstr "Nėra profilio"
 msgid "Profile for the active document"
 msgstr "Profilis aktyviam dokumentui"
 
-#: ../src/main.c:101
+#: ../src/main.c:100
 msgid "- Edit PO files"
 msgstr "– Redaguoti PO failus"
 
-#: ../src/main.c:105
+#: ../src/main.c:104
 #, c-format
 msgid ""
 "%s\n"
@@ -1756,36 +1770,35 @@ msgstr ""
 #. * produce duplicates, but don't worry about it. If your language
 #. * normally has a mnemonic at the start, please use the _. If not,
 #. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:992
+#: ../src/toolbareditor/egg-editable-toolbar.c:991
 #, c-format
 msgid "Show “_%s”"
 msgstr "Rodyti „_%s-"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1485
+#: ../src/toolbareditor/egg-editable-toolbar.c:1484
 msgid "_Move on Toolbar"
 msgstr "_Perkelti į įrankinę"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1486
+#: ../src/toolbareditor/egg-editable-toolbar.c:1485
 msgid "Move the selected item on the toolbar"
 msgstr "Perkelti pasirinktą elementą į įrankinę"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1487
+#: ../src/toolbareditor/egg-editable-toolbar.c:1486
 msgid "_Remove from Toolbar"
 msgstr "Pa_šalinti iš įrankinės"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1488
+#: ../src/toolbareditor/egg-editable-toolbar.c:1487
 msgid "Remove the selected item from the toolbar"
 msgstr "Pašalinti pasirinktą elementą iš įrankinės"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1489
+#: ../src/toolbareditor/egg-editable-toolbar.c:1488
 msgid "_Delete Toolbar"
 msgstr "_Pašalinti įrankinę"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1490
+#: ../src/toolbareditor/egg-editable-toolbar.c:1489
 msgid "Remove the selected toolbar"
 msgstr "Pašalinti pasirinktą įrankinę"
 
-#: ../src/toolbareditor/egg-toolbar-editor.c:489
+#: ../src/toolbareditor/egg-toolbar-editor.c:488
 msgid "Separator"
 msgstr "Skirtukas"
-
