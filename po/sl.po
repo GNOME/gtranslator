@@ -5,15 +5,15 @@
 # Matic Žgur <mr.zgur@gmail.com>, 2006.
 # Andrej Žnidaršič <andrej.znidarsic@gmail.com>, 2009-2010.
 # Martin Srebotnjak <miles@filmsi.si>, 2013.
-# Matej Urbančič <mateju@svn.gnome.org>, 2012-2015.
+# Matej Urbančič <mateju@svn.gnome.org>, 2012-2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-07-08 10:01+0000\n"
-"PO-Revision-Date: 2015-07-08 21:33+0100\n"
+"POT-Creation-Date: 2016-03-12 21:33+0100\n"
+"PO-Revision-Date: 2016-03-12 21:34+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -23,9 +23,19 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.8.4\n"
 
 #: ../data/gtranslator.appdata.xml.in.h:1
+#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
+msgid "Gtranslator"
+msgstr "Gtranslator"
+
+#: ../data/gtranslator.appdata.xml.in.h:2
+#: ../data/desktop/gtranslator.desktop.in.h:4
+msgid "Translate and localize applications and libraries"
+msgstr "Prevajanje in jezikovno prilagajanje vmesnikov programov in knjižnic."
+
+#: ../data/gtranslator.appdata.xml.in.h:3
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -40,7 +50,7 @@ msgstr ""
 "razpredelnica sporočil (za pregled nad prevodi in sporočili v datoteki *."
 "po), enostavno krmarjenje in urejanje sporočil in opomb k prevodu."
 
-#: ../data/gtranslator.appdata.xml.in.h:2
+#: ../data/gtranslator.appdata.xml.in.h:4
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
 "alternate language, insert tags, open tran, integration with subversion and "
@@ -50,10 +60,6 @@ msgstr ""
 "kot so nadomesten jezik, vstavljanje značk, odprto prevajanje, povezovanje s "
 "sistemom različic in ogledovalnik izvorne kode."
 
-#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
-msgid "Gtranslator"
-msgstr "Gtranslator"
-
 #: ../data/desktop/gtranslator.desktop.in.h:2
 msgid "PO File Editor"
 msgstr "Urejevanje datotek .po"
@@ -61,10 +67,6 @@ msgstr "Urejevanje datotek .po"
 #: ../data/desktop/gtranslator.desktop.in.h:3
 msgid "Gtranslator PO File Editor"
 msgstr "Gtranslator - urejevalnik datotek .po"
-
-#: ../data/desktop/gtranslator.desktop.in.h:4
-msgid "Translate and localize applications and libraries"
-msgstr "Prevajanje in jezikovno prilagajanje vmesnikov programov in knjižnic."
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.h:1
 msgid "Warn if file contains fuzzy translations"
@@ -927,7 +929,7 @@ msgid "Translator email:"
 msgstr "Elektronski naslov prevajalca:"
 
 #: ../src/gtr-assistant.c:303 ../src/gtr-assistant.c:395
-#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:461
+#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:460
 msgid "Profile"
 msgstr "Profil"
 
@@ -1430,29 +1432,29 @@ msgstr ""
 "Ni mogoče začeti programa GtkSpell.\n"
 " %s"
 
-#: ../src/gtr-window.c:130
+#: ../src/gtr-window.c:129
 msgid "Untranslated"
 msgstr "Neprevedeno"
 
-#: ../src/gtr-window.c:133
+#: ../src/gtr-window.c:132
 msgid "Translated"
 msgstr "Prevedeno"
 
-#: ../src/gtr-window.c:136
+#: ../src/gtr-window.c:135
 msgid "Fuzzy"
 msgstr "Ohlapno"
 
-#: ../src/gtr-window.c:143
+#: ../src/gtr-window.c:142
 #, c-format
 msgid "Current: %d"
 msgstr "Trenutno: %d"
 
-#: ../src/gtr-window.c:144
+#: ../src/gtr-window.c:143
 #, c-format
 msgid "Total: %d"
 msgstr "Skupaj: %d"
 
-#: ../src/gtr-window.c:145
+#: ../src/gtr-window.c:144
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
@@ -1461,7 +1463,7 @@ msgstr[1] "%d preveden"
 msgstr[2] "%d prevedena"
 msgstr[3] "%d prevedeni"
 
-#: ../src/gtr-window.c:148
+#: ../src/gtr-window.c:147
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
@@ -1470,7 +1472,7 @@ msgstr[1] "%d ohlapen"
 msgstr[2] "%d ohlapna"
 msgstr[3] "%d ohlapni"
 
-#: ../src/gtr-window.c:150
+#: ../src/gtr-window.c:149
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1480,28 +1482,40 @@ msgstr[2] "%d neprevedena"
 msgstr[3] "%d neprevedeni"
 
 #. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:253
+#: ../src/gtr-window.c:252
 #, c-format
 msgid "*%s - gtranslator"
 msgstr "*%s - gtranslator"
 
 #. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:256
+#: ../src/gtr-window.c:255
 #, c-format
 msgid "%s - gtranslator"
 msgstr "%s - gtranslator"
 
-#: ../src/gtr-window.c:262
+#: ../src/gtr-window.c:261
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/gtr-window.c:445
+#: ../src/gtr-window.c:444
 msgid "No profile"
 msgstr "Ni profila"
 
-#: ../src/gtr-window.c:463
+#: ../src/gtr-window.c:462
 msgid "Profile for the active document"
 msgstr "Profil za dejaven dokument"
+
+#: ../src/gtr-window.ui.h:1
+msgid "Projects"
+msgstr "Projekti"
+
+#: ../src/gtr-window.ui.h:2
+msgid "Add project"
+msgstr "Dodaj projekt"
+
+#: ../src/gtr-window.ui.h:3
+msgid "Remove project"
+msgstr "Odstrani projekt"
 
 #: ../src/main.c:97
 msgid "- Edit PO files"
