@@ -6,7 +6,7 @@ gtranslator \-\- a comfortable gettext po file editor with many bells and whistl
 .B gtranslator [ \-\-help ] [ \-\-version ] [ \-a filename ] [ \-e po\-file ] [ \-g geometry\-string  ] [ \-l po\-file\-to\-learn ] [ \-b ] [ \-s ]
 
 .SH "DESCRIPTION"
-gtranslator is a comfortable gettext po file editor with many features like special char featured editing, plural forms view, div. charset support, comfortable prefs, list view of messages, regular expression based search function, compile/update possiblities and much much more.
+gtranslator is a comfortable gettext po file editor with many features like special char featured editing, plural forms view, div. charset support, comfortable prefs, list view of messages, regular expression based search function, compile/update possibilities and much much more.
 
 .TP 
 Of course all standard features of a good application like DnD, session support, supplement files for mime types and menu items are present.
@@ -48,7 +48,7 @@ Shows you the pill of options without an explanation.
 Your personal gtranslator settings will be stored there. 
 .TP 
 .B ~/.gtranslator
-This directory is used by gtranslator for all it's "private" files (e.g. temporary files).
+This directory is used by gtranslator for all its "private" files (e.g. temporary files).
 .TP 
 .B ~/.gtranslator/colorschemes/
 Your personal colorschemes can be placed in this directory \-\- gtranslator does also list the colorschemes in this directory in the colorscheme selection box.
@@ -62,17 +62,17 @@ Your personal learn buffers (in UMTF format) are stored in this directory \-\- t
 .B ~/.gtranslator/files/
 Temporary files used by gtranslator are stored in this directory (mostly this directory should be empty).
 .SH "LEARN BUFFER"
-The learn buffer is the implementation of a personal translation memory (TM) in gtranslator. gtranslator uses the \fBUMTF\fR (a compressed XML file which is normally quite good human readable if uncompressed) format for storing it's learned strings.
+The learn buffer is the implementation of a personal translation memory (TM) in gtranslator. gtranslator uses the \fBUMTF\fR (a compressed XML file which is normally quite good human readable if uncompressed) format for storing its learned strings.
 .br 
 Your learned strings are then available for the autotranslation feature of gtranslator where gtranslator automatically fills in the corresponding and valuable translations for any message which has already been learned previously. This results in a fairly high percentage of prefilled/pretranslated messages.
 .br 
 The common and good style of working with the learn buffer and with the autotranslation should be to learn the main po/translation files for your language via gtranslator via calling \fBgtranslator \-n \-l po\-file\-to\-learn\fR on the command line; this will put the translated strings from this po file into your personal learn buffer.
 .br 
-You should learn the main po files (for GNOME for example \fBgnumeric\fR, \fBnautilus\fR, \fBevolution\fR or any other bigger, already translated package's po file) for your language); you can use a new script from the gtranslator package to automatise this task a little bit: it's \*(lqbuild-gtranslator-learn-buffer.sh\*(rq which is installed into gtranslator's scripts directory which you can see by calling \fBgtranslator \-b\fR and you simply execute the script with it's full path and simply follow the information on the command line for it.
+You should learn the main po files (for GNOME for example \fBgnumeric\fR, \fBnautilus\fR, \fBevolution\fR or any other bigger, already translated package's po file) for your language); you can use a new script from the gtranslator package to automatise this task a little bit: it's \*(lqbuild-gtranslator-learn-buffer.sh\*(rq which is installed into gtranslator's scripts directory which you can see by calling \fBgtranslator \-b\fR and you simply execute the script with its full path and simply follow the information on the command line for it.
 .br 
 Afterwards you can simply use the "Autotranslation" menu entry from the GUI or use the "F10" hotkey to let gtranslator autotranslate all missing translations from your personal learn buffer. This will ease your translation work and make a big portion of the po files be pre\-translated.
 .br 
-With a fairly big personal learn buffer of about 2 MB you can achive many pre\-translated messages for a new project/translation.
+With a fairly big personal learn buffer of about 2 MB you can achieve many pre\-translated messages for a new project/translation.
 .br 
 If you want to use the stored learn buffer contents to produce a po file with all the \*(lqlearned\*(rq translations, you can also use the \*(lqexport learn buffer\*(rq capability of gtranslator to get a plain po file version of the learn buffer.
 .SH "USAGE EXAMPLES"
@@ -105,7 +105,7 @@ Starts gtranslator with the given po\-file loaded on startup.
 .TP 
 .B gtranslator \-g \*(lq460x320+0+0\*(rq
 Lets gtranslator appear on the left upper edge of the screen \*(lq+0+0\*(rq and gtranslator is
-sized to \*(lq460x320\*(rq if possible \-\- if gtranslator needs more size for it's window contents, it'll expand itself to the necessary dimensions \-\- even if you defined a smaller geometry string.
+sized to \*(lq460x320\*(rq if possible \-\- if gtranslator needs more size for its window contents, it'll expand itself to the necessary dimensions \-\- even if you defined a smaller geometry string.
 
 .SH "LICENSE"
 gtranslator is distributed under the 
