@@ -1,19 +1,19 @@
 # Vietnamese translation for GTranslator.
 # Bản dịch tiếng Việt cho GTranslator.
-# Copyright © 2015 Gnome i18n Project for Vietnamese.
+# Copyright © 2016 Gnome i18n Project for Vietnamese.
 # Nguyễn Thái Ngọc Duy <pclouds@gmx.net>, 2002.
 # Clytie Siddall <clytie@riverland.net.au>, 2006.
-# Trần Ngọc Quân <vnwildman@gmail.com>, 2014, 2015.
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2014, 2015, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-09-29 22:48+0000\n"
-"PO-Revision-Date: 2015-09-30 08:13+0700\n"
+"POT-Creation-Date: 2016-01-30 00:35+0000\n"
+"PO-Revision-Date: 2016-06-09 14:01+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
-"Language-Team: Vietnamese <gnome-vi-list@gnome.org>\n"
+"Language-Team: Vietnamese <translation-team-vi@lists.sourceforge.net>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,6 +22,16 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: ../data/gtranslator.appdata.xml.in.h:1
+#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
+msgid "Gtranslator"
+msgstr "Gtranslator"
+
+#: ../data/gtranslator.appdata.xml.in.h:2
+#: ../data/desktop/gtranslator.desktop.in.h:4
+msgid "Translate and localize applications and libraries"
+msgstr "Dịch và bản địa hóa các ứng dụng và thư viện"
+
+#: ../data/gtranslator.appdata.xml.in.h:3
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -36,7 +46,7 @@ msgstr ""
 "dịch, bảng chuỗi (để xem chuỗi gốc và bản dịch của tập tin po), dễ dàng di "
 "chuyển và sửa đổi chuỗi bản dịch và lời ghi chú của bản dịch."
 
-#: ../data/gtranslator.appdata.xml.in.h:2
+#: ../data/gtranslator.appdata.xml.in.h:4
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
 "alternate language, insert tags, open tran, integration with subversion and "
@@ -46,10 +56,6 @@ msgstr ""
 "vị như là ngôn ngữ thay thế, thêm thẻ, open tran, tích hợp với subversion và "
 "bộ xem mã nguồn."
 
-#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
-msgid "Gtranslator"
-msgstr "Gtranslator"
-
 #: ../data/desktop/gtranslator.desktop.in.h:2
 msgid "PO File Editor"
 msgstr "Ứng dụng chỉnh sửa tập tin po"
@@ -57,10 +63,6 @@ msgstr "Ứng dụng chỉnh sửa tập tin po"
 #: ../data/desktop/gtranslator.desktop.in.h:3
 msgid "Gtranslator PO File Editor"
 msgstr "Ứng dụng chỉnh sửa tập tin po Gtranslator"
-
-#: ../data/desktop/gtranslator.desktop.in.h:4
-msgid "Translate and localize applications and libraries"
-msgstr "Dịch và bản địa hóa các ứng dụng và thư viện"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.h:1
 msgid "Warn if file contains fuzzy translations"
@@ -72,7 +74,7 @@ msgid ""
 "strings."
 msgstr ""
 "Nếu đúng, cảnh báo người dùng khi ghi tập tin bản dịch PO mà có chứa các "
-"chuỗi tạm dịch"
+"chuỗi tạm dịch."
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.h:3
 msgid "Auto save files"
@@ -137,7 +139,7 @@ msgstr "Nếu đúng, dùng phông chữ tự chọn cho ô nhập văn bản."
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.h:17
 msgid "Editor font"
-msgstr "Phông bộ biên soạn"
+msgstr "Phông chữ ô biên soạn"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.h:18
 msgid "Custom font to use for edit fields."
@@ -310,7 +312,7 @@ msgstr "Hiện chuỗi trong mã nguồn."
 
 #: ../plugins/codeview/gtr-viewer.c:80
 msgid "Source Viewer"
-msgstr "Chọn trình xem"
+msgstr "Xem mã nguồn"
 
 #: ../plugins/codeview/gtr-viewer.ui.h:1
 msgid "Source code"
@@ -623,7 +625,7 @@ msgstr "Open Tran"
 
 #: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:2
 msgid "Look for phrases in Open tran memory translation database."
-msgstr "Tìm các cụm từ trong cơ sở dữ liệu bộ nhớ bản dịch."
+msgstr "Tìm các cụm từ trong cơ sở dữ liệu bộ nhớ bản dịch Open tran."
 
 #: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:1
 msgid "Search Code"
@@ -692,7 +694,7 @@ msgstr "Chỉ dùng những tập tin có tên:"
 #: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:1
 #: ../plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
 msgid "Translation Memory"
-msgstr "Bộ nhớ Bản dịch"
+msgstr "Bộ nhớ bản dịch"
 
 #: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:2
 msgid "Get translation suggestions from a data base."
@@ -733,7 +735,7 @@ msgstr "Xây dựng bộ nhớ bản dịch"
 
 #: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
 msgid "_Translation Memory"
-msgstr "_Bộ nhớ Bản dịch"
+msgstr "_Dịch từ bộ nhớ"
 
 #: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:1
 msgid "PO directory"
@@ -970,7 +972,7 @@ msgstr "Ghi chú:"
 
 #: ../src/gtr-context.c:242
 msgid "Add Note"
-msgstr "Thêm nút"
+msgstr "Thêm ghi chú"
 
 #: ../src/gtr-context.c:247
 msgid "Edit"
@@ -979,7 +981,7 @@ msgstr "Chỉnh sửa"
 #. Extracted comments
 #: ../src/gtr-context.c:293
 msgid "Extracted comments:"
-msgstr "Ghi chú trích ra trừ mã nguồn:"
+msgstr "Ghi chú trích ra từ mã nguồn:"
 
 #. Context
 #: ../src/gtr-context.c:297
@@ -1001,7 +1003,7 @@ msgstr "Thông dịch gettext"
 
 #: ../src/gtr-file-dialogs.c:71
 msgid "Gettext translation template"
-msgstr "Biểu mẫu thông dịch gettext"
+msgstr "Bản mẫu thông dịch gettext"
 
 #: ../src/gtr-file-dialogs.c:76
 msgid "All files"
@@ -1029,7 +1031,7 @@ msgstr "Ngày _sửa tập tin .po:"
 
 #: ../src/gtr-header-dialog.ui.h:5
 msgid "Report message _bugs to:"
-msgstr "Thông báo lỗi chuỗi gốc cho:"
+msgstr "Thông báo _lỗi chuỗi gốc cho:"
 
 #: ../src/gtr-header-dialog.ui.h:6
 msgid "Project"
@@ -1037,7 +1039,7 @@ msgstr "Dự án"
 
 #: ../src/gtr-header-dialog.ui.h:7
 msgid "Use my options to complete the following entries:"
-msgstr "Dùng tùy chọn của tôi để hoàn tất các mục sau :"
+msgstr "Dùng tùy chọn của tôi để hoàn tất các mục sau:"
 
 #: ../src/gtr-header-dialog.ui.h:8
 msgid "Translator's _name:"
@@ -1884,7 +1886,7 @@ msgstr "Dấu ngăn cách"
 #~ "It was saved by gtranslator before gtranslator last closed\n"
 #~ "and may contain your hard work!\n"
 #~ msgstr ""
-#~ "Mở tập tin phục hồi cho “%s” không'?\n"
+#~ "Mở tập tin phục hồi cho “%s” không”?\n"
 #~ "Tập tin phục hồi được lưu bởi gtranslator\n"
 #~ "trước khi gtranslator kết thúc lần cuối cùng\n"
 #~ "và có thể chứa những thành quả nặng nhọc của bạn!\n"
