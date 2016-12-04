@@ -42,7 +42,7 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <string.h>
-#include <gtksourceview/gtksourcestyleschememanager.h>
+#include <gtksourceview/gtksource.h>
 #include <gdl/gdl.h>
 #include <libpeas-gtk/peas-gtk-plugin-manager.h>
 
