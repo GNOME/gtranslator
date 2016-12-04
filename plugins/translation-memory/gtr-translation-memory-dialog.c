@@ -182,7 +182,7 @@ add_to_database (gpointer data_pointer)
   /*
    * Set the progress only if the values are reasonable.
    */
-  if (percentage > 0.0 || percentage < 1.0)
+  if (percentage > 0.0 && percentage < 1.0)
     {
       /* Set the progressbar status. */
       gtk_progress_bar_set_fraction (data->progress, percentage);

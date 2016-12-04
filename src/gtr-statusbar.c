@@ -345,7 +345,7 @@ gtr_statusbar_update_progress_bar (GtrStatusbar * statusbar,
   /*
    * Set the progress only if the values are reasonable.
    */
-  if (percentage > 0.0 || percentage < 1.0)
+  if (percentage > 0.0 && percentage < 1.0)
     {
       gchar *percentage_str;
 
