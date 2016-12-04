@@ -42,7 +42,7 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <string.h>
-#include <gtksourceview/gtksourcestyleschememanager.h>
+#include <gtksourceview/gtksource.h>
 
 #define GTR_PREFERENCES_DIALOG_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ( \
                                                     (object), \

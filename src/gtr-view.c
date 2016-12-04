@@ -39,10 +39,7 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-#include <gtksourceview/gtksourcelanguagemanager.h>
-#include <gtksourceview/gtksourcebuffer.h>
-#include <gtksourceview/gtksourcestyleschememanager.h>
-
+#include <gtksourceview/gtksource.h>
 #ifdef HAVE_GTKSPELL
 #include <gtkspell/gtkspell.h>
 #endif
