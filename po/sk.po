@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-26 00:58+0000\n"
-"PO-Revision-Date: 2016-03-26 11:23+0100\n"
+"POT-Creation-Date: 2017-01-23 18:04+0000\n"
+"PO-Revision-Date: 2017-01-29 11:25+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: slovenčina <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: ../data/gtranslator.appdata.xml.in.h:1
 #: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
@@ -52,12 +52,12 @@ msgstr ""
 #: ../data/gtranslator.appdata.xml.in.h:4
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
-"alternate language, insert tags, open tran, integration with subversion and "
-"a source code viewer."
+"alternate language, insert tags, integration with subversion and a source "
+"code viewer."
 msgstr ""
 "Gtranslator obsahuje tiež systém zásuvných modulov s mnohými zaujímavými "
-"zásuvnými modulmi ako je iný jazyk, vkladanie značiek, open tran, integrácia "
-"do systému subversion a prehliadač zdrojového kódu."
+"zásuvnými modulmi ako je iný jazyk, vkladanie značiek, integrácia do systému "
+"subversion a prehliadač zdrojového kódu."
 
 #: ../data/desktop/gtranslator.desktop.in.h:2
 msgid "PO File Editor"
@@ -505,165 +505,6 @@ msgstr "Vkladanie parametrov alebo značiek"
 msgid "Parameters and tags detection featuring easy insertion."
 msgstr "Zisťovanie parametrov a značiek zahŕňajúce jednoduché vkladanie."
 
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
-msgid "Open Tran Settings"
-msgstr "Nastavenia Open Tran"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
-msgid "Language code for the Open-Tran query:"
-msgstr "Kód jazyka dopytu pre Open-Tran:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
-msgid "Language code of the translated results:"
-msgstr "Kód jazyka preložených výsledkov:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:4
-msgid "Use a local \"mirror\" copy of the Open-Tran server"
-msgstr "Použiť miestnu „zrkadlovú“ kópiu servera Open-Tran"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:5
-msgid "Mirror server URL:"
-msgstr "URL zrkadlového servera:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:7
-#, no-c-format
-msgid ""
-"<i>The URL should be of the form:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"The two \"%s\" markers and the final slash must not be omitted.</i>"
-msgstr ""
-"<i>URL adresa by mala byť v tomto tvare:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"Dve značky „%s“ a koncová lomka nesmú byť vynechané.</i>"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:10
-msgid "Mirror Server"
-msgstr "Zrkadlový server"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:222
-#, c-format
-msgid "ERROR: Cannot access %s\n"
-msgstr "CHYBA: Nedá sa pristupovať k %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:238
-msgid "Error in server response, GET failed\n"
-msgstr "Chyba v odpovedi servera, GET zlyhalo\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:250
-#, c-format
-msgid "Cannot parse server response, %s\n"
-msgstr "Nedá sa spracovať odpoveď servera, %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:264
-#, c-format
-msgid "Cannot parse server response, not an array? %s\n"
-msgstr "Nedá sa spracovať odpoveď servera, je odpoveď pole? %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:287
-#, c-format
-msgid "WRONG! Can't get result element %d\n"
-msgstr "NESPRÁVNE! Nedá sa získať výsledný prvok %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:297
-#, c-format
-msgid "WRONG! Can't parse result element %d as object\n"
-msgstr "NESPRÁVNE! Výsledný prvok %d sa nedá spracovať ako objekt\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:311
-#, c-format
-msgid "WRONG! Can't read projects for result element %d\n"
-msgstr "NESPRÁVNE! Nedajú sa prečítať projekty pre výsledný prvok %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:335
-#, c-format
-msgid "%s[%s] Count:%d"
-msgstr "%s[%s] Počet:%d"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:345
-#, c-format
-msgid "WRONG! Malformed project: %d\n"
-msgstr "NESPRÁVNE! Poškodený projekt: %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:359
-#: ../src/gtr-actions-search.c:191
-msgid "Phrase not found"
-msgstr "Fráza sa nenašla"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:383
-msgid "You have to provide a phrase to search"
-msgstr "Musíte uviesť frázu, ktorú chcete hľadať"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:392
-msgid "You have to provide a search language code in the plugin configuration"
-msgstr "V konfigurácii zásuvného modulu musíte uviesť kód jazyka pre hľadanie"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:402
-msgid ""
-"You have to provide a language code for your language in the plugin "
-"configuration"
-msgstr "V konfigurácii zásuvného modulu musíte uviesť kód jazyka pre váš jazyk"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:415
-msgid ""
-"Either use the main open-tran.eu server, or enter a server URL in the plugin "
-"configuration,"
-msgstr ""
-"V konfigurácii zásuvného modulu použite buď hlavný server open-tran.eu, "
-"alebo zadajte URL servera."
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:453
-msgid "Type"
-msgstr "Typ"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:464
-msgid "Open-Tran.eu"
-msgstr "Open-Tran.eu"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:510
-msgid "Look for:"
-msgstr "Hľadať:"
-
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:162
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:1
-msgid "Open Tran"
-msgstr "Open Tran"
-
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:2
-msgid "Look for phrases in Open tran memory translation database."
-msgstr "Hľadá frázy v databáze prekladov Open Tran."
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:1
-msgid "Search Code"
-msgstr "Kód na hľadanie"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:2
-msgid "The language code to search for"
-msgstr "Kód jazyka, ktorý sa má hľadať"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:3
-msgid "Own Code"
-msgstr "Vlastný kód"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:4
-msgid "The language code in which you want the results"
-msgstr "Kód jazyka, v ktorom chcete mať výsledky"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:5
-msgid "Use Mirror Server"
-msgstr "Použiť zrkadlový server"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:6
-msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
-msgstr "Použiť lokálnu kópiu hlavného servera Open-Tran na open-tran.eu"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:7
-msgid "Mirror Server URL"
-msgstr "URL zrkadlového servera"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:8
-msgid "URL of an Open-Tran mirror server"
-msgstr "URL zrkadlového servera Open-Tran"
-
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
 msgid "Strings added to database"
 msgstr "Reťazce boli pridané do databázy"
@@ -870,6 +711,10 @@ msgstr[2] "Nájdené a nahradené %d výskyty"
 #: ../src/gtr-actions-search.c:179
 msgid "Found and replaced one occurrence"
 msgstr "Nájdený a nahradený jeden výskyt"
+
+#: ../src/gtr-actions-search.c:191
+msgid "Phrase not found"
+msgstr "Fráza sa nenašla"
 
 #: ../src/gtranslator-menu.ui.h:1
 msgid "_New Window"
@@ -1414,12 +1259,12 @@ msgstr ""
 "Nepodarilo sa zobraziť pomocníka. Prosím, uistite sa, že je nainštalovaný "
 "balík dokumentácie programu Gtranslator."
 
-#: ../src/gtr-view.c:81
+#: ../src/gtr-view.c:78
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "Chyba gtkspell: %s\n"
 
-#: ../src/gtr-view.c:83
+#: ../src/gtr-view.c:80
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1563,6 +1408,120 @@ msgstr "Odstrániť vybranú lištu nástrojov"
 #: ../src/toolbareditor/egg-toolbar-editor.c:488
 msgid "Separator"
 msgstr "Oddeľovač"
+
+#~ msgid "Open Tran Settings"
+#~ msgstr "Nastavenia Open Tran"
+
+#~ msgid "Language code for the Open-Tran query:"
+#~ msgstr "Kód jazyka dopytu pre Open-Tran:"
+
+#~ msgid "Language code of the translated results:"
+#~ msgstr "Kód jazyka preložených výsledkov:"
+
+#~ msgid "Use a local \"mirror\" copy of the Open-Tran server"
+#~ msgstr "Použiť miestnu „zrkadlovú“ kópiu servera Open-Tran"
+
+#~ msgid "Mirror server URL:"
+#~ msgstr "URL zrkadlového servera:"
+
+#~ msgid ""
+#~ "<i>The URL should be of the form:\n"
+#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+#~ "The two \"%s\" markers and the final slash must not be omitted.</i>"
+#~ msgstr ""
+#~ "<i>URL adresa by mala byť v tomto tvare:\n"
+#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+#~ "Dve značky „%s“ a koncová lomka nesmú byť vynechané.</i>"
+
+#~ msgid "Mirror Server"
+#~ msgstr "Zrkadlový server"
+
+#~ msgid "ERROR: Cannot access %s\n"
+#~ msgstr "CHYBA: Nedá sa pristupovať k %s\n"
+
+#~ msgid "Error in server response, GET failed\n"
+#~ msgstr "Chyba v odpovedi servera, GET zlyhalo\n"
+
+#~ msgid "Cannot parse server response, %s\n"
+#~ msgstr "Nedá sa spracovať odpoveď servera, %s\n"
+
+#~ msgid "Cannot parse server response, not an array? %s\n"
+#~ msgstr "Nedá sa spracovať odpoveď servera, je odpoveď pole? %s\n"
+
+#~ msgid "WRONG! Can't get result element %d\n"
+#~ msgstr "NESPRÁVNE! Nedá sa získať výsledný prvok %d\n"
+
+#~ msgid "WRONG! Can't parse result element %d as object\n"
+#~ msgstr "NESPRÁVNE! Výsledný prvok %d sa nedá spracovať ako objekt\n"
+
+#~ msgid "WRONG! Can't read projects for result element %d\n"
+#~ msgstr "NESPRÁVNE! Nedajú sa prečítať projekty pre výsledný prvok %d\n"
+
+#~ msgid "%s[%s] Count:%d"
+#~ msgstr "%s[%s] Počet:%d"
+
+#~ msgid "WRONG! Malformed project: %d\n"
+#~ msgstr "NESPRÁVNE! Poškodený projekt: %d\n"
+
+#~ msgid "You have to provide a phrase to search"
+#~ msgstr "Musíte uviesť frázu, ktorú chcete hľadať"
+
+#~ msgid ""
+#~ "You have to provide a search language code in the plugin configuration"
+#~ msgstr ""
+#~ "V konfigurácii zásuvného modulu musíte uviesť kód jazyka pre hľadanie"
+
+#~ msgid ""
+#~ "You have to provide a language code for your language in the plugin "
+#~ "configuration"
+#~ msgstr ""
+#~ "V konfigurácii zásuvného modulu musíte uviesť kód jazyka pre váš jazyk"
+
+#~ msgid ""
+#~ "Either use the main open-tran.eu server, or enter a server URL in the "
+#~ "plugin configuration,"
+#~ msgstr ""
+#~ "V konfigurácii zásuvného modulu použite buď hlavný server open-tran.eu, "
+#~ "alebo zadajte URL servera."
+
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgid "Open-Tran.eu"
+#~ msgstr "Open-Tran.eu"
+
+#~ msgid "Look for:"
+#~ msgstr "Hľadať:"
+
+#~ msgid "Open Tran"
+#~ msgstr "Open Tran"
+
+#~ msgid "Look for phrases in Open tran memory translation database."
+#~ msgstr "Hľadá frázy v databáze prekladov Open Tran."
+
+#~ msgid "Search Code"
+#~ msgstr "Kód na hľadanie"
+
+#~ msgid "The language code to search for"
+#~ msgstr "Kód jazyka, ktorý sa má hľadať"
+
+#~ msgid "Own Code"
+#~ msgstr "Vlastný kód"
+
+#~ msgid "The language code in which you want the results"
+#~ msgstr "Kód jazyka, v ktorom chcete mať výsledky"
+
+#~ msgid "Use Mirror Server"
+#~ msgstr "Použiť zrkadlový server"
+
+#~ msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
+#~ msgstr "Použiť lokálnu kópiu hlavného servera Open-Tran na open-tran.eu"
+
+#~ msgid "Mirror Server URL"
+#~ msgstr "URL zrkadlového servera"
+
+#~ msgid "URL of an Open-Tran mirror server"
+#~ msgstr "URL zrkadlového servera Open-Tran"
 
 #~ msgid "_File"
 #~ msgstr "_Súbor"
