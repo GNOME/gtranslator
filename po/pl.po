@@ -1,18 +1,18 @@
 # Polish translation for gtranslator.
-# Copyright © 2001-2016 the gtranslator authors.
+# Copyright © 2001-2017 the gtranslator authors.
 # This file is distributed under the same license as the gtranslator package.
 # Grzegorz Kowal <g_kowal@poczta.onet.pl>, 2001.
 # Zbigniew Chyla <chyla@alice.ci.pwr.wroc.pl>, 2001-2003.
 # Artur Flinta <aflinta@at.kernel.pl>, 2003.
-# Piotr Drąg <piotrdrag@gmail.com>, 2011-2016.
-# Aviary.pl <community-poland@mozilla.org>, 2011-2016.
+# Piotr Drąg <piotrdrag@gmail.com>, 2011-2017.
+# Aviary.pl <community-poland@mozilla.org>, 2011-2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-09 03:55+0200\n"
-"PO-Revision-Date: 2016-09-09 03:57+0200\n"
+"POT-Creation-Date: 2017-01-30 01:30+0100\n"
+"PO-Revision-Date: 2017-01-30 01:31+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -51,12 +51,12 @@ msgstr ""
 #: ../data/gtranslator.appdata.xml.in.h:4
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
-"alternate language, insert tags, open tran, integration with subversion and "
-"a source code viewer."
+"alternate language, insert tags, integration with subversion and a source "
+"code viewer."
 msgstr ""
 "gtranslator zawiera także system wtyczek z wieloma interesującymi wtyczkami, "
-"takimi jak alternatywny język, wstawianie znaczników, obsługa serwisu Open-"
-"Tran.eu, integracja z systemem Subversion i przeglądarka kodu źródłowego."
+"takimi jak alternatywny język, wstawianie znaczników, integracja z systemem "
+"Subversion i przeglądarka kodu źródłowego."
 
 #: ../data/desktop/gtranslator.desktop.in.h:2
 msgid "PO File Editor"
@@ -512,165 +512,6 @@ msgstr "Wstawianie parametrów lub etykiet"
 msgid "Parameters and tags detection featuring easy insertion."
 msgstr "Wykrywanie parametrów i etykiet, a także ich łatwe wstawianie."
 
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
-msgid "Open Tran Settings"
-msgstr "Ustawienia serwisu Open-Tran"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
-msgid "Language code for the Open-Tran query:"
-msgstr "Kod języka dla zapytania w serwisie Open-Tran:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
-msgid "Language code of the translated results:"
-msgstr "Kod języka dla przetłumaczonych wyników:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:4
-msgid "Use a local \"mirror\" copy of the Open-Tran server"
-msgstr "Użycie lokalnej „źródlanej” kopii serwera Open-Tran"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:5
-msgid "Mirror server URL:"
-msgstr "Adres URL serwera lustrzanego:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:7
-#, no-c-format
-msgid ""
-"<i>The URL should be of the form:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"The two \"%s\" markers and the final slash must not be omitted.</i>"
-msgstr ""
-"<i>Adres URL powinien mieć formę:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"Nie można pominąć dwóch znaczników „%s” i końcowego ukośnika.</i>"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:10
-msgid "Mirror Server"
-msgstr "Serwer lustrzany"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:222
-#, c-format
-msgid "ERROR: Cannot access %s\n"
-msgstr "Błąd: nie można uzyskać dostępu do %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:238
-msgid "Error in server response, GET failed\n"
-msgstr "Błąd w odpowiedzi serwera, GET się nie powiodło\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:250
-#, c-format
-msgid "Cannot parse server response, %s\n"
-msgstr "Nie można przetworzyć odpowiedzi serwera, %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:264
-#, c-format
-msgid "Cannot parse server response, not an array? %s\n"
-msgstr "Nie można przetworzyć odpowiedzi serwera, nie jest macierzą? %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:287
-#, c-format
-msgid "WRONG! Can't get result element %d\n"
-msgstr "Błąd: nie można uzyskać elementu wyniku %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:297
-#, c-format
-msgid "WRONG! Can't parse result element %d as object\n"
-msgstr "Błąd: nie można przetworzyć elementu %d jako obiektu\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:311
-#, c-format
-msgid "WRONG! Can't read projects for result element %d\n"
-msgstr "Błąd: nie można odczytać projektów dla elementu wyniku %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:335
-#, c-format
-msgid "%s[%s] Count:%d"
-msgstr "%s[%s] Liczba: %d"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:345
-#, c-format
-msgid "WRONG! Malformed project: %d\n"
-msgstr "Błąd: błędnie sformatowany projekt: %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:359
-#: ../src/gtr-actions-search.c:191
-msgid "Phrase not found"
-msgstr "Nie odnaleziono frazy"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:383
-msgid "You have to provide a phrase to search"
-msgstr "Należy podać frazę do wyszukania"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:392
-msgid "You have to provide a search language code in the plugin configuration"
-msgstr "Należy podać kod wyszukiwanego języka w konfiguracji wtyczki"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:402
-msgid ""
-"You have to provide a language code for your language in the plugin "
-"configuration"
-msgstr "Należy podać kod dla języka użytkownika w konfiguracji wtyczki"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:415
-msgid ""
-"Either use the main open-tran.eu server, or enter a server URL in the plugin "
-"configuration,"
-msgstr ""
-"Należy użyć głównego serwera open-tran.eu lub podać adres URL serwera "
-"w konfiguracji wtyczki,"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:453
-msgid "Type"
-msgstr "Typ"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:464
-msgid "Open-Tran.eu"
-msgstr "Open-Tran.eu"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:510
-msgid "Look for:"
-msgstr "Wyszukiwanie:"
-
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:162
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:1
-msgid "Open Tran"
-msgstr "Open-Tran"
-
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:2
-msgid "Look for phrases in Open tran memory translation database."
-msgstr "Wyszukiwanie fraz w bazie danych pamięci tłumaczenia Open-Tran."
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:1
-msgid "Search Code"
-msgstr "Kod wyszukiwania"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:2
-msgid "The language code to search for"
-msgstr "Kod języka, który wyszukiwać"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:3
-msgid "Own Code"
-msgstr "Własny kod"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:4
-msgid "The language code in which you want the results"
-msgstr "Kod języka, dla którego uzyskać wyniki"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:5
-msgid "Use Mirror Server"
-msgstr "Używanie serwera lustrzanego"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:6
-msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
-msgstr "Używanie lokalnej kopii głównego serwera Open-Tran z open-tran.eu"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:7
-msgid "Mirror Server URL"
-msgstr "Adres URL serwera lustrzanego"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:8
-msgid "URL of an Open-Tran mirror server"
-msgstr "Adres URL serwera lustrzanego Open-Tran"
-
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
 msgid "Strings added to database"
 msgstr "Ciągi do dodania do bazy danych"
@@ -840,8 +681,8 @@ msgstr ""
 "Grzegorz Kowal <g_kowal@poczta.onet.pl>, 2001\n"
 "Zbigniew Chyla <chyla@alice.ci.pwr.wroc.pl>, 2001-2003\n"
 "Artur Flinta <aflinta@at.kernel.pl>, 2003\n"
-"Piotr Drąg <piotrdrag@gmail.com>, 2011-2016\n"
-"Aviary.pl <community-poland@mozilla.org>, 2011-2016"
+"Piotr Drąg <piotrdrag@gmail.com>, 2011-2017\n"
+"Aviary.pl <community-poland@mozilla.org>, 2011-2017"
 
 #: ../src/gtr-actions-app.c:114
 msgid "Gtranslator Web Site"
@@ -874,6 +715,10 @@ msgstr[2] "Odnaleziono i zmieniono %d wystąpień"
 #: ../src/gtr-actions-search.c:179
 msgid "Found and replaced one occurrence"
 msgstr "Odnaleziono i zmieniono jedno wystąpienie"
+
+#: ../src/gtr-actions-search.c:191
+msgid "Phrase not found"
+msgstr "Nie odnaleziono frazy"
 
 #: ../src/gtranslator-menu.ui.h:1
 msgid "_New Window"
@@ -1421,12 +1266,12 @@ msgstr ""
 "Nie można wyświetlić pomocy. Proszę się upewnić, że pakiet dokumentacji "
 "programu gtranslator jest zainstalowany."
 
-#: ../src/gtr-view.c:81
+#: ../src/gtr-view.c:78
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "Błąd biblioteki GtkSpell: %s\n"
 
-#: ../src/gtr-view.c:83
+#: ../src/gtr-view.c:80
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
