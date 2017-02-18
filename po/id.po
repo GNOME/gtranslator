@@ -2,15 +2,15 @@
 # Copyright (C) 2003 THE gtranslator'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the gtranslator package.
 # Mohammad DAMT <mdamt@bisnisweb.com>, 2003.
-# Andika Triwidada <andika@gmail.com>, 2009-2013.
+# Andika Triwidada <andika@gmail.com>, 2009-2013, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-07-04 01:39+0000\n"
-"PO-Revision-Date: 2016-07-08 19:19+0700\n"
+"POT-Creation-Date: 2017-02-10 10:20+0000\n"
+"PO-Revision-Date: 2017-02-18 15:05+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: ../data/gtranslator.appdata.xml.in.h:1
 #: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
@@ -49,12 +49,12 @@ msgstr ""
 #: ../data/gtranslator.appdata.xml.in.h:4
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
-"alternate language, insert tags, open tran, integration with subversion and "
-"a source code viewer."
+"alternate language, insert tags, integration with subversion and a source "
+"code viewer."
 msgstr ""
 "Gtranslator juga memiliki sistem plugin dengan banyak plugin menarik seperti "
-"bahasa alternatif, sisip tag, buka tran, integrasi dengan subversion, dan "
-"penilik kode sumber."
+"bahasa alternatif, sisip tag, integrasi dengan subversion, dan penilik kode "
+"sumber."
 
 #: ../data/desktop/gtranslator.desktop.in.h:2
 msgid "PO File Editor"
@@ -497,166 +497,6 @@ msgstr "Sisip Param atau Tag"
 msgid "Parameters and tags detection featuring easy insertion."
 msgstr "Deteksi parameter dan tag dengan fitur penyisipan mudah."
 
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
-msgid "Open Tran Settings"
-msgstr "Penataan Open Tran"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
-msgid "Language code for the Open-Tran query:"
-msgstr "Kode bahasa bagi kueri Open-Tran:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
-msgid "Language code of the translated results:"
-msgstr "Bahasa kode hasil terjemahan:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:4
-msgid "Use a local \"mirror\" copy of the Open-Tran server"
-msgstr "Gunakan salinan \"cermin\" lokal dari server Open-Tran"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:5
-msgid "Mirror server URL:"
-msgstr "URL server cermin:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:7
-#, no-c-format
-msgid ""
-"<i>The URL should be of the form:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"The two \"%s\" markers and the final slash must not be omitted.</i>"
-msgstr ""
-"<i>URL mesti berbentuk:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"Dua penanda \"%s\" dan garis miring akhir tak boleh dihilangkan.</i>"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:10
-msgid "Mirror Server"
-msgstr "Server Cermin"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:222
-#, c-format
-msgid "ERROR: Cannot access %s\n"
-msgstr "GALAT: Tak bisa mengakses %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:238
-msgid "Error in server response, GET failed\n"
-msgstr "Galat dalam jawaban server, GET gagal\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:250
-#, c-format
-msgid "Cannot parse server response, %s\n"
-msgstr "Tak bisa mengurai jawaban server, %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:264
-#, c-format
-msgid "Cannot parse server response, not an array? %s\n"
-msgstr "Tak bisa mengurai jawaban server, bukan larik? %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:287
-#, c-format
-msgid "WRONG! Can't get result element %d\n"
-msgstr "SALAH: Tak bisa mendapat elemen hasil %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:297
-#, c-format
-msgid "WRONG! Can't parse result element %d as object\n"
-msgstr "SALAH! Tak bisa mengurai elemen hasil %d sebagai objek\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:311
-#, c-format
-msgid "WRONG! Can't read projects for result element %d\n"
-msgstr "SALAH! Tak bisa membaca projek untuk elemen hasil %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:335
-#, c-format
-msgid "%s[%s] Count:%d"
-msgstr "%s[%s] Cacah:%d"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:345
-#, c-format
-msgid "WRONG! Malformed project: %d\n"
-msgstr "SALAH! Projek salah bentuk: %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:359
-#: ../src/gtr-actions-search.c:191
-msgid "Phrase not found"
-msgstr "Frasa tak ditemukan"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:383
-msgid "You have to provide a phrase to search"
-msgstr "Anda mesti menyatakan frasa yang akan dicari"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:392
-msgid "You have to provide a search language code in the plugin configuration"
-msgstr "Anda mesti menyatakan kode bahasa pencarian dalam konfigurasi pengaya"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:402
-msgid ""
-"You have to provide a language code for your language in the plugin "
-"configuration"
-msgstr ""
-"Anda mesti menyatakan kode bahasa untuk bahasa Anda dalam konfigurasi pengaya"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:415
-msgid ""
-"Either use the main open-tran.eu server, or enter a server URL in the plugin "
-"configuration,"
-msgstr ""
-"Gunakan server utama open-tran.eu atau masukkan URL server di konfigurasi "
-"pengaya,"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:453
-msgid "Type"
-msgstr "Tipe"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:464
-msgid "Open-Tran.eu"
-msgstr "Open-Tran.eu"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:510
-msgid "Look for:"
-msgstr "Mencari:"
-
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:162
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:1
-msgid "Open Tran"
-msgstr "Open Tran"
-
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:2
-msgid "Look for phrases in Open tran memory translation database."
-msgstr "Mencari frasa dalam basis data terjemahan ingatan Open tran."
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:1
-msgid "Search Code"
-msgstr "Cari Kode"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:2
-msgid "The language code to search for"
-msgstr "Kode bahasa untuk dicari"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:3
-msgid "Own Code"
-msgstr "Kode Sendiri"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:4
-msgid "The language code in which you want the results"
-msgstr "Kode bahasa tempat hasil yang Anda inginkan"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:5
-msgid "Use Mirror Server"
-msgstr "Gunakan Server Cermin"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:6
-msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
-msgstr "Gunakan salinan lokal dari server utama Open-Tran di open-tran.eu"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:7
-msgid "Mirror Server URL"
-msgstr "URL Server Cermin"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:8
-msgid "URL of an Open-Tran mirror server"
-msgstr "URL dari server cermin Open-Tran"
-
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
 msgid "Strings added to database"
 msgstr "Kalimat ditambahkan ke basis data"
@@ -854,6 +694,10 @@ msgstr[0] "Ditemukan dan diganti %d kali"
 #: ../src/gtr-actions-search.c:179
 msgid "Found and replaced one occurrence"
 msgstr "Ditemukan dan diganti satu kali"
+
+#: ../src/gtr-actions-search.c:191
+msgid "Phrase not found"
+msgstr "Frasa tak ditemukan"
 
 #: ../src/gtranslator-menu.ui.h:1
 msgid "_New Window"
@@ -1392,12 +1236,12 @@ msgstr ""
 "Tak bisa menampilkan bantuan. Pastikan bahwa paket dokumentasi Gtranslator "
 "telah dipasang."
 
-#: ../src/gtr-view.c:81
+#: ../src/gtr-view.c:78
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "galat gtkspell: %s\n"
 
-#: ../src/gtr-view.c:83
+#: ../src/gtr-view.c:80
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1535,204 +1379,3 @@ msgstr "Hapus toolbar yang dipilih"
 #: ../src/toolbareditor/egg-toolbar-editor.c:488
 msgid "Separator"
 msgstr "Pemisah"
-
-#~ msgid "_File"
-#~ msgstr "_Berkas"
-
-#~ msgid "_Edit"
-#~ msgstr "_Edit"
-
-#~ msgid "_View"
-#~ msgstr "_Tampilan"
-
-#~ msgid "_Search"
-#~ msgstr "_Cari"
-
-#~ msgid "_Go"
-#~ msgstr "Ay_o"
-
-#~ msgid "_Tools"
-#~ msgstr "_Perkakas"
-
-#~ msgid "_Documents"
-#~ msgstr "_Dokumen"
-
-#~ msgid "Open a PO file"
-#~ msgstr "Buka suatu berkas PO"
-
-#~ msgid "_Recent Files"
-#~ msgstr "Be_rkas Terkini"
-
-#~ msgid "T_oolbar"
-#~ msgstr "T_oolbar"
-
-#~ msgid "_Header..."
-#~ msgstr "_Header..."
-
-#~ msgid "Save the current file"
-#~ msgstr "Simpan berkas kini"
-
-#~ msgid "Save the current file with another name"
-#~ msgstr "Simpan berkas kini dengan nama berbeda"
-
-#~ msgid "Close the current file"
-#~ msgstr "Tutup berkas kini"
-
-#~ msgid "Undo last operation"
-#~ msgstr "Batalkan operasi terakhir"
-
-#~ msgid "Redo last undone operation"
-#~ msgstr "Lakukan lagi operasi terakhir yang dibatalkan"
-
-#~ msgid "Cut the selected text"
-#~ msgstr "Potong teks yang dipilih"
-
-#~ msgid "Copy the selected text"
-#~ msgstr "Salin teks yang dipilih"
-
-#~ msgid "Paste the contents of the clipboard"
-#~ msgstr "Tempel isi clipboard"
-
-#~ msgid "Clear the selected translation"
-#~ msgstr "Bersihkan terjemahan yang dipilih"
-
-#~ msgid "Copy _Message to Translation"
-#~ msgstr "Salin Pesan ke Terje_mahan"
-
-#~ msgid "Copy original message contents to the translation field"
-#~ msgstr "Salin isi pesan asli dan tempelkan sebagai terjemahan"
-
-#~ msgid "Toggle _Fuzzy Status"
-#~ msgstr "_Jungkit Status Keraguan"
-
-#~ msgid "Toggle fuzzy status of a message"
-#~ msgstr "Bolak-balik status keraguan dari suatu pesan"
-
-#~ msgid "_Message Details"
-#~ msgstr "Rincian Pesa_n"
-
-#~ msgid "Show the Context panel"
-#~ msgstr "Tampilkan panel Konteks"
-
-#~ msgid "_Previous Message"
-#~ msgstr "_Pesan Sebelumnya"
-
-#~ msgid "Move back one message"
-#~ msgstr "Mundur satu pesan"
-
-#~ msgid "_Next Message"
-#~ msgstr "Pesa_n Berikutnya"
-
-#~ msgid "Move forward one message"
-#~ msgstr "Maju satu pesan"
-
-#~ msgid "_Go to Message..."
-#~ msgstr "_Lompat ke Pesan..."
-
-#~ msgid "Jumps to a specific message"
-#~ msgstr "Lompat ke nomor pesan tertentu"
-
-#~ msgid "_First Message"
-#~ msgstr "_Pesan Pertama"
-
-#~ msgid "Go to the first message"
-#~ msgstr "Pergi ke pesan pertama"
-
-#~ msgid "_Last Message"
-#~ msgstr "Pesan _Terakhir"
-
-#~ msgid "Go to the last message"
-#~ msgstr "Pergi ke pesan terakhir"
-
-#~ msgid "Next Fuz_zy"
-#~ msgstr "Ragu Beriku_tnya"
-
-#~ msgid "Go to the next fuzzy message"
-#~ msgstr "Pergi ke pesan ragu berikutnya"
-
-#~ msgid "Previous Fuzz_y"
-#~ msgstr "Ragu Sebelumn_ya"
-
-#~ msgid "Go to the previous fuzzy message"
-#~ msgstr "Pergi ke pesan ragu sebelumnya"
-
-#~ msgid "Next _Untranslated"
-#~ msgstr "Bel_um Terjemah Berikutnya"
-
-#~ msgid "Go to the next untranslated message"
-#~ msgstr "Lompat ke pesan berikutnya yang belum diterjemahkan"
-
-#~ msgid "Previ_ous Untranslated"
-#~ msgstr "Belum Terjemah _Sebelumnya"
-
-#~ msgid "Go to the previous untranslated message"
-#~ msgstr "Lompat ke pesan sebelumnya yang belum diterjemahkan"
-
-#~ msgid "Next Fu_zzy or Untranslated"
-#~ msgstr "Belum Terjemah _atau Ragu Berikutnya"
-
-#~ msgid "Go to the next fuzzy or untranslated message"
-#~ msgstr "Lompat ke pesan berikutnya yang belum diterjemahkan atau ragu"
-
-#~ msgid "Pre_vious Fuzzy or Untranslated"
-#~ msgstr "Ragu atau Belum Terjema_h Sebelumnya"
-
-#~ msgid "Go to the previous fuzzy or untranslated message"
-#~ msgstr "Lompat ke pesan berikutnya yang belum diterjemahkan atau ragu"
-
-#~ msgid "Search for text"
-#~ msgstr "Cari teks"
-
-#~ msgid "Search for and replace text"
-#~ msgstr "Cari dan ganti teks"
-
-#~ msgid "_Save All"
-#~ msgstr "_Simpan Semua"
-
-#~ msgid "Save all open files"
-#~ msgstr "Simpan semua berkas terbuka"
-
-#~ msgid "_Close All"
-#~ msgstr "_Tutup Semua"
-
-#~ msgid "Close all open files"
-#~ msgstr "Tutup semua berkas terbuka"
-
-#~ msgid "_Previous Document"
-#~ msgstr "Dokumen Se_belumnya"
-
-#~ msgid "Activate previous document"
-#~ msgstr "Aktifkan dokumen sebelumnya"
-
-#~ msgid "_Next Document"
-#~ msgstr "Dokumen Sela_njutnya"
-
-#~ msgid "Activate next document"
-#~ msgstr "Aktifkan dokumen selanjutnya"
-
-#~ msgid "Activate '%s'"
-#~ msgstr "Aktifkan '%s'"
-
-#~ msgid "Toolbar Editor"
-#~ msgstr "Penyunting Toolbar"
-
-#~ msgid "_Header…"
-#~ msgstr "_Header..."
-
-#~ msgid "Show the context panel"
-#~ msgstr "Tampilkan panel konteks"
-
-#~ msgid "_Go to Message…"
-#~ msgstr "Per_gi ke Pesan..."
-
-#~ msgid "_Open"
-#~ msgstr "_Buka"
-
-#~ msgid "_Save"
-#~ msgstr "_Simpan"
-
-#~ msgid "_Undo"
-#~ msgstr "_Tak Jadi"
-
-#~ msgid "_Redo"
-#~ msgstr "Jadi _Lagi"
