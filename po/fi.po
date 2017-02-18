@@ -7,25 +7,35 @@
 # Ilkka Tuohela <hile@iki.fi>, 2006-2008.
 # Jarkko Ranta <jjranta@cc.joensuu.fi>, 2000-2004.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2014.
-# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2012, 2013, 2014, 2015.
+# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2012, 2013, 2014, 2015, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-10-05 10:47+0000\n"
-"PO-Revision-Date: 2015-10-05 17:28+0300\n"
+"POT-Creation-Date: 2017-02-10 10:20+0000\n"
+"PO-Revision-Date: 2017-02-18 17:04+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
-"Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
+"Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
 #: ../data/gtranslator.appdata.xml.in.h:1
+#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
+msgid "Gtranslator"
+msgstr "Gtranslator"
+
+#: ../data/gtranslator.appdata.xml.in.h:2
+#: ../data/desktop/gtranslator.desktop.in.h:4
+msgid "Translate and localize applications and libraries"
+msgstr "Käännä ja kotoista ohjelmia sekä kirjastoja"
+
+#: ../data/gtranslator.appdata.xml.in.h:3
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -40,20 +50,20 @@ msgstr ""
 "käännösmuistin, useita eri käännösprofiileja, viestitaulun, kommenttien "
 "esittämisen ja ennen kaikkea helpon tavan muokata käännettäviä viestejä. "
 
-#: ../data/gtranslator.appdata.xml.in.h:2
+#: ../data/gtranslator.appdata.xml.in.h:4
+#| msgid ""
+#| "Gtranslator includes also a plugin system with many interesting plugins "
+#| "like alternate language, insert tags, open tran, integration with "
+#| "subversion and a source code viewer."
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
-"alternate language, insert tags, open tran, integration with subversion and "
-"a source code viewer."
+"alternate language, insert tags, integration with subversion and a source "
+"code viewer."
 msgstr ""
 "Gtranslator sisältää myös liitännäisjärjestelmän. Liitännäisistä "
 "mainittakoon vaihtoehtoiskielten liitännäinen, merkintöjen lisäys, "
 "integraatio Subversion-versionhallintajärjestelmään kanssa sekä "
 "lähdekoodikatselin."
-
-#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
-msgid "Gtranslator"
-msgstr "Gtranslator"
 
 #: ../data/desktop/gtranslator.desktop.in.h:2
 msgid "PO File Editor"
@@ -62,10 +72,6 @@ msgstr "PO-tiedostojen muokkain"
 #: ../data/desktop/gtranslator.desktop.in.h:3
 msgid "Gtranslator PO File Editor"
 msgstr "Gtranslator - PO-tiedostojen muokkain"
-
-#: ../data/desktop/gtranslator.desktop.in.h:4
-msgid "Translate and localize applications and libraries"
-msgstr "Käännä ja kotoista ohjelmia sekä kirjastoja"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.h:1
 msgid "Warn if file contains fuzzy translations"
@@ -495,162 +501,6 @@ msgstr "Lisää merkintöjä"
 msgid "Parameters and tags detection featuring easy insertion."
 msgstr "Merkintöjen tunnistus ja helppo lisäys."
 
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
-msgid "Open Tran Settings"
-msgstr "Open Tran -asetukset"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
-msgid "Language code for the Open-Tran query:"
-msgstr "Open-Tran-kyselyn kielikoodi:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
-msgid "Language code of the translated results:"
-msgstr "Käännöstulosten kielikoodi:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:4
-msgid "Use a local \"mirror\" copy of the Open-Tran server"
-msgstr "Käytä paikallista Open-Tran-palvelimen kopiota"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:5
-msgid "Mirror server URL:"
-msgstr "Peilipalvelimen osoite:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:7
-#, no-c-format
-msgid ""
-"<i>The URL should be of the form:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"The two \"%s\" markers and the final slash must not be omitted.</i>"
-msgstr ""
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:10
-msgid "Mirror Server"
-msgstr "Peilipalvelin"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:222
-#, c-format
-msgid "ERROR: Cannot access %s\n"
-msgstr "VIRHE: Pääsy kohteeseen %s ei onnistu\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:238
-msgid "Error in server response, GET failed\n"
-msgstr "Virhe palvelimen vastauksessa, GET epäonnistui\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:250
-#, c-format
-msgid "Cannot parse server response, %s\n"
-msgstr "Palvelimen vastauksen jäsennys ei onnistu, %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:264
-#, c-format
-msgid "Cannot parse server response, not an array? %s\n"
-msgstr ""
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:287
-#, c-format
-msgid "WRONG! Can't get result element %d\n"
-msgstr ""
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:297
-#, c-format
-msgid "WRONG! Can't parse result element %d as object\n"
-msgstr ""
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:311
-#, c-format
-msgid "WRONG! Can't read projects for result element %d\n"
-msgstr ""
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:335
-#, c-format
-msgid "%s[%s] Count:%d"
-msgstr "%s[%s] Lukumäärä:%d"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:345
-#, c-format
-msgid "WRONG! Malformed project: %d\n"
-msgstr "VÄÄRIN! Väärinmuodostettu projekti: %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:359
-#: ../src/gtr-actions-search.c:191
-msgid "Phrase not found"
-msgstr "Sanaa/lausetta ei löydy"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:383
-msgid "You have to provide a phrase to search"
-msgstr "Etsittävä teksti täytyy antaa"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:392
-msgid "You have to provide a search language code in the plugin configuration"
-msgstr "Etsittävän kielen koodi täytyy määrittää lisäosan asetuksissa"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:402
-msgid ""
-"You have to provide a language code for your language in the plugin "
-"configuration"
-msgstr "Oman kielesi kielikoodi täytyy määrittää lisäosan asetuksissa"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:415
-msgid ""
-"Either use the main open-tran.eu server, or enter a server URL in the plugin "
-"configuration,"
-msgstr ""
-"Käytä open-tran.eu-pääpalvelinta tai määritä palvelimen osoite lisäosan "
-"asetuksissa,"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:453
-msgid "Type"
-msgstr "Tyyppi"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:464
-msgid "Open-Tran.eu"
-msgstr "Open-Tran.eu"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:510
-msgid "Look for:"
-msgstr "Etsi:"
-
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:162
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:1
-msgid "Open Tran"
-msgstr "Open Tran"
-
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:2
-msgid "Look for phrases in Open tran memory translation database."
-msgstr "Etsi sanoja ja lauseita Open Tranin käännösmuistista."
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:1
-msgid "Search Code"
-msgstr "Hakukoodi"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:2
-msgid "The language code to search for"
-msgstr "Etsittävä kielikoodi"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:3
-msgid "Own Code"
-msgstr "Oma koodi"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:4
-msgid "The language code in which you want the results"
-msgstr "Kielikoodi, jolla haluat tulokset"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:5
-msgid "Use Mirror Server"
-msgstr "Käytä peilipalvelinta"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:6
-msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
-msgstr "Käytä paikallista kopiota Open-Tran-palvelimesta (open-tran.eu)"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:7
-msgid "Mirror Server URL"
-msgstr "Peilipalvelimen osoite"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:8
-msgid "URL of an Open-Tran mirror server"
-msgstr "Open-Tran-peilipalvelimen osoite"
-
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
 msgid "Strings added to database"
 msgstr "Käännökset lisätty tietokantaan"
@@ -809,7 +659,7 @@ msgstr "Tietoja gtranslatorista"
 #: ../src/gtr-actions-app.c:111
 msgid "translator-credits"
 msgstr ""
-"Jiri Grönroos, 2012\n"
+"Jiri Grönroos, 2012-2017\n"
 "Ilkka Tuohela, 2005-2008\n"
 "Jarkko Ranta, 2000-2004\n"
 "\n"
@@ -845,6 +695,10 @@ msgstr[1] "%d kohtaa löydettiin ja korvattiin"
 #: ../src/gtr-actions-search.c:179
 msgid "Found and replaced one occurrence"
 msgstr "Yksi kohta löytyi ja korvattiin"
+
+#: ../src/gtr-actions-search.c:191
+msgid "Phrase not found"
+msgstr "Sanaa/lausetta ei löydy"
 
 #: ../src/gtranslator-menu.ui.h:1
 msgid "_New Window"
@@ -1388,12 +1242,12 @@ msgstr ""
 "Ohjeen näyttäminen epäonnistui. Varmista, että Gtranslatorin ohjepaketti on "
 "asennettu."
 
-#: ../src/gtr-view.c:81
+#: ../src/gtr-view.c:78
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "gtkspell-virhe: %s\n"
 
-#: ../src/gtr-view.c:83
+#: ../src/gtr-view.c:80
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1470,12 +1324,10 @@ msgid "Profile for the active document"
 msgstr "Aktiivisen asiakirjan profiili"
 
 #: ../src/gtr-window.ui.h:1
-#| msgid "Project"
 msgid "Projects"
 msgstr "Projektit"
 
 #: ../src/gtr-window.ui.h:2
-#| msgid "Project"
 msgid "Add project"
 msgstr "Lisää projekti"
 
@@ -1535,6 +1387,97 @@ msgstr "Poista valittu työkalupalkki"
 #: ../src/toolbareditor/egg-toolbar-editor.c:488
 msgid "Separator"
 msgstr "Erotin"
+
+#~ msgid "Open Tran Settings"
+#~ msgstr "Open Tran -asetukset"
+
+#~ msgid "Language code for the Open-Tran query:"
+#~ msgstr "Open-Tran-kyselyn kielikoodi:"
+
+#~ msgid "Language code of the translated results:"
+#~ msgstr "Käännöstulosten kielikoodi:"
+
+#~ msgid "Use a local \"mirror\" copy of the Open-Tran server"
+#~ msgstr "Käytä paikallista Open-Tran-palvelimen kopiota"
+
+#~ msgid "Mirror server URL:"
+#~ msgstr "Peilipalvelimen osoite:"
+
+#~ msgid "Mirror Server"
+#~ msgstr "Peilipalvelin"
+
+#~ msgid "ERROR: Cannot access %s\n"
+#~ msgstr "VIRHE: Pääsy kohteeseen %s ei onnistu\n"
+
+#~ msgid "Error in server response, GET failed\n"
+#~ msgstr "Virhe palvelimen vastauksessa, GET epäonnistui\n"
+
+#~ msgid "Cannot parse server response, %s\n"
+#~ msgstr "Palvelimen vastauksen jäsennys ei onnistu, %s\n"
+
+#~ msgid "%s[%s] Count:%d"
+#~ msgstr "%s[%s] Lukumäärä:%d"
+
+#~ msgid "WRONG! Malformed project: %d\n"
+#~ msgstr "VÄÄRIN! Väärinmuodostettu projekti: %d\n"
+
+#~ msgid "You have to provide a phrase to search"
+#~ msgstr "Etsittävä teksti täytyy antaa"
+
+#~ msgid ""
+#~ "You have to provide a search language code in the plugin configuration"
+#~ msgstr "Etsittävän kielen koodi täytyy määrittää lisäosan asetuksissa"
+
+#~ msgid ""
+#~ "You have to provide a language code for your language in the plugin "
+#~ "configuration"
+#~ msgstr "Oman kielesi kielikoodi täytyy määrittää lisäosan asetuksissa"
+
+#~ msgid ""
+#~ "Either use the main open-tran.eu server, or enter a server URL in the "
+#~ "plugin configuration,"
+#~ msgstr ""
+#~ "Käytä open-tran.eu-pääpalvelinta tai määritä palvelimen osoite lisäosan "
+#~ "asetuksissa,"
+
+#~ msgid "Type"
+#~ msgstr "Tyyppi"
+
+#~ msgid "Open-Tran.eu"
+#~ msgstr "Open-Tran.eu"
+
+#~ msgid "Look for:"
+#~ msgstr "Etsi:"
+
+#~ msgid "Open Tran"
+#~ msgstr "Open Tran"
+
+#~ msgid "Look for phrases in Open tran memory translation database."
+#~ msgstr "Etsi sanoja ja lauseita Open Tranin käännösmuistista."
+
+#~ msgid "Search Code"
+#~ msgstr "Hakukoodi"
+
+#~ msgid "The language code to search for"
+#~ msgstr "Etsittävä kielikoodi"
+
+#~ msgid "Own Code"
+#~ msgstr "Oma koodi"
+
+#~ msgid "The language code in which you want the results"
+#~ msgstr "Kielikoodi, jolla haluat tulokset"
+
+#~ msgid "Use Mirror Server"
+#~ msgstr "Käytä peilipalvelinta"
+
+#~ msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
+#~ msgstr "Käytä paikallista kopiota Open-Tran-palvelimesta (open-tran.eu)"
+
+#~ msgid "Mirror Server URL"
+#~ msgstr "Peilipalvelimen osoite"
+
+#~ msgid "URL of an Open-Tran mirror server"
+#~ msgstr "Open-Tran-peilipalvelimen osoite"
 
 #~ msgid "_File"
 #~ msgstr "_Tiedosto"
