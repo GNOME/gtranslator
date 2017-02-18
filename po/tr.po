@@ -7,15 +7,15 @@
 # Ali Pakkan <apakkan@hotmail.com>, 2002.
 # RIDVAN CAN <ridvan@geleceklinux.org>, 2003
 # Atilla ÖNTAŞ <atilla_ontas@mandriva.org>, 2009, 2010.
-# Muhammet Kara <muhammetk@gmail.com>, 2011, 2012, 2013, 2016.
+# Muhammet Kara <muhammetk@gmail.com>, 2011, 2012, 2013, 2016, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-01-01 00:32+0000\n"
-"PO-Revision-Date: 2016-01-01 13:11+0200\n"
+"POT-Creation-Date: 2017-02-10 10:20+0000\n"
+"PO-Revision-Date: 2017-02-18 18:41+0300\n"
 "Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -26,6 +26,16 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: ../data/gtranslator.appdata.xml.in.h:1
+#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
+msgid "Gtranslator"
+msgstr "Gtranslator"
+
+#: ../data/gtranslator.appdata.xml.in.h:2
+#: ../data/desktop/gtranslator.desktop.in.h:4
+msgid "Translate and localize applications and libraries"
+msgstr "Uygulamaları ve kütüphaneleri çevirin ve yerelleştirin"
+
+#: ../data/gtranslator.appdata.xml.in.h:3
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -40,19 +50,19 @@ msgstr ""
 "çeviri iletilerinde kolay gezinme ve bunları kolay düzenleme ve ayrıca uygun "
 "olan yerlerde çeviri notları gibi çok kullanışlı özellikler içerir."
 
-#: ../data/gtranslator.appdata.xml.in.h:2
+#: ../data/gtranslator.appdata.xml.in.h:4
+#| msgid ""
+#| "Gtranslator includes also a plugin system with many interesting plugins "
+#| "like alternate language, insert tags, open tran, integration with "
+#| "subversion and a source code viewer."
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
-"alternate language, insert tags, open tran, integration with subversion and "
-"a source code viewer."
+"alternate language, insert tags, integration with subversion and a source "
+"code viewer."
 msgstr ""
-"Gtranslator'da ayrıca alternatif dil, etiket ekleme, open tran, subversion "
+"Gtranslator'da ayrıca alternatif dil, etiket ekleme, subversion "
 "bütünleştirmesi ve kaynak kod görüntüleyicisi gibi ilgi çekici birçok "
 "eklenti içeren bir eklenti sistemi de bulunuyor."
-
-#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
-msgid "Gtranslator"
-msgstr "Gtranslator"
 
 #: ../data/desktop/gtranslator.desktop.in.h:2
 msgid "PO File Editor"
@@ -61,10 +71,6 @@ msgstr "PO Dosyası Düzenleyici"
 #: ../data/desktop/gtranslator.desktop.in.h:3
 msgid "Gtranslator PO File Editor"
 msgstr "Gtranslator PO Dosyası Düzenleyici"
-
-#: ../data/desktop/gtranslator.desktop.in.h:4
-msgid "Translate and localize applications and libraries"
-msgstr "Uygulamaları ve kütüphaneleri çevirin ve yerelleştirin"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.h:1
 msgid "Warn if file contains fuzzy translations"
@@ -502,167 +508,6 @@ msgstr "Değiştirge (Parametre) veya Etiket Ekle"
 msgid "Parameters and tags detection featuring easy insertion."
 msgstr "Kolay eklemeyi sağlayan değiştirge ve etiket algılama."
 
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
-msgid "Open Tran Settings"
-msgstr "Open Tran Ayarları"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
-msgid "Language code for the Open-Tran query:"
-msgstr "Open-Tran sorgusu için dil kodu:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
-msgid "Language code of the translated results:"
-msgstr "Çevirilen sonuçların dil kodu:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:4
-msgid "Use a local \"mirror\" copy of the Open-Tran server"
-msgstr "Open-Tran sunucusunun bir yerel \"yansı\" kopyasını kullanın"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:5
-msgid "Mirror server URL:"
-msgstr "Yansı sunucu URL:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:7
-#, no-c-format
-msgid ""
-"<i>The URL should be of the form:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"The two \"%s\" markers and the final slash must not be omitted.</i>"
-msgstr ""
-"<i>URL aşağıdaki biçimde olmalıdır:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"Her iki \"%s\" işaretçisi ve sondaki eğik çizgi ihmal edilmemelidir.</i>"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:10
-msgid "Mirror Server"
-msgstr "Yansı Sunucu"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:222
-#, c-format
-msgid "ERROR: Cannot access %s\n"
-msgstr "HATA: %s'e erişilemiyor\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:238
-msgid "Error in server response, GET failed\n"
-msgstr "Sunucu yanıtında hata, GET başarısız olsu\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:250
-#, c-format
-msgid "Cannot parse server response, %s\n"
-msgstr "Sunucu yanıtı %s ayrıştırılamadı\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:264
-#, c-format
-msgid "Cannot parse server response, not an array? %s\n"
-msgstr "Sunucu yanıtı ayrıştırılamıyor, yoksa %s bir dizi değil mi?\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:287
-#, c-format
-msgid "WRONG! Can't get result element %d\n"
-msgstr "YANLIŞ! Sonuç elemanı %d alınamıyor\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:297
-#, c-format
-msgid "WRONG! Can't parse result element %d as object\n"
-msgstr "YANLIŞ! Sonuç elemanı %d, nesne olarak ayrıştırılamıyor\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:311
-#, c-format
-msgid "WRONG! Can't read projects for result element %d\n"
-msgstr "YANLIŞ! Sonuç elemanı %d için projeler okunamıyor\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:335
-#, c-format
-msgid "%s[%s] Count:%d"
-msgstr "%s[%s] Adet:%d"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:345
-#, c-format
-msgid "WRONG! Malformed project: %d\n"
-msgstr "YANLIŞ! Kötü biçimlendirilmiş proje: %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:359
-#: ../src/gtr-actions-search.c:191
-msgid "Phrase not found"
-msgstr "İfade bulunamadı"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:383
-msgid "You have to provide a phrase to search"
-msgstr "Aranacak bir ifade girmelisiniz"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:392
-msgid "You have to provide a search language code in the plugin configuration"
-msgstr "Eklenti yapılandırmasında bir arama dili kodu sağlamalısınız"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:402
-msgid ""
-"You have to provide a language code for your language in the plugin "
-"configuration"
-msgstr ""
-"Eklenti yapılandırmasında kendi diliniz için bir dil kodu sağlamalısınız"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:415
-msgid ""
-"Either use the main open-tran.eu server, or enter a server URL in the plugin "
-"configuration,"
-msgstr ""
-"Ana open-tran.eu sunucusunu kullanın ya da eklenti yapılandırmasında bir "
-"sunucu URL'i girin,"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:453
-msgid "Type"
-msgstr "Tür"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:464
-msgid "Open-Tran.eu"
-msgstr "Open-Tran.eu"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:510
-msgid "Look for:"
-msgstr "Araştır:"
-
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:162
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:1
-msgid "Open Tran"
-msgstr "Open Tran"
-
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:2
-msgid "Look for phrases in Open tran memory translation database."
-msgstr "Open tran çeviri belleği veritabanında ifadeyi araştır."
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:1
-msgid "Search Code"
-msgstr "Arama Kodu"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:2
-msgid "The language code to search for"
-msgstr "Aranacak dil kodu"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:3
-msgid "Own Code"
-msgstr "Kendi Kodunuz"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:4
-msgid "The language code in which you want the results"
-msgstr "Sonuçlar için istediğiniz dil kodu"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:5
-msgid "Use Mirror Server"
-msgstr "Yansı Sunucu Kullan"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:6
-msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
-msgstr ""
-"open-tran.eu adresindeki ana Open-Tran sunucusunun yerel bir kopyasını kullan"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:7
-msgid "Mirror Server URL"
-msgstr "Yansı Sunucu Adresi (URL)"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:8
-msgid "URL of an Open-Tran mirror server"
-msgstr "Bir Open-Tran yansı sunucusunun adresi (URL)"
-
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
 msgid "Strings added to database"
 msgstr "Dizgeler veri tabanına eklendi"
@@ -862,6 +707,10 @@ msgstr[0] "%d adet belirtim bulundu ve değiştirildi"
 #: ../src/gtr-actions-search.c:179
 msgid "Found and replaced one occurrence"
 msgstr "Bir belirtim bulundu ve değiştirildi"
+
+#: ../src/gtr-actions-search.c:191
+msgid "Phrase not found"
+msgstr "İfade bulunamadı"
 
 #: ../src/gtranslator-menu.ui.h:1
 msgid "_New Window"
@@ -1402,12 +1251,12 @@ msgstr ""
 "Yardım görüntülenemiyor. Lütfen, Gtranslator belgeleri paketinin kurulu "
 "olduğundan emin olun."
 
-#: ../src/gtr-view.c:81
+#: ../src/gtr-view.c:78
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "gtkspell hatası: %s\n"
 
-#: ../src/gtr-view.c:83
+#: ../src/gtr-view.c:80
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1481,12 +1330,10 @@ msgid "Profile for the active document"
 msgstr "Etkin belge için profil"
 
 #: ../src/gtr-window.ui.h:1
-#| msgid "Project"
 msgid "Projects"
 msgstr "Projeler"
 
 #: ../src/gtr-window.ui.h:2
-#| msgid "Project"
 msgid "Add project"
 msgstr "Proje ekle"
 
@@ -1547,6 +1394,121 @@ msgstr "Seçili araç çubuğunu sil"
 #: ../src/toolbareditor/egg-toolbar-editor.c:488
 msgid "Separator"
 msgstr "Ayraç"
+
+#~ msgid "Open Tran Settings"
+#~ msgstr "Open Tran Ayarları"
+
+#~ msgid "Language code for the Open-Tran query:"
+#~ msgstr "Open-Tran sorgusu için dil kodu:"
+
+#~ msgid "Language code of the translated results:"
+#~ msgstr "Çevirilen sonuçların dil kodu:"
+
+#~ msgid "Use a local \"mirror\" copy of the Open-Tran server"
+#~ msgstr "Open-Tran sunucusunun bir yerel \"yansı\" kopyasını kullanın"
+
+#~ msgid "Mirror server URL:"
+#~ msgstr "Yansı sunucu URL:"
+
+#~ msgid ""
+#~ "<i>The URL should be of the form:\n"
+#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+#~ "The two \"%s\" markers and the final slash must not be omitted.</i>"
+#~ msgstr ""
+#~ "<i>URL aşağıdaki biçimde olmalıdır:\n"
+#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+#~ "Her iki \"%s\" işaretçisi ve sondaki eğik çizgi ihmal edilmemelidir.</i>"
+
+#~ msgid "Mirror Server"
+#~ msgstr "Yansı Sunucu"
+
+#~ msgid "ERROR: Cannot access %s\n"
+#~ msgstr "HATA: %s'e erişilemiyor\n"
+
+#~ msgid "Error in server response, GET failed\n"
+#~ msgstr "Sunucu yanıtında hata, GET başarısız olsu\n"
+
+#~ msgid "Cannot parse server response, %s\n"
+#~ msgstr "Sunucu yanıtı %s ayrıştırılamadı\n"
+
+#~ msgid "Cannot parse server response, not an array? %s\n"
+#~ msgstr "Sunucu yanıtı ayrıştırılamıyor, yoksa %s bir dizi değil mi?\n"
+
+#~ msgid "WRONG! Can't get result element %d\n"
+#~ msgstr "YANLIŞ! Sonuç elemanı %d alınamıyor\n"
+
+#~ msgid "WRONG! Can't parse result element %d as object\n"
+#~ msgstr "YANLIŞ! Sonuç elemanı %d, nesne olarak ayrıştırılamıyor\n"
+
+#~ msgid "WRONG! Can't read projects for result element %d\n"
+#~ msgstr "YANLIŞ! Sonuç elemanı %d için projeler okunamıyor\n"
+
+#~ msgid "%s[%s] Count:%d"
+#~ msgstr "%s[%s] Adet:%d"
+
+#~ msgid "WRONG! Malformed project: %d\n"
+#~ msgstr "YANLIŞ! Kötü biçimlendirilmiş proje: %d\n"
+
+#~ msgid "You have to provide a phrase to search"
+#~ msgstr "Aranacak bir ifade girmelisiniz"
+
+#~ msgid ""
+#~ "You have to provide a search language code in the plugin configuration"
+#~ msgstr "Eklenti yapılandırmasında bir arama dili kodu sağlamalısınız"
+
+#~ msgid ""
+#~ "You have to provide a language code for your language in the plugin "
+#~ "configuration"
+#~ msgstr ""
+#~ "Eklenti yapılandırmasında kendi diliniz için bir dil kodu sağlamalısınız"
+
+#~ msgid ""
+#~ "Either use the main open-tran.eu server, or enter a server URL in the "
+#~ "plugin configuration,"
+#~ msgstr ""
+#~ "Ana open-tran.eu sunucusunu kullanın ya da eklenti yapılandırmasında bir "
+#~ "sunucu URL'i girin,"
+
+#~ msgid "Type"
+#~ msgstr "Tür"
+
+#~ msgid "Open-Tran.eu"
+#~ msgstr "Open-Tran.eu"
+
+#~ msgid "Look for:"
+#~ msgstr "Araştır:"
+
+#~ msgid "Open Tran"
+#~ msgstr "Open Tran"
+
+#~ msgid "Look for phrases in Open tran memory translation database."
+#~ msgstr "Open tran çeviri belleği veritabanında ifadeyi araştır."
+
+#~ msgid "Search Code"
+#~ msgstr "Arama Kodu"
+
+#~ msgid "The language code to search for"
+#~ msgstr "Aranacak dil kodu"
+
+#~ msgid "Own Code"
+#~ msgstr "Kendi Kodunuz"
+
+#~ msgid "The language code in which you want the results"
+#~ msgstr "Sonuçlar için istediğiniz dil kodu"
+
+#~ msgid "Use Mirror Server"
+#~ msgstr "Yansı Sunucu Kullan"
+
+#~ msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
+#~ msgstr ""
+#~ "open-tran.eu adresindeki ana Open-Tran sunucusunun yerel bir kopyasını "
+#~ "kullan"
+
+#~ msgid "Mirror Server URL"
+#~ msgstr "Yansı Sunucu Adresi (URL)"
+
+#~ msgid "URL of an Open-Tran mirror server"
+#~ msgstr "Bir Open-Tran yansı sunucusunun adresi (URL)"
 
 #~ msgid "_File"
 #~ msgstr "_Dosya"
