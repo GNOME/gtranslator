@@ -1,19 +1,19 @@
 # Serbian translation of gtranslator
-# Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003—2015.
+# Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003—2017.
 # This file is distributed under the same license as the gtranslator package.
 # Veljko M. Stanojević <veljko@vms.homelinux.net>
 # Miloš Popović <gpopac@gmail.com>, 2009—2010.
-# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2010—2015.
+# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2010—2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gtransl"
 "ator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-12-30 00:35+0000\n"
-"PO-Revision-Date: 2015-12-30 08:31+0200\n"
+"POT-Creation-Date: 2017-02-10 10:20+0000\n"
+"PO-Revision-Date: 2017-02-25 20:05+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
-"Language-Team: Serbian <gnom@prevod.org>\n"
-"Language: sr@latin\n"
+"Language-Team: Serbian <(nothing)>\n"
+"Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,6 +22,16 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #: ../data/gtranslator.appdata.xml.in.h:1
+#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
+msgid "Gtranslator"
+msgstr "Gnomov prevodilac"
+
+#: ../data/gtranslator.appdata.xml.in.h:2
+#: ../data/desktop/gtranslator.desktop.in.h:4
+msgid "Translate and localize applications and libraries"
+msgstr "Prevodite i lokalizujte programe i biblioteke"
+
+#: ../data/gtranslator.appdata.xml.in.h:3
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -36,19 +46,19 @@ msgstr ""
 "različiti profili prevodioca, tabela poruka (zarad pregleda prevoda/poruka u "
 "po datoteci), lako kretanje i uređivanje poruka prevoda i napomena o prevodu."
 
-#: ../data/gtranslator.appdata.xml.in.h:2
+#: ../data/gtranslator.appdata.xml.in.h:4
+#| msgid ""
+#| "Gtranslator includes also a plugin system with many interesting plugins "
+#| "like alternate language, insert tags, open tran, integration with "
+#| "subversion and a source code viewer."
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
-"alternate language, insert tags, open tran, integration with subversion and "
-"a source code viewer."
+"alternate language, insert tags, integration with subversion and a source "
+"code viewer."
 msgstr ""
 "Gnomov prevodilac takođe uključuje sistem priključaka sa mnogim zanimljivim "
-"priključcima kao što je izborni jezik, oznake umetanja, open tran, "
-"objedinjavanje sa pregledačem subverzije i izvornog koda."
-
-#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
-msgid "Gtranslator"
-msgstr "Gnomov prevodilac"
+"priključcima kao što je izborni jezik, oznake umetanja, objedinjavanje sa "
+"pregledačem subverzije i izvornog koda."
 
 #: ../data/desktop/gtranslator.desktop.in.h:2
 msgid "PO File Editor"
@@ -57,10 +67,6 @@ msgstr "Uređivač PO datoteka"
 #: ../data/desktop/gtranslator.desktop.in.h:3
 msgid "Gtranslator PO File Editor"
 msgstr "Gnomov prevodilac za PO datoteke"
-
-#: ../data/desktop/gtranslator.desktop.in.h:4
-msgid "Translate and localize applications and libraries"
-msgstr "Prevodite i lokalizujte programe i biblioteke"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.h:1
 msgid "Warn if file contains fuzzy translations"
@@ -98,7 +104,8 @@ msgstr "Stvaranje rezerve pre čuvanja"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.h:8
 msgid "If true, create a backup copy of a file before saving it."
-msgstr "Ukoliko je izabrano, praviće rezervnu kopiju datoteke pre njenog čuvanja."
+msgstr ""
+"Ukoliko je izabrano, praviće rezervnu kopiju datoteke pre njenog čuvanja."
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.h:9
 msgid "Use profile values for header"
@@ -499,166 +506,6 @@ msgstr "Umetni parametre ili oznake"
 msgid "Parameters and tags detection featuring easy insertion."
 msgstr "Nalaženje i lako umetanje parametara i oznaka."
 
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
-msgid "Open Tran Settings"
-msgstr "Postavke Otvorenog prevoda"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
-msgid "Language code for the Open-Tran query:"
-msgstr "Šifra jezika za propitivanje Otvorenog prevoda:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
-msgid "Language code of the translated results:"
-msgstr "Šifra jezika za rezultate (npr. sr):"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:4
-msgid "Use a local \"mirror\" copy of the Open-Tran server"
-msgstr "Koristi umnožak lokalnog „cilja“ servera Otvorenog prevoda"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:5
-msgid "Mirror server URL:"
-msgstr "Adresa ciljnog servera:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:7
-#, no-c-format
-msgid ""
-"<i>The URL should be of the form:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"The two \"%s\" markers and the final slash must not be omitted.</i>"
-msgstr ""
-"<i>URL treba biti u obliku:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"Dva „%s“ markera i krajnja kosa crta ne smeju biti izostavljeni.</i>"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:10
-msgid "Mirror Server"
-msgstr "Ciljni server"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:222
-#, c-format
-msgid "ERROR: Cannot access %s\n"
-msgstr "GREŠKA: Ne mogu da pristupim „%s“\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:238
-msgid "Error in server response, GET failed\n"
-msgstr "Greška u odgovoru servera, PREUZIMANJE nije uspelo\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:250
-#, c-format
-msgid "Cannot parse server response, %s\n"
-msgstr "Ne mogu da obradim odgovor servera, %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:264
-#, c-format
-msgid "Cannot parse server response, not an array? %s\n"
-msgstr "Ne mogu da obradim odgovor servera, nije niz? „%s“\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:287
-#, c-format
-msgid "WRONG! Can't get result element %d\n"
-msgstr "GREŠKA! Ne mogu da dobijem krajnji element „%d“\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:297
-#, c-format
-msgid "WRONG! Can't parse result element %d as object\n"
-msgstr "GREŠKA! Ne mogu da obradim krajnji element „%d“ kao objekat\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:311
-#, c-format
-msgid "WRONG! Can't read projects for result element %d\n"
-msgstr "GREŠKA! Ne mogu da čitam projekte krajnjeg elementa „%d“\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:335
-#, c-format
-msgid "%s[%s] Count:%d"
-msgstr "%s[%s] Brojim:%d"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:345
-#, c-format
-msgid "WRONG! Malformed project: %d\n"
-msgstr "GREŠKA! Loš projekat: „%d“\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:359
-#: ../src/gtr-actions-search.c:191
-msgid "Phrase not found"
-msgstr "Izraz nije pronađen"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:383
-msgid "You have to provide a phrase to search"
-msgstr "Morate zadati reči za pretragu"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:392
-msgid "You have to provide a search language code in the plugin configuration"
-msgstr "Morate da obezbedite šifru jezika pretrage u podešavanjima dodatka"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:402
-msgid ""
-"You have to provide a language code for your language in the plugin "
-"configuration"
-msgstr "Morate da obezbedite šifru jezika za vaš jezik u podešavanjima dodatka"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:415
-msgid ""
-"Either use the main open-tran.eu server, or enter a server URL in the plugin "
-"configuration,"
-msgstr ""
-"Da li da koristim glavni „open-tran.eu“ server ili ćete uneti adresu servera "
-"u podešavanjima dodatka"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:453
-msgid "Type"
-msgstr "Vrsta"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:464
-msgid "Open-Tran.eu"
-msgstr "Open-Tran.eu"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:510
-msgid "Look for:"
-msgstr "Traži:"
-
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:162
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:1
-msgid "Open Tran"
-msgstr "Otvoreni prevod"
-
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:2
-msgid "Look for phrases in Open tran memory translation database."
-msgstr "Traži izraze u bazi podataka prevodilačke memorije Otvorenog prevoda."
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:1
-msgid "Search Code"
-msgstr "Traži šifru"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:2
-msgid "The language code to search for"
-msgstr "Šifra jezika za pretraživanje"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:3
-msgid "Own Code"
-msgstr "Lična šifra"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:4
-msgid "The language code in which you want the results"
-msgstr "Šifra jezika u kome želite rezultate (npr. sr)"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:5
-msgid "Use Mirror Server"
-msgstr "Koristi ciljni server"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:6
-msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
-msgstr ""
-"Koristi lokalnu kopiju glavnog servera Opvorenog prevoda na „open-tran.eu“"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:7
-msgid "Mirror Server URL"
-msgstr "Adresa ciljnog servera"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:8
-msgid "URL of an Open-Tran mirror server"
-msgstr "Adresa ciljnog servera Otvorenog prevoda"
-
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
 msgid "Strings added to database"
 msgstr "Niske su dodate u bazu podataka"
@@ -858,11 +705,15 @@ msgid_plural "Found and replaced %d occurrences"
 msgstr[0] "Pronašao sam i zamenio %d pojavu"
 msgstr[1] "Pronašao sam i zamenio %d pojave"
 msgstr[2] "Pronašao sam i zamenio %d pojava"
-msgstr[3] "Pronašao sam i zamenio pojavu"
+msgstr[3] "Pronašao sam i zamenio jednu pojavu"
 
 #: ../src/gtr-actions-search.c:179
 msgid "Found and replaced one occurrence"
 msgstr "Pronašao sam i zamenio jednu pojavu"
+
+#: ../src/gtr-actions-search.c:191
+msgid "Phrase not found"
+msgstr "Izraz nije pronađen"
 
 #: ../src/gtranslator-menu.ui.h:1
 msgid "_New Window"
@@ -959,8 +810,7 @@ msgstr[3] "Izmene učinjene u dokumentu će biti trajno odbačene."
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
-msgstr[0] ""
-"%d dokument ima nesačuvane izmene. Da li da ih sačuvam pre zatvaranja?"
+msgstr[0] "%d dokument ima nesačuvane izmene. Da li da ih sačuvam pre zatvaranja?"
 msgstr[1] ""
 "%d dokumenta imaju nesačuvane izmene. Da li da ih sačuvam pre zatvaranja?"
 msgstr[2] ""
@@ -1158,7 +1008,7 @@ msgid ""
 msgstr ""
 "Svi pokušaji da pretvorim datoteku u UTF-8 su propali, upotrebite „msgconv“ "
 "ili „iconv“ alate linije naredbi pre nego što otvorite ovu datoteku u "
-"Gnomovom prevodiocu."
+"Gnomovom prevodiocu"
 
 #: ../src/gtr-po.c:664
 #, c-format
@@ -1409,12 +1259,12 @@ msgstr ""
 "Ne mogu da prikažem pomoć. Proverite da li je instaliran paket za pomoć u "
 "Gnomovom prevodiocu."
 
-#: ../src/gtr-view.c:81
+#: ../src/gtr-view.c:78
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "„gtkspell“ greška: %s\n"
 
-#: ../src/gtr-view.c:83
+#: ../src/gtr-view.c:80
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1497,12 +1347,10 @@ msgid "Profile for the active document"
 msgstr "Profil za trenutni dokument"
 
 #: ../src/gtr-window.ui.h:1
-#| msgid "Project"
 msgid "Projects"
 msgstr "Projekti"
 
 #: ../src/gtr-window.ui.h:2
-#| msgid "Project"
 msgid "Add project"
 msgstr "Dodaj projekat"
 
@@ -1562,6 +1410,121 @@ msgstr "Uklanja izabranu paletu sa alatkama"
 #: ../src/toolbareditor/egg-toolbar-editor.c:488
 msgid "Separator"
 msgstr "Razdvajač"
+
+#~ msgid "Open Tran Settings"
+#~ msgstr "Postavke Otvorenog prevoda"
+
+#~ msgid "Language code for the Open-Tran query:"
+#~ msgstr "Šifra jezika za propitivanje Otvorenog prevoda:"
+
+#~ msgid "Language code of the translated results:"
+#~ msgstr "Šifra jezika za rezultate (npr. sr):"
+
+#~ msgid "Use a local \"mirror\" copy of the Open-Tran server"
+#~ msgstr "Koristi umnožak lokalnog „cilja“ servera Otvorenog prevoda"
+
+#~ msgid "Mirror server URL:"
+#~ msgstr "Adresa ciljnog servera:"
+
+#~ msgid ""
+#~ "<i>The URL should be of the form:\n"
+#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+#~ "The two \"%s\" markers and the final slash must not be omitted.</i>"
+#~ msgstr ""
+#~ "<i>URL treba biti u obliku:\n"
+#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+#~ "Dva „%s“ markera i krajnja kosa crta ne smeju biti izostavljeni.</i>"
+
+#~ msgid "Mirror Server"
+#~ msgstr "Ciljni server"
+
+#~ msgid "ERROR: Cannot access %s\n"
+#~ msgstr "GREŠKA: Ne mogu da pristupim „%s“\n"
+
+#~ msgid "Error in server response, GET failed\n"
+#~ msgstr "Greška u odgovoru servera, PREUZIMANJE nije uspelo\n"
+
+#~ msgid "Cannot parse server response, %s\n"
+#~ msgstr "Ne mogu da obradim odgovor servera, %s\n"
+
+#~ msgid "Cannot parse server response, not an array? %s\n"
+#~ msgstr "Ne mogu da obradim odgovor servera, nije niz? „%s“\n"
+
+#~ msgid "WRONG! Can't get result element %d\n"
+#~ msgstr "GREŠKA! Ne mogu da dobijem krajnji element „%d“\n"
+
+#~ msgid "WRONG! Can't parse result element %d as object\n"
+#~ msgstr "GREŠKA! Ne mogu da obradim krajnji element „%d“ kao objekat\n"
+
+#~ msgid "WRONG! Can't read projects for result element %d\n"
+#~ msgstr "GREŠKA! Ne mogu da čitam projekte krajnjeg elementa „%d“\n"
+
+#~ msgid "%s[%s] Count:%d"
+#~ msgstr "%s[%s] Brojim:%d"
+
+#~ msgid "WRONG! Malformed project: %d\n"
+#~ msgstr "GREŠKA! Loš projekat: „%d“\n"
+
+#~ msgid "You have to provide a phrase to search"
+#~ msgstr "Morate zadati reči za pretragu"
+
+#~ msgid ""
+#~ "You have to provide a search language code in the plugin configuration"
+#~ msgstr "Morate da obezbedite šifru jezika pretrage u podešavanjima dodatka"
+
+#~ msgid ""
+#~ "You have to provide a language code for your language in the plugin "
+#~ "configuration"
+#~ msgstr ""
+#~ "Morate da obezbedite šifru jezika za vaš jezik u podešavanjima dodatka"
+
+#~ msgid ""
+#~ "Either use the main open-tran.eu server, or enter a server URL in the "
+#~ "plugin configuration,"
+#~ msgstr ""
+#~ "Da li da koristim glavni „open-tran.eu“ server ili ćete uneti adresu "
+#~ "servera u podešavanjima dodatka"
+
+#~ msgid "Type"
+#~ msgstr "Vrsta"
+
+#~ msgid "Open-Tran.eu"
+#~ msgstr "Open-Tran.eu"
+
+#~ msgid "Look for:"
+#~ msgstr "Traži:"
+
+#~ msgid "Open Tran"
+#~ msgstr "Otvoreni prevod"
+
+#~ msgid "Look for phrases in Open tran memory translation database."
+#~ msgstr ""
+#~ "Traži izraze u bazi podataka prevodilačke memorije Otvorenog prevoda."
+
+#~ msgid "Search Code"
+#~ msgstr "Traži šifru"
+
+#~ msgid "The language code to search for"
+#~ msgstr "Šifra jezika za pretraživanje"
+
+#~ msgid "Own Code"
+#~ msgstr "Lična šifra"
+
+#~ msgid "The language code in which you want the results"
+#~ msgstr "Šifra jezika u kome želite rezultate (npr. sr)"
+
+#~ msgid "Use Mirror Server"
+#~ msgstr "Koristi ciljni server"
+
+#~ msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
+#~ msgstr ""
+#~ "Koristi lokalnu kopiju glavnog servera Opvorenog prevoda na „open-tran.eu“"
+
+#~ msgid "Mirror Server URL"
+#~ msgstr "Adresa ciljnog servera"
+
+#~ msgid "URL of an Open-Tran mirror server"
+#~ msgstr "Adresa ciljnog servera Otvorenog prevoda"
 
 #~ msgid "_File"
 #~ msgstr "_Datoteka"
