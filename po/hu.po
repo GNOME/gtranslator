@@ -1,19 +1,19 @@
 # Hungarian translation of gtranslator.
-# Copyright (C) 2012-2016 Free Software Foundation, Inc.
+# Copyright (C) 2012-2017 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gtranslator package.
 #
 # Kristóf Kiszel <ulysses at kubuntu dot org>, 2012.
 # Erika Griechisch <griechisch.erika at gmail dot com>, 2012.
 # Bence Lukács <lukacs.bence1 at gmail dot com>, 2012.
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2012.
-# Balázs Úr <urbalazs at gmail dot com>, 2013, 2014, 2016.
+# Balázs Úr <urbalazs at gmail dot com>, 2013, 2014, 2016, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-04 12:36+0000\n"
-"PO-Revision-Date: 2016-03-04 23:31+0100\n"
+"POT-Creation-Date: 2017-02-26 08:12+0000\n"
+"PO-Revision-Date: 2017-03-15 17:59+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
@@ -50,14 +50,18 @@ msgstr ""
 "fordítási üzeneteinek és megjegyzéseinek szerkesztése, ahol pontos."
 
 #: ../data/gtranslator.appdata.xml.in.h:4
+#| msgid ""
+#| "Gtranslator includes also a plugin system with many interesting plugins "
+#| "like alternate language, insert tags, open tran, integration with "
+#| "subversion and a source code viewer."
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
-"alternate language, insert tags, open tran, integration with subversion and "
-"a source code viewer."
+"alternate language, insert tags, integration with subversion and a source "
+"code viewer."
 msgstr ""
 "A Gtranslator tartalmaz továbbá egy bővítményrendszert számos érdekes "
-"bővítménnyel, úgymint alternatív nyelv, címkék beszúrása, open tran, "
-"integráció a subversion verziókezelővel és forráskód megjelenítő."
+"bővítménnyel, úgymint alternatív nyelv, címkék beszúrása, integráció a "
+"subversion verziókezelővel és forráskód megjelenítő."
 
 #: ../data/desktop/gtranslator.desktop.in.h:2
 msgid "PO File Editor"
@@ -511,165 +515,6 @@ msgstr "Paraméterek vagy címkék beszúrása"
 msgid "Parameters and tags detection featuring easy insertion."
 msgstr "Paraméterek és címkék azonosítása, könnyített beszúrással."
 
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
-msgid "Open Tran Settings"
-msgstr "Open Tran beállítások"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
-msgid "Language code for the Open-Tran query:"
-msgstr "Az Open-Tran lekérdezés nyelvi kódja:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
-msgid "Language code of the translated results:"
-msgstr "A lefordított találatok nyelvi kódja: "
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:4
-msgid "Use a local \"mirror\" copy of the Open-Tran server"
-msgstr "Az Open-Tran kiszolgáló helyi „tükör” másolatának használata"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:5
-msgid "Mirror server URL:"
-msgstr "Tükörkiszolgáló URL:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:7
-#, no-c-format
-msgid ""
-"<i>The URL should be of the form:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"The two \"%s\" markers and the final slash must not be omitted.</i>"
-msgstr ""
-"<i>Az URL-nek a következő formátumúnak kell lennie:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"A két „%s” és a záró osztásjel nem hagyható ki.</i>"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:10
-msgid "Mirror Server"
-msgstr "Tükörkiszolgáló"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:222
-#, c-format
-msgid "ERROR: Cannot access %s\n"
-msgstr "HIBA: %s nem érhető el\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:238
-msgid "Error in server response, GET failed\n"
-msgstr "Hiba a kiszolgáló válaszában, a GET meghiúsult\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:250
-#, c-format
-msgid "Cannot parse server response, %s\n"
-msgstr "A kiszolgáló válaszának feldolgozása sikertelen, %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:264
-#, c-format
-msgid "Cannot parse server response, not an array? %s\n"
-msgstr "A kiszolgáló válaszának feldolgozása sikertelen, nem tömb? %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:287
-#, c-format
-msgid "WRONG! Can't get result element %d\n"
-msgstr "HIBÁS! Nem lehet az eredmény %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:297
-#, c-format
-msgid "WRONG! Can't parse result element %d as object\n"
-msgstr "HIBÁS! Nem dolgozható fel a(z) %d. elem objektumként\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:311
-#, c-format
-msgid "WRONG! Can't read projects for result element %d\n"
-msgstr "HIBÁS! Nem olvashatók a projektek a(z) %d. eredményelemhez\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:335
-#, c-format
-msgid "%s[%s] Count:%d"
-msgstr "%s[%s] szám:%d"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:345
-#, c-format
-msgid "WRONG! Malformed project: %d\n"
-msgstr "HIBÁS! Helytelenül formázott projekt: %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:359
-#: ../src/gtr-actions-search.c:191
-msgid "Phrase not found"
-msgstr "A kifejezés nem található"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:383
-msgid "You have to provide a phrase to search"
-msgstr "Meg kell adnia egy kifejezést a kereséshez"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:392
-msgid "You have to provide a search language code in the plugin configuration"
-msgstr "Meg kell adnia a keresés nyelvének kódját a bővítmény beállításainál"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:402
-msgid ""
-"You have to provide a language code for your language in the plugin "
-"configuration"
-msgstr "Meg kell adnia a nyelvének kódját a bővítmény beállításainál"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:415
-msgid ""
-"Either use the main open-tran.eu server, or enter a server URL in the plugin "
-"configuration,"
-msgstr ""
-"Használja a fő open-tran.eu kiszolgálót, vagy adja meg a kiszolgáló URL-"
-"címét a bővítmény beállításainál,"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:453
-msgid "Type"
-msgstr "Típus"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:464
-msgid "Open-Tran.eu"
-msgstr "Open-Tran.eu"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:510
-msgid "Look for:"
-msgstr "Keresés erre:"
-
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:162
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:1
-msgid "Open Tran"
-msgstr "Open Tran"
-
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:2
-msgid "Look for phrases in Open tran memory translation database."
-msgstr "Kifejezések keresése az Open Tran fordítómemória-adatbázisban."
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:1
-msgid "Search Code"
-msgstr "Keresési kód"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:2
-msgid "The language code to search for"
-msgstr "A keresendő nyelvi kód"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:3
-msgid "Own Code"
-msgstr "Saját kód"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:4
-msgid "The language code in which you want the results"
-msgstr "A találatok nyelvi kódja"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:5
-msgid "Use Mirror Server"
-msgstr "Tükörkiszolgáló használata"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:6
-msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
-msgstr "Használja a fő Open-Tran kiszolgáló (open-tran.eu) helyi másolatát"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:7
-msgid "Mirror Server URL"
-msgstr "Tükörkiszolgáló URL"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:8
-msgid "URL of an Open-Tran mirror server"
-msgstr "Az Open-Tran tükörkiszolgáló URL-címe"
-
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
 msgid "Strings added to database"
 msgstr "Az adatbázishoz hozzáadott karakterláncok"
@@ -871,6 +716,10 @@ msgstr[1] "%d előfordulás megtalálva és lecserélve"
 #: ../src/gtr-actions-search.c:179
 msgid "Found and replaced one occurrence"
 msgstr "Egy előfordulás megtalálva és lecserélve"
+
+#: ../src/gtr-actions-search.c:191
+msgid "Phrase not found"
+msgstr "A kifejezés nem található"
 
 #: ../src/gtranslator-menu.ui.h:1
 msgid "_New Window"
@@ -1414,12 +1263,12 @@ msgstr ""
 "Nem lehet megjeleníteni a súgót. Ellenőrizze, hogy a Gtranslator "
 "dokumentációja telepítve van-e."
 
-#: ../src/gtr-view.c:81
+#: ../src/gtr-view.c:78
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "gtkspell hiba: %s\n"
 
-#: ../src/gtr-view.c:83
+#: ../src/gtr-view.c:80
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1496,12 +1345,10 @@ msgid "Profile for the active document"
 msgstr "Profil az aktív dokumentumhoz"
 
 #: ../src/gtr-window.ui.h:1
-#| msgid "Project"
 msgid "Projects"
 msgstr "Projektek"
 
 #: ../src/gtr-window.ui.h:2
-#| msgid "Project"
 msgid "Add project"
 msgstr "Projekt hozzáadása"
 
@@ -1563,233 +1410,3 @@ msgstr "A kijelölt eszköztár törlése"
 msgid "Separator"
 msgstr "Elválasztó"
 
-#~ msgid "_File"
-#~ msgstr "_Fájl"
-
-#~ msgid "_Edit"
-#~ msgstr "Sz_erkesztés"
-
-#~ msgid "_View"
-#~ msgstr "_Nézet"
-
-#~ msgid "_Search"
-#~ msgstr "Kere_sés"
-
-#~ msgid "_Go"
-#~ msgstr "_Ugrás"
-
-#~ msgid "_Tools"
-#~ msgstr "Esz_közök"
-
-#~ msgid "_Documents"
-#~ msgstr "_Dokumentumok"
-
-#~ msgid "Open a PO file"
-#~ msgstr "PO fájl megnyitása"
-
-#~ msgid "_Recent Files"
-#~ msgstr "_Legutóbbi fájlok"
-
-#~ msgid "T_oolbar"
-#~ msgstr "Eszköz_tár"
-
-#~ msgid "_Header..."
-#~ msgstr "_Fejléc…"
-
-#~ msgid "Save the current file"
-#~ msgstr "Jelenlegi fájl mentése"
-
-#~ msgid "Save the current file with another name"
-#~ msgstr "Jelenlegi fájl mentése más néven"
-
-#~ msgid "Close the current file"
-#~ msgstr "Jelenlegi fájl bezárása"
-
-#~ msgid "Undo last operation"
-#~ msgstr "Utolsó művelet visszavonása"
-
-#~ msgid "Redo last undone operation"
-#~ msgstr "Utolsó visszavont művelet végrehajtása mégis"
-
-#~ msgid "Cut the selected text"
-#~ msgstr "A kijelölt szöveg kivágása"
-
-#~ msgid "Copy the selected text"
-#~ msgstr "A kijelölt szöveg másolása"
-
-#~ msgid "Paste the contents of the clipboard"
-#~ msgstr "A vágólap tartalmának beillesztése"
-
-#~ msgid "Clear the selected translation"
-#~ msgstr "A kijelölt fordítás törlése"
-
-#~ msgid "Copy _Message to Translation"
-#~ msgstr "Üzenet _másolása a fordításba"
-
-#~ msgid "Copy original message contents to the translation field"
-#~ msgstr "Eredeti üzenet tartalmának másolása a fordítás mezőbe"
-
-#~ msgid "Toggle _Fuzzy Status"
-#~ msgstr "Ellenőr_zendő állapot átváltása"
-
-#~ msgid "Toggle fuzzy status of a message"
-#~ msgstr "Egy üzenet ellenőrzendő állapotának átváltása"
-
-#~ msgid "_Message Details"
-#~ msgstr "Üze_net részletei"
-
-#~ msgid "Show the Context panel"
-#~ msgstr "Kontextus panel megjelenítése"
-
-#~ msgid "_Previous Message"
-#~ msgstr "_Előző üzenet"
-
-#~ msgid "Move back one message"
-#~ msgstr "Visszalépés egy üzenettel"
-
-#~ msgid "_Next Message"
-#~ msgstr "_Következő üzenet"
-
-#~ msgid "Move forward one message"
-#~ msgstr "Előrelépés egy üzenettel"
-
-#~ msgid "_Go to Message..."
-#~ msgstr "_Ugrás üzenetre…"
-
-#~ msgid "Jumps to a specific message"
-#~ msgstr "Ugrás egy megadott üzenetre"
-
-#~ msgid "_First Message"
-#~ msgstr "E_lső üzenet"
-
-#~ msgid "Go to the first message"
-#~ msgstr "Ugrás az első üzenetre"
-
-#~ msgid "_Last Message"
-#~ msgstr "_Utolsó üzenet"
-
-#~ msgid "Go to the last message"
-#~ msgstr "Ugrás az utolsó üzenetre"
-
-#~ msgid "Next Fuz_zy"
-#~ msgstr "Következő ellenőr_zendő"
-
-#~ msgid "Go to the next fuzzy message"
-#~ msgstr "Ugrás a következő ellenőrzendő üzenetre"
-
-#~ msgid "Previous Fuzz_y"
-#~ msgstr "Előző ellenőrz_endő"
-
-#~ msgid "Go to the previous fuzzy message"
-#~ msgstr "Ugrás az előző ellenőrzendő üzenetre"
-
-#~ msgid "Next _Untranslated"
-#~ msgstr "Következő le_fordítatlan"
-
-#~ msgid "Go to the next untranslated message"
-#~ msgstr "Ugrás a következő lefordítatlan üzenetre"
-
-#~ msgid "Previ_ous Untranslated"
-#~ msgstr "Előző lef_ordítatlan"
-
-#~ msgid "Go to the previous untranslated message"
-#~ msgstr "Ugrás az előző lefordítatlan üzenetre"
-
-#~ msgid "Next Fu_zzy or Untranslated"
-#~ msgstr "Következő ellenőr_zendő vagy lefordítatlan"
-
-#~ msgid "Go to the next fuzzy or untranslated message"
-#~ msgstr "Ugrás a következő ellenőrzendő vagy lefordítatlan üzenetre"
-
-#~ msgid "Pre_vious Fuzzy or Untranslated"
-#~ msgstr "Előző ellenőrzendő _vagy lefordítatlan"
-
-#~ msgid "Go to the previous fuzzy or untranslated message"
-#~ msgstr "Ugrás az előző ellenőrzendő vagy lefordítatlan üzenetre"
-
-#~ msgid "Search for text"
-#~ msgstr "Szöveg keresése"
-
-#~ msgid "Search for and replace text"
-#~ msgstr "Szöveg keresése és cseréje"
-
-#~ msgid "_Save All"
-#~ msgstr "Ö_sszes mentése"
-
-#~ msgid "Save all open files"
-#~ msgstr "Összes megnyitott fájl mentése"
-
-#~ msgid "_Close All"
-#~ msgstr "Összes _bezárása"
-
-#~ msgid "Close all open files"
-#~ msgstr "Összes megnyitott fájl bezárása"
-
-#~ msgid "_Previous Document"
-#~ msgstr "_Előző dokumentum"
-
-#~ msgid "Activate previous document"
-#~ msgstr "Előző dokumentum aktiválása"
-
-#~ msgid "_Next Document"
-#~ msgstr "_Következő dokumentum"
-
-#~ msgid "Activate next document"
-#~ msgstr "Következő dokumentum aktiválása"
-
-#~ msgid "Activate '%s'"
-#~ msgstr "„%s” aktiválása"
-
-#~ msgid "Toolbar Editor"
-#~ msgstr "Eszköztárszerkesztő"
-
-#~ msgid "_Header…"
-#~ msgstr "_Fejléc…"
-
-#~ msgid "Show the context panel"
-#~ msgstr "Kontextus panel megjelenítése"
-
-#~ msgid "_Go to Message…"
-#~ msgstr "_Ugrás üzenetre…"
-
-#~ msgid "_Open"
-#~ msgstr "_Megnyitás"
-
-#~ msgid "_Save"
-#~ msgstr "M_entés"
-
-#~ msgid "_Undo"
-#~ msgstr "_Visszavonás"
-
-#~ msgid "_Redo"
-#~ msgstr "Új_ra"
-
-#~ msgid "Plugins"
-#~ msgstr "Bővítmények"
-
-#~ msgid "Message Table"
-#~ msgstr "Üzenettáblázat"
-
-#~ msgid "Translation Fields"
-#~ msgstr "Fordítási mezők"
-
-#~ msgid "Message Details"
-#~ msgstr "Üzenet részletei"
-
-#~ msgid ""
-#~ "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"large\">Az adatbázishoz hozzáadott "
-#~ "karakterláncok</span>"
-
-#~ msgid "<b>Translator name:</b>"
-#~ msgstr "<b>Fordító neve:</b>"
-
-#~ msgid "<b>Translator email:</b>"
-#~ msgstr "<b>Fordító e-mailje:</b>"
-
-#~ msgid "<b>Original Message:</b>"
-#~ msgstr "<b>Eredeti üzenet:</b>"
-
-#~ msgid "<b>Translate_d Text:</b>"
-#~ msgstr "<b>Lefor_dított szöveg:</b>"
