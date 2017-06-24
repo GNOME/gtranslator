@@ -10,17 +10,17 @@
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2004, 2005.
 # Juan Carlos Vallejo <urizev@gmail.com>, 2007.
 # Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008, 2009, 2010, 2011.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011, 2012, 2013, 2015.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2011, 2012, 2013, 2015, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-10-04 22:44+0000\n"
-"PO-Revision-Date: 2015-10-05 09:57+0200\n"
+"POT-Creation-Date: 2017-02-26 08:12+0000\n"
+"PO-Revision-Date: 2017-06-20 12:48+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
-"Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
+"Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,6 +29,16 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.6\n"
 
 #: ../data/gtranslator.appdata.xml.in.h:1
+#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
+msgid "Gtranslator"
+msgstr "Gtranslator"
+
+#: ../data/gtranslator.appdata.xml.in.h:2
+#: ../data/desktop/gtranslator.desktop.in.h:4
+msgid "Translate and localize applications and libraries"
+msgstr "Traduzca y localice aplicaciones y bibliotecas"
+
+#: ../data/gtranslator.appdata.xml.in.h:3
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -44,19 +54,19 @@ msgstr ""
 "una visión general de las cadenas del archivo PO), navegación sencilla,"
 "edición y traducción de mensajes y comentarios precisos sobre la traducción."
 
-#: ../data/gtranslator.appdata.xml.in.h:2
+#: ../data/gtranslator.appdata.xml.in.h:4
+#| msgid ""
+#| "Gtranslator includes also a plugin system with many interesting plugins "
+#| "like alternate language, insert tags, open tran, integration with "
+#| "subversion and a source code viewer."
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
-"alternate language, insert tags, open tran, integration with subversion and "
-"a source code viewer."
+"alternate language, insert tags, integration with subversion and a source "
+"code viewer."
 msgstr ""
 "Gtranslator también incluye un sistema de complementos que incluyen idioma "
-"alternativo, insertar etiquetas, OpenTran, integración con subversion y un "
-"visor de código fuente."
-
-#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
-msgid "Gtranslator"
-msgstr "Gtranslator"
+"alternativo, insertar etiquetas, integración con subversion y un visor de "
+"código fuente."
 
 #: ../data/desktop/gtranslator.desktop.in.h:2
 msgid "PO File Editor"
@@ -65,10 +75,6 @@ msgstr "Editor de archivos PO"
 #: ../data/desktop/gtranslator.desktop.in.h:3
 msgid "Gtranslator PO File Editor"
 msgstr "Editor de archivos PO Gtranslator"
-
-#: ../data/desktop/gtranslator.desktop.in.h:4
-msgid "Translate and localize applications and libraries"
-msgstr "Traduzca y localice aplicaciones y bibliotecas"
 
 #: ../data/org.gnome.gtranslator.gschema.xml.in.h:1
 msgid "Warn if file contains fuzzy translations"
@@ -518,175 +524,6 @@ msgstr "Insertar parámetros o etiquetas"
 msgid "Parameters and tags detection featuring easy insertion."
 msgstr "Detección e inserción fácil de parámetros y etiquetas."
 
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
-msgid "Open Tran Settings"
-msgstr "Ajustes de Open Tran"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
-msgid "Language code for the Open-Tran query:"
-msgstr "Código de idioma para la consulta a Open Tran:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
-msgid "Language code of the translated results:"
-msgstr "Código del idioma para el resultado traducido:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:4
-msgid "Use a local \"mirror\" copy of the Open-Tran server"
-msgstr "Usar una copia local del servidor de Open-Tran"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:5
-msgid "Mirror server URL:"
-msgstr "URL del servidor:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:7
-#, no-c-format
-msgid ""
-"<i>The URL should be of the form:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"The two \"%s\" markers and the final slash must not be omitted.</i>"
-msgstr ""
-"<i>El URL debería ser de la forma:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"No se deben omitir los dos marcadores «%s» y la barra final.</i>"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:10
-msgid "Mirror Server"
-msgstr "Servidor"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:222
-#, c-format
-msgid "ERROR: Cannot access %s\n"
-msgstr "Error: no se puede acceder a %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:238
-msgid "Error in server response, GET failed\n"
-msgstr "Error en la respuesta del servidor, falló el GET\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:250
-#, c-format
-msgid "Cannot parse server response, %s\n"
-msgstr ""
-"No se puede analizar la respuesta del servidor, %s\n"
-"\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:264
-#, c-format
-msgid "Cannot parse server response, not an array? %s\n"
-msgstr "No se puede analizar la respuesta del servidor, ¿no es un vector? %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:287
-#, c-format
-msgid "WRONG! Can't get result element %d\n"
-msgstr "ERROR: No se puede obtener el elemento resultado %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:297
-#, c-format
-msgid "WRONG! Can't parse result element %d as object\n"
-msgstr ""
-"ERROR: No se puede analizar el elemento del resultado %d como un objeto\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:311
-#, c-format
-msgid "WRONG! Can't read projects for result element %d\n"
-msgstr ""
-"ERROR: No se pueden leer los proyectos para obtener el elemento del "
-"resultado %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:335
-#, c-format
-msgid "%s[%s] Count:%d"
-msgstr "%s[%s] Conteo:%d"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:345
-#, c-format
-msgid "WRONG! Malformed project: %d\n"
-msgstr "ERROR: proyecto mal formado: %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:359
-#: ../src/gtr-actions-search.c:191
-msgid "Phrase not found"
-msgstr "No se encontró la frase"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:383
-msgid "You have to provide a phrase to search"
-msgstr "Debe proporcionar una frase para buscar"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:392
-msgid "You have to provide a search language code in the plugin configuration"
-msgstr ""
-"Debe proporcionar un código de idioma de búsqueda en la configuración del "
-"complemento"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:402
-msgid ""
-"You have to provide a language code for your language in the plugin "
-"configuration"
-msgstr ""
-"Debe proporcionar un código de idioma para su idioma en la configuración del "
-"complemento"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:415
-msgid ""
-"Either use the main open-tran.eu server, or enter a server URL in the plugin "
-"configuration,"
-msgstr ""
-"Usar el servidor principal open-tran.eu o introducir un URL de servidor en "
-"la configuración del complemento."
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:453
-msgid "Type"
-msgstr "Tipo"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:464
-msgid "Open-Tran.eu"
-msgstr "Open-Tran.eu"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:510
-msgid "Look for:"
-msgstr "Buscar:"
-
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:162
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:1
-msgid "Open Tran"
-msgstr "Open Tran"
-
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:2
-msgid "Look for phrases in Open tran memory translation database."
-msgstr ""
-"Buscar frases en la base de datos de la memoria de traducción de Open Tran."
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:1
-msgid "Search Code"
-msgstr "Buscar código"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:2
-msgid "The language code to search for"
-msgstr "El código de lenguaje que buscar"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:3
-msgid "Own Code"
-msgstr "Código propio"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:4
-msgid "The language code in which you want the results"
-msgstr "El lenguaje del código en el que quiere los resultados"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:5
-msgid "Use Mirror Server"
-msgstr "Usar un servidor"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:6
-msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
-msgstr "Usar una copia local del servidor principal Open-Tran en open-tran.eu"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:7
-msgid "Mirror Server URL"
-msgstr "URL del servidor"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:8
-msgid "URL of an Open-Tran mirror server"
-msgstr "URL de un servidor de Open-Tran"
-
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
 msgid "Strings added to database"
 msgstr "Cadenas añadidas a la base de datos"
@@ -895,6 +732,10 @@ msgstr[1] "Encontradas y reemplazadas %d apariciones"
 #: ../src/gtr-actions-search.c:179
 msgid "Found and replaced one occurrence"
 msgstr "Encontrada y reemplazada una ocurrencia"
+
+#: ../src/gtr-actions-search.c:191
+msgid "Phrase not found"
+msgstr "No se encontró la frase"
 
 #: ../src/gtranslator-menu.ui.h:1
 msgid "_New Window"
@@ -1440,12 +1281,12 @@ msgstr ""
 "No se pudo mostrar la ayuda. Asegúrese de que el paquete de documentación de "
 "Gtranslator está instalado."
 
-#: ../src/gtr-view.c:81
+#: ../src/gtr-view.c:78
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "error de gtkspell: %s\n"
 
-#: ../src/gtr-view.c:83
+#: ../src/gtr-view.c:80
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1522,12 +1363,10 @@ msgid "Profile for the active document"
 msgstr "Perfil para el documento activo"
 
 #: ../src/gtr-window.ui.h:1
-#| msgid "Project"
 msgid "Projects"
 msgstr "Proyectos"
 
 #: ../src/gtr-window.ui.h:2
-#| msgid "Project"
 msgid "Add project"
 msgstr "Añadir proyecto"
 
@@ -1588,6 +1427,131 @@ msgstr "Quitar la barra de herramientas seleccionada"
 #: ../src/toolbareditor/egg-toolbar-editor.c:488
 msgid "Separator"
 msgstr "Separador"
+
+#~ msgid "Open Tran Settings"
+#~ msgstr "Ajustes de Open Tran"
+
+#~ msgid "Language code for the Open-Tran query:"
+#~ msgstr "Código de idioma para la consulta a Open Tran:"
+
+#~ msgid "Language code of the translated results:"
+#~ msgstr "Código del idioma para el resultado traducido:"
+
+#~ msgid "Use a local \"mirror\" copy of the Open-Tran server"
+#~ msgstr "Usar una copia local del servidor de Open-Tran"
+
+#~ msgid "Mirror server URL:"
+#~ msgstr "URL del servidor:"
+
+#~ msgid ""
+#~ "<i>The URL should be of the form:\n"
+#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+#~ "The two \"%s\" markers and the final slash must not be omitted.</i>"
+#~ msgstr ""
+#~ "<i>El URL debería ser de la forma:\n"
+#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+#~ "No se deben omitir los dos marcadores «%s» y la barra final.</i>"
+
+#~ msgid "Mirror Server"
+#~ msgstr "Servidor"
+
+#~ msgid "ERROR: Cannot access %s\n"
+#~ msgstr "Error: no se puede acceder a %s\n"
+
+#~ msgid "Error in server response, GET failed\n"
+#~ msgstr "Error en la respuesta del servidor, falló el GET\n"
+
+#~ msgid "Cannot parse server response, %s\n"
+#~ msgstr ""
+#~ "No se puede analizar la respuesta del servidor, %s\n"
+#~ "\n"
+
+#~ msgid "Cannot parse server response, not an array? %s\n"
+#~ msgstr ""
+#~ "No se puede analizar la respuesta del servidor, ¿no es un vector? %s\n"
+
+#~ msgid "WRONG! Can't get result element %d\n"
+#~ msgstr "ERROR: No se puede obtener el elemento resultado %d\n"
+
+#~ msgid "WRONG! Can't parse result element %d as object\n"
+#~ msgstr ""
+#~ "ERROR: No se puede analizar el elemento del resultado %d como un objeto\n"
+
+#~ msgid "WRONG! Can't read projects for result element %d\n"
+#~ msgstr ""
+#~ "ERROR: No se pueden leer los proyectos para obtener el elemento del "
+#~ "resultado %d\n"
+
+#~ msgid "%s[%s] Count:%d"
+#~ msgstr "%s[%s] Conteo:%d"
+
+#~ msgid "WRONG! Malformed project: %d\n"
+#~ msgstr "ERROR: proyecto mal formado: %d\n"
+
+#~ msgid "You have to provide a phrase to search"
+#~ msgstr "Debe proporcionar una frase para buscar"
+
+#~ msgid ""
+#~ "You have to provide a search language code in the plugin configuration"
+#~ msgstr ""
+#~ "Debe proporcionar un código de idioma de búsqueda en la configuración del "
+#~ "complemento"
+
+#~ msgid ""
+#~ "You have to provide a language code for your language in the plugin "
+#~ "configuration"
+#~ msgstr ""
+#~ "Debe proporcionar un código de idioma para su idioma en la configuración "
+#~ "del complemento"
+
+#~ msgid ""
+#~ "Either use the main open-tran.eu server, or enter a server URL in the "
+#~ "plugin configuration,"
+#~ msgstr ""
+#~ "Usar el servidor principal open-tran.eu o introducir un URL de servidor "
+#~ "en la configuración del complemento."
+
+#~ msgid "Type"
+#~ msgstr "Tipo"
+
+#~ msgid "Open-Tran.eu"
+#~ msgstr "Open-Tran.eu"
+
+#~ msgid "Look for:"
+#~ msgstr "Buscar:"
+
+#~ msgid "Open Tran"
+#~ msgstr "Open Tran"
+
+#~ msgid "Look for phrases in Open tran memory translation database."
+#~ msgstr ""
+#~ "Buscar frases en la base de datos de la memoria de traducción de Open "
+#~ "Tran."
+
+#~ msgid "Search Code"
+#~ msgstr "Buscar código"
+
+#~ msgid "The language code to search for"
+#~ msgstr "El código de lenguaje que buscar"
+
+#~ msgid "Own Code"
+#~ msgstr "Código propio"
+
+#~ msgid "The language code in which you want the results"
+#~ msgstr "El lenguaje del código en el que quiere los resultados"
+
+#~ msgid "Use Mirror Server"
+#~ msgstr "Usar un servidor"
+
+#~ msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
+#~ msgstr ""
+#~ "Usar una copia local del servidor principal Open-Tran en open-tran.eu"
+
+#~ msgid "Mirror Server URL"
+#~ msgstr "URL del servidor"
+
+#~ msgid "URL of an Open-Tran mirror server"
+#~ msgstr "URL de un servidor de Open-Tran"
 
 #~ msgid "_File"
 #~ msgstr "_Archivo"
