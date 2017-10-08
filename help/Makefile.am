@@ -41,11 +41,8 @@ HELP_MEDIA = \
 	figures/Gtranslator_027.png		\
 	figures/gtranslator22.png		\
 	figures/gtranslator32.png		\
-	figures/gtranslator_interface.png	\
 	figures/gtranslator-plugins.png		\
-	figures/gtranslator.png			\
 	figures/gtranslator_tm_strings.png	\
-	figures/gtr-prefs-tm.png		\
 	figures/message-detail.png		\
 	figures/mover1.png			\
 	figures/mover2.png			\
