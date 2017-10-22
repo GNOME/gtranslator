@@ -13,10 +13,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-12-21 20:29+0000\n"
-"PO-Revision-Date: 2017-01-17 18:59+0100\n"
+"POT-Creation-Date: 2017-02-26 08:12+0000\n"
+"PO-Revision-Date: 2017-10-19 17:06+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -55,12 +55,12 @@ msgstr ""
 #: ../data/gtranslator.appdata.xml.in.h:4
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
-"alternate language, insert tags, open tran, integration with subversion and "
-"a source code viewer."
+"alternate language, insert tags, integration with subversion and a source "
+"code viewer."
 msgstr ""
 "Det er også muligt at udvide Gtranslator med udvidelsesmoduler. Der er mange "
-"interessante udvidelsesmoduler såsom alternativt sprog, tilføj mærker, open "
-"tran, integration med subversion og en fremviser til kildekoden."
+"interessante udvidelsesmoduler såsom alternativt sprog, tilføj mærker, "
+"integration med subversion og en fremviser til kildekoden."
 
 #: ../data/desktop/gtranslator.desktop.in.h:2
 msgid "PO File Editor"
@@ -365,7 +365,7 @@ msgstr "Ordbog"
 #: ../plugins/dictionary/gtr-dict-panel.c:166
 #, c-format
 msgid "No dictionary source available with name '%s'"
-msgstr "Ingen tilgængelig ordbogskilde med navnet '%s'"
+msgstr "Ingen tilgængelig ordbogskilde med navnet “%s”"
 
 #: ../plugins/dictionary/gtr-dict-panel.c:170
 msgid "Unable to find dictionary source"
@@ -374,7 +374,7 @@ msgstr "Kunne ikke finde ordbogskilde"
 #: ../plugins/dictionary/gtr-dict-panel.c:185
 #, c-format
 msgid "No context available for source '%s'"
-msgstr "Ingen tilgængelig kontekst for kilde '%s'"
+msgstr "Ingen tilgængelig kontekst for kilde “%s”"
 
 #: ../plugins/dictionary/gtr-dict-panel.c:189
 msgid "Unable to create a context"
@@ -383,22 +383,22 @@ msgstr "Kunne ikke oprette kontekst"
 #: ../plugins/dictionary/gtr-dict-panel.c:272
 #, c-format
 msgid "Dictionary source '%s' selected"
-msgstr "Ordbogskilde '%s' valgt"
+msgstr "Ordbogskilde “%s” valgt"
 
 #: ../plugins/dictionary/gtr-dict-panel.c:291
 #, c-format
 msgid "Strategy '%s' selected"
-msgstr "Strategi '%s' valgt"
+msgstr "Strategi “%s” valgt"
 
 #: ../plugins/dictionary/gtr-dict-panel.c:309
 #, c-format
 msgid "Database '%s' selected"
-msgstr "Database '%s' valgt"
+msgstr "Database “%s” valgt"
 
 #: ../plugins/dictionary/gtr-dict-panel.c:353
 #, c-format
 msgid "Word '%s' selected"
-msgstr "Ord '%s' valgt"
+msgstr "Ord “%s” valgt"
 
 #. speller
 #: ../plugins/dictionary/gtr-dict-panel.c:375
@@ -443,7 +443,7 @@ msgstr "Ordbogskilder"
 
 #: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:2
 msgid "Look up words in a dictionary."
-msgstr "Slå op i ordbog."
+msgstr "Slå ord op i en ordbog."
 
 #: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:1
 msgid "Database"
@@ -487,7 +487,7 @@ msgstr "_Næste parameter"
 
 #: ../plugins/insert-params/gtr-insert-params-plugin.c:114
 msgid "Insert the next param of the message"
-msgstr "Indsæt det næste parameter på beskeden"
+msgstr "Indsæt beskedens næste parameter"
 
 #: ../plugins/insert-params/gtr-insert-params-plugin.c:116
 msgid "_Insert Params"
@@ -566,7 +566,7 @@ msgstr "Hent oversættelsesforslag fra en database."
 #: ../plugins/translation-memory/gtr-translation-memory-ui.c:207
 #, c-format
 msgid "Insert Option nº %d"
-msgstr "Indsæt indstilling nº %d"
+msgstr "Indsæt valgmulighed nr. %d"
 
 #: ../plugins/translation-memory/gtr-translation-memory-ui.c:325
 msgid "_Use this translation"
@@ -766,9 +766,9 @@ msgid ""
 msgstr ""
 "Profilnavn: %s\n"
 "Oversætterens navn: %s\n"
-"Oversætterens e-post-adresse: %s\n"
+"Oversætterens e-mail: %s\n"
 "Sprognavn: %s\n"
-"Oversætterholdets e-post-adresse: %s\n"
+"Oversætterholdets e-mail: %s\n"
 "Sprogkode: %s\n"
 "Tegnsæt: %s\n"
 "Overførelseskodning: %s\n"
@@ -825,9 +825,11 @@ msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] ""
-"Der er %d dokument med ændringer, som ikke er gemt. Gem ændringer før lukning?"
+"Der er %d dokument med ændringer, som ikke er gemt. Gem ændringer før "
+"lukning?"
 msgstr[1] ""
-"Der er %d dokumenter med ændringer, som ikke er gemt. Gem ændringer før lukning?"
+"Der er %d dokumenter med ændringer, som ikke er gemt. Gem ændringer før "
+"lukning?"
 
 #: ../src/gtr-close-confirmation-dialog.c:561
 msgid "Docum_ents with unsaved changes:"
@@ -926,7 +928,7 @@ msgstr "Oversætterens _navn:"
 
 #: ../src/gtr-header-dialog.ui.h:9
 msgid "Translator's _email:"
-msgstr "Oversætterens _e-post-adresse:"
+msgstr "Oversætterens _e-mail:"
 
 #: ../src/gtr-header-dialog.ui.h:10 ../src/gtr-languages-fetcher.ui.h:5
 msgid "_Language:"
@@ -934,7 +936,7 @@ msgstr "_Sprog:"
 
 #: ../src/gtr-header-dialog.ui.h:11
 msgid "Language gro_up email:"
-msgstr "Sproggr_uppens e-post-adresse:"
+msgstr "Sproggr_uppens e-mail:"
 
 #: ../src/gtr-header-dialog.ui.h:12
 msgid "Char_set:"
@@ -958,7 +960,7 @@ msgstr "Indtast beskednummer:"
 
 #: ../src/gtr-languages-fetcher.ui.h:1
 msgid "_Team email:"
-msgstr "_Oversætterholdets e-post:"
+msgstr "_Oversætterholdets e-mail:"
 
 #: ../src/gtr-languages-fetcher.ui.h:2
 msgid "Transfer en_coding:"
@@ -1000,12 +1002,12 @@ msgstr "Filen er tom"
 #: ../src/gtr-po.c:448
 #, c-format
 msgid "Failed opening file '%s': %s"
-msgstr "Kunne ikke åbne fil '%s': %s"
+msgstr "Kunne ikke åbne filen “%s”: %s"
 
 #: ../src/gtr-po.c:522
 #, c-format
 msgid "Could not convert from charset '%s' to UTF-8"
-msgstr "Kunne ikke konvertere fra tegnsæt \"%s\" til UTF-8"
+msgstr "Kunne ikke konvertere fra tegnsættet “%s” til UTF-8"
 
 #: ../src/gtr-po.c:539 ../src/gtr-po.c:559
 #, c-format
@@ -1041,7 +1043,7 @@ msgid ""
 msgstr ""
 "Du prøver at gemme en fil med endelsen .pot.\n"
 "Pot-filer genereres af kompileringsprocessen.\n"
-"Din filer skal sandsynligvis hedde '%s.po'."
+"Din fil skal sandsynligvis hedde “%s.po”."
 
 #: ../src/gtr-po.c:770
 #, c-format
@@ -1166,7 +1168,7 @@ msgstr "Oversætterinformation"
 
 #: ../src/gtr-profile-dialog.ui.h:4
 msgid "_Email:"
-msgstr "_E-post:"
+msgstr "_E-mail:"
 
 #: ../src/gtr-profile-dialog.ui.h:5
 msgid "N_ame:"
@@ -1379,8 +1381,8 @@ msgid ""
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"Kør '%s --help' for at se en fuldstændig liste over tilgængelige "
-"indstillinger for kommandolinjen.\n"
+"Kør “%s --help” for at se en fuldstændig liste over tilgængelige "
+"kommandolinjetilvalg.\n"
 
 #. Translaters: This string is for a toggle to display a toolbar.
 #. * The name of the toolbar is automatically computed from the widgets
