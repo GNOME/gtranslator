@@ -355,7 +355,7 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
                                   GTK_ORIENTATION_VERTICAL);
 
   builder = gtk_builder_new ();
-  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/ui/gtr-languages-fetcher.ui",
+  gtk_builder_add_objects_from_resource (builder, "/org/gnome/translator/gtr-languages-fetcher.ui",
                                          root_objects, NULL);
   content = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
   g_object_ref (content);

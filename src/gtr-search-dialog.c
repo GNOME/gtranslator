@@ -402,7 +402,7 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
   gtk_box_set_spacing (GTK_BOX (action_area), 6);
 
   builder = gtk_builder_new ();
-  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/ui/gtr-search-dialog.ui",
+  gtk_builder_add_objects_from_resource (builder, "/org/gnome/translator/gtr-search-dialog.ui",
                                          root_objects, NULL);
   content = GTK_WIDGET (gtk_builder_get_object (builder, "search_dialog_content"));
   g_object_ref (content);

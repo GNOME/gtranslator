@@ -95,7 +95,7 @@ gtr_profile_dialog_init (GtrProfileDialog *dlg)
 
   builder = gtk_builder_new ();
   GError *error = NULL;
-  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/ui/gtr-profile-dialog.ui",
+  gtk_builder_add_objects_from_resource (builder, "/org/gnome/translator/gtr-profile-dialog.ui",
                                          root_objects, &error);
   if (error)
   {

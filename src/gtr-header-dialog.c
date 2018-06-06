@@ -281,7 +281,7 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
   g_signal_connect (dlg, "response", G_CALLBACK (gtk_widget_destroy), NULL);
 
   builder = gtk_builder_new ();
-  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/ui/gtr-header-dialog.ui",
+  gtk_builder_add_objects_from_resource (builder, "/org/gnome/translator/gtr-header-dialog.ui",
                                          root_objects, NULL);
 
   priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
