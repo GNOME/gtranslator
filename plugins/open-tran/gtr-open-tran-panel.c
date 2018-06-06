@@ -110,6 +110,7 @@ get_service_url (gboolean use_mirror_server, gchar *mirror_server_url,
                  const gchar * search_code, const gchar * own_code)
 {
   const gchar *base_url;
+  gchar **split;
   gchar *url, *full_url, *escaped_text;
   const gchar * open_tran_url = "http://%s.%s.open-tran.eu/json/suggest/";
   /* URL placeholders: source lang, target lang. Search string is appended. */
@@ -119,13 +120,22 @@ get_service_url (gboolean use_mirror_server, gchar *mirror_server_url,
   else
     base_url = mirror_server_url;
 
+  split = g_strsplit (base_url, "%s", 3);
+  /* Sanity check */
+  if (g_strv_length (split) != 3)
+    {
+      g_strfreev (split);
+      split = g_strsplit (open_tran_url, "%s", 3);
+    }
+
   escaped_text = (gchar *) xmlURIEscapeStr ((const xmlChar *) search_text, (const xmlChar *) "");
-  url = g_strdup_printf (base_url, search_code, own_code);
+  url = g_strdup_printf ("%s%s%s%s%s", split[0], search_code, split[1], own_code, split[3]);
   full_url = g_strconcat (url, escaped_text, NULL);
 
   g_free (url);
   if (escaped_text)
     xmlFree (escaped_text);
+  g_strfreev (split);
 
   return full_url;
 }
