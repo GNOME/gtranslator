@@ -39,7 +39,7 @@ libtranslation_memory_la_LDFLAGS = \
 	gda/libgda.la
 
 gtr-translation-memory-resources.c: gtr-translation-memory.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies gtr-translation-memory.gresource.xml)
-	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-source gtr-translation-memory.gresource.xml
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-source $(srcdir)/gtr-translation-memory.gresource.xml
 
 # Plugin Info
 
