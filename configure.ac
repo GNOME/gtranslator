@@ -162,7 +162,7 @@ AC_MSG_RESULT($enable_debug)
 dnl -------------------------------------------------------------------
 dnl Get the date for the man-page and substitute it there and anywhere.
 dnl -------------------------------------------------------------------
-MY_DATE=`date +%Y-%m-%d`
+MY_DATE=`date -u -r ChangeLog +%Y-%m-%d`
 
 AC_SUBST(MY_DATE)
 
