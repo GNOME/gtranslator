@@ -32,7 +32,7 @@
 
 #define ISO_639_DOMAIN	"iso_639"
 
-#define ISOCODESLOCALEDIR		ISO_CODES_PREFIX "/share/locale"
+#define ISOCODESLOCALEDIR		PACKAGE_ISO_CODES_PREFIX "/share/locale"
 #define GTR_PLURAL_FORMS_FILENAME	"gtr-plural-forms.ini"
 
 struct _GtrLanguage
@@ -141,7 +141,7 @@ load_iso_entries (int iso,
   char *filename;
   int ret = -1;
 
-  filename = g_strdup_printf (ISO_CODES_PREFIX "/share/xml/iso-codes/iso_%d.xml", iso);
+  filename = g_strdup_printf (PACKAGE_ISO_CODES_PREFIX "/share/xml/iso-codes/iso_%d.xml", iso);
   reader = xmlNewTextReaderFilename (filename);
   if (reader == NULL)
     goto out;
