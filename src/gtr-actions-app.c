@@ -47,7 +47,7 @@ gtr_about_dialog (GtrWindow *window)
   static const gchar *authors[] = {
     N_("Current Maintainers"),
     "------------------------",
-    "Seán de Búrca <leftmostcat@gmail.com>",
+    "Daniel Garcia Moreno <danigm@gnome.org>",
     "",
     N_("Current Developers"),
     "------------------------",
