@@ -392,7 +392,7 @@ create_profiles_page2 (GtrAssistant * as)
                     as);
 
   gtk_assistant_append_page (GTK_ASSISTANT (as), priv->languages_fetcher);
-  gtk_assistant_set_page_title (GTK_ASSISTANT (as), priv->languages_fetcher, _("Profile"));
+  gtk_assistant_set_page_title (GTK_ASSISTANT (as), priv->languages_fetcher, _("Language"));
 }
 
 static void
@@ -468,14 +468,11 @@ gtr_show_assistant (GtrWindow * window)
       gtk_widget_show (GTK_WIDGET (assist));
     }
 
+  gtk_window_set_transient_for (GTK_WINDOW (assist), GTK_WINDOW (window));
+  gtk_window_set_attached_to (GTK_WINDOW (assist), GTK_WIDGET (window));
+  gtk_window_set_type_hint (GTK_WINDOW (assist), GDK_WINDOW_TYPE_HINT_DIALOG);
   /* Make asssitant modal preventing using application without profile */
   gtk_window_set_modal (GTK_WINDOW (assist), TRUE);
-
-  if (GTK_WINDOW (window) !=
-      gtk_window_get_transient_for (GTK_WINDOW (assist)))
-    {
-      gtk_window_set_transient_for (GTK_WINDOW (assist), GTK_WINDOW (window));
-    }
 
   gtk_window_present (GTK_WINDOW (assist));
 }
