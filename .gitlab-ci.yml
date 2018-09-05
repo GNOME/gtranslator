@@ -4,10 +4,10 @@ stages:
   - review
 
 variables:
-  BUNDLE: "org.gnome.GtranslatorDevel.flatpak"
+  BUNDLE: "org.gnome.Gtranslator.flatpak"
   MANIFEST_PATH: "build-aux/flatpak/org.gnome.Gtranslator.json"
   FLATPAK_MODULE: "gtranslator"
-  DBUS_ID: "org.gnome.GtranslatorDevel"
+  DBUS_ID: "org.gnome.Gtranslator"
 
 .flatpak_cache_template: &flatpak_cache
   cache:
