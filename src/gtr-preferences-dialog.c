@@ -635,7 +635,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
                     "response", G_CALLBACK (dialog_response_handler), NULL);
 
   builder = gtk_builder_new ();
-  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/ui/gtr-preferences-dialog.ui",
+  gtk_builder_add_objects_from_resource (builder, "/org/gnome/translator/gtr-preferences-dialog.ui",
                                          root_objects, NULL);
   priv->notebook = GTK_WIDGET (gtk_builder_get_object (builder, "notebook"));
   g_object_ref (priv->notebook);

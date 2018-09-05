@@ -110,7 +110,7 @@ gtr_jump_dialog_init (GtrJumpDialog * dlg)
                     "response", G_CALLBACK (dialog_response_handler), NULL);
 
   builder = gtk_builder_new ();
-  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/ui/gtr-jump-dialog.ui",
+  gtk_builder_add_objects_from_resource (builder, "/org/gnome/translator/gtr-jump-dialog.ui",
                                          root_objects, NULL);
   priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
   g_object_ref (priv->main_box);

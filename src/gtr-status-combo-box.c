@@ -130,11 +130,6 @@ gtr_status_combo_box_class_init (GtrStatusComboBoxClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	static const gchar style[] =
 		"* {\n"
-		  "-GtkButton-default-border : 0;\n"
-		  "-GtkButton-default-outside-border : 0;\n"
-		  "-GtkButton-inner-border: 0;\n"
-		  "-GtkWidget-focus-line-width : 0;\n"
-		  "-GtkWidget-focus-padding : 0;\n"
 		  "padding: 0;\n"
 		"}";
 	

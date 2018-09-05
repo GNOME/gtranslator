@@ -35,10 +35,6 @@ gtr_close_button_class_init (GtrCloseButtonClass *klass)
 {
 	static const gchar button_style[] =
 		"* {\n"
-		  "-GtkButton-default-border : 0;\n"
-		  "-GtkButton-default-outside-border : 0;\n"
-		  "-GtkButton-inner-border: 0;\n"
-		  "-GtkWidget-focus-line-width : 0;\n"
 		  "-GtkWidget-focus-padding : 0;\n"
 		  "padding: 0;\n"
 		"}";

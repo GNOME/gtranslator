@@ -334,7 +334,7 @@ gtr_application_startup (GApplication *application)
                                    G_N_ELEMENTS (app_entries), application);
 
   builder = gtk_builder_new ();
-  gtk_builder_add_from_resource (builder, "/org/gnome/gtranslator/ui/gtranslator-menu.ui", NULL);
+  gtk_builder_add_from_resource (builder, "/org/gnome/translator/gtranslator-menu.ui", NULL);
   gtk_application_set_app_menu (GTK_APPLICATION (application),
                                 G_MENU_MODEL (gtk_builder_get_object (builder, "appmenu")));
   g_object_unref (builder);
