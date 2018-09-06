@@ -58,10 +58,16 @@
 
 typedef struct
 {
+  GtkRecentManager *recent_manager;
   GSettings *state_settings;
 
   GtkWidget *header_bar;
   GtkWidget *main_box;
+  GtkWidget *stack;
+
+  GtkWidget *project_add;
+  GtkWidget *project_list;
+  GtkWidget *project_remove;
 
   GtkWidget *notebook;
   GtrTab *active_tab;
@@ -182,6 +188,54 @@ get_drop_window (GtkWidget * widget)
   g_return_val_if_fail (GTR_IS_WINDOW (target_window), NULL);
 
   return GTR_WINDOW (target_window);
+}
+
+static void
+show_notebook (GtrWindow *window) {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "notebook");
+}
+
+static void
+file_open_cb (GtkListBox *box,
+              GtkListBoxRow *row,
+              gpointer data)
+{
+  gint index = gtk_list_box_row_get_index (row);
+  GtrWindow *window = GTR_WINDOW (data);
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  GList *recents = gtk_recent_manager_get_items (priv->recent_manager);
+  GtkRecentInfo *info = g_list_nth_data (recents, index);
+
+  GError *error;
+  GFile *file;
+
+  file = g_file_new_for_uri (gtk_recent_info_get_uri (info));
+  if (!gtr_open (file, window, &error)) {
+    g_error_free (error);
+    goto out;
+  }
+
+  show_notebook (window);
+
+out:
+  g_object_unref (file);
+  g_list_free_full (recents, (GDestroyNotify)gtk_recent_info_unref);
+}
+
+static void
+project_add_cb (GtkButton *btn,
+                gpointer data)
+{
+  GtrWindow *window = GTR_WINDOW (data);
+  gtr_open_file_dialog (NULL, window);
+}
+
+static void
+project_remove_cb (GtkButton *btn,
+                   gpointer data)
+{
+  printf ("PROJECT REMOVE\n");
 }
 
 /* Handle drops on the GtrWindow */
@@ -354,6 +408,16 @@ notebook_page_removed (GtkNotebook * notebook,
 }
 
 static void
+notebook_tab_close_request (GtrNotebook * notebook,
+                            GtrTab * tab, GtrWindow * window)
+{
+  /* Note: we are destroying the tab before the default handler
+   * seems to be ok, but we need to keep an eye on this. */
+  gtr_close_tab (tab, window);
+}
+
+
+static void
 notebook_tab_added (GtkNotebook * notebook,
                     GtkWidget * child, guint page_num, GtrWindow * window)
 {
@@ -450,6 +514,37 @@ fill_profile_combo (GtrWindow *window)
                                      GTK_MENU_ITEM (menu_item),
                                      name);
     }
+}
+
+static void
+init_recent (GtrWindow *window)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  GtkListBox *list = GTK_LIST_BOX (priv->project_list);
+
+  GList *recents = gtk_recent_manager_get_items (priv->recent_manager);
+  GList *it = g_list_first (recents);
+  while (it)
+    {
+      const gchar *name = gtk_recent_info_get_uri_display (it->data);
+      GtkWidget *label = gtk_label_new (name);
+      GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+
+      gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+      gtk_label_set_yalign (GTK_LABEL (label), 0.5);
+      gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 6);
+
+      gtk_widget_show_all (box);
+      gtk_list_box_insert (list, box, -1);
+      it = g_list_next (it);
+    }
+
+  g_signal_connect (list,
+                    "row-activated",
+                    G_CALLBACK (file_open_cb), window);
+
+
+  g_list_free_full (recents, (GDestroyNotify)gtk_recent_info_unref);
 }
 
 static void
@@ -605,6 +700,7 @@ gtr_window_init (GtrWindow *window)
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
   priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
+  priv->recent_manager = gtk_recent_manager_get_default ();
 
   gtk_widget_init_template (GTK_WIDGET (window));
 
@@ -622,6 +718,26 @@ gtr_window_init (GtrWindow *window)
 
   /* statusbar & progress bar */
   init_statusbar (window);
+
+  /* init recent projects */
+  init_recent (window);
+
+
+  priv->notebook = GTK_WIDGET (gtr_notebook_new ());
+  gtk_widget_show (priv->notebook);
+  g_signal_connect (priv->notebook, "switch-page",
+                    G_CALLBACK (notebook_switch_page), window);
+  g_signal_connect (priv->notebook, "page-added",
+                    G_CALLBACK (notebook_tab_added), window);
+  g_signal_connect (priv->notebook, "page-removed",
+                    G_CALLBACK (notebook_page_removed), window);
+  g_signal_connect (priv->notebook,
+                    "tab_close_request",
+                    G_CALLBACK (notebook_tab_close_request), window);
+
+  gtk_stack_add_named (GTK_STACK (priv->stack),
+                       priv->notebook,
+                       "notebook");
 
   /* Drag and drop support, set targets to NULL because we add the
      default uri_targets below */
@@ -646,6 +762,15 @@ gtr_window_init (GtrWindow *window)
   g_signal_connect (window,
                     "drag_data_received",
                     G_CALLBACK (drag_data_received_cb), NULL);
+
+  g_signal_connect (priv->project_add,
+                    "clicked",
+                    G_CALLBACK (project_add_cb),
+                    (gpointer)window);
+  g_signal_connect (priv->project_remove,
+                    "clicked",
+                    G_CALLBACK (project_remove_cb),
+                    (gpointer)window);
 }
 
 static void
@@ -714,6 +839,11 @@ gtr_window_class_init (GtrWindowClass *klass)
   /* Main layout widgets */
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, header_bar);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, main_box);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, stack);
+
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, project_list);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, project_add);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, project_remove);
 }
 
 /***************************** Public funcs ***********************************/

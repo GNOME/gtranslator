@@ -766,6 +766,10 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, msgstr_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, trans_notebook);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, context);
+
+  g_type_ensure (gtr_view_get_type ());
+  g_type_ensure (gtr_context_panel_get_type ());
+  g_type_ensure (gtr_message_table_get_type ());
 }
 
 /***************************** Public funcs ***********************************/
