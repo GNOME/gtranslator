@@ -1,0 +1,43 @@
+<schemalist>
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gtranslator.plugins.translation-memory" path="/org/gnome/gtranslator/plugins/translation-memory/">
+    <key name="po-directory" type="s">
+      <default>''</default>
+      <summary>PO directory</summary>
+      <description>
+        Directory containing PO files to add to the translation memory.
+      </description>
+    </key>
+    <key name="restrict-to-filename" type="b">
+      <default>false</default>
+      <summary>Restrict search by filename</summary>
+      <description>
+        If true, only include files with a specified filename when searching 
+        the translation memory.
+      </description>
+    </key>
+    <key name="filename-restriction" type="s">
+      <default>''</default>
+      <summary>Filename to restrict search to</summary>
+      <description>
+        Filename to which searching of the translation memory should be 
+        restricted.
+      </description>
+    </key>
+    <key name="max-missing-words" type="i">
+      <default>2</default>
+      <summary>Maximum number of missing words</summary>
+      <description>
+        Maximum number of words that can be missing from a message displayed as 
+        a match by the translation memory.
+      </description>
+    </key>
+    <key name="max-length-diff" type="i">
+      <default>2</default>
+      <summary>Maximum difference in message length</summary>
+      <description>
+        Maximum difference in length between messages displayed as matches by 
+        the translation memory.
+      </description>
+    </key>
+  </schema>
+</schemalist>

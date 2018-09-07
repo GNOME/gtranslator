@@ -1,0 +1,152 @@
+/*
+ * (C) 2001     Fatih Demir <kabalak@kabalak.net>
+ *     2012	Ignacio Casal Quinteiro <icq@gnome.org>
+ *
+ * gtranslator is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or   
+ * (at your option) any later version.
+ *
+ * gtranslator is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+ *
+ * Authors:
+ *   Ignacio Casal Quinteiro <icq@gnome.org>
+ */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include "gda-utils.h"
+
+#include <string.h>
+
+#include <glib.h>
+#include <gtk/gtk.h>
+
+
+static const gchar *badwords[] = {
+  "a",
+  //"all",
+  "an",
+  //"are",
+  //"can",
+  //"for",
+  //"from",
+  "have",
+  //"it",
+  //"may",
+  //"not",
+  "of",
+  //"that",
+  "the",
+  //"this",
+  //"was",
+  "will",
+  //"with",
+  //"you",
+  //"your",
+  NULL
+};
+
+static gboolean
+check_good_word (const gchar * word, gchar ** badwords)
+{
+  gboolean check = TRUE;
+  gchar *lower = g_utf8_strdown (word, -1);
+  gint i = 0;
+
+  while (badwords[i] != NULL)
+    {
+      gchar *lower_collate = g_utf8_collate_key (lower, -1);
+
+      if (strcmp (lower_collate, badwords[i]) == 0)
+        {
+          check = FALSE;
+          g_free (lower_collate);
+          break;
+        }
+      i++;
+      g_free (lower_collate);
+    }
+  return check;
+}
+
+
+/**
+ * gtr_gda_utils_split_string_in_words:
+ * @string: the text to process
+ *
+ * Process a text and split it in words using pango.
+ * 
+ * Returns: an array of words of the processed text
+ */
+gchar **
+gtr_gda_utils_split_string_in_words (const gchar * string)
+{
+  PangoLanguage *lang = pango_language_from_string ("en");
+  PangoLogAttr *attrs;
+  GPtrArray *array;
+  gint char_len;
+  gint i = 0;
+  gchar *s;
+  gchar *start = NULL;
+  static gchar **badwords_collate = NULL;
+
+  if (badwords_collate == NULL)
+    {
+      gint words_size = g_strv_length ((gchar **) badwords);
+      gint x = 0;
+
+      badwords_collate = g_new0 (gchar *, words_size + 1);
+
+      while (badwords[x] != NULL)
+        {
+          badwords_collate[x] = g_utf8_collate_key (badwords[x], -1);
+          x++;
+        }
+      badwords_collate[x] = NULL;
+    }
+
+  char_len = g_utf8_strlen (string, -1);
+  attrs = g_new (PangoLogAttr, char_len + 1);
+
+  pango_get_log_attrs (string,
+                       strlen (string), -1, lang, attrs, char_len + 1);
+
+  array = g_ptr_array_new ();
+
+  s = (gchar *) string;
+  while (i <= char_len)
+    {
+      gchar *end;
+
+      if (attrs[i].is_word_start)
+        start = s;
+      if (attrs[i].is_word_end)
+        {
+          gchar *word;
+
+          end = s;
+          word = g_strndup (start, end - start);
+
+          if (check_good_word (word, badwords_collate))
+            g_ptr_array_add (array, word);
+        }
+
+      i++;
+      s = g_utf8_next_char (s);
+    }
+
+  g_free (attrs);
+  g_ptr_array_add (array, NULL);
+
+  return (gchar **) g_ptr_array_free (array, FALSE);
+}
+

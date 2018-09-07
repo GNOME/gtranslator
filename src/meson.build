@@ -115,9 +115,11 @@ sources += gnome.compile_resources(
 incs = [
   top_inc,
   include_directories('toolbareditor'),
+  include_directories('translation-memory'),
 ]
 
 subdir('toolbareditor')
+subdir('translation-memory')
 
 
 ###############

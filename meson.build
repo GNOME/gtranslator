@@ -113,12 +113,14 @@ add_project_arguments(common_flags, language: 'c')
 
 gtk_dep = dependency('gtk+-3.0', version: '>= 3.22.20')
 glib_dep = dependency('glib-2.0', version: '>=2.36.0')
+gda_dep = dependency('libgda-5.0')
 
 gtranslator_deps = [
   iso_codes_dep,
   po_dep,
   gtk_dep,
   glib_dep,
+  gda_dep,
   dependency('libxml-2.0', version: '>=2.4.12'),
   dependency('gthread-2.0', version: '>=2.13.0'),
   dependency('gio-2.0', version: '>=2.36.0'),
