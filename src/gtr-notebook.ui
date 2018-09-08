@@ -6,4 +6,115 @@
     <property name="visible">True</property>
     <property name="can_focus">True</property>
   </template>
+
+  <!-- Header bar -->
+  <object class="GtkHeaderBar" id="titlebar">
+    <property name="visible">true</property>
+    <property name="title" translatable="yes">Editing PO file</property>
+    <property name="show_close_button">True</property>
+    <child>
+      <object class="GtkMenuButton" id="main_menu">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="popover">main_menu_popover</property>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="icon_name">open-menu-symbolic</property>
+          </object>
+        </child>
+        <accessibility>
+        </accessibility>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="a11y-room_menu_button">
+            <property name="AtkObject::accessible_name" translatable="yes">Room Menu</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="pack-type">end</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+  </object>
+
+  <!-- Menu -->
+  <object class="GtkPopoverMenu" id="main_menu_popover">
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_left">6</property>
+        <property name="margin_right">6</property>
+        <property name="margin_top">6</property>
+        <property name="margin_bottom">6</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkModelButton" id="save_button">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.save</property>
+            <property name="text" translatable="yes">Save</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="pref_button">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.preferences</property>
+            <property name="text" translatable="yes">Preferences</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">3</property>
+            <property name="margin_bottom">3</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="open_button">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.projects</property>
+            <property name="text" translatable="yes">Open</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="submenu">main</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+  </object>
+
 </interface>
+

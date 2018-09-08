@@ -63,7 +63,7 @@ struct _GtrNotebookClass
  */
 GType gtr_notebook_get_type (void) G_GNUC_CONST;
 
-GtkWidget *gtr_notebook_new (void);
+GtkWidget *gtr_notebook_new ();
 
 void gtr_notebook_add_page (GtrNotebook * notebook, GtrTab * tab);
 
@@ -72,6 +72,8 @@ void gtr_notebook_remove_page (GtrNotebook * notebook, gint page_num);
 void gtr_notebook_remove_all_pages (GtrNotebook *notebook);
 
 GtrTab *gtr_notebook_get_page (GtrNotebook * notebook);
+
+GtkWidget *gtr_notebook_get_header (GtrNotebook *notebook);
 
 G_END_DECLS
 #endif /* __NOTEBOOK_H__ */

@@ -2,20 +2,10 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.14"/>
-  <object class="GtkImage" id="add_image">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">list-add-symbolic</property>
-  </object>
   <object class="GtkImage" id="menu_image">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">open-menu-symbolic</property>
-  </object>
-  <object class="GtkImage" id="remove_image">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="icon_name">list-remove-symbolic</property>
   </object>
   <template class="GtrWindow" parent="GtkApplicationWindow">
     <property name="height_request">600</property>
@@ -24,21 +14,28 @@
     <property name="default_height">600</property>
     <property name="show_menubar">False</property>
     <child type="titlebar">
-      <object class="GtkHeaderBar" id="header_bar">
+      <object class="GtkStack" id="header_stack">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="title" translatable="yes">Projects</property>
-        <property name="show_close_button">True</property>
+        <property name="vexpand">True</property>
         <child>
-          <object class="GtkMenuButton" id="menu_button">
+          <object class="GtkHeaderBar" id="header_bar">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="receives_default">False</property>
-            <property name="image">menu_image</property>
+            <property name="title" translatable="yes">Gtranslator</property>
+            <property name="show_close_button">True</property>
+            <child>
+              <object class="GtkMenuButton" id="menu_button">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="receives_default">False</property>
+                <property name="image">menu_image</property>
+              </object>
+              <packing>
+                <property name="pack_type">end</property>
+              </packing>
+            </child>
           </object>
-          <packing>
-            <property name="pack_type">end</property>
-          </packing>
         </child>
       </object>
     </child>
@@ -52,100 +49,6 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="vexpand">True</property>
-            <child>
-              <object class="GtkBox" id="projects">
-                <property name="margin_start">134</property>
-                <property name="margin_end">134</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_top">24</property>
-                <property name="margin_bottom">24</property>
-                <property name="vexpand">False</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkFrame" id="project_frame">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label_xalign">0</property>
-                    <property name="shadow_type">in</property>
-                    <child>
-                      <object class="GtkListBox" id="project_list">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkToolbar" id="project_toolbar">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="toolbar_style">icons</property>
-                    <property name="show_arrow">False</property>
-                    <property name="icon_size">1</property>
-                    <child>
-                      <object class="GtkToolItem" id="project_add_remove_item">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkBox" id="project_add_remove_box">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <child>
-                              <object class="GtkButton" id="project_add">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="image">add_image</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="project_remove">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="image">remove_image</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="homogeneous">False</property>
-                      </packing>
-                    </child>
-                    <style>
-                      <class name="inline-toolbar"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="name">projects</property>
-                <property name="title" translatable="yes">Projects</property>
-              </packing>
-            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -157,3 +60,4 @@
     </child>
   </template>
 </interface>
+

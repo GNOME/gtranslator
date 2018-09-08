@@ -30,7 +30,12 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-G_DEFINE_TYPE (GtrNotebook, gtr_notebook, GTK_TYPE_NOTEBOOK)
+typedef struct
+{
+  GtkWidget *titlebar;
+} GtrNotebookPrivate;
+
+G_DEFINE_TYPE_WITH_PRIVATE (GtrNotebook, gtr_notebook, GTK_TYPE_NOTEBOOK)
 
 /* Signals */
 enum
@@ -128,6 +133,8 @@ gtr_notebook_class_init (GtrNotebookClass * klass)
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/translator/gtr-notebook.ui");
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, titlebar);
 }
 
 /***************************** Public funcs ***********************************/
@@ -231,3 +238,11 @@ gtr_notebook_get_page (GtrNotebook * notebook)
 
   return GTR_TAB (gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), num));
 }
+
+GtkWidget *
+gtr_notebook_get_header (GtrNotebook *notebook)
+{
+  GtrNotebookPrivate *priv = gtr_notebook_get_instance_private (notebook);
+  return priv->titlebar;
+}
+

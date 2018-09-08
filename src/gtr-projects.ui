@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="GtrProjects" parent="GtkBin">
+    <child>
+      <object class="GtkBox" id="main_box">
+        <property name="margin_start">134</property>
+        <property name="margin_end">134</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_top">24</property>
+        <property name="margin_bottom">24</property>
+        <property name="vexpand">False</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkFrame" id="project_frame">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label_xalign">0</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkListBox" id="project_list">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </template>
+
+  <!-- Header bar -->
+  <object class="GtkHeaderBar" id="titlebar">
+    <property name="visible">true</property>
+    <property name="title" translatable="yes">Select a PO file</property>
+    <property name="show_close_button">True</property>
+    <child>
+      <object class="GtkButton" id="open_button">
+        <property name="label" translatable="yes">Open…</property>
+        <property name="visible">true</property>
+      </object>
+      <packing>
+        <property name="pack-type">start</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+  </object>
+
+</interface>

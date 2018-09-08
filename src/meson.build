@@ -50,6 +50,7 @@ sources = files(
 	'gtr-tab-label.c',
 	'gtr-utils.c',
 	'gtr-view.c',
+	'gtr-projects.c',
 	'gtr-window.c'
 )
 

@@ -308,7 +308,28 @@ quit_activated (GSimpleAction *action,
   g_application_quit (G_APPLICATION (app));
 }
 
+static void
+save_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  gtr_save_file_as_dialog (NULL, app->priv->active_window);
+}
+
+static void
+projects_activated (GSimpleAction *action,
+                    GVariant      *parameter,
+                    gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  gtr_window_show_projects (app->priv->active_window);
+}
+
 static GActionEntry app_entries[] = {
+  { "save", save_activated, NULL, NULL, NULL },
+  { "projects", projects_activated, NULL, NULL, NULL },
+
   { "new_window", new_window_activated, NULL, NULL, NULL },
   { "preferences", preferences_activated, NULL, NULL, NULL },
   { "help", help_activated, NULL, NULL, NULL },
