@@ -23,6 +23,7 @@
 #include <gtk/gtk.h>
 
 #include "gtr-msg.h"
+#include "translation-memory/gtr-translation-memory.h"
 
 G_BEGIN_DECLS
 /*
@@ -66,6 +67,8 @@ GType             gtr_context_panel_get_type              (void) G_GNUC_CONST;
 GtkWidget        *gtr_context_panel_new                   (void);
 
 GtkTextView      *gtr_context_panel_get_context_text_view (GtrContextPanel *panel);
+
+void              gtr_context_init_tm                     (GtrContextPanel *panel, GtrTranslationMemory *tm);
 
 G_END_DECLS
 #endif /* __CONTEXT_PANEL_H__ */

@@ -373,8 +373,8 @@ next_activated (GSimpleAction *action,
 
 static void
 prev_no_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
+                   GVariant      *parameter,
+                   gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_message_go_to_prev_fuzzy_or_untranslated (NULL, app->priv->active_window);
@@ -382,11 +382,21 @@ prev_no_activated (GSimpleAction *action,
 
 static void
 next_no_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
+                   GVariant      *parameter,
+                   gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_message_go_to_next_fuzzy_or_untranslated (NULL, app->priv->active_window);
+}
+
+static void
+build_tm_activated (GSimpleAction *action,
+                    GVariant      *parameter,
+                    gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrWindow *w = GTR_WINDOW (app->priv->active_window);
+  gtr_window_show_tm_dialog (w);
 }
 
 static GActionEntry app_entries[] = {
@@ -403,6 +413,7 @@ static GActionEntry app_entries[] = {
   { "prev_no", prev_no_activated, NULL, NULL, NULL },
   { "next_no", next_no_activated, NULL, NULL, NULL },
 
+  { "build_tm", build_tm_activated, NULL, NULL, NULL },
   { "new_window", new_window_activated, NULL, NULL, NULL },
   { "preferences", preferences_activated, NULL, NULL, NULL },
   { "help", help_activated, NULL, NULL, NULL },

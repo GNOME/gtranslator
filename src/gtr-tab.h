@@ -91,7 +91,7 @@ typedef enum
  */
 GType gtr_tab_get_type (void) G_GNUC_CONST;
 
-GtrTab *gtr_tab_new (GtrPo * po);
+GtrTab *gtr_tab_new (GtrPo * po, GtkWindow *window);
 
 GtrPo *gtr_tab_get_po (GtrTab * tab);
 

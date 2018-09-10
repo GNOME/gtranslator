@@ -22,9 +22,7 @@
 #include "gtr-context.h"
 #include "gtr-tab.h"
 #include "gtr-debug.h"
-#include "translation-memory/gtr-translation-memory.h"
 #include "translation-memory/gtr-translation-memory-ui.h"
-#include "translation-memory/gda/gtr-gda.h"
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -47,8 +45,6 @@ typedef struct
   GtrMsg *current_msg;
 
   // translation memory
-  GSettings *tm_settings;
-  GtrTranslationMemory *translation_memory;
   GtkWidget *translation_memory_ui;
 } GtrContextPanelPrivate;
 
@@ -388,24 +384,6 @@ gtr_context_panel_init (GtrContextPanel *panel)
   g_signal_connect (priv->button, "clicked",
                     G_CALLBACK (on_done_button_clicked), panel);
 
-  priv->tm_settings = g_settings_new ("org.gnome.gtranslator.plugins.translation-memory");
-  priv->translation_memory = GTR_TRANSLATION_MEMORY (gtr_gda_new());
-  gtr_translation_memory_set_max_omits (priv->translation_memory,
-                                        g_settings_get_int (priv->tm_settings,
-                                                            "max-missing-words"));
-  gtr_translation_memory_set_max_delta (priv->translation_memory,
-                                        g_settings_get_int (priv->tm_settings,
-                                                            "max-length-diff"));
-  gtr_translation_memory_set_max_items (priv->translation_memory, 10);
-
-  priv->translation_memory_ui = gtr_translation_memory_ui_new (GTK_WIDGET (priv->tab),
-                                                               priv->translation_memory);
-  gtk_widget_show (priv->translation_memory_ui);
-  gtk_widget_set_size_request (priv->translation_memory_ui, 300, 400);
-  gtk_box_pack_start (GTK_BOX (priv->translation_memory_box),
-                      priv->translation_memory_ui,
-                      FALSE, FALSE, 0);
-
   gtk_widget_hide (priv->button_box);
 }
 
@@ -484,8 +462,6 @@ gtr_context_panel_dispose (GObject *object)
 
   g_clear_object (&priv->hand_cursor);
   g_clear_object (&priv->regular_cursor);
-  g_clear_object (&priv->translation_memory);
-  g_clear_object (&priv->tm_settings);
 
   G_OBJECT_CLASS (gtr_context_panel_parent_class)->dispose (object);
 }
@@ -560,3 +536,18 @@ gtr_context_panel_get_context_text_view (GtrContextPanel * panel)
   priv = gtr_context_panel_get_instance_private(panel);
   return GTK_TEXT_VIEW (priv->context);
 }
+
+void
+gtr_context_init_tm (GtrContextPanel *panel,
+                     GtrTranslationMemory *tm)
+{
+  GtrContextPanelPrivate *priv = gtr_context_panel_get_instance_private(panel);
+  priv->translation_memory_ui = gtr_translation_memory_ui_new (GTK_WIDGET (priv->tab),
+                                                               tm);
+  gtk_widget_show (priv->translation_memory_ui);
+  gtk_widget_set_size_request (priv->translation_memory_ui, 300, 400);
+  gtk_box_pack_start (GTK_BOX (priv->translation_memory_box),
+                      priv->translation_memory_ui,
+                      FALSE, FALSE, 0);
+}
+

@@ -81,8 +81,10 @@ void gtr_window_set_active_tab (GtrWindow * window, GtkWidget * tab);
 
 void _gtr_window_close_tab (GtrWindow * window, GtrTab * tab);
 
-void _gtr_recent_add (GtrWindow * window,
-                      GFile * location, gchar * project_id);
+void _gtr_recent_add (GtrWindow * window, GFile * location, gchar * project_id);
+
+GtrTranslationMemory * gtr_window_get_tm (GtrWindow *window);
+void gtr_window_show_tm_dialog (GtrWindow *window);
 
 /** stack app states **/
 void gtr_window_show_projects (GtrWindow *window);

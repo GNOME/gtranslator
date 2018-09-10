@@ -245,4 +245,3 @@ gtr_notebook_get_header (GtrNotebook *notebook)
   GtrNotebookPrivate *priv = gtr_notebook_get_instance_private (notebook);
   return priv->titlebar;
 }
-

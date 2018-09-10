@@ -44,6 +44,7 @@
 #include "gtr-view.h"
 #include "gtr-dirs.h"
 #include "gtr-debug.h"
+#include "gtr-window.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -777,13 +778,15 @@ gtr_tab_class_init (GtrTabClass * klass)
 /**
  * gtr_tab_new:
  * @po: a #GtrPo
+ * @window: a #GtkWindow
  * 
  * Creates a new #GtrTab.
  * 
  * Return value: a new #GtrTab object
  **/
 GtrTab *
-gtr_tab_new (GtrPo * po)
+gtr_tab_new (GtrPo * po,
+             GtkWindow *window)
 {
   GtrTab *tab;
   GtrTabPrivate *priv;
@@ -793,6 +796,8 @@ gtr_tab_new (GtrPo * po)
   tab = g_object_new (GTR_TYPE_TAB, NULL);
 
   priv = gtr_tab_get_instance_private (tab);
+  gtr_context_init_tm (GTR_CONTEXT_PANEL (priv->context),
+                       gtr_window_get_tm (GTR_WINDOW (window)));
 
   /* FIXME: make the po a property */
   priv->po = po;

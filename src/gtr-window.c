@@ -42,6 +42,10 @@
 #include "gtr-profile-manager.h"
 #include "gtr-status-combo-box.h"
 
+#include "translation-memory/gtr-translation-memory.h"
+#include "translation-memory/gtr-translation-memory-dialog.h"
+#include "translation-memory/gda/gtr-gda.h"
+
 #include <glib.h>
 #include <glib-object.h>
 #include <glib/gi18n.h>
@@ -60,6 +64,8 @@
 typedef struct
 {
   GSettings *state_settings;
+  GSettings *tm_settings;
+  GtrTranslationMemory *translation_memory;
 
   GtkWidget *header_bar;
   GtkWidget *main_box;
@@ -671,7 +677,7 @@ gtr_window_init (GtrWindow *window)
    */
 
   // poeditor
-  priv->notebook = GTK_WIDGET (gtr_notebook_new (window));
+  priv->notebook = GTK_WIDGET (gtr_notebook_new ());
   gtk_widget_show (priv->notebook);
   g_signal_connect (priv->notebook, "switch-page",
                     G_CALLBACK (notebook_switch_page), window);
@@ -696,6 +702,17 @@ gtr_window_init (GtrWindow *window)
                        "projects");
 
   gtk_widget_show_all (priv->stack);
+
+  // translation memory
+  priv->translation_memory = GTR_TRANSLATION_MEMORY (gtr_gda_new());
+  priv->tm_settings = g_settings_new ("org.gnome.gtranslator.plugins.translation-memory");
+  gtr_translation_memory_set_max_omits (priv->translation_memory,
+                                        g_settings_get_int (priv->tm_settings,
+                                                            "max-missing-words"));
+  gtr_translation_memory_set_max_delta (priv->translation_memory,
+                                        g_settings_get_int (priv->tm_settings,
+                                                            "max-length-diff"));
+  gtr_translation_memory_set_max_items (priv->translation_memory, 10);
 
   gtr_window_show_projects (window);
 }
@@ -726,6 +743,8 @@ gtr_window_dispose (GObject * object)
 
   g_clear_object (&priv->state_settings);
   g_clear_object (&priv->prof_manager);
+  g_clear_object (&priv->translation_memory);
+  g_clear_object (&priv->tm_settings);
 
   G_OBJECT_CLASS (gtr_window_parent_class)->dispose (object);
 }
@@ -788,7 +807,7 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtrTab *tab;
 
-  tab = gtr_tab_new (po);
+  tab = gtr_tab_new (po, GTK_WINDOW (window));
   gtk_widget_show (GTK_WIDGET (tab));
 
   gtr_notebook_add_page (GTR_NOTEBOOK (priv->notebook), tab);
@@ -1080,5 +1099,33 @@ gtr_window_show_poeditor (GtrWindow *window)
 
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "poeditor");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "poeditor");
+}
+
+void
+gtr_window_show_tm_dialog (GtrWindow *window)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  static GtkWidget *dlg = NULL;
+
+  if (dlg == NULL)
+    {
+      dlg = gtr_translation_memory_dialog_new (priv->translation_memory);
+      g_signal_connect (dlg, "destroy",
+                        G_CALLBACK (gtk_widget_destroyed), &dlg);
+      gtk_widget_show_all (dlg);
+    }
+
+  if (GTK_WINDOW (window) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
+    {
+      gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
+    }
+
+  gtk_window_present (GTK_WINDOW (dlg));
+}
+
+GtrTranslationMemory *
+gtr_window_get_tm (GtrWindow *window) {
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
+  return priv->translation_memory;
 }
 
