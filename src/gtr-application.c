@@ -309,12 +309,21 @@ quit_activated (GSimpleAction *action,
 }
 
 static void
-save_activated (GSimpleAction *action,
+saveas_activated (GSimpleAction *action,
                 GVariant      *parameter,
                 gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_save_file_as_dialog (NULL, app->priv->active_window);
+}
+
+static void
+save_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  gtr_save_current_file_dialog (NULL, app->priv->active_window);
 }
 
 static void
@@ -326,9 +335,73 @@ projects_activated (GSimpleAction *action,
   gtr_window_show_projects (app->priv->active_window);
 }
 
+static void
+undo_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  gtr_actions_edit_undo (NULL, app->priv->active_window);
+}
+
+static void
+redo_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  gtr_actions_edit_redo (NULL, app->priv->active_window);
+}
+
+static void
+prev_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  gtr_message_go_to_previous (NULL, app->priv->active_window);
+}
+
+static void
+next_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  gtr_message_go_to_next (NULL, app->priv->active_window);
+}
+
+static void
+prev_no_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  gtr_message_go_to_prev_fuzzy_or_untranslated (NULL, app->priv->active_window);
+}
+
+static void
+next_no_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  gtr_message_go_to_next_fuzzy_or_untranslated (NULL, app->priv->active_window);
+}
+
 static GActionEntry app_entries[] = {
   { "save", save_activated, NULL, NULL, NULL },
+  { "saveas", saveas_activated, NULL, NULL, NULL },
   { "projects", projects_activated, NULL, NULL, NULL },
+
+  { "undo", undo_activated, NULL, NULL, NULL },
+  { "redo", redo_activated, NULL, NULL, NULL },
+
+  { "prev", prev_activated, NULL, NULL, NULL },
+  { "next", next_activated, NULL, NULL, NULL },
+
+  { "prev_no", prev_no_activated, NULL, NULL, NULL },
+  { "next_no", next_no_activated, NULL, NULL, NULL },
 
   { "new_window", new_window_activated, NULL, NULL, NULL },
   { "preferences", preferences_activated, NULL, NULL, NULL },
@@ -336,6 +409,13 @@ static GActionEntry app_entries[] = {
   { "about", about_activated, NULL, NULL, NULL },
   { "quit", quit_activated, NULL, NULL, NULL }
 };
+
+static void
+set_kb (GApplication *app, gchar *action, gchar *accel)
+{
+  const gchar *keys[] = {accel, NULL};
+  gtk_application_set_accels_for_action(GTK_APPLICATION (app), action, keys);
+}
 
 static void
 gtr_application_startup (GApplication *application)
@@ -353,6 +433,20 @@ gtr_application_startup (GApplication *application)
 
   g_action_map_add_action_entries (G_ACTION_MAP (application), app_entries,
                                    G_N_ELEMENTS (app_entries), application);
+
+  // keybindings
+  set_kb (application, "app.projects", "<Ctrl>o");
+  set_kb (application, "app.save", "<Ctrl>s");
+  set_kb (application, "app.saveas", "<Ctrl><Shift>s");
+  set_kb (application, "app.preferences", "<Ctrl>p");
+
+  set_kb (application, "app.undo", "<Ctrl>z");
+  set_kb (application, "app.redo", "<Ctrl><Shift>z");
+
+  set_kb (application, "app.prev", "<Alt>Left");
+  set_kb (application, "app.next", "<Alt>Right");
+  set_kb (application, "app.prev_no", "<Alt>Page_Up");
+  set_kb (application, "app.next_no", "<Alt>Page_Down");
 
   builder = gtk_builder_new ();
   gtk_builder_add_from_resource (builder, "/org/gnome/translator/gtranslator-menu.ui", NULL);

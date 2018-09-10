@@ -405,6 +405,8 @@ gtr_context_panel_init (GtrContextPanel *panel)
   gtk_box_pack_start (GTK_BOX (priv->translation_memory_box),
                       priv->translation_memory_ui,
                       FALSE, FALSE, 0);
+
+  gtk_widget_hide (priv->button_box);
 }
 
 static void
