@@ -23,6 +23,7 @@
 #include "gtr-actions.h"
 #include "gtr-projects.h"
 #include "gtr-window.h"
+#include "gtr-utils.h"
 
 typedef struct
 {
@@ -45,6 +46,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (GtrProjects, gtr_projects, GTK_TYPE_BIN)
 
 static void project_add_cb (GtkButton *btn, GtrProjects *self);
 static void init_recent (GtrProjects *self);
+static void file_open_cb (GtkListBox *box, GtkListBoxRow *row, gpointer data);
 
 
 static void
@@ -82,17 +84,20 @@ static void
 gtr_projects_init (GtrProjects *self)
 {
   GtrProjectsPrivate *priv = gtr_projects_get_instance_private (self);
+  GtkListBox *list;
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  list = GTK_LIST_BOX (priv->project_list);
   priv->main_window = NULL;
   priv->recent_manager = gtk_recent_manager_get_default ();
-
-  init_recent (self);
 
   g_signal_connect (priv->open_button,
                     "clicked",
                     G_CALLBACK (project_add_cb),
                     self);
+
+  g_signal_connect (list, "row-activated", G_CALLBACK (file_open_cb), self);
+  init_recent (self);
 }
 
 GtrProjects*
@@ -157,6 +162,14 @@ init_recent (GtrProjects *self)
 
   GList *recents = gtk_recent_manager_get_items (priv->recent_manager);
   GList *it = g_list_first (recents);
+
+  GList *children, *iter;
+
+  children = gtk_container_get_children (GTK_CONTAINER (list));
+  for(iter = children; iter != NULL; iter = g_list_next (iter))
+    gtk_widget_destroy (GTK_WIDGET (iter->data));
+  g_list_free (children);
+
   while (it)
     {
       const gchar *name = gtk_recent_info_get_uri_display (it->data);
@@ -172,8 +185,47 @@ init_recent (GtrProjects *self)
       it = g_list_next (it);
     }
 
-  g_signal_connect (list, "row-activated", G_CALLBACK (file_open_cb), self);
-
   g_list_free_full (recents, (GDestroyNotify)gtk_recent_info_unref);
+}
+
+void
+gtr_projects_recent_add (GtrProjects *self,
+                         GFile *location,
+                         gchar *project_id)
+{
+  GtrProjectsPrivate *priv = gtr_projects_get_instance_private (self);
+  GtkRecentData *recent_data;
+  gchar *uri;
+  gchar *path;
+  gchar *display_name;
+
+  uri = g_file_get_uri (location);
+  path = g_file_get_path (location);
+  display_name = gtr_utils_reduce_path ((const gchar *) path);
+
+  recent_data = g_slice_new (GtkRecentData);
+
+  recent_data->display_name = display_name;
+  recent_data->description = NULL;
+  recent_data->mime_type = "text/x-gettext-translation";
+  recent_data->app_name = (gchar *) g_get_application_name ();
+  recent_data->app_exec = g_strjoin (" ", g_get_prgname (), "%u", NULL);
+  recent_data->groups = NULL;
+  recent_data->is_private = FALSE;
+
+  if (!gtk_recent_manager_add_full (priv->recent_manager,
+                                    uri, recent_data))
+    {
+      g_warning ("Unable to add '%s' to the list of recently used documents",
+                 uri);
+    } else {
+      init_recent (self);
+    }
+
+  g_free (uri);
+  g_free (path);
+  g_free (display_name);
+  g_free (recent_data->app_exec);
+  g_slice_free (GtkRecentData, recent_data);
 }
 

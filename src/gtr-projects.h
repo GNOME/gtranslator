@@ -26,8 +26,11 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (GtrProjects, gtr_projects, GTR, PROJECTS, GtkBin)
 
-GtrProjects*  gtr_projects_new        ();
-GtkWidget*    gtr_projects_get_header (GtrProjects *self);
+GtrProjects*  gtr_projects_new         ();
+GtkWidget*    gtr_projects_get_header  (GtrProjects *self);
+void          gtr_projects_recent_add  (GtrProjects *self,
+                                        GFile *location,
+                                        gchar *jkkproject_id);
 
 G_END_DECLS
 

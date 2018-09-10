@@ -1056,12 +1056,21 @@ _gtr_window_close_tab (GtrWindow * window, GtrTab * tab)
 }
 
 void
+_gtr_recent_add (GtrWindow *window, GFile *location, gchar *project_id)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  gtr_projects_recent_add (GTR_PROJECTS (priv->projects), location, project_id);
+}
+
+void
 gtr_window_show_projects (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "projects");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "projects");
+
+  gtr_notebook_remove_all_pages (GTR_NOTEBOOK (priv->notebook));
 }
 
 void

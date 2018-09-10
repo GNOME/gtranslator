@@ -59,6 +59,8 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
   GtrTab *tab;
   GList *current;
   GtrView *active_view;
+  GtrHeader *header;
+  const gchar *project_id;
 
   /*
    * If the filename can't be opened, pass the error back to the caller
@@ -70,6 +72,10 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
   if ((*error != NULL)
       && (((GError *) * error)->code != GTR_PO_ERROR_RECOVERY))
     return FALSE;
+
+  header = gtr_po_get_header (po);
+  project_id = gtr_header_get_prj_id_version (header);
+  _gtr_recent_add (window, location, (gchar *)project_id);
 
   /*
    * Create a page to add to our list of open files
@@ -97,6 +103,8 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
                                      (po),
                                      (gdouble)
                                      gtr_po_get_messages_count (po));
+
+  gtr_window_show_poeditor (window);
 
   return TRUE;
 }
