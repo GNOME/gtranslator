@@ -35,8 +35,6 @@ G_BEGIN_DECLS
 #define GTR_IS_ASSISTANT(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_ASSISTANT))
 #define GTR_IS_ASSISTANT_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_ASSISTANT))
 #define GTR_ASSISTANT_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_ASSISTANT, GtrAssistantClass))
-/* Private structure type */
-typedef struct _GtrAssistantPrivate GtrAssistantPrivate;
 
 /*
  * Main object structure
@@ -46,9 +44,6 @@ typedef struct _GtrAssistant GtrAssistant;
 struct _GtrAssistant
 {
   GtkAssistant parent_instance;
-
-  /*< private > */
-  GtrAssistantPrivate *priv;
 };
 
 /*
