@@ -282,7 +282,7 @@ set_window_title (GtrWindow * window, gboolean with_path)
   else
     {
       title = g_strdup (_("gtranslator"));
-      subtitle = g_strdup (_(""));
+      subtitle = g_strdup ("");
     }
 
   gtk_window_set_title (GTK_WINDOW (window), title);
