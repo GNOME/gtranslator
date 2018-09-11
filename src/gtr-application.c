@@ -34,7 +34,6 @@
 #include "gtr-utils.h"
 #include "gtr-window.h"
 #include "gtr-preferences-dialog.h"
-#include "egg-toolbars-model.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -63,9 +62,6 @@ struct _GtrApplicationPrivate
   GSettings *window_settings;
 
   GtrWindow *active_window;
-
-  gchar *toolbars_file;
-  EggToolbarsModel *toolbars_model;
 
   GtkIconFactory *icon_factory;
 
@@ -172,7 +168,6 @@ gtr_application_init (GtrApplication *application)
 {
   GtrApplicationPrivate *priv;
   const gchar *gtr_folder;
-  gchar *path_default_gtr_toolbar;
   gchar *profiles_file;
 
   application->priv = GTR_APPLICATION_GET_PRIVATE (application);
@@ -196,28 +191,6 @@ gtr_application_init (GtrApplication *application)
     priv->first_run = TRUE;
   g_free (profiles_file);
 
-  priv->toolbars_model = egg_toolbars_model_new ();
-
-  priv->toolbars_file = g_build_filename (gtr_folder,
-                                          "gtr-toolbar.xml", NULL);
-
-  path_default_gtr_toolbar = gtr_dirs_get_ui_file ("gtr-toolbar.xml");
-
-  egg_toolbars_model_load_names (priv->toolbars_model,
-                                 path_default_gtr_toolbar);
-
-  if (!egg_toolbars_model_load_toolbars (priv->toolbars_model,
-                                         priv->toolbars_file))
-    {
-      egg_toolbars_model_load_toolbars (priv->toolbars_model,
-                                        path_default_gtr_toolbar);
-    }
-
-  g_free (path_default_gtr_toolbar);
-
-  egg_toolbars_model_set_flags (priv->toolbars_model, 0,
-                                EGG_TB_MODEL_NOT_REMOVABLE);
-
   load_accels ();
 
   /* Create Icon factory */
@@ -233,7 +206,6 @@ gtr_application_dispose (GObject * object)
   g_clear_object (&priv->settings);
   g_clear_object (&priv->window_settings);
   g_clear_object (&priv->icon_factory);
-  g_clear_object (&priv->toolbars_model);
 
   G_OBJECT_CLASS (gtr_application_parent_class)->dispose (object);
 }
@@ -244,7 +216,6 @@ gtr_application_finalize (GObject *object)
   GtrApplication *app = GTR_APPLICATION (object);
 
   g_free (app->priv->last_dir);
-  g_free (app->priv->toolbars_file);
 
   G_OBJECT_CLASS (gtr_application_parent_class)->finalize (object);
 }
@@ -603,33 +574,6 @@ gtr_application_create_window (GtrApplication *app)
   gtk_widget_show (GTK_WIDGET (window));
 
   return window;
-}
-
-/**
- * _gtr_application_get_toolbars_model:
- * @application: a #GtrApplication
- * 
- * Returns the toolbar model.
- * 
- * Returns: the toolbar model.
- */
-GObject *
-_gtr_application_get_toolbars_model (GtrApplication * application)
-{
-  return G_OBJECT (application->priv->toolbars_model);
-}
-
-/**
- * _gtr_application_save_toolbars_model:
- * @application: a #GtrApplication
- * 
- * Saves the toolbar model.
- */
-void
-_gtr_application_save_toolbars_model (GtrApplication * application)
-{
-  egg_toolbars_model_save_toolbars (application->priv->toolbars_model,
-                                    application->priv->toolbars_file, "1.0");
 }
 
 /**

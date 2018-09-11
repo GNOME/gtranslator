@@ -74,10 +74,6 @@ void              gtr_application_register_icon          (GtrApplication *app,
                                                           const gchar    *stock_id);
 
 /* Non exported funcs */
-GObject         *_gtr_application_get_toolbars_model     (GtrApplication *application);
-
-void             _gtr_application_save_toolbars_model    (GtrApplication *application);
-
 const gchar     *_gtr_application_get_last_dir           (GtrApplication *app);
 
 void             _gtr_application_set_last_dir           (GtrApplication *app,

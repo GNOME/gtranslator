@@ -116,11 +116,9 @@ sources += gnome.compile_resources(
 
 incs = [
   top_inc,
-  include_directories('toolbareditor'),
   include_directories('translation-memory'),
 ]
 
-subdir('toolbareditor')
 subdir('translation-memory')
 
 
@@ -132,7 +130,7 @@ executable(
   meson.project_name(),
    sources + files('main.c'),
    include_directories: incs,
-          dependencies: gtranslator_deps + [toolbareditor_dep],
+          dependencies: gtranslator_deps,
                install: true,
            install_dir: gtranslator_bindir
 )
