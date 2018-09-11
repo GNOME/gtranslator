@@ -42,14 +42,10 @@ G_BEGIN_DECLS
 
 typedef struct _GtrApplication        GtrApplication;
 typedef struct _GtrApplicationClass   GtrApplicationClass;
-typedef struct _GtrApplicationPrivate GtrApplicationPrivate;
 
 struct _GtrApplication
 {
   GtkApplication base_instance;
-
-  /*< private > */
-  GtrApplicationPrivate *priv;
 };
 
 struct _GtrApplicationClass
@@ -68,10 +64,6 @@ GList *           gtr_application_get_views              (GtrApplication *app,
 GtrWindow        *gtr_application_create_window          (GtrApplication *app);
 
 GtrWindow        *gtr_application_get_active_window      (GtrApplication *app);
-
-void              gtr_application_register_icon          (GtrApplication *app,
-                                                          const gchar    *icon,
-                                                          const gchar    *stock_id);
 
 /* Non exported funcs */
 const gchar     *_gtr_application_get_last_dir           (GtrApplication *app);

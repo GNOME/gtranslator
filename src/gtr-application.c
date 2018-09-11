@@ -54,21 +54,19 @@
 					 GTR_TYPE_APPLICATION,     \
 					 GtrApplicationPrivate))
 
-G_DEFINE_TYPE (GtrApplication, gtr_application, GTK_TYPE_APPLICATION)
-
-struct _GtrApplicationPrivate
+typedef struct
 {
   GSettings *settings;
   GSettings *window_settings;
 
   GtrWindow *active_window;
 
-  GtkIconFactory *icon_factory;
-
   gchar *last_dir;
 
   guint first_run : 1;
-};
+} GtrApplicationPrivate;
+
+G_DEFINE_TYPE_WITH_PRIVATE (GtrApplication, gtr_application, GTK_TYPE_APPLICATION)
 
 static gboolean
 ensure_user_config_dir (void)
@@ -136,7 +134,8 @@ static void
 set_active_window (GtrApplication *app,
                    GtrWindow      *window)
 {
-  app->priv->active_window = window;
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  priv->active_window = window;
 }
 
 static gboolean
@@ -156,22 +155,20 @@ static void
 on_window_destroy_cb (GtrWindow *window, GtrApplication *app)
 {
   GList *windows;
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
   windows = gtk_application_get_windows (GTK_APPLICATION (app));
 
-  if (window == app->priv->active_window)
+  if (window == priv->active_window)
     set_active_window (app, windows != NULL ? windows->data : NULL);
 }
 
 static void
 gtr_application_init (GtrApplication *application)
 {
-  GtrApplicationPrivate *priv;
   const gchar *gtr_folder;
   gchar *profiles_file;
-
-  application->priv = GTR_APPLICATION_GET_PRIVATE (application);
-  priv = application->priv;
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (application);
 
   priv->active_window = NULL;
   priv->last_dir = NULL;
@@ -192,20 +189,16 @@ gtr_application_init (GtrApplication *application)
   g_free (profiles_file);
 
   load_accels ();
-
-  /* Create Icon factory */
-  application->priv->icon_factory = gtk_icon_factory_new ();
-  gtk_icon_factory_add_default (application->priv->icon_factory);
 }
 
 static void
 gtr_application_dispose (GObject * object)
 {
-  GtrApplicationPrivate *priv = GTR_APPLICATION (object)->priv;
+  GtrApplication *app = GTR_APPLICATION (object);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
   g_clear_object (&priv->settings);
   g_clear_object (&priv->window_settings);
-  g_clear_object (&priv->icon_factory);
 
   G_OBJECT_CLASS (gtr_application_parent_class)->dispose (object);
 }
@@ -214,8 +207,9 @@ static void
 gtr_application_finalize (GObject *object)
 {
   GtrApplication *app = GTR_APPLICATION (object);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  g_free (app->priv->last_dir);
+  g_free (priv->last_dir);
 
   G_OBJECT_CLASS (gtr_application_parent_class)->finalize (object);
 }
@@ -238,7 +232,8 @@ preferences_activated (GSimpleAction *action,
                        gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  gtr_show_preferences_dialog (app->priv->active_window);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_show_preferences_dialog (priv->active_window);
 }
 
 static void
@@ -247,7 +242,8 @@ help_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  gtr_show_help (app->priv->active_window);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_show_help (priv->active_window);
 }
 
 static void
@@ -256,7 +252,8 @@ about_activated (GSimpleAction *action,
                  gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  gtr_about_dialog (app->priv->active_window);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_about_dialog (priv->active_window);
 }
 
 static void
@@ -285,7 +282,8 @@ saveas_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  gtr_save_file_as_dialog (NULL, app->priv->active_window);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_save_file_as_dialog (NULL, priv->active_window);
 }
 
 static void
@@ -294,7 +292,8 @@ save_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  gtr_save_current_file_dialog (NULL, app->priv->active_window);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_save_current_file_dialog (NULL, priv->active_window);
 }
 
 static void
@@ -303,7 +302,8 @@ projects_activated (GSimpleAction *action,
                     gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  gtr_window_show_projects (app->priv->active_window);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_window_show_projects (priv->active_window);
 }
 
 static void
@@ -312,7 +312,8 @@ undo_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  gtr_actions_edit_undo (NULL, app->priv->active_window);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_actions_edit_undo (NULL, priv->active_window);
 }
 
 static void
@@ -321,7 +322,8 @@ redo_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  gtr_actions_edit_redo (NULL, app->priv->active_window);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_actions_edit_redo (NULL, priv->active_window);
 }
 
 static void
@@ -330,7 +332,8 @@ prev_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  gtr_message_go_to_previous (NULL, app->priv->active_window);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_message_go_to_previous (NULL, priv->active_window);
 }
 
 static void
@@ -339,7 +342,8 @@ next_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  gtr_message_go_to_next (NULL, app->priv->active_window);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_message_go_to_next (NULL, priv->active_window);
 }
 
 static void
@@ -348,7 +352,8 @@ prev_no_activated (GSimpleAction *action,
                    gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  gtr_message_go_to_prev_fuzzy_or_untranslated (NULL, app->priv->active_window);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_message_go_to_prev_fuzzy_or_untranslated (NULL, priv->active_window);
 }
 
 static void
@@ -357,7 +362,8 @@ next_no_activated (GSimpleAction *action,
                    gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  gtr_message_go_to_next_fuzzy_or_untranslated (NULL, app->priv->active_window);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_message_go_to_next_fuzzy_or_untranslated (NULL, priv->active_window);
 }
 
 static void
@@ -366,7 +372,8 @@ build_tm_activated (GSimpleAction *action,
                     gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrWindow *w = GTR_WINDOW (app->priv->active_window);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  GtrWindow *w = GTR_WINDOW (priv->active_window);
   gtr_window_show_tm_dialog (w);
 }
 
@@ -442,7 +449,8 @@ gtr_application_setup_window (GApplication *application,
                               GFile       **files,
                               gint          n_files)
 {
-  GtrApplicationPrivate *priv = GTR_APPLICATION (application)->priv;
+  GtrApplication *app = GTR_APPLICATION (application);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
   GtrWindow *window;
   GSList *file_list = NULL;
 
@@ -503,8 +511,6 @@ gtr_application_class_init (GtrApplicationClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GApplicationClass *application_class = G_APPLICATION_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GtrApplicationPrivate));
-
   object_class->dispose = gtr_application_dispose;
   object_class->finalize = gtr_application_finalize;
 
@@ -537,16 +543,17 @@ gtr_application_create_window (GtrApplication *app)
   GtrWindow *window;
   GdkWindowState state;
   gint w, h;
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
   window = g_object_new (GTR_TYPE_WINDOW, "application", app, NULL);
   set_active_window (app, window);
 
-  state = g_settings_get_int (app->priv->window_settings,
+  state = g_settings_get_int (priv->window_settings,
                               GTR_SETTINGS_WINDOW_STATE);
 
-  g_settings_get (app->priv->window_settings,
+  g_settings_get (priv->window_settings,
                   GTR_SETTINGS_WINDOW_SIZE,
                   "(ii)", &w, &h);
 
@@ -592,11 +599,12 @@ gtr_application_get_views (GtrApplication * app,
                            gboolean original, gboolean translated)
 {
   GList *res = NULL;
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
   res = g_list_concat (res,
-                       gtr_window_get_all_views (GTR_WINDOW (app->priv->active_window),
+                       gtr_window_get_all_views (GTR_WINDOW (priv->active_window),
                                                  original, translated));
 
   return res;
@@ -611,46 +619,10 @@ gtr_application_get_views (GtrApplication * app,
 GtrWindow *
 gtr_application_get_active_window (GtrApplication * app)
 {
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
-  return GTR_WINDOW (app->priv->active_window);
-}
-
-/**
- * gtr_application_register_icon:
- * @app: a #GtrApplication
- * @icon: the name of the icon
- * @stock_id: the stock id for the new icon
- * 
- * Registers a new @icon with the @stock_id.
- */
-void
-gtr_application_register_icon (GtrApplication *app,
-                               const gchar *icon, const gchar *stock_id)
-{
-  GtkIconSet *icon_set;
-  GtkIconSource *icon_source;
-  const gchar *pixmaps_dir;
-  gchar *path;
-  GdkPixbuf *pixbuf;
-
-  g_return_if_fail (GTR_IS_APPLICATION (app));
-  g_return_if_fail (icon != NULL && stock_id != NULL);
-
-  icon_source = gtk_icon_source_new ();
-  pixmaps_dir = gtr_dirs_get_gtr_pixmaps_dir ();
-  path = g_build_filename (pixmaps_dir, icon, NULL);
-
-  pixbuf = gdk_pixbuf_new_from_file (path, NULL);
-  if (pixbuf)
-    {
-      icon_set = gtk_icon_set_new_from_pixbuf (pixbuf);
-      gtk_icon_factory_add (app->priv->icon_factory, stock_id, icon_set);
-      g_object_unref (pixbuf);
-    }
-
-  g_free (path);
-  gtk_icon_source_free (icon_source);
+  return GTR_WINDOW (priv->active_window);
 }
 
 /**
@@ -662,9 +634,10 @@ gtr_application_register_icon (GtrApplication *app,
 const gchar *
 _gtr_application_get_last_dir (GtrApplication * app)
 {
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
-  return app->priv->last_dir;
+  return priv->last_dir;
 }
 
 /**
@@ -676,15 +649,17 @@ _gtr_application_get_last_dir (GtrApplication * app)
 void
 _gtr_application_set_last_dir (GtrApplication * app, const gchar * last_dir)
 {
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
   g_return_if_fail (GTR_IS_APPLICATION (app));
 
-  app->priv->last_dir = g_strdup (last_dir);
+  priv->last_dir = g_strdup (last_dir);
 }
 
 GSettings *
 _gtr_application_get_settings (GtrApplication *app)
 {
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
-  return app->priv->settings;
+  return priv->settings;
 }
