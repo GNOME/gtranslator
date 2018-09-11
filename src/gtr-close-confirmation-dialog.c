@@ -367,7 +367,7 @@ build_single_doc_dialog (GtrCloseConfirmationDialog * dlg)
 
   str =
     g_markup_printf_escaped (_
-                             ("Save the changes to document \"%s\" before closing?"),
+                             ("Save the changes to document “%s” before closing?"),
                              doc_name);
   g_free (doc_name);
 
@@ -582,7 +582,7 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
       gtk_label_new (_
                      ("Saving has been disabled by the system administrator."));
   else
-    secondary_label = gtk_label_new (_("If you don't save, "
+    secondary_label = gtk_label_new (_("If you don’t save, "
                                        "all your changes will be permanently lost."));
 
   gtk_box_pack_start (GTK_BOX (vbox2), secondary_label, FALSE, FALSE, 0);
