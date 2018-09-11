@@ -126,9 +126,9 @@ set_logout_mode (GtrCloseConfirmationDialog * dlg, gboolean logout_mode)
                          _("Close _without Saving"), GTK_RESPONSE_NO);
 
   gtk_dialog_add_button (GTK_DIALOG (dlg),
-                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+                         _("_Cancel"), GTK_RESPONSE_CANCEL);
 
-  gtk_dialog_add_button (GTK_DIALOG (dlg), GTK_STOCK_SAVE, GTK_RESPONSE_YES);
+  gtk_dialog_add_button (GTK_DIALOG (dlg), _("_Save"), GTK_RESPONSE_YES);
 
   gtk_dialog_set_default_response (GTK_DIALOG (dlg), GTK_RESPONSE_YES);
 }
