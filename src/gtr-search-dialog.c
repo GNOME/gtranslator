@@ -149,7 +149,7 @@ gtr_search_dialog_class_init (GtrSearchDialogClass * klass)
                   G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
                   G_STRUCT_OFFSET (GtrSearchDialogClass,
                                    show_replace), NULL, NULL,
-                  gtr_marshal_BOOLEAN__NONE, G_TYPE_BOOLEAN, 0);
+                  gtr_marshal_BOOLEAN__VOID, G_TYPE_BOOLEAN, 0);
 
   g_object_class_install_property (object_class, PROP_SHOW_REPLACE,
                                    g_param_spec_boolean ("show-replace",
