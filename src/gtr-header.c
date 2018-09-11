@@ -117,7 +117,7 @@ parse_nplurals (GtrHeader * header)
       while (*pointer != '\0' && *pointer != '=')
         pointer++;
 
-      if (pointer != '\0')
+      if (*pointer != '\0')
         {
           pointer++;
           while (*pointer != '\0' && *pointer == ' ')
