@@ -207,12 +207,11 @@ static gboolean
 visibility_notify_event (GtkWidget *text_view, GdkEventVisibility *event,
                          GtrContextPanel *panel)
 {
-  GdkDeviceManager *device_manager;
   GdkDevice *pointer;
   gint wx, wy, bx, by;
+  GdkSeat *seat = gdk_display_get_default_seat (gdk_display_get_default ());
 
-  device_manager = gdk_display_get_device_manager (gtk_widget_get_display (text_view));
-  pointer = gdk_device_manager_get_client_pointer (device_manager);
+  pointer = gdk_seat_get_pointer (seat);
   gdk_window_get_device_position (gtk_widget_get_window (text_view), pointer, &wx, &wy, NULL);
 
   gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view),
@@ -360,6 +359,9 @@ gtr_context_panel_init (GtrContextPanel *panel)
 {
   GtrContextPanelPrivate *priv;
   GtkTextBuffer *buffer;
+  GdkDisplay *display;
+
+  display = gdk_display_get_default ();
 
   priv = gtr_context_panel_get_instance_private(panel);
 
@@ -367,8 +369,8 @@ gtr_context_panel_init (GtrContextPanel *panel)
 
   priv->hovering_over_link = FALSE;
 
-  priv->hand_cursor = gdk_cursor_new (GDK_HAND2);
-  priv->regular_cursor = gdk_cursor_new (GDK_XTERM);
+  priv->hand_cursor = gdk_cursor_new_for_display (display, GDK_HAND2);
+  priv->regular_cursor = gdk_cursor_new_for_display (display, GDK_XTERM);
 
   g_signal_connect (priv->context, "event-after",
                     G_CALLBACK (event_after), panel);
