@@ -360,7 +360,7 @@ gtr_alternate_lang_panel_init (GtrAlternateLangPanel * panel)
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (panel->priv->textview),
                                GTK_WRAP_WORD);
   gtk_text_view_set_editable (GTK_TEXT_VIEW (panel->priv->textview), FALSE);
-  gtr_alternate_lang_panel_set_text (panel, _("There isn't any file loaded"));
+  gtr_alternate_lang_panel_set_text (panel, _("There isn’t any file loaded"));
   gtk_widget_set_sensitive (panel->priv->textview, FALSE);
   gtk_widget_show (panel->priv->textview);
 
