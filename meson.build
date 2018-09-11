@@ -147,8 +147,8 @@ subdir('build-aux')
 subdir('data')
 subdir('src')
 subdir('po')
+subdir('help')
 
-#subdir('help')
 #subdir('man')
 
 if enable_gtk_doc
