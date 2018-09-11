@@ -126,7 +126,7 @@ show_in_editor (const gchar * program_name,
       dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
                                        GTK_DIALOG_MODAL,
                                        GTK_BUTTONS_CLOSE,
-                                       _("Please install \"%s\" to be able to show the file"),
+                                       _("Please install “%s” to be able to show the file"),
                                        program_name);
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);

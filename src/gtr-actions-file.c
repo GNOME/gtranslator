@@ -316,7 +316,7 @@ gtr_save_file_as_dialog (GtkAction * action, GtrWindow * window)
 
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
                                  FILESEL_SAVE,
-                                 _("Save file as..."),
+                                 _("Save file as…"),
                                  _gtr_application_get_last_dir (GTR_APP));
 
   gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog),

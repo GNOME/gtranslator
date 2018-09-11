@@ -163,7 +163,7 @@ get_context_from_loader (GtrDictPanel * panel)
       gchar *detail;
 
       detail =
-        g_strdup_printf (_("No dictionary source available with name '%s'"),
+        g_strdup_printf (_("No dictionary source available with name “%s”"),
                          priv->source_name);
 
       gtr_dict_panel_create_warning_dialog (_
@@ -182,7 +182,7 @@ get_context_from_loader (GtrDictPanel * panel)
     {
       gchar *detail;
 
-      detail = g_strdup_printf (_("No context available for source '%s'"),
+      detail = g_strdup_printf (_("No context available for source “%s”"),
                                 gdict_source_get_description (source));
 
       gtr_dict_panel_create_warning_dialog (_
@@ -269,7 +269,7 @@ source_activated_cb (GdictSourceChooser * chooser,
     {
       gchar *message;
 
-      message = g_strdup_printf (_("Dictionary source '%s' selected"),
+      message = g_strdup_printf (_("Dictionary source “%s” selected"),
                                  gdict_source_get_description (source));
       gtr_statusbar_flash_message (panel->priv->status, 0, "%s", message);
       g_free (message);
@@ -288,7 +288,7 @@ strategy_activated_cb (GdictStrategyChooser * chooser,
     {
       gchar *message;
 
-      message = g_strdup_printf (_("Strategy '%s' selected"), strat_desc);
+      message = g_strdup_printf (_("Strategy “%s” selected"), strat_desc);
       gtr_statusbar_flash_message (panel->priv->status, 0, "%s", message);
       g_free (message);
     }
@@ -306,7 +306,7 @@ database_activated_cb (GdictDatabaseChooser * chooser,
     {
       gchar *message;
 
-      message = g_strdup_printf (_("Database '%s' selected"), db_desc);
+      message = g_strdup_printf (_("Database “%s” selected"), db_desc);
       gtr_statusbar_flash_message (panel->priv->status, 0, "%s", message);
       g_free (message);
     }
@@ -350,7 +350,7 @@ speller_word_activated_cb (GdictSpeller * speller,
     {
       gchar *message;
 
-      message = g_strdup_printf (_("Word '%s' selected"), word);
+      message = g_strdup_printf (_("Word “%s” selected"), word);
       gtr_statusbar_flash_message (panel->priv->status, 0, "%s", message);
       g_free (message);
     }

@@ -94,11 +94,11 @@ main (gint argc, gchar * argv[])
   GOptionContext *context;
   GError *error = NULL;
 
-  context = g_option_context_new (_("- Edit PO files"));
+  context = g_option_context_new (_("— Edit PO files"));
   g_option_context_add_group (context, g_irepository_get_option_group ());
   if (!g_option_context_parse (context, &argc, &argv, &error))
     {
-      g_print(_("%s\nRun '%s --help' to see a full list of available command line options.\n"),
+      g_print(_("%s\nRun “%s --help” to see a full list of available command line options.\n"),
               error->message, argv[0]);
       g_error_free (error);
       g_option_context_free (context);

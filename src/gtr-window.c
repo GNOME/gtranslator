@@ -271,12 +271,12 @@ set_window_title (GtrWindow * window, gboolean with_path)
       if (state == GTR_PO_STATE_MODIFIED)
         {
           /* Translators: this is the title of the window with a modified document */
-          title = g_strdup_printf (_("*%s - gtranslator"), basename);
+          title = g_strdup_printf (_("*%s — gtranslator"), basename);
         }
       else
         {
           /* Translators: this is the title of the window with a document opened */
-          title = g_strdup_printf (_("%s - gtranslator"), basename);
+          title = g_strdup_printf (_("%s — gtranslator"), basename);
         }
 
       g_free (basename);
