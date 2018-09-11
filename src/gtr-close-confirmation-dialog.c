@@ -57,7 +57,7 @@ enum
   N_COLUMNS
 };
 
-struct _GtrCloseConfirmationDialogPrivate
+typedef struct
 {
   gboolean logout_mode;
 
@@ -68,35 +68,32 @@ struct _GtrCloseConfirmationDialogPrivate
   GtkTreeModel *list_store;
 
   gboolean disable_save_to_disk;
-};
-
-#define GTR_CLOSE_CONFIRMATION_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), \
-							GTR_TYPE_CLOSE_CONFIRMATION_DIALOG, \
-							GtrCloseConfirmationDialogPrivate))
+} GtrCloseConfirmationDialogPrivate;
 
 #define GET_MODE(priv) (((priv->unsaved_documents != NULL) && \
 			 (priv->unsaved_documents->next == NULL)) ? \
 			  SINGLE_DOC_MODE : MULTIPLE_DOCS_MODE)
 
-G_DEFINE_TYPE (GtrCloseConfirmationDialog,
-               gtr_close_confirmation_dialog, GTK_TYPE_DIALOG)
-     static void set_unsaved_document (GtrCloseConfirmationDialog *
-                                       dlg, const GList * list);
+G_DEFINE_TYPE_WITH_PRIVATE (GtrCloseConfirmationDialog,
+                            gtr_close_confirmation_dialog,
+                            GTK_TYPE_DIALOG)
 
-     static GList *get_selected_docs (GtkTreeModel * store);
+static void set_unsaved_document (GtrCloseConfirmationDialog *dlg,
+                                  const GList * list);
+
+static GList *get_selected_docs (GtkTreeModel * store);
 
 /*  Since we connect in the costructor we are sure this handler will be called 
  *  before the user ones
  */
-     static void
-       response_cb (GtrCloseConfirmationDialog * dlg,
-                    gint response_id, gpointer data)
+static void
+response_cb (GtrCloseConfirmationDialog * dlg,
+            gint response_id, gpointer data)
 {
   GtrCloseConfirmationDialogPrivate *priv;
+  priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
 
   g_return_if_fail (GTR_IS_CLOSE_CONFIRMATION_DIALOG (dlg));
-
-  priv = dlg->priv;
 
   if (priv->selected_documents != NULL)
     g_list_free (priv->selected_documents);
@@ -138,7 +135,8 @@ gtr_close_confirmation_dialog_init (GtrCloseConfirmationDialog * dlg)
 {
   AtkObject *atk_obj;
 
-  dlg->priv = GTR_CLOSE_CONFIRMATION_DIALOG_GET_PRIVATE (dlg);
+  GtrCloseConfirmationDialogPrivate *priv;
+  priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
 
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
   gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))), 14);
@@ -161,8 +159,7 @@ static void
 gtr_close_confirmation_dialog_finalize (GObject * object)
 {
   GtrCloseConfirmationDialogPrivate *priv;
-
-  priv = GTR_CLOSE_CONFIRMATION_DIALOG (object)->priv;
+  priv = gtr_close_confirmation_dialog_get_instance_private (GTR_CLOSE_CONFIRMATION_DIALOG (object));
 
   if (priv->unsaved_documents != NULL)
     g_list_free (priv->unsaved_documents);
@@ -208,8 +205,7 @@ gtr_close_confirmation_dialog_get_property (GObject * object,
                                             GParamSpec * pspec)
 {
   GtrCloseConfirmationDialogPrivate *priv;
-
-  priv = GTR_CLOSE_CONFIRMATION_DIALOG (object)->priv;
+  priv = gtr_close_confirmation_dialog_get_instance_private (GTR_CLOSE_CONFIRMATION_DIALOG (object));
 
   switch (prop_id)
     {
@@ -236,9 +232,6 @@ static void
   gobject_class->set_property = gtr_close_confirmation_dialog_set_property;
   gobject_class->get_property = gtr_close_confirmation_dialog_get_property;
   gobject_class->finalize = gtr_close_confirmation_dialog_finalize;
-
-  g_type_class_add_private (klass,
-                            sizeof (GtrCloseConfirmationDialogPrivate));
 
   g_object_class_install_property (gobject_class,
                                    PROP_UNSAVED_DOCUMENTS,
@@ -289,9 +282,11 @@ get_selected_docs (GtkTreeModel * store)
 GList *gtr_close_confirmation_dialog_get_selected_documents
   (GtrCloseConfirmationDialog * dlg)
 {
+  GtrCloseConfirmationDialogPrivate *priv;
+  priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
   g_return_val_if_fail (GTR_IS_CLOSE_CONFIRMATION_DIALOG (dlg), NULL);
 
-  return g_list_copy (dlg->priv->selected_documents);
+  return g_list_copy (priv->selected_documents);
 }
 
 GtkWidget *
@@ -345,20 +340,24 @@ build_single_doc_dialog (GtrCloseConfirmationDialog * dlg)
   gchar *doc_name;
   gchar *str;
   gchar *markup_str;
+  GtrCloseConfirmationDialogPrivate *priv;
+  priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
 
-  g_return_if_fail (dlg->priv->unsaved_documents->data != NULL);
-  doc = GTR_PO (dlg->priv->unsaved_documents->data);
+  g_return_if_fail (priv->unsaved_documents->data != NULL);
+  doc = GTR_PO (priv->unsaved_documents->data);
 
   /* Image */
-  image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING,
-                                    GTK_ICON_SIZE_DIALOG);
-  gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0.0);
+  image = gtk_image_new_from_icon_name ("dialog-warning-symbolic",
+                                        GTK_ICON_SIZE_DIALOG);
+  gtk_widget_set_halign (image, 0.5);
+  gtk_widget_set_valign (image, 0.0);
 
   /* Primary label */
   primary_label = gtk_label_new (NULL);
   gtk_label_set_line_wrap (GTK_LABEL (primary_label), TRUE);
   gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (primary_label), 0.0, 0.5);
+  gtk_label_set_xalign (GTK_LABEL (primary_label) , 0.0);
+  gtk_label_set_yalign (GTK_LABEL (primary_label) , 0.5);
   gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
 
   location = gtr_po_get_location (doc);
@@ -504,17 +503,17 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
   GtkWidget *secondary_label;
   gchar *str;
   gchar *markup_str;
-
-  priv = dlg->priv;
+  priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
   gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))), hbox, TRUE, TRUE, 0);
 
   /* Image */
-  image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING,
-                                    GTK_ICON_SIZE_DIALOG);
-  gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0.0);
+  image = gtk_image_new_from_icon_name ("dialog-warning-symbolic",
+                                        GTK_ICON_SIZE_DIALOG);
+  gtk_widget_set_halign (image, 0.5);
+  gtk_widget_set_valign (image, 0.0);
   gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
 
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
@@ -524,7 +523,8 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
   primary_label = gtk_label_new (NULL);
   gtk_label_set_line_wrap (GTK_LABEL (primary_label), TRUE);
   gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (primary_label), 0.0, 0.5);
+  gtk_label_set_xalign (GTK_LABEL (primary_label), 0.0);
+  gtk_label_set_yalign (GTK_LABEL (primary_label), 0.5);
   gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
 
   if (priv->disable_save_to_disk)
@@ -566,7 +566,8 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
 
   gtk_box_pack_start (GTK_BOX (vbox2), select_label, FALSE, FALSE, 0);
   gtk_label_set_line_wrap (GTK_LABEL (select_label), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (select_label), 0.0, 0.5);
+  gtk_label_set_xalign (GTK_LABEL (select_label), 0.0);
+  gtk_label_set_yalign (GTK_LABEL (select_label), 0.5);
 
   scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
   gtk_box_pack_start (GTK_BOX (vbox2), scrolledwindow, TRUE, TRUE, 0);
@@ -587,7 +588,8 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
 
   gtk_box_pack_start (GTK_BOX (vbox2), secondary_label, FALSE, FALSE, 0);
   gtk_label_set_line_wrap (GTK_LABEL (secondary_label), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (secondary_label), 0, 0.5);
+  gtk_label_set_xalign (GTK_LABEL (secondary_label), 0.0);
+  gtk_label_set_yalign (GTK_LABEL (secondary_label), 0.5);
   gtk_label_set_selectable (GTK_LABEL (secondary_label), TRUE);
 
   gtk_label_set_mnemonic_widget (GTK_LABEL (select_label), treeview);
@@ -599,10 +601,10 @@ static void
 set_unsaved_document (GtrCloseConfirmationDialog * dlg, const GList * list)
 {
   GtrCloseConfirmationDialogPrivate *priv;
+  priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
 
   g_return_if_fail (list != NULL);
 
-  priv = dlg->priv;
   g_return_if_fail (priv->unsaved_documents == NULL);
 
   priv->unsaved_documents = g_list_copy ((GList *) list);
@@ -620,7 +622,9 @@ set_unsaved_document (GtrCloseConfirmationDialog * dlg, const GList * list)
 const GList *gtr_close_confirmation_dialog_get_unsaved_documents
   (GtrCloseConfirmationDialog * dlg)
 {
+  GtrCloseConfirmationDialogPrivate *priv;
+  priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
   g_return_val_if_fail (GTR_IS_CLOSE_CONFIRMATION_DIALOG (dlg), NULL);
 
-  return dlg->priv->unsaved_documents;
+  return priv->unsaved_documents;
 }

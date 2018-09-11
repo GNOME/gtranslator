@@ -43,15 +43,10 @@
 typedef struct _GtrCloseConfirmationDialog GtrCloseConfirmationDialog;
 typedef struct _GtrCloseConfirmationDialogClass
   GtrCloseConfirmationDialogClass;
-typedef struct _GtrCloseConfirmationDialogPrivate
-  GtrCloseConfirmationDialogPrivate;
 
 struct _GtrCloseConfirmationDialog
 {
   GtkDialog parent;
-
-  /*< private > */
-  GtrCloseConfirmationDialogPrivate *priv;
 };
 
 struct _GtrCloseConfirmationDialogClass
