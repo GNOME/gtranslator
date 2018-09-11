@@ -5,19 +5,18 @@
 # Karl Eichwalder <ke@suse.de>, 2000.
 # Hendrik Brandt <heb@gnome-de.org>, 2004, 2005, 2008.
 # Frank Arnold <frank@scirocco-5v-turbo.de>, 2005.
-# Hendrik Richter <hendrikr@gnome.org>, 2008. 
+# Hendrik Richter <hendrikr@gnome.org>, 2008.
 # Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2010, 2011.
 # Christian Kirbach <christian.kirbach@gmail.com>, 2008-2010, 2010, 2012, 2013.
 # Simon Linden <xhi2018@gmail.com>, 2013, 2014.
 # Wolfgang Stöggl <c72578@yahoo.de>, 2015.
 # Mario Blättermann <mario.blaettermann@gmail.com>, 2009-2010, 2017-2018.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-09-10 06:52+0000\n"
-"PO-Revision-Date: 2018-09-10 09:37+0200\n"
+"POT-Creation-Date: 2018-09-11 09:59+0000\n"
+"PO-Revision-Date: 2018-09-11 13:24+0200\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -28,7 +27,8 @@ msgstr ""
 "X-Generator: Vé 0.1.4\n"
 
 #: ../data/org.gnome.Gtranslator.appdata.xml.in.h:1
-#: ../data/org.gnome.Gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
+#: ../data/org.gnome.Gtranslator.desktop.in.h:1 ../src/gtr-application.c:438
+#: ../src/gtr-window.ui.h:1
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
@@ -528,35 +528,43 @@ msgstr ""
 "Einfaches Erkennen und Einfügen von Platzhaltervariablen und XML-Elementen."
 
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
+#: ../src/translation-memory/gtr-translation-memory-dialog.c:167
 msgid "Strings added to database"
 msgstr "Meldungen wurden der Datenbank hinzugefügt"
 
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:224
+#: ../src/translation-memory/gtr-translation-memory-dialog.c:224
 msgid "Please specify a valid path to build the translation memory"
 msgstr ""
 "Bitte geben Sie einen gültigen Pfad zum Anlegen des Übersetzungsspeichers an"
 
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.c:291
+#: ../src/translation-memory/gtr-translation-memory-dialog.c:291
 msgid "Gtranslator Translation Memory Manager"
 msgstr "Gtranslator-Verwaltung für Übersetzungsspeicher"
 
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:1
+#: ../src/translation-memory/gtr-translation-memory-dialog.ui.h:1
 msgid "Database:"
 msgstr "Datenbank:"
 
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:2
+#: ../src/translation-memory/gtr-translation-memory-dialog.ui.h:2
 msgid "Select the directory which contains PO files:"
 msgstr "Wählen Sie den Ordner mit den PO-Dateien:"
 
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:3
+#: ../src/translation-memory/gtr-translation-memory-dialog.ui.h:3
 msgid "Add to Database"
 msgstr "Zur Datenbank hinzufügen"
 
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:4
+#: ../src/translation-memory/gtr-translation-memory-dialog.ui.h:4
 msgid "Configuration:"
 msgstr "Konfiguration:"
 
 #: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:5
+#: ../src/translation-memory/gtr-translation-memory-dialog.ui.h:5
 msgid "Use only files with this name:"
 msgstr "Nur Dateien mit diesem Namen verwenden:"
 
@@ -575,22 +583,27 @@ msgid "Insert Option nº %d"
 msgstr "Option Nr. %d einfügen"
 
 #: ../plugins/translation-memory/gtr-translation-memory-ui.c:325
+#: ../src/translation-memory/gtr-translation-memory-ui.c:280
 msgid "_Use this translation"
 msgstr "Diese Übersetzung _verwenden"
 
 #: ../plugins/translation-memory/gtr-translation-memory-ui.c:330
+#: ../src/translation-memory/gtr-translation-memory-ui.c:285
 msgid "_Remove"
 msgstr "_Entfernen"
 
 #: ../plugins/translation-memory/gtr-translation-memory-ui.c:445
+#: ../src/translation-memory/gtr-translation-memory-ui.c:400
 msgid "Shortcut"
 msgstr "Kombination"
 
 #: ../plugins/translation-memory/gtr-translation-memory-ui.c:454
+#: ../src/translation-memory/gtr-translation-memory-ui.c:409
 msgid "Level"
 msgstr "Treffer"
 
 #: ../plugins/translation-memory/gtr-translation-memory-ui.c:463
+#: ../src/translation-memory/gtr-translation-memory-ui.c:418
 msgid "String"
 msgstr "Zeichenkette"
 
@@ -599,6 +612,7 @@ msgid "_Build Translation Memory"
 msgstr "Übersetzungsspeicher _aufbauen"
 
 #: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:82
+#: ../src/gtr-notebook.ui.h:1
 msgid "Build translation memory"
 msgstr "Übersetzungsspeicher aufbauen"
 
@@ -608,21 +622,29 @@ msgstr "Ü_bersetzungsspeicher"
 
 #: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memor
 #: y.gschema.xml.in.h:1
+#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gs
+#: chema.xml.in.h:1
 msgid "PO directory"
 msgstr "PO-Ordner"
 
 #: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memor
 #: y.gschema.xml.in.h:2
+#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gs
+#: chema.xml.in.h:2
 msgid "Directory containing PO files to add to the translation memory."
 msgstr "Ordner mit den zum Übersetzungsspeicher hinzuzufügenden PO-Dateien."
 
 #: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memor
 #: y.gschema.xml.in.h:3
+#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gs
+#: chema.xml.in.h:3
 msgid "Restrict search by filename"
 msgstr "Suche auf Dateinamen beschränken"
 
 #: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memor
 #: y.gschema.xml.in.h:4
+#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gs
+#: chema.xml.in.h:4
 msgid ""
 "If true, only include files with a specified filename when searching the "
 "translation memory."
@@ -632,11 +654,15 @@ msgstr ""
 
 #: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memor
 #: y.gschema.xml.in.h:5
+#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gs
+#: chema.xml.in.h:5
 msgid "Filename to restrict search to"
 msgstr "Dateiname zur Einschränkung der Suche"
 
 #: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memor
 #: y.gschema.xml.in.h:6
+#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gs
+#: chema.xml.in.h:6
 msgid ""
 "Filename to which searching of the translation memory should be restricted."
 msgstr ""
@@ -644,11 +670,15 @@ msgstr ""
 
 #: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memor
 #: y.gschema.xml.in.h:7
+#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gs
+#: chema.xml.in.h:7
 msgid "Maximum number of missing words"
 msgstr "Maximale Anzahl fehlender Worte"
 
 #: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memor
 #: y.gschema.xml.in.h:8
+#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gs
+#: chema.xml.in.h:8
 msgid ""
 "Maximum number of words that can be missing from a message displayed as a "
 "match by the translation memory."
@@ -658,11 +688,15 @@ msgstr ""
 
 #: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memor
 #: y.gschema.xml.in.h:9
+#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gs
+#: chema.xml.in.h:9
 msgid "Maximum difference in message length"
 msgstr "Maximaler Unterschied in der Zeichenkettenlänge"
 
 #: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memor
 #: y.gschema.xml.in.h:10
+#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gs
+#: chema.xml.in.h:10
 msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
@@ -715,19 +749,19 @@ msgstr ""
 msgid "Gtranslator Web Site"
 msgstr "Gtranslator-Webseite"
 
-#: ../src/gtr-actions-file.c:191
+#: ../src/gtr-actions-file.c:199
 msgid "Open file for translation"
 msgstr "Datei zum Übersetzen öffnen"
 
-#: ../src/gtr-actions-file.c:263 ../src/gtr-actions-file.c:380
+#: ../src/gtr-actions-file.c:271 ../src/gtr-actions-file.c:388
 msgid "File saved."
 msgstr "Datei gespeichert."
 
-#: ../src/gtr-actions-file.c:311
+#: ../src/gtr-actions-file.c:319
 msgid "Save file as..."
 msgstr "Datei speichern unter …"
 
-#: ../src/gtr-actions-file.c:769
+#: ../src/gtr-actions-file.c:777
 msgid "Files saved."
 msgstr "Dateien wurden gespeichert."
 
@@ -806,12 +840,11 @@ msgid "Translator email:"
 msgstr "E-Mail des Übersetzers:"
 
 #: ../src/gtr-assistant.c:304 ../src/gtr-preferences-dialog.c:546
-#: ../src/gtr-window.c:460
+#: ../src/gtr-window.c:505
 msgid "Profile"
 msgstr "Profil"
 
 #: ../src/gtr-assistant.c:396
-#| msgid "_Language:"
 msgid "Language"
 msgstr "Sprache"
 
@@ -867,30 +900,30 @@ msgstr "Das Abspeichern ist vom Systemadministrator deaktiviert worden."
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Alle Änderungen gehen verloren, wenn Sie nicht abspeichern."
 
-#: ../src/gtr-context.c:234
+#: ../src/gtr-context.c:239
 msgid "Notes:"
 msgstr "Notizen:"
 
-#: ../src/gtr-context.c:242
+#: ../src/gtr-context.c:247
 msgid "Add Note"
 msgstr "Notiz hinzufügen"
 
-#: ../src/gtr-context.c:247
+#: ../src/gtr-context.c:252
 msgid "Edit"
 msgstr "Bearbeiten"
 
 #. Extracted comments
-#: ../src/gtr-context.c:293
+#: ../src/gtr-context.c:298
 msgid "Extracted comments:"
 msgstr "Kommentarauszug:"
 
 #. Context
-#: ../src/gtr-context.c:297
+#: ../src/gtr-context.c:302
 msgid "Context:"
 msgstr "Kontext:"
 
 #. Format
-#: ../src/gtr-context.c:301
+#: ../src/gtr-context.c:306
 msgid "Format:"
 msgstr "Format:"
 
@@ -1013,6 +1046,99 @@ msgstr "Ursprüngliche Nachricht"
 #: ../src/gtr-message-table.c:223
 msgid "Translated Message"
 msgstr "Übersetzte Nachricht"
+
+#: ../src/gtr-notebook.ui.h:2
+#| msgid "_Preferences"
+msgid "Preferences"
+msgstr "Einstellungen"
+
+#: ../src/gtr-notebook.ui.h:3
+msgid "Keybindings"
+msgstr "Tastenkombinationen"
+
+#: ../src/gtr-notebook.ui.h:4
+#| msgid "_About"
+msgid "About"
+msgstr "Info"
+
+#: ../src/gtr-notebook.ui.h:6
+#, no-c-format
+#| msgid "Untranslated"
+msgid "translated: 0.00%"
+msgstr "Übersetzt: 0,00%"
+
+#: ../src/gtr-notebook.ui.h:7
+msgid "fuzzy: 0"
+msgstr "Unklar: 0"
+
+#: ../src/gtr-notebook.ui.h:8
+#| msgid "Untranslated"
+msgid "untranslated: 0"
+msgstr "Unübersetzt: 0"
+
+#: ../src/gtr-notebook.ui.h:9
+#| msgid "Translated"
+msgid "Translated: 0"
+msgstr "Übersetzt: 0"
+
+#: ../src/gtr-notebook.ui.h:10
+#| msgid "- Edit PO files"
+msgid "Editing PO file"
+msgstr "PO-Datei bearbeiten"
+
+#: ../src/gtr-notebook.ui.h:11
+#| msgctxt "alternate lang"
+#| msgid "_Open"
+msgid "Open"
+msgstr "Öffnen"
+
+#: ../src/gtr-notebook.ui.h:12
+msgid "Open a new file (<Ctrl>o)"
+msgstr "Eine neue Datei öffnen (<Strg>o) "
+
+#: ../src/gtr-notebook.ui.h:13
+msgid "Undo (<Ctrl>z)"
+msgstr "Rückgängig (<Strg>z)"
+
+#: ../src/gtr-notebook.ui.h:14
+msgid "Redo (<Ctrl><Shift>z)"
+msgstr "Wiederholen (<Strg><Umschalt>z)"
+
+#: ../src/gtr-notebook.ui.h:15
+msgid "Previous message (<Alt>🡄)"
+msgstr "Vorherige Zeichenkette  (<Alt>🡄)"
+
+#: ../src/gtr-notebook.ui.h:16
+msgid "Next message (<Alt>🡆)"
+msgstr "Nächste Zeichenkette (<Alt>🡆) "
+
+#: ../src/gtr-notebook.ui.h:17
+msgid "Previous message without translation (<Alt><Page Up>)"
+msgstr "Vorige Zeichenkette ohne Übersetzung (<Alt><Bild auf>)"
+
+#: ../src/gtr-notebook.ui.h:18
+msgid "Next message without translation (<Alt><Page Down>)"
+msgstr "Nächste Zeichenkette ohne Übersetzung (<Alt><Bild ab>)"
+
+#: ../src/gtr-notebook.ui.h:19
+msgid "Main Menu"
+msgstr "Hauptmenü"
+
+#: ../src/gtr-notebook.ui.h:20
+msgid "Progress button"
+msgstr "Fortschrittsknopf"
+
+#: ../src/gtr-notebook.ui.h:21
+msgid "Save"
+msgstr "Speichern"
+
+#: ../src/gtr-notebook.ui.h:22
+msgid "Save the current file (<Ctrl>s)"
+msgstr "Aktuelle Datei speichern (<Strg>s)"
+
+#: ../src/gtr-notebook.ui.h:23
+msgid "Save as (<Ctrl><Shift>s)"
+msgstr "Speichern unter (<Strg><Umschalt>s)"
 
 #: ../src/gtr-po.c:439
 #, c-format
@@ -1196,6 +1322,14 @@ msgstr "_Name:"
 msgid "Language Settings"
 msgstr "Einstellungen zur Sprache"
 
+#: ../src/gtr-projects.ui.h:1
+msgid "Select a PO file"
+msgstr "Eine PO-Datei auswählen"
+
+#: ../src/gtr-projects.ui.h:2
+msgid "Open…"
+msgstr "Öffnen …"
+
 #: ../src/gtr-search-dialog.c:347 ../src/gtr-search-dialog.ui.h:1
 msgid "Replace"
 msgstr "Ersetzen"
@@ -1260,17 +1394,17 @@ msgstr "EINF"
 msgid "OVR"
 msgstr "ÜBS"
 
-#: ../src/gtr-tab.c:209
+#: ../src/gtr-tab.c:210
 msgid "There is an error in the message:"
 msgstr "Die Zeichenkette enthält einen Fehler:"
 
-#: ../src/gtr-tab.c:537
+#: ../src/gtr-tab.c:538
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1055
+#: ../src/gtr-tab.c:1064
 msgid "Path:"
 msgstr "Pfad:"
 
@@ -1306,43 +1440,43 @@ msgid "GtkSpell was unable to initialize.\n"
 msgstr "GtkSpell konnte nicht initialisiert werden.\n"
 " %s"
 
-#: ../src/gtr-window.c:129
+#: ../src/gtr-window.c:144
 msgid "Untranslated"
 msgstr "Unübersetzt"
 
-#: ../src/gtr-window.c:132
+#: ../src/gtr-window.c:147
 msgid "Translated"
 msgstr "Übersetzt"
 
-#: ../src/gtr-window.c:135
+#: ../src/gtr-window.c:150
 msgid "Fuzzy"
 msgstr "Unklar"
 
-#: ../src/gtr-window.c:142
+#: ../src/gtr-window.c:157
 #, c-format
 msgid "Current: %d"
 msgstr "Derzeit: %d"
 
-#: ../src/gtr-window.c:143
+#: ../src/gtr-window.c:158
 #, c-format
 msgid "Total: %d"
 msgstr "Insgesamt: %d"
 
-#: ../src/gtr-window.c:144
+#: ../src/gtr-window.c:159
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "%d übersetzt"
 msgstr[1] "%d übersetzt"
 
-#: ../src/gtr-window.c:147
+#: ../src/gtr-window.c:162
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "%d unklar"
 msgstr[1] "%d unklar"
 
-#: ../src/gtr-window.c:149
+#: ../src/gtr-window.c:164
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1350,40 +1484,28 @@ msgstr[0] "%d nicht übersetzt"
 msgstr[1] "%d nicht übersetzt"
 
 #. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:252
+#: ../src/gtr-window.c:274
 #, c-format
 msgid "*%s - gtranslator"
 msgstr "*%s - gtranslator"
 
 #. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:255
+#: ../src/gtr-window.c:279
 #, c-format
 msgid "%s - gtranslator"
 msgstr "%s - gtranslator"
 
-#: ../src/gtr-window.c:261
+#: ../src/gtr-window.c:287
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/gtr-window.c:444
+#: ../src/gtr-window.c:489
 msgid "No profile"
 msgstr "Kein Profil"
 
-#: ../src/gtr-window.c:462
+#: ../src/gtr-window.c:507
 msgid "Profile for the active document"
 msgstr "Profil des aktiven Dokuments"
-
-#: ../src/gtr-window.ui.h:1
-msgid "Projects"
-msgstr "Projekte"
-
-#: ../src/gtr-window.ui.h:2
-msgid "Add project"
-msgstr "Projekt hinzufügen"
-
-#: ../src/gtr-window.ui.h:3
-msgid "Remove project"
-msgstr "Projekt entfernen"
 
 #: ../src/main.c:97
 msgid "- Edit PO files"
@@ -1438,3 +1560,12 @@ msgstr "Die markierte Werkzeugleiste entfernen"
 #: ../src/toolbareditor/egg-toolbar-editor.c:488
 msgid "Separator"
 msgstr "Trennzeichen"
+
+#~ msgid "Projects"
+#~ msgstr "Projekte"
+
+#~ msgid "Add project"
+#~ msgstr "Projekt hinzufügen"
+
+#~ msgid "Remove project"
+#~ msgstr "Projekt entfernen"
