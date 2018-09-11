@@ -75,5 +75,7 @@ GtrTab *gtr_notebook_get_page (GtrNotebook * notebook);
 
 GtkWidget *gtr_notebook_get_header (GtrNotebook *notebook);
 
+void gtr_notebook_set_progress (GtrNotebook *notebook, gint trans, gint untrans, gint fuzzy);
+
 G_END_DECLS
 #endif /* __NOTEBOOK_H__ */

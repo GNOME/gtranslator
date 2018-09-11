@@ -51,6 +51,7 @@ sources = files(
 	'gtr-utils.c',
 	'gtr-view.c',
 	'gtr-projects.c',
+	'gtr-progress.c',
 	'gtr-window.c'
 )
 

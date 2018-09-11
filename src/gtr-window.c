@@ -135,6 +135,9 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
   untranslated = gtr_po_get_untranslated_count (po);
   status = NULL;
 
+  gtr_notebook_set_progress (GTR_NOTEBOOK (priv->notebook),
+                             translated, untranslated, fuzzy);
+
   switch (gtr_msg_get_status (message))
     {
     case GTR_MSG_STATUS_UNTRANSLATED:
