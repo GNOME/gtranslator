@@ -319,19 +319,19 @@ gtr_alternate_lang_panel_init (GtrAlternateLangPanel * panel)
   gtk_button_box_set_layout (GTK_BUTTON_BOX (buttonbox), GTK_BUTTONBOX_START);
   gtk_widget_show (buttonbox);
 
-  panel->priv->open_button = gtr_gtk_button_new_with_stock_icon (C_("alternate lang", "_Open"),
+  panel->priv->open_button = gtr_gtk_button_new_with_stock_icon (_("_Open"),
                                                                  GTK_STOCK_OPEN);
   g_signal_connect (panel->priv->open_button,
                     "clicked", G_CALLBACK (open_button_clicked_cb), panel);
   gtk_widget_show (panel->priv->open_button);
 
-  panel->priv->close_button = gtr_gtk_button_new_with_stock_icon (C_("alternate lang", "_Close"),
+  panel->priv->close_button = gtr_gtk_button_new_with_stock_icon (_("_Close"),
                                                                   GTK_STOCK_CLOSE);
   g_signal_connect (panel->priv->close_button,
                     "clicked", G_CALLBACK (close_button_clicked_cb), panel);
   gtk_widget_show (panel->priv->close_button);
 
-  panel->priv->copy_button = gtr_gtk_button_new_with_stock_icon (C_("alternate lang", "Co_py"),
+  panel->priv->copy_button = gtr_gtk_button_new_with_stock_icon (_("Co_py"),
                                                                  GTK_STOCK_COPY);
   g_signal_connect (panel->priv->copy_button,
                     "clicked", G_CALLBACK (copy_button_clicked_cb), panel);
