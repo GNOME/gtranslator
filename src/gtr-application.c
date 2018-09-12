@@ -297,13 +297,13 @@ save_activated (GSimpleAction *action,
 }
 
 static void
-projects_activated (GSimpleAction *action,
-                    GVariant      *parameter,
-                    gpointer       user_data)
+open_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_window_show_projects (priv->active_window);
+  gtr_open_file_dialog (NULL, priv->active_window);
 }
 
 static void
@@ -380,7 +380,7 @@ build_tm_activated (GSimpleAction *action,
 static GActionEntry app_entries[] = {
   { "save", save_activated, NULL, NULL, NULL },
   { "saveas", saveas_activated, NULL, NULL, NULL },
-  { "projects", projects_activated, NULL, NULL, NULL },
+  { "open", open_activated, NULL, NULL, NULL },
 
   { "undo", undo_activated, NULL, NULL, NULL },
   { "redo", redo_activated, NULL, NULL, NULL },

@@ -611,7 +611,7 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
  * Parses all things related to the #GtrPo and initilizes all neccessary
  * variables.
  **/
-void
+gboolean
 gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
 {
   GtrPoPrivate *priv = po->priv;
@@ -622,8 +622,8 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
   gint i = 0;
   gint pos = 1;
 
-  g_return_if_fail (GTR_IS_PO (po));
-  g_return_if_fail (location != NULL);
+  g_return_val_if_fail (GTR_IS_PO (po), FALSE);
+  g_return_val_if_fail (location != NULL, FALSE);
 
   if (message_error != NULL)
     {
@@ -639,7 +639,7 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
   if (!_gtr_po_load_ensure_utf8 (po, error))
     {
       g_object_unref (po);
-      return;
+      return FALSE;
     }
 
   /*
@@ -663,7 +663,7 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
                    GTR_PO_ERROR_GETTEXT,
                    _("Gettext returned a null message domain list."));
       g_object_unref (po);
-      return;
+      return FALSE;
     }
   while (domains[i])
     {
@@ -708,7 +708,7 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
                    GTR_PO_ERROR_OTHER,
                    _("No messages obtained from parser."));
       g_object_unref (po);
-      return;
+      return FALSE;
     }
 
   priv->messages = g_list_reverse (priv->messages);
@@ -722,6 +722,7 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
 
   /* Initialize Tab state */
   po->priv->state = GTR_PO_STATE_SAVED;
+  return TRUE;
 }
 
 /**

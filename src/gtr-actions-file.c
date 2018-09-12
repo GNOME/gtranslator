@@ -66,16 +66,22 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
    * If the filename can't be opened, pass the error back to the caller
    * to handle.
    */
+
   po = gtr_po_new ();
-  gtr_po_parse (po, location, error);
+  if (!gtr_po_parse (po, location, error)) {
+    gtr_window_show_projects (window);
+    // TODO: show error message
+    return FALSE;
+  }
 
   if ((*error != NULL)
-      && (((GError *) * error)->code != GTR_PO_ERROR_RECOVERY))
+      && (((GError *) * error)->code != GTR_PO_ERROR_RECOVERY)) {
+    gtr_window_show_projects (window);
     return FALSE;
+  }
 
   header = gtr_po_get_header (po);
   project_id = gtr_header_get_prj_id_version (header);
-  _gtr_recent_add (window, location, (gchar *)project_id);
 
   /*
    * Create a page to add to our list of open files
@@ -411,6 +417,9 @@ load_file_list (GtrWindow * window, const GSList * locations)
   GtkWidget *tab;
 
   g_return_if_fail ((locations != NULL) && (locations->data != NULL));
+
+  // removing other tabs, for now on, we'll using single tab and multiples windows
+  gtr_window_remove_all_pages (window);
 
   /* Remove the uris corresponding to documents already open
    * in "window" and remove duplicates from "uris" list */
