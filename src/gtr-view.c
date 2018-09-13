@@ -140,23 +140,6 @@ gtr_view_init (GtrView * view)
                                       g_settings_get_boolean (priv->editor_settings,
                                                               GTR_SETTINGS_VISIBLE_WHITESPACE));
 
-  /* Set fonts according to preferences */
-  if (g_settings_get_boolean (priv->editor_settings, GTR_SETTINGS_USE_CUSTOM_FONT))
-    {
-      gchar *editor_font;
-
-      editor_font = g_settings_get_string (priv->editor_settings,
-                                           GTR_SETTINGS_EDITOR_FONT);
-
-      gtr_view_set_font (view, FALSE, editor_font);
-
-      g_free (editor_font);
-    }
-  else
-    {
-      gtr_view_set_font (view, TRUE, NULL);
-    }
-
   /* Set scheme color according to preferences */
   gtr_view_reload_scheme_color (view);
 }
@@ -280,13 +263,22 @@ gtr_view_enable_spellcheck (GtrView * view, gboolean enable)
 void
 gtr_view_enable_visible_whitespace (GtrView * view, gboolean enable)
 {
+  GtkSourceView *source;
+  GtkSourceSpaceDrawer *drawer;
+
   g_return_if_fail (GTR_IS_VIEW (view));
 
+  source = GTK_SOURCE_VIEW (view);
+  drawer = gtk_source_view_get_space_drawer (source);
+
   if (enable)
-    gtk_source_view_set_draw_spaces (GTK_SOURCE_VIEW (view),
-                                     GTK_SOURCE_DRAW_SPACES_ALL);
+    gtk_source_space_drawer_set_types_for_locations (drawer,
+                                                     GTK_SOURCE_SPACE_LOCATION_ALL,
+                                                     GTK_SOURCE_SPACE_TYPE_ALL);
   else
-    gtk_source_view_set_draw_spaces (GTK_SOURCE_VIEW (view), 0);
+    gtk_source_space_drawer_set_types_for_locations (drawer,
+                                                     GTK_SOURCE_SPACE_LOCATION_NONE,
+                                                     GTK_SOURCE_SPACE_TYPE_NONE);
 }
 
 /**
@@ -377,44 +369,6 @@ gtr_view_paste_clipboard (GtrView * view)
   gtk_text_view_scroll_to_mark (GTK_TEXT_VIEW (view),
                                 gtk_text_buffer_get_insert (buffer),
                                 0.0, FALSE, 0.0, 0.0);
-}
-
-/**
- * gtr_view_set_font:
- * @view: a #GtrView
- * @def: TRUE if you want to use the default font
- * @font_name: The name of the font you want to use in the #GtrView
- * 
- * Sets the #GtrView font.
- **/
-void
-gtr_view_set_font (GtrView * view, gboolean def, const gchar * font_name)
-{
-  PangoFontDescription *font_desc = NULL;
-
-  g_return_if_fail (GTR_IS_VIEW (view));
-
-  if (def)
-    {
-      GSettings *gtr_settings;
-      gchar *font;
-
-      gtr_settings = _gtr_application_get_settings (GTR_APP);
-      font = gtr_settings_get_system_font (GTR_SETTINGS (gtr_settings));
-
-      font_desc = pango_font_description_from_string (font);
-      g_free (font);
-    }
-  else
-    {
-      font_desc = pango_font_description_from_string (font_name);
-    }
-
-  g_return_if_fail (font_desc != NULL);
-
-  gtk_widget_modify_font (GTK_WIDGET (view), font_desc);
-
-  pango_font_description_free (font_desc);
 }
 
 

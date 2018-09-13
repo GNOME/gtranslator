@@ -26,15 +26,11 @@
 #include <libxml/xmlreader.h>
 #include <libxml/tree.h>
 
-#define GTR_PROFILE_MANAGER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), \
-                                                GTR_TYPE_PROFILE_MANAGER, \
-                                                GtrProfileManagerPrivate))
-
-struct _GtrProfileManagerPrivate
+typedef struct
 {
   GSList     *profiles;
   GtrProfile *active_profile;
-};
+} GtrProfileManagerPrivate;
 
 enum
 {
@@ -45,7 +41,7 @@ enum
   LAST_SIGNAL
 };
 
-G_DEFINE_TYPE (GtrProfileManager, gtr_profile_manager, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrProfileManager, gtr_profile_manager, G_TYPE_OBJECT)
 
 static guint signals[LAST_SIGNAL];
 
@@ -65,8 +61,9 @@ static void
 gtr_profile_manager_finalize (GObject *object)
 {
   GtrProfileManager *manager = GTR_PROFILE_MANAGER (object);
+  GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
 
-  g_slist_free_full (manager->priv->profiles, g_object_unref);
+  g_slist_free_full (priv->profiles, g_object_unref);
 
   G_OBJECT_CLASS (gtr_profile_manager_parent_class)->finalize (object);
 }
@@ -77,8 +74,6 @@ gtr_profile_manager_class_init (GtrProfileManagerClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = gtr_profile_manager_finalize;
-
-  g_type_class_add_private (object_class, sizeof (GtrProfileManagerPrivate));
 
   /* Signals */
   signals[ACTIVE_PROFILE_CHANGED] =
@@ -122,6 +117,7 @@ parse_profile (GtrProfileManager *manager,
                xmlNodePtr         cur)
 {
   GtrProfile *profile;
+  GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
 
   if (xmlStrcmp (cur->name, (const xmlChar *)"profile") != 0)
     return;
@@ -129,7 +125,7 @@ parse_profile (GtrProfileManager *manager,
   profile = gtr_profile_new ();
 
   if (xmlHasProp (cur, (const xmlChar *)"active"))
-    manager->priv->active_profile = profile;
+    priv->active_profile = profile;
 
   cur = cur->xmlChildrenNode;
 
@@ -189,7 +185,7 @@ parse_profile (GtrProfileManager *manager,
       cur = cur->next;
     }
 
-  manager->priv->profiles = g_slist_append (manager->priv->profiles,
+  priv->profiles = g_slist_append (priv->profiles,
                                             profile);
 }
 
@@ -256,10 +252,11 @@ save_profile (GtrProfileManager *manager,
               xmlNodePtr         parent)
 {
   xmlNodePtr profile_node;
+  GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
 
   profile_node = xmlNewChild (parent, NULL, (const xmlChar *)"profile", NULL);
 
-  if (manager->priv->active_profile == profile)
+  if (priv->active_profile == profile)
     xmlSetProp (profile_node, (const xmlChar *)"active", (const xmlChar *)"TRUE");
 
   xmlNewTextChild (profile_node, NULL, (const xmlChar *)"profile_name",
@@ -289,6 +286,7 @@ save_profiles (GtrProfileManager *manager)
   xmlNodePtr root;
   gchar *file_name;
   GSList *l;
+  GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
 
   g_return_if_fail (GTR_IS_PROFILE_MANAGER (manager));
 
@@ -302,7 +300,7 @@ save_profiles (GtrProfileManager *manager)
   root = xmlNewDocNode (doc, NULL, (const xmlChar *)"profiles", NULL);
   xmlDocSetRootElement (doc, root);
 
-  for (l = manager->priv->profiles; l != NULL; l = g_slist_next (l))
+  for (l = priv->profiles; l != NULL; l = g_slist_next (l))
     save_profile (manager, GTR_PROFILE (l->data), root);
 
   file_name = get_profile_filename ();
@@ -326,10 +324,10 @@ save_profiles (GtrProfileManager *manager)
 static void
 gtr_profile_manager_init (GtrProfileManager *manager)
 {
-  manager->priv = GTR_PROFILE_MANAGER_GET_PRIVATE (manager);
+  GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
 
-  manager->priv->profiles = NULL;
-  manager->priv->active_profile = NULL;
+  priv->profiles = NULL;
+  priv->active_profile = NULL;
 
   load_profiles (manager);
 }
@@ -351,27 +349,30 @@ gtr_profile_manager_get_default ()
 GSList *
 gtr_profile_manager_get_profiles (GtrProfileManager *manager)
 {
+  GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
   g_return_val_if_fail (GTR_IS_PROFILE_MANAGER (manager), NULL);
 
-  return manager->priv->profiles;
+  return priv->profiles;
 }
 
 GtrProfile *
 gtr_profile_manager_get_active_profile (GtrProfileManager *manager)
 {
+  GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
   g_return_val_if_fail (GTR_IS_PROFILE_MANAGER (manager), NULL);
 
-  return manager->priv->active_profile;
+  return priv->active_profile;
 }
 
 void
 gtr_profile_manager_set_active_profile (GtrProfileManager *manager,
                                         GtrProfile        *profile)
 {
+  GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
   g_return_if_fail (GTR_IS_PROFILE_MANAGER (manager));
   g_return_if_fail (GTR_IS_PROFILE (profile));
 
-  manager->priv->active_profile = profile;
+  priv->active_profile = profile;
 
   g_signal_emit (G_OBJECT (manager), signals[ACTIVE_PROFILE_CHANGED], 0, profile);
 
@@ -382,13 +383,14 @@ void
 gtr_profile_manager_add_profile (GtrProfileManager *manager,
                                  GtrProfile        *profile)
 {
+  GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
   g_return_if_fail (GTR_IS_PROFILE_MANAGER (manager));
   g_return_if_fail (profile != NULL);
 
-  if (manager->priv->profiles == NULL)
-    manager->priv->active_profile = profile;
+  if (priv->profiles == NULL)
+    priv->active_profile = profile;
 
-  manager->priv->profiles = g_slist_append (manager->priv->profiles,
+  priv->profiles = g_slist_append (priv->profiles,
                                             profile);
 
   g_signal_emit (G_OBJECT (manager), signals[PROFILE_ADDED], 0, profile);
@@ -400,10 +402,11 @@ void
 gtr_profile_manager_remove_profile (GtrProfileManager *manager,
                                     GtrProfile        *profile)
 {
+  GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
   g_return_if_fail (GTR_IS_PROFILE_MANAGER (manager));
   g_return_if_fail (profile != NULL);
 
-  manager->priv->profiles = g_slist_remove (manager->priv->profiles,
+  priv->profiles = g_slist_remove (priv->profiles,
                                             profile);
 
   g_signal_emit (G_OBJECT (manager), signals[PROFILE_REMOVED], 0, profile);
@@ -417,19 +420,20 @@ gtr_profile_manager_modify_profile (GtrProfileManager *manager,
                                     GtrProfile        *old_profile,
                                     GtrProfile        *new_profile)
 {
+  GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
   GSList *p;
 
   g_return_if_fail (GTR_IS_PROFILE_MANAGER (manager));
   g_return_if_fail (old_profile != NULL);
   g_return_if_fail (new_profile != NULL);
 
-  p = g_slist_find (manager->priv->profiles,
+  p = g_slist_find (priv->profiles,
                     old_profile);
 
   p->data = new_profile;
 
-  if (manager->priv->active_profile == old_profile)
-    manager->priv->active_profile = new_profile;
+  if (priv->active_profile == old_profile)
+    priv->active_profile = new_profile;
 
   g_signal_emit (G_OBJECT (manager), signals[PROFILE_MODIFIED], 0,
                  old_profile, new_profile);

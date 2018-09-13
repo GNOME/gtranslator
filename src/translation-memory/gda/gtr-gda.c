@@ -30,21 +30,10 @@
 #include <glib-object.h>
 #include <string.h>
 
-#define GTR_GDA_GET_PRIVATE(object)                                     \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((object),                               \
-                                GTR_TYPE_GDA,                           \
-                                GtrGdaPrivate))
-
 static void
 gtr_translation_memory_iface_init (GtrTranslationMemoryInterface * iface);
 
-G_DEFINE_TYPE_WITH_CODE (GtrGda,
-                         gtr_gda,
-                         G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (GTR_TYPE_TRANSLATION_MEMORY,
-                                                gtr_translation_memory_iface_init))
-
-struct _GtrGdaPrivate
+typedef struct
 {
   GdaConnection *db;
 
@@ -68,7 +57,14 @@ struct _GtrGdaPrivate
   gint max_items;
 
   GHashTable *lookup_query_cache;
-};
+} GtrGdaPrivate;
+
+G_DEFINE_TYPE_WITH_CODE (GtrGda,
+                         gtr_gda,
+                         G_TYPE_OBJECT,
+                         G_ADD_PRIVATE (GtrGda)
+                         G_IMPLEMENT_INTERFACE (GTR_TYPE_TRANSLATION_MEMORY,
+                                                gtr_translation_memory_iface_init))
 
 static gint
 select_integer (GdaConnection *db,
@@ -193,12 +189,13 @@ gtr_gda_words_append (GtrGda *self,
 {
   GError *inner_error;
   gint word_id = 0;
+  GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
   /* look for word */
   {
     inner_error = NULL;
-    word_id = select_integer (self->priv->db,
-                              self->priv->stmt_select_word,
+    word_id = select_integer (priv->db,
+                              priv->stmt_select_word,
                               gda_set_new_inline (1,
                                                   "value", G_TYPE_STRING,
                                                   word),
@@ -213,8 +210,8 @@ gtr_gda_words_append (GtrGda *self,
   if (word_id == 0)
     {
       inner_error = NULL;
-      word_id = insert_row (self->priv->db,
-                            self->priv->stmt_insert_word,
+      word_id = insert_row (priv->db,
+                            priv->stmt_insert_word,
                             gda_set_new_inline (1,
                                                 "value", G_TYPE_STRING, word),
                             &inner_error);
@@ -234,8 +231,8 @@ gtr_gda_words_append (GtrGda *self,
                                  "orig_id", G_TYPE_INT, orig_id);
 
     inner_error = NULL;
-    if (-1 == gda_connection_statement_execute_non_select (self->priv->db,
-                                                           self->priv->stmt_insert_link,
+    if (-1 == gda_connection_statement_execute_non_select (priv->db,
+                                                           priv->stmt_insert_link,
                                                            params,
                                                            NULL,
                                                            &inner_error))
@@ -255,10 +252,11 @@ gtr_gda_store_impl (GtrGda *self,
   gboolean found_translation = FALSE;
   gchar **words = NULL;
   GError *inner_error;
+  GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
   inner_error = NULL;
-  orig_id = select_integer (self->priv->db,
-                            self->priv->stmt_find_orig,
+  orig_id = select_integer (priv->db,
+                            priv->stmt_find_orig,
                             gda_set_new_inline (1,
                                                 "original", G_TYPE_STRING,
                                                 original),
@@ -277,8 +275,8 @@ gtr_gda_store_impl (GtrGda *self,
       sz = g_strv_length (words);
 
       inner_error = NULL;
-      orig_id = insert_row (self->priv->db,
-                            self->priv->stmt_insert_orig,
+      orig_id = insert_row (priv->db,
+                            priv->stmt_insert_orig,
                             gda_set_new_inline (2,
                                                 "original", G_TYPE_STRING,
                                                 original,
@@ -302,8 +300,8 @@ gtr_gda_store_impl (GtrGda *self,
   else
     {
       inner_error = NULL;
-      found_translation = select_integer (self->priv->db,
-                                          self->priv->stmt_find_trans,
+      found_translation = select_integer (priv->db,
+                                          priv->stmt_find_trans,
                                           gda_set_new_inline (2,
                                                               "orig_id",
                                                               G_TYPE_INT,
@@ -319,8 +317,8 @@ gtr_gda_store_impl (GtrGda *self,
   if (!found_translation)
     {
       inner_error = NULL;
-      insert_row (self->priv->db,
-                  self->priv->stmt_insert_trans,
+      insert_row (priv->db,
+                  priv->stmt_insert_trans,
                   gda_set_new_inline (2,
                                       "orig_id", G_TYPE_INT,
                                       orig_id,
@@ -345,11 +343,12 @@ gtr_gda_store (GtrTranslationMemory * tm, GtrMsg * msg)
   GtrGda *self = GTR_GDA (tm);
   gboolean result;
   GError *error;
+  GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
   g_return_val_if_fail (GTR_IS_GDA (self), FALSE);
 
   error = NULL;
-  if (!gda_connection_begin_transaction (self->priv->db,
+  if (!gda_connection_begin_transaction (priv->db,
                                          NULL,
                                          GDA_TRANSACTION_ISOLATION_READ_COMMITTED,
                                          &error))
@@ -372,9 +371,9 @@ gtr_gda_store (GtrTranslationMemory * tm, GtrMsg * msg)
     }
 
   if (result)
-    gda_connection_commit_transaction (self->priv->db, NULL, NULL);
+    gda_connection_commit_transaction (priv->db, NULL, NULL);
   else
-    gda_connection_rollback_transaction (self->priv->db, NULL, NULL);
+    gda_connection_rollback_transaction (priv->db, NULL, NULL);
 
   return result;
 }
@@ -386,11 +385,12 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
   gboolean result = TRUE;
   GList *l;
   GError *error;
+  GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
   g_return_val_if_fail (GTR_IS_GDA (self), FALSE);
 
   error = NULL;
-  if (!gda_connection_begin_transaction (self->priv->db,
+  if (!gda_connection_begin_transaction (priv->db,
                                          NULL,
                                          GDA_TRANSACTION_ISOLATION_READ_COMMITTED,
                                          &error))
@@ -421,9 +421,9 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
     }
 
   if (result)
-    gda_connection_commit_transaction (self->priv->db, NULL, NULL);
+    gda_connection_commit_transaction (priv->db, NULL, NULL);
   else
-    gda_connection_rollback_transaction (self->priv->db, NULL, NULL);
+    gda_connection_rollback_transaction (priv->db, NULL, NULL);
 
   return result;
 }
@@ -435,6 +435,7 @@ gtr_gda_remove (GtrTranslationMemory *tm,
   GtrGda *self = GTR_GDA (tm);
   GdaSet *params;
   GError *error;
+  GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
   params = gda_set_new_inline (1,
                                "id_trans",
@@ -442,8 +443,8 @@ gtr_gda_remove (GtrTranslationMemory *tm,
                                translation_id);
 
   error = NULL;
-  gda_connection_statement_execute_non_select (self->priv->db,
-                                               self->priv->stmt_delete_trans,
+  gda_connection_statement_execute_non_select (priv->db,
+                                               priv->stmt_delete_trans,
                                                params,
                                                NULL,
                                                &error);
@@ -470,6 +471,7 @@ build_lookup_query (GtrGda *self, guint word_count)
 {
   GString * query = g_string_sized_new (1024);
   guint i;
+  GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
   g_string_append_printf (query,
                           "select "
@@ -500,7 +502,7 @@ build_lookup_query (GtrGda *self, guint word_count)
                           "        and WORD.VALUE in (",
                           word_count,
                           word_count,
-                          word_count + self->priv->max_delta);
+                          word_count + priv->max_delta);
 
   for (i = 0; i < word_count; ++i)
     {
@@ -516,8 +518,8 @@ build_lookup_query (GtrGda *self, guint word_count)
                           "where ORID = TRANS.ORIG_ID "
                           "order by SCORE desc "
                           "limit %d",
-                          word_count - self->priv->max_omits,
-                          self->priv->max_items);
+                          word_count - priv->max_omits,
+                          priv->max_items);
 
   return g_string_free (query, FALSE);
 }
@@ -527,21 +529,22 @@ gtr_gda_get_lookup_statement (GtrGda *self, guint word_count, GError **error)
 {
   GdaStatement *stmt;
   gchar *query;
+  GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
-  stmt = GDA_STATEMENT (g_hash_table_lookup (self->priv->lookup_query_cache,
+  stmt = GDA_STATEMENT (g_hash_table_lookup (priv->lookup_query_cache,
                                              GUINT_TO_POINTER (word_count)));
 
   if (stmt)
     return stmt;
 
   query = build_lookup_query (self, word_count);
-  stmt = gda_sql_parser_parse_string (self->priv->parser,
+  stmt = gda_sql_parser_parse_string (priv->parser,
                                       query,
                                       NULL,
                                       error);
   g_free (query);
 
-  g_hash_table_insert (self->priv->lookup_query_cache,
+  g_hash_table_insert (priv->lookup_query_cache,
                        GUINT_TO_POINTER (word_count),
                        stmt);
 
@@ -560,10 +563,11 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
   GdaSet *params = NULL;
   GdaDataModel *model = NULL;
   gint i;
+  GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
   g_return_val_if_fail (GTR_IS_GDA (self), NULL);
 
-  if (!gda_connection_begin_transaction (self->priv->db,
+  if (!gda_connection_begin_transaction (priv->db,
                                          NULL,
                                          GDA_TRANSACTION_ISOLATION_READ_COMMITTED,
                                          NULL))
@@ -604,7 +608,7 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
   }
 
   inner_error = NULL;
-  model = gda_connection_statement_execute_select (self->priv->db,
+  model = gda_connection_statement_execute_select (priv->db,
                                                    stmt,
                                                    params,
                                                    &inner_error);
@@ -676,7 +680,7 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
   if (params)
     g_object_unref (params);
 
-  gda_connection_rollback_transaction (self->priv->db, NULL, NULL);
+  gda_connection_rollback_transaction (priv->db, NULL, NULL);
 
   if (inner_error)
     {
@@ -697,27 +701,30 @@ static void
 gtr_gda_set_max_omits (GtrTranslationMemory * tm, gsize omits)
 {
   GtrGda *self = GTR_GDA (tm);
+  GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
-  self->priv->max_omits = omits;
-  g_hash_table_remove_all (self->priv->lookup_query_cache);
+  priv->max_omits = omits;
+  g_hash_table_remove_all (priv->lookup_query_cache);
 }
 
 static void
 gtr_gda_set_max_delta (GtrTranslationMemory * tm, gsize delta)
 {
   GtrGda *self = GTR_GDA (tm);
+  GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
-  self->priv->max_delta = delta;
-  g_hash_table_remove_all (self->priv->lookup_query_cache);
+  priv->max_delta = delta;
+  g_hash_table_remove_all (priv->lookup_query_cache);
 }
 
 static void
 gtr_gda_set_max_items (GtrTranslationMemory * tm, gint items)
 {
   GtrGda *self = GTR_GDA (tm);
+  GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
-  self->priv->max_items = items;
-  g_hash_table_remove_all (self->priv->lookup_query_cache);
+  priv->max_items = items;
+  g_hash_table_remove_all (priv->lookup_query_cache);
 }
 
 static void
@@ -758,8 +765,7 @@ gtr_gda_init (GtrGda * self)
 {
   gchar *connection_string;
   GError *error = NULL;
-
-  self->priv = GTR_GDA_GET_PRIVATE (self);
+  GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
   gda_init ();
 
@@ -777,7 +783,7 @@ gtr_gda_init (GtrGda * self)
     g_free (encoded_config_dir);
   }
 
-  self->priv->db = gda_connection_open_from_string ("Sqlite",
+  priv->db = gda_connection_open_from_string ("Sqlite",
                                                     connection_string,
                                                     NULL,
                                                     GDA_CONNECTION_OPTIONS_NONE,
@@ -788,34 +794,34 @@ gtr_gda_init (GtrGda * self)
       g_error_free (error);
     }
 
-  gda_connection_execute_non_select_command (self->priv->db,
+  gda_connection_execute_non_select_command (priv->db,
                                              "create table WORD ("
                                              "ID integer primary key autoincrement,"
                                              "VALUE text unique)",
                                              NULL);
 
-  gda_connection_execute_non_select_command (self->priv->db,
+  gda_connection_execute_non_select_command (priv->db,
                                              "create table WORD_ORIG_LINK ("
                                              "WORD_ID integer,"
                                              "ORIG_ID integer,"
                                              "primary key (WORD_ID, ORIG_ID))",
                                              NULL);
 
-  gda_connection_execute_non_select_command (self->priv->db,
+  gda_connection_execute_non_select_command (priv->db,
                                              "create table ORIG ("
                                              "ID integer primary key autoincrement,"
                                              "VALUE text unique,"
                                              "SENTENCE_SIZE integer)",
                                              NULL);
 
-  gda_connection_execute_non_select_command (self->priv->db,
+  gda_connection_execute_non_select_command (priv->db,
                                              "create table TRANS ("
                                              "ID integer primary key autoincrement,"
                                              "ORIG_ID integer,"
                                              "VALUE text)",
                                              NULL);
 
-  gda_connection_execute_non_select_command (self->priv->db,
+  gda_connection_execute_non_select_command (priv->db,
                                              "create index "
                                              "if not exists IDX_TRANS_ORIG_ID "
                                              "on TRANS (ORIG_ID)",
@@ -823,69 +829,69 @@ gtr_gda_init (GtrGda * self)
 
   /* prepare statements */
 
-  self->priv->parser = gda_connection_create_parser (self->priv->db);
-  if (self->priv->parser == NULL)
-    self->priv->parser = gda_sql_parser_new ();
+  priv->parser = gda_connection_create_parser (priv->db);
+  if (priv->parser == NULL)
+    priv->parser = gda_sql_parser_new ();
 
-  self->priv->stmt_find_orig =
-    prepare_statement (self->priv->parser,
+  priv->stmt_find_orig =
+    prepare_statement (priv->parser,
                        "select ID from ORIG "
                        "where VALUE=##original::string");
 
-  self->priv->stmt_select_word =
-    prepare_statement (self->priv->parser,
+  priv->stmt_select_word =
+    prepare_statement (priv->parser,
                        "select ID from WORD "
                        "where VALUE=##value::string");
 
-  self->priv->stmt_select_trans =
-    prepare_statement (self->priv->parser,
+  priv->stmt_select_trans =
+    prepare_statement (priv->parser,
                        "select VALUE from TRANS "
                        "where ORIG_ID=##orig_id::int");
 
-  self->priv->stmt_find_trans =
-    prepare_statement (self->priv->parser,
+  priv->stmt_find_trans =
+    prepare_statement (priv->parser,
                        "select ID from TRANS "
                        "where ORIG_ID=##orig_id::int "
                        "and VALUE=##value::string");
 
-  self->priv->stmt_insert_orig =
-    prepare_statement (self->priv->parser,
+  priv->stmt_insert_orig =
+    prepare_statement (priv->parser,
                        "insert into "
                        "ORIG (VALUE, SENTENCE_SIZE) "
                        "values "
                        "(##original::string, ##sentence_size::int)");
 
-  self->priv->stmt_insert_word =
-    prepare_statement (self->priv->parser,
+  priv->stmt_insert_word =
+    prepare_statement (priv->parser,
                        "insert into "
                        "WORD (VALUE) "
                        "values "
                        "(##value::string)");
 
-  self->priv->stmt_insert_link =
-    prepare_statement (self->priv->parser,
+  priv->stmt_insert_link =
+    prepare_statement (priv->parser,
                        "insert into "
                        "WORD_ORIG_LINK (WORD_ID, ORIG_ID) "
                        "values "
                        "(##word_id::int, ##orig_id::int)");
 
-  self->priv->stmt_insert_trans =
-    prepare_statement (self->priv->parser,
+  priv->stmt_insert_trans =
+    prepare_statement (priv->parser,
                        "insert into "
                        "TRANS (ORIG_ID, VALUE) "
                        "values "
                        "(##orig_id::int, ##value::string)");
 
-  self->priv->stmt_delete_trans =
-    prepare_statement (self->priv->parser,
+  priv->stmt_delete_trans =
+    prepare_statement (priv->parser,
                        "delete from TRANS "
                        "where id = ##id_trans::int");
 
-  self->priv->max_omits = 0;
-  self->priv->max_delta = 0;
-  self->priv->max_items = 0;
+  priv->max_omits = 0;
+  priv->max_delta = 0;
+  priv->max_items = 0;
 
-  self->priv->lookup_query_cache = g_hash_table_new_full (g_direct_hash,
+  priv->lookup_query_cache = g_hash_table_new_full (g_direct_hash,
                                                           g_direct_equal,
                                                           NULL,
                                                           g_object_unref);
@@ -895,77 +901,78 @@ static void
 gtr_gda_dispose (GObject * object)
 {
   GtrGda *self = GTR_GDA (object);
+  GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
-  if (self->priv->stmt_find_orig != NULL)
+  if (priv->stmt_find_orig != NULL)
     {
-      g_object_unref (self->priv->stmt_find_orig);
-      self->priv->stmt_find_orig = NULL;
+      g_object_unref (priv->stmt_find_orig);
+      priv->stmt_find_orig = NULL;
     }
 
-  if (self->priv->stmt_select_trans != NULL)
+  if (priv->stmt_select_trans != NULL)
     {
-      g_object_unref (self->priv->stmt_select_trans);
-      self->priv->stmt_select_trans = NULL;
+      g_object_unref (priv->stmt_select_trans);
+      priv->stmt_select_trans = NULL;
     }
 
-  if (self->priv->stmt_find_trans != NULL)
+  if (priv->stmt_find_trans != NULL)
     {
-      g_object_unref (self->priv->stmt_find_trans);
-      self->priv->stmt_find_trans = NULL;
+      g_object_unref (priv->stmt_find_trans);
+      priv->stmt_find_trans = NULL;
     }
 
-  if (self->priv->stmt_select_word != NULL)
+  if (priv->stmt_select_word != NULL)
     {
-      g_object_unref (self->priv->stmt_select_word);
-      self->priv->stmt_select_word = NULL;
+      g_object_unref (priv->stmt_select_word);
+      priv->stmt_select_word = NULL;
     }
 
-  if (self->priv->stmt_insert_orig != NULL)
+  if (priv->stmt_insert_orig != NULL)
     {
-      g_object_unref (self->priv->stmt_insert_orig);
-      self->priv->stmt_insert_orig = NULL;
+      g_object_unref (priv->stmt_insert_orig);
+      priv->stmt_insert_orig = NULL;
     }
 
-  if (self->priv->stmt_insert_word != NULL)
+  if (priv->stmt_insert_word != NULL)
     {
-      g_object_unref (self->priv->stmt_insert_word);
-      self->priv->stmt_insert_word = NULL;
+      g_object_unref (priv->stmt_insert_word);
+      priv->stmt_insert_word = NULL;
     }
 
-  if (self->priv->stmt_insert_link != NULL)
+  if (priv->stmt_insert_link != NULL)
     {
-      g_object_unref (self->priv->stmt_insert_link);
-      self->priv->stmt_insert_link = NULL;
+      g_object_unref (priv->stmt_insert_link);
+      priv->stmt_insert_link = NULL;
     }
 
-  if (self->priv->stmt_insert_trans != NULL)
+  if (priv->stmt_insert_trans != NULL)
     {
-      g_object_unref (self->priv->stmt_insert_trans);
-      self->priv->stmt_insert_trans = NULL;
+      g_object_unref (priv->stmt_insert_trans);
+      priv->stmt_insert_trans = NULL;
     }
 
-  if (self->priv->stmt_delete_trans != NULL)
+  if (priv->stmt_delete_trans != NULL)
     {
-      g_object_unref (self->priv->stmt_delete_trans);
-      self->priv->stmt_delete_trans = NULL;
+      g_object_unref (priv->stmt_delete_trans);
+      priv->stmt_delete_trans = NULL;
     }
 
-  if (self->priv->parser != NULL)
+  if (priv->parser != NULL)
     {
-      g_object_unref (self->priv->parser);
-      self->priv->parser = NULL;
+      g_object_unref (priv->parser);
+      priv->parser = NULL;
     }
 
-  if (self->priv->db != NULL)
+  if (priv->db != NULL)
     {
-      g_object_unref (self->priv->db);
-      self->priv->db = NULL;
+      g_object_unref (priv->db);
+      priv->db = NULL;
     }
 
-  if (self->priv->lookup_query_cache != NULL)
+  if (priv->lookup_query_cache != NULL)
     {
-      g_hash_table_unref (self->priv->lookup_query_cache);
-      self->priv->lookup_query_cache = NULL;
+      g_hash_table_unref (priv->lookup_query_cache);
+      priv->lookup_query_cache = NULL;
     }
 
   G_OBJECT_CLASS (gtr_gda_parent_class)->dispose (object);
@@ -975,8 +982,6 @@ static void
 gtr_gda_class_init (GtrGdaClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (GtrGdaPrivate));
   object_class->dispose = gtr_gda_dispose;
 }
 

@@ -39,14 +39,10 @@ G_BEGIN_DECLS
 
 typedef struct _GtrMsg        GtrMsg;
 typedef struct _GtrMsgClass   GtrMsgClass;
-typedef struct _GtrMsgPrivate GtrMsgPrivate;
 
 struct _GtrMsg
 {
   GObject parent_instance;
-
-  /*< private > */
-  GtrMsgPrivate *priv;
 };
 
 struct _GtrMsgClass

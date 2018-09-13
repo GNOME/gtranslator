@@ -29,15 +29,11 @@ G_BEGIN_DECLS
 #define GTR_IS_STATUSBAR_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_STATUSBAR))
 #define GTR_STATUSBAR_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_STATUSBAR, GtrStatusbarClass))
 typedef struct _GtrStatusbar GtrStatusbar;
-typedef struct _GtrStatusbarPrivate GtrStatusbarPrivate;
 typedef struct _GtrStatusbarClass GtrStatusbarClass;
 
 struct _GtrStatusbar
 {
   GtkBox parent;
-
-  /* <private/> */
-  GtrStatusbarPrivate *priv;
 };
 
 struct _GtrStatusbarClass

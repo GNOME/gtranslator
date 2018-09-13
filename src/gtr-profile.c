@@ -27,14 +27,7 @@
 
 #include <glib.h>
 
-#define GTR_PROFILE_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
-                                         (object), \
-                                         GTR_TYPE_PROFILE, \
-                                         GtrProfilePrivate))
-
-G_DEFINE_TYPE (GtrProfile, gtr_profile, G_TYPE_OBJECT)
-
-struct _GtrProfilePrivate
+typedef struct
 {
   /* Identify the profile */
   gchar *name;
@@ -60,28 +53,30 @@ struct _GtrProfilePrivate
 
   /* Plural forms */
   gchar *plural_forms;
-};
+} GtrProfilePrivate;
+
+G_DEFINE_TYPE_WITH_PRIVATE (GtrProfile, gtr_profile, G_TYPE_OBJECT)
 
 static void
 gtr_profile_init (GtrProfile *profile)
 {
-  profile->priv = GTR_PROFILE_GET_PRIVATE (profile);
 }
 
 static void
 gtr_profile_finalize (GObject *object)
 {
   GtrProfile *profile = GTR_PROFILE (object);
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
 
-  g_free (profile->priv->name);
-  g_free (profile->priv->author_name);
-  g_free (profile->priv->author_email);
-  g_free (profile->priv->language_name);
-  g_free (profile->priv->language_code);
-  g_free (profile->priv->charset);
-  g_free (profile->priv->encoding);
-  g_free (profile->priv->group_email);
-  g_free (profile->priv->plural_forms);
+  g_free (priv->name);
+  g_free (priv->author_name);
+  g_free (priv->author_email);
+  g_free (priv->language_name);
+  g_free (priv->language_code);
+  g_free (priv->charset);
+  g_free (priv->encoding);
+  g_free (priv->group_email);
+  g_free (priv->plural_forms);
 
   G_OBJECT_CLASS (gtr_profile_parent_class)->finalize (object);
 }
@@ -90,8 +85,6 @@ static void
 gtr_profile_class_init (GtrProfileClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (GtrProfilePrivate));
 
   object_class->finalize = gtr_profile_finalize;
 }
@@ -109,170 +102,188 @@ gtr_profile_new (void)
 const gchar *
 gtr_profile_get_name (GtrProfile *profile)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_val_if_fail (GTR_IS_PROFILE (profile), NULL);
 
-  return profile->priv->name;
+  return priv->name;
 }
 
 void
 gtr_profile_set_name (GtrProfile  *profile,
                       const gchar *data)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (profile->priv->name);
-  profile->priv->name = g_strdup (data);
+  g_free (priv->name);
+  priv->name = g_strdup (data);
 }
 
 const gchar *
 gtr_profile_get_author_name (GtrProfile *profile)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_val_if_fail (GTR_IS_PROFILE (profile), NULL);
 
-  return profile->priv->author_name;
+  return priv->author_name;
 }
 
 void
 gtr_profile_set_author_name (GtrProfile  *profile,
                              const gchar *data)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (profile->priv->author_name);
-  profile->priv->author_name = g_strdup (data);
+  g_free (priv->author_name);
+  priv->author_name = g_strdup (data);
 }
 
 const gchar *
 gtr_profile_get_author_email (GtrProfile *profile)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_val_if_fail (GTR_IS_PROFILE (profile), NULL);
 
-  return profile->priv->author_email;
+  return priv->author_email;
 }
 
 void
 gtr_profile_set_author_email (GtrProfile  *profile,
                               const gchar *data)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (profile->priv->author_email);
-  profile->priv->author_email = g_strdup (data);
+  g_free (priv->author_email);
+  priv->author_email = g_strdup (data);
 }
 
 const gchar *
 gtr_profile_get_language_name (GtrProfile *profile)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_val_if_fail (GTR_IS_PROFILE (profile), NULL);
 
-  return profile->priv->language_name;
+  return priv->language_name;
 }
 
 void
 gtr_profile_set_language_name (GtrProfile  *profile,
                                const gchar *data)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (profile->priv->language_name);
-  profile->priv->language_name = g_strdup (data);
+  g_free (priv->language_name);
+  priv->language_name = g_strdup (data);
 }
 
 const gchar *
 gtr_profile_get_language_code (GtrProfile *profile)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_val_if_fail (GTR_IS_PROFILE (profile), NULL);
 
-  return profile->priv->language_code;
+  return priv->language_code;
 }
 
 void
 gtr_profile_set_language_code (GtrProfile  *profile,
                                const gchar *data)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (profile->priv->language_code);
-  profile->priv->language_code = g_strdup (data);
+  g_free (priv->language_code);
+  priv->language_code = g_strdup (data);
 }
 
 const gchar *
 gtr_profile_get_charset (GtrProfile *profile)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_val_if_fail (GTR_IS_PROFILE (profile), NULL);
 
-  return profile->priv->charset;
+  return priv->charset;
 }
 
 void
 gtr_profile_set_charset (GtrProfile  *profile,
                          const gchar *data)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (profile->priv->charset);
-  profile->priv->charset = g_strdup (data);
+  g_free (priv->charset);
+  priv->charset = g_strdup (data);
 }
 
 const gchar *
 gtr_profile_get_encoding (GtrProfile *profile)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_val_if_fail (GTR_IS_PROFILE (profile), NULL);
 
-  return profile->priv->encoding;
+  return priv->encoding;
 }
 
 void
 gtr_profile_set_encoding (GtrProfile  *profile,
                           const gchar *data)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (profile->priv->encoding);
-  profile->priv->encoding = g_strdup (data);
+  g_free (priv->encoding);
+  priv->encoding = g_strdup (data);
 }
 
 const gchar *
 gtr_profile_get_group_email (GtrProfile *profile)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_val_if_fail (GTR_IS_PROFILE (profile), NULL);
 
-  return profile->priv->group_email;
+  return priv->group_email;
 }
 
 void
 gtr_profile_set_group_email (GtrProfile  *profile,
                              const gchar *data)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (profile->priv->group_email);
-  profile->priv->group_email = g_strdup (data);
+  g_free (priv->group_email);
+  priv->group_email = g_strdup (data);
 }
 
 const gchar *
 gtr_profile_get_plural_forms (GtrProfile *profile)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_val_if_fail (GTR_IS_PROFILE (profile), NULL);
 
-  return profile->priv->plural_forms;
+  return priv->plural_forms;
 }
 
 void
 gtr_profile_set_plural_forms (GtrProfile  *profile,
                               const gchar *data)
 {
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (profile->priv->plural_forms);
-  profile->priv->plural_forms = g_strdup (data);
+  g_free (priv->plural_forms);
+  priv->plural_forms = g_strdup (data);
 }

@@ -27,10 +27,7 @@
 
 #include "gtr-statusbar.h"
 
-#define GTR_STATUSBAR_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object),\
-					  GTR_TYPE_STATUSBAR, GtrStatusbarPrivate))
-
-struct _GtrStatusbarPrivate
+typedef struct
 {
   GtkWidget *statusbar;
   GtkWidget *progress_bar;
@@ -44,15 +41,18 @@ struct _GtrStatusbarPrivate
   guint flash_timeout;
   guint flash_context_id;
   guint flash_message_id;
-};
+} GtrStatusbarPrivate;
 
-G_DEFINE_TYPE (GtrStatusbar, gtr_statusbar, GTK_TYPE_BOX)
-     static void gtr_statusbar_finalize (GObject * object)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrStatusbar, gtr_statusbar, GTK_TYPE_BOX)
+
+static void
+gtr_statusbar_finalize (GObject * object)
 {
   GtrStatusbar *statusbar = GTR_STATUSBAR (object);
+  GtrStatusbarPrivate *priv = gtr_statusbar_get_instance_private (statusbar);
 
-  if (statusbar->priv->flash_timeout > 0)
-    g_source_remove (statusbar->priv->flash_timeout);
+  if (priv->flash_timeout > 0)
+    g_source_remove (priv->flash_timeout);
 
   G_OBJECT_CLASS (gtr_statusbar_parent_class)->finalize (object);
 }
@@ -63,8 +63,6 @@ gtr_statusbar_class_init (GtrStatusbarClass * klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = gtr_statusbar_finalize;
-
-  g_type_class_add_private (object_class, sizeof (GtrStatusbarPrivate));
 }
 
 static void
@@ -72,8 +70,7 @@ gtr_statusbar_init (GtrStatusbar * statusbar)
 {
   GtkWidget *frame;
   GtkShadowType shadow_type;
-
-  statusbar->priv = GTR_STATUSBAR_GET_PRIVATE (statusbar);
+  GtrStatusbarPrivate *priv = gtr_statusbar_get_instance_private (statusbar);
 
   gtk_orientable_set_orientation (GTK_ORIENTABLE (statusbar),
                                   GTK_ORIENTATION_HORIZONTAL);
@@ -81,50 +78,51 @@ gtr_statusbar_init (GtrStatusbar * statusbar)
   /*
    * Statusbar
    */
-  statusbar->priv->statusbar = gtk_statusbar_new ();
-  gtk_widget_show (statusbar->priv->statusbar);
-  gtk_box_pack_end (GTK_BOX (statusbar), statusbar->priv->statusbar,
+  priv->statusbar = gtk_statusbar_new ();
+  gtk_widget_show (priv->statusbar);
+  gtk_box_pack_end (GTK_BOX (statusbar), priv->statusbar,
                     TRUE, TRUE, 0);
-  statusbar->priv->default_context_id =
-    gtk_statusbar_get_context_id (GTK_STATUSBAR (statusbar->priv->statusbar),
+  priv->default_context_id =
+    gtk_statusbar_get_context_id (GTK_STATUSBAR (priv->statusbar),
                                   "default-context-id");
 
   /*
    * Progress bar
    */
-  statusbar->priv->progress_bar = gtk_progress_bar_new ();
-  gtk_progress_bar_set_show_text(GTK_PROGRESS_BAR(statusbar->priv->progress_bar), TRUE);
-  gtk_widget_show (statusbar->priv->progress_bar);
-  gtk_box_pack_start (GTK_BOX (statusbar), statusbar->priv->progress_bar,
+  priv->progress_bar = gtk_progress_bar_new ();
+  gtk_progress_bar_set_show_text(GTK_PROGRESS_BAR(priv->progress_bar), TRUE);
+  gtk_widget_show (priv->progress_bar);
+  gtk_box_pack_start (GTK_BOX (statusbar), priv->progress_bar,
                       FALSE, FALSE, 0);
 
   /*
    * Ins/Ovr stuff
    */
-  gtk_widget_style_get (GTK_WIDGET (statusbar->priv->statusbar),
+  gtk_widget_style_get (GTK_WIDGET (priv->statusbar),
                         "shadow-type", &shadow_type, NULL);
 
   frame = gtk_frame_new (NULL);
   gtk_frame_set_shadow_type (GTK_FRAME (frame), shadow_type);
   gtk_widget_show (frame);
 
-  statusbar->priv->overwrite_mode_label = gtk_label_new ("");
+  priv->overwrite_mode_label = gtk_label_new ("");
   gtk_label_set_single_line_mode (GTK_LABEL
-                                  (statusbar->priv->overwrite_mode_label),
+                                  (priv->overwrite_mode_label),
                                   TRUE);
-  gtk_misc_set_alignment (GTK_MISC (statusbar->priv->overwrite_mode_label),
-                          0.0, 0.5);
+  gtk_label_set_xalign (GTK_LABEL (priv->overwrite_mode_label), 0.0);
+  gtk_label_set_yalign (GTK_LABEL (priv->overwrite_mode_label), 0.5);
+
   gtk_label_set_width_chars (GTK_LABEL
-                             (statusbar->priv->overwrite_mode_label),
+                             (priv->overwrite_mode_label),
                              MAX (g_utf8_strlen (_("INS"), -1) + 1,
                                   g_utf8_strlen (_("OVR"), -1) + 1));
 
 
   gtk_container_add (GTK_CONTAINER (frame),
-                     statusbar->priv->overwrite_mode_label);
-  gtk_widget_show (statusbar->priv->overwrite_mode_label);
+                     priv->overwrite_mode_label);
+  gtk_widget_show (priv->overwrite_mode_label);
 
-  gtk_box_pack_start (GTK_BOX (statusbar->priv->statusbar), frame,
+  gtk_box_pack_start (GTK_BOX (priv->statusbar), frame,
                       FALSE, FALSE, 0);
 }
 
@@ -151,10 +149,11 @@ gtr_statusbar_new (void)
 void
 gtr_statusbar_push_default (GtrStatusbar * statusbar, const gchar * text)
 {
+  GtrStatusbarPrivate *priv = gtr_statusbar_get_instance_private (statusbar);
   g_return_if_fail (GTR_IS_STATUSBAR (statusbar));
 
-  gtk_statusbar_push (GTK_STATUSBAR (statusbar->priv->statusbar),
-                      statusbar->priv->default_context_id, text);
+  gtk_statusbar_push (GTK_STATUSBAR (priv->statusbar),
+                      priv->default_context_id, text);
 }
 
 /**
@@ -166,10 +165,11 @@ gtr_statusbar_push_default (GtrStatusbar * statusbar, const gchar * text)
 void
 gtr_statusbar_pop_default (GtrStatusbar * statusbar)
 {
+  GtrStatusbarPrivate *priv = gtr_statusbar_get_instance_private (statusbar);
   g_return_if_fail (GTR_IS_STATUSBAR (statusbar));
 
-  gtk_statusbar_pop (GTK_STATUSBAR (statusbar->priv->statusbar),
-                     statusbar->priv->default_context_id);
+  gtk_statusbar_pop (GTK_STATUSBAR (priv->statusbar),
+                     priv->default_context_id);
 }
 
 /**
@@ -186,9 +186,10 @@ guint
 gtr_statusbar_push (GtrStatusbar * statusbar,
                     guint context_id, const gchar * text)
 {
+  GtrStatusbarPrivate *priv = gtr_statusbar_get_instance_private (statusbar);
   g_return_val_if_fail (GTR_IS_STATUSBAR (statusbar), 0);
 
-  return gtk_statusbar_push (GTK_STATUSBAR (statusbar->priv->statusbar),
+  return gtk_statusbar_push (GTK_STATUSBAR (priv->statusbar),
                              context_id, text);
 }
 
@@ -202,9 +203,10 @@ gtr_statusbar_push (GtrStatusbar * statusbar,
 void
 gtr_statusbar_pop (GtrStatusbar * statusbar, guint context_id)
 {
+  GtrStatusbarPrivate *priv = gtr_statusbar_get_instance_private (statusbar);
   g_return_if_fail (GTR_IS_STATUSBAR (statusbar));
 
-  gtk_statusbar_pop (GTK_STATUSBAR (statusbar->priv->statusbar), context_id);
+  gtk_statusbar_pop (GTK_STATUSBAR (priv->statusbar), context_id);
 }
 
 /**
@@ -221,8 +223,9 @@ guint
 gtr_statusbar_get_context_id (GtrStatusbar * statusbar,
                               const gchar * context_description)
 {
+  GtrStatusbarPrivate *priv = gtr_statusbar_get_instance_private (statusbar);
   return
-    gtk_statusbar_get_context_id (GTK_STATUSBAR (statusbar->priv->statusbar),
+    gtk_statusbar_get_context_id (GTK_STATUSBAR (priv->statusbar),
                                   context_description);
 }
 
@@ -236,15 +239,16 @@ gtr_statusbar_get_context_id (GtrStatusbar * statusbar,
 void
 gtr_statusbar_set_overwrite (GtrStatusbar * statusbar, gboolean overwrite)
 {
+  GtrStatusbarPrivate *priv = gtr_statusbar_get_instance_private (statusbar);
   g_return_if_fail (GTR_IS_STATUSBAR (statusbar));
 
   if (overwrite)
     /* Translators: Overwrite mode */
-    gtk_label_set_text (GTK_LABEL (statusbar->priv->overwrite_mode_label),
+    gtk_label_set_text (GTK_LABEL (priv->overwrite_mode_label),
                         _("OVR"));
   /* Translators: Insert mode */
   else
-    gtk_label_set_text (GTK_LABEL (statusbar->priv->overwrite_mode_label),
+    gtk_label_set_text (GTK_LABEL (priv->overwrite_mode_label),
                         _("INS"));
 }
 
@@ -257,20 +261,22 @@ gtr_statusbar_set_overwrite (GtrStatusbar * statusbar, gboolean overwrite)
 void
 gtr_statusbar_clear_overwrite (GtrStatusbar * statusbar)
 {
+  GtrStatusbarPrivate *priv = gtr_statusbar_get_instance_private (statusbar);
   g_return_if_fail (GTR_IS_STATUSBAR (statusbar));
 
-  gtk_label_set_text (GTK_LABEL (statusbar->priv->overwrite_mode_label), "");
+  gtk_label_set_text (GTK_LABEL (priv->overwrite_mode_label), "");
 }
 
 static gboolean
 remove_message_timeout (GtrStatusbar * statusbar)
 {
-  gtk_statusbar_remove (GTK_STATUSBAR (statusbar->priv->statusbar),
-                        statusbar->priv->flash_context_id,
-                        statusbar->priv->flash_message_id);
+  GtrStatusbarPrivate *priv = gtr_statusbar_get_instance_private (statusbar);
+  gtk_statusbar_remove (GTK_STATUSBAR (priv->statusbar),
+                        priv->flash_context_id,
+                        priv->flash_message_id);
 
   /* remove the timeout */
-  statusbar->priv->flash_timeout = 0;
+  priv->flash_timeout = 0;
   return FALSE;
 }
 
@@ -286,6 +292,7 @@ void
 gtr_statusbar_flash_message (GtrStatusbar * statusbar,
                              guint context_id, const gchar * format, ...)
 {
+  GtrStatusbarPrivate *priv = gtr_statusbar_get_instance_private (statusbar);
   const guint32 flash_length = 3000;    /* three seconds */
   va_list args;
   gchar *msg;
@@ -298,22 +305,22 @@ gtr_statusbar_flash_message (GtrStatusbar * statusbar,
   va_end (args);
 
   /* remove a currently ongoing flash message */
-  if (statusbar->priv->flash_timeout > 0)
+  if (priv->flash_timeout > 0)
     {
-      g_source_remove (statusbar->priv->flash_timeout);
-      statusbar->priv->flash_timeout = 0;
+      g_source_remove (priv->flash_timeout);
+      priv->flash_timeout = 0;
 
-      gtk_statusbar_remove (GTK_STATUSBAR (statusbar->priv->statusbar),
-                            statusbar->priv->flash_context_id,
-                            statusbar->priv->flash_message_id);
+      gtk_statusbar_remove (GTK_STATUSBAR (priv->statusbar),
+                            priv->flash_context_id,
+                            priv->flash_message_id);
     }
 
-  statusbar->priv->flash_context_id = context_id;
-  statusbar->priv->flash_message_id =
-    gtk_statusbar_push (GTK_STATUSBAR (statusbar->priv->statusbar),
+  priv->flash_context_id = context_id;
+  priv->flash_message_id =
+    gtk_statusbar_push (GTK_STATUSBAR (priv->statusbar),
                         context_id, msg);
 
-  statusbar->priv->flash_timeout = g_timeout_add (flash_length,
+  priv->flash_timeout = g_timeout_add (flash_length,
                                                   (GSourceFunc) remove_message_timeout,
                                                   statusbar);
 
@@ -333,6 +340,7 @@ gtr_statusbar_update_progress_bar (GtrStatusbar * statusbar,
                                    gdouble translated_count,
                                    gdouble messages_count)
 {
+  GtrStatusbarPrivate *priv = gtr_statusbar_get_instance_private (statusbar);
   gdouble percentage;
 
   g_return_if_fail (GTR_IS_STATUSBAR (statusbar));
@@ -351,13 +359,13 @@ gtr_statusbar_update_progress_bar (GtrStatusbar * statusbar,
 
       /* Set the progressbar status */
       gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR
-                                     (statusbar->priv->progress_bar),
+                                     (priv->progress_bar),
                                      percentage);
 
       percentage_str = g_strdup_printf ("%.2f%%", percentage * 100);
 
       gtk_progress_bar_set_text (GTK_PROGRESS_BAR
-                                 (statusbar->priv->progress_bar),
+                                 (priv->progress_bar),
                                  percentage_str);
       g_free (percentage_str);
     }
@@ -372,6 +380,7 @@ gtr_statusbar_update_progress_bar (GtrStatusbar * statusbar,
 void
 gtr_statusbar_clear_progress_bar (GtrStatusbar * statusbar)
 {
+  GtrStatusbarPrivate *priv = gtr_statusbar_get_instance_private (statusbar);
   gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR
-                                 (statusbar->priv->progress_bar), 0.0);
+                                 (priv->progress_bar), 0.0);
 }

@@ -35,14 +35,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#define GTR_PROFILE_DIALOG_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
-                                                 (object), \
-                                                 GTR_TYPE_PROFILE_DIALOG, \
-                                                 GtrProfileDialogPrivate))
-
-G_DEFINE_TYPE (GtrProfileDialog, gtr_profile_dialog, GTK_TYPE_DIALOG)
-
-struct _GtrProfileDialogPrivate
+typedef struct
 {
   GtkWidget *main_box;
 
@@ -52,19 +45,19 @@ struct _GtrProfileDialogPrivate
   GtkWidget *author_email;
 
   GtkWidget *languages_fetcher;
-};
+} GtrProfileDialogPrivate;
+
+G_DEFINE_TYPE_WITH_PRIVATE (GtrProfileDialog, gtr_profile_dialog, GTK_TYPE_DIALOG)
 
 static void
 gtr_profile_dialog_class_init (GtrProfileDialogClass *klass)
 {
-  g_type_class_add_private (klass, sizeof (GtrProfileDialogPrivate));
 }
 
 static void
 gtr_profile_dialog_init (GtrProfileDialog *dlg)
 {
-  GtrProfileDialogPrivate *priv;
-  GtkWidget *action_area;
+  GtrProfileDialogPrivate *priv = gtr_profile_dialog_get_instance_private (dlg);
   GtkBox *content_area;
   GtkWidget *fetcher_box;
   GtkBuilder *builder;
@@ -73,25 +66,19 @@ gtr_profile_dialog_init (GtrProfileDialog *dlg)
     NULL
   };
 
-  dlg->priv = GTR_PROFILE_DIALOG_GET_PRIVATE (dlg);
-  priv = dlg->priv;
-
   gtk_dialog_add_button (GTK_DIALOG (dlg),
-                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+                         _("_Cancel"), GTK_RESPONSE_CANCEL);
 
   gtk_window_set_title (GTK_WINDOW (dlg), _("Gtranslator Profile"));
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
   gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
-  action_area = gtk_dialog_get_action_area (GTK_DIALOG (dlg));
   content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
 
   /* HIG defaults */
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
   gtk_box_set_spacing (content_area, 2); /* 2 * 5 + 2 = 12 */
-  gtk_container_set_border_width (GTK_CONTAINER (action_area), 5);
-  gtk_box_set_spacing (GTK_BOX (action_area), 4);
 
   builder = gtk_builder_new ();
   GError *error = NULL;
@@ -111,7 +98,7 @@ gtr_profile_dialog_init (GtrProfileDialog *dlg)
 
   gtk_box_pack_start (content_area, priv->main_box, FALSE, FALSE, 0);
 
-  dlg->priv->languages_fetcher = gtr_languages_fetcher_new ();
+  priv->languages_fetcher = gtr_languages_fetcher_new ();
   gtk_widget_show (priv->languages_fetcher);
   gtk_box_pack_start (GTK_BOX (fetcher_box), priv->languages_fetcher,
                       TRUE, TRUE, 0);
@@ -120,40 +107,41 @@ gtr_profile_dialog_init (GtrProfileDialog *dlg)
 static void
 fill_entries (GtrProfileDialog *dlg, GtrProfile *profile)
 {
+  GtrProfileDialogPrivate *priv = gtr_profile_dialog_get_instance_private (dlg);
   if (gtr_profile_get_name (profile) != NULL)
-    gtk_entry_set_text (GTK_ENTRY (dlg->priv->profile_name),
+    gtk_entry_set_text (GTK_ENTRY (priv->profile_name),
                         gtr_profile_get_name (profile));
 
   if (gtr_profile_get_author_name (profile) != NULL)
-    gtk_entry_set_text (GTK_ENTRY (dlg->priv->author_name),
+    gtk_entry_set_text (GTK_ENTRY (priv->author_name),
                         gtr_profile_get_author_name (profile));
 
   if (gtr_profile_get_author_email (profile) != NULL)
-    gtk_entry_set_text (GTK_ENTRY (dlg->priv->author_email),
+    gtk_entry_set_text (GTK_ENTRY (priv->author_email),
                         gtr_profile_get_author_email (profile));
 
   if (gtr_profile_get_language_name (profile) != NULL)
-    gtr_languages_fetcher_set_language_name (GTR_LANGUAGES_FETCHER (dlg->priv->languages_fetcher),
+    gtr_languages_fetcher_set_language_name (GTR_LANGUAGES_FETCHER (priv->languages_fetcher),
                                              gtr_profile_get_language_name (profile));
 
   if (gtr_profile_get_language_code (profile) != NULL)
-    gtr_languages_fetcher_set_language_code (GTR_LANGUAGES_FETCHER (dlg->priv->languages_fetcher),
+    gtr_languages_fetcher_set_language_code (GTR_LANGUAGES_FETCHER (priv->languages_fetcher),
                                              gtr_profile_get_language_code (profile));
 
   if (gtr_profile_get_charset (profile) != NULL)
-    gtr_languages_fetcher_set_charset (GTR_LANGUAGES_FETCHER (dlg->priv->languages_fetcher),
+    gtr_languages_fetcher_set_charset (GTR_LANGUAGES_FETCHER (priv->languages_fetcher),
                                        gtr_profile_get_charset (profile));
 
   if (gtr_profile_get_encoding (profile) != NULL)
-    gtr_languages_fetcher_set_encoding (GTR_LANGUAGES_FETCHER (dlg->priv->languages_fetcher),
+    gtr_languages_fetcher_set_encoding (GTR_LANGUAGES_FETCHER (priv->languages_fetcher),
                                         gtr_profile_get_encoding (profile));
 
   if (gtr_profile_get_group_email (profile) != NULL)
-    gtr_languages_fetcher_set_team_email (GTR_LANGUAGES_FETCHER (dlg->priv->languages_fetcher),
+    gtr_languages_fetcher_set_team_email (GTR_LANGUAGES_FETCHER (priv->languages_fetcher),
                                           gtr_profile_get_group_email (profile));
 
   if (gtr_profile_get_plural_forms (profile) != NULL)
-    gtr_languages_fetcher_set_plural_form (GTR_LANGUAGES_FETCHER (dlg->priv->languages_fetcher),
+    gtr_languages_fetcher_set_plural_form (GTR_LANGUAGES_FETCHER (priv->languages_fetcher),
                                            gtr_profile_get_plural_forms (profile));
 }
 
@@ -172,12 +160,12 @@ gtr_profile_dialog_new (GtkWidget  *parent,
       /* We distinguish in the preferences dialog if we are modifying
          or adding a new profile depending on the response */
       gtk_dialog_add_button (GTK_DIALOG (dlg),
-                             GTK_STOCK_OK, GTK_RESPONSE_YES);
+                             _("_OK"), GTK_RESPONSE_YES);
     }
   else
     {
       gtk_dialog_add_button (GTK_DIALOG (dlg),
-                             GTK_STOCK_OK, GTK_RESPONSE_ACCEPT);
+                             _("_OK"), GTK_RESPONSE_ACCEPT);
     }
 
   if (GTK_WINDOW (parent) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
@@ -192,37 +180,38 @@ GtrProfile *
 gtr_profile_dialog_get_profile (GtrProfileDialog *dlg)
 {
   GtrProfile *profile;
+  GtrProfileDialogPrivate *priv = gtr_profile_dialog_get_instance_private (dlg);
 
   g_return_val_if_fail (GTR_IS_PROFILE_DIALOG (dlg), NULL);
 
   profile = gtr_profile_new ();
 
   gtr_profile_set_name (profile,
-                        gtk_entry_get_text (GTK_ENTRY (dlg->priv->profile_name)));
+                        gtk_entry_get_text (GTK_ENTRY (priv->profile_name)));
 
   gtr_profile_set_author_name (profile,
-                               gtk_entry_get_text (GTK_ENTRY (dlg->priv->author_name)));
+                               gtk_entry_get_text (GTK_ENTRY (priv->author_name)));
 
   gtr_profile_set_author_email (profile,
-                                gtk_entry_get_text (GTK_ENTRY (dlg->priv->author_email)));
+                                gtk_entry_get_text (GTK_ENTRY (priv->author_email)));
 
   gtr_profile_set_language_name (profile,
-                                 gtr_languages_fetcher_get_language_name (GTR_LANGUAGES_FETCHER (dlg->priv->languages_fetcher)));
+                                 gtr_languages_fetcher_get_language_name (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
 
   gtr_profile_set_language_code (profile,
-                                 gtr_languages_fetcher_get_language_code (GTR_LANGUAGES_FETCHER (dlg->priv->languages_fetcher)));
+                                 gtr_languages_fetcher_get_language_code (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
 
   gtr_profile_set_charset (profile,
-                           gtr_languages_fetcher_get_charset (GTR_LANGUAGES_FETCHER (dlg->priv->languages_fetcher)));
+                           gtr_languages_fetcher_get_charset (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
 
   gtr_profile_set_encoding (profile,
-                            gtr_languages_fetcher_get_encoding (GTR_LANGUAGES_FETCHER (dlg->priv->languages_fetcher)));
+                            gtr_languages_fetcher_get_encoding (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
 
   gtr_profile_set_group_email (profile,
-                               gtr_languages_fetcher_get_team_email (GTR_LANGUAGES_FETCHER (dlg->priv->languages_fetcher)));
+                               gtr_languages_fetcher_get_team_email (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
 
   gtr_profile_set_plural_forms (profile,
-                                gtr_languages_fetcher_get_plural_form (GTR_LANGUAGES_FETCHER (dlg->priv->languages_fetcher)));
+                                gtr_languages_fetcher_get_plural_form (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
 
   return profile;
 }

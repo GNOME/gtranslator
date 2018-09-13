@@ -36,14 +36,10 @@ G_BEGIN_DECLS
 
 typedef struct _GtrTranslationMemoryUi        GtrTranslationMemoryUi;
 typedef struct _GtrTranslationMemoryUiClass   GtrTranslationMemoryUiClass;
-typedef struct _GtrTranslationMemoryUiPrivate GtrTranslationMemoryUiPrivate;
 
 struct _GtrTranslationMemoryUi
 {
   GtkScrolledWindow parent_instance;
-
-  /*< private > */
-  GtrTranslationMemoryUiPrivate *priv;
 };
 
 struct _GtrTranslationMemoryUiClass

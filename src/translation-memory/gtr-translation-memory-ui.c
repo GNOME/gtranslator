@@ -40,14 +40,7 @@
 
 #define MAX_ELEMENTS 9
 
-#define GTR_TRANSLATION_MEMORY_UI_GET_PRIVATE(object)           \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((object),                       \
-                                GTR_TYPE_TRANSLATION_MEMORY_UI, \
-                                GtrTranslationMemoryUiPrivate))
-
-G_DEFINE_TYPE (GtrTranslationMemoryUi, gtr_translation_memory_ui, GTK_TYPE_SCROLLED_WINDOW)
-
-struct _GtrTranslationMemoryUiPrivate
+typedef struct
 {
   GtrTranslationMemory *translation_memory;
   GtkWidget *tree_view;
@@ -58,7 +51,10 @@ struct _GtrTranslationMemoryUiPrivate
 
   GtkWidget *popup_menu;
   GtrMsg *msg;
-};
+} GtrTranslationMemoryUiPrivate;
+
+
+G_DEFINE_TYPE_WITH_PRIVATE (GtrTranslationMemoryUi, gtr_translation_memory_ui, GTK_TYPE_SCROLLED_WINDOW)
 
 enum
 {
@@ -81,11 +77,12 @@ choose_translation (GtrTranslationMemoryUi *tm_ui, const gchar *translation)
   GtrPo *po;
   GList *current_msg = NULL;
   GtrMsg *msg;
+  GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (tm_ui);
 
-  view = gtr_tab_get_active_view (tm_ui->priv->tab);
+  view = gtr_tab_get_active_view (priv->tab);
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
-  po = gtr_tab_get_po (tm_ui->priv->tab);
+  po = gtr_tab_get_po (priv->tab);
   current_msg = gtr_po_get_current_message (po);
 
   msg = GTR_MSG (current_msg->data);
@@ -97,19 +94,6 @@ choose_translation (GtrTranslationMemoryUi *tm_ui, const gchar *translation)
   gtk_text_buffer_end_user_action (buffer);
 
   gtr_po_set_state (po, GTR_PO_STATE_MODIFIED);
-}
-
-static void
-on_activate_item_cb (GtkMenuItem            *menuitem,
-                     GtrTranslationMemoryUi *tm_ui)
-{
-  gint index;
-
-  /* Possible this hack is not going to work with all languages neither, we
-     are supposing the integer at the end of the string */
-  index = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menuitem), "option"));
-
-  choose_translation (tm_ui, tm_ui->priv->tm_list[index]);
 }
 
 static void
@@ -129,45 +113,38 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
   GtkTreeViewColumn *level_column;
   const gchar *msgid;
   gint i;
-  gint j;
   GList *tm_list = NULL;
   GList *l = NULL;
   GList *renderers_list = NULL;
-  GtkWidget *tm_item;
-  GtkWidget *tm_menu;
-  GtkWidget *items_menu;
-  GtkWidget *window;
-  gchar *item_name;
+  GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (tm_ui);
 
-  model = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (tm_ui->priv->tree_view)));
+  model = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (priv->tree_view)));
 
-  window = gtk_widget_get_toplevel (GTK_WIDGET (tm_ui));
-
-  g_signal_connect (tm_ui->priv->tree_view,
+  g_signal_connect (priv->tree_view,
                     "size_allocate",
-                    G_CALLBACK (tree_view_size_cb), tm_ui->priv->tree_view);
+                    G_CALLBACK (tree_view_size_cb), priv->tree_view);
 
-  if (tm_ui->priv->msg)
-    g_object_unref (tm_ui->priv->msg);
-  tm_ui->priv->msg = g_object_ref (msg);
+  if (priv->msg)
+    g_object_unref (priv->msg);
+  priv->msg = g_object_ref (msg);
 
   msgid = gtr_msg_get_msgid (msg);
 
-  tm_list = gtr_translation_memory_lookup (tm_ui->priv->translation_memory, msgid);
-  g_strfreev (tm_ui->priv->tm_list);
+  tm_list = gtr_translation_memory_lookup (priv->translation_memory, msgid);
+  g_strfreev (priv->tm_list);
 
   gtk_list_store_clear (model);
-  tm_ui->priv->tm_list = g_new (gchar *, MAX_ELEMENTS + 1);
-  tm_ui->priv->tm_list_id = g_new (gint, MAX_ELEMENTS + 1);
+  priv->tm_list = g_new (gchar *, MAX_ELEMENTS + 1);
+  priv->tm_list_id = g_new (gint, MAX_ELEMENTS + 1);
 
   i = 0;
   for (l = tm_list; l && i < MAX_ELEMENTS; l = l->next)
     {
       GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) l->data;
 
-      tm_ui->priv->tm_list_id[i] = match->id;
-      tm_ui->priv->tm_list[i] = g_strdup (match->match);
-      level_column = gtk_tree_view_get_column (GTK_TREE_VIEW (tm_ui->priv->tree_view), 0);
+      priv->tm_list_id[i] = match->id;
+      priv->tm_list[i] = g_strdup (match->match);
+      level_column = gtk_tree_view_get_column (GTK_TREE_VIEW (priv->tree_view), 0);
       renderers_list = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (level_column));
 
       g_object_set (renderers_list->data,
@@ -184,7 +161,7 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
     }
 
   /* Ensure last element is NULL */
-  tm_ui->priv->tm_list[i] = NULL;
+  priv->tm_list[i] = NULL;
 
   g_list_free_full (tm_list, free_match);
 }
@@ -221,8 +198,9 @@ popup_menu_translation_activate (GtkMenuItem *menuitem,
   GtkTreeModel *model;
   GtkTreeIter iter;
   gchar *translation;
+  GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (tm_ui);
 
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tm_ui->priv->tree_view));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->tree_view));
   if (!selection || !gtk_tree_selection_get_selected (selection, &model, &iter))
     return;
 
@@ -244,8 +222,9 @@ popup_menu_remove_from_memory (GtkMenuItem *menuitem,
   GtkTreeIter iter;
   gint i;
   gchar *translation;
+  GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (tm_ui);
 
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tm_ui->priv->tree_view));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->tree_view));
   if (!selection || !gtk_tree_selection_get_selected (selection, &model, &iter))
     return;
 
@@ -253,27 +232,23 @@ popup_menu_remove_from_memory (GtkMenuItem *menuitem,
                       STRING_COLUMN, &translation,
                       -1);
 
-  for (i = 0; tm_ui->priv->tm_list[i]; i++)
-    if (!strcmp (tm_ui->priv->tm_list[i], translation))
+  for (i = 0; priv->tm_list[i]; i++)
+    if (!strcmp (priv->tm_list[i], translation))
       break;
 
-  gtr_translation_memory_remove (tm_ui->priv->translation_memory, tm_ui->priv->tm_list_id[i]);
+  gtr_translation_memory_remove (priv->translation_memory, priv->tm_list_id[i]);
 
   g_free (translation);
 
   /* update list */
-  showed_message_cb (tm_ui->priv->tab, tm_ui->priv->msg, tm_ui);
+  showed_message_cb (priv->tab, priv->msg, tm_ui);
 }
 
 static GtkWidget *
 create_tree_popup_menu (GtrTranslationMemoryUi *self)
 {
-  GtkTreeSelection *selection;
   GtkWidget *menu;
   GtkWidget *item;
-  GtkWidget *image;
-
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->priv->tree_view));
 
   menu = gtk_menu_new ();
 
@@ -282,9 +257,7 @@ create_tree_popup_menu (GtrTranslationMemoryUi *self)
                     G_CALLBACK (popup_menu_translation_activate), self);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
-  item = gtk_image_menu_item_new_with_mnemonic (_("_Remove"));
-  image = gtk_image_new_from_stock (GTK_STOCK_DELETE, GTK_ICON_SIZE_MENU);
-  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
+  item = gtk_menu_item_new_with_mnemonic (_("_Remove"));
   g_signal_connect (item, "activate",
                     G_CALLBACK (popup_menu_remove_from_memory), self);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
@@ -298,31 +271,31 @@ create_tree_popup_menu (GtrTranslationMemoryUi *self)
 static void
 tree_popup_menu_detach (GtrTranslationMemoryUi *self, GtkMenu * menu)
 {
-  self->priv->popup_menu = NULL;
+  GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (self);
+  priv->popup_menu = NULL;
 }
 
 static void
 gtr_translation_memory_ui_show_menu (GtrTranslationMemoryUi *self,
                                      GdkEventButton * event)
 {
-  if (self->priv->popup_menu)
-    gtk_widget_destroy (self->priv->popup_menu);
+  GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (self);
+  if (priv->popup_menu)
+    gtk_widget_destroy (priv->popup_menu);
 
-  self->priv->popup_menu = create_tree_popup_menu (self);
+  priv->popup_menu = create_tree_popup_menu (self);
 
-  gtk_menu_attach_to_widget (GTK_MENU (self->priv->popup_menu),
+  gtk_menu_attach_to_widget (GTK_MENU (priv->popup_menu),
                              GTK_WIDGET (self),
                              (GtkMenuDetachFunc) tree_popup_menu_detach);
 
   if (event != NULL)
-    gtk_menu_popup (GTK_MENU (self->priv->popup_menu), NULL, NULL,
-                    NULL, NULL,
-                    event->button, event->time);
+    gtk_menu_popup_at_pointer (GTK_MENU (priv->popup_menu), (GdkEvent*)event);
   else
-    gtk_menu_popup (GTK_MENU (self->priv->popup_menu), NULL, NULL,
-                    gtr_utils_menu_position_under_tree_view,
-                    self->priv->tree_view,
-                    0, gtk_get_current_event_time ());
+    {
+      GdkEvent *ev = gtk_get_current_event ();
+      gtk_menu_popup_at_pointer (GTK_MENU (priv->popup_menu), ev);
+    }
 }
 
 static void
@@ -378,16 +351,14 @@ tree_view_popup_menu (GtkTreeView *tree, GtrTranslationMemoryUi *tm_ui)
 static void
 gtr_translation_memory_ui_init (GtrTranslationMemoryUi * tm_ui)
 {
-  GtrTranslationMemoryUiPrivate *priv;
   GtkListStore *model;
   GtkCellRenderer *level_renderer, *string_renderer, *shortcut_renderer;
   GtkTreeViewColumn *shortcut, *string, *level;
+  GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (tm_ui);
 
-  tm_ui->priv = GTR_TRANSLATION_MEMORY_UI_GET_PRIVATE (tm_ui);
-  priv = tm_ui->priv;
-  tm_ui->priv->tm_list = NULL;
-  tm_ui->priv->popup_menu = NULL;
-  tm_ui->priv->msg = NULL;
+  priv->tm_list = NULL;
+  priv->popup_menu = NULL;
+  priv->msg = NULL;
 
   priv->tree_view = gtk_tree_view_new ();
   gtk_widget_show (priv->tree_view);
@@ -444,10 +415,11 @@ static void
 gtr_translation_memory_ui_dispose (GObject * object)
 {
   GtrTranslationMemoryUi *tm_ui = GTR_TRANSLATION_MEMORY_UI (object);
+  GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (tm_ui);
 
   DEBUG_PRINT ("Dispose translation memory ui");
 
-  g_clear_object (&tm_ui->priv->msg);
+  g_clear_object (&priv->msg);
 
   G_OBJECT_CLASS (gtr_translation_memory_ui_parent_class)->dispose (object);
 }
@@ -456,10 +428,11 @@ static void
 gtr_translation_memory_ui_finalize (GObject * object)
 {
   GtrTranslationMemoryUi *tm_ui = GTR_TRANSLATION_MEMORY_UI (object);
+  GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (tm_ui);
 
   DEBUG_PRINT ("Finalize translation memory ui");
 
-  g_strfreev (tm_ui->priv->tm_list);
+  g_strfreev (priv->tm_list);
 
   G_OBJECT_CLASS (gtr_translation_memory_ui_parent_class)->finalize (object);
 }
@@ -468,8 +441,6 @@ static void
 gtr_translation_memory_ui_class_init (GtrTranslationMemoryUiClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (GtrTranslationMemoryUiPrivate));
 
   object_class->dispose = gtr_translation_memory_ui_dispose;
   object_class->finalize = gtr_translation_memory_ui_finalize;
@@ -480,16 +451,18 @@ gtr_translation_memory_ui_new (GtkWidget *tab,
                                GtrTranslationMemory *translation_memory)
 {
   GtrTranslationMemoryUi *tm_ui;
+  GtrTranslationMemoryUiPrivate *priv;
   tm_ui = g_object_new (GTR_TYPE_TRANSLATION_MEMORY_UI, NULL);
 
-  tm_ui->priv->tab = GTR_TAB (tab);
-  tm_ui->priv->translation_memory = translation_memory;
+  priv = gtr_translation_memory_ui_get_instance_private (tm_ui);
+  priv->tab = GTR_TAB (tab);
+  priv->translation_memory = translation_memory;
 
   g_signal_connect (tab,
                     "showed-message", G_CALLBACK (showed_message_cb), tm_ui);
 
   /* Scrolledwindow needs to be realized to add a widget */
-  gtk_container_add (GTK_CONTAINER (tm_ui), tm_ui->priv->tree_view);
+  gtk_container_add (GTK_CONTAINER (tm_ui), priv->tree_view);
 
   return GTK_WIDGET (tm_ui);
 }

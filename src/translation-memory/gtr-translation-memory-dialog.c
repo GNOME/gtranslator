@@ -23,9 +23,7 @@
 #include <glib/gi18n.h>
 
 
-#define GTR_TRANSLATION_MEMORY_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GTR_TYPE_TRANSLATION_MEMORY_DIALOG, GtrTranslationMemoryDialogPrivate))
-
-struct _GtrTranslationMemoryDialogPrivate
+typedef struct
 {
   GSettings *tm_settings;
 
@@ -37,9 +35,9 @@ struct _GtrTranslationMemoryDialogPrivate
   GtkWidget *use_lang_profile_in_tm;
 
   GtrTranslationMemory *translation_memory;
-};
+} GtrTranslationMemoryDialogPrivate;
 
-G_DEFINE_TYPE (GtrTranslationMemoryDialog, gtr_translation_memory_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrTranslationMemoryDialog, gtr_translation_memory_dialog, GTK_TYPE_DIALOG)
 
 static void
 gtr_translation_memory_dialog_finalize (GObject *object)
@@ -50,7 +48,8 @@ gtr_translation_memory_dialog_finalize (GObject *object)
 static void
 gtr_translation_memory_dialog_dispose (GObject *object)
 {
-  GtrTranslationMemoryDialogPrivate *priv = GTR_TRANSLATION_MEMORY_DIALOG (object)->priv;
+  GtrTranslationMemoryDialog *dlg = GTR_TRANSLATION_MEMORY_DIALOG (object);
+  GtrTranslationMemoryDialogPrivate *priv = gtr_translation_memory_dialog_get_instance_private (dlg);
 
   g_clear_object (&priv->tm_settings);
 
@@ -64,8 +63,6 @@ gtr_translation_memory_dialog_class_init (GtrTranslationMemoryDialogClass *klass
 
   object_class->finalize = gtr_translation_memory_dialog_finalize;
   object_class->dispose = gtr_translation_memory_dialog_dispose;
-
-  g_type_class_add_private (object_class, sizeof (GtrTranslationMemoryDialogPrivate));
 }
 
 /***************Translation Memory pages****************/
@@ -74,14 +71,16 @@ response_filechooser_cb (GtkDialog                  *dialog,
                          gint                        response_id,
                          GtrTranslationMemoryDialog *dlg)
 {
+  GtrTranslationMemoryDialogPrivate *priv = gtr_translation_memory_dialog_get_instance_private (dlg);
+
   if (response_id == GTK_RESPONSE_YES)
     {
       gchar *filename;
 
       filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-      gtk_entry_set_text (GTK_ENTRY (dlg->priv->directory_entry),
+      gtk_entry_set_text (GTK_ENTRY (priv->directory_entry),
                           filename);
-      g_settings_set_string (dlg->priv->tm_settings,
+      g_settings_set_string (priv->tm_settings,
                              "po-directory",
                              filename);
       g_free (filename);
@@ -99,9 +98,9 @@ on_search_button_clicked (GtkButton                  *button,
   filechooser = gtk_file_chooser_dialog_new ("Select PO directory",
                                              GTK_WINDOW (dlg),
                                              GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-                                             GTK_STOCK_CANCEL,
+                                             _("_Cancel"),
                                              GTK_RESPONSE_CANCEL,
-                                             GTK_STOCK_OK,
+                                             _("_OK"),
                                              GTK_RESPONSE_YES, NULL);
 
   g_signal_connect (GTK_DIALOG (filechooser), "response",
@@ -209,8 +208,9 @@ on_add_database_button_clicked (GtkButton                  *button,
   GFile *dir;
   gchar *dir_name;
   IdleData *data;
+  GtrTranslationMemoryDialogPrivate *priv = gtr_translation_memory_dialog_get_instance_private (dlg);
 
-  dir_name = g_settings_get_string (dlg->priv->tm_settings,
+  dir_name = g_settings_get_string (priv->tm_settings,
                                     "po-directory");
 
   /* If dir name is empty, show a warning message */
@@ -236,12 +236,12 @@ on_add_database_button_clicked (GtkButton                  *button,
   data = g_new0 (IdleData, 1);
   data->list = NULL;
 
-  if (g_settings_get_boolean (dlg->priv->tm_settings,
+  if (g_settings_get_boolean (priv->tm_settings,
                               "restrict-to-filename"))
     {
       gchar *restriction;
 
-      restriction = g_settings_get_string (dlg->priv->tm_settings,
+      restriction = g_settings_get_string (priv->tm_settings,
                                            "filename-restriction");
       gtr_scan_dir (dir, &data->list, restriction);
       g_free (restriction);
@@ -249,11 +249,11 @@ on_add_database_button_clicked (GtkButton                  *button,
   else
     gtr_scan_dir (dir, &data->list, NULL);
 
-  data->tm = dlg->priv->translation_memory;
-  data->progress = GTK_PROGRESS_BAR (dlg->priv->add_database_progressbar);
+  data->tm = priv->translation_memory;
+  data->progress = GTK_PROGRESS_BAR (priv->add_database_progressbar);
   data->parent = GTK_WINDOW (dlg);
 
-  gtk_widget_show (dlg->priv->add_database_progressbar);
+  gtk_widget_show (priv->add_database_progressbar);
   g_idle_add_full (G_PRIORITY_HIGH_IDLE + 30,
                    (GSourceFunc) add_to_database,
                    data, (GDestroyNotify) destroy_idle_data);
@@ -264,8 +264,7 @@ on_add_database_button_clicked (GtkButton                  *button,
 static void
 gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
 {
-  GtrTranslationMemoryDialogPrivate *priv;
-  GtkWidget *action_area;
+  GtrTranslationMemoryDialogPrivate *priv = gtr_translation_memory_dialog_get_instance_private (dlg);
   GtkWidget *content_area;
   GtkBuilder *builder;
   GtkWidget *content;
@@ -278,13 +277,10 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
     NULL
   };
 
-  dlg->priv = GTR_TRANSLATION_MEMORY_DIALOG_GET_PRIVATE (dlg);
-  priv = dlg->priv;
-
   priv->tm_settings = g_settings_new ("org.gnome.gtranslator.plugins.translation-memory");
 
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
-                          GTK_STOCK_CLOSE,
+                          _("_Close"),
                           GTK_RESPONSE_CLOSE,
                           NULL);
 
@@ -292,14 +288,11 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
-  action_area = gtk_dialog_get_action_area (GTK_DIALOG (dlg));
   content_area = gtk_dialog_get_content_area (GTK_DIALOG (dlg));
 
   /* HIG defaults */
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
   gtk_box_set_spacing (GTK_BOX (content_area), 2);    /* 2 * 5 + 2 = 12 */
-  gtk_container_set_border_width (GTK_CONTAINER (action_area), 5);
-  gtk_box_set_spacing (GTK_BOX (action_area), 4);
 
   g_signal_connect (dlg, "response",
                     G_CALLBACK (gtk_widget_destroy), NULL);
@@ -365,11 +358,17 @@ GtkWidget *
 gtr_translation_memory_dialog_new (GtrTranslationMemory *translation_memory)
 {
   GtrTranslationMemoryDialog *dlg;
+  GtrTranslationMemoryDialogPrivate *priv;
 
-  dlg = GTR_TRANSLATION_MEMORY_DIALOG (g_object_new (GTR_TYPE_TRANSLATION_MEMORY_DIALOG, NULL));
+  dlg = GTR_TRANSLATION_MEMORY_DIALOG (g_object_new (GTR_TYPE_TRANSLATION_MEMORY_DIALOG,
+                                                     "use-header-bar", TRUE, NULL));
+  priv = gtr_translation_memory_dialog_get_instance_private (dlg);
 
   /* FIXME: use a property */
-  dlg->priv->translation_memory = translation_memory;
+  priv->translation_memory = translation_memory;
+
+  gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_DIALOG);
+  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
   return GTK_WIDGET (dlg);
 }

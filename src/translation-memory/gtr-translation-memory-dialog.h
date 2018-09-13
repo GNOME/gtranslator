@@ -33,13 +33,10 @@ G_BEGIN_DECLS
 
 typedef struct _GtrTranslationMemoryDialog         GtrTranslationMemoryDialog;
 typedef struct _GtrTranslationMemoryDialogClass    GtrTranslationMemoryDialogClass;
-typedef struct _GtrTranslationMemoryDialogPrivate  GtrTranslationMemoryDialogPrivate;
 
 struct _GtrTranslationMemoryDialog
 {
   GtkDialog parent;
-
-  GtrTranslationMemoryDialogPrivate *priv;
 };
 
 struct _GtrTranslationMemoryDialogClass

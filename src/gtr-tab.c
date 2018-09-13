@@ -167,7 +167,7 @@ gtr_tab_autosave (GtrTab * tab)
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
-  if (!gtr_po_get_state (priv->po) == GTR_PO_STATE_MODIFIED)
+  if (!(gtr_po_get_state (priv->po) == GTR_PO_STATE_MODIFIED))
     return TRUE;
 
   gtr_po_save_file (priv->po, &error);

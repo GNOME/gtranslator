@@ -36,9 +36,6 @@
 #define GTR_IS_PROFILE_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_PROFILE))
 #define GTR_PROFILE_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_PROFILE, GtrProfileClass))
 
-/* Private structure type */
-typedef struct _GtrProfilePrivate GtrProfilePrivate;
-
 /*
  * Main object structure
  */
@@ -47,8 +44,6 @@ typedef struct _GtrProfile GtrProfile;
 struct _GtrProfile
 {
   GObject parent_instance;
-  /*< private > */
-  GtrProfilePrivate *priv;
 };
 
 /*

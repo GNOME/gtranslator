@@ -35,14 +35,6 @@ G_BEGIN_DECLS
 
 typedef struct _GtrLanguagesFetcher		GtrLanguagesFetcher;
 typedef struct _GtrLanguagesFetcherClass	GtrLanguagesFetcherClass;
-typedef struct _GtrLanguagesFetcherPrivate	GtrLanguagesFetcherPrivate;
-
-struct _GtrLanguagesFetcher
-{
-  GtkBox parent;
-
-  GtrLanguagesFetcherPrivate *priv;
-};
 
 struct _GtrLanguagesFetcherClass
 {

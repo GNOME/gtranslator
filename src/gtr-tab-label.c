@@ -28,8 +28,6 @@
 #include "gtr-tab-label.h"
 #include "gtr-close-button.h"
 
-#define GTR_TAB_LABEL_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GTR_TYPE_TAB_LABEL, GtrTabLabelPrivate))
-
 /* Signals */
 enum
 {
@@ -43,7 +41,7 @@ enum
   PROP_TAB
 };
 
-struct _GtrTabLabelPrivate
+typedef struct
 {
   GtrTab *tab;
 
@@ -53,11 +51,11 @@ struct _GtrTabLabelPrivate
   GtkWidget *label;
 
   gboolean close_button_sensitive;
-};
+} GtrTabLabelPrivate;
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE (GtrTabLabel, gtr_tab_label, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrTabLabel, gtr_tab_label, GTK_TYPE_BOX)
 
 static void
 gtr_tab_label_finalize (GObject *object)
@@ -72,11 +70,12 @@ gtr_tab_label_set_property (GObject      *object,
                             GParamSpec   *pspec)
 {
   GtrTabLabel *tab_label = GTR_TAB_LABEL (object);
+  GtrTabLabelPrivate *priv = gtr_tab_label_get_instance_private (tab_label);
 
   switch (prop_id)
     {
     case PROP_TAB:
-      tab_label->priv->tab = GTR_TAB (g_value_get_object (value));
+      priv->tab = GTR_TAB (g_value_get_object (value));
       break;
 
     default:
@@ -92,11 +91,12 @@ gtr_tab_label_get_property (GObject    *object,
                             GParamSpec *pspec)
 {
   GtrTabLabel *tab_label = GTR_TAB_LABEL (object);
+  GtrTabLabelPrivate *priv = gtr_tab_label_get_instance_private (tab_label);
 
   switch (prop_id)
     {
     case PROP_TAB:
-      g_value_set_object (value, tab_label->priv->tab);
+      g_value_set_object (value, priv->tab);
       break;
 
     default:
@@ -116,11 +116,12 @@ static void
 sync_tip (GtrTab *tab, GtrTabLabel *tab_label)
 {
   gchar *str;
+  GtrTabLabelPrivate *priv = gtr_tab_label_get_instance_private (tab_label);
 
   str = _gtr_tab_get_tooltips (tab);
   g_return_if_fail (str != NULL);
 
-  gtk_widget_set_tooltip_markup (tab_label->priv->ebox, str);
+  gtk_widget_set_tooltip_markup (priv->ebox, str);
   g_free (str);
 }
 
@@ -128,13 +129,14 @@ static void
 sync_name (GtrTab *tab, GParamSpec *pspec, GtrTabLabel *tab_label)
 {
   gchar *str;
+  GtrTabLabelPrivate *priv = gtr_tab_label_get_instance_private (tab_label);
 
-  g_return_if_fail (tab == tab_label->priv->tab);
+  g_return_if_fail (tab == priv->tab);
 
   str = _gtr_tab_get_name (tab);
   g_return_if_fail (str != NULL);
 
-  gtk_label_set_text (GTK_LABEL (tab_label->priv->label), str);
+  gtk_label_set_text (GTK_LABEL (priv->label), str);
   g_free (str);
 
   sync_tip (tab, tab_label);
@@ -145,13 +147,14 @@ static void
 sync_state (GtrTab *tab, GParamSpec *pspec, GtrTabLabel *tab_label)
 {
   GtrTabState  state;
+  GtrTabLabelPrivate *priv = gtr_tab_label_get_instance_private (tab_label);
 
-  g_return_if_fail (tab == tab_label->priv->tab);
+  g_return_if_fail (tab == priv->tab);
 
   state = gtr_tab_get_state (tab);
 
-  gtk_widget_set_sensitive (tab_label->priv->close_button,
-                            tab_label->priv->close_button_sensitive &&
+  gtk_widget_set_sensitive (priv->close_button,
+                            priv->close_button_sensitive &&
                             (state != GTR_TAB_STATE_CLOSING) &&
                             (state != GTR_TAB_STATE_SAVING)  &&
                             (state != GTR_TAB_STATE_SHOWING_PRINT_PREVIEW) &&
@@ -161,26 +164,26 @@ sync_state (GtrTab *tab, GParamSpec *pspec, GtrTabLabel *tab_label)
       (state == GTR_TAB_STATE_SAVING)    ||
       (state == GTR_TAB_STATE_REVERTING))
     {
-      gtk_widget_hide (tab_label->priv->icon);
+      gtk_widget_hide (priv->icon);
 
-      gtk_widget_show (tab_label->priv->spinner);
-      gtk_spinner_start (GTK_SPINNER (tab_label->priv->spinner));
+      gtk_widget_show (priv->spinner);
+      gtk_spinner_start (GTK_SPINNER (priv->spinner));
     }
   else
     {
       GdkPixbuf *pixbuf;
 
       pixbuf = _gtr_tab_get_icon (tab);
-      gtk_image_set_from_pixbuf (GTK_IMAGE (tab_label->priv->icon), pixbuf);
+      gtk_image_set_from_pixbuf (GTK_IMAGE (priv->icon), pixbuf);
 
       if (pixbuf != NULL)
         g_object_unref (pixbuf);
 
-      gtk_widget_show (tab_label->priv->icon);
+      gtk_widget_show (priv->icon);
 
-      gtk_widget_hide (tab_label->priv->spinner);
+      gtk_widget_hide (priv->spinner);
 
-      gtk_spinner_stop (GTK_SPINNER (tab_label->priv->spinner));
+      gtk_spinner_stop (GTK_SPINNER (priv->spinner));
     }
 
   /* sync tip since encoding is known only after load/save end */
@@ -192,24 +195,25 @@ static void
 gtr_tab_label_constructed (GObject *object)
 {
   GtrTabLabel *tab_label = GTR_TAB_LABEL (object);
+  GtrTabLabelPrivate *priv = gtr_tab_label_get_instance_private (tab_label);
 
-  if (!tab_label->priv->tab)
+  if (!priv->tab)
     {
       g_critical ("The tab label was not properly constructed");
       return;
     }
 
-  sync_name (tab_label->priv->tab, NULL, tab_label);
-  /*sync_state (tab_label->priv->tab, NULL, tab_label); */
+  sync_name (priv->tab, NULL, tab_label);
+  /*sync_state (priv->tab, NULL, tab_label); */
 
-  g_signal_connect_object (tab_label->priv->tab,
+  g_signal_connect_object (priv->tab,
                            "notify::name",
                            G_CALLBACK (sync_name),
                            tab_label,
                            0);
 
 /*
-  g_signal_connect_object (tab_label->priv->tab,
+  g_signal_connect_object (priv->tab,
                            "notify::state",
                            G_CALLBACK (sync_state),
                            tab_label,
@@ -244,8 +248,6 @@ gtr_tab_label_class_init (GtrTabLabelClass *klass)
                                                         GTR_TYPE_TAB,
                                                         G_PARAM_READWRITE |
                                                         G_PARAM_CONSTRUCT_ONLY));
-
-  g_type_class_add_private (object_class, sizeof(GtrTabLabelPrivate));
 }
 
 static void
@@ -257,10 +259,9 @@ gtr_tab_label_init (GtrTabLabel *tab_label)
   GtkWidget *icon;
   GtkWidget *label;
   GtkWidget *dummy_label;
+  GtrTabLabelPrivate *priv = gtr_tab_label_get_instance_private (tab_label);
 
-  tab_label->priv = GTR_TAB_LABEL_GET_PRIVATE (tab_label);
-
-  tab_label->priv->close_button_sensitive = TRUE;
+  priv->close_button_sensitive = TRUE;
 
   gtk_orientable_set_orientation (GTK_ORIENTABLE (tab_label),
                                   GTK_ORIENTATION_HORIZONTAL);
@@ -268,7 +269,7 @@ gtr_tab_label_init (GtrTabLabel *tab_label)
   ebox = gtk_event_box_new ();
   gtk_event_box_set_visible_window (GTK_EVENT_BOX (ebox), FALSE);
   gtk_box_pack_start (GTK_BOX (tab_label), ebox, TRUE, TRUE, 0);
-  tab_label->priv->ebox = ebox;
+  priv->ebox = ebox;
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
   gtk_container_add (GTK_CONTAINER (ebox), hbox);
@@ -276,7 +277,7 @@ gtr_tab_label_init (GtrTabLabel *tab_label)
   close_button = gtr_close_button_new ();
   gtk_widget_set_tooltip_text (close_button, _("Close document"));
   gtk_box_pack_start (GTK_BOX (tab_label), close_button, FALSE, FALSE, 0);
-  tab_label->priv->close_button = close_button;
+  priv->close_button = close_button;
 
   g_signal_connect (close_button,
                     "clicked",
@@ -286,13 +287,13 @@ gtr_tab_label_init (GtrTabLabel *tab_label)
   /* setup icon, empty by default */
   icon = gtk_image_new ();
   gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
-  tab_label->priv->icon = icon;
+  priv->icon = icon;
 
   label = gtk_label_new ("");
-  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_misc_set_padding (GTK_MISC (label), 0, 0);
+  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+  gtk_label_set_yalign (GTK_LABEL (label), 0.5);
   gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  tab_label->priv->label = label;
+  priv->label = label;
 
   dummy_label = gtk_label_new ("");
   gtk_box_pack_start (GTK_BOX (hbox), dummy_label, TRUE, TRUE, 0);
@@ -309,25 +310,27 @@ void
 gtr_tab_label_set_close_button_sensitive (GtrTabLabel *tab_label,
                                           gboolean     sensitive)
 {
+  GtrTabLabelPrivate *priv = gtr_tab_label_get_instance_private (tab_label);
   g_return_if_fail (GTR_IS_TAB_LABEL (tab_label));
 
   sensitive = (sensitive != FALSE);
 
-  if (sensitive == tab_label->priv->close_button_sensitive)
+  if (sensitive == priv->close_button_sensitive)
     return;
 
-  tab_label->priv->close_button_sensitive = sensitive;
+  priv->close_button_sensitive = sensitive;
 
-  gtk_widget_set_sensitive (tab_label->priv->close_button, 
-                            tab_label->priv->close_button_sensitive);
+  gtk_widget_set_sensitive (priv->close_button,
+                            priv->close_button_sensitive);
 }
 
 GtrTab *
 gtr_tab_label_get_tab (GtrTabLabel *tab_label)
 {
+  GtrTabLabelPrivate *priv = gtr_tab_label_get_instance_private (tab_label);
   g_return_val_if_fail (GTR_IS_TAB_LABEL (tab_label), NULL);
 
-  return tab_label->priv->tab;
+  return priv->tab;
 }
 
 GtkWidget *

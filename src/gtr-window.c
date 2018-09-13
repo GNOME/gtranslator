@@ -1133,6 +1133,8 @@ gtr_window_show_tm_dialog (GtrWindow *window)
   if (dlg == NULL)
     {
       dlg = gtr_translation_memory_dialog_new (priv->translation_memory);
+      gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
+
       g_signal_connect (dlg, "destroy",
                         G_CALLBACK (gtk_widget_destroyed), &dlg);
       gtk_widget_show_all (dlg);

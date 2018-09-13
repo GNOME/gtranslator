@@ -32,15 +32,7 @@
 #include <gtk/gtk.h>
 #include <gettext-po.h>
 
-#define GTR_MSG_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
-					 (object),	\
-					 GTR_TYPE_MSG,     \
-					 GtrMsgPrivate))
-
-
-G_DEFINE_TYPE (GtrMsg, gtr_msg, G_TYPE_OBJECT)
-
-struct _GtrMsgPrivate
+typedef struct
 {
   po_message_iterator_t iterator;
 
@@ -49,14 +41,16 @@ struct _GtrMsgPrivate
   GtrMsgStatus status;
 
   gint po_position;
-};
+} GtrMsgPrivate;
+
+
+G_DEFINE_TYPE_WITH_PRIVATE (GtrMsg, gtr_msg, G_TYPE_OBJECT)
 
 static gchar *message_error = NULL;
 
 static void
 gtr_msg_init (GtrMsg * msg)
 {
-  msg->priv = GTR_MSG_GET_PRIVATE (msg);
 }
 
 static void
@@ -69,8 +63,6 @@ static void
 gtr_msg_class_init (GtrMsgClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (GtrMsgPrivate));
 
   object_class->finalize = gtr_msg_finalize;
 }
@@ -118,9 +110,10 @@ _gtr_msg_new (po_message_iterator_t iter, po_message_t message)
 po_message_iterator_t
 _gtr_msg_get_iterator (GtrMsg * msg)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
 
-  return msg->priv->iterator;
+  return priv->iterator;
 }
 
 /**
@@ -133,9 +126,10 @@ _gtr_msg_get_iterator (GtrMsg * msg)
 void
 _gtr_msg_set_iterator (GtrMsg * msg, po_message_iterator_t iter)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_if_fail (GTR_IS_MSG (msg));
 
-  msg->priv->iterator = iter;
+  priv->iterator = iter;
 }
 
 /**
@@ -147,9 +141,10 @@ _gtr_msg_set_iterator (GtrMsg * msg, po_message_iterator_t iter)
 po_message_t
 _gtr_msg_get_message (GtrMsg * msg)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
 
-  return msg->priv->message;
+  return priv->message;
 }
 
 /**
@@ -162,10 +157,11 @@ _gtr_msg_get_message (GtrMsg * msg)
 void
 _gtr_msg_set_message (GtrMsg * msg, po_message_t message)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_if_fail (GTR_IS_MSG (msg));
   g_return_if_fail (message != NULL);
 
-  msg->priv->message = message;
+  priv->message = message;
 }
 
 /**
@@ -211,9 +207,10 @@ gtr_msg_is_translated (GtrMsg *msg)
 gboolean
 gtr_msg_is_fuzzy (GtrMsg * msg)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_val_if_fail (GTR_IS_MSG (msg), FALSE);
 
-  return po_message_is_fuzzy (msg->priv->message);
+  return po_message_is_fuzzy (priv->message);
 }
 
 
@@ -227,9 +224,10 @@ gtr_msg_is_fuzzy (GtrMsg * msg)
 void
 gtr_msg_set_fuzzy (GtrMsg * msg, gboolean fuzzy)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_if_fail (GTR_IS_MSG (msg));
 
-  po_message_set_fuzzy (msg->priv->message, fuzzy);
+  po_message_set_fuzzy (priv->message, fuzzy);
 }
 
 /**
@@ -242,9 +240,10 @@ gtr_msg_set_fuzzy (GtrMsg * msg, gboolean fuzzy)
 void
 gtr_msg_set_status (GtrMsg * msg, GtrMsgStatus status)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_if_fail (GTR_IS_MSG (msg));
 
-  msg->priv->status = status;
+  priv->status = status;
 }
 
 /**
@@ -256,9 +255,10 @@ gtr_msg_set_status (GtrMsg * msg, GtrMsgStatus status)
 GtrMsgStatus
 gtr_msg_get_status (GtrMsg * msg)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_val_if_fail (GTR_IS_MSG (msg), 0);
 
-  return msg->priv->status;
+  return priv->status;
 }
 
 /**
@@ -270,9 +270,10 @@ gtr_msg_get_status (GtrMsg * msg)
 const gchar *
 gtr_msg_get_msgid (GtrMsg * msg)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
 
-  return po_message_msgid (msg->priv->message);
+  return po_message_msgid (priv->message);
 }
 
 
@@ -286,7 +287,8 @@ gtr_msg_get_msgid (GtrMsg * msg)
 const gchar *
 gtr_msg_get_msgid_plural (GtrMsg * msg)
 {
-  return po_message_msgid_plural (msg->priv->message);
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
+  return po_message_msgid_plural (priv->message);
 }
 
 
@@ -300,9 +302,10 @@ gtr_msg_get_msgid_plural (GtrMsg * msg)
 const gchar *
 gtr_msg_get_msgstr (GtrMsg * msg)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
 
-  return po_message_msgstr (msg->priv->message);
+  return po_message_msgstr (priv->message);
 }
 
 
@@ -317,10 +320,11 @@ gtr_msg_get_msgstr (GtrMsg * msg)
 void
 gtr_msg_set_msgstr (GtrMsg * msg, const gchar * msgstr)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_if_fail (GTR_IS_MSG (msg));
   g_return_if_fail (msgstr != NULL);
 
-  po_message_set_msgstr (msg->priv->message, msgstr);
+  po_message_set_msgstr (priv->message, msgstr);
 }
 
 
@@ -336,9 +340,10 @@ gtr_msg_set_msgstr (GtrMsg * msg, const gchar * msgstr)
 const gchar *
 gtr_msg_get_msgstr_plural (GtrMsg * msg, gint index)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
 
-  return po_message_msgstr_plural (msg->priv->message, index);
+  return po_message_msgstr_plural (priv->message, index);
 }
 
 /**
@@ -353,10 +358,11 @@ gtr_msg_get_msgstr_plural (GtrMsg * msg, gint index)
 void
 gtr_msg_set_msgstr_plural (GtrMsg * msg, gint index, const gchar * msgstr)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_if_fail (GTR_IS_MSG (msg));
   g_return_if_fail (msgstr != NULL);
 
-  po_message_set_msgstr_plural (msg->priv->message, index, msgstr);
+  po_message_set_msgstr_plural (priv->message, index, msgstr);
 }
 
 
@@ -369,9 +375,10 @@ gtr_msg_set_msgstr_plural (GtrMsg * msg, gint index, const gchar * msgstr)
 const gchar *
 gtr_msg_get_comment (GtrMsg * msg)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
 
-  return po_message_comments (msg->priv->message);
+  return po_message_comments (priv->message);
 }
 
 /**
@@ -386,10 +393,11 @@ gtr_msg_get_comment (GtrMsg * msg)
 void
 gtr_msg_set_comment (GtrMsg * msg, const gchar * comment)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_if_fail (GTR_IS_MSG (msg));
   g_return_if_fail (comment != NULL);
 
-  po_message_set_comments (msg->priv->message, comment);
+  po_message_set_comments (priv->message, comment);
 }
 
 /**
@@ -404,9 +412,10 @@ gtr_msg_set_comment (GtrMsg * msg, const gchar * comment)
 gint
 gtr_msg_get_po_position (GtrMsg * msg)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_val_if_fail (GTR_IS_MSG (msg), 0);
 
-  return msg->priv->po_position;
+  return priv->po_position;
 }
 
 /**
@@ -419,9 +428,10 @@ gtr_msg_get_po_position (GtrMsg * msg)
 void
 gtr_msg_set_po_position (GtrMsg * msg, gint po_position)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_if_fail (GTR_IS_MSG (msg));
 
-  msg->priv->po_position = po_position;
+  priv->po_position = po_position;
 }
 
 /**
@@ -433,9 +443,10 @@ gtr_msg_set_po_position (GtrMsg * msg, gint po_position)
 const gchar *
 gtr_msg_get_extracted_comments (GtrMsg * msg)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
 
-  return po_message_extracted_comments (msg->priv->message);
+  return po_message_extracted_comments (priv->message);
 }
 
 /**
@@ -449,11 +460,12 @@ gtr_msg_get_extracted_comments (GtrMsg * msg)
 const gchar *
 gtr_msg_get_filename (GtrMsg * msg, gint i)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
 
   po_filepos_t filepos;
 
-  filepos = po_message_filepos (msg->priv->message, i);
+  filepos = po_message_filepos (priv->message, i);
 
   if (filepos == NULL)
     return NULL;
@@ -472,11 +484,12 @@ gtr_msg_get_filename (GtrMsg * msg, gint i)
 gint *
 gtr_msg_get_file_line (GtrMsg * msg, gint i)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_val_if_fail (GTR_IS_MSG (msg), (gint *) 0);
 
   po_filepos_t filepos;
 
-  filepos = po_message_filepos (msg->priv->message, i);
+  filepos = po_message_filepos (priv->message, i);
 
   if (filepos == NULL)
     return NULL;
@@ -494,9 +507,10 @@ gtr_msg_get_file_line (GtrMsg * msg, gint i)
 const gchar *
 gtr_msg_get_msgctxt (GtrMsg * msg)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
 
-  return po_message_msgctxt (msg->priv->message);
+  return po_message_msgctxt (priv->message);
 }
 
 /**
@@ -513,6 +527,7 @@ gtr_msg_get_msgctxt (GtrMsg * msg)
 const gchar *
 gtr_msg_get_format (GtrMsg * msg)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   const gchar *const *format_list;
   gint i;
 
@@ -522,7 +537,7 @@ gtr_msg_get_format (GtrMsg * msg)
 
   for (i = 0; format_list[i] != NULL; i++)
     {
-      if (po_message_is_format (msg->priv->message, format_list[i]))
+      if (po_message_is_format (priv->message, format_list[i]))
         return po_format_pretty_name (format_list[i]);
     }
 
@@ -570,6 +585,7 @@ on_gettext_po_xerror2 (gint severity,
 gchar *
 gtr_msg_check (GtrMsg * msg)
 {
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   struct po_xerror_handler handler;
 
   g_return_val_if_fail (msg != NULL, NULL);
@@ -582,7 +598,7 @@ gtr_msg_check (GtrMsg * msg)
   handler.xerror = &on_gettext_po_xerror;
   handler.xerror2 = &on_gettext_po_xerror2;
 
-  po_message_check_all (msg->priv->message, msg->priv->iterator, &handler);
+  po_message_check_all (priv->message, priv->iterator, &handler);
 
   if (gtr_msg_is_fuzzy (msg) || !gtr_msg_is_translated (msg))
     {

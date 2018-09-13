@@ -21,6 +21,7 @@
 
 #include <glib.h>
 #include <gtk/gtk.h>
+#include <glib/gi18n.h>
 
 static void
 set_contents (GtkInfoBar * infobar, GtkWidget * contents)
@@ -51,10 +52,11 @@ set_info_bar_text_and_icon (GtkInfoBar * infobar,
   hbox_content = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 8);
   gtk_widget_show (hbox_content);
 
-  image = gtk_image_new_from_stock (icon_stock_id, GTK_ICON_SIZE_DIALOG);
+  image = gtk_image_new_from_icon_name (icon_stock_id, GTK_ICON_SIZE_DIALOG);
   gtk_widget_show (image);
   gtk_box_pack_start (GTK_BOX (hbox_content), image, FALSE, FALSE, 0);
-  gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0);
+  gtk_widget_set_halign (image, 0.5);
+  gtk_widget_set_valign (image, 0.0);
 
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_widget_show (vbox);
@@ -69,7 +71,8 @@ set_info_bar_text_and_icon (GtkInfoBar * infobar,
   gtk_box_pack_start (GTK_BOX (vbox), primary_label, TRUE, TRUE, 0);
   gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
   gtk_label_set_line_wrap (GTK_LABEL (primary_label), FALSE);
-  gtk_misc_set_alignment (GTK_MISC (primary_label), 0, 0.5);
+  gtk_label_set_xalign (GTK_LABEL (primary_label), 0.0);
+  gtk_label_set_yalign (GTK_LABEL (primary_label), 0.5);
 
   gtk_widget_set_can_focus (primary_label, TRUE);
 
@@ -91,7 +94,8 @@ set_info_bar_text_and_icon (GtkInfoBar * infobar,
       gtk_label_set_use_markup (GTK_LABEL (secondary_label), TRUE);
       gtk_label_set_line_wrap (GTK_LABEL (secondary_label), TRUE);
       gtk_label_set_selectable (GTK_LABEL (secondary_label), TRUE);
-      gtk_misc_set_alignment (GTK_MISC (secondary_label), 0, 0.5);
+      gtk_label_set_xalign (GTK_LABEL (secondary_label), 0.0);
+      gtk_label_set_yalign (GTK_LABEL (secondary_label), 0.5);
     }
 
   set_contents (infobar, hbox_content);
@@ -116,13 +120,13 @@ create_error_info_bar (const gchar * primary_text,
 {
   GtkWidget *infobar;
 
-  infobar = gtk_info_bar_new_with_buttons (GTK_STOCK_CLOSE,
+  infobar = gtk_info_bar_new_with_buttons (_("_Close"),
                                            GTK_RESPONSE_CLOSE, NULL);
 
   gtk_info_bar_set_message_type (GTK_INFO_BAR (infobar), GTK_MESSAGE_WARNING);
 
   set_info_bar_text_and_icon (GTK_INFO_BAR (infobar),
-                              GTK_STOCK_DIALOG_ERROR,
+                              "dialog-error-symbolic",
                               primary_text, secondary_text);
 
   g_signal_connect (G_OBJECT (infobar), "response",

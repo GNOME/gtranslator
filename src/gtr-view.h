@@ -87,9 +87,6 @@ gtr_view_get_type (void)
 
      void gtr_view_paste_clipboard (GtrView * view);
 
-     void gtr_view_set_font (GtrView * view,
-                             gboolean def, const gchar * font_name);
-
      void gtr_view_set_search_text (GtrView * view,
                                     const gchar * text, guint flags);
 

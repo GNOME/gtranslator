@@ -40,19 +40,8 @@ G_BEGIN_DECLS
 #define GTR_IS_HEADER_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_HEADER))
 #define GTR_HEADER_GET_CLASS(o)		(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_HEADER, GtrHeaderClass))
 
-/* Private structure type */
-typedef struct _GtrHeaderPrivate GtrHeaderPrivate;
-
 /* Main object structure */
 typedef struct _GtrHeader GtrHeader;
-
-struct _GtrHeader
-{
-  GtrMsg parent_instance;
-
-  /*< private > */
-  GtrHeaderPrivate *priv;
-};
 
 /* Class definition */
 typedef struct _GtrHeaderClass GtrHeaderClass;

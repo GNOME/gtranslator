@@ -31,16 +31,12 @@ G_BEGIN_DECLS
 #define GTR_IS_GDA_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_GDA))
 #define GTR_GDA_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_GDA, GtrGdaClass))
 
-typedef struct _GtrGdaPrivate GtrGdaPrivate;
 typedef struct _GtrGda        GtrGda;
 typedef struct _GtrGdaClass   GtrGdaClass;
 
 struct _GtrGda
 {
   GObject parent_instance;
-
-  /*< private > */
-  GtrGdaPrivate *priv;
 };
 
 struct _GtrGdaClass

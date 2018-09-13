@@ -31,8 +31,8 @@ xmlDocPtr gtr_xml_new_doc (const gchar * name);
 
 xmlDocPtr gtr_xml_open_file (const gchar * filename);
 
-GtkWidget *gtr_gtk_button_new_with_stock_icon (const gchar * label,
-                                               const gchar * stock_id);
+GtkWidget *gtr_gtk_button_new_with_icon_name (const gchar * label,
+                                              const gchar * icon_name);
 
 void gtr_utils_menu_position_under_widget (GtkMenu * menu,
                                            gint * x,

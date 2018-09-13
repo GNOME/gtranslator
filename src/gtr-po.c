@@ -53,17 +53,7 @@
 
 static void gtr_po_message_container_init (GtrMessageContainerInterface *iface);
 
-#define GTR_PO_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
-					 (object),	\
-					 GTR_TYPE_PO,     \
-					 GtrPoPrivate))
-
-
-G_DEFINE_TYPE_WITH_CODE (GtrPo, gtr_po, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (GTR_TYPE_MESSAGE_CONTAINER,
-                                                gtr_po_message_container_init))
-
-struct _GtrPoPrivate
+typedef struct
 {
   /* The location of the file to open */
   GFile *location;
@@ -105,7 +95,13 @@ struct _GtrPoPrivate
 
   /* Marks if the file was changed;  */
   guint file_changed : 1;
-};
+} GtrPoPrivate;
+
+
+G_DEFINE_TYPE_WITH_CODE (GtrPo, gtr_po, G_TYPE_OBJECT,
+                         G_ADD_PRIVATE (GtrPo)
+                         G_IMPLEMENT_INTERFACE (GTR_TYPE_MESSAGE_CONTAINER,
+                                                gtr_po_message_container_init))
 
 enum
 {
@@ -162,10 +158,11 @@ gtr_po_get_property (GObject * object,
 static void
 determine_translation_status (GtrMsg * msg, GtrPo * po)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   if (gtr_msg_is_fuzzy (msg))
-    po->priv->fuzzy++;
+    priv->fuzzy++;
   else if (gtr_msg_is_translated (msg))
-    po->priv->translated++;
+    priv->translated++;
 }
 
 /*
@@ -174,32 +171,34 @@ determine_translation_status (GtrMsg * msg, GtrPo * po)
 static void
 gtr_po_update_translated_count (GtrPo * po)
 {
-  po->priv->translated = 0;
-  po->priv->fuzzy = 0;
-  g_list_foreach (po->priv->messages,
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  priv->translated = 0;
+  priv->fuzzy = 0;
+  g_list_foreach (priv->messages,
                   (GFunc) determine_translation_status, po);
 }
 
 static void
 gtr_po_init (GtrPo * po)
 {
-  po->priv = GTR_PO_GET_PRIVATE (po);
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  po->priv->location = NULL;
-  po->priv->gettext_po_file = NULL;
+  priv->location = NULL;
+  priv->gettext_po_file = NULL;
 }
 
 static void
 gtr_po_finalize (GObject * object)
 {
   GtrPo *po = GTR_PO (object);
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  g_list_free_full (po->priv->messages, g_object_unref);
-  g_list_free_full (po->priv->domains, g_free);
-  g_free (po->priv->obsolete);
+  g_list_free_full (priv->messages, g_object_unref);
+  g_list_free_full (priv->domains, g_free);
+  g_free (priv->obsolete);
 
-  if (po->priv->gettext_po_file)
-    po_file_free (po->priv->gettext_po_file);
+  if (priv->gettext_po_file)
+    po_file_free (priv->gettext_po_file);
 
   G_OBJECT_CLASS (gtr_po_parent_class)->finalize (object);
 }
@@ -208,8 +207,9 @@ static void
 gtr_po_dispose (GObject * object)
 {
   GtrPo *po = GTR_PO (object);
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  g_clear_object (&po->priv->location);
+  g_clear_object (&priv->location);
 
   G_OBJECT_CLASS (gtr_po_parent_class)->dispose (object);
 }
@@ -219,8 +219,9 @@ gtr_po_message_container_get_message (GtrMessageContainer *container,
                                       gint number)
 {
   GtrPo *po = GTR_PO (container);
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  return g_list_nth_data (po->priv->messages, number);
+  return g_list_nth_data (priv->messages, number);
 }
 
 static gint
@@ -229,17 +230,19 @@ gtr_po_message_container_get_message_number (GtrMessageContainer * container,
 {
   GtrPo *po = GTR_PO (container);
   GList *list;
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  list = g_list_find (po->priv->messages, msg);
-  return g_list_position (po->priv->messages, list);
+  list = g_list_find (priv->messages, msg);
+  return g_list_position (priv->messages, list);
 }
 
 static gint
 gtr_po_message_container_get_count (GtrMessageContainer * container)
 {
   GtrPo *po = GTR_PO (container);
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  return g_list_length (po->priv->messages);
+  return g_list_length (priv->messages);
 }
 
 static void
@@ -254,8 +257,6 @@ static void
 gtr_po_class_init (GtrPoClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (GtrPoPrivate));
 
   object_class->finalize = gtr_po_finalize;
   object_class->dispose = gtr_po_dispose;
@@ -393,12 +394,12 @@ gtr_po_new (void)
 static gboolean
 _gtr_po_load (GtrPo * po, GFile * location, GError ** error)
 {
-  GtrPoPrivate *priv = po->priv;
   struct po_xerror_handler handler;
   po_message_iterator_t iter;
   po_message_t message;
   const gchar *msgid;
   gchar *filename;
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
   /*
    * Initialize the handler error.
@@ -414,8 +415,8 @@ _gtr_po_load (GtrPo * po, GFile * location, GError ** error)
 
   filename = g_file_get_path (location);
 
-  if (po->priv->gettext_po_file)
-    po_file_free (po->priv->gettext_po_file);
+  if (priv->gettext_po_file)
+    po_file_free (priv->gettext_po_file);
 
   if (priv->header)
     {
@@ -440,7 +441,7 @@ _gtr_po_load (GtrPo * po, GFile * location, GError ** error)
       return FALSE;
     }
 
-  if (!po->priv->gettext_po_file)
+  if (!priv->gettext_po_file)
     {
       g_set_error (error,
                    GTR_PO_ERROR,
@@ -477,8 +478,9 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
   gboolean utf8_valid;
   gchar *filename;
   gsize size;
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  filename = g_file_get_path (po->priv->location);
+  filename = g_file_get_path (priv->location);
   mapped = g_mapped_file_new (filename, FALSE, error);
   g_free (filename);
 
@@ -490,19 +492,19 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
 
   utf8_valid = g_utf8_validate (content, size, NULL);
 
-  if (!_gtr_po_load (po, po->priv->location, error))
+  if (!_gtr_po_load (po, priv->location, error))
     {
       g_mapped_file_unref (mapped);
       return FALSE;
     }
 
   if (!utf8_valid &&
-      po->priv->header)
+      priv->header)
     {
       gchar *charset = NULL;
 
-      if (po->priv->header)
-        charset = gtr_header_get_charset (po->priv->header);
+      if (priv->header)
+        charset = gtr_header_get_charset (priv->header);
 
       if (charset && *charset && strcmp (charset, "UTF-8") != 0)
         {
@@ -579,8 +581,8 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
           /* Ensure Content-Type is set correctly
            * in the header as per the content
            */
-          if (po->priv->header)
-            gtr_header_set_charset (po->priv->header, "UTF-8");
+          if (priv->header)
+            gtr_header_set_charset (priv->header, "UTF-8");
 
           utf8_valid = TRUE;
         }
@@ -614,13 +616,13 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
 gboolean
 gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
 {
-  GtrPoPrivate *priv = po->priv;
   GtrMsg *msg;
   po_message_t message;
   po_message_iterator_t iter;
   const gchar *const *domains;
   gint i = 0;
   gint pos = 1;
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
   g_return_val_if_fail (GTR_IS_PO (po), FALSE);
   g_return_val_if_fail (location != NULL, FALSE);
@@ -634,7 +636,7 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
   /*
    * Get filename path.
    */
-  po->priv->location = g_file_dup (location);
+  priv->location = g_file_dup (location);
 
   if (!_gtr_po_load_ensure_utf8 (po, error))
     {
@@ -721,7 +723,7 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
   gtr_po_update_translated_count (po);
 
   /* Initialize Tab state */
-  po->priv->state = GTR_PO_STATE_SAVED;
+  priv->state = GTR_PO_STATE_SAVED;
   return TRUE;
 }
 
@@ -739,6 +741,7 @@ gtr_po_save_file (GtrPo * po, GError ** error)
   struct po_xerror_handler handler;
   gchar *filename;
   GtrHeader *header;
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
   /*
    * Initialice the handler error.
@@ -746,7 +749,7 @@ gtr_po_save_file (GtrPo * po, GError ** error)
   handler.xerror = &on_gettext_po_xerror;
   handler.xerror2 = &on_gettext_po_xerror2;
 
-  filename = g_file_get_path (po->priv->location);
+  filename = g_file_get_path (priv->location);
 
   if (g_str_has_suffix (filename, ".pot"))
     {
@@ -813,15 +816,15 @@ gtr_po_save_file (GtrPo * po, GError ** error)
   /*
    * If the warn if fuzzy option is enabled we have to show an error
    */
-  /*if (gtr_prefs_manager_get_warn_if_fuzzy () && po->priv->fuzzy)
+  /*if (gtr_prefs_manager_get_warn_if_fuzzy () && priv->fuzzy)
      {
      g_set_error (error,
      GTR_PO_ERROR,
      GTR_PO_ERROR_OTHER,
      ngettext ("File %s\ncontains %d fuzzy message",
      "File %s\ncontains %d fuzzy messages",
-     po->priv->fuzzy),
-     po->priv->fuzzy);
+     priv->fuzzy),
+     priv->fuzzy);
      } */
 }
 
@@ -837,9 +840,10 @@ gtr_po_save_file (GtrPo * po, GError ** error)
 GFile *
 gtr_po_get_location (GtrPo * po)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_val_if_fail (GTR_IS_PO (po), NULL);
 
-  return g_file_dup (po->priv->location);
+  return g_file_dup (priv->location);
 }
 
 /**
@@ -852,16 +856,17 @@ gtr_po_get_location (GtrPo * po)
 void
 gtr_po_set_location (GtrPo * po, GFile * location)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_if_fail (GTR_IS_PO (po));
 
-  if (po->priv->location)
+  if (priv->location)
     {
-      if (g_file_equal (po->priv->location, location))
+      if (g_file_equal (priv->location, location))
         return;
-      g_object_unref (po->priv->location);
+      g_object_unref (priv->location);
     }
 
-  po->priv->location = g_file_dup (location);
+  priv->location = g_file_dup (location);
 
   g_object_notify (G_OBJECT (po), "location");
 }
@@ -875,9 +880,10 @@ gtr_po_set_location (GtrPo * po, GFile * location)
 GtrPoState
 gtr_po_get_state (GtrPo * po)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_val_if_fail (GTR_IS_PO (po), 0);
 
-  return po->priv->state;
+  return priv->state;
 }
 
 /**
@@ -890,9 +896,10 @@ gtr_po_get_state (GtrPo * po)
 void
 gtr_po_set_state (GtrPo * po, GtrPoState state)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_if_fail (GTR_IS_PO (po));
 
-  po->priv->state = state;
+  priv->state = state;
 
   g_object_notify (G_OBJECT (po), "state");
 }
@@ -903,7 +910,8 @@ gtr_po_set_state (GtrPo * po, GtrPoState state)
 gboolean
 gtr_po_get_write_perms (GtrPo * po)
 {
-  return po->priv->no_write_perms;
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return priv->no_write_perms;
 }
 
 /**
@@ -916,9 +924,10 @@ gtr_po_get_write_perms (GtrPo * po)
 GList *
 gtr_po_get_messages (GtrPo * po)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_val_if_fail (GTR_IS_PO (po), NULL);
 
-  return po->priv->messages;
+  return priv->messages;
 }
 
 /* FIXME: this is hack, we should fix it */
@@ -932,9 +941,10 @@ gtr_po_get_messages (GtrPo * po)
 void
 gtr_po_set_messages (GtrPo * po, GList * messages)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_if_fail (GTR_IS_PO (po));
 
-  po->priv->messages = messages;
+  priv->messages = messages;
 }
 
 /**
@@ -947,7 +957,8 @@ gtr_po_set_messages (GtrPo * po, GList * messages)
 GList *
 gtr_po_get_current_message (GtrPo * po)
 {
-  return po->priv->current;
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return priv->current;
 }
 
 /**
@@ -962,8 +973,9 @@ void
 gtr_po_update_current_message (GtrPo * po, GtrMsg * msg)
 {
   gint i;
-  i = g_list_index (po->priv->messages, msg);
-  po->priv->current = g_list_nth (po->priv->messages, i);
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  i = g_list_index (priv->messages, msg);
+  priv->current = g_list_nth (priv->messages, i);
 }
 
 /**
@@ -976,7 +988,8 @@ gtr_po_update_current_message (GtrPo * po, GtrMsg * msg)
 GList *
 gtr_po_get_domains (GtrPo * po)
 {
-  return po->priv->domains;
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return priv->domains;
 }
 
 /**
@@ -990,7 +1003,8 @@ gtr_po_get_domains (GtrPo * po)
 po_file_t
 gtr_po_get_po_file (GtrPo * po)
 {
-  return po->priv->gettext_po_file;
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return priv->gettext_po_file;
 }
 
 /**
@@ -1004,8 +1018,9 @@ GList *
 gtr_po_get_next_fuzzy (GtrPo * po)
 {
   GList *msg;
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  msg = po->priv->current;
+  msg = priv->current;
   while ((msg = g_list_next (msg)))
     {
       if (gtr_msg_is_fuzzy (msg->data))
@@ -1027,8 +1042,9 @@ GList *
 gtr_po_get_prev_fuzzy (GtrPo * po)
 {
   GList *msg;
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  msg = po->priv->current;
+  msg = priv->current;
   while ((msg = g_list_previous (msg)))
     {
       if (gtr_msg_is_fuzzy (msg->data))
@@ -1050,8 +1066,9 @@ GList *
 gtr_po_get_next_untrans (GtrPo * po)
 {
   GList *msg;
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  msg = po->priv->current;
+  msg = priv->current;
   while ((msg = g_list_next (msg)))
     {
       if (!gtr_msg_is_translated (msg->data))
@@ -1075,8 +1092,9 @@ GList *
 gtr_po_get_prev_untrans (GtrPo * po)
 {
   GList *msg;
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  msg = po->priv->current;
+  msg = priv->current;
   while ((msg = g_list_previous (msg)))
     {
       if (!gtr_msg_is_translated (msg->data))
@@ -1099,8 +1117,9 @@ GList *
 gtr_po_get_next_fuzzy_or_untrans (GtrPo * po)
 {
   GList *msg;
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  msg = po->priv->current;
+  msg = priv->current;
   while ((msg = g_list_next (msg)))
     {
       if (gtr_msg_is_fuzzy (msg->data) || !gtr_msg_is_translated (msg->data))
@@ -1123,8 +1142,9 @@ GList *
 gtr_po_get_prev_fuzzy_or_untrans (GtrPo * po)
 {
   GList *msg;
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  msg = po->priv->current;
+  msg = priv->current;
   while ((msg = g_list_previous (msg)))
     {
       if (gtr_msg_is_fuzzy (msg->data) || !gtr_msg_is_translated (msg->data))
@@ -1147,9 +1167,10 @@ gtr_po_get_prev_fuzzy_or_untrans (GtrPo * po)
 GList *
 gtr_po_get_msg_from_number (GtrPo * po, gint number)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_val_if_fail (GTR_IS_PO (po), NULL);
 
-  return g_list_nth (po->priv->messages, number);
+  return g_list_nth (priv->messages, number);
 }
 
 /**
@@ -1161,9 +1182,10 @@ gtr_po_get_msg_from_number (GtrPo * po, gint number)
 GtrHeader *
 gtr_po_get_header (GtrPo * po)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_val_if_fail (GTR_IS_PO (po), NULL);
 
-  return po->priv->header;
+  return priv->header;
 }
 
 /**
@@ -1175,9 +1197,10 @@ gtr_po_get_header (GtrPo * po)
 gint
 gtr_po_get_translated_count (GtrPo * po)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_val_if_fail (GTR_IS_PO (po), -1);
 
-  return po->priv->translated;
+  return priv->translated;
 }
 
 /*
@@ -1188,12 +1211,13 @@ gtr_po_get_translated_count (GtrPo * po)
 void
 _gtr_po_increase_decrease_translated (GtrPo * po, gboolean increase)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_if_fail (GTR_IS_PO (po));
 
   if (increase)
-    po->priv->translated++;
+    priv->translated++;
   else
-    po->priv->translated--;
+    priv->translated--;
 }
 
 /**
@@ -1205,9 +1229,10 @@ _gtr_po_increase_decrease_translated (GtrPo * po, gboolean increase)
 gint
 gtr_po_get_fuzzy_count (GtrPo * po)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_val_if_fail (GTR_IS_PO (po), -1);
 
-  return po->priv->fuzzy;
+  return priv->fuzzy;
 }
 
 /*
@@ -1218,12 +1243,13 @@ gtr_po_get_fuzzy_count (GtrPo * po)
 void
 _gtr_po_increase_decrease_fuzzy (GtrPo * po, gboolean increase)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_if_fail (GTR_IS_PO (po));
 
   if (increase)
-    po->priv->fuzzy++;
+    priv->fuzzy++;
   else
-    po->priv->fuzzy--;
+    priv->fuzzy--;
 }
 
 /**
@@ -1235,10 +1261,11 @@ _gtr_po_increase_decrease_fuzzy (GtrPo * po, gboolean increase)
 gint
 gtr_po_get_untranslated_count (GtrPo * po)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_val_if_fail (GTR_IS_PO (po), -1);
 
-  return (g_list_length (po->priv->messages) - po->priv->translated -
-          po->priv->fuzzy);
+  return (g_list_length (priv->messages) - priv->translated -
+          priv->fuzzy);
 }
 
 /**
@@ -1250,9 +1277,10 @@ gtr_po_get_untranslated_count (GtrPo * po)
 gint
 gtr_po_get_messages_count (GtrPo * po)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_val_if_fail (GTR_IS_PO (po), -1);
 
-  return g_list_length (po->priv->messages);
+  return g_list_length (priv->messages);
 }
 
 /**
@@ -1264,9 +1292,10 @@ gtr_po_get_messages_count (GtrPo * po)
 gint
 gtr_po_get_message_position (GtrPo * po)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_val_if_fail (GTR_IS_PO (po), -1);
 
-  return gtr_msg_get_po_position (GTR_MSG (po->priv->current->data));
+  return gtr_msg_get_po_position (GTR_MSG (priv->current->data));
 }
 
 /**
@@ -1280,6 +1309,7 @@ gtr_po_get_message_position (GtrPo * po)
 gchar *
 gtr_po_check_po_file (GtrPo * po)
 {
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   struct po_xerror_handler handler;
 
   g_return_val_if_fail (po != NULL, NULL);
@@ -1288,7 +1318,7 @@ gtr_po_check_po_file (GtrPo * po)
   handler.xerror2 = &on_gettext_po_xerror2;
   message_error = NULL;
 
-  po_file_check_all (po->priv->gettext_po_file, &handler);
+  po_file_check_all (priv->gettext_po_file, &handler);
 
   return message_error;
 }

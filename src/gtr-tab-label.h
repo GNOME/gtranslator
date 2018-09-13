@@ -37,12 +37,9 @@ G_BEGIN_DECLS
 
 typedef struct _GtrTabLabel		GtrTabLabel;
 typedef struct _GtrTabLabelClass	GtrTabLabelClass;
-typedef struct _GtrTabLabelPrivate	GtrTabLabelPrivate;
 
 struct _GtrTabLabel {
 	GtkBox parent;
-	
-	GtrTabLabelPrivate *priv;
 };
 
 struct _GtrTabLabelClass {

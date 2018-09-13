@@ -246,7 +246,7 @@ gtr_progress_set (GtrProgress *self,
       g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_FUZZY]);
     }
 
-  gtk_widget_queue_draw (self);
+  gtk_widget_queue_draw (GTK_WIDGET (self));
 }
 
 gint

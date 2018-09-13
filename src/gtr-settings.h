@@ -41,13 +41,10 @@ G_BEGIN_DECLS
 
 typedef struct _GtrSettings		GtrSettings;
 typedef struct _GtrSettingsClass	GtrSettingsClass;
-typedef struct _GtrSettingsPrivate	GtrSettingsPrivate;
 
 struct _GtrSettings
 {
   GObject parent;
-
-  GtrSettingsPrivate *priv;
 };
 
 struct _GtrSettingsClass
@@ -59,8 +56,6 @@ GType                    gtr_settings_get_type                  (void) G_GNUC_CO
 
 GSettings               *gtr_settings_new                       (void);
 
-gchar                   *gtr_settings_get_system_font           (GtrSettings *gs);
-
 /* key constants: IMPORTANT: keep them in the same order as the schema */
 #define GTR_SETTINGS_WARN_IF_CONTAINS_FUZZY		"warn-if-contains-fuzzy"
 #define GTR_SETTINGS_AUTO_SAVE				"auto-save"
@@ -69,8 +64,6 @@ gchar                   *gtr_settings_get_system_font           (GtrSettings *gs
 #define GTR_SETTINGS_USE_PROFILE_VALUES			"use-profile-values"
 #define GTR_SETTINGS_HIGHLIGHT_SYNTAX			"highlight-syntax"
 #define GTR_SETTINGS_VISIBLE_WHITESPACE			"visible-whitespace"
-#define GTR_SETTINGS_USE_CUSTOM_FONT			"use-custom-font"
-#define GTR_SETTINGS_EDITOR_FONT			"editor-font"
 #define GTR_SETTINGS_UNMARK_FUZZY_WHEN_CHANGED		"unmark-fuzzy-when-changed"
 #define GTR_SETTINGS_SPELLCHECK				"spellcheck"
 #define GTR_SETTINGS_PANEL_SWITCHER_STYLE		"panel-switcher-style"

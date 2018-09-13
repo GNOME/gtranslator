@@ -59,8 +59,6 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
   GtrTab *tab;
   GList *current;
   GtrView *active_view;
-  GtrHeader *header;
-  const gchar *project_id;
 
   /*
    * If the filename can't be opened, pass the error back to the caller
@@ -79,9 +77,6 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
     gtr_window_show_projects (window);
     return FALSE;
   }
-
-  header = gtr_po_get_header (po);
-  project_id = gtr_header_get_prj_id_version (header);
 
   /*
    * Create a page to add to our list of open files

@@ -146,8 +146,8 @@ load_iso_entries (int iso,
   if (reader == NULL)
     goto out;
 
-  xmlStrPrintf (iso_entries, sizeof (iso_entries), (const xmlChar *)"iso_%d_entries", iso);
-  xmlStrPrintf (iso_entry, sizeof (iso_entry), (const xmlChar *)"iso_%d_entry", iso);
+  xmlStrPrintf (iso_entries, sizeof (iso_entries), (const char *)"iso_%d_entries", iso);
+  xmlStrPrintf (iso_entry, sizeof (iso_entry), (const char *)"iso_%d_entry", iso);
 
   ret = xmlTextReaderRead (reader);
 

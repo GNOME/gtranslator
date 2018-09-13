@@ -36,21 +36,10 @@
 #define GTR_IS_HEADER_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_HEADER_DIALOG))
 #define GTR_HEADER_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_HEADER_DIALOG, GtrHeaderDialogClass))
 
-/* Private structure type */
-typedef struct _GtrHeaderDialogPrivate GtrHeaderDialogPrivate;
-
 /*
  * Main object structure
  */
 typedef struct _GtrHeaderDialog GtrHeaderDialog;
-
-struct _GtrHeaderDialog
-{
-  GtkDialog parent_instance;
-
-  /*< private > */
-  GtrHeaderDialogPrivate *priv;
-};
 
 /*
  * Class definition

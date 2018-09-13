@@ -135,9 +135,6 @@ gtr_close_confirmation_dialog_init (GtrCloseConfirmationDialog * dlg)
 {
   AtkObject *atk_obj;
 
-  GtrCloseConfirmationDialogPrivate *priv;
-  priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
-
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
   gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))), 14);
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);

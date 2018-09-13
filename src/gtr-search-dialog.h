@@ -36,8 +36,6 @@ G_BEGIN_DECLS
 #define GTR_IS_SEARCH_DIALOG(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GTR_TYPE_SEARCH_DIALOG))
 #define GTR_IS_SEARCH_DIALOG_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_SEARCH_DIALOG))
 #define GTR_SEARCH_DIALOG_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GTR_TYPE_SEARCH_DIALOG, GtrSearchDialogClass))
-/* Private structure type */
-typedef struct _GtrSearchDialogPrivate GtrSearchDialogPrivate;
 
 /*
  * Main object structure
@@ -47,9 +45,6 @@ typedef struct _GtrSearchDialog GtrSearchDialog;
 struct _GtrSearchDialog
 {
   GtkDialog dialog;
-
-  /*< private > */
-  GtrSearchDialogPrivate *priv;
 };
 
 /*

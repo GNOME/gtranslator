@@ -36,21 +36,21 @@
 #include <glib-object.h>
 #include <string.h>
 
-#define GTR_HEADER_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
-                                         (object), \
-                                         GTR_TYPE_HEADER, \
-                                         GtrHeaderPrivate))
-
-G_DEFINE_TYPE (GtrHeader, gtr_header, GTR_TYPE_MSG)
-
-struct _GtrHeaderPrivate
+typedef struct
 {
   GSettings *settings;
 
   GtrProfileManager *prof_manager;
   GtrProfile *profile;
   gint nplurals;
+} GtrHeaderPrivate;
+
+struct _GtrHeader
+{
+  GtrMsg parent_instance;
 };
+
+G_DEFINE_TYPE_WITH_PRIVATE (GtrHeader, gtr_header, GTR_TYPE_MSG)
 
 static void
 gtr_header_set_field (GtrHeader * header,
@@ -74,10 +74,11 @@ parse_nplurals (GtrHeader * header)
 {
   gchar *pointer, *plural_forms;
   gboolean use_profile_values;
+  GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
 
   plural_forms = gtr_header_get_plural_forms (header);
-  header->priv->nplurals = -1;
-  use_profile_values = g_settings_get_boolean (header->priv->settings,
+  priv->nplurals = -1;
+  use_profile_values = g_settings_get_boolean (priv->settings,
                                                GTR_SETTINGS_USE_PROFILE_VALUES);
 
   if (use_profile_values || !plural_forms)
@@ -85,8 +86,8 @@ parse_nplurals (GtrHeader * header)
       const gchar *plural_form = NULL;
       GtrProfile *profile;
 
-      if (header->priv->profile != NULL)
-        profile = header->priv->profile;
+      if (priv->profile != NULL)
+        profile = priv->profile;
       else
         {
           GtrProfileManager *prof_manager;
@@ -129,10 +130,10 @@ parse_nplurals (GtrHeader * header)
       else
         return;
 
-      header->priv->nplurals = g_ascii_digit_value (*pointer);
+      priv->nplurals = g_ascii_digit_value (*pointer);
     }
 
-  /*g_message ("nplurals: %d", header->priv->nplurals); */
+  /*g_message ("nplurals: %d", priv->nplurals); */
 
   g_free (plural_forms);
 }
@@ -142,22 +143,23 @@ profile_removed_cb (GtrProfileManager *prof_manager,
                     GtrProfile        *profile,
                     GtrHeader         *header)
 {
-  if (profile == header->priv->profile)
-    header->priv->profile = NULL;
+  GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
+  if (profile == priv->profile)
+    priv->profile = NULL;
 }
 
 static void
 gtr_header_init (GtrHeader * header)
 {
-  header->priv = GTR_HEADER_GET_PRIVATE (header);
+  GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
 
-  header->priv->nplurals = -1;
-  header->priv->profile = NULL;
+  priv->nplurals = -1;
+  priv->profile = NULL;
 
-  header->priv->settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
-  header->priv->prof_manager = gtr_profile_manager_get_default ();
+  priv->settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
+  priv->prof_manager = gtr_profile_manager_get_default ();
 
-  g_signal_connect (header->priv->prof_manager, "profile-removed",
+  g_signal_connect (priv->prof_manager, "profile-removed",
                     G_CALLBACK (profile_removed_cb), header);
 }
 
@@ -165,10 +167,11 @@ static void
 gtr_header_dispose (GObject * object)
 {
   GtrHeader *header = GTR_HEADER (object);
+  GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
 
-  g_clear_object (&header->priv->settings);
-  g_clear_object (&header->priv->prof_manager);
-  g_clear_object (&header->priv->profile);
+  g_clear_object (&priv->settings);
+  g_clear_object (&priv->prof_manager);
+  g_clear_object (&priv->profile);
 
   G_OBJECT_CLASS (gtr_header_parent_class)->dispose (object);
 }
@@ -177,8 +180,6 @@ static void
 gtr_header_class_init (GtrHeaderClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (GtrHeaderPrivate));
 
   object_class->dispose = gtr_header_dispose;
 }
@@ -536,10 +537,11 @@ gtr_header_set_plural_forms (GtrHeader * header, const gchar * plural_forms)
 gint
 gtr_header_get_nplurals (GtrHeader * header)
 {
+  GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
   g_return_val_if_fail (GTR_IS_HEADER (header), 1);
 
-  if (header->priv->nplurals > -1)
-    return header->priv->nplurals;
+  if (priv->nplurals > -1)
+    return priv->nplurals;
   else
     return 1;
 }
@@ -549,13 +551,14 @@ set_profile_values (GtrHeader *header)
 {
   GtrProfile *active_profile;
   gboolean use_profile_values;
+  GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
 
-  if (header->priv->profile != NULL)
-    active_profile = header->priv->profile;
+  if (priv->profile != NULL)
+    active_profile = priv->profile;
   else
-    active_profile = gtr_profile_manager_get_active_profile (header->priv->prof_manager);
+    active_profile = gtr_profile_manager_get_active_profile (priv->prof_manager);
 
-  use_profile_values = g_settings_get_boolean (header->priv->settings,
+  use_profile_values = g_settings_get_boolean (priv->settings,
                                                GTR_SETTINGS_USE_PROFILE_VALUES);
 
   if (use_profile_values && active_profile != NULL)
@@ -608,15 +611,16 @@ update_comments (GtrHeader *header, const gchar *comments)
   gchar *current_year;
   gboolean use_profile_values;
   gint i;
+  GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
 
-  if (header->priv->profile != NULL)
-    active_profile = header->priv->profile;
+  if (priv->profile != NULL)
+    active_profile = priv->profile;
   else
-    active_profile = gtr_profile_manager_get_active_profile (header->priv->prof_manager);
+    active_profile = gtr_profile_manager_get_active_profile (priv->prof_manager);
 
   current_year = gtr_utils_get_current_year ();
 
-  use_profile_values = g_settings_get_boolean (header->priv->settings,
+  use_profile_values = g_settings_get_boolean (priv->settings,
                                                GTR_SETTINGS_USE_PROFILE_VALUES);
 
   /* Save the previous translator to update the header's comment */
@@ -732,9 +736,10 @@ void
 gtr_header_set_profile (GtrHeader  *header,
                         GtrProfile *profile)
 {
+  GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
   g_return_if_fail (GTR_IS_HEADER (header));
 
-  header->priv->profile = g_object_ref (profile);
+  priv->profile = g_object_ref (profile);
 }
 
 /**
@@ -748,7 +753,8 @@ gtr_header_set_profile (GtrHeader  *header,
 GtrProfile *
 gtr_header_get_profile (GtrHeader *header)
 {
+  GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
 
-  return header->priv->profile;
+  return priv->profile;
 }

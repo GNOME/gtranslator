@@ -38,20 +38,13 @@ G_BEGIN_DECLS
 #define GTR_IS_HISTORY_ENTRY(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_HISTORY_ENTRY))
 #define GTR_IS_HISTORY_ENTRY_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_HISTORY_ENTRY))
 #define GTR_HISTORY_ENTRY_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTR_TYPE_HISTORY_ENTRY, GtrHistoryEntryClass))
+
 typedef struct _GtrHistoryEntry GtrHistoryEntry;
 typedef struct _GtrHistoryEntryClass GtrHistoryEntryClass;
-typedef struct _GtrHistoryEntryPrivate GtrHistoryEntryPrivate;
 
 struct _GtrHistoryEntryClass
 {
   GtkComboBoxTextClass parent_class;
-};
-
-struct _GtrHistoryEntry
-{
-  GtkComboBoxText parent_instance;
-
-  GtrHistoryEntryPrivate *priv;
 };
 
 GType

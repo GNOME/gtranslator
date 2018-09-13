@@ -37,13 +37,10 @@ G_BEGIN_DECLS
 
 typedef struct _GtrProfileManager		GtrProfileManager;
 typedef struct _GtrProfileManagerClass		GtrProfileManagerClass;
-typedef struct _GtrProfileManagerPrivate	GtrProfileManagerPrivate;
 
 struct _GtrProfileManager
 {
   GObject parent;
-
-  GtrProfileManagerPrivate *priv;
 };
 
 struct _GtrProfileManagerClass

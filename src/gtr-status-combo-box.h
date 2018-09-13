@@ -35,15 +35,12 @@ G_BEGIN_DECLS
 #define GTR_STATUS_COMBO_BOX_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), GTR_TYPE_STATUS_COMBO_BOX, GtrStatusComboBoxClass))
 
 typedef struct _GtrStatusComboBox		GtrStatusComboBox;
-typedef struct _GtrStatusComboBoxPrivate	GtrStatusComboBoxPrivate;
 typedef struct _GtrStatusComboBoxClass	GtrStatusComboBoxClass;
 typedef struct _GtrStatusComboBoxClassPrivate	GtrStatusComboBoxClassPrivate;
 
 struct _GtrStatusComboBox
 {
 	GtkEventBox parent;
-	
-	GtrStatusComboBoxPrivate *priv;
 };
 
 struct _GtrStatusComboBoxClass

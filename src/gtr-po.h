@@ -42,9 +42,6 @@ G_BEGIN_DECLS
 #define GTR_IS_PO(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_PO))
 #define GTR_IS_PO_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_PO))
 #define GTR_PO_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_PO, GtrPoClass))
-/* Private structure type */
-typedef struct _GtrPoPrivate GtrPoPrivate;
-
 /*
  * Main object structure
  */
@@ -53,9 +50,6 @@ typedef struct _GtrPo GtrPo;
 struct _GtrPo
 {
   GObject parent_instance;
-
-  /*< private > */
-  GtrPoPrivate *priv;
 };
 
 /*
