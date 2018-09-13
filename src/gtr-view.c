@@ -142,6 +142,7 @@ gtr_view_init (GtrView * view)
 
   /* Set scheme color according to preferences */
   gtr_view_reload_scheme_color (view);
+  gtk_text_view_set_monospace (GTK_TEXT_VIEW (view), TRUE);
 }
 
 static void
@@ -270,6 +271,7 @@ gtr_view_enable_visible_whitespace (GtrView * view, gboolean enable)
 
   source = GTK_SOURCE_VIEW (view);
   drawer = gtk_source_view_get_space_drawer (source);
+  gtk_source_space_drawer_set_enable_matrix (drawer, TRUE);
 
   if (enable)
     gtk_source_space_drawer_set_types_for_locations (drawer,
