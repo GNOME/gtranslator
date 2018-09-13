@@ -377,6 +377,17 @@ build_tm_activated (GSimpleAction *action,
   gtr_window_show_tm_dialog (w);
 }
 
+static void
+toggle_fuzzy_activated (GSimpleAction *action,
+                        GVariant      *parameter,
+                        gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  GtrWindow *w = GTR_WINDOW (priv->active_window);
+  gtr_message_status_toggle_fuzzy (NULL, w);
+}
+
 static GActionEntry app_entries[] = {
   { "save", save_activated, NULL, NULL, NULL },
   { "saveas", saveas_activated, NULL, NULL, NULL },
@@ -390,6 +401,8 @@ static GActionEntry app_entries[] = {
 
   { "prev_no", prev_no_activated, NULL, NULL, NULL },
   { "next_no", next_no_activated, NULL, NULL, NULL },
+
+  { "fuzzy", toggle_fuzzy_activated, NULL, NULL, NULL },
 
   { "build_tm", build_tm_activated, NULL, NULL, NULL },
   { "new_window", new_window_activated, NULL, NULL, NULL },
@@ -436,6 +449,8 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.next", "<Alt>Right");
   set_kb (application, "app.prev_no", "<Alt>Page_Up");
   set_kb (application, "app.next_no", "<Alt>Page_Down");
+
+  set_kb (application, "app.fuzzy", "<Alt>f");
 
   builder = gtk_builder_new ();
   gtk_builder_add_from_resource (builder, "/org/gnome/translator/gtranslator-menu.ui", NULL);
