@@ -260,6 +260,10 @@ gtr_message_table_set_property (GObject      *object,
     {
     case PROP_TAB:
       priv->tab = GTR_TAB (g_value_get_object (value));
+      g_signal_connect (priv->tab,
+                        "showed-message", G_CALLBACK (showed_message_cb), table);
+      g_signal_connect (priv->tab,
+                        "message-changed", G_CALLBACK (message_changed_cb), table);
       break;
 
     default:
@@ -327,18 +331,7 @@ gtr_message_table_class_init (GtrMessageTableClass * klass)
 GtkWidget *
 gtr_message_table_new (void)
 {
-  GtrMessageTable *obj =
-    GTR_MESSAGE_TABLE (g_object_new (GTR_TYPE_MESSAGE_TABLE, NULL));
-  GtrMessageTablePrivate *priv;
-
-  priv = gtr_message_table_get_instance_private (obj);
-
-  g_signal_connect (priv->tab,
-                    "showed-message", G_CALLBACK (showed_message_cb), obj);
-  g_signal_connect (priv->tab,
-                    "message-changed", G_CALLBACK (message_changed_cb), obj);
-
-  return GTK_WIDGET (obj);
+  return GTK_WIDGET (g_object_new (GTR_TYPE_MESSAGE_TABLE, NULL));
 }
 
 /**
