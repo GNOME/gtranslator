@@ -148,8 +148,7 @@ subdir('data')
 subdir('src')
 subdir('po')
 subdir('help')
-
-#subdir('man')
+subdir('man')
 
 if enable_gtk_doc
   subdir('doc/reference')
