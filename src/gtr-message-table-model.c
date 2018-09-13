@@ -30,8 +30,8 @@
 
 #define G_LIST(x) ((GList *) x)
 
-#define TABLE_FUZZY_ICON "gtk-dialog-warning"
-#define TABLE_UNTRANSLATED_ICON "gtk-dialog-error"
+#define TABLE_FUZZY_ICON "dialog-warning-symbolic"
+#define TABLE_UNTRANSLATED_ICON "dialog-error-symbolic"
 #define TABLE_TRANSLATED_ICON NULL
 
 enum {
