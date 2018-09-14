@@ -49,3 +49,5 @@ compiled_schemas = custom_target(
   command: [find_program('glib-compile-schemas'), meson.current_build_dir()]
 )
 
+install_data ('gtr-plural-forms.ini', install_dir: join_paths (gtranslator_pkgdatadir, 'ui'))
+
