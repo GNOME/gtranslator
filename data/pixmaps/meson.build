@@ -1,7 +1,6 @@
 pixdir = join_paths(gtranslator_datadir, 'pixmaps')
 
 install_data([
-    'gtranslator-plugin.png',
 	'gtranslator-plugin.png',
 	'gtranslator-logo.png',
 	'gtranslator-fuzzy-next.png',
