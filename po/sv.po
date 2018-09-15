@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-09-10 18:07+0000\n"
-"PO-Revision-Date: 2018-09-10 20:56+0200\n"
+"POT-Creation-Date: 2018-09-13 13:07+0000\n"
+"PO-Revision-Date: 2018-09-15 23:00+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -22,18 +22,18 @@ msgstr ""
 "X-Generator: Poedit 2.1.1\n"
 
 # src/prefs.c:239
-#: ../data/org.gnome.Gtranslator.appdata.xml.in.h:1
-#: ../data/org.gnome.Gtranslator.desktop.in.h:1 ../src/gtr-application.c:438
-#: ../src/gtr-window.ui.h:1
+#: data/org.gnome.Gtranslator.appdata.xml.in:6
+#: data/org.gnome.Gtranslator.desktop.in:3 src/gtr-application.c:429
+#: src/gtr-window.ui:25
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
-#: ../data/org.gnome.Gtranslator.appdata.xml.in.h:2
-#: ../data/org.gnome.Gtranslator.desktop.in.h:4
+#: data/org.gnome.Gtranslator.appdata.xml.in:7
+#: data/org.gnome.Gtranslator.desktop.in:5
 msgid "Translate and localize applications and libraries"
 msgstr "Översätt och lokalanpassa program och bibliotek"
 
-#: ../data/org.gnome.Gtranslator.appdata.xml.in.h:3
+#: data/org.gnome.Gtranslator.appdata.xml.in:9
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -49,7 +49,7 @@ msgstr ""
 "meddelanden i po-filen), enkel navigering och redigering av "
 "översättningsmeddelanden och kommentarer i översättningen."
 
-#: ../data/org.gnome.Gtranslator.appdata.xml.in.h:4
+#: data/org.gnome.Gtranslator.appdata.xml.in:18
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
 "alternate language, insert tags, integration with subversion and a source "
@@ -60,21 +60,23 @@ msgstr ""
 "och källkodsläsare."
 
 # src/menus.c:315 src/menus.c:316
-#: ../data/org.gnome.Gtranslator.desktop.in.h:2
+#: data/org.gnome.Gtranslator.desktop.in:4
 msgid "PO File Editor"
 msgstr "PO-filredigerare"
 
-# src/dialogs.c:390
-#: ../data/org.gnome.Gtranslator.desktop.in.h:3
-msgid "Gtranslator PO File Editor"
-msgstr "Gtranslator PO-filredigerare"
+# src/prefs.c:239
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: data/org.gnome.Gtranslator.desktop.in:7
+#| msgid "Gtranslator"
+msgid "org.gnome.Gtranslator"
+msgstr "org.gnome.Gtranslator"
 
 # src/prefs.c:166
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:1
+#: data/org.gnome.Gtranslator.gschema.xml.in:24
 msgid "Warn if file contains fuzzy translations"
 msgstr "Varna om filen innehåller luddiga översättningar"
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:2
+#: data/org.gnome.Gtranslator.gschema.xml.in:25
 msgid ""
 "If true, warn the user when saving a PO translation file containing fuzzy "
 "strings."
@@ -82,553 +84,502 @@ msgstr ""
 "Om true, varna användaren när en PO-översättningsfil som innehåller luddiga "
 "strängar, sparas."
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:3
+#: data/org.gnome.Gtranslator.gschema.xml.in:32
 msgid "Auto save files"
 msgstr "Spara automatiskt"
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:4
+#: data/org.gnome.Gtranslator.gschema.xml.in:33
 msgid "If true, automatically save files at specified intervals."
 msgstr "Om true, spara filer automatiskt vid angivna intervall."
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:5
+#: data/org.gnome.Gtranslator.gschema.xml.in:39
 msgid "Auto save interval"
 msgstr "Intervall för att spara automatiskt"
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:6
+#: data/org.gnome.Gtranslator.gschema.xml.in:40
 msgid "Interval in minutes at which to automatically save files."
 msgstr "Intervall i minuter i vilket filer automatiskt sparas."
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:7
+#: data/org.gnome.Gtranslator.gschema.xml.in:46
 msgid "Create backup before saving"
 msgstr "Skapa säkerhetskopia innan filer sparas"
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:8
+#: data/org.gnome.Gtranslator.gschema.xml.in:47
 msgid "If true, create a backup copy of a file before saving it."
 msgstr "Om true, skapa en säkerhetskopia av filer innan de sparas."
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:9
+#: data/org.gnome.Gtranslator.gschema.xml.in:53
 msgid "Use profile values for header"
 msgstr "Använd profilvärden för huvud"
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:10
+#: data/org.gnome.Gtranslator.gschema.xml.in:54
 msgid ""
 "If true, overwrite the values in the PO header with those in the active "
 "profile."
 msgstr "Om true, skriv över värdena i PO-huvudet med de i den aktiva profilen."
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:11
+#: data/org.gnome.Gtranslator.gschema.xml.in:63
 msgid "Highlight syntax in edit fields"
 msgstr "Markeringssyntax i redigeringsfält"
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:12
+#: data/org.gnome.Gtranslator.gschema.xml.in:64
 msgid "If true, apply syntax highlighting to strings in edit fields."
 msgstr "Om true, tillämpa syntaxmarkering på strängar i redigeringsfälten."
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:13
+#: data/org.gnome.Gtranslator.gschema.xml.in:70
 msgid "Make whitespace visible"
 msgstr "Gör alla tecken synliga"
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:14
+#: data/org.gnome.Gtranslator.gschema.xml.in:71
 msgid "If true, display whitespace in strings as representative symbols."
 msgstr "Om true, visa mellanslag i strängar som representativa symboler."
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:15
-msgid "Use custom font"
-msgstr "Använd anpassat teckensnitt"
-
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:16
-msgid "If true, use a custom font for edit fields."
-msgstr "Om true, använd anpassat teckensnitt för redigeringsfält."
-
-# src/sidebar.c:107
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:17
-msgid "Editor font"
-msgstr "Teckensnitt för redigerare"
-
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:18
-msgid "Custom font to use for edit fields."
-msgstr "Anpassat teckensnitt för redigeringsfält."
-
 # src/prefs.c:162
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:19
+#: data/org.gnome.Gtranslator.gschema.xml.in:77
 msgid "Remove fuzzy status when message is changed"
 msgstr "Ta bort luddig status när meddelande ändras"
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:20
+#: data/org.gnome.Gtranslator.gschema.xml.in:78
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr "Om true, ta bort luddig status från översättningar när de ändras."
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:21
+#: data/org.gnome.Gtranslator.gschema.xml.in:84
 msgid "Check spelling"
 msgstr "Kontrollera stavning"
 
 # src/menus.c:217 src/menus.c:342
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:22
+#: data/org.gnome.Gtranslator.gschema.xml.in:85
 msgid "If true, check the spelling of translated messages."
 msgstr "Om true, kontrollera stavningen för översatta meddelanden."
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:23
+#: data/org.gnome.Gtranslator.gschema.xml.in:93
 msgid "Side panel switcher style"
 msgstr "Sidopanelens växlingsstil"
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:24
+#: data/org.gnome.Gtranslator.gschema.xml.in:94
 msgid "Style for switchers in the side panel."
 msgstr "Stil för växlare i sidopanelen."
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:25
+#: data/org.gnome.Gtranslator.gschema.xml.in:100
 msgid "Color scheme"
 msgstr "Färgschema"
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:26
+#: data/org.gnome.Gtranslator.gschema.xml.in:101
 msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
 msgstr "Namn på ett gtksourceview-färgschema att använda för syntaxmarkering."
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:27
+#: data/org.gnome.Gtranslator.gschema.xml.in:107
 msgid "Message list sort order"
 msgstr "Sorteringsordning för meddelandelista"
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:28
+#: data/org.gnome.Gtranslator.gschema.xml.in:108
 msgid ""
-"Sort order to use in the message list. Possible values are \"status\", \"id"
-"\", \"original-text\" and \"translated-text\"."
+"Sort order to use in the message list. Possible values are “status”, “id”, "
+"“original-text” and “translated-text”."
 msgstr ""
-"Sorteringsordning att använda i meddelandelistan. Möjliga värden är \"status"
-"\", \"id\", \"original_text\" och \"translated_text\"."
+"Sorteringsordning att använda i meddelandelistan. Möjliga värden är "
+"”status”, ”id”, ”original-text” och ”translated-text”."
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:29
+#: data/org.gnome.Gtranslator.gschema.xml.in:143
 msgid "Active plugins"
 msgstr "Aktiva insticksmoduler"
 
-#: ../data/org.gnome.Gtranslator.gschema.xml.in.h:30
+#: data/org.gnome.Gtranslator.gschema.xml.in:144
 msgid ""
-"List of active plugins. It contains the \"Location\" of the active plugins. "
-"See the .gtranslator-plugin file for obtaining the \"Location\" of a given "
+"List of active plugins. It contains the “Location” of the active plugins. "
+"See the .gtranslator-plugin file for obtaining the “Location” of a given "
 "plugin."
 msgstr ""
-"Lista över aktiva insticksmoduler. Den innehåller \"Lagringsplatsen\" för "
-"den aktiva insticksmodulen. Sök filen .gtranslator.plugin för att ta reda på "
-"lagringsplatsen för en specifik insticksmodul."
+"Lista över aktiva insticksmoduler. Den innehåller ”Lagringsplatsen” för de "
+"aktiva insticksmodulerna. Sök filen .gtranslator-plugin för att ta reda på "
+"”Lagringsplatsen” för en specifik insticksmodul."
 
-#: ../data/po.lang.h:1
-msgid "Others"
-msgstr "Övriga"
-
-# src/dialogs.c:390
-#: ../data/po.lang.h:2
-msgid "gtranslator highlight"
-msgstr "gtranslator-markering"
-
-#: ../data/po.lang.h:3
-msgid "Tag"
-msgstr "Tagg"
-
-#: ../data/po.lang.h:4
-msgid "Special variable"
-msgstr "Specialvariabel"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:126
+#: plugins/alternate-language/gtr-alternate-language-panel.c:126
 msgid "Message not found"
 msgstr "Meddelandet hittades inte"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:229
+#: plugins/alternate-language/gtr-alternate-language-panel.c:229
 msgid "Open file for alternate language"
 msgstr "Öppna fil för alternativt språk"
 
 # data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:254
+#: plugins/alternate-language/gtr-alternate-language-panel.c:254
 msgid "File closed"
 msgstr "Filen är stängd"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:322
-msgctxt "alternate lang"
+#: plugins/alternate-language/gtr-alternate-language-panel.c:322
+#: src/gtr-file-dialogs.c:48
 msgid "_Open"
 msgstr "_Öppna"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:328
-msgctxt "alternate lang"
+#: plugins/alternate-language/gtr-alternate-language-panel.c:328
+#: src/gtr-header-dialog.c:269 src/gtr-preferences-dialog.c:588
+#: src/gtr-search-dialog.c:392
+#: src/translation-memory/gtr-translation-memory-dialog.c:283
 msgid "_Close"
 msgstr "S_täng"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:334
-msgctxt "alternate lang"
+#: plugins/alternate-language/gtr-alternate-language-panel.c:334
 msgid "Co_py"
 msgstr "Ko_piera"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:363
-msgid "There isn't any file loaded"
+#: plugins/alternate-language/gtr-alternate-language-panel.c:363
+msgid "There isn’t any file loaded"
 msgstr "Det finns ingen fil inläst"
 
 # src/header_stuff.c:451
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:81
+#: plugins/alternate-language/gtr-alternate-language-plugin.c:81
 msgid "_Alternate Language"
 msgstr "_Alternativt språk"
 
 # src/header_stuff.c:451
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:82
+#: plugins/alternate-language/gtr-alternate-language-plugin.c:82
 msgid "Show the Alternate Language panel"
 msgstr "Visa panel för alternativt språk"
 
 # src/header_stuff.c:451
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:222
-#: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:1
+#: plugins/alternate-language/gtr-alternate-language-plugin.c:222
+#: plugins/alternate-language/gtr-alternate-language.plugin.desktop.in:5
 msgid "Alternate Language"
 msgstr "Alternativt språk"
 
-#: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:2
-msgid "Load an alternate language."
-msgstr "Läs in ett alternativt språk."
-
-#. ex:et:ts=4:
-#: ../plugins/charmap/charmap/__init__.py:42
-#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:1
+#: plugins/charmap/charmap/__init__.py:42
+#: plugins/charmap/gtr-charmap.plugin.desktop.in:6
 msgid "Character Map"
 msgstr "Teckentabell"
 
-#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:2
-msgid "Insert special characters just by clicking on them."
-msgstr "Infoga specialtecken genom att klicka på dem."
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: plugins/charmap/gtr-charmap.plugin.desktop.in:9
+msgid "accessories-character-map"
+msgstr "accessories-character-map"
 
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:1
+#: plugins/codeview/gtr-codeview-dialog.ui:8
 msgid "Source View Settings"
 msgstr "Inställningar för källkodsvy"
 
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:2
+#: plugins/codeview/gtr-codeview-dialog.ui:58
 msgid "Use external editor"
 msgstr "Använd extern redigerare"
 
 # src/prefs.c:108
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:3
+#: plugins/codeview/gtr-codeview-dialog.ui:83
 msgid "Program command:"
 msgstr "Programkommando:"
 
 # src/prefs.c:108
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:4
+#: plugins/codeview/gtr-codeview-dialog.ui:120
 msgid "Line command:"
 msgstr "Radkommando:"
 
-#: ../plugins/codeview/gtr-codeview-plugin.c:129
+#: plugins/codeview/gtr-codeview-plugin.c:129
 #, c-format
-msgid "Please install \"%s\" to be able to show the file"
-msgstr "Installera \"%s\" för att kunna visa filen"
+msgid "Please install “%s” to be able to show the file"
+msgstr "Installera ”%s” för att kunna visa filen"
 
-#: ../plugins/codeview/gtr-codeview-plugin.c:497
+#: plugins/codeview/gtr-codeview-plugin.c:497
 msgid "Paths:"
 msgstr "Sökvägar:"
 
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:1
+#: plugins/codeview/gtr-codeview.plugin.desktop.in:5
 msgid "Source Code View"
 msgstr "Källkodsvy"
 
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:2
-msgid "Show the message in the source code."
-msgstr "Visa meddelandet i källkoden."
-
-#: ../plugins/codeview/gtr-viewer.c:80
+#: plugins/codeview/gtr-viewer.c:80
 msgid "Source Viewer"
 msgstr "Källkodsvisare"
 
 # src/prefs.c:114
-#: ../plugins/codeview/gtr-viewer.ui.h:1
+#: plugins/codeview/gtr-viewer.ui:59
 msgid "Source code"
 msgstr "Källkod"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:1
+#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:5
 msgid "Use the System Editor"
 msgstr "Använd systemredigeraren"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:2
+# TODO: Whether *to* use
+#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:6
 msgid "Whether use the system editor to show the source code"
-msgstr "Använd systemets textredigerare för att visa källkoden."
+msgstr "Huruvida systemets textredigerare ska användas för att visa källkoden"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:3
+#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:10
 msgid "The Editor to Launch"
 msgstr "Förvald redigerare"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:4
+#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:11
 msgid "The command to launch the editor you want to use"
 msgstr "Kommando för att starta önskad redigerare"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:5
+#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:15
 msgid "Arguments for the Command"
 msgstr "Argument för kommandot"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:6
+#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:16
 msgid "Arguments to pass to the program command line to select the line"
 msgstr ""
-"Argument att överföra till programmets kommandorad, för att välja raden."
+"Argument att överföra till programmets kommandorad, för att välja raden"
 
-#: ../plugins/dictionary/gtr-dictionary-plugin.c:140
-#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:1
+#: plugins/dictionary/gtr-dictionary-plugin.c:140
+#: plugins/dictionary/gtr-dict.plugin.desktop.in:5
 msgid "Dictionary"
 msgstr "Ordbok"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:166
+#: plugins/dictionary/gtr-dict-panel.c:166
 #, c-format
-msgid "No dictionary source available with name '%s'"
+msgid "No dictionary source available with name “%s”"
 msgstr "Ingen ordbokskälla tillgänglig med namnet ”%s”"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:170
+#: plugins/dictionary/gtr-dict-panel.c:170
 msgid "Unable to find dictionary source"
 msgstr "Kunde inte hitta ordbokskällan"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:185
+#: plugins/dictionary/gtr-dict-panel.c:185
 #, c-format
-msgid "No context available for source '%s'"
+msgid "No context available for source “%s”"
 msgstr "Inget sammanhang tillgängligt för källan ”%s”"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:189
+#: plugins/dictionary/gtr-dict-panel.c:189
 msgid "Unable to create a context"
 msgstr "Kunde inte skapa kontext"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:272
+#: plugins/dictionary/gtr-dict-panel.c:272
 #, c-format
-msgid "Dictionary source '%s' selected"
+msgid "Dictionary source “%s” selected"
 msgstr "Ordbokskälla ”%s” vald"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:291
+#: plugins/dictionary/gtr-dict-panel.c:291
 #, c-format
-msgid "Strategy '%s' selected"
+msgid "Strategy “%s” selected"
 msgstr "Strategi ”%s” vald"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:309
+#: plugins/dictionary/gtr-dict-panel.c:309
 #, c-format
-msgid "Database '%s' selected"
+msgid "Database “%s” selected"
 msgstr "Databas ”%s” vald"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:353
+#: plugins/dictionary/gtr-dict-panel.c:353
 #, c-format
-msgid "Word '%s' selected"
+msgid "Word “%s” selected"
 msgstr "Ordet ”%s” valt"
 
 #. speller
-#: ../plugins/dictionary/gtr-dict-panel.c:375
+#: plugins/dictionary/gtr-dict-panel.c:375
 msgid "Double-click on the word to look up"
 msgstr "Dubbelklicka på ordet att slå upp"
 
 #. strat-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:380
+#: plugins/dictionary/gtr-dict-panel.c:380
 msgid "Double-click on the matching strategy to use"
 msgstr "Dubbelklicka på matchande strategin att använda"
 
 #. source-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:386
+#: plugins/dictionary/gtr-dict-panel.c:386
 msgid "Double-click on the source to use"
 msgstr "Dubbelklicka på källan att använda"
 
 #. db-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:396
+#: plugins/dictionary/gtr-dict-panel.c:396
 msgid "Double-click on the database to use"
 msgstr "Dubbelklicka på databasen att använda"
 
 #. Look up Button
-#: ../plugins/dictionary/gtr-dict-panel.c:502
+#: plugins/dictionary/gtr-dict-panel.c:502
 msgid "Look _up:"
 msgstr "Slå _upp:"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:559
+#: plugins/dictionary/gtr-dict-panel.c:559
 msgid "Similar words"
 msgstr "Liknande ord"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:572
+#: plugins/dictionary/gtr-dict-panel.c:572
 msgid "Available dictionaries"
 msgstr "Tillgängliga ordböcker"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:586
+#: plugins/dictionary/gtr-dict-panel.c:586
 msgid "Available strategies"
 msgstr "Tillgängliga strategier"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:596
+#: plugins/dictionary/gtr-dict-panel.c:596
 msgid "Dictionary sources"
 msgstr "Ordbokskällor"
 
-#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:2
-msgid "Look up words in a dictionary."
-msgstr "Slå upp ord i en ordbok."
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: plugins/dictionary/gtr-dict.plugin.desktop.in:8
+msgid "accessories-dictionary"
+msgstr "accessories-dictionary"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:1
+#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:5
 msgid "Database"
 msgstr "Databas"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:2
+#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:6
 msgid "Word database"
 msgstr "Orddatabas"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:3
+#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:10
 msgid "Source Name"
 msgstr "Källnamn"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:4
+#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:14
 msgid "Strategy"
 msgstr "Strategi"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:5
+#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:18
 msgid "Panel Position"
 msgstr "Panelposition"
 
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:67
+#: plugins/fullscreen/gtr-fullscreen-plugin.c:67
 msgid "_Fullscreen"
 msgstr "_Helskärm"
 
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:68
+#: plugins/fullscreen/gtr-fullscreen-plugin.c:68
 msgid "Place window on fullscreen state"
 msgstr "Placera fönster i helskärmstillstånd"
 
-#: ../plugins/fullscreen/gtr-fullscreen.plugin.desktop.in.h:1
+#: plugins/fullscreen/gtr-fullscreen.plugin.desktop.in:5
 msgid "Fullscreen"
 msgstr "Helskärm"
 
-#: ../plugins/fullscreen/gtr-fullscreen.plugin.desktop.in.h:2
-msgid "Place window in the fullscreen state."
-msgstr "Placera fönstret i helskärmsläge"
-
 # src/menus.c:210
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:113
+#: plugins/insert-params/gtr-insert-params-plugin.c:113
 msgid "_Next Param"
 msgstr "_Nästa param"
 
 # src/menus.c:216
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:114
+#: plugins/insert-params/gtr-insert-params-plugin.c:114
 msgid "Insert the next param of the message"
 msgstr "Infoga nästa param i meddelandet"
 
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:116
+#: plugins/insert-params/gtr-insert-params-plugin.c:116
 msgid "_Insert Params"
 msgstr "_Infoga parametrar"
 
 # src/menus.c:210
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:117
+#: plugins/insert-params/gtr-insert-params-plugin.c:117
 msgid "_Next Tag"
 msgstr "_Nästa tagg"
 
 # src/menus.c:216
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:118
+#: plugins/insert-params/gtr-insert-params-plugin.c:118
 msgid "Insert the next tag of the message"
 msgstr "Infoga nästa tagg i meddelandet"
 
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:120
+#: plugins/insert-params/gtr-insert-params-plugin.c:120
 msgid "_Insert Tags"
 msgstr "_Infoga taggar"
 
-#: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:1
+#: plugins/insert-params/gtr-insert-params.plugin.desktop.in:5
 msgid "Insert Params or Tags"
 msgstr "Infoga parametrar eller taggar"
 
-#: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:2
-msgid "Parameters and tags detection featuring easy insertion."
-msgstr "Parameter- och taggdetektion för enkel infogning."
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
-#: ../src/translation-memory/gtr-translation-memory-dialog.c:167
+#: plugins/translation-memory/gtr-translation-memory-dialog.c:167
+#: src/translation-memory/gtr-translation-memory-dialog.c:166
 msgid "Strings added to database"
 msgstr "Strängar tillagda i databasen"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:224
-#: ../src/translation-memory/gtr-translation-memory-dialog.c:224
+#: plugins/translation-memory/gtr-translation-memory-dialog.c:224
+#: src/translation-memory/gtr-translation-memory-dialog.c:224
 msgid "Please specify a valid path to build the translation memory"
 msgstr "Ange sökväg till en plats att bygga upp översättningsminnet"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:291
-#: ../src/translation-memory/gtr-translation-memory-dialog.c:291
+#: plugins/translation-memory/gtr-translation-memory-dialog.c:291
+#: src/translation-memory/gtr-translation-memory-dialog.c:287
 msgid "Gtranslator Translation Memory Manager"
 msgstr "Hanterare för översättningsminne"
 
 # src/prefs.c:114
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:1
-#: ../src/translation-memory/gtr-translation-memory-dialog.ui.h:1
+#: plugins/translation-memory/gtr-translation-memory-dialog.ui:58
+#: src/translation-memory/gtr-translation-memory-dialog.ui:58
 msgid "Database:"
 msgstr "Databas:"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:2
-#: ../src/translation-memory/gtr-translation-memory-dialog.ui.h:2
+#: plugins/translation-memory/gtr-translation-memory-dialog.ui:101
+#: src/translation-memory/gtr-translation-memory-dialog.ui:101
 msgid "Select the directory which contains PO files:"
 msgstr "Välj katalogen som innehåller PO-filer:"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:3
-#: ../src/translation-memory/gtr-translation-memory-dialog.ui.h:3
+#: plugins/translation-memory/gtr-translation-memory-dialog.ui:152
+#: src/translation-memory/gtr-translation-memory-dialog.ui:152
 msgid "Add to Database"
 msgstr "Lägg till i databas"
 
 # src/prefs.c:108
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:4
-#: ../src/translation-memory/gtr-translation-memory-dialog.ui.h:4
+#: plugins/translation-memory/gtr-translation-memory-dialog.ui:209
+#: src/translation-memory/gtr-translation-memory-dialog.ui:209
 msgid "Configuration:"
 msgstr "Konfiguration:"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:5
-#: ../src/translation-memory/gtr-translation-memory-dialog.ui.h:5
+#: plugins/translation-memory/gtr-translation-memory-dialog.ui:252
+#: src/translation-memory/gtr-translation-memory-dialog.ui:252
 msgid "Use only files with this name:"
 msgstr "Använd endast filer med detta namn:"
 
-#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:1
-#: ../plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
+#: plugins/translation-memory/gtr-translation-memory.plugin.desktop.in:5
+#: plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
 msgid "Translation Memory"
 msgstr "Översättningsminne"
 
-#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:2
-msgid "Get translation suggestions from a data base."
-msgstr "Hämta översättningsförslag från en databas."
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:207
+#: plugins/translation-memory/gtr-translation-memory-ui.c:207
 #, c-format
 msgid "Insert Option nº %d"
 msgstr "Infoga flagga nr. %d"
 
 # src/menus.c:349
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:325
-#: ../src/translation-memory/gtr-translation-memory-ui.c:280
+#: plugins/translation-memory/gtr-translation-memory-ui.c:325
+#: src/translation-memory/gtr-translation-memory-ui.c:255
 msgid "_Use this translation"
 msgstr "A_nvänd denna översättning"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:330
-#: ../src/translation-memory/gtr-translation-memory-ui.c:285
+#: plugins/translation-memory/gtr-translation-memory-ui.c:330
+#: src/translation-memory/gtr-translation-memory-ui.c:260
 msgid "_Remove"
 msgstr "_Ta bort"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:445
-#: ../src/translation-memory/gtr-translation-memory-ui.c:400
+#: plugins/translation-memory/gtr-translation-memory-ui.c:445
+#: src/translation-memory/gtr-translation-memory-ui.c:371
 msgid "Shortcut"
 msgstr "Genväg"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:454
-#: ../src/translation-memory/gtr-translation-memory-ui.c:409
+#: plugins/translation-memory/gtr-translation-memory-ui.c:454
+#: src/translation-memory/gtr-translation-memory-ui.c:380
 msgid "Level"
 msgstr "Nivå"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:463
-#: ../src/translation-memory/gtr-translation-memory-ui.c:418
+#: plugins/translation-memory/gtr-translation-memory-ui.c:463
+#: src/translation-memory/gtr-translation-memory-ui.c:389
 msgid "String"
 msgstr "Sträng"
 
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:81
+#: plugins/translation-memory/gtr-translation-memory-window-activatable.c:81
 msgid "_Build Translation Memory"
 msgstr "_Bygg översättningsminne"
 
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:82
-#: ../src/gtr-notebook.ui.h:1
+#: plugins/translation-memory/gtr-translation-memory-window-activatable.c:82
+#: src/gtr-notebook.ui:26
 msgid "Build translation memory"
 msgstr "Bygg översättningsminne"
 
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
+#: plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
 msgid "_Translation Memory"
 msgstr "_Översättningsminne"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:1
-#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:1
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
 msgid "PO directory"
 msgstr "PO-katalog"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:2
-#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:2
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
 msgid "Directory containing PO files to add to the translation memory."
 msgstr "Katalog som innehåller PO-filer att lägga till i översättningsminnet."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:3
-#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:3
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
 msgid "Restrict search by filename"
 msgstr "Begränsa sökning efter filnamn"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:4
-#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:4
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
 msgid ""
 "If true, only include files with a specified filename when searching the "
 "translation memory."
@@ -636,24 +587,24 @@ msgstr ""
 "Om true, inkludera endast filer med ett angivet filnamn vid sökning i "
 "översättningsminnet."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:5
-#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:5
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
 msgid "Filename to restrict search to"
 msgstr "Filnamn att begränsa sökningen till"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:6
-#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:6
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
 msgid ""
 "Filename to which searching of the translation memory should be restricted."
 msgstr "Filnamn till vilket sökningen för översättningsminnet ska begränsas."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:7
-#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:7
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
 msgid "Maximum number of missing words"
 msgstr "Maximalt antal saknade ord"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:8
-#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:8
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
 msgid ""
 "Maximum number of words that can be missing from a message displayed as a "
 "match by the translation memory."
@@ -661,13 +612,13 @@ msgstr ""
 "Maximalt antal ord som kan saknas från ett meddelande visat som en träff av "
 "översättningsminnet."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:9
-#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:9
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
 msgid "Maximum difference in message length"
 msgstr "Maximal skillnad i meddelandelängd"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:10
-#: ../src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:10
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
 msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
@@ -675,25 +626,25 @@ msgstr ""
 "Maximal skillnad i längd mellan meddelanden visade som träffar av "
 "översättningsminnet."
 
-#: ../src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:48
 msgid "Current Maintainers"
 msgstr "Nuvarande ansvariga"
 
 # src/sidebar.c:107
-#: ../src/gtr-actions-app.c:52
+#: src/gtr-actions-app.c:52
 msgid "Current Developers"
 msgstr "Aktuella utvecklare"
 
-#: ../src/gtr-actions-app.c:57
+#: src/gtr-actions-app.c:57
 msgid "Previous Developers"
 msgstr "Tidigare utvecklare"
 
-#: ../src/gtr-actions-app.c:66
+#: src/gtr-actions-app.c:66
 msgid "Contributors"
 msgstr "Bidragsgivare"
 
 # src/about.c:60
-#: ../src/gtr-actions-app.c:90
+#: src/gtr-actions-app.c:90
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -702,7 +653,7 @@ msgstr ""
 "bibliotek."
 
 # src/prefs.c:239
-#: ../src/gtr-actions-app.c:106
+#: src/gtr-actions-app.c:106
 msgid "About Gtranslator"
 msgstr "Om Gtranslator"
 
@@ -711,7 +662,7 @@ msgstr "Om Gtranslator"
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/gtr-actions-app.c:111
+#: src/gtr-actions-app.c:111
 msgid "translator-credits"
 msgstr ""
 "Daniel Nylander <po@danielnylander.se>\n"
@@ -722,66 +673,66 @@ msgstr ""
 "<tp-sv@listor.tp-sv.se>."
 
 # src/menus.c:265
-#: ../src/gtr-actions-app.c:114
+#: src/gtr-actions-app.c:114
 msgid "Gtranslator Web Site"
 msgstr "Webbplats för Gtranslator"
 
-#: ../src/gtr-actions-file.c:199
+#: src/gtr-actions-file.c:200
 msgid "Open file for translation"
 msgstr "Öppna fil för översättning"
 
 # data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: ../src/gtr-actions-file.c:271 ../src/gtr-actions-file.c:388
+#: src/gtr-actions-file.c:272 src/gtr-actions-file.c:389
 msgid "File saved."
 msgstr "Fil sparad."
 
 # src/menus.c:281
-#: ../src/gtr-actions-file.c:319
-msgid "Save file as..."
-msgstr "Spara fil som..."
+#: src/gtr-actions-file.c:320
+msgid "Save file as…"
+msgstr "Spara fil som…"
 
 # data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: ../src/gtr-actions-file.c:777
+#: src/gtr-actions-file.c:781
 msgid "Files saved."
 msgstr "Filer sparade."
 
-#: ../src/gtr-actions-search.c:170
+#: src/gtr-actions-search.c:170
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
 msgstr[0] "Hittade och ersatte %d förekomst"
 msgstr[1] "Hittade och ersatte %d förekomster"
 
-#: ../src/gtr-actions-search.c:179
+#: src/gtr-actions-search.c:179
 msgid "Found and replaced one occurrence"
 msgstr "Hittade och ersatte en förekomst"
 
-#: ../src/gtr-actions-search.c:191
+#: src/gtr-actions-search.c:191
 msgid "Phrase not found"
 msgstr "Frasen hittades inte"
 
-#: ../src/gtranslator-menu.ui.h:1
+#: src/gtranslator-menu.ui:7
 msgid "_New Window"
 msgstr "_Nytt fönster"
 
 # src/dialogs.c:574
-#: ../src/gtranslator-menu.ui.h:2
+#: src/gtranslator-menu.ui:13
 msgid "_Preferences"
 msgstr "_Inställningar"
 
-#: ../src/gtranslator-menu.ui.h:3
+#: src/gtranslator-menu.ui:19
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: ../src/gtranslator-menu.ui.h:4
+#: src/gtranslator-menu.ui:24
 msgid "_About"
 msgstr "_Om"
 
-#: ../src/gtranslator-menu.ui.h:5
+#: src/gtranslator-menu.ui:30
 msgid "_Quit"
 msgstr "A_vsluta"
 
-#: ../src/gtr-assistant.c:127
+#: src/gtr-assistant.c:127
 #, c-format
 msgid ""
 "Profile name: %s\n"
@@ -804,62 +755,73 @@ msgstr ""
 "Överföringskodning %s\n"
 "Pluralform: %s\n"
 
-#: ../src/gtr-assistant.c:166
+#: src/gtr-assistant.c:166
 msgid "This assistant will help you to create the main profile."
 msgstr "Denna guide hjälper dig att skapa en huvudprofil."
 
 # src/languages.h:220
-#: ../src/gtr-assistant.c:171
+#: src/gtr-assistant.c:171
 msgid "Assistant"
 msgstr "Guide"
 
 # src/prefs.c:108
-#: ../src/gtr-assistant.c:245
+#: src/gtr-assistant.c:245
 msgid "Profile name:"
 msgstr "Profilnamn:"
 
 # src/header_stuff.c:512
-#: ../src/gtr-assistant.c:289
+#: src/gtr-assistant.c:289
 msgid "Translator email:"
 msgstr "Översättarens e-post:"
 
 # data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: ../src/gtr-assistant.c:304 ../src/gtr-preferences-dialog.c:546
-#: ../src/gtr-window.c:502
+#: src/gtr-assistant.c:304 src/gtr-preferences-dialog.c:521
+#: src/gtr-window.c:505
 msgid "Profile"
 msgstr "Profil"
 
 # src/header_stuff.c:515 src/prefs.c:137
-#: ../src/gtr-assistant.c:396
+#: src/gtr-assistant.c:396
 msgid "Language"
 msgstr "Språk"
 
 # src/prefs.c:108
-#: ../src/gtr-assistant.c:417
+#: src/gtr-assistant.c:417
 msgid "Confirmation"
 msgstr "Bekräftelse"
 
-#: ../src/gtr-close-confirmation-dialog.c:126
+#: src/gtr-close-confirmation-dialog.c:123
 msgid "Close _without Saving"
 msgstr "Stäng _utan att spara"
 
-#: ../src/gtr-close-confirmation-dialog.c:155
+#: src/gtr-close-confirmation-dialog.c:126 src/gtr-file-dialogs.c:45
+#: src/gtr-jump-dialog.c:90 src/gtr-preferences-dialog.c:394
+#: src/gtr-profile-dialog.c:70
+#: src/translation-memory/gtr-translation-memory-dialog.c:101
+msgid "_Cancel"
+msgstr "A_vbryt"
+
+#: src/gtr-close-confirmation-dialog.c:128 src/gtr-file-dialogs.c:47
+msgid "_Save"
+msgstr "_Spara"
+
+#: src/gtr-close-confirmation-dialog.c:150
 msgid "Question"
 msgstr "Fråga"
 
-#: ../src/gtr-close-confirmation-dialog.c:370
+#: src/gtr-close-confirmation-dialog.c:366
 #, c-format
-msgid "Save the changes to document \"%s\" before closing?"
-msgstr "Spara ändringar till dokumentet \"%s\" innan stängning?"
+msgid "Save the changes to document “%s” before closing?"
+msgstr "Spara ändringar till dokumentet ”%s” innan stängning?"
 
-#: ../src/gtr-close-confirmation-dialog.c:533
+#: src/gtr-close-confirmation-dialog.c:530
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] "Ändringar i %d dokument kommer att förloras för alltid."
 msgstr[1] "Ändringar i %d dokument kommer att förloras för alltid."
 
-#: ../src/gtr-close-confirmation-dialog.c:540
+#: src/gtr-close-confirmation-dialog.c:537
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -871,563 +833,600 @@ msgstr[1] ""
 "Det finns %d dokument med osparade ändringar. Spara ändringar innan "
 "stängning?"
 
-#: ../src/gtr-close-confirmation-dialog.c:561
+#: src/gtr-close-confirmation-dialog.c:558
 msgid "Docum_ents with unsaved changes:"
 msgstr "Dokum_ent med osparade ändringar:"
 
-#: ../src/gtr-close-confirmation-dialog.c:565
+#: src/gtr-close-confirmation-dialog.c:562
 msgid "S_elect the documents you want to save:"
 msgstr "V_älj de dokument som du vill spara:"
 
-#: ../src/gtr-close-confirmation-dialog.c:583
+#: src/gtr-close-confirmation-dialog.c:581
 msgid "Saving has been disabled by the system administrator."
 msgstr "Sparande har inaktiverats av systemadministratören."
 
-#: ../src/gtr-close-confirmation-dialog.c:585
-msgid "If you don't save, all your changes will be permanently lost."
+#: src/gtr-close-confirmation-dialog.c:583
+msgid "If you don’t save, all your changes will be permanently lost."
 msgstr "Om du inte sparar så kommer dina ändringar att gå förlorade."
 
-#: ../src/gtr-context.c:239
+#: src/gtr-context.c:238
 msgid "Notes:"
 msgstr "Anteckningar:"
 
-#: ../src/gtr-context.c:247
+#: src/gtr-context.c:246
 msgid "Add Note"
 msgstr "Lägg till anteckning"
 
 # src/menus.c:315 src/menus.c:316
-#: ../src/gtr-context.c:252
+#: src/gtr-context.c:251
 msgid "Edit"
 msgstr "Redigera"
 
 # src/sidebar.c:107
 #. Extracted comments
-#: ../src/gtr-context.c:298
+#: src/gtr-context.c:297
 msgid "Extracted comments:"
 msgstr "Extraherade kommentarer:"
 
 # src/dialogs.c:508 src/dialogs.c:588
 #. Context
-#: ../src/gtr-context.c:302
+#: src/gtr-context.c:301
 msgid "Context:"
 msgstr "Sammanhang:"
 
 #. Format
-#: ../src/gtr-context.c:306
+#: src/gtr-context.c:305
 msgid "Format:"
 msgstr "Format:"
 
-#: ../src/gtr-context.ui.h:1
+#: src/gtr-context.ui:50
 msgid "D_one"
 msgstr "_Klar"
 
 # src/menus.c:349
-#: ../src/gtr-file-dialogs.c:62
+#: src/gtr-file-dialogs.c:62
 msgid "Gettext translation"
 msgstr "Gettext-översättning"
 
 # src/menus.c:217 src/menus.c:342
-#: ../src/gtr-file-dialogs.c:71
+#: src/gtr-file-dialogs.c:71
 msgid "Gettext translation template"
 msgstr "Gettext-översättningsmall"
 
-#: ../src/gtr-file-dialogs.c:76
+#: src/gtr-file-dialogs.c:76
 msgid "All files"
 msgstr "Alla filer"
 
-#: ../src/gtr-header-dialog.c:269
+#: src/gtr-header-dialog.c:271
 msgid "Edit Header"
 msgstr "Redigera po-filshuvud"
 
 # src/header_stuff.c:462
-#: ../src/gtr-header-dialog.ui.h:1
+#: src/gtr-header-dialog.ui:74
 msgid "Comment"
 msgstr "Kommentar"
 
 # src/header_stuff.c:471
-#: ../src/gtr-header-dialog.ui.h:2
+#: src/gtr-header-dialog.ui:158
 msgid "Project Id _version:"
 msgstr "Projekt-id-_version:"
 
 # src/header_stuff.c:474
-#: ../src/gtr-header-dialog.ui.h:3
+#: src/gtr-header-dialog.ui:185
 msgid "Pot _file creation date:"
 msgstr "Pot-_filen skapades den:"
 
 # src/header_stuff.c:479
-#: ../src/gtr-header-dialog.ui.h:4
+#: src/gtr-header-dialog.ui:218
 msgid "Po file _revision date:"
 msgstr "Po-filen _reviderades den:"
 
-#: ../src/gtr-header-dialog.ui.h:5
+#: src/gtr-header-dialog.ui:251
 msgid "Report message _bugs to:"
 msgstr "Rapportera _fel i meddelanden till:"
 
 # src/header_stuff.c:443 src/header_stuff.c:448
-#: ../src/gtr-header-dialog.ui.h:6
+#: src/gtr-header-dialog.ui:292
 msgid "Project"
 msgstr "Projekt"
 
 # src/header_stuff.c:496
-#: ../src/gtr-header-dialog.ui.h:7
+#: src/gtr-header-dialog.ui:307
 msgid "Use my options to complete the following entries:"
 msgstr "Använd mina alternativ för att fylla i följande poster:"
 
 # src/header_stuff.c:509
-#: ../src/gtr-header-dialog.ui.h:8
-msgid "Translator's _name:"
+#: src/gtr-header-dialog.ui:468
+msgid "Translator’s _name:"
 msgstr "Översättarens _namn:"
 
 # src/header_stuff.c:512
-#: ../src/gtr-header-dialog.ui.h:9
-msgid "Translator's _email:"
+#: src/gtr-header-dialog.ui:485
+msgid "Translator’s _email:"
 msgstr "Översättarens _e-post:"
 
 # src/header_stuff.c:515 src/prefs.c:137
-#: ../src/gtr-header-dialog.ui.h:10 ../src/gtr-languages-fetcher.ui.h:5
+#: src/gtr-header-dialog.ui:504 src/gtr-languages-fetcher.ui:104
 msgid "_Language:"
 msgstr "_Språk:"
 
 # src/header_stuff.c:520
-#: ../src/gtr-header-dialog.ui.h:11
+#: src/gtr-header-dialog.ui:522
 msgid "Language gro_up email:"
 msgstr "Språkgru_ppens e-post:"
 
 # src/header_stuff.c:524 src/prefs.c:150
-#: ../src/gtr-header-dialog.ui.h:12
+#: src/gtr-header-dialog.ui:540
 msgid "Char_set:"
 msgstr "Teckenta_bell:"
 
 # src/header_stuff.c:528 src/prefs.c:154
-#: ../src/gtr-header-dialog.ui.h:13
+#: src/gtr-header-dialog.ui:558
 msgid "Enc_oding:"
 msgstr "Teckenk_odning:"
 
 # src/header_stuff.c:451
-#: ../src/gtr-header-dialog.ui.h:14
+#: src/gtr-header-dialog.ui:610
 msgid "Translator and Language"
 msgstr "Översättare och språk"
 
+#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:163
+#: src/gtr-profile-dialog.c:168
+#: src/translation-memory/gtr-translation-memory-dialog.c:103
+msgid "_OK"
+msgstr "_OK"
+
 # src/menus.c:195 src/menus.c:337
-#: ../src/gtr-jump-dialog.c:93
+#: src/gtr-jump-dialog.c:92
 msgid "Go to Message"
 msgstr "Gå till meddelande"
 
 # src/dialogs.c:401
-#: ../src/gtr-jump-dialog.ui.h:1
+#: src/gtr-jump-dialog.ui:30
 msgid "Enter message number:"
 msgstr "Ange meddelandenummer:"
 
-#: ../src/gtr-languages-fetcher.ui.h:1
+#: src/gtr-languages-fetcher.ui:44
 msgid "_Team email:"
 msgstr "_Gruppens e-post:"
 
-#: ../src/gtr-languages-fetcher.ui.h:2
+#: src/gtr-languages-fetcher.ui:59
 msgid "Transfer en_coding:"
 msgstr "Överföringsko_dning:"
 
 # src/header_stuff.c:524 src/prefs.c:150
-#: ../src/gtr-languages-fetcher.ui.h:3
+#: src/gtr-languages-fetcher.ui:74
 msgid "Character _set"
-msgstr "Teckenuppsättnin_g:"
+msgstr "Teckenuppsättnin_g"
 
 # src/prefs.c:141
-#: ../src/gtr-languages-fetcher.ui.h:4
+#: src/gtr-languages-fetcher.ui:89
 msgid "Language _code:"
 msgstr "Språk_kod:"
 
 # src/menus.c:135 src/menus.c:367
-#: ../src/gtr-languages-fetcher.ui.h:6
+#: src/gtr-languages-fetcher.ui:221
 msgid "_Plural forms:"
 msgstr "_Pluralformer:"
 
-#: ../src/gtr-message-table.c:181
+#: src/gtr-message-table.c:181
 msgid "Status"
 msgstr "Status"
 
-#: ../src/gtr-message-table.c:193
+#: src/gtr-message-table.c:193
 msgid "ID"
 msgstr "ID"
 
-#: ../src/gtr-message-table.c:208
+#: src/gtr-message-table.c:208
 msgid "Original Message"
 msgstr "Källtext"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: ../src/gtr-message-table.c:223
+#: src/gtr-message-table.c:223
 msgid "Translated Message"
 msgstr "Översatt text"
 
+# src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
+#: src/gtr-notebook.c:277
+#, c-format
+msgid "Translated: %0.2f%%"
+msgstr "Översatt: %0.2f%%"
+
+# src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
+#: src/gtr-notebook.c:278
+#, c-format
+msgid "Translated: %d"
+msgstr "Översatt: %d"
+
+# src/gui.c:407 src/gui.c:409
+#: src/gtr-notebook.c:279
+#, c-format
+msgid "Untranslated: %d"
+msgstr "Oöversatt: %d"
+
+# src/gui.c:385 src/gui.c:389 src/menus.c:348
+#: src/gtr-notebook.c:280
+#, c-format
+msgid "Fuzzy: %d"
+msgstr "Luddigt: %d"
+
 # src/dialogs.c:574
-#: ../src/gtr-notebook.ui.h:2
+#: src/gtr-notebook.ui:40
 msgid "Preferences"
 msgstr "Inställningar"
 
-#: ../src/gtr-notebook.ui.h:3
+#: src/gtr-notebook.ui:67
 msgid "Keybindings"
 msgstr "Tangentbindningar"
 
-#: ../src/gtr-notebook.ui.h:4
+#: src/gtr-notebook.ui:81
 msgid "About"
 msgstr "Om"
 
-#: ../src/gtr-notebook.ui.h:5
-msgid "Editing PO file"
-msgstr "Redigerar PO-fil"
+#: src/gtr-notebook.ui:181 src/gtr-projects.ui:58
+msgid "Open…"
+msgstr "Öppna…"
 
-#: ../src/gtr-notebook.ui.h:6
-msgid "Open"
-msgstr "Öppna"
-
-#: ../src/gtr-notebook.ui.h:7
+#: src/gtr-notebook.ui:185
 msgid "Open a new file (<Ctrl>o)"
 msgstr "Öppna en ny fil (<Ctrl>o)"
 
-#: ../src/gtr-notebook.ui.h:8
+#: src/gtr-notebook.ui:211
 msgid "Undo (<Ctrl>z)"
 msgstr "Ångra (<Ctrl>z)"
 
-#: ../src/gtr-notebook.ui.h:9
+#: src/gtr-notebook.ui:233
 msgid "Redo (<Ctrl><Shift>z)"
 msgstr "Gör om (<Ctrl><Skift>z)"
 
-#: ../src/gtr-notebook.ui.h:10
+#: src/gtr-notebook.ui:278
 msgid "Previous message (<Alt>🡄)"
 msgstr "Föregående meddelande (<Alt>🡄)"
 
-#: ../src/gtr-notebook.ui.h:11
+#: src/gtr-notebook.ui:300
 msgid "Next message (<Alt>🡆)"
 msgstr "Nästa meddelande (<Alt>🡆)"
 
-#: ../src/gtr-notebook.ui.h:12
+#: src/gtr-notebook.ui:336
 msgid "Previous message without translation (<Alt><Page Up>)"
 msgstr "Föregående meddelande utan översättning (<Alt><Page Up>)"
 
-#: ../src/gtr-notebook.ui.h:13
+#: src/gtr-notebook.ui:358
 msgid "Next message without translation (<Alt><Page Down>)"
 msgstr "Nästa meddelande utan översättning (<Alt><Page Down>)"
 
-#: ../src/gtr-notebook.ui.h:14
-msgid "Room Menu"
-msgstr "Rumsmeny"
+#: src/gtr-notebook.ui:398
+msgid "Toggle fuzzy state (<Alt>+f)"
+msgstr "Växla luddigt tillstånd (<Alt>+f)"
 
-#: ../src/gtr-notebook.ui.h:15
+#: src/gtr-notebook.ui:427
+msgid "Main Menu"
+msgstr "Huvudmeny"
+
+#: src/gtr-notebook.ui:443
 msgid "Save"
 msgstr "Spara"
 
-#: ../src/gtr-notebook.ui.h:16
+#: src/gtr-notebook.ui:447
 msgid "Save the current file (<Ctrl>s)"
 msgstr "Spara aktuell fil (<Ctrl>s)"
 
-#: ../src/gtr-notebook.ui.h:17
+#: src/gtr-notebook.ui:462
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Spara som (<Ctrl><Skift>s)"
 
-#: ../src/gtr-po.c:439
+#: src/gtr-notebook.ui:500
+msgid "Progress button"
+msgstr "Förloppsknapp"
+
+#: src/gtr-po.c:440
 #, c-format
 msgid "The file is empty"
 msgstr "Filen är tom"
 
-#: ../src/gtr-po.c:448
+#: src/gtr-po.c:449
 #, c-format
-msgid "Failed opening file '%s': %s"
+msgid "Failed opening file “%s”: %s"
 msgstr "Misslyckades med att öppna filen ”%s”: %s"
 
-#: ../src/gtr-po.c:522
+#: src/gtr-po.c:524
 #, c-format
-msgid "Could not convert from charset '%s' to UTF-8"
+msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Kunde inte konvertera teckentabell ”%s” till UTF-8"
 
-#: ../src/gtr-po.c:539 ../src/gtr-po.c:559
+#: src/gtr-po.c:541 src/gtr-po.c:561
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Kunde inte lagra temporär fil för teckentabellskonvertering"
 
-#: ../src/gtr-po.c:596
+#: src/gtr-po.c:598
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
 "iconv command line tools before opening this file with gtranslator"
 msgstr ""
 "Alla försök att konvertera filen till UTF-8 har misslyckats. Använd "
-"kommandoradsverktygen msgconv eller iconv, innan filen öppnas med "
-"gtranslator."
+"kommandoradsverktygen msgconv eller iconv, innan filen öppnas med gtranslator"
 
-#: ../src/gtr-po.c:664
+#: src/gtr-po.c:666
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext returnerade ett noll meddelande domänlista."
 
-#: ../src/gtr-po.c:709
+#: src/gtr-po.c:711
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Inga meddelanden hämtades från tolkare."
 
-#: ../src/gtr-po.c:757
+#: src/gtr-po.c:761
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
 "Pot files are generated by the compilation process.\n"
-"Your file should likely be named '%s.po'."
+"Your file should likely be named “%s.po”."
 msgstr ""
 "Du sparar en fil med ändelsen .pot.\n"
 "Pot-filer genereras av kompileringsprocessen.\n"
 "Din fil bör troligtvis kallas ”%s.po”."
 
-#: ../src/gtr-po.c:770
+#: src/gtr-po.c:774
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Filen %s är skrivskyddad och kan inte skrivas över"
 
-#: ../src/gtr-po.c:801
+#: src/gtr-po.c:805
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Det inträffade ett fel vid skrivning av PO-filen: %s"
 
-#: ../src/gtr-preferences-dialog.c:397
+#: src/gtr-preferences-dialog.c:370
 msgid "Impossible to remove the active profile"
 msgstr "Omöjligt att ta bort den aktiva profilen"
 
-#: ../src/gtr-preferences-dialog.c:403
+#: src/gtr-preferences-dialog.c:376
 msgid "Another profile should be selected as active before"
 msgstr "En annan profil bör väljas som aktiv innan"
 
-#: ../src/gtr-preferences-dialog.c:416
+#: src/gtr-preferences-dialog.c:389
 msgid "Are you sure you want to delete this profile?"
 msgstr "Vill du verkligen ta bort denna profil?"
 
+#: src/gtr-preferences-dialog.c:397
+msgid "_Delete"
+msgstr "_Ta bort"
+
 # src/prefs.c:114
-#: ../src/gtr-preferences-dialog.c:552
+#: src/gtr-preferences-dialog.c:527
 msgid "Active"
 msgstr "Aktiv"
 
+#: src/gtr-preferences-dialog.c:589
+msgid "Help"
+msgstr "Hjälp"
+
 # src/dialogs.c:574
-#: ../src/gtr-preferences-dialog.c:621 ../src/gtr-preferences-dialog.ui.h:1
+#: src/gtr-preferences-dialog.c:591 src/gtr-preferences-dialog.ui:49
 msgid "Gtranslator Preferences"
 msgstr "Inställningar för Gtranslator"
 
 # src/header_stuff.c:486
-#: ../src/gtr-preferences-dialog.ui.h:2
+#: src/gtr-preferences-dialog.ui:119
 msgid "General"
 msgstr "Allmänt"
 
 # src/prefs.c:166
-#: ../src/gtr-preferences-dialog.ui.h:3
+#: src/gtr-preferences-dialog.ui:138
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "_Varna om po-filen innehåller luddiga översättningar"
 
 # src/prefs.c:114
-#: ../src/gtr-preferences-dialog.ui.h:4
+#: src/gtr-preferences-dialog.ui:160
 msgid "Autosave"
 msgstr "Spara automatiskt"
 
-#: ../src/gtr-preferences-dialog.ui.h:5
+#: src/gtr-preferences-dialog.ui:184
 msgid "Create a _backup copy of files before saving"
 msgstr "Säkerhets_kopiera filer innan de sparas"
 
-#: ../src/gtr-preferences-dialog.ui.h:6
+#: src/gtr-preferences-dialog.ui:206
 msgid "_Autosave files every"
 msgstr "Spara filer _automatiskt var"
 
-#: ../src/gtr-preferences-dialog.ui.h:7
+#: src/gtr-preferences-dialog.ui:230
 msgid "_minutes"
 msgstr "_minut"
 
 # data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: ../src/gtr-preferences-dialog.ui.h:8
+#: src/gtr-preferences-dialog.ui:288
 msgid "Files"
 msgstr "Filer"
 
-#: ../src/gtr-preferences-dialog.ui.h:9
+#: src/gtr-preferences-dialog.ui:312
 msgid "Text Display"
 msgstr "Textvisning"
 
-#: ../src/gtr-preferences-dialog.ui.h:10
+#: src/gtr-preferences-dialog.ui:335
 msgid "_Highlight message syntax"
 msgstr "_Markeringssyntax för meddelande"
 
-#: ../src/gtr-preferences-dialog.ui.h:11
+#: src/gtr-preferences-dialog.ui:351
 msgid "Make _whitespace visible"
 msgstr "Gör alla _tecken synliga"
 
-#: ../src/gtr-preferences-dialog.ui.h:12
-msgid "Use _custom font"
-msgstr "Använd a_npassat teckensnitt"
-
-# src/sidebar.c:107
-#: ../src/gtr-preferences-dialog.ui.h:13
-msgid "Editor _font:"
-msgstr "Teckensnitt för _redigerare:"
-
 # src/dialogs.c:508 src/dialogs.c:588
-#: ../src/gtr-preferences-dialog.ui.h:14
+#: src/gtr-preferences-dialog.ui:392
 msgid "Contents"
 msgstr "Innehåll"
 
 # src/prefs.c:162
-#: ../src/gtr-preferences-dialog.ui.h:15
+#: src/gtr-preferences-dialog.ui:415
 msgid "_Remove fuzzy status if message is changed"
 msgstr "Ta _bort luddig status om meddelandet har ändrats"
 
-#: ../src/gtr-preferences-dialog.ui.h:16
+#: src/gtr-preferences-dialog.ui:431
 msgid "Check _spelling"
 msgstr "Kontrollera _stavning"
 
 # src/menus.c:315 src/menus.c:316
-#: ../src/gtr-preferences-dialog.ui.h:17
+#: src/gtr-preferences-dialog.ui:470
 msgid "Editor"
 msgstr "Redigerare"
 
-#: ../src/gtr-preferences-dialog.ui.h:18
+#: src/gtr-preferences-dialog.ui:569
 msgid "Edit Profile"
 msgstr "Redigera profil"
 
 # data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: ../src/gtr-preferences-dialog.ui.h:19
+#: src/gtr-preferences-dialog.ui:606
 msgid "Profiles"
 msgstr "Profiler"
 
 # src/dialogs.c:390
-#: ../src/gtr-profile-dialog.c:82
+#: src/gtr-profile-dialog.c:72
 msgid "Gtranslator Profile"
 msgstr "Gtranslator-profil"
 
 # src/prefs.c:108
-#: ../src/gtr-profile-dialog.ui.h:1
+#: src/gtr-profile-dialog.ui:57
 msgid "Profile Information"
 msgstr "Profilinformation"
 
-#: ../src/gtr-profile-dialog.ui.h:2
+#: src/gtr-profile-dialog.ui:99
 msgid "_Name:"
 msgstr "_Namn:"
 
 # src/prefs.c:108
-#: ../src/gtr-profile-dialog.ui.h:3
+#: src/gtr-profile-dialog.ui:136
 msgid "Translator Information"
 msgstr "Översättarinformation"
 
-#: ../src/gtr-profile-dialog.ui.h:4
+#: src/gtr-profile-dialog.ui:181
 msgid "_Email:"
 msgstr "_E-post:"
 
-#: ../src/gtr-profile-dialog.ui.h:5
+#: src/gtr-profile-dialog.ui:197
 msgid "N_ame:"
 msgstr "N_amn:"
 
 # src/prefs.c:109
-#: ../src/gtr-profile-dialog.ui.h:6
+#: src/gtr-profile-dialog.ui:246
 msgid "Language Settings"
 msgstr "Språkinställningar"
 
-#: ../src/gtr-projects.ui.h:1
+#: src/gtr-projects.ui:35
+msgid "Open a new .po file or drag & drop here"
+msgstr "Öppna en ny .po-fil eller dra & släpp här"
+
+#: src/gtr-projects.ui:51
 msgid "Select a PO file"
 msgstr "Välj en PO-fil"
 
-#: ../src/gtr-projects.ui.h:2
-msgid "Open…"
-msgstr "Öppna…"
-
 # src/dialogs.c:575 src/menus.c:362
-#: ../src/gtr-search-dialog.c:347 ../src/gtr-search-dialog.ui.h:1
+#: src/gtr-search-dialog.c:348 src/gtr-search-dialog.ui:6
+#: src/gtr-search-dialog.ui:53
 msgid "Replace"
 msgstr "Ersätt"
 
-#: ../src/gtr-search-dialog.c:369
+#: src/gtr-search-dialog.c:370 src/gtr-search-dialog.c:451
 msgid "Find"
 msgstr "Sök"
 
 # src/dialogs.c:576
-#: ../src/gtr-search-dialog.c:457
+#: src/gtr-search-dialog.c:453
 msgid "Replace _All"
 msgstr "Ersätt _alla"
 
+#: src/gtr-search-dialog.c:455
+msgid "Find and replace"
+msgstr "Sök och ersätt"
+
 # src/dialogs.c:575 src/menus.c:362
-#: ../src/gtr-search-dialog.c:461
+#: src/gtr-search-dialog.c:457
 msgid "_Replace"
 msgstr "_Ersätt"
 
 # src/dialogs.c:576
-#: ../src/gtr-search-dialog.ui.h:2
+#: src/gtr-search-dialog.ui:37
 msgid "Replace All"
 msgstr "Ersätt alla"
 
-#: ../src/gtr-search-dialog.ui.h:3
+#: src/gtr-search-dialog.ui:109
 msgid "_Search for: "
 msgstr "_Sök efter: "
 
 # src/dialogs.c:623
-#: ../src/gtr-search-dialog.ui.h:4
+#: src/gtr-search-dialog.ui:124
 msgid "Replace _with: "
-msgstr "Ersätt _med:"
+msgstr "Ersätt _med: "
 
 # src/prefs.c:235
-#: ../src/gtr-search-dialog.ui.h:5
+#: src/gtr-search-dialog.ui:160
 msgid "_Original text"
 msgstr "_Källtext"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: ../src/gtr-search-dialog.ui.h:6
+#: src/gtr-search-dialog.ui:177
 msgid "_Translated text"
 msgstr "Öv_ersatt text"
 
-#: ../src/gtr-search-dialog.ui.h:7
+#: src/gtr-search-dialog.ui:213
 msgid "Include fu_zzy strings"
 msgstr "Inkludera l_uddiga strängar"
 
-#: ../src/gtr-search-dialog.ui.h:8
+#: src/gtr-search-dialog.ui:230
 msgid "_Match case"
 msgstr "_Matcha skiftläge"
 
-#: ../src/gtr-search-dialog.ui.h:9
+#: src/gtr-search-dialog.ui:246
 msgid "Match _entire word only"
 msgstr "Matcha endast _hela ord"
 
-#: ../src/gtr-search-dialog.ui.h:10
+#: src/gtr-search-dialog.ui:262
 msgid "Search _backwards"
 msgstr "Sök _bakåt"
 
-#: ../src/gtr-search-dialog.ui.h:11
+#: src/gtr-search-dialog.ui:279
 msgid "_Wrap around"
 msgstr "_Radbryt"
 
-#: ../src/gtr-statusbar.c:119 ../src/gtr-statusbar.c:248
+#: src/gtr-statusbar.c:117 src/gtr-statusbar.c:252
 msgid "INS"
 msgstr "INF"
 
-#: ../src/gtr-statusbar.c:120 ../src/gtr-statusbar.c:244
+#: src/gtr-statusbar.c:118 src/gtr-statusbar.c:248
 msgid "OVR"
 msgstr "ÖVR"
 
-#: ../src/gtr-tab.c:210
+#: src/gtr-tab.c:210
 msgid "There is an error in the message:"
 msgstr "Det finns ett fel i meddelandet:"
 
-#: ../src/gtr-tab.c:538
+#: src/gtr-tab.c:538
 #, c-format
 msgid "Plural %d"
 msgstr "Pluralis %d"
 
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1064
+#: src/gtr-tab.c:1064
 msgid "Path:"
 msgstr "Sökväg:"
 
 # src/menus.c:92
-#: ../src/gtr-tab-label.c:277
+#: src/gtr-tab-label.c:278
 msgid "Close document"
 msgstr "Stäng dokumentet"
 
 # src/prefs.c:235
-#: ../src/gtr-tab.ui.h:1
+#: src/gtr-tab.ui:41
 msgid "_Original Message:"
-msgstr "_Källtext"
+msgstr "_Källtext:"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: ../src/gtr-tab.ui.h:2
+#: src/gtr-tab.ui:104
 msgid "Translate_d Text:"
-msgstr "_Översatt text"
+msgstr "_Översatt text:"
 
-#: ../src/gtr-utils.c:516
+#: src/gtr-utils.c:516
 msgid ""
 "Unable to display help. Please make sure the Gtranslator documentation "
 "package is installed."
@@ -1435,12 +1434,12 @@ msgstr ""
 "Kunde inte visa hjälp. Försäkra dig om att Gtranslators dokumentationspaket "
 "är installerat."
 
-#: ../src/gtr-view.c:78
+#: src/gtr-view.c:78
 #, c-format
 msgid "gtkspell error: %s\n"
 msgstr "gtkspell-fel: %s\n"
 
-#: ../src/gtr-view.c:80
+#: src/gtr-view.c:80
 #, c-format
 msgid ""
 "GtkSpell was unable to initialize.\n"
@@ -1450,33 +1449,33 @@ msgstr ""
 " %s"
 
 # src/gui.c:407 src/gui.c:409
-#: ../src/gtr-window.c:141
+#: src/gtr-window.c:144
 msgid "Untranslated"
 msgstr "Oöversatt"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: ../src/gtr-window.c:144
+#: src/gtr-window.c:147
 msgid "Translated"
 msgstr "Översatt"
 
 # src/gui.c:385 src/gui.c:389 src/menus.c:348
-#: ../src/gtr-window.c:147
+#: src/gtr-window.c:150
 msgid "Fuzzy"
 msgstr "Luddig"
 
 # src/sidebar.c:107
-#: ../src/gtr-window.c:154
+#: src/gtr-window.c:157
 #, c-format
 msgid "Current: %d"
 msgstr "Aktuell: %d"
 
-#: ../src/gtr-window.c:155
+#: src/gtr-window.c:158
 #, c-format
 msgid "Total: %d"
 msgstr "Totalt: %d"
 
 # src/gui.c:407 src/gui.c:409
-#: ../src/gtr-window.c:156
+#: src/gtr-window.c:159
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
@@ -1484,7 +1483,7 @@ msgstr[0] "%d översatt"
 msgstr[1] "%d översatta"
 
 # src/gui.c:385 src/gui.c:389 src/menus.c:348
-#: ../src/gtr-window.c:159
+#: src/gtr-window.c:162
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
@@ -1492,7 +1491,7 @@ msgstr[0] "%d luddig"
 msgstr[1] "%d luddiga"
 
 # src/gui.c:407 src/gui.c:409
-#: ../src/gtr-window.c:161
+#: src/gtr-window.c:164
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1501,85 +1500,133 @@ msgstr[1] "%d oöversatta"
 
 # src/prefs.c:239
 #. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:271
+#: src/gtr-window.c:274
 #, c-format
-msgid "*%s - gtranslator"
-msgstr "*%s - gtranslator"
+msgid "*%s — gtranslator"
+msgstr "*%s — gtranslator"
 
 # src/prefs.c:239
 #. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:276
+#: src/gtr-window.c:279
 #, c-format
-msgid "%s - gtranslator"
-msgstr "%s - gtranslator"
+msgid "%s — gtranslator"
+msgstr "%s — gtranslator"
 
 # src/prefs.c:239
-#: ../src/gtr-window.c:284
+#: src/gtr-window.c:287
 msgid "gtranslator"
 msgstr "gtranslator"
 
 # data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: ../src/gtr-window.c:486
+#: src/gtr-window.c:489
 msgid "No profile"
 msgstr "Ingen profil"
 
-#: ../src/gtr-window.c:504
+#: src/gtr-window.c:507
 msgid "Profile for the active document"
 msgstr "Profil för det aktiva dokumentet"
 
-#: ../src/main.c:97
-msgid "- Edit PO files"
-msgstr "- Redigera PO-filer"
+#: src/main.c:97
+msgid "— Edit PO files"
+msgstr "— Redigera PO-filer"
 
-#: ../src/main.c:101
+#: src/main.c:101
 #, c-format
 msgid ""
 "%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
+"Run “%s --help” to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
 "Kör ”%s --help” för att se en komplett lista över tillgängliga "
 "kommandoradsflaggor.\n"
 
-#. Translaters: This string is for a toggle to display a toolbar.
-#. * The name of the toolbar is automatically computed from the widgets
-#. * on the toolbar, and is placed at the %s. Note the _ before the %s
-#. * which is used to add mnemonics. We know that this is likely to
-#. * produce duplicates, but don't worry about it. If your language
-#. * normally has a mnemonic at the start, please use the _. If not,
-#. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:991
-#, c-format
-msgid "Show “_%s”"
-msgstr "Visa \"_%s\""
+# src/dialogs.c:390
+#~ msgid "Gtranslator PO File Editor"
+#~ msgstr "Gtranslator PO-filredigerare"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1484
-msgid "_Move on Toolbar"
-msgstr "_Flytta på verktygsfält"
+#~ msgid "Use custom font"
+#~ msgstr "Använd anpassat teckensnitt"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1485
-msgid "Move the selected item on the toolbar"
-msgstr "Flytta det markerade objektet på verktygsfältet"
+#~ msgid "If true, use a custom font for edit fields."
+#~ msgstr "Om true, använd anpassat teckensnitt för redigeringsfält."
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1486
-msgid "_Remove from Toolbar"
-msgstr "_Ta bort från verktygsfält"
+# src/sidebar.c:107
+#~ msgid "Editor font"
+#~ msgstr "Teckensnitt för redigerare"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1487
-msgid "Remove the selected item from the toolbar"
-msgstr "Ta bort markerat objekt från verktygsfältet"
+#~ msgid "Custom font to use for edit fields."
+#~ msgstr "Anpassat teckensnitt för redigeringsfält."
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1488
-msgid "_Delete Toolbar"
-msgstr "_Ta bort verktygsfält"
+#~ msgid "Others"
+#~ msgstr "Övriga"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1489
-msgid "Remove the selected toolbar"
-msgstr "Ta bort markerat verktygsfält"
+# src/dialogs.c:390
+#~ msgid "gtranslator highlight"
+#~ msgstr "gtranslator-markering"
 
-#: ../src/toolbareditor/egg-toolbar-editor.c:488
-msgid "Separator"
-msgstr "Avgränsare"
+#~ msgid "Tag"
+#~ msgstr "Tagg"
+
+#~ msgid "Special variable"
+#~ msgstr "Specialvariabel"
+
+#~ msgid "Load an alternate language."
+#~ msgstr "Läs in ett alternativt språk."
+
+#~ msgid "Insert special characters just by clicking on them."
+#~ msgstr "Infoga specialtecken genom att klicka på dem."
+
+#~ msgid "Show the message in the source code."
+#~ msgstr "Visa meddelandet i källkoden."
+
+#~ msgid "Look up words in a dictionary."
+#~ msgstr "Slå upp ord i en ordbok."
+
+#~ msgid "Place window in the fullscreen state."
+#~ msgstr "Placera fönstret i helskärmsläge"
+
+#~ msgid "Parameters and tags detection featuring easy insertion."
+#~ msgstr "Parameter- och taggdetektion för enkel infogning."
+
+#~ msgid "Get translation suggestions from a data base."
+#~ msgstr "Hämta översättningsförslag från en databas."
+
+#~ msgid "Editing PO file"
+#~ msgstr "Redigerar PO-fil"
+
+#~ msgid "Open"
+#~ msgstr "Öppna"
+
+#~ msgid "Room Menu"
+#~ msgstr "Rumsmeny"
+
+#~ msgid "Use _custom font"
+#~ msgstr "Använd a_npassat teckensnitt"
+
+# src/sidebar.c:107
+#~ msgid "Editor _font:"
+#~ msgstr "Teckensnitt för _redigerare:"
+
+#~ msgid "Show “_%s”"
+#~ msgstr "Visa \"_%s\""
+
+#~ msgid "_Move on Toolbar"
+#~ msgstr "_Flytta på verktygsfält"
+
+#~ msgid "Move the selected item on the toolbar"
+#~ msgstr "Flytta det markerade objektet på verktygsfältet"
+
+#~ msgid "_Remove from Toolbar"
+#~ msgstr "_Ta bort från verktygsfält"
+
+#~ msgid "Remove the selected item from the toolbar"
+#~ msgstr "Ta bort markerat objekt från verktygsfältet"
+
+#~ msgid "Remove the selected toolbar"
+#~ msgstr "Ta bort markerat verktygsfält"
+
+#~ msgid "Separator"
+#~ msgstr "Avgränsare"
 
 # src/header_stuff.c:443 src/header_stuff.c:448
 #~ msgid "Projects"
