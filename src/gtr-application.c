@@ -49,15 +49,11 @@
 #include <gdk/gdkx.h>
 #endif
 
-#define GTR_APPLICATION_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
-					 (object),	\
-					 GTR_TYPE_APPLICATION,     \
-					 GtrApplicationPrivate))
-
 typedef struct
 {
   GSettings *settings;
   GSettings *window_settings;
+  GtkCssProvider *provider;
 
   GtrWindow *active_window;
 
@@ -188,6 +184,10 @@ gtr_application_init (GtrApplication *application)
     priv->first_run = TRUE;
   g_free (profiles_file);
 
+  /* Custom css */
+  priv->provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (priv->provider, "/org/gnome/translator/styles.css");
+
   load_accels ();
 }
 
@@ -199,6 +199,7 @@ gtr_application_dispose (GObject * object)
 
   g_clear_object (&priv->settings);
   g_clear_object (&priv->window_settings);
+  g_clear_object (&priv->provider);
 
   G_OBJECT_CLASS (gtr_application_parent_class)->dispose (object);
 }
@@ -423,6 +424,7 @@ static void
 gtr_application_startup (GApplication *application)
 {
   GtkBuilder *builder;
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (application);
 
   G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
 
@@ -457,6 +459,9 @@ gtr_application_startup (GApplication *application)
   gtk_application_set_app_menu (GTK_APPLICATION (application),
                                 G_MENU_MODEL (gtk_builder_get_object (builder, "appmenu")));
   g_object_unref (builder);
+
+  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                             GTK_STYLE_PROVIDER (priv->provider), 600);
 }
 
 static void
@@ -481,6 +486,13 @@ gtr_application_setup_window (GApplication *application,
     }
   window = gtr_application_create_window (GTR_APPLICATION (application));
   gtk_application_add_window (GTK_APPLICATION (application), GTK_WINDOW (window));
+
+  /** loading custom styles **/
+  if (g_strrstr (PACKAGE_APPID, "Devel") != NULL)
+    {
+      GtkStyleContext *ctx = gtk_widget_get_style_context (GTK_WIDGET (window));
+      gtk_style_context_add_class (ctx, "devel");
+    }
 
   /* If it is the first run, the default directory was created in this
    * run, then we show the First run Assistant
