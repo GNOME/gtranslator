@@ -424,7 +424,8 @@ static void
 gtr_application_startup (GApplication *application)
 {
   GtkBuilder *builder;
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (application);
+  GtrApplication *app = GTR_APPLICATION (application);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
   G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
 
