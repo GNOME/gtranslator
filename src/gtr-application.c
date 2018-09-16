@@ -440,7 +440,7 @@ gtr_application_startup (GApplication *application)
                                    G_N_ELEMENTS (app_entries), application);
 
   // keybindings
-  set_kb (application, "app.projects", "<Ctrl>o");
+  set_kb (application, "app.open", "<Ctrl>o");
   set_kb (application, "app.save", "<Ctrl>s");
   set_kb (application, "app.saveas", "<Ctrl><Shift>s");
   set_kb (application, "app.preferences", "<Ctrl>p");
