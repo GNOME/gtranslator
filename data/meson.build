@@ -5,10 +5,27 @@ subdir('pixmaps')
 desktop = 'org.gnome.Gtranslator.desktop'
 appdata = 'org.gnome.Gtranslator.appdata.xml'
 
+desktop_conf = configuration_data()
+desktop_conf.set('icon', application_id)
+appdata_conf = configuration_data()
+appdata_conf.set('appid', application_id)
+
+desktop_in = configure_file(
+    input: desktop + '.in.in',
+    output: desktop + '.in',
+    configuration: desktop_conf
+)
+
+appdata_in = configure_file(
+    input: appdata + '.in.in',
+    output: appdata + '.in',
+    configuration: appdata_conf
+)
+
 i18n.merge_file(
       desktop,
          type: 'desktop',
-        input: desktop + '.in',
+        input: desktop_in,
        output: desktop,
        po_dir: po_dir,
       install: true,
@@ -18,7 +35,7 @@ i18n.merge_file(
 i18n.merge_file(
       appdata,
          type: 'xml',
-        input: appdata + '.in',
+        input: appdata_in,
        output: appdata,
        po_dir: po_dir,
       install: true,
