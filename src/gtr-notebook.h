@@ -77,5 +77,7 @@ GtkWidget *gtr_notebook_get_header (GtrNotebook *notebook);
 
 void gtr_notebook_set_progress (GtrNotebook *notebook, gint trans, gint untrans, gint fuzzy);
 
+void gtr_notebook_enable_save (GtrNotebook *notebook, gboolean enable);
+
 G_END_DECLS
 #endif /* __NOTEBOOK_H__ */

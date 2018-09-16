@@ -101,6 +101,8 @@ static void          profile_combo_changed            (GtrStatusComboBox *combo,
                                                        GtkMenuItem       *item,
                                                        GtrWindow         *window);
 
+static void update_saved_state (GtrPo *po, GParamSpec *param, gpointer window);
+
 /*
  * gtr_window_update_statusbar_message_count:
  * 
@@ -272,11 +274,13 @@ set_window_title (GtrWindow * window, gboolean with_path)
         {
           /* Translators: this is the title of the window with a modified document */
           title = g_strdup_printf (_("*%s — gtranslator"), basename);
+          gtr_notebook_enable_save (GTR_NOTEBOOK (priv->notebook), TRUE);
         }
       else
         {
           /* Translators: this is the title of the window with a document opened */
           title = g_strdup_printf (_("%s — gtranslator"), basename);
+          gtr_notebook_enable_save (GTR_NOTEBOOK (priv->notebook), FALSE);
         }
 
       g_free (basename);
@@ -297,6 +301,14 @@ set_window_title (GtrWindow * window, gboolean with_path)
 
   g_free (title);
   g_free (subtitle);
+}
+
+static void
+update_saved_state (GtrPo *po,
+                    GParamSpec *param,
+                    gpointer window)
+{
+  set_window_title (GTR_WINDOW (window), TRUE);
 }
 
 static void
@@ -835,6 +847,12 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
 
   gtr_notebook_add_page (GTR_NOTEBOOK (priv->notebook), tab);
 
+  g_signal_connect_after (po,
+                          "notify::state",
+                          G_CALLBACK
+                          (update_saved_state),
+                          window);
+
   return tab;
 }
 
@@ -1153,4 +1171,3 @@ gtr_window_get_tm (GtrWindow *window) {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   return priv->translation_memory;
 }
-

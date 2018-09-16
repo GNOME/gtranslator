@@ -39,6 +39,7 @@ typedef struct
   GtkWidget *progress_trans;
   GtkWidget *progress_fuzzy;
   GtkWidget *progress_untrans;
+  GtkWidget *save;
   GtrProgress *progress;
 } GtrNotebookPrivate;
 
@@ -152,6 +153,7 @@ gtr_notebook_class_init (GtrNotebookClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, progress_fuzzy);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, progress_untrans);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, progress_percentage);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, save);
 }
 
 /***************************** Public funcs ***********************************/
@@ -288,5 +290,13 @@ gtr_notebook_set_progress (GtrNotebook *notebook,
   g_free (trans_text);
   g_free (fuzzy_text);
   g_free (untrans_text);
+}
+
+void
+gtr_notebook_enable_save (GtrNotebook *notebook,
+                          gboolean enable)
+{
+  GtrNotebookPrivate *priv = gtr_notebook_get_instance_private (notebook);
+  gtk_widget_set_sensitive (priv->save, enable);
 }
 
