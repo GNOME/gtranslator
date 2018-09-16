@@ -604,11 +604,12 @@ update_comments (GtrHeader *header, const gchar *comments)
 {
   GtrProfile *active_profile;
   GString *new_comments;
-  GString *years;
   gchar **comment_lines;
   gchar *translator;
   gchar *email;
   gchar *current_year;
+  gchar *first_year = NULL;
+  gchar *years = NULL;
   gboolean use_profile_values;
   gint i;
   GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
@@ -637,7 +638,6 @@ update_comments (GtrHeader *header, const gchar *comments)
 
   comment_lines = g_strsplit (comments, "\n", -1);
   new_comments = g_string_new ("");
-  years = g_string_new ("");
 
   for (i = 0; comment_lines != NULL && comment_lines[i] != NULL; i++)
     {
@@ -662,11 +662,27 @@ update_comments (GtrHeader *header, const gchar *comments)
               else
                 search = g_strdup (year_array[j]);
 
-              if ((g_strrstr (years->str, search) == NULL) &&
-                  (strcmp (search + 1, current_year) != 0))
+              // removing whitespaces. This will remove ^M chars that can cause
+              // problems
+              g_strstrip (search);
+
+              // looking for YEAR1-YEAR2.
+              if (g_strrstr (search, "-"))
                 {
-                  years = g_string_append (years, search);
-                  years = g_string_append_c (years, ',');
+                  gchar **array = g_strsplit (search, "-", 2);
+                  if (*array[0] != '\0' && strcmp (array[0], current_year) != 0)
+                    first_year = g_strdup (array[0]);
+
+                  g_strfreev (array);
+                  g_free (search);
+                  break;
+                }
+
+              if (*search != '\0' && strcmp (search, current_year) != 0)
+                {
+                  first_year = g_strdup (search);
+                  g_free (search);
+                  break;
                 }
 
               g_free (search);
@@ -683,17 +699,24 @@ update_comments (GtrHeader *header, const gchar *comments)
 
   g_strfreev (comment_lines);
 
-  g_string_append_printf (years, " %s.", current_year);
+  if (first_year && first_year != current_year)
+    {
+      years = g_strdup_printf ("%s-%s.", first_year, current_year);
+      g_free (first_year);
+    }
+  else
+    years = g_strdup_printf ("%s.", current_year);
 
   /* Remove all empty lines at the end */
   while (new_comments->str[new_comments->len - 1] == '\n')
     new_comments = g_string_truncate (new_comments, new_comments->len - 1);
 
   /* Add \n\n for an extra newline at the end of the comments */
-  g_string_append_printf (new_comments, "\n%s <%s>,%s\n\n",
-                          translator, email, years->str);
+  g_string_append_printf (new_comments, "\n%s <%s>, %s\n\n",
+                          translator, email, years);
 
-  g_string_free (years, TRUE);
+  g_free (years);
+  g_free (current_year);
 
   gtr_header_set_comments (header, new_comments->str);
 
