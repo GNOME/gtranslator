@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-09-13 13:07+0000\n"
-"PO-Revision-Date: 2018-09-13 21:43+0200\n"
+"POT-Creation-Date: 2018-09-16 14:23+0000\n"
+"PO-Revision-Date: 2018-09-17 09:08+0200\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -27,19 +27,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.1.1\n"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in:6
-#: data/org.gnome.Gtranslator.desktop.in:3 src/gtr-application.c:429
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:6
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:432
 #: src/gtr-window.ui:25
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in:7
-#: data/org.gnome.Gtranslator.desktop.in:5
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
+#: data/org.gnome.Gtranslator.desktop.in.in:5
 msgid "Translate and localize applications and libraries"
 msgstr ""
 "Anwendungen und Bibliotheken übersetzen und an lokale Gegebenheiten anpassen"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in:9
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:9
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -56,7 +56,7 @@ msgstr ""
 "po-Datei), einfache Navigation und Bearbeitung von übersetzten Textstellen "
 "und Kommentieren von Übersetzungen."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in:18
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:18
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
 "alternate language, insert tags, integration with subversion and a source "
@@ -66,15 +66,14 @@ msgstr ""
 "Erweiterungen wie alternative Sprachen, Einfügen von XML-Elementen, "
 "Subversion-Integration und einer Quelltextansicht."
 
-#: data/org.gnome.Gtranslator.desktop.in:4
+#: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
 msgstr "Bearbeitungsprogramm für PO-Dateien"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: data/org.gnome.Gtranslator.desktop.in:7
-#| msgid "Gtranslator"
-msgid "org.gnome.Gtranslator"
-msgstr "org.gnome.Gtranslator"
+#: data/org.gnome.Gtranslator.desktop.in.in:7
+msgid "@icon@"
+msgstr "@icon@"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:24
 msgid "Warn if file contains fuzzy translations"
@@ -229,8 +228,8 @@ msgid "_Open"
 msgstr "Ö_ffnen"
 
 #: plugins/alternate-language/gtr-alternate-language-panel.c:328
-#: src/gtr-header-dialog.c:269 src/gtr-preferences-dialog.c:588
-#: src/gtr-search-dialog.c:392
+#: src/gtr-header-dialog.c:269 src/gtr-io-error-info-bar.c:123
+#: src/gtr-preferences-dialog.c:588 src/gtr-search-dialog.c:392
 #: src/translation-memory/gtr-translation-memory-dialog.c:283
 msgid "_Close"
 msgstr "_Schließen"
@@ -770,7 +769,7 @@ msgid "Translator email:"
 msgstr "E-Mail des Übersetzers:"
 
 #: src/gtr-assistant.c:304 src/gtr-preferences-dialog.c:521
-#: src/gtr-window.c:505
+#: src/gtr-window.c:517
 msgid "Profile"
 msgstr "Profil"
 
@@ -995,22 +994,22 @@ msgstr "Ursprüngliche Nachricht"
 msgid "Translated Message"
 msgstr "Übersetzte Nachricht"
 
-#: src/gtr-notebook.c:277
+#: src/gtr-notebook.c:279
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Übersetzt: %0.2f%%"
 
-#: src/gtr-notebook.c:278
+#: src/gtr-notebook.c:280
 #, c-format
 msgid "Translated: %d"
 msgstr "Übersetzt: %d"
 
-#: src/gtr-notebook.c:279
+#: src/gtr-notebook.c:281
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Unübersetzt: %d"
 
-#: src/gtr-notebook.c:280
+#: src/gtr-notebook.c:282
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Unklar: %d"
@@ -1390,43 +1389,43 @@ msgstr ""
 "GtkSpell konnte nicht initialisiert werden.\n"
 " %s"
 
-#: src/gtr-window.c:144
+#: src/gtr-window.c:146
 msgid "Untranslated"
 msgstr "Unübersetzt"
 
-#: src/gtr-window.c:147
+#: src/gtr-window.c:149
 msgid "Translated"
 msgstr "Übersetzt"
 
-#: src/gtr-window.c:150
+#: src/gtr-window.c:152
 msgid "Fuzzy"
 msgstr "Unklar"
 
-#: src/gtr-window.c:157
+#: src/gtr-window.c:159
 #, c-format
 msgid "Current: %d"
 msgstr "Derzeit: %d"
 
-#: src/gtr-window.c:158
+#: src/gtr-window.c:160
 #, c-format
 msgid "Total: %d"
 msgstr "Insgesamt: %d"
 
-#: src/gtr-window.c:159
+#: src/gtr-window.c:161
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "%d übersetzt"
 msgstr[1] "%d übersetzt"
 
-#: src/gtr-window.c:162
+#: src/gtr-window.c:164
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "%d unklar"
 msgstr[1] "%d unklar"
 
-#: src/gtr-window.c:164
+#: src/gtr-window.c:166
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1434,28 +1433,26 @@ msgstr[0] "%d nicht übersetzt"
 msgstr[1] "%d nicht übersetzt"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:274
+#: src/gtr-window.c:276
 #, c-format
-#| msgid "*%s - gtranslator"
 msgid "*%s — gtranslator"
 msgstr "*%s — gtranslator"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:279
+#: src/gtr-window.c:282
 #, c-format
-#| msgid "%s - gtranslator"
 msgid "%s — gtranslator"
 msgstr "%s — gtranslator"
 
-#: src/gtr-window.c:287
+#: src/gtr-window.c:291
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gtr-window.c:489
+#: src/gtr-window.c:501
 msgid "No profile"
 msgstr "Kein Profil"
 
-#: src/gtr-window.c:507
+#: src/gtr-window.c:519
 msgid "Profile for the active document"
 msgstr "Profil des aktiven Dokuments"
 
