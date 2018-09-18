@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-09-16 14:23+0000\n"
-"PO-Revision-Date: 2018-09-17 09:08+0200\n"
+"POT-Creation-Date: 2018-09-18 17:41+0000\n"
+"PO-Revision-Date: 2018-09-18 21:22+0200\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -868,7 +868,7 @@ msgstr "Kontext:"
 msgid "Format:"
 msgstr "Format:"
 
-#: src/gtr-context.ui:50
+#: src/gtr-context.ui:51
 msgid "D_one"
 msgstr "E_rledigt"
 
@@ -1014,71 +1014,79 @@ msgstr "Unübersetzt: %d"
 msgid "Fuzzy: %d"
 msgstr "Unklar: %d"
 
-#: src/gtr-notebook.ui:40
+#: src/gtr-notebook.ui:53 src/gtr-projects.ui:109
+msgid "New window"
+msgstr "Neues Fenster"
+
+#: src/gtr-notebook.ui:67 src/gtr-projects.ui:123
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: src/gtr-notebook.ui:67
+#: src/gtr-notebook.ui:94 src/gtr-projects.ui:150
 msgid "Keybindings"
 msgstr "Tastenkombinationen"
 
-#: src/gtr-notebook.ui:81
+#: src/gtr-notebook.ui:108 src/gtr-projects.ui:164
 msgid "About"
 msgstr "Info"
 
-#: src/gtr-notebook.ui:181 src/gtr-projects.ui:58
+#: src/gtr-notebook.ui:122 src/gtr-projects.ui:178
+msgid "Quit"
+msgstr "Beenden"
+
+#: src/gtr-notebook.ui:222 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Öffnen …"
 
-#: src/gtr-notebook.ui:185
+#: src/gtr-notebook.ui:226
 msgid "Open a new file (<Ctrl>o)"
 msgstr "Eine neue Datei öffnen (<Strg>o) "
 
-#: src/gtr-notebook.ui:211
+#: src/gtr-notebook.ui:252
 msgid "Undo (<Ctrl>z)"
 msgstr "Rückgängig (<Strg>z)"
 
-#: src/gtr-notebook.ui:233
+#: src/gtr-notebook.ui:274
 msgid "Redo (<Ctrl><Shift>z)"
 msgstr "Wiederholen (<Strg><Umschalt>z)"
 
-#: src/gtr-notebook.ui:278
-msgid "Previous message (<Alt>🡄)"
-msgstr "Vorherige Zeichenkette  (<Alt>🡄)"
+#: src/gtr-notebook.ui:319
+msgid "Previous message (<Alt><-)"
+msgstr "Vorherige Zeichenkette (<Alt><-)"
 
-#: src/gtr-notebook.ui:300
-msgid "Next message (<Alt>🡆)"
-msgstr "Nächste Zeichenkette (<Alt>🡆) "
+#: src/gtr-notebook.ui:341
+msgid "Next message (<Alt>->)"
+msgstr "Nächste Zeichenkette (<Alt>->)"
 
-#: src/gtr-notebook.ui:336
+#: src/gtr-notebook.ui:377
 msgid "Previous message without translation (<Alt><Page Up>)"
 msgstr "Vorige Zeichenkette ohne Übersetzung (<Alt><Bild auf>)"
 
-#: src/gtr-notebook.ui:358
+#: src/gtr-notebook.ui:399
 msgid "Next message without translation (<Alt><Page Down>)"
 msgstr "Nächste Zeichenkette ohne Übersetzung (<Alt><Bild ab>)"
 
-#: src/gtr-notebook.ui:398
+#: src/gtr-notebook.ui:439
 msgid "Toggle fuzzy state (<Alt>+f)"
 msgstr "Unklar-Status umschalten (<Alt>+f)"
 
-#: src/gtr-notebook.ui:427
+#: src/gtr-notebook.ui:468 src/gtr-projects.ui:81
 msgid "Main Menu"
 msgstr "Hauptmenü"
 
-#: src/gtr-notebook.ui:443
+#: src/gtr-notebook.ui:484
 msgid "Save"
 msgstr "Speichern"
 
-#: src/gtr-notebook.ui:447
+#: src/gtr-notebook.ui:488
 msgid "Save the current file (<Ctrl>s)"
 msgstr "Aktuelle Datei speichern (<Strg>s)"
 
-#: src/gtr-notebook.ui:462
+#: src/gtr-notebook.ui:503
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Speichern unter (<Strg><Umschalt>s)"
 
-#: src/gtr-notebook.ui:500
+#: src/gtr-notebook.ui:541
 msgid "Progress button"
 msgstr "Fortschrittsknopf"
 
@@ -1341,17 +1349,17 @@ msgstr "EINF"
 msgid "OVR"
 msgstr "ÜBS"
 
-#: src/gtr-tab.c:210
+#: src/gtr-tab.c:219
 msgid "There is an error in the message:"
 msgstr "Die Zeichenkette enthält einen Fehler:"
 
-#: src/gtr-tab.c:538
+#: src/gtr-tab.c:552
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1064
+#: src/gtr-tab.c:1087
 msgid "Path:"
 msgstr "Pfad:"
 
@@ -1359,11 +1367,11 @@ msgstr "Pfad:"
 msgid "Close document"
 msgstr "Dokument schließen"
 
-#: src/gtr-tab.ui:41
+#: src/gtr-tab.ui:43
 msgid "_Original Message:"
 msgstr "_Ursprüngliche Nachricht:"
 
-#: src/gtr-tab.ui:104
+#: src/gtr-tab.ui:106
 msgid "Translate_d Text:"
 msgstr "_Übersetzter Text:"
 
@@ -1374,20 +1382,6 @@ msgid ""
 msgstr ""
 "Die Hilfe kann nicht angezeigt werden. Bitte stellen Sie sicher, dass das "
 "Dokumentationspaket zu Gtranslator installiert ist."
-
-#: src/gtr-view.c:78
-#, c-format
-msgid "gtkspell error: %s\n"
-msgstr "GtkSpell-Fehler: %s\n"
-
-#: src/gtr-view.c:80
-#, c-format
-msgid ""
-"GtkSpell was unable to initialize.\n"
-" %s"
-msgstr ""
-"GtkSpell konnte nicht initialisiert werden.\n"
-" %s"
 
 #: src/gtr-window.c:146
 msgid "Untranslated"
