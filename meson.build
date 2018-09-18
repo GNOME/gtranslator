@@ -122,6 +122,7 @@ gtranslator_deps = [
   gtk_dep,
   glib_dep,
   gda_dep,
+  dependency('gspell-1', version: '>= 1.2.0'),
   dependency('libxml-2.0', version: '>=2.4.12'),
   dependency('gthread-2.0', version: '>=2.13.0'),
   dependency('gio-2.0', version: '>=2.36.0'),

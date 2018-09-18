@@ -112,6 +112,8 @@ void             gtr_header_set_profile              (GtrHeader  *header,
                                                       GtrProfile *profile);
 GtrProfile      *gtr_header_get_profile              (GtrHeader *header);
 
+gchar           *gtr_header_get_language_code        (GtrHeader * header);
+
 G_END_DECLS
 
 #endif /* __HEADER_H__ */

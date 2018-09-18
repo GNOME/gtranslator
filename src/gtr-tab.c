@@ -337,7 +337,9 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
   if (spellcheck &&
       g_settings_get_boolean (priv->editor_settings,
                               GTR_SETTINGS_SPELLCHECK))
-    gtr_view_enable_spellcheck (GTR_VIEW (widget), spellcheck);
+    {
+      gtr_view_enable_spellcheck (GTR_VIEW (widget), spellcheck);
+    }
 
   gtk_container_add (GTK_CONTAINER (scroll), widget);
 
@@ -534,6 +536,7 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
   gchar *label;
   GtkTextBuffer *buf;
   gint i = 0;
+  gchar *lang_code = NULL;
 
   priv = gtr_tab_get_instance_private (tab);
 
@@ -541,14 +544,19 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
    * We get the header of the po file
    */
   header = gtr_po_get_header (priv->po);
+  lang_code = gtr_header_get_language_code (header);
 
   do
     {
+
       label = g_strdup_printf (_("Plural %d"), i);
       priv->trans_msgstr[i] = gtr_tab_append_msgstr_page (label,
                                                           priv->trans_notebook,
                                                           TRUE,
                                                           tab);
+
+      gtr_view_set_language (GTR_VIEW (priv->trans_msgstr[i]), lang_code);
+
       buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[i]));
       g_signal_connect (buf, "end-user-action",
                         G_CALLBACK (gtr_message_translation_update), tab);
@@ -561,6 +569,7 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
       g_free (label);
     }
   while (i < gtr_header_get_nplurals (header));
+  g_free (lang_code);
 }
 
 static void

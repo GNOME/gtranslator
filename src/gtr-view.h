@@ -112,6 +112,9 @@ gtr_view_get_type (void)
 
      void gtr_view_reload_scheme_color (GtrView * view);
 
+     void gtr_view_set_language (GtrView *view,
+                                 const gchar *lang);
+
 
 /* Search macros */
 #define GTR_SEARCH_IS_DONT_SET_FLAGS(sflags) ((sflags & GTR_SEARCH_DONT_SET_FLAGS) != 0)

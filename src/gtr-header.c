@@ -387,6 +387,16 @@ gtr_header_get_language (GtrHeader * header)
 }
 
 gchar *
+gtr_header_get_language_code (GtrHeader * header)
+{
+  gchar *language;
+  g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
+  language = po_header_field (gtr_msg_get_msgstr (GTR_MSG (header)),
+                              "Language");
+  return language;
+}
+
+gchar *
 gtr_header_get_lg_email (GtrHeader * header)
 {
   gchar *space, *email_temp, *email;

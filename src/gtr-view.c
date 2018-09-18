@@ -40,9 +40,45 @@
 #include <gtk/gtk.h>
 
 #include <gtksourceview/gtksource.h>
-#ifdef HAVE_GTKSPELL
-#include <gtkspell/gtkspell.h>
-#endif
+
+#include <gspell/gspell.h>
+
+/**
+ * Converts the language code to a complete language code with the country
+ * If the language contains the country code this returns a new allocated
+ * string copied from *lang*.
+ *
+ * In other case the code is duplicated by default:
+ *
+ * es -> es_ES
+ * pt -> pt_PT
+ */
+static gchar*
+get_default_lang (const gchar *lang) {
+  gchar *up;
+  gchar *ret;
+
+  if (g_strrstr (lang, "_"))
+    {
+      return g_strdup (lang);
+    }
+
+  up = g_ascii_strup (lang, -1);
+  ret = g_strdup_printf ("%s_%s", lang, up);
+  g_free (up);
+
+  return ret;
+}
+
+static void
+inline_spellcheck (GObject *object,
+                   GParamSpec *param,
+                   GtrView *view)
+{
+  GspellTextView *gspell_view;
+  gspell_view = gspell_text_view_get_from_gtk_text_view (GTK_TEXT_VIEW (view));
+  gspell_text_view_set_inline_spell_checking (gspell_view, TRUE);
+}
 
 typedef struct
 {
@@ -54,43 +90,10 @@ typedef struct
   guint search_flags;
   gchar *search_text;
 
-#ifdef HAVE_GTKSPELL
-  GtkSpellChecker *spell;
-#endif
+  GspellChecker *spell;
 } GtrViewPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrView, gtr_view, GTK_SOURCE_TYPE_VIEW)
-
-#ifdef HAVE_GTKSPELL
-static void
-gtr_attach_gtkspell (GtrView * view)
-{
-  GError *error = NULL;
-  GtrViewPrivate *priv;
-  gchar *errortext = NULL;
-
-  priv = gtr_view_get_instance_private (view);
-
-  priv->spell = gtk_spell_checker_new ();
-  gtk_spell_checker_set_language (priv->spell, NULL, &error);
-  if (error)
-    {
-      g_warning (_("gtkspell error: %s\n"), error->message);
-      errortext =
-        g_strdup_printf (_("GtkSpell was unable to initialize.\n %s"),
-                         error->message);
-      g_warning ("%s", errortext);
-
-      g_error_free (error);
-      g_free (errortext);
-    }
-  else
-    {
-      gtk_spell_checker_attach (priv->spell,
-                                GTK_TEXT_VIEW (view));
-    }
-}
-#endif
 
 static void
 gtr_view_init (GtrView * view)
@@ -105,6 +108,7 @@ gtr_view_init (GtrView * view)
 
   priv = gtr_view_get_instance_private (view);
 
+  priv->spell = NULL;
   priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
   priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
 
@@ -155,6 +159,7 @@ gtr_view_dispose (GObject * object)
 
   g_clear_object (&priv->editor_settings);
   g_clear_object (&priv->ui_settings);
+  g_clear_object (&priv->spell);
 
   G_OBJECT_CLASS (gtr_view_parent_class)->dispose (object);
 }
@@ -222,6 +227,67 @@ gtr_view_get_selected_text (GtrView * view,
   return TRUE;
 }
 
+void
+gtr_view_set_language (GtrView *view,
+                       const gchar *lang)
+{
+  GtrViewPrivate *priv = gtr_view_get_instance_private (view);
+  GList *langs = (GList *)gspell_language_get_available ();
+  gchar **lang_parts = NULL;
+  gboolean found = FALSE;
+  gchar *def_lang = get_default_lang (lang);
+
+  while (langs)
+    {
+      GspellLanguage *l = (GspellLanguage*) langs->data;
+      const gchar *code = gspell_language_get_code (l);
+      if (g_strcmp0 (def_lang, code) == 0)
+        {
+          gspell_checker_set_language (priv->spell, l);
+          // If we found the language exacly, we're finished
+          found = TRUE;
+          break;
+        }
+
+      langs = g_list_next (langs);
+    }
+
+  g_free (def_lang);
+
+  if (found)
+    return;
+
+  // Not found, trying again, but this time only with the first part of
+  // the language code
+
+  langs = (GList *)gspell_language_get_available ();
+  lang_parts = g_strsplit (lang, "_", 2);
+  while (langs)
+    {
+      GspellLanguage *l = (GspellLanguage*) langs->data;
+      const gchar *code = gspell_language_get_code (l);
+      gchar **parts = g_strsplit (code, "_", 2);
+      if (parts[0] && g_strcmp0 (parts[0], lang_parts[0]) == 0)
+        {
+          gspell_checker_set_language (priv->spell, l);
+          g_strfreev (parts);
+          found = TRUE;
+          break;
+        }
+      g_strfreev (parts);
+
+      langs = g_list_next (langs);
+    }
+  g_strfreev (lang_parts);
+
+  if (!found)
+    {
+      GspellTextView *gspell_view;
+      gspell_view = gspell_text_view_get_from_gtk_text_view (GTK_TEXT_VIEW (view));
+      gspell_text_view_set_inline_spell_checking (gspell_view, FALSE);
+    }
+}
+
 /**
  * gtr_view_enable_spellcheck:
  * @view: a #GtrView
@@ -232,26 +298,24 @@ gtr_view_get_selected_text (GtrView * view,
 void
 gtr_view_enable_spellcheck (GtrView * view, gboolean enable)
 {
-#ifdef HAVE_GTKSPELL
   GtrViewPrivate *priv;
-#endif
+  GspellTextView *gspell_view;
+  GtkTextBuffer *gtk_buffer;
+  GspellTextBuffer *gspell_buffer;
 
-  if (enable)
-    {
-#ifdef HAVE_GTKSPELL
-      gtr_attach_gtkspell (view);
-#endif
-    }
-  else
-    {
-#ifdef HAVE_GTKSPELL
-      priv = gtr_view_get_instance_private (view);
+  priv = gtr_view_get_instance_private (view);
 
-      if (!priv->spell)
-        return;
-      gtk_spell_checker_detach (priv->spell);
-#endif
-    }
+  priv->spell = gspell_checker_new (NULL);
+  gtk_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+  gspell_buffer = gspell_text_buffer_get_from_gtk_text_buffer (gtk_buffer);
+  gspell_text_buffer_set_spell_checker (gspell_buffer, priv->spell);
+
+  gspell_view = gspell_text_view_get_from_gtk_text_view (GTK_TEXT_VIEW (view));
+  gspell_text_view_set_inline_spell_checking (gspell_view, enable);
+  gspell_text_view_set_enable_language_menu (gspell_view, TRUE);
+
+  g_signal_connect (G_OBJECT (priv->spell), "notify::language",
+                    G_CALLBACK (inline_spellcheck), view);
 }
 
 /**
