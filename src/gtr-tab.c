@@ -124,12 +124,13 @@ static guint signals[LAST_SIGNAL];
 
 static gboolean gtr_tab_autosave (GtrTab * tab);
 
-static void
+static gboolean
 msg_grab_focus (GtrTab *tab)
 {
   GtrTabPrivate *priv;
   priv = gtr_tab_get_instance_private (tab);
   gtk_widget_grab_focus (priv->trans_msgstr[0]);
+  return FALSE;
 }
 
 static void
