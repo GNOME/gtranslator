@@ -41,6 +41,9 @@ typedef struct
   GtkWidget *progress_untrans;
   GtkWidget *save;
   GtrProgress *progress;
+
+  GtkWidget *undo;
+  GtkWidget *redo;
 } GtrNotebookPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrNotebook, gtr_notebook, GTK_TYPE_NOTEBOOK)
@@ -153,6 +156,8 @@ gtr_notebook_class_init (GtrNotebookClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, progress_fuzzy);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, progress_untrans);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, progress_percentage);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, undo);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, redo);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, save);
 }
 
@@ -298,5 +303,24 @@ gtr_notebook_enable_save (GtrNotebook *notebook,
 {
   GtrNotebookPrivate *priv = gtr_notebook_get_instance_private (notebook);
   gtk_widget_set_sensitive (priv->save, enable);
+}
+
+void
+gtr_notebook_update_undo_buttons (GtrNotebook *notebook,
+                                  GtrView     *view)
+{
+  GtkSourceBuffer *active_document;
+  GtrNotebookPrivate *priv = gtr_notebook_get_instance_private (notebook);
+  gboolean can_undo, can_redo;
+  g_return_if_fail (view);
+
+  active_document =
+    GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+
+  can_undo = gtk_source_buffer_can_undo (active_document);
+  can_redo = gtk_source_buffer_can_redo (active_document);
+
+  gtk_widget_set_sensitive (priv->undo, can_undo);
+  gtk_widget_set_sensitive (priv->redo, can_redo);
 }
 

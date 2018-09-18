@@ -79,5 +79,7 @@ void gtr_notebook_set_progress (GtrNotebook *notebook, gint trans, gint untrans,
 
 void gtr_notebook_enable_save (GtrNotebook *notebook, gboolean enable);
 
+void gtr_notebook_update_undo_buttons (GtrNotebook *notebook, GtrView *view);
+
 G_END_DECLS
 #endif /* __NOTEBOOK_H__ */

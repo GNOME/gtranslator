@@ -103,6 +103,16 @@ static void          profile_combo_changed            (GtrStatusComboBox *combo,
 
 static void update_saved_state (GtrPo *po, GParamSpec *param, gpointer window);
 
+static void
+update_undo_state (GtrTab     *tab,
+                   GtrMsg     *msg,
+                   GtrWindow  *window)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  GtrView *active_view = gtr_window_get_active_view (window);
+  gtr_notebook_update_undo_buttons (priv->notebook, active_view);
+}
+
 /*
  * gtr_window_update_statusbar_message_count:
  * 
@@ -447,6 +457,18 @@ notebook_tab_added (GtkNotebook * notebook,
                           G_CALLBACK
                           (gtr_window_update_statusbar_message_count),
                           window);
+
+  g_signal_connect_after (child,
+                          "message_changed",
+                          G_CALLBACK (update_undo_state),
+                          window);
+
+  g_signal_connect_after (child,
+                          "showed-message",
+                          G_CALLBACK (update_undo_state),
+                          window);
+
+  update_undo_state (NULL, NULL, window);
 }
 
 static void
