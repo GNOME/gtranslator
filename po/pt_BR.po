@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-09-13 11:31+0000\n"
-"PO-Revision-Date: 2018-09-13 10:01-0200\n"
+"POT-Creation-Date: 2018-09-18 17:41+0000\n"
+"PO-Revision-Date: 2018-09-18 23:16-0200\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -27,18 +27,18 @@ msgstr ""
 "X-Generator: Virtaal 1.0.0-beta1\n"
 "X-Project-Style: gnome\n"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in:6
-#: data/org.gnome.Gtranslator.desktop.in:3 src/gtr-application.c:416
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:6
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:432
 #: src/gtr-window.ui:25
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in:7
-#: data/org.gnome.Gtranslator.desktop.in:5
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
+#: data/org.gnome.Gtranslator.desktop.in.in:5
 msgid "Translate and localize applications and libraries"
 msgstr "Traduza e localize aplicativos e bibliotecas"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in:9
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:9
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -55,7 +55,7 @@ msgstr ""
 "simplificada e a edição de mensagens e comentários de tradução tornou-se "
 "mais precisa."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in:18
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:18
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
 "alternate language, insert tags, integration with subversion and a source "
@@ -65,15 +65,14 @@ msgstr ""
 "interessantes como idioma alternativo, inserir marcas, integração com "
 "subversion e um visualizador de código fonte."
 
-#: data/org.gnome.Gtranslator.desktop.in:4
+#: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
 msgstr "Editor de arquivos PO"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: data/org.gnome.Gtranslator.desktop.in:7
-#| msgid "Gtranslator"
-msgid "org.gnome.Gtranslator"
-msgstr "org.gnome.Gtranslator"
+#: data/org.gnome.Gtranslator.desktop.in.in:7
+msgid "@icon@"
+msgstr "@icon@"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:24
 msgid "Warn if file contains fuzzy translations"
@@ -188,9 +187,6 @@ msgid "Message list sort order"
 msgstr "Ordem da lista de mensagens"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:108
-#| msgid ""
-#| "Sort order to use in the message list. Possible values are \"status\", "
-#| "\"id\", \"original-text\" and \"translated-text\"."
 msgid ""
 "Sort order to use in the message list. Possible values are “status”, “id”, "
 "“original-text” and “translated-text”."
@@ -204,10 +200,6 @@ msgid "Active plugins"
 msgstr "Plug-ins ativos"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:144
-#| msgid ""
-#| "List of active plugins. It contains the \"Location\" of the active "
-#| "plugins. See the .gtranslator-plugin file for obtaining the \"Location\" "
-#| "of a given plugin."
 msgid ""
 "List of active plugins. It contains the “Location” of the active plugins. "
 "See the .gtranslator-plugin file for obtaining the “Location” of a given "
@@ -231,28 +223,21 @@ msgstr "Arquivo fechado"
 
 #: plugins/alternate-language/gtr-alternate-language-panel.c:322
 #: src/gtr-file-dialogs.c:48
-#| msgctxt "alternate lang"
-#| msgid "_Open"
 msgid "_Open"
 msgstr "_Abrir"
 
 #: plugins/alternate-language/gtr-alternate-language-panel.c:328
-#: src/gtr-header-dialog.c:269 src/gtr-preferences-dialog.c:588
-#: src/gtr-search-dialog.c:392
+#: src/gtr-header-dialog.c:269 src/gtr-io-error-info-bar.c:123
+#: src/gtr-preferences-dialog.c:588 src/gtr-search-dialog.c:392
 #: src/translation-memory/gtr-translation-memory-dialog.c:283
-#| msgctxt "alternate lang"
-#| msgid "_Close"
 msgid "_Close"
 msgstr "_Fechar"
 
 #: plugins/alternate-language/gtr-alternate-language-panel.c:334
-#| msgctxt "alternate lang"
-#| msgid "Co_py"
 msgid "Co_py"
 msgstr "_Copiar"
 
 #: plugins/alternate-language/gtr-alternate-language-panel.c:363
-#| msgid "There isn't any file loaded"
 msgid "There isn’t any file loaded"
 msgstr "Não há qualquer arquivo carregado"
 
@@ -297,7 +282,6 @@ msgstr "Linha de comando:"
 
 #: plugins/codeview/gtr-codeview-plugin.c:129
 #, c-format
-#| msgid "Please install \"%s\" to be able to show the file"
 msgid "Please install “%s” to be able to show the file"
 msgstr "Por favor, instale “%s” para poder mostrar o arquivo"
 
@@ -348,7 +332,6 @@ msgstr "Dicionário"
 
 #: plugins/dictionary/gtr-dict-panel.c:166
 #, c-format
-#| msgid "No dictionary source available with name '%s'"
 msgid "No dictionary source available with name “%s”"
 msgstr "Nenhuma fonte de dicionário disponível com o nome “%s”"
 
@@ -358,7 +341,6 @@ msgstr "Não foi possível localizar a fonte de dicionário"
 
 #: plugins/dictionary/gtr-dict-panel.c:185
 #, c-format
-#| msgid "No context available for source '%s'"
 msgid "No context available for source “%s”"
 msgstr "Nenhum contexto disponível para a fonte “%s”"
 
@@ -368,25 +350,21 @@ msgstr "Não foi possível criar um contexto"
 
 #: plugins/dictionary/gtr-dict-panel.c:272
 #, c-format
-#| msgid "Dictionary source '%s' selected"
 msgid "Dictionary source “%s” selected"
 msgstr "Fonte de dicionário “%s” selecionada"
 
 #: plugins/dictionary/gtr-dict-panel.c:291
 #, c-format
-#| msgid "Strategy '%s' selected"
 msgid "Strategy “%s” selected"
 msgstr "Estratégia “%s” selecionada"
 
 #: plugins/dictionary/gtr-dict-panel.c:309
 #, c-format
-#| msgid "Database '%s' selected"
 msgid "Database “%s” selected"
 msgstr "Banco de dados “%s” selecionado"
 
 #: plugins/dictionary/gtr-dict-panel.c:353
 #, c-format
-#| msgid "Word '%s' selected"
 msgid "Word “%s” selected"
 msgstr "Palavra “%s” selecionada"
 
@@ -707,7 +685,6 @@ msgid "File saved."
 msgstr "Arquivo salvo."
 
 #: src/gtr-actions-file.c:320
-#| msgid "Save file as..."
 msgid "Save file as…"
 msgstr "Salvar arquivo como…"
 
@@ -790,7 +767,7 @@ msgid "Translator email:"
 msgstr "E-mail do tradutor:"
 
 #: src/gtr-assistant.c:304 src/gtr-preferences-dialog.c:521
-#: src/gtr-window.c:505
+#: src/gtr-window.c:517
 msgid "Profile"
 msgstr "Perfil"
 
@@ -814,7 +791,6 @@ msgid "_Cancel"
 msgstr "_Cancelar"
 
 #: src/gtr-close-confirmation-dialog.c:128 src/gtr-file-dialogs.c:47
-#| msgid "Save"
 msgid "_Save"
 msgstr "_Salvar"
 
@@ -824,7 +800,6 @@ msgstr "Pergunta"
 
 #: src/gtr-close-confirmation-dialog.c:366
 #, c-format
-#| msgid "Save the changes to document \"%s\" before closing?"
 msgid "Save the changes to document “%s” before closing?"
 msgstr "Salvar as alterações do documento “%s” antes de fechar?"
 
@@ -860,7 +835,6 @@ msgid "Saving has been disabled by the system administrator."
 msgstr "O salvamento foi desabilitado pelo administrador do sistema."
 
 #: src/gtr-close-confirmation-dialog.c:583
-#| msgid "If you don't save, all your changes will be permanently lost."
 msgid "If you don’t save, all your changes will be permanently lost."
 msgstr ""
 "Se você não salvar, todas as suas alterações serão permanentemente perdidas."
@@ -892,7 +866,7 @@ msgstr "Contexto:"
 msgid "Format:"
 msgstr "Formato:"
 
-#: src/gtr-context.ui:50
+#: src/gtr-context.ui:51
 msgid "D_one"
 msgstr "Pr_onto"
 
@@ -941,12 +915,10 @@ msgid "Use my options to complete the following entries:"
 msgstr "Usar as minhas opções para preencher as seguintes entradas:"
 
 #: src/gtr-header-dialog.ui:468
-#| msgid "Translator's _name:"
 msgid "Translator’s _name:"
 msgstr "_Nome do tradutor:"
 
 #: src/gtr-header-dialog.ui:485
-#| msgid "Translator's _email:"
 msgid "Translator’s _email:"
 msgstr "_E-mail do tradutor:"
 
@@ -1020,93 +992,106 @@ msgstr "Mensagem original"
 msgid "Translated Message"
 msgstr "Mensagem traduzida"
 
-#: src/gtr-notebook.c:277
+#: src/gtr-notebook.c:279
 #, c-format
-#| msgid "Translated"
 msgid "Translated: %0.2f%%"
 msgstr "Traduzido: %0.2f%%"
 
-#: src/gtr-notebook.c:278
+#: src/gtr-notebook.c:280
 #, c-format
-#| msgid "Translated"
 msgid "Translated: %d"
 msgstr "Traduzido: %d"
 
-#: src/gtr-notebook.c:279
+#: src/gtr-notebook.c:281
 #, c-format
-#| msgid "Untranslated"
 msgid "Untranslated: %d"
 msgstr "Não traduzido: %d"
 
-#: src/gtr-notebook.c:280
+#: src/gtr-notebook.c:282
 #, c-format
-#| msgid "Fuzzy"
 msgid "Fuzzy: %d"
 msgstr "Aproximado: %d"
 
-#: src/gtr-notebook.ui:40
+#: src/gtr-notebook.ui:53 src/gtr-projects.ui:109
+#| msgid "_New Window"
+msgid "New window"
+msgstr "Nova janela"
+
+#: src/gtr-notebook.ui:67 src/gtr-projects.ui:123
 msgid "Preferences"
 msgstr "Preferências"
 
-#: src/gtr-notebook.ui:67
+#: src/gtr-notebook.ui:94 src/gtr-projects.ui:150
 msgid "Keybindings"
 msgstr "Associações de teclas"
 
-#: src/gtr-notebook.ui:81
+#: src/gtr-notebook.ui:108 src/gtr-projects.ui:164
 msgid "About"
 msgstr "Sobre"
 
-#: src/gtr-notebook.ui:181 src/gtr-projects.ui:58
+#: src/gtr-notebook.ui:122 src/gtr-projects.ui:178
+#| msgid "_Quit"
+msgid "Quit"
+msgstr "Sair"
+
+#: src/gtr-notebook.ui:222 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Abrir…"
 
-#: src/gtr-notebook.ui:185
+#: src/gtr-notebook.ui:226
 msgid "Open a new file (<Ctrl>o)"
 msgstr "Abrir um novo arquivo (<Ctrl>o)"
 
-#: src/gtr-notebook.ui:211
+#: src/gtr-notebook.ui:252
 msgid "Undo (<Ctrl>z)"
 msgstr "Desfazer (<Ctrl>z)"
 
-#: src/gtr-notebook.ui:233
+#: src/gtr-notebook.ui:274
 msgid "Redo (<Ctrl><Shift>z)"
 msgstr "Refazer (<Ctrl><Shift>z)"
 
-#: src/gtr-notebook.ui:278
-msgid "Previous message (<Alt>🡄)"
-msgstr "Mensagem anterior (<Alt>🡄)"
+#: src/gtr-notebook.ui:319
+#| msgid "Previous message (<Alt>🡄)"
+msgid "Previous message (<Alt><-)"
+msgstr "Mensagem anterior (<Alt><-)"
 
-#: src/gtr-notebook.ui:300
-msgid "Next message (<Alt>🡆)"
-msgstr "Próxima mensagem (<Alt>🡆)"
+#: src/gtr-notebook.ui:341
+#| msgid "Next message (<Alt>🡆)"
+msgid "Next message (<Alt>->)"
+msgstr "Próxima mensagem (<Alt>->)"
 
-#: src/gtr-notebook.ui:336
+#: src/gtr-notebook.ui:377
 msgid "Previous message without translation (<Alt><Page Up>)"
 msgstr "Mensagem anterior sem tradução (<Alt><Page Up>)"
 
-#: src/gtr-notebook.ui:358
+#: src/gtr-notebook.ui:399
 msgid "Next message without translation (<Alt><Page Down>)"
 msgstr "Próxima mensagem sem tradução (<Alt><Page Down>)"
 
-#: src/gtr-notebook.ui:399
+#: src/gtr-notebook.ui:439
+#| msgid "Toggle fuzzy status of a message"
+msgid "Toggle fuzzy state (<Alt>+f)"
+msgstr "Alterna estado aproximado (<Alt>+f)"
+
+#: src/gtr-notebook.ui:468 src/gtr-projects.ui:81
 msgid "Main Menu"
 msgstr "Menu principal"
 
-#: src/gtr-notebook.ui:419
-msgid "Progress button"
-msgstr "Botão de progresso"
-
-#: src/gtr-notebook.ui:435
+#: src/gtr-notebook.ui:484
 msgid "Save"
 msgstr "Salvar"
 
-#: src/gtr-notebook.ui:439
+#: src/gtr-notebook.ui:488
 msgid "Save the current file (<Ctrl>s)"
 msgstr "Salva o arquivo atual (<Ctrl>s)"
 
-#: src/gtr-notebook.ui:454
+#: src/gtr-notebook.ui:503
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Salvar como (<Ctrl><Shift>s)"
+
+#: src/gtr-notebook.ui:541
+msgid "Progress button"
+msgstr "Botão de progresso"
 
 #: src/gtr-po.c:440
 #, c-format
@@ -1115,13 +1100,11 @@ msgstr "O arquivo está vazio"
 
 #: src/gtr-po.c:449
 #, c-format
-#| msgid "Failed opening file '%s': %s"
 msgid "Failed opening file “%s”: %s"
 msgstr "Falha ao abrir o arquivo “%s”: %s"
 
 #: src/gtr-po.c:524
 #, c-format
-#| msgid "Could not convert from charset '%s' to UTF-8"
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Não foi possível converter do conjunto de caracteres “%s” para UTF-8"
 
@@ -1153,10 +1136,6 @@ msgstr "Nenhuma mensagem obtida do interpretador."
 
 #: src/gtr-po.c:761
 #, c-format
-#| msgid ""
-#| "You are saving a file with a .pot extension.\n"
-#| "Pot files are generated by the compilation process.\n"
-#| "Your file should likely be named '%s.po'."
 msgid ""
 "You are saving a file with a .pot extension.\n"
 "Pot files are generated by the compilation process.\n"
@@ -1189,7 +1168,6 @@ msgid "Are you sure you want to delete this profile?"
 msgstr "Você tem certeza de que deseja excluir esse perfil?"
 
 #: src/gtr-preferences-dialog.c:397
-#| msgid "_Delete Toolbar"
 msgid "_Delete"
 msgstr "E_xcluir"
 
@@ -1198,7 +1176,6 @@ msgid "Active"
 msgstr "Ativo"
 
 #: src/gtr-preferences-dialog.c:589
-#| msgid "_Help"
 msgid "Help"
 msgstr "Ajuda"
 
@@ -1320,8 +1297,6 @@ msgid "Replace _All"
 msgstr "Substituir _todas"
 
 #: src/gtr-search-dialog.c:455
-#| msgid "Found and replaced %d occurrence"
-#| msgid_plural "Found and replaced %d occurrences"
 msgid "Find and replace"
 msgstr "Localizar e substituir"
 
@@ -1377,17 +1352,17 @@ msgstr "INS"
 msgid "OVR"
 msgstr "SBR"
 
-#: src/gtr-tab.c:210
+#: src/gtr-tab.c:219
 msgid "There is an error in the message:"
 msgstr "Há um erro na mensagem:"
 
-#: src/gtr-tab.c:538
+#: src/gtr-tab.c:552
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1064
+#: src/gtr-tab.c:1087
 msgid "Path:"
 msgstr "Caminho:"
 
@@ -1395,11 +1370,11 @@ msgstr "Caminho:"
 msgid "Close document"
 msgstr "Fecha o documento"
 
-#: src/gtr-tab.ui:41
+#: src/gtr-tab.ui:43
 msgid "_Original Message:"
 msgstr "Mensagem o_riginal:"
 
-#: src/gtr-tab.ui:104
+#: src/gtr-tab.ui:106
 msgid "Translate_d Text:"
 msgstr "Texto tradu_zido:"
 
@@ -1411,57 +1386,43 @@ msgstr ""
 "Não foi possível exibir a ajuda. Por favor, certifique-se de que a "
 "documentação do Gtranslator esteja instalada."
 
-#: src/gtr-view.c:78
-#, c-format
-msgid "gtkspell error: %s\n"
-msgstr "erro do gtkspell: %s\n"
-
-#: src/gtr-view.c:80
-#, c-format
-msgid ""
-"GtkSpell was unable to initialize.\n"
-" %s"
-msgstr ""
-"O GtkSpell não conseguiu inicializar.\n"
-" %s"
-
-#: src/gtr-window.c:144
+#: src/gtr-window.c:146
 msgid "Untranslated"
 msgstr "Não traduzida"
 
-#: src/gtr-window.c:147
+#: src/gtr-window.c:149
 msgid "Translated"
 msgstr "Traduzida"
 
-#: src/gtr-window.c:150
+#: src/gtr-window.c:152
 msgid "Fuzzy"
 msgstr "Aproximada"
 
-#: src/gtr-window.c:157
+#: src/gtr-window.c:159
 #, c-format
 msgid "Current: %d"
 msgstr "Atual: %d"
 
-#: src/gtr-window.c:158
+#: src/gtr-window.c:160
 #, c-format
 msgid "Total: %d"
 msgstr "Total: %d"
 
-#: src/gtr-window.c:159
+#: src/gtr-window.c:161
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "%d traduzida"
 msgstr[1] "%d traduzidas"
 
-#: src/gtr-window.c:162
+#: src/gtr-window.c:164
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "%d aproximada"
 msgstr[1] "%d aproximadas"
 
-#: src/gtr-window.c:164
+#: src/gtr-window.c:166
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1469,41 +1430,35 @@ msgstr[0] "%d não traduzida"
 msgstr[1] "%d não traduzidas"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:274
+#: src/gtr-window.c:276
 #, c-format
-#| msgid "*%s - gtranslator"
 msgid "*%s — gtranslator"
 msgstr "*%s – gtranslator"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:279
+#: src/gtr-window.c:282
 #, c-format
-#| msgid "%s - gtranslator"
 msgid "%s — gtranslator"
 msgstr "%s – gtranslator"
 
-#: src/gtr-window.c:287
+#: src/gtr-window.c:291
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gtr-window.c:489
+#: src/gtr-window.c:501
 msgid "No profile"
 msgstr "Sem perfil"
 
-#: src/gtr-window.c:507
+#: src/gtr-window.c:519
 msgid "Profile for the active document"
 msgstr "Perfil para o documento ativo"
 
 #: src/main.c:97
-#| msgid "- Edit PO files"
 msgid "— Edit PO files"
 msgstr "— Edite arquivos PO"
 
 #: src/main.c:101
 #, c-format
-#| msgid ""
-#| "%s\n"
-#| "Run '%s --help' to see a full list of available command line options.\n"
 msgid ""
 "%s\n"
 "Run “%s --help” to see a full list of available command line options.\n"
@@ -1511,6 +1466,20 @@ msgstr ""
 "%s\n"
 "Execute “%s --help” para ver uma lista completa das opções de linha de "
 "comando disponíveis.\n"
+
+#~| msgid "Gtranslator"
+#~ msgid "org.gnome.Gtranslator"
+#~ msgstr "org.gnome.Gtranslator"
+
+#~ msgid "gtkspell error: %s\n"
+#~ msgstr "erro do gtkspell: %s\n"
+
+#~ msgid ""
+#~ "GtkSpell was unable to initialize.\n"
+#~ " %s"
+#~ msgstr ""
+#~ "O GtkSpell não conseguiu inicializar.\n"
+#~ " %s"
 
 #~ msgid "Gtranslator PO File Editor"
 #~ msgstr "Editor de arquivos PO Gtranslator"
@@ -1789,9 +1758,6 @@ msgstr ""
 
 #~ msgid "Toggle _Fuzzy Status"
 #~ msgstr "Alternar stat_us de aproximada"
-
-#~ msgid "Toggle fuzzy status of a message"
-#~ msgstr "Marca ou desmarca uma tradução como aproximada"
 
 #~ msgid "_Message Details"
 #~ msgstr "Detalhes da _mensagem"
