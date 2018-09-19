@@ -2,69 +2,63 @@ subdir('icons')
 subdir('pixmaps')
 
 # Desktop files
-desktop = 'org.gnome.Gtranslator.desktop'
-appdata = 'org.gnome.Gtranslator.appdata.xml'
-
 desktop_conf = configuration_data()
-desktop_conf.set('icon', application_id)
-appdata_conf = configuration_data()
-appdata_conf.set('appid', application_id)
+desktop_conf.set('icon', gtr_app_id)
+
+desktop = gtr_namespace + '.desktop'
 
 desktop_in = configure_file(
-    input: desktop + '.in.in',
-    output: desktop + '.in',
-    configuration: desktop_conf
+  input: desktop + '.in.in',
+  output: desktop + '.in',
+  configuration: desktop_conf,
 )
+
+i18n.merge_file(
+  desktop,
+  type: 'desktop',
+  input: desktop_in,
+  output: desktop,
+  po_dir: po_dir,
+  install: true,
+  install_dir: join_paths(gtr_datadir, 'applications'),
+)
+
+# AppStream application metainfo
+appdata_conf = configuration_data()
+appdata_conf.set('appid', gtr_app_id)
+
+appdata = gtr_namespace + '.appdata.xml'
 
 appdata_in = configure_file(
-    input: appdata + '.in.in',
-    output: appdata + '.in',
-    configuration: appdata_conf
+  input: appdata + '.in.in',
+  output: appdata + '.in',
+  configuration: appdata_conf,
 )
 
 i18n.merge_file(
-      desktop,
-         type: 'desktop',
-        input: desktop_in,
-       output: desktop,
-       po_dir: po_dir,
-      install: true,
-  install_dir: join_paths(gtranslator_datadir, 'applications')
-)
-
-i18n.merge_file(
-      appdata,
-         type: 'xml',
-        input: appdata_in,
-       output: appdata,
-       po_dir: po_dir,
-      install: true,
-  install_dir: join_paths(gtranslator_datadir, 'metainfo')
+  appdata,
+  input: appdata_in,
+  output: appdata,
+  po_dir: po_dir,
+  install: true,
+  install_dir: join_paths(gtr_datadir, 'metainfo'),
 )
 
 # GSettings schema
 schema_conf = configuration_data()
 schema_conf.set('GETTEXT_PACKAGE', meson.project_name())
 
-schema = 'org.gnome.Gtranslator.gschema.xml'
+schema = gtr_namespace + '.gschema.xml'
 
-schema_xml = configure_file(
+configure_file(
   input: schema + '.in',
   output: schema,
+  configuration: schema_conf,
   install: true,
-  install_dir: gtranslator_schemadir,
-  configuration: schema_conf
+  install_dir: gtr_schemasdir,
 )
 
-output = 'gschemas.compiled'
-
-# for unit tests - gnome.compile_schemas() only looks in srcdir
-compiled_schemas = custom_target(
-   output,
-    input: schema_xml,
-   output: output,
-  command: [find_program('glib-compile-schemas'), meson.current_build_dir()]
+install_data(
+  'gtr-plural-forms.ini',
+  install_dir: join_paths(gtr_pkgdatadir, 'ui'),
 )
-
-install_data ('gtr-plural-forms.ini', install_dir: join_paths (gtranslator_pkgdatadir, 'ui'))
-

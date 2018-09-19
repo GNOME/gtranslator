@@ -1,113 +1,117 @@
 src_inc = include_directories('.')
 
-gtr_marshal = gnome.genmarshal('gtr-marshal',
-    sources: 'gtr-marshal.list',
-    prefix: 'gtr_marshal',
-    install_header: true,
-    install_dir: get_option('includedir'),
-    extra_args: ['-UG_ENABLE_DEBUG', '--prototypes'])
+subdir('translation-memory')
 
-gtr_marshal_c = gtr_marshal[0]
-gtr_marshal_h = gtr_marshal[1]
-
-sources = files(
-	'gtr-actions-app.c',
-	'gtr-actions-documents.c',
-	'gtr-actions-edit.c',
-	'gtr-actions-file.c',
-	'gtr-actions-go.c',
-	'gtr-actions-search.c',
-	'gtr-actions-view.c',
-	'gtr-application.c',
-	'gtr-assistant.c',
-	'gtr-close-button.c',
-	'gtr-close-confirmation-dialog.c',
-	'gtr-context.c',
-	'gtr-dirs.c',
-	'gtr-file-dialogs.c',
-	'gtr-header.c',
-	'gtr-header-dialog.c',
-	'gtr-history-entry.c',
-	'gtr-io-error-info-bar.c',
-	'gtr-jump-dialog.c',
-	'gtr-language.c',
-	'gtr-languages-fetcher.c',
-	'gtr-message-container.c',
-	'gtr-message-table.c',
-	'gtr-message-table-model.c',
-	'gtr-msg.c',
-	'gtr-notebook.c',
-	'gtr-po.c',
-	'gtr-preferences-dialog.c',
-	'gtr-profile.c',
-	'gtr-profile-dialog.c',
-	'gtr-profile-manager.c',
-	'gtr-search-dialog.c',
-	'gtr-settings.c',
-	'gtr-statusbar.c',
-	'gtr-status-combo-box.c',
-	'gtr-tab.c',
-	'gtr-tab-label.c',
-	'gtr-utils.c',
-	'gtr-view.c',
-	'gtr-projects.c',
-	'gtr-progress.c',
-	'gtr-window.c'
+enum_headers = files(
+  'gtr-application.h',
+  'gtr-context.h',
+  'gtr-debug.h',
+  'gtr-header.h',
+  'gtr-message-container.h',
+  'gtr-message-table.h',
+  'gtr-msg.h',
+  'gtr-notebook.h',
+  'gtr-po.h',
+  'gtr-profile.h',
+  'gtr-statusbar.h',
+  'gtr-tab-activatable.h',
+  'gtr-tab.h',
+  'gtr-view.h',
+  'gtr-window-activatable.h',
+  'gtr-window.h',
 )
 
-sources += [gtr_marshal_c, gtr_marshal_h]
+sources = files(
+  'gtr-actions-app.c',
+  'gtr-actions-documents.c',
+  'gtr-actions-edit.c',
+  'gtr-actions-file.c',
+  'gtr-actions-go.c',
+  'gtr-actions-search.c',
+  'gtr-actions-view.c',
+  'gtr-application.c',
+  'gtr-assistant.c',
+  'gtr-close-button.c',
+  'gtr-close-confirmation-dialog.c',
+  'gtr-context.c',
+  'gtr-dirs.c',
+  'gtr-file-dialogs.c',
+  'gtr-header.c',
+  'gtr-header-dialog.c',
+  'gtr-history-entry.c',
+  'gtr-io-error-info-bar.c',
+  'gtr-jump-dialog.c',
+  'gtr-language.c',
+  'gtr-languages-fetcher.c',
+  'gtr-message-container.c',
+  'gtr-message-table.c',
+  'gtr-message-table-model.c',
+  'gtr-msg.c',
+  'gtr-notebook.c',
+  'gtr-po.c',
+  'gtr-preferences-dialog.c',
+  'gtr-profile.c',
+  'gtr-profile-dialog.c',
+  'gtr-profile-manager.c',
+  'gtr-search-dialog.c',
+  'gtr-settings.c',
+  'gtr-statusbar.c',
+  'gtr-status-combo-box.c',
+  'gtr-tab.c',
+  'gtr-tab-label.c',
+  'gtr-utils.c',
+  'gtr-view.c',
+  'gtr-projects.c',
+  'gtr-progress.c',
+  'gtr-window.c',
+)
 
-header_files = files(
-	'gtr-application.h',
-	'gtr-context.h',
-	'gtr-debug.h',
-	'gtr-header.h',
-	'gtr-message-container.h',
-	'gtr-message-table.h',
-	'gtr-msg.h',
-	'gtr-notebook.h',
-	'gtr-po.h',
-	'gtr-profile.h',
-	'gtr-statusbar.h',
-	'gtr-tab-activatable.h',
-	'gtr-tab.h',
-	'gtr-view.h',
-	'gtr-window-activatable.h',
-	'gtr-window.h',
+marshal = 'gtr-marshal'
+
+sources += gnome.genmarshal(
+  marshal,
+  sources: marshal + '.list',
+  prefix: marshal.underscorify(),
+  extra_args: [
+    '-UG_ENABLE_DEBUG',
+    '--prototypes',
+  ],
+  install_header: true,
+  install_dir: gtr_includedir,
 )
 
 enum_types = 'gtr-enum-types'
+
 sources += gnome.mkenums(
   enum_types,
-     sources: header_files,
+  sources: enum_headers,
   c_template: enum_types + '.c.template',
-  h_template: enum_types + '.h.template'
+  h_template: enum_types + '.h.template',
 )
 
 resource_data = files(
-    'gtranslator-ui.xml',
-    'gtranslator-menu.ui',
-    'gtr-context.ui',
-    'gtr-header-dialog.ui',
-    'gtr-jump-dialog.ui',
-    'gtr-languages-fetcher.ui',
-    'gtr-message-table.ui',
-    'gtr-notebook.ui',
-    'gtr-preferences-dialog.ui',
-    'gtr-profile-dialog.ui',
-    'gtr-search-dialog.ui',
-    'gtr-statusbar.ui',
-    'gtr-tab.ui',
-    'gtr-window.ui'
+  'gtranslator-menu.ui',
+  'gtranslator-ui.xml',
+  'gtr-context.ui',
+  'gtr-header-dialog.ui',
+  'gtr-jump-dialog.ui',
+  'gtr-languages-fetcher.ui',
+  'gtr-message-table.ui',
+  'gtr-notebook.ui',
+  'gtr-preferences-dialog.ui',
+  'gtr-profile-dialog.ui',
+  'gtr-search-dialog.ui',
+  'gtr-statusbar.ui',
+  'gtr-tab.ui',
+  'gtr-window.ui'
 )
 
-gresource = files('gtranslator.gresource.xml')
 sources += gnome.compile_resources(
-  'gtr-resources', gresource,
-        source_dir: src_dir,
-            c_name: 'gtr_resources',
-      dependencies: resource_data,
-            export: true
+  'gtr-resources',
+  'gtranslator.gresource.xml',
+  c_name: 'gtr_resources',
+  dependencies: resource_data,
+  export: true,
 )
 
 #######################
@@ -116,11 +120,20 @@ sources += gnome.compile_resources(
 
 incs = [
   top_inc,
-  include_directories('translation-memory'),
+  translation_mem_inc,
 ]
 
-subdir('translation-memory')
+libgtranslator = shared_library(
+  meson.project_name(),
+  sources: sources + translation_mem_sources,
+  include_directories: incs,
+  dependencies: gtr_deps,
+)
 
+libgtranslator_dep = declare_dependency(
+  include_directories: src_inc,
+  link_with: libgtranslator,
+)
 
 ###############
 # gtranslator #
@@ -128,9 +141,9 @@ subdir('translation-memory')
 
 executable(
   meson.project_name(),
-   sources + files('main.c'),
-   include_directories: incs,
-          dependencies: gtranslator_deps,
-               install: true,
-           install_dir: gtranslator_bindir
+  'main.c',
+  include_directories: top_inc,
+  dependencies: gtr_deps,
+  objects: libgtranslator.extract_all_objects(),
+  install: true,
 )
