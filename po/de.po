@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-09-18 17:41+0000\n"
-"PO-Revision-Date: 2018-09-18 21:22+0200\n"
+"POT-Creation-Date: 2018-09-20 09:08+0000\n"
+"PO-Revision-Date: 2018-09-20 11:52+0200\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -28,7 +28,7 @@ msgstr ""
 "X-Generator: Poedit 2.1.1\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:432
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:488
 #: src/gtr-window.ui:25
 msgid "Gtranslator"
 msgstr "Gtranslator"
@@ -769,7 +769,7 @@ msgid "Translator email:"
 msgstr "E-Mail des Übersetzers:"
 
 #: src/gtr-assistant.c:304 src/gtr-preferences-dialog.c:521
-#: src/gtr-window.c:517
+#: src/gtr-window.c:548
 msgid "Profile"
 msgstr "Profil"
 
@@ -994,22 +994,22 @@ msgstr "Ursprüngliche Nachricht"
 msgid "Translated Message"
 msgstr "Übersetzte Nachricht"
 
-#: src/gtr-notebook.c:279
+#: src/gtr-notebook.c:284
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Übersetzt: %0.2f%%"
 
-#: src/gtr-notebook.c:280
+#: src/gtr-notebook.c:285
 #, c-format
 msgid "Translated: %d"
 msgstr "Übersetzt: %d"
 
-#: src/gtr-notebook.c:281
+#: src/gtr-notebook.c:286
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Unübersetzt: %d"
 
-#: src/gtr-notebook.c:282
+#: src/gtr-notebook.c:287
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Unklar: %d"
@@ -1023,7 +1023,7 @@ msgid "Preferences"
 msgstr "Einstellungen"
 
 #: src/gtr-notebook.ui:94 src/gtr-projects.ui:150
-msgid "Keybindings"
+msgid "Keyboard Shortcuts"
 msgstr "Tastenkombinationen"
 
 #: src/gtr-notebook.ui:108 src/gtr-projects.ui:164
@@ -1067,8 +1067,8 @@ msgid "Next message without translation (<Alt><Page Down>)"
 msgstr "Nächste Zeichenkette ohne Übersetzung (<Alt><Bild ab>)"
 
 #: src/gtr-notebook.ui:439
-msgid "Toggle fuzzy state (<Alt>+f)"
-msgstr "Unklar-Status umschalten (<Alt>+f)"
+msgid "Toggle fuzzy state (<Ctrl>+u)"
+msgstr "Unklar-Status umschalten (<Strg>+u)"
 
 #: src/gtr-notebook.ui:468 src/gtr-projects.ui:81
 msgid "Main Menu"
@@ -1383,43 +1383,43 @@ msgstr ""
 "Die Hilfe kann nicht angezeigt werden. Bitte stellen Sie sicher, dass das "
 "Dokumentationspaket zu Gtranslator installiert ist."
 
-#: src/gtr-window.c:146
+#: src/gtr-window.c:165
 msgid "Untranslated"
 msgstr "Unübersetzt"
 
-#: src/gtr-window.c:149
+#: src/gtr-window.c:168
 msgid "Translated"
 msgstr "Übersetzt"
 
-#: src/gtr-window.c:152
+#: src/gtr-window.c:171
 msgid "Fuzzy"
 msgstr "Unklar"
 
-#: src/gtr-window.c:159
+#: src/gtr-window.c:178
 #, c-format
 msgid "Current: %d"
 msgstr "Derzeit: %d"
 
-#: src/gtr-window.c:160
+#: src/gtr-window.c:179
 #, c-format
 msgid "Total: %d"
 msgstr "Insgesamt: %d"
 
-#: src/gtr-window.c:161
+#: src/gtr-window.c:180
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "%d übersetzt"
 msgstr[1] "%d übersetzt"
 
-#: src/gtr-window.c:164
+#: src/gtr-window.c:183
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "%d unklar"
 msgstr[1] "%d unklar"
 
-#: src/gtr-window.c:166
+#: src/gtr-window.c:185
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1427,26 +1427,26 @@ msgstr[0] "%d nicht übersetzt"
 msgstr[1] "%d nicht übersetzt"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:276
+#: src/gtr-window.c:295
 #, c-format
 msgid "*%s — gtranslator"
 msgstr "*%s — gtranslator"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:282
+#: src/gtr-window.c:301
 #, c-format
 msgid "%s — gtranslator"
 msgstr "%s — gtranslator"
 
-#: src/gtr-window.c:291
+#: src/gtr-window.c:310
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gtr-window.c:501
+#: src/gtr-window.c:532
 msgid "No profile"
 msgstr "Kein Profil"
 
-#: src/gtr-window.c:519
+#: src/gtr-window.c:550
 msgid "Profile for the active document"
 msgstr "Profil des aktiven Dokuments"
 
