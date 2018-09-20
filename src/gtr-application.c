@@ -379,6 +379,17 @@ build_tm_activated (GSimpleAction *action,
 }
 
 static void
+tm_activated (GSimpleAction *action,
+              GVariant      *parameter,
+              gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  GtrWindow *w = GTR_WINDOW (priv->active_window);
+  gtr_window_tm_keybind (w, action);
+}
+
+static void
 toggle_fuzzy_activated (GSimpleAction *action,
                         GVariant      *parameter,
                         gpointer       user_data)
@@ -406,6 +417,16 @@ static GActionEntry app_entries[] = {
   { "fuzzy", toggle_fuzzy_activated, NULL, NULL, NULL },
 
   { "build_tm", build_tm_activated, NULL, NULL, NULL },
+  { "tm_1", tm_activated, NULL, NULL, NULL },
+  { "tm_2", tm_activated, NULL, NULL, NULL },
+  { "tm_3", tm_activated, NULL, NULL, NULL },
+  { "tm_4", tm_activated, NULL, NULL, NULL },
+  { "tm_5", tm_activated, NULL, NULL, NULL },
+  { "tm_6", tm_activated, NULL, NULL, NULL },
+  { "tm_7", tm_activated, NULL, NULL, NULL },
+  { "tm_8", tm_activated, NULL, NULL, NULL },
+  { "tm_9", tm_activated, NULL, NULL, NULL },
+
   { "new_window", new_window_activated, NULL, NULL, NULL },
   { "preferences", preferences_activated, NULL, NULL, NULL },
   { "help", help_activated, NULL, NULL, NULL },
@@ -454,6 +475,17 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.next_no", "<Alt>Page_Down");
 
   set_kb (application, "app.fuzzy", "<Ctrl>u");
+
+  set_kb (application, "app.build_tm", "<Ctrl>plus");
+  set_kb (application, "app.tm_1", "<Ctrl>1");
+  set_kb (application, "app.tm_2", "<Ctrl>2");
+  set_kb (application, "app.tm_3", "<Ctrl>3");
+  set_kb (application, "app.tm_4", "<Ctrl>4");
+  set_kb (application, "app.tm_5", "<Ctrl>5");
+  set_kb (application, "app.tm_6", "<Ctrl>6");
+  set_kb (application, "app.tm_7", "<Ctrl>7");
+  set_kb (application, "app.tm_8", "<Ctrl>8");
+  set_kb (application, "app.tm_9", "<Ctrl>9");
 
   builder = gtk_builder_new ();
   gtk_builder_add_from_resource (builder, "/org/gnome/translator/gtranslator-menu.ui", NULL);

@@ -1708,3 +1708,18 @@ gtr_tab_set_info_bar (GtrTab * tab, GtkWidget * infobar)
   g_object_add_weak_pointer (G_OBJECT (priv->infobar),
                              (gpointer *) & priv->infobar);
 }
+
+GtrMsg *
+gtr_tab_get_msg (GtrTab *tab)
+{
+  GtrTabPrivate *priv;
+  GList *msg_aux;
+  GtrMsg *msg;
+
+  priv = gtr_tab_get_instance_private (tab);
+  msg_aux = gtr_po_get_current_message (priv->po);
+  msg = msg_aux->data;
+
+  return msg;
+}
+

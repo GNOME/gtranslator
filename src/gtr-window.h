@@ -86,6 +86,8 @@ void gtr_window_show_tm_dialog (GtrWindow *window);
 
 void gtr_window_remove_all_pages (GtrWindow *window);
 
+void gtr_window_tm_keybind (GtrWindow *window, GSimpleAction *action);
+
 /** stack app states **/
 void gtr_window_show_projects (GtrWindow *window);
 void gtr_window_show_poeditor (GtrWindow *window);

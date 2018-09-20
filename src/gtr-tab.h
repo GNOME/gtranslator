@@ -150,6 +150,8 @@ void gtr_tab_go_to_number (GtrTab * tab, gint number);
 
 void gtr_tab_set_info_bar (GtrTab * tab, GtkWidget * infobar);
 
+GtrMsg * gtr_tab_get_msg (GtrTab *tab);
+
 /* Semi-public methods */
 
 gchar *_gtr_tab_get_name (GtrTab * tab);

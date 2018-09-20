@@ -104,13 +104,22 @@ static void          profile_combo_changed            (GtrStatusComboBox *combo,
 static void update_saved_state (GtrPo *po, GParamSpec *param, gpointer window);
 
 static void
+free_match (gpointer data)
+{
+  GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) data;
+
+  g_free (match->match);
+  g_slice_free (GtrTranslationMemoryMatch, match);
+}
+
+static void
 update_undo_state (GtrTab     *tab,
                    GtrMsg     *msg,
                    GtrWindow  *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtrView *active_view = gtr_window_get_active_view (window);
-  gtr_notebook_update_undo_buttons (priv->notebook, active_view);
+  gtr_notebook_update_undo_buttons (GTR_NOTEBOOK (priv->notebook), active_view);
 }
 
 /*
@@ -1193,3 +1202,64 @@ gtr_window_get_tm (GtrWindow *window) {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   return priv->translation_memory;
 }
+
+void
+gtr_window_tm_keybind (GtrWindow *window,
+                       GSimpleAction *action)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
+  GtrTranslationMemory *tm = priv->translation_memory;
+  GList *tm_list;
+  const gchar *msgid;
+  GtrTab *tab = gtr_window_get_active_tab (window);
+  GtrMsg *msg;
+  const gchar *action_name;
+  GtrPo *po;
+  GtrView *view;
+  GtkTextBuffer *buffer;
+  gint index = 0;
+  GtrTranslationMemoryMatch *match = NULL;
+
+  if (!tab)
+    return;
+
+  view = gtr_tab_get_active_view (tab);
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+  po = gtr_tab_get_po (tab);
+  msg = gtr_tab_get_msg (tab);
+  msgid = gtr_msg_get_msgid (msg);
+  tm_list = gtr_translation_memory_lookup (tm, msgid);
+
+  action_name = g_action_get_name (G_ACTION (action));
+  if (g_strcmp0 (action_name, "tm_1") == 0)
+    index = 0;
+  else if (g_strcmp0 (action_name, "tm_2") == 0)
+    index = 1;
+  else if (g_strcmp0 (action_name, "tm_2") == 0)
+    index = 1;
+  else if (g_strcmp0 (action_name, "tm_3") == 0)
+    index = 2;
+  else if (g_strcmp0 (action_name, "tm_4") == 0)
+    index = 3;
+  else if (g_strcmp0 (action_name, "tm_5") == 0)
+    index = 4;
+  else if (g_strcmp0 (action_name, "tm_6") == 0)
+    index = 5;
+  else if (g_strcmp0 (action_name, "tm_7") == 0)
+    index = 6;
+  else if (g_strcmp0 (action_name, "tm_8") == 0)
+    index = 7;
+  else if (g_strcmp0 (action_name, "tm_9") == 0)
+    index = 8;
+
+  match = (GtrTranslationMemoryMatch *) g_list_nth_data (tm_list, index);
+  if (match)
+    {
+      gtr_msg_set_msgstr (msg, match->match);
+      gtk_text_buffer_set_text (buffer, match->match, -1);
+      gtr_po_set_state (po, GTR_PO_STATE_MODIFIED);
+    }
+
+  g_list_free_full (tm_list, free_match);
+}
+
