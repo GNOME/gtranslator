@@ -453,7 +453,7 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.prev_no", "<Alt>Page_Up");
   set_kb (application, "app.next_no", "<Alt>Page_Down");
 
-  set_kb (application, "app.fuzzy", "<Alt>f");
+  set_kb (application, "app.fuzzy", "<Ctrl>u");
 
   builder = gtk_builder_new ();
   gtk_builder_add_from_resource (builder, "/org/gnome/translator/gtranslator-menu.ui", NULL);
