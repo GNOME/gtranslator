@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-09-16 14:23+0000\n"
-"PO-Revision-Date: 2018-09-17 13:41+0200\n"
+"POT-Creation-Date: 2018-09-20 16:08+0000\n"
+"PO-Revision-Date: 2018-09-22 09:53+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:432
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:488
 #: src/gtr-window.ui:25
 msgid "Gtranslator"
 msgstr "Gtranslator"
@@ -746,7 +746,7 @@ msgid "Translator email:"
 msgstr "E-mail překladatele:"
 
 #: src/gtr-assistant.c:304 src/gtr-preferences-dialog.c:521
-#: src/gtr-window.c:517
+#: src/gtr-window.c:548
 msgid "Profile"
 msgstr "Profil"
 
@@ -843,7 +843,7 @@ msgstr "Kontext:"
 msgid "Format:"
 msgstr "Formát:"
 
-#: src/gtr-context.ui:50
+#: src/gtr-context.ui:51
 msgid "D_one"
 msgstr "D_okončit"
 
@@ -969,91 +969,99 @@ msgstr "Originální zpráva"
 msgid "Translated Message"
 msgstr "Přeložená zpráva"
 
-#: src/gtr-notebook.c:279
+#: src/gtr-notebook.c:284
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Přeloženo: %0.2f %%"
 
-#: src/gtr-notebook.c:280
+#: src/gtr-notebook.c:285
 #, c-format
 msgid "Translated: %d"
 msgstr "Přeloženo: %d"
 
-#: src/gtr-notebook.c:281
+#: src/gtr-notebook.c:286
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Nepřeloženo: %d"
 
-#: src/gtr-notebook.c:282
+#: src/gtr-notebook.c:287
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Nepřesných: %d"
 
-#: src/gtr-notebook.ui:40
+#: src/gtr-notebook.ui:53 src/gtr-projects.ui:109
+msgid "New window"
+msgstr "Nové okno"
+
+#: src/gtr-notebook.ui:67 src/gtr-projects.ui:123
 msgid "Preferences"
 msgstr "Předvolby"
 
-#: src/gtr-notebook.ui:67
-msgid "Keybindings"
+#: src/gtr-notebook.ui:94 src/gtr-projects.ui:150
+msgid "Keyboard Shortcuts"
 msgstr "Klávesové zkratky"
 
-#: src/gtr-notebook.ui:81
+#: src/gtr-notebook.ui:108 src/gtr-projects.ui:164
 msgid "About"
 msgstr "O aplikaci"
 
-#: src/gtr-notebook.ui:181 src/gtr-projects.ui:58
+#: src/gtr-notebook.ui:122 src/gtr-projects.ui:178
+msgid "Quit"
+msgstr "Ukončit"
+
+#: src/gtr-notebook.ui:222 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Otevřít…"
 
-#: src/gtr-notebook.ui:185
+#: src/gtr-notebook.ui:226
 msgid "Open a new file (<Ctrl>o)"
-msgstr "Otevřít nový soubor (<Ctrl>o)"
+msgstr "Otevřít nový soubor (<Ctrl> + o)"
 
-#: src/gtr-notebook.ui:211
+#: src/gtr-notebook.ui:252
 msgid "Undo (<Ctrl>z)"
-msgstr "Zpět (<Ctrl>z)"
+msgstr "Zpět (<Ctrl> + z)"
 
-#: src/gtr-notebook.ui:233
+#: src/gtr-notebook.ui:274
 msgid "Redo (<Ctrl><Shift>z)"
-msgstr "Znovu (<Ctrl><Shift>z)"
+msgstr "Znovu (<Ctrl> + <Shift> + z)"
 
-#: src/gtr-notebook.ui:278
-msgid "Previous message (<Alt>🡄)"
-msgstr "Předchozí zpráva (<Alt>🡄)"
+#: src/gtr-notebook.ui:319
+msgid "Previous message (<Alt><-)"
+msgstr "Předchozí zpráva (<Alt> + ←)"
 
-#: src/gtr-notebook.ui:300
-msgid "Next message (<Alt>🡆)"
-msgstr "Následující zpráva (<Alt>🡆)"
+#: src/gtr-notebook.ui:341
+msgid "Next message (<Alt>->)"
+msgstr "Následující zpráva (<Alt> + →)"
 
-#: src/gtr-notebook.ui:336
+#: src/gtr-notebook.ui:377
 msgid "Previous message without translation (<Alt><Page Up>)"
-msgstr "Předchozí nepřeložená zpráva (<Alt><Page Up>)"
+msgstr "Předchozí nepřeložená zpráva (<Alt> + <Page Up>)"
 
-#: src/gtr-notebook.ui:358
+#: src/gtr-notebook.ui:399
 msgid "Next message without translation (<Alt><Page Down>)"
-msgstr "Následující nepřeložená zpráva (<Alt><Page Down>)"
+msgstr "Následující nepřeložená zpráva (<Alt> + <Page Down>)"
 
-#: src/gtr-notebook.ui:398
-msgid "Toggle fuzzy state (<Alt>+f)"
-msgstr "Přepnout příznak nepřesnosti (<Alt>f)"
+#: src/gtr-notebook.ui:439
+msgid "Toggle fuzzy state (<Ctrl>+u)"
+msgstr "Přepnout příznak nepřesnosti (<Alt> + u)"
 
-#: src/gtr-notebook.ui:427
+#: src/gtr-notebook.ui:468 src/gtr-projects.ui:81
 msgid "Main Menu"
 msgstr "Hlavní nabídka"
 
-#: src/gtr-notebook.ui:443
+#: src/gtr-notebook.ui:484
 msgid "Save"
 msgstr "Uložit"
 
-#: src/gtr-notebook.ui:447
+#: src/gtr-notebook.ui:488
 msgid "Save the current file (<Ctrl>s)"
-msgstr "Uložit aktuální soubor (<Ctrl>s)"
+msgstr "Uložit aktuální soubor (<Ctrl> + s)"
 
-#: src/gtr-notebook.ui:462
+#: src/gtr-notebook.ui:503
 msgid "Save as (<Ctrl><Shift>s)"
-msgstr "Uložit jako (<Ctrl><Shift>s)"
+msgstr "Uložit jako (<Ctrl> + <Shift> + s)"
 
-#: src/gtr-notebook.ui:500
+#: src/gtr-notebook.ui:541
 msgid "Progress button"
 msgstr "Ukazatel průběhu"
 
@@ -1314,17 +1322,17 @@ msgstr "VKL"
 msgid "OVR"
 msgstr "PRE"
 
-#: src/gtr-tab.c:210
+#: src/gtr-tab.c:219
 msgid "There is an error in the message:"
 msgstr "Ve zprávě se vyskytla chyba:"
 
-#: src/gtr-tab.c:538
+#: src/gtr-tab.c:552
 #, c-format
 msgid "Plural %d"
 msgstr "Množné číslo %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1064
+#: src/gtr-tab.c:1087
 msgid "Path:"
 msgstr "Cesta:"
 
@@ -1332,11 +1340,11 @@ msgstr "Cesta:"
 msgid "Close document"
 msgstr "Zavřít dokument"
 
-#: src/gtr-tab.ui:41
+#: src/gtr-tab.ui:43
 msgid "_Original Message:"
 msgstr "_Originální zpráva:"
 
-#: src/gtr-tab.ui:104
+#: src/gtr-tab.ui:106
 msgid "Translate_d Text:"
 msgstr "Přeložený _text:"
 
@@ -1348,43 +1356,29 @@ msgstr ""
 "Nelze zobrazit nápovědu. Ujistěte se prosím, že je nainstalovaný balíček s "
 "dokumentací Gtranslator."
 
-#: src/gtr-view.c:78
-#, c-format
-msgid "gtkspell error: %s\n"
-msgstr "Chyba gtkspell: %s\n"
-
-#: src/gtr-view.c:80
-#, c-format
-msgid ""
-"GtkSpell was unable to initialize.\n"
-" %s"
-msgstr ""
-"Nelze inicializovat GtkSpell.\n"
-" %s"
-
-#: src/gtr-window.c:146
+#: src/gtr-window.c:165
 msgid "Untranslated"
 msgstr "Nepřeložená"
 
-#: src/gtr-window.c:149
+#: src/gtr-window.c:168
 msgid "Translated"
 msgstr "Přeložená"
 
-#: src/gtr-window.c:152
+#: src/gtr-window.c:171
 msgid "Fuzzy"
 msgstr "Nepřesná"
 
-#: src/gtr-window.c:159
+#: src/gtr-window.c:178
 #, c-format
 msgid "Current: %d"
 msgstr "Aktuální: %d"
 
-#: src/gtr-window.c:160
+#: src/gtr-window.c:179
 #, c-format
 msgid "Total: %d"
 msgstr "Celkem: %d"
 
-#: src/gtr-window.c:161
+#: src/gtr-window.c:180
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
@@ -1392,7 +1386,7 @@ msgstr[0] "%d přeložená"
 msgstr[1] "%d přeložené"
 msgstr[2] "%d přeložených"
 
-#: src/gtr-window.c:164
+#: src/gtr-window.c:183
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
@@ -1400,7 +1394,7 @@ msgstr[0] "%d nepřesná"
 msgstr[1] "%d nepřesné"
 msgstr[2] "%d nepřesných"
 
-#: src/gtr-window.c:166
+#: src/gtr-window.c:185
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1409,28 +1403,118 @@ msgstr[1] "%d nepřeložené"
 msgstr[2] "%d nepřeložených"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:276
+#: src/gtr-window.c:295
 #, c-format
 msgid "*%s — gtranslator"
 msgstr "*%s — gtranslator"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:282
+#: src/gtr-window.c:301
 #, c-format
 msgid "%s — gtranslator"
 msgstr "%s – gtranslator"
 
-#: src/gtr-window.c:291
+#: src/gtr-window.c:310
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gtr-window.c:501
+#: src/gtr-window.c:532
 msgid "No profile"
 msgstr "Bez profilu"
 
-#: src/gtr-window.c:519
+#: src/gtr-window.c:550
 msgid "Profile for the active document"
 msgstr "Profil pro aktivní dokument"
+
+#: src/help-overlay.ui:13
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "Obecné"
+
+#: src/help-overlay.ui:18
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "Otevřít soubor"
+
+#: src/help-overlay.ui:25
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "Uložit aktuální soubor"
+
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "Uložit aktuální soubor jako"
+
+#: src/help-overlay.ui:40
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "Předvolby"
+
+#: src/help-overlay.ui:47
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "Klávesové zkratky"
+
+#: src/help-overlay.ui:54
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Ukončit"
+
+#: src/help-overlay.ui:64
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "Úpravy"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Undo"
+msgstr "Zpět"
+
+#: src/help-overlay.ui:75
+msgctxt "shortcut window"
+msgid "Redo"
+msgstr "Znovu"
+
+#: src/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr "Přepnou označení jako nepřesná"
+
+#: src/help-overlay.ui:92
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr "Pochyb po zprávách"
+
+#: src/help-overlay.ui:96
+msgctxt "shortcut window"
+msgid "Go previous message"
+msgstr "Přejít na předchozí zprávu"
+
+#: src/help-overlay.ui:103
+msgctxt "shortcut window"
+msgid "Go next message"
+msgstr "Přejít na následující zprávu"
+
+#: src/help-overlay.ui:110
+msgctxt "shortcut window"
+msgid "Go previous untranslated message"
+msgstr "Přejít na předchozí nepřeložnou zprávu"
+
+#: src/help-overlay.ui:117
+msgctxt "shortcut window"
+msgid "Go next untranslated message"
+msgstr "Přejít na následující nepřeložnou zprávu"
+
+#: src/help-overlay.ui:127
+msgctxt "shortcut window group"
+msgid "Translation Memory"
+msgstr "Paměť překladů"
+
+#: src/help-overlay.ui:131
+msgctxt "shortcut window"
+msgid "Build translation memory"
+msgstr "Sestavit paměť překladů"
 
 #: src/main.c:97
 msgid "— Edit PO files"
@@ -1445,6 +1529,3 @@ msgstr ""
 "%s\n"
 "Spuštěním „%s --help“ se zobrazí úplný seznam dostupných přepínačů příkazové "
 "řádky.\n"
-
-#~ msgid "org.gnome.Gtranslator"
-#~ msgstr "org.gnome.Gtranslator"
