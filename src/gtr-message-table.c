@@ -104,9 +104,7 @@ gtr_message_table_selection_changed (GtkTreeSelection *selection,
       gtk_tree_model_get (model, &iter,
                           GTR_MESSAGE_TABLE_MODEL_POINTER_COLUMN, &msg, -1);
 
-      if (msg != NULL
-          && g_utf8_collate (gtr_msg_get_msgid (msg),
-                             gtr_msg_get_msgid (current_msg->data)))
+      if (msg != NULL)
         {
           g_signal_handlers_block_by_func (priv->tab, showed_message_cb, table);
           gtr_tab_message_go_to (priv->tab, msg,
