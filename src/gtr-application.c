@@ -228,6 +228,28 @@ new_window_activated (GSimpleAction *action,
 }
 
 static void
+find_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+
+  _gtr_actions_search_find (GTK_ACTION (action), priv->active_window);
+}
+
+static void
+find_and_replace_activated (GSimpleAction *action,
+                            GVariant      *parameter,
+                            gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+
+  _gtr_actions_search_replace (GTK_ACTION (action), priv->active_window);
+}
+
+static void
 preferences_activated (GSimpleAction *action,
                        GVariant      *parameter,
                        gpointer       user_data)
@@ -461,6 +483,8 @@ static GActionEntry app_entries[] = {
   { "tm_8", tm_activated, NULL, NULL, NULL },
   { "tm_9", tm_activated, NULL, NULL, NULL },
 
+  { "find_and_replace", find_and_replace_activated, NULL, NULL, NULL },
+  { "find", find_activated, NULL, NULL, NULL },
   { "new_window", new_window_activated, NULL, NULL, NULL },
   { "preferences", preferences_activated, NULL, NULL, NULL },
   { "shortcuts", shortcuts_activated, NULL, NULL, NULL },
@@ -510,6 +534,8 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.next_no", "<Alt>Page_Down");
 
   set_kb (application, "app.fuzzy", "<Ctrl>u");
+  set_kb (application, "app.find", "<Ctrl>f");
+  set_kb (application, "app.find_and_replace", "<Ctrl>h");
 
   set_kb (application, "app.build_tm", "<Ctrl>plus");
   set_kb (application, "app.tm_1", "<Ctrl>1");
