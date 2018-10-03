@@ -49,13 +49,10 @@ gtr_about_dialog (GtrWindow *window)
     "------------------------",
     "Daniel Garcia Moreno <danigm@gnome.org>",
     "",
-    N_("Current Developers"),
+    N_("Previous Developers"),
     "------------------------",
     "Seán de Búrca <leftmostcat@gmail.com>",
     "Ignacio Casal Quinteiro <icq@gnome.org>",
-    "",
-    N_("Previous Developers"),
-    "------------------------",
     "Pablo Sanxiao <psanxiao@gnome.org>",
     "Fatih Demir <kabalak@kabalak.net> (Founder)",
     "Ross Golder <ross@golder.org>",
@@ -76,6 +73,7 @@ gtr_about_dialog (GtrWindow *window)
     NULL
   };
   static const gchar *documenters[] = {
+    "GNOME Documentation Project",
     "Abel Cheung <deaddog@deaddog.org>",
     "Emese Kovacs <emese@gnome.hu>",
     "Pablo Sanxiao <psanxiao@gnome.org>",
