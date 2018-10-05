@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-09-18 17:41+0000\n"
-"PO-Revision-Date: 2018-09-18 23:16-0200\n"
+"POT-Creation-Date: 2018-09-23 16:41+0000\n"
+"PO-Revision-Date: 2018-09-27 09:38-0200\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -28,7 +28,7 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:432
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:488
 #: src/gtr-window.ui:25
 msgid "Gtranslator"
 msgstr "Gtranslator"
@@ -767,7 +767,7 @@ msgid "Translator email:"
 msgstr "E-mail do tradutor:"
 
 #: src/gtr-assistant.c:304 src/gtr-preferences-dialog.c:521
-#: src/gtr-window.c:517
+#: src/gtr-window.c:548
 msgid "Profile"
 msgstr "Perfil"
 
@@ -992,28 +992,27 @@ msgstr "Mensagem original"
 msgid "Translated Message"
 msgstr "Mensagem traduzida"
 
-#: src/gtr-notebook.c:279
+#: src/gtr-notebook.c:284
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Traduzido: %0.2f%%"
 
-#: src/gtr-notebook.c:280
+#: src/gtr-notebook.c:285
 #, c-format
 msgid "Translated: %d"
 msgstr "Traduzido: %d"
 
-#: src/gtr-notebook.c:281
+#: src/gtr-notebook.c:286
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Não traduzido: %d"
 
-#: src/gtr-notebook.c:282
+#: src/gtr-notebook.c:287
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Aproximado: %d"
 
 #: src/gtr-notebook.ui:53 src/gtr-projects.ui:109
-#| msgid "_New Window"
 msgid "New window"
 msgstr "Nova janela"
 
@@ -1022,15 +1021,15 @@ msgid "Preferences"
 msgstr "Preferências"
 
 #: src/gtr-notebook.ui:94 src/gtr-projects.ui:150
-msgid "Keybindings"
-msgstr "Associações de teclas"
+#| msgid "Shortcut"
+msgid "Keyboard Shortcuts"
+msgstr "Atalhos de teclado"
 
 #: src/gtr-notebook.ui:108 src/gtr-projects.ui:164
 msgid "About"
 msgstr "Sobre"
 
 #: src/gtr-notebook.ui:122 src/gtr-projects.ui:178
-#| msgid "_Quit"
 msgid "Quit"
 msgstr "Sair"
 
@@ -1051,12 +1050,10 @@ msgid "Redo (<Ctrl><Shift>z)"
 msgstr "Refazer (<Ctrl><Shift>z)"
 
 #: src/gtr-notebook.ui:319
-#| msgid "Previous message (<Alt>🡄)"
 msgid "Previous message (<Alt><-)"
 msgstr "Mensagem anterior (<Alt><-)"
 
 #: src/gtr-notebook.ui:341
-#| msgid "Next message (<Alt>🡆)"
 msgid "Next message (<Alt>->)"
 msgstr "Próxima mensagem (<Alt>->)"
 
@@ -1069,9 +1066,9 @@ msgid "Next message without translation (<Alt><Page Down>)"
 msgstr "Próxima mensagem sem tradução (<Alt><Page Down>)"
 
 #: src/gtr-notebook.ui:439
-#| msgid "Toggle fuzzy status of a message"
-msgid "Toggle fuzzy state (<Alt>+f)"
-msgstr "Alterna estado aproximado (<Alt>+f)"
+#| msgid "Toggle fuzzy state (<Alt>+f)"
+msgid "Toggle fuzzy state (<Ctrl>+u)"
+msgstr "Alterna estado aproximado (<Ctrl>+u)"
 
 #: src/gtr-notebook.ui:468 src/gtr-projects.ui:81
 msgid "Main Menu"
@@ -1386,43 +1383,43 @@ msgstr ""
 "Não foi possível exibir a ajuda. Por favor, certifique-se de que a "
 "documentação do Gtranslator esteja instalada."
 
-#: src/gtr-window.c:146
+#: src/gtr-window.c:165
 msgid "Untranslated"
 msgstr "Não traduzida"
 
-#: src/gtr-window.c:149
+#: src/gtr-window.c:168
 msgid "Translated"
 msgstr "Traduzida"
 
-#: src/gtr-window.c:152
+#: src/gtr-window.c:171
 msgid "Fuzzy"
 msgstr "Aproximada"
 
-#: src/gtr-window.c:159
+#: src/gtr-window.c:178
 #, c-format
 msgid "Current: %d"
 msgstr "Atual: %d"
 
-#: src/gtr-window.c:160
+#: src/gtr-window.c:179
 #, c-format
 msgid "Total: %d"
 msgstr "Total: %d"
 
-#: src/gtr-window.c:161
+#: src/gtr-window.c:180
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "%d traduzida"
 msgstr[1] "%d traduzidas"
 
-#: src/gtr-window.c:164
+#: src/gtr-window.c:183
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "%d aproximada"
 msgstr[1] "%d aproximadas"
 
-#: src/gtr-window.c:166
+#: src/gtr-window.c:185
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1430,28 +1427,138 @@ msgstr[0] "%d não traduzida"
 msgstr[1] "%d não traduzidas"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:276
+#: src/gtr-window.c:295
 #, c-format
 msgid "*%s — gtranslator"
 msgstr "*%s – gtranslator"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:282
+#: src/gtr-window.c:301
 #, c-format
 msgid "%s — gtranslator"
 msgstr "%s – gtranslator"
 
-#: src/gtr-window.c:291
+#: src/gtr-window.c:310
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: src/gtr-window.c:501
+#: src/gtr-window.c:532
 msgid "No profile"
 msgstr "Sem perfil"
 
-#: src/gtr-window.c:519
+#: src/gtr-window.c:550
 msgid "Profile for the active document"
 msgstr "Perfil para o documento ativo"
+
+#: src/help-overlay.ui:13
+#| msgid "General"
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "Geral"
+
+#: src/help-overlay.ui:18
+#| msgid "Open"
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "Abre um arquivo"
+
+#: src/help-overlay.ui:25
+#| msgid "Close the current file"
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "Salva o arquivo atual"
+
+#: src/help-overlay.ui:32
+#| msgid "Save the current file (<Ctrl>s)"
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "Salva o arquivo atual como"
+
+#: src/help-overlay.ui:40
+#| msgid "Preferences"
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "Preferências"
+
+#: src/help-overlay.ui:47
+#| msgid "Shortcut"
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "Atalhos de teclado"
+
+#: src/help-overlay.ui:54
+#| msgid "Quit"
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Sai"
+
+#: src/help-overlay.ui:64
+#| msgid "Edit"
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "Edita"
+
+#: src/help-overlay.ui:68
+#| msgid "_Undo"
+msgctxt "shortcut window"
+msgid "Undo"
+msgstr "Desfaz"
+
+#: src/help-overlay.ui:75
+#| msgid "_Redo"
+msgctxt "shortcut window"
+msgid "Redo"
+msgstr "Refaz"
+
+#: src/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr "Marca/Desmarca como aproximada"
+
+#: src/help-overlay.ui:92
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr "Navegação"
+
+# @Tradutor: Fiz uma tradução menos literal para explicar o comando com outras palavras
+# @Revisor: Deve-se uar "mensagem" ao invés de tradução...
+#: src/help-overlay.ui:96
+#| msgid "Go to the previous fuzzy message"
+msgctxt "shortcut window"
+msgid "Go to the previous message"
+msgstr "Vai para a mensagem anterior"
+
+# @Tradutor: Fiz uma tradução menos literal para explicar o comando com outras palavras
+# @Revisor: Beleza!
+#: src/help-overlay.ui:103
+#| msgid "Go to the next fuzzy message"
+msgctxt "shortcut window"
+msgid "Go to the next message"
+msgstr "Vai para a próxima mensagem"
+
+#: src/help-overlay.ui:110
+#| msgid "Go to the previous untranslated message"
+msgctxt "shortcut window"
+msgid "Go to the previous untranslated message"
+msgstr "Vai para a mensagem anterior não traduzida"
+
+#: src/help-overlay.ui:117
+#| msgid "Go to the next untranslated message"
+msgctxt "shortcut window"
+msgid "Go to the next untranslated message"
+msgstr "Vai para a próxima mensagem não traduzida"
+
+#: src/help-overlay.ui:127
+#| msgid "Translation Memory"
+msgctxt "shortcut window group"
+msgid "Translation Memory"
+msgstr "Memória de tradução"
+
+#: src/help-overlay.ui:131
+#| msgid "Build translation memory"
+msgctxt "shortcut window"
+msgid "Build translation memory"
+msgstr "Compila a memória de tradução"
 
 #: src/main.c:97
 msgid "— Edit PO files"
@@ -1466,6 +1573,9 @@ msgstr ""
 "%s\n"
 "Execute “%s --help” para ver uma lista completa das opções de linha de "
 "comando disponíveis.\n"
+
+#~ msgid "Keybindings"
+#~ msgstr "Associações de teclas"
 
 #~| msgid "Gtranslator"
 #~ msgid "org.gnome.Gtranslator"
@@ -1531,9 +1641,6 @@ msgstr ""
 
 #~ msgid "Editing PO file"
 #~ msgstr "Editando um arquivo PO"
-
-#~ msgid "Open"
-#~ msgstr "Abrir"
 
 #~ msgid "Room Menu"
 #~ msgstr "Menu da sala"
@@ -1728,9 +1835,6 @@ msgstr ""
 #~ msgid "Save the current file with another name"
 #~ msgstr "Salva o arquivo atual com outro nome"
 
-#~ msgid "Close the current file"
-#~ msgstr "Fecha o arquivo atual"
-
 #~ msgid "Undo last operation"
 #~ msgstr "Desfaz a última operação"
 
@@ -1801,30 +1905,14 @@ msgstr ""
 #~ msgid "Next Fuz_zy"
 #~ msgstr "Pró_xima aproximada"
 
-# @Tradutor: Fiz uma tradução menos literal para explicar o comando com outras palavras
-# @Revisor: Beleza!
-#~ msgid "Go to the next fuzzy message"
-#~ msgstr "Vai para a próxima mensagem aproximada"
-
 #~ msgid "Previous Fuzz_y"
 #~ msgstr "Apr_oximada anterior"
-
-# @Tradutor: Fiz uma tradução menos literal para explicar o comando com outras palavras
-# @Revisor: Deve-se uar "mensagem" ao invés de tradução...
-#~ msgid "Go to the previous fuzzy message"
-#~ msgstr "Vai para a mensagem aproximada antecedente"
 
 #~ msgid "Next _Untranslated"
 #~ msgstr "Próxima não traduzi_da"
 
-#~ msgid "Go to the next untranslated message"
-#~ msgstr "Vai para a próxima mensagem não traduzida"
-
 #~ msgid "Previ_ous Untranslated"
 #~ msgstr "Anterior não _traduzida"
-
-#~ msgid "Go to the previous untranslated message"
-#~ msgstr "Vai para a mensagem anterior não traduzida"
 
 #~ msgid "Next Fu_zzy or Untranslated"
 #~ msgstr "Pró_xima não traduzida ou aproximada"
@@ -1884,12 +1972,6 @@ msgstr ""
 
 #~ msgid "_Go to Message…"
 #~ msgstr "Ir _para a mensagem…"
-
-#~ msgid "_Undo"
-#~ msgstr "_Desfazer"
-
-#~ msgid "_Redo"
-#~ msgstr "Re_fazer"
 
 #~ msgid "Plugins"
 #~ msgstr "Plug-ins"
