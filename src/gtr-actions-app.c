@@ -87,21 +87,13 @@ gtr_about_dialog (GtrWindow *window)
   static const gchar comments[] =
     N_("Translation file editing suite for localization of applications and libraries.");
 
-  GdkPixbuf *logo;
-  gchar *logo_file;
-
-  logo_file = g_build_filename (gtr_dirs_get_gtr_pixmaps_dir (),
-                                "gtranslator-logo.png", NULL);
-  logo = gdk_pixbuf_new_from_file (logo_file, NULL);
-  g_free (logo_file);
-
   gtk_show_about_dialog (GTK_WINDOW (window),
                          "comments", _(comments),
                          "authors", authors,
                          "copyright", copyright,
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "documenters", documenters,
-                         "logo", logo, "title", _("About Gtranslator"),
+                         "logo-icon-name", PACKAGE_APPID,
                          /*
                           * Note to translators: put here your name and email so it will show
                           * up in the "about" box
@@ -112,6 +104,4 @@ gtr_about_dialog (GtrWindow *window)
                          "website-label", _("Gtranslator Web Site"),
                          NULL);
 
-  if (logo)
-    g_object_unref (logo);
 }
