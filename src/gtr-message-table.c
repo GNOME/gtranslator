@@ -88,16 +88,11 @@ gtr_message_table_selection_changed (GtkTreeSelection *selection,
   GtkTreeIter iter;
   GtkTreeModel *model;
   GtrMsg *msg;
-  GList *current_msg = NULL;
   GtrMessageTablePrivate *priv;
-  GtrPo *po;
 
   g_return_if_fail (selection != NULL);
 
   priv = gtr_message_table_get_instance_private (table);
-
-  po = gtr_tab_get_po (priv->tab);
-  current_msg = gtr_po_get_current_message (po);
 
   if (gtk_tree_selection_get_selected (selection, &model, &iter) == TRUE)
     {
