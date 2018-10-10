@@ -55,6 +55,55 @@ typedef struct
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrMessageTable, gtr_message_table, GTK_TYPE_BOX)
 
+typedef struct
+{
+  GdkRGBA *fuzzy;
+  GdkRGBA *untranslated;
+  GdkRGBA *translated;
+} GtrMessageColors;
+
+static void
+gtr_message_color_destroy (GtrMessageColors *colors)
+{
+  gdk_rgba_free (colors->fuzzy);
+  gdk_rgba_free (colors->untranslated);
+  gdk_rgba_free (colors->translated);
+  g_free (colors);
+}
+
+static GtrMessageColors *
+gtr_message_color_copy (GtrMessageColors *colors)
+{
+  GtrMessageColors *copy = g_malloc0 (sizeof(GtrMessageColors));
+  copy->fuzzy = gdk_rgba_copy (colors->fuzzy);
+  copy->translated = gdk_rgba_copy (colors->translated);
+  copy->untranslated = gdk_rgba_copy (colors->untranslated);
+
+  return copy;
+}
+
+static void
+colorize_cell (GtkTreeViewColumn *tree_column,
+               GtkCellRenderer *cell,
+               GtkTreeModel *tree_model,
+               GtkTreeIter *iter,
+               gpointer data)
+{
+  GtrMsg *msg;
+  GtrMessageColors *colors = (GtrMessageColors*)data;
+
+  gtk_tree_model_get (tree_model, iter,
+                      GTR_MESSAGE_TABLE_MODEL_POINTER_COLUMN, &msg,
+                      -1);
+
+  if (gtr_msg_is_fuzzy (msg))
+    g_object_set (cell, "foreground-rgba", colors->fuzzy, NULL);
+  else if (gtr_msg_is_translated (msg))
+    g_object_set (cell, "foreground-rgba", colors->translated, NULL);
+  else
+    g_object_set (cell, "foreground-rgba", colors->untranslated, NULL);
+}
+
 static void
 showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrMessageTable * table)
 {
@@ -163,36 +212,27 @@ gtr_message_table_init (GtrMessageTable * table)
   GtkTreeSelection *selection;
   GtrMessageTablePrivate *priv;
 
+  GdkRGBA translated, fuzzy, untranslated;
+  GtkStyleContext *style_context;
+  GtrMessageColors *colors;
+
+  colors = g_malloc0 (sizeof(GtrMessageColors));
+
+  style_context = gtk_widget_get_style_context (GTK_WIDGET (table));
+  gtk_style_context_lookup_color (style_context, "fg_color", &translated);
+  gtk_style_context_lookup_color (style_context, "warning_color", &fuzzy);
+  gtk_style_context_lookup_color (style_context, "error_color", &untranslated);
+
+  colors->fuzzy = gdk_rgba_copy (&fuzzy);
+  colors->translated = gdk_rgba_copy (&translated);
+  colors->untranslated = gdk_rgba_copy (&untranslated);
+
   priv = gtr_message_table_get_instance_private (table);
 
   gtk_orientable_set_orientation (GTK_ORIENTABLE (table),
                                   GTK_ORIENTATION_VERTICAL);
 
   gtk_widget_init_template (GTK_WIDGET (table));
-
-  renderer = gtk_cell_renderer_pixbuf_new ();
-  column = gtk_tree_view_column_new_with_attributes (_("Status"),
-                                                     renderer,
-                                                     "icon-name",
-                                                     GTR_MESSAGE_TABLE_MODEL_ICON_COLUMN,
-                                                     NULL);
-
-  gtk_tree_view_column_set_sort_column_id (column,
-                                           GTR_MESSAGE_TABLE_MODEL_STATUS_COLUMN);
-  gtk_tree_view_column_set_resizable (column, FALSE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (priv->treeview), column);
-
-  renderer = gtk_cell_renderer_text_new ();
-  column = gtk_tree_view_column_new_with_attributes (_("ID"),
-                                                     renderer,
-                                                     "text",
-                                                     GTR_MESSAGE_TABLE_MODEL_ID_COLUMN,
-                                                     NULL);
-
-  gtk_tree_view_column_set_sort_column_id (column,
-                                           GTR_MESSAGE_TABLE_MODEL_ID_COLUMN);
-  gtk_tree_view_column_set_resizable (column, FALSE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (priv->treeview), column);
 
   renderer = gtk_cell_renderer_text_new ();
   g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
@@ -203,6 +243,10 @@ gtr_message_table_init (GtrMessageTable * table)
                                                      "text",
                                                      GTR_MESSAGE_TABLE_MODEL_ORIGINAL_COLUMN,
                                                      NULL);
+
+  gtk_tree_view_column_set_cell_data_func (column, renderer, colorize_cell,
+                                           colors,
+                                           (GDestroyNotify)gtr_message_color_destroy);
 
   gtk_tree_view_column_set_sort_column_id (column,
                                            GTR_MESSAGE_TABLE_MODEL_ORIGINAL_COLUMN);
@@ -218,6 +262,10 @@ gtr_message_table_init (GtrMessageTable * table)
                                                      "text",
                                                      GTR_MESSAGE_TABLE_MODEL_TRANSLATION_COLUMN,
                                                      NULL);
+
+  gtk_tree_view_column_set_cell_data_func (column, renderer, colorize_cell,
+                                           gtr_message_color_copy (colors),
+                                           (GDestroyNotify)gtr_message_color_destroy);
 
   gtk_tree_view_column_set_sort_column_id (column,
                                            GTR_MESSAGE_TABLE_MODEL_TRANSLATION_COLUMN);

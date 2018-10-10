@@ -30,10 +30,6 @@
 
 #define G_LIST(x) ((GList *) x)
 
-#define TABLE_FUZZY_ICON "dialog-warning-symbolic"
-#define TABLE_UNTRANSLATED_ICON "dialog-error-symbolic"
-#define TABLE_TRANSLATED_ICON NULL
-
 enum {
   PROP_0,
   PROP_CONTAINER
@@ -65,7 +61,6 @@ gtr_message_table_model_get_column_type (GtkTreeModel * self, gint column)
 
   switch (column)
     {
-    case GTR_MESSAGE_TABLE_MODEL_ICON_COLUMN:
     case GTR_MESSAGE_TABLE_MODEL_ORIGINAL_COLUMN:
     case GTR_MESSAGE_TABLE_MODEL_TRANSLATION_COLUMN:
       retval = G_TYPE_STRING;
@@ -149,21 +144,6 @@ gtr_message_table_model_get_value (GtkTreeModel * self,
 
   switch (column)
     {
-    case GTR_MESSAGE_TABLE_MODEL_ICON_COLUMN:
-      g_value_init (value, G_TYPE_STRING);
-
-      status = gtr_msg_get_status (msg);
-
-      if (status == GTR_MSG_STATUS_UNTRANSLATED)
-        text = TABLE_UNTRANSLATED_ICON;
-      else if (status == GTR_MSG_STATUS_FUZZY)
-        text = TABLE_FUZZY_ICON;
-      else
-        text = TABLE_TRANSLATED_ICON;
-
-      g_value_set_string (value, text);
-      break;
-
     case GTR_MESSAGE_TABLE_MODEL_ID_COLUMN:
       g_value_init (value, G_TYPE_INT);
 

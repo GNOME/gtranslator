@@ -40,16 +40,38 @@
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkLabel" id="msgid_label">
+                      <object class="GtkBox" id="text_hbox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">0</property>
-                        <property name="ypad">5</property>
-                        <property name="label" translatable="yes">_Original Message:</property>
-                        <property name="use_underline">True</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                        </attributes>
+                        <property name="orientation">horizontal</property>
+                        <child>
+                          <object class="GtkLabel" id="msgid_label">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="xalign">0</property>
+                            <property name="ypad">5</property>
+                            <property name="label" translatable="yes">_Original Message:</property>
+                            <property name="use_underline">True</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                            </attributes>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="msgid_tags">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="xalign">0</property>
+                            <property name="ypad">5</property>
+                            <property name="label"></property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                            </attributes>
+                            <style>
+                              <class name="msgtags"/>
+                            </style>
+                          </object>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -165,3 +187,4 @@
     </child>
   </template>
 </interface>
+
