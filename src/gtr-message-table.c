@@ -97,11 +97,23 @@ colorize_cell (GtkTreeViewColumn *tree_column,
                       -1);
 
   if (gtr_msg_is_fuzzy (msg))
-    g_object_set (cell, "foreground-rgba", colors->fuzzy, NULL);
+    {
+      g_object_set (cell, "foreground-rgba", colors->fuzzy, NULL);
+      g_object_set (cell, "style", PANGO_STYLE_ITALIC, NULL);
+      g_object_set (cell, "weight", PANGO_WEIGHT_NORMAL, NULL);
+    }
   else if (gtr_msg_is_translated (msg))
-    g_object_set (cell, "foreground-rgba", colors->translated, NULL);
+    {
+      g_object_set (cell, "foreground-rgba", colors->translated, NULL);
+      g_object_set (cell, "style", PANGO_STYLE_NORMAL, NULL);
+      g_object_set (cell, "weight", PANGO_WEIGHT_NORMAL, NULL);
+    }
   else
-    g_object_set (cell, "foreground-rgba", colors->untranslated, NULL);
+    {
+      g_object_set (cell, "foreground-rgba", colors->untranslated, NULL);
+      g_object_set (cell, "style", PANGO_STYLE_NORMAL, NULL);
+      g_object_set (cell, "weight", PANGO_WEIGHT_BOLD, NULL);
+    }
 }
 
 static void
