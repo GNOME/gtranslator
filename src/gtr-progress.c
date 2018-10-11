@@ -115,54 +115,35 @@ on_draw (GtkWidget       *widget,
 {
   GtrProgressPrivate *priv = gtr_progress_get_instance_private (GTR_PROGRESS (widget));
 
-  gdouble ratio, ratio_fuzzy;
-  guint width;
-  guint height;
   GdkRGBA background;
   GdkRGBA foreground;
   GdkRGBA fuzzy_color;
   GtkStyleContext *style_context;
-  gfloat percentage = 0.0;
+  gfloat translated = 0.0, fuzzy = 0.0;
   gint total = priv->trans + priv->untrans + priv->fuzzy;
+  gint width, height;
 
   style_context = gtk_widget_get_style_context (widget);
   gtk_style_context_lookup_color (style_context, "theme_selected_bg_color", &foreground);
   gtk_style_context_lookup_color (style_context, "warning_color", &fuzzy_color);
-  gtk_style_context_get_color (style_context, gtk_widget_get_state_flags (widget), &background);
-  background.alpha *= 0.3;
+  gtk_style_context_lookup_color (style_context, "error_color", &background);
 
-  percentage = (float) (priv->trans * 100) / (float) total;
-  ratio = percentage / 100.0;
-
-  percentage = (float) (priv->fuzzy * 100) / (float) total;
-  ratio_fuzzy = percentage / 100.0;
+  translated = (float) (priv->trans) / (float) total;
+  fuzzy = (float) (priv->fuzzy) / (float) total;
 
   width = gtk_widget_get_allocated_width (widget);
   height = gtk_widget_get_allocated_height (widget);
 
   gdk_cairo_set_source_rgba (cr, &background);
-  cairo_arc (cr,
-             width / 2.0, height / 2.0,
-             MIN (width, height) / 2.0,
-             0, 2 * G_PI);
+  cairo_rectangle (cr, 0, 0, width * total, height);
   cairo_fill (cr);
 
-  cairo_move_to (cr, width / 2.0, height / 2.0);
   gdk_cairo_set_source_rgba (cr, &foreground);
-  cairo_arc (cr,
-             width / 2.0, height / 2.0,
-             MIN (width, height) / 2.0,
-             -G_PI / 2.0, ratio * 2 * G_PI - G_PI / 2.0);
+  cairo_rectangle (cr, 0, 0, width * translated, height);
   cairo_fill (cr);
 
-  cairo_move_to (cr, width / 2.0, height / 2.0);
   gdk_cairo_set_source_rgba (cr, &fuzzy_color);
-  cairo_arc (cr,
-             width / 2.0, height / 2.0,
-             MIN (width, height) / 2.0,
-             ratio * 2 * G_PI - G_PI / 2.0,
-             (ratio + ratio_fuzzy) * 2 * G_PI - G_PI / 2.0);
-
+  cairo_rectangle (cr, width * translated, 0, width * fuzzy, height);
   cairo_fill (cr);
 }
 
@@ -212,7 +193,7 @@ gtr_progress_init (GtrProgress *self)
   priv->untrans = 0;
   priv->fuzzy = 0;
 
-  gtk_widget_set_size_request (GTK_WIDGET (self), 16, 16);
+  gtk_widget_set_size_request (GTK_WIDGET (self), -1, 8);
   g_signal_connect (G_OBJECT (self), "draw",
                     G_CALLBACK (on_draw), NULL);
 }

@@ -152,6 +152,8 @@ void gtr_tab_set_info_bar (GtrTab * tab, GtkWidget * infobar);
 
 GtrMsg * gtr_tab_get_msg (GtrTab *tab);
 
+void gtr_tab_set_progress (GtrTab *tab, gint trans, gint untrans, gint fuzzy);
+
 /* Semi-public methods */
 
 gchar *_gtr_tab_get_name (GtrTab * tab);

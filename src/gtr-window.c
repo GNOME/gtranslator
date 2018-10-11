@@ -134,6 +134,7 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
                                            GtrWindow * window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  GtrTab *active_tab;
   GtrPo *po;
   gchar *msg;
   const gchar *status;
@@ -156,8 +157,9 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
   untranslated = gtr_po_get_untranslated_count (po);
   status = NULL;
 
-  gtr_notebook_set_progress (GTR_NOTEBOOK (priv->notebook),
-                             translated, untranslated, fuzzy);
+  active_tab = gtr_window_get_active_tab (window);
+  gtr_tab_set_progress (GTR_TAB (active_tab),
+                        translated, untranslated, fuzzy);
 
   switch (gtr_msg_get_status (message))
     {

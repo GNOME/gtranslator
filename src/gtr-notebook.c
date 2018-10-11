@@ -24,7 +24,6 @@
 #include "gtr-tab.h"
 #include "gtr-tab-label.h"
 #include "gtr-debug.h"
-#include "gtr-progress.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -34,13 +33,7 @@
 typedef struct
 {
   GtkWidget *titlebar;
-  GtkWidget *progress_button;
-  GtkWidget *progress_percentage;
-  GtkWidget *progress_trans;
-  GtkWidget *progress_fuzzy;
-  GtkWidget *progress_untrans;
   GtkWidget *save;
-  GtrProgress *progress;
 
   GtkWidget *undo;
   GtkWidget *redo;
@@ -116,12 +109,7 @@ update_tabs_visibility (GtrNotebook *nb)
 static void
 gtr_notebook_init (GtrNotebook * notebook)
 {
-  GtrNotebookPrivate *priv = gtr_notebook_get_instance_private (notebook);
   gtk_widget_init_template (GTK_WIDGET (notebook));
-
-  priv->progress = gtr_progress_new ();
-  gtk_widget_show (GTK_WIDGET (priv->progress));
-  gtk_container_add (GTK_CONTAINER (priv->progress_button), GTK_WIDGET (priv->progress));
 }
 
 static void
@@ -151,11 +139,6 @@ gtr_notebook_class_init (GtrNotebookClass * klass)
                                                "/org/gnome/translator/gtr-notebook.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, titlebar);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, progress_button);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, progress_trans);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, progress_fuzzy);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, progress_untrans);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, progress_percentage);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, undo);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, redo);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, save);
@@ -270,32 +253,6 @@ gtr_notebook_get_header (GtrNotebook *notebook)
   return priv->titlebar;
 }
 
-void
-gtr_notebook_set_progress (GtrNotebook *notebook,
-                           gint         trans,
-                           gint         untrans,
-                           gint         fuzzy)
-{
-  GtrNotebookPrivate *priv = gtr_notebook_get_instance_private (notebook);
-  gchar *percentage, *trans_text, *fuzzy_text, *untrans_text;
-
-  gtr_progress_set (priv->progress, trans, untrans, fuzzy);
-
-  percentage = g_strdup_printf (_("Translated: %0.2f%%"), (float)trans * 100 / (float)(trans + untrans + fuzzy));
-  trans_text = g_strdup_printf (_("Translated: %d"), trans);
-  untrans_text = g_strdup_printf (_("Untranslated: %d"), untrans);
-  fuzzy_text = g_strdup_printf (_("Fuzzy: %d"), fuzzy);
-
-  gtk_label_set_text (GTK_LABEL (priv->progress_percentage), percentage);
-  gtk_label_set_text (GTK_LABEL (priv->progress_fuzzy), fuzzy_text);
-  gtk_label_set_text (GTK_LABEL (priv->progress_untrans), untrans_text);
-  gtk_label_set_text (GTK_LABEL (priv->progress_trans), trans_text);
-
-  g_free (percentage);
-  g_free (trans_text);
-  g_free (fuzzy_text);
-  g_free (untrans_text);
-}
 
 void
 gtr_notebook_enable_save (GtrNotebook *notebook,

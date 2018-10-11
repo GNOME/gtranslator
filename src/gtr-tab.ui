@@ -7,6 +7,103 @@
     <property name="can_focus">False</property>
     <property name="orientation">vertical</property>
     <child>
+      <object class="GtkEventBox" id="progress_eventbox">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkBox" id="progress_box">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+
+              <object class="GtkRevealer" id="progress_revealer">
+                <property name="visible">True</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">6</property>
+                    <property name="margin_right">6</property>
+                    <property name="margin_top">6</property>
+                    <property name="margin_bottom">6</property>
+                    <property name="orientation">Horizontal</property>
+                    <property name="homogeneous">True</property>
+                    <child>
+                      <object class="GtkLabel" id="progress_percentage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">translated: 0.00%</property>
+                        <property name="xalign">0.5</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="progress_trans">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">Translated: 0</property>
+                        <property name="xalign">0.5</property>
+                        <style>
+                          <class name="progress_trans"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="progress_fuzzy">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">fuzzy: 0</property>
+                        <property name="xalign">0.5</property>
+                        <style>
+                          <class name="progress_fuzzy"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="progress_untrans">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">untranslated: 0</property>
+                        <property name="xalign">0.5</property>
+                        <style>
+                          <class name="progress_untranslated"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
+              </object>
+
+            </child>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">false</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
       <object class="GtkPaned" id="hbox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
@@ -182,9 +279,10 @@
       <packing>
         <property name="expand">True</property>
         <property name="fill">True</property>
-        <property name="position">0</property>
+        <property name="position">1</property>
       </packing>
     </child>
   </template>
 </interface>
+
 

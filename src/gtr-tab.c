@@ -45,6 +45,7 @@
 #include "gtr-dirs.h"
 #include "gtr-debug.h"
 #include "gtr-window.h"
+#include "gtr-progress.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -62,6 +63,16 @@ typedef struct
   GSettings *files_settings;
   GSettings *editor_settings;
   GSettings *state_settings;
+
+  GtkWidget *progress_eventbox;
+  GtkWidget *progress_box;
+  GtkWidget *progress_revealer;
+  GtkWidget *progress_percentage;
+  GtkWidget *progress_trans;
+  GtkWidget *progress_fuzzy;
+  GtkWidget *progress_untrans;
+
+  GtrProgress *progress;
 
   GtrPo *po;
 
@@ -124,6 +135,19 @@ enum
 static guint signals[LAST_SIGNAL];
 
 static gboolean gtr_tab_autosave (GtrTab * tab);
+
+static gboolean
+show_hide_revealer (GtkWidget *widget, GdkEvent *ev, GtrTab *tab)
+{
+  GtrTabPrivate *priv;
+  GtkRevealer *rev;
+
+  priv = gtr_tab_get_instance_private (tab);
+  rev = GTK_REVEALER (priv->progress_revealer);
+  gtk_revealer_set_reveal_child (rev, !gtk_revealer_get_reveal_child (rev));
+
+  return TRUE;
+}
 
 static gboolean
 msg_grab_focus (GtrTab *tab)
@@ -622,6 +646,13 @@ gtr_tab_init (GtrTab * tab)
                                                 GTR_SETTINGS_AUTO_SAVE_INTERVAL);
   if (priv->autosave_interval <= 0)
     priv->autosave_interval = 1;
+
+  priv->progress = gtr_progress_new ();
+  gtk_widget_show (GTK_WIDGET (priv->progress));
+  gtk_container_add (GTK_CONTAINER (priv->progress_box), GTK_WIDGET (priv->progress));
+
+  g_signal_connect (priv->progress_eventbox, "button-press-event",
+                    G_CALLBACK (show_hide_revealer), tab);
 }
 
 static void
@@ -795,6 +826,14 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, msgstr_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, trans_notebook);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, context);
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_eventbox);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_box);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_revealer);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_trans);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_fuzzy);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_untrans);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_percentage);
 
   g_type_ensure (gtr_view_get_type ());
   g_type_ensure (gtr_context_panel_get_type ());
@@ -1733,3 +1772,29 @@ gtr_tab_get_msg (GtrTab *tab)
   return msg;
 }
 
+void
+gtr_tab_set_progress (GtrTab      *tab,
+                      gint         trans,
+                      gint         untrans,
+                      gint         fuzzy)
+{
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
+  gchar *percentage, *trans_text, *fuzzy_text, *untrans_text;
+
+  gtr_progress_set (priv->progress, trans, untrans, fuzzy);
+
+  percentage = g_strdup_printf (_("Translated: %0.2f%%"), (float)trans * 100 / (float)(trans + untrans + fuzzy));
+  trans_text = g_strdup_printf (_("Translated: %d"), trans);
+  untrans_text = g_strdup_printf (_("Untranslated: %d"), untrans);
+  fuzzy_text = g_strdup_printf (_("Fuzzy: %d"), fuzzy);
+
+  gtk_label_set_text (GTK_LABEL (priv->progress_percentage), percentage);
+  gtk_label_set_text (GTK_LABEL (priv->progress_fuzzy), fuzzy_text);
+  gtk_label_set_text (GTK_LABEL (priv->progress_untrans), untrans_text);
+  gtk_label_set_text (GTK_LABEL (priv->progress_trans), trans_text);
+
+  g_free (percentage);
+  g_free (trans_text);
+  g_free (fuzzy_text);
+  g_free (untrans_text);
+}
