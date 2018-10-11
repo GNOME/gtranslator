@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-09-23 16:41+0000\n"
-"PO-Revision-Date: 2018-09-28 12:38+0200\n"
+"POT-Creation-Date: 2018-10-10 16:35+0000\n"
+"PO-Revision-Date: 2018-10-11 10:36+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:488
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:512
 #: src/gtr-window.ui:25
 msgid "Gtranslator"
 msgstr "Gtranslator"
@@ -541,7 +541,7 @@ msgid "_Build Translation Memory"
 msgstr "Sestavit _paměť překladů"
 
 #: plugins/translation-memory/gtr-translation-memory-window-activatable.c:82
-#: src/gtr-notebook.ui:26
+#: src/gtr-notebook.ui:54
 msgid "Build translation memory"
 msgstr "Sestavit paměť překladů"
 
@@ -617,40 +617,32 @@ msgid "Current Maintainers"
 msgstr "Současní udržovatelé"
 
 #: src/gtr-actions-app.c:52
-msgid "Current Developers"
-msgstr "Současní vývojáři"
-
-#: src/gtr-actions-app.c:57
 msgid "Previous Developers"
 msgstr "Předchozí vývojáři"
 
-#: src/gtr-actions-app.c:66
+#: src/gtr-actions-app.c:63
 msgid "Contributors"
 msgstr "Přispěvatelé"
 
-#: src/gtr-actions-app.c:90
+#: src/gtr-actions-app.c:88
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
 msgstr ""
 "Sada pro úpravu souborů s překlady určená k lokalizaci aplikací a knihoven."
 
-#: src/gtr-actions-app.c:106
-msgid "About Gtranslator"
-msgstr "O aplikaci Gtranslator"
-
 #.
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:111
+#: src/gtr-actions-app.c:101
 msgid "translator-credits"
 msgstr ""
 "Jaroslav Jiřička <jiricka@mujbox.cz>\n"
 "Miloslav Trmač <mitr@volny.cz>\n"
 "Marek Černocký <marek@manet.cz>"
 
-#: src/gtr-actions-app.c:114
+#: src/gtr-actions-app.c:104
 msgid "Gtranslator Web Site"
 msgstr "Webové stránky aplikace Gtranslator"
 
@@ -953,19 +945,11 @@ msgstr "_Kód jazyka:"
 msgid "_Plural forms:"
 msgstr "Formy _množného čísla:"
 
-#: src/gtr-message-table.c:181
-msgid "Status"
-msgstr "Stav"
-
-#: src/gtr-message-table.c:193
-msgid "ID"
-msgstr "ID"
-
-#: src/gtr-message-table.c:208
+#: src/gtr-message-table.c:241
 msgid "Original Message"
 msgstr "Originální zpráva"
 
-#: src/gtr-message-table.c:223
+#: src/gtr-message-table.c:260
 msgid "Translated Message"
 msgstr "Přeložená zpráva"
 
@@ -989,79 +973,88 @@ msgstr "Nepřeloženo: %d"
 msgid "Fuzzy: %d"
 msgstr "Nepřesných: %d"
 
-#: src/gtr-notebook.ui:53 src/gtr-projects.ui:109
+#: src/gtr-notebook.ui:26 src/gtr-search-dialog.c:370
+#: src/gtr-search-dialog.c:451
+msgid "Find"
+msgstr "Najít"
+
+#: src/gtr-notebook.ui:40 src/gtr-search-dialog.c:455
+msgid "Find and replace"
+msgstr "Najít a nahradit"
+
+#: src/gtr-notebook.ui:81 src/gtr-projects.ui:109
 msgid "New window"
 msgstr "Nové okno"
 
-#: src/gtr-notebook.ui:67 src/gtr-projects.ui:123
+#: src/gtr-notebook.ui:95 src/gtr-projects.ui:123
 msgid "Preferences"
 msgstr "Předvolby"
 
-#: src/gtr-notebook.ui:94 src/gtr-projects.ui:150
+#: src/gtr-notebook.ui:122 src/gtr-projects.ui:150
 msgid "Keyboard Shortcuts"
 msgstr "Klávesové zkratky"
 
-#: src/gtr-notebook.ui:108 src/gtr-projects.ui:164
+#: src/gtr-notebook.ui:136 src/gtr-projects.ui:164
 msgid "About"
 msgstr "O aplikaci"
 
-#: src/gtr-notebook.ui:122 src/gtr-projects.ui:178
+#: src/gtr-notebook.ui:150 src/gtr-projects.ui:178
 msgid "Quit"
 msgstr "Ukončit"
 
-#: src/gtr-notebook.ui:222 src/gtr-projects.ui:58
+#: src/gtr-notebook.ui:250 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Otevřít…"
 
-#: src/gtr-notebook.ui:226
+#: src/gtr-notebook.ui:254
 msgid "Open a new file (<Ctrl>o)"
 msgstr "Otevřít nový soubor (<Ctrl> + o)"
 
-#: src/gtr-notebook.ui:252
+#: src/gtr-notebook.ui:280
 msgid "Undo (<Ctrl>z)"
 msgstr "Zpět (<Ctrl> + z)"
 
-#: src/gtr-notebook.ui:274
+#: src/gtr-notebook.ui:302
 msgid "Redo (<Ctrl><Shift>z)"
 msgstr "Znovu (<Ctrl> + <Shift> + z)"
 
-#: src/gtr-notebook.ui:319
+#: src/gtr-notebook.ui:347
 msgid "Previous message (<Alt><-)"
 msgstr "Předchozí zpráva (<Alt> + ←)"
 
-#: src/gtr-notebook.ui:341
+#: src/gtr-notebook.ui:369
 msgid "Next message (<Alt>->)"
 msgstr "Následující zpráva (<Alt> + →)"
 
-#: src/gtr-notebook.ui:377
+#: src/gtr-notebook.ui:405
 msgid "Previous message without translation (<Alt><Page Up>)"
 msgstr "Předchozí nepřeložená zpráva (<Alt> + <Page Up>)"
 
-#: src/gtr-notebook.ui:399
+#: src/gtr-notebook.ui:427
 msgid "Next message without translation (<Alt><Page Down>)"
 msgstr "Následující nepřeložená zpráva (<Alt> + <Page Down>)"
 
-#: src/gtr-notebook.ui:439
+#: src/gtr-notebook.ui:467
 msgid "Toggle fuzzy state (<Ctrl>+u)"
 msgstr "Přepnout příznak nepřesnosti (<Alt> + u)"
 
-#: src/gtr-notebook.ui:468 src/gtr-projects.ui:81
+#: src/gtr-notebook.ui:496 src/gtr-projects.ui:81
 msgid "Main Menu"
 msgstr "Hlavní nabídka"
 
-#: src/gtr-notebook.ui:484
+#: src/gtr-notebook.ui:512
 msgid "Save"
 msgstr "Uložit"
 
-#: src/gtr-notebook.ui:488
+#: src/gtr-notebook.ui:516
 msgid "Save the current file (<Ctrl>s)"
 msgstr "Uložit aktuální soubor (<Ctrl> + s)"
 
-#: src/gtr-notebook.ui:503
+#: src/gtr-notebook.ui:531
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Uložit jako (<Ctrl> + <Shift> + s)"
 
-#: src/gtr-notebook.ui:541
+#: src/gtr-notebook.ui:569
 msgid "Progress button"
 msgstr "Ukazatel průběhu"
 
@@ -1258,17 +1251,9 @@ msgstr "Výběr souboru PO"
 msgid "Replace"
 msgstr "Nahradit"
 
-#: src/gtr-search-dialog.c:370 src/gtr-search-dialog.c:451
-msgid "Find"
-msgstr "Najít"
-
 #: src/gtr-search-dialog.c:453
 msgid "Replace _All"
 msgstr "Nahradit _vše"
-
-#: src/gtr-search-dialog.c:455
-msgid "Find and replace"
-msgstr "Najít a nahradit"
 
 #: src/gtr-search-dialog.c:457
 msgid "_Replace"
@@ -1322,17 +1307,21 @@ msgstr "VKL"
 msgid "OVR"
 msgstr "PRE"
 
-#: src/gtr-tab.c:219
+#: src/gtr-tab.c:220
 msgid "There is an error in the message:"
 msgstr "Ve zprávě se vyskytla chyba:"
 
-#: src/gtr-tab.c:552
+#: src/gtr-tab.c:420 src/gtr-tab.c:531
+msgid "fuzzy"
+msgstr "nepřesná"
+
+#: src/gtr-tab.c:561
 #, c-format
 msgid "Plural %d"
 msgstr "Množné číslo %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1087
+#: src/gtr-tab.c:1097
 msgid "Path:"
 msgstr "Cesta:"
 
@@ -1340,11 +1329,11 @@ msgstr "Cesta:"
 msgid "Close document"
 msgstr "Zavřít dokument"
 
-#: src/gtr-tab.ui:43
+#: src/gtr-tab.ui:53
 msgid "_Original Message:"
 msgstr "_Originální zpráva:"
 
-#: src/gtr-tab.ui:106
+#: src/gtr-tab.ui:133
 msgid "Translate_d Text:"
 msgstr "Přeložený _text:"
 
@@ -1358,15 +1347,15 @@ msgstr ""
 
 #: src/gtr-window.c:165
 msgid "Untranslated"
-msgstr "Nepřeložená"
+msgstr "nepřeložená"
 
 #: src/gtr-window.c:168
 msgid "Translated"
-msgstr "Přeložená"
+msgstr "přeložená"
 
 #: src/gtr-window.c:171
 msgid "Fuzzy"
-msgstr "Nepřesná"
+msgstr "nepřesná"
 
 #: src/gtr-window.c:178
 #, c-format
