@@ -427,10 +427,14 @@ do_replace (GtrSearchDialog * dialog, GtrWindow * window)
   gchar *unescaped_replace_text;
   gchar *selected_text = NULL;
   gboolean match_case;
+  GtrTab *tab;
 
   view = gtr_window_get_active_view (window);
   if (view == NULL)
     return;
+
+  tab = gtr_window_get_active_tab (window);
+  gtr_tab_find_replace (tab, TRUE);
 
   search_entry_text = gtr_search_dialog_get_search_text (dialog);
   g_return_if_fail ((search_entry_text) != NULL);
@@ -457,6 +461,7 @@ do_replace (GtrSearchDialog * dialog, GtrWindow * window)
       do_find (dialog, window);
       g_free (unescaped_search_text);
       g_free (selected_text);
+      gtr_tab_find_replace (tab, FALSE);
 
       return;
     }
@@ -471,6 +476,7 @@ do_replace (GtrSearchDialog * dialog, GtrWindow * window)
   g_free (unescaped_replace_text);
 
   do_find (dialog, window);
+  gtr_tab_find_replace (tab, FALSE);
 }
 
 static void
@@ -487,6 +493,7 @@ do_replace_all (GtrSearchDialog * dialog, GtrWindow * window)
   gint count = 0;
 
   tab = gtr_window_get_active_tab (window);
+  gtr_tab_find_replace (tab, TRUE);
 
   /* Get only translated textviews */
   views = gtr_window_get_all_views (window, FALSE, TRUE);
@@ -550,6 +557,7 @@ do_replace_all (GtrSearchDialog * dialog, GtrWindow * window)
                                      FALSE);
 
   restore_last_searched_data (dialog, tab);
+  gtr_tab_find_replace (tab, FALSE);
 }
 
 static void

@@ -73,6 +73,7 @@ typedef struct
   GtkWidget *progress_untrans;
 
   GtrProgress *progress;
+  gboolean find_replace_flag;
 
   GtrPo *po;
 
@@ -282,6 +283,7 @@ gtr_message_translation_update (GtkTextBuffer * textbuffer, GtrTab * tab)
   unmark_fuzzy = g_settings_get_boolean (priv->editor_settings,
                                          GTR_SETTINGS_UNMARK_FUZZY_WHEN_CHANGED);
 
+  unmark_fuzzy = unmark_fuzzy && !priv->find_replace_flag;
   if (gtr_msg_is_fuzzy (msg) && unmark_fuzzy)
     gtr_msg_set_fuzzy (msg, FALSE);
 
@@ -512,7 +514,7 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
   fuzzy = gtr_msg_is_fuzzy (msg);
   translated = gtr_msg_is_translated (msg);
 
-  if ((status == GTR_MSG_STATUS_FUZZY) && !fuzzy)
+  if ((status == GTR_MSG_STATUS_FUZZY) && !fuzzy && !priv->find_replace_flag)
     {
       _gtr_po_increase_decrease_fuzzy (priv->po, FALSE);
       if (translated)
@@ -647,6 +649,7 @@ gtr_tab_init (GtrTab * tab)
   if (priv->autosave_interval <= 0)
     priv->autosave_interval = 1;
 
+  priv->find_replace_flag = FALSE;
   priv->progress = gtr_progress_new ();
   gtk_widget_show (GTK_WIDGET (priv->progress));
   gtk_container_add (GTK_CONTAINER (priv->progress_box), GTK_WIDGET (priv->progress));
@@ -1806,5 +1809,14 @@ gtr_tab_sort_by (GtrTab *tab,
   GtrTabPrivate *priv;
   priv = gtr_tab_get_instance_private (tab);
   gtr_message_table_sort_by (GTR_MESSAGE_TABLE (priv->message_table), sort);
+}
+
+void
+gtr_tab_find_replace (GtrTab *tab,
+                      gboolean set)
+{
+  GtrTabPrivate *priv;
+  priv = gtr_tab_get_instance_private (tab);
+  priv->find_replace_flag = set;
 }
 

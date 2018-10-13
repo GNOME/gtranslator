@@ -157,6 +157,8 @@ void gtr_tab_set_progress (GtrTab *tab, gint trans, gint untrans, gint fuzzy);
 
 void gtr_tab_sort_by (GtrTab *tab, GtrMessageTableSortBy sort);
 
+void gtr_tab_find_replace (GtrTab *tab, gboolean set);
+
 /* Semi-public methods */
 
 gchar *_gtr_tab_get_name (GtrTab * tab);
