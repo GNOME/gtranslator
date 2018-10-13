@@ -16,7 +16,7 @@ variables:
       - .flatpak-builder/cache/
 
 flatpak:
-  image: "registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:3.28"
+  image: "registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:3.30"
   stage: "test"
   script:
     - flatpak-builder --stop-at=${FLATPAK_MODULE} --force-clean app ${MANIFEST_PATH}
