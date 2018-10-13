@@ -51,6 +51,7 @@ typedef struct
   GtkTreeModel *sort_model;
 
   GtrTab *tab;
+  GtrMessageTableSortBy sort_status;
 } GtrMessageTablePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrMessageTable, gtr_message_table, GTK_TYPE_BOX)
@@ -240,6 +241,7 @@ gtr_message_table_init (GtrMessageTable * table)
   colors->untranslated = gdk_rgba_copy (&untranslated);
 
   priv = gtr_message_table_get_instance_private (table);
+  priv->sort_status = GTR_MESSAGE_TABLE_SORT_ID;
 
   gtk_orientable_set_orientation (GTK_ORIENTABLE (table),
                                   GTK_ORIENTATION_VERTICAL);
@@ -416,19 +418,14 @@ gtr_message_table_populate (GtrMessageTable * table, GtrMessageContainer * conta
   priv->sort_model =
     gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (priv->store));
 
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
-                                        (priv->sort_model),
-                                        GTR_MESSAGE_TABLE_MODEL_ID_COLUMN,
-                                        GTK_SORT_ASCENDING);
-
   gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE
                                            (priv->sort_model),
                                            NULL, NULL, NULL);
-
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (priv->sort_model),
                                    GTR_MESSAGE_TABLE_MODEL_STATUS_COLUMN,
                                    model_compare_by_status, NULL, NULL);
 
+  gtr_message_table_sort_by (table, priv->sort_status);
   gtk_tree_view_set_model (GTK_TREE_VIEW (priv->treeview),
                            priv->sort_model);
 }
@@ -531,4 +528,59 @@ gtr_message_table_navigate (GtrMessageTable * table,
                       -1);
 
   return msg;
+}
+
+void
+gtr_message_table_sort_by (GtrMessageTable *table,
+                           GtrMessageTableSortBy sort)
+{
+  GtrMessageTablePrivate *priv;
+  priv = gtr_message_table_get_instance_private (table);
+  priv->sort_status = sort;
+
+  switch (sort)
+    {
+    case GTR_MESSAGE_TABLE_SORT_STATUS:
+      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
+                                            (priv->sort_model),
+                                            GTR_MESSAGE_TABLE_MODEL_STATUS_COLUMN,
+                                            GTK_SORT_ASCENDING);
+      break;
+    case GTR_MESSAGE_TABLE_SORT_STATUS_DESC:
+      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
+                                            (priv->sort_model),
+                                            GTR_MESSAGE_TABLE_MODEL_STATUS_COLUMN,
+                                            GTK_SORT_DESCENDING);
+      break;
+    case GTR_MESSAGE_TABLE_SORT_MSGID:
+      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
+                                            (priv->sort_model),
+                                            GTR_MESSAGE_TABLE_MODEL_ORIGINAL_COLUMN,
+                                            GTK_SORT_ASCENDING);
+      break;
+    case GTR_MESSAGE_TABLE_SORT_MSGID_DESC:
+      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
+                                            (priv->sort_model),
+                                            GTR_MESSAGE_TABLE_MODEL_ORIGINAL_COLUMN,
+                                            GTK_SORT_DESCENDING);
+      break;
+    case GTR_MESSAGE_TABLE_SORT_TRANSLATED:
+      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
+                                            (priv->sort_model),
+                                            GTR_MESSAGE_TABLE_MODEL_TRANSLATION_COLUMN,
+                                            GTK_SORT_ASCENDING);
+      break;
+    case GTR_MESSAGE_TABLE_SORT_TRANSLATED_DESC:
+      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
+                                            (priv->sort_model),
+                                            GTR_MESSAGE_TABLE_MODEL_TRANSLATION_COLUMN,
+                                            GTK_SORT_DESCENDING);
+      break;
+    case GTR_MESSAGE_TABLE_SORT_ID:
+    default:
+      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
+                                            (priv->sort_model),
+                                            GTR_MESSAGE_TABLE_MODEL_ID_COLUMN,
+                                            GTK_SORT_ASCENDING);
+    }
 }

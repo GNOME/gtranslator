@@ -456,6 +456,29 @@ toggle_fuzzy_activated (GSimpleAction *action,
   gtr_message_status_toggle_fuzzy (NULL, w);
 }
 
+static void
+sort_by_activated (GSimpleAction *action,
+                   GVariant      *parameter,
+                   gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  GtrWindow *w;
+  GtrTab *tab;
+
+  GVariant *st;
+  gint sortby = 0;
+
+  g_object_get (G_OBJECT (action), "state", &st, NULL);
+  sortby = g_variant_get_int32 (st);
+
+  w = GTR_WINDOW (priv->active_window);
+  g_return_if_fail (w != NULL);
+  tab = gtr_window_get_active_tab (w);
+  g_return_if_fail (tab != NULL);
+  gtr_tab_sort_by (tab, (GtrMessageTableSortBy)sortby);
+}
+
 static GActionEntry app_entries[] = {
   { "save", save_activated, NULL, NULL, NULL },
   { "saveas", saveas_activated, NULL, NULL, NULL },
@@ -471,6 +494,15 @@ static GActionEntry app_entries[] = {
   { "next_no", next_no_activated, NULL, NULL, NULL },
 
   { "fuzzy", toggle_fuzzy_activated, NULL, NULL, NULL },
+
+  // sort actions
+  { "sort_by_id", sort_by_activated, NULL, "0", NULL },
+  { "sort_by_status", sort_by_activated, NULL, "1", NULL },
+  { "sort_by_status_desc", sort_by_activated, NULL, "2", NULL },
+  { "sort_by_msgid", sort_by_activated, NULL, "3", NULL },
+  { "sort_by_msgid_desc", sort_by_activated, NULL, "4", NULL },
+  { "sort_by_translated", sort_by_activated, NULL, "5", NULL },
+  { "sort_by_translated_desc", sort_by_activated, NULL, "6", NULL },
 
   { "build_tm", build_tm_activated, NULL, NULL, NULL },
   { "tm_1", tm_activated, NULL, NULL, NULL },

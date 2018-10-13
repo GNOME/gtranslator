@@ -90,5 +90,8 @@ gtr_message_table_get_type (void)
                                              GtrMsg * msg,
                                              gchar * translation);
 
+     void gtr_message_table_sort_by (GtrMessageTable *table,
+                                     GtrMessageTableSortBy sort);
+
 G_END_DECLS
 #endif /* __MESSAGE_TABLE_H__ */

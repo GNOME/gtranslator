@@ -31,6 +31,7 @@
 #include "gtr-msg.h"
 #include "gtr-po.h"
 #include "gtr-view.h"
+#include "gtr-message-table-model.h"
 
 G_BEGIN_DECLS
 /*
@@ -153,6 +154,8 @@ void gtr_tab_set_info_bar (GtrTab * tab, GtkWidget * infobar);
 GtrMsg * gtr_tab_get_msg (GtrTab *tab);
 
 void gtr_tab_set_progress (GtrTab *tab, gint trans, gint untrans, gint fuzzy);
+
+void gtr_tab_sort_by (GtrTab *tab, GtrMessageTableSortBy sort);
 
 /* Semi-public methods */
 

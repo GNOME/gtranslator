@@ -64,6 +64,20 @@ enum _GtrMessageTableModelColumn
   GTR_MESSAGE_TABLE_MODEL_N_COLUMNS
 };
 
+typedef enum _GtrMessageTableSortBy GtrMessageTableSortBy;
+
+enum _GtrMessageTableSortBy
+{
+  GTR_MESSAGE_TABLE_SORT_ID,
+  GTR_MESSAGE_TABLE_SORT_STATUS,
+  GTR_MESSAGE_TABLE_SORT_STATUS_DESC,
+  GTR_MESSAGE_TABLE_SORT_MSGID,
+  GTR_MESSAGE_TABLE_SORT_MSGID_DESC,
+  GTR_MESSAGE_TABLE_SORT_TRANSLATED,
+  GTR_MESSAGE_TABLE_SORT_TRANSLATED_DESC,
+  GTR_MESSAGE_TABLE_SORT_N_COLUMNS
+};
+
 GType                   gtr_message_table_model_get_type      (void) G_GNUC_CONST;
 
 GtrMessageTableModel   *gtr_message_table_model_new           (GtrMessageContainer  *container);

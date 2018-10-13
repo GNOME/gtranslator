@@ -6,6 +6,116 @@
     <property name="visible">True</property>
     <property name="can_focus">True</property>
   </template>
+
+  <object class="GtkPopoverMenu" id="order_menu_popover">
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_left">6</property>
+        <property name="margin_right">6</property>
+        <property name="margin_top">6</property>
+        <property name="margin_bottom">6</property>
+        <property name="orientation">vertical</property>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Order messages by</property>
+            <property name="xalign">0.5</property>
+            <property name="margin_top">3</property>
+            <property name="margin_bottom">3</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">3</property>
+            <property name="margin_bottom">3</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="GtkRadioButton" id="sort_id">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.sort_by_id</property>
+            <property name="label" translatable="yes">Appearance in the original file</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="sort_status">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.sort_by_status</property>
+            <property name="label" translatable="yes">Message status</property>
+            <property name="group">sort_id</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="sort_msgid">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.sort_by_msgid</property>
+            <property name="label" translatable="yes">Original message</property>
+            <property name="group">sort_id</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="sort_translated">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.sort_by_translated</property>
+            <property name="label" translatable="yes">Translated message</property>
+            <property name="group">sort_id</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">7</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="submenu">main</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+  </object>
+
   <object class="GtkPopoverMenu" id="main_menu_popover">
     <property name="can_focus">False</property>
     <child>
@@ -342,6 +452,31 @@
         <property name="position">10</property>
       </packing>
     </child>
+
+    <child>
+      <object class="GtkMenuButton" id="sortby_menu">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="popover">order_menu_popover</property>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="icon_name">view-sort-ascending-symbolic</property>
+          </object>
+        </child>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="sortby_menu-atkobject">
+            <property name="AtkObject::accessible-name" translatable="yes">Order by menu</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="position">11</property>
+      </packing>
+    </child>
+
     <child>
       <object class="GtkMenuButton" id="main_menu">
         <property name="visible">True</property>
@@ -419,6 +554,7 @@
         <property name="position">6</property>
       </packing>
     </child>
+
     <style>
       <class name="titlebar"/>
     </style>

@@ -1798,3 +1798,13 @@ gtr_tab_set_progress (GtrTab      *tab,
   g_free (fuzzy_text);
   g_free (untrans_text);
 }
+
+void
+gtr_tab_sort_by (GtrTab *tab,
+                 GtrMessageTableSortBy sort)
+{
+  GtrTabPrivate *priv;
+  priv = gtr_tab_get_instance_private (tab);
+  gtr_message_table_sort_by (GTR_MESSAGE_TABLE (priv->message_table), sort);
+}
+

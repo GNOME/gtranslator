@@ -879,6 +879,7 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   gtk_widget_show (GTK_WIDGET (tab));
 
   gtr_notebook_add_page (GTR_NOTEBOOK (priv->notebook), tab);
+  gtr_notebook_reset_sort (GTR_NOTEBOOK (priv->notebook));
 
   g_signal_connect_after (po,
                           "notify::state",
@@ -900,7 +901,9 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
 GtrTab *
 gtr_window_get_active_tab (GtrWindow * window)
 {
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
+  g_return_val_if_fail (priv != NULL, NULL);
+  g_return_val_if_fail (priv->notebook != NULL, NULL);
 
   return gtr_notebook_get_page (GTR_NOTEBOOK (priv->notebook));
 }
@@ -1264,4 +1267,3 @@ gtr_window_tm_keybind (GtrWindow *window,
 
   g_list_free_full (tm_list, free_match);
 }
-
