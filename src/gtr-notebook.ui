@@ -262,64 +262,6 @@
         <property name="can_focus">False</property>
         <property name="layout_style">start</property>
         <child>
-          <object class="GtkButton" id="prev">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">Previous message (&lt;Alt&gt;&lt;-)</property>
-            <property name="action_name">app.prev</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">go-previous-symbolic</property>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-            <property name="non_homogeneous">True</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="next">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">Next message (&lt;Alt&gt;-&gt;)</property>
-            <property name="action_name">app.next</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">go-next-symbolic</property>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-            <property name="non_homogeneous">True</property>
-          </packing>
-        </child>
-        <style>
-          <class name="linked"/>
-          <class name="horizontal"/>
-        </style>
-      </object>
-      <packing>
-        <property name="position">5</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkButtonBox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="layout_style">start</property>
-        <child>
           <object class="GtkButton" id="prev_untranslated">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -482,6 +424,7 @@
     </style>
   </object>
 </interface>
+
 
 
 
