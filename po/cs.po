@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-10-13 10:57+0000\n"
-"PO-Revision-Date: 2018-10-13 18:30+0200\n"
+"POT-Creation-Date: 2018-10-15 09:09+0000\n"
+"PO-Revision-Date: 2018-10-15 11:10+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:544
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:555
 #: src/gtr-window.ui:25
 msgid "Gtranslator"
 msgstr "Gtranslator"
@@ -214,8 +214,8 @@ msgid "_Open"
 msgstr "_Otevřít"
 
 #: plugins/alternate-language/gtr-alternate-language-panel.c:328
-#: src/gtr-header-dialog.c:269 src/gtr-io-error-info-bar.c:123
-#: src/gtr-preferences-dialog.c:588 src/gtr-search-dialog.c:392
+#: src/gtr-header-dialog.c:278 src/gtr-io-error-info-bar.c:123
+#: src/gtr-preferences-dialog.c:588 src/gtr-search-dialog.c:391
 #: src/translation-memory/gtr-translation-memory-dialog.c:283
 msgid "_Close"
 msgstr "_Zavřít"
@@ -662,7 +662,7 @@ msgstr "Uložit soubor jako…"
 msgid "Files saved."
 msgstr "Soubory uloženy."
 
-#: src/gtr-actions-search.c:170
+#: src/gtr-actions-search.c:168
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
@@ -670,11 +670,11 @@ msgstr[0] "Nalezen a nahrazen %d výskyt"
 msgstr[1] "Nalezeny a nahrazeny %d výskyty"
 msgstr[2] "Nalezeno a nahrazeno %d výskytů"
 
-#: src/gtr-actions-search.c:179
+#: src/gtr-actions-search.c:177
 msgid "Found and replaced one occurrence"
 msgstr "Nalezen a zaměněn jeden výskyt"
 
-#: src/gtr-actions-search.c:191
+#: src/gtr-actions-search.c:189
 msgid "Phrase not found"
 msgstr "Fráze nenalezena"
 
@@ -851,65 +851,69 @@ msgstr "Šablona překladu gettext"
 msgid "All files"
 msgstr "Všechny soubory"
 
-#: src/gtr-header-dialog.c:271
+#: src/gtr-header-dialog.c:280
 msgid "Edit Header"
 msgstr "Úprava hlavičky"
 
-#: src/gtr-header-dialog.ui:74
-msgid "Comment"
-msgstr "Komentář"
-
-#: src/gtr-header-dialog.ui:158
-msgid "Project Id _version:"
-msgstr "_Verze projektu:"
-
-#: src/gtr-header-dialog.ui:185
-msgid "Pot _file creation date:"
-msgstr "Datum _vytvoření souboru POT:"
-
-#: src/gtr-header-dialog.ui:218
-msgid "Po file _revision date:"
-msgstr "Datum _změny souboru PO:"
-
-#: src/gtr-header-dialog.ui:251
-msgid "Report message _bugs to:"
-msgstr "Chy_by zpráv hlásit na:"
-
-#: src/gtr-header-dialog.ui:292
-msgid "Project"
-msgstr "Projekt"
-
-#: src/gtr-header-dialog.ui:307
+#: src/gtr-header-dialog.ui:65
 msgid "Use my options to complete the following entries:"
 msgstr "Použít vlastní nastavení pro vyplnění následujících položek:"
 
-#: src/gtr-header-dialog.ui:468
+#: src/gtr-header-dialog.ui:89
 msgid "Translator’s _name:"
 msgstr "_Jméno překladatele:"
 
-#: src/gtr-header-dialog.ui:485
+#: src/gtr-header-dialog.ui:103
 msgid "Translator’s _email:"
 msgstr "_E-mail překladatele:"
 
-#: src/gtr-header-dialog.ui:504 src/gtr-languages-fetcher.ui:104
+#: src/gtr-header-dialog.ui:117 src/gtr-languages-fetcher.ui:104
 msgid "_Language:"
 msgstr "_Jazyk:"
 
-#: src/gtr-header-dialog.ui:522
+#: src/gtr-header-dialog.ui:130
+msgid "Language Code:"
+msgstr "Kód jazyka:"
+
+#: src/gtr-header-dialog.ui:142
 msgid "Language gro_up email:"
 msgstr "E-mail překladatelského tým_u:"
 
-#: src/gtr-header-dialog.ui:540
+#: src/gtr-header-dialog.ui:155
 msgid "Char_set:"
 msgstr "Znaková _sada:"
 
-#: src/gtr-header-dialog.ui:558
+#: src/gtr-header-dialog.ui:168
 msgid "Enc_oding:"
 msgstr "Kó_dování:"
 
-#: src/gtr-header-dialog.ui:610
+#: src/gtr-header-dialog.ui:266
 msgid "Translator and Language"
 msgstr "Překladatel a Jazyk"
+
+#: src/gtr-header-dialog.ui:289
+msgid "Project Id _version:"
+msgstr "_Verze projektu:"
+
+#: src/gtr-header-dialog.ui:302
+msgid "Pot _file creation date:"
+msgstr "Datum _vytvoření souboru POT:"
+
+#: src/gtr-header-dialog.ui:316
+msgid "Po file _revision date:"
+msgstr "Datum _změny souboru PO:"
+
+#: src/gtr-header-dialog.ui:330
+msgid "Report message _bugs to:"
+msgstr "Chy_by zpráv hlásit na:"
+
+#: src/gtr-header-dialog.ui:399
+msgid "Project"
+msgstr "Projekt"
+
+#: src/gtr-header-dialog.ui:429
+msgid "Comment"
+msgstr "Komentář"
 
 #: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:163
 #: src/gtr-profile-dialog.c:168
@@ -973,80 +977,84 @@ msgstr "Originálních zpráv"
 msgid "Translated message"
 msgstr "Přeložených zpráv"
 
-#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:370
-#: src/gtr-search-dialog.c:451
+#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:369
+#: src/gtr-search-dialog.c:449
 msgid "Find"
 msgstr "Najít"
 
-#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:455
+#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:453
 msgid "Find and replace"
 msgstr "Najít a nahradit"
 
-#: src/gtr-notebook.ui:191 src/gtr-projects.ui:109
+#: src/gtr-notebook.ui:179
+msgid "Edit header"
+msgstr "Upravit hlavičku"
+
+#: src/gtr-notebook.ui:207 src/gtr-projects.ui:109
 msgid "New window"
 msgstr "Nové okno"
 
-#: src/gtr-notebook.ui:205 src/gtr-projects.ui:123
+#: src/gtr-notebook.ui:221 src/gtr-projects.ui:123
 msgid "Preferences"
 msgstr "Předvolby"
 
-#: src/gtr-notebook.ui:232 src/gtr-projects.ui:150
+#: src/gtr-notebook.ui:248 src/gtr-projects.ui:150
 msgid "Keyboard Shortcuts"
 msgstr "Klávesové zkratky"
 
-#: src/gtr-notebook.ui:246 src/gtr-projects.ui:164
+#: src/gtr-notebook.ui:262 src/gtr-projects.ui:164
 msgid "About"
 msgstr "O aplikaci"
 
-#: src/gtr-notebook.ui:260 src/gtr-projects.ui:178
+#: src/gtr-notebook.ui:276 src/gtr-projects.ui:178
 msgid "Quit"
 msgstr "Ukončit"
 
-#: src/gtr-notebook.ui:282 src/gtr-projects.ui:58
+#: src/gtr-notebook.ui:298 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Otevřít…"
 
-#: src/gtr-notebook.ui:286
+#: src/gtr-notebook.ui:302
 msgid "Open a new file (<Ctrl>o)"
 msgstr "Otevřít nový soubor (<Ctrl> + o)"
 
-#: src/gtr-notebook.ui:312
+#: src/gtr-notebook.ui:328
 msgid "Undo (<Ctrl>z)"
 msgstr "Zpět (<Ctrl> + z)"
 
-#: src/gtr-notebook.ui:334
+#: src/gtr-notebook.ui:350
 msgid "Redo (<Ctrl><Shift>z)"
 msgstr "Znovu (<Ctrl> + <Shift> + z)"
 
-#: src/gtr-notebook.ui:379
+#: src/gtr-notebook.ui:395
 msgid "Previous message without translation (<Alt><Page Up>)"
 msgstr "Předchozí nepřeložená zpráva (<Alt> + <Page Up>)"
 
-#: src/gtr-notebook.ui:401
+#: src/gtr-notebook.ui:417
 msgid "Next message without translation (<Alt><Page Down>)"
 msgstr "Následující nepřeložená zpráva (<Alt> + <Page Down>)"
 
-#: src/gtr-notebook.ui:441
+#: src/gtr-notebook.ui:457
 msgid "Toggle fuzzy state (<Ctrl>+u)"
 msgstr "Přepnout příznak nepřesnosti (<Alt> + u)"
 
-#: src/gtr-notebook.ui:471
+#: src/gtr-notebook.ui:487
 msgid "Order by menu"
 msgstr "Nabídka řazení"
 
-#: src/gtr-notebook.ui:495 src/gtr-projects.ui:81
+#: src/gtr-notebook.ui:511 src/gtr-projects.ui:81
 msgid "Main Menu"
 msgstr "Hlavní nabídka"
 
-#: src/gtr-notebook.ui:511
+#: src/gtr-notebook.ui:527
 msgid "Save"
 msgstr "Uložit"
 
-#: src/gtr-notebook.ui:515
+#: src/gtr-notebook.ui:531
 msgid "Save the current file (<Ctrl>s)"
 msgstr "Uložit aktuální soubor (<Ctrl> + s)"
 
-#: src/gtr-notebook.ui:530
+#: src/gtr-notebook.ui:546
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Uložit jako (<Ctrl> + <Shift> + s)"
 
@@ -1089,7 +1097,7 @@ msgstr "Gettext vrátil prázdný seznam domény zpráv."
 msgid "No messages obtained from parser."
 msgstr "Z analyzátoru nebyla získána žádná zpráva."
 
-#: src/gtr-po.c:761
+#: src/gtr-po.c:762
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1100,12 +1108,17 @@ msgstr ""
 "Soubory POT jsou generovány během procesu kompilace.\n"
 "Správný název pro váš soubor bude spíše „%s.po“."
 
-#: src/gtr-po.c:774
+#: src/gtr-po.c:775
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Soubor %s je pouze pro čtení a nelze jej přepsat"
 
-#: src/gtr-po.c:805
+#: src/gtr-po.c:794
+#, c-format
+msgid "There is an error in the PO file: %s"
+msgstr "Vyskytla se chyba v souboru PO: %s"
+
+#: src/gtr-po.c:806
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Vyskytla se chyba při zápisu souboru PO: %s"
@@ -1238,16 +1251,16 @@ msgstr "Otevřete nový soubor .po nebo jej sem přetáhněte"
 msgid "Select a PO file"
 msgstr "Výběr souboru PO"
 
-#: src/gtr-search-dialog.c:348 src/gtr-search-dialog.ui:6
+#: src/gtr-search-dialog.c:347 src/gtr-search-dialog.ui:6
 #: src/gtr-search-dialog.ui:53
 msgid "Replace"
 msgstr "Nahradit"
 
-#: src/gtr-search-dialog.c:453
+#: src/gtr-search-dialog.c:451
 msgid "Replace _All"
 msgstr "Nahradit _vše"
 
-#: src/gtr-search-dialog.c:457
+#: src/gtr-search-dialog.c:455
 msgid "_Replace"
 msgstr "Nah_radit"
 
@@ -1272,22 +1285,18 @@ msgid "_Translated text"
 msgstr "Přeložený _text"
 
 #: src/gtr-search-dialog.ui:213
-msgid "Include fu_zzy strings"
-msgstr "Včetně _nepřesných řetězců"
-
-#: src/gtr-search-dialog.ui:230
 msgid "_Match case"
 msgstr "_Rozlišovat velikost písmen"
 
-#: src/gtr-search-dialog.ui:246
+#: src/gtr-search-dialog.ui:229
 msgid "Match _entire word only"
 msgstr "Shoda pouze c_elých slov"
 
-#: src/gtr-search-dialog.ui:262
+#: src/gtr-search-dialog.ui:245
 msgid "Search _backwards"
 msgstr "Hledat směrem _k začátku"
 
-#: src/gtr-search-dialog.ui:279
+#: src/gtr-search-dialog.ui:262
 msgid "_Wrap around"
 msgstr "Přecházet přes _okraj"
 
@@ -1299,40 +1308,40 @@ msgstr "VKL"
 msgid "OVR"
 msgstr "PRE"
 
-#: src/gtr-tab.c:244
+#: src/gtr-tab.c:245
 msgid "There is an error in the message:"
 msgstr "Ve zprávě se vyskytla chyba:"
 
-#: src/gtr-tab.c:444 src/gtr-tab.c:555
+#: src/gtr-tab.c:446 src/gtr-tab.c:557
 msgid "fuzzy"
 msgstr "nepřesná"
 
-#: src/gtr-tab.c:585
+#: src/gtr-tab.c:587
 #, c-format
 msgid "Plural %d"
 msgstr "Množné číslo %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1136
+#: src/gtr-tab.c:1139
 msgid "Path:"
 msgstr "Cesta:"
 
-#: src/gtr-tab.c:1786
+#: src/gtr-tab.c:1789
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Přeloženo: %0.2f %%"
 
-#: src/gtr-tab.c:1787
+#: src/gtr-tab.c:1790
 #, c-format
 msgid "Translated: %d"
 msgstr "Přeloženo: %d"
 
-#: src/gtr-tab.c:1788
+#: src/gtr-tab.c:1791
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Nepřeloženo: %d"
 
-#: src/gtr-tab.c:1789
+#: src/gtr-tab.c:1792
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Nepřesných: %d"
