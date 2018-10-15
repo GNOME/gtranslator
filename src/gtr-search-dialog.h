@@ -112,11 +112,6 @@ gtr_search_dialog_get_original_text (GtrSearchDialog * dialog);
 gboolean
 gtr_search_dialog_get_translated_text (GtrSearchDialog * dialog);
 
-     void gtr_search_dialog_set_fuzzy (GtrSearchDialog *
-                                       dialog, gboolean match_case);
-
-     gboolean gtr_search_dialog_get_fuzzy (GtrSearchDialog * dialog);
-
      void gtr_search_dialog_set_match_case (GtrSearchDialog *
                                             dialog, gboolean match_case);
 
