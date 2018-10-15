@@ -251,72 +251,43 @@ find_in_list (GtrWindow * window,
 
   do
     {
-      if (gtr_msg_is_fuzzy (GTR_MSG (l->data)) )
+      while (viewsaux != NULL)
         {
-          if (!search_backwards)
+          gboolean aux = found;
+
+          found = run_search (GTR_VIEW (viewsaux->data), found);
+          if (found)
             {
-              if (l->next == NULL)
-                {
-                  if (!wrap_around)
-                    return FALSE;
-                  l = g_list_first (l);
-                }
-              else
-                l = l->next;
+              gtr_tab_message_go_to (tab, l->data, FALSE, GTR_TAB_MOVE_NONE);
+              run_search (GTR_VIEW (viewsaux->data), aux);
+              return TRUE;
+            }
+          viewsaux = viewsaux->next;
+        }
+      if (!search_backwards)
+        {
+          if (l->next == NULL)
+            {
+              if (!wrap_around)
+                return FALSE;
+              l = g_list_first (l);
             }
           else
-            {
-              if (l->prev == NULL)
-                {
-                  if (!wrap_around)
-                    return FALSE;
-                  l = g_list_last (l);
-                }
-              else
-                l = l->prev;
-            }
-          gtr_tab_message_go_to (tab, l->data, TRUE, GTR_TAB_MOVE_NONE);
+            l = l->next;
         }
       else
         {
-          while (viewsaux != NULL)
+          if (l->prev == NULL)
             {
-              gboolean aux = found;
-
-              found = run_search (GTR_VIEW (viewsaux->data), found);
-              if (found)
-                {
-                  gtr_tab_message_go_to (tab, l->data, FALSE, GTR_TAB_MOVE_NONE);
-                  run_search (GTR_VIEW (viewsaux->data), aux);
-                  return TRUE;
-                }
-              viewsaux = viewsaux->next;
-            }
-          if (!search_backwards)
-            {
-              if (l->next == NULL)
-                {
-                  if (!wrap_around)
-                    return FALSE;
-                  l = g_list_first (l);
-                }
-              else
-                l = l->next;
+              if (!wrap_around)
+                return FALSE;
+              l = g_list_last (l);
             }
           else
-            {
-              if (l->prev == NULL)
-                {
-                  if (!wrap_around)
-                    return FALSE;
-                  l = g_list_last (l);
-                }
-              else
-                l = l->prev;
-            }
-          gtr_tab_message_go_to (tab, l->data, TRUE, GTR_TAB_MOVE_NONE);
-          viewsaux = views;
+            l = l->prev;
         }
+      gtr_tab_message_go_to (tab, l->data, TRUE, GTR_TAB_MOVE_NONE);
+      viewsaux = views;
     }
   while (l != current);
 
