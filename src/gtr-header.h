@@ -87,6 +87,7 @@ gchar           *gtr_header_get_language             (GtrHeader *header);
 gchar           *gtr_header_get_lg_email             (GtrHeader *header);
 void             gtr_header_set_language             (GtrHeader   *header,
                                                       const gchar *language,
+                                                      const gchar *lang_code,
                                                       const gchar *email);
 
 gchar           *gtr_header_get_mime_version         (GtrHeader *header);

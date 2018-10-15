@@ -55,6 +55,7 @@ typedef struct
   GtkWidget *pot_date;
   GtkWidget *po_date;
   GtkWidget *language;
+  GtkWidget *lang_code;
   GtkWidget *lg_email;
   GtkWidget *charset;
   GtkWidget *encoding;
@@ -105,6 +106,7 @@ take_my_options_checkbutton_toggled (GtkToggleButton * button,
   gtk_widget_set_sensitive (priv->translator, !active);
   gtk_widget_set_sensitive (priv->tr_email, !active);
   gtk_widget_set_sensitive (priv->language, !active);
+  gtk_widget_set_sensitive (priv->lang_code, !active);
   gtk_widget_set_sensitive (priv->lg_email, !active);
   gtk_widget_set_sensitive (priv->encoding, !active);
 }
@@ -183,15 +185,18 @@ translator_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 static void
 language_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 {
-  const gchar *language, *lg_email;
+  const gchar *language, *lg_email, *lang_code;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
   language = gtk_entry_get_text (GTK_ENTRY (priv->language));
   lg_email = gtk_entry_get_text (GTK_ENTRY (priv->lg_email));
+  lang_code = gtk_entry_get_text (GTK_ENTRY (priv->lang_code));
 
   if (language && lg_email)
     {
-      gtr_header_set_language (gtr_po_get_header (priv->po), language, lg_email);
+      gtr_header_set_language (gtr_po_get_header (priv->po),
+                               language, lang_code,
+                               lg_email);
       po_state_set_modified (priv->po);
     }
 }
@@ -237,6 +242,10 @@ gtr_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
 
   text = gtr_header_get_language (header);
   gtk_entry_set_text (GTK_ENTRY (priv->language), text);
+  g_free (text);
+
+  text = gtr_header_get_language_code (header);
+  gtk_entry_set_text (GTK_ENTRY (priv->lang_code), text);
   g_free (text);
 
   text = gtr_header_get_lg_email (header);
@@ -296,6 +305,7 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
   priv->pot_date = GTK_WIDGET (gtk_builder_get_object (builder, "pot_date"));
   priv->po_date = GTK_WIDGET (gtk_builder_get_object (builder, "po_date"));
   priv->language = GTK_WIDGET (gtk_builder_get_object (builder, "language_entry"));
+  priv->lang_code = GTK_WIDGET (gtk_builder_get_object (builder, "language_code_entry"));
   priv->lg_email = GTK_WIDGET (gtk_builder_get_object (builder, "lg_email_entry"));
   priv->charset = GTK_WIDGET (gtk_builder_get_object (builder, "charset_entry"));
   priv->encoding = GTK_WIDGET (gtk_builder_get_object (builder, "encoding_entry"));
@@ -327,6 +337,7 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
       gtk_widget_set_sensitive (priv->translator, !active);
       gtk_widget_set_sensitive (priv->tr_email, !active);
       gtk_widget_set_sensitive (priv->language, !active);
+      gtk_widget_set_sensitive (priv->lang_code, !active);
       gtk_widget_set_sensitive (priv->lg_email, !active);
       gtk_widget_set_sensitive (priv->encoding, !active);
     }
@@ -369,6 +380,9 @@ set_default_values (GtrHeaderDialog * dlg, GtrWindow * window)
   g_signal_connect (priv->language, "changed",
                     G_CALLBACK (language_changed), dlg);
 
+  g_signal_connect (priv->lang_code, "changed",
+                    G_CALLBACK (language_changed), dlg);
+
   g_signal_connect (priv->lg_email, "changed",
                     G_CALLBACK (language_changed), dlg);
 }
@@ -376,7 +390,7 @@ set_default_values (GtrHeaderDialog * dlg, GtrWindow * window)
 void
 gtr_show_header_dialog (GtrWindow * window)
 {
-  static GtrHeaderDialog *dlg = NULL;
+  static GtkWidget *dlg = NULL;
   GtrTab *tab;
 
   tab = gtr_window_get_active_tab (window);
@@ -386,20 +400,20 @@ gtr_show_header_dialog (GtrWindow * window)
 
   if (dlg == NULL)
     {
-      dlg = g_object_new (GTR_TYPE_HEADER_DIALOG, NULL);
+      dlg = GTK_WIDGET (g_object_new (GTR_TYPE_HEADER_DIALOG,
+                                      "use-header-bar", TRUE, NULL));
 
       g_signal_connect (dlg,
                         "destroy", G_CALLBACK (gtk_widget_destroyed), &dlg);
 
-      set_default_values (dlg, window);
+      set_default_values (GTR_HEADER_DIALOG (dlg), window);
 
       gtk_widget_show (GTK_WIDGET (dlg));
     }
 
-  if (GTK_WINDOW (window) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
-    {
-      gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
-    }
+  gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
+  gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_DIALOG);
+  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
   gtk_window_present (GTK_WINDOW (dlg));
 }

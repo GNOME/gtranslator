@@ -260,6 +260,16 @@ preferences_activated (GSimpleAction *action,
 }
 
 static void
+edit_header_activated (GSimpleAction *action,
+                       GVariant      *parameter,
+                       gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_actions_edit_header (NULL, priv->active_window);
+}
+
+static void
 shortcuts_activated (GSimpleAction *action,
                      GVariant      *parameter,
                      gpointer       user_data)
@@ -519,6 +529,7 @@ static GActionEntry app_entries[] = {
   { "find", find_activated, NULL, NULL, NULL },
   { "new_window", new_window_activated, NULL, NULL, NULL },
   { "preferences", preferences_activated, NULL, NULL, NULL },
+  { "edit_header", edit_header_activated, NULL, NULL, NULL },
   { "shortcuts", shortcuts_activated, NULL, NULL, NULL },
   { "help", help_activated, NULL, NULL, NULL },
   { "about", about_activated, NULL, NULL, NULL },

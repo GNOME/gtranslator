@@ -419,7 +419,9 @@ gtr_header_get_lg_email (GtrHeader * header)
 
 void
 gtr_header_set_language (GtrHeader * header,
-                         const gchar * language, const gchar * email)
+                         const gchar * language,
+                         const gchar * lang_code,
+                         const gchar * email)
 {
   gchar *lang_temp;
 
@@ -428,6 +430,7 @@ gtr_header_set_language (GtrHeader * header,
   lang_temp = g_strconcat (language, " <", email, ">", NULL);
 
   gtr_header_set_field (header, "Language-Team", lang_temp);
+  gtr_header_set_field (header, "Language", lang_code);
 
   g_free (lang_temp);
 }
@@ -579,6 +582,7 @@ set_profile_values (GtrHeader *header)
                                  (active_profile));
       gtr_header_set_language (header,
                                gtr_profile_get_language_name (active_profile),
+                               gtr_profile_get_language_code (active_profile),
                                gtr_profile_get_group_email (active_profile));
       gtr_header_set_charset (header,
                               gtr_profile_get_charset (active_profile));
