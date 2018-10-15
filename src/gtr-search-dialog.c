@@ -64,7 +64,6 @@ typedef struct
   GtkWidget *replace_text_entry;
   GtkWidget *original_text_checkbutton;
   GtkWidget *translated_text_checkbutton;
-  GtkWidget *fuzzy_checkbutton;
   GtkWidget *match_case_checkbutton;
   GtkWidget *entire_word_checkbutton;
   GtkWidget *backwards_checkbutton;
@@ -407,7 +406,6 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
   priv->replace_label = GTK_WIDGET (gtk_builder_get_object (builder, "replace_with_label"));
   priv->original_text_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "original_text_checkbutton"));
   priv->translated_text_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "translated_text_checkbutton"));
-  priv->fuzzy_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "fuzzy_checkbutton"));
   priv->match_case_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "match_case_checkbutton"));
   priv->entire_word_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "entire_word_checkbutton"));
   priv->backwards_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "search_backwards_checkbutton"));
@@ -647,26 +645,6 @@ gtr_search_dialog_get_translated_text (GtrSearchDialog * dialog)
   g_return_val_if_fail (GTR_IS_SEARCH_DIALOG (dialog), FALSE);
 
   return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->translated_text_checkbutton));
-}
-
-void
-gtr_search_dialog_set_fuzzy (GtrSearchDialog * dialog, gboolean match_case)
-{
-  GtrSearchDialogPrivate *priv = gtr_search_dialog_get_instance_private (dialog);
-  g_return_if_fail (GTR_IS_SEARCH_DIALOG (dialog));
-
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (priv->fuzzy_checkbutton),
-                                match_case);
-}
-
-gboolean
-gtr_search_dialog_get_fuzzy (GtrSearchDialog * dialog)
-{
-  GtrSearchDialogPrivate *priv = gtr_search_dialog_get_instance_private (dialog);
-  g_return_val_if_fail (GTR_IS_SEARCH_DIALOG (dialog), FALSE);
-
-  return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->fuzzy_checkbutton));
 }
 
 void

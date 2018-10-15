@@ -92,7 +92,6 @@ last_search_data_set (LastSearchData * data, GtrSearchDialog * dialog)
 
   data->original_text = gtr_search_dialog_get_original_text (dialog);
   data->translated_text = gtr_search_dialog_get_translated_text (dialog);
-  data->fuzzy_messages = gtr_search_dialog_get_fuzzy (dialog);
   data->match_case = gtr_search_dialog_get_match_case (dialog);
   data->entire_word = gtr_search_dialog_get_entire_word (dialog);
   data->backwards = gtr_search_dialog_get_backwards (dialog);
@@ -121,7 +120,6 @@ search_dialog_set_last_options (GtrSearchDialog * dialog,
 {
   gtr_search_dialog_set_original_text (dialog, data->original_text);
   gtr_search_dialog_set_translated_text (dialog, data->translated_text);
-  gtr_search_dialog_set_fuzzy (dialog, data->fuzzy_messages);
   gtr_search_dialog_set_match_case (dialog, data->match_case);
   gtr_search_dialog_set_entire_word (dialog, data->entire_word);
   gtr_search_dialog_set_backwards (dialog, data->backwards);
@@ -233,7 +231,7 @@ run_search (GtrView * view, gboolean follow)
 static gboolean
 find_in_list (GtrWindow * window,
               GList * views,
-              gboolean fuzzy, gboolean wrap_around, gboolean search_backwards)
+              gboolean wrap_around, gboolean search_backwards)
 {
   GtrTab *tab = gtr_window_get_active_tab (window);
   GtrPo *po = gtr_tab_get_po (tab);
@@ -253,72 +251,43 @@ find_in_list (GtrWindow * window,
 
   do
     {
-      if (gtr_msg_is_fuzzy (GTR_MSG (l->data)) && !fuzzy)
+      while (viewsaux != NULL)
         {
-          if (!search_backwards)
+          gboolean aux = found;
+
+          found = run_search (GTR_VIEW (viewsaux->data), found);
+          if (found)
             {
-              if (l->next == NULL)
-                {
-                  if (!wrap_around)
-                    return FALSE;
-                  l = g_list_first (l);
-                }
-              else
-                l = l->next;
+              gtr_tab_message_go_to (tab, l->data, FALSE, GTR_TAB_MOVE_NONE);
+              run_search (GTR_VIEW (viewsaux->data), aux);
+              return TRUE;
+            }
+          viewsaux = viewsaux->next;
+        }
+      if (!search_backwards)
+        {
+          if (l->next == NULL)
+            {
+              if (!wrap_around)
+                return FALSE;
+              l = g_list_first (l);
             }
           else
-            {
-              if (l->prev == NULL)
-                {
-                  if (!wrap_around)
-                    return FALSE;
-                  l = g_list_last (l);
-                }
-              else
-                l = l->prev;
-            }
-          gtr_tab_message_go_to (tab, l->data, TRUE, GTR_TAB_MOVE_NONE);
+            l = l->next;
         }
       else
         {
-          while (viewsaux != NULL)
+          if (l->prev == NULL)
             {
-              gboolean aux = found;
-
-              found = run_search (GTR_VIEW (viewsaux->data), found);
-              if (found)
-                {
-                  gtr_tab_message_go_to (tab, l->data, FALSE, GTR_TAB_MOVE_NONE);
-                  run_search (GTR_VIEW (viewsaux->data), aux);
-                  return TRUE;
-                }
-              viewsaux = viewsaux->next;
-            }
-          if (!search_backwards)
-            {
-              if (l->next == NULL)
-                {
-                  if (!wrap_around)
-                    return FALSE;
-                  l = g_list_first (l);
-                }
-              else
-                l = l->next;
+              if (!wrap_around)
+                return FALSE;
+              l = g_list_last (l);
             }
           else
-            {
-              if (l->prev == NULL)
-                {
-                  if (!wrap_around)
-                    return FALSE;
-                  l = g_list_last (l);
-                }
-              else
-                l = l->prev;
-            }
-          gtr_tab_message_go_to (tab, l->data, TRUE, GTR_TAB_MOVE_NONE);
-          viewsaux = views;
+            l = l->prev;
         }
+      gtr_tab_message_go_to (tab, l->data, TRUE, GTR_TAB_MOVE_NONE);
+      viewsaux = views;
     }
   while (l != current);
 
@@ -334,7 +303,6 @@ do_find (GtrSearchDialog * dialog, GtrWindow * window)
   const gchar *entry_text;
   gboolean original_text;
   gboolean translated_text;
-  gboolean fuzzy;
   gboolean match_case;
   gboolean entire_word;
   gboolean wrap_around;
@@ -351,7 +319,6 @@ do_find (GtrSearchDialog * dialog, GtrWindow * window)
   /* Views where find */
   original_text = gtr_search_dialog_get_original_text (dialog);
   translated_text = gtr_search_dialog_get_translated_text (dialog);
-  fuzzy = gtr_search_dialog_get_fuzzy (dialog);
 
   /* Flags */
   match_case = gtr_search_dialog_get_match_case (dialog);
@@ -359,7 +326,7 @@ do_find (GtrSearchDialog * dialog, GtrWindow * window)
   search_backwards = gtr_search_dialog_get_backwards (dialog);
   wrap_around = gtr_search_dialog_get_wrap_around (dialog);
 
-  if (!original_text && !translated_text && !fuzzy)
+  if (!original_text && !translated_text)
     return;
 
   /* Get textviews */
@@ -387,7 +354,7 @@ do_find (GtrSearchDialog * dialog, GtrWindow * window)
       list = list->next;
     }
 
-  found = find_in_list (window, views, fuzzy, wrap_around, search_backwards);
+  found = find_in_list (window, views, wrap_around, search_backwards);
 
   if (found)
     phrase_found (window, 0);
