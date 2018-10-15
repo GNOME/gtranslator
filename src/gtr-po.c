@@ -740,6 +740,7 @@ gtr_po_save_file (GtrPo * po, GError ** error)
 {
   struct po_xerror_handler handler;
   gchar *filename;
+  gchar *msg_error;
   GtrHeader *header;
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
@@ -777,25 +778,25 @@ gtr_po_save_file (GtrPo * po, GError ** error)
       return;
     }
 
+  /* Save header fields into msg */
+  header = gtr_po_get_header (po);
+  gtr_header_update_header (header);
 
   /*
    * Check if the file is right
    */
-  /*msg_error = gtr_po_check_po_file (po);
-     if (msg_error != NULL)
-     {
-     g_set_error (error,
-     GTR_PO_ERROR,
-     GTR_PO_ERROR_GETTEXT,
-     _("There is an error in the PO file: %s"),
-     msg_error);
-     g_free (msg_error);
-     } */
-
-
-  /* Save header fields into msg */
-  header = gtr_po_get_header (po);
-  gtr_header_update_header (header);
+  msg_error = gtr_po_check_po_file (po);
+  if (msg_error != NULL)
+    {
+      g_set_error (error,
+                   GTR_PO_ERROR,
+                   GTR_PO_ERROR_GETTEXT,
+                   _("There is an error in the PO file: %s"),
+                   msg_error);
+      g_free (msg_error);
+      g_free (filename);
+      return;
+    }
 
   if (!po_file_write (gtr_po_get_po_file (po), filename, &handler))
     {
@@ -1318,6 +1319,7 @@ gtr_po_check_po_file (GtrPo * po)
   handler.xerror2 = &on_gettext_po_xerror2;
   message_error = NULL;
 
+  //TODO: handle error and mark wrong msgids
   po_file_check_all (priv->gettext_po_file, &handler);
 
   return message_error;
