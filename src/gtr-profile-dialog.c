@@ -43,6 +43,7 @@ typedef struct
 
   GtkWidget *author_name;
   GtkWidget *author_email;
+  GtkWidget *team_email;
 
   GtkWidget *languages_fetcher;
 } GtrProfileDialogPrivate;
@@ -93,6 +94,7 @@ gtr_profile_dialog_init (GtrProfileDialog *dlg)
   priv->profile_name = GTK_WIDGET (gtk_builder_get_object (builder, "profile_name"));
   priv->author_name = GTK_WIDGET (gtk_builder_get_object (builder, "name"));
   priv->author_email = GTK_WIDGET (gtk_builder_get_object (builder, "email"));
+  priv->team_email = GTK_WIDGET (gtk_builder_get_object (builder, "team_email"));
   fetcher_box = GTK_WIDGET (gtk_builder_get_object (builder, "fetcher_box"));
   g_object_unref (builder);
 
@@ -120,6 +122,10 @@ fill_entries (GtrProfileDialog *dlg, GtrProfile *profile)
     gtk_entry_set_text (GTK_ENTRY (priv->author_email),
                         gtr_profile_get_author_email (profile));
 
+  if (gtr_profile_get_group_email (profile) != NULL)
+    gtk_entry_set_text (GTK_ENTRY (priv->team_email),
+                        gtr_profile_get_group_email (profile));
+
   if (gtr_profile_get_language_name (profile) != NULL)
     gtr_languages_fetcher_set_language_name (GTR_LANGUAGES_FETCHER (priv->languages_fetcher),
                                              gtr_profile_get_language_name (profile));
@@ -135,10 +141,6 @@ fill_entries (GtrProfileDialog *dlg, GtrProfile *profile)
   if (gtr_profile_get_encoding (profile) != NULL)
     gtr_languages_fetcher_set_encoding (GTR_LANGUAGES_FETCHER (priv->languages_fetcher),
                                         gtr_profile_get_encoding (profile));
-
-  if (gtr_profile_get_group_email (profile) != NULL)
-    gtr_languages_fetcher_set_team_email (GTR_LANGUAGES_FETCHER (priv->languages_fetcher),
-                                          gtr_profile_get_group_email (profile));
 
   if (gtr_profile_get_plural_forms (profile) != NULL)
     gtr_languages_fetcher_set_plural_form (GTR_LANGUAGES_FETCHER (priv->languages_fetcher),
@@ -195,6 +197,9 @@ gtr_profile_dialog_get_profile (GtrProfileDialog *dlg)
   gtr_profile_set_author_email (profile,
                                 gtk_entry_get_text (GTK_ENTRY (priv->author_email)));
 
+  gtr_profile_set_group_email (profile,
+                               gtk_entry_get_text (GTK_ENTRY (priv->team_email)));
+
   gtr_profile_set_language_name (profile,
                                  gtr_languages_fetcher_get_language_name (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
 
@@ -206,9 +211,6 @@ gtr_profile_dialog_get_profile (GtrProfileDialog *dlg)
 
   gtr_profile_set_encoding (profile,
                             gtr_languages_fetcher_get_encoding (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
-
-  gtr_profile_set_group_email (profile,
-                               gtr_languages_fetcher_get_team_email (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
 
   gtr_profile_set_plural_forms (profile,
                                 gtr_languages_fetcher_get_plural_form (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));

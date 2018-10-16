@@ -32,6 +32,7 @@ typedef struct
   GtkWidget *encoding;
   GtkWidget *team_email;
   GtkWidget *plural_forms;
+  GtkWidget *advanced;
 
   GtkListStore *language_store;
   GtkListStore *code_store;
@@ -173,12 +174,12 @@ fill_encoding_and_charset (GtrLanguagesFetcher *fetcher)
 
   text = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->charset))));
 
-  if (text == NULL || *text == '\0')
+  if (text == NULL || *text == '\0' || !gtk_widget_is_sensitive (priv->charset))
     gtk_combo_box_set_active (GTK_COMBO_BOX (priv->charset), 0);
 
   text = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->encoding))));
 
-  if (text == NULL || *text == '\0')
+  if (text == NULL || *text == '\0' || !gtk_widget_is_sensitive (priv->encoding))
     gtk_combo_box_set_active (GTK_COMBO_BOX (priv->encoding), 0);
 }
 
@@ -186,34 +187,19 @@ static void
 fill_from_language_entry (GtrLanguagesFetcher *fetcher,
                           GtrLanguage         *lang)
 {
-  const gchar *entry_text;
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
 
   fill_encoding_and_charset (fetcher);
 
-  entry_text = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->language_code))));
+  const gchar *code;
+  code = gtr_language_get_code (lang);
+  if (code != NULL && *code != '\0')
+    gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->language_code))), code);
 
-  if (*entry_text == '\0')
-    {
-      const gchar *code;
-
-      code = gtr_language_get_code (lang);
-
-      if (code != NULL && *code != '\0')
-        gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->language_code))), code);
-    }
-
-  entry_text = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))));
-
-  if (*entry_text == '\0')
-    {
-      const gchar *plural_form;
-
-      plural_form = gtr_language_get_plural_form (lang);
-
-      if (plural_form != NULL && *plural_form != '\0')
-        gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))), plural_form);
-    }
+  const gchar *plural_form;
+  plural_form = gtr_language_get_plural_form (lang);
+  if (plural_form != NULL && *plural_form != '\0')
+    gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))), plural_form);
 }
 
 static void
@@ -343,6 +329,30 @@ on_combo_box_changed (GtkWidget           *widget,
 }
 
 static void
+on_advanced_changed (GtkToggleButton     *widget,
+                     GtrLanguagesFetcher *fetcher)
+{
+  GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
+  gboolean active = gtk_toggle_button_get_active (widget);
+
+  gtk_widget_set_sensitive (priv->language_code, active);
+  gtk_widget_set_sensitive (priv->charset, active);
+  gtk_widget_set_sensitive (priv->encoding, active);
+  gtk_widget_set_sensitive (priv->plural_forms, active);
+}
+
+static void
+on_lang_changed (GtkWidget           *widget,
+                 GtrLanguagesFetcher *fetcher)
+{
+  GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
+  GtkWidget *entry = gtk_bin_get_child (GTK_BIN (priv->language));
+
+  on_language_activate (GTK_ENTRY (entry), fetcher);
+  g_signal_emit (fetcher, signals[CHANGED], 0, NULL);
+}
+
+static void
 gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
 {
   GtkWidget *content;
@@ -367,8 +377,8 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
   priv->language_code = GTK_WIDGET (gtk_builder_get_object (builder, "language_code"));
   priv->charset = GTK_WIDGET (gtk_builder_get_object (builder, "charset"));
   priv->encoding = GTK_WIDGET (gtk_builder_get_object (builder, "encoding"));
-  priv->team_email = GTK_WIDGET (gtk_builder_get_object (builder, "team_email"));
   priv->plural_forms = GTK_WIDGET (gtk_builder_get_object (builder, "plural_forms"));
+  priv->advanced = GTK_WIDGET (gtk_builder_get_object (builder, "advanced_check"));
   priv->language_store = GTK_LIST_STORE (gtk_builder_get_object (builder, "language_store"));
   priv->code_store = GTK_LIST_STORE (gtk_builder_get_object (builder, "code_store"));
   g_object_unref (builder);
@@ -397,7 +407,7 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
 
   /* To emit the changed signal */
   g_signal_connect (priv->language, "changed",
-                    G_CALLBACK (on_combo_box_changed),
+                    G_CALLBACK (on_lang_changed),
                     fetcher);
   g_signal_connect (priv->language_code, "changed",
                     G_CALLBACK (on_combo_box_changed),
@@ -408,11 +418,12 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
   g_signal_connect (priv->encoding, "changed",
                     G_CALLBACK (on_combo_box_changed),
                     fetcher);
-  g_signal_connect (priv->team_email, "changed",
-                    G_CALLBACK (on_combo_box_changed),
-                    fetcher);
   g_signal_connect (priv->plural_forms, "changed",
                     G_CALLBACK (on_combo_box_changed),
+                    fetcher);
+
+  g_signal_connect (priv->advanced, "toggled",
+                    G_CALLBACK (on_advanced_changed),
                     fetcher);
 }
 
@@ -500,26 +511,6 @@ gtr_languages_fetcher_set_encoding (GtrLanguagesFetcher *fetcher,
   g_return_if_fail (enc != NULL);
 
   gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->encoding))), enc);
-}
-
-const gchar *
-gtr_languages_fetcher_get_team_email (GtrLanguagesFetcher *fetcher)
-{
-  GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  g_return_val_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher), NULL);
-
-  return gtk_entry_get_text (GTK_ENTRY (priv->team_email));
-}
-
-void
-gtr_languages_fetcher_set_team_email (GtrLanguagesFetcher *fetcher,
-                                      const gchar         *email)
-{
-  GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  g_return_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher));
-  g_return_if_fail (email != NULL);
-
-  gtk_entry_set_text (GTK_ENTRY (priv->team_email), email);
 }
 
 const gchar *
