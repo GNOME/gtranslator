@@ -117,7 +117,7 @@ gtr_deps = [
   dependency('gsettings-desktop-schemas'),
   dependency('gspell-1', version: '>= 1.2.0'),
   dependency('gthread-2.0', version: '>= 2.13.0'),
-  dependency('gtksourceview-3.0', version: '>= 3.0.0'),
+  dependency('gtksourceview-4', version: '>= 4.0.2'),
   dependency('libxml-2.0', version: '>= 2.4.12'),
   cc.find_library('gettextpo'),
 ]
