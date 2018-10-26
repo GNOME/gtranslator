@@ -337,6 +337,12 @@ create_profiles_page1 (GtrAssistant * as)
 
   gtk_assistant_append_page (GTK_ASSISTANT (as), box);
   gtk_assistant_set_page_title (GTK_ASSISTANT (as), box, _("Profile"));
+
+  /**
+   * Default values
+   */
+  gtk_entry_set_text (GTK_ENTRY (priv->profile_name), "default");
+  gtk_entry_set_text (GTK_ENTRY (priv->name), g_get_real_name ());
 }
 
 static void
