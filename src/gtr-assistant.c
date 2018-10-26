@@ -46,6 +46,7 @@ typedef struct
   GtkWidget *profile_name;
   GtkWidget *name;
   GtkWidget *email;
+  GtkWidget *team_email;
 
   /* Profiles Page 2 */
   GtkWidget *languages_fetcher;
@@ -87,6 +88,9 @@ on_assistant_apply (GtkAssistant * assistant)
                                 gtk_entry_get_text (GTK_ENTRY
                                                     (priv->email)));
 
+  gtr_profile_set_group_email (profile,
+                               gtk_entry_get_text (GTK_ENTRY (priv->team_email)));
+
   gtr_profile_set_language_name (profile,
                                  gtr_languages_fetcher_get_language_name (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
 
@@ -98,9 +102,6 @@ on_assistant_apply (GtkAssistant * assistant)
 
   gtr_profile_set_encoding (profile,
                             gtr_languages_fetcher_get_encoding (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
-
-  gtr_profile_set_group_email (profile,
-                               gtr_languages_fetcher_get_team_email (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
 
   gtr_profile_set_plural_forms (profile,
                                 gtr_languages_fetcher_get_plural_form (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
@@ -138,7 +139,7 @@ on_assistant_prepare (GtkAssistant * assistant, GtkWidget * page)
                             gtk_entry_get_text (GTK_ENTRY (priv->name)),
                             gtk_entry_get_text (GTK_ENTRY (priv->email)),
                             gtr_languages_fetcher_get_language_name (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)),
-                            gtr_languages_fetcher_get_team_email (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)),
+                            gtk_entry_get_text (GTK_ENTRY (priv->team_email)),
                             gtr_languages_fetcher_get_language_code (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)),
                             gtr_languages_fetcher_get_charset (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)),
                             gtr_languages_fetcher_get_encoding (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)),
@@ -220,6 +221,18 @@ on_profile1_entry_changed (GtkWidget * widget, GtrAssistant * as)
                                        FALSE);
       return;
     }
+
+  /* Team email */
+  text = gtk_entry_get_text (GTK_ENTRY (priv->team_email));
+
+  if (text && *text)
+    gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, TRUE);
+  else
+    {
+      gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page,
+                                       FALSE);
+      return;
+    }
 }
 
 static void
@@ -242,10 +255,10 @@ create_profiles_page1 (GtrAssistant * as)
   gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
 
   label = gtk_label_new (NULL);
-  markup = g_strdup_printf("<b>%s</b>", _("Profile name:"));
+  markup = g_strdup_printf("<b>%s</b>", _("Profile name"));
   gtk_label_set_markup (GTK_LABEL (label), markup);
   g_free(markup);
-  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+  gtk_label_set_xalign (GTK_LABEL (label), 1.0);
   gtk_label_set_yalign (GTK_LABEL (label), 0.5);
   gtk_widget_show (label);
   gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
@@ -264,10 +277,10 @@ create_profiles_page1 (GtrAssistant * as)
   gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
 
   label = gtk_label_new (NULL);
-  markup = g_strdup_printf("<b>%s</b>", ("Translator name:"));
+  markup = g_strdup_printf("<b>%s</b>", ("Translator name"));
   gtk_label_set_markup (GTK_LABEL (label), markup);
   g_free(markup);
-  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+  gtk_label_set_xalign (GTK_LABEL (label), 1.0);
   gtk_label_set_yalign (GTK_LABEL (label), 0.5);
   gtk_widget_show (label);
   gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
@@ -286,10 +299,10 @@ create_profiles_page1 (GtrAssistant * as)
   gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
 
   label = gtk_label_new (NULL);
-  markup = g_strdup_printf("<b>%s</b>", _("Translator email:"));
+  markup = g_strdup_printf("<b>%s</b>", _("Translator email"));
   gtk_label_set_markup (GTK_LABEL (label), markup);
   g_free(markup);
-  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+  gtk_label_set_xalign (GTK_LABEL (label), 1.0);
   gtk_label_set_yalign (GTK_LABEL (label), 0.5);
   gtk_widget_show (label);
   gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
@@ -300,8 +313,36 @@ create_profiles_page1 (GtrAssistant * as)
   g_signal_connect (G_OBJECT (priv->email), "changed",
                     G_CALLBACK (on_profile1_entry_changed), as);
 
+  /*
+   * Team email:
+   */
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+  gtk_widget_show (hbox);
+  gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
+
+  label = gtk_label_new (NULL);
+  markup = g_strdup_printf("<b>%s</b>", _("Team email"));
+  gtk_label_set_markup (GTK_LABEL (label), markup);
+  g_free(markup);
+  gtk_label_set_xalign (GTK_LABEL (label), 1.0);
+  gtk_label_set_yalign (GTK_LABEL (label), 0.5);
+  gtk_widget_show (label);
+  gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+
+  priv->team_email = gtk_entry_new ();
+  gtk_widget_show (priv->team_email);
+  gtk_box_pack_start (GTK_BOX (hbox), priv->team_email, FALSE, FALSE, 0);
+  g_signal_connect (G_OBJECT (priv->team_email), "changed",
+                    G_CALLBACK (on_profile1_entry_changed), as);
+
   gtk_assistant_append_page (GTK_ASSISTANT (as), box);
   gtk_assistant_set_page_title (GTK_ASSISTANT (as), box, _("Profile"));
+
+  /**
+   * Default values
+   */
+  gtk_entry_set_text (GTK_ENTRY (priv->profile_name), "default");
+  gtk_entry_set_text (GTK_ENTRY (priv->name), g_get_real_name ());
 }
 
 static void
@@ -362,14 +403,6 @@ on_profile2_entry_changed (GtkWidget * widget, GtrAssistant * as)
                                        FALSE);
       return;
     }
-
-  /* Team email */
-  text = gtr_languages_fetcher_get_team_email (GTR_LANGUAGES_FETCHER (priv->languages_fetcher));
-
-  if (text && *text)
-    gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, TRUE);
-  else
-    gtk_assistant_set_page_complete (GTK_ASSISTANT (as), current_page, FALSE);
 
   /* Plural form */
   text = gtr_languages_fetcher_get_plural_form (GTR_LANGUAGES_FETCHER (priv->languages_fetcher));

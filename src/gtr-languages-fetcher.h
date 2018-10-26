@@ -41,6 +41,7 @@ struct _GtrLanguagesFetcherClass
   GtkBoxClass parent_class;
 
   void (* changed) (GtrLanguagesFetcher *fetcher);
+  void (* lang_changed) (GtrLanguagesFetcher *fetcher);
 };
 
 GType                  gtr_languages_fetcher_get_type             (void) G_GNUC_CONST;
@@ -66,11 +67,6 @@ const gchar           *gtr_languages_fetcher_get_encoding         (GtrLanguagesF
 
 void                   gtr_languages_fetcher_set_encoding         (GtrLanguagesFetcher *fetcher,
                                                                    const gchar         *enc);
-
-const gchar           *gtr_languages_fetcher_get_team_email       (GtrLanguagesFetcher *fetcher);
-
-void                   gtr_languages_fetcher_set_team_email       (GtrLanguagesFetcher *fetcher,
-                                                                   const gchar         *email);
 
 const gchar           *gtr_languages_fetcher_get_plural_form      (GtrLanguagesFetcher *fetcher);
 
