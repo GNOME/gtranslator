@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-10-15 09:09+0000\n"
-"PO-Revision-Date: 2018-10-15 11:10+0200\n"
+"POT-Creation-Date: 2018-10-26 19:13+0000\n"
+"PO-Revision-Date: 2018-10-27 07:39+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -698,7 +698,7 @@ msgstr "O _aplikaci"
 msgid "_Quit"
 msgstr "U_končit"
 
-#: src/gtr-assistant.c:127
+#: src/gtr-assistant.c:128
 #, c-format
 msgid ""
 "Profile name: %s\n"
@@ -721,32 +721,36 @@ msgstr ""
 "Kódování přenosu: %s\n"
 "Forma množného čísla: %s\n"
 
-#: src/gtr-assistant.c:166
+#: src/gtr-assistant.c:167
 msgid "This assistant will help you to create the main profile."
 msgstr "Tento průvodce vám pomůže vytvořit hlavní profil."
 
-#: src/gtr-assistant.c:171
+#: src/gtr-assistant.c:172
 msgid "Assistant"
 msgstr "Průvodce"
 
-#: src/gtr-assistant.c:245
-msgid "Profile name:"
-msgstr "Název profilu:"
+#: src/gtr-assistant.c:258
+msgid "Profile name"
+msgstr "Název profilu"
 
-#: src/gtr-assistant.c:289
-msgid "Translator email:"
-msgstr "E-mail překladatele:"
+#: src/gtr-assistant.c:302
+msgid "Translator email"
+msgstr "E-mail překladatele"
 
-#: src/gtr-assistant.c:304 src/gtr-preferences-dialog.c:521
+#: src/gtr-assistant.c:324
+msgid "Team email"
+msgstr "E-mail týmu"
+
+#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:521
 #: src/gtr-window.c:550
 msgid "Profile"
 msgstr "Profil"
 
-#: src/gtr-assistant.c:396
+#: src/gtr-assistant.c:429
 msgid "Language"
 msgstr "Jazyk"
 
-#: src/gtr-assistant.c:417
+#: src/gtr-assistant.c:450
 msgid "Confirmation"
 msgstr "Potvrzení"
 
@@ -756,7 +760,7 @@ msgstr "Zavřít _bez uložení"
 
 #: src/gtr-close-confirmation-dialog.c:126 src/gtr-file-dialogs.c:45
 #: src/gtr-jump-dialog.c:90 src/gtr-preferences-dialog.c:394
-#: src/gtr-profile-dialog.c:70
+#: src/gtr-profile-dialog.c:71
 #: src/translation-memory/gtr-translation-memory-dialog.c:101
 msgid "_Cancel"
 msgstr "_Zrušit"
@@ -867,56 +871,56 @@ msgstr "_Jméno překladatele:"
 msgid "Translator’s _email:"
 msgstr "_E-mail překladatele:"
 
-#: src/gtr-header-dialog.ui:117 src/gtr-languages-fetcher.ui:104
+#: src/gtr-header-dialog.ui:117
 msgid "_Language:"
 msgstr "_Jazyk:"
 
 #: src/gtr-header-dialog.ui:130
-msgid "Language Code:"
-msgstr "Kód jazyka:"
+msgid "Language _code:"
+msgstr "_Kód jazyka:"
 
-#: src/gtr-header-dialog.ui:142
+#: src/gtr-header-dialog.ui:143
 msgid "Language gro_up email:"
 msgstr "E-mail překladatelského tým_u:"
 
-#: src/gtr-header-dialog.ui:155
+#: src/gtr-header-dialog.ui:156
 msgid "Char_set:"
 msgstr "Znaková _sada:"
 
-#: src/gtr-header-dialog.ui:168
+#: src/gtr-header-dialog.ui:169
 msgid "Enc_oding:"
 msgstr "Kó_dování:"
 
-#: src/gtr-header-dialog.ui:266
+#: src/gtr-header-dialog.ui:267
 msgid "Translator and Language"
 msgstr "Překladatel a Jazyk"
 
-#: src/gtr-header-dialog.ui:289
+#: src/gtr-header-dialog.ui:290
 msgid "Project Id _version:"
 msgstr "_Verze projektu:"
 
-#: src/gtr-header-dialog.ui:302
+#: src/gtr-header-dialog.ui:303
 msgid "Pot _file creation date:"
 msgstr "Datum _vytvoření souboru POT:"
 
-#: src/gtr-header-dialog.ui:316
+#: src/gtr-header-dialog.ui:317
 msgid "Po file _revision date:"
 msgstr "Datum _změny souboru PO:"
 
-#: src/gtr-header-dialog.ui:330
+#: src/gtr-header-dialog.ui:331
 msgid "Report message _bugs to:"
 msgstr "Chy_by zpráv hlásit na:"
 
-#: src/gtr-header-dialog.ui:399
+#: src/gtr-header-dialog.ui:400
 msgid "Project"
 msgstr "Projekt"
 
-#: src/gtr-header-dialog.ui:429
+#: src/gtr-header-dialog.ui:430
 msgid "Comment"
 msgstr "Komentář"
 
-#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:163
-#: src/gtr-profile-dialog.c:168
+#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
+#: src/gtr-profile-dialog.c:170
 #: src/translation-memory/gtr-translation-memory-dialog.c:103
 msgid "_OK"
 msgstr "_Budiž"
@@ -929,25 +933,33 @@ msgstr "Přejít na zprávu"
 msgid "Enter message number:"
 msgstr "Zadejte číslo zprávy:"
 
-#: src/gtr-languages-fetcher.ui:44
-msgid "_Team email:"
-msgstr "_E-mail týmu:"
+#: src/gtr-lang-button.ui:61 src/gtr-lang-button.ui:70
+msgid "Choose Language"
+msgstr "Vybrat jazyk"
 
-#: src/gtr-languages-fetcher.ui:59
-msgid "Transfer en_coding:"
-msgstr "Kó_dování přenosu:"
+#: src/gtr-languages-fetcher.ui:46
+msgid "_Language"
+msgstr "_Jazyk"
+
+#: src/gtr-languages-fetcher.ui:60
+msgid "Language _code"
+msgstr "_Kód jazyka"
 
 #: src/gtr-languages-fetcher.ui:74
 msgid "Character _set"
 msgstr "Znaková _sada"
 
-#: src/gtr-languages-fetcher.ui:89
-msgid "Language _code:"
-msgstr "_Kód jazyka:"
+#: src/gtr-languages-fetcher.ui:88
+msgid "Transfer en_coding"
+msgstr "Kó_dování přenosu"
 
-#: src/gtr-languages-fetcher.ui:221
-msgid "_Plural forms:"
-msgstr "Formy _množného čísla:"
+#: src/gtr-languages-fetcher.ui:102
+msgid "_Plural forms"
+msgstr "Formy _množného čísla"
+
+#: src/gtr-languages-fetcher.ui:200
+msgid "Edit options manually"
+msgstr "Upravit volby ručně"
 
 #: src/gtr-message-table.c:255
 msgid "Original Message"
@@ -1215,31 +1227,35 @@ msgstr "Upravit profil"
 msgid "Profiles"
 msgstr "Profily"
 
-#: src/gtr-profile-dialog.c:72
+#: src/gtr-profile-dialog.c:73
 msgid "Gtranslator Profile"
 msgstr "Profil aplikace Gtranslator"
 
-#: src/gtr-profile-dialog.ui:57
+#: src/gtr-profile-dialog.ui:68
+msgid "_Name"
+msgstr "_Název"
+
+#: src/gtr-profile-dialog.ui:96
 msgid "Profile Information"
 msgstr "Údaje profilu"
 
-#: src/gtr-profile-dialog.ui:99
-msgid "_Name:"
-msgstr "_Název:"
-
-#: src/gtr-profile-dialog.ui:136
+#: src/gtr-profile-dialog.ui:113
 msgid "Translator Information"
 msgstr "Údaje o překladateli"
 
-#: src/gtr-profile-dialog.ui:181
-msgid "_Email:"
-msgstr "_E-mail:"
+#: src/gtr-profile-dialog.ui:131
+msgid "N_ame"
+msgstr "_Jméno"
 
-#: src/gtr-profile-dialog.ui:197
-msgid "N_ame:"
-msgstr "_Jméno:"
+#: src/gtr-profile-dialog.ui:146
+msgid "_Email"
+msgstr "_E-mail"
 
-#: src/gtr-profile-dialog.ui:246
+#: src/gtr-profile-dialog.ui:160
+msgid "_Team email"
+msgstr "_E-mail týmu"
+
+#: src/gtr-profile-dialog.ui:209
 msgid "Language Settings"
 msgstr "Jazyková nastavení"
 
@@ -1539,3 +1555,6 @@ msgstr ""
 "%s\n"
 "Spuštěním „%s --help“ se zobrazí úplný seznam dostupných přepínačů příkazové "
 "řádky.\n"
+
+#~ msgid "Language Code:"
+#~ msgstr "Kód jazyka:"
