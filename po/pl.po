@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-10-15 16:02+0000\n"
-"PO-Revision-Date: 2018-10-15 18:05+0200\n"
+"POT-Creation-Date: 2018-10-26 19:13+0000\n"
+"PO-Revision-Date: 2018-10-28 17:44+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -708,7 +708,7 @@ msgstr "_O programie"
 msgid "_Quit"
 msgstr "Za_kończ"
 
-#: src/gtr-assistant.c:127
+#: src/gtr-assistant.c:128
 #, c-format
 msgid ""
 "Profile name: %s\n"
@@ -731,32 +731,36 @@ msgstr ""
 "Kodowanie przesyłania: %s\n"
 "Forma liczby mnogiej: %s\n"
 
-#: src/gtr-assistant.c:166
+#: src/gtr-assistant.c:167
 msgid "This assistant will help you to create the main profile."
 msgstr "Ten asystent pomoże utworzyć główny profil."
 
-#: src/gtr-assistant.c:171
+#: src/gtr-assistant.c:172
 msgid "Assistant"
 msgstr "Asystent"
 
-#: src/gtr-assistant.c:245
-msgid "Profile name:"
-msgstr "Nazwa profilu:"
+#: src/gtr-assistant.c:258
+msgid "Profile name"
+msgstr "Nazwa profilu"
 
-#: src/gtr-assistant.c:289
-msgid "Translator email:"
-msgstr "Adres e-mail tłumacza:"
+#: src/gtr-assistant.c:302
+msgid "Translator email"
+msgstr "Adres e-mail tłumacza"
 
-#: src/gtr-assistant.c:304 src/gtr-preferences-dialog.c:521
+#: src/gtr-assistant.c:324
+msgid "Team email"
+msgstr "Adres e-mail zespołu"
+
+#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:521
 #: src/gtr-window.c:550
 msgid "Profile"
 msgstr "Profil"
 
-#: src/gtr-assistant.c:396
+#: src/gtr-assistant.c:429
 msgid "Language"
 msgstr "Język"
 
-#: src/gtr-assistant.c:417
+#: src/gtr-assistant.c:450
 msgid "Confirmation"
 msgstr "Potwierdzenie"
 
@@ -766,7 +770,7 @@ msgstr "Zamknij _bez zapisywania"
 
 #: src/gtr-close-confirmation-dialog.c:126 src/gtr-file-dialogs.c:45
 #: src/gtr-jump-dialog.c:90 src/gtr-preferences-dialog.c:394
-#: src/gtr-profile-dialog.c:70
+#: src/gtr-profile-dialog.c:71
 #: src/translation-memory/gtr-translation-memory-dialog.c:101
 msgid "_Cancel"
 msgstr "_Anuluj"
@@ -882,11 +886,11 @@ msgstr "Imię i _nazwisko tłumacza:"
 msgid "Translator’s _email:"
 msgstr "Adres _e-mail tłumacza:"
 
-#: src/gtr-header-dialog.ui:117 src/gtr-languages-fetcher.ui:104
+#: src/gtr-header-dialog.ui:117
 msgid "_Language:"
 msgstr "_Język:"
 
-#: src/gtr-header-dialog.ui:130 src/gtr-languages-fetcher.ui:89
+#: src/gtr-header-dialog.ui:130
 msgid "Language _code:"
 msgstr "_Kod języka:"
 
@@ -930,8 +934,8 @@ msgstr "Projekt"
 msgid "Comment"
 msgstr "Komentarz"
 
-#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:163
-#: src/gtr-profile-dialog.c:168
+#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
+#: src/gtr-profile-dialog.c:170
 #: src/translation-memory/gtr-translation-memory-dialog.c:103
 msgid "_OK"
 msgstr "_OK"
@@ -944,21 +948,33 @@ msgstr "Przejście do komunikatu"
 msgid "Enter message number:"
 msgstr "Numer komunikatu:"
 
-#: src/gtr-languages-fetcher.ui:44
-msgid "_Team email:"
-msgstr "Adres e-mail _zespołu:"
+#: src/gtr-lang-button.ui:61 src/gtr-lang-button.ui:70
+msgid "Choose Language"
+msgstr "Wybór języka"
 
-#: src/gtr-languages-fetcher.ui:59
-msgid "Transfer en_coding:"
-msgstr "Kodowanie prze_syłania:"
+#: src/gtr-languages-fetcher.ui:46
+msgid "_Language"
+msgstr "_Język"
+
+#: src/gtr-languages-fetcher.ui:60
+msgid "Language _code"
+msgstr "_Kod języka"
 
 #: src/gtr-languages-fetcher.ui:74
 msgid "Character _set"
 msgstr "_Zestaw znaków"
 
-#: src/gtr-languages-fetcher.ui:221
-msgid "_Plural forms:"
-msgstr "_Formy liczby mnogiej:"
+#: src/gtr-languages-fetcher.ui:88
+msgid "Transfer en_coding"
+msgstr "Kodowanie prze_syłania"
+
+#: src/gtr-languages-fetcher.ui:102
+msgid "_Plural forms"
+msgstr "_Formy liczby mnogiej"
+
+#: src/gtr-languages-fetcher.ui:200
+msgid "Edit options manually"
+msgstr "Ręczna modyfikacja opcji"
 
 #: src/gtr-message-table.c:255
 msgid "Original Message"
@@ -1227,31 +1243,35 @@ msgstr "Modyfikuj profil"
 msgid "Profiles"
 msgstr "Profile"
 
-#: src/gtr-profile-dialog.c:72
+#: src/gtr-profile-dialog.c:73
 msgid "Gtranslator Profile"
 msgstr "Profil programu gtranslator"
 
-#: src/gtr-profile-dialog.ui:57
+#: src/gtr-profile-dialog.ui:68
+msgid "_Name"
+msgstr "_Nazwa"
+
+#: src/gtr-profile-dialog.ui:96
 msgid "Profile Information"
 msgstr "Informacje o profilu"
 
-#: src/gtr-profile-dialog.ui:99
-msgid "_Name:"
-msgstr "_Nazwa:"
-
-#: src/gtr-profile-dialog.ui:136
+#: src/gtr-profile-dialog.ui:113
 msgid "Translator Information"
 msgstr "Informacje o tłumaczu"
 
-#: src/gtr-profile-dialog.ui:181
-msgid "_Email:"
-msgstr "Adres _e-mail:"
+#: src/gtr-profile-dialog.ui:131
+msgid "N_ame"
+msgstr "_Imię i nazwisko"
 
-#: src/gtr-profile-dialog.ui:197
-msgid "N_ame:"
-msgstr "N_azwa:"
+#: src/gtr-profile-dialog.ui:146
+msgid "_Email"
+msgstr "Adres _e-mail"
 
-#: src/gtr-profile-dialog.ui:246
+#: src/gtr-profile-dialog.ui:160
+msgid "_Team email"
+msgstr "Adres e-mail _zespołu"
+
+#: src/gtr-profile-dialog.ui:209
 msgid "Language Settings"
 msgstr "Ustawienia języka"
 
