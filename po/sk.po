@@ -10,10 +10,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-01-23 18:04+0000\n"
-"PO-Revision-Date: 2017-01-29 11:25+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
+"POT-Creation-Date: 2018-10-26 19:13+0000\n"
+"PO-Revision-Date: 2018-10-28 12:11+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: slovenčina <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -21,19 +20,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.2\n"
 
-#: ../data/gtranslator.appdata.xml.in.h:1
-#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:6
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:555
+#: src/gtr-window.ui:25
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
-#: ../data/gtranslator.appdata.xml.in.h:2
-#: ../data/desktop/gtranslator.desktop.in.h:4
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
+#: data/org.gnome.Gtranslator.desktop.in.in:5
 msgid "Translate and localize applications and libraries"
 msgstr "Prekladá a lokalizuje aplikácie a knižnice"
 
-#: ../data/gtranslator.appdata.xml.in.h:3
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:9
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -49,7 +49,7 @@ msgstr ""
 "tabuľka správ (pre lepší prehľad nad prekladmi/správami v súbore po), "
 "jednoduchá orientácia a upravovanie správ prekladu a komentárov k prekladu."
 
-#: ../data/gtranslator.appdata.xml.in.h:4
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:18
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
 "alternate language, insert tags, integration with subversion and a source "
@@ -59,19 +59,20 @@ msgstr ""
 "zásuvnými modulmi ako je iný jazyk, vkladanie značiek, integrácia do systému "
 "subversion a prehliadač zdrojového kódu."
 
-#: ../data/desktop/gtranslator.desktop.in.h:2
+#: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
 msgstr "Editor PO súborov"
 
-#: ../data/desktop/gtranslator.desktop.in.h:3
-msgid "Gtranslator PO File Editor"
-msgstr "Gtranslator - editor PO súborov"
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: data/org.gnome.Gtranslator.desktop.in.in:7
+msgid "@icon@"
+msgstr ""
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:1
+#: data/org.gnome.Gtranslator.gschema.xml.in:24
 msgid "Warn if file contains fuzzy translations"
 msgstr "Upozorniť, ak súbor obsahuje nepresné preklady"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:2
+#: data/org.gnome.Gtranslator.gschema.xml.in:25
 msgid ""
 "If true, warn the user when saving a PO translation file containing fuzzy "
 "strings."
@@ -79,526 +80,518 @@ msgstr ""
 "Ak je true, varuje používateľa pri ukladaní PO súboru obsahujúceho nepresné "
 "reťazce."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:3
+#: data/org.gnome.Gtranslator.gschema.xml.in:32
 msgid "Auto save files"
 msgstr "Automatické ukladanie súborov"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:4
+#: data/org.gnome.Gtranslator.gschema.xml.in:33
 msgid "If true, automatically save files at specified intervals."
 msgstr "Ak je true, automaticky ukladá súbory v určených intervaloch."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:5
+#: data/org.gnome.Gtranslator.gschema.xml.in:39
 msgid "Auto save interval"
 msgstr "Interval automatického ukladania"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:6
+#: data/org.gnome.Gtranslator.gschema.xml.in:40
 msgid "Interval in minutes at which to automatically save files."
 msgstr "Interval (v minútach), po ktorom sa majú automaticky ukladať súbory."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:7
+#: data/org.gnome.Gtranslator.gschema.xml.in:46
 msgid "Create backup before saving"
 msgstr "Vytvárať záložnú kópiu pred uložením"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:8
+#: data/org.gnome.Gtranslator.gschema.xml.in:47
 msgid "If true, create a backup copy of a file before saving it."
 msgstr "Ak je true, vytvára záložnú kópiu súboru pred jeho uložením."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:9
+#: data/org.gnome.Gtranslator.gschema.xml.in:53
 msgid "Use profile values for header"
 msgstr "Pre hlavičku použiť hodnoty profilu"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:10
+#: data/org.gnome.Gtranslator.gschema.xml.in:54
 msgid ""
 "If true, overwrite the values in the PO header with those in the active "
 "profile."
 msgstr "Ak je true, prepíše hodnoty v hlavičke PO tými z aktívneho profilu."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:11
+#: data/org.gnome.Gtranslator.gschema.xml.in:63
 msgid "Highlight syntax in edit fields"
 msgstr "Zvýrazniť syntax v editačných poliach"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:12
+#: data/org.gnome.Gtranslator.gschema.xml.in:64
 msgid "If true, apply syntax highlighting to strings in edit fields."
 msgstr ""
 "Ak je true, aplikuje zvýrazňovanie syntaxe na reťazce v editačných poliach."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:13
+#: data/org.gnome.Gtranslator.gschema.xml.in:70
 msgid "Make whitespace visible"
 msgstr "Zviditeľniť prázdne miesta"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:14
+#: data/org.gnome.Gtranslator.gschema.xml.in:71
 msgid "If true, display whitespace in strings as representative symbols."
 msgstr "Ak je true, zobrazí prázdne miesta v reťazcoch ako zástupné symboly."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:15
-msgid "Use custom font"
-msgstr "Použiť vlastné písmo"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:16
-msgid "If true, use a custom font for edit fields."
-msgstr "Ak je true, použije vlastné písmo v editačných poliach."
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:17
-msgid "Editor font"
-msgstr "Písmo editora"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:18
-msgid "Custom font to use for edit fields."
-msgstr "Vlastné písmo použité pre editačné polia."
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:19
+#: data/org.gnome.Gtranslator.gschema.xml.in:77
 msgid "Remove fuzzy status when message is changed"
 msgstr "Odstrániť stav nepresného prekladu pri zmene správy"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:20
+#: data/org.gnome.Gtranslator.gschema.xml.in:78
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr "Ak je true, odstráni stav nepresnosti pri zmene prekladu."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:21
+#: data/org.gnome.Gtranslator.gschema.xml.in:84
 msgid "Check spelling"
 msgstr "Kontrola pravopisu"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:22
+#: data/org.gnome.Gtranslator.gschema.xml.in:85
 msgid "If true, check the spelling of translated messages."
 msgstr "Ak je true, kontroluje pravopis preložených správ."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:23
+#: data/org.gnome.Gtranslator.gschema.xml.in:93
 msgid "Side panel switcher style"
 msgstr "Štýl prepínača bočného panelu"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:24
+#: data/org.gnome.Gtranslator.gschema.xml.in:94
 msgid "Style for switchers in the side panel."
 msgstr "Štýl, ktorý sa má použiť na prepínače v bočnom paneli."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:25
+#: data/org.gnome.Gtranslator.gschema.xml.in:100
 msgid "Color scheme"
 msgstr "Farebná schéma"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:26
+#: data/org.gnome.Gtranslator.gschema.xml.in:101
 msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
 msgstr ""
 "Názov farebnej schémy gtksourceview, ktorá sa má použiť pri zvýrazňovaní "
 "syntaxe."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:27
+#: data/org.gnome.Gtranslator.gschema.xml.in:107
 msgid "Message list sort order"
 msgstr "Zoradiť správy podľa:"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:28
+#: data/org.gnome.Gtranslator.gschema.xml.in:108
+#, fuzzy
+#| msgid ""
+#| "Sort order to use in the message list. Possible values are \"status\", "
+#| "\"id\", \"original-text\" and \"translated-text\"."
 msgid ""
-"Sort order to use in the message list. Possible values are \"status\", \"id"
-"\", \"original-text\" and \"translated-text\"."
+"Sort order to use in the message list. Possible values are “status”, “id”, "
+"“original-text” and “translated-text”."
 msgstr ""
 "Stĺpec, podľa ktorého sa má zoradiť zoznam správ. Možné hodnoty sú \"status"
 "\", \"id\", \"original_text\" a \"translated_text\"."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:29
+#: data/org.gnome.Gtranslator.gschema.xml.in:143
 msgid "Active plugins"
 msgstr "Aktívne zásuvné moduly"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:30
+#: data/org.gnome.Gtranslator.gschema.xml.in:144
+#, fuzzy
+#| msgid ""
+#| "List of active plugins. It contains the \"Location\" of the active "
+#| "plugins. See the .gtranslator-plugin file for obtaining the \"Location\" "
+#| "of a given plugin."
 msgid ""
-"List of active plugins. It contains the \"Location\" of the active plugins. "
-"See the .gtranslator-plugin file for obtaining the \"Location\" of a given "
+"List of active plugins. It contains the “Location” of the active plugins. "
+"See the .gtranslator-plugin file for obtaining the “Location” of a given "
 "plugin."
 msgstr ""
 "Zoznam aktívnych zásuvných modulov. Obsahuje vlastnosti \"Location\" "
 "aktívnych zásuvných modulov. Vlastnosť \"Location\" daného zásuvného modulu "
 "môžete získať zo súboru \".gtranslator-plugin\"."
 
-#: ../data/po.lang.h:1
-msgid "Others"
-msgstr "Ostatné"
-
-#: ../data/po.lang.h:2
-msgid "gtranslator highlight"
-msgstr "Zvýrazňovanie pre gtranslator"
-
-#: ../data/po.lang.h:3
-msgid "Tag"
-msgstr "Značka"
-
-#: ../data/po.lang.h:4
-msgid "Special variable"
-msgstr "Špeciálna premenná"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:126
+#: plugins/alternate-language/gtr-alternate-language-panel.c:126
 msgid "Message not found"
 msgstr "Správa sa nenašla"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:229
+#: plugins/alternate-language/gtr-alternate-language-panel.c:229
 msgid "Open file for alternate language"
 msgstr "Otvoriť súbor pre iný jazyk"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:254
+#: plugins/alternate-language/gtr-alternate-language-panel.c:254
 msgid "File closed"
 msgstr "Súbor zatvorený"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:322
-msgctxt "alternate lang"
+#: plugins/alternate-language/gtr-alternate-language-panel.c:322
+#: src/gtr-file-dialogs.c:48
 msgid "_Open"
 msgstr "_Otvoriť"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:328
-msgctxt "alternate lang"
+#: plugins/alternate-language/gtr-alternate-language-panel.c:328
+#: src/gtr-header-dialog.c:278 src/gtr-io-error-info-bar.c:123
+#: src/gtr-preferences-dialog.c:588 src/gtr-search-dialog.c:391
+#: src/translation-memory/gtr-translation-memory-dialog.c:283
+#, fuzzy
+#| msgctxt "alternate lang"
+#| msgid "_Close"
 msgid "_Close"
 msgstr "Za_vrieť"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:334
-msgctxt "alternate lang"
+#: plugins/alternate-language/gtr-alternate-language-panel.c:334
+#, fuzzy
+#| msgctxt "alternate lang"
+#| msgid "Co_py"
 msgid "Co_py"
 msgstr "_Kopírovať"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:363
-msgid "There isn't any file loaded"
+#: plugins/alternate-language/gtr-alternate-language-panel.c:363
+#, fuzzy
+#| msgid "There isn't any file loaded"
+msgid "There isn’t any file loaded"
 msgstr "Nie je načítaný žiadny súbor"
 
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:81
+#: plugins/alternate-language/gtr-alternate-language-plugin.c:81
 msgid "_Alternate Language"
 msgstr "_Iný jazyk"
 
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:82
+#: plugins/alternate-language/gtr-alternate-language-plugin.c:82
 msgid "Show the Alternate Language panel"
 msgstr "Zobraziť panel Iný jazyk"
 
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:222
-#: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:1
+#: plugins/alternate-language/gtr-alternate-language-plugin.c:222
+#: plugins/alternate-language/gtr-alternate-language.plugin.desktop.in:5
 msgid "Alternate Language"
 msgstr "Iný jazyk"
 
-#: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:2
-msgid "Load an alternate language."
-msgstr "Načíta iný jazyk."
-
-#. ex:et:ts=4:
-#: ../plugins/charmap/charmap/__init__.py:42
-#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:1
+#: plugins/charmap/charmap/__init__.py:42
+#: plugins/charmap/gtr-charmap.plugin.desktop.in:6
 msgid "Character Map"
 msgstr "Mapa znakov"
 
-#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:2
-msgid "Insert special characters just by clicking on them."
-msgstr "Vkladajte špeciálne znaky iba pomocou kliknutia."
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: plugins/charmap/gtr-charmap.plugin.desktop.in:9
+msgid "accessories-character-map"
+msgstr ""
 
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:1
+#: plugins/codeview/gtr-codeview-dialog.ui:8
 msgid "Source View Settings"
 msgstr "Nastavenia zobrazenia zdrojového kódu"
 
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:2
+#: plugins/codeview/gtr-codeview-dialog.ui:58
 msgid "Use external editor"
 msgstr "Použiť externý editor"
 
 # V nastaveniach externého editora zdrojového kódu
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:3
+#: plugins/codeview/gtr-codeview-dialog.ui:83
 msgid "Program command:"
 msgstr "Príkaz pre program:"
 
 # V nastaveniach externého editora zdrojového kódu
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:4
+#: plugins/codeview/gtr-codeview-dialog.ui:120
 msgid "Line command:"
 msgstr "Prepínač pre číslo riadka:"
 
-#: ../plugins/codeview/gtr-codeview-plugin.c:129
-#, c-format
-msgid "Please install \"%s\" to be able to show the file"
+#: plugins/codeview/gtr-codeview-plugin.c:129
+#, fuzzy, c-format
+#| msgid "Please install \"%s\" to be able to show the file"
+msgid "Please install “%s” to be able to show the file"
 msgstr "Nainštalujte prosím „%s“, aby bolo možné zobraziť súbor"
 
-#: ../plugins/codeview/gtr-codeview-plugin.c:497
+#: plugins/codeview/gtr-codeview-plugin.c:497
 msgid "Paths:"
 msgstr "Cesty:"
 
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:1
+#: plugins/codeview/gtr-codeview.plugin.desktop.in:5
 msgid "Source Code View"
 msgstr "Zobrazenie zdrojového kódu"
 
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:2
-msgid "Show the message in the source code."
-msgstr "Zobrazí správu v zdrojovom kóde."
-
-#: ../plugins/codeview/gtr-viewer.c:80
+#: plugins/codeview/gtr-viewer.c:80
 msgid "Source Viewer"
 msgstr "Prehliadač zdrojového kódu"
 
-#: ../plugins/codeview/gtr-viewer.ui.h:1
+#: plugins/codeview/gtr-viewer.ui:59
 msgid "Source code"
 msgstr "Zdrojový kód"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:1
+#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:5
 msgid "Use the System Editor"
 msgstr "Použiť systémový editor"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:2
+#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:6
 msgid "Whether use the system editor to show the source code"
 msgstr "Použije systémový editor na zobrazenie zdrojového kódu"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:3
+#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:10
 msgid "The Editor to Launch"
 msgstr "Editor, ktorý sa má spustiť"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:4
+#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:11
 msgid "The command to launch the editor you want to use"
 msgstr "Príkaz na spustenie editora, ktorý chcete použiť"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:5
+#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:15
 msgid "Arguments for the Command"
 msgstr "Parametre pre príkaz"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:6
+#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:16
 msgid "Arguments to pass to the program command line to select the line"
 msgstr ""
 "Parametre, ktoré sa majú pridať do príkazového riadka programu na vybratie "
 "riadka"
 
-#: ../plugins/dictionary/gtr-dictionary-plugin.c:140
-#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:1
+#: plugins/dictionary/gtr-dictionary-plugin.c:140
+#: plugins/dictionary/gtr-dict.plugin.desktop.in:5
 msgid "Dictionary"
 msgstr "Slovník"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:166
-#, c-format
-msgid "No dictionary source available with name '%s'"
+#: plugins/dictionary/gtr-dict-panel.c:166
+#, fuzzy, c-format
+#| msgid "No dictionary source available with name '%s'"
+msgid "No dictionary source available with name “%s”"
 msgstr "Nie je dostupný žiadny zdroj slovníka s názvom „%s“"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:170
+#: plugins/dictionary/gtr-dict-panel.c:170
 msgid "Unable to find dictionary source"
 msgstr "Nepodarilo sa nájsť zdroj slovníka"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:185
-#, c-format
-msgid "No context available for source '%s'"
+#: plugins/dictionary/gtr-dict-panel.c:185
+#, fuzzy, c-format
+#| msgid "No context available for source '%s'"
+msgid "No context available for source “%s”"
 msgstr "Nie je dostupný žiadny kontext pre zdroj „%s“"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:189
+#: plugins/dictionary/gtr-dict-panel.c:189
 msgid "Unable to create a context"
 msgstr "Nie je možné vytvoriť kontext"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:272
-#, c-format
-msgid "Dictionary source '%s' selected"
+#: plugins/dictionary/gtr-dict-panel.c:272
+#, fuzzy, c-format
+#| msgid "Dictionary source '%s' selected"
+msgid "Dictionary source “%s” selected"
 msgstr "Vybraný zdroj slovníka „%s“"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:291
-#, c-format
-msgid "Strategy '%s' selected"
+#: plugins/dictionary/gtr-dict-panel.c:291
+#, fuzzy, c-format
+#| msgid "Strategy '%s' selected"
+msgid "Strategy “%s” selected"
 msgstr "Vybraná stratégia „%s“"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:309
-#, c-format
-msgid "Database '%s' selected"
+#: plugins/dictionary/gtr-dict-panel.c:309
+#, fuzzy, c-format
+#| msgid "Database '%s' selected"
+msgid "Database “%s” selected"
 msgstr "Vybraná databáza „%s“"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:353
-#, c-format
-msgid "Word '%s' selected"
+#: plugins/dictionary/gtr-dict-panel.c:353
+#, fuzzy, c-format
+#| msgid "Word '%s' selected"
+msgid "Word “%s” selected"
 msgstr "Vybrané slovo „%s“"
 
 #. speller
-#: ../plugins/dictionary/gtr-dict-panel.c:375
+#: plugins/dictionary/gtr-dict-panel.c:375
 msgid "Double-click on the word to look up"
 msgstr "Dvakrát kliknite na slovo, ktoré chcete vyhľadať"
 
 #. strat-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:380
+#: plugins/dictionary/gtr-dict-panel.c:380
 msgid "Double-click on the matching strategy to use"
 msgstr "Dvakrát kliknite na stratégiu hľadania zhôd, ktorú chcete použiť"
 
 #. source-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:386
+#: plugins/dictionary/gtr-dict-panel.c:386
 msgid "Double-click on the source to use"
 msgstr "Dvakrát kliknite na zdroj, ktorý chcete použiť"
 
 #. db-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:396
+#: plugins/dictionary/gtr-dict-panel.c:396
 msgid "Double-click on the database to use"
 msgstr "Dvakrát kliknite na databázu, ktorú chcete použiť"
 
 #. Look up Button
-#: ../plugins/dictionary/gtr-dict-panel.c:502
+#: plugins/dictionary/gtr-dict-panel.c:502
 msgid "Look _up:"
 msgstr "Vy_hľadať:"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:559
+#: plugins/dictionary/gtr-dict-panel.c:559
 msgid "Similar words"
 msgstr "Podobné slová"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:572
+#: plugins/dictionary/gtr-dict-panel.c:572
 msgid "Available dictionaries"
 msgstr "Dostupné slovníky"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:586
+#: plugins/dictionary/gtr-dict-panel.c:586
 msgid "Available strategies"
 msgstr "Dostupné stratégie"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:596
+#: plugins/dictionary/gtr-dict-panel.c:596
 msgid "Dictionary sources"
 msgstr "Zdroje slovníkov"
 
-#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:2
-msgid "Look up words in a dictionary."
-msgstr "Vyhľadávajte slová v slovníku."
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: plugins/dictionary/gtr-dict.plugin.desktop.in:8
+msgid "accessories-dictionary"
+msgstr ""
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:1
+#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:5
 msgid "Database"
 msgstr "Databáza"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:2
+#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:6
 msgid "Word database"
 msgstr "Databáza slov"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:3
+#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:10
 msgid "Source Name"
 msgstr "Názov zdroja"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:4
+#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:14
 msgid "Strategy"
 msgstr "Stratégia"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:5
+#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:18
 msgid "Panel Position"
 msgstr "Umiestnenie panela"
 
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:67
+#: plugins/fullscreen/gtr-fullscreen-plugin.c:67
 msgid "_Fullscreen"
 msgstr "Na _celú obrazovku"
 
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:68
+#: plugins/fullscreen/gtr-fullscreen-plugin.c:68
 msgid "Place window on fullscreen state"
 msgstr "Prepne okno do režimu celej obrazovky"
 
-#: ../plugins/fullscreen/gtr-fullscreen.plugin.desktop.in.h:1
+#: plugins/fullscreen/gtr-fullscreen.plugin.desktop.in:5
 msgid "Fullscreen"
 msgstr "Na celú obrazovku"
 
-#: ../plugins/fullscreen/gtr-fullscreen.plugin.desktop.in.h:2
-msgid "Place window in the fullscreen state."
-msgstr "Prepne okno do režimu celej obrazovky."
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:113
+#: plugins/insert-params/gtr-insert-params-plugin.c:113
 msgid "_Next Param"
 msgstr "N_asledujúci parameter"
 
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:114
+#: plugins/insert-params/gtr-insert-params-plugin.c:114
 msgid "Insert the next param of the message"
 msgstr "Vloží nasledujúci parameter správy"
 
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:116
+#: plugins/insert-params/gtr-insert-params-plugin.c:116
 msgid "_Insert Params"
 msgstr "_Vložiť parametre"
 
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:117
+#: plugins/insert-params/gtr-insert-params-plugin.c:117
 msgid "_Next Tag"
 msgstr "Nasledujúca _značka"
 
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:118
+#: plugins/insert-params/gtr-insert-params-plugin.c:118
 msgid "Insert the next tag of the message"
 msgstr "Vloží nasledujúcu značku správy"
 
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:120
+#: plugins/insert-params/gtr-insert-params-plugin.c:120
 msgid "_Insert Tags"
 msgstr "Vlož_iť značky"
 
-#: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:1
+#: plugins/insert-params/gtr-insert-params.plugin.desktop.in:5
 msgid "Insert Params or Tags"
 msgstr "Vkladanie parametrov alebo značiek"
 
-#: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:2
-msgid "Parameters and tags detection featuring easy insertion."
-msgstr "Zisťovanie parametrov a značiek zahŕňajúce jednoduché vkladanie."
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
+#: plugins/translation-memory/gtr-translation-memory-dialog.c:167
+#: src/translation-memory/gtr-translation-memory-dialog.c:166
 msgid "Strings added to database"
 msgstr "Reťazce boli pridané do databázy"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:224
+#: plugins/translation-memory/gtr-translation-memory-dialog.c:224
+#: src/translation-memory/gtr-translation-memory-dialog.c:224
 msgid "Please specify a valid path to build the translation memory"
 msgstr ""
 "Prosím, určite platnú cestu, do ktorej sa má vygenerovať pamäť prekladov"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:291
+#: plugins/translation-memory/gtr-translation-memory-dialog.c:291
+#: src/translation-memory/gtr-translation-memory-dialog.c:287
 msgid "Gtranslator Translation Memory Manager"
 msgstr "Správca pamäte prekladov programu Gtranslator"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:1
+#: plugins/translation-memory/gtr-translation-memory-dialog.ui:58
+#: src/translation-memory/gtr-translation-memory-dialog.ui:58
 msgid "Database:"
 msgstr "Databáza:"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:2
+#: plugins/translation-memory/gtr-translation-memory-dialog.ui:101
+#: src/translation-memory/gtr-translation-memory-dialog.ui:101
 msgid "Select the directory which contains PO files:"
 msgstr "Vyberte priečinok, ktorý obsahuje PO súbory:"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:3
+#: plugins/translation-memory/gtr-translation-memory-dialog.ui:152
+#: src/translation-memory/gtr-translation-memory-dialog.ui:152
 msgid "Add to Database"
 msgstr "Pridať do databázy"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:4
+#: plugins/translation-memory/gtr-translation-memory-dialog.ui:209
+#: src/translation-memory/gtr-translation-memory-dialog.ui:209
 msgid "Configuration:"
 msgstr "Konfigurácia:"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:5
+#: plugins/translation-memory/gtr-translation-memory-dialog.ui:252
+#: src/translation-memory/gtr-translation-memory-dialog.ui:252
 msgid "Use only files with this name:"
 msgstr "Použiť len súbory s týmto názvom:"
 
-#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:1
-#: ../plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
+#: plugins/translation-memory/gtr-translation-memory.plugin.desktop.in:5
+#: plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
 msgid "Translation Memory"
 msgstr "Pamäť prekladov"
 
-#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:2
-msgid "Get translation suggestions from a data base."
-msgstr "Získa návrhy na preklad z databázy."
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:207
+#: plugins/translation-memory/gtr-translation-memory-ui.c:207
 #, c-format
 msgid "Insert Option nº %d"
 msgstr "Vložiť voľbu č. %d"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:325
+#: plugins/translation-memory/gtr-translation-memory-ui.c:325
+#: src/translation-memory/gtr-translation-memory-ui.c:255
 msgid "_Use this translation"
 msgstr "Po_užiť tento preklad"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:330
+#: plugins/translation-memory/gtr-translation-memory-ui.c:330
+#: src/translation-memory/gtr-translation-memory-ui.c:260
 msgid "_Remove"
 msgstr "O_dstrániť"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:445
+#: plugins/translation-memory/gtr-translation-memory-ui.c:445
+#: src/translation-memory/gtr-translation-memory-ui.c:371
 msgid "Shortcut"
 msgstr "Skratka"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:454
+#: plugins/translation-memory/gtr-translation-memory-ui.c:454
+#: src/translation-memory/gtr-translation-memory-ui.c:380
 msgid "Level"
 msgstr "Úroveň"
 
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:463
+#: plugins/translation-memory/gtr-translation-memory-ui.c:463
+#: src/translation-memory/gtr-translation-memory-ui.c:389
 msgid "String"
 msgstr "Reťazec"
 
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:81
+#: plugins/translation-memory/gtr-translation-memory-window-activatable.c:81
 msgid "_Build Translation Memory"
 msgstr "_Zostaviť pamäť prekladov"
 
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:82
+#: plugins/translation-memory/gtr-translation-memory-window-activatable.c:82
+#: src/gtr-notebook.ui:164
 msgid "Build translation memory"
 msgstr "Zostaví pamäť prekladov"
 
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
+#: plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
 msgid "_Translation Memory"
 msgstr "_Pamäť prekladov"
 
 # OM: Toto je názov konfiguračného nastavenia. Jeho popis hovorí, že je to priečinok obsahujúci PO súbory.
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:1
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
 msgid "PO directory"
 msgstr "Priečinok s PO súbormi"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:2
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
 msgid "Directory containing PO files to add to the translation memory."
 msgstr ""
 "Priečinok obsahujúci PO súbory, ktoré sa majú pridať do pamäte prekladov."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:3
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
 msgid "Restrict search by filename"
 msgstr "Obmedziť hľadanie podľa názvu súboru"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:4
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
 msgid ""
 "If true, only include files with a specified filename when searching the "
 "translation memory."
@@ -606,21 +599,25 @@ msgstr ""
 "Ak je true, zahrnie iba súbory s určitým názvom pri prehľadávaní pamäte "
 "prekladov."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:5
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
 msgid "Filename to restrict search to"
 msgstr "Názov súboru, na ktorý sa obmedzí hľadanie"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:6
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
 msgid ""
 "Filename to which searching of the translation memory should be restricted."
 msgstr ""
 "Názov súboru, na ktorý by sa malo obmedziť prehľadávanie pamäte prekladov."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:7
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
 msgid "Maximum number of missing words"
 msgstr "Maximálny počet chýbajúcich slov"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:8
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
 msgid ""
 "Maximum number of words that can be missing from a message displayed as a "
 "match by the translation memory."
@@ -628,11 +625,13 @@ msgstr ""
 "Maximálny počet slov, ktoré môžu chýbať v správe pri porovnávaní s pamäťou "
 "prekladov, aby sa zobrazila ako zhodná."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:9
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
 msgid "Maximum difference in message length"
 msgstr "Maximálny rozdiel v dĺžke správy"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:10
+#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
 msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
@@ -640,38 +639,30 @@ msgstr ""
 "Maximálny rozdiel v dĺžke správ pri porovnávaní s pamäťou prekladov, aby sa "
 "zobrazili ako zhodné."
 
-#: ../src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:48
 msgid "Current Maintainers"
 msgstr "Súčasní správcovia"
 
-#: ../src/gtr-actions-app.c:52
-msgid "Current Developers"
-msgstr "Súčasní vývojári"
-
-#: ../src/gtr-actions-app.c:57
+#: src/gtr-actions-app.c:52
 msgid "Previous Developers"
 msgstr "Predchádzajúci vývojári"
 
-#: ../src/gtr-actions-app.c:66
+#: src/gtr-actions-app.c:63
 msgid "Contributors"
 msgstr "Prispievatelia"
 
-#: ../src/gtr-actions-app.c:90
+#: src/gtr-actions-app.c:88
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
 msgstr ""
 "Sada na úpravu súborov s prekladmi určená na lokalizáciu aplikácií a knižníc"
 
-#: ../src/gtr-actions-app.c:106
-msgid "About Gtranslator"
-msgstr "O programe Gtranslator"
-
 #.
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/gtr-actions-app.c:111
+#: src/gtr-actions-app.c:101
 msgid "translator-credits"
 msgstr ""
 "Martin Lacko <lacko@host.sk>\n"
@@ -680,27 +671,29 @@ msgstr ""
 "Ondrej Mosnáček <omosnacek@gmail.com>\n"
 "Dušan Kazik <prescott66@gmail.com>"
 
-#: ../src/gtr-actions-app.c:114
+#: src/gtr-actions-app.c:104
 msgid "Gtranslator Web Site"
 msgstr "Webové stránky programu Gtranslator"
 
-#: ../src/gtr-actions-file.c:191
+#: src/gtr-actions-file.c:200
 msgid "Open file for translation"
 msgstr "Otvoriť súbor na preklad"
 
-#: ../src/gtr-actions-file.c:263 ../src/gtr-actions-file.c:380
+#: src/gtr-actions-file.c:272 src/gtr-actions-file.c:389
 msgid "File saved."
 msgstr "Súbor uložený."
 
-#: ../src/gtr-actions-file.c:311
-msgid "Save file as..."
+#: src/gtr-actions-file.c:320
+#, fuzzy
+#| msgid "Save file as..."
+msgid "Save file as…"
 msgstr "Uložiť súbor ako..."
 
-#: ../src/gtr-actions-file.c:769
+#: src/gtr-actions-file.c:781
 msgid "Files saved."
 msgstr "Súbory uložené."
 
-#: ../src/gtr-actions-search.c:170
+#: src/gtr-actions-search.c:168
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
@@ -708,35 +701,35 @@ msgstr[0] "Nájdených a nahradených %d výskytov"
 msgstr[1] "Nájdený a nahradený %d výskyt"
 msgstr[2] "Nájdené a nahradené %d výskyty"
 
-#: ../src/gtr-actions-search.c:179
+#: src/gtr-actions-search.c:177
 msgid "Found and replaced one occurrence"
 msgstr "Nájdený a nahradený jeden výskyt"
 
-#: ../src/gtr-actions-search.c:191
+#: src/gtr-actions-search.c:189
 msgid "Phrase not found"
 msgstr "Fráza sa nenašla"
 
-#: ../src/gtranslator-menu.ui.h:1
+#: src/gtranslator-menu.ui:7
 msgid "_New Window"
 msgstr "_Nové okno"
 
-#: ../src/gtranslator-menu.ui.h:2
+#: src/gtranslator-menu.ui:13
 msgid "_Preferences"
 msgstr "Nas_tavenia"
 
-#: ../src/gtranslator-menu.ui.h:3
+#: src/gtranslator-menu.ui:19
 msgid "_Help"
 msgstr "_Pomocník"
 
-#: ../src/gtranslator-menu.ui.h:4
+#: src/gtranslator-menu.ui:24
 msgid "_About"
 msgstr "_O programe"
 
-#: ../src/gtranslator-menu.ui.h:5
+#: src/gtranslator-menu.ui:30
 msgid "_Quit"
 msgstr "U_končiť"
 
-#: ../src/gtr-assistant.c:130
+#: src/gtr-assistant.c:128
 #, c-format
 msgid ""
 "Profile name: %s\n"
@@ -759,45 +752,73 @@ msgstr ""
 "Kódovanie prenosu: %s\n"
 "Tvary množného čísla: %s\n"
 
-#: ../src/gtr-assistant.c:169
+#: src/gtr-assistant.c:167
 msgid "This assistant will help you to create the main profile."
 msgstr "Tento asistent vám pomôže vytvoriť hlavný profil."
 
-#: ../src/gtr-assistant.c:174
+#: src/gtr-assistant.c:172
 msgid "Assistant"
 msgstr "Asistent"
 
-#: ../src/gtr-assistant.c:247
-msgid "Profile name:"
+#: src/gtr-assistant.c:258
+#, fuzzy
+#| msgid "Profile name:"
+msgid "Profile name"
 msgstr "Názov profilu:"
 
-#: ../src/gtr-assistant.c:289
-msgid "Translator email:"
+#: src/gtr-assistant.c:302
+#, fuzzy
+#| msgid "Translator email:"
+msgid "Translator email"
 msgstr "Prekladateľov email:"
 
-#: ../src/gtr-assistant.c:303 ../src/gtr-assistant.c:395
-#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:460
+#: src/gtr-assistant.c:324
+#, fuzzy
+#| msgid "_Team email:"
+msgid "Team email"
+msgstr "_Email týmu:"
+
+#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:521
+#: src/gtr-window.c:550
 msgid "Profile"
 msgstr "Profil"
 
-#: ../src/gtr-assistant.c:415
+#: src/gtr-assistant.c:429
+#, fuzzy
+#| msgid "_Language:"
+msgid "Language"
+msgstr "_Jazyk:"
+
+#: src/gtr-assistant.c:450
 msgid "Confirmation"
 msgstr "Potvrdenie"
 
-#: ../src/gtr-close-confirmation-dialog.c:126
+#: src/gtr-close-confirmation-dialog.c:123
 msgid "Close _without Saving"
 msgstr "Zavrieť _bez uloženia"
 
-#: ../src/gtr-close-confirmation-dialog.c:155
+#: src/gtr-close-confirmation-dialog.c:126 src/gtr-file-dialogs.c:45
+#: src/gtr-jump-dialog.c:90 src/gtr-preferences-dialog.c:394
+#: src/gtr-profile-dialog.c:71
+#: src/translation-memory/gtr-translation-memory-dialog.c:101
+msgid "_Cancel"
+msgstr ""
+
+#: src/gtr-close-confirmation-dialog.c:128 src/gtr-file-dialogs.c:47
+msgid "_Save"
+msgstr "_Uložiť"
+
+#: src/gtr-close-confirmation-dialog.c:150
 msgid "Question"
 msgstr "Otázka"
 
-#: ../src/gtr-close-confirmation-dialog.c:370
-#, c-format
-msgid "Save the changes to document \"%s\" before closing?"
+#: src/gtr-close-confirmation-dialog.c:366
+#, fuzzy, c-format
+#| msgid "Save the changes to document \"%s\" before closing?"
+msgid "Save the changes to document “%s” before closing?"
 msgstr "Uložiť zmeny dokumentu „%s“ pred zatvorením?"
 
-#: ../src/gtr-close-confirmation-dialog.c:533
+#: src/gtr-close-confirmation-dialog.c:530
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
@@ -805,7 +826,7 @@ msgstr[0] "Zmeny %d dokumentov budú navždy stratené."
 msgstr[1] "Zmeny %d dokumentu budú navždy stratené."
 msgstr[2] "Zmeny %d dokumentov budú navždy stratené."
 
-#: ../src/gtr-close-confirmation-dialog.c:540
+#: src/gtr-close-confirmation-dialog.c:537
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -814,191 +835,354 @@ msgstr[0] "%d dokumentov má neuložené zmeny. Uložiť ich pred zatvorením?"
 msgstr[1] "%d dokument má neuložené zmeny. Uložiť ich pred zatvorením?"
 msgstr[2] "%d dokumenty majú neuložené zmeny. Uložiť ich pred zatvorením?"
 
-#: ../src/gtr-close-confirmation-dialog.c:561
+#: src/gtr-close-confirmation-dialog.c:558
 msgid "Docum_ents with unsaved changes:"
 msgstr "_Dokumenty s neuloženými zmenami:"
 
-#: ../src/gtr-close-confirmation-dialog.c:565
+#: src/gtr-close-confirmation-dialog.c:562
 msgid "S_elect the documents you want to save:"
 msgstr "_Vyberte dokumenty, ktoré chcete uložiť:"
 
-#: ../src/gtr-close-confirmation-dialog.c:583
+#: src/gtr-close-confirmation-dialog.c:581
 msgid "Saving has been disabled by the system administrator."
 msgstr "Ukladanie bolo zakázané správcom systému."
 
-#: ../src/gtr-close-confirmation-dialog.c:585
-msgid "If you don't save, all your changes will be permanently lost."
+#: src/gtr-close-confirmation-dialog.c:583
+#, fuzzy
+#| msgid "If you don't save, all your changes will be permanently lost."
+msgid "If you don’t save, all your changes will be permanently lost."
 msgstr "Ak neuložíte zmeny, budú navždy stratené."
 
-#: ../src/gtr-context.c:234
+#: src/gtr-context.c:238
 msgid "Notes:"
 msgstr "Poznámky:"
 
-#: ../src/gtr-context.c:242
+#: src/gtr-context.c:246
 msgid "Add Note"
 msgstr "Pridať poznámku"
 
-#: ../src/gtr-context.c:247
+#: src/gtr-context.c:251
 msgid "Edit"
 msgstr "Upraviť"
 
 #. Extracted comments
-#: ../src/gtr-context.c:293
+#: src/gtr-context.c:297
 msgid "Extracted comments:"
 msgstr "Extrahované komentáre:"
 
 #. Context
-#: ../src/gtr-context.c:297
+#: src/gtr-context.c:301
 msgid "Context:"
 msgstr "Kontext:"
 
 #. Format
-#: ../src/gtr-context.c:301
+#: src/gtr-context.c:305
 msgid "Format:"
 msgstr "Formát:"
 
-#: ../src/gtr-context.ui.h:1
+#: src/gtr-context.ui:51
 msgid "D_one"
 msgstr "_Hotovo"
 
-#: ../src/gtr-file-dialogs.c:62
+#: src/gtr-file-dialogs.c:62
 msgid "Gettext translation"
 msgstr "Preklad gettext"
 
-#: ../src/gtr-file-dialogs.c:71
+#: src/gtr-file-dialogs.c:71
 msgid "Gettext translation template"
 msgstr "Šablóna prekladu gettext"
 
-#: ../src/gtr-file-dialogs.c:76
+#: src/gtr-file-dialogs.c:76
 msgid "All files"
 msgstr "Všetky súbory"
 
-#: ../src/gtr-header-dialog.c:269
+#: src/gtr-header-dialog.c:280
 msgid "Edit Header"
 msgstr "Úprava hlavičky"
 
-#: ../src/gtr-header-dialog.ui.h:1
-msgid "Comment"
-msgstr "Komentár"
-
-#: ../src/gtr-header-dialog.ui.h:2
-msgid "Project Id _version:"
-msgstr "V_erzia projektu:"
-
-#: ../src/gtr-header-dialog.ui.h:3
-msgid "Pot _file creation date:"
-msgstr "_Dátum vytvorenia .pot súboru:"
-
-#: ../src/gtr-header-dialog.ui.h:4
-msgid "Po file _revision date:"
-msgstr "Dátum _revízie .po súboru:"
-
-#: ../src/gtr-header-dialog.ui.h:5
-msgid "Report message _bugs to:"
-msgstr "_Ohlásiť chybné správy na adresu:"
-
-#: ../src/gtr-header-dialog.ui.h:6
-msgid "Project"
-msgstr "Projekt"
-
-#: ../src/gtr-header-dialog.ui.h:7
+#: src/gtr-header-dialog.ui:65
 msgid "Use my options to complete the following entries:"
 msgstr "Po_užiť moje nastavenia na vyplnenie nasledovných položiek:"
 
-#: ../src/gtr-header-dialog.ui.h:8
-msgid "Translator's _name:"
+#: src/gtr-header-dialog.ui:89
+#, fuzzy
+#| msgid "Translator's _name:"
+msgid "Translator’s _name:"
 msgstr "_Meno prekladateľa:"
 
-#: ../src/gtr-header-dialog.ui.h:9
-msgid "Translator's _email:"
+#: src/gtr-header-dialog.ui:103
+#, fuzzy
+#| msgid "Translator's _email:"
+msgid "Translator’s _email:"
 msgstr "Prekladateľov _email:"
 
-#: ../src/gtr-header-dialog.ui.h:10 ../src/gtr-languages-fetcher.ui.h:5
+#: src/gtr-header-dialog.ui:117
 msgid "_Language:"
 msgstr "_Jazyk:"
 
-#: ../src/gtr-header-dialog.ui.h:11
-msgid "Language gro_up email:"
-msgstr "Email prekladateľského _tímu:"
-
-#: ../src/gtr-header-dialog.ui.h:12
-msgid "Char_set:"
-msgstr "Znaková _sada:"
-
-#: ../src/gtr-header-dialog.ui.h:13
-msgid "Enc_oding:"
-msgstr "_Kódovanie:"
-
-#: ../src/gtr-header-dialog.ui.h:14
-msgid "Translator and Language"
-msgstr "Prekladateľ a jazyk"
-
-#  window title
-#: ../src/gtr-jump-dialog.c:93
-msgid "Go to Message"
-msgstr "Prechod na správu"
-
-#: ../src/gtr-jump-dialog.ui.h:1
-msgid "Enter message number:"
-msgstr "Zadajte číslo správy:"
-
-#: ../src/gtr-languages-fetcher.ui.h:1
-msgid "_Team email:"
-msgstr "_Email týmu:"
-
-#: ../src/gtr-languages-fetcher.ui.h:2
-msgid "Transfer en_coding:"
-msgstr "Kódovanie _prenosu:"
-
-#: ../src/gtr-languages-fetcher.ui.h:3
-msgid "Character _set"
-msgstr "Znaková _sada:"
-
-#: ../src/gtr-languages-fetcher.ui.h:4
+#: src/gtr-header-dialog.ui:130
 msgid "Language _code:"
 msgstr "_Kód jazyka:"
 
-#: ../src/gtr-languages-fetcher.ui.h:6
-msgid "_Plural forms:"
+#: src/gtr-header-dialog.ui:143
+msgid "Language gro_up email:"
+msgstr "Email prekladateľského _tímu:"
+
+#: src/gtr-header-dialog.ui:156
+msgid "Char_set:"
+msgstr "Znaková _sada:"
+
+#: src/gtr-header-dialog.ui:169
+msgid "Enc_oding:"
+msgstr "_Kódovanie:"
+
+#: src/gtr-header-dialog.ui:267
+msgid "Translator and Language"
+msgstr "Prekladateľ a jazyk"
+
+#: src/gtr-header-dialog.ui:290
+msgid "Project Id _version:"
+msgstr "V_erzia projektu:"
+
+#: src/gtr-header-dialog.ui:303
+msgid "Pot _file creation date:"
+msgstr "_Dátum vytvorenia .pot súboru:"
+
+#: src/gtr-header-dialog.ui:317
+msgid "Po file _revision date:"
+msgstr "Dátum _revízie .po súboru:"
+
+#: src/gtr-header-dialog.ui:331
+msgid "Report message _bugs to:"
+msgstr "_Ohlásiť chybné správy na adresu:"
+
+#: src/gtr-header-dialog.ui:400
+msgid "Project"
+msgstr "Projekt"
+
+#: src/gtr-header-dialog.ui:430
+msgid "Comment"
+msgstr "Komentár"
+
+#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
+#: src/gtr-profile-dialog.c:170
+#: src/translation-memory/gtr-translation-memory-dialog.c:103
+msgid "_OK"
+msgstr ""
+
+#  window title
+#: src/gtr-jump-dialog.c:92
+msgid "Go to Message"
+msgstr "Prechod na správu"
+
+#: src/gtr-jump-dialog.ui:30
+msgid "Enter message number:"
+msgstr "Zadajte číslo správy:"
+
+#: src/gtr-lang-button.ui:61 src/gtr-lang-button.ui:70
+#, fuzzy
+#| msgid "_Language:"
+msgid "Choose Language"
+msgstr "_Jazyk:"
+
+#: src/gtr-languages-fetcher.ui:46
+#, fuzzy
+#| msgid "_Language:"
+msgid "_Language"
+msgstr "_Jazyk:"
+
+#: src/gtr-languages-fetcher.ui:60
+#, fuzzy
+#| msgid "Language _code:"
+msgid "Language _code"
+msgstr "_Kód jazyka:"
+
+#: src/gtr-languages-fetcher.ui:74
+msgid "Character _set"
+msgstr "Znaková _sada:"
+
+#: src/gtr-languages-fetcher.ui:88
+#, fuzzy
+#| msgid "Transfer en_coding:"
+msgid "Transfer en_coding"
+msgstr "Kódovanie _prenosu:"
+
+#: src/gtr-languages-fetcher.ui:102
+#, fuzzy
+#| msgid "_Plural forms:"
+msgid "_Plural forms"
 msgstr "_Tvary množného čísla:"
 
-#: ../src/gtr-message-table.c:181
-msgid "Status"
-msgstr "Stav"
+#: src/gtr-languages-fetcher.ui:200
+msgid "Edit options manually"
+msgstr ""
 
-#: ../src/gtr-message-table.c:193
-msgid "ID"
-msgstr "ID"
-
-#: ../src/gtr-message-table.c:208
+#: src/gtr-message-table.c:255
 msgid "Original Message"
 msgstr "Pôvodná správa"
 
-#: ../src/gtr-message-table.c:223
+#: src/gtr-message-table.c:274
 msgid "Translated Message"
 msgstr "Preložená správa"
 
-#: ../src/gtr-po.c:439
+#: src/gtr-notebook.ui:26
+#, fuzzy
+#| msgid "Enter message number:"
+msgid "Order messages by"
+msgstr "Zadajte číslo správy:"
+
+#: src/gtr-notebook.ui:58
+msgid "Appearance in the original file"
+msgstr ""
+
+#: src/gtr-notebook.ui:72
+#, fuzzy
+#| msgid "Message Details"
+msgid "Message status"
+msgstr "Podrobnosti správy"
+
+#: src/gtr-notebook.ui:87
+#, fuzzy
+#| msgid "Original Message"
+msgid "Original message"
+msgstr "Pôvodná správa"
+
+#: src/gtr-notebook.ui:102
+#, fuzzy
+#| msgid "Translated Message"
+msgid "Translated message"
+msgstr "Preložená správa"
+
+# window title
+#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:369
+#: src/gtr-search-dialog.c:449
+msgid "Find"
+msgstr "Vyhľadávanie"
+
+#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:453
+#, fuzzy
+#| msgid "Found and replaced %d occurrence"
+#| msgid_plural "Found and replaced %d occurrences"
+msgid "Find and replace"
+msgstr "Nájdených a nahradených %d výskytov"
+
+#: src/gtr-notebook.ui:179
+#, fuzzy
+#| msgid "Edit Header"
+msgid "Edit header"
+msgstr "Úprava hlavičky"
+
+#: src/gtr-notebook.ui:207 src/gtr-projects.ui:109
+#, fuzzy
+#| msgid "_New Window"
+msgid "New window"
+msgstr "_Nové okno"
+
+#: src/gtr-notebook.ui:221 src/gtr-projects.ui:123
+#, fuzzy
+#| msgid "_Preferences"
+msgid "Preferences"
+msgstr "Nas_tavenia"
+
+#: src/gtr-notebook.ui:248 src/gtr-projects.ui:150
+#, fuzzy
+#| msgid "Shortcut"
+msgid "Keyboard Shortcuts"
+msgstr "Skratka"
+
+#: src/gtr-notebook.ui:262 src/gtr-projects.ui:164
+#, fuzzy
+#| msgid "_About"
+msgid "About"
+msgstr "_O programe"
+
+#: src/gtr-notebook.ui:276 src/gtr-projects.ui:178
+#, fuzzy
+#| msgid "_Quit"
+msgid "Quit"
+msgstr "U_končiť"
+
+#: src/gtr-notebook.ui:298 src/gtr-projects.ui:58
+#, fuzzy
+#| msgid "_Open"
+msgid "Open…"
+msgstr "_Otvoriť"
+
+#: src/gtr-notebook.ui:302
+#, fuzzy
+#| msgid "Open a PO file"
+msgid "Open a new file (<Ctrl>o)"
+msgstr "Otvoriť PO súbor"
+
+#: src/gtr-notebook.ui:328
+msgid "Undo (<Ctrl>z)"
+msgstr ""
+
+#: src/gtr-notebook.ui:350
+msgid "Redo (<Ctrl><Shift>z)"
+msgstr ""
+
+#: src/gtr-notebook.ui:395
+msgid "Previous message without translation (<Alt><Page Up>)"
+msgstr ""
+
+#: src/gtr-notebook.ui:417
+msgid "Next message without translation (<Alt><Page Down>)"
+msgstr ""
+
+#: src/gtr-notebook.ui:457
+#, fuzzy
+#| msgid "Toggle _Fuzzy Status"
+msgid "Toggle fuzzy state (<Ctrl>+u)"
+msgstr "Zmeniť stav _nepresnosti správy"
+
+#: src/gtr-notebook.ui:487
+msgid "Order by menu"
+msgstr ""
+
+#: src/gtr-notebook.ui:511 src/gtr-projects.ui:81
+msgid "Main Menu"
+msgstr ""
+
+#: src/gtr-notebook.ui:527
+#, fuzzy
+#| msgid "_Save"
+msgid "Save"
+msgstr "_Uložiť"
+
+#: src/gtr-notebook.ui:531
+#, fuzzy
+#| msgid "Save the current file"
+msgid "Save the current file (<Ctrl>s)"
+msgstr "Uloží aktuálny súbor"
+
+#: src/gtr-notebook.ui:546
+msgid "Save as (<Ctrl><Shift>s)"
+msgstr ""
+
+#: src/gtr-po.c:440
 #, c-format
 msgid "The file is empty"
 msgstr "Súbor je prázdny"
 
-#: ../src/gtr-po.c:448
-#, c-format
-msgid "Failed opening file '%s': %s"
+#: src/gtr-po.c:449
+#, fuzzy, c-format
+#| msgid "Failed opening file '%s': %s"
+msgid "Failed opening file “%s”: %s"
 msgstr "Nepodarilo sa otvoriť súbor „%s“: %s"
 
-#: ../src/gtr-po.c:522
-#, c-format
-msgid "Could not convert from charset '%s' to UTF-8"
+#: src/gtr-po.c:524
+#, fuzzy, c-format
+#| msgid "Could not convert from charset '%s' to UTF-8"
+msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Nepodarilo sa previesť zo znakovej sady „%s“ na UTF-8"
 
-#: ../src/gtr-po.c:539 ../src/gtr-po.c:559
+#: src/gtr-po.c:541 src/gtr-po.c:561
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Nepodarilo sa uložiť dočasný súbor na prevod kódovania"
 
-#: ../src/gtr-po.c:596
+#: src/gtr-po.c:598
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -1008,250 +1192,300 @@ msgstr ""
 "riadka „msgconv“ alebo „iconv“ pred otvorením tohto súboru v programe "
 "GTranslator"
 
-#: ../src/gtr-po.c:664
+#: src/gtr-po.c:666
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext vrátil prázdny zoznam domén pre správy."
 
-#: ../src/gtr-po.c:709
+#: src/gtr-po.c:711
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Syntaktický analyzátor nevrátil žiadne správy."
 
-#: ../src/gtr-po.c:757
-#, c-format
+#: src/gtr-po.c:762
+#, fuzzy, c-format
+#| msgid ""
+#| "You are saving a file with a .pot extension.\n"
+#| "Pot files are generated by the compilation process.\n"
+#| "Your file should likely be named '%s.po'."
 msgid ""
 "You are saving a file with a .pot extension.\n"
 "Pot files are generated by the compilation process.\n"
-"Your file should likely be named '%s.po'."
+"Your file should likely be named “%s.po”."
 msgstr ""
 "Ukladáte súbor s príponou pot.\n"
 "Pot súbory sú generované pri procese kompilácie.\n"
 "Váš súbor by sa pravdepodobne mal volať „%s.po“."
 
-#: ../src/gtr-po.c:770
+#: src/gtr-po.c:775
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Súbor %s je len na čítanie a nemôže byť prepísaný"
 
-#: ../src/gtr-po.c:801
+#: src/gtr-po.c:794
+#, fuzzy, c-format
+#| msgid "There was an error writing the PO file: %s"
+msgid "There is an error in the PO file: %s"
+msgstr "Vyskytla sa chyba pri zápise PO súboru: %s"
+
+#: src/gtr-po.c:806
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Vyskytla sa chyba pri zápise PO súboru: %s"
 
-#: ../src/gtr-preferences-dialog.c:397
+#: src/gtr-preferences-dialog.c:370
 msgid "Impossible to remove the active profile"
 msgstr "Nie je možné odstrániť aktívny profil"
 
-#: ../src/gtr-preferences-dialog.c:403
+#: src/gtr-preferences-dialog.c:376
 msgid "Another profile should be selected as active before"
 msgstr "Najprv by mal byť iný profil vybraný ako aktívny"
 
-#: ../src/gtr-preferences-dialog.c:416
+#: src/gtr-preferences-dialog.c:389
 msgid "Are you sure you want to delete this profile?"
 msgstr "Naozaj chcete odstrániť tento profil?"
 
-#: ../src/gtr-preferences-dialog.c:552
+#: src/gtr-preferences-dialog.c:397
+msgid "_Delete"
+msgstr "O_dstrániť"
+
+#: src/gtr-preferences-dialog.c:527
 msgid "Active"
 msgstr "Aktívny"
 
-#: ../src/gtr-preferences-dialog.c:621 ../src/gtr-preferences-dialog.ui.h:1
+#: src/gtr-preferences-dialog.c:589
+msgid "Help"
+msgstr "Pomocník"
+
+#: src/gtr-preferences-dialog.c:591 src/gtr-preferences-dialog.ui:49
 msgid "Gtranslator Preferences"
 msgstr "Nastavenia programu Gtranslator"
 
-#: ../src/gtr-preferences-dialog.ui.h:2
+#: src/gtr-preferences-dialog.ui:119
 msgid "General"
 msgstr "Všeobecné"
 
-#: ../src/gtr-preferences-dialog.ui.h:3
+#: src/gtr-preferences-dialog.ui:138
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "_Upozorniť, ak po súbor PO obsahuje nepresné preklady"
 
-#: ../src/gtr-preferences-dialog.ui.h:4
+#: src/gtr-preferences-dialog.ui:160
 msgid "Autosave"
 msgstr "Automatické ukladanie súborov"
 
-#: ../src/gtr-preferences-dialog.ui.h:5
+#: src/gtr-preferences-dialog.ui:184
 msgid "Create a _backup copy of files before saving"
 msgstr "Pred uložením vytvárať _záložné kópie súborov"
 
-#: ../src/gtr-preferences-dialog.ui.h:6
+#: src/gtr-preferences-dialog.ui:206
 msgid "_Autosave files every"
 msgstr "_Automaticky ukladať súbory každých"
 
-#: ../src/gtr-preferences-dialog.ui.h:7
+#: src/gtr-preferences-dialog.ui:230
 msgid "_minutes"
 msgstr "_minút"
 
-#: ../src/gtr-preferences-dialog.ui.h:8
+#: src/gtr-preferences-dialog.ui:288
 msgid "Files"
 msgstr "Súbory"
 
-#: ../src/gtr-preferences-dialog.ui.h:9
+#: src/gtr-preferences-dialog.ui:312
 msgid "Text Display"
 msgstr "Zobrazenie textu"
 
-#: ../src/gtr-preferences-dialog.ui.h:10
+#: src/gtr-preferences-dialog.ui:335
 msgid "_Highlight message syntax"
 msgstr "_Zvýrazňovať syntax správ"
 
-#: ../src/gtr-preferences-dialog.ui.h:11
+#: src/gtr-preferences-dialog.ui:351
 msgid "Make _whitespace visible"
 msgstr "Zvi_diteľniť prázdne miesta"
 
-#: ../src/gtr-preferences-dialog.ui.h:12
-msgid "Use _custom font"
-msgstr "Po_užiť vlastné písmo"
-
-#: ../src/gtr-preferences-dialog.ui.h:13
-msgid "Editor _font:"
-msgstr "Písmo _editora:"
-
-#: ../src/gtr-preferences-dialog.ui.h:14
+#: src/gtr-preferences-dialog.ui:392
 msgid "Contents"
 msgstr "Obsah"
 
-#: ../src/gtr-preferences-dialog.ui.h:15
+#: src/gtr-preferences-dialog.ui:415
 msgid "_Remove fuzzy status if message is changed"
 msgstr "_Odstrániť stav nepresného prekladu pri zmene správy"
 
-#: ../src/gtr-preferences-dialog.ui.h:16
+#: src/gtr-preferences-dialog.ui:431
 msgid "Check _spelling"
 msgstr "_Kontrola pravopisu"
 
-#: ../src/gtr-preferences-dialog.ui.h:17
+#: src/gtr-preferences-dialog.ui:470
 msgid "Editor"
 msgstr "Editor"
 
-#: ../src/gtr-preferences-dialog.ui.h:18
+#: src/gtr-preferences-dialog.ui:569
 msgid "Edit Profile"
 msgstr "Upraviť profil"
 
-#: ../src/gtr-preferences-dialog.ui.h:19
+#: src/gtr-preferences-dialog.ui:606
 msgid "Profiles"
 msgstr "Profily"
 
-#: ../src/gtr-profile-dialog.c:82
+#: src/gtr-profile-dialog.c:73
 msgid "Gtranslator Profile"
 msgstr "Profil programu Gtranslator"
 
-#: ../src/gtr-profile-dialog.ui.h:1
+#: src/gtr-profile-dialog.ui:68
+#, fuzzy
+#| msgid "_Name:"
+msgid "_Name"
+msgstr "_Meno:"
+
+#: src/gtr-profile-dialog.ui:96
 msgid "Profile Information"
 msgstr "Informácie o profile"
 
-#: ../src/gtr-profile-dialog.ui.h:2
-msgid "_Name:"
-msgstr "_Meno:"
-
-#: ../src/gtr-profile-dialog.ui.h:3
+#: src/gtr-profile-dialog.ui:113
 msgid "Translator Information"
 msgstr "Údaje o prekladateľovi"
 
-#: ../src/gtr-profile-dialog.ui.h:4
-msgid "_Email:"
-msgstr "_Email:"
-
-#: ../src/gtr-profile-dialog.ui.h:5
-msgid "N_ame:"
+#: src/gtr-profile-dialog.ui:131
+#, fuzzy
+#| msgid "N_ame:"
+msgid "N_ame"
 msgstr "_Názov"
 
-#: ../src/gtr-profile-dialog.ui.h:6
+#: src/gtr-profile-dialog.ui:146
+msgid "_Email"
+msgstr "_Email"
+
+#: src/gtr-profile-dialog.ui:160
+msgid "_Team email"
+msgstr "_Email týmu"
+
+#: src/gtr-profile-dialog.ui:209
 msgid "Language Settings"
 msgstr "Nastavenia jazyka"
 
+#: src/gtr-projects.ui:35
+msgid "Open a new .po file or drag & drop here"
+msgstr ""
+
+#: src/gtr-projects.ui:51
+#, fuzzy
+#| msgid "Open a PO file"
+msgid "Select a PO file"
+msgstr "Otvoriť PO súbor"
+
 # window title
-#: ../src/gtr-search-dialog.c:347 ../src/gtr-search-dialog.ui.h:1
+#: src/gtr-search-dialog.c:347 src/gtr-search-dialog.ui:6
+#: src/gtr-search-dialog.ui:53
 msgid "Replace"
 msgstr "Nahradenie"
 
-# window title
-#: ../src/gtr-search-dialog.c:369
-msgid "Find"
-msgstr "Vyhľadávanie"
-
-#: ../src/gtr-search-dialog.c:457
+#: src/gtr-search-dialog.c:451
 msgid "Replace _All"
 msgstr "N_ahradiť všetky"
 
-#: ../src/gtr-search-dialog.c:461
+#: src/gtr-search-dialog.c:455
 msgid "_Replace"
 msgstr "Nah_radiť"
 
-#: ../src/gtr-search-dialog.ui.h:2
+#: src/gtr-search-dialog.ui:37
 msgid "Replace All"
 msgstr "Nahradiť všetky"
 
-#: ../src/gtr-search-dialog.ui.h:3
+#: src/gtr-search-dialog.ui:109
 msgid "_Search for: "
 msgstr "_Hľadať:"
 
-#: ../src/gtr-search-dialog.ui.h:4
+#: src/gtr-search-dialog.ui:124
 msgid "Replace _with: "
 msgstr "Nahradiť _za:"
 
-#: ../src/gtr-search-dialog.ui.h:5
+#: src/gtr-search-dialog.ui:160
 msgid "_Original text"
 msgstr "_Pôvodný text:"
 
-#: ../src/gtr-search-dialog.ui.h:6
+#: src/gtr-search-dialog.ui:177
 msgid "_Translated text"
 msgstr "P_reložený text:"
 
-#: ../src/gtr-search-dialog.ui.h:7
-msgid "Include fu_zzy strings"
-msgstr "Vrátane n_epresných reťazcov"
-
-#: ../src/gtr-search-dialog.ui.h:8
+#: src/gtr-search-dialog.ui:213
 msgid "_Match case"
 msgstr "Rozlišovať veľkosť _písma"
 
-#: ../src/gtr-search-dialog.ui.h:9
+#: src/gtr-search-dialog.ui:229
 msgid "Match _entire word only"
 msgstr "Hľadať iba _celé slová"
 
-#: ../src/gtr-search-dialog.ui.h:10
+#: src/gtr-search-dialog.ui:245
 msgid "Search _backwards"
 msgstr "Hľadať _dozadu"
 
-#: ../src/gtr-search-dialog.ui.h:11
+#: src/gtr-search-dialog.ui:262
 msgid "_Wrap around"
 msgstr "Pokračovať d_ookola"
 
-#: ../src/gtr-statusbar.c:119 ../src/gtr-statusbar.c:248
+#: src/gtr-statusbar.c:117 src/gtr-statusbar.c:252
 msgid "INS"
 msgstr "VKL"
 
-#: ../src/gtr-statusbar.c:120 ../src/gtr-statusbar.c:244
+#: src/gtr-statusbar.c:118 src/gtr-statusbar.c:248
 msgid "OVR"
 msgstr "CEZ"
 
-#: ../src/gtr-tab.c:209
+#: src/gtr-tab.c:245
 msgid "There is an error in the message:"
 msgstr "V správe je chyba:"
 
-#: ../src/gtr-tab.c:537
+#: src/gtr-tab.c:446 src/gtr-tab.c:557
+#, fuzzy
+#| msgid "Fuzzy"
+msgid "fuzzy"
+msgstr "Nepresná"
+
+#: src/gtr-tab.c:587
 #, c-format
 msgid "Plural %d"
 msgstr "Množné číslo %d"
 
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1055
+#: src/gtr-tab.c:1139
 msgid "Path:"
 msgstr "Cesta:"
 
-#: ../src/gtr-tab-label.c:277
+#: src/gtr-tab.c:1789
+#, fuzzy, c-format
+#| msgid "Translated"
+msgid "Translated: %0.2f%%"
+msgstr "Preložená"
+
+#: src/gtr-tab.c:1790
+#, fuzzy, c-format
+#| msgid "Translated"
+msgid "Translated: %d"
+msgstr "Preložená"
+
+#: src/gtr-tab.c:1791
+#, fuzzy, c-format
+#| msgid "Untranslated"
+msgid "Untranslated: %d"
+msgstr "Nepreložená"
+
+#: src/gtr-tab.c:1792
+#, fuzzy, c-format
+#| msgid "Fuzzy"
+msgid "Fuzzy: %d"
+msgstr "Nepresná"
+
+#: src/gtr-tab-label.c:278
 msgid "Close document"
 msgstr "Zavrieť dokument"
 
-#: ../src/gtr-tab.ui.h:1
+#: src/gtr-tab.ui:153
 msgid "_Original Message:"
 msgstr "_Pôvodná správa:"
 
-#: ../src/gtr-tab.ui.h:2
+#: src/gtr-tab.ui:233
 msgid "Translate_d Text:"
 msgstr "P_reložený text:"
 
-#: ../src/gtr-utils.c:516
+#: src/gtr-utils.c:516
 msgid ""
 "Unable to display help. Please make sure the Gtranslator documentation "
 "package is installed."
@@ -1259,43 +1493,29 @@ msgstr ""
 "Nepodarilo sa zobraziť pomocníka. Prosím, uistite sa, že je nainštalovaný "
 "balík dokumentácie programu Gtranslator."
 
-#: ../src/gtr-view.c:78
-#, c-format
-msgid "gtkspell error: %s\n"
-msgstr "Chyba gtkspell: %s\n"
-
-#: ../src/gtr-view.c:80
-#, c-format
-msgid ""
-"GtkSpell was unable to initialize.\n"
-" %s"
-msgstr ""
-"GtkSpell sa nepodarilo inicializovať.\n"
-" %s"
-
-#: ../src/gtr-window.c:129
+#: src/gtr-window.c:167
 msgid "Untranslated"
 msgstr "Nepreložená"
 
-#: ../src/gtr-window.c:132
+#: src/gtr-window.c:170
 msgid "Translated"
 msgstr "Preložená"
 
-#: ../src/gtr-window.c:135
+#: src/gtr-window.c:173
 msgid "Fuzzy"
 msgstr "Nepresná"
 
-#: ../src/gtr-window.c:142
+#: src/gtr-window.c:180
 #, c-format
 msgid "Current: %d"
 msgstr "Aktuálna: %d"
 
-#: ../src/gtr-window.c:143
+#: src/gtr-window.c:181
 #, c-format
 msgid "Total: %d"
 msgstr "Celkom: %d"
 
-#: ../src/gtr-window.c:144
+#: src/gtr-window.c:182
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
@@ -1303,7 +1523,7 @@ msgstr[0] "%d preložených"
 msgstr[1] "%d preložený"
 msgstr[2] "%d preložené"
 
-#: ../src/gtr-window.c:147
+#: src/gtr-window.c:185
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
@@ -1311,7 +1531,7 @@ msgstr[0] "%d nepresných"
 msgstr[1] "%d nepresný"
 msgstr[2] "%d nepresné"
 
-#: ../src/gtr-window.c:149
+#: src/gtr-window.c:187
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1320,94 +1540,250 @@ msgstr[1] "%d nepreložený"
 msgstr[2] "%d nepreložené"
 
 #. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:252
+#: src/gtr-window.c:297
 #, c-format
-msgid "*%s - gtranslator"
-msgstr "*%s - gtranslator"
+#| msgid "*%s - gtranslator"
+msgid "*%s — gtranslator"
+msgstr "*%s — gtranslator"
 
 #. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:255
+#: src/gtr-window.c:303
 #, c-format
-msgid "%s - gtranslator"
-msgstr "%s - gtranslator"
+#| msgid "%s - gtranslator"
+msgid "%s — gtranslator"
+msgstr "%s — gtranslator"
 
-#: ../src/gtr-window.c:261
+#: src/gtr-window.c:312
 msgid "gtranslator"
 msgstr "gtranslator"
 
-#: ../src/gtr-window.c:444
+#: src/gtr-window.c:534
 msgid "No profile"
 msgstr "Žiadny profil"
 
-#: ../src/gtr-window.c:462
+#: src/gtr-window.c:552
 msgid "Profile for the active document"
 msgstr "Profil aktívneho dokumentu"
 
-#: ../src/gtr-window.ui.h:1
-msgid "Projects"
-msgstr "Projekty"
+#: src/help-overlay.ui:13
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "Všeobecné"
 
-#: ../src/gtr-window.ui.h:2
-msgid "Add project"
-msgstr "Pridá projekt"
+#: src/help-overlay.ui:18
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "Otvorenie súboru"
 
-#: ../src/gtr-window.ui.h:3
-msgid "Remove project"
-msgstr "Odstráni projekt"
+#: src/help-overlay.ui:25
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "Uloženie aktuálneho súboru"
 
-#: ../src/main.c:97
-msgid "- Edit PO files"
-msgstr "- úprava PO súborov"
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "Uloženie aktuálneho súboru ako"
 
-#: ../src/main.c:101
-#, c-format
+#: src/help-overlay.ui:40
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "Nastavenia"
+
+#: src/help-overlay.ui:47
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "Klávesové skratky"
+
+#: src/help-overlay.ui:54
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Ukončenie"
+
+#: src/help-overlay.ui:64
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "Úprava"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Undo"
+msgstr "Vrátenie späť"
+
+#: src/help-overlay.ui:75
+msgctxt "shortcut window"
+msgid "Redo"
+msgstr "Znovu vykonanie"
+
+#: src/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr ""
+
+#: src/help-overlay.ui:92
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr ""
+
+#: src/help-overlay.ui:96
+msgctxt "shortcut window"
+msgid "Go to the previous message"
+msgstr "Prejdenie na predchádzajúcu správu"
+
+#: src/help-overlay.ui:103
+msgctxt "shortcut window"
+msgid "Go to the next message"
+msgstr "Prejdenie na ďalšiu správu"
+
+#: src/help-overlay.ui:110
+msgctxt "shortcut window"
+msgid "Go to the previous untranslated message"
+msgstr "Prejdenie na predchádzajúcu nepreloženú správu"
+
+#: src/help-overlay.ui:117
+msgctxt "shortcut window"
+msgid "Go to the next untranslated message"
+msgstr "Prejdenie na ďalšiu nepreloženú správu"
+
+#: src/help-overlay.ui:127
+msgctxt "shortcut window group"
+msgid "Translation Memory"
+msgstr "Pamäť prekladov"
+
+#: src/help-overlay.ui:131
+msgctxt "shortcut window"
+msgid "Build translation memory"
+msgstr "Zostavenie pamäte prekladov"
+
+#: src/main.c:97
+msgid "— Edit PO files"
+msgstr "— úprava PO súborov"
+
+#: src/main.c:101
+#, fuzzy, c-format
+#| msgid ""
+#| "%s\n"
+#| "Run '%s --help' to see a full list of available command line options.\n"
 msgid ""
 "%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
+"Run “%s --help” to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
 "Spustite '%s --help' na zobrazenie zoznamu dostupných možností príkazového "
 "riadka.\n"
 
-#. Translaters: This string is for a toggle to display a toolbar.
-#. * The name of the toolbar is automatically computed from the widgets
-#. * on the toolbar, and is placed at the %s. Note the _ before the %s
-#. * which is used to add mnemonics. We know that this is likely to
-#. * produce duplicates, but don't worry about it. If your language
-#. * normally has a mnemonic at the start, please use the _. If not,
-#. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:991
-#, c-format
-msgid "Show “_%s”"
-msgstr "Zobraziť „_%s“"
+#~ msgid "Gtranslator PO File Editor"
+#~ msgstr "Gtranslator - editor PO súborov"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1484
-msgid "_Move on Toolbar"
-msgstr "_Presunúť na lištu nástrojov"
+#~ msgid "Use custom font"
+#~ msgstr "Použiť vlastné písmo"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1485
-msgid "Move the selected item on the toolbar"
-msgstr "Presunúť vybrané položky na lištu nástrojov"
+#~ msgid "If true, use a custom font for edit fields."
+#~ msgstr "Ak je true, použije vlastné písmo v editačných poliach."
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1486
-msgid "_Remove from Toolbar"
-msgstr "_Odobrať z lišty nástrojov"
+#~ msgid "Editor font"
+#~ msgstr "Písmo editora"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1487
-msgid "Remove the selected item from the toolbar"
-msgstr "Odobrať vybrané položky z lišty nástrojov"
+#~ msgid "Custom font to use for edit fields."
+#~ msgstr "Vlastné písmo použité pre editačné polia."
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1488
-msgid "_Delete Toolbar"
-msgstr "O_dstrániť lištu nástrojov"
+#~ msgid "Others"
+#~ msgstr "Ostatné"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1489
-msgid "Remove the selected toolbar"
-msgstr "Odstrániť vybranú lištu nástrojov"
+#~ msgid "gtranslator highlight"
+#~ msgstr "Zvýrazňovanie pre gtranslator"
 
-#: ../src/toolbareditor/egg-toolbar-editor.c:488
-msgid "Separator"
-msgstr "Oddeľovač"
+#~ msgid "Tag"
+#~ msgstr "Značka"
+
+#~ msgid "Special variable"
+#~ msgstr "Špeciálna premenná"
+
+#~ msgctxt "alternate lang"
+#~ msgid "_Open"
+#~ msgstr "_Otvoriť"
+
+#~ msgid "Load an alternate language."
+#~ msgstr "Načíta iný jazyk."
+
+#~ msgid "Insert special characters just by clicking on them."
+#~ msgstr "Vkladajte špeciálne znaky iba pomocou kliknutia."
+
+#~ msgid "Show the message in the source code."
+#~ msgstr "Zobrazí správu v zdrojovom kóde."
+
+#~ msgid "Look up words in a dictionary."
+#~ msgstr "Vyhľadávajte slová v slovníku."
+
+#~ msgid "Place window in the fullscreen state."
+#~ msgstr "Prepne okno do režimu celej obrazovky."
+
+#~ msgid "Parameters and tags detection featuring easy insertion."
+#~ msgstr "Zisťovanie parametrov a značiek zahŕňajúce jednoduché vkladanie."
+
+#~ msgid "Get translation suggestions from a data base."
+#~ msgstr "Získa návrhy na preklad z databázy."
+
+#~ msgid "Current Developers"
+#~ msgstr "Súčasní vývojári"
+
+#~ msgid "About Gtranslator"
+#~ msgstr "O programe Gtranslator"
+
+#~ msgid "Status"
+#~ msgstr "Stav"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Use _custom font"
+#~ msgstr "Po_užiť vlastné písmo"
+
+#~ msgid "Editor _font:"
+#~ msgstr "Písmo _editora:"
+
+#~ msgid "Include fu_zzy strings"
+#~ msgstr "Vrátane n_epresných reťazcov"
+
+#~ msgid "gtkspell error: %s\n"
+#~ msgstr "Chyba gtkspell: %s\n"
+
+#~ msgid ""
+#~ "GtkSpell was unable to initialize.\n"
+#~ " %s"
+#~ msgstr ""
+#~ "GtkSpell sa nepodarilo inicializovať.\n"
+#~ " %s"
+
+#~ msgid "Projects"
+#~ msgstr "Projekty"
+
+#~ msgid "Add project"
+#~ msgstr "Pridá projekt"
+
+#~ msgid "Remove project"
+#~ msgstr "Odstráni projekt"
+
+#~ msgid "Show “_%s”"
+#~ msgstr "Zobraziť „_%s“"
+
+#~ msgid "_Move on Toolbar"
+#~ msgstr "_Presunúť na lištu nástrojov"
+
+#~ msgid "Move the selected item on the toolbar"
+#~ msgstr "Presunúť vybrané položky na lištu nástrojov"
+
+#~ msgid "_Remove from Toolbar"
+#~ msgstr "_Odobrať z lišty nástrojov"
+
+#~ msgid "Remove the selected item from the toolbar"
+#~ msgstr "Odobrať vybrané položky z lišty nástrojov"
+
+#~ msgid "Remove the selected toolbar"
+#~ msgstr "Odstrániť vybranú lištu nástrojov"
+
+#~ msgid "Separator"
+#~ msgstr "Oddeľovač"
 
 #~ msgid "Open Tran Settings"
 #~ msgstr "Nastavenia Open Tran"
@@ -1544,9 +1920,6 @@ msgstr "Oddeľovač"
 #~ msgid "_Documents"
 #~ msgstr "_Dokumenty"
 
-#~ msgid "Open a PO file"
-#~ msgstr "Otvoriť PO súbor"
-
 #~ msgid "_Recent Files"
 #~ msgstr "_Nedávne súbory"
 
@@ -1555,9 +1928,6 @@ msgstr "Oddeľovač"
 
 #~ msgid "_Header..."
 #~ msgstr "_Hlavička..."
-
-#~ msgid "Save the current file"
-#~ msgstr "Uloží aktuálny súbor"
 
 #~ msgid "Save the current file with another name"
 #~ msgstr "Uloží aktuálny súbor pod novým názvom"
@@ -1588,9 +1958,6 @@ msgstr "Oddeľovač"
 
 #~ msgid "Copy original message contents to the translation field"
 #~ msgstr "Skopíruje obsah originálnej správy do poľa prekladu"
-
-#~ msgid "Toggle _Fuzzy Status"
-#~ msgstr "Zmeniť stav _nepresnosti správy"
 
 #~ msgid "Toggle fuzzy status of a message"
 #~ msgstr "Zmení stav nepresnosti správy"
@@ -1634,26 +2001,14 @@ msgstr "Oddeľovač"
 #~ msgid "Next Fuz_zy"
 #~ msgstr "Nas_ledujúca nepresná"
 
-#~ msgid "Go to the next fuzzy message"
-#~ msgstr "Prejde na ďalšiu nepresnú správu"
-
 #~ msgid "Previous Fuzz_y"
 #~ msgstr "Pre_dchádzajúca nepresná"
-
-#~ msgid "Go to the previous fuzzy message"
-#~ msgstr "Prejde na predchádzajúcu nepresnú správu"
 
 #~ msgid "Next _Untranslated"
 #~ msgstr "Nasledujúca neprelož_ená"
 
-#~ msgid "Go to the next untranslated message"
-#~ msgstr "Prejde na ďalšiu nepreloženú správu"
-
 #~ msgid "Previ_ous Untranslated"
 #~ msgstr "Predchád_zajúca nepreložená"
-
-#~ msgid "Go to the previous untranslated message"
-#~ msgstr "Prejde na predchádzajúcu nepreloženú správu"
 
 #~ msgid "Next Fu_zzy or Untranslated"
 #~ msgstr "Nasledujúca nepresná ale_bo nepreložená"
@@ -1714,18 +2069,6 @@ msgstr "Oddeľovač"
 #~ msgid "_Go to Message…"
 #~ msgstr "_Prejsť na správu…"
 
-#~ msgid "_Open"
-#~ msgstr "_Otvoriť"
-
-#~ msgid "_Save"
-#~ msgstr "_Uložiť"
-
-#~ msgid "_Undo"
-#~ msgstr "Vrátiť _späť"
-
-#~ msgid "_Redo"
-#~ msgstr "_Znovu vykonať"
-
 #~ msgid ""
 #~ "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
 #~ msgstr ""
@@ -1751,9 +2094,6 @@ msgstr "Oddeľovač"
 
 #~ msgid "Translation Fields"
 #~ msgstr "Polia prekladu"
-
-#~ msgid "Message Details"
-#~ msgstr "Podrobnosti správy"
 
 #~ msgid "Delete compiled GMO files"
 #~ msgstr "Vymazať skompilované GMO súbory"
