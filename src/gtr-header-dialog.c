@@ -391,7 +391,7 @@ void
 gtr_show_header_dialog (GtrWindow * window)
 {
   static GtkWidget *dlg = NULL;
-  GtrTab *tab;
+  GtrTab *tab = NULL;
 
   tab = gtr_window_get_active_tab (window);
   g_return_if_fail (tab != NULL);

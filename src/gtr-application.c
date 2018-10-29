@@ -235,7 +235,7 @@ find_activated (GSimpleAction *action,
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  _gtr_actions_search_find (GTK_ACTION (action), priv->active_window);
+  _gtr_actions_search_find (NULL, priv->active_window);
 }
 
 static void
@@ -246,7 +246,7 @@ find_and_replace_activated (GSimpleAction *action,
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  _gtr_actions_search_replace (GTK_ACTION (action), priv->active_window);
+  _gtr_actions_search_replace (NULL, priv->active_window);
 }
 
 static void
