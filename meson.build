@@ -81,7 +81,7 @@ if gtr_debug
 elif gtr_buildtype == 'release'
   common_flags += [
     '-DG_DISABLE_ASSERT',
-    '-DG_DISABLE_CHECKS',
+    #'-DG_DISABLE_CHECKS',
     '-DG_DISABLE_CAST_CHECKS',
   ]
 endif
