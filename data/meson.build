@@ -17,7 +17,7 @@ i18n.merge_file(
   desktop,
   type: 'desktop',
   input: desktop_in,
-  output: desktop,
+  output: '@0@.desktop'.format(gtr_app_id),
   po_dir: po_dir,
   install: true,
   install_dir: join_paths(gtr_datadir, 'applications'),

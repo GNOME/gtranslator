@@ -294,13 +294,13 @@ set_window_title (GtrWindow * window, gboolean with_path)
       if (state == GTR_PO_STATE_MODIFIED)
         {
           /* Translators: this is the title of the window with a modified document */
-          title = g_strdup_printf (_("*%s — gtranslator"), basename);
+          title = g_strdup_printf (_("*%s — Translation Editor"), basename);
           gtr_notebook_enable_save (GTR_NOTEBOOK (priv->notebook), TRUE);
         }
       else
         {
           /* Translators: this is the title of the window with a document opened */
-          title = g_strdup_printf (_("%s — gtranslator"), basename);
+          title = g_strdup_printf (_("%s — Translation Editor"), basename);
           gtr_notebook_enable_save (GTR_NOTEBOOK (priv->notebook), FALSE);
         }
 
@@ -309,7 +309,7 @@ set_window_title (GtrWindow * window, gboolean with_path)
     }
   else
     {
-      title = g_strdup (_("gtranslator"));
+      title = g_strdup (_("Translation Editor"));
       subtitle = g_strdup ("");
     }
 

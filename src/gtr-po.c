@@ -597,7 +597,7 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
                    GTR_PO_ERROR_ENCODING,
                    _("All attempt to convert the file to UTF-8 has failed, "
                      "use the msgconv or iconv command line tools before "
-                     "opening this file with gtranslator"));
+                     "opening this file with GNOME Translation Editor"));
       return FALSE;
     }
 

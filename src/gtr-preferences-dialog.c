@@ -588,7 +588,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
                           _("_Close"), GTK_RESPONSE_CLOSE,
                           _("Help"), GTK_RESPONSE_HELP, NULL);
 
-  gtk_window_set_title (GTK_WINDOW (dlg), _("Gtranslator Preferences"));
+  gtk_window_set_title (GTK_WINDOW (dlg), _("Translation Editor Preferences"));
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 

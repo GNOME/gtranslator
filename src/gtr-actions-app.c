@@ -101,7 +101,7 @@ gtr_about_dialog (GtrWindow *window)
                          "translator-credits", _("translator-credits"),
                          "version", PACKAGE_VERSION,
                          "website", PACKAGE_URL,
-                         "website-label", _("Gtranslator Web Site"),
+                         "website-label", _("Translation Editor Web Site"),
                          NULL);
 
 }

@@ -64,7 +64,7 @@ setup_path (void)
   g_free (bin);
 
   if (!g_setenv ("PATH", path, TRUE))
-    g_warning ("Could not set PATH for gtranslator");
+    g_warning ("Could not set PATH for Translation Editor");
 
   g_free (path);
 }

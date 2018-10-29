@@ -284,7 +284,7 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
                           GTK_RESPONSE_CLOSE,
                           NULL);
 
-  gtk_window_set_title (GTK_WINDOW (dlg), _("Gtranslator Translation Memory Manager"));
+  gtk_window_set_title (GTK_WINDOW (dlg), _("Translation Editor Memory Manager"));
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 

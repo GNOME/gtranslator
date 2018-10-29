@@ -552,8 +552,8 @@ gtr_application_startup (GApplication *application)
 
   G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
 
-  g_set_application_name (_("Gtranslator"));
-  gtk_window_set_default_icon_name ("gtranslator");
+  g_set_application_name (_("Translation Editor"));
+  gtk_window_set_default_icon_name ("Gtranslator");
 
   /* We set the default icon dir */
   gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
@@ -688,7 +688,7 @@ GtrApplication *
 _gtr_application_new ()
 {
   return GTR_APPLICATION (g_object_new (GTR_TYPE_APPLICATION,
-                                        "application-id", "org.gnome.Gtranslator",
+                                        "application-id", PACKAGE_APPID,
                                         "flags", G_APPLICATION_HANDLES_OPEN,
                                         NULL));
 }
