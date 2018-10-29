@@ -553,7 +553,7 @@ gtr_application_startup (GApplication *application)
   G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
 
   g_set_application_name (_("Translation Editor"));
-  gtk_window_set_default_icon_name ("Gtranslator");
+  gtk_window_set_default_icon_name (PACKAGE_APPID);
 
   /* We set the default icon dir */
   gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
