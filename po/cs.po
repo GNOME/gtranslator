@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-10-26 19:13+0000\n"
-"PO-Revision-Date: 2018-10-27 07:39+0200\n"
+"POT-Creation-Date: 2018-10-29 12:07+0000\n"
+"PO-Revision-Date: 2018-11-01 08:10+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -24,8 +24,6 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:555
-#: src/gtr-window.ui:25
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
@@ -59,6 +57,11 @@ msgstr ""
 "zásuvných modulů, jako je alternativní jazyk, vkládání značek, integrace se "
 "správou verzí a zobrazení zdrojového kódu."
 
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:555
+#: src/gtr-window.c:312 src/gtr-window.ui:25
+msgid "Translation Editor"
+msgstr "Editor překladů"
+
 #: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
 msgstr "Editor souborů PO"
@@ -67,6 +70,10 @@ msgstr "Editor souborů PO"
 #: data/org.gnome.Gtranslator.desktop.in.in:7
 msgid "@icon@"
 msgstr "@icon@"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:14
+msgid "Gtranslator;Translation;Editor;Gettext;Write;"
+msgstr "gtranslator;překlad;editor;gettext;lokalizace;"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:24
 msgid "Warn if file contains fuzzy translations"
@@ -472,7 +479,6 @@ msgid "Please specify a valid path to build the translation memory"
 msgstr "Zadejte prosím platnou cestu k sestavení paměti překladů"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.c:291
-#: src/translation-memory/gtr-translation-memory-dialog.c:287
 msgid "Gtranslator Translation Memory Manager"
 msgstr "Správa paměti překladů Gtranslator"
 
@@ -643,8 +649,8 @@ msgstr ""
 "Marek Černocký <marek@manet.cz>"
 
 #: src/gtr-actions-app.c:104
-msgid "Gtranslator Web Site"
-msgstr "Webové stránky aplikace Gtranslator"
+msgid "Translation Editor Web Site"
+msgstr "Webové stránky Editoru překladů"
 
 #: src/gtr-actions-file.c:200
 msgid "Open file for translation"
@@ -1094,10 +1100,11 @@ msgstr "Nelze uložit dočasný soubor potřebný pro převod kódování"
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
-"iconv command line tools before opening this file with gtranslator"
+"iconv command line tools before opening this file with GNOME Translation "
+"Editor"
 msgstr ""
 "Selhaly všechny pokusy o převod souboru do UTF-8; před otevřením souboru v "
-"aplikaci gtranslator použijte program msgconv nebo iconv v příkazovém řádku"
+"Editoru překladů použijte program msgconv nebo iconv v příkazovém řádku."
 
 #: src/gtr-po.c:666
 #, c-format
@@ -1160,8 +1167,8 @@ msgid "Help"
 msgstr "Nápověda"
 
 #: src/gtr-preferences-dialog.c:591 src/gtr-preferences-dialog.ui:49
-msgid "Gtranslator Preferences"
-msgstr "Předvolby aplikace Gtranslator"
+msgid "Translation Editor Preferences"
+msgstr "Předvolby Editoru překladů"
 
 #: src/gtr-preferences-dialog.ui:119
 msgid "General"
@@ -1228,8 +1235,8 @@ msgid "Profiles"
 msgstr "Profily"
 
 #: src/gtr-profile-dialog.c:73
-msgid "Gtranslator Profile"
-msgstr "Profil aplikace Gtranslator"
+msgid "Translation Editor Profile"
+msgstr "Profil Editoru překladů"
 
 #: src/gtr-profile-dialog.ui:68
 msgid "_Name"
@@ -1376,11 +1383,11 @@ msgstr "Přeložený _text:"
 
 #: src/gtr-utils.c:516
 msgid ""
-"Unable to display help. Please make sure the Gtranslator documentation "
-"package is installed."
+"Unable to display help. Please make sure the Translation Editor "
+"documentation package is installed."
 msgstr ""
 "Nelze zobrazit nápovědu. Ujistěte se prosím, že je nainstalovaný balíček s "
-"dokumentací Gtranslator."
+"Editorem překladů."
 
 #: src/gtr-window.c:167
 msgid "Untranslated"
@@ -1431,18 +1438,14 @@ msgstr[2] "%d nepřeložených"
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:297
 #, c-format
-msgid "*%s — gtranslator"
-msgstr "*%s — gtranslator"
+msgid "*%s — Translation Editor"
+msgstr "*%s — Editor překladů"
 
 #. Translators: this is the title of the window with a document opened
 #: src/gtr-window.c:303
 #, c-format
-msgid "%s — gtranslator"
-msgstr "%s – gtranslator"
-
-#: src/gtr-window.c:312
-msgid "gtranslator"
-msgstr "gtranslator"
+msgid "%s — Translation Editor"
+msgstr "%s – Editor překladů"
 
 #: src/gtr-window.c:534
 msgid "No profile"
@@ -1556,5 +1559,6 @@ msgstr ""
 "Spuštěním „%s --help“ se zobrazí úplný seznam dostupných přepínačů příkazové "
 "řádky.\n"
 
-#~ msgid "Language Code:"
-#~ msgstr "Kód jazyka:"
+#: src/translation-memory/gtr-translation-memory-dialog.c:287
+msgid "Translation Editor Memory Manager"
+msgstr "Správa paměti Editoru překladů"
