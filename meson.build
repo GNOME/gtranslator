@@ -57,7 +57,6 @@ set_defines = [
   # package
   ['PACKAGE', meson.project_name()],
   ['PACKAGE_DATADIR', gtr_datadir],
-  ['PACKAGE_HELPDIR', join_paths(gtr_datadir, 'gnome', 'help')],
   ['PACKAGE_LIBDIR', gtr_libdir],
   ['PACKAGE_LOCALEDIR', gtr_localedir],
   ['PACKAGE_URL', 'https://wiki.gnome.org/Apps/Gtranslator'],
