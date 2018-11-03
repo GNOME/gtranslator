@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-10-26 19:13+0000\n"
-"PO-Revision-Date: 2018-10-28 17:44+0100\n"
+"POT-Creation-Date: 2018-11-03 14:35+0000\n"
+"PO-Revision-Date: 2018-11-03 22:55+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -23,8 +23,6 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:555
-#: src/gtr-window.ui:25
 msgid "Gtranslator"
 msgstr "gtranslator"
 
@@ -59,6 +57,11 @@ msgstr ""
 "takimi jak alternatywny język, wstawianie znaczników, integracja z systemem "
 "Subversion i przeglądarka kodu źródłowego."
 
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:555
+#: src/gtr-notebook.ui:294 src/gtr-window.c:312 src/gtr-window.ui:25
+msgid "Translation Editor"
+msgstr "Edytor tłumaczeń"
+
 #: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
 msgstr "Edytor plików PO"
@@ -67,6 +70,11 @@ msgstr "Edytor plików PO"
 #: data/org.gnome.Gtranslator.desktop.in.in:7
 msgid "@icon@"
 msgstr "@icon@"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:14
+msgid "Gtranslator;Translation;Editor;Gettext;Write;"
+msgstr ""
+"gtranslator;edytor;tłumaczeń;tłumaczenia;translacja;translator;gettext;"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:24
 msgid "Warn if file contains fuzzy translations"
@@ -479,7 +487,6 @@ msgid "Please specify a valid path to build the translation memory"
 msgstr "Proszę podać prawidłową ścieżkę, aby zbudować pamięć tłumaczeń"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.c:291
-#: src/translation-memory/gtr-translation-memory-dialog.c:287
 msgid "Gtranslator Translation Memory Manager"
 msgstr "Menedżer pamięci tłumaczeń programu gtranslator"
 
@@ -653,8 +660,8 @@ msgstr ""
 "Aviary.pl <community-poland@mozilla.org>, 2011-2018"
 
 #: src/gtr-actions-app.c:104
-msgid "Gtranslator Web Site"
-msgstr "Witryna programu gtranslator"
+msgid "Translation Editor Web Site"
+msgstr "Witryna edytora tłumaczeń"
 
 #: src/gtr-actions-file.c:200
 msgid "Open file for translation"
@@ -1109,11 +1116,12 @@ msgstr "Nie można przechować pliku tymczasowego do konwersji kodowania"
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
-"iconv command line tools before opening this file with gtranslator"
+"iconv command line tools before opening this file with GNOME Translation "
+"Editor"
 msgstr ""
 "Żadna próba konwersji pliku do UTF-8 się nie powiodła. Proszę użyć narzędzi "
-"wiersza poleceń msgconv lub iconv przed otwarciem tego pliku za pomocą "
-"programu gtranslator"
+"wiersza poleceń msgconv lub iconv przed otwarciem tego pliku za pomocą tego "
+"programu"
 
 #: src/gtr-po.c:666
 #, c-format
@@ -1176,8 +1184,8 @@ msgid "Help"
 msgstr "Pomoc"
 
 #: src/gtr-preferences-dialog.c:591 src/gtr-preferences-dialog.ui:49
-msgid "Gtranslator Preferences"
-msgstr "Preferencje programu gtranslator"
+msgid "Translation Editor Preferences"
+msgstr "Preferencje edytora tłumaczeń"
 
 #: src/gtr-preferences-dialog.ui:119
 msgid "General"
@@ -1244,8 +1252,8 @@ msgid "Profiles"
 msgstr "Profile"
 
 #: src/gtr-profile-dialog.c:73
-msgid "Gtranslator Profile"
-msgstr "Profil programu gtranslator"
+msgid "Translation Editor Profile"
+msgstr "Profil edytora tłumaczeń"
 
 #: src/gtr-profile-dialog.ui:68
 msgid "_Name"
@@ -1392,11 +1400,11 @@ msgstr "Przetłumaczony te_kst:"
 
 #: src/gtr-utils.c:516
 msgid ""
-"Unable to display help. Please make sure the Gtranslator documentation "
-"package is installed."
+"Unable to display help. Please make sure the Translation Editor "
+"documentation package is installed."
 msgstr ""
 "Nie można wyświetlić pomocy. Proszę się upewnić, że pakiet dokumentacji "
-"programu gtranslator jest zainstalowany."
+"programu jest zainstalowany."
 
 #: src/gtr-window.c:167
 msgid "Untranslated"
@@ -1447,18 +1455,14 @@ msgstr[2] "%d nieprzetłumaczonych"
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:297
 #, c-format
-msgid "*%s — gtranslator"
-msgstr "*%s — gtranslator"
+msgid "*%s — Translation Editor"
+msgstr "*%s — edytor tłumaczeń"
 
 #. Translators: this is the title of the window with a document opened
 #: src/gtr-window.c:303
 #, c-format
-msgid "%s — gtranslator"
-msgstr "%s — gtranslator"
-
-#: src/gtr-window.c:312
-msgid "gtranslator"
-msgstr "gtranslator"
+msgid "%s — Translation Editor"
+msgstr "%s — edytor tłumaczeń"
 
 #: src/gtr-window.c:534
 msgid "No profile"
@@ -1571,3 +1575,7 @@ msgstr ""
 "%s\n"
 "Polecenie „%s --help” wyświetli pełną listę dostępnych opcji wiersza "
 "poleceń.\n"
+
+#: src/translation-memory/gtr-translation-memory-dialog.c:287
+msgid "Translation Editor Memory Manager"
+msgstr "Menedżer pamięci edytora tłumaczeń"
