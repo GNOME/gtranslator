@@ -127,6 +127,8 @@ if gtr_schemasdir == ''
   message(gtr_schemasdir)
 endif
 
+itstool = find_program  ('itstool')
+
 ###########
 # Subdirs #
 ###########
