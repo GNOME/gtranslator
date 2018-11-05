@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-10-15 16:02+0000\n"
-"PO-Revision-Date: 2018-10-16 21:33+0200\n"
+"POT-Creation-Date: 2018-10-29 12:07+0000\n"
+"PO-Revision-Date: 2018-11-04 23:23+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -19,12 +19,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.2\n"
 
 # src/prefs.c:239
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:555
-#: src/gtr-window.ui:25
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
@@ -59,6 +57,11 @@ msgstr ""
 "insticksmoduler, som alternativa språk, taggning, integration med subversion "
 "och källkodsläsare."
 
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:555
+#: src/gtr-window.c:312 src/gtr-window.ui:25
+msgid "Translation Editor"
+msgstr "Översättningsredigerare"
+
 # src/menus.c:315 src/menus.c:316
 #: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
@@ -68,6 +71,11 @@ msgstr "PO-filredigerare"
 #: data/org.gnome.Gtranslator.desktop.in.in:7
 msgid "@icon@"
 msgstr "@icon@"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:14
+#| msgid "Gtranslator Translation Memory Manager"
+msgid "Gtranslator;Translation;Editor;Gettext;Write;"
+msgstr "Gtranslator;Översättning;Redigerare;Gettext;Skriv;"
 
 # src/prefs.c:166
 #: data/org.gnome.Gtranslator.gschema.xml.in:24
@@ -481,7 +489,6 @@ msgid "Please specify a valid path to build the translation memory"
 msgstr "Ange sökväg till en plats att bygga upp översättningsminnet"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.c:291
-#: src/translation-memory/gtr-translation-memory-dialog.c:287
 msgid "Gtranslator Translation Memory Manager"
 msgstr "Hanterare för översättningsminne"
 
@@ -662,8 +669,8 @@ msgstr ""
 
 # src/menus.c:265
 #: src/gtr-actions-app.c:104
-msgid "Gtranslator Web Site"
-msgstr "Webbplats för Gtranslator"
+msgid "Translation Editor Web Site"
+msgstr "Webbplats för Översättningsredigerare"
 
 #: src/gtr-actions-file.c:200
 msgid "Open file for translation"
@@ -720,7 +727,7 @@ msgstr "_Om"
 msgid "_Quit"
 msgstr "A_vsluta"
 
-#: src/gtr-assistant.c:127
+#: src/gtr-assistant.c:128
 #, c-format
 msgid ""
 "Profile name: %s\n"
@@ -743,38 +750,42 @@ msgstr ""
 "Överföringskodning %s\n"
 "Pluralform: %s\n"
 
-#: src/gtr-assistant.c:166
+#: src/gtr-assistant.c:167
 msgid "This assistant will help you to create the main profile."
 msgstr "Denna guide hjälper dig att skapa en huvudprofil."
 
 # src/languages.h:220
-#: src/gtr-assistant.c:171
+#: src/gtr-assistant.c:172
 msgid "Assistant"
 msgstr "Guide"
 
 # src/prefs.c:108
-#: src/gtr-assistant.c:245
-msgid "Profile name:"
-msgstr "Profilnamn:"
+#: src/gtr-assistant.c:258
+msgid "Profile name"
+msgstr "Profilnamn"
 
 # src/header_stuff.c:512
-#: src/gtr-assistant.c:289
-msgid "Translator email:"
-msgstr "Översättarens e-post:"
+#: src/gtr-assistant.c:302
+msgid "Translator email"
+msgstr "Översättarens e-post"
+
+#: src/gtr-assistant.c:324
+msgid "Team email"
+msgstr "Gruppens e-post"
 
 # data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: src/gtr-assistant.c:304 src/gtr-preferences-dialog.c:521
+#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:521
 #: src/gtr-window.c:550
 msgid "Profile"
 msgstr "Profil"
 
 # src/header_stuff.c:515 src/prefs.c:137
-#: src/gtr-assistant.c:396
+#: src/gtr-assistant.c:429
 msgid "Language"
 msgstr "Språk"
 
 # src/prefs.c:108
-#: src/gtr-assistant.c:417
+#: src/gtr-assistant.c:450
 msgid "Confirmation"
 msgstr "Bekräftelse"
 
@@ -784,7 +795,7 @@ msgstr "Stäng _utan att spara"
 
 #: src/gtr-close-confirmation-dialog.c:126 src/gtr-file-dialogs.c:45
 #: src/gtr-jump-dialog.c:90 src/gtr-preferences-dialog.c:394
-#: src/gtr-profile-dialog.c:70
+#: src/gtr-profile-dialog.c:71
 #: src/translation-memory/gtr-translation-memory-dialog.c:101
 msgid "_Cancel"
 msgstr "A_vbryt"
@@ -905,12 +916,12 @@ msgid "Translator’s _email:"
 msgstr "Översättarens _e-post:"
 
 # src/header_stuff.c:515 src/prefs.c:137
-#: src/gtr-header-dialog.ui:117 src/gtr-languages-fetcher.ui:104
+#: src/gtr-header-dialog.ui:117
 msgid "_Language:"
 msgstr "_Språk:"
 
 # src/prefs.c:141
-#: src/gtr-header-dialog.ui:130 src/gtr-languages-fetcher.ui:89
+#: src/gtr-header-dialog.ui:130
 msgid "Language _code:"
 msgstr "Språk_kod:"
 
@@ -963,8 +974,8 @@ msgstr "Projekt"
 msgid "Comment"
 msgstr "Kommentar"
 
-#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:163
-#: src/gtr-profile-dialog.c:168
+#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
+#: src/gtr-profile-dialog.c:170
 #: src/translation-memory/gtr-translation-memory-dialog.c:103
 msgid "_OK"
 msgstr "_OK"
@@ -979,23 +990,38 @@ msgstr "Gå till meddelande"
 msgid "Enter message number:"
 msgstr "Ange meddelandenummer:"
 
-#: src/gtr-languages-fetcher.ui:44
-msgid "_Team email:"
-msgstr "_Gruppens e-post:"
+# src/header_stuff.c:515 src/prefs.c:137
+#: src/gtr-lang-button.ui:61 src/gtr-lang-button.ui:70
+msgid "Choose Language"
+msgstr "Välj språk"
 
-#: src/gtr-languages-fetcher.ui:59
-msgid "Transfer en_coding:"
-msgstr "Överföringsko_dning:"
+# src/header_stuff.c:515 src/prefs.c:137
+#: src/gtr-languages-fetcher.ui:46
+msgid "_Language"
+msgstr "_Språk"
+
+# src/prefs.c:141
+#: src/gtr-languages-fetcher.ui:60
+msgid "Language _code"
+msgstr "Språk_kod"
 
 # src/header_stuff.c:524 src/prefs.c:150
 #: src/gtr-languages-fetcher.ui:74
 msgid "Character _set"
 msgstr "Teckenuppsättnin_g"
 
+#: src/gtr-languages-fetcher.ui:88
+msgid "Transfer en_coding"
+msgstr "Överföringsko_dning"
+
 # src/menus.c:135 src/menus.c:367
-#: src/gtr-languages-fetcher.ui:221
-msgid "_Plural forms:"
-msgstr "_Pluralformer:"
+#: src/gtr-languages-fetcher.ui:102
+msgid "_Plural forms"
+msgstr "_Pluralformer"
+
+#: src/gtr-languages-fetcher.ui:200
+msgid "Edit options manually"
+msgstr "Redigera alternativ manuellt"
 
 #: src/gtr-message-table.c:255
 msgid "Original Message"
@@ -1134,10 +1160,12 @@ msgstr "Kunde inte lagra temporär fil för teckentabellskonvertering"
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
-"iconv command line tools before opening this file with gtranslator"
+"iconv command line tools before opening this file with GNOME Translation "
+"Editor"
 msgstr ""
 "Alla försök att konvertera filen till UTF-8 har misslyckats. Använd "
-"kommandoradsverktygen msgconv eller iconv, innan filen öppnas med gtranslator"
+"kommandoradsverktygen msgconv eller iconv, innan filen öppnas med GNOME "
+"Översättningsredigerare"
 
 #: src/gtr-po.c:666
 #, c-format
@@ -1202,8 +1230,8 @@ msgstr "Hjälp"
 
 # src/dialogs.c:574
 #: src/gtr-preferences-dialog.c:591 src/gtr-preferences-dialog.ui:49
-msgid "Gtranslator Preferences"
-msgstr "Inställningar för Gtranslator"
+msgid "Translation Editor Preferences"
+msgstr "Inställningar för Översättningsredigerare"
 
 # src/header_stuff.c:486
 #: src/gtr-preferences-dialog.ui:119
@@ -1278,34 +1306,38 @@ msgid "Profiles"
 msgstr "Profiler"
 
 # src/dialogs.c:390
-#: src/gtr-profile-dialog.c:72
-msgid "Gtranslator Profile"
-msgstr "Gtranslator-profil"
+#: src/gtr-profile-dialog.c:73
+msgid "Translation Editor Profile"
+msgstr "Översättningsredigerarprofil"
+
+#: src/gtr-profile-dialog.ui:68
+msgid "_Name"
+msgstr "_Namn"
 
 # src/prefs.c:108
-#: src/gtr-profile-dialog.ui:57
+#: src/gtr-profile-dialog.ui:96
 msgid "Profile Information"
 msgstr "Profilinformation"
 
-#: src/gtr-profile-dialog.ui:99
-msgid "_Name:"
-msgstr "_Namn:"
-
 # src/prefs.c:108
-#: src/gtr-profile-dialog.ui:136
+#: src/gtr-profile-dialog.ui:113
 msgid "Translator Information"
 msgstr "Översättarinformation"
 
-#: src/gtr-profile-dialog.ui:181
-msgid "_Email:"
-msgstr "_E-post:"
+#: src/gtr-profile-dialog.ui:131
+msgid "N_ame"
+msgstr "N_amn"
 
-#: src/gtr-profile-dialog.ui:197
-msgid "N_ame:"
-msgstr "N_amn:"
+#: src/gtr-profile-dialog.ui:146
+msgid "_Email"
+msgstr "_E-post"
+
+#: src/gtr-profile-dialog.ui:160
+msgid "_Team email"
+msgstr "_Gruppens e-post"
 
 # src/prefs.c:109
-#: src/gtr-profile-dialog.ui:246
+#: src/gtr-profile-dialog.ui:209
 msgid "Language Settings"
 msgstr "Språkinställningar"
 
@@ -1441,11 +1473,11 @@ msgstr "_Översatt text:"
 
 #: src/gtr-utils.c:516
 msgid ""
-"Unable to display help. Please make sure the Gtranslator documentation "
-"package is installed."
+"Unable to display help. Please make sure the Translation Editor "
+"documentation package is installed."
 msgstr ""
-"Kunde inte visa hjälp. Försäkra dig om att Gtranslators dokumentationspaket "
-"är installerat."
+"Kunde inte visa hjälp. Försäkra dig om att Översättningsredigerares "
+"dokumentationspaket är installerat."
 
 # src/gui.c:407 src/gui.c:409
 #: src/gtr-window.c:167
@@ -1501,20 +1533,15 @@ msgstr[1] "%d oöversatta"
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:297
 #, c-format
-msgid "*%s — gtranslator"
-msgstr "*%s — gtranslator"
+msgid "*%s — Translation Editor"
+msgstr "*%s — Översättningsredigerare"
 
 # src/prefs.c:239
 #. Translators: this is the title of the window with a document opened
 #: src/gtr-window.c:303
 #, c-format
-msgid "%s — gtranslator"
-msgstr "%s — gtranslator"
-
-# src/prefs.c:239
-#: src/gtr-window.c:312
-msgid "gtranslator"
-msgstr "gtranslator"
+msgid "%s — Translation Editor"
+msgstr "%s — Översättningsredigerare"
 
 # data/ui/nautilus-gtranslator-view-ui.xml.h:4
 #: src/gtr-window.c:534
@@ -1635,6 +1662,14 @@ msgstr ""
 "%s\n"
 "Kör ”%s --help” för att se en komplett lista över tillgängliga "
 "kommandoradsflaggor.\n"
+
+#: src/translation-memory/gtr-translation-memory-dialog.c:287
+msgid "Translation Editor Memory Manager"
+msgstr "Hanterare för översättningsminne"
+
+# src/prefs.c:239
+#~ msgid "gtranslator"
+#~ msgstr "gtranslator"
 
 # src/sidebar.c:107
 #~ msgid "Current Developers"
