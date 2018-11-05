@@ -76,7 +76,7 @@ gtr_dirs_init ()
   if (gtr_data_dir == NULL)
     {
       gtr_data_dir = g_build_filename (PACKAGE_DATADIR, "gtranslator", NULL);
-      gtr_help_dir = g_build_filename (PACKAGE_HELPDIR, "gnome", "help", NULL);
+      gtr_help_dir = g_build_filename (PACKAGE_DATADIR, "help", NULL);
       gtr_locale_dir = g_build_filename (PACKAGE_LOCALEDIR, "locale", NULL);
       gtr_lib_dir = g_build_filename (PACKAGE_LIBDIR, "gtranslator", NULL);
     }

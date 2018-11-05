@@ -494,8 +494,8 @@ gtr_utils_help_display (GtkWindow * parent,
         continue;
 
       path = gtr_dirs_get_gtr_help_dir ();
-      uri = g_build_filename (path, doc_id,
-                              lang, file_name, NULL);
+      uri = g_build_filename (path, lang,
+                              doc_id, file_name, NULL);
 
       if (g_file_test (uri, G_FILE_TEST_EXISTS))
         {
@@ -522,7 +522,9 @@ gtr_utils_help_display (GtkWindow * parent,
       return;
     }
 
-  command = g_strconcat ("gnome-help help://", uri, NULL);
+  /* Should be updated to use gtk_show_uri instead, see
+   * https://wiki.gnome.org/Initiatives/GnomeGoals/RemoveGnomeOpenGnomeHelp */
+  command = g_strconcat ("yelp ", uri, NULL);
   g_free (uri);
 
   g_spawn_command_line_async (command, &error);
