@@ -33,7 +33,6 @@ typedef struct
 {
   GtkWidget *sw;
   GtkWidget *context;
-  GtkWidget *button_box;
   GtkWidget *button;
   GtkWidget *translation_memory_box;
 
@@ -65,19 +64,51 @@ enum
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
+static void buffer_end_user_action (GtkTextBuffer *buffer, GtrContextPanel *panel);
+static void reload_values (GtrContextPanel *panel);
+
 static void
 setup_notes_edition (GtrContextPanel *panel)
 {
-  GtkTextBuffer *buffer;
   GtrContextPanelPrivate *priv;
+  GtkWidget *dialog;
+  GtkBox *dialog_area;
+  GtkWidget *text_view;
+  GtkTextBuffer *text_buffer;
+  int result;
 
-  priv = gtr_context_panel_get_instance_private(panel);
+  priv = gtr_context_panel_get_instance_private (panel);
 
-  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->context));
-  gtk_text_buffer_set_text (buffer, gtr_msg_get_comment (priv->current_msg), -1);
+  dialog = gtk_dialog_new_with_buttons ("Add notes",
+                                        GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (panel))),
+                                        GTK_DIALOG_MODAL,
+                                        _("_Save"),
+                                        GTK_RESPONSE_ACCEPT,
+                                        _("_Cancel"),
+                                        GTK_RESPONSE_REJECT,
+                                        NULL);
 
-  gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->context), TRUE);
-  gtk_widget_show (priv->button_box);
+  dialog_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog)));
+  text_view = gtk_text_view_new ();
+  gtk_box_pack_start (dialog_area, text_view, TRUE, TRUE, 6);
+
+  text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
+  gtk_text_buffer_set_text (text_buffer, gtr_msg_get_comment (priv->current_msg), -1);
+
+  gtk_widget_show_all (dialog);
+  result = gtk_dialog_run (GTK_DIALOG (dialog));
+
+  switch (result)
+    {
+    case GTK_RESPONSE_ACCEPT:
+      buffer_end_user_action (text_buffer, panel);
+      break;
+    default:
+      break;
+    }
+
+  gtk_widget_destroy (dialog);
+  reload_values(panel);
 }
 
 static void
@@ -314,7 +345,6 @@ reload_values (GtrContextPanel *panel)
   priv = gtr_context_panel_get_instance_private(panel);
 
   showed_message_cb (priv->tab, priv->current_msg, panel);
-  gtk_widget_hide (priv->button_box);
   gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->context), FALSE);
 
   g_signal_emit (G_OBJECT (panel), signals[RELOADED], 0, priv->current_msg);
@@ -330,8 +360,6 @@ buffer_end_user_action (GtkTextBuffer *buffer, GtrContextPanel *panel)
   GtrPoState po_state;
 
   priv = gtr_context_panel_get_instance_private(panel);
-
-  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->context));
 
   gtk_text_buffer_get_bounds (buffer, &start, &end);
 
@@ -385,8 +413,6 @@ gtr_context_panel_init (GtrContextPanel *panel)
 
   g_signal_connect (priv->button, "clicked",
                     G_CALLBACK (on_done_button_clicked), panel);
-
-  gtk_widget_hide (priv->button_box);
 }
 
 static void
@@ -504,7 +530,6 @@ gtr_context_panel_class_init (GtrContextPanelClass * klass)
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, sw);
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, context);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, button_box);
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, button);
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, translation_memory_box);
 }
