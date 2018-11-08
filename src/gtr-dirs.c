@@ -77,7 +77,7 @@ gtr_dirs_init ()
     {
       gtr_data_dir = g_build_filename (PACKAGE_DATADIR, "gtranslator", NULL);
       gtr_help_dir = g_build_filename (PACKAGE_DATADIR, "help", NULL);
-      gtr_locale_dir = g_build_filename (PACKAGE_LOCALEDIR, "locale", NULL);
+      gtr_locale_dir = g_build_filename (PACKAGE_DATADIR, "locale", NULL);
       gtr_lib_dir = g_build_filename (PACKAGE_LIBDIR, "gtranslator", NULL);
     }
 #endif /* !G_OS_WIN32 */
