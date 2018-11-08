@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-10-29 12:07+0000\n"
-"PO-Revision-Date: 2018-10-29 13:34+0100\n"
+"POT-Creation-Date: 2018-11-06 09:22+0000\n"
+"PO-Revision-Date: 2018-11-08 13:19+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -63,8 +63,7 @@ msgstr ""
 "y un visor de código fuente."
 
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:555
-#: src/gtr-window.c:312 src/gtr-window.ui:25
-#| msgid "Translation Memory"
+#: src/gtr-notebook.ui:294 src/gtr-window.c:312 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Editor de traducciones"
 
@@ -78,7 +77,6 @@ msgid "@icon@"
 msgstr "@icon@"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:14
-#| msgid "Gtranslator Translation Memory Manager"
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "gtranslator;traducción;editor;gettext;traducir;escribir;"
 
@@ -674,7 +672,6 @@ msgstr ""
 "Javier Gómez sierras <jgomsi@apolo.umh.es>, 2000"
 
 #: src/gtr-actions-app.c:104
-#| msgid "Gtranslator Web Site"
 msgid "Translation Editor Web Site"
 msgstr "Página web del Editor de traducciones"
 
@@ -761,17 +758,14 @@ msgid "Assistant"
 msgstr "Asistente"
 
 #: src/gtr-assistant.c:258
-#| msgid "Profile name:"
 msgid "Profile name"
 msgstr "Nombre del perfil"
 
 #: src/gtr-assistant.c:302
-#| msgid "Translator email:"
 msgid "Translator email"
 msgstr "Correo-_e del traductor"
 
 #: src/gtr-assistant.c:324
-#| msgid "_Team email:"
 msgid "Team email"
 msgstr "Correo-e del _equipo"
 
@@ -792,14 +786,15 @@ msgstr "Confirmación"
 msgid "Close _without Saving"
 msgstr "Cerrar _sin guardar"
 
-#: src/gtr-close-confirmation-dialog.c:126 src/gtr-file-dialogs.c:45
-#: src/gtr-jump-dialog.c:90 src/gtr-preferences-dialog.c:394
-#: src/gtr-profile-dialog.c:71
+#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:86
+#: src/gtr-file-dialogs.c:45 src/gtr-jump-dialog.c:90
+#: src/gtr-preferences-dialog.c:394 src/gtr-profile-dialog.c:71
 #: src/translation-memory/gtr-translation-memory-dialog.c:101
 msgid "_Cancel"
 msgstr "C_ancelar"
 
-#: src/gtr-close-confirmation-dialog.c:128 src/gtr-file-dialogs.c:47
+#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:84
+#: src/gtr-file-dialogs.c:47
 msgid "_Save"
 msgstr "_Guardar"
 
@@ -847,36 +842,37 @@ msgstr "El administrador del sistema ha desactivado el guardado."
 msgid "If you don’t save, all your changes will be permanently lost."
 msgstr "Si no guarda perderá todos los cambios permanentemente."
 
-#: src/gtr-context.c:238
+#: src/gtr-context.c:81
+#| msgid "Editor font"
+msgid "Edit notes"
+msgstr "Editar notas"
+
+#: src/gtr-context.c:268
 msgid "Notes:"
 msgstr "Notas:"
 
-#: src/gtr-context.c:246
+#: src/gtr-context.c:276
 msgid "Add Note"
 msgstr "Añadir una nota"
 
-#: src/gtr-context.c:251
+#: src/gtr-context.c:281
 msgid "Edit"
 msgstr "Editar"
 
 #. Extracted comments
-#: src/gtr-context.c:297
+#: src/gtr-context.c:327
 msgid "Extracted comments:"
 msgstr "Comentarios extraídos:"
 
 #. Context
-#: src/gtr-context.c:301
+#: src/gtr-context.c:331
 msgid "Context:"
 msgstr "Contexto:"
 
 #. Format
-#: src/gtr-context.c:305
+#: src/gtr-context.c:335
 msgid "Format:"
 msgstr "Formato:"
-
-#: src/gtr-context.ui:51
-msgid "D_one"
-msgstr "Terminad_o"
 
 #: src/gtr-file-dialogs.c:62
 msgid "Gettext translation"
@@ -969,17 +965,14 @@ msgid "Enter message number:"
 msgstr "Introducir el número del mensaje:"
 
 #: src/gtr-lang-button.ui:61 src/gtr-lang-button.ui:70
-#| msgid "Language"
 msgid "Choose Language"
 msgstr "Elegir idioma"
 
 #: src/gtr-languages-fetcher.ui:46
-#| msgid "_Language:"
 msgid "_Language"
 msgstr "_Idioma"
 
 #: src/gtr-languages-fetcher.ui:60
-#| msgid "Language _code:"
 msgid "Language _code"
 msgstr "_Código del idioma"
 
@@ -988,12 +981,10 @@ msgid "Character _set"
 msgstr "Co_njunto de caracteres:"
 
 #: src/gtr-languages-fetcher.ui:88
-#| msgid "Transfer en_coding:"
 msgid "Transfer en_coding"
 msgstr "_Codificación de transferencia"
 
 #: src/gtr-languages-fetcher.ui:102
-#| msgid "_Plural forms:"
 msgid "_Plural forms"
 msgstr "Formas _plurales"
 
@@ -1134,9 +1125,6 @@ msgstr ""
 
 #: src/gtr-po.c:598
 #, c-format
-#| msgid ""
-#| "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
-#| "iconv command line tools before opening this file with gtranslator"
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
 "iconv command line tools before opening this file with GNOME Translation "
@@ -1207,7 +1195,6 @@ msgid "Help"
 msgstr "Ayuda"
 
 #: src/gtr-preferences-dialog.c:591 src/gtr-preferences-dialog.ui:49
-#| msgid "Gtranslator Preferences"
 msgid "Translation Editor Preferences"
 msgstr "Preferencias del Editor de traducciones"
 
@@ -1276,12 +1263,10 @@ msgid "Profiles"
 msgstr "Perfiles"
 
 #: src/gtr-profile-dialog.c:73
-#| msgid "Gtranslator Profile"
 msgid "Translation Editor Profile"
 msgstr "Perfil del Editor de traducciones"
 
 #: src/gtr-profile-dialog.ui:68
-#| msgid "_Name:"
 msgid "_Name"
 msgstr "_Nombre"
 
@@ -1294,17 +1279,14 @@ msgid "Translator Information"
 msgstr "Información del traductor"
 
 #: src/gtr-profile-dialog.ui:131
-#| msgid "N_ame:"
 msgid "N_ame"
 msgstr "N_ombre"
 
 #: src/gtr-profile-dialog.ui:146
-#| msgid "_Email:"
 msgid "_Email"
 msgstr "Correo-_e"
 
 #: src/gtr-profile-dialog.ui:160
-#| msgid "_Team email:"
 msgid "_Team email"
 msgstr "Correo-e del _equipo"
 
@@ -1403,7 +1385,7 @@ msgstr "Traducido: %0.2f%%"
 #: src/gtr-tab.c:1790
 #, c-format
 msgid "Translated: %d"
-msgstr "Traducido: %d"
+msgstr "Traducidas: %d"
 
 #: src/gtr-tab.c:1791
 #, c-format
@@ -1413,7 +1395,7 @@ msgstr "Sin traducir: %d"
 #: src/gtr-tab.c:1792
 #, c-format
 msgid "Fuzzy: %d"
-msgstr "Difusos: %d"
+msgstr "Difusas: %d"
 
 #: src/gtr-tab-label.c:278
 msgid "Close document"
@@ -1428,9 +1410,6 @@ msgid "Translate_d Text:"
 msgstr "Texto _traducido:"
 
 #: src/gtr-utils.c:516
-#| msgid ""
-#| "Unable to display help. Please make sure the Gtranslator documentation "
-#| "package is installed."
 msgid ""
 "Unable to display help. Please make sure the Translation Editor "
 "documentation package is installed."
@@ -1484,14 +1463,12 @@ msgstr[1] "%d sin traducir"
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:297
 #, c-format
-#| msgid "*%s — gtranslator"
 msgid "*%s — Translation Editor"
 msgstr "*%s — Editor de traducciones"
 
 #. Translators: this is the title of the window with a document opened
 #: src/gtr-window.c:303
 #, c-format
-#| msgid "%s — gtranslator"
 msgid "%s — Translation Editor"
 msgstr "%s — Editor de traducciones"
 
@@ -1608,9 +1585,11 @@ msgstr ""
 "comandos disponibles.\n"
 
 #: src/translation-memory/gtr-translation-memory-dialog.c:287
-#| msgid "Gtranslator Translation Memory Manager"
 msgid "Translation Editor Memory Manager"
 msgstr "Gestor de la memoria de traducción del Editor de traducciones"
+
+#~ msgid "D_one"
+#~ msgstr "Terminad_o"
 
 #~| msgid "Language _code:"
 #~ msgid "Language Code:"
@@ -1666,9 +1645,6 @@ msgstr "Gestor de la memoria de traducción del Editor de traducciones"
 #~ msgid "If true, use a custom font for edit fields."
 #~ msgstr ""
 #~ "Si está activado, usa una tipografía personalizada para editar campos."
-
-#~ msgid "Editor font"
-#~ msgstr "Tipografía del editor"
 
 #~ msgid "Custom font to use for edit fields."
 #~ msgstr "Tipografía personalizada que usar para editar campos."
