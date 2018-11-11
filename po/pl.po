@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-11-03 14:35+0000\n"
-"PO-Revision-Date: 2018-11-03 22:55+0100\n"
+"POT-Creation-Date: 2018-11-06 09:22+0000\n"
+"PO-Revision-Date: 2018-11-11 13:30+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -775,14 +775,15 @@ msgstr "Potwierdzenie"
 msgid "Close _without Saving"
 msgstr "Zamknij _bez zapisywania"
 
-#: src/gtr-close-confirmation-dialog.c:126 src/gtr-file-dialogs.c:45
-#: src/gtr-jump-dialog.c:90 src/gtr-preferences-dialog.c:394
-#: src/gtr-profile-dialog.c:71
+#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:86
+#: src/gtr-file-dialogs.c:45 src/gtr-jump-dialog.c:90
+#: src/gtr-preferences-dialog.c:394 src/gtr-profile-dialog.c:71
 #: src/translation-memory/gtr-translation-memory-dialog.c:101
 msgid "_Cancel"
 msgstr "_Anuluj"
 
-#: src/gtr-close-confirmation-dialog.c:128 src/gtr-file-dialogs.c:47
+#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:84
+#: src/gtr-file-dialogs.c:47
 msgid "_Save"
 msgstr "_Zapisz"
 
@@ -834,36 +835,36 @@ msgstr ""
 "Jeżeli dokument nie zostanie zapisany, wszystkie zmiany zostaną bezpowrotnie "
 "utracone."
 
-#: src/gtr-context.c:238
+#: src/gtr-context.c:81
+msgid "Edit notes"
+msgstr "Modyfikacja notatek"
+
+#: src/gtr-context.c:268
 msgid "Notes:"
 msgstr "Notatki:"
 
-#: src/gtr-context.c:246
+#: src/gtr-context.c:276
 msgid "Add Note"
 msgstr "Dodaj notatkę"
 
-#: src/gtr-context.c:251
+#: src/gtr-context.c:281
 msgid "Edit"
 msgstr "Modyfikuj"
 
 #. Extracted comments
-#: src/gtr-context.c:297
+#: src/gtr-context.c:327
 msgid "Extracted comments:"
 msgstr "Wydobyte komentarze:"
 
 #. Context
-#: src/gtr-context.c:301
+#: src/gtr-context.c:331
 msgid "Context:"
 msgstr "Kontekst:"
 
 #. Format
-#: src/gtr-context.c:305
+#: src/gtr-context.c:335
 msgid "Format:"
 msgstr "Format:"
-
-#: src/gtr-context.ui:51
-msgid "D_one"
-msgstr "_Gotowe"
 
 #: src/gtr-file-dialogs.c:62
 msgid "Gettext translation"
