@@ -104,6 +104,7 @@ typedef struct _IdleData
   GtkProgressBar *progress;
   GtrTranslationMemory *tm;
   GtkWindow *parent;
+  GtkWidget *add_database_button;
 } IdleData;
 
 static gboolean
@@ -140,26 +141,7 @@ add_to_database (gpointer data_pointer)
     }
   else
     {
-      GtkWidget *dialog;
-      gchar *markup;
-
-      gtk_progress_bar_set_fraction (data->progress, 1.0);
-
-      dialog = gtk_message_dialog_new (data->parent,
-                                       GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_INFO,
-                                       GTK_BUTTONS_CLOSE, NULL);
-
-      markup =
-        g_strdup_printf("<span weight=\"bold\" size=\"large\">%s</span>",
-                        _("Strings added to database"));
-      gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog), markup);
-      g_free(markup);
-
-      g_signal_connect (dialog, "response",
-                        G_CALLBACK (gtk_widget_destroy), NULL);
-      gtk_widget_show (dialog);
-
+      gtk_widget_set_sensitive (data->add_database_button, TRUE);
       return FALSE;
     }
 
@@ -190,14 +172,87 @@ destroy_idle_data (gpointer data)
   g_free (d);
 }
 
+typedef struct
+{
+  GFile *dir;
+  gchar *restriction;
+} ScanDirTaskData;
+
+static void
+task_data_destroy (ScanDirTaskData *data)
+{
+  if (data->restriction)
+    g_free (data->restriction);
+  g_object_unref (data->dir);
+
+  g_free (data);
+}
+
+static void
+scan_dir_task_func (GTask                      *task,
+                    GtrTranslationMemoryDialog *dlg,
+                    ScanDirTaskData            *data,
+                    GCancellable               *cancellable)
+{
+  GSList *list = NULL;
+  gtr_scan_dir (data->dir, &list, data->restriction);
+  g_task_return_pointer (task, list, (GDestroyNotify)g_slist_free);
+}
+
+static void
+scan_dir_task_ready_cb (GtrTranslationMemoryDialog *dlg,
+                        GTask                      *task,
+                        IdleData                   *data)
+{
+  data->list = g_task_propagate_pointer (task, NULL);
+
+  g_idle_add_full (G_PRIORITY_HIGH_IDLE + 30,
+                   (GSourceFunc) add_to_database,
+                   data, (GDestroyNotify) destroy_idle_data);
+}
+
+static void
+launch_gtr_scan_dir_task (GtrTranslationMemoryDialog *dlg,
+                          ScanDirTaskData            *data)
+{
+  GTask *task;
+  GCancellable *cancellable;
+  IdleData *idata;
+  GtrTranslationMemoryDialogPrivate *priv = gtr_translation_memory_dialog_get_instance_private (dlg);
+
+  cancellable = g_cancellable_new ();
+  // TODO: connect cancellable cancel signal
+
+  idata = g_new0 (IdleData, 1);
+  idata->list = NULL;
+  idata->tm = priv->translation_memory;
+  idata->progress = GTK_PROGRESS_BAR (priv->add_database_progressbar);
+  idata->parent = GTK_WINDOW (dlg);
+  idata->add_database_button = priv->add_database_button;
+
+  gtk_progress_bar_pulse (idata->progress);
+  gtk_widget_show (priv->add_database_progressbar);
+
+  gtk_widget_set_sensitive (priv->add_database_button, FALSE);
+
+  task = g_task_new (dlg,
+                     cancellable,
+                     (GAsyncReadyCallback)scan_dir_task_ready_cb,
+                     idata);
+
+  g_task_set_task_data (task, data, (GDestroyNotify)task_data_destroy);
+
+  g_task_run_in_thread (task,
+                        (GTaskThreadFunc) scan_dir_task_func);
+}
+
 static void
 on_add_database_button_clicked (GtkButton                  *button,
                                 GtrTranslationMemoryDialog *dlg)
 {
-  GFile *dir;
   gchar *dir_name;
-  IdleData *data;
   GtrTranslationMemoryDialogPrivate *priv = gtr_translation_memory_dialog_get_instance_private (dlg);
+  ScanDirTaskData *scan_dir_data;
 
   dir_name = g_settings_get_string (priv->tm_settings,
                                     "po-directory");
@@ -205,49 +260,21 @@ on_add_database_button_clicked (GtkButton                  *button,
   /* If dir name is empty, show a warning message */
   if (*dir_name == '\0')
     {
-      GtkWidget *dialog;
-      dialog = gtk_message_dialog_new (GTK_WINDOW (dlg),
-                                       GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_WARNING,
-                                       GTK_BUTTONS_CLOSE,
-                                       _("Please specify a valid path to build the translation memory"));
-
-      gtk_widget_show (dialog);
-      g_signal_connect (dialog, "response",
-                        G_CALLBACK (gtk_widget_destroy), NULL);
       g_free (dir_name);
       return;
     }
 
-  dir = g_file_new_for_path (dir_name);
+  scan_dir_data = g_new0 (ScanDirTaskData, 1);
+  scan_dir_data->dir = g_file_new_for_path (dir_name);
   g_free (dir_name);
-
-  data = g_new0 (IdleData, 1);
-  data->list = NULL;
 
   if (g_settings_get_boolean (priv->tm_settings,
                               "restrict-to-filename"))
     {
-      gchar *restriction;
-
-      restriction = g_settings_get_string (priv->tm_settings,
-                                           "filename-restriction");
-      gtr_scan_dir (dir, &data->list, restriction);
-      g_free (restriction);
+      scan_dir_data->restriction = g_settings_get_string (priv->tm_settings,
+                                                          "filename-restriction");
     }
-  else
-    gtr_scan_dir (dir, &data->list, NULL);
-
-  data->tm = priv->translation_memory;
-  data->progress = GTK_PROGRESS_BAR (priv->add_database_progressbar);
-  data->parent = GTK_WINDOW (dlg);
-
-  gtk_widget_show (priv->add_database_progressbar);
-  g_idle_add_full (G_PRIORITY_HIGH_IDLE + 30,
-                   (GSourceFunc) add_to_database,
-                   data, (GDestroyNotify) destroy_idle_data);
-
-  g_object_unref (dir);
+  launch_gtr_scan_dir_task (dlg, scan_dir_data);
 }
 
 static void
