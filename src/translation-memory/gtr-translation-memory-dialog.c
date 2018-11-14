@@ -67,17 +67,26 @@ gtr_translation_memory_dialog_class_init (GtrTranslationMemoryDialogClass *klass
 
 /***************Translation Memory pages****************/
 static void
-response_filechooser_cb (GtkDialog                  *dialog,
-                         gint                        response_id,
-                         GtrTranslationMemoryDialog *dlg)
+on_search_button_clicked (GtkButton                  *button,
+                          GtrTranslationMemoryDialog *dlg)
 {
+  GtkFileChooserNative *native;
+  gint res;
   GtrTranslationMemoryDialogPrivate *priv = gtr_translation_memory_dialog_get_instance_private (dlg);
 
-  if (response_id == GTK_RESPONSE_YES)
-    {
-      gchar *filename;
+  native = gtk_file_chooser_native_new (_("Select PO directory"),
+                                        GTK_WINDOW (dlg),
+                                        GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
+                                        _("_OK"),
+                                        _("_Cancel"));
 
-      filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+  res = gtk_native_dialog_run (GTK_NATIVE_DIALOG (native));
+  if (res == GTK_RESPONSE_ACCEPT)
+    {
+      char *filename;
+      GtkFileChooser *chooser = GTK_FILE_CHOOSER (native);
+
+      filename = gtk_file_chooser_get_filename (chooser);
       gtk_entry_set_text (GTK_ENTRY (priv->directory_entry),
                           filename);
       g_settings_set_string (priv->tm_settings,
@@ -86,27 +95,7 @@ response_filechooser_cb (GtkDialog                  *dialog,
       g_free (filename);
     }
 
-  gtk_widget_destroy (GTK_WIDGET (dialog));
-}
-
-static void
-on_search_button_clicked (GtkButton                  *button,
-                          GtrTranslationMemoryDialog *dlg)
-{
-  GtkWidget *filechooser;
-
-  filechooser = gtk_file_chooser_dialog_new ("Select PO directory",
-                                             GTK_WINDOW (dlg),
-                                             GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-                                             _("_Cancel"),
-                                             GTK_RESPONSE_CANCEL,
-                                             _("_OK"),
-                                             GTK_RESPONSE_YES, NULL);
-
-  g_signal_connect (GTK_DIALOG (filechooser), "response",
-                    G_CALLBACK (response_filechooser_cb), dlg);
-
-  gtk_widget_show (filechooser);
+  g_object_unref (native);
 }
 
 typedef struct _IdleData
