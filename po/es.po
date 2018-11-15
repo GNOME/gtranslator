@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-11-06 09:22+0000\n"
-"PO-Revision-Date: 2018-11-08 13:19+0100\n"
+"POT-Creation-Date: 2018-11-14 13:33+0000\n"
+"PO-Revision-Date: 2018-11-15 11:46+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -235,7 +235,7 @@ msgstr "_Abrir"
 #: plugins/alternate-language/gtr-alternate-language-panel.c:328
 #: src/gtr-header-dialog.c:278 src/gtr-io-error-info-bar.c:123
 #: src/gtr-preferences-dialog.c:588 src/gtr-search-dialog.c:391
-#: src/translation-memory/gtr-translation-memory-dialog.c:283
+#: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "_Cerrar"
 
@@ -483,12 +483,10 @@ msgid "Insert Params or Tags"
 msgstr "Insertar parámetros o etiquetas"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.c:167
-#: src/translation-memory/gtr-translation-memory-dialog.c:166
 msgid "Strings added to database"
 msgstr "Cadenas añadidas a la base de datos"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.c:224
-#: src/translation-memory/gtr-translation-memory-dialog.c:224
 msgid "Please specify a valid path to build the translation memory"
 msgstr "Especifique una ruta válida para construir la memoria de traducción"
 
@@ -497,17 +495,17 @@ msgid "Gtranslator Translation Memory Manager"
 msgstr "Gestor de la memoria de traducción de Gtranslator"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.ui:58
-#: src/translation-memory/gtr-translation-memory-dialog.ui:58
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
 msgid "Database:"
 msgstr "Base de datos:"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.ui:101
-#: src/translation-memory/gtr-translation-memory-dialog.ui:101
+#: src/translation-memory/gtr-translation-memory-dialog.ui:103
 msgid "Select the directory which contains PO files:"
 msgstr "Seleccionar la carpeta que contiene los archivos PO:"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.ui:152
-#: src/translation-memory/gtr-translation-memory-dialog.ui:152
+#: src/translation-memory/gtr-translation-memory-dialog.ui:154
 msgid "Add to Database"
 msgstr "Añadir a la base de datos"
 
@@ -517,7 +515,7 @@ msgid "Configuration:"
 msgstr "Configuración:"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.ui:252
-#: src/translation-memory/gtr-translation-memory-dialog.ui:252
+#: src/translation-memory/gtr-translation-memory-dialog.ui:253
 msgid "Use only files with this name:"
 msgstr "Sólo usar los archivos con este nombre:"
 
@@ -789,7 +787,7 @@ msgstr "Cerrar _sin guardar"
 #: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:86
 #: src/gtr-file-dialogs.c:45 src/gtr-jump-dialog.c:90
 #: src/gtr-preferences-dialog.c:394 src/gtr-profile-dialog.c:71
-#: src/translation-memory/gtr-translation-memory-dialog.c:101
+#: src/translation-memory/gtr-translation-memory-dialog.c:81
 msgid "_Cancel"
 msgstr "C_ancelar"
 
@@ -843,7 +841,6 @@ msgid "If you don’t save, all your changes will be permanently lost."
 msgstr "Si no guarda perderá todos los cambios permanentemente."
 
 #: src/gtr-context.c:81
-#| msgid "Editor font"
 msgid "Edit notes"
 msgstr "Editar notas"
 
@@ -952,7 +949,7 @@ msgstr "Comentario"
 
 #: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
 #: src/gtr-profile-dialog.c:170
-#: src/translation-memory/gtr-translation-memory-dialog.c:103
+#: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "_OK"
 msgstr "_Aceptar"
 
@@ -1584,7 +1581,12 @@ msgstr ""
 "Ejecute «%s --help» para ver una lista completa de las opciones de línea de "
 "comandos disponibles.\n"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:287
+#: src/translation-memory/gtr-translation-memory-dialog.c:77
+#| msgid "PO directory"
+msgid "Select PO directory"
+msgstr "Seleccione la carpeta PO"
+
+#: src/translation-memory/gtr-translation-memory-dialog.c:303
 msgid "Translation Editor Memory Manager"
 msgstr "Gestor de la memoria de traducción del Editor de traducciones"
 
