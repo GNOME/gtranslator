@@ -103,6 +103,7 @@ src_dir = join_paths(meson.source_root(), 'src')
 
 glib_dep = dependency('glib-2.0', version: '>= 2.36.0')
 gtk_dep = dependency('gtk+-3.0', version: '>= 3.22.20')
+gtk_doc_dep = dependency('gtk-doc-tools', version: '>= 1.28')
 
 iso_codes_dep = dependency('iso-codes', version: '>= 0.35')
 config_h.set_quoted('PACKAGE_ISO_CODES_PREFIX', iso_codes_dep.get_pkgconfig_variable('prefix'))
@@ -111,6 +112,7 @@ gtr_deps = [
   glib_dep,
   gtk_dep,
   iso_codes_dep,
+  gtk_doc_dep,
   dependency('libgda-5.0'),
   dependency('gio-2.0', version: '>= 2.36.0'),
   dependency('gsettings-desktop-schemas'),
