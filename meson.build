@@ -139,8 +139,11 @@ subdir('po')
 subdir('help')
 subdir('man')
 
+
 enable_gtk_doc = get_option('gtk_doc')
 if enable_gtk_doc
+  gtk_doc_dep = dependency('gtk-doc', version: '>= 1.28')
+  gtr_deps += gtk_doc_dep
   subdir('doc/reference')
 endif
 
