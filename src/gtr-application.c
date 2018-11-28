@@ -250,6 +250,17 @@ find_and_replace_activated (GSimpleAction *action,
 }
 
 static void
+copy_text_activated (GSimpleAction *action,
+                     GVariant      *parameter,
+                     gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+
+  gtr_message_copy_to_translation (NULL, priv->active_window);
+}
+
+static void
 preferences_activated (GSimpleAction *action,
                        GVariant      *parameter,
                        gpointer       user_data)
@@ -525,6 +536,7 @@ static GActionEntry app_entries[] = {
   { "tm_8", tm_activated, NULL, NULL, NULL },
   { "tm_9", tm_activated, NULL, NULL, NULL },
 
+  { "copy_text", copy_text_activated, NULL, NULL, NULL },
   { "find_and_replace", find_and_replace_activated, NULL, NULL, NULL },
   { "find", find_activated, NULL, NULL, NULL },
   { "new_window", new_window_activated, NULL, NULL, NULL },
@@ -579,6 +591,8 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.fuzzy", "<Ctrl>u");
   set_kb (application, "app.find", "<Ctrl>f");
   set_kb (application, "app.find_and_replace", "<Ctrl>h");
+
+  set_kb (application, "app.copy_text", "<Ctrl>space");
 
   set_kb (application, "app.build_tm", "<Ctrl>plus");
   set_kb (application, "app.tm_1", "<Ctrl>1");
