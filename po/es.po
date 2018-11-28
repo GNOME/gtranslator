@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-11-14 13:33+0000\n"
-"PO-Revision-Date: 2018-11-15 11:46+0100\n"
+"POT-Creation-Date: 2018-11-28 13:04+0000\n"
+"PO-Revision-Date: 2018-11-28 16:01+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -62,7 +62,11 @@ msgstr ""
 "incluyen idioma alternativo, insertar etiquetas, integración con subversion "
 "y un visor de código fuente."
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:555
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:31
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
 #: src/gtr-notebook.ui:294 src/gtr-window.c:312 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Editor de traducciones"
@@ -841,6 +845,7 @@ msgid "If you don’t save, all your changes will be permanently lost."
 msgstr "Si no guarda perderá todos los cambios permanentemente."
 
 #: src/gtr-context.c:81
+#| msgid "Editor font"
 msgid "Edit notes"
 msgstr "Editar notas"
 
@@ -1382,7 +1387,7 @@ msgstr "Traducido: %0.2f%%"
 #: src/gtr-tab.c:1790
 #, c-format
 msgid "Translated: %d"
-msgstr "Traducidas: %d"
+msgstr "Traducido: %d"
 
 #: src/gtr-tab.c:1791
 #, c-format
@@ -1392,7 +1397,7 @@ msgstr "Sin traducir: %d"
 #: src/gtr-tab.c:1792
 #, c-format
 msgid "Fuzzy: %d"
-msgstr "Difusas: %d"
+msgstr "Difusos: %d"
 
 #: src/gtr-tab-label.c:278
 msgid "Close document"
@@ -1532,40 +1537,60 @@ msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Marcar/desmarcar como difuso"
 
-#: src/help-overlay.ui:92
+#: src/help-overlay.ui:89
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "Copiar el mensaje original a la traducción"
+
+#: src/help-overlay.ui:99
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Navegación"
 
-#: src/help-overlay.ui:96
+#: src/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Ir al mensaje anterior"
 
-#: src/help-overlay.ui:103
+#: src/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Ir al siguiente mensaje"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Ir al anterior mensaje sin traducir"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Ir al siguiente mensaje sin traducir"
 
-#: src/help-overlay.ui:127
+#: src/help-overlay.ui:134
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Memoria de traducción"
 
-#: src/help-overlay.ui:131
+#: src/help-overlay.ui:138
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Construir memoria de traducción"
+
+#: src/help-overlay.ui:148
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "Buscar y reemplazar"
+
+#: src/help-overlay.ui:152
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Buscar"
+
+#: src/help-overlay.ui:159
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "Buscar y reemplazar"
 
 #: src/main.c:97
 msgid "— Edit PO files"
@@ -1582,9 +1607,8 @@ msgstr ""
 "comandos disponibles.\n"
 
 #: src/translation-memory/gtr-translation-memory-dialog.c:77
-#| msgid "PO directory"
 msgid "Select PO directory"
-msgstr "Seleccione la carpeta PO"
+msgstr "Seleccionar carpeta PO"
 
 #: src/translation-memory/gtr-translation-memory-dialog.c:303
 msgid "Translation Editor Memory Manager"
@@ -1905,9 +1929,6 @@ msgstr "Gestor de la memoria de traducción del Editor de traducciones"
 
 #~ msgid "Copy _Message to Translation"
 #~ msgstr "Copiar el _mensaje a la traducción"
-
-#~ msgid "Copy original message contents to the translation field"
-#~ msgstr "Copiar el contenido del mensaje original al campo de la traducción"
 
 #~ msgid "Toggle _Fuzzy Status"
 #~ msgstr "Conmutar el estado di_fuso"
