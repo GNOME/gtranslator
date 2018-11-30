@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-11-03 14:35+0000\n"
-"PO-Revision-Date: 2018-11-03 17:31-0200\n"
+"POT-Creation-Date: 2018-11-28 15:09+0000\n"
+"PO-Revision-Date: 2018-11-30 10:01-0200\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -63,9 +63,12 @@ msgstr ""
 "interessantes como idioma alternativo, inserir marcas, integração com "
 "subversion e um visualizador de código fonte."
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:555
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:31
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
 #: src/gtr-notebook.ui:294 src/gtr-window.c:312 src/gtr-window.ui:25
-#| msgid "Translation Memory"
 msgid "Translation Editor"
 msgstr "Editor de Tradução"
 
@@ -79,7 +82,6 @@ msgid "@icon@"
 msgstr "@icon@"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:14
-#| msgid "Gtranslator Translation Memory Manager"
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Tradução;Editor;Gettext;Escrever;"
 
@@ -238,7 +240,7 @@ msgstr "_Abrir"
 #: plugins/alternate-language/gtr-alternate-language-panel.c:328
 #: src/gtr-header-dialog.c:278 src/gtr-io-error-info-bar.c:123
 #: src/gtr-preferences-dialog.c:588 src/gtr-search-dialog.c:391
-#: src/translation-memory/gtr-translation-memory-dialog.c:283
+#: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "_Fechar"
 
@@ -484,12 +486,10 @@ msgid "Insert Params or Tags"
 msgstr "Inserir parâmetros ou marcas"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.c:167
-#: src/translation-memory/gtr-translation-memory-dialog.c:166
 msgid "Strings added to database"
 msgstr "Strings adicionadas ao banco de dados"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.c:224
-#: src/translation-memory/gtr-translation-memory-dialog.c:224
 msgid "Please specify a valid path to build the translation memory"
 msgstr ""
 "Por favor, especifique um caminho válido para compilar a memória de tradução"
@@ -499,17 +499,17 @@ msgid "Gtranslator Translation Memory Manager"
 msgstr "Gerenciador de memória de tradução do Gtranslator"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.ui:58
-#: src/translation-memory/gtr-translation-memory-dialog.ui:58
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
 msgid "Database:"
 msgstr "Banco de dados:"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.ui:101
-#: src/translation-memory/gtr-translation-memory-dialog.ui:101
+#: src/translation-memory/gtr-translation-memory-dialog.ui:103
 msgid "Select the directory which contains PO files:"
 msgstr "Selecione o diretório que contém os arquivos PO:"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.ui:152
-#: src/translation-memory/gtr-translation-memory-dialog.ui:152
+#: src/translation-memory/gtr-translation-memory-dialog.ui:154
 msgid "Add to Database"
 msgstr "Adicionar ao banco de dados"
 
@@ -519,7 +519,7 @@ msgid "Configuration:"
 msgstr "Configuração:"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.ui:252
-#: src/translation-memory/gtr-translation-memory-dialog.ui:252
+#: src/translation-memory/gtr-translation-memory-dialog.ui:253
 msgid "Use only files with this name:"
 msgstr "Usar apenas arquivos com esse nome:"
 
@@ -673,7 +673,6 @@ msgstr ""
 "Rafael Fontenelle <rafaelff@gnome.org>"
 
 #: src/gtr-actions-app.c:104
-#| msgid "Gtranslator Web Site"
 msgid "Translation Editor Web Site"
 msgstr "Site do Editor de Tradução"
 
@@ -760,17 +759,14 @@ msgid "Assistant"
 msgstr "Assistente"
 
 #: src/gtr-assistant.c:258
-#| msgid "Profile name:"
 msgid "Profile name"
 msgstr "Nome do perfil"
 
 #: src/gtr-assistant.c:302
-#| msgid "Translator email:"
 msgid "Translator email"
 msgstr "E-mail do tradutor"
 
 #: src/gtr-assistant.c:324
-#| msgid "_Team email:"
 msgid "Team email"
 msgstr "E-mail da equipe"
 
@@ -794,7 +790,7 @@ msgstr "_Fechar sem salvar"
 #: src/gtr-close-confirmation-dialog.c:126 src/gtr-file-dialogs.c:45
 #: src/gtr-jump-dialog.c:90 src/gtr-preferences-dialog.c:394
 #: src/gtr-profile-dialog.c:71
-#: src/translation-memory/gtr-translation-memory-dialog.c:101
+#: src/translation-memory/gtr-translation-memory-dialog.c:81
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -956,7 +952,7 @@ msgstr "Comentário"
 
 #: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
 #: src/gtr-profile-dialog.c:170
-#: src/translation-memory/gtr-translation-memory-dialog.c:103
+#: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "_OK"
 msgstr "_OK"
 
@@ -969,17 +965,14 @@ msgid "Enter message number:"
 msgstr "Digite o número da mensagem:"
 
 #: src/gtr-lang-button.ui:61 src/gtr-lang-button.ui:70
-#| msgid "Language"
 msgid "Choose Language"
 msgstr "Escolher idioma"
 
 #: src/gtr-languages-fetcher.ui:46
-#| msgid "_Language:"
 msgid "_Language"
 msgstr "_Idioma"
 
 #: src/gtr-languages-fetcher.ui:60
-#| msgid "Language _code:"
 msgid "Language _code"
 msgstr "_Código do idioma"
 
@@ -988,12 +981,10 @@ msgid "Character _set"
 msgstr "Conjunto de cara_cteres"
 
 #: src/gtr-languages-fetcher.ui:88
-#| msgid "Transfer en_coding:"
 msgid "Transfer en_coding"
 msgstr "Codificação de _transferência"
 
 #: src/gtr-languages-fetcher.ui:102
-#| msgid "_Plural forms:"
 msgid "_Plural forms"
 msgstr "Formas de _plural"
 
@@ -1133,9 +1124,6 @@ msgstr ""
 
 #: src/gtr-po.c:598
 #, c-format
-#| msgid ""
-#| "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
-#| "iconv command line tools before opening this file with gtranslator"
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
 "iconv command line tools before opening this file with GNOME Translation "
@@ -1206,7 +1194,6 @@ msgid "Help"
 msgstr "Ajuda"
 
 #: src/gtr-preferences-dialog.c:591 src/gtr-preferences-dialog.ui:49
-#| msgid "Gtranslator Preferences"
 msgid "Translation Editor Preferences"
 msgstr "Preferências do Editor de Tradução"
 
@@ -1275,12 +1262,10 @@ msgid "Profiles"
 msgstr "Perfis"
 
 #: src/gtr-profile-dialog.c:73
-#| msgid "Gtranslator Profile"
 msgid "Translation Editor Profile"
 msgstr "Perfil do Editor de Tradução"
 
 #: src/gtr-profile-dialog.ui:68
-#| msgid "_Name:"
 msgid "_Name"
 msgstr "_Nome"
 
@@ -1293,17 +1278,14 @@ msgid "Translator Information"
 msgstr "Informações do tradutor"
 
 #: src/gtr-profile-dialog.ui:131
-#| msgid "N_ame:"
 msgid "N_ame"
 msgstr "No_me"
 
 #: src/gtr-profile-dialog.ui:146
-#| msgid "_Email:"
 msgid "_Email"
 msgstr "_E-mail"
 
 #: src/gtr-profile-dialog.ui:160
-#| msgid "_Team email:"
 msgid "_Team email"
 msgstr "E-mail da e_quipe"
 
@@ -1427,9 +1409,6 @@ msgid "Translate_d Text:"
 msgstr "Texto tradu_zido:"
 
 #: src/gtr-utils.c:516
-#| msgid ""
-#| "Unable to display help. Please make sure the Gtranslator documentation "
-#| "package is installed."
 msgid ""
 "Unable to display help. Please make sure the Translation Editor "
 "documentation package is installed."
@@ -1483,14 +1462,12 @@ msgstr[1] "%d não traduzidas"
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:297
 #, c-format
-#| msgid "*%s — gtranslator"
 msgid "*%s — Translation Editor"
 msgstr "*%s – Editor de Tradução"
 
 #. Translators: this is the title of the window with a document opened
 #: src/gtr-window.c:303
 #, c-format
-#| msgid "%s — gtranslator"
 msgid "%s — Translation Editor"
 msgstr "%s – Editor de Tradução"
 
@@ -1557,44 +1534,68 @@ msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Marca/Desmarca como aproximada"
 
-#: src/help-overlay.ui:92
+#: src/help-overlay.ui:89
+#| msgid "Copy original message contents to the translation field"
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "Copia o texto original para tradução"
+
+#: src/help-overlay.ui:99
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Navegação"
 
 # @Tradutor: Fiz uma tradução menos literal para explicar o comando com outras palavras
 # @Revisor: Deve-se uar "mensagem" ao invés de tradução...
-#: src/help-overlay.ui:96
+#: src/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Vai para a mensagem anterior"
 
 # @Tradutor: Fiz uma tradução menos literal para explicar o comando com outras palavras
 # @Revisor: Beleza!
-#: src/help-overlay.ui:103
+#: src/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Vai para a próxima mensagem"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Vai para a mensagem anterior não traduzida"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Vai para a próxima mensagem não traduzida"
 
-#: src/help-overlay.ui:127
+#: src/help-overlay.ui:134
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Memória de tradução"
 
-#: src/help-overlay.ui:131
+#: src/help-overlay.ui:138
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Compila a memória de tradução"
+
+#: src/help-overlay.ui:148
+#| msgid "Find and replace"
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "Localizar & substituir"
+
+#: src/help-overlay.ui:152
+#| msgid "Find"
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Localiza"
+
+#: src/help-overlay.ui:159
+#| msgid "Find and replace"
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "Localiza & substitui"
 
 #: src/main.c:97
 msgid "— Edit PO files"
@@ -1610,8 +1611,12 @@ msgstr ""
 "Execute “%s --help” para ver uma lista completa das opções de linha de "
 "comando disponíveis.\n"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:287
-#| msgid "Gtranslator Translation Memory Manager"
+#: src/translation-memory/gtr-translation-memory-dialog.c:77
+#| msgid "PO directory"
+msgid "Select PO directory"
+msgstr "Selecionar o diretório de PO"
+
+#: src/translation-memory/gtr-translation-memory-dialog.c:303
 msgid "Translation Editor Memory Manager"
 msgstr "Gerenciador de memória do Editor de Tradução"
 
@@ -1928,9 +1933,6 @@ msgstr "Gerenciador de memória do Editor de Tradução"
 # Mantive assim por ter sentido coerente.
 #~ msgid "Copy _Message to Translation"
 #~ msgstr "Copiar do original para a tra_dução"
-
-#~ msgid "Copy original message contents to the translation field"
-#~ msgstr "Copia o conteúdo da mensagem original para o campo da tradução"
 
 #~ msgid "Toggle _Fuzzy Status"
 #~ msgstr "Alternar stat_us de aproximada"
