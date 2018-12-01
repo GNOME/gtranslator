@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-11-17 21:53+0000\n"
-"PO-Revision-Date: 2018-11-18 13:02+0100\n"
+"POT-Creation-Date: 2018-11-30 12:11+0000\n"
+"PO-Revision-Date: 2018-12-01 15:42+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -57,7 +57,11 @@ msgstr ""
 "takimi jak alternatywny język, wstawianie znaczników, integracja z systemem "
 "Subversion i przeglądarka kodu źródłowego."
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:555
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:31
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
 #: src/gtr-notebook.ui:294 src/gtr-window.c:312 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Edytor tłumaczeń"
@@ -192,8 +196,9 @@ msgid ""
 "Sort order to use in the message list. Possible values are “status”, “id”, "
 "“original-text” and “translated-text”."
 msgstr ""
-"Kolejność porządkowania używana na liście komunikatów. Możliwe wartości to "
-"„status”, „id”, „original-text” i „translated-text”."
+"Kolejność porządkowania używana na liście komunikatów. Możliwe wartości: "
+"„status” (stan), „id” (identyfikator), „original-text” (oryginalny tekst) "
+"i „translated-text” (przetłumaczony tekst)."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:143
 msgid "Active plugins"
@@ -1526,40 +1531,60 @@ msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Oznaczenie/odznaczenie jako niepewne"
 
-#: src/help-overlay.ui:92
+#: src/help-overlay.ui:89
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "Skopiowanie oryginalnego tekstu do tłumaczenia"
+
+#: src/help-overlay.ui:99
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Nawigacja"
 
-#: src/help-overlay.ui:96
+#: src/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Przejście do poprzedniego komunikatu"
 
-#: src/help-overlay.ui:103
+#: src/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Przejście do następnego komunikatu"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Przejście do poprzedniego nieprzetłumaczonego komunikatu"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Przejście do następnego nieprzetłumaczonego komunikatu"
 
-#: src/help-overlay.ui:127
+#: src/help-overlay.ui:134
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Pamięć tłumaczeń"
 
-#: src/help-overlay.ui:131
+#: src/help-overlay.ui:138
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Zbudowanie pamięci tłumaczeń"
+
+#: src/help-overlay.ui:148
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "Wyszukiwanie i zastępowanie"
+
+#: src/help-overlay.ui:152
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Wyszukiwanie"
+
+#: src/help-overlay.ui:159
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "Wyszukiwanie i zastępowanie"
 
 #: src/main.c:97
 msgid "— Edit PO files"
