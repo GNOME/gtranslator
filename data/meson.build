@@ -60,5 +60,6 @@ configure_file(
 
 install_data(
   'gtr-plural-forms.ini',
+  'gtr-languages.ini',
   install_dir: join_paths(gtr_pkgdatadir, 'ui'),
 )

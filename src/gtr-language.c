@@ -25,15 +25,12 @@
 #endif
 
 #include <glib/gi18n.h>
-#include <libxml/xmlreader.h>
 
 #include "gtr-language.h"
 #include "gtr-dirs.h"
 
-#define ISO_639_DOMAIN	"iso_639"
-
-#define ISOCODESLOCALEDIR		PACKAGE_ISO_CODES_PREFIX "/share/locale"
 #define GTR_PLURAL_FORMS_FILENAME	"gtr-plural-forms.ini"
+#define GTR_LANGS_FILENAME	"gtr-languages.ini"
 
 struct _GtrLanguage
 {
@@ -69,20 +66,6 @@ gtr_language_free (GtrLanguage *lang)
 }
 
 static void
-bind_iso_domains (void)
-{
-  static gboolean bound = FALSE;
-
-  if (bound == FALSE)
-    {
-      bindtextdomain (ISO_639_DOMAIN, ISOCODESLOCALEDIR);
-      bind_textdomain_codeset (ISO_639_DOMAIN, "UTF-8");
-
-      bound = TRUE;
-    }
-}
-
-static void
 load_plural_form (GtrLanguage *lang)
 {
   gchar *plural_form;
@@ -95,34 +78,6 @@ load_plural_form (GtrLanguage *lang)
     lang->plural_form = NULL;
 }
 
-static void
-read_iso_639_entry (xmlTextReaderPtr reader,
-                    GSList **langs)
-{
-  xmlChar *code, *name;
-
-  code = xmlTextReaderGetAttribute (reader, (const xmlChar *) "iso_639_1_code");
-  name = xmlTextReaderGetAttribute (reader, (const xmlChar *) "name");
-
-  if (code != NULL && code[0] != '\0' && name != NULL && name[0] != '\0')
-    {
-      GtrLanguage *lang = g_slice_new (GtrLanguage);
-      lang->code = (gchar *)code;
-      lang->name = g_strdup (dgettext (ISO_639_DOMAIN, (gchar *)name));
-      xmlFree (name);
-
-      /* set the plural form */
-      load_plural_form (lang);
-
-      *langs = g_slist_prepend (*langs, lang);
-    }
-  else
-    {
-      xmlFree (code);
-      xmlFree (name);
-    }
-}
-
 typedef enum
 {
   STATE_START,
@@ -131,83 +86,13 @@ typedef enum
 } ParserState;
 
 static void
-load_iso_entries (int iso,
-                  GFunc read_entry_func,
-                  gpointer user_data)
-{
-  xmlTextReaderPtr reader;
-  ParserState state = STATE_START;
-  xmlChar iso_entries[32], iso_entry[32];
-  char *filename;
-  int ret = -1;
-
-  filename = g_strdup_printf (PACKAGE_ISO_CODES_PREFIX "/share/xml/iso-codes/iso_%d.xml", iso);
-  reader = xmlNewTextReaderFilename (filename);
-  if (reader == NULL)
-    goto out;
-
-  xmlStrPrintf (iso_entries, sizeof (iso_entries), (const char *)"iso_%d_entries", iso);
-  xmlStrPrintf (iso_entry, sizeof (iso_entry), (const char *)"iso_%d_entry", iso);
-
-  ret = xmlTextReaderRead (reader);
-
-  while (ret == 1)
-    {
-      const xmlChar *tag;
-      xmlReaderTypes type;
-
-      tag = xmlTextReaderConstName (reader);
-      type = xmlTextReaderNodeType (reader);
-
-      if (state == STATE_ENTRIES &&
-          type == XML_READER_TYPE_ELEMENT &&
-          xmlStrEqual (tag, iso_entry))
-        {
-          read_entry_func (reader, user_data);
-        }
-      else if (state == STATE_START &&
-               type == XML_READER_TYPE_ELEMENT &&
-               xmlStrEqual (tag, iso_entries))
-        {
-          state = STATE_ENTRIES;
-        }
-      else if (state == STATE_ENTRIES &&
-               type == XML_READER_TYPE_END_ELEMENT &&
-               xmlStrEqual (tag, iso_entries))
-        {
-          state = STATE_STOP;
-        }
-      else if (type == XML_READER_TYPE_SIGNIFICANT_WHITESPACE ||
-               type == XML_READER_TYPE_WHITESPACE ||
-               type == XML_READER_TYPE_TEXT ||
-               type == XML_READER_TYPE_COMMENT)
-        {
-          /* eat it */
-        }
-      else
-        {
-          /* ignore it */
-        }
-
-      ret = xmlTextReaderRead (reader);
-    }
-
-  xmlFreeTextReader (reader);
-
-out:
-  if (ret < 0 || state != STATE_STOP)
-    {
-      g_warning ("Failed to load ISO-%d codes from %s!\n",
-                 iso, filename);
-    }
-
-  g_free (filename);
-}
-
-static void
 gtr_language_lazy_init (void)
 {
   gchar *filename;
+  GKeyFile *lang_file;
+  gchar **langs;
+  gchar *lang;
+  gsize n, i;
 
   if (initialized)
     return;
@@ -223,12 +108,34 @@ gtr_language_lazy_init (void)
 
   g_free (filename);
 
-  bind_iso_domains ();
-  load_iso_entries (639, (GFunc) read_iso_639_entry, &languages);
+  lang_file = g_key_file_new ();
+  filename = gtr_dirs_get_ui_file (GTR_LANGS_FILENAME);
+  if (!g_key_file_load_from_file (lang_file, filename, G_KEY_FILE_NONE, NULL))
+    {
+      g_warning ("Bad languages file: '%s'", filename);
+      g_free (filename);
+      return;
+    }
+
+  g_free (filename);
+
+  langs = g_key_file_get_keys (lang_file, "Languages", &n, NULL);
+  for (i=0; i<n; i++)
+    {
+      GtrLanguage *gtr_lang = g_slice_new (GtrLanguage);
+      lang = langs[i];
+      gtr_lang->code = g_strdup (lang);
+      gtr_lang->name = g_key_file_get_string (lang_file, "Languages", lang, NULL);
+      load_plural_form (gtr_lang);
+      languages = g_slist_prepend (languages, gtr_lang);
+    }
+  g_strfreev (langs);
+
   languages = g_slist_reverse (languages);
 
   /* free the file, not needed anymore */
   g_key_file_free (plurals_file);
+  g_key_file_free (lang_file);
 
   initialized = TRUE;
 }
