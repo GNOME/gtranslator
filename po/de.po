@@ -9,16 +9,16 @@
 # Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2010, 2011.
 # Christian Kirbach <christian.kirbach@gmail.com>, 2008-2010, 2010, 2012, 2013.
 # Simon Linden <xhi2018@gmail.com>, 2013, 2014.
-# Wolfgang Stöggl <c72578@yahoo.de>, 2015.
+# Wolfgang Stöggl <c72578@yahoo.de>, 2015, 2018.
 # Mario Blättermann <mario.blaettermann@gmail.com>, 2009-2010, 2017-2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-11-14 13:33+0000\n"
-"PO-Revision-Date: 2018-11-17 22:52+0100\n"
-"Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
-"Language-Team: German <debian-l10n-german@lists.debian.org>\n"
+"POT-Creation-Date: 2018-12-10 12:48+0000\n"
+"PO-Revision-Date: 2018-12-12 22:28+0100\n"
+"Last-Translator: Wolfgang Stoeggl <c72578@yahoo.de>\n"
+"Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,7 +63,11 @@ msgstr ""
 "Erweiterungen wie alternative Sprachen, Einfügen von XML-Elementen, "
 "Subversion-Integration und einer Quelltextansicht."
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:555
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:31
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
 #: src/gtr-notebook.ui:294 src/gtr-window.c:312 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Übersetzungseditor"
@@ -717,12 +721,8 @@ msgid "_Help"
 msgstr "_Hilfe"
 
 #: src/gtranslator-menu.ui:24
-msgid "_About"
-msgstr "I_nfo"
-
-#: src/gtranslator-menu.ui:30
-msgid "_Quit"
-msgstr "_Beenden"
+msgid "_About GNOME Translation Editor"
+msgstr "_Info zu GNOME Übersetzungseditor"
 
 #: src/gtr-assistant.c:128
 #, c-format
@@ -810,8 +810,8 @@ msgstr ""
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
-msgstr[0] "Änderungen an %d Dokument werden unwiderruflich verloren gehen"
-msgstr[1] "Änderungen an %d Dokumenten werden unwiderruflich verloren gehen"
+msgstr[0] "Änderungen an %d Dokument werden unwiderruflich verloren gehen."
+msgstr[1] "Änderungen an %d Dokumenten werden unwiderruflich verloren gehen."
 
 #: src/gtr-close-confirmation-dialog.c:537
 #, c-format
@@ -1057,7 +1057,7 @@ msgstr "Öffnen …"
 
 #: src/gtr-notebook.ui:302
 msgid "Open a new file (<Ctrl>o)"
-msgstr "Eine neue Datei öffnen (<Strg>o) "
+msgstr "Eine neue Datei öffnen (<Strg>o)"
 
 #: src/gtr-notebook.ui:328
 msgid "Undo (<Ctrl>z)"
@@ -1150,7 +1150,7 @@ msgid ""
 msgstr ""
 "Sie versuchen die Datei mit einer .POT-Endung zu speichern.\n"
 "Diese Dateien werden durch das Kompilieren generiert.\n"
-"Ihre Datei sollte die po-Endung besitzen, also »%s.po«"
+"Ihre Datei sollte die po-Endung besitzen, also »%s.po«."
 
 #: src/gtr-po.c:775
 #, c-format
@@ -1213,7 +1213,7 @@ msgstr "Eine _Sicherungskopie von Dateien vor dem Speichern erstellen"
 
 #: src/gtr-preferences-dialog.ui:206
 msgid "_Autosave files every"
-msgstr "_Intervall für das automatische Speichern: "
+msgstr "_Intervall für das automatische Speichern:"
 
 #: src/gtr-preferences-dialog.ui:230
 msgid "_minutes"
@@ -1322,7 +1322,7 @@ msgstr "_Suchen nach: "
 
 #: src/gtr-search-dialog.ui:124
 msgid "Replace _with: "
-msgstr "Ersetzen _mit:"
+msgstr "Ersetzen _mit: "
 
 #: src/gtr-search-dialog.ui:160
 msgid "_Original text"
@@ -1532,40 +1532,60 @@ msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Als unklar markieren/Markierung entfernen"
 
-#: src/help-overlay.ui:92
+#: src/help-overlay.ui:89
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "Originaltext in die Übersetzung kopieren"
+
+#: src/help-overlay.ui:99
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Navigation"
 
-#: src/help-overlay.ui:96
+#: src/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Zur vorherigen Zeichenkette springen"
 
-#: src/help-overlay.ui:103
+#: src/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Zur nächsten Zeichenkette springen"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Zur vorherigen unübersetzten Zeichenkette springen"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Zur nächsten unübersetzten Zeichenkette springen"
 
-#: src/help-overlay.ui:127
+#: src/help-overlay.ui:134
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Übersetzungsspeicher"
 
-#: src/help-overlay.ui:131
+#: src/help-overlay.ui:138
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Übersetzungsspeicher aufbauen"
+
+#: src/help-overlay.ui:148
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "Suchen und Ersetzen"
+
+#: src/help-overlay.ui:152
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Suchen"
+
+#: src/help-overlay.ui:159
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "Suchen und Ersetzen"
 
 #: src/main.c:97
 msgid "— Edit PO files"
@@ -1588,3 +1608,9 @@ msgstr "PO-Ordner auswählen"
 #: src/translation-memory/gtr-translation-memory-dialog.c:303
 msgid "Translation Editor Memory Manager"
 msgstr "Übersetzungseditor-Verwaltung für Übersetzungsspeicher"
+
+#~ msgid "_About"
+#~ msgstr "I_nfo"
+
+#~ msgid "_Quit"
+#~ msgstr "_Beenden"
