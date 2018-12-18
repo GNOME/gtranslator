@@ -91,6 +91,7 @@ void gtr_window_tm_keybind (GtrWindow *window, GSimpleAction *action);
 /** stack app states **/
 void gtr_window_show_projects (GtrWindow *window);
 void gtr_window_show_poeditor (GtrWindow *window);
+void gtr_window_show_dlteams (GtrWindow *window);
 
 G_END_DECLS
 #endif /* __GTR_WINDOW_H__ */
