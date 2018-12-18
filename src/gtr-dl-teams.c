@@ -78,6 +78,7 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
 static void
 gtr_dl_teams_init (GtrDlTeams *self)
 {
+  GtkWidget *box, *combo, *entry;
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   gtk_widget_init_template (GTK_WIDGET (self));
 
