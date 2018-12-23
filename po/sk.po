@@ -5,22 +5,22 @@
 # Ivan Noris <vix@vazka.sk>, 2005.
 # Robert Hartl <hartl.robert@gmail.com>, 2009, 2010.
 # Ondrej Mosnáček <omosnacek@gmail.com>, 2011, 2012.
-# Dušan Kazik <prescott66@gmail.com>, 2014.
+# Dušan Kazik <prescott66@gmail.com>, 2014-2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-12-22 14:08+0000\n"
-"PO-Revision-Date: 2018-12-23 16:37+0100\n"
+"POT-Creation-Date: 2018-12-23 15:39+0000\n"
+"PO-Revision-Date: 2018-12-23 16:51+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: slovenčina <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Generator: Poedit 2.2\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0\n"
+"X-Generator: Gtranslator 3.31.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
 msgid "Gtranslator"
@@ -706,12 +706,9 @@ msgid "_Help"
 msgstr "_Pomocník"
 
 #: src/gtranslator-menu.ui:24
-msgid "_About"
-msgstr "_O programe"
-
-#: src/gtranslator-menu.ui:30
-msgid "_Quit"
-msgstr "U_končiť"
+#| msgid "Translation Editor"
+msgid "_About GNOME Translation Editor"
+msgstr "_O Editore prekladov prostredia GNOME"
 
 #: src/gtr-assistant.c:128
 #, c-format
@@ -773,14 +770,15 @@ msgstr "Potvrdenie"
 msgid "Close _without Saving"
 msgstr "Zavrieť _bez uloženia"
 
-#: src/gtr-close-confirmation-dialog.c:126 src/gtr-file-dialogs.c:45
-#: src/gtr-jump-dialog.c:90 src/gtr-preferences-dialog.c:394
-#: src/gtr-profile-dialog.c:71
+#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:86
+#: src/gtr-file-dialogs.c:45 src/gtr-jump-dialog.c:90
+#: src/gtr-preferences-dialog.c:394 src/gtr-profile-dialog.c:71
 #: src/translation-memory/gtr-translation-memory-dialog.c:81
 msgid "_Cancel"
 msgstr "_Zrušiť"
 
-#: src/gtr-close-confirmation-dialog.c:128 src/gtr-file-dialogs.c:47
+#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:84
+#: src/gtr-file-dialogs.c:47
 msgid "_Save"
 msgstr "_Uložiť"
 
@@ -826,36 +824,37 @@ msgstr "Ukladanie bolo zakázané správcom systému."
 msgid "If you don’t save, all your changes will be permanently lost."
 msgstr "Ak neuložíte zmeny, budú navždy stratené."
 
-#: src/gtr-context.c:238
+#: src/gtr-context.c:81
+#| msgid "Editor font"
+msgid "Edit notes"
+msgstr "Úprava poznámok"
+
+#: src/gtr-context.c:268
 msgid "Notes:"
 msgstr "Poznámky:"
 
-#: src/gtr-context.c:246
+#: src/gtr-context.c:276
 msgid "Add Note"
 msgstr "Pridať poznámku"
 
-#: src/gtr-context.c:251
+#: src/gtr-context.c:281
 msgid "Edit"
 msgstr "Upraviť"
 
 #. Extracted comments
-#: src/gtr-context.c:297
+#: src/gtr-context.c:327
 msgid "Extracted comments:"
 msgstr "Extrahované komentáre:"
 
 #. Context
-#: src/gtr-context.c:301
+#: src/gtr-context.c:331
 msgid "Context:"
 msgstr "Kontext:"
 
 #. Format
-#: src/gtr-context.c:305
+#: src/gtr-context.c:335
 msgid "Format:"
 msgstr "Formát:"
-
-#: src/gtr-context.ui:51
-msgid "D_one"
-msgstr "_Hotovo"
 
 #: src/gtr-file-dialogs.c:62
 msgid "Gettext translation"
@@ -1611,6 +1610,15 @@ msgstr "Výber priečinka so súbormi PO"
 msgid "Translation Editor Memory Manager"
 msgstr "Správca pamäte prekladov Editora prekladov"
 
+#~ msgid "_About"
+#~ msgstr "_O programe"
+
+#~ msgid "_Quit"
+#~ msgstr "U_končiť"
+
+#~ msgid "D_one"
+#~ msgstr "_Hotovo"
+
 #~ msgid "gtranslator"
 #~ msgstr "gtranslator"
 
@@ -1622,9 +1630,6 @@ msgstr "Správca pamäte prekladov Editora prekladov"
 
 #~ msgid "If true, use a custom font for edit fields."
 #~ msgstr "Ak je true, použije vlastné písmo v editačných poliach."
-
-#~ msgid "Editor font"
-#~ msgstr "Písmo editora"
 
 #~ msgid "Custom font to use for edit fields."
 #~ msgstr "Vlastné písmo použité pre editačné polia."
