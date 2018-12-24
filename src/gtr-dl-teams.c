@@ -30,6 +30,7 @@ typedef struct
   GtkWidget *titlebar;
   GtkWidget *main_box;
   GtkWidget *open_button;
+  GtkWidget *dl_button;
 
   GtrWindow *main_window;
 } GtrDlTeamsPrivate;
@@ -41,8 +42,66 @@ struct _GtrDlTeams
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrDlTeams, gtr_dl_teams, GTK_TYPE_BIN)
 
-
 static void team_add_cb (GtkButton *btn, GtrDlTeams *self);
+
+static GtkTreeModel *
+create_combo_store (void)
+{
+  const gchar *labels[4] = {
+    "Adding",
+    "Items",
+    "As I",
+    "Go",
+  };
+
+  //GtkTreeIter iter;
+  GtkListStore *store;
+  gint i;
+
+  store = gtk_list_store_new (1, G_TYPE_STRING);
+
+  for (i = 0; i < G_N_ELEMENTS (labels); i++)
+    {
+      //printf( labels[i]);printf("\n");
+      gtk_list_store_insert_with_values(store, NULL, -1,
+        0, "test name",
+        -1);
+      /*
+      gtk_list_store_append (store, &iter);
+      gtk_list_store_set (store, &iter,
+                          0, "Test",
+                          -1);*/
+    }
+
+  return GTK_TREE_MODEL (store);
+}
+
+static void
+add_dl_teams_combo (GtkButton *btn,
+             GtrDlTeams *self)
+{
+  GtkWidget *combo_box;
+  GtkTreeModel *model;
+  GtkCellRenderer *column;
+
+  GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
+
+  model = create_combo_store ();
+  combo_box = gtk_combo_box_new_with_model (GTK_TREE_MODEL (model));
+  g_object_unref (model);
+
+  column = gtk_cell_renderer_text_new();
+  gtk_cell_layout_pack_start(GTK_CELL_LAYOUT(combo_box), column, TRUE);
+
+  gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(combo_box), column,
+                                 "cell-background", 0,
+                                 "text", 1,
+                                 NULL);
+
+  gtk_container_add (GTK_CONTAINER (priv->main_box), combo_box);
+  gtk_widget_show (combo_box);
+
+}
 
 
 static void
@@ -73,12 +132,13 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, main_box);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, open_button);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, dl_button);
 }
 
 static void
 gtr_dl_teams_init (GtrDlTeams *self)
 {
-  GtkWidget *box, *combo, *entry;
+  //GtkWidget *box, *combo, *entry;
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -87,6 +147,10 @@ gtr_dl_teams_init (GtrDlTeams *self)
   g_signal_connect (priv->open_button,
                     "clicked",
                     G_CALLBACK (team_add_cb),
+                    self);
+  g_signal_connect (priv->dl_button,
+                    "clicked",
+                    G_CALLBACK (add_dl_teams_combo),
                     self);
 }
 
