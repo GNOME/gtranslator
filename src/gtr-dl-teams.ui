@@ -48,7 +48,7 @@
   <!-- Header bar -->
   <object class="GtkHeaderBar" id="titlebar">
     <property name="visible">true</property>
-    <property name="title" translatable="yes">Select a PO file</property>
+    <property name="title" translatable="yes">Damned Lies integration</property>
     <property name="show_close_button">True</property>
     <style>
       <class name="titlebar"/>
@@ -61,6 +61,16 @@
       <packing>
         <property name="pack-type">start</property>
         <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="dl_button">
+        <property name="label" translatable="yes">Load from DL…</property>
+        <property name="visible">true</property>
+      </object>
+      <packing>
+        <property name="pack-type">start</property>
+        <property name="position">1</property>
       </packing>
     </child>
     <child>

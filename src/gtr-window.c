@@ -792,6 +792,7 @@ gtr_window_init (GtrWindow *window)
   gtr_translation_memory_set_max_items (priv->translation_memory, 10);
 
   gtr_window_show_dlteams (window);
+  //gtr_window_show_projects (window);
 }
 
 static void
