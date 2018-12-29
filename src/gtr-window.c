@@ -46,6 +46,8 @@
 #include "translation-memory/gtr-translation-memory-dialog.h"
 #include "translation-memory/gda/gtr-gda.h"
 
+#include "codeview/gtr-codeview.h"
+
 #include <glib.h>
 #include <glib-object.h>
 #include <glib/gi18n.h>
@@ -66,6 +68,8 @@ typedef struct
   GSettings *state_settings;
   GSettings *tm_settings;
   GtrTranslationMemory *translation_memory;
+
+  GtrCodeView *codeview;
 
   GtkWidget *header_bar;
   GtkWidget *main_box;
@@ -782,6 +786,9 @@ gtr_window_init (GtrWindow *window)
                                                             "max-length-diff"));
   gtr_translation_memory_set_max_items (priv->translation_memory, 10);
 
+  // code view
+  priv->codeview = gtr_code_view_new (window);
+
   gtr_window_show_projects (window);
 }
 
@@ -813,6 +820,7 @@ gtr_window_dispose (GObject * object)
   g_clear_object (&priv->prof_manager);
   g_clear_object (&priv->translation_memory);
   g_clear_object (&priv->tm_settings);
+  g_clear_object (&priv->codeview);
 
   G_OBJECT_CLASS (gtr_window_parent_class)->dispose (object);
 }

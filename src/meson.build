@@ -1,6 +1,7 @@
 src_inc = include_directories('.')
 
 subdir('translation-memory')
+subdir('codeview')
 
 enum_headers = files(
   'gtr-application.h',
@@ -122,11 +123,12 @@ sources += gnome.compile_resources(
 incs = [
   top_inc,
   translation_mem_inc,
+  codeview_inc,
 ]
 
 libgtranslator = shared_library(
   meson.project_name(),
-  sources: sources + translation_mem_sources,
+  sources: sources + translation_mem_sources + codeview_sources,
   include_directories: incs,
   dependencies: gtr_deps,
 )

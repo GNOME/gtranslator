@@ -33,23 +33,22 @@
 #include <string.h>
 #include <gtksourceview/gtksource.h>
 
-#define GTR_VIEWER_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ( \
-						 	(object),	\
-						 	GTR_TYPE_VIEWER,     \
-						 	GtrViewerPrivate))
-
-
-G_DEFINE_TYPE (GtrViewer, gtr_viewer, GTK_TYPE_DIALOG)
-
-struct _GtrViewerPrivate
+typedef struct
 {
   GtkWidget *main_box;
   GtkWidget *view;
   GtkWidget *filename_label;
+} GtrViewerPrivate;
+
+struct _GtrViewer
+{
+  GtkDialog parent_instance;
 };
 
+G_DEFINE_TYPE_WITH_PRIVATE (GtrViewer, gtr_viewer, GTK_TYPE_DIALOG)
+
 static void
-dialog_response_handler (GtkDialog * dlg, gint res_id)
+dialog_response_handler (GtkDialog *dlg, gint res_id)
 {
   switch (res_id)
     {
@@ -59,10 +58,8 @@ dialog_response_handler (GtkDialog * dlg, gint res_id)
 }
 
 static void
-gtr_viewer_init (GtrViewer * dlg)
+gtr_viewer_init (GtrViewer *dlg)
 {
-  GtrViewerPrivate *priv;
-  GtkWidget *action_area;
   GtkBox *content_area;
   GtkWidget *sw;
   GtkBuilder *builder;
@@ -70,26 +67,17 @@ gtr_viewer_init (GtrViewer * dlg)
     "main_box",
     NULL
   };
-
-  dlg->priv = GTR_VIEWER_GET_PRIVATE (dlg);
-  priv = dlg->priv;
+  GtrViewerPrivate *priv = gtr_viewer_get_instance_private (dlg);
 
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
-                          GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE, NULL);
+                          _("_Close"), GTK_RESPONSE_CLOSE, NULL);
 
   gtk_window_set_title (GTK_WINDOW (dlg), _("Source Viewer"));
   gtk_window_set_default_size (GTK_WINDOW (dlg), 800, 600);
   gtk_window_set_resizable (GTK_WINDOW (dlg), TRUE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
-  action_area = gtk_dialog_get_action_area (GTK_DIALOG (dlg));
   content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
-
-  /* HIG defaults */
-  gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-  gtk_box_set_spacing (content_area, 2);    /* 2 * 5 + 2 = 12 */
-  gtk_container_set_border_width (GTK_CONTAINER (action_area), 5);
-  gtk_box_set_spacing (GTK_BOX (action_area), 4);
 
   g_signal_connect (dlg,
                     "response", G_CALLBACK (dialog_response_handler), NULL);
@@ -98,7 +86,7 @@ gtr_viewer_init (GtrViewer * dlg)
   builder = gtk_builder_new ();
   gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/plugins/codeview/ui/gtr-viewer.ui",
   root_objects, NULL);
- 
+
   priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
   g_object_ref (priv->main_box);
   sw = GTK_WIDGET (gtk_builder_get_object (builder, "scrolledwindow"));
@@ -110,7 +98,7 @@ gtr_viewer_init (GtrViewer * dlg)
   gtk_container_set_border_width (GTK_CONTAINER (priv->main_box), 5);
 
   /* Source view */
-  dlg->priv->view = gtk_source_view_new ();
+  priv->view = gtk_source_view_new ();
   gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->view), FALSE);
   gtk_widget_show (priv->view);
   gtk_container_add (GTK_CONTAINER (sw), priv->view);
@@ -126,17 +114,15 @@ gtr_viewer_init (GtrViewer * dlg)
 }
 
 static void
-gtr_viewer_finalize (GObject * object)
+gtr_viewer_finalize (GObject *object)
 {
   G_OBJECT_CLASS (gtr_viewer_parent_class)->finalize (object);
 }
 
 static void
-gtr_viewer_class_init (GtrViewerClass * klass)
+gtr_viewer_class_init (GtrViewerClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (GtrViewerPrivate));
 
   object_class->finalize = gtr_viewer_finalize;
 }
@@ -144,7 +130,7 @@ gtr_viewer_class_init (GtrViewerClass * klass)
 /***************** File loading *****************/
 
 static void
-error_dialog (GtkWindow * parent, const gchar * msg, ...)
+error_dialog (GtkWindow *parent, const gchar *msg, ...)
 {
   va_list ap;
   gchar *tmp;
@@ -165,8 +151,9 @@ error_dialog (GtkWindow * parent, const gchar * msg, ...)
 }
 
 static gboolean
-gtk_source_buffer_load_file (GtkSourceBuffer * source_buffer,
-                             const gchar * filename, GError ** error)
+gtk_source_buffer_load_file (GtkSourceBuffer *source_buffer,
+                             const gchar     *filename,
+                             GError         **error)
 {
   GtkTextIter iter;
   gchar *buffer;
@@ -208,7 +195,7 @@ gtk_source_buffer_load_file (GtkSourceBuffer * source_buffer,
 }
 
 static void
-remove_all_marks (GtkSourceBuffer * buffer)
+remove_all_marks (GtkSourceBuffer *buffer)
 {
   GtkTextIter s, e;
 
@@ -220,7 +207,7 @@ remove_all_marks (GtkSourceBuffer * buffer)
 /* Note this is wrong for several reasons, e.g. g_pattern_match is broken
  * for glob matching. */
 static GtkSourceLanguage *
-get_language_for_filename (const gchar * filename)
+get_language_for_filename (const gchar *filename)
 {
   const gchar *const *languages;
   gchar *filename_utf8;
@@ -264,7 +251,7 @@ get_language_for_filename (const gchar * filename)
 }
 
 static GtkSourceLanguage *
-get_language_for_file (const gchar * filename)
+get_language_for_file (const gchar *filename)
 {
   GtkSourceLanguage *language = NULL;
 
@@ -275,7 +262,7 @@ get_language_for_file (const gchar * filename)
 }
 
 static GtkSourceLanguage *
-get_language_by_id (const gchar * id)
+get_language_by_id (const gchar *id)
 {
   GtkSourceLanguageManager *manager;
   manager = gtk_source_language_manager_get_default ();
@@ -283,7 +270,7 @@ get_language_by_id (const gchar * id)
 }
 
 static GtkSourceLanguage *
-get_language (GtkTextBuffer * buffer, const gchar * filename)
+get_language (GtkTextBuffer *buffer, const gchar *filename)
 {
   GtkSourceLanguage *language = NULL;
   GtkTextIter start, end;
@@ -320,7 +307,7 @@ get_language (GtkTextBuffer * buffer, const gchar * filename)
 }
 
 static gboolean
-open_file (GtkSourceBuffer * buffer, const gchar * filename)
+open_file (GtkSourceBuffer *buffer, const gchar *filename)
 {
   GtkSourceLanguage *language = NULL;
   gchar *freeme = NULL;
@@ -388,7 +375,7 @@ out:
 }
 
 static void
-jump_to_line (GtkTextView * view, gint line)
+jump_to_line (GtkTextView *view, gint line)
 {
   GtkTextBuffer *buffer;
   GtkTextIter iter;
@@ -411,9 +398,10 @@ jump_to_line (GtkTextView * view, gint line)
 }
 
 void
-gtr_show_viewer (GtrWindow * window, const gchar * path, gint line)
+gtr_show_viewer (GtrWindow *window, const gchar *path, gint line)
 {
   static GtrViewer *dlg = NULL;
+  GtrViewerPrivate *priv;
 
   g_return_if_fail (GTR_IS_WINDOW (window));
 
@@ -423,16 +411,17 @@ gtr_show_viewer (GtrWindow * window, const gchar * path, gint line)
       gchar *label;
 
       dlg = g_object_new (GTR_TYPE_VIEWER, NULL);
+      priv = gtr_viewer_get_instance_private (dlg);
 
       buffer =
         GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
-                           (GTK_TEXT_VIEW (dlg->priv->view)));
+                           (GTK_TEXT_VIEW (priv->view)));
 
       open_file (buffer, path);
-      jump_to_line (GTK_TEXT_VIEW (dlg->priv->view), line);
+      jump_to_line (GTK_TEXT_VIEW (priv->view), line);
 
       label = g_strdup_printf ("<b>%s</b>", g_path_get_basename (path));
-      gtk_label_set_markup (GTK_LABEL (dlg->priv->filename_label), label);
+      gtk_label_set_markup (GTK_LABEL (priv->filename_label), label);
       g_free (label);
 
       g_signal_connect (dlg,

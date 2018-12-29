@@ -16,8 +16,7 @@
  *
  */
 
-#ifndef __VIEWER_H__
-#define __VIEWER_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
@@ -27,31 +26,9 @@
 
 G_BEGIN_DECLS
 
-#define GTR_TYPE_VIEWER		(gtr_viewer_get_type ())
-#define GTR_VIEWER(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_VIEWER, GtrViewer))
-#define GTR_VIEWER_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_VIEWER, GtrViewerClass))
-#define GTR_IS_VIEWER(o)	(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_VIEWER))
-#define GTR_IS_VIEWER_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_VIEWER))
-#define GTR_VIEWER_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_VIEWER, GtrViewerClass))
+#define GTR_TYPE_VIEWER (gtr_viewer_get_type())
 
-typedef struct _GtrViewer        GtrViewer;
-typedef struct _GtrViewerPrivate GtrViewerPrivate;
-typedef struct _GtrViewerClass   GtrViewerClass;
-
-struct _GtrViewer
-{
-  GtkDialog parent_instance;
-
-  /*< private > */
-  GtrViewerPrivate *priv;
-};
-
-struct _GtrViewerClass
-{
-  GtkDialogClass parent_class;
-};
-
-GType   gtr_viewer_get_type           (void) G_GNUC_CONST;
+G_DECLARE_FINAL_TYPE (GtrViewer, gtr_viewer, GTR, VIEWER, GtkDialog)
 
 GType   gtr_viewer_register_type      (GTypeModule  *module);
 
@@ -60,4 +37,3 @@ void    gtr_show_viewer               (GtrWindow    *window,
                                        gint          line);
 
 G_END_DECLS
-#endif /* __VIEWER_H__ */
