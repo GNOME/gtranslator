@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.9.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-05 01:47+0300\n"
-"PO-Revision-Date: 2018-11-05 01:56+0300\n"
+"POT-Creation-Date: 2018-12-29 15:03+0300\n"
+"PO-Revision-Date: 2018-12-29 15:21+0300\n"
 "Last-Translator: Alexandre Prokoudine <alexandre.prokoudine@gmail.com>\n"
 "Language-Team: русский <gnome-cyr@lists.gnome.org>\n"
 "Language: ru\n"
@@ -22,255 +22,231 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 "X-Generator: Gtranslator 3.31.0\n"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:126
-msgid "Message not found"
-msgstr "Сообщение не найдено"
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:6
+msgid "Gtranslator"
+msgstr "Gtranslator"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:229
-msgid "Open file for alternate language"
-msgstr "Открыть файл альтернативного языка"
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
+#: data/org.gnome.Gtranslator.desktop.in.in:5
+msgid "Translate and localize applications and libraries"
+msgstr "Перевод и локализация файлов и приложений"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:254
-msgid "File closed"
-msgstr "Файл закрыт"
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:9
+msgid ""
+"Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
+"environment. It handles all forms of gettext po files and includes very "
+"useful features like find/replace, translation memory, different translator "
+"profiles, messages table (for having an overview of the translations/"
+"messages in the po file), easy navigation and editing of translation "
+"messages and comments of the translation where accurate."
+msgstr ""
+"Gtranslator — это улучшенный редактор po-файлов для среды рабочего стола "
+"GNOME. Он обрабатывает все формы gettext и включает в себя некоторые "
+"полезные функции: поиск/замена, память переводов, профили для перевода, "
+"таблица сообщений (для получения обзора переводов/сообщений в po-файле), "
+"простая навигация, редактирование сообщений и комментирование переводов."
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:322
-#: ../src/gtr-file-dialogs.c:48
-msgid "_Open"
-msgstr "_Открыть"
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:18
+#, fuzzy
+msgid ""
+"Gtranslator includes also a plugin system with many interesting plugins like "
+"alternate language, insert tags, integration with subversion and a source "
+"code viewer."
+msgstr ""
+"Gtranslator также включает в себя систему модулей: альтернативный язык, "
+"вставка тэгов, open tran, интеграция с subversion, просмотрщик исходного "
+"кода."
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:328
-#: ../src/gtr-header-dialog.c:278 ../src/gtr-io-error-info-bar.c:123
-#: ../src/gtr-preferences-dialog.c:588 ../src/gtr-search-dialog.c:391
-#: ../src/translation-memory/gtr-translation-memory-dialog.c:283
-msgid "_Close"
-msgstr "_Закрыть"
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:31
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:334
-msgid "Co_py"
-msgstr "_Копировать"
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
+#: src/gtr-notebook.ui:294 src/gtr-window.c:316 src/gtr-window.ui:25
+msgid "Translation Editor"
+msgstr "Translation Editor"
 
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:363
-msgid "There isn’t any file loaded"
-msgstr "Нет загруженных файлов"
+#: data/org.gnome.Gtranslator.desktop.in.in:4
+msgid "PO File Editor"
+msgstr "Редактор PO-файлов"
 
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:81
-msgid "_Alternate Language"
-msgstr "_Альтернативный язык"
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: data/org.gnome.Gtranslator.desktop.in.in:7
+msgid "@icon@"
+msgstr ""
 
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:82
-msgid "Show the Alternate Language panel"
-msgstr "Показать панель с текстом на альтернативном языке"
+#: data/org.gnome.Gtranslator.desktop.in.in:14
+#, fuzzy
+msgid "Gtranslator;Translation;Editor;Gettext;Write;"
+msgstr "Менеджер памяти переводов Gtranslator"
 
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:222
-msgid "Alternate Language"
-msgstr "Альтернативный язык"
+#: data/org.gnome.Gtranslator.gschema.xml.in:24
+msgid "Warn if file contains fuzzy translations"
+msgstr "Предупреждать о наличии неточных переводов"
 
-#: ../plugins/charmap/charmap/__init__.py:42
-msgid "Character Map"
-msgstr "Касса символов"
+#: data/org.gnome.Gtranslator.gschema.xml.in:25
+msgid ""
+"If true, warn the user when saving a PO translation file containing fuzzy "
+"strings."
+msgstr ""
+"Если выбрано, то при сохранении PO-файлов, содержащих неточные строки "
+"перевода, пользователь будет получать предупреждение."
 
-#: ../plugins/codeview/gtr-codeview-plugin.c:129
-#, c-format
-msgid "Please install “%s” to be able to show the file"
-msgstr "Установите «%s», чтобы открыть файл"
+#: data/org.gnome.Gtranslator.gschema.xml.in:32
+msgid "Auto save files"
+msgstr "Автосохранение файлов"
 
-#: ../plugins/codeview/gtr-codeview-plugin.c:497
+#: data/org.gnome.Gtranslator.gschema.xml.in:33
+msgid "If true, automatically save files at specified intervals."
+msgstr ""
+"Если выбрано, файлы будут автоматически сохраняться через указанные "
+"интервалы времени."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:39
+msgid "Auto save interval"
+msgstr "Интервал автосохранения"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:40
+msgid "Interval in minutes at which to automatically save files."
+msgstr "Интервал в минутах для автоматического сохранения файлов."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:46
+msgid "Create backup before saving"
+msgstr "Создавать архивную копию перед сохранением"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:47
+msgid "If true, create a backup copy of a file before saving it."
+msgstr ""
+"Если выбрано, то перед сохранением файла будет создаваться его резервная "
+"копия."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:53
+msgid "Use profile values for header"
+msgstr "Использовать данные профиля для заголовка"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:54
+msgid ""
+"If true, overwrite the values in the PO header with those in the active "
+"profile."
+msgstr ""
+"Если выбрано, то значения в заголовочной части PO-файла будут "
+"перезаписываться значениями текущего профиля."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:63
+msgid "Highlight syntax in edit fields"
+msgstr "Подсвечивать синтаксис переводимых сообщений"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:64
+msgid "If true, apply syntax highlighting to strings in edit fields."
+msgstr ""
+"Если выбрано, то к строкам в полях ввода будет применяться подсветка "
+"синтаксиса."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:70
+msgid "Make whitespace visible"
+msgstr "Показывать пробелы"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:71
+msgid "If true, display whitespace in strings as representative symbols."
+msgstr "Если выбрано, то символы пробелов будут показаны в строках явно."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:77
+msgid "Remove fuzzy status when message is changed"
+msgstr "Убирать признак неточного перевода при изменении сообщения"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:78
+msgid "If true, remove fuzzy status from translations when they are changed."
+msgstr ""
+"Если выбрано, с изменённых сообщений будет удаляться признак неточного "
+"перевода."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:84
+msgid "Check spelling"
+msgstr "Проверка орфографии"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:85
+msgid "If true, check the spelling of translated messages."
+msgstr ""
+"Если выбрано, переведённые сообщения будут проверяться на наличие ошибок в "
+"правописании."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:93
+msgid "Side panel switcher style"
+msgstr "Стиль переключателя боковой панели"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:94
+msgid "Style for switchers in the side panel."
+msgstr "Стиль переключателей боковой панели."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:100
+msgid "Color scheme"
+msgstr "Цветовая схема"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:101
+msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
+msgstr ""
+"Название цветовой схемы gtksourceview для использования при подсветке "
+"синтаксиса."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:107
+msgid "Message list sort order"
+msgstr "Порядок сортировки списка сообщений"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:108
+#, fuzzy
+msgid ""
+"Sort order to use in the message list. Possible values are “status”, “id”, "
+"“original-text” and “translated-text”."
+msgstr ""
+"Порядок сортировки в списке сообщений. Возможные значения: «status», «id», "
+"«original-text» и «translated-text»."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:143
+msgid "Active plugins"
+msgstr "Включённые модули"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:144
+#, fuzzy
+msgid ""
+"List of active plugins. It contains the “Location” of the active plugins. "
+"See the .gtranslator-plugin file for obtaining the “Location” of a given "
+"plugin."
+msgstr ""
+"Список включённых модулей. Содержит «Местоположение» включённых модулей. Для "
+"получения «Местоположения» данного модуля см. файл .gtranslator-plugin."
+
+#: src/codeview/gtr-codeview.c:353
 msgid "Paths:"
 msgstr "Пути:"
 
-#: ../plugins/codeview/gtr-viewer.c:80
+#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
+#: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:588
+#: src/gtr-search-dialog.c:391
+#: src/translation-memory/gtr-translation-memory-dialog.c:299
+msgid "_Close"
+msgstr "_Закрыть"
+
+#: src/codeview/gtr-viewer.c:75
 msgid "Source Viewer"
 msgstr "Просмотр исходного кода"
 
-#: ../plugins/dictionary/gtr-dictionary-plugin.c:140
-msgid "Dictionary"
-msgstr "Словарь"
+#: src/codeview/gtr-viewer.ui:59
+msgid "Source code"
+msgstr "Исходный код"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:166
-#, c-format
-msgid "No dictionary source available with name “%s”"
-msgstr "Нет источника словаря с именем «%s»"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:170
-msgid "Unable to find dictionary source"
-msgstr "Не удалось найти источник словаря"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:185
-#, c-format
-msgid "No context available for source “%s”"
-msgstr "Нет доступного контекста для источника «%s»"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:189
-msgid "Unable to create a context"
-msgstr "Не удалось создать контекст"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:272
-#, c-format
-msgid "Dictionary source “%s” selected"
-msgstr "Выбран источник словаря «%s»"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:291
-#, c-format
-msgid "Strategy “%s” selected"
-msgstr "Выбрана стратегия «%s»"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:309
-#, c-format
-msgid "Database “%s” selected"
-msgstr "Выбрана база данных «%s»"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:353
-#, c-format
-msgid "Word “%s” selected"
-msgstr "Выбрано слово «%s»"
-
-#. speller
-#: ../plugins/dictionary/gtr-dict-panel.c:375
-msgid "Double-click on the word to look up"
-msgstr "Дважды щёлкните по слову, которое нужно найти"
-
-#. strat-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:380
-msgid "Double-click on the matching strategy to use"
-msgstr "Дважды щёлкните по подходящей к использованию стратегии"
-
-#. source-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:386
-msgid "Double-click on the source to use"
-msgstr "Дважды щёлкните по источнику, который нужно использовать"
-
-#. db-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:396
-msgid "Double-click on the database to use"
-msgstr "Дважды щёлкните по базе данных, которую нужно использовать"
-
-#. Look up Button
-#: ../plugins/dictionary/gtr-dict-panel.c:502
-msgid "Look _up:"
-msgstr "_Найти:"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:559
-msgid "Similar words"
-msgstr "Схожие слова"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:572
-msgid "Available dictionaries"
-msgstr "Доступные словари"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:586
-msgid "Available strategies"
-msgstr "Доступные стратегии"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:596
-msgid "Dictionary sources"
-msgstr "Источники словарей"
-
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:67
-msgid "_Fullscreen"
-msgstr "_Во весь экран"
-
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:68
-msgid "Place window on fullscreen state"
-msgstr "Открыть окно программы на весь экран"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:113
-msgid "_Next Param"
-msgstr "С_ледующий параметр"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:114
-msgid "Insert the next param of the message"
-msgstr "Вставить следующий параметр сообщения"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:116
-msgid "_Insert Params"
-msgstr "Вставить пара_метры"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:117
-msgid "_Next Tag"
-msgstr "Сл_едующий тэг"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:118
-msgid "Insert the next tag of the message"
-msgstr "Вставить следующую метку сообщения"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:120
-msgid "_Insert Tags"
-msgstr "Вставить те_ги"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
-#: ../src/translation-memory/gtr-translation-memory-dialog.c:166
-msgid "Strings added to database"
-msgstr "Строки добавленные в базу данных"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:224
-#: ../src/translation-memory/gtr-translation-memory-dialog.c:224
-msgid "Please specify a valid path to build the translation memory"
-msgstr "Укажите правильный путь для создания памяти переводов"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:291
-msgid "Gtranslator Translation Memory Manager"
-msgstr "Менеджер памяти переводов Gtranslator"
-
-#: ../plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
-msgid "Translation Memory"
-msgstr "Память переводов"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:207
-#, c-format
-msgid "Insert Option nº %d"
-msgstr "Вставить параметр nº %d"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:325
-#: ../src/translation-memory/gtr-translation-memory-ui.c:255
-msgid "_Use this translation"
-msgstr "_Использовать этот перевод"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:330
-#: ../src/translation-memory/gtr-translation-memory-ui.c:260
-msgid "_Remove"
-msgstr "_Удалить"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:445
-#: ../src/translation-memory/gtr-translation-memory-ui.c:371
-msgid "Shortcut"
-msgstr "Комбинация клавиш"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:454
-#: ../src/translation-memory/gtr-translation-memory-ui.c:380
-msgid "Level"
-msgstr "Уровень схожести"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:463
-#: ../src/translation-memory/gtr-translation-memory-ui.c:389
-msgid "String"
-msgstr "Строка"
-
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:81
-msgid "_Build Translation Memory"
-msgstr "_Создать память переводов"
-
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:82
-msgid "Build translation memory"
-msgstr "Создать память переводов"
-
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
-msgid "_Translation Memory"
-msgstr "_Память переводов"
-
-#: ../src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:48
 msgid "Current Maintainers"
 msgstr "Текущие сопровождающие"
 
-#: ../src/gtr-actions-app.c:52
+#: src/gtr-actions-app.c:52
 msgid "Previous Developers"
 msgstr "Предыдущие разработчики"
 
-#: ../src/gtr-actions-app.c:63
+#: src/gtr-actions-app.c:63
 msgid "Contributors"
 msgstr "Участники"
 
-#: ../src/gtr-actions-app.c:88
+#: src/gtr-actions-app.c:88
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -280,33 +256,33 @@ msgstr "Средство локализации приложений и библ
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/gtr-actions-app.c:101
+#: src/gtr-actions-app.c:101
 msgid "translator-credits"
 msgstr ""
 "Диконов Вячеслав <sdiconov@mail.ru>\\n\n"
 "Александр Прокудин <alexandre.prokoudine@gmail.com>"
 
-#: ../src/gtr-actions-app.c:104
+#: src/gtr-actions-app.c:104
 msgid "Translation Editor Web Site"
 msgstr "Домашняя страница Translation Editor"
 
-#: ../src/gtr-actions-file.c:200
+#: src/gtr-actions-file.c:200
 msgid "Open file for translation"
 msgstr "Открыть файл для перевода"
 
-#: ../src/gtr-actions-file.c:272 ../src/gtr-actions-file.c:389
+#: src/gtr-actions-file.c:272 src/gtr-actions-file.c:389
 msgid "File saved."
 msgstr "Файл сохранен."
 
-#: ../src/gtr-actions-file.c:320
+#: src/gtr-actions-file.c:320
 msgid "Save file as…"
 msgstr "Сохранить файл как…"
 
-#: ../src/gtr-actions-file.c:781
+#: src/gtr-actions-file.c:781
 msgid "Files saved."
 msgstr "Файлы сохранены."
 
-#: ../src/gtr-actions-search.c:168
+#: src/gtr-actions-search.c:168
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
@@ -314,19 +290,15 @@ msgstr[0] "Найдено и заменено %d совпадение"
 msgstr[1] "Найдено и заменено %d совпадения"
 msgstr[2] "Найдено и заменено %d совпадений"
 
-#: ../src/gtr-actions-search.c:177
+#: src/gtr-actions-search.c:177
 msgid "Found and replaced one occurrence"
 msgstr "Найдено и заменено одно совпадение"
 
-#: ../src/gtr-actions-search.c:189
+#: src/gtr-actions-search.c:189
 msgid "Phrase not found"
 msgstr "Фраза не найдена"
 
-#: ../src/gtr-application.c:555 ../src/gtr-window.c:312
-msgid "Translation Editor"
-msgstr "Translation Editor"
-
-#: ../src/gtr-assistant.c:128
+#: src/gtr-assistant.c:128
 #, c-format
 msgid ""
 "Profile name: %s\n"
@@ -349,64 +321,65 @@ msgstr ""
 "Выходная кодировка: %s\n"
 "Множественные формы: %s\n"
 
-#: ../src/gtr-assistant.c:167
+#: src/gtr-assistant.c:167
 msgid "This assistant will help you to create the main profile."
 msgstr "Этот мастер поможет вам создать основной профиль."
 
-#: ../src/gtr-assistant.c:172
+#: src/gtr-assistant.c:172
 msgid "Assistant"
 msgstr "Мастер"
 
-#: ../src/gtr-assistant.c:258
+#: src/gtr-assistant.c:258
 msgid "Profile name"
 msgstr "Название профиля"
 
-#: ../src/gtr-assistant.c:302
+#: src/gtr-assistant.c:302
 msgid "Translator email"
 msgstr "Эл. почта переводчика"
 
-#: ../src/gtr-assistant.c:324
+#: src/gtr-assistant.c:324
 msgid "Team email"
 msgstr "Эл. почта команды"
 
-#: ../src/gtr-assistant.c:339 ../src/gtr-preferences-dialog.c:521
-#: ../src/gtr-window.c:550
+#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:521
+#: src/gtr-window.c:554
 msgid "Profile"
 msgstr "Профиль"
 
-#: ../src/gtr-assistant.c:429
+#: src/gtr-assistant.c:429
 msgid "Language"
 msgstr "Язык"
 
-#: ../src/gtr-assistant.c:450
+#: src/gtr-assistant.c:450
 msgid "Confirmation"
 msgstr "Подтверждение"
 
-#: ../src/gtr-close-confirmation-dialog.c:123
+#: src/gtr-close-confirmation-dialog.c:123
 msgid "Close _without Saving"
 msgstr "Закрыть _без сохранения"
 
-#: ../src/gtr-close-confirmation-dialog.c:126 ../src/gtr-file-dialogs.c:45
-#: ../src/gtr-jump-dialog.c:90 ../src/gtr-preferences-dialog.c:394
-#: ../src/gtr-profile-dialog.c:71
-#: ../src/translation-memory/gtr-translation-memory-dialog.c:101
+#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:86
+#: src/gtr-file-dialogs.c:45 src/gtr-jump-dialog.c:90
+#: src/gtr-preferences-dialog.c:394 src/gtr-profile-dialog.c:71
+#: src/translation-memory/gtr-translation-memory-dialog.c:81
 msgid "_Cancel"
 msgstr "О_тмена"
 
-#: ../src/gtr-close-confirmation-dialog.c:128 ../src/gtr-file-dialogs.c:47
+#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:84
+#: src/gtr-file-dialogs.c:47
 msgid "_Save"
 msgstr "_Сохранить"
 
-#: ../src/gtr-close-confirmation-dialog.c:150
+#: src/gtr-close-confirmation-dialog.c:150
 msgid "Question"
 msgstr "Вопрос"
 
-#: ../src/gtr-close-confirmation-dialog.c:366
+#: src/gtr-close-confirmation-dialog.c:366
 #, c-format
 msgid "Save the changes to document “%s” before closing?"
 msgstr "Сохранить изменения в документе «%s» перед закрытием?"
 
-#: ../src/gtr-close-confirmation-dialog.c:530
+#: src/gtr-close-confirmation-dialog.c:530
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
@@ -414,7 +387,7 @@ msgstr[0] "Изменения в %d документе будут потерян
 msgstr[1] "Изменения в %d документах будут потеряны навсегда."
 msgstr[2] "Изменения в %d документах будут потеряны навсегда."
 
-#: ../src/gtr-close-confirmation-dialog.c:537
+#: src/gtr-close-confirmation-dialog.c:537
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -429,104 +402,311 @@ msgstr[2] ""
 "Имеется %d документов с несохранёнными изменениями. Сохранить изменения "
 "перед закрытием?"
 
-#: ../src/gtr-close-confirmation-dialog.c:558
+#: src/gtr-close-confirmation-dialog.c:558
 msgid "Docum_ents with unsaved changes:"
 msgstr "_Документы с несохраненными изменениями:"
 
-#: ../src/gtr-close-confirmation-dialog.c:562
+#: src/gtr-close-confirmation-dialog.c:562
 msgid "S_elect the documents you want to save:"
 msgstr "_Выберите документы, которые необходимо сохранить:"
 
-#: ../src/gtr-close-confirmation-dialog.c:581
+#: src/gtr-close-confirmation-dialog.c:581
 msgid "Saving has been disabled by the system administrator."
 msgstr "Возможность сохранения была отключена системным администратором."
 
-#: ../src/gtr-close-confirmation-dialog.c:583
+#: src/gtr-close-confirmation-dialog.c:583
 msgid "If you don’t save, all your changes will be permanently lost."
 msgstr "Если не сохранить изменения, они будут безвозвратно утеряны."
 
-#: ../src/gtr-context.c:238
+#: src/gtr-context.c:81
+#, fuzzy
+msgid "Edit notes"
+msgstr "Шрифт редактора"
+
+#: src/gtr-context.c:268
 msgid "Notes:"
 msgstr "Примечания:"
 
-#: ../src/gtr-context.c:246
+#: src/gtr-context.c:276
 msgid "Add Note"
 msgstr "Добавить примечание"
 
-#: ../src/gtr-context.c:251
+#: src/gtr-context.c:281
 msgid "Edit"
 msgstr "Правка"
 
 #. Extracted comments
-#: ../src/gtr-context.c:297
+#: src/gtr-context.c:327
 msgid "Extracted comments:"
 msgstr "Извлеченные комментарии:"
 
 #. Context
-#: ../src/gtr-context.c:301
+#: src/gtr-context.c:331
 msgid "Context:"
 msgstr "Контекст:"
 
 #. Format
-#: ../src/gtr-context.c:305
+#: src/gtr-context.c:335
 msgid "Format:"
 msgstr "Формат:"
 
-#: ../src/gtr-file-dialogs.c:62
+#: src/gtr-file-dialogs.c:48
+msgid "_Open"
+msgstr "_Открыть"
+
+#: src/gtr-file-dialogs.c:62
 msgid "Gettext translation"
 msgstr "Перевод Gettext"
 
-#: ../src/gtr-file-dialogs.c:71
+#: src/gtr-file-dialogs.c:71
 msgid "Gettext translation template"
 msgstr "Шаблон перевода Gettext"
 
-#: ../src/gtr-file-dialogs.c:76
+#: src/gtr-file-dialogs.c:76
 msgid "All files"
 msgstr "Все файлы"
 
-#: ../src/gtr-header-dialog.c:280
+#: src/gtr-header-dialog.c:280
 msgid "Edit Header"
 msgstr "Правка заголовка"
 
-#: ../src/gtr-jump-dialog.c:88 ../src/gtr-profile-dialog.c:165
-#: ../src/gtr-profile-dialog.c:170
-#: ../src/translation-memory/gtr-translation-memory-dialog.c:103
+#: src/gtr-header-dialog.ui:65
+msgid "Use my options to complete the following entries:"
+msgstr "Использовать личные настройки для заполнения полей заголовка"
+
+#: src/gtr-header-dialog.ui:89
+msgid "Translator’s _name:"
+msgstr "_Имя переводчика:"
+
+#: src/gtr-header-dialog.ui:103
+msgid "Translator’s _email:"
+msgstr "Эл. почта _переводчика:"
+
+#: src/gtr-header-dialog.ui:117
+msgid "_Language:"
+msgstr "_Язык:"
+
+#: src/gtr-header-dialog.ui:130
+msgid "Language _code:"
+msgstr "Код _языка:"
+
+#: src/gtr-header-dialog.ui:143
+msgid "Language gro_up email:"
+msgstr "_Эл. почта команды:"
+
+#: src/gtr-header-dialog.ui:156
+msgid "Char_set:"
+msgstr "_Кодировка:"
+
+#: src/gtr-header-dialog.ui:169
+msgid "Enc_oding:"
+msgstr "_Кодировка:"
+
+#: src/gtr-header-dialog.ui:267
+msgid "Translator and Language"
+msgstr "Переводчик и язык"
+
+#: src/gtr-header-dialog.ui:290
+msgid "Project Id _version:"
+msgstr "В_ерсия Id проекта:"
+
+#: src/gtr-header-dialog.ui:303
+msgid "Pot _file creation date:"
+msgstr "Дата _создания pot-файла:"
+
+#: src/gtr-header-dialog.ui:317
+msgid "Po file _revision date:"
+msgstr "Дата _обновления po-файла:"
+
+#: src/gtr-header-dialog.ui:331
+msgid "Report message _bugs to:"
+msgstr "_Куда сообщать об ошибках:"
+
+#: src/gtr-header-dialog.ui:400
+msgid "Project"
+msgstr "Проект"
+
+#: src/gtr-header-dialog.ui:430
+msgid "Comment"
+msgstr "Комментарий"
+
+#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
+#: src/gtr-profile-dialog.c:170
+#: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "_OK"
 msgstr "_OK"
 
-#: ../src/gtr-jump-dialog.c:92
+#: src/gtr-jump-dialog.c:92
 msgid "Go to Message"
 msgstr "Перейти к сообщению"
 
-#: ../src/gtr-message-table.c:255
+#: src/gtr-jump-dialog.ui:30
+msgid "Enter message number:"
+msgstr "Введите номер сообщения:"
+
+#: src/gtr-lang-button.ui:61 src/gtr-lang-button.ui:70
+msgid "Choose Language"
+msgstr "Выберите язык"
+
+#: src/gtr-languages-fetcher.ui:46
+msgid "_Language"
+msgstr "_Язык"
+
+#: src/gtr-languages-fetcher.ui:60
+msgid "Language _code"
+msgstr "_Код языка:"
+
+#: src/gtr-languages-fetcher.ui:74
+msgid "Character _set"
+msgstr "_Кодировка"
+
+#: src/gtr-languages-fetcher.ui:88
+#, fuzzy
+msgid "Transfer en_coding"
+msgstr "Кодировка для _передачи:"
+
+#: src/gtr-languages-fetcher.ui:102
+msgid "_Plural forms"
+msgstr "_Множественные формы"
+
+#: src/gtr-languages-fetcher.ui:200
+msgid "Edit options manually"
+msgstr ""
+
+#: src/gtr-message-table.c:255
 msgid "Original Message"
 msgstr "Исходный текст"
 
-#: ../src/gtr-message-table.c:274
+#: src/gtr-message-table.c:274
 msgid "Translated Message"
 msgstr "Текст перевода"
 
-#: ../src/gtr-po.c:440
+#: src/gtr-notebook.ui:26
+msgid "Order messages by"
+msgstr "Сортировать сообщения"
+
+#: src/gtr-notebook.ui:58
+msgid "Appearance in the original file"
+msgstr "По порядку появления в файле перевода"
+
+#: src/gtr-notebook.ui:72
+msgid "Message status"
+msgstr "По статусу сообщения"
+
+#: src/gtr-notebook.ui:87
+msgid "Original message"
+msgstr "По исходному тексту"
+
+#: src/gtr-notebook.ui:102
+msgid "Translated message"
+msgstr "По переводу"
+
+#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:369
+#: src/gtr-search-dialog.c:449
+msgid "Find"
+msgstr "Поиск"
+
+#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:453
+msgid "Find and replace"
+msgstr "Найти и заменить"
+
+#: src/gtr-notebook.ui:164
+msgid "Build translation memory"
+msgstr "Создать память переводов"
+
+#: src/gtr-notebook.ui:179
+msgid "Edit header"
+msgstr "Изменить заголовок"
+
+#: src/gtr-notebook.ui:207 src/gtr-projects.ui:109
+msgid "New window"
+msgstr "Создать окно"
+
+#: src/gtr-notebook.ui:221 src/gtr-projects.ui:123
+msgid "Preferences"
+msgstr "Параметры"
+
+#: src/gtr-notebook.ui:248 src/gtr-projects.ui:150
+msgid "Keyboard Shortcuts"
+msgstr "Комбинация клавиш"
+
+#: src/gtr-notebook.ui:262 src/gtr-projects.ui:164
+msgid "About"
+msgstr "О программе"
+
+#: src/gtr-notebook.ui:276 src/gtr-projects.ui:178
+msgid "Quit"
+msgstr "Выйти"
+
+#: src/gtr-notebook.ui:298 src/gtr-projects.ui:58
+msgid "Open…"
+msgstr "Открыть…"
+
+#: src/gtr-notebook.ui:302
+msgid "Open a new file (<Ctrl>o)"
+msgstr "Открыть файл (<Ctrl>o)"
+
+#: src/gtr-notebook.ui:328
+msgid "Undo (<Ctrl>z)"
+msgstr "Отменить (<Ctrl>z)"
+
+#: src/gtr-notebook.ui:350
+msgid "Redo (<Ctrl><Shift>z)"
+msgstr "Вернуть (<Ctrl><Shift>z)"
+
+#: src/gtr-notebook.ui:395
+msgid "Previous message without translation (<Alt><Page Up>)"
+msgstr "Предыдущее сообщение без перевода (<Alt><Page Up>)"
+
+#: src/gtr-notebook.ui:417
+msgid "Next message without translation (<Alt><Page Down>)"
+msgstr "Следующее сообщение без перевода (<Alt><Page Down>)"
+
+#: src/gtr-notebook.ui:457
+msgid "Toggle fuzzy state (<Ctrl>+u)"
+msgstr "Изменить статус неточного перевода <Ctrl>+u)"
+
+#: src/gtr-notebook.ui:487
+msgid "Order by menu"
+msgstr ""
+
+#: src/gtr-notebook.ui:511 src/gtr-projects.ui:81
+msgid "Main Menu"
+msgstr "Главное меню"
+
+#: src/gtr-notebook.ui:527
+msgid "Save"
+msgstr "Сохранить"
+
+#: src/gtr-notebook.ui:531
+msgid "Save the current file (<Ctrl>s)"
+msgstr "Сохранить текущий файл (<Ctrl>s)"
+
+#: src/gtr-notebook.ui:546
+msgid "Save as (<Ctrl><Shift>s)"
+msgstr "Сохранить как (<Ctrl><Shift>s)"
+
+#: src/gtr-po.c:440
 #, c-format
 msgid "The file is empty"
 msgstr "Файл пуст"
 
-#: ../src/gtr-po.c:449
+#: src/gtr-po.c:449
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Сбой при открытии файла «%s»: %s"
 
-#: ../src/gtr-po.c:524
+#: src/gtr-po.c:524
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Не удалось преобразовать из кодировки '%s' в UTF-8"
 
-#: ../src/gtr-po.c:541 ../src/gtr-po.c:561
+#: src/gtr-po.c:541 src/gtr-po.c:561
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Не удалось создать временный файл для преобразования кодировки"
 
-#: ../src/gtr-po.c:598
+#: src/gtr-po.c:598
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -537,17 +717,17 @@ msgstr ""
 "инструменты командной строки msgconv или iconv перед открытием этого файла в "
 "GNOME Translation Editor."
 
-#: ../src/gtr-po.c:666
+#: src/gtr-po.c:666
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext вернул пустой список сообщений домена."
 
-#: ../src/gtr-po.c:711
+#: src/gtr-po.c:711
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Не получено сообщений от анализатора."
 
-#: ../src/gtr-po.c:762
+#: src/gtr-po.c:762
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -558,124 +738,261 @@ msgstr ""
 "Учтите, что такие файлы создаются при компиляции.\n"
 "Файл перевода должен иметь расширение \"po\", скорее всего %s.po"
 
-#: ../src/gtr-po.c:775
+#: src/gtr-po.c:775
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Файл %s доступен только для чтения, его нельзя перезаписать"
 
-#: ../src/gtr-po.c:794
+#: src/gtr-po.c:794
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "При записи PO-файла произошла ошибка: %s"
 
-#: ../src/gtr-po.c:806
+#: src/gtr-po.c:806
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "При записи PO-файла произошла ошибка: %s"
 
-#: ../src/gtr-preferences-dialog.c:370
+#: src/gtr-preferences-dialog.c:370
 msgid "Impossible to remove the active profile"
 msgstr "Невозможно удалить активный профиль"
 
-#: ../src/gtr-preferences-dialog.c:376
+#: src/gtr-preferences-dialog.c:376
 msgid "Another profile should be selected as active before"
 msgstr "Сначала должен быть выбран другой профиль."
 
-#: ../src/gtr-preferences-dialog.c:389
+#: src/gtr-preferences-dialog.c:389
 msgid "Are you sure you want to delete this profile?"
 msgstr "Уверены, что хотите удалить этот профиль?"
 
-#: ../src/gtr-preferences-dialog.c:397
+#: src/gtr-preferences-dialog.c:397
 msgid "_Delete"
 msgstr "_Удалить"
 
-#: ../src/gtr-preferences-dialog.c:527
+#: src/gtr-preferences-dialog.c:527
 msgid "Active"
 msgstr "Активен"
 
-#: ../src/gtr-preferences-dialog.c:589
+#: src/gtr-preferences-dialog.c:589
 msgid "Help"
 msgstr "Справка"
 
-#: ../src/gtr-preferences-dialog.c:591
+#: src/gtr-preferences-dialog.c:591 src/gtr-preferences-dialog.ui:49
 msgid "Translation Editor Preferences"
-msgstr "Параметры Translation Editor"
+msgstr "Параметры GNOME Translation Editor"
 
-#: ../src/gtr-profile-dialog.c:73
+#: src/gtr-preferences-dialog.ui:119
+msgid "General"
+msgstr "Общие"
+
+#: src/gtr-preferences-dialog.ui:138
+msgid "_Warn if PO file contains fuzzy translations"
+msgstr "Предупреждать о наличии _неточных переводов"
+
+#: src/gtr-preferences-dialog.ui:160
+msgid "Autosave"
+msgstr "Автосохранение файлов"
+
+#: src/gtr-preferences-dialog.ui:184
+msgid "Create a _backup copy of files before saving"
+msgstr "Создавать _резервную копию перевода перед сохранением"
+
+#: src/gtr-preferences-dialog.ui:206
+msgid "_Autosave files every"
+msgstr "_Интервал автосохранения:"
+
+#: src/gtr-preferences-dialog.ui:230
+msgid "_minutes"
+msgstr "_минут"
+
+#: src/gtr-preferences-dialog.ui:288
+msgid "Files"
+msgstr "Файлы"
+
+#: src/gtr-preferences-dialog.ui:312
+msgid "Text Display"
+msgstr "Отображение текста"
+
+#: src/gtr-preferences-dialog.ui:335
+msgid "_Highlight message syntax"
+msgstr "_Подсвечивать синтаксис сообщений"
+
+#: src/gtr-preferences-dialog.ui:351
+msgid "Make _whitespace visible"
+msgstr "_Делать пробелы видимыми"
+
+#: src/gtr-preferences-dialog.ui:392
+msgid "Contents"
+msgstr "Содержимое"
+
+#: src/gtr-preferences-dialog.ui:415
+msgid "_Remove fuzzy status if message is changed"
+msgstr "_Снимать статус неточного перевода с измененных сообщений"
+
+#: src/gtr-preferences-dialog.ui:431
+msgid "Check _spelling"
+msgstr "Про_верять орфографию"
+
+#: src/gtr-preferences-dialog.ui:470
+msgid "Editor"
+msgstr "Редактор"
+
+#: src/gtr-preferences-dialog.ui:569
+msgid "Edit Profile"
+msgstr "Изменить профиль"
+
+#: src/gtr-preferences-dialog.ui:606
+msgid "Profiles"
+msgstr "Профили"
+
+#: src/gtr-profile-dialog.c:73
 msgid "Translation Editor Profile"
 msgstr "Профиль Translation Editor"
 
-#: ../src/gtr-search-dialog.c:347
+#: src/gtr-profile-dialog.ui:68
+msgid "_Name"
+msgstr "И_мя"
+
+#: src/gtr-profile-dialog.ui:96
+msgid "Profile Information"
+msgstr "Информация о профиле"
+
+#: src/gtr-profile-dialog.ui:113
+msgid "Translator Information"
+msgstr "Информация о переводчике"
+
+#: src/gtr-profile-dialog.ui:131
+msgid "N_ame"
+msgstr "_Имя"
+
+#: src/gtr-profile-dialog.ui:146
+msgid "_Email"
+msgstr "_Эл. почта"
+
+#: src/gtr-profile-dialog.ui:160
+msgid "_Team email"
+msgstr "Эл. почта _команды"
+
+#: src/gtr-profile-dialog.ui:209
+msgid "Language Settings"
+msgstr "Языковые параметры"
+
+#: src/gtr-projects.ui:35
+msgid "Open a new .po file or drag & drop here"
+msgstr "Откройте файл PO или перетащите его сюда"
+
+#: src/gtr-projects.ui:51
+msgid "Select a PO file"
+msgstr "Открыть файл PO"
+
+#: src/gtr-search-dialog.c:347 src/gtr-search-dialog.ui:6
+#: src/gtr-search-dialog.ui:53
 msgid "Replace"
 msgstr "Заменить"
 
-#: ../src/gtr-search-dialog.c:369 ../src/gtr-search-dialog.c:449
-msgid "Find"
-msgstr "Поиск"
-
-#: ../src/gtr-search-dialog.c:451
+#: src/gtr-search-dialog.c:451
 msgid "Replace _All"
 msgstr "Заменить _все"
 
-#: ../src/gtr-search-dialog.c:453
-msgid "Find and replace"
-msgstr "Найти и заменить"
-
-#: ../src/gtr-search-dialog.c:455
+#: src/gtr-search-dialog.c:455
 msgid "_Replace"
 msgstr "З_аменить"
 
-#: ../src/gtr-statusbar.c:117 ../src/gtr-statusbar.c:252
+#: src/gtr-search-dialog.ui:37
+msgid "Replace All"
+msgstr "Заменить все"
+
+#: src/gtr-search-dialog.ui:109
+msgid "_Search for: "
+msgstr "На_йти:"
+
+#: src/gtr-search-dialog.ui:124
+msgid "Replace _with: "
+msgstr "З_аменить на:"
+
+#: src/gtr-search-dialog.ui:160
+msgid "_Original text"
+msgstr "_Исходный текст"
+
+#: src/gtr-search-dialog.ui:177
+msgid "_Translated text"
+msgstr "Текст _перевода"
+
+#: src/gtr-search-dialog.ui:213
+msgid "_Match case"
+msgstr "_Учитывать регистр"
+
+#: src/gtr-search-dialog.ui:229
+msgid "Match _entire word only"
+msgstr "Только _полные слова"
+
+#: src/gtr-search-dialog.ui:245
+msgid "Search _backwards"
+msgstr "О_братный поиск"
+
+#: src/gtr-search-dialog.ui:262
+msgid "_Wrap around"
+msgstr "_Поиск по всему переводу"
+
+#: src/gtr-statusbar.c:117 src/gtr-statusbar.c:252
 msgid "INS"
 msgstr "ВСТ"
 
-#: ../src/gtr-statusbar.c:118 ../src/gtr-statusbar.c:248
+#: src/gtr-statusbar.c:118 src/gtr-statusbar.c:248
 msgid "OVR"
 msgstr "ЗАМ"
 
-#: ../src/gtr-tab.c:245
+#: src/gtr-tab-label.c:278
+msgid "Close document"
+msgstr "Закрыть документ"
+
+#: src/gtr-tab.c:246
 msgid "There is an error in the message:"
 msgstr "В сообщении есть ошибка:"
 
-#: ../src/gtr-tab.c:446 ../src/gtr-tab.c:557
+#: src/gtr-tab.c:459 src/gtr-tab.c:570
 msgid "fuzzy"
 msgstr "Неточное"
 
-#: ../src/gtr-tab.c:587
+#: src/gtr-tab.c:600
 #, c-format
 msgid "Plural %d"
 msgstr "Множественное число (%d)"
 
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1139
+#: src/gtr-tab.c:1153
 msgid "Path:"
 msgstr "Путь:"
 
-#: ../src/gtr-tab.c:1789
+#: src/gtr-tab.c:1803
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Переведено: %0.2f%%"
 
-#: ../src/gtr-tab.c:1790
+#: src/gtr-tab.c:1804
 #, c-format
 msgid "Translated: %d"
 msgstr "Переведено: %d"
 
-#: ../src/gtr-tab.c:1791
+#: src/gtr-tab.c:1805
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Не переведено: %d"
 
-#: ../src/gtr-tab.c:1792
+#: src/gtr-tab.c:1806
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Неточных: %d"
 
-#: ../src/gtr-tab-label.c:278
-msgid "Close document"
-msgstr "Закрыть документ"
+#: src/gtr-tab.ui:153
+msgid "_Original Message"
+msgstr "_Исходное сообщение"
 
-#: ../src/gtr-utils.c:516
+#: src/gtr-tab.ui:245
+msgid "Translate_d Text"
+msgstr "_Переведённый текст:"
+
+#: src/gtr-utils.c:516
 msgid ""
 "Unable to display help. Please make sure the Translation Editor "
 "documentation package is installed."
@@ -683,29 +1000,29 @@ msgstr ""
 "Не удалось открыть справку. Убедитесь, что установлен пакет с документацией "
 "Translation Editor."
 
-#: ../src/gtr-window.c:167
+#: src/gtr-window.c:171
 msgid "Untranslated"
 msgstr "Не переведено"
 
-#: ../src/gtr-window.c:170
+#: src/gtr-window.c:174
 msgid "Translated"
 msgstr "Переведено"
 
-#: ../src/gtr-window.c:173
+#: src/gtr-window.c:177
 msgid "Fuzzy"
 msgstr "Неточное"
 
-#: ../src/gtr-window.c:180
+#: src/gtr-window.c:184
 #, c-format
 msgid "Current: %d"
 msgstr "Текущее: %d"
 
-#: ../src/gtr-window.c:181
+#: src/gtr-window.c:185
 #, c-format
 msgid "Total: %d"
 msgstr "Всего: %d"
 
-#: ../src/gtr-window.c:182
+#: src/gtr-window.c:186
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
@@ -713,7 +1030,7 @@ msgstr[0] "%d переведённое"
 msgstr[1] "%d переведённых"
 msgstr[2] "%d переведённых"
 
-#: ../src/gtr-window.c:185
+#: src/gtr-window.c:189
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
@@ -721,7 +1038,7 @@ msgstr[0] "%d неточное"
 msgstr[1] "%d неточных"
 msgstr[2] "%d неточных"
 
-#: ../src/gtr-window.c:187
+#: src/gtr-window.c:191
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -730,30 +1047,166 @@ msgstr[1] "%d непереведённых"
 msgstr[2] "%d непереведённых"
 
 #. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:297
+#: src/gtr-window.c:301
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Translation Editor"
 
 #. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:303
+#: src/gtr-window.c:307
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Translation Editor"
 
-#: ../src/gtr-window.c:534
+#: src/gtr-window.c:538
 msgid "No profile"
 msgstr "Нет профиля"
 
-#: ../src/gtr-window.c:552
+#: src/gtr-window.c:556
 msgid "Profile for the active document"
 msgstr "Профиль для текущего документа"
 
-#: ../src/main.c:97
+#: src/gtranslator-menu.ui:7
+msgid "_New Window"
+msgstr "_Создать окно"
+
+#: src/gtranslator-menu.ui:13
+msgid "_Preferences"
+msgstr "_Параметры"
+
+#: src/gtranslator-menu.ui:19
+msgid "_Help"
+msgstr "_Справка"
+
+#: src/gtranslator-menu.ui:24
+msgid "_About GNOME Translation Editor"
+msgstr "О GNOME Translation Editor"
+
+#: src/help-overlay.ui:13
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "Общие"
+
+#: src/help-overlay.ui:18
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "Открыть файл"
+
+#: src/help-overlay.ui:25
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "Сохранить текущий файл"
+
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "Сохранить текущий файл как"
+
+#: src/help-overlay.ui:40
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "Параметры"
+
+#: src/help-overlay.ui:47
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "Комбинация клавиш"
+
+#: src/help-overlay.ui:54
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Выйти"
+
+#: src/help-overlay.ui:64
+#, fuzzy
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "Правка"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Undo"
+msgstr "Отменить"
+
+#: src/help-overlay.ui:75
+msgctxt "shortcut window"
+msgid "Redo"
+msgstr "Вернуть"
+
+#: src/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr "Пометить как точное или неточное"
+
+#: src/help-overlay.ui:89
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "Скопировать исходное сообщение и вставить его как перевод"
+
+#: src/help-overlay.ui:99
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr "Навигация"
+
+#: src/help-overlay.ui:103
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Go to the previous message"
+msgstr "Перейти к предыдущему неточному сообщению"
+
+#: src/help-overlay.ui:110
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Go to the next message"
+msgstr "Перейти к следующему неточному сообщению"
+
+#: src/help-overlay.ui:117
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Go to the previous untranslated message"
+msgstr "Перейти к предыдущему непереведённому сообщению"
+
+#: src/help-overlay.ui:124
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Go to the next untranslated message"
+msgstr "Перейти к следующему непереведённому сообщению"
+
+#: src/help-overlay.ui:134
+msgctxt "shortcut window group"
+msgid "Translation Memory"
+msgstr "Память переводов"
+
+#: src/help-overlay.ui:138
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Build translation memory"
+msgstr "Создать память переводов"
+
+#: src/help-overlay.ui:148
+#, fuzzy
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "Найти и заменить"
+
+#: src/help-overlay.ui:152
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Поиск"
+
+#: src/help-overlay.ui:159
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "Найти и заменить"
+
+#: src/main.c:97
 msgid "— Edit PO files"
 msgstr "— правка PO-файлов"
 
-#: ../src/main.c:101
+#: src/main.c:101
 #, c-format
 msgid ""
 "%s\n"
@@ -763,100 +1216,233 @@ msgstr ""
 "Запустите «%s --help», чтобы вывести полный список доступных параметров "
 "командной строки.\n"
 
-#: ../src/translation-memory/gtr-translation-memory-dialog.c:287
+#: src/translation-memory/gtr-translation-memory-dialog.c:77
+#, fuzzy
+msgid "Select PO directory"
+msgstr "Каталог PO"
+
+#: src/translation-memory/gtr-translation-memory-dialog.c:303
 msgid "Translation Editor Memory Manager"
 msgstr "Менеджер памяти переводов Translation Editor"
 
-#~ msgid ""
-#~ "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
-#~ "environment. It handles all forms of gettext po files and includes very "
-#~ "useful features like find/replace, translation memory, different "
-#~ "translator profiles, messages table (for having an overview of the "
-#~ "translations/messages in the po file), easy navigation and editing of "
-#~ "translation messages and comments of the translation where accurate."
-#~ msgstr ""
-#~ "Gtranslator — это улучшенный редактор po-файлов для среды рабочего стола "
-#~ "GNOME. Он обрабатывает все формы gettext и включает в себя некоторые "
-#~ "полезные функции: поиск/замена, память переводов, профили для перевода, "
-#~ "таблица сообщений (для получения обзора переводов/сообщений в po-файле), "
-#~ "простая навигация, редактирование сообщений и комментирование переводов."
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
+msgid "Database:"
+msgstr "База данных:"
 
-#~ msgid ""
-#~ "Gtranslator includes also a plugin system with many interesting plugins "
-#~ "like alternate language, insert tags, open tran, integration with "
-#~ "subversion and a source code viewer."
-#~ msgstr ""
-#~ "Gtranslator также включает в себя систему модулей: альтернативный язык, "
-#~ "вставка тэгов, open tran, интеграция с subversion, просмотрщик исходного "
-#~ "кода."
+#: src/translation-memory/gtr-translation-memory-dialog.ui:103
+msgid "Select the directory which contains PO files:"
+msgstr "Укажите каталог с файлами PO:"
 
-#~ msgid "Gtranslator"
-#~ msgstr "Gtranslator"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:154
+msgid "Add to Database"
+msgstr "Добавить в базу данных"
 
-#~ msgid "PO File Editor"
-#~ msgstr "Редактор PO-файлов"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:209
+msgid "Configuration:"
+msgstr "Конфигурация:"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:253
+msgid "Use only files with this name:"
+msgstr "Использовать только файлы с именем:"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:255
+msgid "_Use this translation"
+msgstr "_Использовать этот перевод"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:260
+msgid "_Remove"
+msgstr "_Удалить"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:371
+msgid "Shortcut"
+msgstr "Комбинация клавиш"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:380
+msgid "Level"
+msgstr "Уровень схожести"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:389
+msgid "String"
+msgstr "Строка"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
+msgid "PO directory"
+msgstr "Каталог PO"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
+msgid "Directory containing PO files to add to the translation memory."
+msgstr "Каталог, содержащий PO-файлы для добавления в память переводов."
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
+msgid "Restrict search by filename"
+msgstr "Ограничить поиск именем файла"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
+msgid ""
+"If true, only include files with a specified filename when searching the "
+"translation memory."
+msgstr ""
+"Если выбрано, то при поиске в памяти переводов будут включаться файлы только "
+"с определённым именем."
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
+msgid "Filename to restrict search to"
+msgstr "Имя файла для ограничения поиска"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
+msgid ""
+"Filename to which searching of the translation memory should be restricted."
+msgstr "Имя файла, которым должен быть ограничен поиск по памяти переводов."
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
+msgid "Maximum number of missing words"
+msgstr "Максимальное количество пропущенных слов"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
+msgid ""
+"Maximum number of words that can be missing from a message displayed as a "
+"match by the translation memory."
+msgstr ""
+"Максимальное количество слов, которое может быть пропущено в сообщении, "
+"показанном памятью переводов как совпадающее."
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
+msgid "Maximum difference in message length"
+msgstr "Максимальное отличие в длине сообщения"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
+msgid ""
+"Maximum difference in length between messages displayed as matches by the "
+"translation memory."
+msgstr ""
+"Максимальное отличие в длине между сообщениями, показанными памятью "
+"переводов как совпадающие."
+
+#~ msgid "Message not found"
+#~ msgstr "Сообщение не найдено"
+
+#~ msgid "Open file for alternate language"
+#~ msgstr "Открыть файл альтернативного языка"
+
+#~ msgid "File closed"
+#~ msgstr "Файл закрыт"
+
+#~ msgid "Co_py"
+#~ msgstr "_Копировать"
+
+#~ msgid "There isn’t any file loaded"
+#~ msgstr "Нет загруженных файлов"
+
+#~ msgid "_Alternate Language"
+#~ msgstr "_Альтернативный язык"
+
+#~ msgid "Show the Alternate Language panel"
+#~ msgstr "Показать панель с текстом на альтернативном языке"
+
+#~ msgid "Alternate Language"
+#~ msgstr "Альтернативный язык"
+
+#~ msgid "Character Map"
+#~ msgstr "Касса символов"
+
+#~ msgid "Please install “%s” to be able to show the file"
+#~ msgstr "Установите «%s», чтобы открыть файл"
+
+#~ msgid "Dictionary"
+#~ msgstr "Словарь"
+
+#~ msgid "No dictionary source available with name “%s”"
+#~ msgstr "Нет источника словаря с именем «%s»"
+
+#~ msgid "Unable to find dictionary source"
+#~ msgstr "Не удалось найти источник словаря"
+
+#~ msgid "No context available for source “%s”"
+#~ msgstr "Нет доступного контекста для источника «%s»"
+
+#~ msgid "Unable to create a context"
+#~ msgstr "Не удалось создать контекст"
+
+#~ msgid "Dictionary source “%s” selected"
+#~ msgstr "Выбран источник словаря «%s»"
+
+#~ msgid "Strategy “%s” selected"
+#~ msgstr "Выбрана стратегия «%s»"
+
+#~ msgid "Database “%s” selected"
+#~ msgstr "Выбрана база данных «%s»"
+
+#~ msgid "Word “%s” selected"
+#~ msgstr "Выбрано слово «%s»"
+
+#~ msgid "Double-click on the word to look up"
+#~ msgstr "Дважды щёлкните по слову, которое нужно найти"
+
+#~ msgid "Double-click on the matching strategy to use"
+#~ msgstr "Дважды щёлкните по подходящей к использованию стратегии"
+
+#~ msgid "Double-click on the source to use"
+#~ msgstr "Дважды щёлкните по источнику, который нужно использовать"
+
+#~ msgid "Double-click on the database to use"
+#~ msgstr "Дважды щёлкните по базе данных, которую нужно использовать"
+
+#~ msgid "Look _up:"
+#~ msgstr "_Найти:"
+
+#~ msgid "Similar words"
+#~ msgstr "Схожие слова"
+
+#~ msgid "Available dictionaries"
+#~ msgstr "Доступные словари"
+
+#~ msgid "Available strategies"
+#~ msgstr "Доступные стратегии"
+
+#~ msgid "Dictionary sources"
+#~ msgstr "Источники словарей"
+
+#~ msgid "_Fullscreen"
+#~ msgstr "_Во весь экран"
+
+#~ msgid "Place window on fullscreen state"
+#~ msgstr "Открыть окно программы на весь экран"
+
+#~ msgid "_Next Param"
+#~ msgstr "С_ледующий параметр"
+
+#~ msgid "Insert the next param of the message"
+#~ msgstr "Вставить следующий параметр сообщения"
+
+#~ msgid "_Insert Params"
+#~ msgstr "Вставить пара_метры"
+
+#~ msgid "_Next Tag"
+#~ msgstr "Сл_едующий тэг"
+
+#~ msgid "Insert the next tag of the message"
+#~ msgstr "Вставить следующую метку сообщения"
+
+#~ msgid "_Insert Tags"
+#~ msgstr "Вставить те_ги"
+
+#~ msgid "Strings added to database"
+#~ msgstr "Строки добавленные в базу данных"
+
+#~ msgid "Please specify a valid path to build the translation memory"
+#~ msgstr "Укажите правильный путь для создания памяти переводов"
+
+#~ msgid "Insert Option nº %d"
+#~ msgstr "Вставить параметр nº %d"
+
+#~ msgid "_Build Translation Memory"
+#~ msgstr "_Создать память переводов"
+
+#~ msgid "_Translation Memory"
+#~ msgstr "_Память переводов"
 
 #~ msgid "Gtranslator PO File Editor"
 #~ msgstr "Редактор PO-файлов Gtranslator"
-
-#~ msgid "Translate and localize applications and libraries"
-#~ msgstr "Перевод и локализация файлов и приложений"
-
-#~ msgid "Warn if file contains fuzzy translations"
-#~ msgstr "Предупреждать о наличии неточных переводов"
-
-#~ msgid ""
-#~ "If true, warn the user when saving a PO translation file containing fuzzy "
-#~ "strings."
-#~ msgstr ""
-#~ "Если выбрано, то при сохранении PO-файлов, содержащих неточные строки "
-#~ "перевода, пользователь будет получать предупреждение."
-
-#~ msgid "Auto save files"
-#~ msgstr "Автосохранение файлов"
-
-#~ msgid "If true, automatically save files at specified intervals."
-#~ msgstr ""
-#~ "Если выбрано, файлы будут автоматически сохраняться через указанные "
-#~ "интервалы времени."
-
-#~ msgid "Auto save interval"
-#~ msgstr "Интервал автосохранения"
-
-#~ msgid "Interval in minutes at which to automatically save files."
-#~ msgstr "Интервал в минутах для автоматического сохранения файлов."
-
-#~ msgid "Create backup before saving"
-#~ msgstr "Создавать архивную копию перед сохранением"
-
-#~ msgid "If true, create a backup copy of a file before saving it."
-#~ msgstr ""
-#~ "Если выбрано, то перед сохранением файла будет создаваться его резервная "
-#~ "копия."
-
-#~ msgid "Use profile values for header"
-#~ msgstr "Использовать данные профиля для заголовка"
-
-#~ msgid ""
-#~ "If true, overwrite the values in the PO header with those in the active "
-#~ "profile."
-#~ msgstr ""
-#~ "Если выбрано, то значения в заголовочной части PO-файла будут "
-#~ "перезаписываться значениями текущего профиля."
-
-#~ msgid "Highlight syntax in edit fields"
-#~ msgstr "Подсвечивать синтаксис переводимых сообщений"
-
-#~ msgid "If true, apply syntax highlighting to strings in edit fields."
-#~ msgstr ""
-#~ "Если выбрано, то к строкам в полях ввода будет применяться подсветка "
-#~ "синтаксиса."
-
-#~ msgid "Make whitespace visible"
-#~ msgstr "Показывать пробелы"
-
-#~ msgid "If true, display whitespace in strings as representative symbols."
-#~ msgstr "Если выбрано, то символы пробелов будут показаны в строках явно."
 
 #~ msgid "Use custom font"
 #~ msgstr "Использовать другой шрифт"
@@ -866,64 +1452,8 @@ msgstr "Менеджер памяти переводов Translation Editor"
 #~ "Если выбрано, то в полях редактирования будет использоваться выбранный "
 #~ "пользователем шрифт."
 
-#~ msgid "Editor font"
-#~ msgstr "Шрифт редактора"
-
 #~ msgid "Custom font to use for edit fields."
 #~ msgstr "Свой шрифт для полей редактирования"
-
-#~ msgid "Remove fuzzy status when message is changed"
-#~ msgstr "Убирать признак неточного перевода при изменении сообщения"
-
-#~ msgid ""
-#~ "If true, remove fuzzy status from translations when they are changed."
-#~ msgstr ""
-#~ "Если выбрано, с изменённых сообщений будет удаляться признак неточного "
-#~ "перевода."
-
-#~ msgid "Check spelling"
-#~ msgstr "Проверка орфографии"
-
-#~ msgid "If true, check the spelling of translated messages."
-#~ msgstr ""
-#~ "Если выбрано, переведённые сообщения будут проверяться на наличие ошибок "
-#~ "в правописании."
-
-#~ msgid "Side panel switcher style"
-#~ msgstr "Стиль переключателя боковой панели"
-
-#~ msgid "Style for switchers in the side panel."
-#~ msgstr "Стиль переключателей боковой панели."
-
-#~ msgid "Color scheme"
-#~ msgstr "Цветовая схема"
-
-#~ msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
-#~ msgstr ""
-#~ "Название цветовой схемы gtksourceview для использования при подсветке "
-#~ "синтаксиса."
-
-#~ msgid "Message list sort order"
-#~ msgstr "Порядок сортировки списка сообщений"
-
-#~ msgid ""
-#~ "Sort order to use in the message list. Possible values are \"status\", "
-#~ "\"id\", \"original-text\" and \"translated-text\"."
-#~ msgstr ""
-#~ "Порядок сортировки в списке сообщений. Возможные значения: «status», "
-#~ "«id», «original-text» и «translated-text»."
-
-#~ msgid "Active plugins"
-#~ msgstr "Включённые модули"
-
-#~ msgid ""
-#~ "List of active plugins. It contains the \"Location\" of the active "
-#~ "plugins. See the .gtranslator-plugin file for obtaining the \"Location\" "
-#~ "of a given plugin."
-#~ msgstr ""
-#~ "Список включённых модулей. Содержит «Местоположение» включённых модулей. "
-#~ "Для получения «Местоположения» данного модуля см. файл .gtranslator-"
-#~ "plugin."
 
 #~ msgid "Others"
 #~ msgstr "Прочие"
@@ -964,9 +1494,6 @@ msgstr "Менеджер памяти переводов Translation Editor"
 
 #~ msgid "Show the message in the source code."
 #~ msgstr "Показать сообщение в исходном коде."
-
-#~ msgid "Source code"
-#~ msgstr "Исходный код"
 
 #~ msgid "Use the System Editor"
 #~ msgstr "Использовать системный редактор"
@@ -1134,67 +1661,8 @@ msgstr "Менеджер памяти переводов Translation Editor"
 #~ msgid "URL of an Open-Tran mirror server"
 #~ msgstr "Адрес URL зеркала Open-Tran"
 
-#~ msgid "Database:"
-#~ msgstr "База данных:"
-
-#~ msgid "Select the directory which contains PO files:"
-#~ msgstr "Укажите каталог с файлами PO:"
-
-#~ msgid "Add to Database"
-#~ msgstr "Добавить в базу данных"
-
-#~ msgid "Configuration:"
-#~ msgstr "Конфигурация:"
-
-#~ msgid "Use only files with this name:"
-#~ msgstr "Использовать только файлы с именем:"
-
 #~ msgid "Get translation suggestions from a data base."
 #~ msgstr "Получить предложение перевода из базы данных."
-
-#~ msgid "PO directory"
-#~ msgstr "Каталог PO"
-
-#~ msgid "Directory containing PO files to add to the translation memory."
-#~ msgstr "Каталог, содержащий PO-файлы для добавления в память переводов."
-
-#~ msgid "Restrict search by filename"
-#~ msgstr "Ограничить поиск именем файла"
-
-#~ msgid ""
-#~ "If true, only include files with a specified filename when searching the "
-#~ "translation memory."
-#~ msgstr ""
-#~ "Если выбрано, то при поиске в памяти переводов будут включаться файлы "
-#~ "только с определённым именем."
-
-#~ msgid "Filename to restrict search to"
-#~ msgstr "Имя файла для ограничения поиска"
-
-#~ msgid ""
-#~ "Filename to which searching of the translation memory should be "
-#~ "restricted."
-#~ msgstr "Имя файла, которым должен быть ограничен поиск по памяти переводов."
-
-#~ msgid "Maximum number of missing words"
-#~ msgstr "Максимальное количество пропущенных слов"
-
-#~ msgid ""
-#~ "Maximum number of words that can be missing from a message displayed as a "
-#~ "match by the translation memory."
-#~ msgstr ""
-#~ "Максимальное количество слов, которое может быть пропущено в сообщении, "
-#~ "показанном памятью переводов как совпадающее."
-
-#~ msgid "Maximum difference in message length"
-#~ msgstr "Максимальное отличие в длине сообщения"
-
-#~ msgid ""
-#~ "Maximum difference in length between messages displayed as matches by the "
-#~ "translation memory."
-#~ msgstr ""
-#~ "Максимальное отличие в длине между сообщениями, показанными памятью "
-#~ "переводов как совпадающие."
 
 #~ msgid "Current Developers"
 #~ msgstr "Активные разработчики"
@@ -1202,74 +1670,8 @@ msgstr "Менеджер памяти переводов Translation Editor"
 #~ msgid "About Gtranslator"
 #~ msgstr "О Gtranslator"
 
-#~ msgid "_New Window"
-#~ msgstr "_Создать окно"
-
-#~ msgid "_Preferences"
-#~ msgstr "_Параметры"
-
-#~ msgid "_About"
-#~ msgstr "_О программе"
-
-#~ msgid "_Quit"
-#~ msgstr "_Закончить"
-
 #~ msgid "D_one"
 #~ msgstr "_Готово"
-
-#~ msgid "Comment"
-#~ msgstr "Комментарий"
-
-#~ msgid "Project Id _version:"
-#~ msgstr "В_ерсия Id проекта:"
-
-#~ msgid "Pot _file creation date:"
-#~ msgstr "Дата _создания pot-файла:"
-
-#~ msgid "Po file _revision date:"
-#~ msgstr "Дата _обновления po-файла:"
-
-#~ msgid "Report message _bugs to:"
-#~ msgstr "_Куда сообщать об ошибках:"
-
-#~ msgid "Project"
-#~ msgstr "Проект"
-
-#~ msgid "Use my options to complete the following entries:"
-#~ msgstr "Использовать личные настройки для заполнения полей заголовка"
-
-#~ msgid "Translator's _name:"
-#~ msgstr "_Имя переводчика:"
-
-#~ msgid "Translator's _email:"
-#~ msgstr "Эл. почта переводчика:"
-
-#~ msgid "Language gro_up email:"
-#~ msgstr "_Эл. почта команды:"
-
-#~ msgid "Char_set:"
-#~ msgstr "_Кодировка:"
-
-#~ msgid "Enc_oding:"
-#~ msgstr "_Кодировка:"
-
-#~ msgid "Translator and Language"
-#~ msgstr "Переводчик и язык"
-
-#~ msgid "Enter message number:"
-#~ msgstr "Введите номер сообщения:"
-
-#~ msgid "Transfer en_coding:"
-#~ msgstr "Кодировка для _передачи:"
-
-#~ msgid "Character _set"
-#~ msgstr "_Кодировка"
-
-#~ msgid "Language _code:"
-#~ msgstr "Код _языка:"
-
-#~ msgid "_Plural forms:"
-#~ msgstr "_Множественные формы:"
 
 #~ msgid "Status"
 #~ msgstr "Статус"
@@ -1277,115 +1679,14 @@ msgstr "Менеджер памяти переводов Translation Editor"
 #~ msgid "ID"
 #~ msgstr "ID"
 
-#~ msgid "General"
-#~ msgstr "Общие"
-
-#~ msgid "_Warn if PO file contains fuzzy translations"
-#~ msgstr "Предупреждать о наличии _неточных переводов"
-
-#~ msgid "Autosave"
-#~ msgstr "Автосохранение файлов"
-
-#~ msgid "Create a _backup copy of files before saving"
-#~ msgstr "Создавать _резервную копию перевода перед сохранением"
-
-#~ msgid "_Autosave files every"
-#~ msgstr "_Интервал автосохранения:"
-
-#~ msgid "_minutes"
-#~ msgstr "_минут"
-
-#~ msgid "Files"
-#~ msgstr "Файлы"
-
-#~ msgid "Text Display"
-#~ msgstr "Отображение текста"
-
-#~ msgid "_Highlight message syntax"
-#~ msgstr "_Подсвечивать синтаксис сообщений"
-
-#~ msgid "Make _whitespace visible"
-#~ msgstr "_Делать пробелы видимыми"
-
 #~ msgid "Use _custom font"
 #~ msgstr "_Использовать другой шрифт"
 
 #~ msgid "Editor _font:"
 #~ msgstr "_Шрифт редактора:"
 
-#~ msgid "Contents"
-#~ msgstr "Содержимое"
-
-#~ msgid "_Remove fuzzy status if message is changed"
-#~ msgstr "_Снимать статус неточного перевода с измененных сообщений"
-
-#~ msgid "Check _spelling"
-#~ msgstr "Про_верять орфографию"
-
-#~ msgid "Editor"
-#~ msgstr "Редактор"
-
-#~ msgid "Edit Profile"
-#~ msgstr "Изменить профиль"
-
-#~ msgid "Profiles"
-#~ msgstr "Профили"
-
-#~ msgid "Profile Information"
-#~ msgstr "Информация о профиле"
-
-#~ msgid "_Name:"
-#~ msgstr "_Имя:"
-
-#~ msgid "Translator Information"
-#~ msgstr "Информация о переводчике"
-
-#~ msgid "_Email:"
-#~ msgstr "_Эл. почта:"
-
-#~ msgid "N_ame:"
-#~ msgstr "_Имя"
-
-#~ msgid "Language Settings"
-#~ msgstr "Языковые параметры"
-
-#~ msgid "Replace All"
-#~ msgstr "Заменить все"
-
-#~ msgid "_Search for: "
-#~ msgstr "На_йти:"
-
-#~ msgid "Replace _with: "
-#~ msgstr "З_аменить на:"
-
-#~ msgid "_Original text"
-#~ msgstr "_Исходный текст"
-
-#~ msgid "_Translated text"
-#~ msgstr "Текст _перевода"
-
 #~ msgid "Include fu_zzy strings"
 #~ msgstr "_Включая неточные переводы"
-
-#~ msgid "_Match case"
-#~ msgstr "_Учитывать регистр"
-
-#~ msgid "Match _entire word only"
-#~ msgstr "Только _полные слова"
-
-#~ msgid "Search _backwards"
-#~ msgstr "О_братный поиск"
-
-#~ msgid "_Wrap around"
-#~ msgstr "_Поиск по всему переводу"
-
-#~| msgid "Original Message"
-#~ msgid "_Original Message:"
-#~ msgstr "_Исходное сообщение:"
-
-#~| msgid "_Translated text"
-#~ msgid "Translate_d Text:"
-#~ msgstr "_Переведённый текст:"
 
 #~ msgid "gtkspell error: %s\n"
 #~ msgstr "Ошибка gtkspell: %s\n"
@@ -1418,9 +1719,6 @@ msgstr "Менеджер памяти переводов Translation Editor"
 #~ msgid "_Documents"
 #~ msgstr "_Документы"
 
-#~ msgid "Open a PO file"
-#~ msgstr "Открыть файл PO"
-
 #~ msgid "_Recent Files"
 #~ msgstr "_Недавние файлы"
 
@@ -1429,9 +1727,6 @@ msgstr "Менеджер памяти переводов Translation Editor"
 
 #~ msgid "_Header..."
 #~ msgstr "За_головок..."
-
-#~ msgid "Save the current file"
-#~ msgstr "Сохранить сообщение файл"
 
 #~ msgid "Save the current file with another name"
 #~ msgstr "Сохранить текущий файл под другим именем"
@@ -1459,12 +1754,6 @@ msgstr "Менеджер памяти переводов Translation Editor"
 
 #~ msgid "Copy _Message to Translation"
 #~ msgstr "Скопировать _сообщение в перевод"
-
-#~ msgid "Copy original message contents to the translation field"
-#~ msgstr "Скопировать исходное сообщение и вставить его как перевод"
-
-#~ msgid "Toggle _Fuzzy Status"
-#~ msgstr "Изменить статус _неточного перевода"
 
 #~ msgid "Toggle fuzzy status of a message"
 #~ msgstr "Изменить признак неточного перевода"
@@ -1508,26 +1797,14 @@ msgstr "Менеджер памяти переводов Translation Editor"
 #~ msgid "Next Fuz_zy"
 #~ msgstr "Следующее не_точное"
 
-#~ msgid "Go to the next fuzzy message"
-#~ msgstr "Перейти к следующему неточному сообщению"
-
 #~ msgid "Previous Fuzz_y"
 #~ msgstr "Пре_дыдущее неточное"
-
-#~ msgid "Go to the previous fuzzy message"
-#~ msgstr "Перейти к предыдущему неточному сообщению"
 
 #~ msgid "Next _Untranslated"
 #~ msgstr "_Следующее непереведённое"
 
-#~ msgid "Go to the next untranslated message"
-#~ msgstr "Перейти к следующему непереведённому сообщению"
-
 #~ msgid "Previ_ous Untranslated"
 #~ msgstr "Пре_дыдущее непереведённое"
-
-#~ msgid "Go to the previous untranslated message"
-#~ msgstr "Перейти к предыдущему непереведённому сообщению"
 
 #~ msgid "Next Fu_zzy or Untranslated"
 #~ msgstr "_Следующее неточное или непереведённое"
@@ -1595,12 +1872,6 @@ msgstr "Менеджер памяти переводов Translation Editor"
 #~ msgid "_Go to Message…"
 #~ msgstr "_Перейти к сообщению…"
 
-#~ msgid "_Undo"
-#~ msgstr "_Отменить"
-
-#~ msgid "_Redo"
-#~ msgstr "_Вернуть"
-
 #~ msgid "Show “_%s”"
 #~ msgstr "Показывать «_%s»"
 
@@ -1648,7 +1919,3 @@ msgstr "Менеджер памяти переводов Translation Editor"
 
 #~ msgid "Translation Fields"
 #~ msgstr "Поля перевода"
-
-#~| msgid "Message Table"
-#~ msgid "Message Details"
-#~ msgstr "Подробности"
