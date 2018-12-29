@@ -150,7 +150,7 @@
                             <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="ypad">5</property>
-                            <property name="label" translatable="yes">_Original Message:</property>
+                            <property name="label" translatable="yes">_Original Message</property>
                             <property name="use_underline">True</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
@@ -158,11 +158,23 @@
                           </object>
                         </child>
                         <child>
+                          <object class="GtkLabel" id="msgid_ctxt">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="no"></property>
+                            <property name="use_underline">True</property>
+                            <property name="ellipsize">end</property>
+                            <style>
+                              <class name="msgcontext"/>
+                            </style>
+                          </object>
+                        </child>
+                        <child>
                           <object class="GtkLabel" id="msgid_tags">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="xalign">0</property>
-                            <property name="ypad">5</property>
                             <property name="label"></property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
@@ -230,7 +242,7 @@
                     <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="ypad">5</property>
-                    <property name="label" translatable="yes">Translate_d Text:</property>
+                    <property name="label" translatable="yes">Translate_d Text</property>
                     <property name="use_underline">True</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
@@ -287,5 +299,3 @@
     </child>
   </template>
 </interface>
-
-

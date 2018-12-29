@@ -90,6 +90,7 @@ typedef struct
   GtkWidget *text_plural_scroll;
   GtkWidget *text_msgid_plural;
   GtkWidget *msgid_tags;
+  GtkWidget *msgid_ctxt;
 
   /*Translated text */
   GtkWidget *msgstr_label;
@@ -426,11 +427,23 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
   GtkTextBuffer *buf;
   const gchar *msgid, *msgid_plural;
   const gchar *msgstr;
+  const gchar *msgctxt;
 
   g_return_if_fail (GTR_IS_TAB (tab));
 
   priv = gtr_tab_get_instance_private (tab);
   gtk_label_set_text (GTK_LABEL (priv->msgid_tags), "");
+
+  msgctxt = gtr_msg_get_msgctxt (msg);
+  if (msgctxt)
+   {
+     gtk_label_set_text (GTK_LABEL (priv->msgid_ctxt), msgctxt);
+     gtk_widget_show (priv->msgid_ctxt);
+   }
+  else
+   {
+     gtk_widget_hide (priv->msgid_ctxt);
+   }
 
   po = priv->po;
   gtr_po_update_current_message (po, msg);
@@ -824,6 +837,7 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, message_table);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, text_msgid);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, msgid_tags);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, msgid_ctxt);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, text_plural_scroll);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, text_msgid_plural);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, msgstr_label);
