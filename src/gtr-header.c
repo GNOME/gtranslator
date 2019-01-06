@@ -184,6 +184,20 @@ gtr_header_class_init (GtrHeaderClass * klass)
   object_class->dispose = gtr_header_dispose;
 }
 
+static void
+gtr_header_set_defaults (GtrHeader *header)
+{
+  g_autofree gchar* mime_version = gtr_header_get_mime_version (header);
+  g_autofree gchar* prj_id_version = gtr_header_get_prj_id_version (header);
+
+  if (!mime_version || *mime_version == '\0')
+    gtr_header_set_mime_version (header, "1.0");
+  if (!prj_id_version || *prj_id_version == '\0')
+    gtr_header_set_prj_id_version (header, "0.1");
+
+}
+
+
 /* Public methods */
 
 /**
@@ -205,6 +219,8 @@ gtr_header_new (po_message_iterator_t iter, po_message_t message)
 
   /* We have to parse the number of plurals */
   parse_nplurals (header);
+
+  gtr_header_set_defaults (header);
 
   return header;
 }
