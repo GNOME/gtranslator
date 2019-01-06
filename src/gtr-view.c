@@ -235,7 +235,12 @@ gtr_view_set_language (GtrView *view,
   GList *langs = (GList *)gspell_language_get_available ();
   gchar **lang_parts = NULL;
   gboolean found = FALSE;
-  gchar *def_lang = get_default_lang (lang);
+  gchar *def_lang;
+
+  if (!lang || *lang == '\0')
+    return;
+
+  def_lang = get_default_lang (lang);
 
   while (langs)
     {
