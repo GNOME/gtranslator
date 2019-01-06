@@ -193,7 +193,7 @@ gtr_header_set_defaults (GtrHeader *header)
   if (!mime_version || *mime_version == '\0')
     gtr_header_set_mime_version (header, "1.0");
   if (!prj_id_version || *prj_id_version == '\0')
-    gtr_header_set_prj_id_version (header, "0.1");
+    gtr_header_set_prj_id_version (header, "unnamed project");
 
 }
 
