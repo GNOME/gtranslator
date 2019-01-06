@@ -460,9 +460,15 @@ _gtr_po_load (GtrPo * po, GFile * location, GError ** error)
     priv->header = gtr_header_new (iter, message);
   else
     {
-      /* FIXME: add a header with default values */
       po_message_iterator_free (iter);
       iter = po_message_iterator (priv->gettext_po_file, NULL);
+
+      message = po_message_create ();
+      po_message_set_msgid (message, "");
+      po_message_set_msgstr (message, "");
+      po_message_insert (iter, message);
+
+      priv->header = gtr_header_new (iter, message);
     }
 
   priv->iter = iter;
