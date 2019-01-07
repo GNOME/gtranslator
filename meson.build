@@ -114,6 +114,8 @@ gtr_deps = [
   dependency('gthread-2.0', version: '>= 2.13.0'),
   dependency('gtksourceview-4', version: '>= 4.0.2'),
   dependency('libxml-2.0', version: '>= 2.4.12'),
+  dependency('libsoup-2.4'),
+  dependency('json-glib-1.0', version: '>= 1.2.0'),
   cc.find_library('gettextpo'),
 ]
 
