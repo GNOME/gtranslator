@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  Daniel Garcia Moreno <danigm@gnome.org>
+ * Copyright (C) 2018  Teja Cetinski <teja@cetinski.eu>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,6 +24,10 @@
 #include "gtr-dl-teams.h"
 #include "gtr-window.h"
 #include "gtr-utils.h"
+#include <libsoup/soup.h>
+
+#include <json-glib/json-glib.h>
+#include <json-glib/json-gobject.h>
 
 typedef struct
 {
@@ -103,6 +107,66 @@ add_dl_teams_combo (GtkButton *btn,
 
 }
 
+static void
+load_and_parse ()
+{
+  SoupSession *session;
+  SoupMessage *message;
+  guint status;
+  JsonParser *parser;
+  gboolean result;
+  JsonNode *root;
+  JsonArray *array;
+  gint i;
+
+  /* Get team list JSON from DL */
+  //g_type_init();
+  /*session = soup_session_new ();
+  message = soup_message_new ("GET", "https://l10n.gnome.org/teams/json");
+  //status = soup_session_send_message (session, message);
+  //g_assert (message != NULL);
+  //g_assert (status_code == SOUP_STATUS_OK);
+
+  fwrite (message->response_body->data,
+        1,
+        message->response_body->length,
+        stdout);
+
+  */
+
+  /* Parse JSON */
+  gchar *msg = "[{\"id\": \"af\", \"description\": \"Afrikaans\"}]";
+
+  parser = json_parser_new ();
+  json_parser_load_from_data (parser, msg, -1, NULL);
+  root = json_parser_get_root (parser);
+
+  g_assert (JSON_NODE_HOLDS_ARRAY (root));
+  array = json_node_get_array (root);
+
+  for (i = 0; i < json_array_get_length (array); i++)
+  {
+    JsonNode *node;
+    JsonObject *object;
+
+    const gchar *lang_code;
+    const gchar *lang_name;
+
+    node = json_array_get_element (array, i);
+    if (!JSON_NODE_HOLDS_OBJECT (node))
+        continue;
+
+    object = json_node_get_object (node);
+    lang_code = json_object_get_string_member (object, "id");
+    lang_name = json_object_get_string_member (object, "description");
+    printf ("lang id: %s, lang: %s", lang_code, lang_name);
+  }
+
+  //g_object_unref (session);
+  //g_object_unref (message);
+  g_object_unref (parser);
+
+}
 
 static void
 gtr_dl_teams_dispose (GObject *object)
@@ -133,6 +197,9 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, open_button);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, dl_button);
+
+  printf("load and parse\n");
+  load_and_parse();
 }
 
 static void
