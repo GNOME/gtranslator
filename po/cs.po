@@ -6,14 +6,14 @@
 # Jaroslav Jiricka <jiricka@mujbox.cz>, 2003.
 # Miloslav Trmac <mitr@volny.cz>, 2004, 2005.
 # Petr Kovar <pknbe@volny.cz>, 2010.
-# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011, 2012, 2013, 2015, 2017, 2018.
+# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011, 2012, 2013, 2015, 2017, 2018, 2019.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator gnome-master\n"
+"Project-Id-Version: gtranslator gnome-3.30\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-10-29 12:07+0000\n"
-"PO-Revision-Date: 2018-11-01 08:10+0100\n"
+"POT-Creation-Date: 2018-11-28 13:09+0000\n"
+"PO-Revision-Date: 2019-01-07 10:53+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -57,8 +57,12 @@ msgstr ""
 "zásuvných modulů, jako je alternativní jazyk, vkládání značek, integrace se "
 "správou verzí a zobrazení zdrojového kódu."
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:555
-#: src/gtr-window.c:312 src/gtr-window.ui:25
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:31
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
+#: src/gtr-notebook.ui:294 src/gtr-window.c:312 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Editor překladů"
 
@@ -223,7 +227,7 @@ msgstr "_Otevřít"
 #: plugins/alternate-language/gtr-alternate-language-panel.c:328
 #: src/gtr-header-dialog.c:278 src/gtr-io-error-info-bar.c:123
 #: src/gtr-preferences-dialog.c:588 src/gtr-search-dialog.c:391
-#: src/translation-memory/gtr-translation-memory-dialog.c:283
+#: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "_Zavřít"
 
@@ -469,12 +473,10 @@ msgid "Insert Params or Tags"
 msgstr "Vkládání parametrů a značek"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.c:167
-#: src/translation-memory/gtr-translation-memory-dialog.c:166
 msgid "Strings added to database"
 msgstr "Řetězce přidány do databáze"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.c:224
-#: src/translation-memory/gtr-translation-memory-dialog.c:224
 msgid "Please specify a valid path to build the translation memory"
 msgstr "Zadejte prosím platnou cestu k sestavení paměti překladů"
 
@@ -483,17 +485,17 @@ msgid "Gtranslator Translation Memory Manager"
 msgstr "Správa paměti překladů Gtranslator"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.ui:58
-#: src/translation-memory/gtr-translation-memory-dialog.ui:58
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
 msgid "Database:"
 msgstr "Databáze:"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.ui:101
-#: src/translation-memory/gtr-translation-memory-dialog.ui:101
+#: src/translation-memory/gtr-translation-memory-dialog.ui:103
 msgid "Select the directory which contains PO files:"
 msgstr "Vyberte složku obsahující soubory PO:"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.ui:152
-#: src/translation-memory/gtr-translation-memory-dialog.ui:152
+#: src/translation-memory/gtr-translation-memory-dialog.ui:154
 msgid "Add to Database"
 msgstr "Přidat do databáze"
 
@@ -503,7 +505,7 @@ msgid "Configuration:"
 msgstr "Nastavení:"
 
 #: plugins/translation-memory/gtr-translation-memory-dialog.ui:252
-#: src/translation-memory/gtr-translation-memory-dialog.ui:252
+#: src/translation-memory/gtr-translation-memory-dialog.ui:253
 msgid "Use only files with this name:"
 msgstr "Použít pouze soubory s tímto názvem:"
 
@@ -767,7 +769,7 @@ msgstr "Zavřít _bez uložení"
 #: src/gtr-close-confirmation-dialog.c:126 src/gtr-file-dialogs.c:45
 #: src/gtr-jump-dialog.c:90 src/gtr-preferences-dialog.c:394
 #: src/gtr-profile-dialog.c:71
-#: src/translation-memory/gtr-translation-memory-dialog.c:101
+#: src/translation-memory/gtr-translation-memory-dialog.c:81
 msgid "_Cancel"
 msgstr "_Zrušit"
 
@@ -927,7 +929,7 @@ msgstr "Komentář"
 
 #: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
 #: src/gtr-profile-dialog.c:170
-#: src/translation-memory/gtr-translation-memory-dialog.c:103
+#: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "_OK"
 msgstr "_Budiž"
 
@@ -1510,40 +1512,60 @@ msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Přepnou označení jako nepřesná"
 
-#: src/help-overlay.ui:92
+#: src/help-overlay.ui:89
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "Zkopírovat originální text do překladu"
+
+#: src/help-overlay.ui:99
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Pochyb po zprávách"
 
-#: src/help-overlay.ui:96
+#: src/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Přejít na předchozí zprávu"
 
-#: src/help-overlay.ui:103
+#: src/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Přejít na následující zprávu"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Přejít na předchozí nepřeložnou zprávu"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Přejít na následující nepřeložnou zprávu"
 
-#: src/help-overlay.ui:127
+#: src/help-overlay.ui:134
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Paměť překladů"
 
-#: src/help-overlay.ui:131
+#: src/help-overlay.ui:138
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Sestavit paměť překladů"
+
+#: src/help-overlay.ui:148
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "Najít a nahradit"
+
+#: src/help-overlay.ui:152
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Najít"
+
+#: src/help-overlay.ui:159
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "Najít a nahradit"
 
 #: src/main.c:97
 msgid "— Edit PO files"
@@ -1559,6 +1581,10 @@ msgstr ""
 "Spuštěním „%s --help“ se zobrazí úplný seznam dostupných přepínačů příkazové "
 "řádky.\n"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:287
+#: src/translation-memory/gtr-translation-memory-dialog.c:77
+msgid "Select PO directory"
+msgstr "Výběr složky PO"
+
+#: src/translation-memory/gtr-translation-memory-dialog.c:303
 msgid "Translation Editor Memory Manager"
 msgstr "Správa paměti Editoru překladů"
