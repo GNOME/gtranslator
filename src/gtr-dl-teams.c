@@ -68,7 +68,7 @@ create_combo_store (void)
     {
       //printf( labels[i]);printf("\n");
       gtk_list_store_insert_with_values(store, NULL, -1,
-        0, "test name",
+        0, labels[i],
         -1);
       /*
       gtk_list_store_append (store, &iter);
@@ -82,7 +82,7 @@ create_combo_store (void)
 
 static void
 add_dl_teams_combo (GtkButton *btn,
-             GtrDlTeams *self)
+                    GtrDlTeams *self)
 {
   GtkWidget *combo_box;
   GtkTreeModel *model;
@@ -90,16 +90,19 @@ add_dl_teams_combo (GtkButton *btn,
 
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
 
+  combo_box = gtk_combo_box_new ();
+  //model = create_combo_model_from_json (teams_json_array);
   model = create_combo_store ();
-  combo_box = gtk_combo_box_new_with_model (GTK_TREE_MODEL (model));
+  //combo_box = gtk_combo_box_new_with_model (GTK_TREE_MODEL (model));
+  gtk_combo_box_set_model (GTK_COMBO_BOX (combo_box), GTK_TREE_MODEL (model));
   g_object_unref (model);
 
   column = gtk_cell_renderer_text_new();
   gtk_cell_layout_pack_start(GTK_CELL_LAYOUT(combo_box), column, TRUE);
 
   gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(combo_box), column,
-                                 "cell-background", 0,
-                                 "text", 1,
+                                 "text", 0,
+                                 //"text", 1,
                                  NULL);
 
   gtk_container_add (GTK_CONTAINER (priv->main_box), combo_box);
@@ -108,64 +111,55 @@ add_dl_teams_combo (GtkButton *btn,
 }
 
 static void
-load_and_parse ()
+element_cb (JsonArray *array,
+            guint      index,
+            JsonNode  *element,
+            gpointer   data)
 {
-  SoupSession *session;
-  SoupMessage *message;
-  guint status;
-  JsonParser *parser;
-  gboolean result;
-  JsonNode *root;
-  JsonArray *array;
-  gint i;
+  JsonObject *object = json_node_get_object (element);
+  /*printf ("%s: %s\n",
+          json_object_get_string_member (object, "id"),
+          json_object_get_string_member (object, "description")
+          );
+   * */
+}
 
-  /* Get team list JSON from DL */
-  //g_type_init();
-  /*session = soup_session_new ();
-  message = soup_message_new ("GET", "https://l10n.gnome.org/teams/json");
-  //status = soup_session_send_message (session, message);
-  //g_assert (message != NULL);
-  //g_assert (status_code == SOUP_STATUS_OK);
+static void
+load_and_parse (GObject *object, GAsyncResult *result, gpointer user_data)
+{
+  g_autoptr(JsonParser) parser = json_parser_new ();
+  g_autoptr(GInputStream) stream;
+  JsonNode *node = NULL;
+  JsonArray *array = NULL;
 
-  fwrite (message->response_body->data,
-        1,
-        message->response_body->length,
-        stdout);
-
-  */
+  printf("load and parse\n");
 
   /* Parse JSON */
-  gchar *msg = "[{\"id\": \"af\", \"description\": \"Afrikaans\"}]";
+  stream = soup_session_send_finish (SOUP_SESSION (object), result, NULL);
+  json_parser_load_from_stream (parser, stream, NULL, NULL);
 
-  parser = json_parser_new ();
-  json_parser_load_from_data (parser, msg, -1, NULL);
-  root = json_parser_get_root (parser);
+  node = json_parser_get_root (parser);
+  array = json_node_get_array (node);
 
-  g_assert (JSON_NODE_HOLDS_ARRAY (root));
-  array = json_node_get_array (root);
+  printf("array length: %d\n", json_array_get_length(array));
 
-  for (i = 0; i < json_array_get_length (array); i++)
-  {
-    JsonNode *node;
-    JsonObject *object;
-
-    const gchar *lang_code;
-    const gchar *lang_name;
-
-    node = json_array_get_element (array, i);
-    if (!JSON_NODE_HOLDS_OBJECT (node))
-        continue;
-
-    object = json_node_get_object (node);
-    lang_code = json_object_get_string_member (object, "id");
-    lang_name = json_object_get_string_member (object, "description");
-    printf ("lang id: %s, lang: %s", lang_code, lang_name);
-  }
+  // create combo and fill it with options from JSON
+  //json_array_foreach_element (array, element_cb, NULL);
 
   //g_object_unref (session);
   //g_object_unref (message);
-  g_object_unref (parser);
+  //g_object_unref (parser);
 
+}
+
+static void
+gtr_dl_teams_load_json ()
+{
+  /* Get team list JSON from DL */
+  printf("get JSON\n");
+  g_autoptr(SoupSession) session = soup_session_new ();
+  g_autoptr(SoupMessage) message = soup_message_new ("GET", "https://l10n.gnome.org/teams/json");
+  soup_session_send_async (session, message, NULL, load_and_parse, NULL);
 }
 
 static void
@@ -198,8 +192,6 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, open_button);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, dl_button);
 
-  printf("load and parse\n");
-  load_and_parse();
 }
 
 static void
