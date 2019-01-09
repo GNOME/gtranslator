@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  Daniel Garcia Moreno <danigm@gnome.org>
+ * Copyright (C) 2018  Teja Cetinski <teja@cetinski.eu>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
