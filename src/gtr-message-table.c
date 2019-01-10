@@ -204,9 +204,6 @@ gtr_message_table_init (GtrMessageTable * table)
   GtkTreeSelection *selection;
   GtrMessageTablePrivate *priv;
 
-  GdkRGBA translated, fuzzy, untranslated;
-  GtkStyleContext *style_context;
-
   priv = gtr_message_table_get_instance_private (table);
   priv->sort_status = GTR_MESSAGE_TABLE_SORT_ID;
 
