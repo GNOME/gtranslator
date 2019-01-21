@@ -29,6 +29,8 @@
 #include <json-glib/json-glib.h>
 #include <json-glib/json-gobject.h>
 
+#define API_URL "https://l10n.gnome.org/api/v1/"
+
 typedef struct
 {
   GtkWidget *titlebar;
@@ -49,7 +51,7 @@ typedef struct
   gchar *selected_team;
   gchar *selected_module;
   gchar *selected_branch;
-  gchar *selected_domain;
+  const gchar *selected_domain;
 
   GtrWindow *main_window;
 } GtrDlTeamsPrivate;
@@ -63,6 +65,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (GtrDlTeams, gtr_dl_teams, GTK_TYPE_BIN)
 
 static void team_add_cb (GtkButton *btn, GtrDlTeams *self);
 static void gtr_dl_teams_save_combo_selected (GtkComboBox *combo, GtrDlTeams *self);
+static void gtr_dl_teams_load_po_file (GtrDlTeams *self);
 
 static void
 gtr_dl_teams_list_add (JsonArray *array,
@@ -74,6 +77,7 @@ gtr_dl_teams_list_add (JsonArray *array,
 
   gtk_list_store_insert_with_values(data, NULL, -1,
         0, json_object_get_string_member (object, "description"),
+        1, json_object_get_string_member (object, "name"),
         -1);
   /*printf ("%s: %s\n",
           json_object_get_string_member (object, "name"),
@@ -135,7 +139,7 @@ gtr_dl_teams_parse_teams_json (GObject *object,
 
 static void
 gtr_dl_teams_load_module_details_json (GtkComboBox *combo,
-                      GtrDlTeams *self)
+                                       GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   SoupMessage *msg;
@@ -147,15 +151,14 @@ gtr_dl_teams_load_module_details_json (GtkComboBox *combo,
   JsonNode *node = NULL;
 
   /* Get module details JSON from DL API */
-  module_endpoint = g_strconcat ((const gchar *)"https://l10n.gnome.org/api/v1/modules/", priv->selected_module, NULL);
+  module_endpoint = g_strconcat ((const gchar *)API_URL, priv->selected_module, NULL);
   msg = soup_message_new ("GET", module_endpoint);
   session = soup_session_new ();
   status = soup_session_send_message (session, msg);
 
   g_autoptr(JsonParser) parser = json_parser_new ();
 
-  /* Load response body and fill branches and domains */
-  /* TODO: empty/remove existing combo boxes to avoid duplicating widgets */
+  /* Load response body and fill branches and domains, then show widgets */
   json_parser_load_from_data (parser, msg->response_body->data, msg->response_body->length, &error);
   node = json_parser_get_root (parser);
 
@@ -163,51 +166,45 @@ gtr_dl_teams_load_module_details_json (GtkComboBox *combo,
 
   /* branches */
   JsonNode *branchesNode = json_object_get_member (object, "branches");
-  JsonArray *branchesArray = json_node_get_array (branchesNode);
 
-  priv->branches_combobox = gtk_combo_box_text_new ();
-  gtk_widget_set_name (priv->branches_combobox, "combo_branches");
+  if (branchesNode != NULL) {
+    JsonArray *branchesArray = json_node_get_array (branchesNode);
 
-  for (i=0; i < json_array_get_length (branchesArray); i++) {
-    JsonNode *branch_element = json_array_get_element (branchesArray, i);
-    JsonObject *branch_object = json_node_get_object (branch_element);
-    gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (priv->branches_combobox),
-                               json_object_get_string_member (branch_object, "name"),
-                               json_object_get_string_member (branch_object, "name")
-                               );
+    gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (priv->branches_combobox));
+
+    for (i=0; i < json_array_get_length (branchesArray); i++) {
+      JsonNode *branch_element = json_array_get_element (branchesArray, i);
+      JsonObject *branch_object = json_node_get_object (branch_element);
+      gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (priv->branches_combobox),
+                                 json_object_get_string_member (branch_object, "name"),
+                                 json_object_get_string_member (branch_object, "name")
+                                 );
+    }
+
+    gtk_widget_show (priv->branches_combobox);
   }
-  gtk_container_add (GTK_CONTAINER (priv->main_box), priv->branches_combobox);
-
-  g_signal_connect (priv->branches_combobox,
-                    "changed",
-                    G_CALLBACK (gtr_dl_teams_save_combo_selected),
-                    self);
-
-  gtk_widget_show (priv->branches_combobox);
+  // TODO: check why there are no branches, display notification to user
 
   /* domains */
   JsonNode *domainsNode = json_object_get_member (object, "domains");
-  JsonArray *domains_array = json_node_get_array (domainsNode);
 
-  priv->domains_combobox = gtk_combo_box_text_new ();
-  gtk_widget_set_name (priv->domains_combobox, "combo_domains");
+  if (domainsNode != NULL) {
+    JsonArray *domains_array = json_node_get_array (domainsNode);
 
-  for (i=0; i < json_array_get_length (domains_array); i++) {
-    JsonNode *domain_element = json_array_get_element (domains_array, i);
-    JsonObject *domain_object = json_node_get_object (domain_element);
-    gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (priv->domains_combobox),
-                               json_object_get_string_member (domain_object, "name"),
-                               json_object_get_string_member (domain_object, "description")
-                               );
+    gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (priv->domains_combobox));
+
+    for (i=0; i < json_array_get_length (domains_array); i++) {
+      JsonNode *domain_element = json_array_get_element (domains_array, i);
+      JsonObject *domain_object = json_node_get_object (domain_element);
+      gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (priv->domains_combobox),
+                                 json_object_get_string_member (domain_object, "name"),
+                                 json_object_get_string_member (domain_object, "description")
+                                 );
+    }
+
+    gtk_widget_show (priv->domains_combobox);
   }
-  gtk_container_add (GTK_CONTAINER (priv->main_box), priv->domains_combobox);
-
-  g_signal_connect (priv->domains_combobox,
-                    "changed",
-                    G_CALLBACK (gtr_dl_teams_save_combo_selected),
-                    self);
-
-  gtk_widget_show (priv->domains_combobox);
+  // TODO: check why there are no domains and display notification to user
 }
 
 static void
@@ -260,12 +257,12 @@ gtr_dl_teams_load_json (GtkButton *btn,
 {
   /* Get team list JSON from DL */
   g_autoptr(SoupSession) session = soup_session_new ();
-  g_autoptr(SoupMessage) message = soup_message_new ("GET", "https://l10n.gnome.org/api/v1/teams");
+  g_autoptr(SoupMessage) message = soup_message_new ("GET", g_strconcat ((const gchar *)API_URL, "teams", NULL));
   soup_session_send_async (session, message, NULL, gtr_dl_teams_parse_teams_json, self);
 
   /* Get module list JSON from DL */
   g_autoptr(SoupSession) session_modules = soup_session_new ();
-  g_autoptr(SoupMessage) message_modules = soup_message_new ("GET", "https://l10n.gnome.org/api/v1/modules");
+  g_autoptr(SoupMessage) message_modules = soup_message_new ("GET", g_strconcat ((const gchar *)API_URL, "modules", NULL));
   soup_session_send_async (session_modules, message_modules, NULL, gtr_dl_teams_parse_modules_json, self);
 }
 
@@ -283,13 +280,56 @@ void gtr_dl_teams_verify_and_load (GtrDlTeams *self)
       priv->selected_branch != NULL &&
       priv->selected_domain != NULL)
     {
-      // TODO: load PO file, get path from DL API first
+      // get path from DL API and load PO file
       //printf("all good, PO can be loaded now\n");
+      gtr_dl_teams_load_po_file (self);
     }
   else
     {
       //printf("not yet!\n");
     }
+}
+
+static void
+gtr_dl_teams_load_po_file (GtrDlTeams *self)
+{
+  GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
+  SoupMessage *msg;
+  SoupSession *session;
+  gchar *stats_endpoint;
+  guint status;
+  GError *error = NULL;
+  JsonNode *node = NULL;
+
+  /* modules/[module]/branches/[branch]/domains/[domain]/languages/[team] */
+  stats_endpoint = g_strconcat ((const gchar *)API_URL,
+                                 "modules/",
+                                 priv->selected_module,
+                                 "/branches/",
+                                 priv->selected_branch,
+                                 "/domains/",
+                                 priv->selected_domain,
+                                 "/languages/",
+                                 priv->selected_team,
+                                 NULL);
+  //printf("%s\n", stats_endpoint);
+
+  msg = soup_message_new ("GET", stats_endpoint);
+  session = soup_session_new ();
+  status = soup_session_send_message (session, msg);
+
+  g_autoptr(JsonParser) parser = json_parser_new ();
+
+  /* Load response body and get path to PO file */
+  json_parser_load_from_data (parser, msg->response_body->data, msg->response_body->length, &error);
+  node = json_parser_get_root (parser);
+
+  JsonObject *object = json_node_get_object(node);
+
+  const gchar *lang_po_file = json_object_get_string_member (object, "po_file");
+  //printf ("%s\n", lang_po_file);
+  // path to file is https://l10n.gnome.org/[lang_po_file]
+  // TODO load file
 }
 
 static void
@@ -304,7 +344,7 @@ gtr_dl_teams_save_combo_selected (GtkComboBox *combo,
 
   /* Save selected combo option */
   const gchar *name = gtk_widget_get_name (GTK_WIDGET (combo));
-  printf("%s\n", name);
+
   if (strcmp(name, "combo_modules") == 0)
     {
       gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->modules_store), &iter, path);
@@ -313,7 +353,7 @@ gtr_dl_teams_save_combo_selected (GtkComboBox *combo,
   else if (strcmp(name, "combo_teams") == 0)
     {
       gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->teams_store), &iter, path);
-      gtk_tree_model_get (GTK_TREE_MODEL (priv->teams_store), &iter, 0, &priv->selected_team, -1);
+      gtk_tree_model_get (GTK_TREE_MODEL (priv->teams_store), &iter, 1, &priv->selected_team, -1);
     }
   else if (strcmp(name, "combo_branches") == 0)
     {
@@ -321,7 +361,7 @@ gtr_dl_teams_save_combo_selected (GtkComboBox *combo,
     }
   else if (strcmp(name, "combo_domains") == 0)
     {
-      priv->selected_domain = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (combo));
+      priv->selected_domain = gtk_combo_box_get_active_id (GTK_COMBO_BOX (combo));
     }
 
   /* Check if all four required values have been selected to proceed with loading PO file */
@@ -370,7 +410,7 @@ gtr_dl_teams_init (GtrDlTeams *self)
   priv->main_window = NULL;
 
   /* Init teams and modules list stores */
-  priv->teams_store = gtk_list_store_new (1, G_TYPE_STRING);
+  priv->teams_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
   priv->modules_store = gtk_list_store_new (1, G_TYPE_STRING);
 
   /* Add combo boxes for DL teams and modules */
@@ -405,18 +445,37 @@ gtr_dl_teams_init (GtrDlTeams *self)
                     G_CALLBACK (team_add_cb),
                     self);
 
+  /* Add empty combo boxes for DL domains and branches and hide them */
+  priv->domains_combobox = gtk_combo_box_text_new ();
+  gtk_widget_set_name (priv->domains_combobox, "combo_domains");
+  gtk_container_add (GTK_CONTAINER (priv->main_box), priv->domains_combobox);
+  gtk_widget_hide (priv->domains_combobox);
+
+  priv->branches_combobox = gtk_combo_box_text_new ();
+  gtk_widget_set_name (priv->branches_combobox, "combo_branches");
+  gtk_container_add (GTK_CONTAINER (priv->main_box), priv->branches_combobox);
+  gtk_widget_hide (priv->branches_combobox);
+
   /* Load teams and modules on click */
   g_signal_connect (priv->dl_button,
                     "clicked",
                     G_CALLBACK (gtr_dl_teams_load_json),
                     self);
 
-  /* Connect "changed" to teams and modules combo boxes */
+  /* Connect "changed" to all combo boxes */
   g_signal_connect (priv->teams_combobox,
                     "changed",
                     G_CALLBACK (gtr_dl_teams_save_combo_selected),
                     self);
   g_signal_connect (priv->modules_combobox,
+                    "changed",
+                    G_CALLBACK (gtr_dl_teams_save_combo_selected),
+                    self);
+  g_signal_connect (priv->domains_combobox,
+                    "changed",
+                    G_CALLBACK (gtr_dl_teams_save_combo_selected),
+                    self);
+  g_signal_connect (priv->branches_combobox,
                     "changed",
                     G_CALLBACK (gtr_dl_teams_save_combo_selected),
                     self);
