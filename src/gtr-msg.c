@@ -49,6 +49,18 @@ G_DEFINE_TYPE_WITH_PRIVATE (GtrMsg, gtr_msg, G_TYPE_OBJECT)
 static gchar *message_error = NULL;
 
 static void
+gtr_msg_recalc_status (GtrMsg *msg)
+{
+  /* Set the status */
+  if (gtr_msg_is_fuzzy (msg))
+    gtr_msg_set_status (msg, GTR_MSG_STATUS_FUZZY);
+  else if (gtr_msg_is_translated (msg))
+    gtr_msg_set_status (msg, GTR_MSG_STATUS_TRANSLATED);
+  else
+    gtr_msg_set_status (msg, GTR_MSG_STATUS_UNTRANSLATED);
+}
+
+static void
 gtr_msg_init (GtrMsg * msg)
 {
 }
@@ -90,13 +102,7 @@ _gtr_msg_new (po_message_iterator_t iter, po_message_t message)
   _gtr_msg_set_iterator (msg, iter);
   _gtr_msg_set_message (msg, message);
 
-  /* Set the status */
-  if (gtr_msg_is_fuzzy (msg))
-    gtr_msg_set_status (msg, GTR_MSG_STATUS_FUZZY);
-  else if (gtr_msg_is_translated (msg))
-    gtr_msg_set_status (msg, GTR_MSG_STATUS_TRANSLATED);
-  else
-    gtr_msg_set_status (msg, GTR_MSG_STATUS_UNTRANSLATED);
+  gtr_msg_recalc_status (msg);
 
   return msg;
 }
@@ -228,6 +234,7 @@ gtr_msg_set_fuzzy (GtrMsg * msg, gboolean fuzzy)
   g_return_if_fail (GTR_IS_MSG (msg));
 
   po_message_set_fuzzy (priv->message, fuzzy);
+  gtr_msg_recalc_status (msg);
 }
 
 /**
@@ -325,6 +332,7 @@ gtr_msg_set_msgstr (GtrMsg * msg, const gchar * msgstr)
   g_return_if_fail (msgstr != NULL);
 
   po_message_set_msgstr (priv->message, msgstr);
+  gtr_msg_recalc_status (msg);
 }
 
 
@@ -363,6 +371,7 @@ gtr_msg_set_msgstr_plural (GtrMsg * msg, gint index, const gchar * msgstr)
   g_return_if_fail (msgstr != NULL);
 
   po_message_set_msgstr_plural (priv->message, index, msgstr);
+  gtr_msg_recalc_status (msg);
 }
 
 
