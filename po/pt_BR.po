@@ -10,21 +10,22 @@
 # Rodrigo Padula <contato@rodrigopadula.com>, 2011.
 # Gabriel Feitosa Vilar <cogumm@gmail.com>, 2010, 2011.
 # Enrico Nicoletto <liverig@gmail.com>, 2013.
-# Rafael Fontenelle <rafaelff@gnome.org>, 2013, 2015, 2017, 2018.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2013-2019.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-12-10 12:48+0000\n"
-"PO-Revision-Date: 2018-12-10 22:22-0200\n"
+"POT-Creation-Date: 2019-01-07 09:56+0000\n"
+"PO-Revision-Date: 2019-01-23 14:10-0200\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
-"Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
+"Language-Team: Portuguese - Brazil <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Virtaal 1.0.0-beta1\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Generator: Gtranslator 3.31.0\n"
 "X-Project-Style: gnome\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
@@ -68,7 +69,7 @@ msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
-#: src/gtr-notebook.ui:294 src/gtr-window.c:312 src/gtr-window.ui:25
+#: src/gtr-notebook.ui:294 src/gtr-window.c:316 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Editor de Tradução"
 
@@ -220,421 +221,24 @@ msgstr ""
 "Consulte o arquivo .gtranslator-plugin para obter a “localização” de um "
 "determinado plug-in."
 
-#: plugins/alternate-language/gtr-alternate-language-panel.c:126
-msgid "Message not found"
-msgstr "Mensagem não localizada"
+#: src/codeview/gtr-codeview.c:353
+msgid "Paths:"
+msgstr "Caminhos:"
 
-#: plugins/alternate-language/gtr-alternate-language-panel.c:229
-msgid "Open file for alternate language"
-msgstr "Abrir o arquivo para idioma alternativo"
-
-#: plugins/alternate-language/gtr-alternate-language-panel.c:254
-msgid "File closed"
-msgstr "Arquivo fechado"
-
-#: plugins/alternate-language/gtr-alternate-language-panel.c:322
-#: src/gtr-file-dialogs.c:48
-msgid "_Open"
-msgstr "_Abrir"
-
-#: plugins/alternate-language/gtr-alternate-language-panel.c:328
-#: src/gtr-header-dialog.c:278 src/gtr-io-error-info-bar.c:123
-#: src/gtr-preferences-dialog.c:588 src/gtr-search-dialog.c:391
+#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
+#: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:588
+#: src/gtr-search-dialog.c:391
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "_Fechar"
 
-#: plugins/alternate-language/gtr-alternate-language-panel.c:334
-msgid "Co_py"
-msgstr "_Copiar"
-
-#: plugins/alternate-language/gtr-alternate-language-panel.c:363
-msgid "There isn’t any file loaded"
-msgstr "Não há qualquer arquivo carregado"
-
-#: plugins/alternate-language/gtr-alternate-language-plugin.c:81
-msgid "_Alternate Language"
-msgstr "_Idioma alternativo"
-
-#: plugins/alternate-language/gtr-alternate-language-plugin.c:82
-msgid "Show the Alternate Language panel"
-msgstr "Mostra o painel de idioma alternativo"
-
-#: plugins/alternate-language/gtr-alternate-language-plugin.c:222
-#: plugins/alternate-language/gtr-alternate-language.plugin.desktop.in:5
-msgid "Alternate Language"
-msgstr "Idioma alternativo"
-
-#: plugins/charmap/charmap/__init__.py:42
-#: plugins/charmap/gtr-charmap.plugin.desktop.in:6
-msgid "Character Map"
-msgstr "Mapa de caracteres"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: plugins/charmap/gtr-charmap.plugin.desktop.in:9
-msgid "accessories-character-map"
-msgstr "accessories-character-map"
-
-#: plugins/codeview/gtr-codeview-dialog.ui:8
-msgid "Source View Settings"
-msgstr "Configurações da visualização de código-fonte"
-
-#: plugins/codeview/gtr-codeview-dialog.ui:58
-msgid "Use external editor"
-msgstr "Usar editor externo"
-
-#: plugins/codeview/gtr-codeview-dialog.ui:83
-msgid "Program command:"
-msgstr "Comando do programa:"
-
-#: plugins/codeview/gtr-codeview-dialog.ui:120
-msgid "Line command:"
-msgstr "Linha de comando:"
-
-#: plugins/codeview/gtr-codeview-plugin.c:129
-#, c-format
-msgid "Please install “%s” to be able to show the file"
-msgstr "Por favor, instale “%s” para poder mostrar o arquivo"
-
-#: plugins/codeview/gtr-codeview-plugin.c:497
-msgid "Paths:"
-msgstr "Caminhos:"
-
-#: plugins/codeview/gtr-codeview.plugin.desktop.in:5
-msgid "Source Code View"
-msgstr "Visualização de código fonte"
-
-#: plugins/codeview/gtr-viewer.c:80
+#: src/codeview/gtr-viewer.c:75
 msgid "Source Viewer"
 msgstr "Visualizador de código-fonte"
 
-#: plugins/codeview/gtr-viewer.ui:59
+#: src/codeview/gtr-viewer.ui:59
 msgid "Source code"
 msgstr "Código fonte"
-
-#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:5
-msgid "Use the System Editor"
-msgstr "Usar o editor do sistema"
-
-#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:6
-msgid "Whether use the system editor to show the source code"
-msgstr "Se é para usar o editor padrão do sistema para mostrar o código fonte"
-
-#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:10
-msgid "The Editor to Launch"
-msgstr "O editor de texto a ser executado"
-
-#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:11
-msgid "The command to launch the editor you want to use"
-msgstr "Comando para executar o editor que você deseja usar"
-
-#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:15
-msgid "Arguments for the Command"
-msgstr "Argumentos para o comando"
-
-#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:16
-msgid "Arguments to pass to the program command line to select the line"
-msgstr "Argumentos que serão passados para o programa"
-
-#: plugins/dictionary/gtr-dictionary-plugin.c:140
-#: plugins/dictionary/gtr-dict.plugin.desktop.in:5
-msgid "Dictionary"
-msgstr "Dicionário"
-
-#: plugins/dictionary/gtr-dict-panel.c:166
-#, c-format
-msgid "No dictionary source available with name “%s”"
-msgstr "Nenhuma fonte de dicionário disponível com o nome “%s”"
-
-#: plugins/dictionary/gtr-dict-panel.c:170
-msgid "Unable to find dictionary source"
-msgstr "Não foi possível localizar a fonte de dicionário"
-
-#: plugins/dictionary/gtr-dict-panel.c:185
-#, c-format
-msgid "No context available for source “%s”"
-msgstr "Nenhum contexto disponível para a fonte “%s”"
-
-#: plugins/dictionary/gtr-dict-panel.c:189
-msgid "Unable to create a context"
-msgstr "Não foi possível criar um contexto"
-
-#: plugins/dictionary/gtr-dict-panel.c:272
-#, c-format
-msgid "Dictionary source “%s” selected"
-msgstr "Fonte de dicionário “%s” selecionada"
-
-#: plugins/dictionary/gtr-dict-panel.c:291
-#, c-format
-msgid "Strategy “%s” selected"
-msgstr "Estratégia “%s” selecionada"
-
-#: plugins/dictionary/gtr-dict-panel.c:309
-#, c-format
-msgid "Database “%s” selected"
-msgstr "Banco de dados “%s” selecionado"
-
-#: plugins/dictionary/gtr-dict-panel.c:353
-#, c-format
-msgid "Word “%s” selected"
-msgstr "Palavra “%s” selecionada"
-
-#. speller
-#: plugins/dictionary/gtr-dict-panel.c:375
-msgid "Double-click on the word to look up"
-msgstr "Dê um duplo clique na palavra para consultá-la"
-
-#. strat-chooser
-#: plugins/dictionary/gtr-dict-panel.c:380
-msgid "Double-click on the matching strategy to use"
-msgstr "Dê um duplo clique na estratégia para usá-la"
-
-#. source-chooser
-#: plugins/dictionary/gtr-dict-panel.c:386
-msgid "Double-click on the source to use"
-msgstr "Dê um duplo clique na fonte para usá-la"
-
-#. db-chooser
-#: plugins/dictionary/gtr-dict-panel.c:396
-msgid "Double-click on the database to use"
-msgstr "Dê um duplo clique no banco de dados para usá-lo"
-
-#. Look up Button
-#: plugins/dictionary/gtr-dict-panel.c:502
-msgid "Look _up:"
-msgstr "Cons_ultar:"
-
-#: plugins/dictionary/gtr-dict-panel.c:559
-msgid "Similar words"
-msgstr "Palavras semelhantes"
-
-#: plugins/dictionary/gtr-dict-panel.c:572
-msgid "Available dictionaries"
-msgstr "Dicionários disponíveis"
-
-#: plugins/dictionary/gtr-dict-panel.c:586
-msgid "Available strategies"
-msgstr "Estratégias disponíveis"
-
-#: plugins/dictionary/gtr-dict-panel.c:596
-msgid "Dictionary sources"
-msgstr "Fontes de dicionário"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: plugins/dictionary/gtr-dict.plugin.desktop.in:8
-msgid "accessories-dictionary"
-msgstr "accessories-dictionary"
-
-#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:5
-msgid "Database"
-msgstr "Banco de dados"
-
-#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:6
-msgid "Word database"
-msgstr "Expressão no banco de dados"
-
-#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:10
-msgid "Source Name"
-msgstr "Nome do código"
-
-#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:14
-msgid "Strategy"
-msgstr "Estratégia"
-
-#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:18
-msgid "Panel Position"
-msgstr "Posição do painel"
-
-#: plugins/fullscreen/gtr-fullscreen-plugin.c:67
-msgid "_Fullscreen"
-msgstr "_Tela cheia"
-
-#: plugins/fullscreen/gtr-fullscreen-plugin.c:68
-msgid "Place window on fullscreen state"
-msgstr "Coloca a janela em estado de tela cheia"
-
-#: plugins/fullscreen/gtr-fullscreen.plugin.desktop.in:5
-msgid "Fullscreen"
-msgstr "Tela cheia"
-
-#: plugins/insert-params/gtr-insert-params-plugin.c:113
-msgid "_Next Param"
-msgstr "Pró_ximo parâmetro"
-
-#: plugins/insert-params/gtr-insert-params-plugin.c:114
-msgid "Insert the next param of the message"
-msgstr "Insere o próximo parâmetro da mensagem"
-
-#: plugins/insert-params/gtr-insert-params-plugin.c:116
-msgid "_Insert Params"
-msgstr "_Inserir parâmetros"
-
-#: plugins/insert-params/gtr-insert-params-plugin.c:117
-msgid "_Next Tag"
-msgstr "Pró_xima marca"
-
-#: plugins/insert-params/gtr-insert-params-plugin.c:118
-msgid "Insert the next tag of the message"
-msgstr "Insere a próxima marca da mensagem"
-
-#: plugins/insert-params/gtr-insert-params-plugin.c:120
-msgid "_Insert Tags"
-msgstr "_Inserir marcas"
-
-#: plugins/insert-params/gtr-insert-params.plugin.desktop.in:5
-msgid "Insert Params or Tags"
-msgstr "Inserir parâmetros ou marcas"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.c:167
-msgid "Strings added to database"
-msgstr "Strings adicionadas ao banco de dados"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.c:224
-msgid "Please specify a valid path to build the translation memory"
-msgstr ""
-"Por favor, especifique um caminho válido para compilar a memória de tradução"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.c:291
-msgid "Gtranslator Translation Memory Manager"
-msgstr "Gerenciador de memória de tradução do Gtranslator"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.ui:58
-#: src/translation-memory/gtr-translation-memory-dialog.ui:60
-msgid "Database:"
-msgstr "Banco de dados:"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.ui:101
-#: src/translation-memory/gtr-translation-memory-dialog.ui:103
-msgid "Select the directory which contains PO files:"
-msgstr "Selecione o diretório que contém os arquivos PO:"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.ui:152
-#: src/translation-memory/gtr-translation-memory-dialog.ui:154
-msgid "Add to Database"
-msgstr "Adicionar ao banco de dados"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.ui:209
-#: src/translation-memory/gtr-translation-memory-dialog.ui:209
-msgid "Configuration:"
-msgstr "Configuração:"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.ui:252
-#: src/translation-memory/gtr-translation-memory-dialog.ui:253
-msgid "Use only files with this name:"
-msgstr "Usar apenas arquivos com esse nome:"
-
-#: plugins/translation-memory/gtr-translation-memory.plugin.desktop.in:5
-#: plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
-msgid "Translation Memory"
-msgstr "Memória de tradução"
-
-#: plugins/translation-memory/gtr-translation-memory-ui.c:207
-#, c-format
-msgid "Insert Option nº %d"
-msgstr "Inserir opção nº %d"
-
-#: plugins/translation-memory/gtr-translation-memory-ui.c:325
-#: src/translation-memory/gtr-translation-memory-ui.c:255
-msgid "_Use this translation"
-msgstr "_Use esta tradução"
-
-#: plugins/translation-memory/gtr-translation-memory-ui.c:330
-#: src/translation-memory/gtr-translation-memory-ui.c:260
-msgid "_Remove"
-msgstr "_Remover"
-
-#: plugins/translation-memory/gtr-translation-memory-ui.c:445
-#: src/translation-memory/gtr-translation-memory-ui.c:371
-msgid "Shortcut"
-msgstr "Atalho"
-
-#: plugins/translation-memory/gtr-translation-memory-ui.c:454
-#: src/translation-memory/gtr-translation-memory-ui.c:380
-msgid "Level"
-msgstr "Nível"
-
-#: plugins/translation-memory/gtr-translation-memory-ui.c:463
-#: src/translation-memory/gtr-translation-memory-ui.c:389
-msgid "String"
-msgstr "Mensagem"
-
-#: plugins/translation-memory/gtr-translation-memory-window-activatable.c:81
-msgid "_Build Translation Memory"
-msgstr "_Compilar memória de tradução"
-
-#: plugins/translation-memory/gtr-translation-memory-window-activatable.c:82
-#: src/gtr-notebook.ui:164
-msgid "Build translation memory"
-msgstr "Compila a memória de tradução"
-
-#: plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
-msgid "_Translation Memory"
-msgstr "_Memória de tradução"
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
-msgid "PO directory"
-msgstr "Diretório PO"
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
-msgid "Directory containing PO files to add to the translation memory."
-msgstr ""
-"Diretório contendo arquivos PO a serem adicionados à memória de tradução."
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
-msgid "Restrict search by filename"
-msgstr "Restringir a pesquisa por nome de arquivo"
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
-msgid ""
-"If true, only include files with a specified filename when searching the "
-"translation memory."
-msgstr ""
-"Caso verdadeiro, inclui apenas arquivos com um determinado nome ao pesquisar "
-"a memória de tradução."
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
-msgid "Filename to restrict search to"
-msgstr "Restringir a pesquisa ao nome de arquivo"
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
-msgid ""
-"Filename to which searching of the translation memory should be restricted."
-msgstr ""
-"Nome de arquivo ao qual a pesquisa de memória de tradução deve ser restrita."
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
-msgid "Maximum number of missing words"
-msgstr "Número máximo de palavras ausentes"
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
-msgid ""
-"Maximum number of words that can be missing from a message displayed as a "
-"match by the translation memory."
-msgstr ""
-"Número máximo de palavras que podem estar ausentes em uma mensagem exibida "
-"como uma ocorrência pela memória de tradução."
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
-msgid "Maximum difference in message length"
-msgstr "Diferença máxima de comprimento das mensagens"
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
-msgid ""
-"Maximum difference in length between messages displayed as matches by the "
-"translation memory."
-msgstr ""
-"Diferença máxima em comprimento entre as mensagens exibidas como ocorrências "
-"pela memória de tradução."
 
 #: src/gtr-actions-app.c:48
 msgid "Current Maintainers"
@@ -707,23 +311,6 @@ msgstr "Uma ocorrência foi localizada e substituída"
 msgid "Phrase not found"
 msgstr "Frase não localizada"
 
-#: src/gtranslator-menu.ui:7
-msgid "_New Window"
-msgstr "_Nova janela"
-
-#: src/gtranslator-menu.ui:13
-msgid "_Preferences"
-msgstr "_Preferências"
-
-#: src/gtranslator-menu.ui:19
-msgid "_Help"
-msgstr "Aj_uda"
-
-#: src/gtranslator-menu.ui:24
-#| msgid "Translation Editor"
-msgid "_About GNOME Translation Editor"
-msgstr "_Sobre o Editor de Tradução do GNOME"
-
 #: src/gtr-assistant.c:128
 #, c-format
 msgid ""
@@ -768,7 +355,7 @@ msgid "Team email"
 msgstr "E-mail da equipe"
 
 #: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:521
-#: src/gtr-window.c:550
+#: src/gtr-window.c:554
 msgid "Profile"
 msgstr "Perfil"
 
@@ -871,6 +458,10 @@ msgstr "Contexto:"
 #: src/gtr-context.c:335
 msgid "Format:"
 msgstr "Formato:"
+
+#: src/gtr-file-dialogs.c:48
+msgid "_Open"
+msgstr "_Abrir"
 
 #: src/gtr-file-dialogs.c:62
 msgid "Gettext translation"
@@ -1027,6 +618,10 @@ msgstr "Localizar"
 msgid "Find and replace"
 msgstr "Localizar e substituir"
 
+#: src/gtr-notebook.ui:164
+msgid "Build translation memory"
+msgstr "Compila a memória de tradução"
+
 #: src/gtr-notebook.ui:179
 msgid "Edit header"
 msgstr "Editar cabeçalho"
@@ -1109,18 +704,18 @@ msgstr "O arquivo está vazio"
 msgid "Failed opening file “%s”: %s"
 msgstr "Falha ao abrir o arquivo “%s”: %s"
 
-#: src/gtr-po.c:524
+#: src/gtr-po.c:530
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Não foi possível converter do conjunto de caracteres “%s” para UTF-8"
 
-#: src/gtr-po.c:541 src/gtr-po.c:561
+#: src/gtr-po.c:547 src/gtr-po.c:567
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr ""
 "Não foi possível armazenar arquivo temporário para conversão da codificação"
 
-#: src/gtr-po.c:598
+#: src/gtr-po.c:604
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -1131,17 +726,17 @@ msgstr ""
 "ferramentas de linha de comando msgconv ou iconv antes de abrir este arquivo "
 "com o Editor de Tradução do GNOME"
 
-#: src/gtr-po.c:666
+#: src/gtr-po.c:672
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "O gettext retornou uma lista nula de mensagens do domínio."
 
-#: src/gtr-po.c:711
+#: src/gtr-po.c:717
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Nenhuma mensagem obtida do interpretador."
 
-#: src/gtr-po.c:762
+#: src/gtr-po.c:768
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1152,17 +747,17 @@ msgstr ""
 "Os arquivos POT são criados no processo de compilação.\n"
 "Seu arquivo deveria ser nomeado como “%s.po”."
 
-#: src/gtr-po.c:775
+#: src/gtr-po.c:781
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "O arquivo %s é somente-leitura, e não pode ser sobrescrito"
 
-#: src/gtr-po.c:794
+#: src/gtr-po.c:800
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Há um erro no arquivo PO: %s"
 
-#: src/gtr-po.c:806
+#: src/gtr-po.c:812
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Houve um erro ao escrever o arquivo PO: %s"
@@ -1356,55 +951,57 @@ msgstr "INS"
 msgid "OVR"
 msgstr "SBR"
 
-#: src/gtr-tab.c:245
+#: src/gtr-tab-label.c:278
+msgid "Close document"
+msgstr "Fecha o documento"
+
+#: src/gtr-tab.c:246
 msgid "There is an error in the message:"
 msgstr "Há um erro na mensagem:"
 
-#: src/gtr-tab.c:446 src/gtr-tab.c:557
+#: src/gtr-tab.c:459 src/gtr-tab.c:570
 msgid "fuzzy"
 msgstr "aproximada"
 
-#: src/gtr-tab.c:587
+#: src/gtr-tab.c:600
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1139
+#: src/gtr-tab.c:1153
 msgid "Path:"
 msgstr "Caminho:"
 
-#: src/gtr-tab.c:1789
+#: src/gtr-tab.c:1803
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Traduzido: %0.2f%%"
 
-#: src/gtr-tab.c:1790
+#: src/gtr-tab.c:1804
 #, c-format
 msgid "Translated: %d"
 msgstr "Traduzido: %d"
 
-#: src/gtr-tab.c:1791
+#: src/gtr-tab.c:1805
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Não traduzido: %d"
 
-#: src/gtr-tab.c:1792
+#: src/gtr-tab.c:1806
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Aproximado: %d"
 
-#: src/gtr-tab-label.c:278
-msgid "Close document"
-msgstr "Fecha o documento"
-
 #: src/gtr-tab.ui:153
-msgid "_Original Message:"
-msgstr "Mensagem o_riginal:"
+#| msgid "_Original Message:"
+msgid "_Original Message"
+msgstr "Mensagem o_riginal"
 
-#: src/gtr-tab.ui:233
-msgid "Translate_d Text:"
-msgstr "Texto tradu_zido:"
+#: src/gtr-tab.ui:245
+#| msgid "Translate_d Text:"
+msgid "Translate_d Text"
+msgstr "Texto tradu_zido"
 
 #: src/gtr-utils.c:516
 msgid ""
@@ -1414,43 +1011,43 @@ msgstr ""
 "Não foi possível exibir a ajuda. Por favor, certifique-se de que a "
 "documentação do Editor de Tradução esteja instalada."
 
-#: src/gtr-window.c:167
+#: src/gtr-window.c:171
 msgid "Untranslated"
 msgstr "Não traduzida"
 
-#: src/gtr-window.c:170
+#: src/gtr-window.c:174
 msgid "Translated"
 msgstr "Traduzida"
 
-#: src/gtr-window.c:173
+#: src/gtr-window.c:177
 msgid "Fuzzy"
 msgstr "Aproximada"
 
-#: src/gtr-window.c:180
+#: src/gtr-window.c:184
 #, c-format
 msgid "Current: %d"
 msgstr "Atual: %d"
 
-#: src/gtr-window.c:181
+#: src/gtr-window.c:185
 #, c-format
 msgid "Total: %d"
 msgstr "Total: %d"
 
-#: src/gtr-window.c:182
+#: src/gtr-window.c:186
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "%d traduzida"
 msgstr[1] "%d traduzidas"
 
-#: src/gtr-window.c:185
+#: src/gtr-window.c:189
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "%d aproximada"
 msgstr[1] "%d aproximadas"
 
-#: src/gtr-window.c:187
+#: src/gtr-window.c:191
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1458,24 +1055,40 @@ msgstr[0] "%d não traduzida"
 msgstr[1] "%d não traduzidas"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:297
+#: src/gtr-window.c:301
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s – Editor de Tradução"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:303
+#: src/gtr-window.c:307
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s – Editor de Tradução"
 
-#: src/gtr-window.c:534
+#: src/gtr-window.c:538
 msgid "No profile"
 msgstr "Sem perfil"
 
-#: src/gtr-window.c:552
+#: src/gtr-window.c:556
 msgid "Profile for the active document"
 msgstr "Perfil para o documento ativo"
+
+#: src/gtranslator-menu.ui:7
+msgid "_New Window"
+msgstr "_Nova janela"
+
+#: src/gtranslator-menu.ui:13
+msgid "_Preferences"
+msgstr "_Preferências"
+
+#: src/gtranslator-menu.ui:19
+msgid "_Help"
+msgstr "Aj_uda"
+
+#: src/gtranslator-menu.ui:24
+msgid "_About GNOME Translation Editor"
+msgstr "_Sobre o Editor de Tradução do GNOME"
 
 #: src/help-overlay.ui:13
 msgctxt "shortcut window group"
@@ -1612,6 +1225,293 @@ msgstr "Selecionar o diretório de PO"
 #: src/translation-memory/gtr-translation-memory-dialog.c:303
 msgid "Translation Editor Memory Manager"
 msgstr "Gerenciador de memória do Editor de Tradução"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
+msgid "Database:"
+msgstr "Banco de dados:"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:103
+msgid "Select the directory which contains PO files:"
+msgstr "Selecione o diretório que contém os arquivos PO:"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:154
+msgid "Add to Database"
+msgstr "Adicionar ao banco de dados"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:209
+msgid "Configuration:"
+msgstr "Configuração:"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:253
+msgid "Use only files with this name:"
+msgstr "Usar apenas arquivos com esse nome:"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:255
+msgid "_Use this translation"
+msgstr "_Use esta tradução"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:260
+msgid "_Remove"
+msgstr "_Remover"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:371
+msgid "Shortcut"
+msgstr "Atalho"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:380
+msgid "Level"
+msgstr "Nível"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:389
+msgid "String"
+msgstr "Mensagem"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
+msgid "PO directory"
+msgstr "Diretório PO"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
+msgid "Directory containing PO files to add to the translation memory."
+msgstr ""
+"Diretório contendo arquivos PO a serem adicionados à memória de tradução."
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
+msgid "Restrict search by filename"
+msgstr "Restringir a pesquisa por nome de arquivo"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
+msgid ""
+"If true, only include files with a specified filename when searching the "
+"translation memory."
+msgstr ""
+"Caso verdadeiro, inclui apenas arquivos com um determinado nome ao pesquisar "
+"a memória de tradução."
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
+msgid "Filename to restrict search to"
+msgstr "Restringir a pesquisa ao nome de arquivo"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
+msgid ""
+"Filename to which searching of the translation memory should be restricted."
+msgstr ""
+"Nome de arquivo ao qual a pesquisa de memória de tradução deve ser restrita."
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
+msgid "Maximum number of missing words"
+msgstr "Número máximo de palavras ausentes"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
+msgid ""
+"Maximum number of words that can be missing from a message displayed as a "
+"match by the translation memory."
+msgstr ""
+"Número máximo de palavras que podem estar ausentes em uma mensagem exibida "
+"como uma ocorrência pela memória de tradução."
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
+msgid "Maximum difference in message length"
+msgstr "Diferença máxima de comprimento das mensagens"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
+msgid ""
+"Maximum difference in length between messages displayed as matches by the "
+"translation memory."
+msgstr ""
+"Diferença máxima em comprimento entre as mensagens exibidas como ocorrências "
+"pela memória de tradução."
+
+#~ msgid "Message not found"
+#~ msgstr "Mensagem não localizada"
+
+#~ msgid "Open file for alternate language"
+#~ msgstr "Abrir o arquivo para idioma alternativo"
+
+#~ msgid "File closed"
+#~ msgstr "Arquivo fechado"
+
+#~ msgid "Co_py"
+#~ msgstr "_Copiar"
+
+#~ msgid "There isn’t any file loaded"
+#~ msgstr "Não há qualquer arquivo carregado"
+
+#~ msgid "_Alternate Language"
+#~ msgstr "_Idioma alternativo"
+
+#~ msgid "Show the Alternate Language panel"
+#~ msgstr "Mostra o painel de idioma alternativo"
+
+#~ msgid "Alternate Language"
+#~ msgstr "Idioma alternativo"
+
+#~ msgid "Character Map"
+#~ msgstr "Mapa de caracteres"
+
+#~ msgid "accessories-character-map"
+#~ msgstr "accessories-character-map"
+
+#~ msgid "Source View Settings"
+#~ msgstr "Configurações da visualização de código-fonte"
+
+#~ msgid "Use external editor"
+#~ msgstr "Usar editor externo"
+
+#~ msgid "Program command:"
+#~ msgstr "Comando do programa:"
+
+#~ msgid "Line command:"
+#~ msgstr "Linha de comando:"
+
+#~ msgid "Please install “%s” to be able to show the file"
+#~ msgstr "Por favor, instale “%s” para poder mostrar o arquivo"
+
+#~ msgid "Source Code View"
+#~ msgstr "Visualização de código fonte"
+
+#~ msgid "Use the System Editor"
+#~ msgstr "Usar o editor do sistema"
+
+#~ msgid "Whether use the system editor to show the source code"
+#~ msgstr ""
+#~ "Se é para usar o editor padrão do sistema para mostrar o código fonte"
+
+#~ msgid "The Editor to Launch"
+#~ msgstr "O editor de texto a ser executado"
+
+#~ msgid "The command to launch the editor you want to use"
+#~ msgstr "Comando para executar o editor que você deseja usar"
+
+#~ msgid "Arguments for the Command"
+#~ msgstr "Argumentos para o comando"
+
+#~ msgid "Arguments to pass to the program command line to select the line"
+#~ msgstr "Argumentos que serão passados para o programa"
+
+#~ msgid "Dictionary"
+#~ msgstr "Dicionário"
+
+#~ msgid "No dictionary source available with name “%s”"
+#~ msgstr "Nenhuma fonte de dicionário disponível com o nome “%s”"
+
+#~ msgid "Unable to find dictionary source"
+#~ msgstr "Não foi possível localizar a fonte de dicionário"
+
+#~ msgid "No context available for source “%s”"
+#~ msgstr "Nenhum contexto disponível para a fonte “%s”"
+
+#~ msgid "Unable to create a context"
+#~ msgstr "Não foi possível criar um contexto"
+
+#~ msgid "Dictionary source “%s” selected"
+#~ msgstr "Fonte de dicionário “%s” selecionada"
+
+#~ msgid "Strategy “%s” selected"
+#~ msgstr "Estratégia “%s” selecionada"
+
+#~ msgid "Database “%s” selected"
+#~ msgstr "Banco de dados “%s” selecionado"
+
+#~ msgid "Word “%s” selected"
+#~ msgstr "Palavra “%s” selecionada"
+
+#~ msgid "Double-click on the word to look up"
+#~ msgstr "Dê um duplo clique na palavra para consultá-la"
+
+#~ msgid "Double-click on the matching strategy to use"
+#~ msgstr "Dê um duplo clique na estratégia para usá-la"
+
+#~ msgid "Double-click on the source to use"
+#~ msgstr "Dê um duplo clique na fonte para usá-la"
+
+#~ msgid "Double-click on the database to use"
+#~ msgstr "Dê um duplo clique no banco de dados para usá-lo"
+
+#~ msgid "Look _up:"
+#~ msgstr "Cons_ultar:"
+
+#~ msgid "Similar words"
+#~ msgstr "Palavras semelhantes"
+
+#~ msgid "Available dictionaries"
+#~ msgstr "Dicionários disponíveis"
+
+#~ msgid "Available strategies"
+#~ msgstr "Estratégias disponíveis"
+
+#~ msgid "Dictionary sources"
+#~ msgstr "Fontes de dicionário"
+
+#~ msgid "accessories-dictionary"
+#~ msgstr "accessories-dictionary"
+
+#~ msgid "Database"
+#~ msgstr "Banco de dados"
+
+#~ msgid "Word database"
+#~ msgstr "Expressão no banco de dados"
+
+#~ msgid "Source Name"
+#~ msgstr "Nome do código"
+
+#~ msgid "Strategy"
+#~ msgstr "Estratégia"
+
+#~ msgid "Panel Position"
+#~ msgstr "Posição do painel"
+
+#~ msgid "_Fullscreen"
+#~ msgstr "_Tela cheia"
+
+#~ msgid "Place window on fullscreen state"
+#~ msgstr "Coloca a janela em estado de tela cheia"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Tela cheia"
+
+#~ msgid "_Next Param"
+#~ msgstr "Pró_ximo parâmetro"
+
+#~ msgid "Insert the next param of the message"
+#~ msgstr "Insere o próximo parâmetro da mensagem"
+
+#~ msgid "_Insert Params"
+#~ msgstr "_Inserir parâmetros"
+
+#~ msgid "_Next Tag"
+#~ msgstr "Pró_xima marca"
+
+#~ msgid "Insert the next tag of the message"
+#~ msgstr "Insere a próxima marca da mensagem"
+
+#~ msgid "_Insert Tags"
+#~ msgstr "_Inserir marcas"
+
+#~ msgid "Insert Params or Tags"
+#~ msgstr "Inserir parâmetros ou marcas"
+
+#~ msgid "Strings added to database"
+#~ msgstr "Strings adicionadas ao banco de dados"
+
+#~ msgid "Please specify a valid path to build the translation memory"
+#~ msgstr ""
+#~ "Por favor, especifique um caminho válido para compilar a memória de "
+#~ "tradução"
+
+#~ msgid "Gtranslator Translation Memory Manager"
+#~ msgstr "Gerenciador de memória de tradução do Gtranslator"
+
+#~ msgid "Translation Memory"
+#~ msgstr "Memória de tradução"
+
+#~ msgid "Insert Option nº %d"
+#~ msgstr "Inserir opção nº %d"
+
+#~ msgid "_Build Translation Memory"
+#~ msgstr "_Compilar memória de tradução"
+
+#~ msgid "_Translation Memory"
+#~ msgstr "_Memória de tradução"
 
 #~ msgid "_About"
 #~ msgstr "_Sobre"
