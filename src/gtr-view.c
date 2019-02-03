@@ -335,12 +335,15 @@ gtr_view_enable_visible_whitespace (GtrView * view, gboolean enable)
 {
   GtkSourceView *source;
   GtkSourceSpaceDrawer *drawer;
+  GtkSourceBuffer *buffer;
 
   g_return_if_fail (GTR_IS_VIEW (view));
 
   source = GTK_SOURCE_VIEW (view);
   drawer = gtk_source_view_get_space_drawer (source);
   gtk_source_space_drawer_set_enable_matrix (drawer, TRUE);
+  buffer = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+  gtk_source_buffer_set_implicit_trailing_newline (buffer, FALSE);
 
   if (enable)
     gtk_source_space_drawer_set_types_for_locations (drawer,
