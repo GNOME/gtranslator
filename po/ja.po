@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2019-01-10 14:07+0000\n"
-"PO-Revision-Date: 2019-02-04 00:05+0900\n"
+"POT-Creation-Date: 2019-02-03 15:11+0000\n"
+"PO-Revision-Date: 2019-02-04 00:28+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -81,7 +81,8 @@ msgid ""
 "If true, warn the user when saving a PO translation file containing fuzzy "
 "strings."
 msgstr ""
-"true の場合、PO ファイル保存をするときに fuzzy な文字列が残っていたら警告します。"
+"true の場合、PO ファイル保存をするときに fuzzy な文字列が残っていたら警告しま"
+"す。"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:32
 msgid "Auto save files"
@@ -177,8 +178,8 @@ msgid ""
 "Sort order to use in the message list. Possible values are “status”, “id”, "
 "“original-text” and “translated-text”."
 msgstr ""
-"メッセージを一覧で使用する並べ方です。指定可能な値: “status”、“id"
-"”、“original_text”、“translated_text”"
+"メッセージを一覧で使用する並べ方です。指定可能な値: "
+"“status”、“id”、“original_text”、“translated_text”"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:143
 msgid "Active plugins"
@@ -263,7 +264,7 @@ msgstr "翻訳するファイルの選択"
 
 #: src/gtr-actions-file.c:272 src/gtr-actions-file.c:389
 msgid "File saved."
-msgstr "ファイルを保存しました"
+msgstr "ファイルを保存しました。"
 
 #: src/gtr-actions-file.c:320
 msgid "Save file as…"
@@ -281,7 +282,7 @@ msgstr[0] "%d個見つかり置換しました"
 
 #: src/gtr-actions-search.c:177
 msgid "Found and replaced one occurrence"
-msgstr "1つ置換"
+msgstr "1個見つかり置換しました"
 
 #: src/gtr-actions-search.c:189
 msgid "Phrase not found"
@@ -651,7 +652,7 @@ msgstr ""
 
 #: src/gtr-notebook.ui:511 src/gtr-projects.ui:81
 msgid "Main Menu"
-msgstr ""
+msgstr "メインメニュー"
 
 #: src/gtr-notebook.ui:527
 msgid "Save"
@@ -692,8 +693,8 @@ msgid ""
 "iconv command line tools before opening this file with GNOME Translation "
 "Editor"
 msgstr ""
-"GNOME 翻訳エディターでこのファイルを UTF-8 に変換できませんでした。事前に msgconv"
-"や iconv などのコマンドで UTF-8 に変換してください。"
+"GNOME 翻訳エディターでこのファイルを UTF-8 に変換できませんでした。事前に "
+"msgconvや iconv などのコマンドで UTF-8 に変換してください。"
 
 #: src/gtr-po.c:672
 #, c-format
@@ -975,8 +976,8 @@ msgid ""
 "Unable to display help. Please make sure the Translation Editor "
 "documentation package is installed."
 msgstr ""
-"ヘルプを表示できません。翻訳エディターのドキュメントが入ったパッケージがインス"
-"トールされているか確認してください。"
+"ヘルプを表示できません。翻訳エディターのドキュメントが入ったパッケージがイン"
+"ストールされているか確認してください。"
 
 #: src/gtr-window.c:171
 msgid "Untranslated"
@@ -1175,8 +1176,8 @@ msgid ""
 "Run “%s --help” to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"“%s --help”を実行すると利用可能なすべてのコマンドラインオプションが表示され"
-"ます。\n"
+"“%s --help”を実行すると利用可能なすべてのコマンドラインオプションが表示されま"
+"す。\n"
 
 #: src/translation-memory/gtr-translation-memory-dialog.c:77
 msgid "Select PO directory"
@@ -1251,8 +1252,7 @@ msgstr "翻訳メモリに含めるファイルの名前"
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
 msgid ""
 "Filename to which searching of the translation memory should be restricted."
-msgstr ""
-"翻訳メモリに含めるファイルを、指定した名前のファイルだけに限定します。"
+msgstr "翻訳メモリに含めるファイルを、指定した名前のファイルだけに限定します。"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
 msgid "Maximum number of missing words"
@@ -1263,10 +1263,10 @@ msgid ""
 "Maximum number of words that can be missing from a message displayed as a "
 "match by the translation memory."
 msgstr ""
-"編集しているメッセージが翻訳メモリの中にあるメッセージと一致しているかどう"
-"かを判定する際のしきい値で、双方のメッセージの間に含まれていない単語の数が最"
-"大いくつまで許容できるかを表す数値です (ここで指定した数だけ単語が異なってい"
-"ても同一のメッセージであると判定します)。"
+"編集しているメッセージが翻訳メモリの中にあるメッセージと一致しているかどうか"
+"を判定する際のしきい値で、双方のメッセージの間に含まれていない単語の数が最大"
+"いくつまで許容できるかを表す数値です (ここで指定した数だけ単語が異なっていて"
+"も同一のメッセージであると判定します)。"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
 msgid "Maximum difference in message length"
@@ -1277,9 +1277,9 @@ msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
 msgstr ""
-"編集しているメッセージが翻訳メモリの中にあるメッセージと一致しているかどう"
-"かを判定する際のしきい値で、双方のメッセージの長さがいくつまで異なることが許"
-"容できるかを表す数値です (ここで指定した数だけ長さが異なっていても同一のメッ"
+"編集しているメッセージが翻訳メモリの中にあるメッセージと一致しているかどうか"
+"を判定する際のしきい値で、双方のメッセージの長さがいくつまで異なることが許容"
+"できるかを表す数値です (ここで指定した数だけ長さが異なっていても同一のメッ"
 "セージであると判定します)。"
 
 #~ msgid "Gtranslator PO File Editor"
