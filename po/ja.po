@@ -2,20 +2,21 @@
 # Copyright (C) 2000-2004,2006,2009-2013 gtranslator's COPYRIGHT HOLDER
 # Takeshi AIHANA <takeshi.aihana@gmail.com>, 2000-2004,2006,2009.
 # Nishio Futoshi <fut_nis@d3.dion.ne.jp>, 2009.
-# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2010, 2011.
 # IWAI, Masaharu <iwaim.sub@gmail.com>, 2010.
 # Hiroyuki Sekihara <hiroyuki.sekihara@gmail.com>, 2010.
-# Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2011, 2012.
+# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2010, 2011.
 # OKANO Takayoshi <kano@na.rim.or.jp>, 2011.
+# Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2011-2013.
 # Yoji TOYODA <bsyamato@sea.plala.or.jp>, 2013.
+# sicklylife <translation@sicklylife.jp>, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-06-07 06:18+0000\n"
-"PO-Revision-Date: 2013-06-09 14:32+0900\n"
-"Last-Translator: Yoji TOYODA <bsyamato@sea.plala.or.jp>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
+"POT-Creation-Date: 2019-01-10 14:07+0000\n"
+"PO-Revision-Date: 2019-02-04 00:05+0900\n"
+"Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -23,801 +24,270 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../data/desktop/gtranslator.desktop.in.in.h:1 ../src/gtr-application.c:328
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:6
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
-#: ../data/desktop/gtranslator.desktop.in.in.h:2
-msgid "PO File Editor"
-msgstr "翻訳エディター"
-
-#: ../data/desktop/gtranslator.desktop.in.in.h:3
-msgid "Gtranslator PO File Editor"
-msgstr "Gtranslator 翻訳エディター"
-
-#: ../data/desktop/gtranslator.desktop.in.in.h:4
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
+#: data/org.gnome.Gtranslator.desktop.in.in:5
 msgid "Translate and localize applications and libraries"
 msgstr "アプリケーションやライブラリのメッセージを翻訳します"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:1
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:9
+msgid ""
+"Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
+"environment. It handles all forms of gettext po files and includes very "
+"useful features like find/replace, translation memory, different translator "
+"profiles, messages table (for having an overview of the translations/"
+"messages in the po file), easy navigation and editing of translation "
+"messages and comments of the translation where accurate."
+msgstr ""
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:18
+msgid ""
+"Gtranslator includes also a plugin system with many interesting plugins like "
+"alternate language, insert tags, integration with subversion and a source "
+"code viewer."
+msgstr ""
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:31
+msgid "Daniel García Moreno"
+msgstr ""
+
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
+#: src/gtr-notebook.ui:294 src/gtr-window.c:316 src/gtr-window.ui:25
+msgid "Translation Editor"
+msgstr "翻訳エディター"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:4
+msgid "PO File Editor"
+msgstr "PO ファイルエディター"
+
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: data/org.gnome.Gtranslator.desktop.in.in:7
+msgid "@icon@"
+msgstr "@icon@"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:14
+msgid "Gtranslator;Translation;Editor;Gettext;Write;"
+msgstr "Gtranslator;Translation;Editor;Gettext;Write;翻訳;エディター"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:24
 msgid "Warn if file contains fuzzy translations"
 msgstr "fuzzy が残っている場合に警告する"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:2
-msgid "If true, warn the user when saving a PO translation file containing fuzzy strings."
-msgstr "true の場合、PO ファイルをするときに fuzzy な文字列が残っていれば警告します。"
+#: data/org.gnome.Gtranslator.gschema.xml.in:25
+msgid ""
+"If true, warn the user when saving a PO translation file containing fuzzy "
+"strings."
+msgstr ""
+"true の場合、PO ファイル保存をするときに fuzzy な文字列が残っていたら警告します。"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:3
+#: data/org.gnome.Gtranslator.gschema.xml.in:32
 msgid "Auto save files"
 msgstr "ファイルを自動保存する"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:4
+#: data/org.gnome.Gtranslator.gschema.xml.in:33
 msgid "If true, automatically save files at specified intervals."
 msgstr "true の場合、指定した間隔でファイルを自動的に保存します。"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:5
+#: data/org.gnome.Gtranslator.gschema.xml.in:39
 msgid "Auto save interval"
 msgstr "自動保存する間隔"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:6
+#: data/org.gnome.Gtranslator.gschema.xml.in:40
 msgid "Interval in minutes at which to automatically save files."
 msgstr "編集中のファイルを自動的に保存する間隔 (単位は分) です。"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:7
+#: data/org.gnome.Gtranslator.gschema.xml.in:46
 msgid "Create backup before saving"
 msgstr "保存する前にバックアップを作成する"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:8
+#: data/org.gnome.Gtranslator.gschema.xml.in:47
 msgid "If true, create a backup copy of a file before saving it."
 msgstr "true の場合、ファイルを保存する前にバックアップを作成します。"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:9
+#: data/org.gnome.Gtranslator.gschema.xml.in:53
 msgid "Use profile values for header"
 msgstr "プロファイルの値をヘッダーに使用する"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:10
-msgid "If true, overwrite the values in the PO header with those in the active profile."
-msgstr "true の場合、有効にしているプロファイルの値をPO ファイルのヘッダーに使用します。"
+#: data/org.gnome.Gtranslator.gschema.xml.in:54
+msgid ""
+"If true, overwrite the values in the PO header with those in the active "
+"profile."
+msgstr ""
+"true の場合、有効にしているプロファイルの値を PO ファイルのヘッダーに使用しま"
+"す。"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:11
+#: data/org.gnome.Gtranslator.gschema.xml.in:63
 msgid "Highlight syntax in edit fields"
 msgstr "メッセージのシンタックスハイライトを有効にする"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:12
+#: data/org.gnome.Gtranslator.gschema.xml.in:64
 msgid "If true, apply syntax highlighting to strings in edit fields."
 msgstr "true の場合、編集フィールド内の文字列をシンタックスハイライトします。"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:13
+#: data/org.gnome.Gtranslator.gschema.xml.in:70
 msgid "Make whitespace visible"
 msgstr "空白文字を表示する"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:14
+#: data/org.gnome.Gtranslator.gschema.xml.in:71
 msgid "If true, display whitespace in strings as representative symbols."
 msgstr "true の場合、メッセージに含まれる空白文字を記号として表示します。"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:15
-msgid "Use custom font"
-msgstr "フォントを指定する"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:16
-msgid "If true, use a custom font for edit fields."
-msgstr "true の場合、編集フィールドにカスタムフォントを使用します。"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:17
-msgid "Editor font"
-msgstr "エディターのフォント"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:18
-msgid "Custom font to use for edit fields."
-msgstr "編集フィールドに使用するカスタムフォントです。"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:19
+#: data/org.gnome.Gtranslator.gschema.xml.in:77
 msgid "Remove fuzzy status when message is changed"
-msgstr "メッセージを編集すれば fuzzy を解除する"
+msgstr "メッセージを編集したら fuzzy を解除する"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:20
+#: data/org.gnome.Gtranslator.gschema.xml.in:78
 msgid "If true, remove fuzzy status from translations when they are changed."
-msgstr "true の場合、翻訳内容を編集すれば fuzzy 状態を解除します。"
+msgstr "true の場合、翻訳内容を編集したら fuzzy 状態を解除します。"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:21
+#: data/org.gnome.Gtranslator.gschema.xml.in:84
 msgid "Check spelling"
 msgstr "スペルをチェックする"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:22
+#: data/org.gnome.Gtranslator.gschema.xml.in:85
 msgid "If true, check the spelling of translated messages."
 msgstr "翻訳したメッセージのスペルをチェックします。"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:23
+#: data/org.gnome.Gtranslator.gschema.xml.in:93
 msgid "Side panel switcher style"
 msgstr "サイドパネルスイッチャーのスタイル"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:24
+#: data/org.gnome.Gtranslator.gschema.xml.in:94
 msgid "Style for switchers in the side panel."
 msgstr "サイドパネルスイッチャーのスタイルです。"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:25
+#: data/org.gnome.Gtranslator.gschema.xml.in:100
 msgid "Color scheme"
-msgstr "色のスキーム"
+msgstr "カラースキーム"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:26
+#: data/org.gnome.Gtranslator.gschema.xml.in:101
 msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
-msgstr "メッセージを強調表示する際に使用する gtksourceview 提供の色のスキーム名です。"
+msgstr ""
+"メッセージを強調表示する際に使用する gtksourceview 提供の色のスキーム名です。"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:27
+#: data/org.gnome.Gtranslator.gschema.xml.in:107
 msgid "Message list sort order"
 msgstr "メッセージを並べる順番"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:28
-msgid "Sort order to use in the message list. Possible values are \"status\", \"id\", \"original-text\" and \"translated-text\"."
-msgstr "メッセージを一覧で使用する並べ方です。指定可能な値: \"status\"、\"id\"、\"original-text\"、\"translated-text\""
+#: data/org.gnome.Gtranslator.gschema.xml.in:108
+msgid ""
+"Sort order to use in the message list. Possible values are “status”, “id”, "
+"“original-text” and “translated-text”."
+msgstr ""
+"メッセージを一覧で使用する並べ方です。指定可能な値: “status”、“id"
+"”、“original_text”、“translated_text”"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:29
+#: data/org.gnome.Gtranslator.gschema.xml.in:143
 msgid "Active plugins"
 msgstr "使用中のプラグイン"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:30
-msgid "List of active plugins. It contains the \"Location\" of the active plugins. See the .gtranslator-plugin file for obtaining the \"Location\" of a given plugin."
-msgstr "使用中のプラグインの一覧です。使用中のプラグインの \"Location\" を取得します。 \"Location\" を取得するために .gtranslator-plugin ファイルを見ます。"
+#: data/org.gnome.Gtranslator.gschema.xml.in:144
+#, fuzzy
+#| msgid ""
+#| "List of active plugins. It contains the \"Location\" of the active "
+#| "plugins. See the .gtranslator-plugin file for obtaining the \"Location\" "
+#| "of a given plugin."
+msgid ""
+"List of active plugins. It contains the “Location” of the active plugins. "
+"See the .gtranslator-plugin file for obtaining the “Location” of a given "
+"plugin."
+msgstr ""
+"使用中のプラグイン一覧です。使用中のプラグインの“Location”を取得しま"
+"す。“Location”を取得するために .gtranslator-plugin ファイルを見ます。"
 
-#: ../data/po.lang.h:1
-msgid "Others"
-msgstr "その他"
-
-#: ../data/po.lang.h:2
-msgid "gtranslator highlight"
-msgstr "Gtranslator の強調表示"
-
-#: ../data/po.lang.h:3
-msgid "Tag"
-msgstr "タグ"
-
-#: ../data/po.lang.h:4
-msgid "Special variable"
-msgstr "特別な値"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:126
-msgid "Message not found"
-msgstr "メッセージがありません"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:229
-msgid "Open file for alternate language"
-msgstr "代替言語のファイルを開く"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:254
-msgid "File closed"
-msgstr "ファイルを閉じる"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:322
-msgctxt "alternate lang"
-msgid "_Open"
-msgstr "開く(_O)"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:328
-msgctxt "alternate lang"
-msgid "_Close"
-msgstr "閉じる(_C)"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:334
-msgctxt "alternate lang"
-msgid "Co_py"
-msgstr "コピー(_P)"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:363
-msgid "There isn't any file loaded"
-msgstr "ロードすべきファイルがありません。"
-
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:81
-msgid "_Alternate Language"
-msgstr "代替言語(_A)"
-
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:82
-msgid "Show the Alternate Language panel"
-msgstr "代替言語パネルの表示"
-
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:222
-#: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:1
-msgid "Alternate Language"
-msgstr "代替の言語"
-
-#: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:2
-msgid "Load an alternate language."
-msgstr "代替の言語を読み込みます。"
-
-#. ex:et:ts=4:
-#: ../plugins/charmap/charmap/__init__.py:42
-#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:1
-msgid "Character Map"
-msgstr "文字マップ"
-
-#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:2
-msgid "Insert special characters just by clicking on them."
-msgstr "特殊な文字をクリックしながら挿入していきます。"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:1
-msgid "Source View Settings"
-msgstr "ソースビューアーの設定"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:2
-msgid "Use external editor"
-msgstr "外部エディターを使用する"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:3
-msgid "Program command:"
-msgstr "プログラムコマンド:"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:4
-msgid "Line command:"
-msgstr "行番号を指定する引数:"
-
-#: ../plugins/codeview/gtr-codeview-plugin.c:129
-#, c-format
-msgid "Please install \"%s\" to be able to show the file"
-msgstr "ファイルを表示するために\"%s\"をインストールしてください"
-
-#: ../plugins/codeview/gtr-codeview-plugin.c:497
+#: src/codeview/gtr-codeview.c:353
 msgid "Paths:"
 msgstr "パス:"
 
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:1
-msgid "Source Code View"
-msgstr "ソースコードビューアー"
+#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
+#: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:588
+#: src/gtr-search-dialog.c:391
+#: src/translation-memory/gtr-translation-memory-dialog.c:299
+msgid "_Close"
+msgstr "閉じる(_C)"
 
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:2
-msgid "Show the message in the source code."
-msgstr "メッセージを含むソースコードを表示します。"
-
-#: ../plugins/codeview/gtr-viewer.c:80
+#: src/codeview/gtr-viewer.c:75
 msgid "Source Viewer"
 msgstr "ソースビューアー"
 
-#: ../plugins/codeview/gtr-viewer.ui.h:1
+#: src/codeview/gtr-viewer.ui:59
 msgid "Source code"
 msgstr "ソースコード"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:1
-msgid "Use the System Editor"
-msgstr "システムで設定したエディターを使用する"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:2
-msgid "Whether use the system editor to show the source code"
-msgstr "システムで設定したエディターを使用してソースコードを表示します。"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:3
-msgid "The Editor to Launch"
-msgstr "起動するエディター"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:4
-msgid "The command to launch the editor you want to use"
-msgstr "使用するエディターを起動するコマンドです。"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:5
-msgid "Arguments for the Command"
-msgstr "コマンドの引数"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:6
-msgid "Arguments to pass to the program command line to select the line"
-msgstr "行番号を指定するために、コマンドラインプログラムに渡す引数です。"
-
-#: ../plugins/dictionary/gtr-dictionary-plugin.c:140
-#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:1
-msgid "Dictionary"
-msgstr "辞書"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:166
-#, c-format
-msgid "No dictionary source available with name '%s'"
-msgstr "名前'%s'で利用可能な辞書ソースがありません。"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:170
-msgid "Unable to find dictionary source"
-msgstr "辞書ソースが見つかりません"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:185
-#, c-format
-msgid "No context available for source '%s'"
-msgstr "ソース'%s'で利用可能なコンテキストはありません。"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:189
-msgid "Unable to create a context"
-msgstr "コンテキストを生成できません。"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:272
-#, c-format
-msgid "Dictionary source '%s' selected"
-msgstr "辞書ソース'%s'が選択されました"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:291
-#, c-format
-msgid "Strategy '%s' selected"
-msgstr "方針'%s'が選択されました"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:309
-#, c-format
-msgid "Database '%s' selected"
-msgstr "データベース'%s'が選択されました"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:353
-#, c-format
-msgid "Word '%s' selected"
-msgstr "単語'%s'が選択されました"
-
-#. speller
-#: ../plugins/dictionary/gtr-dict-panel.c:375
-msgid "Double-click on the word to look up"
-msgstr "検索単語をダブルクリック"
-
-#. strat-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:380
-msgid "Double-click on the matching strategy to use"
-msgstr "使用する方針に一致するものをダブルクリック"
-
-#. source-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:386
-msgid "Double-click on the source to use"
-msgstr "使用するソースをダブルクリック"
-
-#. db-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:396
-msgid "Double-click on the database to use"
-msgstr "使用するデータベースをダブルクリック"
-
-#. Look up Button
-#: ../plugins/dictionary/gtr-dict-panel.c:502
-msgid "Look _up:"
-msgstr "検索(_U):"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:559
-msgid "Similar words"
-msgstr "似た単語"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:572
-msgid "Available dictionaries"
-msgstr "利用可能な辞書"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:586
-msgid "Available strategies"
-msgstr "利用可能な方針"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:596
-msgid "Dictionary sources"
-msgstr "辞書ソース"
-
-#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:2
-msgid "Look up words in a dictionary."
-msgstr "辞書を使って単語の意味を調べます。"
-
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:1
-msgid "Database"
-msgstr "データベース"
-
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:2
-msgid "Word database"
-msgstr "単語データベース"
-
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:3
-msgid "Source Name"
-msgstr "ソース名"
-
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:4
-msgid "Strategy"
-msgstr "戦略"
-
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:5
-msgid "Panel Position"
-msgstr "パネルの位置"
-
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:67
-msgid "_Fullscreen"
-msgstr "フルスクリーン(_F)"
-
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:68
-msgid "Place window on fullscreen state"
-msgstr "フルスクリーン状態でウィンドウを配置"
-
-#: ../plugins/fullscreen/gtr-fullscreen.plugin.desktop.in.h:1
-msgid "Fullscreen"
-msgstr "フルスクリーン"
-
-#: ../plugins/fullscreen/gtr-fullscreen.plugin.desktop.in.h:2
-msgid "Place window in the fullscreen state."
-msgstr "ウィンドウをフルスクリーン表示します。"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:113
-msgid "_Next Param"
-msgstr "次のパラメーター(_N)"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:114
-msgid "Insert the next param of the message"
-msgstr "メッセージの次のパラメーターを挿入"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:116
-msgid "_Insert Params"
-msgstr "パラメーターの挿入(_I)"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:117
-msgid "_Next Tag"
-msgstr "次のタグ(_N)"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:118
-msgid "Insert the next tag of the message"
-msgstr "メッセージの次のタグを挿入"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:120
-msgid "_Insert Tags"
-msgstr "タグの挿入(_I)"
-
-#: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:1
-msgid "Insert Params or Tags"
-msgstr "引数またはタグの挿入"
-
-#: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:2
-msgid "Parameters and tags detection featuring easy insertion."
-msgstr "引数とタグを検出して簡単に挿入できるようにします。"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
-msgid "Open Tran Settings"
-msgstr "Open Tran の設定"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
-msgid "Language code for the Open-Tran query:"
-msgstr "Open-Tran への問い合わせの際の言語コード:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
-msgid "Language code of the translated results:"
-msgstr "翻訳結果の言語コード:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:4
-msgid "Use a local \"mirror\" copy of the Open-Tran server"
-msgstr "Open-Tran サーバーのローカルにある「ミラー」コピーを使用"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:5
-msgid "Mirror server URL:"
-msgstr "ミラーサーバーのURL:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:7
-#, no-c-format
-msgid ""
-"<i>The URL should be of the form:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"The two \"%s\" markers and the final slash must not be omitted.</i>"
-msgstr ""
-"<i>URL は次の形式である必要があります:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"二つの \"%s\" と最後のスラッシュは省略できません。</i>"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:10
-msgid "Mirror Server"
-msgstr "ミラーサーバー"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:222
-#, c-format
-msgid "ERROR: Cannot access %s\n"
-msgstr "エラー: %s にアクセスできません\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:238
-msgid "Error in server response, GET failed\n"
-msgstr "サーバーの応答でエラーがありました。GET に失敗\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:250
-#, c-format
-msgid "Cannot parse server response, %s\n"
-msgstr "サーバーの応答を解析できません。%s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:264
-#, c-format
-msgid "Cannot parse server response, not an array? %s\n"
-msgstr "サーバーの応答を解析できません。配列ではない？ %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:287
-#, c-format
-msgid "WRONG! Can't get result element %d\n"
-msgstr "間違い! 結果の要素を取得できません %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:297
-#, c-format
-msgid "WRONG! Can't parse result element %d as object\n"
-msgstr "間違い! 結果の要素 %d をオブジェクトとして解析できません\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:311
-#, c-format
-msgid "WRONG! Can't read projects for result element %d\n"
-msgstr "間違い! 結果の要素 %d のプロジェクトを読み込めません\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:335
-#, c-format
-msgid "%s[%s] Count:%d"
-msgstr "%s[%s] 個数:%d"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:345
-#, c-format
-msgid "WRONG! Malformed project: %d\n"
-msgstr "間違い! 不正な形式のプロジェクトです: %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:359
-#: ../src/gtr-actions-search.c:192
-msgid "Phrase not found"
-msgstr "語句が見つかりませんでした"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:383
-msgid "You have to provide a phrase to search"
-msgstr "検索語句を提供する必要があります"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:392
-msgid "You have to provide a search language code in the plugin configuration"
-msgstr "プラグインの設定で、検索する言語コードを指定する必要があります"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:402
-msgid "You have to provide a language code for your language in the plugin configuration"
-msgstr "プラグインの設定で、あなたが使用する言語の言語コードを指定する必要があります"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:415
-msgid "Either use the main open-tran.eu server, or enter a server URL in the plugin configuration,"
-msgstr "メインの open-tran.eu サーバーを使用するか、プラグインの設定でサーバーの URL を入力してください。"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:453
-msgid "Type"
-msgstr "形式"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:464
-msgid "Open-Tran.eu"
-msgstr "Open-Tran.eu"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:510
-msgid "Look for:"
-msgstr "検索:"
-
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:162
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:1
-msgid "Open Tran"
-msgstr "Open-Tran"
-
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:2
-msgid "Look for phrases in Open tran memory translation database."
-msgstr "Open-Tran という翻訳データベースで単語を調べます。"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:1
-msgid "Search Code"
-msgstr "検索コード"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:2
-msgid "The language code to search for"
-msgstr "検索時の言語コード"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:3
-msgid "Own Code"
-msgstr "表示コード"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:4
-msgid "The language code in which you want the results"
-msgstr "検索結果を表示する際の言語コード"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:5
-msgid "Use Mirror Server"
-msgstr "ミラーサーバーの使用"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:6
-msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
-msgstr "メイン Open-Tran サーバーのローカルコピーを使用します"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:7
-msgid "Mirror Server URL"
-msgstr "ミラーサーバーの URL"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:8
-msgid "URL of an Open-Tran mirror server"
-msgstr "Open-Tran ミラーサーバーの URL"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
-msgid "Strings added to database"
-msgstr "文字列をデータベースに追加しました"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:224
-msgid "Please specify a valid path to build the translation memory"
-msgstr "翻訳メモリーを構築するための有効なパスを指定してください。"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:291
-msgid "Gtranslator Translation Memory Manager"
-msgstr "GTranslator 翻訳メモリーマネージャー"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:1
-msgid "Database:"
-msgstr "データベース:"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:2
-msgid "Select the directory which contains PO files:"
-msgstr "PO ファイルが置かれているフォルダーを選択:"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:3
-msgid "Add to Database"
-msgstr "データベースに追加する"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:4
-msgid "Configuration:"
-msgstr "設定:"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:5
-msgid "Use only files with this name:"
-msgstr "次の名前のファイルだけ使用する:"
-
-#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:1
-#: ../plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
-msgid "Translation Memory"
-msgstr "翻訳メモリー"
-
-#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:2
-msgid "Get translation suggestions from a data base."
-msgstr "データベースから翻訳候補を取得します。"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:207
-#, c-format
-msgid "Insert Option nº %d"
-msgstr "オプションNo.%dの挿入"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:325
-msgid "_Use this translation"
-msgstr "この翻訳を使用(_U)"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:330
-msgid "_Remove"
-msgstr "削除(_R)"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:445
-msgid "Shortcut"
-msgstr "ショートカット"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:454
-msgid "Level"
-msgstr "レベル"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:463
-msgid "String"
-msgstr "文字列"
-
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:81
-msgid "_Build Translation Memory"
-msgstr "翻訳メモリーの構築(_B)"
-
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:82
-msgid "Build translation memory"
-msgstr "翻訳メモリーの構築"
-
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
-#: ../src/gtr-window.c:184
-msgid "_Translation Memory"
-msgstr "翻訳メモリー(_T)"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:1
-msgid "PO directory"
-msgstr "PO が含まれるフォルダー"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:2
-msgid "Directory containing PO files to add to the translation memory."
-msgstr "翻訳メモリーに追加する PO ファイルが含まれるフォルダーです。"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:3
-msgid "Restrict search by filename"
-msgstr "ファイル名で検索を絞る"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:4
-msgid "If true, only include files with a specified filename when searching the translation memory."
-msgstr "true の場合、特定の名前のファイルだけを翻訳メモリーに含めます。"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:5
-msgid "Filename to restrict search to"
-msgstr "翻訳メモリーに含めるファイルの名前"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:6
-msgid "Filename to which searching of the translation memory should be restricted."
-msgstr "翻訳メモリーに含めるファイルを、指定した名前のファイルだけに限定します。"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:7
-msgid "Maximum number of missing words"
-msgstr "メッセージに含まれていない単語数の最大値"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:8
-msgid "Maximum number of words that can be missing from a message displayed as a match by the translation memory."
-msgstr "編集しているメッセージが翻訳メモリーの中にあるメッセージと一致しているかどうかを判定する際のしきい値で、双方のメッセージの間に含まれていない単語の数が最大いくつまで許容できるかを表す数値です (ここで指定した数だけ単語が異なっていても同一のメッセージであると判定します)。"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:9
-msgid "Maximum difference in message length"
-msgstr "メッセージの差異を表す最大値"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:10
-msgid "Maximum difference in length between messages displayed as matches by the translation memory."
-msgstr "編集しているメッセージが翻訳メモリーの中にあるメッセージと一致しているかどうかを判定する際のしきい値で、双方のメッセージの長さがいくつまで異なることが許容できるかを表す数値です (ここで指定した数だけ長さが異なっていても同一のメッセージであると判定します)。"
-
-#: ../src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:48
 msgid "Current Maintainers"
 msgstr "現在のメンテナー"
 
-#: ../src/gtr-actions-app.c:52
-msgid "Current Developers"
-msgstr "現在の開発者"
-
-#: ../src/gtr-actions-app.c:56
+#: src/gtr-actions-app.c:52
 msgid "Previous Developers"
 msgstr "前バージョンの開発者"
 
-#: ../src/gtr-actions-app.c:66
+#: src/gtr-actions-app.c:63
 msgid "Contributors"
 msgstr "寄稿者"
 
-#: ../src/gtr-actions-app.c:90
-msgid "Translation file editing suite for localization of applications and libraries."
+#: src/gtr-actions-app.c:88
+msgid ""
+"Translation file editing suite for localization of applications and "
+"libraries."
 msgstr "アプリケーションやライブラリのメッセージを編集するツールです。"
-
-#: ../src/gtr-actions-app.c:106
-msgid "About Gtranslator"
-msgstr "このアプリケーションについて"
 
 #.
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/gtr-actions-app.c:111
+#: src/gtr-actions-app.c:101
 msgid "translator-credits"
 msgstr ""
 "相花 毅 <takeshi.aihana@gmail.com>\n"
-"Nishio Futoshi <fut_nis@d3.dion.ne.jp>\n"
 "草野 貴之 <AE5T-KSN@asahi-net.or.jp>\n"
-"IWAI, Masaharu <iwaim.sub@gmail.com>\n"
-"Hiroyuki Sekihara <hiroyuki.sekihara@gmail.com>\n"
+"日本 GNOME ユーザー会 <http://www.gnome.gr.jp/>\n"
 "松澤 二郎 <jmatsuzawa@gnome.org>\n"
+"Hiroyuki Sekihara <hiroyuki.sekihara@gmail.com>\n"
+"IWAI, Masaharu <iwaim.sub@gmail.com>\n"
+"Nishio Futoshi <fut_nis@d3.dion.ne.jp>\n"
 "OKANO Takayoshi <kano@na.rim.or.jp>\n"
-"Yoji TOYODA <bsyamato@sea.plala.or.jp>\n"
-"日本GNOMEユーザー会 <http://www.gnome.gr.jp/>"
+"sicklylife <translation@sicklylife.jp>\n"
+"Yoji TOYODA <bsyamato@sea.plala.or.jp>"
 
-#: ../src/gtr-actions-app.c:114
-msgid "Gtranslator Web Site"
-msgstr "Gtranslator のウェブサイト"
+#: src/gtr-actions-app.c:104
+msgid "Translation Editor Web Site"
+msgstr "翻訳エディターのウェブサイト"
 
-#: ../src/gtr-actions-file.c:201
+#: src/gtr-actions-file.c:200
 msgid "Open file for translation"
 msgstr "翻訳するファイルの選択"
 
-#: ../src/gtr-actions-file.c:273 ../src/gtr-actions-file.c:390
+#: src/gtr-actions-file.c:272 src/gtr-actions-file.c:389
 msgid "File saved."
 msgstr "ファイルを保存しました"
 
-#: ../src/gtr-actions-file.c:321
-msgid "Save file as..."
-msgstr "名前を付けて保存..."
+#: src/gtr-actions-file.c:320
+msgid "Save file as…"
+msgstr "名前を付けて保存…"
 
-#: ../src/gtr-actions-file.c:779
+#: src/gtr-actions-file.c:781
 msgid "Files saved."
 msgstr "ファイルを保存しました。"
 
-#: ../src/gtr-actions-search.c:171
+#: src/gtr-actions-search.c:168
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
 msgstr[0] "%d個見つかり置換しました"
 
-#: ../src/gtr-actions-search.c:180
+#: src/gtr-actions-search.c:177
 msgid "Found and replaced one occurrence"
 msgstr "1つ置換"
 
-#: ../src/gtranslator-menu.ui.h:1
-msgid "_New Window"
-msgstr "新しいウィンドウ(_N)"
+#: src/gtr-actions-search.c:189
+msgid "Phrase not found"
+msgstr "語句が見つかりませんでした"
 
-#: ../src/gtranslator-menu.ui.h:2
-msgid "_Preferences"
-msgstr "設定(_P)"
-
-#: ../src/gtranslator-menu.ui.h:3
-msgid "_Help"
-msgstr "ヘルプ(_H)"
-
-#: ../src/gtranslator-menu.ui.h:4
-msgid "_About"
-msgstr "このアプリケーションについて(_A)"
-
-#: ../src/gtranslator-menu.ui.h:5
-msgid "_Quit"
-msgstr "終了(_Q)"
-
-#: ../src/gtr-assistant.c:130
+#: src/gtr-assistant.c:128
 #, c-format
 msgid ""
 "Profile name: %s\n"
@@ -832,886 +302,1542 @@ msgid ""
 msgstr ""
 "プロファイル名: %s\n"
 "翻訳者の名前: %s\n"
-"翻訳者の E-メール: %s\n"
+"翻訳者のメール: %s\n"
 "言語の名前: %s\n"
-"翻訳チームの E-メール: %s\n"
+"翻訳チームのメール: %s\n"
 "言語のコード: %s\n"
-"文字セット: %s\n"
+"文字集合: %s\n"
 "エンコーディング: %s\n"
 "複数形の形式: %s\n"
 
-#: ../src/gtr-assistant.c:169
+#: src/gtr-assistant.c:167
 msgid "This assistant will help you to create the main profile."
-msgstr "このアシスタントはメインプロファイルを作成するお手伝いをします。"
+msgstr "このアシスタント機能でメインプロファイルを作成します。"
 
-#: ../src/gtr-assistant.c:174
+#: src/gtr-assistant.c:172
 msgid "Assistant"
 msgstr "アシスタント"
 
-#: ../src/gtr-assistant.c:247
-msgid "Profile name:"
-msgstr "プロファイル名:"
+#: src/gtr-assistant.c:258
+msgid "Profile name"
+msgstr "プロファイル名"
 
-#: ../src/gtr-assistant.c:289
-msgid "Translator email:"
-msgstr "翻訳者の E-メール:"
+#: src/gtr-assistant.c:302
+msgid "Translator email"
+msgstr "翻訳者のメール"
 
-#: ../src/gtr-assistant.c:303 ../src/gtr-assistant.c:395
-#: ../src/gtr-preferences-dialog.c:551 ../src/gtr-window.c:1232
+#: src/gtr-assistant.c:324
+msgid "Team email"
+msgstr "翻訳チームのメール"
+
+#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:521
+#: src/gtr-window.c:554
 msgid "Profile"
 msgstr "プロファイル"
 
-#: ../src/gtr-assistant.c:415
+#: src/gtr-assistant.c:429
+msgid "Language"
+msgstr "言語"
+
+#: src/gtr-assistant.c:450
 msgid "Confirmation"
 msgstr "確認"
 
-#: ../src/gtr-close-confirmation-dialog.c:127
+#: src/gtr-close-confirmation-dialog.c:123
 msgid "Close _without Saving"
 msgstr "保存せずに閉じる(_W)"
 
-#: ../src/gtr-close-confirmation-dialog.c:156
+#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:86
+#: src/gtr-file-dialogs.c:45 src/gtr-jump-dialog.c:90
+#: src/gtr-preferences-dialog.c:394 src/gtr-profile-dialog.c:71
+#: src/translation-memory/gtr-translation-memory-dialog.c:81
+msgid "_Cancel"
+msgstr "キャンセル(_C)"
+
+#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:84
+#: src/gtr-file-dialogs.c:47
+msgid "_Save"
+msgstr "保存(_S)"
+
+#: src/gtr-close-confirmation-dialog.c:150
 msgid "Question"
 msgstr "質問"
 
-#: ../src/gtr-close-confirmation-dialog.c:371
+#: src/gtr-close-confirmation-dialog.c:366
 #, c-format
-msgid "Save the changes to document \"%s\" before closing?"
-msgstr "閉じる前に \"%s\" ファイルへの変更点を保存しますか?"
+msgid "Save the changes to document “%s” before closing?"
+msgstr "閉じる前に“%s”への変更点を保存しますか?"
 
-#: ../src/gtr-close-confirmation-dialog.c:534
+#: src/gtr-close-confirmation-dialog.c:530
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] "%d 個のファイルに対する変更点を完全に失うことになります。"
 
-#: ../src/gtr-close-confirmation-dialog.c:541
+#: src/gtr-close-confirmation-dialog.c:537
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
-msgid_plural "There are %d documents with unsaved changes. Save changes before closing?"
-msgstr[0] "未だ保存していない変更点を含むファイルが %d 個あります。閉じる前に保存しますか?"
+msgid_plural ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr[0] ""
+"未だ保存していない変更点を含むファイルが %d 個あります。閉じる前に保存します"
+"か?"
 
-#: ../src/gtr-close-confirmation-dialog.c:562
+#: src/gtr-close-confirmation-dialog.c:558
 msgid "Docum_ents with unsaved changes:"
 msgstr "未だ保存していない変更点を含むファイル(_E):"
 
-#: ../src/gtr-close-confirmation-dialog.c:566
+#: src/gtr-close-confirmation-dialog.c:562
 msgid "S_elect the documents you want to save:"
 msgstr "保存するファイルを選択してください(_E):"
 
-#: ../src/gtr-close-confirmation-dialog.c:584
+#: src/gtr-close-confirmation-dialog.c:581
 msgid "Saving has been disabled by the system administrator."
 msgstr "システム管理者によってファイルの保存が禁じられています。"
 
-#: ../src/gtr-close-confirmation-dialog.c:586
-msgid "If you don't save, all your changes will be permanently lost."
+#: src/gtr-close-confirmation-dialog.c:583
+msgid "If you don’t save, all your changes will be permanently lost."
 msgstr "保存しないと、すべての変更点を完全に失うことになります。"
 
-#: ../src/gtr-context.c:232
+#: src/gtr-context.c:81
+msgid "Edit notes"
+msgstr ""
+
+#: src/gtr-context.c:268
 msgid "Notes:"
 msgstr "メモ:"
 
-#: ../src/gtr-context.c:240
+#: src/gtr-context.c:276
 msgid "Add Note"
 msgstr "メモを追加:"
 
-#: ../src/gtr-context.c:245
+#: src/gtr-context.c:281
 msgid "Edit"
 msgstr "編集"
 
 #. Extracted comments
-#: ../src/gtr-context.c:288
+#: src/gtr-context.c:327
 msgid "Extracted comments:"
 msgstr "追加のコメント:"
 
 #. Context
-#: ../src/gtr-context.c:292
+#: src/gtr-context.c:331
 msgid "Context:"
 msgstr "コンテキスト:"
 
 #. Format
-#: ../src/gtr-context.c:296
+#: src/gtr-context.c:335
 msgid "Format:"
 msgstr "書式:"
 
-#: ../src/gtr-context.c:392
-msgid "D_one"
-msgstr "完了(_O)"
+#: src/gtr-file-dialogs.c:48
+msgid "_Open"
+msgstr "開く(_O)"
 
-#: ../src/gtr-file-dialogs.c:62
+#: src/gtr-file-dialogs.c:62
 msgid "Gettext translation"
 msgstr "PO ファイル"
 
-#: ../src/gtr-file-dialogs.c:71
+#: src/gtr-file-dialogs.c:71
 msgid "Gettext translation template"
 msgstr "POT ファイル"
 
-#: ../src/gtr-file-dialogs.c:76
+#: src/gtr-file-dialogs.c:76
 msgid "All files"
 msgstr "すべてのファイル"
 
-#: ../src/gtr-header-dialog.c:269
+#: src/gtr-header-dialog.c:280
 msgid "Edit Header"
 msgstr "ヘッダーの編集"
 
-#: ../src/gtr-header-dialog.ui.h:1
-msgid "Comment"
-msgstr "コメント"
-
-#: ../src/gtr-header-dialog.ui.h:2
-msgid "Project Id _version:"
-msgstr "プロジェクトのバージョン(_V):"
-
-#: ../src/gtr-header-dialog.ui.h:3
-msgid "Pot _file creation date:"
-msgstr "POT ファイルの生成日(_F):"
-
-#: ../src/gtr-header-dialog.ui.h:4
-msgid "Po file _revision date:"
-msgstr "PO ファイルの更新日(_R):"
-
-#: ../src/gtr-header-dialog.ui.h:5
-msgid "Report message _bugs to:"
-msgstr "バグの報告先(_B):"
-
-#: ../src/gtr-header-dialog.ui.h:6
-msgid "Project"
-msgstr "プロジェクト"
-
-#: ../src/gtr-header-dialog.ui.h:7
+#: src/gtr-header-dialog.ui:65
 msgid "Use my options to complete the following entries:"
 msgstr "ここで設定したオプションを適用する:"
 
-#: ../src/gtr-header-dialog.ui.h:8
-msgid "Translator's _name:"
+#: src/gtr-header-dialog.ui:89
+msgid "Translator’s _name:"
 msgstr "翻訳者の氏名(_N):"
 
-#: ../src/gtr-header-dialog.ui.h:9
-msgid "Translator's _email:"
-msgstr "翻訳者の E-メール(_E):"
+#: src/gtr-header-dialog.ui:103
+msgid "Translator’s _email:"
+msgstr "翻訳者のメール(_E):"
 
-#: ../src/gtr-header-dialog.ui.h:10 ../src/gtr-languages-fetcher.ui.h:5
+#: src/gtr-header-dialog.ui:117
 msgid "_Language:"
 msgstr "言語(_L):"
 
-#: ../src/gtr-header-dialog.ui.h:11
-msgid "Language gro_up email:"
-msgstr "翻訳チームの E-メール(_U):"
-
-#: ../src/gtr-header-dialog.ui.h:12
-msgid "Char_set:"
-msgstr "文字セット(_S):"
-
-#: ../src/gtr-header-dialog.ui.h:13
-msgid "Enc_oding:"
-msgstr "エンコーディング(_O):"
-
-#: ../src/gtr-header-dialog.ui.h:14
-msgid "Translator and Language"
-msgstr "翻訳者と言語"
-
-#: ../src/gtr-jump-dialog.c:93
-msgid "Go to Message"
-msgstr "メッセージに移動"
-
-#: ../src/gtr-jump-dialog.ui.h:1
-msgid "Enter message number:"
-msgstr "メッセージの番号を入力してください:"
-
-#: ../src/gtr-languages-fetcher.ui.h:1
-msgid "_Team email:"
-msgstr "翻訳チームの E-メール(_T):"
-
-#: ../src/gtr-languages-fetcher.ui.h:2
-msgid "Transfer en_coding:"
-msgstr "エンコーディング(_C):"
-
-#: ../src/gtr-languages-fetcher.ui.h:3
-msgid "Character _set"
-msgstr "文字セット(_S)"
-
-#: ../src/gtr-languages-fetcher.ui.h:4
+#: src/gtr-header-dialog.ui:130
 msgid "Language _code:"
 msgstr "言語のコード(_C):"
 
-#: ../src/gtr-languages-fetcher.ui.h:6
-msgid "_Plural forms:"
-msgstr "複数形の形式(_P):"
+#: src/gtr-header-dialog.ui:143
+msgid "Language gro_up email:"
+msgstr "翻訳チームのメール(_U):"
 
-#: ../src/gtr-message-table.c:175
-msgid "Status"
-msgstr "状態"
+#: src/gtr-header-dialog.ui:156
+msgid "Char_set:"
+msgstr "文字セット(_S):"
 
-#: ../src/gtr-message-table.c:187
-msgid "ID"
-msgstr "ID"
+#: src/gtr-header-dialog.ui:169
+msgid "Enc_oding:"
+msgstr "エンコーディング(_O):"
 
-#: ../src/gtr-message-table.c:202
+#: src/gtr-header-dialog.ui:267
+msgid "Translator and Language"
+msgstr "翻訳者と言語"
+
+#: src/gtr-header-dialog.ui:290
+msgid "Project Id _version:"
+msgstr "プロジェクトのバージョン(_V):"
+
+#: src/gtr-header-dialog.ui:303
+msgid "Pot _file creation date:"
+msgstr "POT ファイルの生成日(_F):"
+
+#: src/gtr-header-dialog.ui:317
+msgid "Po file _revision date:"
+msgstr "PO ファイルの更新日(_R):"
+
+#: src/gtr-header-dialog.ui:331
+msgid "Report message _bugs to:"
+msgstr "バグの報告先(_B):"
+
+#: src/gtr-header-dialog.ui:400
+msgid "Project"
+msgstr "プロジェクト"
+
+#: src/gtr-header-dialog.ui:430
+msgid "Comment"
+msgstr "コメント"
+
+#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
+#: src/gtr-profile-dialog.c:170
+#: src/translation-memory/gtr-translation-memory-dialog.c:80
+msgid "_OK"
+msgstr "OK(_O)"
+
+#: src/gtr-jump-dialog.c:92
+msgid "Go to Message"
+msgstr "メッセージに移動"
+
+#: src/gtr-jump-dialog.ui:30
+msgid "Enter message number:"
+msgstr "メッセージの番号を入力してください:"
+
+#: src/gtr-lang-button.ui:61 src/gtr-lang-button.ui:70
+msgid "Choose Language"
+msgstr "言語を選択"
+
+#: src/gtr-languages-fetcher.ui:46
+msgid "_Language"
+msgstr "言語(_L)"
+
+#: src/gtr-languages-fetcher.ui:60
+msgid "Language _code"
+msgstr "言語のコード"
+
+#: src/gtr-languages-fetcher.ui:74
+msgid "Character _set"
+msgstr "文字セット(_S)"
+
+#: src/gtr-languages-fetcher.ui:88
+msgid "Transfer en_coding"
+msgstr "エンコーディング(_C)"
+
+#: src/gtr-languages-fetcher.ui:102
+msgid "_Plural forms"
+msgstr "複数形の形式(_P)"
+
+#: src/gtr-languages-fetcher.ui:200
+msgid "Edit options manually"
+msgstr ""
+
+#: src/gtr-message-table.c:219
 msgid "Original Message"
 msgstr "原文"
 
-#: ../src/gtr-message-table.c:217
+#: src/gtr-message-table.c:238
 msgid "Translated Message"
 msgstr "翻訳文"
 
-#: ../src/gtr-po.c:439
+#: src/gtr-notebook.ui:26
+msgid "Order messages by"
+msgstr ""
+
+#: src/gtr-notebook.ui:58
+msgid "Appearance in the original file"
+msgstr ""
+
+#: src/gtr-notebook.ui:72
+msgid "Message status"
+msgstr "メッセージのステータス"
+
+#: src/gtr-notebook.ui:87
+msgid "Original message"
+msgstr "原文"
+
+#: src/gtr-notebook.ui:102
+msgid "Translated message"
+msgstr "翻訳文"
+
+#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:369
+#: src/gtr-search-dialog.c:449
+msgid "Find"
+msgstr "検索"
+
+#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:453
+msgid "Find and replace"
+msgstr "検索と置換"
+
+#: src/gtr-notebook.ui:164
+msgid "Build translation memory"
+msgstr "翻訳メモリの構築"
+
+#: src/gtr-notebook.ui:179
+msgid "Edit header"
+msgstr "ヘッダーの編集"
+
+#: src/gtr-notebook.ui:207 src/gtr-projects.ui:109
+msgid "New window"
+msgstr "新しいウィンドウ"
+
+#: src/gtr-notebook.ui:221 src/gtr-projects.ui:123
+msgid "Preferences"
+msgstr "設定"
+
+#: src/gtr-notebook.ui:248 src/gtr-projects.ui:150
+msgid "Keyboard Shortcuts"
+msgstr "キーボードショートカット"
+
+#: src/gtr-notebook.ui:262 src/gtr-projects.ui:164
+msgid "About"
+msgstr "このアプリケーションについて"
+
+#: src/gtr-notebook.ui:276 src/gtr-projects.ui:178
+msgid "Quit"
+msgstr "終了"
+
+#: src/gtr-notebook.ui:298 src/gtr-projects.ui:58
+msgid "Open…"
+msgstr "開く…"
+
+#: src/gtr-notebook.ui:302
+msgid "Open a new file (<Ctrl>o)"
+msgstr "新しいファイルを開く(<Ctrl>o)"
+
+#: src/gtr-notebook.ui:328
+msgid "Undo (<Ctrl>z)"
+msgstr "元に戻す(<Ctrl>z)"
+
+#: src/gtr-notebook.ui:350
+msgid "Redo (<Ctrl><Shift>z)"
+msgstr "やり直す(<Ctrl><Shift>z)"
+
+#: src/gtr-notebook.ui:395
+msgid "Previous message without translation (<Alt><Page Up>)"
+msgstr "前の未翻訳メッセージ(<Alt><Page Up>)"
+
+#: src/gtr-notebook.ui:417
+msgid "Next message without translation (<Alt><Page Down>)"
+msgstr "次の未翻訳メッセージ(<Alt><Page Down>)"
+
+#: src/gtr-notebook.ui:457
+msgid "Toggle fuzzy state (<Ctrl>+u)"
+msgstr "fuzzy の ON/OFF(<Ctrl>+u)"
+
+#: src/gtr-notebook.ui:487
+msgid "Order by menu"
+msgstr ""
+
+#: src/gtr-notebook.ui:511 src/gtr-projects.ui:81
+msgid "Main Menu"
+msgstr ""
+
+#: src/gtr-notebook.ui:527
+msgid "Save"
+msgstr "保存"
+
+#: src/gtr-notebook.ui:531
+msgid "Save the current file (<Ctrl>s)"
+msgstr "このファイルを保存(<Ctrl>s)"
+
+#: src/gtr-notebook.ui:546
+msgid "Save as (<Ctrl><Shift>s)"
+msgstr "名前をつけて保存(<Ctrl><Shift>s)"
+
+#: src/gtr-po.c:440
 #, c-format
 msgid "The file is empty"
 msgstr "ファイルは空です"
 
-#: ../src/gtr-po.c:448
+#: src/gtr-po.c:449
 #, c-format
-msgid "Failed opening file '%s': %s"
-msgstr "'%s'というファイルを開けませんでした: %s"
+msgid "Failed opening file “%s”: %s"
+msgstr "“%s”というファイルを開けませんでした: %s"
 
-#: ../src/gtr-po.c:522
+#: src/gtr-po.c:530
 #, c-format
-msgid "Could not convert from charset '%s' to UTF-8"
-msgstr "文字セット '%s' から UTF-8 に変換できません"
+msgid "Could not convert from charset “%s” to UTF-8"
+msgstr "文字セット“%s”から UTF-8 に変換できません"
 
-#: ../src/gtr-po.c:539 ../src/gtr-po.c:559
+#: src/gtr-po.c:547 src/gtr-po.c:567
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
-msgstr "エンコーディング変換用の一時ファイルに保存できません"
+msgstr ""
 
-#: ../src/gtr-po.c:596
+#: src/gtr-po.c:604
 #, c-format
-msgid "All attempt to convert the file to UTF-8 has failed, use the msgconv or iconv command line tools before opening this file with gtranslator"
-msgstr "Gtranslator でこのファイルを UTF-8 に変換できませんでした。事前に msgconv, iconv 等のコマンドを使用して UTF-8 に変換してください。"
+msgid ""
+"All attempt to convert the file to UTF-8 has failed, use the msgconv or "
+"iconv command line tools before opening this file with GNOME Translation "
+"Editor"
+msgstr ""
+"GNOME 翻訳エディターでこのファイルを UTF-8 に変換できませんでした。事前に msgconv"
+"や iconv などのコマンドで UTF-8 に変換してください。"
 
-#: ../src/gtr-po.c:664
+#: src/gtr-po.c:672
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext が null ドメインリストを返しました"
 
-#: ../src/gtr-po.c:709
+#: src/gtr-po.c:717
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "パーサーからメッセージを取得できませんでした"
 
-#: ../src/gtr-po.c:757
+#: src/gtr-po.c:768
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
 "Pot files are generated by the compilation process.\n"
-"Your file should likely be named '%s.po'."
+"Your file should likely be named “%s.po”."
 msgstr ""
 "*.pot という拡張子でファイルを保存します。\n"
 "POT ファイルはプログラムのコンパイル時に生成されます。\n"
-"翻訳するファイルには '%s.po' という名前を付けてください。"
+"翻訳するファイルには“%s.po”という名前を付けてください。"
 
-#: ../src/gtr-po.c:770
+#: src/gtr-po.c:781
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
-msgstr "ファイル%sは読み込み専用なので、上書きできません"
+msgstr "ファイル %s は読み込み専用なので、上書きできません"
 
-#: ../src/gtr-po.c:801
+#: src/gtr-po.c:800
+#, c-format
+msgid "There is an error in the PO file: %s"
+msgstr "PO ファイル中にエラー: %s"
+
+#: src/gtr-po.c:812
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "PO ファイルの保存中にエラー: %s"
 
-#: ../src/gtr-preferences-dialog.c:402
+#: src/gtr-preferences-dialog.c:370
 msgid "Impossible to remove the active profile"
 msgstr "現在有効になっているプロファイルは削除できません"
 
-#: ../src/gtr-preferences-dialog.c:408
+#: src/gtr-preferences-dialog.c:376
 msgid "Another profile should be selected as active before"
 msgstr "別のプロファイルを選択してください"
 
-#: ../src/gtr-preferences-dialog.c:421
+#: src/gtr-preferences-dialog.c:389
 msgid "Are you sure you want to delete this profile?"
 msgstr "このプロファイルを削除してもよろしいですか?"
 
-#: ../src/gtr-preferences-dialog.c:557
+#: src/gtr-preferences-dialog.c:397
+msgid "_Delete"
+msgstr "削除(_D)"
+
+#: src/gtr-preferences-dialog.c:527
 msgid "Active"
 msgstr "有効"
 
-#: ../src/gtr-preferences-dialog.c:648 ../src/gtr-preferences-dialog.ui.h:1
-msgid "Gtranslator Preferences"
-msgstr "Gtranslator の設定"
+#: src/gtr-preferences-dialog.c:589
+msgid "Help"
+msgstr "ヘルプ"
 
-#: ../src/gtr-preferences-dialog.ui.h:2
+#: src/gtr-preferences-dialog.c:591 src/gtr-preferences-dialog.ui:49
+msgid "Translation Editor Preferences"
+msgstr "翻訳エディターの設定"
+
+#: src/gtr-preferences-dialog.ui:119
 msgid "General"
 msgstr "全般"
 
-#: ../src/gtr-preferences-dialog.ui.h:3
+#: src/gtr-preferences-dialog.ui:138
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "PO ファイルに fuzzy メッセージが残っていれば警告する(_W)"
 
-#: ../src/gtr-preferences-dialog.ui.h:4
+#: src/gtr-preferences-dialog.ui:160
 msgid "Autosave"
 msgstr "自動保存"
 
-#: ../src/gtr-preferences-dialog.ui.h:5
+#: src/gtr-preferences-dialog.ui:184
 msgid "Create a _backup copy of files before saving"
 msgstr "保存する前にバックアップを作成する(_B)"
 
-#: ../src/gtr-preferences-dialog.ui.h:6
+#: src/gtr-preferences-dialog.ui:206
 msgid "_Autosave files every"
 msgstr "自動保存する(_A): "
 
-#: ../src/gtr-preferences-dialog.ui.h:7
+#: src/gtr-preferences-dialog.ui:230
 msgid "_minutes"
 msgstr "分ごと(_M)"
 
-#: ../src/gtr-preferences-dialog.ui.h:8
+#: src/gtr-preferences-dialog.ui:288
 msgid "Files"
 msgstr "ファイル"
 
-#: ../src/gtr-preferences-dialog.ui.h:9
+#: src/gtr-preferences-dialog.ui:312
 msgid "Text Display"
 msgstr "メッセージの表示"
 
-#: ../src/gtr-preferences-dialog.ui.h:10
+#: src/gtr-preferences-dialog.ui:335
 msgid "_Highlight message syntax"
 msgstr "メッセージのシンタックスハイライトを有効にする(_H)"
 
-#: ../src/gtr-preferences-dialog.ui.h:11
+#: src/gtr-preferences-dialog.ui:351
 msgid "Make _whitespace visible"
 msgstr "空白文字を表示する(_W)"
 
-#: ../src/gtr-preferences-dialog.ui.h:12
-msgid "Use _custom font"
-msgstr "フォントを指定する(_C):"
-
-#: ../src/gtr-preferences-dialog.ui.h:13
-msgid "Editor _font:"
-msgstr "エディターのフォント(_F):"
-
-#: ../src/gtr-preferences-dialog.ui.h:14
+#: src/gtr-preferences-dialog.ui:392
 msgid "Contents"
 msgstr "目次"
 
-#: ../src/gtr-preferences-dialog.ui.h:15
+#: src/gtr-preferences-dialog.ui:415
 msgid "_Remove fuzzy status if message is changed"
-msgstr "メッセージを編集すれば fuzzy を解除する(_R)"
+msgstr "メッセージを編集したら fuzzy を解除する(_R)"
 
-#: ../src/gtr-preferences-dialog.ui.h:16
+#: src/gtr-preferences-dialog.ui:431
 msgid "Check _spelling"
 msgstr "スペルをチェックする(_S)"
 
-#: ../src/gtr-preferences-dialog.ui.h:17
+#: src/gtr-preferences-dialog.ui:470
 msgid "Editor"
 msgstr "エディター"
 
-#: ../src/gtr-preferences-dialog.ui.h:18
+#: src/gtr-preferences-dialog.ui:569
 msgid "Edit Profile"
 msgstr "プロファイルの編集"
 
-#: ../src/gtr-preferences-dialog.ui.h:19
+#: src/gtr-preferences-dialog.ui:606
 msgid "Profiles"
 msgstr "プロファイル"
 
-#: ../src/gtr-preferences-dialog.ui.h:20
-msgid "Plugins"
-msgstr "プラグイン"
+#: src/gtr-profile-dialog.c:73
+msgid "Translation Editor Profile"
+msgstr "翻訳エディターのプロファイル"
 
-#: ../src/gtr-profile-dialog.c:82
-msgid "Gtranslator Profile"
-msgstr "Gtranslator のプロファイル"
+#: src/gtr-profile-dialog.ui:68
+msgid "_Name"
+msgstr "名前(_N)"
 
-#: ../src/gtr-profile-dialog.ui.h:1
+#: src/gtr-profile-dialog.ui:96
 msgid "Profile Information"
 msgstr "プロファイルの情報"
 
-#: ../src/gtr-profile-dialog.ui.h:2
-msgid "_Name:"
-msgstr "名前(_N):"
-
-#: ../src/gtr-profile-dialog.ui.h:3
+#: src/gtr-profile-dialog.ui:113
 msgid "Translator Information"
 msgstr "翻訳者の情報"
 
-#: ../src/gtr-profile-dialog.ui.h:4
-msgid "_Email:"
-msgstr "E-メール(_E):"
+#: src/gtr-profile-dialog.ui:131
+msgid "N_ame"
+msgstr "名前(_A)"
 
-#: ../src/gtr-profile-dialog.ui.h:5
-msgid "N_ame:"
-msgstr "名前(_A):"
+#: src/gtr-profile-dialog.ui:146
+msgid "_Email"
+msgstr "メール(_E)"
 
-#: ../src/gtr-profile-dialog.ui.h:6
+#: src/gtr-profile-dialog.ui:160
+msgid "_Team email"
+msgstr "翻訳チームのメール(_T)"
+
+#: src/gtr-profile-dialog.ui:209
 msgid "Language Settings"
 msgstr "言語の設定"
 
-#: ../src/gtr-search-dialog.c:348 ../src/gtr-search-dialog.ui.h:1
+#: src/gtr-projects.ui:35
+msgid "Open a new .po file or drag & drop here"
+msgstr ""
+
+#: src/gtr-projects.ui:51
+msgid "Select a PO file"
+msgstr ""
+
+#: src/gtr-search-dialog.c:347 src/gtr-search-dialog.ui:6
+#: src/gtr-search-dialog.ui:53
 msgid "Replace"
 msgstr "置換"
 
-#: ../src/gtr-search-dialog.c:370
-msgid "Find"
-msgstr "検索"
-
-#: ../src/gtr-search-dialog.c:458
+#: src/gtr-search-dialog.c:451
 msgid "Replace _All"
 msgstr "すべて置換(_A)"
 
-#: ../src/gtr-search-dialog.c:462
+#: src/gtr-search-dialog.c:455
 msgid "_Replace"
 msgstr "置換(_R)"
 
-#: ../src/gtr-search-dialog.ui.h:2
+#: src/gtr-search-dialog.ui:37
 msgid "Replace All"
 msgstr "すべて置換"
 
-#: ../src/gtr-search-dialog.ui.h:3
+#: src/gtr-search-dialog.ui:109
 msgid "_Search for: "
 msgstr "検索する文字列(_S):"
 
-#: ../src/gtr-search-dialog.ui.h:4
+#: src/gtr-search-dialog.ui:124
 msgid "Replace _with: "
 msgstr "置換後の文字列(_W):"
 
-#: ../src/gtr-search-dialog.ui.h:5
+#: src/gtr-search-dialog.ui:160
 msgid "_Original text"
 msgstr "原文のメッセージ(_O)"
 
-#: ../src/gtr-search-dialog.ui.h:6
+#: src/gtr-search-dialog.ui:177
 msgid "_Translated text"
 msgstr "翻訳文(_T)"
 
-#: ../src/gtr-search-dialog.ui.h:7
-msgid "Include fu_zzy strings"
-msgstr "fuzzy な文字列を含める(_Z)"
-
-#: ../src/gtr-search-dialog.ui.h:8
+#: src/gtr-search-dialog.ui:213
 msgid "_Match case"
 msgstr "大/小文字を区別する(_M)"
 
-#: ../src/gtr-search-dialog.ui.h:9
+#: src/gtr-search-dialog.ui:229
 msgid "Match _entire word only"
 msgstr "完全に一致する単語だけ(_E)"
 
-#: ../src/gtr-search-dialog.ui.h:10
+#: src/gtr-search-dialog.ui:245
 msgid "Search _backwards"
 msgstr "先頭に向かって検索する(_B)"
 
-#: ../src/gtr-search-dialog.ui.h:11
+#: src/gtr-search-dialog.ui:262
 msgid "_Wrap around"
 msgstr "折り返しも対象にする(_W)"
 
-#: ../src/gtr-statusbar.c:119 ../src/gtr-statusbar.c:248
+#: src/gtr-statusbar.c:117 src/gtr-statusbar.c:252
 msgid "INS"
 msgstr "[挿入]"
 
-#: ../src/gtr-statusbar.c:120 ../src/gtr-statusbar.c:244
+#: src/gtr-statusbar.c:118 src/gtr-statusbar.c:248
 msgid "OVR"
 msgstr "[上書き]"
 
-#: ../src/gtr-tab.c:316
+#: src/gtr-tab-label.c:278
+msgid "Close document"
+msgstr "このファイルを閉じます"
+
+#: src/gtr-tab.c:246
 msgid "There is an error in the message:"
 msgstr "メッセージの中にエラーが含まれています:"
 
-#: ../src/gtr-tab.c:627
+#: src/gtr-tab.c:459 src/gtr-tab.c:570
+msgid "fuzzy"
+msgstr "fuzzy"
+
+#: src/gtr-tab.c:600
 #, c-format
 msgid "Plural %d"
 msgstr "複数形 %d"
 
-#: ../src/gtr-tab.c:749
-msgid "Message Table"
-msgstr "メッセージテーブル"
-
-#: ../src/gtr-tab.c:759
-msgid "Original Message:"
-msgstr "原文のメッセージ:"
-
-#: ../src/gtr-tab.c:813
-msgid "Translate_d Text:"
-msgstr "翻訳済のメッセージ(_D):"
-
-#: ../src/gtr-tab.c:832
-msgid "Translation Fields"
-msgstr "翻訳領域"
-
-#: ../src/gtr-tab.c:842
-msgid "Message Details"
-msgstr "メッセージの詳細"
-
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1331
+#: src/gtr-tab.c:1153
 msgid "Path:"
 msgstr "パス:"
 
-#: ../src/gtr-tab-label.c:278
-msgid "Close document"
-msgstr "このファイルを閉じます"
-
-#: ../src/gtr-utils.c:517
-msgid "Unable to display help. Please make sure the Gtranslator documentation package is installed."
-msgstr "ヘルプを表示できません。Gtranslator のドキュメントが入ったパッケージがインストールされているか確認してください。"
-
-#: ../src/gtr-view.c:83
+#: src/gtr-tab.c:1803
 #, c-format
-msgid "gtkspell error: %s\n"
-msgstr "gtkspell のエラー: %s\n"
+msgid "Translated: %0.2f%%"
+msgstr "翻訳済み: %0.2f%%"
 
-#: ../src/gtr-view.c:85
+#: src/gtr-tab.c:1804
 #, c-format
+msgid "Translated: %d"
+msgstr "翻訳済み: %d"
+
+#: src/gtr-tab.c:1805
+#, c-format
+msgid "Untranslated: %d"
+msgstr "未訳: %d"
+
+#: src/gtr-tab.c:1806
+#, c-format
+msgid "Fuzzy: %d"
+msgstr "fuzzy: %d"
+
+#: src/gtr-tab.ui:153
+msgid "_Original Message"
+msgstr "原文(_O)"
+
+#: src/gtr-tab.ui:245
+msgid "Translate_d Text"
+msgstr "翻訳文(_D):"
+
+#: src/gtr-utils.c:516
 msgid ""
-"GtkSpell was unable to initialize.\n"
-" %s"
+"Unable to display help. Please make sure the Translation Editor "
+"documentation package is installed."
 msgstr ""
-"GtkSpell を初期化できませんでした。\n"
-" %s"
+"ヘルプを表示できません。翻訳エディターのドキュメントが入ったパッケージがインス"
+"トールされているか確認してください。"
 
-#: ../src/gtr-window.c:117
-msgid "_File"
-msgstr "ファイル(_F)"
-
-#: ../src/gtr-window.c:118
-msgid "_Edit"
-msgstr "編集(_E)"
-
-#: ../src/gtr-window.c:119
-msgid "_View"
-msgstr "表示(_V)"
-
-#: ../src/gtr-window.c:120
-msgid "_Search"
-msgstr "検索(_S)"
-
-#: ../src/gtr-window.c:121
-msgid "_Go"
-msgstr "ジャンプ(_G)"
-
-#: ../src/gtr-window.c:122
-msgid "_Tools"
-msgstr "ツール(_T)"
-
-#: ../src/gtr-window.c:123
-msgid "_Documents"
-msgstr "ドキュメント(_D)"
-
-#: ../src/gtr-window.c:127
-msgid "Open a PO file"
-msgstr "PO ファイルを開きます"
-
-#: ../src/gtr-window.c:129
-msgid "_Recent Files"
-msgstr "最近開いたファイル(_R)"
-
-#. Edit menu
-#: ../src/gtr-window.c:133
-msgid "T_oolbar"
-msgstr "ツールバー(_O)"
-
-#: ../src/gtr-window.c:135 ../src/gtr-window.c:175
-msgid "_Header..."
-msgstr "ヘッダー(_H)..."
-
-#: ../src/gtr-window.c:144
-msgid "Save the current file"
-msgstr "このファイルを保存します"
-
-#: ../src/gtr-window.c:147
-msgid "Save the current file with another name"
-msgstr "このファイルに別の名前を付けて保存します"
-
-#: ../src/gtr-window.c:153
-msgid "Close the current file"
-msgstr "このファイルを閉じます"
-
-#: ../src/gtr-window.c:158
-msgid "Undo last operation"
-msgstr "最後に実施した操作を行う前に戻します"
-
-#: ../src/gtr-window.c:161
-msgid "Redo last undone operation"
-msgstr "最後に実施した操作をやり直します"
-
-#: ../src/gtr-window.c:164
-msgid "Cut the selected text"
-msgstr "選択した文字列を切り取ります"
-
-#: ../src/gtr-window.c:167
-msgid "Copy the selected text"
-msgstr "選択した文字列をコピーします"
-
-#: ../src/gtr-window.c:170
-msgid "Paste the contents of the clipboard"
-msgstr "クリップボードの内容を貼り付けます"
-
-#: ../src/gtr-window.c:173
-msgid "Clear the selected translation"
-msgstr "選択したメッセージの訳文をクリアします"
-
-#: ../src/gtr-window.c:177
-msgid "Copy _Message to Translation"
-msgstr "原文を翻訳文に複写する(_M)"
-
-#: ../src/gtr-window.c:179
-msgid "Copy original message contents to the translation field"
-msgstr "原文の内容を翻訳文に複写します"
-
-#: ../src/gtr-window.c:181
-msgid "Toggle _Fuzzy Status"
-msgstr "fuzzy 状態を切り替える(_F)"
-
-#: ../src/gtr-window.c:182
-msgid "Toggle fuzzy status of a message"
-msgstr "メッセージの fuzzy 状態を切り替えます"
-
-#. View menu
-#: ../src/gtr-window.c:189
-msgid "_Message Details"
-msgstr "メッセージの詳細(_M)"
-
-#: ../src/gtr-window.c:190
-msgid "Show the Context panel"
-msgstr "このメッセージのコンテキストを表示します"
-
-#. Go menu
-#: ../src/gtr-window.c:194
-msgid "_Previous Message"
-msgstr "前のメッセージ(_P)"
-
-#: ../src/gtr-window.c:195
-msgid "Move back one message"
-msgstr "前のメッセージにジャンプします"
-
-#: ../src/gtr-window.c:197
-msgid "_Next Message"
-msgstr "次のメッセージ(_N)"
-
-#: ../src/gtr-window.c:198
-msgid "Move forward one message"
-msgstr "次のメッセージにジャンプします"
-
-#: ../src/gtr-window.c:200
-msgid "_Go to Message..."
-msgstr "メッセージを指定する(_G)..."
-
-#: ../src/gtr-window.c:201
-msgid "Jumps to a specific message"
-msgstr "指定した番号のメッセージにジャンプします"
-
-#: ../src/gtr-window.c:203
-msgid "_First Message"
-msgstr "最初のメッセージ(_F)"
-
-#: ../src/gtr-window.c:204
-msgid "Go to the first message"
-msgstr "最初のメッセージにジャンプします"
-
-#: ../src/gtr-window.c:206
-msgid "_Last Message"
-msgstr "最後のメッセージ(_L)"
-
-#: ../src/gtr-window.c:207
-msgid "Go to the last message"
-msgstr "最後のメッセージにジャンプします"
-
-#: ../src/gtr-window.c:209
-msgid "Next Fuz_zy"
-msgstr "次の fuzzy(_Z)"
-
-#: ../src/gtr-window.c:210
-msgid "Go to the next fuzzy message"
-msgstr "次の fuzzy メッセージにジャンプします"
-
-#: ../src/gtr-window.c:212
-msgid "Previous Fuzz_y"
-msgstr "前の fuzzy(_Y)"
-
-#: ../src/gtr-window.c:213
-msgid "Go to the previous fuzzy message"
-msgstr "前の fuzzy メッセージにジャンプします"
-
-#: ../src/gtr-window.c:215
-msgid "Next _Untranslated"
-msgstr "次の未訳(_U)"
-
-#: ../src/gtr-window.c:216
-msgid "Go to the next untranslated message"
-msgstr "次の未訳メッセージにジャンプします"
-
-#: ../src/gtr-window.c:219
-msgid "Previ_ous Untranslated"
-msgstr "前の未訳(_O)"
-
-#: ../src/gtr-window.c:220
-msgid "Go to the previous untranslated message"
-msgstr "前の未訳メッセージにジャンプします"
-
-#: ../src/gtr-window.c:223
-msgid "Next Fu_zzy or Untranslated"
-msgstr "次の fuzzy または未訳(_Z)"
-
-#: ../src/gtr-window.c:225
-msgid "Go to the next fuzzy or untranslated message"
-msgstr "次の fuzzy か未訳メッセージにジャンプします"
-
-#: ../src/gtr-window.c:228
-msgid "Pre_vious Fuzzy or Untranslated"
-msgstr "前の fuzzy または未訳(_V)"
-
-#: ../src/gtr-window.c:230
-msgid "Go to the previous fuzzy or untranslated message"
-msgstr "前の fuzzy か未訳メッセージにジャンプします"
-
-#: ../src/gtr-window.c:235
-msgid "Search for text"
-msgstr "文字列を検索します"
-
-#: ../src/gtr-window.c:238
-msgid "Search for and replace text"
-msgstr "文字列を検索して置換します"
-
-#. Documents menu
-#: ../src/gtr-window.c:242
-msgid "_Save All"
-msgstr "すべて保存(_S)"
-
-#: ../src/gtr-window.c:243
-msgid "Save all open files"
-msgstr "すべてのファイルを保存します"
-
-#: ../src/gtr-window.c:245
-msgid "_Close All"
-msgstr "すべて閉じる(_C)"
-
-#: ../src/gtr-window.c:246
-msgid "Close all open files"
-msgstr "すべてのファイルを閉じます"
-
-#: ../src/gtr-window.c:248
-msgid "_Previous Document"
-msgstr "前のドキュメント(_P)"
-
-#: ../src/gtr-window.c:250
-msgid "Activate previous document"
-msgstr "アクティブな前のドキュメント"
-
-#: ../src/gtr-window.c:252
-msgid "_Next Document"
-msgstr "次のドキュメント(_N)"
-
-#: ../src/gtr-window.c:254
-msgid "Activate next document"
-msgstr "アクティブな次のドキュメント"
-
-#: ../src/gtr-window.c:442
+#: src/gtr-window.c:171
 msgid "Untranslated"
 msgstr "未訳"
 
-#: ../src/gtr-window.c:445
+#: src/gtr-window.c:174
 msgid "Translated"
 msgstr "翻訳済み"
 
-#: ../src/gtr-window.c:448
+#: src/gtr-window.c:177
 msgid "Fuzzy"
 msgstr "fuzzy"
 
-#: ../src/gtr-window.c:455
+#: src/gtr-window.c:184
 #, c-format
 msgid "Current: %d"
 msgstr "現在位置: %d"
 
-#: ../src/gtr-window.c:456
+#: src/gtr-window.c:185
 #, c-format
 msgid "Total: %d"
 msgstr "合計: %d"
 
-#: ../src/gtr-window.c:457
+#: src/gtr-window.c:186
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "翻訳済み: %d"
 
-#: ../src/gtr-window.c:460
+#: src/gtr-window.c:189
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "fuzzy: %d"
 
-#: ../src/gtr-window.c:462
+#: src/gtr-window.c:191
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
 msgstr[0] "未訳: %d"
 
-#. Translators: %s is a URI
-#: ../src/gtr-window.c:516
-#, c-format
-msgid "Activate '%s'"
-msgstr "'%s' を有効にする"
-
 #. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:689
+#: src/gtr-window.c:301
 #, c-format
-msgid "*%s - gtranslator"
-msgstr "*%s - Gtranslator"
+msgid "*%s — Translation Editor"
+msgstr "*%s — 翻訳エディター"
 
 #. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:692
+#: src/gtr-window.c:307
 #, c-format
-msgid "%s - gtranslator"
-msgstr "%s - Gtranslator"
+msgid "%s — Translation Editor"
+msgstr "%s — 翻訳エディター"
 
-#: ../src/gtr-window.c:698
-msgid "gtranslator"
-msgstr "Gtranslator"
-
-#: ../src/gtr-window.c:1079
-msgid "Toolbar Editor"
-msgstr "ツールバーエディター"
-
-#: ../src/gtr-window.c:1205
+#: src/gtr-window.c:538
 msgid "No profile"
 msgstr "プロファイル無し"
 
-#: ../src/gtr-window.c:1234
+#: src/gtr-window.c:556
 msgid "Profile for the active document"
 msgstr "現在のドキュメントのプロファイル"
 
-#: ../src/main.c:101
-msgid "- Edit PO files"
-msgstr "- PO ファイルを編集する"
+#: src/gtranslator-menu.ui:7
+msgid "_New Window"
+msgstr "新しいウィンドウ(_N)"
 
-#: ../src/main.c:105
+#: src/gtranslator-menu.ui:13
+msgid "_Preferences"
+msgstr "設定(_P)"
+
+#: src/gtranslator-menu.ui:19
+msgid "_Help"
+msgstr "ヘルプ(_H)"
+
+#: src/gtranslator-menu.ui:24
+msgid "_About GNOME Translation Editor"
+msgstr "GNOME 翻訳エディターについて(_A)"
+
+#: src/help-overlay.ui:13
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "全般"
+
+#: src/help-overlay.ui:18
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "ファイルを開く"
+
+#: src/help-overlay.ui:25
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "このファイルを保存する"
+
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "このファイルを別名で保存する"
+
+#: src/help-overlay.ui:40
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "設定"
+
+#: src/help-overlay.ui:47
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "キーボードショートカット"
+
+#: src/help-overlay.ui:54
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "終了する"
+
+#: src/help-overlay.ui:64
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "編集"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Undo"
+msgstr "元に戻す"
+
+#: src/help-overlay.ui:75
+msgctxt "shortcut window"
+msgid "Redo"
+msgstr "やり直す"
+
+#: src/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr "fuzzy としてマーク/マーク解除"
+
+#: src/help-overlay.ui:89
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "原文を複写する"
+
+#: src/help-overlay.ui:99
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr "ナビゲーション"
+
+#: src/help-overlay.ui:103
+msgctxt "shortcut window"
+msgid "Go to the previous message"
+msgstr "前のメッセージにジャンプする"
+
+#: src/help-overlay.ui:110
+msgctxt "shortcut window"
+msgid "Go to the next message"
+msgstr "次のメッセージにジャンプする"
+
+#: src/help-overlay.ui:117
+msgctxt "shortcut window"
+msgid "Go to the previous untranslated message"
+msgstr "前の未訳メッセージにジャンプする"
+
+#: src/help-overlay.ui:124
+msgctxt "shortcut window"
+msgid "Go to the next untranslated message"
+msgstr "次の未訳メッセージにジャンプする"
+
+#: src/help-overlay.ui:134
+msgctxt "shortcut window group"
+msgid "Translation Memory"
+msgstr "翻訳メモリ"
+
+#: src/help-overlay.ui:138
+msgctxt "shortcut window"
+msgid "Build translation memory"
+msgstr "翻訳メモリを構築する"
+
+#: src/help-overlay.ui:148
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "検索と置換"
+
+#: src/help-overlay.ui:152
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "検索する"
+
+#: src/help-overlay.ui:159
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "検索して置換する"
+
+#: src/main.c:97
+msgid "— Edit PO files"
+msgstr "— PO ファイルを編集する"
+
+#: src/main.c:101
 #, c-format
 msgid ""
 "%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
+"Run “%s --help” to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"'%s --help' を実行すると利用可能なすべてのコマンドラインオプションが表示されます。\n"
+"“%s --help”を実行すると利用可能なすべてのコマンドラインオプションが表示され"
+"ます。\n"
 
-#. Translaters: This string is for a toggle to display a toolbar.
-#. * The name of the toolbar is automatically computed from the widgets
-#. * on the toolbar, and is placed at the %s. Note the _ before the %s
-#. * which is used to add mnemonics. We know that this is likely to
-#. * produce duplicates, but don't worry about it. If your language
-#. * normally has a mnemonic at the start, please use the _. If not,
-#. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:992
-#, c-format
-msgid "Show “_%s”"
-msgstr "“_%s”を表示する"
+#: src/translation-memory/gtr-translation-memory-dialog.c:77
+msgid "Select PO directory"
+msgstr ""
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1485
-msgid "_Move on Toolbar"
-msgstr "ツールバーに移動(_M)"
+#: src/translation-memory/gtr-translation-memory-dialog.c:303
+msgid "Translation Editor Memory Manager"
+msgstr "翻訳エディターメモリマネージャー"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1486
-msgid "Move the selected item on the toolbar"
-msgstr "ツールバーの選択された項目に移動"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
+msgid "Database:"
+msgstr "データベース:"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1487
-msgid "_Remove from Toolbar"
-msgstr "ツールバーから削除(_R)"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:103
+msgid "Select the directory which contains PO files:"
+msgstr "PO ファイルが置かれているフォルダーを選択:"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1488
-msgid "Remove the selected item from the toolbar"
-msgstr "ツールバーから選択した項目を削除"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:154
+msgid "Add to Database"
+msgstr "データベースに追加する"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1489
-msgid "_Delete Toolbar"
-msgstr "ツールバーの削除(_D)"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:209
+msgid "Configuration:"
+msgstr "設定:"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1490
-msgid "Remove the selected toolbar"
-msgstr "選択したツールバーを削除"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:253
+msgid "Use only files with this name:"
+msgstr "次の名前のファイルだけ使用する:"
 
-#: ../src/toolbareditor/egg-toolbar-editor.c:489
-msgid "Separator"
-msgstr "区切り"
+#: src/translation-memory/gtr-translation-memory-ui.c:255
+msgid "_Use this translation"
+msgstr "この翻訳を使用(_U)"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:260
+msgid "_Remove"
+msgstr "削除(_R)"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:371
+msgid "Shortcut"
+msgstr "ショートカット"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:380
+msgid "Level"
+msgstr "レベル"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:389
+msgid "String"
+msgstr "文字列"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
+msgid "PO directory"
+msgstr "PO が含まれるフォルダー"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
+msgid "Directory containing PO files to add to the translation memory."
+msgstr "翻訳メモリに追加する PO ファイルが含まれるフォルダーです。"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
+msgid "Restrict search by filename"
+msgstr "ファイル名で検索を絞る"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
+msgid ""
+"If true, only include files with a specified filename when searching the "
+"translation memory."
+msgstr "true の場合、特定の名前のファイルだけを翻訳メモリに含めます。"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
+msgid "Filename to restrict search to"
+msgstr "翻訳メモリに含めるファイルの名前"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
+msgid ""
+"Filename to which searching of the translation memory should be restricted."
+msgstr ""
+"翻訳メモリに含めるファイルを、指定した名前のファイルだけに限定します。"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
+msgid "Maximum number of missing words"
+msgstr "メッセージに含まれていない単語数の最大値"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
+msgid ""
+"Maximum number of words that can be missing from a message displayed as a "
+"match by the translation memory."
+msgstr ""
+"編集しているメッセージが翻訳メモリの中にあるメッセージと一致しているかどう"
+"かを判定する際のしきい値で、双方のメッセージの間に含まれていない単語の数が最"
+"大いくつまで許容できるかを表す数値です (ここで指定した数だけ単語が異なってい"
+"ても同一のメッセージであると判定します)。"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
+msgid "Maximum difference in message length"
+msgstr "メッセージの差異を表す最大値"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
+msgid ""
+"Maximum difference in length between messages displayed as matches by the "
+"translation memory."
+msgstr ""
+"編集しているメッセージが翻訳メモリの中にあるメッセージと一致しているかどう"
+"かを判定する際のしきい値で、双方のメッセージの長さがいくつまで異なることが許"
+"容できるかを表す数値です (ここで指定した数だけ長さが異なっていても同一のメッ"
+"セージであると判定します)。"
+
+#~ msgid "Gtranslator PO File Editor"
+#~ msgstr "Gtranslator 翻訳エディター"
+
+#~ msgid "Use custom font"
+#~ msgstr "フォントを指定する"
+
+#~ msgid "If true, use a custom font for edit fields."
+#~ msgstr "true の場合、編集フィールドにカスタムフォントを使用します。"
+
+#~ msgid "Custom font to use for edit fields."
+#~ msgstr "編集フィールドに使用するカスタムフォントです。"
+
+#~ msgid "Others"
+#~ msgstr "その他"
+
+#~ msgid "gtranslator highlight"
+#~ msgstr "Gtranslator の強調表示"
+
+#~ msgid "Tag"
+#~ msgstr "タグ"
+
+#~ msgid "Special variable"
+#~ msgstr "特別な値"
+
+#~ msgid "Message not found"
+#~ msgstr "メッセージがありません"
+
+#~ msgid "Open file for alternate language"
+#~ msgstr "代替言語のファイルを開く"
+
+#~ msgid "File closed"
+#~ msgstr "ファイルを閉じる"
+
+#~ msgctxt "alternate lang"
+#~ msgid "Co_py"
+#~ msgstr "コピー(_P)"
+
+#~ msgid "There isn't any file loaded"
+#~ msgstr "ロードすべきファイルがありません。"
+
+#~ msgid "_Alternate Language"
+#~ msgstr "代替言語(_A)"
+
+#~ msgid "Show the Alternate Language panel"
+#~ msgstr "代替言語パネルの表示"
+
+#~ msgid "Alternate Language"
+#~ msgstr "代替の言語"
+
+#~ msgid "Load an alternate language."
+#~ msgstr "代替の言語を読み込みます。"
+
+#~ msgid "Character Map"
+#~ msgstr "文字マップ"
+
+#~ msgid "Insert special characters just by clicking on them."
+#~ msgstr "特殊な文字をクリックしながら挿入していきます。"
+
+#~ msgid "Source View Settings"
+#~ msgstr "ソースビューアーの設定"
+
+#~ msgid "Use external editor"
+#~ msgstr "外部エディターを使用する"
+
+#~ msgid "Program command:"
+#~ msgstr "プログラムコマンド:"
+
+#~ msgid "Line command:"
+#~ msgstr "行番号を指定する引数:"
+
+#~ msgid "Please install \"%s\" to be able to show the file"
+#~ msgstr "ファイルを表示するために\"%s\"をインストールしてください"
+
+#~ msgid "Source Code View"
+#~ msgstr "ソースコードビューアー"
+
+#~ msgid "Show the message in the source code."
+#~ msgstr "メッセージを含むソースコードを表示します。"
+
+#~ msgid "Use the System Editor"
+#~ msgstr "システムで設定したエディターを使用する"
+
+#~ msgid "Whether use the system editor to show the source code"
+#~ msgstr "システムで設定したエディターを使用してソースコードを表示します。"
+
+#~ msgid "The Editor to Launch"
+#~ msgstr "起動するエディター"
+
+#~ msgid "The command to launch the editor you want to use"
+#~ msgstr "使用するエディターを起動するコマンドです。"
+
+#~ msgid "Arguments for the Command"
+#~ msgstr "コマンドの引数"
+
+#~ msgid "Arguments to pass to the program command line to select the line"
+#~ msgstr "行番号を指定するために、コマンドラインプログラムに渡す引数です。"
+
+#~ msgid "Dictionary"
+#~ msgstr "辞書"
+
+#~ msgid "No dictionary source available with name '%s'"
+#~ msgstr "名前'%s'で利用可能な辞書ソースがありません。"
+
+#~ msgid "Unable to find dictionary source"
+#~ msgstr "辞書ソースが見つかりません"
+
+#~ msgid "No context available for source '%s'"
+#~ msgstr "ソース'%s'で利用可能なコンテキストはありません。"
+
+#~ msgid "Unable to create a context"
+#~ msgstr "コンテキストを生成できません。"
+
+#~ msgid "Dictionary source '%s' selected"
+#~ msgstr "辞書ソース'%s'が選択されました"
+
+#~ msgid "Strategy '%s' selected"
+#~ msgstr "方針'%s'が選択されました"
+
+#~ msgid "Database '%s' selected"
+#~ msgstr "データベース'%s'が選択されました"
+
+#~ msgid "Word '%s' selected"
+#~ msgstr "単語'%s'が選択されました"
+
+#~ msgid "Double-click on the word to look up"
+#~ msgstr "検索単語をダブルクリック"
+
+#~ msgid "Double-click on the matching strategy to use"
+#~ msgstr "使用する方針に一致するものをダブルクリック"
+
+#~ msgid "Double-click on the source to use"
+#~ msgstr "使用するソースをダブルクリック"
+
+#~ msgid "Double-click on the database to use"
+#~ msgstr "使用するデータベースをダブルクリック"
+
+#~ msgid "Look _up:"
+#~ msgstr "検索(_U):"
+
+#~ msgid "Similar words"
+#~ msgstr "似た単語"
+
+#~ msgid "Available dictionaries"
+#~ msgstr "利用可能な辞書"
+
+#~ msgid "Available strategies"
+#~ msgstr "利用可能な方針"
+
+#~ msgid "Dictionary sources"
+#~ msgstr "辞書ソース"
+
+#~ msgid "Look up words in a dictionary."
+#~ msgstr "辞書を使って単語の意味を調べます。"
+
+#~ msgid "Database"
+#~ msgstr "データベース"
+
+#~ msgid "Word database"
+#~ msgstr "単語データベース"
+
+#~ msgid "Source Name"
+#~ msgstr "ソース名"
+
+#~ msgid "Strategy"
+#~ msgstr "戦略"
+
+#~ msgid "Panel Position"
+#~ msgstr "パネルの位置"
+
+#~ msgid "_Fullscreen"
+#~ msgstr "フルスクリーン(_F)"
+
+#~ msgid "Place window on fullscreen state"
+#~ msgstr "フルスクリーン状態でウィンドウを配置"
+
+#~ msgid "Fullscreen"
+#~ msgstr "フルスクリーン"
+
+#~ msgid "Place window in the fullscreen state."
+#~ msgstr "ウィンドウをフルスクリーン表示します。"
+
+#~ msgid "_Next Param"
+#~ msgstr "次のパラメーター(_N)"
+
+#~ msgid "Insert the next param of the message"
+#~ msgstr "メッセージの次のパラメーターを挿入"
+
+#~ msgid "_Insert Params"
+#~ msgstr "パラメーターの挿入(_I)"
+
+#~ msgid "_Next Tag"
+#~ msgstr "次のタグ(_N)"
+
+#~ msgid "Insert the next tag of the message"
+#~ msgstr "メッセージの次のタグを挿入"
+
+#~ msgid "_Insert Tags"
+#~ msgstr "タグの挿入(_I)"
+
+#~ msgid "Insert Params or Tags"
+#~ msgstr "引数またはタグの挿入"
+
+#~ msgid "Parameters and tags detection featuring easy insertion."
+#~ msgstr "引数とタグを検出して簡単に挿入できるようにします。"
+
+#~ msgid "Open Tran Settings"
+#~ msgstr "Open Tran の設定"
+
+#~ msgid "Language code for the Open-Tran query:"
+#~ msgstr "Open-Tran への問い合わせの際の言語コード:"
+
+#~ msgid "Language code of the translated results:"
+#~ msgstr "翻訳結果の言語コード:"
+
+#~ msgid "Use a local \"mirror\" copy of the Open-Tran server"
+#~ msgstr "Open-Tran サーバーのローカルにある「ミラー」コピーを使用"
+
+#~ msgid "Mirror server URL:"
+#~ msgstr "ミラーサーバーのURL:"
+
+#~ msgid ""
+#~ "<i>The URL should be of the form:\n"
+#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+#~ "The two \"%s\" markers and the final slash must not be omitted.</i>"
+#~ msgstr ""
+#~ "<i>URL は次の形式である必要があります:\n"
+#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+#~ "二つの \"%s\" と最後のスラッシュは省略できません。</i>"
+
+#~ msgid "Mirror Server"
+#~ msgstr "ミラーサーバー"
+
+#~ msgid "ERROR: Cannot access %s\n"
+#~ msgstr "エラー: %s にアクセスできません\n"
+
+#~ msgid "Error in server response, GET failed\n"
+#~ msgstr "サーバーの応答でエラーがありました。GET に失敗\n"
+
+#~ msgid "Cannot parse server response, %s\n"
+#~ msgstr "サーバーの応答を解析できません。%s\n"
+
+#~ msgid "Cannot parse server response, not an array? %s\n"
+#~ msgstr "サーバーの応答を解析できません。配列ではない？ %s\n"
+
+#~ msgid "WRONG! Can't get result element %d\n"
+#~ msgstr "間違い! 結果の要素を取得できません %d\n"
+
+#~ msgid "WRONG! Can't parse result element %d as object\n"
+#~ msgstr "間違い! 結果の要素 %d をオブジェクトとして解析できません\n"
+
+#~ msgid "WRONG! Can't read projects for result element %d\n"
+#~ msgstr "間違い! 結果の要素 %d のプロジェクトを読み込めません\n"
+
+#~ msgid "%s[%s] Count:%d"
+#~ msgstr "%s[%s] 個数:%d"
+
+#~ msgid "WRONG! Malformed project: %d\n"
+#~ msgstr "間違い! 不正な形式のプロジェクトです: %d\n"
+
+#~ msgid "You have to provide a phrase to search"
+#~ msgstr "検索語句を提供する必要があります"
+
+#~ msgid ""
+#~ "You have to provide a search language code in the plugin configuration"
+#~ msgstr "プラグインの設定で、検索する言語コードを指定する必要があります"
+
+#~ msgid ""
+#~ "You have to provide a language code for your language in the plugin "
+#~ "configuration"
+#~ msgstr ""
+#~ "プラグインの設定で、あなたが使用する言語の言語コードを指定する必要がありま"
+#~ "す"
+
+#~ msgid ""
+#~ "Either use the main open-tran.eu server, or enter a server URL in the "
+#~ "plugin configuration,"
+#~ msgstr ""
+#~ "メインの open-tran.eu サーバーを使用するか、プラグインの設定でサーバーの "
+#~ "URL を入力してください。"
+
+#~ msgid "Type"
+#~ msgstr "形式"
+
+#~ msgid "Open-Tran.eu"
+#~ msgstr "Open-Tran.eu"
+
+#~ msgid "Look for:"
+#~ msgstr "検索:"
+
+#~ msgid "Open Tran"
+#~ msgstr "Open-Tran"
+
+#~ msgid "Look for phrases in Open tran memory translation database."
+#~ msgstr "Open-Tran という翻訳データベースで単語を調べます。"
+
+#~ msgid "Search Code"
+#~ msgstr "検索コード"
+
+#~ msgid "The language code to search for"
+#~ msgstr "検索時の言語コード"
+
+#~ msgid "Own Code"
+#~ msgstr "表示コード"
+
+#~ msgid "The language code in which you want the results"
+#~ msgstr "検索結果を表示する際の言語コード"
+
+#~ msgid "Use Mirror Server"
+#~ msgstr "ミラーサーバーの使用"
+
+#~ msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
+#~ msgstr "メイン Open-Tran サーバーのローカルコピーを使用します"
+
+#~ msgid "Mirror Server URL"
+#~ msgstr "ミラーサーバーの URL"
+
+#~ msgid "URL of an Open-Tran mirror server"
+#~ msgstr "Open-Tran ミラーサーバーの URL"
+
+#~ msgid "Strings added to database"
+#~ msgstr "文字列をデータベースに追加しました"
+
+#~ msgid "Please specify a valid path to build the translation memory"
+#~ msgstr "翻訳メモリーを構築するための有効なパスを指定してください。"
+
+#~ msgid "Get translation suggestions from a data base."
+#~ msgstr "データベースから翻訳候補を取得します。"
+
+#~ msgid "Insert Option nº %d"
+#~ msgstr "オプションNo.%dの挿入"
+
+#~ msgid "_Build Translation Memory"
+#~ msgstr "翻訳メモリーの構築(_B)"
+
+#~ msgid "_Translation Memory"
+#~ msgstr "翻訳メモリー(_T)"
+
+#~ msgid "Current Developers"
+#~ msgstr "現在の開発者"
+
+#~ msgid "D_one"
+#~ msgstr "完了(_O)"
+
+#~ msgid "Status"
+#~ msgstr "状態"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Use _custom font"
+#~ msgstr "フォントを指定する(_C):"
+
+#~ msgid "Editor _font:"
+#~ msgstr "エディターのフォント(_F):"
+
+#~ msgid "Plugins"
+#~ msgstr "プラグイン"
+
+#~ msgid "Include fu_zzy strings"
+#~ msgstr "fuzzy な文字列を含める(_Z)"
+
+#~ msgid "Message Table"
+#~ msgstr "メッセージテーブル"
+
+#~ msgid "Original Message:"
+#~ msgstr "原文のメッセージ:"
+
+#~ msgid "Translation Fields"
+#~ msgstr "翻訳領域"
+
+#~ msgid "gtkspell error: %s\n"
+#~ msgstr "gtkspell のエラー: %s\n"
+
+#~ msgid ""
+#~ "GtkSpell was unable to initialize.\n"
+#~ " %s"
+#~ msgstr ""
+#~ "GtkSpell を初期化できませんでした。\n"
+#~ " %s"
+
+#~ msgid "_File"
+#~ msgstr "ファイル(_F)"
+
+#~ msgid "_Edit"
+#~ msgstr "編集(_E)"
+
+#~ msgid "_View"
+#~ msgstr "表示(_V)"
+
+#~ msgid "_Search"
+#~ msgstr "検索(_S)"
+
+#~ msgid "_Go"
+#~ msgstr "ジャンプ(_G)"
+
+#~ msgid "_Tools"
+#~ msgstr "ツール(_T)"
+
+#~ msgid "_Documents"
+#~ msgstr "ドキュメント(_D)"
+
+#~ msgid "_Recent Files"
+#~ msgstr "最近開いたファイル(_R)"
+
+#~ msgid "T_oolbar"
+#~ msgstr "ツールバー(_O)"
+
+#~ msgid "_Header..."
+#~ msgstr "ヘッダー(_H)..."
+
+#~ msgid "Save the current file with another name"
+#~ msgstr "このファイルに別の名前を付けて保存します"
+
+#~ msgid "Close the current file"
+#~ msgstr "このファイルを閉じます"
+
+#~ msgid "Undo last operation"
+#~ msgstr "最後に実施した操作を行う前に戻します"
+
+#~ msgid "Redo last undone operation"
+#~ msgstr "最後に実施した操作をやり直します"
+
+#~ msgid "Cut the selected text"
+#~ msgstr "選択した文字列を切り取ります"
+
+#~ msgid "Copy the selected text"
+#~ msgstr "選択した文字列をコピーします"
+
+#~ msgid "Paste the contents of the clipboard"
+#~ msgstr "クリップボードの内容を貼り付けます"
+
+#~ msgid "Clear the selected translation"
+#~ msgstr "選択したメッセージの訳文をクリアします"
+
+#~ msgid "Copy _Message to Translation"
+#~ msgstr "原文を翻訳文に複写する(_M)"
+
+#~ msgid "Toggle fuzzy status of a message"
+#~ msgstr "メッセージの fuzzy 状態を切り替えます"
+
+#~ msgid "_Message Details"
+#~ msgstr "メッセージの詳細(_M)"
+
+#~ msgid "Show the Context panel"
+#~ msgstr "このメッセージのコンテキストを表示します"
+
+#~ msgid "_Previous Message"
+#~ msgstr "前のメッセージ(_P)"
+
+#~ msgid "Move back one message"
+#~ msgstr "前のメッセージにジャンプします"
+
+#~ msgid "_Next Message"
+#~ msgstr "次のメッセージ(_N)"
+
+#~ msgid "Move forward one message"
+#~ msgstr "次のメッセージにジャンプします"
+
+#~ msgid "_Go to Message..."
+#~ msgstr "メッセージを指定する(_G)..."
+
+#~ msgid "Jumps to a specific message"
+#~ msgstr "指定した番号のメッセージにジャンプします"
+
+#~ msgid "_First Message"
+#~ msgstr "最初のメッセージ(_F)"
+
+#~ msgid "Go to the first message"
+#~ msgstr "最初のメッセージにジャンプします"
+
+#~ msgid "_Last Message"
+#~ msgstr "最後のメッセージ(_L)"
+
+#~ msgid "Go to the last message"
+#~ msgstr "最後のメッセージにジャンプします"
+
+#~ msgid "Next Fuz_zy"
+#~ msgstr "次の fuzzy(_Z)"
+
+#~ msgid "Previous Fuzz_y"
+#~ msgstr "前の fuzzy(_Y)"
+
+#~ msgid "Next _Untranslated"
+#~ msgstr "次の未訳(_U)"
+
+#~ msgid "Previ_ous Untranslated"
+#~ msgstr "前の未訳(_O)"
+
+#~ msgid "Next Fu_zzy or Untranslated"
+#~ msgstr "次の fuzzy または未訳(_Z)"
+
+#~ msgid "Go to the next fuzzy or untranslated message"
+#~ msgstr "次の fuzzy か未訳メッセージにジャンプします"
+
+#~ msgid "Pre_vious Fuzzy or Untranslated"
+#~ msgstr "前の fuzzy または未訳(_V)"
+
+#~ msgid "Go to the previous fuzzy or untranslated message"
+#~ msgstr "前の fuzzy か未訳メッセージにジャンプします"
+
+#~ msgid "Search for text"
+#~ msgstr "文字列を検索します"
+
+#~ msgid "Search for and replace text"
+#~ msgstr "文字列を検索して置換します"
+
+#~ msgid "Save all open files"
+#~ msgstr "すべてのファイルを保存します"
+
+#~ msgid "_Close All"
+#~ msgstr "すべて閉じる(_C)"
+
+#~ msgid "Close all open files"
+#~ msgstr "すべてのファイルを閉じます"
+
+#~ msgid "_Previous Document"
+#~ msgstr "前のドキュメント(_P)"
+
+#~ msgid "Activate previous document"
+#~ msgstr "アクティブな前のドキュメント"
+
+#~ msgid "_Next Document"
+#~ msgstr "次のドキュメント(_N)"
+
+#~ msgid "Activate next document"
+#~ msgstr "アクティブな次のドキュメント"
+
+#~ msgid "Activate '%s'"
+#~ msgstr "'%s' を有効にする"
+
+#~ msgid "%s - gtranslator"
+#~ msgstr "%s - Gtranslator"
+
+#~ msgid "gtranslator"
+#~ msgstr "Gtranslator"
+
+#~ msgid "Toolbar Editor"
+#~ msgstr "ツールバーエディター"
+
+#~ msgid "Show “_%s”"
+#~ msgstr "“_%s”を表示する"
+
+#~ msgid "_Move on Toolbar"
+#~ msgstr "ツールバーに移動(_M)"
+
+#~ msgid "Move the selected item on the toolbar"
+#~ msgstr "ツールバーの選択された項目に移動"
+
+#~ msgid "_Remove from Toolbar"
+#~ msgstr "ツールバーから削除(_R)"
+
+#~ msgid "Remove the selected item from the toolbar"
+#~ msgstr "ツールバーから選択した項目を削除"
+
+#~ msgid "Remove the selected toolbar"
+#~ msgstr "選択したツールバーを削除"
+
+#~ msgid "Separator"
+#~ msgstr "区切り"
