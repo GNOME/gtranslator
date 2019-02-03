@@ -1268,9 +1268,11 @@ gtr_window_tm_keybind (GtrWindow *window,
   match = (GtrTranslationMemoryMatch *) g_list_nth_data (tm_list, index);
   if (match)
     {
+      gtk_text_buffer_begin_user_action (buffer);
       gtr_msg_set_msgstr (msg, match->match);
       gtk_text_buffer_set_text (buffer, match->match, -1);
       gtr_po_set_state (po, GTR_PO_STATE_MODIFIED);
+      gtk_text_buffer_end_user_action (buffer);
     }
 
   g_list_free_full (tm_list, free_match);
