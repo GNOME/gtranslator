@@ -527,6 +527,8 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
   fuzzy = gtr_msg_is_fuzzy (msg);
   translated = gtr_msg_is_translated (msg);
 
+  printf ("ONE MORE: %d, %d, %d\n", status, fuzzy, translated);
+
   if ((status == GTR_MSG_STATUS_FUZZY) && !fuzzy && !priv->find_replace_flag)
     {
       _gtr_po_increase_decrease_fuzzy (priv->po, FALSE);
@@ -565,7 +567,12 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
         }
     }
 
-  gtr_msg_set_status (msg, status);
+  if (status != gtr_msg_get_status (msg))
+    {
+      gtr_msg_set_status (msg, status);
+      g_signal_emit (G_OBJECT (tab), signals[MESSAGE_CHANGED], 0, msg);
+    }
+
   if (gtr_msg_is_fuzzy (msg))
     gtk_label_set_text (GTK_LABEL (priv->msgid_tags), _("fuzzy"));
   else

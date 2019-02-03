@@ -234,7 +234,6 @@ gtr_msg_set_fuzzy (GtrMsg * msg, gboolean fuzzy)
   g_return_if_fail (GTR_IS_MSG (msg));
 
   po_message_set_fuzzy (priv->message, fuzzy);
-  gtr_msg_recalc_status (msg);
 }
 
 /**
@@ -332,7 +331,6 @@ gtr_msg_set_msgstr (GtrMsg * msg, const gchar * msgstr)
   g_return_if_fail (msgstr != NULL);
 
   po_message_set_msgstr (priv->message, msgstr);
-  gtr_msg_recalc_status (msg);
 }
 
 
@@ -371,7 +369,6 @@ gtr_msg_set_msgstr_plural (GtrMsg * msg, gint index, const gchar * msgstr)
   g_return_if_fail (msgstr != NULL);
 
   po_message_set_msgstr_plural (priv->message, index, msgstr);
-  gtr_msg_recalc_status (msg);
 }
 
 
