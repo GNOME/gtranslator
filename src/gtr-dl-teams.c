@@ -151,7 +151,7 @@ gtr_dl_teams_load_module_details_json (GtkComboBox *combo,
   JsonNode *node = NULL;
 
   /* Get module details JSON from DL API */
-  module_endpoint = g_strconcat ((const gchar *)API_URL, priv->selected_module, NULL);
+  module_endpoint = g_strconcat ((const gchar *)API_URL, "modules/", priv->selected_module, NULL);
   msg = soup_message_new ("GET", module_endpoint);
   session = soup_session_new ();
   status = soup_session_send_message (session, msg);
