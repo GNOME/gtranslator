@@ -76,13 +76,9 @@ gtr_dl_teams_list_add (JsonArray *array,
   JsonObject *object = json_node_get_object (element);
 
   gtk_list_store_insert_with_values(data, NULL, -1,
-        0, json_object_get_string_member (object, "description"),
-        1, json_object_get_string_member (object, "name"),
-        -1);
-  /*printf ("%s: %s\n",
-          json_object_get_string_member (object, "name"),
-          json_object_get_string_member (object, "description")
-          );*/
+                                    0, json_object_get_string_member (object, "description"),
+                                    1, json_object_get_string_member (object, "name"),
+                                    -1);
 }
 
 static void
@@ -94,8 +90,8 @@ gtr_dl_modules_list_add (JsonArray *array,
   JsonObject *object = json_node_get_object (element);
 
   gtk_list_store_insert_with_values(data, NULL, -1,
-        0, json_object_get_string_member (object, "name"),
-        -1);
+                                    0, json_object_get_string_member (object, "name"),
+                                    -1);
 }
 
 static void
@@ -119,22 +115,21 @@ gtr_dl_teams_parse_teams_json (GObject *object,
     {
       // todo: display text in UI
       //printf("error! code: %d, message: %s\n", error->code, error->message);
+      return;
     }
-  else
-    {
-      json_parser_load_from_stream (parser, stream, NULL, NULL);
 
-      node = json_parser_get_root (parser);
-      array = json_node_get_array (node);
+  json_parser_load_from_stream (parser, stream, NULL, NULL);
 
-      /* Fill teams list store with values from JSON and set store as combo box model */
-      json_array_foreach_element (array, gtr_dl_teams_list_add, GTK_TREE_MODEL (priv->teams_store));
+  node = json_parser_get_root (parser);
+  array = json_node_get_array (node);
 
-      gtk_combo_box_set_model (GTK_COMBO_BOX (priv->teams_combobox), GTK_TREE_MODEL (priv->teams_store));
+  /* Fill teams list store with values from JSON and set store as combo box model */
+  json_array_foreach_element (array, gtr_dl_teams_list_add, GTK_TREE_MODEL (priv->teams_store));
 
-      /* Enable selection */
-      gtk_widget_set_sensitive (priv->teams_combobox, TRUE);
-    }
+  gtk_combo_box_set_model (GTK_COMBO_BOX (priv->teams_combobox), GTK_TREE_MODEL (priv->teams_store));
+
+  /* Enable selection */
+  gtk_widget_set_sensitive (priv->teams_combobox, TRUE);
 }
 
 static void
@@ -142,13 +137,17 @@ gtr_dl_teams_load_module_details_json (GtkComboBox *combo,
                                        GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  SoupMessage *msg;
-  SoupSession *session;
-  gchar *module_endpoint;
+  g_autoptr(SoupMessage) msg;
+  g_autoptr(SoupSession) session;
+  g_autofree gchar *module_endpoint;
+  g_autoptr(JsonParser) parser;
   guint status;
   gint i;
   GError *error = NULL;
   JsonNode *node = NULL;
+  JsonObject *object;
+  JsonNode *branchesNode;
+  JsonNode *domainsNode;
 
   /* Get module details JSON from DL API */
   module_endpoint = g_strconcat ((const gchar *)API_URL, "modules/", priv->selected_module, NULL);
@@ -156,54 +155,60 @@ gtr_dl_teams_load_module_details_json (GtkComboBox *combo,
   session = soup_session_new ();
   status = soup_session_send_message (session, msg);
 
-  g_autoptr(JsonParser) parser = json_parser_new ();
+  parser = json_parser_new ();
 
   /* Load response body and fill branches and domains, then show widgets */
   json_parser_load_from_data (parser, msg->response_body->data, msg->response_body->length, &error);
   node = json_parser_get_root (parser);
 
-  JsonObject *object = json_node_get_object(node);
+  object = json_node_get_object(node);
 
   /* branches */
-  JsonNode *branchesNode = json_object_get_member (object, "branches");
+  branchesNode = json_object_get_member (object, "branches");
 
-  if (branchesNode != NULL) {
-    JsonArray *branchesArray = json_node_get_array (branchesNode);
+  if (branchesNode != NULL)
+    {
+      JsonArray *branchesArray = json_node_get_array (branchesNode);
+      JsonNode *branch_element;
+      JsonObject *branch_object;
 
-    gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (priv->branches_combobox));
+      gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (priv->branches_combobox));
 
-    for (i=0; i < json_array_get_length (branchesArray); i++) {
-      JsonNode *branch_element = json_array_get_element (branchesArray, i);
-      JsonObject *branch_object = json_node_get_object (branch_element);
-      gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (priv->branches_combobox),
-                                 json_object_get_string_member (branch_object, "name"),
-                                 json_object_get_string_member (branch_object, "name")
-                                 );
+      for (i=0; i < json_array_get_length (branchesArray); i++)
+        {
+          branch_element = json_array_get_element (branchesArray, i);
+          branch_object = json_node_get_object (branch_element);
+          gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (priv->branches_combobox),
+                                     json_object_get_string_member (branch_object, "name"),
+                                     json_object_get_string_member (branch_object, "name"));
+        }
+
+      gtk_widget_show (priv->branches_combobox);
     }
-
-    gtk_widget_show (priv->branches_combobox);
-  }
   // TODO: check why there are no branches, display notification to user
 
   /* domains */
-  JsonNode *domainsNode = json_object_get_member (object, "domains");
+  domainsNode = json_object_get_member (object, "domains");
 
-  if (domainsNode != NULL) {
-    JsonArray *domains_array = json_node_get_array (domainsNode);
+  if (domainsNode != NULL)
+    {
+      JsonArray *domains_array = json_node_get_array (domainsNode);
+      JsonNode *domain_element;
+      JsonObject *domain_object;
 
-    gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (priv->domains_combobox));
+      gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (priv->domains_combobox));
 
-    for (i=0; i < json_array_get_length (domains_array); i++) {
-      JsonNode *domain_element = json_array_get_element (domains_array, i);
-      JsonObject *domain_object = json_node_get_object (domain_element);
-      gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (priv->domains_combobox),
-                                 json_object_get_string_member (domain_object, "name"),
-                                 json_object_get_string_member (domain_object, "description")
-                                 );
+      for (i=0; i < json_array_get_length (domains_array); i++)
+        {
+          domain_element = json_array_get_element (domains_array, i);
+          domain_object = json_node_get_object (domain_element);
+          gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (priv->domains_combobox),
+                                     json_object_get_string_member (domain_object, "name"),
+                                     json_object_get_string_member (domain_object, "description"));
+        }
+
+      gtk_widget_show (priv->domains_combobox);
     }
-
-    gtk_widget_show (priv->domains_combobox);
-  }
   // TODO: check why there are no domains and display notification to user
 }
 
@@ -228,27 +233,26 @@ gtr_dl_teams_parse_modules_json (GObject *object,
     {
       // todo: display text in UI
       //printf("error! code: %d, message: %s\n", error->code, error->message);
+      return;
     }
-  else
-    {
-      json_parser_load_from_stream (parser, stream, NULL, NULL);
 
-      node = json_parser_get_root (parser);
-      array = json_node_get_array (node);
+  json_parser_load_from_stream (parser, stream, NULL, NULL);
 
-      /* Fill modules list store with values from JSON and set store as combo box model */
-      json_array_foreach_element (array, gtr_dl_modules_list_add, GTK_TREE_MODEL (priv->modules_store));
+  node = json_parser_get_root (parser);
+  array = json_node_get_array (node);
 
-      gtk_combo_box_set_model (GTK_COMBO_BOX (priv->modules_combobox), GTK_TREE_MODEL (priv->modules_store));
+  /* Fill modules list store with values from JSON and set store as combo box model */
+  json_array_foreach_element (array, gtr_dl_modules_list_add, GTK_TREE_MODEL (priv->modules_store));
 
-      gtk_widget_set_sensitive (priv->modules_combobox, TRUE);
+  gtk_combo_box_set_model (GTK_COMBO_BOX (priv->modules_combobox), GTK_TREE_MODEL (priv->modules_store));
 
-      /* Load module details when module is selected */
-      g_signal_connect (priv->modules_combobox,
+  gtk_widget_set_sensitive (priv->modules_combobox, TRUE);
+
+  /* Load module details when module is selected */
+  g_signal_connect (priv->modules_combobox,
                     "changed",
                     G_CALLBACK (gtr_dl_teams_load_module_details_json),
                     user_data);
-    }
 }
 
 static void
@@ -269,24 +273,18 @@ gtr_dl_teams_load_json (GtkButton *btn,
 void gtr_dl_teams_verify_and_load (GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  /*printf("%s, %s, %s, %s\n",
-         priv->selected_team,
-         priv->selected_module,
-         priv->selected_branch,
-         priv->selected_domain
-         );*/
+
   if (priv->selected_team != NULL &&
       priv->selected_module != NULL &&
       priv->selected_branch != NULL &&
       priv->selected_domain != NULL)
     {
       // get path from DL API and load PO file
-      //printf("all good, PO can be loaded now\n");
       gtr_dl_teams_load_po_file (self);
     }
   else
     {
-      //printf("not yet!\n");
+      // TODO: display notification to user
     }
 }
 
@@ -300,8 +298,10 @@ gtr_dl_teams_load_po_file (GtrDlTeams *self)
   guint status;
   GError *error = NULL;
   JsonNode *node = NULL;
+  g_autoptr(JsonParser) parser;
+  g_autoptr(JsonObject) object;
 
-  /* modules/[module]/branches/[branch]/domains/[domain]/languages/[team] */
+  /* API endpoint: modules/[module]/branches/[branch]/domains/[domain]/languages/[team] */
   stats_endpoint = g_strconcat ((const gchar *)API_URL,
                                  "modules/",
                                  priv->selected_module,
@@ -312,22 +312,21 @@ gtr_dl_teams_load_po_file (GtrDlTeams *self)
                                  "/languages/",
                                  priv->selected_team,
                                  NULL);
-  //printf("%s\n", stats_endpoint);
 
   msg = soup_message_new ("GET", stats_endpoint);
   session = soup_session_new ();
   status = soup_session_send_message (session, msg);
 
-  g_autoptr(JsonParser) parser = json_parser_new ();
+  parser = json_parser_new ();
 
   /* Load response body and get path to PO file */
   json_parser_load_from_data (parser, msg->response_body->data, msg->response_body->length, &error);
   node = json_parser_get_root (parser);
 
-  JsonObject *object = json_node_get_object(node);
+  object = json_node_get_object(node);
 
   const gchar *lang_po_file = json_object_get_string_member (object, "po_file");
-  //printf ("%s\n", lang_po_file);
+
   // path to file is https://l10n.gnome.org/[lang_po_file]
   // TODO load file
 }
@@ -339,11 +338,12 @@ gtr_dl_teams_save_combo_selected (GtkComboBox *combo,
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   GtkTreeIter iter;
   GtkTreePath *path;
+  g_autofree const gchar *name;
 
   path = gtk_tree_path_new_from_indices (gtk_combo_box_get_active (combo), -1);
 
   /* Save selected combo option */
-  const gchar *name = gtk_widget_get_name (GTK_WIDGET (combo));
+  name = gtk_widget_get_name (GTK_WIDGET (combo));
 
   if (strcmp(name, "combo_modules") == 0)
     {
@@ -418,11 +418,11 @@ gtr_dl_teams_init (GtrDlTeams *self)
   gtk_widget_set_name (priv->teams_combobox, "combo_teams");
 
   column = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT(priv->teams_combobox), column, TRUE);
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (priv->teams_combobox), column, TRUE);
 
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT(priv->teams_combobox), column,
-                                 "text", 0,
-                                 NULL);
+  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (priv->teams_combobox), column,
+                                  "text", 0,
+                                  NULL);
 
   gtk_container_add (GTK_CONTAINER (priv->main_box), priv->teams_combobox);
   gtk_widget_set_sensitive (priv->teams_combobox, FALSE);
@@ -431,11 +431,11 @@ gtr_dl_teams_init (GtrDlTeams *self)
   gtk_widget_set_name (priv->modules_combobox, "combo_modules");
 
   column = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT(priv->modules_combobox), column, TRUE);
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (priv->modules_combobox), column, TRUE);
 
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT(priv->modules_combobox), column,
-                                 "text", 0,
-                                 NULL);
+  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (priv->modules_combobox), column,
+                                  "text", 0,
+                                  NULL);
 
   gtk_container_add (GTK_CONTAINER (priv->main_box), priv->modules_combobox);
   gtk_widget_set_sensitive (priv->modules_combobox, FALSE);
@@ -482,7 +482,8 @@ gtr_dl_teams_init (GtrDlTeams *self)
 }
 
 GtrDlTeams*
-gtr_dl_teams_new (GtrWindow *window) {
+gtr_dl_teams_new (GtrWindow *window)
+{
   GtrDlTeams *self = g_object_new (GTR_TYPE_DL_TEAMS, NULL);
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
 
@@ -500,7 +501,7 @@ gtr_dl_teams_get_header (GtrDlTeams *self)
 // static functions
 static void
 team_add_cb (GtkButton   *btn,
-                GtrDlTeams *self)
+             GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   GtrWindow *window = GTR_WINDOW (priv->main_window);
