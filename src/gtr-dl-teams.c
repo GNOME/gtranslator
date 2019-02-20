@@ -108,13 +108,21 @@ gtr_dl_teams_parse_teams_json (GObject *object,
   GtrDlTeams *widget = GTR_DL_TEAMS (user_data);
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (widget);
 
+  GtkWidget *dialog;
+
   /* Parse JSON */
   stream = soup_session_send_finish (SOUP_SESSION (object), result, &error);
 
   if (error)
     {
-      // todo: display text in UI
-      //printf("error! code: %d, message: %s\n", error->code, error->message);
+      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
+                                             GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                             GTK_MESSAGE_WARNING,
+                                             GTK_BUTTONS_CLOSE,
+                                             "%s",
+                                             error->message);
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
       return;
     }
 
@@ -227,12 +235,20 @@ gtr_dl_teams_parse_modules_json (GObject *object,
   GtrDlTeams *widget = GTR_DL_TEAMS (user_data);
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (widget);
 
+  GtkWidget *dialog;
+
   /* Parse JSON */
   stream = soup_session_send_finish (SOUP_SESSION (object), result, &error);
   if (error)
     {
-      // todo: display text in UI
-      //printf("error! code: %d, message: %s\n", error->code, error->message);
+      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
+                                             GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                             GTK_MESSAGE_WARNING,
+                                             GTK_BUTTONS_CLOSE,
+                                             "%s",
+                                             error->message);
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
       return;
     }
 
