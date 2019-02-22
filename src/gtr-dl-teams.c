@@ -354,7 +354,7 @@ gtr_dl_teams_save_combo_selected (GtkComboBox *combo,
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   GtkTreeIter iter;
   GtkTreePath *path;
-  g_autofree const gchar *name;
+  const gchar *name;
 
   path = gtk_tree_path_new_from_indices (gtk_combo_box_get_active (combo), -1);
 
