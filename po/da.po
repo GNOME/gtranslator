@@ -14,16 +14,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-12-29 11:52+0000\n"
-"PO-Revision-Date: 2019-01-26 15:26+0100\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"POT-Creation-Date: 2019-02-11 12:09+0000\n"
+"PO-Revision-Date: 2019-02-16 00:00+0200\n"
+"Last-Translator: scootergrisen\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
 msgid "Gtranslator"
@@ -60,7 +59,7 @@ msgstr ""
 "interessante udvidelsesmoduler såsom alternativt sprog, tilføj mærker, "
 "integration med subversion og en fremviser til kildekoden."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:31
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:53
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -141,11 +140,11 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:70
 msgid "Make whitespace visible"
-msgstr "Gør mellemrum synlige"
+msgstr "Gør blanktegn synlige"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:71
 msgid "If true, display whitespace in strings as representative symbols."
-msgstr "Hvis true, så vis mellemrum i strenge med repræsentative symboler."
+msgstr "Hvis true, så vis blanktegn i strenge med repræsentative symboler."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:77
 msgid "Remove fuzzy status when message is changed"
@@ -565,11 +564,11 @@ msgstr "_Flertalsformer"
 msgid "Edit options manually"
 msgstr "Redigér indstillinger manuelt"
 
-#: src/gtr-message-table.c:255
+#: src/gtr-message-table.c:219
 msgid "Original Message"
 msgstr "Oprindelig besked"
 
-#: src/gtr-message-table.c:274
+#: src/gtr-message-table.c:238
 msgid "Translated Message"
 msgstr "Oversat besked"
 
@@ -688,17 +687,17 @@ msgstr "Filen er tom"
 msgid "Failed opening file “%s”: %s"
 msgstr "Kunne ikke åbne filen “%s”: %s"
 
-#: src/gtr-po.c:524
+#: src/gtr-po.c:530
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Kunne ikke konvertere fra tegnsættet “%s” til UTF-8"
 
-#: src/gtr-po.c:541 src/gtr-po.c:561
+#: src/gtr-po.c:547 src/gtr-po.c:567
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Kunne ikke gemme midlertidig fil for kodningskonvertering"
 
-#: src/gtr-po.c:598
+#: src/gtr-po.c:604
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -709,17 +708,17 @@ msgstr ""
 "kommandolinjeværktøjerne msgconv eller iconv, før du åbner denne fil med "
 "GNOME Oversættelsesprogram"
 
-#: src/gtr-po.c:666
+#: src/gtr-po.c:672
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext returnerede en null-beskedsdomæneliste."
 
-#: src/gtr-po.c:711
+#: src/gtr-po.c:717
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Ingen beskeder indhentet fra fortolker (parser)."
 
-#: src/gtr-po.c:762
+#: src/gtr-po.c:768
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -730,17 +729,17 @@ msgstr ""
 "Pot-filer genereres af kompileringsprocessen.\n"
 "Din fil skal sandsynligvis hedde “%s.po”."
 
-#: src/gtr-po.c:775
+#: src/gtr-po.c:781
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Filen %s er skrivebeskyttet, og kan ikke blive overskrevet"
 
-#: src/gtr-po.c:794
+#: src/gtr-po.c:800
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Der er fejl i po-filen: %s"
 
-#: src/gtr-po.c:806
+#: src/gtr-po.c:812
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Der opstod en fejl under skrivning af po-filen: %s"
@@ -811,7 +810,7 @@ msgstr "_Fremhæv beskedsyntaks"
 
 #: src/gtr-preferences-dialog.ui:351
 msgid "Make _whitespace visible"
-msgstr "Gør _mellemrum synlige"
+msgstr "Gør _blanktegn synlige"
 
 #: src/gtr-preferences-dialog.ui:392
 msgid "Contents"
@@ -826,7 +825,7 @@ msgstr "_Fjern den uafklarede status hvis beskeden ændres"
 # jeg vil tro det skal være "Kontroller _stavning"
 #: src/gtr-preferences-dialog.ui:431
 msgid "Check _spelling"
-msgstr "Kontroller _stavning"
+msgstr "_Stavekontrol"
 
 #: src/gtr-preferences-dialog.ui:470
 msgid "Editor"
@@ -945,36 +944,36 @@ msgstr "Luk dokument"
 msgid "There is an error in the message:"
 msgstr "Der er en fejl i beskeden:"
 
-#: src/gtr-tab.c:459 src/gtr-tab.c:570
+#: src/gtr-tab.c:459 src/gtr-tab.c:577
 msgid "fuzzy"
 msgstr "uafklaret"
 
-#: src/gtr-tab.c:600
+#: src/gtr-tab.c:607
 #, c-format
 msgid "Plural %d"
 msgstr "Flertal %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1153
+#: src/gtr-tab.c:1160
 msgid "Path:"
-msgstr "Stier:"
+msgstr "Sti:"
 
-#: src/gtr-tab.c:1803
+#: src/gtr-tab.c:1810
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Oversat: %0.2f%%"
 
-#: src/gtr-tab.c:1804
+#: src/gtr-tab.c:1811
 #, c-format
 msgid "Translated: %d"
 msgstr "Oversat: %d"
 
-#: src/gtr-tab.c:1805
+#: src/gtr-tab.c:1812
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Uoversat: %d"
 
-#: src/gtr-tab.c:1806
+#: src/gtr-tab.c:1813
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Uafklaret: %d"
