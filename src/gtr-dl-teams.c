@@ -37,6 +37,7 @@ typedef struct
   GtkWidget *main_box;
   GtkWidget *open_button;
   GtkWidget *dl_button;
+  GtkWidget *load_button;
 
   GtkWidget *teams_combobox;
   GtkWidget *modules_combobox;
@@ -65,7 +66,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (GtrDlTeams, gtr_dl_teams, GTK_TYPE_BIN)
 
 static void team_add_cb (GtkButton *btn, GtrDlTeams *self);
 static void gtr_dl_teams_save_combo_selected (GtkComboBox *combo, GtrDlTeams *self);
-static void gtr_dl_teams_load_po_file (GtrDlTeams *self);
+static void gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self);
 
 static void
 gtr_dl_teams_list_add (JsonArray *array,
@@ -295,8 +296,8 @@ void gtr_dl_teams_verify_and_load (GtrDlTeams *self)
       priv->selected_branch != NULL &&
       priv->selected_domain != NULL)
     {
-      // get path from DL API and load PO file
-      gtr_dl_teams_load_po_file (self);
+      // enable load button to get path from DL API and load PO file
+      gtk_widget_set_sensitive (priv->load_button, TRUE);
     }
   else
     {
@@ -305,7 +306,7 @@ void gtr_dl_teams_verify_and_load (GtrDlTeams *self)
 }
 
 static void
-gtr_dl_teams_load_po_file (GtrDlTeams *self)
+gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   SoupMessage *msg;
@@ -316,6 +317,14 @@ gtr_dl_teams_load_po_file (GtrDlTeams *self)
   JsonNode *node = NULL;
   g_autoptr(JsonParser) parser;
   g_autoptr(JsonObject) object;
+  GFile *tmp_file = NULL;
+  GFileIOStream *iostream = NULL;
+  GOutputStream *output = NULL;
+  gsize bytes = 0;
+  GtkWidget *dialog;
+  g_autoptr(GFile) dest_file;
+  char *file_name;
+  const gchar *lang_po_file;
 
   /* API endpoint: modules/[module]/branches/[branch]/domains/[domain]/languages/[team] */
   stats_endpoint = g_strconcat ((const gchar *)API_URL,
@@ -341,10 +350,82 @@ gtr_dl_teams_load_po_file (GtrDlTeams *self)
 
   object = json_node_get_object(node);
 
-  const gchar *lang_po_file = json_object_get_string_member (object, "po_file");
+  lang_po_file = json_object_get_string_member (object, "po_file");
 
-  // path to file is https://l10n.gnome.org/[lang_po_file]
-  // TODO load file
+  /* Path to file is https://l10n.gnome.org/[lang_po_file] */
+  // todo show message/progress to user
+
+  msg = soup_message_new ("GET", g_strconcat ("https://l10n.gnome.org", lang_po_file, NULL));
+  soup_session_send_message (session, msg);
+
+  if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
+    {
+      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
+                                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       GTK_MESSAGE_WARNING,
+                                       GTK_BUTTONS_CLOSE,
+                                       "Error loading file: %s",
+                                       soup_status_get_phrase (msg->status_code));
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+      return;
+    }
+
+  tmp_file = g_file_new_tmp (NULL, &iostream, &error);
+
+  if (error != NULL)
+    {
+      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
+                                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       GTK_MESSAGE_WARNING,
+                                       GTK_BUTTONS_CLOSE,
+                                       "Error creating temp file: %s",
+                                       error->message);
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+      g_error_free (error);
+      return;
+    }
+
+  output = g_io_stream_get_output_stream (G_IO_STREAM (iostream));
+  g_output_stream_write_all (output,
+                             msg->response_body->data,
+                             msg->response_body->length,
+                             &bytes,
+                             NULL,
+                             &error);
+
+  if (error != NULL)
+    {
+      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
+                                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       GTK_MESSAGE_WARNING,
+                                       GTK_BUTTONS_CLOSE,
+                                       "Error writing stream: %s",
+                                       error->message);
+      g_error_free (error);
+      return;
+    }
+
+  file_name = strrchr(lang_po_file, '/');
+  dest_file = g_file_new_for_uri (g_strconcat("file:///tmp/", file_name+1, NULL));
+  g_file_copy (tmp_file, dest_file, G_FILE_COPY_OVERWRITE, NULL, NULL, NULL, &error);
+
+  if (error != NULL)
+    {
+      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
+                                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       GTK_MESSAGE_WARNING,
+                                       GTK_BUTTONS_CLOSE,
+                                       "Error creating tmp file %s",
+                                       error->message);
+      g_error_free (error);
+      return;
+    }
+
+  gtr_open (dest_file, priv->main_window, &error);
+
+  g_object_unref (tmp_file);
 }
 
 static void
@@ -472,6 +553,10 @@ gtr_dl_teams_init (GtrDlTeams *self)
   gtk_container_add (GTK_CONTAINER (priv->main_box), priv->branches_combobox);
   gtk_widget_hide (priv->branches_combobox);
 
+  priv->load_button = gtk_button_new_with_label ("Load file");
+  gtk_container_add (GTK_CONTAINER (priv->main_box), priv->load_button);
+  gtk_widget_set_sensitive (priv->load_button, FALSE);
+
   /* Load teams and modules on click */
   g_signal_connect (priv->dl_button,
                     "clicked",
@@ -494,6 +579,12 @@ gtr_dl_teams_init (GtrDlTeams *self)
   g_signal_connect (priv->branches_combobox,
                     "changed",
                     G_CALLBACK (gtr_dl_teams_save_combo_selected),
+                    self);
+
+  /* Connect "click" on file button to load PO file */
+  g_signal_connect (priv->load_button,
+                    "clicked",
+                    G_CALLBACK (gtr_dl_teams_load_po_file),
                     self);
 }
 
