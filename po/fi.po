@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-10-29 12:07+0000\n"
-"PO-Revision-Date: 2018-11-05 11:36+0200\n"
+"POT-Creation-Date: 2019-02-24 13:48+0000\n"
+"PO-Revision-Date: 2019-03-02 10:54+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
 msgid "Gtranslator"
@@ -59,8 +59,12 @@ msgstr ""
 "integraatio Subversion-versionhallintajärjestelmään kanssa sekä "
 "lähdekoodikatselin."
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:555
-#: src/gtr-window.c:312 src/gtr-window.ui:25
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:53
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
+#: src/gtr-notebook.ui:294 src/gtr-window.c:316 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Käännösmuokkain"
 
@@ -74,7 +78,6 @@ msgid "@icon@"
 msgstr "@icon@"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:14
-#| msgid "Gtranslator Translation Memory Manager"
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Translation;Editor;Gettext;Write;käännös;lokalisointi;"
 
@@ -195,414 +198,24 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: plugins/alternate-language/gtr-alternate-language-panel.c:126
-msgid "Message not found"
-msgstr "Viestiä ei löydy"
-
-#: plugins/alternate-language/gtr-alternate-language-panel.c:229
-msgid "Open file for alternate language"
-msgstr "Avaa toisenkielinen tiedosto"
-
-#: plugins/alternate-language/gtr-alternate-language-panel.c:254
-msgid "File closed"
-msgstr "Tiedosto on suljettu"
-
-#: plugins/alternate-language/gtr-alternate-language-panel.c:322
-#: src/gtr-file-dialogs.c:48
-msgid "_Open"
-msgstr "A_vaa"
-
-#: plugins/alternate-language/gtr-alternate-language-panel.c:328
-#: src/gtr-header-dialog.c:278 src/gtr-io-error-info-bar.c:123
-#: src/gtr-preferences-dialog.c:588 src/gtr-search-dialog.c:391
-#: src/translation-memory/gtr-translation-memory-dialog.c:283
-msgid "_Close"
-msgstr "_Sulje"
-
-#: plugins/alternate-language/gtr-alternate-language-panel.c:334
-msgid "Co_py"
-msgstr "Ko_pioi"
-
-#: plugins/alternate-language/gtr-alternate-language-panel.c:363
-msgid "There isn’t any file loaded"
-msgstr "Mitään tiedostoa ei ole ladattu"
-
-#: plugins/alternate-language/gtr-alternate-language-plugin.c:81
-msgid "_Alternate Language"
-msgstr "_Vaihtoehtoinen kieli"
-
-#: plugins/alternate-language/gtr-alternate-language-plugin.c:82
-msgid "Show the Alternate Language panel"
-msgstr "Näytä vaihtoehtoisen kielen paneeli"
-
-#: plugins/alternate-language/gtr-alternate-language-plugin.c:222
-#: plugins/alternate-language/gtr-alternate-language.plugin.desktop.in:5
-msgid "Alternate Language"
-msgstr "Vaihtoehtoinen kieli"
-
-#: plugins/charmap/charmap/__init__.py:42
-#: plugins/charmap/gtr-charmap.plugin.desktop.in:6
-msgid "Character Map"
-msgstr "Merkkikartta"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: plugins/charmap/gtr-charmap.plugin.desktop.in:9
-msgid "accessories-character-map"
-msgstr "accessories-character-map"
-
-#: plugins/codeview/gtr-codeview-dialog.ui:8
-msgid "Source View Settings"
-msgstr "Lähdekoodinäkymän asetukset"
-
-#: plugins/codeview/gtr-codeview-dialog.ui:58
-msgid "Use external editor"
-msgstr "Käytä ulkoista muokkainta"
-
-#: plugins/codeview/gtr-codeview-dialog.ui:83
-msgid "Program command:"
-msgstr "Ohjelman komento:"
-
-#: plugins/codeview/gtr-codeview-dialog.ui:120
-msgid "Line command:"
-msgstr "Rivikomento:"
-
-#: plugins/codeview/gtr-codeview-plugin.c:129
-#, c-format
-msgid "Please install “%s” to be able to show the file"
-msgstr "Asenna “%s”, jotta tiedosto on mahdollista näyttää"
-
-#: plugins/codeview/gtr-codeview-plugin.c:497
+#: src/codeview/gtr-codeview.c:353
 msgid "Paths:"
 msgstr "Polut:"
 
-#: plugins/codeview/gtr-codeview.plugin.desktop.in:5
-msgid "Source Code View"
-msgstr "Lähdekoodinäkymä"
+#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
+#: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:588
+#: src/gtr-search-dialog.c:391
+#: src/translation-memory/gtr-translation-memory-dialog.c:299
+msgid "_Close"
+msgstr "_Sulje"
 
-#: plugins/codeview/gtr-viewer.c:80
+#: src/codeview/gtr-viewer.c:75
 msgid "Source Viewer"
 msgstr "Lähdekoodin katselin"
 
-#: plugins/codeview/gtr-viewer.ui:59
+#: src/codeview/gtr-viewer.ui:59
 msgid "Source code"
 msgstr "Lähdekoodi"
-
-#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:5
-msgid "Use the System Editor"
-msgstr "Käytä järjestelmän tekstimuokkainta"
-
-#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:6
-msgid "Whether use the system editor to show the source code"
-msgstr "Käytetäänkö järjestelmän tekstimuokkainta lähdekoodin näyttämiseen"
-
-#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:10
-msgid "The Editor to Launch"
-msgstr "Käynnistettävä tekstimuokkain"
-
-#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:11
-msgid "The command to launch the editor you want to use"
-msgstr "Haluamasi tekstimuokkaimen käynnistämiseen käytettävä komento"
-
-#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:15
-msgid "Arguments for the Command"
-msgstr ""
-
-#: plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in:16
-msgid "Arguments to pass to the program command line to select the line"
-msgstr ""
-
-#: plugins/dictionary/gtr-dictionary-plugin.c:140
-#: plugins/dictionary/gtr-dict.plugin.desktop.in:5
-msgid "Dictionary"
-msgstr "Sanasto"
-
-#: plugins/dictionary/gtr-dict-panel.c:166
-#, c-format
-msgid "No dictionary source available with name “%s”"
-msgstr "Sanastolähdettä nimellä “%s” ei ole saatavilla"
-
-#: plugins/dictionary/gtr-dict-panel.c:170
-msgid "Unable to find dictionary source"
-msgstr "Sanastolähdettä ei löytynyt"
-
-#: plugins/dictionary/gtr-dict-panel.c:185
-#, c-format
-msgid "No context available for source “%s”"
-msgstr "Lähteelle “%s” ei löydy asiayhteyttä"
-
-#: plugins/dictionary/gtr-dict-panel.c:189
-msgid "Unable to create a context"
-msgstr "Uutta asiayhteyttä ei voi luoda"
-
-#: plugins/dictionary/gtr-dict-panel.c:272
-#, c-format
-msgid "Dictionary source “%s” selected"
-msgstr "Sanastolähde “%s” valittu"
-
-#: plugins/dictionary/gtr-dict-panel.c:291
-#, c-format
-msgid "Strategy “%s” selected"
-msgstr "Strategia “%s” valittu"
-
-#: plugins/dictionary/gtr-dict-panel.c:309
-#, c-format
-msgid "Database “%s” selected"
-msgstr "Tietokanta “%s” valittu"
-
-#: plugins/dictionary/gtr-dict-panel.c:353
-#, c-format
-msgid "Word “%s” selected"
-msgstr "Sana “%s” valittu"
-
-#. speller
-#: plugins/dictionary/gtr-dict-panel.c:375
-msgid "Double-click on the word to look up"
-msgstr "Etsi sanaa kaksoisnapsauttamalla"
-
-#. strat-chooser
-#: plugins/dictionary/gtr-dict-panel.c:380
-msgid "Double-click on the matching strategy to use"
-msgstr "Kaksoisnapsauta käyttääksesi täsmäävät strategiaa"
-
-#. source-chooser
-#: plugins/dictionary/gtr-dict-panel.c:386
-msgid "Double-click on the source to use"
-msgstr "Kaksoisnapsauta käytettävää lähdettä"
-
-#. db-chooser
-#: plugins/dictionary/gtr-dict-panel.c:396
-msgid "Double-click on the database to use"
-msgstr "Kaksoisnapsauta käytettääksesi tietokantaa"
-
-#. Look up Button
-#: plugins/dictionary/gtr-dict-panel.c:502
-msgid "Look _up:"
-msgstr "Etsi _lähteistä:"
-
-#: plugins/dictionary/gtr-dict-panel.c:559
-msgid "Similar words"
-msgstr "Samankaltaiset sanat"
-
-#: plugins/dictionary/gtr-dict-panel.c:572
-msgid "Available dictionaries"
-msgstr "Saatavilla olevat sanakirjat"
-
-#: plugins/dictionary/gtr-dict-panel.c:586
-msgid "Available strategies"
-msgstr "Saatavilla olevat strategiat"
-
-#: plugins/dictionary/gtr-dict-panel.c:596
-msgid "Dictionary sources"
-msgstr "Sanastolähteet"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: plugins/dictionary/gtr-dict.plugin.desktop.in:8
-msgid "accessories-dictionary"
-msgstr "accessories-dictionary"
-
-#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:5
-msgid "Database"
-msgstr "Tietokanta"
-
-#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:6
-msgid "Word database"
-msgstr "Sanatietokanta"
-
-#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:10
-msgid "Source Name"
-msgstr "Lähteen nimi"
-
-#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:14
-msgid "Strategy"
-msgstr "Strategia"
-
-#: plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in:18
-msgid "Panel Position"
-msgstr "Paneelin sijainti"
-
-#: plugins/fullscreen/gtr-fullscreen-plugin.c:67
-msgid "_Fullscreen"
-msgstr "_Koko näyttö"
-
-#: plugins/fullscreen/gtr-fullscreen-plugin.c:68
-msgid "Place window on fullscreen state"
-msgstr "Näytä ikkunan koko näytön tilassa"
-
-#: plugins/fullscreen/gtr-fullscreen.plugin.desktop.in:5
-msgid "Fullscreen"
-msgstr "Koko näyttö"
-
-#: plugins/insert-params/gtr-insert-params-plugin.c:113
-msgid "_Next Param"
-msgstr "_Seuraava merkintä"
-
-#: plugins/insert-params/gtr-insert-params-plugin.c:114
-msgid "Insert the next param of the message"
-msgstr "Lisää viestin seuraava merkintä"
-
-#: plugins/insert-params/gtr-insert-params-plugin.c:116
-msgid "_Insert Params"
-msgstr "_Lisää merkinnät"
-
-#: plugins/insert-params/gtr-insert-params-plugin.c:117
-msgid "_Next Tag"
-msgstr "_Seuraava merkintä"
-
-#: plugins/insert-params/gtr-insert-params-plugin.c:118
-msgid "Insert the next tag of the message"
-msgstr "Lisää viestin seuraava merkintä"
-
-#: plugins/insert-params/gtr-insert-params-plugin.c:120
-msgid "_Insert Tags"
-msgstr "_Lisää merkinnät"
-
-#: plugins/insert-params/gtr-insert-params.plugin.desktop.in:5
-msgid "Insert Params or Tags"
-msgstr "Lisää merkintöjä"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.c:167
-#: src/translation-memory/gtr-translation-memory-dialog.c:166
-msgid "Strings added to database"
-msgstr "Käännökset lisätty tietokantaan"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.c:224
-#: src/translation-memory/gtr-translation-memory-dialog.c:224
-msgid "Please specify a valid path to build the translation memory"
-msgstr "Määritä kelvollinen polku rakentaaksesi käännösmuistin"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.c:291
-msgid "Gtranslator Translation Memory Manager"
-msgstr "Gtranslatorin käännösmuistin hallinta"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.ui:58
-#: src/translation-memory/gtr-translation-memory-dialog.ui:58
-msgid "Database:"
-msgstr "Tietokanta:"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.ui:101
-#: src/translation-memory/gtr-translation-memory-dialog.ui:101
-msgid "Select the directory which contains PO files:"
-msgstr "Valitse po-tiedostoja sisältävä kansio:"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.ui:152
-#: src/translation-memory/gtr-translation-memory-dialog.ui:152
-msgid "Add to Database"
-msgstr "Lisää tietokantaan"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.ui:209
-#: src/translation-memory/gtr-translation-memory-dialog.ui:209
-msgid "Configuration:"
-msgstr "Asetukset:"
-
-#: plugins/translation-memory/gtr-translation-memory-dialog.ui:252
-#: src/translation-memory/gtr-translation-memory-dialog.ui:252
-msgid "Use only files with this name:"
-msgstr "Käytä vain tämännimisiä tiedostoja:"
-
-#: plugins/translation-memory/gtr-translation-memory.plugin.desktop.in:5
-#: plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
-msgid "Translation Memory"
-msgstr "Käännösmuisti"
-
-#: plugins/translation-memory/gtr-translation-memory-ui.c:207
-#, c-format
-msgid "Insert Option nº %d"
-msgstr "Sisällytä valinta nro %d"
-
-#: plugins/translation-memory/gtr-translation-memory-ui.c:325
-#: src/translation-memory/gtr-translation-memory-ui.c:255
-msgid "_Use this translation"
-msgstr "_Käytä tätä käännöstä"
-
-#: plugins/translation-memory/gtr-translation-memory-ui.c:330
-#: src/translation-memory/gtr-translation-memory-ui.c:260
-msgid "_Remove"
-msgstr "_Poista"
-
-#: plugins/translation-memory/gtr-translation-memory-ui.c:445
-#: src/translation-memory/gtr-translation-memory-ui.c:371
-msgid "Shortcut"
-msgstr "Pikanäppäin"
-
-#: plugins/translation-memory/gtr-translation-memory-ui.c:454
-#: src/translation-memory/gtr-translation-memory-ui.c:380
-msgid "Level"
-msgstr "Vastaavuus"
-
-#: plugins/translation-memory/gtr-translation-memory-ui.c:463
-#: src/translation-memory/gtr-translation-memory-ui.c:389
-msgid "String"
-msgstr "Käännös"
-
-#: plugins/translation-memory/gtr-translation-memory-window-activatable.c:81
-msgid "_Build Translation Memory"
-msgstr "_Rakenna käännösmuisti"
-
-#: plugins/translation-memory/gtr-translation-memory-window-activatable.c:82
-#: src/gtr-notebook.ui:164
-msgid "Build translation memory"
-msgstr "Rakenna käännösmuisti"
-
-#: plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
-msgid "_Translation Memory"
-msgstr "Käännös_muisti"
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
-msgid "PO directory"
-msgstr "PO-kansio"
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
-msgid "Directory containing PO files to add to the translation memory."
-msgstr "Kansio, joka sisältää käännösmuistiin lisättävät PO-tiedostot."
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
-msgid "Restrict search by filename"
-msgstr "Rajoita hakua tiedostonimen perusteella"
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
-msgid ""
-"If true, only include files with a specified filename when searching the "
-"translation memory."
-msgstr ""
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
-msgid "Filename to restrict search to"
-msgstr "Tiedostonimi, johon haku rajoitetaan"
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
-msgid ""
-"Filename to which searching of the translation memory should be restricted."
-msgstr ""
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
-msgid "Maximum number of missing words"
-msgstr "Puuttuvien sanojen enimmäismäärä"
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
-msgid ""
-"Maximum number of words that can be missing from a message displayed as a "
-"match by the translation memory."
-msgstr ""
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
-msgid "Maximum difference in message length"
-msgstr "Enimmäiseroavaisuus viestin pituudessa"
-
-#: plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
-msgid ""
-"Maximum difference in length between messages displayed as matches by the "
-"translation memory."
-msgstr ""
 
 #: src/gtr-actions-app.c:48
 msgid "Current Maintainers"
@@ -629,7 +242,7 @@ msgstr "Työkaluja ohjelmien ja kirjastojen kotoistamisen avuksi."
 #: src/gtr-actions-app.c:101
 msgid "translator-credits"
 msgstr ""
-"Jiri Grönroos, 2012-2018\n"
+"Jiri Grönroos, 2012-2019\n"
 "Ilkka Tuohela, 2005-2008\n"
 "Jarkko Ranta, 2000-2004\n"
 "\n"
@@ -669,26 +282,6 @@ msgstr "Yksi kohta löytyi ja korvattiin"
 #: src/gtr-actions-search.c:189
 msgid "Phrase not found"
 msgstr "Sanaa/lausetta ei löydy"
-
-#: src/gtranslator-menu.ui:7
-msgid "_New Window"
-msgstr "_Uusi ikkuna"
-
-#: src/gtranslator-menu.ui:13
-msgid "_Preferences"
-msgstr "_Asetukset"
-
-#: src/gtranslator-menu.ui:19
-msgid "_Help"
-msgstr "O_hje"
-
-#: src/gtranslator-menu.ui:24
-msgid "_About"
-msgstr "_Tietoja"
-
-#: src/gtranslator-menu.ui:30
-msgid "_Quit"
-msgstr "_Lopeta"
 
 #: src/gtr-assistant.c:128
 #, c-format
@@ -734,7 +327,7 @@ msgid "Team email"
 msgstr "Kääntäjäryhmän sähköposti"
 
 #: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:521
-#: src/gtr-window.c:550
+#: src/gtr-window.c:554
 msgid "Profile"
 msgstr "Profiili"
 
@@ -750,14 +343,15 @@ msgstr "Vahvistus"
 msgid "Close _without Saving"
 msgstr "Sulje _tallentamatta"
 
-#: src/gtr-close-confirmation-dialog.c:126 src/gtr-file-dialogs.c:45
-#: src/gtr-jump-dialog.c:90 src/gtr-preferences-dialog.c:394
-#: src/gtr-profile-dialog.c:71
-#: src/translation-memory/gtr-translation-memory-dialog.c:101
+#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:86
+#: src/gtr-file-dialogs.c:45 src/gtr-jump-dialog.c:90
+#: src/gtr-preferences-dialog.c:394 src/gtr-profile-dialog.c:71
+#: src/translation-memory/gtr-translation-memory-dialog.c:81
 msgid "_Cancel"
 msgstr "_Peru"
 
-#: src/gtr-close-confirmation-dialog.c:128 src/gtr-file-dialogs.c:47
+#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:84
+#: src/gtr-file-dialogs.c:47
 msgid "_Save"
 msgstr "T_allenna"
 
@@ -805,36 +399,37 @@ msgstr "Tallennus on estetty järjestelmän pääkäyttäjän toimesta."
 msgid "If you don’t save, all your changes will be permanently lost."
 msgstr "Jos et tallenna, kaikki muutokset häviävät."
 
-#: src/gtr-context.c:238
+#: src/gtr-context.c:81
+msgid "Edit notes"
+msgstr "Muokkaa huomioita"
+
+#: src/gtr-context.c:268
 msgid "Notes:"
 msgstr "Huomiot:"
 
-#: src/gtr-context.c:246
+#: src/gtr-context.c:276
 msgid "Add Note"
 msgstr "Lisää huomio"
 
-#: src/gtr-context.c:251
+#: src/gtr-context.c:281
 msgid "Edit"
 msgstr "Muokkaa"
 
-#. Extracted comments
-#: src/gtr-context.c:297
+#: src/gtr-context.c:327
 msgid "Extracted comments:"
 msgstr "Tuodut kommentit:"
 
-#. Context
-#: src/gtr-context.c:301
+#: src/gtr-context.c:331
 msgid "Context:"
 msgstr "Asiayhteys:"
 
-#. Format
-#: src/gtr-context.c:305
+#: src/gtr-context.c:335
 msgid "Format:"
 msgstr "Muoto:"
 
-#: src/gtr-context.ui:51
-msgid "D_one"
-msgstr "_Valmis"
+#: src/gtr-file-dialogs.c:48
+msgid "_Open"
+msgstr "A_vaa"
 
 #: src/gtr-file-dialogs.c:62
 msgid "Gettext translation"
@@ -914,7 +509,7 @@ msgstr "Kommentti"
 
 #: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
 #: src/gtr-profile-dialog.c:170
-#: src/translation-memory/gtr-translation-memory-dialog.c:103
+#: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "_OK"
 msgstr "_OK"
 
@@ -954,19 +549,17 @@ msgstr "M_onikkomuodot"
 msgid "Edit options manually"
 msgstr "Muokkaa valintoja käsin"
 
-#: src/gtr-message-table.c:255
+#: src/gtr-message-table.c:219
 msgid "Original Message"
 msgstr "Alkuperäisen viesti"
 
-#: src/gtr-message-table.c:274
+#: src/gtr-message-table.c:238
 msgid "Translated Message"
 msgstr "Käännetty viesti"
 
 #: src/gtr-notebook.ui:26
-#, fuzzy
-#| msgid "Enter message number:"
 msgid "Order messages by"
-msgstr "Anna viestin numero:"
+msgstr "Viestien järjestys"
 
 #: src/gtr-notebook.ui:58
 msgid "Appearance in the original file"
@@ -992,6 +585,10 @@ msgstr "Etsi"
 #: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:453
 msgid "Find and replace"
 msgstr "Etsi ja korvaa"
+
+#: src/gtr-notebook.ui:164
+msgid "Build translation memory"
+msgstr "Rakenna käännösmuisti"
 
 #: src/gtr-notebook.ui:179
 msgid "Edit header"
@@ -1075,17 +672,17 @@ msgstr "Tiedosto on tyhjä"
 msgid "Failed opening file “%s”: %s"
 msgstr "Tiedoston “%s” avaus epäonnistui: %s"
 
-#: src/gtr-po.c:524
+#: src/gtr-po.c:530
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Muunnos merkistöstä “%s” UTF-8-muotoon ei onnistu"
 
-#: src/gtr-po.c:541 src/gtr-po.c:561
+#: src/gtr-po.c:547 src/gtr-po.c:567
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Väliaikaistiedoston tallennus merkistömuunnosta varten epäonnistui"
 
-#: src/gtr-po.c:598
+#: src/gtr-po.c:604
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -1096,17 +693,17 @@ msgstr ""
 "iconv-komentorivityökaluja ennen tämän tiedoston avaamista Gnomen "
 "käännösmuokkaimella"
 
-#: src/gtr-po.c:666
+#: src/gtr-po.c:672
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext palautti tyhjän viestialuelistan."
 
-#: src/gtr-po.c:711
+#: src/gtr-po.c:717
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Viestejä ei saatu parserilta."
 
-#: src/gtr-po.c:762
+#: src/gtr-po.c:768
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -1117,18 +714,17 @@ msgstr ""
 "Pot-tiedostot luodaan koostamisvaiheessa automaattisesti.\n"
 "Tiedostosi nimen tulisi luultavasti olla muotoa “%s.po”."
 
-#: src/gtr-po.c:775
+#: src/gtr-po.c:781
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Tiedosto %s on vain lukumuodossa, joten sitä ei voi korvata"
 
-#: src/gtr-po.c:794
+#: src/gtr-po.c:800
 #, c-format
-#| msgid "There was an error writing the PO file: %s"
 msgid "There is an error in the PO file: %s"
 msgstr "PO-tiedostossa on virhe: %s"
 
-#: src/gtr-po.c:806
+#: src/gtr-po.c:812
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Virhe tallennettaessa po-tiedostoa: %s"
@@ -1323,55 +919,55 @@ msgstr "INS"
 msgid "OVR"
 msgstr "OVR"
 
-#: src/gtr-tab.c:245
+#: src/gtr-tab-label.c:278
+msgid "Close document"
+msgstr "Sulje asiakirja"
+
+#: src/gtr-tab.c:246
 msgid "There is an error in the message:"
 msgstr "Viestissä on virhe:"
 
-#: src/gtr-tab.c:446 src/gtr-tab.c:557
+#: src/gtr-tab.c:459 src/gtr-tab.c:577
 msgid "fuzzy"
 msgstr "sumea"
 
-#: src/gtr-tab.c:587
+#: src/gtr-tab.c:607
 #, c-format
 msgid "Plural %d"
 msgstr "Monikko %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1139
+#: src/gtr-tab.c:1160
 msgid "Path:"
 msgstr "Polku:"
 
-#: src/gtr-tab.c:1789
+#: src/gtr-tab.c:1810
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Käännetty: %0.2f%%"
 
-#: src/gtr-tab.c:1790
+#: src/gtr-tab.c:1811
 #, c-format
 msgid "Translated: %d"
 msgstr "Käännetty: %d"
 
-#: src/gtr-tab.c:1791
+#: src/gtr-tab.c:1812
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Kääntämättä: %d"
 
-#: src/gtr-tab.c:1792
+#: src/gtr-tab.c:1813
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Sumeita: %d"
 
-#: src/gtr-tab-label.c:278
-msgid "Close document"
-msgstr "Sulje asiakirja"
-
 #: src/gtr-tab.ui:153
-msgid "_Original Message:"
-msgstr "_Alkuperäisen viesti:"
+msgid "_Original Message"
+msgstr "_Alkuperäisen viesti"
 
-#: src/gtr-tab.ui:233
-msgid "Translate_d Text:"
-msgstr "_Käännetty viesti:"
+#: src/gtr-tab.ui:245
+msgid "Translate_d Text"
+msgstr "_Käännetty viesti"
 
 #: src/gtr-utils.c:516
 msgid ""
@@ -1381,43 +977,43 @@ msgstr ""
 "Ohjeen näyttäminen epäonnistui. Varmista, että käännösmuokkaimen ohjepaketti "
 "on asennettu."
 
-#: src/gtr-window.c:167
+#: src/gtr-window.c:171
 msgid "Untranslated"
 msgstr "Kääntämättä"
 
-#: src/gtr-window.c:170
+#: src/gtr-window.c:174
 msgid "Translated"
 msgstr "Käännetty"
 
-#: src/gtr-window.c:173
+#: src/gtr-window.c:177
 msgid "Fuzzy"
 msgstr "Sumea"
 
-#: src/gtr-window.c:180
+#: src/gtr-window.c:184
 #, c-format
 msgid "Current: %d"
 msgstr "Nykyinen: %d"
 
-#: src/gtr-window.c:181
+#: src/gtr-window.c:185
 #, c-format
 msgid "Total: %d"
 msgstr "Yhteensä: %d"
 
-#: src/gtr-window.c:182
+#: src/gtr-window.c:186
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "%d käännetty"
 msgstr[1] "%d käännetty"
 
-#: src/gtr-window.c:185
+#: src/gtr-window.c:189
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "%d sumea"
 msgstr[1] "%d sumeaa"
 
-#: src/gtr-window.c:187
+#: src/gtr-window.c:191
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1425,25 +1021,40 @@ msgstr[0] "%d kääntämättä"
 msgstr[1] "%d kääntämättä"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:297
+#: src/gtr-window.c:301
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Käännösmuokkain"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:303
+#: src/gtr-window.c:307
 #, c-format
-#| msgid "%s — gtranslator"
 msgid "%s — Translation Editor"
 msgstr "%s — Käännösmuokkain"
 
-#: src/gtr-window.c:534
+#: src/gtr-window.c:538
 msgid "No profile"
 msgstr "Ei profiilia"
 
-#: src/gtr-window.c:552
+#: src/gtr-window.c:556
 msgid "Profile for the active document"
 msgstr "Aktiivisen asiakirjan profiili"
+
+#: src/gtranslator-menu.ui:7
+msgid "_New Window"
+msgstr "_Uusi ikkuna"
+
+#: src/gtranslator-menu.ui:13
+msgid "_Preferences"
+msgstr "_Asetukset"
+
+#: src/gtranslator-menu.ui:19
+msgid "_Help"
+msgstr "O_hje"
+
+#: src/gtranslator-menu.ui:24
+msgid "_About GNOME Translation Editor"
+msgstr "_Tietoja - Käännösmuokkain"
 
 #: src/help-overlay.ui:13
 msgctxt "shortcut window group"
@@ -1500,40 +1111,60 @@ msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Merkitse sumeaksi päälle/pois"
 
-#: src/help-overlay.ui:92
+#: src/help-overlay.ui:89
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "Kopioi alkuperäisen viestin sisältö käännöskenttään"
+
+#: src/help-overlay.ui:99
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Liikkuminen"
 
-#: src/help-overlay.ui:96
+#: src/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Siirry edelliseen viestiin"
 
-#: src/help-overlay.ui:103
+#: src/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Siirry seuraavaan viestiin"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Siirry edelliseen kääntämättömään viestiin"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Siirry seuraavaan kääntämättömään viestiin"
 
-#: src/help-overlay.ui:127
+#: src/help-overlay.ui:134
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Käännösmuisti"
 
-#: src/help-overlay.ui:131
+#: src/help-overlay.ui:138
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Rakenna käännösmuisti"
+
+#: src/help-overlay.ui:148
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "Etsi ja korvaa"
+
+#: src/help-overlay.ui:152
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Etsi"
+
+#: src/help-overlay.ui:159
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "Etsi ja korvaa"
 
 #: src/main.c:97
 msgid "— Edit PO files"
@@ -1548,9 +1179,292 @@ msgstr ""
 "%s\n"
 "Suorita “%s --help” nähdäksesi kaikki komentorivivalinnat.\n"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:287
+#: src/translation-memory/gtr-translation-memory-dialog.c:77
+msgid "Select PO directory"
+msgstr "Valitse PO-kansio"
+
+#: src/translation-memory/gtr-translation-memory-dialog.c:303
 msgid "Translation Editor Memory Manager"
 msgstr "Käännösmuokkaimen käännösmuistin hallinta"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
+msgid "Database:"
+msgstr "Tietokanta:"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:103
+msgid "Select the directory which contains PO files:"
+msgstr "Valitse po-tiedostoja sisältävä kansio:"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:154
+msgid "Add to Database"
+msgstr "Lisää tietokantaan"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:209
+msgid "Configuration:"
+msgstr "Asetukset:"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:253
+msgid "Use only files with this name:"
+msgstr "Käytä vain tämännimisiä tiedostoja:"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:255
+msgid "_Use this translation"
+msgstr "_Käytä tätä käännöstä"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:260
+msgid "_Remove"
+msgstr "_Poista"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:371
+msgid "Shortcut"
+msgstr "Pikanäppäin"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:380
+msgid "Level"
+msgstr "Vastaavuus"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:389
+msgid "String"
+msgstr "Käännös"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
+msgid "PO directory"
+msgstr "PO-kansio"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
+msgid "Directory containing PO files to add to the translation memory."
+msgstr "Kansio, joka sisältää käännösmuistiin lisättävät PO-tiedostot."
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
+msgid "Restrict search by filename"
+msgstr "Rajoita hakua tiedostonimen perusteella"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
+msgid ""
+"If true, only include files with a specified filename when searching the "
+"translation memory."
+msgstr ""
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
+msgid "Filename to restrict search to"
+msgstr "Tiedostonimi, johon haku rajoitetaan"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
+msgid ""
+"Filename to which searching of the translation memory should be restricted."
+msgstr ""
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
+msgid "Maximum number of missing words"
+msgstr "Puuttuvien sanojen enimmäismäärä"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
+msgid ""
+"Maximum number of words that can be missing from a message displayed as a "
+"match by the translation memory."
+msgstr ""
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
+msgid "Maximum difference in message length"
+msgstr "Enimmäiseroavaisuus viestin pituudessa"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
+msgid ""
+"Maximum difference in length between messages displayed as matches by the "
+"translation memory."
+msgstr ""
+
+#~ msgid "Message not found"
+#~ msgstr "Viestiä ei löydy"
+
+#~ msgid "Open file for alternate language"
+#~ msgstr "Avaa toisenkielinen tiedosto"
+
+#~ msgid "File closed"
+#~ msgstr "Tiedosto on suljettu"
+
+#~ msgid "Co_py"
+#~ msgstr "Ko_pioi"
+
+#~ msgid "There isn’t any file loaded"
+#~ msgstr "Mitään tiedostoa ei ole ladattu"
+
+#~ msgid "_Alternate Language"
+#~ msgstr "_Vaihtoehtoinen kieli"
+
+#~ msgid "Show the Alternate Language panel"
+#~ msgstr "Näytä vaihtoehtoisen kielen paneeli"
+
+#~ msgid "Alternate Language"
+#~ msgstr "Vaihtoehtoinen kieli"
+
+#~ msgid "Character Map"
+#~ msgstr "Merkkikartta"
+
+#~ msgid "accessories-character-map"
+#~ msgstr "accessories-character-map"
+
+#~ msgid "Source View Settings"
+#~ msgstr "Lähdekoodinäkymän asetukset"
+
+#~ msgid "Use external editor"
+#~ msgstr "Käytä ulkoista muokkainta"
+
+#~ msgid "Program command:"
+#~ msgstr "Ohjelman komento:"
+
+#~ msgid "Line command:"
+#~ msgstr "Rivikomento:"
+
+#~ msgid "Please install “%s” to be able to show the file"
+#~ msgstr "Asenna “%s”, jotta tiedosto on mahdollista näyttää"
+
+#~ msgid "Source Code View"
+#~ msgstr "Lähdekoodinäkymä"
+
+#~ msgid "Use the System Editor"
+#~ msgstr "Käytä järjestelmän tekstimuokkainta"
+
+#~ msgid "Whether use the system editor to show the source code"
+#~ msgstr "Käytetäänkö järjestelmän tekstimuokkainta lähdekoodin näyttämiseen"
+
+#~ msgid "The Editor to Launch"
+#~ msgstr "Käynnistettävä tekstimuokkain"
+
+#~ msgid "The command to launch the editor you want to use"
+#~ msgstr "Haluamasi tekstimuokkaimen käynnistämiseen käytettävä komento"
+
+#~ msgid "Dictionary"
+#~ msgstr "Sanasto"
+
+#~ msgid "No dictionary source available with name “%s”"
+#~ msgstr "Sanastolähdettä nimellä “%s” ei ole saatavilla"
+
+#~ msgid "Unable to find dictionary source"
+#~ msgstr "Sanastolähdettä ei löytynyt"
+
+#~ msgid "No context available for source “%s”"
+#~ msgstr "Lähteelle “%s” ei löydy asiayhteyttä"
+
+#~ msgid "Unable to create a context"
+#~ msgstr "Uutta asiayhteyttä ei voi luoda"
+
+#~ msgid "Dictionary source “%s” selected"
+#~ msgstr "Sanastolähde “%s” valittu"
+
+#~ msgid "Strategy “%s” selected"
+#~ msgstr "Strategia “%s” valittu"
+
+#~ msgid "Database “%s” selected"
+#~ msgstr "Tietokanta “%s” valittu"
+
+#~ msgid "Word “%s” selected"
+#~ msgstr "Sana “%s” valittu"
+
+#~ msgid "Double-click on the word to look up"
+#~ msgstr "Etsi sanaa kaksoisnapsauttamalla"
+
+#~ msgid "Double-click on the matching strategy to use"
+#~ msgstr "Kaksoisnapsauta käyttääksesi täsmäävät strategiaa"
+
+#~ msgid "Double-click on the source to use"
+#~ msgstr "Kaksoisnapsauta käytettävää lähdettä"
+
+#~ msgid "Double-click on the database to use"
+#~ msgstr "Kaksoisnapsauta käytettääksesi tietokantaa"
+
+#~ msgid "Look _up:"
+#~ msgstr "Etsi _lähteistä:"
+
+#~ msgid "Similar words"
+#~ msgstr "Samankaltaiset sanat"
+
+#~ msgid "Available dictionaries"
+#~ msgstr "Saatavilla olevat sanakirjat"
+
+#~ msgid "Available strategies"
+#~ msgstr "Saatavilla olevat strategiat"
+
+#~ msgid "Dictionary sources"
+#~ msgstr "Sanastolähteet"
+
+#~ msgid "accessories-dictionary"
+#~ msgstr "accessories-dictionary"
+
+#~ msgid "Database"
+#~ msgstr "Tietokanta"
+
+#~ msgid "Word database"
+#~ msgstr "Sanatietokanta"
+
+#~ msgid "Source Name"
+#~ msgstr "Lähteen nimi"
+
+#~ msgid "Strategy"
+#~ msgstr "Strategia"
+
+#~ msgid "Panel Position"
+#~ msgstr "Paneelin sijainti"
+
+#~ msgid "_Fullscreen"
+#~ msgstr "_Koko näyttö"
+
+#~ msgid "Place window on fullscreen state"
+#~ msgstr "Näytä ikkunan koko näytön tilassa"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Koko näyttö"
+
+#~ msgid "_Next Param"
+#~ msgstr "_Seuraava merkintä"
+
+#~ msgid "Insert the next param of the message"
+#~ msgstr "Lisää viestin seuraava merkintä"
+
+#~ msgid "_Insert Params"
+#~ msgstr "_Lisää merkinnät"
+
+#~ msgid "_Next Tag"
+#~ msgstr "_Seuraava merkintä"
+
+#~ msgid "Insert the next tag of the message"
+#~ msgstr "Lisää viestin seuraava merkintä"
+
+#~ msgid "_Insert Tags"
+#~ msgstr "_Lisää merkinnät"
+
+#~ msgid "Insert Params or Tags"
+#~ msgstr "Lisää merkintöjä"
+
+#~ msgid "Strings added to database"
+#~ msgstr "Käännökset lisätty tietokantaan"
+
+#~ msgid "Please specify a valid path to build the translation memory"
+#~ msgstr "Määritä kelvollinen polku rakentaaksesi käännösmuistin"
+
+#~ msgid "Gtranslator Translation Memory Manager"
+#~ msgstr "Gtranslatorin käännösmuistin hallinta"
+
+#~ msgid "Translation Memory"
+#~ msgstr "Käännösmuisti"
+
+#~ msgid "Insert Option nº %d"
+#~ msgstr "Sisällytä valinta nro %d"
+
+#~ msgid "_Build Translation Memory"
+#~ msgstr "_Rakenna käännösmuisti"
+
+#~ msgid "_Translation Memory"
+#~ msgstr "Käännös_muisti"
+
+#~ msgid "_About"
+#~ msgstr "_Tietoja"
+
+#~ msgid "_Quit"
+#~ msgstr "_Lopeta"
+
+#~ msgid "D_one"
+#~ msgstr "_Valmis"
 
 #~ msgid "Include fu_zzy strings"
 #~ msgstr "Sisällytä _myös sumeat käännökset"
@@ -1566,9 +1480,6 @@ msgstr "Käännösmuokkaimen käännösmuistin hallinta"
 
 #~ msgid "If true, use a custom font for edit fields."
 #~ msgstr "Jos tosi, muokkauskentissä käytetään omavalintaista fonttia."
-
-#~ msgid "Editor font"
-#~ msgstr "Muokkaimen fontti"
 
 #~ msgid "Custom font to use for edit fields."
 #~ msgstr "Muokkauskentissä käytettävä omavalintainen fontti."
@@ -1815,9 +1726,6 @@ msgstr "Käännösmuokkaimen käännösmuistin hallinta"
 
 #~ msgid "Copy _Message to Translation"
 #~ msgstr "Kopioi _viesti käännökseen"
-
-#~ msgid "Copy original message contents to the translation field"
-#~ msgstr "Kopioi alkuperäisen viestin sisältö käännöskenttään"
 
 #~ msgid "Toggle fuzzy status of a message"
 #~ msgstr "Määritä onko viesti sumea"
