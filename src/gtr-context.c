@@ -323,15 +323,12 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrContextPanel *panel)
   /* Add custom comments */
   add_notes (buffer, &iter, bold, msg);
 
-  
   add_text (buffer, bold, &iter, _("Extracted comments:"),
             gtr_msg_get_extracted_comments (msg));
 
-  
   add_text (buffer, bold, &iter, _("Context:"),
             gtr_msg_get_msgctxt (msg));
 
-  
   add_text (buffer, bold, &iter, _("Format:"),
             gtr_msg_get_format (msg));
 }
