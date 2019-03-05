@@ -52,6 +52,8 @@ const gchar *gtr_dirs_get_gtr_plugins_data_dir (void);
 
 const gchar *gtr_dirs_get_gtr_pixmaps_dir (void);
 
+const gchar *gtr_dirs_get_gtr_sourceview_dir (void);
+
 gchar *gtr_dirs_get_ui_file (const gchar * file);
 
 G_END_DECLS

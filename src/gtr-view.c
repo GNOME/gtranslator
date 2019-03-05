@@ -338,11 +338,25 @@ gtr_view_enable_visible_whitespace (GtrView * view, gboolean enable)
   GtkSourceBuffer *buffer;
   GtkSourceLanguageManager *manager;
   GtkSourceLanguage *lang;
+  const gchar * const * deflangs = NULL;
+  const gchar *langs[20] = {NULL};
+  gint i = 0;
 
   g_return_if_fail (GTR_IS_VIEW (view));
 
   manager = gtk_source_language_manager_get_default ();
-  lang = gtk_source_language_manager_guess_language (manager, "file.xml", NULL);
+  deflangs = gtk_source_language_manager_get_search_path (manager);
+  langs[1] = deflangs[0];
+
+  while (deflangs[i] && i < 18) {
+    langs[i] = deflangs[i];
+    i++;
+  }
+  langs[i] = gtr_dirs_get_gtr_sourceview_dir ();
+
+  manager = gtk_source_language_manager_new ();
+  gtk_source_language_manager_set_search_path (manager, (gchar **)langs);
+  lang = gtk_source_language_manager_get_language (manager, "gtranslator");
 
   source = GTK_SOURCE_VIEW (view);
   drawer = gtk_source_view_get_space_drawer (source);

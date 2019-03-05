@@ -63,3 +63,8 @@ install_data(
   'gtr-languages.ini',
   install_dir: join_paths(gtr_pkgdatadir, 'ui'),
 )
+
+install_data(
+  'sourceview/gtranslator.lang',
+  install_dir: join_paths(gtr_pkgdatadir, 'sourceview'),
+)
