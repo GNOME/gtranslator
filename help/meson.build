@@ -48,7 +48,6 @@ media = [
   'figures/mover5.png',
   'figures/profiles2.png',
   'figures/tm-manager.png',
-  'figures/top-bar.png',
   'figures/use-tm-entry.png',
 ]
 
