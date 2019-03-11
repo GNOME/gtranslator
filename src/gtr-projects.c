@@ -30,6 +30,7 @@ typedef struct
   GtkWidget *titlebar;
   GtkWidget *main_box;
   GtkWidget *open_button;
+  GtkWidget *dl_button;
 
   GtrWindow *main_window;
 } GtrProjectsPrivate;
@@ -43,7 +44,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (GtrProjects, gtr_projects, GTK_TYPE_BIN)
 
 
 static void project_add_cb (GtkButton *btn, GtrProjects *self);
-
+static void switch_to_dl (GtkButton *btn, GtrProjects *self);
 
 static void
 gtr_projects_dispose (GObject *object)
@@ -73,6 +74,7 @@ gtr_projects_class_init (GtrProjectsClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrProjects, main_box);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrProjects, open_button);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrProjects, dl_button);
 }
 
 static void
@@ -86,6 +88,12 @@ gtr_projects_init (GtrProjects *self)
   g_signal_connect (priv->open_button,
                     "clicked",
                     G_CALLBACK (project_add_cb),
+                    self);
+
+  /* switch teams and modules on click */
+  g_signal_connect (priv->dl_button,
+                    "clicked",
+                    G_CALLBACK (switch_to_dl),
                     self);
 }
 
@@ -113,5 +121,14 @@ project_add_cb (GtkButton   *btn,
   GtrProjectsPrivate *priv = gtr_projects_get_instance_private (self);
   GtrWindow *window = GTR_WINDOW (priv->main_window);
   gtr_open_file_dialog (NULL, window);
+}
+
+static void
+switch_to_dl (GtkButton   *btn,
+              GtrProjects *self)
+{
+  GtrProjectsPrivate *priv = gtr_projects_get_instance_private (self);
+  GtrWindow *window = GTR_WINDOW (priv->main_window);
+  gtr_window_show_dlteams (window);
 }
 

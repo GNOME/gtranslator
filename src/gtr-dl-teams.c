@@ -35,9 +35,13 @@ typedef struct
 {
   GtkWidget *titlebar;
   GtkWidget *main_box;
+  GtkWidget *select_box;
   GtkWidget *open_button;
   GtkWidget *dl_button;
   GtkWidget *load_button;
+  GtkWidget *stats_label;
+  GtkWidget *file_label;
+  GtkWidget *instructions;
 
   GtkWidget *teams_combobox;
   GtkWidget *modules_combobox;
@@ -53,6 +57,7 @@ typedef struct
   gchar *selected_module;
   gchar *selected_branch;
   const gchar *selected_domain;
+  const gchar *file_path;
 
   GtrWindow *main_window;
 } GtrDlTeamsPrivate;
@@ -67,6 +72,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (GtrDlTeams, gtr_dl_teams, GTK_TYPE_BIN)
 static void team_add_cb (GtkButton *btn, GtrDlTeams *self);
 static void gtr_dl_teams_save_combo_selected (GtkComboBox *combo, GtrDlTeams *self);
 static void gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self);
+static void gtr_dl_teams_get_file_info (GtrDlTeams *self);
 
 static void
 gtr_dl_teams_list_add (JsonArray *array,
@@ -150,19 +156,44 @@ gtr_dl_teams_load_module_details_json (GtkComboBox *combo,
   g_autoptr(SoupSession) session;
   g_autofree gchar *module_endpoint;
   g_autoptr(JsonParser) parser;
-  guint status;
   gint i;
   GError *error = NULL;
   JsonNode *node = NULL;
   JsonObject *object;
   JsonNode *branchesNode;
   JsonNode *domainsNode;
+  GtkWidget *dialog;
+
+  gtk_widget_hide (priv->file_label);
+  gtk_widget_show (priv->instructions);
+  gtk_label_set_text (GTK_LABEL (priv->stats_label), "");
+
+  /* Disable (down)load button */
+  gtk_widget_set_sensitive (priv->branches_combobox, FALSE);
+  gtk_widget_set_sensitive (priv->domains_combobox, FALSE);
+  gtk_widget_set_sensitive (priv->load_button, FALSE);
+
+  gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (priv->branches_combobox));
+  gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (priv->domains_combobox));
 
   /* Get module details JSON from DL API */
   module_endpoint = g_strconcat ((const gchar *)API_URL, "modules/", priv->selected_module, NULL);
   msg = soup_message_new ("GET", module_endpoint);
   session = soup_session_new ();
-  status = soup_session_send_message (session, msg);
+  soup_session_send_message (session, msg);
+
+  if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
+    {
+      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
+                                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       GTK_MESSAGE_WARNING,
+                                       GTK_BUTTONS_CLOSE,
+                                       "Error loading module info: %s",
+                                       soup_status_get_phrase (msg->status_code));
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+      return;
+    }
 
   parser = json_parser_new ();
 
@@ -181,8 +212,6 @@ gtr_dl_teams_load_module_details_json (GtkComboBox *combo,
       JsonNode *branch_element;
       JsonObject *branch_object;
 
-      gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (priv->branches_combobox));
-
       for (i=0; i < json_array_get_length (branchesArray); i++)
         {
           branch_element = json_array_get_element (branchesArray, i);
@@ -192,7 +221,7 @@ gtr_dl_teams_load_module_details_json (GtkComboBox *combo,
                                      json_object_get_string_member (branch_object, "name"));
         }
 
-      gtk_widget_show (priv->branches_combobox);
+      gtk_widget_set_sensitive (priv->branches_combobox, TRUE);
     }
   // TODO: check why there are no branches, display notification to user
 
@@ -205,8 +234,6 @@ gtr_dl_teams_load_module_details_json (GtkComboBox *combo,
       JsonNode *domain_element;
       JsonObject *domain_object;
 
-      gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (priv->domains_combobox));
-
       for (i=0; i < json_array_get_length (domains_array); i++)
         {
           domain_element = json_array_get_element (domains_array, i);
@@ -216,7 +243,7 @@ gtr_dl_teams_load_module_details_json (GtkComboBox *combo,
                                      json_object_get_string_member (domain_object, "description"));
         }
 
-      gtk_widget_show (priv->domains_combobox);
+      gtk_widget_set_sensitive (priv->domains_combobox, TRUE);
     }
   // TODO: check why there are no domains and display notification to user
 }
@@ -264,12 +291,6 @@ gtr_dl_teams_parse_modules_json (GObject *object,
   gtk_combo_box_set_model (GTK_COMBO_BOX (priv->modules_combobox), GTK_TREE_MODEL (priv->modules_store));
 
   gtk_widget_set_sensitive (priv->modules_combobox, TRUE);
-
-  /* Load module details when module is selected */
-  g_signal_connect (priv->modules_combobox,
-                    "changed",
-                    G_CALLBACK (gtr_dl_teams_load_module_details_json),
-                    user_data);
 }
 
 static void
@@ -296,35 +317,32 @@ void gtr_dl_teams_verify_and_load (GtrDlTeams *self)
       priv->selected_branch != NULL &&
       priv->selected_domain != NULL)
     {
-      // enable load button to get path from DL API and load PO file
-      gtk_widget_set_sensitive (priv->load_button, TRUE);
+      gtk_widget_hide (priv->instructions);
+      // get stats and path from DL API and enable (down)load button
+      gtr_dl_teams_get_file_info (self);
     }
   else
     {
-      // TODO: display notification to user
+      gtk_widget_show (priv->instructions);
     }
 }
 
 static void
-gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
+gtr_dl_teams_get_file_info (GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  SoupMessage *msg;
-  SoupSession *session;
   gchar *stats_endpoint;
-  guint status;
-  GError *error = NULL;
   JsonNode *node = NULL;
   g_autoptr(JsonParser) parser;
   g_autoptr(JsonObject) object;
-  GFile *tmp_file = NULL;
-  GFileIOStream *iostream = NULL;
-  GOutputStream *output = NULL;
-  gsize bytes = 0;
+  SoupMessage *msg;
+  SoupSession *session;
+  GError *error = NULL;
+  JsonNode *stats_node;
+  JsonObject *stats_object;
+  const char *format;
+  char *markup;
   GtkWidget *dialog;
-  g_autoptr(GFile) dest_file;
-  char *file_name;
-  const gchar *lang_po_file;
 
   /* API endpoint: modules/[module]/branches/[branch]/domains/[domain]/languages/[team] */
   stats_endpoint = g_strconcat ((const gchar *)API_URL,
@@ -340,7 +358,20 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
 
   msg = soup_message_new ("GET", stats_endpoint);
   session = soup_session_new ();
-  status = soup_session_send_message (session, msg);
+  soup_session_send_message (session, msg);
+
+  if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
+    {
+      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
+                                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       GTK_MESSAGE_WARNING,
+                                       GTK_BUTTONS_CLOSE,
+                                       "Error loading file info: %s",
+                                       soup_status_get_phrase (msg->status_code));
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+      return;
+    }
 
   parser = json_parser_new ();
 
@@ -350,15 +381,56 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
 
   object = json_node_get_object(node);
 
-  lang_po_file = json_object_get_string_member (object, "po_file");
+  /* Save file path; escape the string - slashes inside! */
+  priv->file_path = g_strescape (json_object_get_string_member (object, "po_file"), "");
 
-  /* Path to file is https://l10n.gnome.org/[lang_po_file] */
-  // todo show message/progress to user
+  if (!priv->file_path)
+    {
+      gtk_label_set_text (GTK_LABEL (priv->file_label), "No file found.");
+      gtk_widget_show (priv->file_label);
+      return;
+    }
 
-  msg = soup_message_new ("GET", g_strconcat ("https://l10n.gnome.org", lang_po_file, NULL));
+  /* Get file statistics and show them to the user */
+  stats_node = json_object_get_member (object, "statistics");
+  stats_object = json_node_get_object (stats_node);
+
+  format = "<span color=\"green\">\%d translated</span>, <span color=\"orange\">\%d fuzzy</span>, <span color=\"red\">\%d untranslated</span>";
+  markup = g_markup_printf_escaped (format,
+                                    json_object_get_int_member (stats_object, "trans"),
+                                    json_object_get_int_member (stats_object, "fuzzy"),
+                                    json_object_get_int_member (stats_object, "untrans"));
+
+  gtk_label_set_markup (GTK_LABEL (priv->stats_label), markup);
+  gtk_label_set_text (GTK_LABEL (priv->file_label), g_strconcat("File: ", strrchr (priv->file_path, '/') + 1, NULL));
+  gtk_widget_show (priv->file_label);
+
+  /* Enable (down)load button */
+  gtk_widget_set_sensitive (priv->load_button, TRUE);
+
+  g_free (markup);
+}
+
+static void
+gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
+{
+  GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
+  SoupMessage *msg;
+  SoupSession *session;
+  GError *error = NULL;
+  GFile *tmp_file = NULL;
+  GFileIOStream *iostream = NULL;
+  GOutputStream *output = NULL;
+  gsize bytes = 0;
+  GtkWidget *dialog;
+  g_autoptr(GFile) dest_file = NULL;
+
+  /* Load the file, save as temp; path to file is https://l10n.gnome.org/[priv->file_path] */
+  session = soup_session_new ();
+  msg = soup_message_new ("GET", g_strconcat ("https://l10n.gnome.org", g_strcompress(priv->file_path), NULL));
   soup_session_send_message (session, msg);
 
-  if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
+	if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
     {
       dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
                                        GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -407,8 +479,9 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
       return;
     }
 
-  file_name = strrchr(lang_po_file, '/');
-  dest_file = g_file_new_for_uri (g_strconcat("file:///tmp/", file_name+1, NULL));
+  /* Save file to /tmp; file basename is the part from last / character on */
+  dest_file = g_file_new_for_uri (g_strconcat ("file:///tmp", strrchr (priv->file_path, '/'), NULL));
+
   g_file_copy (tmp_file, dest_file, G_FILE_COPY_OVERWRITE, NULL, NULL, NULL, &error);
 
   if (error != NULL)
@@ -446,6 +519,8 @@ gtr_dl_teams_save_combo_selected (GtkComboBox *combo,
     {
       gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->modules_store), &iter, path);
       gtk_tree_model_get (GTK_TREE_MODEL (priv->modules_store), &iter, 0, &priv->selected_module, -1);
+      /* Reload module details on module change */
+      gtr_dl_teams_load_module_details_json (combo, self);
     }
   else if (strcmp(name, "combo_teams") == 0)
     {
@@ -491,6 +566,11 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, titlebar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, main_box);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, select_box);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, file_label);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, stats_label);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, load_button);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, instructions);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, open_button);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, dl_button);
@@ -505,6 +585,8 @@ gtr_dl_teams_init (GtrDlTeams *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   priv->main_window = NULL;
+
+  gtk_widget_set_sensitive (priv->load_button, FALSE);
 
   /* Init teams and modules list stores */
   priv->teams_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
@@ -521,7 +603,7 @@ gtr_dl_teams_init (GtrDlTeams *self)
                                   "text", 0,
                                   NULL);
 
-  gtk_container_add (GTK_CONTAINER (priv->main_box), priv->teams_combobox);
+  gtk_container_add (GTK_CONTAINER (priv->select_box), priv->teams_combobox);
   gtk_widget_set_sensitive (priv->teams_combobox, FALSE);
 
   priv->modules_combobox = gtk_combo_box_new ();
@@ -534,7 +616,7 @@ gtr_dl_teams_init (GtrDlTeams *self)
                                   "text", 0,
                                   NULL);
 
-  gtk_container_add (GTK_CONTAINER (priv->main_box), priv->modules_combobox);
+  gtk_container_add (GTK_CONTAINER (priv->select_box), priv->modules_combobox);
   gtk_widget_set_sensitive (priv->modules_combobox, FALSE);
 
   g_signal_connect (priv->open_button,
@@ -545,17 +627,13 @@ gtr_dl_teams_init (GtrDlTeams *self)
   /* Add empty combo boxes for DL domains and branches and hide them */
   priv->domains_combobox = gtk_combo_box_text_new ();
   gtk_widget_set_name (priv->domains_combobox, "combo_domains");
-  gtk_container_add (GTK_CONTAINER (priv->main_box), priv->domains_combobox);
+  gtk_container_add (GTK_CONTAINER (priv->select_box), priv->domains_combobox);
   gtk_widget_hide (priv->domains_combobox);
 
   priv->branches_combobox = gtk_combo_box_text_new ();
   gtk_widget_set_name (priv->branches_combobox, "combo_branches");
-  gtk_container_add (GTK_CONTAINER (priv->main_box), priv->branches_combobox);
+  gtk_container_add (GTK_CONTAINER (priv->select_box), priv->branches_combobox);
   gtk_widget_hide (priv->branches_combobox);
-
-  priv->load_button = gtk_button_new_with_label ("Load file");
-  gtk_container_add (GTK_CONTAINER (priv->main_box), priv->load_button);
-  gtk_widget_set_sensitive (priv->load_button, FALSE);
 
   /* Load teams and modules on click */
   g_signal_connect (priv->dl_button,

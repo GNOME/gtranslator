@@ -18,8 +18,8 @@
           <object class="GtkImage">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="pixel_size">80</property>
-            <property name="icon_name">go-home-symbolic</property>
+            <property name="pixel_size">60</property>
+            <property name="icon_name">view-restore-symbolic</property>
             <property name="icon_size">6</property>
           </object>
           <packing>
@@ -29,15 +29,73 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel">
+          <object class="GtkButton" id="dl_button">
+            <property name="label" translatable="yes">Click to load teams and modules from Damned Lies</property>
+            <property name="visible">true</property>
+            <property name="expand">False</property>
+          </object>
+          <packing>
+            <property name="pack-type">start</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="select_box">
+            <property name="margin_start">0</property>
+            <property name="margin_end">0</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">O hello, my new team container!</property>
+            <property name="margin_top">24</property>
+            <property name="margin_bottom">24</property>
+            <property name="vexpand">False</property>
+            <property name="valign">center</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">14</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="file_label">
+            <property name="visible">False</property>
+            <property name="can_focus">False</property>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="instructions">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Select team, module, branch and domain to get the translation file.</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="stats_label">
+            <property name="visible">False</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="load_button">
+            <property name="label" translatable="yes">Load file</property>
+            <property name="visible">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">6</property>
           </packing>
         </child>
 
@@ -48,7 +106,7 @@
   <!-- Header bar -->
   <object class="GtkHeaderBar" id="titlebar">
     <property name="visible">true</property>
-    <property name="title" translatable="yes">Damned Lies integration</property>
+    <property name="title" translatable="yes">Load from Damned Lies</property>
     <property name="show_close_button">True</property>
     <style>
       <class name="titlebar"/>
@@ -61,16 +119,6 @@
       <packing>
         <property name="pack-type">start</property>
         <property name="position">0</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkButton" id="dl_button">
-        <property name="label" translatable="yes">Load from DL…</property>
-        <property name="visible">true</property>
-      </object>
-      <packing>
-        <property name="pack-type">start</property>
-        <property name="position">1</property>
       </packing>
     </child>
     <child>
