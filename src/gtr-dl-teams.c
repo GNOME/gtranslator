@@ -107,7 +107,7 @@ gtr_dl_teams_parse_teams_json (GObject *object,
                                gpointer user_data)
 {
   g_autoptr(JsonParser) parser = json_parser_new ();
-  g_autoptr(GInputStream) stream;
+  g_autoptr(GInputStream) stream = NULL;
   GError *error = NULL;
   JsonNode *node = NULL;
   JsonArray *array = NULL;
@@ -152,10 +152,10 @@ gtr_dl_teams_load_module_details_json (GtkComboBox *combo,
                                        GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  g_autoptr(SoupMessage) msg;
-  g_autoptr(SoupSession) session;
+  g_autoptr(SoupMessage) msg = NULL;
+  g_autoptr(SoupSession) session = NULL;
   g_autofree gchar *module_endpoint;
-  g_autoptr(JsonParser) parser;
+  g_autoptr(JsonParser) parser = NULL;
   gint i;
   GError *error = NULL;
   JsonNode *node = NULL;
@@ -254,7 +254,7 @@ gtr_dl_teams_parse_modules_json (GObject *object,
                                  gpointer user_data)
 {
   g_autoptr(JsonParser) parser = json_parser_new ();
-  g_autoptr(GInputStream) stream;
+  g_autoptr(GInputStream) stream = NULL;
 	GError *error = NULL;
 
   JsonNode *node = NULL;
@@ -333,8 +333,8 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   gchar *stats_endpoint;
   JsonNode *node = NULL;
-  g_autoptr(JsonParser) parser;
-  g_autoptr(JsonObject) object;
+  g_autoptr(JsonParser) parser = NULL;
+  g_autoptr(JsonObject) object = NULL;
   SoupMessage *msg;
   SoupSession *session;
   GError *error = NULL;
