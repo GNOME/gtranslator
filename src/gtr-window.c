@@ -34,6 +34,7 @@
 #include "gtr-tab.h"
 #include "gtr-po.h"
 #include "gtr-projects.h"
+#include "gtr-dl-teams.h"
 #include "gtr-settings.h"
 #include "gtr-statusbar.h"
 #include "gtr-utils.h"
@@ -79,6 +80,7 @@ typedef struct
 
   GtkWidget *projects;
   GtkWidget *notebook;
+  GtkWidget *dlteams;
 
   GtrTab *active_tab;
 
@@ -773,6 +775,13 @@ gtr_window_init (GtrWindow *window)
                        gtr_projects_get_header (GTR_PROJECTS (priv->projects)),
                        "projects");
 
+  // DL team selection
+  priv->dlteams = GTK_WIDGET (gtr_dl_teams_new (window));
+  gtk_stack_add_named (GTK_STACK (priv->stack), priv->dlteams, "dlteams");
+  gtk_stack_add_named (GTK_STACK (priv->header_stack),
+                       gtr_dl_teams_get_header (GTR_DL_TEAMS (priv->dlteams)),
+                       "dlteams");
+
   gtk_widget_show_all (priv->stack);
 
   // translation memory
@@ -1177,6 +1186,15 @@ gtr_window_show_poeditor (GtrWindow *window)
 
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "poeditor");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "poeditor");
+}
+
+void
+gtr_window_show_dlteams (GtrWindow *window)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+
+  gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "dlteams");
+  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "dlteams");
 }
 
 void
