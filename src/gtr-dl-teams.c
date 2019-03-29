@@ -37,7 +37,6 @@ typedef struct
   GtkWidget *main_box;
   GtkWidget *select_box;
   GtkWidget *open_button;
-  GtkWidget *dl_button;
   GtkWidget *load_button;
   GtkWidget *stats_label;
   GtkWidget *file_label;
@@ -294,8 +293,10 @@ gtr_dl_teams_parse_modules_json (GObject *object,
 }
 
 static void
-gtr_dl_teams_load_json (GtkButton *btn,
+/*gtr_dl_teams_load_json (GtkButton *btn,
                         GtrDlTeams *self)
+*/
+gtr_dl_teams_load_json (GtrDlTeams *self)
 {
   /* Get team list JSON from DL */
   g_autoptr(SoupSession) session = soup_session_new ();
@@ -573,7 +574,6 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, instructions);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, open_button);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, dl_button);
 
 }
 
@@ -635,11 +635,8 @@ gtr_dl_teams_init (GtrDlTeams *self)
   gtk_container_add (GTK_CONTAINER (priv->select_box), priv->branches_combobox);
   gtk_widget_hide (priv->branches_combobox);
 
-  /* Load teams and modules on click */
-  g_signal_connect (priv->dl_button,
-                    "clicked",
-                    G_CALLBACK (gtr_dl_teams_load_json),
-                    self);
+  /* Load teams and modules automatically */
+  gtr_dl_teams_load_json (self);
 
   /* Connect "changed" to all combo boxes */
   g_signal_connect (priv->teams_combobox,
