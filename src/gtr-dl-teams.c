@@ -293,9 +293,6 @@ gtr_dl_teams_parse_modules_json (GObject *object,
 }
 
 static void
-/*gtr_dl_teams_load_json (GtkButton *btn,
-                        GtrDlTeams *self)
-*/
 gtr_dl_teams_load_json (GtrDlTeams *self)
 {
   /* Get team list JSON from DL */
