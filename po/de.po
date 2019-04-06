@@ -1,5 +1,6 @@
 # German gtranslator translation.
 # Copyright (C) 2000-2004 Free Software Foundation, Inc.
+#
 # Christian Meyer <chrisime@gnome.org>, 2000, 2001.
 # Kai Lahmann <kl@linuxfaqs.de>, 2000, 2001.
 # Karl Eichwalder <ke@suse.de>, 2000.
@@ -11,21 +12,20 @@
 # Simon Linden <xhi2018@gmail.com>, 2013, 2014.
 # Wolfgang Stöggl <c72578@yahoo.de>, 2015, 2018.
 # Mario Blättermann <mario.blaettermann@gmail.com>, 2009-2019.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-12-29 11:52+0000\n"
-"PO-Revision-Date: 2019-01-01 17:21+0100\n"
+"POT-Creation-Date: 2019-04-02 07:09+0000\n"
+"PO-Revision-Date: 2019-04-06 10:12+0200\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
-"Language-Team: Deutsch <gnome-de@gnome.org>\n"
+"Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 3.30.0\n"
+"X-Generator: Lokalize 18.12.3\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
 msgid "Gtranslator"
@@ -64,23 +64,18 @@ msgstr ""
 "Erweiterungen wie alternative Sprachen, Einfügen von XML-Elementen, "
 "Subversion-Integration und einer Quelltextansicht."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:31
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:61
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
-#: src/gtr-notebook.ui:294 src/gtr-window.c:316 src/gtr-window.ui:25
+#: src/gtr-notebook.ui:294 src/gtr-window.c:318 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Übersetzungseditor"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
 msgstr "Bearbeitungsprogramm für PO-Dateien"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: data/org.gnome.Gtranslator.desktop.in.in:7
-msgid "@icon@"
-msgstr "@icon@"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:14
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
@@ -354,7 +349,7 @@ msgid "Team email"
 msgstr "E-Mail des Sprachteams"
 
 #: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:521
-#: src/gtr-window.c:554
+#: src/gtr-window.c:556
 msgid "Profile"
 msgstr "Profil"
 
@@ -443,20 +438,60 @@ msgstr "Notiz hinzufügen"
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#. Extracted comments
-#: src/gtr-context.c:327
+#: src/gtr-context.c:326
 msgid "Extracted comments:"
 msgstr "Kommentarauszug:"
 
-#. Context
-#: src/gtr-context.c:331
+#: src/gtr-context.c:329
 msgid "Context:"
 msgstr "Kontext:"
 
-#. Format
-#: src/gtr-context.c:335
+#: src/gtr-context.c:332
 msgid "Format:"
 msgstr "Format:"
+
+#: src/gtr-dl-teams.ui:60
+msgid "Select team, module, branch and domain to get the translation file."
+msgstr ""
+"Wählen Sie Team, Modul, Zweig und Domain, um die Übersetzungsdatei zu"
+" erhalten."
+
+#: src/gtr-dl-teams.ui:81
+#| msgid "No profile"
+msgid "Load file"
+msgstr "Datei laden"
+
+#: src/gtr-dl-teams.ui:98
+msgid "Load from Damned Lies"
+msgstr "Aus den »Verdammten Lügen« laden"
+
+#: src/gtr-dl-teams.ui:105 src/gtr-notebook.ui:298 src/gtr-projects.ui:58
+msgid "Open…"
+msgstr "Öffnen …"
+
+#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:511 src/gtr-projects.ui:91
+msgid "Main Menu"
+msgstr "Hauptmenü"
+
+#: src/gtr-dl-teams.ui:156 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+msgid "New window"
+msgstr "Neues Fenster"
+
+#: src/gtr-dl-teams.ui:170 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+msgid "Preferences"
+msgstr "Einstellungen"
+
+#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:160
+msgid "Keyboard Shortcuts"
+msgstr "Tastenkombinationen"
+
+#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:174
+msgid "About"
+msgstr "Info"
+
+#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:276 src/gtr-projects.ui:188
+msgid "Quit"
+msgstr "Beenden"
 
 #: src/gtr-file-dialogs.c:48
 msgid "_Open"
@@ -552,9 +587,14 @@ msgstr "Springe zu Übersetzung"
 msgid "Enter message number:"
 msgstr "Geben Sie die Zeichenkettennummer ein:"
 
-#: src/gtr-lang-button.ui:61 src/gtr-lang-button.ui:70
+#: src/gtr-lang-button.ui:61
 msgid "Choose Language"
 msgstr "Sprache wählen"
+
+#: src/gtr-lang-button.ui:70
+#| msgid "Choose Language"
+msgid "Choose _Language"
+msgstr "Sprache wäh_len"
 
 #: src/gtr-languages-fetcher.ui:46
 msgid "_Language"
@@ -577,14 +617,15 @@ msgid "_Plural forms"
 msgstr "_Pluralformen"
 
 #: src/gtr-languages-fetcher.ui:200
-msgid "Edit options manually"
-msgstr "Optionen manuell bearbeiten"
+#| msgid "Edit options manually"
+msgid "_Edit options manually"
+msgstr "Optionen manu_ell bearbeiten"
 
-#: src/gtr-message-table.c:255
+#: src/gtr-message-table.c:219
 msgid "Original Message"
 msgstr "Ursprüngliche Zeichenkette"
 
-#: src/gtr-message-table.c:274
+#: src/gtr-message-table.c:238
 msgid "Translated Message"
 msgstr "Übersetzte Zeichenkette"
 
@@ -625,30 +666,6 @@ msgstr "Übersetzungsspeicher aufbauen"
 msgid "Edit header"
 msgstr "Kopfzeilen bearbeiten"
 
-#: src/gtr-notebook.ui:207 src/gtr-projects.ui:109
-msgid "New window"
-msgstr "Neues Fenster"
-
-#: src/gtr-notebook.ui:221 src/gtr-projects.ui:123
-msgid "Preferences"
-msgstr "Einstellungen"
-
-#: src/gtr-notebook.ui:248 src/gtr-projects.ui:150
-msgid "Keyboard Shortcuts"
-msgstr "Tastenkombinationen"
-
-#: src/gtr-notebook.ui:262 src/gtr-projects.ui:164
-msgid "About"
-msgstr "Info"
-
-#: src/gtr-notebook.ui:276 src/gtr-projects.ui:178
-msgid "Quit"
-msgstr "Beenden"
-
-#: src/gtr-notebook.ui:298 src/gtr-projects.ui:58
-msgid "Open…"
-msgstr "Öffnen …"
-
 #: src/gtr-notebook.ui:302
 msgid "Open a new file (<Ctrl>o)"
 msgstr "Eine neue Datei öffnen (<Strg>o)"
@@ -677,10 +694,6 @@ msgstr "Unklar-Status umschalten (<Strg>+u)"
 msgid "Order by menu"
 msgstr "Ordnen nach Menü"
 
-#: src/gtr-notebook.ui:511 src/gtr-projects.ui:81
-msgid "Main Menu"
-msgstr "Hauptmenü"
-
 #: src/gtr-notebook.ui:527
 msgid "Save"
 msgstr "Speichern"
@@ -703,18 +716,18 @@ msgstr "Die Datei ist leer"
 msgid "Failed opening file “%s”: %s"
 msgstr "Fehler beim Öffnen der Datei »%s«: %s"
 
-#: src/gtr-po.c:524
+#: src/gtr-po.c:530
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Zeichensatz »%s« konnte nicht nach UTF-8 umgewandelt werden"
 
-#: src/gtr-po.c:541 src/gtr-po.c:561
+#: src/gtr-po.c:547 src/gtr-po.c:567
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr ""
 "Temporäre Datei zur Umwandlung der Kodierung konnte nicht gespeichert werden"
 
-#: src/gtr-po.c:598
+#: src/gtr-po.c:604
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -725,17 +738,17 @@ msgstr ""
 "Verwenden Sie die Befehlszeilen-Werkzeuge msgconv oder iconv, bevor Sie "
 "diese Datei mit dem GNOME Übersetzungseditor öffnen"
 
-#: src/gtr-po.c:666
+#: src/gtr-po.c:672
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext hat eine leere Zeichenkettendomänenliste zurückgegeben."
 
-#: src/gtr-po.c:711
+#: src/gtr-po.c:717
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Vom Parser wurden keine Zeichenketten erhalten."
 
-#: src/gtr-po.c:762
+#: src/gtr-po.c:768
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -746,17 +759,17 @@ msgstr ""
 "Diese Dateien werden durch das Kompilieren generiert.\n"
 "Ihre Datei sollte die po-Endung besitzen, also »%s.po«."
 
-#: src/gtr-po.c:775
+#: src/gtr-po.c:781
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Die Datei %s ist nur lesbar und kann nicht überschrieben werden"
 
-#: src/gtr-po.c:794
+#: src/gtr-po.c:800
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Es gibt einen Fehler in der PO-Datei: %s"
 
-#: src/gtr-po.c:806
+#: src/gtr-po.c:812
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Es gab einen Fehler beim Schreiben der PO-Datei: %s"
@@ -893,6 +906,10 @@ msgstr "Öffnen Sie eine neue .po-Datei oder ziehen Sie sie hier hin"
 msgid "Select a PO file"
 msgstr "Eine PO-Datei auswählen"
 
+#: src/gtr-projects.ui:68
+msgid "Load from DL…"
+msgstr "Aus VL laden …"
+
 #: src/gtr-search-dialog.c:347 src/gtr-search-dialog.ui:6
 #: src/gtr-search-dialog.ui:53
 msgid "Replace"
@@ -958,47 +975,45 @@ msgstr "Dokument schließen"
 msgid "There is an error in the message:"
 msgstr "Die Zeichenkette enthält einen Fehler:"
 
-#: src/gtr-tab.c:459 src/gtr-tab.c:570
+#: src/gtr-tab.c:459 src/gtr-tab.c:577
 msgid "fuzzy"
 msgstr "Unklar"
 
-#: src/gtr-tab.c:600
+#: src/gtr-tab.c:607
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1153
+#: src/gtr-tab.c:1160
 msgid "Path:"
 msgstr "Pfad:"
 
-#: src/gtr-tab.c:1803
+#: src/gtr-tab.c:1810
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Übersetzt: %0.2f%%"
 
-#: src/gtr-tab.c:1804
+#: src/gtr-tab.c:1811
 #, c-format
 msgid "Translated: %d"
 msgstr "Übersetzt: %d"
 
-#: src/gtr-tab.c:1805
+#: src/gtr-tab.c:1812
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Unübersetzt: %d"
 
-#: src/gtr-tab.c:1806
+#: src/gtr-tab.c:1813
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Unklar: %d"
 
 #: src/gtr-tab.ui:153
-#| msgid "_Original Message:"
 msgid "_Original Message"
 msgstr "_Ursprüngliche Zeichenkette"
 
 #: src/gtr-tab.ui:245
-#| msgid "Translate_d Text:"
 msgid "Translate_d Text"
 msgstr "_Übersetzter Text"
 
@@ -1010,43 +1025,43 @@ msgstr ""
 "Die Hilfe kann nicht angezeigt werden. Bitte stellen Sie sicher, dass das "
 "Dokumentationspaket zum Übersetzungseditor installiert ist."
 
-#: src/gtr-window.c:171
+#: src/gtr-window.c:173
 msgid "Untranslated"
 msgstr "Unübersetzt"
 
-#: src/gtr-window.c:174
+#: src/gtr-window.c:176
 msgid "Translated"
 msgstr "Übersetzt"
 
-#: src/gtr-window.c:177
+#: src/gtr-window.c:179
 msgid "Fuzzy"
 msgstr "Unklar"
 
-#: src/gtr-window.c:184
+#: src/gtr-window.c:186
 #, c-format
 msgid "Current: %d"
 msgstr "Derzeit: %d"
 
-#: src/gtr-window.c:185
+#: src/gtr-window.c:187
 #, c-format
 msgid "Total: %d"
 msgstr "Insgesamt: %d"
 
-#: src/gtr-window.c:186
+#: src/gtr-window.c:188
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "%d übersetzt"
 msgstr[1] "%d übersetzt"
 
-#: src/gtr-window.c:189
+#: src/gtr-window.c:191
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "%d unklar"
 msgstr[1] "%d unklar"
 
-#: src/gtr-window.c:191
+#: src/gtr-window.c:193
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1054,22 +1069,22 @@ msgstr[0] "%d nicht übersetzt"
 msgstr[1] "%d nicht übersetzt"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:301
+#: src/gtr-window.c:303
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Übersetzungseditor"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:307
+#: src/gtr-window.c:309
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Übersetzungseditor"
 
-#: src/gtr-window.c:538
+#: src/gtr-window.c:540
 msgid "No profile"
 msgstr "Kein Profil"
 
-#: src/gtr-window.c:556
+#: src/gtr-window.c:558
 msgid "Profile for the active document"
 msgstr "Profil des aktiven Dokuments"
 
@@ -1293,7 +1308,7 @@ msgstr ""
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
 msgid "Maximum number of missing words"
-msgstr "Maximale Anzahl fehlender Worte"
+msgstr "Maximale Anzahl fehlender Wörter"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
 msgid ""
@@ -1314,203 +1329,3 @@ msgid ""
 msgstr ""
 "Maximal erlaubter Längenunterschied zwischen Zeichenketten, die als "
 "Übereinstimmung vom Übersetzungsspeicher angezeigt werden."
-
-#~ msgid "Message not found"
-#~ msgstr "Zeichenkette nicht gefunden"
-
-#~ msgid "Open file for alternate language"
-#~ msgstr "Datei für weitere Sprache öffnen"
-
-#~ msgid "File closed"
-#~ msgstr "Datei geschlossen"
-
-#~ msgid "Co_py"
-#~ msgstr "Ko_pieren"
-
-#~ msgid "There isn’t any file loaded"
-#~ msgstr "Es ist keine Datei geladen"
-
-#~ msgid "_Alternate Language"
-#~ msgstr "_Weitere Sprache"
-
-#~ msgid "Show the Alternate Language panel"
-#~ msgstr "Das Panel für weitere Sprachen anzeigen"
-
-#~ msgid "Alternate Language"
-#~ msgstr "Weitere Sprache"
-
-#~ msgid "Character Map"
-#~ msgstr "Zeichentabelle"
-
-#~ msgid "accessories-character-map"
-#~ msgstr "accessories-character-map"
-
-#~ msgid "Source View Settings"
-#~ msgstr "Einstellungen der Quellansicht"
-
-#~ msgid "Use external editor"
-#~ msgstr "Externen Texteditor verwenden"
-
-#~ msgid "Program command:"
-#~ msgstr "Programmbefehl:"
-
-#~ msgid "Line command:"
-#~ msgstr "Zeilenbefehl:"
-
-#~ msgid "Please install “%s” to be able to show the file"
-#~ msgstr "Bitte installieren Sie »%s«, um die Datei anzeigen zu können"
-
-#~ msgid "Source Code View"
-#~ msgstr "Quelltextansicht"
-
-#~ msgid "Use the System Editor"
-#~ msgstr "Den Systemeditor verwenden"
-
-#~ msgid "Whether use the system editor to show the source code"
-#~ msgstr ""
-#~ "Legt fest, ob der Systemeditor zum Anzeigen von Quelltext verwendet wird"
-
-#~ msgid "The Editor to Launch"
-#~ msgstr "Der zu startende Editor"
-
-#~ msgid "The command to launch the editor you want to use"
-#~ msgstr "Der Befehl zum Starten des gewünschten Bearbeitungsprogramms"
-
-#~ msgid "Arguments for the Command"
-#~ msgstr "Argumente für den Befehl"
-
-#~ msgid "Arguments to pass to the program command line to select the line"
-#~ msgstr ""
-#~ "Argumente, die an den Programmbefehl übergeben werden sollen, um die "
-#~ "Zeile wählen"
-
-#~ msgid "Dictionary"
-#~ msgstr "Wörterbuch"
-
-#~ msgid "No dictionary source available with name “%s”"
-#~ msgstr "Es gibt keine Wörterbuchquelle mit dem Namen »%s«"
-
-#~ msgid "Unable to find dictionary source"
-#~ msgstr "Wörterbuchquelle konnte nicht gefunden werden"
-
-#~ msgid "No context available for source “%s”"
-#~ msgstr "Für Quelle »%s« steht kein Kontext zur Verfügung"
-
-#~ msgid "Unable to create a context"
-#~ msgstr "Kontext kann nicht erstellt werden"
-
-#~ msgid "Dictionary source “%s” selected"
-#~ msgstr "Wörterbuchquelle »%s« ausgewählt"
-
-#~ msgid "Strategy “%s” selected"
-#~ msgstr "Abgleichstrategie »%s« ausgewählt"
-
-#~ msgid "Database “%s” selected"
-#~ msgstr "Datenbank »%s« ausgewählt"
-
-#~ msgid "Word “%s” selected"
-#~ msgstr "Wort »%s« ausgewählt"
-
-#~ msgid "Double-click on the word to look up"
-#~ msgstr "Klicken Sie doppelt auf das nachzuschlagende Wort"
-
-#~ msgid "Double-click on the matching strategy to use"
-#~ msgstr "Klicken Sie doppelt auf die zu verwendende Abgleichstrategie"
-
-#~ msgid "Double-click on the source to use"
-#~ msgstr "Klicken Sie doppelt auf die zu verwendende Quelle"
-
-#~ msgid "Double-click on the database to use"
-#~ msgstr "Klicken Sie doppelt auf die zu verwendende Datenbank"
-
-#~ msgid "Look _up:"
-#~ msgstr "Nach_schlagen:"
-
-#~ msgid "Similar words"
-#~ msgstr "Ähnliche Worte"
-
-#~ msgid "Available dictionaries"
-#~ msgstr "Verfügbare Wörterbücher"
-
-#~ msgid "Available strategies"
-#~ msgstr "Verfügbare Strategien"
-
-#~ msgid "Dictionary sources"
-#~ msgstr "Wörterbuchquellen"
-
-#~ msgid "accessories-dictionary"
-#~ msgstr "accessories-dictionary"
-
-#~ msgid "Database"
-#~ msgstr "Datenbank"
-
-#~ msgid "Word database"
-#~ msgstr "Wörter-Datenbank"
-
-#~ msgid "Source Name"
-#~ msgstr "Quellname"
-
-#~ msgid "Strategy"
-#~ msgstr "Strategie"
-
-#~ msgid "Panel Position"
-#~ msgstr "Panel-Position"
-
-#~ msgid "_Fullscreen"
-#~ msgstr "_Vollbild"
-
-#~ msgid "Place window on fullscreen state"
-#~ msgstr "Fenster in den Vollbildmodus schalten"
-
-#~ msgid "Fullscreen"
-#~ msgstr "Vollbild"
-
-#~ msgid "_Next Param"
-#~ msgstr "_Nächste Platzhaltervariable"
-
-#~ msgid "Insert the next param of the message"
-#~ msgstr "Nächste Platzhaltervariable in die Zeichenkette einfügen"
-
-#~ msgid "_Insert Params"
-#~ msgstr "Platzhaltervariable _einfügen"
-
-#~ msgid "_Next Tag"
-#~ msgstr "_Nächstes XML-Element"
-
-#~ msgid "Insert the next tag of the message"
-#~ msgstr "Nächstes XML-Element in die Übersetzung einfügen"
-
-#~ msgid "_Insert Tags"
-#~ msgstr "XML-Element _einfügen"
-
-#~ msgid "Insert Params or Tags"
-#~ msgstr "Platzhaltervariablen oder XML-Elemente einfügen"
-
-#~ msgid "Strings added to database"
-#~ msgstr "Zeichenketten wurden der Datenbank hinzugefügt"
-
-#~ msgid "Please specify a valid path to build the translation memory"
-#~ msgstr ""
-#~ "Bitte geben Sie einen gültigen Pfad zum Anlegen des Übersetzungsspeichers "
-#~ "an"
-
-#~ msgid "Gtranslator Translation Memory Manager"
-#~ msgstr "Gtranslator-Verwaltung für Übersetzungsspeicher"
-
-#~ msgid "Translation Memory"
-#~ msgstr "Übersetzungsspeicher"
-
-#~ msgid "Insert Option nº %d"
-#~ msgstr "Option Nr. %d einfügen"
-
-#~ msgid "_Build Translation Memory"
-#~ msgstr "Übersetzungsspeicher _aufbauen"
-
-#~ msgid "_Translation Memory"
-#~ msgstr "Ü_bersetzungsspeicher"
-
-#~ msgid "_About"
-#~ msgstr "I_nfo"
-
-#~ msgid "_Quit"
-#~ msgstr "_Beenden"
