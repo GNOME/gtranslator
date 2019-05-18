@@ -67,6 +67,12 @@ enum
   GTR_SEARCH_DIALOG_REPLACE_ALL_RESPONSE
 };
 
+typedef enum
+{
+  GTR_SEARCH_DIALOG_MSG_INFO,
+  GTR_SEARCH_DIALOG_MSG_ERROR
+} GtrSearchDialogMsg;
+
 /*
  * Public methods
  */
@@ -134,6 +140,11 @@ gtr_search_dialog_get_entire_word (GtrSearchDialog * dialog);
 
 gboolean
 gtr_search_dialog_get_wrap_around (GtrSearchDialog * dialog);
+
+void
+gtr_search_dialog_show_message (GtrSearchDialog * dialog,
+                                char *message,
+                                GtrSearchDialogMsg info_type);
 
 G_END_DECLS
 #endif /* __SEARCH_DIALOG_H__  */

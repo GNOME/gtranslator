@@ -154,39 +154,24 @@ restore_last_searched_data (GtrSearchDialog * dialog, GtrTab * tab)
 
 /* Use occurences only for Replace All */
 static void
-phrase_found (GtrWindow * window, gint occurrences)
+phrase_found (GtrSearchDialog * dialog,
+              gint occurrences)
 {
-  GtrStatusbar *statusbar;
-
-  statusbar = GTR_STATUSBAR (gtr_window_get_statusbar (window));
+  g_autofree char *message = NULL;
 
   if (occurrences > 1)
-    {
-      gtr_statusbar_flash_message (statusbar,
-                                   0,
-                                   ngettext
-                                   ("Found and replaced %d occurrence",
-                                    "Found and replaced %d occurrences",
-                                    occurrences), occurrences);
-    }
-  else
-    {
-      if (occurrences == 1)
-        gtr_statusbar_flash_message (statusbar,
-                                     0,
-                                     _("Found and replaced one occurrence"));
-      else
-        gtr_statusbar_flash_message (statusbar, 0, " ");
-    }
+    message = g_strdup_printf (_("Found and replaced %d occurrence"),
+                               occurrences);
+  else if (occurrences == 1)
+    message = g_strdup_printf (_("Found and replaced one occurrence"));
+  gtr_search_dialog_show_message (dialog, message, GTR_SEARCH_DIALOG_MSG_INFO);
 }
 
 static void
-phrase_not_found (GtrWindow * window)
+phrase_not_found (GtrSearchDialog * dialog)
 {
-  GtrStatusbar *status;
-
-  status = GTR_STATUSBAR (gtr_window_get_statusbar (window));
-  gtr_statusbar_flash_message (status, 0, _("Phrase not found"));
+  gtr_search_dialog_show_message (dialog, _("Phrase not found"),
+                                  GTR_SEARCH_DIALOG_MSG_ERROR);
 }
 
 static gboolean
@@ -357,9 +342,9 @@ do_find (GtrSearchDialog * dialog, GtrWindow * window)
   found = find_in_list (window, views, wrap_around, search_backwards);
 
   if (found)
-    phrase_found (window, 0);
+    phrase_found (dialog, 0);
   else
-    phrase_not_found (window);
+    phrase_not_found (dialog);
 
   gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
                                      GTR_SEARCH_DIALOG_REPLACE_RESPONSE,
@@ -512,11 +497,11 @@ do_replace_all (GtrSearchDialog * dialog, GtrWindow * window)
 
   if (count > 0)
     {
-      phrase_found (window, count);
+      phrase_found (dialog, count);
     }
   else
     {
-      phrase_not_found (window);
+      phrase_not_found (dialog);
     }
 
   gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),

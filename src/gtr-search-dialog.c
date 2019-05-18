@@ -71,6 +71,8 @@ typedef struct
   GtkWidget *find_button;
   GtkWidget *replace_button;
   GtkWidget *replace_all_button;
+  GtkWidget *info_revealer;
+  GtkWidget *info_label;
 
   gboolean glade_error;
 } GtrSearchDialogPrivate;
@@ -410,7 +412,11 @@ gtr_search_dialog_init (GtrSearchDialog * dlg)
   priv->entire_word_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "entire_word_checkbutton"));
   priv->backwards_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "search_backwards_checkbutton"));
   priv->wrap_around_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "wrap_around_checkbutton"));
+  priv->info_revealer = GTK_WIDGET (gtk_builder_get_object (builder, "info_revealer"));
+  priv->info_label = GTK_WIDGET (gtk_builder_get_object (builder, "info_label"));
   g_object_unref (builder);
+
+  gtk_revealer_set_reveal_child (GTK_REVEALER (priv->info_revealer), FALSE);
 
   priv->search_entry = gtr_history_entry_new ("search-for-entry", TRUE);
   gtk_widget_set_size_request (priv->search_entry, 300, -1);
@@ -735,4 +741,35 @@ gtr_search_dialog_get_wrap_around (GtrSearchDialog * dialog)
   return
     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
                                   (priv->wrap_around_checkbutton));
+}
+
+void
+gtr_search_dialog_show_message (GtrSearchDialog * dialog,
+                                char *message,
+                                GtrSearchDialogMsg info_type)
+{
+  GtrSearchDialogPrivate *priv = gtr_search_dialog_get_instance_private (dialog);
+  GtkStyleContext *ctx = gtk_widget_get_style_context (priv->info_label);
+
+  if (!message)
+    {
+      gtk_revealer_set_reveal_child (GTK_REVEALER (priv->info_revealer), FALSE);
+      return;
+    }
+
+  gtk_label_set_text (GTK_LABEL (priv->info_label), message);
+  gtk_revealer_set_reveal_child (GTK_REVEALER (priv->info_revealer), TRUE);
+
+  switch (info_type)
+    {
+    case GTR_SEARCH_DIALOG_MSG_ERROR:
+      gtk_style_context_remove_class (ctx, "info");
+      gtk_style_context_add_class (ctx, "error");
+      break;
+    case GTR_SEARCH_DIALOG_MSG_INFO:
+    default:
+      gtk_style_context_remove_class (ctx, "error");
+      gtk_style_context_add_class (ctx, "info");
+      break;
+    }
 }
