@@ -49,8 +49,6 @@ typedef struct
 
   GtkListStore *teams_store;
   GtkListStore *modules_store;
-  GtkListStore *domains_store;
-  GtkListStore *branches_store;
 
   gchar *selected_team;
   gchar *selected_module;
