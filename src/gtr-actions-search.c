@@ -159,11 +159,11 @@ phrase_found (GtrSearchDialog * dialog,
 {
   g_autofree char *message = NULL;
 
-  if (occurrences > 1)
-    message = g_strdup_printf (_("Found and replaced %d occurrence"),
-                               occurrences);
-  else if (occurrences == 1)
-    message = g_strdup_printf (_("Found and replaced one occurrence"));
+  message = g_strdup_printf (
+      ngettext ("Found and replaced one occurrence",
+                "Found and replaced %d occurrences",
+                occurrences), occurrences);
+
   gtr_search_dialog_show_message (dialog, message, GTR_SEARCH_DIALOG_MSG_INFO);
 }
 
