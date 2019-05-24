@@ -527,8 +527,6 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
   fuzzy = gtr_msg_is_fuzzy (msg);
   translated = gtr_msg_is_translated (msg);
 
-  printf ("ONE MORE: %d, %d, %d\n", status, fuzzy, translated);
-
   if ((status == GTR_MSG_STATUS_FUZZY) && !fuzzy && !priv->find_replace_flag)
     {
       _gtr_po_increase_decrease_fuzzy (priv->po, FALSE);
