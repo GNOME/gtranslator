@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2019-03-30 09:13+0000\n"
-"PO-Revision-Date: 2019-03-30 14:55+0100\n"
+"POT-Creation-Date: 2019-05-24 07:58+0000\n"
+"PO-Revision-Date: 2019-05-27 18:40+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -215,7 +215,7 @@ msgstr "Ścieżki:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
 #: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:588
-#: src/gtr-search-dialog.c:391
+#: src/gtr-search-dialog.c:393
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "Za_mknij"
@@ -281,19 +281,15 @@ msgstr "Zapis pliku jako…"
 msgid "Files saved."
 msgstr "Zapisano pliki."
 
-#: src/gtr-actions-search.c:168
+#: src/gtr-actions-search.c:163
 #, c-format
-msgid "Found and replaced %d occurrence"
+msgid "Found and replaced one occurrence"
 msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "Odnaleziono i zmieniono %d wystąpienie"
+msgstr[0] "Odnaleziono i zmieniono jedno wystąpienie"
 msgstr[1] "Odnaleziono i zmieniono %d wystąpienia"
 msgstr[2] "Odnaleziono i zmieniono %d wystąpień"
 
-#: src/gtr-actions-search.c:177
-msgid "Found and replaced one occurrence"
-msgstr "Odnaleziono i zmieniono jedno wystąpienie"
-
-#: src/gtr-actions-search.c:189
+#: src/gtr-actions-search.c:173
 msgid "Phrase not found"
 msgstr "Nie odnaleziono frazy"
 
@@ -445,48 +441,44 @@ msgstr "Kontekst:"
 msgid "Format:"
 msgstr "Format:"
 
-#: src/gtr-dl-teams.ui:33
-msgid "Click to load teams and modules from Damned Lies"
-msgstr "Wczytaj zespoły i moduły z serwisu Damned Lies"
-
-#: src/gtr-dl-teams.ui:71
+#: src/gtr-dl-teams.ui:60
 msgid "Select team, module, branch and domain to get the translation file."
 msgstr ""
 "Proszę wybrać zespół, moduł, gałąź i domenę, aby uzyskać plik tłumaczenia."
 
-#: src/gtr-dl-teams.ui:92
+#: src/gtr-dl-teams.ui:81
 msgid "Load file"
 msgstr "Wczytaj plik"
 
-#: src/gtr-dl-teams.ui:109
+#: src/gtr-dl-teams.ui:98
 msgid "Load from Damned Lies"
 msgstr "Wczytanie z serwisu Damned Lies"
 
-#: src/gtr-dl-teams.ui:116 src/gtr-notebook.ui:298 src/gtr-projects.ui:58
+#: src/gtr-dl-teams.ui:105 src/gtr-notebook.ui:298 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Otwórz…"
 
-#: src/gtr-dl-teams.ui:139 src/gtr-notebook.ui:511 src/gtr-projects.ui:91
+#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:511 src/gtr-projects.ui:91
 msgid "Main Menu"
 msgstr "Menu główne"
 
-#: src/gtr-dl-teams.ui:167 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+#: src/gtr-dl-teams.ui:156 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
 msgid "New window"
 msgstr "Nowe okno"
 
-#: src/gtr-dl-teams.ui:181 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+#: src/gtr-dl-teams.ui:170 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
 msgid "Preferences"
 msgstr "Preferencje"
 
-#: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:248 src/gtr-projects.ui:160
+#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "Skróty klawiszowe"
 
-#: src/gtr-dl-teams.ui:222 src/gtr-notebook.ui:262 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:174
 msgid "About"
 msgstr "O programie"
 
-#: src/gtr-dl-teams.ui:236 src/gtr-notebook.ui:276 src/gtr-projects.ui:188
+#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:276 src/gtr-projects.ui:188
 msgid "Quit"
 msgstr "Zakończ"
 
@@ -584,13 +576,9 @@ msgstr "Przejście do komunikatu"
 msgid "Enter message number:"
 msgstr "Numer komunikatu:"
 
-#: src/gtr-lang-button.ui:61
+#: src/gtr-lang-button.c:65
 msgid "Choose Language"
 msgstr "Wybór języka"
-
-#: src/gtr-lang-button.ui:70
-msgid "Choose _Language"
-msgstr "_Wybierz język"
 
 #: src/gtr-languages-fetcher.ui:46
 msgid "_Language"
@@ -644,12 +632,12 @@ msgstr "Oryginalny komunikat"
 msgid "Translated message"
 msgstr "Przetłumaczony komunikat"
 
-#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:369
-#: src/gtr-search-dialog.c:449
+#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:371
+#: src/gtr-search-dialog.c:455
 msgid "Find"
 msgstr "Znajdź"
 
-#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:453
+#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:459
 msgid "Find and replace"
 msgstr "Znajdź i zmień"
 
@@ -904,16 +892,16 @@ msgstr "Wybór pliku PO"
 msgid "Load from DL…"
 msgstr "Wczytaj z serwisu DL…"
 
-#: src/gtr-search-dialog.c:347 src/gtr-search-dialog.ui:6
+#: src/gtr-search-dialog.c:349 src/gtr-search-dialog.ui:6
 #: src/gtr-search-dialog.ui:53
 msgid "Replace"
 msgstr "Zmień"
 
-#: src/gtr-search-dialog.c:451
+#: src/gtr-search-dialog.c:457
 msgid "Replace _All"
 msgstr "Zmień _wszystkie"
 
-#: src/gtr-search-dialog.c:455
+#: src/gtr-search-dialog.c:461
 msgid "_Replace"
 msgstr "Z_mień"
 
@@ -929,27 +917,27 @@ msgstr "Wy_szukiwanie: "
 msgid "Replace _with: "
 msgstr "Zmiana _na: "
 
-#: src/gtr-search-dialog.ui:160
+#: src/gtr-search-dialog.ui:184
 msgid "_Original text"
 msgstr "_Oryginalny tekst"
 
-#: src/gtr-search-dialog.ui:177
+#: src/gtr-search-dialog.ui:201
 msgid "_Translated text"
 msgstr "_Przetłumaczony tekst"
 
-#: src/gtr-search-dialog.ui:213
+#: src/gtr-search-dialog.ui:237
 msgid "_Match case"
 msgstr "_Rozróżnianie małych i wielkich liter"
 
-#: src/gtr-search-dialog.ui:229
+#: src/gtr-search-dialog.ui:253
 msgid "Match _entire word only"
 msgstr "Tylko _całe wyrazy"
 
-#: src/gtr-search-dialog.ui:245
+#: src/gtr-search-dialog.ui:269
 msgid "Search _backwards"
 msgstr "Wyszukiwanie _wstecz"
 
-#: src/gtr-search-dialog.ui:262
+#: src/gtr-search-dialog.ui:286
 msgid "_Wrap around"
 msgstr "_Automatyczny powrót do początku"
 
@@ -969,36 +957,36 @@ msgstr "Zamyka dokument"
 msgid "There is an error in the message:"
 msgstr "Wystąpił błąd w komunikacie:"
 
-#: src/gtr-tab.c:459 src/gtr-tab.c:577
+#: src/gtr-tab.c:459 src/gtr-tab.c:575
 msgid "fuzzy"
 msgstr "niepewne"
 
-#: src/gtr-tab.c:607
+#: src/gtr-tab.c:605
 #, c-format
 msgid "Plural %d"
 msgstr "%d. liczba mnoga"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1160
+#: src/gtr-tab.c:1158
 msgid "Path:"
 msgstr "Ścieżka:"
 
-#: src/gtr-tab.c:1810
+#: src/gtr-tab.c:1808
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Przetłumaczone: %0.2f%%"
 
-#: src/gtr-tab.c:1811
+#: src/gtr-tab.c:1809
 #, c-format
 msgid "Translated: %d"
 msgstr "Przetłumaczone: %d"
 
-#: src/gtr-tab.c:1812
+#: src/gtr-tab.c:1810
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Nieprzetłumaczone: %d"
 
-#: src/gtr-tab.c:1813
+#: src/gtr-tab.c:1811
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Niepewne: %d"
