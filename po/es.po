@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2019-03-29 11:21+0000\n"
-"PO-Revision-Date: 2019-03-29 12:23+0100\n"
+"POT-Creation-Date: 2019-05-24 07:58+0000\n"
+"PO-Revision-Date: 2019-06-03 12:05+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -220,7 +220,7 @@ msgstr "Rutas:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
 #: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:588
-#: src/gtr-search-dialog.c:391
+#: src/gtr-search-dialog.c:393
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "_Cerrar"
@@ -288,18 +288,15 @@ msgstr "Guardar archivo como…"
 msgid "Files saved."
 msgstr "Archivos guardados."
 
-#: src/gtr-actions-search.c:168
+#: src/gtr-actions-search.c:163
 #, c-format
-msgid "Found and replaced %d occurrence"
-msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "Encontrada y reemplazada %d aparición"
-msgstr[1] "Encontradas y reemplazadas %d apariciones"
-
-#: src/gtr-actions-search.c:177
+#| msgid "Found and replaced one occurrence"
 msgid "Found and replaced one occurrence"
-msgstr "Encontrada y reemplazada una ocurrencia"
+msgid_plural "Found and replaced %d occurrences"
+msgstr[0] "Encontrada y reemplazada una ocurrencia"
+msgstr[1] "Encontradas y reemplazadas %d ocurrencias"
 
-#: src/gtr-actions-search.c:189
+#: src/gtr-actions-search.c:173
 msgid "Phrase not found"
 msgstr "No se encontró la frase"
 
@@ -447,49 +444,45 @@ msgstr "Contexto:"
 msgid "Format:"
 msgstr "Formato:"
 
-#: src/gtr-dl-teams.ui:33
-msgid "Click to load teams and modules from Damned Lies"
-msgstr "Pulse para cargar los equipos y los módulos desde Damned Lies"
-
-#: src/gtr-dl-teams.ui:71
+#: src/gtr-dl-teams.ui:60
 msgid "Select team, module, branch and domain to get the translation file."
 msgstr ""
 "Seleccione un módulo, una rama y un dominio para obtener el archivo de "
 "traducción."
 
-#: src/gtr-dl-teams.ui:92
+#: src/gtr-dl-teams.ui:81
 msgid "Load file"
 msgstr "Cargar archivo"
 
-#: src/gtr-dl-teams.ui:109
+#: src/gtr-dl-teams.ui:98
 msgid "Load from Damned Lies"
 msgstr "Cargar desde Damned Lies"
 
-#: src/gtr-dl-teams.ui:116 src/gtr-notebook.ui:298 src/gtr-projects.ui:58
+#: src/gtr-dl-teams.ui:105 src/gtr-notebook.ui:298 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Abrir…"
 
-#: src/gtr-dl-teams.ui:139 src/gtr-notebook.ui:511 src/gtr-projects.ui:91
+#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:511 src/gtr-projects.ui:91
 msgid "Main Menu"
 msgstr "Menú principal"
 
-#: src/gtr-dl-teams.ui:167 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+#: src/gtr-dl-teams.ui:156 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
 msgid "New window"
 msgstr "Ventana nueva"
 
-#: src/gtr-dl-teams.ui:181 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+#: src/gtr-dl-teams.ui:170 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:248 src/gtr-projects.ui:160
+#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "Atajos de teclado"
 
-#: src/gtr-dl-teams.ui:222 src/gtr-notebook.ui:262 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:174
 msgid "About"
 msgstr "Acerca de"
 
-#: src/gtr-dl-teams.ui:236 src/gtr-notebook.ui:276 src/gtr-projects.ui:188
+#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:276 src/gtr-projects.ui:188
 msgid "Quit"
 msgstr "Salir"
 
@@ -587,14 +580,9 @@ msgstr "Ir al mensaje"
 msgid "Enter message number:"
 msgstr "Introducir el número del mensaje:"
 
-#: src/gtr-lang-button.ui:61
+#: src/gtr-lang-button.c:65
 msgid "Choose Language"
 msgstr "Elegir idioma"
-
-#: src/gtr-lang-button.ui:70
-#| msgid "Choose Language"
-msgid "Choose _Language"
-msgstr "E_legir idioma"
 
 #: src/gtr-languages-fetcher.ui:46
 msgid "_Language"
@@ -617,7 +605,6 @@ msgid "_Plural forms"
 msgstr "Formas _plurales"
 
 #: src/gtr-languages-fetcher.ui:200
-#| msgid "Edit options manually"
 msgid "_Edit options manually"
 msgstr "_Editar opciones manualmente"
 
@@ -649,12 +636,12 @@ msgstr "Mensaje original"
 msgid "Translated message"
 msgstr "Mensaje traducido"
 
-#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:369
-#: src/gtr-search-dialog.c:449
+#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:371
+#: src/gtr-search-dialog.c:455
 msgid "Find"
 msgstr "Buscar"
 
-#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:453
+#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:459
 msgid "Find and replace"
 msgstr "Buscar y reemplazar"
 
@@ -911,16 +898,16 @@ msgstr "Seleccione un archivo PO"
 msgid "Load from DL…"
 msgstr "Cargar desde DL…"
 
-#: src/gtr-search-dialog.c:347 src/gtr-search-dialog.ui:6
+#: src/gtr-search-dialog.c:349 src/gtr-search-dialog.ui:6
 #: src/gtr-search-dialog.ui:53
 msgid "Replace"
 msgstr "Reemplazar"
 
-#: src/gtr-search-dialog.c:451
+#: src/gtr-search-dialog.c:457
 msgid "Replace _All"
 msgstr "Reemplazar _todo"
 
-#: src/gtr-search-dialog.c:455
+#: src/gtr-search-dialog.c:461
 msgid "_Replace"
 msgstr "_Reemplazar"
 
@@ -936,27 +923,27 @@ msgstr "_Buscar: "
 msgid "Replace _with: "
 msgstr "Reemplazar _con: "
 
-#: src/gtr-search-dialog.ui:160
+#: src/gtr-search-dialog.ui:184
 msgid "_Original text"
 msgstr "Texto _original"
 
-#: src/gtr-search-dialog.ui:177
+#: src/gtr-search-dialog.ui:201
 msgid "_Translated text"
 msgstr "Texto _traducido"
 
-#: src/gtr-search-dialog.ui:213
+#: src/gtr-search-dialog.ui:237
 msgid "_Match case"
-msgstr "_Coincidir con capitalización"
+msgstr "_Coincidir con mayúsculas y minúsculas"
 
-#: src/gtr-search-dialog.ui:229
+#: src/gtr-search-dialog.ui:253
 msgid "Match _entire word only"
 msgstr "Coincidir sólo con la palabra _entera"
 
-#: src/gtr-search-dialog.ui:245
+#: src/gtr-search-dialog.ui:269
 msgid "Search _backwards"
 msgstr "Buscar hacia _atrás"
 
-#: src/gtr-search-dialog.ui:262
+#: src/gtr-search-dialog.ui:286
 msgid "_Wrap around"
 msgstr "_Volver al principio"
 
@@ -976,36 +963,36 @@ msgstr "Cerrar el documento"
 msgid "There is an error in the message:"
 msgstr "Hay un error en el mensaje:"
 
-#: src/gtr-tab.c:459 src/gtr-tab.c:577
+#: src/gtr-tab.c:459 src/gtr-tab.c:575
 msgid "fuzzy"
 msgstr "(Difuso)"
 
-#: src/gtr-tab.c:607
+#: src/gtr-tab.c:605
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1160
+#: src/gtr-tab.c:1158
 msgid "Path:"
 msgstr "Ruta:"
 
-#: src/gtr-tab.c:1810
+#: src/gtr-tab.c:1808
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Traducido: %0.2f%%"
 
-#: src/gtr-tab.c:1811
+#: src/gtr-tab.c:1809
 #, c-format
 msgid "Translated: %d"
 msgstr "Traducido: %d"
 
-#: src/gtr-tab.c:1812
+#: src/gtr-tab.c:1810
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Sin traducir: %d"
 
-#: src/gtr-tab.c:1813
+#: src/gtr-tab.c:1811
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Difusos: %d"
@@ -1333,6 +1320,18 @@ msgid ""
 msgstr ""
 "Diferencia máxima en la longitud entre los mensajes mostrados como "
 "coincidencias por la memoria de traducción."
+
+#~ msgid "Found and replaced %d occurrence"
+#~ msgid_plural "Found and replaced %d occurrences"
+#~ msgstr[0] "Encontrada y reemplazada %d aparición"
+#~ msgstr[1] "Encontradas y reemplazadas %d apariciones"
+
+#~ msgid "Click to load teams and modules from Damned Lies"
+#~ msgstr "Pulse para cargar los equipos y los módulos desde Damned Lies"
+
+#~| msgid "Choose Language"
+#~ msgid "Choose _Language"
+#~ msgstr "E_legir idioma"
 
 #~ msgid "@icon@"
 #~ msgstr "@icon@"
