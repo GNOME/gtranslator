@@ -63,6 +63,9 @@ gtr_lang_button_init (GtrLangButton *self)
   langs = g_slist_sort (langs, (GCompareFunc)g_utf8_collate);
   gtr_filter_selection_set_options (GTR_FILTER_SELECTION (self), langs);
   gtr_filter_selection_set_text (GTR_FILTER_SELECTION (self), _("Choose Language"));
+
+  if (langs)
+    g_slist_free_full (langs, g_free);
 }
 
 GtrLangButton*
@@ -74,7 +77,10 @@ gtr_lang_button_new () {
 const gchar *
 gtr_lang_button_get_lang (GtrLangButton *self)
 {
-  return gtr_filter_selection_get_option (GTR_FILTER_SELECTION (self));
+  const GtrFilterOption *opt = gtr_filter_selection_get_option (GTR_FILTER_SELECTION (self));
+  if (!opt)
+    return NULL;
+  return opt->name;
 }
 
 void

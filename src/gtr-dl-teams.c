@@ -22,12 +22,15 @@
 
 #include "gtr-actions.h"
 #include "gtr-dl-teams.h"
+#include "gtr-filter-selection.h"
 #include "gtr-window.h"
 #include "gtr-utils.h"
 #include <libsoup/soup.h>
 
 #include <json-glib/json-glib.h>
 #include <json-glib/json-gobject.h>
+
+#include <glib/gi18n.h>
 
 #define API_URL "https://l10n.gnome.org/api/v1/"
 
@@ -47,9 +50,6 @@ typedef struct
   GtkWidget *domains_combobox;
   GtkWidget *branches_combobox;
 
-  GtkListStore *teams_store;
-  GtkListStore *modules_store;
-
   gchar *selected_team;
   gchar *selected_module;
   gchar *selected_branch;
@@ -67,7 +67,7 @@ struct _GtrDlTeams
 G_DEFINE_TYPE_WITH_PRIVATE (GtrDlTeams, gtr_dl_teams, GTK_TYPE_BIN)
 
 static void team_add_cb (GtkButton *btn, GtrDlTeams *self);
-static void gtr_dl_teams_save_combo_selected (GtkComboBox *combo, GtrDlTeams *self);
+static void gtr_dl_teams_save_combo_selected (GtkWidget *widget, GtrDlTeams *self);
 static void gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self);
 static void gtr_dl_teams_get_file_info (GtrDlTeams *self);
 
@@ -77,12 +77,13 @@ gtr_dl_teams_list_add (JsonArray *array,
                        JsonNode  *element,
                        gpointer   data)
 {
+  GSList **list = data;
   JsonObject *object = json_node_get_object (element);
+  const char *name = json_object_get_string_member (object, "name");
+  const char *desc = json_object_get_string_member (object, "description");
+  GtrFilterOption *opt = gtr_filter_option_new (name, desc);
 
-  gtk_list_store_insert_with_values(data, NULL, -1,
-                                    0, json_object_get_string_member (object, "description"),
-                                    1, json_object_get_string_member (object, "name"),
-                                    -1);
+  *list = g_slist_append (*list, opt);
 }
 
 static void
@@ -92,10 +93,11 @@ gtr_dl_modules_list_add (JsonArray *array,
                          gpointer   data)
 {
   JsonObject *object = json_node_get_object (element);
+  GSList **list = data;
+  const char *name = json_object_get_string_member (object, "name");
+  GtrFilterOption *opt = gtr_filter_option_new (name, name);
 
-  gtk_list_store_insert_with_values(data, NULL, -1,
-                                    0, json_object_get_string_member (object, "name"),
-                                    -1);
+  *list = g_slist_append (*list, opt);
 }
 
 static void
@@ -113,6 +115,8 @@ gtr_dl_teams_parse_teams_json (GObject *object,
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (widget);
 
   GtkWidget *dialog;
+
+  GSList *options = NULL;
 
   /* Parse JSON */
   stream = soup_session_send_finish (SOUP_SESSION (object), result, &error);
@@ -136,16 +140,15 @@ gtr_dl_teams_parse_teams_json (GObject *object,
   array = json_node_get_array (node);
 
   /* Fill teams list store with values from JSON and set store as combo box model */
-  json_array_foreach_element (array, gtr_dl_teams_list_add, GTK_TREE_MODEL (priv->teams_store));
-
-  gtk_combo_box_set_model (GTK_COMBO_BOX (priv->teams_combobox), GTK_TREE_MODEL (priv->teams_store));
+  json_array_foreach_element (array, gtr_dl_teams_list_add, &options);
+  gtr_filter_selection_set_options_full (GTR_FILTER_SELECTION (priv->teams_combobox), options);
 
   /* Enable selection */
   gtk_widget_set_sensitive (priv->teams_combobox, TRUE);
 }
 
 static void
-gtr_dl_teams_load_module_details_json (GtkComboBox *combo,
+gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
                                        GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
@@ -211,13 +214,15 @@ gtr_dl_teams_load_module_details_json (GtkComboBox *combo,
 
       for (i=0; i < json_array_get_length (branchesArray); i++)
         {
+          const char *name = NULL;
           branch_element = json_array_get_element (branchesArray, i);
           branch_object = json_node_get_object (branch_element);
-          gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (priv->branches_combobox),
-                                     json_object_get_string_member (branch_object, "name"),
-                                     json_object_get_string_member (branch_object, "name"));
-        }
+          name = json_object_get_string_member (branch_object, "name"),
 
+          gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (priv->branches_combobox),
+                                     name, name);
+        }
+      gtk_combo_box_set_active (GTK_COMBO_BOX (priv->branches_combobox), 0);
       gtk_widget_set_sensitive (priv->branches_combobox, TRUE);
     }
   // TODO: check why there are no branches, display notification to user
@@ -240,6 +245,7 @@ gtr_dl_teams_load_module_details_json (GtkComboBox *combo,
                                      json_object_get_string_member (domain_object, "description"));
         }
 
+      gtk_combo_box_set_active (GTK_COMBO_BOX (priv->domains_combobox), 0);
       gtk_widget_set_sensitive (priv->domains_combobox, TRUE);
     }
   // TODO: check why there are no domains and display notification to user
@@ -262,6 +268,8 @@ gtr_dl_teams_parse_modules_json (GObject *object,
 
   GtkWidget *dialog;
 
+  GSList *options = NULL;
+
   /* Parse JSON */
   stream = soup_session_send_finish (SOUP_SESSION (object), result, &error);
   if (error)
@@ -283,9 +291,8 @@ gtr_dl_teams_parse_modules_json (GObject *object,
   array = json_node_get_array (node);
 
   /* Fill modules list store with values from JSON and set store as combo box model */
-  json_array_foreach_element (array, gtr_dl_modules_list_add, GTK_TREE_MODEL (priv->modules_store));
-
-  gtk_combo_box_set_model (GTK_COMBO_BOX (priv->modules_combobox), GTK_TREE_MODEL (priv->modules_store));
+  json_array_foreach_element (array, gtr_dl_modules_list_add, &options);
+  gtr_filter_selection_set_options_full (GTR_FILTER_SELECTION (priv->modules_combobox), options);
 
   gtk_widget_set_sensitive (priv->modules_combobox, TRUE);
 }
@@ -498,38 +505,41 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
 }
 
 static void
-gtr_dl_teams_save_combo_selected (GtkComboBox *combo,
+gtr_dl_teams_save_combo_selected (GtkWidget  *widget,
                                   GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  GtkTreeIter iter;
-  GtkTreePath *path;
   const gchar *name;
 
-  path = gtk_tree_path_new_from_indices (gtk_combo_box_get_active (combo), -1);
-
   /* Save selected combo option */
-  name = gtk_widget_get_name (GTK_WIDGET (combo));
+  name = gtk_widget_get_name (widget);
 
   if (strcmp(name, "combo_modules") == 0)
     {
-      gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->modules_store), &iter, path);
-      gtk_tree_model_get (GTK_TREE_MODEL (priv->modules_store), &iter, 0, &priv->selected_module, -1);
+      const GtrFilterOption *opt = NULL;
+      if (priv->selected_module)
+        g_free (priv->selected_module);
+      opt = gtr_filter_selection_get_option (GTR_FILTER_SELECTION (priv->modules_combobox));
+      priv->selected_module = g_strdup (opt->name);
+
       /* Reload module details on module change */
-      gtr_dl_teams_load_module_details_json (combo, self);
+      gtr_dl_teams_load_module_details_json (widget, self);
     }
   else if (strcmp(name, "combo_teams") == 0)
     {
-      gtk_tree_model_get_iter (GTK_TREE_MODEL (priv->teams_store), &iter, path);
-      gtk_tree_model_get (GTK_TREE_MODEL (priv->teams_store), &iter, 1, &priv->selected_team, -1);
+      const GtrFilterOption *opt = NULL;
+      if (priv->selected_team)
+        g_free (priv->selected_team);
+      opt = gtr_filter_selection_get_option (GTR_FILTER_SELECTION (priv->teams_combobox));
+      priv->selected_team = g_strdup (opt->name);
     }
   else if (strcmp(name, "combo_branches") == 0)
     {
-      priv->selected_branch = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (combo));
+      priv->selected_branch = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (widget));
     }
   else if (strcmp(name, "combo_domains") == 0)
     {
-      priv->selected_domain = gtk_combo_box_get_active_id (GTK_COMBO_BOX (combo));
+      priv->selected_domain = gtk_combo_box_get_active_id (GTK_COMBO_BOX (widget));
     }
 
   /* Check if all four required values have been selected to proceed with loading PO file */
@@ -539,6 +549,11 @@ gtr_dl_teams_save_combo_selected (GtkComboBox *combo,
 static void
 gtr_dl_teams_dispose (GObject *object)
 {
+  GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (GTR_DL_TEAMS (object));
+
+  if (priv->selected_team)
+    g_free (priv->selected_team);
+
   G_OBJECT_CLASS (gtr_dl_teams_parent_class)->dispose (object);
 }
 
@@ -575,41 +590,25 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
 static void
 gtr_dl_teams_init (GtrDlTeams *self)
 {
-  GtkCellRenderer *column;
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   gtk_widget_init_template (GTK_WIDGET (self));
 
   priv->main_window = NULL;
+  priv->selected_team = NULL;
 
   gtk_widget_set_sensitive (priv->load_button, FALSE);
 
-  /* Init teams and modules list stores */
-  priv->teams_store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
-  priv->modules_store = gtk_list_store_new (1, G_TYPE_STRING);
-
   /* Add combo boxes for DL teams and modules */
-  priv->teams_combobox = gtk_combo_box_new ();
+  priv->teams_combobox = GTK_WIDGET (gtr_filter_selection_new ());
   gtk_widget_set_name (priv->teams_combobox, "combo_teams");
-
-  column = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (priv->teams_combobox), column, TRUE);
-
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (priv->teams_combobox), column,
-                                  "text", 0,
-                                  NULL);
+  gtr_filter_selection_set_text (GTR_FILTER_SELECTION (priv->teams_combobox), _("Translation Team"));
 
   gtk_container_add (GTK_CONTAINER (priv->select_box), priv->teams_combobox);
   gtk_widget_set_sensitive (priv->teams_combobox, FALSE);
 
-  priv->modules_combobox = gtk_combo_box_new ();
+  priv->modules_combobox = GTK_WIDGET (gtr_filter_selection_new ());
   gtk_widget_set_name (priv->modules_combobox, "combo_modules");
-
-  column = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (priv->modules_combobox), column, TRUE);
-
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (priv->modules_combobox), column,
-                                  "text", 0,
-                                  NULL);
+  gtr_filter_selection_set_text (GTR_FILTER_SELECTION (priv->modules_combobox), _("Module"));
 
   gtk_container_add (GTK_CONTAINER (priv->select_box), priv->modules_combobox);
   gtk_widget_set_sensitive (priv->modules_combobox, FALSE);

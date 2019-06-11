@@ -29,7 +29,7 @@ typedef struct
   GtkWidget *popup;
   GSList *options;
   // TODO: manage this as a property
-  char *option;
+  GtrFilterOption *option;
 
 } GtrFilterSelectionPrivate;
 
@@ -48,9 +48,20 @@ change_option (GtkListBox         *box,
                GtkListBoxRow      *row,
                GtrFilterSelection *self)
 {
+  GSList *o = NULL;
   GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (self);
   GtkWidget *label = gtk_bin_get_child (GTK_BIN (row));
-  gtr_filter_selection_set_option (self, gtk_label_get_text (GTK_LABEL (label)));
+  const char *label_text = gtk_label_get_text (GTK_LABEL (label));
+
+  for (o = priv->options; o != NULL; o = g_slist_next (o))
+    {
+      GtrFilterOption *opt = (GtrFilterOption *)o->data;
+      if (!g_strcmp0 (opt->desc, label_text))
+        {
+          gtr_filter_selection_set_option_full (self, opt);
+          break;
+        }
+    }
 
   gtk_popover_popdown (GTK_POPOVER (priv->popup));
 }
@@ -76,13 +87,13 @@ filter_option (GtkEditable        *entry,
   for (o = priv->options; o != NULL; o = g_slist_next (o))
     {
       GtkWidget *child;
-      const char *opt = (char *)o->data;
-      g_autofree char *upopt = g_ascii_strup (opt, -1);
+      GtrFilterOption *opt = (GtrFilterOption *)o->data;
+      g_autofree char *upopt = g_ascii_strup (opt->desc, -1);
 
       if (g_strrstr (upopt, uptext) == NULL)
         continue;
 
-      child = gtk_label_new (opt);
+      child = gtk_label_new (opt->desc);
       gtk_label_set_xalign (GTK_LABEL (child), 0.0);
       gtk_container_add (GTK_CONTAINER (priv->option_list), child);
     }
@@ -93,9 +104,8 @@ static void
 gtr_filter_selection_finalize (GObject *object)
 {
   GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (GTR_FILTER_SELECTION (object));
-  g_clear_pointer (&priv->option, g_free);
   if (priv->options)
-    g_slist_free_full (priv->options, g_free);
+    g_slist_free_full (priv->options, (GDestroyNotify)gtr_filter_option_free);
   G_OBJECT_CLASS (gtr_filter_selection_parent_class)->finalize (object);
 }
 
@@ -148,7 +158,7 @@ gtr_filter_selection_new () {
   return self;
 }
 
-const char *
+const GtrFilterOption *
 gtr_filter_selection_get_option (GtrFilterSelection *self)
 {
   GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (self);
@@ -157,25 +167,42 @@ gtr_filter_selection_get_option (GtrFilterSelection *self)
 
 void
 gtr_filter_selection_set_option (GtrFilterSelection *self,
-                                 const char         *option)
+                                 const char         *name)
 {
   GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (self);
-  g_clear_pointer (&priv->option, g_free);
-  priv->option = g_strdup (option);
-  gtk_button_set_label (GTK_BUTTON (self), option);
+  GSList *o = NULL;
+
+  for (o = priv->options; o != NULL; o = g_slist_next (o))
+    {
+      GtrFilterOption *opt = (GtrFilterOption *)o->data;
+      if (!g_strcmp0 (opt->desc, name))
+        {
+          gtr_filter_selection_set_option_full (self, opt);
+          break;
+        }
+    }
+}
+
+void
+gtr_filter_selection_set_option_full (GtrFilterSelection *self,
+                                      GtrFilterOption   *option)
+{
+  GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (self);
+  priv->option = option;
+  gtk_button_set_label (GTK_BUTTON (self), option->desc);
   g_signal_emit (self, signals[CHANGED], 0, NULL);
 }
 
 void
-gtr_filter_selection_set_options (GtrFilterSelection *self,
-                                  GSList *options)
+gtr_filter_selection_set_options_full (GtrFilterSelection *self,
+                                       GSList *options)
 {
   GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (self);
   const GSList *o;
   GList *children;
 
   if (priv->options)
-    g_slist_free_full (priv->options, g_free);
+    g_slist_free_full (priv->options, (GDestroyNotify)gtr_filter_option_free);
   priv->options = options;
 
   children = gtk_container_get_children (GTK_CONTAINER (priv->option_list));
@@ -188,8 +215,8 @@ gtr_filter_selection_set_options (GtrFilterSelection *self,
 
   for (o = priv->options; o != NULL; o = g_slist_next (o))
     {
-      const char *opt = (char *)o->data;
-      GtkWidget *child = gtk_label_new (opt);
+      GtrFilterOption *opt = (GtrFilterOption *)o->data;
+      GtkWidget *child = gtk_label_new (opt->desc);
       gtk_label_set_xalign (GTK_LABEL (child), 0.0);
       gtk_container_add (GTK_CONTAINER (priv->option_list), child);
     }
@@ -198,9 +225,51 @@ gtr_filter_selection_set_options (GtrFilterSelection *self,
 }
 
 void
+gtr_filter_selection_set_options (GtrFilterSelection *self,
+                                  const GSList *options)
+{
+  const GSList *o;
+  GSList *optlist = NULL;
+
+  for (o = options; o != NULL; o = g_slist_next (o))
+    {
+      const char *opt = (char *)o->data;
+      GtrFilterOption *option = gtr_filter_option_new (opt, opt);
+      optlist = g_slist_append (optlist, option);
+    }
+
+  gtr_filter_selection_set_options_full (self, optlist);
+}
+
+void
 gtr_filter_selection_set_text (GtrFilterSelection *selection,
                                const char *text)
 {
   gtk_button_set_label (GTK_BUTTON (selection), text);
+}
+
+void
+gtr_filter_option_free (GtrFilterOption *opt)
+{
+  if (!opt)
+    return;
+
+  if (opt->name)
+    g_free (opt->name);
+  if (opt->desc)
+    g_free (opt->desc);
+  g_free (opt);
+}
+
+GtrFilterOption *
+gtr_filter_option_new (const gchar *name,
+                       const gchar *desc)
+{
+  GtrFilterOption *option = g_malloc0 (sizeof (GtrFilterOption));
+  if (name)
+    option->name = g_strdup (name);
+  if (desc)
+    option->desc = g_strdup (desc);
+  return option;
 }
 

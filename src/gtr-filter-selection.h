@@ -31,20 +31,39 @@ struct _GtrFilterSelectionClass
   GtkMenuButtonClass parent_class;
 };
 
+typedef struct
+{
+  char *name;
+  char *desc;
+} GtrFilterOption;
+
+GtrFilterOption * gtr_filter_option_new (const char *name, const char *desc);
+void gtr_filter_option_free (GtrFilterOption *opt);
+
 GtrFilterSelection*  gtr_filter_selection_new             ();
 
 void
 gtr_filter_selection_set_text (GtrFilterSelection *selection,
                                const char *text);
 
+// options should be a GSlist<char*>
 void
 gtr_filter_selection_set_options (GtrFilterSelection *self,
-                                  GSList *options);
-const char *
+                                  const GSList *options);
+
+// options should be a GSlist<GtrFilterOption>
+void
+gtr_filter_selection_set_options_full (GtrFilterSelection *self,
+                                       GSList *options);
+
+const GtrFilterOption *
 gtr_filter_selection_get_option (GtrFilterSelection *self);
 void
 gtr_filter_selection_set_option (GtrFilterSelection *self,
-                                 const char         *option);
+                                 const char         *name);
+void
+gtr_filter_selection_set_option_full (GtrFilterSelection *self,
+                                      GtrFilterOption    *option);
 
 G_END_DECLS
 
