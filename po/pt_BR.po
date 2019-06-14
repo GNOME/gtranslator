@@ -1,5 +1,5 @@
 # Brazilian Portuguese translation of gtranslator.
-# Copyright (C) 2018 Free Software Foundation, Inc.
+# Copyright (C) 2019 Free Software Foundation, Inc.
 # Francisco Petrucio <fpetrucioL@mat.ufal.br>, 2000-2004.
 # João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>, 2004.
 # Raphael Higino <in memoriam>, 2004.
@@ -14,10 +14,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator master\n"
+"Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2019-03-29 11:21+0000\n"
-"PO-Revision-Date: 2019-03-29 16:41-0300\n"
+"POT-Creation-Date: 2019-06-12 17:45+0000\n"
+"PO-Revision-Date: 2019-06-13 21:01-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -63,6 +63,57 @@ msgstr ""
 "O Gtranslator também inclui um sistema de plug-in com plug-ins muito "
 "interessantes como idioma alternativo, inserir marcas, integração com "
 "subversion e um visualizador de código fonte."
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:31
+msgid "This is an stable release in the 3.32 development series."
+msgstr "Esta é uma versão estável na série de desenvolvimento 3.32."
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:43
+msgid "XML language syntax for the source view"
+msgstr "Sintaxe da linguagem XML para a visualização da origem"
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:44
+msgid "Fix msg status management"
+msgstr "Correção do gerenciamento de status de mensagens"
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:45
+msgid "Use theme_fg_color for translated texts"
+msgstr "Uso de theme_fg_color para textos traduzidos"
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:46
+msgid "Better prj id version default header"
+msgstr "Melhor cabeçalho padrão da versão prj id"
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:47
+msgid "Header with default values when doesn't exists"
+msgstr "Cabeçalho com valores padrão quando não existe"
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:48
+msgid "codeview: Recover codeview plugin"
+msgstr "codeview: Recuperação do plug-in codeview"
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:49
+msgid "Show context in the original message bar"
+msgstr "Mostra contexto na barra de mensagens original"
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:50
+msgid "List of languages in a config file instead iso-codes"
+msgstr "Lista de idiomas em um arquivo de configuração, em vez de iso-codes"
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:51
+msgid "Find &amp; replace and copy text to shortcuts window"
+msgstr "Localização &amp; substituição e cópia de texto para janela de atalhos"
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:52
+#| msgctxt "shortcut window"
+#| msgid "Copy original text to translation"
+msgid "Ctrl+space to copy original text into translated"
+msgstr "Ctrl+espaço para copiar o texto original para tradução"
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:53
+#| msgid "Please specify a valid path to build the translation memory"
+msgid "Native File Chooser for the translation memory"
+msgstr "Seletor de arquivos nativo para a memória de tradução"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:61
 msgid "Daniel García Moreno"
@@ -222,7 +273,7 @@ msgstr "Caminhos:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
 #: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:588
-#: src/gtr-search-dialog.c:391
+#: src/gtr-search-dialog.c:393
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "_Fechar"
@@ -291,18 +342,15 @@ msgstr "Salvar arquivo como…"
 msgid "Files saved."
 msgstr "Arquivos salvos."
 
-#: src/gtr-actions-search.c:168
+#: src/gtr-actions-search.c:163
 #, c-format
-msgid "Found and replaced %d occurrence"
-msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "%d ocorrência localizada e substituída"
-msgstr[1] "%d ocorrências localizadas e substituídas"
-
-#: src/gtr-actions-search.c:177
+#| msgid "Found and replaced one occurrence"
 msgid "Found and replaced one occurrence"
-msgstr "Uma ocorrência foi localizada e substituída"
+msgid_plural "Found and replaced %d occurrences"
+msgstr[0] "Uma ocorrência foi localizada e substituída"
+msgstr[1] "%d ocorrências foram localizadas e substituídas"
 
-#: src/gtr-actions-search.c:189
+#: src/gtr-actions-search.c:173
 msgid "Phrase not found"
 msgstr "Frase não localizada"
 
@@ -451,48 +499,53 @@ msgstr "Contexto:"
 msgid "Format:"
 msgstr "Formato:"
 
-#: src/gtr-dl-teams.ui:33
-msgid "Click to load teams and modules from Damned Lies"
-msgstr "Clique para carregar equipes e módulos do Damned Lies"
+#: src/gtr-dl-teams.c:604
+#| msgid "Translation Memory"
+msgid "Translation Team"
+msgstr "Equipe de tradução"
 
-#: src/gtr-dl-teams.ui:71
+#: src/gtr-dl-teams.c:611
+msgid "Module"
+msgstr "Módulo"
+
+#: src/gtr-dl-teams.ui:60
 msgid "Select team, module, branch and domain to get the translation file."
 msgstr ""
 "Seleciona equipe, módulo, ramo e domínio para obter o arquivo de tradução."
 
-#: src/gtr-dl-teams.ui:92
+#: src/gtr-dl-teams.ui:81
 msgid "Load file"
 msgstr "Carregar arquivo"
 
-#: src/gtr-dl-teams.ui:109
+#: src/gtr-dl-teams.ui:98
 msgid "Load from Damned Lies"
 msgstr "Carregar do Damned Lies"
 
-#: src/gtr-dl-teams.ui:116 src/gtr-notebook.ui:298 src/gtr-projects.ui:58
+#: src/gtr-dl-teams.ui:105 src/gtr-notebook.ui:298 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Abrir…"
 
-#: src/gtr-dl-teams.ui:139 src/gtr-notebook.ui:511 src/gtr-projects.ui:91
+#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:511 src/gtr-projects.ui:91
 msgid "Main Menu"
 msgstr "Menu principal"
 
-#: src/gtr-dl-teams.ui:167 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+#: src/gtr-dl-teams.ui:156 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
 msgid "New window"
 msgstr "Nova janela"
 
-#: src/gtr-dl-teams.ui:181 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+#: src/gtr-dl-teams.ui:170 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
 msgid "Preferences"
 msgstr "Preferências"
 
-#: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:248 src/gtr-projects.ui:160
+#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "Atalhos de teclado"
 
-#: src/gtr-dl-teams.ui:222 src/gtr-notebook.ui:262 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:174
 msgid "About"
 msgstr "Sobre"
 
-#: src/gtr-dl-teams.ui:236 src/gtr-notebook.ui:276 src/gtr-projects.ui:188
+#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:276 src/gtr-projects.ui:188
 msgid "Quit"
 msgstr "Sair"
 
@@ -590,14 +643,9 @@ msgstr "Ir para a mensagem"
 msgid "Enter message number:"
 msgstr "Digite o número da mensagem:"
 
-#: src/gtr-lang-button.ui:61
+#: src/gtr-lang-button.c:65
 msgid "Choose Language"
 msgstr "Escolher idioma"
-
-#: src/gtr-lang-button.ui:70
-#| msgid "Choose Language"
-msgid "Choose _Language"
-msgstr "Escolher _idioma"
 
 #: src/gtr-languages-fetcher.ui:46
 msgid "_Language"
@@ -620,7 +668,6 @@ msgid "_Plural forms"
 msgstr "Formas de _plural"
 
 #: src/gtr-languages-fetcher.ui:200
-#| msgid "Edit options manually"
 msgid "_Edit options manually"
 msgstr "_Editar opções manualmente"
 
@@ -652,12 +699,12 @@ msgstr "Mensagem original"
 msgid "Translated message"
 msgstr "Mensagem traduzida"
 
-#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:369
-#: src/gtr-search-dialog.c:449
+#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:371
+#: src/gtr-search-dialog.c:455
 msgid "Find"
 msgstr "Localizar"
 
-#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:453
+#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:459
 msgid "Find and replace"
 msgstr "Localizar e substituir"
 
@@ -913,16 +960,16 @@ msgstr "Selecionar um arquivo PO"
 msgid "Load from DL…"
 msgstr "Carregar do DL…"
 
-#: src/gtr-search-dialog.c:347 src/gtr-search-dialog.ui:6
+#: src/gtr-search-dialog.c:349 src/gtr-search-dialog.ui:6
 #: src/gtr-search-dialog.ui:53
 msgid "Replace"
 msgstr "Substituir"
 
-#: src/gtr-search-dialog.c:451
+#: src/gtr-search-dialog.c:457
 msgid "Replace _All"
 msgstr "Substituir _todas"
 
-#: src/gtr-search-dialog.c:455
+#: src/gtr-search-dialog.c:461
 msgid "_Replace"
 msgstr "Substitui_r"
 
@@ -938,27 +985,27 @@ msgstr "_Pesquisar: "
 msgid "Replace _with: "
 msgstr "Substituir _com: "
 
-#: src/gtr-search-dialog.ui:160
+#: src/gtr-search-dialog.ui:184
 msgid "_Original text"
 msgstr "Texto _original"
 
-#: src/gtr-search-dialog.ui:177
+#: src/gtr-search-dialog.ui:201
 msgid "_Translated text"
 msgstr "Texto tradu_zido"
 
-#: src/gtr-search-dialog.ui:213
+#: src/gtr-search-dialog.ui:237
 msgid "_Match case"
 msgstr "_Diferenciar maiúsculas de minúsculas"
 
-#: src/gtr-search-dialog.ui:229
+#: src/gtr-search-dialog.ui:253
 msgid "Match _entire word only"
 msgstr "Coincidir apenas palavra _completa"
 
-#: src/gtr-search-dialog.ui:245
+#: src/gtr-search-dialog.ui:269
 msgid "Search _backwards"
 msgstr "Pesquisar para _trás"
 
-#: src/gtr-search-dialog.ui:262
+#: src/gtr-search-dialog.ui:286
 msgid "_Wrap around"
 msgstr "_Voltar ao início"
 
@@ -978,36 +1025,36 @@ msgstr "Fecha o documento"
 msgid "There is an error in the message:"
 msgstr "Há um erro na mensagem:"
 
-#: src/gtr-tab.c:459 src/gtr-tab.c:577
+#: src/gtr-tab.c:459 src/gtr-tab.c:575
 msgid "fuzzy"
 msgstr "aproximada"
 
-#: src/gtr-tab.c:607
+#: src/gtr-tab.c:605
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1160
+#: src/gtr-tab.c:1158
 msgid "Path:"
 msgstr "Caminho:"
 
-#: src/gtr-tab.c:1810
+#: src/gtr-tab.c:1808
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Traduzido: %0.2f%%"
 
-#: src/gtr-tab.c:1811
+#: src/gtr-tab.c:1809
 #, c-format
 msgid "Translated: %d"
 msgstr "Traduzido: %d"
 
-#: src/gtr-tab.c:1812
+#: src/gtr-tab.c:1810
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Não traduzido: %d"
 
-#: src/gtr-tab.c:1813
+#: src/gtr-tab.c:1811
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Aproximado: %d"
@@ -1338,6 +1385,18 @@ msgstr ""
 "Diferença máxima em comprimento entre as mensagens exibidas como ocorrências "
 "pela memória de tradução."
 
+#~ msgid "Found and replaced %d occurrence"
+#~ msgid_plural "Found and replaced %d occurrences"
+#~ msgstr[0] "%d ocorrência localizada e substituída"
+#~ msgstr[1] "%d ocorrências localizadas e substituídas"
+
+#~ msgid "Click to load teams and modules from Damned Lies"
+#~ msgstr "Clique para carregar equipes e módulos do Damned Lies"
+
+#~| msgid "Choose Language"
+#~ msgid "Choose _Language"
+#~ msgstr "Escolher _idioma"
+
 #~ msgid "@icon@"
 #~ msgstr "@icon@"
 
@@ -1513,16 +1572,8 @@ msgstr ""
 #~ msgid "Strings added to database"
 #~ msgstr "Strings adicionadas ao banco de dados"
 
-#~ msgid "Please specify a valid path to build the translation memory"
-#~ msgstr ""
-#~ "Por favor, especifique um caminho válido para compilar a memória de "
-#~ "tradução"
-
 #~ msgid "Gtranslator Translation Memory Manager"
 #~ msgstr "Gerenciador de memória de tradução do Gtranslator"
-
-#~ msgid "Translation Memory"
-#~ msgstr "Memória de tradução"
 
 #~ msgid "Insert Option nº %d"
 #~ msgstr "Inserir opção nº %d"
