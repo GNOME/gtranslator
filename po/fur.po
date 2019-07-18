@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2018-12-29 11:52+0000\n"
-"PO-Revision-Date: 2019-02-09 16:09+0100\n"
+"POT-Creation-Date: 2019-03-30 09:14+0000\n"
+"PO-Revision-Date: 2019-07-18 11:25+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.3\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
 msgid "Gtranslator"
@@ -53,7 +53,7 @@ msgstr ""
 "plugin come lenghe alternative, inserî etichetis, integrazion cun subversion "
 "e un visualizadôr di codiç sorzint."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:31
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:61
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -66,13 +66,7 @@ msgstr "Editôr di traduzion"
 msgid "PO File Editor"
 msgstr "Editôr di file PO"
 
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: data/org.gnome.Gtranslator.desktop.in.in:7
-msgid "@icon@"
-msgstr "@icon@"
-
 #: data/org.gnome.Gtranslator.desktop.in.in:14
-#| msgid "Gtranslator Translation Memory Manager"
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Traduzion;Editôr;Gettext;Scrivi;"
 
@@ -224,7 +218,7 @@ msgstr "Codiç sorzint"
 
 #: src/gtr-actions-app.c:48
 msgid "Current Maintainers"
-msgstr "Manutentôr atuâl"
+msgstr "Assegnâts ae manutenzion atuâi"
 
 #: src/gtr-actions-app.c:52
 msgid "Previous Developers"
@@ -415,18 +409,15 @@ msgstr "Zonte note"
 msgid "Edit"
 msgstr "Modifiche"
 
-#. Extracted comments
-#: src/gtr-context.c:327
+#: src/gtr-context.c:326
 msgid "Extracted comments:"
 msgstr "Coments estrats:"
 
-#. Context
-#: src/gtr-context.c:331
+#: src/gtr-context.c:329
 msgid "Context:"
 msgstr "Contest:"
 
-#. Format
-#: src/gtr-context.c:335
+#: src/gtr-context.c:332
 msgid "Format:"
 msgstr "Formât:"
 
@@ -552,11 +543,11 @@ msgstr "Formis _plurâls"
 msgid "Edit options manually"
 msgstr "Modifiche lis opzions a man"
 
-#: src/gtr-message-table.c:255
+#: src/gtr-message-table.c:219
 msgid "Original Message"
 msgstr "Messaç orogjinâl"
 
-#: src/gtr-message-table.c:274
+#: src/gtr-message-table.c:238
 msgid "Translated Message"
 msgstr "Messaç voltât"
 
@@ -675,17 +666,17 @@ msgstr "Il file al è vueit"
 msgid "Failed opening file “%s”: %s"
 msgstr "No si è rivâts a vierzi il file “%s”: %s"
 
-#: src/gtr-po.c:524
+#: src/gtr-po.c:530
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "De cumbinazion di caratars “%s” nol è stât pussibil convertî a UTF-8"
 
-#: src/gtr-po.c:541 src/gtr-po.c:561
+#: src/gtr-po.c:547 src/gtr-po.c:567
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Impussibil archiviâ il file temporani pe conversion de codifiche"
 
-#: src/gtr-po.c:598
+#: src/gtr-po.c:604
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -696,17 +687,17 @@ msgstr ""
 "struments a rie di comant msgconv o iconv prime di vierzi chest file cun "
 "Editôr di traduzion GNOME"
 
-#: src/gtr-po.c:666
+#: src/gtr-po.c:672
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext al à tornât une liste di dominis di messaç nule."
 
-#: src/gtr-po.c:711
+#: src/gtr-po.c:717
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Nissun messaç otignût dal analizadôr."
 
-#: src/gtr-po.c:762
+#: src/gtr-po.c:768
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -717,17 +708,17 @@ msgstr ""
 "I file pot a vegnin gjenerâts dal procès di compilazion.\n"
 "Il to file al varès di clamâsi su par jù “%s.po”."
 
-#: src/gtr-po.c:775
+#: src/gtr-po.c:781
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Il file %s al è in dome-leture e nol pues jessi sorescrit"
 
-#: src/gtr-po.c:794
+#: src/gtr-po.c:800
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Al è presint un erôr tal file PO: %s"
 
-#: src/gtr-po.c:806
+#: src/gtr-po.c:812
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Al jere un erôr tal scrivi il file PO: %s"
@@ -929,36 +920,36 @@ msgstr "Siere document"
 msgid "There is an error in the message:"
 msgstr "Al è un erôr intal messaç:"
 
-#: src/gtr-tab.c:459 src/gtr-tab.c:570
+#: src/gtr-tab.c:459 src/gtr-tab.c:577
 msgid "fuzzy"
 msgstr "confusionât"
 
-#: src/gtr-tab.c:600
+#: src/gtr-tab.c:607
 #, c-format
 msgid "Plural %d"
 msgstr "Plurâl %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1153
+#: src/gtr-tab.c:1160
 msgid "Path:"
 msgstr "Percors:"
 
-#: src/gtr-tab.c:1803
+#: src/gtr-tab.c:1810
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Tradot: %0.2f%%"
 
-#: src/gtr-tab.c:1804
+#: src/gtr-tab.c:1811
 #, c-format
 msgid "Translated: %d"
 msgstr "Tradot: %d"
 
-#: src/gtr-tab.c:1805
+#: src/gtr-tab.c:1812
 #, c-format
 msgid "Untranslated: %d"
 msgstr "No tradot: %d"
 
-#: src/gtr-tab.c:1806
+#: src/gtr-tab.c:1813
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Confusionât: %d"
@@ -1283,6 +1274,9 @@ msgid ""
 msgstr ""
 "La massime diference inte lungjece tra i messaçs mostrâts come "
 "corispuindince de memorie di traduzion."
+
+#~ msgid "@icon@"
+#~ msgstr "@icon@"
 
 #~ msgid "Gtranslator PO File Editor"
 #~ msgstr "Editôr di file PO Gtranslator"
