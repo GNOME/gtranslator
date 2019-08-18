@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2019-04-02 07:09+0000\n"
-"PO-Revision-Date: 2019-04-14 15:40+0300\n"
+"POT-Creation-Date: 2019-07-18 09:27+0000\n"
+"PO-Revision-Date: 2019-08-18 17:43+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
 msgid "Gtranslator"
@@ -199,7 +199,7 @@ msgstr "Polut:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
 #: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:588
-#: src/gtr-search-dialog.c:391
+#: src/gtr-search-dialog.c:393
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "_Sulje"
@@ -263,18 +263,14 @@ msgstr "Tallenna tiedosto nimellä…"
 msgid "Files saved."
 msgstr "Tiedostot tallennettu."
 
-#: src/gtr-actions-search.c:168
+#: src/gtr-actions-search.c:163
 #, c-format
-msgid "Found and replaced %d occurrence"
-msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "%d kohta löydettiin ja korvattiin"
-msgstr[1] "%d kohtaa löydettiin ja korvattiin"
-
-#: src/gtr-actions-search.c:177
 msgid "Found and replaced one occurrence"
-msgstr "Yksi kohta löytyi ja korvattiin"
+msgid_plural "Found and replaced %d occurrences"
+msgstr[0] "Yksi kohta löytyi ja korvattiin"
+msgstr[1] "Löytyi %d kohtaa ja ne korvattiin"
 
-#: src/gtr-actions-search.c:189
+#: src/gtr-actions-search.c:173
 msgid "Phrase not found"
 msgstr "Sanaa/lausetta ei löydy"
 
@@ -422,6 +418,14 @@ msgstr "Asiayhteys:"
 msgid "Format:"
 msgstr "Muoto:"
 
+#: src/gtr-dl-teams.c:604
+msgid "Translation Team"
+msgstr "Käännöstiimi"
+
+#: src/gtr-dl-teams.c:611
+msgid "Module"
+msgstr "Moduuli"
+
 #: src/gtr-dl-teams.ui:60
 msgid "Select team, module, branch and domain to get the translation file."
 msgstr ""
@@ -556,13 +560,9 @@ msgstr "Siirry viestiin"
 msgid "Enter message number:"
 msgstr "Anna viestin numero:"
 
-#: src/gtr-lang-button.ui:61
+#: src/gtr-lang-button.c:65
 msgid "Choose Language"
 msgstr "Valitse kieli"
-
-#: src/gtr-lang-button.ui:70
-msgid "Choose _Language"
-msgstr "Valitse _kieli"
 
 #: src/gtr-languages-fetcher.ui:46
 msgid "_Language"
@@ -616,12 +616,12 @@ msgstr "Alkuperäisen viesti"
 msgid "Translated message"
 msgstr "Käännetty viesti"
 
-#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:369
-#: src/gtr-search-dialog.c:449
+#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:371
+#: src/gtr-search-dialog.c:455
 msgid "Find"
 msgstr "Etsi"
 
-#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:453
+#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:459
 msgid "Find and replace"
 msgstr "Etsi ja korvaa"
 
@@ -877,16 +877,16 @@ msgstr "Valitse PO-tiedosto"
 msgid "Load from DL…"
 msgstr "Lataa DL-palvelusta…"
 
-#: src/gtr-search-dialog.c:347 src/gtr-search-dialog.ui:6
+#: src/gtr-search-dialog.c:349 src/gtr-search-dialog.ui:6
 #: src/gtr-search-dialog.ui:53
 msgid "Replace"
 msgstr "Korvaa"
 
-#: src/gtr-search-dialog.c:451
+#: src/gtr-search-dialog.c:457
 msgid "Replace _All"
 msgstr "Korvaa k_aikki"
 
-#: src/gtr-search-dialog.c:455
+#: src/gtr-search-dialog.c:461
 msgid "_Replace"
 msgstr "Ko_rvaa"
 
@@ -902,27 +902,27 @@ msgstr "_Etsi: "
 msgid "Replace _with: "
 msgstr "Korvaa _tekstillä: "
 
-#: src/gtr-search-dialog.ui:160
+#: src/gtr-search-dialog.ui:184
 msgid "_Original text"
 msgstr "_Alkuperäisen teksti"
 
-#: src/gtr-search-dialog.ui:177
+#: src/gtr-search-dialog.ui:201
 msgid "_Translated text"
 msgstr "_Käännetty teksti"
 
-#: src/gtr-search-dialog.ui:213
+#: src/gtr-search-dialog.ui:237
 msgid "_Match case"
 msgstr "_Huomioi kirjainkoko"
 
-#: src/gtr-search-dialog.ui:229
+#: src/gtr-search-dialog.ui:253
 msgid "Match _entire word only"
 msgstr "Täsmää vain _kokonaiset sanat"
 
-#: src/gtr-search-dialog.ui:245
+#: src/gtr-search-dialog.ui:269
 msgid "Search _backwards"
 msgstr "Etsi _taaksepäin"
 
-#: src/gtr-search-dialog.ui:262
+#: src/gtr-search-dialog.ui:286
 msgid "_Wrap around"
 msgstr "_Jatka asiakirjan alusta"
 
@@ -942,36 +942,36 @@ msgstr "Sulje asiakirja"
 msgid "There is an error in the message:"
 msgstr "Viestissä on virhe:"
 
-#: src/gtr-tab.c:459 src/gtr-tab.c:577
+#: src/gtr-tab.c:459 src/gtr-tab.c:575
 msgid "fuzzy"
 msgstr "sumea"
 
-#: src/gtr-tab.c:607
+#: src/gtr-tab.c:605
 #, c-format
 msgid "Plural %d"
 msgstr "Monikko %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1160
+#: src/gtr-tab.c:1158
 msgid "Path:"
 msgstr "Polku:"
 
-#: src/gtr-tab.c:1810
+#: src/gtr-tab.c:1808
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Käännetty: %0.2f%%"
 
-#: src/gtr-tab.c:1811
+#: src/gtr-tab.c:1809
 #, c-format
 msgid "Translated: %d"
 msgstr "Käännetty: %d"
 
-#: src/gtr-tab.c:1812
+#: src/gtr-tab.c:1810
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Kääntämättä: %d"
 
-#: src/gtr-tab.c:1813
+#: src/gtr-tab.c:1811
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Sumeita: %d"
@@ -1289,6 +1289,14 @@ msgid ""
 "translation memory."
 msgstr ""
 
+#~ msgid "Found and replaced %d occurrence"
+#~ msgid_plural "Found and replaced %d occurrences"
+#~ msgstr[0] "%d kohta löydettiin ja korvattiin"
+#~ msgstr[1] "%d kohtaa löydettiin ja korvattiin"
+
+#~ msgid "Choose _Language"
+#~ msgstr "Valitse _kieli"
+
 #~ msgid "@icon@"
 #~ msgstr "@icon@"
 
@@ -1462,9 +1470,6 @@ msgstr ""
 
 #~ msgid "Gtranslator Translation Memory Manager"
 #~ msgstr "Gtranslatorin käännösmuistin hallinta"
-
-#~ msgid "Translation Memory"
-#~ msgstr "Käännösmuisti"
 
 #~ msgid "Insert Option nº %d"
 #~ msgstr "Sisällytä valinta nro %d"
