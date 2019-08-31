@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2019-02-03 15:30+0000\n"
+"POT-Creation-Date: 2019-06-15 10:55+0000\n"
 "PO-Revision-Date: 2019-02-04 02:00+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -50,23 +50,18 @@ msgid ""
 "code viewer."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:31
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:61
 msgid "Daniel García Moreno"
 msgstr ""
 
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
-#: src/gtr-notebook.ui:294 src/gtr-window.c:316 src/gtr-window.ui:25
+#: src/gtr-notebook.ui:294 src/gtr-window.c:318 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "翻訳エディター"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
 msgstr "PO ファイルエディター"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: data/org.gnome.Gtranslator.desktop.in.in:7
-msgid "@icon@"
-msgstr "@icon@"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:14
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
@@ -200,7 +195,7 @@ msgstr "パス:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
 #: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:588
-#: src/gtr-search-dialog.c:391
+#: src/gtr-search-dialog.c:393
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "閉じる(_C)"
@@ -269,17 +264,14 @@ msgstr "名前を付けて保存…"
 msgid "Files saved."
 msgstr "ファイルを保存しました。"
 
-#: src/gtr-actions-search.c:168
-#, c-format
-msgid "Found and replaced %d occurrence"
-msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "%d個見つかり置換しました"
-
-#: src/gtr-actions-search.c:177
+#: src/gtr-actions-search.c:163
+#, fuzzy, c-format
+#| msgid "Found and replaced one occurrence"
 msgid "Found and replaced one occurrence"
-msgstr "1個見つかり置換しました"
+msgid_plural "Found and replaced %d occurrences"
+msgstr[0] "1個見つかり置換しました"
 
-#: src/gtr-actions-search.c:189
+#: src/gtr-actions-search.c:173
 msgid "Phrase not found"
 msgstr "語句が見つかりませんでした"
 
@@ -327,7 +319,7 @@ msgid "Team email"
 msgstr "翻訳チームのメール"
 
 #: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:521
-#: src/gtr-window.c:554
+#: src/gtr-window.c:556
 msgid "Profile"
 msgstr "プロファイル"
 
@@ -411,20 +403,70 @@ msgstr "メモを追加:"
 msgid "Edit"
 msgstr "編集"
 
-#. Extracted comments
-#: src/gtr-context.c:327
+#: src/gtr-context.c:326
 msgid "Extracted comments:"
 msgstr "追加のコメント:"
 
-#. Context
-#: src/gtr-context.c:331
+#: src/gtr-context.c:329
 msgid "Context:"
 msgstr "コンテキスト:"
 
-#. Format
-#: src/gtr-context.c:335
+#: src/gtr-context.c:332
 msgid "Format:"
 msgstr "書式:"
+
+#: src/gtr-dl-teams.c:604
+#, fuzzy
+#| msgctxt "shortcut window group"
+#| msgid "Translation Memory"
+msgid "Translation Team"
+msgstr "翻訳メモリ"
+
+#: src/gtr-dl-teams.c:611
+msgid "Module"
+msgstr ""
+
+#: src/gtr-dl-teams.ui:60
+msgid "Select team, module, branch and domain to get the translation file."
+msgstr ""
+
+#: src/gtr-dl-teams.ui:81
+#, fuzzy
+#| msgid "No profile"
+msgid "Load file"
+msgstr "プロファイル無し"
+
+#: src/gtr-dl-teams.ui:98
+msgid "Load from Damned Lies"
+msgstr ""
+
+#: src/gtr-dl-teams.ui:105 src/gtr-notebook.ui:298 src/gtr-projects.ui:58
+msgid "Open…"
+msgstr "開く…"
+
+#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:511 src/gtr-projects.ui:91
+msgid "Main Menu"
+msgstr "メインメニュー"
+
+#: src/gtr-dl-teams.ui:156 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+msgid "New window"
+msgstr "新しいウィンドウ"
+
+#: src/gtr-dl-teams.ui:170 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+msgid "Preferences"
+msgstr "設定"
+
+#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:160
+msgid "Keyboard Shortcuts"
+msgstr "キーボードショートカット"
+
+#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:174
+msgid "About"
+msgstr "このアプリケーションについて"
+
+#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:276 src/gtr-projects.ui:188
+msgid "Quit"
+msgstr "終了"
 
 #: src/gtr-file-dialogs.c:48
 msgid "_Open"
@@ -520,7 +562,7 @@ msgstr "メッセージに移動"
 msgid "Enter message number:"
 msgstr "メッセージの番号を入力してください:"
 
-#: src/gtr-lang-button.ui:61 src/gtr-lang-button.ui:70
+#: src/gtr-lang-button.c:65
 msgid "Choose Language"
 msgstr "言語を選択"
 
@@ -545,7 +587,9 @@ msgid "_Plural forms"
 msgstr "複数形の形式(_P)"
 
 #: src/gtr-languages-fetcher.ui:200
-msgid "Edit options manually"
+#, fuzzy
+#| msgid "Edit options manually"
+msgid "_Edit options manually"
 msgstr "オプションを手動で編集する"
 
 #: src/gtr-message-table.c:219
@@ -576,12 +620,12 @@ msgstr "原文"
 msgid "Translated message"
 msgstr "翻訳文"
 
-#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:369
-#: src/gtr-search-dialog.c:449
+#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:371
+#: src/gtr-search-dialog.c:455
 msgid "Find"
 msgstr "検索"
 
-#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:453
+#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:459
 msgid "Find and replace"
 msgstr "検索と置換"
 
@@ -592,30 +636,6 @@ msgstr "翻訳メモリの構築"
 #: src/gtr-notebook.ui:179
 msgid "Edit header"
 msgstr "ヘッダーの編集"
-
-#: src/gtr-notebook.ui:207 src/gtr-projects.ui:109
-msgid "New window"
-msgstr "新しいウィンドウ"
-
-#: src/gtr-notebook.ui:221 src/gtr-projects.ui:123
-msgid "Preferences"
-msgstr "設定"
-
-#: src/gtr-notebook.ui:248 src/gtr-projects.ui:150
-msgid "Keyboard Shortcuts"
-msgstr "キーボードショートカット"
-
-#: src/gtr-notebook.ui:262 src/gtr-projects.ui:164
-msgid "About"
-msgstr "このアプリケーションについて"
-
-#: src/gtr-notebook.ui:276 src/gtr-projects.ui:178
-msgid "Quit"
-msgstr "終了"
-
-#: src/gtr-notebook.ui:298 src/gtr-projects.ui:58
-msgid "Open…"
-msgstr "開く…"
 
 #: src/gtr-notebook.ui:302
 msgid "Open a new file (<Ctrl>o)"
@@ -644,10 +664,6 @@ msgstr "fuzzy の ON/OFF(<Ctrl>+u)"
 #: src/gtr-notebook.ui:487
 msgid "Order by menu"
 msgstr ""
-
-#: src/gtr-notebook.ui:511 src/gtr-projects.ui:81
-msgid "Main Menu"
-msgstr "メインメニュー"
 
 #: src/gtr-notebook.ui:527
 msgid "Save"
@@ -859,16 +875,20 @@ msgstr ".po ファイルを開くか、ここにドラッグ & ドロップし�
 msgid "Select a PO file"
 msgstr "PO ファイルの選択"
 
-#: src/gtr-search-dialog.c:347 src/gtr-search-dialog.ui:6
+#: src/gtr-projects.ui:68
+msgid "Load from DL…"
+msgstr ""
+
+#: src/gtr-search-dialog.c:349 src/gtr-search-dialog.ui:6
 #: src/gtr-search-dialog.ui:53
 msgid "Replace"
 msgstr "置換"
 
-#: src/gtr-search-dialog.c:451
+#: src/gtr-search-dialog.c:457
 msgid "Replace _All"
 msgstr "すべて置換(_A)"
 
-#: src/gtr-search-dialog.c:455
+#: src/gtr-search-dialog.c:461
 msgid "_Replace"
 msgstr "置換(_R)"
 
@@ -884,27 +904,27 @@ msgstr "検索する文字列(_S):"
 msgid "Replace _with: "
 msgstr "置換後の文字列(_W):"
 
-#: src/gtr-search-dialog.ui:160
+#: src/gtr-search-dialog.ui:184
 msgid "_Original text"
 msgstr "原文のメッセージ(_O)"
 
-#: src/gtr-search-dialog.ui:177
+#: src/gtr-search-dialog.ui:201
 msgid "_Translated text"
 msgstr "翻訳文(_T)"
 
-#: src/gtr-search-dialog.ui:213
+#: src/gtr-search-dialog.ui:237
 msgid "_Match case"
 msgstr "大/小文字を区別する(_M)"
 
-#: src/gtr-search-dialog.ui:229
+#: src/gtr-search-dialog.ui:253
 msgid "Match _entire word only"
 msgstr "完全に一致する単語だけ(_E)"
 
-#: src/gtr-search-dialog.ui:245
+#: src/gtr-search-dialog.ui:269
 msgid "Search _backwards"
 msgstr "先頭に向かって検索する(_B)"
 
-#: src/gtr-search-dialog.ui:262
+#: src/gtr-search-dialog.ui:286
 msgid "_Wrap around"
 msgstr "折り返しも対象にする(_W)"
 
@@ -924,36 +944,36 @@ msgstr "このファイルを閉じます"
 msgid "There is an error in the message:"
 msgstr "メッセージの中にエラーが含まれています:"
 
-#: src/gtr-tab.c:459 src/gtr-tab.c:570
+#: src/gtr-tab.c:459 src/gtr-tab.c:575
 msgid "fuzzy"
 msgstr "fuzzy"
 
-#: src/gtr-tab.c:600
+#: src/gtr-tab.c:605
 #, c-format
 msgid "Plural %d"
 msgstr "複数形 %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1153
+#: src/gtr-tab.c:1158
 msgid "Path:"
 msgstr "パス:"
 
-#: src/gtr-tab.c:1803
+#: src/gtr-tab.c:1808
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "翻訳済み: %0.2f%%"
 
-#: src/gtr-tab.c:1804
+#: src/gtr-tab.c:1809
 #, c-format
 msgid "Translated: %d"
 msgstr "翻訳済み: %d"
 
-#: src/gtr-tab.c:1805
+#: src/gtr-tab.c:1810
 #, c-format
 msgid "Untranslated: %d"
 msgstr "未訳: %d"
 
-#: src/gtr-tab.c:1806
+#: src/gtr-tab.c:1811
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "fuzzy: %d"
@@ -974,63 +994,63 @@ msgstr ""
 "ヘルプを表示できません。翻訳エディターのドキュメントが入ったパッケージがイン"
 "ストールされているか確認してください。"
 
-#: src/gtr-window.c:171
+#: src/gtr-window.c:173
 msgid "Untranslated"
 msgstr "未訳"
 
-#: src/gtr-window.c:174
+#: src/gtr-window.c:176
 msgid "Translated"
 msgstr "翻訳済み"
 
-#: src/gtr-window.c:177
+#: src/gtr-window.c:179
 msgid "Fuzzy"
 msgstr "fuzzy"
 
-#: src/gtr-window.c:184
+#: src/gtr-window.c:186
 #, c-format
 msgid "Current: %d"
 msgstr "現在位置: %d"
 
-#: src/gtr-window.c:185
+#: src/gtr-window.c:187
 #, c-format
 msgid "Total: %d"
 msgstr "合計: %d"
 
-#: src/gtr-window.c:186
+#: src/gtr-window.c:188
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "翻訳済み: %d"
 
-#: src/gtr-window.c:189
+#: src/gtr-window.c:191
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "fuzzy: %d"
 
-#: src/gtr-window.c:191
+#: src/gtr-window.c:193
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
 msgstr[0] "未訳: %d"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:301
+#: src/gtr-window.c:303
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — 翻訳エディター"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:307
+#: src/gtr-window.c:309
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — 翻訳エディター"
 
-#: src/gtr-window.c:538
+#: src/gtr-window.c:540
 msgid "No profile"
 msgstr "プロファイル無し"
 
-#: src/gtr-window.c:556
+#: src/gtr-window.c:558
 msgid "Profile for the active document"
 msgstr "現在のドキュメントのプロファイル"
 
@@ -1276,6 +1296,13 @@ msgstr ""
 "を判定する際のしきい値で、双方のメッセージの長さがいくつまで異なることが許容"
 "できるかを表す数値です (ここで指定した数だけ長さが異なっていても同一のメッ"
 "セージであると判定します)。"
+
+#~ msgid "@icon@"
+#~ msgstr "@icon@"
+
+#~ msgid "Found and replaced %d occurrence"
+#~ msgid_plural "Found and replaced %d occurrences"
+#~ msgstr[0] "%d個見つかり置換しました"
 
 #~ msgid "Gtranslator PO File Editor"
 #~ msgstr "Gtranslator 翻訳エディター"
