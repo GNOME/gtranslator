@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2019-06-15 10:55+0000\n"
-"PO-Revision-Date: 2019-02-04 02:00+0900\n"
+"POT-Creation-Date: 2019-08-29 10:00+0000\n"
+"PO-Revision-Date: 2019-08-30 23:32+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -50,7 +50,7 @@ msgid ""
 "code viewer."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:61
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:74
 msgid "Daniel García Moreno"
 msgstr ""
 
@@ -265,11 +265,10 @@ msgid "Files saved."
 msgstr "ファイルを保存しました。"
 
 #: src/gtr-actions-search.c:163
-#, fuzzy, c-format
-#| msgid "Found and replaced one occurrence"
+#, c-format
 msgid "Found and replaced one occurrence"
 msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "1個見つかり置換しました"
+msgstr[0] "%d個見つかり置換しました"
 
 #: src/gtr-actions-search.c:173
 msgid "Phrase not found"
@@ -416,29 +415,24 @@ msgid "Format:"
 msgstr "書式:"
 
 #: src/gtr-dl-teams.c:604
-#, fuzzy
-#| msgctxt "shortcut window group"
-#| msgid "Translation Memory"
 msgid "Translation Team"
-msgstr "翻訳メモリ"
+msgstr "翻訳チーム"
 
 #: src/gtr-dl-teams.c:611
 msgid "Module"
-msgstr ""
+msgstr "モジュール"
 
 #: src/gtr-dl-teams.ui:60
 msgid "Select team, module, branch and domain to get the translation file."
 msgstr ""
 
 #: src/gtr-dl-teams.ui:81
-#, fuzzy
-#| msgid "No profile"
 msgid "Load file"
-msgstr "プロファイル無し"
+msgstr "ファイルを読み込む"
 
 #: src/gtr-dl-teams.ui:98
 msgid "Load from Damned Lies"
-msgstr ""
+msgstr "Damned Lies から読み込む"
 
 #: src/gtr-dl-teams.ui:105 src/gtr-notebook.ui:298 src/gtr-projects.ui:58
 msgid "Open…"
@@ -587,10 +581,8 @@ msgid "_Plural forms"
 msgstr "複数形の形式(_P)"
 
 #: src/gtr-languages-fetcher.ui:200
-#, fuzzy
-#| msgid "Edit options manually"
 msgid "_Edit options manually"
-msgstr "オプションを手動で編集する"
+msgstr "オプションを手動で編集する(_E)"
 
 #: src/gtr-message-table.c:219
 msgid "Original Message"
@@ -877,7 +869,7 @@ msgstr "PO ファイルの選択"
 
 #: src/gtr-projects.ui:68
 msgid "Load from DL…"
-msgstr ""
+msgstr "DL から読み込む…"
 
 #: src/gtr-search-dialog.c:349 src/gtr-search-dialog.ui:6
 #: src/gtr-search-dialog.ui:53
