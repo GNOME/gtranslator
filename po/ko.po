@@ -5,15 +5,14 @@
 # update by Chideok Hwang <hwang@mizi.co.kr>, 2000-09-15
 # Seongchong Park <spark@tapl01.kaist.ac.kr>, 2004-01-16
 # Namhyung Kim <namhyung@gmail.com>, 2007 , 2011.
-# Seong-ho Cho <shcho@gnome.org>, 2012, 2013, 2014, 2016.
+# Seong-ho Cho <shcho@gnome.org>, 2012, 2013, 2014, 2016, 2019.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 1.0\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-01 12:37+0000\n"
-"PO-Revision-Date: 2016-03-04 07:29+0900\n"
+"Project-Id-Version: gtranslator master\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
+"POT-Creation-Date: 2019-08-31 12:44+0000\n"
+"PO-Revision-Date: 2019-09-03 17:52+0900\n"
 "Last-Translator: Seong-ho Cho <shcho@gnome.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -22,19 +21,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 2.2.3\n"
 
-#: ../data/gtranslator.appdata.xml.in.h:1
-#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:6
 msgid "Gtranslator"
 msgstr "지트랜스레이터"
 
-#: ../data/gtranslator.appdata.xml.in.h:2
-#: ../data/desktop/gtranslator.desktop.in.h:4
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
+#: data/org.gnome.Gtranslator.desktop.in.in:5
 msgid "Translate and localize applications and libraries"
 msgstr "프로그램과 라이브러리를 변역하고 지역화합니다"
 
-#: ../data/gtranslator.appdata.xml.in.h:3
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:9
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -46,771 +44,197 @@ msgstr ""
 "지트랜스레이터는 그놈 데스크톱 환경용으로 개선한 gettext po 파일 편집기입니"
 "다. 모든 형태의 gettext po 파일을 다루며, 찾기/바꾸기, 번역 기억장소, 제각각"
 "의 번역자 프로파일, 메시지 표(po 파일에서 번역/메시지를 미리보는 용도), 쉬운 "
-"탐색, 번역 메시지 편집, 정확성을 부여하기 위한 번역 주석 달기 같은 매우 쓸만"
-"한 기능도 있습니다."
+"탐색, 번역문 편집, 정확성을 부여하기 위한 번역 주석 달기 같은 매우 쓸만한 기"
+"능도 있습니다."
 
-#: ../data/gtranslator.appdata.xml.in.h:4
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:18
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
-"alternate language, insert tags, open tran, integration with subversion and "
-"a source code viewer."
+"alternate language, insert tags, integration with subversion and a source "
+"code viewer."
 msgstr ""
-"지트랜스레이터에는 대체언어, 태그 삽입, 오픈 트랜, 서브버전 및 소스코드 보기"
-"와의 통합 기능을 지원하여 흥미로운 많은 플러그인을 갖춘 플러그인 체계를 지니"
-"고 있습니다."
+"지트랜스레이터에는 대체언어, 태그 삽입, 서브버전 및 소스코드 보기 기능 통합"
+"을 지원하는 등 흥미로운 여러 플러그인을 갖춘 플러그인 체계를 지니고 있습니다."
 
-#: ../data/desktop/gtranslator.desktop.in.h:2
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:74
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
+#: src/gtr-notebook.ui:294 src/gtr-window.c:318 src/gtr-window.ui:25
+msgid "Translation Editor"
+msgstr "번역 편집기"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
 msgstr "PO 파일 편집기"
 
-#: ../data/desktop/gtranslator.desktop.in.h:3
-msgid "Gtranslator PO File Editor"
-msgstr "지트랜스레이터 PO 파일 편집기"
+#: data/org.gnome.Gtranslator.desktop.in.in:14
+msgid "Gtranslator;Translation;Editor;Gettext;Write;"
+msgstr ""
+"Gtranslator;Translation;Editor;Gettext;Write;지트랜스레이터;번역;편집기;"
+"gettext;기록;쓰기;작성;"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:1
+#: data/org.gnome.Gtranslator.gschema.xml.in:24
 msgid "Warn if file contains fuzzy translations"
 msgstr "파일에 애매한 번역이 있으면 경고"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:2
+#: data/org.gnome.Gtranslator.gschema.xml.in:25
 msgid ""
 "If true, warn the user when saving a PO translation file containing fuzzy "
 "strings."
 msgstr ""
 "참이면, 모호함 문자열이 들어있는 PO 번역 파일을 저장할 때 사용자에게 경고."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:3
+#: data/org.gnome.Gtranslator.gschema.xml.in:32
 msgid "Auto save files"
 msgstr "파일을 자동 저장"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:4
+#: data/org.gnome.Gtranslator.gschema.xml.in:33
 msgid "If true, automatically save files at specified intervals."
 msgstr "참이면, 정해진 시간간격에 따라 자동으로 파일을 저장."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:5
+#: data/org.gnome.Gtranslator.gschema.xml.in:39
 msgid "Auto save interval"
 msgstr "자동 저장 간격"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:6
+#: data/org.gnome.Gtranslator.gschema.xml.in:40
 msgid "Interval in minutes at which to automatically save files."
 msgstr "자동으로 파일을 저장할 시간의 분 단위 간격."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:7
+#: data/org.gnome.Gtranslator.gschema.xml.in:46
 msgid "Create backup before saving"
 msgstr "저장하기 전 백업 만들기"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:8
+#: data/org.gnome.Gtranslator.gschema.xml.in:47
 msgid "If true, create a backup copy of a file before saving it."
 msgstr "참이면, 파일을 저장하기 전에 백업 복사본을 만듬."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:9
+#: data/org.gnome.Gtranslator.gschema.xml.in:53
 msgid "Use profile values for header"
 msgstr "헤더에 대한 프로파일 값 사용"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:10
+#: data/org.gnome.Gtranslator.gschema.xml.in:54
 msgid ""
 "If true, overwrite the values in the PO header with those in the active "
 "profile."
 msgstr "참이면, 활성 프로파일의 값으로 PO 헤더에 값을 덮어 씀."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:11
+#: data/org.gnome.Gtranslator.gschema.xml.in:63
 msgid "Highlight syntax in edit fields"
 msgstr "편집 칸의 문법 강조"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:12
+#: data/org.gnome.Gtranslator.gschema.xml.in:64
 msgid "If true, apply syntax highlighting to strings in edit fields."
 msgstr "참이면, 편집 칸의 문자열에 문법 강조를 적용."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:13
+#: data/org.gnome.Gtranslator.gschema.xml.in:70
 msgid "Make whitespace visible"
 msgstr "공백 표시"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:14
+#: data/org.gnome.Gtranslator.gschema.xml.in:71
 msgid "If true, display whitespace in strings as representative symbols."
 msgstr "참이면, 해당 특수 문자로 문자열의 공백을 표시."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:15
-msgid "Use custom font"
-msgstr "사용자 정의 글꼴 사용"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:16
-msgid "If true, use a custom font for edit fields."
-msgstr "참이면, 편집 칸에 사용자 정의 글꼴을 사용."
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:17
-msgid "Editor font"
-msgstr "편집기 글꼴"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:18
-msgid "Custom font to use for edit fields."
-msgstr "칸을 편집하는데 사용할 사용자 정의 글꼴."
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:19
+#: data/org.gnome.Gtranslator.gschema.xml.in:77
 msgid "Remove fuzzy status when message is changed"
 msgstr "메시지가 바뀌면 모호함 상태를 없애기"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:20
+#: data/org.gnome.Gtranslator.gschema.xml.in:78
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr "참이면, 메시지 상태가 바뀌면 번역으로부터 모호함 상태를 없앰."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:21
+#: data/org.gnome.Gtranslator.gschema.xml.in:84
 msgid "Check spelling"
 msgstr "맞춤법 검사"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:22
+#: data/org.gnome.Gtranslator.gschema.xml.in:85
 msgid "If true, check the spelling of translated messages."
 msgstr "참이면, 번역한 메시지의 맞춤법을 검사."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:23
+#: data/org.gnome.Gtranslator.gschema.xml.in:93
 msgid "Side panel switcher style"
 msgstr "가장자리 창 변환기 방식"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:24
+#: data/org.gnome.Gtranslator.gschema.xml.in:94
 msgid "Style for switchers in the side panel."
 msgstr "가장자리 창의 변환기 방식."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:25
+#: data/org.gnome.Gtranslator.gschema.xml.in:100
 msgid "Color scheme"
 msgstr "색상 구성"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:26
+#: data/org.gnome.Gtranslator.gschema.xml.in:101
 msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
 msgstr "문법 강조에 사용할 gtksourceview 색상 구성 이름."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:27
+#: data/org.gnome.Gtranslator.gschema.xml.in:107
 msgid "Message list sort order"
 msgstr "메시지 목록 정렬 순서"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:28
+#: data/org.gnome.Gtranslator.gschema.xml.in:108
 msgid ""
-"Sort order to use in the message list. Possible values are \"status\", \"id"
-"\", \"original-text\" and \"translated-text\"."
+"Sort order to use in the message list. Possible values are “status”, “id”, "
+"“original-text” and “translated-text”."
 msgstr ""
-"메시지 목록에 사용할 정렬 순서입니다. 가능한 값은 \"status\", \"id\", "
-"\"original-text\" 그리고 \"translated-text\" 입니다."
+"메시지 목록에 사용할 정렬 기준입니다. 가능한 값은 “status”, “id”, "
+"“original-text”, “translated-text”입니다."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:29
+#: data/org.gnome.Gtranslator.gschema.xml.in:143
 msgid "Active plugins"
 msgstr "활성 플러그인"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:30
+#: data/org.gnome.Gtranslator.gschema.xml.in:144
 msgid ""
-"List of active plugins. It contains the \"Location\" of the active plugins. "
-"See the .gtranslator-plugin file for obtaining the \"Location\" of a given "
+"List of active plugins. It contains the “Location” of the active plugins. "
+"See the .gtranslator-plugin file for obtaining the “Location” of a given "
 "plugin."
 msgstr ""
-"활성 플러그인의 목록입니다. 활성 플러그인의 \"위치\"를 담고 있습니다. 주어진 "
-"플러그인의 \"위치\"를 가져오려면 gtranslator-plugin 파일을 참조합니다."
+"활성 플러그인의 목록입니다. 활성 플러그인의 “위치” 정보가 들어있습니다. 주어진 "
+"플러그인의 “위치” 정보를 가져오려면 gtranslator-plugin 파일을 살펴보십시오."
 
-#: ../data/po.lang.h:1
-msgid "Others"
-msgstr "기타"
-
-#: ../data/po.lang.h:2
-msgid "gtranslator highlight"
-msgstr "지트랜스레이터 강조"
-
-#: ../data/po.lang.h:3
-msgid "Tag"
-msgstr "태그"
-
-#: ../data/po.lang.h:4
-msgid "Special variable"
-msgstr "특수 변수"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:126
-msgid "Message not found"
-msgstr "메시지를 찾을 수 없음"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:229
-msgid "Open file for alternate language"
-msgstr "대체 언어에 대한 파일 열기"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:254
-msgid "File closed"
-msgstr "파일 닫힘"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:322
-msgctxt "alternate lang"
-msgid "_Open"
-msgstr "열기(_O)"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:328
-msgctxt "alternate lang"
-msgid "_Close"
-msgstr "닫기(_C)"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:334
-msgctxt "alternate lang"
-msgid "Co_py"
-msgstr "복사(_P)"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:363
-msgid "There isn't any file loaded"
-msgstr "불러온 파일이 없습니다"
-
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:81
-msgid "_Alternate Language"
-msgstr "대체 언어(_A)"
-
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:82
-msgid "Show the Alternate Language panel"
-msgstr "대체 언어 창 표시"
-
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:222
-#: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:1
-msgid "Alternate Language"
-msgstr "대체 언어"
-
-#: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:2
-msgid "Load an alternate language."
-msgstr "대체 언어를 불러옵니다."
-
-#. ex:et:ts=4:
-#: ../plugins/charmap/charmap/__init__.py:42
-#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:1
-msgid "Character Map"
-msgstr "문자 표"
-
-#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:2
-msgid "Insert special characters just by clicking on them."
-msgstr "눌러서 특수 문자를 삽입하십시오."
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:1
-msgid "Source View Settings"
-msgstr "소스 보기 설정"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:2
-msgid "Use external editor"
-msgstr "외부 편집기 사용"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:3
-msgid "Program command:"
-msgstr "프로그램 명령:"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:4
-msgid "Line command:"
-msgstr "줄 명령:"
-
-#: ../plugins/codeview/gtr-codeview-plugin.c:129
-#, c-format
-msgid "Please install \"%s\" to be able to show the file"
-msgstr "파일을 표시하려면 \"%s\"을(를) 설치하십시오."
-
-#: ../plugins/codeview/gtr-codeview-plugin.c:497
+#: src/codeview/gtr-codeview.c:353
 msgid "Paths:"
 msgstr "경로:"
 
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:1
-msgid "Source Code View"
-msgstr "소스 코드 보기"
+#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
+#: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:588
+#: src/gtr-search-dialog.c:393
+#: src/translation-memory/gtr-translation-memory-dialog.c:299
+msgid "_Close"
+msgstr "닫기(_C)"
 
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:2
-msgid "Show the message in the source code."
-msgstr "소스 코드의 메시지 보기."
-
-#: ../plugins/codeview/gtr-viewer.c:80
+#: src/codeview/gtr-viewer.c:75
 msgid "Source Viewer"
 msgstr "소스 보기"
 
-#: ../plugins/codeview/gtr-viewer.ui.h:1
+#: src/codeview/gtr-viewer.ui:59
 msgid "Source code"
 msgstr "소스 코드"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:1
-msgid "Use the System Editor"
-msgstr "시스템 편집기 사용"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:2
-msgid "Whether use the system editor to show the source code"
-msgstr "소스 코드를 표시할 시스템 편집기 사용 여부"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:3
-msgid "The Editor to Launch"
-msgstr "실행할 편집기"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:4
-msgid "The command to launch the editor you want to use"
-msgstr "사용할 편집기를 실행할 명령"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:5
-msgid "Arguments for the Command"
-msgstr "명령 인자"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:6
-msgid "Arguments to pass to the program command line to select the line"
-msgstr "줄을 선택할 때 프로그램 명령줄로 전달할 인자"
-
-#: ../plugins/dictionary/gtr-dictionary-plugin.c:140
-#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:1
-msgid "Dictionary"
-msgstr "사전"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:166
-#, c-format
-msgid "No dictionary source available with name '%s'"
-msgstr "'%s'(이)라는 이름의 사전 소스를 이용할 수 없습니다"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:170
-msgid "Unable to find dictionary source"
-msgstr "사전 자료를 찾을 수 없음"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:185
-#, c-format
-msgid "No context available for source '%s'"
-msgstr "'%s' 자료에 대해 사용할 수 있는 내용이 없습니다"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:189
-msgid "Unable to create a context"
-msgstr "내용을 만들 수 없습니다"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:272
-#, c-format
-msgid "Dictionary source '%s' selected"
-msgstr "'%s' 사전 자료를 선택함"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:291
-#, c-format
-msgid "Strategy '%s' selected"
-msgstr "'%s' 방식을 선택함"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:309
-#, c-format
-msgid "Database '%s' selected"
-msgstr "'%s' 데이터베이스를 선택"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:353
-#, c-format
-msgid "Word '%s' selected"
-msgstr "'%s' 단어를 선택함"
-
-#. speller
-#: ../plugins/dictionary/gtr-dict-panel.c:375
-msgid "Double-click on the word to look up"
-msgstr "찾아볼 단어를 두번 누르십시오"
-
-#. strat-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:380
-msgid "Double-click on the matching strategy to use"
-msgstr "사용할 검색 방식을 두번 누르십시오"
-
-#. source-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:386
-msgid "Double-click on the source to use"
-msgstr "사용할 자료를 두번 누르십시오"
-
-#. db-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:396
-msgid "Double-click on the database to use"
-msgstr "사용할 데이터베이스를 두번 누르십시오"
-
-#. Look up Button
-#: ../plugins/dictionary/gtr-dict-panel.c:502
-msgid "Look _up:"
-msgstr "찾기(_U):"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:559
-msgid "Similar words"
-msgstr "비슷한 단어"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:572
-msgid "Available dictionaries"
-msgstr "이용할 수 있는 사전"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:586
-msgid "Available strategies"
-msgstr "이용할 수 있는 방식"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:596
-msgid "Dictionary sources"
-msgstr "사전 자료"
-
-#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:2
-msgid "Look up words in a dictionary."
-msgstr "사전에서 단어를 찾습니다."
-
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:1
-msgid "Database"
-msgstr "데이터베이스"
-
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:2
-msgid "Word database"
-msgstr "단어 데이터베이스"
-
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:3
-msgid "Source Name"
-msgstr "자료 이름"
-
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:4
-msgid "Strategy"
-msgstr "방식"
-
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:5
-msgid "Panel Position"
-msgstr "패널 위치"
-
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:67
-msgid "_Fullscreen"
-msgstr "최대 화면(_F)"
-
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:68
-msgid "Place window on fullscreen state"
-msgstr "창을 최대 화면 상태로"
-
-#: ../plugins/fullscreen/gtr-fullscreen.plugin.desktop.in.h:1
-msgid "Fullscreen"
-msgstr "최대 화면"
-
-#: ../plugins/fullscreen/gtr-fullscreen.plugin.desktop.in.h:2
-msgid "Place window in the fullscreen state."
-msgstr "창을 최대 화면 상태로."
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:113
-msgid "_Next Param"
-msgstr "다음 매개 변수(_N)"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:114
-msgid "Insert the next param of the message"
-msgstr "메시지에 다음 매개 변수 넣기"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:116
-msgid "_Insert Params"
-msgstr "매개 변수 삽입(_I)"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:117
-msgid "_Next Tag"
-msgstr "다음 태그(_N)"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:118
-msgid "Insert the next tag of the message"
-msgstr "메시지에 다음 태그 넣기"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:120
-msgid "_Insert Tags"
-msgstr "태그 삽입(_I)"
-
-#: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:1
-msgid "Insert Params or Tags"
-msgstr "매개 변수 또는 태그 넣기"
-
-#: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:2
-msgid "Parameters and tags detection featuring easy insertion."
-msgstr "쉬운 삽입 기능이 있는 매개 변수 및 태그 발견 기능입니다."
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
-msgid "Open Tran Settings"
-msgstr "Open Tran 설정"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
-msgid "Language code for the Open-Tran query:"
-msgstr "Open-Tran에 요청할 언어 코드:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
-msgid "Language code of the translated results:"
-msgstr "번역 결과의 언어 코드:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:4
-msgid "Use a local \"mirror\" copy of the Open-Tran server"
-msgstr "Open-Tran 서버의 지역 \"미러\" 사본 사용"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:5
-msgid "Mirror server URL:"
-msgstr "미러 서버 URL:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:7
-#, no-c-format
-msgid ""
-"<i>The URL should be of the form:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"The two \"%s\" markers and the final slash must not be omitted.</i>"
-msgstr ""
-"<i>URL은 다음 형식이어야 합니다:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"두개의 \"%s\" 마커와 마지막 슬래시 문자는 생략하면 안됩니다.</i>"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:10
-msgid "Mirror Server"
-msgstr "미러 서버"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:222
-#, c-format
-msgid "ERROR: Cannot access %s\n"
-msgstr "오류: %s에 접근할 수 없음\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:238
-msgid "Error in server response, GET failed\n"
-msgstr "서버 응답에 오류가 발생하여, GET 실패\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:250
-#, c-format
-msgid "Cannot parse server response, %s\n"
-msgstr "서버 응답을 해석할 수 없습니다. %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:264
-#, c-format
-msgid "Cannot parse server response, not an array? %s\n"
-msgstr "서버 응답을 해석할 수 없습니다. 배열이 아닙니까? %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:287
-#, c-format
-msgid "WRONG! Can't get result element %d\n"
-msgstr "이런! 결과 요소 %d을(를) 가져올 수 없습니다\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:297
-#, c-format
-msgid "WRONG! Can't parse result element %d as object\n"
-msgstr "이런! 결과 요소 %d을(를) 객체로 해석할 수 없습니다\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:311
-#, c-format
-msgid "WRONG! Can't read projects for result element %d\n"
-msgstr "이런! 객체 요소 %d의 프로젝트를 읽어올 수 없습니다\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:335
-#, c-format
-msgid "%s[%s] Count:%d"
-msgstr "%s[%s] 갯수:%d"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:345
-#, c-format
-msgid "WRONG! Malformed project: %d\n"
-msgstr "이런! 잘못된 형식의 프로젝트 입니다: %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:359
-#: ../src/gtr-actions-search.c:191
-msgid "Phrase not found"
-msgstr "구절을 찾을 수 없음"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:383
-msgid "You have to provide a phrase to search"
-msgstr "검색할 구절을 입력해야 합니다."
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:392
-msgid "You have to provide a search language code in the plugin configuration"
-msgstr "플러그인 설정에서 검색할 언어 코드를 제공해야 합니다."
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:402
-msgid ""
-"You have to provide a language code for your language in the plugin "
-"configuration"
-msgstr "플러그인 설정에서 사용할 언어에 대한 언어 코드를 제공해야 합니다."
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:415
-msgid ""
-"Either use the main open-tran.eu server, or enter a server URL in the plugin "
-"configuration,"
-msgstr ""
-"메인 open-tran.eu 서버를 사용하거나 플러그인 설정에 서버 URL을 입력하십시오,"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:453
-msgid "Type"
-msgstr "유형"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:464
-msgid "Open-Tran.eu"
-msgstr "Open-Tran.eu"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:510
-msgid "Look for:"
-msgstr "찾기:"
-
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:162
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:1
-msgid "Open Tran"
-msgstr "번역 열기"
-
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:2
-msgid "Look for phrases in Open tran memory translation database."
-msgstr "Open Tran 저장소 번역 데이터베이스에서 구절을 찾음."
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:1
-msgid "Search Code"
-msgstr "코드 검색"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:2
-msgid "The language code to search for"
-msgstr "검색 언어 코드"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:3
-msgid "Own Code"
-msgstr "보유한 코드"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:4
-msgid "The language code in which you want the results"
-msgstr "원하는 결과를 표시할 언어 코드"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:5
-msgid "Use Mirror Server"
-msgstr "미러 서버 사용"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:6
-msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
-msgstr "open-tran.eu의 주 Open-Tran 서버에 대한 로컬 복사본을 사용"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:7
-msgid "Mirror Server URL"
-msgstr "미러 서버 URL"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.h:8
-msgid "URL of an Open-Tran mirror server"
-msgstr "Open-Tran 미러 서버 URL"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
-msgid "Strings added to database"
-msgstr "데이터베이스에 추가한 문자열"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:224
-msgid "Please specify a valid path to build the translation memory"
-msgstr "번역 저장소를 만들 존재 경로를 지정해주십시오"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:291
-msgid "Gtranslator Translation Memory Manager"
-msgstr "지트랜스레이터 번역 저장소 관리자"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:1
-msgid "Database:"
-msgstr "데이터베이스:"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:2
-msgid "Select the directory which contains PO files:"
-msgstr "PO 파일이 있는 디렉터리를 선택:"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:3
-msgid "Add to Database"
-msgstr "데이터베이스에 추가"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:4
-msgid "Configuration:"
-msgstr "설정:"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:5
-msgid "Use only files with this name:"
-msgstr "이 이름을 가진 파일만 사용합니다:"
-
-#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:1
-#: ../plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
-msgid "Translation Memory"
-msgstr "번역 저장소"
-
-#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:2
-msgid "Get translation suggestions from a data base."
-msgstr "데이터베이스에서 번역 제안을 가져옴."
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:207
-#, c-format
-msgid "Insert Option nº %d"
-msgstr "삽입 옵션 nº %d"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:325
-msgid "_Use this translation"
-msgstr "이 번역 사용(_U)"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:330
-msgid "_Remove"
-msgstr "제거(_R)"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:445
-msgid "Shortcut"
-msgstr "바로 가기"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:454
-msgid "Level"
-msgstr "수준"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:463
-msgid "String"
-msgstr "문자열"
-
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:81
-msgid "_Build Translation Memory"
-msgstr "번역 저장소 만들기(_B)"
-
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:82
-msgid "Build translation memory"
-msgstr "번역 저장소 만들기"
-
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
-msgid "_Translation Memory"
-msgstr "번역 저장소(_T)"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:1
-msgid "PO directory"
-msgstr "PO 디렉터리"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:2
-msgid "Directory containing PO files to add to the translation memory."
-msgstr "번역 저장소에 추가할 PO 파일이 들어있는 디렉터리."
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:3
-msgid "Restrict search by filename"
-msgstr "파일 이름으로 검색 제한하기"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:4
-msgid ""
-"If true, only include files with a specified filename when searching the "
-"translation memory."
-msgstr "참이면, 번역 저장소를 검색할 때 지정된 파일 이름을 가진 파일만 포함."
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:5
-msgid "Filename to restrict search to"
-msgstr "검색을 제한할 파일 이름"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:6
-msgid ""
-"Filename to which searching of the translation memory should be restricted."
-msgstr "번역 저장소 검색에 사용할 파일 이름은 제한적이어야 합니다."
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:7
-msgid "Maximum number of missing words"
-msgstr "빠진 단어의 최대 수"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:8
-msgid ""
-"Maximum number of words that can be missing from a message displayed as a "
-"match by the translation memory."
-msgstr ""
-"번역 저장소에 일치하다고 표시한 메시지에서 빠질 수 있는 최대 단어 갯수입니다."
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:9
-msgid "Maximum difference in message length"
-msgstr "최대 메시지 길이 차이"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:10
-msgid ""
-"Maximum difference in length between messages displayed as matches by the "
-"translation memory."
-msgstr "번역 저장소에 일치하다고 표시한 메시지의 최대 길이 차이 입니다."
-
-#: ../src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:48
 msgid "Current Maintainers"
 msgstr "현재 메인테이너"
 
-#: ../src/gtr-actions-app.c:52
-msgid "Current Developers"
-msgstr "현재 개발자"
-
-#: ../src/gtr-actions-app.c:57
+#: src/gtr-actions-app.c:52
 msgid "Previous Developers"
 msgstr "이전 개발자"
 
-#: ../src/gtr-actions-app.c:66
+#: src/gtr-actions-app.c:63
 msgid "Contributors"
 msgstr "공헌자"
 
-#: ../src/gtr-actions-app.c:90
+#: src/gtr-actions-app.c:88
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
 msgstr "프로그램과 라이브러리를 번역하는 번역 파일 편집 프로그램입니다."
 
-#: ../src/gtr-actions-app.c:106
-msgid "About Gtranslator"
-msgstr "Gtranslator 정보"
-
 #.
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/gtr-actions-app.c:111
+#: src/gtr-actions-app.c:101
 msgid "translator-credits"
 msgstr ""
 "Young-Ho, Cha <ganadist@tlug.sarang.net>\n"
@@ -819,57 +243,37 @@ msgstr ""
 "Namhyung Kim <namhyung@gmail.com>\n"
 "Seong-ho Cho <shcho@gnome.org>"
 
-#: ../src/gtr-actions-app.c:114
-msgid "Gtranslator Web Site"
-msgstr "지트랜스레이터 웹 사이트"
+#: src/gtr-actions-app.c:104
+msgid "Translation Editor Web Site"
+msgstr "번역 편집기 웹 사이트"
 
-#: ../src/gtr-actions-file.c:191
+#: src/gtr-actions-file.c:200
 msgid "Open file for translation"
 msgstr "번역할 파일 열기"
 
-#: ../src/gtr-actions-file.c:263 ../src/gtr-actions-file.c:380
+#: src/gtr-actions-file.c:272 src/gtr-actions-file.c:389
 msgid "File saved."
 msgstr "파일을 저장했습니다."
 
-#: ../src/gtr-actions-file.c:311
-msgid "Save file as..."
-msgstr "다른 이름으로 파일 저장..."
+#: src/gtr-actions-file.c:320
+msgid "Save file as…"
+msgstr "다른 이름으로 저장…"
 
-#: ../src/gtr-actions-file.c:769
+#: src/gtr-actions-file.c:781
 msgid "Files saved."
 msgstr "파일을 저장했습니다."
 
-#: ../src/gtr-actions-search.c:170
+#: src/gtr-actions-search.c:163
 #, c-format
-msgid "Found and replaced %d occurrence"
+msgid "Found and replaced one occurrence"
 msgid_plural "Found and replaced %d occurrences"
 msgstr[0] "문자열 %d개를 찾아 바꾸었습니다"
 
-#: ../src/gtr-actions-search.c:179
-msgid "Found and replaced one occurrence"
-msgstr "문자열 1개를 찾아 바꾸었습니다"
+#: src/gtr-actions-search.c:173
+msgid "Phrase not found"
+msgstr "구절을 찾을 수 없음"
 
-#: ../src/gtranslator-menu.ui.h:1
-msgid "_New Window"
-msgstr "새 창(_N)"
-
-#: ../src/gtranslator-menu.ui.h:2
-msgid "_Preferences"
-msgstr "기본 설정(_P)"
-
-#: ../src/gtranslator-menu.ui.h:3
-msgid "_Help"
-msgstr "도움말(_H)"
-
-#: ../src/gtranslator-menu.ui.h:4
-msgid "_About"
-msgstr "정보(_A)"
-
-#: ../src/gtranslator-menu.ui.h:5
-msgid "_Quit"
-msgstr "끝내기(_Q)"
-
-#: ../src/gtr-assistant.c:130
+#: src/gtr-assistant.c:128
 #, c-format
 msgid ""
 "Profile name: %s\n"
@@ -892,51 +296,71 @@ msgstr ""
 "전송 인코딩: %s\n"
 "서수 형식: %s\n"
 
-#: ../src/gtr-assistant.c:169
+#: src/gtr-assistant.c:167
 msgid "This assistant will help you to create the main profile."
 msgstr "이 도우미는 메인 프로파일을 만드는 과정을 도와줍니다."
 
-#: ../src/gtr-assistant.c:174
+#: src/gtr-assistant.c:172
 msgid "Assistant"
 msgstr "도우미"
 
-#: ../src/gtr-assistant.c:247
-msgid "Profile name:"
-msgstr "프로파일 이름:"
+#: src/gtr-assistant.c:258
+msgid "Profile name"
+msgstr "프로파일 이름"
 
-#: ../src/gtr-assistant.c:289
-msgid "Translator email:"
-msgstr "번역자 전자메일:"
+#: src/gtr-assistant.c:302
+msgid "Translator email"
+msgstr "번역자 전자메일"
 
-#: ../src/gtr-assistant.c:303 ../src/gtr-assistant.c:395
-#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:460
+#: src/gtr-assistant.c:324
+msgid "Team email"
+msgstr "팀 전자메일"
+
+#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:521
+#: src/gtr-window.c:556
 msgid "Profile"
 msgstr "프로파일"
 
-#: ../src/gtr-assistant.c:415
+#: src/gtr-assistant.c:429
+msgid "Language"
+msgstr "언어"
+
+#: src/gtr-assistant.c:450
 msgid "Confirmation"
 msgstr "확인"
 
-#: ../src/gtr-close-confirmation-dialog.c:126
+#: src/gtr-close-confirmation-dialog.c:123
 msgid "Close _without Saving"
 msgstr "저장하지 않고 닫기(_W)"
 
-#: ../src/gtr-close-confirmation-dialog.c:155
+#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:86
+#: src/gtr-file-dialogs.c:45 src/gtr-jump-dialog.c:90
+#: src/gtr-preferences-dialog.c:394 src/gtr-profile-dialog.c:71
+#: src/translation-memory/gtr-translation-memory-dialog.c:81
+msgid "_Cancel"
+msgstr "취소(_C)"
+
+#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:84
+#: src/gtr-file-dialogs.c:47
+msgid "_Save"
+msgstr "저장(_S)"
+
+#: src/gtr-close-confirmation-dialog.c:150
 msgid "Question"
 msgstr "질문"
 
-#: ../src/gtr-close-confirmation-dialog.c:370
+#: src/gtr-close-confirmation-dialog.c:366
 #, c-format
-msgid "Save the changes to document \"%s\" before closing?"
-msgstr "닫기 전에 바꾼 내용을 \"%s\" 문서에 저장하시겠습니까?"
+msgid "Save the changes to document “%s” before closing?"
+msgstr "닫기 전에 바뀐 내용을 “%s” 문서에 저장하시겠습니까?"
 
-#: ../src/gtr-close-confirmation-dialog.c:533
+#: src/gtr-close-confirmation-dialog.c:530
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] "문서 %d개에서 바꾼 내용을 영원히 잃게됩니다."
 
-#: ../src/gtr-close-confirmation-dialog.c:540
+#: src/gtr-close-confirmation-dialog.c:537
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -944,591 +368,1319 @@ msgid_plural ""
 msgstr[0] ""
 "바꾼 내용을 저장하지 않은 문서 %d개가 있습니다. 닫기 전에 저장하시겠습니까?"
 
-#: ../src/gtr-close-confirmation-dialog.c:561
+#: src/gtr-close-confirmation-dialog.c:558
 msgid "Docum_ents with unsaved changes:"
 msgstr "바꾼 내용을 저장하지 않은 문서(_E):"
 
-#: ../src/gtr-close-confirmation-dialog.c:565
+#: src/gtr-close-confirmation-dialog.c:562
 msgid "S_elect the documents you want to save:"
 msgstr "저장할 문서 선택(_E):"
 
-#: ../src/gtr-close-confirmation-dialog.c:583
+#: src/gtr-close-confirmation-dialog.c:581
 msgid "Saving has been disabled by the system administrator."
 msgstr "시스템 관리자가 저장 동작을 막았습니다."
 
-#: ../src/gtr-close-confirmation-dialog.c:585
-msgid "If you don't save, all your changes will be permanently lost."
-msgstr "저장하지 않으면 모든 바꾼 내용을 완전히 잃게 됩니다."
+#: src/gtr-close-confirmation-dialog.c:583
+msgid "If you don’t save, all your changes will be permanently lost."
+msgstr "저장하지 않으면 모든 바뀐 내용을 완전히 잃게 됩니다."
 
-#: ../src/gtr-context.c:234
+#: src/gtr-context.c:81
+msgid "Edit notes"
+msgstr "편집 주석"
+
+#: src/gtr-context.c:268
 msgid "Notes:"
 msgstr "참고:"
 
-#: ../src/gtr-context.c:242
+#: src/gtr-context.c:276
 msgid "Add Note"
 msgstr "참고 추가"
 
-#: ../src/gtr-context.c:247
+#: src/gtr-context.c:281
 msgid "Edit"
 msgstr "편집"
 
-#. Extracted comments
-#: ../src/gtr-context.c:293
+#: src/gtr-context.c:326
 msgid "Extracted comments:"
 msgstr "추출한 주석:"
 
-#. Context
-#: ../src/gtr-context.c:297
+#: src/gtr-context.c:329
 msgid "Context:"
 msgstr "내용:"
 
-#. Format
-#: ../src/gtr-context.c:301
+#: src/gtr-context.c:332
 msgid "Format:"
 msgstr "형식:"
 
-#: ../src/gtr-context.ui.h:1
-msgid "D_one"
-msgstr "완료(_O)"
+#: src/gtr-dl-teams.c:604
+msgid "Translation Team"
+msgstr "번역팀"
 
-#: ../src/gtr-file-dialogs.c:62
+#: src/gtr-dl-teams.c:611
+msgid "Module"
+msgstr "모듈"
+
+#: src/gtr-dl-teams.ui:60
+msgid "Select team, module, branch and domain to get the translation file."
+msgstr "번역 파일을 가져올 팀, 모듈, 브랜치, 도메인을 선택하십시오."
+
+#: src/gtr-dl-teams.ui:81
+msgid "Load file"
+msgstr "파일 읽어들이기"
+
+#: src/gtr-dl-teams.ui:98
+msgid "Load from Damned Lies"
+msgstr "빌어먹을 거짓말에서 읽어들입니다"
+
+#: src/gtr-dl-teams.ui:105 src/gtr-notebook.ui:298 src/gtr-projects.ui:58
+msgid "Open…"
+msgstr "열기…"
+
+#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:511 src/gtr-projects.ui:91
+msgid "Main Menu"
+msgstr "메인 메뉴"
+
+#: src/gtr-dl-teams.ui:156 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+msgid "New window"
+msgstr "새 창"
+
+#: src/gtr-dl-teams.ui:170 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+msgid "Preferences"
+msgstr "기본 설정"
+
+#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:160
+msgid "Keyboard Shortcuts"
+msgstr "키보드 바로 가기"
+
+#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:174
+msgid "About"
+msgstr "정보"
+
+#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:276 src/gtr-projects.ui:188
+msgid "Quit"
+msgstr "끝내기"
+
+#: src/gtr-file-dialogs.c:48
+msgid "_Open"
+msgstr "열기(_O)"
+
+#: src/gtr-file-dialogs.c:62
 msgid "Gettext translation"
 msgstr "Gettext 번역"
 
-#: ../src/gtr-file-dialogs.c:71
+#: src/gtr-file-dialogs.c:71
 msgid "Gettext translation template"
 msgstr "Gettext 번역 서식"
 
-#: ../src/gtr-file-dialogs.c:76
+#: src/gtr-file-dialogs.c:76
 msgid "All files"
 msgstr "모든 파일"
 
-#: ../src/gtr-header-dialog.c:269
+#: src/gtr-header-dialog.c:280
 msgid "Edit Header"
 msgstr "헤더 편집"
 
-#: ../src/gtr-header-dialog.ui.h:1
-msgid "Comment"
-msgstr "주석:"
+#: src/gtr-header-dialog.ui:65
+msgid "Use my options to complete the following entries:"
+msgstr "내 설정을 다음 기재란에 채웁니다:"
 
-#: ../src/gtr-header-dialog.ui.h:2
+#: src/gtr-header-dialog.ui:89
+msgid "Translator’s _name:"
+msgstr "번역자 이름(_N):"
+
+#: src/gtr-header-dialog.ui:103
+msgid "Translator’s _email:"
+msgstr "번역자 전자메일(_E):"
+
+#: src/gtr-header-dialog.ui:117
+msgid "_Language:"
+msgstr "언어(_L):"
+
+#: src/gtr-header-dialog.ui:130
+msgid "Language _code:"
+msgstr "언어 코드(_C):"
+
+#: src/gtr-header-dialog.ui:143
+msgid "Language gro_up email:"
+msgstr "언어 그룹 전자메일(_U):"
+
+#: src/gtr-header-dialog.ui:156
+msgid "Char_set:"
+msgstr "문자세트(_S):"
+
+#: src/gtr-header-dialog.ui:169
+msgid "Enc_oding:"
+msgstr "인코딩(_O):"
+
+#: src/gtr-header-dialog.ui:267
+msgid "Translator and Language"
+msgstr "번역자와 언어"
+
+#: src/gtr-header-dialog.ui:290
 msgid "Project Id _version:"
 msgstr "프로젝트 ID 버전(_V):"
 
 # Note: 날짜 뿐만 아니라 시각도 들어감
-#: ../src/gtr-header-dialog.ui.h:3
+#: src/gtr-header-dialog.ui:303
 msgid "Pot _file creation date:"
 msgstr "POT 파일 생성일시(_F):"
 
 # Note: 날짜 뿐만 아니라 시각도 들어감
-#: ../src/gtr-header-dialog.ui.h:4
+#: src/gtr-header-dialog.ui:317
 msgid "Po file _revision date:"
 msgstr "PO 파일 개정일시(_R):"
 
-#: ../src/gtr-header-dialog.ui.h:5
+#: src/gtr-header-dialog.ui:331
 msgid "Report message _bugs to:"
 msgstr "메시지 버그 보고(_B):"
 
-#: ../src/gtr-header-dialog.ui.h:6
+#: src/gtr-header-dialog.ui:400
 msgid "Project"
 msgstr "프로젝트"
 
-#: ../src/gtr-header-dialog.ui.h:7
-msgid "Use my options to complete the following entries:"
-msgstr "내 설정을 다음 기재란에 채웁니다:"
+#: src/gtr-header-dialog.ui:430
+msgid "Comment"
+msgstr "주석:"
 
-#: ../src/gtr-header-dialog.ui.h:8
-msgid "Translator's _name:"
-msgstr "번역자 이름(_N):"
+#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
+#: src/gtr-profile-dialog.c:170
+#: src/translation-memory/gtr-translation-memory-dialog.c:80
+msgid "_OK"
+msgstr "확인(_O)"
 
-#: ../src/gtr-header-dialog.ui.h:9
-msgid "Translator's _email:"
-msgstr "번역자 전자메일(_E):"
-
-#: ../src/gtr-header-dialog.ui.h:10 ../src/gtr-languages-fetcher.ui.h:5
-msgid "_Language:"
-msgstr "언어(_L):"
-
-#: ../src/gtr-header-dialog.ui.h:11
-msgid "Language gro_up email:"
-msgstr "언어 그룹 전자메일(_U):"
-
-#: ../src/gtr-header-dialog.ui.h:12
-msgid "Char_set:"
-msgstr "문자세트(_S):"
-
-#: ../src/gtr-header-dialog.ui.h:13
-msgid "Enc_oding:"
-msgstr "인코딩(_O):"
-
-#: ../src/gtr-header-dialog.ui.h:14
-msgid "Translator and Language"
-msgstr "번역자와 언어"
-
-#: ../src/gtr-jump-dialog.c:93
+#: src/gtr-jump-dialog.c:92
 msgid "Go to Message"
 msgstr "메시지로 가기"
 
-#: ../src/gtr-jump-dialog.ui.h:1
+#: src/gtr-jump-dialog.ui:30
 msgid "Enter message number:"
 msgstr "메시지 번호로 이동:"
 
-#: ../src/gtr-languages-fetcher.ui.h:1
-msgid "_Team email:"
-msgstr "팀 전자메일(_T):"
+#: src/gtr-lang-button.c:65
+msgid "Choose Language"
+msgstr "언어(_L)"
 
-#: ../src/gtr-languages-fetcher.ui.h:2
-msgid "Transfer en_coding:"
-msgstr "전송 인코딩(_C):"
+#: src/gtr-languages-fetcher.ui:46
+msgid "_Language"
+msgstr "언어(_L)"
 
-#: ../src/gtr-languages-fetcher.ui.h:3
+#: src/gtr-languages-fetcher.ui:60
+msgid "Language _code"
+msgstr "언어 코드(_C)"
+
+#: src/gtr-languages-fetcher.ui:74
 msgid "Character _set"
 msgstr "문자셋(_S):"
 
-#: ../src/gtr-languages-fetcher.ui.h:4
-msgid "Language _code:"
-msgstr "언어 코드(_C):"
+#: src/gtr-languages-fetcher.ui:88
+msgid "Transfer en_coding"
+msgstr "전송 인코딩(_C)"
 
-#: ../src/gtr-languages-fetcher.ui.h:6
-msgid "_Plural forms:"
-msgstr "복수형 문자열(_P):"
+#: src/gtr-languages-fetcher.ui:102
+msgid "_Plural forms"
+msgstr "복수형 형태(_P)"
 
-#: ../src/gtr-message-table.c:181
-msgid "Status"
-msgstr "상태"
+#: src/gtr-languages-fetcher.ui:200
+msgid "_Edit options manually"
+msgstr "옵션 직접 편집(_E)"
 
-#: ../src/gtr-message-table.c:193
-msgid "ID"
-msgstr "ID"
-
-#: ../src/gtr-message-table.c:208
+#: src/gtr-message-table.c:219
 msgid "Original Message"
 msgstr "원문"
 
-#: ../src/gtr-message-table.c:223
+#: src/gtr-message-table.c:238
 msgid "Translated Message"
 msgstr "번역문"
 
-#: ../src/gtr-po.c:439
+#: src/gtr-notebook.ui:26
+msgid "Order messages by"
+msgstr "메시지 정렬 기준: "
+
+#: src/gtr-notebook.ui:58
+msgid "Appearance in the original file"
+msgstr "원본 파일 모양새"
+
+#: src/gtr-notebook.ui:72
+msgid "Message status"
+msgstr "메시지 상태"
+
+#: src/gtr-notebook.ui:87
+msgid "Original message"
+msgstr "원문"
+
+#: src/gtr-notebook.ui:102
+msgid "Translated message"
+msgstr "번역문"
+
+#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:371
+#: src/gtr-search-dialog.c:455
+msgid "Find"
+msgstr "찾기"
+
+#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:459
+msgid "Find and replace"
+msgstr "찾기 및 바꾸기"
+
+#: src/gtr-notebook.ui:164
+msgid "Build translation memory"
+msgstr "번역 저장소 만들기"
+
+#: src/gtr-notebook.ui:179
+msgid "Edit header"
+msgstr "헤더 편집"
+
+#: src/gtr-notebook.ui:302
+msgid "Open a new file (<Ctrl>o)"
+msgstr "새 파일 열기 (<Ctrl>o)"
+
+#: src/gtr-notebook.ui:328
+msgid "Undo (<Ctrl>z)"
+msgstr "실행 취소 (<Ctrl>z)"
+
+#: src/gtr-notebook.ui:350
+msgid "Redo (<Ctrl><Shift>z)"
+msgstr "다시 실행 (<Ctrl><Shift>z)"
+
+#: src/gtr-notebook.ui:395
+msgid "Previous message without translation (<Alt><Page Up>)"
+msgstr "번역하지 않은 이전 메시지 (<Alt><Page Up>)"
+
+#: src/gtr-notebook.ui:417
+msgid "Next message without translation (<Alt><Page Down>)"
+msgstr "번역하지 않은 다음 메시지 (<Alt><Page Down>)"
+
+#: src/gtr-notebook.ui:457
+msgid "Toggle fuzzy state (<Ctrl>+u)"
+msgstr "모호함 상태 전환 (<Ctrl>+u)"
+
+#: src/gtr-notebook.ui:487
+msgid "Order by menu"
+msgstr "메뉴 순 정렬"
+
+#: src/gtr-notebook.ui:527
+msgid "Save"
+msgstr "저장"
+
+#: src/gtr-notebook.ui:531
+msgid "Save the current file (<Ctrl>s)"
+msgstr "현재 파일 저장 (<Ctrl>s)"
+
+#: src/gtr-notebook.ui:546
+msgid "Save as (<Ctrl><Shift>s)"
+msgstr "다른 이름으로 저장 (<Ctrl><Shift>s)"
+
+#: src/gtr-po.c:440
 #, c-format
 msgid "The file is empty"
 msgstr "파일이 비어있음"
 
-#: ../src/gtr-po.c:448
+#: src/gtr-po.c:449
 #, c-format
-msgid "Failed opening file '%s': %s"
-msgstr "'%s' 파일을 열 수 없음: %s"
+msgid "Failed opening file “%s”: %s"
+msgstr "“%s” 파일 열기 실패: %s"
 
-#: ../src/gtr-po.c:522
+#: src/gtr-po.c:530
 #, c-format
-msgid "Could not convert from charset '%s' to UTF-8"
-msgstr "'%s' 문자셋을 UTF-8로 변환할 수 없습니다"
+msgid "Could not convert from charset “%s” to UTF-8"
+msgstr "“%s” 문자세트를 UTF-8로 변환할 수 없습니다"
 
-#: ../src/gtr-po.c:539 ../src/gtr-po.c:559
+#: src/gtr-po.c:547 src/gtr-po.c:567
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "인코딩 변환을 위한 임시 파일을 저장할 수 없습니다"
 
-#: ../src/gtr-po.c:596
+#: src/gtr-po.c:604
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
-"iconv command line tools before opening this file with gtranslator"
+"iconv command line tools before opening this file with GNOME Translation "
+"Editor"
 msgstr ""
-"파일을 UTF-8로 변환하려는 모든 시도를 실패했습니다. 지트랜스레이터로 이 파일"
-"을 열기 전에 msgconf또는 iconv 명령줄 도구를 사용하십시오"
+"파일을 UTF-8로 변환하려는 모든 시도를 실패했습니다. 그놈 번역 편집기로 이 파"
+"일을 열기 전에 msgconf또는 iconv 명령행 도구를 사용하십시오"
 
-#: ../src/gtr-po.c:664
+#: src/gtr-po.c:672
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext에서 빈 메시지 도메인 목록을 반환했습니다."
 
-#: ../src/gtr-po.c:709
+#: src/gtr-po.c:717
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "분석기로부터 아무런 메시지도 가져올 수 없습니다."
 
-#: ../src/gtr-po.c:757
+#: src/gtr-po.c:768
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
 "Pot files are generated by the compilation process.\n"
-"Your file should likely be named '%s.po'."
+"Your file should likely be named “%s.po”."
 msgstr ""
 ".pot 확장자로 저장합니다.\n"
-"pot 파일은 컴파일 과정에서 만듭니다.\n"
-"작성한 파일은 '%s.po' 파일 이름으로 저장해야합니다."
+"pot 파일은 컴파일 과정에 만듭니다.\n"
+"작성한 파일은 “%s.po” 이름으로 저장해야합니다."
 
-#: ../src/gtr-po.c:770
+#: src/gtr-po.c:781
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "%s 파일은 읽기 전용이며 덮어쓸 수 없습니다"
 
-#: ../src/gtr-po.c:801
+#: src/gtr-po.c:800
+#, c-format
+msgid "There is an error in the PO file: %s"
+msgstr "PO 파일에 오류가 있습니다: %s"
+
+#: src/gtr-po.c:812
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "PO 파일에 기록하는데 오류가 발생했습니다: %s"
 
-#: ../src/gtr-preferences-dialog.c:397
+#: src/gtr-preferences-dialog.c:370
 msgid "Impossible to remove the active profile"
 msgstr "활성 프로파일을 제거할 수 없습니다"
 
-#: ../src/gtr-preferences-dialog.c:403
+#: src/gtr-preferences-dialog.c:376
 msgid "Another profile should be selected as active before"
 msgstr "활성화 하기 전에 다른 프로파일을 선택해야 합니다"
 
-#: ../src/gtr-preferences-dialog.c:416
+#: src/gtr-preferences-dialog.c:389
 msgid "Are you sure you want to delete this profile?"
 msgstr "정말로 이 프로파일을 삭제하시겠습니까?"
 
-#: ../src/gtr-preferences-dialog.c:552
+#: src/gtr-preferences-dialog.c:397
+msgid "_Delete"
+msgstr "삭제(_D)"
+
+#: src/gtr-preferences-dialog.c:527
 msgid "Active"
 msgstr "활성화"
 
-#: ../src/gtr-preferences-dialog.c:621 ../src/gtr-preferences-dialog.ui.h:1
-msgid "Gtranslator Preferences"
-msgstr "지트랜스레이터 기본 설정"
+#: src/gtr-preferences-dialog.c:589
+msgid "Help"
+msgstr "도움말"
 
-#: ../src/gtr-preferences-dialog.ui.h:2
+#: src/gtr-preferences-dialog.c:591 src/gtr-preferences-dialog.ui:49
+msgid "Translation Editor Preferences"
+msgstr "번역 편집기 기본 설정"
+
+#: src/gtr-preferences-dialog.ui:119
 msgid "General"
 msgstr "일반"
 
-#: ../src/gtr-preferences-dialog.ui.h:3
+#: src/gtr-preferences-dialog.ui:138
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "PO 파일에 모호함 항목이 들어 있으면 경고(_W)"
 
-#: ../src/gtr-preferences-dialog.ui.h:4
+#: src/gtr-preferences-dialog.ui:160
 msgid "Autosave"
 msgstr "자동 저장"
 
-#: ../src/gtr-preferences-dialog.ui.h:5
+#: src/gtr-preferences-dialog.ui:184
 msgid "Create a _backup copy of files before saving"
 msgstr "저장하기 전 파일의 백업 사본 만들기(_B)"
 
-#: ../src/gtr-preferences-dialog.ui.h:6
+#: src/gtr-preferences-dialog.ui:206
 msgid "_Autosave files every"
 msgstr "항상 파일을 자동 저장(_A)"
 
-#: ../src/gtr-preferences-dialog.ui.h:7
+#: src/gtr-preferences-dialog.ui:230
 msgid "_minutes"
 msgstr "분(_M)"
 
-#: ../src/gtr-preferences-dialog.ui.h:8
+#: src/gtr-preferences-dialog.ui:288
 msgid "Files"
 msgstr "파일"
 
-#: ../src/gtr-preferences-dialog.ui.h:9
+#: src/gtr-preferences-dialog.ui:312
 msgid "Text Display"
 msgstr "텍스트 보기"
 
-#: ../src/gtr-preferences-dialog.ui.h:10
+#: src/gtr-preferences-dialog.ui:335
 msgid "_Highlight message syntax"
 msgstr "메시지 문법 강조(_H)"
 
-#: ../src/gtr-preferences-dialog.ui.h:11
+#: src/gtr-preferences-dialog.ui:351
 msgid "Make _whitespace visible"
 msgstr "공백 표시(_W)"
 
-#: ../src/gtr-preferences-dialog.ui.h:12
-msgid "Use _custom font"
-msgstr "사용자 정의 글꼴 사용(_C)"
-
-#: ../src/gtr-preferences-dialog.ui.h:13
-msgid "Editor _font:"
-msgstr "편집기 글꼴(_F):"
-
-#: ../src/gtr-preferences-dialog.ui.h:14
+#: src/gtr-preferences-dialog.ui:392
 msgid "Contents"
 msgstr "내용"
 
-#: ../src/gtr-preferences-dialog.ui.h:15
+#: src/gtr-preferences-dialog.ui:415
 msgid "_Remove fuzzy status if message is changed"
 msgstr "메시지가 바뀌면 모호함 속성 제거(_R)"
 
-#: ../src/gtr-preferences-dialog.ui.h:16
+#: src/gtr-preferences-dialog.ui:431
 msgid "Check _spelling"
 msgstr "철자 검사(_S)"
 
-#: ../src/gtr-preferences-dialog.ui.h:17
+#: src/gtr-preferences-dialog.ui:470
 msgid "Editor"
 msgstr "편집기"
 
-#: ../src/gtr-preferences-dialog.ui.h:18
+#: src/gtr-preferences-dialog.ui:569
 msgid "Edit Profile"
 msgstr "프로파일 편집"
 
-#: ../src/gtr-preferences-dialog.ui.h:19
+#: src/gtr-preferences-dialog.ui:606
 msgid "Profiles"
 msgstr "프로파일"
 
-#: ../src/gtr-profile-dialog.c:82
-msgid "Gtranslator Profile"
-msgstr "지트랜스레이터 프로파일"
+#: src/gtr-profile-dialog.c:73
+msgid "Translation Editor Profile"
+msgstr "번역 편집기 프로파일"
 
-#: ../src/gtr-profile-dialog.ui.h:1
+#: src/gtr-profile-dialog.ui:68
+msgid "_Name"
+msgstr "이름(_N)"
+
+#: src/gtr-profile-dialog.ui:96
 msgid "Profile Information"
 msgstr "프로파일 정보"
 
-#: ../src/gtr-profile-dialog.ui.h:2
-msgid "_Name:"
-msgstr "이름(_N):"
-
-#: ../src/gtr-profile-dialog.ui.h:3
+#: src/gtr-profile-dialog.ui:113
 msgid "Translator Information"
 msgstr "번역자 정보"
 
-#: ../src/gtr-profile-dialog.ui.h:4
-msgid "_Email:"
-msgstr "전자메일(_E):"
+#: src/gtr-profile-dialog.ui:131
+msgid "N_ame"
+msgstr "이름(_A)"
 
-#: ../src/gtr-profile-dialog.ui.h:5
-msgid "N_ame:"
-msgstr "이름(_A):"
+#: src/gtr-profile-dialog.ui:146
+msgid "_Email"
+msgstr "전자메일(_E)"
 
-#: ../src/gtr-profile-dialog.ui.h:6
+#: src/gtr-profile-dialog.ui:160
+msgid "_Team email"
+msgstr "팀 전자메일(_T)"
+
+#: src/gtr-profile-dialog.ui:209
 msgid "Language Settings"
 msgstr "언어 설정"
 
-#: ../src/gtr-search-dialog.c:347 ../src/gtr-search-dialog.ui.h:1
+#: src/gtr-projects.ui:35
+msgid "Open a new .po file or drag & drop here"
+msgstr "새 .po 파일을 열거나 .po 파일을 이곳에 끌어다 놓으십시오"
+
+#: src/gtr-projects.ui:51
+msgid "Select a PO file"
+msgstr "PO 파일을 선택하십시오"
+
+#: src/gtr-projects.ui:68
+msgid "Load from DL…"
+msgstr "빌어먹을 거짓말에서 읽어들이기…"
+
+#: src/gtr-search-dialog.c:349 src/gtr-search-dialog.ui:6
+#: src/gtr-search-dialog.ui:53
 msgid "Replace"
 msgstr "바꾸기"
 
-#: ../src/gtr-search-dialog.c:369
-msgid "Find"
-msgstr "찾기"
-
-#: ../src/gtr-search-dialog.c:457
+#: src/gtr-search-dialog.c:457
 msgid "Replace _All"
 msgstr "모두 바꾸기(_A)"
 
-#: ../src/gtr-search-dialog.c:461
+#: src/gtr-search-dialog.c:461
 msgid "_Replace"
 msgstr "바꾸기(_R)"
 
-#: ../src/gtr-search-dialog.ui.h:2
+#: src/gtr-search-dialog.ui:37
 msgid "Replace All"
 msgstr "모두 바꾸기"
 
-#: ../src/gtr-search-dialog.ui.h:3
+#: src/gtr-search-dialog.ui:109
 msgid "_Search for: "
 msgstr "검색 문자열(_S):"
 
-#: ../src/gtr-search-dialog.ui.h:4
+#: src/gtr-search-dialog.ui:124
 msgid "Replace _with: "
 msgstr "바꾸기(_W):"
 
-#: ../src/gtr-search-dialog.ui.h:5
+#: src/gtr-search-dialog.ui:184
 msgid "_Original text"
 msgstr "원문(_O)"
 
-#: ../src/gtr-search-dialog.ui.h:6
+#: src/gtr-search-dialog.ui:201
 msgid "_Translated text"
 msgstr "번역문(_T)"
 
-#: ../src/gtr-search-dialog.ui.h:7
-msgid "Include fu_zzy strings"
-msgstr "모호한 문자열 포함(_Z)"
-
-#: ../src/gtr-search-dialog.ui.h:8
+#: src/gtr-search-dialog.ui:237
 msgid "_Match case"
 msgstr "대소문자 일치(_M)"
 
-#: ../src/gtr-search-dialog.ui.h:9
+#: src/gtr-search-dialog.ui:253
 msgid "Match _entire word only"
 msgstr "전체가 일치하는 단어만(_E)"
 
-#: ../src/gtr-search-dialog.ui.h:10
+#: src/gtr-search-dialog.ui:269
 msgid "Search _backwards"
 msgstr "뒤로 검색(_B)"
 
-#: ../src/gtr-search-dialog.ui.h:11
+#: src/gtr-search-dialog.ui:286
 msgid "_Wrap around"
 msgstr "마지막에 도달하면 처음으로(_W)"
 
-#: ../src/gtr-statusbar.c:119 ../src/gtr-statusbar.c:248
+#: src/gtr-statusbar.c:117 src/gtr-statusbar.c:252
 msgid "INS"
 msgstr "삽입"
 
-#: ../src/gtr-statusbar.c:120 ../src/gtr-statusbar.c:244
+#: src/gtr-statusbar.c:118 src/gtr-statusbar.c:248
 msgid "OVR"
 msgstr "수정"
 
-#: ../src/gtr-tab.c:209
+#: src/gtr-tab-label.c:278
+msgid "Close document"
+msgstr "문서 닫기"
+
+#: src/gtr-tab.c:246
 msgid "There is an error in the message:"
 msgstr "메시지에 오류가 있습니다:"
 
-#: ../src/gtr-tab.c:537
+#: src/gtr-tab.c:459 src/gtr-tab.c:575
+msgid "fuzzy"
+msgstr "모호함"
+
+#: src/gtr-tab.c:605
 #, c-format
 msgid "Plural %d"
 msgstr "복수형 %d"
 
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1055
+#: src/gtr-tab.c:1158
 msgid "Path:"
 msgstr "경로:"
 
-#: ../src/gtr-tab-label.c:277
-msgid "Close document"
-msgstr "문서 닫기"
-
-#: ../src/gtr-tab.ui.h:1
-msgid "_Original Message:"
-msgstr "원본 메시지(_O):"
-
-#: ../src/gtr-tab.ui.h:2
-msgid "Translate_d Text:"
-msgstr "번역한 텍스트(_D):"
-
-#: ../src/gtr-utils.c:516
-msgid ""
-"Unable to display help. Please make sure the Gtranslator documentation "
-"package is installed."
-msgstr ""
-"도움말을 표시할 수 없습니다. Gtranslator 문서 패키지를 설치했는지 확인해주십"
-"시오."
-
-#: ../src/gtr-view.c:81
+#: src/gtr-tab.c:1808
 #, c-format
-msgid "gtkspell error: %s\n"
-msgstr "gtkspell 오류: %s\n"
+msgid "Translated: %0.2f%%"
+msgstr "번역율: %0.2f%%"
 
-#: ../src/gtr-view.c:83
+#: src/gtr-tab.c:1809
 #, c-format
-msgid ""
-"GtkSpell was unable to initialize.\n"
-" %s"
-msgstr ""
-"GtkSpell을 초기화할 수 없습니다.\n"
-" %s"
+msgid "Translated: %d"
+msgstr "번역함: %d"
 
-#: ../src/gtr-window.c:129
+#: src/gtr-tab.c:1810
+#, c-format
+msgid "Untranslated: %d"
+msgstr "번역하지 않음: %d"
+
+#: src/gtr-tab.c:1811
+#, c-format
+msgid "Fuzzy: %d"
+msgstr "모호함: %d"
+
+#: src/gtr-tab.ui:153
+msgid "_Original Message"
+msgstr "원문(_O)"
+
+#: src/gtr-tab.ui:245
+msgid "Translate_d Text"
+msgstr "번역한 텍스트(_D)"
+
+#: src/gtr-utils.c:516
+msgid ""
+"Unable to display help. Please make sure the Translation Editor "
+"documentation package is installed."
+msgstr ""
+"도움말을 표시할 수 없습니다. 번역 편집기 문서 패키지를 설치했는지 확인하십시"
+"오."
+
+#: src/gtr-window.c:173
 msgid "Untranslated"
 msgstr "번역하지 않음"
 
-#: ../src/gtr-window.c:132
+#: src/gtr-window.c:176
 msgid "Translated"
 msgstr "번역함"
 
-#: ../src/gtr-window.c:135
+#: src/gtr-window.c:179
 msgid "Fuzzy"
 msgstr "모호함"
 
-#: ../src/gtr-window.c:142
+#: src/gtr-window.c:186
 #, c-format
 msgid "Current: %d"
 msgstr "현재 %d번째"
 
-#: ../src/gtr-window.c:143
+#: src/gtr-window.c:187
 #, c-format
 msgid "Total: %d"
 msgstr "전체 %d개"
 
-#: ../src/gtr-window.c:144
+#: src/gtr-window.c:188
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "번역함 %d개"
 
-#: ../src/gtr-window.c:147
+#: src/gtr-window.c:191
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "모호함 %d개"
 
-#: ../src/gtr-window.c:149
+#: src/gtr-window.c:193
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
 msgstr[0] "미번역 %d개"
 
 #. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:252
+#: src/gtr-window.c:303
 #, c-format
-msgid "*%s - gtranslator"
-msgstr "*%s - 지트랜스레이터"
+msgid "*%s — Translation Editor"
+msgstr "*%s — 번역 편집기"
 
 #. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:255
+#: src/gtr-window.c:309
 #, c-format
-msgid "%s - gtranslator"
-msgstr "%s - 지트랜스레이터"
+msgid "%s — Translation Editor"
+msgstr "%s — 번역 편집기"
 
-#: ../src/gtr-window.c:261
-msgid "gtranslator"
-msgstr "지트랜스레이터"
-
-#: ../src/gtr-window.c:444
+#: src/gtr-window.c:540
 msgid "No profile"
 msgstr "프로파일 없음"
 
-#: ../src/gtr-window.c:462
+#: src/gtr-window.c:558
 msgid "Profile for the active document"
 msgstr "활성화한 문서의 프로파일"
 
-#: ../src/gtr-window.ui.h:1
-#| msgid "Project"
-msgid "Projects"
-msgstr "프로젝트"
+#: src/gtranslator-menu.ui:7
+msgid "_New Window"
+msgstr "새 창(_N)"
 
-#: ../src/gtr-window.ui.h:2
-#| msgid "Project"
-msgid "Add project"
-msgstr "프로젝트 추가"
+#: src/gtranslator-menu.ui:13
+msgid "_Preferences"
+msgstr "기본 설정(_P)"
 
-#: ../src/gtr-window.ui.h:3
-msgid "Remove project"
-msgstr "프로젝트 제거"
+#: src/gtranslator-menu.ui:19
+msgid "_Help"
+msgstr "도움말(_H)"
 
-#: ../src/main.c:97
-msgid "- Edit PO files"
-msgstr "- PO 파일을 편집합니다"
+#: src/gtranslator-menu.ui:24
+msgid "_About GNOME Translation Editor"
+msgstr "그놈 번역 편집기 정보(_A)"
 
-#: ../src/main.c:101
+#: src/help-overlay.ui:13
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "일반"
+
+#: src/help-overlay.ui:18
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "파일 열기"
+
+#: src/help-overlay.ui:25
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "현재 파일 저장"
+
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "다른 이름으로 현재 파일 저장"
+
+#: src/help-overlay.ui:40
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "기본 설정"
+
+#: src/help-overlay.ui:47
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "키보드 바로 가기"
+
+#: src/help-overlay.ui:54
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "끝내기"
+
+#: src/help-overlay.ui:64
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "편집"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Undo"
+msgstr "실행 취소"
+
+#: src/help-overlay.ui:75
+msgctxt "shortcut window"
+msgid "Redo"
+msgstr "다시 실행"
+
+#: src/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr "모호함 표시/표시 취소"
+
+#: src/help-overlay.ui:89
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "원본 텍스트를 번역으로 복사"
+
+#: src/help-overlay.ui:99
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr "탐색"
+
+#: src/help-overlay.ui:103
+msgctxt "shortcut window"
+msgid "Go to the previous message"
+msgstr "이전 메시지로 이동"
+
+#: src/help-overlay.ui:110
+msgctxt "shortcut window"
+msgid "Go to the next message"
+msgstr "다음 메시지로 이동"
+
+#: src/help-overlay.ui:117
+msgctxt "shortcut window"
+msgid "Go to the previous untranslated message"
+msgstr "번역하지 않은 이전 메시지로 이동"
+
+#: src/help-overlay.ui:124
+msgctxt "shortcut window"
+msgid "Go to the next untranslated message"
+msgstr "번역하지 않은 다음 메시지로 이동"
+
+#: src/help-overlay.ui:134
+msgctxt "shortcut window group"
+msgid "Translation Memory"
+msgstr "번역 저장소"
+
+#: src/help-overlay.ui:138
+msgctxt "shortcut window"
+msgid "Build translation memory"
+msgstr "번역 저장소 만들기"
+
+#: src/help-overlay.ui:148
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "찾기 및 바꾸기"
+
+#: src/help-overlay.ui:152
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "찾기"
+
+#: src/help-overlay.ui:159
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "찾아 바꾸기"
+
+#: src/main.c:97
+msgid "— Edit PO files"
+msgstr "— PO 파일을 편집합니다"
+
+#: src/main.c:101
 #, c-format
 msgid ""
 "%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
+"Run “%s --help” to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"사용할 수 있는 명령줄 옵션의 모든 목록을 보시려면 '%s --help'를 실행하십시"
-"오.\n"
+"사용할 수 있는 명령행 옵션의 모든 목록을 보시려면 “%s --help” 명령을 실행하십"
+"시오.\n"
 
-#. Translaters: This string is for a toggle to display a toolbar.
-#. * The name of the toolbar is automatically computed from the widgets
-#. * on the toolbar, and is placed at the %s. Note the _ before the %s
-#. * which is used to add mnemonics. We know that this is likely to
-#. * produce duplicates, but don't worry about it. If your language
-#. * normally has a mnemonic at the start, please use the _. If not,
-#. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:991
+#: src/translation-memory/gtr-translation-memory-dialog.c:77
+msgid "Select PO directory"
+msgstr "PO 디렉터리 선택"
+
+#: src/translation-memory/gtr-translation-memory-dialog.c:303
+msgid "Translation Editor Memory Manager"
+msgstr "번역 편집기 저장소 관리자"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
+msgid "Database:"
+msgstr "데이터베이스:"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:103
+msgid "Select the directory which contains PO files:"
+msgstr "PO 파일이 있는 디렉터리를 선택:"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:154
+msgid "Add to Database"
+msgstr "데이터베이스에 추가"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:209
+msgid "Configuration:"
+msgstr "설정:"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:253
+msgid "Use only files with this name:"
+msgstr "이 이름을 가진 파일만 사용합니다:"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:255
+msgid "_Use this translation"
+msgstr "이 번역 사용(_U)"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:260
+msgid "_Remove"
+msgstr "제거(_R)"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:371
+msgid "Shortcut"
+msgstr "바로 가기"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:380
+msgid "Level"
+msgstr "수준"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:389
+msgid "String"
+msgstr "문자열"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
+msgid "PO directory"
+msgstr "PO 디렉터리"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
+msgid "Directory containing PO files to add to the translation memory."
+msgstr "번역 저장소에 추가할 PO 파일이 들어있는 디렉터리."
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
+msgid "Restrict search by filename"
+msgstr "파일 이름으로 검색 제한하기"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
+msgid ""
+"If true, only include files with a specified filename when searching the "
+"translation memory."
+msgstr "참이면, 번역 저장소를 검색할 때 지정된 파일 이름을 가진 파일만 포함."
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
+msgid "Filename to restrict search to"
+msgstr "검색을 제한할 파일 이름"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
+msgid ""
+"Filename to which searching of the translation memory should be restricted."
+msgstr "번역 저장소 검색에 사용할 파일 이름은 제한적이어야 합니다."
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
+msgid "Maximum number of missing words"
+msgstr "빠진 단어의 최대 수"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
+msgid ""
+"Maximum number of words that can be missing from a message displayed as a "
+"match by the translation memory."
+msgstr ""
+"번역 저장소에 일치하다고 표시한 메시지에서 빠질 수 있는 최대 단어 갯수입니다."
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
+msgid "Maximum difference in message length"
+msgstr "최대 메시지 길이 차이"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
+msgid ""
+"Maximum difference in length between messages displayed as matches by the "
+"translation memory."
+msgstr "번역 저장소에 일치하다고 표시한 메시지의 최대 길이 차이 입니다."
+
 #, c-format
-msgid "Show “_%s”"
-msgstr "“_%s” 표시"
+#~ msgid "Found and replaced %d occurrence"
+#~ msgid_plural "Found and replaced %d occurrences"
+#~ msgstr[0] "문자열 %d개를 찾아 바꾸었습니다"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1484
-msgid "_Move on Toolbar"
-msgstr "도구 모음에서 옮기기(_M)"
+#~ msgid "Gtranslator PO File Editor"
+#~ msgstr "지트랜스레이터 PO 파일 편집기"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1485
-msgid "Move the selected item on the toolbar"
-msgstr "도구 모음에서 선택한 항목을 옮깁니다"
+#~ msgid "Use custom font"
+#~ msgstr "사용자 정의 글꼴 사용"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1486
-msgid "_Remove from Toolbar"
-msgstr "도구 모음에서 제거(_R)"
+#~ msgid "If true, use a custom font for edit fields."
+#~ msgstr "참이면, 편집 칸에 사용자 정의 글꼴을 사용."
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1487
-msgid "Remove the selected item from the toolbar"
-msgstr "도구 모음에서 선택한 항목을 제거합니다"
+#~ msgid "Custom font to use for edit fields."
+#~ msgstr "칸을 편집하는데 사용할 사용자 정의 글꼴."
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1488
-msgid "_Delete Toolbar"
-msgstr "도구 모음 삭제(_D)"
+#~ msgid "Others"
+#~ msgstr "기타"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1489
-msgid "Remove the selected toolbar"
-msgstr "선택한 도구 모음을 제거합니다"
+#~ msgid "gtranslator highlight"
+#~ msgstr "지트랜스레이터 강조"
 
-#: ../src/toolbareditor/egg-toolbar-editor.c:488
-msgid "Separator"
-msgstr "구분선"
+#~ msgid "Tag"
+#~ msgstr "태그"
+
+#~ msgid "Special variable"
+#~ msgstr "특수 변수"
+
+#~ msgid "Open file for alternate language"
+#~ msgstr "대체 언어에 대한 파일 열기"
+
+#~ msgid "File closed"
+#~ msgstr "파일 닫힘"
+
+#~ msgctxt "alternate lang"
+#~ msgid "Co_py"
+#~ msgstr "복사(_P)"
+
+#~ msgid "There isn't any file loaded"
+#~ msgstr "불러온 파일이 없습니다"
+
+#~ msgid "_Alternate Language"
+#~ msgstr "대체 언어(_A)"
+
+#~ msgid "Show the Alternate Language panel"
+#~ msgstr "대체 언어 창 표시"
+
+#~ msgid "Alternate Language"
+#~ msgstr "대체 언어"
+
+#~ msgid "Load an alternate language."
+#~ msgstr "대체 언어를 불러옵니다."
+
+#~ msgid "Character Map"
+#~ msgstr "문자 표"
+
+#~ msgid "Insert special characters just by clicking on them."
+#~ msgstr "눌러서 특수 문자를 삽입하십시오."
+
+#~ msgid "Source View Settings"
+#~ msgstr "소스 보기 설정"
+
+#~ msgid "Use external editor"
+#~ msgstr "외부 편집기 사용"
+
+#~ msgid "Program command:"
+#~ msgstr "프로그램 명령:"
+
+#~ msgid "Line command:"
+#~ msgstr "줄 명령:"
+
+#~ msgid "Please install \"%s\" to be able to show the file"
+#~ msgstr "파일을 표시하려면 \"%s\"을(를) 설치하십시오."
+
+#~ msgid "Source Code View"
+#~ msgstr "소스 코드 보기"
+
+#~ msgid "Show the message in the source code."
+#~ msgstr "소스 코드의 메시지 보기."
+
+#~ msgid "Use the System Editor"
+#~ msgstr "시스템 편집기 사용"
+
+#~ msgid "Whether use the system editor to show the source code"
+#~ msgstr "소스 코드를 표시할 시스템 편집기 사용 여부"
+
+#~ msgid "The Editor to Launch"
+#~ msgstr "실행할 편집기"
+
+#~ msgid "The command to launch the editor you want to use"
+#~ msgstr "사용할 편집기를 실행할 명령"
+
+#~ msgid "Arguments for the Command"
+#~ msgstr "명령 인자"
+
+#~ msgid "Arguments to pass to the program command line to select the line"
+#~ msgstr "줄을 선택할 때 프로그램 명령줄로 전달할 인자"
+
+#~ msgid "Dictionary"
+#~ msgstr "사전"
+
+#~ msgid "No dictionary source available with name '%s'"
+#~ msgstr "'%s'(이)라는 이름의 사전 소스를 이용할 수 없습니다"
+
+#~ msgid "Unable to find dictionary source"
+#~ msgstr "사전 자료를 찾을 수 없음"
+
+#~ msgid "No context available for source '%s'"
+#~ msgstr "'%s' 자료에 대해 사용할 수 있는 내용이 없습니다"
+
+#~ msgid "Unable to create a context"
+#~ msgstr "내용을 만들 수 없습니다"
+
+#~ msgid "Dictionary source '%s' selected"
+#~ msgstr "'%s' 사전 자료를 선택함"
+
+#~ msgid "Strategy '%s' selected"
+#~ msgstr "'%s' 방식을 선택함"
+
+#~ msgid "Database '%s' selected"
+#~ msgstr "'%s' 데이터베이스를 선택"
+
+#~ msgid "Word '%s' selected"
+#~ msgstr "'%s' 단어를 선택함"
+
+#~ msgid "Double-click on the word to look up"
+#~ msgstr "찾아볼 단어를 두번 누르십시오"
+
+#~ msgid "Double-click on the matching strategy to use"
+#~ msgstr "사용할 검색 방식을 두번 누르십시오"
+
+#~ msgid "Double-click on the source to use"
+#~ msgstr "사용할 자료를 두번 누르십시오"
+
+#~ msgid "Double-click on the database to use"
+#~ msgstr "사용할 데이터베이스를 두번 누르십시오"
+
+#~ msgid "Look _up:"
+#~ msgstr "찾기(_U):"
+
+#~ msgid "Similar words"
+#~ msgstr "비슷한 단어"
+
+#~ msgid "Available dictionaries"
+#~ msgstr "이용할 수 있는 사전"
+
+#~ msgid "Available strategies"
+#~ msgstr "이용할 수 있는 방식"
+
+#~ msgid "Dictionary sources"
+#~ msgstr "사전 자료"
+
+#~ msgid "Look up words in a dictionary."
+#~ msgstr "사전에서 단어를 찾습니다."
+
+#~ msgid "Database"
+#~ msgstr "데이터베이스"
+
+#~ msgid "Word database"
+#~ msgstr "단어 데이터베이스"
+
+#~ msgid "Source Name"
+#~ msgstr "자료 이름"
+
+#~ msgid "Strategy"
+#~ msgstr "방식"
+
+#~ msgid "Panel Position"
+#~ msgstr "패널 위치"
+
+#~ msgid "_Fullscreen"
+#~ msgstr "최대 화면(_F)"
+
+#~ msgid "Place window on fullscreen state"
+#~ msgstr "창을 최대 화면 상태로"
+
+#~ msgid "Fullscreen"
+#~ msgstr "최대 화면"
+
+#~ msgid "Place window in the fullscreen state."
+#~ msgstr "창을 최대 화면 상태로."
+
+#~ msgid "_Next Param"
+#~ msgstr "다음 매개 변수(_N)"
+
+#~ msgid "Insert the next param of the message"
+#~ msgstr "메시지에 다음 매개 변수 넣기"
+
+#~ msgid "_Insert Params"
+#~ msgstr "매개 변수 삽입(_I)"
+
+#~ msgid "_Next Tag"
+#~ msgstr "다음 태그(_N)"
+
+#~ msgid "_Insert Tags"
+#~ msgstr "태그 삽입(_I)"
+
+#~ msgid "Insert Params or Tags"
+#~ msgstr "매개 변수 또는 태그 넣기"
+
+#~ msgid "Parameters and tags detection featuring easy insertion."
+#~ msgstr "쉬운 삽입 기능이 있는 매개 변수 및 태그 발견 기능입니다."
+
+#~ msgid "Open Tran Settings"
+#~ msgstr "Open Tran 설정"
+
+#~ msgid "Language code for the Open-Tran query:"
+#~ msgstr "Open-Tran에 요청할 언어 코드:"
+
+#~ msgid "Language code of the translated results:"
+#~ msgstr "번역 결과의 언어 코드:"
+
+#~ msgid "Use a local \"mirror\" copy of the Open-Tran server"
+#~ msgstr "Open-Tran 서버의 지역 \"미러\" 사본 사용"
+
+#~ msgid "Mirror server URL:"
+#~ msgstr "미러 서버 URL:"
+
+#~ msgid ""
+#~ "<i>The URL should be of the form:\n"
+#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+#~ "The two \"%s\" markers and the final slash must not be omitted.</i>"
+#~ msgstr ""
+#~ "<i>URL은 다음 형식이어야 합니다:\n"
+#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+#~ "두개의 \"%s\" 마커와 마지막 슬래시 문자는 생략하면 안됩니다.</i>"
+
+#~ msgid "Mirror Server"
+#~ msgstr "미러 서버"
+
+#~ msgid "ERROR: Cannot access %s\n"
+#~ msgstr "오류: %s에 접근할 수 없음\n"
+
+#~ msgid "Error in server response, GET failed\n"
+#~ msgstr "서버 응답에 오류가 발생하여, GET 실패\n"
+
+#~ msgid "Cannot parse server response, %s\n"
+#~ msgstr "서버 응답을 해석할 수 없습니다. %s\n"
+
+#~ msgid "Cannot parse server response, not an array? %s\n"
+#~ msgstr "서버 응답을 해석할 수 없습니다. 배열이 아닙니까? %s\n"
+
+#~ msgid "WRONG! Can't get result element %d\n"
+#~ msgstr "이런! 결과 요소 %d을(를) 가져올 수 없습니다\n"
+
+#~ msgid "WRONG! Can't parse result element %d as object\n"
+#~ msgstr "이런! 결과 요소 %d을(를) 객체로 해석할 수 없습니다\n"
+
+#~ msgid "WRONG! Can't read projects for result element %d\n"
+#~ msgstr "이런! 객체 요소 %d의 프로젝트를 읽어올 수 없습니다\n"
+
+#~ msgid "%s[%s] Count:%d"
+#~ msgstr "%s[%s] 갯수:%d"
+
+#~ msgid "WRONG! Malformed project: %d\n"
+#~ msgstr "이런! 잘못된 형식의 프로젝트 입니다: %d\n"
+
+#~ msgid "You have to provide a phrase to search"
+#~ msgstr "검색할 구절을 입력해야 합니다."
+
+#~ msgid ""
+#~ "You have to provide a search language code in the plugin configuration"
+#~ msgstr "플러그인 설정에서 검색할 언어 코드를 제공해야 합니다."
+
+#~ msgid ""
+#~ "You have to provide a language code for your language in the plugin "
+#~ "configuration"
+#~ msgstr "플러그인 설정에서 사용할 언어에 대한 언어 코드를 제공해야 합니다."
+
+#~ msgid ""
+#~ "Either use the main open-tran.eu server, or enter a server URL in the "
+#~ "plugin configuration,"
+#~ msgstr ""
+#~ "메인 open-tran.eu 서버를 사용하거나 플러그인 설정에 서버 URL을 입력하십시"
+#~ "오,"
+
+#~ msgid "Type"
+#~ msgstr "유형"
+
+#~ msgid "Open-Tran.eu"
+#~ msgstr "Open-Tran.eu"
+
+#~ msgid "Look for:"
+#~ msgstr "찾기:"
+
+#~ msgid "Open Tran"
+#~ msgstr "번역 열기"
+
+#~ msgid "Look for phrases in Open tran memory translation database."
+#~ msgstr "Open Tran 저장소 번역 데이터베이스에서 구절을 찾음."
+
+#~ msgid "Search Code"
+#~ msgstr "코드 검색"
+
+#~ msgid "The language code to search for"
+#~ msgstr "검색 언어 코드"
+
+#~ msgid "Own Code"
+#~ msgstr "보유한 코드"
+
+#~ msgid "The language code in which you want the results"
+#~ msgstr "원하는 결과를 표시할 언어 코드"
+
+#~ msgid "Use Mirror Server"
+#~ msgstr "미러 서버 사용"
+
+#~ msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
+#~ msgstr "open-tran.eu의 주 Open-Tran 서버에 대한 로컬 복사본을 사용"
+
+#~ msgid "Mirror Server URL"
+#~ msgstr "미러 서버 URL"
+
+#~ msgid "URL of an Open-Tran mirror server"
+#~ msgstr "Open-Tran 미러 서버 URL"
+
+#~ msgid "Strings added to database"
+#~ msgstr "데이터베이스에 추가한 문자열"
+
+#~ msgid "Please specify a valid path to build the translation memory"
+#~ msgstr "번역 저장소를 만들 존재 경로를 지정해주십시오"
+
+#~ msgid "Get translation suggestions from a data base."
+#~ msgstr "데이터베이스에서 번역 제안을 가져옴."
+
+#~ msgid "Insert Option nº %d"
+#~ msgstr "삽입 옵션 nº %d"
+
+#~ msgid "_Build Translation Memory"
+#~ msgstr "번역 저장소 만들기(_B)"
+
+#~ msgid "_Translation Memory"
+#~ msgstr "번역 저장소(_T)"
+
+#~ msgid "Current Developers"
+#~ msgstr "현재 개발자"
+
+#~ msgid "D_one"
+#~ msgstr "완료(_O)"
+
+#~ msgid "Status"
+#~ msgstr "상태"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Use _custom font"
+#~ msgstr "사용자 정의 글꼴 사용(_C)"
+
+#~ msgid "Editor _font:"
+#~ msgstr "편집기 글꼴(_F):"
+
+#~ msgid "Include fu_zzy strings"
+#~ msgstr "모호한 문자열 포함(_Z)"
+
+#~ msgid "gtkspell error: %s\n"
+#~ msgstr "gtkspell 오류: %s\n"
+
+#~ msgid ""
+#~ "GtkSpell was unable to initialize.\n"
+#~ " %s"
+#~ msgstr ""
+#~ "GtkSpell을 초기화할 수 없습니다.\n"
+#~ " %s"
+
+#~ msgid "%s - gtranslator"
+#~ msgstr "%s - 지트랜스레이터"
+
+#~ msgid "gtranslator"
+#~ msgstr "지트랜스레이터"
+
+#~| msgid "Project"
+#~ msgid "Projects"
+#~ msgstr "프로젝트"
+
+#~| msgid "Project"
+#~ msgid "Add project"
+#~ msgstr "프로젝트 추가"
+
+#~ msgid "Remove project"
+#~ msgstr "프로젝트 제거"
+
+#~ msgid "Show “_%s”"
+#~ msgstr "“_%s” 표시"
+
+#~ msgid "_Move on Toolbar"
+#~ msgstr "도구 모음에서 옮기기(_M)"
+
+#~ msgid "Move the selected item on the toolbar"
+#~ msgstr "도구 모음에서 선택한 항목을 옮깁니다"
+
+#~ msgid "_Remove from Toolbar"
+#~ msgstr "도구 모음에서 제거(_R)"
+
+#~ msgid "Remove the selected item from the toolbar"
+#~ msgstr "도구 모음에서 선택한 항목을 제거합니다"
+
+#~ msgid "Remove the selected toolbar"
+#~ msgstr "선택한 도구 모음을 제거합니다"
+
+#~ msgid "Separator"
+#~ msgstr "구분선"
