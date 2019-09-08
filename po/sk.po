@@ -11,16 +11,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2019-01-07 09:56+0000\n"
-"PO-Revision-Date: 2019-01-15 19:16+0100\n"
+"POT-Creation-Date: 2019-06-15 10:55+0000\n"
+"PO-Revision-Date: 2019-09-08 11:44+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: slovenčina <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0\n"
-"X-Generator: Gtranslator 3.30.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
 msgid "Gtranslator"
@@ -57,23 +57,18 @@ msgstr ""
 "zásuvnými modulmi ako je iný jazyk, vkladanie značiek, integrácia do systému "
 "subversion a prehliadač zdrojového kódu."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:31
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:61
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
-#: src/gtr-notebook.ui:294 src/gtr-window.c:316 src/gtr-window.ui:25
+#: src/gtr-notebook.ui:294 src/gtr-window.c:318 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Editor prekladov"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
 msgstr "Editor PO súborov"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: data/org.gnome.Gtranslator.desktop.in.in:7
-msgid "@icon@"
-msgstr "@icon@"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:14
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
@@ -209,7 +204,7 @@ msgstr "Cesty:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
 #: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:588
-#: src/gtr-search-dialog.c:391
+#: src/gtr-search-dialog.c:393
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "_Zavrieť"
@@ -275,19 +270,15 @@ msgstr "Uloženie súboru ako…"
 msgid "Files saved."
 msgstr "Súbory uložené."
 
-#: src/gtr-actions-search.c:168
+#: src/gtr-actions-search.c:163
 #, c-format
-msgid "Found and replaced %d occurrence"
+msgid "Found and replaced one occurrence"
 msgid_plural "Found and replaced %d occurrences"
 msgstr[0] "Nájdených a nahradených %d výskytov"
-msgstr[1] "Nájdený a nahradený %d výskyt"
+msgstr[1] "Nájdený a nahradený jeden výskyt"
 msgstr[2] "Nájdené a nahradené %d výskyty"
 
-#: src/gtr-actions-search.c:177
-msgid "Found and replaced one occurrence"
-msgstr "Nájdený a nahradený jeden výskyt"
-
-#: src/gtr-actions-search.c:189
+#: src/gtr-actions-search.c:173
 msgid "Phrase not found"
 msgstr "Fráza sa nenašla"
 
@@ -335,7 +326,7 @@ msgid "Team email"
 msgstr "Email tímu"
 
 #: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:521
-#: src/gtr-window.c:554
+#: src/gtr-window.c:556
 msgid "Profile"
 msgstr "Profil"
 
@@ -421,20 +412,65 @@ msgstr "Pridať poznámku"
 msgid "Edit"
 msgstr "Upraviť"
 
-#. Extracted comments
-#: src/gtr-context.c:327
+#: src/gtr-context.c:326
 msgid "Extracted comments:"
 msgstr "Extrahované komentáre:"
 
-#. Context
-#: src/gtr-context.c:331
+#: src/gtr-context.c:329
 msgid "Context:"
 msgstr "Kontext:"
 
-#. Format
-#: src/gtr-context.c:335
+#: src/gtr-context.c:332
 msgid "Format:"
 msgstr "Formát:"
+
+#: src/gtr-dl-teams.c:604
+msgid "Translation Team"
+msgstr "Prekladateľský tím"
+
+#: src/gtr-dl-teams.c:611
+msgid "Module"
+msgstr "Modul"
+
+#: src/gtr-dl-teams.ui:60
+msgid "Select team, module, branch and domain to get the translation file."
+msgstr "Vyberte tím, modul, vetvu a doménu pre získanie súboru s prekladom."
+
+#: src/gtr-dl-teams.ui:81
+msgid "Load file"
+msgstr "Načítať súbor"
+
+#: src/gtr-dl-teams.ui:98
+msgid "Load from Damned Lies"
+msgstr "Načítanie zo služby Damned Lies"
+
+#: src/gtr-dl-teams.ui:105 src/gtr-notebook.ui:298 src/gtr-projects.ui:58
+msgid "Open…"
+msgstr "Otvoriť…"
+
+#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:511 src/gtr-projects.ui:91
+msgid "Main Menu"
+msgstr "Hlavná ponuka"
+
+#: src/gtr-dl-teams.ui:156 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+msgid "New window"
+msgstr "Nové okno"
+
+#: src/gtr-dl-teams.ui:170 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+msgid "Preferences"
+msgstr "Predvoľby"
+
+#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:160
+msgid "Keyboard Shortcuts"
+msgstr "Klávesové skratky"
+
+#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:174
+msgid "About"
+msgstr "O programe"
+
+#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:276 src/gtr-projects.ui:188
+msgid "Quit"
+msgstr "Ukončiť"
 
 #: src/gtr-file-dialogs.c:48
 msgid "_Open"
@@ -531,7 +567,7 @@ msgstr "Prechod na správu"
 msgid "Enter message number:"
 msgstr "Zadajte číslo správy:"
 
-#: src/gtr-lang-button.ui:61 src/gtr-lang-button.ui:70
+#: src/gtr-lang-button.c:65
 msgid "Choose Language"
 msgstr "Zvoliť jazyk"
 
@@ -556,14 +592,14 @@ msgid "_Plural forms"
 msgstr "_Tvary množného čísla"
 
 #: src/gtr-languages-fetcher.ui:200
-msgid "Edit options manually"
-msgstr "Upraviť voľby ručne"
+msgid "_Edit options manually"
+msgstr "_Upraviť voľby ručne"
 
-#: src/gtr-message-table.c:255
+#: src/gtr-message-table.c:219
 msgid "Original Message"
 msgstr "Pôvodná správa"
 
-#: src/gtr-message-table.c:274
+#: src/gtr-message-table.c:238
 msgid "Translated Message"
 msgstr "Preložená správa"
 
@@ -588,12 +624,12 @@ msgid "Translated message"
 msgstr "Preloženej správy"
 
 # window title
-#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:369
-#: src/gtr-search-dialog.c:449
+#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:371
+#: src/gtr-search-dialog.c:455
 msgid "Find"
 msgstr "Vyhľadávanie"
 
-#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:453
+#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:459
 msgid "Find and replace"
 msgstr "Nájsť a nahradiť"
 
@@ -604,30 +640,6 @@ msgstr "Zostaviť pamäť prekladov"
 #: src/gtr-notebook.ui:179
 msgid "Edit header"
 msgstr "Upraviť hlavičku"
-
-#: src/gtr-notebook.ui:207 src/gtr-projects.ui:109
-msgid "New window"
-msgstr "Nové okno"
-
-#: src/gtr-notebook.ui:221 src/gtr-projects.ui:123
-msgid "Preferences"
-msgstr "Predvoľby"
-
-#: src/gtr-notebook.ui:248 src/gtr-projects.ui:150
-msgid "Keyboard Shortcuts"
-msgstr "Klávesové skratky"
-
-#: src/gtr-notebook.ui:262 src/gtr-projects.ui:164
-msgid "About"
-msgstr "O programe"
-
-#: src/gtr-notebook.ui:276 src/gtr-projects.ui:178
-msgid "Quit"
-msgstr "Ukončiť"
-
-#: src/gtr-notebook.ui:298 src/gtr-projects.ui:58
-msgid "Open…"
-msgstr "Otvoriť…"
 
 # tooltip
 #: src/gtr-notebook.ui:302
@@ -662,10 +674,6 @@ msgstr "Zmení stav nepresnosti správy (<Ctrl>+u)"
 #: src/gtr-notebook.ui:487
 msgid "Order by menu"
 msgstr "Zoradiť podľa ponuky"
-
-#: src/gtr-notebook.ui:511 src/gtr-projects.ui:81
-msgid "Main Menu"
-msgstr "Hlavná ponuka"
 
 #: src/gtr-notebook.ui:527
 msgid "Save"
@@ -882,17 +890,21 @@ msgstr "Otvorte nový súbor .po alebo nejaký pretiahnite a pustite sem"
 msgid "Select a PO file"
 msgstr "Výber súboru PO"
 
+#: src/gtr-projects.ui:68
+msgid "Load from DL…"
+msgstr "Načítať zo služby DL…"
+
 # window title
-#: src/gtr-search-dialog.c:347 src/gtr-search-dialog.ui:6
+#: src/gtr-search-dialog.c:349 src/gtr-search-dialog.ui:6
 #: src/gtr-search-dialog.ui:53
 msgid "Replace"
 msgstr "Nahradenie"
 
-#: src/gtr-search-dialog.c:451
+#: src/gtr-search-dialog.c:457
 msgid "Replace _All"
 msgstr "N_ahradiť všetky"
 
-#: src/gtr-search-dialog.c:455
+#: src/gtr-search-dialog.c:461
 msgid "_Replace"
 msgstr "Nah_radiť"
 
@@ -908,27 +920,27 @@ msgstr "Vy_hľadať: "
 msgid "Replace _with: "
 msgstr "Nahradiť _za: "
 
-#: src/gtr-search-dialog.ui:160
+#: src/gtr-search-dialog.ui:184
 msgid "_Original text"
 msgstr "_Pôvodný text"
 
-#: src/gtr-search-dialog.ui:177
+#: src/gtr-search-dialog.ui:201
 msgid "_Translated text"
 msgstr "P_reložený text"
 
-#: src/gtr-search-dialog.ui:213
+#: src/gtr-search-dialog.ui:237
 msgid "_Match case"
 msgstr "Rozlišovať veľkosť _písma"
 
-#: src/gtr-search-dialog.ui:229
+#: src/gtr-search-dialog.ui:253
 msgid "Match _entire word only"
 msgstr "Hľadať iba _celé slová"
 
-#: src/gtr-search-dialog.ui:245
+#: src/gtr-search-dialog.ui:269
 msgid "Search _backwards"
 msgstr "Hľadať _dozadu"
 
-#: src/gtr-search-dialog.ui:262
+#: src/gtr-search-dialog.ui:286
 msgid "_Wrap around"
 msgstr "Pokračovať d_ookola"
 
@@ -948,47 +960,45 @@ msgstr "Zavrieť dokument"
 msgid "There is an error in the message:"
 msgstr "V správe je chyba:"
 
-#: src/gtr-tab.c:459 src/gtr-tab.c:570
+#: src/gtr-tab.c:459 src/gtr-tab.c:575
 msgid "fuzzy"
 msgstr "nepresná"
 
-#: src/gtr-tab.c:600
+#: src/gtr-tab.c:605
 #, c-format
 msgid "Plural %d"
 msgstr "Množné číslo %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1153
+#: src/gtr-tab.c:1158
 msgid "Path:"
 msgstr "Cesta:"
 
-#: src/gtr-tab.c:1803
+#: src/gtr-tab.c:1808
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Preložené na: %0.2f%%"
 
-#: src/gtr-tab.c:1804
+#: src/gtr-tab.c:1809
 #, c-format
 msgid "Translated: %d"
 msgstr "Preložených: %d"
 
-#: src/gtr-tab.c:1805
+#: src/gtr-tab.c:1810
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Nepreložených: %d"
 
-#: src/gtr-tab.c:1806
+#: src/gtr-tab.c:1811
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Nepresných: %d"
 
 #: src/gtr-tab.ui:153
-#| msgid "_Original Message:"
 msgid "_Original Message"
 msgstr "_Pôvodná správa"
 
 #: src/gtr-tab.ui:245
-#| msgid "Translate_d Text:"
 msgid "Translate_d Text"
 msgstr "P_reložený text"
 
@@ -1000,29 +1010,29 @@ msgstr ""
 "Nepodarilo sa zobraziť pomocníka. Prosím, uistite sa, že je nainštalovaný "
 "balík dokumentácie Editora prekladu."
 
-#: src/gtr-window.c:171
+#: src/gtr-window.c:173
 msgid "Untranslated"
 msgstr "Nepreložená"
 
-#: src/gtr-window.c:174
+#: src/gtr-window.c:176
 msgid "Translated"
 msgstr "Preložená"
 
-#: src/gtr-window.c:177
+#: src/gtr-window.c:179
 msgid "Fuzzy"
 msgstr "Nepresná"
 
-#: src/gtr-window.c:184
+#: src/gtr-window.c:186
 #, c-format
 msgid "Current: %d"
 msgstr "Aktuálna: %d"
 
-#: src/gtr-window.c:185
+#: src/gtr-window.c:187
 #, c-format
 msgid "Total: %d"
 msgstr "Celkom: %d"
 
-#: src/gtr-window.c:186
+#: src/gtr-window.c:188
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
@@ -1030,7 +1040,7 @@ msgstr[0] "%d preložených"
 msgstr[1] "%d preložený"
 msgstr[2] "%d preložené"
 
-#: src/gtr-window.c:189
+#: src/gtr-window.c:191
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
@@ -1038,7 +1048,7 @@ msgstr[0] "%d nepresných"
 msgstr[1] "%d nepresný"
 msgstr[2] "%d nepresné"
 
-#: src/gtr-window.c:191
+#: src/gtr-window.c:193
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1047,22 +1057,22 @@ msgstr[1] "%d nepreložený"
 msgstr[2] "%d nepreložené"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:301
+#: src/gtr-window.c:303
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Editor prekladov"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:307
+#: src/gtr-window.c:309
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Editor prekladov"
 
-#: src/gtr-window.c:538
+#: src/gtr-window.c:540
 msgid "No profile"
 msgstr "Žiadny profil"
 
-#: src/gtr-window.c:556
+#: src/gtr-window.c:558
 msgid "Profile for the active document"
 msgstr "Profil aktívneho dokumentu"
 
@@ -1312,6 +1322,15 @@ msgstr ""
 "Maximálny rozdiel v dĺžke správ pri porovnávaní s pamäťou prekladov, aby sa "
 "zobrazili ako zhodné."
 
+#~ msgid "@icon@"
+#~ msgstr "@icon@"
+
+#~ msgid "Found and replaced %d occurrence"
+#~ msgid_plural "Found and replaced %d occurrences"
+#~ msgstr[0] "Nájdených a nahradených %d výskytov"
+#~ msgstr[1] "Nájdený a nahradený %d výskyt"
+#~ msgstr[2] "Nájdené a nahradené %d výskyty"
+
 #~ msgid "Message not found"
 #~ msgstr "Správa sa nenašla"
 
@@ -1493,9 +1512,6 @@ msgstr ""
 
 #~ msgid "Gtranslator Translation Memory Manager"
 #~ msgstr "Správca pamäte prekladov programu Gtranslator"
-
-#~ msgid "Translation Memory"
-#~ msgstr "Pamäť prekladov"
 
 #~ msgid "Insert Option nº %d"
 #~ msgstr "Vložiť voľbu č. %d"
