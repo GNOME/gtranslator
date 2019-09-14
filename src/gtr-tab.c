@@ -450,6 +450,7 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
   msgid = gtr_msg_get_msgid (msg);
   if (msgid)
     {
+      gchar *msg_error = gtr_msg_check (msg);
       buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->text_msgid));
       gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER (buf));
       gtk_text_buffer_set_text (buf, (gchar *) msgid, -1);
@@ -457,6 +458,10 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
 
       if (gtr_msg_is_fuzzy (msg))
         gtk_label_set_text (GTK_LABEL (priv->msgid_tags), _("fuzzy"));
+      if (msg_error) {
+        gtk_label_set_text (GTK_LABEL (priv->msgid_tags), msg_error);
+        g_free (msg_error);
+      }
     }
   msgid_plural = gtr_msg_get_msgid_plural (msg);
   if (!msgid_plural)
@@ -518,6 +523,7 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
   GtrPoState po_state;
   GtrTabPrivate *priv;
   gboolean fuzzy, translated;
+  gchar *msg_error = NULL;
 
   priv = gtr_tab_get_instance_private (tab);
 
@@ -571,7 +577,12 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
       g_signal_emit (G_OBJECT (tab), signals[MESSAGE_CHANGED], 0, msg);
     }
 
-  if (gtr_msg_is_fuzzy (msg))
+  msg_error = gtr_msg_check (msg);
+  if (msg_error) {
+    gtk_label_set_text (GTK_LABEL (priv->msgid_tags), msg_error);
+    g_free (msg_error);
+  }
+  else if (gtr_msg_is_fuzzy (msg))
     gtk_label_set_text (GTK_LABEL (priv->msgid_tags), _("fuzzy"));
   else
     gtk_label_set_text (GTK_LABEL (priv->msgid_tags), "");

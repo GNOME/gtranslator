@@ -591,6 +591,7 @@ on_gettext_po_xerror2 (gint severity,
 gchar *
 gtr_msg_check (GtrMsg * msg)
 {
+  gchar *error = NULL;
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   struct po_xerror_handler handler;
 
@@ -613,6 +614,12 @@ gtr_msg_check (GtrMsg * msg)
       message_error = NULL;
     }
 
-  /*Are there any other way to do this? */
-  return message_error;
+  if (message_error)
+    {
+      error = g_strdup (message_error);
+      g_free (message_error);
+    }
+  message_error = NULL;
+
+  return error;
 }

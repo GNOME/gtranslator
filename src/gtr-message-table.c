@@ -64,32 +64,47 @@ colorize_cell (GtkTreeViewColumn *tree_column,
                gpointer data)
 {
   GtrMsg *msg;
+  gchar *message_error = NULL;
 
-  GdkRGBA translated, fuzzy, untranslated;
+  GdkRGBA translated, fuzzy, untranslated, bg_color, fg_color;
   GtkStyleContext *style_context;
   style_context = gtk_widget_get_style_context (GTK_WIDGET (data));
   gtk_style_context_lookup_color (style_context, "theme_fg_color", &translated);
   gtk_style_context_lookup_color (style_context, "warning_color", &fuzzy);
   gtk_style_context_lookup_color (style_context, "error_color", &untranslated);
+  gtk_style_context_lookup_color (style_context, "theme_bg_color", &bg_color);
+  gtk_style_context_lookup_color (style_context, "theme_selected_fg_color", &fg_color);
 
   gtk_tree_model_get (tree_model, iter,
                       GTR_MESSAGE_TABLE_MODEL_POINTER_COLUMN, &msg,
                       -1);
 
-  if (gtr_msg_is_fuzzy (msg))
+  message_error = gtr_msg_check (msg);
+  if (message_error)
     {
+      g_free (message_error);
+      g_object_set (cell, "background-rgba", &untranslated, NULL);
+      g_object_set (cell, "foreground-rgba", &fg_color, NULL);
+      g_object_set (cell, "style", PANGO_STYLE_NORMAL, NULL);
+      g_object_set (cell, "weight", PANGO_WEIGHT_BOLD, NULL);
+    }
+  else if (gtr_msg_is_fuzzy (msg))
+    {
+      g_object_set (cell, "background-rgba", &bg_color, NULL);
       g_object_set (cell, "foreground-rgba", &fuzzy, NULL);
       g_object_set (cell, "style", PANGO_STYLE_ITALIC, NULL);
       g_object_set (cell, "weight", PANGO_WEIGHT_NORMAL, NULL);
     }
   else if (gtr_msg_is_translated (msg))
     {
+      g_object_set (cell, "background-rgba", &bg_color, NULL);
       g_object_set (cell, "foreground-rgba", &translated, NULL);
       g_object_set (cell, "style", PANGO_STYLE_NORMAL, NULL);
       g_object_set (cell, "weight", PANGO_WEIGHT_NORMAL, NULL);
     }
   else
     {
+      g_object_set (cell, "background-rgba", &bg_color, NULL);
       g_object_set (cell, "foreground-rgba", &untranslated, NULL);
       g_object_set (cell, "style", PANGO_STYLE_NORMAL, NULL);
       g_object_set (cell, "weight", PANGO_WEIGHT_BOLD, NULL);
