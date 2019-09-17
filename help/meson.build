@@ -31,8 +31,6 @@ media = [
   'figures/comment-text.png',
   'figures/edit-profile.png',
   'figures/edit-toolbar.png',
-  'figures/goto-string-toolbar.png',
-  'figures/gtrans_go_to_string_menu.png',
   'figures/gtranslator32.png',
   'figures/gtranslator_interface2.png',
   'figures/gtranslator-plugins.png',
