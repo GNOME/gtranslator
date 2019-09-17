@@ -29,8 +29,6 @@ media = [
   'figures/alt-lang.png',
   'figures/char-map.png',
   'figures/comment-text.png',
-  'figures/edit_header2.png',
-  'figures/edit_header.png',
   'figures/edit-profile.png',
   'figures/edit-toolbar.png',
   'figures/goto-string-toolbar.png',
