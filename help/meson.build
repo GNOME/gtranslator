@@ -24,14 +24,11 @@ sources = [
 ]
 
 media = [
-  'figures/add-profile.png',
   'figures/alt-lang.png',
   'figures/char-map.png',
-  'figures/edit-profile.png',
   'figures/gtranslator32.png',
   'figures/gtranslator_interface2.png',
   'figures/gtranslator_tm_strings.png',
-  'figures/profiles2.png',
   'figures/use-tm-entry.png',
 ]
 
