@@ -32,7 +32,6 @@ media = [
   'figures/gtranslator_interface2.png',
   'figures/gtranslator_tm_strings.png',
   'figures/profiles2.png',
-  'figures/tm-manager.png',
   'figures/use-tm-entry.png',
 ]
 
