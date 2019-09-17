@@ -32,7 +32,6 @@ media = [
   'figures/edit_header2.png',
   'figures/edit_header.png',
   'figures/edit-profile.png',
-  'figures/edit-text.png',
   'figures/edit-toolbar.png',
   'figures/goto-string-toolbar.png',
   'figures/gtrans_go_to_string_menu.png',
