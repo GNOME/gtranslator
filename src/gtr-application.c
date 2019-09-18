@@ -579,6 +579,7 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.save", "<Ctrl>s");
   set_kb (application, "app.saveas", "<Ctrl><Shift>s");
   set_kb (application, "app.preferences", "<Ctrl>p");
+  set_kb (application, "app.quit", "<Primary>q");
 
   set_kb (application, "app.undo", "<Ctrl>z");
   set_kb (application, "app.redo", "<Ctrl><Shift>z");
