@@ -29,7 +29,6 @@ media = [
   'figures/gtranslator32.png',
   'figures/gtranslator_interface2.png',
   'figures/gtranslator_tm_strings.png',
-  'figures/use-tm-entry.png',
 ]
 
 gnome.yelp(
