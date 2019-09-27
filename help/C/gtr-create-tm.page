@@ -9,7 +9,7 @@
     <link type="seealso" xref="gtr-shortcut-keys"/>
            
     <revision pkgversion="2.91.6" date="2013-06-18" status="review"/>
-    <revision pkgversion="3.32.1" date="2019-09-17" status="review"/>
+    <revision pkgversion="3.34.0" date="2019-09-27" status="review"/>
    <credit type="author copyright">
       <name>Radina Matic</name>
       <email its:translate="no">radina.matic@gmail.com</email>
@@ -33,7 +33,7 @@
 
   <p>With <app>Gtranslator</app> you can start with a blank translation memory (TM), and each time you translate a string it will be added as a new entry in the TM database.</p>
   
-  <p>You can also build the TM by importing strings from an already existing PO file (for example one that has been created for the previous version of the program or web application that you are working on). That way, if there are similar strings in the PO file that you are working on, <app>Gtranslator</app> will display them in the TM panel and you can choose to use them as it is, or change/adapt them for the string you are translating.</p>
+  <p>You can also build the TM by importing strings from an already existing PO file (for example one that has been created for the previous version of the program or web application that you are working on). That way, if there are similar strings in the PO file that you are working on, <app>Gtranslator</app> will display them in the TM panel and you can choose to <link xref="gtr-use-delete-entry">use these strings</link> as is, or change/adapt them for the string you are translating.</p>
  
 <figure>
   <title>Gtranslator TM panel</title>
@@ -41,10 +41,12 @@
  <media type="image" mime="image/png" src="figures/gtranslator_tm_strings.png"/>
 </figure>
 
-<p>To create <gui>Translation Memory</gui> from an existing PO file:</p>
+<p>To add strings to the <gui>Translation Memory</gui> from existing PO files:</p>
 
 <list type="numbered">
       <item><p>Press the menu button in the top-right corner of the window and select <gui style="menuitem">Build translation memory</gui>.</p></item>
+      <item><p>Select the folder where the PO files are stored.</p></item>
+      <item><p>If the folder also contains PO files for other languages, select <gui>Use only files with this name</gui> and enter a file name (like <file>xy.po</file>). If you do not do this, then your translation memory will also contain translations for these other languages as it will import all PO files in the folder.</p></item>
       <item><p>Select the folder where the PO files are stored, and press <gui style="button">Add to Database</gui>.</p></item>
       <item><p>Press <gui style="button">Close</gui> to finish.</p></item>
 </list>
