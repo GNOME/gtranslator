@@ -175,7 +175,7 @@ gtr_filter_selection_set_option (GtrFilterSelection *self,
   for (o = priv->options; o != NULL; o = g_slist_next (o))
     {
       GtrFilterOption *opt = (GtrFilterOption *)o->data;
-      if (!g_strcmp0 (opt->desc, name))
+      if (!g_strcmp0 (opt->name, name) || !g_strcmp0 (opt->desc, name))
         {
           gtr_filter_selection_set_option_full (self, opt);
           break;

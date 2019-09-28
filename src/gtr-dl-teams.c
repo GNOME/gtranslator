@@ -25,6 +25,7 @@
 #include "gtr-filter-selection.h"
 #include "gtr-window.h"
 #include "gtr-utils.h"
+#include "gtr-profile-manager.h"
 #include <libsoup/soup.h>
 
 #include <json-glib/json-glib.h>
@@ -107,6 +108,9 @@ gtr_dl_teams_parse_teams_json (GObject *object,
 {
   g_autoptr(JsonParser) parser = json_parser_new ();
   g_autoptr(GInputStream) stream = NULL;
+  GtrProfileManager * pmanager = NULL;
+  const char *def_lang = NULL;
+  GtrProfile *profile = NULL;
   GError *error = NULL;
   JsonNode *node = NULL;
   JsonArray *array = NULL;
@@ -139,12 +143,18 @@ gtr_dl_teams_parse_teams_json (GObject *object,
   node = json_parser_get_root (parser);
   array = json_node_get_array (node);
 
+  pmanager = gtr_profile_manager_get_default ();
+  profile = gtr_profile_manager_get_active_profile (pmanager);
+  def_lang = gtr_profile_get_language_code (profile);
+
   /* Fill teams list store with values from JSON and set store as combo box model */
   json_array_foreach_element (array, gtr_dl_teams_list_add, &options);
   gtr_filter_selection_set_options_full (GTR_FILTER_SELECTION (priv->teams_combobox), options);
+  gtr_filter_selection_set_option (GTR_FILTER_SELECTION (priv->teams_combobox), def_lang);
 
   /* Enable selection */
   gtk_widget_set_sensitive (priv->teams_combobox, TRUE);
+  g_object_unref (pmanager);
 }
 
 static void
