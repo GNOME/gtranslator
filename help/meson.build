@@ -9,7 +9,6 @@ sources = [
   'gtr-join-users.page',
   'gtr-main-window.page',
   'gtr-open-po.page',
-  'gtr-plugins.page',
   'gtr-profiles.page',
   'gtr-quickstart.page',
   'gtr-report-problem.page',
