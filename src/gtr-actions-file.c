@@ -46,7 +46,7 @@
 #define GTR_IS_CLOSING_ALL "gtr-is-closing-all"
 
 static void load_file_list (GtrWindow * window, const GSList * uris);
-
+static GList * get_modified_documents (GtrWindow * window);
 
 /*
  * The main file opening function. Checks that the file isn't already open,
@@ -190,6 +190,33 @@ gtr_open_file_dialog (GtkAction * action, GtrWindow * window)
 {
   GtkWidget *dialog = NULL;
 
+   GList *list;
+  list = get_modified_documents (window);
+  if (list != NULL)
+    {
+      GtkWidget *dialog;
+      gint res;
+
+      dialog = gtk_message_dialog_new(GTK_WINDOW(window),
+            GTK_DIALOG_DESTROY_WITH_PARENT,
+            GTK_MESSAGE_QUESTION,
+            GTK_BUTTONS_YES_NO,
+            "Do you want to save the file?");
+      gtk_window_set_title(GTK_WINDOW(dialog), "Question");
+      res=gtk_dialog_run(GTK_DIALOG(dialog));
+      gtk_widget_destroy(dialog);
+
+      if (res == GTK_RESPONSE_YES)
+      {
+        gtr_save_file_as_dialog ((GtkAction*)action, window);
+        return;
+      }
+      else if (res == GTK_RESPONSE_NO){
+         goto open;
+      }
+    }
+
+  open:
   if (dialog != NULL)
     {
       gtk_window_present (GTK_WINDOW (dialog));
