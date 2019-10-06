@@ -201,7 +201,7 @@ gtr_open_file_dialog (GtkAction * action, GtrWindow * window)
             GTK_DIALOG_DESTROY_WITH_PARENT,
             GTK_MESSAGE_QUESTION,
             GTK_BUTTONS_YES_NO,
-            "Do you want to save the file?");
+            "Do you want to save the changes?");
       gtk_window_set_title(GTK_WINDOW(dialog), "Question");
       res=gtk_dialog_run(GTK_DIALOG(dialog));
       gtk_widget_destroy(dialog);
