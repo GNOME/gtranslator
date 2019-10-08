@@ -194,31 +194,9 @@ gtr_open_file_dialog (GtkAction * action, GtrWindow * window)
   list = get_modified_documents (window);
   if (list != NULL)
     {
-      GtkWidget *dialog;
-      gint res;
-
-      dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-            GTK_DIALOG_DESTROY_WITH_PARENT,
-            GTK_MESSAGE_QUESTION,
-            GTK_BUTTONS_YES_NO,
-            _("Do you want to save the changes?"));
-      gtk_window_set_title (GTK_WINDOW (dialog), _("Warning"));
-      g_list_free (list);
-      res = gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-
-      if (res == GTK_RESPONSE_YES)
-      {
-        gtr_save_file_as_dialog ((GtkAction*) action, window);
-        return;
-      }
+	  gtr_save_current_file_dialog (NULL, window);
     }
 
-  if (dialog != NULL)
-    {
-      gtk_window_present (GTK_WINDOW (dialog));
-      return;
-    }
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
                                  FILESEL_OPEN,
                                  _("Open file for translation"),
