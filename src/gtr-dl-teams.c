@@ -513,7 +513,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
 
   g_object_unref (tmp_file);
 
-//LEO
+  /* Show Save As dialog to asve file in another path than /tmp */
   gtr_save_file_as_dialog (NULL, priv->main_window);
 }
 
