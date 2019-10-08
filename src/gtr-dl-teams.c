@@ -512,6 +512,9 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   gtr_open (dest_file, priv->main_window, &error);
 
   g_object_unref (tmp_file);
+
+//LEO
+  gtr_save_file_as_dialog (NULL, priv->main_window);
 }
 
 static void
