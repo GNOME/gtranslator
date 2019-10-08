@@ -209,8 +209,7 @@ gtr_open_file_dialog (GtkAction * action, GtrWindow * window)
 
       if (res == GTK_RESPONSE_YES)
       {
-        gtr_save_file_as_dialog ((GtkAction*) action, window);
-        return;
+	gtr_save_current_file_dialog (NULL, window);
       }
     }
 
