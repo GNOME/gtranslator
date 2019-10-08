@@ -55,7 +55,17 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "https://gitlab.gnome.org/GNOME/gspell.git"
+                    "url" : "https://gitlab.gnome.org/GNOME/gspell.git",
+                    "tag": "1.8.1",
+                    "commit": "ba03499234037861e01ce1e83075e8a32b9790f3"
+                },
+                {
+                    "type": "patch",
+                    "path": "gspell-no-code-coverage.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "gspell-gettext-fix.patch"
                 }
             ]
         },
@@ -69,28 +79,30 @@
                 }
             ]
         },
-
-        /** this is needed by libgda **/
-        {
-            "name": "intltool",
-            "sources": {
-                "type": "archive",
-                "url": "https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz",
-                "md5": "12e517cac2b57a0121cda351570f1e63"
-            }
-        },
         {
             "name": "libgda",
             "config-opts": [
                 "--enable-json=yes",
-                "--enable-system-sqlite=yes",
-                "--disable-gi-system-install"
+                "--enable-system-sqlite=yes"
             ],
             "sources": [
                 {
                     "type": "archive",
                     "url": "http://ftp.gnome.org/pub/GNOME/sources/libgda/5.2/libgda-5.2.9.tar.xz",
                     "sha256": "59caed8ca72b1ac6437c9844f0677f8a296d52cfd1c0049116026abfb1d87d9b"
+                }
+            ],
+            "modules": [
+                {
+                  "name": "intltool",
+                  "cleanup": [ "*" ],
+                  "sources": [
+                    {
+                      "type": "archive",
+                      "url": "https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz",
+                      "sha256": "67c74d94196b153b774ab9f89b2fa6c6ba79352407037c8c14d5aeb334e959cd"
+                    }
+                  ]
                 }
             ],
             "cleanup": [
