@@ -258,6 +258,29 @@ on_profile_dialog_response_cb (GtrProfileDialog     *profile_dialog,
 }
 
 static void
+update_profile_buttons (GtkTreeSelection *selection, GtrPreferencesDialog *dlg)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GtrPreferencesDialogPrivate *priv = gtr_preferences_dialog_get_instance_private (dlg);
+
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (priv->profile_treeview));
+  g_return_if_fail (model != NULL);
+
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+    {
+      gtk_widget_set_sensitive (priv->edit_button, TRUE);
+      gtk_widget_set_sensitive (priv->delete_button, TRUE);
+    }
+  else
+    {
+      gtk_widget_set_sensitive (priv->edit_button, FALSE);
+      gtk_widget_set_sensitive (priv->delete_button, FALSE);
+    }
+}
+
+
+static void
 add_button_clicked (GtkWidget *button, GtrPreferencesDialog *dlg)
 {
   GtrProfileDialog *profile_dialog;
@@ -423,6 +446,7 @@ active_toggled_cb (GtkCellRendererToggle *cell_renderer,
 
   gtk_tree_model_get (model, &iter, PROFILE_COLUMN, &active_profile, -1);
 
+
   if (active_profile != NULL)
     {
       GtrProfileManager *prof_manager;
@@ -495,6 +519,7 @@ setup_profile_pages (GtrPreferencesDialog *dlg)
   GtkTreeViewColumn *name_column, *toggle_column;
   GtkCellRenderer *text_renderer, *toggle_renderer;
   GtkListStore *model;
+  GtkTreeSelection *selection;
   GtrPreferencesDialogPrivate *priv = gtr_preferences_dialog_get_instance_private (dlg);
 
   model = gtk_list_store_new (PROFILE_N_COLUMNS,
@@ -550,6 +575,11 @@ setup_profile_pages (GtrPreferencesDialog *dlg)
 
   g_signal_connect (priv->edit_button,
                     "clicked", G_CALLBACK (edit_button_clicked), dlg);
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->profile_treeview));
+  g_signal_connect (selection, "changed", G_CALLBACK (update_profile_buttons), dlg);
+
+  update_profile_buttons (selection, dlg);
 }
 
 static void
@@ -681,3 +711,4 @@ gtr_show_preferences_dialog (GtrWindow * window)
 
   gtk_window_present (GTK_WINDOW (dlg));
 }
+
