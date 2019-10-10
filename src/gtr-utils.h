@@ -55,9 +55,7 @@ void gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
      gboolean g_utf8_caselessnmatch (const gchar * s1,
                                      const gchar * s2, gssize n1, gssize n2);
 
-     void gtr_utils_help_display (GtkWindow * parent,
-                                  const gchar * doc_id,
-                                  const gchar * file_name);
+     void gtr_utils_help_display (GtkWindow * parent);
 
      gchar *gtr_utils_get_user_config_dir (void);
 
