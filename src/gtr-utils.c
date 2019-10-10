@@ -454,6 +454,15 @@ finally_2:
  * Shows the help for an specific document in the default help browser.
  */
 void
+gtr_utils_help_display (GtkWindow * window)
+{
+        gtk_show_uri_on_window (GTK_WINDOW (window), "help:gtranslator",
+				gtk_get_current_event_time (), NULL);
+}
+
+
+/*
+void
 gtr_utils_help_display (GtkWindow * parent,
                         const gchar * doc_id, const gchar * file_name)
 {
@@ -465,24 +474,6 @@ gtr_utils_help_display (GtkWindow * parent,
   const gchar *path;
   gchar *uri = NULL;
   gint i;
-
-
-  /* FIXME: How to display help on windows. Gedit opens a browser and displays
-     a url with the contents of the help 
-     if (uri == NULL)
-     {
-     GtkWidget *dialog;
-     dialog = gtk_message_dialog_new (parent,
-     GTK_DIALOG_DESTROY_WITH_PARENT,
-     GTK_MESSAGE_ERROR,
-     GTK_BUTTONS_CLOSE,
-     _("Sorry, Translation Editor for windows is unable to display help yet."));
-     gtk_dialog_run (GTK_DIALOG (dialog));
-     gtk_widget_destroy (dialog);
-
-     return;
-     } End of FIXME: How to display help on windows. */
-
 
   g_return_if_fail (file_name != NULL);
 
@@ -522,8 +513,8 @@ gtr_utils_help_display (GtkWindow * parent,
       return;
     }
 
-  /* Should be updated to use gtk_show_uri instead, see
-   * https://wiki.gnome.org/Initiatives/GnomeGoals/RemoveGnomeOpenGnomeHelp */
+  // Should be updated to use gtk_show_uri instead, see
+  // https://wiki.gnome.org/Initiatives/GnomeGoals/RemoveGnomeOpenGnomeHelp
   command = g_strconcat ("yelp ", uri, NULL);
   g_free (uri);
 
@@ -539,6 +530,7 @@ gtr_utils_help_display (GtkWindow * parent,
     }
   g_free (command);
 }
+*/
 
 gchar *
 gtr_utils_get_current_date (void)

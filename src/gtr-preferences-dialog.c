@@ -423,8 +423,10 @@ active_toggled_cb (GtkCellRendererToggle *cell_renderer,
 
   gtk_tree_model_get (model, &iter, PROFILE_COLUMN, &active_profile, -1);
 
+
   if (active_profile != NULL)
     {
+  gtk_widget_set_sensitive (priv->edit_button, TRUE);
       GtrProfileManager *prof_manager;
 
       prof_manager = gtr_profile_manager_get_default ();
@@ -623,6 +625,8 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   profiles_scrolled_window = GTK_WIDGET (gtk_builder_get_object (builder, "profiles-scrolledwindow"));
   g_object_unref (builder);
 
+  gtk_widget_set_sensitive (priv->edit_button, FALSE);
+
   gtk_box_pack_start (content_area, priv->notebook, FALSE, FALSE, 0);
 
   gtk_container_set_border_width (GTK_CONTAINER (priv->notebook), 5);
@@ -681,3 +685,4 @@ gtr_show_preferences_dialog (GtrWindow * window)
 
   gtk_window_present (GTK_WINDOW (dlg));
 }
+
