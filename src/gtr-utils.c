@@ -448,10 +448,8 @@ finally_2:
 /**
  * gtr_utils_help_display:
  * @parent: a #GtkWindow
- * @doc_id: the name of the type of doc
- * @file_name: the name of the doc
  * 
- * Shows the help for an specific document in the default help browser.
+ * Launches the help viewer on @screen to show gtranslator's help
  */
 void
 gtr_utils_help_display (GtkWindow * window)
@@ -459,78 +457,6 @@ gtr_utils_help_display (GtkWindow * window)
         gtk_show_uri_on_window (GTK_WINDOW (window), "help:gtranslator",
 				gtk_get_current_event_time (), NULL);
 }
-
-
-/*
-void
-gtr_utils_help_display (GtkWindow * parent,
-                        const gchar * doc_id, const gchar * file_name)
-{
-
-  GError *error = NULL;
-  gchar *command;
-  const gchar *lang;
-  const gchar *const *langs;
-  const gchar *path;
-  gchar *uri = NULL;
-  gint i;
-
-  g_return_if_fail (file_name != NULL);
-
-  langs = g_get_language_names ();
-  for (i = 0; langs[i]; i++)
-    {
-      lang = langs[i];
-      if (strchr (lang, '.'))
-        continue;
-
-      path = gtr_dirs_get_gtr_help_dir ();
-      uri = g_build_filename (path, lang,
-                              doc_id, file_name, NULL);
-
-      if (g_file_test (uri, G_FILE_TEST_EXISTS))
-        {
-          break;
-        }
-      g_free (uri);
-      uri = NULL;
-    }
-
-
-  if (uri == NULL)
-    {
-      GtkWidget *dialog;
-      dialog = gtk_message_dialog_new (parent,
-                                       GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_ERROR,
-                                       GTK_BUTTONS_CLOSE,
-                                       _("Unable to display help. "
-                                         "Please make sure the Translation Editor "
-                                         "documentation package is installed."));
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-
-      return;
-    }
-
-  // Should be updated to use gtk_show_uri instead, see
-  // https://wiki.gnome.org/Initiatives/GnomeGoals/RemoveGnomeOpenGnomeHelp
-  command = g_strconcat ("yelp ", uri, NULL);
-  g_free (uri);
-
-  g_spawn_command_line_async (command, &error);
-
-
-  if (error != NULL)
-    {
-      g_warning ("Error executing help application: %s", error->message);
-      g_error_free (error);
-
-      return;
-    }
-  g_free (command);
-}
-*/
 
 gchar *
 gtr_utils_get_current_date (void)
