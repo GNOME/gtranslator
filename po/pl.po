@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2019-06-15 10:55+0000\n"
-"PO-Revision-Date: 2019-06-16 13:50+0200\n"
+"POT-Creation-Date: 2019-10-08 06:35+0000\n"
+"PO-Revision-Date: 2019-10-10 13:22+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -22,16 +22,16 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:6
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
 msgstr "gtranslator"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:8
 #: data/org.gnome.Gtranslator.desktop.in.in:5
 msgid "Translate and localize applications and libraries"
 msgstr "Tłumaczenie i lokalizowanie programów oraz bibliotek"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:9
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:10
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -47,7 +47,7 @@ msgstr ""
 "komunikatów w pliku PO), łatwa nawigacja oraz modyfikowanie komunikatów "
 "tłumaczeń i komentarzy."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:18
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:19
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
 "alternate language, insert tags, integration with subversion and a source "
@@ -57,7 +57,7 @@ msgstr ""
 "takimi jak alternatywny język, wstawianie znaczników, integracja z systemem "
 "Subversion i przeglądarka kodu źródłowego."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:61
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:83
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -265,19 +265,27 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "Witryna edytora tłumaczeń"
 
-#: src/gtr-actions-file.c:200
+#: src/gtr-actions-file.c:204
+msgid "Do you want to save the changes?"
+msgstr "Zapisać zmiany?"
+
+#: src/gtr-actions-file.c:205
+msgid "Warning"
+msgstr "Ostrzeżenie"
+
+#: src/gtr-actions-file.c:224
 msgid "Open file for translation"
 msgstr "Otwiera plik do tłumaczenia"
 
-#: src/gtr-actions-file.c:272 src/gtr-actions-file.c:389
+#: src/gtr-actions-file.c:296 src/gtr-actions-file.c:413
 msgid "File saved."
 msgstr "Zapisano plik."
 
-#: src/gtr-actions-file.c:320
+#: src/gtr-actions-file.c:344
 msgid "Save file as…"
 msgstr "Zapis pliku jako…"
 
-#: src/gtr-actions-file.c:781
+#: src/gtr-actions-file.c:805
 msgid "Files saved."
 msgstr "Zapisano pliki."
 
@@ -441,11 +449,11 @@ msgstr "Kontekst:"
 msgid "Format:"
 msgstr "Format:"
 
-#: src/gtr-dl-teams.c:604
+#: src/gtr-dl-teams.c:614
 msgid "Translation Team"
 msgstr "Zespół tłumaczenia"
 
-#: src/gtr-dl-teams.c:611
+#: src/gtr-dl-teams.c:621
 msgid "Module"
 msgstr "Moduł"
 
@@ -478,15 +486,15 @@ msgstr "Nowe okno"
 msgid "Preferences"
 msgstr "Preferencje"
 
-#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:160
+#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
 msgid "Keyboard Shortcuts"
 msgstr "Skróty klawiszowe"
 
-#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
 msgid "About"
 msgstr "O programie"
 
-#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:276 src/gtr-projects.ui:188
+#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:276 src/gtr-projects.ui:202
 msgid "Quit"
 msgstr "Zakończ"
 
@@ -612,11 +620,11 @@ msgstr "_Formy liczby mnogiej"
 msgid "_Edit options manually"
 msgstr "_Ręczna modyfikacja opcji"
 
-#: src/gtr-message-table.c:219
+#: src/gtr-message-table.c:234
 msgid "Original Message"
 msgstr "Oryginalny komunikat"
 
-#: src/gtr-message-table.c:238
+#: src/gtr-message-table.c:253
 msgid "Translated Message"
 msgstr "Przetłumaczony komunikat"
 
@@ -649,7 +657,7 @@ msgstr "Znajdź"
 msgid "Find and replace"
 msgstr "Znajdź i zmień"
 
-#: src/gtr-notebook.ui:164
+#: src/gtr-notebook.ui:164 src/gtr-projects.ui:147
 msgid "Build translation memory"
 msgstr "Buduje pamięć tłumaczeń"
 
@@ -965,36 +973,36 @@ msgstr "Zamyka dokument"
 msgid "There is an error in the message:"
 msgstr "Wystąpił błąd w komunikacie:"
 
-#: src/gtr-tab.c:459 src/gtr-tab.c:575
+#: src/gtr-tab.c:460 src/gtr-tab.c:586
 msgid "fuzzy"
 msgstr "niepewne"
 
-#: src/gtr-tab.c:605
+#: src/gtr-tab.c:616
 #, c-format
 msgid "Plural %d"
 msgstr "%d. liczba mnoga"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1158
+#: src/gtr-tab.c:1169
 msgid "Path:"
 msgstr "Ścieżka:"
 
-#: src/gtr-tab.c:1808
+#: src/gtr-tab.c:1819
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Przetłumaczone: %0.2f%%"
 
-#: src/gtr-tab.c:1809
+#: src/gtr-tab.c:1820
 #, c-format
 msgid "Translated: %d"
 msgstr "Przetłumaczone: %d"
 
-#: src/gtr-tab.c:1810
+#: src/gtr-tab.c:1821
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Nieprzetłumaczone: %d"
 
-#: src/gtr-tab.c:1811
+#: src/gtr-tab.c:1822
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Niepewne: %d"
