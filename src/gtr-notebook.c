@@ -289,3 +289,4 @@ gtr_notebook_reset_sort (GtrNotebook *notebook)
   GtrNotebookPrivate *priv = gtr_notebook_get_instance_private (notebook);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->sort_id), TRUE);
 }
+

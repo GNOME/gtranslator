@@ -385,6 +385,16 @@ open_activated (GSimpleAction *action,
 }
 
 static void
+dl_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_window_show_dlteams (priv->active_window);
+}
+
+static void
 undo_activated (GSimpleAction *action,
                 GVariant      *parameter,
                 gpointer       user_data)
@@ -504,7 +514,7 @@ static GActionEntry app_entries[] = {
   { "save", save_activated, NULL, NULL, NULL },
   { "saveas", saveas_activated, NULL, NULL, NULL },
   { "open", open_activated, NULL, NULL, NULL },
-
+  { "dl", dl_activated, NULL, NULL, NULL },
   { "undo", undo_activated, NULL, NULL, NULL },
   { "redo", redo_activated, NULL, NULL, NULL },
 
@@ -576,6 +586,7 @@ gtr_application_startup (GApplication *application)
 
   // keybindings
   set_kb (application, "app.open", "<Ctrl>o");
+  set_kb (application, "app.dl", "<Ctrl>d");
   set_kb (application, "app.save", "<Ctrl>s");
   set_kb (application, "app.saveas", "<Ctrl><Shift>s");
   set_kb (application, "app.preferences", "<Ctrl>p");
