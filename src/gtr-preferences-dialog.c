@@ -587,6 +587,9 @@ dialog_response_handler (GtkDialog * dlg, gint res_id)
 {
   switch (res_id)
     {
+    case GTK_RESPONSE_HELP:
+      gtr_show_help (GTK_WINDOW (dlg));
+      break;
     default:
       gtk_widget_destroy (GTK_WIDGET (dlg));
     }

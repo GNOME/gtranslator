@@ -37,7 +37,7 @@
 void
 gtr_show_help (GtrWindow *window)
 {
-  gtr_utils_help_display (GTK_WINDOW (window), "gtranslator", "");
+  gtr_utils_help_display (GTK_WINDOW (window));
 }
 
 /* Creates and shows the about box for gtranslator */
