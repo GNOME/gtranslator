@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -130,7 +130,7 @@ update_undo_state (GtrTab     *tab,
 
 /*
  * gtr_window_update_statusbar_message_count:
- * 
+ *
  * This func is used to show the global status of the message list
  * in the statusbar widget.
  */
@@ -880,10 +880,10 @@ gtr_window_class_init (GtrWindowClass *klass)
  * gtr_window_create_tab:
  * @window: a #GtrWindow
  * @po: a #GtrPo
- * 
+ *
  * Adds a new #GtrTab to the #GtrNotebook and returns the
  * #GtrTab.
- * 
+ *
  * Returns: (transfer none): a new #GtrTab object
  */
 GtrTab *
@@ -910,7 +910,7 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
 /**
  * gtr_window_get_active_tab:
  * @window: a #GtrWindow
- * 
+ *
  * Gets the active #GtrTab of the @window.
  *
  * Returns: (transfer none): the active #GtrTab of the @window.
@@ -988,7 +988,7 @@ gtr_window_get_header_from_active_tab (GtrWindow * window)
 /**
  * gtr_window_get_notebook:
  * @window: a #GtrWindow
- * 
+ *
  * Gets the main #GtrNotebook of the @window.
  *
  * Returns: (transfer none): the #GtrNotebook of the @window
@@ -1294,4 +1294,9 @@ gtr_window_tm_keybind (GtrWindow *window,
     }
 
   g_list_free_full (tm_list, free_match);
+}
+
+void
+gtr_window_hide_sort_menu(GtrWindow *window) {
+  gtr_notebook_hide_sort_menu ();
 }

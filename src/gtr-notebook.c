@@ -1,16 +1,16 @@
 /*
  * Copyright (C) 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
- * 
+ *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
  *     the Free Software Foundation, either version 3 of the License, or
  *     (at your option) any later version.
- * 
+ *
  *     This program is distributed in the hope that it will be useful,
  *     but WITHOUT ANY WARRANTY; without even the implied warranty of
  *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *     GNU General Public License for more details.
- * 
+ *
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -33,6 +33,7 @@
 typedef struct
 {
   GtkWidget *titlebar;
+  GtkWidget *sortby_menu;
   GtkWidget *save;
   GtkWidget *sort_id;
 
@@ -140,6 +141,7 @@ gtr_notebook_class_init (GtrNotebookClass * klass)
                                                "/org/gnome/translator/gtr-notebook.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, titlebar);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, sortby_menu);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, sort_id);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, undo);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, redo);
@@ -150,9 +152,9 @@ gtr_notebook_class_init (GtrNotebookClass * klass)
 
 /**
  * gtr_notebook_new:
- * 
+ *
  * Creates a new #GtrNotebook.
- * 
+ *
  * Returns: a new #GtrNotebook object
  */
 GtkWidget *
@@ -165,7 +167,7 @@ gtr_notebook_new ()
  * gtr_notebook_add_page:
  * @notebook: a #GtrNotebook
  * @tab: a #GtrTab
- * 
+ *
  * Adds a new #GtrTab to @notebook.
  */
 void
@@ -233,9 +235,9 @@ gtr_notebook_remove_all_pages (GtrNotebook *notebook)
 /**
  * gtr_notebook_get_page:
  * @notebook: a #GtrNotebook
- * 
+ *
  * Gets the selected page in the #GtrNotebook.
- * 
+ *
  * Returns: (transfer none): the selected page in the @notebook
  */
 GtrTab *
@@ -288,4 +290,12 @@ gtr_notebook_reset_sort (GtrNotebook *notebook)
 {
   GtrNotebookPrivate *priv = gtr_notebook_get_instance_private (notebook);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->sort_id), TRUE);
+}
+
+void
+gtr_notebook_hide_sort_menu(GtrNotebook *notebook)
+{
+  if (sort_id != NULL){
+  gtk_widget_hide(priv->sortby_menu);
+  }
 }
