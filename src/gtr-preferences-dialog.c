@@ -25,6 +25,7 @@
 #include <config.h>
 #endif
 
+#include "gtr-actions-app.h"
 #include "gtr-application.h"
 #include "gtr-dirs.h"
 #include "gtr-preferences-dialog.h"

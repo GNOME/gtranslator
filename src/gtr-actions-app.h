@@ -20,7 +20,7 @@
 
 #include "gtr-window.h"
 
-void gtr_show_help (GtrWindow *window);
+void gtr_show_help (GtkWindow *window);
 
 void gtr_about_dialog (GtrWindow *window);
 

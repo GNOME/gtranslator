@@ -35,7 +35,7 @@
 
 /* Show the user's guide for gtranslator */
 void
-gtr_show_help (GtrWindow *window)
+gtr_show_help (GtkWindow *window)
 {
   gtr_utils_help_display (GTK_WINDOW (window));
 }
