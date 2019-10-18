@@ -71,9 +71,10 @@ setup_notes_edition (GtrContextPanel *panel)
 {
   GtrContextPanelPrivate *priv;
   GtkWidget *dialog;
+  GtkWidget *scrolled_window;
   GtkBox *dialog_area;
   GtkWidget *text_view;
-  GtkTextBuffer *text_buffer;
+  GtkTextBuffer *text_buffer = gtk_text_buffer_new (NULL);;
   gint result;
 
   priv = gtr_context_panel_get_instance_private (panel);
@@ -88,11 +89,30 @@ setup_notes_edition (GtrContextPanel *panel)
                                         NULL);
 
   dialog_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog)));
-  text_view = gtk_text_view_new ();
-  gtk_box_pack_start (dialog_area, text_view, TRUE, TRUE, 6);
+  text_view = gtk_text_view_new_with_buffer (text_buffer);
+
+  gtk_text_view_set_left_margin (GTK_TEXT_VIEW (text_view),10);
+  gtk_text_view_set_right_margin (GTK_TEXT_VIEW (text_view),10);
+  gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_CHAR);
+  gtk_text_view_set_pixels_inside_wrap (GTK_TEXT_VIEW (text_view),0);
+
+
+  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+                                  GTK_POLICY_AUTOMATIC,
+                                  GTK_POLICY_AUTOMATIC);
+
+  gtk_container_add (GTK_CONTAINER (scrolled_window),
+                                         text_view);
+  gtk_container_set_border_width (GTK_CONTAINER (scrolled_window), 5);
+
+  gtk_box_pack_start (dialog_area, scrolled_window, TRUE, TRUE, 6);
 
   text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
   gtk_text_buffer_set_text (text_buffer, gtr_msg_get_comment (priv->current_msg), -1);
+
+  gtk_widget_set_size_request(dialog, 300, 200);
+  gtk_window_set_resizable (GTK_WINDOW(dialog), FALSE);
 
   gtk_widget_show_all (dialog);
   result = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -129,7 +149,7 @@ follow_if_link (GtrContextPanel *panel, GtkWidget *text_view, GtkTextIter *iter)
     }
 
   if (tags)
-    g_slist_free (tags);
+     g_slist_free (tags);
 }
 
 static gboolean
