@@ -42,7 +42,6 @@ struct _GtrProjects
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrProjects, gtr_projects, GTK_TYPE_BIN)
 
-
 static void project_add_cb (GtkButton *btn, GtrProjects *self);
 static void switch_to_dl (GtkButton *btn, GtrProjects *self);
 
@@ -82,7 +81,6 @@ gtr_projects_init (GtrProjects *self)
 {
   GtrProjectsPrivate *priv = gtr_projects_get_instance_private (self);
   gtk_widget_init_template (GTK_WIDGET (self));
-
   priv->main_window = NULL;
 
   g_signal_connect (priv->open_button,
@@ -90,7 +88,7 @@ gtr_projects_init (GtrProjects *self)
                     G_CALLBACK (project_add_cb),
                     self);
 
-  /* switch teams and modules on click */
+  /*switch teams and modules on click*/
   g_signal_connect (priv->dl_button,
                     "clicked",
                     G_CALLBACK (switch_to_dl),
@@ -129,6 +127,15 @@ switch_to_dl (GtkButton   *btn,
 {
   GtrProjectsPrivate *priv = gtr_projects_get_instance_private (self);
   GtrWindow *window = GTR_WINDOW (priv->main_window);
+  GtkSourceBuffer *active_document;
+
+  active_document =
+    GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
+                       (GTK_TEXT_VIEW (self)));
+
+  if (gtk_source_buffer_can_undo(active_document))
+    {
+     gtr_save_current_file_dialog (NULL, window);
+    }
   gtr_window_show_dlteams (window);
 }
-

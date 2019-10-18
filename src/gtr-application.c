@@ -381,7 +381,27 @@ open_activated (GSimpleAction *action,
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_open_file_dialog (NULL, priv->active_window);
+  gtr_open_file_dialog (NULL,priv->active_window);
+}
+
+static void
+dl_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  GtkSourceBuffer *active_document;
+
+  active_document =
+    GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
+                       (GTK_TEXT_VIEW (priv->active_window)));
+
+  if (gtk_source_buffer_can_undo(active_document))
+    {
+      gtr_save_current_file_dialog (NULL, priv->active_window);
+    }
+  gtr_window_show_dlteams (priv->active_window);
 }
 
 static void
@@ -503,7 +523,9 @@ sort_by_activated (GSimpleAction *action,
 static GActionEntry app_entries[] = {
   { "save", save_activated, NULL, NULL, NULL },
   { "saveas", saveas_activated, NULL, NULL, NULL },
+
   { "open", open_activated, NULL, NULL, NULL },
+  { "dl", dl_activated, NULL, NULL, NULL },
 
   { "undo", undo_activated, NULL, NULL, NULL },
   { "redo", redo_activated, NULL, NULL, NULL },
@@ -576,6 +598,7 @@ gtr_application_startup (GApplication *application)
 
   // keybindings
   set_kb (application, "app.open", "<Ctrl>o");
+  set_kb (application, "app.dl", "<Ctrl>d");
   set_kb (application, "app.save", "<Ctrl>s");
   set_kb (application, "app.saveas", "<Ctrl><Shift>s");
   set_kb (application, "app.preferences", "<Ctrl>p");
