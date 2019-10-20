@@ -133,9 +133,7 @@ switch_to_dl (GtkButton   *btn,
     GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
                        (GTK_TEXT_VIEW (self)));
 
-  if (gtk_source_buffer_can_undo(active_document))
-    {
-     gtr_save_current_file_dialog (NULL, window);
-    }
+  if (gtk_source_buffer_can_undo (active_document))
+    gtr_save_current_file_dialog (NULL, window);
   gtr_window_show_dlteams (window);
 }
