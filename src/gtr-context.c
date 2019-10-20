@@ -98,7 +98,6 @@ setup_notes_edition (GtrContextPanel *panel)
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_CHAR);
   gtk_text_view_set_pixels_inside_wrap (GTK_TEXT_VIEW (text_view),0);
 
-
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                   GTK_POLICY_AUTOMATIC,
