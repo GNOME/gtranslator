@@ -114,7 +114,7 @@ setup_notes_edition (GtrContextPanel *panel)
 
   gtk_widget_set_size_request (dialog, 400, 300);
   gtk_window_set_resizable (GTK_WINDOW(dialog), FALSE);
-  gtk_window_set_deletable(GTK_WINDOW(dialog), FALSE);
+  gtk_window_set_deletable (GTK_WINDOW (dialog), FALSE);
 
   gtk_widget_show_all (dialog);
   result = gtk_dialog_run (GTK_DIALOG (dialog));
