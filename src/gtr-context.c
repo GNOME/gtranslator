@@ -112,7 +112,7 @@ setup_notes_edition (GtrContextPanel *panel)
   text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
   gtk_text_buffer_set_text (text_buffer, gtr_msg_get_comment (priv->current_msg), -1);
 
-  gtk_widget_set_size_request(dialog, 400, 300);
+  gtk_widget_set_size_request (dialog, 400, 300);
   gtk_window_set_resizable (GTK_WINDOW(dialog), FALSE);
   gtk_window_set_deletable(GTK_WINDOW(dialog), FALSE);
 
