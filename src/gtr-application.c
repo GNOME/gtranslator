@@ -381,7 +381,7 @@ open_activated (GSimpleAction *action,
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_open_file_dialog (NULL,priv->active_window);
+  gtr_open_file_dialog (NULL, priv->active_window);
 }
 
 static void
