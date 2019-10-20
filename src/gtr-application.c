@@ -397,10 +397,8 @@ dl_activated (GSimpleAction *action,
     GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
                        (GTK_TEXT_VIEW (priv->active_window)));
 
-  if (gtk_source_buffer_can_undo(active_document))
-    {
-      gtr_save_current_file_dialog (NULL, priv->active_window);
-    }
+  if (gtk_source_buffer_can_undo (active_document))
+    gtr_save_current_file_dialog (NULL, priv->active_window);
   gtr_window_show_dlteams (priv->active_window);
 }
 
