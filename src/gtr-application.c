@@ -321,7 +321,7 @@ help_activated (GSimpleAction *action,
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_show_help (priv->active_window);
+  gtr_show_help (GTK_WINDOW (priv->active_window));
 }
 
 static void
