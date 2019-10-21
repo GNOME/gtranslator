@@ -1297,6 +1297,8 @@ gtr_window_tm_keybind (GtrWindow *window,
 }
 
 void
-gtr_window_hide_sort_menu(GtrWindow *window) {
-  gtr_notebook_hide_sort_menu ();
+gtr_window_hide_sort_menu (GtrWindow * window)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
+  gtr_notebook_hide_sort_menu (GTR_NOTEBOOK (priv->notebook));
 }

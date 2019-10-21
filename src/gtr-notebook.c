@@ -293,9 +293,13 @@ gtr_notebook_reset_sort (GtrNotebook *notebook)
 }
 
 void
-gtr_notebook_hide_sort_menu(GtrNotebook *notebook)
+gtr_notebook_hide_sort_menu (GtrNotebook *notebook)
 {
-  if (sort_id != NULL){
-  gtk_widget_hide(priv->sortby_menu);
+  GtrNotebookPrivate *priv = gtr_notebook_get_instance_private (notebook);
+  GtrNotebook *hide_menu;
+  hide_menu = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (priv->sort_id));
+
+  if (hide_menu != NULL) {
+  gtk_popover_popdown (GTK_POPOVER (priv->sortby_menu));
   }
 }

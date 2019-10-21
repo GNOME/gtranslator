@@ -498,7 +498,7 @@ sort_by_activated (GSimpleAction *action,
   tab = gtr_window_get_active_tab (w);
   g_return_if_fail (tab != NULL);
   gtr_tab_sort_by (tab, (GtrMessageTableSortBy)sortby);
-  gtr_window_hide_sort_menu(sort_id!=NULL);
+  gtr_window_hide_sort_menu (w);
 }
 
 static GActionEntry app_entries[] = {
