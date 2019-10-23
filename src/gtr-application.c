@@ -386,19 +386,33 @@ open_activated (GSimpleAction *action,
 
 static void
 dl_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
+              GVariant      *parameter,
+              gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  GtkSourceBuffer *active_document;
 
-  active_document =
-    GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
-                       (GTK_TEXT_VIEW (priv->active_window)));
+  GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
+  GtrPoState state = gtr_po_get_state (gtr_tab_get_po (active_tab));
 
-  if (gtk_source_buffer_can_undo (active_document))
-    gtr_save_current_file_dialog (NULL, priv->active_window);
+  if (state == GTR_PO_STATE_MODIFIED)
+    {
+      GtkWidget *dialog;
+      gint res;
+
+      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->active_window),
+            GTK_DIALOG_DESTROY_WITH_PARENT,
+            GTK_MESSAGE_QUESTION,
+            GTK_BUTTONS_YES_NO,
+            _("Do you want to save the changes?"));
+      gtk_window_set_title (GTK_WINDOW (dialog), _("Warning"));
+      res = gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+
+      if (res == GTK_RESPONSE_YES)
+        gtr_save_current_file_dialog (NULL, priv->active_window);
+    }
+
   gtr_window_show_dlteams (priv->active_window);
 }
 
