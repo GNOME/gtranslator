@@ -386,7 +386,6 @@ open_activated (GSimpleAction *action,
 
 static void
 dl_activated (GSimpleAction *action,
-<<<<<<< HEAD
               GVariant      *parameter,
               gpointer       user_data)
 {
@@ -414,21 +413,6 @@ dl_activated (GSimpleAction *action,
         gtr_save_current_file_dialog (NULL, priv->active_window);
     }
 
-=======
-                GVariant      *parameter,
-                gpointer       user_data)
-{
-  GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  GtkSourceBuffer *active_document;
-
-  active_document =
-    GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
-                       (GTK_TEXT_VIEW (priv->active_window)));
-
-  if (gtk_source_buffer_can_undo (active_document))
-    gtr_save_current_file_dialog (NULL, priv->active_window);
->>>>>>> fb4f184c266a1076ae7ebc153de3b1d23e3c7dcd
   gtr_window_show_dlteams (priv->active_window);
 }
 
