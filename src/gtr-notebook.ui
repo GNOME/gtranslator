@@ -307,19 +307,64 @@
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Translation Editor</property>
     <property name="show_close_button">True</property>
+
     <child>
-      <object class="GtkButton" id="open">
-        <property name="label" translatable="yes">Open…</property>
+       <object class="GtkButtonBox">
         <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="tooltip_text" translatable="yes">Open a new file (&lt;Ctrl&gt;o)</property>
-        <property name="action_name">app.open</property>
+        <property name="can_focus">False</property>
+        <property name="layout_style">start</property>
+        <child>
+          <object class="GtkButton" id="open_button">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Open a new file (&lt;Ctrl&gt;o)</property>
+            <property name="action_name">app.open</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">document-open-symbolic</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+            <property name="non_homogeneous">True</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="dl_button">
+            <property name="visible">True</property>
+            <property name="tooltip_text" translatable="yes">Open from Damned Lies (&lt;Ctrl&gt;d)</property>
+            <property name="action_name">app.dl</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="icon_name">folder-download-symbolic</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">F</property>
+            <property name="position">1</property>
+            <property name="non_homogeneous">True</property>
+          </packing>
+        </child>
+        <style>
+         <class name="linked"/>
+         <class name="horizontal"/>
+        </style>
       </object>
       <packing>
         <property name="position">1</property>
       </packing>
     </child>
+
     <child>
       <object class="GtkSeparator">
         <property name="visible">True</property>
@@ -590,6 +635,7 @@
     </style>
   </object>
 </interface>
+
 
 
 

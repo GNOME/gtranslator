@@ -385,6 +385,38 @@ open_activated (GSimpleAction *action,
 }
 
 static void
+dl_activated (GSimpleAction *action,
+              GVariant      *parameter,
+              gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+
+  GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
+  GtrPoState state = gtr_po_get_state (gtr_tab_get_po (active_tab));
+
+  if (state == GTR_PO_STATE_MODIFIED)
+    {
+      GtkWidget *dialog;
+      gint res;
+
+      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->active_window),
+            GTK_DIALOG_DESTROY_WITH_PARENT,
+            GTK_MESSAGE_QUESTION,
+            GTK_BUTTONS_YES_NO,
+            _("Do you want to save the changes?"));
+      gtk_window_set_title (GTK_WINDOW (dialog), _("Warning"));
+      res = gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+
+      if (res == GTK_RESPONSE_YES)
+        gtr_save_current_file_dialog (NULL, priv->active_window);
+    }
+
+  gtr_window_show_dlteams (priv->active_window);
+}
+
+static void
 undo_activated (GSimpleAction *action,
                 GVariant      *parameter,
                 gpointer       user_data)
@@ -503,7 +535,9 @@ sort_by_activated (GSimpleAction *action,
 static GActionEntry app_entries[] = {
   { "save", save_activated, NULL, NULL, NULL },
   { "saveas", saveas_activated, NULL, NULL, NULL },
+
   { "open", open_activated, NULL, NULL, NULL },
+  { "dl", dl_activated, NULL, NULL, NULL },
 
   { "undo", undo_activated, NULL, NULL, NULL },
   { "redo", redo_activated, NULL, NULL, NULL },
@@ -576,6 +610,7 @@ gtr_application_startup (GApplication *application)
 
   // keybindings
   set_kb (application, "app.open", "<Ctrl>o");
+  set_kb (application, "app.dl", "<Ctrl>d");
   set_kb (application, "app.save", "<Ctrl>s");
   set_kb (application, "app.saveas", "<Ctrl><Shift>s");
   set_kb (application, "app.preferences", "<Ctrl>p");
