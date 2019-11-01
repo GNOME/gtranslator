@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2019-10-20 06:40+0000\n"
-"PO-Revision-Date: 2019-10-24 10:50-0300\n"
+"POT-Creation-Date: 2019-10-28 17:01+0000\n"
+"PO-Revision-Date: 2019-11-01 04:54-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -68,7 +68,7 @@ msgstr ""
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:601
 #: src/gtr-notebook.ui:308 src/gtr-window.c:318 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Editor de Tradução"
@@ -275,12 +275,11 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "Site do Editor de Tradução"
 
-#: src/gtr-actions-file.c:204
-#| msgid "Docum_ents with unsaved changes:"
+#: src/gtr-actions-file.c:204 src/gtr-application.c:407
 msgid "Do you want to save the changes?"
 msgstr "Você deseja salvar as alterações?"
 
-#: src/gtr-actions-file.c:205
+#: src/gtr-actions-file.c:205 src/gtr-application.c:408
 msgid "Warning"
 msgstr "Atenção"
 
@@ -429,7 +428,6 @@ msgstr ""
 "Se você não salvar, todas as suas alterações serão permanentemente perdidas."
 
 #: src/gtr-context.c:82
-#| msgid "Notes:"
 msgid "Notes"
 msgstr "Notas"
 
@@ -478,11 +476,11 @@ msgstr "Carregar arquivo"
 msgid "Load from Damned Lies"
 msgstr "Carregar do Damned Lies"
 
-#: src/gtr-dl-teams.ui:105 src/gtr-notebook.ui:312 src/gtr-projects.ui:58
+#: src/gtr-dl-teams.ui:105 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Abrir…"
 
-#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:525 src/gtr-projects.ui:91
+#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:570 src/gtr-projects.ui:91
 msgid "Main Menu"
 msgstr "Menu principal"
 
@@ -678,43 +676,48 @@ msgstr "Editar cabeçalho"
 msgid "Help"
 msgstr "Ajuda"
 
-#: src/gtr-notebook.ui:316
+#: src/gtr-notebook.ui:321
 msgid "Open a new file (<Ctrl>o)"
 msgstr "Abrir um novo arquivo (<Ctrl>o)"
 
-#: src/gtr-notebook.ui:342
+#: src/gtr-notebook.ui:341
+#| msgid "Open a new file (<Ctrl>o)"
+msgid "Open from Damned Lies (<Ctrl>d)"
+msgstr "Abrir do Damned Lies (<Ctrl>d)"
+
+#: src/gtr-notebook.ui:387
 msgid "Undo (<Ctrl>z)"
 msgstr "Desfazer (<Ctrl>z)"
 
-#: src/gtr-notebook.ui:364
+#: src/gtr-notebook.ui:409
 msgid "Redo (<Ctrl><Shift>z)"
 msgstr "Refazer (<Ctrl><Shift>z)"
 
-#: src/gtr-notebook.ui:409
+#: src/gtr-notebook.ui:454
 msgid "Previous message without translation (<Alt><Page Up>)"
 msgstr "Mensagem anterior sem tradução (<Alt><Page Up>)"
 
-#: src/gtr-notebook.ui:431
+#: src/gtr-notebook.ui:476
 msgid "Next message without translation (<Alt><Page Down>)"
 msgstr "Próxima mensagem sem tradução (<Alt><Page Down>)"
 
-#: src/gtr-notebook.ui:471
+#: src/gtr-notebook.ui:516
 msgid "Toggle fuzzy state (<Ctrl>+u)"
 msgstr "Alterna estado aproximado (<Ctrl>+u)"
 
-#: src/gtr-notebook.ui:501
+#: src/gtr-notebook.ui:546
 msgid "Order by menu"
 msgstr "Ordenar por menu"
 
-#: src/gtr-notebook.ui:541
+#: src/gtr-notebook.ui:586
 msgid "Save"
 msgstr "Salvar"
 
-#: src/gtr-notebook.ui:545
+#: src/gtr-notebook.ui:590
 msgid "Save the current file (<Ctrl>s)"
 msgstr "Salva o arquivo atual (<Ctrl>s)"
 
-#: src/gtr-notebook.ui:560
+#: src/gtr-notebook.ui:605
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Salvar como (<Ctrl><Shift>s)"
 
