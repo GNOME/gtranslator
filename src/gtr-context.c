@@ -87,7 +87,7 @@ setup_notes_edition (GtrContextPanel *panel)
                                         _("_Save"),
                                         GTK_RESPONSE_ACCEPT,
                                         _("_Cancel"),
-                                        GTK_RESPONSE_REJECT,
+                                        GTK_RESPONSE_CANCEL,
                                         NULL);
 
   dialog_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog)));
