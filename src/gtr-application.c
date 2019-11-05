@@ -183,12 +183,6 @@ gtr_application_init (GtrApplication *application)
   if (!g_file_test (profiles_file, G_FILE_TEST_EXISTS))
     priv->first_run = TRUE;
   g_free (profiles_file);
-
-  /* Custom css */
-  priv->provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (priv->provider, "/org/gnome/translator/styles.css");
-
-  load_accels ();
 }
 
 static void
@@ -600,6 +594,13 @@ gtr_application_startup (GApplication *application)
 
   g_set_application_name (_("Translation Editor"));
   gtk_window_set_default_icon_name (PACKAGE_APPID);
+
+
+  /* Custom css */
+  priv->provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (priv->provider, "/org/gnome/translator/styles.css");
+
+  load_accels ();
 
   /* We set the default icon dir */
   gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
