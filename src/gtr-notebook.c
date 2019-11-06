@@ -35,6 +35,7 @@ typedef struct
   GtkWidget *titlebar;
   GtkWidget *save;
   GtkWidget *sort_id;
+  GtkWidget *sortby_menu;
 
   GtkWidget *undo;
   GtkWidget *redo;
@@ -141,6 +142,7 @@ gtr_notebook_class_init (GtrNotebookClass * klass)
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, titlebar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, sort_id);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, sortby_menu);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, undo);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, redo);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, save);
@@ -288,4 +290,13 @@ gtr_notebook_reset_sort (GtrNotebook *notebook)
 {
   GtrNotebookPrivate *priv = gtr_notebook_get_instance_private (notebook);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->sort_id), TRUE);
+}
+
+void
+gtr_notebook_hide_sort_menu (GtrNotebook *notebook)
+{
+  GtrNotebookPrivate *priv = gtr_notebook_get_instance_private (notebook);
+
+  if (priv->sort_id)
+    gtk_menu_button_set_use_popover (GTK_MENU_BUTTON (priv->sortby_menu), FALSE);
 }

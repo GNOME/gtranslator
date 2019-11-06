@@ -81,5 +81,7 @@ void gtr_notebook_update_undo_buttons (GtrNotebook *notebook, GtrView *view);
 
 void gtr_notebook_reset_sort (GtrNotebook *notebook);
 
+void gtr_notebook_hide_sort_menu (GtrNotebook *notebook);
+
 G_END_DECLS
 #endif /* __NOTEBOOK_H__ */
