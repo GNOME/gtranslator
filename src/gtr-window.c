@@ -802,14 +802,17 @@ gtr_window_init (GtrWindow *window)
 }
 
 static void
-save_panes_state (GtrWindow * window)
+save_window_state (GtrWindow * window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
-  g_settings_set (priv->state_settings, GTR_SETTINGS_WINDOW_SIZE, "(ii)",
-                  priv->width, priv->height);
-  g_settings_set_int (priv->state_settings, GTR_SETTINGS_WINDOW_STATE,
-                      priv->window_state);
+  if ((priv->window_state &
+	 (GDK_WINDOW_STATE_MAXIMIZED | GDK_WINDOW_STATE_FULLSCREEN)) == 0)
+    {
+      gtk_window_get_size (GTK_WINDOW (window), &priv->width, &priv->height);
+      g_settings_set (priv->state_settings, GTR_SETTINGS_WINDOW_SIZE,
+				"(ii)", priv->width, priv->height);
+    }
 }
 
 static void
@@ -820,8 +823,7 @@ gtr_window_dispose (GObject * object)
 
   if (!priv->dispose_has_run)
     {
-      save_panes_state (window);
-
+      save_window_state (window);
       priv->dispose_has_run = TRUE;
     }
 
