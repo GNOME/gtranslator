@@ -32,6 +32,9 @@
 
   <title>Use or delete translations from TM</title>
 
+<section id="use-translation-from-memory">
+<title>Use translations</title>
+
   <p>When <app>Gtranslator</app> finds string(s) in the TM that partially or completely match the one that you have selected in the <gui>Message Table</gui>, it displays them in the <gui>Translation Memory</gui> panel.</p>
 
 <figure>
@@ -51,12 +54,15 @@
 <p>Once you have inserted the translation from the TM, you can further edit it in the <gui>Translated Text</gui> field to match your original string.</p>
 
 <p>If there are no matches in the TM for the string in the selected <gui>Original Message</gui>, you have to translate it manually in the <gui>Translated Text</gui> field. The newly translated strings are stored in the TM database and can be used for future translations, as well as repetitions of the string in the current PO file.</p>
+</section>
 
+<section id="delete-translation-from-memory">
+<title>Delete a translation</title>
 <p>To delete a specific match from the <gui>Translation Memory</gui> panel, <em style="strong">right-click it</em> and select <gui>Remove</gui> from the contextual menu.</p>	
 
 <note style="advanced">
 <p>To remove the entire TM, delete the file <file>~/.config/gtranslator/translation-memory.db</file> while <app>Gtranslator</app> is not running.</p>
 </note>
+</section>
 
 </page>
-
