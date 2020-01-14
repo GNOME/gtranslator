@@ -23,6 +23,9 @@ sources = [
 ]
 
 media = [
+  'figures/color-8ca7ff.png',
+  'figures/color-8cff8e.png',
+  'figures/color-ff8c8c.png',
   'figures/gtranslator32.png',
   'figures/gtranslator_interface2.png',
   'figures/gtranslator_tm_strings.png',

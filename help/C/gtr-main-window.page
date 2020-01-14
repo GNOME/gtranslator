@@ -10,15 +10,16 @@
     <link type="seealso" xref="gtr-concepts"/>
     
  <revision pkgversion="2.91.6" date="2013-06-18" status="review"/>
+ <revision pkgversion="3.34.0" date="2020-01-14" status="review"/>
    <credit type="author copyright">
       <name>Radina Matic</name>
       <email its:translate="no">radina.matic@gmail.com</email>
       <years>2013</years>
     </credit>
     <credit type="copyright editor">
-      <name></name>
-      <email its:translate="no"></email>
-      <years></years>
+      <name>Andre Klapper</name>
+      <email its:translate="no">ak-47@gmx.net</email>
+      <years>2020</years>
     </credit>
 
     <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
@@ -27,7 +28,7 @@
 
   <title>Understand Gtranslator main window</title>
 
-  <p>The main Gtranslator window contains the <gui>Menubar</gui>, <gui>Toolbar</gui> and the <gui>Workspace</gui>. <gui>Workspace</gui> allows you to visualize and edit the strings contained in the PO file. It is divided into three areas:</p>
+  <p>Once you have opened a file to translate, the main Gtranslator window will contain the <gui>Header bar</gui> with some buttons and the main menu, the <gui>Workspace</gui> area, and the <gui>Status bar</gui> at the bottom with statistics about the current file. The <gui>Workspace</gui> is divided into three areas:</p>
   
   <figure>
   <title>Gtranslator window</title>
@@ -38,21 +39,17 @@
 <list>
 
 <item>
-<p><gui>Message Table</gui> (<em>see the red area on the image above</em>) contains columns with the list of all the strings (messages) in the source language on the left (<gui>Original Message</gui>), and their corresponding translations on the right (<gui>Translated Message</gui>). Depending on the size of the <app>Gtranslator</app> window and the number of the words, you may only view the beginning of the string.</p>
-
+<p><media type="image" mime="image/png" its:translate="no" src="./figures/color-ff8c8c.png" width="12" /> The <gui>Message Table</gui> contains two columns: The list of all the strings (messages) in the source language on the left (<gui>Original Message</gui>), and their corresponding translations on the right (<gui>Translated Message</gui>). Depending on the size of the <app>Gtranslator</app> window and the number of the words, you may only see the beginning of the string.</p>
 </item> 
     
 <item>
-<p>Below the <gui>Message Table</gui> there are two fields which display the full content of the selected strings (<em>blue area on the image above</em>). The field <gui>Original Message</gui> is not editable but allows you to see the the entire content of the string, and the field <gui>Translated Text</gui> is where you type the translation.</p>
-
+<p><media type="image" mime="image/png" its:translate="no" src="./figures/color-8ca7ff.png" width="12" /> Below the <gui>Message Table</gui> there are two fields which display the full selected string. You enter your translation in the <gui>Translated Text</gui> field. You cannot edit the <gui>Original Message</gui>.</p>
 </item>  
 
 <item>
-<p>Sidebar on the right (<em>green area on the image above</em>)contains the <gui>Translation Memory</gui> and the <gui>Message Details</gui> panels with additional information for the translation process.</p>
-
+<p><media type="image" mime="image/png" its:translate="no" src="./figures/color-8cff8e.png" width="12" /> The sidebar on the right shows similar translations from the <link xref="gtr-create-tm">Translation Memory</link> and their <link xref="gtr-shortcut-keys">keyboard shortcuts</link> to potentially insert one of the translation proposals into the <gui>Translated Text</gui> field. Below, you can see and add notes about the selected string.</p>
 </item> 
 
 </list>
 
 </page>
-
