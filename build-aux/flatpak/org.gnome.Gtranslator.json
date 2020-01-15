@@ -3,7 +3,6 @@
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
-    "separate-locales": false,
     "command" : "gtranslator",
     "tags" : [
         "devel"
@@ -12,7 +11,7 @@
     "finish-args" : [
         "--share=ipc",
         "--share=network",
-        "--socket=x11",
+        "--socket=fallback-x11",
         "--socket=wayland",
         "--filesystem=home",
         "--filesystem=xdg-run/dconf",
@@ -20,13 +19,6 @@
         "--talk-name=ca.desrt.dconf",
         "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
     ],
-    "build-options" : {
-        "cflags" : "-O2 -g",
-        "env" : {
-            "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR": "/app/share/gir-1.0",
-            "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_TYPELIBDIR": "/app/lib/girepository-1.0"
-        }
-    },
     "cleanup" : [
         "/include",
         "/lib/pkgconfig",
@@ -47,9 +39,6 @@
             ],
             "cleanup" : [
                 "/bin",
-                "/include",
-                "/lib/pkgconfig",
-                "*.la",
                 "/share"
             ],
             "sources" : [
@@ -75,7 +64,7 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "https://gitlab.gnome.org/danigm/gtksourceview.git"
+                    "url" : "https://gitlab.gnome.org/GNOME/gtksourceview.git"
                 }
             ]
         },
@@ -85,6 +74,12 @@
                 "--enable-json=yes",
                 "--enable-system-sqlite=yes"
             ],
+            "build-options" : {
+                "env" : {
+                    "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR": "/app/share/gir-1.0",
+                    "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_TYPELIBDIR": "/app/lib/girepository-1.0"
+                }
+            },
             "sources": [
                 {
                     "type": "archive",
@@ -106,16 +101,7 @@
                 }
             ],
             "cleanup": [
-                "/include",
-                "/lib/*.a",
-                "/lib/*.la",
-                "/lib/pkgconfig",
-                "/man",
-                "/share/aclocal",
-                "/share/doc",
-                "/share/gtk-doc",
-                "/share/man",
-                "/share/pkgconfig"
+                "/share/doc"
             ]
         },
         {
