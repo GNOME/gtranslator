@@ -54,6 +54,44 @@ enum
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrCodeView, gtr_code_view, G_TYPE_OBJECT)
 
+static char *
+find_source_file (GtrCodeView *codeview,
+                  const char  *path)
+{
+  GtrTab *tab;
+  GtrPo *po;
+  GtrCodeViewPrivate *priv = gtr_code_view_get_instance_private (codeview);
+
+  g_autofree char *fullpath = NULL;
+  g_autofree char *dirname = NULL;
+  g_autoptr(GFile) location = NULL;
+  g_autoptr(GFile) podir = NULL;
+  g_autoptr(GFile) parent = NULL;
+
+  if (g_file_test (path, G_FILE_TEST_EXISTS))
+    return g_strdup (path);
+
+  tab = gtr_window_get_active_tab (priv->window);
+
+  if (!tab)
+    return NULL;
+  po = gtr_tab_get_po (tab);
+
+  // .po files should live in PROJECT/po/LANG.po and the path inside the po
+  // usually is relative to the PROJECT root, so we get the file path and
+  // go one directory up to prepend to the file path
+  location = gtr_po_get_location (po);
+  podir = g_file_get_parent (location);
+  parent = g_file_get_parent (podir);
+  dirname = g_file_get_path (parent);
+  fullpath = g_build_filename (dirname, path, NULL);
+
+  if (g_file_test (fullpath, G_FILE_TEST_EXISTS))
+    return g_strdup (fullpath);
+
+  return NULL;
+}
+
 static void
 insert_link (GtkTextBuffer *buffer,
              GtkTextIter   *iter,
@@ -63,8 +101,19 @@ insert_link (GtkTextBuffer *buffer,
              const gchar   *msgid)
 {
   GtkTextTag *tag;
-  gchar *text;
   GtrCodeViewPrivate *priv = gtr_code_view_get_instance_private (codeview);
+  g_autofree char *text = NULL;
+  g_autofree char *fullpath = NULL;
+
+  fullpath = find_source_file (codeview, path);
+
+  text = g_strdup_printf ("%s:%d\n", path, GPOINTER_TO_INT (line));
+
+  if (!fullpath)
+    {
+      gtk_text_buffer_insert (buffer, iter, text, -1);
+      return;
+    }
 
   tag = gtk_text_buffer_create_tag (buffer, NULL,
                                     "foreground", "blue",
@@ -75,11 +124,9 @@ insert_link (GtkTextBuffer *buffer,
   g_object_set_data_full (G_OBJECT (tag), "path", g_strdup (path), g_free);
   g_object_set_data_full (G_OBJECT (tag), "msgid", g_strdup (msgid), g_free);
 
-  text = g_strdup_printf ("%s:%d\n", path, GPOINTER_TO_INT (line));
-  gtk_text_buffer_insert_with_tags (buffer, iter, text, -1, tag, NULL);
-  g_free (text);
-
   priv->tags = g_slist_prepend (priv->tags, tag);
+
+  gtk_text_buffer_insert_with_tags (buffer, iter, text, -1, tag, NULL);
 }
 
 static void
@@ -149,56 +196,30 @@ static void
 follow_if_link (GtrCodeView *codeview, GtkWidget *text_view, GtkTextIter *iter)
 {
   GSList *tags = NULL, *tagp = NULL;
-  GtrTab *tab;
-  GtrPo *po;
-  gchar *fullpath;
-  gchar *dirname;
-  GFile *location, *parent;
-  GtrCodeViewPrivate *priv = gtr_code_view_get_instance_private (codeview);
-
-  tab = gtr_window_get_active_tab (priv->window);
-
-  if (!tab)
-    return;
-  po = gtr_tab_get_po (tab);
-
-  location = gtr_po_get_location (po);
-  parent = g_file_get_parent (location);
-  g_object_unref (location);
-
-  dirname = g_file_get_path (parent);
-  g_object_unref (parent);
 
   tags = gtk_text_iter_get_tags (iter);
   for (tagp = tags; tagp != NULL; tagp = tagp->next)
     {
       GtkTextTag *tag = tagp->data;
-      gchar *path = g_object_get_data (G_OBJECT (tag), "path");
-      gint line = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (tag), "line"));
+      char *path = g_object_get_data (G_OBJECT (tag), "path");
+      int line = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (tag), "line"));
+      g_autofree char *fullpath = NULL;
 
-      fullpath = g_build_filename (dirname, path, NULL);
+      fullpath = find_source_file (codeview, path);
 
-      if (path_is_fake (fullpath))
+      if (fullpath && path_is_fake (fullpath))
         {
-          gchar *msgid = g_object_get_data (G_OBJECT (tag), "msgid");
-
-          path = g_strdup (fullpath);
-          g_free (fullpath);
-          fullpath = real_path (path);
-          g_free (path);
-
+          char *msgid = g_object_get_data (G_OBJECT (tag), "msgid");
+          g_autofree char *realpath = NULL;
+          realpath = real_path (fullpath);
           line = get_line_for_text (fullpath, msgid);
         }
 
       show_source (codeview, fullpath, line);
-
-      g_free (fullpath);
     }
 
   if (tags)
     g_slist_free (tags);
-
-  g_free (dirname);
 }
 
 static gboolean
