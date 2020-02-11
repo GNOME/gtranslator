@@ -1,10 +1,10 @@
 # gtranslator ja.po.
-# Copyright (C) 2000-2019 gtranslator's COPYRIGHT HOLDER
-# Takeshi AIHANA <takeshi.aihana@gmail.com>, 2000-2004,2006,2009.
+# Copyright (C) 2000-2020 gtranslator's COPYRIGHT HOLDER
+# Takeshi AIHANA <takeshi.aihana@gmail.com>, 2000-2004, 2006, 2009.
 # Nishio Futoshi <fut_nis@d3.dion.ne.jp>, 2009.
 # IWAI, Masaharu <iwaim.sub@gmail.com>, 2010.
 # Hiroyuki Sekihara <hiroyuki.sekihara@gmail.com>, 2010.
-# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2010, 2011.
+# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2010-2011.
 # OKANO Takayoshi <kano@na.rim.or.jp>, 2011.
 # Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2011-2013.
 # Yoji TOYODA <bsyamato@sea.plala.or.jp>, 2013.
@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
 "POT-Creation-Date: 2020-01-18 11:49+0000\n"
-"PO-Revision-Date: 2020-01-09 00:00+0900\n"
+"PO-Revision-Date: 2020-02-12 00:00+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -53,7 +53,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:83
 msgid "Daniel García Moreno"
-msgstr ""
+msgstr "Daniel García Moreno"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:596
 #: src/gtr-notebook.ui:308 src/gtr-window.c:318 src/gtr-window.ui:25
@@ -675,10 +675,8 @@ msgid "Toggle fuzzy state (<Ctrl>+u)"
 msgstr "fuzzy の ON/OFF (<Ctrl>+U)"
 
 #: src/gtr-notebook.ui:537
-#, fuzzy
-#| msgid "Order messages by"
 msgid "Sort messages by"
-msgstr "メッセージの並び順"
+msgstr "メッセージの並べ替え"
 
 #: src/gtr-notebook.ui:547
 msgid "Order by menu"
@@ -755,12 +753,12 @@ msgstr "ファイル %s は読み込み専用なので、上書きできませ�
 #: src/gtr-po.c:800
 #, c-format
 msgid "There is an error in the PO file: %s"
-msgstr "PO ファイル中にエラー: %s"
+msgstr "PO ファイル内にエラーがあります: %s"
 
 #: src/gtr-po.c:812
 #, c-format
 msgid "There was an error writing the PO file: %s"
-msgstr "PO ファイルの保存中にエラー: %s"
+msgstr "PO ファイルの保存中にエラーが発生しました: %s"
 
 #: src/gtr-preferences-dialog.c:394
 msgid "Impossible to remove the active profile"
@@ -1309,579 +1307,41 @@ msgstr ""
 "できるかを表す数値です (ここで指定した数だけ長さが異なっていても同一のメッ"
 "セージであると判定します)。"
 
-#~ msgid "Edit notes"
-#~ msgstr "メモの編集"
-
-#~ msgid ""
-#~ "Unable to display help. Please make sure the Translation Editor "
-#~ "documentation package is installed."
-#~ msgstr ""
-#~ "ヘルプを表示できません。翻訳エディターのドキュメントが入ったパッケージがイ"
-#~ "ンストールされているか確認してください。"
-
-#~ msgid "@icon@"
-#~ msgstr "@icon@"
-
-#~ msgid "Found and replaced %d occurrence"
-#~ msgid_plural "Found and replaced %d occurrences"
-#~ msgstr[0] "%d個見つかり置換しました"
-
-#~ msgid "Gtranslator PO File Editor"
-#~ msgstr "Gtranslator 翻訳エディター"
-
-#~ msgid "Use custom font"
-#~ msgstr "フォントを指定する"
-
-#~ msgid "If true, use a custom font for edit fields."
-#~ msgstr "true の場合、編集フィールドにカスタムフォントを使用します。"
-
-#~ msgid "Custom font to use for edit fields."
-#~ msgstr "編集フィールドに使用するカスタムフォントです。"
-
-#~ msgid "Others"
-#~ msgstr "その他"
-
-#~ msgid "gtranslator highlight"
-#~ msgstr "Gtranslator の強調表示"
-
-#~ msgid "Tag"
-#~ msgstr "タグ"
-
 #~ msgid "Special variable"
 #~ msgstr "特別な値"
-
-#~ msgid "Message not found"
-#~ msgstr "メッセージがありません"
-
-#~ msgid "Open file for alternate language"
-#~ msgstr "代替言語のファイルを開く"
-
-#~ msgid "File closed"
-#~ msgstr "ファイルを閉じる"
-
-#~ msgctxt "alternate lang"
-#~ msgid "Co_py"
-#~ msgstr "コピー(_P)"
-
-#~ msgid "There isn't any file loaded"
-#~ msgstr "ロードすべきファイルがありません。"
 
 #~ msgid "_Alternate Language"
 #~ msgstr "代替言語(_A)"
 
-#~ msgid "Show the Alternate Language panel"
-#~ msgstr "代替言語パネルの表示"
-
-#~ msgid "Alternate Language"
-#~ msgstr "代替の言語"
-
-#~ msgid "Load an alternate language."
-#~ msgstr "代替の言語を読み込みます。"
-
-#~ msgid "Character Map"
-#~ msgstr "文字マップ"
-
 #~ msgid "Insert special characters just by clicking on them."
 #~ msgstr "特殊な文字をクリックしながら挿入していきます。"
-
-#~ msgid "Source View Settings"
-#~ msgstr "ソースビューアーの設定"
-
-#~ msgid "Use external editor"
-#~ msgstr "外部エディターを使用する"
-
-#~ msgid "Program command:"
-#~ msgstr "プログラムコマンド:"
-
-#~ msgid "Line command:"
-#~ msgstr "行番号を指定する引数:"
-
-#~ msgid "Please install \"%s\" to be able to show the file"
-#~ msgstr "ファイルを表示するために\"%s\"をインストールしてください"
-
-#~ msgid "Source Code View"
-#~ msgstr "ソースコードビューアー"
-
-#~ msgid "Show the message in the source code."
-#~ msgstr "メッセージを含むソースコードを表示します。"
-
-#~ msgid "Use the System Editor"
-#~ msgstr "システムで設定したエディターを使用する"
-
-#~ msgid "Whether use the system editor to show the source code"
-#~ msgstr "システムで設定したエディターを使用してソースコードを表示します。"
-
-#~ msgid "The Editor to Launch"
-#~ msgstr "起動するエディター"
-
-#~ msgid "The command to launch the editor you want to use"
-#~ msgstr "使用するエディターを起動するコマンドです。"
-
-#~ msgid "Arguments for the Command"
-#~ msgstr "コマンドの引数"
-
-#~ msgid "Arguments to pass to the program command line to select the line"
-#~ msgstr "行番号を指定するために、コマンドラインプログラムに渡す引数です。"
-
-#~ msgid "Dictionary"
-#~ msgstr "辞書"
-
-#~ msgid "No dictionary source available with name '%s'"
-#~ msgstr "名前'%s'で利用可能な辞書ソースがありません。"
-
-#~ msgid "Unable to find dictionary source"
-#~ msgstr "辞書ソースが見つかりません"
-
-#~ msgid "No context available for source '%s'"
-#~ msgstr "ソース'%s'で利用可能なコンテキストはありません。"
-
-#~ msgid "Unable to create a context"
-#~ msgstr "コンテキストを生成できません。"
-
-#~ msgid "Dictionary source '%s' selected"
-#~ msgstr "辞書ソース'%s'が選択されました"
-
-#~ msgid "Strategy '%s' selected"
-#~ msgstr "方針'%s'が選択されました"
-
-#~ msgid "Database '%s' selected"
-#~ msgstr "データベース'%s'が選択されました"
-
-#~ msgid "Word '%s' selected"
-#~ msgstr "単語'%s'が選択されました"
-
-#~ msgid "Double-click on the word to look up"
-#~ msgstr "検索単語をダブルクリック"
 
 #~ msgid "Double-click on the matching strategy to use"
 #~ msgstr "使用する方針に一致するものをダブルクリック"
 
-#~ msgid "Double-click on the source to use"
-#~ msgstr "使用するソースをダブルクリック"
-
-#~ msgid "Double-click on the database to use"
-#~ msgstr "使用するデータベースをダブルクリック"
-
 #~ msgid "Look _up:"
 #~ msgstr "検索(_U):"
-
-#~ msgid "Similar words"
-#~ msgstr "似た単語"
-
-#~ msgid "Available dictionaries"
-#~ msgstr "利用可能な辞書"
 
 #~ msgid "Available strategies"
 #~ msgstr "利用可能な方針"
 
-#~ msgid "Dictionary sources"
-#~ msgstr "辞書ソース"
-
-#~ msgid "Look up words in a dictionary."
-#~ msgstr "辞書を使って単語の意味を調べます。"
-
-#~ msgid "Database"
-#~ msgstr "データベース"
-
-#~ msgid "Word database"
-#~ msgstr "単語データベース"
-
-#~ msgid "Source Name"
-#~ msgstr "ソース名"
-
-#~ msgid "Strategy"
-#~ msgstr "戦略"
-
-#~ msgid "Panel Position"
-#~ msgstr "パネルの位置"
-
-#~ msgid "_Fullscreen"
-#~ msgstr "フルスクリーン(_F)"
-
-#~ msgid "Place window on fullscreen state"
-#~ msgstr "フルスクリーン状態でウィンドウを配置"
-
-#~ msgid "Fullscreen"
-#~ msgstr "フルスクリーン"
-
-#~ msgid "Place window in the fullscreen state."
-#~ msgstr "ウィンドウをフルスクリーン表示します。"
-
-#~ msgid "_Next Param"
-#~ msgstr "次のパラメーター(_N)"
-
-#~ msgid "Insert the next param of the message"
-#~ msgstr "メッセージの次のパラメーターを挿入"
-
-#~ msgid "_Insert Params"
-#~ msgstr "パラメーターの挿入(_I)"
-
-#~ msgid "_Next Tag"
-#~ msgstr "次のタグ(_N)"
-
-#~ msgid "Insert the next tag of the message"
-#~ msgstr "メッセージの次のタグを挿入"
-
-#~ msgid "_Insert Tags"
-#~ msgstr "タグの挿入(_I)"
-
-#~ msgid "Insert Params or Tags"
-#~ msgstr "引数またはタグの挿入"
-
 #~ msgid "Parameters and tags detection featuring easy insertion."
 #~ msgstr "引数とタグを検出して簡単に挿入できるようにします。"
-
-#~ msgid "Open Tran Settings"
-#~ msgstr "Open Tran の設定"
-
-#~ msgid "Language code for the Open-Tran query:"
-#~ msgstr "Open-Tran への問い合わせの際の言語コード:"
-
-#~ msgid "Language code of the translated results:"
-#~ msgstr "翻訳結果の言語コード:"
-
-#~ msgid "Use a local \"mirror\" copy of the Open-Tran server"
-#~ msgstr "Open-Tran サーバーのローカルにある「ミラー」コピーを使用"
-
-#~ msgid "Mirror server URL:"
-#~ msgstr "ミラーサーバーのURL:"
-
-#~ msgid ""
-#~ "<i>The URL should be of the form:\n"
-#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-#~ "The two \"%s\" markers and the final slash must not be omitted.</i>"
-#~ msgstr ""
-#~ "<i>URL は次の形式である必要があります:\n"
-#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-#~ "二つの \"%s\" と最後のスラッシュは省略できません。</i>"
-
-#~ msgid "Mirror Server"
-#~ msgstr "ミラーサーバー"
-
-#~ msgid "ERROR: Cannot access %s\n"
-#~ msgstr "エラー: %s にアクセスできません\n"
-
-#~ msgid "Error in server response, GET failed\n"
-#~ msgstr "サーバーの応答でエラーがありました。GET に失敗\n"
-
-#~ msgid "Cannot parse server response, %s\n"
-#~ msgstr "サーバーの応答を解析できません。%s\n"
-
-#~ msgid "Cannot parse server response, not an array? %s\n"
-#~ msgstr "サーバーの応答を解析できません。配列ではない？ %s\n"
-
-#~ msgid "WRONG! Can't get result element %d\n"
-#~ msgstr "間違い! 結果の要素を取得できません %d\n"
-
-#~ msgid "WRONG! Can't parse result element %d as object\n"
-#~ msgstr "間違い! 結果の要素 %d をオブジェクトとして解析できません\n"
-
-#~ msgid "WRONG! Can't read projects for result element %d\n"
-#~ msgstr "間違い! 結果の要素 %d のプロジェクトを読み込めません\n"
-
-#~ msgid "%s[%s] Count:%d"
-#~ msgstr "%s[%s] 個数:%d"
-
-#~ msgid "WRONG! Malformed project: %d\n"
-#~ msgstr "間違い! 不正な形式のプロジェクトです: %d\n"
-
-#~ msgid "You have to provide a phrase to search"
-#~ msgstr "検索語句を提供する必要があります"
-
-#~ msgid ""
-#~ "You have to provide a search language code in the plugin configuration"
-#~ msgstr "プラグインの設定で、検索する言語コードを指定する必要があります"
-
-#~ msgid ""
-#~ "You have to provide a language code for your language in the plugin "
-#~ "configuration"
-#~ msgstr ""
-#~ "プラグインの設定で、あなたが使用する言語の言語コードを指定する必要がありま"
-#~ "す"
-
-#~ msgid ""
-#~ "Either use the main open-tran.eu server, or enter a server URL in the "
-#~ "plugin configuration,"
-#~ msgstr ""
-#~ "メインの open-tran.eu サーバーを使用するか、プラグインの設定でサーバーの "
-#~ "URL を入力してください。"
-
-#~ msgid "Type"
-#~ msgstr "形式"
-
-#~ msgid "Open-Tran.eu"
-#~ msgstr "Open-Tran.eu"
 
 #~ msgid "Look for:"
 #~ msgstr "検索:"
 
-#~ msgid "Open Tran"
-#~ msgstr "Open-Tran"
-
-#~ msgid "Look for phrases in Open tran memory translation database."
-#~ msgstr "Open-Tran という翻訳データベースで単語を調べます。"
-
-#~ msgid "Search Code"
-#~ msgstr "検索コード"
-
-#~ msgid "The language code to search for"
-#~ msgstr "検索時の言語コード"
-
 #~ msgid "Own Code"
 #~ msgstr "表示コード"
 
-#~ msgid "The language code in which you want the results"
-#~ msgstr "検索結果を表示する際の言語コード"
-
-#~ msgid "Use Mirror Server"
-#~ msgstr "ミラーサーバーの使用"
-
-#~ msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
-#~ msgstr "メイン Open-Tran サーバーのローカルコピーを使用します"
-
-#~ msgid "Mirror Server URL"
-#~ msgstr "ミラーサーバーの URL"
-
-#~ msgid "URL of an Open-Tran mirror server"
-#~ msgstr "Open-Tran ミラーサーバーの URL"
-
-#~ msgid "Strings added to database"
-#~ msgstr "文字列をデータベースに追加しました"
-
-#~ msgid "Please specify a valid path to build the translation memory"
-#~ msgstr "翻訳メモリーを構築するための有効なパスを指定してください。"
-
-#~ msgid "Get translation suggestions from a data base."
-#~ msgstr "データベースから翻訳候補を取得します。"
-
 #~ msgid "Insert Option nº %d"
-#~ msgstr "オプションNo.%dの挿入"
-
-#~ msgid "_Build Translation Memory"
-#~ msgstr "翻訳メモリーの構築(_B)"
-
-#~ msgid "_Translation Memory"
-#~ msgstr "翻訳メモリー(_T)"
-
-#~ msgid "Current Developers"
-#~ msgstr "現在の開発者"
-
-#~ msgid "D_one"
-#~ msgstr "完了(_O)"
-
-#~ msgid "Status"
-#~ msgstr "状態"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Use _custom font"
-#~ msgstr "フォントを指定する(_C):"
-
-#~ msgid "Editor _font:"
-#~ msgstr "エディターのフォント(_F):"
-
-#~ msgid "Plugins"
-#~ msgstr "プラグイン"
-
-#~ msgid "Include fu_zzy strings"
-#~ msgstr "fuzzy な文字列を含める(_Z)"
-
-#~ msgid "Message Table"
-#~ msgstr "メッセージテーブル"
-
-#~ msgid "Original Message:"
-#~ msgstr "原文のメッセージ:"
-
-#~ msgid "Translation Fields"
-#~ msgstr "翻訳領域"
-
-#~ msgid "gtkspell error: %s\n"
-#~ msgstr "gtkspell のエラー: %s\n"
-
-#~ msgid ""
-#~ "GtkSpell was unable to initialize.\n"
-#~ " %s"
-#~ msgstr ""
-#~ "GtkSpell を初期化できませんでした。\n"
-#~ " %s"
-
-#~ msgid "_File"
-#~ msgstr "ファイル(_F)"
-
-#~ msgid "_Edit"
-#~ msgstr "編集(_E)"
-
-#~ msgid "_View"
-#~ msgstr "表示(_V)"
-
-#~ msgid "_Search"
-#~ msgstr "検索(_S)"
+#~ msgstr "オプション No.%d の挿入"
 
 #~ msgid "_Go"
 #~ msgstr "ジャンプ(_G)"
 
-#~ msgid "_Tools"
-#~ msgstr "ツール(_T)"
-
-#~ msgid "_Documents"
-#~ msgstr "ドキュメント(_D)"
-
-#~ msgid "_Recent Files"
-#~ msgstr "最近開いたファイル(_R)"
-
-#~ msgid "T_oolbar"
-#~ msgstr "ツールバー(_O)"
-
-#~ msgid "_Header..."
-#~ msgstr "ヘッダー(_H)..."
-
-#~ msgid "Save the current file with another name"
-#~ msgstr "このファイルに別の名前を付けて保存します"
-
-#~ msgid "Close the current file"
-#~ msgstr "このファイルを閉じます"
-
-#~ msgid "Undo last operation"
-#~ msgstr "最後に実施した操作を行う前に戻します"
-
-#~ msgid "Redo last undone operation"
-#~ msgstr "最後に実施した操作をやり直します"
-
-#~ msgid "Cut the selected text"
-#~ msgstr "選択した文字列を切り取ります"
-
-#~ msgid "Copy the selected text"
-#~ msgstr "選択した文字列をコピーします"
-
-#~ msgid "Paste the contents of the clipboard"
-#~ msgstr "クリップボードの内容を貼り付けます"
-
-#~ msgid "Clear the selected translation"
-#~ msgstr "選択したメッセージの訳文をクリアします"
-
 #~ msgid "Copy _Message to Translation"
-#~ msgstr "原文を翻訳文に複写する(_M)"
+#~ msgstr "原文を翻訳文にコピーする(_M)"
 
 #~ msgid "Toggle fuzzy status of a message"
 #~ msgstr "メッセージの fuzzy 状態を切り替えます"
-
-#~ msgid "_Message Details"
-#~ msgstr "メッセージの詳細(_M)"
-
-#~ msgid "Show the Context panel"
-#~ msgstr "このメッセージのコンテキストを表示します"
-
-#~ msgid "_Previous Message"
-#~ msgstr "前のメッセージ(_P)"
-
-#~ msgid "Move back one message"
-#~ msgstr "前のメッセージにジャンプします"
-
-#~ msgid "_Next Message"
-#~ msgstr "次のメッセージ(_N)"
-
-#~ msgid "Move forward one message"
-#~ msgstr "次のメッセージにジャンプします"
-
-#~ msgid "_Go to Message..."
-#~ msgstr "メッセージを指定する(_G)..."
-
-#~ msgid "Jumps to a specific message"
-#~ msgstr "指定した番号のメッセージにジャンプします"
-
-#~ msgid "_First Message"
-#~ msgstr "最初のメッセージ(_F)"
-
-#~ msgid "Go to the first message"
-#~ msgstr "最初のメッセージにジャンプします"
-
-#~ msgid "_Last Message"
-#~ msgstr "最後のメッセージ(_L)"
-
-#~ msgid "Go to the last message"
-#~ msgstr "最後のメッセージにジャンプします"
-
-#~ msgid "Next Fuz_zy"
-#~ msgstr "次の fuzzy(_Z)"
-
-#~ msgid "Previous Fuzz_y"
-#~ msgstr "前の fuzzy(_Y)"
-
-#~ msgid "Next _Untranslated"
-#~ msgstr "次の未訳(_U)"
-
-#~ msgid "Previ_ous Untranslated"
-#~ msgstr "前の未訳(_O)"
-
-#~ msgid "Next Fu_zzy or Untranslated"
-#~ msgstr "次の fuzzy または未訳(_Z)"
-
-#~ msgid "Go to the next fuzzy or untranslated message"
-#~ msgstr "次の fuzzy か未訳メッセージにジャンプします"
-
-#~ msgid "Pre_vious Fuzzy or Untranslated"
-#~ msgstr "前の fuzzy または未訳(_V)"
-
-#~ msgid "Go to the previous fuzzy or untranslated message"
-#~ msgstr "前の fuzzy か未訳メッセージにジャンプします"
-
-#~ msgid "Search for text"
-#~ msgstr "文字列を検索します"
-
-#~ msgid "Search for and replace text"
-#~ msgstr "文字列を検索して置換します"
-
-#~ msgid "Save all open files"
-#~ msgstr "すべてのファイルを保存します"
-
-#~ msgid "_Close All"
-#~ msgstr "すべて閉じる(_C)"
-
-#~ msgid "Close all open files"
-#~ msgstr "すべてのファイルを閉じます"
-
-#~ msgid "_Previous Document"
-#~ msgstr "前のドキュメント(_P)"
-
-#~ msgid "Activate previous document"
-#~ msgstr "アクティブな前のドキュメント"
-
-#~ msgid "_Next Document"
-#~ msgstr "次のドキュメント(_N)"
-
-#~ msgid "Activate next document"
-#~ msgstr "アクティブな次のドキュメント"
-
-#~ msgid "Activate '%s'"
-#~ msgstr "'%s' を有効にする"
-
-#~ msgid "%s - gtranslator"
-#~ msgstr "%s - Gtranslator"
-
-#~ msgid "gtranslator"
-#~ msgstr "Gtranslator"
-
-#~ msgid "Toolbar Editor"
-#~ msgstr "ツールバーエディター"
-
-#~ msgid "Show “_%s”"
-#~ msgstr "“_%s”を表示する"
-
-#~ msgid "_Move on Toolbar"
-#~ msgstr "ツールバーに移動(_M)"
-
-#~ msgid "Move the selected item on the toolbar"
-#~ msgstr "ツールバーの選択された項目に移動"
-
-#~ msgid "_Remove from Toolbar"
-#~ msgstr "ツールバーから削除(_R)"
-
-#~ msgid "Remove the selected item from the toolbar"
-#~ msgstr "ツールバーから選択した項目を削除"
-
-#~ msgid "Remove the selected toolbar"
-#~ msgstr "選択したツールバーを削除"
-
-#~ msgid "Separator"
-#~ msgstr "区切り"
