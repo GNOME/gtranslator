@@ -1,14 +1,14 @@
 # Dutch translation of granslator
 # Vincent van Adrighem <adrighem@gnome.org>, 2004.
 # Tino Meinen <a.t.meinen@chello.nl>, 2005.
-# Nathan Follens <nthn@unseen.is>, 2019.
+# Nathan Follens <nthn@unseen.is>, 2019-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator cvs\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2019-03-11 13:17+0000\n"
-"PO-Revision-Date: 2019-03-14 15:48+0100\n"
+"POT-Creation-Date: 2019-10-21 09:09+0000\n"
+"PO-Revision-Date: 2020-02-26 14:38+0100\n"
 "Last-Translator: Nathan Follens <nthn@unseen.is>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "Language: nl\n"
@@ -16,10 +16,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:6
-#| msgid "gtranslator"
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
@@ -54,23 +53,18 @@ msgstr ""
 "zoals verschillende talen, invoegen van tags, integratie met subversion en "
 "een broncodeviewer."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:61
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:82
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
-#: src/gtr-notebook.ui:294 src/gtr-window.c:316 src/gtr-window.ui:25
+#: src/gtr-notebook.ui:294 src/gtr-window.c:318 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Vertalingsbewerker"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
 msgstr "PO-bestandsbewerker"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: data/org.gnome.Gtranslator.desktop.in.in:7
-msgid "@icon@"
-msgstr "@icon@"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:14
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
@@ -219,7 +213,7 @@ msgstr "Paden:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
 #: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:588
-#: src/gtr-search-dialog.c:391
+#: src/gtr-search-dialog.c:393
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "_Sluiten"
@@ -283,18 +277,14 @@ msgstr "Bestand opslaan als…"
 msgid "Files saved."
 msgstr "Bestanden opgeslagen."
 
-#: src/gtr-actions-search.c:168
+#: src/gtr-actions-search.c:163
 #, c-format
-msgid "Found and replaced %d occurrence"
+msgid "Found and replaced one occurrence"
 msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "%d zoekterm gevonden en vervangen"
+msgstr[0] "Eén zoekterm gevonden en vervangen"
 msgstr[1] "%d zoektermen gevonden en vervangen"
 
-#: src/gtr-actions-search.c:177
-msgid "Found and replaced one occurrence"
-msgstr "Eén zoekterm gevonden en vervangen"
-
-#: src/gtr-actions-search.c:189
+#: src/gtr-actions-search.c:173
 msgid "Phrase not found"
 msgstr "Zoekterm niet gevonden"
 
@@ -342,7 +332,7 @@ msgid "Team email"
 msgstr "E-mailadres van team"
 
 #: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:521
-#: src/gtr-window.c:554
+#: src/gtr-window.c:556
 msgid "Profile"
 msgstr "Profiel"
 
@@ -442,6 +432,55 @@ msgstr "Context:"
 msgid "Format:"
 msgstr "Formaat:"
 
+#: src/gtr-dl-teams.c:604
+msgid "Translation Team"
+msgstr "Vertaalteam"
+
+#: src/gtr-dl-teams.c:611
+msgid "Module"
+msgstr "Module"
+
+#: src/gtr-dl-teams.ui:60
+msgid "Select team, module, branch and domain to get the translation file."
+msgstr ""
+"Selecteer uw team, module, tak en domein om het vertaalbestand te verkrijgen."
+
+#: src/gtr-dl-teams.ui:81
+msgid "Load file"
+msgstr "Bestand laden"
+
+#: src/gtr-dl-teams.ui:98
+msgid "Load from Damned Lies"
+msgstr "Laden uit Damned Lies"
+
+#: src/gtr-dl-teams.ui:105 src/gtr-notebook.ui:298 src/gtr-projects.ui:58
+msgid "Open…"
+msgstr "Openen…"
+
+#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:511 src/gtr-projects.ui:91
+msgid "Main Menu"
+msgstr "Hoofdmenu"
+
+#: src/gtr-dl-teams.ui:156 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+msgid "New window"
+msgstr "Nieuw venster"
+
+#: src/gtr-dl-teams.ui:170 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+msgid "Preferences"
+msgstr "Voorkeuren"
+
+#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:160
+msgid "Keyboard Shortcuts"
+msgstr "Sneltoetsen"
+
+#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:174
+msgid "About"
+msgstr "Info"
+
+#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:276 src/gtr-projects.ui:188
+msgid "Quit"
+msgstr "Afsluiten"
+
 #: src/gtr-file-dialogs.c:48
 msgid "_Open"
 msgstr "_Openen"
@@ -536,7 +575,7 @@ msgstr "Ga naar bericht"
 msgid "Enter message number:"
 msgstr "Voer berichtnummer in:"
 
-#: src/gtr-lang-button.ui:61 src/gtr-lang-button.ui:70
+#: src/gtr-lang-button.c:65
 msgid "Choose Language"
 msgstr "Kies een taal"
 
@@ -561,8 +600,8 @@ msgid "_Plural forms"
 msgstr "_Meervoudsvormen"
 
 #: src/gtr-languages-fetcher.ui:200
-msgid "Edit options manually"
-msgstr "Opties handmatig bewerken"
+msgid "_Edit options manually"
+msgstr "Opties handmatig b_ewerken"
 
 #: src/gtr-message-table.c:219
 msgid "Original Message"
@@ -592,12 +631,12 @@ msgstr "Oorspronkelijk bericht"
 msgid "Translated message"
 msgstr "Vertaald bericht"
 
-#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:369
-#: src/gtr-search-dialog.c:449
+#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:371
+#: src/gtr-search-dialog.c:455
 msgid "Find"
 msgstr "Zoeken"
 
-#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:453
+#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:459
 msgid "Find and replace"
 msgstr "Zoeken en vervangen"
 
@@ -609,32 +648,7 @@ msgstr "Vertaalgeheugen samenstellen"
 msgid "Edit header"
 msgstr "Kop bewerken"
 
-#: src/gtr-notebook.ui:207 src/gtr-projects.ui:109
-msgid "New window"
-msgstr "Nieuw venster"
-
-#: src/gtr-notebook.ui:221 src/gtr-projects.ui:123
-msgid "Preferences"
-msgstr "Voorkeuren"
-
-#: src/gtr-notebook.ui:248 src/gtr-projects.ui:150
-msgid "Keyboard Shortcuts"
-msgstr "Sneltoetsen"
-
-#: src/gtr-notebook.ui:262 src/gtr-projects.ui:164
-msgid "About"
-msgstr "Info"
-
-#: src/gtr-notebook.ui:276 src/gtr-projects.ui:178
-msgid "Quit"
-msgstr "Afsluiten"
-
-#: src/gtr-notebook.ui:298 src/gtr-projects.ui:58
-msgid "Open…"
-msgstr "Openen…"
-
 #: src/gtr-notebook.ui:302
-#| msgid "Open a po file"
 msgid "Open a new file (<Ctrl>o)"
 msgstr "Een nieuw bestand openen (<Ctrl>o)"
 
@@ -661,10 +675,6 @@ msgstr "‘Onzeker’ aan/uit (<Ctrl>+u)"
 #: src/gtr-notebook.ui:487
 msgid "Order by menu"
 msgstr "Volgordemenu"
-
-#: src/gtr-notebook.ui:511 src/gtr-projects.ui:81
-msgid "Main Menu"
-msgstr "Hoofdmenu"
 
 #: src/gtr-notebook.ui:527
 msgid "Save"
@@ -878,16 +888,20 @@ msgstr "Open een nieuw .po-bestand of versleep het naar hier"
 msgid "Select a PO file"
 msgstr "Selecteer een PO-bestand"
 
-#: src/gtr-search-dialog.c:347 src/gtr-search-dialog.ui:6
+#: src/gtr-projects.ui:68
+msgid "Load from DL…"
+msgstr "Laden uit DL…"
+
+#: src/gtr-search-dialog.c:349 src/gtr-search-dialog.ui:6
 #: src/gtr-search-dialog.ui:53
 msgid "Replace"
 msgstr "Vervangen"
 
-#: src/gtr-search-dialog.c:451
+#: src/gtr-search-dialog.c:457
 msgid "Replace _All"
 msgstr "_Alles vervangen"
 
-#: src/gtr-search-dialog.c:455
+#: src/gtr-search-dialog.c:461
 msgid "_Replace"
 msgstr "Ve_rvangen"
 
@@ -903,27 +917,27 @@ msgstr "_Zoeken naar: "
 msgid "Replace _with: "
 msgstr "Vervangen _door: "
 
-#: src/gtr-search-dialog.ui:160
+#: src/gtr-search-dialog.ui:184
 msgid "_Original text"
 msgstr "_Oorspronkelijke tekst"
 
-#: src/gtr-search-dialog.ui:177
+#: src/gtr-search-dialog.ui:201
 msgid "_Translated text"
 msgstr "Ver_taalde tekst"
 
-#: src/gtr-search-dialog.ui:213
+#: src/gtr-search-dialog.ui:237
 msgid "_Match case"
 msgstr "_Hoofdlettergevoelig"
 
-#: src/gtr-search-dialog.ui:229
+#: src/gtr-search-dialog.ui:253
 msgid "Match _entire word only"
 msgstr "_Enkel volledige woorden"
 
-#: src/gtr-search-dialog.ui:245
+#: src/gtr-search-dialog.ui:269
 msgid "Search _backwards"
 msgstr "Achter_waarts zoeken"
 
-#: src/gtr-search-dialog.ui:262
+#: src/gtr-search-dialog.ui:286
 msgid "_Wrap around"
 msgstr "Doorgaan na document_einde"
 
@@ -943,36 +957,36 @@ msgstr "Document sluiten"
 msgid "There is an error in the message:"
 msgstr "Er bevindt zich een fout in het bericht:"
 
-#: src/gtr-tab.c:459 src/gtr-tab.c:577
+#: src/gtr-tab.c:459 src/gtr-tab.c:575
 msgid "fuzzy"
 msgstr "onzeker"
 
-#: src/gtr-tab.c:607
+#: src/gtr-tab.c:605
 #, c-format
 msgid "Plural %d"
 msgstr "Meervoud %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1160
+#: src/gtr-tab.c:1158
 msgid "Path:"
 msgstr "Pad:"
 
-#: src/gtr-tab.c:1810
+#: src/gtr-tab.c:1808
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Vertaald: %0.2f%%"
 
-#: src/gtr-tab.c:1811
+#: src/gtr-tab.c:1809
 #, c-format
 msgid "Translated: %d"
 msgstr "Vertaald: %d"
 
-#: src/gtr-tab.c:1812
+#: src/gtr-tab.c:1810
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Onvertaald: %d"
 
-#: src/gtr-tab.c:1813
+#: src/gtr-tab.c:1811
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Onzeker: %d"
@@ -993,43 +1007,43 @@ msgstr ""
 "Kan hulp niet weergeven. Zorg ervoor dat het documentatiepakket voor de "
 "Vertalingsbewerker geïnstalleerd is."
 
-#: src/gtr-window.c:171
+#: src/gtr-window.c:173
 msgid "Untranslated"
 msgstr "Onvertaald"
 
-#: src/gtr-window.c:174
+#: src/gtr-window.c:176
 msgid "Translated"
 msgstr "Vertaald"
 
-#: src/gtr-window.c:177
+#: src/gtr-window.c:179
 msgid "Fuzzy"
 msgstr "Onzeker"
 
-#: src/gtr-window.c:184
+#: src/gtr-window.c:186
 #, c-format
 msgid "Current: %d"
 msgstr "Huidig: %d"
 
-#: src/gtr-window.c:185
+#: src/gtr-window.c:187
 #, c-format
 msgid "Total: %d"
 msgstr "Totaal: %d"
 
-#: src/gtr-window.c:186
+#: src/gtr-window.c:188
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "%d vertaald"
 msgstr[1] "%d vertaald"
 
-#: src/gtr-window.c:189
+#: src/gtr-window.c:191
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "%d onzeker"
 msgstr[1] "%d onzeker"
 
-#: src/gtr-window.c:191
+#: src/gtr-window.c:193
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1037,24 +1051,22 @@ msgstr[0] "%d onvertaald"
 msgstr[1] "%d onvertaald"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:301
+#: src/gtr-window.c:303
 #, c-format
-#| msgid "Translation font:"
 msgid "*%s — Translation Editor"
 msgstr "*%s — vertalingsbewerker"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:307
+#: src/gtr-window.c:309
 #, c-format
-#| msgid "Translation font:"
 msgid "%s — Translation Editor"
 msgstr "%s — vertalingsbewerker"
 
-#: src/gtr-window.c:538
+#: src/gtr-window.c:540
 msgid "No profile"
 msgstr "Geen profiel"
 
-#: src/gtr-window.c:556
+#: src/gtr-window.c:558
 msgid "Profile for the active document"
 msgstr "Profiel voor het actieve document"
 
@@ -1300,6 +1312,14 @@ msgid ""
 msgstr ""
 "Maximaal verschil in lengte tussen berichten weergegeven als suggesties door "
 "het vertaalgeheugen."
+
+#~ msgid "@icon@"
+#~ msgstr "@icon@"
+
+#~ msgid "Found and replaced %d occurrence"
+#~ msgid_plural "Found and replaced %d occurrences"
+#~ msgstr[0] "%d zoekterm gevonden en vervangen"
+#~ msgstr[1] "%d zoektermen gevonden en vervangen"
 
 #~ msgid "gtranslator PO file editor"
 #~ msgstr "gtranslator po-bestanden editor"
