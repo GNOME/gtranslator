@@ -83,5 +83,7 @@ void gtr_notebook_reset_sort (GtrNotebook *notebook);
 
 void gtr_notebook_hide_sort_menu (GtrNotebook *notebook);
 
+void gtr_notebook_enable_find_button (GtrNotebook *notebook, gboolean enable);
+
 G_END_DECLS
 #endif /* __NOTEBOOK_H__ */

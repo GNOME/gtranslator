@@ -93,6 +93,8 @@ typedef struct
   GtrProfileManager *prof_manager;
   GtkWidget *profile_combo;
 
+  gboolean search_bar_shown;
+
   guint dispose_has_run : 1;
 } GtrWindowPrivate;
 
@@ -700,6 +702,7 @@ gtr_window_init (GtrWindow *window)
   GtkTargetList *tl;
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
+  priv->search_bar_shown = FALSE;
   priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
 
   gtk_widget_init_template (GTK_WIDGET (window));
@@ -1304,4 +1307,26 @@ gtr_window_hide_sort_menu (GtrWindow *window)
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
 
   gtr_notebook_hide_sort_menu (GTR_NOTEBOOK (priv->notebook));
+}
+
+void
+gtr_window_show_search_bar (GtrWindow *window,
+                            gboolean show)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
+  GtrNotebook *notebook = GTR_NOTEBOOK (priv->notebook);
+  GtrTab *tab = gtr_window_get_active_tab (window);
+
+  gtr_tab_show_hide_search_bar (tab, show);
+  gtr_notebook_enable_find_button(notebook, show);
+
+  priv->search_bar_shown = show;
+}
+
+void
+gtr_window_toggle_search_bar (GtrWindow *window)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
+
+  gtr_window_show_search_bar(window, !priv->search_bar_shown);
 }

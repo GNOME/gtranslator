@@ -46,6 +46,7 @@
 #include "gtr-debug.h"
 #include "gtr-window.h"
 #include "gtr-progress.h"
+#include "gtr-actions.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -107,12 +108,17 @@ typedef struct
   gint autosave_interval;
   guint autosave_timeout;
   guint autosave : 1;
-
   /*Blocking movement */
   guint blocking : 1;
 
   guint tab_realized : 1;
   guint dispose_has_run : 1;
+
+  /*Search Bar*/
+  GtkOverlay     *overlay;
+  GtkRevealer    *search_revealer;
+  GtrSearchBar   *search_bar;
+  GtkSearchEntry *search;
 } GtrTabPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrTab, gtr_tab, GTK_TYPE_BOX)
@@ -137,6 +143,89 @@ enum
 static guint signals[LAST_SIGNAL];
 
 static gboolean gtr_tab_autosave (GtrTab * tab);
+
+//---------------------------Search Bar Revealer------------------//
+
+void
+gtr_page_stop_search (GtrTab *tab,
+                             GtrSearchBar *search_bar)
+{
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
+  g_assert (GTR_IS_TAB (tab));
+  g_assert (GTR_IS_SEARCH_BAR (priv->search_bar));
+
+  gtk_revealer_set_reveal_child (priv->search_revealer, FALSE);
+
+}
+
+void
+gtr_tab_show_hide_search_bar (GtrTab *tab, gboolean show)
+{
+  GtrTabPrivate *priv;
+
+  g_assert (GTR_IS_TAB (tab));
+  priv = gtr_tab_get_instance_private (tab);
+
+  gtk_revealer_set_reveal_child (priv->search_revealer, show);
+}
+
+void
+gtr_tab_find_set_replace (GtrTab   *tab,
+                          gboolean  replace)
+{
+  GtrTabPrivate *priv;
+
+  g_assert (GTR_IS_TAB (tab));
+  priv = gtr_tab_get_instance_private (tab);
+  gtr_search_bar_set_replace_mode (priv->search_bar, replace);
+}
+
+void
+gtr_tab_find_next (GtrTab * tab)
+{
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
+  gtr_search_bar_find_next (priv->search_bar);
+}
+
+void
+gtr_tab_find_prev (GtrTab * tab)
+{
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
+  gtr_search_bar_find_prev (priv->search_bar);
+}
+
+void
+gtr_page_notify_child_revealed (GtrTab *tab,
+                                       GParamSpec    *pspec,
+                                       GtkRevealer   *revealer)
+{
+  GtrTabPrivate *priv;
+
+  priv = gtr_tab_get_instance_private (tab);
+  g_assert (GTR_IS_TAB (tab));
+  g_assert (GTK_IS_REVEALER (revealer));
+
+  if (gtk_revealer_get_child_revealed (revealer))
+    {
+      GtkWidget *toplevel = gtk_widget_get_ancestor (GTK_WIDGET (revealer), GTK_TYPE_WINDOW);
+      GtkWidget *focus = gtk_window_get_focus (GTK_WINDOW (toplevel));
+
+      /* Only focus the search bar if it doesn't already have focus,
+       * as it can reselect the search text.
+       */
+      if (focus == NULL || !gtk_widget_is_ancestor (focus, GTK_WIDGET (revealer)))
+        gtk_widget_grab_focus (GTK_WIDGET (priv->search_bar));
+    }
+}
+
+//----------------------------------------------------------------//
+
 
 static gboolean
 show_hide_revealer (GtkWidget *widget, GdkEvent *ev, GtrTab *tab)
@@ -867,10 +956,16 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_fuzzy);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_untrans);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_percentage);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, overlay);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_bar);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_revealer);
+  gtk_widget_class_bind_template_callback (widget_class, gtr_page_notify_child_revealed);
+  gtk_widget_class_bind_template_callback (widget_class, gtr_page_stop_search);
 
   g_type_ensure (gtr_view_get_type ());
   g_type_ensure (gtr_context_panel_get_type ());
   g_type_ensure (gtr_message_table_get_type ());
+  g_type_ensure (gtr_search_bar_get_type ());
 }
 
 /***************************** Public funcs ***********************************/

@@ -107,6 +107,7 @@ gtk_dep = dependency('gtk+-3.0', version: '>= 3.22.20')
 gtr_deps = [
   glib_dep,
   gtk_dep,
+  dependency('libdazzle-1.0', version: '>= 3.33.90'),
   dependency('libgda-5.0'),
   dependency('gio-2.0', version: '>= 2.36.0'),
   dependency('gsettings-desktop-schemas'),

@@ -34,6 +34,8 @@
 #include "gtr-utils.h"
 #include "gtr-window.h"
 #include "gtr-preferences-dialog.h"
+#include "gtr-search-bar.h"
+#include "gtr-tab.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -222,6 +224,17 @@ new_window_activated (GSimpleAction *action,
 }
 
 static void
+find_toggle_activated (GSimpleAction *action,
+                       GVariant      *parameter,
+                       gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+
+  gtr_window_toggle_search_bar (priv->active_window);
+}
+
+static void
 find_activated (GSimpleAction *action,
                 GVariant      *parameter,
                 gpointer       user_data)
@@ -229,7 +242,49 @@ find_activated (GSimpleAction *action,
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  _gtr_actions_search_find (NULL, priv->active_window);
+  GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
+  g_return_if_fail (active_tab != NULL);
+  gtr_window_show_search_bar (priv->active_window, TRUE);
+  gtr_tab_find_set_replace (active_tab, FALSE);
+}
+
+static void
+find_next_activated (GSimpleAction *action,
+                     GVariant      *parameter,
+                     gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+
+  GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
+  g_return_if_fail (active_tab != NULL);
+  gtr_window_show_search_bar (priv->active_window, TRUE);
+  gtr_tab_find_next (active_tab);
+}
+
+static void
+find_prev_activated (GSimpleAction *action,
+                     GVariant      *parameter,
+                     gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+
+  GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
+  g_return_if_fail (active_tab != NULL);
+  gtr_window_show_search_bar (priv->active_window, TRUE);
+  gtr_tab_find_prev (active_tab);
+}
+
+static void
+find_unactivated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_window_show_search_bar (priv->active_window, FALSE);
 }
 
 static void
@@ -240,7 +295,9 @@ find_and_replace_activated (GSimpleAction *action,
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  _gtr_actions_search_replace (NULL, priv->active_window);
+  GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
+  gtr_window_show_search_bar (priv->active_window, TRUE);
+  gtr_tab_find_set_replace (active_tab, TRUE);
 }
 
 static void
@@ -567,7 +624,11 @@ static GActionEntry app_entries[] = {
 
   { "copy_text", copy_text_activated, NULL, NULL, NULL },
   { "find_and_replace", find_and_replace_activated, NULL, NULL, NULL },
+  { "findtoggle", find_toggle_activated, NULL, NULL, NULL },
   { "find", find_activated, NULL, NULL, NULL },
+  { "find-off", find_unactivated, NULL, NULL, NULL},
+  { "find-next", find_next_activated, NULL, NULL, NULL },
+  { "find-prev", find_prev_activated, NULL, NULL, NULL },
   { "new_window", new_window_activated, NULL, NULL, NULL },
   { "preferences", preferences_activated, NULL, NULL, NULL },
   { "edit_header", edit_header_activated, NULL, NULL, NULL },
@@ -628,7 +689,10 @@ gtr_application_startup (GApplication *application)
 
   set_kb (application, "app.fuzzy", "<Ctrl>u");
   set_kb (application, "app.find", "<Ctrl>f");
+  set_kb (application, "app.find-off", "Escape");
   set_kb (application, "app.find_and_replace", "<Ctrl>h");
+  set_kb (application, "app.find-next", "<Ctrl>g");
+  set_kb (application, "app.find-prev", "<Ctrl><Shift>g");
 
   set_kb (application, "app.copy_text", "<Ctrl>space");
 
