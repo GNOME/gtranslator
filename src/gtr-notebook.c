@@ -36,6 +36,7 @@ typedef struct
   GtkWidget *save;
   GtkWidget *sort_id;
   GtkWidget *order_menu_popover;
+  GtkWidget *search;
 
   GtkWidget *undo;
   GtkWidget *redo;
@@ -143,6 +144,7 @@ gtr_notebook_class_init (GtrNotebookClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, titlebar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, sort_id);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, order_menu_popover);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, search);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, undo);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, redo);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, save);
@@ -299,4 +301,14 @@ gtr_notebook_hide_sort_menu (GtrNotebook *notebook)
 
   if (priv->sort_id)
     gtk_popover_popdown (GTK_POPOVER (priv->order_menu_popover));
+}
+
+void
+gtr_notebook_enable_find_button (GtrNotebook *notebook,
+                                 gboolean enable)
+{
+  GtrNotebookPrivate *priv = gtr_notebook_get_instance_private (notebook);
+
+  if (priv->search)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->search), enable);
 }

@@ -90,6 +90,9 @@ void gtr_window_tm_keybind (GtrWindow *window, GSimpleAction *action);
 
 void gtr_window_hide_sort_menu (GtrWindow *window);
 
+void gtr_window_show_search_bar (GtrWindow *window, gboolean show);
+void gtr_window_toggle_search_bar (GtrWindow *window);
+
 /** stack app states **/
 void gtr_window_show_projects (GtrWindow *window);
 void gtr_window_show_poeditor (GtrWindow *window);

@@ -23,9 +23,27 @@
 #include <gio/gio.h>
 
 #include "gtr-window.h"
+#include "gtr-search-bar.h"
 
 G_BEGIN_DECLS
 /*File*/
+
+typedef struct _LastSearchData LastSearchData;
+struct _LastSearchData
+{
+  gchar *find_text;
+  gchar *replace_text;
+
+  gint original_text:1;
+  gint translated_text:1;
+  gint fuzzy_messages:1;
+  gint match_case:1;
+  gint entire_word:1;
+  gint backwards:1;
+  gint wrap_around:1;
+};
+
+
 void gtr_open_file_dialog (GtkAction * action, GtrWindow * window);
 
 void gtr_save_current_file_dialog (GtkWidget * widget, GtrWindow * window);
@@ -94,12 +112,57 @@ void gtr_message_go_to_next_fuzzy_or_untranslated
 void gtr_message_go_to_prev_fuzzy_or_untranslated
   (GtkAction * action, GtrWindow * window);
 
-void gtr_message_jump (GtkAction * action, GtrWindow * window);
+void gtr_message_jump (GtkAction * action,
+                       GtrWindow * window);
 
 /*Search*/
-void _gtr_actions_search_find (GtkAction * action, GtrWindow * window);
+void _gtr_actions_search_find (GtkAction * action,
+                               GtrWindow * window);
 
-void _gtr_actions_search_replace (GtkAction * action, GtrWindow * window);
+void _gtr_actions_search_replace (GtkAction * action,
+                                  GtrWindow * window);
+
+void gtr_page_stop_search (GtrTab * tab,
+                           GtrSearchBar * search_bar);
+
+void gtr_page_notify_child_revealed (GtrTab * tab,
+                                GParamSpec * pspec,
+                                GtkRevealer * revealer);
+
+void last_search_data_set (LastSearchData * data,
+                           GtrSearchBar * dialog);
+
+void search_bar_set_last_find_text (GtrSearchBar * dialog,
+                                    LastSearchData * data);
+
+void search_bar_set_last_replace_text (GtrSearchBar * dialog,
+                                       LastSearchData * data);
+
+void search_bar_set_last_options (GtrSearchBar * dialog,
+                                  LastSearchData * data);
+
+gboolean run_search (GtrView * view,
+                    gboolean follow);
+
+gboolean find_in_list (GtrWindow * window,
+                       GList * views,
+                       gboolean wrap_around,
+                       gboolean search_backwards);
+
+
+void do_find (GtrSearchBar * dialog,
+              GtrWindow * window,
+              gboolean search_backwards);
+
+void do_replace (GtrSearchBar * dialog,
+                 GtrWindow * window);
+
+void do_replace_all (GtrSearchBar * dialog,
+                     GtrWindow * window);
+
+void search_bar_response_cb (GtrSearchBar * dialog,
+                             gint response_id,
+                             GtrWindow    * window);
 
 /*Documents*/
 void gtr_actions_documents_next_document

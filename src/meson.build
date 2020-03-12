@@ -20,6 +20,7 @@ enum_headers = files(
   'gtr-view.h',
   'gtr-window-activatable.h',
   'gtr-window.h',
+  'gtr-search-bar.h',
 )
 
 sources = files(
@@ -54,7 +55,6 @@ sources = files(
   'gtr-profile.c',
   'gtr-profile-dialog.c',
   'gtr-profile-manager.c',
-  'gtr-search-dialog.c',
   'gtr-settings.c',
   'gtr-statusbar.c',
   'gtr-status-combo-box.c',
@@ -68,6 +68,7 @@ sources = files(
   'gtr-lang-button.c',
   'gtr-progress.c',
   'gtr-window.c',
+  'gtr-search-bar.c',
 )
 
 marshal = 'gtr-marshal'
@@ -104,10 +105,10 @@ resource_data = files(
   'gtr-notebook.ui',
   'gtr-preferences-dialog.ui',
   'gtr-profile-dialog.ui',
-  'gtr-search-dialog.ui',
   'gtr-statusbar.ui',
   'gtr-tab.ui',
-  'gtr-window.ui'
+  'gtr-window.ui',
+  'gtr-search-bar.ui',
 )
 
 sources += gnome.compile_resources(
