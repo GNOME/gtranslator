@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-01-17 13:20+0000\n"
-"PO-Revision-Date: 2020-02-23 13:54+0200\n"
+"POT-Creation-Date: 2020-03-12 16:11+0000\n"
+"PO-Revision-Date: 2020-03-15 13:53+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -63,8 +63,8 @@ msgstr ""
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:596
-#: src/gtr-notebook.ui:308 src/gtr-window.c:318 src/gtr-window.ui:25
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:657
+#: src/gtr-notebook.ui:308 src/gtr-window.c:320 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Käännösmuokkain"
 
@@ -193,13 +193,12 @@ msgid ""
 "plugin."
 msgstr ""
 
-#: src/codeview/gtr-codeview.c:353
+#: src/codeview/gtr-codeview.c:374
 msgid "Paths:"
 msgstr "Polut:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
 #: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:622
-#: src/gtr-search-dialog.c:393
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "_Sulje"
@@ -247,11 +246,11 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "Käännösmuokkaimen verkkosivusto"
 
-#: src/gtr-actions-file.c:204 src/gtr-application.c:401
+#: src/gtr-actions-file.c:204 src/gtr-application.c:458
 msgid "Do you want to save the changes?"
 msgstr "Haluatko tallentaa muutokset?"
 
-#: src/gtr-actions-file.c:205 src/gtr-application.c:402
+#: src/gtr-actions-file.c:205 src/gtr-application.c:459
 msgid "Warning"
 msgstr "Varoitus"
 
@@ -270,17 +269,6 @@ msgstr "Tallenna tiedosto nimellä…"
 #: src/gtr-actions-file.c:804
 msgid "Files saved."
 msgstr "Tiedostot tallennettu."
-
-#: src/gtr-actions-search.c:163
-#, c-format
-msgid "Found and replaced one occurrence"
-msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "Yksi kohta löytyi ja korvattiin"
-msgstr[1] "Löytyi %d kohtaa ja ne korvattiin"
-
-#: src/gtr-actions-search.c:173
-msgid "Phrase not found"
-msgstr "Sanaa/lausetta ei löydy"
 
 #: src/gtr-assistant.c:128
 #, c-format
@@ -326,7 +314,7 @@ msgid "Team email"
 msgstr "Kääntäjäryhmän sähköposti"
 
 #: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:547
-#: src/gtr-window.c:556
+#: src/gtr-window.c:558
 msgid "Profile"
 msgstr "Profiili"
 
@@ -624,12 +612,11 @@ msgstr "Alkuperäisen viesti"
 msgid "Translated message"
 msgstr "Käännetty viesti"
 
-#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:371
-#: src/gtr-search-dialog.c:455
+#: src/gtr-notebook.ui:136
 msgid "Find"
 msgstr "Etsi"
 
-#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:459
+#: src/gtr-notebook.ui:150
 msgid "Find and replace"
 msgstr "Etsi ja korvaa"
 
@@ -651,7 +638,6 @@ msgid "Open a new file (<Ctrl>o)"
 msgstr "Avaa uusi tiedosto (<Ctrl>o)"
 
 #: src/gtr-notebook.ui:341
-#| msgid "Open a new file (<Ctrl>o)"
 msgid "Open from Damned Lies (<Ctrl>d)"
 msgstr "Avaa Damned Lies -palvelusta (<Ctrl>d)"
 
@@ -683,15 +669,20 @@ msgstr "Viestien järjestysperuste"
 msgid "Order by menu"
 msgstr ""
 
-#: src/gtr-notebook.ui:587
+#: src/gtr-notebook.ui:585
+#| msgid "Undo (<Ctrl>z)"
+msgid "Find (<Ctrl><f>)"
+msgstr "Etsi (<Ctrl><f>)"
+
+#: src/gtr-notebook.ui:624
 msgid "Save"
 msgstr "Tallenna"
 
-#: src/gtr-notebook.ui:591
+#: src/gtr-notebook.ui:628
 msgid "Save the current file (<Ctrl>s)"
 msgstr "Tallenna nykyinen tiedosto (<Ctrl>s)"
 
-#: src/gtr-notebook.ui:606
+#: src/gtr-notebook.ui:643
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Tallenna nimellä (<Ctrl><Shift>s)"
 
@@ -895,54 +886,53 @@ msgstr "Valitse PO-tiedosto"
 msgid "Load from DL…"
 msgstr "Lataa DL-palvelusta…"
 
-#: src/gtr-search-dialog.c:349 src/gtr-search-dialog.ui:6
-#: src/gtr-search-dialog.ui:53
+#: src/gtr-search-bar.c:484 src/gtr-search-bar.ui:212
+msgid "Case sensitive"
+msgstr "Kirjainkoko merkitsee"
+
+#: src/gtr-search-bar.c:489 src/gtr-search-bar.ui:225
+msgid "Match whole word only"
+msgstr "Täsmää vain kokonaiset sanat"
+
+#: src/gtr-search-bar.c:494
+msgid "Wrap around"
+msgstr "Jatka asiakirjan alusta"
+
+#: src/gtr-search-bar.c:499
+msgid "Original text"
+msgstr "Alkuperäisen teksti"
+
+#: src/gtr-search-bar.c:504
+msgid "Translated text"
+msgstr "Käännetty teksti"
+
+#: src/gtr-search-bar.ui:121
 msgid "Replace"
 msgstr "Korvaa"
 
-#: src/gtr-search-dialog.c:457
-msgid "Replace _All"
-msgstr "Korvaa k_aikki"
-
-#: src/gtr-search-dialog.c:461
-msgid "_Replace"
-msgstr "Ko_rvaa"
-
-#: src/gtr-search-dialog.ui:37
+#: src/gtr-search-bar.ui:133
 msgid "Replace All"
 msgstr "Korvaa kaikki"
 
-#: src/gtr-search-dialog.ui:109
-msgid "_Search for: "
-msgstr "_Etsi: "
+#: src/gtr-search-bar.ui:153
+msgid "Switch between Search and Search-and-Replace"
+msgstr "Vaihda toimintojen \"Etsi\" ja \"Etsi ja korvaa\" välillä"
 
-#: src/gtr-search-dialog.ui:124
-msgid "Replace _with: "
-msgstr "Korvaa _tekstillä: "
+#: src/gtr-search-bar.ui:173
+msgid "Show or hide search options such as case sensitivity"
+msgstr "Näytä tai piilota hakuvalinnat kuten kirjainkoon merkitsevyys"
 
-#: src/gtr-search-dialog.ui:184
-msgid "_Original text"
-msgstr "_Alkuperäisen teksti"
+#: src/gtr-search-bar.ui:238
+msgid "Wrap Around"
+msgstr "Jatka asiakirjan alusta"
 
-#: src/gtr-search-dialog.ui:201
-msgid "_Translated text"
-msgstr "_Käännetty teksti"
+#: src/gtr-search-bar.ui:251
+msgid "Original-text"
+msgstr "Alkuperäisen teksti"
 
-#: src/gtr-search-dialog.ui:237
-msgid "_Match case"
-msgstr "_Huomioi kirjainkoko"
-
-#: src/gtr-search-dialog.ui:253
-msgid "Match _entire word only"
-msgstr "Täsmää vain _kokonaiset sanat"
-
-#: src/gtr-search-dialog.ui:269
-msgid "Search _backwards"
-msgstr "Etsi _taaksepäin"
-
-#: src/gtr-search-dialog.ui:286
-msgid "_Wrap around"
-msgstr "_Jatka asiakirjan alusta"
+#: src/gtr-search-bar.ui:264
+msgid "Translated-text"
+msgstr "Käännetty teksti"
 
 #: src/gtr-statusbar.c:117 src/gtr-statusbar.c:252
 msgid "INS"
@@ -956,89 +946,89 @@ msgstr "OVR"
 msgid "Close document"
 msgstr "Sulje asiakirja"
 
-#: src/gtr-tab.c:246
+#: src/gtr-tab.c:335
 msgid "There is an error in the message:"
 msgstr "Viestissä on virhe:"
 
-#: src/gtr-tab.c:460 src/gtr-tab.c:586
+#: src/gtr-tab.c:549 src/gtr-tab.c:675
 msgid "fuzzy"
 msgstr "sumea"
 
-#: src/gtr-tab.c:616
+#: src/gtr-tab.c:705
 #, c-format
 msgid "Plural %d"
 msgstr "Monikko %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1169
+#: src/gtr-tab.c:1264
 msgid "Path:"
 msgstr "Polku:"
 
-#: src/gtr-tab.c:1819
+#: src/gtr-tab.c:1914
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Käännetty: %0.2f%%"
 
-#: src/gtr-tab.c:1820
+#: src/gtr-tab.c:1915
 #, c-format
 msgid "Translated: %d"
 msgstr "Käännetty: %d"
 
-#: src/gtr-tab.c:1821
+#: src/gtr-tab.c:1916
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Kääntämättä: %d"
 
-#: src/gtr-tab.c:1822
+#: src/gtr-tab.c:1917
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Sumeita: %d"
 
-#: src/gtr-tab.ui:153
+#: src/gtr-tab.ui:79
 msgid "_Original Message"
 msgstr "_Alkuperäisen viesti"
 
-#: src/gtr-tab.ui:245
+#: src/gtr-tab.ui:171
 msgid "Translate_d Text"
 msgstr "_Käännetty viesti"
 
-#: src/gtr-window.c:173
+#: src/gtr-window.c:175
 msgid "Untranslated"
 msgstr "Kääntämättä"
 
-#: src/gtr-window.c:176
+#: src/gtr-window.c:178
 msgid "Translated"
 msgstr "Käännetty"
 
-#: src/gtr-window.c:179
+#: src/gtr-window.c:181
 msgid "Fuzzy"
 msgstr "Sumea"
 
-#: src/gtr-window.c:186
+#: src/gtr-window.c:188
 #, c-format
 msgid "Current: %d"
 msgstr "Nykyinen: %d"
 
-#: src/gtr-window.c:187
+#: src/gtr-window.c:189
 #, c-format
 msgid "Total: %d"
 msgstr "Yhteensä: %d"
 
-#: src/gtr-window.c:188
+#: src/gtr-window.c:190
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "%d käännetty"
 msgstr[1] "%d käännetty"
 
-#: src/gtr-window.c:191
+#: src/gtr-window.c:193
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "%d sumea"
 msgstr[1] "%d sumeaa"
 
-#: src/gtr-window.c:193
+#: src/gtr-window.c:195
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1046,22 +1036,22 @@ msgstr[0] "%d kääntämättä"
 msgstr[1] "%d kääntämättä"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:303
+#: src/gtr-window.c:305
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Käännösmuokkain"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:309
+#: src/gtr-window.c:311
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Käännösmuokkain"
 
-#: src/gtr-window.c:540
+#: src/gtr-window.c:542
 msgid "No profile"
 msgstr "Ei profiilia"
 
-#: src/gtr-window.c:558
+#: src/gtr-window.c:560
 msgid "Profile for the active document"
 msgstr "Aktiivisen asiakirjan profiili"
 
@@ -1196,6 +1186,21 @@ msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Etsi ja korvaa"
 
+#: src/help-overlay.ui:173
+msgctxt "shortcut window"
+msgid "Forward-search"
+msgstr "Jatka hakua eteenpäin"
+
+#: src/help-overlay.ui:180
+msgctxt "shortcut window"
+msgid "Backward-search"
+msgstr "Jatka hakua taaksepäin"
+
+#: src/help-overlay.ui:187
+msgctxt "shortcut window"
+msgid "Hide find & replace bar"
+msgstr "Piilota \"Etsi ja korvaa\"-palkki"
+
 #: src/main.c:97
 msgid "— Edit PO files"
 msgstr "— muokkaa PO-tiedostoja"
@@ -1303,6 +1308,32 @@ msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
 msgstr ""
+
+#~ msgid "Found and replaced one occurrence"
+#~ msgid_plural "Found and replaced %d occurrences"
+#~ msgstr[0] "Yksi kohta löytyi ja korvattiin"
+#~ msgstr[1] "Löytyi %d kohtaa ja ne korvattiin"
+
+#~ msgid "Phrase not found"
+#~ msgstr "Sanaa/lausetta ei löydy"
+
+#~ msgid "Replace _All"
+#~ msgstr "Korvaa k_aikki"
+
+#~ msgid "_Replace"
+#~ msgstr "Ko_rvaa"
+
+#~ msgid "_Search for: "
+#~ msgstr "_Etsi: "
+
+#~ msgid "Replace _with: "
+#~ msgstr "Korvaa _tekstillä: "
+
+#~ msgid "_Match case"
+#~ msgstr "_Huomioi kirjainkoko"
+
+#~ msgid "Search _backwards"
+#~ msgstr "Etsi _taaksepäin"
 
 #~ msgid "Edit notes"
 #~ msgstr "Muokkaa huomioita"
