@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator master\n"
+"Project-Id-Version: gtranslator gnome-3-36\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-01-17 13:20+0000\n"
-"PO-Revision-Date: 2020-01-27 22:12+0700\n"
+"POT-Creation-Date: 2020-03-14 10:45+0000\n"
+"PO-Revision-Date: 2020-03-18 14:29+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n!=1;\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -54,12 +54,12 @@ msgstr ""
 "bahasa alternatif, sisip tag, integrasi dengan subversion, dan penilik kode "
 "sumber."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:83
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:99
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:596
-#: src/gtr-notebook.ui:308 src/gtr-window.c:318 src/gtr-window.ui:25
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:657
+#: src/gtr-notebook.ui:308 src/gtr-window.c:320 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Penyunting Terjemahan"
 
@@ -68,7 +68,6 @@ msgid "PO File Editor"
 msgstr "Penyunting Berkas PO"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:14
-#| msgid "Gtranslator Translation Memory Manager"
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Penerjemahan;Editor;Penyunting;Gettext;Menulis;"
 
@@ -195,13 +194,12 @@ msgstr ""
 "Daftar plugin aktif. Ini memuat \"Lokasi\" dari plugin aktif. Lihat berkas ."
 "gtranslator-plugin untuk memperoleh \"Lokasi\" dari suatu plugin."
 
-#: src/codeview/gtr-codeview.c:353
+#: src/codeview/gtr-codeview.c:374
 msgid "Paths:"
 msgstr "Path:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
 #: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:622
-#: src/gtr-search-dialog.c:393
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "_Tutup"
@@ -246,11 +244,11 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "Situs Web Penyunting Terjemahan"
 
-#: src/gtr-actions-file.c:204 src/gtr-application.c:401
+#: src/gtr-actions-file.c:204 src/gtr-application.c:458
 msgid "Do you want to save the changes?"
 msgstr "Apakah Anda ingin menyimpan perubahan?"
 
-#: src/gtr-actions-file.c:205 src/gtr-application.c:402
+#: src/gtr-actions-file.c:205 src/gtr-application.c:459
 msgid "Warning"
 msgstr "Peringatan"
 
@@ -269,17 +267,6 @@ msgstr "Simpan berkas sebagai…"
 #: src/gtr-actions-file.c:804
 msgid "Files saved."
 msgstr "Berkas disimpan."
-
-#: src/gtr-actions-search.c:163
-#, c-format
-msgid "Found and replaced one occurrence"
-msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "Ditemukan dan diganti satu kali"
-msgstr[1] "Ditemukan dan diganti %d kali"
-
-#: src/gtr-actions-search.c:173
-msgid "Phrase not found"
-msgstr "Frasa tak ditemukan"
 
 #: src/gtr-assistant.c:128
 #, c-format
@@ -325,7 +312,7 @@ msgid "Team email"
 msgstr "Surel tim"
 
 #: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:547
-#: src/gtr-window.c:556
+#: src/gtr-window.c:558
 msgid "Profile"
 msgstr "Profil"
 
@@ -624,12 +611,11 @@ msgstr "Pesan asli"
 msgid "Translated message"
 msgstr "Pesan terjemahan"
 
-#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:371
-#: src/gtr-search-dialog.c:455
+#: src/gtr-notebook.ui:136
 msgid "Find"
 msgstr "Cari"
 
-#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:459
+#: src/gtr-notebook.ui:150
 msgid "Find and replace"
 msgstr "Cari dan ganti"
 
@@ -682,15 +668,19 @@ msgstr "Mengurutkan pesan menurut"
 msgid "Order by menu"
 msgstr "Urutkan berdasarkan menu"
 
-#: src/gtr-notebook.ui:587
+#: src/gtr-notebook.ui:585
+msgid "Find (<Ctrl><f>)"
+msgstr "Cari (<Ctrl><f>)"
+
+#: src/gtr-notebook.ui:624
 msgid "Save"
 msgstr "Simpan"
 
-#: src/gtr-notebook.ui:591
+#: src/gtr-notebook.ui:628
 msgid "Save the current file (<Ctrl>s)"
 msgstr "Simpan berkas saat ini (<Ctrl>s)"
 
-#: src/gtr-notebook.ui:606
+#: src/gtr-notebook.ui:643
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Simpan sebagai (<Ctrl><Shift>s)"
 
@@ -893,54 +883,55 @@ msgstr "Pilih sebuah berkas PO"
 msgid "Load from DL…"
 msgstr "Muat dari DL…"
 
-#: src/gtr-search-dialog.c:349 src/gtr-search-dialog.ui:6
-#: src/gtr-search-dialog.ui:53
+#: src/gtr-search-bar.c:484 src/gtr-search-bar.ui:212
+msgid "Case sensitive"
+msgstr "Peka huruf besar kecil"
+
+#: src/gtr-search-bar.c:489 src/gtr-search-bar.ui:225
+msgid "Match whole word only"
+msgstr "Hanya cocok seluruh kata"
+
+#: src/gtr-search-bar.c:494
+msgid "Wrap around"
+msgstr "Melipat"
+
+#: src/gtr-search-bar.c:499
+msgid "Original text"
+msgstr "Teks asli"
+
+#: src/gtr-search-bar.c:504
+msgid "Translated text"
+msgstr "Teks terjemahan"
+
+#: src/gtr-search-bar.ui:121
 msgid "Replace"
 msgstr "Ganti"
 
-#: src/gtr-search-dialog.c:457
-msgid "Replace _All"
-msgstr "Ganti Semu_a"
-
-#: src/gtr-search-dialog.c:461
-msgid "_Replace"
-msgstr "Ganti"
-
-#: src/gtr-search-dialog.ui:37
+#: src/gtr-search-bar.ui:133
 msgid "Replace All"
 msgstr "Ganti Semua"
 
-#: src/gtr-search-dialog.ui:109
-msgid "_Search for: "
-msgstr "Cari: "
+#: src/gtr-search-bar.ui:153
+msgid "Switch between Search and Search-and-Replace"
+msgstr "Bertukar antara Cari dan Cari-dan-Ganti"
 
-#: src/gtr-search-dialog.ui:124
-msgid "Replace _with: "
-msgstr "Ganti _dengan: "
+#: src/gtr-search-bar.ui:173
+msgid "Show or hide search options such as case sensitivity"
+msgstr ""
+"Tampilkan atau sembunyikan opsi pencarian seperti misalnya peka huruf besar "
+"kecil"
 
-#: src/gtr-search-dialog.ui:184
-msgid "_Original text"
-msgstr "Teks _Asli"
+#: src/gtr-search-bar.ui:238
+msgid "Wrap Around"
+msgstr "Melipat"
 
-#: src/gtr-search-dialog.ui:201
-msgid "_Translated text"
-msgstr "_Teks terjemahan"
+#: src/gtr-search-bar.ui:251
+msgid "Original-text"
+msgstr "Teks-asli"
 
-#: src/gtr-search-dialog.ui:237
-msgid "_Match case"
-msgstr "Besar/kecil cocok"
-
-#: src/gtr-search-dialog.ui:253
-msgid "Match _entire word only"
-msgstr "Hanya cocok s_eluruh kata"
-
-#: src/gtr-search-dialog.ui:269
-msgid "Search _backwards"
-msgstr "Cari mundur"
-
-#: src/gtr-search-dialog.ui:286
-msgid "_Wrap around"
-msgstr "_Melipat"
+#: src/gtr-search-bar.ui:264
+msgid "Translated-text"
+msgstr "Teks-terjemahan"
 
 #: src/gtr-statusbar.c:117 src/gtr-statusbar.c:252
 msgid "INS"
@@ -954,89 +945,89 @@ msgstr "OVR"
 msgid "Close document"
 msgstr "Tutup dokumen"
 
-#: src/gtr-tab.c:246
+#: src/gtr-tab.c:335
 msgid "There is an error in the message:"
 msgstr "Ada galat dalam pesan:"
 
-#: src/gtr-tab.c:460 src/gtr-tab.c:586
+#: src/gtr-tab.c:549 src/gtr-tab.c:675
 msgid "fuzzy"
 msgstr "ragu"
 
-#: src/gtr-tab.c:616
+#: src/gtr-tab.c:705
 #, c-format
 msgid "Plural %d"
 msgstr "Jamak %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1169
+#: src/gtr-tab.c:1264
 msgid "Path:"
 msgstr "Path:"
 
-#: src/gtr-tab.c:1819
+#: src/gtr-tab.c:1914
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Diterjemahkan: %0.2f%%"
 
-#: src/gtr-tab.c:1820
+#: src/gtr-tab.c:1915
 #, c-format
 msgid "Translated: %d"
 msgstr "Diterjemahkan: %d"
 
-#: src/gtr-tab.c:1821
+#: src/gtr-tab.c:1916
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Belum diterjemahkan: %d"
 
-#: src/gtr-tab.c:1822
+#: src/gtr-tab.c:1917
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Ragu: %d"
 
-#: src/gtr-tab.ui:153
+#: src/gtr-tab.ui:79
 msgid "_Original Message"
 msgstr "Teks _Asli"
 
-#: src/gtr-tab.ui:245
+#: src/gtr-tab.ui:171
 msgid "Translate_d Text"
 msgstr "_Teks Terjemahan"
 
-#: src/gtr-window.c:173
+#: src/gtr-window.c:175
 msgid "Untranslated"
 msgstr "Belum diterjemahkan"
 
-#: src/gtr-window.c:176
+#: src/gtr-window.c:178
 msgid "Translated"
 msgstr "Diterjemahkan"
 
-#: src/gtr-window.c:179
+#: src/gtr-window.c:181
 msgid "Fuzzy"
 msgstr "Ragu"
 
-#: src/gtr-window.c:186
+#: src/gtr-window.c:188
 #, c-format
 msgid "Current: %d"
 msgstr "Kini: %d"
 
-#: src/gtr-window.c:187
+#: src/gtr-window.c:189
 #, c-format
 msgid "Total: %d"
 msgstr "Total: %d"
 
-#: src/gtr-window.c:188
+#: src/gtr-window.c:190
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "%d diterjemahkan"
 msgstr[1] "%d diterjemahkan"
 
-#: src/gtr-window.c:191
+#: src/gtr-window.c:193
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "%d ragu"
 msgstr[1] "%d ragu"
 
-#: src/gtr-window.c:193
+#: src/gtr-window.c:195
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1044,22 +1035,22 @@ msgstr[0] "%d belum diterjemahkan"
 msgstr[1] "%d belum diterjemahkan"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:303
+#: src/gtr-window.c:305
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Penyunting Terjemahan"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:309
+#: src/gtr-window.c:311
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Penyunting Terjemahan"
 
-#: src/gtr-window.c:540
+#: src/gtr-window.c:542
 msgid "No profile"
 msgstr "Tiada profil"
 
-#: src/gtr-window.c:558
+#: src/gtr-window.c:560
 msgid "Profile for the active document"
 msgstr "Profil dokumen aktif"
 
@@ -1193,6 +1184,21 @@ msgstr "Cari"
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Cari & Ganti"
+
+#: src/help-overlay.ui:173
+msgctxt "shortcut window"
+msgid "Forward-search"
+msgstr "Pencarian maju"
+
+#: src/help-overlay.ui:180
+msgctxt "shortcut window"
+msgid "Backward-search"
+msgstr "Pencarian mundur"
+
+#: src/help-overlay.ui:187
+msgctxt "shortcut window"
+msgid "Hide find & replace bar"
+msgstr "Sembunyikan bilah cari dan ganti"
 
 #: src/main.c:97
 msgid "— Edit PO files"
