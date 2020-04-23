@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-01-18 11:49+0000\n"
-"PO-Revision-Date: 2020-01-20 14:43+0100\n"
+"POT-Creation-Date: 2020-03-26 08:06+0000\n"
+"PO-Revision-Date: 2020-04-23 13:22+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: slovenčina <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -57,12 +57,12 @@ msgstr ""
 "zásuvnými modulmi ako je iný jazyk, vkladanie značiek, integrácia do systému "
 "subversion a prehliadač zdrojového kódu."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:83
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:99
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:596
-#: src/gtr-notebook.ui:308 src/gtr-window.c:318 src/gtr-window.ui:25
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:657
+#: src/gtr-notebook.ui:308 src/gtr-window.c:320 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Editor prekladov"
 
@@ -198,13 +198,12 @@ msgstr ""
 "zásuvných modulov. Vlastnosť „Location“ daného zásuvného modulu môžete "
 "získať zo súboru .gtranslator-plugin."
 
-#: src/codeview/gtr-codeview.c:353
+#: src/codeview/gtr-codeview.c:374
 msgid "Paths:"
 msgstr "Cesty:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
 #: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:622
-#: src/gtr-search-dialog.c:393
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "_Zavrieť"
@@ -253,11 +252,11 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "Webová stránka editora prekladu"
 
-#: src/gtr-actions-file.c:204 src/gtr-application.c:401
+#: src/gtr-actions-file.c:204 src/gtr-application.c:458
 msgid "Do you want to save the changes?"
 msgstr "Chcete uložiť zmeny?"
 
-#: src/gtr-actions-file.c:205 src/gtr-application.c:402
+#: src/gtr-actions-file.c:205 src/gtr-application.c:459
 msgid "Warning"
 msgstr "Upozornenie"
 
@@ -277,18 +276,6 @@ msgstr "Uloženie súboru ako…"
 #: src/gtr-actions-file.c:804
 msgid "Files saved."
 msgstr "Súbory uložené."
-
-#: src/gtr-actions-search.c:163
-#, c-format
-msgid "Found and replaced one occurrence"
-msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "Nájdených a nahradených %d výskytov"
-msgstr[1] "Nájdený a nahradený jeden výskyt"
-msgstr[2] "Nájdené a nahradené %d výskyty"
-
-#: src/gtr-actions-search.c:173
-msgid "Phrase not found"
-msgstr "Fráza sa nenašla"
 
 #: src/gtr-assistant.c:128
 #, c-format
@@ -334,7 +321,7 @@ msgid "Team email"
 msgstr "Email tímu"
 
 #: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:547
-#: src/gtr-window.c:556
+#: src/gtr-window.c:558
 msgid "Profile"
 msgstr "Profil"
 
@@ -632,12 +619,11 @@ msgid "Translated message"
 msgstr "Preloženej správy"
 
 # window title
-#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:371
-#: src/gtr-search-dialog.c:455
+#: src/gtr-notebook.ui:136
 msgid "Find"
 msgstr "Vyhľadávanie"
 
-#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:459
+#: src/gtr-notebook.ui:150
 msgid "Find and replace"
 msgstr "Nájsť a nahradiť"
 
@@ -697,17 +683,23 @@ msgstr "Usporiadať správy podľa"
 msgid "Order by menu"
 msgstr "Zoradiť podľa ponuky"
 
-#: src/gtr-notebook.ui:587
+# tooltip
+#: src/gtr-notebook.ui:585
+#| msgid "Undo (<Ctrl>z)"
+msgid "Find (<Ctrl><f>)"
+msgstr "Nájde (<Ctrl><f>)"
+
+#: src/gtr-notebook.ui:624
 msgid "Save"
 msgstr "Uložiť"
 
 # tooltip
-#: src/gtr-notebook.ui:591
+#: src/gtr-notebook.ui:628
 msgid "Save the current file (<Ctrl>s)"
 msgstr "Uloží aktuálny súbor (<Ctrl>s)"
 
 # tooltip
-#: src/gtr-notebook.ui:606
+#: src/gtr-notebook.ui:643
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Uloží ako (<Ctrl><Shift>s)"
 
@@ -912,55 +904,55 @@ msgstr "Výber súboru PO"
 msgid "Load from DL…"
 msgstr "Načítať zo služby DL…"
 
+#: src/gtr-search-bar.c:484 src/gtr-search-bar.ui:212
+msgid "Case sensitive"
+msgstr "Rozlišovať veľkosť písmen"
+
+#: src/gtr-search-bar.c:489 src/gtr-search-bar.ui:225
+msgid "Match whole word only"
+msgstr "Hľadať iba celé slová"
+
+#: src/gtr-search-bar.c:494
+msgid "Wrap around"
+msgstr "Pokračovať dookola"
+
+#: src/gtr-search-bar.c:499
+msgid "Original text"
+msgstr "Pôvodný text"
+
+#: src/gtr-search-bar.c:504
+msgid "Translated text"
+msgstr "Preložený text"
+
 # window title
-#: src/gtr-search-dialog.c:349 src/gtr-search-dialog.ui:6
-#: src/gtr-search-dialog.ui:53
+#: src/gtr-search-bar.ui:121
 msgid "Replace"
 msgstr "Nahradenie"
 
-#: src/gtr-search-dialog.c:457
-msgid "Replace _All"
-msgstr "N_ahradiť všetky"
-
-#: src/gtr-search-dialog.c:461
-msgid "_Replace"
-msgstr "Nah_radiť"
-
-#: src/gtr-search-dialog.ui:37
+#: src/gtr-search-bar.ui:133
 msgid "Replace All"
 msgstr "Nahradiť všetky"
 
-#: src/gtr-search-dialog.ui:109
-msgid "_Search for: "
-msgstr "Vy_hľadať: "
+#: src/gtr-search-bar.ui:153
+msgid "Switch between Search and Search-and-Replace"
+msgstr "Prepína medzi Hladať a Hľadať a nahradiť"
 
-#: src/gtr-search-dialog.ui:124
-msgid "Replace _with: "
-msgstr "Nahradiť _za: "
+#: src/gtr-search-bar.ui:173
+msgid "Show or hide search options such as case sensitivity"
+msgstr ""
+"Zobrazí alebo skryje voľby vyhľadávania ako zohľadnenie veľkosti písmen"
 
-#: src/gtr-search-dialog.ui:184
-msgid "_Original text"
-msgstr "_Pôvodný text"
+#: src/gtr-search-bar.ui:238
+msgid "Wrap Around"
+msgstr "Pokračovať dookola"
 
-#: src/gtr-search-dialog.ui:201
-msgid "_Translated text"
-msgstr "P_reložený text"
+#: src/gtr-search-bar.ui:251
+msgid "Original-text"
+msgstr "Pôvodný text"
 
-#: src/gtr-search-dialog.ui:237
-msgid "_Match case"
-msgstr "Rozlišovať veľkosť _písma"
-
-#: src/gtr-search-dialog.ui:253
-msgid "Match _entire word only"
-msgstr "Hľadať iba _celé slová"
-
-#: src/gtr-search-dialog.ui:269
-msgid "Search _backwards"
-msgstr "Hľadať _dozadu"
-
-#: src/gtr-search-dialog.ui:286
-msgid "_Wrap around"
-msgstr "Pokračovať d_ookola"
+#: src/gtr-search-bar.ui:264
+msgid "Translated-text"
+msgstr "Preložený text"
 
 #: src/gtr-statusbar.c:117 src/gtr-statusbar.c:252
 msgid "INS"
@@ -974,75 +966,75 @@ msgstr "CEZ"
 msgid "Close document"
 msgstr "Zavrieť dokument"
 
-#: src/gtr-tab.c:246
+#: src/gtr-tab.c:335
 msgid "There is an error in the message:"
 msgstr "V správe je chyba:"
 
-#: src/gtr-tab.c:460 src/gtr-tab.c:586
+#: src/gtr-tab.c:549 src/gtr-tab.c:675
 msgid "fuzzy"
 msgstr "nepresná"
 
-#: src/gtr-tab.c:616
+#: src/gtr-tab.c:705
 #, c-format
 msgid "Plural %d"
 msgstr "Množné číslo %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1169
+#: src/gtr-tab.c:1264
 msgid "Path:"
 msgstr "Cesta:"
 
-#: src/gtr-tab.c:1819
+#: src/gtr-tab.c:1914
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Preložené na: %0.2f%%"
 
-#: src/gtr-tab.c:1820
+#: src/gtr-tab.c:1915
 #, c-format
 msgid "Translated: %d"
 msgstr "Preložených: %d"
 
-#: src/gtr-tab.c:1821
+#: src/gtr-tab.c:1916
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Nepreložených: %d"
 
-#: src/gtr-tab.c:1822
+#: src/gtr-tab.c:1917
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Nepresných: %d"
 
-#: src/gtr-tab.ui:153
+#: src/gtr-tab.ui:79
 msgid "_Original Message"
 msgstr "_Pôvodná správa"
 
-#: src/gtr-tab.ui:245
+#: src/gtr-tab.ui:171
 msgid "Translate_d Text"
 msgstr "P_reložený text"
 
-#: src/gtr-window.c:173
+#: src/gtr-window.c:175
 msgid "Untranslated"
 msgstr "Nepreložená"
 
-#: src/gtr-window.c:176
+#: src/gtr-window.c:178
 msgid "Translated"
 msgstr "Preložená"
 
-#: src/gtr-window.c:179
+#: src/gtr-window.c:181
 msgid "Fuzzy"
 msgstr "Nepresná"
 
-#: src/gtr-window.c:186
+#: src/gtr-window.c:188
 #, c-format
 msgid "Current: %d"
 msgstr "Aktuálna: %d"
 
-#: src/gtr-window.c:187
+#: src/gtr-window.c:189
 #, c-format
 msgid "Total: %d"
 msgstr "Celkom: %d"
 
-#: src/gtr-window.c:188
+#: src/gtr-window.c:190
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
@@ -1050,7 +1042,7 @@ msgstr[0] "%d preložených"
 msgstr[1] "%d preložený"
 msgstr[2] "%d preložené"
 
-#: src/gtr-window.c:191
+#: src/gtr-window.c:193
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
@@ -1058,7 +1050,7 @@ msgstr[0] "%d nepresných"
 msgstr[1] "%d nepresný"
 msgstr[2] "%d nepresné"
 
-#: src/gtr-window.c:193
+#: src/gtr-window.c:195
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1067,22 +1059,22 @@ msgstr[1] "%d nepreložený"
 msgstr[2] "%d nepreložené"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:303
+#: src/gtr-window.c:305
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Editor prekladov"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:309
+#: src/gtr-window.c:311
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Editor prekladov"
 
-#: src/gtr-window.c:540
+#: src/gtr-window.c:542
 msgid "No profile"
 msgstr "Žiadny profil"
 
-#: src/gtr-window.c:558
+#: src/gtr-window.c:560
 msgid "Profile for the active document"
 msgstr "Profil aktívneho dokumentu"
 
@@ -1218,6 +1210,21 @@ msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Nájdenie a nahradenie"
 
+#: src/help-overlay.ui:173
+msgctxt "shortcut window"
+msgid "Forward-search"
+msgstr "Hľadanie dopredu"
+
+#: src/help-overlay.ui:180
+msgctxt "shortcut window"
+msgid "Backward-search"
+msgstr "Hľadanie dozadu"
+
+#: src/help-overlay.ui:187
+msgctxt "shortcut window"
+msgid "Hide find & replace bar"
+msgstr "Skrytie lišty nájdenia a nahradenia"
+
 #: src/main.c:97
 msgid "— Edit PO files"
 msgstr "— úprava PO súborov"
@@ -1336,6 +1343,33 @@ msgid ""
 msgstr ""
 "Maximálny rozdiel v dĺžke správ pri porovnávaní s pamäťou prekladov, aby sa "
 "zobrazili ako zhodné."
+
+#~ msgid "Found and replaced one occurrence"
+#~ msgid_plural "Found and replaced %d occurrences"
+#~ msgstr[0] "Nájdených a nahradených %d výskytov"
+#~ msgstr[1] "Nájdený a nahradený jeden výskyt"
+#~ msgstr[2] "Nájdené a nahradené %d výskyty"
+
+#~ msgid "Phrase not found"
+#~ msgstr "Fráza sa nenašla"
+
+#~ msgid "Replace _All"
+#~ msgstr "N_ahradiť všetky"
+
+#~ msgid "_Replace"
+#~ msgstr "Nah_radiť"
+
+#~ msgid "_Search for: "
+#~ msgstr "Vy_hľadať: "
+
+#~ msgid "Replace _with: "
+#~ msgstr "Nahradiť _za: "
+
+#~ msgid "_Match case"
+#~ msgstr "Rozlišovať veľkosť _písma"
+
+#~ msgid "Search _backwards"
+#~ msgstr "Hľadať _dozadu"
 
 #~ msgid "Edit notes"
 #~ msgstr "Úprava poznámok"
