@@ -183,6 +183,12 @@ gtr_application_init (GtrApplication *application)
   if (!g_file_test (profiles_file, G_FILE_TEST_EXISTS))
     priv->first_run = TRUE;
   g_free (profiles_file);
+
+  /* Custom css */
+  priv->provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (priv->provider, "/org/gnome/translator/styles.css");
+
+  load_accels ();
 }
 
 static void
@@ -387,26 +393,62 @@ dl_activated (GSimpleAction *action,
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
   GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
+  GtrPo *po = gtr_tab_get_po (active_tab);
   GtrPoState state = gtr_po_get_state (gtr_tab_get_po (active_tab));
+  GtkWidget *dialog = NULL;
 
   if (state == GTR_PO_STATE_MODIFIED)
     {
       GtkWidget *dialog;
-      gint res;
+      gint res = 0;
+      GFile *location;
+      gchar *filename;
+
+      po = gtr_tab_get_po (active_tab);
+      location = gtr_po_get_location (po);
+      filename = g_file_get_path (location);
+      g_object_unref (location);
 
       dialog = gtk_message_dialog_new (GTK_WINDOW (priv->active_window),
-            GTK_DIALOG_DESTROY_WITH_PARENT,
-            GTK_MESSAGE_QUESTION,
-            GTK_BUTTONS_YES_NO,
-            _("Do you want to save the changes?"));
-      gtk_window_set_title (GTK_WINDOW (dialog), _("Warning"));
+                                       GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       GTK_MESSAGE_WARNING,
+                                       GTK_BUTTONS_NONE,NULL);
+
+      filename = g_strdup_printf("<span weight=\"bold\" size=\"large\">%s</span>",
+                                 _("Do you want to save changes to this file ?"));
+      gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog), filename);
+      g_free(filename);
+
+      gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG (dialog),
+                                              _("If you don't save, all your unsaved changes will be permanently lost."));
+
+      gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+                              _("Save and open"), GTK_RESPONSE_YES,
+                              _("Cancel"), GTK_RESPONSE_CANCEL,
+                              _("Continue without saving"), GTK_RESPONSE_NO,
+                              NULL);
+
       res = gtk_dialog_run (GTK_DIALOG (dialog));
+
       gtk_widget_destroy (dialog);
 
       if (res == GTK_RESPONSE_YES)
+      {
         gtr_save_current_file_dialog (NULL, priv->active_window);
+        gtr_window_show_dlteams (priv->active_window);
+        return;
+      }
+
+      else if (res == GTK_RESPONSE_CANCEL){
+        return;
+      }
     }
 
+  if (dialog != NULL)
+    {
+      gtk_window_present (GTK_WINDOW (dialog));
+      return;
+    }
   gtr_window_show_dlteams (priv->active_window);
 }
 
@@ -595,13 +637,6 @@ gtr_application_startup (GApplication *application)
 
   g_set_application_name (_("Translation Editor"));
   gtk_window_set_default_icon_name (PACKAGE_APPID);
-
-
-  /* Custom css */
-  priv->provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (priv->provider, "/org/gnome/translator/styles.css");
-
-  load_accels ();
 
   /* We set the default icon dir */
   gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
