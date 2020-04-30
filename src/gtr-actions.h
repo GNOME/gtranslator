@@ -43,6 +43,7 @@ struct _LastSearchData
   gint wrap_around:1;
 };
 
+gboolean gtr_want_to_save_current_dialog (GtrWindow * window);
 
 void gtr_open_file_dialog (GtkAction * action, GtrWindow * window);
 

@@ -181,6 +181,54 @@ gtr_file_chooser_analyse (gpointer dialog,
     }
 }
 
+gboolean
+gtr_want_to_save_current_dialog (GtrWindow * window)
+{
+  gint res = 0;
+  GtrTab *tab;
+  GtrPo *po;
+
+  g_autoptr (GtkWidget) dialog = NULL;
+  g_autoptr (GFile) location = NULL;
+  g_autofree gchar *filename = NULL;
+  g_autofree gchar *markup = NULL;
+
+  tab = gtr_window_get_active_tab (window);
+  po = gtr_tab_get_po (tab);
+  location = gtr_po_get_location (po);
+  filename = g_file_get_path (location);
+
+  dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   GTK_MESSAGE_WARNING,
+                                   GTK_BUTTONS_NONE, NULL);
+
+  markup = g_strdup_printf (
+    _("Do you want to save changes to this file: "
+      "<span weight=\"bold\" size=\"large\">%s</span>?"),
+    filename);
+
+  gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog), markup);
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+    _("If you don't save, all your unsaved changes will be permanently lost."));
+
+  gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+                          _("Save and open"), GTK_RESPONSE_YES,
+                          _("Cancel"), GTK_RESPONSE_CANCEL,
+                          _("Continue without saving"), GTK_RESPONSE_NO,
+                          NULL);
+
+  res = gtk_dialog_run (GTK_DIALOG (dialog));
+
+  if (res == GTK_RESPONSE_CANCEL)
+    return FALSE;
+
+  if (res == GTK_RESPONSE_YES)
+    gtr_save_current_file_dialog (NULL, window);
+
+  return TRUE;
+}
+
 /*
  * The "Open file" dialog.
  */
@@ -188,75 +236,19 @@ void
 gtr_open_file_dialog (GtkAction * action, GtrWindow * window)
 {
   GtkWidget *dialog = NULL;
-  GList *list;
+  g_autoptr (GList) list = NULL;
 
   list = get_modified_documents (window);
   if (list != NULL)
     {
-      GtkWidget *dialog;
-      gint res = 0;
-      GtrTab *tab;
-      GtrPo *po;
-      GFile *location;
-      gchar *filename;
-
-      tab = gtr_window_get_active_tab (window);
-      po = gtr_tab_get_po (tab);
-      location = gtr_po_get_location (po);
-      filename = g_file_get_path (location);
-
-      dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                       GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_WARNING,
-                                       GTK_BUTTONS_NONE, NULL);
-
-      filename = g_strdup_printf("<span weight=\"bold\" size=\"large\">%s</span>",
-                                 _("Do you want to save changes to this file ?"));
-      gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog), filename);
-      g_free(filename);
-
-      gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG (dialog),
-                                              _("If you don't save, all your unsaved changes will be permanently lost."));
-
-      gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-                              _("Save and open"), GTK_RESPONSE_YES,
-                              _("Cancel"), GTK_RESPONSE_CANCEL,
-                              _("Continue without saving"), GTK_RESPONSE_NO,
-                              NULL);
-
-      res = gtk_dialog_run (GTK_DIALOG (dialog));
-      g_list_free (list);
-      gtk_widget_destroy (dialog);
-
-      if (res == GTK_RESPONSE_YES)
-        {
-          gtr_save_current_file_dialog (NULL, window);
-          gtr_open_file_dialog (NULL, window);
-          return;
-        }
-      else if (res == GTK_RESPONSE_CANCEL)
-        {
-            return;
-        }
+      if (!gtr_want_to_save_current_dialog (window))
+        return;
     }
 
-  if (dialog != NULL)
-    {
-      gtk_window_present (GTK_WINDOW (dialog));
-      return;
-    }
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
                                  FILESEL_OPEN,
                                  _("Open file for translation"),
                                  _gtr_application_get_last_dir (GTR_APP));
-
-  /*
-   * With the gettext parser/writer API, we can't currently read/write
-   * to remote files with gnome-vfs. Eventually, we should intercept
-   * remote requests and use gnome-vfs to retrieve a temporary file to
-   * work on, and transmit it back when saved.
-   */
-  //gtk_file_chooser_set_local_only(GTK_FILE_CHOOSER(dialog), TRUE);
 
   gtr_file_chooser_analyse ((gpointer) dialog, FILESEL_OPEN, window);
 }
@@ -424,8 +416,7 @@ gtr_save_current_file_dialog (GtkWidget * widget, GtrWindow * window)
       dialog = gtk_message_dialog_new (GTK_WINDOW (window),
                                        GTK_DIALOG_DESTROY_WITH_PARENT,
                                        GTK_MESSAGE_WARNING,
-                                       GTK_BUTTONS_OK,
-                                       "%s", error->message);
+                                       GTK_BUTTONS_OK, "%s", error->message);
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
       g_clear_error (&error);
