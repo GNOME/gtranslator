@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-03-14 10:45+0000\n"
+"POT-Creation-Date: 2020-04-30 07:03+0000\n"
 "PO-Revision-Date: 2020-03-18 00:05+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -55,7 +55,7 @@ msgstr ""
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:657
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:645
 #: src/gtr-notebook.ui:308 src/gtr-window.c:320 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "翻訳エディター"
@@ -249,27 +249,48 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "翻訳エディターのウェブサイト"
 
-#: src/gtr-actions-file.c:204 src/gtr-application.c:458
-msgid "Do you want to save the changes?"
-msgstr "変更点を保存しますか?"
+#: src/gtr-actions-file.c:207
+#, c-format
+msgid ""
+"Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
+"\">%s</span>?"
+msgstr ""
 
-#: src/gtr-actions-file.c:205 src/gtr-application.c:459
-msgid "Warning"
-msgstr "警告"
+#: src/gtr-actions-file.c:213
+#, fuzzy
+#| msgid "If you don’t save, all your changes will be permanently lost."
+msgid "If you don't save, all your unsaved changes will be permanently lost."
+msgstr "保存しないと、すべての変更点を完全に失うことになります。"
 
-#: src/gtr-actions-file.c:223
+#: src/gtr-actions-file.c:216
+msgid "Save and open"
+msgstr ""
+
+#: src/gtr-actions-file.c:217
+#, fuzzy
+#| msgid "_Cancel"
+msgid "Cancel"
+msgstr "キャンセル(_C)"
+
+#: src/gtr-actions-file.c:218
+#, fuzzy
+#| msgid "Close _without Saving"
+msgid "Continue without saving"
+msgstr "保存せずに閉じる(_W)"
+
+#: src/gtr-actions-file.c:250
 msgid "Open file for translation"
 msgstr "翻訳するファイルの選択"
 
-#: src/gtr-actions-file.c:295 src/gtr-actions-file.c:412
+#: src/gtr-actions-file.c:314 src/gtr-actions-file.c:431
 msgid "File saved."
 msgstr "ファイルを保存しました。"
 
-#: src/gtr-actions-file.c:343
+#: src/gtr-actions-file.c:362
 msgid "Save file as…"
 msgstr "名前を付けて保存…"
 
-#: src/gtr-actions-file.c:804
+#: src/gtr-actions-file.c:823
 msgid "Files saved."
 msgstr "ファイルを保存しました。"
 
@@ -1312,6 +1333,12 @@ msgstr ""
 "を判定する際のしきい値で、双方のメッセージの長さがいくつまで異なることが許容"
 "できるかを表す数値です (ここで指定した数だけ長さが異なっていても同一のメッ"
 "セージであると判定します)。"
+
+#~ msgid "Do you want to save the changes?"
+#~ msgstr "変更点を保存しますか?"
+
+#~ msgid "Warning"
+#~ msgstr "警告"
 
 #~ msgid "Found and replaced one occurrence"
 #~ msgid_plural "Found and replaced %d occurrences"
