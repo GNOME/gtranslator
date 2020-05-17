@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-03-14 10:45+0000\n"
-"PO-Revision-Date: 2020-03-14 13:45+0100\n"
+"POT-Creation-Date: 2020-04-30 07:03+0000\n"
+"PO-Revision-Date: 2020-05-17 11:30+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -61,7 +61,7 @@ msgstr ""
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:657
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:645
 #: src/gtr-notebook.ui:308 src/gtr-window.c:320 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Edytor tłumaczeń"
@@ -264,27 +264,45 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "Witryna edytora tłumaczeń"
 
-#: src/gtr-actions-file.c:204 src/gtr-application.c:458
-msgid "Do you want to save the changes?"
-msgstr "Zapisać zmiany?"
+#: src/gtr-actions-file.c:207
+#, c-format
+msgid ""
+"Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
+"\">%s</span>?"
+msgstr ""
+"Zapisać zmiany w tym pliku: <span weight=\"bold\" size=\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:205 src/gtr-application.c:459
-msgid "Warning"
-msgstr "Ostrzeżenie"
+#: src/gtr-actions-file.c:213
+msgid "If you don't save, all your unsaved changes will be permanently lost."
+msgstr ""
+"Jeżeli dokument nie zostanie zapisany, wszystkie niezapisane zmiany zostaną "
+"bezpowrotnie utracone."
 
-#: src/gtr-actions-file.c:223
+#: src/gtr-actions-file.c:216
+msgid "Save and open"
+msgstr "Zapisz i otwórz"
+
+#: src/gtr-actions-file.c:217
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: src/gtr-actions-file.c:218
+msgid "Continue without saving"
+msgstr "Zamknij bez zapisywania"
+
+#: src/gtr-actions-file.c:250
 msgid "Open file for translation"
 msgstr "Otwiera plik do tłumaczenia"
 
-#: src/gtr-actions-file.c:295 src/gtr-actions-file.c:412
+#: src/gtr-actions-file.c:314 src/gtr-actions-file.c:431
 msgid "File saved."
 msgstr "Zapisano plik."
 
-#: src/gtr-actions-file.c:343
+#: src/gtr-actions-file.c:362
 msgid "Save file as…"
 msgstr "Zapis pliku jako…"
 
-#: src/gtr-actions-file.c:804
+#: src/gtr-actions-file.c:823
 msgid "Files saved."
 msgstr "Zapisano pliki."
 
