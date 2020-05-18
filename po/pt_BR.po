@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-03-14 10:45+0000\n"
-"PO-Revision-Date: 2020-03-17 07:55-0300\n"
+"POT-Creation-Date: 2020-05-17 09:31+0000\n"
+"PO-Revision-Date: 2020-05-17 21:36-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -69,7 +69,7 @@ msgstr ""
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:657
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:645
 #: src/gtr-notebook.ui:308 src/gtr-window.c:320 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Editor de tradução"
@@ -275,27 +275,50 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "Site do Editor de tradução"
 
-#: src/gtr-actions-file.c:204 src/gtr-application.c:458
-msgid "Do you want to save the changes?"
-msgstr "Você deseja salvar as alterações?"
+#: src/gtr-actions-file.c:207
+#, c-format
+msgid ""
+"Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
+"\">%s</span>?"
+msgstr ""
+"Deseja salvar as alterações a este arquivo: <span weight=\"bold\" size="
+"\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:205 src/gtr-application.c:459
-msgid "Warning"
-msgstr "Atenção"
+#: src/gtr-actions-file.c:213
+#| msgid "If you don’t save, all your changes will be permanently lost."
+msgid "If you don't save, all your unsaved changes will be permanently lost."
+msgstr ""
+"Se você não salvar, todas as suas alterações não salvas serão "
+"permanentemente perdidas."
 
-#: src/gtr-actions-file.c:223
+#: src/gtr-actions-file.c:216
+#| msgid "Save all open files"
+msgid "Save and open"
+msgstr "Salvar e abrir"
+
+#: src/gtr-actions-file.c:217
+#| msgid "_Cancel"
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/gtr-actions-file.c:218
+#| msgid "Close _without Saving"
+msgid "Continue without saving"
+msgstr "Continuar sem salvar"
+
+#: src/gtr-actions-file.c:250
 msgid "Open file for translation"
 msgstr "Abrir arquivo para tradução"
 
-#: src/gtr-actions-file.c:295 src/gtr-actions-file.c:412
+#: src/gtr-actions-file.c:314 src/gtr-actions-file.c:431
 msgid "File saved."
 msgstr "Arquivo salvo."
 
-#: src/gtr-actions-file.c:343
+#: src/gtr-actions-file.c:362
 msgid "Save file as…"
 msgstr "Salvar arquivo como…"
 
-#: src/gtr-actions-file.c:804
+#: src/gtr-actions-file.c:823
 msgid "Files saved."
 msgstr "Arquivos salvos."
 
@@ -701,7 +724,6 @@ msgid "Order by menu"
 msgstr "Ordenar por menu"
 
 #: src/gtr-notebook.ui:585
-#| msgid "Undo (<Ctrl>z)"
 msgid "Find (<Ctrl><f>)"
 msgstr "Localiza (<Ctrl><f>)"
 
@@ -922,22 +944,18 @@ msgid "Case sensitive"
 msgstr "Diferenciar maiúsculas de minúsculas"
 
 #: src/gtr-search-bar.c:489 src/gtr-search-bar.ui:225
-#| msgid "Match _entire word only"
 msgid "Match whole word only"
 msgstr "Coincidir apenas palavra completa"
 
 #: src/gtr-search-bar.c:494
-#| msgid "_Wrap around"
 msgid "Wrap around"
 msgstr "Voltar ao início"
 
 #: src/gtr-search-bar.c:499
-#| msgid "_Original text"
 msgid "Original text"
 msgstr "Texto original"
 
 #: src/gtr-search-bar.c:504
-#| msgid "_Translated text"
 msgid "Translated text"
 msgstr "Texto traduzido"
 
@@ -960,17 +978,14 @@ msgstr ""
 "maiúsculo/minúsculo"
 
 #: src/gtr-search-bar.ui:238
-#| msgid "_Wrap around"
 msgid "Wrap Around"
 msgstr "Voltar ao início"
 
 #: src/gtr-search-bar.ui:251
-#| msgid "_Original text"
 msgid "Original-text"
 msgstr "Texto original"
 
 #: src/gtr-search-bar.ui:264
-#| msgid "_Translated text"
 msgid "Translated-text"
 msgstr "Texto traduzido"
 
@@ -1241,7 +1256,6 @@ msgid "Backward-search"
 msgstr "Pesquisa para trás"
 
 #: src/help-overlay.ui:187
-#| msgid "Find and replace"
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Oculta a barra de localização e substituição"
@@ -1362,6 +1376,12 @@ msgid ""
 msgstr ""
 "Diferença máxima em comprimento entre as mensagens exibidas como ocorrências "
 "pela memória de tradução."
+
+#~ msgid "Do you want to save the changes?"
+#~ msgstr "Você deseja salvar as alterações?"
+
+#~ msgid "Warning"
+#~ msgstr "Atenção"
 
 #~ msgid "Found and replaced one occurrence"
 #~ msgid_plural "Found and replaced %d occurrences"
@@ -2034,9 +2054,6 @@ msgstr ""
 
 #~ msgid "_Save All"
 #~ msgstr "_Salvar todos"
-
-#~ msgid "Save all open files"
-#~ msgstr "Salva todos os arquivos abertos"
 
 #~ msgid "_Close All"
 #~ msgstr "_Fechar todos"
