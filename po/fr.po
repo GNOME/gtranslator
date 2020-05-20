@@ -12,33 +12,33 @@
 # Claude Paroz <claude@2xlibre.net>, 2009.
 # Laurent Coudeur <laurentc@iol.ie>, 2010.
 # Guillaume Bernard <associations@guillaume-bernard.fr>, 2014.
-# Charles Monzat <charles.monzat@free.fr>, 2017-2019.
+# Charles Monzat <charles.monzat@free.fr>, 2017-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator-HEAD-po-fr\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2019-09-10 06:46+0000\n"
-"PO-Revision-Date: 2019-10-20 20:29+0200\n"
+"POT-Creation-Date: 2020-03-26 08:06+0000\n"
+"PO-Revision-Date: 2020-04-01 16:04+0200\n"
 "Last-Translator: Charles Monzat <charles.monzat@free.fr>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"X-Generator: Gtranslator 3.34.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Gtranslator 3.36.0\n"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:6
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
 msgstr "Gtranslator"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:8
 #: data/org.gnome.Gtranslator.desktop.in.in:5
 msgid "Translate and localize applications and libraries"
 msgstr "Traduit et localise des programmes et des bibliothèques"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:9
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:10
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -54,7 +54,7 @@ msgstr ""
 "traductions/messages du fichier .po), une navigation et une édition faciles "
 "et précises des messages et des commentaires."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:18
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:19
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
 "alternate language, insert tags, integration with subversion and a source "
@@ -64,12 +64,12 @@ msgstr ""
 "langue », « Insérer les balises », « Intégration avec Subversion » et "
 "« Affichage du code source »."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:82
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:99
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:567
-#: src/gtr-notebook.ui:294 src/gtr-window.c:318 src/gtr-window.ui:25
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:657
+#: src/gtr-notebook.ui:308 src/gtr-window.c:320 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Éditeur de traduction"
 
@@ -209,13 +209,12 @@ msgstr ""
 "Liste des greffons actifs et leur « emplacement ». Consultez le fichier ."
 "gtranslator-plugin pour obtenir l’« emplacement » d’un greffon donné."
 
-#: src/codeview/gtr-codeview.c:353
+#: src/codeview/gtr-codeview.c:374
 msgid "Paths:"
 msgstr "Chemins :"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
-#: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:588
-#: src/gtr-search-dialog.c:393
+#: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:622
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "_Fermer"
@@ -268,33 +267,30 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "Site Web d’Éditeur de traduction"
 
-#: src/gtr-actions-file.c:200
+#: src/gtr-actions-file.c:204 src/gtr-application.c:458
+#| msgid "Docum_ents with unsaved changes:"
+msgid "Do you want to save the changes?"
+msgstr "Voulez-vous enregistrer les modifications ?"
+
+#: src/gtr-actions-file.c:205 src/gtr-application.c:459
+msgid "Warning"
+msgstr "Avertissement"
+
+#: src/gtr-actions-file.c:223
 msgid "Open file for translation"
 msgstr "Ouvrir un fichier à traduire"
 
-#: src/gtr-actions-file.c:272 src/gtr-actions-file.c:389
+#: src/gtr-actions-file.c:295 src/gtr-actions-file.c:412
 msgid "File saved."
 msgstr "Fichier enregistré."
 
-#: src/gtr-actions-file.c:320
+#: src/gtr-actions-file.c:343
 msgid "Save file as…"
 msgstr "Enregistrer le fichier sous…"
 
-#: src/gtr-actions-file.c:781
+#: src/gtr-actions-file.c:804
 msgid "Files saved."
 msgstr "Fichiers enregistrés."
-
-#: src/gtr-actions-search.c:163
-#, c-format
-#| msgid "Found and replaced one occurrence"
-msgid "Found and replaced one occurrence"
-msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "Une occurrence trouvée et remplacée"
-msgstr[1] "%d occurrences trouvées et remplacées"
-
-#: src/gtr-actions-search.c:173
-msgid "Phrase not found"
-msgstr "Phrase non trouvée"
 
 #: src/gtr-assistant.c:128
 #, c-format
@@ -339,8 +335,8 @@ msgstr "Courriel du traducteur"
 msgid "Team email"
 msgstr "Courriel de l’équipe de traduction"
 
-#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:521
-#: src/gtr-window.c:556
+#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:547
+#: src/gtr-window.c:558
 msgid "Profile"
 msgstr "Profil"
 
@@ -356,14 +352,14 @@ msgstr "Confirmation"
 msgid "Close _without Saving"
 msgstr "Fermer _sans enregistrer"
 
-#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:86
+#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:89
 #: src/gtr-file-dialogs.c:45 src/gtr-jump-dialog.c:90
-#: src/gtr-preferences-dialog.c:394 src/gtr-profile-dialog.c:71
+#: src/gtr-preferences-dialog.c:418 src/gtr-profile-dialog.c:71
 #: src/translation-memory/gtr-translation-memory-dialog.c:81
 msgid "_Cancel"
 msgstr "A_nnuler"
 
-#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:84
+#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:87
 #: src/gtr-file-dialogs.c:47
 msgid "_Save"
 msgstr "_Enregistrer"
@@ -414,40 +410,40 @@ msgstr ""
 "Si vous n’enregistrez pas, toutes vos modifications seront définitivement "
 "perdues."
 
-#: src/gtr-context.c:81
-msgid "Edit notes"
-msgstr "Modifier des notes"
+#: src/gtr-context.c:82
+#| msgid "Notes:"
+msgid "Notes"
+msgstr "Notes"
 
-#: src/gtr-context.c:268
+#: src/gtr-context.c:290
 msgid "Notes:"
 msgstr "Notes :"
 
-#: src/gtr-context.c:276
+#: src/gtr-context.c:298
 msgid "Add Note"
 msgstr "Ajouter une note"
 
-#: src/gtr-context.c:281
+#: src/gtr-context.c:303
 msgid "Edit"
 msgstr "Modifier"
 
-#: src/gtr-context.c:326
+#: src/gtr-context.c:348
 msgid "Extracted comments:"
 msgstr "Commentaires extraits :"
 
-#: src/gtr-context.c:329
+#: src/gtr-context.c:351
 msgid "Context:"
 msgstr "Contexte :"
 
-#: src/gtr-context.c:332
+#: src/gtr-context.c:354
 msgid "Format:"
 msgstr "Format :"
 
-#: src/gtr-dl-teams.c:604
-#| msgid "Translation Memory"
+#: src/gtr-dl-teams.c:617
 msgid "Translation Team"
 msgstr "Équipe de traduction"
 
-#: src/gtr-dl-teams.c:611
+#: src/gtr-dl-teams.c:624
 msgid "Module"
 msgstr "Module"
 
@@ -458,7 +454,6 @@ msgstr ""
 "fichier de traduction."
 
 #: src/gtr-dl-teams.ui:81
-#| msgid "No profile"
 msgid "Load file"
 msgstr "Charger le fichier"
 
@@ -466,11 +461,11 @@ msgstr "Charger le fichier"
 msgid "Load from Damned Lies"
 msgstr "Charger à partir de Damned Lies"
 
-#: src/gtr-dl-teams.ui:105 src/gtr-notebook.ui:298 src/gtr-projects.ui:58
+#: src/gtr-dl-teams.ui:105 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Ouvrir…"
 
-#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:511 src/gtr-projects.ui:91
+#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
 msgid "Main Menu"
 msgstr "Menu principal"
 
@@ -482,15 +477,15 @@ msgstr "Nouvelle fenêtre"
 msgid "Preferences"
 msgstr "Préférences"
 
-#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:160
+#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
 msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 
-#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
 msgid "About"
 msgstr "À propos de"
 
-#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:276 src/gtr-projects.ui:188
+#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
 msgid "Quit"
 msgstr "Quitter"
 
@@ -613,15 +608,14 @@ msgid "_Plural forms"
 msgstr "Formes _plurielles"
 
 #: src/gtr-languages-fetcher.ui:200
-#| msgid "Edit options manually"
 msgid "_Edit options manually"
 msgstr "_Modifier les options manuellement"
 
-#: src/gtr-message-table.c:219
+#: src/gtr-message-table.c:234
 msgid "Original Message"
 msgstr "Message original"
 
-#: src/gtr-message-table.c:238
+#: src/gtr-message-table.c:253
 msgid "Translated Message"
 msgstr "Message traduit"
 
@@ -645,16 +639,15 @@ msgstr "Message original"
 msgid "Translated message"
 msgstr "Message traduit"
 
-#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:371
-#: src/gtr-search-dialog.c:455
+#: src/gtr-notebook.ui:136
 msgid "Find"
 msgstr "Rechercher"
 
-#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:459
+#: src/gtr-notebook.ui:150
 msgid "Find and replace"
 msgstr "Rechercher et remplacer"
 
-#: src/gtr-notebook.ui:164
+#: src/gtr-notebook.ui:164 src/gtr-projects.ui:147
 msgid "Build translation memory"
 msgstr "Construire la mémoire de traduction"
 
@@ -662,43 +655,64 @@ msgstr "Construire la mémoire de traduction"
 msgid "Edit header"
 msgstr "Modifier l’en-tête"
 
-#: src/gtr-notebook.ui:302
+#: src/gtr-notebook.ui:276 src/gtr-preferences-dialog.c:623
+#: src/gtr-projects.ui:202
+msgid "Help"
+msgstr "Aide"
+
+#: src/gtr-notebook.ui:321
 msgid "Open a new file (<Ctrl>o)"
 msgstr "Ouvrir un nouveau fichier (<Ctrl>o)"
 
-#: src/gtr-notebook.ui:328
+#: src/gtr-notebook.ui:341
+#| msgid "Open a new file (<Ctrl>o)"
+msgid "Open from Damned Lies (<Ctrl>d)"
+msgstr "Ouvrir à partir de Damned Lies (<Ctrl>d)"
+
+#: src/gtr-notebook.ui:387
 msgid "Undo (<Ctrl>z)"
 msgstr "Annuler (<Ctrl>z)"
 
-#: src/gtr-notebook.ui:350
+#: src/gtr-notebook.ui:409
 msgid "Redo (<Ctrl><Shift>z)"
 msgstr "Rétablir (<Ctrl><Maj>z)"
 
-#: src/gtr-notebook.ui:395
+#: src/gtr-notebook.ui:454
 msgid "Previous message without translation (<Alt><Page Up>)"
 msgstr "Message précédent non traduit (<Alt><Page haut>)"
 
-#: src/gtr-notebook.ui:417
+#: src/gtr-notebook.ui:476
 msgid "Next message without translation (<Alt><Page Down>)"
 msgstr "Message suivant non traduit (<Alt><Page bas>)"
 
-#: src/gtr-notebook.ui:457
+#: src/gtr-notebook.ui:516
 msgid "Toggle fuzzy state (<Ctrl>+u)"
 msgstr "Basculer l’état approximatif (<Ctrl>+u)"
 
-#: src/gtr-notebook.ui:487
+# Cette chaîne correspond à la description (infobulle) de l’action « Trier les messages par » (Charles).
+#: src/gtr-notebook.ui:537
+#| msgid "Order messages by"
+msgid "Sort messages by"
+msgstr "Trier les messages"
+
+#: src/gtr-notebook.ui:547
 msgid "Order by menu"
 msgstr "Trier par menu"
 
-#: src/gtr-notebook.ui:527
+#: src/gtr-notebook.ui:585
+#| msgid "Undo (<Ctrl>z)"
+msgid "Find (<Ctrl><f>)"
+msgstr "Rechercher (<Ctrl><f>)"
+
+#: src/gtr-notebook.ui:624
 msgid "Save"
 msgstr "Enregistrer"
 
-#: src/gtr-notebook.ui:531
+#: src/gtr-notebook.ui:628
 msgid "Save the current file (<Ctrl>s)"
 msgstr "Enregistrer le fichier actuel (<Ctrl>s)"
 
-#: src/gtr-notebook.ui:546
+#: src/gtr-notebook.ui:643
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Enregistrer sous (<Ctrl><Maj>s)"
 
@@ -770,31 +784,27 @@ msgstr "Il s’est produit une erreur d’écriture du fichier po : %s"
 msgid "There was an error writing the PO file: %s"
 msgstr "Il s’est produit une erreur d’écriture du fichier po : %s"
 
-#: src/gtr-preferences-dialog.c:370
+#: src/gtr-preferences-dialog.c:394
 msgid "Impossible to remove the active profile"
 msgstr "Impossible de supprimer le profil actif"
 
-#: src/gtr-preferences-dialog.c:376
+#: src/gtr-preferences-dialog.c:400
 msgid "Another profile should be selected as active before"
 msgstr "Un autre profil doit d’abord être activé"
 
-#: src/gtr-preferences-dialog.c:389
+#: src/gtr-preferences-dialog.c:413
 msgid "Are you sure you want to delete this profile?"
 msgstr "Voulez-vous vraiment détruire ce profil ?"
 
-#: src/gtr-preferences-dialog.c:397
+#: src/gtr-preferences-dialog.c:421
 msgid "_Delete"
 msgstr "_Supprimer"
 
-#: src/gtr-preferences-dialog.c:527
+#: src/gtr-preferences-dialog.c:553
 msgid "Active"
 msgstr "Actif"
 
-#: src/gtr-preferences-dialog.c:589
-msgid "Help"
-msgstr "Aide"
-
-#: src/gtr-preferences-dialog.c:591 src/gtr-preferences-dialog.ui:49
+#: src/gtr-preferences-dialog.c:625 src/gtr-preferences-dialog.ui:49
 msgid "Translation Editor Preferences"
 msgstr "Préférences de l’éditeur de traduction"
 
@@ -906,54 +916,62 @@ msgstr "Sélectionner un fichier po"
 msgid "Load from DL…"
 msgstr "Charger à partir de DL…"
 
-#: src/gtr-search-dialog.c:349 src/gtr-search-dialog.ui:6
-#: src/gtr-search-dialog.ui:53
+#: src/gtr-search-bar.c:484 src/gtr-search-bar.ui:212
+msgid "Case sensitive"
+msgstr "Respecter la casse"
+
+#: src/gtr-search-bar.c:489 src/gtr-search-bar.ui:225
+#| msgid "Match _entire word only"
+msgid "Match whole word only"
+msgstr "Mots entiers seulement"
+
+#: src/gtr-search-bar.c:494
+#| msgid "_Wrap around"
+msgid "Wrap around"
+msgstr "Recherche circulaire"
+
+#: src/gtr-search-bar.c:499
+#| msgid "_Original text"
+msgid "Original text"
+msgstr "Texte original"
+
+#: src/gtr-search-bar.c:504
+#| msgid "_Translated text"
+msgid "Translated text"
+msgstr "Texte traduit"
+
+#: src/gtr-search-bar.ui:121
 msgid "Replace"
 msgstr "Remplacer"
 
-#: src/gtr-search-dialog.c:457
-msgid "Replace _All"
-msgstr "_Tout remplacer"
-
-#: src/gtr-search-dialog.c:461
-msgid "_Replace"
-msgstr "_Remplacer"
-
-#: src/gtr-search-dialog.ui:37
+#: src/gtr-search-bar.ui:133
 msgid "Replace All"
 msgstr "Tout remplacer"
 
-#: src/gtr-search-dialog.ui:109
-msgid "_Search for: "
-msgstr "_Rechercher : "
+#: src/gtr-search-bar.ui:153
+msgid "Switch between Search and Search-and-Replace"
+msgstr "Basculer entre Rechercher et Rechercher et remplacer"
 
-#: src/gtr-search-dialog.ui:124
-msgid "Replace _with: "
-msgstr "Remplacer _par : "
+#: src/gtr-search-bar.ui:173
+msgid "Show or hide search options such as case sensitivity"
+msgstr ""
+"Afficher ou masquer les options de recherche telles que la sensibilité à la "
+"casse"
 
-#: src/gtr-search-dialog.ui:184
-msgid "_Original text"
-msgstr "Texte _original"
+#: src/gtr-search-bar.ui:238
+#| msgid "_Wrap around"
+msgid "Wrap Around"
+msgstr "Recherche circulaire"
 
-#: src/gtr-search-dialog.ui:201
-msgid "_Translated text"
-msgstr "_Texte traduit"
+#: src/gtr-search-bar.ui:251
+#| msgid "_Original text"
+msgid "Original-text"
+msgstr "Texte original"
 
-#: src/gtr-search-dialog.ui:237
-msgid "_Match case"
-msgstr "_Respecter la casse"
-
-#: src/gtr-search-dialog.ui:253
-msgid "Match _entire word only"
-msgstr "Mots _entiers seulement"
-
-#: src/gtr-search-dialog.ui:269
-msgid "Search _backwards"
-msgstr "Rechercher en _arrière"
-
-#: src/gtr-search-dialog.ui:286
-msgid "_Wrap around"
-msgstr "_Recherche circulaire"
+#: src/gtr-search-bar.ui:264
+#| msgid "_Translated text"
+msgid "Translated-text"
+msgstr "Texte traduit"
 
 #: src/gtr-statusbar.c:117 src/gtr-statusbar.c:252
 msgid "INS"
@@ -967,97 +985,89 @@ msgstr "ÉCR"
 msgid "Close document"
 msgstr "Fermer le document"
 
-#: src/gtr-tab.c:246
+#: src/gtr-tab.c:335
 msgid "There is an error in the message:"
 msgstr "Il y a une erreur dans le message :"
 
-#: src/gtr-tab.c:459 src/gtr-tab.c:575
+#: src/gtr-tab.c:549 src/gtr-tab.c:675
 msgid "fuzzy"
 msgstr "approximatif"
 
-#: src/gtr-tab.c:605
+#: src/gtr-tab.c:705
 #, c-format
 msgid "Plural %d"
 msgstr "Pluriel %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1158
+#: src/gtr-tab.c:1264
 msgid "Path:"
 msgstr "Chemin :"
 
-#: src/gtr-tab.c:1808
+#: src/gtr-tab.c:1914
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Traduit : %0.2f %%"
 
-#: src/gtr-tab.c:1809
+#: src/gtr-tab.c:1915
 #, c-format
 msgid "Translated: %d"
 msgstr "Traduit : %d"
 
-#: src/gtr-tab.c:1810
+#: src/gtr-tab.c:1916
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Non traduit : %d"
 
-#: src/gtr-tab.c:1811
+#: src/gtr-tab.c:1917
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Approximatif : %d"
 
-#: src/gtr-tab.ui:153
+#: src/gtr-tab.ui:79
 msgid "_Original Message"
 msgstr "Message _original"
 
-#: src/gtr-tab.ui:245
+#: src/gtr-tab.ui:171
 msgid "Translate_d Text"
 msgstr "_Texte traduit"
 
-#: src/gtr-utils.c:516
-msgid ""
-"Unable to display help. Please make sure the Translation Editor "
-"documentation package is installed."
-msgstr ""
-"Impossible d’afficher l’aide. Assurez-vous que le paquet de documentation de "
-"l’éditeur de traduction est bien installé."
-
-#: src/gtr-window.c:173
+#: src/gtr-window.c:175
 msgid "Untranslated"
 msgstr "Non traduit"
 
-#: src/gtr-window.c:176
+#: src/gtr-window.c:178
 msgid "Translated"
 msgstr "Traduit"
 
-#: src/gtr-window.c:179
+#: src/gtr-window.c:181
 msgid "Fuzzy"
 msgstr "Approximatif"
 
-#: src/gtr-window.c:186
+#: src/gtr-window.c:188
 #, c-format
 msgid "Current: %d"
 msgstr "Actuel : %d"
 
-#: src/gtr-window.c:187
+#: src/gtr-window.c:189
 #, c-format
 msgid "Total: %d"
 msgstr "Total : %d"
 
-#: src/gtr-window.c:188
+#: src/gtr-window.c:190
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "%d traduit"
 msgstr[1] "%d traduits"
 
-#: src/gtr-window.c:191
+#: src/gtr-window.c:193
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "%d approximatif"
 msgstr[1] "%d approximatifs"
 
-#: src/gtr-window.c:193
+#: src/gtr-window.c:195
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
@@ -1065,22 +1075,22 @@ msgstr[0] "%d non traduit"
 msgstr[1] "%d non traduits"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:303
+#: src/gtr-window.c:305
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Éditeur de traduction"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:309
+#: src/gtr-window.c:311
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Éditeur de traduction"
 
-#: src/gtr-window.c:540
+#: src/gtr-window.c:542
 msgid "No profile"
 msgstr "Aucun profil"
 
-#: src/gtr-window.c:558
+#: src/gtr-window.c:560
 msgid "Profile for the active document"
 msgstr "Profil du document actif"
 
@@ -1195,20 +1205,41 @@ msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Construire la mémoire de traduction"
 
-#: src/help-overlay.ui:148
+#: src/help-overlay.ui:145
+msgctxt "shortcut window"
+msgid "Copy below"
+msgstr "Copier en dessous"
+
+#: src/help-overlay.ui:155
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Rechercher et remplacer"
 
-#: src/help-overlay.ui:152
+#: src/help-overlay.ui:159
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Rechercher"
 
-#: src/help-overlay.ui:159
+#: src/help-overlay.ui:166
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Rechercher et remplacer"
+
+#: src/help-overlay.ui:173
+msgctxt "shortcut window"
+msgid "Forward-search"
+msgstr "Rechercher en avant"
+
+#: src/help-overlay.ui:180
+msgctxt "shortcut window"
+msgid "Backward-search"
+msgstr "Rechercher en arrière"
+
+#: src/help-overlay.ui:187
+#| msgid "Find and replace"
+msgctxt "shortcut window"
+msgid "Hide find & replace bar"
+msgstr "Masquer la barre Rechercher et remplacer"
 
 #: src/main.c:97
 msgid "— Edit PO files"
@@ -1327,6 +1358,43 @@ msgid ""
 msgstr ""
 "Différence maximale de longueur entre les messages affichés correspondant à "
 "la mémoire de traduction."
+
+#~| msgid "Found and replaced one occurrence"
+#~ msgid "Found and replaced one occurrence"
+#~ msgid_plural "Found and replaced %d occurrences"
+#~ msgstr[0] "Une occurrence trouvée et remplacée"
+#~ msgstr[1] "%d occurrences trouvées et remplacées"
+
+#~ msgid "Phrase not found"
+#~ msgstr "Phrase non trouvée"
+
+#~ msgid "Edit notes"
+#~ msgstr "Modifier des notes"
+
+#~ msgid "Replace _All"
+#~ msgstr "_Tout remplacer"
+
+#~ msgid "_Replace"
+#~ msgstr "_Remplacer"
+
+#~ msgid "_Search for: "
+#~ msgstr "_Rechercher : "
+
+#~ msgid "Replace _with: "
+#~ msgstr "Remplacer _par : "
+
+#~ msgid "_Match case"
+#~ msgstr "_Respecter la casse"
+
+#~ msgid "Search _backwards"
+#~ msgstr "Rechercher en _arrière"
+
+#~ msgid ""
+#~ "Unable to display help. Please make sure the Translation Editor "
+#~ "documentation package is installed."
+#~ msgstr ""
+#~ "Impossible d’afficher l’aide. Assurez-vous que le paquet de documentation "
+#~ "de l’éditeur de traduction est bien installé."
 
 #~ msgid "Found and replaced %d occurrence"
 #~ msgid_plural "Found and replaced %d occurrences"
