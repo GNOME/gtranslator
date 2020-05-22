@@ -692,7 +692,7 @@ gtr_search_bar_init (GtrSearchBar *self)
 
   gtk_entry_set_activates_default (GTK_ENTRY (self->search_text_entry), TRUE);
 
-  // Sets the Original-text and Translated-text checkbutton toggled by default.
+  // Sets the Original-text, Translated-text and Wrap-around checkbuttons toggled by default.
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
                                 (self->original_text_checkbutton),
@@ -700,6 +700,10 @@ gtr_search_bar_init (GtrSearchBar *self)
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
                                 (self->translated_text_checkbutton),
+                                TRUE);
+
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
+                                (self->wrap_around_button),
                                 TRUE);
 
   gtr_history_entry_set_escape_func (GTR_HISTORY_ENTRY
