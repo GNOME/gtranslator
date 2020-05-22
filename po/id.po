@@ -3,21 +3,21 @@
 # This file is distributed under the same license as the gtranslator package.
 # Mohammad DAMT <mdamt@bisnisweb.com>, 2003.
 # Andika Triwidada <andika@gmail.com>, 2009-2013, 2017.
-#
+# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-3-36\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-03-14 10:45+0000\n"
-"PO-Revision-Date: 2020-03-18 14:29+0700\n"
-"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"POT-Creation-Date: 2020-05-17 09:31+0000\n"
+"PO-Revision-Date: 2020-05-22 11:12+0700\n"
+"Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n!=1;\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -58,7 +58,7 @@ msgstr ""
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:657
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:645
 #: src/gtr-notebook.ui:308 src/gtr-window.c:320 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Penyunting Terjemahan"
@@ -237,34 +237,54 @@ msgstr "Penyunting berkas terjemahan untuk lokalisasi aplikasi dan pustaka."
 #: src/gtr-actions-app.c:101
 msgid "translator-credits"
 msgstr ""
-"Mohammad DAMT <mdamt@bisnisweb.com>, 2003\n"
-"Andika Triwidada <andika@gmail.com>, 2009-2013, 2016, 2020"
+"Mohammad DAMT <mdamt@bisnisweb.com>, 2003.\n"
+"Andika Triwidada <andika@gmail.com>, 2009-2013, 2016, 2020.\n"
+"Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020."
 
 #: src/gtr-actions-app.c:104
 msgid "Translation Editor Web Site"
 msgstr "Situs Web Penyunting Terjemahan"
 
-#: src/gtr-actions-file.c:204 src/gtr-application.c:458
-msgid "Do you want to save the changes?"
-msgstr "Apakah Anda ingin menyimpan perubahan?"
+#: src/gtr-actions-file.c:207
+#, c-format
+msgid ""
+"Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
+"\">%s</span>?"
+msgstr ""
+"Apakah Anda ingin menyimpan perubahan pada berkas ini: <span weight=\"bold\" "
+"size=\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:205 src/gtr-application.c:459
-msgid "Warning"
-msgstr "Peringatan"
+#: src/gtr-actions-file.c:213
+msgid "If you don't save, all your unsaved changes will be permanently lost."
+msgstr ""
+"Jika tidak disimpan, semua perubahan yang belum disimpan akan hilang secara "
+"permanen."
 
-#: src/gtr-actions-file.c:223
+#: src/gtr-actions-file.c:216
+msgid "Save and open"
+msgstr "Simpan dan buka"
+
+#: src/gtr-actions-file.c:217
+msgid "Cancel"
+msgstr "Batal"
+
+#: src/gtr-actions-file.c:218
+msgid "Continue without saving"
+msgstr "Tutup tanpa menyimpan"
+
+#: src/gtr-actions-file.c:250
 msgid "Open file for translation"
 msgstr "Buka berkas untuk diterjemahkan"
 
-#: src/gtr-actions-file.c:295 src/gtr-actions-file.c:412
+#: src/gtr-actions-file.c:314 src/gtr-actions-file.c:431
 msgid "File saved."
 msgstr "Berkas disimpan."
 
-#: src/gtr-actions-file.c:343
+#: src/gtr-actions-file.c:362
 msgid "Save file as…"
 msgstr "Simpan berkas sebagai…"
 
-#: src/gtr-actions-file.c:804
+#: src/gtr-actions-file.c:823
 msgid "Files saved."
 msgstr "Berkas disimpan."
 
@@ -1314,3 +1334,9 @@ msgid ""
 msgstr ""
 "Perbedaan panjang maksimum antar pesan yang ditampilkan sebagai cocok oleh "
 "ingatan terjemahan."
+
+#~ msgid "Do you want to save the changes?"
+#~ msgstr "Apakah Anda ingin menyimpan perubahan?"
+
+#~ msgid "Warning"
+#~ msgstr "Peringatan"
