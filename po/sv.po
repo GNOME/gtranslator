@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-03-12 16:11+0000\n"
-"PO-Revision-Date: 2020-04-29 22:21+0200\n"
+"POT-Creation-Date: 2020-05-17 09:31+0000\n"
+"PO-Revision-Date: 2020-05-29 01:08+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 
 # src/prefs.c:239
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
@@ -57,11 +57,11 @@ msgstr ""
 "insticksmoduler, som alternativa språk, taggning, integration med subversion "
 "och källkodsläsare."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:83
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:99
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:657
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:645
 #: src/gtr-notebook.ui:308 src/gtr-window.c:320 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Översättningsredigerare"
@@ -259,30 +259,47 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "Webbplats för Översättningsredigerare"
 
-#: src/gtr-actions-file.c:204 src/gtr-application.c:458
-msgid "Do you want to save the changes?"
-msgstr "Vill du spara ändringarna?"
+#: src/gtr-actions-file.c:207
+#, c-format
+msgid ""
+"Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
+"\">%s</span>?"
+msgstr ""
+"Vill du spara ändringar till denna fil: <span weight=\"bold\" size=\"large\">"
+"%s</span>?"
 
-#: src/gtr-actions-file.c:205 src/gtr-application.c:459
-msgid "Warning"
-msgstr "Varning"
+#: src/gtr-actions-file.c:213
+msgid "If you don't save, all your unsaved changes will be permanently lost."
+msgstr "Om du inte sparar så kommer dina osparade ändringar att gå förlorade."
 
-#: src/gtr-actions-file.c:223
+#: src/gtr-actions-file.c:216
+msgid "Save and open"
+msgstr "Spara och öppna"
+
+#: src/gtr-actions-file.c:217
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: src/gtr-actions-file.c:218
+msgid "Continue without saving"
+msgstr "Fortsätt utan att spara"
+
+#: src/gtr-actions-file.c:250
 msgid "Open file for translation"
 msgstr "Öppna fil för översättning"
 
 # data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: src/gtr-actions-file.c:295 src/gtr-actions-file.c:412
+#: src/gtr-actions-file.c:314 src/gtr-actions-file.c:431
 msgid "File saved."
 msgstr "Fil sparad."
 
 # src/menus.c:281
-#: src/gtr-actions-file.c:343
+#: src/gtr-actions-file.c:362
 msgid "Save file as…"
 msgstr "Spara fil som…"
 
 # data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: src/gtr-actions-file.c:804
+#: src/gtr-actions-file.c:823
 msgid "Files saved."
 msgstr "Filer sparade."
 
@@ -725,7 +742,6 @@ msgid "Order by menu"
 msgstr "Sorteringsmeny"
 
 #: src/gtr-notebook.ui:585
-#| msgid "Undo (<Ctrl>z)"
 msgid "Find (<Ctrl><f>)"
 msgstr "Sök (<Ctrl><f>)"
 
@@ -1418,6 +1434,12 @@ msgid ""
 msgstr ""
 "Maximal skillnad i längd mellan meddelanden visade som träffar av "
 "översättningsminnet."
+
+#~ msgid "Do you want to save the changes?"
+#~ msgstr "Vill du spara ändringarna?"
+
+#~ msgid "Warning"
+#~ msgstr "Varning"
 
 #~ msgid "Found and replaced one occurrence"
 #~ msgid_plural "Found and replaced %d occurrences"
