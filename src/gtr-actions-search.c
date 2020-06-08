@@ -307,6 +307,8 @@ do_find (GtrSearchBar * dialog, GtrWindow * window, gboolean search_backwards)
 
   if (!found && current_msg)
     gtr_tab_message_go_to (tab, current_msg->data, FALSE, GTR_TAB_MOVE_NONE);
+
+  gtr_search_bar_set_found (dialog, found);
 }
 
 static void

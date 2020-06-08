@@ -94,5 +94,7 @@ void             gtr_search_bar_present_with_time (GtrSearchBar * dialog,
 void             gtr_search_bar_find_next (GtrSearchBar *self);
 void             gtr_search_bar_find_prev (GtrSearchBar *self);
 
+void             gtr_search_bar_set_found (GtrSearchBar *self, gboolean found);
+
 G_END_DECLS
 

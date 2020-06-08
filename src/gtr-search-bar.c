@@ -833,5 +833,15 @@ gtr_search_bar_set_search (GtrSearchBar *self,
     }
 }
 
-
+void
+gtr_search_bar_set_found (GtrSearchBar *self,
+                          gboolean found)
+{
+  GtkStyleContext *context = gtk_widget_get_style_context (
+    GTK_WIDGET (self->search_entry));
+  if (found)
+    gtk_style_context_remove_class (context, "error");
+  else
+    gtk_style_context_add_class (context, "error");
+}
 
