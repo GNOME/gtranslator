@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "POT-Creation-Date: 2020-06-08 06:31+0000\n"
-"PO-Revision-Date: 2020-06-15 17:22+0300\n"
+"PO-Revision-Date: 2020-06-16 16:16+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -84,6 +84,8 @@ msgid ""
 "Click the <gui>Add Note</gui> link below the <gui>Notes:</gui> section in "
 "the lower panel in the sidebar on the right."
 msgstr ""
+"Натисніть посилання <gui>Додати примітку</gui> у розділі <gui>Примітки:</gui>"
+" на нижній панелі бічної панелі праворуч."
 
 #. (itstool) path: item/p
 #: C/gtr-add-comment-po.page:43
@@ -113,6 +115,8 @@ msgid ""
 "Here are some localization concepts that you should understand to be able to "
 "work with Gtranslator."
 msgstr ""
+"Тут наведено декілька понять локалізації, розуміння яких є необхідним для"
+" роботи з Gtranslator."
 
 #. (itstool) path: page/p
 #: C/gtr-concepts.page:31
@@ -121,6 +125,9 @@ msgid ""
 "internationalization and localization of programs on Unix-like operating "
 "systems, and in web applications."
 msgstr ""
+"<em style=\"strong\">Файл PO</em> — тип файлів, які використовуються у"
+" системі gettext для перекладу та локалізації програм у UNIX-подібних"
+" операційних система та у вебпрограмах."
 
 #. (itstool) path: page/p
 #: C/gtr-concepts.page:33
@@ -131,6 +138,10 @@ msgid ""
 "web pages and applications. Strings in Gtranslator can have one of these 3 "
 "states:"
 msgstr ""
+"<em style=\"strong\">Рядок або сегмент</em> — речення або подібні до речень"
+" модулі (окремі слова, фрази та абзаци), які є частиною графічного інтерфейсу"
+" користувача у окремих комп'ютерних програмах або інтерфейсу вебсторінок та"
+" програм. Рядки у Gtranslator можуть перебувати у одному з 3 станів:"
 
 #. (itstool) path: item/p
 #: C/gtr-concepts.page:35
@@ -146,6 +157,8 @@ msgstr "Не перекладено"
 #: C/gtr-concepts.page:37
 msgid "Fuzzy (string with a partial match in translation memory)"
 msgstr ""
+"Перекладено неточно (рядок із частинною відповідністю рядку з пам'яті"
+" перекладів)"
 
 #. (itstool) path: page/p
 #: C/gtr-concepts.page:40
@@ -156,6 +169,11 @@ msgid ""
 "least a language identifier and a region identifier, for example es_ES for "
 "Spanish (Spain) or ca_ES for Catalan (Spain)."
 msgstr ""
+"<em style=\"strong\">Локаль</em> — набір параметрів, який визначає мову,"
+" країну і усі спеціальні налаштування варіанта мови, які користувач хоче"
+" бачити у інтерфейсі. Зазвичай, ідентифікатор локалі складається із"
+" ідентифікатора мови та ідентифікатора регіону. Приклади: es_ES — іспанська"
+" (Іспанія) або ca_ES — каталонська (Іспанія)."
 
 #. (itstool) path: page/p
 #: C/gtr-concepts.page:42
@@ -164,6 +182,10 @@ msgid ""
 "header of the PO file (target language and translator information). You can "
 "have a separate profile for each language and/or translator team."
 msgstr ""
+"<em style=\"strong\">Профіль</em> — група специфічних параметрів, які"
+" зберігаються у заголовку файла PO (дані щодо мови перекладу та дані щодо"
+" перекладача). Ви можете мати різні профілі для різних мов і/або різних"
+" команд перекладачів."
 
 #. (itstool) path: page/p
 #: C/gtr-concepts.page:45
@@ -172,6 +194,9 @@ msgid ""
 "so-called \"segments\", which can be sentences or sentence-like units "
 "(words, phrases and paragraphs) that have previously been translated."
 msgstr ""
+"<em style=\"strong\">Пам'ять перекладів</em> — база даних, у якій"
+" зберігаються так звані «сегменти», якими можуть бути речення або подібні до"
+" речень модулі (слова, фрази і абзаци), які вже було перекладено раніше."
 
 #. (itstool) path: page/title
 #: C/gtr-create-tm.page:32
@@ -185,6 +210,9 @@ msgid ""
 "(TM), and each time you translate a string it will be added as a new entry "
 "in the TM database."
 msgstr ""
+"У <app>Gtranslator</app> ви можете почати з порожньої пам'яті перекладів —"
+" кожного разу, коли ви перекладатимете рядок, його буде додано як новий запис"
+" до бази даних пам'яті перекладів."
 
 #. (itstool) path: page/p
 #: C/gtr-create-tm.page:36
@@ -197,6 +225,13 @@ msgid ""
 "\"gtr-use-delete-entry\">use these strings</link> as is, or change/adapt "
 "them for the string you are translating."
 msgstr ""
+"Ви можжете побудувати пам'ять перекладів імпортуванням рядків з наявного"
+" файла PO (наприклад, файла, який було створено для попередньої версії"
+" програми або вебпрограми, над якою ви працюєте). Після цього, якщо у файлі"
+" PO, над яким ви працюєте, є подібні рядки, <app>Gtranslator</app> покаже їх"
+" на панелі пам'яті перекладів і ви зможете <link"
+" xref=\"gtr-use-delete-entry\">скористатися цими рядками</link> як є або"
+" змінити чи адаптувати їх до рядка, який ви перекладаєте."
 
 #. (itstool) path: figure/title
 #: C/gtr-create-tm.page:39 C/gtr-use-delete-entry.page:41
@@ -248,6 +283,10 @@ msgid ""
 "contain translations for these other languages as it will import all PO "
 "files in the folder."
 msgstr ""
+"Якщо у теці містяться файли PO інших мов, позначте пункт <gui>Використовувати"
+" лише з таким ім'ям</gui> і ввести назву файла (наприклад <file>xy.po</file"
+">). Якщо ви цього не зробите, пам'ять перекладів буде заповнено перекладами"
+" іншими мовами, оскільки програма імпортує дані з усіх файлів PO у теці."
 
 #. (itstool) path: item/p
 #: C/gtr-create-tm.page:50
@@ -255,6 +294,8 @@ msgid ""
 "Select the folder where the PO files are stored, and press <gui style="
 "\"button\">Add to Database</gui>."
 msgstr ""
+"Виберіть теку, у якій зберігаються файли PO, і натисніть кнопку <gui"
+" style=\"button\">Додати до бази даних</gui>."
 
 #. (itstool) path: item/p
 #: C/gtr-create-tm.page:51
@@ -276,6 +317,12 @@ msgid ""
 "another translator. Press the menu button in the top-right corner of the "
 "window and select <gui style=\"menuitem\">Edit header</gui>."
 msgstr ""
+"<app>Gtranslator</app> отримує потрібні дані для заголовка файла PO з вашого"
+" активного <link xref=\"gtr-profiles\">профілю</link>. Ви можете редагувати"
+" дані, які зберігаються у заголовку файла PO, над яким ви зараз працюєте,"
+" наприклад, якщо потрібно зміни адресу електронної пошти або додати запис"
+" перекладача. Натисніть кнопку меню у правому верхньому куті вікна програми і"
+" виберіть пункт <gui style=\"menuitem\">Редагувати заголовок</gui>."
 
 #. (itstool) path: note/p
 #: C/gtr-edit-header.page:40
@@ -284,6 +331,9 @@ msgid ""
 "tab, uncheck the <gui>Use my options to complete the following entries</gui> "
 "checkbox."
 msgstr ""
+"Щоб мати змогу редагувати відомості на вкладці <gui>Перекладач і мова</gui>,"
+" зніміть позначку з пункту <gui>Заповнити рядки даними з активного профілю<"
+"/gui>."
 
 #. (itstool) path: page/title
 #: C/gtr-edit-po.page:34
@@ -299,6 +349,12 @@ msgid ""
 "message in the source language (usually English). The field <gui>Translated "
 "Text</gui> is where you type or edit the translation in the target language."
 msgstr ""
+"Позначений рядок у таблиці повідомлень також буде показано у двох полях у"
+" нижній частині вікна <app>Gtranslator</app>. Вміст поля <gui>Початкове"
+" повідомлення</gui> не можна редагувати. За його допомогою ви можете бачити"
+" вміст повідомлення початковою мовою (зазвичай англійською). У полі <gui"
+">Перекладений текст</gui> ви можете ввести або редагувати переклад мовою"
+" призначення."
 
 #. (itstool) path: page/p
 #: C/gtr-edit-po.page:38
@@ -307,6 +363,9 @@ msgid ""
 "goto-string-po\">go to the next message</link> to continue with the "
 "translation."
 msgstr ""
+"Після завершення редагування у полі <gui>Перекладений текст</gui>, <link"
+" xref=\"gtr-goto-string-po\">перейдіть до наступного повідомлення</link>, щоб"
+" продовжити переклад."
 
 #. (itstool) path: page/title
 #: C/gtr-faq.page:25
@@ -319,6 +378,8 @@ msgid ""
 "<em>Is there a fast way to copy the contents of the original string to "
 "translated string (code lines that do not need to be translated)?</em>"
 msgstr ""
+"<em>Чи існує швидкий спосіб копіювання вмісту початкового рядка до рядка"
+" перекладу (рядків коду, який не слід перекладати)?</em>"
 
 #. (itstool) path: item/p
 #: C/gtr-faq.page:30
@@ -334,6 +395,10 @@ msgid ""
 "the following error: \".po file does not pass 'msgfmt -vc'. Please correct "
 "the file and try again.\" How can I solve this problem?</em>"
 msgstr ""
+"<em>Мною завершено переклад файла PO, але коли я намагаюся вивантажити"
+" переклад, бачу таке повідомлення про помилку: «файл .po не пройшов перевірку"
+" «msgfmt -vc». Будь ласка, виправте файлі і повторіть спробу.» Як розв'язати"
+" цю проблему?</em>"
 
 #. (itstool) path: item/p
 #: C/gtr-faq.page:34
@@ -341,6 +406,8 @@ msgid ""
 "Open the <app>Terminal</app> and use the command \"msgfmt -cv\" with the "
 "name of the PO file:"
 msgstr ""
+"Відкрийте <app>Термінал</app> і скористайтеся командою «msgfmt -cv» із"
+" додаванням назви файла PO:"
 
 #. (itstool) path: item/code
 #: C/gtr-faq.page:36
@@ -360,11 +427,16 @@ msgid ""
 "you need first to select it in the <gui>Message Table</gui>. There are "
 "several ways you can move among the strings in the PO file:"
 msgstr ""
+"Щоб розпочати переклад певного рядка (або редагувати наявний переклад), вам"
+" слід спочатку позначити рядок у <gui>Таблиці повідомлень</gui>. Існує"
+" декілька способів пересування між рядками у файлі PO:"
 
 #. (itstool) path: item/p
 #: C/gtr-goto-string-po.page:35
 msgid "Click directly on the desired string in the <gui>Message Table</gui>."
 msgstr ""
+"Клацніть безпосередньо на пункті бажаного рядка у <gui>Таблиці повідомлень<"
+"/gui>."
 
 #. (itstool) path: item/p
 #: C/gtr-goto-string-po.page:36
@@ -377,6 +449,9 @@ msgid ""
 "Jump between only <gui>Fuzzy</gui>, only <gui>Untranslated</gui>, or both "
 "<gui>Fuzzy and Untranslated</gui> strings with:"
 msgstr ""
+"Переходити між лише <gui>Неточними</gui>, лише <gui>Неперекладеними</gui> або"
+" <gui>Неточними і неперекладеними</gui> рядками можна за допомогою таких"
+" елементів інтерфейсу:"
 
 #. (itstool) path: item/p
 #: C/gtr-goto-string-po.page:39
@@ -431,6 +506,11 @@ msgid ""
 "statistics about the current file. The <gui>Workspace</gui> is divided into "
 "three areas:"
 msgstr ""
+"Після відкриття файла для перекладу у головному вікні Gtranslator буде"
+" показано <gui>Панель заголовка</gui> із кнопками та головним меню, область <"
+"gui>Робочого простору</gui> та <gui>Смужку стану</gui> у нижній частині вікна"
+" із статистичними даними щодо поточного файла. <gui>Робочий простір</gui>"
+" поділено на три панелі:"
 
 #. (itstool) path: figure/title
 #: C/gtr-main-window.page:34
@@ -461,6 +541,12 @@ msgid ""
 "<app>Gtranslator</app> window and the number of the words, you may only see "
 "the beginning of the string."
 msgstr ""
+"<_:media-1/> У <gui>Таблиці повідомлень</gui> ви побачите два стовпчики:"
+" список усіх рядків (повідомлень) початковою мовою ліворуч (<gui>Початкове"
+" повідомлення</gui>) та відповідні переклади праворуч (<gui>Перекладене"
+" повідомлення</gui>). Залежно від розміру вікна <app>Gtranslator</app> та"
+" кількості слів у повідомленнях, може бути показано лише початкову частину"
+" рядка."
 
 #. (itstool) path: item/p
 #: C/gtr-main-window.page:46
@@ -470,6 +556,10 @@ msgid ""
 "<gui>Translated Text</gui> field. You cannot edit the <gui>Original Message</"
 "gui>."
 msgstr ""
+"<_:media-1/> Під <gui>Таблицею повідомлень</gui> ви побачите два поля, у яких"
+" буде повністю показано позначений рядок. Переклад рядка має бути введено до"
+" поля <gui>Перекладений текст</gui>. Редагувати <gui>Початкове повідомлення<"
+"/gui> не можна."
 
 #. (itstool) path: item/p
 #: C/gtr-main-window.page:50
@@ -480,6 +570,11 @@ msgid ""
 "the translation proposals into the <gui>Translated Text</gui> field. Below, "
 "you can see and add notes about the selected string."
 msgstr ""
+"<_:media-1/> На бічній панелі праворуч буде показано подібні переклад з <link"
+" xref=\"gtr-create-tm\">пам'яті перекладів</link> та відповідні <link xref="
+"\"gtr-shortcut-keys\">клавіатурні скорочення</link> для потенційного"
+" вставляння однієї із пропозицій перекладу до поля <gui>Перекладений текст<"
+"/gui>. Нижче ви можете переглянути і додати нотатки щодо позначеного рядка."
 
 #. (itstool) path: page/title
 #. (itstool) path: td/p
@@ -495,6 +590,11 @@ msgid ""
 "keyseq> keyboard shortcut. Browse through your file system, select the PO "
 "file you wish to open, and press the <gui style=\"button\">Open</gui> button."
 msgstr ""
+"Щоб відкрити файл PO і розпочати переклад, натисніть кнопку <gui"
+" style=\"button\">Відкрити…</gui> на панелі заголовка або скористайтеся"
+" клавіатурним скороченням <keyseq><key>Ctrl</key><key>O</key></keyseq>."
+" Знайдіть відповідну теку у файловій системі, виберіть файл PO, який ви"
+" хочете відкрити, і натисніть кнопку <gui style=\"button\">Відкрити</gui>."
 
 #. (itstool) path: page/title
 #: C/gtr-profiles.page:32
@@ -510,6 +610,11 @@ msgid ""
 "\">initial profile</link> is configured immediately after running "
 "<app>Gtranslator</app> for the first time."
 msgstr ""
+"За допомогою профілів ви можете створювати різноманітні «облікові записи» для"
+" різних мов і/або різних наборів даних щодо перекладача (різних адрес"
+" електронної пошти або різних команд перекладачів). <link"
+" xref=\"gtr-wizzard\">Початковий профіль</link> буде налаштовано одразу після"
+" першого запуску <app>Gtranslator</app>."
 
 #. (itstool) path: section/title
 #: C/gtr-profiles.page:39
@@ -523,6 +628,9 @@ msgid ""
 "corner of the window and select <gui style=\"menuitem\">Preferences</gui>. "
 "Then open the <gui>Profiles</gui> tab."
 msgstr ""
+"Щоб переглянути список доступних профілів, натисніть кнопку меню у верхньому"
+" правому куті вікна і виберіть <gui style=\"menuitem\">Параметри</gui>. Далі,"
+" відкрийте вкладку <gui>Профілі</gui>."
 
 #. (itstool) path: section/title
 #: C/gtr-profiles.page:46
@@ -536,6 +644,9 @@ msgid ""
 "and press the <gui style=\"button\">Edit Profile</gui> button in the "
 "<gui>Profiles</gui> tab. Perform the desired changes."
 msgstr ""
+"Зі списку доступних профілів виберіть той, до якого хочете внести зміни, і"
+" натисніть кнопку <gui style=\"button\">Редагувати профіль</gui> на вкладці <"
+"gui>Профілі</gui>. Внесіть бажані зміни."
 
 #. (itstool) path: section/p
 #: C/gtr-profiles.page:50 C/gtr-profiles.page:58
@@ -543,6 +654,8 @@ msgid ""
 "To close the window and save the entered data, press the <gui style=\"button"
 "\">OK</gui> button."
 msgstr ""
+"Щоб закрити вікно і зберегти введені дані, натисніть кнопку <gui"
+" style=\"button\">Гаразд</gui>."
 
 #. (itstool) path: section/title
 #: C/gtr-profiles.page:54
@@ -555,6 +668,8 @@ msgid ""
 "To create a new profile press the <key>+</key> button in the <gui>Profiles</"
 "gui> tab. Fill in all the required information."
 msgstr ""
+"Щоб створити профіль, натисніть кнопку <key>+</key> на вкладці <gui>Профілі<"
+"/gui>. Заповніть поля усіх обов'язкових даних."
 
 #. (itstool) path: section/title
 #: C/gtr-profiles.page:63
@@ -567,6 +682,8 @@ msgid ""
 "Select the profile from the list in the <gui>Profiles</gui> tab, and press "
 "the <key>-</key> button."
 msgstr ""
+"Виберіть профіль зі списку на вкладці <gui>Профілі</gui> і натисніть кнопку <"
+"key>-</key>."
 
 #. (itstool) path: page/title
 #: C/gtr-quickstart.page:34
@@ -579,6 +696,8 @@ msgid ""
 "Gtranslator is a versatile graphic user interface editor for the <link href="
 "\"http://en.wikipedia.org/wiki/Gettext\">gettext PO files</link>."
 msgstr ""
+"Gtranslator є редактогром <link href=\"http://en.wikipedia.org/wiki/Gettext\""
+">файлів PO gettext</link> із різнобічним графічним інтерфейсом користувача."
 
 #. (itstool) path: page/p
 #: C/gtr-quickstart.page:38
@@ -592,6 +711,9 @@ msgid ""
 "displays the progress as a graphic bar and the number of strings in each "
 "category)"
 msgstr ""
+"Без проблем пересуватися списком неточно перекладених, перекладених та"
+" неперекладених рядків (на смужці стану буде показано поступ у форматі"
+" графічної смужки та кількості рядків у кожній з категорій)."
 
 #. (itstool) path: item/p
 #: C/gtr-quickstart.page:47
@@ -599,6 +721,8 @@ msgid ""
 "Set up different language profiles with the necessary information to fill "
 "the PO file header."
 msgstr ""
+"Налаштувати різні профілі мов із відповідними даними для заповнення"
+" заголовків файлів PO."
 
 #. (itstool) path: item/p
 #: C/gtr-quickstart.page:51
@@ -606,6 +730,9 @@ msgid ""
 "Use any translated PO file to create the Translation Memory (TM) - a "
 "database that will offer suggestions for translation of the current string."
 msgstr ""
+"Скористатися будь-якими перекладеними файлами PO для створення пам'яті"
+" перекладів — бази даних, з якої програма братиме пропозиції для перекладів"
+" рядків, які ви перекладатимете."
 
 #. (itstool) path: item/p
 #: C/gtr-quickstart.page:56
@@ -613,6 +740,8 @@ msgid ""
 "See developer’s comments for a given string and add comments to strings as a "
 "translator."
 msgstr ""
+"Переглядати коментарі розробників щодо певного рядка і додавати коментарі до"
+" рядків як перекладач."
 
 #. (itstool) path: page/p
 #: C/gtr-quickstart.page:61
@@ -622,6 +751,11 @@ msgid ""
 "Desktop Help</link> or type <cmd>gtranslator</cmd> in the Terminal command "
 "line."
 msgstr ""
+"Настанови щодо запуску Gtranslator можна знайти у <link"
+" xref=\"help:gnome-help/shell-apps-open\" href="
+"\"https://help.gnome.org/users/gnome-help/stable/shell-apps-open\">довідці зі"
+" стільничного середовища GNOME</link>. Можна ж просто ввести команду <cmd"
+">gtranslator</cmd> у командному рядку програми «Термінал»."
 
 #. (itstool) path: page/title
 #: C/gtr-report-problem.page:27
@@ -635,6 +769,9 @@ msgid ""
 "it in <link href=\"https://gitlab.gnome.org/GNOME/gtranslator/issues/new\"> "
 "GNOME Gitlab</link>."
 msgstr ""
+"Допоможіть удосконалити <app>Gtranslator</app>! Якщо вами буде виявлено ваду,"
+" повідомте про неї за допомогою <link href=\"https://gitlab.gnome.org/GNOME/gt"
+"ranslator/issues/new\">Gitlab GNOME</link>."
 
 #. (itstool) path: page/title
 #. (itstool) path: td/p
@@ -652,6 +789,12 @@ msgid ""
 "header bar or using the <keyseq><key>Ctrl</key><key>S</key></keyseq> "
 "keyboard shortcut."
 msgstr ""
+"Кожного разу, коли ви редагуватимете файл PO (вносячи зміни до перекладеного"
+" рядка або даних у заголовку), поряд із назвою файла у заголовку вікна"
+" з'являтиметься зірочка «*». Ця зірочка означає, що до файла внесено зміни."
+" Ви можете зберегти зміни натисканням кнопки <gui style=\"button\">Зберегти<"
+"/gui> на панелі заголовка або натисканням комбінації клавіш <keyseq><key"
+">Ctrl</key><key>S</key></keyseq>."
 
 #. (itstool) path: page/p
 #: C/gtr-save-po.page:41
@@ -660,6 +803,10 @@ msgid ""
 "style=\"button\">Save</gui> in the header bar or the <keyseq><key>Ctrl</"
 "key><key>Shift</key><key>S</key></keyseq> keyboard shortcut."
 msgstr ""
+"Щоб зберегти файл PO під іншою назвою, натисніть кнопку, розташовану поруч із"
+" кнопкою <gui "
+"style=\"button\">Зберегти</gui> на панелі заголовка, або натисніть комбінацію"
+" клавіш <keyseq><key>Ctrl</key><key>Shift</key><key>S</key></keyseq>."
 
 #. (itstool) path: page/title
 #: C/gtr-shortcut-keys.page:27
@@ -673,6 +820,10 @@ msgid ""
 "with the mouse and menus. The following table lists all of "
 "<app>Gtranslator's</app> shortcut keys."
 msgstr ""
+"Скористайтеся <gui>клавіатурними скороченнями</gui> для пришвидшення"
+" виконання типових дій, порівняно із використанням миші та меню. Нижче"
+" наведено таблицю зі списком усіх клавіатурних скорочень <app>Gtranslator<"
+"/app>."
 
 #. (itstool) path: table/title
 #: C/gtr-shortcut-keys.page:33
@@ -912,6 +1063,8 @@ msgid ""
 "Even if you are not a programmer, you can contribute by translating "
 "<app>Gtranslator</app> to your language. Go to:"
 msgstr ""
+"Навіть якщо ви не є програмістом, ви можете допомогти <app>Gtranslator</app>"
+" перекладом вашою рідною мовою. Відповідна сторінка:"
 
 #. (itstool) path: page/p
 #: C/gtr-translate.page:31
@@ -930,6 +1083,10 @@ msgid ""
 "language. You will be credited for your translation inside the program and "
 "on our website. Thank you!!!"
 msgstr ""
+"Вам доведеться зареєструватися на платформі Damned Lies і <link"
+" href=\"http://l10n.gnome.org/teams/\">долучитися до команди перекладачів<"
+"/link> вашої рідної мови. Подяки за переклад буде розміщено у самій програмі"
+" та на нашому сайті. Дякуємо!!!"
 
 #. (itstool) path: credit/years
 #: C/gtr-use-delete-entry.page:21
@@ -953,6 +1110,10 @@ msgid ""
 "completely match the one that you have selected in the <gui>Message Table</"
 "gui>, it displays them in the <gui>Translation Memory</gui> panel."
 msgstr ""
+"Якщо <app>Gtranslator</app> вдасться виявити у пам'яті перекладів рядки, які"
+" частково або повністю збігаються з тим рядком, який позначено на панелі <gui"
+">Таблиця повідомлень</"
+"gui>, програма покаже їх на панелі <gui>Пам'ять перекладів</gui>."
 
 #. (itstool) path: item/title
 #: C/gtr-use-delete-entry.page:47
@@ -965,6 +1126,9 @@ msgid ""
 "Use the keyboard shortcut to insert the translated string that most closely "
 "matches the selected string in the <gui>Message Table</gui>."
 msgstr ""
+"Скористайтеся клавіатурним скороченням для вставлення перекладеного рядка,"
+" який є найточнішим відповідником позначеного у <gui>Таблиці повідомлень</gui"
+"> рядка."
 
 #. (itstool) path: item/title
 #: C/gtr-use-delete-entry.page:48
@@ -977,6 +1141,8 @@ msgid ""
 "Indicates the percentage of the match (correspondence between the original/"
 "source string in the <gui>Message Table</gui> and those found in the TM."
 msgstr ""
+"Вказує на відсоток відповідності оригіналу або початкового рядка у <gui"
+">Таблиці повідомлень</gui> і рядка, який знайдено у пам'яті перекладів."
 
 #. (itstool) path: item/title
 #: C/gtr-use-delete-entry.page:49
@@ -998,6 +1164,11 @@ msgid ""
 "translation</gui> from the contextual menu, or press the displayed keyboard "
 "shortcut."
 msgstr ""
+"Якщо вас влаштовує пропозиція, яку знайдено у базі даних пам'яті перекладів <"
+"app>Gtranslator</app>, або позначте пункт пропозиції і натисніть клавішу <key"
+">Enter</key>, або клацніть правою кнопкою миші на пункті пропозиції і"
+" виберіть пункт <gui style=\"menuitem\">Використовувати цей переклад</gui> у"
+" контекстному меню, або натисніть показане клавіатурне скорочення."
 
 #. (itstool) path: section/p
 #: C/gtr-use-delete-entry.page:54
@@ -1005,6 +1176,9 @@ msgid ""
 "Once you have inserted the translation from the TM, you can further edit it "
 "in the <gui>Translated Text</gui> field to match your original string."
 msgstr ""
+"Щойно програма вставить переклад з пам'яті перекладів, ви зможете продовжити"
+" редагування у полі <gui>Перекладений текст</gui> так, щоб переклад"
+" якнайточніше відповідав початковому рядку."
 
 #. (itstool) path: section/p
 #: C/gtr-use-delete-entry.page:56
@@ -1015,6 +1189,12 @@ msgid ""
 "the TM database and can be used for future translations, as well as "
 "repetitions of the string in the current PO file."
 msgstr ""
+"Якщо у пам'яті перекладів не буде виявлено відповідників для рядка, який"
+" позначено у списку <gui>Початкове повідомлення</gui>, вам доведеться"
+" перекласти його вручну у полі <gui>Перекладений текст</gui>. Нові"
+" перекладені рядки зберігатимуться у базі даних пам'яті перекладів. Ними"
+" можна буде скористатися у майбутніх перекладах, а також для перекладу"
+" подібних рядків у поточному файлі PO."
 
 #. (itstool) path: section/title
 #: C/gtr-use-delete-entry.page:60
@@ -1028,6 +1208,10 @@ msgid ""
 "style=\"strong\">right-click it</em> and select <gui>Remove</gui> from the "
 "contextual menu."
 msgstr ""
+"Щоб вилучити якийсь з відповідників з панелі <gui>Пам'ять перекладів</gui>, <"
+"em "
+"style=\"strong\">клацніть правою кнопкою миші на відповідному пункті у"
+" списку</em> і виберіть пункт <gui>Вилучити</gui> у контекстному меню."
 
 #. (itstool) path: note/p
 #: C/gtr-use-delete-entry.page:64
@@ -1035,6 +1219,9 @@ msgid ""
 "To remove the entire TM, delete the file <file>~/.config/gtranslator/"
 "translation-memory.db</file> while <app>Gtranslator</app> is not running."
 msgstr ""
+"Щоб вилучити усю пам'ять перекладів, виконайте вилучення файла <file"
+">~/.config/gtranslator/"
+"translation-memory.db</file>, коли <app>Gtranslator</app> не буде запущено."
 
 #. (itstool) path: page/title
 #: C/gtr-wizzard.page:29
@@ -1048,6 +1235,9 @@ msgid ""
 "Assistant opens automatically to guide you through the process of "
 "configuring the initial profile."
 msgstr ""
+"Після встановлення Gtranslator і відкриття програми уперше буде автоматично"
+" запущено програму-помічник, яка допоможе вам у процесі налаштовування"
+" початкового профілю."
 
 #. (itstool) path: item/p
 #: C/gtr-wizzard.page:36
@@ -1063,6 +1253,10 @@ msgid ""
 "address of the translation team that you are collaborating with, and click "
 "<gui style=\"button\">Next</gui>."
 msgstr ""
+"На сторінці <gui>Профіль</gui> вікна <gui>Помічник</gui> заповніть поля назви"
+" профілю, імені та адреси електронної пошти перекладача, адреси електронної"
+" пошти команди перекладачів, з якою ви співпрацюєте, і натисніть кнопку <gui"
+" style=\"button\">Далі</gui>."
 
 #. (itstool) path: item/p
 #: C/gtr-wizzard.page:44
@@ -1072,6 +1266,10 @@ msgid ""
 "<gui>Edit options manually</gui> to fill in custom data. Click the button "
 "<gui>Next</gui>."
 msgstr ""
+"На сторінці <gui>Мова</gui> натисніть кнопку <gui style=\"button\">Вибрати"
+" мову</gui>, щоб автоматично заповнити відповідні поля, або виберіть пункт <"
+"gui>Редагувати параметри вручну</gui>, щоб вказати нетипові дані. Натисніть"
+" кнопку <gui>Далі</gui>."
 
 #. (itstool) path: item/p
 #: C/gtr-wizzard.page:48
@@ -1079,6 +1277,8 @@ msgid ""
 "Review the information in the <gui>Confirmation</gui> page, click the button "
 "<gui>Apply</gui>, and Gtranslator will create your first profile!"
 msgstr ""
+"Перегляньте дані на сторінці <gui>Підтвердження</gui>, натисніть кнопку <gui"
+">Застосувати</gui>, і Gtranslator створить ваш перший профіль!"
 
 #. (itstool) path: page/p
 #: C/gtr-wizzard.page:53
@@ -1086,6 +1286,9 @@ msgid ""
 "For more details about working with profiles, see the section <link xref="
 "\"gtr-profiles\">Advanced Topics - Configure profiles</link>."
 msgstr ""
+"Щоб дізнатися більше про роботу з профілями, ознайомтеся із розділом <link"
+" xref="
+"\"gtr-profiles\">Додаткові питання — Налаштовування профілів</link>."
 
 #. (itstool) path: info/title
 #: C/index.page:8
@@ -1134,6 +1337,11 @@ msgid ""
 "\">gettext PO files</link> used in localization process of various GNOME and "
 "web applications."
 msgstr ""
+"<app>Gtranslator</app> — гнучкий редактор із графічним інтерфейсом для <link"
+" href="
+"\"https://live.gnome.org/TranslationProject/LocalisationGuide#po_files"
+"\">файлів PO gettext</link>, яким можна скористатися у процесі локалізації"
+" різноманітних програм GNOME та вебпрограм."
 
 #. (itstool) path: section/p
 #: C/index.page:44
@@ -1144,6 +1352,12 @@ msgid ""
 "profile</link> for your <app>Gtranslator</app>. Other help topics are "
 "grouped together into sections below. Enjoy using <app>Gtranslator</app>!"
 msgstr ""
+"Якщо у вас ще немає досвіду у світі перекладу програм, спочатку ознайомтеся"
+" із розділом <link xref=\"gtr-concepts\">Базові поняття локалізації</link>,"
+" потім перейдіть до розділу щодо <link xref=\"gtr-wizzard\">налаштовування"
+" початкового профілю</link> для вашого <app>Gtranslator</app>. Інші питання"
+" зібрано у групи за наведеними нижче розділами. Приємного користування <app"
+">Gtranslator</app>!"
 
 #. (itstool) path: section/title
 #: C/index.page:49
