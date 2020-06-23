@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-03-14 10:24+0000\n"
-"PO-Revision-Date: 2020-04-14 21:00+0800\n"
+"POT-Creation-Date: 2020-05-28 23:09+0000\n"
+"PO-Revision-Date: 2020-06-13 22:37+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -61,7 +61,7 @@ msgstr ""
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:657
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:645
 #: src/gtr-notebook.ui:308 src/gtr-window.c:320 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "翻译编辑器"
@@ -247,28 +247,47 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "翻译编辑器网站"
 
-#: src/gtr-actions-file.c:204 src/gtr-application.c:458
-#| msgid "Docum_ents with unsaved changes:"
-msgid "Do you want to save the changes?"
-msgstr "您想要保存修改吗？"
+#: src/gtr-actions-file.c:207
+#, c-format
+msgid ""
+"Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
+"\">%s</span>?"
+msgstr ""
+"您想保存修改至该文件：<span weight=\"bold\" size=\"large\">%s</span> 吗？"
 
-#: src/gtr-actions-file.c:205 src/gtr-application.c:459
-msgid "Warning"
-msgstr "警告"
+#: src/gtr-actions-file.c:213
+#| msgid "If you don’t save, all your changes will be permanently lost."
+msgid "If you don't save, all your unsaved changes will be permanently lost."
+msgstr "如果您不保存，所有未保存的更改将会永久丢失。"
 
-#: src/gtr-actions-file.c:223
+#: src/gtr-actions-file.c:216
+#| msgid "Save all open files"
+msgid "Save and open"
+msgstr "保存并打开"
+
+#: src/gtr-actions-file.c:217
+#| msgid "_Cancel"
+msgid "Cancel"
+msgstr "取消"
+
+#: src/gtr-actions-file.c:218
+#| msgid "Close _without Saving"
+msgid "Continue without saving"
+msgstr "不保存并继续"
+
+#: src/gtr-actions-file.c:250
 msgid "Open file for translation"
 msgstr "打开文件进行翻译"
 
-#: src/gtr-actions-file.c:295 src/gtr-actions-file.c:412
+#: src/gtr-actions-file.c:314 src/gtr-actions-file.c:431
 msgid "File saved."
 msgstr "文件已保存。"
 
-#: src/gtr-actions-file.c:343
+#: src/gtr-actions-file.c:362
 msgid "Save file as…"
 msgstr "文件另存为…"
 
-#: src/gtr-actions-file.c:804
+#: src/gtr-actions-file.c:823
 msgid "Files saved."
 msgstr "文件已保存。"
 
@@ -383,7 +402,6 @@ msgid "If you don’t save, all your changes will be permanently lost."
 msgstr "如果您不保存，所有的更改将会永久丢失。"
 
 #: src/gtr-context.c:82
-#| msgid "Notes:"
 msgid "Notes"
 msgstr "备注"
 
@@ -635,7 +653,6 @@ msgid "Open a new file (<Ctrl>o)"
 msgstr "打开新文件 (<Ctrl>o)"
 
 #: src/gtr-notebook.ui:341
-#| msgid "Open a new file (<Ctrl>o)"
 msgid "Open from Damned Lies (<Ctrl>d)"
 msgstr "从 Damned Lies 打开 (<Ctrl>d)"
 
@@ -660,7 +677,6 @@ msgid "Toggle fuzzy state (<Ctrl>+u)"
 msgstr "切换模糊状态 (<Ctrl>+u)"
 
 #: src/gtr-notebook.ui:537
-#| msgid "Order messages by"
 msgid "Sort messages by"
 msgstr "排序消息"
 
@@ -669,7 +685,6 @@ msgid "Order by menu"
 msgstr "按菜单排序"
 
 #: src/gtr-notebook.ui:585
-#| msgid "Undo (<Ctrl>z)"
 msgid "Find (<Ctrl><f>)"
 msgstr "查找 (<Ctrl><f>)"
 
@@ -888,22 +903,18 @@ msgid "Case sensitive"
 msgstr "区分大小写"
 
 #: src/gtr-search-bar.c:489 src/gtr-search-bar.ui:225
-#| msgid "Match _entire word only"
 msgid "Match whole word only"
 msgstr "仅匹配整个单词"
 
 #: src/gtr-search-bar.c:494
-#| msgid "_Wrap around"
 msgid "Wrap around"
 msgstr "从头查找"
 
 #: src/gtr-search-bar.c:499
-#| msgid "_Original text"
 msgid "Original text"
 msgstr "原始文本"
 
 #: src/gtr-search-bar.c:504
-#| msgid "_Translated text"
 msgid "Translated text"
 msgstr "翻译文本"
 
@@ -924,17 +935,14 @@ msgid "Show or hide search options such as case sensitivity"
 msgstr "显示或隐藏如区分大小写等搜索选项"
 
 #: src/gtr-search-bar.ui:238
-#| msgid "_Wrap around"
 msgid "Wrap Around"
 msgstr "从头查找"
 
 #: src/gtr-search-bar.ui:251
-#| msgid "_Original text"
 msgid "Original-text"
 msgstr "原始文本"
 
 #: src/gtr-search-bar.ui:264
-#| msgid "_Translated text"
 msgid "Translated-text"
 msgstr "翻译文本"
 
@@ -1198,7 +1206,6 @@ msgid "Backward-search"
 msgstr "向后搜索"
 
 #: src/help-overlay.ui:187
-#| msgid "Find and replace"
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "隐藏查找和替换栏"
@@ -1310,6 +1317,13 @@ msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
 msgstr "显示的消息与翻译记忆匹配的消息的最大长度差。"
+
+#~| msgid "Docum_ents with unsaved changes:"
+#~ msgid "Do you want to save the changes?"
+#~ msgstr "您想要保存修改吗？"
+
+#~ msgid "Warning"
+#~ msgstr "警告"
 
 #~ msgid "Found and replaced one occurrence"
 #~ msgid_plural "Found and replaced %d occurrences"
@@ -2014,9 +2028,6 @@ msgstr "显示的消息与翻译记忆匹配的消息的最大长度差。"
 
 #~ msgid "Search for and replace text"
 #~ msgstr "查找和替换文本"
-
-#~ msgid "Save all open files"
-#~ msgstr "保存所有已打开文件"
 
 #~ msgid "_Close All"
 #~ msgstr "全部关闭(_C)"
