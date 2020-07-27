@@ -68,14 +68,27 @@ gtr_language_free (GtrLanguage *lang)
 static void
 load_plural_form (GtrLanguage *lang)
 {
-  gchar *plural_form;
+  gchar *plural_form = NULL;
+  gchar **parts = NULL;
 
   plural_form = g_key_file_get_string (plurals_file, "Plural Forms", lang->code, NULL);
 
   if (plural_form != NULL && *plural_form != '\0')
+    {
+      lang->plural_form = plural_form;
+      return;
+    }
+
+  // Trying with the base language
+  parts = g_strsplit (lang->code, "_", 2);
+
+  plural_form = g_key_file_get_string (plurals_file, "Plural Forms", parts[0], NULL);
+  if (plural_form != NULL && *plural_form != '\0')
     lang->plural_form = plural_form;
   else
     lang->plural_form = NULL;
+
+  g_strfreev (parts);
 }
 
 typedef enum
