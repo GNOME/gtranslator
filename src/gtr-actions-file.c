@@ -37,7 +37,6 @@
 #include "gtr-file-dialogs.h"
 #include "gtr-notebook.h"
 #include "gtr-po.h"
-#include "gtr-statusbar.h"
 #include "gtr-tab.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
@@ -95,15 +94,6 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
    */
   active_view = gtr_tab_get_active_view (tab);
   gtk_widget_grab_focus (GTK_WIDGET (active_view));
-
-  gtr_statusbar_update_progress_bar (GTR_STATUSBAR
-                                     (gtr_window_get_statusbar
-                                      (window)),
-                                     (gdouble)
-                                     gtr_po_get_translated_count
-                                     (po),
-                                     (gdouble)
-                                     gtr_po_get_messages_count (po));
 
   gtr_window_show_poeditor (window);
 
@@ -262,7 +252,6 @@ save_dialog_response_cb (GtkDialog * dialog,
   GtrTab *tab;
   gchar *filename;
   GFile *location;
-  GtrStatusbar *status;
 
   tab = GTR_TAB (g_object_get_data (G_OBJECT (dialog), GTR_TAB_SAVE_AS));
 
@@ -308,10 +297,6 @@ save_dialog_response_cb (GtkDialog * dialog,
 
       /* We have to change the state of the tab */
       gtr_po_set_state (po, GTR_PO_STATE_SAVED);
-
-      /* Flash a message */
-      status = GTR_STATUSBAR (gtr_window_get_statusbar (window));
-      gtr_statusbar_flash_message (status, 0, _("File saved."));
     }
   g_object_unref (location);
 }
@@ -403,7 +388,6 @@ gtr_save_current_file_dialog (GtkWidget * widget, GtrWindow * window)
   GError *error = NULL;
   GtrTab *current;
   GtrPo *po;
-  GtrStatusbar *status;
 
   current = gtr_window_get_active_tab (window);
   po = gtr_tab_get_po (current);
@@ -425,10 +409,6 @@ gtr_save_current_file_dialog (GtkWidget * widget, GtrWindow * window)
 
   /* We have to change the state of the tab */
   gtr_po_set_state (po, GTR_PO_STATE_SAVED);
-
-  /* Flash a message */
-  status = GTR_STATUSBAR (gtr_window_get_statusbar (window));
-  gtr_statusbar_flash_message (status, 0, _("File saved."));
 }
 
 static gboolean
@@ -795,7 +775,6 @@ _gtr_actions_file_save_all (GtkAction * action, GtrWindow * window)
   for (l = list; l != NULL; l = g_list_next (l))
     {
       GError *error = NULL;
-      GtrStatusbar *status;
 
       gtr_po_save_file (GTR_PO (l->data), &error);
 
@@ -817,10 +796,6 @@ _gtr_actions_file_save_all (GtkAction * action, GtrWindow * window)
 
       /* We have to change the state of the tab */
       gtr_po_set_state (GTR_PO (l->data), GTR_PO_STATE_SAVED);
-
-      /* Flash a message */
-      status = GTR_STATUSBAR (gtr_window_get_statusbar (window));
-      gtr_statusbar_flash_message (status, 0, _("Files saved."));
     }
 
   g_list_free (list);

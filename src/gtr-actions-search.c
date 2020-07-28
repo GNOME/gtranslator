@@ -34,7 +34,6 @@
 
 #include "gtr-actions.h"
 #include "gtr-msg.h"
-#include "gtr-statusbar.h"
 #include "gtr-utils.h"
 #include "gtr-view.h"
 #include "gtr-window.h"
