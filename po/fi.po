@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-03-12 16:11+0000\n"
-"PO-Revision-Date: 2020-03-15 13:53+0200\n"
+"POT-Creation-Date: 2020-07-28 11:23+0000\n"
+"PO-Revision-Date: 2020-08-16 17:11+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -59,12 +59,12 @@ msgstr ""
 "integraatio Subversion-versionhallintajärjestelmään kanssa sekä "
 "lähdekoodikatselin."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:83
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:99
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:657
-#: src/gtr-notebook.ui:308 src/gtr-window.c:320 src/gtr-window.ui:25
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:645
+#: src/gtr-notebook.ui:308 src/gtr-window.c:233 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Käännösmuokkain"
 
@@ -246,29 +246,38 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "Käännösmuokkaimen verkkosivusto"
 
-#: src/gtr-actions-file.c:204 src/gtr-application.c:458
-msgid "Do you want to save the changes?"
-msgstr "Haluatko tallentaa muutokset?"
+#: src/gtr-actions-file.c:197
+#, c-format
+msgid ""
+"Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
+"\">%s</span>?"
+msgstr ""
+"Haluatko tallentaa muutokset tähän tiedostoon: <span weight=\"bold\" size="
+"\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:205 src/gtr-application.c:459
-msgid "Warning"
-msgstr "Varoitus"
+#: src/gtr-actions-file.c:203
+msgid "If you don't save, all your unsaved changes will be permanently lost."
+msgstr "Jos et tallenna, kaikki tallentamattomat muutokset häviävät."
 
-#: src/gtr-actions-file.c:223
+#: src/gtr-actions-file.c:206
+msgid "Save and open"
+msgstr "Tallenna ja avaa"
+
+#: src/gtr-actions-file.c:207
+msgid "Cancel"
+msgstr "Peru"
+
+#: src/gtr-actions-file.c:208
+msgid "Continue without saving"
+msgstr "Jatka tallentamatta"
+
+#: src/gtr-actions-file.c:240
 msgid "Open file for translation"
 msgstr "Avaa käännettävä tiedosto"
 
-#: src/gtr-actions-file.c:295 src/gtr-actions-file.c:412
-msgid "File saved."
-msgstr "Tiedosto tallennettu."
-
-#: src/gtr-actions-file.c:343
+#: src/gtr-actions-file.c:347
 msgid "Save file as…"
 msgstr "Tallenna tiedosto nimellä…"
-
-#: src/gtr-actions-file.c:804
-msgid "Files saved."
-msgstr "Tiedostot tallennettu."
 
 #: src/gtr-assistant.c:128
 #, c-format
@@ -314,7 +323,6 @@ msgid "Team email"
 msgstr "Kääntäjäryhmän sähköposti"
 
 #: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:547
-#: src/gtr-window.c:558
 msgid "Profile"
 msgstr "Profiili"
 
@@ -670,7 +678,6 @@ msgid "Order by menu"
 msgstr ""
 
 #: src/gtr-notebook.ui:585
-#| msgid "Undo (<Ctrl>z)"
 msgid "Find (<Ctrl><f>)"
 msgstr "Etsi (<Ctrl><f>)"
 
@@ -934,14 +941,6 @@ msgstr "Alkuperäisen teksti"
 msgid "Translated-text"
 msgstr "Käännetty teksti"
 
-#: src/gtr-statusbar.c:117 src/gtr-statusbar.c:252
-msgid "INS"
-msgstr "INS"
-
-#: src/gtr-statusbar.c:118 src/gtr-statusbar.c:248
-msgid "OVR"
-msgstr "OVR"
-
 #: src/gtr-tab-label.c:278
 msgid "Close document"
 msgstr "Sulje asiakirja"
@@ -992,68 +991,17 @@ msgstr "_Alkuperäisen viesti"
 msgid "Translate_d Text"
 msgstr "_Käännetty viesti"
 
-#: src/gtr-window.c:175
-msgid "Untranslated"
-msgstr "Kääntämättä"
-
-#: src/gtr-window.c:178
-msgid "Translated"
-msgstr "Käännetty"
-
-#: src/gtr-window.c:181
-msgid "Fuzzy"
-msgstr "Sumea"
-
-#: src/gtr-window.c:188
-#, c-format
-msgid "Current: %d"
-msgstr "Nykyinen: %d"
-
-#: src/gtr-window.c:189
-#, c-format
-msgid "Total: %d"
-msgstr "Yhteensä: %d"
-
-#: src/gtr-window.c:190
-#, c-format
-msgid "%d translated"
-msgid_plural "%d translated"
-msgstr[0] "%d käännetty"
-msgstr[1] "%d käännetty"
-
-#: src/gtr-window.c:193
-#, c-format
-msgid "%d fuzzy"
-msgid_plural "%d fuzzy"
-msgstr[0] "%d sumea"
-msgstr[1] "%d sumeaa"
-
-#: src/gtr-window.c:195
-#, c-format
-msgid "%d untranslated"
-msgid_plural "%d untranslated"
-msgstr[0] "%d kääntämättä"
-msgstr[1] "%d kääntämättä"
-
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:305
+#: src/gtr-window.c:218
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Käännösmuokkain"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:311
+#: src/gtr-window.c:224
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Käännösmuokkain"
-
-#: src/gtr-window.c:542
-msgid "No profile"
-msgstr "Ei profiilia"
-
-#: src/gtr-window.c:560
-msgid "Profile for the active document"
-msgstr "Aktiivisen asiakirjan profiili"
 
 #: src/gtranslator-menu.ui:7
 msgid "_New Window"
@@ -1308,6 +1256,60 @@ msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
 msgstr ""
+
+#~ msgid "Do you want to save the changes?"
+#~ msgstr "Haluatko tallentaa muutokset?"
+
+#~ msgid "Warning"
+#~ msgstr "Varoitus"
+
+#~ msgid "File saved."
+#~ msgstr "Tiedosto tallennettu."
+
+#~ msgid "Files saved."
+#~ msgstr "Tiedostot tallennettu."
+
+#~ msgid "INS"
+#~ msgstr "INS"
+
+#~ msgid "OVR"
+#~ msgstr "OVR"
+
+#~ msgid "Untranslated"
+#~ msgstr "Kääntämättä"
+
+#~ msgid "Translated"
+#~ msgstr "Käännetty"
+
+#~ msgid "Fuzzy"
+#~ msgstr "Sumea"
+
+#~ msgid "Current: %d"
+#~ msgstr "Nykyinen: %d"
+
+#~ msgid "Total: %d"
+#~ msgstr "Yhteensä: %d"
+
+#~ msgid "%d translated"
+#~ msgid_plural "%d translated"
+#~ msgstr[0] "%d käännetty"
+#~ msgstr[1] "%d käännetty"
+
+#~ msgid "%d fuzzy"
+#~ msgid_plural "%d fuzzy"
+#~ msgstr[0] "%d sumea"
+#~ msgstr[1] "%d sumeaa"
+
+#~ msgid "%d untranslated"
+#~ msgid_plural "%d untranslated"
+#~ msgstr[0] "%d kääntämättä"
+#~ msgstr[1] "%d kääntämättä"
+
+#~ msgid "No profile"
+#~ msgstr "Ei profiilia"
+
+#~ msgid "Profile for the active document"
+#~ msgstr "Aktiivisen asiakirjan profiili"
 
 #~ msgid "Found and replaced one occurrence"
 #~ msgid_plural "Found and replaced %d occurrences"
@@ -1874,9 +1876,6 @@ msgstr ""
 
 #~ msgid "_Save All"
 #~ msgstr "_Tallenna kaikki"
-
-#~ msgid "Save all open files"
-#~ msgstr "Tallenna kaikki avoimet tiedostot"
 
 #~ msgid "_Close All"
 #~ msgstr "_Sulje kaikki"
