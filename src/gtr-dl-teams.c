@@ -436,6 +436,8 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   GOutputStream *output = NULL;
   gsize bytes = 0;
   GtkWidget *dialog;
+  const char *dest_dir = g_get_user_special_dir (G_USER_DIRECTORY_DOWNLOAD);
+  g_autofree char *file_path = NULL;
   g_autoptr(GFile) dest_file = NULL;
 
   /* Load the file, save as temp; path to file is https://l10n.gnome.org/[priv->file_path] */
@@ -492,8 +494,9 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
       return;
     }
 
-  /* Save file to /tmp; file basename is the part from last / character on */
-  dest_file = g_file_new_for_uri (g_strconcat ("file:///tmp", strrchr (priv->file_path, '/'), NULL));
+  /* Save file to Downloads; file basename is the part from last / character on */
+  file_path = g_strconcat ("file://", dest_dir, "/", strrchr (priv->file_path, '/'), NULL);
+  dest_file = g_file_new_for_uri (file_path);
 
   g_file_copy (tmp_file, dest_file, G_FILE_COPY_OVERWRITE, NULL, NULL, NULL, &error);
 
@@ -512,9 +515,6 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   gtr_open (dest_file, priv->main_window, &error);
 
   g_object_unref (tmp_file);
-
-  /* Show Save As dialog to asve file in another path than /tmp */
-  gtr_save_file_as_dialog (NULL, priv->main_window);
 }
 
 static void
