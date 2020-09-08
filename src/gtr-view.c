@@ -91,6 +91,7 @@ typedef struct
   gchar *search_text;
 
   GspellChecker *spell;
+  GtkCssProvider *provider;
 } GtrViewPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrView, gtr_view, GTK_SOURCE_TYPE_VIEW)
@@ -107,6 +108,11 @@ gtr_view_init (GtrView * view)
   GtrViewPrivate *priv;
 
   priv = gtr_view_get_instance_private (view);
+
+  priv->provider = gtk_css_provider_new ();
+  gtk_style_context_add_provider (gtk_widget_get_style_context (GTK_WIDGET (view)),
+                                  GTK_STYLE_PROVIDER (priv->provider),
+                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   priv->spell = NULL;
   priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
@@ -144,6 +150,9 @@ gtr_view_init (GtrView * view)
                                       g_settings_get_boolean (priv->editor_settings,
                                                               GTR_SETTINGS_VISIBLE_WHITESPACE));
 
+  gtr_view_set_font_size (view, g_settings_get_int (priv->editor_settings,
+                                                    GTR_SETTINGS_FONT_SIZE));
+
   /* Set scheme color according to preferences */
   gtr_view_reload_scheme_color (view);
   gtk_text_view_set_monospace (GTK_TEXT_VIEW (view), TRUE);
@@ -160,6 +169,7 @@ gtr_view_dispose (GObject * object)
   g_clear_object (&priv->editor_settings);
   g_clear_object (&priv->ui_settings);
   g_clear_object (&priv->spell);
+  g_object_unref (&priv->provider);
 
   G_OBJECT_CLASS (gtr_view_parent_class)->dispose (object);
 }
@@ -897,4 +907,18 @@ gtr_view_reload_scheme_color (GtrView * view)
   g_free (scheme_id);
 
   gtk_source_buffer_set_style_scheme (buf, scheme);
+}
+
+void
+gtr_view_set_font_size (GtrView *view, int size)
+{
+  g_autofree char *css = NULL;
+  GtrViewPrivate *priv = gtr_view_get_instance_private (view);
+
+  if (size == 0)
+    css = g_strdup ("textview { }");
+  else
+    css = g_strdup_printf ("textview { font-size: %dpt; }", size);
+
+  gtk_css_provider_load_from_data (priv->provider, css, -1, NULL);
 }
