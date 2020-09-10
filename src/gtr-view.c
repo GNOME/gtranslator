@@ -40,6 +40,7 @@
 #include <gtk/gtk.h>
 
 #include <gtksourceview/gtksource.h>
+#include <dazzle.h>
 
 #include <gspell/gspell.h>
 
@@ -91,6 +92,7 @@ typedef struct
   gchar *search_text;
 
   GspellChecker *spell;
+  GtkCssProvider *provider;
 } GtrViewPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrView, gtr_view, GTK_SOURCE_TYPE_VIEW)
@@ -106,7 +108,14 @@ gtr_view_init (GtrView * view)
   gchar *ui_dir;
   GtrViewPrivate *priv;
 
+  g_autofree char *font = NULL;
+
   priv = gtr_view_get_instance_private (view);
+
+  priv->provider = gtk_css_provider_new ();
+  gtk_style_context_add_provider (gtk_widget_get_style_context (GTK_WIDGET (view)),
+                                  GTK_STYLE_PROVIDER (priv->provider),
+                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   priv->spell = NULL;
   priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
@@ -144,6 +153,9 @@ gtr_view_init (GtrView * view)
                                       g_settings_get_boolean (priv->editor_settings,
                                                               GTR_SETTINGS_VISIBLE_WHITESPACE));
 
+  font = g_settings_get_string (priv->editor_settings, GTR_SETTINGS_FONT);
+  gtr_view_set_font (view, font);
+
   /* Set scheme color according to preferences */
   gtr_view_reload_scheme_color (view);
   gtk_text_view_set_monospace (GTK_TEXT_VIEW (view), TRUE);
@@ -160,6 +172,7 @@ gtr_view_dispose (GObject * object)
   g_clear_object (&priv->editor_settings);
   g_clear_object (&priv->ui_settings);
   g_clear_object (&priv->spell);
+  g_object_unref (&priv->provider);
 
   G_OBJECT_CLASS (gtr_view_parent_class)->dispose (object);
 }
@@ -897,4 +910,23 @@ gtr_view_reload_scheme_color (GtrView * view)
   g_free (scheme_id);
 
   gtk_source_buffer_set_style_scheme (buf, scheme);
+}
+
+void
+gtr_view_set_font (GtrView *view, char *font)
+{
+  PangoFontDescription *font_desc = NULL;
+  g_autofree char *str = NULL;
+  g_autofree char *css = NULL;
+  GtrViewPrivate *priv = gtr_view_get_instance_private (view);
+  g_autoptr (GtkWidget) button = gtk_font_button_new ();
+
+  gtk_font_chooser_set_font (GTK_FONT_CHOOSER (button), font);
+  font_desc = gtk_font_chooser_get_font_desc (GTK_FONT_CHOOSER (button));
+  str = dzl_pango_font_description_to_css (font_desc);
+  css = g_strdup_printf ("textview { %s }", str ?: "");
+
+  gtk_css_provider_load_from_data (priv->provider, css, -1, NULL);
+
+  pango_font_description_free (font_desc);
 }

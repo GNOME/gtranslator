@@ -119,6 +119,7 @@ typedef struct
   GtkRevealer    *search_revealer;
   GtrSearchBar   *search_bar;
   GtkSearchEntry *search;
+
 } GtrTabPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrTab, gtr_tab, GTK_TYPE_BOX)
@@ -225,7 +226,6 @@ gtr_page_notify_child_revealed (GtrTab *tab,
 }
 
 //----------------------------------------------------------------//
-
 
 static gboolean
 show_hide_revealer (GtkWidget *widget, GdkEvent *ev, GtrTab *tab)
