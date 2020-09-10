@@ -120,11 +120,6 @@ typedef struct
   GtrSearchBar   *search_bar;
   GtkSearchEntry *search;
 
-  /* Text zoom */
-  GtkWidget *zoom_in;
-  GtkWidget *zoom_original;
-  GtkWidget *zoom_out;
-
 } GtrTabPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrTab, gtr_tab, GTK_TYPE_BOX)
@@ -149,35 +144,6 @@ enum
 static guint signals[LAST_SIGNAL];
 
 static gboolean gtr_tab_autosave (GtrTab * tab);
-
-static int DEFAULT_FONT_SIZE = 18;
-
-static void
-update_default_font_size () {
-  gchar **font_parts = NULL;
-  int i = 0;
-  g_autofree char *font = NULL;
-  g_autoptr(GSettings) settings = NULL;
-  g_autoptr(GSettingsSchema) schema = NULL;
-  GSettingsSchemaSource *source = g_settings_schema_source_get_default ();
-
-  DEFAULT_FONT_SIZE = 12;
-
-  schema = g_settings_schema_source_lookup (source, "org.gnome.desktop.interface", TRUE);
-  if (!schema || !g_settings_schema_has_key (schema, "font-name"))
-    return;
-
-  settings = g_settings_new ("org.gnome.desktop.interface");
-  font = g_settings_get_string (settings, "font-name");
-  font_parts = g_strsplit (font, " ", -1);
-
-  while (font_parts[i])
-    i++;
-
-  DEFAULT_FONT_SIZE = atoi (font_parts[i ? i - 1 : 0]);
-
-  g_strfreev (font_parts);
-}
 
 //---------------------------Search Bar Revealer------------------//
 
@@ -260,51 +226,6 @@ gtr_page_notify_child_revealed (GtrTab *tab,
 }
 
 //----------------------------------------------------------------//
-
-static gboolean
-zoom_in (GtkWidget *widget, GtrTab *tab)
-{
-  GtrTabPrivate *priv;
-  int size;
-
-  priv = gtr_tab_get_instance_private (tab);
-
-  size = g_settings_get_int (priv->editor_settings, GTR_SETTINGS_FONT_SIZE);
-  size = size == 0 ? DEFAULT_FONT_SIZE : size;
-
-  if (size <= 32)
-    g_settings_set_int (priv->editor_settings, GTR_SETTINGS_FONT_SIZE, size + 1);
-
-  return TRUE;
-}
-
-static gboolean
-zoom_original (GtkWidget *widget, GtrTab *tab)
-{
-  GtrTabPrivate *priv;
-
-  priv = gtr_tab_get_instance_private (tab);
-  g_settings_set_int (priv->editor_settings, GTR_SETTINGS_FONT_SIZE, 0);
-
-  return TRUE;
-}
-
-static gboolean
-zoom_out (GtkWidget *widget, GtrTab *tab)
-{
-  GtrTabPrivate *priv;
-  int size;
-
-  priv = gtr_tab_get_instance_private (tab);
-
-  size = g_settings_get_int (priv->editor_settings, GTR_SETTINGS_FONT_SIZE);
-  size = size == 0 ? DEFAULT_FONT_SIZE : size;
-
-  if (size >= 4)
-    g_settings_set_int (priv->editor_settings, GTR_SETTINGS_FONT_SIZE, size - 1);
-
-  return TRUE;
-}
 
 static gboolean
 show_hide_revealer (GtkWidget *widget, GdkEvent *ev, GtrTab *tab)
@@ -853,15 +774,6 @@ gtr_tab_init (GtrTab * tab)
 
   g_signal_connect (priv->progress_eventbox, "button-press-event",
                     G_CALLBACK (show_hide_revealer), tab);
-
-  update_default_font_size();
-
-  g_signal_connect (priv->zoom_in, "clicked",
-                    G_CALLBACK (zoom_in), tab);
-  g_signal_connect (priv->zoom_original, "clicked",
-                    G_CALLBACK (zoom_original), tab);
-  g_signal_connect (priv->zoom_out, "clicked",
-                    G_CALLBACK (zoom_out), tab);
 }
 
 static void
@@ -1047,9 +959,6 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, overlay);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_bar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_revealer);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, zoom_in);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, zoom_original);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, zoom_out);
   gtk_widget_class_bind_template_callback (widget_class, gtr_page_notify_child_revealed);
   gtk_widget_class_bind_template_callback (widget_class, gtr_page_stop_search);
 

@@ -65,6 +65,7 @@ typedef struct
   /* Editor->Text display */
   GtkWidget *highlight_syntax_checkbutton;
   GtkWidget *visible_whitespace_checkbutton;
+  GtkWidget *font_button;
 
   /* Editor->Contents */
   GtkWidget *unmark_fuzzy_when_changed_checkbutton;
@@ -192,6 +193,33 @@ setup_editor_pages (GtrPreferencesDialog * dlg)
   setup_editor_text_display_page (dlg);
   setup_editor_contents (dlg);
 }
+
+static void
+on_font_set (GtkWidget *widget, GtrPreferencesDialog *dlg)
+{
+  GtrPreferencesDialogPrivate *priv = gtr_preferences_dialog_get_instance_private (dlg);
+  g_autofree char *font = NULL;
+
+  font = gtk_font_chooser_get_font (GTK_FONT_CHOOSER (priv->font_button));
+  g_settings_set_string (priv->editor_settings, GTR_SETTINGS_FONT, font);
+}
+
+static char *
+get_default_font () {
+  g_autoptr(GSettings) settings = NULL;
+  g_autoptr(GSettingsSchema) schema = NULL;
+  GSettingsSchemaSource *source = g_settings_schema_source_get_default ();
+  char *font = NULL;
+
+  schema = g_settings_schema_source_lookup (source, "org.gnome.desktop.interface", TRUE);
+  if (!schema || !g_settings_schema_has_key (schema, "monospace-font-name"))
+    return NULL;
+
+  settings = g_settings_new ("org.gnome.desktop.interface");
+  font = g_settings_get_string (settings, "monospace-font-name");
+  return font;
+}
+
 
 /***************Profile pages****************/
 static void
@@ -613,6 +641,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
     NULL
   };
   GtrPreferencesDialogPrivate *priv = gtr_preferences_dialog_get_instance_private (dlg);
+  g_autofree char *font = NULL;
 
   priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
   priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
@@ -647,6 +676,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   priv->create_backup_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "create_backup_checkbutton"));
   priv->highlight_syntax_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "highlight_checkbutton"));
   priv->visible_whitespace_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "visible_whitespace_checkbutton"));
+  priv->font_button = GTK_WIDGET (gtk_builder_get_object (builder, "font_button"));
   priv->unmark_fuzzy_when_changed_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "unmark_fuzzy_checkbutton"));
   priv->spellcheck_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "spellcheck_checkbutton"));
   priv->profile_treeview = GTK_WIDGET (gtk_builder_get_object (builder, "profile_treeview"));
@@ -670,6 +700,14 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   setup_files_pages (dlg);
   setup_editor_pages (dlg);
   setup_profile_pages (dlg);
+
+  font = g_settings_get_string (priv->editor_settings, GTR_SETTINGS_FONT);
+  if (!strlen (font))
+    font = get_default_font ();
+
+  gtk_font_chooser_set_font (GTK_FONT_CHOOSER (priv->font_button), font);
+
+  g_signal_connect (priv->font_button, "font-set", G_CALLBACK (on_font_set), dlg);
 }
 
 static void

@@ -65,7 +65,7 @@ GSettings               *gtr_settings_new                       (void);
 #define GTR_SETTINGS_VISIBLE_WHITESPACE			"visible-whitespace"
 #define GTR_SETTINGS_UNMARK_FUZZY_WHEN_CHANGED		"unmark-fuzzy-when-changed"
 #define GTR_SETTINGS_SPELLCHECK				"spellcheck"
-#define GTR_SETTINGS_FONT_SIZE				"font-size"
+#define GTR_SETTINGS_FONT				"font"
 #define GTR_SETTINGS_PANEL_SWITCHER_STYLE		"panel-switcher-style"
 #define GTR_SETTINGS_COLOR_SCHEME			"color-scheme"
 #define GTR_SETTINGS_SORT_ORDER				"sort-order"

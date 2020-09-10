@@ -180,19 +180,19 @@ on_spellcheck_changed (GSettings * settings,
 }
 
 static void
-on_font_size_changed (GSettings * settings,
-                      const gchar * key, GtrSettings * gs)
+on_font_changed (GSettings * settings,
+                 const gchar * key, GtrSettings * gs)
 {
   GList *views, *l;
-  int size;
+  g_autofree char *font = NULL;
 
-  size = g_settings_get_int (settings, key);
+  font = g_settings_get_string (settings, GTR_SETTINGS_FONT);
 
   views = gtr_application_get_views (GTR_APP, TRUE, TRUE);
 
   for (l = views; l != NULL; l = g_list_next (l))
     {
-      gtr_view_set_font_size (GTR_VIEW (l->data), size);
+      gtr_view_set_font (GTR_VIEW (l->data), font);
     }
 
   g_list_free (views);
@@ -247,8 +247,8 @@ gtr_settings_init (GtrSettings * gs)
                     "changed::color-scheme",
                     G_CALLBACK (on_scheme_changed), gs);
   g_signal_connect (priv->editor,
-                    "changed::font-size",
-                    G_CALLBACK (on_font_size_changed), gs);
+                    "changed::font",
+                    G_CALLBACK (on_font_changed), gs);
 }
 
 static void

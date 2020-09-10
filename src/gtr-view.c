@@ -40,6 +40,7 @@
 #include <gtk/gtk.h>
 
 #include <gtksourceview/gtksource.h>
+#include <dazzle.h>
 
 #include <gspell/gspell.h>
 
@@ -107,6 +108,8 @@ gtr_view_init (GtrView * view)
   gchar *ui_dir;
   GtrViewPrivate *priv;
 
+  g_autofree char *font = NULL;
+
   priv = gtr_view_get_instance_private (view);
 
   priv->provider = gtk_css_provider_new ();
@@ -150,8 +153,8 @@ gtr_view_init (GtrView * view)
                                       g_settings_get_boolean (priv->editor_settings,
                                                               GTR_SETTINGS_VISIBLE_WHITESPACE));
 
-  gtr_view_set_font_size (view, g_settings_get_int (priv->editor_settings,
-                                                    GTR_SETTINGS_FONT_SIZE));
+  font = g_settings_get_string (priv->editor_settings, GTR_SETTINGS_FONT);
+  gtr_view_set_font (view, font);
 
   /* Set scheme color according to preferences */
   gtr_view_reload_scheme_color (view);
@@ -910,15 +913,20 @@ gtr_view_reload_scheme_color (GtrView * view)
 }
 
 void
-gtr_view_set_font_size (GtrView *view, int size)
+gtr_view_set_font (GtrView *view, char *font)
 {
+  PangoFontDescription *font_desc = NULL;
+  g_autofree char *str = NULL;
   g_autofree char *css = NULL;
   GtrViewPrivate *priv = gtr_view_get_instance_private (view);
+  g_autoptr (GtkWidget) button = gtk_font_button_new ();
 
-  if (size == 0)
-    css = g_strdup ("textview { }");
-  else
-    css = g_strdup_printf ("textview { font-size: %dpt; }", size);
+  gtk_font_chooser_set_font (GTK_FONT_CHOOSER (button), font);
+  font_desc = gtk_font_chooser_get_font_desc (GTK_FONT_CHOOSER (button));
+  str = dzl_pango_font_description_to_css (font_desc);
+  css = g_strdup_printf ("textview { %s }", str ?: "");
 
   gtk_css_provider_load_from_data (priv->provider, css, -1, NULL);
+
+  pango_font_description_free (font_desc);
 }

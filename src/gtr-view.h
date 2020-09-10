@@ -115,7 +115,7 @@ gtr_view_get_type (void)
      void gtr_view_set_language (GtrView *view,
                                  const gchar *lang);
 
-     void gtr_view_set_font_size (GtrView *view, int size);
+     void gtr_view_set_font (GtrView *view, char *font);
 
 
 /* Search macros */
