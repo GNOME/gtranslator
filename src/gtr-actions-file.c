@@ -151,24 +151,11 @@ gtr_file_chooser_analyse (gpointer dialog,
 {
   gint reply;
 
-  reply = gtk_dialog_run (GTK_DIALOG (dialog));
-  switch (reply)
-    {
-    case GTK_RESPONSE_ACCEPT:
-      if (mode == FILESEL_OPEN)
-        {
-          gtr_po_parse_files_from_dialog (GTK_WIDGET (dialog), window);
-        }
-      break;
-    case GTK_RESPONSE_CANCEL:
-      gtk_widget_hide (GTK_WIDGET (dialog));
-      break;
-    case GTK_RESPONSE_DELETE_EVENT:
-      gtk_widget_hide (GTK_WIDGET (dialog));
-      break;
-    default:
-      break;
-    }
+  reply = gtk_native_dialog_run (GTK_NATIVE_DIALOG (dialog));
+  if (reply == GTK_RESPONSE_ACCEPT && mode == FILESEL_OPEN)
+    gtr_po_parse_files_from_dialog (GTK_WIDGET (dialog), window);
+
+  g_object_unref (dialog);
 }
 
 gboolean
@@ -261,7 +248,7 @@ save_dialog_response_cb (GtkDialog * dialog,
 
   if (response_id != GTK_RESPONSE_ACCEPT)
     {
-      gtk_widget_destroy (GTK_WIDGET (dialog));
+      g_object_unref (dialog);
       return;
     }
 
@@ -271,7 +258,7 @@ save_dialog_response_cb (GtkDialog * dialog,
   location = g_file_new_for_path (filename);
   g_free (filename);
 
-  gtk_widget_destroy (GTK_WIDGET (dialog));
+  g_object_unref (dialog);
 
   if (po != NULL)
     {
@@ -329,9 +316,7 @@ gtr_save_file_as_dialog (GtkAction * action, GtrWindow * window)
 {
   GtkWidget *dialog = NULL;
   GtrTab *current_page;
-  GtrPo *po;
-  GFile *location;
-  gchar *uri = NULL;
+  gint reply = 0;
 
   if (dialog != NULL)
     {
@@ -340,12 +325,10 @@ gtr_save_file_as_dialog (GtkAction * action, GtrWindow * window)
     }
 
   current_page = gtr_window_get_active_tab (window);
-  po = gtr_tab_get_po (current_page);
-
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
                                  FILESEL_SAVE,
                                  _("Save file as…"),
-                                 _gtr_application_get_last_dir (GTR_APP));
+                                 g_get_home_dir ());
 
   gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog),
                                                   TRUE);
@@ -354,29 +337,10 @@ gtr_save_file_as_dialog (GtkAction * action, GtrWindow * window)
                     G_CALLBACK (confirm_overwrite_callback), NULL);
 
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-
-  /*Set the suggested file */
-  location = gtr_po_get_location (po);
-
-  uri = g_file_get_uri (location);
-
-  g_object_unref (location);
-
-  if (uri)
-    gtk_file_chooser_set_uri (GTK_FILE_CHOOSER (dialog), uri);
-
-  g_free (uri);
-
-  /*
-   * FIXME: If we can't set the uri we should add a default path and name
-   */
-
   g_object_set_data (G_OBJECT (dialog), GTR_TAB_SAVE_AS, current_page);
 
-  g_signal_connect (dialog,
-                    "response", G_CALLBACK (save_dialog_response_cb), window);
-
-  gtk_widget_show (GTK_WIDGET (dialog));
+  reply = gtk_native_dialog_run (GTK_NATIVE_DIALOG (dialog));
+  save_dialog_response_cb (GTK_DIALOG (dialog), reply, window);
 }
 
 /*

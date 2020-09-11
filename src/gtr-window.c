@@ -194,13 +194,11 @@ set_window_title (GtrWindow * window, gboolean with_path)
   GtrTab *active_tab;
   GFile *file;
   gchar *title;
-  gchar *subtitle;
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtkHeaderBar *header;
 
   if (with_path)
     {
-      gchar *path;
       gchar *basename;
 
       active_tab = gtr_window_get_active_tab (window);
@@ -208,9 +206,7 @@ set_window_title (GtrWindow * window, gboolean with_path)
       state = gtr_po_get_state (gtr_tab_get_po (active_tab));
       po = gtr_tab_get_po (active_tab);
       file = gtr_po_get_location (po);
-      path = g_file_get_path (file);
       basename = g_file_get_basename (file);
-      subtitle = path;
 
       if (state == GTR_PO_STATE_MODIFIED)
         {
@@ -231,7 +227,6 @@ set_window_title (GtrWindow * window, gboolean with_path)
   else
     {
       title = g_strdup (_("Translation Editor"));
-      subtitle = g_strdup ("");
     }
 
   gtk_window_set_title (GTK_WINDOW (window), title);
@@ -239,10 +234,8 @@ set_window_title (GtrWindow * window, gboolean with_path)
   // notebook headerbar
   header = GTK_HEADER_BAR (gtr_notebook_get_header (GTR_NOTEBOOK (priv->notebook)));
   gtk_header_bar_set_title (header, title);
-  gtk_header_bar_set_subtitle (header, subtitle);
 
   g_free (title);
-  g_free (subtitle);
 }
 
 static void
