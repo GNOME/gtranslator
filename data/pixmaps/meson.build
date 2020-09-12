@@ -1,6 +1,5 @@
 pixmap_data = files(
   'gtranslator-logo.png',
-  'gtranslator-plugin.png',
 )
 
 install_data(
