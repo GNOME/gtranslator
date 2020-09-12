@@ -22,7 +22,6 @@
 #include "gtr-dict-panel.h"
 #include "gtr-gdict-sidebar.h"
 #include "gtr-window.h"
-#include "gtr-statusbar.h"
 #include "gtr-dirs.h"
 
 #include <glib.h>
