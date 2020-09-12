@@ -58,22 +58,19 @@
             ],
             "cleanup" : [
                 "/bin",
-                "/share"
+                "/include",
+                "/lib/pkgconfig",
+                "*.la",
+                "/share/gir-1.0",
+                "/share/gtk-doc",
+                "/share/vala"
             ],
             "sources" : [
                 {
                     "type" : "git",
                     "url" : "https://gitlab.gnome.org/GNOME/gspell.git",
-                    "tag": "1.8.1",
-                    "commit": "ba03499234037861e01ce1e83075e8a32b9790f3"
-                },
-                {
-                    "type": "patch",
-                    "path": "gspell-no-code-coverage.patch"
-                },
-                {
-                    "type": "patch",
-                    "path": "gspell-gettext-fix.patch"
+                    "tag": "1.8.4",
+                    "commit": "afd6d46d900dff621be840079c34488d9b3e8259"
                 }
             ]
         },
