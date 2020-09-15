@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-07-28 11:23+0000\n"
-"PO-Revision-Date: 2020-09-03 11:52+0200\n"
+"POT-Creation-Date: 2020-09-12 10:36+0000\n"
+"PO-Revision-Date: 2020-09-15 21:14+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: slovenčina <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -57,12 +57,12 @@ msgstr ""
 "zásuvnými modulmi ako je iný jazyk, vkladanie značiek, integrácia do systému "
 "subversion a prehliadač zdrojového kódu."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:99
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:117
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:645
-#: src/gtr-notebook.ui:308 src/gtr-window.c:233 src/gtr-window.ui:25
+#: src/gtr-notebook.ui:308 src/gtr-window.c:229 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Editor prekladov"
 
@@ -153,29 +153,29 @@ msgstr "Kontrola pravopisu"
 msgid "If true, check the spelling of translated messages."
 msgstr "Ak je true, kontroluje pravopis preložených správ."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:93
+#: data/org.gnome.Gtranslator.gschema.xml.in:96
 msgid "Side panel switcher style"
 msgstr "Štýl prepínača bočného panelu"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:94
+#: data/org.gnome.Gtranslator.gschema.xml.in:97
 msgid "Style for switchers in the side panel."
 msgstr "Štýl, ktorý sa má použiť na prepínače v bočnom paneli."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:100
+#: data/org.gnome.Gtranslator.gschema.xml.in:103
 msgid "Color scheme"
 msgstr "Farebná schéma"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:101
+#: data/org.gnome.Gtranslator.gschema.xml.in:104
 msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
 msgstr ""
 "Názov farebnej schémy gtksourceview, ktorá sa má použiť pri zvýrazňovaní "
 "syntaxe."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:107
+#: data/org.gnome.Gtranslator.gschema.xml.in:110
 msgid "Message list sort order"
 msgstr "Zoradenie zoznamu správ"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:108
+#: data/org.gnome.Gtranslator.gschema.xml.in:111
 msgid ""
 "Sort order to use in the message list. Possible values are “status”, “id”, "
 "“original-text” and “translated-text”."
@@ -184,11 +184,11 @@ msgstr ""
 "\" (stav), „id“ (identifikátor), „original_text“ (pôvodný text) a "
 "„translated_text“ (preložený text)."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:143
+#: data/org.gnome.Gtranslator.gschema.xml.in:146
 msgid "Active plugins"
 msgstr "Aktívne zásuvné moduly"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:144
+#: data/org.gnome.Gtranslator.gschema.xml.in:147
 msgid ""
 "List of active plugins. It contains the “Location” of the active plugins. "
 "See the .gtranslator-plugin file for obtaining the “Location” of a given "
@@ -203,7 +203,7 @@ msgid "Paths:"
 msgstr "Cesty:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
-#: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:622
+#: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:651
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "_Zavrieť"
@@ -252,7 +252,7 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "Webová stránka editora prekladu"
 
-#: src/gtr-actions-file.c:197
+#: src/gtr-actions-file.c:184
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -261,29 +261,29 @@ msgstr ""
 "Chcete uložiť zmeny do tohto súboru: <span weight=\"bold\" size=\"large\">"
 "%s</span>?"
 
-#: src/gtr-actions-file.c:203
+#: src/gtr-actions-file.c:190
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr ""
 "Ak nevykonáte uloženie, všetky vaše neuložené zmeny budú navždy stratené."
 
-#: src/gtr-actions-file.c:206
+#: src/gtr-actions-file.c:193
 msgid "Save and open"
 msgstr "Uložiť a otvoriť"
 
-#: src/gtr-actions-file.c:207
+#: src/gtr-actions-file.c:194
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: src/gtr-actions-file.c:208
+#: src/gtr-actions-file.c:195
 msgid "Continue without saving"
 msgstr "Pokračovať bez uloženia"
 
-#: src/gtr-actions-file.c:240
+#: src/gtr-actions-file.c:227
 msgid "Open file for translation"
 msgstr "Otvoriť súbor na preklad"
 
 # dialog title
-#: src/gtr-actions-file.c:347
+#: src/gtr-actions-file.c:330
 msgid "Save file as…"
 msgstr "Uloženie súboru ako…"
 
@@ -330,7 +330,7 @@ msgstr "Prekladateľov email"
 msgid "Team email"
 msgstr "Email tímu"
 
-#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:547
+#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:575
 msgid "Profile"
 msgstr "Profil"
 
@@ -347,14 +347,14 @@ msgid "Close _without Saving"
 msgstr "Zavrieť _bez uloženia"
 
 #: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:89
-#: src/gtr-file-dialogs.c:45 src/gtr-jump-dialog.c:90
-#: src/gtr-preferences-dialog.c:418 src/gtr-profile-dialog.c:71
+#: src/gtr-file-dialogs.c:47 src/gtr-jump-dialog.c:90
+#: src/gtr-preferences-dialog.c:446 src/gtr-profile-dialog.c:71
 #: src/translation-memory/gtr-translation-memory-dialog.c:81
 msgid "_Cancel"
 msgstr "_Zrušiť"
 
 #: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:87
-#: src/gtr-file-dialogs.c:47
+#: src/gtr-file-dialogs.c:46
 msgid "_Save"
 msgstr "_Uložiť"
 
@@ -476,19 +476,19 @@ msgstr "O programe"
 msgid "Quit"
 msgstr "Ukončiť"
 
-#: src/gtr-file-dialogs.c:48
+#: src/gtr-file-dialogs.c:47
 msgid "_Open"
 msgstr "_Otvoriť"
 
-#: src/gtr-file-dialogs.c:62
+#: src/gtr-file-dialogs.c:61
 msgid "Gettext translation"
 msgstr "Preklad gettext"
 
-#: src/gtr-file-dialogs.c:71
+#: src/gtr-file-dialogs.c:70
 msgid "Gettext translation template"
 msgstr "Šablóna prekladu gettext"
 
-#: src/gtr-file-dialogs.c:76
+#: src/gtr-file-dialogs.c:75
 msgid "All files"
 msgstr "Všetky súbory"
 
@@ -644,7 +644,7 @@ msgstr "Zostaviť pamäť prekladov"
 msgid "Edit header"
 msgstr "Upraviť hlavičku"
 
-#: src/gtr-notebook.ui:276 src/gtr-preferences-dialog.c:623
+#: src/gtr-notebook.ui:276 src/gtr-preferences-dialog.c:652
 #: src/gtr-projects.ui:202
 msgid "Help"
 msgstr "Pomocník"
@@ -778,27 +778,27 @@ msgstr "Vyskytla sa chyba v súbore PO: %s"
 msgid "There was an error writing the PO file: %s"
 msgstr "Vyskytla sa chyba pri zápise PO súboru: %s"
 
-#: src/gtr-preferences-dialog.c:394
+#: src/gtr-preferences-dialog.c:422
 msgid "Impossible to remove the active profile"
 msgstr "Nie je možné odstrániť aktívny profil"
 
-#: src/gtr-preferences-dialog.c:400
+#: src/gtr-preferences-dialog.c:428
 msgid "Another profile should be selected as active before"
 msgstr "Najprv by mal byť iný profil vybraný ako aktívny"
 
-#: src/gtr-preferences-dialog.c:413
+#: src/gtr-preferences-dialog.c:441
 msgid "Are you sure you want to delete this profile?"
 msgstr "Naozaj chcete odstrániť tento profil?"
 
-#: src/gtr-preferences-dialog.c:421
+#: src/gtr-preferences-dialog.c:449
 msgid "_Delete"
 msgstr "O_dstrániť"
 
-#: src/gtr-preferences-dialog.c:553
+#: src/gtr-preferences-dialog.c:581
 msgid "Active"
 msgstr "Aktívny"
 
-#: src/gtr-preferences-dialog.c:625 src/gtr-preferences-dialog.ui:49
+#: src/gtr-preferences-dialog.c:654 src/gtr-preferences-dialog.ui:49
 msgid "Translation Editor Preferences"
 msgstr "Predvoľby Editora prekladov"
 
@@ -842,27 +842,35 @@ msgstr "_Zvýrazňovať syntax správ"
 msgid "Make _whitespace visible"
 msgstr "Zvi_diteľniť prázdne miesta"
 
-#: src/gtr-preferences-dialog.ui:392
+#: src/gtr-preferences-dialog.ui:376
+msgid "Font:"
+msgstr "Písmo:"
+
+#: src/gtr-preferences-dialog.ui:388
+msgid "Choose the editor font"
+msgstr "Zvoliť písmo editora"
+
+#: src/gtr-preferences-dialog.ui:430
 msgid "Contents"
 msgstr "Obsah"
 
-#: src/gtr-preferences-dialog.ui:415
+#: src/gtr-preferences-dialog.ui:453
 msgid "_Remove fuzzy status if message is changed"
 msgstr "_Odstrániť stav nepresného prekladu pri zmene správy"
 
-#: src/gtr-preferences-dialog.ui:431
+#: src/gtr-preferences-dialog.ui:469
 msgid "Check _spelling"
 msgstr "_Kontrola pravopisu"
 
-#: src/gtr-preferences-dialog.ui:470
+#: src/gtr-preferences-dialog.ui:508
 msgid "Editor"
 msgstr "Editor"
 
-#: src/gtr-preferences-dialog.ui:569
+#: src/gtr-preferences-dialog.ui:607
 msgid "Edit Profile"
 msgstr "Upraviť profil"
 
-#: src/gtr-preferences-dialog.ui:606
+#: src/gtr-preferences-dialog.ui:644
 msgid "Profiles"
 msgstr "Profily"
 
@@ -1013,13 +1021,13 @@ msgid "Translate_d Text"
 msgstr "P_reložený text"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:218
+#: src/gtr-window.c:214
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Editor prekladov"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:224
+#: src/gtr-window.c:220
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Editor prekladov"
@@ -1442,9 +1450,6 @@ msgstr ""
 
 #~ msgid "Source Code View"
 #~ msgstr "Zobrazenie zdrojového kódu"
-
-#~ msgid "Use the System Editor"
-#~ msgstr "Použiť systémový editor"
 
 #~ msgid "Whether use the system editor to show the source code"
 #~ msgstr "Použije systémový editor na zobrazenie zdrojového kódu"
