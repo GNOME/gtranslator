@@ -1,5 +1,4 @@
 subdir('icons')
-subdir('pixmaps')
 
 # Desktop files
 desktop_conf = configuration_data()
