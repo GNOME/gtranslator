@@ -42,6 +42,7 @@
 #include <gio/gio.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <libhandy-1/handy.h>
 
 #ifdef ENABLE_INTROSPECTION
 #include <girepository.h>
@@ -642,6 +643,7 @@ gtr_application_startup (GApplication *application)
 
   G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
 
+  hdy_init();
   g_set_application_name (_("Translation Editor"));
   gtk_window_set_default_icon_name (PACKAGE_APPID);
 

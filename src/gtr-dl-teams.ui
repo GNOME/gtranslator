@@ -1,37 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
+  <requires lib="gtk+" version="3.20"/>
+  <requires lib="libhandy" version="1.0"/>
   <template class="GtrDlTeams" parent="GtkBin">
     <child>
-      <object class="GtkBox" id="main_box">
-        <property name="margin_start">134</property>
-        <property name="margin_end">134</property>
+      <object class="HdyClamp">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="margin_top">24</property>
-        <property name="margin_bottom">24</property>
-        <property name="vexpand">False</property>
-        <property name="valign">center</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">14</property>
-
+        <property name="halign">fill</property>
+        <property name="valign">fill</property>
+        <property name="margin-bottom">32</property>
+        <property name="margin-start">16</property>
+        <property name="margin-end">16</property>
+        <property name="margin-top">32</property>
+        <property name="expand">True</property>
+        <property name="maximum-size">600</property>
+        <property name="tightening-threshold">400</property>
         <child>
-          <object class="GtkImage">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="pixel_size">60</property>
-            <property name="icon_name">view-restore-symbolic</property>
-            <property name="icon_size">6</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox" id="select_box">
-            <property name="margin_start">0</property>
-            <property name="margin_end">0</property>
+          <object class="GtkBox" id="main_box">
+            <property name="margin_start">134</property>
+            <property name="margin_end">134</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_top">24</property>
@@ -40,54 +28,82 @@
             <property name="valign">center</property>
             <property name="orientation">vertical</property>
             <property name="spacing">14</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkLabel" id="file_label">
-            <property name="visible">False</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">4</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="instructions">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Select team, module, branch and domain to get the translation file.</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">5</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="stats_label">
-            <property name="visible">False</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">5</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="load_button">
-            <property name="label" translatable="yes">Load file</property>
-            <property name="visible">False</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">6</property>
-          </packing>
-        </child>
 
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixel_size">48</property>
+                <property name="icon_name">view-restore-symbolic</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="select_box">
+                <property name="margin_start">0</property>
+                <property name="margin_end">0</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">24</property>
+                <property name="margin_bottom">24</property>
+                <property name="vexpand">False</property>
+                <property name="valign">center</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">14</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="file_label">
+                <property name="visible">False</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="instructions">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Select team, module, branch and domain to get the translation file.</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="stats_label">
+                <property name="visible">False</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="load_button">
+                <property name="label" translatable="yes">Load file</property>
+                <property name="visible">False</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">6</property>
+              </packing>
+            </child>
+
+          </object>
+        </child>
       </object>
     </child>
   </template>
@@ -239,4 +255,3 @@
   </object>
 
 </interface>
-
