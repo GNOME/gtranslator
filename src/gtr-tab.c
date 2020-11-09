@@ -80,6 +80,12 @@ typedef struct
 
   GtkWidget *dock;
 
+  /*Vertical and Horizontal Panes */
+  GtkPaned *hbox;
+  GtkPaned *vertical_box;
+  gint context_position;
+  gint content_position;
+
   GtkWidget *message_table;
   GtkWidget *context;
 
@@ -757,6 +763,16 @@ gtr_tab_init (GtrTab * tab)
 
   g_signal_connect (tab, "message-changed", G_CALLBACK (update_status), NULL);
 
+  /*Load gsettings for panes */
+  priv->context_position = g_settings_get_int (priv->state_settings,
+                                               GTR_SETTINGS_CONTEXT_PANEL_SIZE);
+
+  priv->content_position = g_settings_get_int (priv->state_settings,
+                                               GTR_SETTINGS_CONTENT_PANEL_SIZE);
+
+  gtk_paned_set_position (priv->hbox, priv->context_position);
+  gtk_paned_set_position (priv->vertical_box, priv->content_position);
+
   /* Manage auto save data */
   priv->autosave = g_settings_get_boolean (priv->files_settings,
                                            GTR_SETTINGS_AUTO_SAVE);
@@ -794,11 +810,35 @@ gtr_tab_finalize (GObject * object)
 }
 
 static void
-gtr_tab_dispose (GObject * object)
+save_pane_state(GtrTab *tab)
 {
   GtrTabPrivate *priv;
 
+  priv = gtr_tab_get_instance_private (tab);
+
+  priv->context_position = gtk_paned_get_position (priv->hbox);
+  priv->content_position = gtk_paned_get_position (priv->vertical_box);
+
+  g_settings_set_int (priv->state_settings, GTR_SETTINGS_CONTEXT_PANEL_SIZE,
+                      priv->context_position);
+
+  g_settings_set_int (priv->state_settings, GTR_SETTINGS_CONTENT_PANEL_SIZE,
+                      priv->content_position);
+}
+
+static void
+gtr_tab_dispose (GObject * object)
+{
+  GtrTab *tab = GTR_TAB(object);
+  GtrTabPrivate *priv;
+
   priv = gtr_tab_get_instance_private (GTR_TAB (object));
+
+  if (!priv->dispose_has_run)
+    {
+      save_pane_state (tab);
+      priv->dispose_has_run = TRUE;
+    }
 
   g_clear_object (&priv->po);
   g_clear_object (&priv->ui_settings);
@@ -948,6 +988,8 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, msgstr_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, trans_notebook);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, context);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, hbox);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, vertical_box);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_eventbox);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_box);
