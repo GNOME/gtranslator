@@ -11,23 +11,23 @@
 # Gabriel Feitosa Vilar <cogumm@gmail.com>, 2010, 2011.
 # Enrico Nicoletto <liverig@gmail.com>, 2013.
 # Fábio Nogueira <fnogueira@gnome.org>, 2020.
-# Rafael Fontenelle <rafaelff@gnome.org>, 2013-2020.
 # Henrique Machado Campos <henriquecamposrj@gmail.com>, 2020.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2013-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-09-10 18:50+0000\n"
-"PO-Revision-Date: 2020-09-10 21:41-0300\n"
-"Last-Translator: Henrique Machado Campos <henriquecamposrj@gmail.com>\n"
+"POT-Creation-Date: 2020-09-18 22:09+0000\n"
+"PO-Revision-Date: 2020-12-14 06:59-0300\n"
+"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"X-Generator: Gtranslator 3.36.0\n"
+"X-Generator: Gtranslator 3.38.0\n"
 "X-Project-Style: gnome\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
@@ -66,12 +66,12 @@ msgstr ""
 "interessantes como idioma alternativo, inserir marcas, integração com "
 "subversion e um visualizador de código fonte."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:99
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:117
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:645
-#: src/gtr-notebook.ui:308 src/gtr-window.c:233 src/gtr-window.ui:25
+#: src/gtr-notebook.ui:308 src/gtr-window.c:229 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Editor de tradução"
 
@@ -276,7 +276,7 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "Site do Editor de tradução"
 
-#: src/gtr-actions-file.c:197
+#: src/gtr-actions-file.c:184
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -285,29 +285,29 @@ msgstr ""
 "Deseja salvar as alterações a este arquivo: <span weight=\"bold\" size="
 "\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:203
+#: src/gtr-actions-file.c:190
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr ""
 "Se você não salvar, todas as suas alterações não salvas serão "
 "permanentemente perdidas."
 
-#: src/gtr-actions-file.c:206
+#: src/gtr-actions-file.c:193
 msgid "Save and open"
 msgstr "Salvar e abrir"
 
-#: src/gtr-actions-file.c:207
+#: src/gtr-actions-file.c:194
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/gtr-actions-file.c:208
+#: src/gtr-actions-file.c:195
 msgid "Continue without saving"
 msgstr "Continuar sem salvar"
 
-#: src/gtr-actions-file.c:240
+#: src/gtr-actions-file.c:227
 msgid "Open file for translation"
 msgstr "Abrir arquivo para tradução"
 
-#: src/gtr-actions-file.c:347
+#: src/gtr-actions-file.c:330
 msgid "Save file as…"
 msgstr "Salvar arquivo como…"
 
@@ -371,14 +371,14 @@ msgid "Close _without Saving"
 msgstr "_Fechar sem salvar"
 
 #: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:89
-#: src/gtr-file-dialogs.c:45 src/gtr-jump-dialog.c:90
+#: src/gtr-file-dialogs.c:47 src/gtr-jump-dialog.c:90
 #: src/gtr-preferences-dialog.c:446 src/gtr-profile-dialog.c:71
 #: src/translation-memory/gtr-translation-memory-dialog.c:81
 msgid "_Cancel"
 msgstr "_Cancelar"
 
 #: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:87
-#: src/gtr-file-dialogs.c:47
+#: src/gtr-file-dialogs.c:46
 msgid "_Save"
 msgstr "_Salvar"
 
@@ -504,19 +504,19 @@ msgstr "Sobre"
 msgid "Quit"
 msgstr "Sair"
 
-#: src/gtr-file-dialogs.c:48
+#: src/gtr-file-dialogs.c:47
 msgid "_Open"
 msgstr "_Abrir"
 
-#: src/gtr-file-dialogs.c:62
+#: src/gtr-file-dialogs.c:61
 msgid "Gettext translation"
 msgstr "Catálogo de mensagens"
 
-#: src/gtr-file-dialogs.c:71
+#: src/gtr-file-dialogs.c:70
 msgid "Gettext translation template"
 msgstr "Modelo de catálogo de mensagens"
 
-#: src/gtr-file-dialogs.c:76
+#: src/gtr-file-dialogs.c:75
 msgid "All files"
 msgstr "Todos os arquivos"
 
@@ -677,7 +677,7 @@ msgstr "Ajuda"
 
 #: src/gtr-notebook.ui:321
 msgid "Open a new file (<Ctrl>o)"
-msgstr "Abri um novo arquivo (<Ctrl>o)"
+msgstr "Abre um novo arquivo (<Ctrl>o)"
 
 #: src/gtr-notebook.ui:341
 msgid "Open from Damned Lies (<Ctrl>d)"
@@ -1036,13 +1036,13 @@ msgid "Translate_d Text"
 msgstr "Texto tradu_zido"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:218
+#: src/gtr-window.c:214
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s – Editor de tradução"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:224
+#: src/gtr-window.c:220
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s – Editor de tradução"
