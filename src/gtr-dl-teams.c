@@ -42,6 +42,7 @@ typedef struct
   GtkWidget *select_box;
   GtkWidget *open_button;
   GtkWidget *load_button;
+  GtkWidget *reserve_button;
   GtkWidget *stats_label;
   GtkWidget *module_state_label;
   GtkWidget *file_label;
@@ -73,6 +74,7 @@ static void team_add_cb (GtkButton *btn, GtrDlTeams *self);
 static void gtr_dl_teams_save_combo_selected (GtkWidget *widget, GtrDlTeams *self);
 static void gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self);
 static void gtr_dl_teams_get_file_info (GtrDlTeams *self);
+static void gtr_dl_teams_reserve_for_translation(GtkButton *button, GtrDlTeams *self);
 
 static void
 gtr_dl_teams_list_add (JsonArray *array,
@@ -435,6 +437,18 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   /* Enable (down)load button */
   gtk_widget_set_sensitive (priv->load_button, TRUE);
 
+  /* Enable the reserve button if a module's state is either None or Translated or ToReview */
+  if (strcmp(priv->module_state, "None") == 0 ||
+      strcmp(priv->module_state, "Translated") == 0 ||
+      strcmp(priv->module_state, "ToReview") == 0)
+    {
+      gtk_widget_set_sensitive (priv->reserve_button, TRUE);
+    }
+  else
+    {
+      gtk_widget_set_sensitive (priv->reserve_button, FALSE);
+    }
+
   g_free (markup);
 }
 
@@ -570,6 +584,67 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   g_object_unref (tmp_file);
 }
 
+/* Reserve for translation */
+static void
+gtr_dl_teams_reserve_for_translation(GtkButton *button, GtrDlTeams *self)
+{
+  GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
+  GtrProfileManager *pmanager = NULL;
+  GtrProfile *profile = NULL;
+  GtkWidget *dialog, *success_dialog;
+  g_autoptr (SoupSession) session = NULL;
+  g_autoptr (SoupMessage) msg = NULL;
+  const char *auth_token = NULL;
+  g_autofree char *auth = NULL;
+  g_autofree gchar *reserve_endpoint = NULL;
+
+  pmanager = gtr_profile_manager_get_default ();
+  profile = gtr_profile_manager_get_active_profile (pmanager);
+  auth_token = gtr_profile_get_auth_token (profile);
+  auth = g_strconcat ("Bearer ", auth_token, NULL);
+
+  /* API endpoint: modules/[module]/branches/[branch]/domains/[domain]/languages/[team]/reserve */
+  reserve_endpoint = g_strconcat ((const gchar *)API_URL,
+                                  "modules/", priv->selected_module,
+                                  "/branches/", priv->selected_branch,
+                                  "/domains/", priv->selected_domain,
+                                  "/languages/", priv->selected_team,
+                                  "/reserve", NULL);
+
+  msg = soup_message_new ("POST", reserve_endpoint);
+  soup_message_headers_append (msg->request_headers, "Authentication", auth);
+  session = soup_session_new ();
+  soup_session_send_message (session, msg);
+
+  if (!SOUP_STATUS_IS_SUCCESSFUL(msg->status_code))
+  {
+    dialog = gtk_message_dialog_new(GTK_WINDOW(priv->main_window),
+                                    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                    GTK_MESSAGE_WARNING,
+                                    GTK_BUTTONS_CLOSE,
+                                    _("An error occurred while reserving this module: %s"),
+                                    soup_status_get_phrase(msg->status_code));
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+    return;
+  }
+
+  /* Display a message if the reserve for translation operation was successful */
+  success_dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
+                                           GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                           GTK_MESSAGE_INFO,
+                                           GTK_BUTTONS_OK,
+                                           _("The file '%s.%s.%s.%s' has been successfully reserved"),
+                                           priv->selected_module,
+                                           priv->selected_branch,
+                                           priv->selected_team,
+                                           priv->selected_domain);
+
+  gtk_dialog_run (GTK_DIALOG (success_dialog));
+  gtk_widget_destroy (success_dialog);
+  gtk_widget_set_sensitive (priv->reserve_button, FALSE);
+}
+
 static void
 gtr_dl_teams_save_combo_selected (GtkWidget  *widget,
                                   GtrDlTeams *self)
@@ -656,6 +731,7 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, stats_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, module_state_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, load_button);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, reserve_button);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, instructions);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, open_button);
@@ -677,6 +753,7 @@ gtr_dl_teams_init (GtrDlTeams *self)
   priv->module_state = NULL;
 
   gtk_widget_set_sensitive (priv->load_button, FALSE);
+  gtk_widget_set_sensitive (priv->reserve_button, FALSE);
 
   /* Add combo boxes for DL teams and modules */
   priv->teams_combobox = GTK_WIDGET (gtr_filter_selection_new ());
@@ -734,6 +811,11 @@ gtr_dl_teams_init (GtrDlTeams *self)
   g_signal_connect (priv->load_button,
                     "clicked",
                     G_CALLBACK (gtr_dl_teams_load_po_file),
+                    self);
+
+  g_signal_connect (priv->reserve_button,
+                    "clicked",
+                    G_CALLBACK (gtr_dl_teams_reserve_for_translation),
                     self);
 }
 
