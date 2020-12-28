@@ -136,3 +136,26 @@ create_error_info_bar (const gchar * primary_text,
 
   return infobar;
 }
+
+GtkWidget *
+create_info_info_bar (const gchar * primary_text,
+                      const gchar * secondary_text)
+{
+  GtkWidget *infobar;
+
+  infobar = gtk_info_bar_new_with_buttons (_("_OK"),
+                                           GTK_RESPONSE_OK, NULL);
+
+  gtk_info_bar_set_message_type (GTK_INFO_BAR (infobar), GTK_MESSAGE_INFO);
+
+  set_info_bar_text_and_icon (GTK_INFO_BAR (infobar),
+                              "dialog-information-symbolic",
+                              primary_text, secondary_text);
+
+  g_signal_connect (G_OBJECT (infobar), "response",
+                    G_CALLBACK (gtk_widget_hide), NULL);
+
+  gtk_widget_show (infobar);
+
+  return infobar;
+}

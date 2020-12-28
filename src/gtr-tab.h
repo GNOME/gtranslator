@@ -152,6 +152,8 @@ void gtr_tab_go_to_number (GtrTab * tab, gint number);
 
 void gtr_tab_set_info_bar (GtrTab * tab, GtkWidget * infobar);
 
+void gtr_tab_set_info (GtrTab * tab, const char * primary, const char * secondary);
+
 GtrMsg * gtr_tab_get_msg (GtrTab *tab);
 
 void gtr_tab_set_progress (GtrTab *tab, gint trans, gint untrans, gint fuzzy);

@@ -26,5 +26,8 @@ G_BEGIN_DECLS
   GtkWidget * create_error_info_bar (const gchar * primary_text,
                                      const gchar * secondary_text);
 
+  GtkWidget * create_info_info_bar (const gchar * primary_text,
+                                    const gchar * secondary_text);
+
 G_END_DECLS
 #endif

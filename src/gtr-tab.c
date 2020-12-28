@@ -1928,6 +1928,23 @@ gtr_tab_set_info_bar (GtrTab * tab, GtkWidget * infobar)
                              (gpointer *) & priv->infobar);
 }
 
+/**
+ * gtr_tab_set_info:
+ * @tab: a #GtrTab
+ * @info: a string to show
+ *
+ * Sets the @info to be shown in the @infobar.
+ */
+void
+gtr_tab_set_info (GtrTab * tab,
+                  const char * primary,
+                  const char * secondary)
+{
+  GtkWidget *infobar;
+  infobar = create_info_info_bar (primary, secondary);
+  gtr_tab_set_info_bar (tab, infobar);
+}
+
 GtrMsg *
 gtr_tab_get_msg (GtrTab *tab)
 {
