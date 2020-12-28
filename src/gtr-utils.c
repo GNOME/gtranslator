@@ -574,11 +574,15 @@ gtr_utils_get_filename (const gchar * filename)
   array = g_strsplit (filename, ".", -1);
   l = g_strv_length (array);
 
+  new_str = g_strdup (array[0]);
   // Remove the extension
-  g_free (array[l]);
-  array[l] = NULL;
-
-  new_str = g_strjoinv (".", array);
+  for (int i=1; i < l-1; i++)
+    {
+      char *tmp = NULL;
+      tmp = new_str;
+      new_str = g_strjoin (".", tmp, array[i], NULL);
+      g_free (tmp);
+    }
 
   g_strfreev (array);
 

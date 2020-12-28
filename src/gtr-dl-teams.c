@@ -501,19 +501,22 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   /* Save file to Downloads; file basename is the part from last / character on */
   basename = g_path_get_basename (priv->file_path);
   // Remove the extension
-  filename = gtr_utils_get_filename (basename);
+  filename = g_strdup_printf ("%s.%s.%s", priv->selected_module, priv->selected_branch, basename);
+  g_free (basename);
+  basename = g_strdup (filename);
   file_path = g_strconcat ("file://", dest_dir, "/", basename, NULL);
   dest_file = g_file_new_for_uri (file_path);
 
   ret = g_file_copy (tmp_file, dest_file, G_FILE_COPY_NONE, NULL, NULL, NULL, &error);
   while (!ret && g_error_matches (error, G_IO_ERROR, G_IO_ERROR_EXISTS))
     {
+      g_autofree char *tmpname = gtr_utils_get_filename (filename);
       g_free (basename);
       g_free (file_path);
       g_object_unref (dest_file);
       g_clear_error (&error);
 
-      basename = g_strdup_printf ("%s (%d).po", filename, ++file_index);
+      basename = g_strdup_printf ("%s (%d).po", tmpname, ++file_index);
       file_path = g_strconcat ("file://", dest_dir, "/", basename, NULL);
       dest_file = g_file_new_for_uri (file_path);
       ret = g_file_copy (tmp_file, dest_file, G_FILE_COPY_NONE, NULL, NULL, NULL, &error);
@@ -534,9 +537,8 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   if (gtr_open (dest_file, priv->main_window, &error)) {
     GtrTab *tab = gtr_window_get_active_tab (priv->main_window);
     g_autofree char *info_msg = NULL;
-    g_autofree char *filename = g_file_get_basename (dest_file);
     info_msg = g_strdup_printf (_("The file '%s' has been stored on %s"),
-                                filename, dest_dir);
+                                basename, dest_dir);
     gtr_tab_set_info (tab, info_msg, NULL);
   }
 
