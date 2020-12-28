@@ -562,3 +562,25 @@ gtr_utils_escape_underscores (const gchar * text, gssize length)
 
   return g_string_free (str, FALSE);
 }
+
+// Removes the extension from a filename
+gchar *
+gtr_utils_get_filename (const gchar * filename)
+{
+  gchar *new_str;
+  gchar **array;
+  int l = 0;
+
+  array = g_strsplit (filename, ".", -1);
+  l = g_strv_length (array);
+
+  // Remove the extension
+  g_free (array[l]);
+  array[l] = NULL;
+
+  new_str = g_strjoinv (".", array);
+
+  g_strfreev (array);
+
+  return new_str;
+}
