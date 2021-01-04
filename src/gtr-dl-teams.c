@@ -43,6 +43,7 @@ typedef struct
   GtkWidget *open_button;
   GtkWidget *load_button;
   GtkWidget *stats_label;
+  GtkWidget *module_state_label;
   GtkWidget *file_label;
   GtkWidget *instructions;
 
@@ -56,6 +57,7 @@ typedef struct
   gchar *selected_branch;
   const gchar *selected_domain;
   const gchar *file_path;
+  const gchar *module_state;
 
   GtrWindow *main_window;
 } GtrDlTeamsPrivate;
@@ -175,6 +177,7 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
   GtkWidget *dialog;
 
   gtk_widget_hide (priv->file_label);
+  gtk_widget_hide (priv->module_state_label);
   gtk_widget_show (priv->instructions);
   gtk_label_set_text (GTK_LABEL (priv->stats_label), "");
 
@@ -355,6 +358,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   JsonObject *stats_object;
   const char *format;
   char *markup;
+  g_autofree char *module_state = NULL;
   GtkWidget *dialog;
 
   /* API endpoint: modules/[module]/branches/[branch]/domains/[domain]/languages/[team] */
@@ -404,6 +408,14 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
       return;
     }
 
+  priv->module_state = json_object_get_string_member (object, "state");
+
+  if (!priv->module_state)
+    {
+      gtk_label_set_text (GTK_LABEL (priv->module_state_label), _("No module state found."));
+      gtk_widget_show (priv->module_state_label);
+    }
+
   /* Get file statistics and show them to the user */
   stats_node = json_object_get_member (object, "statistics");
   stats_object = json_node_get_object (stats_node);
@@ -417,7 +429,9 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   gtk_label_set_markup (GTK_LABEL (priv->stats_label), markup);
   gtk_label_set_text (GTK_LABEL (priv->file_label), g_strconcat("File: ", strrchr (priv->file_path, '/') + 1, NULL));
   gtk_widget_show (priv->file_label);
-
+  module_state = g_strdup_printf (_("The current state is: %s"), priv->module_state);
+  gtk_label_set_text (GTK_LABEL (priv->module_state_label), module_state);
+  gtk_widget_show (priv->module_state_label);
   /* Enable (down)load button */
   gtk_widget_set_sensitive (priv->load_button, TRUE);
 
@@ -593,6 +607,7 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, select_box);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, file_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, stats_label);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, module_state_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, load_button);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, instructions);
 
