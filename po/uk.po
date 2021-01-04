@@ -3,13 +3,13 @@
 # Yuri Syrota <rasta@renome.rovno.ua>, 2000.
 # Sergey Panasenko <nitay@users.sourceforge.net>, 2009.
 # Sergiy Gavrylov <sergiovana@bigmir.net>, 2010, 2011.
-# Yuri Chornoivan <yurchor@ukr.net>, 2020.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-09-10 14:22+0000\n"
-"PO-Revision-Date: 2020-09-11 15:57+0300\n"
+"POT-Creation-Date: 2021-01-04 08:43+0000\n"
+"PO-Revision-Date: 2021-01-04 13:49+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
 "=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 20.11.70\n"
+"X-Generator: Lokalize 19.04.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -57,12 +57,12 @@ msgstr ""
 "додаток вставлення теґів, додаток інтеграції із subversion та додаток "
 "перегляду початкового коду програм."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:99
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:117
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:645
-#: src/gtr-notebook.ui:308 src/gtr-window.c:233 src/gtr-window.ui:25
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:647
+#: src/gtr-notebook.ui:308 src/gtr-window.c:229 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Редактор перекладів"
 
@@ -252,7 +252,7 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "Cайт «Редактора перекладів»"
 
-#: src/gtr-actions-file.c:197
+#: src/gtr-actions-file.c:184
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -261,28 +261,28 @@ msgstr ""
 "Хочете зберегти зміни до цього файла: <span weight=\"bold\" size=\"large\">"
 "%s</span>?"
 
-#: src/gtr-actions-file.c:203
+#: src/gtr-actions-file.c:190
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr ""
 "Якщо ви не збережете файл, всі незбережені зміни будуть остаточно втрачені."
 
-#: src/gtr-actions-file.c:206
+#: src/gtr-actions-file.c:193
 msgid "Save and open"
 msgstr "Зберегти і відкрити"
 
-#: src/gtr-actions-file.c:207
+#: src/gtr-actions-file.c:194
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: src/gtr-actions-file.c:208
+#: src/gtr-actions-file.c:195
 msgid "Continue without saving"
 msgstr "Продовжити без збереження"
 
-#: src/gtr-actions-file.c:240
+#: src/gtr-actions-file.c:227
 msgid "Open file for translation"
 msgstr "Відкрити файл для перекладу"
 
-#: src/gtr-actions-file.c:347
+#: src/gtr-actions-file.c:330
 msgid "Save file as…"
 msgstr "Зберегти файл як…"
 
@@ -346,14 +346,14 @@ msgid "Close _without Saving"
 msgstr "Закрити _без збереження"
 
 #: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:89
-#: src/gtr-file-dialogs.c:45 src/gtr-jump-dialog.c:90
+#: src/gtr-file-dialogs.c:47 src/gtr-jump-dialog.c:90
 #: src/gtr-preferences-dialog.c:446 src/gtr-profile-dialog.c:71
 #: src/translation-memory/gtr-translation-memory-dialog.c:81
 msgid "_Cancel"
 msgstr "_Скасувати"
 
 #: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:87
-#: src/gtr-file-dialogs.c:47
+#: src/gtr-file-dialogs.c:46
 msgid "_Save"
 msgstr "З_берегти"
 
@@ -427,67 +427,76 @@ msgstr "Контекст:"
 msgid "Format:"
 msgstr "Формат:"
 
-#: src/gtr-dl-teams.c:617
+#: src/gtr-dl-teams.c:415
+msgid "No module state found."
+msgstr "Не знайдено стану модуля."
+
+#: src/gtr-dl-teams.c:432
+#, c-format
+msgid "The current state is: %s"
+msgstr "Поточний стан: %s"
+
+#: src/gtr-dl-teams.c:632
 msgid "Translation Team"
 msgstr "Команда перекладу"
 
-#: src/gtr-dl-teams.c:624
+#: src/gtr-dl-teams.c:639
 msgid "Module"
 msgstr "Модуль"
 
-#: src/gtr-dl-teams.ui:60
+#: src/gtr-dl-teams.ui:85
 msgid "Select team, module, branch and domain to get the translation file."
 msgstr "Виберіть команду, модуль, гілку і домен, щоб отримати файл перекладу."
 
-#: src/gtr-dl-teams.ui:81
+#: src/gtr-dl-teams.ui:106
 msgid "Load file"
 msgstr "Завантаження файла"
 
-#: src/gtr-dl-teams.ui:98
+#: src/gtr-dl-teams.ui:125
 msgid "Load from Damned Lies"
 msgstr "Завантажити з Damned Lies"
 
-#: src/gtr-dl-teams.ui:105 src/gtr-projects.ui:58
+#: src/gtr-dl-teams.ui:132 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Відкрити…"
 
-#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
+#: src/gtr-dl-teams.ui:155 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
 msgid "Main Menu"
 msgstr "Головне меню"
 
-#: src/gtr-dl-teams.ui:156 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+#: src/gtr-dl-teams.ui:183 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
 msgid "New window"
 msgstr "Нове вікно"
 
-#: src/gtr-dl-teams.ui:170 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
 msgid "Preferences"
 msgstr "Налаштування"
 
-#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:224 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
 msgid "Keyboard Shortcuts"
 msgstr "Клавіатурні скорочення"
 
-#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
+#: src/gtr-dl-teams.ui:238 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
 msgid "About"
 msgstr "Про програму"
 
-#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
+#: src/gtr-dl-teams.ui:252 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
 msgid "Quit"
 msgstr "Вийти"
 
-#: src/gtr-file-dialogs.c:48
+#: src/gtr-file-dialogs.c:47
 msgid "_Open"
 msgstr "_Відкрити"
 
-#: src/gtr-file-dialogs.c:62
+#: src/gtr-file-dialogs.c:61
 msgid "Gettext translation"
 msgstr "Переклад Gettext"
 
-#: src/gtr-file-dialogs.c:71
+#: src/gtr-file-dialogs.c:70
 msgid "Gettext translation template"
 msgstr "Шаблон перекладу Gettext"
 
-#: src/gtr-file-dialogs.c:76
+#: src/gtr-file-dialogs.c:75
 msgid "All files"
 msgstr "Усі файли"
 
@@ -959,40 +968,40 @@ msgstr "Перекладений текст"
 msgid "Close document"
 msgstr "Закрити документ"
 
-#: src/gtr-tab.c:335
+#: src/gtr-tab.c:341
 msgid "There is an error in the message:"
 msgstr "Помилка у цьому повідомленні:"
 
-#: src/gtr-tab.c:549 src/gtr-tab.c:675
+#: src/gtr-tab.c:555 src/gtr-tab.c:681
 msgid "fuzzy"
 msgstr "неточний"
 
-#: src/gtr-tab.c:705
+#: src/gtr-tab.c:711
 #, c-format
 msgid "Plural %d"
 msgstr "Форма множини %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1264
+#: src/gtr-tab.c:1306
 msgid "Path:"
 msgstr "Шлях:"
 
-#: src/gtr-tab.c:1914
+#: src/gtr-tab.c:1956
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Перекладено: %0.2f%%"
 
-#: src/gtr-tab.c:1915
+#: src/gtr-tab.c:1957
 #, c-format
 msgid "Translated: %d"
 msgstr "Перекладених: %d"
 
-#: src/gtr-tab.c:1916
+#: src/gtr-tab.c:1958
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Неперекладених: %d"
 
-#: src/gtr-tab.c:1917
+#: src/gtr-tab.c:1959
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Неточних: %d"
@@ -1006,13 +1015,13 @@ msgid "Translate_d Text"
 msgstr "Пере_кладений текст"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:218
+#: src/gtr-window.c:214
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — редактор перекладів"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:224
+#: src/gtr-window.c:220
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — редактор перекладів"
