@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-01-04 08:43+0000\n"
-"PO-Revision-Date: 2021-01-04 13:49+0200\n"
+"POT-Creation-Date: 2021-01-05 07:50+0000\n"
+"PO-Revision-Date: 2021-01-05 10:08+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
 "=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 19.04.0\n"
+"X-Generator: Lokalize 20.11.70\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -436,11 +436,16 @@ msgstr "Не знайдено стану модуля."
 msgid "The current state is: %s"
 msgstr "Поточний стан: %s"
 
-#: src/gtr-dl-teams.c:632
+#: src/gtr-dl-teams.c:554
+#, c-format
+msgid "The file '%s' has been saved in %s"
+msgstr "Файл «%s» було збережено до %s"
+
+#: src/gtr-dl-teams.c:660
 msgid "Translation Team"
 msgstr "Команда перекладу"
 
-#: src/gtr-dl-teams.c:639
+#: src/gtr-dl-teams.c:667
 msgid "Module"
 msgstr "Модуль"
 
@@ -564,8 +569,8 @@ msgstr "Проект"
 msgid "Comment"
 msgstr "Коментар"
 
-#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
-#: src/gtr-profile-dialog.c:170
+#: src/gtr-io-error-info-bar.c:146 src/gtr-jump-dialog.c:88
+#: src/gtr-profile-dialog.c:165 src/gtr-profile-dialog.c:170
 #: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "_OK"
 msgstr "_Гаразд"
@@ -986,22 +991,22 @@ msgstr "Форма множини %d"
 msgid "Path:"
 msgstr "Шлях:"
 
-#: src/gtr-tab.c:1956
+#: src/gtr-tab.c:1973
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Перекладено: %0.2f%%"
 
-#: src/gtr-tab.c:1957
+#: src/gtr-tab.c:1974
 #, c-format
 msgid "Translated: %d"
 msgstr "Перекладених: %d"
 
-#: src/gtr-tab.c:1958
+#: src/gtr-tab.c:1975
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Неперекладених: %d"
 
-#: src/gtr-tab.c:1959
+#: src/gtr-tab.c:1976
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Неточних: %d"
