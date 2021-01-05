@@ -76,4 +76,6 @@ void gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
      gchar *gtr_utils_get_datadir (void);
 
      gchar *gtr_utils_get_win32_plugindir (void);
+
+     gchar * gtr_utils_get_filename (const gchar * filename);
 #endif

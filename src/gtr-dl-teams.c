@@ -450,7 +450,11 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   GOutputStream *output = NULL;
   gsize bytes = 0;
   GtkWidget *dialog;
+  gboolean ret = FALSE;
+  int file_index = 0;
   const char *dest_dir = g_get_user_special_dir (G_USER_DIRECTORY_DOWNLOAD);
+  g_autofree char *basename = NULL;
+  g_autofree char *filename = NULL;
   g_autofree char *file_path = NULL;
   g_autoptr(GFile) dest_file = NULL;
 
@@ -509,10 +513,28 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
     }
 
   /* Save file to Downloads; file basename is the part from last / character on */
-  file_path = g_strconcat ("file://", dest_dir, "/", strrchr (priv->file_path, '/'), NULL);
+  basename = g_path_get_basename (priv->file_path);
+  // Remove the extension
+  filename = g_strdup_printf ("%s.%s.%s", priv->selected_module, priv->selected_branch, basename);
+  g_free (basename);
+  basename = g_strdup (filename);
+  file_path = g_strconcat ("file://", dest_dir, "/", basename, NULL);
   dest_file = g_file_new_for_uri (file_path);
 
-  g_file_copy (tmp_file, dest_file, G_FILE_COPY_OVERWRITE, NULL, NULL, NULL, &error);
+  ret = g_file_copy (tmp_file, dest_file, G_FILE_COPY_NONE, NULL, NULL, NULL, &error);
+  while (!ret && g_error_matches (error, G_IO_ERROR, G_IO_ERROR_EXISTS))
+    {
+      g_autofree char *tmpname = gtr_utils_get_filename (filename);
+      g_free (basename);
+      g_free (file_path);
+      g_object_unref (dest_file);
+      g_clear_error (&error);
+
+      basename = g_strdup_printf ("%s (%d).po", tmpname, ++file_index);
+      file_path = g_strconcat ("file://", dest_dir, "/", basename, NULL);
+      dest_file = g_file_new_for_uri (file_path);
+      ret = g_file_copy (tmp_file, dest_file, G_FILE_COPY_NONE, NULL, NULL, NULL, &error);
+    }
 
   if (error != NULL)
     {
@@ -526,7 +548,13 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
       return;
     }
 
-  gtr_open (dest_file, priv->main_window, &error);
+  if (gtr_open (dest_file, priv->main_window, &error)) {
+    GtrTab *tab = gtr_window_get_active_tab (priv->main_window);
+    g_autofree char *info_msg = NULL;
+    info_msg = g_strdup_printf (_("The file '%s' has been saved in %s"),
+                                basename, dest_dir);
+    gtr_tab_set_info (tab, info_msg, NULL);
+  }
 
   g_object_unref (tmp_file);
 }
