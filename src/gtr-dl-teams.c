@@ -554,9 +554,20 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
     info_msg = g_strdup_printf (_("The file '%s' has been saved in %s"),
                                 basename, dest_dir);
     gtr_tab_set_info (tab, info_msg, NULL);
+
+    GtrPo *po = gtr_tab_get_po(tab);
+    GError *po_error = NULL;
+    gtr_po_set_dl_info(po,
+                       priv->selected_team,
+                       priv->selected_module,
+                       priv->selected_branch,
+                       priv->selected_domain,
+                       priv->module_state);
+    // Save to update the headers
+    gtr_po_save_file(po, &po_error);
   }
 
-  g_object_unref (tmp_file);
+  g_object_unref(tmp_file);
 }
 
 static void
@@ -739,4 +750,5 @@ team_add_cb (GtkButton   *btn,
   GtrWindow *window = GTR_WINDOW (priv->main_window);
   gtr_open_file_dialog (NULL, window);
 }
+
 
