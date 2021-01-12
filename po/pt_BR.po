@@ -13,21 +13,22 @@
 # Fábio Nogueira <fnogueira@gnome.org>, 2020.
 # Henrique Machado Campos <henriquecamposrj@gmail.com>, 2020.
 # Rafael Fontenelle <rafaelff@gnome.org>, 2013-2020.
+# Bruno Lopes <brunolopesdsilv@gmail.com>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-09-18 22:09+0000\n"
-"PO-Revision-Date: 2020-12-14 06:59-0300\n"
-"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
+"POT-Creation-Date: 2021-01-08 21:28+0000\n"
+"PO-Revision-Date: 2021-01-09 11:35-0300\n"
+"Last-Translator: Bruno Lopes <brunolopesdsilv@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"X-Generator: Gtranslator 3.38.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Project-Style: gnome\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
@@ -70,7 +71,7 @@ msgstr ""
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:645
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:647
 #: src/gtr-notebook.ui:308 src/gtr-window.c:229 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Editor de tradução"
@@ -455,52 +456,66 @@ msgstr "Contexto:"
 msgid "Format:"
 msgstr "Formato:"
 
-#: src/gtr-dl-teams.c:617
+#: src/gtr-dl-teams.c:415
+msgid "No module state found."
+msgstr "Nenhum estado do módulo foi encontrado."
+
+#: src/gtr-dl-teams.c:432
+#, c-format
+msgid "The current state is: %s"
+msgstr "O estado atual é: %s"
+
+#: src/gtr-dl-teams.c:554
+#, c-format
+msgid "The file '%s' has been saved in %s"
+msgstr "O arquivo “%s” foi salvo em %s"
+
+#: src/gtr-dl-teams.c:660
 msgid "Translation Team"
 msgstr "Equipe de tradução"
 
-#: src/gtr-dl-teams.c:624
+#: src/gtr-dl-teams.c:667
 msgid "Module"
 msgstr "Módulo"
 
-#: src/gtr-dl-teams.ui:60
+#: src/gtr-dl-teams.ui:85
 msgid "Select team, module, branch and domain to get the translation file."
 msgstr ""
 "Seleciona equipe, módulo, ramo e domínio para obter o arquivo de tradução."
 
-#: src/gtr-dl-teams.ui:81
+#: src/gtr-dl-teams.ui:106
 msgid "Load file"
 msgstr "Carregar arquivo"
 
-#: src/gtr-dl-teams.ui:98
+#: src/gtr-dl-teams.ui:125
 msgid "Load from Damned Lies"
 msgstr "Carregar do Damned Lies"
 
-#: src/gtr-dl-teams.ui:105 src/gtr-projects.ui:58
+#: src/gtr-dl-teams.ui:132 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Abrir…"
 
-#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
+#: src/gtr-dl-teams.ui:155 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
 msgid "Main Menu"
 msgstr "Menu principal"
 
-#: src/gtr-dl-teams.ui:156 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+#: src/gtr-dl-teams.ui:183 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
 msgid "New window"
 msgstr "Nova janela"
 
-#: src/gtr-dl-teams.ui:170 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
 msgid "Preferences"
 msgstr "Preferências"
 
-#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:224 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
 msgid "Keyboard Shortcuts"
 msgstr "Atalhos de teclado"
 
-#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
+#: src/gtr-dl-teams.ui:238 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
 msgid "About"
 msgstr "Sobre"
 
-#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
+#: src/gtr-dl-teams.ui:252 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
 msgid "Quit"
 msgstr "Sair"
 
@@ -584,8 +599,8 @@ msgstr "Projeto"
 msgid "Comment"
 msgstr "Comentário"
 
-#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
-#: src/gtr-profile-dialog.c:170
+#: src/gtr-io-error-info-bar.c:146 src/gtr-jump-dialog.c:88
+#: src/gtr-profile-dialog.c:165 src/gtr-profile-dialog.c:170
 #: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "_OK"
 msgstr "_OK"
@@ -989,40 +1004,40 @@ msgstr "Texto traduzido"
 msgid "Close document"
 msgstr "Fecha o documento"
 
-#: src/gtr-tab.c:335
+#: src/gtr-tab.c:341
 msgid "There is an error in the message:"
 msgstr "Há um erro na mensagem:"
 
-#: src/gtr-tab.c:549 src/gtr-tab.c:675
+#: src/gtr-tab.c:555 src/gtr-tab.c:681
 msgid "fuzzy"
 msgstr "aproximada"
 
-#: src/gtr-tab.c:705
+#: src/gtr-tab.c:711
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1264
+#: src/gtr-tab.c:1306
 msgid "Path:"
 msgstr "Caminho:"
 
-#: src/gtr-tab.c:1914
+#: src/gtr-tab.c:1973
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Traduzido: %0.2f%%"
 
-#: src/gtr-tab.c:1915
+#: src/gtr-tab.c:1974
 #, c-format
 msgid "Translated: %d"
 msgstr "Traduzido: %d"
 
-#: src/gtr-tab.c:1916
+#: src/gtr-tab.c:1975
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Não traduzido: %d"
 
-#: src/gtr-tab.c:1917
+#: src/gtr-tab.c:1976
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Aproximado: %d"
