@@ -104,6 +104,9 @@ gtr_po_get_type (void)
 
      void gtr_po_set_state (GtrPo * po, GtrPoState state);
 
+     void gtr_po_set_dl_info(GtrPo *po, const char *team, const char *module_name,
+                             const char *branch, const char *domain, const char *module_state);
+
      GFile *gtr_po_get_location (GtrPo * po);
 
      void gtr_po_set_location (GtrPo * po, GFile * location);

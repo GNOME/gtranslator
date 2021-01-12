@@ -567,7 +567,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
     gtr_po_save_file(po, &po_error);
   }
 
-  g_object_unref(tmp_file);
+  g_object_unref (tmp_file);
 }
 
 static void

@@ -93,6 +93,21 @@ typedef struct
 
   GtrPoState state;
 
+  /* Damned Lies(DL) teams are stored here */
+  const char *dl_team;
+
+  /* DL modules */
+  const char *dl_module;
+
+  /*  DL branches */
+  const char *dl_branch;
+
+  /*  DL domains */
+  const char *dl_domain;
+
+  /* The state of a DL module */
+  const char *dl_state;
+
   /* Marks if the file was changed;  */
   guint file_changed : 1;
 } GtrPoPrivate;
@@ -111,6 +126,22 @@ enum
 };
 
 static gchar *message_error = NULL;
+
+static void
+gtr_header_set_field (GtrHeader * header,
+                      const gchar * field, const gchar * data)
+{
+  gchar *msgstr;
+
+  g_return_if_fail (GTR_IS_HEADER (header));
+  g_return_if_fail (data != NULL);
+
+  msgstr = po_header_set_field (gtr_msg_get_msgstr (GTR_MSG (header)),
+                                field, data);
+  gtr_msg_set_msgstr (GTR_MSG (header), msgstr);
+
+  g_free (msgstr);
+}
 
 static void
 gtr_po_set_property (GObject      *object,
@@ -911,6 +942,22 @@ gtr_po_set_state (GtrPo * po, GtrPoState state)
   g_object_notify (G_OBJECT (po), "state");
 }
 
+void gtr_po_set_dl_info(GtrPo * po, const char * team, const char * module_name,
+                        const char * branch, const char * domain, const char * module_state)
+{
+  GtrPoPrivate *priv = gtr_po_get_instance_private(po);
+  priv->dl_team = g_strdup (team);
+  priv->dl_module = g_strdup (module_name);
+  priv->dl_branch = g_strdup (branch);
+  priv->dl_domain = g_strdup (domain);
+  priv->dl_state = g_strdup (module_state);
+
+  gtr_header_set_field(priv->header, "X-DL-Team", team);
+  gtr_header_set_field(priv->header, "X-DL-Module", module_name);
+  gtr_header_set_field(priv->header, "X-DL-Branch", branch);
+  gtr_header_set_field(priv->header, "X-DL-Domain", domain);
+  gtr_header_set_field(priv->header, "X-DL-State", module_state);
+}
 /*
  * FIXME: We are not using this func.
  */
