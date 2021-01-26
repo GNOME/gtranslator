@@ -55,9 +55,9 @@ typedef struct
   gchar *selected_team;
   gchar *selected_module;
   gchar *selected_branch;
-  const gchar *selected_domain;
-  const gchar *file_path;
-  const gchar *module_state;
+  gchar *selected_domain;
+  gchar *file_path;
+  gchar *module_state;
 
   GtrWindow *main_window;
 } GtrDlTeamsPrivate;
@@ -408,7 +408,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
       return;
     }
 
-  priv->module_state = json_object_get_string_member (object, "state");
+  priv->module_state = g_strdup (json_object_get_string_member (object, "state"));
 
   if (!priv->module_state)
     {
@@ -605,7 +605,7 @@ gtr_dl_teams_save_combo_selected (GtkWidget  *widget,
     }
   else if (strcmp(name, "combo_domains") == 0)
     {
-      priv->selected_domain = gtk_combo_box_get_active_id (GTK_COMBO_BOX (widget));
+      priv->selected_domain = g_strdup (gtk_combo_box_get_active_id (GTK_COMBO_BOX (widget)));
     }
 
   /* Check if all four required values have been selected to proceed with loading PO file */
@@ -619,6 +619,14 @@ gtr_dl_teams_dispose (GObject *object)
 
   if (priv->selected_team)
     g_free (priv->selected_team);
+  if (priv->selected_module)
+    g_free (priv->selected_module);
+  if (priv->selected_branch)
+    g_free (priv->selected_branch);
+  if (priv->selected_domain)
+    g_free (priv->selected_domain);
+  if (priv->module_state)
+    g_free (priv->module_state);
 
   G_OBJECT_CLASS (gtr_dl_teams_parent_class)->dispose (object);
 }
@@ -662,6 +670,11 @@ gtr_dl_teams_init (GtrDlTeams *self)
 
   priv->main_window = NULL;
   priv->selected_team = NULL;
+  priv->selected_module = NULL;
+  priv->selected_branch = NULL;
+  priv->selected_domain = NULL;
+  priv->file_path = NULL;
+  priv->module_state = NULL;
 
   gtk_widget_set_sensitive (priv->load_button, FALSE);
 
