@@ -138,6 +138,11 @@ parse_profile (GtrProfileManager *manager,
           content = xmlNodeGetContent (cur);
           gtr_profile_set_name (profile, (const gchar *)content);
         }
+      else if (xmlStrcmp (cur->name, (const xmlChar *)"auth_token") == 0)
+        {
+          content = xmlNodeGetContent (cur);
+          gtr_profile_set_auth_token (profile, (const gchar *)content);
+        }
       else if (xmlStrcmp (cur->name, (const xmlChar *)"author_name") == 0)
         {
           content = xmlNodeGetContent (cur);
@@ -261,6 +266,8 @@ save_profile (GtrProfileManager *manager,
 
   xmlNewTextChild (profile_node, NULL, (const xmlChar *)"profile_name",
                    (const xmlChar *)gtr_profile_get_name (profile));
+  xmlNewTextChild (profile_node, NULL, (const xmlChar *)"auth_token",
+                   (const xmlChar *)gtr_profile_get_auth_token (profile));                
   xmlNewTextChild (profile_node, NULL, (const xmlChar *)"author_name",
                    (const xmlChar *)gtr_profile_get_author_name (profile));
   xmlNewTextChild (profile_node, NULL, (const xmlChar *)"author_email",
