@@ -67,6 +67,10 @@ const gchar          *gtr_profile_get_name            (GtrProfile  *profile);
 void                  gtr_profile_set_name            (GtrProfile  *profile,
                                                        const gchar *data);
 
+const gchar          *gtr_profile_get_auth_token      (GtrProfile  *profile);
+void                  gtr_profile_set_auth_token      (GtrProfile  *profile,
+                                                       const gchar *data);                                                      
+
 const gchar          *gtr_profile_get_author_name     (GtrProfile  *profile);
 void                  gtr_profile_set_author_name     (GtrProfile  *profile,
                                                        const gchar *data);
