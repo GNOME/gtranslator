@@ -37,6 +37,7 @@ typedef struct
   GtkWidget *sort_id;
   GtkWidget *order_menu_popover;
   GtkWidget *search;
+  GtkWidget *upload;
 
   GtkWidget *undo;
   GtkWidget *redo;
@@ -148,6 +149,7 @@ gtr_notebook_class_init (GtrNotebookClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, undo);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, redo);
   gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, save);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrNotebook, upload);
 }
 
 /***************************** Public funcs ***********************************/
@@ -269,6 +271,13 @@ gtr_notebook_enable_save (GtrNotebook *notebook,
 }
 
 void
+gtr_notebook_enable_upload (GtrNotebook *notebook, gboolean enable)
+{
+  GtrNotebookPrivate *priv = gtr_notebook_get_instance_private (notebook);
+  gtk_widget_set_sensitive (priv->upload, enable);
+}
+
+void
 gtr_notebook_update_undo_buttons (GtrNotebook *notebook,
                                   GtrView     *view)
 {
@@ -312,3 +321,4 @@ gtr_notebook_enable_find_button (GtrNotebook *notebook,
   if (priv->search)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->search), enable);
 }
+

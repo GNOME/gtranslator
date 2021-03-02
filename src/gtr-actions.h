@@ -24,6 +24,7 @@
 
 #include "gtr-window.h"
 #include "gtr-search-bar.h"
+#include <libsoup/soup.h>
 
 G_BEGIN_DECLS
 /*File*/
@@ -50,6 +51,8 @@ void gtr_open_file_dialog (GtkAction * action, GtrWindow * window);
 void gtr_save_current_file_dialog (GtkWidget * widget, GtrWindow * window);
 
 void gtr_save_file_as_dialog (GtkAction * action, GtrWindow * window);
+
+void gtr_upload_file_dialog (GtkAction * action, GtrWindow * window);
 
 gboolean gtr_open (GFile * location, GtrWindow * window, GError ** error);
 

@@ -107,6 +107,18 @@ gtr_po_get_type (void)
      void gtr_po_set_dl_info (GtrPo * po, gchar * team, gchar * module_name,
                               gchar * branch, gchar * domain, gchar * module_state);
 
+     const gchar *gtr_po_get_dl_team (GtrPo * po);
+
+     const gchar *gtr_po_get_dl_module (GtrPo * po);
+
+     const gchar *gtr_po_get_dl_branch (GtrPo * po);
+
+     const gchar *gtr_po_get_dl_domain (GtrPo * po);
+
+     const gchar *gtr_po_get_dl_module_state (GtrPo * po);
+
+     gboolean gtr_po_can_dl_upload (GtrPo * po);
+
      GFile *gtr_po_get_location (GtrPo * po);
 
      void gtr_po_set_location (GtrPo * po, GFile * location);

@@ -1393,3 +1393,45 @@ gtr_po_check_po_file (GtrPo * po)
 
   return message_error;
 }
+
+const gchar *
+gtr_po_get_dl_team (GtrPo *po)
+{
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return priv->dl_team;
+}
+
+const gchar *
+gtr_po_get_dl_module (GtrPo *po)
+{
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return priv->dl_module;
+}
+
+const gchar *
+gtr_po_get_dl_branch (GtrPo *po)
+{
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return priv->dl_branch;
+}
+
+const gchar *
+gtr_po_get_dl_domain (GtrPo *po)
+{
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return priv->dl_domain;
+}
+
+const gchar *
+gtr_po_get_dl_module_state (GtrPo *po)
+{
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return priv->dl_state;
+}
+
+gboolean
+gtr_po_can_dl_upload (GtrPo *po)
+{
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return g_strcmp0 (priv->dl_state, "Translating") == 0;
+}

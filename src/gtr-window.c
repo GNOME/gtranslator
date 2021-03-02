@@ -243,7 +243,10 @@ update_saved_state (GtrPo *po,
                     GParamSpec *param,
                     gpointer window)
 {
+  GtrNotebook *active_notebook;
+  active_notebook = gtr_window_get_notebook (window);
   set_window_title (GTR_WINDOW (window), TRUE);
+  gtr_notebook_enable_upload (active_notebook, gtr_po_can_dl_upload (po));
 }
 
 static void
@@ -536,7 +539,6 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
                           G_CALLBACK
                           (update_saved_state),
                           window);
-
   return tab;
 }
 

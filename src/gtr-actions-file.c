@@ -30,6 +30,7 @@
 #include <string.h>
 #include <gio/gio.h>
 
+#include "gtr-profile-manager.h"
 #include "gtr-close-confirmation-dialog.h"
 #include "gtr-actions.h"
 #include "gtr-application.h"
@@ -43,6 +44,8 @@
 
 #define GTR_TAB_SAVE_AS    "gtr-tab-save-as"
 #define GTR_IS_CLOSING_ALL "gtr-is-closing-all"
+
+#define API_URL "https://l10n.gnome.org/api/v1/"
 
 static void load_file_list (GtrWindow * window, const GSList * uris);
 static GList * get_modified_documents (GtrWindow * window);
@@ -58,6 +61,13 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
   GtrTab *tab;
   GList *current;
   GtrView *active_view;
+  GtrHeader *header;
+  GtrNotebook *active_notebook;
+  gchar *dl_team;
+  gchar *dl_module;
+  gchar *dl_branch;
+  gchar *dl_domain;
+  gchar *dl_module_state;
 
   /*
    * If the filename can't be opened, pass the error back to the caller
@@ -77,11 +87,35 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
     return FALSE;
   }
 
+  header = gtr_po_get_header (po);
+  dl_team = gtr_header_get_dl_team (header);
+  dl_module = gtr_header_get_dl_module (header);
+  dl_branch = gtr_header_get_dl_branch (header);
+  dl_domain = gtr_header_get_dl_domain (header);
+  dl_module_state = gtr_header_get_dl_state (header);
+
+  /*
+   * Set Damned Lies info when a po file is opened locally
+   */
+  gtr_po_set_dl_info(po,
+                     dl_team,
+                     dl_module,
+                     dl_branch,
+                     dl_domain,
+                     dl_module_state);
+
   /*
    * Create a page to add to our list of open files
    */
   tab = gtr_window_create_tab (window, po);
   gtr_window_set_active_tab (window, GTK_WIDGET (tab));
+
+  /*
+   * Activate the upload file icon if the po file is in the appropriate
+   * state as on the vertimus workflow
+   */
+  active_notebook = gtr_window_get_notebook (window);
+  gtr_notebook_enable_upload (active_notebook, gtr_po_can_dl_upload (po));
 
   /*
    * Show the current message.
@@ -165,7 +199,7 @@ gtr_want_to_save_current_dialog (GtrWindow * window)
   GtrTab *tab;
   GtrPo *po;
 
-  g_autoptr (GtkWidget) dialog = NULL;
+  GtkWidget *dialog;
   g_autoptr (GFile) location = NULL;
   g_autofree gchar *filename = NULL;
   g_autofree gchar *markup = NULL;
@@ -196,6 +230,7 @@ gtr_want_to_save_current_dialog (GtrWindow * window)
                           NULL);
 
   res = gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (dialog);
 
   if (res == GTK_RESPONSE_CANCEL)
     return FALSE;
@@ -214,7 +249,6 @@ gtr_open_file_dialog (GtkAction * action, GtrWindow * window)
 {
   GtkWidget *dialog = NULL;
   g_autoptr (GList) list = NULL;
-
   list = get_modified_documents (window);
   if (list != NULL)
     {
@@ -306,6 +340,142 @@ confirm_overwrite_callback (GtkFileChooser * dialog, gpointer data)
   g_free (uri);
 
   return res;
+}
+
+/*
+ * "Upload file" dialog
+ *
+ */
+void
+gtr_upload_file_dialog (GtkAction * action, GtrWindow * window)
+{
+  GtrTab *tab;
+  GtrPo *po;
+  GtkWidget *dialog, *success_dialog;
+  GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
+  GMappedFile *mapped;
+  GError *error = NULL;
+  GtrProfileManager *pmanager = NULL;
+  GtrNotebook *active_notebook;
+  GtrProfile *profile;
+  GtrHeader *header;
+  g_autoptr (SoupMessage) msg = NULL;
+  g_autoptr (SoupMultipart) mpart = NULL;
+  g_autoptr (SoupBuffer) buffer = NULL;
+  g_autoptr (SoupSession) session = NULL;
+  const gchar *content = NULL;
+  g_autofree gchar *mime_type = NULL;
+  g_autofree gchar *filename = NULL;
+  g_autofree gchar *upload_endpoint = NULL;
+  const char *auth_token = NULL;
+  g_autofree char *auth = NULL;
+  gsize size;
+  const gchar *selected_team;
+  const gchar *selected_module;
+  const gchar *selected_branch;
+  const gchar *selected_domain;
+
+  /* Get file content */
+  tab = gtr_window_get_active_tab (window);
+  po = gtr_tab_get_po (tab);
+  filename = g_file_get_path (gtr_po_get_location (po));
+  mapped = g_mapped_file_new (filename, FALSE, &error);
+  if (error != NULL) {
+    g_warning ("Error opening file %s: %s", filename, (error)->message);
+  }
+  content = g_mapped_file_get_contents (mapped);
+  size = g_mapped_file_get_length (mapped);
+  active_notebook = gtr_window_get_notebook (window);
+  header = gtr_po_get_header (po);
+
+  /* Check mimetype */
+  mime_type = g_strdup (g_content_type_get_mime_type(content));
+
+  /* Get the authentication token from the user profile */
+  pmanager = gtr_profile_manager_get_default ();
+  profile = gtr_profile_manager_get_active_profile (pmanager);
+  auth_token = gtr_profile_get_auth_token (profile);
+  auth = g_strconcat ("Bearer ", auth_token, NULL);
+
+  selected_module = gtr_po_get_dl_module (po);
+  if (selected_module == NULL)
+    selected_module = gtr_header_get_dl_module (header);
+
+  selected_branch = gtr_po_get_dl_branch (po);
+  if (selected_branch == NULL)
+    selected_branch = gtr_header_get_dl_branch (header);
+
+  selected_domain = gtr_po_get_dl_domain (po);
+  if (selected_domain == NULL)
+    selected_domain = gtr_header_get_dl_domain (header);
+
+  selected_team = gtr_po_get_dl_team (po);
+  if (selected_team == NULL)
+    selected_team = gtr_header_get_dl_team (header);
+
+  /* API endpoint: modules/[module]/branches/[branch]/domains/[domain]/languages/[team]/upload */
+  upload_endpoint = g_strconcat((const gchar *)API_URL,
+                                "modules/", selected_module,
+                                "/branches/", selected_branch,
+                                "/domains/", selected_domain,
+                                "/languages/", selected_team,
+                                "/upload", NULL);
+
+  /* Init multipart container */
+  mpart = soup_multipart_new (SOUP_FORM_MIME_TYPE_MULTIPART);
+  buffer = soup_buffer_new (SOUP_MEMORY_COPY, content, size);
+  soup_multipart_append_form_string (mpart, "file", "txt");
+  soup_multipart_append_form_file (mpart, "file", filename,
+                                   mime_type, buffer);
+
+  /* Get the associated message */
+  msg = soup_form_request_new_from_multipart (upload_endpoint, mpart);
+
+  /* Append the authentication header*/
+  soup_message_headers_append (msg->request_headers, "Authentication", auth);
+
+  session = soup_session_new ();
+  soup_session_send_message (session, msg);
+
+  if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
+    {
+      if (msg->status_code == 403)
+        {
+          dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                           flags,
+                                           GTK_MESSAGE_INFO,
+                                           GTK_BUTTONS_OK,
+                                           _("This file has already been uploaded"));
+          gtk_dialog_run (GTK_DIALOG (dialog));
+          gtk_widget_destroy (dialog);
+          gtr_notebook_enable_upload (active_notebook, FALSE);
+          return;
+        }
+
+      dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                       flags,
+                                       GTK_MESSAGE_WARNING,
+                                       GTK_BUTTONS_CLOSE,
+                                       _("An error occurred while uploading the file: %s"),
+                                       soup_status_get_phrase (msg->status_code));
+      gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+      return;
+    }
+
+  success_dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                           flags,
+                                           GTK_MESSAGE_INFO,
+                                           GTK_BUTTONS_OK,
+                                           _("The file '%s.%s.%s.%s' has been uploaded!"),
+                                           selected_module,
+                                           selected_branch,
+                                           selected_team,
+                                           selected_domain);
+
+  gtk_dialog_run (GTK_DIALOG (success_dialog));
+  gtk_widget_destroy (success_dialog);
+  gtr_notebook_enable_upload (active_notebook, FALSE);
 }
 
 /*

@@ -77,6 +77,8 @@ GtkWidget *gtr_notebook_get_header (GtrNotebook *notebook);
 
 void gtr_notebook_enable_save (GtrNotebook *notebook, gboolean enable);
 
+void gtr_notebook_enable_upload (GtrNotebook *notebook, gboolean enable);
+
 void gtr_notebook_update_undo_buttons (GtrNotebook *notebook, GtrView *view);
 
 void gtr_notebook_reset_sort (GtrNotebook *notebook);

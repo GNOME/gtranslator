@@ -74,7 +74,7 @@ static void team_add_cb (GtkButton *btn, GtrDlTeams *self);
 static void gtr_dl_teams_save_combo_selected (GtkWidget *widget, GtrDlTeams *self);
 static void gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self);
 static void gtr_dl_teams_get_file_info (GtrDlTeams *self);
-static void gtr_dl_teams_reserve_for_translation(GtkButton *button, GtrDlTeams *self);
+static void gtr_dl_teams_reserve_for_translation (GtkButton *button, GtrDlTeams *self);
 
 static void
 gtr_dl_teams_list_add (JsonArray *array,
@@ -586,7 +586,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
 
 /* Reserve for translation */
 static void
-gtr_dl_teams_reserve_for_translation(GtkButton *button, GtrDlTeams *self)
+gtr_dl_teams_reserve_for_translation (GtkButton *button, GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   GtrProfileManager *pmanager = NULL;
