@@ -74,7 +74,7 @@ static void team_add_cb (GtkButton *btn, GtrDlTeams *self);
 static void gtr_dl_teams_save_combo_selected (GtkWidget *widget, GtrDlTeams *self);
 static void gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self);
 static void gtr_dl_teams_get_file_info (GtrDlTeams *self);
-static void gtr_dl_teams_reserve_for_translation (GtkButton *button, GtrDlTeams *self);
+static gboolean gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self);
 
 static void
 gtr_dl_teams_list_add (JsonArray *array,
@@ -471,6 +471,17 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   g_autofree char *filename = NULL;
   g_autofree char *file_path = NULL;
   g_autoptr(GFile) dest_file = NULL;
+  gboolean reserve_first = FALSE;
+
+  // reserve for translation first
+  reserve_first = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
+                                                (priv->reserve_button));
+  if (reserve_first)
+    {
+      ret = gtr_dl_teams_reserve_for_translation (priv->reserve_button, self);
+      if (!ret)
+        return;
+    }
 
   /* Load the file, save as temp; path to file is https://l10n.gnome.org/[priv->file_path] */
   session = soup_session_new ();
@@ -585,8 +596,8 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
 }
 
 /* Reserve for translation */
-static void
-gtr_dl_teams_reserve_for_translation (GtkButton *button, GtrDlTeams *self)
+static gboolean
+gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   GtrProfileManager *pmanager = NULL;
@@ -626,7 +637,7 @@ gtr_dl_teams_reserve_for_translation (GtkButton *button, GtrDlTeams *self)
                                     soup_status_get_phrase(msg->status_code));
     gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(dialog);
-    return;
+    return FALSE;
   }
 
   /* Display a message if the reserve for translation operation was successful */
@@ -643,6 +654,8 @@ gtr_dl_teams_reserve_for_translation (GtkButton *button, GtrDlTeams *self)
   gtk_dialog_run (GTK_DIALOG (success_dialog));
   gtk_widget_destroy (success_dialog);
   gtk_widget_set_sensitive (priv->reserve_button, FALSE);
+
+  return TRUE;
 }
 
 static void
@@ -811,11 +824,6 @@ gtr_dl_teams_init (GtrDlTeams *self)
   g_signal_connect (priv->load_button,
                     "clicked",
                     G_CALLBACK (gtr_dl_teams_load_po_file),
-                    self);
-
-  g_signal_connect (priv->reserve_button,
-                    "clicked",
-                    G_CALLBACK (gtr_dl_teams_reserve_for_translation),
                     self);
 }
 
