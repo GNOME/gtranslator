@@ -481,6 +481,13 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
       ret = gtr_dl_teams_reserve_for_translation (priv->reserve_button, self);
       if (!ret)
         return;
+
+      if (priv->module_state)
+        g_free (priv->module_state);
+
+      // The reserve was successful, so we should change the module_state to
+      // "Translating"
+      priv->module_state = g_strdup ("Translating");
     }
 
   /* Load the file, save as temp; path to file is https://l10n.gnome.org/[priv->file_path] */
@@ -488,7 +495,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   msg = soup_message_new ("GET", g_strconcat ("https://l10n.gnome.org", g_strcompress(priv->file_path), NULL));
   soup_session_send_message (session, msg);
 
-	if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
+  if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
     {
       dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
                                        GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
