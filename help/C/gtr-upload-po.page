@@ -1,0 +1,59 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:its="http://www.w3.org/2005/11/its"
+      type="topic" style="task"
+      id="gtr-upload-po">
+
+  <info>
+    <link type="guide" xref="index#gtr-po" group="eighth"/>
+    <link type="seealso" xref="gtr-edit-po"/>
+    <link type="seealso" xref="gtr-open-po"/>
+    <link type="seealso" xref="gtr-add-comment-po"/>
+    <link type="seealso" xref="gtr-goto-string-po"/>
+    <link type="seealso" xref="gtr-edit-header"/>
+    <link type="seealso" xref="gtr-reserve-po"/>
+
+ <revision pkgversion="2.91.6" date="2013-06-18" status="review"/>
+ <revision pkgversion="3.34.0" date="2019-09-27" status="review"/>
+    <credit type="author copyright">
+      <name>Amanda Shafack</name>
+      <email its:translate="no">shafack.likhene@gmail.com</email>
+      <years>2021</years>
+    </credit>
+    <credit type="copyright editor">
+      <name></name>
+      <email its:translate="no"></email>
+      <years></years>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <title>Upload PO file</title>
+
+  <p>You can upload a po file (translation file) to Damned Lies after translating. Note that the po file that is uploaded is that which is currently open at a given time; as it is not yet possible to manually select a file to upload.</p>
+
+  <p>In order to perform the upload operation, you need to be authenticated.</p>
+
+  <list type="numbered">
+    <title>To authenticate yourself:</title>
+      <item><p>Login to your account on <link href="https://l10n.gnome.org/">Damned Lies</link></p></item>
+      <item><p>From your profile, click on the <gui style="button">Create auth token </gui>button.</p></item>
+      <item><p>Copy the auth token that has been generated; you can find it just below your profile details.</p></item>
+      <item><p>Launch the Translation Editor and go to Preferences >> Profiles.</p></item>
+      <item><p>Select your profile and click on the <gui style="button">Edit Profile</gui> button.</p></item>
+      <item><p>Paste the auth token you copied in the "DL auth token" field and click on the <gui style="button">OK</gui> button.</p></item>
+      <item><p>You have successfully authenticated yourself. You can now upload a po file to Damned Lies.</p></item>
+  </list>
+
+  <list type="numbered">
+    <title>To upload a po file:</title>
+      <item><p>Click on the <gui style="button">Upload file</gui> icon in the header bar or use the <keyseq><key>Ctrl</key><key>B</key></keyseq> keyboard shortcut.</p></item>
+      <item><p>A message dialog will display the status of the operation.</p></item>
+      <item><p>If the message dialog displays a success message, you have successfully uploaded the po file to Damned Lies.</p></item>
+      <item><p>If the <gui style="button">Upload file</gui> icon is deactivated, it means the po file cannot be uploaded. This is because it is not in the appropriate state. See the <link href="https://l10n.gnome.org/help/vertimus_workflow/">vertimus workflow </link>for more details.</p></item>
+  </list>
+
+<p>Note that a po file must be reserved (in the state; Translating) before it can be uploaded to Damned Lies.</p>
+
+</page>

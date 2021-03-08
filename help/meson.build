@@ -16,6 +16,8 @@ sources = [
   'gtr-shortcut-keys.page',
   'gtr-translate.page',
   'gtr-use-delete-entry.page',
+  'gtr-reserve-po.page',
+  'gtr-upload-po.page',
   'gtr-wizzard.page',
   'index.page',
   'legal.xml',

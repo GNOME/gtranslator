@@ -1,0 +1,60 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:its="http://www.w3.org/2005/11/its"
+      type="topic" style="task"
+      id="gtr-reserve-po">
+
+  <info>
+    <link type="guide" xref="index#gtr-po" group="seventh"/>
+    <link type="seealso" xref="gtr-edit-po"/>
+    <link type="seealso" xref="gtr-open-po"/>
+    <link type="seealso" xref="gtr-add-comment-po"/>
+    <link type="seealso" xref="gtr-goto-string-po"/>
+    <link type="seealso" xref="gtr-edit-header"/>
+    <link type="seealso" xref="gtr-upload-po"/>
+
+ <revision pkgversion="2.91.6" date="2013-06-18" status="review"/>
+ <revision pkgversion="3.34.0" date="2019-09-27" status="review"/>
+    <credit type="author copyright">
+      <name>Amanda Shafack</name>
+      <email its:translate="no">shafack.likhene@gmail.com</email>
+      <years>2021</years>
+    </credit>
+    <credit type="copyright editor">
+      <name></name>
+      <email its:translate="no"></email>
+      <years></years>
+    </credit>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <title>Reserve PO file</title>
+
+  <p>You can reserve a po file for translation, during the process of downloading it from Damned Lies. To be able to reserve a po file, you need to be authenticated.</p>
+
+   <list type="numbered">
+    <title>To authenticate yourself:</title>
+      <item><p>Login to your account on <link href="https://l10n.gnome.org/">Damned Lies</link></p></item>
+      <item><p>From your profile, click on the <gui style="button">Create auth token </gui>button.</p></item>
+      <item><p>Copy the auth token that has been generated; you can find it just below your profile details.</p></item>
+      <item><p>Launch the Translation Editor and go to Preferences >> Profiles.</p></item>
+      <item><p>Select your profile and click on the <gui style="button">Edit Profile</gui> button.</p></item>
+      <item><p>Paste the auth token you copied in the "DL auth token" field and click on the <gui style="button">OK</gui> button.</p></item>
+      <item><p>You have successfully authenticated yourself. You can now perform the reserve operation.</p></item>
+  </list>
+
+  <list type="numbered">
+    <title>To reserve a po file:</title>
+      <item><p>Click on the <gui style="button">Load from DL</gui> button (if you are on the main window) or <gui style="button">Open from Damned Lies</gui> icon (if a po file is open) in the header bar.
+      You can also use the <keyseq><key>Ctrl</key><key>D</key></keyseq> keyboard shortcut.</p></item>
+      <item><p>Select your desired po file; specifying the particular team, module, branch and domain.</p></item>
+      <item><p>The state of the po file is displayed.</p></item>
+      <item><p>Select the <gui style="button">Reserve for translation</gui> checkbox to reserve your chosen po file.</p></item>
+      <item><p>A message dialog will display the status of the operation.</p></item>
+      <item><p>If the message dialog displays a success message, you have successfully reserved the po file for translation.</p></item>
+      <item><p>However, if the <gui style="button">Reserve for translation</gui> checkbox is deactivated, it means the po file cannot be reserved. This is because it is not in the appropriate state.
+      See the <link href="https://l10n.gnome.org/help/vertimus_workflow/">vertimus workflow </link>for more details.</p></item>
+  </list>
+
+</page>
