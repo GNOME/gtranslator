@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-01-05 07:50+0000\n"
-"PO-Revision-Date: 2021-01-08 22:27+0100\n"
+"POT-Creation-Date: 2021-03-08 06:55+0000\n"
+"PO-Revision-Date: 2021-03-08 21:00+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -61,7 +61,7 @@ msgstr ""
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:647
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:659
 #: src/gtr-notebook.ui:308 src/gtr-window.c:229 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Översättningsredigerare"
@@ -202,7 +202,7 @@ msgstr ""
 msgid "Paths:"
 msgstr "Sökvägar:"
 
-#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
+#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
 #: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:651
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
@@ -259,7 +259,7 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "Webbplats för Översättningsredigerare"
 
-#: src/gtr-actions-file.c:184
+#: src/gtr-actions-file.c:218
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -268,28 +268,42 @@ msgstr ""
 "Vill du spara ändringar till denna fil: <span weight=\"bold\" size=\"large\">"
 "%s</span>?"
 
-#: src/gtr-actions-file.c:190
+#: src/gtr-actions-file.c:224
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr "Om du inte sparar så kommer dina osparade ändringar att gå förlorade."
 
-#: src/gtr-actions-file.c:193
+#: src/gtr-actions-file.c:227
 msgid "Save and open"
 msgstr "Spara och öppna"
 
-#: src/gtr-actions-file.c:194
+#: src/gtr-actions-file.c:228
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/gtr-actions-file.c:195
+#: src/gtr-actions-file.c:229
 msgid "Continue without saving"
 msgstr "Fortsätt utan att spara"
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:261
 msgid "Open file for translation"
 msgstr "Öppna fil för översättning"
 
+#: src/gtr-actions-file.c:448
+msgid "This file has already been uploaded"
+msgstr "Denna fil har redan skickats"
+
+#: src/gtr-actions-file.c:459
+#, c-format
+msgid "An error occurred while uploading the file: %s"
+msgstr "Ett fel uppstod vid sändning av filen: %s"
+
+#: src/gtr-actions-file.c:470
+#, c-format
+msgid "The file '%s.%s.%s.%s' has been uploaded!"
+msgstr "Filen ”%s.%s.%s.%s” har skickats!"
+
 # src/menus.c:281
-#: src/gtr-actions-file.c:330
+#: src/gtr-actions-file.c:500
 msgid "Save file as…"
 msgstr "Spara fil som…"
 
@@ -360,7 +374,7 @@ msgstr "Stäng _utan att spara"
 
 #: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:89
 #: src/gtr-file-dialogs.c:47 src/gtr-jump-dialog.c:90
-#: src/gtr-preferences-dialog.c:446 src/gtr-profile-dialog.c:71
+#: src/gtr-preferences-dialog.c:446 src/gtr-profile-dialog.c:72
 #: src/translation-memory/gtr-translation-memory-dialog.c:81
 msgid "_Cancel"
 msgstr "A_vbryt"
@@ -445,25 +459,35 @@ msgstr "Sammanhang:"
 msgid "Format:"
 msgstr "Format:"
 
-#: src/gtr-dl-teams.c:415
+#: src/gtr-dl-teams.c:417
 msgid "No module state found."
 msgstr "Inget modultillstånd hittades."
 
-#: src/gtr-dl-teams.c:432
+#: src/gtr-dl-teams.c:434
 #, c-format
 msgid "The current state is: %s"
 msgstr "Det aktuella tillståndet är: %s"
 
-#: src/gtr-dl-teams.c:554
+#: src/gtr-dl-teams.c:586
 #, c-format
 msgid "The file '%s' has been saved in %s"
 msgstr "Filen ”%s” har sparats i %s"
 
-#: src/gtr-dl-teams.c:660
+#: src/gtr-dl-teams.c:643
+#, c-format
+msgid "An error occurred while reserving this module: %s"
+msgstr "Ett fel uppstod då modulen skulle reserveras: %s"
+
+#: src/gtr-dl-teams.c:655
+#, c-format
+msgid "The file '%s.%s.%s.%s' has been successfully reserved"
+msgstr "Lyckades reservera filen ”%s.%s.%s.%s”"
+
+#: src/gtr-dl-teams.c:781
 msgid "Translation Team"
 msgstr "Översättningsgrupp"
 
-#: src/gtr-dl-teams.c:667
+#: src/gtr-dl-teams.c:788
 msgid "Module"
 msgstr "Modul"
 
@@ -472,41 +496,45 @@ msgid "Select team, module, branch and domain to get the translation file."
 msgstr ""
 "Välj översättningsgrupp, modul, gren och domän för att få översättningsfilen."
 
-# data/ui/nautilus-gtranslator-view-ui.xml.h:4
 #: src/gtr-dl-teams.ui:106
+msgid "Reserve for translation"
+msgstr "Reservera för översättning"
+
+# data/ui/nautilus-gtranslator-view-ui.xml.h:4
+#: src/gtr-dl-teams.ui:117
 msgid "Load file"
 msgstr "Läs in fil"
 
-#: src/gtr-dl-teams.ui:125
+#: src/gtr-dl-teams.ui:136
 msgid "Load from Damned Lies"
 msgstr "Läs in från Förbannade lögner (Damned Lies)"
 
-#: src/gtr-dl-teams.ui:132 src/gtr-projects.ui:58
+#: src/gtr-dl-teams.ui:143 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Öppna…"
 
-#: src/gtr-dl-teams.ui:155 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
+#: src/gtr-dl-teams.ui:166 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
 msgid "Main Menu"
 msgstr "Huvudmeny"
 
-#: src/gtr-dl-teams.ui:183 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+#: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
 msgid "New window"
 msgstr "Nytt fönster"
 
 # src/dialogs.c:574
-#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+#: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
 msgid "Preferences"
 msgstr "Inställningar"
 
-#: src/gtr-dl-teams.ui:224 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:235 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
 msgid "Keyboard Shortcuts"
 msgstr "Tangentbordsgenvägar"
 
-#: src/gtr-dl-teams.ui:238 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
+#: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
 msgid "About"
 msgstr "Om"
 
-#: src/gtr-dl-teams.ui:252 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
+#: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
 msgid "Quit"
 msgstr "Avsluta"
 
@@ -528,7 +556,7 @@ msgstr "Gettext-översättningsmall"
 msgid "All files"
 msgstr "Alla filer"
 
-#: src/gtr-header-dialog.c:280
+#: src/gtr-header-dialog.c:325
 msgid "Edit Header"
 msgstr "Redigera po-filshuvud"
 
@@ -606,8 +634,32 @@ msgstr "Projekt"
 msgid "Comment"
 msgstr "Kommentar"
 
+#: src/gtr-header-dialog.ui:454
+msgid "DL Team:"
+msgstr "DL-grupp:"
+
+#: src/gtr-header-dialog.ui:467
+msgid "DL Module:"
+msgstr "DL-modul:"
+
+#: src/gtr-header-dialog.ui:481
+msgid "DL Branch:"
+msgstr "DL-gren:"
+
+#: src/gtr-header-dialog.ui:495
+msgid "DL Domain:"
+msgstr "DL-domän:"
+
+#: src/gtr-header-dialog.ui:509
+msgid "DL State:"
+msgstr "DL-tillstånd:"
+
+#: src/gtr-header-dialog.ui:587
+msgid "Damned Lies Info"
+msgstr "Damned Lies-information"
+
 #: src/gtr-io-error-info-bar.c:146 src/gtr-jump-dialog.c:88
-#: src/gtr-profile-dialog.c:165 src/gtr-profile-dialog.c:170
+#: src/gtr-profile-dialog.c:171 src/gtr-profile-dialog.c:176
 #: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "_OK"
 msgstr "_OK"
@@ -760,27 +812,31 @@ msgstr "Spara aktuell fil (<Ctrl>s)"
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Spara som (<Ctrl><Skift>s)"
 
-#: src/gtr-po.c:440
+#: src/gtr-notebook.ui:665
+msgid "Upload file (<Ctrl>b)"
+msgstr "Skicka fil (<Ctrl>b)"
+
+#: src/gtr-po.c:487
 #, c-format
 msgid "The file is empty"
 msgstr "Filen är tom"
 
-#: src/gtr-po.c:449
+#: src/gtr-po.c:496
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Misslyckades med att öppna filen ”%s”: %s"
 
-#: src/gtr-po.c:530
+#: src/gtr-po.c:577
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Kunde inte konvertera teckentabell ”%s” till UTF-8"
 
-#: src/gtr-po.c:547 src/gtr-po.c:567
+#: src/gtr-po.c:594 src/gtr-po.c:614
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Kunde inte lagra temporär fil för teckentabellskonvertering"
 
-#: src/gtr-po.c:604
+#: src/gtr-po.c:651
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -791,17 +847,17 @@ msgstr ""
 "kommandoradsverktygen msgconv eller iconv, innan filen öppnas med GNOME "
 "Översättningsredigerare"
 
-#: src/gtr-po.c:672
+#: src/gtr-po.c:719
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext returnerade ett noll meddelande domänlista."
 
-#: src/gtr-po.c:717
+#: src/gtr-po.c:764
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Inga meddelanden hämtades från tolkare."
 
-#: src/gtr-po.c:768
+#: src/gtr-po.c:815
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -812,17 +868,17 @@ msgstr ""
 "Pot-filer genereras av kompileringsprocessen.\n"
 "Din fil bör troligtvis kallas ”%s.po”."
 
-#: src/gtr-po.c:781
+#: src/gtr-po.c:828
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Filen %s är skrivskyddad och kan inte skrivas över"
 
-#: src/gtr-po.c:800
+#: src/gtr-po.c:847
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Det finns ett fel i PO-filen: %s"
 
-#: src/gtr-po.c:812
+#: src/gtr-po.c:859
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Det inträffade ett fel vid skrivning av PO-filen: %s"
@@ -934,7 +990,7 @@ msgid "Profiles"
 msgstr "Profiler"
 
 # src/dialogs.c:390
-#: src/gtr-profile-dialog.c:73
+#: src/gtr-profile-dialog.c:74
 msgid "Translation Editor Profile"
 msgstr "Översättningsredigerarprofil"
 
@@ -964,8 +1020,20 @@ msgstr "_E-post"
 msgid "_Team email"
 msgstr "_Gruppens e-post"
 
+#: src/gtr-profile-dialog.ui:174
+msgid "_DL auth token"
+msgstr "_DL-autentiseringstoken"
+
+#: src/gtr-profile-dialog.ui:175
+msgid ""
+"GNOME Damned Lies integration token, go to your profile in https://l10n."
+"gnome.org/ to get it"
+msgstr ""
+"Integrationstoken till GNOME Damned Lies, gå till din profil på https://l10n."
+"gnome.org/ för att få den"
+
 # src/prefs.c:109
-#: src/gtr-profile-dialog.ui:209
+#: src/gtr-profile-dialog.ui:237
 msgid "Language Settings"
 msgstr "Språkinställningar"
 
@@ -1378,574 +1446,3 @@ msgid ""
 msgstr ""
 "Maximal skillnad i längd mellan meddelanden visade som träffar av "
 "översättningsminnet."
-
-# data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#~ msgid "File saved."
-#~ msgstr "Fil sparad."
-
-# data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#~ msgid "Files saved."
-#~ msgstr "Filer sparade."
-
-#~ msgid "INS"
-#~ msgstr "INF"
-
-#~ msgid "OVR"
-#~ msgstr "ÖVR"
-
-# src/gui.c:407 src/gui.c:409
-#~ msgid "Untranslated"
-#~ msgstr "Oöversatt"
-
-# src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#~ msgid "Translated"
-#~ msgstr "Översatt"
-
-# src/gui.c:385 src/gui.c:389 src/menus.c:348
-#~ msgid "Fuzzy"
-#~ msgstr "Luddig"
-
-# src/sidebar.c:107
-#~ msgid "Current: %d"
-#~ msgstr "Aktuell: %d"
-
-#~ msgid "Total: %d"
-#~ msgstr "Totalt: %d"
-
-# src/gui.c:407 src/gui.c:409
-#~ msgid "%d translated"
-#~ msgid_plural "%d translated"
-#~ msgstr[0] "%d översatt"
-#~ msgstr[1] "%d översatta"
-
-# src/gui.c:385 src/gui.c:389 src/menus.c:348
-#~ msgid "%d fuzzy"
-#~ msgid_plural "%d fuzzy"
-#~ msgstr[0] "%d luddig"
-#~ msgstr[1] "%d luddiga"
-
-# src/gui.c:407 src/gui.c:409
-#~ msgid "%d untranslated"
-#~ msgid_plural "%d untranslated"
-#~ msgstr[0] "%d oöversatt"
-#~ msgstr[1] "%d oöversatta"
-
-# data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#~ msgid "No profile"
-#~ msgstr "Ingen profil"
-
-#~ msgid "Profile for the active document"
-#~ msgstr "Profil för det aktiva dokumentet"
-
-#~ msgid "Do you want to save the changes?"
-#~ msgstr "Vill du spara ändringarna?"
-
-#~ msgid "Warning"
-#~ msgstr "Varning"
-
-#~ msgid "Found and replaced one occurrence"
-#~ msgid_plural "Found and replaced %d occurrences"
-#~ msgstr[0] "Hittade och ersatte en förekomst"
-#~ msgstr[1] "Hittade och ersatte %d förekomster"
-
-#~ msgid "Phrase not found"
-#~ msgstr "Frasen hittades inte"
-
-# src/dialogs.c:576
-#~ msgid "Replace _All"
-#~ msgstr "Ersätt _alla"
-
-# src/dialogs.c:575 src/menus.c:362
-#~ msgid "_Replace"
-#~ msgstr "_Ersätt"
-
-#~ msgid "_Search for: "
-#~ msgstr "_Sök efter: "
-
-# src/dialogs.c:623
-#~ msgid "Replace _with: "
-#~ msgstr "Ersätt _med: "
-
-#~ msgid "_Match case"
-#~ msgstr "_Matcha skiftläge"
-
-#~ msgid "Search _backwards"
-#~ msgstr "Sök _bakåt"
-
-# src/sidebar.c:107
-#~ msgid "Edit notes"
-#~ msgstr "Redigera anteckningar"
-
-#~ msgid ""
-#~ "Unable to display help. Please make sure the Translation Editor "
-#~ "documentation package is installed."
-#~ msgstr ""
-#~ "Kunde inte visa hjälp. Försäkra dig om att Översättningsredigerares "
-#~ "dokumentationspaket är installerat."
-
-#~ msgid "@icon@"
-#~ msgstr "@icon@"
-
-#~ msgid "Found and replaced %d occurrence"
-#~ msgid_plural "Found and replaced %d occurrences"
-#~ msgstr[0] "Hittade och ersatte %d förekomst"
-#~ msgstr[1] "Hittade och ersatte %d förekomster"
-
-#~ msgid "Message not found"
-#~ msgstr "Meddelandet hittades inte"
-
-#~ msgid "Open file for alternate language"
-#~ msgstr "Öppna fil för alternativt språk"
-
-# data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#~ msgid "File closed"
-#~ msgstr "Filen är stängd"
-
-#~ msgid "Co_py"
-#~ msgstr "Ko_piera"
-
-#~ msgid "There isn’t any file loaded"
-#~ msgstr "Det finns ingen fil inläst"
-
-# src/header_stuff.c:451
-#~ msgid "_Alternate Language"
-#~ msgstr "_Alternativt språk"
-
-# src/header_stuff.c:451
-#~ msgid "Show the Alternate Language panel"
-#~ msgstr "Visa panel för alternativt språk"
-
-# src/header_stuff.c:451
-#~ msgid "Alternate Language"
-#~ msgstr "Alternativt språk"
-
-#~ msgid "Character Map"
-#~ msgstr "Teckentabell"
-
-#~ msgid "accessories-character-map"
-#~ msgstr "accessories-character-map"
-
-#~ msgid "Source View Settings"
-#~ msgstr "Inställningar för källkodsvy"
-
-#~ msgid "Use external editor"
-#~ msgstr "Använd extern redigerare"
-
-# src/prefs.c:108
-#~ msgid "Program command:"
-#~ msgstr "Programkommando:"
-
-# src/prefs.c:108
-#~ msgid "Line command:"
-#~ msgstr "Radkommando:"
-
-#~ msgid "Please install “%s” to be able to show the file"
-#~ msgstr "Installera ”%s” för att kunna visa filen"
-
-#~ msgid "Source Code View"
-#~ msgstr "Källkodsvy"
-
-# TODO: Whether *to* use
-#~ msgid "Whether use the system editor to show the source code"
-#~ msgstr ""
-#~ "Huruvida systemets textredigerare ska användas för att visa källkoden"
-
-#~ msgid "The Editor to Launch"
-#~ msgstr "Förvald redigerare"
-
-#~ msgid "The command to launch the editor you want to use"
-#~ msgstr "Kommando för att starta önskad redigerare"
-
-#~ msgid "Arguments for the Command"
-#~ msgstr "Argument för kommandot"
-
-#~ msgid "Arguments to pass to the program command line to select the line"
-#~ msgstr ""
-#~ "Argument att överföra till programmets kommandorad, för att välja raden"
-
-#~ msgid "Dictionary"
-#~ msgstr "Ordbok"
-
-#~ msgid "No dictionary source available with name “%s”"
-#~ msgstr "Ingen ordbokskälla tillgänglig med namnet ”%s”"
-
-#~ msgid "Unable to find dictionary source"
-#~ msgstr "Kunde inte hitta ordbokskällan"
-
-#~ msgid "No context available for source “%s”"
-#~ msgstr "Inget sammanhang tillgängligt för källan ”%s”"
-
-#~ msgid "Unable to create a context"
-#~ msgstr "Kunde inte skapa kontext"
-
-#~ msgid "Dictionary source “%s” selected"
-#~ msgstr "Ordbokskälla ”%s” vald"
-
-#~ msgid "Strategy “%s” selected"
-#~ msgstr "Strategi ”%s” vald"
-
-#~ msgid "Database “%s” selected"
-#~ msgstr "Databas ”%s” vald"
-
-#~ msgid "Word “%s” selected"
-#~ msgstr "Ordet ”%s” valt"
-
-#~ msgid "Double-click on the word to look up"
-#~ msgstr "Dubbelklicka på ordet att slå upp"
-
-#~ msgid "Double-click on the matching strategy to use"
-#~ msgstr "Dubbelklicka på matchande strategin att använda"
-
-#~ msgid "Double-click on the source to use"
-#~ msgstr "Dubbelklicka på källan att använda"
-
-#~ msgid "Double-click on the database to use"
-#~ msgstr "Dubbelklicka på databasen att använda"
-
-#~ msgid "Look _up:"
-#~ msgstr "Slå _upp:"
-
-#~ msgid "Similar words"
-#~ msgstr "Liknande ord"
-
-#~ msgid "Available dictionaries"
-#~ msgstr "Tillgängliga ordböcker"
-
-#~ msgid "Available strategies"
-#~ msgstr "Tillgängliga strategier"
-
-#~ msgid "Dictionary sources"
-#~ msgstr "Ordbokskällor"
-
-#~ msgid "accessories-dictionary"
-#~ msgstr "accessories-dictionary"
-
-#~ msgid "Database"
-#~ msgstr "Databas"
-
-#~ msgid "Word database"
-#~ msgstr "Orddatabas"
-
-#~ msgid "Source Name"
-#~ msgstr "Källnamn"
-
-#~ msgid "Strategy"
-#~ msgstr "Strategi"
-
-#~ msgid "Panel Position"
-#~ msgstr "Panelposition"
-
-#~ msgid "_Fullscreen"
-#~ msgstr "_Helskärm"
-
-#~ msgid "Place window on fullscreen state"
-#~ msgstr "Placera fönster i helskärmstillstånd"
-
-#~ msgid "Fullscreen"
-#~ msgstr "Helskärm"
-
-# src/menus.c:210
-#~ msgid "_Next Param"
-#~ msgstr "_Nästa param"
-
-# src/menus.c:216
-#~ msgid "Insert the next param of the message"
-#~ msgstr "Infoga nästa param i meddelandet"
-
-#~ msgid "_Insert Params"
-#~ msgstr "_Infoga parametrar"
-
-# src/menus.c:210
-#~ msgid "_Next Tag"
-#~ msgstr "_Nästa tagg"
-
-# src/menus.c:216
-#~ msgid "Insert the next tag of the message"
-#~ msgstr "Infoga nästa tagg i meddelandet"
-
-#~ msgid "_Insert Tags"
-#~ msgstr "_Infoga taggar"
-
-#~ msgid "Insert Params or Tags"
-#~ msgstr "Infoga parametrar eller taggar"
-
-#~ msgid "Strings added to database"
-#~ msgstr "Strängar tillagda i databasen"
-
-#~ msgid "Please specify a valid path to build the translation memory"
-#~ msgstr "Ange sökväg till en plats att bygga upp översättningsminnet"
-
-#~ msgid "Gtranslator Translation Memory Manager"
-#~ msgstr "Hanterare för översättningsminne"
-
-#~ msgid "Insert Option nº %d"
-#~ msgstr "Infoga flagga nr. %d"
-
-#~ msgid "_Build Translation Memory"
-#~ msgstr "_Bygg översättningsminne"
-
-#~ msgid "_Translation Memory"
-#~ msgstr "_Översättningsminne"
-
-#~ msgid "_About"
-#~ msgstr "_Om"
-
-#~ msgid "_Quit"
-#~ msgstr "A_vsluta"
-
-#~ msgid "D_one"
-#~ msgstr "_Klar"
-
-# src/prefs.c:239
-#~ msgid "gtranslator"
-#~ msgstr "gtranslator"
-
-# src/sidebar.c:107
-#~ msgid "Current Developers"
-#~ msgstr "Aktuella utvecklare"
-
-# src/prefs.c:239
-#~ msgid "About Gtranslator"
-#~ msgstr "Om Gtranslator"
-
-#~ msgid "Status"
-#~ msgstr "Status"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Previous message (<Alt><-)"
-#~ msgstr "Föregående meddelande (<Alt><-)"
-
-#~ msgid "Next message (<Alt>->)"
-#~ msgstr "Nästa meddelande (<Alt>->)"
-
-#~ msgid "Progress button"
-#~ msgstr "Förloppsknapp"
-
-#~ msgid "Include fu_zzy strings"
-#~ msgstr "Inkludera l_uddiga strängar"
-
-# src/prefs.c:239
-#~| msgid "Gtranslator"
-#~ msgid "org.gnome.Gtranslator"
-#~ msgstr "org.gnome.Gtranslator"
-
-#~ msgid "Keybindings"
-#~ msgstr "Tangentbindningar"
-
-#~ msgid "gtkspell error: %s\n"
-#~ msgstr "gtkspell-fel: %s\n"
-
-#~ msgid ""
-#~ "GtkSpell was unable to initialize.\n"
-#~ " %s"
-#~ msgstr ""
-#~ "GtkSpell kunde inte initieras.\n"
-#~ " %s"
-
-# src/dialogs.c:390
-#~ msgid "Gtranslator PO File Editor"
-#~ msgstr "Gtranslator PO-filredigerare"
-
-#~ msgid "Use custom font"
-#~ msgstr "Använd anpassat teckensnitt"
-
-#~ msgid "If true, use a custom font for edit fields."
-#~ msgstr "Om true, använd anpassat teckensnitt för redigeringsfält."
-
-#~ msgid "Custom font to use for edit fields."
-#~ msgstr "Anpassat teckensnitt för redigeringsfält."
-
-#~ msgid "Others"
-#~ msgstr "Övriga"
-
-# src/dialogs.c:390
-#~ msgid "gtranslator highlight"
-#~ msgstr "gtranslator-markering"
-
-#~ msgid "Tag"
-#~ msgstr "Tagg"
-
-#~ msgid "Special variable"
-#~ msgstr "Specialvariabel"
-
-#~ msgid "Load an alternate language."
-#~ msgstr "Läs in ett alternativt språk."
-
-#~ msgid "Insert special characters just by clicking on them."
-#~ msgstr "Infoga specialtecken genom att klicka på dem."
-
-#~ msgid "Show the message in the source code."
-#~ msgstr "Visa meddelandet i källkoden."
-
-#~ msgid "Look up words in a dictionary."
-#~ msgstr "Slå upp ord i en ordbok."
-
-#~ msgid "Place window in the fullscreen state."
-#~ msgstr "Placera fönstret i helskärmsläge"
-
-#~ msgid "Parameters and tags detection featuring easy insertion."
-#~ msgstr "Parameter- och taggdetektion för enkel infogning."
-
-#~ msgid "Get translation suggestions from a data base."
-#~ msgstr "Hämta översättningsförslag från en databas."
-
-#~ msgid "Editing PO file"
-#~ msgstr "Redigerar PO-fil"
-
-#~ msgid "Room Menu"
-#~ msgstr "Rumsmeny"
-
-#~ msgid "Use _custom font"
-#~ msgstr "Använd a_npassat teckensnitt"
-
-# src/sidebar.c:107
-#~ msgid "Editor _font:"
-#~ msgstr "Teckensnitt för _redigerare:"
-
-#~ msgid "Show “_%s”"
-#~ msgstr "Visa \"_%s\""
-
-#~ msgid "_Move on Toolbar"
-#~ msgstr "_Flytta på verktygsfält"
-
-#~ msgid "Move the selected item on the toolbar"
-#~ msgstr "Flytta det markerade objektet på verktygsfältet"
-
-#~ msgid "_Remove from Toolbar"
-#~ msgstr "_Ta bort från verktygsfält"
-
-#~ msgid "Remove the selected item from the toolbar"
-#~ msgstr "Ta bort markerat objekt från verktygsfältet"
-
-#~ msgid "Remove the selected toolbar"
-#~ msgstr "Ta bort markerat verktygsfält"
-
-#~ msgid "Separator"
-#~ msgstr "Avgränsare"
-
-# src/header_stuff.c:443 src/header_stuff.c:448
-#~ msgid "Projects"
-#~ msgstr "Projekt"
-
-# src/header_stuff.c:443 src/header_stuff.c:448
-#~ msgid "Add project"
-#~ msgstr "Lägg till projekt"
-
-#~ msgid "Remove project"
-#~ msgstr "Ta bort projekt"
-
-#~ msgid "Open Tran Settings"
-#~ msgstr "Inställningar för Open Tran"
-
-#~ msgid "Language code for the Open-Tran query:"
-#~ msgstr "Språkkod för Open-Tran-förfrågan:"
-
-# src/prefs.c:109
-#~ msgid "Language code of the translated results:"
-#~ msgstr "Språkkod för resultatet:"
-
-#~ msgid "Use a local \"mirror\" copy of the Open-Tran server"
-#~ msgstr "Använd en lokal \"spegelserver\" för Open-Tran"
-
-#~ msgid "Mirror server URL:"
-#~ msgstr "Spegelserverns URL:"
-
-#~ msgid ""
-#~ "<i>The URL should be of the form:\n"
-#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-#~ "The two \"%s\" markers and the final slash must not be omitted.</i>"
-#~ msgstr ""
-#~ "<i>Serveradressen skall vara i formatet:\n"
-#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-#~ "De två markörerna \"%s.%s\" och det sista snedstrecket måste ingå.</i>"
-
-#~ msgid "Mirror Server"
-#~ msgstr "Spegelserver"
-
-#~ msgid "ERROR: Cannot access %s\n"
-#~ msgstr "FEL: Kan inte komma åt %s\n"
-
-#~ msgid "Error in server response, GET failed\n"
-#~ msgstr "Fel i serversvaret, GET misslyckades\n"
-
-#~ msgid "Cannot parse server response, %s\n"
-#~ msgstr "Kan inte tolka serversvaret, %s\n"
-
-#~ msgid "Cannot parse server response, not an array? %s\n"
-#~ msgstr "Kan inte tolka serversvaret, ingen matris? %s\n"
-
-#~ msgid "WRONG! Can't get result element %d\n"
-#~ msgstr "FEL! Kan inte få tag på resultatelement %d\n"
-
-#~ msgid "WRONG! Can't parse result element %d as object\n"
-#~ msgstr "FEL! Kan inte tolka resultatelement %d, som ett objekt\n"
-
-#~ msgid "WRONG! Can't read projects for result element %d\n"
-#~ msgstr "FEL! Kan inte läsa in projekten, för resultatelement %d\n"
-
-#~ msgid "%s[%s] Count:%d"
-#~ msgstr "%s[%s] Antal:%d"
-
-#~ msgid "WRONG! Malformed project: %d\n"
-#~ msgstr "FEL! Felformaterat projekt: %d\n"
-
-#~ msgid "You have to provide a phrase to search"
-#~ msgstr "Du måste ange en fras att söka efter"
-
-#~ msgid ""
-#~ "You have to provide a search language code in the plugin configuration"
-#~ msgstr "Du måste ange en språkkod i insticksinställningarna"
-
-#~ msgid ""
-#~ "You have to provide a language code for your language in the plugin "
-#~ "configuration"
-#~ msgstr "Du måste ange en språkkod för ditt språk, i insticksinställningarna"
-
-#~ msgid ""
-#~ "Either use the main open-tran.eu server, or enter a server URL in the "
-#~ "plugin configuration,"
-#~ msgstr ""
-#~ "Använd antingen den primära servern på open-tran.eu, eller ange en URL i "
-#~ "insticksinställningarna."
-
-#~ msgid "Type"
-#~ msgstr "Typ"
-
-#~ msgid "Open-Tran.eu"
-#~ msgstr "Open-Tran.eu"
-
-#~ msgid "Look for:"
-#~ msgstr "Leta efter:"
-
-# src/history.c:205
-#~ msgid "Open Tran"
-#~ msgstr "Open Tran"
-
-#~ msgid "Look for phrases in Open tran memory translation database."
-#~ msgstr "Leta efter fraser i Open tran-översättningsdatabas."
-
-#~ msgid "Search Code"
-#~ msgstr "Söksträng"
-
-#~ msgid "The language code to search for"
-#~ msgstr "Språkkod att söka efter"
-
-#~ msgid "Own Code"
-#~ msgstr "Egen kod"
-
-#~ msgid "The language code in which you want the results"
-#~ msgstr "Språkkoden du vill ha resultatet i"
-
-#~ msgid "Use Mirror Server"
-#~ msgstr "Använd spegelserver"
-
-#~ msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
-#~ msgstr "Använd en lokal kopia av Open-Tran-servern på open-tran.eu"
-
-#~ msgid "Mirror Server URL"
-#~ msgstr "Spegelserver-URL"
-
-#~ msgid "URL of an Open-Tran mirror server"
-#~ msgstr "URL till en Open-Tran spegelserver"
