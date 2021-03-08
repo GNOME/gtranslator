@@ -32,6 +32,9 @@ typedef struct
   /* Identify the profile */
   gchar *name;
 
+  /* Authentication token */
+  gchar *auth_token;
+
   /* Translator's information */
   gchar *author_name;
   gchar *author_email;
@@ -69,6 +72,7 @@ gtr_profile_finalize (GObject *object)
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
 
   g_free (priv->name);
+  g_free (priv->auth_token);
   g_free (priv->author_name);
   g_free (priv->author_email);
   g_free (priv->language_name);
@@ -118,6 +122,27 @@ gtr_profile_set_name (GtrProfile  *profile,
 
   g_free (priv->name);
   priv->name = g_strdup (data);
+}
+
+const gchar *
+gtr_profile_get_auth_token (GtrProfile *profile)
+{
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
+  g_return_val_if_fail (GTR_IS_PROFILE (profile), NULL);
+
+  return priv->auth_token;
+}
+
+void
+gtr_profile_set_auth_token (GtrProfile  *profile,
+                            const gchar *data)
+{
+  GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
+  g_return_if_fail (GTR_IS_PROFILE (profile));
+  g_return_if_fail (data != NULL);
+
+  g_free (priv->auth_token);
+  priv->auth_token = g_strdup (data);
 }
 
 const gchar *

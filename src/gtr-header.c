@@ -521,6 +521,113 @@ gtr_header_set_encoding (GtrHeader * header, const gchar * encoding)
   gtr_header_set_field (header, "Content-Transfer-Encoding", encoding);
 }
 
+void
+gtr_header_set_dl_info (GtrHeader * header,
+                         const gchar * team,
+                         const gchar * module_name,
+                         const gchar * branch,
+                         const gchar * domain)
+{
+
+  g_return_if_fail (GTR_IS_HEADER (header));
+
+  gtr_header_set_field (header, "X-DL-Team", team);
+  gtr_header_set_field (header, "X-DL-Module", module_name);
+  gtr_header_set_field (header, "X-DL-Branch", branch);
+  gtr_header_set_field (header, "X-DL-Domain", domain);
+
+}
+
+/**
+ * gtr_header_get_dl_team:
+ * @header: a #GtrHeader
+ *
+ * Gets the damned lies team of the header
+ *
+ * Return value: (transfer full): a newly allocated string representing the
+ *                damned lies team of the header
+ */
+gchar *
+gtr_header_get_dl_team (GtrHeader * header)
+{
+  g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
+
+  return po_header_field (gtr_msg_get_msgstr (GTR_MSG (header)),
+                          "X-DL-Team");
+}
+
+/**
+ * gtr_header_get_dl_module:
+ * @header: a #GtrHeader
+ *
+ * Gets the damned lies module of the header
+ *
+ * Return value: (transfer full): a newly allocated string representing the
+ *                damned lies module of the header
+ */
+gchar *
+gtr_header_get_dl_module (GtrHeader * header)
+{
+  g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
+
+  return po_header_field (gtr_msg_get_msgstr (GTR_MSG (header)),
+                          "X-DL-Module");
+}
+
+/**
+ * gtr_header_get_dl_branch:
+ * @header: a #GtrHeader
+ *
+ * Gets the damned lies branch of the header
+ *
+ * Return value: (transfer full): a newly allocated string representing the
+ *                damned lies branch of the header
+ */
+gchar *
+gtr_header_get_dl_branch (GtrHeader * header)
+{
+  g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
+
+  return po_header_field (gtr_msg_get_msgstr (GTR_MSG (header)),
+                          "X-DL-Branch");
+}
+
+/**
+ * gtr_header_get_dl_domain:
+ * @header: a #GtrHeader
+ *
+ * Gets the damned lies domain of the header
+ *
+ * Return value: (transfer full): a newly allocated string representing the
+ *                damned lies domain of the header
+ */
+gchar *
+gtr_header_get_dl_domain (GtrHeader * header)
+{
+  g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
+
+  return po_header_field (gtr_msg_get_msgstr (GTR_MSG (header)),
+                          "X-DL-Domain");
+}
+
+/**
+ * gtr_header_get_dl_state:
+ * @header: a #GtrHeader
+ *
+ * Gets the damned lies module state of the header
+ *
+ * Return value: (transfer full): a newly allocated string representing the
+ *                damned lies module state of the header
+ */
+gchar *
+gtr_header_get_dl_state (GtrHeader * header)
+{
+  g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
+
+  return po_header_field (gtr_msg_get_msgstr (GTR_MSG (header)),
+                          "X-DL-State");
+}
+
 /**
  * gtr_header_get_plural_forms:
  * @header: a #GtrHeader.

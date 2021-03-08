@@ -93,6 +93,21 @@ typedef struct
 
   GtrPoState state;
 
+  /* Damned Lies(DL) teams are stored here */
+  gchar *dl_team;
+
+  /* DL modules */
+  gchar *dl_module;
+
+  /*  DL branches */
+  gchar *dl_branch;
+
+  /*  DL domains */
+  gchar *dl_domain;
+
+  /* The state of a DL module */
+  gchar *dl_state;
+
   /* Marks if the file was changed;  */
   guint file_changed : 1;
 } GtrPoPrivate;
@@ -111,6 +126,22 @@ enum
 };
 
 static gchar *message_error = NULL;
+
+static void
+gtr_header_set_field (GtrHeader * header,
+                      const gchar * field, const gchar * data)
+{
+  gchar *msgstr;
+
+  g_return_if_fail (GTR_IS_HEADER (header));
+  g_return_if_fail (data != NULL);
+
+  msgstr = po_header_set_field (gtr_msg_get_msgstr (GTR_MSG (header)),
+                                field, data);
+  gtr_msg_set_msgstr (GTR_MSG (header), msgstr);
+
+  g_free (msgstr);
+}
 
 static void
 gtr_po_set_property (GObject      *object,
@@ -185,6 +216,11 @@ gtr_po_init (GtrPo * po)
 
   priv->location = NULL;
   priv->gettext_po_file = NULL;
+  priv->dl_team = NULL;
+  priv->dl_module = NULL;
+  priv->dl_branch = NULL;
+  priv->dl_domain = NULL;
+  priv->dl_state = NULL;
 }
 
 static void
@@ -199,6 +235,17 @@ gtr_po_finalize (GObject * object)
 
   if (priv->gettext_po_file)
     po_file_free (priv->gettext_po_file);
+
+  if (priv->dl_team)
+    g_free (priv->dl_team);
+  if (priv->dl_module)
+    g_free (priv->dl_module);
+  if (priv->dl_branch)
+    g_free (priv->dl_branch);
+  if (priv->dl_domain)
+    g_free (priv->dl_domain);
+  if (priv->dl_state)
+    g_free (priv->dl_state);
 
   G_OBJECT_CLASS (gtr_po_parent_class)->finalize (object);
 }
@@ -911,6 +958,22 @@ gtr_po_set_state (GtrPo * po, GtrPoState state)
   g_object_notify (G_OBJECT (po), "state");
 }
 
+void gtr_po_set_dl_info (GtrPo * po, gchar * team, gchar * module_name,
+                         gchar * branch, gchar * domain, gchar * module_state)
+{
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  priv->dl_team = g_strdup (team);
+  priv->dl_module = g_strdup (module_name);
+  priv->dl_branch = g_strdup (branch);
+  priv->dl_domain = g_strdup (domain);
+  priv->dl_state = g_strdup (module_state);
+
+  gtr_header_set_field (priv->header, "X-DL-Team", team);
+  gtr_header_set_field (priv->header, "X-DL-Module", module_name);
+  gtr_header_set_field (priv->header, "X-DL-Branch", branch);
+  gtr_header_set_field (priv->header, "X-DL-Domain", domain);
+  gtr_header_set_field (priv->header, "X-DL-State", module_state);
+}
 /*
  * FIXME: We are not using this func.
  */
@@ -1329,4 +1392,46 @@ gtr_po_check_po_file (GtrPo * po)
   po_file_check_all (priv->gettext_po_file, &handler);
 
   return message_error;
+}
+
+const gchar *
+gtr_po_get_dl_team (GtrPo *po)
+{
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return priv->dl_team;
+}
+
+const gchar *
+gtr_po_get_dl_module (GtrPo *po)
+{
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return priv->dl_module;
+}
+
+const gchar *
+gtr_po_get_dl_branch (GtrPo *po)
+{
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return priv->dl_branch;
+}
+
+const gchar *
+gtr_po_get_dl_domain (GtrPo *po)
+{
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return priv->dl_domain;
+}
+
+const gchar *
+gtr_po_get_dl_module_state (GtrPo *po)
+{
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return priv->dl_state;
+}
+
+gboolean
+gtr_po_can_dl_upload (GtrPo *po)
+{
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return g_strcmp0 (priv->dl_state, "Translating") == 0;
 }

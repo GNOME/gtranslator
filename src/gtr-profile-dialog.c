@@ -40,6 +40,7 @@ typedef struct
   GtkWidget *main_box;
 
   GtkWidget *profile_name;
+  GtkWidget *auth_token;
 
   GtkWidget *author_name;
   GtkWidget *author_email;
@@ -92,6 +93,7 @@ gtr_profile_dialog_init (GtrProfileDialog *dlg)
   priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
   g_object_ref (priv->main_box);
   priv->profile_name = GTK_WIDGET (gtk_builder_get_object (builder, "profile_name"));
+  priv->auth_token = GTK_WIDGET (gtk_builder_get_object (builder, "auth_token"));
   priv->author_name = GTK_WIDGET (gtk_builder_get_object (builder, "name"));
   priv->author_email = GTK_WIDGET (gtk_builder_get_object (builder, "email"));
   priv->team_email = GTK_WIDGET (gtk_builder_get_object (builder, "team_email"));
@@ -113,6 +115,10 @@ fill_entries (GtrProfileDialog *dlg, GtrProfile *profile)
   if (gtr_profile_get_name (profile) != NULL)
     gtk_entry_set_text (GTK_ENTRY (priv->profile_name),
                         gtr_profile_get_name (profile));
+
+  if (gtr_profile_get_auth_token (profile) != NULL)
+    gtk_entry_set_text (GTK_ENTRY (priv->auth_token),
+                        gtr_profile_get_auth_token (profile));                      
 
   if (gtr_profile_get_author_name (profile) != NULL)
     gtk_entry_set_text (GTK_ENTRY (priv->author_name),
@@ -190,6 +196,9 @@ gtr_profile_dialog_get_profile (GtrProfileDialog *dlg)
 
   gtr_profile_set_name (profile,
                         gtk_entry_get_text (GTK_ENTRY (priv->profile_name)));
+
+  gtr_profile_set_auth_token (profile,
+                        gtk_entry_get_text (GTK_ENTRY (priv->auth_token)));
 
   gtr_profile_set_author_name (profile,
                                gtk_entry_get_text (GTK_ENTRY (priv->author_name)));

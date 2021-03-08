@@ -60,6 +60,12 @@ typedef struct
   GtkWidget *charset;
   GtkWidget *encoding;
 
+  GtkWidget *team;
+  GtkWidget *module;
+  GtkWidget *branch;
+  GtkWidget *domain;
+  GtkWidget *state;
+
   GtrPo     *po;
 } GtrHeaderDialogPrivate;
 
@@ -202,6 +208,24 @@ language_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 }
 
 static void
+dl_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
+{
+  const gchar *team, *module, *branch, *domain;
+  GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
+
+  team = gtk_entry_get_text (GTK_ENTRY (priv->team));
+  module = gtk_entry_get_text (GTK_ENTRY (priv->module));
+  branch = gtk_entry_get_text (GTK_ENTRY (priv->branch));
+  domain = gtk_entry_get_text (GTK_ENTRY (priv->domain));
+
+  gtr_header_set_dl_info (gtr_po_get_header (priv->po),
+                          team, module, branch,
+                          domain);
+
+  po_state_set_modified (priv->po);
+}
+
+static void
 gtr_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
 {
   GtrHeader *header;
@@ -259,6 +283,27 @@ gtr_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
   text = gtr_header_get_encoding (header);
   gtk_entry_set_text (GTK_ENTRY (priv->encoding), text);
   g_free (text);
+
+  /* Damned Lies Information */
+  text = gtr_header_get_dl_team (header);
+  gtk_entry_set_text (GTK_ENTRY (priv->team), text);
+  g_free (text);
+
+  text = gtr_header_get_dl_module (header);
+  gtk_entry_set_text (GTK_ENTRY (priv->module), text);
+  g_free (text);
+
+  text = gtr_header_get_dl_branch (header);
+  gtk_entry_set_text (GTK_ENTRY (priv->branch), text);
+  g_free (text);
+
+  text = gtr_header_get_dl_domain (header);
+  gtk_entry_set_text (GTK_ENTRY (priv->domain), text);
+  g_free (text);
+
+  text = gtr_header_get_dl_state (header);
+  gtk_entry_set_text (GTK_ENTRY (priv->state), text);
+  g_free (text);
 }
 
 static void
@@ -309,6 +354,12 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
   priv->lg_email = GTK_WIDGET (gtk_builder_get_object (builder, "lg_email_entry"));
   priv->charset = GTK_WIDGET (gtk_builder_get_object (builder, "charset_entry"));
   priv->encoding = GTK_WIDGET (gtk_builder_get_object (builder, "encoding_entry"));
+  priv->team = GTK_WIDGET (gtk_builder_get_object (builder, "team"));
+  priv->module = GTK_WIDGET (gtk_builder_get_object (builder, "module"));
+  priv->branch = GTK_WIDGET (gtk_builder_get_object (builder, "branch"));
+  priv->domain = GTK_WIDGET (gtk_builder_get_object (builder, "domain"));
+  priv->state = GTK_WIDGET (gtk_builder_get_object (builder, "state"));
+
   g_object_unref (builder);
 
   gtk_box_pack_start (content_area, priv->main_box, FALSE, FALSE, 0);
@@ -324,6 +375,7 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
   gtk_widget_set_sensitive (priv->pot_date, FALSE);
   gtk_widget_set_sensitive (priv->po_date, FALSE);
   gtk_widget_set_sensitive (priv->charset, FALSE);
+  gtk_widget_set_sensitive (priv->state, FALSE);
 
   if (gtk_toggle_button_get_active
       (GTK_TOGGLE_BUTTON (priv->take_my_options)))
@@ -385,6 +437,18 @@ set_default_values (GtrHeaderDialog * dlg, GtrWindow * window)
 
   g_signal_connect (priv->lg_email, "changed",
                     G_CALLBACK (language_changed), dlg);
+
+  g_signal_connect (priv->team, "changed",
+                    G_CALLBACK (dl_changed), dlg);
+
+  g_signal_connect (priv->module, "changed",
+                    G_CALLBACK (dl_changed), dlg);
+
+  g_signal_connect (priv->branch, "changed",
+                    G_CALLBACK (dl_changed), dlg);
+
+  g_signal_connect (priv->domain, "changed",
+                    G_CALLBACK (dl_changed), dlg);
 }
 
 void

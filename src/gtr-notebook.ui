@@ -657,6 +657,28 @@
             <property name="non_homogeneous">True</property>
           </packing>
         </child>
+         <child>
+          <object class="GtkButton" id="upload">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Upload file (&lt;Ctrl&gt;b)</property>
+            <property name="action_name">app.upload_file</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">document-send-symbolic</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+            <property name="non_homogeneous">True</property>
+          </packing>
+        </child>
         <style>
           <class name="horizontal"/>
           <class name="linked"/>
