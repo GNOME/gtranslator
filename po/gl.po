@@ -18,10 +18,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-01-04 08:43+0000\n"
-"PO-Revision-Date: 2021-01-04 23:47+0100\n"
+"POT-Creation-Date: 2021-03-08 06:55+0000\n"
+"PO-Revision-Date: 2021-03-08 15:39+0100\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
-"Language-Team: Galician <proxecto@trasno.gal>\n"
+"Language-Team: Galician <Proxecto Trasno <proxecto@trasno.gal>>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -68,7 +68,7 @@ msgstr ""
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:647
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:659
 #: src/gtr-notebook.ui:308 src/gtr-window.c:229 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Editor de traducións"
@@ -215,7 +215,7 @@ msgstr ""
 msgid "Paths:"
 msgstr "Rutas:"
 
-#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
+#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
 #: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:651
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
@@ -256,14 +256,14 @@ msgstr ""
 #: src/gtr-actions-app.c:101
 msgid "translator-credits"
 msgstr ""
-"Francisco Diéguez Souto <frandieguez@ubuntu.com>, 2010.\n"
+"Fran Diéguez <frandieguez@gnome.org>, 2021.\n"
 "Ignacio Casal Quinteiro <nacho.resa@gmail.com>, 2006-2009."
 
 #: src/gtr-actions-app.c:104
 msgid "Translation Editor Web Site"
 msgstr "Sitio web do Editor de traducións"
 
-#: src/gtr-actions-file.c:184
+#: src/gtr-actions-file.c:218
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -272,27 +272,41 @@ msgstr ""
 "Desexa gardar os cambios neste ficheiro: <span weight=\"bold\" size=\"large"
 "\">%s</span>?"
 
-#: src/gtr-actions-file.c:190
+#: src/gtr-actions-file.c:224
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr "Se non garda, perderanse todos os seus cambios permanentemente."
 
-#: src/gtr-actions-file.c:193
+#: src/gtr-actions-file.c:227
 msgid "Save and open"
 msgstr "Gardar e abrir"
 
-#: src/gtr-actions-file.c:194
+#: src/gtr-actions-file.c:228
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/gtr-actions-file.c:195
+#: src/gtr-actions-file.c:229
 msgid "Continue without saving"
 msgstr "Continuar sen gardar"
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:261
 msgid "Open file for translation"
 msgstr "Abrir ficheiro para tradución"
 
-#: src/gtr-actions-file.c:330
+#: src/gtr-actions-file.c:448
+msgid "This file has already been uploaded"
+msgstr "Este ficheiro xa foi subido"
+
+#: src/gtr-actions-file.c:459
+#, c-format
+msgid "An error occurred while uploading the file: %s"
+msgstr "Produciuse un erro ao subir o ficheiro: %s"
+
+#: src/gtr-actions-file.c:470
+#, c-format
+msgid "The file '%s.%s.%s.%s' has been uploaded!"
+msgstr "Subiuse o ficheiro «%s.%s.%s.%s»!"
+
+#: src/gtr-actions-file.c:500
 msgid "Save file as…"
 msgstr "Gardar ficheiro como…"
 
@@ -357,7 +371,7 @@ msgstr "Pechar _sen gardar"
 
 #: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:89
 #: src/gtr-file-dialogs.c:47 src/gtr-jump-dialog.c:90
-#: src/gtr-preferences-dialog.c:446 src/gtr-profile-dialog.c:71
+#: src/gtr-preferences-dialog.c:446 src/gtr-profile-dialog.c:72
 #: src/translation-memory/gtr-translation-memory-dialog.c:81
 msgid "_Cancel"
 msgstr "_Cancelar"
@@ -439,20 +453,35 @@ msgstr "Contexto:"
 msgid "Format:"
 msgstr "Formato:"
 
-#: src/gtr-dl-teams.c:415
+#: src/gtr-dl-teams.c:417
 msgid "No module state found."
 msgstr "Non se atopou o estado do módulo."
 
-#: src/gtr-dl-teams.c:432
+#: src/gtr-dl-teams.c:434
 #, c-format
 msgid "The current state is: %s"
 msgstr "O estado actual é: %s"
 
-#: src/gtr-dl-teams.c:632
+#: src/gtr-dl-teams.c:586
+#, c-format
+msgid "The file '%s' has been saved in %s"
+msgstr "O ficheiro «%s» foi gardado en %s"
+
+#: src/gtr-dl-teams.c:643
+#, c-format
+msgid "An error occurred while reserving this module: %s"
+msgstr "Produciuse un erro ao reservar este módulo: %s"
+
+#: src/gtr-dl-teams.c:655
+#, c-format
+msgid "The file '%s.%s.%s.%s' has been successfully reserved"
+msgstr "O ficheiro «%s.%s.%s.%s» reservouse correctamente"
+
+#: src/gtr-dl-teams.c:781
 msgid "Translation Team"
 msgstr "Equipo de tradución"
 
-#: src/gtr-dl-teams.c:639
+#: src/gtr-dl-teams.c:788
 msgid "Module"
 msgstr "Módulo"
 
@@ -463,38 +492,43 @@ msgstr ""
 "tradución"
 
 #: src/gtr-dl-teams.ui:106
+#| msgid "Open file for translation"
+msgid "Reserve for translation"
+msgstr "Reservar para traducir"
+
+#: src/gtr-dl-teams.ui:117
 msgid "Load file"
 msgstr "Cargar ficheiro"
 
-#: src/gtr-dl-teams.ui:125
+#: src/gtr-dl-teams.ui:136
 msgid "Load from Damned Lies"
 msgstr "Cargar desde Damned Lies"
 
-#: src/gtr-dl-teams.ui:132 src/gtr-projects.ui:58
+#: src/gtr-dl-teams.ui:143 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Abrir…"
 
-#: src/gtr-dl-teams.ui:155 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
+#: src/gtr-dl-teams.ui:166 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
 msgid "Main Menu"
 msgstr "Menú principal"
 
-#: src/gtr-dl-teams.ui:183 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+#: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
 msgid "New window"
 msgstr "Nova xanela"
 
-#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+#: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: src/gtr-dl-teams.ui:224 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:235 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
 msgid "Keyboard Shortcuts"
 msgstr "Atallos de teclado"
 
-#: src/gtr-dl-teams.ui:238 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
+#: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
 msgid "About"
 msgstr "Sobre"
 
-#: src/gtr-dl-teams.ui:252 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
+#: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
 msgid "Quit"
 msgstr "Saír"
 
@@ -514,7 +548,7 @@ msgstr "Modelo de tradución gettext"
 msgid "All files"
 msgstr "Todos os ficheiros"
 
-#: src/gtr-header-dialog.c:280
+#: src/gtr-header-dialog.c:325
 msgid "Edit Header"
 msgstr "Editar cabeceira"
 
@@ -578,8 +612,33 @@ msgstr "Proxecto"
 msgid "Comment"
 msgstr "Comentario"
 
-#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
-#: src/gtr-profile-dialog.c:170
+#: src/gtr-header-dialog.ui:454
+msgid "DL Team:"
+msgstr "Equipo de DL:"
+
+#: src/gtr-header-dialog.ui:467
+#| msgid "Module"
+msgid "DL Module:"
+msgstr "Módulo de DL:"
+
+#: src/gtr-header-dialog.ui:481
+msgid "DL Branch:"
+msgstr "Rama de DL:"
+
+#: src/gtr-header-dialog.ui:495
+msgid "DL Domain:"
+msgstr "Dominio de DL:"
+
+#: src/gtr-header-dialog.ui:509
+msgid "DL State:"
+msgstr "Estado en DL:"
+
+#: src/gtr-header-dialog.ui:587
+msgid "Damned Lies Info"
+msgstr "Información de Damned Lies"
+
+#: src/gtr-io-error-info-bar.c:146 src/gtr-jump-dialog.c:88
+#: src/gtr-profile-dialog.c:171 src/gtr-profile-dialog.c:176
 #: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "_OK"
 msgstr "_Aceptar"
@@ -721,29 +780,34 @@ msgstr "Gardar o ficheiro actual (<Ctrl>s)"
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Gardar como (<Ctrl><Shift>s)"
 
-#: src/gtr-po.c:440
+#: src/gtr-notebook.ui:665
+#| msgid "Open a new file (<Ctrl>o)"
+msgid "Upload file (<Ctrl>b)"
+msgstr "Subir ficheiro (<Ctrl>b)"
+
+#: src/gtr-po.c:487
 #, c-format
 msgid "The file is empty"
 msgstr "O ficheiro está baleiro"
 
-#: src/gtr-po.c:449
+#: src/gtr-po.c:496
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Produciuse un fallo ao abrir o ficheiro «%s»: %s"
 
-#: src/gtr-po.c:530
+#: src/gtr-po.c:577
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Non foi posíbel converter desde o conxunto de caracteres «%s» a UTF-8"
 
-#: src/gtr-po.c:547 src/gtr-po.c:567
+#: src/gtr-po.c:594 src/gtr-po.c:614
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr ""
 "Non foi posíbel almacenar o ficheiro temporal para a conversión de "
 "codificación"
 
-#: src/gtr-po.c:604
+#: src/gtr-po.c:651
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -754,17 +818,17 @@ msgstr ""
 "ferramentas de liña de ordes «msgconv» ou «iconv» antes de abrir este "
 "ficheiro co Editor de Traducións de GNOME"
 
-#: src/gtr-po.c:672
+#: src/gtr-po.c:719
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext devolveu unha lista de dominios de mensaxe nula."
 
-#: src/gtr-po.c:717
+#: src/gtr-po.c:764
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Non se obtiveron mensaxes do analizador."
 
-#: src/gtr-po.c:768
+#: src/gtr-po.c:815
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -775,17 +839,17 @@ msgstr ""
 "Os ficheiros pot son xerados por un proceso de compilación.\n"
 "O seu ficheiro debería chamase como «%s.po»."
 
-#: src/gtr-po.c:781
+#: src/gtr-po.c:828
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "O ficheiro %s é de só lectura e non pode sobrescribilo"
 
-#: src/gtr-po.c:800
+#: src/gtr-po.c:847
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Produciuse un erro escribindo o ficheiro PO: %s"
 
-#: src/gtr-po.c:812
+#: src/gtr-po.c:859
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Produciuse un erro escribindo o ficheiro PO: %s"
@@ -859,7 +923,6 @@ msgid "Font:"
 msgstr "Tipo de letra:"
 
 #: src/gtr-preferences-dialog.ui:388
-#| msgid "Editor font"
 msgid "Choose the editor font"
 msgstr "Escoller o tipo de letra do editor"
 
@@ -887,7 +950,7 @@ msgstr "Editar perfíl"
 msgid "Profiles"
 msgstr "Perfiles"
 
-#: src/gtr-profile-dialog.c:73
+#: src/gtr-profile-dialog.c:74
 msgid "Translation Editor Profile"
 msgstr "Perfil do Editor de traducións"
 
@@ -915,7 +978,19 @@ msgstr "_Correo-e"
 msgid "_Team email"
 msgstr "Correo-e do _grupo"
 
-#: src/gtr-profile-dialog.ui:209
+#: src/gtr-profile-dialog.ui:174
+msgid "_DL auth token"
+msgstr "Token de autenticación de _DL"
+
+#: src/gtr-profile-dialog.ui:175
+msgid ""
+"GNOME Damned Lies integration token, go to your profile in https://l10n."
+"gnome.org/ to get it"
+msgstr ""
+"Token de integración de Damned Lies de GNOME, vaia ao seu perfil en https://"
+"l10n.gnome.org/ para obtelo"
+
+#: src/gtr-profile-dialog.ui:237
 msgid "Language Settings"
 msgstr "Configuracións de idioma"
 
@@ -1001,22 +1076,22 @@ msgstr "Plural %d"
 msgid "Path:"
 msgstr "Camiño:"
 
-#: src/gtr-tab.c:1956
+#: src/gtr-tab.c:1973
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Traducidas: %0.2f%%"
 
-#: src/gtr-tab.c:1957
+#: src/gtr-tab.c:1974
 #, c-format
 msgid "Translated: %d"
 msgstr "Traducidas: %d"
 
-#: src/gtr-tab.c:1958
+#: src/gtr-tab.c:1975
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Sen traducir: %d"
 
-#: src/gtr-tab.c:1959
+#: src/gtr-tab.c:1976
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Dubidosas: %d"
