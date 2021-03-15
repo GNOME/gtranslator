@@ -1,5 +1,5 @@
 # Brazilian Portuguese translation of gtranslator.
-# Copyright (C) 2020 Free Software Foundation, Inc.
+# Copyright (C) 2021 Free Software Foundation, Inc.
 # Francisco Petrucio <fpetrucioL@mat.ufal.br>, 2000-2004.
 # João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>, 2004.
 # Raphael Higino <In Memoriam>, 2004.
@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-08 06:55+0000\n"
-"PO-Revision-Date: 2021-03-12 17:30-0300\n"
+"POT-Creation-Date: 2021-03-15 08:20+0000\n"
+"PO-Revision-Date: 2021-03-15 16:18-0300\n"
 "Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -309,21 +309,29 @@ msgstr "Continuar sem salvar"
 msgid "Open file for translation"
 msgstr "Abrir arquivo para tradução"
 
-#: src/gtr-actions-file.c:448
+#: src/gtr-actions-file.c:449
 msgid "This file has already been uploaded"
 msgstr "Esse arquivo já foi enviado"
 
-#: src/gtr-actions-file.c:459
+#: src/gtr-actions-file.c:462
 #, c-format
-msgid "An error occurred while uploading the file: %s"
-msgstr "Ocorreu um erro ao enviar o arquivo: %s"
+msgid ""
+"An error occurred while uploading the file: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to upload this "
+"module."
+msgstr ""
+"Ocorreu um erro ao enviar o arquivo: %s\n"
+"Talvez seu <b>token</b> do <i>l10n.gnome.org</i> não tenha sido configurado "
+"corretamente em seu perfil ou você não possui permissões para enviar nesse "
+"módulo."
 
-#: src/gtr-actions-file.c:470
+#: src/gtr-actions-file.c:477
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been uploaded!"
 msgstr "O arquivo \"%s.%s.%s.%s\" foi enviado!"
 
-#: src/gtr-actions-file.c:500
+#: src/gtr-actions-file.c:507
 msgid "Save file as…"
 msgstr "Salvar arquivo como…"
 
@@ -485,21 +493,29 @@ msgstr "O estado atual é: %s"
 msgid "The file '%s' has been saved in %s"
 msgstr "O arquivo “%s” foi salvo em %s"
 
-#: src/gtr-dl-teams.c:643
+#: src/gtr-dl-teams.c:646
 #, c-format
-msgid "An error occurred while reserving this module: %s"
-msgstr "Ocorreu um erro ao reservar esse módulo: %s"
+msgid ""
+"An error occurred while reserving this module: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to reserve this "
+"module."
+msgstr ""
+"Ocorreu um erro ao reservar esse módulo: %s\n"
+"Talvez seu <b>token</b> do <i>l10n.gnome.org</i> não tenha sido configurado "
+"corretamente em seu perfil ou você não possui permissões para reservar esse "
+"módulo."
 
-#: src/gtr-dl-teams.c:655
+#: src/gtr-dl-teams.c:662
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "O arquivo \"%s.%s.%s.%s\" foi reservado com sucesso"
 
-#: src/gtr-dl-teams.c:781
+#: src/gtr-dl-teams.c:788
 msgid "Translation Team"
 msgstr "Equipe de tradução"
 
-#: src/gtr-dl-teams.c:788
+#: src/gtr-dl-teams.c:795
 msgid "Module"
 msgstr "Módulo"
 
@@ -1397,6 +1413,12 @@ msgid ""
 msgstr ""
 "Diferença máxima em comprimento entre as mensagens exibidas como ocorrências "
 "pela memória de tradução."
+
+#~ msgid "An error occurred while uploading the file: %s"
+#~ msgstr "Ocorreu um erro ao enviar o arquivo: %s"
+
+#~ msgid "An error occurred while reserving this module: %s"
+#~ msgstr "Ocorreu um erro ao reservar esse módulo: %s"
 
 #~ msgid "File saved."
 #~ msgstr "Arquivo salvo."
