@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-08 06:55+0000\n"
-"PO-Revision-Date: 2021-03-08 16:00+0200\n"
+"POT-Creation-Date: 2021-03-15 08:20+0000\n"
+"PO-Revision-Date: 2021-03-15 10:26+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -281,24 +281,27 @@ msgstr "Продовжити без збереження"
 msgid "Open file for translation"
 msgstr "Відкрити файл для перекладу"
 
-#: src/gtr-actions-file.c:448
+#: src/gtr-actions-file.c:449
 msgid "This file has already been uploaded"
-msgstr ""
-"Цей файл вже вивантажено"
+msgstr "Цей файл вже вивантажено"
 
-#: src/gtr-actions-file.c:459
+#: src/gtr-actions-file.c:462
 #, c-format
-msgid "An error occurred while uploading the file: %s"
+msgid ""
+"An error occurred while uploading the file: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to upload this "
+"module."
 msgstr ""
-"Під час вивантаження файла сталася помилка: %s"
+"Сталася помилка під час вивантаження файла: %s\n"
+"Можливо, ви не налаштувати ваш <i>l10n.gnome.org</i>-<b>жетон</b> у вашому профілі або ви не маєте прав доступу до вивантаження цього модуля."
 
-#: src/gtr-actions-file.c:470
+#: src/gtr-actions-file.c:477
 #, c-format
-#| msgid "The file '%s' has been saved in %s"
 msgid "The file '%s.%s.%s.%s' has been uploaded!"
 msgstr "Файл «%s.%s.%s.%s» вивантажено!"
 
-#: src/gtr-actions-file.c:500
+#: src/gtr-actions-file.c:507
 msgid "Save file as…"
 msgstr "Зберегти файл як…"
 
@@ -456,23 +459,27 @@ msgstr "Поточний стан: %s"
 msgid "The file '%s' has been saved in %s"
 msgstr "Файл «%s» було збережено до %s"
 
-#: src/gtr-dl-teams.c:643
+#: src/gtr-dl-teams.c:646
 #, c-format
-msgid "An error occurred while reserving this module: %s"
+msgid ""
+"An error occurred while reserving this module: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to reserve this "
+"module."
 msgstr ""
-"Під час резервування цього модуля сталася помилка: %s"
+"Сталася помилка під час резервування цього модуля: %s\n"
+"Можливо, ви не налаштувати ваш <i>l10n.gnome.org</i>-<b>жетон</b> у вашому профілі або ви не маєте прав доступу до резервування цього модуля."
 
-#: src/gtr-dl-teams.c:655
+#: src/gtr-dl-teams.c:662
 #, c-format
-#| msgid "The file '%s' has been saved in %s"
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "Файл «%s.%s.%s.%s» успішно зарезервовано"
 
-#: src/gtr-dl-teams.c:781
+#: src/gtr-dl-teams.c:788
 msgid "Translation Team"
 msgstr "Команда перекладу"
 
-#: src/gtr-dl-teams.c:788
+#: src/gtr-dl-teams.c:795
 msgid "Module"
 msgstr "Модуль"
 
@@ -481,7 +488,6 @@ msgid "Select team, module, branch and domain to get the translation file."
 msgstr "Виберіть команду, модуль, гілку і домен, щоб отримати файл перекладу."
 
 #: src/gtr-dl-teams.ui:106
-#| msgid "Open file for translation"
 msgid "Reserve for translation"
 msgstr "Зарезервовано для перекладу"
 
@@ -603,33 +609,27 @@ msgstr "Коментар"
 
 #: src/gtr-header-dialog.ui:454
 msgid "DL Team:"
-msgstr ""
-"Команда DL:"
+msgstr "Команда DL:"
 
 #: src/gtr-header-dialog.ui:467
-#| msgid "Module"
 msgid "DL Module:"
 msgstr "Модуль DL:"
 
 #: src/gtr-header-dialog.ui:481
 msgid "DL Branch:"
-msgstr ""
-"Гілка DL:"
+msgstr "Гілка DL:"
 
 #: src/gtr-header-dialog.ui:495
 msgid "DL Domain:"
-msgstr ""
-"Домен DL:"
+msgstr "Домен DL:"
 
 #: src/gtr-header-dialog.ui:509
 msgid "DL State:"
-msgstr ""
-"Стан DL:"
+msgstr "Стан DL:"
 
 #: src/gtr-header-dialog.ui:587
 msgid "Damned Lies Info"
-msgstr ""
-"Відомості Damned Lies"
+msgstr "Відомості Damned Lies"
 
 #: src/gtr-io-error-info-bar.c:146 src/gtr-jump-dialog.c:88
 #: src/gtr-profile-dialog.c:171 src/gtr-profile-dialog.c:176
@@ -775,7 +775,6 @@ msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Зберегти як (<Ctrl><Shift>s)"
 
 #: src/gtr-notebook.ui:665
-#| msgid "Open a new file (<Ctrl>o)"
 msgid "Upload file (<Ctrl>b)"
 msgstr "Вивантажити файл (<Ctrl>b)"
 
@@ -972,16 +971,15 @@ msgstr "Електронна пошта _команди"
 
 #: src/gtr-profile-dialog.ui:174
 msgid "_DL auth token"
-msgstr ""
-"_Жетон розпізнавання DL"
+msgstr "_Жетон розпізнавання DL"
 
 #: src/gtr-profile-dialog.ui:175
 msgid ""
 "GNOME Damned Lies integration token, go to your profile in https://l10n."
 "gnome.org/ to get it"
 msgstr ""
-"Жетон інтеграції до GNOME Damned Lies. Для отримання перейдіть до сторінки вашого профілю на https://l10n."
-"gnome.org/"
+"Жетон інтеграції до GNOME Damned Lies. Для отримання перейдіть до сторінки "
+"вашого профілю на https://l10n.gnome.org/"
 
 #: src/gtr-profile-dialog.ui:237
 msgid "Language Settings"
@@ -1370,6 +1368,12 @@ msgid ""
 "translation memory."
 msgstr ""
 "Максимальна різниця в довжині між рядком та прикладом у пам'яті перекладів."
+
+#~ msgid "An error occurred while uploading the file: %s"
+#~ msgstr "Під час вивантаження файла сталася помилка: %s"
+
+#~ msgid "An error occurred while reserving this module: %s"
+#~ msgstr "Під час резервування цього модуля сталася помилка: %s"
 
 #~ msgid "File saved."
 #~ msgstr "Файл збережено."
