@@ -430,6 +430,7 @@ gtr_upload_file_dialog (GtkAction * action, GtrWindow * window)
 
   /* Get the associated message */
   msg = soup_form_request_new_from_multipart (upload_endpoint, mpart);
+  soup_message_set_flags (msg, SOUP_MESSAGE_NO_REDIRECT);
 
   /* Append the authentication header*/
   soup_message_headers_append (msg->request_headers, "Authentication", auth);
@@ -452,12 +453,18 @@ gtr_upload_file_dialog (GtkAction * action, GtrWindow * window)
           return;
         }
 
-      dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                       flags,
-                                       GTK_MESSAGE_WARNING,
-                                       GTK_BUTTONS_CLOSE,
-                                       _("An error occurred while uploading the file: %s"),
-                                       soup_status_get_phrase (msg->status_code));
+      dialog = gtk_message_dialog_new_with_markup (
+        GTK_WINDOW (window),
+        flags,
+        GTK_MESSAGE_WARNING,
+        GTK_BUTTONS_CLOSE,
+        _(
+          "An error occurred while uploading the file: %s\n"
+          "Maybe you've not configured your <i>l10n.gnome.org</i> "
+          "<b>token</b> correctly in your profile or you don't have "
+          "permissions to upload this module."
+        ),
+        soup_status_get_phrase (msg->status_code));
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
       return;

@@ -630,20 +630,27 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
                                   "/reserve", NULL);
 
   msg = soup_message_new ("POST", reserve_endpoint);
+  soup_message_set_flags (msg, SOUP_MESSAGE_NO_REDIRECT);
   soup_message_headers_append (msg->request_headers, "Authentication", auth);
   session = soup_session_new ();
   soup_session_send_message (session, msg);
 
-  if (!SOUP_STATUS_IS_SUCCESSFUL(msg->status_code))
+  if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
   {
-    dialog = gtk_message_dialog_new(GTK_WINDOW(priv->main_window),
-                                    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                    GTK_MESSAGE_WARNING,
-                                    GTK_BUTTONS_CLOSE,
-                                    _("An error occurred while reserving this module: %s"),
-                                    soup_status_get_phrase(msg->status_code));
-    gtk_dialog_run(GTK_DIALOG(dialog));
-    gtk_widget_destroy(dialog);
+    dialog = gtk_message_dialog_new_with_markup (
+      GTK_WINDOW (priv->main_window),
+      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+      GTK_MESSAGE_WARNING,
+      GTK_BUTTONS_CLOSE,
+      _(
+        "An error occurred while reserving this module: %s\n"
+        "Maybe you've not configured your <i>l10n.gnome.org</i> "
+        "<b>token</b> correctly in your profile or you don't have "
+        "permissions to reserve this module."
+      ),
+      soup_status_get_phrase (msg->status_code));
+    gtk_dialog_run (GTK_DIALOG (dialog));
+    gtk_widget_destroy (dialog);
     return FALSE;
   }
 
