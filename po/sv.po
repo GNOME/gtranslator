@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-08 06:55+0000\n"
-"PO-Revision-Date: 2021-03-08 21:00+0100\n"
+"POT-Creation-Date: 2021-03-15 08:20+0000\n"
+"PO-Revision-Date: 2021-03-16 01:30+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -288,22 +288,29 @@ msgstr "Fortsätt utan att spara"
 msgid "Open file for translation"
 msgstr "Öppna fil för översättning"
 
-#: src/gtr-actions-file.c:448
+#: src/gtr-actions-file.c:449
 msgid "This file has already been uploaded"
 msgstr "Denna fil har redan skickats"
 
-#: src/gtr-actions-file.c:459
+#: src/gtr-actions-file.c:462
 #, c-format
-msgid "An error occurred while uploading the file: %s"
-msgstr "Ett fel uppstod vid sändning av filen: %s"
+msgid ""
+"An error occurred while uploading the file: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to upload this "
+"module."
+msgstr ""
+"Ett fel uppstod vid sändning av fil: %s\n"
+"Du har kanske inte konfigurerat din <b>token</b> för <i>l10n.gnome.org</i> "
+"korrekt i din profil, eller så har du inte rättighet att skicka denna modul."
 
-#: src/gtr-actions-file.c:470
+#: src/gtr-actions-file.c:477
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been uploaded!"
 msgstr "Filen ”%s.%s.%s.%s” har skickats!"
 
 # src/menus.c:281
-#: src/gtr-actions-file.c:500
+#: src/gtr-actions-file.c:507
 msgid "Save file as…"
 msgstr "Spara fil som…"
 
@@ -473,21 +480,29 @@ msgstr "Det aktuella tillståndet är: %s"
 msgid "The file '%s' has been saved in %s"
 msgstr "Filen ”%s” har sparats i %s"
 
-#: src/gtr-dl-teams.c:643
+#: src/gtr-dl-teams.c:646
 #, c-format
-msgid "An error occurred while reserving this module: %s"
-msgstr "Ett fel uppstod då modulen skulle reserveras: %s"
+msgid ""
+"An error occurred while reserving this module: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to reserve this "
+"module."
+msgstr ""
+"Ett fel uppstod vid reservering av fil: %s\n"
+"Du har kanske inte konfigurerat din <b>token</b> för <i>l10n.gnome.org</i> "
+"korrekt i din profil, eller så har du inte rättighet att reservera denna "
+"modul."
 
-#: src/gtr-dl-teams.c:655
+#: src/gtr-dl-teams.c:662
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "Lyckades reservera filen ”%s.%s.%s.%s”"
 
-#: src/gtr-dl-teams.c:781
+#: src/gtr-dl-teams.c:788
 msgid "Translation Team"
 msgstr "Översättningsgrupp"
 
-#: src/gtr-dl-teams.c:788
+#: src/gtr-dl-teams.c:795
 msgid "Module"
 msgstr "Modul"
 
@@ -1446,3 +1461,9 @@ msgid ""
 msgstr ""
 "Maximal skillnad i längd mellan meddelanden visade som träffar av "
 "översättningsminnet."
+
+#~ msgid "An error occurred while uploading the file: %s"
+#~ msgstr "Ett fel uppstod vid sändning av filen: %s"
+
+#~ msgid "An error occurred while reserving this module: %s"
+#~ msgstr "Ett fel uppstod då modulen skulle reserveras: %s"
