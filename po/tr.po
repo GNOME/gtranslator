@@ -10,24 +10,24 @@
 # RIDVAN CAN <ridvan@geleceklinux.org>, 2003.
 # Barış ÇİÇEK <baris@teamforce.name.tr>, 2003.
 # Atilla ÖNTAŞ <atilla_ontas@mandriva.org>, 2009, 2010.
-# Muhammet Kara <muhammetk@gmail.com>, 2011, 2012, 2013, 2016, 2017.
 # Sabri Ünal <libreajans@gmail.com>, 2019, 2020.
 # Emin Tufan Çetin <etcetin@gmail.com>, 2018, 2019, 2020.
+# Muhammet Kara <muhammetk@gmail.com>, 2011-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-09-12 09:00+0000\n"
-"PO-Revision-Date: 2020-09-28 01:21+0300\n"
-"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
-"Language-Team: Türkçe <gnome-turk@gnome.org>\n"
+"POT-Creation-Date: 2021-03-15 08:20+0000\n"
+"PO-Revision-Date: 2021-03-17 19:10+0300\n"
+"Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
+"Language-Team: Turkish <gnometurk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.2.3\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Gtranslator 3.38.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -67,7 +67,7 @@ msgstr ""
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:645
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:659
 #: src/gtr-notebook.ui:308 src/gtr-window.c:229 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Çeviri Düzenleyici"
@@ -207,7 +207,7 @@ msgstr ""
 msgid "Paths:"
 msgstr "Yollar:"
 
-#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
+#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
 #: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:651
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
@@ -257,7 +257,7 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "Çeviri Düzenleyici Web Sayfası"
 
-#: src/gtr-actions-file.c:184
+#: src/gtr-actions-file.c:218
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -266,29 +266,51 @@ msgstr ""
 "Değişiklikleri şu dosyaya kaydetmek istiyor musunuz: <span weight=\"bold\" "
 "size=\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:190
+#: src/gtr-actions-file.c:224
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr ""
 "Kaydetmezseniz, yaptığınız tüm kaydedilmemiş değişiklikler kalıcı olarak "
 "yitirilecek."
 
-#: src/gtr-actions-file.c:193
+#: src/gtr-actions-file.c:227
 msgid "Save and open"
 msgstr "Kaydet ve aç"
 
-#: src/gtr-actions-file.c:194
+#: src/gtr-actions-file.c:228
 msgid "Cancel"
 msgstr "İptal"
 
-#: src/gtr-actions-file.c:195
+#: src/gtr-actions-file.c:229
 msgid "Continue without saving"
 msgstr "Kaydetmeden devam et"
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:261
 msgid "Open file for translation"
 msgstr "Çevrilecek dosyayı aç"
 
-#: src/gtr-actions-file.c:330
+#: src/gtr-actions-file.c:449
+msgid "This file has already been uploaded"
+msgstr "Dosya zaten karşıya yüklenmiş"
+
+#: src/gtr-actions-file.c:462
+#, c-format
+msgid ""
+"An error occurred while uploading the file: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to upload this "
+"module."
+msgstr ""
+"Dosya karşıya yüklenirken bir hata oluştu: %s\n"
+"Profilinizdeki <i>l10n.gnome.org</i> <b>jetonunu</b> doğru şekilde "
+"yapılandırmamış olabilirsiniz ya da bu modüle dosya yüklemek için izniniz "
+"olmayabilir."
+
+#: src/gtr-actions-file.c:477
+#, c-format
+msgid "The file '%s.%s.%s.%s' has been uploaded!"
+msgstr "'%s.%s.%s.%s' dosyası karşıya yüklendi!"
+
+#: src/gtr-actions-file.c:507
 msgid "Save file as…"
 msgstr "Dosyayı farklı kaydet…"
 
@@ -353,7 +375,7 @@ msgstr "_Kaydetmeden Kapat"
 
 #: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:89
 #: src/gtr-file-dialogs.c:47 src/gtr-jump-dialog.c:90
-#: src/gtr-preferences-dialog.c:446 src/gtr-profile-dialog.c:71
+#: src/gtr-preferences-dialog.c:446 src/gtr-profile-dialog.c:72
 #: src/translation-memory/gtr-translation-memory-dialog.c:81
 msgid "_Cancel"
 msgstr "_İptal"
@@ -432,51 +454,85 @@ msgstr "Bağlam:"
 msgid "Format:"
 msgstr "Biçim:"
 
-#: src/gtr-dl-teams.c:617
+#: src/gtr-dl-teams.c:417
+msgid "No module state found."
+msgstr "Modül durumu bulunamadı."
+
+#: src/gtr-dl-teams.c:434
+#, c-format
+msgid "The current state is: %s"
+msgstr "Güncel durum: %s"
+
+#: src/gtr-dl-teams.c:586
+#, c-format
+msgid "The file '%s' has been saved in %s"
+msgstr ""
+
+#: src/gtr-dl-teams.c:646
+#, c-format
+msgid ""
+"An error occurred while reserving this module: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to reserve this "
+"module."
+msgstr ""
+
+#: src/gtr-dl-teams.c:662
+#, c-format
+msgid "The file '%s.%s.%s.%s' has been successfully reserved"
+msgstr ""
+
+#: src/gtr-dl-teams.c:788
 msgid "Translation Team"
 msgstr "Çeviri Takımı"
 
-#: src/gtr-dl-teams.c:624
+#: src/gtr-dl-teams.c:795
 msgid "Module"
 msgstr "Modül"
 
-#: src/gtr-dl-teams.ui:60
+#: src/gtr-dl-teams.ui:85
 msgid "Select team, module, branch and domain to get the translation file."
 msgstr "Çeviriyi indirmek için, takım, modül, dal ve alan adı seçin."
 
-#: src/gtr-dl-teams.ui:81
+#: src/gtr-dl-teams.ui:106
+#, fuzzy
+#| msgid "Open file for translation"
+msgid "Reserve for translation"
+msgstr "Çevrilecek dosyayı aç"
+
+#: src/gtr-dl-teams.ui:117
 msgid "Load file"
 msgstr "Dosya yükle"
 
-#: src/gtr-dl-teams.ui:98
+#: src/gtr-dl-teams.ui:136
 msgid "Load from Damned Lies"
 msgstr "Damned Lies sisteminden yükle"
 
-#: src/gtr-dl-teams.ui:105 src/gtr-projects.ui:58
+#: src/gtr-dl-teams.ui:143 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Aç…"
 
-#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
+#: src/gtr-dl-teams.ui:166 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
 msgid "Main Menu"
 msgstr "Ana Menü"
 
-#: src/gtr-dl-teams.ui:156 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+#: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
 msgid "New window"
 msgstr "Yeni pencere"
 
-#: src/gtr-dl-teams.ui:170 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+#: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
 msgid "Preferences"
 msgstr "Tercihler"
 
-#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:235 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
 msgid "Keyboard Shortcuts"
 msgstr "Klavye Kısayolları"
 
-#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
+#: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
 msgid "About"
 msgstr "Hakkında"
 
-#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
+#: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
 msgid "Quit"
 msgstr "Çık"
 
@@ -496,7 +552,7 @@ msgstr "Gettext çeviri şablonu"
 msgid "All files"
 msgstr "Tüm dosyalar"
 
-#: src/gtr-header-dialog.c:280
+#: src/gtr-header-dialog.c:325
 msgid "Edit Header"
 msgstr "Başlığı Düzenle"
 
@@ -560,8 +616,33 @@ msgstr "Proje"
 msgid "Comment"
 msgstr "Açıklama"
 
-#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
-#: src/gtr-profile-dialog.c:170
+#: src/gtr-header-dialog.ui:454
+msgid "DL Team:"
+msgstr "DL Ekibi:"
+
+#: src/gtr-header-dialog.ui:467
+#| msgid "Module"
+msgid "DL Module:"
+msgstr "DL Modülü:"
+
+#: src/gtr-header-dialog.ui:481
+msgid "DL Branch:"
+msgstr "DL Dalı:"
+
+#: src/gtr-header-dialog.ui:495
+msgid "DL Domain:"
+msgstr "DL Etki Alanı:"
+
+#: src/gtr-header-dialog.ui:509
+msgid "DL State:"
+msgstr "DL Durumu:"
+
+#: src/gtr-header-dialog.ui:587
+msgid "Damned Lies Info"
+msgstr "Damned Lies Bilgisi"
+
+#: src/gtr-io-error-info-bar.c:146 src/gtr-jump-dialog.c:88
+#: src/gtr-profile-dialog.c:171 src/gtr-profile-dialog.c:176
 #: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "_OK"
 msgstr "_Tamam"
@@ -703,27 +784,32 @@ msgstr "Şu anki dosyayı kaydet (<Ctrl>s)"
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Farklı kaydet (<Ctrl><Shift>s)"
 
-#: src/gtr-po.c:440
+#: src/gtr-notebook.ui:665
+#| msgid "Open a new file (<Ctrl>o)"
+msgid "Upload file (<Ctrl>b)"
+msgstr "Dosyayı karşıya yükle (<Ctrl>b)"
+
+#: src/gtr-po.c:487
 #, c-format
 msgid "The file is empty"
 msgstr "Dosya boş"
 
-#: src/gtr-po.c:449
+#: src/gtr-po.c:496
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "“%s” dosyası açılamıyor: %s"
 
-#: src/gtr-po.c:530
+#: src/gtr-po.c:577
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "“%s” karakter kümesinden UTF-8’e dönüşüm yapılamadı"
 
-#: src/gtr-po.c:547 src/gtr-po.c:567
+#: src/gtr-po.c:594 src/gtr-po.c:614
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Kodlama dönüşümü için geçici dosya kaydedilemedi"
 
-#: src/gtr-po.c:604
+#: src/gtr-po.c:651
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -734,17 +820,17 @@ msgstr ""
 "Çeviri Düzenleyici ile açmadan önce msgconv ya da iconv komut satırı "
 "araçlarını kullanın"
 
-#: src/gtr-po.c:672
+#: src/gtr-po.c:719
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext boş bir ileti alan listesi döndürdü."
 
-#: src/gtr-po.c:717
+#: src/gtr-po.c:764
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Çözümleyiciden hiçbir ileti alınamadı."
 
-#: src/gtr-po.c:768
+#: src/gtr-po.c:815
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -755,17 +841,17 @@ msgstr ""
 "Pot dosyaları derleme işlemi sırasında oluşturulur.\n"
 "Dosyanız, “%s.po” gibi adlandırılmalıdır."
 
-#: src/gtr-po.c:781
+#: src/gtr-po.c:828
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "%s dosyası salt okunur, ve üzerine yazılamaz"
 
-#: src/gtr-po.c:800
+#: src/gtr-po.c:847
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "PO dosyasında hata var: %s"
 
-#: src/gtr-po.c:812
+#: src/gtr-po.c:859
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "PO dosyası yazımında hata oluştu: %s"
@@ -866,7 +952,7 @@ msgstr "Profili Düzenle"
 msgid "Profiles"
 msgstr "Profiller"
 
-#: src/gtr-profile-dialog.c:73
+#: src/gtr-profile-dialog.c:74
 msgid "Translation Editor Profile"
 msgstr "Çeviri Düzenleyici Profili"
 
@@ -894,7 +980,17 @@ msgstr "_E-posta"
 msgid "_Team email"
 msgstr "_Ekip e-postası"
 
-#: src/gtr-profile-dialog.ui:209
+#: src/gtr-profile-dialog.ui:174
+msgid "_DL auth token"
+msgstr ""
+
+#: src/gtr-profile-dialog.ui:175
+msgid ""
+"GNOME Damned Lies integration token, go to your profile in https://l10n."
+"gnome.org/ to get it"
+msgstr ""
+
+#: src/gtr-profile-dialog.ui:237
 msgid "Language Settings"
 msgstr "Dil Ayarları"
 
@@ -963,40 +1059,40 @@ msgstr "Çevrilmiş-metin"
 msgid "Close document"
 msgstr "Belgeyi kapat"
 
-#: src/gtr-tab.c:335
+#: src/gtr-tab.c:341
 msgid "There is an error in the message:"
 msgstr "İletide hata var:"
 
-#: src/gtr-tab.c:549 src/gtr-tab.c:675
+#: src/gtr-tab.c:555 src/gtr-tab.c:681
 msgid "fuzzy"
 msgstr "bulanık"
 
-#: src/gtr-tab.c:705
+#: src/gtr-tab.c:711
 #, c-format
 msgid "Plural %d"
 msgstr "Çoğul %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1264
+#: src/gtr-tab.c:1306
 msgid "Path:"
 msgstr "Yol:"
 
-#: src/gtr-tab.c:1914
+#: src/gtr-tab.c:1973
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Çevrilen: %%%0.2f"
 
-#: src/gtr-tab.c:1915
+#: src/gtr-tab.c:1974
 #, c-format
 msgid "Translated: %d"
 msgstr "Çevrilen: %d"
 
-#: src/gtr-tab.c:1916
+#: src/gtr-tab.c:1975
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Çevrilmemiş: %d"
 
-#: src/gtr-tab.c:1917
+#: src/gtr-tab.c:1976
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Bulanık: %d"
