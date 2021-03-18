@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-08 06:55+0000\n"
-"PO-Revision-Date: 2021-03-08 22:39+0200\n"
+"POT-Creation-Date: 2021-03-15 08:20+0000\n"
+"PO-Revision-Date: 2021-03-18 22:09+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -276,22 +276,28 @@ msgstr "Tęsti neįrašant"
 msgid "Open file for translation"
 msgstr "Atverti failą vertimui"
 
-#: src/gtr-actions-file.c:448
+#: src/gtr-actions-file.c:449
 msgid "This file has already been uploaded"
 msgstr "Šis failas jau buvo nusiųstas"
 
-#: src/gtr-actions-file.c:459
+#: src/gtr-actions-file.c:462
 #, c-format
-msgid "An error occurred while uploading the file: %s"
-msgstr "Kilo klaida siunčiant failą: %s"
+msgid ""
+"An error occurred while uploading the file: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to upload this "
+"module."
+msgstr ""
+"Kilo klaida įkeliant failą: %s\n"
+"Galbūt teisingai nesukonfigūravote savo <i>l10n.gnome.org</i> <b>leksemos</"
+"b> savo profilyje arba neturite leidimų įkelti šį modulį."
 
-#: src/gtr-actions-file.c:470
+#: src/gtr-actions-file.c:477
 #, c-format
-#| msgid "The file '%s' has been saved in %s"
 msgid "The file '%s.%s.%s.%s' has been uploaded!"
 msgstr "Failas „%s.%s.%s.%s“ buvo nusiųstas!"
 
-#: src/gtr-actions-file.c:500
+#: src/gtr-actions-file.c:507
 msgid "Save file as…"
 msgstr "Įrašyti failą kaip…"
 
@@ -456,22 +462,28 @@ msgstr "Dabartinė būsena yra: %s"
 msgid "The file '%s' has been saved in %s"
 msgstr "Failas „%s“ buvo įrašytas %s"
 
-#: src/gtr-dl-teams.c:643
+#: src/gtr-dl-teams.c:646
 #, c-format
-msgid "An error occurred while reserving this module: %s"
-msgstr "Kilo klaida rezervuojant šį modulį: %s"
+msgid ""
+"An error occurred while reserving this module: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to reserve this "
+"module."
+msgstr ""
+"Kilo klaida rezervuojant šį modulį: %s\n"
+"Galbūt teisingai nesukonfigūravote savo <i>l10n.gnome.org</i> <b>leksemos</"
+"b> savo profilyje arba neturite leidimų rezervuoti šį modulį."
 
-#: src/gtr-dl-teams.c:655
+#: src/gtr-dl-teams.c:662
 #, c-format
-#| msgid "The file '%s' has been saved in %s"
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "Failas „%s.%s.%s.%s“ buvo sėkmingai rezervuotas"
 
-#: src/gtr-dl-teams.c:781
+#: src/gtr-dl-teams.c:788
 msgid "Translation Team"
 msgstr "Vertėjų komanda"
 
-#: src/gtr-dl-teams.c:788
+#: src/gtr-dl-teams.c:795
 msgid "Module"
 msgstr "Modulis"
 
@@ -480,7 +492,6 @@ msgid "Select team, module, branch and domain to get the translation file."
 msgstr "Pasirinkite komandą, modulį, šaką ir domeną vertimų failui gauti."
 
 #: src/gtr-dl-teams.ui:106
-#| msgid "Open file for translation"
 msgid "Reserve for translation"
 msgstr "Rezervuoti vertimui"
 
@@ -605,7 +616,6 @@ msgid "DL Team:"
 msgstr "DL komanda:"
 
 #: src/gtr-header-dialog.ui:467
-#| msgid "Module"
 msgid "DL Module:"
 msgstr "DL modulis"
 
@@ -769,7 +779,6 @@ msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Įrašyti kaip (<Vald><Lyg2>s)"
 
 #: src/gtr-notebook.ui:665
-#| msgid "Open a new file (<Ctrl>o)"
 msgid "Upload file (<Ctrl>b)"
 msgstr "Nusiųsti failą (<Vald>b)"
 
@@ -1362,6 +1371,12 @@ msgid ""
 msgstr ""
 "Didžiausias ilgio skirtumas tarp užrašų, rodomų kaip sutapimai su vertimų "
 "atmintimi."
+
+#~ msgid "An error occurred while uploading the file: %s"
+#~ msgstr "Kilo klaida siunčiant failą: %s"
+
+#~ msgid "An error occurred while reserving this module: %s"
+#~ msgstr "Kilo klaida rezervuojant šį modulį: %s"
 
 #~ msgid "Gtranslator PO File Editor"
 #~ msgstr "Gtranslator PO failų redaktorius"
