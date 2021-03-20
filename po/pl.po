@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-08 06:55+0000\n"
-"PO-Revision-Date: 2021-03-14 14:22+0100\n"
+"POT-Creation-Date: 2021-03-19 10:13+0000\n"
+"PO-Revision-Date: 2021-03-20 14:25+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -294,21 +294,28 @@ msgstr "Zamknij bez zapisywania"
 msgid "Open file for translation"
 msgstr "Otwiera plik do tłumaczenia"
 
-#: src/gtr-actions-file.c:448
+#: src/gtr-actions-file.c:449
 msgid "This file has already been uploaded"
 msgstr "Ten plik został już wysłany"
 
-#: src/gtr-actions-file.c:459
+#: src/gtr-actions-file.c:462
 #, c-format
-msgid "An error occurred while uploading the file: %s"
-msgstr "Wystąpił błąd podczas wysyłania pliku: %s"
+msgid ""
+"An error occurred while uploading the file: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to upload this "
+"module."
+msgstr ""
+"Wystąpił błąd podczas wysyłania pliku: %s\n"
+"Być może nie skonfigurowano poprawnie <b>tokenu</b> serwisu <i>l10n.gnome."
+"org</i> w profilu lub brak uprawnień do wysyłania tego modułu."
 
-#: src/gtr-actions-file.c:470
+#: src/gtr-actions-file.c:477
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been uploaded!"
 msgstr "Wysłano plik „%s.%s.%s.%s”"
 
-#: src/gtr-actions-file.c:500
+#: src/gtr-actions-file.c:507
 msgid "Save file as…"
 msgstr "Zapis pliku jako…"
 
@@ -473,21 +480,28 @@ msgstr "Obecny stan: %s"
 msgid "The file '%s' has been saved in %s"
 msgstr "Plik „%s” został zapisany w %s"
 
-#: src/gtr-dl-teams.c:643
+#: src/gtr-dl-teams.c:646
 #, c-format
-msgid "An error occurred while reserving this module: %s"
-msgstr "Wystąpił błąd podczas rezerwowania tego modułu: %s"
+msgid ""
+"An error occurred while reserving this module: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to reserve this "
+"module."
+msgstr ""
+"Wystąpił błąd podczas rezerwowania tego modułu: %s\n"
+"Być może nie skonfigurowano poprawnie <b>tokenu</b> serwisu <i>l10n.gnome."
+"org</i> w profilu lub brak uprawnień do rezerwowania tego modułu."
 
-#: src/gtr-dl-teams.c:655
+#: src/gtr-dl-teams.c:662
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "Pomyślnie zarezerwowano plik „%s.%s.%s.%s”"
 
-#: src/gtr-dl-teams.c:781
+#: src/gtr-dl-teams.c:788
 msgid "Translation Team"
 msgstr "Zespół tłumaczenia"
 
-#: src/gtr-dl-teams.c:788
+#: src/gtr-dl-teams.c:795
 msgid "Module"
 msgstr "Moduł"
 
