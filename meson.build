@@ -1,6 +1,6 @@
 project(
   'gtranslator', 'c',
-  version: '3.38.0',
+  version: '40.0',
   license: 'GPL3+',
   meson_version: '>= 0.50.0',
 )
@@ -13,7 +13,6 @@ gtr_version = meson.project_version()
 version_array = gtr_version.split('.')
 gtr_major_version = version_array[0].to_int()
 gtr_minor_version = version_array[1].to_int()
-gtr_micro_version = version_array[2].to_int()
 
 #################
 # Default paths #
@@ -34,7 +33,7 @@ gtr_pkgdatadir = join_paths(gtr_datadir, meson.project_name())
 gtr_namespace = 'org.gnome.Gtranslator'
 
 gtr_buildtype = get_option('buildtype')
-gtr_debug = gtr_minor_version.is_odd() or gtr_buildtype.contains('debug')
+gtr_debug = gtr_buildtype.contains('debug')
 
 if gtr_debug
   profile = 'Devel'
