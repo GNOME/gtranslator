@@ -1,22 +1,22 @@
 # Dutch translation of granslator
 # Vincent van Adrighem <adrighem@gnome.org>, 2004.
 # Tino Meinen <a.t.meinen@chello.nl>, 2005.
-# Nathan Follens <nthn@unseen.is>, 2019-2020.
+# Nathan Follens <nthn@unseen.is>, 2019-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator cvs\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2020-02-26 13:41+0000\n"
-"PO-Revision-Date: 2020-02-26 14:58+0100\n"
+"POT-Creation-Date: 2021-03-23 10:50+0000\n"
+"PO-Revision-Date: 2021-04-02 12:57+0200\n"
 "Last-Translator: Nathan Follens <nthn@unseen.is>\n"
-"Language-Team: Dutch <vertaling@nl.linux.org>\n"
+"Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -53,12 +53,12 @@ msgstr ""
 "zoals verschillende talen, invoegen van tags, integratie met subversion en "
 "een broncodeviewer."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:83
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:131
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:596
-#: src/gtr-notebook.ui:308 src/gtr-window.c:318 src/gtr-window.ui:25
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:659
+#: src/gtr-notebook.ui:308 src/gtr-window.c:229 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Vertalingsbewerker"
 
@@ -163,28 +163,28 @@ msgid "If true, check the spelling of translated messages."
 msgstr ""
 "Indien ingeschakeld wordt de spelling van vertaalde berichten gecontroleerd."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:93
+#: data/org.gnome.Gtranslator.gschema.xml.in:96
 msgid "Side panel switcher style"
 msgstr "Zijpaneelwisselknopstijl"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:94
+#: data/org.gnome.Gtranslator.gschema.xml.in:97
 msgid "Style for switchers in the side panel."
 msgstr "Stijl voor wisselknoppen in het zijpaneel."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:100
+#: data/org.gnome.Gtranslator.gschema.xml.in:103
 msgid "Color scheme"
 msgstr "Kleurenschema"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:101
+#: data/org.gnome.Gtranslator.gschema.xml.in:104
 msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
 msgstr ""
 "Naam van een gtksourceview-kleurenschema gebruikt voor syntax-markering."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:107
+#: data/org.gnome.Gtranslator.gschema.xml.in:110
 msgid "Message list sort order"
 msgstr "Sorteervolgorde voor berichtenlijst"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:108
+#: data/org.gnome.Gtranslator.gschema.xml.in:111
 msgid ""
 "Sort order to use in the message list. Possible values are “status”, “id”, "
 "“original-text” and “translated-text”."
@@ -193,11 +193,11 @@ msgstr ""
 "‘status’, ‘id’, ‘original-text’ (oorspronkelijke tekst) en ‘translated-"
 "text’ (vertaalde tekst)."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:143
+#: data/org.gnome.Gtranslator.gschema.xml.in:146
 msgid "Active plugins"
 msgstr "Actieve plug-ins"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:144
+#: data/org.gnome.Gtranslator.gschema.xml.in:147
 msgid ""
 "List of active plugins. It contains the “Location” of the active plugins. "
 "See the .gtranslator-plugin file for obtaining the “Location” of a given "
@@ -211,9 +211,8 @@ msgstr ""
 msgid "Paths:"
 msgstr "Paden:"
 
-#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
-#: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:622
-#: src/gtr-search-dialog.c:393
+#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
+#: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:651
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
 msgstr "_Sluiten"
@@ -261,40 +260,62 @@ msgstr ""
 msgid "Translation Editor Web Site"
 msgstr "_Website van Vertalingsbewerker"
 
-#: src/gtr-actions-file.c:204 src/gtr-application.c:401
-msgid "Do you want to save the changes?"
-msgstr "Wilt u de wijzigingen opslaan?"
+#: src/gtr-actions-file.c:218
+#, c-format
+msgid ""
+"Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
+"\">%s</span>?"
+msgstr ""
+"Wilt u de wijzigingen opslaan in dit bestand: <span weight=\"bold\" size="
+"\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:205 src/gtr-application.c:402
-msgid "Warning"
-msgstr "Waarschuwing"
+#: src/gtr-actions-file.c:224
+msgid "If you don't save, all your unsaved changes will be permanently lost."
+msgstr ""
+"Als u niet opslaat, zullen al uw niet-opgeslagen wijzigingen definitief "
+"verloren gaan."
 
-#: src/gtr-actions-file.c:223
+#: src/gtr-actions-file.c:227
+msgid "Save and open"
+msgstr "Opslaan en openen"
+
+#: src/gtr-actions-file.c:228
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: src/gtr-actions-file.c:229
+msgid "Continue without saving"
+msgstr "Doorgaan zonder opslaan"
+
+#: src/gtr-actions-file.c:261
 msgid "Open file for translation"
 msgstr "Bestand openen voor vertalen"
 
-#: src/gtr-actions-file.c:295 src/gtr-actions-file.c:412
-msgid "File saved."
-msgstr "Bestand opgeslagen."
+#: src/gtr-actions-file.c:449
+msgid "This file has already been uploaded"
+msgstr "Dit bestand is al geüpload"
 
-#: src/gtr-actions-file.c:343
+#: src/gtr-actions-file.c:462
+#, c-format
+msgid ""
+"An error occurred while uploading the file: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to upload this "
+"module."
+msgstr ""
+"Er is een fout opgetreden bij het uploaden van het bestand: %s\n"
+"Misschien heeft u uw <i>l10n.gnome.org</i>-<b>token</b> nog niet correct "
+"geconfigureerd in uw profiel, of beschikt u niet over de nodige rechten om "
+"deze module te uploaden."
+
+#: src/gtr-actions-file.c:477
+#, c-format
+msgid "The file '%s.%s.%s.%s' has been uploaded!"
+msgstr "Het bestand ‘%s.%s.%s.%s’ is geüpload!"
+
+#: src/gtr-actions-file.c:507
 msgid "Save file as…"
 msgstr "Bestand opslaan als…"
-
-#: src/gtr-actions-file.c:804
-msgid "Files saved."
-msgstr "Bestanden opgeslagen."
-
-#: src/gtr-actions-search.c:163
-#, c-format
-msgid "Found and replaced one occurrence"
-msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "Eén zoekterm gevonden en vervangen"
-msgstr[1] "%d zoektermen gevonden en vervangen"
-
-#: src/gtr-actions-search.c:173
-msgid "Phrase not found"
-msgstr "Zoekterm niet gevonden"
 
 #: src/gtr-assistant.c:128
 #, c-format
@@ -339,8 +360,7 @@ msgstr "E-mailadres van vertaler"
 msgid "Team email"
 msgstr "E-mailadres van team"
 
-#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:547
-#: src/gtr-window.c:556
+#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:575
 msgid "Profile"
 msgstr "Profiel"
 
@@ -357,14 +377,14 @@ msgid "Close _without Saving"
 msgstr "Sluiten _zonder opslaan"
 
 #: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:89
-#: src/gtr-file-dialogs.c:45 src/gtr-jump-dialog.c:90
-#: src/gtr-preferences-dialog.c:418 src/gtr-profile-dialog.c:71
+#: src/gtr-file-dialogs.c:47 src/gtr-jump-dialog.c:90
+#: src/gtr-preferences-dialog.c:446 src/gtr-profile-dialog.c:72
 #: src/translation-memory/gtr-translation-memory-dialog.c:81
 msgid "_Cancel"
 msgstr "_Annuleren"
 
 #: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:87
-#: src/gtr-file-dialogs.c:47
+#: src/gtr-file-dialogs.c:46
 msgid "_Save"
 msgstr "Op_slaan"
 
@@ -440,72 +460,108 @@ msgstr "Context:"
 msgid "Format:"
 msgstr "Formaat:"
 
-#: src/gtr-dl-teams.c:617
+#: src/gtr-dl-teams.c:417
+msgid "No module state found."
+msgstr "Geen modulestatus gevonden."
+
+#: src/gtr-dl-teams.c:434
+#, c-format
+msgid "The current state is: %s"
+msgstr "De huidige status is: %s"
+
+#: src/gtr-dl-teams.c:586
+#, c-format
+msgid "The file '%s' has been saved in %s"
+msgstr "Het bestand ‘%s’ is opgeslagen in %s"
+
+#: src/gtr-dl-teams.c:646
+#, c-format
+msgid ""
+"An error occurred while reserving this module: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to reserve this "
+"module."
+msgstr ""
+"Er is een fout opgetreden bij het reserveren van deze module: %s\n"
+"Misschien heeft u uw <i>l10n.gnome.org</i>-<b>token</b> nog niet correct "
+"geconfigureerd in uw profiel, of beschikt u niet over de nodige rechten om "
+"deze module te reserveren."
+
+#: src/gtr-dl-teams.c:662
+#, c-format
+msgid "The file '%s.%s.%s.%s' has been successfully reserved"
+msgstr "Het bestand ‘%s.%s.%s.%s’ is gereserveerd"
+
+#: src/gtr-dl-teams.c:788
 msgid "Translation Team"
 msgstr "Vertaalteam"
 
-#: src/gtr-dl-teams.c:624
+#: src/gtr-dl-teams.c:795
 msgid "Module"
 msgstr "Module"
 
-#: src/gtr-dl-teams.ui:60
+#: src/gtr-dl-teams.ui:85
 msgid "Select team, module, branch and domain to get the translation file."
 msgstr ""
 "Selecteer uw team, module, tak en domein om het vertaalbestand te verkrijgen."
 
-#: src/gtr-dl-teams.ui:81
+#: src/gtr-dl-teams.ui:106
+msgid "Reserve for translation"
+msgstr "Reserveren voor vertaling"
+
+#: src/gtr-dl-teams.ui:117
 msgid "Load file"
 msgstr "Bestand laden"
 
-#: src/gtr-dl-teams.ui:98
+#: src/gtr-dl-teams.ui:136
 msgid "Load from Damned Lies"
 msgstr "Laden uit Damned Lies"
 
-#: src/gtr-dl-teams.ui:105 src/gtr-projects.ui:58
+#: src/gtr-dl-teams.ui:143 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Openen…"
 
-#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
+#: src/gtr-dl-teams.ui:166 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
 msgid "Main Menu"
 msgstr "Hoofdmenu"
 
-#: src/gtr-dl-teams.ui:156 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+#: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
 msgid "New window"
 msgstr "Nieuw venster"
 
-#: src/gtr-dl-teams.ui:170 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+#: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
 msgid "Preferences"
 msgstr "Voorkeuren"
 
-#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:235 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
 msgid "Keyboard Shortcuts"
 msgstr "Sneltoetsen"
 
-#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
+#: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
 msgid "About"
 msgstr "Info"
 
-#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
+#: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: src/gtr-file-dialogs.c:48
+#: src/gtr-file-dialogs.c:47
 msgid "_Open"
 msgstr "_Openen"
 
-#: src/gtr-file-dialogs.c:62
+#: src/gtr-file-dialogs.c:61
 msgid "Gettext translation"
 msgstr "Gettext-vertaling"
 
-#: src/gtr-file-dialogs.c:71
+#: src/gtr-file-dialogs.c:70
 msgid "Gettext translation template"
 msgstr "Gettext-vertalingssjabloon"
 
-#: src/gtr-file-dialogs.c:76
+#: src/gtr-file-dialogs.c:75
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: src/gtr-header-dialog.c:280
+#: src/gtr-header-dialog.c:325
 msgid "Edit Header"
 msgstr "Kop bewerken"
 
@@ -569,8 +625,32 @@ msgstr "Project"
 msgid "Comment"
 msgstr "Commentaar"
 
-#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
-#: src/gtr-profile-dialog.c:170
+#: src/gtr-header-dialog.ui:454
+msgid "DL Team:"
+msgstr "DL-team:"
+
+#: src/gtr-header-dialog.ui:467
+msgid "DL Module:"
+msgstr "DL-module:"
+
+#: src/gtr-header-dialog.ui:481
+msgid "DL Branch:"
+msgstr "DL-branch:"
+
+#: src/gtr-header-dialog.ui:495
+msgid "DL Domain:"
+msgstr "DL-domein:"
+
+#: src/gtr-header-dialog.ui:509
+msgid "DL State:"
+msgstr "DL-status:"
+
+#: src/gtr-header-dialog.ui:587
+msgid "Damned Lies Info"
+msgstr "Damned Lies-info"
+
+#: src/gtr-io-error-info-bar.c:146 src/gtr-jump-dialog.c:88
+#: src/gtr-profile-dialog.c:171 src/gtr-profile-dialog.c:176
 #: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "_OK"
 msgstr "_Oké"
@@ -639,12 +719,11 @@ msgstr "Oorspronkelijk bericht"
 msgid "Translated message"
 msgstr "Vertaald bericht"
 
-#: src/gtr-notebook.ui:136 src/gtr-search-dialog.c:371
-#: src/gtr-search-dialog.c:455
+#: src/gtr-notebook.ui:136
 msgid "Find"
 msgstr "Zoeken"
 
-#: src/gtr-notebook.ui:150 src/gtr-search-dialog.c:459
+#: src/gtr-notebook.ui:150
 msgid "Find and replace"
 msgstr "Zoeken en vervangen"
 
@@ -656,7 +735,7 @@ msgstr "Vertaalgeheugen samenstellen"
 msgid "Edit header"
 msgstr "Kop bewerken"
 
-#: src/gtr-notebook.ui:276 src/gtr-preferences-dialog.c:623
+#: src/gtr-notebook.ui:276 src/gtr-preferences-dialog.c:652
 #: src/gtr-projects.ui:202
 msgid "Help"
 msgstr "Hulp"
@@ -697,39 +776,49 @@ msgstr "Berichten sorteren op"
 msgid "Order by menu"
 msgstr "Volgordemenu"
 
-#: src/gtr-notebook.ui:587
+#: src/gtr-notebook.ui:585
+#| msgid "Undo (<Ctrl>z)"
+msgid "Find (<Ctrl><f>)"
+msgstr "Zoeken (<Ctrl><f>)"
+
+#: src/gtr-notebook.ui:624
 msgid "Save"
 msgstr "Opslaan"
 
-#: src/gtr-notebook.ui:591
+#: src/gtr-notebook.ui:628
 msgid "Save the current file (<Ctrl>s)"
 msgstr "Het huidige bestand opslaan als (<Ctrl>s)"
 
-#: src/gtr-notebook.ui:606
+#: src/gtr-notebook.ui:643
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Opslaan als (<Ctrl><Shift>s)"
 
-#: src/gtr-po.c:440
+#: src/gtr-notebook.ui:665
+#| msgid "Open a new file (<Ctrl>o)"
+msgid "Upload file (<Ctrl>b)"
+msgstr "Bestand uploaden (<Ctrl>b)"
+
+#: src/gtr-po.c:487
 #, c-format
 msgid "The file is empty"
 msgstr "Het bestand is leeg"
 
-#: src/gtr-po.c:449
+#: src/gtr-po.c:496
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Openen van bestand ‘%s’ mislukt: %s"
 
-#: src/gtr-po.c:530
+#: src/gtr-po.c:577
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Kon vanuit tekenset ‘%s’ niet naar UTF-8 converteren"
 
-#: src/gtr-po.c:547 src/gtr-po.c:567
+#: src/gtr-po.c:594 src/gtr-po.c:614
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Kon tijdelijk bestand voor coderingsconversie niet opslaan"
 
-#: src/gtr-po.c:604
+#: src/gtr-po.c:651
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -740,17 +829,17 @@ msgstr ""
 "gebruik de opdrachtregelprogramma’s ‘msgconv’ of ‘iconv’ vooraleer u dit "
 "bestand open met Gnome Vertalingsbewerker"
 
-#: src/gtr-po.c:672
+#: src/gtr-po.c:719
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext gaf een null-berichtdomeinlijst."
 
-#: src/gtr-po.c:717
+#: src/gtr-po.c:764
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Geen berichten verkregen van de verwerker."
 
-#: src/gtr-po.c:768
+#: src/gtr-po.c:815
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -761,43 +850,43 @@ msgstr ""
 "Dit zijn sjablonen die automatisch door programma’s worden aangemaakt.\n"
 "Uw bestand hoort de extensie .po te hebben, waarschijnlijk ‘%s.po’."
 
-#: src/gtr-po.c:781
+#: src/gtr-po.c:828
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Het bestand ‘%s’ is alleen-lezen, en kan niet overschreven worden"
 
-#: src/gtr-po.c:800
+#: src/gtr-po.c:847
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Er bevindt zich een fout in het PO-bestand: %s"
 
-#: src/gtr-po.c:812
+#: src/gtr-po.c:859
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Er is een fout opgetreden bij het schrijven naar het PO-bestand: %s"
 
-#: src/gtr-preferences-dialog.c:394
+#: src/gtr-preferences-dialog.c:422
 msgid "Impossible to remove the active profile"
 msgstr "Kan het actieve profiel niet verwijderen"
 
-#: src/gtr-preferences-dialog.c:400
+#: src/gtr-preferences-dialog.c:428
 msgid "Another profile should be selected as active before"
 msgstr ""
 "Er dient eerst een ander profiel ingesteld te worden als het actieve profiel"
 
-#: src/gtr-preferences-dialog.c:413
+#: src/gtr-preferences-dialog.c:441
 msgid "Are you sure you want to delete this profile?"
 msgstr "Weet u zeker dat u dit profiel wilt verwijderen?"
 
-#: src/gtr-preferences-dialog.c:421
+#: src/gtr-preferences-dialog.c:449
 msgid "_Delete"
 msgstr "Verwij_deren"
 
-#: src/gtr-preferences-dialog.c:553
+#: src/gtr-preferences-dialog.c:581
 msgid "Active"
 msgstr "Actief"
 
-#: src/gtr-preferences-dialog.c:625 src/gtr-preferences-dialog.ui:49
+#: src/gtr-preferences-dialog.c:654 src/gtr-preferences-dialog.ui:49
 msgid "Translation Editor Preferences"
 msgstr "Voorkeuren voor Vertalingsbewerker"
 
@@ -841,31 +930,39 @@ msgstr "Berichtsyntax _markeren"
 msgid "Make _whitespace visible"
 msgstr "_Spaties zichtbaar maken"
 
-#: src/gtr-preferences-dialog.ui:392
+#: src/gtr-preferences-dialog.ui:376
+msgid "Font:"
+msgstr "Lettertype:"
+
+#: src/gtr-preferences-dialog.ui:388
+msgid "Choose the editor font"
+msgstr "Kies het lettertype voor de verwerker"
+
+#: src/gtr-preferences-dialog.ui:430
 msgid "Contents"
 msgstr "Inhoud"
 
-#: src/gtr-preferences-dialog.ui:415
+#: src/gtr-preferences-dialog.ui:453
 msgid "_Remove fuzzy status if message is changed"
 msgstr "Zet status ‘onzeke_r’ uit wanneer bericht aangepast wordt"
 
-#: src/gtr-preferences-dialog.ui:431
+#: src/gtr-preferences-dialog.ui:469
 msgid "Check _spelling"
 msgstr "_Spelling controleren"
 
-#: src/gtr-preferences-dialog.ui:470
+#: src/gtr-preferences-dialog.ui:508
 msgid "Editor"
 msgstr "Editor"
 
-#: src/gtr-preferences-dialog.ui:569
+#: src/gtr-preferences-dialog.ui:607
 msgid "Edit Profile"
 msgstr "Profiel bewerken"
 
-#: src/gtr-preferences-dialog.ui:606
+#: src/gtr-preferences-dialog.ui:644
 msgid "Profiles"
 msgstr "Profielen"
 
-#: src/gtr-profile-dialog.c:73
+#: src/gtr-profile-dialog.c:74
 msgid "Translation Editor Profile"
 msgstr "Profiel voor Vertalingsbewerker"
 
@@ -893,7 +990,19 @@ msgstr "_E-mailadres"
 msgid "_Team email"
 msgstr "E-mailadres van _team"
 
-#: src/gtr-profile-dialog.ui:209
+#: src/gtr-profile-dialog.ui:174
+msgid "_DL auth token"
+msgstr "_DL-aanmeldingstoken"
+
+#: src/gtr-profile-dialog.ui:175
+msgid ""
+"GNOME Damned Lies integration token, go to your profile in https://l10n."
+"gnome.org/ to get it"
+msgstr ""
+"Integratietoken voor Gnome Damned Lies, ga naar uw profiel in https://l10n."
+"gnome.org om dit te verkrijgen"
+
+#: src/gtr-profile-dialog.ui:237
 msgid "Language Settings"
 msgstr "Taalinstellingen"
 
@@ -909,175 +1018,115 @@ msgstr "Selecteer een PO-bestand"
 msgid "Load from DL…"
 msgstr "Laden uit DL…"
 
-#: src/gtr-search-dialog.c:349 src/gtr-search-dialog.ui:6
-#: src/gtr-search-dialog.ui:53
+#: src/gtr-search-bar.c:484 src/gtr-search-bar.ui:212
+msgid "Case sensitive"
+msgstr "Hoofdlettergevoelig"
+
+#: src/gtr-search-bar.c:489 src/gtr-search-bar.ui:225
+msgid "Match whole word only"
+msgstr "Enkel volledige woorden zoeken"
+
+#: src/gtr-search-bar.c:494
+msgid "Wrap around"
+msgstr "Doorgaan na documenteinde"
+
+#: src/gtr-search-bar.c:499
+msgid "Original text"
+msgstr "Oorspronkelijke tekst"
+
+#: src/gtr-search-bar.c:504
+msgid "Translated text"
+msgstr "Vertaalde tekst"
+
+#: src/gtr-search-bar.ui:121
 msgid "Replace"
 msgstr "Vervangen"
 
-#: src/gtr-search-dialog.c:457
-msgid "Replace _All"
-msgstr "_Alles vervangen"
-
-#: src/gtr-search-dialog.c:461
-msgid "_Replace"
-msgstr "Ve_rvangen"
-
-#: src/gtr-search-dialog.ui:37
+#: src/gtr-search-bar.ui:133
 msgid "Replace All"
 msgstr "Alles vervangen"
 
-#: src/gtr-search-dialog.ui:109
-msgid "_Search for: "
-msgstr "_Zoeken naar: "
+#: src/gtr-search-bar.ui:153
+msgid "Switch between Search and Search-and-Replace"
+msgstr "Wisselen tussen ‘zoeken’ en ‘zoeken en vervangen’"
 
-#: src/gtr-search-dialog.ui:124
-msgid "Replace _with: "
-msgstr "Vervangen _door: "
+#: src/gtr-search-bar.ui:173
+msgid "Show or hide search options such as case sensitivity"
+msgstr "Opties zoals hoofdlettergevoeligheid tonen of verbergen"
 
-#: src/gtr-search-dialog.ui:184
-msgid "_Original text"
-msgstr "_Oorspronkelijke tekst"
+#: src/gtr-search-bar.ui:238
+msgid "Wrap Around"
+msgstr "Doorgaan na documenteinde"
 
-#: src/gtr-search-dialog.ui:201
-msgid "_Translated text"
-msgstr "Ver_taalde tekst"
+#: src/gtr-search-bar.ui:251
+msgid "Original-text"
+msgstr "Oorspronkelijke-tekst"
 
-#: src/gtr-search-dialog.ui:237
-msgid "_Match case"
-msgstr "_Hoofdlettergevoelig"
-
-#: src/gtr-search-dialog.ui:253
-msgid "Match _entire word only"
-msgstr "_Enkel volledige woorden"
-
-#: src/gtr-search-dialog.ui:269
-msgid "Search _backwards"
-msgstr "Achter_waarts zoeken"
-
-#: src/gtr-search-dialog.ui:286
-msgid "_Wrap around"
-msgstr "Doorgaan na document_einde"
-
-#: src/gtr-statusbar.c:117 src/gtr-statusbar.c:252
-msgid "INS"
-msgstr "INS"
-
-#: src/gtr-statusbar.c:118 src/gtr-statusbar.c:248
-msgid "OVR"
-msgstr "OVR"
+#: src/gtr-search-bar.ui:264
+msgid "Translated-text"
+msgstr "Vertaalde-tekst"
 
 #: src/gtr-tab-label.c:278
 msgid "Close document"
 msgstr "Document sluiten"
 
-#: src/gtr-tab.c:246
+#: src/gtr-tab.c:341
 msgid "There is an error in the message:"
 msgstr "Er bevindt zich een fout in het bericht:"
 
-#: src/gtr-tab.c:460 src/gtr-tab.c:586
+#: src/gtr-tab.c:555 src/gtr-tab.c:681
 msgid "fuzzy"
 msgstr "onzeker"
 
-#: src/gtr-tab.c:616
+#: src/gtr-tab.c:711
 #, c-format
 msgid "Plural %d"
 msgstr "Meervoud %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1169
+#: src/gtr-tab.c:1306
 msgid "Path:"
 msgstr "Pad:"
 
-#: src/gtr-tab.c:1819
+#: src/gtr-tab.c:1973
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Vertaald: %0.2f%%"
 
-#: src/gtr-tab.c:1820
+#: src/gtr-tab.c:1974
 #, c-format
 msgid "Translated: %d"
 msgstr "Vertaald: %d"
 
-#: src/gtr-tab.c:1821
+#: src/gtr-tab.c:1975
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Onvertaald: %d"
 
-#: src/gtr-tab.c:1822
+#: src/gtr-tab.c:1976
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Onzeker: %d"
 
-#: src/gtr-tab.ui:153
+#: src/gtr-tab.ui:79
 msgid "_Original Message"
 msgstr "_Oorspronkelijk bericht"
 
-#: src/gtr-tab.ui:245
+#: src/gtr-tab.ui:171
 msgid "Translate_d Text"
 msgstr "Vertaal_de tekst"
 
-#: src/gtr-window.c:173
-msgid "Untranslated"
-msgstr "Onvertaald"
-
-#: src/gtr-window.c:176
-msgid "Translated"
-msgstr "Vertaald"
-
-#: src/gtr-window.c:179
-msgid "Fuzzy"
-msgstr "Onzeker"
-
-#: src/gtr-window.c:186
-#, c-format
-msgid "Current: %d"
-msgstr "Huidig: %d"
-
-#: src/gtr-window.c:187
-#, c-format
-msgid "Total: %d"
-msgstr "Totaal: %d"
-
-#: src/gtr-window.c:188
-#, c-format
-msgid "%d translated"
-msgid_plural "%d translated"
-msgstr[0] "%d vertaald"
-msgstr[1] "%d vertaald"
-
-#: src/gtr-window.c:191
-#, c-format
-msgid "%d fuzzy"
-msgid_plural "%d fuzzy"
-msgstr[0] "%d onzeker"
-msgstr[1] "%d onzeker"
-
-#: src/gtr-window.c:193
-#, c-format
-msgid "%d untranslated"
-msgid_plural "%d untranslated"
-msgstr[0] "%d onvertaald"
-msgstr[1] "%d onvertaald"
-
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:303
+#: src/gtr-window.c:214
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — vertalingsbewerker"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:309
+#: src/gtr-window.c:220
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — vertalingsbewerker"
-
-#: src/gtr-window.c:540
-msgid "No profile"
-msgstr "Geen profiel"
-
-#: src/gtr-window.c:558
-msgid "Profile for the active document"
-msgstr "Profiel voor het actieve document"
 
 #: src/gtranslator-menu.ui:7
 msgid "_New Window"
@@ -1211,6 +1260,21 @@ msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Zoeken & vervangen"
 
+#: src/help-overlay.ui:173
+msgctxt "shortcut window"
+msgid "Forward-search"
+msgstr "Voorwaarts zoeken"
+
+#: src/help-overlay.ui:180
+msgctxt "shortcut window"
+msgid "Backward-search"
+msgstr "Achterwaarts zoeken"
+
+#: src/help-overlay.ui:187
+msgctxt "shortcut window"
+msgid "Hide find & replace bar"
+msgstr "Balk voor zoeken en vervangen verbergen"
+
 #: src/main.c:97
 msgid "— Edit PO files"
 msgstr "— bewerk PO-bestanden"
@@ -1328,6 +1392,86 @@ msgstr ""
 "Maximaal verschil in lengte tussen berichten weergegeven als suggesties door "
 "het vertaalgeheugen."
 
+#~ msgid "Do you want to save the changes?"
+#~ msgstr "Wilt u de wijzigingen opslaan?"
+
+#~ msgid "Warning"
+#~ msgstr "Waarschuwing"
+
+#~ msgid "File saved."
+#~ msgstr "Bestand opgeslagen."
+
+#~ msgid "Files saved."
+#~ msgstr "Bestanden opgeslagen."
+
+#~ msgid "Found and replaced one occurrence"
+#~ msgid_plural "Found and replaced %d occurrences"
+#~ msgstr[0] "Eén zoekterm gevonden en vervangen"
+#~ msgstr[1] "%d zoektermen gevonden en vervangen"
+
+#~ msgid "Phrase not found"
+#~ msgstr "Zoekterm niet gevonden"
+
+#~ msgid "Replace _All"
+#~ msgstr "_Alles vervangen"
+
+#~ msgid "_Replace"
+#~ msgstr "Ve_rvangen"
+
+#~ msgid "_Search for: "
+#~ msgstr "_Zoeken naar: "
+
+#~ msgid "Replace _with: "
+#~ msgstr "Vervangen _door: "
+
+#~ msgid "_Match case"
+#~ msgstr "_Hoofdlettergevoelig"
+
+#~ msgid "Search _backwards"
+#~ msgstr "Achter_waarts zoeken"
+
+#~ msgid "INS"
+#~ msgstr "INS"
+
+#~ msgid "OVR"
+#~ msgstr "OVR"
+
+#~ msgid "Untranslated"
+#~ msgstr "Onvertaald"
+
+#~ msgid "Translated"
+#~ msgstr "Vertaald"
+
+#~ msgid "Fuzzy"
+#~ msgstr "Onzeker"
+
+#~ msgid "Current: %d"
+#~ msgstr "Huidig: %d"
+
+#~ msgid "Total: %d"
+#~ msgstr "Totaal: %d"
+
+#~ msgid "%d translated"
+#~ msgid_plural "%d translated"
+#~ msgstr[0] "%d vertaald"
+#~ msgstr[1] "%d vertaald"
+
+#~ msgid "%d fuzzy"
+#~ msgid_plural "%d fuzzy"
+#~ msgstr[0] "%d onzeker"
+#~ msgstr[1] "%d onzeker"
+
+#~ msgid "%d untranslated"
+#~ msgid_plural "%d untranslated"
+#~ msgstr[0] "%d onvertaald"
+#~ msgstr[1] "%d onvertaald"
+
+#~ msgid "No profile"
+#~ msgstr "Geen profiel"
+
+#~ msgid "Profile for the active document"
+#~ msgstr "Profiel voor het actieve document"
+
 #~ msgid "Edit notes"
 #~ msgstr "Opmerkingen bewerken"
 
@@ -1413,9 +1557,6 @@ msgstr ""
 
 #~ msgid "Enter search string:"
 #~ msgstr "Geef zoekopdracht: "
-
-#~ msgid "Case sensitive"
-#~ msgstr "Hoofdlettergevoelig"
 
 #~ msgid "Find in:"
 #~ msgstr "Zoeken in:"
@@ -1922,9 +2063,6 @@ msgstr ""
 
 #~ msgid "Save File"
 #~ msgstr "Bestand opslaan"
-
-#~ msgid "Save as"
-#~ msgstr "Opslaan als"
 
 #~ msgid "Save file with a different name"
 #~ msgstr "Bestand onder een andere naam opslaan"
