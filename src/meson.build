@@ -3,6 +3,12 @@ src_inc = include_directories('.')
 subdir('translation-memory')
 subdir('codeview')
 
+gtr_build_ident_h = vcs_tag(
+     fallback: meson.project_version(),
+        input: 'gtr-build-ident.h.in',
+       output: 'gtr-build-ident.h',
+)
+
 enum_headers = files(
   'gtr-application.h',
   'gtr-context.h',
@@ -127,7 +133,7 @@ incs = [
 
 libgtranslator = shared_library(
   meson.project_name(),
-  sources: sources + translation_mem_sources + codeview_sources,
+  sources: sources + translation_mem_sources + codeview_sources + [gtr_build_ident_h],
   include_directories: incs,
   dependencies: gtr_deps,
 )
