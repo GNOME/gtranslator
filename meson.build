@@ -109,7 +109,7 @@ gtr_deps = [
   gtk_dep,
   libhandy_dep,
   dependency('libdazzle-1.0', version: '>= 3.33.90'),
-  dependency('libgda-5.0'),
+  dependency('libgda-6.0'),
   dependency('gio-2.0', version: '>= 2.36.0'),
   dependency('gsettings-desktop-schemas'),
   dependency('gspell-1', version: '>= 1.2.0'),

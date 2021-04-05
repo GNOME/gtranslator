@@ -76,9 +76,9 @@
         },
         {
             "name": "libgda",
+            "buildsystem": "meson",
             "config-opts": [
-                "--enable-json=yes",
-                "--enable-system-sqlite=yes"
+                "-Djson=true"
             ],
             "build-options" : {
                 "env" : {
@@ -89,8 +89,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://ftp.gnome.org/pub/GNOME/sources/libgda/5.2/libgda-5.2.9.tar.xz",
-                    "sha256": "59caed8ca72b1ac6437c9844f0677f8a296d52cfd1c0049116026abfb1d87d9b"
+                    "url": "http://ftp.gnome.org/pub/GNOME/sources/libgda/6.0/libgda-6.0.0.tar.xz",
+                    "sha256": "995f4b420e666da5c8bac9faf55e7aedbe3789c525d634720a53be3ccf27a670"
                 }
             ],
             "modules": [
