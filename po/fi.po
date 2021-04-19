@@ -13,16 +13,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-08 06:55+0000\n"
-"PO-Revision-Date: 2021-03-14 18:36+0200\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
+"POT-Creation-Date: 2021-03-23 10:50+0000\n"
+"PO-Revision-Date: 2021-03-27 20:24+0200\n"
+"Last-Translator: JR-Fi <starman@starman.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -59,7 +59,7 @@ msgstr ""
 "integraatio Subversion-versionhallintajärjestelmään kanssa sekä "
 "lähdekoodikatselin."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:117
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:131
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -160,11 +160,11 @@ msgstr "Jos tosi, käännettyjen viestin oikeinkirjoitus tarkistetaan."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:96
 msgid "Side panel switcher style"
-msgstr ""
+msgstr "Sivupaneelin vaihtajan tyyli"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:97
 msgid "Style for switchers in the side panel."
-msgstr ""
+msgstr "Tyyli sivupaneelin vaihtajille."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:103
 msgid "Color scheme"
@@ -172,7 +172,7 @@ msgstr "Väriteema"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:104
 msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
-msgstr ""
+msgstr "Nimi käytettävälle gtksourceview-tekstinkorostuksen värimallille."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:110
 msgid "Message list sort order"
@@ -196,6 +196,9 @@ msgid ""
 "See the .gtranslator-plugin file for obtaining the “Location” of a given "
 "plugin."
 msgstr ""
+"Lista aktiivisista liitännäisistä. Sisältää aktiivisten liitännäisten "
+"\"sijainnin\". Katso .gtranslator-plugin -tiedostoa saadaksesi tietyn "
+"liitännäisen \"sijainnin\"."
 
 #: src/codeview/gtr-codeview.c:374
 msgid "Paths:"
@@ -279,21 +282,28 @@ msgstr "Jatka tallentamatta"
 msgid "Open file for translation"
 msgstr "Avaa käännettävä tiedosto"
 
-#: src/gtr-actions-file.c:448
+#: src/gtr-actions-file.c:449
 msgid "This file has already been uploaded"
 msgstr "Tiedosto on jo lähetetty"
 
-#: src/gtr-actions-file.c:459
+#: src/gtr-actions-file.c:462
 #, c-format
-msgid "An error occurred while uploading the file: %s"
-msgstr "Tiedostoa lähettäessä tapahtui virhe: %s"
+msgid ""
+"An error occurred while uploading the file: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to upload this "
+"module."
+msgstr ""
+"Tapahtui virhe ladattaessa tiedostoa: %s\n"
+"Ehkä et ole laittanut asetuksia kohdalleen <i>l10n.gnome.org</i> <b>token</"
+"b>-profiilissasi tai sinulla ei ole oikeutta ladata tätä tiedostoa sivulle."
 
-#: src/gtr-actions-file.c:470
+#: src/gtr-actions-file.c:477
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been uploaded!"
 msgstr "Tiedosto '%s.%s.%s.%s' on lähetetty!"
 
-#: src/gtr-actions-file.c:500
+#: src/gtr-actions-file.c:507
 msgid "Save file as…"
 msgstr "Tallenna tiedosto nimellä…"
 
@@ -454,21 +464,28 @@ msgstr "Nykyinen tila on: %s"
 msgid "The file '%s' has been saved in %s"
 msgstr "Tiedosto '%s' on tallennettu sijaintiin %s"
 
-#: src/gtr-dl-teams.c:643
+#: src/gtr-dl-teams.c:646
 #, c-format
-msgid "An error occurred while reserving this module: %s"
-msgstr "Moduulia varatessa tapahtui virhe: %s"
+msgid ""
+"An error occurred while reserving this module: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to reserve this "
+"module."
+msgstr ""
+"Tapahtui virhe varattaessä tätä moduulia: %s\n"
+"Ehkä et ole laittanut asetuksia kohdalleen <i>l10n.gnome.org</i> <b>token</"
+"b>-profiilissasi tai sinulla ei ole oikeutta varata tätä moduulia sivulle."
 
-#: src/gtr-dl-teams.c:655
+#: src/gtr-dl-teams.c:662
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "Tiedosto '%s.%s.%s.%s' on varattu onnistuneesti"
 
-#: src/gtr-dl-teams.c:781
+#: src/gtr-dl-teams.c:788
 msgid "Translation Team"
 msgstr "Käännöstiimi"
 
-#: src/gtr-dl-teams.c:788
+#: src/gtr-dl-teams.c:795
 msgid "Module"
 msgstr "Moduuli"
 
@@ -745,7 +762,7 @@ msgstr "Viestien järjestysperuste"
 
 #: src/gtr-notebook.ui:547
 msgid "Order by menu"
-msgstr ""
+msgstr "Lajittelu valikon mukaan"
 
 #: src/gtr-notebook.ui:585
 msgid "Find (<Ctrl><f>)"
@@ -764,7 +781,6 @@ msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Tallenna nimellä (<Ctrl><Shift>s)"
 
 #: src/gtr-notebook.ui:665
-#| msgid "Open a new file (<Ctrl>o)"
 msgid "Upload file (<Ctrl>b)"
 msgstr "Lähetä tiedosto (<Ctrl>b)"
 
@@ -1322,6 +1338,8 @@ msgid ""
 "If true, only include files with a specified filename when searching the "
 "translation memory."
 msgstr ""
+"Mikäli totta, sisällytä tiedostot, joilla on määritetty tiedostonimi, kun "
+"haetaan käännösmuistista."
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
 msgid "Filename to restrict search to"
@@ -1330,7 +1348,7 @@ msgstr "Tiedostonimi, johon haku rajoitetaan"
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
 msgid ""
 "Filename to which searching of the translation memory should be restricted."
-msgstr ""
+msgstr "Teidostonimi johon käännösmuistin haun tulisi rajoittua."
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
 msgid "Maximum number of missing words"
@@ -1341,6 +1359,8 @@ msgid ""
 "Maximum number of words that can be missing from a message displayed as a "
 "match by the translation memory."
 msgstr ""
+"Suurin määrä sanoja, joita voi puuttua tekstistä, mikä näytetään osumana "
+"käännösmuistista."
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
 msgid "Maximum difference in message length"
@@ -1351,6 +1371,14 @@ msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
 msgstr ""
+"Suurin ero pituudessa tekstien välillä, mikä näytetään osumana "
+"käännösmuistista."
+
+#~ msgid "An error occurred while uploading the file: %s"
+#~ msgstr "Tiedostoa lähettäessä tapahtui virhe: %s"
+
+#~ msgid "An error occurred while reserving this module: %s"
+#~ msgstr "Moduulia varatessa tapahtui virhe: %s"
 
 #~ msgid "Do you want to save the changes?"
 #~ msgstr "Haluatko tallentaa muutokset?"
