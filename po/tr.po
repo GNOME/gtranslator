@@ -11,23 +11,23 @@
 # Barış ÇİÇEK <baris@teamforce.name.tr>, 2003.
 # Atilla ÖNTAŞ <atilla_ontas@mandriva.org>, 2009, 2010.
 # Sabri Ünal <libreajans@gmail.com>, 2019, 2020.
-# Emin Tufan Çetin <etcetin@gmail.com>, 2018, 2019, 2020.
 # Muhammet Kara <muhammetk@gmail.com>, 2011-2021.
+# Emin Tufan Çetin <etcetin@gmail.com>, 2018, 2019, 2020, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-15 08:20+0000\n"
-"PO-Revision-Date: 2021-03-17 19:10+0300\n"
-"Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
+"POT-Creation-Date: 2021-03-19 10:13+0000\n"
+"PO-Revision-Date: 2021-05-02 17:39+0300\n"
+"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <gnometurk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Gtranslator 3.38.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.4.3\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -89,8 +89,8 @@ msgid ""
 "If true, warn the user when saving a PO translation file containing fuzzy "
 "strings."
 msgstr ""
-"Eğer doğruysa, bulanık söz dizileri içeren bir PO çeviri dosyası "
-"kaydedilirken uyar."
+"Eğer doğruysa, bulanık söz dizileri içeren PO çeviri dosyası kaydedilirken "
+"uyar."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:32
 msgid "Auto save files"
@@ -107,7 +107,7 @@ msgstr "Kendiliğinden kaydetme aralığı"
 #: data/org.gnome.Gtranslator.gschema.xml.in:40
 msgid "Interval in minutes at which to automatically save files."
 msgstr ""
-"Dosyaların kendiliğinden kaydedilmesi için dakika cinsinden zaman aralığı."
+"Dosyaların kendiliğinden kaydedilmesi için dakika türünden zaman aralığı."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:46
 msgid "Create backup before saving"
@@ -115,7 +115,7 @@ msgstr "Kaydetmeden önce yedekle"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:47
 msgid "If true, create a backup copy of a file before saving it."
-msgstr "Eğer doğruysa, kaydetmeden önce dosyanın yedek bir kopyasını oluştur."
+msgstr "Eğer doğruysa, kaydetmeden önce dosyanın yedek kopyasını oluştur."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:53
 msgid "Use profile values for header"
@@ -175,8 +175,7 @@ msgstr "Renk şeması"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:104
 msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
-msgstr ""
-"Söz dizimi vurgulamasında kullanılacak bir gtksourceview renk şeması adı."
+msgstr "Söz dizimi vurgulamasında kullanılacak gtksourceview renk şeması adı."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:110
 msgid "Message list sort order"
@@ -200,7 +199,7 @@ msgid ""
 "See the .gtranslator-plugin file for obtaining the “Location” of a given "
 "plugin."
 msgstr ""
-"Etkin eklentiler listesi. Etkin eklentilerin “Konum”unu içerir. Belirli bir "
+"Etkin eklentiler listesi. Etkin eklentilerin “Konum”unu içerir. Belirli "
 "eklentinin “Konum”unu almak için .gtranslator-plugin dosyasına bakınız."
 
 #: src/codeview/gtr-codeview.c:374
@@ -300,7 +299,7 @@ msgid ""
 "correctly in your profile or you don't have permissions to upload this "
 "module."
 msgstr ""
-"Dosya karşıya yüklenirken bir hata oluştu: %s\n"
+"Dosya karşıya yüklenirken hata oluştu: %s\n"
 "Profilinizdeki <i>l10n.gnome.org</i> <b>jetonunu</b> doğru şekilde "
 "yapılandırmamış olabilirsiniz ya da bu modüle dosya yüklemek için izniniz "
 "olmayabilir."
@@ -355,7 +354,7 @@ msgstr "Çevirmen e-postası"
 
 #: src/gtr-assistant.c:324
 msgid "Team email"
-msgstr "Ekip e-postası"
+msgstr "Takım e-postası"
 
 #: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:575
 msgid "Profile"
@@ -466,7 +465,7 @@ msgstr "Güncel durum: %s"
 #: src/gtr-dl-teams.c:586
 #, c-format
 msgid "The file '%s' has been saved in %s"
-msgstr ""
+msgstr "'%s' dosyası %s içine kaydedildi"
 
 #: src/gtr-dl-teams.c:646
 #, c-format
@@ -476,11 +475,14 @@ msgid ""
 "correctly in your profile or you don't have permissions to reserve this "
 "module."
 msgstr ""
+"Bu modül üzerinize alınırken hata oluştu: %s\n"
+"Belki de profilinizde <i>l10n.gnome.org</i> <b>jetonunuzu</b> doğru "
+"yapılandırmadınız veya bu modülü üzerinize almaya izniniz yok."
 
 #: src/gtr-dl-teams.c:662
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
-msgstr ""
+msgstr "'%s.%s.%s.%s' dosyası başarıyla üzerinize alındı"
 
 #: src/gtr-dl-teams.c:788
 msgid "Translation Team"
@@ -492,13 +494,11 @@ msgstr "Modül"
 
 #: src/gtr-dl-teams.ui:85
 msgid "Select team, module, branch and domain to get the translation file."
-msgstr "Çeviriyi indirmek için, takım, modül, dal ve alan adı seçin."
+msgstr "Çeviriyi indirmek için takım, modül, dal ve alan adı seç."
 
 #: src/gtr-dl-teams.ui:106
-#, fuzzy
-#| msgid "Open file for translation"
 msgid "Reserve for translation"
-msgstr "Çevrilecek dosyayı aç"
+msgstr "Çeviriyi üzerine al"
 
 #: src/gtr-dl-teams.ui:117
 msgid "Load file"
@@ -618,10 +618,9 @@ msgstr "Açıklama"
 
 #: src/gtr-header-dialog.ui:454
 msgid "DL Team:"
-msgstr "DL Ekibi:"
+msgstr "DL Takımı:"
 
 #: src/gtr-header-dialog.ui:467
-#| msgid "Module"
 msgid "DL Module:"
 msgstr "DL Modülü:"
 
@@ -785,7 +784,6 @@ msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Farklı kaydet (<Ctrl><Shift>s)"
 
 #: src/gtr-notebook.ui:665
-#| msgid "Open a new file (<Ctrl>o)"
 msgid "Upload file (<Ctrl>b)"
 msgstr "Dosyayı karşıya yükle (<Ctrl>b)"
 
@@ -823,7 +821,7 @@ msgstr ""
 #: src/gtr-po.c:719
 #, c-format
 msgid "Gettext returned a null message domain list."
-msgstr "Gettext boş bir ileti alan listesi döndürdü."
+msgstr "Gettext boş ileti alan listesi döndürdü."
 
 #: src/gtr-po.c:764
 #, c-format
@@ -978,17 +976,19 @@ msgstr "_E-posta"
 
 #: src/gtr-profile-dialog.ui:160
 msgid "_Team email"
-msgstr "_Ekip e-postası"
+msgstr "_Takım e-postası"
 
 #: src/gtr-profile-dialog.ui:174
 msgid "_DL auth token"
-msgstr ""
+msgstr "_DL kimlik doğrulama jetonu"
 
 #: src/gtr-profile-dialog.ui:175
 msgid ""
 "GNOME Damned Lies integration token, go to your profile in https://l10n."
 "gnome.org/ to get it"
 msgstr ""
+"GNOME Damned Lies tümleşim jetonu, almak için https://l10n.gnome.org/ "
+"adresindeki profilinize gidin"
 
 #: src/gtr-profile-dialog.ui:237
 msgid "Language Settings"
@@ -1356,7 +1356,7 @@ msgstr "Çeviri belleği aramasının sınırlandırılmasında kullanılacak do
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
 msgid "Maximum number of missing words"
-msgstr "En fazla eksik sözcük sayısı"
+msgstr "Azami eksik sözcük sayısı"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
 msgid ""
@@ -1364,11 +1364,11 @@ msgid ""
 "match by the translation memory."
 msgstr ""
 "Çeviri belleğince bir eşleşme olarak gösterilen iletideki eksik olabilecek "
-"en fazla sözcük sayısı."
+"azami sözcük sayısı."
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
 msgid "Maximum difference in message length"
-msgstr "İleti uzunluğundaki en fazla fark"
+msgstr "İleti uzunluğundaki azami fark"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
 msgid ""
@@ -1376,7 +1376,7 @@ msgid ""
 "translation memory."
 msgstr ""
 "Çeviri belleğince eşleşme olarak gösterilen iletiler arasındaki uzunluk "
-"cinsinden en fazla fark."
+"türünden azami fark."
 
 #~ msgid "Do you want to save the changes?"
 #~ msgstr "Değişiklikleri kaydetmek ister misiniz?"
