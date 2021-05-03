@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-3-38\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-01-27 12:03+0000\n"
-"PO-Revision-Date: 2021-01-27 13:04+0100\n"
+"POT-Creation-Date: 2021-03-23 10:50+0000\n"
+"PO-Revision-Date: 2021-05-03 23:34+0200\n"
 "Last-Translator: \n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -55,11 +55,11 @@ msgstr ""
 "interesante cum ar fi limbi alternative, introducerea de etichete, "
 "integrarea cu subversion și un vizualizator de cod sursă."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:117
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:131
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:647
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:659
 #: src/gtr-notebook.ui:308 src/gtr-window.c:229 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Editor de traducere"
@@ -208,7 +208,7 @@ msgstr ""
 msgid "Paths:"
 msgstr "Căi:"
 
-#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
+#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
 #: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:651
 #: src/translation-memory/gtr-translation-memory-dialog.c:299
 msgid "_Close"
@@ -253,7 +253,7 @@ msgstr "Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2021"
 msgid "Translation Editor Web Site"
 msgstr "Sit web pentru Editor de traducere"
 
-#: src/gtr-actions-file.c:184
+#: src/gtr-actions-file.c:218
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -262,28 +262,49 @@ msgstr ""
 "Doriți să salvați modificările în acest fișier: <span weight=\"bold\" size="
 "\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:190
+#: src/gtr-actions-file.c:224
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr ""
 "Dacă nu salvați, toate modificările nesalvate vor fi pierdute permanent."
 
-#: src/gtr-actions-file.c:193
+#: src/gtr-actions-file.c:227
 msgid "Save and open"
 msgstr "Salvează și deschide"
 
-#: src/gtr-actions-file.c:194
+#: src/gtr-actions-file.c:228
 msgid "Cancel"
 msgstr "Anulează"
 
-#: src/gtr-actions-file.c:195
+#: src/gtr-actions-file.c:229
 msgid "Continue without saving"
 msgstr "Continuă fără a salva"
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:261
 msgid "Open file for translation"
 msgstr "Deschide fișier pentru traducere"
 
-#: src/gtr-actions-file.c:330
+#: src/gtr-actions-file.c:449
+msgid "This file has already been uploaded"
+msgstr "Fișierul a fost deja încărcat"
+
+#: src/gtr-actions-file.c:462
+#, c-format
+msgid ""
+"An error occurred while uploading the file: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to upload this "
+"module."
+msgstr ""
+"A apărut o eroare în timpul încărcării fișierului: %s\n"
+"Probabil nu ați configurat <b>jetonul</b> <i>l10n.gnome.org</i> corect în "
+"profilul dumneavoastră sau nu aveți permisiuni pentru a încărca acest modul."
+
+#: src/gtr-actions-file.c:477
+#, c-format
+msgid "The file '%s.%s.%s.%s' has been uploaded!"
+msgstr "Fișierul „%s.%s.%s.%s” a fost încărcat!"
+
+#: src/gtr-actions-file.c:507
 msgid "Save file as…"
 msgstr "Salvează fișierul ca…"
 
@@ -348,7 +369,7 @@ msgstr "Închide _fără a salva"
 
 #: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:89
 #: src/gtr-file-dialogs.c:47 src/gtr-jump-dialog.c:90
-#: src/gtr-preferences-dialog.c:446 src/gtr-profile-dialog.c:71
+#: src/gtr-preferences-dialog.c:446 src/gtr-profile-dialog.c:72
 #: src/translation-memory/gtr-translation-memory-dialog.c:81
 msgid "_Cancel"
 msgstr "_Anulează"
@@ -434,25 +455,42 @@ msgstr "Context:"
 msgid "Format:"
 msgstr "Format:"
 
-#: src/gtr-dl-teams.c:415
+#: src/gtr-dl-teams.c:417
 msgid "No module state found."
 msgstr "Nu a fost găsită starea modulului."
 
-#: src/gtr-dl-teams.c:432
+#: src/gtr-dl-teams.c:434
 #, c-format
 msgid "The current state is: %s"
 msgstr "Starea curentă este: %s"
 
-#: src/gtr-dl-teams.c:554
+#: src/gtr-dl-teams.c:586
 #, c-format
 msgid "The file '%s' has been saved in %s"
 msgstr "Fișierul „%s” a fost salvat în %s"
 
-#: src/gtr-dl-teams.c:660
+#: src/gtr-dl-teams.c:646
+#, c-format
+msgid ""
+"An error occurred while reserving this module: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to reserve this "
+"module."
+msgstr ""
+"A apărut o eroare în timpul rezervării acestui modul: %s\n"
+"Probabil nu ați configurat <b>jetonul</b> <i>l10n.gnome.org</i> corect în "
+"profilul dumneavoastră sau nu aveți permisiuni pentru a încărca acest modul."
+
+#: src/gtr-dl-teams.c:662
+#, c-format
+msgid "The file '%s.%s.%s.%s' has been successfully reserved"
+msgstr "Fișierul „%s.%s.%s.%s” a fost rezervat cu succes"
+
+#: src/gtr-dl-teams.c:788
 msgid "Translation Team"
 msgstr "Echipă de traducere"
 
-#: src/gtr-dl-teams.c:667
+#: src/gtr-dl-teams.c:795
 msgid "Module"
 msgstr "Modul"
 
@@ -463,38 +501,42 @@ msgstr ""
 "traducere."
 
 #: src/gtr-dl-teams.ui:106
+msgid "Reserve for translation"
+msgstr "Rezervă pentru traducere"
+
+#: src/gtr-dl-teams.ui:117
 msgid "Load file"
 msgstr "Încarcă fișier"
 
-#: src/gtr-dl-teams.ui:125
+#: src/gtr-dl-teams.ui:136
 msgid "Load from Damned Lies"
 msgstr "Încarcă din Minciuni blestemate"
 
-#: src/gtr-dl-teams.ui:132 src/gtr-projects.ui:58
+#: src/gtr-dl-teams.ui:143 src/gtr-projects.ui:58
 msgid "Open…"
 msgstr "Deschide…"
 
-#: src/gtr-dl-teams.ui:155 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
+#: src/gtr-dl-teams.ui:166 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
 msgid "Main Menu"
 msgstr "Meniu principal"
 
-#: src/gtr-dl-teams.ui:183 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+#: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
 msgid "New window"
 msgstr "Fereastră nouă"
 
-#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+#: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
 msgid "Preferences"
 msgstr "Preferințe"
 
-#: src/gtr-dl-teams.ui:224 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:235 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
 msgid "Keyboard Shortcuts"
 msgstr "Scurtături de tastatură"
 
-#: src/gtr-dl-teams.ui:238 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
+#: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
 msgid "About"
 msgstr "Despre"
 
-#: src/gtr-dl-teams.ui:252 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
+#: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
 msgid "Quit"
 msgstr "Ieșire"
 
@@ -514,7 +556,7 @@ msgstr "Șablon de traducere Gettext"
 msgid "All files"
 msgstr "Toate fișierele"
 
-#: src/gtr-header-dialog.c:280
+#: src/gtr-header-dialog.c:325
 msgid "Edit Header"
 msgstr "Editare antet"
 
@@ -578,8 +620,32 @@ msgstr "Proiect"
 msgid "Comment"
 msgstr "Comentariu"
 
+#: src/gtr-header-dialog.ui:454
+msgid "DL Team:"
+msgstr "Echipă DL:"
+
+#: src/gtr-header-dialog.ui:467
+msgid "DL Module:"
+msgstr "Modul DL:"
+
+#: src/gtr-header-dialog.ui:481
+msgid "DL Branch:"
+msgstr "Ramură DL:"
+
+#: src/gtr-header-dialog.ui:495
+msgid "DL Domain:"
+msgstr "Domeniu DL:"
+
+#: src/gtr-header-dialog.ui:509
+msgid "DL State:"
+msgstr "Stare DL:"
+
+#: src/gtr-header-dialog.ui:587
+msgid "Damned Lies Info"
+msgstr "Informații Damned Lies"
+
 #: src/gtr-io-error-info-bar.c:146 src/gtr-jump-dialog.c:88
-#: src/gtr-profile-dialog.c:165 src/gtr-profile-dialog.c:170
+#: src/gtr-profile-dialog.c:171 src/gtr-profile-dialog.c:176
 #: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "_OK"
 msgstr "_OK"
@@ -721,27 +787,31 @@ msgstr "Salvează fișierul curent (<Ctrl>s)"
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Salvează ca (<Ctrl><Shift>s)"
 
-#: src/gtr-po.c:440
+#: src/gtr-notebook.ui:665
+msgid "Upload file (<Ctrl>b)"
+msgstr "Încarcă fișier (<Ctrl>b)"
+
+#: src/gtr-po.c:487
 #, c-format
 msgid "The file is empty"
 msgstr "Fișierul este gol"
 
-#: src/gtr-po.c:449
+#: src/gtr-po.c:496
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Eșec la deschiderea fișierului „%s”: %s"
 
-#: src/gtr-po.c:530
+#: src/gtr-po.c:577
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Nu s-a putut converti din setul de caractere „%s” în UTF-8"
 
-#: src/gtr-po.c:547 src/gtr-po.c:567
+#: src/gtr-po.c:594 src/gtr-po.c:614
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Nu s-a putut stoca fișierul temporar pentru conversia codării"
 
-#: src/gtr-po.c:604
+#: src/gtr-po.c:651
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -752,17 +822,17 @@ msgstr ""
 "uneltele pentru linia de comandă msgconv sau iconv înainte de a deschide "
 "acest fișier în Editor de traduceri GNOME"
 
-#: src/gtr-po.c:672
+#: src/gtr-po.c:719
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettex a returat o listă de mesaje domeniu nulă."
 
-#: src/gtr-po.c:717
+#: src/gtr-po.c:764
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Niciun mesaj obținut de la parser."
 
-#: src/gtr-po.c:768
+#: src/gtr-po.c:815
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -773,17 +843,17 @@ msgstr ""
 "Fișierele pot sunt generate de procesul de compilare.\n"
 "Fișierul ar trebui să se numească „%s.po”."
 
-#: src/gtr-po.c:781
+#: src/gtr-po.c:828
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Fișierul %s este protejat la scriere, și nu poate fi suprascris"
 
-#: src/gtr-po.c:800
+#: src/gtr-po.c:847
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Există o eroare în fișierul PO: %s"
 
-#: src/gtr-po.c:812
+#: src/gtr-po.c:859
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "A fost o eroare la scrierea fișierului PO: %s"
@@ -884,7 +954,7 @@ msgstr "Editează profil"
 msgid "Profiles"
 msgstr "Profile"
 
-#: src/gtr-profile-dialog.c:73
+#: src/gtr-profile-dialog.c:74
 msgid "Translation Editor Profile"
 msgstr "Profil Editor de traducere"
 
@@ -912,7 +982,19 @@ msgstr "_Email"
 msgid "_Team email"
 msgstr "Email _echipă"
 
-#: src/gtr-profile-dialog.ui:209
+#: src/gtr-profile-dialog.ui:174
+msgid "_DL auth token"
+msgstr "Jeton de autentificare _DL"
+
+#: src/gtr-profile-dialog.ui:175
+msgid ""
+"GNOME Damned Lies integration token, go to your profile in https://l10n."
+"gnome.org/ to get it"
+msgstr ""
+"Jeton de integrare Damned Lies GNOME, navigați la profilul dumneavoastră pe "
+"https://l10n.gnome.org/ pentru a-l obține"
+
+#: src/gtr-profile-dialog.ui:237
 msgid "Language Settings"
 msgstr "Configurări limbă"
 
