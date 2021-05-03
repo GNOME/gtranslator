@@ -61,6 +61,7 @@ set_defines = [
   ['PACKAGE_URL', 'https://wiki.gnome.org/Apps/Gtranslator'],
   ['PACKAGE_VERSION', gtr_version],
   ['PACKAGE_APPID', gtr_app_id],
+  ['PROFILE', get_option('profile')],
   # i18
   ['GETTEXT_PACKAGE', meson.project_name()],
 ]

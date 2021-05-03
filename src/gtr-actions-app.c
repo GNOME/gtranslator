@@ -27,6 +27,7 @@
 #include "gtr-dirs.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
+#include "gtr-build-ident.h"
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -38,6 +39,15 @@ void
 gtr_show_help (GtkWindow *window)
 {
   gtr_utils_help_display (GTK_WINDOW (window));
+}
+
+static const char *
+get_version (void)
+{
+  if (g_strcmp0 (PROFILE, "development") == 0)
+    return GTR_BUILD_IDENTIFIER;
+  else
+    return PACKAGE_VERSION;
 }
 
 /* Creates and shows the about box for gtranslator */
@@ -99,9 +109,8 @@ gtr_about_dialog (GtrWindow *window)
                           * up in the "about" box
                           */
                          "translator-credits", _("translator-credits"),
-                         "version", PACKAGE_VERSION,
+                         "version", get_version (),
                          "website", PACKAGE_URL,
                          "website-label", _("Translation Editor Web Site"),
                          NULL);
-
 }
