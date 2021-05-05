@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-08 06:55+0000\n"
-"PO-Revision-Date: 2021-03-10 12:47+0100\n"
+"POT-Creation-Date: 2021-03-19 10:13+0000\n"
+"PO-Revision-Date: 2021-05-05 10:38+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 3.38.0\n"
+"X-Generator: Gtranslator 40.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -301,22 +301,28 @@ msgstr "Continuar sin guardar"
 msgid "Open file for translation"
 msgstr "Abrir archivo para traducción"
 
-#: src/gtr-actions-file.c:448
+#: src/gtr-actions-file.c:449
 msgid "This file has already been uploaded"
 msgstr "Este archivo ya se ha subido"
 
-#: src/gtr-actions-file.c:459
+#: src/gtr-actions-file.c:462
 #, c-format
-msgid "An error occurred while uploading the file: %s"
-msgstr "Ha ocurrido un error al subir el archivo: %s"
+msgid ""
+"An error occurred while uploading the file: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to upload this "
+"module."
+msgstr ""
+"Ha ocurrido un error al subir el archivo: %s\n"
+"Quizá no ha configurado su <b>testigo</b> de <i>l10n.gnome.org</i> "
+"correctamente en su perfil o no tiene permisos para subir este módulo."
 
-#: src/gtr-actions-file.c:470
+#: src/gtr-actions-file.c:477
 #, c-format
-#| msgid "The file '%s' has been saved in %s"
 msgid "The file '%s.%s.%s.%s' has been uploaded!"
 msgstr "El archivo «%s.%s.%s.%s» ya se ha subido."
 
-#: src/gtr-actions-file.c:500
+#: src/gtr-actions-file.c:507
 msgid "Save file as…"
 msgstr "Guardar archivo como…"
 
@@ -477,22 +483,28 @@ msgstr "El estado actual es: %s"
 msgid "The file '%s' has been saved in %s"
 msgstr "El archivo «%s» se ha guardado en %s"
 
-#: src/gtr-dl-teams.c:643
+#: src/gtr-dl-teams.c:646
 #, c-format
-msgid "An error occurred while reserving this module: %s"
-msgstr "Ha ocurrido un error al reservar este módulo: %s"
+msgid ""
+"An error occurred while reserving this module: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to reserve this "
+"module."
+msgstr ""
+"Ha ocurrido un error al reservar este módulo: %s\n"
+"Quizá no ha configurado su <b>testigo</b> de <i>l10n.gnome.org</i> "
+"correctamente en su perfil o no tiene permisos para reservar este módulo."
 
-#: src/gtr-dl-teams.c:655
+#: src/gtr-dl-teams.c:662
 #, c-format
-#| msgid "The file '%s' has been saved in %s"
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "El archivo «%s.%s.%s.%s» se ha reservado correctamente"
 
-#: src/gtr-dl-teams.c:781
+#: src/gtr-dl-teams.c:788
 msgid "Translation Team"
 msgstr "Equipo de traducción"
 
-#: src/gtr-dl-teams.c:788
+#: src/gtr-dl-teams.c:795
 msgid "Module"
 msgstr "Módulo"
 
@@ -503,7 +515,6 @@ msgstr ""
 "traducción."
 
 #: src/gtr-dl-teams.ui:106
-#| msgid "Open file for translation"
 msgid "Reserve for translation"
 msgstr "Reservar para traducir"
 
@@ -628,7 +639,6 @@ msgid "DL Team:"
 msgstr "Equipo de DL:"
 
 #: src/gtr-header-dialog.ui:467
-#| msgid "Module"
 msgid "DL Module:"
 msgstr "Módulo de DL:"
 
@@ -792,7 +802,6 @@ msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Guardar como (<Ctrl><Mayús>s)"
 
 #: src/gtr-notebook.ui:665
-#| msgid "Open a new file (<Ctrl>o)"
 msgid "Upload file (<Ctrl>b)"
 msgstr "Subir archivo (<Ctrl>b)"
 
@@ -1393,6 +1402,12 @@ msgid ""
 msgstr ""
 "Diferencia máxima en la longitud entre los mensajes mostrados como "
 "coincidencias por la memoria de traducción."
+
+#~ msgid "An error occurred while uploading the file: %s"
+#~ msgstr "Ha ocurrido un error al subir el archivo: %s"
+
+#~ msgid "An error occurred while reserving this module: %s"
+#~ msgstr "Ha ocurrido un error al reservar este módulo: %s"
 
 #~ msgid "File saved."
 #~ msgstr "Archivo guardado."
