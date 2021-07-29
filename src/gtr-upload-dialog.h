@@ -67,6 +67,7 @@ GtrUploadDialog   *gtr_upload_dialog_new              (GtkWidget *parent);
 char              *gtr_upload_dialog_get_comment      (GtrUploadDialog *dlg);
 void               gtr_upload_dialog_set_loading      (GtrUploadDialog *dlg,
                                                        gboolean loading);
+GtkWidget         *gtr_upload_dialog_get_parent       (GtrUploadDialog *dlg);
 
 G_END_DECLS
 

@@ -34,7 +34,8 @@ typedef struct
   GtkWidget *main_box;
   GtkWidget *text_view;
   GtkWidget *label;
-  GtkWidget *spinner;
+  GtkWidget *parent;
+  GtkWidget *upload;
 } GtrUploadDialogPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrUploadDialog, gtr_upload_dialog, GTK_TYPE_DIALOG)
@@ -55,8 +56,8 @@ gtr_upload_dialog_init (GtrUploadDialog *dlg)
     NULL
   };
 
-  gtk_dialog_add_button (GTK_DIALOG (dlg),
-                         _("_Upload"), GTK_RESPONSE_ACCEPT);
+  priv->upload = gtk_dialog_add_button (GTK_DIALOG (dlg),
+                                        _("_Upload"), GTK_RESPONSE_ACCEPT);
 
   gtk_window_set_title (GTK_WINDOW (dlg), _("Upload to Damned Lies"));
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
@@ -81,7 +82,6 @@ gtr_upload_dialog_init (GtrUploadDialog *dlg)
   g_object_ref (priv->main_box);
   priv->text_view = GTK_WIDGET (gtk_builder_get_object (builder, "text_view"));
   priv->label = GTK_WIDGET (gtk_builder_get_object (builder, "label"));
-  priv->spinner = GTK_WIDGET (gtk_builder_get_object (builder, "spinner"));
   g_object_unref (builder);
 
   gtk_box_pack_start (content_area, priv->main_box, FALSE, FALSE, 0);
@@ -91,8 +91,11 @@ GtrUploadDialog *
 gtr_upload_dialog_new (GtkWidget  *parent)
 {
   GtrUploadDialog *dlg;
+  GtrUploadDialogPrivate *priv = NULL;
 
   dlg = g_object_new (GTR_TYPE_UPLOAD_DIALOG, NULL);
+  priv = gtr_upload_dialog_get_instance_private (dlg);
+  priv->parent = parent;
 
   if (GTK_WINDOW (parent) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
     {
@@ -123,16 +126,24 @@ gtr_upload_dialog_set_loading (GtrUploadDialog *dlg,
                                gboolean         loading)
 {
   GtrUploadDialogPrivate *priv = gtr_upload_dialog_get_instance_private (dlg);
+
   if (loading)
     {
-      gtk_widget_show (priv->spinner);
       gtk_widget_set_sensitive (priv->text_view, FALSE);
-      gtk_spinner_start (GTK_SPINNER (priv->spinner));
+      gtk_widget_set_sensitive (priv->upload, FALSE);
+      gtk_button_set_label (GTK_BUTTON (priv->upload), _("Uploading..."));
     }
   else
     {
-      gtk_widget_hide (priv->spinner);
       gtk_widget_set_sensitive (priv->text_view, TRUE);
-      gtk_spinner_stop (GTK_SPINNER (priv->spinner));
+      gtk_widget_set_sensitive (priv->upload, TRUE);
+      gtk_button_set_label (GTK_BUTTON (priv->upload), _("Upload"));
     }
+}
+
+GtkWidget *
+gtr_upload_dialog_get_parent (GtrUploadDialog *dlg)
+{
+  GtrUploadDialogPrivate *priv = gtr_upload_dialog_get_instance_private (dlg);
+  return priv->parent;
 }

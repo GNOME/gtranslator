@@ -51,6 +51,7 @@
 static void load_file_list (GtrWindow * window, const GSList * uris);
 static GList * get_modified_documents (GtrWindow * window);
 
+
 /*
  * The main file opening function. Checks that the file isn't already open,
  * and if not, opens it in a new tab.
@@ -343,6 +344,62 @@ confirm_overwrite_callback (GtkFileChooser * dialog, gpointer data)
   return res;
 }
 
+static void
+_upload_file_callback (SoupSession *session,
+                       SoupMessage *msg,
+                       gpointer     user_data)
+{
+  GtkWidget *dialog;
+  GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
+  GtrNotebook *active_notebook;
+
+  GtkWidget *upload_dialog = user_data;
+  GtkWidget *window = gtr_upload_dialog_get_parent (GTR_UPLOAD_DIALOG (upload_dialog));
+
+  active_notebook = gtr_window_get_notebook (GTR_WINDOW (window));
+
+  if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
+    {
+      if (msg->status_code == 403)
+        {
+          dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                           flags,
+                                           GTK_MESSAGE_INFO,
+                                           GTK_BUTTONS_OK,
+                                           _("This file has already been uploaded"));
+          gtr_notebook_enable_upload (active_notebook, FALSE);
+          goto end;
+        }
+
+      dialog = gtk_message_dialog_new_with_markup (
+        GTK_WINDOW (window),
+        flags,
+        GTK_MESSAGE_WARNING,
+        GTK_BUTTONS_CLOSE,
+        _(
+          "An error occurred while uploading the file: %s\n"
+          "Maybe you've not configured your <i>l10n.gnome.org</i> "
+          "<b>token</b> correctly in your profile or you don't have "
+          "permissions to upload this module."
+        ),
+        soup_status_get_phrase (msg->status_code));
+      goto end;
+    }
+
+  dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                   flags,
+                                   GTK_MESSAGE_INFO,
+                                   GTK_BUTTONS_OK,
+                                   _("The file has been uploaded!"));
+
+  gtr_notebook_enable_upload (active_notebook, FALSE);
+
+end:
+  gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (dialog);
+  gtk_widget_destroy (upload_dialog);
+}
+
 void
 gtr_upload_file (GtkWidget *upload_dialog,
                  int        response_id,
@@ -350,18 +407,17 @@ gtr_upload_file (GtkWidget *upload_dialog,
 {
   GtrTab *tab;
   GtrPo *po;
-  GtkWidget *dialog, *success_dialog;
-  GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
   GMappedFile *mapped;
   GError *error = NULL;
   GtrProfileManager *pmanager = NULL;
-  GtrNotebook *active_notebook;
   GtrProfile *profile;
   GtrHeader *header;
-  g_autoptr (SoupMessage) msg = NULL;
   g_autoptr (SoupMultipart) mpart = NULL;
   g_autoptr (SoupBuffer) buffer = NULL;
-  g_autoptr (SoupSession) session = NULL;
+
+  SoupMessage *msg = NULL;
+  static SoupSession *session = NULL;
+
   const gchar *content = NULL;
   g_autofree gchar *mime_type = NULL;
   g_autofree gchar *filename = NULL;
@@ -395,7 +451,6 @@ gtr_upload_file (GtkWidget *upload_dialog,
   }
   content = g_mapped_file_get_contents (mapped);
   size = g_mapped_file_get_length (mapped);
-  active_notebook = gtr_window_get_notebook (window);
   header = gtr_po_get_header (po);
 
   /* Check mimetype */
@@ -434,10 +489,10 @@ gtr_upload_file (GtkWidget *upload_dialog,
   /* Init multipart container */
   mpart = soup_multipart_new (SOUP_FORM_MIME_TYPE_MULTIPART);
   buffer = soup_buffer_new (SOUP_MEMORY_COPY, content, size);
-  soup_multipart_append_form_string (mpart, "file", "txt");
   soup_multipart_append_form_file (mpart, "file", filename,
                                    mime_type, buffer);
-  soup_multipart_append_form_string (mpart, "comment", upload_comment);
+  if (upload_comment)
+    soup_multipart_append_form_string (mpart, "comment", upload_comment);
 
   /* Get the associated message */
   msg = soup_form_request_new_from_multipart (upload_endpoint, mpart);
@@ -446,60 +501,12 @@ gtr_upload_file (GtkWidget *upload_dialog,
   /* Append the authentication header*/
   soup_message_headers_append (msg->request_headers, "Authentication", auth);
 
-  session = soup_session_new ();
   gtr_upload_dialog_set_loading (GTR_UPLOAD_DIALOG (upload_dialog), TRUE);
-  // TODO: Send async
-  soup_session_send_message (session, msg);
 
-  if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
-    {
-      if (msg->status_code == 403)
-        {
-          dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                           flags,
-                                           GTK_MESSAGE_INFO,
-                                           GTK_BUTTONS_OK,
-                                           _("This file has already been uploaded"));
-          gtk_dialog_run (GTK_DIALOG (dialog));
-          gtk_widget_destroy (dialog);
-          gtr_notebook_enable_upload (active_notebook, FALSE);
-          gtk_widget_destroy (upload_dialog);
-          return;
-        }
+  if (!session)
+    session = soup_session_new ();
 
-      dialog = gtk_message_dialog_new_with_markup (
-        GTK_WINDOW (window),
-        flags,
-        GTK_MESSAGE_WARNING,
-        GTK_BUTTONS_CLOSE,
-        _(
-          "An error occurred while uploading the file: %s\n"
-          "Maybe you've not configured your <i>l10n.gnome.org</i> "
-          "<b>token</b> correctly in your profile or you don't have "
-          "permissions to upload this module."
-        ),
-        soup_status_get_phrase (msg->status_code));
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
-      gtk_widget_destroy (upload_dialog);
-      return;
-    }
-
-  gtk_widget_destroy (upload_dialog);
-
-  success_dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                           flags,
-                                           GTK_MESSAGE_INFO,
-                                           GTK_BUTTONS_OK,
-                                           _("The file '%s.%s.%s.%s' has been uploaded!"),
-                                           selected_module,
-                                           selected_branch,
-                                           selected_team,
-                                           selected_domain);
-
-  gtk_dialog_run (GTK_DIALOG (success_dialog));
-  gtk_widget_destroy (success_dialog);
-  gtr_notebook_enable_upload (active_notebook, FALSE);
+  soup_session_queue_message (session, msg, _upload_file_callback, upload_dialog);
 }
 
 /*
