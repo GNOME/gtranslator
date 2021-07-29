@@ -72,6 +72,7 @@ sources = files(
   'gtr-progress.c',
   'gtr-window.c',
   'gtr-search-bar.c',
+  'gtr-upload-dialog.c',
 )
 
 marshal = 'gtr-marshal'
@@ -111,6 +112,7 @@ resource_data = files(
   'gtr-tab.ui',
   'gtr-window.ui',
   'gtr-search-bar.ui',
+  'gtr-upload-dialog.ui',
 )
 
 sources += gnome.compile_resources(

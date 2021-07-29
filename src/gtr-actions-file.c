@@ -41,6 +41,7 @@
 #include "gtr-tab.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
+#include "gtr-upload-dialog.h"
 
 #define GTR_TAB_SAVE_AS    "gtr-tab-save-as"
 #define GTR_IS_CLOSING_ALL "gtr-is-closing-all"
@@ -342,12 +343,10 @@ confirm_overwrite_callback (GtkFileChooser * dialog, gpointer data)
   return res;
 }
 
-/*
- * "Upload file" dialog
- *
- */
 void
-gtr_upload_file_dialog (GtkAction * action, GtrWindow * window)
+gtr_upload_file (GtkWidget *upload_dialog,
+                 int        response_id,
+                 gpointer   user_data)
 {
   GtrTab *tab;
   GtrPo *po;
@@ -369,11 +368,22 @@ gtr_upload_file_dialog (GtkAction * action, GtrWindow * window)
   g_autofree gchar *upload_endpoint = NULL;
   const char *auth_token = NULL;
   g_autofree char *auth = NULL;
+  g_autofree char *upload_comment = NULL;
   gsize size;
   const gchar *selected_team;
   const gchar *selected_module;
   const gchar *selected_branch;
   const gchar *selected_domain;
+
+  GtrWindow * window = GTR_WINDOW (user_data);
+
+  if (response_id != GTK_RESPONSE_ACCEPT)
+    {
+      gtk_widget_destroy (upload_dialog);
+      return;
+    }
+
+  upload_comment = gtr_upload_dialog_get_comment (GTR_UPLOAD_DIALOG (upload_dialog));
 
   /* Get file content */
   tab = gtr_window_get_active_tab (window);
@@ -427,6 +437,7 @@ gtr_upload_file_dialog (GtkAction * action, GtrWindow * window)
   soup_multipart_append_form_string (mpart, "file", "txt");
   soup_multipart_append_form_file (mpart, "file", filename,
                                    mime_type, buffer);
+  soup_multipart_append_form_string (mpart, "comment", upload_comment);
 
   /* Get the associated message */
   msg = soup_form_request_new_from_multipart (upload_endpoint, mpart);
@@ -436,6 +447,8 @@ gtr_upload_file_dialog (GtkAction * action, GtrWindow * window)
   soup_message_headers_append (msg->request_headers, "Authentication", auth);
 
   session = soup_session_new ();
+  gtr_upload_dialog_set_loading (GTR_UPLOAD_DIALOG (upload_dialog), TRUE);
+  // TODO: Send async
   soup_session_send_message (session, msg);
 
   if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
@@ -450,6 +463,7 @@ gtr_upload_file_dialog (GtkAction * action, GtrWindow * window)
           gtk_dialog_run (GTK_DIALOG (dialog));
           gtk_widget_destroy (dialog);
           gtr_notebook_enable_upload (active_notebook, FALSE);
+          gtk_widget_destroy (upload_dialog);
           return;
         }
 
@@ -467,8 +481,11 @@ gtr_upload_file_dialog (GtkAction * action, GtrWindow * window)
         soup_status_get_phrase (msg->status_code));
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
+      gtk_widget_destroy (upload_dialog);
       return;
     }
+
+  gtk_widget_destroy (upload_dialog);
 
   success_dialog = gtk_message_dialog_new (GTK_WINDOW (window),
                                            flags,
@@ -483,6 +500,23 @@ gtr_upload_file_dialog (GtkAction * action, GtrWindow * window)
   gtk_dialog_run (GTK_DIALOG (success_dialog));
   gtk_widget_destroy (success_dialog);
   gtr_notebook_enable_upload (active_notebook, FALSE);
+}
+
+/*
+ * "Upload file" dialog
+ *
+ */
+void
+gtr_upload_file_dialog (GtkAction * action, GtrWindow * window)
+{
+  GtrUploadDialog *dialog = gtr_upload_dialog_new (GTK_WIDGET (window));
+
+  g_signal_connect (dialog,
+                   "response",
+                   G_CALLBACK (gtr_upload_file),
+                   window);
+
+  gtk_widget_show_all (GTK_WIDGET (dialog));
 }
 
 /*
