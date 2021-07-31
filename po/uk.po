@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-15 08:20+0000\n"
-"PO-Revision-Date: 2021-03-15 10:26+0200\n"
+"POT-Creation-Date: 2021-07-31 16:58+0000\n"
+"PO-Revision-Date: 2021-07-31 21:59+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 20.11.70\n"
+"X-Generator: Lokalize 20.12.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -56,7 +56,7 @@ msgstr ""
 "додаток вставлення теґів, додаток інтеграції із subversion та додаток "
 "перегляду початкового коду програм."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:117
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:131
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -218,19 +218,19 @@ msgstr "Переглядач джерельного коду"
 msgid "Source code"
 msgstr "Джерельний код"
 
-#: src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:58
 msgid "Current Maintainers"
 msgstr "Чинні відповідальні"
 
-#: src/gtr-actions-app.c:52
+#: src/gtr-actions-app.c:62
 msgid "Previous Developers"
 msgstr "Попередні розробники"
 
-#: src/gtr-actions-app.c:63
+#: src/gtr-actions-app.c:73
 msgid "Contributors"
 msgstr "Помічники"
 
-#: src/gtr-actions-app.c:88
+#: src/gtr-actions-app.c:98
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -240,18 +240,18 @@ msgstr "Комплект ПЗ для редагування файлів лок�
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:101
+#: src/gtr-actions-app.c:111
 msgid "translator-credits"
 msgstr ""
 "Yuri Syrota <rasta@renome.rovno.ua>\n"
 "Сергій Панасенко <nitay@users.sourceforge.net>\n"
 "Sergiy Gavrylov <sergiovana@bigmir.net>"
 
-#: src/gtr-actions-app.c:104
+#: src/gtr-actions-app.c:114
 msgid "Translation Editor Web Site"
 msgstr "Cайт «Редактора перекладів»"
 
-#: src/gtr-actions-file.c:218
+#: src/gtr-actions-file.c:220
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -260,32 +260,32 @@ msgstr ""
 "Хочете зберегти зміни до цього файла: <span weight=\"bold\" size=\"large\">"
 "%s</span>?"
 
-#: src/gtr-actions-file.c:224
+#: src/gtr-actions-file.c:226
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr ""
 "Якщо ви не збережете файл, всі незбережені зміни будуть остаточно втрачені."
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:229
 msgid "Save and open"
 msgstr "Зберегти і відкрити"
 
-#: src/gtr-actions-file.c:228
+#: src/gtr-actions-file.c:230
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: src/gtr-actions-file.c:229
+#: src/gtr-actions-file.c:231
 msgid "Continue without saving"
 msgstr "Продовжити без збереження"
 
-#: src/gtr-actions-file.c:261
+#: src/gtr-actions-file.c:263
 msgid "Open file for translation"
 msgstr "Відкрити файл для перекладу"
 
-#: src/gtr-actions-file.c:449
+#: src/gtr-actions-file.c:369
 msgid "This file has already been uploaded"
 msgstr "Цей файл вже вивантажено"
 
-#: src/gtr-actions-file.c:462
+#: src/gtr-actions-file.c:380
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -294,14 +294,15 @@ msgid ""
 "module."
 msgstr ""
 "Сталася помилка під час вивантаження файла: %s\n"
-"Можливо, ви не налаштувати ваш <i>l10n.gnome.org</i>-<b>жетон</b> у вашому профілі або ви не маєте прав доступу до вивантаження цього модуля."
+"Можливо, ви не налаштувати ваш <i>l10n.gnome.org</i>-<b>жетон</b> у вашому "
+"профілі або ви не маєте прав доступу до вивантаження цього модуля."
 
-#: src/gtr-actions-file.c:477
-#, c-format
-msgid "The file '%s.%s.%s.%s' has been uploaded!"
-msgstr "Файл «%s.%s.%s.%s» вивантажено!"
+#: src/gtr-actions-file.c:393
+#| msgid "This file has already been uploaded"
+msgid "The file has been uploaded!"
+msgstr "Файл вивантажено!"
 
-#: src/gtr-actions-file.c:507
+#: src/gtr-actions-file.c:548
 msgid "Save file as…"
 msgstr "Зберегти файл як…"
 
@@ -468,7 +469,8 @@ msgid ""
 "module."
 msgstr ""
 "Сталася помилка під час резервування цього модуля: %s\n"
-"Можливо, ви не налаштувати ваш <i>l10n.gnome.org</i>-<b>жетон</b> у вашому профілі або ви не маєте прав доступу до резервування цього модуля."
+"Можливо, ви не налаштувати ваш <i>l10n.gnome.org</i>-<b>жетон</b> у вашому "
+"профілі або ви не маєте прав доступу до резервування цього модуля."
 
 #: src/gtr-dl-teams.c:662
 #, c-format
@@ -1097,6 +1099,31 @@ msgstr "П_очаткове повідомлення"
 msgid "Translate_d Text"
 msgstr "Пере_кладений текст"
 
+#: src/gtr-upload-dialog.c:60
+msgid "_Upload"
+msgstr ""
+"_Вивантажити"
+
+#: src/gtr-upload-dialog.c:62
+#| msgid "Load from Damned Lies"
+msgid "Upload to Damned Lies"
+msgstr "Вивантажити на Damned Lies"
+
+#: src/gtr-upload-dialog.c:134
+msgid "Uploading..."
+msgstr ""
+"Вивантаження…"
+
+#: src/gtr-upload-dialog.c:140
+msgid "Upload"
+msgstr ""
+"Вивантажити"
+
+#: src/gtr-upload-dialog.ui:50
+#| msgid "Comment"
+msgid "comment:"
+msgstr "коментар:"
+
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:214
 #, c-format
@@ -1368,6 +1395,9 @@ msgid ""
 "translation memory."
 msgstr ""
 "Максимальна різниця в довжині між рядком та прикладом у пам'яті перекладів."
+
+#~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
+#~ msgstr "Файл «%s.%s.%s.%s» вивантажено!"
 
 #~ msgid "An error occurred while uploading the file: %s"
 #~ msgstr "Під час вивантаження файла сталася помилка: %s"
