@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-19 10:13+0000\n"
-"PO-Revision-Date: 2021-03-20 14:25+0100\n"
+"POT-Creation-Date: 2021-07-31 16:58+0000\n"
+"PO-Revision-Date: 2021-08-01 14:02+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -57,7 +57,7 @@ msgstr ""
 "takimi jak alternatywny język, wstawianie znaczników, integracja z systemem "
 "Subversion i przeglądarka kodu źródłowego."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:117
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:131
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -227,19 +227,19 @@ msgstr "Przeglądarka źródeł"
 msgid "Source code"
 msgstr "Kod źródłowy"
 
-#: src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:58
 msgid "Current Maintainers"
 msgstr "Obecni opiekunowie"
 
-#: src/gtr-actions-app.c:52
+#: src/gtr-actions-app.c:62
 msgid "Previous Developers"
 msgstr "Poprzedni programiści"
 
-#: src/gtr-actions-app.c:63
+#: src/gtr-actions-app.c:73
 msgid "Contributors"
 msgstr "Współtwórcy"
 
-#: src/gtr-actions-app.c:88
+#: src/gtr-actions-app.c:98
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -251,7 +251,7 @@ msgstr ""
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:101
+#: src/gtr-actions-app.c:111
 msgid "translator-credits"
 msgstr ""
 "Grzegorz Kowal <g_kowal@poczta.onet.pl>, 2001\n"
@@ -260,11 +260,11 @@ msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2011-2021\n"
 "Aviary.pl <community-poland@mozilla.org>, 2011-2021"
 
-#: src/gtr-actions-app.c:104
+#: src/gtr-actions-app.c:114
 msgid "Translation Editor Web Site"
 msgstr "Witryna edytora tłumaczeń"
 
-#: src/gtr-actions-file.c:218
+#: src/gtr-actions-file.c:220
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -272,33 +272,33 @@ msgid ""
 msgstr ""
 "Zapisać zmiany w tym pliku: <span weight=\"bold\" size=\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:224
+#: src/gtr-actions-file.c:226
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr ""
 "Jeżeli dokument nie zostanie zapisany, wszystkie niezapisane zmiany zostaną "
 "bezpowrotnie utracone."
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:229
 msgid "Save and open"
 msgstr "Zapisz i otwórz"
 
-#: src/gtr-actions-file.c:228
+#: src/gtr-actions-file.c:230
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: src/gtr-actions-file.c:229
+#: src/gtr-actions-file.c:231
 msgid "Continue without saving"
 msgstr "Zamknij bez zapisywania"
 
-#: src/gtr-actions-file.c:261
+#: src/gtr-actions-file.c:263
 msgid "Open file for translation"
 msgstr "Otwiera plik do tłumaczenia"
 
-#: src/gtr-actions-file.c:449
+#: src/gtr-actions-file.c:369
 msgid "This file has already been uploaded"
 msgstr "Ten plik został już wysłany"
 
-#: src/gtr-actions-file.c:462
+#: src/gtr-actions-file.c:380
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -310,12 +310,11 @@ msgstr ""
 "Być może nie skonfigurowano poprawnie <b>tokenu</b> serwisu <i>l10n.gnome."
 "org</i> w profilu lub brak uprawnień do wysyłania tego modułu."
 
-#: src/gtr-actions-file.c:477
-#, c-format
-msgid "The file '%s.%s.%s.%s' has been uploaded!"
-msgstr "Wysłano plik „%s.%s.%s.%s”"
+#: src/gtr-actions-file.c:393
+msgid "The file has been uploaded!"
+msgstr "Plik został wysłany."
 
-#: src/gtr-actions-file.c:507
+#: src/gtr-actions-file.c:548
 msgid "Save file as…"
 msgstr "Zapis pliku jako…"
 
@@ -1119,6 +1118,26 @@ msgstr "_Oryginalny komunikat"
 #: src/gtr-tab.ui:171
 msgid "Translate_d Text"
 msgstr "Przetłumaczony te_kst"
+
+#: src/gtr-upload-dialog.c:60
+msgid "_Upload"
+msgstr "_Wyślij"
+
+#: src/gtr-upload-dialog.c:62
+msgid "Upload to Damned Lies"
+msgstr "Wysłanie do serwisu Damned Lies"
+
+#: src/gtr-upload-dialog.c:134
+msgid "Uploading..."
+msgstr "Wysyłanie…"
+
+#: src/gtr-upload-dialog.c:140
+msgid "Upload"
+msgstr "Wyślij"
+
+#: src/gtr-upload-dialog.ui:50
+msgid "comment:"
+msgstr "komentarz:"
 
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:214
