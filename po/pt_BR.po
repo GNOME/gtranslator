@@ -11,24 +11,24 @@
 # Gabriel Feitosa Vilar <cogumm@gmail.com>, 2010, 2011.
 # Fábio Nogueira <fnogueira@gnome.org>, 2020.
 # Henrique Machado Campos <henriquecamposrj@gmail.com>, 2020.
-# Rafael Fontenelle <rafaelff@gnome.org>, 2013-2020.
 # Bruno Lopes <brunolopesdsilv@gmail.com>, 2020.
 # Enrico Nicoletto <liverig@gmail.com>, 2013, 2021.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2013-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-15 08:20+0000\n"
-"PO-Revision-Date: 2021-03-15 16:18-0300\n"
-"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
+"POT-Creation-Date: 2021-07-31 16:58+0000\n"
+"PO-Revision-Date: 2021-08-01 13:56-0300\n"
+"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Generator: Gtranslator 40.0\n"
 "X-Project-Style: gnome\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
@@ -67,7 +67,7 @@ msgstr ""
 "interessantes como idioma alternativo, inserir marcas, integração com "
 "subversion e um visualizador de código fonte."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:117
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:131
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -237,19 +237,19 @@ msgstr "Visualizador de código-fonte"
 msgid "Source code"
 msgstr "Código fonte"
 
-#: src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:58
 msgid "Current Maintainers"
 msgstr "Mantenedores atuais"
 
-#: src/gtr-actions-app.c:52
+#: src/gtr-actions-app.c:62
 msgid "Previous Developers"
 msgstr "Desenvolvedores anteriores"
 
-#: src/gtr-actions-app.c:63
+#: src/gtr-actions-app.c:73
 msgid "Contributors"
 msgstr "Colaboradores"
 
-#: src/gtr-actions-app.c:88
+#: src/gtr-actions-app.c:98
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -261,7 +261,7 @@ msgstr ""
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:101
+#: src/gtr-actions-app.c:111
 msgid "translator-credits"
 msgstr ""
 "João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>\n"
@@ -274,11 +274,11 @@ msgstr ""
 "Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Enrico Nicoletto <liverig@gmail.com>"
 
-#: src/gtr-actions-app.c:104
+#: src/gtr-actions-app.c:114
 msgid "Translation Editor Web Site"
 msgstr "Site do Editor de tradução"
 
-#: src/gtr-actions-file.c:218
+#: src/gtr-actions-file.c:220
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -287,33 +287,33 @@ msgstr ""
 "Deseja salvar as alterações a este arquivo: <span weight=\"bold\" size="
 "\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:224
+#: src/gtr-actions-file.c:226
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr ""
 "Se você não salvar, todas as suas alterações não salvas serão "
 "permanentemente perdidas."
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:229
 msgid "Save and open"
 msgstr "Salvar e abrir"
 
-#: src/gtr-actions-file.c:228
+#: src/gtr-actions-file.c:230
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/gtr-actions-file.c:229
+#: src/gtr-actions-file.c:231
 msgid "Continue without saving"
 msgstr "Continuar sem salvar"
 
-#: src/gtr-actions-file.c:261
+#: src/gtr-actions-file.c:263
 msgid "Open file for translation"
 msgstr "Abrir arquivo para tradução"
 
-#: src/gtr-actions-file.c:449
+#: src/gtr-actions-file.c:369
 msgid "This file has already been uploaded"
 msgstr "Esse arquivo já foi enviado"
 
-#: src/gtr-actions-file.c:462
+#: src/gtr-actions-file.c:380
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -326,12 +326,12 @@ msgstr ""
 "corretamente em seu perfil ou você não possui permissões para enviar nesse "
 "módulo."
 
-#: src/gtr-actions-file.c:477
-#, c-format
-msgid "The file '%s.%s.%s.%s' has been uploaded!"
-msgstr "O arquivo \"%s.%s.%s.%s\" foi enviado!"
+#: src/gtr-actions-file.c:393
+#| msgid "This file has already been uploaded"
+msgid "The file has been uploaded!"
+msgstr "O arquivo já foi enviado!"
 
-#: src/gtr-actions-file.c:507
+#: src/gtr-actions-file.c:548
 msgid "Save file as…"
 msgstr "Salvar arquivo como…"
 
@@ -1135,6 +1135,28 @@ msgstr "Mensagem o_riginal"
 msgid "Translate_d Text"
 msgstr "Texto tradu_zido"
 
+#: src/gtr-upload-dialog.c:60
+msgid "_Upload"
+msgstr "_Enviar"
+
+#: src/gtr-upload-dialog.c:62
+#| msgid "Load from Damned Lies"
+msgid "Upload to Damned Lies"
+msgstr "Envia para o Damned Lies"
+
+#: src/gtr-upload-dialog.c:134
+msgid "Uploading..."
+msgstr "Enviando…"
+
+#: src/gtr-upload-dialog.c:140
+msgid "Upload"
+msgstr "Enviar"
+
+#: src/gtr-upload-dialog.ui:50
+#| msgid "Comment"
+msgid "comment:"
+msgstr "comentário:"
+
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:214
 #, c-format
@@ -1413,6 +1435,9 @@ msgid ""
 msgstr ""
 "Diferença máxima em comprimento entre as mensagens exibidas como ocorrências "
 "pela memória de tradução."
+
+#~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
+#~ msgstr "O arquivo \"%s.%s.%s.%s\" foi enviado!"
 
 #~ msgid "An error occurred while uploading the file: %s"
 #~ msgstr "Ocorreu um erro ao enviar o arquivo: %s"
