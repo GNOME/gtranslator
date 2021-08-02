@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-15 08:20+0000\n"
-"PO-Revision-Date: 2021-03-16 01:30+0100\n"
+"POT-Creation-Date: 2021-07-31 16:58+0000\n"
+"PO-Revision-Date: 2021-08-02 23:05+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -57,7 +57,7 @@ msgstr ""
 "insticksmoduler, som alternativa språk, taggning, integration med subversion "
 "och källkodsläsare."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:117
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:131
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -217,20 +217,20 @@ msgstr "Källkodsvisare"
 msgid "Source code"
 msgstr "Källkod"
 
-#: src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:58
 msgid "Current Maintainers"
 msgstr "Nuvarande ansvariga"
 
-#: src/gtr-actions-app.c:52
+#: src/gtr-actions-app.c:62
 msgid "Previous Developers"
 msgstr "Tidigare utvecklare"
 
-#: src/gtr-actions-app.c:63
+#: src/gtr-actions-app.c:73
 msgid "Contributors"
 msgstr "Bidragsgivare"
 
 # src/about.c:60
-#: src/gtr-actions-app.c:88
+#: src/gtr-actions-app.c:98
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -243,7 +243,7 @@ msgstr ""
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:101
+#: src/gtr-actions-app.c:111
 msgid "translator-credits"
 msgstr ""
 "Daniel Nylander <po@danielnylander.se>\n"
@@ -255,11 +255,11 @@ msgstr ""
 "<tp-sv@listor.tp-sv.se>."
 
 # src/menus.c:265
-#: src/gtr-actions-app.c:104
+#: src/gtr-actions-app.c:114
 msgid "Translation Editor Web Site"
 msgstr "Webbplats för Översättningsredigerare"
 
-#: src/gtr-actions-file.c:218
+#: src/gtr-actions-file.c:220
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -268,31 +268,31 @@ msgstr ""
 "Vill du spara ändringar till denna fil: <span weight=\"bold\" size=\"large\">"
 "%s</span>?"
 
-#: src/gtr-actions-file.c:224
+#: src/gtr-actions-file.c:226
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr "Om du inte sparar så kommer dina osparade ändringar att gå förlorade."
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:229
 msgid "Save and open"
 msgstr "Spara och öppna"
 
-#: src/gtr-actions-file.c:228
+#: src/gtr-actions-file.c:230
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/gtr-actions-file.c:229
+#: src/gtr-actions-file.c:231
 msgid "Continue without saving"
 msgstr "Fortsätt utan att spara"
 
-#: src/gtr-actions-file.c:261
+#: src/gtr-actions-file.c:263
 msgid "Open file for translation"
 msgstr "Öppna fil för översättning"
 
-#: src/gtr-actions-file.c:449
+#: src/gtr-actions-file.c:369
 msgid "This file has already been uploaded"
 msgstr "Denna fil har redan skickats"
 
-#: src/gtr-actions-file.c:462
+#: src/gtr-actions-file.c:380
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -304,13 +304,12 @@ msgstr ""
 "Du har kanske inte konfigurerat din <b>token</b> för <i>l10n.gnome.org</i> "
 "korrekt i din profil, eller så har du inte rättighet att skicka denna modul."
 
-#: src/gtr-actions-file.c:477
-#, c-format
-msgid "The file '%s.%s.%s.%s' has been uploaded!"
-msgstr "Filen ”%s.%s.%s.%s” har skickats!"
+#: src/gtr-actions-file.c:393
+msgid "The file has been uploaded!"
+msgstr "Filen har skickats!"
 
 # src/menus.c:281
-#: src/gtr-actions-file.c:507
+#: src/gtr-actions-file.c:548
 msgid "Save file as…"
 msgstr "Spara fil som…"
 
@@ -1176,6 +1175,27 @@ msgstr "_Källtext"
 msgid "Translate_d Text"
 msgstr "_Översatt text"
 
+#: src/gtr-upload-dialog.c:60
+msgid "_Upload"
+msgstr "S_kicka"
+
+#: src/gtr-upload-dialog.c:62
+msgid "Upload to Damned Lies"
+msgstr "Skicka till Förbannade lögner (Damned Lies)"
+
+#: src/gtr-upload-dialog.c:134
+msgid "Uploading..."
+msgstr "Skickar…"
+
+#: src/gtr-upload-dialog.c:140
+msgid "Upload"
+msgstr "Skicka"
+
+# src/header_stuff.c:462
+#: src/gtr-upload-dialog.ui:50
+msgid "comment:"
+msgstr "kommentar:"
+
 # src/prefs.c:239
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:214
@@ -1461,6 +1481,9 @@ msgid ""
 msgstr ""
 "Maximal skillnad i längd mellan meddelanden visade som träffar av "
 "översättningsminnet."
+
+#~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
+#~ msgstr "Filen ”%s.%s.%s.%s” har skickats!"
 
 #~ msgid "An error occurred while uploading the file: %s"
 #~ msgstr "Ett fel uppstod vid sändning av filen: %s"
