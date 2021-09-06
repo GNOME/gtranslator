@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-15 08:20+0000\n"
-"PO-Revision-Date: 2021-03-18 22:09+0200\n"
+"POT-Creation-Date: 2021-07-31 16:58+0000\n"
+"PO-Revision-Date: 2021-09-06 14:06+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2)\n"
-"X-Generator: Gtranslator 3.38.0\n"
+"X-Generator: Gtranslator 40.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -56,7 +56,7 @@ msgstr ""
 "kaip papildoma kalba, žymų įterpimas, integracija su subversion bei pradinio "
 "kodo žiūryklė."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:117
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:131
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -212,19 +212,19 @@ msgstr "Pradinio programos teksto peržiūra"
 msgid "Source code"
 msgstr "Pradinis programos tekstas"
 
-#: src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:58
 msgid "Current Maintainers"
 msgstr "Dabartiniai prižiūrėtojai"
 
-#: src/gtr-actions-app.c:52
+#: src/gtr-actions-app.c:62
 msgid "Previous Developers"
 msgstr "Ankstesni kūrėjai"
 
-#: src/gtr-actions-app.c:63
+#: src/gtr-actions-app.c:73
 msgid "Contributors"
 msgstr "Pagalbininkai"
 
-#: src/gtr-actions-app.c:88
+#: src/gtr-actions-app.c:98
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -236,18 +236,18 @@ msgstr ""
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:101
+#: src/gtr-actions-app.c:111
 msgid "translator-credits"
 msgstr ""
 "Aurimas Černius <aurisc4@gmail.com>\n"
 "Žygimantas Beručka <zygis@gnome.org>\n"
 "Gediminas Paulauskas <menesis@chatsubo.lt>"
 
-#: src/gtr-actions-app.c:104
+#: src/gtr-actions-app.c:114
 msgid "Translation Editor Web Site"
 msgstr "Vertimų redaktoriaus tinklalapis"
 
-#: src/gtr-actions-file.c:218
+#: src/gtr-actions-file.c:220
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -256,31 +256,31 @@ msgstr ""
 "Ar norite įrašyti šio failo pakeitimus: <span weight=\"bold\" size=\"large\">"
 "%s</span>?"
 
-#: src/gtr-actions-file.c:224
+#: src/gtr-actions-file.c:226
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr "Jei neįrašysite, visų jūsų pakeitimai bus negrįžtamai prarasti."
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:229
 msgid "Save and open"
 msgstr "Įrašyti ir atverti"
 
-#: src/gtr-actions-file.c:228
+#: src/gtr-actions-file.c:230
 msgid "Cancel"
 msgstr "Atsisakyti"
 
-#: src/gtr-actions-file.c:229
+#: src/gtr-actions-file.c:231
 msgid "Continue without saving"
 msgstr "Tęsti neįrašant"
 
-#: src/gtr-actions-file.c:261
+#: src/gtr-actions-file.c:263
 msgid "Open file for translation"
 msgstr "Atverti failą vertimui"
 
-#: src/gtr-actions-file.c:449
+#: src/gtr-actions-file.c:369
 msgid "This file has already been uploaded"
 msgstr "Šis failas jau buvo nusiųstas"
 
-#: src/gtr-actions-file.c:462
+#: src/gtr-actions-file.c:380
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -292,12 +292,12 @@ msgstr ""
 "Galbūt teisingai nesukonfigūravote savo <i>l10n.gnome.org</i> <b>leksemos</"
 "b> savo profilyje arba neturite leidimų įkelti šį modulį."
 
-#: src/gtr-actions-file.c:477
-#, c-format
-msgid "The file '%s.%s.%s.%s' has been uploaded!"
-msgstr "Failas „%s.%s.%s.%s“ buvo nusiųstas!"
+#: src/gtr-actions-file.c:393
+#| msgid "This file has already been uploaded"
+msgid "The file has been uploaded!"
+msgstr "Šis failas jau buvo nusiųstas!"
 
-#: src/gtr-actions-file.c:507
+#: src/gtr-actions-file.c:548
 msgid "Save file as…"
 msgstr "Įrašyti failą kaip…"
 
@@ -1099,6 +1099,28 @@ msgstr "_Originalus tekstas"
 msgid "Translate_d Text"
 msgstr "Iš_verstas tekstas"
 
+#: src/gtr-upload-dialog.c:60
+msgid "_Upload"
+msgstr "N_usiųsti"
+
+#: src/gtr-upload-dialog.c:62
+#| msgid "Load from Damned Lies"
+msgid "Upload to Damned Lies"
+msgstr "Nusiųsti į Damned Lies"
+
+#: src/gtr-upload-dialog.c:134
+msgid "Uploading..."
+msgstr "Siunčiama..."
+
+#: src/gtr-upload-dialog.c:140
+msgid "Upload"
+msgstr "Nusiųsti"
+
+#: src/gtr-upload-dialog.ui:50
+#| msgid "Comment"
+msgid "comment:"
+msgstr "komentaras:"
+
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:214
 #, c-format
@@ -1371,6 +1393,9 @@ msgid ""
 msgstr ""
 "Didžiausias ilgio skirtumas tarp užrašų, rodomų kaip sutapimai su vertimų "
 "atmintimi."
+
+#~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
+#~ msgstr "Failas „%s.%s.%s.%s“ buvo nusiųstas!"
 
 #~ msgid "An error occurred while uploading the file: %s"
 #~ msgstr "Kilo klaida siunčiant failą: %s"
