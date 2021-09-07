@@ -1,22 +1,22 @@
 # Dutch translation of granslator
 # Vincent van Adrighem <adrighem@gnome.org>, 2004.
 # Tino Meinen <a.t.meinen@chello.nl>, 2005.
-# Nathan Follens <nthn@unseen.is>, 2019-2021.
+# Nathan Follens <nfollens@gnome.org>, 2019-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator cvs\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-23 10:50+0000\n"
-"PO-Revision-Date: 2021-04-02 12:57+0200\n"
-"Last-Translator: Nathan Follens <nthn@unseen.is>\n"
+"POT-Creation-Date: 2021-07-31 16:58+0000\n"
+"PO-Revision-Date: 2021-09-07 21:49+0200\n"
+"Last-Translator: Nathan Follens <nfollens@gnome.org>\n"
 "Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -225,19 +225,19 @@ msgstr "Bronviewer"
 msgid "Source code"
 msgstr "Broncode"
 
-#: src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:58
 msgid "Current Maintainers"
 msgstr "Huidige beheerders"
 
-#: src/gtr-actions-app.c:52
+#: src/gtr-actions-app.c:62
 msgid "Previous Developers"
 msgstr "Vroegere ontwikkelaars"
 
-#: src/gtr-actions-app.c:63
+#: src/gtr-actions-app.c:73
 msgid "Contributors"
 msgstr "Met bijdragen van"
 
-#: src/gtr-actions-app.c:88
+#: src/gtr-actions-app.c:98
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -247,20 +247,20 @@ msgstr "Een vertaalsuite voor lokalisatie van toepassingen en bibliotheken."
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:101
+#: src/gtr-actions-app.c:111
 msgid "translator-credits"
 msgstr ""
 "Vincent van Adrighem\n"
 "Tino Meinen\n"
-"Nathan Follens <nthn@unseen.is>\n"
+"Nathan Follens <nfollens@gnome.org>\n"
 "\n"
-"Meer info over Gnome-NL http://nl.gnome.org"
+"Meer info over Gnome-NL https://nl.gnome.org"
 
-#: src/gtr-actions-app.c:104
+#: src/gtr-actions-app.c:114
 msgid "Translation Editor Web Site"
 msgstr "_Website van Vertalingsbewerker"
 
-#: src/gtr-actions-file.c:218
+#: src/gtr-actions-file.c:220
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -269,33 +269,33 @@ msgstr ""
 "Wilt u de wijzigingen opslaan in dit bestand: <span weight=\"bold\" size="
 "\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:224
+#: src/gtr-actions-file.c:226
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr ""
 "Als u niet opslaat, zullen al uw niet-opgeslagen wijzigingen definitief "
 "verloren gaan."
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:229
 msgid "Save and open"
 msgstr "Opslaan en openen"
 
-#: src/gtr-actions-file.c:228
+#: src/gtr-actions-file.c:230
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: src/gtr-actions-file.c:229
+#: src/gtr-actions-file.c:231
 msgid "Continue without saving"
 msgstr "Doorgaan zonder opslaan"
 
-#: src/gtr-actions-file.c:261
+#: src/gtr-actions-file.c:263
 msgid "Open file for translation"
 msgstr "Bestand openen voor vertalen"
 
-#: src/gtr-actions-file.c:449
+#: src/gtr-actions-file.c:369
 msgid "This file has already been uploaded"
 msgstr "Dit bestand is al geüpload"
 
-#: src/gtr-actions-file.c:462
+#: src/gtr-actions-file.c:380
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -308,12 +308,11 @@ msgstr ""
 "geconfigureerd in uw profiel, of beschikt u niet over de nodige rechten om "
 "deze module te uploaden."
 
-#: src/gtr-actions-file.c:477
-#, c-format
-msgid "The file '%s.%s.%s.%s' has been uploaded!"
-msgstr "Het bestand ‘%s.%s.%s.%s’ is geüpload!"
+#: src/gtr-actions-file.c:393
+msgid "The file has been uploaded!"
+msgstr "Het bestand is geüpload!"
 
-#: src/gtr-actions-file.c:507
+#: src/gtr-actions-file.c:548
 msgid "Save file as…"
 msgstr "Bestand opslaan als…"
 
@@ -777,7 +776,6 @@ msgid "Order by menu"
 msgstr "Volgordemenu"
 
 #: src/gtr-notebook.ui:585
-#| msgid "Undo (<Ctrl>z)"
 msgid "Find (<Ctrl><f>)"
 msgstr "Zoeken (<Ctrl><f>)"
 
@@ -794,7 +792,6 @@ msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Opslaan als (<Ctrl><Shift>s)"
 
 #: src/gtr-notebook.ui:665
-#| msgid "Open a new file (<Ctrl>o)"
 msgid "Upload file (<Ctrl>b)"
 msgstr "Bestand uploaden (<Ctrl>b)"
 
@@ -1116,6 +1113,26 @@ msgstr "_Oorspronkelijk bericht"
 msgid "Translate_d Text"
 msgstr "Vertaal_de tekst"
 
+#: src/gtr-upload-dialog.c:60
+msgid "_Upload"
+msgstr "_Uploaden"
+
+#: src/gtr-upload-dialog.c:62
+msgid "Upload to Damned Lies"
+msgstr "Uploaden naar Damned Lies"
+
+#: src/gtr-upload-dialog.c:134
+msgid "Uploading..."
+msgstr "Bezig met uploaden…"
+
+#: src/gtr-upload-dialog.c:140
+msgid "Upload"
+msgstr "Uploaden"
+
+#: src/gtr-upload-dialog.ui:50
+msgid "comment:"
+msgstr "opmerking:"
+
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:214
 #, c-format
@@ -1392,6 +1409,9 @@ msgstr ""
 "Maximaal verschil in lengte tussen berichten weergegeven als suggesties door "
 "het vertaalgeheugen."
 
+#~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
+#~ msgstr "Het bestand ‘%s.%s.%s.%s’ is geüpload!"
+
 #~ msgid "Do you want to save the changes?"
 #~ msgstr "Wilt u de wijzigingen opslaan?"
 
@@ -1545,9 +1565,6 @@ msgstr ""
 
 #~ msgid "gtranslator -- edit comment"
 #~ msgstr "gtranslatior -- commentaar bewerken"
-
-#~ msgid "Comment:"
-#~ msgstr "Opmerking:"
 
 #~ msgid "Should ALL translations from `%s' be removed?"
 #~ msgstr "Moeten ALLE vertalingen uit '%s' verwijderd worden?"
