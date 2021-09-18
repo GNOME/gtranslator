@@ -1,7 +1,7 @@
 {
     "app-id" : "org.gnome.GtranslatorDevel",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "master",
+    "runtime-version" : "41rc",
     "sdk" : "org.gnome.Sdk",
     "command" : "gtranslator",
     "tags" : [
@@ -69,66 +69,72 @@
                 {
                     "type" : "git",
                     "url" : "https://gitlab.gnome.org/GNOME/gspell.git",
-                    "tag": "1.8.4",
-                    "commit": "afd6d46d900dff621be840079c34488d9b3e8259"
+                    "tag" : "1.9.1",
+                    "commit" : "5300d93dae00998801ef1be48da71dac4e2ebd1b"
                 }
             ]
         },
         {
-            "name": "libgda",
-            "buildsystem": "meson",
-            "config-opts": [
+            "name" : "libgda",
+            "buildsystem" : "meson",
+            "config-opts" : [
                 "-Djson=true"
             ],
             "build-options" : {
                 "env" : {
-                    "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR": "/app/share/gir-1.0",
-                    "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_TYPELIBDIR": "/app/lib/girepository-1.0"
+                    "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR" : "/app/share/gir-1.0",
+                    "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_TYPELIBDIR" : "/app/lib/girepository-1.0"
                 }
             },
-            "sources": [
+            "sources" : [
                 {
-                    "type": "archive",
-                    "url": "http://ftp.gnome.org/pub/GNOME/sources/libgda/6.0/libgda-6.0.0.tar.xz",
-                    "sha256": "995f4b420e666da5c8bac9faf55e7aedbe3789c525d634720a53be3ccf27a670"
+                    "type" : "archive",
+                    "url" : "http://ftp.gnome.org/pub/GNOME/sources/libgda/6.0/libgda-6.0.0.tar.xz",
+                    "sha256" : "995f4b420e666da5c8bac9faf55e7aedbe3789c525d634720a53be3ccf27a670"
+                },
+                {
+                    "type" : "patch",
+                    "path" : "patches/libgda-no-gtkdoc-markers.patch"
                 }
             ],
-            "modules": [
+            "modules" : [
                 {
-                  "name": "intltool",
-                  "cleanup": [ "*" ],
-                  "sources": [
-                    {
-                      "type": "archive",
-                      "url": "https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz",
-                      "sha256": "67c74d94196b153b774ab9f89b2fa6c6ba79352407037c8c14d5aeb334e959cd"
-                    }
-                  ]
+                    "name" : "intltool",
+                    "cleanup" : [
+                        "*"
+                    ],
+                    "sources" : [
+                        {
+                            "type" : "archive",
+                            "url" : "https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz",
+                            "sha256" : "67c74d94196b153b774ab9f89b2fa6c6ba79352407037c8c14d5aeb334e959cd"
+                        }
+                    ]
                 }
             ],
-            "cleanup": [
+            "cleanup" : [
                 "/share/doc"
             ]
         },
         {
-            "name": "libhandy",
-            "buildsystem": "meson",
-            "builddir": true,
-            "config-opts": [
+            "name" : "libhandy",
+            "buildsystem" : "meson",
+            "builddir" : true,
+            "config-opts" : [
                 "-Dexamples=false",
                 "-Dtests=false"
             ],
-            "sources": [
+            "sources" : [
                 {
-                    "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/libhandy.git"
+                    "type" : "git",
+                    "url" : "https://gitlab.gnome.org/GNOME/libhandy.git"
                 }
             ]
         },
         {
             "name" : "gtranslator",
             "buildsystem" : "meson",
-            "config-opts": [
+            "config-opts" : [
                 "-Dprofile=development"
             ],
             "sources" : [
@@ -138,5 +144,8 @@
                 }
             ]
         }
-    ]
+    ],
+    "build-options" : {
+        "env" : {        }
+    }
 }
