@@ -576,9 +576,9 @@ sort_by_activated (GSimpleAction *action,
   sortby = g_variant_get_int32 (st);
 
   w = GTR_WINDOW (priv->active_window);
-  g_return_if_fail (w != NULL);
+  if (!w) return;
   tab = gtr_window_get_active_tab (w);
-  g_return_if_fail (tab != NULL);
+  if (!tab) return;
   gtr_tab_sort_by (tab, (GtrMessageTableSortBy)sortby);
   gtr_window_hide_sort_menu (w);
 }
