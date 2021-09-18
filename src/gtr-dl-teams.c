@@ -410,6 +410,8 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
       return;
     }
 
+  if (priv->module_state)
+    g_free (priv->module_state);
   priv->module_state = g_strdup (json_object_get_string_member (object, "state"));
 
   if (!priv->module_state)
@@ -703,10 +705,14 @@ gtr_dl_teams_save_combo_selected (GtkWidget  *widget,
     }
   else if (strcmp(name, "combo_branches") == 0)
     {
+      if (priv->selected_branch)
+        g_free (priv->selected_branch);
       priv->selected_branch = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (widget));
     }
   else if (strcmp(name, "combo_domains") == 0)
     {
+      if (priv->selected_domain)
+        g_free (priv->selected_domain);
       priv->selected_domain = g_strdup (gtk_combo_box_get_active_id (GTK_COMBO_BOX (widget)));
     }
 
@@ -720,15 +726,35 @@ gtr_dl_teams_dispose (GObject *object)
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (GTR_DL_TEAMS (object));
 
   if (priv->selected_team)
-    g_free (priv->selected_team);
+    {
+      g_free (priv->selected_team);
+      priv->selected_team = NULL;
+    }
   if (priv->selected_module)
-    g_free (priv->selected_module);
+    {
+      g_free (priv->selected_module);
+      priv->selected_module = NULL;
+    }
   if (priv->selected_branch)
-    g_free (priv->selected_branch);
+    {
+      g_free (priv->selected_branch);
+      priv->selected_branch = NULL;
+    }
   if (priv->selected_domain)
-    g_free (priv->selected_domain);
+    {
+      g_free (priv->selected_domain);
+      priv->selected_domain = NULL;
+    }
   if (priv->module_state)
-    g_free (priv->module_state);
+    {
+      g_free (priv->module_state);
+      priv->module_state = NULL;
+    }
+  if (priv->file_path)
+    {
+      g_free (priv->file_path);
+      priv->file_path = NULL;
+    }
 
   G_OBJECT_CLASS (gtr_dl_teams_parent_class)->dispose (object);
 }
