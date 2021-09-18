@@ -5,14 +5,16 @@
 # Милош Поповић <gpopac@gmail.com>, 2009—2010.
 # Мирослав Николић <miroslavnikolic@rocketmail.com>, 2010—2021.
 # Марко М. Костић <marko.m.kostic@gmail.com>, 2020.
+# Dušan Simić <dusan.simic1810@gmail.com>, 2021.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-23 10:50+0000\n"
-"PO-Revision-Date: 2021-04-11 21:07+0200\n"
-"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
-"Language-Team: српски <gnome-sr@googlegroups.org>\n"
+"POT-Creation-Date: 2021-07-31 16:58+0000\n"
+"PO-Revision-Date: 2021-08-26 13:03+0200\n"
+"Last-Translator: Dušan Simić <dusan.simic1810@gmail.com>\n"
+"Language-Team: Serbian <gnome-sr@googlegroups.com>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,6 +22,12 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2\n"
 "X-Project-Style: gnome\n"
+"X-DL-Team: sr\n"
+"X-DL-Module: gtranslator\n"
+"X-DL-Branch: master\n"
+"X-DL-Domain: po\n"
+"X-DL-State: Translating\n"
+"X-Generator: Gtranslator 40.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -218,19 +226,19 @@ msgstr "Приказивање извора"
 msgid "Source code"
 msgstr "Изворни кȏд"
 
-#: src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:58
 msgid "Current Maintainers"
 msgstr "Програм тренутно одржавају"
 
-#: src/gtr-actions-app.c:52
+#: src/gtr-actions-app.c:62
 msgid "Previous Developers"
 msgstr "Претходни програмери"
 
-#: src/gtr-actions-app.c:63
+#: src/gtr-actions-app.c:73
 msgid "Contributors"
 msgstr "Програму су допринели"
 
-#: src/gtr-actions-app.c:88
+#: src/gtr-actions-app.c:98
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -240,21 +248,22 @@ msgstr "Програм за уређивање датотека са прево�
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:101
+#: src/gtr-actions-app.c:111
 msgid "translator-credits"
 msgstr ""
 "Вељко М. Станојевић <veljko@vms.homelinux.net>\n"
 "Милош Поповић <gpopac@gmail.com>\n"
 "Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Марко М. Костић <marko.m.kostic@gmail.com>\n"
+"Душан Симић <dusan.simic1810@gmail.com>\n"
 "\n"
 "Prevod.org — превод на српски језик."
 
-#: src/gtr-actions-app.c:104
+#: src/gtr-actions-app.c:114
 msgid "Translation Editor Web Site"
 msgstr "Интернет страница Уређивача превода"
 
-#: src/gtr-actions-file.c:218
+#: src/gtr-actions-file.c:220
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -263,31 +272,31 @@ msgstr ""
 "Да ли желите да сачувате измене у ову датотеку: <span weight=\"bold\" size="
 "\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:224
+#: src/gtr-actions-file.c:226
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr "Уколико не сачувате, све ваше измене биће трајно одбачене."
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:229
 msgid "Save and open"
 msgstr "Сачувај и отвори"
 
-#: src/gtr-actions-file.c:228
+#: src/gtr-actions-file.c:230
 msgid "Cancel"
 msgstr "Откажи"
 
-#: src/gtr-actions-file.c:229
+#: src/gtr-actions-file.c:231
 msgid "Continue without saving"
 msgstr "Настави без чувања"
 
-#: src/gtr-actions-file.c:261
+#: src/gtr-actions-file.c:263
 msgid "Open file for translation"
 msgstr "Отворите датотеку за превођење"
 
-#: src/gtr-actions-file.c:449
+#: src/gtr-actions-file.c:369
 msgid "This file has already been uploaded"
 msgstr "Ова датотека је већ отпремљена"
 
-#: src/gtr-actions-file.c:462
+#: src/gtr-actions-file.c:380
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -299,13 +308,12 @@ msgstr ""
 "Можда нисте исправно подесили вашу <i>l10n.gnome.org</i> <b>скупину</b> на "
 "вашем профилу или немате овлашћења да отпремите овај модул."
 
-#: src/gtr-actions-file.c:477
-#, c-format
-#| msgid "The file '%s' has been saved in %s"
-msgid "The file '%s.%s.%s.%s' has been uploaded!"
-msgstr "Датотека „%s.%s.%s.%s“ је отпремљена!"
+#: src/gtr-actions-file.c:393
+#| msgid "This file has already been uploaded"
+msgid "The file has been uploaded!"
+msgstr "Ова датотека је већ отпремљена!"
 
-#: src/gtr-actions-file.c:507
+#: src/gtr-actions-file.c:548
 msgid "Save file as…"
 msgstr "Сачувај као…"
 
@@ -483,7 +491,6 @@ msgstr ""
 
 #: src/gtr-dl-teams.c:662
 #, c-format
-#| msgid "The file '%s' has been saved in %s"
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "Датотека „%s.%s.%s.%s“ је успешно резервисана"
 
@@ -501,7 +508,6 @@ msgstr ""
 "Изаберите тим, модул, грану и домен за добављање преводилачке датотеке."
 
 #: src/gtr-dl-teams.ui:106
-#| msgid "Open file for translation"
 msgid "Reserve for translation"
 msgstr "Резервиши за превођење"
 
@@ -626,7 +632,6 @@ msgid "DL Team:"
 msgstr "Тим Проклетих лажи:"
 
 #: src/gtr-header-dialog.ui:467
-#| msgid "Module"
 msgid "DL Module:"
 msgstr "Модул Проклетих лажи:"
 
@@ -790,7 +795,6 @@ msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Сачувај као (<Ctrl><Shift>s)"
 
 #: src/gtr-notebook.ui:665
-#| msgid "Open a new file (<Ctrl>o)"
 msgid "Upload file (<Ctrl>b)"
 msgstr "Отпреми датотеку (<Ctrl>b)"
 
@@ -994,8 +998,8 @@ msgid ""
 "GNOME Damned Lies integration token, go to your profile in https://l10n."
 "gnome.org/ to get it"
 msgstr ""
-"Скупина интеграције Гномових Проклетих лажи, идите на ваш профил на "
-"„https://l10n.gnome.org/“ да га набавите"
+"Скупина интеграције Гномових Проклетих лажи, идите на ваш профил на „https://"
+"l10n.gnome.org/“ да га набавите"
 
 #: src/gtr-profile-dialog.ui:237
 msgid "Language Settings"
@@ -1110,6 +1114,28 @@ msgstr "Изв_орна порука"
 #: src/gtr-tab.ui:171
 msgid "Translate_d Text"
 msgstr "Преве_дена порука"
+
+#: src/gtr-upload-dialog.c:60
+msgid "_Upload"
+msgstr "_Отпреми"
+
+#: src/gtr-upload-dialog.c:62
+#| msgid "Load from Damned Lies"
+msgid "Upload to Damned Lies"
+msgstr "Отпреми на Проклете Лажи"
+
+#: src/gtr-upload-dialog.c:134
+msgid "Uploading..."
+msgstr "Отпремљује се..."
+
+#: src/gtr-upload-dialog.c:140
+msgid "Upload"
+msgstr "Отпреми"
+
+#: src/gtr-upload-dialog.ui:50
+#| msgid "Comment"
+msgid "comment:"
+msgstr "напомена:"
 
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:214
@@ -1384,6 +1410,10 @@ msgid ""
 msgstr ""
 "Највећа разлика у дужини између порука које ће бити приказане као "
 "подударајуће у преводилачкој меморији."
+
+#~| msgid "The file '%s' has been saved in %s"
+#~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
+#~ msgstr "Датотека „%s.%s.%s.%s“ је отпремљена!"
 
 #~| msgid "Docum_ents with unsaved changes:"
 #~ msgid "Do you want to save the changes?"
