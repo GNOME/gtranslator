@@ -1,6 +1,6 @@
 project(
   'gtranslator', 'c',
-  version: '40.0',
+  version: '41.0',
   license: 'GPL3+',
   meson_version: '>= 0.50.0',
 )
