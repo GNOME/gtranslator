@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-15 08:20+0000\n"
-"PO-Revision-Date: 2021-03-16 14:49+0100\n"
+"POT-Creation-Date: 2021-07-31 16:58+0000\n"
+"PO-Revision-Date: 2021-09-20 01:23+0200\n"
 "Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 3.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -67,7 +67,7 @@ msgstr ""
 "Erweiterungen wie alternative Sprachen, Einfügen von XML-Elementen, "
 "Subversion-Integration und einer Quelltextansicht."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:117
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:131
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -237,19 +237,19 @@ msgstr "Quelltextanzeige"
 msgid "Source code"
 msgstr "Quelltext"
 
-#: src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:58
 msgid "Current Maintainers"
 msgstr "Derzeitige Betreuer"
 
-#: src/gtr-actions-app.c:52
+#: src/gtr-actions-app.c:62
 msgid "Previous Developers"
 msgstr "Vorherige Entwickler"
 
-#: src/gtr-actions-app.c:63
+#: src/gtr-actions-app.c:73
 msgid "Contributors"
 msgstr "Mitwirkende"
 
-#: src/gtr-actions-app.c:88
+#: src/gtr-actions-app.c:98
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -261,7 +261,7 @@ msgstr ""
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:101
+#: src/gtr-actions-app.c:111
 msgid "translator-credits"
 msgstr ""
 "Christian Meyer <chrisime@gnome.org>\n"
@@ -273,11 +273,11 @@ msgstr ""
 "Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>\n"
 "Philipp Kiemle <philipp.kiemle@gmail.com>"
 
-#: src/gtr-actions-app.c:104
+#: src/gtr-actions-app.c:114
 msgid "Translation Editor Web Site"
 msgstr "Webseite des Übersetzungseditors"
 
-#: src/gtr-actions-file.c:218
+#: src/gtr-actions-file.c:220
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -286,32 +286,32 @@ msgstr ""
 "Wollen Sie die Änderungen an dieser Datei speichern: <span weight=\"bold\" "
 "size=\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:224
+#: src/gtr-actions-file.c:226
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr ""
 "Alle ungespeicherten Änderungen gehen verloren, wenn Sie nicht speichern."
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:229
 msgid "Save and open"
 msgstr "Speichern und öffnen"
 
-#: src/gtr-actions-file.c:228
+#: src/gtr-actions-file.c:230
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/gtr-actions-file.c:229
+#: src/gtr-actions-file.c:231
 msgid "Continue without saving"
 msgstr "Ohne Abspeichern schließen"
 
-#: src/gtr-actions-file.c:261
+#: src/gtr-actions-file.c:263
 msgid "Open file for translation"
 msgstr "Datei zum Übersetzen öffnen"
 
-#: src/gtr-actions-file.c:449
+#: src/gtr-actions-file.c:369
 msgid "This file has already been uploaded"
 msgstr "Diese Datei wurde bereits hochgeladen"
 
-#: src/gtr-actions-file.c:462
+#: src/gtr-actions-file.c:380
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -324,12 +324,11 @@ msgstr ""
 "Profil falsch konfiguriert, oder Sie haben nicht die Berechtigung, dieses "
 "Modul hochzuladen."
 
-#: src/gtr-actions-file.c:477
-#, c-format
-msgid "The file '%s.%s.%s.%s' has been uploaded!"
-msgstr "Die Datei »%s.%s.%s.%s« wurde hochgeladen!"
+#: src/gtr-actions-file.c:393
+msgid "The file has been uploaded!"
+msgstr "Die Datei wurde hochgeladen!"
 
-#: src/gtr-actions-file.c:507
+#: src/gtr-actions-file.c:548
 msgid "Save file as…"
 msgstr "Datei speichern unter …"
 
@@ -1132,6 +1131,26 @@ msgstr "_Ursprüngliche Zeichenkette"
 msgid "Translate_d Text"
 msgstr "_Übersetzter Text"
 
+#: src/gtr-upload-dialog.c:60
+msgid "_Upload"
+msgstr "_Hochladen"
+
+#: src/gtr-upload-dialog.c:62
+msgid "Upload to Damned Lies"
+msgstr "Zu »Verdammten Lügen« hochladen"
+
+#: src/gtr-upload-dialog.c:134
+msgid "Uploading..."
+msgstr "Hochladen läuft …"
+
+#: src/gtr-upload-dialog.c:140
+msgid "Upload"
+msgstr "Hochladen"
+
+#: src/gtr-upload-dialog.ui:50
+msgid "comment:"
+msgstr "Kommentar:"
+
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:214
 #, c-format
@@ -1405,6 +1424,9 @@ msgid ""
 msgstr ""
 "Maximal erlaubter Längenunterschied zwischen Zeichenketten, die als "
 "Übereinstimmung vom Übersetzungsspeicher angezeigt werden."
+
+#~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
+#~ msgstr "Die Datei »%s.%s.%s.%s« wurde hochgeladen!"
 
 #~ msgid "File saved."
 #~ msgstr "Datei gespeichert."
