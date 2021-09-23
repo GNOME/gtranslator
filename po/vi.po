@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-23 10:50+0000\n"
-"PO-Revision-Date: 2021-03-24 07:48+0700\n"
+"POT-Creation-Date: 2021-09-19 06:00+0000\n"
+"PO-Revision-Date: 2021-09-23 07:58+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <gnome-vi-list@gnome.org>\n"
 "Language: vi\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Gtranslator 3.38.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -54,7 +54,7 @@ msgstr ""
 "vị như là ngôn ngữ thay thế, thêm thẻ, tích hợp với subversion và bộ xem mã "
 "nguồn."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:131
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:143
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -212,19 +212,19 @@ msgstr "Xem mã nguồn"
 msgid "Source code"
 msgstr "Mã nguồn"
 
-#: src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:58
 msgid "Current Maintainers"
 msgstr "Những người bảo trì hiện nay"
 
-#: src/gtr-actions-app.c:52
+#: src/gtr-actions-app.c:62
 msgid "Previous Developers"
 msgstr "Những người phát triển trước đây"
 
-#: src/gtr-actions-app.c:63
+#: src/gtr-actions-app.c:73
 msgid "Contributors"
 msgstr "Người đóng góp"
 
-#: src/gtr-actions-app.c:88
+#: src/gtr-actions-app.c:98
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -235,15 +235,15 @@ msgstr ""
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:101
+#: src/gtr-actions-app.c:111
 msgid "translator-credits"
 msgstr "Nhóm Việt hóa GNOME <gnome-vi-list@gnome.org>"
 
-#: src/gtr-actions-app.c:104
+#: src/gtr-actions-app.c:114
 msgid "Translation Editor Web Site"
 msgstr "Trang web Trình sửa bản dịch"
 
-#: src/gtr-actions-file.c:218
+#: src/gtr-actions-file.c:220
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -252,31 +252,31 @@ msgstr ""
 "Bạn có muốn lưu thay đổi vào tệp này không: <span weight=\"bold\" size="
 "\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:224
+#: src/gtr-actions-file.c:226
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr "Nếu bạn không lưu, tất cả các thay đổi của bạn sẽ hoàn toàn bị mất."
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:229
 msgid "Save and open"
 msgstr "Lưu và mở"
 
-#: src/gtr-actions-file.c:228
+#: src/gtr-actions-file.c:230
 msgid "Cancel"
 msgstr "Thôi"
 
-#: src/gtr-actions-file.c:229
+#: src/gtr-actions-file.c:231
 msgid "Continue without saving"
 msgstr "Tiếp tục mà không lưu"
 
-#: src/gtr-actions-file.c:261
+#: src/gtr-actions-file.c:263
 msgid "Open file for translation"
 msgstr "Mở tập tin để dịch"
 
-#: src/gtr-actions-file.c:449
+#: src/gtr-actions-file.c:369
 msgid "This file has already been uploaded"
 msgstr "Tập tin đã được tải lên rồi"
 
-#: src/gtr-actions-file.c:462
+#: src/gtr-actions-file.c:380
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -289,12 +289,11 @@ msgstr ""
 "cách đúng đắn trong hồ sơ của bạn hoặc là bạn không có quyền tải lên mô-đun "
 "này."
 
-#: src/gtr-actions-file.c:477
-#, c-format
-msgid "The file '%s.%s.%s.%s' has been uploaded!"
-msgstr "Tập tin '%s.%s.%s.%s' đã được tải lên!"
+#: src/gtr-actions-file.c:393
+msgid "The file has been uploaded!"
+msgstr "Tập tin đã được tải lên!"
 
-#: src/gtr-actions-file.c:507
+#: src/gtr-actions-file.c:548
 msgid "Save file as…"
 msgstr "Lưu tập tin dạng…"
 
@@ -437,21 +436,21 @@ msgstr "Ngữ cảnh:"
 msgid "Format:"
 msgstr "Định dạng:"
 
-#: src/gtr-dl-teams.c:417
+#: src/gtr-dl-teams.c:419
 msgid "No module state found."
 msgstr "Không tìm thấy tình trạng của mô-đun."
 
-#: src/gtr-dl-teams.c:434
+#: src/gtr-dl-teams.c:436
 #, c-format
 msgid "The current state is: %s"
 msgstr "Tình trạng hiện tại là: %s"
 
-#: src/gtr-dl-teams.c:586
+#: src/gtr-dl-teams.c:588
 #, c-format
 msgid "The file '%s' has been saved in %s"
 msgstr "Tập tin '%s' đã được lưu tại %s"
 
-#: src/gtr-dl-teams.c:646
+#: src/gtr-dl-teams.c:648
 #, c-format
 msgid ""
 "An error occurred while reserving this module: %s\n"
@@ -463,16 +462,16 @@ msgstr ""
 "Có lẽ bạn đã chưa cấu hình <b>thẻ</b> <i>l10n.gnome.org</i> của mình một "
 "cách đúng đắn trong hồ sơ của bạn hoặc là bạn không có quyền nhận mô-đun này."
 
-#: src/gtr-dl-teams.c:662
+#: src/gtr-dl-teams.c:664
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "Tập tin '%s.%s.%s.%s' đã được nhận thành công"
 
-#: src/gtr-dl-teams.c:788
+#: src/gtr-dl-teams.c:814
 msgid "Translation Team"
 msgstr "Nhóm dịch"
 
-#: src/gtr-dl-teams.c:795
+#: src/gtr-dl-teams.c:821
 msgid "Module"
 msgstr "Mô-đun"
 
@@ -1087,6 +1086,26 @@ msgstr "Chuỗi _gốc"
 msgid "Translate_d Text"
 msgstr "Bản _dịch"
 
+#: src/gtr-upload-dialog.c:60
+msgid "_Upload"
+msgstr "_Tải lên"
+
+#: src/gtr-upload-dialog.c:62
+msgid "Upload to Damned Lies"
+msgstr "Tải lên Damned Lies"
+
+#: src/gtr-upload-dialog.c:134
+msgid "Uploading..."
+msgstr "Đang tải lên..."
+
+#: src/gtr-upload-dialog.c:140
+msgid "Upload"
+msgstr "Tải lên"
+
+#: src/gtr-upload-dialog.ui:50
+msgid "comment:"
+msgstr "ghi chú:"
+
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:214
 #, c-format
@@ -1357,6 +1376,10 @@ msgid ""
 "translation memory."
 msgstr ""
 "Chiều dài khác biệt tối đa từ chuỗi đã hiển thị mà khớp với bộ nhớ bản dịch."
+
+#, c-format
+#~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
+#~ msgstr "Tập tin '%s.%s.%s.%s' đã được tải lên!"
 
 #~ msgid "Do you want to save the changes?"
 #~ msgstr "Bạn có muốn lưu các thay đổi không?"
@@ -2214,9 +2237,6 @@ msgstr ""
 
 #~ msgid "No header for this file/domain"
 #~ msgstr "Không có phần đầu cho tập tin/miền này"
-
-#~ msgid "Comments:"
-#~ msgstr "Ghi chú :"
 
 #~ msgid "_File/Recen_t files/"
 #~ msgstr "_Tập tin/Tập t_in gần đây/"
