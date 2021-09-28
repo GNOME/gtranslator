@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-40\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-23 10:50+0000\n"
-"PO-Revision-Date: 2021-05-25 10:05+0700\n"
-"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"POT-Creation-Date: 2021-09-18 09:14+0000\n"
+"PO-Revision-Date: 2021-09-19 12:58+0700\n"
+"Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n!=1;\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -54,7 +54,7 @@ msgstr ""
 "bahasa alternatif, sisip tag, integrasi dengan subversion, dan penilik kode "
 "sumber."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:131
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:143
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -212,19 +212,19 @@ msgstr "Penampil Sumber"
 msgid "Source code"
 msgstr "Kode sumber"
 
-#: src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:58
 msgid "Current Maintainers"
 msgstr "Para Pemelihara Kini"
 
-#: src/gtr-actions-app.c:52
+#: src/gtr-actions-app.c:62
 msgid "Previous Developers"
 msgstr "Para Pengembang Sebelumnya"
 
-#: src/gtr-actions-app.c:63
+#: src/gtr-actions-app.c:73
 msgid "Contributors"
 msgstr "Para Kontributor"
 
-#: src/gtr-actions-app.c:88
+#: src/gtr-actions-app.c:98
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -234,18 +234,18 @@ msgstr "Penyunting berkas terjemahan untuk lokalisasi aplikasi dan pustaka."
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:101
+#: src/gtr-actions-app.c:111
 msgid "translator-credits"
 msgstr ""
 "Mohammad DAMT <mdamt@bisnisweb.com>, 2003.\n"
 "Andika Triwidada <andika@gmail.com>, 2009-2013, 2016, 2020, 2021.\n"
 "Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2021."
 
-#: src/gtr-actions-app.c:104
+#: src/gtr-actions-app.c:114
 msgid "Translation Editor Web Site"
 msgstr "Situs Web Penyunting Terjemahan"
 
-#: src/gtr-actions-file.c:218
+#: src/gtr-actions-file.c:220
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -254,33 +254,33 @@ msgstr ""
 "Apakah Anda ingin menyimpan perubahan pada berkas ini: <span weight=\"bold\" "
 "size=\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:224
+#: src/gtr-actions-file.c:226
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr ""
 "Jika tidak disimpan, semua perubahan yang belum disimpan akan hilang secara "
 "permanen."
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:229
 msgid "Save and open"
 msgstr "Simpan dan buka"
 
-#: src/gtr-actions-file.c:228
+#: src/gtr-actions-file.c:230
 msgid "Cancel"
 msgstr "Batal"
 
-#: src/gtr-actions-file.c:229
+#: src/gtr-actions-file.c:231
 msgid "Continue without saving"
 msgstr "Tutup tanpa menyimpan"
 
-#: src/gtr-actions-file.c:261
+#: src/gtr-actions-file.c:263
 msgid "Open file for translation"
 msgstr "Buka berkas untuk diterjemahkan"
 
-#: src/gtr-actions-file.c:449
+#: src/gtr-actions-file.c:369
 msgid "This file has already been uploaded"
 msgstr "Berkas ini telah diunggah"
 
-#: src/gtr-actions-file.c:462
+#: src/gtr-actions-file.c:380
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -293,12 +293,11 @@ msgstr ""
 "benar di profil Anda atau Anda tidak memiliki izin untuk mengunggah modul "
 "ini."
 
-#: src/gtr-actions-file.c:477
-#, c-format
-msgid "The file '%s.%s.%s.%s' has been uploaded!"
-msgstr "Berkas '%s.%s.%s.%s' telah diunggah!"
+#: src/gtr-actions-file.c:393
+msgid "The file has been uploaded!"
+msgstr "Berkas telah diunggah!"
 
-#: src/gtr-actions-file.c:507
+#: src/gtr-actions-file.c:548
 msgid "Save file as…"
 msgstr "Simpan berkas sebagai…"
 
@@ -1099,6 +1098,26 @@ msgstr "Teks _Asli"
 msgid "Translate_d Text"
 msgstr "_Teks Terjemahan"
 
+#: src/gtr-upload-dialog.c:60
+msgid "_Upload"
+msgstr "_Unggah"
+
+#: src/gtr-upload-dialog.c:62
+msgid "Upload to Damned Lies"
+msgstr "Unggah ke Damned Lies"
+
+#: src/gtr-upload-dialog.c:134
+msgid "Uploading..."
+msgstr "Mengunggah..."
+
+#: src/gtr-upload-dialog.c:140
+msgid "Upload"
+msgstr "Unggah"
+
+#: src/gtr-upload-dialog.ui:50
+msgid "comment:"
+msgstr "komentar:"
+
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:214
 #, c-format
@@ -1371,3 +1390,6 @@ msgid ""
 msgstr ""
 "Perbedaan panjang maksimum antar pesan yang ditampilkan sebagai cocok oleh "
 "ingatan terjemahan."
+
+#~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
+#~ msgstr "Berkas '%s.%s.%s.%s' telah diunggah!"
