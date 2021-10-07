@@ -13,21 +13,27 @@
 # Sabri Ünal <libreajans@gmail.com>, 2019, 2020.
 # Emin Tufan Çetin <etcetin@gmail.com>, 2018, 2019, 2020.
 # Muhammet Kara <muhammetk@gmail.com>, 2011-2021.
+# Özgür Baskın <queeup@zoho.com>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-15 08:20+0000\n"
-"PO-Revision-Date: 2021-03-17 19:10+0300\n"
-"Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
-"Language-Team: Turkish <gnometurk@gnome.org>\n"
+"POT-Creation-Date: 2021-05-26 12:59+0000\n"
+"PO-Revision-Date: 2021-08-11 22:08+0300\n"
+"Last-Translator: Özgür Baskın <queeup@zoho.com>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org >\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Gtranslator 3.38.0\n"
+"X-Generator: Gtranslator 40.0\n"
+"X-DL-Team: tr\n"
+"X-DL-Module: gtranslator\n"
+"X-DL-Branch: gnome-40\n"
+"X-DL-Domain: po\n"
+"X-DL-State: None\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -63,7 +69,7 @@ msgstr ""
 "kaynak kod görüntüleyicisi gibi ilgi çekici birçok eklenti içeren eklenti "
 "sistemi de bulunuyor."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:117
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:131
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -466,7 +472,7 @@ msgstr "Güncel durum: %s"
 #: src/gtr-dl-teams.c:586
 #, c-format
 msgid "The file '%s' has been saved in %s"
-msgstr ""
+msgstr "'%s' dosyası %s içine kaydedildi"
 
 #: src/gtr-dl-teams.c:646
 #, c-format
@@ -476,11 +482,14 @@ msgid ""
 "correctly in your profile or you don't have permissions to reserve this "
 "module."
 msgstr ""
+"Bu modül üzerinize alınırken hata oluştu: %s\n"
+"Belki de profilinizde <i>l10n.gnome.org</i> <b>jetonunuzu</b> doğru "
+"yapılandırmadınız veya bu modülü üzerinize almaya izniniz yok."
 
 #: src/gtr-dl-teams.c:662
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
-msgstr ""
+msgstr "'%s.%s.%s.%s' dosyası başarıyla üzerinize alındı"
 
 #: src/gtr-dl-teams.c:788
 msgid "Translation Team"
@@ -495,10 +504,9 @@ msgid "Select team, module, branch and domain to get the translation file."
 msgstr "Çeviriyi indirmek için, takım, modül, dal ve alan adı seçin."
 
 #: src/gtr-dl-teams.ui:106
-#, fuzzy
 #| msgid "Open file for translation"
 msgid "Reserve for translation"
-msgstr "Çevrilecek dosyayı aç"
+msgstr "Çeviriyi üzerine al"
 
 #: src/gtr-dl-teams.ui:117
 msgid "Load file"
@@ -621,7 +629,6 @@ msgid "DL Team:"
 msgstr "DL Ekibi:"
 
 #: src/gtr-header-dialog.ui:467
-#| msgid "Module"
 msgid "DL Module:"
 msgstr "DL Modülü:"
 
@@ -785,7 +792,6 @@ msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Farklı kaydet (<Ctrl><Shift>s)"
 
 #: src/gtr-notebook.ui:665
-#| msgid "Open a new file (<Ctrl>o)"
 msgid "Upload file (<Ctrl>b)"
 msgstr "Dosyayı karşıya yükle (<Ctrl>b)"
 
@@ -982,13 +988,15 @@ msgstr "_Ekip e-postası"
 
 #: src/gtr-profile-dialog.ui:174
 msgid "_DL auth token"
-msgstr ""
+msgstr "_DL kimlik doğrulama jetonu"
 
 #: src/gtr-profile-dialog.ui:175
 msgid ""
 "GNOME Damned Lies integration token, go to your profile in https://l10n."
 "gnome.org/ to get it"
 msgstr ""
+"GNOME Damned Lies tümleşim jetonu, almak için https://l10n.gnome.org/ "
+"adresindeki profilinize gidin"
 
 #: src/gtr-profile-dialog.ui:237
 msgid "Language Settings"
