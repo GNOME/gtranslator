@@ -13,21 +13,27 @@
 # Sabri Ünal <libreajans@gmail.com>, 2019, 2020.
 # Muhammet Kara <muhammetk@gmail.com>, 2011-2021.
 # Emin Tufan Çetin <etcetin@gmail.com>, 2018, 2019, 2020, 2021.
+# Özgür Baskın <queeup@zoho.com>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-19 10:13+0000\n"
-"PO-Revision-Date: 2021-05-02 17:39+0300\n"
-"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
-"Language-Team: Turkish <gnometurk@gnome.org>\n"
+"POT-Creation-Date: 2021-07-31 16:58+0000\n"
+"PO-Revision-Date: 2021-08-11 22:03+0300\n"
+"Last-Translator: Özgür Baskın <queeup@zoho.com>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org >\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.4.3\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Gtranslator 40.0\n"
+"X-DL-Team: tr\n"
+"X-DL-Module: gtranslator\n"
+"X-DL-Branch: master\n"
+"X-DL-Domain: po\n"
+"X-DL-State: None\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -63,7 +69,7 @@ msgstr ""
 "kaynak kod görüntüleyicisi gibi ilgi çekici birçok eklenti içeren eklenti "
 "sistemi de bulunuyor."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:117
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:131
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -220,19 +226,19 @@ msgstr "Kaynak Gösterici"
 msgid "Source code"
 msgstr "Kaynak kodu"
 
-#: src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:58
 msgid "Current Maintainers"
 msgstr "Şimdiki Yöneticiler"
 
-#: src/gtr-actions-app.c:52
+#: src/gtr-actions-app.c:62
 msgid "Previous Developers"
 msgstr "Önceki Geliştiriciler"
 
-#: src/gtr-actions-app.c:63
+#: src/gtr-actions-app.c:73
 msgid "Contributors"
 msgstr "Katkıda Bulunanlar"
 
-#: src/gtr-actions-app.c:88
+#: src/gtr-actions-app.c:98
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -244,7 +250,7 @@ msgstr ""
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:101
+#: src/gtr-actions-app.c:111
 msgid "translator-credits"
 msgstr ""
 "Barış ÇİÇEK <baris@teamforce.name.tr>\n"
@@ -252,11 +258,11 @@ msgstr ""
 "Muhammet Kara <muhammetk@gmail.com>\n"
 "Emin Tufan Çetin <etcetin@gmail.com>"
 
-#: src/gtr-actions-app.c:104
+#: src/gtr-actions-app.c:114
 msgid "Translation Editor Web Site"
 msgstr "Çeviri Düzenleyici Web Sayfası"
 
-#: src/gtr-actions-file.c:218
+#: src/gtr-actions-file.c:220
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -265,33 +271,33 @@ msgstr ""
 "Değişiklikleri şu dosyaya kaydetmek istiyor musunuz: <span weight=\"bold\" "
 "size=\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:224
+#: src/gtr-actions-file.c:226
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr ""
 "Kaydetmezseniz, yaptığınız tüm kaydedilmemiş değişiklikler kalıcı olarak "
 "yitirilecek."
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:229
 msgid "Save and open"
 msgstr "Kaydet ve aç"
 
-#: src/gtr-actions-file.c:228
+#: src/gtr-actions-file.c:230
 msgid "Cancel"
 msgstr "İptal"
 
-#: src/gtr-actions-file.c:229
+#: src/gtr-actions-file.c:231
 msgid "Continue without saving"
 msgstr "Kaydetmeden devam et"
 
-#: src/gtr-actions-file.c:261
+#: src/gtr-actions-file.c:263
 msgid "Open file for translation"
 msgstr "Çevrilecek dosyayı aç"
 
-#: src/gtr-actions-file.c:449
+#: src/gtr-actions-file.c:369
 msgid "This file has already been uploaded"
 msgstr "Dosya zaten karşıya yüklenmiş"
 
-#: src/gtr-actions-file.c:462
+#: src/gtr-actions-file.c:380
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -304,12 +310,12 @@ msgstr ""
 "yapılandırmamış olabilirsiniz ya da bu modüle dosya yüklemek için izniniz "
 "olmayabilir."
 
-#: src/gtr-actions-file.c:477
-#, c-format
-msgid "The file '%s.%s.%s.%s' has been uploaded!"
-msgstr "'%s.%s.%s.%s' dosyası karşıya yüklendi!"
+#: src/gtr-actions-file.c:393
+#| msgid "This file has already been uploaded"
+msgid "The file has been uploaded!"
+msgstr "Dosya karşıya yüklendi!"
 
-#: src/gtr-actions-file.c:507
+#: src/gtr-actions-file.c:548
 msgid "Save file as…"
 msgstr "Dosyayı farklı kaydet…"
 
@@ -1105,6 +1111,28 @@ msgstr "_Özgün İleti"
 msgid "Translate_d Text"
 msgstr "Ç_evrilmiş Metin"
 
+#: src/gtr-upload-dialog.c:60
+msgid "_Upload"
+msgstr "_Karşıya Yükle"
+
+#: src/gtr-upload-dialog.c:62
+#| msgid "Load from Damned Lies"
+msgid "Upload to Damned Lies"
+msgstr "Damned Lies sistemine yükle"
+
+#: src/gtr-upload-dialog.c:134
+msgid "Uploading..."
+msgstr "Karşıya yükleniyor..."
+
+#: src/gtr-upload-dialog.c:140
+msgid "Upload"
+msgstr "Karşıya yükle"
+
+#: src/gtr-upload-dialog.ui:50
+#| msgid "Comment"
+msgid "comment:"
+msgstr "açıklama:"
+
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:214
 #, c-format
@@ -1377,6 +1405,9 @@ msgid ""
 msgstr ""
 "Çeviri belleğince eşleşme olarak gösterilen iletiler arasındaki uzunluk "
 "türünden azami fark."
+
+#~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
+#~ msgstr "'%s.%s.%s.%s' dosyası karşıya yüklendi!"
 
 #~ msgid "Do you want to save the changes?"
 #~ msgstr "Değişiklikleri kaydetmek ister misiniz?"
