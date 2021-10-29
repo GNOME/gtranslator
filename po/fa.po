@@ -1,1682 +1,1296 @@
-# Persian translation of gtranslator.
-# Copyright (C) 2004 Sharif FarsiWeb, Inc.
-# Copyright (C) 2004 Free Software Foundation, Inc.
-# This file is distributed under the same license as the gtranslator package.
-# Roozbeh Pournader <roozbeh@sharif.edu>, 2004.
-# 
-# 
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: gtranslator 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-01 15:31+0100\n"
-"PO-Revision-Date: 2004-01-01 19:56+0330\n"
-"Last-Translator: Roozbeh Pournader <roozbeh@sharif.edu>\n"
-"Language-Team: Persian <farsi@lists.sharif.edu>\n"
-"Language: fa\n"
+"Project-Id-Version: Gtranslator\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
+"POT-Creation-Date: 2021-08-25 11:51+0000\n"
+"PO-Revision-Date: 2021-10-29 15:12+0330\n"
+"Language-Team: Persian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: eshagh <eshagh094@gmail.com>\n"
+"Language: fa\n"
 
-#: data/desktop/gtranslator.desktop.in.h:1
-msgid "The GNOME translation program"
-msgstr "برنامه‌ی ترجمه‌ی گنوم"
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
+msgid "Gtranslator"
+msgstr "جی‌ترنسلیتور"
 
-#: data/desktop/gtranslator.desktop.in.h:2 src/parse.c:1139
-msgid "gtranslator"
-msgstr "gtranslator"
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:8
+#: data/org.gnome.Gtranslator.desktop.in.in:5
+msgid "Translate and localize applications and libraries"
+msgstr "ترجمه و بومی‌سازی برنامه‌ها و کتابخانه‌ها"
 
-#. Translator credits
-#: src/about.c:60
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:10
+msgid "Gtranslator is an enhanced gettext po file editor for the GNOME desktop environment. It handles all forms of gettext po files and includes very useful features like find/replace, translation memory, different translator profiles, messages table (for having an overview of the translations/messages in the po file), easy navigation and editing of translation messages and comments of the translation where accurate."
+msgstr "جی‌ترنسلیتور یک ویرایشگر پروندهٔ gettext po برای محیط دسکتاپ گنوم است. این برنامه همهٔ اَشکال پرونده‌های gettext po را مدیریت می‌کند و شامل ویژگی‌های بسیار مفیدی مانند یافتن/جای‌گزینی، حافظهٔ ترجمه، نمایه‌های مختلف مترجم، جدول پیام‌ها (برای مرور کلی ترجمه‌ها/پیام‌ها در پروندهٔ po)، ناوبری آسان و ویرایش پیام‌های ترجمه است و دیدگاه‌های ترجمه در آنجا دقیق است."
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:19
+msgid "Gtranslator includes also a plugin system with many interesting plugins like alternate language, insert tags, integration with subversion and a source code viewer."
+msgstr "جی‌ترنسلیتور همچنین شامل یک سامانهٔ افزایه با افزایه‌های جالب مانند زبان متناوب، درج برچسب‌ها، ادغام با واژگونی و نمایشگر کدمنبع است."
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:131
+msgid "Daniel García Moreno"
+msgstr "دانیل گارسیا مورنو"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:659
+#: src/gtr-notebook.ui:308 src/gtr-window.c:229 src/gtr-window.ui:25
+msgid "Translation Editor"
+msgstr "ویرایشگر ترجمه"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:4
+msgid "PO File Editor"
+msgstr "ویرایشگر پروندهٔ PO"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:14
+msgid "Gtranslator;Translation;Editor;Gettext;Write;"
+msgstr "Gtranslator;Translation;Editor;Gettext;Write;ترجمه;ویرایشگر;نوشتن;"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:24
+msgid "Warn if file contains fuzzy translations"
+msgstr "اگر پرونده دارای ترجمه‌های نامشخص است، هشدار می‌دهد"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:25
+msgid "If true, warn the user when saving a PO translation file containing fuzzy strings."
+msgstr "اگر درست باشد، هنگام ذخیرهٔ پروندهٔ ترجمه PO دارای رشته‌های نامشخص، به کاربر هشدار می‌دهد."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:32
+msgid "Auto save files"
+msgstr "ذخیرهٔ خودکار پرونده‌ها"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:33
+msgid "If true, automatically save files at specified intervals."
+msgstr "اگر درست باشد، به طور خودکار پرونده‌ها را در فواصل زمانی مشخص ذخیره می‌کند."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:39
+msgid "Auto save interval"
+msgstr "فاصلهٔ بین ذخیرهٔ خودکار"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:40
+msgid "Interval in minutes at which to automatically save files."
+msgstr "فاصله زمانی به دقیقه که پرونده‌ها به صورت خودکار ذخیره می‌شوند."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:46
+msgid "Create backup before saving"
+msgstr "قبل از ذخیره، پشتیبان تهیه می‌کند"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:47
+msgid "If true, create a backup copy of a file before saving it."
+msgstr "اگر درست باشد، قبل از ذخیرهٔ پرونده، یک رونوشت پشتیبان تهیه می‌کند."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:53
+msgid "Use profile values for header"
+msgstr "از مقادیر نمایه برای سرایند استفاده می‌کند"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:54
+msgid "If true, overwrite the values in the PO header with those in the active profile."
+msgstr "اگر درست باشد، مقادیر موجود در سرایند PO را با مقادیر موجود در نمایهٔ فعّال بازنویسی می‌کند."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:63
+msgid "Highlight syntax in edit fields"
+msgstr "نحو نگارش را در زمینه‌های ویرایش برجسته می‌کند"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:64
+msgid "If true, apply syntax highlighting to strings in edit fields."
+msgstr "اگر درست باشد، برجسته‌سازی نحو نگارش را در رشته‌های ویرایش شده اعمال می‌کند."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:70
+msgid "Make whitespace visible"
+msgstr "فضای سفید را قابل مشاهده می‌کند"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:71
+msgid "If true, display whitespace in strings as representative symbols."
+msgstr "اگر درست باشد، فضای سفید را در رشته‌ها به عنوان نمادهای نماینده نمایش می‌دهد."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:77
+msgid "Remove fuzzy status when message is changed"
+msgstr "هنگام تغییر پیام، وضعیت نامشخص را بر می‌دارد"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:78
+msgid "If true, remove fuzzy status from translations when they are changed."
+msgstr "اگر درست باشد، هنگام تغییر وضعیت نامشخص را از ترجمه بر می‌دارد."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:84
+msgid "Check spelling"
+msgstr "بررسی املاء"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:85
+msgid "If true, check the spelling of translated messages."
+msgstr "اگر درست باشد، املای پیام‌های ترجمه شده را بررسی می‌کند."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:96
+msgid "Side panel switcher style"
+msgstr "سبک تعویض‌گر تابلوی کناری"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:97
+msgid "Style for switchers in the side panel."
+msgstr "سبک برای تعویض‌گرها در تابلوی کناری."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:103
+msgid "Color scheme"
+msgstr "شِمای رنگ"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:104
+msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
+msgstr "نام شِمای رنگی gtksourceview که برای برجسته‌سازی نحو نگارش استفاده می‌شود."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:110
+msgid "Message list sort order"
+msgstr "ترتیب چینش فهرست پیام‌ها"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:111
+msgid "Sort order to use in the message list. Possible values are “status”, “id”, “original-text” and “translated-text”."
+msgstr "ترتیب استفاده را در فهرست پیام بچینید. مقادیر احتمالی عبارتند از «وضعیت»، «شناسه»، «متن اصلی» و «متن ترجمه شده»."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:146
+msgid "Active plugins"
+msgstr "افزایه‌های فعّال"
+
+# در این رشته از نویسهٔ LRM استفاده شده است
+#: data/org.gnome.Gtranslator.gschema.xml.in:147
+msgid "List of active plugins. It contains the “Location” of the active plugins. See the .gtranslator-plugin file for obtaining the “Location” of a given plugin."
+msgstr "فهرست افزایه‌های فعّال. این دارای «مکان» افزایه‌های فعّال است. برای به دست آوردن «مکان» افزایهٔ مشخص شده، پروندهٔ ‎.gtranslator-plugin را ببینید."
+
+#: src/codeview/gtr-codeview.c:374
+msgid "Paths:"
+msgstr "مسیرها:"
+
+#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
+#: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:651
+#: src/translation-memory/gtr-translation-memory-dialog.c:299
+msgid "_Close"
+msgstr "_بستن"
+
+#: src/codeview/gtr-viewer.c:75
+msgid "Source Viewer"
+msgstr "بینندهٔ منبع"
+
+#: src/codeview/gtr-viewer.ui:59
+msgid "Source code"
+msgstr "کدمنبع"
+
+#: src/gtr-actions-app.c:58
+msgid "Current Maintainers"
+msgstr "نگهدارندگان فعلی"
+
+#: src/gtr-actions-app.c:62
+msgid "Previous Developers"
+msgstr "توسعه‌دهندگان قبلی"
+
+#: src/gtr-actions-app.c:73
+msgid "Contributors"
+msgstr "مشارکت‌کنندگان"
+
+#: src/gtr-actions-app.c:98
+msgid "Translation file editing suite for localization of applications and libraries."
+msgstr "مجموعه ویرایش پروندهٔ ترجمه برای محلی‌سازی برنامه‌ها و کتابخانه‌ها."
+
+#. * Note to translators: put here your name and email so it will show
+#. * up in the "about" box
+#: src/gtr-actions-app.c:111
 msgid "translator-credits"
-msgstr "ترجمه‌ی: روزبه پورنادر"
-
-#: src/about.c:80
-msgid "(C) 1999 The Free Software Foundation, Inc."
-msgstr "‎(C) 1999 The Free Software Foundation, Inc.‎"
-
-#: src/about.c:81
-msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgstr ""
+"سید اسحاق مقیم شهیدانی <eshagh094@gmail.com>\n"
+"روزبه پورنادر <roozbeh@farsiweb.info>"
 
-#: src/bookmark.c:93 src/dialogs.c:1489
-msgid "No comment"
-msgstr ""
+#: src/gtr-actions-app.c:114
+msgid "Translation Editor Web Site"
+msgstr "پایگاه وب ویرایشگر ترجمه"
 
-#: src/bookmark.c:598
-msgid "_View/_Bookmarks/"
-msgstr ""
+# در این رشته از نویسهٔ ایزوله اولین نویسهٔ قوی استفاده شده است
+#: src/gtr-actions-file.c:220
+msgid "Do you want to save changes to this file: <span weight=\"bold\" size=\"large\">%s</span>?"
+msgstr "آیا می‌خواهید تغییرات را در این پرونده ذخیره کنید: <span weight=\"bold\" size=\"large\">⁨%s⁩</span>؟"
 
-#: src/bookmark.c:635
-#, c-format
-msgid "Open %s (%s)"
-msgstr ""
+#: src/gtr-actions-file.c:226
+msgid "If you don't save, all your unsaved changes will be permanently lost."
+msgstr "اگر ذخیره نکنید، همه تغییرات ذخیره نشده شما برای همیشه از بین می‌روند."
 
-#: src/color-schemes.c:196
-#, c-format
-msgid "Can't apply color scheme file `%s'!"
-msgstr ""
+#: src/gtr-actions-file.c:229
+msgid "Save and open"
+msgstr "ذخیره و گشودن"
 
-#: src/color-schemes.c:318
-msgid "Couldn't retrieve author information!"
-msgstr ""
+#: src/gtr-actions-file.c:230
+msgid "Cancel"
+msgstr "انصراف"
 
-#.
-#. * Translators: These strings are used as author informations if
-#. *  no author informations could be retrieved:
-#.
-#: src/color-schemes.c:324 src/translator.c:318
-msgid "Unknown"
-msgstr ""
+#: src/gtr-actions-file.c:231
+msgid "Continue without saving"
+msgstr "ادامه بدون ذخیره"
 
-#: src/color-schemes.c:325
-msgid "<Not Given>"
-msgstr ""
+#: src/gtr-actions-file.c:263
+msgid "Open file for translation"
+msgstr "گشودن پرونده برای ترجمه"
 
-#: src/color-schemes.c:472
-msgid "_View/_Colorschemes/"
-msgstr ""
+#: src/gtr-actions-file.c:369
+msgid "This file has already been uploaded"
+msgstr "این پرونده هم‌اکنون بارگذاری شده است"
 
-#: src/color-schemes.c:502
-#, c-format
-msgid "Activate colorscheme %s"
-msgstr ""
-
-#: src/dialogs.c:115
-msgid "gtranslator -- open po file"
-msgstr ""
-
-#: src/dialogs.c:157
-msgid "gtranslator -- save file as.."
-msgstr ""
-
-#: src/dialogs.c:177
-msgid "gtranslator -- save local copy of file as.."
-msgstr ""
-
-#: src/dialogs.c:227
-#, c-format
+#: src/gtr-actions-file.c:380
 msgid ""
-"File %s\n"
-"was changed. Save?"
+"An error occurred while uploading the file: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> correctly in your profile or you don't have permissions to upload this module."
 msgstr ""
+"هنگام بارگذاری پرونده خطایی رخ داد: %s\n"
+"شاید شما <b>ژتون</b> <i>l10n.gnome.org</i> خود را به درستی در نمایه خود پیکربندی نکرده‌اید، یا مجوز بارگذاری این پیمانه را ندارید."
 
-#: src/dialogs.c:233
-msgid "Don't save"
-msgstr ""
+#: src/gtr-actions-file.c:393
+msgid "The file has been uploaded!"
+msgstr "پرونده بارگذاری شد!"
 
-#: src/dialogs.c:277
-msgid "gtranslator -- import po file"
-msgstr ""
+#: src/gtr-actions-file.c:548
+msgid "Save file as…"
+msgstr "ذخیرهٔ پرونده به عنوان…"
 
-#: src/dialogs.c:324
-msgid "gtranslator -- export po file"
-msgstr ""
-
-#: src/dialogs.c:372 src/dialogs.c:405
-msgid "gtranslator -- edit comment"
-msgstr ""
-
-#: src/dialogs.c:397
-msgid "Comment:"
-msgstr ""
-
-#: src/dialogs.c:512
-#, c-format
-msgid "Should ALL translations from `%s' be removed?"
-msgstr ""
-
-#: src/dialogs.c:615
-msgid "gtranslator -- go to"
-msgstr ""
-
-#: src/dialogs.c:623
-msgid "Go to message number:"
-msgstr ""
-
-#: src/dialogs.c:681
-msgid "Find in the po file"
-msgstr ""
-
-#: src/dialogs.c:690
-msgid "Enter search string:"
-msgstr ""
-
-#: src/dialogs.c:695
-msgid "Case sensitive"
-msgstr ""
-
-#: src/dialogs.c:700
-msgid "Find in:"
-msgstr ""
-
-#: src/dialogs.c:704 src/dialogs.c:835
-msgid "Comments"
-msgstr ""
-
-#: src/dialogs.c:707 src/dialogs.c:838 src/languages.c:97
-msgid "English"
-msgstr "انگلیسی"
-
-#: src/dialogs.c:710 src/dialogs.c:841 src/messages-table.c:254
-msgid "Translation"
-msgstr "ترجمه"
-
-#.
-#. * Translators: this means that the hotkeys ("_" etc.) are ignored
-#. *  during the search action.
-#.
-#: src/dialogs.c:721
-msgid "Ignore hotkeys"
-msgstr ""
-
-#: src/dialogs.c:814
-msgid "gtranslator -- replace"
-msgstr ""
-
-#: src/dialogs.c:818 src/menus.c:355
-msgid "Replace"
-msgstr ""
-
-#: src/dialogs.c:819
-msgid "Replace all"
-msgstr ""
-
-#: src/dialogs.c:824
-msgid "String to replace:"
-msgstr ""
-
-#: src/dialogs.c:827
-msgid "Replace string:"
-msgstr ""
-
-#: src/dialogs.c:832
-msgid "Replace in:"
-msgstr ""
-
-#: src/dialogs.c:895
-msgid "Please enter a string to replace!"
-msgstr ""
-
-#: src/dialogs.c:903
-msgid "Please enter a string to replace with!"
-msgstr ""
-
-#: src/dialogs.c:945
-msgid "An error occurred while msgfmt was executed:\n"
-msgstr ""
-
-#: src/dialogs.c:986
-#, c-format
+#: src/gtr-assistant.c:128
 msgid ""
-"The file\n"
-"\n"
-"   %s\n"
-"\n"
-"is already open in another instance of gtranslator!\n"
-"Please close the other instance of gtranslator handling\n"
-"this file currently to re-gain access to this file.\n"
-"\n"
-"Shall fool gtranslator open this file anyway ?"
+"Profile name: %s\n"
+"Translator name: %s\n"
+"Translator email: %s\n"
+"Language name: %s\n"
+"Team email: %s\n"
+"Language code: %s\n"
+"Character set: %s\n"
+"Transfer encoding: %s\n"
+"Plural form: %s\n"
 msgstr ""
+"نام نمایه: %s\n"
+"نام مترجم: %s\n"
+"رایانامهٔ مترجم: %s\n"
+"نام زبان: %s\n"
+"رایانامهٔ تیم: %s\n"
+"کد زبان: %s\n"
+"مجموعهٔ نویسه: %s\n"
+"رمزگذاری انتقال: %s\n"
+"شکل جمع: %s\n"
 
-#: src/dialogs.c:1027
-#, c-format
+#: src/gtr-assistant.c:167
+msgid "This assistant will help you to create the main profile."
+msgstr "این دستیار به شما در ایجاد نمایه اصلی کمک می‌کند."
+
+#: src/gtr-assistant.c:172
+msgid "Assistant"
+msgstr "دستیار"
+
+#: src/gtr-assistant.c:258
+msgid "Profile name"
+msgstr "نام نمایه"
+
+#: src/gtr-assistant.c:302
+msgid "Translator email"
+msgstr "رایانامهٔ مترجم"
+
+#: src/gtr-assistant.c:324
+msgid "Team email"
+msgstr "رایانامهٔ تیم"
+
+#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:575
+msgid "Profile"
+msgstr "نمایه"
+
+#: src/gtr-assistant.c:429
+msgid "Language"
+msgstr "زبان"
+
+#: src/gtr-assistant.c:450
+msgid "Confirmation"
+msgstr "تأییدیه"
+
+#: src/gtr-close-confirmation-dialog.c:123
+msgid "Close _without Saving"
+msgstr "بستن _بدون ذخیره"
+
+#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:89
+#: src/gtr-file-dialogs.c:47 src/gtr-jump-dialog.c:90
+#: src/gtr-preferences-dialog.c:446 src/gtr-profile-dialog.c:72
+#: src/translation-memory/gtr-translation-memory-dialog.c:81
+msgid "_Cancel"
+msgstr "_لغو"
+
+#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:87
+#: src/gtr-file-dialogs.c:46
+msgid "_Save"
+msgstr "_ذخیره"
+
+#: src/gtr-close-confirmation-dialog.c:150
+msgid "Question"
+msgstr "پرسش"
+
+# در این ترجمه از نویسهٔ ایزوله اولین نویسهٔ قوی استفاده شده است
+#: src/gtr-close-confirmation-dialog.c:366
+msgid "Save the changes to document “%s” before closing?"
+msgstr "پیش از بستن، تغییرات در سند «⁨%s⁩» ذخیره شود؟"
+
+#: src/gtr-close-confirmation-dialog.c:530
+msgid "Changes to %d document will be permanently lost."
+msgid_plural "Changes to %d documents will be permanently lost."
+msgstr[0] "تغییرات در %Id سند برای همیشه از بین می‌رود."
+msgstr[1] "تغییرات در %Id سند برای همیشه از بین می‌روند."
+
+#: src/gtr-close-confirmation-dialog.c:537
+msgid "There is %d document with unsaved changes. Save changes before closing?"
+msgid_plural "There are %d documents with unsaved changes. Save changes before closing?"
+msgstr[0] "اینجا %Id سند با تغییرات ذخیره نشده وجود دارد. قبل از بسته شدن تغییرات ذخیره شود؟"
+msgstr[1] "اینجا %Id سند با تغییرات ذخیره نشده وجود دارد. قبل از بسته شدن تغییرات ذخیره شوند؟"
+
+#: src/gtr-close-confirmation-dialog.c:558
+msgid "Docum_ents with unsaved changes:"
+msgstr "ا_سناد با تغییرات ذخیره نشده:"
+
+#: src/gtr-close-confirmation-dialog.c:562
+msgid "S_elect the documents you want to save:"
+msgstr "اسنادی را که می‌خواهید ذخیره کنید، برگزینید:"
+
+#: src/gtr-close-confirmation-dialog.c:581
+msgid "Saving has been disabled by the system administrator."
+msgstr "ذخیره کردن توسط مدیر سیستم غیرفعّال شده است."
+
+#: src/gtr-close-confirmation-dialog.c:583
+msgid "If you don’t save, all your changes will be permanently lost."
+msgstr "اگر ذخیره نکنید، همه تغییرات شما برای همیشه از بین می‌روند."
+
+#: src/gtr-context.c:82
+msgid "Notes"
+msgstr "یادداشت‌ها"
+
+#: src/gtr-context.c:290
+msgid "Notes:"
+msgstr "یادداشت‌ها:"
+
+#: src/gtr-context.c:298
+msgid "Add Note"
+msgstr "افزودن یادداشت"
+
+#: src/gtr-context.c:303
+msgid "Edit"
+msgstr "ویرایش"
+
+#: src/gtr-context.c:348
+msgid "Extracted comments:"
+msgstr "دیدگاه‌های استخراج شده:"
+
+#: src/gtr-context.c:351
+msgid "Context:"
+msgstr "متن نوشته:"
+
+#: src/gtr-context.c:354
+msgid "Format:"
+msgstr "قالب:"
+
+#: src/gtr-dl-teams.c:417
+msgid "No module state found."
+msgstr "هیچ وضعیت پیمانه‌ای یافت نشد."
+
+#: src/gtr-dl-teams.c:434
+msgid "The current state is: %s"
+msgstr "وضعیت فعلی: %s"
+
+#  در این رشته از نویسهٔ ایزوله اولین نویسهٔ قوی استفاده شده است
+#: src/gtr-dl-teams.c:586
+msgid "The file '%s' has been saved in %s"
+msgstr "پروندهٔ «⁨%s⁩» در ⁨%s⁩ ذخیره شد"
+
+#: src/gtr-dl-teams.c:646
 msgid ""
-"File %s\n"
-"was changed. Do you want to revert to saved copy?"
+"An error occurred while reserving this module: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> correctly in your profile or you don't have permissions to reserve this module."
 msgstr ""
+"هنگام حفظ کردن این پیمانه خطایی رخ داد: %s\n"
+"شاید شما <b>ژتون</b> <i>l10n.gnome.org</i> خود را به درستی در نمایه خود پیکربندی نکرده‌اید، یا مجوز حفظ کردن این پیمانه را ندارید."
 
-#: src/dialogs.c:1056
-msgid "gtranslator -- open from URI"
-msgstr ""
+# در این رشته از نویسهٔ ایزوله اولین نویسهٔ قوی استفاده شده است
+#: src/gtr-dl-teams.c:662
+msgid "The file '%s.%s.%s.%s' has been successfully reserved"
+msgstr "پروندهٔ «⁨%s.%s.%s.%s⁩» با موفقیت حفظ شد"
 
-#: src/dialogs.c:1068
-msgid "Enter URI:"
-msgstr ""
+#: src/gtr-dl-teams.c:788
+msgid "Translation Team"
+msgstr "تیم ترجمه"
 
-#: src/dialogs.c:1104
-msgid "No URI given!"
-msgstr ""
+#: src/gtr-dl-teams.c:795
+msgid "Module"
+msgstr "پیمانه"
 
-#: src/dialogs.c:1119
-msgid "No supported URI protocol (like \"ftp://\") given!"
-msgstr ""
+#: src/gtr-dl-teams.ui:85
+msgid "Select team, module, branch and domain to get the translation file."
+msgstr "برای دریافت پروندهٔ ترجمه، تیم، پیمانه، شاخه و دامنه را برگزینید."
 
-#: src/dialogs.c:1127
-msgid ""
-"URIs are used to locate files uniquely on different systems.\n"
-"The standard Internet addresses (URLs) are also URIs -- you can\n"
-"use them to open remote po files lying on servers with standard protocols\n"
-"like \"http\", \"ftp\" or any other access method supported by GnomeVFS.\n"
-"Some example URIs for clarification (these ones are supported):\n"
-"http://www.gtranslator.org/remote-po/gtranslator.pot\n"
-"ftp://anonymous@ftp.somewhere.com/<A-REMOTE-PO-FILE>\n"
-"\n"
-"file:///<PO-FILE> or\n"
-"http://www.DOMAIN.COM/PO-FILE"
-msgstr ""
+#: src/gtr-dl-teams.ui:106
+msgid "Reserve for translation"
+msgstr "حفظ کردن برای ترجمه"
 
-#: src/dialogs.c:1166
-#, c-format
-msgid ""
-"Open recovery file for `%s'?\n"
-"It was saved by gtranslator before gtranslator last closed\n"
-"and may contain your hard work!\n"
-msgstr ""
+#: src/gtr-dl-teams.ui:117
+msgid "Load file"
+msgstr "بار کردن پرونده"
 
-#.
-#. * Translators: All this is about recovering a po file after
-#. *  a crash or something; postbone means that the user will
-#. *   get asked the next time he starts up gtranslator again
-#. *    if he/she wants to recover file.
-#.
-#: src/dialogs.c:1178
-msgid "Postpone decision"
-msgstr ""
+#: src/gtr-dl-teams.ui:136
+msgid "Load from Damned Lies"
+msgstr "بار کردن از دروغ‌های ملعون"
 
-#: src/dialogs.c:1180
-msgid "Ignore recovery file"
-msgstr ""
+#: src/gtr-dl-teams.ui:143 src/gtr-projects.ui:58
+msgid "Open…"
+msgstr "گشودن…"
 
-#: src/dialogs.c:1182
-msgid "Recover file"
-msgstr ""
+#: src/gtr-dl-teams.ui:166 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
+msgid "Main Menu"
+msgstr "فهرست اصلی"
 
-#.
-#. * A half-baken dialog for the query functionality.
-#.
-#: src/dialogs.c:1241
-msgid "Here you can query existing translations from your learn buffer."
-msgstr ""
+#: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+msgid "New window"
+msgstr "پنجرهٔ جدید"
 
-#: src/dialogs.c:1244
-msgid "gtranslator -- query your personal learn buffer"
-msgstr ""
+#: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+msgid "Preferences"
+msgstr "ترجیحات"
 
-#: src/dialogs.c:1248 src/menus.c:360
-msgid "Query"
-msgstr ""
+#: src/gtr-dl-teams.ui:235 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
+msgid "Keyboard Shortcuts"
+msgstr "میان‌برهای صفحه‌کلید"
 
-#: src/dialogs.c:1249
-msgid "Query message content"
-msgstr ""
+#: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
+msgid "About"
+msgstr "درباره"
 
-#: src/dialogs.c:1259
-msgid "Query string:"
-msgstr ""
+#: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
+msgid "Quit"
+msgstr "ترک"
 
-#: src/dialogs.c:1297
-msgid "No query string given!"
-msgstr ""
+#: src/gtr-file-dialogs.c:47
+msgid "_Open"
+msgstr "_گشودن"
 
-#: src/dialogs.c:1319
-msgid "Couldn't find any result for the query in your learn buffer!"
-msgstr ""
+#: src/gtr-file-dialogs.c:61
+msgid "Gettext translation"
+msgstr "ترجمهٔ Gettext"
 
-#: src/dialogs.c:1331
-#, c-format
-msgid ""
-"Found \"%s\" as a translation for \"%s\".\n"
-"Would you like to insert it into the translation?"
-msgstr ""
+#: src/gtr-file-dialogs.c:70
+msgid "Gettext translation template"
+msgstr "الگوی ترجمه Gettext"
 
-#.
-#. * Translators: This means that the query result string is
-#. *  already translated.
-#.
-#: src/dialogs.c:1401
-msgid "Query's result translation is already there!"
-msgstr ""
+#: src/gtr-file-dialogs.c:75
+msgid "All files"
+msgstr "تمام پرونده‌ها"
 
-#: src/dialogs.c:1433
-msgid ""
-"Should gtranslator autotranslate the file using information\n"
-"from your personal learn buffer?"
-msgstr ""
+#: src/gtr-header-dialog.c:325
+msgid "Edit Header"
+msgstr "ویرایش سرایند"
 
-#: src/dialogs.c:1469 src/dialogs.c:1497
-msgid "gtranslator -- add bookmark with comment?"
-msgstr ""
-
-#: src/dialogs.c:1489
-msgid "Comment for the bookmark:"
-msgstr ""
-
-#: src/find.c:217
-msgid "Please enter a search string"
-msgstr ""
-
-#: src/find.c:233
-#, c-format
-msgid ""
-"Could not find\n"
-"\"%s\""
-msgstr ""
-
-#: src/gui.c:199
-msgid "Edit comment"
-msgstr ""
-
-#: src/gui.c:501
-#, c-format
-msgid "%s [ %i Fuzzy left ]"
-msgstr ""
-
-#: src/gui.c:501 src/gui.c:505 src/menus.c:341 src/messages-table.c:315
-msgid "Fuzzy"
-msgstr ""
-
-#: src/gui.c:505
-#, c-format
-msgid "%s [ No fuzzy left ]"
-msgstr ""
-
-#: src/gui.c:513
-msgid "Sticky (Message & translation are the same)"
-msgstr ""
-
-#: src/gui.c:515 src/messages-table.c:323
-msgid "Translated"
-msgstr "ترجمه‌شده"
-
-#: src/gui.c:524
-#, c-format
-msgid "%s [ %i Untranslated left ]"
-msgstr ""
-
-#: src/gui.c:524 src/gui.c:526 src/messages-table.c:306
-msgid "Untranslated"
-msgstr "ترجمه‌نشده"
-
-#: src/gui.c:526
-#, c-format
-msgid "%s [ No untranslated left ]"
-msgstr ""
-
-#: src/gui.c:545
-#, c-format
-msgid "Message %d / %d / Status: %s (Message contains plural forms)"
-msgstr ""
-
-#: src/gui.c:549
-#, c-format
-msgid "Message %d / %d / Status: %s"
-msgstr ""
-
-#: src/header_stuff.c:495
-msgid "gtranslator -- edit header"
-msgstr ""
-
-#: src/header_stuff.c:519
-msgid "Comments:"
-msgstr ""
-
-#: src/header_stuff.c:526
-msgid "Project name:"
-msgstr "نام پروژه:"
-
-#: src/header_stuff.c:532
-msgid "Project version:"
-msgstr "نسخه‌ی پروژه:"
-
-#: src/header_stuff.c:539
-msgid "Pot file creation date:"
-msgstr "تاریخ ایجاد پرونده‌ی Pot:"
-
-#: src/header_stuff.c:545
-msgid "Po file revision date:"
-msgstr ""
-
-#: src/header_stuff.c:559
-msgid "Report message string bugs to:"
-msgstr ""
-
-#: src/header_stuff.c:572
-msgid "Generator:"
-msgstr "تولیدکننده:"
-
-#: src/header_stuff.c:576
-msgid "Project"
-msgstr "پروژه"
-
-#: src/header_stuff.c:582
+#: src/gtr-header-dialog.ui:65
 msgid "Use my options to complete the following entries:"
-msgstr ""
+msgstr "از انتخاب‌های من برای تکمیل ورودی‌های زیر استفاده شود:"
 
-#: src/header_stuff.c:595
-msgid "Translator's name:"
-msgstr "نام مترجم:"
+#: src/gtr-header-dialog.ui:89
+msgid "Translator’s _name:"
+msgstr "_نام مترجم:"
 
-#: src/header_stuff.c:601
-msgid "Translator's e-mail:"
-msgstr ""
+#: src/gtr-header-dialog.ui:103
+msgid "Translator’s _email:"
+msgstr "_رایانامهٔ مترجم:"
 
-#: src/header_stuff.c:608 src/prefs.c:500
-msgid "Language:"
-msgstr "زبان:"
+#: src/gtr-header-dialog.ui:117
+msgid "_Language:"
+msgstr "_زبان:"
 
-#: src/header_stuff.c:615 src/prefs.c:512
-msgid "Language group's email:"
-msgstr ""
+#: src/gtr-header-dialog.ui:130
+msgid "Language _code:"
+msgstr "_کد زبان:"
 
-#: src/header_stuff.c:622 src/prefs.c:518
-msgid "Charset:"
-msgstr ""
+#: src/gtr-header-dialog.ui:143
+msgid "Language gro_up email:"
+msgstr "رایانامهٔ _تیم زبان:"
 
-#: src/header_stuff.c:629 src/prefs.c:523
-msgid "Encoding:"
-msgstr ""
+#: src/gtr-header-dialog.ui:156
+msgid "Char_set:"
+msgstr "_مجموعهٔ نویسه:"
 
-#: src/header_stuff.c:637
+#: src/gtr-header-dialog.ui:169
+msgid "Enc_oding:"
+msgstr "_رمزگذاری:"
+
+#: src/gtr-header-dialog.ui:267
 msgid "Translator and Language"
 msgstr "مترجم و زبان"
 
-#: src/history.c:195
-msgid "_File/Recen_t files/"
-msgstr ""
-
-#: src/history.c:243
-#, c-format
-msgid "Open %s"
-msgstr ""
-
-#: src/languages.c:37
-msgid "Afrikaans"
-msgstr "آفریکانس"
-
-#: src/languages.c:41
-msgid "Arabic"
-msgstr "عربی"
-
-#: src/languages.c:45
-msgid "Azerbaijani Turkish"
-msgstr "ترکی آذربایجانی"
-
-#: src/languages.c:49
-msgid "Basque"
-msgstr ""
-
-#: src/languages.c:53
-msgid "Belorussian"
-msgstr ""
-
-#: src/languages.c:57
-msgid "Bengali"
-msgstr "بنگالی"
-
-#: src/languages.c:61
-msgid "Britton"
-msgstr ""
-
-#: src/languages.c:65
-msgid "Bulgarian"
-msgstr "بلغاری"
-
-#: src/languages.c:69
-msgid "Catalan"
-msgstr ""
-
-#: src/languages.c:73
-msgid "Chinese/Simplified"
-msgstr "چینی/ساده‌شده"
-
-#: src/languages.c:77
-msgid "Chinese/Traditional"
-msgstr "چینی/سنتی"
-
-#: src/languages.c:81
-msgid "Croatian"
-msgstr ""
-
-#: src/languages.c:85
-msgid "Czech"
-msgstr ""
-
-#: src/languages.c:89
-msgid "Danish"
-msgstr "دانمارکی"
-
-#: src/languages.c:93
-msgid "Dutch"
-msgstr "هلندی"
-
-#: src/languages.c:101
-msgid "English/Canada"
-msgstr "انگلیسی/کانادا"
-
-#: src/languages.c:105
-msgid "English/GB"
-msgstr "انگلیسی/بریتانیا"
-
-#: src/languages.c:109
-msgid "English/USA"
-msgstr "انگلیسی/امریکا"
-
-#: src/languages.c:113
-msgid "Esperanto"
-msgstr "اسپرانتو"
-
-#: src/languages.c:117
-msgid "Estonian"
-msgstr ""
-
-#: src/languages.c:121
-msgid "Persian"
-msgstr "فارسی"
-
-#: src/languages.c:125
-msgid "Finnish"
-msgstr "فنلاندی"
-
-#: src/languages.c:129
-msgid "French"
-msgstr "فرانسوی"
-
-#: src/languages.c:133
-msgid "Galician"
-msgstr ""
-
-#: src/languages.c:137
-msgid "German"
-msgstr "آلمانی"
-
-#: src/languages.c:141
-msgid "Greek"
-msgstr "یونانی"
-
-#: src/languages.c:145
-msgid "Gujarati"
-msgstr "گجراتی"
-
-#: src/languages.c:149
-msgid "Hindi"
-msgstr "هندی"
-
-#: src/languages.c:153
-msgid "Hungarian"
-msgstr "مجاری"
-
-#: src/languages.c:157
-msgid "Icelandic"
-msgstr "ایسلندی"
-
-#: src/languages.c:161
-msgid "Indonesian"
-msgstr "اندونزیایی"
-
-#: src/languages.c:165
-msgid "Italian"
-msgstr "ایتالیایی"
-
-#: src/languages.c:169
-msgid "Irish"
-msgstr "ایرلندی"
-
-#: src/languages.c:173
-msgid "Japanese"
-msgstr "ژاپنی"
-
-#: src/languages.c:177
-msgid "Kannada"
-msgstr ""
-
-#: src/languages.c:181
-msgid "Korean"
-msgstr "کره‌ای"
-
-#: src/languages.c:185
-msgid "Latvian"
-msgstr ""
-
-#: src/languages.c:189
-msgid "Lithuanian"
-msgstr ""
-
-#: src/languages.c:193
-msgid "Malay/Bahasa Melayu"
-msgstr ""
-
-#: src/languages.c:197
-msgid "Maltese"
-msgstr "مالتی"
-
-#: src/languages.c:201
-msgid "Marathi"
-msgstr ""
-
-#: src/languages.c:205
-msgid "Norwegian/Bokmaal"
-msgstr ""
-
-#: src/languages.c:209
-msgid "Norwegian/Nynorsk"
-msgstr ""
-
-#: src/languages.c:213
-msgid "Punjabi"
-msgstr "پنجابی"
-
-#: src/languages.c:217
-msgid "Polish"
-msgstr "لهستانی"
-
-#: src/languages.c:221
-msgid "Portuguese"
-msgstr "پرتغالی"
-
-#: src/languages.c:225
-msgid "Portuguese/Brazil"
-msgstr "پرتغالی/برزیل"
-
-#: src/languages.c:229
-msgid "Romanian"
-msgstr "رومانیایی"
-
-#: src/languages.c:233
-msgid "Russian"
-msgstr "روسی"
-
-#: src/languages.c:237
-msgid "Serbian/Cyrillic"
-msgstr "صربی/سیریلی"
-
-#: src/languages.c:241
-msgid "Serbian/Latin"
-msgstr "صربی/لاتینی"
-
-#: src/languages.c:245
-msgid "Slovak"
-msgstr ""
-
-#: src/languages.c:249
-msgid "Slovenian"
-msgstr ""
-
-#: src/languages.c:253
-msgid "Spanish"
-msgstr "اسپانیایی"
-
-#: src/languages.c:257
-msgid "Spanish/Spain"
-msgstr "اسپانیایی/اسپانیا"
-
-#: src/languages.c:261
-msgid "Spanish/Mexico"
-msgstr "اسپانیایی/مکزیک"
-
-#: src/languages.c:265
-msgid "Swedish"
-msgstr "سوئدی"
-
-#: src/languages.c:269
-msgid "Tamil"
-msgstr ""
-
-#: src/languages.c:273
-msgid "Telugu"
-msgstr ""
-
-#: src/languages.c:277
-msgid "Thai"
-msgstr "تایلندی"
-
-#: src/languages.c:281
-msgid "Turkish"
-msgstr "ترکی"
-
-#: src/languages.c:285
-msgid "Ukrainian"
-msgstr "اوکراینی"
-
-#: src/languages.c:289
-msgid "Uzbekian"
-msgstr "ازبکی"
-
-#: src/languages.c:293
-msgid "Vietnamese"
-msgstr "ویتنامی"
-
-#: src/languages.c:297
-msgid "Walloon"
-msgstr ""
-
-#: src/languages.c:301
-msgid "Welsh"
-msgstr "ولزی"
-
-#: src/learn.c:379
-msgid "gtranslator learn buffer statistics:"
-msgstr ""
-
-#: src/learn.c:382
-#, c-format
-msgid "Learn buffer filename: `%s`"
-msgstr ""
-
-#.
-#. * Translators: This means the encoding of the learn buffer (XML) file.
-#.
-#: src/learn.c:388
-#, c-format
-msgid "Encoding: `%s'"
-msgstr ""
-
-#.
-#. * Translators: "Serial number" of the learn buffer - means # of file updates.
-#.
-#: src/learn.c:394
-#, c-format
-msgid "Serial: `%i'"
-msgstr ""
-
-#.
-#. * Translators: That's the number of message entries in the learn buffer.
-#.
-#: src/learn.c:400
-#, c-format
-msgid "Number of entries: `%i'"
-msgstr ""
-
-#: src/main.c:85
-msgid "Auto translate the po file"
-msgstr ""
-
-#: src/main.c:85 src/main.c:101
-msgid "FILENAME"
-msgstr "نام پرونده"
-
-#: src/main.c:89
-msgid "Show build specifications"
-msgstr ""
-
-#: src/main.c:93
-msgid "Export learn buffer to a plain po file"
-msgstr ""
-
-#: src/main.c:93
-msgid "PO_FILE"
-msgstr ""
-
-#: src/main.c:97
-msgid "Specify main window geometry"
-msgstr ""
-
-#: src/main.c:97
-msgid "GEOMETRY"
-msgstr "هندسه"
-
-#: src/main.c:101
-msgid "Learn the file completely"
-msgstr ""
-
-#: src/main.c:105
-msgid "Show learn buffer statistics"
-msgstr ""
-
-#: src/main.c:148
-#, c-format
-msgid "Error during GConf initialization: %s."
-msgstr ""
-
-#: src/main.c:180
-msgid "gtranslator build information/specs:"
-msgstr ""
-
-#: src/main.c:182
-msgid "Version and build date:"
-msgstr "نسخه و تاریخ ساختن:"
-
-#: src/main.c:184
-msgid "Build GLib / Gtk+ / GNOME / XML versions:"
-msgstr ""
-
-#: src/main.c:186
-msgid "Colorschemes directory:"
-msgstr ""
-
-#: src/main.c:188
-msgid "Scripts directory:"
-msgstr ""
-
-#: src/main.c:190
-msgid "Window icon:"
-msgstr "شمایل پنجره:"
-
-#: src/main.c:192
-msgid "Own locale directory:"
-msgstr ""
-
-#: src/main.c:194
-msgid "Default learn buffer file location:"
-msgstr ""
-
-#.
-#. * As everything seemed to went fine, print out a nice
-#. *  message informing the user about the success.
-#.
-#: src/main.c:459
-#, c-format
-msgid "Learned file `%s' successfully for your learn buffer.\n"
-msgstr ""
-
-#.
-#. * Give us another small status feedback about the export.
-#.
-#: src/main.c:501
-#, c-format
-msgid "Exported learn buffer to file `%s'.\n"
-msgstr ""
-
-#: src/menus.c:48
-msgid "_Go"
-msgstr ""
-
-#: src/menus.c:58
-msgid "_Compile"
-msgstr ""
-
-#: src/menus.c:59 src/menus.c:296
-msgid "Compile the po file"
-msgstr ""
-
-#: src/menus.c:65
-msgid "_Update"
-msgstr ""
-
-#: src/menus.c:66 src/menus.c:300
-msgid "Update the po file"
-msgstr ""
-
-#: src/menus.c:73
-msgid "Add bookmark"
-msgstr ""
-
-#: src/menus.c:74
-msgid "Add a bookmark for this message in this po file"
-msgstr ""
-
-#: src/menus.c:81
-msgid "Aut_otranslate..."
-msgstr ""
-
-#: src/menus.c:82
-msgid "Autotranslate the file with information from your learn buffer"
-msgstr ""
-
-#: src/menus.c:89
-msgid "Remove all translations..."
-msgstr "حذف همه‌ی ترجمه‌ها..."
-
-#: src/menus.c:90
-msgid "Remove all existing translations from the po file"
-msgstr ""
-
-#: src/menus.c:98
-msgid "Open from _URI..."
-msgstr ""
-
-#: src/menus.c:99
-msgid "Open a po file from a given URI"
-msgstr ""
-
-#: src/menus.c:109
-msgid "Recen_t files"
-msgstr ""
-
-#: src/menus.c:113
-msgid "_Export to UTF-8..."
-msgstr ""
-
-#: src/menus.c:114
-msgid "Export the current po file to UTF-8"
-msgstr ""
-
-#: src/menus.c:120
-msgid "_Import from UTF-8..."
-msgstr ""
-
-#: src/menus.c:121
-msgid "Import a UTF-8 encoded po file into it's corresponding plain encoding"
-msgstr ""
-
-#: src/menus.c:153
-msgid "_Query..."
-msgstr ""
-
-#: src/menus.c:154 src/menus.c:361
-msgid "Query for a string"
-msgstr ""
-
-#: src/menus.c:161
-msgid "_Header..."
-msgstr ""
-
-#: src/menus.c:162
-msgid "Edit po file header"
-msgstr ""
-
-#: src/menus.c:169
-msgid "C_omment..."
-msgstr ""
-
-#: src/menus.c:170
-msgid "Edit message comment"
-msgstr ""
-
-#: src/menus.c:177
-msgid "Copy _message -> translation"
-msgstr ""
-
-#: src/menus.c:178
-msgid "Copy the original message contents and paste them as translation"
-msgstr ""
-
-#: src/menus.c:185
-msgid "Fu_zzy"
-msgstr ""
-
-#: src/menus.c:186
-msgid "Toggle fuzzy status of a message"
-msgstr ""
-
-#: src/menus.c:200
-msgid "_First"
-msgstr "_اولین"
-
-#: src/menus.c:201 src/menus.c:317
-msgid "Go to the first message"
-msgstr ""
-
-#: src/menus.c:207
-msgid "_Back"
-msgstr "_عقب"
-
-#: src/menus.c:208 src/menus.c:321
-msgid "Move back one message"
-msgstr ""
-
-#: src/menus.c:215
-msgid "_Next"
-msgstr "_بعدی"
-
-#: src/menus.c:216 src/menus.c:326
-msgid "Move forward one message"
-msgstr ""
-
-#: src/menus.c:222
-msgid "_Last"
-msgstr "_آخرین"
-
-#: src/menus.c:223 src/menus.c:330
-msgid "Go to the last message"
-msgstr ""
-
-#: src/menus.c:230
-msgid "_Go to..."
-msgstr ""
-
-#: src/menus.c:231
-msgid "Goto specified message number"
-msgstr ""
-
-#: src/menus.c:237
-msgid "Next fuz_zy"
-msgstr ""
-
-#: src/menus.c:238
-msgid "Go to next fuzzy message"
-msgstr ""
-
-#: src/menus.c:244
-msgid "Next _untranslated"
-msgstr ""
-
-#: src/menus.c:245 src/menus.c:335
-msgid "Go to next untranslated message"
-msgstr ""
-
-#: src/menus.c:255
-msgid "_Bookmarks"
-msgstr ""
-
-#: src/menus.c:256
-msgid "_Colorschemes"
-msgstr ""
-
-#: src/menus.c:270
-msgid "gtranslator _website"
-msgstr ""
-
-#: src/menus.c:271
-msgid "gtranslator's homepage on the web"
-msgstr ""
-
-#: src/menus.c:282
-msgid "Open"
-msgstr "باز کردن"
-
-#: src/menus.c:283
-msgid "Open a po file"
-msgstr ""
-
-#: src/menus.c:286
+#: src/gtr-header-dialog.ui:290
+msgid "Project Id _version:"
+msgstr "_نگارش شناسهٔ پروژه:"
+
+#: src/gtr-header-dialog.ui:303
+msgid "Pot _file creation date:"
+msgstr "تاریخ ایجاد _پروندهٔ Pot:"
+
+#: src/gtr-header-dialog.ui:317
+msgid "Po file _revision date:"
+msgstr "تاریخ _بازبینی پروندهٔ Po:"
+
+#: src/gtr-header-dialog.ui:331
+msgid "Report message _bugs to:"
+msgstr "گزارش _مشکلات پیام به:"
+
+#: src/gtr-header-dialog.ui:400
+msgid "Project"
+msgstr "پروژه"
+
+#: src/gtr-header-dialog.ui:430
+msgid "Comment"
+msgstr "دیدگاه"
+
+#: src/gtr-header-dialog.ui:454
+msgid "DL Team:"
+msgstr "تیم DL:"
+
+#: src/gtr-header-dialog.ui:467
+msgid "DL Module:"
+msgstr "پیمانهٔ DL:"
+
+#: src/gtr-header-dialog.ui:481
+msgid "DL Branch:"
+msgstr "شعبهٔ DL:"
+
+#: src/gtr-header-dialog.ui:495
+msgid "DL Domain:"
+msgstr "دامنهٔ DL:"
+
+#: src/gtr-header-dialog.ui:509
+msgid "DL State:"
+msgstr "وضعیت DL:"
+
+#: src/gtr-header-dialog.ui:587
+msgid "Damned Lies Info"
+msgstr "اطّلاعات دروغ‌های ملعون"
+
+#: src/gtr-io-error-info-bar.c:146 src/gtr-jump-dialog.c:88
+#: src/gtr-profile-dialog.c:171 src/gtr-profile-dialog.c:176
+#: src/translation-memory/gtr-translation-memory-dialog.c:80
+msgid "_OK"
+msgstr "_تأیید"
+
+#: src/gtr-jump-dialog.c:92
+msgid "Go to Message"
+msgstr "رفتن به پیام"
+
+#: src/gtr-jump-dialog.ui:30
+msgid "Enter message number:"
+msgstr "شماره پیام را وارد کنید:"
+
+#: src/gtr-lang-button.c:65
+msgid "Choose Language"
+msgstr "زبان را انتخاب کنید"
+
+#: src/gtr-languages-fetcher.ui:46
+msgid "_Language"
+msgstr "_زبان"
+
+#: src/gtr-languages-fetcher.ui:60
+msgid "Language _code"
+msgstr "_کد زبان"
+
+#: src/gtr-languages-fetcher.ui:74
+msgid "Character _set"
+msgstr "_مجموعهٔ کاراکتر"
+
+#: src/gtr-languages-fetcher.ui:88
+msgid "Transfer en_coding"
+msgstr "_رمزگذاری انتقال"
+
+#: src/gtr-languages-fetcher.ui:102
+msgid "_Plural forms"
+msgstr "_شکل‌های جمع"
+
+#: src/gtr-languages-fetcher.ui:200
+msgid "_Edit options manually"
+msgstr "_ویرایش انتخاب‌ها به صورت دستی"
+
+#: src/gtr-message-table.c:234
+msgid "Original Message"
+msgstr "پیام اصلی"
+
+#: src/gtr-message-table.c:253
+msgid "Translated Message"
+msgstr "پیام ترجمه شده"
+
+#: src/gtr-notebook.ui:26
+msgid "Order messages by"
+msgstr "ترتیب پیام‌ها بر اساس"
+
+#: src/gtr-notebook.ui:58
+msgid "Appearance in the original file"
+msgstr "ظاهر در پروندهٔ اصلی"
+
+#: src/gtr-notebook.ui:72
+msgid "Message status"
+msgstr "وضعیت پیام"
+
+#: src/gtr-notebook.ui:87
+msgid "Original message"
+msgstr "پیام اصلی"
+
+#: src/gtr-notebook.ui:102
+msgid "Translated message"
+msgstr "پیام ترجمه شده"
+
+#: src/gtr-notebook.ui:136
+msgid "Find"
+msgstr "یافتن"
+
+#: src/gtr-notebook.ui:150
+msgid "Find and replace"
+msgstr "یافتن و جای‌گزینی"
+
+#: src/gtr-notebook.ui:164 src/gtr-projects.ui:147
+msgid "Build translation memory"
+msgstr "ایجاد حافظهٔ ترجمه"
+
+#: src/gtr-notebook.ui:179
+msgid "Edit header"
+msgstr "ویرایش سرایند"
+
+#: src/gtr-notebook.ui:276 src/gtr-preferences-dialog.c:652
+#: src/gtr-projects.ui:202
+msgid "Help"
+msgstr "راهنما"
+
+# در این رشته از نویسهٔ LRM استفاده شده است
+#: src/gtr-notebook.ui:321
+msgid "Open a new file (<Ctrl>o)"
+msgstr "گشودن یک پروندهٔ جدید (مهار + o)"
+
+# در این رشته از نویسهٔ LRM استفاده شده است
+#: src/gtr-notebook.ui:341
+msgid "Open from Damned Lies (<Ctrl>d)"
+msgstr "گشودن از دروغ‌های ملعون (مهار + d)"
+
+# در این رشته از نویسهٔ LRM استفاده شده است
+#: src/gtr-notebook.ui:387
+msgid "Undo (<Ctrl>z)"
+msgstr "بازگردان (مهار + z)"
+
+# در این رشته از نویسهٔ LRM استفاده شده است
+#: src/gtr-notebook.ui:409
+msgid "Redo (<Ctrl><Shift>z)"
+msgstr "انجام دوباره (مهار + تبدیل + z)"
+
+#: src/gtr-notebook.ui:454
+msgid "Previous message without translation (<Alt><Page Up>)"
+msgstr "پیام قبلی بدون ترجمه (دگرساز + صفحهٔ بالا)"
+
+#: src/gtr-notebook.ui:476
+msgid "Next message without translation (<Alt><Page Down>)"
+msgstr "پیام بعدی بدون ترجمه (دگرساز + صفحهٔ پایین)"
+
+# در این رشته از نویسهٔ LRM استفاده شده است
+#: src/gtr-notebook.ui:516
+msgid "Toggle fuzzy state (<Ctrl>+u)"
+msgstr "تغییر وضعیت نامشخص (مهار + u )"
+
+#: src/gtr-notebook.ui:537
+msgid "Sort messages by"
+msgstr "چینش پیام‌ها بر اساس"
+
+#: src/gtr-notebook.ui:547
+msgid "Order by menu"
+msgstr "ترتیب بر اساس فهرست"
+
+# در متن منبع اشکالی وجود دارد. (نویسه «f» نباید بین <> باشد)
+# * در این رشته از نویسهٔ LRM استفاده شده است
+#: src/gtr-notebook.ui:585
+msgid "Find (<Ctrl><f>)"
+msgstr "یافتن (مهار + f)"
+
+#: src/gtr-notebook.ui:624
 msgid "Save"
 msgstr "ذخیره"
 
-#: src/menus.c:287
-msgid "Save File"
-msgstr ""
+# در این رشته از نویسهٔ LRM استفاده شده است
+#: src/gtr-notebook.ui:628
+msgid "Save the current file (<Ctrl>s)"
+msgstr "ذخیرهٔ پروندهٔ فعلی (مهار + s)"
 
-#: src/menus.c:290
-msgid "Save as"
-msgstr "ذخیره با نام"
+# در این رشته از نویسهٔ LRM استفاده شده است
+#: src/gtr-notebook.ui:643
+msgid "Save as (<Ctrl><Shift>s)"
+msgstr "ذخیره به عنوان (مهار + تبدیل + s)"
 
-#: src/menus.c:291
-msgid "Save file with a different name"
-msgstr ""
+# در این رشته از نویسهٔ LRM استفاده شده است
+#: src/gtr-notebook.ui:665
+msgid "Upload file (<Ctrl>b)"
+msgstr "بارگذاری پرونده (مهار + b)"
 
-#: src/menus.c:295
-msgid "Compile"
-msgstr ""
+#: src/gtr-po.c:487
+msgid "The file is empty"
+msgstr "پرونده خالی است"
 
-#: src/menus.c:299
-msgid "Update"
-msgstr ""
+# در این رشته از نویسهٔ ایزوله اولین نویسهٔ قوی استفاده شده است
+#: src/gtr-po.c:496
+msgid "Failed opening file “%s”: %s"
+msgstr "گشودن پروندهٔ «⁨%s⁩» شکست خورد: %s"
 
-#: src/menus.c:303
-msgid "Header"
-msgstr ""
+#: src/gtr-po.c:577
+msgid "Could not convert from charset “%s” to UTF-8"
+msgstr "نمی‌توان مجموعهٔ نویسهٔ «%s» را به UTF-8 تبدیل کرد"
 
-#: src/menus.c:304
-msgid "Edit the header"
-msgstr ""
+#: src/gtr-po.c:594 src/gtr-po.c:614
+msgid "Could not store temporary file for encoding conversion"
+msgstr "نمی‌توان پروندهٔ موقتی را برای تبدیل کدگذاری ذخیره کرد"
 
-#: src/menus.c:308
-msgid "Undo"
-msgstr ""
+#: src/gtr-po.c:651
+msgid "All attempt to convert the file to UTF-8 has failed, use the msgconv or iconv command line tools before opening this file with GNOME Translation Editor"
+msgstr "تمام تلاش‌ها برای تبدیل پرونده به UTF-8 شکست خوردند، پیش از گشودن این پرونده با ویرایشگر ترجمهٔ گنوم، از ابزارهای خط فرمان msgconv یا iconv استفاده کنید"
 
-#: src/menus.c:309
-msgid "Undo the last performed action"
-msgstr ""
+#: src/gtr-po.c:719
+msgid "Gettext returned a null message domain list."
+msgstr "Gettext یک فهرست دامنهٔ پیام تهی را بازگرداند."
 
-#: src/menus.c:316
-msgid "First"
-msgstr "اولین"
+#: src/gtr-po.c:764
+msgid "No messages obtained from parser."
+msgstr "هیچ پیامی از تجزیه کننده بدست نیامده است."
 
-#: src/menus.c:320
-msgid "Back"
-msgstr "عقب"
-
-#: src/menus.c:325
-msgid "Next"
-msgstr "بعدی"
-
-#: src/menus.c:329
-msgid "Last"
-msgstr "آخرین"
-
-#: src/menus.c:334
-msgid "Missing"
-msgstr ""
-
-#: src/menus.c:342
-msgid "Go to the next fuzzy translation"
-msgstr ""
-
-#: src/menus.c:347
-msgid "Go to"
-msgstr ""
-
-#: src/menus.c:348
-msgid "Go to specified message number"
-msgstr ""
-
-#: src/menus.c:351
-msgid "Find"
-msgstr ""
-
-#: src/menus.c:352
-msgid "Find string in po file"
-msgstr ""
-
-#: src/menus.c:356
-msgid "Replace string in po file"
-msgstr ""
-
-#: src/message.c:96
-msgid "Couldn't get the message!"
-msgstr ""
-
-#: src/message.c:118
-msgid "There are no fuzzy messages left."
-msgstr ""
-
-#: src/message.c:142
-msgid "All messages seem to be translated."
-msgstr ""
-
-#: src/message.c:328
-msgid "gtranslator -- edit plural forms of message translation"
-msgstr ""
-
-#: src/messages-table.c:243
-msgid "Original"
-msgstr "اصلی"
-
-#: src/open.c:144
-#, c-format
-msgid "Couldn't open compiled gettext file `%s'!"
-msgstr ""
-
-#: src/open.c:192
-#, c-format
-msgid "Couldn't open compressed gettext file `%s'!"
-msgstr ""
-
-#.
-#. * The %s format here stands for the used
-#. *  compressions program (gzip, bzip2 etc.)
-#.
-#: src/open.c:202
-#, c-format
-msgid "Couldn't open %s'd gettext file `%s'!"
-msgstr ""
-
-#: src/open.c:271
-#, c-format
-msgid "Couldn't open zip'ed po file `%s'!"
-msgstr ""
-
-#: src/parse.c:483
-#, c-format
-msgid ""
-"Error in file \"%s\"\n"
-"at line %d.\n"
-"Please check the file and try again."
-msgstr ""
-
-#: src/parse.c:538
-#, c-format
-msgid ""
-"The file is empty:\n"
-"%s"
-msgstr ""
-
-#: src/parse.c:560
-#, c-format
-msgid "The file `%s' doesn't exist at all!"
-msgstr ""
-
-#.
-#. * Provide a default po->header to avoid segfaults (#62244)
-#.
-#: src/parse.c:692
-msgid "Header record not found - defaulting from preferences"
-msgstr ""
-
-#: src/parse.c:708
-#, c-format
-msgid "gtranslator -- %s"
-msgstr ""
-
-#: src/parse.c:920
-#, c-format
+# در این رشته از نویسهٔ LRM استفاده شده است
+#: src/gtr-po.c:815
 msgid ""
 "You are saving a file with a .pot extension.\n"
 "Pot files are generated by the compilation process.\n"
-"Your file should likely be named '%s.po'."
+"Your file should likely be named “%s.po”."
 msgstr ""
+"شما در حال ذخیره پرونده‌ای با پسوند ‎.pot هستید.\n"
+"پرونده‌های Pot توسط فرایند کامپایل ایجاد می‌شوند.\n"
+"نام پرونده شما احتمالاً باید «%s.po» باشد."
 
-#: src/parse.c:982
-#, c-format
-msgid "Could not open file `%s' for writing!"
-msgstr ""
+# در این رشته از نویسهٔ ایزوله اولین نویسهٔ قوی استفاده شده است
+#: src/gtr-po.c:828
+msgid "The file %s is read-only, and can not be overwritten"
+msgstr "پروندهٔ ⁨%s⁩ فقط خواندنی است و نمی‌توان آن را بازنویسی کرد"
 
-#: src/parse.c:1034
-#, c-format
-msgid ""
-"File %s\n"
-"contains %d fuzzy message"
-"File %s\n"
-"contains %d fuzzy messages"
-msgstr ""
+#: src/gtr-po.c:847
+msgid "There is an error in the PO file: %s"
+msgstr "خطایی در پروندهٔ PO وجود دارد: %s"
 
-#: src/parse.c:1303
-msgid "Sorry, msgfmt isn't available on your system!"
-msgstr ""
+#: src/gtr-po.c:859
+msgid "There was an error writing the PO file: %s"
+msgstr "هنگام نوشتن پروندهٔ PO خطایی رخ داد: %s"
 
-#: src/parse.c:1338
-#, c-format
-msgid ""
-"Compile successful:\n"
-"%s"
-msgstr ""
+#: src/gtr-preferences-dialog.c:422
+msgid "Impossible to remove the active profile"
+msgstr "برداشتن نمایهٔ فعّال غیرممکن است"
 
-#: src/preferences.c:180
-msgid "Couldn't generate the current date!"
-msgstr ""
+#: src/gtr-preferences-dialog.c:428
+msgid "Another profile should be selected as active before"
+msgstr "نمایهٔ دیگری باید قبلاً به عنوان فعّال گزیده شود"
 
-#: src/prefs.c:212
-msgid "Hotkey indicating character:"
-msgstr ""
+#: src/gtr-preferences-dialog.c:441
+msgid "Are you sure you want to delete this profile?"
+msgstr "آیا مطمئن هستید که می‌خواهید این نمایه را حذف کنید؟"
 
-#: src/prefs.c:332
-msgid "gtranslator -- options"
-msgstr ""
+#: src/gtr-preferences-dialog.c:449
+msgid "_Delete"
+msgstr "_حذف"
 
-#.
-#. * Files page
-#.
-#: src/prefs.c:350
-msgid "Files"
-msgstr "پرونده‌ها"
+#: src/gtr-preferences-dialog.c:581
+msgid "Active"
+msgstr "فعّال"
 
-#: src/prefs.c:351 src/prefs.c:530 src/prefs.c:587
+#: src/gtr-preferences-dialog.c:654 src/gtr-preferences-dialog.ui:49
+msgid "Translation Editor Preferences"
+msgstr "ترجیحات ویرایشگر ترجمه"
+
+#: src/gtr-preferences-dialog.ui:119
 msgid "General"
 msgstr "عمومی"
 
-#: src/prefs.c:352
-msgid "Warn if po file contains fuzzy translations"
-msgstr ""
+#: src/gtr-preferences-dialog.ui:138
+msgid "_Warn if PO file contains fuzzy translations"
+msgstr "اگر پروندهٔ PO دارای ترجمه‌های نامشخص است، _هشدار بده"
 
-#: src/prefs.c:356
-msgid "Delete compiled files (e.g. \"project.gmo\")"
-msgstr ""
-
-#: src/prefs.c:360
+#: src/gtr-preferences-dialog.ui:160
 msgid "Autosave"
-msgstr "ذخیره‌ی خودکار"
+msgstr "ذخیرهٔ خودکار"
 
-#: src/prefs.c:361
-msgid "Automatically save at regular intervals"
-msgstr ""
+#: src/gtr-preferences-dialog.ui:184
+msgid "Create a _backup copy of files before saving"
+msgstr "قبل از ذخیره کردن، یک رونوشت _پشتیبان از پرونده‌ها ایجاد شود"
 
-#: src/prefs.c:369
-msgid "Autosave interval:"
-msgstr ""
+#: src/gtr-preferences-dialog.ui:206
+msgid "_Autosave files every"
+msgstr "_ذخیرهٔ خودکار پرونده‌ها هر"
 
-#: src/prefs.c:370
-msgid "Append a suffix to automatically saved files"
-msgstr ""
+#: src/gtr-preferences-dialog.ui:230
+msgid "_minutes"
+msgstr "_دقیقه"
 
-#: src/prefs.c:377
-msgid "Suffix:"
-msgstr "پسوند:"
+#: src/gtr-preferences-dialog.ui:288
+msgid "Files"
+msgstr "پرونده‌ها"
 
-#: src/prefs.c:378
-msgid "Recent files"
-msgstr "پرونده‌های اخیر"
+#: src/gtr-preferences-dialog.ui:312
+msgid "Text Display"
+msgstr "نمایش متن"
 
-#: src/prefs.c:386
-msgid "Maximum number of entries in the recent files list:"
-msgstr ""
+#: src/gtr-preferences-dialog.ui:335
+msgid "_Highlight message syntax"
+msgstr "_نحو نگارش پیام برجسته شود"
 
-#: src/prefs.c:387
-msgid "Check recent files before showing in recent files list"
-msgstr ""
+#: src/gtr-preferences-dialog.ui:351
+msgid "Make _whitespace visible"
+msgstr "_فضای سفید نمایان شود"
 
-#.
-#. * Editor page
-#.
-#: src/prefs.c:395
-msgid "Editor"
-msgstr "ویرایشگر"
+#: src/gtr-preferences-dialog.ui:376
+msgid "Font:"
+msgstr "قلم:"
 
-#: src/prefs.c:398
-msgid "Text display"
-msgstr ""
+#: src/gtr-preferences-dialog.ui:388
+msgid "Choose the editor font"
+msgstr "قلم ویرایشگر را انتخاب کنید"
 
-#: src/prefs.c:399
-msgid "Highlight syntax of the translation message"
-msgstr ""
-
-#: src/prefs.c:410
-msgid "Syntax color scheme to use:"
-msgstr ""
-
-#: src/prefs.c:411
-msgid "Use special character to indicate white space"
-msgstr ""
-
-#: src/prefs.c:419
-msgid "Apply own fonts"
-msgstr ""
-
-#: src/prefs.c:423
-msgid "gtranslator -- font selection/msgid font"
-msgstr ""
-
-#: src/prefs.c:427
-msgid "Original text font:"
-msgstr ""
-
-#: src/prefs.c:428
-msgid "gtranslator -- font selection/msgstr font"
-msgstr ""
-
-#: src/prefs.c:432
-msgid "Translation font:"
-msgstr "قلم ترجمه:"
-
-#: src/prefs.c:433
-msgid "Apply own colors:"
-msgstr ""
-
-#: src/prefs.c:437
-msgid "gtranslator -- foreground color"
-msgstr ""
-
-#: src/prefs.c:441
-msgid "Foreground color:"
-msgstr ""
-
-#: src/prefs.c:442
-msgid "gtranslator -- background color"
-msgstr ""
-
-#: src/prefs.c:446
-msgid "Background:"
-msgstr "پس‌زمینه:"
-
-#: src/prefs.c:447
+#: src/gtr-preferences-dialog.ui:430
 msgid "Contents"
-msgstr ""
+msgstr "محتویات"
 
-#: src/prefs.c:448
-msgid "Remove fuzzy status if message is changed"
-msgstr ""
+#: src/gtr-preferences-dialog.ui:453
+msgid "_Remove fuzzy status if message is changed"
+msgstr "در صورت تغییر پیام، وضعیت نامشخص را _بر می‌دارد"
 
-#: src/prefs.c:452
-msgid "Keep obsolete messages in the po files"
-msgstr ""
+#: src/gtr-preferences-dialog.ui:469
+msgid "Check _spelling"
+msgstr "بررسی ا_ملاء"
 
-#: src/prefs.c:456
-msgid "Spell checking"
-msgstr ""
+#: src/gtr-preferences-dialog.ui:508
+msgid "Editor"
+msgstr "ویراستار"
 
-#: src/prefs.c:457
-msgid "Instant spell checking"
-msgstr ""
+#: src/gtr-preferences-dialog.ui:607
+msgid "Edit Profile"
+msgstr "ویرایش نمایه"
 
-#: src/prefs.c:463
-msgid "Use special dictionary:"
-msgstr ""
+#: src/gtr-preferences-dialog.ui:644
+msgid "Profiles"
+msgstr "نمایه‌ها"
 
-#.
-#. * PO header page
-#.
-#: src/prefs.c:481
-msgid "PO header"
-msgstr ""
+#: src/gtr-profile-dialog.c:74
+msgid "Translation Editor Profile"
+msgstr "نمایهٔ ویراستار ترجمه"
 
-#: src/prefs.c:484
-msgid "Personal Information"
-msgstr "اطلاعات شخصی"
+#: src/gtr-profile-dialog.ui:68
+msgid "_Name"
+msgstr "_نام"
 
-#: src/prefs.c:488
-msgid "Author's name:"
-msgstr "نام مؤلف:"
+#: src/gtr-profile-dialog.ui:96
+msgid "Profile Information"
+msgstr "اطّلاعات نمایه"
 
-#: src/prefs.c:492
-msgid "Author's email:"
-msgstr ""
+#: src/gtr-profile-dialog.ui:113
+msgid "Translator Information"
+msgstr "اطّلاعات مترجم"
 
-#: src/prefs.c:493
-msgid "Language settings"
+#: src/gtr-profile-dialog.ui:131
+msgid "N_ame"
+msgstr "ن_ام"
+
+#: src/gtr-profile-dialog.ui:146
+msgid "_Email"
+msgstr "_رایانامه"
+
+#: src/gtr-profile-dialog.ui:160
+msgid "_Team email"
+msgstr "رایانامهٔ _تیم"
+
+#: src/gtr-profile-dialog.ui:174
+msgid "_DL auth token"
+msgstr "ژتون تأیید اعتبار _DL"
+
+#: src/gtr-profile-dialog.ui:175
+msgid "GNOME Damned Lies integration token, go to your profile in https://l10n.gnome.org/ to get it"
+msgstr "ژتون ادغام دروغ‌های ملعون گنوم، برای دریافت آن به نمایهٔ خود در https://l10n.gnome.org/ بروید"
+
+#: src/gtr-profile-dialog.ui:237
+msgid "Language Settings"
 msgstr "تنظیمات زبان"
 
-#: src/prefs.c:506
-msgid "Language code:"
-msgstr "کد زبان:"
+# در این رشته از نویسهٔ LRM استفاده شده است
+#: src/gtr-projects.ui:35
+msgid "Open a new .po file or drag & drop here"
+msgstr "یک پرونده ‎.po جدید بگشایید یا به اینجا بکشید و رها کنید"
 
-#.
-#. * Functionality page
-#.
-#: src/prefs.c:528
-msgid "Functionality"
-msgstr ""
+#: src/gtr-projects.ui:51
+msgid "Select a PO file"
+msgstr "یک پرونده PO را برگزینید"
 
-#: src/prefs.c:531
-msgid "Enable the functionality to update a po file from within gtranslator"
-msgstr ""
+#: src/gtr-projects.ui:68
+msgid "Load from DL…"
+msgstr "بار کردن از DL…"
 
-#: src/prefs.c:535
-msgid "Enable the functionality to remove all translations from a po file"
-msgstr ""
+#: src/gtr-search-bar.c:484 src/gtr-search-bar.ui:212
+msgid "Case sensitive"
+msgstr "حساس به حروف کوچک و بزرگ"
 
-#: src/prefs.c:539
-msgid "Show instant comment view in main pane"
-msgstr ""
+#: src/gtr-search-bar.c:489 src/gtr-search-bar.ui:225
+msgid "Match whole word only"
+msgstr "فقط کلمهٔ کامل"
 
-#: src/prefs.c:543
-msgid "Display special dialog for messages with plural forms"
-msgstr ""
+#: src/gtr-search-bar.c:494
+msgid "Wrap around"
+msgstr "پیچیدن به اطراف"
 
-#: src/prefs.c:547
-msgid "Save geometry on exit and restore it on startup"
-msgstr ""
+#: src/gtr-search-bar.c:499
+msgid "Original text"
+msgstr "متن اصلی"
 
-#: src/prefs.c:551
-msgid "Messages table"
-msgstr "جدول پیغام‌ها"
+#: src/gtr-search-bar.c:504
+msgid "Translated text"
+msgstr "متن ترجمه شده"
 
-#: src/prefs.c:552
-msgid "Show the messages table (requires restart)"
-msgstr ""
+#: src/gtr-search-bar.ui:121
+msgid "Replace"
+msgstr "جای‌گزینی"
 
-#: src/prefs.c:556
-msgid "Collapse all entries by default"
-msgstr ""
+#: src/gtr-search-bar.ui:133
+msgid "Replace All"
+msgstr "جایگزینی همه"
 
-#: src/prefs.c:560
-msgid "Use own colors for messages table groups"
-msgstr ""
+#: src/gtr-search-bar.ui:153
+msgid "Switch between Search and Search-and-Replace"
+msgstr "تعویض میان «جست‌وجو» و «جست‌وجو و جای‌گزینی»"
 
-#: src/prefs.c:569
-msgid "Fuzzy entries color:"
-msgstr ""
+#: src/gtr-search-bar.ui:173
+msgid "Show or hide search options such as case sensitivity"
+msgstr "نمایش یا پنهان کردن گزینه‌های جست‌وجو مانند حساسیت حروف کوچک و بزرگ"
 
-#: src/prefs.c:575
-msgid "Untranslated entries color:"
-msgstr ""
+#: src/gtr-search-bar.ui:238
+msgid "Wrap Around"
+msgstr "پیچیدن به اطراف"
 
-#: src/prefs.c:581
-msgid "Translated entries color:"
-msgstr ""
+#: src/gtr-search-bar.ui:251
+msgid "Original-text"
+msgstr "متن اصلی"
 
-#.
-#. * Autotranslate page
-#.
-#: src/prefs.c:586
-msgid "Autotranslation"
-msgstr "ترجمه‌ی خودکار"
+#: src/gtr-search-bar.ui:264
+msgid "Translated-text"
+msgstr "متن ترجمه شده"
 
-#: src/prefs.c:588
+#: src/gtr-tab-label.c:278
+msgid "Close document"
+msgstr "بستن سند"
+
+#: src/gtr-tab.c:341
+msgid "There is an error in the message:"
+msgstr "خطایی در پیام وجود دارد:"
+
+#: src/gtr-tab.c:555 src/gtr-tab.c:681
+msgid "fuzzy"
+msgstr "نامشخص"
+
+#: src/gtr-tab.c:711
+msgid "Plural %d"
+msgstr "جمع %Id"
+
+#. Translators: Path to the document opened
+#: src/gtr-tab.c:1306
+msgid "Path:"
+msgstr "مسیر:"
+
+# در این رشته از نویسه‌های ایزوله چپ‌به‌راست استفاده شده است
+#: src/gtr-tab.c:1973
+msgid "Translated: %0.2f%%"
+msgstr "ترجمه شده: ⁦%I 0.2f٪⁩"
+
+#: src/gtr-tab.c:1974
+msgid "Translated: %d"
+msgstr "ترجمه شده: %Id"
+
+#: src/gtr-tab.c:1975
+msgid "Untranslated: %d"
+msgstr "ترجمه نشده: %Id"
+
+#: src/gtr-tab.c:1976
+msgid "Fuzzy: %d"
+msgstr "نامشخص: %Id"
+
+#: src/gtr-tab.ui:79
+msgid "_Original Message"
+msgstr "پیام ا_صلی"
+
+#: src/gtr-tab.ui:171
+msgid "Translate_d Text"
+msgstr "متن _ترجمه شده"
+
+#: src/gtr-upload-dialog.c:60
+msgid "_Upload"
+msgstr "_بارگذاری"
+
+#: src/gtr-upload-dialog.c:62
+msgid "Upload to Damned Lies"
+msgstr "بارگذاری به دروغ‌های ملعون"
+
+#: src/gtr-upload-dialog.c:134
+msgid "Uploading..."
+msgstr "در حال بارگذاری ..."
+
+#: src/gtr-upload-dialog.c:140
+msgid "Upload"
+msgstr "بارگذاری"
+
+#: src/gtr-upload-dialog.ui:50
+msgid "comment:"
+msgstr "دیدگاه:"
+
+#. Translators: this is the title of the window with a modified document
+#: src/gtr-window.c:214
+msgid "*%s — Translation Editor"
+msgstr "*%s — ویرایشگر ترجمه"
+
+#. Translators: this is the title of the window with a document opened
+#: src/gtr-window.c:220
+msgid "%s — Translation Editor"
+msgstr "%s — ویرایشگر ترجمه"
+
+#: src/gtranslator-menu.ui:7
+msgid "_New Window"
+msgstr "_پنجرهٔ جدید"
+
+#: src/gtranslator-menu.ui:13
+msgid "_Preferences"
+msgstr "_ترجیحات"
+
+#: src/gtranslator-menu.ui:19
+msgid "_Help"
+msgstr "_راهنما"
+
+#: src/gtranslator-menu.ui:24
+msgid "_About GNOME Translation Editor"
+msgstr "_دربارهٔ ویرایشگر ترجمهٔ گنوم"
+
+#: src/help-overlay.ui:13
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "عمومی"
+
+#: src/help-overlay.ui:18
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "گشودن پرونده"
+
+#: src/help-overlay.ui:25
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "ذخیرهٔ پروندهٔ فعلی"
+
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "ذخیرهٔ پروندهٔ فعلی با عنوان"
+
+#: src/help-overlay.ui:40
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "ترجیحات"
+
+#: src/help-overlay.ui:47
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "میان‌برهای صفحه‌کلید"
+
+#: src/help-overlay.ui:54
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "خروج"
+
+#: src/help-overlay.ui:64
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "ویرایش"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Undo"
+msgstr "برگردان"
+
+#: src/help-overlay.ui:75
+msgctxt "shortcut window"
+msgid "Redo"
+msgstr "انجام دوباره"
+
+#: src/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr "علامت‌گذاری/برداشتن علامت به عنوان نامشخص"
+
+#: src/help-overlay.ui:89
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "رونویسی متن اصلی به ترجمه"
+
+#: src/help-overlay.ui:99
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr "ناوش"
+
+#: src/help-overlay.ui:103
+msgctxt "shortcut window"
+msgid "Go to the previous message"
+msgstr "رفتن به پیام قبلی"
+
+#: src/help-overlay.ui:110
+msgctxt "shortcut window"
+msgid "Go to the next message"
+msgstr "رفتن به پیام بعدی"
+
+#: src/help-overlay.ui:117
+msgctxt "shortcut window"
+msgid "Go to the previous untranslated message"
+msgstr "رفتن به پیام بدون ترجمه قبلی"
+
+#: src/help-overlay.ui:124
+msgctxt "shortcut window"
+msgid "Go to the next untranslated message"
+msgstr "رفتن به پیام بدون ترجمه بعدی"
+
+#: src/help-overlay.ui:134
+msgctxt "shortcut window group"
+msgid "Translation Memory"
+msgstr "حافظهٔ ترجمه"
+
+#: src/help-overlay.ui:138
+msgctxt "shortcut window"
+msgid "Build translation memory"
+msgstr "ایجاد حافظهٔ ترجمه"
+
+#: src/help-overlay.ui:145
+msgctxt "shortcut window"
+msgid "Copy below"
+msgstr "رونوشت به زیر"
+
+#: src/help-overlay.ui:155
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "یافتن و جای‌گزینی"
+
+#: src/help-overlay.ui:159
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "یافتن"
+
+#: src/help-overlay.ui:166
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "یافتن و جای‌گزینی"
+
+#: src/help-overlay.ui:173
+msgctxt "shortcut window"
+msgid "Forward-search"
+msgstr "جستجوی روبه‌جلو"
+
+#: src/help-overlay.ui:180
+msgctxt "shortcut window"
+msgid "Backward-search"
+msgstr "جستجوی روبه‌عقب"
+
+#: src/help-overlay.ui:187
+msgctxt "shortcut window"
+msgid "Hide find & replace bar"
+msgstr "مخفی کردن نوار یافتن و جای‌گزینی"
+
+#: src/main.c:97
+msgid "— Edit PO files"
+msgstr "— ویرایش پرونده‌های PO"
+
+# در این رشته از نویسه‌های ایزوله چپ‌به‌راست استفاده شده است
+#: src/main.c:101
 msgid ""
-"Also query the personal learn buffer while autotranslating untranslated "
-"messages"
+"%s\n"
+"Run “%s --help” to see a full list of available command line options.\n"
 msgstr ""
+"%s\n"
+"برای مشاهده لیست کامل گزینه‌های موجود در خط فرمان، «⁦%s --help⁩» را اجرا کنید.\n"
 
-#: src/prefs.c:592
-msgid "Automatically learn a newly translated message"
-msgstr ""
+#: src/translation-memory/gtr-translation-memory-dialog.c:77
+msgid "Select PO directory"
+msgstr "شاخهٔ PO را برگزینید"
 
-#: src/prefs.c:596
-msgid "Fuzzy matching"
-msgstr ""
+#: src/translation-memory/gtr-translation-memory-dialog.c:303
+msgid "Translation Editor Memory Manager"
+msgstr "مدیریت حافظهٔ ویرایشگر ترجمه"
 
-#: src/prefs.c:603
-msgid "Use \"fuzzy\" matching routines for learn buffer queries"
-msgstr ""
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
+msgid "Database:"
+msgstr "پایگاه داده:"
 
-#: src/prefs.c:610
-msgid "Minimal required similarity persentage for fuzzy queries:"
-msgstr ""
+#: src/translation-memory/gtr-translation-memory-dialog.ui:103
+msgid "Select the directory which contains PO files:"
+msgstr "شاخهٔ دارای پرونده‌های PO را برگزینید:"
 
-#: src/prefs.c:655
-msgid "Please enter your name!"
-msgstr "لطفاً نامتان را وارد کنید!"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:154
+msgid "Add to Database"
+msgstr "افزودن به پایگاه داده"
 
-#: src/prefs.c:669
-msgid "Please enter your EMail address!"
-msgstr ""
+#: src/translation-memory/gtr-translation-memory-dialog.ui:209
+msgid "Configuration:"
+msgstr "پیکربندی:"
 
-#: src/prefs.c:682
-msgid "Please enter a valid EMail address!"
-msgstr ""
+#: src/translation-memory/gtr-translation-memory-dialog.ui:253
+msgid "Use only files with this name:"
+msgstr "فقط از پرونده‌هایی با این نام استفاده شود:"
 
-#: src/replace.c:171
-msgid "No replacements made!"
-msgstr ""
+#: src/translation-memory/gtr-translation-memory-ui.c:255
+msgid "_Use this translation"
+msgstr "_از این ترجمه استفاده کنید"
 
-#.
-#. * Based on a suggestion by Pablo Saratxaga (/thanks pablo!).
-#. *
-#. * Translators: you should translate this foo'sh string into something
-#. *  another than a 'Y' to avoid the usage of the mid dot (U+00B7) in the
-#. *   text displaying routines of gtranslator.
-#.
-#: src/runtime-config.c:72
-msgid "Y"
-msgstr "N"
+#: src/translation-memory/gtr-translation-memory-ui.c:260
+msgid "_Remove"
+msgstr "_برداشتن"
 
-#.
-#. * Translators: this character is used if the middle dot
-#. *  can't be used under your locale.
-#.
-#: src/runtime-config.c:88 src/runtime-config.c:93
-msgid "^"
-msgstr "^"
+#: src/translation-memory/gtr-translation-memory-ui.c:371
+msgid "Shortcut"
+msgstr "میان‌بر"
 
-#: src/save.c:116
-#, c-format
-msgid "Couldn't save compiled gettext file `%s'!"
-msgstr ""
+#: src/translation-memory/gtr-translation-memory-ui.c:380
+msgid "Level"
+msgstr "سطح"
 
-#: src/save.c:159
-#, c-format
-msgid "Couldn't save compressed gettext file `%s'!"
-msgstr ""
+#: src/translation-memory/gtr-translation-memory-ui.c:389
+msgid "String"
+msgstr "رشته"
 
-#.
-#. * The %s format here stands for the used
-#. *  compressions program (gzip, bzip2 etc.)
-#.
-#: src/save.c:169
-#, c-format
-msgid "Couldn't save %s'd gettext file `%s'!"
-msgstr ""
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
+msgid "PO directory"
+msgstr "شاخهٔ PO"
 
-#: src/save.c:228
-#, c-format
-msgid "Couldn't save zip'ed po file `%s'!"
-msgstr ""
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
+msgid "Directory containing PO files to add to the translation memory."
+msgstr "شاخه‌ای که دارای پرونده‌های PO برای افزودن به حافظهٔ ترجمه است."
 
-#: src/session.c:86
-msgid "Session restored successfully."
-msgstr ""
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
+msgid "Restrict search by filename"
+msgstr "جست‌وجو را به نام پرونده محدود می‌کند"
 
-#: src/stylistics.c:267
-msgid "No font set! Using default font"
-msgstr ""
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
+msgid "If true, only include files with a specified filename when searching the translation memory."
+msgstr "اگر درست باشد، هنگام جست‌وجو در حافظهٔ ترجمه، فقط پرونده‌هایی با نام پرونده مشخص شده را شامل می‌شود."
 
-#.
-#. * Use gtranslator's font in this case -- should be a fallback font
-#. *  for your language.
-#.
-#: src/stylistics.c:273
-msgid "-misc-fixed-medium-r-normal-*-*-120-*-*-c-*-iso8859-1"
-msgstr ""
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
+msgid "Filename to restrict search to"
+msgstr "نام پرونده برای محدود کردن جست‌وجو به"
 
-#: src/update.c:102
-msgid "No POTFILES.in found!"
-msgstr ""
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
+msgid "Filename to which searching of the translation memory should be restricted."
+msgstr "نام پرونده‌ای که جست‌وجوی حافظهٔ ترجمه باید محدود کند."
 
-#: src/update.c:113
-msgid "Po file is uptodate."
-msgstr ""
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
+msgid "Maximum number of missing words"
+msgstr "بیشینهٔ تعداد کلمات گم شده"
 
-#: src/update.c:120
-msgid "The update was successfull."
-msgstr ""
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
+msgid "Maximum number of words that can be missing from a message displayed as a match by the translation memory."
+msgstr "بیشینهٔ تعداد کلماتی که ممکن است در پیامی که به عنوان مطابقت توسط حافظهٔ ترجمه نمایش داده می‌شود، وجود نداشته باشد."
 
-#: src/update.c:125
-msgid "An error occurred while updating the po file."
-msgstr ""
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
+msgid "Maximum difference in message length"
+msgstr "بیشینهٔ تفاوت در طول پیام"
 
-#: src/utils.c:308 src/utils.c:325
-#, c-format
-msgid "Can't create directory `%s'!"
-msgstr ""
-
-#.
-#. * Again return the fallback default locale value given by the translator.
-#.
-#: src/utils.c:794
-msgid "iso-8859-1"
-msgstr "UTF-8"
-
-#: src/utils_gui.c:144
-#, c-format
-msgid "The geometry string \"%s\" couldn't be parsed!"
-msgstr ""
-
-#: src/utils_gui.c:360
-#, c-format
-msgid "You are not permitted to access file '%s'."
-msgstr ""
-
-#: src/utils_gui.c:378
-#, c-format
-msgid ""
-"You do not have permission to modify file '%s'.\n"
-"Please save a new copy of it to a place of your choice and get write\n"
-"permission for it."
-msgstr ""
-
-#: src/utils_gui.c:467
-#, c-format
-msgid "The necessary decompression program `%s' is not installed!"
-msgstr ""
-
-#: src/utils_gui.c:472
-#, c-format
-msgid "The necessary compression program `%s' is not installed!"
-msgstr ""
-
-#: src/vfs-handle.c:121
-#, c-format
-msgid "Couldn't create temporary directory `%s'!"
-msgstr ""
-
-#: src/vfs-handle.c:149
-#, c-format
-msgid "File `%s' couldn't be found!"
-msgstr ""
-
-#: src/vfs-handle.c:154
-#, c-format
-msgid "Malformed URI `%s' entered!"
-msgstr ""
-
-#: src/vfs-handle.c:159
-#, c-format
-msgid "Host `%s' couldn't be found!"
-msgstr ""
-
-#: src/vfs-handle.c:164
-#, c-format
-msgid "Hostname `%s' is not valid!"
-msgstr ""
-
-#: src/vfs-handle.c:169
-#, c-format
-msgid "Host `%s' has no address!"
-msgstr ""
-
-#: src/vfs-handle.c:174
-msgid "Transfer interrupted!"
-msgstr ""
-
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
+msgid "Maximum difference in length between messages displayed as matches by the translation memory."
+msgstr "بیشینهٔ تفاوت طول بین پیام‌هایی که به عنوان مطابقت توسط حافظهٔ ترجمه نمایش داده می‌شوند."
