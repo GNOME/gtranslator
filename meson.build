@@ -12,7 +12,7 @@ project(
 gtr_version = meson.project_version()
 version_array = gtr_version.split('.')
 gtr_major_version = version_array[0].to_int()
-gtr_minor_version = version_array[1].to_int()
+gtr_minor_version = version_array[1]
 
 #################
 # Default paths #
