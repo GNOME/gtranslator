@@ -785,7 +785,14 @@ update_comments (GtrHeader *header, const gchar *comments)
 
           year_array = g_strsplit (comment_lines[i], ",", -1);
 
-          for (j = 1; year_array != NULL && year_array[j] != NULL; j++)
+          // Empty comment
+          if (year_array == NULL || year_array[0] == NULL)
+            {
+              g_strfreev (year_array);
+              continue;
+            }
+
+          for (j = 1; year_array[j] != NULL; j++)
             {
               gchar *search;
 
