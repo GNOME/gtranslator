@@ -234,6 +234,14 @@ gtr_msg_set_fuzzy (GtrMsg * msg, gboolean fuzzy)
   g_return_if_fail (GTR_IS_MSG (msg));
 
   po_message_set_fuzzy (priv->message, fuzzy);
+
+  // Remove "previous msgid" when marked as not fuzzy
+  // https://www.gnu.org/software/gettext/manual/html_node/msgattrib-Invocation.html
+  if (!fuzzy)
+    {
+      po_message_set_prev_msgid (priv->message, NULL);
+
+    }
 }
 
 /**
