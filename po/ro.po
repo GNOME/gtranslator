@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-3-38\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-03-23 10:50+0000\n"
-"PO-Revision-Date: 2021-05-03 23:34+0200\n"
+"POT-Creation-Date: 2021-09-18 09:14+0000\n"
+"PO-Revision-Date: 2022-01-07 13:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n==0 || (n!=1 && n%100>=1 && n"
 "%100<=19) ? 1 : 2);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
@@ -55,7 +55,7 @@ msgstr ""
 "interesante cum ar fi limbi alternative, introducerea de etichete, "
 "integrarea cu subversion și un vizualizator de cod sursă."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:131
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:143
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -222,19 +222,19 @@ msgstr "Vizualizator de sursă"
 msgid "Source code"
 msgstr "Cod sursă"
 
-#: src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:58
 msgid "Current Maintainers"
 msgstr "Întreținători curenți"
 
-#: src/gtr-actions-app.c:52
+#: src/gtr-actions-app.c:62
 msgid "Previous Developers"
 msgstr "Dezvoltatori anteriori"
 
-#: src/gtr-actions-app.c:63
+#: src/gtr-actions-app.c:73
 msgid "Contributors"
 msgstr "Contribuitori"
 
-#: src/gtr-actions-app.c:88
+#: src/gtr-actions-app.c:98
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -245,15 +245,15 @@ msgstr ""
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:101
+#: src/gtr-actions-app.c:111
 msgid "translator-credits"
-msgstr "Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2021"
+msgstr "Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2021-2022"
 
-#: src/gtr-actions-app.c:104
+#: src/gtr-actions-app.c:114
 msgid "Translation Editor Web Site"
 msgstr "Sit web pentru Editor de traducere"
 
-#: src/gtr-actions-file.c:218
+#: src/gtr-actions-file.c:220
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
@@ -262,32 +262,32 @@ msgstr ""
 "Doriți să salvați modificările în acest fișier: <span weight=\"bold\" size="
 "\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:224
+#: src/gtr-actions-file.c:226
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr ""
 "Dacă nu salvați, toate modificările nesalvate vor fi pierdute permanent."
 
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:229
 msgid "Save and open"
 msgstr "Salvează și deschide"
 
-#: src/gtr-actions-file.c:228
+#: src/gtr-actions-file.c:230
 msgid "Cancel"
 msgstr "Anulează"
 
-#: src/gtr-actions-file.c:229
+#: src/gtr-actions-file.c:231
 msgid "Continue without saving"
 msgstr "Continuă fără a salva"
 
-#: src/gtr-actions-file.c:261
+#: src/gtr-actions-file.c:263
 msgid "Open file for translation"
 msgstr "Deschide fișier pentru traducere"
 
-#: src/gtr-actions-file.c:449
+#: src/gtr-actions-file.c:369
 msgid "This file has already been uploaded"
 msgstr "Fișierul a fost deja încărcat"
 
-#: src/gtr-actions-file.c:462
+#: src/gtr-actions-file.c:380
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -299,12 +299,11 @@ msgstr ""
 "Probabil nu ați configurat <b>jetonul</b> <i>l10n.gnome.org</i> corect în "
 "profilul dumneavoastră sau nu aveți permisiuni pentru a încărca acest modul."
 
-#: src/gtr-actions-file.c:477
-#, c-format
-msgid "The file '%s.%s.%s.%s' has been uploaded!"
-msgstr "Fișierul „%s.%s.%s.%s” a fost încărcat!"
+#: src/gtr-actions-file.c:393
+msgid "The file has been uploaded!"
+msgstr "Fișierul a fost deja încărcat!"
 
-#: src/gtr-actions-file.c:507
+#: src/gtr-actions-file.c:548
 msgid "Save file as…"
 msgstr "Salvează fișierul ca…"
 
@@ -1109,6 +1108,26 @@ msgstr "Mesaj _original"
 msgid "Translate_d Text"
 msgstr "Text tra_dus"
 
+#: src/gtr-upload-dialog.c:60
+msgid "_Upload"
+msgstr "Î_ncarcă"
+
+#: src/gtr-upload-dialog.c:62
+msgid "Upload to Damned Lies"
+msgstr "Încarcă la Minciuni blestemate"
+
+#: src/gtr-upload-dialog.c:134
+msgid "Uploading..."
+msgstr "Se încarcă…"
+
+#: src/gtr-upload-dialog.c:140
+msgid "Upload"
+msgstr "Încarcă"
+
+#: src/gtr-upload-dialog.ui:50
+msgid "comment:"
+msgstr "comentariu:"
+
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:214
 #, c-format
@@ -1384,3 +1403,6 @@ msgid ""
 msgstr ""
 "Diferența maximă în lungime dintre mesajele fișate ca potriviri de către "
 "memoria de traduceri."
+
+#~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
+#~ msgstr "Fișierul „%s.%s.%s.%s” a fost încărcat!"
