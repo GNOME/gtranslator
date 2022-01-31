@@ -1,5 +1,5 @@
 # gtranslator ja.po.
-# Copyright (C) 2000-2004, 2006, 2009-2013, 2019-2020 gtranslator's COPYRIGHT HOLDER
+# Copyright (C) 2000-2004, 2006, 2009-2013, 2019-2021 gtranslator's COPYRIGHT HOLDER
 # Takeshi AIHANA <takeshi.aihana@gmail.com>, 2000-2004, 2006, 2009.
 # Nishio Futoshi <fut_nis@d3.dion.ne.jp>, 2009.
 # IWAI, Masaharu <iwaim.sub@gmail.com>, 2010.
@@ -10,14 +10,15 @@
 # Yoji TOYODA <bsyamato@sea.plala.or.jp>, 2013.
 # sicklylife <translation@sicklylife.jp>, 2019-2020.
 # sujiniku <sujinikusityuu@gmail.com>, 2019.
+# Peniel Vargas <penieru@gmail.com>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
 "POT-Creation-Date: 2020-04-30 07:03+0000\n"
-"PO-Revision-Date: 2020-05-07 20:30+0900\n"
-"Last-Translator: sicklylife <translation@sicklylife.jp>\n"
+"PO-Revision-Date: 2021-12-18 16:20-0400\n"
+"Last-Translator: Peniel Vargas <penieru@gmail.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -43,6 +44,11 @@ msgid ""
 "messages in the po file), easy navigation and editing of translation "
 "messages and comments of the translation where accurate."
 msgstr ""
+"Gtranslator は GNOME デスクトップ環境用の高度な gettext PO ファイルエディター"
+"です。全ての gettext PO ファイル形式を対応し、検索と置換、翻訳メモリ、複数の"
+"翻訳者プロファイル、メッセージ表（PO ファイル内の翻訳とメッセージの概要を表示"
+"するため）、簡単なナビゲーションと翻訳メッセージとコメントの編集などのとても"
+"便利な機能を含まれています。"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:19
 msgid ""
@@ -50,6 +56,8 @@ msgid ""
 "alternate language, insert tags, integration with subversion and a source "
 "code viewer."
 msgstr ""
+"Gtranslator には代替言語、タグの挿入、SVN との統合とソースコードのビューアな"
+"どの多くの興味深い拡張機能を備えた拡張機能システムも含まれています。"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:99
 msgid "Daniel García Moreno"
@@ -70,15 +78,14 @@ msgstr "Gtranslator;Translation;Editor;Gettext;Write;翻訳;エディター"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:24
 msgid "Warn if file contains fuzzy translations"
-msgstr "fuzzy が残っている場合に警告する"
+msgstr "曖昧な翻訳が残っている場合に警告する"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:25
 msgid ""
 "If true, warn the user when saving a PO translation file containing fuzzy "
 "strings."
 msgstr ""
-"true の場合、PO ファイル保存をするときに fuzzy な文字列が残っていたら警告しま"
-"す。"
+"true の場合、PO ファイル保存をするときに曖昧な文字列が残っていたら警告します。"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:32
 msgid "Auto save files"
@@ -134,11 +141,11 @@ msgstr "true の場合、メッセージに含まれる空白文字を記号と�
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:77
 msgid "Remove fuzzy status when message is changed"
-msgstr "メッセージを編集したら fuzzy を解除する"
+msgstr "メッセージを編集したら曖昧状態を解除する"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:78
 msgid "If true, remove fuzzy status from translations when they are changed."
-msgstr "true の場合、翻訳内容を編集したら fuzzy 状態を解除します。"
+msgstr "true の場合、翻訳内容を編集したら曖昧状態を解除します。"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:84
 msgid "Check spelling"
@@ -146,7 +153,7 @@ msgstr "スペルをチェックする"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:85
 msgid "If true, check the spelling of translated messages."
-msgstr "翻訳したメッセージのスペルをチェックします。"
+msgstr "true の場合、翻訳したメッセージのスペルをチェックします。"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:93
 msgid "Side panel switcher style"
@@ -236,6 +243,7 @@ msgstr ""
 "相花 毅 <takeshi.aihana@gmail.com>\n"
 "草野 貴之 <AE5T-KSN@asahi-net.or.jp>\n"
 "日本 GNOME ユーザー会 <http://www.gnome.gr.jp/>\n"
+"バルガス・ペニエル <penieru@gmail.com>\n"
 "松澤 二郎 <jmatsuzawa@gnome.org>\n"
 "Hiroyuki Sekihara <hiroyuki.sekihara@gmail.com>\n"
 "IWAI, Masaharu <iwaim.sub@gmail.com>\n"
@@ -259,7 +267,7 @@ msgstr ""
 
 #: src/gtr-actions-file.c:213
 msgid "If you don't save, all your unsaved changes will be permanently lost."
-msgstr "保存しないと、すべての未保存の変更点を完全に失うことになります。"
+msgstr "保存しないと、すべての未保存の変更点は完全に失われます。"
 
 #: src/gtr-actions-file.c:216
 msgid "Save and open"
@@ -276,6 +284,27 @@ msgstr "保存せずに続行"
 #: src/gtr-actions-file.c:250
 msgid "Open file for translation"
 msgstr "翻訳するファイルの選択"
+
+#: src/gtr-actions-file.c:449
+msgid "This file has already been uploaded"
+msgstr "このファイルは既にアップロードされています"
+
+#: src/gtr-actions-file.c:462
+#, c-format
+msgid ""
+"An error occurred while uploading the file: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to upload this "
+"module."
+msgstr ""
+"ファイルをアップロードする際にエラーが発生しました: %s\n"
+"プロフィールで <i>l10n.gnome.org</i> <b>トークン</b>を正常に設定していない"
+"か、このモジュールをアップロードする権限がない可能性があります。"
+
+#: src/gtr-actions-file.c:477
+#, c-format
+msgid "The file '%s.%s.%s.%s' has been uploaded!"
+msgstr "ファイル '%s.%s.%s.%s' はアップロードされました!"
 
 #: src/gtr-actions-file.c:314 src/gtr-actions-file.c:431
 msgid "File saved."
@@ -374,7 +403,7 @@ msgstr "閉じる前に“%s”への変更点を保存しますか?"
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
-msgstr[0] "%d 個のファイルに対する変更点を完全に失うことになります。"
+msgstr[0] "%d 個のファイルに対する変更点は完全に失われます。"
 
 #: src/gtr-close-confirmation-dialog.c:537
 #, c-format
@@ -399,7 +428,7 @@ msgstr "システム管理者によってファイルの保存が禁じられて
 
 #: src/gtr-close-confirmation-dialog.c:583
 msgid "If you don’t save, all your changes will be permanently lost."
-msgstr "保存しないと、すべての変更点を完全に失うことになります。"
+msgstr "保存しないと、すべての変更点は完全に失われます。"
 
 #: src/gtr-context.c:82
 msgid "Notes"
@@ -429,6 +458,37 @@ msgstr "コンテキスト:"
 msgid "Format:"
 msgstr "書式:"
 
+#: src/gtr-dl-teams.c:417
+msgid "No module state found."
+msgstr "モジュールの状態は見つかりませんでした。"
+
+#: src/gtr-dl-teams.c:434
+#, c-format
+msgid "The current state is: %s"
+msgstr "現在の状態: %s"
+
+#: src/gtr-dl-teams.c:586
+#, c-format
+msgid "The file '%s' has been saved in %s"
+msgstr "ファイル '%s' は %s　に保存されました"
+
+#: src/gtr-dl-teams.c:646
+#, c-format
+msgid ""
+"An error occurred while reserving this module: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to reserve this "
+"module."
+msgstr ""
+"このモジュールを予約する際にエラーが発生しました: %s\n"
+"プロフィールで <i>l10n.gnome.org</i> <b>トークン</b>を正常に設定していない"
+"か、このモジュールを予約する権限がない可能性があります。"
+
+#: src/gtr-dl-teams.c:662
+#, c-format
+msgid "The file '%s.%s.%s.%s' has been successfully reserved"
+msgstr "ファイル '%s.%s.%s.%s' は正常に予約されました"
+
 #: src/gtr-dl-teams.c:617
 msgid "Translation Team"
 msgstr "翻訳チーム"
@@ -442,6 +502,10 @@ msgid "Select team, module, branch and domain to get the translation file."
 msgstr ""
 "翻訳ファイル取得のために、チーム、モジュール、ブランチ、ドメインを選択してく"
 "ださい。"
+
+#: src/gtr-dl-teams.ui:106
+msgid "Reserve for translation"
+msgstr "翻訳の予約"
 
 #: src/gtr-dl-teams.ui:81
 msgid "Load file"
@@ -558,6 +622,30 @@ msgstr "プロジェクト"
 #: src/gtr-header-dialog.ui:430
 msgid "Comment"
 msgstr "コメント"
+
+#: src/gtr-header-dialog.ui:454
+msgid "DL Team:"
+msgstr "翻訳チーム:"
+
+#: src/gtr-header-dialog.ui:467
+msgid "DL Module:"
+msgstr "モジュール:"
+
+#: src/gtr-header-dialog.ui:481
+msgid "DL Branch:"
+msgstr "ブランチ:"
+
+#: src/gtr-header-dialog.ui:495
+msgid "DL Domain:"
+msgstr "ドメイン:"
+
+#: src/gtr-header-dialog.ui:509
+msgid "DL State:"
+msgstr "状態:"
+
+#: src/gtr-header-dialog.ui:587
+msgid "Damned Lies Info"
+msgstr "Damned Lies の情報"
 
 #: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
 #: src/gtr-profile-dialog.c:170
@@ -676,7 +764,7 @@ msgstr "次の未翻訳メッセージ (<Alt><Page Down>)"
 
 #: src/gtr-notebook.ui:516
 msgid "Toggle fuzzy state (<Ctrl>+u)"
-msgstr "fuzzy の ON/OFF (<Ctrl>+U)"
+msgstr "曖昧状態の切り替え (<Ctrl>+U)"
 
 #: src/gtr-notebook.ui:537
 msgid "Sort messages by"
@@ -684,7 +772,7 @@ msgstr "メッセージの並べ替え"
 
 #: src/gtr-notebook.ui:547
 msgid "Order by menu"
-msgstr ""
+msgstr "メニューの並び順"
 
 #: src/gtr-notebook.ui:585
 msgid "Find (<Ctrl><f>)"
@@ -700,7 +788,11 @@ msgstr "このファイルを保存 (<Ctrl>S)"
 
 #: src/gtr-notebook.ui:643
 msgid "Save as (<Ctrl><Shift>s)"
-msgstr "名前をつけて保存 (<Ctrl><Shift>S)"
+msgstr "名前を付けて保存 (<Ctrl><Shift>S)"
+
+#: src/gtr-notebook.ui:665
+msgid "Upload file (<Ctrl>b)"
+msgstr "ファイルをアップロード (<Ctrl>B)"
 
 #: src/gtr-po.c:440
 #, c-format
@@ -735,12 +827,12 @@ msgstr ""
 #: src/gtr-po.c:672
 #, c-format
 msgid "Gettext returned a null message domain list."
-msgstr "Gettext が null ドメインリストを返しました"
+msgstr "Gettext が null ドメインリストを返しました。"
 
 #: src/gtr-po.c:717
 #, c-format
 msgid "No messages obtained from parser."
-msgstr "パーサーからメッセージを取得できませんでした"
+msgstr "パーサーからメッセージを取得できませんでした。"
 
 #: src/gtr-po.c:768
 #, c-format
@@ -798,7 +890,7 @@ msgstr "全般"
 
 #: src/gtr-preferences-dialog.ui:138
 msgid "_Warn if PO file contains fuzzy translations"
-msgstr "PO ファイルに fuzzy メッセージが残っていれば警告する(_W)"
+msgstr "PO ファイルに曖昧なメッセージが残っていれば警告する(_W)"
 
 #: src/gtr-preferences-dialog.ui:160
 msgid "Autosave"
@@ -832,13 +924,21 @@ msgstr "メッセージのシンタックスハイライトを有効にする(_H
 msgid "Make _whitespace visible"
 msgstr "空白文字を表示する(_W)"
 
+#: src/gtr-preferences-dialog.ui:376
+msgid "Font:"
+msgstr "フォント:"
+
+#: src/gtr-preferences-dialog.ui:388
+msgid "Choose the editor font"
+msgstr "エディターのフォントを選択"
+
 #: src/gtr-preferences-dialog.ui:392
 msgid "Contents"
 msgstr "目次"
 
 #: src/gtr-preferences-dialog.ui:415
 msgid "_Remove fuzzy status if message is changed"
-msgstr "メッセージを編集したら fuzzy を解除する(_R)"
+msgstr "メッセージを編集したら曖昧状態を解除する(_R)"
 
 #: src/gtr-preferences-dialog.ui:431
 msgid "Check _spelling"
@@ -883,6 +983,18 @@ msgstr "メール(_E)"
 #: src/gtr-profile-dialog.ui:160
 msgid "_Team email"
 msgstr "翻訳チームのメール(_T)"
+
+#: src/gtr-profile-dialog.ui:174
+msgid "_DL auth token"
+msgstr "DL の認証トークン(_D)"
+
+#: src/gtr-profile-dialog.ui:175
+msgid ""
+"GNOME Damned Lies integration token, go to your profile in https://l10n."
+"gnome.org/ to get it"
+msgstr ""
+"GNOME Damned Lies の統合トークンです。https://l10n.gnome.org/ にて自分のプロ"
+"フィールで取得できます"
 
 #: src/gtr-profile-dialog.ui:209
 msgid "Language Settings"
@@ -966,7 +1078,7 @@ msgstr "メッセージの中にエラーが含まれています:"
 
 #: src/gtr-tab.c:549 src/gtr-tab.c:675
 msgid "fuzzy"
-msgstr "fuzzy"
+msgstr "曖昧"
 
 #: src/gtr-tab.c:705
 #, c-format
@@ -991,12 +1103,12 @@ msgstr "翻訳済み: %d"
 #: src/gtr-tab.c:1916
 #, c-format
 msgid "Untranslated: %d"
-msgstr "未訳: %d"
+msgstr "未翻訳: %d"
 
 #: src/gtr-tab.c:1917
 #, c-format
 msgid "Fuzzy: %d"
-msgstr "fuzzy: %d"
+msgstr "曖昧: %d"
 
 #: src/gtr-tab.ui:79
 msgid "_Original Message"
@@ -1008,7 +1120,7 @@ msgstr "翻訳文(_D):"
 
 #: src/gtr-window.c:175
 msgid "Untranslated"
-msgstr "未訳"
+msgstr "未翻訳"
 
 #: src/gtr-window.c:178
 msgid "Translated"
@@ -1044,7 +1156,7 @@ msgstr[0] "fuzzy: %d"
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
-msgstr[0] "未訳: %d"
+msgstr[0] "未翻訳: %d"
 
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:305
@@ -1135,12 +1247,12 @@ msgstr "やり直す"
 #: src/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
-msgstr "fuzzy としてマーク/マーク解除"
+msgstr "曖昧としてマーク/マーク解除"
 
 #: src/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
-msgstr "原文を複写する"
+msgstr "原文をコピーする"
 
 #: src/help-overlay.ui:99
 msgctxt "shortcut window group"
@@ -1150,22 +1262,22 @@ msgstr "ナビゲーション"
 #: src/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Go to the previous message"
-msgstr "前のメッセージにジャンプする"
+msgstr "前のメッセージに移動する"
 
 #: src/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "Go to the next message"
-msgstr "次のメッセージにジャンプする"
+msgstr "次のメッセージに移動する"
 
 #: src/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
-msgstr "前の未訳メッセージにジャンプする"
+msgstr "前の未翻訳メッセージに移動する"
 
 #: src/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
-msgstr "次の未訳メッセージにジャンプする"
+msgstr "次の未翻訳メッセージに移動する"
 
 #: src/help-overlay.ui:134
 msgctxt "shortcut window group"
@@ -1180,7 +1292,7 @@ msgstr "翻訳メモリを構築する"
 #: src/help-overlay.ui:145
 msgctxt "shortcut window"
 msgid "Copy below"
-msgstr ""
+msgstr "原文をコピー"
 
 #: src/help-overlay.ui:155
 msgctxt "shortcut window group"
