@@ -124,7 +124,7 @@ add_to_database (gpointer data_pointer)
       GList *msg_list = NULL;
       GFile *location;
       GError *error = NULL;
-      GtrPo *po;
+      g_autoptr(GtrPo) po = NULL;
 
       po = gtr_po_new ();
       location = (GFile *) l->data;
@@ -136,8 +136,6 @@ add_to_database (gpointer data_pointer)
       msg_list = gtr_po_get_messages (po);
 
       gtr_translation_memory_store_list (data->tm, msg_list);
-
-      g_object_unref (po);
     }
   else
     {
