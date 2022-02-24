@@ -401,9 +401,6 @@ quit_activated (GSimpleAction *action,
     {
       gtr_file_quit (NULL, l->data);
     }
-
-  // FIXME: we may want to continue editing
-  g_application_quit (G_APPLICATION (app));
 }
 
 static void
