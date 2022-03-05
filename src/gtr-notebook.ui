@@ -28,11 +28,6 @@
             <property name="margin_top">3</property>
             <property name="margin_bottom">3</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
         </child>
 
         <child>
@@ -42,11 +37,6 @@
             <property name="margin_top">3</property>
             <property name="margin_bottom">3</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
 
         <child>
@@ -57,11 +47,6 @@
             <property name="action_name">app.sort_by_id</property>
             <property name="label" translatable="yes">Appearance in the original file</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
         </child>
         <child>
           <object class="GtkRadioButton" id="sort_status">
@@ -72,11 +57,6 @@
             <property name="label" translatable="yes">Message status</property>
             <property name="group">sort_id</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">3</property>
-          </packing>
         </child>
         <child>
           <object class="GtkRadioButton" id="sort_msgid">
@@ -87,11 +67,6 @@
             <property name="label" translatable="yes">Original message</property>
             <property name="group">sort_id</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">5</property>
-          </packing>
         </child>
         <child>
           <object class="GtkRadioButton" id="sort_translated">
@@ -102,16 +77,10 @@
             <property name="label" translatable="yes">Translated message</property>
             <property name="group">sort_id</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">7</property>
-          </packing>
         </child>
       </object>
       <packing>
         <property name="submenu">main</property>
-        <property name="position">1</property>
       </packing>
     </child>
   </object>
@@ -135,11 +104,6 @@
             <property name="action_name">app.find</property>
             <property name="text" translatable="yes">Find</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
         </child>
         <child>
           <object class="GtkModelButton" id="find_and_replace">
@@ -149,11 +113,6 @@
             <property name="action_name">app.find_and_replace</property>
             <property name="text" translatable="yes">Find and replace</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
         <child>
           <object class="GtkModelButton" id="translation_memory">
@@ -163,11 +122,6 @@
             <property name="action_name">app.build_tm</property>
             <property name="text" translatable="yes">Build translation memory</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
         </child>
 
         <child>
@@ -178,11 +132,6 @@
             <property name="action_name">app.edit_header</property>
             <property name="text" translatable="yes">Edit header</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">3</property>
-          </packing>
         </child>
 
         <child>
@@ -192,11 +141,6 @@
             <property name="margin_top">3</property>
             <property name="margin_bottom">3</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">4</property>
-          </packing>
         </child>
         <child>
           <object class="GtkModelButton" id="new_win">
@@ -206,11 +150,6 @@
             <property name="action_name">app.new_window</property>
             <property name="text" translatable="yes">New window</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">5</property>
-          </packing>
         </child>
         <child>
           <object class="GtkModelButton" id="pref_button1">
@@ -220,11 +159,6 @@
             <property name="action_name">app.preferences</property>
             <property name="text" translatable="yes">Preferences</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">6</property>
-          </packing>
         </child>
         <child>
           <object class="GtkSeparator">
@@ -233,11 +167,6 @@
             <property name="margin_top">3</property>
             <property name="margin_bottom">3</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">7</property>
-          </packing>
         </child>
         <child>
           <object class="GtkModelButton" id="pref_button">
@@ -247,11 +176,6 @@
             <property name="action_name">app.shortcuts</property>
             <property name="text" translatable="yes">Keyboard Shortcuts</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">8</property>
-          </packing>
         </child>
         <child>
           <object class="GtkModelButton" id="about_button">
@@ -261,11 +185,6 @@
             <property name="action_name">app.about</property>
             <property name="text" translatable="yes">About</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">9</property>
-          </packing>
         </child>
         <child>
           <object class="GtkModelButton" id="help_button">
@@ -275,11 +194,6 @@
             <property name="action_name">app.help</property>
             <property name="text" translatable="yes">Help</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">10</property>
-          </packing>
         </child>
         <child>
           <object class="GtkModelButton" id="quit">
@@ -289,16 +203,10 @@
             <property name="action_name">app.quit</property>
             <property name="text" translatable="yes">Quit</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">11</property>
-          </packing>
         </child>
       </object>
       <packing>
         <property name="submenu">main</property>
-        <property name="position">1</property>
       </packing>
     </child>
   </object>
@@ -328,12 +236,6 @@
               </object>
             </child>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-            <property name="non_homogeneous">True</property>
-          </packing>
         </child>
         <child>
           <object class="GtkButton" id="dl_button">
@@ -348,21 +250,12 @@
               </object>
             </child>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">F</property>
-            <property name="position">1</property>
-            <property name="non_homogeneous">True</property>
-          </packing>
         </child>
         <style>
          <class name="linked"/>
          <class name="horizontal"/>
         </style>
       </object>
-      <packing>
-        <property name="position">1</property>
-      </packing>
     </child>
 
     <child>
@@ -370,9 +263,6 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
       </object>
-      <packing>
-        <property name="position">2</property>
-      </packing>
     </child>
     <child>
       <object class="GtkButtonBox">
@@ -394,12 +284,6 @@
               </object>
             </child>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-            <property name="non_homogeneous">True</property>
-          </packing>
         </child>
         <child>
           <object class="GtkButton" id="redo">
@@ -416,30 +300,18 @@
               </object>
             </child>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-            <property name="non_homogeneous">True</property>
-          </packing>
         </child>
         <style>
           <class name="linked"/>
           <class name="horizontal"/>
         </style>
       </object>
-      <packing>
-        <property name="position">3</property>
-      </packing>
     </child>
     <child>
       <object class="GtkSeparator">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
       </object>
-      <packing>
-        <property name="position">4</property>
-      </packing>
     </child>
     <child>
       <object class="GtkButtonBox">
@@ -461,12 +333,6 @@
               </object>
             </child>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-            <property name="non_homogeneous">True</property>
-          </packing>
         </child>
         <child>
           <object class="GtkButton" id="next_untranslated">
@@ -483,30 +349,18 @@
               </object>
             </child>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-            <property name="non_homogeneous">True</property>
-          </packing>
         </child>
         <style>
           <class name="linked"/>
           <class name="horizontal"/>
         </style>
       </object>
-      <packing>
-        <property name="position">6</property>
-      </packing>
     </child>
     <child>
       <object class="GtkSeparator">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
       </object>
-      <packing>
-        <property name="position">9</property>
-      </packing>
     </child>
     <child>
       <object class="GtkButton">
@@ -523,9 +377,6 @@
           </object>
         </child>
       </object>
-      <packing>
-        <property name="position">10</property>
-      </packing>
     </child>
 
     <child>
@@ -548,9 +399,6 @@
           </object>
         </child>
       </object>
-      <packing>
-        <property name="position">11</property>
-      </packing>
     </child>
 
     <child>
@@ -574,7 +422,6 @@
       </object>
       <packing>
         <property name="pack_type">end</property>
-        <property name="position">1</property>
       </packing>
     </child>
     <child>
@@ -592,13 +439,6 @@
               </object>
             </child>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">2</property>
-            <property name="non_homogeneous">True</property>
-          </packing>
     </child>
     <child>
           <object class="GtkSeparator">
@@ -609,9 +449,6 @@
           </object>
           <packing>
             <property name="pack_type">end</property>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">3</property>
           </packing>
     </child>
     <child>
@@ -628,12 +465,6 @@
             <property name="tooltip_text" translatable="yes">Save the current file (&lt;Ctrl&gt;s)</property>
             <property name="action_name">app.save</property>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-            <property name="non_homogeneous">True</property>
-          </packing>
         </child>
         <child>
           <object class="GtkButton">
@@ -650,12 +481,6 @@
               </object>
             </child>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-            <property name="non_homogeneous">True</property>
-          </packing>
         </child>
          <child>
           <object class="GtkButton" id="upload">
@@ -672,12 +497,6 @@
               </object>
             </child>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-            <property name="non_homogeneous">True</property>
-          </packing>
         </child>
         <style>
           <class name="horizontal"/>
@@ -686,7 +505,6 @@
       </object>
       <packing>
         <property name="pack_type">end</property>
-        <property name="position">6</property>
       </packing>
     </child>
 
