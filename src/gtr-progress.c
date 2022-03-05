@@ -38,6 +38,7 @@ struct _GtrProgress
 
 enum
 {
+  PROP_0,
   PROP_TRANS,
   PROP_UNTRANS,
   PROP_FUZZY,
