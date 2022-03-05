@@ -532,15 +532,9 @@ gtr_upload_file_dialog (GtkAction * action, GtrWindow * window)
 void
 gtr_save_file_as_dialog (GtkAction * action, GtrWindow * window)
 {
-  GtkWidget *dialog = NULL;
+  GtkWidget *dialog;
   GtrTab *current_page;
   gint reply = 0;
-
-  if (dialog != NULL)
-    {
-      gtk_window_present (GTK_WINDOW (dialog));
-      return;
-    }
 
   current_page = gtr_window_get_active_tab (window);
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
