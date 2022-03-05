@@ -207,28 +207,6 @@ gtr_search_bar_get_entire_word (GtrSearchBar *dialog)
 }
 
 void
-gtr_search_bar_set_backwards (GtrSearchBar *dialog, gboolean backwards)
-{
-
-  g_return_if_fail (GTR_IS_SEARCH_BAR (dialog));
-
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (dialog->previous_button),
-                                backwards);
-}
-
-gboolean
-gtr_search_bar_get_backwards (GtrSearchBar *dialog)
-{
-
-  g_return_val_if_fail (GTR_IS_SEARCH_BAR (dialog), FALSE);
-
-  return
-    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-                                  (dialog->previous_button));
-}
-
-void
 gtr_search_bar_set_wrap_around (GtrSearchBar *dialog,
                                    gboolean wrap_around)
 {
