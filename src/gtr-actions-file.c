@@ -137,7 +137,7 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
 }
 
 static void
-gtr_po_parse_files_from_dialog (GtkWidget * dialog, GtrWindow * window)
+gtr_po_parse_files_from_dialog (GtkNativeDialog * dialog, GtrWindow * window)
 {
   GSList *po_files, *l;
   GSList *locations = NULL;
@@ -177,7 +177,7 @@ gtr_po_parse_files_from_dialog (GtkWidget * dialog, GtrWindow * window)
   /*
    * Destroy the dialog 
    */
-  gtk_widget_destroy (dialog);
+  gtk_native_dialog_destroy (dialog);
 }
 
 
@@ -189,7 +189,7 @@ gtr_file_chooser_analyse (gpointer dialog,
 
   reply = gtk_native_dialog_run (GTK_NATIVE_DIALOG (dialog));
   if (reply == GTK_RESPONSE_ACCEPT && mode == FILESEL_OPEN)
-    gtr_po_parse_files_from_dialog (GTK_WIDGET (dialog), window);
+    gtr_po_parse_files_from_dialog (GTK_NATIVE_DIALOG (dialog), window);
 
   g_object_unref (dialog);
 }
