@@ -380,7 +380,7 @@ original_checkbutton_toggled (GtkToggleButton * button,
 gboolean
 gtr_search_bar_get_replace_mode (GtrSearchBar *self)
 {
-  g_return_val_if_fail (GTK_IS_SEARCH_BAR (self), FALSE);
+  g_return_val_if_fail (GTR_IS_SEARCH_BAR (self), FALSE);
 
   return self->replace_mode;
 }
