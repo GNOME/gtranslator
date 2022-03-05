@@ -46,7 +46,7 @@ struct _GtrSearchBar
   GtkButton               *previous_button;
   GtkButton               *next_button;
   GtrHistoryEntry         *replace_entry;
-  GtkEntry                *search_entry;
+  GtkSearchEntry          *search_entry;
   GtkGrid                 *search_options;
   GtkCheckButton          *whole_word;
   GtkCheckButton          *wrap_around_button;
@@ -537,16 +537,6 @@ search_entry_stop_search (GtrSearchBar *self,
 }
 
 static void
-search_entry_changed (GtrSearchBar *dialog,
-                      GtkEntry     *entry)
-{
-  const gchar *search_string;
-
-  search_string = gtk_entry_get_text (GTK_ENTRY (entry));
-  g_return_if_fail (search_string != NULL);
-}
-
-static void
 gtr_search_bar_destroy (GtkWidget *widget)
 {
   GtrSearchBar *self = (GtrSearchBar *)widget;
@@ -774,12 +764,6 @@ gtr_search_bar_init (GtrSearchBar *self)
                             "activate",
                             G_CALLBACK (gtr_search_bar_find_next),
                             self);
-
-  g_signal_connect_data (self->search_entry,
-                         "changed",
-                         G_CALLBACK (search_entry_changed),
-                         self, NULL,
-                         G_CONNECT_SWAPPED | G_CONNECT_AFTER);
 
   g_signal_connect_swapped (self->search_entry,
                             "populate-popup",
