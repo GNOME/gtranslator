@@ -27,7 +27,6 @@
 #include "gtr-actions.h"
 #include "gtr-tab.h"
 #include "gtr-window.h"
-#include "gtr-history-entry.h"
 #include "gtr-utils.h"
 
 struct _GtrSearchBar
@@ -45,7 +44,7 @@ struct _GtrSearchBar
   GtkButton               *replace_button;
   GtkButton               *previous_button;
   GtkButton               *next_button;
-  GtrHistoryEntry         *replace_entry;
+  GtkSearchEntry          *replace_entry;
   GtkSearchEntry          *search_entry;
   GtkGrid                 *search_options;
   GtkCheckButton          *whole_word;
@@ -53,8 +52,6 @@ struct _GtrSearchBar
   GtkCheckButton          *original_text_checkbutton;
   GtkCheckButton          *translated_text_checkbutton;
   GtkLabel                *search_text_error;
-  GtkWidget               *search_text_entry;
-  GtkWidget               *replace_text_entry;
 
   GtrWindow               *active_window;
 
@@ -675,13 +672,6 @@ gtr_search_bar_init (GtrSearchBar *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  gtr_history_entry_set_escape_func (GTR_HISTORY_ENTRY (self->search_entry),
-                                     (GtrHistoryEntryEscapeFunc) gtr_utils_escape_search_text);
-
-  self->search_text_entry = gtr_history_entry_get_entry (GTR_HISTORY_ENTRY (self->search_entry));
-
-  gtk_entry_set_activates_default (GTK_ENTRY (self->search_text_entry), TRUE);
-
   // Sets the Original-text, Translated-text and Wrap-around checkbuttons toggled by default.
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
@@ -695,15 +685,6 @@ gtr_search_bar_init (GtrSearchBar *self)
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
                                 (self->wrap_around_button),
                                 TRUE);
-
-  gtr_history_entry_set_escape_func (GTR_HISTORY_ENTRY
-                                     (self->replace_entry),
-                                     (GtrHistoryEntryEscapeFunc)
-                                     gtr_utils_escape_search_text);
-
-  self->replace_text_entry = gtr_history_entry_get_entry (GTR_HISTORY_ENTRY (self->replace_entry));
-
-  gtk_entry_set_activates_default (GTK_ENTRY (self->replace_text_entry), TRUE);
 
 
   self->search_signals = dzl_signal_group_new (GTK_TYPE_SEARCH_ENTRY);
@@ -743,12 +724,11 @@ gtr_search_bar_init (GtrSearchBar *self)
                           self->whole_word, "active",
                           G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-  g_signal_connect (self->search_text_entry,
+  g_signal_connect (self->search_entry,
                     "insert_text", G_CALLBACK (insert_text_handler), NULL);
 
-  g_signal_connect (self->replace_text_entry,
+  g_signal_connect (self->replace_entry,
                     "insert_text", G_CALLBACK (insert_text_handler), NULL);
-
 
   g_signal_connect (self->original_text_checkbutton,
                     "toggled",
