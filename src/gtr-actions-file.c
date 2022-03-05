@@ -554,7 +554,6 @@ gtr_save_file_as_dialog (GtkAction * action, GtrWindow * window)
                     "confirm-overwrite",
                     G_CALLBACK (confirm_overwrite_callback), NULL);
 
-  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
   g_object_set_data (G_OBJECT (dialog), GTR_TAB_SAVE_AS, current_page);
 
   reply = gtk_native_dialog_run (GTK_NATIVE_DIALOG (dialog));
