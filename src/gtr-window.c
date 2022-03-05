@@ -921,7 +921,9 @@ gtr_window_show_search_bar (GtrWindow *window,
   GtrNotebook *notebook = GTR_NOTEBOOK (priv->notebook);
   GtrTab *tab = gtr_window_get_active_tab (window);
 
-  gtr_tab_show_hide_search_bar (tab, show);
+  if (tab != NULL)
+    gtr_tab_show_hide_search_bar (tab, show);
+
   gtr_notebook_enable_find_button(notebook, show);
 
   priv->search_bar_shown = show;
