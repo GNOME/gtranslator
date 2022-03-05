@@ -172,7 +172,7 @@ gtr_view_dispose (GObject * object)
   g_clear_object (&priv->editor_settings);
   g_clear_object (&priv->ui_settings);
   g_clear_object (&priv->spell);
-  g_object_unref (&priv->provider);
+  g_clear_object (&priv->provider);
 
   G_OBJECT_CLASS (gtr_view_parent_class)->dispose (object);
 }
