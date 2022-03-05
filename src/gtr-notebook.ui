@@ -217,10 +217,8 @@
     <property name="show_close_button">True</property>
 
     <child>
-       <object class="GtkButtonBox">
+       <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="layout_style">start</property>
         <child>
           <object class="GtkButton" id="open_button">
             <property name="visible">True</property>
@@ -253,7 +251,6 @@
         </child>
         <style>
          <class name="linked"/>
-         <class name="horizontal"/>
         </style>
       </object>
     </child>
@@ -265,10 +262,8 @@
       </object>
     </child>
     <child>
-      <object class="GtkButtonBox">
+      <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="layout_style">start</property>
         <child>
           <object class="GtkButton" id="undo">
             <property name="visible">True</property>
@@ -303,7 +298,6 @@
         </child>
         <style>
           <class name="linked"/>
-          <class name="horizontal"/>
         </style>
       </object>
     </child>
@@ -314,10 +308,8 @@
       </object>
     </child>
     <child>
-      <object class="GtkButtonBox">
+      <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="layout_style">start</property>
         <child>
           <object class="GtkButton" id="prev_untranslated">
             <property name="visible">True</property>
@@ -352,7 +344,6 @@
         </child>
         <style>
           <class name="linked"/>
-          <class name="horizontal"/>
         </style>
       </object>
     </child>
@@ -439,6 +430,9 @@
               </object>
             </child>
           </object>
+          <packing>
+            <property name="pack_type">end</property>
+          </packing>
     </child>
     <child>
           <object class="GtkSeparator">
@@ -452,10 +446,8 @@
           </packing>
     </child>
     <child>
-      <object class="GtkButtonBox">
+      <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="layout_style">start</property>
         <child>
           <object class="GtkButton" id="save">
             <property name="label" translatable="yes">Save</property>
@@ -499,7 +491,6 @@
           </object>
         </child>
         <style>
-          <class name="horizontal"/>
           <class name="linked"/>
         </style>
       </object>
