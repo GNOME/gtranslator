@@ -919,7 +919,7 @@ gtr_view_set_font (GtrView *view, char *font)
   g_autofree char *str = NULL;
   g_autofree char *css = NULL;
   GtrViewPrivate *priv = gtr_view_get_instance_private (view);
-  g_autoptr (GtkWidget) button = gtk_font_button_new ();
+  GtkWidget *button = gtk_font_button_new ();
 
   gtk_font_chooser_set_font (GTK_FONT_CHOOSER (button), font);
   font_desc = gtk_font_chooser_get_font_desc (GTK_FONT_CHOOSER (button));
