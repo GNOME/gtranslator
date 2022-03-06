@@ -662,6 +662,10 @@ gtr_application_startup (GApplication *application)
 
   load_accels ();
 
+  /* TODO Remove in GTK 4 port */
+  hdy_style_manager_set_color_scheme (hdy_style_manager_get_default (),
+                                      HDY_COLOR_SCHEME_PREFER_LIGHT);
+
   /* We set the default icon dir */
   gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
                                      gtr_dirs_get_gtr_pixmaps_dir ());
