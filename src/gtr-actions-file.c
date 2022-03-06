@@ -263,7 +263,7 @@ gtr_open_file_dialog (GtrWindow * window)
 }
 
 static void
-save_dialog_response_cb (GtkDialog * dialog,
+save_dialog_response_cb (GtkNativeDialog * dialog,
                          gint response_id, GtrWindow * window)
 {
   GError *error = NULL;
@@ -272,7 +272,7 @@ save_dialog_response_cb (GtkDialog * dialog,
   gchar *filename;
   GFile *location;
 
-  tab = GTR_TAB (g_object_get_data (G_OBJECT (dialog), GTR_TAB_SAVE_AS));
+  tab = gtr_window_get_active_tab (window);
 
   g_return_if_fail (GTK_IS_FILE_CHOOSER (dialog));
 
@@ -280,7 +280,7 @@ save_dialog_response_cb (GtkDialog * dialog,
 
   if (response_id != GTK_RESPONSE_ACCEPT)
     {
-      g_object_unref (dialog);
+      gtk_native_dialog_destroy (dialog);
       return;
     }
 
@@ -290,13 +290,11 @@ save_dialog_response_cb (GtkDialog * dialog,
   location = g_file_new_for_path (filename);
   g_free (filename);
 
-  g_object_unref (dialog);
+  gtk_native_dialog_destroy (dialog);
 
   if (po != NULL)
     {
       gtr_po_set_location (po, location);
-
-      g_object_unref (location);
 
       gtr_po_save_file (po, &error);
 
@@ -318,26 +316,6 @@ save_dialog_response_cb (GtkDialog * dialog,
       gtr_po_set_state (po, GTR_PO_STATE_SAVED);
     }
   g_object_unref (location);
-}
-
-static GtkFileChooserConfirmation
-confirm_overwrite_callback (GtkFileChooser * dialog, gpointer data)
-{
-  gchar *uri;
-  GtkFileChooserConfirmation res;
-
-  uri = gtk_file_chooser_get_uri (dialog);
-
-  /*
-   * FIXME: We have to detect if the file is read-only
-   */
-
-  /* fall back to the default confirmation dialog */
-  res = GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM;
-
-  g_free (uri);
-
-  return res;
 }
 
 static void
@@ -553,26 +531,16 @@ gtr_upload_file_dialog (GtrWindow * window)
 void
 gtr_save_file_as_dialog (GtrWindow * window)
 {
-  GtkWidget *dialog;
-  GtrTab *current_page;
-  gint reply = 0;
+  GtkNativeDialog *dialog;
 
-  current_page = gtr_window_get_active_tab (window);
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
                                  FILESEL_SAVE,
                                  _("Save file as…"),
                                  g_get_home_dir ());
 
-  gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog),
-                                                  TRUE);
-  g_signal_connect (dialog,
-                    "confirm-overwrite",
-                    G_CALLBACK (confirm_overwrite_callback), NULL);
-
-  g_object_set_data (G_OBJECT (dialog), GTR_TAB_SAVE_AS, current_page);
-
-  reply = gtk_native_dialog_run (GTK_NATIVE_DIALOG (dialog));
-  save_dialog_response_cb (GTK_DIALOG (dialog), reply, window);
+  g_signal_connect (dialog, "response", G_CALLBACK (save_dialog_response_cb),
+                    window);
+  gtk_native_dialog_show (dialog);
 }
 
 /*
