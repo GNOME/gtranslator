@@ -78,7 +78,6 @@ last_search_data_set (LastSearchData * data, GtrSearchBar * dialog)
   data->translated_text = gtr_search_bar_get_translated_text (dialog);
   data->match_case = gtr_search_bar_get_match_case (dialog);
   data->entire_word = gtr_search_bar_get_entire_word (dialog);
-  data->backwards = gtr_search_bar_get_backwards (dialog);
   data->wrap_around = gtr_search_bar_get_wrap_around (dialog);
 }
 
@@ -106,7 +105,6 @@ search_bar_set_last_options (GtrSearchBar *   dialog,
   gtr_search_bar_set_translated_text (dialog, data->translated_text);
   gtr_search_bar_set_match_case (dialog, data->match_case);
   gtr_search_bar_set_entire_word (dialog, data->entire_word);
-  gtr_search_bar_set_backwards (dialog, data->backwards);
   gtr_search_bar_set_wrap_around (dialog, data->wrap_around);
 }
 

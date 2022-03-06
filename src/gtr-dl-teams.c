@@ -352,7 +352,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   gchar *stats_endpoint;
   JsonNode *node = NULL;
   g_autoptr(JsonParser) parser = NULL;
-  g_autoptr(JsonObject) object = NULL;
+  JsonObject *object;
   SoupMessage *msg;
   SoupSession *session;
   GError *error = NULL;

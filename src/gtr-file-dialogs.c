@@ -46,8 +46,6 @@ gtr_file_chooser_new (GtkWindow * parent,
                                          FILESEL_SAVE) ? _("_Save") :
                                         _("_Open"), _("_Cancel"));
 
-  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
-
   if (dir)
     gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (dialog), dir);
 
@@ -76,8 +74,6 @@ gtr_file_chooser_new (GtkWindow * parent,
       gtk_file_filter_add_pattern (filter, "*");
       gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
     }
-
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent));
 
   return GTK_WIDGET (dialog);
 }

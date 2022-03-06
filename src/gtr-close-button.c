@@ -35,7 +35,6 @@ gtr_close_button_class_init (GtrCloseButtonClass *klass)
 {
 	static const gchar button_style[] =
 		"* {\n"
-		  "-GtkWidget-focus-padding : 0;\n"
 		  "padding: 0;\n"
 		"}";
 

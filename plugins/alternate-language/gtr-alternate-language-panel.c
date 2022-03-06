@@ -185,7 +185,7 @@ open_file (GtkWidget *dialog, GtrAlternateLangPanel *panel)
 
 
 static void
-gtr_file_chooser_analyse (gpointer dialog, GtrAlternateLangPanel * panel)
+gtr_file_chooser_analyse (GtkNativeDialog * dialog, GtrAlternateLangPanel * panel)
 {
   gint reply;
 
@@ -241,7 +241,7 @@ open_button_clicked_cb (GtkWidget * open_button,
 
   gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (dialog), TRUE);
 
-  gtr_file_chooser_analyse ((gpointer) dialog, panel);
+  gtr_file_chooser_analyse (GTK_NATIVE_DIALOG (dialog), panel);
 }
 
 static void
