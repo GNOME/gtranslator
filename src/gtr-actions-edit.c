@@ -33,7 +33,7 @@
 #include "gtr-window.h"
 
 void
-gtr_actions_edit_undo (GtkAction * action, GtrWindow * window)
+gtr_actions_edit_undo (GtrWindow * window)
 {
   GtrView *active_view;
   GtkSourceBuffer *active_document;
@@ -60,7 +60,7 @@ gtr_actions_edit_undo (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtr_actions_edit_redo (GtkAction * action, GtrWindow * window)
+gtr_actions_edit_redo (GtrWindow * window)
 {
   GtrView *active_view;
   GtkSourceBuffer *active_document;
@@ -87,7 +87,7 @@ gtr_actions_edit_redo (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtr_actions_edit_cut (GtkAction * action, GtrWindow * window)
+gtr_actions_edit_cut (GtrWindow * window)
 {
   GtrView *active_view;
 
@@ -100,7 +100,7 @@ gtr_actions_edit_cut (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtr_actions_edit_copy (GtkAction * action, GtrWindow * window)
+gtr_actions_edit_copy (GtrWindow * window)
 {
   GtrView *active_view;
 
@@ -113,7 +113,7 @@ gtr_actions_edit_copy (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtr_actions_edit_paste (GtkAction * action, GtrWindow * window)
+gtr_actions_edit_paste (GtrWindow * window)
 {
   GtrView *active_view;
 
@@ -130,7 +130,7 @@ gtr_actions_edit_paste (GtkAction * action, GtrWindow * window)
  * Use the untranslated message as the translation.
  */
 void
-gtr_message_copy_to_translation (GtkAction * action, GtrWindow * window)
+gtr_message_copy_to_translation (GtrWindow * window)
 {
   GtrTab *current;
 
@@ -143,7 +143,7 @@ gtr_message_copy_to_translation (GtkAction * action, GtrWindow * window)
  * Toggle the sticky status
  */
 void
-gtr_message_status_toggle_fuzzy (GtkAction * action, GtrWindow * window)
+gtr_message_status_toggle_fuzzy (GtrWindow * window)
 {
   GtrTab *current;
   GtrPo *po;
@@ -165,13 +165,13 @@ gtr_message_status_toggle_fuzzy (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtr_actions_edit_header (GtkAction * action, GtrWindow * window)
+gtr_actions_edit_header (GtrWindow * window)
 {
   gtr_show_header_dialog (window);
 }
 
 void
-gtr_actions_edit_clear (GtkAction * action, GtrWindow * window)
+gtr_actions_edit_clear (GtrWindow * window)
 {
   GtrTab *tab;
 

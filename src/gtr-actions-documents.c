@@ -22,7 +22,7 @@
 #include "gtr-actions.h"
 
 void
-gtr_actions_documents_next_document (GtkAction * action, GtrWindow * window)
+gtr_actions_documents_next_document (GtrWindow * window)
 {
   GtrNotebook *notebook;
   notebook = gtr_window_get_notebook (window);
@@ -30,8 +30,7 @@ gtr_actions_documents_next_document (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtr_actions_documents_previous_document (GtkAction * action,
-                                         GtrWindow * window)
+gtr_actions_documents_previous_document (GtrWindow * window)
 {
   GtrNotebook *notebook;
   notebook = gtr_window_get_notebook (window);

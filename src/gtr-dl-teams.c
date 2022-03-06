@@ -891,7 +891,7 @@ team_add_cb (GtkButton   *btn,
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   GtrWindow *window = GTR_WINDOW (priv->main_window);
-  gtr_open_file_dialog (NULL, window);
+  gtr_open_file_dialog (window);
 }
 
 
