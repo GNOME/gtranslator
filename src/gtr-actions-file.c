@@ -251,7 +251,7 @@ gtr_want_to_save_current_dialog (GtrWindow * window)
 void
 gtr_open_file_dialog (GtrWindow * window)
 {
-  GtkWidget *dialog = NULL;
+  GtkNativeDialog *dialog;
   g_autoptr (GList) list = NULL;
   list = get_modified_documents (window);
   if (list != NULL)

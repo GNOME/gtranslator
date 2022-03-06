@@ -210,7 +210,7 @@ static void
 open_button_clicked_cb (GtkWidget * open_button,
                         GtrAlternateLangPanel * panel)
 {
-  GtkWidget *dialog = NULL;
+  GtkNativeDialog *dialog;
   gchar *dir;
   GtrPo *tab_po;
   GFile *location, *parent;
