@@ -201,13 +201,15 @@ gtr_want_to_save_current_dialog (GtrWindow * window)
   g_autofree gchar *filename = NULL;
   g_autofree gchar *markup = NULL;
 
+  GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
+
   tab = gtr_window_get_active_tab (window);
   po = gtr_tab_get_po (tab);
   location = gtr_po_get_location (po);
   filename = g_file_get_path (location);
 
   dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   flags,
                                    GTK_MESSAGE_WARNING,
                                    GTK_BUTTONS_NONE, NULL);
 
@@ -303,8 +305,9 @@ save_dialog_response_cb (GtkNativeDialog * dialog,
       if (error)
         {
           GtkWidget *dialog;
+          GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
           dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                           GTK_DIALOG_DESTROY_WITH_PARENT,
+                                           flags,
                                            GTK_MESSAGE_WARNING,
                                            GTK_BUTTONS_OK,
                                            "%s", error->message);
@@ -566,8 +569,9 @@ gtr_save_current_file_dialog (GtkWidget * widget, GtrWindow * window)
   if (error)
     {
       GtkWidget *dialog;
+      GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
       dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                       GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       flags,
                                        GTK_MESSAGE_WARNING,
                                        GTK_BUTTONS_OK, "%s", error->message);
       g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
@@ -655,11 +659,12 @@ load_file_list (GtrWindow * window, const GSList * locations)
   if (error != NULL)
     {
       GtkWidget *dialog;
+      GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
       /*
        * We have to show the error in a dialog
        */
       dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                       GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       flags,
                                        GTK_MESSAGE_ERROR,
                                        GTK_BUTTONS_CLOSE,
                                        "%s", error->message);
@@ -725,8 +730,9 @@ save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
       if (error)
         {
           GtkWidget *dialog;
+          GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
           dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                           GTK_DIALOG_DESTROY_WITH_PARENT,
+                                           flags,
                                            GTK_MESSAGE_WARNING,
                                            GTK_BUTTONS_OK,
                                            "%s", error->message);
@@ -950,9 +956,10 @@ _gtr_actions_file_save_all (GtrWindow * window)
       if (error)
         {
           GtkWidget *dialog;
+          GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
 
           dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                           GTK_DIALOG_DESTROY_WITH_PARENT,
+                                           flags,
                                            GTK_MESSAGE_WARNING,
                                            GTK_BUTTONS_OK,
                                            "%s", error->message);
