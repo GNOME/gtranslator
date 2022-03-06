@@ -175,23 +175,16 @@ gtr_po_parse_files_from_dialog (GtkNativeDialog * dialog, GtrWindow * window)
    */
   load_file_list (window, (const GSList *) locations);
   g_slist_free_full (locations, g_object_unref);
-
-  /*
-   * Destroy the dialog 
-   */
-  gtk_native_dialog_destroy (dialog);
 }
 
 
 static void
-gtr_file_chooser_analyse (GtkNativeDialog * dialog,
-                          FileselMode mode, GtrWindow * window)
+gtr_file_chooser_cb (GtkNativeDialog * dialog, guint reply, gpointer user_data)
 {
-  gint reply;
+  GtrWindow *window = GTR_WINDOW (user_data);
 
-  reply = gtk_native_dialog_run (GTK_NATIVE_DIALOG (dialog));
-  if (reply == GTK_RESPONSE_ACCEPT && mode == FILESEL_OPEN)
-    gtr_po_parse_files_from_dialog (GTK_NATIVE_DIALOG (dialog), window);
+  if (reply == GTK_RESPONSE_ACCEPT)
+    gtr_po_parse_files_from_dialog (dialog, window);
 
   gtk_native_dialog_destroy (dialog);
 }
@@ -265,7 +258,8 @@ gtr_open_file_dialog (GtrWindow * window)
                                  _("Open file for translation"),
                                  _gtr_application_get_last_dir (GTR_APP));
 
-  gtr_file_chooser_analyse (GTK_NATIVE_DIALOG (dialog), FILESEL_OPEN, window);
+  g_signal_connect (dialog, "response", G_CALLBACK (gtr_file_chooser_cb), window);
+  gtk_native_dialog_show (dialog);
 }
 
 static void
