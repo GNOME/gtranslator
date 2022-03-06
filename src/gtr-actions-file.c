@@ -314,8 +314,8 @@ save_dialog_response_cb (GtkDialog * dialog,
                                            GTK_MESSAGE_WARNING,
                                            GTK_BUTTONS_OK,
                                            "%s", error->message);
-          gtk_dialog_run (GTK_DIALOG (dialog));
-          gtk_widget_destroy (dialog);
+          g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+          gtk_window_present (GTK_WINDOW (dialog));
           g_clear_error (&error);
           return;
         }
@@ -417,8 +417,8 @@ _upload_file_callback (GObject      *object,
   gtr_notebook_enable_upload (active_notebook, FALSE);
 
 end:
-  gtk_dialog_run (GTK_DIALOG (dialog));
-  gtk_widget_destroy (dialog);
+  g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+  gtk_window_present (GTK_WINDOW (dialog));
   gtk_widget_destroy (upload_dialog);
   g_free (ud);
 }
@@ -603,8 +603,8 @@ gtr_save_current_file_dialog (GtkWidget * widget, GtrWindow * window)
                                        GTK_DIALOG_DESTROY_WITH_PARENT,
                                        GTK_MESSAGE_WARNING,
                                        GTK_BUTTONS_OK, "%s", error->message);
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
+      g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+      gtk_window_present (GTK_WINDOW (dialog));
       g_clear_error (&error);
       return;
     }
@@ -696,8 +696,8 @@ load_file_list (GtrWindow * window, const GSList * locations)
                                        GTK_MESSAGE_ERROR,
                                        GTK_BUTTONS_CLOSE,
                                        "%s", error->message);
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
+      g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+      gtk_window_present (GTK_WINDOW (dialog));
       g_error_free (error);
     }
 
@@ -763,8 +763,8 @@ save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
                                            GTK_MESSAGE_WARNING,
                                            GTK_BUTTONS_OK,
                                            "%s", error->message);
-          gtk_dialog_run (GTK_DIALOG (dialog));
-          gtk_widget_destroy (dialog);
+          g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+          gtk_window_present (GTK_WINDOW (dialog));
           g_clear_error (&error);
 
           return;
@@ -989,8 +989,8 @@ _gtr_actions_file_save_all (GtrWindow * window)
                                            GTK_MESSAGE_WARNING,
                                            GTK_BUTTONS_OK,
                                            "%s", error->message);
-          gtk_dialog_run (GTK_DIALOG (dialog));
-          gtk_widget_destroy (dialog);
+          g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+          gtk_window_present (GTK_WINDOW (dialog));
           g_clear_error (&error);
 
           return;

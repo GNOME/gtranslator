@@ -163,8 +163,8 @@ open_file (GtkWidget *dialog, GtrAlternateLangPanel *panel)
                                          GTK_MESSAGE_ERROR,
                                          GTK_BUTTONS_CLOSE,
                                          "%s", error->message);
-      gtk_dialog_run (GTK_DIALOG (erdialog));
-      gtk_widget_destroy (erdialog);
+      g_signal_connect (erdialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+      gtk_window_present (GTK_WINDOW (erdialog));
       g_error_free (error);
       return;
     }

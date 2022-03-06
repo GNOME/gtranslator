@@ -146,8 +146,8 @@ error_dialog (GtkWindow *parent, const gchar *msg, ...)
                                    GTK_BUTTONS_OK, "%s", tmp);
   g_free (tmp);
 
-  gtk_dialog_run (GTK_DIALOG (dialog));
-  gtk_widget_destroy (dialog);
+  g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static gboolean

@@ -427,8 +427,8 @@ delete_button_clicked (GtkWidget *button, GtrPreferencesDialog *dlg)
                                                     (dialog),
                                                     _("Another profile should be selected as active before"));
 
-          gtk_dialog_run (GTK_DIALOG (dialog));
-          gtk_widget_destroy (dialog);
+          g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+          gtk_window_present (GTK_WINDOW (dialog));
         }
       else
         {
@@ -448,10 +448,9 @@ delete_button_clicked (GtkWidget *button, GtrPreferencesDialog *dlg)
           gtk_dialog_add_button (GTK_DIALOG (dialog),
                                  _("_Delete"), GTK_RESPONSE_YES);
 
-          gtk_dialog_run (GTK_DIALOG (dialog));
-
           g_signal_connect (GTK_DIALOG (dialog), "response",
                             G_CALLBACK (delete_confirm_dialog_cb), dlg);
+          gtk_window_present (GTK_WINDOW (dialog));
         }
     }
 }
