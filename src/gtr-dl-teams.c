@@ -175,6 +175,8 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
   JsonNode *branchesNode;
   JsonNode *domainsNode;
   GtkWidget *dialog;
+  SoupStatus status_code;
+  g_autoptr(GInputStream) stream = NULL;
 
   gtk_widget_hide (priv->file_label);
   gtk_widget_hide (priv->module_state_label);
@@ -193,16 +195,29 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
   module_endpoint = g_strconcat ((const gchar *)API_URL, "modules/", priv->selected_module, NULL);
   msg = soup_message_new ("GET", module_endpoint);
   session = soup_session_new ();
-  soup_session_send_message (session, msg);
+  stream = soup_session_send (session, msg, NULL, &error);
+  status_code = soup_message_get_status (msg);
 
-  if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
+  if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
     {
+      g_autofree gchar *message = NULL;
+
+      if (error)
+        {
+          message = error->message;
+          g_clear_error (&error);
+        }
+      else
+        {
+          message = g_strdup (soup_message_get_reason_phrase (msg));
+        }
+
       dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
                                        GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                        GTK_MESSAGE_WARNING,
                                        GTK_BUTTONS_CLOSE,
                                        "Error loading module info: %s",
-                                       soup_status_get_phrase (msg->status_code));
+                                       message);
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
       return;
@@ -211,7 +226,7 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
   parser = json_parser_new ();
 
   /* Load response body and fill branches and domains, then show widgets */
-  json_parser_load_from_data (parser, msg->response_body->data, msg->response_body->length, &error);
+  json_parser_load_from_stream (parser, stream, NULL, &error);
   node = json_parser_get_root (parser);
 
   object = json_node_get_object(node);
@@ -316,12 +331,12 @@ gtr_dl_teams_load_json (GtrDlTeams *self)
   /* Get team list JSON from DL */
   g_autoptr(SoupSession) session = soup_session_new ();
   g_autoptr(SoupMessage) message = soup_message_new ("GET", g_strconcat ((const gchar *)API_URL, "teams", NULL));
-  soup_session_send_async (session, message, NULL, gtr_dl_teams_parse_teams_json, self);
+  soup_session_send_async (session, message, G_PRIORITY_DEFAULT, NULL, gtr_dl_teams_parse_teams_json, self);
 
   /* Get module list JSON from DL */
   g_autoptr(SoupSession) session_modules = soup_session_new ();
   g_autoptr(SoupMessage) message_modules = soup_message_new ("GET", g_strconcat ((const gchar *)API_URL, "modules", NULL));
-  soup_session_send_async (session_modules, message_modules, NULL, gtr_dl_teams_parse_modules_json, self);
+  soup_session_send_async (session_modules, message_modules, G_PRIORITY_DEFAULT, NULL, gtr_dl_teams_parse_modules_json, self);
 }
 
 void gtr_dl_teams_verify_and_load (GtrDlTeams *self)
@@ -360,6 +375,8 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   char *markup;
   g_autofree char *module_state = NULL;
   GtkWidget *dialog;
+  SoupStatus status_code;
+  g_autoptr(GInputStream) stream = NULL;
 
   /* API endpoint: modules/[module]/branches/[branch]/domains/[domain]/languages/[team] */
   stats_endpoint = g_strconcat ((const gchar *)API_URL,
@@ -375,16 +392,29 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
 
   msg = soup_message_new ("GET", stats_endpoint);
   session = soup_session_new ();
-  soup_session_send_message (session, msg);
+  stream = soup_session_send (session, msg, NULL, &error);
+  status_code = soup_message_get_status (msg);
 
-  if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
+  if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
     {
+      g_autofree gchar *message = NULL;
+
+      if (error)
+        {
+          message = error->message;
+          g_clear_error (&error);
+        }
+      else
+        {
+          message = g_strdup (soup_message_get_reason_phrase (msg));
+        }
+
       dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
                                        GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                        GTK_MESSAGE_WARNING,
                                        GTK_BUTTONS_CLOSE,
                                        "Error loading file info: %s",
-                                       soup_status_get_phrase (msg->status_code));
+                                       message);
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
       return;
@@ -393,7 +423,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   parser = json_parser_new ();
 
   /* Load response body and get path to PO file */
-  json_parser_load_from_data (parser, msg->response_body->data, msg->response_body->length, &error);
+  json_parser_load_from_stream (parser, stream, NULL, &error);
   node = json_parser_get_root (parser);
 
   object = json_node_get_object(node);
@@ -462,7 +492,6 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   GFile *tmp_file = NULL;
   GFileIOStream *iostream = NULL;
   GOutputStream *output = NULL;
-  gsize bytes = 0;
   GtkWidget *dialog;
   gboolean ret = FALSE;
   int file_index = 0;
@@ -472,6 +501,8 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   g_autofree char *file_path = NULL;
   g_autoptr(GFile) dest_file = NULL;
   gboolean reserve_first = FALSE;
+  SoupStatus status_code;
+  GBytes *bytes;
 
   // reserve for translation first
   reserve_first = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
@@ -493,16 +524,29 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   /* Load the file, save as temp; path to file is https://l10n.gnome.org/[priv->file_path] */
   session = soup_session_new ();
   msg = soup_message_new ("GET", g_strconcat (DL_SERVER, g_strcompress(priv->file_path), NULL));
-  soup_session_send_message (session, msg);
+  bytes = soup_session_send_and_read (session, msg, NULL, &error);
+  status_code = soup_message_get_status (msg);
 
-  if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
+  if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
     {
+      g_autofree gchar *message = NULL;
+
+      if (error)
+        {
+          message = error->message;
+          g_clear_error (&error);
+        }
+      else
+        {
+          message = g_strdup (soup_message_get_reason_phrase (msg));
+        }
+
       dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
                                        GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                        GTK_MESSAGE_WARNING,
                                        GTK_BUTTONS_CLOSE,
                                        "Error loading file: %s",
-                                       soup_status_get_phrase (msg->status_code));
+                                       message);
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
       return;
@@ -525,12 +569,10 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
     }
 
   output = g_io_stream_get_output_stream (G_IO_STREAM (iostream));
-  g_output_stream_write_all (output,
-                             msg->response_body->data,
-                             msg->response_body->length,
-                             &bytes,
-                             NULL,
-                             &error);
+  g_output_stream_write_bytes (output,
+                               bytes,
+                               NULL,
+                               &error);
 
   if (error != NULL)
     {
@@ -615,6 +657,9 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
   const char *auth_token = NULL;
   g_autofree char *auth = NULL;
   g_autofree gchar *reserve_endpoint = NULL;
+  SoupStatus status_code;
+  g_autoptr(GInputStream) stream = NULL;
+  GError *error = NULL;
 
   pmanager = gtr_profile_manager_get_default ();
   profile = gtr_profile_manager_get_active_profile (pmanager);
@@ -631,12 +676,26 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
 
   msg = soup_message_new ("POST", reserve_endpoint);
   soup_message_set_flags (msg, SOUP_MESSAGE_NO_REDIRECT);
-  soup_message_headers_append (msg->request_headers, "Authentication", auth);
+  soup_message_headers_append (soup_message_get_request_headers (msg),
+                               "Authentication", auth);
   session = soup_session_new ();
-  soup_session_send_message (session, msg);
+  stream = soup_session_send (session, msg, NULL, &error);
+  status_code = soup_message_get_status (msg);
 
-  if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
+  if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
   {
+    g_autofree gchar *message = NULL;
+
+    if (error)
+      {
+        message = error->message;
+        g_clear_error (&error);
+      }
+    else
+      {
+        message = g_strdup (soup_message_get_reason_phrase (msg));
+      }
+
     dialog = gtk_message_dialog_new_with_markup (
       GTK_WINDOW (priv->main_window),
       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -648,7 +707,7 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
         "<b>token</b> correctly in your profile or you don't have "
         "permissions to reserve this module."
       ),
-      soup_status_get_phrase (msg->status_code));
+      message);
     gtk_dialog_run (GTK_DIALOG (dialog));
     gtk_widget_destroy (dialog);
     return FALSE;

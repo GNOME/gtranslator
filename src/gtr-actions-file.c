@@ -49,6 +49,10 @@
 static void load_file_list (GtrWindow * window, const GSList * uris);
 static GList * get_modified_documents (GtrWindow * window);
 
+typedef struct {
+  SoupMessage *msg;
+  GtkWidget   *dialog;
+} UserData;
 
 /*
  * The main file opening function. Checks that the file isn't already open,
@@ -343,22 +347,30 @@ confirm_overwrite_callback (GtkFileChooser * dialog, gpointer data)
 }
 
 static void
-_upload_file_callback (SoupSession *session,
-                       SoupMessage *msg,
-                       gpointer     user_data)
+_upload_file_callback (GObject      *object,
+                       GAsyncResult *result,
+                       gpointer      user_data)
 {
+  UserData *ud = user_data;
+  g_autoptr(GInputStream) stream = NULL;
   GtkWidget *dialog;
   GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
   GtrNotebook *active_notebook;
 
-  GtkWidget *upload_dialog = user_data;
+  GtkWidget *upload_dialog = ud->dialog;
   GtkWidget *window = gtr_upload_dialog_get_parent (GTR_UPLOAD_DIALOG (upload_dialog));
+  SoupSession *session = SOUP_SESSION (object);
+  SoupStatus status_code = soup_message_get_status (ud->msg);
+
+  GError *error = NULL;
+
+  stream = soup_session_send_finish (session, result, &error);
 
   active_notebook = gtr_window_get_notebook (GTR_WINDOW (window));
 
-  if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
+  if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
     {
-      if (msg->status_code == 403)
+      if (status_code == SOUP_STATUS_FORBIDDEN)
         {
           dialog = gtk_message_dialog_new (GTK_WINDOW (window),
                                            flags,
@@ -367,6 +379,18 @@ _upload_file_callback (SoupSession *session,
                                            _("This file has already been uploaded"));
           gtr_notebook_enable_upload (active_notebook, FALSE);
           goto end;
+        }
+
+      g_autofree gchar *message = NULL;
+
+      if (error)
+        {
+          message = error->message;
+          g_clear_error (&error);
+        }
+      else
+        {
+          message = g_strdup (soup_status_get_phrase (status_code));
         }
 
       dialog = gtk_message_dialog_new_with_markup (
@@ -380,7 +404,7 @@ _upload_file_callback (SoupSession *session,
           "<b>token</b> correctly in your profile or you don't have "
           "permissions to upload this module."
         ),
-        soup_status_get_phrase (msg->status_code));
+        message);
       goto end;
     }
 
@@ -396,6 +420,7 @@ end:
   gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_destroy (dialog);
   gtk_widget_destroy (upload_dialog);
+  g_free (ud);
 }
 
 void
@@ -405,12 +430,12 @@ gtr_upload_file (GtkWidget *upload_dialog,
 {
   GtrTab *tab;
   GtrPo *po;
+  GBytes *bytes;
   GError *error = NULL;
   GtrProfileManager *pmanager = NULL;
   GtrProfile *profile;
   GtrHeader *header;
   g_autoptr (SoupMultipart) mpart = NULL;
-  g_autoptr (SoupBuffer) buffer = NULL;
 
   SoupMessage *msg = NULL;
   static SoupSession *session = NULL;
@@ -441,16 +466,18 @@ gtr_upload_file (GtkWidget *upload_dialog,
   /* Get file content */
   tab = gtr_window_get_active_tab (window);
   po = gtr_tab_get_po (tab);
+  filename = g_file_get_basename (gtr_po_get_location (po));
   g_file_load_contents (gtr_po_get_location (po), NULL, &content, &size, NULL,
                         &error);
   if (error != NULL) {
     g_warning ("Error opening file %s: %s", filename, (error)->message);
     g_error_free (error);
   }
+  bytes = g_bytes_new (content, size);
   header = gtr_po_get_header (po);
 
   /* Check mimetype */
-  mime_type = g_strdup (g_content_type_get_mime_type(content));
+  mime_type = g_strdup (g_content_type_get_mime_type (content));
 
   /* Get the authentication token from the user profile */
   pmanager = gtr_profile_manager_get_default ();
@@ -484,25 +511,28 @@ gtr_upload_file (GtkWidget *upload_dialog,
 
   /* Init multipart container */
   mpart = soup_multipart_new (SOUP_FORM_MIME_TYPE_MULTIPART);
-  buffer = soup_buffer_new (SOUP_MEMORY_COPY, content, size);
-  soup_multipart_append_form_file (mpart, "file", filename,
-                                   mime_type, buffer);
+  soup_multipart_append_form_file (mpart, "file", filename, mime_type, bytes);
   if (upload_comment)
     soup_multipart_append_form_string (mpart, "comment", upload_comment);
 
   /* Get the associated message */
-  msg = soup_form_request_new_from_multipart (upload_endpoint, mpart);
+  msg = soup_message_new_from_multipart (upload_endpoint, mpart);
   soup_message_set_flags (msg, SOUP_MESSAGE_NO_REDIRECT);
 
   /* Append the authentication header*/
-  soup_message_headers_append (msg->request_headers, "Authentication", auth);
+  soup_message_headers_append (soup_message_get_request_headers (msg),
+                               "Authentication", auth);
 
   gtr_upload_dialog_set_loading (GTR_UPLOAD_DIALOG (upload_dialog), TRUE);
 
   if (!session)
     session = soup_session_new ();
 
-  soup_session_queue_message (session, msg, _upload_file_callback, upload_dialog);
+  UserData *ud;
+  ud = g_new0 (UserData, 1);
+  ud->dialog = upload_dialog;
+  ud->msg = msg;
+  soup_session_send_async (session, msg, G_PRIORITY_DEFAULT, NULL, _upload_file_callback, ud);
 }
 
 /*
