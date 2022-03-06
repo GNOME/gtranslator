@@ -66,6 +66,24 @@ static guint signals[LAST_SIGNAL] = { 0 };
 static void buffer_end_user_action (GtkTextBuffer *buffer, GtrContextPanel *panel);
 static void reload_values (GtrContextPanel *panel);
 
+typedef struct {
+  GtrContextPanel *panel;
+  GtkTextBuffer   *text_buffer;
+} DialogData;
+
+static void
+dialog_response_cb (GtkDialog *dialog, guint response, gpointer user_data)
+{
+  DialogData *dd = user_data;
+
+  if (response == GTK_RESPONSE_ACCEPT)
+    buffer_end_user_action (dd->text_buffer, dd->panel);
+
+  gtk_widget_destroy (GTK_WIDGET (dialog));
+  reload_values (dd->panel);
+  g_free (dd);
+}
+
 static void
 setup_notes_edition (GtrContextPanel *panel)
 {
@@ -75,7 +93,7 @@ setup_notes_edition (GtrContextPanel *panel)
   GtkBox *dialog_area;
   GtkWidget *text_view;
   GtkTextBuffer *text_buffer = gtk_text_buffer_new (NULL);;
-  gint result;
+  DialogData *dd;
 
   priv = gtr_context_panel_get_instance_private (panel);
 
@@ -116,20 +134,12 @@ setup_notes_edition (GtrContextPanel *panel)
   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
   gtk_window_set_deletable (GTK_WINDOW (dialog), FALSE);
 
+  dd = g_new0 (DialogData, 1);
+  dd->panel = panel;
+  dd->text_buffer = text_buffer;
+
+  g_signal_connect (dialog, "response", G_CALLBACK (dialog_response_cb), dd);
   gtk_widget_show_all (dialog);
-  result = gtk_dialog_run (GTK_DIALOG (dialog));
-
-  switch (result)
-    {
-    case GTK_RESPONSE_ACCEPT:
-      buffer_end_user_action (text_buffer, panel);
-      break;
-    default:
-      break;
-    }
-
-  gtk_widget_destroy (dialog);
-  reload_values(panel);
 }
 
 static void
