@@ -296,6 +296,8 @@ save_dialog_response_cb (GtkNativeDialog * dialog,
     {
       gtr_po_set_location (po, location);
 
+      g_object_unref (location);
+
       gtr_po_save_file (po, &error);
 
       if (error)
@@ -315,7 +317,10 @@ save_dialog_response_cb (GtkNativeDialog * dialog,
       /* We have to change the state of the tab */
       gtr_po_set_state (po, GTR_PO_STATE_SAVED);
     }
-  g_object_unref (location);
+  else
+    {
+      g_object_unref (location);
+    }
 }
 
 static void
