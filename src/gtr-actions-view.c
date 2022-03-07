@@ -18,7 +18,7 @@
 #include "gtr-actions.h"
 
 void
-gtr_actions_view_context (GtkAction * action, GtrWindow * window)
+gtr_actions_view_context (GtrWindow * window)
 {
   GtrTab *tab;
   GtkWidget *context;

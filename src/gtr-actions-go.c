@@ -31,7 +31,7 @@
 
 
 void
-gtr_message_go_to_first (GtkAction * action, GtrWindow * window)
+gtr_message_go_to_first (GtrWindow * window)
 {
   GtrTab *current;
 
@@ -40,7 +40,7 @@ gtr_message_go_to_first (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtr_message_go_to_previous (GtkAction * action, GtrWindow * window)
+gtr_message_go_to_previous (GtrWindow * window)
 {
   GtrTab *current;
 
@@ -49,7 +49,7 @@ gtr_message_go_to_previous (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtr_message_go_to_next (GtkAction * action, GtrWindow * window)
+gtr_message_go_to_next (GtrWindow * window)
 {
   GtrTab *current;
 
@@ -58,7 +58,7 @@ gtr_message_go_to_next (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtr_message_go_to_last (GtkAction * action, GtrWindow * window)
+gtr_message_go_to_last (GtrWindow * window)
 {
   GtrTab *current;
 
@@ -67,7 +67,7 @@ gtr_message_go_to_last (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtr_message_go_to_next_fuzzy (GtkAction * action, GtrWindow * window)
+gtr_message_go_to_next_fuzzy (GtrWindow * window)
 {
   GtrTab *current;
 
@@ -76,7 +76,7 @@ gtr_message_go_to_next_fuzzy (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtr_message_go_to_prev_fuzzy (GtkAction * action, GtrWindow * window)
+gtr_message_go_to_prev_fuzzy (GtrWindow * window)
 {
   GtrTab *current;
 
@@ -85,7 +85,7 @@ gtr_message_go_to_prev_fuzzy (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtr_message_go_to_next_untranslated (GtkAction * action, GtrWindow * window)
+gtr_message_go_to_next_untranslated (GtrWindow * window)
 {
   GtrTab *current;
 
@@ -94,7 +94,7 @@ gtr_message_go_to_next_untranslated (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtr_message_go_to_prev_untranslated (GtkAction * action, GtrWindow * window)
+gtr_message_go_to_prev_untranslated (GtrWindow * window)
 {
   GtrTab *current;
 
@@ -103,8 +103,7 @@ gtr_message_go_to_prev_untranslated (GtkAction * action, GtrWindow * window)
 }
 
 void
-gtr_message_go_to_next_fuzzy_or_untranslated (GtkAction * action,
-                                              GtrWindow * window)
+gtr_message_go_to_next_fuzzy_or_untranslated (GtrWindow * window)
 {
   GtrTab *current;
 
@@ -113,8 +112,7 @@ gtr_message_go_to_next_fuzzy_or_untranslated (GtkAction * action,
 }
 
 void
-gtr_message_go_to_prev_fuzzy_or_untranslated (GtkAction * action,
-                                              GtrWindow * window)
+gtr_message_go_to_prev_fuzzy_or_untranslated (GtrWindow * window)
 {
   GtrTab *current;
 
@@ -123,7 +121,7 @@ gtr_message_go_to_prev_fuzzy_or_untranslated (GtkAction * action,
 }
 
 void
-gtr_message_jump (GtkAction * action, GtrWindow * window)
+gtr_message_jump (GtrWindow * window)
 {
   gtr_show_jump_dialog (window);
 }

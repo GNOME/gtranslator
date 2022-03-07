@@ -247,7 +247,7 @@ gtr_want_to_save_current_dialog (GtrWindow * window)
  * The "Open file" dialog.
  */
 void
-gtr_open_file_dialog (GtkAction * action, GtrWindow * window)
+gtr_open_file_dialog (GtrWindow * window)
 {
   GtkWidget *dialog = NULL;
   g_autoptr (GList) list = NULL;
@@ -514,7 +514,7 @@ gtr_upload_file (GtkWidget *upload_dialog,
  *
  */
 void
-gtr_upload_file_dialog (GtkAction * action, GtrWindow * window)
+gtr_upload_file_dialog (GtrWindow * window)
 {
   GtrUploadDialog *dialog = gtr_upload_dialog_new (GTK_WIDGET (window));
 
@@ -530,7 +530,7 @@ gtr_upload_file_dialog (GtkAction * action, GtrWindow * window)
  * "Save as" dialog.
  */
 void
-gtr_save_file_as_dialog (GtkAction * action, GtrWindow * window)
+gtr_save_file_as_dialog (GtrWindow * window)
 {
   GtkWidget *dialog;
   GtrTab *current_page;
@@ -855,7 +855,7 @@ gtr_close_tab (GtrTab * tab, GtrWindow * window)
 }
 
 void
-gtr_file_close (GtkAction * widget, GtrWindow * window)
+gtr_file_close (GtrWindow * window)
 {
   GtrTab *tab;
 
@@ -926,7 +926,7 @@ close_all_documents (GtrWindow * window, gboolean logout_mode)
 }
 
 void
-gtr_file_quit (GtkAction * action, GtrWindow * window)
+gtr_file_quit (GtrWindow * window)
 {
   g_object_set_data (G_OBJECT (window),
                      GTR_IS_CLOSING_ALL, GINT_TO_POINTER (1));
@@ -935,13 +935,13 @@ gtr_file_quit (GtkAction * action, GtrWindow * window)
 }
 
 void
-_gtr_actions_file_close_all (GtkAction * action, GtrWindow * window)
+_gtr_actions_file_close_all (GtrWindow * window)
 {
   close_all_documents (window, FALSE);
 }
 
 void
-_gtr_actions_file_save_all (GtkAction * action, GtrWindow * window)
+_gtr_actions_file_save_all (GtrWindow * window)
 {
   GList *list, *l;
 

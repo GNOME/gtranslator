@@ -125,7 +125,7 @@ static gboolean
 on_window_delete_event_cb (GtrWindow * window,
                            GdkEvent * event, GtrApplication * app)
 {
-  gtr_file_quit (NULL, window);
+  gtr_file_quit (window);
   return TRUE;
 }
 
@@ -309,7 +309,7 @@ copy_text_activated (GSimpleAction *action,
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  gtr_message_copy_to_translation (NULL, priv->active_window);
+  gtr_message_copy_to_translation (priv->active_window);
 }
 
 static void
@@ -329,7 +329,7 @@ edit_header_activated (GSimpleAction *action,
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_actions_edit_header (NULL, priv->active_window);
+  gtr_actions_edit_header (priv->active_window);
 }
 
 static void
@@ -399,7 +399,7 @@ quit_activated (GSimpleAction *action,
 
   for (l = windows; l != NULL; l = g_list_next (l))
     {
-      gtr_file_quit (NULL, l->data);
+      gtr_file_quit (l->data);
     }
 }
 
@@ -410,7 +410,7 @@ upload_file_activated (GSimpleAction *action,
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_upload_file_dialog (NULL, priv->active_window);
+  gtr_upload_file_dialog (priv->active_window);
 }
 
 static void
@@ -420,7 +420,7 @@ saveas_activated (GSimpleAction *action,
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_save_file_as_dialog (NULL, priv->active_window);
+  gtr_save_file_as_dialog (priv->active_window);
 }
 
 static void
@@ -440,7 +440,7 @@ open_activated (GSimpleAction *action,
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_open_file_dialog (NULL, priv->active_window);
+  gtr_open_file_dialog (priv->active_window);
 }
 
 static void
@@ -470,7 +470,7 @@ undo_activated (GSimpleAction *action,
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_actions_edit_undo (NULL, priv->active_window);
+  gtr_actions_edit_undo (priv->active_window);
 }
 
 static void
@@ -480,7 +480,7 @@ redo_activated (GSimpleAction *action,
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_actions_edit_redo (NULL, priv->active_window);
+  gtr_actions_edit_redo (priv->active_window);
 }
 
 static void
@@ -490,7 +490,7 @@ prev_activated (GSimpleAction *action,
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_message_go_to_previous (NULL, priv->active_window);
+  gtr_message_go_to_previous (priv->active_window);
 }
 
 static void
@@ -500,7 +500,7 @@ next_activated (GSimpleAction *action,
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_message_go_to_next (NULL, priv->active_window);
+  gtr_message_go_to_next (priv->active_window);
 }
 
 static void
@@ -510,7 +510,7 @@ prev_no_activated (GSimpleAction *action,
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_message_go_to_prev_fuzzy_or_untranslated (NULL, priv->active_window);
+  gtr_message_go_to_prev_fuzzy_or_untranslated (priv->active_window);
 }
 
 static void
@@ -520,7 +520,7 @@ next_no_activated (GSimpleAction *action,
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_message_go_to_next_fuzzy_or_untranslated (NULL, priv->active_window);
+  gtr_message_go_to_next_fuzzy_or_untranslated (priv->active_window);
 }
 
 static void
@@ -553,7 +553,7 @@ toggle_fuzzy_activated (GSimpleAction *action,
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
   GtrWindow *w = GTR_WINDOW (priv->active_window);
-  gtr_message_status_toggle_fuzzy (NULL, w);
+  gtr_message_status_toggle_fuzzy (w);
 }
 
 static void

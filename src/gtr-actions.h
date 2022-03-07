@@ -46,85 +46,78 @@ struct _LastSearchData
 
 gboolean gtr_want_to_save_current_dialog (GtrWindow * window);
 
-void gtr_open_file_dialog (GtkAction * action, GtrWindow * window);
+void gtr_open_file_dialog (GtrWindow * window);
 
 void gtr_save_current_file_dialog (GtkWidget * widget, GtrWindow * window);
 
-void gtr_save_file_as_dialog (GtkAction * action, GtrWindow * window);
+void gtr_save_file_as_dialog (GtrWindow * window);
 
-void gtr_upload_file_dialog (GtkAction * action, GtrWindow * window);
+void gtr_upload_file_dialog (GtrWindow * window);
 
 gboolean gtr_open (GFile * location, GtrWindow * window, GError ** error);
 
 void gtr_close_tab (GtrTab * tab, GtrWindow * window);
 
-void gtr_file_close (GtkAction * widget, GtrWindow * window);
+void gtr_file_close (GtrWindow * window);
 
-void gtr_file_quit (GtkAction * action, GtrWindow * window);
+void gtr_file_quit (GtrWindow * window);
 
 void gtr_actions_load_locations (GtrWindow * window,
                                  const GSList * locations);
 
-void _gtr_actions_file_close_all (GtkAction * action, GtrWindow * window);
+void _gtr_actions_file_close_all (GtrWindow * window);
 
-void _gtr_actions_file_save_all (GtkAction * action, GtrWindow * window);
+void _gtr_actions_file_save_all (GtrWindow * window);
 
 /*Edit*/
-void gtr_actions_edit_undo (GtkAction * action, GtrWindow * window);
+void gtr_actions_edit_undo (GtrWindow * window);
 
-void gtr_actions_edit_redo (GtkAction * action, GtrWindow * window);
+void gtr_actions_edit_redo (GtrWindow * window);
 
-void gtr_actions_edit_cut (GtkAction * action, GtrWindow * window);
+void gtr_actions_edit_cut (GtrWindow * window);
 
-void gtr_actions_edit_copy (GtkAction * action, GtrWindow * window);
+void gtr_actions_edit_copy (GtrWindow * window);
 
-void gtr_actions_edit_paste (GtkAction * action, GtrWindow * window);
+void gtr_actions_edit_paste (GtrWindow * window);
 
-void gtr_actions_edit_header (GtkAction * action, GtrWindow * window);
+void gtr_actions_edit_header (GtrWindow * window);
 
-void gtr_message_copy_to_translation (GtkAction * action, GtrWindow * window);
+void gtr_message_copy_to_translation (GtrWindow * window);
 
-void gtr_message_status_toggle_fuzzy (GtkAction * action, GtrWindow * window);
+void gtr_message_status_toggle_fuzzy (GtrWindow * window);
 
-void gtr_actions_edit_clear (GtkAction * action, GtrWindow * window);
+void gtr_actions_edit_clear (GtrWindow * window);
 
 /* View */
-void gtr_actions_view_context (GtkAction * action, GtrWindow * window);
+void gtr_actions_view_context (GtrWindow * window);
 
 /*Go*/
-void gtr_message_go_to_first (GtkAction * action, GtrWindow * window);
+void gtr_message_go_to_first (GtrWindow * window);
 
-void gtr_message_go_to_previous (GtkAction * action, GtrWindow * window);
+void gtr_message_go_to_previous (GtrWindow * window);
 
-void gtr_message_go_to_next (GtkAction * action, GtrWindow * window);
+void gtr_message_go_to_next (GtrWindow * window);
 
-void gtr_message_go_to_last (GtkAction * action, GtrWindow * window);
+void gtr_message_go_to_last (GtrWindow * window);
 
-void gtr_message_go_to_next_fuzzy (GtkAction * action, GtrWindow * window);
+void gtr_message_go_to_next_fuzzy (GtrWindow * window);
 
-void gtr_message_go_to_prev_fuzzy (GtkAction * action, GtrWindow * window);
+void gtr_message_go_to_prev_fuzzy (GtrWindow * window);
 
-void gtr_message_go_to_next_untranslated
-  (GtkAction * action, GtrWindow * window);
+void gtr_message_go_to_next_untranslated (GtrWindow * window);
 
-void gtr_message_go_to_prev_untranslated
-  (GtkAction * action, GtrWindow * window);
+void gtr_message_go_to_prev_untranslated (GtrWindow * window);
 
-void gtr_message_go_to_next_fuzzy_or_untranslated
-  (GtkAction * action, GtrWindow * window);
+void gtr_message_go_to_next_fuzzy_or_untranslated (GtrWindow * window);
 
-void gtr_message_go_to_prev_fuzzy_or_untranslated
-  (GtkAction * action, GtrWindow * window);
+void gtr_message_go_to_prev_fuzzy_or_untranslated (GtrWindow * window);
 
-void gtr_message_jump (GtkAction * action,
-                       GtrWindow * window);
+void gtr_message_jump (GtrWindow * window);
 
 /*Search*/
-void _gtr_actions_search_find (GtkAction * action,
-                               GtrWindow * window);
+void _gtr_actions_search_find (GtrWindow * window);
 
-void _gtr_actions_search_replace (GtkAction * action,
-                                  GtrWindow * window);
+void _gtr_actions_search_replace (GtrWindow * window);
 
 void gtr_page_stop_search (GtrTab * tab,
                            GtrSearchBar * search_bar);
@@ -169,14 +162,12 @@ void search_bar_response_cb (GtrSearchBar * dialog,
                              GtrWindow    * window);
 
 /*Documents*/
-void gtr_actions_documents_next_document
-  (GtkAction * action, GtrWindow * window);
+void gtr_actions_documents_next_document (GtrWindow * window);
 
-void gtr_actions_documents_previous_document
-  (GtkAction * action, GtrWindow * window);
+void gtr_actions_documents_previous_document (GtrWindow * window);
 
 /*Help*/
-void gtr_window_show_home_page (GtkAction * action, gpointer useless);
+void gtr_window_show_home_page (gpointer useless);
 
 G_END_DECLS
 #endif
