@@ -33,8 +33,6 @@
 
 #include <glib/gi18n.h>
 
-#define API_URL "https://l10n.gnome.org/api/v1/"
-
 typedef struct
 {
   GtkWidget *titlebar;

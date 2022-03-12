@@ -46,8 +46,6 @@
 #define GTR_TAB_SAVE_AS    "gtr-tab-save-as"
 #define GTR_IS_CLOSING_ALL "gtr-is-closing-all"
 
-#define API_URL "https://l10n.gnome.org/api/v1/"
-
 static void load_file_list (GtrWindow * window, const GSList * uris);
 static GList * get_modified_documents (GtrWindow * window);
 

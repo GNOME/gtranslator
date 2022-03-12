@@ -64,6 +64,7 @@ set_defines = [
   ['PROFILE', get_option('profile')],
   # i18
   ['GETTEXT_PACKAGE', meson.project_name()],
+  ['API_URL', get_option('dl_endpoint')],
 ]
 
 foreach define: set_defines
