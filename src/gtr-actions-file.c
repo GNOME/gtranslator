@@ -405,7 +405,6 @@ gtr_upload_file (GtkWidget *upload_dialog,
 {
   GtrTab *tab;
   GtrPo *po;
-  GMappedFile *mapped;
   GError *error = NULL;
   GtrProfileManager *pmanager = NULL;
   GtrProfile *profile;
@@ -416,7 +415,7 @@ gtr_upload_file (GtkWidget *upload_dialog,
   SoupMessage *msg = NULL;
   static SoupSession *session = NULL;
 
-  const gchar *content = NULL;
+  g_autofree gchar *content = NULL;
   g_autofree gchar *mime_type = NULL;
   g_autofree gchar *filename = NULL;
   g_autofree gchar *upload_endpoint = NULL;
@@ -442,13 +441,12 @@ gtr_upload_file (GtkWidget *upload_dialog,
   /* Get file content */
   tab = gtr_window_get_active_tab (window);
   po = gtr_tab_get_po (tab);
-  filename = g_file_get_path (gtr_po_get_location (po));
-  mapped = g_mapped_file_new (filename, FALSE, &error);
+  g_file_load_contents (gtr_po_get_location (po), NULL, &content, &size, NULL,
+                        &error);
   if (error != NULL) {
     g_warning ("Error opening file %s: %s", filename, (error)->message);
+    g_error_free (error);
   }
-  content = g_mapped_file_get_contents (mapped);
-  size = g_mapped_file_get_length (mapped);
   header = gtr_po_get_header (po);
 
   /* Check mimetype */
