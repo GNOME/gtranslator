@@ -477,7 +477,7 @@ gtr_upload_file (GtkWidget *upload_dialog,
   header = gtr_po_get_header (po);
 
   /* Check mimetype */
-  mime_type = g_strdup (g_content_type_get_mime_type (content));
+  mime_type = g_content_type_guess (filename, (const guchar *) content, size, NULL);
 
   /* Get the authentication token from the user profile */
   pmanager = gtr_profile_manager_get_default ();
