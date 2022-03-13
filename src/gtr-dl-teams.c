@@ -492,7 +492,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
 
   /* Load the file, save as temp; path to file is https://l10n.gnome.org/[priv->file_path] */
   session = soup_session_new ();
-  msg = soup_message_new ("GET", g_strconcat ("https://l10n.gnome.org", g_strcompress(priv->file_path), NULL));
+  msg = soup_message_new ("GET", g_strconcat (DL_SERVER, g_strcompress(priv->file_path), NULL));
   soup_session_send_message (session, msg);
 
   if (!SOUP_STATUS_IS_SUCCESSFUL (msg->status_code))
