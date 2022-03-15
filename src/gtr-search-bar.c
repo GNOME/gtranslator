@@ -33,7 +33,6 @@ struct _GtrSearchBar
   GtkBin                  parent_instance;
 
   GBindingGroup           *search_bindings;
-  GtkSearchEntry          *search;
 
   GObject                 *search_entry_tag;
 
@@ -397,8 +396,7 @@ maybe_escape_regex (GBinding     *binding,
     {
       g_autofree gchar *unescaped = NULL;
 
-      if (self->search != NULL)
-        entry_text = unescaped = gtk_source_utils_unescape_search_text (entry_text);
+      entry_text = unescaped = gtk_source_utils_unescape_search_text (entry_text);
 
       g_value_set_string (to_value, entry_text);
     }
@@ -457,7 +455,6 @@ gtr_search_bar_destroy (GtkWidget *widget)
   GtrSearchBar *self = (GtrSearchBar *)widget;
 
   g_clear_object (&self->search_bindings);
-  g_clear_object (&self->search);
   g_clear_object (&self->search_entry_tag);
 
   GTK_WIDGET_CLASS (gtr_search_bar_parent_class)->destroy (widget);
@@ -680,14 +677,6 @@ gtr_search_bar_init (GtrSearchBar *self)
                             "stop-search",
                             G_CALLBACK (search_entry_stop_search),
                             self);
-}
-
-GtkSearchEntry *
-gtr_search_bar_get_search (GtrSearchBar *self)
-{
-  g_return_val_if_fail (GTR_IS_SEARCH_BAR (self), NULL);
-
-  return self->search;
 }
 
 void
