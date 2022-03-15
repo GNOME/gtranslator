@@ -16,10 +16,13 @@
             <property name="row_spacing">8</property>
             <property name="column_spacing">8</property>
             <child>
-              <object class="GtkSearchEntry" id="search_entry">
+              <object class="GtkEntry" id="search_entry">
                 <property name="visible">true</property>
                 <property name="can-focus">true</property>
                 <property name="hexpand">true</property>
+                <property name="primary_icon_name">edit-find-symbolic</property>
+                <property name="primary_icon_activatable">false</property>
+                <property name="primary_icon_sensitive">false</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -44,7 +47,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkSearchEntry" id="replace_entry">
+              <object class="GtkEntry" id="replace_entry">
                 <property name="visible">false</property>
                 <property name="can-focus">true</property>
                 <property name="width-chars">20</property>

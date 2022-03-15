@@ -41,8 +41,8 @@ struct _GtrSearchBar
   GtkButton               *replace_button;
   GtkButton               *previous_button;
   GtkButton               *next_button;
-  GtkSearchEntry          *replace_entry;
-  GtkSearchEntry          *search_entry;
+  GtkEntry                *replace_entry;
+  GtkEntry                *search_entry;
   GtkGrid                 *search_options;
   GtkCheckButton          *whole_word;
   GtkCheckButton          *wrap_around_button;
@@ -441,10 +441,10 @@ gtr_search_bar_real_stop_search (GtrSearchBar *self)
 
 static void
 search_entry_stop_search (GtrSearchBar *self,
-                          GtkSearchEntry     *entry)
+                          GtkEntry     *entry)
 {
   g_assert (GTR_IS_SEARCH_BAR (self));
-  g_assert (GTK_IS_SEARCH_ENTRY (entry));
+  g_assert (GTK_IS_ENTRY (entry));
 
   g_signal_emit (self, signals [STOP_SEARCH], 0);
 }
