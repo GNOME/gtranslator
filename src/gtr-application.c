@@ -162,6 +162,15 @@ on_window_destroy_cb (GtrWindow *window, GtrApplication *app)
     set_active_window (app, windows != NULL ? windows->data : NULL);
 }
 
+static int
+handle_local_options_cb (GApplication *application, GVariantDict *options, gpointer user_data) {
+  if (g_variant_dict_contains (options, "version")) {
+    g_print ("%s - %s\n", PACKAGE, PACKAGE_VERSION);
+    return 0;
+  }
+  return -1;
+}
+
 static void
 gtr_application_init (GtrApplication *application)
 {
@@ -172,6 +181,15 @@ gtr_application_init (GtrApplication *application)
   priv->active_window = NULL;
   priv->last_dir = NULL;
   priv->first_run = FALSE;
+
+  GOptionEntry options[] = {
+      {"version", 'v', 0, G_OPTION_ARG_NONE, NULL, "Print version information and exit", NULL},
+      {NULL}
+  };
+
+  g_application_add_main_option_entries (application, options);
+
+  g_signal_connect (application, "handle-local-options", handle_local_options_cb, NULL);
 
   /* Creating config folder */
   ensure_user_config_dir (); /* FIXME: is this really needed ? */
