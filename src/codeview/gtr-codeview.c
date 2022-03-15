@@ -157,14 +157,17 @@ real_path (const gchar *path)
 static int
 get_line_for_text (const gchar *path, const gchar *msgid)
 {
+  GFile *file;
   gchar *content, *str_found, *i, *escaped;
   int result;
+
+  file = g_file_new_for_path (path);
 
   content = NULL;
   result = 1;
   escaped = g_markup_escape_text (msgid, -1);
 
-  if (!g_file_get_contents (path, &content, NULL, NULL))
+  if (!g_file_load_contents (file, NULL, &content, NULL, NULL, NULL))
     goto out;
 
   i = content;

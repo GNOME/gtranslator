@@ -152,17 +152,20 @@ error_dialog (GtkWindow *parent, const gchar *msg, ...)
 
 static gboolean
 gtk_source_buffer_load_file (GtkSourceBuffer *source_buffer,
-                             const gchar     *filename,
+                             GFile           *file,
                              GError         **error)
 {
   GtkTextIter iter;
   gchar *buffer;
   GError *error_here = NULL;
+  g_autofree char *filename = NULL;
 
   g_return_val_if_fail (GTK_SOURCE_IS_BUFFER (source_buffer), FALSE);
-  g_return_val_if_fail (filename != NULL, FALSE);
+  g_return_val_if_fail (G_IS_FILE (file), FALSE);
 
-  if (!g_file_get_contents (filename, &buffer, NULL, &error_here))
+  filename = g_file_get_basename (file);
+
+  if (!g_file_load_contents (file, NULL, &buffer, NULL, NULL, &error_here))
     {
       error_dialog (NULL, "%s\nFile %s", error_here->message, filename);
       g_propagate_error (error, error_here);
@@ -313,15 +316,14 @@ open_file (GtkSourceBuffer *buffer, const gchar *filename)
   gchar *freeme = NULL;
   gboolean success = FALSE;
   GFile *file;
-  gchar *path;
 
   file = g_file_new_for_path (filename);
-  path = g_file_get_path (file);
-  g_object_unref (file);
 
   remove_all_marks (buffer);
 
-  success = gtk_source_buffer_load_file (buffer, path, NULL);
+  success = gtk_source_buffer_load_file (buffer, file, NULL);
+
+  g_object_unref (file);
 
   if (!success)
     goto out;
