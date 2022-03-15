@@ -20,7 +20,6 @@
 
 #include "config.h"
 
-#include <dazzle.h>
 #include <glib/gi18n.h>
 
 #include "gtr-search-bar.h"
@@ -31,10 +30,9 @@
 
 struct _GtrSearchBar
 {
-  DzlBin                  parent_instance;
+  GtkBin                  parent_instance;
 
-  DzlSignalGroup          *search_signals;
-  DzlBindingGroup         *search_bindings;
+  GBindingGroup           *search_bindings;
   GtkSearchEntry          *search;
 
   GObject                 *search_entry_tag;
@@ -55,8 +53,6 @@ struct _GtrSearchBar
 
   GtrWindow               *active_window;
 
-  guint                    match_source;
-
   guint                    show_options : 1;
   guint                    replace_mode : 1;
 };
@@ -73,7 +69,7 @@ enum {
   N_SIGNALS
 };
 
-G_DEFINE_FINAL_TYPE (GtrSearchBar, gtr_search_bar, DZL_TYPE_BIN)
+G_DEFINE_FINAL_TYPE (GtrSearchBar, gtr_search_bar, GTK_TYPE_BIN)
 
 static GParamSpec *properties [N_PROPS];
 static guint signals [N_SIGNALS];
@@ -440,62 +436,6 @@ gtr_search_bar_grab_focus (GtkWidget *widget)
 }
 
 static void
-search_entry_populate_popup (GtrSearchBar *self,
-                             GtkWidget    *widget,
-                             GtkEntry     *entry)
-{
-  g_assert (GTR_IS_SEARCH_BAR (self));
-  g_assert (GTK_IS_MENU (widget));
-  g_assert (GTK_IS_ENTRY (entry));
-
-  if (GTK_IS_MENU (widget))
-    {
-      g_autoptr(DzlPropertiesGroup) group = NULL;
-
-      GtkWidget *item;
-      GtkWidget *sep;
-      guint pos = 0;
-
-      item = gtk_check_menu_item_new_with_label (_("Case sensitive"));
-      gtk_actionable_set_action_name (GTK_ACTIONABLE (item), "search-settings.case-sensitive");
-      gtk_menu_shell_insert (GTK_MENU_SHELL (widget), item, pos++);
-      gtk_widget_show (item);
-
-      item = gtk_check_menu_item_new_with_label (_("Match whole word only"));
-      gtk_actionable_set_action_name (GTK_ACTIONABLE (item), "search-settings.at-word-boundaries");
-      gtk_menu_shell_insert (GTK_MENU_SHELL (widget), item, pos++);
-      gtk_widget_show (item);
-
-      item = gtk_check_menu_item_new_with_label (_("Wrap around"));
-      gtk_actionable_set_action_name (GTK_ACTIONABLE (item), "search-settings.wrap-around");
-      gtk_menu_shell_insert (GTK_MENU_SHELL (widget), item, pos++);
-      gtk_widget_show (item);
-
-      item = gtk_check_menu_item_new_with_label (_("Original text"));
-      gtk_actionable_set_action_name (GTK_ACTIONABLE (item), "search-settings.at-original-text");
-      gtk_menu_shell_insert (GTK_MENU_SHELL (widget), item, pos++);
-      gtk_widget_show (item);
-
-      item = gtk_check_menu_item_new_with_label (_("Translated text"));
-      gtk_actionable_set_action_name (GTK_ACTIONABLE (item), "search-settings.at-translated-text");
-      gtk_menu_shell_insert (GTK_MENU_SHELL (widget), item, pos++);
-      gtk_widget_show (item);
-
-      sep = gtk_separator_menu_item_new ();
-      gtk_menu_shell_insert (GTK_MENU_SHELL (widget), sep, pos++);
-      gtk_widget_show (sep);
-
-      if (self->search != NULL)
-        {
-          group = dzl_properties_group_new (G_OBJECT (self->search));
-          dzl_properties_group_add_all_properties (group);
-        }
-
-      gtk_widget_insert_action_group (widget, "search-settings", G_ACTION_GROUP (group));
-    }
-}
-
-static void
 gtr_search_bar_real_stop_search (GtrSearchBar *self)
 {
   g_assert (GTR_IS_SEARCH_BAR (self));
@@ -516,9 +456,6 @@ gtr_search_bar_destroy (GtkWidget *widget)
 {
   GtrSearchBar *self = (GtrSearchBar *)widget;
 
-  dzl_clear_source (&self->match_source);
-
-  g_clear_object (&self->search_signals);
   g_clear_object (&self->search_bindings);
   g_clear_object (&self->search);
   g_clear_object (&self->search_entry_tag);
@@ -664,43 +601,39 @@ gtr_search_bar_init (GtrSearchBar *self)
                                 (self->wrap_around_button),
                                 TRUE);
 
-
-  self->search_signals = dzl_signal_group_new (GTK_TYPE_SEARCH_ENTRY);
-
   g_object_set (G_OBJECT (self->next_button), "can-default", TRUE, NULL);
 
-  self->search_bindings = dzl_binding_group_new ();
+  self->search_bindings = g_binding_group_new ();
 
-  dzl_binding_group_bind_full (self->search_bindings, "search-text",
-                               self->search_entry, "text",
-                               G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL,
-                               maybe_escape_regex, pacify_null_text, self, NULL);
+  g_binding_group_bind_full (self->search_bindings, "search-text",
+                             self->search_entry, "text",
+                             G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL,
+                             maybe_escape_regex, pacify_null_text, self, NULL);
 
-  dzl_binding_group_bind_full (self->search_bindings, "replacement-text",
-                               self->replace_entry, "text",
-                               G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL,
-                               pacify_null_text, pacify_null_text, NULL, NULL);
+  g_binding_group_bind_full (self->search_bindings, "replacement-text",
+                             self->replace_entry, "text",
+                             G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL,
+                             pacify_null_text, pacify_null_text, NULL, NULL);
 
-  dzl_binding_group_bind (self->search_bindings, "case-sensitive",
-                          self->case_sensitive, "active",
-                          G_BINDING_SYNC_CREATE |
- G_BINDING_BIDIRECTIONAL);
+  g_binding_group_bind (self->search_bindings, "case-sensitive",
+                        self->case_sensitive, "active",
+                        G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-  dzl_binding_group_bind (self->search_bindings, "at-word-boundaries",
-                          self->whole_word, "active",
-                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+  g_binding_group_bind (self->search_bindings, "at-word-boundaries",
+                        self->whole_word, "active",
+                        G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-  dzl_binding_group_bind (self->search_bindings, "wrap-around",
-                          self->whole_word, "active",
-                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+  g_binding_group_bind (self->search_bindings, "wrap-around",
+                        self->whole_word, "active",
+                        G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-  dzl_binding_group_bind (self->search_bindings, "at-original-text",
-                          self->whole_word, "active",
-                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+  g_binding_group_bind (self->search_bindings, "at-original-text",
+                        self->whole_word, "active",
+                        G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-  dzl_binding_group_bind (self->search_bindings, "at-translated-text",
-                          self->whole_word, "active",
-                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+  g_binding_group_bind (self->search_bindings, "at-translated-text",
+                        self->whole_word, "active",
+                        G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
   g_signal_connect (self->search_entry,
                     "insert_text", G_CALLBACK (insert_text_handler), NULL);
@@ -721,11 +654,6 @@ gtr_search_bar_init (GtrSearchBar *self)
   g_signal_connect_swapped (self->search_entry,
                             "activate",
                             G_CALLBACK (gtr_search_bar_find_next),
-                            self);
-
-  g_signal_connect_swapped (self->search_entry,
-                            "populate-popup",
-                            G_CALLBACK (search_entry_populate_popup),
                             self);
 
   g_signal_connect_swapped (self->next_button,
@@ -760,19 +688,6 @@ gtr_search_bar_get_search (GtrSearchBar *self)
   g_return_val_if_fail (GTR_IS_SEARCH_BAR (self), NULL);
 
   return self->search;
-}
-
-void
-gtr_search_bar_set_search (GtrSearchBar *self,
-                           GtkSearchEntry    *search)
-{
-  g_return_if_fail (GTR_IS_SEARCH_BAR (self));
-
-  if (g_set_object (&self->search, search))
-    {
-      dzl_signal_group_set_target (self->search_signals, search);
-      dzl_binding_group_set_source (self->search_bindings, search);
-    }
 }
 
 void
