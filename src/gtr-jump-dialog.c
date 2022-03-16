@@ -96,9 +96,11 @@ gtr_jump_dialog_init (GtrJumpDialog * dlg)
 
   content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
 
-  /* HIG defaults */
-  gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-  gtk_box_set_spacing (content_area, 2);    /* 2 * 5 + 2 = 12 */
+  gtk_widget_set_margin_start (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_end (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_top (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_bottom (GTK_WIDGET (dlg), 6);
+  gtk_box_set_spacing (content_area, 6);
 
   gtk_dialog_set_default_response (GTK_DIALOG (dlg), GTK_RESPONSE_OK);
 
@@ -116,7 +118,10 @@ gtr_jump_dialog_init (GtrJumpDialog * dlg)
   gtk_widget_set_vexpand (priv->main_box, TRUE);
   gtk_box_append (content_area, priv->main_box);
 
-  gtk_container_set_border_width (GTK_CONTAINER (priv->main_box), 5);
+  gtk_widget_set_margin_start (priv->main_box, 6);
+  gtk_widget_set_margin_end (priv->main_box, 6);
+  gtk_widget_set_margin_top (priv->main_box, 6);
+  gtk_widget_set_margin_bottom (priv->main_box, 6);
 }
 
 static void

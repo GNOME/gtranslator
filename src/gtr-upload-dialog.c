@@ -67,9 +67,11 @@ gtr_upload_dialog_init (GtrUploadDialog *dlg)
 
   content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
 
-  /* HIG defaults */
-  gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-  gtk_box_set_spacing (content_area, 2); /* 2 * 5 + 2 = 12 */
+  gtk_widget_set_margin_start (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_end (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_top (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_bottom (GTK_WIDGET (dlg), 6);
+  gtk_box_set_spacing (content_area, 6);
 
   builder = gtk_builder_new ();
   GError *error = NULL;

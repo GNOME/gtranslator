@@ -124,7 +124,10 @@ setup_notes_edition (GtrContextPanel *panel)
 
   gtk_container_add (GTK_CONTAINER (scrolled_window),
                                          text_view);
-  gtk_container_set_border_width (GTK_CONTAINER (scrolled_window), 5);
+  gtk_widget_set_margin_start (scrolled_window, 6);
+  gtk_widget_set_margin_end (scrolled_window, 6);
+  gtk_widget_set_margin_top (scrolled_window, 6);
+  gtk_widget_set_margin_bottom (scrolled_window, 6);
 
   gtk_widget_set_vexpand (scrolled_window, TRUE);
   gtk_box_append (dialog_area, scrolled_window);
