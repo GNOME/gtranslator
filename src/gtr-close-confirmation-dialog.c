@@ -135,7 +135,10 @@ gtr_close_confirmation_dialog_init (GtrCloseConfirmationDialog * dlg)
 {
   AtkObject *atk_obj;
 
-  gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
+  gtk_widget_set_margin_start (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_end (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_top (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_bottom (GTK_WIDGET (dlg), 6);
   gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))), 14);
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
   gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dlg), TRUE);
@@ -376,7 +379,10 @@ build_single_doc_dialog (GtrCloseConfirmationDialog * dlg)
   g_free (markup_str);
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
+  gtk_widget_set_margin_start (hbox, 6);
+  gtk_widget_set_margin_end (hbox, 6);
+  gtk_widget_set_margin_top (hbox, 6);
+  gtk_widget_set_margin_bottom (hbox, 6);
 
   gtk_box_append (GTK_BOX (hbox), image);
 
@@ -503,7 +509,10 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
   priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
+  gtk_widget_set_margin_start (hbox, 6);
+  gtk_widget_set_margin_end (hbox, 6);
+  gtk_widget_set_margin_top (hbox, 6);
+  gtk_widget_set_margin_bottom (hbox, 6);
   gtk_widget_set_hexpand (hbox, TRUE);
   gtk_box_append (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))), hbox);
 
