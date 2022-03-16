@@ -248,6 +248,9 @@ create_profiles_page1 (GtrAssistant * as)
   gtk_widget_show (box);
   gtk_container_set_border_width (GTK_CONTAINER (box), 5);
 
+  gtk_widget_set_valign (box, GTK_ALIGN_CENTER);
+  gtk_widget_set_halign (box, GTK_ALIGN_CENTER);
+
   /*
    * Profile name:
    */
@@ -439,6 +442,7 @@ create_finish_page (GtrAssistant * as)
 {
   GtrAssistantPrivate *priv = gtr_assistant_get_instance_private (as);
   priv->finish_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  gtk_widget_set_valign (priv->finish_box, GTK_ALIGN_CENTER);
   gtk_widget_show (priv->finish_box);
 
   priv->confirm_label = gtk_label_new (NULL);
