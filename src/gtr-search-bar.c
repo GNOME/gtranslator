@@ -443,22 +443,6 @@ search_entry_populate_popup (GtrSearchBar *self,
 }
 
 static void
-gtr_search_bar_real_stop_search (GtrSearchBar *self)
-{
-  g_assert (GTR_IS_SEARCH_BAR (self));
-}
-
-static void
-search_entry_stop_search (GtrSearchBar *self,
-                          GtkEntry     *entry)
-{
-  g_assert (GTR_IS_SEARCH_BAR (self));
-  g_assert (GTK_IS_ENTRY (entry));
-
-  g_signal_emit (self, signals [STOP_SEARCH], 0);
-}
-
-static void
 gtr_search_bar_destroy (GtkWidget *widget)
 {
   GtrSearchBar *self = (GtrSearchBar *)widget;
@@ -613,6 +597,7 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  GtkBindingSet *binding_set;
 
   object_class->get_property = gtr_search_bar_get_property;
   object_class->set_property = gtr_search_bar_set_property;
@@ -651,13 +636,12 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
   signals [STOP_SEARCH] =
-    g_signal_new_class_handler ("stop-search",
-                                G_TYPE_FROM_CLASS (klass),
-                                G_SIGNAL_RUN_LAST,
-                                G_CALLBACK (gtr_search_bar_real_stop_search),
-                                NULL, NULL,
-                                g_cclosure_marshal_VOID__VOID,
-                                G_TYPE_NONE, 0);
+    g_signal_new ("stop-search",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+                  0,
+                  NULL, NULL, NULL,
+                  G_TYPE_NONE, 0);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/translator/gtr-search-bar.ui");
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, replace_all_button);
@@ -670,6 +654,14 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, search_text_error);
 
   gtk_widget_class_set_css_name (widget_class, "gtrsearchbar");
+
+  /* Replace by gtk_widget_class_add_binding_signal in gtk 4. */
+  /* Also add gtk_widget_class_add_binding for next-match and previous-match as
+   * in gtksearchentry.c, which are already in the app as app.find-next and
+   * app.find-prev */
+  binding_set = gtk_binding_set_by_class (klass);
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY_Escape, 0,
+                                "stop-search", 0);
 }
 
 static void
@@ -733,11 +725,6 @@ gtr_search_bar_init (GtrSearchBar *self)
   g_signal_connect_swapped (self->replace_all_button,
                             "clicked",
                             G_CALLBACK (gtr_do_replace_all),
-                            self);
-
-  g_signal_connect_swapped (self->search_entry,
-                            "stop-search",
-                            G_CALLBACK (search_entry_stop_search),
                             self);
 
   add_actions (self);
