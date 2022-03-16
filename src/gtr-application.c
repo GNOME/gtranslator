@@ -187,9 +187,9 @@ gtr_application_init (GtrApplication *application)
       {NULL}
   };
 
-  g_application_add_main_option_entries (application, options);
+  g_application_add_main_option_entries (G_APPLICATION (application), options);
 
-  g_signal_connect (application, "handle-local-options", handle_local_options_cb, NULL);
+  g_signal_connect (application, "handle-local-options", G_CALLBACK (handle_local_options_cb), NULL);
 
   /* Creating config folder */
   ensure_user_config_dir (); /* FIXME: is this really needed ? */
