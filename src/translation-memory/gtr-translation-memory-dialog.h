@@ -46,7 +46,8 @@ struct _GtrTranslationMemoryDialogClass
 
 GType            gtr_translation_memory_dialog_get_type     (void) G_GNUC_CONST;
 
-GtkWidget       *gtr_translation_memory_dialog_new          (GtrTranslationMemory *translation_memory);
+GtkWidget       *gtr_translation_memory_dialog_new          (GtkWindow *window,
+                                                             GtrTranslationMemory *translation_memory);
 
 G_END_DECLS
 

@@ -371,20 +371,21 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
 }
 
 GtkWidget *
-gtr_translation_memory_dialog_new (GtrTranslationMemory *translation_memory)
+gtr_translation_memory_dialog_new (GtkWindow *window,
+                                   GtrTranslationMemory *translation_memory)
 {
   GtrTranslationMemoryDialog *dlg;
   GtrTranslationMemoryDialogPrivate *priv;
 
   dlg = GTR_TRANSLATION_MEMORY_DIALOG (g_object_new (GTR_TYPE_TRANSLATION_MEMORY_DIALOG,
-                                                     "use-header-bar", TRUE, NULL));
+                                                     "use-header-bar", TRUE,
+                                                     "modal", TRUE,
+                                                     "transient-for", window,
+                                                     NULL));
   priv = gtr_translation_memory_dialog_get_instance_private (dlg);
 
   /* FIXME: use a property */
   priv->translation_memory = translation_memory;
-
-  gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_DIALOG);
-  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
   return GTK_WIDGET (dlg);
 }

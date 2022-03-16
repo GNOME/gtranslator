@@ -821,17 +821,12 @@ gtr_window_show_tm_dialog (GtrWindow *window)
 
   if (dlg == NULL)
     {
-      dlg = gtr_translation_memory_dialog_new (priv->translation_memory);
-      gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
+      dlg = gtr_translation_memory_dialog_new (GTK_WINDOW (window),
+                                               priv->translation_memory);
 
       g_signal_connect (dlg, "destroy",
                         G_CALLBACK (gtk_widget_destroyed), &dlg);
       gtk_widget_show_all (dlg);
-    }
-
-  if (GTK_WINDOW (window) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
-    {
-      gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
     }
 
   gtk_window_present (GTK_WINDOW (dlg));
