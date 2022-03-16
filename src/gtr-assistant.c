@@ -162,7 +162,10 @@ create_start_page (GtrAssistant * as)
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_show (box);
-  gtk_container_set_border_width (GTK_CONTAINER (box), 12);
+  gtk_widget_set_margin_start (box, 12);
+  gtk_widget_set_margin_end (box, 12);
+  gtk_widget_set_margin_top (box, 12);
+  gtk_widget_set_margin_bottom (box, 12);
 
   label = gtk_label_new (_("This assistant will help you to create the main profile."));
   gtk_widget_show (label);
@@ -246,7 +249,10 @@ create_profiles_page1 (GtrAssistant * as)
 
   box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_widget_show (box);
-  gtk_container_set_border_width (GTK_CONTAINER (box), 5);
+  gtk_widget_set_margin_start (box, 6);
+  gtk_widget_set_margin_end (box, 6);
+  gtk_widget_set_margin_top (box, 6);
+  gtk_widget_set_margin_bottom (box, 6);
 
   gtk_widget_set_valign (box, GTK_ALIGN_CENTER);
   gtk_widget_set_halign (box, GTK_ALIGN_CENTER);
@@ -428,7 +434,11 @@ create_profiles_page2 (GtrAssistant * as)
 
   priv->languages_fetcher = gtr_languages_fetcher_new ();
   gtk_widget_show (priv->languages_fetcher);
-  gtk_container_set_border_width (GTK_CONTAINER (priv->languages_fetcher), 5);
+  gtk_widget_set_margin_start (priv->languages_fetcher, 6);
+  gtk_widget_set_margin_end (priv->languages_fetcher, 6);
+  gtk_widget_set_margin_top (priv->languages_fetcher, 6);
+  gtk_widget_set_margin_bottom (priv->languages_fetcher, 6);
+
   g_signal_connect (priv->languages_fetcher, "changed",
                     G_CALLBACK (on_profile2_entry_changed),
                     as);
