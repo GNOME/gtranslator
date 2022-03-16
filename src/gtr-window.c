@@ -817,17 +817,12 @@ void
 gtr_window_show_tm_dialog (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-  static GtkWidget *dlg = NULL;
+  GtkWidget *dlg;
 
-  if (dlg == NULL)
-    {
-      dlg = gtr_translation_memory_dialog_new (GTK_WINDOW (window),
-                                               priv->translation_memory);
+  dlg = gtr_translation_memory_dialog_new (GTK_WINDOW (window),
+                                           priv->translation_memory);
 
-      g_signal_connect (dlg, "destroy",
-                        G_CALLBACK (gtk_widget_destroyed), &dlg);
-      gtk_widget_show_all (dlg);
-    }
+  g_signal_connect (dlg, "response", G_CALLBACK (gtk_widget_destroy), NULL);
 
   gtk_window_present (GTK_WINDOW (dlg));
 }

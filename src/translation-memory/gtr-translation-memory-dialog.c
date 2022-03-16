@@ -310,9 +310,6 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
   gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
   gtk_box_set_spacing (GTK_BOX (content_area), 2);    /* 2 * 5 + 2 = 12 */
 
-  g_signal_connect (dlg, "response",
-                    G_CALLBACK (gtk_widget_destroy), NULL);
-
   builder = gtk_builder_new ();
   gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/plugins/translation-memory/ui/gtr-translation-memory-dialog.ui", root_objects, NULL);
   content = GTK_WIDGET (gtk_builder_get_object (builder, "translation-memory-box"));
