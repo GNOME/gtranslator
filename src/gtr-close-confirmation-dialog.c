@@ -378,16 +378,16 @@ build_single_doc_dialog (GtrCloseConfirmationDialog * dlg)
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
 
-  gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (hbox), image);
 
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
 
-  gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (hbox), vbox);
 
-  gtk_box_pack_start (GTK_BOX (vbox), primary_label, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (vbox), primary_label);
 
-  gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
-                      hbox, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
+                  hbox);
 
   gtk_widget_show_all (hbox);
 }
@@ -504,17 +504,19 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
-  gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))), hbox, TRUE, TRUE, 0);
+  gtk_widget_set_hexpand (hbox, TRUE);
+  gtk_box_append (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))), hbox);
 
   /* Image */
   image = gtk_image_new_from_icon_name ("dialog-warning-symbolic",
                                         GTK_ICON_SIZE_DIALOG);
   gtk_widget_set_halign (image, 0.5);
   gtk_widget_set_valign (image, 0.0);
-  gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (hbox), image);
 
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-  gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
+  gtk_widget_set_hexpand (vbox, TRUE);
+  gtk_box_append (GTK_BOX (hbox), vbox);
 
   /* Primary label */
   primary_label = gtk_label_new (NULL);
@@ -548,10 +550,10 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
 
   gtk_label_set_markup (GTK_LABEL (primary_label), markup_str);
   g_free (markup_str);
-  gtk_box_pack_start (GTK_BOX (vbox), primary_label, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (vbox), primary_label);
 
   vbox2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 8);
-  gtk_box_pack_start (GTK_BOX (vbox), vbox2, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (vbox), vbox2);
 
   if (priv->disable_save_to_disk)
     select_label =
@@ -561,13 +563,14 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
       gtk_label_new_with_mnemonic (_
                                    ("S_elect the documents you want to save:"));
 
-  gtk_box_pack_start (GTK_BOX (vbox2), select_label, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (vbox2), select_label);
   gtk_label_set_line_wrap (GTK_LABEL (select_label), TRUE);
   gtk_label_set_xalign (GTK_LABEL (select_label), 0.0);
   gtk_label_set_yalign (GTK_LABEL (select_label), 0.5);
 
   scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-  gtk_box_pack_start (GTK_BOX (vbox2), scrolledwindow, TRUE, TRUE, 0);
+  gtk_widget_set_vexpand (vbox2, TRUE);
+  gtk_box_append (GTK_BOX (vbox2), scrolledwindow);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow),
                                        GTK_SHADOW_IN);
 
@@ -583,7 +586,7 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
     secondary_label = gtk_label_new (_("If you don’t save, "
                                        "all your changes will be permanently lost."));
 
-  gtk_box_pack_start (GTK_BOX (vbox2), secondary_label, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (vbox2), secondary_label);
   gtk_label_set_line_wrap (GTK_LABEL (secondary_label), TRUE);
   gtk_label_set_xalign (GTK_LABEL (secondary_label), 0.0);
   gtk_label_set_yalign (GTK_LABEL (secondary_label), 0.5);
