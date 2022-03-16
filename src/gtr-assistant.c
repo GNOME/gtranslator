@@ -166,7 +166,8 @@ create_start_page (GtrAssistant * as)
 
   label = gtk_label_new (_("This assistant will help you to create the main profile."));
   gtk_widget_show (label);
-  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+  gtk_widget_set_hexpand (label, TRUE);
+  gtk_box_append (GTK_BOX (box), label);
 
   gtk_assistant_append_page (GTK_ASSISTANT (as), box);
   gtk_assistant_set_page_title (GTK_ASSISTANT (as), box, _("Assistant"));
@@ -252,7 +253,7 @@ create_profiles_page1 (GtrAssistant * as)
    */
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_show (hbox);
-  gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (box), hbox);
 
   label = gtk_label_new (NULL);
   markup = g_strdup_printf("<b>%s</b>", _("Profile name"));
@@ -261,11 +262,12 @@ create_profiles_page1 (GtrAssistant * as)
   gtk_label_set_xalign (GTK_LABEL (label), 1.0);
   gtk_label_set_yalign (GTK_LABEL (label), 0.5);
   gtk_widget_show (label);
-  gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+  gtk_widget_set_hexpand (label, TRUE);
+  gtk_box_append (GTK_BOX (hbox), label);
 
   priv->profile_name = gtk_entry_new ();
   gtk_widget_show (priv->profile_name);
-  gtk_box_pack_start (GTK_BOX (hbox), priv->profile_name, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (hbox), priv->profile_name);
   g_signal_connect (G_OBJECT (priv->profile_name), "changed",
                     G_CALLBACK (on_profile1_entry_changed), as);
 
@@ -274,7 +276,7 @@ create_profiles_page1 (GtrAssistant * as)
    */
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_show (hbox);
-  gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (box), hbox);
 
   label = gtk_label_new (NULL);
   markup = g_strdup_printf("<b>%s</b>", ("Translator name"));
@@ -283,11 +285,12 @@ create_profiles_page1 (GtrAssistant * as)
   gtk_label_set_xalign (GTK_LABEL (label), 1.0);
   gtk_label_set_yalign (GTK_LABEL (label), 0.5);
   gtk_widget_show (label);
-  gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+  gtk_widget_set_hexpand (label, TRUE);
+  gtk_box_append (GTK_BOX (hbox), label);
 
   priv->name = gtk_entry_new ();
   gtk_widget_show (priv->name);
-  gtk_box_pack_start (GTK_BOX (hbox), priv->name, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (hbox), priv->name);
   g_signal_connect (G_OBJECT (priv->name), "changed",
                     G_CALLBACK (on_profile1_entry_changed), as);
 
@@ -296,7 +299,7 @@ create_profiles_page1 (GtrAssistant * as)
    */
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_show (hbox);
-  gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (box), hbox);
 
   label = gtk_label_new (NULL);
   markup = g_strdup_printf("<b>%s</b>", _("Translator email"));
@@ -305,11 +308,12 @@ create_profiles_page1 (GtrAssistant * as)
   gtk_label_set_xalign (GTK_LABEL (label), 1.0);
   gtk_label_set_yalign (GTK_LABEL (label), 0.5);
   gtk_widget_show (label);
-  gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+  gtk_widget_set_hexpand (label, TRUE);
+  gtk_box_append (GTK_BOX (hbox), label);
 
   priv->email = gtk_entry_new ();
   gtk_widget_show (priv->email);
-  gtk_box_pack_start (GTK_BOX (hbox), priv->email, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (hbox), priv->email);
   g_signal_connect (G_OBJECT (priv->email), "changed",
                     G_CALLBACK (on_profile1_entry_changed), as);
 
@@ -318,7 +322,7 @@ create_profiles_page1 (GtrAssistant * as)
    */
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_show (hbox);
-  gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (box), hbox);
 
   label = gtk_label_new (NULL);
   markup = g_strdup_printf("<b>%s</b>", _("Team email"));
@@ -327,11 +331,12 @@ create_profiles_page1 (GtrAssistant * as)
   gtk_label_set_xalign (GTK_LABEL (label), 1.0);
   gtk_label_set_yalign (GTK_LABEL (label), 0.5);
   gtk_widget_show (label);
-  gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+  gtk_widget_set_hexpand (label, TRUE);
+  gtk_box_append (GTK_BOX (hbox), label);
 
   priv->team_email = gtk_entry_new ();
   gtk_widget_show (priv->team_email);
-  gtk_box_pack_start (GTK_BOX (hbox), priv->team_email, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (hbox), priv->team_email);
   g_signal_connect (G_OBJECT (priv->team_email), "changed",
                     G_CALLBACK (on_profile1_entry_changed), as);
 
@@ -438,8 +443,8 @@ create_finish_page (GtrAssistant * as)
 
   priv->confirm_label = gtk_label_new (NULL);
   gtk_widget_show (priv->confirm_label);
-  gtk_box_pack_start (GTK_BOX (priv->finish_box), priv->confirm_label,
-                      TRUE, TRUE, 0);
+  gtk_widget_set_hexpand (priv->confirm_label, TRUE);
+  gtk_box_append (GTK_BOX (priv->finish_box), priv->confirm_label);
 
   gtk_assistant_append_page (GTK_ASSISTANT (as), priv->finish_box);
   gtk_assistant_set_page_type (GTK_ASSISTANT (as), priv->finish_box,
