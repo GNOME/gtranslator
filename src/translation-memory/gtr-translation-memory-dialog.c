@@ -103,7 +103,6 @@ typedef struct _IdleData
   GSList *list;
   GtkProgressBar *progress;
   GtrTranslationMemory *tm;
-  GtkWindow *parent;
   GtkWidget *add_database_button;
 } IdleData;
 
@@ -227,7 +226,6 @@ launch_gtr_scan_dir_task (GtrTranslationMemoryDialog *dlg,
   idata->list = NULL;
   idata->tm = priv->translation_memory;
   idata->progress = GTK_PROGRESS_BAR (priv->add_database_progressbar);
-  idata->parent = GTK_WINDOW (dlg);
   idata->add_database_button = priv->add_database_button;
 
   gtk_progress_bar_pulse (idata->progress);
