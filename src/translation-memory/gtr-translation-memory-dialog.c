@@ -19,6 +19,7 @@
 #include "gtr-profile-manager.h"
 #include "gtr-translation-memory-utils.h"
 #include "gtr-po.h"
+#include "gtr-utils.h"
 
 #include <glib/gi18n.h>
 
@@ -325,7 +326,8 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
   priv->tm_lang_entry = GTK_WIDGET (gtk_builder_get_object (builder, "tm-lang-entry"));
   g_object_unref (builder);
 
-  gtk_box_pack_start (GTK_BOX (content_area), content, TRUE, TRUE, 0);
+  gtk_widget_set_vexpand (content, TRUE);
+  gtk_box_append (GTK_BOX (content_area), content);
   g_object_unref (content);
 
   prof_manager = gtr_profile_manager_get_default ();

@@ -113,7 +113,8 @@ gtr_jump_dialog_init (GtrJumpDialog * dlg)
   priv->jump = GTK_WIDGET (gtk_builder_get_object (builder, "jump"));
   g_object_unref (builder);
 
-  gtk_box_pack_start (content_area, priv->main_box, TRUE, TRUE, 0);
+  gtk_widget_set_vexpand (priv->main_box, TRUE);
+  gtk_box_append (content_area, priv->main_box);
 
   gtk_container_set_border_width (GTK_CONTAINER (priv->main_box), 5);
 }

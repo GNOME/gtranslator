@@ -355,7 +355,7 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
 
   g_object_unref (builder);
 
-  gtk_box_pack_start (GTK_BOX (fetcher), content, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (fetcher), content);
 
   /* add items to comboboxes */
   append_from_languages (fetcher);

@@ -362,7 +362,7 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
 
   g_object_unref (builder);
 
-  gtk_box_pack_start (content_area, priv->main_box, FALSE, FALSE, 0);
+  gtk_box_append (content_area, priv->main_box);
 
   gtk_container_set_border_width (GTK_CONTAINER (priv->notebook), 5);
 

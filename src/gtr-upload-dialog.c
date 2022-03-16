@@ -23,6 +23,7 @@
 #endif
 
 #include "gtr-upload-dialog.h"
+#include "gtr-utils.h"
 
 #include <string.h>
 #include <glib.h>
@@ -84,7 +85,7 @@ gtr_upload_dialog_init (GtrUploadDialog *dlg)
   priv->label = GTK_WIDGET (gtk_builder_get_object (builder, "label"));
   g_object_unref (builder);
 
-  gtk_box_pack_start (content_area, priv->main_box, FALSE, FALSE, 0);
+  gtk_box_append (content_area, priv->main_box);
 }
 
 GtrUploadDialog *

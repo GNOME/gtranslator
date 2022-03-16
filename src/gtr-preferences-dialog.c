@@ -686,7 +686,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   profiles_scrolled_window = GTK_WIDGET (gtk_builder_get_object (builder, "profiles-scrolledwindow"));
   g_object_unref (builder);
 
-  gtk_box_pack_start (content_area, priv->notebook, FALSE, FALSE, 0);
+  gtk_box_append (content_area, priv->notebook);
 
   gtk_container_set_border_width (GTK_CONTAINER (priv->notebook), 5);
 
