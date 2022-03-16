@@ -800,3 +800,9 @@ pango_font_description_to_css (PangoFontDescription *desc)
 
   return g_string_free (s, FALSE);
 }
+
+void
+gtk_box_append (GtkBox *box, GtkWidget *child)
+{
+  gtk_container_add (GTK_CONTAINER (box), child);
+}

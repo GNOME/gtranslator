@@ -80,4 +80,6 @@ void gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
      gchar * gtr_utils_get_filename (const gchar * filename);
 
      gchar * pango_font_description_to_css (PangoFontDescription *desc);
+
+     void gtk_box_append (GtkBox *box, GtkWidget *child);
 #endif
