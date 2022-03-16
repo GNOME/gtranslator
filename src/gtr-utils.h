@@ -82,4 +82,8 @@ void gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
      gchar * pango_font_description_to_css (PangoFontDescription *desc);
 
      void gtk_box_append (GtkBox *box, GtkWidget *child);
+
+     void gtk_list_box_append (GtkListBox *box, GtkWidget *child);
+
+     void gtk_list_box_remove (GtkListBox *box, GtkWidget *child);
 #endif

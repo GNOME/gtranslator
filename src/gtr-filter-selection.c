@@ -21,6 +21,7 @@
 #endif
 
 #include "gtr-filter-selection.h"
+#include "gtr-utils.h"
 
 typedef struct
 {
@@ -80,7 +81,7 @@ filter_option (GtkEditable        *entry,
   while (children)
     {
       GtkWidget *w = GTK_WIDGET (children->data);
-      gtk_container_remove (GTK_CONTAINER (priv->option_list), w);
+      gtk_list_box_remove (GTK_LIST_BOX (priv->option_list), w);
       children = g_list_next (children);
     }
 
@@ -95,7 +96,7 @@ filter_option (GtkEditable        *entry,
 
       child = gtk_label_new (opt->desc);
       gtk_label_set_xalign (GTK_LABEL (child), 0.0);
-      gtk_container_add (GTK_CONTAINER (priv->option_list), child);
+      gtk_list_box_append (GTK_LIST_BOX (priv->option_list), child);
     }
   gtk_widget_show_all (priv->option_list);
 }
@@ -209,7 +210,7 @@ gtr_filter_selection_set_options_full (GtrFilterSelection *self,
   while (children)
     {
       GtkWidget *w = GTK_WIDGET (children->data);
-      gtk_container_remove (GTK_CONTAINER (priv->option_list), w);
+      gtk_list_box_remove (GTK_LIST_BOX (priv->option_list), w);
       children = g_list_next (children);
     }
 
@@ -218,7 +219,7 @@ gtr_filter_selection_set_options_full (GtrFilterSelection *self,
       GtrFilterOption *opt = (GtrFilterOption *)o->data;
       GtkWidget *child = gtk_label_new (opt->desc);
       gtk_label_set_xalign (GTK_LABEL (child), 0.0);
-      gtk_container_add (GTK_CONTAINER (priv->option_list), child);
+      gtk_list_box_append (GTK_LIST_BOX (priv->option_list), child);
     }
 
   gtk_widget_show_all (priv->option_list);
