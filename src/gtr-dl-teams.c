@@ -573,6 +573,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
                                bytes,
                                NULL,
                                &error);
+  g_bytes_unref (bytes);
 
   if (error != NULL)
     {

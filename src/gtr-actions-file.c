@@ -512,6 +512,7 @@ gtr_upload_file (GtkWidget *upload_dialog,
   /* Init multipart container */
   mpart = soup_multipart_new (SOUP_FORM_MIME_TYPE_MULTIPART);
   soup_multipart_append_form_file (mpart, "file", filename, mime_type, bytes);
+  g_bytes_unref (bytes);
   if (upload_comment)
     soup_multipart_append_form_string (mpart, "comment", upload_comment);
 
