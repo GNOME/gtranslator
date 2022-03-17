@@ -103,7 +103,6 @@ typedef struct _IdleData
   GSList *list;
   GtkProgressBar *progress;
   GtrTranslationMemory *tm;
-  GtkWindow *parent;
   GtkWidget *add_database_button;
 } IdleData;
 
@@ -227,7 +226,6 @@ launch_gtr_scan_dir_task (GtrTranslationMemoryDialog *dlg,
   idata->list = NULL;
   idata->tm = priv->translation_memory;
   idata->progress = GTK_PROGRESS_BAR (priv->add_database_progressbar);
-  idata->parent = GTK_WINDOW (dlg);
   idata->add_database_button = priv->add_database_button;
 
   gtk_progress_bar_pulse (idata->progress);
@@ -306,13 +304,6 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
 
   content_area = gtk_dialog_get_content_area (GTK_DIALOG (dlg));
 
-  /* HIG defaults */
-  gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-  gtk_box_set_spacing (GTK_BOX (content_area), 2);    /* 2 * 5 + 2 = 12 */
-
-  g_signal_connect (dlg, "response",
-                    G_CALLBACK (gtk_widget_destroy), NULL);
-
   builder = gtk_builder_new ();
   gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/plugins/translation-memory/ui/gtr-translation-memory-dialog.ui", root_objects, NULL);
   content = GTK_WIDGET (gtk_builder_get_object (builder, "translation-memory-box"));
@@ -371,20 +362,21 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
 }
 
 GtkWidget *
-gtr_translation_memory_dialog_new (GtrTranslationMemory *translation_memory)
+gtr_translation_memory_dialog_new (GtkWindow *window,
+                                   GtrTranslationMemory *translation_memory)
 {
   GtrTranslationMemoryDialog *dlg;
   GtrTranslationMemoryDialogPrivate *priv;
 
   dlg = GTR_TRANSLATION_MEMORY_DIALOG (g_object_new (GTR_TYPE_TRANSLATION_MEMORY_DIALOG,
-                                                     "use-header-bar", TRUE, NULL));
+                                                     "use-header-bar", TRUE,
+                                                     "modal", TRUE,
+                                                     "transient-for", window,
+                                                     NULL));
   priv = gtr_translation_memory_dialog_get_instance_private (dlg);
 
   /* FIXME: use a property */
   priv->translation_memory = translation_memory;
-
-  gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_DIALOG);
-  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
   return GTK_WIDGET (dlg);
 }
