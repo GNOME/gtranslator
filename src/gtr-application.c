@@ -351,6 +351,16 @@ edit_header_activated (GSimpleAction *action,
 }
 
 static void
+clear_msgstr_activated (GSimpleAction *action,
+                        GVariant      *parameter,
+                        gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  gtr_actions_edit_clear (priv->active_window);
+}
+
+static void
 shortcuts_activated (GSimpleAction *action,
                      GVariant      *parameter,
                      gpointer       user_data)
@@ -648,6 +658,7 @@ static GActionEntry app_entries[] = {
   { "new_window", new_window_activated, NULL, NULL, NULL },
   { "preferences", preferences_activated, NULL, NULL, NULL },
   { "edit_header", edit_header_activated, NULL, NULL, NULL },
+  { "clear_msgstr", clear_msgstr_activated, NULL, NULL, NULL },
   { "shortcuts", shortcuts_activated, NULL, NULL, NULL },
   { "help", help_activated, NULL, NULL, NULL },
   { "about", about_activated, NULL, NULL, NULL },
@@ -702,6 +713,7 @@ gtr_application_startup (GApplication *application)
 
   set_kb (application, "app.undo", "<Ctrl>z");
   set_kb (application, "app.redo", "<Ctrl><Shift>z");
+  set_kb (application, "app.clear_msgstr", "<Ctrl>k");
 
   set_kb (application, "app.prev", "<Alt>Left");
   set_kb (application, "app.next", "<Alt>Right");
