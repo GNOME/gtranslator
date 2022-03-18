@@ -28,7 +28,7 @@
 /*
  * File chooser dialog
  */
-GtkWidget *
+GtkNativeDialog *
 gtr_file_chooser_new (GtkWindow * parent,
                       FileselMode mode,
                       const gchar * title, const gchar * dir)
@@ -75,5 +75,5 @@ gtr_file_chooser_new (GtkWindow * parent,
       gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
     }
 
-  return GTK_WIDGET (dialog);
+  return GTK_NATIVE_DIALOG (dialog);
 }

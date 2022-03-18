@@ -175,23 +175,16 @@ gtr_po_parse_files_from_dialog (GtkNativeDialog * dialog, GtrWindow * window)
    */
   load_file_list (window, (const GSList *) locations);
   g_slist_free_full (locations, g_object_unref);
-
-  /*
-   * Destroy the dialog 
-   */
-  gtk_native_dialog_destroy (dialog);
 }
 
 
 static void
-gtr_file_chooser_analyse (GtkNativeDialog * dialog,
-                          FileselMode mode, GtrWindow * window)
+gtr_file_chooser_cb (GtkNativeDialog * dialog, guint reply, gpointer user_data)
 {
-  gint reply;
+  GtrWindow *window = GTR_WINDOW (user_data);
 
-  reply = gtk_native_dialog_run (GTK_NATIVE_DIALOG (dialog));
-  if (reply == GTK_RESPONSE_ACCEPT && mode == FILESEL_OPEN)
-    gtr_po_parse_files_from_dialog (GTK_NATIVE_DIALOG (dialog), window);
+  if (reply == GTK_RESPONSE_ACCEPT)
+    gtr_po_parse_files_from_dialog (dialog, window);
 
   gtk_native_dialog_destroy (dialog);
 }
@@ -208,13 +201,15 @@ gtr_want_to_save_current_dialog (GtrWindow * window)
   g_autofree gchar *filename = NULL;
   g_autofree gchar *markup = NULL;
 
+  GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
+
   tab = gtr_window_get_active_tab (window);
   po = gtr_tab_get_po (tab);
   location = gtr_po_get_location (po);
   filename = g_file_get_path (location);
 
   dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   flags,
                                    GTK_MESSAGE_WARNING,
                                    GTK_BUTTONS_NONE, NULL);
 
@@ -251,7 +246,7 @@ gtr_want_to_save_current_dialog (GtrWindow * window)
 void
 gtr_open_file_dialog (GtrWindow * window)
 {
-  GtkWidget *dialog = NULL;
+  GtkNativeDialog *dialog;
   g_autoptr (GList) list = NULL;
   list = get_modified_documents (window);
   if (list != NULL)
@@ -265,11 +260,12 @@ gtr_open_file_dialog (GtrWindow * window)
                                  _("Open file for translation"),
                                  _gtr_application_get_last_dir (GTR_APP));
 
-  gtr_file_chooser_analyse (GTK_NATIVE_DIALOG (dialog), FILESEL_OPEN, window);
+  g_signal_connect (dialog, "response", G_CALLBACK (gtr_file_chooser_cb), window);
+  gtk_native_dialog_show (dialog);
 }
 
 static void
-save_dialog_response_cb (GtkDialog * dialog,
+save_dialog_response_cb (GtkNativeDialog * dialog,
                          gint response_id, GtrWindow * window)
 {
   GError *error = NULL;
@@ -278,7 +274,7 @@ save_dialog_response_cb (GtkDialog * dialog,
   gchar *filename;
   GFile *location;
 
-  tab = GTR_TAB (g_object_get_data (G_OBJECT (dialog), GTR_TAB_SAVE_AS));
+  tab = gtr_window_get_active_tab (window);
 
   g_return_if_fail (GTK_IS_FILE_CHOOSER (dialog));
 
@@ -286,7 +282,7 @@ save_dialog_response_cb (GtkDialog * dialog,
 
   if (response_id != GTK_RESPONSE_ACCEPT)
     {
-      g_object_unref (dialog);
+      gtk_native_dialog_destroy (dialog);
       return;
     }
 
@@ -296,7 +292,7 @@ save_dialog_response_cb (GtkDialog * dialog,
   location = g_file_new_for_path (filename);
   g_free (filename);
 
-  g_object_unref (dialog);
+  gtk_native_dialog_destroy (dialog);
 
   if (po != NULL)
     {
@@ -309,13 +305,14 @@ save_dialog_response_cb (GtkDialog * dialog,
       if (error)
         {
           GtkWidget *dialog;
+          GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
           dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                           GTK_DIALOG_DESTROY_WITH_PARENT,
+                                           flags,
                                            GTK_MESSAGE_WARNING,
                                            GTK_BUTTONS_OK,
                                            "%s", error->message);
-          gtk_dialog_run (GTK_DIALOG (dialog));
-          gtk_widget_destroy (dialog);
+          g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+          gtk_window_present (GTK_WINDOW (dialog));
           g_clear_error (&error);
           return;
         }
@@ -323,27 +320,10 @@ save_dialog_response_cb (GtkDialog * dialog,
       /* We have to change the state of the tab */
       gtr_po_set_state (po, GTR_PO_STATE_SAVED);
     }
-  g_object_unref (location);
-}
-
-static GtkFileChooserConfirmation
-confirm_overwrite_callback (GtkFileChooser * dialog, gpointer data)
-{
-  gchar *uri;
-  GtkFileChooserConfirmation res;
-
-  uri = gtk_file_chooser_get_uri (dialog);
-
-  /*
-   * FIXME: We have to detect if the file is read-only
-   */
-
-  /* fall back to the default confirmation dialog */
-  res = GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM;
-
-  g_free (uri);
-
-  return res;
+  else
+    {
+      g_object_unref (location);
+    }
 }
 
 static void
@@ -417,8 +397,8 @@ _upload_file_callback (GObject      *object,
   gtr_notebook_enable_upload (active_notebook, FALSE);
 
 end:
-  gtk_dialog_run (GTK_DIALOG (dialog));
-  gtk_widget_destroy (dialog);
+  g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+  gtk_window_present (GTK_WINDOW (dialog));
   gtk_widget_destroy (upload_dialog);
   g_free (ud);
 }
@@ -559,26 +539,16 @@ gtr_upload_file_dialog (GtrWindow * window)
 void
 gtr_save_file_as_dialog (GtrWindow * window)
 {
-  GtkWidget *dialog;
-  GtrTab *current_page;
-  gint reply = 0;
+  GtkNativeDialog *dialog;
 
-  current_page = gtr_window_get_active_tab (window);
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
                                  FILESEL_SAVE,
                                  _("Save file as…"),
                                  g_get_home_dir ());
 
-  gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog),
-                                                  TRUE);
-  g_signal_connect (dialog,
-                    "confirm-overwrite",
-                    G_CALLBACK (confirm_overwrite_callback), NULL);
-
-  g_object_set_data (G_OBJECT (dialog), GTR_TAB_SAVE_AS, current_page);
-
-  reply = gtk_native_dialog_run (GTK_NATIVE_DIALOG (dialog));
-  save_dialog_response_cb (GTK_DIALOG (dialog), reply, window);
+  g_signal_connect (dialog, "response", G_CALLBACK (save_dialog_response_cb),
+                    window);
+  gtk_native_dialog_show (dialog);
 }
 
 /*
@@ -599,12 +569,13 @@ gtr_save_current_file_dialog (GtkWidget * widget, GtrWindow * window)
   if (error)
     {
       GtkWidget *dialog;
+      GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
       dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                       GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       flags,
                                        GTK_MESSAGE_WARNING,
                                        GTK_BUTTONS_OK, "%s", error->message);
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
+      g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+      gtk_window_present (GTK_WINDOW (dialog));
       g_clear_error (&error);
       return;
     }
@@ -688,16 +659,17 @@ load_file_list (GtrWindow * window, const GSList * locations)
   if (error != NULL)
     {
       GtkWidget *dialog;
+      GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
       /*
        * We have to show the error in a dialog
        */
       dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                       GTK_DIALOG_DESTROY_WITH_PARENT,
+                                       flags,
                                        GTK_MESSAGE_ERROR,
                                        GTK_BUTTONS_CLOSE,
                                        "%s", error->message);
-      gtk_dialog_run (GTK_DIALOG (dialog));
-      gtk_widget_destroy (dialog);
+      g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+      gtk_window_present (GTK_WINDOW (dialog));
       g_error_free (error);
     }
 
@@ -758,13 +730,14 @@ save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
       if (error)
         {
           GtkWidget *dialog;
+          GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
           dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                           GTK_DIALOG_DESTROY_WITH_PARENT,
+                                           flags,
                                            GTK_MESSAGE_WARNING,
                                            GTK_BUTTONS_OK,
                                            "%s", error->message);
-          gtk_dialog_run (GTK_DIALOG (dialog));
-          gtk_widget_destroy (dialog);
+          g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+          gtk_window_present (GTK_WINDOW (dialog));
           g_clear_error (&error);
 
           return;
@@ -983,14 +956,15 @@ _gtr_actions_file_save_all (GtrWindow * window)
       if (error)
         {
           GtkWidget *dialog;
+          GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
 
           dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                           GTK_DIALOG_DESTROY_WITH_PARENT,
+                                           flags,
                                            GTK_MESSAGE_WARNING,
                                            GTK_BUTTONS_OK,
                                            "%s", error->message);
-          gtk_dialog_run (GTK_DIALOG (dialog));
-          gtk_widget_destroy (dialog);
+          g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+          gtk_window_present (GTK_WINDOW (dialog));
           g_clear_error (&error);
 
           return;

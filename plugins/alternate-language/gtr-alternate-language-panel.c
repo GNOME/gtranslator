@@ -163,8 +163,8 @@ open_file (GtkWidget *dialog, GtrAlternateLangPanel *panel)
                                          GTK_MESSAGE_ERROR,
                                          GTK_BUTTONS_CLOSE,
                                          "%s", error->message);
-      gtk_dialog_run (GTK_DIALOG (erdialog));
-      gtk_widget_destroy (erdialog);
+      g_signal_connect (erdialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+      gtk_window_present (GTK_WINDOW (erdialog));
       g_error_free (error);
       return;
     }
@@ -183,34 +183,22 @@ open_file (GtkWidget *dialog, GtrAlternateLangPanel *panel)
   gtk_widget_destroy (dialog);
 }
 
-
 static void
-gtr_file_chooser_analyse (GtkNativeDialog * dialog, GtrAlternateLangPanel * panel)
+gtr_file_chooser_cb (GtkNativeDialog * dialog, guint response, gpointer user_data)
 {
-  gint reply;
+  GtrAlternateLangPanel *panel = GTR_ALTERNATE_LANG_PANEL (user_data);
 
-  reply = gtk_dialog_run (GTK_DIALOG (dialog));
-  switch (reply)
-    {
-    case GTK_RESPONSE_ACCEPT:
+  if response == GTK_RESPONSE_ACCEPT:
       open_file (GTK_WIDGET (dialog), panel);
-      break;
-    case GTK_RESPONSE_CANCEL:
-      gtk_widget_hide (GTK_WIDGET (dialog));
-      break;
-    case GTK_RESPONSE_DELETE_EVENT:
-      gtk_widget_hide (GTK_WIDGET (dialog));
-      break;
-    default:
-      break;
-    }
+
+  gtk_native_dialog_destroy (dialog);
 }
 
 static void
 open_button_clicked_cb (GtkWidget * open_button,
                         GtrAlternateLangPanel * panel)
 {
-  GtkWidget *dialog = NULL;
+  GtkNativeDialog *dialog;
   gchar *dir;
   GtrPo *tab_po;
   GFile *location, *parent;
@@ -241,7 +229,8 @@ open_button_clicked_cb (GtkWidget * open_button,
 
   gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (dialog), TRUE);
 
-  gtr_file_chooser_analyse (GTK_NATIVE_DIALOG (dialog), panel);
+  g_signal_connect (dialog, "response", G_CALLBACK (gtr_file_chooser_cb), panel);
+  gtk_native_dialog_show (dialog);
 }
 
 static void

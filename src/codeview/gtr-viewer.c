@@ -135,19 +135,20 @@ error_dialog (GtkWindow *parent, const gchar *msg, ...)
   va_list ap;
   gchar *tmp;
   GtkWidget *dialog;
+  GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
 
   va_start (ap, msg);
   tmp = g_strdup_vprintf (msg, ap);
   va_end (ap);
 
   dialog = gtk_message_dialog_new (parent,
-                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   flags,
                                    GTK_MESSAGE_ERROR,
                                    GTK_BUTTONS_OK, "%s", tmp);
   g_free (tmp);
 
-  gtk_dialog_run (GTK_DIALOG (dialog));
-  gtk_widget_destroy (dialog);
+  g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static gboolean

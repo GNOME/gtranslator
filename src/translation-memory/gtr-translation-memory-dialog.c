@@ -40,6 +40,31 @@ typedef struct
 G_DEFINE_TYPE_WITH_PRIVATE (GtrTranslationMemoryDialog, gtr_translation_memory_dialog, GTK_TYPE_DIALOG)
 
 static void
+native_response_cb (GtkNativeDialog *dialog, guint response, gpointer user_data)
+{
+  GtrTranslationMemoryDialog *dlg;
+  GtrTranslationMemoryDialogPrivate *priv;
+
+  dlg = GTR_TRANSLATION_MEMORY_DIALOG (user_data);
+  priv = gtr_translation_memory_dialog_get_instance_private (dlg);
+
+  if (response == GTK_RESPONSE_ACCEPT)
+    {
+      g_autofree char *filename = NULL;
+      GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
+
+      filename = gtk_file_chooser_get_filename (chooser);
+      gtk_entry_set_text (GTK_ENTRY (priv->directory_entry),
+                          filename);
+      g_settings_set_string (priv->tm_settings,
+                             "po-directory",
+                             filename);
+    }
+
+  gtk_native_dialog_destroy (dialog);
+}
+
+static void
 gtr_translation_memory_dialog_finalize (GObject *object)
 {
   G_OBJECT_CLASS (gtr_translation_memory_dialog_parent_class)->finalize (object);
@@ -71,8 +96,6 @@ on_search_button_clicked (GtkButton                  *button,
                           GtrTranslationMemoryDialog *dlg)
 {
   GtkFileChooserNative *native;
-  gint res;
-  GtrTranslationMemoryDialogPrivate *priv = gtr_translation_memory_dialog_get_instance_private (dlg);
 
   native = gtk_file_chooser_native_new (_("Select PO directory"),
                                         GTK_WINDOW (dlg),
@@ -80,22 +103,8 @@ on_search_button_clicked (GtkButton                  *button,
                                         _("_OK"),
                                         _("_Cancel"));
 
-  res = gtk_native_dialog_run (GTK_NATIVE_DIALOG (native));
-  if (res == GTK_RESPONSE_ACCEPT)
-    {
-      char *filename;
-      GtkFileChooser *chooser = GTK_FILE_CHOOSER (native);
-
-      filename = gtk_file_chooser_get_filename (chooser);
-      gtk_entry_set_text (GTK_ENTRY (priv->directory_entry),
-                          filename);
-      g_settings_set_string (priv->tm_settings,
-                             "po-directory",
-                             filename);
-      g_free (filename);
-    }
-
-  g_object_unref (native);
+  g_signal_connect (native, "response", G_CALLBACK (native_response_cb), dlg);
+  gtk_native_dialog_show (GTK_NATIVE_DIALOG (native));
 }
 
 typedef struct _IdleData
