@@ -20,7 +20,6 @@
 
 #include "config.h"
 
-#include <dazzle.h>
 #include <glib/gi18n.h>
 
 #include "gtr-search-bar.h"
@@ -31,40 +30,42 @@
 
 struct _GtrSearchBar
 {
-  DzlBin                  parent_instance;
+  GtkBin                  parent_instance;
 
-  DzlSignalGroup          *search_signals;
-  DzlBindingGroup         *search_bindings;
-  GtkSearchEntry          *search;
+  GBindingGroup           *search_bindings;
 
   GObject                 *search_entry_tag;
 
-  GtkCheckButton          *case_sensitive;
   GtkButton               *replace_all_button;
   GtkButton               *replace_button;
   GtkButton               *previous_button;
   GtkButton               *next_button;
-  GtkSearchEntry          *replace_entry;
-  GtkSearchEntry          *search_entry;
+  GtkEntry                *replace_entry;
+  GtkEntry                *search_entry;
   GtkGrid                 *search_options;
-  GtkCheckButton          *whole_word;
-  GtkCheckButton          *wrap_around_button;
-  GtkCheckButton          *original_text_checkbutton;
-  GtkCheckButton          *translated_text_checkbutton;
   GtkLabel                *search_text_error;
 
   GtrWindow               *active_window;
 
-  guint                    match_source;
-
   guint                    show_options : 1;
   guint                    replace_mode : 1;
+
+  gboolean                 case_sensitive;
+  gboolean                 at_word_boundaries;
+  gboolean                 wrap_around;
+  gboolean                 at_original_text;
+  gboolean                 at_translated_text;
 };
 
 enum {
   PROP_0,
   PROP_REPLACE_MODE,
   PROP_SHOW_OPTIONS,
+  PROP_CASE_SENSITIVE,
+  PROP_AT_WORD_BOUNDARIES,
+  PROP_WRAP_AROUND,
+  PROP_AT_ORIGINAL_TEXT,
+  PROP_AT_TRANSLATED_TEXT,
   N_PROPS
 };
 
@@ -73,7 +74,7 @@ enum {
   N_SIGNALS
 };
 
-G_DEFINE_TYPE (GtrSearchBar, gtr_search_bar, DZL_TYPE_BIN)
+G_DEFINE_FINAL_TYPE (GtrSearchBar, gtr_search_bar, GTK_TYPE_BIN)
 
 static GParamSpec *properties [N_PROPS];
 static guint signals [N_SIGNALS];
@@ -122,110 +123,117 @@ gtr_search_bar_get_replace_text (GtrSearchBar *dialog)
 }
 
 void
-gtr_search_bar_set_original_text (GtrSearchBar *dialog,
-                                  gboolean match_case)
+gtr_search_bar_set_original_text (GtrSearchBar *self,
+                                  gboolean      at_original_text)
 {
-  g_return_if_fail (GTR_IS_SEARCH_BAR (dialog));
+  g_return_if_fail (GTR_IS_SEARCH_BAR (self));
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (dialog->original_text_checkbutton),
-                                match_case);
+  if (self->at_original_text == at_original_text)
+    return;
+
+  self->at_original_text = at_original_text;
+  g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_AT_ORIGINAL_TEXT]);
+
+  /* Make sure at least one is activated */
+  if (!at_original_text && !self->at_translated_text)
+    gtr_search_bar_set_translated_text (self, TRUE);
 }
 
 gboolean
-gtr_search_bar_get_original_text (GtrSearchBar *dialog)
+gtr_search_bar_get_original_text (GtrSearchBar *self)
 {
-  g_return_val_if_fail (GTR_IS_SEARCH_BAR (dialog), FALSE);
+  g_return_val_if_fail (GTR_IS_SEARCH_BAR (self), FALSE);
 
-  return
-    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-                                  (dialog->original_text_checkbutton));
+  return self->at_original_text;
 }
 
 void
-gtr_search_bar_set_translated_text (GtrSearchBar *dialog,
-                                    gboolean match_case)
+gtr_search_bar_set_translated_text (GtrSearchBar *self,
+                                    gboolean      at_translated_text)
 {
+  g_return_if_fail (GTR_IS_SEARCH_BAR (self));
 
-  g_return_if_fail (GTR_IS_SEARCH_BAR (dialog));
+  if (self->at_translated_text == at_translated_text)
+    return;
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (dialog->translated_text_checkbutton),
-                                match_case);
+  self->at_translated_text = at_translated_text;
+  g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_AT_TRANSLATED_TEXT]);
+
+  /* Make sure at least one is activated */
+  if (!self->at_original_text && !at_translated_text)
+    gtr_search_bar_set_original_text (self, TRUE);
 }
 
 gboolean
-gtr_search_bar_get_translated_text (GtrSearchBar *dialog)
+gtr_search_bar_get_translated_text (GtrSearchBar *self)
 {
+  g_return_val_if_fail (GTR_IS_SEARCH_BAR (self), FALSE);
 
-  g_return_val_if_fail (GTR_IS_SEARCH_BAR (dialog), FALSE);
-
-  return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->translated_text_checkbutton));
+  return self->at_translated_text;
 }
 
 void
-gtr_search_bar_set_match_case (GtrSearchBar *dialog,
-                               gboolean match_case)
+gtr_search_bar_set_match_case (GtrSearchBar *self,
+                               gboolean      case_sensitive)
 {
+  g_return_if_fail (GTR_IS_SEARCH_BAR (self));
 
-  g_return_if_fail (GTR_IS_SEARCH_BAR (dialog));
+  if (self->case_sensitive == case_sensitive)
+    return;
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->case_sensitive),
-                                match_case);
+  self->case_sensitive = case_sensitive;
+  g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_CASE_SENSITIVE]);
 }
 
 gboolean
-gtr_search_bar_get_match_case (GtrSearchBar *dialog)
+gtr_search_bar_get_match_case (GtrSearchBar *self)
 {
-  g_return_val_if_fail (GTR_IS_SEARCH_BAR (dialog), FALSE);
+  g_return_val_if_fail (GTR_IS_SEARCH_BAR (self), FALSE);
 
-  return
-    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-                                  (dialog->case_sensitive));
+  return self->case_sensitive;
 }
 
 void
-gtr_search_bar_set_entire_word (GtrSearchBar *dialog,
-                                gboolean entire_word)
+gtr_search_bar_set_entire_word (GtrSearchBar *self,
+                                gboolean      at_word_boundaries)
 {
-  g_return_if_fail (GTR_IS_SEARCH_BAR (dialog));
+  g_return_if_fail (GTR_IS_SEARCH_BAR (self));
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (dialog->whole_word),
-                                entire_word);
+  if (self->at_word_boundaries == at_word_boundaries)
+    return;
+
+  self->at_word_boundaries = at_word_boundaries;
+  g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_AT_WORD_BOUNDARIES]);
 }
 
 gboolean
-gtr_search_bar_get_entire_word (GtrSearchBar *dialog)
+gtr_search_bar_get_entire_word (GtrSearchBar *self)
 {
+  g_return_val_if_fail (GTR_IS_SEARCH_BAR (self), FALSE);
 
-  g_return_val_if_fail (GTR_IS_SEARCH_BAR (dialog), FALSE);
-
-  return
-    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-                                  (dialog->whole_word));
+  return self->at_word_boundaries;
 }
 
 void
-gtr_search_bar_set_wrap_around (GtrSearchBar *dialog,
-                                   gboolean wrap_around)
+gtr_search_bar_set_wrap_around (GtrSearchBar *self,
+                                gboolean wrap_around)
 {
 
-  g_return_if_fail (GTR_IS_SEARCH_BAR (dialog));
+  g_return_if_fail (GTR_IS_SEARCH_BAR (self));
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (dialog->wrap_around_button),
-                                wrap_around);
+  if (self->wrap_around == wrap_around)
+    return;
+
+  self->wrap_around = wrap_around;
+  g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_WRAP_AROUND]);
 }
 
 gboolean
-gtr_search_bar_get_wrap_around (GtrSearchBar *dialog)
+gtr_search_bar_get_wrap_around (GtrSearchBar *self)
 {
-  g_return_val_if_fail (GTR_IS_SEARCH_BAR (dialog), FALSE);
+  g_return_val_if_fail (GTR_IS_SEARCH_BAR (self), FALSE);
 
-  return
-    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-                                  (dialog->wrap_around_button));
+  return self->wrap_around;
 }
 
 void
@@ -300,56 +308,6 @@ insert_text_handler (GtkEditable * editable,
   g_free (escaped_text);
 }
 
-/*
- * Functions to make sure either translated or original checkbutton
- * is selected at any time. Anything else does not make any sense.
- */
-static void
-translated_checkbutton_toggled (GtkToggleButton * button,
-                                         GtrSearchBar * dialog)
-{
-  gboolean original_text;
-  gboolean translated_text;
-
-  original_text =
-    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-                                  (dialog->original_text_checkbutton));
-  translated_text =
-    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-                                  (
-                                   dialog->translated_text_checkbutton));
-
-  if (!original_text && !translated_text)
-    {
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                    (dialog->original_text_checkbutton),
-                                     TRUE);
-    }
-}
-
-static void
-original_checkbutton_toggled (GtkToggleButton * button,
-                              GtrSearchBar * dialog)
-{
-  gboolean original_text;
-  gboolean translated_text;
-
-  original_text =
-    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-                                  (dialog->original_text_checkbutton));
-  translated_text =
-    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-                                  (
-                                   dialog->translated_text_checkbutton));
-
-  if (!original_text && !translated_text)
-    {
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                    (dialog->translated_text_checkbutton),
-                                     TRUE);
-    }
-}
-
 /*-----------------------------END OF NEW RE_WRITTEN METHODS-----------------*/
 
 gboolean
@@ -401,8 +359,7 @@ maybe_escape_regex (GBinding     *binding,
     {
       g_autofree gchar *unescaped = NULL;
 
-      if (self->search != NULL)
-        entry_text = unescaped = gtk_source_utils_unescape_search_text (entry_text);
+      entry_text = unescaped = gtk_source_utils_unescape_search_text (entry_text);
 
       g_value_set_string (to_value, entry_text);
     }
@@ -450,8 +407,6 @@ search_entry_populate_popup (GtrSearchBar *self,
 
   if (GTK_IS_MENU (widget))
     {
-      g_autoptr(DzlPropertiesGroup) group = NULL;
-
       GtkWidget *item;
       GtkWidget *sep;
       guint pos = 0;
@@ -484,31 +439,7 @@ search_entry_populate_popup (GtrSearchBar *self,
       sep = gtk_separator_menu_item_new ();
       gtk_menu_shell_insert (GTK_MENU_SHELL (widget), sep, pos++);
       gtk_widget_show (sep);
-
-      if (self->search != NULL)
-        {
-          group = dzl_properties_group_new (G_OBJECT (self->search));
-          dzl_properties_group_add_all_properties (group);
-        }
-
-      gtk_widget_insert_action_group (widget, "search-settings", G_ACTION_GROUP (group));
     }
-}
-
-static void
-gtr_search_bar_real_stop_search (GtrSearchBar *self)
-{
-  g_assert (GTR_IS_SEARCH_BAR (self));
-}
-
-static void
-search_entry_stop_search (GtrSearchBar *self,
-                          GtkSearchEntry     *entry)
-{
-  g_assert (GTR_IS_SEARCH_BAR (self));
-  g_assert (GTK_IS_SEARCH_ENTRY (entry));
-
-  g_signal_emit (self, signals [STOP_SEARCH], 0);
 }
 
 static void
@@ -516,11 +447,7 @@ gtr_search_bar_destroy (GtkWidget *widget)
 {
   GtrSearchBar *self = (GtrSearchBar *)widget;
 
-  dzl_clear_source (&self->match_source);
-
-  g_clear_object (&self->search_signals);
   g_clear_object (&self->search_bindings);
-  g_clear_object (&self->search);
   g_clear_object (&self->search_entry_tag);
 
   GTK_WIDGET_CLASS (gtr_search_bar_parent_class)->destroy (widget);
@@ -551,6 +478,35 @@ gtr_search_bar_set_show_options (GtrSearchBar *self,
 }
 
 static void
+add_actions (GtrSearchBar *self)
+{
+  GSimpleActionGroup *group;
+  GPropertyAction *action;
+
+  group = g_simple_action_group_new ();
+
+  action = g_property_action_new ("case-sensitive", self, "case-sensitive");
+  g_action_map_add_action (G_ACTION_MAP (group), G_ACTION (action));
+
+  action = g_property_action_new ("at-word-boundaries", self, "at-word-boundaries");
+  g_action_map_add_action (G_ACTION_MAP (group), G_ACTION (action));
+
+  action = g_property_action_new ("wrap-around", self, "wrap-around");
+  g_action_map_add_action (G_ACTION_MAP (group), G_ACTION (action));
+
+  action = g_property_action_new ("at-original-text", self, "at-original-text");
+  g_action_map_add_action (G_ACTION_MAP (group), G_ACTION (action));
+
+  action = g_property_action_new ("at-translated-text", self, "at-translated-text");
+  g_action_map_add_action (G_ACTION_MAP (group), G_ACTION (action));
+
+  gtk_widget_insert_action_group (GTK_WIDGET (self), "search-settings", G_ACTION_GROUP (group));
+
+  g_object_unref (action);
+}
+
+
+static void
 gtr_search_bar_get_property (GObject    *object,
                              guint       prop_id,
                              GValue     *value,
@@ -566,6 +522,26 @@ gtr_search_bar_get_property (GObject    *object,
 
     case PROP_SHOW_OPTIONS:
       g_value_set_boolean (value, gtr_search_bar_get_show_options (self));
+      break;
+
+    case PROP_CASE_SENSITIVE:
+      g_value_set_boolean (value, gtr_search_bar_get_match_case (self));
+      break;
+
+    case PROP_AT_WORD_BOUNDARIES:
+      g_value_set_boolean (value, gtr_search_bar_get_entire_word (self));
+      break;
+
+    case PROP_WRAP_AROUND:
+      g_value_set_boolean (value, gtr_search_bar_get_wrap_around (self));
+      break;
+
+    case PROP_AT_ORIGINAL_TEXT:
+      g_value_set_boolean (value, gtr_search_bar_get_original_text (self));
+      break;
+
+    case PROP_AT_TRANSLATED_TEXT:
+      g_value_set_boolean (value, gtr_search_bar_get_translated_text (self));
       break;
 
     default:
@@ -591,6 +567,26 @@ gtr_search_bar_set_property (GObject      *object,
       gtr_search_bar_set_show_options (self, g_value_get_boolean (value));
       break;
 
+    case PROP_CASE_SENSITIVE:
+      gtr_search_bar_set_match_case (self, g_value_get_boolean (value));
+      break;
+
+    case PROP_AT_WORD_BOUNDARIES:
+      gtr_search_bar_set_entire_word (self, g_value_get_boolean (value));
+      break;
+
+    case PROP_WRAP_AROUND:
+      gtr_search_bar_set_wrap_around (self, g_value_get_boolean (value));
+      break;
+
+    case PROP_AT_ORIGINAL_TEXT:
+      gtr_search_bar_set_original_text (self, g_value_get_boolean (value));
+      break;
+
+    case PROP_AT_TRANSLATED_TEXT:
+      gtr_search_bar_set_translated_text (self, g_value_get_boolean (value));
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -601,6 +597,7 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  GtkBindingSet *binding_set;
 
   object_class->get_property = gtr_search_bar_get_property;
   object_class->set_property = gtr_search_bar_set_property;
@@ -616,19 +613,37 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
     g_param_spec_boolean ("show-options", NULL, NULL, FALSE,
                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
+  properties [PROP_CASE_SENSITIVE] =
+    g_param_spec_boolean ("case-sensitive", NULL, NULL, FALSE,
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
+
+  properties [PROP_AT_WORD_BOUNDARIES] =
+    g_param_spec_boolean ("at-word-boundaries", NULL, NULL, FALSE,
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
+
+  properties [PROP_WRAP_AROUND] =
+    g_param_spec_boolean ("wrap-around", NULL, NULL, TRUE,
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
+
+  properties [PROP_AT_ORIGINAL_TEXT] =
+    g_param_spec_boolean ("at-original-text", NULL, NULL, TRUE,
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
+
+  properties [PROP_AT_TRANSLATED_TEXT] =
+    g_param_spec_boolean ("at-translated-text", NULL, NULL, TRUE,
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
+
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
   signals [STOP_SEARCH] =
-    g_signal_new_class_handler ("stop-search",
-                                G_TYPE_FROM_CLASS (klass),
-                                G_SIGNAL_RUN_LAST,
-                                G_CALLBACK (gtr_search_bar_real_stop_search),
-                                NULL, NULL,
-                                g_cclosure_marshal_VOID__VOID,
-                                G_TYPE_NONE, 0);
+    g_signal_new ("stop-search",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+                  0,
+                  NULL, NULL, NULL,
+                  G_TYPE_NONE, 0);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/translator/gtr-search-bar.ui");
-  gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, case_sensitive);
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, replace_all_button);
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, replace_button);
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, replace_entry);
@@ -637,12 +652,16 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, next_button);
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, search_options);
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, search_text_error);
-  gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, whole_word);
-  gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, wrap_around_button );
-  gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, original_text_checkbutton);
-  gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, translated_text_checkbutton);
 
   gtk_widget_class_set_css_name (widget_class, "gtrsearchbar");
+
+  /* Replace by gtk_widget_class_add_binding_signal in gtk 4. */
+  /* Also add gtk_widget_class_add_binding for next-match and previous-match as
+   * in gtksearchentry.c, which are already in the app as app.find-next and
+   * app.find-prev */
+  binding_set = gtk_binding_set_by_class (klass);
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY_Escape, 0,
+                                "stop-search", 0);
 }
 
 static void
@@ -650,73 +669,33 @@ gtr_search_bar_init (GtrSearchBar *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  // Sets the Original-text, Translated-text and Wrap-around checkbuttons toggled by default.
+  // Sets the Original-text, Translated-text and Wrap-around enabled by default.
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (self->original_text_checkbutton),
-                                TRUE);
-
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (self->translated_text_checkbutton),
-                                TRUE);
-
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-                                (self->wrap_around_button),
-                                TRUE);
-
-
-  self->search_signals = dzl_signal_group_new (GTK_TYPE_SEARCH_ENTRY);
+  self->case_sensitive = FALSE;
+  self->at_word_boundaries = FALSE;
+  self->wrap_around = TRUE;
+  self->at_original_text = TRUE;
+  self->at_translated_text = TRUE;
 
   g_object_set (G_OBJECT (self->next_button), "can-default", TRUE, NULL);
 
-  self->search_bindings = dzl_binding_group_new ();
+  self->search_bindings = g_binding_group_new ();
 
-  dzl_binding_group_bind_full (self->search_bindings, "search-text",
-                               self->search_entry, "text",
-                               G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL,
-                               maybe_escape_regex, pacify_null_text, self, NULL);
+  g_binding_group_bind_full (self->search_bindings, "search-text",
+                             self->search_entry, "text",
+                             G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL,
+                             maybe_escape_regex, pacify_null_text, self, NULL);
 
-  dzl_binding_group_bind_full (self->search_bindings, "replacement-text",
-                               self->replace_entry, "text",
-                               G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL,
-                               pacify_null_text, pacify_null_text, NULL, NULL);
-
-  dzl_binding_group_bind (self->search_bindings, "case-sensitive",
-                          self->case_sensitive, "active",
-                          G_BINDING_SYNC_CREATE |
- G_BINDING_BIDIRECTIONAL);
-
-  dzl_binding_group_bind (self->search_bindings, "at-word-boundaries",
-                          self->whole_word, "active",
-                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
-
-  dzl_binding_group_bind (self->search_bindings, "wrap-around",
-                          self->whole_word, "active",
-                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
-
-  dzl_binding_group_bind (self->search_bindings, "at-original-text",
-                          self->whole_word, "active",
-                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
-
-  dzl_binding_group_bind (self->search_bindings, "at-translated-text",
-                          self->whole_word, "active",
-                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+  g_binding_group_bind_full (self->search_bindings, "replacement-text",
+                             self->replace_entry, "text",
+                             G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL,
+                             pacify_null_text, pacify_null_text, NULL, NULL);
 
   g_signal_connect (self->search_entry,
                     "insert_text", G_CALLBACK (insert_text_handler), NULL);
 
   g_signal_connect (self->replace_entry,
                     "insert_text", G_CALLBACK (insert_text_handler), NULL);
-
-  g_signal_connect (self->original_text_checkbutton,
-                    "toggled",
-                    G_CALLBACK (original_checkbutton_toggled),
-                    self);
-
-  g_signal_connect (self->translated_text_checkbutton,
-                    "toggled",
-                    G_CALLBACK (translated_checkbutton_toggled),
-                    self);
 
   g_signal_connect_swapped (self->search_entry,
                             "activate",
@@ -748,31 +727,7 @@ gtr_search_bar_init (GtrSearchBar *self)
                             G_CALLBACK (gtr_do_replace_all),
                             self);
 
-  g_signal_connect_swapped (self->search_entry,
-                            "stop-search",
-                            G_CALLBACK (search_entry_stop_search),
-                            self);
-}
-
-GtkSearchEntry *
-gtr_search_bar_get_search (GtrSearchBar *self)
-{
-  g_return_val_if_fail (GTR_IS_SEARCH_BAR (self), NULL);
-
-  return self->search;
-}
-
-void
-gtr_search_bar_set_search (GtrSearchBar *self,
-                           GtkSearchEntry    *search)
-{
-  g_return_if_fail (GTR_IS_SEARCH_BAR (self));
-
-  if (g_set_object (&self->search, search))
-    {
-      dzl_signal_group_set_target (self->search_signals, search);
-      dzl_binding_group_set_source (self->search_bindings, search);
-    }
+  add_actions (self);
 }
 
 void

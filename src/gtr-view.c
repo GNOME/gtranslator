@@ -40,7 +40,6 @@
 #include <gtk/gtk.h>
 
 #include <gtksourceview/gtksource.h>
-#include <dazzle.h>
 
 #include <gspell/gspell.h>
 
@@ -923,8 +922,8 @@ gtr_view_set_font (GtrView *view, char *font)
 
   gtk_font_chooser_set_font (GTK_FONT_CHOOSER (button), font);
   font_desc = gtk_font_chooser_get_font_desc (GTK_FONT_CHOOSER (button));
-  str = dzl_pango_font_description_to_css (font_desc);
-  css = g_strdup_printf ("textview { %s }", str ?: "");
+  str = pango_font_description_to_css (font_desc);
+  css = g_strdup_printf ("textview  %s", str ?: "");
 
   gtk_css_provider_load_from_data (priv->provider, css, -1, NULL);
 

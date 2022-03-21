@@ -187,9 +187,9 @@ gtr_application_init (GtrApplication *application)
       {NULL}
   };
 
-  g_application_add_main_option_entries (application, options);
+  g_application_add_main_option_entries (G_APPLICATION (application), options);
 
-  g_signal_connect (application, "handle-local-options", handle_local_options_cb, NULL);
+  g_signal_connect (application, "handle-local-options", G_CALLBACK (handle_local_options_cb), NULL);
 
   /* Creating config folder */
   ensure_user_config_dir (); /* FIXME: is this really needed ? */
@@ -293,17 +293,6 @@ find_prev_activated (GSimpleAction *action,
   g_return_if_fail (active_tab != NULL);
   gtr_window_show_search_bar (priv->active_window, TRUE);
   gtr_tab_find_prev (active_tab);
-}
-
-static void
-find_unactivated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
-{
-  GtrApplication *app = GTR_APPLICATION (user_data);
-
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_window_show_search_bar (priv->active_window, FALSE);
 }
 
 static void
@@ -652,7 +641,6 @@ static GActionEntry app_entries[] = {
   { "find_and_replace", find_and_replace_activated, NULL, NULL, NULL },
   { "findtoggle", find_toggle_activated, NULL, NULL, NULL },
   { "find", find_activated, NULL, NULL, NULL },
-  { "find-off", find_unactivated, NULL, NULL, NULL},
   { "find-next", find_next_activated, NULL, NULL, NULL },
   { "find-prev", find_prev_activated, NULL, NULL, NULL },
   { "new_window", new_window_activated, NULL, NULL, NULL },
@@ -722,7 +710,6 @@ gtr_application_startup (GApplication *application)
 
   set_kb (application, "app.fuzzy", "<Ctrl>u");
   set_kb (application, "app.find", "<Ctrl>f");
-  set_kb (application, "app.find-off", "Escape");
   set_kb (application, "app.find_and_replace", "<Ctrl>h");
   set_kb (application, "app.find-next", "<Ctrl>g");
   set_kb (application, "app.find-prev", "<Ctrl><Shift>g");
