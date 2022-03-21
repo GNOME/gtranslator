@@ -528,6 +528,16 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtrTab *tab;
 
+  // Remove all tabs when creating a new one,
+  // this way we only have one tab. This is a workaround
+  // to remove the tab functionality without change all
+  // the code
+  GList *tabs, *l;
+  tabs = gtr_window_get_all_tabs (window);
+  for (l = tabs; l != NULL; l = g_list_next (l))
+    _gtr_window_close_tab (window, l->data);
+  g_list_free (tabs);
+
   tab = gtr_tab_new (po, GTK_WINDOW (window));
   gtk_widget_show (GTK_WIDGET (tab));
 
