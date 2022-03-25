@@ -34,17 +34,8 @@ G_BEGIN_DECLS
 /* Utility Macros */
 
 #define GTR_TYPE_HEADER			(gtr_header_get_type ())
-#define GTR_HEADER(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_HEADER, GtrHeader))
-#define GTR_HEADER_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_HEADER, GtrHeaderClass))
-#define GTR_IS_HEADER(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_HEADER))
-#define GTR_IS_HEADER_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_HEADER))
-#define GTR_HEADER_GET_CLASS(o)		(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_HEADER, GtrHeaderClass))
 
-/* Main object structure */
-typedef struct _GtrHeader GtrHeader;
-
-/* Class definition */
-typedef struct _GtrHeaderClass GtrHeaderClass;
+G_DECLARE_FINAL_TYPE (GtrHeader, gtr_header, GTR, HEADER, GtrMsg)
 
 struct _GtrHeaderClass
 {
@@ -52,8 +43,6 @@ struct _GtrHeaderClass
 };
 
 /* Public methods */
-GType            gtr_header_get_type                 (void) G_GNUC_CONST;
-
 GtrHeader       *gtr_header_new                      (po_message_iterator_t iter,
                                                       po_message_t message);
 
