@@ -31,19 +31,8 @@
 G_BEGIN_DECLS
 
 #define GTR_TYPE_MSG		(gtr_msg_get_type ())
-#define GTR_MSG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MSG, GtrMsg))
-#define GTR_MSG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_MSG, GtrMsgClass))
-#define GTR_IS_MSG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_MSG))
-#define GTR_IS_MSG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_MSG))
-#define GTR_MSG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_MSG, GtrMsgClass))
 
-typedef struct _GtrMsg        GtrMsg;
-typedef struct _GtrMsgClass   GtrMsgClass;
-
-struct _GtrMsg
-{
-  GObject parent_instance;
-};
+G_DECLARE_DERIVABLE_TYPE (GtrMsg, gtr_msg, GTR, MSG, GObject)
 
 struct _GtrMsgClass
 {
@@ -58,8 +47,6 @@ typedef enum
 } GtrMsgStatus;
 
 /* Public methods */
-GType                      gtr_msg_get_type                 (void) G_GNUC_CONST;
-
 gboolean                   gtr_msg_is_translated            (GtrMsg     *msg);
 
 gboolean                   gtr_msg_is_fuzzy                 (GtrMsg     *msg);
