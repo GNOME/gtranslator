@@ -35,14 +35,8 @@
 G_BEGIN_DECLS
 
 #define GTR_TYPE_WINDOW		(gtr_window_get_type ())
-#define GTR_WINDOW(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_WINDOW, GtrWindow))
-#define GTR_WINDOW_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_WINDOW, GtrWindowClass))
-#define GTR_IS_WINDOW(o)	(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_WINDOW))
-#define GTR_IS_WINDOW_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_WINDOW))
-#define GTR_WINDOW_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_WINDOW, GtrWindowClass))
 
-typedef struct _GtrWindow        GtrWindow;
-typedef struct _GtrWindowClass   GtrWindowClass;
+G_DECLARE_FINAL_TYPE (GtrWindow, gtr_window, GTR, WINDOW, GtkApplicationWindow)
 
 struct _GtrWindow
 {
@@ -53,10 +47,6 @@ struct _GtrWindowClass
 {
   GtkApplicationWindowClass parent_class;
 };
-
-GType gtr_window_get_type (void) G_GNUC_CONST;
-
-GType gtr_window_register_type (GTypeModule * module);
 
 GtrTab *gtr_window_create_tab (GtrWindow * window, GtrPo * po);
 
