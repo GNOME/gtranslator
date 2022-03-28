@@ -134,12 +134,14 @@ static void
 gtr_close_confirmation_dialog_init (GtrCloseConfirmationDialog * dlg)
 {
   AtkObject *atk_obj;
+  GtkWidget *content_area = gtk_dialog_get_content_area (GTK_DIALOG (dlg));
 
-  gtk_widget_set_margin_start (GTK_WIDGET (dlg), 6);
-  gtk_widget_set_margin_end (GTK_WIDGET (dlg), 6);
-  gtk_widget_set_margin_top (GTK_WIDGET (dlg), 6);
-  gtk_widget_set_margin_bottom (GTK_WIDGET (dlg), 6);
-  gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))), 14);
+  gtk_widget_set_margin_start (GTK_WIDGET (content_area), 6);
+  gtk_widget_set_margin_end (GTK_WIDGET (content_area), 6);
+  gtk_widget_set_margin_top (GTK_WIDGET (content_area), 6);
+  gtk_widget_set_margin_bottom (GTK_WIDGET (content_area), 6);
+
+  gtk_box_set_spacing (GTK_BOX (content_area), 14);
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
   gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dlg), TRUE);
 
