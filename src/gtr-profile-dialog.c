@@ -78,10 +78,10 @@ gtr_profile_dialog_init (GtrProfileDialog *dlg)
 
   content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
 
-  gtk_widget_set_margin_start (GTK_WIDGET (dlg), 6);
-  gtk_widget_set_margin_end (GTK_WIDGET (dlg), 6);
-  gtk_widget_set_margin_top (GTK_WIDGET (dlg), 6);
-  gtk_widget_set_margin_bottom (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_start (GTK_WIDGET (content_area), 6);
+  gtk_widget_set_margin_end (GTK_WIDGET (content_area), 6);
+  gtk_widget_set_margin_top (GTK_WIDGET (content_area), 6);
+  gtk_widget_set_margin_bottom (GTK_WIDGET (content_area), 6);
   gtk_box_set_spacing (content_area, 6);
 
   builder = gtk_builder_new ();
