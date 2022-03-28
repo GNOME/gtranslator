@@ -47,6 +47,7 @@
 #include "gtr-window.h"
 #include "gtr-progress.h"
 #include "gtr-actions.h"
+#include "gtr-utils.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -786,7 +787,7 @@ gtr_tab_init (GtrTab * tab)
   priv->find_replace_flag = FALSE;
   priv->progress = gtr_progress_new ();
   gtk_widget_show (GTK_WIDGET (priv->progress));
-  gtk_container_add (GTK_CONTAINER (priv->progress_box), GTK_WIDGET (priv->progress));
+  gtk_box_append (GTK_BOX (priv->progress_box), GTK_WIDGET (priv->progress));
 
   g_signal_connect (priv->progress_eventbox, "button-press-event",
                     G_CALLBACK (show_hide_revealer), tab);
@@ -1922,7 +1923,7 @@ gtr_tab_set_info_bar (GtrTab * tab, GtkWidget * infobar)
   if (infobar == NULL)
     return;
 
-  gtk_box_pack_start (GTK_BOX (tab), priv->infobar, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (tab), priv->infobar);
 
   g_object_add_weak_pointer (G_OBJECT (priv->infobar),
                              (gpointer *) & priv->infobar);

@@ -93,9 +93,13 @@ gtr_viewer_init (GtrViewer *dlg)
   priv->filename_label = GTK_WIDGET (gtk_builder_get_object (builder, "filename_label"));
   g_object_unref (builder);
 
-  gtk_box_pack_start (content_area, priv->main_box, TRUE, TRUE, 0);
+  gtk_widget_set_vexpand (priv->main_box, TRUE);
+  gtk_box_append (content_area, priv->main_box);
 
-  gtk_container_set_border_width (GTK_CONTAINER (priv->main_box), 5);
+  gtk_widget_set_margin_start (priv->main_box, 6);
+  gtk_widget_set_margin_end (priv->main_box, 6);
+  gtk_widget_set_margin_top (priv->main_box, 6);
+  gtk_widget_set_margin_bottom (priv->main_box, 6);
 
   /* Source view */
   priv->view = gtk_source_view_new ();

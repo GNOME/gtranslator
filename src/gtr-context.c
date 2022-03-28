@@ -22,6 +22,7 @@
 #include "gtr-context.h"
 #include "gtr-tab.h"
 #include "gtr-debug.h"
+#include "gtr-utils.h"
 #include "translation-memory/gtr-translation-memory-ui.h"
 
 #include <glib.h>
@@ -123,9 +124,13 @@ setup_notes_edition (GtrContextPanel *panel)
 
   gtk_container_add (GTK_CONTAINER (scrolled_window),
                                          text_view);
-  gtk_container_set_border_width (GTK_CONTAINER (scrolled_window), 5);
+  gtk_widget_set_margin_start (scrolled_window, 6);
+  gtk_widget_set_margin_end (scrolled_window, 6);
+  gtk_widget_set_margin_top (scrolled_window, 6);
+  gtk_widget_set_margin_bottom (scrolled_window, 6);
 
-  gtk_box_pack_start (dialog_area, scrolled_window, TRUE, TRUE, 6);
+  gtk_widget_set_vexpand (scrolled_window, TRUE);
+  gtk_box_append (dialog_area, scrolled_window);
 
   text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
   gtk_text_buffer_set_text (text_buffer, gtr_msg_get_comment (priv->current_msg), -1);
@@ -591,7 +596,6 @@ gtr_context_init_tm (GtrContextPanel *panel,
                                                                tm);
   gtk_widget_show (priv->translation_memory_ui);
   gtk_widget_set_size_request (priv->translation_memory_ui, 300, 400);
-  gtk_box_pack_start (GTK_BOX (priv->translation_memory_box),
-                      priv->translation_memory_ui,
-                      FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (priv->translation_memory_box),
+                  priv->translation_memory_ui);
 }

@@ -328,8 +328,11 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
 
   content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
 
-  gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-  gtk_box_set_spacing (content_area, 2);
+  gtk_widget_set_margin_start (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_end (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_top (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_bottom (GTK_WIDGET (dlg), 6);
+  gtk_box_set_spacing (content_area, 6);
 
   g_signal_connect (dlg, "response", G_CALLBACK (gtk_widget_destroy), NULL);
 
@@ -362,9 +365,12 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
 
   g_object_unref (builder);
 
-  gtk_box_pack_start (content_area, priv->main_box, FALSE, FALSE, 0);
+  gtk_box_append (content_area, priv->main_box);
 
-  gtk_container_set_border_width (GTK_CONTAINER (priv->notebook), 5);
+  gtk_widget_set_margin_start (priv->notebook, 6);
+  gtk_widget_set_margin_end (priv->notebook, 6);
+  gtk_widget_set_margin_top (priv->notebook, 6);
+  gtk_widget_set_margin_bottom (priv->notebook, 6);
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->take_my_options),
                                 g_settings_get_boolean (priv->settings,

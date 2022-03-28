@@ -268,7 +268,8 @@ gtr_tab_label_init (GtrTabLabel *tab_label)
 
   ebox = gtk_event_box_new ();
   gtk_event_box_set_visible_window (GTK_EVENT_BOX (ebox), FALSE);
-  gtk_box_pack_start (GTK_BOX (tab_label), ebox, TRUE, TRUE, 0);
+  gtk_widget_set_hexpand (ebox, TRUE);
+  gtk_box_append (GTK_BOX (tab_label), ebox);
   priv->ebox = ebox;
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
@@ -276,7 +277,7 @@ gtr_tab_label_init (GtrTabLabel *tab_label)
 
   close_button = gtr_close_button_new ();
   gtk_widget_set_tooltip_text (close_button, _("Close document"));
-  gtk_box_pack_start (GTK_BOX (tab_label), close_button, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (tab_label), close_button);
   priv->close_button = close_button;
 
   g_signal_connect (close_button,
@@ -286,17 +287,18 @@ gtr_tab_label_init (GtrTabLabel *tab_label)
 
   /* setup icon, empty by default */
   icon = gtk_image_new ();
-  gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (hbox), icon);
   priv->icon = icon;
 
   label = gtk_label_new ("");
   gtk_label_set_xalign (GTK_LABEL (label), 0.0);
   gtk_label_set_yalign (GTK_LABEL (label), 0.5);
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (hbox), label);
   priv->label = label;
 
   dummy_label = gtk_label_new ("");
-  gtk_box_pack_start (GTK_BOX (hbox), dummy_label, TRUE, TRUE, 0);
+  gtk_widget_set_hexpand (dummy_label, TRUE);
+  gtk_box_append (GTK_BOX (hbox), dummy_label);
 
   gtk_widget_show (ebox);
   gtk_widget_show (hbox);

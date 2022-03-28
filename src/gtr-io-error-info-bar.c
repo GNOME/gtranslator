@@ -18,6 +18,7 @@
  */
 
 #include "gtr-io-error-info-bar.h"
+#include "gtr-utils.h"
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -54,13 +55,14 @@ set_info_bar_text_and_icon (GtkInfoBar * infobar,
 
   image = gtk_image_new_from_icon_name (icon_stock_id, GTK_ICON_SIZE_DIALOG);
   gtk_widget_show (image);
-  gtk_box_pack_start (GTK_BOX (hbox_content), image, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (hbox_content), image);
   gtk_widget_set_halign (image, 0.5);
   gtk_widget_set_valign (image, 0.0);
 
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
   gtk_widget_show (vbox);
-  gtk_box_pack_start (GTK_BOX (hbox_content), vbox, TRUE, TRUE, 0);
+  gtk_widget_set_hexpand (vbox, TRUE);
+  gtk_box_append (GTK_BOX (hbox_content), vbox);
 
   primary_markup = g_strdup_printf ("<b>%s</b>", primary_text);
   primary_label = gtk_label_new (primary_markup);
@@ -68,7 +70,8 @@ set_info_bar_text_and_icon (GtkInfoBar * infobar,
 
   gtk_widget_show (primary_label);
 
-  gtk_box_pack_start (GTK_BOX (vbox), primary_label, TRUE, TRUE, 0);
+  gtk_widget_set_vexpand (primary_label, TRUE);
+  gtk_box_append (GTK_BOX (vbox), primary_label);
   gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
   gtk_label_set_line_wrap (GTK_LABEL (primary_label), FALSE);
   gtk_label_set_xalign (GTK_LABEL (primary_label), 0.0);
@@ -87,7 +90,8 @@ set_info_bar_text_and_icon (GtkInfoBar * infobar,
 
       gtk_widget_show (secondary_label);
 
-      gtk_box_pack_start (GTK_BOX (vbox), secondary_label, TRUE, TRUE, 0);
+      gtk_widget_set_vexpand (secondary_label, TRUE);
+      gtk_box_append (GTK_BOX (vbox), secondary_label);
 
       gtk_widget_set_can_focus (secondary_label, TRUE);
 

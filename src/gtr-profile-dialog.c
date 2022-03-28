@@ -78,9 +78,11 @@ gtr_profile_dialog_init (GtrProfileDialog *dlg)
 
   content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
 
-  /* HIG defaults */
-  gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-  gtk_box_set_spacing (content_area, 2); /* 2 * 5 + 2 = 12 */
+  gtk_widget_set_margin_start (GTK_WIDGET (content_area), 6);
+  gtk_widget_set_margin_end (GTK_WIDGET (content_area), 6);
+  gtk_widget_set_margin_top (GTK_WIDGET (content_area), 6);
+  gtk_widget_set_margin_bottom (GTK_WIDGET (content_area), 6);
+  gtk_box_set_spacing (content_area, 6);
 
   builder = gtk_builder_new ();
   GError *error = NULL;
@@ -100,12 +102,12 @@ gtr_profile_dialog_init (GtrProfileDialog *dlg)
   fetcher_box = GTK_WIDGET (gtk_builder_get_object (builder, "fetcher_box"));
   g_object_unref (builder);
 
-  gtk_box_pack_start (content_area, priv->main_box, FALSE, FALSE, 0);
+  gtk_box_append (content_area, priv->main_box);
 
   priv->languages_fetcher = gtr_languages_fetcher_new ();
   gtk_widget_show (priv->languages_fetcher);
-  gtk_box_pack_start (GTK_BOX (fetcher_box), priv->languages_fetcher,
-                      TRUE, TRUE, 0);
+  gtk_widget_set_hexpand (priv->languages_fetcher, TRUE);
+  gtk_box_append (GTK_BOX (fetcher_box), priv->languages_fetcher);
 }
 
 static void

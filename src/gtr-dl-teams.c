@@ -872,14 +872,14 @@ gtr_dl_teams_init (GtrDlTeams *self)
   gtk_widget_set_name (priv->teams_combobox, "combo_teams");
   gtr_filter_selection_set_text (GTR_FILTER_SELECTION (priv->teams_combobox), _("Translation Team"));
 
-  gtk_container_add (GTK_CONTAINER (priv->select_box), priv->teams_combobox);
+  gtk_box_append (GTK_BOX (priv->select_box), priv->teams_combobox);
   gtk_widget_set_sensitive (priv->teams_combobox, FALSE);
 
   priv->modules_combobox = GTK_WIDGET (gtr_filter_selection_new ());
   gtk_widget_set_name (priv->modules_combobox, "combo_modules");
   gtr_filter_selection_set_text (GTR_FILTER_SELECTION (priv->modules_combobox), _("Module"));
 
-  gtk_container_add (GTK_CONTAINER (priv->select_box), priv->modules_combobox);
+  gtk_box_append (GTK_BOX (priv->select_box), priv->modules_combobox);
   gtk_widget_set_sensitive (priv->modules_combobox, FALSE);
 
   g_signal_connect (priv->open_button,
@@ -890,12 +890,12 @@ gtr_dl_teams_init (GtrDlTeams *self)
   /* Add empty combo boxes for DL domains and branches and hide them */
   priv->domains_combobox = gtk_combo_box_text_new ();
   gtk_widget_set_name (priv->domains_combobox, "combo_domains");
-  gtk_container_add (GTK_CONTAINER (priv->select_box), priv->domains_combobox);
+  gtk_box_append (GTK_BOX (priv->select_box), priv->domains_combobox);
   gtk_widget_hide (priv->domains_combobox);
 
   priv->branches_combobox = gtk_combo_box_text_new ();
   gtk_widget_set_name (priv->branches_combobox, "combo_branches");
-  gtk_container_add (GTK_CONTAINER (priv->select_box), priv->branches_combobox);
+  gtk_box_append (GTK_BOX (priv->select_box), priv->branches_combobox);
   gtk_widget_hide (priv->branches_combobox);
 
   /* Load teams and modules automatically */

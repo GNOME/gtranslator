@@ -23,6 +23,7 @@
 #endif
 
 #include "gtr-upload-dialog.h"
+#include "gtr-utils.h"
 
 #include <string.h>
 #include <glib.h>
@@ -66,9 +67,11 @@ gtr_upload_dialog_init (GtrUploadDialog *dlg)
 
   content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
 
-  /* HIG defaults */
-  gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-  gtk_box_set_spacing (content_area, 2); /* 2 * 5 + 2 = 12 */
+  gtk_widget_set_margin_start (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_end (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_top (GTK_WIDGET (dlg), 6);
+  gtk_widget_set_margin_bottom (GTK_WIDGET (dlg), 6);
+  gtk_box_set_spacing (content_area, 6);
 
   builder = gtk_builder_new ();
   GError *error = NULL;
@@ -84,7 +87,7 @@ gtr_upload_dialog_init (GtrUploadDialog *dlg)
   priv->label = GTK_WIDGET (gtk_builder_get_object (builder, "label"));
   g_object_unref (builder);
 
-  gtk_box_pack_start (content_area, priv->main_box, FALSE, FALSE, 0);
+  gtk_box_append (content_area, priv->main_box);
 }
 
 GtrUploadDialog *

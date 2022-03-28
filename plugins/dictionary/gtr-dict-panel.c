@@ -523,7 +523,7 @@ gtr_dict_panel_init (GtrDictPanel * panel)
   g_signal_connect (panel->priv->defbox, "link-clicked",
                     G_CALLBACK (gtr_dict_panel_link_clicked), panel);
 
-  gtk_container_add (GTK_CONTAINER (vbox), panel->priv->defbox);
+  gtk_box_append (G_BOX (vbox), panel->priv->defbox);
   gtk_widget_show (panel->priv->defbox);
 
   /* Sidebar */
