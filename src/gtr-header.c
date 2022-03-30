@@ -50,7 +50,7 @@ struct _GtrHeader
   GtrMsg parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrHeader, gtr_header, GTR_TYPE_MSG)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrHeader, gtr_header, GTR_TYPE_MSG)
 
 static void
 gtr_header_set_field (GtrHeader * header,

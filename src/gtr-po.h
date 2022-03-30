@@ -37,25 +37,13 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_PO		(gtr_po_get_type ())
-#define GTR_PO(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_PO, GtrPo))
-#define GTR_PO_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_PO, GtrPoClass))
-#define GTR_IS_PO(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_PO))
-#define GTR_IS_PO_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_PO))
-#define GTR_PO_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_PO, GtrPoClass))
-/*
- * Main object structure
- */
-typedef struct _GtrPo GtrPo;
+
+G_DECLARE_FINAL_TYPE (GtrPo, gtr_po, GTR, PO, GObject)
 
 struct _GtrPo
 {
   GObject parent_instance;
 };
-
-/*
- * Class definition
- */
-typedef struct _GtrPoClass GtrPoClass;
 
 struct _GtrPoClass
 {
@@ -85,12 +73,6 @@ typedef enum
  * Public methods
  */
 GQuark gtr_po_error_quark (void);
-
-GType
-gtr_po_get_type (void)
-  G_GNUC_CONST;
-
-     GType gtr_po_register_type (GTypeModule * module);
 
      GtrPo *gtr_po_new (void);
 

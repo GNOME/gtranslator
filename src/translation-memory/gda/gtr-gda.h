@@ -25,14 +25,8 @@
 G_BEGIN_DECLS
 
 #define GTR_TYPE_GDA		(gtr_gda_get_type ())
-#define GTR_GDA(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_GDA, GtrGda))
-#define GTR_GDA_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_GDA, GtrGdaClass))
-#define GTR_IS_GDA(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_GDA))
-#define GTR_IS_GDA_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_GDA))
-#define GTR_GDA_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_GDA, GtrGdaClass))
 
-typedef struct _GtrGda        GtrGda;
-typedef struct _GtrGdaClass   GtrGdaClass;
+G_DECLARE_FINAL_TYPE (GtrGda, gtr_gda, GTR, GDA, GObject)
 
 struct _GtrGda
 {
@@ -43,10 +37,6 @@ struct _GtrGdaClass
 {
   GObjectClass parent_class;
 };
-
-GType                   gtr_gda_get_type                (void) G_GNUC_CONST;
-
-GType                   gtr_gda_register_type           (GTypeModule *module);
 
 GtrGda                 *gtr_gda_new                     (void);
 

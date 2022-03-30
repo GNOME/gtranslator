@@ -117,10 +117,10 @@ typedef struct
 } GtrPoPrivate;
 
 
-G_DEFINE_TYPE_WITH_CODE (GtrPo, gtr_po, G_TYPE_OBJECT,
-                         G_ADD_PRIVATE (GtrPo)
-                         G_IMPLEMENT_INTERFACE (GTR_TYPE_MESSAGE_CONTAINER,
-                                                gtr_po_message_container_init))
+G_DEFINE_FINAL_TYPE_WITH_CODE (GtrPo, gtr_po, G_TYPE_OBJECT,
+                               G_ADD_PRIVATE (GtrPo)
+                               G_IMPLEMENT_INTERFACE (GTR_TYPE_MESSAGE_CONTAINER,
+                                                      gtr_po_message_container_init))
 
 enum
 {

@@ -59,12 +59,12 @@ typedef struct
   GHashTable *lookup_query_cache;
 } GtrGdaPrivate;
 
-G_DEFINE_TYPE_WITH_CODE (GtrGda,
-                         gtr_gda,
-                         G_TYPE_OBJECT,
-                         G_ADD_PRIVATE (GtrGda)
-                         G_IMPLEMENT_INTERFACE (GTR_TYPE_TRANSLATION_MEMORY,
-                                                gtr_translation_memory_iface_init))
+G_DEFINE_FINAL_TYPE_WITH_CODE (GtrGda,
+                               gtr_gda,
+                               G_TYPE_OBJECT,
+                               G_ADD_PRIVATE (GtrGda)
+                               G_IMPLEMENT_INTERFACE (GTR_TYPE_TRANSLATION_MEMORY,
+                                                      gtr_translation_memory_iface_init))
 
 static gint
 select_integer (GdaConnection *db,

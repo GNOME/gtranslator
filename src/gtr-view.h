@@ -29,12 +29,10 @@ G_BEGIN_DECLS
  * Type checking and casting macros
  */
 #define GTR_TYPE_VIEW		(gtr_view_get_type ())
-#define GTR_VIEW(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_VIEW, GtrView))
-#define GTR_VIEW_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_VIEW, GtrViewClass))
-#define GTR_IS_VIEW(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_VIEW))
-#define GTR_IS_VIEW_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_VIEW))
-#define GTR_VIEW_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_VIEW, GtrViewClass))
-  typedef enum
+
+G_DECLARE_FINAL_TYPE (GtrView, gtr_view, GTR, VIEW, GtkSourceView)
+
+typedef enum
 {
   GTR_SEARCH_DONT_SET_FLAGS = 1 << 0,
   GTR_SEARCH_ENTIRE_WORD = 1 << 1,
@@ -44,8 +42,6 @@ G_BEGIN_DECLS
 /*
  * Main object structure
  */
-typedef struct _GtrView GtrView;
-
 struct _GtrView
 {
   GtkSourceView parent_instance;
@@ -54,8 +50,6 @@ struct _GtrView
 /*
  * Class definition
  */
-typedef struct _GtrViewClass GtrViewClass;
-
 struct _GtrViewClass
 {
   GtkSourceViewClass parent_class;
@@ -65,12 +59,6 @@ struct _GtrViewClass
 /*
  * Public methods
  */
-GType
-gtr_view_get_type (void)
-  G_GNUC_CONST;
-
-     GType gtr_view_register_type (GTypeModule * module);
-
      GtkWidget *gtr_view_new (void);
 
      gboolean gtr_view_get_selected_text (GtrView * view,
