@@ -25,6 +25,7 @@
 
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include "gtr-utils.h"
 #include "gtr-tab-label.h"
 #include "gtr-close-button.h"
 
