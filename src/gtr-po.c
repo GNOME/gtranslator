@@ -40,6 +40,7 @@
 #include "gtr-profile.h"
 #include "gtr-utils.h"
 #include "gtr-message-container.h"
+#include "gtr-preferences-dialog.h"
 
 #include <string.h>
 #include <errno.h>
@@ -75,6 +76,9 @@ typedef struct
 
   /* The obsolete messages are stored within this gchar. */
   gchar *obsolete;
+
+  /* Whether po file contains obsolete entries or not */
+  gboolean po_contains_obsolete_entries;
 
   /* Is the file write-permitted? (read-only) */
   gboolean no_write_perms;
@@ -214,6 +218,7 @@ gtr_po_init (GtrPo * po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
+  priv->po_contains_obsolete_entries = FALSE;
   priv->location = NULL;
   priv->gettext_po_file = NULL;
   priv->dl_team = NULL;
@@ -734,6 +739,8 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
           /* Build up messages */
           priv->messages = g_list_prepend (priv->messages, msg);
         }
+      else
+        priv->po_contains_obsolete_entries = TRUE;
     }
 
   if (priv->messages == NULL)
@@ -778,6 +785,9 @@ gtr_po_save_file (GtrPo * po, GError ** error)
   gchar *msg_error;
   GtrHeader *header;
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  /* can't use priv->iter as its already exhausted*/
+  po_message_iterator_t iter = po_message_iterator (priv->gettext_po_file, NULL);
+  po_message_t message;
 
   /*
    * Initialice the handler error.
@@ -799,6 +809,21 @@ gtr_po_save_file (GtrPo * po, GError ** error)
                      "Your file should likely be named “%s.po”."), filename);
       g_free (filename);
       return;
+    }
+
+  /*
+   * Removes obsolete entries from file if user opt for it
+   */
+  if (priv->po_contains_obsolete_entries && gtr_prefs_get_remove_obsolete ())
+    {
+      while ((message = po_next_message (iter)))
+        {
+          if(po_message_is_obsolete (message))
+            {
+              po_message_set_msgstr (message,"");
+              po_message_set_msgid (message, "");
+            }
+        }
     }
 
 

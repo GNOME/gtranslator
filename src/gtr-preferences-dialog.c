@@ -55,6 +55,7 @@ typedef struct
 
   /* Files->General */
   GtkWidget *warn_if_contains_fuzzy_checkbutton;
+  GtkCheckButton *remove_obsolete_entries;
 
   /* Files->Autosave */
   GtkWidget *autosave_checkbutton;
@@ -100,6 +101,11 @@ setup_files_general_page (GtrPreferencesDialog * dlg)
                    priv->warn_if_contains_fuzzy_checkbutton,
                    "active",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+  g_settings_bind (priv->files_settings,
+                   GTR_SETTINGS_REMOVE_OBSOLETE_ENTRIES,
+                   priv->remove_obsolete_entries,
+                   "active",
+                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 }
 
 static void
@@ -141,6 +147,14 @@ setup_files_autosave_page (GtrPreferencesDialog * dlg)
                    priv->create_backup_checkbutton,
                    "active",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+}
+
+int 
+gtr_prefs_get_remove_obsolete ()
+{
+  GSettings *files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
+  gboolean remove_obsolete_entries_bool = g_settings_get_boolean (files_settings, GTR_SETTINGS_REMOVE_OBSOLETE_ENTRIES);
+  return remove_obsolete_entries_bool;
 }
 
 static void
@@ -671,6 +685,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   priv->notebook = GTK_WIDGET (gtk_builder_get_object (builder, "notebook"));
   g_object_ref (priv->notebook);
   priv->warn_if_contains_fuzzy_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "warn_if_fuzzy_checkbutton"));
+  priv->remove_obsolete_entries = GTK_CHECK_BUTTON (gtk_builder_get_object (builder, "remove_obsolete_entries"));
   priv->autosave_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "autosave_checkbutton"));
   priv->autosave_interval_spinbutton = GTK_WIDGET (gtk_builder_get_object (builder, "autosave_interval_spinbutton"));
   priv->autosave_grid = GTK_WIDGET (gtk_builder_get_object (builder, "autosave_grid"));
@@ -757,4 +772,3 @@ gtr_show_preferences_dialog (GtrWindow * window)
 
   gtk_window_present (GTK_WINDOW (dlg));
 }
-
