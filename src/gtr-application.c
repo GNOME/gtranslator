@@ -663,7 +663,6 @@ set_kb (GApplication *app, gchar *action, gchar *accel)
 static void
 gtr_application_startup (GApplication *application)
 {
-  GtkBuilder *builder;
   GtrApplication *app = GTR_APPLICATION (application);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
@@ -726,12 +725,6 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.tm_7", "<Ctrl>7");
   set_kb (application, "app.tm_8", "<Ctrl>8");
   set_kb (application, "app.tm_9", "<Ctrl>9");
-
-  builder = gtk_builder_new ();
-  gtk_builder_add_from_resource (builder, "/org/gnome/translator/gtranslator-menu.ui", NULL);
-  gtk_application_set_app_menu (GTK_APPLICATION (application),
-                                G_MENU_MODEL (gtk_builder_get_object (builder, "appmenu")));
-  g_object_unref (builder);
 
   gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
                                              GTK_STYLE_PROVIDER (priv->provider), 600);

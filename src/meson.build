@@ -99,7 +99,6 @@ sources += gnome.mkenums(
 )
 
 resource_data = files(
-  'gtranslator-menu.ui',
   'gtranslator-ui.xml',
   'gtr-context.ui',
   'gtr-header-dialog.ui',
