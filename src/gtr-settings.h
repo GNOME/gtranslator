@@ -57,6 +57,7 @@ GSettings               *gtr_settings_new                       (void);
 
 /* key constants: IMPORTANT: keep them in the same order as the schema */
 #define GTR_SETTINGS_WARN_IF_CONTAINS_FUZZY		"warn-if-contains-fuzzy"
+#define GTR_SETTINGS_REMOVE_OBSOLETE_ENTRIES            "remove-obsolete-entries"
 #define GTR_SETTINGS_AUTO_SAVE				"auto-save"
 #define GTR_SETTINGS_AUTO_SAVE_INTERVAL			"auto-save-interval"
 #define GTR_SETTINGS_CREATE_BACKUP			"create-backup"

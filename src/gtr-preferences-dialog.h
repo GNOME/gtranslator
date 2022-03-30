@@ -55,6 +55,7 @@ struct _GtrPreferencesDialogClass
 GType           gtr_preferences_dialog_get_type         (void)G_GNUC_CONST;
 
 void            gtr_show_preferences_dialog             (GtrWindow *window);
+int             gtr_prefs_get_remove_obsolete           (void);
 
 G_END_DECLS
 
