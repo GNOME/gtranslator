@@ -69,8 +69,6 @@ typedef enum
   GTR_PO_STATE_MODIFIED
 } GtrPoState;
 
-G_DEFINE_AUTOPTR_CLEANUP_FUNC(GtrPo, g_object_unref)
-
 /*
  * Public methods
  */
