@@ -698,7 +698,7 @@ gtr_search_bar_init (GtrSearchBar *self)
                     "insert_text", G_CALLBACK (insert_text_handler), NULL);
 
   g_signal_connect_swapped (self->search_entry,
-                            "activate",
+                            "changed",
                             G_CALLBACK (gtr_search_bar_find_next),
                             self);
 
