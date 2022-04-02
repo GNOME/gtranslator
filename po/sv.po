@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2022-03-30 06:22+0000\n"
-"PO-Revision-Date: 2022-03-30 21:47+0200\n"
+"POT-Creation-Date: 2022-04-02 16:46+0000\n"
+"PO-Revision-Date: 2022-04-02 20:11+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -57,11 +57,11 @@ msgstr ""
 "insticksmoduler, som alternativa språk, taggning, integration med subversion "
 "och källkodsläsare."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:143
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:157
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:673
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:672
 #: src/gtr-notebook.ui:216 src/gtr-window.c:229 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Översättningsredigerare"
@@ -214,7 +214,7 @@ msgstr "Sökvägar:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
 #: src/gtr-io-error-info-bar.c:127 src/gtr-preferences-dialog.c:664
-#: src/translation-memory/gtr-translation-memory-dialog.c:307
+#: src/translation-memory/gtr-translation-memory-dialog.c:305
 msgid "_Close"
 msgstr "S_täng"
 
@@ -484,12 +484,12 @@ msgstr "Inget modultillstånd hittades."
 msgid "The current state is: %s"
 msgstr "Det aktuella tillståndet är: %s"
 
-#: src/gtr-dl-teams.c:629
+#: src/gtr-dl-teams.c:625
 #, c-format
 msgid "The file '%s' has been saved in %s"
 msgstr "Filen ”%s” har sparats i %s"
 
-#: src/gtr-dl-teams.c:706
+#: src/gtr-dl-teams.c:702
 #, c-format
 msgid ""
 "An error occurred while reserving this module: %s\n"
@@ -502,16 +502,16 @@ msgstr ""
 "korrekt i din profil, eller så har du inte rättighet att reservera denna "
 "modul."
 
-#: src/gtr-dl-teams.c:723
+#: src/gtr-dl-teams.c:719
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "Lyckades reservera filen ”%s.%s.%s.%s”"
 
-#: src/gtr-dl-teams.c:873
+#: src/gtr-dl-teams.c:869
 msgid "Translation Team"
 msgstr "Översättningsgrupp"
 
-#: src/gtr-dl-teams.c:880
+#: src/gtr-dl-teams.c:876
 msgid "Module"
 msgstr "Modul"
 
@@ -611,7 +611,7 @@ msgstr "Språk_kod:"
 
 # src/header_stuff.c:520
 #: src/gtr-header-dialog.ui:149
-msgid "Language gro_up email:"
+msgid "Language _Team email:"
 msgstr "Språkgru_ppens e-post:"
 
 # src/header_stuff.c:524 src/prefs.c:150
@@ -1122,49 +1122,49 @@ msgid "Wrap Around"
 msgstr "Börja om från början"
 
 # src/menus.c:92
-#: src/gtr-tab-label.c:279
+#: src/gtr-tab-label.c:280
 msgid "Close document"
 msgstr "Stäng dokumentet"
 
-#: src/gtr-tab.c:342
+#: src/gtr-tab.c:333
 msgid "There is an error in the message:"
 msgstr "Det finns ett fel i meddelandet:"
 
 # src/gui.c:385 src/gui.c:389 src/menus.c:348
-#: src/gtr-tab.c:556 src/gtr-tab.c:682
+#: src/gtr-tab.c:547 src/gtr-tab.c:673
 msgid "fuzzy"
 msgstr "luddig"
 
-#: src/gtr-tab.c:712
+#: src/gtr-tab.c:703
 #, c-format
 msgid "Plural %d"
 msgstr "Pluralis %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1307
+#: src/gtr-tab.c:1293
 msgid "Path:"
 msgstr "Sökväg:"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: src/gtr-tab.c:1974
+#: src/gtr-tab.c:1960
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Översatt: %0.2f%%"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: src/gtr-tab.c:1975
+#: src/gtr-tab.c:1961
 #, c-format
 msgid "Translated: %d"
 msgstr "Översatt: %d"
 
 # src/gui.c:407 src/gui.c:409
-#: src/gtr-tab.c:1976
+#: src/gtr-tab.c:1962
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Oöversatt: %d"
 
 # src/gui.c:385 src/gui.c:389 src/menus.c:348
-#: src/gtr-tab.c:1977
+#: src/gtr-tab.c:1963
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Luddigt: %d"
@@ -1213,23 +1213,6 @@ msgstr "*%s — Översättningsredigerare"
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Översättningsredigerare"
-
-#: src/gtranslator-menu.ui:7
-msgid "_New Window"
-msgstr "_Nytt fönster"
-
-# src/dialogs.c:574
-#: src/gtranslator-menu.ui:13
-msgid "_Preferences"
-msgstr "_Inställningar"
-
-#: src/gtranslator-menu.ui:19
-msgid "_Help"
-msgstr "_Hjälp"
-
-#: src/gtranslator-menu.ui:24
-msgid "_About GNOME Translation Editor"
-msgstr "_Om GNOME Översättningsredigerare"
 
 # src/header_stuff.c:486
 #: src/help-overlay.ui:13
@@ -1386,7 +1369,7 @@ msgstr ""
 msgid "Select PO directory"
 msgstr "Välj PO-katalog"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:311
+#: src/translation-memory/gtr-translation-memory-dialog.c:309
 msgid "Translation Editor Memory Manager"
 msgstr "Hanterare för översättningsminne"
 
