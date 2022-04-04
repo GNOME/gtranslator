@@ -929,6 +929,21 @@ gtr_window_show_search_bar (GtrWindow *window,
   priv->search_bar_shown = show;
 }
 
+// Shortcut for find now calls this
+void
+gtr_window_show_focus_search_bar (GtrWindow *window,
+                                  gboolean show)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
+  GtrTab *tab = gtr_window_get_active_tab (window);
+
+  // don't need to show if already shown but need to focus on entry
+  if (tab != NULL && priv->search_bar_shown == show)
+    gtr_tab_focus_search_bar (tab);
+  else
+    gtr_window_show_search_bar (window, show);
+}
+
 void
 gtr_window_toggle_search_bar (GtrWindow *window)
 {

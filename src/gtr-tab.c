@@ -169,6 +169,20 @@ gtr_page_stop_search (GtrTab *tab,
 }
 
 void
+gtr_tab_focus_search_bar (GtrTab *tab)
+{
+  GtrTabPrivate *priv;
+  GtkEntry *entry;
+
+  g_assert (GTR_IS_TAB (tab));
+  priv = gtr_tab_get_instance_private (tab);
+
+  entry = (GtkEntry *) gtr_search_bar_get_search (priv->search_bar);
+
+  gtk_entry_grab_focus_without_selecting (entry);
+}
+
+void
 gtr_tab_show_hide_search_bar (GtrTab *tab, gboolean show)
 {
   GtrTabPrivate *priv;

@@ -263,7 +263,7 @@ find_activated (GSimpleAction *action,
 
   GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
   g_return_if_fail (active_tab != NULL);
-  gtr_window_show_search_bar (priv->active_window, TRUE);
+  gtr_window_show_focus_search_bar (priv->active_window, TRUE);
   gtr_tab_find_set_replace (active_tab, FALSE);
 }
 
@@ -277,7 +277,7 @@ find_next_activated (GSimpleAction *action,
 
   GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
   g_return_if_fail (active_tab != NULL);
-  gtr_window_show_search_bar (priv->active_window, TRUE);
+  gtr_window_show_focus_search_bar (priv->active_window, TRUE);
   gtr_tab_find_next (active_tab);
 }
 
@@ -291,7 +291,7 @@ find_prev_activated (GSimpleAction *action,
 
   GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
   g_return_if_fail (active_tab != NULL);
-  gtr_window_show_search_bar (priv->active_window, TRUE);
+  gtr_window_show_focus_search_bar (priv->active_window, TRUE);
   gtr_tab_find_prev (active_tab);
 }
 
@@ -304,7 +304,7 @@ find_and_replace_activated (GSimpleAction *action,
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
   GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
-  gtr_window_show_search_bar (priv->active_window, TRUE);
+  gtr_window_show_focus_search_bar (priv->active_window, TRUE);
   gtr_tab_find_set_replace (active_tab, TRUE);
 }
 

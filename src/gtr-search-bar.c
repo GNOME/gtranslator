@@ -742,3 +742,9 @@ gtr_search_bar_set_found (GtrSearchBar *self,
     gtk_style_context_add_class (context, "error");
 }
 
+/* Previously, declared but unimplemented */
+GtkSearchEntry *
+gtr_search_bar_get_search (GtrSearchBar *self)
+{
+  return (GtkSearchEntry *) self->search_entry;
+}

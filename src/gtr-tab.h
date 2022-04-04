@@ -162,6 +162,7 @@ void gtr_tab_sort_by (GtrTab *tab, GtrMessageTableSortBy sort);
 
 void gtr_tab_find_replace (GtrTab *tab, gboolean set);
 
+void gtr_tab_focus_search_bar (GtrTab *tab);
 void gtr_tab_show_hide_search_bar (GtrTab * tab, gboolean show);
 void gtr_tab_find_next (GtrTab * tab);
 void gtr_tab_find_prev (GtrTab * tab);
