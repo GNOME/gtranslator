@@ -208,6 +208,9 @@ follow_if_link (GtrCodeView *codeview, GtkWidget *text_view, GtkTextIter *iter)
       int line = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (tag), "line"));
       g_autofree char *fullpath = NULL;
 
+      if (!path)
+        continue;
+
       fullpath = find_source_file (codeview, path);
 
       if (fullpath && path_is_fake (fullpath))
