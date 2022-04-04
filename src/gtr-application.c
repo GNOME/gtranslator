@@ -702,7 +702,7 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.undo", "<Ctrl>z");
   set_kb (application, "app.redo", "<Ctrl><Shift>z");
   set_kb (application, "app.clear_msgstr", "<Ctrl>k");
-  
+
   set_kb (application, "app.prev", "<Alt>Left");
   set_kb (application, "app.next", "<Alt>Right");
   set_kb (application, "app.prev_no", "<Alt>Page_Up");
