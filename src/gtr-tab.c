@@ -169,6 +169,20 @@ gtr_page_stop_search (GtrTab *tab,
 }
 
 void
+gtr_tab_focus_search_bar (GtrTab *tab)
+{
+  GtrTabPrivate *priv;
+  GtkEntry *entry;
+
+  g_assert (GTR_IS_TAB (tab));
+  priv = gtr_tab_get_instance_private (tab);
+
+  entry = (GtkEntry *) gtr_search_bar_get_search (priv->search_bar);
+
+  gtk_entry_grab_focus_without_selecting (entry);
+}
+
+void
 gtr_tab_show_hide_search_bar (GtrTab *tab, gboolean show)
 {
   GtrTabPrivate *priv;
@@ -245,15 +259,6 @@ show_hide_revealer (GtkWidget *widget, GdkEvent *ev, GtrTab *tab)
   gtk_revealer_set_reveal_child (rev, !gtk_revealer_get_reveal_child (rev));
 
   return TRUE;
-}
-
-static gboolean
-msg_grab_focus (GtrTab *tab)
-{
-  GtrTabPrivate *priv;
-  priv = gtr_tab_get_instance_private (tab);
-  gtk_widget_grab_focus (priv->trans_msgstr[0]);
-  return FALSE;
 }
 
 static void
@@ -1244,11 +1249,6 @@ gtr_tab_message_go_to (GtrTab * tab,
     }
   else
     return;
-
-  // Grabbing the focus in the GtrView to edit the message
-  // This is done in the idle add to avoid the focus grab from the
-  // message-table
-  g_idle_add((GSourceFunc)msg_grab_focus, tab);
 
   /*
    * Emitting showed-message signal
