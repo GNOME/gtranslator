@@ -697,6 +697,7 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.upload_file", "<Ctrl>b");
   set_kb (application, "app.preferences", "<Ctrl>p");
   set_kb (application, "app.shortcuts", "<Ctrl><Shift>question");
+  set_kb (application, "app.help", "<Primary>h");
   set_kb (application, "app.quit", "<Primary>q");
 
   set_kb (application, "app.undo", "<Ctrl>z");
