@@ -3,21 +3,21 @@
 # This file is distributed under the same license as the gtranslator package.
 # Mohammad DAMT <mdamt@bisnisweb.com>, 2003.
 # Andika Triwidada <andika@gmail.com>, 2009-2013, 2016, 2017, 2020-2022.
-# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2021.
+# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-42\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2022-03-31 05:12+0000\n"
-"PO-Revision-Date: 2022-04-01 12:10+0700\n"
-"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"POT-Creation-Date: 2022-04-18 14:59+0000\n"
+"PO-Revision-Date: 2022-04-19 10:09+0700\n"
+"Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -84,8 +84,8 @@ msgstr ""
 "memuat string ragu."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:32
-msgid "Whether the obsolete entries be removed upon saving"
-msgstr "Apakah entri usang dihapus saat disimpan"
+msgid "Whether to remove the obsolete entries upon saving"
+msgstr "Apakah akan menghapus entri usang saat menyimpan"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:33
 msgid ""
@@ -204,7 +204,7 @@ msgstr ""
 "Daftar plugin aktif. Ini memuat \"Lokasi\" dari plugin aktif. Lihat berkas ."
 "gtranslator-plugin untuk memperoleh \"Lokasi\" dari suatu plugin."
 
-#: src/codeview/gtr-codeview.c:377
+#: src/codeview/gtr-codeview.c:380
 msgid "Paths:"
 msgstr "Path:"
 
@@ -249,7 +249,7 @@ msgid "translator-credits"
 msgstr ""
 "Mohammad DAMT <mdamt@bisnisweb.com>, 2003.\n"
 "Andika Triwidada <andika@gmail.com>, 2009-2013, 2016, 2020-2022.\n"
-"Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2021."
+"Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2022."
 
 #: src/gtr-actions-app.c:114
 msgid "Translation Editor Web Site"
@@ -575,8 +575,8 @@ msgid "Language _code:"
 msgstr "Kode bahasa:"
 
 #: src/gtr-header-dialog.ui:149
-msgid "Language gro_up email:"
-msgstr "Email gr_up bahasa:"
+msgid "Language _Team email:"
+msgstr "Surel _Tim Bahasa:"
 
 #: src/gtr-header-dialog.ui:162
 msgid "Char_set:"
@@ -1054,15 +1054,15 @@ msgstr "Melipat"
 msgid "Close document"
 msgstr "Tutup dokumen"
 
-#: src/gtr-tab.c:342
+#: src/gtr-tab.c:347
 msgid "There is an error in the message:"
 msgstr "Ada galat dalam pesan:"
 
-#: src/gtr-tab.c:556 src/gtr-tab.c:682
+#: src/gtr-tab.c:561 src/gtr-tab.c:687
 msgid "fuzzy"
 msgstr "ragu"
 
-#: src/gtr-tab.c:712
+#: src/gtr-tab.c:717
 #, c-format
 msgid "Plural %d"
 msgstr "Jamak %d"
@@ -1164,100 +1164,105 @@ msgstr "Pintasan Papan Tik"
 
 #: src/help-overlay.ui:54
 msgctxt "shortcut window"
+msgid "Help"
+msgstr "Bantuan"
+
+#: src/help-overlay.ui:61
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Keluar"
 
-#: src/help-overlay.ui:64
+#: src/help-overlay.ui:71
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "Sunting"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:75
 msgctxt "shortcut window"
 msgid "Undo"
 msgstr "Tak jadi"
 
-#: src/help-overlay.ui:75
+#: src/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Redo"
 msgstr "Jadi Lagi"
 
-#: src/help-overlay.ui:82
+#: src/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Tandai/hapus tanda sebagai ragu"
 
-#: src/help-overlay.ui:89
+#: src/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "Salin teks asli ke terjemahan"
 
-#: src/help-overlay.ui:99
+#: src/help-overlay.ui:106
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Navigasi"
 
-#: src/help-overlay.ui:103
+#: src/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Ke pesan sebelumnya"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Ke pesan berikutnya"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Ke pesan sebelumnya yang belum diterjemahkan"
 
-#: src/help-overlay.ui:124
+#: src/help-overlay.ui:131
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Ke pesan selanjutnya yang belum diterjemahkan"
 
-#: src/help-overlay.ui:134
+#: src/help-overlay.ui:141
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Ingatan Terjemahan"
 
-#: src/help-overlay.ui:138
+#: src/help-overlay.ui:145
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Bangun ingatan terjemahan"
 
-#: src/help-overlay.ui:145
+#: src/help-overlay.ui:152
 msgctxt "shortcut window"
 msgid "Copy below"
 msgstr "Salin di bawah"
 
-#: src/help-overlay.ui:155
+#: src/help-overlay.ui:162
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Cari & Ganti"
 
-#: src/help-overlay.ui:159
+#: src/help-overlay.ui:166
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Cari"
 
-#: src/help-overlay.ui:166
+#: src/help-overlay.ui:173
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Cari & Ganti"
 
-#: src/help-overlay.ui:173
+#: src/help-overlay.ui:180
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "Pencarian maju"
 
-#: src/help-overlay.ui:180
+#: src/help-overlay.ui:187
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Pencarian mundur"
 
-#: src/help-overlay.ui:187
+#: src/help-overlay.ui:194
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Sembunyikan bilah cari dan ganti"
