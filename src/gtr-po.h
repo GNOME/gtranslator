@@ -152,7 +152,11 @@ gtr_po_get_message_position (GtrPo * po);
 
      gchar *gtr_po_check_po_file (GtrPo * po);
 
+void
+gtr_po_emit_file_not_consistent (GtrPo * po);
 
+int
+gtr_po_consistent_with_profile (GtrPo * po);
 /* Unexported funcs */
      void
        _gtr_po_increase_decrease_translated (GtrPo * po, gboolean increase);

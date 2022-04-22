@@ -382,7 +382,6 @@ gtr_profile_manager_set_active_profile (GtrProfileManager *manager,
   priv->active_profile = profile;
 
   g_signal_emit (G_OBJECT (manager), signals[ACTIVE_PROFILE_CHANGED], 0, profile);
-
   save_profiles (manager);
 }
 

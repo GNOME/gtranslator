@@ -28,6 +28,7 @@
  *   Thomas Ziehmer <thomas@kabalak.net>
  */
 
+#include "gtr-profile.h"
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -48,6 +49,7 @@
 #include "gtr-progress.h"
 #include "gtr-actions.h"
 #include "gtr-utils.h"
+#include "gtr-profile-manager.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -259,6 +261,40 @@ show_hide_revealer (GtkWidget *widget, GdkEvent *ev, GtrTab *tab)
   gtk_revealer_set_reveal_child (rev, !gtk_revealer_get_reveal_child (rev));
 
   return TRUE;
+}
+
+static void
+handle_file_is_inconsistent (GtrPo *po, GtrTab *tab)
+{
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
+  GtrProfileManager *manager = gtr_profile_manager_get_default ();
+  GtrProfile *active_profile = gtr_profile_manager_get_active_profile (manager);
+  const gchar* profile_name = gtr_profile_get_name (active_profile);
+
+  gchar* info_msg_primary = g_strdup_printf ("File is not consistent with profile %s",profile_name);
+  gchar *filename = g_file_get_path (gtr_po_get_location (po));
+  gchar* info_msg_secondary = g_strdup_printf ("Kindly go to preferences and select a profile with consistent nplurals values as this file %s",filename);
+  gtr_tab_set_info (tab, info_msg_primary, info_msg_secondary);
+
+  GtkWidget *nb = priv->trans_notebook;
+  gtk_widget_set_sensitive (nb, FALSE);
+}
+
+static void
+on_active_profile_changed (GtrProfileManager *manager, GtrProfile *profile, GtrTab *tab)
+{
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
+  GtkWidget *nb = priv->trans_notebook;
+
+  GtrPo *po = priv->po;
+  if (!gtr_po_consistent_with_profile (po))
+  {
+    gtr_po_emit_file_not_consistent (po);
+  }
+  else
+  {
+    gtk_widget_set_sensitive (nb, TRUE);
+  }
 }
 
 static void
@@ -688,7 +724,7 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
   else
     gtk_label_set_text (GTK_LABEL (priv->msgid_tags), "");
 
-  /* We need to update the tab state too if is neccessary */
+  /* We need to update the tab state too if is necessary */
   if (po_state != GTR_PO_STATE_MODIFIED)
     gtr_po_set_state (priv->po, GTR_PO_STATE_MODIFIED);
 }
@@ -1033,8 +1069,11 @@ gtr_tab_new (GtrPo * po,
 {
   GtrTab *tab;
   GtrTabPrivate *priv;
+  GtrProfileManager *manager;
 
   g_return_val_if_fail (po != NULL, NULL);
+
+  manager = gtr_profile_manager_get_default();
 
   tab = g_object_new (GTR_TYPE_TAB, NULL);
 
@@ -1052,6 +1091,12 @@ gtr_tab_new (GtrPo * po,
   g_signal_connect (po, "notify::state",
                     G_CALLBACK (on_state_notify), tab);
 
+  g_signal_connect (po, "file-is-inconsistent-with-profile",
+                    G_CALLBACK (handle_file_is_inconsistent), tab);
+
+  g_signal_connect (manager, "active-profile-changed",
+                    G_CALLBACK (on_active_profile_changed), tab);
+
   install_autosave_timeout_if_needed (tab);
 
   /* Now we have to initialize the number of msgstr tabs */
@@ -1059,6 +1104,11 @@ gtr_tab_new (GtrPo * po,
 
   gtr_message_table_populate (GTR_MESSAGE_TABLE (priv->message_table),
                               GTR_MESSAGE_CONTAINER (priv->po));
+
+  if (!gtr_po_consistent_with_profile (po))
+  {
+    gtr_po_emit_file_not_consistent (po);
+  }
 
   gtk_widget_show (GTK_WIDGET (tab));
   return tab;
