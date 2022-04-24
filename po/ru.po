@@ -5,22 +5,23 @@
 # Александр Прокудин <alexandre.prokoudine@gmail.com>, 2010.
 # Yuri Myasoedov <omerta13@yandex.ru>, 2012.
 # Alexandre Prokoudine <alexandre.prokoudine@gmail.com>, 2018.
+# Constantine Loparyov <konstal1993@yandex.ru>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.9.9\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2022-04-07 11:12+0000\n"
-"PO-Revision-Date: 2022-04-17 10:06+1000\n"
-"Last-Translator: Ser82-png <sw@atrus.ru>\n"
-"Language-Team: русский <gnome-cyr@lists.gnome.org>\n"
+"POT-Creation-Date: 2022-04-18 14:59+0000\n"
+"PO-Revision-Date: 2022-04-23 19:01+0700\n"
+"Last-Translator: Constantine Loparyov <konstal1993@yandex.ru>\n"
+"Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"X-Generator: Gtranslator 41.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -29,7 +30,7 @@ msgstr "Gtranslator"
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:8
 #: data/org.gnome.Gtranslator.desktop.in.in:5
 msgid "Translate and localize applications and libraries"
-msgstr "Перевод и локализация файлов и приложений"
+msgstr "Перевод и локализация приложений и библиотек"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:10
 msgid ""
@@ -53,8 +54,7 @@ msgid ""
 "code viewer."
 msgstr ""
 "Gtranslator также включает в себя систему модулей: альтернативный язык, "
-"вставка тэгов, вставка тэгов, интеграция с subversion, просмотрщик исходного "
-"кода."
+"вставка тэгов, интеграция с subversion и просмотрщик исходного кода."
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:157
 msgid "Daniel García Moreno"
@@ -63,7 +63,7 @@ msgstr "Daniel García Moreno"
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:672
 #: src/gtr-notebook.ui:216 src/gtr-window.c:229 src/gtr-window.ui:25
 msgid "Translation Editor"
-msgstr "Translation Editor"
+msgstr "Редактор переводов"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
@@ -86,7 +86,9 @@ msgstr ""
 "перевода, пользователь будет получать предупреждение."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:32
-msgid "Whether the obsolete entries be removed upon saving"
+#, fuzzy
+#| msgid "Whether the obsolete entries be removed upon saving"
+msgid "Whether to remove the obsolete entries upon saving"
 msgstr "Удаляются ли устаревшие записи при сохранении"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:33
@@ -270,11 +272,11 @@ msgstr "Домашняя страница Translation Editor"
 #: src/gtr-actions-file.c:217
 #, c-format
 msgid ""
-"Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
-"\">%s</span>?"
+"Do you want to save changes to this file: <span weight=\"bold\" "
+"size=\"large\">%s</span>?"
 msgstr ""
-"Вы хотите сохранить изменения в файл: <span weight=\"bold\" size=\"large\">"
-"%s</span>?"
+"Вы хотите сохранить изменения в файл: <span weight=\"bold\" "
+"size=\"large\">%s</span>?"
 
 #: src/gtr-actions-file.c:223
 msgid "If you don't save, all your unsaved changes will be permanently lost."
@@ -938,7 +940,7 @@ msgstr "_Делать пробелы видимыми"
 
 #: src/gtr-preferences-dialog.ui:409
 msgid "Font:"
-msgstr "Щрифт:"
+msgstr "Шрифт:"
 
 #: src/gtr-preferences-dialog.ui:421
 msgid "Choose the editor font"
@@ -1125,7 +1127,7 @@ msgstr "Загрузить на Damned Lies"
 
 #: src/gtr-upload-dialog.c:137
 msgid "Uploading..."
-msgstr "Загружаю..."
+msgstr "Загружается..."
 
 #: src/gtr-upload-dialog.c:143
 msgid "Upload"
@@ -1178,101 +1180,108 @@ msgid "Keyboard Shortcuts"
 msgstr "Комбинация клавиш"
 
 #: src/help-overlay.ui:54
+#, fuzzy
+#| msgid "Help"
+msgctxt "shortcut window"
+msgid "Help"
+msgstr "Справка"
+
+#: src/help-overlay.ui:61
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Выйти"
 
-#: src/help-overlay.ui:64
+#: src/help-overlay.ui:71
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "Править"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:75
 msgctxt "shortcut window"
 msgid "Undo"
 msgstr "Отменить"
 
-#: src/help-overlay.ui:75
+#: src/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Redo"
 msgstr "Вернуть"
 
-#: src/help-overlay.ui:82
+#: src/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Пометить как точное или неточное"
 
-#: src/help-overlay.ui:89
+#: src/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "Скопировать исходное сообщение и вставить его как перевод"
 
-#: src/help-overlay.ui:99
+#: src/help-overlay.ui:106
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Навигация"
 
-#: src/help-overlay.ui:103
+#: src/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Перейти к предыдущему сообщению"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Перейти к следующему сообщению"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Перейти к предыдущему непереведённому сообщению"
 
-#: src/help-overlay.ui:124
+#: src/help-overlay.ui:131
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Перейти к следующему непереведённому сообщению"
 
-#: src/help-overlay.ui:134
+#: src/help-overlay.ui:141
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Память переводов"
 
-#: src/help-overlay.ui:138
+#: src/help-overlay.ui:145
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Создать память переводов"
 
-#: src/help-overlay.ui:145
+#: src/help-overlay.ui:152
 msgctxt "shortcut window"
 msgid "Copy below"
 msgstr "Скопировать вниз"
 
-#: src/help-overlay.ui:155
+#: src/help-overlay.ui:162
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Поиск и замена"
 
-#: src/help-overlay.ui:159
+#: src/help-overlay.ui:166
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Поиск"
 
-#: src/help-overlay.ui:166
+#: src/help-overlay.ui:173
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Найти и заменить"
 
-#: src/help-overlay.ui:173
+#: src/help-overlay.ui:180
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "Поиск впереди"
 
-#: src/help-overlay.ui:180
+#: src/help-overlay.ui:187
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Поиск сзади"
 
-#: src/help-overlay.ui:187
+#: src/help-overlay.ui:194
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Панель поиска и замены"
