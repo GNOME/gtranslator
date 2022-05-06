@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.26\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2022-04-04 15:48+0000\n"
-"PO-Revision-Date: 2022-04-04 22:20+0100\n"
+"POT-Creation-Date: 2022-05-05 13:00+0000\n"
+"PO-Revision-Date: 2022-05-06 09:55+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.gnome.org/teams/pt/>\n"
 "Language: pt\n"
@@ -91,7 +91,7 @@ msgstr ""
 "contendo cadeias aproximadas."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:32
-msgid "Whether the obsolete entries be removed upon saving"
+msgid "Whether to remove the obsolete entries upon saving"
 msgstr "Se as entradas obsoletas devem ser removidas ao gravar"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:33
@@ -220,7 +220,7 @@ msgstr ""
 "Consulte o ficheiro .gtranslator-plugin para obter a “Location” de uma "
 "determinada extensão."
 
-#: src/codeview/gtr-codeview.c:377
+#: src/codeview/gtr-codeview.c:380
 msgid "Paths:"
 msgstr "Caminhos:"
 
@@ -1078,40 +1078,40 @@ msgstr "Ajustar à volta"
 msgid "Close document"
 msgstr "Fechar documento"
 
-#: src/gtr-tab.c:333
+#: src/gtr-tab.c:347
 msgid "There is an error in the message:"
 msgstr "Há um erro na mensagem:"
 
-#: src/gtr-tab.c:547 src/gtr-tab.c:673
+#: src/gtr-tab.c:561 src/gtr-tab.c:687
 msgid "fuzzy"
 msgstr "aproximado"
 
-#: src/gtr-tab.c:703
+#: src/gtr-tab.c:717
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1293
+#: src/gtr-tab.c:1307
 msgid "Path:"
 msgstr "Caminho:"
 
-#: src/gtr-tab.c:1960
+#: src/gtr-tab.c:1974
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Traduzida: %0.2f%%"
 
-#: src/gtr-tab.c:1961
+#: src/gtr-tab.c:1975
 #, c-format
 msgid "Translated: %d"
 msgstr "Traduzida: %d"
 
-#: src/gtr-tab.c:1962
+#: src/gtr-tab.c:1976
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Por traduzir: %d"
 
-#: src/gtr-tab.c:1963
+#: src/gtr-tab.c:1977
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Aproximada: %d"
@@ -1188,100 +1188,105 @@ msgstr "Atalhos de teclado"
 
 #: src/help-overlay.ui:54
 msgctxt "shortcut window"
+msgid "Help"
+msgstr "Ajuda"
+
+#: src/help-overlay.ui:61
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Sair"
 
-#: src/help-overlay.ui:64
+#: src/help-overlay.ui:71
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "Editar"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:75
 msgctxt "shortcut window"
 msgid "Undo"
 msgstr "Desfazer"
 
-#: src/help-overlay.ui:75
+#: src/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Redo"
 msgstr "Refazer"
 
-#: src/help-overlay.ui:82
+#: src/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Marcar/desmarcar como aproximado"
 
-#: src/help-overlay.ui:89
+#: src/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "Copiar o texto original e colar no campo de tradução"
 
-#: src/help-overlay.ui:99
+#: src/help-overlay.ui:106
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Navegação"
 
-#: src/help-overlay.ui:103
+#: src/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Ir para a mensagem anterior"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Ir para a próxima mensagem"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Ir para a mensagem anterior a traduzir"
 
-#: src/help-overlay.ui:124
+#: src/help-overlay.ui:131
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Ir para a próxima mensagem a traduzir"
 
-#: src/help-overlay.ui:134
+#: src/help-overlay.ui:141
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Memória de Tradução"
 
-#: src/help-overlay.ui:138
+#: src/help-overlay.ui:145
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Construir memória de tradução"
 
-#: src/help-overlay.ui:145
+#: src/help-overlay.ui:152
 msgctxt "shortcut window"
 msgid "Copy below"
 msgstr "Copiar abaixo"
 
-#: src/help-overlay.ui:155
+#: src/help-overlay.ui:162
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Procurar e Substituir"
 
-#: src/help-overlay.ui:159
+#: src/help-overlay.ui:166
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Procurar"
 
-#: src/help-overlay.ui:166
+#: src/help-overlay.ui:173
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Procurar e substituir"
 
-#: src/help-overlay.ui:173
+#: src/help-overlay.ui:180
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "Busca à frente"
 
-#: src/help-overlay.ui:180
+#: src/help-overlay.ui:187
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Busca reversa"
 
-#: src/help-overlay.ui:187
+#: src/help-overlay.ui:194
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Esconder barra de Procurar e Substituir"
