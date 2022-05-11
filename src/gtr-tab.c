@@ -137,6 +137,7 @@ enum
   MESSAGE_CHANGED,
   MESSAGE_EDITION_FINISHED,
   SELECTION_CHANGED,
+  SEARCHBAR_TOGGLED,
   LAST_SIGNAL
 };
 
@@ -627,6 +628,15 @@ emit_selection_changed (GtkTextBuffer * buf, GParamSpec * spec, GtrTab * tab)
 }
 
 static void
+emit_searchbar_toggled (GtkRevealer *revealer,
+                        GParamSpec  *pspec,
+                        GtrTab      *tab)
+{
+  gboolean revealed = gtk_revealer_get_child_revealed (revealer);
+  g_signal_emit (G_OBJECT (tab), signals[SEARCHBAR_TOGGLED], 0, revealed);
+}
+
+static void
 update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
 {
   GtrMsgStatus status;
@@ -805,6 +815,9 @@ gtr_tab_init (GtrTab * tab)
 
   g_signal_connect (priv->progress_eventbox, "button-press-event",
                     G_CALLBACK (show_hide_revealer), tab);
+
+  g_signal_connect (priv->search_revealer, "notify::child-revealed",
+                    G_CALLBACK (emit_searchbar_toggled), tab);
 }
 
 static void
@@ -960,6 +973,15 @@ gtr_tab_class_init (GtrTabClass * klass)
                   NULL, NULL,
                   g_cclosure_marshal_VOID__VOID,
                   G_TYPE_NONE, 0);
+
+  signals[SEARCHBAR_TOGGLED] =
+    g_signal_new ("searchbar-toggled",
+                  G_OBJECT_CLASS_TYPE (klass),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (GtrTabClass, searchbar_toggled),
+                  NULL, NULL,
+                  g_cclosure_marshal_VOID__BOOLEAN,
+                  G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
 
   /* Properties */
   g_object_class_install_property (object_class,

@@ -510,6 +510,13 @@ gtr_window_class_init (GtrWindowClass *klass)
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, header_stack);
 }
 
+static void
+searchbar_toggled (GtrTab * tab, gboolean revealed, GtrWindow *window)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
+  gtr_notebook_enable_find_button (GTR_NOTEBOOK (priv->notebook), revealed);
+}
+
 /***************************** Public funcs ***********************************/
 
 /**
@@ -549,6 +556,8 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
                           G_CALLBACK
                           (update_saved_state),
                           window);
+
+  g_signal_connect (tab, "searchbar-toggled", G_CALLBACK (searchbar_toggled), window);
   return tab;
 }
 
