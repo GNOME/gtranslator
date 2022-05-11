@@ -204,7 +204,7 @@ find_in_list (GtrWindow * window,
           found = run_search (GTR_VIEW (viewsaux->data), found);
           if (found)
             {
-              gtr_tab_message_go_to (tab, l->data, FALSE, GTR_TAB_MOVE_NONE);
+              gtr_tab_message_go_to (tab, l->data, TRUE, GTR_TAB_MOVE_NONE);
               run_search (GTR_VIEW (viewsaux->data), aux);
               return TRUE;
             }
@@ -303,7 +303,7 @@ do_find (GtrSearchBar * dialog, GtrWindow * window, gboolean search_backwards)
   restore_last_searched_data (dialog, tab);
 
   if (!found && current_msg)
-    gtr_tab_message_go_to (tab, current_msg->data, FALSE, GTR_TAB_MOVE_NONE);
+    gtr_tab_message_go_to (tab, current_msg->data, TRUE, GTR_TAB_MOVE_NONE);
 
   gtr_search_bar_set_found (dialog, found);
 }
