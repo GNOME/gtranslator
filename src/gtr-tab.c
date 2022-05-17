@@ -343,7 +343,6 @@ static void
 gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
 {
   gchar *message_error;
-  GtkWidget *infobar;
 
   /*
    * Checking message
@@ -354,9 +353,8 @@ gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
     {
       gtr_tab_block_movement (tab);
 
-      infobar = create_error_info_bar (_("There is an error in the message:"),
-                                       message_error);
-      gtr_tab_set_info_bar (tab, infobar);
+      create_error_info_bar (_("There is an error in the message:"),
+                                       message_error, tab);
       g_free (message_error);
     }
   else
@@ -1981,9 +1979,7 @@ gtr_tab_set_info (GtrTab * tab,
                   const char * primary,
                   const char * secondary)
 {
-  GtkWidget *infobar;
-  infobar = create_info_info_bar (primary, secondary);
-  gtr_tab_set_info_bar (tab, infobar);
+  create_info_info_bar (primary, secondary, tab);
 }
 
 GtrMsg *

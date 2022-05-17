@@ -19,15 +19,19 @@
 #ifndef __IO_ERROR_MESSAGE_AREA_H__
 #define __IO_ERROR_MESSAGE_AREA_H__
 
+#include "gtr-tab.h"
+
 #include <glib.h>
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
-  GtkWidget * create_error_info_bar (const gchar * primary_text,
-                                     const gchar * secondary_text);
+  void create_error_info_bar (const gchar * primary_text,
+                                     const gchar * secondary_text,
+                                     GtrTab * tab);
 
-  GtkWidget * create_info_info_bar (const gchar * primary_text,
-                                    const gchar * secondary_text);
+  void create_info_info_bar (const gchar * primary_text,
+                                    const gchar * secondary_text,
+                                    GtrTab * tab);
 
 G_END_DECLS
 #endif
