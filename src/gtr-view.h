@@ -64,8 +64,6 @@ struct _GtrViewClass
      gboolean gtr_view_get_selected_text (GtrView * view,
                                           gchar ** selected_text, gint * len);
 
-     void gtr_view_enable_spellcheck (GtrView * view, gboolean enable);
-
      void gtr_view_enable_visible_whitespace
        (GtrView * view, gboolean enable);
 
@@ -99,9 +97,6 @@ struct _GtrViewClass
                                 const gchar * replace, guint flags);
 
      void gtr_view_reload_scheme_color (GtrView * view);
-
-     void gtr_view_set_language (GtrView *view,
-                                 const gchar *lang);
 
      void gtr_view_set_font (GtrView *view, char *font);
 

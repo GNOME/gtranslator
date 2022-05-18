@@ -41,8 +41,6 @@
 
 #include <gtksourceview/gtksource.h>
 
-#include <gspell/gspell.h>
-
 /**
  * Converts the language code to a complete language code with the country
  * If the language contains the country code this returns a new allocated
@@ -70,16 +68,6 @@ get_default_lang (const gchar *lang) {
   return ret;
 }
 
-static void
-inline_spellcheck (GObject *object,
-                   GParamSpec *param,
-                   GtrView *view)
-{
-  GspellTextView *gspell_view;
-  gspell_view = gspell_text_view_get_from_gtk_text_view (GTK_TEXT_VIEW (view));
-  gspell_text_view_set_inline_spell_checking (gspell_view, TRUE);
-}
-
 typedef struct
 {
   GSettings *editor_settings;
@@ -90,7 +78,6 @@ typedef struct
   guint search_flags;
   gchar *search_text;
 
-  GspellChecker *spell;
   GtkCssProvider *provider;
 } GtrViewPrivate;
 
@@ -116,7 +103,6 @@ gtr_view_init (GtrView * view)
                                   GTK_STYLE_PROVIDER (priv->provider),
                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-  priv->spell = NULL;
   priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
   priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
 
@@ -170,7 +156,6 @@ gtr_view_dispose (GObject * object)
 
   g_clear_object (&priv->editor_settings);
   g_clear_object (&priv->ui_settings);
-  g_clear_object (&priv->spell);
   g_clear_object (&priv->provider);
 
   G_OBJECT_CLASS (gtr_view_parent_class)->dispose (object);
@@ -237,102 +222,6 @@ gtr_view_get_selected_text (GtrView * view,
     *len = g_utf8_strlen (*selected_text, -1);
 
   return TRUE;
-}
-
-void
-gtr_view_set_language (GtrView *view,
-                       const gchar *lang)
-{
-  GtrViewPrivate *priv = gtr_view_get_instance_private (view);
-  GList *langs = (GList *)gspell_language_get_available ();
-  gchar **lang_parts = NULL;
-  gboolean found = FALSE;
-  gchar *def_lang;
-
-  if (!lang || *lang == '\0')
-    return;
-
-  def_lang = get_default_lang (lang);
-
-  while (langs)
-    {
-      GspellLanguage *l = (GspellLanguage*) langs->data;
-      const gchar *code = gspell_language_get_code (l);
-      if (g_strcmp0 (def_lang, code) == 0)
-        {
-          gspell_checker_set_language (priv->spell, l);
-          // If we found the language exacly, we're finished
-          found = TRUE;
-          break;
-        }
-
-      langs = g_list_next (langs);
-    }
-
-  g_free (def_lang);
-
-  if (found)
-    return;
-
-  // Not found, trying again, but this time only with the first part of
-  // the language code
-
-  langs = (GList *)gspell_language_get_available ();
-  lang_parts = g_strsplit (lang, "_", 2);
-  while (langs)
-    {
-      GspellLanguage *l = (GspellLanguage*) langs->data;
-      const gchar *code = gspell_language_get_code (l);
-      gchar **parts = g_strsplit (code, "_", 2);
-      if (parts[0] && g_strcmp0 (parts[0], lang_parts[0]) == 0)
-        {
-          gspell_checker_set_language (priv->spell, l);
-          g_strfreev (parts);
-          found = TRUE;
-          break;
-        }
-      g_strfreev (parts);
-
-      langs = g_list_next (langs);
-    }
-  g_strfreev (lang_parts);
-
-  if (!found)
-    {
-      GspellTextView *gspell_view;
-      gspell_view = gspell_text_view_get_from_gtk_text_view (GTK_TEXT_VIEW (view));
-      gspell_text_view_set_inline_spell_checking (gspell_view, FALSE);
-    }
-}
-
-/**
- * gtr_view_enable_spellcheck:
- * @view: a #GtrView
- * @enable: TRUE if you want enable the spellcheck
- * 
- * Enables the spellcheck
- **/
-void
-gtr_view_enable_spellcheck (GtrView * view, gboolean enable)
-{
-  GtrViewPrivate *priv;
-  GspellTextView *gspell_view;
-  GtkTextBuffer *gtk_buffer;
-  GspellTextBuffer *gspell_buffer;
-
-  priv = gtr_view_get_instance_private (view);
-
-  priv->spell = gspell_checker_new (NULL);
-  gtk_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
-  gspell_buffer = gspell_text_buffer_get_from_gtk_text_buffer (gtk_buffer);
-  gspell_text_buffer_set_spell_checker (gspell_buffer, priv->spell);
-
-  gspell_view = gspell_text_view_get_from_gtk_text_view (GTK_TEXT_VIEW (view));
-  gspell_text_view_set_inline_spell_checking (gspell_view, enable);
-  gspell_text_view_set_enable_language_menu (gspell_view, TRUE);
-
-  g_signal_connect (G_OBJECT (priv->spell), "notify::language",
-                    G_CALLBACK (inline_spellcheck), view);
 }
 
 /**

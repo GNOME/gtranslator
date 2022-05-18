@@ -534,13 +534,6 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
 
   priv = gtr_tab_get_instance_private (tab);
 
-  if (spellcheck &&
-      g_settings_get_boolean (priv->editor_settings,
-                              GTR_SETTINGS_SPELLCHECK))
-    {
-      gtr_view_enable_spellcheck (GTR_VIEW (widget), spellcheck);
-    }
-
   gtk_container_add (GTK_CONTAINER (scroll), widget);
 
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
@@ -799,8 +792,6 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
                                                           priv->trans_notebook,
                                                           TRUE,
                                                           tab);
-
-      gtr_view_set_language (GTR_VIEW (priv->trans_msgstr[i]), lang_code);
 
       buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[i]));
       g_signal_connect (buf, "end-user-action",

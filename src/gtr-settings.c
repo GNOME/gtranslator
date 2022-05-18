@@ -164,19 +164,6 @@ static void
 on_spellcheck_changed (GSettings * settings,
                        const gchar * key, GtrSettings * gs)
 {
-  GList *views, *l;
-  gboolean enable;
-
-  enable = g_settings_get_boolean (settings, key);
-
-  views = gtr_application_get_views (GTR_APP, TRUE, TRUE);
-
-  for (l = views; l != NULL; l = g_list_next (l))
-    {
-      gtr_view_enable_spellcheck (GTR_VIEW (l->data), enable);
-    }
-
-  g_list_free (views);
 }
 
 static void
