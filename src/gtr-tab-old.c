@@ -28,7 +28,6 @@
  *   Thomas Ziehmer <thomas@kabalak.net>
  */
 
-#include "gtr-profile.h"
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -49,7 +48,6 @@
 #include "gtr-progress.h"
 #include "gtr-actions.h"
 #include "gtr-utils.h"
-#include "gtr-profile-manager.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -128,17 +126,6 @@ typedef struct
   GtkRevealer    *search_revealer;
   GtrSearchBar   *search_bar;
   GtkSearchEntry *search;
-
-  /* notebook code */
-  GtkWidget *titlebar;
-  GtkWidget *save;
-  GtkWidget *sort_id;
-  GtkWidget *order_menu_popover;
-  GtkWidget *search_toggle;
-  GtkWidget *upload;
-
-  GtkWidget *undo;
-  GtkWidget *redo;
 
 } GtrTabPrivate;
 
@@ -285,67 +272,6 @@ msg_grab_focus (GtrTab *tab)
 }
 
 static void
-handle_file_is_inconsistent (GtrPo *po, GtrTab *tab)
-{
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-  GtrProfileManager *manager = gtr_profile_manager_get_default ();
-  GtrProfile *active_profile = gtr_profile_manager_get_active_profile (manager);
-  const char *profile_name = gtr_profile_get_name (active_profile);
-  int profile_nplurals = -1;
-  int po_nplurals = -1;
-
-  g_autofree char *info_msg_primary = NULL;
-  g_autofree char *info_msg_secondary = NULL;
-  g_autofree char *filename = NULL;
-  g_autoptr (GFile) po_file = gtr_po_get_location (po);
-
-  filename = g_file_get_path (po_file);
-  po_nplurals = gtr_header_get_nplurals (gtr_po_get_header (po));
-  profile_nplurals = parse_nplurals_header (gtr_profile_get_plural_forms (active_profile));
-
-  info_msg_primary = g_strdup_printf ("File is not consistent with profile %s", profile_name);
-  info_msg_secondary = g_strdup_printf (
-    "File nplurals: %d, is different from profile nplurals %d.\n"
-    "Kindly go to preferences and select a profile with consistent nplurals "
-    "values as this file %s.",
-    po_nplurals, profile_nplurals, filename
-  );
-  gtr_tab_set_info (tab, info_msg_primary, info_msg_secondary);
-
-  GtkWidget *nb = priv->trans_notebook;
-  gtk_widget_set_sensitive (nb, FALSE);
-
-  g_object_unref (manager);
-}
-
-static void
-on_active_profile_changed (GtrProfileManager *manager, GtrProfile *profile, GtrTab *tab)
-{
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-  GtkWidget *nb = priv->trans_notebook;
-
-  GtrPo *po = priv->po;
-  if (!gtr_po_consistent_with_profile (po))
-  {
-    gtr_po_emit_file_not_consistent (po);
-  }
-  else
-  {
-    gtk_widget_set_sensitive (nb, TRUE);
-  }
-}
-
-static void
-on_profile_modified (GtrProfileManager *manager,
-                     GtrProfile *old_profile,
-                     GtrProfile *new_profile,
-                     GtrTab *tab)
-{
-  on_active_profile_changed (manager, new_profile, tab);
-}
-
-
-static void
 install_autosave_timeout (GtrTab * tab)
 {
   GtrTabPrivate *priv;
@@ -417,6 +343,7 @@ static void
 gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
 {
   gchar *message_error;
+  GtkWidget *infobar;
 
   /*
    * Checking message
@@ -427,8 +354,9 @@ gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
     {
       gtr_tab_block_movement (tab);
 
-      create_error_info_bar (_("There is an error in the message:"),
-                             message_error, tab);
+      infobar = create_error_info_bar (_("There is an error in the message:"),
+                                       message_error);
+      gtr_tab_set_info_bar (tab, infobar);
       g_free (message_error);
     }
   else
@@ -532,24 +460,27 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
 {
   GtkWidget *scroll;
   GtkWidget *label;
-  GtkWidget *view;
+  GtkWidget *widget;
+  GtrTabPrivate *priv;
 
   label = gtk_label_new (tab_label);
 
   scroll = gtk_scrolled_window_new (NULL, NULL);
   gtk_widget_show (scroll);
 
-  view = gtr_view_new ();
-  gtk_widget_show (view);
+  widget = gtr_view_new ();
+  gtk_widget_show (widget);
 
-  gtk_container_add (GTK_CONTAINER (scroll), view);
+  priv = gtr_tab_get_instance_private (tab);
+
+  gtk_container_add (GTK_CONTAINER (scroll), widget);
 
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
                                        GTK_SHADOW_IN);
 
   gtk_notebook_append_page (GTK_NOTEBOOK (box), scroll, label);
 
-  return view;
+  return widget;
 }
 
 static void
@@ -769,7 +700,7 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
   else
     gtk_label_set_text (GTK_LABEL (priv->msgid_tags), "");
 
-  /* We need to update the tab state too if is necessary */
+  /* We need to update the tab state too if is neccessary */
   if (po_state != GTR_PO_STATE_MODIFIED)
     gtr_po_set_state (priv->po, GTR_PO_STATE_MODIFIED);
 }
@@ -794,6 +725,7 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
 
   do
     {
+
       label = g_strdup_printf (_("Plural %d"), i);
       priv->trans_msgstr[i] = gtr_tab_append_msgstr_page (label,
                                                           priv->trans_notebook,
@@ -1097,16 +1029,6 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, overlay);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_bar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_revealer);
-
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, titlebar);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_id);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, order_menu_popover);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_toggle);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, undo);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, redo);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, save);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, upload);
-
   gtk_widget_class_bind_template_callback (widget_class, gtr_page_notify_child_revealed);
   gtk_widget_class_bind_template_callback (widget_class, gtr_page_stop_search);
 
@@ -1117,66 +1039,6 @@ gtr_tab_class_init (GtrTabClass * klass)
 }
 
 /***************************** Public funcs ***********************************/
-
-void
-gtr_tab_hide_sort_menu (GtrTab *tab)
-{
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-
-  if (priv->sort_id)
-    gtk_popover_popdown (GTK_POPOVER (priv->order_menu_popover));
-}
-
-void
-gtr_tab_enable_find_button (GtrTab *tab,
-                                 gboolean enable)
-{
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-
-  if (priv->search_toggle)
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->search_toggle), enable);
-}
-
-void
-gtr_tab_enable_save (GtrTab *tab,
-                          gboolean enable)
-{
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-  gtk_widget_set_sensitive (priv->save, enable);
-}
-
-void
-gtr_tab_update_undo_buttons (GtrTab *tab,
-                                  GtrView     *view)
-{
-  GtkSourceBuffer *active_document;
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-  gboolean can_undo, can_redo;
-  g_return_if_fail (view);
-
-  active_document =
-    GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
-
-  can_undo = gtk_source_buffer_can_undo (active_document);
-  can_redo = gtk_source_buffer_can_redo (active_document);
-
-  gtk_widget_set_sensitive (priv->undo, can_undo);
-  gtk_widget_set_sensitive (priv->redo, can_redo);
-}
-
-void
-gtr_tab_enable_upload (GtrTab *tab, gboolean enable)
-{
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-  gtk_widget_set_sensitive (priv->upload, enable);
-}
-
-GtkWidget *
-gtr_tab_get_header (GtrTab *tab)
-{
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-  return priv->titlebar;
-}
 
 /**
  * gtr_tab_new:
@@ -1193,11 +1055,8 @@ gtr_tab_new (GtrPo * po,
 {
   GtrTab *tab;
   GtrTabPrivate *priv;
-  GtrProfileManager *manager;
 
   g_return_val_if_fail (po != NULL, NULL);
-
-  manager = gtr_profile_manager_get_default();
 
   tab = g_object_new (GTR_TYPE_TAB, NULL);
 
@@ -1215,15 +1074,6 @@ gtr_tab_new (GtrPo * po,
   g_signal_connect (po, "notify::state",
                     G_CALLBACK (on_state_notify), tab);
 
-  g_signal_connect (po, "file-is-inconsistent-with-profile",
-                    G_CALLBACK (handle_file_is_inconsistent), tab);
-
-  g_signal_connect (manager, "active-profile-changed",
-                    G_CALLBACK (on_active_profile_changed), tab);
-
-    g_signal_connect (manager, "profile-modified",
-                    G_CALLBACK (on_profile_modified), tab);
-
   install_autosave_timeout_if_needed (tab);
 
   /* Now we have to initialize the number of msgstr tabs */
@@ -1231,11 +1081,6 @@ gtr_tab_new (GtrPo * po,
 
   gtr_message_table_populate (GTR_MESSAGE_TABLE (priv->message_table),
                               GTR_MESSAGE_CONTAINER (priv->po));
-
-  if (!gtr_po_consistent_with_profile (po))
-  {
-    gtr_po_emit_file_not_consistent (po);
-  }
 
   gtk_widget_show (GTK_WIDGET (tab));
   return tab;
@@ -2127,7 +1972,9 @@ gtr_tab_set_info (GtrTab * tab,
                   const char * primary,
                   const char * secondary)
 {
-  create_info_info_bar (primary, secondary, tab);
+  GtkWidget *infobar;
+  infobar = create_info_info_bar (primary, secondary);
+  gtr_tab_set_info_bar (tab, infobar);
 }
 
 GtrMsg *

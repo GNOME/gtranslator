@@ -169,15 +169,6 @@ void gtr_tab_find_next (GtrTab * tab);
 void gtr_tab_find_prev (GtrTab * tab);
 void gtr_tab_find_set_replace (GtrTab * tab, gboolean replace);
 
-/* notebook */
-void gtr_tab_enable_save (GtrTab *tab, gboolean enable);
-void gtr_tab_enable_upload (GtrTab *tab, gboolean enable);
-void gtr_tab_update_undo_buttons (GtrTab *tab, GtrView *view);
-GtkWidget *
-gtr_tab_get_header (GtrTab *tab);
-void gtr_tab_enable_find_button (GtrTab *tab, gboolean enable);
-void gtr_tab_hide_sort_menu (GtrTab *tab);
-
 /* Semi-public methods */
 
 gchar *_gtr_tab_get_name (GtrTab * tab);

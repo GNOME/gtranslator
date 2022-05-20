@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.15.3 on Wed Sep  4 22:17:30 2013 -->
+<interface>
+  <!-- interface-requires gtk+ 3.10 -->
+  <template class="GtrTab" parent="GtkBox">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="orientation">vertical</property>
+    <child>
+      <object class="GtkOverlay" id="overlay">
+        <property name="visible">True</property>
+        <property name="expand">True</property>
+        <child type="overlay">
+          <object class="GtkRevealer" id="search_revealer">
+            <property name="width-request">525</property>
+            <property name="halign">end</property>
+            <property name="valign">start</property>
+            <property name="margin-end">12</property>
+            <property name="reveal-child">false</property>
+            <property name="visible">True</property>
+            <signal name="notify::child-revealed" handler="gtr_page_notify_child_revealed" swapped="true" object="GtrTab"/>
+            <child>
+              <object class="GtrSearchBar" id="search_bar">
+                <property name="visible">True</property>
+                <signal name="stop-search" handler="gtr_page_stop_search" swapped="true" object="GtrTab"/>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkPaned" id="hbox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="wide_handle">True</property>
+            <child>
+              <object class="GtkPaned" id="vertical_box">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
+                <property name="width_request">450</property>
+                <property name="wide_handle">True</property>
+                <child>
+                  <object class="GtrMessageTable" id="message_table">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="tab">GtrTab</property>
+                    <property name="height_request">350</property>
+                  </object>
+                  <packing>
+                    <property name="resize">True</property>
+                    <property name="shrink">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="translation_box">
+                    <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkBox" id="text_vbox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkBox" id="text_hbox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="orientation">horizontal</property>
+                            <child>
+                              <object class="GtkLabel" id="msgid_label">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="ypad">5</property>
+                                <property name="label" translatable="yes">_Original Message</property>
+                                <property name="use_underline">True</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="msgid_ctxt">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="no"></property>
+                                <property name="use_underline">True</property>
+                                <property name="ellipsize">end</property>
+                                <style>
+                                  <class name="msgcontext"/>
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="msgid_tags">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="label"></property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                                <style>
+                                  <class name="msgtags"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkScrolledWindow" id="text_msgid_scroll">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="shadow_type">in</property>
+                            <child>
+                              <object class="GtrView" id="text_msgid">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="editable">False</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkScrolledWindow" id="text_plural_scroll">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="shadow_type">in</property>
+                            <child>
+                              <object class="GtrView" id="text_msgid_plural">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="editable">False</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="msgstr_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="ypad">5</property>
+                        <property name="label" translatable="yes">Translate_d Text</property>
+                        <property name="use_underline">True</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkNotebook" id="trans_notebook">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="show_border">False</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="resize">False</property>
+                    <property name="shrink">False</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="resize">True</property>
+                <property name="shrink">False</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtrContextPanel" id="context">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="tab">GtrTab</property>
+                <property name="width_request">150</property>
+              </object>
+              <packing>
+                <property name="resize">False</property>
+                <property name="shrink">False</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child >
+      <object class="GtkEventBox" id="progress_eventbox">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkBox" id="progress_box">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkRevealer" id="progress_revealer">
+                <property name="visible">True</property>
+                <property name="reveal_child">True</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_start">6</property>
+                    <property name="margin_end">6</property>
+                    <property name="margin_top">6</property>
+                    <property name="margin_bottom">6</property>
+                    <property name="orientation">horizontal</property>
+                    <property name="homogeneous">True</property>
+                    <child>
+                      <object class="GtkLabel" id="progress_percentage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">translated: 0.00%</property>
+                        <property name="xalign">0.5</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="progress_trans">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">Translated: 0</property>
+                        <property name="xalign">0.5</property>
+                        <style>
+                          <class name="progress_trans"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="progress_fuzzy">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">fuzzy: 0</property>
+                        <property name="xalign">0.5</property>
+                        <style>
+                          <class name="progress_fuzzy"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="progress_untrans">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">untranslated: 0</property>
+                        <property name="xalign">0.5</property>
+                        <style>
+                          <class name="progress_untranslated"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">False</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+  </template>
+</interface>

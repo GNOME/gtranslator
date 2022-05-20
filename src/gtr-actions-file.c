@@ -66,7 +66,6 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
   GList *current;
   GtrView *active_view;
   GtrHeader *header;
-  GtrNotebook *active_notebook;
   gchar *dl_team;
   gchar *dl_module;
   gchar *dl_branch;
@@ -112,14 +111,14 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
    * Create a page to add to our list of open files
    */
   tab = gtr_window_create_tab (window, po);
-  gtr_window_set_active_tab (window, GTK_WIDGET (tab));
+  //gtr_window_set_active_tab (window, GTK_WIDGET (tab));
 
   /*
    * Activate the upload file icon if the po file is in the appropriate
    * state as on the vertimus workflow
    */
-  active_notebook = gtr_window_get_notebook (window);
-  gtr_notebook_enable_upload (active_notebook, gtr_po_can_dl_upload (po));
+  //active_notebook = gtr_window_get_notebook (window);
+  gtr_tab_enable_upload (tab, gtr_po_can_dl_upload (po));
 
   /*
    * Show the current message.
@@ -247,13 +246,13 @@ void
 gtr_open_file_dialog (GtrWindow * window)
 {
   GtkNativeDialog *dialog;
-  g_autoptr (GList) list = NULL;
-  list = get_modified_documents (window);
-  if (list != NULL)
+  //g_autoptr (GList) list = NULL;
+  //list = get_modified_documents (window);
+  /*if (list != NULL)
     {
       if (!gtr_want_to_save_current_dialog (window))
         return;
-    }
+    }*/
 
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
                                  FILESEL_OPEN,
@@ -334,8 +333,9 @@ _upload_file_callback (GObject      *object,
   UserData *ud = user_data;
   g_autoptr(GInputStream) stream = NULL;
   GtkWidget *dialog;
+  GtrTab *active_tab;
   GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
-  GtrNotebook *active_notebook;
+  //GtrNotebook *active_notebook;
 
   GtkWidget *upload_dialog = ud->dialog;
   GtkWidget *window = gtr_upload_dialog_get_parent (GTR_UPLOAD_DIALOG (upload_dialog));
@@ -346,7 +346,7 @@ _upload_file_callback (GObject      *object,
 
   stream = soup_session_send_finish (session, result, &error);
 
-  active_notebook = gtr_window_get_notebook (GTR_WINDOW (window));
+  active_tab = gtr_window_get_active_tab (GTR_WINDOW (window));
 
   if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
     {
@@ -357,7 +357,8 @@ _upload_file_callback (GObject      *object,
                                            GTK_MESSAGE_INFO,
                                            GTK_BUTTONS_OK,
                                            _("This file has already been uploaded"));
-          gtr_notebook_enable_upload (active_notebook, FALSE);
+          //gtr_notebook_enable_upload (active_notebook, FALSE);
+          gtr_tab_enable_upload (active_tab, FALSE);
           goto end;
         }
 
@@ -394,7 +395,7 @@ _upload_file_callback (GObject      *object,
                                    GTK_BUTTONS_OK,
                                    _("The file has been uploaded!"));
 
-  gtr_notebook_enable_upload (active_notebook, FALSE);
+  gtr_tab_enable_upload (active_tab, FALSE);
 
 end:
   g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
@@ -619,15 +620,15 @@ load_file_list (GtrWindow * window, const GSList * locations)
       if (!is_duplicated_location (locations_to_load, locations->data))
         {
           /*We need to now if is already loaded in any tab */
-          tab = gtr_window_get_tab_from_location (window,
-                                                  (GFile *) locations->data);
+          /*tab = gtr_window_get_tab_from_location (window,
+                                                  (GFile *) locations->data);*/
 
-          if (tab != NULL)
+          /*if (tab != NULL)
             {
               if (locations == l)
                 gtr_window_set_active_tab (window, tab);
             }
-          else
+          else*/
             locations_to_load = g_slist_prepend (locations_to_load,
                                                  locations->data);
 
@@ -707,13 +708,13 @@ save_and_close_document (GtrPo * po, GtrWindow * window)
 static void
 close_all_tabs (GtrWindow * window)
 {
-  GtrNotebook *nb;
+  /*GtrNotebook *nb;
 
   nb = gtr_window_get_notebook (window);
   gtr_notebook_remove_all_pages (nb);
 
   //FIXME: This has to change once we add the close all documents menuitem
-  gtk_widget_destroy (GTK_WIDGET (window));
+  gtk_widget_destroy (GTK_WIDGET (window));*/
 }
 
 static void
@@ -867,13 +868,12 @@ gtr_file_close (GtrWindow * window)
 static GList *
 get_modified_documents (GtrWindow * window)
 {
-  GtrNotebook *nb;
+  //GtrNotebook *nb;
   GtrTab *tab;
   GtrPo *po;
-  gint pages;
   GList *list = NULL;
 
-  nb = gtr_window_get_notebook (window);
+  /*nb = gtr_window_get_notebook (window);
   pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (nb));
 
   while (pages > 0)
@@ -886,7 +886,12 @@ get_modified_documents (GtrWindow * window)
         list = g_list_prepend (list, po);
 
       pages--;
-    }
+    }*/
+
+  tab = gtr_window_get_active_tab(window);
+  po = gtr_tab_get_po (tab);
+  if (gtr_po_get_state (po) == GTR_PO_STATE_MODIFIED)
+    list = g_list_prepend (list, po);
 
   return list;
 }

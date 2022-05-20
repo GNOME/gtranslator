@@ -28,7 +28,7 @@
 #include <gtk/gtk.h>
 
 #include "gtr-header.h"
-// #include "gtr-notebook.h"
+#include "gtr-notebook.h"
 #include "gtr-tab.h"
 #include "gtr-view.h"
 
@@ -54,7 +54,7 @@ GtrTab *gtr_window_get_active_tab (GtrWindow * window);
 
 GList *gtr_window_get_all_tabs (GtrWindow * window);
 
-// GtrNotebook *gtr_window_get_notebook (GtrWindow * window);
+GtrNotebook *gtr_window_get_notebook (GtrWindow * window);
 
 GtrHeader * gtr_window_get_header_from_active_tab (GtrWindow * window);
 

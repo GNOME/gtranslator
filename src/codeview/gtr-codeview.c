@@ -465,22 +465,20 @@ on_context_panel_reloaded (GtrContextPanel *panel,
 }
 
 static void
-page_added_cb (GtkNotebook *notebook,
-               GtkWidget   *child,
-               guint        page_num,
+page_added_cb (GtkWidget   *tab,
                GtrCodeView *codeview)
 {
   GtrContextPanel *panel;
   GtkTextView *view;
 
-  panel = gtr_tab_get_context_panel (GTR_TAB (child));
+  panel = gtr_tab_get_context_panel (GTR_TAB (tab));
   view = gtr_context_panel_get_context_text_view (panel);
 
   g_return_if_fail (GTK_IS_TEXT_VIEW (view));
 
-  g_signal_connect_after (child, "showed-message",
+  g_signal_connect_after (tab, "showed-message",
                           G_CALLBACK (showed_message_cb), codeview);
-  g_signal_connect (child, "message-edition-finished",
+  g_signal_connect (tab, "message-edition-finished",
                     G_CALLBACK (message_edition_finished_cb), codeview);
 
   g_signal_connect (view, "event-after", G_CALLBACK (event_after), codeview);
@@ -577,12 +575,12 @@ gtr_code_view_new (GtrWindow *window)
   GtrCodeView *self = g_object_new (GTR_TYPE_CODE_VIEW,
                                     "window", window, NULL);
   GtrCodeViewPrivate *priv = gtr_code_view_get_instance_private (self);
-  GtkWidget *notebook;
+  GtkWidget *tab;
   GdkDisplay *display;
   GList *tabs, *l;
 
-  notebook = GTK_WIDGET (gtr_window_get_notebook (priv->window));
-  display = gtk_widget_get_display (notebook);
+  tab = GTK_WIDGET (gtr_window_get_active_tab (priv->window));
+  display = gtk_widget_get_display (tab);
 
   /*
    * Cursors
@@ -590,13 +588,13 @@ gtr_code_view_new (GtrWindow *window)
   hand_cursor = gdk_cursor_new_for_display (display, GDK_HAND2);
   regular_cursor = gdk_cursor_new_for_display (display, GDK_XTERM);
 
-  g_signal_connect (notebook, "page-added", G_CALLBACK (page_added_cb), self);
+  //g_signal_connect (notebook, "page-added", G_CALLBACK (page_added_cb), self);
 
   /*
    * If we already have tabs opened we have to add them
    */
-  tabs = gtr_window_get_all_tabs (priv->window);
-  for (l = tabs; l != NULL; l = g_list_next (l))
+  //tabs = gtr_window_get_all_tabs (priv->window);
+  /*for (l = tabs; l != NULL; l = g_list_next (l))
     {
       GtrPo *po;
       GList *msg;
@@ -607,7 +605,13 @@ gtr_code_view_new (GtrWindow *window)
       msg = gtr_po_get_current_message (po);
 
       showed_message_cb (GTR_TAB (l->data), msg->data, self);
-    }
+    }*/
+    GtrPo *po;
+    GList *msg;
+    po = gtr_tab_get_po (GTR_TAB (tab));
+    msg = gtr_po_get_current_message (po);
+    page_added_cb (GTR_TAB(tab), self);
+    showed_message_cb (GTR_TAB (tab), msg->data, self);
 
   return self;
 }

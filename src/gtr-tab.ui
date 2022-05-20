@@ -312,4 +312,503 @@
       </packing>
     </child>
   </template>
+
+  <object class="GtkPopoverMenu" id="order_menu_popover">
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_start">6</property>
+        <property name="margin_end">6</property>
+        <property name="margin_top">6</property>
+        <property name="margin_bottom">6</property>
+        <property name="orientation">vertical</property>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Order messages by</property>
+            <property name="xalign">0.5</property>
+            <property name="margin_top">3</property>
+            <property name="margin_bottom">3</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">3</property>
+            <property name="margin_bottom">3</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkRadioButton" id="sort_id">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.sort_by_id</property>
+            <property name="label" translatable="yes">Appearance in the original file</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="sort_status">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.sort_by_status</property>
+            <property name="label" translatable="yes">Message status</property>
+            <property name="group">sort_id</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="sort_msgid">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.sort_by_msgid</property>
+            <property name="label" translatable="yes">Original message</property>
+            <property name="group">sort_id</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="sort_translated">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.sort_by_translated</property>
+            <property name="label" translatable="yes">Translated message</property>
+            <property name="group">sort_id</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="submenu">main</property>
+      </packing>
+    </child>
+  </object>
+
+  <object class="GtkPopoverMenu" id="main_menu_popover">
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_start">6</property>
+        <property name="margin_end">6</property>
+        <property name="margin_top">6</property>
+        <property name="margin_bottom">6</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkModelButton" id="find">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.find</property>
+            <property name="text" translatable="yes">Find</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="find_and_replace">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.find_and_replace</property>
+            <property name="text" translatable="yes">Find and replace</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="translation_memory">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.build_tm</property>
+            <property name="text" translatable="yes">Build translation memory</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkModelButton" id="edit_header">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.edit_header</property>
+            <property name="text" translatable="yes">Edit header</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">3</property>
+            <property name="margin_bottom">3</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="new_win">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.new_window</property>
+            <property name="text" translatable="yes">New window</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="pref_button1">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.preferences</property>
+            <property name="text" translatable="yes">Preferences</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">3</property>
+            <property name="margin_bottom">3</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="pref_button">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.shortcuts</property>
+            <property name="text" translatable="yes">Keyboard Shortcuts</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="about_button">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.about</property>
+            <property name="text" translatable="yes">About</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="help_button">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.help</property>
+            <property name="text" translatable="yes">Help</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="quit">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="action_name">app.quit</property>
+            <property name="text" translatable="yes">Quit</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="submenu">main</property>
+      </packing>
+    </child>
+  </object>
+
+  <object class="GtkHeaderBar" id="titlebar">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Translation Editor</property>
+    <property name="show_close_button">True</property>
+
+    <child>
+       <object class="GtkBox">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkButton" id="open_button">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Open a new file (&lt;Ctrl&gt;o)</property>
+            <property name="action_name">app.open</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">document-open-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="dl_button">
+            <property name="visible">True</property>
+            <property name="tooltip_text" translatable="yes">Open from Damned Lies (&lt;Ctrl&gt;d)</property>
+            <property name="action_name">app.dl</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="icon_name">folder-download-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <style>
+         <class name="linked"/>
+        </style>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkSeparator">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkButton" id="undo">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Undo (&lt;Ctrl&gt;z)</property>
+            <property name="action_name">app.undo</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">edit-undo-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="redo">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Redo (&lt;Ctrl&gt;&lt;Shift&gt;z)</property>
+            <property name="action_name">app.redo</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">edit-redo-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <style>
+          <class name="linked"/>
+        </style>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparator">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkButton" id="prev_untranslated">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Previous message without translation (&lt;Alt&gt;&lt;Page Up&gt;)</property>
+            <property name="action_name">app.prev_no</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">go-up-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="next_untranslated">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Next message without translation (&lt;Alt&gt;&lt;Page Down&gt;)</property>
+            <property name="action_name">app.next_no</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">go-down-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <style>
+          <class name="linked"/>
+        </style>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparator">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="tooltip_text" translatable="yes">Toggle fuzzy state (&lt;Ctrl&gt;+u)</property>
+        <property name="action_name">app.fuzzy</property>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="icon_name">weather-fog-symbolic</property>
+          </object>
+        </child>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkMenuButton" id="sortby_menu">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="popover">order_menu_popover</property>
+        <property name="tooltip_text" translatable="yes">Sort messages by</property>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="icon_name">view-sort-ascending-symbolic</property>
+          </object>
+        </child>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="sortby_menu-atkobject">
+            <property name="AtkObject::accessible-name" translatable="yes">Order by menu</property>
+          </object>
+        </child>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkMenuButton" id="main_menu">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="popover">main_menu_popover</property>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="icon_name">open-menu-symbolic</property>
+          </object>
+        </child>
+        <child internal-child="accessible">
+          <object class="AtkObject" id="main_menu-atkobject">
+            <property name="AtkObject::accessible-name" translatable="yes">Main Menu</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="pack_type">end</property>
+      </packing>
+    </child>
+    <child>
+          <object class="GtkToggleButton" id="search_toggle">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Find (&lt;Ctrl&gt;&lt;f&gt;)</property>
+            <property name="action_name">app.findtoggle</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">edit-find-symbolic</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+          </packing>
+    </child>
+    <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">3</property>
+            <property name="margin_bottom">3</property>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+          </packing>
+    </child>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkButton" id="save">
+            <property name="label" translatable="yes">Save</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Save the current file (&lt;Ctrl&gt;s)</property>
+            <property name="action_name">app.save</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Save as (&lt;Ctrl&gt;&lt;Shift&gt;s)</property>
+            <property name="action_name">app.saveas</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">document-save-as-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+         <child>
+          <object class="GtkButton" id="upload">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Upload file (&lt;Ctrl&gt;b)</property>
+            <property name="action_name">app.upload_file</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">document-send-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <style>
+          <class name="linked"/>
+        </style>
+      </object>
+      <packing>
+        <property name="pack_type">end</property>
+      </packing>
+    </child>
+
+    <style>
+      <class name="titlebar"/>
+    </style>
+  </object>
+
 </interface>

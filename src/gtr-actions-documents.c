@@ -21,18 +21,18 @@
 
 #include "gtr-actions.h"
 
-void
+/*void
 gtr_actions_documents_next_document (GtrWindow * window)
 {
   GtrNotebook *notebook;
   notebook = gtr_window_get_notebook (window);
   gtk_notebook_next_page (GTK_NOTEBOOK (notebook));
-}
+}*/
 
-void
+/*void
 gtr_actions_documents_previous_document (GtrWindow * window)
 {
   GtrNotebook *notebook;
   notebook = gtr_window_get_notebook (window);
   gtk_notebook_prev_page (GTK_NOTEBOOK (notebook));
-}
+}*/

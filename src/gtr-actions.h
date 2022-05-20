@@ -162,9 +162,9 @@ void search_bar_response_cb (GtrSearchBar * dialog,
                              GtrWindow    * window);
 
 /*Documents*/
-void gtr_actions_documents_next_document (GtrWindow * window);
+//void gtr_actions_documents_next_document (GtrWindow * window);
 
-void gtr_actions_documents_previous_document (GtrWindow * window);
+//void gtr_actions_documents_previous_document (GtrWindow * window);
 
 /*Help*/
 void gtr_window_show_home_page (gpointer useless);
