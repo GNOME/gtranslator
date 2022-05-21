@@ -1147,7 +1147,7 @@ gtr_tab_enable_save (GtrTab *tab,
 
 void
 gtr_tab_update_undo_buttons (GtrTab *tab,
-                                  GtrView     *view)
+                                  GtrView  *view)
 {
   GtkSourceBuffer *active_document;
   GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
@@ -1156,6 +1156,7 @@ gtr_tab_update_undo_buttons (GtrTab *tab,
 
   active_document =
     GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+  g_return_if_fail(active_document);
 
   can_undo = gtk_source_buffer_can_undo (active_document);
   can_redo = gtk_source_buffer_can_redo (active_document);

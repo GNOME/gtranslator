@@ -77,7 +77,6 @@ typedef struct
   GtkWidget *stack;
 
   GtkWidget *projects;
-  GtkWidget *tab;
   GtkWidget *dlteams;
 
   GtrTab *active_tab;
@@ -116,9 +115,8 @@ update_undo_state (GtrTab     *tab,
                    GtrMsg     *msg,
                    GtrWindow  *window)
 {
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtrView *active_view = gtr_window_get_active_view (window);
-  gtr_tab_update_undo_buttons (GTR_TAB (priv->tab), active_view);
+  gtr_tab_update_undo_buttons (GTR_TAB (tab), active_view);
 }
 
 /*
@@ -129,14 +127,14 @@ update_undo_state (GtrTab     *tab,
  */
 static void
 gtr_window_update_statusbar_message_count (GtrTab * tab,
-                                           GtrMsg * message,
+                                           GtrMsg *message,
                                            GtrWindow * window)
 {
   GtrTab *active_tab;
   GtrPo *po;
   gint translated, fuzzy, untranslated;
 
-  g_return_if_fail (GTR_IS_MSG (message));
+  //g_return_if_fail (GTR_IS_MSG (message));
 
   po = gtr_tab_get_po (tab);
 
@@ -204,7 +202,6 @@ set_window_title (GtrWindow * window, gboolean with_path)
       active_tab = gtr_window_get_active_tab (window);
       po = gtr_tab_get_po (active_tab);
       state = gtr_po_get_state (gtr_tab_get_po (active_tab));
-      po = gtr_tab_get_po (active_tab);
       file = gtr_po_get_location (po);
       basename = g_file_get_basename (file);
 
@@ -212,13 +209,13 @@ set_window_title (GtrWindow * window, gboolean with_path)
         {
           /* Translators: this is the title of the window with a modified document */
           title = g_strdup_printf (_("*%s — Translation Editor"), basename);
-          gtr_tab_enable_save (GTR_TAB (priv->tab), TRUE);
+          gtr_tab_enable_save (GTR_TAB (priv->active_tab), TRUE);
         }
       else
         {
           /* Translators: this is the title of the window with a document opened */
           title = g_strdup_printf (_("%s — Translation Editor"), basename);
-          gtr_tab_enable_save (GTR_TAB (priv->tab), FALSE);
+          gtr_tab_enable_save (GTR_TAB (priv->active_tab), FALSE);
         }
 
       g_free (basename);
@@ -346,6 +343,7 @@ gtr_window_init (GtrWindow *window)
 
   priv->search_bar_shown = FALSE;
   priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
+  priv->active_tab = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (window));
 
@@ -427,9 +425,6 @@ gtr_window_init (GtrWindow *window)
                                         g_settings_get_int (priv->tm_settings,
                                                             "max-length-diff"));
   gtr_translation_memory_set_max_items (priv->translation_memory, 10);
-
-  // code view
-  //priv->codeview = gtr_code_view_new (window);
 
   gtr_window_show_projects (window);
 }
@@ -513,7 +508,7 @@ static void
 searchbar_toggled (GtrTab * tab, gboolean revealed, GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
-  gtr_tab_enable_find_button (GTR_TAB (priv->tab), revealed);
+  gtr_tab_enable_find_button (GTR_TAB (priv->active_tab), revealed);
 }
 
 /***************************** Public funcs ***********************************/
@@ -545,8 +540,33 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   g_list_free (tabs);
 
   tab = gtr_tab_new (po, GTK_WINDOW (window));
+  g_return_if_fail (GTR_IS_TAB (tab));
   priv->active_tab = tab;
+
+  set_window_title (window, TRUE);
+  g_signal_connect_after (tab,
+                          "message_changed",
+                          G_CALLBACK
+                          (gtr_window_update_statusbar_message_count),
+                          window);
+
+  g_signal_connect_after (tab,
+                          "message_changed",
+                          G_CALLBACK (update_undo_state),
+                          window);
+  g_signal_connect_after (tab,
+                          "showed-message",
+                          G_CALLBACK (update_undo_state),
+                          window);
+
   gtk_widget_show (GTK_WIDGET (tab));
+  gtr_window_update_statusbar_message_count(priv->active_tab,NULL, window);
+
+  //update_undo_state (NULL, NULL, window);
+
+  //GtkWidget *label;
+  //label = create_tab_label (notebook, tab);
+  //gtk_notebook_append_page (GTK_NOTEBOOK (notebook), GTK_WIDGET (tab), label);
 
   /*
   gtr_notebook_add_page (GTR_NOTEBOOK (priv->notebook), tab);
@@ -557,6 +577,9 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   gtk_stack_add_named (GTK_STACK (priv->header_stack),
                        gtr_tab_get_header (GTR_TAB (priv->active_tab)),
                        "poeditor");
+
+  // code view
+  priv->codeview = gtr_code_view_new (window);
 
   g_signal_connect_after (po,
                           "notify::state",
@@ -614,10 +637,12 @@ gtr_window_get_all_tabs (GtrWindow * window)
                                                         (priv->notebook), i));
       i++;
     }*/
-  toret = g_list_append (toret,
-                        GTK_WIDGET(
-                          gtr_window_get_active_tab(window)));
-
+  GtrTab *tab = gtr_window_get_active_tab(window);
+  if (tab != NULL) {
+    toret = g_list_append (toret,
+                          GTK_WIDGET(
+                            gtr_window_get_active_tab(window)));
+  }
   return toret;
 }
 
@@ -704,7 +729,7 @@ gtr_window_get_all_views (GtrWindow * window,
                           gboolean original, gboolean translated)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-  gint numtabs;
+  //gint numtabs;
   //gint i;
   GList *views = NULL;
   //GtkWidget *tab;

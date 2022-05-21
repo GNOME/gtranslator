@@ -577,7 +577,6 @@ gtr_code_view_new (GtrWindow *window)
   GtrCodeViewPrivate *priv = gtr_code_view_get_instance_private (self);
   GtkWidget *tab;
   GdkDisplay *display;
-  GList *tabs, *l;
 
   tab = GTK_WIDGET (gtr_window_get_active_tab (priv->window));
   display = gtk_widget_get_display (tab);
@@ -610,8 +609,7 @@ gtr_code_view_new (GtrWindow *window)
     GList *msg;
     po = gtr_tab_get_po (GTR_TAB (tab));
     msg = gtr_po_get_current_message (po);
-    page_added_cb (GTR_TAB(tab), self);
+    page_added_cb (tab, self);
     showed_message_cb (GTR_TAB (tab), msg->data, self);
-
   return self;
 }
