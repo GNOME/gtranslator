@@ -159,7 +159,7 @@ get_drop_window (GtkWidget * widget)
 }
 
 /* Handle drops on the GtrWindow */
-static void
+/*static void
 drag_data_received_cb (GtkWidget * widget,
                        GdkDragContext * context,
                        gint x,
@@ -182,7 +182,7 @@ drag_data_received_cb (GtkWidget * widget,
 
       g_slist_free_full (locations, g_object_unref);
     }
-}
+}*/
 
 void
 set_window_title (GtrWindow * window, gboolean with_path)
@@ -353,12 +353,12 @@ gtr_window_init (GtrWindow *window)
 
   /* Drag and drop support, set targets to NULL because we add the
      default uri_targets below */
-  gtk_drag_dest_set (GTK_WIDGET (window),
+  /*gtk_drag_dest_set (GTK_WIDGET (window),
                      GTK_DEST_DEFAULT_MOTION |
                      GTK_DEST_DEFAULT_HIGHLIGHT |
                      GTK_DEST_DEFAULT_DROP, NULL, 0, GDK_ACTION_COPY);
 
-  /* Add uri targets */
+  // Add uri targets //
   tl = gtk_drag_dest_get_target_list (GTK_WIDGET (window));
 
   if (tl == NULL)
@@ -370,10 +370,10 @@ gtr_window_init (GtrWindow *window)
 
   gtk_target_list_add_uri_targets (tl, TARGET_URI_LIST);
 
-  /* Connect signals */
+  // Connect signals //
   g_signal_connect (window,
                     "drag_data_received",
-                    G_CALLBACK (drag_data_received_cb), NULL);
+                    G_CALLBACK (drag_data_received_cb), NULL);*/
 
   /**
    * Here we define different widgets that provides to append to the main

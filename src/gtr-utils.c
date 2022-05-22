@@ -93,7 +93,7 @@ gtr_gtk_button_new_with_icon_name (const gchar * label,
  * 
  * It returns the position to popup a menu in a specific widget.
  */
-void
+/*void
 gtr_utils_menu_position_under_widget (GtkMenu * menu,
                                       gint * x,
                                       gint * y,
@@ -120,7 +120,7 @@ gtr_utils_menu_position_under_widget (GtkMenu * menu,
   *y += allocation.y + allocation.height;
 
   *push_in = TRUE;
-}
+}*/
 
 /**
  * gtr_utils_menu_position_under_tree_view:
@@ -132,7 +132,7 @@ gtr_utils_menu_position_under_widget (GtkMenu * menu,
  * 
  * It returns the position to popup a menu in a TreeView.
  */
-void
+/*void
 gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
                                          gint * x,
                                          gint * y,
@@ -158,7 +158,7 @@ gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
       gdk_window_get_origin (gtk_widget_get_window (GTK_WIDGET (tree)), x, y);
 
       path = gtk_tree_model_get_path (model, &iter);
-      gtk_tree_view_get_cell_area (tree, path, gtk_tree_view_get_column (tree, 0),      /* FIXME 0 for RTL ? */
+      gtk_tree_view_get_cell_area (tree, path, gtk_tree_view_get_column (tree, 0),      // FIXME 0 for RTL ? //
                                    &rect);
       gtk_tree_path_free (path);
 
@@ -175,10 +175,10 @@ gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
     }
   else
     {
-      /* no selection -> regular "under widget" positioning */
+      // no selection -> regular "under widget" positioning //
       gtr_utils_menu_position_under_widget (menu, x, y, push_in, tree);
     }
-}
+}*/
 
 
 static gboolean
@@ -252,7 +252,7 @@ gtr_utils_is_valid_uri (const gchar * uri)
  *		 were no valid uris. g_strfreev should be used when the 
  *		 string array is no longer used
  */
-GSList *
+/*GSList *
 gtr_utils_drop_get_locations (GtkSelectionData * selection_data)
 {
   gchar **uris;
@@ -264,7 +264,7 @@ gtr_utils_drop_get_locations (GtkSelectionData * selection_data)
   for (i = 0; uris[i] != NULL; i++)
     {
       GFile *file;
-      /* Silently ignore malformed URI/filename */
+      // Silently ignore malformed URI/filename //
       if (gtr_utils_is_valid_uri (uris[i]))
         {
           file = g_file_new_for_uri (uris[i]);
@@ -273,7 +273,7 @@ gtr_utils_drop_get_locations (GtkSelectionData * selection_data)
     }
 
   return locations;
-}
+}*/
 
 gchar *
 gtr_utils_escape_search_text (const gchar * text)

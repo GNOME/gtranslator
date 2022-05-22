@@ -34,7 +34,7 @@ xmlDocPtr gtr_xml_open_file (const gchar * filename);
 GtkWidget *gtr_gtk_button_new_with_icon_name (const gchar * label,
                                               const gchar * icon_name);
 
-void gtr_utils_menu_position_under_widget (GtkMenu * menu,
+/*void gtr_utils_menu_position_under_widget (GtkMenu * menu,
                                            gint * x,
                                            gint * y,
                                            gboolean * push_in,
@@ -44,9 +44,9 @@ void gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
                                               gint * x,
                                               gint * y,
                                               gboolean * push_in,
-                                              gpointer user_data);
+                                              gpointer user_data);*/
 
-     GSList *gtr_utils_drop_get_locations (GtkSelectionData * selection_data);
+     //GSList *gtr_utils_drop_get_locations (GtkSelectionData * selection_data);
 
      gchar *gtr_utils_escape_search_text (const gchar * text);
 
