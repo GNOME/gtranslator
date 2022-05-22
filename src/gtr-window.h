@@ -67,9 +67,9 @@ GList *gtr_window_get_all_views (GtrWindow * window,
 
 GtkWidget *gtr_window_get_tab_from_location (GtrWindow * window, GFile * location);
 
-void gtr_window_set_active_tab (GtrWindow * window, GtkWidget * tab);
+//void gtr_window_set_active_tab (GtrWindow * window, GtkWidget * tab);
 
-void _gtr_window_close_tab (GtrWindow * window, GtrTab * tab);
+//void _gtr_window_close_tab (GtrWindow * window, GtrTab * tab);
 
 GtrTranslationMemory * gtr_window_get_tm (GtrWindow *window);
 void gtr_window_show_tm_dialog (GtrWindow *window);

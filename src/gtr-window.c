@@ -184,7 +184,7 @@ drag_data_received_cb (GtkWidget * widget,
     }
 }
 
-static void
+void
 set_window_title (GtrWindow * window, gboolean with_path)
 {
   GtrPo *po;
@@ -226,13 +226,14 @@ set_window_title (GtrWindow * window, gboolean with_path)
       title = g_strdup (_("Translation Editor"));
     }
 
-  gtk_window_set_title (GTK_WINDOW (window), title);
+  //gtk_window_set_title (GTK_WINDOW (window), title);
 
   // notebook headerbar
   header = GTK_HEADER_BAR (gtr_tab_get_header (GTR_TAB (priv->active_tab)));
   gtk_header_bar_set_title (header, title);
+  gtk_widget_show_all(GTK_WIDGET(header));
 
-  g_free (title);
+  //g_free (title);
 }
 
 static void
@@ -512,6 +513,20 @@ searchbar_toggled (GtrTab * tab, gboolean revealed, GtrWindow *window)
 }
 
 /***************************** Public funcs ***********************************/
+void
+gtr_window_remove_tab (GtrWindow * window)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  if (priv->active_tab != NULL)
+  {
+    gtk_widget_destroy(GTK_WIDGET(priv->active_tab));
+  }
+  //as set_window_title not working in gtr_window_create_tab that's why we are removing whole child of stack and again adding it in gtr_window_create_tab
+  if (gtk_stack_get_child_by_name(priv->header_stack,"poeditor") != NULL)
+  {
+    gtk_widget_destroy(GTK_WIDGET(gtk_stack_get_child_by_name(priv->header_stack,"poeditor")));
+  }
+}
 
 /**
  * gtr_window_create_tab:
@@ -534,16 +549,15 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   // to remove the tab functionality without change all
   // the code
   GList *tabs, *l;
-  tabs = gtr_window_get_all_tabs (window);
+  /*tabs = gtr_window_get_all_tabs (window);
   for (l = tabs; l != NULL; l = g_list_next (l))
     _gtr_window_close_tab (window, l->data);
-  g_list_free (tabs);
+  g_list_free (tabs);*/
 
   tab = gtr_tab_new (po, GTK_WINDOW (window));
   g_return_if_fail (GTR_IS_TAB (tab));
   priv->active_tab = tab;
 
-  set_window_title (window, TRUE);
   g_signal_connect_after (tab,
                           "message_changed",
                           G_CALLBACK
@@ -573,10 +587,14 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   gtr_notebook_reset_sort (GTR_NOTEBOOK (priv->notebook));
   */
 
-  gtk_stack_add_named (GTK_STACK (priv->stack), GTK_WIDGET(priv->active_tab), "poeditor");
-  gtk_stack_add_named (GTK_STACK (priv->header_stack),
-                       gtr_tab_get_header (GTR_TAB (priv->active_tab)),
-                       "poeditor");
+  if (gtk_stack_get_child_by_name (priv->stack,"poeditor") == NULL) {
+    gtk_stack_add_named (GTK_STACK (priv->stack), GTK_WIDGET(priv->active_tab), "poeditor");
+  }
+  if (gtk_stack_get_child_by_name (priv->header_stack,"poeditor") == NULL) {
+    gtk_stack_add_named (GTK_STACK (priv->header_stack),
+                         gtr_tab_get_header (GTR_TAB (priv->active_tab)),
+                         "poeditor");
+  }
 
   // code view
   priv->codeview = gtr_code_view_new (window);
@@ -588,6 +606,9 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
                           window);
 
   g_signal_connect (tab, "searchbar-toggled", G_CALLBACK (searchbar_toggled), window);
+
+  //Don't know why this is not setting title
+  set_window_title (window, TRUE);
   return tab;
 }
 
@@ -802,17 +823,16 @@ gtr_window_get_tab_from_location (GtrWindow * window, GFile * location)
  *
  * Sets the active tab for the @window.
  */
-void
+/* void
 gtr_window_set_active_tab (GtrWindow * window, GtkWidget * tab)
 {
-  /*GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   gint page;
 
   page = gtk_notebook_page_num (GTK_NOTEBOOK (priv->notebook), tab);
 
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), page);*/
-  g_printf("setting active_tab \n");
-}
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), page);
+}*/
 
 /**
  * _gtr_window_close_tab:
@@ -822,10 +842,10 @@ gtr_window_set_active_tab (GtrWindow * window, GtkWidget * tab)
  * Closes the opened @tab of the @window and sets the right sensitivity of the
  * widgets.
  */
-void
+/*void
 _gtr_window_close_tab (GtrWindow * window, GtrTab * tab)
 {
-  /*GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   gint i;
 
   g_return_if_fail (GTR_IS_TAB (tab));
@@ -833,8 +853,8 @@ _gtr_window_close_tab (GtrWindow * window, GtrTab * tab)
   i = gtk_notebook_page_num (GTK_NOTEBOOK (priv->notebook),
                              GTK_WIDGET (tab));
   if (i != -1)
-    gtr_notebook_remove_page (GTR_NOTEBOOK (priv->notebook), i);*/
-}
+    gtr_notebook_remove_page (GTR_NOTEBOOK (priv->notebook), i);
+}*/
 
 void
 gtr_window_show_projects (GtrWindow *window)
@@ -865,12 +885,12 @@ gtr_window_show_dlteams (GtrWindow *window)
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "dlteams");
 }
 
-void
+/*void
 gtr_window_remove_all_pages (GtrWindow *window)
 {
   //GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   //gtr_notebook_remove_all_pages (GTR_NOTEBOOK (priv->notebook));
-}
+}*/
 
 void
 gtr_window_show_tm_dialog (GtrWindow *window)

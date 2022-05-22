@@ -36,7 +36,7 @@
 #include "gtr-application.h"
 #include "gtr-dirs.h"
 #include "gtr-file-dialogs.h"
-#include "gtr-notebook.h"
+//#include "gtr-notebook.h"
 #include "gtr-po.h"
 #include "gtr-tab.h"
 #include "gtr-utils.h"
@@ -246,13 +246,13 @@ void
 gtr_open_file_dialog (GtrWindow * window)
 {
   GtkNativeDialog *dialog;
-  //g_autoptr (GList) list = NULL;
-  //list = get_modified_documents (window);
-  /*if (list != NULL)
+  g_autoptr (GList) list = NULL;
+  list = get_modified_documents (window);
+  if (list != NULL)
     {
       if (!gtr_want_to_save_current_dialog (window))
         return;
-    }*/
+    }
 
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
                                  FILESEL_OPEN,
@@ -610,7 +610,8 @@ load_file_list (GtrWindow * window, const GSList * locations)
   g_return_if_fail ((locations != NULL) && (locations->data != NULL));
 
   // removing other tabs, for now on, we'll using single tab and multiples windows
-  gtr_window_remove_all_pages (window);
+  // gtr_window_remove_all_pages (window);
+  gtr_window_remove_tab (window);
 
   /* Remove the uris corresponding to documents already open
    * in "window" and remove duplicates from "uris" list */
@@ -700,31 +701,33 @@ save_and_close_document (GtrPo * po, GtrWindow * window)
 
   gtr_save_current_file_dialog (NULL, window);
 
-  tab = gtr_tab_get_from_document (po);
+  //tab = gtr_tab_get_from_document (po);
 
-  _gtr_window_close_tab (window, tab);
+  //_gtr_window_close_tab (window, tab);
+  gtr_window_remove_tab (window);
 }
 
 static void
 close_all_tabs (GtrWindow * window)
 {
+  gtr_window_remove_tab(window);
   /*GtrNotebook *nb;
 
   nb = gtr_window_get_notebook (window);
   gtr_notebook_remove_all_pages (nb);
 
-  //FIXME: This has to change once we add the close all documents menuitem
-  gtk_widget_destroy (GTK_WIDGET (window));*/
+  //FIXME: This has to change once we add the close all documents menuitem*/
+  gtk_widget_destroy (GTK_WIDGET (window));
 }
 
 static void
 save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
 {
   GtrTab *tab;
-  GList *l;
+  //GList *l;
   GError *error = NULL;
 
-  for (l = unsaved_documents; l != NULL; l = g_list_next (l))
+  /*for (l = unsaved_documents; l != NULL; l = g_list_next (l))
     {
       gtr_po_save_file (l->data, &error);
 
@@ -747,8 +750,25 @@ save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
       tab = gtr_tab_get_from_document (l->data);
 
       _gtr_window_close_tab (window, tab);
-    }
+    }*/
 
+  gtr_po_save_file(unsaved_documents->data,&error);
+  if(error)
+  {
+    GtkWidget *dialog;
+    GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
+    dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                     flags,
+                                     GTK_MESSAGE_WARNING,
+                                     GTK_BUTTONS_OK,
+                                     "%s", error->message);
+    g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+    gtk_window_present (GTK_WINDOW (dialog));
+    g_clear_error (&error);
+    return;
+  }
+
+  gtr_window_remove_tab (window);
   gtk_widget_destroy (GTK_WIDGET (window));
 }
 
@@ -810,7 +830,8 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog
         }
       else
         {
-          const GList *unsaved_documents;
+          // right now is_closing_all is always true so this won't run therefore no need to consider this in port from gtk3 to gtk4
+          /*const GList *unsaved_documents;
 
           unsaved_documents =
             gtr_close_confirmation_dialog_get_unsaved_documents (dlg);
@@ -818,7 +839,7 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog
 
           _gtr_window_close_tab (window,
                                  gtr_tab_get_from_document
-                                 (unsaved_documents->data));
+                                 (unsaved_documents->data));*/
         }
 
       break;
@@ -852,7 +873,8 @@ gtr_close_tab (GtrTab * tab, GtrWindow * window)
       gtk_widget_show (dlg);
     }
   else
-    _gtr_window_close_tab (window, tab);
+    //_gtr_window_close_tab (window, tab);
+    gtr_window_remove_tab(window);
 }
 
 void
@@ -889,10 +911,11 @@ get_modified_documents (GtrWindow * window)
     }*/
 
   tab = gtr_window_get_active_tab(window);
-  po = gtr_tab_get_po (tab);
-  if (gtr_po_get_state (po) == GTR_PO_STATE_MODIFIED)
-    list = g_list_prepend (list, po);
-
+  if (tab != NULL) {
+    po = gtr_tab_get_po (tab);
+    if (gtr_po_get_state (po) == GTR_PO_STATE_MODIFIED)
+      list = g_list_prepend (list, po);
+  }
   return list;
 }
 
