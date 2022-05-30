@@ -27,17 +27,11 @@
 
 static GArray * msg_queue_arr = NULL;
 
-enum msg_type
-{
-  INFO_MSG,
-  ERROR_MSG
-};
-
 typedef struct
 {
   const gchar * primary_text;
   const gchar * secondary_text;
-  enum msg_type message_type;
+  GtkMessageType message_type;
 } message_struct;
 
 static void show_info_bar (GtrTab * tab);
@@ -153,28 +147,22 @@ show_info_bar (GtrTab * tab)
   message_struct msg_struct_temp = g_array_index (msg_queue_arr, message_struct, 0);
   const gchar * primary_text = msg_struct_temp.primary_text;
   const gchar * secondary_text = msg_struct_temp.secondary_text;
-  enum msg_type message_type = msg_struct_temp.message_type;
+  GtkMessageType message_type = msg_struct_temp.message_type;
   gchar * icon_stock_id = NULL;
 
-  if (message_type == INFO_MSG)
+  if (message_type == GTK_MESSAGE_INFO)
   {
     infobar = gtk_info_bar_new_with_buttons (_("_OK"),
                                              GTK_RESPONSE_OK, NULL);
-
-    gtk_info_bar_set_message_type (GTK_INFO_BAR (infobar), GTK_MESSAGE_INFO);
-
     icon_stock_id = "dialog-information-symbolic";
   }
   else
   {
     infobar = gtk_info_bar_new_with_buttons (_("_Close"),
                                              GTK_RESPONSE_CLOSE, NULL);
-
-    gtk_info_bar_set_message_type (GTK_INFO_BAR (infobar), GTK_MESSAGE_WARNING);
-
     icon_stock_id = "dialog-error-symbolic";
   }
-
+  gtk_info_bar_set_message_type (GTK_INFO_BAR (infobar), message_type);
   set_info_bar_text_and_icon (GTK_INFO_BAR (infobar),
                               icon_stock_id,
                               primary_text, secondary_text);
@@ -195,7 +183,7 @@ create_error_info_bar (const gchar * primary_text,
   message_struct msg_struct_temp = {
     g_strdup (primary_text),
     g_strdup (secondary_text),
-    ERROR_MSG
+    GTK_MESSAGE_WARNING
   };
 
   if (msg_queue_arr == NULL)
@@ -213,7 +201,7 @@ create_info_info_bar (const gchar * primary_text,
   message_struct msg_struct_temp = {
     g_strdup(primary_text),
     g_strdup(secondary_text),
-    INFO_MSG
+    GTK_MESSAGE_INFO
   };
 
   if (msg_queue_arr == NULL)
