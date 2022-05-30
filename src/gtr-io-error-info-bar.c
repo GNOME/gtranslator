@@ -127,8 +127,9 @@ set_info_bar_text_and_icon (GtkInfoBar * infobar,
  * Callback func called when warning button is clicked
  */
 static void
-handle_info_bar_response(GtkWidget * infobar,gint response_id,
-                        GtrTab * tab)
+handle_info_bar_response (GtkWidget * infobar,
+                          gint response_id,
+                          GtrTab * tab)
 {
   if (response_id == GTK_RESPONSE_OK || response_id == GTK_RESPONSE_CLOSE)
   {
@@ -183,7 +184,7 @@ show_info_bar (GtrTab * tab)
 
   gtk_widget_show (infobar);
 
-  gtr_tab_set_info_bar(tab, infobar);
+  gtr_tab_set_info_bar (tab, infobar);
 }
 
 void
@@ -191,29 +192,33 @@ create_error_info_bar (const gchar * primary_text,
                        const gchar * secondary_text,
                        GtrTab * tab)
 {
-  message_struct msg_struct_temp = {g_strdup(primary_text), g_strdup(secondary_text), ERROR_MSG};
+  message_struct msg_struct_temp = {
+    g_strdup (primary_text),
+    g_strdup (secondary_text),
+    ERROR_MSG
+  };
 
   if (msg_queue_arr == NULL)
-    msg_queue_arr = g_array_new (FALSE, FALSE, sizeof(message_struct));
+    msg_queue_arr = g_array_new (FALSE, FALSE, sizeof (message_struct));
 
   g_array_append_val (msg_queue_arr, msg_struct_temp);
-
-  if (msg_queue_arr -> len == 1)
-    show_info_bar(tab);
+  show_info_bar (tab);
 }
 
 void
 create_info_info_bar (const gchar * primary_text,
                       const gchar * secondary_text,
-                      GtrTab * tab )
+                      GtrTab * tab)
 {
-  message_struct msg_struct_temp = {g_strdup(primary_text), g_strdup(secondary_text), INFO_MSG};
+  message_struct msg_struct_temp = {
+    g_strdup(primary_text),
+    g_strdup(secondary_text),
+    INFO_MSG
+  };
 
   if (msg_queue_arr == NULL)
-    msg_queue_arr = g_array_new (FALSE, FALSE, sizeof(message_struct));
+    msg_queue_arr = g_array_new (FALSE, FALSE, sizeof (message_struct));
 
   g_array_append_val (msg_queue_arr, msg_struct_temp);
-
-  if (msg_queue_arr->len == 1)
-    show_info_bar(tab);
+  show_info_bar (tab);
 }

@@ -354,7 +354,7 @@ gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
       gtr_tab_block_movement (tab);
 
       create_error_info_bar (_("There is an error in the message:"),
-                                       message_error, tab);
+                             message_error, tab);
       g_free (message_error);
     }
   else

@@ -26,12 +26,12 @@
 
 G_BEGIN_DECLS
   void create_error_info_bar (const gchar * primary_text,
-                                     const gchar * secondary_text,
-                                     GtrTab * tab);
+                              const gchar * secondary_text,
+                              GtrTab * tab);
 
   void create_info_info_bar (const gchar * primary_text,
-                                    const gchar * secondary_text,
-                                    GtrTab * tab);
+                             const gchar * secondary_text,
+                             GtrTab * tab);
 
 G_END_DECLS
 #endif
