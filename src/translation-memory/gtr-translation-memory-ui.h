@@ -39,12 +39,12 @@ typedef struct _GtrTranslationMemoryUiClass   GtrTranslationMemoryUiClass;
 
 struct _GtrTranslationMemoryUi
 {
-  GtkScrolledWindow parent_instance;
+  GtkFrame parent_instance;
 };
 
 struct _GtrTranslationMemoryUiClass
 {
-  GtkScrolledWindowClass parent_class;
+  GtkFrameClass parent_class;
 };
 
 GType            gtr_translation_memory_ui_get_type             (void) G_GNUC_CONST;

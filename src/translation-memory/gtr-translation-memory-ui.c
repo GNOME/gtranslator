@@ -54,7 +54,7 @@ typedef struct
 } GtrTranslationMemoryUiPrivate;
 
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrTranslationMemoryUi, gtr_translation_memory_ui, GTK_TYPE_SCROLLED_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrTranslationMemoryUi, gtr_translation_memory_ui, GTK_TYPE_FRAME)
 
 enum
 {
