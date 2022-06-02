@@ -72,7 +72,7 @@ gtr_header_set_field (GtrHeader * header,
 static void
 parse_nplurals (GtrHeader * header)
 {
-  gchar *pointer, *plural_forms;
+  gchar *plural_forms;
   gboolean use_profile_values;
   GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
 
@@ -111,30 +111,7 @@ parse_nplurals (GtrHeader * header)
         return;
     }
 
-  pointer = g_strrstr (plural_forms, "nplurals");
-
-  if (pointer != NULL)
-    {
-      while (*pointer != '\0' && *pointer != '=')
-        pointer++;
-
-      if (*pointer != '\0')
-        {
-          pointer++;
-          while (*pointer != '\0' && *pointer == ' ')
-            pointer++;
-
-          if (*pointer == '\0')
-            return;
-        }
-      else
-        return;
-
-      priv->nplurals = g_ascii_digit_value (*pointer);
-    }
-
-  /*g_message ("nplurals: %d", priv->nplurals); */
-
+  priv->nplurals = parse_nplurals_header (plural_forms);
   g_free (plural_forms);
 }
 

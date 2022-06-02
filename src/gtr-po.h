@@ -155,7 +155,7 @@ gtr_po_get_message_position (GtrPo * po);
 void
 gtr_po_emit_file_not_consistent (GtrPo * po);
 
-int
+gboolean
 gtr_po_consistent_with_profile (GtrPo * po);
 /* Unexported funcs */
      void

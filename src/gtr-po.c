@@ -27,7 +27,6 @@
  *   Gediminas Paulauskas <menesis@kabalak.net>
  */
 
-#include "gtr-header.h"
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -346,7 +345,8 @@ gtr_po_class_init (GtrPoClass * klass)
     g_signal_new ("file-is-inconsistent-with-profile",
                   G_OBJECT_CLASS_TYPE (klass),
                   G_SIGNAL_RUN_LAST,
-                  0,NULL,NULL,g_cclosure_marshal_VOID__VOID,
+                  0, NULL, NULL,
+                  g_cclosure_marshal_VOID__VOID,
                   G_TYPE_NONE, 0);
 }
 
@@ -1425,45 +1425,24 @@ gtr_po_check_po_file (GtrPo * po)
  * Tests whether the po file is consistent or not with profile values
  * Returns: If the po file is not consistent with profile then it returns 0 .
  **/
-int gtr_po_consistent_with_profile(GtrPo * po){
-  GtrPoPrivate *priv; 
+gboolean
+gtr_po_consistent_with_profile (GtrPo * po)
+{
   GtrProfileManager *prof_manager;
   GtrProfile *profile;
   gint po_header_nplurals;
-  gint profile_nplurals;
+  gint profile_nplurals = -1;
 
-  priv= gtr_po_get_instance_private(po);
-  po_message_iterator_t iter = po_message_iterator (priv->gettext_po_file, NULL);
-  GtrHeader *header = gtr_header_new (iter, po_next_message(iter));
-  po_header_nplurals = gtr_header_get_nplurals(header);
+  GtrHeader *header = gtr_po_get_header (po);
+  po_header_nplurals = gtr_header_get_nplurals (header);
 
   prof_manager = gtr_profile_manager_get_default ();
   profile = gtr_profile_manager_get_active_profile (prof_manager);
-  gchar *pointer = g_strrstr (gtr_profile_get_plural_forms(profile), "nplurals");
-  if (pointer != NULL)
-    {
-      while (*pointer != '\0' && *pointer != '=')
-        pointer++;
+  profile_nplurals = parse_nplurals_header (
+    gtr_profile_get_plural_forms (profile)
+  );
 
-      if (*pointer != '\0')
-        {
-          pointer++;
-          while (*pointer != '\0' && *pointer == ' ')
-            pointer++;
-
-          if (*pointer == '\0')
-            return 0;
-        }
-      else
-        return 0;
-
-      profile_nplurals = g_ascii_digit_value (*pointer);
-    }
-
-  if (profile_nplurals == po_header_nplurals) 
-    return 1;
-  else 
-    return 0;
+  return profile_nplurals == po_header_nplurals;
 }
 
 const gchar *
