@@ -45,7 +45,7 @@ sources = files(
   'gtr-file-dialogs.c',
   'gtr-header.c',
   'gtr-header-dialog.c',
-  'gtr-history-entry.c',
+  # 'gtr-history-entry.c',
   'gtr-io-error-info-bar.c',
   'gtr-jump-dialog.c',
   'gtr-language.c',
