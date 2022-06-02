@@ -86,4 +86,6 @@ void gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
      void gtk_list_box_append (GtkListBox *box, GtkWidget *child);
 
      void gtk_list_box_remove (GtkListBox *box, GtkWidget *child);
+
+     int parse_nplurals_header (const gchar * plurals_header);
 #endif

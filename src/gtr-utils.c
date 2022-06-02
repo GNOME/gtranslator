@@ -818,3 +818,31 @@ gtk_list_box_remove (GtkListBox *box, GtkWidget *child)
 {
   gtk_container_remove (GTK_CONTAINER (box), child);
 }
+
+// TODO: Improve this parser, this string parsing is weak
+// It could be better to use GRegex: https://docs.gtk.org/glib/method.Regex.match.html
+int
+parse_nplurals_header (const gchar * plurals_header)
+{
+  gchar * pointer = g_strrstr (plurals_header, "nplurals");
+
+  if (!pointer)
+    return -1;
+
+  while (*pointer != '\0' && *pointer != '=')
+    pointer++;
+
+  if (*pointer != '\0')
+    {
+      pointer++;
+      while (*pointer != '\0' && *pointer == ' ')
+        pointer++;
+
+      if (*pointer == '\0')
+        return -1;
+    }
+  else
+    return -1;
+
+  return g_ascii_digit_value (*pointer);
+}

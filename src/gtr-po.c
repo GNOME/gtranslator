@@ -38,6 +38,7 @@
 #include "gtr-msg.h"
 #include "gtr-enum-types.h"
 #include "gtr-profile.h"
+#include "gtr-profile-manager.h"
 #include "gtr-utils.h"
 #include "gtr-message-container.h"
 #include "gtr-preferences-dialog.h"
@@ -128,6 +129,14 @@ enum
   PROP_LOCATION,
   PROP_STATE
 };
+
+enum
+{
+  FILE_INCONSISTENT_WITH_PROFILE,
+  NO_OF_SIGNALS
+};
+
+guint signals[NO_OF_SIGNALS];
 
 static gchar *message_error = NULL;
 
@@ -331,6 +340,14 @@ gtr_po_class_init (GtrPoClass * klass)
                                                       GTR_TYPE_PO_STATE,
                                                       GTR_PO_STATE_SAVED,
                                                       G_PARAM_READABLE));
+  /* Signals */
+  signals[FILE_INCONSISTENT_WITH_PROFILE] =
+    g_signal_new ("file-is-inconsistent-with-profile",
+                  G_OBJECT_CLASS_TYPE (klass),
+                  G_SIGNAL_RUN_LAST,
+                  0, NULL, NULL,
+                  g_cclosure_marshal_VOID__VOID,
+                  G_TYPE_NONE, 0);
 }
 
 /*
@@ -1401,6 +1418,35 @@ gtr_po_check_po_file (GtrPo * po)
   return message_error;
 }
 
+/**
+ * gtr_po_consistent_with_profile
+ * @po: a #GtrPo
+ *
+ * Tests whether the po file is consistent or not with profile values
+ * Returns: If the po file is not consistent with profile then it returns 0 .
+ **/
+gboolean
+gtr_po_consistent_with_profile (GtrPo * po)
+{
+  GtrProfileManager *prof_manager;
+  GtrProfile *profile;
+  gint po_header_nplurals;
+  gint profile_nplurals = -1;
+
+  GtrHeader *header = gtr_po_get_header (po);
+  po_header_nplurals = gtr_header_get_nplurals (header);
+
+  prof_manager = gtr_profile_manager_get_default ();
+  profile = gtr_profile_manager_get_active_profile (prof_manager);
+  profile_nplurals = parse_nplurals_header (
+    gtr_profile_get_plural_forms (profile)
+  );
+
+  g_object_unref (prof_manager);
+
+  return profile_nplurals == po_header_nplurals;
+}
+
 const gchar *
 gtr_po_get_dl_team (GtrPo *po)
 {
@@ -1441,4 +1487,10 @@ gtr_po_can_dl_upload (GtrPo *po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   return g_strcmp0 (priv->dl_state, "Translating") == 0;
+}
+
+void
+gtr_po_emit_file_not_consistent (GtrPo *po)
+{
+  g_signal_emit (G_OBJECT(po), signals[FILE_INCONSISTENT_WITH_PROFILE], 0);
 }
