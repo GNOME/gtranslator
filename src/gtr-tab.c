@@ -269,15 +269,32 @@ handle_file_is_inconsistent (GtrPo *po, GtrTab *tab)
   GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
   GtrProfileManager *manager = gtr_profile_manager_get_default ();
   GtrProfile *active_profile = gtr_profile_manager_get_active_profile (manager);
-  const gchar* profile_name = gtr_profile_get_name (active_profile);
+  const char *profile_name = gtr_profile_get_name (active_profile);
+  int profile_nplurals = -1;
+  int po_nplurals = -1;
 
-  gchar* info_msg_primary = g_strdup_printf ("File is not consistent with profile %s",profile_name);
-  gchar *filename = g_file_get_path (gtr_po_get_location (po));
-  gchar* info_msg_secondary = g_strdup_printf ("Kindly go to preferences and select a profile with consistent nplurals values as this file %s",filename);
+  g_autofree char *info_msg_primary = NULL;
+  g_autofree char *info_msg_secondary = NULL;
+  g_autofree char *filename = NULL;
+  g_autoptr (GFile) po_file = gtr_po_get_location (po);
+
+  filename = g_file_get_path (po_file);
+  po_nplurals = gtr_header_get_nplurals (gtr_po_get_header (po));
+  profile_nplurals = parse_nplurals_header (gtr_profile_get_plural_forms (active_profile));
+
+  info_msg_primary = g_strdup_printf ("File is not consistent with profile %s", profile_name);
+  info_msg_secondary = g_strdup_printf (
+    "File nplurals: %d, is different from profile nplurals %d.\n"
+    "Kindly go to preferences and select a profile with consistent nplurals "
+    "values as this file %s.",
+    po_nplurals, profile_nplurals, filename
+  );
   gtr_tab_set_info (tab, info_msg_primary, info_msg_secondary);
 
   GtkWidget *nb = priv->trans_notebook;
   gtk_widget_set_sensitive (nb, FALSE);
+
+  g_object_unref (manager);
 }
 
 static void

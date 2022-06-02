@@ -1442,6 +1442,8 @@ gtr_po_consistent_with_profile (GtrPo * po)
     gtr_profile_get_plural_forms (profile)
   );
 
+  g_object_unref (prof_manager);
+
   return profile_nplurals == po_header_nplurals;
 }
 
