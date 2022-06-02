@@ -37,10 +37,10 @@ typedef struct
 
 struct _GtrProjects
 {
-  GtkBin parent_instance;
+  GtkFrame parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrProjects, gtr_projects, GTK_TYPE_BIN)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrProjects, gtr_projects, GTK_TYPE_FRAME)
 
 
 static void project_add_cb (GtkButton *btn, GtrProjects *self);

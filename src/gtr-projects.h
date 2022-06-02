@@ -24,7 +24,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_PROJECTS (gtr_projects_get_type())
 
-G_DECLARE_FINAL_TYPE (GtrProjects, gtr_projects, GTR, PROJECTS, GtkBin)
+G_DECLARE_FINAL_TYPE (GtrProjects, gtr_projects, GTR, PROJECTS, GtkFrame)
 
 GtrProjects*  gtr_projects_new         ();
 GtkWidget*    gtr_projects_get_header  (GtrProjects *self);
