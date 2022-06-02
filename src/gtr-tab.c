@@ -2113,7 +2113,7 @@ gtr_tab_sort_by (GtrTab *tab,
 }
 
 void
-gtr_tab_find_replace (GtrTab *tab,
+gtr_tab_find_replace (GtrTab * tab,
                       gboolean set)
 {
   GtrTabPrivate *priv;
