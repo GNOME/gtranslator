@@ -298,6 +298,16 @@ on_active_profile_changed (GtrProfileManager *manager, GtrProfile *profile, GtrT
 }
 
 static void
+on_profile_modified (GtrProfileManager *manager,
+                     GtrProfile *old_profile,
+                     GtrProfile *new_profile,
+                     GtrTab *tab)
+{
+  on_active_profile_changed (manager, new_profile, tab);
+}
+
+
+static void
 install_autosave_timeout (GtrTab * tab)
 {
   GtrTabPrivate *priv;
@@ -1096,6 +1106,9 @@ gtr_tab_new (GtrPo * po,
 
   g_signal_connect (manager, "active-profile-changed",
                     G_CALLBACK (on_active_profile_changed), tab);
+
+    g_signal_connect (manager, "profile-modified",
+                    G_CALLBACK (on_profile_modified), tab);
 
   install_autosave_timeout_if_needed (tab);
 
