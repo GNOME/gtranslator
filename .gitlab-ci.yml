@@ -1,5 +1,10 @@
 include: 'https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_ci_initiative.yml'
 
+stages:
+  - check
+  - test
+  - deploy
+
 variables:
   BUNDLE: "org.gnome.GtranslatorDevel.flatpak"
 
@@ -19,3 +24,14 @@ nightly:
   extends: '.publish_nightly'
   dependencies:
     - 'flatpak'
+
+# Lint the code
+clang-format:
+  stage: check
+  image: fedora:36
+  script:
+    - dnf install -y clang-tools-extra git
+    - git fetch --depth 50 origin $CI_MERGE_REQUEST_TARGET_BRANCH_NAME:$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+    - git diff -U0 --no-color --relative $CI_MERGE_REQUEST_TARGET_BRANCH_NAME | scripts/check-diff-style.sh
+  only:
+    - merge_requests
