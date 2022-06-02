@@ -24,11 +24,11 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_FILTER_SELECTION (gtr_filter_selection_get_type())
 
-G_DECLARE_DERIVABLE_TYPE (GtrFilterSelection, gtr_filter_selection, GTR, FILTER_SELECTION, GtkMenuButton)
+G_DECLARE_DERIVABLE_TYPE (GtrFilterSelection, gtr_filter_selection, GTR, FILTER_SELECTION, GtkButton)
 
 struct _GtrFilterSelectionClass
 {
-  GtkMenuButtonClass parent_class;
+  GtkButtonClass parent_class;
 };
 
 typedef struct

@@ -57,12 +57,12 @@
       </object>
     </child>
   </object>
-  <template class="GtrFilterSelection" parent="GtkMenuButton">
+  <template class="GtrFilterSelection" parent="GtkButton" >
     <property name="label" translatable="yes">Choose Language</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="receives_default">False</property>
-    <property name="popover">popup</property>
+    <!-- <property name="popover">popup</property> -->
     <child>
       <object class="GtkLabel">
         <property name="visible">True</property>

@@ -40,9 +40,16 @@ enum
   LAST_SIGNAL
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrFilterSelection, gtr_filter_selection, GTK_TYPE_MENU_BUTTON)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrFilterSelection, gtr_filter_selection, GTK_TYPE_BUTTON)
 
 static guint signals[LAST_SIGNAL] = { 0 };
+
+static void
+handle_filter_selection_btn_clicked (GtkButton* btn, gpointer user_data)
+{
+  GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (GTR_FILTER_SELECTION(btn));
+  gtk_popover_popup(GTK_POPOVER(priv->popup));
+}
 
 static void
 change_option (GtkListBox         *box,
@@ -140,6 +147,13 @@ gtr_filter_selection_init (GtrFilterSelection *self)
   priv->option = NULL;
   priv->options = NULL;
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  gtk_popover_set_relative_to(GTK_POPOVER(priv->popup),GTK_WIDGET(self));
+  g_signal_connect (self,
+                    "clicked",
+                    G_CALLBACK(handle_filter_selection_btn_clicked),
+                    NULL);
+
   gtk_widget_show_all (priv->option_list);
 
   g_signal_connect (priv->option_list,
