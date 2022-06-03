@@ -297,7 +297,7 @@ on_profile_dialog_response_cb (GtrProfileDialog     *profile_dialog,
     }
 
   g_object_unref (prof_manager);
-  gtk_widget_destroy (GTK_WIDGET (profile_dialog));
+  gtk_window_destroy (GTK_WIDGET (profile_dialog));
 }
 
 static void
@@ -441,7 +441,7 @@ delete_button_clicked (GtkWidget *button, GtrPreferencesDialog *dlg)
                                                     (dialog),
                                                     _("Another profile should be selected as active before"));
 
-          g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+          g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
           gtk_window_present (GTK_WINDOW (dialog));
         }
       else
@@ -711,10 +711,10 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   gtk_widget_set_margin_bottom (priv->notebook, 6);
 
   context = gtk_widget_get_style_context (profiles_scrolled_window);
-  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+  //gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
 
   context = gtk_widget_get_style_context (profiles_toolbar);
-  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
+  //gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
   setup_files_pages (dlg);
   setup_editor_pages (dlg);
@@ -762,12 +762,13 @@ gtr_show_preferences_dialog (GtrWindow * window)
       dlg = GTK_WIDGET (g_object_new (GTR_TYPE_PREFERENCES_DIALOG,
                                       "use-header-bar", TRUE, NULL));
       g_signal_connect (dlg,
-                        "destroy", G_CALLBACK (gtk_widget_destroyed), &dlg);
-      gtk_widget_show_all (dlg);
+                        "destroy", G_CALLBACK (gtk_window_destroy), NULL);
+      g_free(dlg);
+      gtk_widget_show (dlg);
     }
 
   gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
-  gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_DIALOG);
+  //gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_DIALOG);
   gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
   gtk_window_present (GTK_WINDOW (dlg));

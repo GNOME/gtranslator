@@ -54,9 +54,13 @@ native_response_cb (GtkNativeDialog *dialog, guint response, gpointer user_data)
       g_autofree char *filename = NULL;
       GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
 
-      filename = gtk_file_chooser_get_filename (chooser);
-      gtk_entry_set_text (GTK_ENTRY (priv->directory_entry),
-                          filename);
+      //filename = gtk_file_chooser_get_filename (chooser);
+      GFile * file = gtk_file_chooser_get_file (chooser);
+      filename = g_file_get_path(file);
+      //gtk_entry_set_text (GTK_ENTRY (priv->directory_entry),
+      //                    filename);
+      GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->directory_entry));
+      gtk_entry_buffer_set_text (entry_buffer, filename, -1);
       g_settings_set_string (priv->tm_settings,
                              "po-directory",
                              filename);
@@ -336,7 +340,9 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
       language_code = gtr_profile_get_language_code (profile);
       filename = g_strconcat (language_code, ".po", NULL);
 
-      gtk_entry_set_text (GTK_ENTRY (priv->tm_lang_entry), filename);
+      //gtk_entry_set_text (GTK_ENTRY (priv->tm_lang_entry), filename);
+      GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->tm_lang_entry));
+      gtk_entry_buffer_set_text (entry_buffer, filename, -1);
     }
   g_object_unref (prof_manager);
 

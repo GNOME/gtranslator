@@ -104,7 +104,7 @@ src_dir = join_paths(meson.source_root(), 'src')
 ################
 
 glib_dep = dependency('glib-2.0', version: '>= 2.71.3')
-gtk_dep = dependency('gtk+-3.0', version: '>= 3.22.20')
+gtk_dep = dependency('gtk4', version: '>= 4.6.0')
 libhandy_dep = dependency('libhandy-1', version: '>= 1.5.0')
 
 gtr_deps = [
@@ -112,10 +112,11 @@ gtr_deps = [
   gtk_dep,
   libhandy_dep,
   dependency('libgda-6.0'),
+  dependency('atk'),
   dependency('gio-2.0', version: '>= 2.36.0'),
   dependency('gsettings-desktop-schemas'),
   dependency('gthread-2.0', version: '>= 2.13.0'),
-  dependency('gtksourceview-4', version: '>= 4.0.2'),
+  dependency('gtksourceview-5', version: '>= 5.4.0'),
   dependency('libxml-2.0', version: '>= 2.4.12'),
   dependency('libsoup-3.0'),
   dependency('json-glib-1.0', version: '>= 1.2.0'),

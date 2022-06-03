@@ -41,7 +41,7 @@ gtr_close_button_class_init (GtrCloseButtonClass *klass)
 	klass->priv = G_TYPE_CLASS_GET_PRIVATE (klass, GTR_TYPE_CLOSE_BUTTON, GtrCloseButtonClassPrivate);
 
 	klass->priv->css = gtk_css_provider_new ();
-	gtk_css_provider_load_from_data (klass->priv->css, button_style, -1, NULL);
+	gtk_css_provider_load_from_data (klass->priv->css, button_style, -1);
 }
 
 static void
@@ -52,7 +52,7 @@ gtr_close_button_init (GtrCloseButton *button)
 	GIcon *icon;
 
 	icon = g_themed_icon_new_with_default_fallbacks ("window-close-symbolic");
-	image = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_MENU);
+	image = gtk_image_new_from_gicon (icon);
 	gtk_widget_show (image);
 	g_object_unref (icon);
 
@@ -69,7 +69,6 @@ GtkWidget *
 gtr_close_button_new ()
 {
 	return GTK_WIDGET (g_object_new (GTR_TYPE_CLOSE_BUTTON,
-	                                 "relief", GTK_RELIEF_NONE,
 	                                 "focus-on-click", FALSE,
 	                                 NULL));
 }

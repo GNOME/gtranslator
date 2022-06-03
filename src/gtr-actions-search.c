@@ -471,6 +471,6 @@ search_bar_response_cb (GtrSearchBar *dialog,
       do_replace_all (dialog, window);
       break;
     default:
-      gtk_widget_destroy (GTK_WIDGET (dialog));
+      gtk_window_destroy (GTK_WINDOW (dialog));
     }
 }

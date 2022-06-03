@@ -61,10 +61,10 @@ typedef struct
 
 struct _GtrHistoryEntry
 {
-  GtkComboBoxText parent_instance;
+  GtkComboBox parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrHistoryEntry, gtr_history_entry, GTK_TYPE_COMBO_BOX_TEXT)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrHistoryEntry, gtr_history_entry, GTK_TYPE_COMBO_BOX)
 
 static void
 gtr_history_entry_set_property (GObject * object,

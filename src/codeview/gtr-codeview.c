@@ -228,7 +228,7 @@ follow_if_link (GtrCodeView *codeview, GtkWidget *text_view, GtkTextIter *iter)
     g_slist_free (tags);
 }
 
-static gboolean
+/*static gboolean
 event_after (GtkWidget *text_view, GdkEvent *ev, GtrCodeView *codeview)
 {
   GtkTextIter start, end, iter;
@@ -246,7 +246,7 @@ event_after (GtkWidget *text_view, GdkEvent *ev, GtrCodeView *codeview)
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
 
-  /* we shouldn't follow a link if the user has selected something */
+  // we shouldn't follow a link if the user has selected something //
   gtk_text_buffer_get_selection_bounds (buffer, &start, &end);
   if (gtk_text_iter_get_offset (&start) != gtk_text_iter_get_offset (&end))
     return FALSE;
@@ -260,7 +260,7 @@ event_after (GtkWidget *text_view, GdkEvent *ev, GtrCodeView *codeview)
   follow_if_link (codeview, text_view, &iter);
 
   return FALSE;
-}
+}*/
 
 static gboolean hovering_over_link = FALSE;
 static GdkCursor *hand_cursor = NULL;
@@ -270,7 +270,7 @@ static GdkCursor *regular_cursor = NULL;
  * and if one of them is a link, change the cursor to the "hands" cursor
  * typically used by web browsers.
  */
-static void
+/*static void
 set_cursor_if_appropriate (GtkTextView *text_view, gint x, gint y)
 {
   GSList *tags = NULL, *tagp = NULL;
@@ -308,12 +308,12 @@ set_cursor_if_appropriate (GtkTextView *text_view, gint x, gint y)
 
   if (tags)
     g_slist_free (tags);
-}
+}*/
 
 /*
  * Update the cursor image if the pointer moved.
  */
-static gboolean
+/*static gboolean
 motion_notify_event (GtkWidget *text_view, GdkEventMotion *event)
 {
   gint x, y;
@@ -325,12 +325,12 @@ motion_notify_event (GtkWidget *text_view, GdkEventMotion *event)
   set_cursor_if_appropriate (GTK_TEXT_VIEW (text_view), x, y);
 
   return FALSE;
-}
+}*/
 
 /* Also update the cursor image if the window becomes visible
  * (e.g. when a window covering it got iconified).
  */
-static gboolean
+/*static gboolean
 visibility_notify_event (GtkWidget *text_view, GdkEventVisibility *event)
 {
   GdkDevice *pointer;
@@ -349,7 +349,7 @@ visibility_notify_event (GtkWidget *text_view, GdkEventVisibility *event)
   set_cursor_if_appropriate (GTK_TEXT_VIEW (text_view), bx, by);
 
   return FALSE;
-}
+}*/
 
 static void
 showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrCodeView *codeview)
@@ -481,11 +481,11 @@ page_added_cb (GtkWidget   *tab,
   g_signal_connect (tab, "message-edition-finished",
                     G_CALLBACK (message_edition_finished_cb), codeview);
 
-  g_signal_connect (view, "event-after", G_CALLBACK (event_after), codeview);
+  /*g_signal_connect (view, "event-after", G_CALLBACK (event_after), codeview);
   g_signal_connect (view, "motion-notify-event",
                     G_CALLBACK (motion_notify_event), NULL);
   g_signal_connect (view, "visibility-notify-event",
-                    G_CALLBACK (visibility_notify_event), NULL);
+                    G_CALLBACK (visibility_notify_event), NULL);*/
   g_signal_connect (panel, "reloaded",
                     G_CALLBACK (on_context_panel_reloaded), codeview);
 }
@@ -584,8 +584,8 @@ gtr_code_view_new (GtrWindow *window)
   /*
    * Cursors
    */
-  hand_cursor = gdk_cursor_new_for_display (display, GDK_HAND2);
-  regular_cursor = gdk_cursor_new_for_display (display, GDK_XTERM);
+  /*hand_cursor = gdk_cursor_new_for_display (display, GDK_HAND2);
+  regular_cursor = gdk_cursor_new_for_display (display, GDK_XTERM);*/
 
   //g_signal_connect (notebook, "page-added", G_CALLBACK (page_added_cb), self);
 

@@ -75,10 +75,13 @@ gtr_gtk_button_new_with_icon_name (const gchar * label,
 {
   GtkWidget *button;
 
-  button = gtk_button_new_with_mnemonic (label);
+  /*button = gtk_button_new_with_mnemonic (label);
   gtk_button_set_image (GTK_BUTTON (button),
                         gtk_image_new_from_icon_name (icon_name,
-                                                      GTK_ICON_SIZE_BUTTON));
+                                                      GTK_ICON_SIZE_BUTTON));*/
+  button = gtk_button_new_from_icon_name (icon_name);
+  gtk_button_set_label (button, label);
+  gtk_button_set_use_underline (button, true);
 
   return button;
 }

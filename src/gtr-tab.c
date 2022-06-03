@@ -536,7 +536,7 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
 
   label = gtk_label_new (tab_label);
 
-  scroll = gtk_scrolled_window_new (NULL, NULL);
+  scroll = gtk_scrolled_window_new ();
   gtk_widget_show (scroll);
 
   view = gtr_view_new ();
@@ -544,8 +544,8 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
 
   gtk_container_add (GTK_CONTAINER (scroll), view);
 
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
-                                       GTK_SHADOW_IN);
+  /*gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
+                                       GTK_SHADOW_IN);*/
 
   gtk_notebook_append_page (GTK_NOTEBOOK (box), scroll, label);
 

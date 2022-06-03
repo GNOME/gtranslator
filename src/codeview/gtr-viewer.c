@@ -53,7 +53,7 @@ dialog_response_handler (GtkDialog *dlg, gint res_id)
   switch (res_id)
     {
     default:
-      gtk_widget_destroy (GTK_WIDGET (dlg));
+      gtk_window_destroy (GTK_WIDGET (dlg));
     }
 }
 
@@ -151,7 +151,7 @@ error_dialog (GtkWindow *parent, const gchar *msg, ...)
                                    GTK_BUTTONS_OK, "%s", tmp);
   g_free (tmp);
 
-  g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+  g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
   gtk_window_present (GTK_WINDOW (dialog));
 }
 
@@ -177,9 +177,9 @@ gtk_source_buffer_load_file (GtkSourceBuffer *source_buffer,
       return FALSE;
     }
 
-  gtk_source_buffer_begin_not_undoable_action (source_buffer);
+  gtk_source_buffer_begin_irreversible_action (source_buffer);
   gtk_text_buffer_set_text (GTK_TEXT_BUFFER (source_buffer), buffer, -1);
-  gtk_source_buffer_end_not_undoable_action (source_buffer);
+  gtk_source_buffer_end_irreversible_action (source_buffer);
   gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (source_buffer), FALSE);
 
   /* move cursor to the beginning */
@@ -432,7 +432,8 @@ gtr_show_viewer (GtrWindow *window, const gchar *path, gint line)
       g_free (label);
 
       g_signal_connect (dlg,
-                        "destroy", G_CALLBACK (gtk_widget_destroyed), &dlg);
+                        "destroy", G_CALLBACK (gtk_window_destroy), NULL);
+      g_free(dlg);
       gtk_widget_show (GTK_WIDGET (dlg));
     }
 

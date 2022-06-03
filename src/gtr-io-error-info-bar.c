@@ -65,7 +65,8 @@ set_info_bar_text_and_icon (GtkInfoBar * infobar,
   hbox_content = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 8);
   gtk_widget_show (hbox_content);
 
-  image = gtk_image_new_from_icon_name (icon_stock_id, GTK_ICON_SIZE_DIALOG);
+  image = gtk_image_new_from_icon_name (icon_stock_id);
+  gtk_image_set_icon_size (image, GTK_ICON_SIZE_NORMAL);
   gtk_widget_show (image);
   gtk_box_append (GTK_BOX (hbox_content), image);
   gtk_widget_set_halign (image, 0.5);

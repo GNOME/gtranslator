@@ -80,7 +80,7 @@ dialog_response_cb (GtkDialog *dialog, guint response, gpointer user_data)
   if (response == GTK_RESPONSE_ACCEPT)
     buffer_end_user_action (dd->text_buffer, dd->panel);
 
-  gtk_widget_destroy (GTK_WIDGET (dialog));
+  gtk_window_destroy (GTK_WIDGET (dialog));
   reload_values (dd->panel);
   g_free (dd);
 }
@@ -117,7 +117,7 @@ setup_notes_edition (GtrContextPanel *panel)
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_CHAR);
   gtk_text_view_set_pixels_inside_wrap (GTK_TEXT_VIEW (text_view),0);
 
-  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  scrolled_window = gtk_scrolled_window_new ();
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                   GTK_POLICY_AUTOMATIC,
                                   GTK_POLICY_AUTOMATIC);
@@ -169,7 +169,7 @@ follow_if_link (GtrContextPanel *panel, GtkWidget *text_view, GtkTextIter *iter)
     g_slist_free (tags);
 }
 
-static gboolean
+/*static gboolean
 event_after (GtkWidget *text_view,
              GdkEvent *ev, GtrContextPanel *panel)
 {
@@ -186,10 +186,10 @@ event_after (GtkWidget *text_view,
   if (event->button != 1)
     return FALSE;
 
-  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));*/
 
   /* we shouldn't follow a link if the user has selected something */
-  gtk_text_buffer_get_selection_bounds (buffer, &start, &end);
+  /* gtk_text_buffer_get_selection_bounds (buffer, &start, &end);
   if (gtk_text_iter_get_offset (&start) != gtk_text_iter_get_offset (&end))
     return FALSE;
 
@@ -202,13 +202,13 @@ event_after (GtkWidget *text_view,
   follow_if_link (panel, text_view, &iter);
 
   return FALSE;
-}
+}*/
 
 /* Looks at all tags covering the position (x, y) in the text view, 
  * and if one of them is a link, change the cursor to the "hands" cursor
  * typically used by web browsers.
  */
-static void
+/*static void
 set_cursor_if_appropriate (GtkTextView * text_view, gint x, gint y,
                            GtrContextPanel *panel)
 {
@@ -250,9 +250,9 @@ set_cursor_if_appropriate (GtkTextView * text_view, gint x, gint y,
 
   if (tags)
     g_slist_free (tags);
-}
+}*/
 
-/* Update the cursor image if the pointer moved. */
+/* Update the cursor image if the pointer moved. 
 static gboolean
 motion_notify_event (GtkWidget *text_view, GdkEventMotion *event,
                      GtrContextPanel *panel)
@@ -266,11 +266,11 @@ motion_notify_event (GtkWidget *text_view, GdkEventMotion *event,
   set_cursor_if_appropriate (GTK_TEXT_VIEW (text_view), x, y, panel);
 
   return FALSE;
-}
+}*/
 
 /* Also update the cursor image if the window becomes visible
  * (e.g. when a window covering it got iconified). */
-static gboolean
+/* static gboolean
 visibility_notify_event (GtkWidget *text_view, GdkEventVisibility *event,
                          GtrContextPanel *panel)
 {
@@ -288,7 +288,7 @@ visibility_notify_event (GtkWidget *text_view, GdkEventVisibility *event,
   set_cursor_if_appropriate (GTK_TEXT_VIEW (text_view), bx, by, panel);
 
   return FALSE;
-}
+} */
 
 static void
 add_notes (GtkTextBuffer *buffer, GtkTextIter *pos, GtkTextTag *header_tag,
@@ -424,15 +424,16 @@ gtr_context_panel_init (GtrContextPanel *panel)
 
   priv->hovering_over_link = FALSE;
 
-  priv->hand_cursor = gdk_cursor_new_for_display (display, GDK_HAND2);
-  priv->regular_cursor = gdk_cursor_new_for_display (display, GDK_XTERM);
+  // priv->hand_cursor = gdk_cursor_new_for_display (display, GDK_HAND2);
+  // priv->regular_cursor = gdk_cursor_new_for_display (display, GDK_XTERM);
 
+  /* Don't know what does this do
   g_signal_connect (priv->context, "event-after",
                     G_CALLBACK (event_after), panel);
   g_signal_connect (priv->context, "motion-notify-event",
                     G_CALLBACK (motion_notify_event), panel);
   g_signal_connect (priv->context, "visibility-notify-event",
-                    G_CALLBACK (visibility_notify_event), panel);
+                    G_CALLBACK (visibility_notify_event), panel);*/
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->context));
   g_signal_connect (buffer, "end-user-action",

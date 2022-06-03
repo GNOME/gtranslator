@@ -37,7 +37,7 @@ sources = files(
   'gtr-actions-search.c',
   'gtr-actions-view.c',
   'gtr-application.c',
-  'gtr-assistant.c',
+  # 'gtr-assistant.c',
   'gtr-close-button.c',
   'gtr-close-confirmation-dialog.c',
   'gtr-context.c',

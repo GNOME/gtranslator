@@ -31,6 +31,7 @@
 #include "gtr-utils.h"
 #include "gtr-window.h"
 #include "gtr-po.h"
+#include <atk/atk.h>
 
 
 /* Properties */
@@ -349,14 +350,15 @@ build_single_doc_dialog (GtrCloseConfirmationDialog * dlg)
   doc = GTR_PO (priv->unsaved_documents->data);
 
   /* Image */
-  image = gtk_image_new_from_icon_name ("dialog-warning-symbolic",
-                                        GTK_ICON_SIZE_DIALOG);
+  image = gtk_image_new_from_icon_name ("dialog-warning-symbolic");
+  gtk_image_set_icon_size(image, GTK_ICON_SIZE_NORMAL);
+
   gtk_widget_set_halign (image, 0.5);
   gtk_widget_set_valign (image, 0.0);
 
   /* Primary label */
   primary_label = gtk_label_new (NULL);
-  gtk_label_set_line_wrap (GTK_LABEL (primary_label), TRUE);
+  gtk_label_set_wrap (GTK_LABEL (primary_label), TRUE);
   gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
   gtk_label_set_xalign (GTK_LABEL (primary_label) , 0.0);
   gtk_label_set_yalign (GTK_LABEL (primary_label) , 0.5);
@@ -397,7 +399,7 @@ build_single_doc_dialog (GtrCloseConfirmationDialog * dlg)
   gtk_box_append (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
                   hbox);
 
-  gtk_widget_show_all (hbox);
+  gtk_widget_show (hbox);
 }
 
 static void
@@ -519,8 +521,9 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
   gtk_box_append (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))), hbox);
 
   /* Image */
-  image = gtk_image_new_from_icon_name ("dialog-warning-symbolic",
-                                        GTK_ICON_SIZE_DIALOG);
+  image = gtk_image_new_from_icon_name ("dialog-warning-symbolic");
+                                        //GTK_ICON_SIZE_DIALOG);
+  gtk_image_set_icon_size (image, GTK_ICON_SIZE_NORMAL);
   gtk_widget_set_halign (image, 0.5);
   gtk_widget_set_valign (image, 0.0);
   gtk_box_append (GTK_BOX (hbox), image);
@@ -531,7 +534,7 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
 
   /* Primary label */
   primary_label = gtk_label_new (NULL);
-  gtk_label_set_line_wrap (GTK_LABEL (primary_label), TRUE);
+  gtk_label_set_wrap (GTK_LABEL (primary_label), TRUE);
   gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
   gtk_label_set_xalign (GTK_LABEL (primary_label), 0.0);
   gtk_label_set_yalign (GTK_LABEL (primary_label), 0.5);
@@ -575,15 +578,15 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
                                    ("S_elect the documents you want to save:"));
 
   gtk_box_append (GTK_BOX (vbox2), select_label);
-  gtk_label_set_line_wrap (GTK_LABEL (select_label), TRUE);
+  gtk_label_set_wrap (GTK_LABEL (select_label), TRUE);
   gtk_label_set_xalign (GTK_LABEL (select_label), 0.0);
   gtk_label_set_yalign (GTK_LABEL (select_label), 0.5);
 
-  scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
+  scrolledwindow = gtk_scrolled_window_new ();
   gtk_widget_set_vexpand (vbox2, TRUE);
   gtk_box_append (GTK_BOX (vbox2), scrolledwindow);
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow),
-                                       GTK_SHADOW_IN);
+  /*gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow),
+                                       GTK_SHADOW_IN);*/
 
   treeview = create_treeview (priv);
   gtk_container_add (GTK_CONTAINER (scrolledwindow), treeview);
@@ -598,14 +601,14 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
                                        "all your changes will be permanently lost."));
 
   gtk_box_append (GTK_BOX (vbox2), secondary_label);
-  gtk_label_set_line_wrap (GTK_LABEL (secondary_label), TRUE);
+  gtk_label_set_wrap (GTK_LABEL (secondary_label), TRUE);
   gtk_label_set_xalign (GTK_LABEL (secondary_label), 0.0);
   gtk_label_set_yalign (GTK_LABEL (secondary_label), 0.5);
   gtk_label_set_selectable (GTK_LABEL (secondary_label), TRUE);
 
   gtk_label_set_mnemonic_widget (GTK_LABEL (select_label), treeview);
 
-  gtk_widget_show_all (hbox);
+  gtk_widget_show (hbox);
 }
 
 static void

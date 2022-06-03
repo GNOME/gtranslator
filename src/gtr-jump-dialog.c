@@ -64,11 +64,11 @@ dialog_response_handler (GtkDialog * dlg, gint res_id)
                                           (priv->jump));
       tab = gtr_window_get_active_tab (priv->window);
       gtr_tab_go_to_number (tab, number - 1);
-      gtk_widget_destroy (GTK_WIDGET (dlg));
+      gtk_window_destroy (GTK_WIDGET (dlg));
       break;
 
     default:
-      gtk_widget_destroy (GTK_WIDGET (dlg));
+      gtk_window_destroy (GTK_WIDGET (dlg));
     }
 }
 
@@ -155,7 +155,7 @@ gtr_show_jump_dialog (GtrWindow * window)
       dlg = g_object_new (GTR_TYPE_JUMP_DIALOG, NULL);
 
       g_signal_connect (dlg,
-                        "destroy", G_CALLBACK (gtk_widget_destroyed), &dlg);
+                        "destroy", G_CALLBACK (gtk_window_destroy), &dlg);
 
       priv->window = window;
 

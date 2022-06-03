@@ -289,15 +289,15 @@ void
 gtr_view_cut_clipboard (GtrView * view)
 {
   GtkTextBuffer *buffer;
-  GtkClipboard *clipboard;
+  GdkClipboard *clipboard;
 
   g_return_if_fail (GTR_IS_VIEW (view));
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
   g_return_if_fail (buffer != NULL);
 
-  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view),
-                                        GDK_SELECTION_CLIPBOARD);
+  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view));
+                                        //GDK_SELECTION_CLIPBOARD);
 
   /* FIXME: what is default editability of a buffer? */
   gtk_text_buffer_cut_clipboard (buffer,
@@ -320,15 +320,15 @@ void
 gtr_view_copy_clipboard (GtrView * view)
 {
   GtkTextBuffer *buffer;
-  GtkClipboard *clipboard;
+  GdkClipboard *clipboard;
 
   g_return_if_fail (GTR_IS_VIEW (view));
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
   g_return_if_fail (buffer != NULL);
 
-  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view),
-                                        GDK_SELECTION_CLIPBOARD);
+  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view));
+                                        //GDK_SELECTION_CLIPBOARD);
 
   gtk_text_buffer_copy_clipboard (buffer, clipboard);
 
@@ -346,15 +346,15 @@ void
 gtr_view_paste_clipboard (GtrView * view)
 {
   GtkTextBuffer *buffer;
-  GtkClipboard *clipboard;
+  GdkClipboard *clipboard;
 
   g_return_if_fail (GTR_IS_VIEW (view));
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
   g_return_if_fail (buffer != NULL);
 
-  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view),
-                                        GDK_SELECTION_CLIPBOARD);
+  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view));
+                                        //GDK_SELECTION_CLIPBOARD);
 
   /* FIXME: what is default editability of a buffer? */
   gtk_text_buffer_paste_clipboard (buffer,
@@ -814,7 +814,7 @@ gtr_view_set_font (GtrView *view, char *font)
   str = pango_font_description_to_css (font_desc);
   css = g_strdup_printf ("textview  %s", str ?: "");
 
-  gtk_css_provider_load_from_data (priv->provider, css, -1, NULL);
+  gtk_css_provider_load_from_data (priv->provider, css, -1);
 
   pango_font_description_free (font_desc);
 }

@@ -190,7 +190,7 @@ tree_view_row_activated (GtkTreeView *tree_view,
   g_free (translation);
 }
 
-static void
+/*static void
 popup_menu_translation_activate (GtkMenuItem *menuitem,
                                  GtrTranslationMemoryUi *tm_ui)
 {
@@ -211,9 +211,9 @@ popup_menu_translation_activate (GtkMenuItem *menuitem,
   choose_translation (tm_ui, translation);
 
   g_free (translation);
-}
+}*/
 
-static void
+/*static void
 popup_menu_remove_from_memory (GtkMenuItem *menuitem,
                                GtrTranslationMemoryUi *tm_ui)
 {
@@ -240,9 +240,9 @@ popup_menu_remove_from_memory (GtkMenuItem *menuitem,
 
   g_free (translation);
 
-  /* update list */
+  // update list //
   showed_message_cb (priv->tab, priv->msg, tm_ui);
-}
+}*/
 
 static GtkWidget *
 create_tree_popup_menu (GtrTranslationMemoryUi *self)
@@ -253,13 +253,13 @@ create_tree_popup_menu (GtrTranslationMemoryUi *self)
   menu = gtk_menu_new ();
 
   item = gtk_menu_item_new_with_mnemonic (_("_Use this translation"));
-  g_signal_connect (item, "activate",
-                    G_CALLBACK (popup_menu_translation_activate), self);
+  /*g_signal_connect (item, "activate",
+                    G_CALLBACK (popup_menu_translation_activate), self);*/
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
   item = gtk_menu_item_new_with_mnemonic (_("_Remove"));
-  g_signal_connect (item, "activate",
-                    G_CALLBACK (popup_menu_remove_from_memory), self);
+  /*g_signal_connect (item, "activate",
+                    G_CALLBACK (popup_menu_remove_from_memory), self);*/
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_set_sensitive (item, TRUE);
 
@@ -268,14 +268,14 @@ create_tree_popup_menu (GtrTranslationMemoryUi *self)
   return menu;
 }
 
-static void
+/*static void
 tree_popup_menu_detach (GtrTranslationMemoryUi *self, GtkMenu * menu)
 {
   GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (self);
   priv->popup_menu = NULL;
-}
+}*/
 
-static void
+/*static void
 gtr_translation_memory_ui_show_menu (GtrTranslationMemoryUi *self,
                                      GdkEventButton * event)
 {
@@ -296,7 +296,7 @@ gtr_translation_memory_ui_show_menu (GtrTranslationMemoryUi *self,
       GdkEvent *ev = gtk_get_current_event ();
       gtk_menu_popup_at_pointer (GTK_MENU (priv->popup_menu), ev);
     }
-}
+}*/
 
 static void
 tree_view_size_cb (GtkWidget * widget,
@@ -320,7 +320,7 @@ tree_view_size_cb (GtkWidget * widget,
   g_list_free (renderers_list);
 }
 
-static gboolean
+/*static gboolean
 tree_view_button_press_event (GtkTreeView *tree,
                               GdkEventButton *event,
                               GtrTranslationMemoryUi *tm_ui)
@@ -337,9 +337,9 @@ tree_view_button_press_event (GtkTreeView *tree,
   gtk_widget_grab_focus (GTK_WIDGET (tree));
   gtk_tree_view_set_cursor (tree, path, NULL, FALSE);
 
-  gtr_translation_memory_ui_show_menu (tm_ui, event);
+  //gtr_translation_memory_ui_show_menu (tm_ui, event);
   return TRUE;
-}
+}*/
 
 static gboolean
 tree_view_popup_menu (GtkTreeView *tree, GtrTranslationMemoryUi *tm_ui)
@@ -401,8 +401,8 @@ gtr_translation_memory_ui_init (GtrTranslationMemoryUi * tm_ui)
 
   gtk_tree_view_append_column (GTK_TREE_VIEW (priv->tree_view), string);
 
-  g_signal_connect (priv->tree_view, "button-press-event",
-                    G_CALLBACK (tree_view_button_press_event), tm_ui);
+  /*g_signal_connect (priv->tree_view, "button-press-event",
+                    G_CALLBACK (tree_view_button_press_event), tm_ui);*/
 
   g_signal_connect (priv->tree_view, "popup-menu",
                     G_CALLBACK (tree_view_popup_menu), tm_ui);

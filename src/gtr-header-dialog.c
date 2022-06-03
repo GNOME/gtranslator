@@ -148,7 +148,9 @@ prj_id_version_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
   const gchar *text;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
-  text = gtk_entry_get_text (GTK_ENTRY (widget));
+  //text = gtk_entry_get_text (GTK_ENTRY (widget));
+  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
+  text = gtk_entry_buffer_get_text (buffer);
 
   if (text)
     {
@@ -163,7 +165,9 @@ rmbt_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
   const gchar *text;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
-  text = gtk_entry_get_text (GTK_ENTRY (widget));
+  //text = gtk_entry_get_text (GTK_ENTRY (widget));
+  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
+  text = gtk_entry_buffer_get_text (buffer);
 
   if (text)
     {
@@ -178,8 +182,10 @@ translator_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
   const gchar *name, *email;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
-  name = gtk_entry_get_text (GTK_ENTRY (priv->translator));
-  email = gtk_entry_get_text (GTK_ENTRY (priv->tr_email));
+  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
+  name = gtk_entry_buffer_get_text (buffer);
+  buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
+  email = gtk_entry_buffer_get_text (buffer);
 
   if (name && email)
     {
@@ -194,9 +200,15 @@ language_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
   const gchar *language, *lg_email, *lang_code;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
-  language = gtk_entry_get_text (GTK_ENTRY (priv->language));
-  lg_email = gtk_entry_get_text (GTK_ENTRY (priv->lg_email));
-  lang_code = gtk_entry_get_text (GTK_ENTRY (priv->lang_code));
+  // language = gtk_entry_get_text (GTK_ENTRY (priv->language));
+  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
+  language = gtk_entry_buffer_get_text (buffer);
+  // lg_email = gtk_entry_get_text (GTK_ENTRY (priv->lg_email));
+  buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
+  lg_email = gtk_entry_buffer_get_text (buffer);
+  // lang_code = gtk_entry_get_text (GTK_ENTRY (priv->lang_code));
+  buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
+  lang_code = gtk_entry_buffer_get_text (buffer);
 
   if (language && lg_email)
     {
@@ -213,10 +225,18 @@ dl_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
   const gchar *team, *module, *branch, *domain;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
-  team = gtk_entry_get_text (GTK_ENTRY (priv->team));
-  module = gtk_entry_get_text (GTK_ENTRY (priv->module));
-  branch = gtk_entry_get_text (GTK_ENTRY (priv->branch));
-  domain = gtk_entry_get_text (GTK_ENTRY (priv->domain));
+  //team = gtk_entry_get_text (GTK_ENTRY (priv->team));
+  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
+  team = gtk_entry_buffer_get_text (buffer);
+  //module = gtk_entry_get_text (GTK_ENTRY (priv->module));
+  buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
+  module = gtk_entry_buffer_get_text (buffer);
+  //branch = gtk_entry_get_text (GTK_ENTRY (priv->branch));
+  buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
+  branch = gtk_entry_buffer_get_text (buffer);
+  //domain = gtk_entry_get_text (GTK_ENTRY (priv->domain));
+  buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
+  domain = gtk_entry_buffer_get_text (buffer);
 
   gtr_header_set_dl_info (gtr_po_get_header (priv->po),
                           team, module, branch,
@@ -240,69 +260,101 @@ gtr_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
   gtk_text_buffer_set_text (buffer, gtr_header_get_comments (header), -1);
 
   text = gtr_header_get_prj_id_version (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->prj_id_version), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->prj_id_version), text);
+  GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->prj_id_version));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 
   text = gtr_header_get_pot_date (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->pot_date), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->pot_date), text);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->pot_date));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 
   text = gtr_header_get_po_date (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->po_date), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->po_date), text);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->po_date));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 
   text = gtr_header_get_rmbt (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->rmbt), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->rmbt), text);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->rmbt));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 
   /* Translator and Language Information */
   text = gtr_header_get_translator (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->translator), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->translator), text);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->translator));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 
   text = gtr_header_get_tr_email (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->tr_email), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->tr_email), text);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->tr_email));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 
   text = gtr_header_get_language (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->language), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->language), text);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->language));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 
   text = gtr_header_get_language_code (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->lang_code), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->lang_code), text);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->lang_code));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 
   text = gtr_header_get_lg_email (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->lg_email), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->lg_email), text);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->lg_email));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 
   text = gtr_header_get_charset (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->charset), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->charset), text);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->charset));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 
   text = gtr_header_get_encoding (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->encoding), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->encoding), text);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->encoding));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 
   /* Damned Lies Information */
   text = gtr_header_get_dl_team (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->team), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->team), text);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->team));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 
   text = gtr_header_get_dl_module (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->module), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->module), text);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->module));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 
   text = gtr_header_get_dl_branch (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->branch), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->branch), text);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->branch));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 
   text = gtr_header_get_dl_domain (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->domain), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->domain), text);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->domain));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 
   text = gtr_header_get_dl_state (header);
-  gtk_entry_set_text (GTK_ENTRY (priv->state), text);
+  //gtk_entry_set_text (GTK_ENTRY (priv->state), text);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->state));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
   g_free (text);
 }
 
@@ -334,7 +386,7 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
   gtk_widget_set_margin_bottom (GTK_WIDGET (dlg), 6);
   gtk_box_set_spacing (content_area, 6);
 
-  g_signal_connect (dlg, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+  g_signal_connect (dlg, "response", G_CALLBACK (gtk_window_destroy), NULL);
 
   builder = gtk_builder_new ();
   gtk_builder_add_objects_from_resource (builder, "/org/gnome/translator/gtr-header-dialog.ui",
@@ -474,7 +526,7 @@ gtr_show_header_dialog (GtrWindow * window)
                                       "use-header-bar", TRUE, NULL));
 
       g_signal_connect (dlg,
-                        "destroy", G_CALLBACK (gtk_widget_destroyed), &dlg);
+                        "destroy", G_CALLBACK (gtk_window_destroy), NULL);
 
       set_default_values (GTR_HEADER_DIALOG (dlg), window);
 
@@ -482,7 +534,7 @@ gtr_show_header_dialog (GtrWindow * window)
     }
 
   gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
-  gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_DIALOG);
+  //gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_DIALOG);
   gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
   gtk_window_present (GTK_WINDOW (dlg));
