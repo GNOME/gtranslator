@@ -56,7 +56,8 @@ gtr_close_button_init (GtrCloseButton *button)
 	gtk_widget_show (image);
 	g_object_unref (icon);
 
-	gtk_container_add (GTK_CONTAINER (button), image);
+	//gtk_container_add (GTK_CONTAINER (button), image);
+	gtk_button_set_child (GTK_BUTTON(button), image);
 
 	/* make it small */
 	context = gtk_widget_get_style_context (GTK_WIDGET (button));

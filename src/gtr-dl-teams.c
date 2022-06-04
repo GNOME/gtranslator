@@ -135,7 +135,7 @@ gtr_dl_teams_parse_teams_json (GObject *object,
                                              GTK_BUTTONS_CLOSE,
                                              "%s",
                                              error->message);
-      g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
       gtk_window_present (GTK_WINDOW (dialog));
       return;
     }
@@ -218,7 +218,7 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
                                        GTK_BUTTONS_CLOSE,
                                        "Error loading module info: %s",
                                        message);
-      g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
       gtk_window_present (GTK_WINDOW (dialog));
       return;
     }
@@ -308,7 +308,7 @@ gtr_dl_teams_parse_modules_json (GObject *object,
                                              GTK_BUTTONS_CLOSE,
                                              "%s",
                                              error->message);
-      g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
       gtk_window_present (GTK_WINDOW (dialog));
       return;
     }
@@ -415,7 +415,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
                                        GTK_BUTTONS_CLOSE,
                                        "Error loading file info: %s",
                                        message);
-      g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
       gtk_window_present (GTK_WINDOW (dialog));
       return;
     }
@@ -546,7 +546,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
                                        GTK_BUTTONS_CLOSE,
                                        "Error loading file: %s",
                                        message);
-      g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
       gtk_window_present (GTK_WINDOW (dialog));
       return;
     }
@@ -561,7 +561,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
                                        GTK_BUTTONS_CLOSE,
                                        "Error creating temp file: %s",
                                        error->message);
-      g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
       gtk_window_present (GTK_WINDOW (dialog));
       g_error_free (error);
       return;
@@ -705,7 +705,7 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
         "permissions to reserve this module."
       ),
       message);
-    g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+    g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
     gtk_window_present (GTK_WINDOW (dialog));
 
     return FALSE;
@@ -722,7 +722,7 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
                                            priv->selected_team,
                                            priv->selected_domain);
 
-  g_signal_connect (success_dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+  g_signal_connect (success_dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
   gtk_window_present (GTK_WINDOW (success_dialog));
   gtk_widget_set_sensitive (priv->reserve_button, FALSE);
 

@@ -403,17 +403,17 @@ pacify_null_text (GBinding     *binding,
   return TRUE;
 }
 
-static void
+static gboolean
 gtr_search_bar_grab_focus (GtkWidget *widget)
 {
   GtrSearchBar *self = (GtrSearchBar *)widget;
 
   g_assert (GTR_IS_SEARCH_BAR (self));
 
-  gtk_widget_grab_focus (GTK_WIDGET (self->search_entry));
+  return gtk_widget_grab_focus (GTK_WIDGET (self->search_entry));
 }
 
-static void
+/*static void
 search_entry_populate_popup (GtrSearchBar *self,
                              GtkWidget    *widget,
                              GtkEntry     *entry)
@@ -453,11 +453,11 @@ search_entry_populate_popup (GtrSearchBar *self,
       gtk_menu_shell_insert (GTK_MENU_SHELL (widget), item, pos++);
       gtk_widget_show (item);
 
-      /*sep = gtk_separator_menu_item_new ();
-      gtk_menu_shell_insert (GTK_MENU_SHELL (widget), sep, pos++);
-      gtk_widget_show (sep);*/
+      //sep = gtk_separator_menu_item_new ();
+      //gtk_menu_shell_insert (GTK_MENU_SHELL (widget), sep, pos++);
+      //gtk_widget_show (sep);
     }
-}
+}*/
 
 static void
 gtr_search_bar_destroy (GtkWidget *widget)
@@ -679,7 +679,7 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
   /*binding_set = gtk_binding_set_by_class (klass);
   gtk_binding_entry_add_signal (binding_set, GDK_KEY_Escape, 0,
                                 "stop-search", 0);*/
-  gtk_widget_class_add_binding_signal (klass, GDK_KEY_Escape, 0, 
+  gtk_widget_class_add_binding_signal (GTK_WIDGET_CLASS(klass), GDK_KEY_Escape, 0, 
                                       "stop-search", NULL);
 }
 
@@ -721,10 +721,10 @@ gtr_search_bar_init (GtrSearchBar *self)
                             G_CALLBACK (gtr_search_bar_find_next),
                             self);
 
-  g_signal_connect_swapped (self->search_entry,
+  /*g_signal_connect_swapped (self->search_entry,
                             "populate-popup",
                             G_CALLBACK (search_entry_populate_popup),
-                            self);
+                            self);*/
 
   g_signal_connect_swapped (self->next_button,
                             "clicked",

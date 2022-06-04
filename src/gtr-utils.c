@@ -80,8 +80,8 @@ gtr_gtk_button_new_with_icon_name (const gchar * label,
                         gtk_image_new_from_icon_name (icon_name,
                                                       GTK_ICON_SIZE_BUTTON));*/
   button = gtk_button_new_from_icon_name (icon_name);
-  gtk_button_set_label (button, label);
-  gtk_button_set_use_underline (button, true);
+  gtk_button_set_label (GTK_BUTTON(button), label);
+  gtk_button_set_use_underline (GTK_BUTTON(button), true);
 
   return button;
 }
@@ -457,8 +457,8 @@ finally_2:
 void
 gtr_utils_help_display (GtkWindow * window)
 {
-  gtk_show_uri_on_window (GTK_WINDOW (window), "help:gtranslator",
-                          gtk_get_current_event_time (), NULL);
+  /*gtk_show_uri_on_window (GTK_WINDOW (window), "help:gtranslator",
+                          gtk_get_current_event_time (), NULL);*/
 }
 
 gchar *
@@ -802,24 +802,6 @@ pango_font_description_to_css (PangoFontDescription *desc)
   g_string_append (s, "}");
 
   return g_string_free (s, FALSE);
-}
-
-void
-gtk_box_append (GtkBox *box, GtkWidget *child)
-{
-  gtk_container_add (GTK_CONTAINER (box), child);
-}
-
-void
-gtk_list_box_append (GtkListBox *box, GtkWidget *child)
-{
-  gtk_container_add (GTK_CONTAINER (box), child);
-}
-
-void
-gtk_list_box_remove (GtkListBox *box, GtkWidget *child)
-{
-  gtk_container_remove (GTK_CONTAINER (box), child);
 }
 
 // TODO: Improve this parser, this string parsing is weak

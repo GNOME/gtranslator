@@ -542,7 +542,8 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
   view = gtr_view_new ();
   gtk_widget_show (view);
 
-  gtk_container_add (GTK_CONTAINER (scroll), view);
+  //gtk_container_add (GTK_CONTAINER (scroll), view);
+  gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW(scroll), view);
 
   /*gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
                                        GTK_SHADOW_IN);*/
@@ -576,10 +577,10 @@ gtr_message_plural_forms (GtrTab * tab, GtrMsg * msg)
           buf =
             gtk_text_view_get_buffer (GTK_TEXT_VIEW
                                       (priv->trans_msgstr[i]));
-          gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER
-                                                       (buf));
+          //gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER (buf));
+          gtk_text_buffer_begin_irreversible_action (buf);
           gtk_text_buffer_set_text (buf, (gchar *) msgstr_plural, -1);
-          gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (buf));
+          gtk_text_buffer_end_irreversible_action (buf);
         }
     }
 }
@@ -625,9 +626,9 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
     {
       gchar *msg_error = gtr_msg_check (msg);
       buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->text_msgid));
-      gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER (buf));
+      gtk_text_buffer_begin_irreversible_action (buf);
       gtk_text_buffer_set_text (buf, (gchar *) msgid, -1);
-      gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (buf));
+      gtk_text_buffer_begin_irreversible_action (buf);
 
       if (gtr_msg_is_fuzzy (msg))
         gtk_label_set_text (GTK_LABEL (priv->msgid_tags), _("fuzzy"));
@@ -648,12 +649,10 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
       gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->trans_notebook), 0);
       if (msgstr)
         {
-          buf =
-            gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[0]));
-          gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER
-                                                       (buf));
+          buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[0]));
+          gtk_text_buffer_begin_irreversible_action (buf);
           gtk_text_buffer_set_text (buf, (gchar *) msgstr, -1);
-          gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (buf));
+          gtk_text_buffer_end_irreversible_action (buf);
           gtk_label_set_mnemonic_widget (GTK_LABEL (priv->msgstr_label),
                                          priv->trans_msgstr[0]);
         }
@@ -1158,8 +1157,8 @@ gtr_tab_update_undo_buttons (GtrTab *tab,
     GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
   g_return_if_fail(active_document);
 
-  can_undo = gtk_source_buffer_can_undo (active_document);
-  can_redo = gtk_source_buffer_can_redo (active_document);
+  can_undo = gtk_text_buffer_get_can_undo (GTK_TEXT_BUFFER(active_document));
+  can_redo = gtk_text_buffer_get_can_redo (GTK_TEXT_BUFFER(active_document));
 
   gtk_widget_set_sensitive (priv->undo, can_undo);
   gtk_widget_set_sensitive (priv->redo, can_redo);
@@ -2103,7 +2102,8 @@ gtr_tab_set_info_bar (GtrTab * tab, GtkWidget * infobar)
     return;
 
   if (priv->infobar != NULL)
-    gtk_widget_destroy (priv->infobar);
+    //gtk_widget_destroy (priv->infobar);
+    g_object_unref(priv->infobar);
 
   priv->infobar = infobar;
 

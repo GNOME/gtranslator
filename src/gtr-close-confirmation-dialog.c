@@ -134,7 +134,7 @@ set_logout_mode (GtrCloseConfirmationDialog * dlg, gboolean logout_mode)
 static void
 gtr_close_confirmation_dialog_init (GtrCloseConfirmationDialog * dlg)
 {
-  AtkObject *atk_obj;
+  //AtkObject *atk_obj;
   GtkWidget *content_area = gtk_dialog_get_content_area (GTK_DIALOG (dlg));
 
   gtk_widget_set_margin_start (GTK_WIDGET (content_area), 6);
@@ -144,16 +144,17 @@ gtr_close_confirmation_dialog_init (GtrCloseConfirmationDialog * dlg)
 
   gtk_box_set_spacing (GTK_BOX (content_area), 14);
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
-  gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dlg), TRUE);
+  //gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dlg), TRUE);
 
   gtk_window_set_title (GTK_WINDOW (dlg), "");
 
   gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
-  atk_obj = gtk_widget_get_accessible (GTK_WIDGET (dlg));
+  /* started use of gtk_widget_class_set_accessible role in class_init
+   * atk_obj = gtk_widget_get_accessible (GTK_WIDGET (dlg));
   atk_object_set_role (atk_obj, ATK_ROLE_ALERT);
-  atk_object_set_name (atk_obj, _("Question"));
+  atk_object_set_name (atk_obj, _("Question"));*/
 
   g_signal_connect (dlg, "response", G_CALLBACK (response_cb), NULL);
 }
@@ -252,6 +253,8 @@ static void
                                                          FALSE,
                                                          (G_PARAM_READWRITE |
                                                           G_PARAM_CONSTRUCT_ONLY)));
+
+  gtk_widget_class_set_accessible_role (klass, GTK_ACCESSIBLE_ROLE_ALERT);
 }
 
 static GList *
@@ -351,7 +354,7 @@ build_single_doc_dialog (GtrCloseConfirmationDialog * dlg)
 
   /* Image */
   image = gtk_image_new_from_icon_name ("dialog-warning-symbolic");
-  gtk_image_set_icon_size(image, GTK_ICON_SIZE_NORMAL);
+  gtk_image_set_icon_size(GTK_IMAGE(image), GTK_ICON_SIZE_NORMAL);
 
   gtk_widget_set_halign (image, 0.5);
   gtk_widget_set_valign (image, 0.0);
@@ -523,7 +526,7 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
   /* Image */
   image = gtk_image_new_from_icon_name ("dialog-warning-symbolic");
                                         //GTK_ICON_SIZE_DIALOG);
-  gtk_image_set_icon_size (image, GTK_ICON_SIZE_NORMAL);
+  gtk_image_set_icon_size (GTK_IMAGE(image), GTK_ICON_SIZE_NORMAL);
   gtk_widget_set_halign (image, 0.5);
   gtk_widget_set_valign (image, 0.0);
   gtk_box_append (GTK_BOX (hbox), image);
@@ -589,7 +592,8 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
                                        GTK_SHADOW_IN);*/
 
   treeview = create_treeview (priv);
-  gtk_container_add (GTK_CONTAINER (scrolledwindow), treeview);
+  //gtk_container_add (GTK_CONTAINER (scrolledwindow), treeview);
+  gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW(scrolledwindow), treeview);
 
   /* Secondary label */
   if (priv->disable_save_to_disk)

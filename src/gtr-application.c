@@ -42,14 +42,16 @@
 #include <gio/gio.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <libhandy-1/handy.h>
+//#include <libhandy-1/handy.h>
+#include <adwaita.h>
 
 #ifdef ENABLE_INTROSPECTION
 #include <girepository.h>
 #endif
 
 #ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
+//#include <gdk/gdkx.h>
+#include <gdk/gdk.h>
 #endif
 
 typedef struct
@@ -101,7 +103,7 @@ load_accels (void)
                                NULL);
   if (filename != NULL)
     {
-      gtk_accel_map_load (filename);
+      //gtk_accel_map_load (filename);
       g_free (filename);
     }
 }
@@ -116,7 +118,7 @@ save_accels (void)
                                NULL);
   if (filename != NULL)
     {
-      gtk_accel_map_save (filename);
+      //gtk_accel_map_save (filename);
       g_free (filename);
     }
 }
@@ -139,7 +141,7 @@ set_active_window (GtrApplication *app,
 
 static gboolean
 window_focus_in_event (GtrWindow      *window,
-		       GdkEventFocus  *event,
+		       GdkFocusEvent  *event,
 		       GtrApplication *app)
 {
   /* updates active_view and active_child when a new toplevel receives focus */
@@ -634,7 +636,7 @@ gtr_application_startup (GApplication *application)
   g_application_set_resource_base_path (application, "/org/gnome/translator");
   G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
 
-  hdy_init();
+  adw_init();
   g_set_application_name (_("Translation Editor"));
   gtk_window_set_default_icon_name (PACKAGE_APPID);
 
@@ -645,12 +647,14 @@ gtr_application_startup (GApplication *application)
   load_accels ();
 
   /* TODO Remove in GTK 4 port */
-  hdy_style_manager_set_color_scheme (hdy_style_manager_get_default (),
-                                      HDY_COLOR_SCHEME_PREFER_LIGHT);
+  /*hdy_style_manager_set_color_scheme (hdy_style_manager_get_default (),
+                                      HDY_COLOR_SCHEME_PREFER_LIGHT);*/
+  adw_style_manager_set_color_scheme (adw_style_manager_get_default (),
+                                      ADW_COLOR_SCHEME_PREFER_LIGHT);
 
   /* We set the default icon dir */
-  gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
-                                     gtr_dirs_get_gtr_pixmaps_dir ());
+  /*gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
+                                     gtr_dirs_get_gtr_pixmaps_dir ());*/
 
   g_action_map_add_action_entries (G_ACTION_MAP (application), app_entries,
                                    G_N_ELEMENTS (app_entries), application);
@@ -693,7 +697,7 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.tm_8", "<Ctrl>8");
   set_kb (application, "app.tm_9", "<Ctrl>9");
 
-  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
                                              GTK_STYLE_PROVIDER (priv->provider), 600);
 }
 
@@ -801,7 +805,8 @@ GtrWindow *
 gtr_application_create_window (GtrApplication *app)
 {
   GtrWindow *window;
-  GdkWindowState state;
+  //GdkWindowState state;
+  GdkToplevelState state;
   gint w, h;
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
@@ -820,15 +825,15 @@ gtr_application_create_window (GtrApplication *app)
   gtk_window_set_default_size (GTK_WINDOW (window), w, h);
   gtk_application_window_set_show_menubar (GTK_APPLICATION_WINDOW (window), FALSE);
 
-  if ((state & GDK_WINDOW_STATE_MAXIMIZED) != 0)
+  if ((state & GDK_TOPLEVEL_STATE_MAXIMIZED) != 0)
     gtk_window_maximize (GTK_WINDOW (window));
   else
     gtk_window_unmaximize (GTK_WINDOW (window));
 
-  if ((state & GDK_WINDOW_STATE_STICKY ) != 0)
-    gtk_window_stick (GTK_WINDOW (window));
-  else
-    gtk_window_unstick (GTK_WINDOW (window));
+  if ((state & GDK_TOPLEVEL_STATE_STICKY ) != 0);
+    ///gtk_window_stick (GTK_WINDOW (window));
+  else;
+    //gtk_window_unstick (GTK_WINDOW (window));
 
   g_signal_connect (window, "focus_in_event",
                     G_CALLBACK (window_focus_in_event), app);

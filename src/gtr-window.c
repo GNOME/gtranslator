@@ -83,7 +83,7 @@ typedef struct
 
   gint width;
   gint height;
-  GdkWindowState window_state;
+  GdkToplevelState window_state;
 
   GtrProfileManager *prof_manager;
 
@@ -150,9 +150,9 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
 static GtrWindow *
 get_drop_window (GtkWidget * widget)
 {
-  GtkWidget *target_window;
+  GtkWindow *target_window;
 
-  target_window = gtk_widget_get_toplevel (widget);
+  target_window = GTK_WINDOW(gtk_widget_get_root (widget));
   g_return_val_if_fail (GTR_IS_WINDOW (target_window), NULL);
 
   return GTR_WINDOW (target_window);
@@ -226,12 +226,12 @@ set_window_title (GtrWindow * window, gboolean with_path)
       title = g_strdup (_("Translation Editor"));
     }
 
-  //gtk_window_set_title (GTK_WINDOW (window), title);
+  gtk_window_set_title (GTK_WINDOW (window), title);
 
   // notebook headerbar
   header = GTK_HEADER_BAR (gtr_tab_get_header (GTR_TAB (priv->active_tab)));
-  gtk_header_bar_set_title (header, title);
-  gtk_widget_show_all(GTK_WIDGET(header));
+  //gtk_header_bar_set_title (header, title);
+  gtk_widget_show(GTK_WIDGET(header));
 
   //g_free (title);
 }
@@ -339,7 +339,7 @@ notebook_tab_added (GtkNotebook * notebook,
 static void
 gtr_window_init (GtrWindow *window)
 {
-  GtkTargetList *tl;
+  //GtkTargetList *tl;
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
   priv->search_bar_shown = FALSE;
@@ -414,7 +414,7 @@ gtr_window_init (GtrWindow *window)
                        gtr_dl_teams_get_header (GTR_DL_TEAMS (priv->dlteams)),
                        "dlteams");
 
-  gtk_widget_show_all (priv->stack);
+  gtk_widget_show (priv->stack);
 
   // translation memory
   priv->translation_memory = GTR_TRANSLATION_MEMORY (gtr_gda_new());
@@ -436,9 +436,9 @@ save_window_state (GtrWindow * window)
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
   if ((priv->window_state &
-	 (GDK_WINDOW_STATE_MAXIMIZED | GDK_WINDOW_STATE_FULLSCREEN)) == 0)
+	 (GDK_TOPLEVEL_STATE_MAXIMIZED | GDK_TOPLEVEL_STATE_FULLSCREEN)) == 0)
     {
-      gtk_window_get_size (GTK_WINDOW (window), &priv->width, &priv->height);
+      gtk_window_get_default_size (GTK_WINDOW (window), &priv->width, &priv->height);
       g_settings_set (priv->state_settings, GTR_SETTINGS_WINDOW_SIZE,
 				"(ii)", priv->width, priv->height);
     }
@@ -471,7 +471,7 @@ gtr_window_finalize (GObject * object)
   G_OBJECT_CLASS (gtr_window_parent_class)->finalize (object);
 }
 
-static gboolean
+/*static gboolean
 gtr_window_configure_event (GtkWidget * widget, GdkEventConfigure * event)
 {
   GtrWindow *window = GTR_WINDOW (widget);
@@ -482,7 +482,7 @@ gtr_window_configure_event (GtkWidget * widget, GdkEventConfigure * event)
 
   return GTK_WIDGET_CLASS (gtr_window_parent_class)->configure_event (widget,
                                                                       event);
-}
+}*/
 
 static void
 gtr_window_class_init (GtrWindowClass *klass)
@@ -493,7 +493,7 @@ gtr_window_class_init (GtrWindowClass *klass)
   object_class->finalize = gtr_window_finalize;
   object_class->dispose = gtr_window_dispose;
 
-  widget_class->configure_event = gtr_window_configure_event;
+  //widget_class->configure_event = gtr_window_configure_event;
 
   gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass),
                                                "/org/gnome/translator/gtr-window.ui");
@@ -519,13 +519,15 @@ gtr_window_remove_tab (GtrWindow * window)
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   if (priv->active_tab != NULL)
   {
-    gtk_widget_destroy(GTK_WIDGET(priv->active_tab));
+    //gtk_container_remove(GTK_CONTAINER(window), GTK_WIDGET(priv->active_tab));
+    g_object_unref(priv->active_tab);
   }
   //as set_window_title not working in gtr_window_create_tab that's why we are removing whole child of stack and again adding it in gtr_window_create_tab
-  if (gtk_stack_get_child_by_name(priv->header_stack,"poeditor") != NULL)
+  /*if (gtk_stack_get_child_by_name(priv->header_stack,"poeditor") != NULL)
   {
-    gtk_widget_destroy(GTK_WIDGET(gtk_stack_get_child_by_name(priv->header_stack,"poeditor")));
-  }
+    //gtk_container_remove(GTK_CONTAINER(window), GTK_WIDGET(gtk_stack_get_child_by_name(priv->header_stack,"poeditor")));
+    g_object_unref ()
+  }*/
 }
 
 /**
@@ -587,10 +589,10 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   gtr_notebook_reset_sort (GTR_NOTEBOOK (priv->notebook));
   */
 
-  if (gtk_stack_get_child_by_name (priv->stack,"poeditor") == NULL) {
+  if (gtk_stack_get_child_by_name (GTK_STACK(priv->stack),"poeditor") == NULL) {
     gtk_stack_add_named (GTK_STACK (priv->stack), GTK_WIDGET(priv->active_tab), "poeditor");
   }
-  if (gtk_stack_get_child_by_name (priv->header_stack,"poeditor") == NULL) {
+  if (gtk_stack_get_child_by_name (GTK_STACK(priv->header_stack),"poeditor") == NULL) {
     gtk_stack_add_named (GTK_STACK (priv->header_stack),
                          gtr_tab_get_header (GTR_TAB (priv->active_tab)),
                          "poeditor");
@@ -901,7 +903,7 @@ gtr_window_show_tm_dialog (GtrWindow *window)
   dlg = gtr_translation_memory_dialog_new (GTK_WINDOW (window),
                                            priv->translation_memory);
 
-  g_signal_connect (dlg, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+  g_signal_connect (dlg, "response", G_CALLBACK (gtk_window_destroy), NULL);
 
   gtk_window_present (GTK_WINDOW (dlg));
 }

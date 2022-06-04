@@ -62,7 +62,7 @@ sources = files(
   'gtr-profile-manager.c',
   'gtr-settings.c',
   'gtr-tab.c',
-  'gtr-tab-label.c',
+  # 'gtr-tab-label.c',
   'gtr-utils.c',
   'gtr-view.c',
   'gtr-projects.c',

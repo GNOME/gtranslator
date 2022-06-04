@@ -63,7 +63,7 @@ gtr_profile_dialog_init (GtrProfileDialog *dlg)
   GtkBox *content_area;
   GtkWidget *fetcher_box;
   GtkBuilder *builder;
-  gchar *root_objects[] = {
+  const gchar *root_objects[] = {
     "main_box",
     NULL
   };
@@ -115,24 +115,39 @@ fill_entries (GtrProfileDialog *dlg, GtrProfile *profile)
 {
   GtrProfileDialogPrivate *priv = gtr_profile_dialog_get_instance_private (dlg);
   if (gtr_profile_get_name (profile) != NULL)
-    gtk_entry_set_text (GTK_ENTRY (priv->profile_name),
-                        gtr_profile_get_name (profile));
+    //gtk_entry_set_text (GTK_ENTRY (priv->profile_name), gtr_profile_get_name (profile));
+  {
+    GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->profile_name));
+    gtk_entry_buffer_set_text (entry_buffer, gtr_profile_get_name (profile), -1);
+  }
 
   if (gtr_profile_get_auth_token (profile) != NULL)
-    gtk_entry_set_text (GTK_ENTRY (priv->auth_token),
-                        gtr_profile_get_auth_token (profile));                      
+    //gtk_entry_set_text (GTK_ENTRY (priv->auth_token), gtr_profile_get_auth_token (profile));
+  {
+    GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->auth_token));
+    gtk_entry_buffer_set_text (entry_buffer, gtr_profile_get_auth_token (profile), -1);
+  }
 
   if (gtr_profile_get_author_name (profile) != NULL)
-    gtk_entry_set_text (GTK_ENTRY (priv->author_name),
-                        gtr_profile_get_author_name (profile));
+    //gtk_entry_set_text (GTK_ENTRY (priv->author_name), gtr_profile_get_author_name (profile));
+  {
+    GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->author_name));
+    gtk_entry_buffer_set_text (entry_buffer, gtr_profile_get_author_name (profile), -1);
+  }
 
   if (gtr_profile_get_author_email (profile) != NULL)
-    gtk_entry_set_text (GTK_ENTRY (priv->author_email),
-                        gtr_profile_get_author_email (profile));
+    //gtk_entry_set_text (GTK_ENTRY (priv->author_email), gtr_profile_get_author_email (profile));
+  {
+    GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->author_email));
+    gtk_entry_buffer_set_text (entry_buffer, gtr_profile_get_author_email (profile), -1);
+  }
 
   if (gtr_profile_get_group_email (profile) != NULL)
-    gtk_entry_set_text (GTK_ENTRY (priv->team_email),
-                        gtr_profile_get_group_email (profile));
+    //gtk_entry_set_text (GTK_ENTRY (priv->team_email), gtr_profile_get_group_email (profile));
+  {
+    GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->team_email));
+    gtk_entry_buffer_set_text (entry_buffer,  gtr_profile_get_group_email (profile), -1);
+  }
 
   if (gtr_profile_get_language_name (profile) != NULL)
     gtr_languages_fetcher_set_language_name (GTR_LANGUAGES_FETCHER (priv->languages_fetcher),
@@ -190,26 +205,32 @@ GtrProfile *
 gtr_profile_dialog_get_profile (GtrProfileDialog *dlg)
 {
   GtrProfile *profile;
+  GtkEntryBuffer *buffer;
   GtrProfileDialogPrivate *priv = gtr_profile_dialog_get_instance_private (dlg);
 
   g_return_val_if_fail (GTR_IS_PROFILE_DIALOG (dlg), NULL);
 
   profile = gtr_profile_new ();
 
-  gtr_profile_set_name (profile,
-                        gtk_entry_get_text (GTK_ENTRY (priv->profile_name)));
+  buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->profile_name));
+  gtr_profile_set_name (profile,gtk_entry_buffer_get_text (buffer));
+                        //gtk_entry_get_text (GTK_ENTRY (priv->profile_name)));
 
-  gtr_profile_set_auth_token (profile,
-                        gtk_entry_get_text (GTK_ENTRY (priv->auth_token)));
+  buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->auth_token));
+  gtr_profile_set_auth_token (profile,gtk_entry_buffer_get_text (buffer));
+                        //gtk_entry_get_text (GTK_ENTRY (priv->auth_token)));
 
-  gtr_profile_set_author_name (profile,
-                               gtk_entry_get_text (GTK_ENTRY (priv->author_name)));
+  buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->author_name));
+  gtr_profile_set_author_name (profile,gtk_entry_buffer_get_text (buffer));
+                               //gtk_entry_get_text (GTK_ENTRY (priv->author_name)));
 
-  gtr_profile_set_author_email (profile,
-                                gtk_entry_get_text (GTK_ENTRY (priv->author_email)));
+  buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->author_email));
+  gtr_profile_set_author_email (profile,gtk_entry_buffer_get_text (buffer));
+                                //gtk_entry_get_text (GTK_ENTRY (priv->author_email)));
 
-  gtr_profile_set_group_email (profile,
-                               gtk_entry_get_text (GTK_ENTRY (priv->team_email)));
+  buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->team_email));
+  gtr_profile_set_group_email (profile,gtk_entry_buffer_get_text (buffer));
+                               //gtk_entry_get_text (GTK_ENTRY (priv->team_email)));
 
   gtr_profile_set_language_name (profile,
                                  gtr_languages_fetcher_get_language_name (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));

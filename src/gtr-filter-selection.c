@@ -58,7 +58,7 @@ change_option (GtkListBox         *box,
 {
   GSList *o = NULL;
   GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (self);
-  GtkWidget *label = gtk_bin_get_child (GTK_BIN (row));
+  GtkWidget *label = gtk_list_box_row_get_child (row);
   const char *label_text = gtk_label_get_text (GTK_LABEL (label));
 
   for (o = priv->options; o != NULL; o = g_slist_next (o))
@@ -79,17 +79,26 @@ filter_option (GtkEditable        *entry,
                GtrFilterSelection *self)
 {
   GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (self);
-  const char *text = gtk_entry_get_text (GTK_ENTRY (entry));
+  //const char *text = gtk_entry_get_text (GTK_ENTRY (entry));
+  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY (entry));
+  const char* text = gtk_entry_buffer_get_text (buffer);
   g_autofree char *uptext = g_ascii_strup (text, -1);
   const GSList *o;
-  GList *children;
+  GtkWidget *children;
 
-  children = gtk_container_get_children (GTK_CONTAINER (priv->option_list));
+  /* children = gtk_container_get_children (GTK_CONTAINER (priv->option_list));
   while (children)
     {
       GtkWidget *w = GTK_WIDGET (children->data);
       gtk_list_box_remove (GTK_LIST_BOX (priv->option_list), w);
       children = g_list_next (children);
+    } */
+
+  children = gtk_widget_get_first_child (GTK_WIDGET (priv->option_list));
+  while (children)
+    {
+      gtk_list_box_remove (GTK_LIST_BOX (priv->option_list), children);
+      children = gtk_widget_get_next_sibling (children);
     }
 
   for (o = priv->options; o != NULL; o = g_slist_next (o))
@@ -105,7 +114,7 @@ filter_option (GtkEditable        *entry,
       gtk_label_set_xalign (GTK_LABEL (child), 0.0);
       gtk_list_box_append (GTK_LIST_BOX (priv->option_list), child);
     }
-  gtk_widget_show_all (priv->option_list);
+  gtk_widget_show (priv->option_list);
 }
 
 static void
@@ -148,13 +157,13 @@ gtr_filter_selection_init (GtrFilterSelection *self)
   priv->options = NULL;
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  gtk_popover_set_relative_to(GTK_POPOVER(priv->popup),GTK_WIDGET(self));
+  gtk_popover_set_default_widget (GTK_POPOVER(priv->popup),GTK_WIDGET(self));
   g_signal_connect (self,
                     "clicked",
                     G_CALLBACK(handle_filter_selection_btn_clicked),
                     NULL);
 
-  gtk_widget_show_all (priv->option_list);
+  gtk_widget_show (priv->option_list);
 
   g_signal_connect (priv->option_list,
                     "row-activated",
@@ -214,18 +223,25 @@ gtr_filter_selection_set_options_full (GtrFilterSelection *self,
 {
   GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (self);
   const GSList *o;
-  GList *children;
 
   if (priv->options)
     g_slist_free_full (priv->options, (GDestroyNotify)gtr_filter_option_free);
   priv->options = options;
 
-  children = gtk_container_get_children (GTK_CONTAINER (priv->option_list));
+  GtkWidget *children;
+  /* children = gtk_container_get_children (GTK_CONTAINER (priv->option_list));
   while (children)
     {
       GtkWidget *w = GTK_WIDGET (children->data);
       gtk_list_box_remove (GTK_LIST_BOX (priv->option_list), w);
       children = g_list_next (children);
+    } */
+
+  children = gtk_widget_get_first_child (GTK_WIDGET (priv->option_list));
+  while (children)
+    {
+      gtk_list_box_remove (GTK_LIST_BOX (priv->option_list), GTK_WIDGET(children));
+      children = gtk_widget_get_next_sibling (children);
     }
 
   for (o = priv->options; o != NULL; o = g_slist_next (o))
@@ -236,7 +252,7 @@ gtr_filter_selection_set_options_full (GtrFilterSelection *self,
       gtk_list_box_append (GTK_LIST_BOX (priv->option_list), child);
     }
 
-  gtk_widget_show_all (priv->option_list);
+  gtk_widget_show (priv->option_list);
 }
 
 void

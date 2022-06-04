@@ -141,18 +141,26 @@ static void
 gtr_po_parse_files_from_dialog (GtkNativeDialog * dialog, GtrWindow * window)
 {
   GSList *po_files, *l;
+  GListModel *po_files_model;
   GSList *locations = NULL;
   GFile *file, *parent;
   gchar *uri;
 
-  po_files = gtk_file_chooser_get_uris (GTK_FILE_CHOOSER (dialog));
-  for (l = po_files; l != NULL; l = g_slist_next (l))
+  /*for (l = po_files; l != NULL; l = g_slist_next (l))
     {
       GFile *file;
 
       file = g_file_new_for_uri (l->data);
       locations = g_slist_prepend (locations, file);
-    }
+    }*/
+
+  po_files_model = gtk_file_chooser_get_files (GTK_FILE_CHOOSER (dialog));
+  guint i = 0;
+  while (i < g_list_model_get_n_items(po_files_model)) {
+    GFile *file = g_list_model_get_item(po_files_model, i);
+    locations = g_slist_prepend (locations, file);
+  }
+  g_free(i);
 
   /*
    * We store latest directory
@@ -186,6 +194,18 @@ gtr_file_chooser_cb (GtkNativeDialog * dialog, guint reply, gpointer user_data)
     gtr_po_parse_files_from_dialog (dialog, window);
 
   gtk_native_dialog_destroy (dialog);
+}
+
+static void
+handle_dialog_response (GtkNativeDialog *dialog, gint response_id, GtrWindow *window ){
+  if (response_id == GTK_RESPONSE_YES)
+  {
+    gtr_save_current_file_dialog (NULL, window);
+  }
+  else if (response_id == GTK_RESPONSE_CANCEL)
+  {
+    //to be implemented
+  }
 }
 
 gboolean
@@ -227,14 +247,17 @@ gtr_want_to_save_current_dialog (GtrWindow * window)
                           _("Continue without saving"), GTK_RESPONSE_NO,
                           NULL);
 
-  res = gtk_dialog_run (GTK_DIALOG (dialog));
-  gtk_widget_destroy (dialog);
+  //res = gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
+  //gtk_widget_destroy (dialog);
 
-  if (res == GTK_RESPONSE_CANCEL)
+  // Below code can be removed as response signal is connected
+  /*if (res == GTK_RESPONSE_CANCEL)
     return FALSE;
 
   if (res == GTK_RESPONSE_YES)
-    gtr_save_current_file_dialog (NULL, window);
+    gtr_save_current_file_dialog (NULL, window);*/
+  g_signal_connect(dialog, "response", G_CALLBACK(handle_dialog_response), window);
 
   return TRUE;
 }
@@ -285,7 +308,9 @@ save_dialog_response_cb (GtkNativeDialog * dialog,
       return;
     }
 
-  filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+  //filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+  GFile * file = gtk_file_chooser_get_file (GTK_FILE_CHOOSER(dialog));
+  filename = g_file_get_path(file);
   g_return_if_fail (filename != NULL);
 
   location = g_file_new_for_path (filename);
@@ -400,7 +425,7 @@ _upload_file_callback (GObject      *object,
 end:
   g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
   gtk_window_present (GTK_WINDOW (dialog));
-  gtk_widget_destroy (upload_dialog);
+  gtk_window_destroy (GTK_WINDOW(upload_dialog));
   g_free (ud);
 }
 
@@ -438,7 +463,7 @@ gtr_upload_file (GtkWidget *upload_dialog,
 
   if (response_id != GTK_RESPONSE_ACCEPT)
     {
-      gtk_widget_destroy (upload_dialog);
+      gtk_window_destroy (GTK_WINDOW(upload_dialog));
       return;
     }
 
@@ -717,7 +742,7 @@ close_all_tabs (GtrWindow * window)
   gtr_notebook_remove_all_pages (nb);
 
   //FIXME: This has to change once we add the close all documents menuitem*/
-  gtk_widget_destroy (GTK_WIDGET (window));
+  gtk_window_destroy (GTK_WINDOW (window));
 }
 
 static void
@@ -769,7 +794,7 @@ save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
   }
 
   gtr_window_remove_tab (window);
-  gtk_widget_destroy (GTK_WIDGET (window));
+  gtk_window_destroy (GTK_WINDOW (window));
 }
 
 static void
@@ -794,7 +819,7 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog
         {
           if (is_closing_all)
             {
-              gtk_widget_destroy (GTK_WIDGET (dlg));
+              gtk_window_destroy (GTK_WINDOW (dlg));
 
               close_all_tabs (window);
 
@@ -822,7 +847,7 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog
     case GTK_RESPONSE_NO:      /* Close without Saving */
       if (is_closing_all)
         {
-          gtk_widget_destroy (GTK_WIDGET (dlg));
+          gtk_window_destroy (GTK_WINDOW (dlg));
 
           close_all_tabs (window);
 
@@ -847,7 +872,7 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog
       break;
     }
 
-  gtk_widget_destroy (GTK_WIDGET (dlg));
+  gtk_window_destroy (GTK_WINDOW (dlg));
 }
 
 void
@@ -948,7 +973,7 @@ close_all_documents (GtrWindow * window, gboolean logout_mode)
 
       if (logout_mode)
         {
-          gtk_widget_destroy (GTK_WIDGET (window));
+          gtk_window_destroy (GTK_WINDOW (window));
         }
     }
 }

@@ -297,7 +297,7 @@ on_profile_dialog_response_cb (GtrProfileDialog     *profile_dialog,
     }
 
   g_object_unref (prof_manager);
-  gtk_window_destroy (GTK_WIDGET (profile_dialog));
+  gtk_window_destroy (GTK_WINDOW (profile_dialog));
 }
 
 static void
@@ -402,7 +402,7 @@ delete_confirm_dialog_cb (GtkWidget *dialog,
         }
     }
 
-  gtk_widget_destroy (dialog);
+  gtk_window_destroy (GTK_WINDOW(dialog));
 }
 
 static void
@@ -633,7 +633,7 @@ dialog_response_handler (GtkDialog * dlg, gint res_id)
       gtr_show_help (GTK_WINDOW (dlg));
       break;
     default:
-      gtk_widget_destroy (GTK_WIDGET (dlg));
+      gtk_window_destroy (GTK_WINDOW (dlg));
     }
 }
 
@@ -645,7 +645,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   GtkBuilder *builder;
   GtkBox *content_area;
   GtkStyleContext *context;
-  gchar *root_objects[] = {
+  const gchar *root_objects[] = {
     "notebook",
     "adjustment1",
     "adjustment2",

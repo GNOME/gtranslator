@@ -142,12 +142,16 @@ fill_encoding_and_charset (GtrLanguagesFetcher *fetcher)
   const gchar *text;
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
 
-  text = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->charset))));
+  //text = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->charset))));
+  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->charset))));
+  text = gtk_entry_buffer_get_text (buffer);
 
   if (text == NULL || *text == '\0' || !gtk_widget_is_sensitive (priv->charset))
     gtk_combo_box_set_active (GTK_COMBO_BOX (priv->charset), 0);
 
-  text = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->encoding))));
+  //text = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->encoding))));
+  buffer = gtk_entry_get_buffer (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->encoding))));
+  text = gtk_entry_buffer_get_text (buffer);
 
   if (text == NULL || *text == '\0' || !gtk_widget_is_sensitive (priv->encoding))
     gtk_combo_box_set_active (GTK_COMBO_BOX (priv->encoding), 0);
@@ -164,12 +168,20 @@ fill_from_language_entry (GtrLanguagesFetcher *fetcher,
   const gchar *code;
   code = gtr_language_get_code (lang);
   if (code != NULL && *code != '\0')
-    gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->language_code))), code);
+    //gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->language_code))), code);
+  {
+    GtkEntryBuffer * buffer = gtk_entry_get_buffer (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->language_code))));
+    gtk_entry_buffer_set_text (buffer, code, -1);
+  }
 
   const gchar *plural_form;
   plural_form = gtr_language_get_plural_form (lang);
   if (plural_form != NULL && *plural_form != '\0')
-    gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))), plural_form);
+    //gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))), plural_form);
+  {
+    GtkEntryBuffer * buffer = gtk_entry_get_buffer (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->plural_forms))));
+    gtk_entry_buffer_set_text (buffer, plural_form, -1);
+  }
 }
 
 static void
@@ -193,7 +205,9 @@ fill_from_language_code_entry (GtrLanguagesFetcher *fetcher,
         gtr_lang_button_set_lang (GTR_LANG_BUTTON (priv->language), name);
     }
 
-  entry_text = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))));
+  //entry_text = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))));
+  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->plural_forms))));
+  entry_text = gtk_entry_buffer_get_text (buffer);
 
   if (*entry_text == '\0')
     {
@@ -202,7 +216,11 @@ fill_from_language_code_entry (GtrLanguagesFetcher *fetcher,
       plural_form = gtr_language_get_plural_form (lang);
 
       if (plural_form != NULL && *plural_form != '\0')
-        gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))), plural_form);
+        //gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))), plural_form);
+      {
+        GtkEntryBuffer * buffer = gtk_entry_get_buffer (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->plural_forms))));
+        gtk_entry_buffer_set_text (buffer, plural_form, -1);
+      }
     }
 }
 
@@ -277,7 +295,9 @@ on_language_code_activate (GtkEntry            *entry,
                            GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  const gchar *text = gtk_entry_get_text (entry);
+  //const gchar *text = gtk_entry_get_text (entry);
+  GtkEntryBuffer *buffer = gtk_entry_get_buffer (entry);
+  const gchar *text = gtk_entry_buffer_get_text (buffer);
 
   fill_boxes (fetcher, text, GTK_TREE_MODEL (priv->code_store),
               fill_from_language_code_entry);
@@ -364,11 +384,11 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
                     "clicked",
                     G_CALLBACK (on_language_activate),
                     fetcher);
-  g_signal_connect (gtk_bin_get_child (GTK_BIN (priv->language_code)),
+  g_signal_connect (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->language_code))),
                     "activate",
                     G_CALLBACK (on_language_code_activate),
                     fetcher);
-  g_signal_connect (gtk_bin_get_child (GTK_BIN (priv->language_code)),
+  g_signal_connect (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->language_code))),
                     "focus-out-event",
                     G_CALLBACK (on_language_code_focus_out_event),
                     fetcher);
@@ -427,7 +447,9 @@ gtr_languages_fetcher_get_language_code (GtrLanguagesFetcher *fetcher)
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
   g_return_val_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher), NULL);
 
-  return gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->language_code))));
+  //return gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->language_code))));
+  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->language_code))));
+  return gtk_entry_buffer_get_text (buffer);
 }
 
 void
@@ -438,7 +460,9 @@ gtr_languages_fetcher_set_language_code (GtrLanguagesFetcher *fetcher,
   g_return_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher));
   g_return_if_fail (code != NULL);
 
-  gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->language_code))), code);
+  //gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->language_code))), code);
+  GtkEntryBuffer * buffer = gtk_entry_get_buffer (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->language_code))));
+  gtk_entry_buffer_set_text (buffer, code, -1);
 }
 
 const gchar *
@@ -447,7 +471,9 @@ gtr_languages_fetcher_get_charset (GtrLanguagesFetcher *fetcher)
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
   g_return_val_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher), NULL);
 
-  return gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->charset))));
+  //return gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->charset))));
+  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->charset))));
+  return gtk_entry_buffer_get_text(buffer);
 }
 
 void
@@ -458,7 +484,9 @@ gtr_languages_fetcher_set_charset (GtrLanguagesFetcher *fetcher,
   g_return_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher));
   g_return_if_fail (charset != NULL);
 
-  gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->charset))), charset);
+  //gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->charset))), charset);
+  GtkEntryBuffer * buffer = gtk_entry_get_buffer (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->charset))));
+  gtk_entry_buffer_set_text (buffer, charset, -1);
 }
 
 const gchar *
@@ -467,7 +495,9 @@ gtr_languages_fetcher_get_encoding (GtrLanguagesFetcher *fetcher)
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
   g_return_val_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher), NULL);
 
-  return gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->encoding))));
+  //return gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->encoding))));
+  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->charset))));
+  return gtk_entry_buffer_get_text(buffer);
 }
 
 void
@@ -478,7 +508,9 @@ gtr_languages_fetcher_set_encoding (GtrLanguagesFetcher *fetcher,
   g_return_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher));
   g_return_if_fail (enc != NULL);
 
-  gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->encoding))), enc);
+  //gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->encoding))), enc);
+  GtkEntryBuffer * buffer = gtk_entry_get_buffer (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->encoding))));
+  gtk_entry_buffer_set_text (buffer, enc, -1);
 }
 
 const gchar *
@@ -487,7 +519,9 @@ gtr_languages_fetcher_get_plural_form (GtrLanguagesFetcher *fetcher)
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
   g_return_val_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher), NULL);
 
-  return gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))));
+  //return gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))));
+  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->charset))));
+  return gtk_entry_buffer_get_text(buffer);
 }
 
 void
@@ -498,5 +532,7 @@ gtr_languages_fetcher_set_plural_form (GtrLanguagesFetcher *fetcher,
   g_return_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher));
   g_return_if_fail (plural_form != NULL);
 
-  gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))), plural_form);
+  //gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))), plural_form);
+  GtkEntryBuffer * buffer = gtk_entry_get_buffer (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->plural_forms))));
+  gtk_entry_buffer_set_text (buffer, plural_form, -1);
 }

@@ -80,7 +80,7 @@ dialog_response_cb (GtkDialog *dialog, guint response, gpointer user_data)
   if (response == GTK_RESPONSE_ACCEPT)
     buffer_end_user_action (dd->text_buffer, dd->panel);
 
-  gtk_window_destroy (GTK_WIDGET (dialog));
+  gtk_window_destroy (GTK_WINDOW (dialog));
   reload_values (dd->panel);
   g_free (dd);
 }
@@ -99,7 +99,7 @@ setup_notes_edition (GtrContextPanel *panel)
   priv = gtr_context_panel_get_instance_private (panel);
 
   dialog = gtk_dialog_new_with_buttons (_("Notes"),
-                                        GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (panel))),
+                                        GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (panel))),
                                         GTK_DIALOG_MODAL|
                                         GTK_DIALOG_USE_HEADER_BAR|
                                         GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -122,7 +122,7 @@ setup_notes_edition (GtrContextPanel *panel)
                                   GTK_POLICY_AUTOMATIC,
                                   GTK_POLICY_AUTOMATIC);
 
-  gtk_container_add (GTK_CONTAINER (scrolled_window),
+  gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (scrolled_window),
                                          text_view);
   gtk_widget_set_margin_start (scrolled_window, 6);
   gtk_widget_set_margin_end (scrolled_window, 6);
@@ -144,7 +144,7 @@ setup_notes_edition (GtrContextPanel *panel)
   dd->text_buffer = text_buffer;
 
   g_signal_connect (dialog, "response", G_CALLBACK (dialog_response_cb), dd);
-  gtk_widget_show_all (dialog);
+  gtk_widget_show (dialog);
 }
 
 static void

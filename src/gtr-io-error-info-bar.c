@@ -39,10 +39,11 @@ static void show_info_bar (GtrTab * tab);
 static void
 set_contents (GtkInfoBar * infobar, GtkWidget * contents)
 {
-  GtkWidget *content_area;
+  /*GtkWidget *content_area;
 
   content_area = gtk_info_bar_get_content_area (infobar);
-  gtk_container_add (GTK_CONTAINER (content_area), contents);
+  gtk_container_add (GTK_CONTAINER (content_area), contents);*/
+  gtk_info_bar_add_child (infobar, contents);
 }
 
 /*
@@ -86,7 +87,7 @@ set_info_bar_text_and_icon (GtkInfoBar * infobar,
   gtk_widget_set_vexpand (primary_label, TRUE);
   gtk_box_append (GTK_BOX (vbox), primary_label);
   gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
-  gtk_label_set_line_wrap (GTK_LABEL (primary_label), FALSE);
+  gtk_label_set_wrap (GTK_LABEL (primary_label), FALSE);
   gtk_label_set_xalign (GTK_LABEL (primary_label), 0.0);
   gtk_label_set_yalign (GTK_LABEL (primary_label), 0.5);
 
@@ -109,7 +110,7 @@ set_info_bar_text_and_icon (GtkInfoBar * infobar,
       gtk_widget_set_can_focus (secondary_label, TRUE);
 
       gtk_label_set_use_markup (GTK_LABEL (secondary_label), TRUE);
-      gtk_label_set_line_wrap (GTK_LABEL (secondary_label), TRUE);
+      gtk_label_set_wrap (GTK_LABEL (secondary_label), TRUE);
       gtk_label_set_selectable (GTK_LABEL (secondary_label), TRUE);
       gtk_label_set_xalign (GTK_LABEL (secondary_label), 0.0);
       gtk_label_set_yalign (GTK_LABEL (secondary_label), 0.5);

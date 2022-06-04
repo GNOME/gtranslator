@@ -47,7 +47,11 @@ gtr_file_chooser_new (GtkWindow * parent,
                                         _("_Open"), _("_Cancel"));
 
   if (dir)
-    gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (dialog), dir);
+    //gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (dialog), dir);
+  {
+    GFile * file = g_file_new_for_uri (dir);
+    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(dialog), file, NULL);
+  }
 
   if (mode != FILESEL_SAVE)
     {

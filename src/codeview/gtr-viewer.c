@@ -53,7 +53,7 @@ dialog_response_handler (GtkDialog *dlg, gint res_id)
   switch (res_id)
     {
     default:
-      gtk_window_destroy (GTK_WIDGET (dlg));
+      gtk_window_destroy (GTK_WINDOW (dlg));
     }
 }
 
@@ -63,7 +63,7 @@ gtr_viewer_init (GtrViewer *dlg)
   GtkBox *content_area;
   GtkWidget *sw;
   GtkBuilder *builder;
-  gchar *root_objects[] = {
+  const gchar *root_objects[] = {
     "main_box",
     NULL
   };
@@ -105,7 +105,8 @@ gtr_viewer_init (GtrViewer *dlg)
   priv->view = gtk_source_view_new ();
   gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->view), FALSE);
   gtk_widget_show (priv->view);
-  gtk_container_add (GTK_CONTAINER (sw), priv->view);
+  //gtk_container_add (GTK_CONTAINER (sw), priv->view);
+  gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW(sw), priv->view);
 
   gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW
                                               (priv->view), TRUE);
@@ -177,9 +178,9 @@ gtk_source_buffer_load_file (GtkSourceBuffer *source_buffer,
       return FALSE;
     }
 
-  gtk_source_buffer_begin_irreversible_action (source_buffer);
+  gtk_text_buffer_begin_irreversible_action (GTK_TEXT_BUFFER(source_buffer));
   gtk_text_buffer_set_text (GTK_TEXT_BUFFER (source_buffer), buffer, -1);
-  gtk_source_buffer_end_irreversible_action (source_buffer);
+  gtk_text_buffer_end_irreversible_action (GTK_TEXT_BUFFER(source_buffer));
   gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (source_buffer), FALSE);
 
   /* move cursor to the beginning */

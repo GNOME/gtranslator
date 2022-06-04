@@ -105,12 +105,13 @@ src_dir = join_paths(meson.source_root(), 'src')
 
 glib_dep = dependency('glib-2.0', version: '>= 2.71.3')
 gtk_dep = dependency('gtk4', version: '>= 4.6.0')
-libhandy_dep = dependency('libhandy-1', version: '>= 1.5.0')
+# libhandy_dep = dependency('libhandy-1', version: '>= 1.5.0')
+libadwaita_dep = dependency('libadwaita-1', version: '>= 1.1.0')
 
 gtr_deps = [
   glib_dep,
   gtk_dep,
-  libhandy_dep,
+  libadwaita_dep,
   dependency('libgda-6.0'),
   dependency('atk'),
   dependency('gio-2.0', version: '>= 2.36.0'),

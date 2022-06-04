@@ -244,7 +244,7 @@ popup_menu_remove_from_memory (GtkMenuItem *menuitem,
   showed_message_cb (priv->tab, priv->msg, tm_ui);
 }*/
 
-static GtkWidget *
+/*static GtkWidget *
 create_tree_popup_menu (GtrTranslationMemoryUi *self)
 {
   GtkWidget *menu;
@@ -253,20 +253,20 @@ create_tree_popup_menu (GtrTranslationMemoryUi *self)
   menu = gtk_menu_new ();
 
   item = gtk_menu_item_new_with_mnemonic (_("_Use this translation"));
-  /*g_signal_connect (item, "activate",
-                    G_CALLBACK (popup_menu_translation_activate), self);*/
+  //g_signal_connect (item, "activate",
+                    //G_CALLBACK (popup_menu_translation_activate), self);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
   item = gtk_menu_item_new_with_mnemonic (_("_Remove"));
-  /*g_signal_connect (item, "activate",
-                    G_CALLBACK (popup_menu_remove_from_memory), self);*/
+  //g_signal_connect (item, "activate",
+                    //G_CALLBACK (popup_menu_remove_from_memory), self);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
   gtk_widget_set_sensitive (item, TRUE);
 
   gtk_widget_show_all (menu);
 
   return menu;
-}
+}*/
 
 /*static void
 tree_popup_menu_detach (GtrTranslationMemoryUi *self, GtkMenu * menu)
@@ -341,12 +341,12 @@ tree_view_button_press_event (GtkTreeView *tree,
   return TRUE;
 }*/
 
-static gboolean
+/*static gboolean
 tree_view_popup_menu (GtkTreeView *tree, GtrTranslationMemoryUi *tm_ui)
 {
   gtr_translation_memory_ui_show_menu (tm_ui, NULL);
   return TRUE;
-}
+}*/
 
 static void
 gtr_translation_memory_ui_init (GtrTranslationMemoryUi * tm_ui)
@@ -404,8 +404,8 @@ gtr_translation_memory_ui_init (GtrTranslationMemoryUi * tm_ui)
   /*g_signal_connect (priv->tree_view, "button-press-event",
                     G_CALLBACK (tree_view_button_press_event), tm_ui);*/
 
-  g_signal_connect (priv->tree_view, "popup-menu",
-                    G_CALLBACK (tree_view_popup_menu), tm_ui);
+  /*g_signal_connect (priv->tree_view, "popup-menu",
+                    G_CALLBACK (tree_view_popup_menu), tm_ui);*/
 
   g_signal_connect (priv->tree_view, "row-activated",
                     G_CALLBACK (tree_view_row_activated), tm_ui);
@@ -462,7 +462,7 @@ gtr_translation_memory_ui_new (GtkWidget *tab,
                     "showed-message", G_CALLBACK (showed_message_cb), tm_ui);
 
   /* Scrolledwindow needs to be realized to add a widget */
-  gtk_container_add (GTK_CONTAINER (tm_ui), priv->tree_view);
+  gtk_frame_set_child (GTK_FRAME (tm_ui), priv->tree_view);
 
   return GTK_WIDGET (tm_ui);
 }
