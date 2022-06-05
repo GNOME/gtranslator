@@ -24,6 +24,7 @@
 #include "gtr-projects.h"
 #include "gtr-window.h"
 #include "gtr-utils.h"
+#include "atk/atk.h"
 
 typedef struct
 {

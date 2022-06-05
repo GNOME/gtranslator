@@ -123,13 +123,13 @@ save_accels (void)
     }
 }
 
-static gboolean
+/*static gboolean
 on_window_delete_event_cb (GtrWindow * window,
                            GdkEvent * event, GtrApplication * app)
 {
   gtr_file_quit (window);
   return TRUE;
-}
+}*/
 
 static void
 set_active_window (GtrApplication *app,
@@ -139,18 +139,18 @@ set_active_window (GtrApplication *app,
   priv->active_window = window;
 }
 
-static gboolean
+/*static gboolean
 window_focus_in_event (GtrWindow      *window,
 		       GdkFocusEvent  *event,
 		       GtrApplication *app)
 {
-  /* updates active_view and active_child when a new toplevel receives focus */
+  // updates active_view and active_child when a new toplevel receives focus //
   g_return_val_if_fail (GTR_IS_WINDOW (window), FALSE);
 
   set_active_window (app, window);
 
   return FALSE;
-}
+}*/
 
 static void
 on_window_destroy_cb (GtrWindow *window, GtrApplication *app)
@@ -835,11 +835,12 @@ gtr_application_create_window (GtrApplication *app)
   else;
     //gtk_window_unstick (GTK_WINDOW (window));
 
+  /* both of these signals are not valid in gtk4
   g_signal_connect (window, "focus_in_event",
                     G_CALLBACK (window_focus_in_event), app);
 
   g_signal_connect (window, "delete-event",
-                    G_CALLBACK (on_window_delete_event_cb), app);
+                    G_CALLBACK (on_window_delete_event_cb), app);*/
 
   g_signal_connect (window, "destroy",
                     G_CALLBACK (on_window_destroy_cb), app);
@@ -855,7 +856,7 @@ gtr_application_create_window (GtrApplication *app)
  * @original: TRUE if you want original TextViews.
  * @translated: TRUE if you want translated TextViews.
  *
- * Returns all the views currently present in #GtranslationApplication.
+ * Returns all the views currently present in #GtranslationApplication1
  *
  * Return value: (transfer container) (element-type Gtranslator.View):
  * a newly allocated list of #GtranslationApplication objects

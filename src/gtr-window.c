@@ -382,7 +382,7 @@ gtr_window_init (GtrWindow *window)
    * With this widgets we have different views in the same window
    */
 
-  // poeditor
+  // as GtkNotebook has been removed
   /*priv->notebook = GTK_WIDGET (gtr_notebook_new ());
   gtk_widget_show (priv->notebook);
   g_signal_connect (priv->notebook, "switch-page",
@@ -406,18 +406,18 @@ gtr_window_init (GtrWindow *window)
   gtk_stack_add_named (GTK_STACK (priv->header_stack),
                        gtr_projects_get_header (GTR_PROJECTS (priv->projects)),
                        "projects");
-
+  /*
   // DL team selection
   priv->dlteams = GTK_WIDGET (gtr_dl_teams_new (window));
   gtk_stack_add_named (GTK_STACK (priv->stack), priv->dlteams, "dlteams");
   gtk_stack_add_named (GTK_STACK (priv->header_stack),
                        gtr_dl_teams_get_header (GTR_DL_TEAMS (priv->dlteams)),
-                       "dlteams");
+                       "dlteams");*/
 
   gtk_widget_show (priv->stack);
 
   // translation memory
-  priv->translation_memory = GTR_TRANSLATION_MEMORY (gtr_gda_new());
+  /*priv->translation_memory = GTR_TRANSLATION_MEMORY (gtr_gda_new());
   priv->tm_settings = g_settings_new ("org.gnome.gtranslator.plugins.translation-memory");
   gtr_translation_memory_set_max_omits (priv->translation_memory,
                                         g_settings_get_int (priv->tm_settings,
@@ -425,7 +425,7 @@ gtr_window_init (GtrWindow *window)
   gtr_translation_memory_set_max_delta (priv->translation_memory,
                                         g_settings_get_int (priv->tm_settings,
                                                             "max-length-diff"));
-  gtr_translation_memory_set_max_items (priv->translation_memory, 10);
+  gtr_translation_memory_set_max_items (priv->translation_memory, 10);*/
 
   gtr_window_show_projects (window);
 }
@@ -493,7 +493,7 @@ gtr_window_class_init (GtrWindowClass *klass)
   object_class->finalize = gtr_window_finalize;
   object_class->dispose = gtr_window_dispose;
 
-  //widget_class->configure_event = gtr_window_configure_event;
+  //widget_class->configure_event = gtr_window_configure_event; not used in gtk4
 
   gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass),
                                                "/org/gnome/translator/gtr-window.ui");
@@ -865,6 +865,7 @@ gtr_window_show_projects (GtrWindow *window)
 
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "projects");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "projects");
+  gtk_window_set_title (window,_("Select a Po file"));
 
   //gtr_notebook_remove_all_pages (GTR_NOTEBOOK (priv->notebook));
 }
