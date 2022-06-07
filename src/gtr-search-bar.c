@@ -30,7 +30,7 @@
 
 struct _GtrSearchBar
 {
-  GtkFrame                  parent_instance;
+  AdwBin                  parent_instance;
 
   GBindingGroup           *search_bindings;
 
@@ -74,7 +74,7 @@ enum {
   N_SIGNALS
 };
 
-G_DEFINE_FINAL_TYPE (GtrSearchBar, gtr_search_bar, GTK_TYPE_FRAME)
+G_DEFINE_FINAL_TYPE (GtrSearchBar, gtr_search_bar, ADW_TYPE_BIN)
 
 static GParamSpec *properties [N_PROPS];
 static guint signals [N_SIGNALS];

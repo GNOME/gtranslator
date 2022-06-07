@@ -20,12 +20,13 @@
 
 #include <gtk/gtk.h>
 //#include "libhandy-1/handy.h"
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define GTR_TYPE_DL_TEAMS (gtr_dl_teams_get_type())
 
-G_DECLARE_FINAL_TYPE (GtrDlTeams, gtr_dl_teams, GTR, DL_TEAMS, GtkFrame)
+G_DECLARE_FINAL_TYPE (GtrDlTeams, gtr_dl_teams, GTR, DL_TEAMS, AdwBin)
 
 GtrDlTeams* gtr_dl_teams_new         ();
 GtkWidget*  gtr_dl_teams_get_header  (GtrDlTeams *self);

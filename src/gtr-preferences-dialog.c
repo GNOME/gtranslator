@@ -644,7 +644,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   GtkWidget *profiles_scrolled_window;
   GtkBuilder *builder;
   GtkBox *content_area;
-  GtkStyleContext *context;
+  //GtkStyleContext *context;
   const gchar *root_objects[] = {
     "notebook",
     "adjustment1",
@@ -665,23 +665,24 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
                           _("Help"), GTK_RESPONSE_HELP, NULL);
 
   gtk_window_set_title (GTK_WINDOW (dlg), _("Translation Editor Preferences"));
-  gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
-  gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
+  /*gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
+  gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);*/
 
   content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
 
-  gtk_widget_set_margin_start (GTK_WIDGET (dlg), 6);
-  gtk_widget_set_margin_end (GTK_WIDGET (dlg), 6);
-  gtk_widget_set_margin_top (GTK_WIDGET (dlg), 6);
-  gtk_widget_set_margin_bottom (GTK_WIDGET (dlg), 6);
   gtk_box_set_spacing (content_area, 6);
 
   g_signal_connect (dlg,
                     "response", G_CALLBACK (dialog_response_handler), NULL);
 
   builder = gtk_builder_new ();
+  GError *error = NULL;
   gtk_builder_add_objects_from_resource (builder, "/org/gnome/translator/gtr-preferences-dialog.ui",
-                                         root_objects, NULL);
+                                         root_objects, &error);
+  if (error)
+{
+  g_printf("%s \n",error->message);
+}
   priv->notebook = GTK_WIDGET (gtk_builder_get_object (builder, "notebook"));
   g_object_ref (priv->notebook);
   priv->warn_if_contains_fuzzy_checkbutton = GTK_WIDGET (gtk_builder_get_object (builder, "warn_if_fuzzy_checkbutton"));
@@ -705,17 +706,18 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
 
   gtk_box_append (content_area, priv->notebook);
 
-  gtk_widget_set_margin_start (priv->notebook, 6);
+  /*gtk_widget_set_margin_start (priv->notebook, 6);
   gtk_widget_set_margin_end (priv->notebook, 6);
   gtk_widget_set_margin_top (priv->notebook, 6);
-  gtk_widget_set_margin_bottom (priv->notebook, 6);
+  gtk_widget_set_margin_bottom (priv->notebook, 6);*/
 
-  context = gtk_widget_get_style_context (profiles_scrolled_window);
-  //gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+  //context = gtk_widget_get_style_context (GTK_WIDGET(profiles_scrolled_window));
+  //gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM); not in gtk4
 
-  context = gtk_widget_get_style_context (profiles_toolbar);
-  //gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
+  //context = gtk_widget_get_style_context (GTK_WIDGET(profiles_toolbar));
+  //gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP); not in gtk4
 
+  g_printf("init ran but after mapping\n");
   setup_files_pages (dlg);
   setup_editor_pages (dlg);
   setup_profile_pages (dlg);
@@ -739,6 +741,8 @@ gtr_preferences_dialog_dispose (GObject * object)
   g_clear_object (&priv->editor_settings);
   g_clear_object (&priv->files_settings);
 
+  /*g_free(&dlg);*/
+
   G_OBJECT_CLASS (gtr_preferences_dialog_parent_class)->dispose (object);
 }
 
@@ -748,6 +752,13 @@ gtr_preferences_dialog_class_init (GtrPreferencesDialogClass * klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->dispose = gtr_preferences_dialog_dispose;
+  g_printf("class_init ran\n");
+}
+
+static void gtr_destroy_preferences_dialog (GtkWidget *dlg , GtkWidget **dlg_ptr)
+{
+  gtk_window_destroy(GTK_WINDOW(dlg));
+  *dlg_ptr = NULL;
 }
 
 void
@@ -762,14 +773,15 @@ gtr_show_preferences_dialog (GtrWindow * window)
       dlg = GTK_WIDGET (g_object_new (GTR_TYPE_PREFERENCES_DIALOG,
                                       "use-header-bar", TRUE, NULL));
       g_signal_connect (dlg,
-                        "destroy", G_CALLBACK (gtk_window_destroy), NULL);
-      g_free(dlg);
+                        "destroy", G_CALLBACK (gtr_destroy_preferences_dialog), &dlg);
+      gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
       gtk_widget_show (dlg);
     }
 
-  gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
   //gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_DIALOG);
   gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
   gtk_window_present (GTK_WINDOW (dlg));
+
+  /*g_free(dlg);*/
 }

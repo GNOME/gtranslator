@@ -63,10 +63,10 @@ typedef struct
 
 struct _GtrDlTeams
 {
-  GtkFrame parent_instance;
+  AdwBin parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrDlTeams, gtr_dl_teams, GTK_TYPE_FRAME)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrDlTeams, gtr_dl_teams, ADW_TYPE_BIN)
 
 static void team_add_cb (GtkButton *btn, GtrDlTeams *self);
 static void gtr_dl_teams_save_combo_selected (GtkWidget *widget, GtrDlTeams *self);

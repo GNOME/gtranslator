@@ -406,13 +406,13 @@ gtr_window_init (GtrWindow *window)
   gtk_stack_add_named (GTK_STACK (priv->header_stack),
                        gtr_projects_get_header (GTR_PROJECTS (priv->projects)),
                        "projects");
-  /*
+  
   // DL team selection
   priv->dlteams = GTK_WIDGET (gtr_dl_teams_new (window));
   gtk_stack_add_named (GTK_STACK (priv->stack), priv->dlteams, "dlteams");
   gtk_stack_add_named (GTK_STACK (priv->header_stack),
                        gtr_dl_teams_get_header (GTR_DL_TEAMS (priv->dlteams)),
-                       "dlteams");*/
+                       "dlteams");
 
   gtk_widget_show (priv->stack);
 
@@ -886,6 +886,7 @@ gtr_window_show_dlteams (GtrWindow *window)
 
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "dlteams");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "dlteams");
+  gtk_window_set_title (window,_("Load from Damned Lies"));
 }
 
 /*void
