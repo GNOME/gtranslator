@@ -40,16 +40,9 @@ enum
   LAST_SIGNAL
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrFilterSelection, gtr_filter_selection, GTK_TYPE_BUTTON)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrFilterSelection, gtr_filter_selection, GTK_TYPE_MENU_BUTTON)
 
 static guint signals[LAST_SIGNAL] = { 0 };
-
-static void
-handle_filter_selection_btn_clicked (GtkButton* btn, gpointer user_data)
-{
-  GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (GTR_FILTER_SELECTION(btn));
-  gtk_popover_popup(GTK_POPOVER(priv->popup));
-}
 
 static void
 change_option (GtkListBox         *box,
@@ -58,7 +51,7 @@ change_option (GtkListBox         *box,
 {
   GSList *o = NULL;
   GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (self);
-  GtkWidget *label = gtk_list_box_row_get_child (row);
+  GtkWidget *label = gtk_bin_get_child (GTK_BIN (row));
   const char *label_text = gtk_label_get_text (GTK_LABEL (label));
 
   for (o = priv->options; o != NULL; o = g_slist_next (o))
@@ -79,27 +72,19 @@ filter_option (GtkEditable        *entry,
                GtrFilterSelection *self)
 {
   GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (self);
-  //const char *text = gtk_entry_get_text (GTK_ENTRY (entry));
-  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY (entry));
-  const char* text = gtk_entry_buffer_get_text (buffer);
+  const char *text = gtk_entry_get_text (GTK_ENTRY (entry));
   g_autofree char *uptext = g_ascii_strup (text, -1);
   const GSList *o;
-  GtkWidget *children;
-  GtkWidget *row;
+  GList *children;
 
-  int i = 0 ;
-  //g_printf("%d and %d\n",i,g_slist_length(priv->options) );
-  while (row = gtk_list_box_get_row_at_index (GTK_LIST_BOX(priv->option_list),i))
-  {
-    gtk_list_box_remove(GTK_LIST_BOX(priv->option_list), row);
-    i++;
-  }
-  //g_printf("%d and %d\n",i,g_slist_length(priv->options) );
-  if(row == NULL)
-    //g_printf("all removed\n");
+  children = gtk_container_get_children (GTK_CONTAINER (priv->option_list));
+  while (children)
+    {
+      GtkWidget *w = GTK_WIDGET (children->data);
+      gtk_list_box_remove (GTK_LIST_BOX (priv->option_list), w);
+      children = g_list_next (children);
+    }
 
-  gtk_widget_show(priv->option_list);
-  //g_printf("UPTEXT - %s\n",uptext);
   for (o = priv->options; o != NULL; o = g_slist_next (o))
     {
       GtkWidget *child;
@@ -109,14 +94,11 @@ filter_option (GtkEditable        *entry,
       if (g_strrstr (upopt, uptext) == NULL)
         continue;
 
-      //g_printf("%s\n",opt->desc);
-
       child = gtk_label_new (opt->desc);
       gtk_label_set_xalign (GTK_LABEL (child), 0.0);
-      //gtk_list_box_append (GTK_LIST_BOX (priv->option_list), child);
+      gtk_list_box_append (GTK_LIST_BOX (priv->option_list), child);
     }
-  //g_printf("\n\n\n");
-  gtk_widget_show (priv->option_list);
+  gtk_widget_show_all (priv->option_list);
 }
 
 static void
@@ -125,7 +107,6 @@ gtr_filter_selection_finalize (GObject *object)
   GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (GTR_FILTER_SELECTION (object));
   if (priv->options)
     g_slist_free_full (priv->options, (GDestroyNotify)gtr_filter_option_free);
-  //g_printf("finalized\n");
   G_OBJECT_CLASS (gtr_filter_selection_parent_class)->finalize (object);
 }
 
@@ -152,7 +133,6 @@ gtr_filter_selection_class_init (GtrFilterSelectionClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrFilterSelection, popup);
 }
 
-
 static void
 gtr_filter_selection_init (GtrFilterSelection *self)
 {
@@ -160,14 +140,7 @@ gtr_filter_selection_init (GtrFilterSelection *self)
   priv->option = NULL;
   priv->options = NULL;
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  gtk_widget_set_parent (priv->popup, GTK_WIDGET(self));
-  g_signal_connect (self,
-                    "clicked",
-                    G_CALLBACK(handle_filter_selection_btn_clicked),
-                    NULL);
-
-  gtk_widget_show (priv->option_list);
+  gtk_widget_show_all (priv->option_list);
 
   g_signal_connect (priv->option_list,
                     "row-activated",
@@ -227,27 +200,19 @@ gtr_filter_selection_set_options_full (GtrFilterSelection *self,
 {
   GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (self);
   const GSList *o;
+  GList *children;
 
   if (priv->options)
     g_slist_free_full (priv->options, (GDestroyNotify)gtr_filter_option_free);
   priv->options = options;
 
-  GtkWidget *children;
-  GtkWidget *row;
-  /* children = gtk_container_get_children (GTK_CONTAINER (priv->option_list));
+  children = gtk_container_get_children (GTK_CONTAINER (priv->option_list));
   while (children)
     {
       GtkWidget *w = GTK_WIDGET (children->data);
       gtk_list_box_remove (GTK_LIST_BOX (priv->option_list), w);
       children = g_list_next (children);
-    } */
-
-  int i = 0 ;
-  while (row = gtk_list_box_get_row_at_index (GTK_LIST_BOX(priv->option_list),i))
-  {
-    gtk_list_box_remove(GTK_LIST_BOX(priv->option_list), row);
-    i++;
-  }
+    }
 
   for (o = priv->options; o != NULL; o = g_slist_next (o))
     {
@@ -257,7 +222,7 @@ gtr_filter_selection_set_options_full (GtrFilterSelection *self,
       gtk_list_box_append (GTK_LIST_BOX (priv->option_list), child);
     }
 
-  gtk_widget_show (priv->option_list);
+  gtk_widget_show_all (priv->option_list);
 }
 
 void

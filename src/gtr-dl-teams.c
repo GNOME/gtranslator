@@ -843,7 +843,6 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, instructions);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, open_button);
-
 }
 
 static void
@@ -887,12 +886,10 @@ gtr_dl_teams_init (GtrDlTeams *self)
   priv->domains_combobox = gtk_combo_box_text_new ();
   gtk_widget_set_name (priv->domains_combobox, "combo_domains");
   gtk_box_append (GTK_BOX (priv->select_box), priv->domains_combobox);
-  gtk_widget_hide (priv->domains_combobox);
 
   priv->branches_combobox = gtk_combo_box_text_new ();
   gtk_widget_set_name (priv->branches_combobox, "combo_branches");
   gtk_box_append (GTK_BOX (priv->select_box), priv->branches_combobox);
-  gtk_widget_hide (priv->branches_combobox);
 
   /* Load teams and modules automatically */
   gtr_dl_teams_load_json (self);

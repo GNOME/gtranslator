@@ -66,6 +66,7 @@ gtr_lang_button_init (GtrLangButton *self)
 
   if (langs)
     g_slist_free_full (langs, g_free);
+  g_printf("ran init of lang button\n");
 }
 
 GtrLangButton*

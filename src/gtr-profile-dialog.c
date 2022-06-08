@@ -176,8 +176,7 @@ gtr_profile_dialog_new (GtkWidget  *parent,
 {
   GtrProfileDialog *dlg;
 
-  dlg = g_object_new (GTR_TYPE_PROFILE_DIALOG, NULL);
-  g_printf("object creation successful\n");
+  dlg = g_object_new (GTR_TYPE_PROFILE_DIALOG,"use-header-bar",TRUE, NULL);
 
   if (profile != NULL)
     {

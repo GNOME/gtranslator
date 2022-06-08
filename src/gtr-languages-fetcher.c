@@ -347,6 +347,7 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
 {
   GtkWidget *content;
   GtkBuilder *builder;
+  GError *error = NULL;
   gchar *root_objects[] = {
     "main_box",
     "code_store",
@@ -361,7 +362,11 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
 
   builder = gtk_builder_new ();
   gtk_builder_add_objects_from_resource (builder, "/org/gnome/translator/gtr-languages-fetcher.ui",
-                                         root_objects, NULL);
+                                         root_objects, &error);
+  if (error)
+  {
+    g_printf("%s \n", error->message);
+  }
 
   content = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
   g_object_ref (content);
@@ -388,10 +393,10 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
                     "activate",
                     G_CALLBACK (on_language_code_activate),
                     fetcher);
-  g_signal_connect (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->language_code))),
+  /*g_signal_connect (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->language_code))),
                     "focus-out-event",
                     G_CALLBACK (on_language_code_focus_out_event),
-                    fetcher);
+                    fetcher);*/
 
   /* To emit the changed signal */
   g_signal_connect (priv->language, "changed",
