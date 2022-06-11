@@ -681,7 +681,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
                                          root_objects, &error);
   if (error)
 {
-  g_printf("%s \n",error->message);
+  g_debug("%s \n",error->message);
 }
   priv->notebook = GTK_WIDGET (gtk_builder_get_object (builder, "notebook"));
   g_object_ref (priv->notebook);
@@ -717,7 +717,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   //context = gtk_widget_get_style_context (GTK_WIDGET(profiles_toolbar));
   //gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP); not in gtk4
 
-  g_printf("init ran but after mapping\n");
+  g_debug("init ran but after mapping\n");
   setup_files_pages (dlg);
   setup_editor_pages (dlg);
   setup_profile_pages (dlg);
@@ -752,7 +752,7 @@ gtr_preferences_dialog_class_init (GtrPreferencesDialogClass * klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->dispose = gtr_preferences_dialog_dispose;
-  g_printf("class_init ran\n");
+  g_debug("class_init ran\n");
 }
 
 static void gtr_destroy_preferences_dialog (GtkWidget *dlg , GtkWidget **dlg_ptr)

@@ -160,6 +160,7 @@ on_visible_whitespace_changed (GSettings * settings,
   g_list_free (views);
 }
 
+// TODO: enable/disable the spellcheck when we've a replacement for gspell
 static void
 on_spellcheck_changed (GSettings * settings,
                        const gchar * key, GtrSettings * gs)

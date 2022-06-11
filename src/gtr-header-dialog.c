@@ -201,14 +201,13 @@ language_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
   // language = gtk_entry_get_text (GTK_ENTRY (priv->language));
-  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
-  language = gtk_entry_buffer_get_text (buffer);
+  language = gtk_entry_buffer_get_text (gtk_entry_get_buffer (GTK_ENTRY (priv->language)));
+
   // lg_email = gtk_entry_get_text (GTK_ENTRY (priv->lg_email));
-  buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
-  lg_email = gtk_entry_buffer_get_text (buffer);
+  lg_email = gtk_entry_buffer_get_text (gtk_entry_get_buffer (GTK_ENTRY (priv->lg_email)));
+
   // lang_code = gtk_entry_get_text (GTK_ENTRY (priv->lang_code));
-  buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
-  lang_code = gtk_entry_buffer_get_text (buffer);
+  lang_code = gtk_entry_buffer_get_text (gtk_entry_get_buffer (GTK_ENTRY (priv->lang_code)));
 
   if (language && lg_email)
     {

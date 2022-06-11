@@ -90,7 +90,7 @@ gtr_profile_dialog_init (GtrProfileDialog *dlg)
                                          root_objects, &error);
   if (error)
   {
-    g_printf("%s \n", error->message);
+    g_debug("%s \n", error->message);
   }
   priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
   g_object_ref (priv->main_box);

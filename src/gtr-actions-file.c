@@ -777,7 +777,10 @@ save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
       _gtr_window_close_tab (window, tab);
     }*/
 
+  if(unsaved_documents == NULL)
+    return;
   gtr_po_save_file(unsaved_documents->data,&error);
+
   if(error)
   {
     GtkWidget *dialog;

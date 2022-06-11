@@ -365,7 +365,7 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
                                          root_objects, &error);
   if (error)
   {
-    g_printf("%s \n", error->message);
+    g_debug("%s \n", error->message);
   }
 
   content = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));

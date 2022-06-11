@@ -52,14 +52,16 @@ native_response_cb (GtkNativeDialog *dialog, guint response, gpointer user_data)
   if (response == GTK_RESPONSE_ACCEPT)
     {
       g_autofree char *filename = NULL;
+      GtkEntryBuffer *entry_buffer;
+      g_autoptr (GFile) file ;
       GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
 
       //filename = gtk_file_chooser_get_filename (chooser);
-      GFile * file = gtk_file_chooser_get_file (chooser);
+      file = gtk_file_chooser_get_file (chooser);
       filename = g_file_get_path(file);
       //gtk_entry_set_text (GTK_ENTRY (priv->directory_entry),
       //                    filename);
-      GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->directory_entry));
+      entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->directory_entry));
       gtk_entry_buffer_set_text (entry_buffer, filename, -1);
       g_settings_set_string (priv->tm_settings,
                              "po-directory",

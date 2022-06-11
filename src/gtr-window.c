@@ -191,7 +191,7 @@ set_window_title (GtrWindow * window, gboolean with_path)
   GtrPoState state;
   GtrTab *active_tab;
   GFile *file;
-  gchar *title;
+  g_autofree gchar *title;
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtkHeaderBar *header;
 

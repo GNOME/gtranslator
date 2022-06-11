@@ -88,18 +88,18 @@ filter_option (GtkEditable        *entry,
   GtkWidget *row;
 
   int i = 0 ;
-  //g_printf("%d and %d\n",i,g_slist_length(priv->options) );
+  //g_debug("%d and %d\n",i,g_slist_length(priv->options) );
   while (row = gtk_list_box_get_row_at_index (GTK_LIST_BOX(priv->option_list),i))
   {
     gtk_list_box_remove(GTK_LIST_BOX(priv->option_list), row);
     i++;
   }
-  //g_printf("%d and %d\n",i,g_slist_length(priv->options) );
+  //g_debug("%d and %d\n",i,g_slist_length(priv->options) );
   if(row == NULL)
-    //g_printf("all removed\n");
+    //g_debug("all removed\n");
 
   gtk_widget_show(priv->option_list);
-  //g_printf("UPTEXT - %s\n",uptext);
+  //g_debug("UPTEXT - %s\n",uptext);
   for (o = priv->options; o != NULL; o = g_slist_next (o))
     {
       GtkWidget *child;
@@ -109,13 +109,13 @@ filter_option (GtkEditable        *entry,
       if (g_strrstr (upopt, uptext) == NULL)
         continue;
 
-      //g_printf("%s\n",opt->desc);
+      //g_debug("%s\n",opt->desc);
 
       child = gtk_label_new (opt->desc);
       gtk_label_set_xalign (GTK_LABEL (child), 0.0);
       //gtk_list_box_append (GTK_LIST_BOX (priv->option_list), child);
     }
-  //g_printf("\n\n\n");
+  //g_debug("\n\n\n");
   gtk_widget_show (priv->option_list);
 }
 
@@ -125,7 +125,7 @@ gtr_filter_selection_finalize (GObject *object)
   GtrFilterSelectionPrivate *priv = gtr_filter_selection_get_instance_private (GTR_FILTER_SELECTION (object));
   if (priv->options)
     g_slist_free_full (priv->options, (GDestroyNotify)gtr_filter_option_free);
-  //g_printf("finalized\n");
+  //g_debug("finalized\n");
   G_OBJECT_CLASS (gtr_filter_selection_parent_class)->finalize (object);
 }
 

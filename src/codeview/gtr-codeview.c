@@ -587,7 +587,8 @@ gtr_code_view_new (GtrWindow *window)
   /*hand_cursor = gdk_cursor_new_for_display (display, GDK_HAND2);
   regular_cursor = gdk_cursor_new_for_display (display, GDK_XTERM);*/
 
-  //g_signal_connect (notebook, "page-added", G_CALLBACK (page_added_cb), self);
+ // CLEANUP: Replace or remove this commented code
+ //g_signal_connect (notebook, "page-added", G_CALLBACK (page_added_cb), self);
 
   /*
    * If we already have tabs opened we have to add them
