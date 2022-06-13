@@ -34,30 +34,6 @@
     ],
     "modules" : [
         {
-            "name" : "gspell",
-            "config-opts" : [
-                "--disable-gtk-doc",
-                "--disable-gtk-doc-html"
-            ],
-            "cleanup" : [
-                "/bin",
-                "/include",
-                "/lib/pkgconfig",
-                "*.la",
-                "/share/gir-1.0",
-                "/share/gtk-doc",
-                "/share/vala"
-            ],
-            "sources" : [
-                {
-                    "type" : "git",
-                    "url" : "https://gitlab.gnome.org/GNOME/gspell.git",
-                    "tag" : "1.9.1",
-                    "commit" : "5300d93dae00998801ef1be48da71dac4e2ebd1b"
-                }
-            ]
-        },
-        {
             "name" : "libgda",
             "buildsystem" : "meson",
             "config-opts" : [
