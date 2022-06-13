@@ -155,18 +155,18 @@ gtr_po_parse_files_from_dialog (GtkNativeDialog * dialog, GtrWindow * window)
     }*/
 
   po_files_model = gtk_file_chooser_get_files (GTK_FILE_CHOOSER (dialog));
-  guint i = 0;
+  g_autofree guint i = 0;
   while (i < g_list_model_get_n_items(po_files_model)) {
-    GFile *file = g_list_model_get_item(po_files_model, i);
+    file = g_list_model_get_item(po_files_model, i);
     locations = g_slist_prepend (locations, file);
+    i++;
   }
-  g_free(i);
 
   /*
    * We store latest directory
    */
-  file = g_file_new_for_uri (po_files->data);
-  g_slist_free_full (po_files, g_free);
+  //file = g_file_new_for_uri (po_files->data);
+  //g_slist_free_full (po_files, g_free);
 
   parent = g_file_get_parent (file);
   g_object_unref (file);
@@ -181,6 +181,7 @@ gtr_po_parse_files_from_dialog (GtkNativeDialog * dialog, GtrWindow * window)
    * Open the file via our centralized opening function.
    */
   load_file_list (window, (const GSList *) locations);
+  g_printf("loaded files\n");
   g_slist_free_full (locations, g_object_unref);
 }
 

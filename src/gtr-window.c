@@ -382,7 +382,7 @@ gtr_window_init (GtrWindow *window)
    * With this widgets we have different views in the same window
    */
 
-  // as GtkNotebook has been removed
+  // CLEANUP :  as GtkNotebook has been removed
   /*priv->notebook = GTK_WIDGET (gtr_notebook_new ());
   gtk_widget_show (priv->notebook);
   g_signal_connect (priv->notebook, "switch-page",
@@ -417,7 +417,7 @@ gtr_window_init (GtrWindow *window)
   gtk_widget_show (priv->stack);
 
   // translation memory
-  /*priv->translation_memory = GTR_TRANSLATION_MEMORY (gtr_gda_new());
+  priv->translation_memory = GTR_TRANSLATION_MEMORY (gtr_gda_new());
   priv->tm_settings = g_settings_new ("org.gnome.gtranslator.plugins.translation-memory");
   gtr_translation_memory_set_max_omits (priv->translation_memory,
                                         g_settings_get_int (priv->tm_settings,
@@ -425,7 +425,7 @@ gtr_window_init (GtrWindow *window)
   gtr_translation_memory_set_max_delta (priv->translation_memory,
                                         g_settings_get_int (priv->tm_settings,
                                                             "max-length-diff"));
-  gtr_translation_memory_set_max_items (priv->translation_memory, 10);*/
+  gtr_translation_memory_set_max_items (priv->translation_memory, 10);
 
   gtr_window_show_projects (window);
 }

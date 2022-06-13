@@ -120,9 +120,9 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
 
   model = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (priv->tree_view)));
 
-  g_signal_connect (priv->tree_view,
+  /*g_signal_connect (priv->tree_view,
                     "size_allocate",
-                    G_CALLBACK (tree_view_size_cb), priv->tree_view);
+                    G_CALLBACK (tree_view_size_cb), priv->tree_view);*/
 
   if (priv->msg)
     g_object_unref (priv->msg);

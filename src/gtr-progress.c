@@ -195,8 +195,9 @@ gtr_progress_init (GtrProgress *self)
   priv->fuzzy = 0;
 
   gtk_widget_set_size_request (GTK_WIDGET (self), -1, 8);
-  g_signal_connect (G_OBJECT (self), "draw",
-                    G_CALLBACK (on_draw), NULL);
+  //g_signal_connect (G_OBJECT (self), "draw",
+                    //G_CALLBACK (on_draw), NULL);
+  gtk_drawing_area_set_draw_func (GTK_DRAWING_AREA(self), on_draw, NULL, NULL);
 }
 
 GtrProgress*

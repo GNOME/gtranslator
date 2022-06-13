@@ -412,6 +412,7 @@ buffer_end_user_action (GtkTextBuffer *buffer, GtrContextPanel *panel)
 static void
 gtr_context_panel_init (GtrContextPanel *panel)
 {
+  g_printf("init: contextpanel\n");
   GtrContextPanelPrivate *priv;
   GtkTextBuffer *buffer;
   GdkDisplay *display;
@@ -522,6 +523,7 @@ gtr_context_panel_dispose (GObject *object)
 static void
 gtr_context_panel_class_init (GtrContextPanelClass * klass)
 {
+  g_printf("class init: contextpanel\n");
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
@@ -568,6 +570,7 @@ gtr_context_panel_class_init (GtrContextPanelClass * klass)
 GtkWidget *
 gtr_context_panel_new (void)
 {
+  g_printf("creating context\n");
   return g_object_new (GTR_TYPE_CONTEXT_PANEL, NULL);
 }
 

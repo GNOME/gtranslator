@@ -681,6 +681,7 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
                                 "stop-search", 0);*/
   gtk_widget_class_add_binding_signal (GTK_WIDGET_CLASS(klass), GDK_KEY_Escape, 0, 
                                       "stop-search", NULL);
+  g_printf("class init: search bar\n");
 }
 
 static void
@@ -696,7 +697,8 @@ gtr_search_bar_init (GtrSearchBar *self)
   self->at_original_text = TRUE;
   self->at_translated_text = TRUE;
 
-  g_object_set (G_OBJECT (self->next_button), "can-default", TRUE, NULL);
+  //TODO: Replace in gtk4
+  //g_object_set (G_OBJECT (self->next_button), "can-default", TRUE, NULL);
 
   self->search_bindings = g_binding_group_new ();
 
@@ -747,6 +749,7 @@ gtr_search_bar_init (GtrSearchBar *self)
                             self);
 
   add_actions (self);
+  g_printf("init: search bar\n");
 }
 
 void

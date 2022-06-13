@@ -262,7 +262,7 @@ gtr_page_notify_child_revealed (GtrTab *tab,
 
 //----------------------------------------------------------------//
 
-static gboolean
+/*static gboolean
 show_hide_revealer (GtkWidget *widget, GdkEvent *ev, GtrTab *tab)
 {
   GtrTabPrivate *priv;
@@ -273,7 +273,7 @@ show_hide_revealer (GtkWidget *widget, GdkEvent *ev, GtrTab *tab)
   gtk_revealer_set_reveal_child (rev, !gtk_revealer_get_reveal_child (rev));
 
   return TRUE;
-}
+}*/
 
 static gboolean
 msg_grab_focus (GtrTab *tab)
@@ -837,7 +837,9 @@ gtr_tab_init (GtrTab * tab)
 
   priv = gtr_tab_get_instance_private (tab);
 
+  g_printf("creating tab widget from template \n");
   gtk_widget_init_template (GTK_WIDGET (tab));
+  g_printf("created tab widget from template \n");
 
   priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
   priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
@@ -871,8 +873,8 @@ gtr_tab_init (GtrTab * tab)
   gtk_widget_show (GTK_WIDGET (priv->progress));
   gtk_box_append (GTK_BOX (priv->progress_box), GTK_WIDGET (priv->progress));
 
-  g_signal_connect (priv->progress_eventbox, "button-press-event",
-                    G_CALLBACK (show_hide_revealer), tab);
+  //g_signal_connect (priv->progress_eventbox, "button-press-event",
+                    //G_CALLBACK (show_hide_revealer), tab);
 
   g_signal_connect (priv->search_revealer, "notify::child-revealed",
                     G_CALLBACK (emit_searchbar_toggled), tab);
@@ -1086,7 +1088,7 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, hbox);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, vertical_box);
 
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_eventbox);
+  //gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_eventbox);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_box);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_revealer);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_trans);
@@ -1200,6 +1202,7 @@ gtr_tab_new (GtrPo * po,
   manager = gtr_profile_manager_get_default();
 
   tab = g_object_new (GTR_TYPE_TAB, NULL);
+  g_printf("tab created\n");
 
   priv = gtr_tab_get_instance_private (tab);
   gtr_context_init_tm (GTR_CONTEXT_PANEL (priv->context),
