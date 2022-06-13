@@ -155,7 +155,7 @@ gtr_po_parse_files_from_dialog (GtkNativeDialog * dialog, GtrWindow * window)
     }*/
 
   po_files_model = gtk_file_chooser_get_files (GTK_FILE_CHOOSER (dialog));
-  g_autofree guint i = 0;
+  guint i = 0;
   while (i < g_list_model_get_n_items(po_files_model)) {
     file = g_list_model_get_item(po_files_model, i);
     locations = g_slist_prepend (locations, file);
