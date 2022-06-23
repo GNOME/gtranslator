@@ -20,16 +20,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2022-05-09 02:13+0000\n"
-"PO-Revision-Date: 2022-05-29 00:28+0200\n"
-"Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
+"POT-Creation-Date: 2022-06-08 08:25+0000\n"
+"PO-Revision-Date: 2022-06-23 14:50+0200\n"
+"Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -68,7 +68,7 @@ msgstr ""
 "Erweiterungen wie alternative Sprachen, Einfügen von XML-Elementen, "
 "Subversion-Integration und einer Quelltextansicht."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:157
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:161
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -98,7 +98,7 @@ msgstr ""
 "mit unklaren Zeichenketten gewarnt."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:32
-msgid "Whether the obsolete entries be removed upon saving"
+msgid "Whether to remove the obsolete entries upon saving"
 msgstr "Sollen die überflüssigen Einträge beim Speichern entfernt werden?"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:33
@@ -236,7 +236,7 @@ msgid "Paths:"
 msgstr "Pfade:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
-#: src/gtr-io-error-info-bar.c:127 src/gtr-preferences-dialog.c:664
+#: src/gtr-io-error-info-bar.c:161 src/gtr-preferences-dialog.c:664
 #: src/translation-memory/gtr-translation-memory-dialog.c:305
 msgid "_Close"
 msgstr "_Schließen"
@@ -679,7 +679,7 @@ msgstr "VL-Status:"
 msgid "Damned Lies Info"
 msgstr "Info zu Verdammte Lügen"
 
-#: src/gtr-io-error-info-bar.c:150 src/gtr-jump-dialog.c:88
+#: src/gtr-io-error-info-bar.c:155 src/gtr-jump-dialog.c:88
 #: src/gtr-profile-dialog.c:173 src/gtr-profile-dialog.c:178
 #: src/translation-memory/gtr-translation-memory-dialog.c:104
 msgid "_OK"
@@ -826,28 +826,28 @@ msgstr "Speichern unter (<Strg><Umschalt>s)"
 msgid "Upload file (<Ctrl>b)"
 msgstr "Datei hochladen (<Strg>b)"
 
-#: src/gtr-po.c:492
+#: src/gtr-po.c:509
 #, c-format
 msgid "The file is empty"
 msgstr "Die Datei ist leer"
 
-#: src/gtr-po.c:501
+#: src/gtr-po.c:518
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Fehler beim Öffnen der Datei »%s«: %s"
 
-#: src/gtr-po.c:572
+#: src/gtr-po.c:589
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Zeichensatz »%s« konnte nicht nach UTF-8 umgewandelt werden"
 
-#: src/gtr-po.c:588 src/gtr-po.c:607
+#: src/gtr-po.c:605 src/gtr-po.c:624
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr ""
 "Temporäre Datei zur Umwandlung der Kodierung konnte nicht gespeichert werden"
 
-#: src/gtr-po.c:638
+#: src/gtr-po.c:655
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -858,17 +858,17 @@ msgstr ""
 "Verwenden Sie die Befehlszeilen-Werkzeuge msgconv oder iconv, bevor Sie "
 "diese Datei mit dem GNOME Übersetzungseditor öffnen"
 
-#: src/gtr-po.c:706
+#: src/gtr-po.c:723
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext hat eine leere Zeichenkettendomänenliste zurückgegeben."
 
-#: src/gtr-po.c:753
+#: src/gtr-po.c:770
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Vom Parser wurden keine Zeichenketten erhalten."
 
-#: src/gtr-po.c:807
+#: src/gtr-po.c:824
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -879,17 +879,17 @@ msgstr ""
 "Diese Dateien werden durch das Kompilieren generiert.\n"
 "Ihre Datei sollte die po-Endung besitzen, also »%s.po«."
 
-#: src/gtr-po.c:835
+#: src/gtr-po.c:852
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Die Datei %s ist nur lesbar und kann nicht überschrieben werden"
 
-#: src/gtr-po.c:854
+#: src/gtr-po.c:871
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Es gibt einen Fehler in der PO-Datei: %s"
 
-#: src/gtr-po.c:866
+#: src/gtr-po.c:883
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Es gab einen Fehler beim Schreiben der PO-Datei: %s"
@@ -1094,40 +1094,40 @@ msgstr "Suche beim Dateianfang fortsetzen"
 msgid "Close document"
 msgstr "Dokument schließen"
 
-#: src/gtr-tab.c:347
+#: src/gtr-tab.c:419
 msgid "There is an error in the message:"
 msgstr "Die Zeichenkette enthält einen Fehler:"
 
-#: src/gtr-tab.c:561 src/gtr-tab.c:687
+#: src/gtr-tab.c:632 src/gtr-tab.c:767
 msgid "fuzzy"
 msgstr "Unklar"
 
-#: src/gtr-tab.c:717
+#: src/gtr-tab.c:797
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1307
+#: src/gtr-tab.c:1425
 msgid "Path:"
 msgstr "Pfad:"
 
-#: src/gtr-tab.c:1974
+#: src/gtr-tab.c:2090
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Übersetzt: %0.2f%%"
 
-#: src/gtr-tab.c:1975
+#: src/gtr-tab.c:2091
 #, c-format
 msgid "Translated: %d"
 msgstr "Übersetzt: %d"
 
-#: src/gtr-tab.c:1976
+#: src/gtr-tab.c:2092
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Unübersetzt: %d"
 
-#: src/gtr-tab.c:1977
+#: src/gtr-tab.c:2093
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Unklar: %d"
@@ -1206,100 +1206,105 @@ msgstr "Tastenkombinationen"
 
 #: src/help-overlay.ui:54
 msgctxt "shortcut window"
+msgid "Help"
+msgstr "Hilfe"
+
+#: src/help-overlay.ui:61
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Beenden"
 
-#: src/help-overlay.ui:64
+#: src/help-overlay.ui:71
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:75
 msgctxt "shortcut window"
 msgid "Undo"
 msgstr "Rückgängig"
 
-#: src/help-overlay.ui:75
+#: src/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Redo"
 msgstr "Wiederholen"
 
-#: src/help-overlay.ui:82
+#: src/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Als unklar markieren/Markierung entfernen"
 
-#: src/help-overlay.ui:89
+#: src/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "Originaltext in die Übersetzung kopieren"
 
-#: src/help-overlay.ui:99
+#: src/help-overlay.ui:106
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Navigation"
 
-#: src/help-overlay.ui:103
+#: src/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Zur vorherigen Zeichenkette springen"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Zur nächsten Zeichenkette springen"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Zur vorherigen unübersetzten Zeichenkette springen"
 
-#: src/help-overlay.ui:124
+#: src/help-overlay.ui:131
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Zur nächsten unübersetzten Zeichenkette springen"
 
-#: src/help-overlay.ui:134
+#: src/help-overlay.ui:141
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Übersetzungsspeicher"
 
-#: src/help-overlay.ui:138
+#: src/help-overlay.ui:145
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Übersetzungsspeicher aufbauen"
 
-#: src/help-overlay.ui:145
+#: src/help-overlay.ui:152
 msgctxt "shortcut window"
 msgid "Copy below"
 msgstr "Nach unten kopieren"
 
-#: src/help-overlay.ui:155
+#: src/help-overlay.ui:162
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Suchen und Ersetzen"
 
-#: src/help-overlay.ui:159
+#: src/help-overlay.ui:166
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Suchen"
 
-#: src/help-overlay.ui:166
+#: src/help-overlay.ui:173
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Suchen und Ersetzen"
 
-#: src/help-overlay.ui:173
+#: src/help-overlay.ui:180
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "Vorwärtssuche"
 
-#: src/help-overlay.ui:180
+#: src/help-overlay.ui:187
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Rückwärtssuche"
 
-#: src/help-overlay.ui:187
+#: src/help-overlay.ui:194
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Suchen-und-Ersetzen-Leiste verbergen"
