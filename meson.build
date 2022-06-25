@@ -113,7 +113,6 @@ gtr_deps = [
   gtk_dep,
   libadwaita_dep,
   dependency('libgda-6.0'),
-  dependency('atk'),
   dependency('gio-2.0', version: '>= 2.36.0'),
   dependency('gsettings-desktop-schemas'),
   dependency('gthread-2.0', version: '>= 2.13.0'),

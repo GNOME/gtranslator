@@ -16,7 +16,6 @@
             <signal name="notify::child-revealed" handler="gtr_page_notify_child_revealed" swapped="true" object="GtrTab"/>
             <child>
               <object class="GtrSearchBar" id="search_bar">
-                <property name="visible">True</property>
                 <signal name="stop-search" handler="gtr_page_stop_search" swapped="true" object="GtrTab"/>
               </object>
             </child>
@@ -198,7 +197,7 @@
     </child>
   </template>
 
-  <object class="GtkPopoverMenu" id="order_menu_popover">
+  <object class="GtkPopover" id="order_menu_popover">
     <property name="child">
       <object class="GtkBox">
         <property name="margin_start">6</property>
@@ -221,27 +220,27 @@
         </child>
         <child>
           <object class="GtkCheckButton" id="sort_id">
-            <property name="action_name">app.sort_by_id</property>
+            <!--<property name="action_name">app.sort_by_id</property>-->
             <property name="label" translatable="1">Appearance in the original file</property>
           </object>
         </child>
         <child>
           <object class="GtkCheckButton" id="sort_status">
-            <property name="action_name">app.sort_by_status</property>
+            <!--<property name="action_name">app.sort_by_status</property>-->
             <property name="label" translatable="1">Message status</property>
             <property name="group">sort_id</property>
           </object>
         </child>
         <child>
           <object class="GtkCheckButton" id="sort_msgid">
-            <property name="action_name">app.sort_by_msgid</property>
+            <!--<property name="action_name">app.sort_by_msgid</property>-->
             <property name="label" translatable="1">Original message</property>
             <property name="group">sort_id</property>
           </object>
         </child>
         <child>
           <object class="GtkCheckButton" id="sort_translated">
-            <property name="action_name">app.sort_by_translated</property>
+            <!--<property name="action_name">app.sort_by_translated</property>-->
             <property name="label" translatable="1">Translated message</property>
             <property name="group">sort_id</property>
           </object>
@@ -310,23 +309,14 @@
             <property name="receives_default">1</property>
             <property name="tooltip_text" translatable="1">Open a new file (&lt;Ctrl&gt;o)</property>
             <property name="action_name">app.open</property>
-            <child>
-              <object class="GtkImage">
-                <property name="icon_name">document-open-symbolic</property>
-              </object>
-            </child>
+            <property name="icon_name">document-open-symbolic</property>
           </object>
         </child>
         <child>
           <object class="GtkButton" id="dl_button">
             <property name="tooltip_text" translatable="1">Open from Damned Lies (&lt;Ctrl&gt;d)</property>
             <property name="action_name">app.dl</property>
-            <child>
-              <object class="GtkImage">
-                <property name="focusable">1</property>
-                <property name="icon_name">folder-download-symbolic</property>
-              </object>
-            </child>
+            <property name="icon_name">folder-download-symbolic</property>
           </object>
         </child>
         <style>
@@ -345,11 +335,7 @@
             <property name="receives_default">1</property>
             <property name="tooltip_text" translatable="1">Undo (&lt;Ctrl&gt;z)</property>
             <property name="action_name">app.undo</property>
-            <child>
-              <object class="GtkImage">
-                <property name="icon_name">edit-undo-symbolic</property>
-              </object>
-            </child>
+            <property name="icon_name">edit-undo-symbolic</property>
           </object>
         </child>
         <child>
@@ -358,11 +344,7 @@
             <property name="receives_default">1</property>
             <property name="tooltip_text" translatable="1">Redo (&lt;Ctrl&gt;&lt;Shift&gt;z)</property>
             <property name="action_name">app.redo</property>
-            <child>
-              <object class="GtkImage">
-                <property name="icon_name">edit-redo-symbolic</property>
-              </object>
-            </child>
+            <property name="icon_name">edit-redo-symbolic</property>
           </object>
         </child>
         <style>
@@ -381,11 +363,7 @@
             <property name="receives_default">1</property>
             <property name="tooltip_text" translatable="1">Previous message without translation (&lt;Alt&gt;&lt;Page Up&gt;)</property>
             <property name="action_name">app.prev_no</property>
-            <child>
-              <object class="GtkImage">
-                <property name="icon_name">go-up-symbolic</property>
-              </object>
-            </child>
+            <property name="icon_name">go-up-symbolic</property>
           </object>
         </child>
         <child>
@@ -394,11 +372,7 @@
             <property name="receives_default">1</property>
             <property name="tooltip_text" translatable="1">Next message without translation (&lt;Alt&gt;&lt;Page Down&gt;)</property>
             <property name="action_name">app.next_no</property>
-            <child>
-              <object class="GtkImage">
-                <property name="icon_name">go-down-symbolic</property>
-              </object>
-            </child>
+            <property name="icon_name">go-down-symbolic</property>
           </object>
         </child>
         <style>
@@ -411,15 +385,10 @@
     </child>
     <child>
       <object class="GtkButton">
-        <property name="focusable">1</property>
         <property name="receives_default">1</property>
         <property name="tooltip_text" translatable="1">Toggle fuzzy state (&lt;Ctrl&gt;+u)</property>
         <property name="action_name">app.fuzzy</property>
-        <child>
-          <object class="GtkImage">
-            <property name="icon_name">weather-fog-symbolic</property>
-          </object>
-        </child>
+        <property name="icon_name">weather-fog-symbolic</property>
       </object>
     </child>
     <child>
@@ -428,11 +397,7 @@
         <property name="receives_default">1</property>
         <property name="popover">order_menu_popover</property>
         <property name="tooltip_text" translatable="1">Sort messages by</property>
-        <child>
-          <object class="GtkImage">
-            <property name="icon_name">view-sort-ascending-symbolic</property>
-          </object>
-        </child>
+        <property name="icon_name">view-sort-ascending-symbolic</property>
 
           <!-- TODO: To be replace in gtk4
           <child internal-child="accessible">
@@ -447,11 +412,7 @@
         <property name="focusable">1</property>
         <property name="receives_default">1</property>
         <property name="popover">main_menu_popover</property>
-        <child>
-          <object class="GtkImage">
-            <property name="icon_name">open-menu-symbolic</property>
-          </object>
-        </child>
+        <property name="icon_name">open-menu-symbolic</property>
         <!-- TODO: To be replace in gtk4
         <child internal-child="accessible">
           <object class="AtkObject" id="main_menu-atkobject">
@@ -466,11 +427,7 @@
         <property name="receives_default">1</property>
         <property name="tooltip_text" translatable="1">Find (&lt;Ctrl&gt;&lt;f&gt;)</property>
         <property name="action_name">app.findtoggle</property>
-        <child>
-          <object class="GtkImage">
-            <property name="icon_name">edit-find-symbolic</property>
-          </object>
-        </child>
+        <property name="icon_name">edit-find-symbolic</property>
       </object>
     </child>
     <child type="end">
@@ -496,11 +453,7 @@
             <property name="receives_default">1</property>
             <property name="tooltip_text" translatable="1">Save as (&lt;Ctrl&gt;&lt;Shift&gt;s)</property>
             <property name="action_name">app.saveas</property>
-            <child>
-              <object class="GtkImage">
-                <property name="icon_name">document-save-as-symbolic</property>
-              </object>
-            </child>
+            <property name="icon_name">document-save-as-symbolic</property>
           </object>
         </child>
         <child>
@@ -509,11 +462,7 @@
             <property name="receives_default">1</property>
             <property name="tooltip_text" translatable="1">Upload file (&lt;Ctrl&gt;b)</property>
             <property name="action_name">app.upload_file</property>
-            <child>
-              <object class="GtkImage">
-                <property name="icon_name">document-send-symbolic</property>
-              </object>
-            </child>
+            <property name="icon_name">document-send-symbolic</property>
           </object>
         </child>
         <style>

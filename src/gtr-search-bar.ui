@@ -15,7 +15,6 @@
             <property name="column_spacing">8</property>
             <child>
               <object class="GtkEntry" id="search_entry">
-                <property name="focusable">1</property>
                 <property name="hexpand">1</property>
                 <property name="primary_icon_name">edit-find-symbolic</property>
                 <property name="primary_icon_activatable">0</property>
@@ -46,7 +45,6 @@
             <child>
               <object class="GtkEntry" id="replace_entry">
                 <property name="visible">0</property>
-                <property name="focusable">1</property>
                 <property name="width-chars">20</property>
                 <property name="max-width-chars">30</property>
                 <property name="primary_icon_name">edit-find-replace-symbolic</property>
@@ -67,22 +65,13 @@
                 </style>
                 <child>
                   <object class="GtkButton" id="previous_button">
-                    <child>
-                      <object class="GtkImage">
-                        <property name="icon_name">go-up-symbolic</property>
-                        <property name="icon_size">normal</property>
-                      </object>
-                    </child>
+                    <!--CLEANUP: <property name="action-name">editor-search.move-previous</property> -->
+                    <property name="icon_name">go-up-symbolic</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton" id="next_button">
-                    <child>
-                      <object class="GtkImage">
-                        <property name="icon_name">go-down-symbolic</property>
-                        <property name="icon_size">normal</property>
-                      </object>
-                    </child>
+                    <property name="icon_name">go-down-symbolic</property>
                   </object>
                 </child>
                 <layout>
@@ -95,7 +84,6 @@
               <object class="GtkButton" id="replace_button">
                 <property name="label" translatable="1">Replace</property>
                 <property name="visible">0</property>
-                <property name="focusable">1</property>
                 <layout>
                   <property name="column">1</property>
                   <property name="row">2</property>
@@ -106,7 +94,8 @@
               <object class="GtkButton" id="replace_all_button">
                 <property name="label" translatable="1">Replace All</property>
                 <property name="visible">0</property>
-                <property name="focusable">1</property>
+                <!--TODO: <property name="action-name">editor-search.replace-all</property> -->
+                <property name="action_name">editor-search.replace-all</property>
                 <layout>
                   <property name="column">2</property>
                   <property name="row">2</property>
@@ -122,25 +111,15 @@
                   <object class="GtkToggleButton">
                     <property name="active" bind-source="GtrSearchBar" bind-property="replace-mode" bind-flags="sync-create|bidirectional"/>
                     <property name="tooltip-text" translatable="1">Switch between Search and Search-and-Replace</property>
-                    <property name="focusable">1</property>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="icon_name">edit-find-replace-symbolic</property>
-                      </object>
-                    </child>
+                    <property name="icon_name">edit-find-replace-symbolic</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkToggleButton" id="show_options">
                     <property name="tooltip-text" translatable="1">Show or hide search options such as case sensitivity</property>
                     <property name="focus-on-click">0</property>
-                    <property name="focusable">1</property>
                     <property name="active" bind-source="GtrSearchBar" bind-property="show-options" bind-flags="sync-create|bidirectional"/>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="icon_name">emblem-system-symbolic</property>
-                      </object>
-                    </child>
+                    <property name="icon_name">emblem-system-symbolic</property>
                   </object>
                 </child>
                 <layout>

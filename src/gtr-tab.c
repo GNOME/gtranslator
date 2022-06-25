@@ -68,7 +68,7 @@ typedef struct
   GSettings *editor_settings;
   GSettings *state_settings;
 
-  GtkWidget *progress_eventbox;
+  GtkWidget *progress_gesture_click;
   GtkWidget *progress_box;
   GtkWidget *progress_revealer;
   GtkWidget *progress_percentage;
@@ -133,6 +133,9 @@ typedef struct
   GtkWidget *titlebar;
   GtkWidget *save;
   GtkWidget *sort_id;
+  GtkWidget *sort_status;
+  GtkWidget *sort_msgid;
+  GtkWidget *sort_translated;
   GtkWidget *order_menu_popover;
   GtkWidget *search_toggle;
   GtkWidget *upload;
@@ -262,7 +265,7 @@ gtr_page_notify_child_revealed (GtrTab *tab,
 
 //----------------------------------------------------------------//
 
-/*static gboolean
+static gboolean
 show_hide_revealer (GtkWidget *widget, GdkEvent *ev, GtrTab *tab)
 {
   GtrTabPrivate *priv;
@@ -273,7 +276,7 @@ show_hide_revealer (GtkWidget *widget, GdkEvent *ev, GtrTab *tab)
   gtk_revealer_set_reveal_child (rev, !gtk_revealer_get_reveal_child (rev));
 
   return TRUE;
-}*/
+}
 
 static gboolean
 msg_grab_focus (GtrTab *tab)
@@ -831,6 +834,30 @@ on_state_notify (GtrPo      *po,
 }
 
 static void
+sort_by_id_cb (GtkWidget *checkbutton, GtrTab* tab)
+{
+  gtr_tab_sort_by(tab,(GtrMessageTableSortBy) 0);
+}
+
+static void
+sort_by_status_cb (GtkWidget *checkbutton, GtrTab* tab)
+{
+  gtr_tab_sort_by(tab,(GtrMessageTableSortBy) 1);
+}
+
+static void
+sort_by_msgid_cb (GtkWidget *checkbutton, GtrTab* tab)
+{
+  gtr_tab_sort_by(tab,(GtrMessageTableSortBy) 3);
+}
+
+static void
+sort_by_translated_cb (GtkWidget *checkbutton, GtrTab* tab)
+{
+  gtr_tab_sort_by(tab,(GtrMessageTableSortBy) 5);
+}
+
+static void
 gtr_tab_init (GtrTab * tab)
 {
   GtrTabPrivate *priv;
@@ -870,14 +897,27 @@ gtr_tab_init (GtrTab * tab)
 
   priv->find_replace_flag = FALSE;
   priv->progress = gtr_progress_new ();
+  priv->progress_gesture_click = gtk_gesture_click_new();
   gtk_widget_show (GTK_WIDGET (priv->progress));
+  gtk_widget_add_controller(priv->progress_box, priv->progress_gesture_click);
   gtk_box_append (GTK_BOX (priv->progress_box), GTK_WIDGET (priv->progress));
 
-  //g_signal_connect (priv->progress_eventbox, "button-press-event",
-                    //G_CALLBACK (show_hide_revealer), tab);
+  g_signal_connect (priv->progress_gesture_click, "pressed",
+                    G_CALLBACK (show_hide_revealer), tab);
 
   g_signal_connect (priv->search_revealer, "notify::child-revealed",
                     G_CALLBACK (emit_searchbar_toggled), tab);
+
+  // TODO: related to header of gtr tab move to saperate header file
+  g_signal_connect (priv->sort_id, "toggled",
+                    G_CALLBACK(sort_by_id_cb), tab);
+  g_signal_connect (priv->sort_status, "toggled",
+                    G_CALLBACK(sort_by_status_cb), tab);
+  g_signal_connect (priv->sort_msgid, "toggled",
+                    G_CALLBACK(sort_by_msgid_cb), tab);
+  g_signal_connect (priv->sort_translated, "toggled",
+                    G_CALLBACK(sort_by_translated_cb), tab);
+  gtk_check_button_set_active (priv->sort_id, TRUE);
 }
 
 static void
@@ -1101,6 +1141,9 @@ gtr_tab_class_init (GtrTabClass * klass)
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, titlebar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_id);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_status);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_msgid);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_translated);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, order_menu_popover);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_toggle);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, undo);

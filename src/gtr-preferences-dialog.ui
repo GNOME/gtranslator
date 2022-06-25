@@ -64,7 +64,6 @@
             <property name="margin_end">6</property>
             <property name="margin_top">6</property>
             <property name="margin_bottom">6</property>
-            <property name="visible">TRUE</property>
 
             <!-- page1 -->
             <child>
@@ -359,22 +358,13 @@
                           <object class="GtkButton" id="add-button">
                             <property name="focusable">1</property>
                             <property name="receives_default">1</property>
-                            <child>
-                              <object class="GtkImage" id="image1">
-                                <property name="icon_name">list-add-symbolic</property>
-                              </object>
-                            </child>
+                            <property name="icon_name">list-add-symbolic</property>
                           </object>
                         </child>
                         <child type="end">
                           <object class="GtkButton" id="delete-button">
-                            <property name="focusable">1</property>
                             <property name="receives_default">1</property>
-                            <child>
-                              <object class="GtkImage" id="image2">
-                                <property name="icon_name">list-remove-symbolic</property>
-                              </object>
-                            </child>
+                            <property name="icon_name">list-remove-symbolic</property>
                           </object>
                         </child>
                         <child type="end">

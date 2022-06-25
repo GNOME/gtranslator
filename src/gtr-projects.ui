@@ -78,19 +78,12 @@
     </child>
     <child type="end">
       <object class="GtkMenuButton" id="main_menu">
-        <property name="focusable">1</property>
         <property name="receives_default">1</property>
         <property name="popover">main_menu_popover</property>
-        <child>
-          <object class="GtkImage">
-            <property name="icon_name">open-menu-symbolic</property>
-          </object>
-        </child>
-        <!-- <child internal-child="accessible">
-          <object class="AtkObject" id="main_menu-atkobject">
-            <property name="AtkObject::accessible-name" translatable="1">Main Menu</property>
-          </object>
-        </child> -->
+        <property name="icon_name">open-menu-symbolic</property>
+        <accessibility>
+          <property name="label" translatable="yes">Main Menu</property>
+        </accessibility>
       </object>
     </child>
   </object>

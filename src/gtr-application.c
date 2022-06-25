@@ -856,7 +856,7 @@ gtr_application_create_window (GtrApplication *app)
  * @original: TRUE if you want original TextViews.
  * @translated: TRUE if you want translated TextViews.
  *
- * Returns all the views currently present in #GtranslationApplication1
+ * Returns all the views currently present in #GtranslationApplication
  *
  * Return value: (transfer container) (element-type Gtranslator.View):
  * a newly allocated list of #GtranslationApplication objects

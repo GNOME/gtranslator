@@ -405,6 +405,12 @@ jump_to_line (GtkTextView *view, gint line)
                                 0.25, FALSE, 0.0, 0.0);
 }
 
+static void
+gtr_viewer_destroy (GtkWidget *dlg , GtkWidget **dlg_ptr)
+{
+  gtk_window_destroy(GTK_WINDOW(dlg));
+  *dlg_ptr = NULL;
+}
 void
 gtr_show_viewer (GtrWindow *window, const gchar *path, gint line)
 {
@@ -433,8 +439,7 @@ gtr_show_viewer (GtrWindow *window, const gchar *path, gint line)
       g_free (label);
 
       g_signal_connect (dlg,
-                        "destroy", G_CALLBACK (gtk_window_destroy), NULL);
-      g_free(dlg);
+                        "destroy", G_CALLBACK (gtk_window_destroy), &dlg);
       gtk_widget_show (GTK_WIDGET (dlg));
     }
 

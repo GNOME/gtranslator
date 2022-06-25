@@ -682,6 +682,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   if (error)
 {
   g_debug("%s \n",error->message);
+  g_free(error);
 }
   priv->notebook = GTK_WIDGET (gtk_builder_get_object (builder, "notebook"));
   g_object_ref (priv->notebook);
@@ -729,6 +730,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   gtk_font_chooser_set_font (GTK_FONT_CHOOSER (priv->font_button), font);
 
   g_signal_connect (priv->font_button, "font-set", G_CALLBACK (on_font_set), dlg);
+  g_free(error);
 }
 
 static void
@@ -755,7 +757,8 @@ gtr_preferences_dialog_class_init (GtrPreferencesDialogClass * klass)
   g_debug("class_init ran\n");
 }
 
-static void gtr_destroy_preferences_dialog (GtkWidget *dlg , GtkWidget **dlg_ptr)
+static void
+gtr_destroy_preferences_dialog (GtkWidget *dlg , GtkWidget **dlg_ptr)
 {
   gtk_window_destroy(GTK_WINDOW(dlg));
   *dlg_ptr = NULL;
@@ -775,7 +778,7 @@ gtr_show_preferences_dialog (GtrWindow * window)
       g_signal_connect (dlg,
                         "destroy", G_CALLBACK (gtr_destroy_preferences_dialog), &dlg);
       gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
-      gtk_widget_show (dlg);
+      gtk_window_present (GTK_WINDOW(dlg));
     }
 
   //gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_DIALOG);

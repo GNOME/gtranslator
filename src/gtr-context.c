@@ -144,7 +144,7 @@ setup_notes_edition (GtrContextPanel *panel)
   dd->text_buffer = text_buffer;
 
   g_signal_connect (dialog, "response", G_CALLBACK (dialog_response_cb), dd);
-  gtk_widget_show (dialog);
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static void

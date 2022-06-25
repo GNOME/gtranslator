@@ -127,7 +127,7 @@ update_undo_state (GtrTab     *tab,
  */
 static void
 gtr_window_update_statusbar_message_count (GtrTab * tab,
-                                           GtrMsg *message,
+                                           GtrMsg * message,
                                            GtrWindow * window)
 {
   GtrTab *active_tab;
@@ -609,7 +609,6 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
 
   g_signal_connect (tab, "searchbar-toggled", G_CALLBACK (searchbar_toggled), window);
 
-  //Don't know why this is not setting title
   set_window_title (window, TRUE);
   return tab;
 }

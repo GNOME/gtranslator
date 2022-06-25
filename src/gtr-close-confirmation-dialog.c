@@ -31,7 +31,6 @@
 #include "gtr-utils.h"
 #include "gtr-window.h"
 #include "gtr-po.h"
-#include <atk/atk.h>
 
 
 /* Properties */

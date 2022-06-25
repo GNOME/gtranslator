@@ -102,7 +102,6 @@ gtr_search_bar_get_search_text (GtrSearchBar *dialog)
   //g_assert (GTR_IS_SEARCH_BAR (dialog));
   g_return_val_if_fail (GTR_IS_SEARCH_BAR (dialog), NULL);
 
-  //return gtk_entry_get_text (GTK_ENTRY (dialog->search_entry));
   const gchar *text;
   GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY(dialog->search_entry));
   text = gtk_entry_buffer_get_text (buffer);
@@ -672,6 +671,7 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
 
   gtk_widget_class_set_css_name (widget_class, "gtrsearchbar");
 
+  //CLEANUP:
   /* Replace by gtk_widget_class_add_binding_signal in gtk 4. */
   /* Also add gtk_widget_class_add_binding for next-match and previous-match as
    * in gtksearchentry.c, which are already in the app as app.find-next and
@@ -696,9 +696,6 @@ gtr_search_bar_init (GtrSearchBar *self)
   self->wrap_around = TRUE;
   self->at_original_text = TRUE;
   self->at_translated_text = TRUE;
-
-  //TODO: Replace in gtk4
-  //g_object_set (G_OBJECT (self->next_button), "can-default", TRUE, NULL);
 
   self->search_bindings = g_binding_group_new ();
 
@@ -749,7 +746,6 @@ gtr_search_bar_init (GtrSearchBar *self)
                             self);
 
   add_actions (self);
-  g_printf("init: search bar\n");
 }
 
 void

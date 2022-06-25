@@ -39,6 +39,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <adwaita.h>
 
 xmlDocPtr
 gtr_xml_new_doc (const gchar * name)
@@ -79,9 +80,11 @@ gtr_gtk_button_new_with_icon_name (const gchar * label,
   gtk_button_set_image (GTK_BUTTON (button),
                         gtk_image_new_from_icon_name (icon_name,
                                                       GTK_ICON_SIZE_BUTTON));*/
-  button = gtk_button_new_from_icon_name (icon_name);
-  gtk_button_set_label (GTK_BUTTON(button), label);
-  gtk_button_set_use_underline (GTK_BUTTON(button), true);
+  //button = gtk_button_new_from_icon_name (icon_name);
+  button = adw_button_content_new ();
+  adw_button_content_set_label (ADW_BUTTON_CONTENT(button), label);
+  adw_button_content_set_use_underline (ADW_BUTTON_CONTENT(button), true);
+  adw_button_content_set_icon_name (ADW_BUTTON_CONTENT(button), icon_name);
 
   return button;
 }
@@ -457,8 +460,9 @@ finally_2:
 void
 gtr_utils_help_display (GtkWindow * window)
 {
-  /*gtk_show_uri_on_window (GTK_WINDOW (window), "help:gtranslator",
-                          gtk_get_current_event_time (), NULL);*/
+  gtk_show_uri (GTK_WINDOW (window), "help:gtranslator",
+                          g_get_real_time ());
+                          //gtk_get_current_event_time (), NULL);
 }
 
 gchar *
