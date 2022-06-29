@@ -55,9 +55,6 @@ gtr_file_chooser_new (GtkWindow * parent,
 
   if (mode != FILESEL_SAVE)
     {
-      /* We set a multi selection dialog */
-      gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dialog), TRUE);
-
       /* Now we set the filters */
       filter = gtk_file_filter_new ();
       gtk_file_filter_set_name (filter, _("Gettext translation"));

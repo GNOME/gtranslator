@@ -26,7 +26,6 @@
 
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
-#include <gio/gio.h>
 #include <string.h>
 #include <gio/gio.h>
 
@@ -140,48 +139,23 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
 static void
 gtr_po_parse_files_from_dialog (GtkNativeDialog * dialog, GtrWindow * window)
 {
-  GSList *po_files, *l;
-  GListModel *po_files_model;
   GSList *locations = NULL;
-  GFile *file, *parent;
-  gchar *uri;
+  GFile *file;
 
-  /*for (l = po_files; l != NULL; l = g_slist_next (l))
-    {
-      GFile *file;
+  g_autoptr (GFile) parent = NULL;
+  g_autofree gchar *uri = NULL;
 
-      file = g_file_new_for_uri (l->data);
-      locations = g_slist_prepend (locations, file);
-    }*/
-
-  po_files_model = gtk_file_chooser_get_files (GTK_FILE_CHOOSER (dialog));
-  guint i = 0;
-  while (i < g_list_model_get_n_items(po_files_model)) {
-    file = g_list_model_get_item(po_files_model, i);
-    locations = g_slist_prepend (locations, file);
-    i++;
-  }
-
-  /*
-   * We store latest directory
-   */
-  //file = g_file_new_for_uri (po_files->data);
-  //g_slist_free_full (po_files, g_free);
-
+  // Store the file directory for future openings
+  file = gtk_file_chooser_get_file (GTK_FILE_CHOOSER (dialog));
   parent = g_file_get_parent (file);
-  g_object_unref (file);
-
   uri = g_file_get_uri (parent);
-  g_object_unref (parent);
   _gtr_application_set_last_dir (GTR_APP, uri);
-
-  g_free (uri);
 
   /*
    * Open the file via our centralized opening function.
    */
+  locations = g_slist_append (locations, file);
   load_file_list (window, (const GSList *) locations);
-  g_printf("loaded files\n");
   g_slist_free_full (locations, g_object_unref);
 }
 
@@ -629,46 +603,13 @@ static void
 load_file_list (GtrWindow * window, const GSList * locations)
 {
   GSList *locations_to_load = NULL;
-  const GSList *l;
   GError *error = NULL;
-  GtkWidget *tab;
 
   g_return_if_fail ((locations != NULL) && (locations->data != NULL));
 
-  // removing other tabs, for now on, we'll using single tab and multiples windows
-  // gtr_window_remove_all_pages (window);
   gtr_window_remove_tab (window);
 
-  /* Remove the uris corresponding to documents already open
-   * in "window" and remove duplicates from "uris" list */
-  l = locations;
-  while (locations != NULL)
-    {
-      if (!is_duplicated_location (locations_to_load, locations->data))
-        {
-          /*We need to now if is already loaded in any tab */
-          /*tab = gtr_window_get_tab_from_location (window,
-                                                  (GFile *) locations->data);*/
-
-          /*if (tab != NULL)
-            {
-              if (locations == l)
-                gtr_window_set_active_tab (window, tab);
-            }
-          else*/
-            locations_to_load = g_slist_prepend (locations_to_load,
-                                                 locations->data);
-
-        }
-
-      locations = g_slist_next (locations);
-    }
-
-  if (locations_to_load == NULL)
-    return;
-
-  locations_to_load = g_slist_reverse (locations_to_load);
-  l = locations_to_load;
+  locations_to_load = g_slist_reverse (locations);
 
   while (locations_to_load != NULL)
     {
@@ -701,8 +642,7 @@ load_file_list (GtrWindow * window, const GSList * locations)
       g_error_free (error);
     }
 
-  /* Free uris_to_load. Note that l points to the first element of uris_to_load */
-  g_slist_free ((GSList *) l);
+  g_slist_free ((GSList *) locations_to_load);
 }
 
 
