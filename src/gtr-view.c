@@ -86,7 +86,6 @@ G_DEFINE_TYPE_WITH_PRIVATE (GtrView, gtr_view, GTK_SOURCE_TYPE_VIEW)
 static void
 gtr_view_init (GtrView * view)
 {
-  g_printf("init: view started\n");
   GtkSourceLanguageManager *lm;
   GtkSourceLanguage *lang;
   GPtrArray *dirs;
@@ -119,50 +118,32 @@ gtr_view_init (GtrView * view)
   g_ptr_array_add (dirs, NULL);
   langs = (gchar **) g_ptr_array_free (dirs, FALSE);
 
-  /* CLEANUP: For debugging
-  guint i = 0;
-  while (*(langs+i) != NULL) {
-    g_printf("%s\n",*(langs+i));
-    i++;
-  }
-  i=0;*/
   gtk_source_language_manager_set_search_path (lm, langs);
-  /* CLEANUP: For debugging
-  gchar * const * lang_id = gtk_source_language_manager_get_language_ids(lm);
-  while (*(lang_id+i) != NULL) {
-    g_printf("%s\n",*(lang_id+i));
-    i++;
-  }*/
-  //There is not any language_id of name gtranslator when I ran above code to get all language_ids 
-  //lang = gtk_source_language_manager_get_language (lm, "gtranslator"); 
+  lang = gtk_source_language_manager_get_language (lm, "gtranslator");
   g_strfreev (langs);
 
-  //if (lang != NULL) {
-    //priv->buffer = gtk_source_buffer_new_with_language (GTK_SOURCE_LANGUAGE(lang));
-    //priv->buffer = gtk_source_buffer_new (NULL);
-    //gtk_text_view_set_buffer (GTK_TEXT_VIEW (view),
-    //                GTK_TEXT_BUFFER (priv->buffer));
-    priv->buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
-    if (priv->buffer == NULL)
-      g_printf("buffer is null\n");
-    gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), GTK_WRAP_WORD);
-    /* Set syntax highlight according to preferences */
-    //gtk_source_buffer_set_highlight_syntax (priv->buffer,
-                                            //g_settings_get_boolean (priv->editor_settings,
-                                                                    //GTR_SETTINGS_HIGHLIGHT_SYNTAX));
-    /* Set dot char according to preferences */
-    gtr_view_enable_visible_whitespace (view,
-                                        g_settings_get_boolean (priv->editor_settings,
-                                                                GTR_SETTINGS_VISIBLE_WHITESPACE));
-    font = g_settings_get_string (priv->editor_settings, GTR_SETTINGS_FONT);
-    gtr_view_set_font (view, font);
+  priv->buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+  gtk_source_buffer_set_language (priv->buffer, lang);
+  gtk_text_view_set_buffer (GTK_TEXT_VIEW (view), GTK_TEXT_BUFFER (priv->buffer));
+  gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), GTK_WRAP_WORD);
 
-    /* Set scheme color according to preferences */
-    gtr_view_reload_scheme_color (view);
-    gtk_text_view_set_monospace (GTK_TEXT_VIEW (view), TRUE);
-  //}
-  g_printf("init: view\n");
-} 
+  /* Set syntax highlight according to preferences */
+  gtk_source_buffer_set_highlight_syntax (priv->buffer,
+                                          g_settings_get_boolean (priv->editor_settings,
+                                                                  GTR_SETTINGS_HIGHLIGHT_SYNTAX));
+
+  /* Set dot char according to preferences */
+  gtr_view_enable_visible_whitespace (view,
+                                      g_settings_get_boolean (priv->editor_settings,
+                                                              GTR_SETTINGS_VISIBLE_WHITESPACE));
+
+  font = g_settings_get_string (priv->editor_settings, GTR_SETTINGS_FONT);
+  gtr_view_set_font (view, font);
+
+  /* Set scheme color according to preferences */
+  gtr_view_reload_scheme_color (view);
+  gtk_text_view_set_monospace (GTK_TEXT_VIEW (view), TRUE);
+}
 
 static void
 gtr_view_dispose (GObject * object)

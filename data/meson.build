@@ -61,8 +61,7 @@ install_data(
   install_dir: join_paths(gtr_pkgdatadir, 'ui'),
 )
 
-# TODO Set to gtksourceview-5 on GTK 4 port.
 install_data(
   'sourceview/gtranslator.lang',
-  install_dir: join_paths(gtr_datadir, 'gtksourceview-4', 'language-specs'),
+  install_dir: join_paths(gtr_datadir, 'gtksourceview-5', 'language-specs'),
 )
