@@ -519,15 +519,11 @@ gtr_window_remove_tab (GtrWindow * window)
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   if (priv->active_tab != NULL)
   {
-    //gtk_container_remove(GTK_CONTAINER(window), GTK_WIDGET(priv->active_tab));
-    g_object_unref(priv->active_tab);
+    if (gtk_stack_get_child_by_name (GTK_STACK (priv->stack), "poeditor"))
+      gtk_stack_remove (GTK_STACK (priv->stack), GTK_WIDGET (priv->active_tab));
+
+    priv->active_tab = NULL;
   }
-  //as set_window_title not working in gtr_window_create_tab that's why we are removing whole child of stack and again adding it in gtr_window_create_tab
-  /*if (gtk_stack_get_child_by_name(priv->header_stack,"poeditor") != NULL)
-  {
-    //gtk_container_remove(GTK_CONTAINER(window), GTK_WIDGET(gtk_stack_get_child_by_name(priv->header_stack,"poeditor")));
-    g_object_unref ()
-  }*/
 }
 
 /**

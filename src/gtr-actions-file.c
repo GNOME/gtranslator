@@ -110,7 +110,6 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
    * Create a page to add to our list of open files
    */
   tab = gtr_window_create_tab (window, po);
-  //gtr_window_set_active_tab (window, GTK_WIDGET (tab));
 
   /*
    * Activate the upload file icon if the po file is in the appropriate
