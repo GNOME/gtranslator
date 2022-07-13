@@ -107,7 +107,7 @@ main (gint argc, gchar * argv[])
   g_option_context_free (context);
 #endif
 
-  app = _gtr_application_new ();
+  app = gtr_application_new ();
 
   status = g_application_run (G_APPLICATION (app), argc, argv);
 

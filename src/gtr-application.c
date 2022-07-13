@@ -67,7 +67,7 @@ typedef struct
   guint first_run : 1;
 } GtrApplicationPrivate;
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrApplication, gtr_application, GTK_TYPE_APPLICATION)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrApplication, gtr_application, ADW_TYPE_APPLICATION)
 
 static gboolean
 ensure_user_config_dir (void)
@@ -635,16 +635,20 @@ gtr_application_startup (GApplication *application)
 
   g_application_set_resource_base_path (application, "/org/gnome/translator");
   G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
-
-  adw_init();
   g_set_application_name (_("Translation Editor"));
   gtk_window_set_default_icon_name (PACKAGE_APPID);
 
-  /* Custom css */
-  priv->provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (priv->provider, "/org/gnome/translator/styles.css");
-
   load_accels ();
+
+  //CLEANUP: As we are now subclassing from AdwApplication thsese all are not needed
+  //adw_init();
+
+  /* Custom css */
+  //priv->provider = gtk_css_provider_new ();
+  //gtk_css_provider_load_from_resource (priv->provider, "/org/gnome/translator/styles.css");
+
+  //gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                             //GTK_STYLE_PROVIDER (priv->provider), 600);
 
   /* TODO Remove in GTK 4 port */
   /*hdy_style_manager_set_color_scheme (hdy_style_manager_get_default (),
@@ -697,8 +701,6 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.tm_8", "<Ctrl>8");
   set_kb (application, "app.tm_9", "<Ctrl>9");
 
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                             GTK_STYLE_PROVIDER (priv->provider), 600);
 }
 
 static void
@@ -785,7 +787,7 @@ gtr_application_class_init (GtrApplicationClass *klass)
 }
 
 GtrApplication *
-_gtr_application_new ()
+gtr_application_new ()
 {
   return GTR_APPLICATION (g_object_new (GTR_TYPE_APPLICATION,
                                         "application-id", PACKAGE_APPID,

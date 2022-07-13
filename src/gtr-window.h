@@ -36,16 +36,16 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_WINDOW		(gtr_window_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrWindow, gtr_window, GTR, WINDOW, GtkApplicationWindow)
+G_DECLARE_FINAL_TYPE (GtrWindow, gtr_window, GTR, WINDOW, AdwApplicationWindow)
 
 struct _GtrWindow
 {
-  GtkApplicationWindow parent_instance;
+  AdwApplicationWindow parent_instance;
 };
 
 struct _GtrWindowClass
 {
-  GtkApplicationWindowClass parent_class;
+  AdwApplicationWindowClass parent_class;
 };
 
 GtrTab *gtr_window_create_tab (GtrWindow * window, GtrPo * po);

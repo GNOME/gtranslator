@@ -299,6 +299,7 @@ insert_text_handler (GtkEditable * editable,
   gchar *escaped_text;
   gint new_len;
 
+//CLEANUP:May be this should be removed as it will always be false
   /* To avoid recursive behavior */
   if (insert_text)
     return;

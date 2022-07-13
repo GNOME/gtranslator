@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk" version="4.0"/>
-  <template class="GtrWindow" parent="GtkApplicationWindow">
+  <requires lib="gtk" version="4.0" />
+  <template class="GtrWindow" parent="AdwApplicationWindow">
     <property name="default_width">800</property>
     <property name="default_height">600</property>
-    <child type="titlebar">
-      <object class="GtkStack" id="header_stack">
-        <property name="vexpand">1</property>
+    <property name="content">
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkHeaderBar" id="header_bar">
-            <!--<child type="end">
+          <object class="GtkStack" id="header_stack">
+            <!--<property name="vexpand">1</property>-->
+            <child>
+              <object class="GtkHeaderBar" id="header_bar">
+                <!--<child type="end">
               <object class="GtkMenuButton" id="menu_button">
                 <property name="icon_name">open-menu-symbolic</property>
               </object>
             </child>-->
+              </object>
+            </child>
           </object>
         </child>
-      </object>
-    </child>
-    <child>
-      <object class="GtkBox" id="main_box">
-        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkStack" id="stack">
-            <property name="vexpand">1</property>
+          <object class="GtkBox" id="main_box">
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkStack" id="stack">
+                <property name="vexpand">1</property>
+              </object>
+            </child>
           </object>
         </child>
       </object>
-    </child>
+    </property>
   </template>
 </interface>

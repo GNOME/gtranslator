@@ -400,8 +400,6 @@ build_single_doc_dialog (GtrCloseConfirmationDialog * dlg)
 
   gtk_box_append (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
                   hbox);
-
-  gtk_widget_show (hbox);
 }
 
 static void

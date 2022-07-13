@@ -45,17 +45,17 @@ typedef struct _GtrApplicationClass   GtrApplicationClass;
 
 struct _GtrApplication
 {
-  GtkApplication base_instance;
+  AdwApplication base_instance;
 };
 
 struct _GtrApplicationClass
 {
-  GtkApplicationClass parent_class;
+  AdwApplicationClass parent_class;
 };
 
 GType             gtr_application_get_type               (void)G_GNUC_CONST;
 
-GtrApplication  *_gtr_application_new                    (void);
+GtrApplication  * gtr_application_new                    (void);
 
 GList *           gtr_application_get_views              (GtrApplication *app,
                                                           gboolean        original,

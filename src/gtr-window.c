@@ -92,7 +92,7 @@ typedef struct
   guint dispose_has_run : 1;
 } GtrWindowPrivate;
 
-G_DEFINE_FINAL_TYPE_WITH_PRIVATE(GtrWindow, gtr_window, GTK_TYPE_APPLICATION_WINDOW)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE(GtrWindow, gtr_window, ADW_TYPE_APPLICATION_WINDOW)
 
 enum
 {
