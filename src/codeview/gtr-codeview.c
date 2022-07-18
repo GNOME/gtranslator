@@ -228,22 +228,19 @@ follow_if_link (GtrCodeView *codeview, GtkWidget *text_view, GtkTextIter *iter)
     g_slist_free (tags);
 }
 
-/*static gboolean
-event_after (GtkWidget *text_view, GdkEvent *ev, GtrCodeView *codeview)
+static gboolean
+click_event (GtkGestureClick *ev,
+             int n_press,
+             double x,
+             double y,
+             GtrCodeView *codeview)
 {
   GtkTextIter start, end, iter;
   GtkTextBuffer *buffer;
-  GdkEventButton *event;
-  gint x, y;
+  GtkWidget *text_view;
+  gint bx, by;
 
-  if (ev->type != GDK_BUTTON_RELEASE)
-    return FALSE;
-
-  event = (GdkEventButton *) ev;
-
-  if (event->button != 1)
-    return FALSE;
-
+  text_view = gtk_event_controller_get_widget (GTK_EVENT_CONTROLLER (ev));
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
 
   // we shouldn't follow a link if the user has selected something //
@@ -253,14 +250,14 @@ event_after (GtkWidget *text_view, GdkEvent *ev, GtrCodeView *codeview)
 
   gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view),
                                          GTK_TEXT_WINDOW_WIDGET,
-                                         event->x, event->y, &x, &y);
+                                         x, y, &bx, &by);
 
   gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (text_view), &iter, x, y);
 
   follow_if_link (codeview, text_view, &iter);
 
   return FALSE;
-}*/
+}
 
 static gboolean hovering_over_link = FALSE;
 static GdkCursor *hand_cursor = NULL;
@@ -470,9 +467,11 @@ page_added_cb (GtkWidget   *tab,
 {
   GtrContextPanel *panel;
   GtkTextView *view;
+  GtkGesture *press_gesture;
 
   panel = gtr_tab_get_context_panel (GTR_TAB (tab));
   view = gtr_context_panel_get_context_text_view (panel);
+  press_gesture = gtk_gesture_click_new ();
 
   g_return_if_fail (GTK_IS_TEXT_VIEW (view));
 
@@ -481,7 +480,10 @@ page_added_cb (GtkWidget   *tab,
   g_signal_connect (tab, "message-edition-finished",
                     G_CALLBACK (message_edition_finished_cb), codeview);
 
-  /*g_signal_connect (view, "event-after", G_CALLBACK (event_after), codeview);
+  gtk_widget_add_controller (view, GTK_EVENT_CONTROLLER (press_gesture));
+  g_signal_connect (press_gesture, "released", G_CALLBACK (click_event), codeview);
+
+  /*
   g_signal_connect (view, "motion-notify-event",
                     G_CALLBACK (motion_notify_event), NULL);
   g_signal_connect (view, "visibility-notify-event",

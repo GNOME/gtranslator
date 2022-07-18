@@ -408,8 +408,8 @@ jump_to_line (GtkTextView *view, gint line)
 static void
 gtr_viewer_destroy (GtkWidget *dlg , GtkWidget **dlg_ptr)
 {
-  gtk_window_destroy(GTK_WINDOW(dlg));
-  g_free(*dlg_ptr);
+  gtk_window_destroy (GTK_WINDOW (dlg));
+  *dlg_ptr = NULL;
 }
 
 void
