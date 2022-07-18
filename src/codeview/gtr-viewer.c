@@ -405,49 +405,32 @@ jump_to_line (GtkTextView *view, gint line)
                                 0.25, FALSE, 0.0, 0.0);
 }
 
-static void
-gtr_viewer_destroy (GtkWidget *dlg , GtkWidget **dlg_ptr)
-{
-  gtk_window_destroy (GTK_WINDOW (dlg));
-  *dlg_ptr = NULL;
-}
-
 void
 gtr_show_viewer (GtrWindow *window, const gchar *path, gint line)
 {
-  static GtrViewer *dlg = NULL;
+  GtrViewer *dlg = NULL;
   GtrViewerPrivate *priv;
+  GtkSourceBuffer *buffer;
+  g_autofree char *label = NULL;
 
-  g_return_if_fail (GTR_IS_WINDOW (window));
+  dlg = g_object_new (GTR_TYPE_VIEWER, "use-header-bar", TRUE, NULL);
+  priv = gtr_viewer_get_instance_private (dlg);
 
-  if (dlg == NULL)
-    {
-      GtkSourceBuffer *buffer;
-      gchar *label;
+  buffer =
+    GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
+                       (GTK_TEXT_VIEW (priv->view)));
 
-      dlg = g_object_new (GTR_TYPE_VIEWER, NULL);
-      priv = gtr_viewer_get_instance_private (dlg);
+  open_file (buffer, path);
+  jump_to_line (GTK_TEXT_VIEW (priv->view), line);
 
-      buffer =
-        GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
-                           (GTK_TEXT_VIEW (priv->view)));
-
-      open_file (buffer, path);
-      jump_to_line (GTK_TEXT_VIEW (priv->view), line);
-
-      label = g_strdup_printf ("<b>%s</b>", g_path_get_basename (path));
-      gtk_label_set_markup (GTK_LABEL (priv->filename_label), label);
-      g_free (label);
-
-      g_signal_connect (dlg,
-                        "destroy", G_CALLBACK (gtr_viewer_destroy),&dlg );
-      gtk_widget_show (GTK_WIDGET (dlg));
-    }
+  label = g_strdup_printf ("<b>%s</b>", g_path_get_basename (path));
+  gtk_label_set_markup (GTK_LABEL (priv->filename_label), label);
 
   if (GTK_WINDOW (window) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
     {
       gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
     }
+  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
   gtk_window_present (GTK_WINDOW (dlg));
 }
