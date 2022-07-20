@@ -68,6 +68,7 @@ gtr_viewer_init (GtrViewer *dlg)
     NULL
   };
   GtrViewerPrivate *priv = gtr_viewer_get_instance_private (dlg);
+  GError *error = NULL;
 
   gtk_dialog_add_buttons (GTK_DIALOG (dlg),
                           _("_Close"), GTK_RESPONSE_CLOSE, NULL);
@@ -84,8 +85,18 @@ gtr_viewer_init (GtrViewer *dlg)
 
   /*Builder */
   builder = gtk_builder_new ();
-  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/plugins/codeview/ui/gtr-viewer.ui",
-  root_objects, NULL);
+  gtk_builder_add_objects_from_resource (
+    builder,
+    "/org/gnome/gtranslator/plugins/codeview/ui/gtr-viewer.ui",
+    root_objects,
+    &error
+  );
+
+  if (error != NULL)
+    {
+      g_warning ("Error parsing gtr-viewer.ui: %s", (error)->message);
+      g_error_free (error);
+    }
 
   priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
   g_object_ref (priv->main_box);
@@ -105,8 +116,7 @@ gtr_viewer_init (GtrViewer *dlg)
   priv->view = gtk_source_view_new ();
   gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->view), FALSE);
   gtk_widget_show (priv->view);
-  //gtk_container_add (GTK_CONTAINER (sw), priv->view);
-  gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW(sw), priv->view);
+  gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (sw), priv->view);
 
   gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW
                                               (priv->view), TRUE);
