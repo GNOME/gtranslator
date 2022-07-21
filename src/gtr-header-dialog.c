@@ -96,15 +96,15 @@ gtr_header_dialog_class_init (GtrHeaderDialogClass * klass)
 }
 
 static void
-take_my_options_checkbutton_toggled (GtkToggleButton * button,
+take_my_options_checkbutton_toggled (GtkCheckButton * button,
                                      GtrHeaderDialog * dlg)
 {
   gboolean active;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
-  g_return_if_fail (button == GTK_TOGGLE_BUTTON (priv->take_my_options));
+  g_return_if_fail (button == GTK_CHECK_BUTTON (priv->take_my_options));
 
-  active = gtk_toggle_button_get_active (button);
+  active = gtk_check_button_get_active (button);
 
   g_settings_set_boolean (priv->settings, GTR_SETTINGS_USE_PROFILE_VALUES,
                           active);
@@ -327,34 +327,44 @@ gtr_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
 
   /* Damned Lies Information */
   text = gtr_header_get_dl_team (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->team), text);
-  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->team));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
-  g_free (text);
+  if (text)
+    {
+      entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->team));
+      gtk_entry_buffer_set_text (entry_buffer, text, -1);
+      g_free (text);
+    }
 
   text = gtr_header_get_dl_module (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->module), text);
-  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->module));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
-  g_free (text);
+  if (text)
+    {
+      entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->module));
+      gtk_entry_buffer_set_text (entry_buffer, text, -1);
+      g_free (text);
+    }
 
   text = gtr_header_get_dl_branch (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->branch), text);
-  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->branch));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
-  g_free (text);
+  if (text)
+    {
+      entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->branch));
+      gtk_entry_buffer_set_text (entry_buffer, text, -1);
+      g_free (text);
+    }
 
   text = gtr_header_get_dl_domain (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->domain), text);
-  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->domain));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
-  g_free (text);
+  if (text)
+    {
+      entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->domain));
+      gtk_entry_buffer_set_text (entry_buffer, text, -1);
+      g_free (text);
+    }
 
   text = gtr_header_get_dl_state (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->state), text);
-  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->state));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
-  g_free (text);
+  if (text)
+    {
+      entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->state));
+      gtk_entry_buffer_set_text (entry_buffer, text, -1);
+      g_free (text);
+    }
 }
 
 static void
@@ -363,7 +373,8 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
   GtkBox *content_area;
   GtkBuilder *builder;
-  gchar *root_objects[] = {
+  GError *error = NULL;
+  const char *root_objects[] = {
     "main_box",
     NULL
   };
@@ -388,8 +399,17 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
   g_signal_connect (dlg, "response", G_CALLBACK (gtk_window_destroy), NULL);
 
   builder = gtk_builder_new ();
-  gtk_builder_add_objects_from_resource (builder, "/org/gnome/translator/gtr-header-dialog.ui",
-                                         root_objects, NULL);
+  gtk_builder_add_objects_from_resource (
+    builder, "/org/gnome/translator/gtr-header-dialog.ui",
+    root_objects,
+    &error
+  );
+
+  if (error != NULL)
+    {
+      g_warning ("Error parsing gtr-header-dialog.ui: %s", (error)->message);
+      g_error_free (error);
+    }
 
   priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
   g_object_ref (priv->main_box);
@@ -423,9 +443,9 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
   gtk_widget_set_margin_top (priv->notebook, 6);
   gtk_widget_set_margin_bottom (priv->notebook, 6);
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->take_my_options),
-                                g_settings_get_boolean (priv->settings,
-                                                        GTR_SETTINGS_USE_PROFILE_VALUES));
+  gtk_check_button_set_active (GTK_CHECK_BUTTON (priv->take_my_options),
+                               g_settings_get_boolean (priv->settings,
+                                                       GTR_SETTINGS_USE_PROFILE_VALUES));
 
   gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->prj_comment), TRUE);
 
@@ -434,14 +454,14 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
   gtk_widget_set_sensitive (priv->charset, FALSE);
   gtk_widget_set_sensitive (priv->state, FALSE);
 
-  if (gtk_toggle_button_get_active
-      (GTK_TOGGLE_BUTTON (priv->take_my_options)))
+  if (gtk_check_button_get_active
+      (GTK_CHECK_BUTTON (priv->take_my_options)))
     {
       gboolean active;
 
       active =
-        gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-                                      (priv->take_my_options));
+        gtk_check_button_get_active (GTK_CHECK_BUTTON
+                                     (priv->take_my_options));
 
       gtk_widget_set_sensitive (priv->translator, !active);
       gtk_widget_set_sensitive (priv->tr_email, !active);
@@ -463,6 +483,8 @@ set_default_values (GtrHeaderDialog * dlg, GtrWindow * window)
   tab = gtr_window_get_active_tab (window);
   priv->po = gtr_tab_get_po (tab);
   gtr_header_dialog_fill_from_header (GTR_HEADER_DIALOG (dlg));
+
+  gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
 
   /*Connect signals */
   g_signal_connect (priv->take_my_options, "toggled",
@@ -511,30 +533,17 @@ set_default_values (GtrHeaderDialog * dlg, GtrWindow * window)
 void
 gtr_show_header_dialog (GtrWindow * window)
 {
-  static GtkWidget *dlg = NULL;
+  GtkWidget *dlg = NULL;
   GtrTab *tab = NULL;
 
+  g_return_if_fail (GTR_IS_WINDOW (window));
   tab = gtr_window_get_active_tab (window);
   g_return_if_fail (tab != NULL);
 
-  g_return_if_fail (GTR_IS_WINDOW (window));
+  dlg = GTK_WIDGET (g_object_new (GTR_TYPE_HEADER_DIALOG,
+                                  "use-header-bar", TRUE, NULL));
+  set_default_values (GTR_HEADER_DIALOG (dlg), window);
 
-  if (dlg == NULL)
-    {
-      dlg = GTK_WIDGET (g_object_new (GTR_TYPE_HEADER_DIALOG,
-                                      "use-header-bar", TRUE, NULL));
-
-      g_signal_connect (dlg,
-                        "destroy", G_CALLBACK (gtk_window_destroy), NULL);
-
-      set_default_values (GTR_HEADER_DIALOG (dlg), window);
-
-      gtk_widget_show (GTK_WIDGET (dlg));
-    }
-
-  gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
-  //gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_DIALOG);
   gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
-
   gtk_window_present (GTK_WINDOW (dlg));
 }
