@@ -300,6 +300,7 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
   GtrProfile *profile;
   const gchar *language_code;
   gchar *filename = NULL;
+  GError *error = NULL;
   gchar *root_objects[] = {
     "translation-memory-box",
     NULL
@@ -319,7 +320,19 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
   content_area = gtk_dialog_get_content_area (GTK_DIALOG (dlg));
 
   builder = gtk_builder_new ();
-  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/plugins/translation-memory/ui/gtr-translation-memory-dialog.ui", root_objects, NULL);
+  gtk_builder_add_objects_from_resource (
+    builder,
+    "/org/gnome/gtranslator/plugins/translation-memory/ui/gtr-translation-memory-dialog.ui",
+    root_objects,
+    &error
+  );
+
+  if (error != NULL)
+    {
+      g_warning ("Error parsing gtr-translation-memory-dialog.ui: %s", (error)->message);
+      g_error_free (error);
+    }
+
   content = GTK_WIDGET (gtk_builder_get_object (builder, "translation-memory-box"));
   g_object_ref (content);
   priv->directory_entry = GTK_WIDGET (gtk_builder_get_object (builder, "directory-entry"));
