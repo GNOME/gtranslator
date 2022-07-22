@@ -22,7 +22,6 @@
 
 #include "gtr-actions.h"
 #include "gtr-dl-teams.h"
-#include "gtr-filter-selection.h"
 #include "gtr-window.h"
 #include "gtr-utils.h"
 #include "gtr-profile-manager.h"

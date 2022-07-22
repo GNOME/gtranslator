@@ -19,6 +19,7 @@
 #pragma once
 
 #include <gtk/gtk.h>
+// TODO: use GtkDropDown instead of filter selection
 #include "gtr-filter-selection.h"
 
 G_BEGIN_DECLS
