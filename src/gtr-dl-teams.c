@@ -33,6 +33,137 @@
 
 #include <glib/gi18n.h>
 
+
+#define GTR_TYPE_DROP_DOWN_OPTION (gtr_drop_down_option_get_type ())
+G_DECLARE_FINAL_TYPE (GtrDropDownOption, gtr_drop_down_option, GTR, DROP_DOWN_OPTION, GObject)
+
+enum {
+  PROP_0,
+  PROP_NAME,
+  PROP_DESCRIPTION,
+  N_PROPERTIES
+};
+
+static GParamSpec *option_properties[N_PROPERTIES] = { NULL, };
+
+struct _GtrDropDownOption {
+  GObject parent_instance;
+  char *name;
+  char *description;
+};
+
+G_DEFINE_TYPE (GtrDropDownOption, gtr_drop_down_option, G_TYPE_OBJECT);
+
+static void
+gtr_drop_down_option_init (GtrDropDownOption *option)
+{
+  option->name = NULL;
+  option->description = NULL;
+}
+
+static void
+gtr_drop_down_option_finalize (GObject *object)
+{
+  GtrDropDownOption *option = GTR_DROP_DOWN_OPTION (object);
+
+  g_free (option->name);
+  g_free (option->description);
+
+  G_OBJECT_CLASS (gtr_drop_down_option_parent_class)->finalize (object);
+}
+
+static void
+gtr_drop_down_set_property (GObject      *object,
+                            guint         property_id,
+                            const GValue *value,
+                            GParamSpec   *pspec)
+{
+  GtrDropDownOption *self = GTR_DROP_DOWN_OPTION (object);
+
+  switch (property_id)
+    {
+    case PROP_NAME:
+      if (self->name)
+        g_free (self->name);
+      self->name = g_value_dup_string (value);
+      break;
+    case PROP_DESCRIPTION:
+      if (self->description)
+        g_free (self->description);
+      self->description = g_value_dup_string (value);
+      break;
+    default:
+      /* We don't have any other property... */
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+      break;
+    }
+}
+
+static void
+gtr_drop_down_get_property (GObject    *object,
+                            guint       property_id,
+                            GValue     *value,
+                            GParamSpec *pspec)
+{
+  GtrDropDownOption *self = GTR_DROP_DOWN_OPTION (object);
+
+  switch (property_id)
+    {
+    case PROP_NAME:
+      g_value_set_string (value, self->name);
+      break;
+    case PROP_DESCRIPTION:
+      g_value_set_string (value, self->description);
+      break;
+    default:
+      /* We don't have any other property... */
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+      break;
+    }
+}
+
+static void
+gtr_drop_down_option_class_init (GtrDropDownOptionClass *class)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (class);
+
+  object_class->finalize = gtr_drop_down_option_finalize;
+  object_class->set_property = gtr_drop_down_set_property;
+  object_class->get_property = gtr_drop_down_get_property;
+
+  option_properties[PROP_NAME] =
+    g_param_spec_string ("name", "Name", "Name",
+                      NULL,
+                      G_PARAM_CONSTRUCT | G_PARAM_READWRITE);
+
+  option_properties[PROP_DESCRIPTION] =
+    g_param_spec_string ("description", "Description", "Description",
+                      NULL,
+                      G_PARAM_CONSTRUCT | G_PARAM_READWRITE);
+
+  g_object_class_install_properties (object_class,
+                                     N_PROPERTIES,
+                                     option_properties);
+}
+
+static GtrDropDownOption *
+gtr_drop_down_option_new (const char *name, const char *description)
+{
+  GtrDropDownOption *option = g_object_new (GTR_TYPE_DROP_DOWN_OPTION,
+                                            "name", name,
+                                            "description", description,
+                                            NULL);
+  return option;
+}
+
+static gboolean
+gtr_drop_down_option_equal (GtrDropDownOption *opt1, GtrDropDownOption *opt2)
+{
+    if (strcmp (opt1->name, opt2->name))
+        return FALSE;
+    return TRUE;
+}
+
 typedef struct
 {
   GtkWidget *titlebar;
@@ -47,6 +178,7 @@ typedef struct
   GtkWidget *instructions;
 
   GtkWidget *teams_combobox;
+  GListStore *teams_model;
   GtkWidget *modules_combobox;
   GtkWidget *domains_combobox;
   GtkWidget *branches_combobox;
@@ -74,19 +206,27 @@ static void gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self);
 static void gtr_dl_teams_get_file_info (GtrDlTeams *self);
 static gboolean gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self);
 
+struct _StringObject {
+  GObject parent_instance;
+  const char * string;
+};
+
 static void
-gtr_dl_teams_list_add (JsonArray *array,
-                       guint      index,
-                       JsonNode  *element,
-                       gpointer   data)
+gtr_dl_teams_combobox_add (JsonArray *array,
+                           int index,
+                           JsonNode *element,
+                           GtkDropDown *combo)
 {
-  GSList **list = data;
   JsonObject *object = json_node_get_object (element);
+  GListStore *model = G_LIST_STORE (gtk_drop_down_get_model (GTK_DROP_DOWN (combo)));
+  GtrDropDownOption *option = NULL;
+
   const char *name = json_object_get_string_member (object, "name");
   const char *desc = json_object_get_string_member (object, "description");
-  GtrFilterOption *opt = gtr_filter_option_new (name, desc);
 
-  *list = g_slist_append (*list, opt);
+  option = gtr_drop_down_option_new (name, desc);
+  g_list_store_append (model, option);
+  g_object_unref (option);
 }
 
 static void
@@ -110,8 +250,10 @@ gtr_dl_teams_parse_teams_json (GObject *object,
 {
   g_autoptr(JsonParser) parser = json_parser_new ();
   g_autoptr(GInputStream) stream = NULL;
+  g_autoptr(GtrDropDownOption) option = NULL;
   GtrProfileManager * pmanager = NULL;
   const char *def_lang = NULL;
+  unsigned int def_lang_pos = 0;
   GtrProfile *profile = NULL;
   GError *error = NULL;
   JsonNode *node = NULL;
@@ -121,8 +263,6 @@ gtr_dl_teams_parse_teams_json (GObject *object,
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (widget);
 
   GtkWidget *dialog;
-
-  GSList *options = NULL;
 
   /* Parse JSON */
   stream = soup_session_send_finish (SOUP_SESSION (object), result, &error);
@@ -149,10 +289,20 @@ gtr_dl_teams_parse_teams_json (GObject *object,
   profile = gtr_profile_manager_get_active_profile (pmanager);
   def_lang = gtr_profile_get_language_code (profile);
 
-  /* Fill teams list store with values from JSON and set store as combo box model */
-  json_array_foreach_element (array, gtr_dl_teams_list_add, &options);
-  gtr_filter_selection_set_options_full (GTR_FILTER_SELECTION (priv->teams_combobox), options);
-  gtr_filter_selection_set_option (GTR_FILTER_SELECTION (priv->teams_combobox), def_lang);
+  json_array_foreach_element (
+    array,
+    (JsonArrayForeach)gtr_dl_teams_combobox_add,
+    priv->teams_combobox
+  );
+
+  option = gtr_drop_down_option_new (def_lang, NULL);
+  g_list_store_find_with_equal_func (
+    priv->teams_model,
+    option,
+    (GEqualFunc)gtr_drop_down_option_equal,
+    &def_lang_pos
+  );
+  gtk_drop_down_set_selected (GTK_DROP_DOWN (priv->teams_combobox), def_lang_pos);
 
   /* Enable selection */
   gtk_widget_set_sensitive (priv->teams_combobox, TRUE);
@@ -752,10 +902,11 @@ gtr_dl_teams_save_combo_selected (GtkWidget  *widget,
     }
   else if (strcmp(name, "combo_teams") == 0)
     {
-      const GtrFilterOption *opt = NULL;
+      const GtrDropDownOption *opt = GTR_DROP_DOWN_OPTION (
+        gtk_drop_down_get_selected_item (GTK_DROP_DOWN (priv->teams_combobox))
+      );
       if (priv->selected_team)
         g_free (priv->selected_team);
-      opt = gtr_filter_selection_get_option (GTR_FILTER_SELECTION (priv->teams_combobox));
       priv->selected_team = g_strdup (opt->name);
     }
   else if (strcmp(name, "combo_branches") == 0)
@@ -850,6 +1001,7 @@ gtr_dl_teams_init (GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   gtk_widget_init_template (GTK_WIDGET (self));
+  GtkExpression *expression = NULL;
 
   priv->main_window = NULL;
   priv->selected_team = NULL;
@@ -863,9 +1015,13 @@ gtr_dl_teams_init (GtrDlTeams *self)
   gtk_widget_set_sensitive (priv->reserve_button, FALSE);
 
   /* Add combo boxes for DL teams and modules */
-  priv->teams_combobox = GTK_WIDGET (gtr_filter_selection_new ());
+  expression = gtk_property_expression_new (GTR_TYPE_DROP_DOWN_OPTION, NULL, "description");
+  priv->teams_model = g_list_store_new (GTR_TYPE_DROP_DOWN_OPTION);
+  priv->teams_combobox = GTK_WIDGET (
+    gtk_drop_down_new (G_LIST_MODEL (priv->teams_model), expression)
+  );
   gtk_widget_set_name (priv->teams_combobox, "combo_teams");
-  gtr_filter_selection_set_text (GTR_FILTER_SELECTION (priv->teams_combobox), _("Translation Team"));
+  gtk_drop_down_set_enable_search (GTK_DROP_DOWN (priv->teams_combobox), TRUE);
 
   gtk_box_append (GTK_BOX (priv->select_box), priv->teams_combobox);
   gtk_widget_set_sensitive (priv->teams_combobox, FALSE);
