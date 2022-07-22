@@ -386,10 +386,6 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
   /* add items to comboboxes */
   append_from_languages (fetcher);
 
-  g_signal_connect (G_OBJECT (priv->language),
-                    "clicked",
-                    G_CALLBACK (on_language_activate),
-                    fetcher);
   g_signal_connect (GTK_ENTRY (gtk_combo_box_get_child(GTK_COMBO_BOX (priv->language_code))),
                     "activate",
                     G_CALLBACK (on_language_code_activate),
