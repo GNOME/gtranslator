@@ -37,14 +37,12 @@ typedef struct
 {
   GtkWidget *titlebar;
   GtkWidget *main_box;
-  GtkWidget *select_box;
   GtkWidget *open_button;
   GtkWidget *load_button;
   GtkWidget *reserve_button;
   GtkWidget *stats_label;
   GtkWidget *module_state_label;
   GtkWidget *file_label;
-  GtkWidget *instructions;
 
   GtkWidget *teams_combobox;
   GListStore *teams_model;
@@ -202,7 +200,6 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
 
   gtk_widget_hide (priv->file_label);
   gtk_widget_hide (priv->module_state_label);
-  gtk_widget_show (priv->instructions);
   gtk_label_set_text (GTK_LABEL (priv->stats_label), "");
 
   /* Disable (down)load button */
@@ -370,13 +367,8 @@ void gtr_dl_teams_verify_and_load (GtrDlTeams *self)
       priv->selected_branch != NULL &&
       priv->selected_domain != NULL)
     {
-      gtk_widget_hide (priv->instructions);
       // get stats and path from DL API and enable (down)load button
       gtr_dl_teams_get_file_info (self);
-    }
-  else
-    {
-      gtk_widget_show (priv->instructions);
     }
 }
 
@@ -481,7 +473,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
                                     json_object_get_int_member (stats_object, "untrans"));
 
   gtk_label_set_markup (GTK_LABEL (priv->stats_label), markup);
-  gtk_label_set_text (GTK_LABEL (priv->file_label), g_strconcat("File: ", strrchr (priv->file_path, '/') + 1, NULL));
+  gtk_label_set_text (GTK_LABEL (priv->file_label), strrchr (priv->file_path, '/') + 1);
   gtk_widget_show (priv->file_label);
   module_state = g_strdup_printf (_("The current state is: %s"), priv->module_state);
   gtk_label_set_text (GTK_LABEL (priv->module_state_label), module_state);
@@ -863,15 +855,18 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, titlebar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, main_box);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, select_box);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, file_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, stats_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, module_state_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, load_button);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, reserve_button);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, instructions);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, open_button);
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, teams_combobox);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, modules_combobox);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, domains_combobox);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, branches_combobox);
 }
 
 static void
@@ -895,39 +890,28 @@ gtr_dl_teams_init (GtrDlTeams *self)
   /* Add combo boxes for DL teams and modules */
   expression = gtk_property_expression_new (GTR_TYPE_DROP_DOWN_OPTION, NULL, "description");
   priv->teams_model = g_list_store_new (GTR_TYPE_DROP_DOWN_OPTION);
-  priv->teams_combobox = GTK_WIDGET (
-    gtk_drop_down_new (G_LIST_MODEL (priv->teams_model), expression)
+  gtk_drop_down_set_model (
+    GTK_DROP_DOWN (priv->teams_combobox),
+    G_LIST_MODEL (priv->teams_model)
   );
-  gtk_widget_set_name (priv->teams_combobox, "combo_teams");
+  gtk_drop_down_set_expression (GTK_DROP_DOWN (priv->teams_combobox), expression);
   gtk_drop_down_set_enable_search (GTK_DROP_DOWN (priv->teams_combobox), TRUE);
-
-  gtk_box_append (GTK_BOX (priv->select_box), priv->teams_combobox);
   gtk_widget_set_sensitive (priv->teams_combobox, FALSE);
 
   expression = gtk_property_expression_new (GTR_TYPE_DROP_DOWN_OPTION, NULL, "name");
   priv->modules_model = g_list_store_new (GTR_TYPE_DROP_DOWN_OPTION);
-  priv->modules_combobox = GTK_WIDGET (
-    gtk_drop_down_new (G_LIST_MODEL (priv->modules_model), expression)
+  gtk_drop_down_set_model (
+    GTK_DROP_DOWN (priv->modules_combobox),
+    G_LIST_MODEL (priv->modules_model)
   );
-  gtk_widget_set_name (priv->modules_combobox, "combo_modules");
+  gtk_drop_down_set_expression (GTK_DROP_DOWN (priv->modules_combobox), expression);
   gtk_drop_down_set_enable_search (GTK_DROP_DOWN (priv->modules_combobox), TRUE);
-
-  gtk_box_append (GTK_BOX (priv->select_box), priv->modules_combobox);
   gtk_widget_set_sensitive (priv->modules_combobox, FALSE);
 
   g_signal_connect (priv->open_button,
                     "clicked",
                     G_CALLBACK (team_add_cb),
                     self);
-
-  /* Add empty combo boxes for DL domains and branches and hide them */
-  priv->domains_combobox = gtk_combo_box_text_new ();
-  gtk_widget_set_name (priv->domains_combobox, "combo_domains");
-  gtk_box_append (GTK_BOX (priv->select_box), priv->domains_combobox);
-
-  priv->branches_combobox = gtk_combo_box_text_new ();
-  gtk_widget_set_name (priv->branches_combobox, "combo_branches");
-  gtk_box_append (GTK_BOX (priv->select_box), priv->branches_combobox);
 
   /* Load teams and modules automatically */
   gtr_dl_teams_load_json (self);

@@ -31,7 +31,7 @@
   <template class="GtrDlTeams" parent="AdwBin">
     <child>
       <object class="AdwClamp">
-        <property name="maximum-size">600</property>
+        <property name="maximum-size">900</property>
         <property name="tightening-threshold">400</property>
         <child>
           <object class="GtkBox" id="main_box">
@@ -49,44 +49,115 @@
                 <property name="icon_name">view-restore-symbolic</property>
               </object>
             </child>
+
             <child>
-              <object class="GtkBox" id="select_box">
-                <property name="margin_top">24</property>
-                <property name="margin_bottom">24</property>
-                <property name="vexpand">0</property>
-                <property name="valign">center</property>
-                <property name="orientation">vertical</property>
-                <property name="spacing">14</property>
+              <object class="GtkListBox">
+                <property name="selection-mode">none</property>
+                <style>
+                  <class name="boxed-list"/>
+                </style>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="true">Team</property>
+                    <child>
+                      <object class="GtkDropDown" id="teams_combobox">
+                        <property name="name">combo_teams</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="true">Module</property>
+                    <child>
+                      <object class="GtkDropDown" id="modules_combobox">
+                        <property name="name">combo_modules</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="true">Domain</property>
+                    <child>
+                      <object class="GtkComboBoxText" id="domains_combobox">
+                        <property name="name">combo_domains</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="true">Branch</property>
+                    <child>
+                      <object class="GtkComboBoxText" id="branches_combobox">
+                        <property name="name">combo_branches</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="true">Reserve for translation</property>
+                    <child>
+                      <object class="GtkSwitch" id="reserve_button">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
+
             <child>
-              <object class="GtkLabel" id="file_label">
-                <property name="visible">0</property>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="true">Info</property>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="true">File</property>
+                    <child>
+                      <object class="GtkLabel" id="file_label">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="true">Translation State</property>
+                    <child>
+                      <object class="GtkLabel" id="module_state_label">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="true">Stats</property>
+                    <child>
+                      <object class="GtkLabel" id="stats_label">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
               </object>
             </child>
-            <child>
-              <object class="GtkLabel" id="module_state_label">
-                <property name="visible">0</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel" id="instructions">
-                <property name="label" translatable="1">Select team, module, branch and domain to get the translation file.</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel" id="stats_label">
-                <property name="visible">0</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkCheckButton" id="reserve_button">
-                <property name="label" translatable="1">Reserve for translation</property>
-              </object>
-            </child>
+
             <child>
               <object class="GtkButton" id="load_button">
                 <property name="label" translatable="1">Load file</property>
+                <property name="halign">end</property>
+                <style>
+                  <class name="pill"/>
+                  <class name="suggested-action"/>
+                </style>
               </object>
             </child>
           </object>
@@ -113,11 +184,6 @@
             <property name="icon_name">open-menu-symbolic</property>
           </object>
         </child>
-        <!--<child internal-child="accessible">
-          <object class="AtkObject" id="main_menu-atkobject">
-            <property name="AtkObject::accessible-name" translatable="1">Main Menu</property>
-          </object>
-        </child>-->
         <accessibility>
           <property name="label" translatable="yes">Main Menu</property>
         </accessibility>
