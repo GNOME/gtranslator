@@ -387,7 +387,6 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   JsonObject *stats_object;
   const char *format;
   char *markup;
-  g_autofree char *module_state = NULL;
   GtkWidget *dialog;
   SoupStatus status_code;
   g_autoptr(GInputStream) stream = NULL;
@@ -475,8 +474,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   gtk_label_set_markup (GTK_LABEL (priv->stats_label), markup);
   gtk_label_set_text (GTK_LABEL (priv->file_label), strrchr (priv->file_path, '/') + 1);
   gtk_widget_show (priv->file_label);
-  module_state = g_strdup_printf (_("The current state is: %s"), priv->module_state);
-  gtk_label_set_text (GTK_LABEL (priv->module_state_label), module_state);
+  gtk_label_set_text (GTK_LABEL (priv->module_state_label), priv->module_state);
   gtk_widget_show (priv->module_state_label);
   /* Enable (down)load button */
   gtk_widget_set_sensitive (priv->load_button, TRUE);
