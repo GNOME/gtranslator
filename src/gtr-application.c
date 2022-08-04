@@ -24,7 +24,6 @@
 #include <config.h>
 #endif
 
-//#include "gtr-assistant.h"
 #include "gtr-actions.h"
 #include "gtr-actions-app.h"
 #include "gtr-application.h"
@@ -734,10 +733,10 @@ gtr_application_setup_window (GApplication *application,
     }
 
   /* If it is the first run, the default directory was created in this
-   * run, then we show the First run Assistant
+   * run, then we show the First run greeter
    */
   if (priv->first_run)
-    //gtr_show_assistant (window);
+    gtr_window_show_greeter (window);
 
   if (file_list != NULL)
     {

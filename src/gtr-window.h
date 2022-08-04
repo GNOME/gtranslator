@@ -88,6 +88,7 @@ void gtr_window_toggle_search_bar (GtrWindow *window);
 void gtr_window_show_projects (GtrWindow *window);
 void gtr_window_show_poeditor (GtrWindow *window);
 void gtr_window_show_dlteams (GtrWindow *window);
+void gtr_window_show_greeter (GtrWindow *window);
 
 G_END_DECLS
 #endif /* __GTR_WINDOW_H__ */

@@ -30,7 +30,6 @@
 #include "gtr-dirs.h"
 #include "gtr-header.h"
 #include "gtr-msg.h"
-// #include "gtr-notebook.h"
 #include "gtr-tab.h"
 #include "gtr-po.h"
 #include "gtr-projects.h"
@@ -40,6 +39,7 @@
 #include "gtr-window.h"
 #include "gtr-window-activatable.h"
 #include "gtr-profile-manager.h"
+#include "gtr-greeter.h"
 
 #include "translation-memory/gtr-translation-memory.h"
 #include "translation-memory/gtr-translation-memory-dialog.h"
@@ -78,6 +78,7 @@ typedef struct
 
   GtkWidget *projects;
   GtkWidget *dlteams;
+  GtkWidget *greeter;
 
   GtrTab *active_tab;
 
@@ -375,44 +376,26 @@ gtr_window_init (GtrWindow *window)
                     "drag_data_received",
                     G_CALLBACK (drag_data_received_cb), NULL);*/
 
-  /**
-   * Here we define different widgets that provides to append to the main
-   * stack and this widgets can also provide a custom headerbar
-   *
-   * With this widgets we have different views in the same window
-   */
-
-  // CLEANUP :  as GtkNotebook has been removed
-  /*priv->notebook = GTK_WIDGET (gtr_notebook_new ());
-  gtk_widget_show (priv->notebook);
-  g_signal_connect (priv->notebook, "switch-page",
-                    G_CALLBACK (notebook_switch_page), window);
-  g_signal_connect (priv->notebook, "page-added",
-                    G_CALLBACK (notebook_tab_added), window);
-  g_signal_connect (priv->notebook, "page-removed",
-                    G_CALLBACK (notebook_page_removed), window);
-  g_signal_connect (priv->notebook,
-                    "tab_close_request",
-                    G_CALLBACK (notebook_tab_close_request), window);
-
-  gtk_stack_add_named (GTK_STACK (priv->stack), priv->notebook, "poeditor");
-  gtk_stack_add_named (GTK_STACK (priv->header_stack),
-                       gtr_notebook_get_header (GTR_NOTEBOOK (priv->notebook)),
-                       "poeditor");*/
-
   // project selection
   priv->projects = GTK_WIDGET (gtr_projects_new (window));
   gtk_stack_add_named (GTK_STACK (priv->stack), priv->projects, "projects");
   gtk_stack_add_named (GTK_STACK (priv->header_stack),
                        gtr_projects_get_header (GTR_PROJECTS (priv->projects)),
                        "projects");
-  
+
   // DL team selection
   priv->dlteams = GTK_WIDGET (gtr_dl_teams_new (window));
   gtk_stack_add_named (GTK_STACK (priv->stack), priv->dlteams, "dlteams");
   gtk_stack_add_named (GTK_STACK (priv->header_stack),
                        gtr_dl_teams_get_header (GTR_DL_TEAMS (priv->dlteams)),
                        "dlteams");
+
+  // Greeter, First launch view
+  priv->greeter = GTK_WIDGET (gtr_greeter_new (window));
+  gtk_stack_add_named (GTK_STACK (priv->stack), priv->greeter, "greeter");
+  gtk_stack_add_named (GTK_STACK (priv->header_stack),
+                       gtr_greeter_get_header (GTR_GREETER (priv->greeter)),
+                       "greeter");
 
   gtk_widget_show (priv->stack);
 
@@ -882,14 +865,20 @@ gtr_window_show_dlteams (GtrWindow *window)
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "dlteams");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "dlteams");
   gtk_window_set_title (window,_("Load from Damned Lies"));
+
+  /* Load teams and modules automatically */
+  gtr_dl_teams_load_json (GTR_DL_TEAMS (priv->dlteams));
 }
 
-/*void
-gtr_window_remove_all_pages (GtrWindow *window)
+void
+gtr_window_show_greeter (GtrWindow *window)
 {
-  //GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-  //gtr_notebook_remove_all_pages (GTR_NOTEBOOK (priv->notebook));
-}*/
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
+
+  gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "greeter");
+  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "greeter");
+  gtk_window_set_title (window, _("Welcome to Translation Editor"));
+}
 
 void
 gtr_window_show_tm_dialog (GtrWindow *window)

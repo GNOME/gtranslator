@@ -157,7 +157,8 @@ gtr_dl_teams_parse_teams_json (GObject *object,
 
   pmanager = gtr_profile_manager_get_default ();
   profile = gtr_profile_manager_get_active_profile (pmanager);
-  def_lang = gtr_profile_get_language_code (profile);
+  if (profile)
+    def_lang = gtr_profile_get_language_code (profile);
 
   json_array_foreach_element (
     array,
@@ -344,7 +345,7 @@ gtr_dl_teams_parse_modules_json (GObject *object,
   gtk_widget_set_sensitive (priv->modules_combobox, TRUE);
 }
 
-static void
+void
 gtr_dl_teams_load_json (GtrDlTeams *self)
 {
   /* Get team list JSON from DL */
@@ -910,9 +911,6 @@ gtr_dl_teams_init (GtrDlTeams *self)
                     "clicked",
                     G_CALLBACK (team_add_cb),
                     self);
-
-  /* Load teams and modules automatically */
-  gtr_dl_teams_load_json (self);
 
   /* Connect "changed" to all combo boxes */
   g_signal_connect (priv->teams_combobox,

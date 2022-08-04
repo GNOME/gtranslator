@@ -68,10 +68,6 @@ static void
 gtr_lang_button_dispose (GObject *object)
 {
   GtrLangButtonPrivate *priv = gtr_lang_button_get_instance_private (GTR_LANG_BUTTON (object));
-
-  g_clear_pointer (&priv->model, g_object_unref);
-  g_clear_pointer (&priv->widget, gtk_widget_unparent);
-
   G_OBJECT_CLASS (gtr_lang_button_parent_class)->dispose (object);
 }
 

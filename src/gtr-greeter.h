@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  Teja Cetinski <teja@cetinski.eu>
+ * Copyright (C) 2022  Daniel Garcia <danigm@gnome.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,18 +19,17 @@
 #pragma once
 
 #include <gtk/gtk.h>
-//#include "libhandy-1/handy.h"
 #include <adwaita.h>
+
+#include "gtr-window.h"
 
 G_BEGIN_DECLS
 
-#define GTR_TYPE_DL_TEAMS (gtr_dl_teams_get_type())
+#define GTR_TYPE_GREETER (gtr_greeter_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrDlTeams, gtr_dl_teams, GTR, DL_TEAMS, AdwBin)
+G_DECLARE_FINAL_TYPE (GtrGreeter, gtr_greeter, GTR, GREETER, AdwBin)
 
-GtrDlTeams* gtr_dl_teams_new         ();
-GtkWidget*  gtr_dl_teams_get_header  (GtrDlTeams *self);
-void        gtr_dl_teams_load_json   (GtrDlTeams *self);
+GtrGreeter* gtr_greeter_new         (GtrWindow *main_window);
+GtkWidget*  gtr_greeter_get_header  (GtrGreeter *self);
 
 G_END_DECLS
-
