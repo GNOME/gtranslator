@@ -1,220 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <object class="GtkDialog" id="dialog1">
-    <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-    <property name="margin_start">6</property>
-    <property name="margin_end">6</property>
-    <property name="margin_top">6</property>
-    <property name="margin_bottom">6</property>
-    <property name="modal">1</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="type_hint">dialog</property>
-    <child internal-child="content_area">
-      <object class="GtkBox" id="vbox1">
-        <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
+  <template class="GtrProfileDialog" parent="GtkDialog">
+    <property name="height-request">400</property>
+    <child type="action">
+      <object class="GtkButton" id="button_cancel">
+        <property name="label" translatable="yes">Cancel</property>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="cancel">button_cancel</action-widget>
+    </action-widgets>
+    <child>
+
+      <object class="GtkScrolledWindow">
+          <property name="hscrollbar-policy">never</property>
+          <property name="propagate-natural-width">1</property>
+          <property name="propagate-natural-height">1</property>
+          <property name="hexpand">1</property>
+          <property name="vexpand">1</property>
         <child>
-          <object class="GtkBox" id="main_box">
-            <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-            <property name="orientation">vertical</property>
-            <property name="spacing">18</property>
+          <object class="GtkViewport">
             <child>
-              <object class="GtkBox" id="vbox2">
-                <property name="valign">center</property>
-                <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-                <property name="orientation">vertical</property>
-                <property name="spacing">6</property>
+
+              <object class="AdwClamp">
+                <property name="maximum-size">600</property>
+                <property name="tightening-threshold">400</property>
                 <child>
-                  <object class="GtkGrid">
-                    <property name="row_spacing">4</property>
-                    <property name="column_spacing">6</property>
+                  <object class="GtkBox" id="main_box">
+                    <property name="orientation">vertical</property>
+                    <property name="margin-bottom">12</property>
                     <child>
-                      <object class="GtkLabel" id="label3">
-                        <property name="width_request">80</property>
-                        <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-                        <property name="label" translatable="1">_Name</property>
-                        <property name="use_underline">1</property>
-                        <property name="mnemonic_widget">profile_name</property>
-                        <property name="xalign">1</property>
-                        <layout>
-                          <property name="column">0</property>
-                          <property name="row">1</property>
-                        </layout>
+                      <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="true">Profile Information</property>
+                        <property name="vexpand">true</property>
+                        <property name="valign">center</property>
+                        <child>
+                          <object class="AdwEntryRow" id="profile_name">
+                            <property name="title" translatable="yes">Profile name</property>
+                            <property name="text" translatable="yes">default</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="profile_name">
-                        <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-                        <property name="hexpand">1</property>
-                        <property name="invisible_char">●</property>
-                        <layout>
-                          <property name="column">1</property>
-                          <property name="row">1</property>
-                        </layout>
+                      <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="true">Translator Information</property>
+                        <property name="vexpand">true</property>
+                        <property name="valign">center</property>
+                        <child>
+                          <object class="AdwEntryRow" id="author_name">
+                            <property name="title" translatable="yes">Translator _name</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwEntryRow" id="author_email">
+                            <property name="title" translatable="yes">Translator _email</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwEntryRow" id="team_email">
+                            <property name="title" translatable="yes">Translation _team email</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label1">
-                        <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-                        <property name="label" translatable="1">Profile Information</property>
-                        <property name="xalign">0</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"></attribute>
-                        </attributes>
-                        <layout>
-                          <property name="column">0</property>
-                          <property name="row">0</property>
-                          <property name="column-span">2</property>
-                        </layout>
+                      <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="true">Damned Lies Integration</property>
+                        <property name="description" translatable="yes">GNOME Damned Lies integration token, go to your profile in https://l10n.gnome.org/ to get it</property>
+                        <property name="vexpand">true</property>
+                        <property name="valign">center</property>
+                        <child>
+                          <object class="AdwEntryRow" id="auth_token">
+                            <property name="title" translatable="yes">_Damned Lies auth token</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label4">
-                        <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-                        <property name="label" translatable="1">Translator Information</property>
-                        <property name="xalign">0</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"></attribute>
-                        </attributes>
-                        <layout>
-                          <property name="column">0</property>
-                          <property name="row">2</property>
-                          <property name="column-span">2</property>
-                        </layout>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label6">
-                        <property name="width_request">80</property>
-                        <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-                        <property name="label" translatable="1">N_ame</property>
-                        <property name="use_underline">1</property>
-                        <property name="mnemonic_widget">name</property>
-                        <property name="xalign">1</property>
-                        <layout>
-                          <property name="column">0</property>
-                          <property name="row">3</property>
-                        </layout>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label7">
-                        <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-                        <property name="label" translatable="1">_Email</property>
-                        <property name="use_underline">1</property>
-                        <property name="mnemonic_widget">email</property>
-                        <property name="xalign">1</property>
-                        <layout>
-                          <property name="column">0</property>
-                          <property name="row">4</property>
-                        </layout>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="label" translatable="1">_Team email</property>
-                        <property name="use_underline">1</property>
-                        <property name="xalign">1</property>
-                        <layout>
-                          <property name="column">0</property>
-                          <property name="row">5</property>
-                        </layout>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label9">
-                        <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-                        <property name="label" translatable="1">_DL auth token</property>
-                        <property name="tooltip_text" translatable="1">GNOME Damned Lies integration token, go to your profile in https://l10n.gnome.org/ to get it</property>
-                        <property name="use_underline">1</property>
-                        <property name="mnemonic_widget">auth_token</property>
-                        <property name="xalign">1</property>
-                        <layout>
-                          <property name="column">0</property>
-                          <property name="row">6</property>
-                        </layout>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="name">
-                        <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-                        <property name="hexpand">1</property>
-                        <property name="invisible_char">●</property>
-                        <layout>
-                          <property name="column">1</property>
-                          <property name="row">3</property>
-                        </layout>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="email">
-                        <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-                        <property name="invisible_char">●</property>
-                        <layout>
-                          <property name="column">1</property>
-                          <property name="row">4</property>
-                        </layout>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="auth_token">
-                        <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-                        <property name="invisible_char">●</property>
-                        <layout>
-                          <property name="column">1</property>
-                          <property name="row">6</property>
-                        </layout>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="team_email">
-                        <layout>
-                          <property name="column">1</property>
-                          <property name="row">5</property>
-                        </layout>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label8">
-                        <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-                        <property name="label" translatable="1">Language Settings</property>
-                        <property name="xalign">0</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"></attribute>
-                        </attributes>
-                        <layout>
-                          <property name="column">0</property>
-                          <property name="row">7</property>
-                          <property name="column-span">2</property>
-                        </layout>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkBox" id="fetcher_box">
-                        <layout>
-                          <property name="column">0</property>
-                          <property name="row">8</property>
-                          <property name="column-span">2</property>
-                        </layout>
-                      </object>
+                      <object class="GtrLanguagesFetcher" id="languages_fetcher" />
                     </child>
                   </object>
                 </child>
               </object>
+
             </child>
           </object>
+
         </child>
       </object>
+
     </child>
-  <child internal-child="action_area">
-    <object class="GtkBox" id="dialog-action_area1">
-      <property name="visible">True</property>
-      <property name="can_focus">False</property>
-      <!--<property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>-->
-      <!--<property name="layout_style">end</property>-->
-      </object>
-    </child>
-  </object>
+  </template>
 </interface>
