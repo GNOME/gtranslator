@@ -448,3 +448,22 @@ gtr_profile_manager_modify_profile (GtrProfileManager *manager,
 
   save_profiles (manager);
 }
+
+GtrProfile *
+gtr_profile_manager_get_profile (GtrProfileManager *manager,
+                                 const char        *name)
+{
+  GSList *l = NULL;
+
+  GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
+
+  for (l = priv->profiles; l != NULL; l = g_slist_next (l))
+    {
+      GtrProfile *p = GTR_PROFILE (l->data);
+      const char *pname = gtr_profile_get_name (p);
+      if (g_strcmp0 (name, pname) == 0)
+        return p;
+    }
+
+  return NULL;
+}
