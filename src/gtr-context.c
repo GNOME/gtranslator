@@ -600,6 +600,13 @@ gtr_context_init_tm (GtrContextPanel *panel,
                                                                tm);
   gtk_widget_show (priv->translation_memory_ui);
   gtk_widget_set_size_request (priv->translation_memory_ui, 300, 400);
+
+  GtkWidget* scrolled_win = gtk_scrolled_window_new ();
+  gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW(scrolled_win), priv->translation_memory_ui);
+  gtk_scrolled_window_set_min_content_width (GTK_SCROLLED_WINDOW (scrolled_win), 300);
+  gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (scrolled_win), 400);
+
   gtk_box_append (GTK_BOX (priv->translation_memory_box),
-                  priv->translation_memory_ui);
+                  scrolled_win);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_win), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 }

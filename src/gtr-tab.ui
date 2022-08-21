@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
+  <object class="GtkSeparator" id="sep">
+    <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
+  </object>
   <template class="GtrTab" parent="GtkBox">
     <property name="orientation">vertical</property>
     <child>
@@ -22,11 +25,16 @@
           </object>
         </child>
         <property name="child">
-          <object class="GtkPaned" id="hbox">
-            <property name="shrink-end-child">0</property>
+          <object class="AdwFlap" id="hbox">
+            <!--<property name="shrink-end-child">0</property>
             <property name="resize-end-child">0</property>
             <property name="shrink-start-child">0</property>
-            <property name="wide_handle">1</property>
+            <property name="wide_handle">1</property>-->
+            <property name="flap_position">end</property>
+            <property name="fold_policy">ADW_FLAP_FOLD_POLICY_NEVER</property>
+            <property name="locked">1</property>
+            <property name="reveal_flap">1</property>
+            <property name="separator">sep</property>
             <child>
               <object class="GtkPaned" id="vertical_box">
                 <property name="shrink-end-child">0</property>
@@ -137,7 +145,7 @@
                 </child>
               </object>
             </child>
-            <child>
+            <child type="flap">
               <object class="GtrContextPanel" id="context">
                 <property name="tab">GtrTab</property>
                 <!--<property name="width_request">150</property>-->
