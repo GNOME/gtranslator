@@ -2156,7 +2156,7 @@ gtr_tab_set_info_bar (GtrTab * tab, GtkWidget * infobar)
   if (infobar == NULL)
     return;
 
-  gtk_box_append (GTK_BOX (tab), priv->infobar);
+  gtk_box_prepend (GTK_BOX (tab), priv->infobar);
 
   g_object_add_weak_pointer (G_OBJECT (priv->infobar),
                              (gpointer *) & priv->infobar);
