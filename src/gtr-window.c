@@ -160,30 +160,41 @@ get_drop_window (GtkWidget * widget)
 }
 
 /* Handle drops on the GtrWindow */
-/*static void
-drag_data_received_cb (GtkWidget * widget,
-                       GdkDragContext * context,
+static gboolean
+drag_data_received_cb (GtkDropTarget * drop_target,
+                       const GValue * value,
                        gint x,
                        gint y,
-                       GtkSelectionData * selection_data,
-                       guint info, guint time, gpointer data)
+                       gpointer data)
 {
-  GtrWindow *window;
-  GSList *locations;
+  GtrWindow * window = GTR_WINDOW (data);
+  GError * error = NULL;
+  GSList *locations = NULL;
 
-  window = get_drop_window (widget);
-
-  if (window == NULL)
-    return;
-
-  if (info == TARGET_URI_LIST)
-    {
-      locations = gtr_utils_drop_get_locations (selection_data);
-      gtr_actions_load_locations (window, locations);
-
-      g_slist_free_full (locations, g_object_unref);
-    }
-}*/
+  if (G_VALUE_HOLDS (value, G_TYPE_FILE))
+  {
+    g_debug("file received \n");
+    gtr_open(g_value_get_object (G_FILE(value)), GTK_WINDOW(window), &error);
+    if (error != NULL)
+      {
+        GtkWidget *dialog;
+        GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
+        /*
+         * We have to show the error in a dialog
+         */
+        dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                         flags,
+                                         GTK_MESSAGE_ERROR,
+                                         GTK_BUTTONS_CLOSE,
+                                         "%s", error->message);
+        g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
+        gtk_window_present (GTK_WINDOW (dialog));
+        g_error_free (error);
+      }
+    return TRUE;
+  }
+  else return FALSE;
+}
 
 void
 set_window_title (GtrWindow * window, gboolean with_path)
@@ -351,6 +362,11 @@ gtr_window_init (GtrWindow *window)
 
   /* Profile manager */
   priv->prof_manager = gtr_profile_manager_get_default ();
+
+  /* Drag and drop */
+  GtkDropTarget * drop_target = gtk_drop_target_new (G_TYPE_FILE, GDK_ACTION_COPY);
+  g_signal_connect (drop_target, "drop", G_CALLBACK (drag_data_received_cb), window);
+  gtk_widget_add_controller (window, GTK_EVENT_CONTROLLER (drop_target));
 
   /* Drag and drop support, set targets to NULL because we add the
      default uri_targets below */
@@ -571,10 +587,12 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   if (gtk_stack_get_child_by_name (GTK_STACK(priv->stack),"poeditor") == NULL) {
     gtk_stack_add_named (GTK_STACK (priv->stack), GTK_WIDGET(priv->active_tab), "poeditor");
   }
+
   if (gtk_stack_get_child_by_name (GTK_STACK(priv->header_stack),"poeditor") == NULL) {
     gtk_stack_add_named (GTK_STACK (priv->header_stack),
                          gtr_tab_get_header (GTR_TAB (priv->active_tab)),
                          "poeditor");
+  g_debug("after getting child\n");
   }
 
   // code view

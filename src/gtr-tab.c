@@ -882,7 +882,8 @@ gtr_tab_init (GtrTab * tab)
   priv->content_position = g_settings_get_int (priv->state_settings,
                                                GTR_SETTINGS_CONTENT_PANEL_SIZE);
 
-  gtk_paned_set_position (priv->hbox, priv->context_position);
+  //CLEANUP: As priv->hbox is no more GtkPaned widget
+  //gtk_paned_set_position (priv->hbox, priv->context_position);
   gtk_paned_set_position (priv->vertical_box, priv->content_position);
 
   /* Manage auto save data */
