@@ -20,41 +20,28 @@
  *   Pablo Sanxiao <psanxiao@gmail.com>
  */
 
-#ifndef __GTR_WINDOW_H__
-#define __GTR_WINDOW_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
+#include <adwaita.h>
 
 #include "gtr-header.h"
-// #include "gtr-notebook.h"
 #include "gtr-tab.h"
 #include "gtr-view.h"
 
 G_BEGIN_DECLS
 
-#define GTR_TYPE_WINDOW		(gtr_window_get_type ())
+#define GTR_TYPE_WINDOW (gtr_window_get_type ())
 
 G_DECLARE_FINAL_TYPE (GtrWindow, gtr_window, GTR, WINDOW, AdwApplicationWindow)
-
-struct _GtrWindow
-{
-  AdwApplicationWindow parent_instance;
-};
-
-struct _GtrWindowClass
-{
-  AdwApplicationWindowClass parent_class;
-};
 
 GtrTab *gtr_window_create_tab (GtrWindow * window, GtrPo * po);
 
 GtrTab *gtr_window_get_active_tab (GtrWindow * window);
 
 GList *gtr_window_get_all_tabs (GtrWindow * window);
-
-// GtrNotebook *gtr_window_get_notebook (GtrWindow * window);
 
 GtrHeader * gtr_window_get_header_from_active_tab (GtrWindow * window);
 
@@ -67,9 +54,6 @@ GList *gtr_window_get_all_views (GtrWindow * window,
 
 GtkWidget *gtr_window_get_tab_from_location (GtrWindow * window, GFile * location);
 
-//void gtr_window_set_active_tab (GtrWindow * window, GtkWidget * tab);
-
-//void _gtr_window_close_tab (GtrWindow * window, GtrTab * tab);
 void gtr_window_remove_tab (GtrWindow * window);
 
 GtrTranslationMemory * gtr_window_get_tm (GtrWindow *window);
@@ -91,4 +75,3 @@ void gtr_window_show_dlteams (GtrWindow *window);
 void gtr_window_show_greeter (GtrWindow *window);
 
 G_END_DECLS
-#endif /* __GTR_WINDOW_H__ */

@@ -93,7 +93,12 @@ typedef struct
   guint dispose_has_run : 1;
 } GtrWindowPrivate;
 
-G_DEFINE_FINAL_TYPE_WITH_PRIVATE(GtrWindow, gtr_window, ADW_TYPE_APPLICATION_WINDOW)
+struct _GtrWindow
+{
+  AdwApplicationWindow parent_instance;
+};
+
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrWindow, gtr_window, ADW_TYPE_APPLICATION_WINDOW)
 
 enum
 {
@@ -171,29 +176,28 @@ drag_data_received_cb (GtkDropTarget * drop_target,
   GError * error = NULL;
   GSList *locations = NULL;
 
-  if (G_VALUE_HOLDS (value, G_TYPE_FILE))
-  {
-    g_debug("file received \n");
-    gtr_open(g_value_get_object (G_FILE(value)), GTK_WINDOW(window), &error);
-    if (error != NULL)
-      {
-        GtkWidget *dialog;
-        GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
-        /*
-         * We have to show the error in a dialog
-         */
-        dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                         flags,
-                                         GTK_MESSAGE_ERROR,
-                                         GTK_BUTTONS_CLOSE,
-                                         "%s", error->message);
-        g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-        gtk_window_present (GTK_WINDOW (dialog));
-        g_error_free (error);
-      }
-    return TRUE;
-  }
-  else return FALSE;
+  if (!G_VALUE_HOLDS (value, G_TYPE_FILE))
+    return FALSE;
+
+  gtr_window_remove_tab (window);
+  gtr_open (g_value_get_object (value), window, &error);
+  if (error != NULL)
+    {
+      GtkWidget *dialog;
+      GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
+      /*
+       * We have to show the error in a dialog
+       */
+      dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                       flags,
+                                       GTK_MESSAGE_ERROR,
+                                       GTK_BUTTONS_CLOSE,
+                                       "%s", error->message);
+      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
+      gtk_window_present (GTK_WINDOW (dialog));
+      g_error_free (error);
+    }
+  return TRUE;
 }
 
 void
@@ -368,30 +372,6 @@ gtr_window_init (GtrWindow *window)
   g_signal_connect (drop_target, "drop", G_CALLBACK (drag_data_received_cb), window);
   gtk_widget_add_controller (window, GTK_EVENT_CONTROLLER (drop_target));
 
-  /* Drag and drop support, set targets to NULL because we add the
-     default uri_targets below */
-  /*gtk_drag_dest_set (GTK_WIDGET (window),
-                     GTK_DEST_DEFAULT_MOTION |
-                     GTK_DEST_DEFAULT_HIGHLIGHT |
-                     GTK_DEST_DEFAULT_DROP, NULL, 0, GDK_ACTION_COPY);
-
-  // Add uri targets //
-  tl = gtk_drag_dest_get_target_list (GTK_WIDGET (window));
-
-  if (tl == NULL)
-    {
-      tl = gtk_target_list_new (NULL, 0);
-      gtk_drag_dest_set_target_list (GTK_WIDGET (window), tl);
-      gtk_target_list_unref (tl);
-    }
-
-  gtk_target_list_add_uri_targets (tl, TARGET_URI_LIST);
-
-  // Connect signals //
-  g_signal_connect (window,
-                    "drag_data_received",
-                    G_CALLBACK (drag_data_received_cb), NULL);*/
-
   // project selection
   priv->projects = GTK_WIDGET (gtr_projects_new (window));
   gtk_stack_add_named (GTK_STACK (priv->stack), priv->projects, "projects");
@@ -538,18 +518,8 @@ gtr_window_remove_tab (GtrWindow * window)
 GtrTab *
 gtr_window_create_tab (GtrWindow * window, GtrPo * po)
 {
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   GtrTab *tab;
-
-  // Remove all tabs when creating a new one,
-  // this way we only have one tab. This is a workaround
-  // to remove the tab functionality without change all
-  // the code
-  GList *tabs, *l;
-  /*tabs = gtr_window_get_all_tabs (window);
-  for (l = tabs; l != NULL; l = g_list_next (l))
-    _gtr_window_close_tab (window, l->data);
-  g_list_free (tabs);*/
 
   tab = gtr_tab_new (po, GTK_WINDOW (window));
   g_return_if_fail (GTR_IS_TAB (tab));
@@ -573,26 +543,16 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   gtk_widget_show (GTK_WIDGET (tab));
   gtr_window_update_statusbar_message_count(priv->active_tab,NULL, window);
 
-  //update_undo_state (NULL, NULL, window);
+  update_undo_state (tab, NULL, window);
 
-  //GtkWidget *label;
-  //label = create_tab_label (notebook, tab);
-  //gtk_notebook_append_page (GTK_NOTEBOOK (notebook), GTK_WIDGET (tab), label);
-
-  /*
-  gtr_notebook_add_page (GTR_NOTEBOOK (priv->notebook), tab);
-  gtr_notebook_reset_sort (GTR_NOTEBOOK (priv->notebook));
-  */
-
-  if (gtk_stack_get_child_by_name (GTK_STACK(priv->stack),"poeditor") == NULL) {
+  if (gtk_stack_get_child_by_name (GTK_STACK (priv->stack), "poeditor") == NULL) {
     gtk_stack_add_named (GTK_STACK (priv->stack), GTK_WIDGET(priv->active_tab), "poeditor");
   }
 
-  if (gtk_stack_get_child_by_name (GTK_STACK(priv->header_stack),"poeditor") == NULL) {
+  if (gtk_stack_get_child_by_name (GTK_STACK (priv->header_stack), "poeditor") == NULL) {
     gtk_stack_add_named (GTK_STACK (priv->header_stack),
                          gtr_tab_get_header (GTR_TAB (priv->active_tab)),
                          "poeditor");
-  g_debug("after getting child\n");
   }
 
   // code view
