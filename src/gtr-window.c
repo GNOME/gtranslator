@@ -163,8 +163,8 @@ get_drop_window (GtkWidget * widget)
 static gboolean
 drag_data_received_cb (GtkDropTarget * drop_target,
                        const GValue * value,
-                       gint x,
-                       gint y,
+                       gdouble x,
+                       gdouble y,
                        gpointer data)
 {
   GtrWindow * window = GTR_WINDOW (data);
