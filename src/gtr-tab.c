@@ -122,10 +122,8 @@ typedef struct
   guint dispose_has_run : 1;
 
   /*Search Bar*/
-  GtkOverlay     *overlay;
-  GtkRevealer    *search_revealer;
-  GtrSearchBar   *search_bar;
-  GtkSearchEntry *search;
+  GtkSearchBar   *search_bar;
+  GtrSearchBar   *gtr_search_bar;
 
   /* notebook code */
   GtkWidget *titlebar;
@@ -176,10 +174,7 @@ gtr_page_stop_search (GtrTab *tab,
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
-  g_assert (GTR_IS_TAB (tab));
-  g_assert (GTR_IS_SEARCH_BAR (priv->search_bar));
-
-  gtk_revealer_set_reveal_child (priv->search_revealer, FALSE);
+  gtk_search_bar_set_search_mode (priv->search_bar, FALSE);
 
 }
 
@@ -192,7 +187,7 @@ gtr_tab_focus_search_bar (GtrTab *tab)
   g_assert (GTR_IS_TAB (tab));
   priv = gtr_tab_get_instance_private (tab);
 
-  entry = (GtkEntry *) gtr_search_bar_get_search (priv->search_bar);
+  entry = (GtkEntry *) gtr_search_bar_get_search (priv->gtr_search_bar);
 
   gtk_entry_grab_focus_without_selecting (entry);
 }
@@ -202,10 +197,8 @@ gtr_tab_show_hide_search_bar (GtrTab *tab, gboolean show)
 {
   GtrTabPrivate *priv;
 
-  g_assert (GTR_IS_TAB (tab));
   priv = gtr_tab_get_instance_private (tab);
-
-  gtk_revealer_set_reveal_child (priv->search_revealer, show);
+  gtk_search_bar_set_search_mode (priv->search_bar, show);
 }
 
 void
@@ -216,7 +209,7 @@ gtr_tab_find_set_replace (GtrTab   *tab,
 
   g_assert (GTR_IS_TAB (tab));
   priv = gtr_tab_get_instance_private (tab);
-  gtr_search_bar_set_replace_mode (priv->search_bar, replace);
+  gtr_search_bar_set_replace_mode (priv->gtr_search_bar, replace);
 }
 
 void
@@ -225,7 +218,7 @@ gtr_tab_find_next (GtrTab * tab)
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
-  gtr_search_bar_find_next (priv->search_bar);
+  gtr_search_bar_find_next (priv->gtr_search_bar);
 }
 
 void
@@ -234,7 +227,7 @@ gtr_tab_find_prev (GtrTab * tab)
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
-  gtr_search_bar_find_prev (priv->search_bar);
+  gtr_search_bar_find_prev (priv->gtr_search_bar);
 }
 
 void
@@ -257,7 +250,7 @@ gtr_page_notify_child_revealed (GtrTab *tab,
        * as it can reselect the search text.
        */
       if (focus == NULL || !gtk_widget_is_ancestor (focus, GTK_WIDGET (revealer)))
-        gtk_widget_grab_focus (GTK_WIDGET (priv->search_bar));
+        gtk_widget_grab_focus (GTK_WIDGET (priv->gtr_search_bar));
     }
 }
 
@@ -690,11 +683,11 @@ emit_selection_changed (GtkTextBuffer * buf, GParamSpec * spec, GtrTab * tab)
 }
 
 static void
-emit_searchbar_toggled (GtkRevealer *revealer,
-                        GParamSpec  *pspec,
-                        GtrTab      *tab)
+emit_searchbar_toggled (GtkSearchBar *search_bar,
+                        GParamSpec   *pspec,
+                        GtrTab       *tab)
 {
-  gboolean revealed = gtk_revealer_get_child_revealed (revealer);
+  gboolean revealed = gtk_search_bar_get_search_mode (search_bar);
   g_signal_emit (G_OBJECT (tab), signals[SEARCHBAR_TOGGLED], 0, revealed);
 }
 
@@ -897,7 +890,7 @@ gtr_tab_init (GtrTab * tab)
   g_signal_connect (priv->progress_gesture_click, "pressed",
                     G_CALLBACK (show_hide_revealer), tab);
 
-  g_signal_connect (priv->search_revealer, "notify::child-revealed",
+  g_signal_connect (priv->search_bar, "notify::search-mode-enabled",
                     G_CALLBACK (emit_searchbar_toggled), tab);
 
   // TODO: related to header of gtr tab move to saperate header file
@@ -1121,9 +1114,8 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_fuzzy);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_untrans);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_percentage);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, overlay);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_bar);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_revealer);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, gtr_search_bar);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, titlebar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_id);

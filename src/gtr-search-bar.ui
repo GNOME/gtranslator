@@ -8,10 +8,8 @@
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
-        <property name="spacing">7</property>
         <child>
           <object class="GtkGrid">
-            <property name="row_spacing">8</property>
             <property name="column_spacing">8</property>
             <child>
               <object class="GtkEntry" id="search_entry">
@@ -22,37 +20,6 @@
                 <layout>
                   <property name="column">0</property>
                   <property name="row">0</property>
-                </layout>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel" id="search_text_error">
-                <property name="visible">0</property>
-                <property name="xalign">0.0</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-                <attributes>
-                  <attribute name="scale" value="0.8333"></attribute>
-                </attributes>
-                <layout>
-                  <property name="column">0</property>
-                  <property name="column-span">3</property>
-                  <property name="row">1</property>
-                </layout>
-              </object>
-            </child>
-            <child>
-              <object class="GtkEntry" id="replace_entry">
-                <property name="visible">0</property>
-                <property name="width-chars">20</property>
-                <property name="max-width-chars">30</property>
-                <property name="primary_icon_name">edit-find-replace-symbolic</property>
-                <property name="primary_icon_activatable">0</property>
-                <property name="primary_icon_sensitive">0</property>
-                <layout>
-                  <property name="column">0</property>
-                  <property name="row">2</property>
                 </layout>
               </object>
             </child>
@@ -77,28 +44,6 @@
                 <layout>
                   <property name="column">1</property>
                   <property name="row">0</property>
-                </layout>
-              </object>
-            </child>
-            <child>
-              <object class="GtkButton" id="replace_button">
-                <property name="label" translatable="1">Replace</property>
-                <property name="visible">0</property>
-                <layout>
-                  <property name="column">1</property>
-                  <property name="row">2</property>
-                </layout>
-              </object>
-            </child>
-            <child>
-              <object class="GtkButton" id="replace_all_button">
-                <property name="label" translatable="1">Replace All</property>
-                <property name="visible">0</property>
-                <!--TODO: <property name="action-name">editor-search.replace-all</property> -->
-                <property name="action_name">editor-search.replace-all</property>
-                <layout>
-                  <property name="column">2</property>
-                  <property name="row">2</property>
                 </layout>
               </object>
             </child>
@@ -131,59 +76,117 @@
           </object>
         </child>
         <child>
-          <object class="GtkGrid" id="search_options">
-            <property name="visible">0</property>
-            <property name="column_spacing">8</property>
+          <object class="GtkRevealer" id="replace_options">
             <child>
-              <object class="GtkCheckButton" id="case_sensitive">
-                <property name="label" translatable="1">Case sensitive</property>
-                <property name="action-name">search-settings.case-sensitive</property>
-                <layout>
-                  <property name="column">0</property>
-                  <property name="row">0</property>
-                </layout>
+              <object class="GtkGrid">
+                <property name="column_spacing">8</property>
+                <child>
+                  <object class="GtkEntry" id="replace_entry">
+                    <property name="width-chars">20</property>
+                    <property name="max-width-chars">30</property>
+                    <property name="primary_icon_name">edit-find-replace-symbolic</property>
+                    <property name="primary_icon_activatable">0</property>
+                    <property name="primary_icon_sensitive">0</property>
+                    <layout>
+                      <property name="column">0</property>
+                      <property name="row">0</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="replace_button">
+                    <property name="label" translatable="1">Replace</property>
+                    <layout>
+                      <property name="column">1</property>
+                      <property name="row">0</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="replace_all_button">
+                    <property name="label" translatable="1">Replace All</property>
+                    <!--TODO: <property name="action-name">editor-search.replace-all</property> -->
+                    <property name="action_name">editor-search.replace-all</property>
+                    <layout>
+                      <property name="column">2</property>
+                      <property name="row">0</property>
+                    </layout>
+                  </object>
+                </child>
+
               </object>
             </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkRevealer" id="search_options">
             <child>
-              <object class="GtkCheckButton" id="whole_word">
-                <property name="label" translatable="1">Match whole word only</property>
-                <property name="action-name">search-settings.at-word-boundaries</property>
-                <layout>
-                  <property name="column">1</property>
-                  <property name="row">0</property>
-                </layout>
+              <object class="GtkGrid">
+                <property name="column_spacing">8</property>
+                <child>
+                  <object class="GtkCheckButton" id="case_sensitive">
+                    <property name="label" translatable="1">Case sensitive</property>
+                    <property name="action-name">search-settings.case-sensitive</property>
+                    <layout>
+                      <property name="column">0</property>
+                      <property name="row">0</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="whole_word">
+                    <property name="label" translatable="1">Match whole word only</property>
+                    <property name="action-name">search-settings.at-word-boundaries</property>
+                    <layout>
+                      <property name="column">1</property>
+                      <property name="row">0</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="wrap_around_button">
+                    <property name="label" translatable="1">Wrap around</property>
+                    <property name="action-name">search-settings.wrap-around</property>
+                    <layout>
+                      <property name="column">2</property>
+                      <property name="row">0</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="original_text_checkbutton">
+                    <property name="label" translatable="1">Original text</property>
+                    <property name="action-name">search-settings.at-original-text</property>
+                    <layout>
+                      <property name="column">0</property>
+                      <property name="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="translated_text_checkbutton">
+                    <property name="label" translatable="1">Translated text</property>
+                    <property name="action-name">search-settings.at-translated-text</property>
+                    <layout>
+                      <property name="column">1</property>
+                      <property name="row">1</property>
+                    </layout>
+                  </object>
+                </child>
               </object>
             </child>
-            <child>
-              <object class="GtkCheckButton" id="wrap_around_button">
-                <property name="label" translatable="1">Wrap around</property>
-                <property name="action-name">search-settings.wrap-around</property>
-                <layout>
-                  <property name="column">2</property>
-                  <property name="row">0</property>
-                </layout>
-              </object>
-            </child>
-            <child>
-              <object class="GtkCheckButton" id="original_text_checkbutton">
-                <property name="label" translatable="1">Original text</property>
-                <property name="action-name">search-settings.at-original-text</property>
-                <layout>
-                  <property name="column">0</property>
-                  <property name="row">1</property>
-                </layout>
-              </object>
-            </child>
-            <child>
-              <object class="GtkCheckButton" id="translated_text_checkbutton">
-                <property name="label" translatable="1">Translated text</property>
-                <property name="action-name">search-settings.at-translated-text</property>
-                <layout>
-                  <property name="column">1</property>
-                  <property name="row">1</property>
-                </layout>
-              </object>
-            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="search_text_error">
+            <property name="visible">false</property>
+            <property name="xalign">0.0</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
+            <attributes>
+              <attribute name="scale" value="0.8333"></attribute>
+            </attributes>
           </object>
         </child>
       </object>

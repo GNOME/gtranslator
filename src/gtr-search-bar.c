@@ -42,7 +42,8 @@ struct _GtrSearchBar
   GtkButton               *next_button;
   GtkEntry                *replace_entry;
   GtkEntry                *search_entry;
-  GtkGrid                 *search_options;
+  GtkRevealer             *search_options;
+  GtkRevealer             *replace_options;
   GtkLabel                *search_text_error;
 
   GtrWindow               *active_window;
@@ -346,9 +347,7 @@ gtr_search_bar_set_replace_mode (GtrSearchBar *self,
   if (replace_mode != self->replace_mode)
     {
       self->replace_mode = replace_mode;
-      gtk_widget_set_visible (GTK_WIDGET (self->replace_entry), replace_mode);
-      gtk_widget_set_visible (GTK_WIDGET (self->replace_button), replace_mode);
-      gtk_widget_set_visible (GTK_WIDGET (self->replace_all_button), replace_mode);
+      gtk_revealer_set_reveal_child (self->replace_options, replace_mode);
       g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_REPLACE_MODE]);
     }
 }
@@ -489,7 +488,7 @@ gtr_search_bar_set_show_options (GtrSearchBar *self,
   if (self->show_options != show_options)
     {
       self->show_options = show_options;
-      gtk_widget_set_visible (GTK_WIDGET (self->search_options), show_options);
+      gtk_revealer_set_reveal_child (self->search_options, show_options);
       g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_SHOW_OPTIONS]);
     }
 }
@@ -668,6 +667,7 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, previous_button);
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, next_button);
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, search_options);
+  gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, replace_options);
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, search_text_error);
 
   gtk_widget_class_set_css_name (widget_class, "gtrsearchbar");

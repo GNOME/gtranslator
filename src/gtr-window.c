@@ -489,6 +489,7 @@ searchbar_toggled (GtrTab * tab, gboolean revealed, GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   gtr_tab_enable_find_button (GTR_TAB (priv->active_tab), revealed);
+  priv->search_bar_shown = revealed;
 }
 
 /***************************** Public funcs ***********************************/
@@ -953,13 +954,13 @@ gtr_window_show_search_bar (GtrWindow *window,
                             gboolean show)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
-  //GtrNotebook *notebook = GTR_NOTEBOOK (priv->notebook);
   GtrTab *tab = gtr_window_get_active_tab (window);
 
-  if (tab != NULL)
-    gtr_tab_show_hide_search_bar (tab, show);
+  if (!tab)
+    return;
 
-  gtr_tab_enable_find_button(tab, show);
+  gtr_tab_show_hide_search_bar (tab, show);
+  gtr_tab_enable_find_button (tab, show);
 
   priv->search_bar_shown = show;
 }
@@ -984,5 +985,5 @@ gtr_window_toggle_search_bar (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
 
-  gtr_window_show_search_bar(window, !priv->search_bar_shown);
+  gtr_window_show_search_bar (window, !priv->search_bar_shown);
 }
