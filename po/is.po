@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
 "POT-Creation-Date: 2022-07-27 09:21+0000\n"
-"PO-Revision-Date: 2022-09-06 13:58+0000\n"
+"PO-Revision-Date: 2022-09-07 14:15+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #| msgid "gtranslator"
 msgid "Gtranslator"
-msgstr "gtranslator"
+msgstr "Gtranslator"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:8
 #: data/org.gnome.Gtranslator.desktop.in.in:5
@@ -60,7 +60,7 @@ msgstr "Þýðingaritill"
 #: data/org.gnome.Gtranslator.desktop.in.in:4
 #| msgid "Editor"
 msgid "PO File Editor"
-msgstr "Ritill"
+msgstr "Ritill fyrir PO-skrár"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:14
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
@@ -69,7 +69,7 @@ msgstr ""
 #: data/org.gnome.Gtranslator.gschema.xml.in:24
 #| msgid "Warn if po file contains fuzzy translations"
 msgid "Warn if file contains fuzzy translations"
-msgstr "Vara við ef po-skrá inniheldur loðnar þýðingar"
+msgstr "Vara við ef skrá inniheldur loðnar þýðingar"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:25
 msgid ""
@@ -89,12 +89,12 @@ msgstr ""
 #: data/org.gnome.Gtranslator.gschema.xml.in:39
 #| msgid "Autosave"
 msgid "Auto save files"
-msgstr "Sjálfvirk vistun"
+msgstr "Sjálfvirk vistun skráa"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:40
 #| msgid "Automatically save at regular intervals"
 msgid "If true, automatically save files at specified intervals."
-msgstr "Vista sjálfkrafa með reglulegu millibili"
+msgstr "Ef virkt, vista sjálfkrafa með tilteknu millibili."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:46
 #| msgid "Autosave interval:"
@@ -104,7 +104,7 @@ msgstr "Millibil sjálfvirkrar vistunar:"
 #: data/org.gnome.Gtranslator.gschema.xml.in:47
 #| msgid "Append a suffix to automatically saved files"
 msgid "Interval in minutes at which to automatically save files."
-msgstr "Hengja endingu á sjálfvirkt vistaðar skrár"
+msgstr "Millibil í mínútum á milli þess sem skrár eru sjálfvirkt vistaðar."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:53
 msgid "Create backup before saving"
@@ -127,7 +127,7 @@ msgstr ""
 #: data/org.gnome.Gtranslator.gschema.xml.in:70
 #| msgid "Highlight syntax of the translation message"
 msgid "Highlight syntax in edit fields"
-msgstr "Lita kóða í þýðingarfærslu"
+msgstr "Lita kóða í þýðingafærslum"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:71
 msgid "If true, apply syntax highlighting to strings in edit fields."
@@ -149,7 +149,8 @@ msgstr "Eyða loðinni stöðu ef færslu er breytt"
 #: data/org.gnome.Gtranslator.gschema.xml.in:85
 #| msgid "Remove fuzzy status if message is changed"
 msgid "If true, remove fuzzy status from translations when they are changed."
-msgstr "Eyða loðinni stöðu ef færslu er breytt"
+msgstr ""
+"Ef virkt, fjarlægja loðna stöðu af þýðingafærslum þegar þeim er breytt."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:91
 msgid "Check spelling"
@@ -158,7 +159,7 @@ msgstr "Yfirfara stafsetningu"
 #: data/org.gnome.Gtranslator.gschema.xml.in:92
 #| msgid "Go to next untranslated message"
 msgid "If true, check the spelling of translated messages."
-msgstr "Fara til næsta loðna strengs"
+msgstr "Ef virkt, yfirfara stafsetningu þýddra færslna."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:103
 msgid "Side panel switcher style"
@@ -169,7 +170,6 @@ msgid "Style for switchers in the side panel."
 msgstr ""
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:110
-#, fuzzy
 #| msgid "_Colorschemes"
 msgid "Color scheme"
 msgstr "Litastef"
@@ -214,7 +214,6 @@ msgid "Source Viewer"
 msgstr ""
 
 #: src/codeview/gtr-viewer.ui:62
-#, fuzzy
 msgid "Source code"
 msgstr "Upprunakóði"
 
@@ -227,17 +226,16 @@ msgid "Previous Developers"
 msgstr "Fyrri forritarar"
 
 #: src/gtr-actions-app.c:73
-#, fuzzy
 #| msgid "Contents"
 msgid "Contributors"
-msgstr "Innihald"
+msgstr "Þátttakendur"
 
 #: src/gtr-actions-app.c:98
 #| msgid "gtranslator is a po file editing suite with many bells and whistles."
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
-msgstr "gtranslator er po-ritill með mörgum sniðugum fídusum."
+msgstr "Hugbúnaður til þýðinga og staðfærslu á forritum og aðgerðasöfnum."
 
 #  Translator credits
 #.
@@ -247,14 +245,14 @@ msgstr "gtranslator er po-ritill með mörgum sniðugum fídusum."
 #: src/gtr-actions-app.c:111
 msgid "translator-credits"
 msgstr ""
-"Áki G. Karlsson og\n"
-"Victor Jónsson"
+"Áki G. Karlsson\n"
+"Victor Jónsson\n"
+"Sveinn í Felli"
 
 #: src/gtr-actions-app.c:114
-#, fuzzy
 #| msgid "gtranslator _website"
 msgid "Translation Editor Web Site"
-msgstr "_Heimasíða gtranslator"
+msgstr "Heimasíða þýðingaritilsins"
 
 #: src/gtr-actions-file.c:217
 #, c-format
@@ -268,25 +266,22 @@ msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr ""
 
 #: src/gtr-actions-file.c:226
-#, fuzzy
 #| msgid "Save as"
 msgid "Save and open"
-msgstr "Vista sem"
+msgstr "Vista og opna"
 
 #: src/gtr-actions-file.c:227
-#, fuzzy
 msgid "Cancel"
 msgstr "Hætta við"
 
 #: src/gtr-actions-file.c:228
-#, fuzzy
 msgid "Continue without saving"
-msgstr "_Halda áfram án þess að vista"
+msgstr "Halda áfram án þess að vista"
 
 #: src/gtr-actions-file.c:260
 #| msgid "Copy _message -> translation"
 msgid "Open file for translation"
-msgstr "Afrita _færslu -> þýðing"
+msgstr "Opna skrá til þýðingar"
 
 #: src/gtr-actions-file.c:359
 msgid "This file has already been uploaded"
@@ -306,10 +301,9 @@ msgid "The file has been uploaded!"
 msgstr ""
 
 #: src/gtr-actions-file.c:546
-#, fuzzy
 #| msgid "Save File"
 msgid "Save file as…"
-msgstr "Vista skrá"
+msgstr "Vista skrá sem…"
 
 #: src/gtr-assistant.c:128
 #, c-format
@@ -330,39 +324,33 @@ msgid "This assistant will help you to create the main profile."
 msgstr ""
 
 #: src/gtr-assistant.c:176
-#, fuzzy
 msgid "Assistant"
-msgstr "Aðstoðarmaður"
+msgstr "Aðstoð"
 
 #: src/gtr-assistant.c:268
-#, fuzzy
 #| msgid "Project name:"
 msgid "Profile name"
-msgstr "Nafn notanda"
+msgstr "Heiti notkunarsniðs"
 
 #: src/gtr-assistant.c:314
-#, fuzzy
 #| msgid "Translator's e-mail:"
 msgid "Translator email"
-msgstr "Netfang þýðanda:"
+msgstr "Tölvupóstfang þýðanda"
 
 #: src/gtr-assistant.c:337
 msgid "Team email"
 msgstr "Tölvupóstfang þýðingateymis"
 
 #: src/gtr-assistant.c:353 src/gtr-preferences-dialog.c:588
-#, fuzzy
 msgid "Profile"
 msgstr "Snið"
 
 #: src/gtr-assistant.c:447
-#, fuzzy
 #| msgid "Language:"
 msgid "Language"
 msgstr "Tungumál"
 
 #: src/gtr-assistant.c:469
-#, fuzzy
 #| msgid "Personal Information"
 msgid "Confirmation"
 msgstr "Staðfesting"
@@ -372,7 +360,6 @@ msgid "Close _without Saving"
 msgstr "_Loka án þess að vista"
 
 #: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:108
-#, fuzzy
 #: src/gtr-file-dialogs.c:47 src/gtr-jump-dialog.c:90
 #: src/gtr-preferences-dialog.c:460 src/gtr-profile-dialog.c:72
 #: src/translation-memory/gtr-translation-memory-dialog.c:105
@@ -381,43 +368,39 @@ msgstr "_Hætta við"
 
 #: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:106
 #: src/gtr-file-dialogs.c:46
-#, fuzzy
 #| msgid "Save"
 msgid "_Save"
-msgstr "_Vista"
+msgstr "Vi_sta"
 
 #: src/gtr-close-confirmation-dialog.c:155
-#, fuzzy
 msgid "Question"
 msgstr "Spurning"
 
 #: src/gtr-close-confirmation-dialog.c:371
 #, c-format
 msgid "Save the changes to document “%s” before closing?"
-msgstr ""
+msgstr "Viltu vista breytingar á skjalinu “%s“ áður en þú lokar því?"
 
 #: src/gtr-close-confirmation-dialog.c:543
-#, fuzzy, c-format
+#, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
-msgstr[0] "Breytingar á skjalinu %d munu endanlega tapast."
-msgstr[1] ""
-"Breytingar sem gerðar hafa verið á skjalinu síðustu %d klukkustundirnar munu "
-"tapast."
+msgstr[0] "Breytingar á %d skjali munu endanlega tapast."
+msgstr[1] "Breytingar á %d skjölum munu endanlega tapast."
 
 #: src/gtr-close-confirmation-dialog.c:550
-#, fuzzy, c-format
+#, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] ""
 "Þú átt eftir að vista breytingar á %d skjali. Viltu vista áður en þú lokar?"
 msgstr[1] ""
-"Þú átt eftir að vista breytingar á %d myndum. Viltu vista áður en þú lokar?"
+"Þú átt eftir að vista breytingar á %d skjölum. Viltu vista áður en þú lokar?"
 
 #: src/gtr-close-confirmation-dialog.c:571
 msgid "Docum_ents with unsaved changes:"
-msgstr "_Skjöl með breytingum sem á eftir að vista:"
+msgstr "Skjöl með br_eytingum sem á eftir að vista:"
 
 #: src/gtr-close-confirmation-dialog.c:575
 msgid "S_elect the documents you want to save:"
@@ -425,29 +408,25 @@ msgstr "V_eldu skjölin sem þú vilt vista:"
 
 #: src/gtr-close-confirmation-dialog.c:595
 msgid "Saving has been disabled by the system administrator."
-msgstr "Kerfisstjórinn hefur bannað þér að vista."
+msgstr "Vistun hefur verið gerð óvirk af kerfisstjóranum."
 
 #: src/gtr-close-confirmation-dialog.c:597
 msgid "If you don’t save, all your changes will be permanently lost."
 msgstr "Ef þú vistar ekki munu allar breytingar glatast."
 
 #: src/gtr-context.c:101
-#, fuzzy
 msgid "Notes"
-msgstr "Athugasemdir"
+msgstr "Minnispunktar"
 
 #: src/gtr-context.c:305
-#, fuzzy
 msgid "Notes:"
-msgstr "Athugasemdir:"
+msgstr "Minnispunktar:"
 
 #: src/gtr-context.c:313
-#, fuzzy
 msgid "Add Note"
-msgstr "Bæta við athugasemd"
+msgstr "Bæta við minnispunkti"
 
 #: src/gtr-context.c:318
-#, fuzzy
 #| msgid "Editor"
 msgid "Edit"
 msgstr "Breyta"
@@ -455,16 +434,14 @@ msgstr "Breyta"
 #: src/gtr-context.c:363
 #| msgid "Edit comment"
 msgid "Extracted comments:"
-msgstr "Breyta athugasemd"
+msgstr "Sóttar athugasemdir:"
 
 #: src/gtr-context.c:366
-#, fuzzy
 #| msgid "Contents"
 msgid "Context:"
-msgstr "Innihald"
+msgstr "Samhengi:"
 
 #: src/gtr-context.c:369
-#, fuzzy
 msgid "Format:"
 msgstr "Snið:"
 
@@ -480,7 +457,7 @@ msgstr ""
 #: src/gtr-dl-teams.c:625
 #, c-format
 msgid "The file '%s' has been saved in %s"
-msgstr ""
+msgstr "Skráin '%s' hefur verið vistuð í %s"
 
 #: src/gtr-dl-teams.c:702
 #, c-format
@@ -494,22 +471,22 @@ msgstr ""
 #: src/gtr-dl-teams.c:719
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
-msgstr ""
+msgstr "Það tókst að taka frá skrána '%s.%s.%s.%s'"
 
 #: src/gtr-dl-teams.c:869
-#, fuzzy
 #| msgid "Translation"
 msgid "Translation Team"
-msgstr "Þýðing"
+msgstr "Þýðingateymi"
 
 #: src/gtr-dl-teams.c:876
-#, fuzzy
 msgid "Module"
 msgstr "Eining"
 
 #: src/gtr-dl-teams.ui:85
 msgid "Select team, module, branch and domain to get the translation file."
 msgstr ""
+"Veldu þýðingateymi, einingu, grein (brench) og þýðingarlén til að sækja"
+" þýðingaskrána."
 
 #: src/gtr-dl-teams.ui:106
 #| msgid "Remove all translations..."
@@ -525,43 +502,35 @@ msgid "Load from Damned Lies"
 msgstr "Sækja á Damned Lies"
 
 #: src/gtr-dl-teams.ui:143 src/gtr-projects.ui:58
-#, fuzzy
 #| msgid "Open"
 msgid "Open…"
 msgstr "Opna…"
 
 #: src/gtr-dl-teams.ui:166 src/gtr-notebook.ui:410 src/gtr-projects.ui:91
-#, fuzzy
 msgid "Main Menu"
-msgstr "Aðal valmyndin"
+msgstr "Aðalvalmynd"
 
 #: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:151 src/gtr-projects.ui:119
-#, fuzzy
 msgid "New window"
 msgstr "Nýr gluggi"
 
 #: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:160 src/gtr-projects.ui:133
-#, fuzzy
 msgid "Preferences"
 msgstr "Kjörstillingar"
 
 #: src/gtr-dl-teams.ui:235 src/gtr-notebook.ui:177 src/gtr-projects.ui:174
-#, fuzzy
 msgid "Keyboard Shortcuts"
 msgstr "Flýtilyklar"
 
 #: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:186 src/gtr-projects.ui:188
-#, fuzzy
 msgid "About"
 msgstr "Um hugbúnaðinn"
 
 #: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:204 src/gtr-projects.ui:216
-#, fuzzy
 msgid "Quit"
 msgstr "Hætta"
 
 #: src/gtr-file-dialogs.c:47
-#, fuzzy
 #| msgid "Open"
 msgid "_Open"
 msgstr "_Opna"
@@ -569,15 +538,14 @@ msgstr "_Opna"
 #: src/gtr-file-dialogs.c:59
 #| msgid "Go to the next fuzzy translation"
 msgid "Gettext translation"
-msgstr "Fara til næstu loðnu þýðingar"
+msgstr "Gettext þýðing"
 
 #: src/gtr-file-dialogs.c:68
 #| msgid "Go to next untranslated message"
 msgid "Gettext translation template"
-msgstr "Fara til næsta loðna strengs"
+msgstr "Gettext þýðingasniðmát"
 
 #: src/gtr-file-dialogs.c:73
-#, fuzzy
 msgid "All files"
 msgstr "Allar skrár"
 
@@ -588,46 +556,42 @@ msgstr "Breyta haus"
 
 #: src/gtr-header-dialog.ui:71
 msgid "Use my options to complete the following entries:"
-msgstr "Nota mitt val til að ljúka eftirfarandi færslum:"
+msgstr "Nota valkosti mína til að ljúka eftirfarandi færslum:"
 
 #: src/gtr-header-dialog.ui:95
-#, fuzzy
 #| msgid "Translator's name:"
 msgid "Translator’s _name:"
-msgstr "Nafn þýðanda:"
+msgstr "_Nafn þýðanda:"
 
 #: src/gtr-header-dialog.ui:109
-#, fuzzy
 #| msgid "Translator's e-mail:"
 msgid "Translator’s _email:"
-msgstr "Netfang þýðanda:"
+msgstr "Tölvu_póstfang þýðanda:"
 
 #: src/gtr-header-dialog.ui:123
-#, fuzzy
 #| msgid "Language:"
 msgid "_Language:"
-msgstr "_Tungumál:"
+msgstr "Tungumá_l:"
 
 #: src/gtr-header-dialog.ui:136
 #| msgid "Language code:"
 msgid "Language _code:"
-msgstr "Tungumálslykill:"
+msgstr "Tungumáls_kóði:"
 
 #: src/gtr-header-dialog.ui:149
-#, fuzzy
 #| msgid "Language group's email:"
 msgid "Language _Team email:"
-msgstr "Netfang þýðingarhóps:"
+msgstr "_Tölvupóstfang þýðingateymis:"
 
 #: src/gtr-header-dialog.ui:162
 #| msgid "Charset:"
 msgid "Char_set:"
-msgstr "Stafagerð:"
+msgstr "_Stafatafla:"
 
 #: src/gtr-header-dialog.ui:175
 #| msgid "Encoding:"
 msgid "Enc_oding:"
-msgstr "Táknun:"
+msgstr "_Kóðun:"
 
 #: src/gtr-header-dialog.ui:273
 msgid "Translator and Language"
@@ -636,56 +600,55 @@ msgstr "Þýðandi og tungumál"
 #: src/gtr-header-dialog.ui:299
 #| msgid "Project version:"
 msgid "Project Id _version:"
-msgstr "Útgáfa verkefnis:"
+msgstr "Útgáfa _verkefnis:"
 
 #: src/gtr-header-dialog.ui:312
 #| msgid "Pot file creation date:"
 msgid "Pot _file creation date:"
-msgstr "Pot-skrá búin til:"
+msgstr "POT-skrá búin til:"
 
 #: src/gtr-header-dialog.ui:326
 #| msgid "Po file revision date:"
 msgid "Po file _revision date:"
-msgstr "Po-skrá endurskoðuð:"
+msgstr "PO-skrá endurskoðuð:"
 
 #: src/gtr-header-dialog.ui:340
 #| msgid "Report message string bugs to:"
 msgid "Report message _bugs to:"
-msgstr "Tilkynna villur í strengjum til:"
+msgstr "Tilk_ynna villur í færslum til:"
 
 #: src/gtr-header-dialog.ui:409
 msgid "Project"
-msgstr "Verkefni:"
+msgstr "Verkefni"
 
 #: src/gtr-header-dialog.ui:442
-#, fuzzy
 #| msgid "Comment:"
 msgid "Comment"
 msgstr "Athugasemd"
 
 #: src/gtr-header-dialog.ui:469
 msgid "DL Team:"
-msgstr ""
+msgstr "DL-teymi:"
 
 #: src/gtr-header-dialog.ui:482
 msgid "DL Module:"
-msgstr ""
+msgstr "DL-eining:"
 
 #: src/gtr-header-dialog.ui:496
 msgid "DL Branch:"
-msgstr ""
+msgstr "DL-grein:"
 
 #: src/gtr-header-dialog.ui:510
 msgid "DL Domain:"
-msgstr ""
+msgstr "DL-lén:"
 
 #: src/gtr-header-dialog.ui:524
 msgid "DL State:"
-msgstr ""
+msgstr "DL-staða:"
 
 #: src/gtr-header-dialog.ui:602
 msgid "Damned Lies Info"
-msgstr ""
+msgstr "Damned Lies upplýsingar"
 
 #: src/gtr-io-error-info-bar.c:150 src/gtr-jump-dialog.c:88
 #: src/gtr-profile-dialog.c:173 src/gtr-profile-dialog.c:178
@@ -696,93 +659,84 @@ msgstr "Í _lagi"
 #: src/gtr-jump-dialog.c:92
 #| msgid "Go to message number:"
 msgid "Go to Message"
-msgstr "Fara til færslu númer:"
+msgstr "Fara í færslu"
 
 #: src/gtr-jump-dialog.ui:33
 #| msgid "Go to message number:"
 msgid "Enter message number:"
-msgstr "Fara til færslu númer:"
+msgstr "Settu inn númer færslu:"
 
 #: src/gtr-lang-button.c:65
-#, fuzzy
 #| msgid "Language:"
 msgid "Choose Language"
-msgstr "Velja tungumál"
+msgstr "Veldu tungumál"
 
 #: src/gtr-languages-fetcher.ui:49
-#, fuzzy
 #| msgid "Language:"
 msgid "_Language"
 msgstr "Tungumá_l"
 
 #: src/gtr-languages-fetcher.ui:63
-#, fuzzy
 #| msgid "Language code:"
 msgid "Language _code"
-msgstr "Tungumálslykill:"
+msgstr "Tungumáls_kóði"
 
 #: src/gtr-languages-fetcher.ui:77
 #| msgid "Charset:"
 msgid "Character _set"
-msgstr "Stafagerð:"
+msgstr "_Stafatafla"
 
 #: src/gtr-languages-fetcher.ui:91
 msgid "Transfer en_coding"
-msgstr ""
+msgstr "_Kóðun í flutningi"
 
 #: src/gtr-languages-fetcher.ui:105
-#, fuzzy
 msgid "_Plural forms"
-msgstr "Fleirtölusnið:"
+msgstr "_Fleirtölusnið"
 
 #: src/gtr-languages-fetcher.ui:203
 msgid "_Edit options manually"
-msgstr ""
+msgstr "Br_eyta valkostum handvirkt"
 
 #: src/gtr-message-table.c:234
-#, fuzzy
 #| msgid "Original"
 msgid "Original Message"
-msgstr "Upprunaleg skilaboð"
+msgstr "Upprunaleg færsla"
 
 #: src/gtr-message-table.c:253
 #| msgid "Translated"
 msgid "Translated Message"
-msgstr "þýdd"
+msgstr "Þýdd færsla"
 
 #: src/gtr-notebook.ui:26
 msgid "Order messages by"
-msgstr ""
+msgstr "Raða færslum eftir"
 
 #: src/gtr-notebook.ui:48
-#, fuzzy
 #| msgid "Find in the po file"
 msgid "Appearance in the original file"
-msgstr "Finna í po-skránni"
+msgstr "Birting í upprunalegu skránni"
 
 #: src/gtr-notebook.ui:57
-#, fuzzy
 #| msgid "Messages table"
 msgid "Message status"
-msgstr "Staða skeytis"
+msgstr "Staða færslu"
 
 #: src/gtr-notebook.ui:67
 #| msgid "Original"
 msgid "Original message"
-msgstr "Vista Sem"
+msgstr "Upprunalegur strengur"
 
 #: src/gtr-notebook.ui:77
-#, fuzzy
 #| msgid "Translated"
 msgid "Translated message"
-msgstr "þýdd"
+msgstr "Þýdd færsla"
 
 #: src/gtr-notebook.ui:105
 msgid "Find"
 msgstr "Finna"
 
 #: src/gtr-notebook.ui:114
-#, fuzzy
 #| msgid "String to replace:"
 msgid "Find and replace"
 msgstr "Finna og skipta út"
@@ -790,64 +744,59 @@ msgstr "Finna og skipta út"
 #: src/gtr-notebook.ui:123 src/gtr-projects.ui:147
 #| msgid "Autotranslation"
 msgid "Build translation memory"
-msgstr "Sjálfvirk þýðing"
+msgstr "Byggja þýðingaminni"
 
 #: src/gtr-notebook.ui:133
-#, fuzzy
 #| msgid "Edit the header"
 msgid "Edit header"
 msgstr "Breyta haus"
 
 #: src/gtr-notebook.ui:195 src/gtr-preferences-dialog.c:665
-#, fuzzy
 #: src/gtr-projects.ui:202
 msgid "Help"
 msgstr "Hjálp"
 
 #: src/gtr-notebook.ui:227
-#, fuzzy
 #| msgid "Open a po file"
 msgid "Open a new file (<Ctrl>o)"
-msgstr "Opna po-skrá"
+msgstr "Opna nýja skrá (<Ctrl>o)"
 
 #: src/gtr-notebook.ui:241
 msgid "Open from Damned Lies (<Ctrl>d)"
-msgstr ""
+msgstr "Opna frá Damned Lies (<Ctrl>d)"
 
 #: src/gtr-notebook.ui:272
 msgid "Undo (<Ctrl>z)"
-msgstr ""
+msgstr "Afturkalla (<Ctrl>z)"
 
 #: src/gtr-notebook.ui:288
 msgid "Redo (<Ctrl><Shift>z)"
-msgstr ""
+msgstr "Redo (<Ctrl><Shift>z)Endurtaka"
 
 #: src/gtr-notebook.ui:318
 msgid "Previous message without translation (<Alt><Page Up>)"
-msgstr ""
+msgstr "Fyrri færsla án þýðingar (<Alt><Síða upp>)"
 
 #: src/gtr-notebook.ui:334
 msgid "Next message without translation (<Alt><Page Down>)"
-msgstr ""
+msgstr "Næsta færsla án þýðingar (<Alt><Síða niður>)"
 
 #: src/gtr-notebook.ui:361
 msgid "Toggle fuzzy state (<Ctrl>+u)"
-msgstr ""
+msgstr "Víxla loðinni stöðu af/á (<Ctrl>+u)"
 
 #: src/gtr-notebook.ui:379
-#, fuzzy
 #| msgid "Go to message number:"
 msgid "Sort messages by"
-msgstr "Fara til færslu númer:"
+msgstr "Raða færslum eftir"
 
 #: src/gtr-notebook.ui:389
 msgid "Order by menu"
-msgstr ""
+msgstr "Raða eftir valmynd"
 
 #: src/gtr-notebook.ui:423
-#, fuzzy
 msgid "Find (<Ctrl><f>)"
-msgstr "Finna"
+msgstr "Finna (<Ctrl><f>)"
 
 #: src/gtr-notebook.ui:453
 msgid "Save"
@@ -855,7 +804,7 @@ msgstr "Vista"
 
 #: src/gtr-notebook.ui:457
 msgid "Save the current file (<Ctrl>s)"
-msgstr ""
+msgstr "Vista fyrirliggjandi skrá (<Ctrl>s)"
 
 #: src/gtr-notebook.ui:466
 msgid "Save as (<Ctrl><Shift>s)"
@@ -863,10 +812,10 @@ msgstr "Vista sem (<Ctrl><Shift>s)"
 
 #: src/gtr-notebook.ui:482
 msgid "Upload file (<Ctrl>b)"
-msgstr ""
+msgstr "Hlaða inn skrá (<Ctrl>b)"
 
 #: src/gtr-po.c:492
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| "The file is empty:\n"
 #| "%s"
@@ -876,7 +825,7 @@ msgstr "Skráin er tóm"
 #: src/gtr-po.c:501
 #, c-format
 msgid "Failed opening file “%s”: %s"
-msgstr ""
+msgstr "Mistókst að opnað skrána \"%s\": %s"
 
 #: src/gtr-po.c:572
 #, c-format
@@ -907,7 +856,7 @@ msgid "No messages obtained from parser."
 msgstr ""
 
 #: src/gtr-po.c:807
-#, fuzzy, c-format
+#, c-format
 #| msgid ""
 #| "You are saving a file with a .pot extension.\n"
 #| "Pot files are generated by the compilation process.\n"
@@ -918,7 +867,7 @@ msgid ""
 "Your file should likely be named “%s.po”."
 msgstr ""
 "Þú ert að vista skrá með endingunni .pot.\n"
-"Pot-skrár eru búnar til við byggingu forrits.\n"
+"POT-skrár eru búnar til með vistþýðingarferli.\n"
 "Skráin þín ætti líklega að heita `%s.po'."
 
 #: src/gtr-po.c:835
@@ -946,21 +895,19 @@ msgstr ""
 
 #: src/gtr-preferences-dialog.c:455
 msgid "Are you sure you want to delete this profile?"
-msgstr ""
+msgstr "Ertu viss um að þú viljir eyða þessu sniði?"
 
 #: src/gtr-preferences-dialog.c:463
-#, fuzzy
 msgid "_Delete"
 msgstr "_Eyða"
 
 #: src/gtr-preferences-dialog.c:594
-#, fuzzy
 msgid "Active"
 msgstr "Virkt"
 
 #: src/gtr-preferences-dialog.c:667 src/gtr-preferences-dialog.ui:52
 msgid "Translation Editor Preferences"
-msgstr ""
+msgstr "Kjörstillingar þýðingaritils"
 
 #: src/gtr-preferences-dialog.ui:125
 msgid "General"
@@ -969,11 +916,11 @@ msgstr "Almennt"
 #: src/gtr-preferences-dialog.ui:144
 #| msgid "Warn if po file contains fuzzy translations"
 msgid "_Warn if PO file contains fuzzy translations"
-msgstr "Vara við ef po-skrá inniheldur loðnar þýðingar"
+msgstr "Vara við ef PO-skrá inniheldur loðnar þýðingar"
 
 #: src/gtr-preferences-dialog.ui:168
 msgid "_Remove obsolete entries on save"
-msgstr ""
+msgstr "Fja_rlægja úreltar færslur við vistun"
 
 #: src/gtr-preferences-dialog.ui:190
 msgid "Autosave"
@@ -984,15 +931,13 @@ msgid "Create a _backup copy of files before saving"
 msgstr "Gera ör_yggisafrit áður en skrár eru vistaðar"
 
 #: src/gtr-preferences-dialog.ui:236
-#, fuzzy
 #| msgid "Autosave interval:"
 msgid "_Autosave files every"
-msgstr "Vist_a sjálfvirkt hverja"
+msgstr "Vist_a sjálfvirkt á"
 
 #: src/gtr-preferences-dialog.ui:260
-#, fuzzy
 msgid "_minutes"
-msgstr "_mínútur"
+msgstr "_mínútna fresti"
 
 #: src/gtr-preferences-dialog.ui:318
 msgid "Files"
@@ -1001,24 +946,23 @@ msgstr "Skrár"
 #: src/gtr-preferences-dialog.ui:345
 #| msgid "Text display"
 msgid "Text Display"
-msgstr "Textasýn"
+msgstr "Birting texta"
 
 #: src/gtr-preferences-dialog.ui:368
 msgid "_Highlight message syntax"
-msgstr ""
+msgstr "Áherslulita kóða í þýðingarfærslu"
 
 #: src/gtr-preferences-dialog.ui:384
 msgid "Make _whitespace visible"
-msgstr ""
+msgstr "Gera bilstafi sýnilega"
 
 #: src/gtr-preferences-dialog.ui:409
-#, fuzzy
 msgid "Font:"
 msgstr "Letur:"
 
 #: src/gtr-preferences-dialog.ui:421
 msgid "Choose the editor font"
-msgstr ""
+msgstr "Veldu leturgerð ritilsins"
 
 #: src/gtr-preferences-dialog.ui:463
 msgid "Contents"
@@ -1027,42 +971,36 @@ msgstr "Innihald"
 #: src/gtr-preferences-dialog.ui:486
 #| msgid "Remove fuzzy status if message is changed"
 msgid "_Remove fuzzy status if message is changed"
-msgstr "Eyða loðinni stöðu ef færslu er breytt"
+msgstr "Eyða loðinni stöðu ef fæ_rslu er breytt"
 
 #: src/gtr-preferences-dialog.ui:502
-#, fuzzy
 msgid "Check _spelling"
-msgstr "Athuga stafsetningu"
+msgstr "Yfirfara _stafsetningu"
 
 #: src/gtr-preferences-dialog.ui:541
 msgid "Editor"
 msgstr "Ritill"
 
 #: src/gtr-preferences-dialog.ui:640
-#, fuzzy
 #| msgid "Edit po file header"
 msgid "Edit Profile"
-msgstr "Breyta haus po-skrár"
+msgstr "Breyta sniði"
 
 #: src/gtr-preferences-dialog.ui:677
-#, fuzzy
 #| msgid "Files"
 msgid "Profiles"
-msgstr "Snið"
+msgstr "Notkunarsnið"
 
 #: src/gtr-profile-dialog.c:74
-#, fuzzy
 #| msgid "gtranslator -- import po file"
 msgid "Translation Editor Profile"
-msgstr "gtranslator -- flytja inn po-skrá"
+msgstr "Snið þýðingaritilsins"
 
 #: src/gtr-profile-dialog.ui:71
-#, fuzzy
 msgid "_Name"
-msgstr "_Heiti"
+msgstr "_Nafn"
 
 #: src/gtr-profile-dialog.ui:99
-#, fuzzy
 #| msgid "Personal Information"
 msgid "Profile Information"
 msgstr "Persónuupplýsingar"
@@ -1070,17 +1008,15 @@ msgstr "Persónuupplýsingar"
 #: src/gtr-profile-dialog.ui:116
 #| msgid "Personal Information"
 msgid "Translator Information"
-msgstr "Persónuupplýsingar"
+msgstr "Upplýsingar um þýðanda"
 
 #: src/gtr-profile-dialog.ui:134
-#, fuzzy
 msgid "N_ame"
-msgstr "Nafn"
+msgstr "N_afn"
 
 #: src/gtr-profile-dialog.ui:149
-#, fuzzy
 msgid "_Email"
-msgstr "Tölvupóstur"
+msgstr "Tölvu_póstur"
 
 #: src/gtr-profile-dialog.ui:163
 msgid "_Team email"
@@ -1088,7 +1024,7 @@ msgstr "_Tölvupóstfang þýðingateymis"
 
 #: src/gtr-profile-dialog.ui:177
 msgid "_DL auth token"
-msgstr ""
+msgstr "_DL-auðkenningarteikn"
 
 #: src/gtr-profile-dialog.ui:178
 msgid ""
@@ -1103,41 +1039,38 @@ msgstr "Tungumálastillingar"
 
 #: src/gtr-projects.ui:35
 msgid "Open a new .po file or drag & drop here"
-msgstr ""
+msgstr "Opnaðu nýja .po-skrá eða dragðu/slepptu hingað"
 
 #: src/gtr-projects.ui:51
-#, fuzzy
 #| msgid "Open a po file"
 msgid "Select a PO file"
-msgstr "Opna po-skrá"
+msgstr "Veldu PO-skrá"
 
 #: src/gtr-projects.ui:68
 msgid "Load from DL…"
-msgstr ""
+msgstr "Hlaða inn úr DL…"
 
 #: src/gtr-search-bar.c:414 src/gtr-search-bar.ui:212
 msgid "Case sensitive"
-msgstr "Sömu há-/lágstafir"
+msgstr "Gera greinarmun á hástöfum/lágstöfum"
 
 #: src/gtr-search-bar.c:419 src/gtr-search-bar.ui:226
-#, fuzzy
 msgid "Match whole word only"
-msgstr "Passa einungis við _heil orð"
+msgstr "Passa einungis við heil orð"
 
 #: src/gtr-search-bar.c:424
 msgid "Wrap around"
-msgstr "Umbrjóta í kringum"
+msgstr "Umbrjóta texta"
 
 #: src/gtr-search-bar.c:429 src/gtr-search-bar.ui:254
 #| msgid "Original text font:"
 msgid "Original text"
-msgstr "Texte original"
+msgstr "Upprunalegur texti"
 
 #: src/gtr-search-bar.c:434 src/gtr-search-bar.ui:268
-#, fuzzy
 #| msgid "Translated"
 msgid "Translated text"
-msgstr "þýdd"
+msgstr "Þýddur texti"
 
 #: src/gtr-search-bar.ui:121
 msgid "Replace"
@@ -1157,18 +1090,16 @@ msgid "Show or hide search options such as case sensitivity"
 msgstr ""
 
 #: src/gtr-search-bar.ui:240
-#, fuzzy
 msgid "Wrap Around"
-msgstr "Umvefja kringum"
+msgstr "Umbrjóta texta"
 
 #: src/gtr-tab-label.c:280
-#, fuzzy
 msgid "Close document"
-msgstr "Loka skjalinu"
+msgstr "Loka skjali"
 
 #: src/gtr-tab.c:347
 msgid "There is an error in the message:"
-msgstr ""
+msgstr "Það er villa í færslunni:"
 
 #: src/gtr-tab.c:561 src/gtr-tab.c:687
 #| msgid "Fuzzy"
@@ -1182,87 +1113,79 @@ msgstr "Fleirtala %d"
 
 #. Translators: Path to the document opened
 #: src/gtr-tab.c:1307
-#, fuzzy
 msgid "Path:"
 msgstr "Slóð:"
 
 #: src/gtr-tab.c:1974
-#, fuzzy, c-format
+#, c-format
 #| msgid "Translated"
 msgid "Translated: %0.2f%%"
-msgstr "þýdd"
+msgstr "Þýtt: %0.2f%%"
 
 #: src/gtr-tab.c:1975
-#, fuzzy, c-format
+#, c-format
 #| msgid "Translated"
 msgid "Translated: %d"
-msgstr "þýdd"
+msgstr "Þýtt: %d"
 
 #: src/gtr-tab.c:1976
-#, fuzzy, c-format
+#, c-format
 #| msgid "Untranslated"
 msgid "Untranslated: %d"
-msgstr "Óþýtt"
+msgstr "Óþýtt: %d"
 
 #: src/gtr-tab.c:1977
-#, fuzzy, c-format
+#, c-format
 #| msgid "Fuzzy"
 msgid "Fuzzy: %d"
-msgstr "Loðin"
+msgstr "Loðið: %d"
 
 #: src/gtr-tab.ui:74
-#, fuzzy
 #| msgid "Original"
 msgid "_Original Message"
-msgstr "----- Upphaflegt skeyti -----"
+msgstr "Upprunaleg færsla"
 
 #: src/gtr-tab.ui:166
-#, fuzzy
 #| msgid "Translated"
 msgid "Translate_d Text"
-msgstr "þýdd"
+msgstr "Þý_ddur texti"
 
 #: src/gtr-upload-dialog.c:61
-#, fuzzy
 msgid "_Upload"
-msgstr "Sen_da út"
+msgstr "Sen_da inn"
 
 #: src/gtr-upload-dialog.c:63
 msgid "Upload to Damned Lies"
-msgstr ""
+msgstr "Senda inn í Damned Lies"
 
 #: src/gtr-upload-dialog.c:137
-#, fuzzy
 msgid "Uploading..."
-msgstr "Sendi inn ..."
+msgstr "Sendi inn..."
 
 #: src/gtr-upload-dialog.c:143
-#, fuzzy
 msgid "Upload"
-msgstr "Senda"
+msgstr "Senda inn"
 
 #: src/gtr-upload-dialog.ui:53
-#, fuzzy
 #| msgid "Comment:"
 msgid "comment:"
-msgstr "Athugasemd"
+msgstr "athugasemd:"
 
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:214
-#, fuzzy, c-format
+#, c-format
 #| msgid "Translation font:"
 msgid "*%s — Translation Editor"
-msgstr "Letur þýðingar:"
+msgstr "*%s - Þýðingaritill"
 
 #. Translators: this is the title of the window with a document opened
 #: src/gtr-window.c:220
-#, fuzzy, c-format
+#, c-format
 #| msgid "Translation font:"
 msgid "%s — Translation Editor"
-msgstr "Letur þýðingar:"
+msgstr "%s - Þýðingaritill"
 
 #: src/help-overlay.ui:13
-#, fuzzy
 #| msgid "General"
 msgctxt "shortcut window group"
 msgid "General"
@@ -1287,147 +1210,133 @@ msgid "Save the current file as"
 msgstr "Vista þetta skjal sem"
 
 #: src/help-overlay.ui:40
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Preferences"
 msgstr "Kjörstillingar"
 
 #: src/help-overlay.ui:47
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Flýtilyklar"
 
 #: src/help-overlay.ui:54
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Loka forriti"
+msgstr "Hætta"
 
 #: src/help-overlay.ui:64
-#, fuzzy
 #| msgid "Editor"
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "Breyta"
 
 #: src/help-overlay.ui:68
-#, fuzzy
 #| msgid "Undo"
 msgctxt "shortcut window"
 msgid "Undo"
-msgstr "Afturkalla og endurtaka"
+msgstr "Afturkalla"
 
 #: src/help-overlay.ui:75
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Redo"
-msgstr "Afturkalla og endurtaka"
+msgstr "Endurtaka"
 
 #: src/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
-msgstr ""
+msgstr "Merkja/Afmerkja sem loðið"
 
 #: src/help-overlay.ui:89
-#, fuzzy
 #| msgid "Copy _message -> translation"
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
-msgstr "Afrita _færslu -> þýðing"
+msgstr "Afrita upprunalegan texta yfir í þýðingu"
 
 #: src/help-overlay.ui:99
-#, fuzzy
 msgctxt "shortcut window group"
 msgid "Navigation"
-msgstr "Leiðarstýring"
+msgstr "Flakk"
 
 #: src/help-overlay.ui:103
 #| msgid "Go to the first message"
 msgctxt "shortcut window"
 msgid "Go to the previous message"
-msgstr "Fara að fyrra bréfi"
+msgstr "Fara í fyrri færslu"
 
 #: src/help-overlay.ui:110
 #| msgid "Go to the last message"
 msgctxt "shortcut window"
 msgid "Go to the next message"
-msgstr "Fara að næsta bréfi"
+msgstr "Fara í næstu færslu"
 
 #: src/help-overlay.ui:117
 #| msgid "Go to next untranslated message"
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
-msgstr "Fara til næsta loðna strengs"
+msgstr "Fara í fyrri óþýddu færslu"
 
 #: src/help-overlay.ui:124
 #| msgid "Go to next untranslated message"
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
-msgstr "Fara til næsta loðna strengs"
+msgstr "Fara í næstu óþýddu færslu"
 
 #: src/help-overlay.ui:134
 #| msgid "Translation"
 msgctxt "shortcut window group"
 msgid "Translation Memory"
-msgstr "Þýðing"
+msgstr "Þýðingaminni"
 
 #: src/help-overlay.ui:138
 #| msgid "Autotranslation"
 msgctxt "shortcut window"
 msgid "Build translation memory"
-msgstr "Sjálfvirk þýðing"
+msgstr "Byggja þýðingaminni"
 
 #: src/help-overlay.ui:145
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Copy below"
-msgstr "Afrita valinn texta á klippispjald"
+msgstr "Afrita hér fyrir neðan"
 
 #: src/help-overlay.ui:155
-#, fuzzy
 #| msgid "Replace"
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Finna og skipta út"
 
 #: src/help-overlay.ui:159
-#, fuzzy
 #| msgid "Find"
 msgctxt "shortcut window"
 msgid "Find"
-msgstr "Finna og skipta út"
+msgstr "Finna"
 
 #: src/help-overlay.ui:166
-#, fuzzy
 #| msgid "Replace"
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Finna og skipta út"
 
 #: src/help-overlay.ui:173
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Forward-search"
-msgstr "Leita:"
+msgstr "Leita áfram"
 
 #: src/help-overlay.ui:180
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Backward-search"
-msgstr "Leita:"
+msgstr "Leita afturábak"
 
 #: src/help-overlay.ui:187
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
-msgstr ""
+msgstr "Fela 'Finna og skipta út' stikuna"
 
 #: src/main.c:97
 msgid "— Edit PO files"
-msgstr ""
+msgstr "— Breyta PO-skrám"
 
 #: src/main.c:101
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "Run “%s --help” to see a full list of available command line options.\n"
@@ -1437,25 +1346,22 @@ msgstr ""
 "skipanalínunnar.\n"
 
 #: src/translation-memory/gtr-translation-memory-dialog.c:101
-#, fuzzy
 #| msgid "Scripts directory:"
 msgid "Select PO directory"
-msgstr "Skriftumappa:"
+msgstr "Veldu möppu með PO-skrám"
 
 #: src/translation-memory/gtr-translation-memory-dialog.c:309
-#, fuzzy
 #| msgid "Translator and Language"
 msgid "Translation Editor Memory Manager"
-msgstr "Þýðandi og tungumál"
+msgstr "Umsýsla þýðingaminnis í þýðingaritli"
 
 #: src/translation-memory/gtr-translation-memory-dialog.ui:66
-#, fuzzy
 msgid "Database:"
 msgstr "Gagnagrunnur:"
 
 #: src/translation-memory/gtr-translation-memory-dialog.ui:109
 msgid "Select the directory which contains PO files:"
-msgstr ""
+msgstr "Veldu möppu sem inniheldur PO-skrár:"
 
 #: src/translation-memory/gtr-translation-memory-dialog.ui:160
 msgid "Add to Database"
@@ -1463,49 +1369,45 @@ msgstr "Bæta við gagnagrunn"
 
 #: src/translation-memory/gtr-translation-memory-dialog.ui:215
 msgid "Configuration:"
-msgstr "Stillingar:"
+msgstr "Uppsetning:"
 
 #: src/translation-memory/gtr-translation-memory-dialog.ui:259
 msgid "Use only files with this name:"
-msgstr ""
+msgstr "Nota aðeins skrár með þessu heiti:"
 
 #: src/translation-memory/gtr-translation-memory-ui.c:255
 #| msgid "Autotranslation"
 msgid "_Use this translation"
-msgstr "Sjálfvirk þýðing"
+msgstr "N_ota þessa þýðingu"
 
 #: src/translation-memory/gtr-translation-memory-ui.c:260
-#, fuzzy
 msgid "_Remove"
-msgstr "_Fjarlægja"
+msgstr "Fja_rlægja"
 
 #: src/translation-memory/gtr-translation-memory-ui.c:371
-#, fuzzy
 msgid "Shortcut"
 msgstr "Flýtilykill"
 
 #: src/translation-memory/gtr-translation-memory-ui.c:380
-#, fuzzy
 msgid "Level"
 msgstr "Stig"
 
 #: src/translation-memory/gtr-translation-memory-ui.c:389
-#, fuzzy
 msgid "String"
-msgstr "String"
+msgstr "Strengur"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
 #| msgid "Scripts directory:"
 msgid "PO directory"
-msgstr "Skriftumappa:"
+msgstr "Mappa fyrir PO-skrár"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
 msgid "Directory containing PO files to add to the translation memory."
-msgstr ""
+msgstr "Mappa með PO-skrám sem á að bæta í þýðingaminnið."
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
 msgid "Restrict search by filename"
-msgstr ""
+msgstr "Takmarka leit við skráarheiti"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
 msgid ""
@@ -1515,7 +1417,7 @@ msgstr ""
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
 msgid "Filename to restrict search to"
-msgstr ""
+msgstr "Skráarheiti sem á að takmarka leit við"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
 msgid ""
@@ -1525,7 +1427,7 @@ msgstr ""
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
 #| msgid "Maximum number of entries in the recent files list:"
 msgid "Maximum number of missing words"
-msgstr "Hámarksfjöldi færslna í lista yfir fyrri skrár:"
+msgstr "Hámarksfjöldi orða sem má vanta"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
 msgid ""
@@ -1535,7 +1437,7 @@ msgstr ""
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
 msgid "Maximum difference in message length"
-msgstr ""
+msgstr "Hámarksmunur á lengd færslna"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
 msgid ""
