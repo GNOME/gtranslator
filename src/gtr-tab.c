@@ -199,6 +199,8 @@ gtr_tab_show_hide_search_bar (GtrTab *tab, gboolean show)
 
   priv = gtr_tab_get_instance_private (tab);
   gtk_search_bar_set_search_mode (priv->search_bar, show);
+  if (show)
+    gtr_tab_focus_search_bar (tab);
 }
 
 void
