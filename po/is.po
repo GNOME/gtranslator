@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
 "POT-Creation-Date: 2022-07-27 09:21+0000\n"
-"PO-Revision-Date: 2022-09-07 14:15+0000\n"
+"PO-Revision-Date: 2022-09-07 14:45+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -28,7 +28,7 @@ msgstr "Gtranslator"
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:8
 #: data/org.gnome.Gtranslator.desktop.in.in:5
 msgid "Translate and localize applications and libraries"
-msgstr ""
+msgstr "Þýddu og staðfærðu forrit og aðgerðasöfn"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:10
 msgid ""
@@ -49,7 +49,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:157
 msgid "Daniel García Moreno"
-msgstr ""
+msgstr "Daniel García Moreno"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:672
 #: src/gtr-notebook.ui:216 src/gtr-window.c:229 src/gtr-window.ui:25
@@ -64,7 +64,7 @@ msgstr "Ritill fyrir PO-skrár"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:14
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
-msgstr ""
+msgstr "Gtranslator;Þýðingaritill;Ritill;Þýðing;Þýðingar;Gettext;Skrifa;"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:24
 #| msgid "Warn if po file contains fuzzy translations"
@@ -79,7 +79,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:32
 msgid "Whether the obsolete entries be removed upon saving"
-msgstr ""
+msgstr "Hvort fjarlægja eigi úreldar færslur við vistun"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:33
 msgid ""
@@ -108,11 +108,11 @@ msgstr "Millibil í mínútum á milli þess sem skrár eru sjálfvirkt vistaða
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:53
 msgid "Create backup before saving"
-msgstr ""
+msgstr "Gera öryggisafrit áður en skrár eru vistaðar"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:54
 msgid "If true, create a backup copy of a file before saving it."
-msgstr ""
+msgstr "Ef virkt, verður gert öryggisafrit áður en skrár eru vistaðar."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:60
 msgid "Use profile values for header"
@@ -135,11 +135,11 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:77
 msgid "Make whitespace visible"
-msgstr ""
+msgstr "Gera bilstafi sýnilega"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:78
 msgid "If true, display whitespace in strings as representative symbols."
-msgstr ""
+msgstr "Ef virkt, verða birt tákn fyrir bilstafi."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:84
 #| msgid "Remove fuzzy status if message is changed"
@@ -295,6 +295,10 @@ msgid ""
 "correctly in your profile or you don't have permissions to upload this "
 "module."
 msgstr ""
+"Villa kom upp við að senda inn skrána: %s\n"
+"Mögulega hefur þú ekki sett <i>l10n.gnome.org</i> <b>auðkenningarteiknið</b> "
+"rétt upp í sniðinu þínu eða hafir ekki réttindi til að senda inn þessa"
+" einingu."
 
 #: src/gtr-actions-file.c:395
 msgid "The file has been uploaded!"
@@ -318,14 +322,23 @@ msgid ""
 "Transfer encoding: %s\n"
 "Plural form: %s\n"
 msgstr ""
+"Heiti notkunarsniðs: %s\n"
+"Nafn þýðanda: %s\n"
+"Tölvupóstfang þýðanda: %s\n"
+"Heiti tungumáls: %s\n"
+"Tölvupóstfang þýðingateymis: %s\n"
+"Tungumálskóði: %s\n"
+"Stafakóðun: %s\n"
+"Kóðun í millifærslum: %s\n"
+"Fleirtöluform: %s\n"
 
 #: src/gtr-assistant.c:170
 msgid "This assistant will help you to create the main profile."
-msgstr ""
+msgstr "Þessi leiðarvísir mun hjálpa þér við að útbúa aðalnotkunarsniðið."
 
 #: src/gtr-assistant.c:176
 msgid "Assistant"
-msgstr "Aðstoð"
+msgstr "Leiðarvísir"
 
 #: src/gtr-assistant.c:268
 #| msgid "Project name:"
@@ -343,7 +356,7 @@ msgstr "Tölvupóstfang þýðingateymis"
 
 #: src/gtr-assistant.c:353 src/gtr-preferences-dialog.c:588
 msgid "Profile"
-msgstr "Snið"
+msgstr "Notkunarsnið"
 
 #: src/gtr-assistant.c:447
 #| msgid "Language:"
@@ -447,12 +460,12 @@ msgstr "Snið:"
 
 #: src/gtr-dl-teams.c:447
 msgid "No module state found."
-msgstr ""
+msgstr "Engin staða einingar fannst."
 
 #: src/gtr-dl-teams.c:464
 #, c-format
 msgid "The current state is: %s"
-msgstr ""
+msgstr "Fyrirliggjandi staða er: %s"
 
 #: src/gtr-dl-teams.c:625
 #, c-format
@@ -467,6 +480,9 @@ msgid ""
 "correctly in your profile or you don't have permissions to reserve this "
 "module."
 msgstr ""
+"Villa kom upp við að taka frá þessa einingu: %s\n"
+"Mögulega hefur þú ekki sett <i>l10n.gnome.org</i> <b>auðkenningarteiknið</b> "
+"rétt upp í sniðinu þínu eða hafir ekki réttindi til að taka frá þessa einingu."
 
 #: src/gtr-dl-teams.c:719
 #, c-format
@@ -873,25 +889,25 @@ msgstr ""
 #: src/gtr-po.c:835
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
-msgstr ""
+msgstr "Skráin %s er aðeins til lestrar og er ekki hægt að yfirskrifa"
 
 #: src/gtr-po.c:854
 #, c-format
 msgid "There is an error in the PO file: %s"
-msgstr ""
+msgstr "Það er villa í PO-skránni: %s"
 
 #: src/gtr-po.c:866
 #, c-format
 msgid "There was an error writing the PO file: %s"
-msgstr ""
+msgstr "Það kom upp villa við að skrifa PO-skrána: %s"
 
 #: src/gtr-preferences-dialog.c:436
 msgid "Impossible to remove the active profile"
-msgstr ""
+msgstr "Ómögulegt að fjarlægja virka notkunarsniðið"
 
 #: src/gtr-preferences-dialog.c:442
 msgid "Another profile should be selected as active before"
-msgstr ""
+msgstr "Annað notkunarsnið ætti að velja fyrst"
 
 #: src/gtr-preferences-dialog.c:455
 msgid "Are you sure you want to delete this profile?"
@@ -954,7 +970,7 @@ msgstr "Áherslulita kóða í þýðingarfærslu"
 
 #: src/gtr-preferences-dialog.ui:384
 msgid "Make _whitespace visible"
-msgstr "Gera bilstafi sýnilega"
+msgstr "Gera _bilstafi sýnilega"
 
 #: src/gtr-preferences-dialog.ui:409
 msgid "Font:"
@@ -1031,6 +1047,9 @@ msgid ""
 "GNOME Damned Lies integration token, go to your profile in https://l10n."
 "gnome.org/ to get it"
 msgstr ""
+"Samþættingarteikn GNOME Damned Lies, farðu á persónusniðið þitt á"
+" https://l10n."
+"gnome.org/ til að nálgast það"
 
 #: src/gtr-profile-dialog.ui:240
 #| msgid "Language settings"
