@@ -262,16 +262,14 @@ gtr_hide_bar (GtrSearchBar *self)
 void
 gtr_search_bar_find_next (GtrSearchBar *self)
 {
-  //GtkWidget *window = gtk_widget_get_toplevel (GTK_WIDGET (self));
-  GtkWindow *window = GTK_WINDOW(gtk_widget_get_root (GTK_WIDGET (self)));
+  GtkWindow *window = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
   do_find (self, GTR_WINDOW (window), FALSE);
 }
 
 void
 gtr_search_bar_find_prev (GtrSearchBar *self)
 {
-  //GtkWidget *window = gtk_widget_get_toplevel (GTK_WIDGET (self));
-  GtkWindow *window = GTK_WINDOW(gtk_widget_get_root (GTK_WIDGET (self)));
+  GtkWindow *window = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
   do_find (self, GTR_WINDOW (window), TRUE);
 }
 
@@ -717,7 +715,7 @@ gtr_search_bar_init (GtrSearchBar *self)
                     "insert_text", G_CALLBACK (insert_text_handler), NULL);
 
   g_signal_connect_swapped (self->search_entry,
-                            "changed",
+                            "activate",
                             G_CALLBACK (gtr_search_bar_find_next),
                             self);
 

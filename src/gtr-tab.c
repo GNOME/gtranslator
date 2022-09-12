@@ -68,7 +68,7 @@ typedef struct
   GSettings *editor_settings;
   GSettings *state_settings;
 
-  GtkWidget *progress_gesture_click;
+  GtkGesture *progress_gesture_click;
   GtkWidget *progress_box;
   GtkWidget *progress_revealer;
   GtkWidget *progress_percentage;
@@ -853,13 +853,9 @@ sort_by_translated_cb (GtkWidget *checkbutton, GtrTab* tab)
 static void
 gtr_tab_init (GtrTab * tab)
 {
-  GtrTabPrivate *priv;
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
 
-  priv = gtr_tab_get_instance_private (tab);
-
-  g_printf("creating tab widget from template \n");
   gtk_widget_init_template (GTK_WIDGET (tab));
-  g_printf("created tab widget from template \n");
 
   priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
   priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
@@ -884,9 +880,11 @@ gtr_tab_init (GtrTab * tab)
 
   priv->find_replace_flag = FALSE;
   priv->progress = gtr_progress_new ();
-  priv->progress_gesture_click = gtk_gesture_click_new();
+  priv->progress_gesture_click = gtk_gesture_click_new ();
   gtk_widget_show (GTK_WIDGET (priv->progress));
-  gtk_widget_add_controller(priv->progress_box, priv->progress_gesture_click);
+
+  gtk_widget_add_controller (priv->progress_box,
+                             GTK_EVENT_CONTROLLER (priv->progress_gesture_click));
   gtk_box_append (GTK_BOX (priv->progress_box), GTK_WIDGET (priv->progress));
 
   g_signal_connect (priv->progress_gesture_click, "pressed",
@@ -904,7 +902,7 @@ gtr_tab_init (GtrTab * tab)
                     G_CALLBACK(sort_by_msgid_cb), tab);
   g_signal_connect (priv->sort_translated, "toggled",
                     G_CALLBACK(sort_by_translated_cb), tab);
-  gtk_check_button_set_active (priv->sort_id, TRUE);
+  gtk_check_button_set_active (GTK_CHECK_BUTTON (priv->sort_id), TRUE);
 }
 
 static void
@@ -1225,7 +1223,6 @@ gtr_tab_new (GtrPo * po,
   manager = gtr_profile_manager_get_default();
 
   tab = g_object_new (GTR_TYPE_TAB, NULL);
-  g_printf("tab created\n");
 
   priv = gtr_tab_get_instance_private (tab);
   gtr_context_init_tm (GTR_CONTEXT_PANEL (priv->context),
@@ -1390,12 +1387,7 @@ gtr_tab_message_go_to (GtrTab * tab,
                        GtrTabMove move)
 {
   static gboolean first_msg = TRUE;
-  GtrTabPrivate *priv;
-
-  g_return_if_fail (tab != NULL);
-  g_return_if_fail (GTR_IS_MSG (to_go));
-
-  priv = gtr_tab_get_instance_private (tab);
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
 
   if (!priv->blocking || first_msg)
     {
@@ -1463,10 +1455,11 @@ gtr_tab_message_go_to (GtrTab * tab,
       g_signal_emit (G_OBJECT (tab), signals[SHOWED_MESSAGE], 0,
                      GTR_MSG (to_go));
 
+
       // Grabbing the focus in the GtrView to edit the message
       // This is done in the idle add to avoid the focus grab from the
       // message-table
-      g_idle_add((GSourceFunc)msg_grab_focus, tab);
+      g_idle_add ((GSourceFunc)msg_grab_focus, tab);
     }
 }
 

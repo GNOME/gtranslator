@@ -204,7 +204,7 @@ find_in_list (GtrWindow * window,
           found = run_search (GTR_VIEW (viewsaux->data), found);
           if (found)
             {
-              gtr_tab_message_go_to (tab, l->data, TRUE, GTR_TAB_MOVE_NONE);
+              gtr_tab_message_go_to (tab, l->data, FALSE, GTR_TAB_MOVE_NONE);
               run_search (GTR_VIEW (viewsaux->data), aux);
               return TRUE;
             }
@@ -232,7 +232,7 @@ find_in_list (GtrWindow * window,
           else
             l = l->prev;
         }
-      gtr_tab_message_go_to (tab, l->data, TRUE, GTR_TAB_MOVE_NONE);
+      gtr_tab_message_go_to (tab, l->data, FALSE, GTR_TAB_MOVE_NONE);
       viewsaux = views;
     }
   while (l != current);
@@ -241,7 +241,7 @@ find_in_list (GtrWindow * window,
 }
 
 void
-do_find (GtrSearchBar * dialog, GtrWindow * window, gboolean search_backwards)
+do_find (GtrSearchBar * searchbar, GtrWindow * window, gboolean search_backwards)
 {
   GtrTab *tab;
   GList *views, *list, *current_msg;
@@ -259,16 +259,16 @@ do_find (GtrSearchBar * dialog, GtrWindow * window, gboolean search_backwards)
   /* Used to store search options */
   tab = gtr_window_get_active_tab (window);
 
-  entry_text = gtr_search_bar_get_search_text (dialog);
+  entry_text = gtr_search_bar_get_search_text (searchbar);
 
   /* Views where find */
-  original_text = gtr_search_bar_get_original_text (dialog);
-  translated_text = gtr_search_bar_get_translated_text (dialog);
+  original_text = gtr_search_bar_get_original_text (searchbar);
+  translated_text = gtr_search_bar_get_translated_text (searchbar);
 
   /* Flags */
-  match_case = gtr_search_bar_get_match_case (dialog);
-  entire_word = gtr_search_bar_get_entire_word (dialog);
-  wrap_around = gtr_search_bar_get_wrap_around (dialog);
+  match_case = gtr_search_bar_get_match_case (searchbar);
+  entire_word = gtr_search_bar_get_entire_word (searchbar);
+  wrap_around = gtr_search_bar_get_wrap_around (searchbar);
 
   if (!original_text && !translated_text)
     return;
@@ -300,12 +300,12 @@ do_find (GtrSearchBar * dialog, GtrWindow * window, gboolean search_backwards)
 
   current_msg = gtr_po_get_current_message (gtr_tab_get_po (tab));
   found = find_in_list (window, views, wrap_around, search_backwards);
-  restore_last_searched_data (dialog, tab);
+  restore_last_searched_data (searchbar, tab);
 
   if (!found && current_msg)
     gtr_tab_message_go_to (tab, current_msg->data, TRUE, GTR_TAB_MOVE_NONE);
 
-  gtr_search_bar_set_found (dialog, found);
+  gtr_search_bar_set_found (searchbar, found);
 }
 
 static void
