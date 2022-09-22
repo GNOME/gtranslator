@@ -111,7 +111,7 @@ gtr_deps = [
   glib_dep,
   gtk_dep,
   libhandy_dep,
-  dependency('libgda-6.0'),
+  dependency('libgda-5.0'),
   dependency('gio-2.0', version: '>= 2.36.0'),
   dependency('gsettings-desktop-schemas'),
   dependency('gspell-1', version: '>= 1.2.0'),
