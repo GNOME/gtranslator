@@ -171,21 +171,27 @@ gtr_file_chooser_cb (GtkNativeDialog * dialog, guint reply, gpointer user_data)
 }
 
 static void
-handle_dialog_response (GtkNativeDialog *dialog, gint response_id, GtrWindow *window ){
-  if (response_id == GTK_RESPONSE_YES)
-  {
-    gtr_save_current_file_dialog (NULL, window);
-  }
-  else if (response_id == GTK_RESPONSE_CANCEL)
-  {
-    //to be implemented
-  }
+handle_save_current_dialog_response (GtkDialog *dialog,
+                                     gint response_id,
+                                     void (*callback)(GtrWindow *))
+{
+  GtrWindow *window = gtr_application_get_active_window (GTR_APP);
+  switch (response_id)
+    {
+      case GTK_RESPONSE_YES:
+        gtr_save_current_file_dialog (NULL, window);
+      case GTK_RESPONSE_NO:
+        callback (window);
+        break;
+      default:
+        break;
+    }
+  gtk_window_destroy (GTK_WINDOW (dialog));
 }
 
-gboolean
-gtr_want_to_save_current_dialog (GtrWindow * window)
+void
+gtr_want_to_save_current_dialog (GtrWindow * window, void (*callback)(GtrWindow *))
 {
-  gint res = 0;
   GtrTab *tab;
   GtrPo *po;
 
@@ -221,35 +227,18 @@ gtr_want_to_save_current_dialog (GtrWindow * window)
                           _("Continue without saving"), GTK_RESPONSE_NO,
                           NULL);
 
-  //res = gtk_dialog_run (GTK_DIALOG (dialog));
-  gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
-  //gtk_widget_destroy (dialog);
-
-  // Below code can be removed as response signal is connected
-  /*if (res == GTK_RESPONSE_CANCEL)
-    return FALSE;
-
-  if (res == GTK_RESPONSE_YES)
-    gtr_save_current_file_dialog (NULL, window);*/
-  g_signal_connect(dialog, "response", G_CALLBACK(handle_dialog_response), window);
-
-  return TRUE;
+  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+  g_signal_connect (dialog, "response", G_CALLBACK (handle_save_current_dialog_response), callback);
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 /*
  * The "Open file" dialog.
  */
-void
-gtr_open_file_dialog (GtrWindow * window)
+static void
+gtr_open_file_dialog_nocheck (GtrWindow *window)
 {
   GtkNativeDialog *dialog;
-  g_autoptr (GList) list = NULL;
-  list = get_modified_documents (window);
-  if (list != NULL)
-    {
-      if (!gtr_want_to_save_current_dialog (window))
-        return;
-    }
 
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
                                  FILESEL_OPEN,
@@ -258,6 +247,17 @@ gtr_open_file_dialog (GtrWindow * window)
 
   g_signal_connect (dialog, "response", G_CALLBACK (gtr_file_chooser_cb), window);
   gtk_native_dialog_show (dialog);
+}
+
+void
+gtr_open_file_dialog (GtrWindow *window)
+{
+  g_autoptr (GList) list = NULL;
+  list = get_modified_documents (window);
+  if (list != NULL)
+    gtr_want_to_save_current_dialog (window, gtr_open_file_dialog_nocheck);
+  else
+    gtr_open_file_dialog_nocheck (window);
 }
 
 static void

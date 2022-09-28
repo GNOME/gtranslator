@@ -122,13 +122,13 @@ save_accels (void)
     }
 }
 
-/*static gboolean
+static gboolean
 on_window_delete_event_cb (GtrWindow * window,
                            GdkEvent * event, GtrApplication * app)
 {
   gtr_file_quit (window);
   return TRUE;
-}*/
+}
 
 static void
 set_active_window (GtrApplication *app,
@@ -439,12 +439,9 @@ dl_activated (GSimpleAction *action,
   GtrPoState state = gtr_po_get_state (gtr_tab_get_po (active_tab));
 
   if (state == GTR_PO_STATE_MODIFIED)
-    {
-      if (!gtr_want_to_save_current_dialog (priv->active_window))
-        return;
-    }
-
-  gtr_window_show_dlteams (priv->active_window);
+    gtr_want_to_save_current_dialog (priv->active_window, gtr_window_show_dlteams);
+  else
+    gtr_window_show_dlteams (priv->active_window);
 }
 
 static void
@@ -839,9 +836,10 @@ gtr_application_create_window (GtrApplication *app)
   /* both of these signals are not valid in gtk4
   g_signal_connect (window, "focus_in_event",
                     G_CALLBACK (window_focus_in_event), app);
+  */
 
-  g_signal_connect (window, "delete-event",
-                    G_CALLBACK (on_window_delete_event_cb), app);*/
+  g_signal_connect (window, "close-request",
+                    G_CALLBACK (on_window_delete_event_cb), app);
 
   g_signal_connect (window, "destroy",
                     G_CALLBACK (on_window_destroy_cb), app);
