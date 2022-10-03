@@ -1,23 +1,25 @@
 /*
  * Copyright (C) 2007  Ignacio Casal Quinteiro <icq@gnome.org>
- *               2008  Igalia 
+ *               2008  Igalia
+ *               2022  Daniel Garcia Moreno <danigm@gnome.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
  *   Ignacio Casal Quinteiro <icq@gnome.org>
  *   Pablo Sanxiao <psanxiao@gmail.com>
+ *   Daniel Garcia Moreno <danigm@gnome.org>
  */
 
 #ifdef HAVE_CONFIG_H
@@ -41,7 +43,6 @@
 #include <gio/gio.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-//#include <libhandy-1/handy.h>
 #include <adwaita.h>
 
 #ifdef ENABLE_INTROSPECTION
@@ -49,9 +50,18 @@
 #endif
 
 #ifdef GDK_WINDOWING_X11
-//#include <gdk/gdkx.h>
 #include <gdk/gdk.h>
 #endif
+
+struct _GtrApplication
+{
+  AdwApplication base_instance;
+};
+
+struct _GtrApplicationClass
+{
+  AdwApplicationClass parent_class;
+};
 
 typedef struct
 {
@@ -92,36 +102,6 @@ ensure_user_config_dir (void)
   return ret;
 }
 
-static void
-load_accels (void)
-{
-  gchar *filename;
-
-  filename = g_build_filename (gtr_dirs_get_user_config_dir (),
-                               "accels",
-                               NULL);
-  if (filename != NULL)
-    {
-      //gtk_accel_map_load (filename);
-      g_free (filename);
-    }
-}
-
-static void
-save_accels (void)
-{
-  gchar *filename;
-
-  filename = g_build_filename (gtr_dirs_get_user_config_dir (),
-                               "accels",
-                               NULL);
-  if (filename != NULL)
-    {
-      //gtk_accel_map_save (filename);
-      g_free (filename);
-    }
-}
-
 static gboolean
 on_window_delete_event_cb (GtrWindow * window,
                            GdkEvent * event, GtrApplication * app)
@@ -137,19 +117,6 @@ set_active_window (GtrApplication *app,
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
   priv->active_window = window;
 }
-
-/*static gboolean
-window_focus_in_event (GtrWindow      *window,
-		       GdkFocusEvent  *event,
-		       GtrApplication *app)
-{
-  // updates active_view and active_child when a new toplevel receives focus //
-  g_return_val_if_fail (GTR_IS_WINDOW (window), FALSE);
-
-  set_active_window (app, window);
-
-  return FALSE;
-}*/
 
 static void
 on_window_destroy_cb (GtrWindow *window, GtrApplication *app)
@@ -620,7 +587,7 @@ static void
 set_kb (GApplication *app, gchar *action, gchar *accel)
 {
   const gchar *keys[] = {accel, NULL};
-  gtk_application_set_accels_for_action(GTK_APPLICATION (app), action, keys);
+  gtk_application_set_accels_for_action (GTK_APPLICATION (app), action, keys);
 }
 
 static void
@@ -634,27 +601,15 @@ gtr_application_startup (GApplication *application)
   g_set_application_name (_("Translation Editor"));
   gtk_window_set_default_icon_name (PACKAGE_APPID);
 
-  load_accels ();
-
-  //CLEANUP: As we are now subclassing from AdwApplication thsese all are not needed
-  //adw_init();
-
   /* Custom css */
-  //priv->provider = gtk_css_provider_new ();
-  //gtk_css_provider_load_from_resource (priv->provider, "/org/gnome/translator/styles.css");
+  priv->provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (priv->provider, "/org/gnome/translator/styles.css");
 
-  //gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                             //GTK_STYLE_PROVIDER (priv->provider), 600);
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                              GTK_STYLE_PROVIDER (priv->provider), 600);
 
-  /* TODO Remove in GTK 4 port */
-  /*hdy_style_manager_set_color_scheme (hdy_style_manager_get_default (),
-                                      HDY_COLOR_SCHEME_PREFER_LIGHT);*/
   adw_style_manager_set_color_scheme (adw_style_manager_get_default (),
                                       ADW_COLOR_SCHEME_PREFER_LIGHT);
-
-  /* We set the default icon dir */
-  /*gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
-                                     gtr_dirs_get_gtr_pixmaps_dir ());*/
 
   g_action_map_add_action_entries (G_ACTION_MAP (application), app_entries,
                                    G_N_ELEMENTS (app_entries), application);
@@ -762,8 +717,6 @@ static void
 gtr_application_shutdown (GApplication *application)
 {
   ensure_user_config_dir ();
-  save_accels ();
-
   G_APPLICATION_CLASS (gtr_application_parent_class)->shutdown (application);
 }
 
@@ -796,14 +749,13 @@ gtr_application_new ()
  * @app: a #GtrApplication
  *
  * Creates a new #GtrWindow and shows it.
- * 
+ *
  * Returns: (transfer none):  the #GtrWindow to be opened
  */
 GtrWindow *
 gtr_application_create_window (GtrApplication *app)
 {
   GtrWindow *window;
-  //GdkWindowState state;
   GdkToplevelState state;
   gint w, h;
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
@@ -827,16 +779,6 @@ gtr_application_create_window (GtrApplication *app)
     gtk_window_maximize (GTK_WINDOW (window));
   else
     gtk_window_unmaximize (GTK_WINDOW (window));
-
-  if ((state & GDK_TOPLEVEL_STATE_STICKY ) != 0);
-    ///gtk_window_stick (GTK_WINDOW (window));
-  else;
-    //gtk_window_unstick (GTK_WINDOW (window));
-
-  /* both of these signals are not valid in gtk4
-  g_signal_connect (window, "focus_in_event",
-                    G_CALLBACK (window_focus_in_event), app);
-  */
 
   g_signal_connect (window, "close-request",
                     G_CALLBACK (on_window_delete_event_cb), app);
@@ -879,7 +821,7 @@ gtr_application_get_views (GtrApplication * app,
 /**
  * gtr_application_get_active_window:
  * @app: a #GtrApplication
- * 
+ *
  * Return value: (transfer none): the active #GtrWindow
  **/
 GtrWindow *
