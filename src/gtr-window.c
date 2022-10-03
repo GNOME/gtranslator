@@ -496,7 +496,7 @@ searchbar_toggled (GtrTab * tab, gboolean revealed, GtrWindow *window)
 void
 gtr_window_remove_tab (GtrWindow * window)
 {
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   if (priv->active_tab != NULL)
   {
     if (gtk_stack_get_child_by_name (GTK_STACK (priv->stack), "poeditor"))
@@ -774,46 +774,6 @@ gtr_window_get_tab_from_location (GtrWindow * window, GFile * location)
 
   return NULL;
 }
-
-/**
- * gtr_window_set_active_tab:
- * @window: a #GtrWindow
- * @tab: a #GtrTab
- *
- * Sets the active tab for the @window.
- */
-/* void
-gtr_window_set_active_tab (GtrWindow * window, GtkWidget * tab)
-{
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-  gint page;
-
-  page = gtk_notebook_page_num (GTK_NOTEBOOK (priv->notebook), tab);
-
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), page);
-}*/
-
-/**
- * _gtr_window_close_tab:
- * @window: a #GtrWindow
- * @tab: a #GtrTab
- *
- * Closes the opened @tab of the @window and sets the right sensitivity of the
- * widgets.
- */
-/*void
-_gtr_window_close_tab (GtrWindow * window, GtrTab * tab)
-{
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-  gint i;
-
-  g_return_if_fail (GTR_IS_TAB (tab));
-
-  i = gtk_notebook_page_num (GTK_NOTEBOOK (priv->notebook),
-                             GTK_WIDGET (tab));
-  if (i != -1)
-    gtr_notebook_remove_page (GTR_NOTEBOOK (priv->notebook), i);
-}*/
 
 void
 gtr_window_show_projects (GtrWindow *window)

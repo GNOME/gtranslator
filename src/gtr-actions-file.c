@@ -584,20 +584,6 @@ gtr_save_current_file_dialog (GtkWidget * widget, GtrWindow * window)
   gtr_po_set_state (po, GTR_PO_STATE_SAVED);
 }
 
-static gboolean
-is_duplicated_location (const GSList * locations, GFile * u)
-{
-  GSList *l;
-
-  for (l = (GSList *) locations; l != NULL; l = g_slist_next (l))
-    {
-      if (g_file_equal (u, l->data))
-        return TRUE;
-    }
-
-  return FALSE;
-}
-
 static void
 load_file_list (GtrWindow * window, const GSList * locations)
 {
@@ -608,7 +594,7 @@ load_file_list (GtrWindow * window, const GSList * locations)
 
   gtr_window_remove_tab (window);
 
-  locations_to_load = g_slist_reverse (locations);
+  locations_to_load = g_slist_reverse ((GSList*) locations);
 
   while (locations_to_load != NULL)
     {
@@ -648,7 +634,7 @@ load_file_list (GtrWindow * window, const GSList * locations)
 /**
  * gtr_actions_load_uris:
  *
- * Ignore non-existing URIs 
+ * Ignore non-existing URIs
  */
 void
 gtr_actions_load_locations (GtrWindow * window, const GSList * locations)
@@ -662,64 +648,26 @@ gtr_actions_load_locations (GtrWindow * window, const GSList * locations)
 static void
 save_and_close_document (GtrPo * po, GtrWindow * window)
 {
-  GtrTab *tab;
-
   gtr_save_current_file_dialog (NULL, window);
-
-  //tab = gtr_tab_get_from_document (po);
-
-  //_gtr_window_close_tab (window, tab);
   gtr_window_remove_tab (window);
 }
 
 static void
 close_all_tabs (GtrWindow * window)
 {
-  gtr_window_remove_tab(window);
-  /*GtrNotebook *nb;
-
-  nb = gtr_window_get_notebook (window);
-  gtr_notebook_remove_all_pages (nb);
-
-  //FIXME: This has to change once we add the close all documents menuitem*/
+  gtr_window_remove_tab (window);
   gtk_window_destroy (GTK_WINDOW (window));
 }
 
 static void
 save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
 {
-  GtrTab *tab;
-  //GList *l;
   GError *error = NULL;
-
-  /*for (l = unsaved_documents; l != NULL; l = g_list_next (l))
-    {
-      gtr_po_save_file (l->data, &error);
-
-      if (error)
-        {
-          GtkWidget *dialog;
-          GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
-          dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                           flags,
-                                           GTK_MESSAGE_WARNING,
-                                           GTK_BUTTONS_OK,
-                                           "%s", error->message);
-          g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
-          gtk_window_present (GTK_WINDOW (dialog));
-          g_clear_error (&error);
-
-          return;
-        }
-
-      tab = gtr_tab_get_from_document (l->data);
-
-      _gtr_window_close_tab (window, tab);
-    }*/
 
   if(unsaved_documents == NULL)
     return;
-  gtr_po_save_file(unsaved_documents->data,&error);
+
+  gtr_po_save_file (unsaved_documents->data, &error);
 
   if(error)
   {
