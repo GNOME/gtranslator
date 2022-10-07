@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2022-03-31 05:12+0000\n"
-"PO-Revision-Date: 2022-04-01 14:09+0200\n"
+"POT-Creation-Date: 2022-09-28 21:23+0000\n"
+"PO-Revision-Date: 2022-10-07 17:39+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -57,7 +57,7 @@ msgstr ""
 "zásuvnými modulmi ako je iný jazyk, vkladanie značiek, integrácia do systému "
 "subversion a prehliadač zdrojového kódu."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:157
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:161
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -87,7 +87,7 @@ msgstr ""
 "reťazce."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:32
-msgid "Whether the obsolete entries be removed upon saving"
+msgid "Whether to remove the obsolete entries upon saving"
 msgstr "Či sa majú odstrániť zastarané záznamy po uložení"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:33
@@ -189,8 +189,8 @@ msgid ""
 "Sort order to use in the message list. Possible values are “status”, “id”, "
 "“original-text” and “translated-text”."
 msgstr ""
-"Stĺpec, podľa ktorého sa má zoradiť zoznam správ. Možné hodnoty sú \"status"
-"\" (stav), „id“ (identifikátor), „original_text“ (pôvodný text) a "
+"Stĺpec, podľa ktorého sa má zoradiť zoznam správ. Možné hodnoty sú "
+"\"status\" (stav), „id“ (identifikátor), „original_text“ (pôvodný text) a "
 "„translated_text“ (preložený text)."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:153
@@ -207,12 +207,12 @@ msgstr ""
 "zásuvných modulov. Vlastnosť „Location“ daného zásuvného modulu môžete "
 "získať zo súboru .gtranslator-plugin."
 
-#: src/codeview/gtr-codeview.c:377
+#: src/codeview/gtr-codeview.c:380
 msgid "Paths:"
 msgstr "Cesty:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
-#: src/gtr-io-error-info-bar.c:127 src/gtr-preferences-dialog.c:664
+#: src/gtr-io-error-info-bar.c:161 src/gtr-preferences-dialog.c:664
 #: src/translation-memory/gtr-translation-memory-dialog.c:305
 msgid "_Close"
 msgstr "_Zavrieť"
@@ -264,11 +264,11 @@ msgstr "Webová stránka editora prekladu"
 #: src/gtr-actions-file.c:217
 #, c-format
 msgid ""
-"Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
-"\">%s</span>?"
+"Do you want to save changes to this file: <span weight=\"bold\" "
+"size=\"large\">%s</span>?"
 msgstr ""
-"Chcete uložiť zmeny do tohto súboru: <span weight=\"bold\" size=\"large\">"
-"%s</span>?"
+"Chcete uložiť zmeny do tohto súboru: <span weight=\"bold\" "
+"size=\"large\">%s</span>?"
 
 #: src/gtr-actions-file.c:223
 msgid "If you don't save, all your unsaved changes will be permanently lost."
@@ -581,7 +581,7 @@ msgid "Language _code:"
 msgstr "_Kód jazyka:"
 
 #: src/gtr-header-dialog.ui:149
-msgid "Language gro_up email:"
+msgid "Language _Team email:"
 msgstr "Email prekladateľského _tímu:"
 
 #: src/gtr-header-dialog.ui:162
@@ -644,7 +644,7 @@ msgstr "Stav v aplikácii DL:"
 msgid "Damned Lies Info"
 msgstr "Informácie o aplikácii Damned Lies"
 
-#: src/gtr-io-error-info-bar.c:150 src/gtr-jump-dialog.c:88
+#: src/gtr-io-error-info-bar.c:155 src/gtr-jump-dialog.c:88
 #: src/gtr-profile-dialog.c:173 src/gtr-profile-dialog.c:178
 #: src/translation-memory/gtr-translation-memory-dialog.c:104
 msgid "_OK"
@@ -804,27 +804,27 @@ msgstr "Uloží ako (<Ctrl><Shift>s)"
 msgid "Upload file (<Ctrl>b)"
 msgstr "Odovzdá súbor (<Ctrl>b)"
 
-#: src/gtr-po.c:492
+#: src/gtr-po.c:509
 #, c-format
 msgid "The file is empty"
 msgstr "Súbor je prázdny"
 
-#: src/gtr-po.c:501
+#: src/gtr-po.c:518
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Zlyhalo otvorenie súboru „%s“: %s"
 
-#: src/gtr-po.c:572
+#: src/gtr-po.c:589
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Nepodarilo sa previesť zo znakovej sady „%s“ na UTF-8"
 
-#: src/gtr-po.c:588 src/gtr-po.c:607
+#: src/gtr-po.c:605 src/gtr-po.c:624
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Nepodarilo sa uložiť dočasný súbor na prevod kódovania"
 
-#: src/gtr-po.c:638
+#: src/gtr-po.c:655
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -835,17 +835,17 @@ msgstr ""
 "riadka „msgconv“ alebo „iconv“ pred otvorením tohto súboru v programe Editor "
 "prekladov prostredia GNOME"
 
-#: src/gtr-po.c:706
+#: src/gtr-po.c:723
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext vrátil prázdny zoznam domén pre správy."
 
-#: src/gtr-po.c:753
+#: src/gtr-po.c:770
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Syntaktický analyzátor nevrátil žiadne správy."
 
-#: src/gtr-po.c:807
+#: src/gtr-po.c:824
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -856,17 +856,17 @@ msgstr ""
 "Pot súbory sú generované pri procese kompilácie.\n"
 "Váš súbor by sa pravdepodobne mal volať „%s.po“."
 
-#: src/gtr-po.c:835
+#: src/gtr-po.c:852
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Súbor %s je len na čítanie a nemôže byť prepísaný"
 
-#: src/gtr-po.c:854
+#: src/gtr-po.c:871
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Vyskytla sa chyba v súbore PO: %s"
 
-#: src/gtr-po.c:866
+#: src/gtr-po.c:883
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Vyskytla sa chyba pri zápise PO súboru: %s"
@@ -1075,40 +1075,40 @@ msgstr "Pokračovať dookola"
 msgid "Close document"
 msgstr "Zavrieť dokument"
 
-#: src/gtr-tab.c:342
+#: src/gtr-tab.c:419
 msgid "There is an error in the message:"
 msgstr "V správe je chyba:"
 
-#: src/gtr-tab.c:556 src/gtr-tab.c:682
+#: src/gtr-tab.c:632 src/gtr-tab.c:767
 msgid "fuzzy"
 msgstr "nepresná"
 
-#: src/gtr-tab.c:712
+#: src/gtr-tab.c:797
 #, c-format
 msgid "Plural %d"
 msgstr "Množné číslo %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1307
+#: src/gtr-tab.c:1425
 msgid "Path:"
 msgstr "Cesta:"
 
-#: src/gtr-tab.c:1974
+#: src/gtr-tab.c:2090
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Preložené na: %0.2f%%"
 
-#: src/gtr-tab.c:1975
+#: src/gtr-tab.c:2091
 #, c-format
 msgid "Translated: %d"
 msgstr "Preložených: %d"
 
-#: src/gtr-tab.c:1976
+#: src/gtr-tab.c:2092
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Nepreložených: %d"
 
-#: src/gtr-tab.c:1977
+#: src/gtr-tab.c:2093
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Nepresných: %d"
@@ -1186,101 +1186,106 @@ msgstr "Klávesové skratky"
 
 #: src/help-overlay.ui:54
 msgctxt "shortcut window"
+msgid "Help"
+msgstr "Pomocník"
+
+#: src/help-overlay.ui:61
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Ukončenie"
 
-#: src/help-overlay.ui:64
+#: src/help-overlay.ui:71
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "Úprava"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:75
 msgctxt "shortcut window"
 msgid "Undo"
 msgstr "Vrátenie späť"
 
-#: src/help-overlay.ui:75
+#: src/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Redo"
 msgstr "Znovu vykonanie"
 
-#: src/help-overlay.ui:82
+#: src/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Označenie/odznačenie nepresného prekladu"
 
-#: src/help-overlay.ui:89
+#: src/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "Skopírovanie pôvodného textu do prekladu"
 
-#: src/help-overlay.ui:99
+#: src/help-overlay.ui:106
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Navigácia"
 
-#: src/help-overlay.ui:103
+#: src/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Prejdenie na predchádzajúcu správu"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Prejdenie na ďalšiu správu"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Prejdenie na predchádzajúcu nepreloženú správu"
 
-#: src/help-overlay.ui:124
+#: src/help-overlay.ui:131
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Prejdenie na ďalšiu nepreloženú správu"
 
-#: src/help-overlay.ui:134
+#: src/help-overlay.ui:141
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Pamäť prekladov"
 
-#: src/help-overlay.ui:138
+#: src/help-overlay.ui:145
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Zostavenie pamäte prekladov"
 
-#: src/help-overlay.ui:145
+#: src/help-overlay.ui:152
 msgctxt "shortcut window"
 msgid "Copy below"
 msgstr "Skopírovanie textu nižšie"
 
-#: src/help-overlay.ui:155
+#: src/help-overlay.ui:162
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Nájdenie a nahradenie"
 
 # window title
-#: src/help-overlay.ui:159
+#: src/help-overlay.ui:166
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Nájdenie"
 
-#: src/help-overlay.ui:166
+#: src/help-overlay.ui:173
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Nájdenie a nahradenie"
 
-#: src/help-overlay.ui:173
+#: src/help-overlay.ui:180
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "Hľadanie dopredu"
 
-#: src/help-overlay.ui:180
+#: src/help-overlay.ui:187
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Hľadanie dozadu"
 
-#: src/help-overlay.ui:187
+#: src/help-overlay.ui:194
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Skrytie lišty nájdenia a nahradenia"
