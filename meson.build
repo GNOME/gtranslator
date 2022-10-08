@@ -2,7 +2,7 @@ project(
   'gtranslator', 'c',
   version: '42.0',
   license: 'GPL3+',
-  meson_version: '>= 0.50.0',
+  meson_version: '>= 0.57.0',
 )
 
 ###########
@@ -154,10 +154,9 @@ configure_file(
   configuration: config_h,
 )
 
-meson.add_install_script(
-  'build-aux/meson/meson_post_install.py',
-  gtr_datadir,
-  gtr_schemasdir,
+gnome.post_install(
+  glib_compile_schemas: true,
+  gtk_update_icon_cache: true,
 )
 
 output = '\n\n      GTranslator ' + gtr_version + '\n'
