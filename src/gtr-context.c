@@ -1,16 +1,17 @@
 /*
  * Copyright (C) 2007  Ignacio Casal Quinteiro <icq@gnome.org>
- * 
+ *               2022  Daniel Garcia Moreno <danigm@gnome.org>
+ *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
  *     the Free Software Foundation, either version 3 of the License, or
  *     (at your option) any later version.
- * 
+ *
  *     This program is distributed in the hope that it will be useful,
  *     but WITHOUT ANY WARRANTY; without even the implied warranty of
  *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *     GNU General Public License for more details.
- * 
+ *
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -29,6 +30,24 @@
 #include <glib/gi18n.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
+
+/*
+ * Main object structure
+ */
+struct _GtrContextPanel
+{
+  GtkBox parent_instance;
+};
+
+/*
+ * Class definition
+ */
+struct _GtrContextPanelClass
+{
+  GtkBoxClass parent_class;
+  void (* reloaded) (GtrContextPanel *panel,
+                     GtrMsg          *msg);
+};
 
 typedef struct
 {
@@ -65,230 +84,6 @@ enum
 static guint signals[LAST_SIGNAL] = { 0 };
 
 static void buffer_end_user_action (GtkTextBuffer *buffer, GtrContextPanel *panel);
-static void reload_values (GtrContextPanel *panel);
-
-typedef struct {
-  GtrContextPanel *panel;
-  GtkTextBuffer   *text_buffer;
-} DialogData;
-
-static void
-dialog_response_cb (GtkDialog *dialog, guint response, gpointer user_data)
-{
-  DialogData *dd = user_data;
-
-  if (response == GTK_RESPONSE_ACCEPT)
-    buffer_end_user_action (dd->text_buffer, dd->panel);
-
-  gtk_window_destroy (GTK_WINDOW (dialog));
-  reload_values (dd->panel);
-  g_free (dd);
-}
-
-static void
-setup_notes_edition (GtrContextPanel *panel)
-{
-  GtrContextPanelPrivate *priv;
-  GtkWidget *dialog;
-  GtkWidget *scrolled_window;
-  GtkBox *dialog_area;
-  GtkWidget *text_view;
-  GtkTextBuffer *text_buffer = gtk_text_buffer_new (NULL);;
-  DialogData *dd;
-
-  priv = gtr_context_panel_get_instance_private (panel);
-
-  dialog = gtk_dialog_new_with_buttons (_("Notes"),
-                                        GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (panel))),
-                                        GTK_DIALOG_MODAL|
-                                        GTK_DIALOG_USE_HEADER_BAR|
-                                        GTK_DIALOG_DESTROY_WITH_PARENT,
-                                        _("_Save"),
-                                        GTK_RESPONSE_ACCEPT,
-                                        _("_Cancel"),
-                                        GTK_RESPONSE_CANCEL,
-                                        NULL);
-
-  dialog_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog)));
-  text_view = gtk_text_view_new_with_buffer (text_buffer);
-
-  gtk_text_view_set_left_margin (GTK_TEXT_VIEW (text_view),10);
-  gtk_text_view_set_right_margin (GTK_TEXT_VIEW (text_view),10);
-  gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_CHAR);
-  gtk_text_view_set_pixels_inside_wrap (GTK_TEXT_VIEW (text_view),0);
-
-  scrolled_window = gtk_scrolled_window_new ();
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-                                  GTK_POLICY_AUTOMATIC,
-                                  GTK_POLICY_AUTOMATIC);
-
-  gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (scrolled_window),
-                                         text_view);
-  gtk_widget_set_margin_start (scrolled_window, 6);
-  gtk_widget_set_margin_end (scrolled_window, 6);
-  gtk_widget_set_margin_top (scrolled_window, 6);
-  gtk_widget_set_margin_bottom (scrolled_window, 6);
-
-  gtk_widget_set_vexpand (scrolled_window, TRUE);
-  gtk_box_append (dialog_area, scrolled_window);
-
-  text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
-  gtk_text_buffer_set_text (text_buffer, gtr_msg_get_comment (priv->current_msg), -1);
-
-  gtk_widget_set_size_request (dialog, 400, 300);
-  gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-  gtk_window_set_deletable (GTK_WINDOW (dialog), FALSE);
-
-  dd = g_new0 (DialogData, 1);
-  dd->panel = panel;
-  dd->text_buffer = text_buffer;
-
-  g_signal_connect (dialog, "response", G_CALLBACK (dialog_response_cb), dd);
-  gtk_window_present (GTK_WINDOW (dialog));
-}
-
-static void
-follow_if_link (GtrContextPanel *panel, GtkWidget *text_view, GtkTextIter *iter)
-{
-  GSList *tags = NULL, *tagp = NULL;
-
-  tags = gtk_text_iter_get_tags (iter);
-  for (tagp = tags; tagp != NULL; tagp = tagp->next)
-    {
-      GtkTextTag *tag = tagp->data;
-      gint *is_path = g_object_get_data (G_OBJECT (tag), "is_path");
-
-      if (is_path)
-        {
-          setup_notes_edition (panel);
-          break;
-        }
-    }
-
-  if (tags)
-    g_slist_free (tags);
-}
-
-/*static gboolean
-event_after (GtkWidget *text_view,
-             GdkEvent *ev, GtrContextPanel *panel)
-{
-  GtkTextIter start, end, iter;
-  GtkTextBuffer *buffer;
-  GdkEventButton *event;
-  gint x, y;
-
-  if (ev->type != GDK_BUTTON_RELEASE)
-    return FALSE;
-
-  event = (GdkEventButton *) ev;
-
-  if (event->button != 1)
-    return FALSE;
-
-  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));*/
-
-  /* we shouldn't follow a link if the user has selected something */
-  /* gtk_text_buffer_get_selection_bounds (buffer, &start, &end);
-  if (gtk_text_iter_get_offset (&start) != gtk_text_iter_get_offset (&end))
-    return FALSE;
-
-  gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view),
-                                         GTK_TEXT_WINDOW_WIDGET,
-                                         event->x, event->y, &x, &y);
-
-  gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (text_view), &iter, x, y);
-
-  follow_if_link (panel, text_view, &iter);
-
-  return FALSE;
-}*/
-
-/* Looks at all tags covering the position (x, y) in the text view, 
- * and if one of them is a link, change the cursor to the "hands" cursor
- * typically used by web browsers.
- */
-/*static void
-set_cursor_if_appropriate (GtkTextView * text_view, gint x, gint y,
-                           GtrContextPanel *panel)
-{
-  GSList *tags = NULL, *tagp = NULL;
-  GtkTextIter iter;
-  GtrContextPanelPrivate *priv;
-  gboolean hovering = FALSE;
-
-  priv = gtr_context_panel_get_instance_private(panel);
-
-  gtk_text_view_get_iter_at_location (text_view, &iter, x, y);
-
-  tags = gtk_text_iter_get_tags (&iter);
-  for (tagp = tags; tagp != NULL; tagp = tagp->next)
-    {
-      GtkTextTag *tag = tagp->data;
-      gint *is_path = g_object_get_data (G_OBJECT (tag), "is_path");
-
-      if (is_path)
-        {
-          hovering = TRUE;
-          break;
-        }
-    }
-
-  if (hovering != priv->hovering_over_link)
-    {
-      priv->hovering_over_link = hovering;
-
-      if (priv->hovering_over_link)
-        gdk_window_set_cursor (gtk_text_view_get_window (text_view,
-                                                         GTK_TEXT_WINDOW_TEXT),
-                               priv->hand_cursor);
-      else
-        gdk_window_set_cursor (gtk_text_view_get_window (text_view,
-                                                         GTK_TEXT_WINDOW_TEXT),
-                               priv->regular_cursor);
-    }
-
-  if (tags)
-    g_slist_free (tags);
-}*/
-
-/* Update the cursor image if the pointer moved. 
-static gboolean
-motion_notify_event (GtkWidget *text_view, GdkEventMotion *event,
-                     GtrContextPanel *panel)
-{
-  gint x, y;
-
-  gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view),
-                                         GTK_TEXT_WINDOW_WIDGET,
-                                         event->x, event->y, &x, &y);
-
-  set_cursor_if_appropriate (GTK_TEXT_VIEW (text_view), x, y, panel);
-
-  return FALSE;
-}*/
-
-/* Also update the cursor image if the window becomes visible
- * (e.g. when a window covering it got iconified). */
-/* static gboolean
-visibility_notify_event (GtkWidget *text_view, GdkEventVisibility *event,
-                         GtrContextPanel *panel)
-{
-  GdkDevice *pointer;
-  gint wx, wy, bx, by;
-  GdkSeat *seat = gdk_display_get_default_seat (gdk_display_get_default ());
-
-  pointer = gdk_seat_get_pointer (seat);
-  gdk_window_get_device_position (gtk_widget_get_window (text_view), pointer, &wx, &wy, NULL);
-
-  gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view),
-                                         GTK_TEXT_WINDOW_WIDGET,
-                                         wx, wy, &bx, &by);
-
-  set_cursor_if_appropriate (GTK_TEXT_VIEW (text_view), bx, by, panel);
-
-  return FALSE;
-} */
 
 static void
 add_notes (GtkTextBuffer *buffer, GtkTextIter *pos, GtkTextTag *header_tag,
@@ -371,19 +166,6 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrContextPanel *panel)
 }
 
 static void
-reload_values (GtrContextPanel *panel)
-{
-  GtrContextPanelPrivate *priv;
-
-  priv = gtr_context_panel_get_instance_private(panel);
-
-  showed_message_cb (priv->tab, priv->current_msg, panel);
-  gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->context), FALSE);
-
-  g_signal_emit (G_OBJECT (panel), signals[RELOADED], 0, priv->current_msg);
-}
-
-static void
 buffer_end_user_action (GtkTextBuffer *buffer, GtrContextPanel *panel)
 {
   GtkTextIter start, end;
@@ -412,29 +194,14 @@ buffer_end_user_action (GtkTextBuffer *buffer, GtrContextPanel *panel)
 static void
 gtr_context_panel_init (GtrContextPanel *panel)
 {
-  g_printf("init: contextpanel\n");
   GtrContextPanelPrivate *priv;
   GtkTextBuffer *buffer;
-  GdkDisplay *display;
-
-  display = gdk_display_get_default ();
 
   priv = gtr_context_panel_get_instance_private(panel);
 
   gtk_widget_init_template (GTK_WIDGET (panel));
 
   priv->hovering_over_link = FALSE;
-
-  // priv->hand_cursor = gdk_cursor_new_for_display (display, GDK_HAND2);
-  // priv->regular_cursor = gdk_cursor_new_for_display (display, GDK_XTERM);
-
-  /* Don't know what does this do
-  g_signal_connect (priv->context, "event-after",
-                    G_CALLBACK (event_after), panel);
-  g_signal_connect (priv->context, "motion-notify-event",
-                    G_CALLBACK (motion_notify_event), panel);
-  g_signal_connect (priv->context, "visibility-notify-event",
-                    G_CALLBACK (visibility_notify_event), panel);*/
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->context));
   g_signal_connect (buffer, "end-user-action",
@@ -523,7 +290,6 @@ gtr_context_panel_dispose (GObject *object)
 static void
 gtr_context_panel_class_init (GtrContextPanelClass * klass)
 {
-  g_printf("class init: contextpanel\n");
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
@@ -536,7 +302,7 @@ gtr_context_panel_class_init (GtrContextPanelClass * klass)
     g_signal_new ("reloaded",
                   G_OBJECT_CLASS_TYPE (object_class),
                   G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (GtrContextPanelClass, reloaded),
+                  G_STRUCT_OFFSET (struct _GtrContextPanelClass, reloaded),
                   NULL, NULL,
                   g_cclosure_marshal_VOID__OBJECT,
                   G_TYPE_NONE,
@@ -570,7 +336,6 @@ gtr_context_panel_class_init (GtrContextPanelClass * klass)
 GtkWidget *
 gtr_context_panel_new (void)
 {
-  g_printf("creating context\n");
   return g_object_new (GTR_TYPE_CONTEXT_PANEL, NULL);
 }
 
