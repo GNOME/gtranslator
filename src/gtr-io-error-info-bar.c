@@ -1,17 +1,17 @@
 /*
  * Copyright (C) 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
- * 		 2005  Paolo Maggi 
- * 
+ * 		 2005  Paolo Maggi
+ *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
  *     the Free Software Foundation, either version 3 of the License, or
  *     (at your option) any later version.
- * 
+ *
  *     This program is distributed in the hope that it will be useful,
  *     but WITHOUT ANY WARRANTY; without even the implied warranty of
  *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *     GNU General Public License for more details.
- * 
+ *
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -36,16 +36,6 @@ typedef struct
 
 static void show_info_bar (GtrTab * tab);
 
-static void
-set_contents (GtkInfoBar * infobar, GtkWidget * contents)
-{
-  /*GtkWidget *content_area;
-
-  content_area = gtk_info_bar_get_content_area (infobar);
-  gtk_container_add (GTK_CONTAINER (content_area), contents);*/
-  gtk_info_bar_add_child (infobar, contents);
-}
-
 /*
  * Message area funcs
  */
@@ -67,7 +57,7 @@ set_info_bar_text_and_icon (GtkInfoBar * infobar,
   gtk_widget_show (hbox_content);
 
   image = gtk_image_new_from_icon_name (icon_stock_id);
-  gtk_image_set_icon_size (image, GTK_ICON_SIZE_NORMAL);
+  gtk_image_set_icon_size (GTK_IMAGE (image), GTK_ICON_SIZE_NORMAL);
   gtk_widget_show (image);
   gtk_box_append (GTK_BOX (hbox_content), image);
   gtk_widget_set_halign (image, 0.5);
@@ -116,7 +106,7 @@ set_info_bar_text_and_icon (GtkInfoBar * infobar,
       gtk_label_set_yalign (GTK_LABEL (secondary_label), 0.5);
     }
 
-  set_contents (infobar, hbox_content);
+  gtk_info_bar_add_child (infobar, hbox_content);
 }
 
 /*

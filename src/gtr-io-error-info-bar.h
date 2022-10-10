@@ -16,8 +16,7 @@
  *
  */
 
-#ifndef __IO_ERROR_MESSAGE_AREA_H__
-#define __IO_ERROR_MESSAGE_AREA_H__
+#pragma once
 
 #include "gtr-tab.h"
 
@@ -34,4 +33,3 @@ G_BEGIN_DECLS
                              GtrTab * tab);
 
 G_END_DECLS
-#endif
