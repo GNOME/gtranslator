@@ -112,8 +112,6 @@ void gtr_message_go_to_next_fuzzy_or_untranslated (GtrWindow * window);
 
 void gtr_message_go_to_prev_fuzzy_or_untranslated (GtrWindow * window);
 
-void gtr_message_jump (GtrWindow * window);
-
 /*Search*/
 void _gtr_actions_search_find (GtrWindow * window);
 
