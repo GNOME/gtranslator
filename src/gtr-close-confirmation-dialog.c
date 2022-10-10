@@ -57,6 +57,16 @@ enum
   N_COLUMNS
 };
 
+struct _GtrCloseConfirmationDialog
+{
+  GtkDialog parent;
+};
+
+struct _GtrCloseConfirmationDialogClass
+{
+  GtkDialogClass parent_class;
+};
+
 typedef struct
 {
   gboolean logout_mode;
@@ -71,8 +81,8 @@ typedef struct
 } GtrCloseConfirmationDialogPrivate;
 
 #define GET_MODE(priv) (((priv->unsaved_documents != NULL) && \
-			 (priv->unsaved_documents->next == NULL)) ? \
-			  SINGLE_DOC_MODE : MULTIPLE_DOCS_MODE)
+                         (priv->unsaved_documents->next == NULL)) ? \
+                          SINGLE_DOC_MODE : MULTIPLE_DOCS_MODE)
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrCloseConfirmationDialog,
                             gtr_close_confirmation_dialog,
@@ -83,7 +93,7 @@ static void set_unsaved_document (GtrCloseConfirmationDialog *dlg,
 
 static GList *get_selected_docs (GtkTreeModel * store);
 
-/*  Since we connect in the costructor we are sure this handler will be called 
+/*  Since we connect in the costructor we are sure this handler will be called
  *  before the user ones
  */
 static void
@@ -133,8 +143,12 @@ set_logout_mode (GtrCloseConfirmationDialog * dlg, gboolean logout_mode)
 static void
 gtr_close_confirmation_dialog_init (GtrCloseConfirmationDialog * dlg)
 {
-  //AtkObject *atk_obj;
   GtkWidget *content_area = gtk_dialog_get_content_area (GTK_DIALOG (dlg));
+
+  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
+  gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
+
+  g_signal_connect (dlg, "response", G_CALLBACK (response_cb), NULL);
 
   gtk_widget_set_margin_start (GTK_WIDGET (content_area), 6);
   gtk_widget_set_margin_end (GTK_WIDGET (content_area), 6);
@@ -143,19 +157,8 @@ gtr_close_confirmation_dialog_init (GtrCloseConfirmationDialog * dlg)
 
   gtk_box_set_spacing (GTK_BOX (content_area), 14);
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
-  //gtk_window_set_skip_taskbar_hint (GTK_WINDOW (dlg), TRUE);
 
   gtk_window_set_title (GTK_WINDOW (dlg), "");
-
-  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
-  gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
-
-  /* started use of gtk_widget_class_set_accessible role in class_init
-   * atk_obj = gtk_widget_get_accessible (GTK_WIDGET (dlg));
-  atk_object_set_role (atk_obj, ATK_ROLE_ALERT);
-  atk_object_set_name (atk_obj, _("Question"));*/
-
-  g_signal_connect (dlg, "response", G_CALLBACK (response_cb), NULL);
 }
 
 static void
@@ -252,8 +255,6 @@ static void
                                                          FALSE,
                                                          (G_PARAM_READWRITE |
                                                           G_PARAM_CONSTRUCT_ONLY)));
-
-  gtk_widget_class_set_accessible_role (klass, GTK_ACCESSIBLE_ROLE_ALERT);
 }
 
 static GList *
@@ -385,19 +386,11 @@ build_single_doc_dialog (GtrCloseConfirmationDialog * dlg)
   g_free (markup_str);
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_set_margin_start (hbox, 6);
-  gtk_widget_set_margin_end (hbox, 6);
-  gtk_widget_set_margin_top (hbox, 6);
-  gtk_widget_set_margin_bottom (hbox, 6);
-
   gtk_box_append (GTK_BOX (hbox), image);
 
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-
   gtk_box_append (GTK_BOX (hbox), vbox);
-
   gtk_box_append (GTK_BOX (vbox), primary_label);
-
   gtk_box_append (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
                   hbox);
 }
@@ -513,10 +506,6 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
   priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
 
   hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_set_margin_start (hbox, 6);
-  gtk_widget_set_margin_end (hbox, 6);
-  gtk_widget_set_margin_top (hbox, 6);
-  gtk_widget_set_margin_bottom (hbox, 6);
   gtk_widget_set_hexpand (hbox, TRUE);
   gtk_box_append (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))), hbox);
 
@@ -585,12 +574,9 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
   scrolledwindow = gtk_scrolled_window_new ();
   gtk_widget_set_vexpand (vbox2, TRUE);
   gtk_box_append (GTK_BOX (vbox2), scrolledwindow);
-  /*gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolledwindow),
-                                       GTK_SHADOW_IN);*/
 
   treeview = create_treeview (priv);
-  //gtk_container_add (GTK_CONTAINER (scrolledwindow), treeview);
-  gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW(scrolledwindow), treeview);
+  gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (scrolledwindow), treeview);
 
   /* Secondary label */
   if (priv->disable_save_to_disk)
