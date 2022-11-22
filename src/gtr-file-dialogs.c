@@ -28,53 +28,52 @@
 /*
  * File chooser dialog
  */
-GtkNativeDialog *
+GtkFileDialog *
 gtr_file_chooser_new (GtkWindow * parent,
                       FileselMode mode,
                       const gchar * title, const gchar * dir)
 {
-  GtkFileChooserNative *dialog;
-  GtkFileFilter *filter;
+  GtkFileDialog *dialog;
 
-  dialog = gtk_file_chooser_native_new (title,
-                                        parent,
-                                        (mode ==
-                                         FILESEL_SAVE) ?
-                                        GTK_FILE_CHOOSER_ACTION_SAVE :
-                                        GTK_FILE_CHOOSER_ACTION_OPEN,
-                                        (mode ==
-                                         FILESEL_SAVE) ? _("_Save") :
-                                        _("_Open"), _("_Cancel"));
+  dialog = gtk_file_dialog_new ();
+  gtk_file_dialog_set_title (dialog, title);
+  gtk_file_dialog_set_modal (dialog, TRUE);
 
   if (dir)
-    //gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (dialog), dir);
   {
-    GFile * file = g_file_new_for_uri (dir);
-    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(dialog), file, NULL);
+    g_autoptr (GFile) file = g_file_new_for_uri (dir);
+    gtk_file_dialog_set_current_folder (dialog, file);
   }
 
   if (mode != FILESEL_SAVE)
     {
+      g_autoptr (GListStore) filters = g_list_store_new (GTK_TYPE_FILE_FILTER);
+      g_autoptr (GtkFileFilter) po = NULL;
+      g_autoptr (GtkFileFilter) pot = NULL;
+      g_autoptr (GtkFileFilter) all = NULL;
       /* Now we set the filters */
-      filter = gtk_file_filter_new ();
-      gtk_file_filter_set_name (filter, _("Gettext translation"));
+      // FIXME: review if we need to free the filters... maybe there's a memory leak
+      po = gtk_file_filter_new ();
+      gtk_file_filter_set_name (po, _("Gettext translation"));
 #ifndef G_OS_WIN32
-      gtk_file_filter_add_mime_type (filter, "text/x-gettext-translation");
+      gtk_file_filter_add_mime_type (po, "text/x-gettext-translation");
 #else
-      gtk_file_filter_add_pattern (filter, "*.po");
+      gtk_file_filter_add_pattern (po, "*.po");
 #endif
-      gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
 
-      filter = gtk_file_filter_new ();
-      gtk_file_filter_set_name (filter, _("Gettext translation template"));
-      gtk_file_filter_add_pattern (filter, "*.pot");
-      gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
+      pot = gtk_file_filter_new ();
+      gtk_file_filter_set_name (pot, _("Gettext translation template"));
+      gtk_file_filter_add_pattern (pot, "*.pot");
 
-      filter = gtk_file_filter_new ();
-      gtk_file_filter_set_name (filter, _("All files"));
-      gtk_file_filter_add_pattern (filter, "*");
-      gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
+      all = gtk_file_filter_new ();
+      gtk_file_filter_set_name (all, _("All files"));
+      gtk_file_filter_add_pattern (all, "*");
+
+      g_list_store_append (filters, po);
+      g_list_store_append (filters, pot);
+      g_list_store_append (filters, all);
+      gtk_file_dialog_set_filters (dialog, G_LIST_MODEL (filters));
     }
 
-  return GTK_NATIVE_DIALOG (dialog);
+  return dialog;
 }

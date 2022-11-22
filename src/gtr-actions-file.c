@@ -136,16 +136,17 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
 }
 
 static void
-gtr_po_parse_files_from_dialog (GtkNativeDialog * dialog, GtrWindow * window)
+gtr_po_parse_files_from_dialog (GtkFileDialog *dialog, GAsyncResult *res, GtrWindow *window)
 {
   GSList *locations = NULL;
-  GFile *file;
-
+  g_autoptr (GFile) file = NULL;
   g_autoptr (GFile) parent = NULL;
   g_autofree gchar *uri = NULL;
 
-  // Store the file directory for future openings
-  file = gtk_file_chooser_get_file (GTK_FILE_CHOOSER (dialog));
+  // FIXME: handle errors here
+  file = gtk_file_dialog_open_finish (dialog, res, NULL);
+  if (!file) return;
+
   parent = g_file_get_parent (file);
   uri = g_file_get_uri (parent);
   _gtr_application_set_last_dir (GTR_APP, uri);
@@ -156,18 +157,6 @@ gtr_po_parse_files_from_dialog (GtkNativeDialog * dialog, GtrWindow * window)
   locations = g_slist_append (locations, file);
   load_file_list (window, (const GSList *) locations);
   g_slist_free_full (locations, g_object_unref);
-}
-
-
-static void
-gtr_file_chooser_cb (GtkNativeDialog * dialog, guint reply, gpointer user_data)
-{
-  GtrWindow *window = GTR_WINDOW (user_data);
-
-  if (reply == GTK_RESPONSE_ACCEPT)
-    gtr_po_parse_files_from_dialog (dialog, window);
-
-  gtk_native_dialog_destroy (dialog);
 }
 
 static void
@@ -238,15 +227,14 @@ gtr_want_to_save_current_dialog (GtrWindow * window, void (*callback)(GtrWindow 
 static void
 gtr_open_file_dialog_nocheck (GtrWindow *window)
 {
-  GtkNativeDialog *dialog;
+  GtkFileDialog *dialog;
 
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
                                  FILESEL_OPEN,
                                  _("Open file for translation"),
                                  _gtr_application_get_last_dir (GTR_APP));
 
-  g_signal_connect (dialog, "response", G_CALLBACK (gtr_file_chooser_cb), window);
-  gtk_native_dialog_show (dialog);
+  gtk_file_dialog_open (dialog, GTK_WINDOW (window), NULL, NULL, G_CALLBACK (gtr_po_parse_files_from_dialog), window);
 }
 
 void
@@ -261,36 +249,24 @@ gtr_open_file_dialog (GtrWindow *window)
 }
 
 static void
-save_dialog_response_cb (GtkNativeDialog * dialog,
-                         gint response_id, GtrWindow * window)
+save_dialog_response_cb (GtkFileDialog *dialog, GAsyncResult *res, GtrWindow *window)
 {
   GError *error = NULL;
   GtrPo *po;
   GtrTab *tab;
-  gchar *filename;
-  GFile *location;
+
+  g_autofree char *filename = NULL;
+  g_autoptr (GFile) file = NULL;
+  g_autoptr (GFile) location = NULL;
 
   tab = gtr_window_get_active_tab (window);
-
-  g_return_if_fail (GTK_IS_FILE_CHOOSER (dialog));
-
   po = gtr_tab_get_po (tab);
 
-  if (response_id != GTK_RESPONSE_ACCEPT)
-    {
-      gtk_native_dialog_destroy (dialog);
-      return;
-    }
-
-  //filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-  GFile * file = gtk_file_chooser_get_file (GTK_FILE_CHOOSER(dialog));
-  filename = g_file_get_path(file);
-  g_return_if_fail (filename != NULL);
-
+  // FIXME: handle errors here
+  file = gtk_file_dialog_save_finish (dialog, res, NULL);
+  if (!file) return;
+  filename = g_file_get_path (file);
   location = g_file_new_for_path (filename);
-  g_free (filename);
-
-  gtk_native_dialog_destroy (dialog);
 
   if (po != NULL)
     {
@@ -539,16 +515,13 @@ gtr_upload_file_dialog (GtrWindow * window)
 void
 gtr_save_file_as_dialog (GtrWindow * window)
 {
-  GtkNativeDialog *dialog;
+  GtkFileDialog *dialog;
 
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
                                  FILESEL_SAVE,
-                                 _("Save file as…"),
-                                 g_get_home_dir ());
+                                 _("Save file as…"), NULL);
 
-  g_signal_connect (dialog, "response", G_CALLBACK (save_dialog_response_cb),
-                    window);
-  gtk_native_dialog_show (dialog);
+  gtk_file_dialog_save (dialog, GTK_WINDOW (window), NULL, NULL, NULL, G_CALLBACK (save_dialog_response_cb), window);
 }
 
 /*
