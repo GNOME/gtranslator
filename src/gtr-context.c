@@ -52,18 +52,25 @@ struct _GtrContextPanelClass
 typedef struct
 {
   GtkWidget *sw;
-  GtkWidget *context;
   GtkWidget *translation_memory_box;
-
-  GdkCursor *hand_cursor;
-  GdkCursor *regular_cursor;
-  gboolean hovering_over_link;
 
   GtrTab *tab;
   GtrMsg *current_msg;
 
   // translation memory
   GtkWidget *translation_memory_ui;
+
+  // notes
+  GtkWidget *notes;
+  GtkTextBuffer *notesbuffer;
+  GtkWidget *edit_notes;
+
+  // comments
+  GtkWidget *comments;
+  GtkTextBuffer *commentsbuffer;
+
+  // paths
+  GtkWidget *paths;
 } GtrContextPanelPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrContextPanel, gtr_context_panel, GTK_TYPE_BOX)
@@ -77,92 +84,168 @@ enum
 /* Signals */
 enum
 {
-	RELOADED,
-	LAST_SIGNAL
+  RELOADED,
+  LAST_SIGNAL
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
 static void buffer_end_user_action (GtkTextBuffer *buffer, GtrContextPanel *panel);
+static void showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrContextPanel *panel);
+
+typedef struct {
+  GtrContextPanel *panel;
+  GtkTextBuffer   *text_buffer;
+} DialogData;
 
 static void
-add_notes (GtkTextBuffer *buffer, GtkTextIter *pos, GtkTextTag *header_tag,
-           GtrMsg *msg)
+reload_values (GtrContextPanel *panel)
 {
-  GtkTextTag *tag;
-  const gchar *comments;
+  GtrContextPanelPrivate *priv;
 
-  tag = gtk_text_buffer_create_tag (buffer, NULL,
-                                    "foreground", "blue",
-                                    "underline", PANGO_UNDERLINE_SINGLE,
-                                    NULL);
+  priv = gtr_context_panel_get_instance_private(panel);
 
-  gtk_text_buffer_insert_with_tags (buffer, pos, _("Notes:"), -1, header_tag, NULL);
-  gtk_text_buffer_insert (buffer, pos, "\n", 1);
-
-  g_object_set_data (G_OBJECT (tag), "is_path", GINT_TO_POINTER (1));
-
-  comments = gtr_msg_get_comment (msg);
-
-  if (comments == NULL || *comments == '\0')
-    gtk_text_buffer_insert_with_tags (buffer, pos, _("Add Note"), -1, tag, NULL);
-  else
-    {
-      gtk_text_buffer_insert (buffer, pos, comments, -1);
-      gtk_text_buffer_insert (buffer, pos, "(", 1);
-      gtk_text_buffer_insert_with_tags (buffer, pos, _("Edit"), -1, tag, NULL);
-      gtk_text_buffer_insert (buffer, pos, ")", 1);
-    }
-
-  gtk_text_buffer_insert (buffer, pos, "\n", 1);
+  showed_message_cb (priv->tab, priv->current_msg, panel);
+  g_signal_emit (G_OBJECT (panel), signals[RELOADED], 0, priv->current_msg);
 }
 
 static void
-add_text (GtkTextBuffer *buffer, GtkTextTag *tag, GtkTextIter *pos,
-          const gchar *header, const gchar *text)
+dialog_response_cb (GtkDialog *dialog, guint response, gpointer user_data)
 {
-  if (text && *text != '\0')
+  DialogData *dd = user_data;
+
+  if (response == GTK_RESPONSE_ACCEPT)
+    buffer_end_user_action (dd->text_buffer, dd->panel);
+
+  gtk_window_destroy (GTK_WINDOW (dialog));
+  reload_values (dd->panel);
+  g_free (dd);
+}
+
+static void
+setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
+{
+  GtrContextPanelPrivate *priv;
+  GtkWidget *dialog;
+  GtkWidget *scrolled_window;
+  GtkBox *dialog_area;
+  GtkWidget *text_view;
+  GtkTextBuffer *text_buffer = gtk_text_buffer_new (NULL);;
+  DialogData *dd;
+  GtkWidget *toplevel = gtk_widget_get_ancestor (GTK_WIDGET (panel), GTK_TYPE_WINDOW);
+
+  priv = gtr_context_panel_get_instance_private (panel);
+
+  dialog = gtk_dialog_new_with_buttons (_("Notes"),
+                                        GTK_WINDOW (toplevel),
+                                        GTK_DIALOG_MODAL|
+                                        GTK_DIALOG_USE_HEADER_BAR|
+                                        GTK_DIALOG_DESTROY_WITH_PARENT,
+                                        _("_Save"),
+                                        GTK_RESPONSE_ACCEPT,
+                                        _("_Cancel"),
+                                        GTK_RESPONSE_CANCEL,
+                                        NULL);
+
+  dialog_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog)));
+  text_view = gtk_text_view_new_with_buffer (text_buffer);
+
+  gtk_text_view_set_left_margin (GTK_TEXT_VIEW (text_view),10);
+  gtk_text_view_set_right_margin (GTK_TEXT_VIEW (text_view),10);
+  gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_CHAR);
+  gtk_text_view_set_pixels_inside_wrap (GTK_TEXT_VIEW (text_view),0);
+
+  scrolled_window = gtk_scrolled_window_new ();
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+                                  GTK_POLICY_AUTOMATIC,
+                                  GTK_POLICY_AUTOMATIC);
+
+  gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (scrolled_window), text_view);
+  gtk_widget_set_margin_start (scrolled_window, 6);
+  gtk_widget_set_margin_end (scrolled_window, 6);
+  gtk_widget_set_margin_top (scrolled_window, 6);
+  gtk_widget_set_margin_bottom (scrolled_window, 6);
+
+  gtk_widget_set_vexpand (scrolled_window, TRUE);
+  gtk_box_append (dialog_area, scrolled_window);
+
+  text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
+  gtk_text_buffer_set_text (text_buffer, gtr_msg_get_comment (priv->current_msg), -1);
+
+  gtk_widget_set_size_request (dialog, 400, 300);
+  gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+  gtk_window_set_deletable (GTK_WINDOW (dialog), FALSE);
+
+  dd = g_new0 (DialogData, 1);
+  dd->panel = panel;
+  dd->text_buffer = text_buffer;
+
+  g_signal_connect (dialog, "response", G_CALLBACK (dialog_response_cb), dd);
+  gtk_window_present (GTK_WINDOW (dialog));
+}
+
+static void
+add_notes (GtrContextPanel *panel, GtrMsg *msg)
+{
+  const gchar *comments;
+  GtrContextPanelPrivate *priv;
+  GtkTextIter iter;
+
+  priv = gtr_context_panel_get_instance_private (panel);
+  gtk_text_buffer_set_text (priv->notesbuffer, "", 0);
+  gtk_text_buffer_get_start_iter (priv->notesbuffer, &iter);
+
+  comments = gtr_msg_get_comment (msg);
+  gtk_text_buffer_insert (priv->notesbuffer, &iter, comments, -1);
+}
+
+static void
+add_extracted_comments (GtrContextPanel *panel, GtrMsg *msg)
+{
+  const gchar *comments;
+  GtrContextPanelPrivate *priv;
+  GtkTextIter iter;
+
+  priv = gtr_context_panel_get_instance_private (panel);
+
+  gtk_text_buffer_set_text (priv->commentsbuffer, "", 0);
+  gtk_text_buffer_get_start_iter (priv->commentsbuffer, &iter);
+
+  comments = gtr_msg_get_extracted_comments (msg);
+  if (comments == NULL || *comments == '\0')
+    gtk_text_buffer_insert (priv->commentsbuffer, &iter, "-", -1);
+  else
+    gtk_text_buffer_insert (priv->commentsbuffer, &iter, comments, -1);
+}
+
+static void
+clean_paths (GtrContextPanel *panel)
+{
+  GtrContextPanelPrivate *priv = gtr_context_panel_get_instance_private (panel);
+  GtkListBoxRow *row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (priv->paths), 0);
+  while (row)
     {
-      gtk_text_buffer_insert (buffer, pos, "\n", 1);
-      gtk_text_buffer_insert_with_tags (buffer, pos, header, -1, tag, NULL);
-      gtk_text_buffer_insert (buffer, pos, "\n", 1);
-      gtk_text_buffer_insert (buffer, pos, text, -1);
-      gtk_text_buffer_insert (buffer, pos, "\n", 1);
+      gtk_list_box_remove (GTK_LIST_BOX (priv->paths), GTK_WIDGET (row));
+      row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (priv->paths), 0);
     }
 }
 
 static void
 showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrContextPanel *panel)
 {
-  GtkTextBuffer *buffer;
-  GtkTextIter iter;
-  GtkTextTag *bold;
   GtrContextPanelPrivate *priv;
-
-  priv = gtr_context_panel_get_instance_private(panel);
+  priv = gtr_context_panel_get_instance_private (panel);
 
   /* Update current msg */
   priv->current_msg = msg;
 
-  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->context));
-  gtk_text_buffer_set_text (buffer, "", 0);
-  gtk_text_buffer_get_start_iter (buffer, &iter);
+  add_notes (panel, msg);
+  add_extracted_comments (panel, msg);
 
-  /* Create the bold tag for headers */
-  bold = gtk_text_buffer_create_tag (buffer, NULL, "weight", PANGO_WEIGHT_BOLD,
-                                     "weight-set", TRUE, NULL);
+  clean_paths (panel);
 
-  /* Add custom comments */
-  add_notes (buffer, &iter, bold, msg);
-
-  add_text (buffer, bold, &iter, _("Extracted comments:"),
-            gtr_msg_get_extracted_comments (msg));
-
-  add_text (buffer, bold, &iter, _("Context:"),
-            gtr_msg_get_msgctxt (msg));
-
-  add_text (buffer, bold, &iter, _("Format:"),
-            gtr_msg_get_format (msg));
+  // TODO: Add this to the panel
+  // gtr_msg_get_format (msg)
 }
 
 static void
@@ -194,18 +277,11 @@ buffer_end_user_action (GtkTextBuffer *buffer, GtrContextPanel *panel)
 static void
 gtr_context_panel_init (GtrContextPanel *panel)
 {
-  GtrContextPanelPrivate *priv;
-  GtkTextBuffer *buffer;
-
-  priv = gtr_context_panel_get_instance_private(panel);
+  GtrContextPanelPrivate *priv = gtr_context_panel_get_instance_private(panel);
 
   gtk_widget_init_template (GTK_WIDGET (panel));
-
-  priv->hovering_over_link = FALSE;
-
-  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->context));
-  g_signal_connect (buffer, "end-user-action",
-                    G_CALLBACK (buffer_end_user_action), panel);
+  g_signal_connect (priv->edit_notes, "clicked",
+                    G_CALLBACK (setup_notes_edition), panel);
 }
 
 static void
@@ -276,14 +352,6 @@ gtr_context_panel_constructed (GObject *object)
 static void
 gtr_context_panel_dispose (GObject *object)
 {
-  GtrContextPanel *panel = GTR_CONTEXT_PANEL (object);
-  GtrContextPanelPrivate *priv;
-
-  priv = gtr_context_panel_get_instance_private(panel);
-
-  g_clear_object (&priv->hand_cursor);
-  g_clear_object (&priv->regular_cursor);
-
   G_OBJECT_CLASS (gtr_context_panel_parent_class)->dispose (object);
 }
 
@@ -322,8 +390,16 @@ gtr_context_panel_class_init (GtrContextPanelClass * klass)
                                                "/org/gnome/translator/gtr-context.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, sw);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, context);
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, translation_memory_box);
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, notes);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, notesbuffer);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, edit_notes);
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, comments);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, commentsbuffer);
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, paths);
 }
 
 /**
@@ -337,23 +413,6 @@ GtkWidget *
 gtr_context_panel_new (void)
 {
   return g_object_new (GTR_TYPE_CONTEXT_PANEL, NULL);
-}
-
-/**
- * gtr_context_panel_get_context_text_view:
- * @panel: a #GtrContextPanel
- *
- * Returns: (transfer none): the context #GtkTextView
- */
-GtkTextView *
-gtr_context_panel_get_context_text_view (GtrContextPanel * panel)
-{
-  GtrContextPanelPrivate *priv;
-
-  g_return_val_if_fail (GTR_IS_CONTEXT_PANEL (panel), NULL);
-
-  priv = gtr_context_panel_get_instance_private(panel);
-  return GTK_TEXT_VIEW (priv->context);
 }
 
 void
@@ -374,4 +433,23 @@ gtr_context_init_tm (GtrContextPanel *panel,
   gtk_box_append (GTK_BOX (priv->translation_memory_box),
                   scrolled_win);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_win), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+}
+
+void
+gtr_context_add_path (GtrContextPanel *panel,
+                      const char      *filename,
+                      int             line)
+{
+  GtkWidget *widget = NULL;
+  GtrContextPanelPrivate *priv = gtr_context_panel_get_instance_private (panel);
+
+  g_autofree char *text = g_strdup_printf ("%s:%d", filename, line);
+
+  // TODO: make file path clickable it should open the dialog GtrViewer with
+  // the source if it's found in the local filesystem or try to open the gnome
+  // gitlab if this looks like a gnome project?
+  widget = gtk_label_new (text);
+  gtk_label_set_xalign (GTK_LABEL (widget), 0.0);
+
+  gtk_list_box_append (GTK_LIST_BOX (priv->paths), widget);
 }
