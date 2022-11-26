@@ -41,34 +41,26 @@ typedef struct
 G_DEFINE_TYPE_WITH_PRIVATE (GtrTranslationMemoryDialog, gtr_translation_memory_dialog, GTK_TYPE_DIALOG)
 
 static void
-native_response_cb (GtkNativeDialog *dialog, guint response, gpointer user_data)
+select_folder_cb (GtkFileDialog *dialog, GAsyncResult *res, gpointer user_data)
 {
   GtrTranslationMemoryDialog *dlg;
   GtrTranslationMemoryDialogPrivate *priv;
+  GtkEntryBuffer *entry_buffer = NULL;
+
+  g_autofree char *filename = NULL;
+  g_autoptr (GFile) file = NULL;
 
   dlg = GTR_TRANSLATION_MEMORY_DIALOG (user_data);
   priv = gtr_translation_memory_dialog_get_instance_private (dlg);
 
-  if (response == GTK_RESPONSE_ACCEPT)
-    {
-      g_autofree char *filename = NULL;
-      GtkEntryBuffer *entry_buffer;
-      g_autoptr (GFile) file ;
-      GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
+  file = gtk_file_dialog_select_folder_finish (dialog, res, NULL);
 
-      //filename = gtk_file_chooser_get_filename (chooser);
-      file = gtk_file_chooser_get_file (chooser);
-      filename = g_file_get_path(file);
-      //gtk_entry_set_text (GTK_ENTRY (priv->directory_entry),
-      //                    filename);
-      entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->directory_entry));
-      gtk_entry_buffer_set_text (entry_buffer, filename, -1);
-      g_settings_set_string (priv->tm_settings,
-                             "po-directory",
-                             filename);
-    }
+  if (!file) return;
 
-  gtk_native_dialog_destroy (dialog);
+  filename = g_file_get_path (file);
+  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY (priv->directory_entry));
+  gtk_entry_buffer_set_text (entry_buffer, filename, -1);
+  g_settings_set_string (priv->tm_settings, "po-directory", filename);
 }
 
 static void
@@ -102,16 +94,20 @@ static void
 on_search_button_clicked (GtkButton                  *button,
                           GtrTranslationMemoryDialog *dlg)
 {
-  GtkFileChooserNative *native;
+  GtkFileDialog *dialog;
 
-  native = gtk_file_chooser_native_new (_("Select PO directory"),
-                                        GTK_WINDOW (dlg),
-                                        GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-                                        _("_OK"),
-                                        _("_Cancel"));
+  dialog = gtk_file_dialog_new ();
+  gtk_file_dialog_set_title (dialog, _("Select PO directory"));
+  gtk_file_dialog_set_modal (dialog, TRUE);
 
-  g_signal_connect (native, "response", G_CALLBACK (native_response_cb), dlg);
-  gtk_native_dialog_show (GTK_NATIVE_DIALOG (native));
+  gtk_file_dialog_select_folder (
+    dialog,
+    GTK_WINDOW (dlg),
+    NULL,
+    NULL,
+    (GAsyncReadyCallback) (select_folder_cb),
+    dlg
+  );
 }
 
 typedef struct _IdleData
@@ -301,7 +297,7 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
   const gchar *language_code;
   gchar *filename = NULL;
   GError *error = NULL;
-  gchar *root_objects[] = {
+  const char *root_objects[] = {
     "translation-memory-box",
     NULL
   };
