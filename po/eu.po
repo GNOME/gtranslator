@@ -12,8 +12,8 @@
 msgid ""
 msgstr "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-09-18 09:14+0000\n"
-"PO-Revision-Date: 2022-03-08 10:00+0100\n"
+"POT-Creation-Date: 2022-07-27 09:21+0000\n"
+"PO-Revision-Date: 2022-12-03 10:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -49,12 +49,12 @@ msgid ""
 "code viewer."
 msgstr "Gtranslator-ek pluginen sistema bat ere badauka: bestelako hizkuntza, etiketak txertatzea, subversion-ekin bateragarritasuna eta iturburuaren kodearen ikustailea bezalako plugin interesgarriekin."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:143
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:157
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:659
-#: src/gtr-notebook.ui:308 src/gtr-window.c:229 src/gtr-window.ui:25
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:672
+#: src/gtr-notebook.ui:216 src/gtr-window.c:229 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Itzulpenen editorea"
 
@@ -77,115 +77,124 @@ msgid ""
 msgstr "TRUE (egia) bada, abisatu erabiltzaileari itzulpeneko PO fitxategi bat gordetzean mezu lausoak baditu."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:32
+msgid "Whether the obsolete entries be removed upon saving"
+msgstr "Gordetzean, sarrera zaharkituak kenduko diren ala ez"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:33
+msgid ""
+"If true, the obsolete entries will be removed from the file after saving"
+msgstr "True (egia) bada, sarrera zaharkituak fitxategitik kenduko dira hura gorde ondoren"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:39
 msgid "Auto save files"
 msgstr "Autogorde fitxategiak"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:33
+#: data/org.gnome.Gtranslator.gschema.xml.in:40
 msgid "If true, automatically save files at specified intervals."
 msgstr "TRUE (egia) bada, fitxategiak automatikoki gordeko dira zehaztutako bitartean."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:39
+#: data/org.gnome.Gtranslator.gschema.xml.in:46
 msgid "Auto save interval"
 msgstr "Autogordetzeko bitartea"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:40
+#: data/org.gnome.Gtranslator.gschema.xml.in:47
 msgid "Interval in minutes at which to automatically save files."
 msgstr "Bitartea minututan fitxategiak automatikoki gordetzeko."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:46
+#: data/org.gnome.Gtranslator.gschema.xml.in:53
 msgid "Create backup before saving"
 msgstr "Sortu babeskopia gorde aurretik"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:47
+#: data/org.gnome.Gtranslator.gschema.xml.in:54
 msgid "If true, create a backup copy of a file before saving it."
 msgstr "TRUE (egia) bada, sortu fitxategi baten babeskopia hura gorde aurretik."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:53
+#: data/org.gnome.Gtranslator.gschema.xml.in:60
 msgid "Use profile values for header"
 msgstr "Erabili profilaren balioak goiburukoan"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:54
+#: data/org.gnome.Gtranslator.gschema.xml.in:61
 msgid ""
 "If true, overwrite the values in the PO header with those in the active "
 "profile."
 msgstr "TRUE (egia) bada, POaren goiburua gainidatzi aktibo dagoen profileko balioekin."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:63
+#: data/org.gnome.Gtranslator.gschema.xml.in:70
 msgid "Highlight syntax in edit fields"
 msgstr "Nabarmendu sintaxia edizioko eremuetan"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:64
+#: data/org.gnome.Gtranslator.gschema.xml.in:71
 msgid "If true, apply syntax highlighting to strings in edit fields."
 msgstr "TRUE (egia) bada, aplikatu sintaxia nabarmentzea edizioko eremuetako kateetan."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:70
+#: data/org.gnome.Gtranslator.gschema.xml.in:77
 msgid "Make whitespace visible"
 msgstr "Egin zuriuneak ikusgai"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:71
+#: data/org.gnome.Gtranslator.gschema.xml.in:78
 msgid "If true, display whitespace in strings as representative symbols."
 msgstr "TRUE (egia) bada, erakutsi zuriuneak kateetan ikur adierazleekin."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:77
+#: data/org.gnome.Gtranslator.gschema.xml.in:84
 msgid "Remove fuzzy status when message is changed"
 msgstr "Kendu lausotasun-egoera, mezua aldatzen bada"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:78
+#: data/org.gnome.Gtranslator.gschema.xml.in:85
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr "TRUE (egia) bada, kendu mezuen lausotasun-egoera hauek aldatzean."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:84
+#: data/org.gnome.Gtranslator.gschema.xml.in:91
 msgid "Check spelling"
 msgstr "Ortografia-egiaztapena"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:85
+#: data/org.gnome.Gtranslator.gschema.xml.in:92
 msgid "If true, check the spelling of translated messages."
 msgstr "TRUE (egia) bada, egiaztatu itzulitako mezuen ortografia."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:96
+#: data/org.gnome.Gtranslator.gschema.xml.in:103
 msgid "Side panel switcher style"
 msgstr "Alboko panelaren aldatzailearen estiloa"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:97
+#: data/org.gnome.Gtranslator.gschema.xml.in:104
 msgid "Style for switchers in the side panel."
 msgstr "Alboko paneleko aldatzaileen estiloa."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:103
+#: data/org.gnome.Gtranslator.gschema.xml.in:110
 msgid "Color scheme"
 msgstr "Kolore-eskema"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:104
+#: data/org.gnome.Gtranslator.gschema.xml.in:111
 msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
 msgstr "gtksourceview kolore-eskema baten izena sintaxia nabarmentzean erabiltzeko."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:110
+#: data/org.gnome.Gtranslator.gschema.xml.in:117
 msgid "Message list sort order"
 msgstr "Mezuen zerrendaren ordena"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:111
+#: data/org.gnome.Gtranslator.gschema.xml.in:118
 msgid ""
 "Sort order to use in the message list. Possible values are “status”, “id”, "
 "“original-text” and “translated-text”."
 msgstr "Ordena mezuen zerrendan erabiltzeko. Balio erabilgarriak: “status” (egoera), “id” (IDa), “original_text” (jatorrizko testua) eta “translated_text” (itzulitako testua)"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:146
+#: data/org.gnome.Gtranslator.gschema.xml.in:153
 msgid "Active plugins"
 msgstr "Plugin aktiboak"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:147
+#: data/org.gnome.Gtranslator.gschema.xml.in:154
 msgid ""
 "List of active plugins. It contains the “Location” of the active plugins. "
 "See the .gtranslator-plugin file for obtaining the “Location” of a given "
 "plugin."
 msgstr "Plugin aktiboen zerrenda. Honek plugin aktiboen “kokalekua” dauka. Ikus .gtranslator-plugin fitxategia emandako plugin baten “kokalekua” jakiteko."
 
-#: src/codeview/gtr-codeview.c:374
+#: src/codeview/gtr-codeview.c:380
 msgid "Paths:"
 msgstr "Bide-izenak:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
-#: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:651
-#: src/translation-memory/gtr-translation-memory-dialog.c:299
+#: src/gtr-io-error-info-bar.c:127 src/gtr-preferences-dialog.c:664
+#: src/translation-memory/gtr-translation-memory-dialog.c:305
 msgid "_Close"
 msgstr "It_xi"
 
@@ -193,7 +202,7 @@ msgstr "It_xi"
 msgid "Source Viewer"
 msgstr "Iturburuaren ikustailea"
 
-#: src/codeview/gtr-viewer.ui:59
+#: src/codeview/gtr-viewer.ui:62
 msgid "Source code"
 msgstr "Iturburu-kodea"
 
@@ -227,38 +236,38 @@ msgstr "translator-credits"
 msgid "Translation Editor Web Site"
 msgstr "Itzulpen-editorearen webgunea"
 
-#: src/gtr-actions-file.c:220
+#: src/gtr-actions-file.c:217
 #, c-format
 msgid ""
 "Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
 "\">%s</span>?"
 msgstr "Gorde nahi al dituzko honako fitxategiaren aldaketak: <span weight=\"bold\" size=\"large\">%s</span>?"
 
-#: src/gtr-actions-file.c:226
+#: src/gtr-actions-file.c:223
 msgid "If you don't save, all your unsaved changes will be permanently lost."
 msgstr "Gordetzen ez baduzu, gorde gabeko zure aldaketa guztiak betiko galdiko dira."
 
-#: src/gtr-actions-file.c:229
+#: src/gtr-actions-file.c:226
 msgid "Save and open"
 msgstr "Gorde eta ireki"
 
-#: src/gtr-actions-file.c:230
+#: src/gtr-actions-file.c:227
 msgid "Cancel"
 msgstr "Utzi"
 
-#: src/gtr-actions-file.c:231
+#: src/gtr-actions-file.c:228
 msgid "Continue without saving"
 msgstr "Jarraitu gorde gabe"
 
-#: src/gtr-actions-file.c:263
+#: src/gtr-actions-file.c:260
 msgid "Open file for translation"
 msgstr "Ireki fitxategia itzulketarako"
 
-#: src/gtr-actions-file.c:369
+#: src/gtr-actions-file.c:359
 msgid "This file has already been uploaded"
 msgstr "Fitxategi hau dagoeneko igo da"
 
-#: src/gtr-actions-file.c:380
+#: src/gtr-actions-file.c:382
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -268,11 +277,11 @@ msgid ""
 msgstr "Errorea gertatu da honako fitxategia igotzean: %s\n"
 "Beharbada ez duzu konfiguratu <i>l10n.gnome.org</i> <b>tokena</b> behar den moduan zure profilean, edo ez duzu baimenik modulu hau igotzeko."
 
-#: src/gtr-actions-file.c:393
+#: src/gtr-actions-file.c:395
 msgid "The file has been uploaded!"
 msgstr "Fitxategia igo da!"
 
-#: src/gtr-actions-file.c:548
+#: src/gtr-actions-file.c:546
 msgid "Save file as…"
 msgstr "Gorde fitxategia honela…"
 
@@ -298,35 +307,35 @@ msgstr "Profilaren izena:%s\n"
 "Transferentzia-kodeketa: %s\n"
 "Forma pluralak: %s\n"
 
-#: src/gtr-assistant.c:167
+#: src/gtr-assistant.c:170
 msgid "This assistant will help you to create the main profile."
 msgstr "Laguntzaile honek profil nagusia sortzen sortzen lagunduko dizu."
 
-#: src/gtr-assistant.c:172
+#: src/gtr-assistant.c:176
 msgid "Assistant"
 msgstr "Laguntzailea"
 
-#: src/gtr-assistant.c:258
+#: src/gtr-assistant.c:268
 msgid "Profile name"
 msgstr "Profilaren izena"
 
-#: src/gtr-assistant.c:302
+#: src/gtr-assistant.c:314
 msgid "Translator email"
 msgstr "Itzultzailearen emaila"
 
-#: src/gtr-assistant.c:324
+#: src/gtr-assistant.c:337
 msgid "Team email"
 msgstr "Taldearen emaila"
 
-#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:575
+#: src/gtr-assistant.c:353 src/gtr-preferences-dialog.c:588
 msgid "Profile"
 msgstr "Profila"
 
-#: src/gtr-assistant.c:429
+#: src/gtr-assistant.c:447
 msgid "Language"
 msgstr "Hizkuntza"
 
-#: src/gtr-assistant.c:450
+#: src/gtr-assistant.c:469
 msgid "Confirmation"
 msgstr "Berrespena"
 
@@ -334,35 +343,35 @@ msgstr "Berrespena"
 msgid "Close _without Saving"
 msgstr "Itxi gorde _gabe"
 
-#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:89
+#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:108
 #: src/gtr-file-dialogs.c:47 src/gtr-jump-dialog.c:90
-#: src/gtr-preferences-dialog.c:446 src/gtr-profile-dialog.c:72
-#: src/translation-memory/gtr-translation-memory-dialog.c:81
+#: src/gtr-preferences-dialog.c:460 src/gtr-profile-dialog.c:72
+#: src/translation-memory/gtr-translation-memory-dialog.c:105
 msgid "_Cancel"
 msgstr "_Utzi"
 
-#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:87
+#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:106
 #: src/gtr-file-dialogs.c:46
 msgid "_Save"
 msgstr "_Gorde"
 
-#: src/gtr-close-confirmation-dialog.c:150
+#: src/gtr-close-confirmation-dialog.c:155
 msgid "Question"
 msgstr "Galdera"
 
-#: src/gtr-close-confirmation-dialog.c:366
+#: src/gtr-close-confirmation-dialog.c:371
 #, c-format
 msgid "Save the changes to document “%s” before closing?"
 msgstr "Gorde “%s” dokumentuaren aldaketak itxi aurretik?"
 
-#: src/gtr-close-confirmation-dialog.c:530
+#: src/gtr-close-confirmation-dialog.c:543
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] "Dokumentu %dean egindako aldaketak betirako galduko dira."
 msgstr[1] "%d dokumentutan egindako aldaketak betirako galduko dira."
 
-#: src/gtr-close-confirmation-dialog.c:537
+#: src/gtr-close-confirmation-dialog.c:550
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -370,65 +379,65 @@ msgid_plural ""
 msgstr[0] "Aldatutako  dokumentu %d gorde gabe dago. Aldaketak gorde itxi aurretik?"
 msgstr[1] "Aldatutako %d dokumentu gorde gabe daude. Aldaketak gorde itxi aurretik?"
 
-#: src/gtr-close-confirmation-dialog.c:558
+#: src/gtr-close-confirmation-dialog.c:571
 msgid "Docum_ents with unsaved changes:"
 msgstr "_Dokumentuak, gorde gabeko aldaketekin:"
 
-#: src/gtr-close-confirmation-dialog.c:562
+#: src/gtr-close-confirmation-dialog.c:575
 msgid "S_elect the documents you want to save:"
 msgstr "_Hautatu dokumentuak, gordetzea nahi dituzunak:"
 
-#: src/gtr-close-confirmation-dialog.c:581
+#: src/gtr-close-confirmation-dialog.c:595
 msgid "Saving has been disabled by the system administrator."
 msgstr "Sistemaren administratzaileak desgaitu egin du gordetzea."
 
-#: src/gtr-close-confirmation-dialog.c:583
+#: src/gtr-close-confirmation-dialog.c:597
 msgid "If you don’t save, all your changes will be permanently lost."
 msgstr "Gordetzen ez baduzu, aldaketa guztiak betiko galduko dira."
 
-#: src/gtr-context.c:82
+#: src/gtr-context.c:101
 msgid "Notes"
 msgstr "Oharrak"
 
-#: src/gtr-context.c:290
+#: src/gtr-context.c:305
 msgid "Notes:"
 msgstr "Oharrak:"
 
-#: src/gtr-context.c:298
+#: src/gtr-context.c:313
 msgid "Add Note"
 msgstr "Gehitu oharra"
 
-#: src/gtr-context.c:303
+#: src/gtr-context.c:318
 msgid "Edit"
 msgstr "Editatu"
 
-#: src/gtr-context.c:348
+#: src/gtr-context.c:363
 msgid "Extracted comments:"
 msgstr "Erauzitako iruzkinak:"
 
-#: src/gtr-context.c:351
+#: src/gtr-context.c:366
 msgid "Context:"
 msgstr "Testuingurua:"
 
-#: src/gtr-context.c:354
+#: src/gtr-context.c:369
 msgid "Format:"
 msgstr "Formatua:"
 
-#: src/gtr-dl-teams.c:417
+#: src/gtr-dl-teams.c:447
 msgid "No module state found."
 msgstr "Ez da modulu-egoerarik aurkitu."
 
-#: src/gtr-dl-teams.c:434
+#: src/gtr-dl-teams.c:464
 #, c-format
 msgid "The current state is: %s"
 msgstr "Uneko egoera honakoa da: %s"
 
-#: src/gtr-dl-teams.c:586
+#: src/gtr-dl-teams.c:625
 #, c-format
 msgid "The file '%s' has been saved in %s"
 msgstr "'%s' fitxategia hemen gorde da: %s"
 
-#: src/gtr-dl-teams.c:646
+#: src/gtr-dl-teams.c:702
 #, c-format
 msgid ""
 "An error occurred while reserving this module: %s\n"
@@ -438,16 +447,16 @@ msgid ""
 msgstr "Errorea gertatu da honako modulua erreserbatzean: %s\n"
 "Beharbada ez duzu konfiguratu <i>l10n.gnome.org</i> <b>tokena</b> behar den moduan zure profilean, edo ez duzu baimenik modulu hau erreserbatzeko."
 
-#: src/gtr-dl-teams.c:662
+#: src/gtr-dl-teams.c:719
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "'%s.%s.%s.%s' fitxategia ongi erreserbatu da"
 
-#: src/gtr-dl-teams.c:788
+#: src/gtr-dl-teams.c:869
 msgid "Translation Team"
 msgstr "Itzulpen-taldea"
 
-#: src/gtr-dl-teams.c:795
+#: src/gtr-dl-teams.c:876
 msgid "Module"
 msgstr "Modulua"
 
@@ -471,27 +480,27 @@ msgstr "Kargatu Gezur Madarikatuak webgunetik"
 msgid "Open…"
 msgstr "Ireki…"
 
-#: src/gtr-dl-teams.ui:166 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
+#: src/gtr-dl-teams.ui:166 src/gtr-notebook.ui:410 src/gtr-projects.ui:91
 msgid "Main Menu"
 msgstr "Menu nagusia"
 
-#: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+#: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:151 src/gtr-projects.ui:119
 msgid "New window"
 msgstr "Leiho berria"
 
-#: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+#: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:160 src/gtr-projects.ui:133
 msgid "Preferences"
 msgstr "Hobespenak"
 
-#: src/gtr-dl-teams.ui:235 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:235 src/gtr-notebook.ui:177 src/gtr-projects.ui:174
 msgid "Keyboard Shortcuts"
 msgstr "Laster-teklak"
 
-#: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
+#: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:186 src/gtr-projects.ui:188
 msgid "About"
 msgstr "Honi buruz"
 
-#: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
+#: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:204 src/gtr-projects.ui:216
 msgid "Quit"
 msgstr "Irten"
 
@@ -499,15 +508,15 @@ msgstr "Irten"
 msgid "_Open"
 msgstr "_Ireki"
 
-#: src/gtr-file-dialogs.c:61
+#: src/gtr-file-dialogs.c:59
 msgid "Gettext translation"
 msgstr "Gettext itzulpena"
 
-#: src/gtr-file-dialogs.c:70
+#: src/gtr-file-dialogs.c:68
 msgid "Gettext translation template"
 msgstr "Gettext itzulpen txantiloia"
 
-#: src/gtr-file-dialogs.c:75
+#: src/gtr-file-dialogs.c:73
 msgid "All files"
 msgstr "Fitxategi denak"
 
@@ -515,93 +524,93 @@ msgstr "Fitxategi denak"
 msgid "Edit Header"
 msgstr "Editatu goiburukoa"
 
-#: src/gtr-header-dialog.ui:65
+#: src/gtr-header-dialog.ui:71
 msgid "Use my options to complete the following entries:"
 msgstr "Erabili nire aukerak honako sarrerak betetzeko:"
 
-#: src/gtr-header-dialog.ui:89
+#: src/gtr-header-dialog.ui:95
 msgid "Translator’s _name:"
 msgstr "Itzultzailearen _izena:"
 
-#: src/gtr-header-dialog.ui:103
+#: src/gtr-header-dialog.ui:109
 msgid "Translator’s _email:"
 msgstr "Itzultzailearen _emaila:"
 
-#: src/gtr-header-dialog.ui:117
+#: src/gtr-header-dialog.ui:123
 msgid "_Language:"
 msgstr "_Hizkuntza:"
 
-#: src/gtr-header-dialog.ui:130
+#: src/gtr-header-dialog.ui:136
 msgid "Language _code:"
 msgstr "Hizkuntzaren _kodea:"
 
-#: src/gtr-header-dialog.ui:143
-msgid "Language gro_up email:"
+#: src/gtr-header-dialog.ui:149
+msgid "Language _Team email:"
 msgstr "Hizkuntza _taldearen helb. elek.:"
 
-#: src/gtr-header-dialog.ui:156
+#: src/gtr-header-dialog.ui:162
 msgid "Char_set:"
 msgstr "Karaktere-_jokoa:"
 
-#: src/gtr-header-dialog.ui:169
+#: src/gtr-header-dialog.ui:175
 msgid "Enc_oding:"
 msgstr "_Kodeketa:"
 
-#: src/gtr-header-dialog.ui:267
+#: src/gtr-header-dialog.ui:273
 msgid "Translator and Language"
 msgstr "Itzultzailea eta hizkuntza"
 
-#: src/gtr-header-dialog.ui:290
+#: src/gtr-header-dialog.ui:299
 msgid "Project Id _version:"
 msgstr "Proiektuaren ID _bertsioa:"
 
-#: src/gtr-header-dialog.ui:303
+#: src/gtr-header-dialog.ui:312
 msgid "Pot _file creation date:"
 msgstr "Pot _fitxategiaren sorrera-data:"
 
-#: src/gtr-header-dialog.ui:317
+#: src/gtr-header-dialog.ui:326
 msgid "Po file _revision date:"
 msgstr "Po fitxategiko _berraztertze data:"
 
-#: src/gtr-header-dialog.ui:331
+#: src/gtr-header-dialog.ui:340
 msgid "Report message _bugs to:"
 msgstr "Mezuen _akatsen berri honi eman:"
 
-#: src/gtr-header-dialog.ui:400
+#: src/gtr-header-dialog.ui:409
 msgid "Project"
 msgstr "Proiektua"
 
-#: src/gtr-header-dialog.ui:430
+#: src/gtr-header-dialog.ui:442
 msgid "Comment"
 msgstr "Iruzkina"
 
-#: src/gtr-header-dialog.ui:454
+#: src/gtr-header-dialog.ui:469
 msgid "DL Team:"
 msgstr "GM taldea:"
 
-#: src/gtr-header-dialog.ui:467
+#: src/gtr-header-dialog.ui:482
 msgid "DL Module:"
 msgstr "GM modulua:"
 
-#: src/gtr-header-dialog.ui:481
+#: src/gtr-header-dialog.ui:496
 msgid "DL Branch:"
 msgstr "GM adarra:"
 
-#: src/gtr-header-dialog.ui:495
+#: src/gtr-header-dialog.ui:510
 msgid "DL Domain:"
 msgstr "GM domeinua:"
 
-#: src/gtr-header-dialog.ui:509
+#: src/gtr-header-dialog.ui:524
 msgid "DL State:"
 msgstr "GM egoera:"
 
-#: src/gtr-header-dialog.ui:587
+#: src/gtr-header-dialog.ui:602
 msgid "Damned Lies Info"
 msgstr "Gezur Madarikatuen informazioa"
 
-#: src/gtr-io-error-info-bar.c:146 src/gtr-jump-dialog.c:88
-#: src/gtr-profile-dialog.c:171 src/gtr-profile-dialog.c:176
-#: src/translation-memory/gtr-translation-memory-dialog.c:80
+#: src/gtr-io-error-info-bar.c:150 src/gtr-jump-dialog.c:88
+#: src/gtr-profile-dialog.c:173 src/gtr-profile-dialog.c:178
+#: src/translation-memory/gtr-translation-memory-dialog.c:104
 msgid "_OK"
 msgstr "_Ados"
 
@@ -609,7 +618,7 @@ msgstr "_Ados"
 msgid "Go to Message"
 msgstr "Joan mezura"
 
-#: src/gtr-jump-dialog.ui:30
+#: src/gtr-jump-dialog.ui:33
 msgid "Enter message number:"
 msgstr "Sartu mezuaren zenbakia:"
 
@@ -617,27 +626,27 @@ msgstr "Sartu mezuaren zenbakia:"
 msgid "Choose Language"
 msgstr "Aukeratu hizkuntza"
 
-#: src/gtr-languages-fetcher.ui:46
+#: src/gtr-languages-fetcher.ui:49
 msgid "_Language"
 msgstr "_Hizkuntza"
 
-#: src/gtr-languages-fetcher.ui:60
+#: src/gtr-languages-fetcher.ui:63
 msgid "Language _code"
 msgstr "Hizkuntza-_kodea"
 
-#: src/gtr-languages-fetcher.ui:74
+#: src/gtr-languages-fetcher.ui:77
 msgid "Character _set"
 msgstr "_Karaktere-jokoa:"
 
-#: src/gtr-languages-fetcher.ui:88
+#: src/gtr-languages-fetcher.ui:91
 msgid "Transfer en_coding"
 msgstr "_Transferentzia-kodeketa:"
 
-#: src/gtr-languages-fetcher.ui:102
+#: src/gtr-languages-fetcher.ui:105
 msgid "_Plural forms"
 msgstr "Forma _pluralak"
 
-#: src/gtr-languages-fetcher.ui:200
+#: src/gtr-languages-fetcher.ui:203
 msgid "_Edit options manually"
 msgstr "_Editatu aukerak eskuz"
 
@@ -653,120 +662,120 @@ msgstr "Itzulitako mezua"
 msgid "Order messages by"
 msgstr "Ordenatu mezuak honela:"
 
-#: src/gtr-notebook.ui:58
+#: src/gtr-notebook.ui:48
 msgid "Appearance in the original file"
 msgstr "Agerpena jatorrizko fitxategian"
 
-#: src/gtr-notebook.ui:72
+#: src/gtr-notebook.ui:57
 msgid "Message status"
 msgstr "Mezuaren egoera"
 
-#: src/gtr-notebook.ui:87
+#: src/gtr-notebook.ui:67
 msgid "Original message"
 msgstr "Jatorrizko mezua"
 
-#: src/gtr-notebook.ui:102
+#: src/gtr-notebook.ui:77
 msgid "Translated message"
 msgstr "Itzulitako mezua"
 
-#: src/gtr-notebook.ui:136
+#: src/gtr-notebook.ui:105
 msgid "Find"
 msgstr "Bilatu"
 
-#: src/gtr-notebook.ui:150
+#: src/gtr-notebook.ui:114
 msgid "Find and replace"
 msgstr "Bilatu eta ordeztu"
 
-#: src/gtr-notebook.ui:164 src/gtr-projects.ui:147
+#: src/gtr-notebook.ui:123 src/gtr-projects.ui:147
 msgid "Build translation memory"
 msgstr "Eraiki itzulpen-memoriak"
 
-#: src/gtr-notebook.ui:179
+#: src/gtr-notebook.ui:133
 msgid "Edit header"
 msgstr "Editatu goiburua"
 
-#: src/gtr-notebook.ui:276 src/gtr-preferences-dialog.c:652
+#: src/gtr-notebook.ui:195 src/gtr-preferences-dialog.c:665
 #: src/gtr-projects.ui:202
 msgid "Help"
 msgstr "Laguntza"
 
-#: src/gtr-notebook.ui:321
+#: src/gtr-notebook.ui:227
 msgid "Open a new file (<Ctrl>o)"
 msgstr "Ireki fitxategi berria (<Ctrl>o)"
 
-#: src/gtr-notebook.ui:341
+#: src/gtr-notebook.ui:241
 msgid "Open from Damned Lies (<Ctrl>d)"
 msgstr "Ireki Gezur Madarikatuak webgunetik (<Ctrl>d)"
 
-#: src/gtr-notebook.ui:387
+#: src/gtr-notebook.ui:272
 msgid "Undo (<Ctrl>z)"
 msgstr "Desegin (<Ctrl>z)"
 
-#: src/gtr-notebook.ui:409
+#: src/gtr-notebook.ui:288
 msgid "Redo (<Ctrl><Shift>z)"
 msgstr "Berregin (<Ctrl><Shift>z)"
 
-#: src/gtr-notebook.ui:454
+#: src/gtr-notebook.ui:318
 msgid "Previous message without translation (<Alt><Page Up>)"
 msgstr "Itzulpenik gabeko aurreko mezua (<Alt><Page Up>)"
 
-#: src/gtr-notebook.ui:476
+#: src/gtr-notebook.ui:334
 msgid "Next message without translation (<Alt><Page Down>)"
 msgstr "Itzulpenik gabeko hurrengo mezua (<Alt><Page Down>)"
 
-#: src/gtr-notebook.ui:516
+#: src/gtr-notebook.ui:361
 msgid "Toggle fuzzy state (<Ctrl>+u)"
 msgstr "Txandakatu egoera lausoa (<Ctrl>+u)"
 
-#: src/gtr-notebook.ui:537
+#: src/gtr-notebook.ui:379
 msgid "Sort messages by"
 msgstr "Ordenatu mezuak honela:"
 
-#: src/gtr-notebook.ui:547
+#: src/gtr-notebook.ui:389
 msgid "Order by menu"
 msgstr "Ordenatu menuaren arabera"
 
-#: src/gtr-notebook.ui:585
+#: src/gtr-notebook.ui:423
 msgid "Find (<Ctrl><f>)"
 msgstr "Bilatu (<Ctrl><f>)"
 
-#: src/gtr-notebook.ui:624
+#: src/gtr-notebook.ui:453
 msgid "Save"
 msgstr "Gorde"
 
-#: src/gtr-notebook.ui:628
+#: src/gtr-notebook.ui:457
 msgid "Save the current file (<Ctrl>s)"
 msgstr "Gorde uneko fitxategia (<Ctrl>s)"
 
-#: src/gtr-notebook.ui:643
+#: src/gtr-notebook.ui:466
 msgid "Save as (<Ctrl><Shift>s)"
 msgstr "Gorde honela (<Ctrl><Shift>s)"
 
-#: src/gtr-notebook.ui:665
+#: src/gtr-notebook.ui:482
 msgid "Upload file (<Ctrl>b)"
 msgstr "Igo fitxategia (<Ctrl>b)"
 
-#: src/gtr-po.c:487
+#: src/gtr-po.c:492
 #, c-format
 msgid "The file is empty"
 msgstr "Fitxategia hutsik dago"
 
-#: src/gtr-po.c:496
+#: src/gtr-po.c:501
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Huts egin du “%s” fitxategia irekitzeak: %s"
 
-#: src/gtr-po.c:577
+#: src/gtr-po.c:572
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Ezin izan da “%s” karaktere-jokotik UTF-8 kodeketara bihurtu"
 
-#: src/gtr-po.c:594 src/gtr-po.c:614
+#: src/gtr-po.c:588 src/gtr-po.c:607
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Ezin izan da aldi bateko fitxategia gorde kodeketa bihurtzeko"
 
-#: src/gtr-po.c:651
+#: src/gtr-po.c:638
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -774,17 +783,17 @@ msgid ""
 "Editor"
 msgstr "Fitxategia UTF-8 kodeketara bihurtzeko saiakera guztiek huts egin dute. Erabili 'msgconv' edo 'iconv' komando-lerroak fitxategi hau GNOME itzulpen-editorearekin ireki aurretik."
 
-#: src/gtr-po.c:719
+#: src/gtr-po.c:706
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext-ek domeinu zerrenda mezu nulua itzuli du."
 
-#: src/gtr-po.c:764
+#: src/gtr-po.c:753
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Ez da mezurik lortu analizatzailetik."
 
-#: src/gtr-po.c:815
+#: src/gtr-po.c:807
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -794,114 +803,118 @@ msgstr "Fitxategia .pot luzapenarekin gordetzen ari zara.\n"
 "Pot fitxategiak konpilazio-prozesuak sortzen ditu.\n"
 "Zure fitxategiak “%s.po” izena eduki beharko luke."
 
-#: src/gtr-po.c:828
+#: src/gtr-po.c:835
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "%s fitxategia irakurtzeko soilik da, eta ezin da gainidatzi"
 
-#: src/gtr-po.c:847
+#: src/gtr-po.c:854
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Errore bat dago PO fitxategian: %s"
 
-#: src/gtr-po.c:859
+#: src/gtr-po.c:866
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Errore bat gertatu da PO fitxategia gordetzean: %s"
 
-#: src/gtr-preferences-dialog.c:422
+#: src/gtr-preferences-dialog.c:436
 msgid "Impossible to remove the active profile"
 msgstr "Ezin da profil aktiboa kendu"
 
-#: src/gtr-preferences-dialog.c:428
+#: src/gtr-preferences-dialog.c:442
 msgid "Another profile should be selected as active before"
 msgstr "Aurrenik, beste profil bat hautatu behar da aktibo gisa"
 
-#: src/gtr-preferences-dialog.c:441
+#: src/gtr-preferences-dialog.c:455
 msgid "Are you sure you want to delete this profile?"
 msgstr "Ziur zaude profil hau ezabatzea nahi duzula?"
 
-#: src/gtr-preferences-dialog.c:449
+#: src/gtr-preferences-dialog.c:463
 msgid "_Delete"
 msgstr "Ez_abatu"
 
-#: src/gtr-preferences-dialog.c:581
+#: src/gtr-preferences-dialog.c:594
 msgid "Active"
 msgstr "Aktibo"
 
-#: src/gtr-preferences-dialog.c:654 src/gtr-preferences-dialog.ui:49
+#: src/gtr-preferences-dialog.c:667 src/gtr-preferences-dialog.ui:52
 msgid "Translation Editor Preferences"
 msgstr "Itzulpen-editorearen hobespenak"
 
-#: src/gtr-preferences-dialog.ui:119
+#: src/gtr-preferences-dialog.ui:125
 msgid "General"
 msgstr "Orokorra"
 
-#: src/gtr-preferences-dialog.ui:138
+#: src/gtr-preferences-dialog.ui:144
 msgid "_Warn if PO file contains fuzzy translations"
-msgstr "_Abisatu PO fitxategiak itzulpen lausoak baldin baditu"
+msgstr "A_bisatu PO fitxategiak itzulpen lausoak baldin baditu"
 
-#: src/gtr-preferences-dialog.ui:160
+#: src/gtr-preferences-dialog.ui:168
+msgid "_Remove obsolete entries on save"
+msgstr "_Kendu sarrera zaharkituak gordetzean"
+
+#: src/gtr-preferences-dialog.ui:190
 msgid "Autosave"
 msgstr "Gorde automatikoki"
 
-#: src/gtr-preferences-dialog.ui:184
+#: src/gtr-preferences-dialog.ui:214
 msgid "Create a _backup copy of files before saving"
 msgstr "Sortu _fitxategien babeskopia gorde aurretik"
 
-#: src/gtr-preferences-dialog.ui:206
+#: src/gtr-preferences-dialog.ui:236
 msgid "_Autosave files every"
-msgstr "_Autogorde fitxategia maiztasun honekin"
+msgstr "_Autogorde fitxategia honako maiztasunarekin"
 
-#: src/gtr-preferences-dialog.ui:230
+#: src/gtr-preferences-dialog.ui:260
 msgid "_minutes"
 msgstr "_minutu"
 
-#: src/gtr-preferences-dialog.ui:288
+#: src/gtr-preferences-dialog.ui:318
 msgid "Files"
 msgstr "Fitxategiak"
 
-#: src/gtr-preferences-dialog.ui:312
+#: src/gtr-preferences-dialog.ui:345
 msgid "Text Display"
 msgstr "Testuaren pantaila"
 
-#: src/gtr-preferences-dialog.ui:335
+#: src/gtr-preferences-dialog.ui:368
 msgid "_Highlight message syntax"
 msgstr "_Nabarmendu mezuaren sintaxia"
 
-#: src/gtr-preferences-dialog.ui:351
+#: src/gtr-preferences-dialog.ui:384
 msgid "Make _whitespace visible"
 msgstr "Egin _zuriuneak ikusgai"
 
-#: src/gtr-preferences-dialog.ui:376
+#: src/gtr-preferences-dialog.ui:409
 msgid "Font:"
 msgstr "Letra-tipoa:"
 
-#: src/gtr-preferences-dialog.ui:388
+#: src/gtr-preferences-dialog.ui:421
 msgid "Choose the editor font"
 msgstr "Aukeratu editorearen letra-tipoa"
 
-#: src/gtr-preferences-dialog.ui:430
+#: src/gtr-preferences-dialog.ui:463
 msgid "Contents"
 msgstr "Edukia"
 
-#: src/gtr-preferences-dialog.ui:453
+#: src/gtr-preferences-dialog.ui:486
 msgid "_Remove fuzzy status if message is changed"
 msgstr "_Kendu lausotasun-egoera, mezua aldatzen bada"
 
-#: src/gtr-preferences-dialog.ui:469
+#: src/gtr-preferences-dialog.ui:502
 msgid "Check _spelling"
 msgstr "Zuzentzaile _ortografikoa"
 
-#: src/gtr-preferences-dialog.ui:508
+#: src/gtr-preferences-dialog.ui:541
 msgid "Editor"
 msgstr "Editorea"
 
-#: src/gtr-preferences-dialog.ui:607
+#: src/gtr-preferences-dialog.ui:640
 msgid "Edit Profile"
 msgstr "Editatu profila"
 
-#: src/gtr-preferences-dialog.ui:644
+#: src/gtr-preferences-dialog.ui:677
 msgid "Profiles"
 msgstr "Profilak"
 
@@ -909,41 +922,41 @@ msgstr "Profilak"
 msgid "Translation Editor Profile"
 msgstr "Itzulpen-editorearen profila"
 
-#: src/gtr-profile-dialog.ui:68
+#: src/gtr-profile-dialog.ui:71
 msgid "_Name"
 msgstr "_Izena"
 
-#: src/gtr-profile-dialog.ui:96
+#: src/gtr-profile-dialog.ui:99
 msgid "Profile Information"
 msgstr "Profilaren informazioa"
 
-#: src/gtr-profile-dialog.ui:113
+#: src/gtr-profile-dialog.ui:116
 msgid "Translator Information"
 msgstr "Itzultailearen informazioa"
 
-#: src/gtr-profile-dialog.ui:131
+#: src/gtr-profile-dialog.ui:134
 msgid "N_ame"
 msgstr "I_zena"
 
-#: src/gtr-profile-dialog.ui:146
+#: src/gtr-profile-dialog.ui:149
 msgid "_Email"
 msgstr "_Emaila"
 
-#: src/gtr-profile-dialog.ui:160
+#: src/gtr-profile-dialog.ui:163
 msgid "_Team email"
 msgstr "_Taldearen emaila"
 
-#: src/gtr-profile-dialog.ui:174
+#: src/gtr-profile-dialog.ui:177
 msgid "_DL auth token"
 msgstr "_GMren autentifikazio-tokea"
 
-#: src/gtr-profile-dialog.ui:175
+#: src/gtr-profile-dialog.ui:178
 msgid ""
 "GNOME Damned Lies integration token, go to your profile in https://l10n."
 "gnome.org/ to get it"
 msgstr "GNOME Gezur Madarikatuen integrazio-tokena, joan https://l10n.gnome.org/ guneko zure profilera hura eskuratzeko"
 
-#: src/gtr-profile-dialog.ui:237
+#: src/gtr-profile-dialog.ui:240
 msgid "Language Settings"
 msgstr "Hizkuntzaren ezarpenak"
 
@@ -959,23 +972,23 @@ msgstr "Hautatu PO fitxategia"
 msgid "Load from DL…"
 msgstr "Kargatu Gezur Madarikatuak webgunetik..."
 
-#: src/gtr-search-bar.c:484 src/gtr-search-bar.ui:212
+#: src/gtr-search-bar.c:414 src/gtr-search-bar.ui:212
 msgid "Case sensitive"
 msgstr "Maiuskulak/minuskulak"
 
-#: src/gtr-search-bar.c:489 src/gtr-search-bar.ui:225
+#: src/gtr-search-bar.c:419 src/gtr-search-bar.ui:226
 msgid "Match whole word only"
 msgstr "Bat etorri hitz osoarekin soilik"
 
-#: src/gtr-search-bar.c:494
+#: src/gtr-search-bar.c:424
 msgid "Wrap around"
 msgstr "Egokitu"
 
-#: src/gtr-search-bar.c:499
+#: src/gtr-search-bar.c:429 src/gtr-search-bar.ui:254
 msgid "Original text"
 msgstr "Jatorrizko testua"
 
-#: src/gtr-search-bar.c:504
+#: src/gtr-search-bar.c:434 src/gtr-search-bar.ui:268
 msgid "Translated text"
 msgstr "Itzulitako testua"
 
@@ -995,85 +1008,77 @@ msgstr "Txandakatu bilatzeko modua eta bilatu eta ordezteko modua"
 msgid "Show or hide search options such as case sensitivity"
 msgstr "Erakutsi edo ezkutatu bilaketa-aukerak, adibidez maiuskulen/minuskulen bereizketa"
 
-#: src/gtr-search-bar.ui:238
+#: src/gtr-search-bar.ui:240
 msgid "Wrap Around"
 msgstr "Egokitu inguruan"
 
-#: src/gtr-search-bar.ui:251
-msgid "Original-text"
-msgstr "Itzulitako testua"
-
-#: src/gtr-search-bar.ui:264
-msgid "Translated-text"
-msgstr "Itzulitako testua"
-
-#: src/gtr-tab-label.c:278
+#: src/gtr-tab-label.c:280
 msgid "Close document"
 msgstr "Itxi dokumentua"
 
-#: src/gtr-tab.c:341
+#: src/gtr-tab.c:347
 msgid "There is an error in the message:"
 msgstr "Errore bat dago mezuan:"
 
-#: src/gtr-tab.c:555 src/gtr-tab.c:681
+#: src/gtr-tab.c:561 src/gtr-tab.c:687
 msgid "fuzzy"
 msgstr "lausoa"
 
-#: src/gtr-tab.c:711
+#: src/gtr-tab.c:717
 #, c-format
 msgid "Plural %d"
 msgstr "%d plural"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1306
+#: src/gtr-tab.c:1307
 msgid "Path:"
 msgstr "Bidea:"
 
-#: src/gtr-tab.c:1973
+#: src/gtr-tab.c:1974
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Itzulia: %0.2f%%"
 
-#: src/gtr-tab.c:1974
+#: src/gtr-tab.c:1975
 #, c-format
 msgid "Translated: %d"
 msgstr "Itzulia: %d"
 
-#: src/gtr-tab.c:1975
+#: src/gtr-tab.c:1976
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Itzuli gabea: %d"
 
-#: src/gtr-tab.c:1976
+#: src/gtr-tab.c:1977
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Lausoa: %d"
 
-#: src/gtr-tab.ui:79
+#: src/gtr-tab.ui:74
 msgid "_Original Message"
 msgstr "_Jatorrizko mezua"
 
-#: src/gtr-tab.ui:171
+#: src/gtr-tab.ui:166
 msgid "Translate_d Text"
 msgstr "I_tzulitako testua"
 
-#: src/gtr-upload-dialog.c:60
+#: src/gtr-upload-dialog.c:61
 msgid "_Upload"
 msgstr "_Igo"
 
-#: src/gtr-upload-dialog.c:62
+#: src/gtr-upload-dialog.c:63
 msgid "Upload to Damned Lies"
 msgstr "Igo Gezur Madarikatuak webgunera"
 
-#: src/gtr-upload-dialog.c:134
+#: src/gtr-upload-dialog.c:137
 msgid "Uploading..."
 msgstr "Igotzen..."
 
-#: src/gtr-upload-dialog.c:140
+#: src/gtr-upload-dialog.c:143
 msgid "Upload"
 msgstr "Igo"
 
-#: src/gtr-upload-dialog.ui:50
+#: src/gtr-upload-dialog.ui:53
 msgid "comment:"
 msgstr "iruzkina:"
 
@@ -1088,22 +1093,6 @@ msgstr "*%s — Itzulpen-editorea"
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Itzulpen-editorea"
-
-#: src/gtranslator-menu.ui:7
-msgid "_New Window"
-msgstr "_Leiho berria"
-
-#: src/gtranslator-menu.ui:13
-msgid "_Preferences"
-msgstr "_Hobespenak"
-
-#: src/gtranslator-menu.ui:19
-msgid "_Help"
-msgstr "_Laguntza"
-
-#: src/gtranslator-menu.ui:24
-msgid "_About GNOME Translation Editor"
-msgstr "GNOME Itzulpen-editoreari _buruz"
 
 #: src/help-overlay.ui:13
 msgctxt "shortcut window group"
@@ -1247,31 +1236,31 @@ msgid ""
 msgstr "%s\n"
 "Exekutatu “%s --help” komando-lerroko aukera guztiak zerrendatzeko.\n"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:77
+#: src/translation-memory/gtr-translation-memory-dialog.c:101
 msgid "Select PO directory"
 msgstr "Hautatu PO direktorioa"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:303
+#: src/translation-memory/gtr-translation-memory-dialog.c:309
 msgid "Translation Editor Memory Manager"
 msgstr "Itzulpen-editorearen memoria-kudeatzailea"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:60
+#: src/translation-memory/gtr-translation-memory-dialog.ui:66
 msgid "Database:"
 msgstr "Datu-basea:"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:103
+#: src/translation-memory/gtr-translation-memory-dialog.ui:109
 msgid "Select the directory which contains PO files:"
 msgstr "Hautatu PO fitxategien direktorioa:"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:154
+#: src/translation-memory/gtr-translation-memory-dialog.ui:160
 msgid "Add to Database"
 msgstr "Gehitu datu-baseari"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:209
+#: src/translation-memory/gtr-translation-memory-dialog.ui:215
 msgid "Configuration:"
 msgstr "Konfigurazioa:"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:253
+#: src/translation-memory/gtr-translation-memory-dialog.ui:259
 msgid "Use only files with this name:"
 msgstr "Erabili izen hau duten fitxategiak soilik:"
 
@@ -1341,6 +1330,24 @@ msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
 msgstr "Gehieneko diferentzia luzeran itzulpen-memoriak bat datozen gisa bistaratutako mezuen artean"
+
+#~ msgid "Original-text"
+#~ msgstr "Itzulitako testua"
+
+#~ msgid "Translated-text"
+#~ msgstr "Itzulitako testua"
+
+#~ msgid "_New Window"
+#~ msgstr "_Leiho berria"
+
+#~ msgid "_Preferences"
+#~ msgstr "_Hobespenak"
+
+#~ msgid "_Help"
+#~ msgstr "_Laguntza"
+
+#~ msgid "_About GNOME Translation Editor"
+#~ msgstr "GNOME Itzulpen-editoreari _buruz"
 
 #~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
 #~ msgstr "'%s.%s.%s.%s' fitxatgeia igo da!"
