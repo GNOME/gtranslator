@@ -96,6 +96,7 @@ static void showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrContextPanel *panel)
 typedef struct {
   GtrContextPanel *panel;
   GtkTextBuffer   *text_buffer;
+  GtkWidget       *dialog;
 } DialogData;
 
 static void
@@ -110,16 +111,20 @@ reload_values (GtrContextPanel *panel)
 }
 
 static void
-dialog_response_cb (GtkDialog *dialog, guint response, gpointer user_data)
+close_notes (GtkWidget *widget, gpointer user_data)
 {
   DialogData *dd = user_data;
-
-  if (response == GTK_RESPONSE_ACCEPT)
-    buffer_end_user_action (dd->text_buffer, dd->panel);
-
-  gtk_window_destroy (GTK_WINDOW (dialog));
+  gtk_window_destroy (GTK_WINDOW (dd->dialog));
   reload_values (dd->panel);
   g_free (dd);
+}
+
+static void
+save_notes (GtkWidget *widget, gpointer user_data)
+{
+  DialogData *dd = user_data;
+  buffer_end_user_action (dd->text_buffer, dd->panel);
+  close_notes (widget, user_data);
 }
 
 static void
@@ -130,24 +135,32 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
   GtkWidget *scrolled_window;
   GtkBox *dialog_area;
   GtkWidget *text_view;
+
+  GtkWidget *headerbar;
+  GtkWidget *save;
+  GtkWidget *cancel;
+
   GtkTextBuffer *text_buffer = gtk_text_buffer_new (NULL);;
   DialogData *dd;
   GtkWidget *toplevel = gtk_widget_get_ancestor (GTK_WIDGET (panel), GTK_TYPE_WINDOW);
 
   priv = gtr_context_panel_get_instance_private (panel);
 
-  dialog = gtk_dialog_new_with_buttons (_("Notes"),
-                                        GTK_WINDOW (toplevel),
-                                        GTK_DIALOG_MODAL|
-                                        GTK_DIALOG_USE_HEADER_BAR|
-                                        GTK_DIALOG_DESTROY_WITH_PARENT,
-                                        _("_Save"),
-                                        GTK_RESPONSE_ACCEPT,
-                                        _("_Cancel"),
-                                        GTK_RESPONSE_CANCEL,
-                                        NULL);
+  headerbar = gtk_header_bar_new ();
+  cancel = gtk_button_new_with_label (_("Cancel"));
+  save = gtk_button_new_with_label (_("Save"));
+  gtk_widget_add_css_class (save, "suggested-action");
+  gtk_header_bar_pack_start (GTK_HEADER_BAR (headerbar), cancel);
+  gtk_header_bar_pack_end (GTK_HEADER_BAR (headerbar), save);
 
-  dialog_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog)));
+  dialog = gtk_window_new ();
+  gtk_window_set_title (GTK_WINDOW (dialog), _("Notes"));
+  gtk_window_set_titlebar (GTK_WINDOW (dialog), headerbar);
+  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+  gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
+
+  dialog_area = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 6));
   text_view = gtk_text_view_new_with_buffer (text_buffer);
 
   gtk_text_view_set_left_margin (GTK_TEXT_VIEW (text_view),10);
@@ -168,6 +181,7 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
 
   gtk_widget_set_vexpand (scrolled_window, TRUE);
   gtk_box_append (dialog_area, scrolled_window);
+  gtk_window_set_child (GTK_WINDOW (dialog), GTK_WIDGET (dialog_area));
 
   text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
   gtk_text_buffer_set_text (text_buffer, gtr_msg_get_comment (priv->current_msg), -1);
@@ -179,8 +193,11 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
   dd = g_new0 (DialogData, 1);
   dd->panel = panel;
   dd->text_buffer = text_buffer;
+  dd->dialog = dialog;
 
-  g_signal_connect (dialog, "response", G_CALLBACK (dialog_response_cb), dd);
+  g_signal_connect (cancel, "clicked", G_CALLBACK (close_notes), dd);
+  g_signal_connect (save, "clicked", G_CALLBACK (save_notes), dd);
+
   gtk_window_present (GTK_WINDOW (dialog));
 }
 
