@@ -588,13 +588,6 @@ gtr_actions_load_locations (GtrWindow * window, const GSList * locations)
 }
 
 static void
-save_and_close_document (GtrPo * po, GtrWindow * window)
-{
-  gtr_save_current_file_dialog (NULL, window);
-  gtr_window_remove_tab (window);
-}
-
-static void
 close_all_tabs (GtrWindow * window)
 {
   gtr_window_remove_tab (window);
@@ -625,78 +618,32 @@ save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
 }
 
 static void
-close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog
-                                            * dlg, gint response_id,
-                                            GtrWindow * window)
+close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog *dlg,
+                                            char *response,
+                                            GtrWindow *window)
 {
   GList *selected_documents;
-  gboolean is_closing_all;
-
-  gtk_widget_hide (GTK_WIDGET (dlg));
-
-  is_closing_all = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (window),
-                                                       GTR_IS_CLOSING_ALL));
-
-  switch (response_id)
+  if (g_strcmp0 (response, "yes") == 0)
     {
-    case GTK_RESPONSE_YES:     /* Save and Close */
-      selected_documents =
-        gtr_close_confirmation_dialog_get_selected_documents (dlg);
+      /* Save and Close */
+      selected_documents = gtr_close_confirmation_dialog_get_selected_documents (dlg);
       if (selected_documents == NULL)
         {
-          if (is_closing_all)
-            {
-              gtk_window_destroy (GTK_WINDOW (dlg));
-
-              close_all_tabs (window);
-
-              return;
-            }
-          else
-            g_return_if_reached ();
-        }
-      else
-        {
-          if (is_closing_all)
-            {
-              save_and_close_all_documents (selected_documents, window);
-            }
-          else
-            {
-              save_and_close_document (selected_documents->data, window);
-            }
-        }
-
-      g_list_free (selected_documents);
-
-      break;
-
-    case GTK_RESPONSE_NO:      /* Close without Saving */
-      if (is_closing_all)
-        {
           gtk_window_destroy (GTK_WINDOW (dlg));
-
           close_all_tabs (window);
-
           return;
         }
       else
         {
-          // right now is_closing_all is always true so this won't run therefore no need to consider this in port from gtk3 to gtk4
-          /*const GList *unsaved_documents;
-
-          unsaved_documents =
-            gtr_close_confirmation_dialog_get_unsaved_documents (dlg);
-          g_return_if_fail (unsaved_documents->next == NULL);
-
-          _gtr_window_close_tab (window,
-                                 gtr_tab_get_from_document
-                                 (unsaved_documents->data));*/
+          save_and_close_all_documents (selected_documents, window);
         }
-
-      break;
-    default:                   /* Do not close */
-      break;
+      g_list_free (selected_documents);
+    }
+  else if (g_strcmp0 (response, "no") == 0)
+    {
+      gtk_window_destroy (GTK_WINDOW (dlg));
+      close_all_tabs (window);
+      return;
     }
 
   gtk_window_destroy (GTK_WINDOW (dlg));

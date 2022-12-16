@@ -25,6 +25,7 @@
 #endif
 
 #include <glib/gi18n.h>
+#include <adwaita.h>
 
 #include "gtr-close-confirmation-dialog.h"
 #include "gtr-application.h"
@@ -59,23 +60,19 @@ enum
 
 struct _GtrCloseConfirmationDialog
 {
-  GtkDialog parent;
+  AdwMessageDialog parent;
 };
 
 struct _GtrCloseConfirmationDialogClass
 {
-  GtkDialogClass parent_class;
+  AdwMessageDialogClass parent_class;
 };
 
 typedef struct
 {
   gboolean logout_mode;
-
   GList *unsaved_documents;
-
   GList *selected_documents;
-
-  GtkTreeModel *list_store;
 
   gboolean disable_save_to_disk;
 } GtrCloseConfirmationDialogPrivate;
@@ -86,19 +83,18 @@ typedef struct
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrCloseConfirmationDialog,
                             gtr_close_confirmation_dialog,
-                            GTK_TYPE_DIALOG)
+                            ADW_TYPE_MESSAGE_DIALOG)
 
 static void set_unsaved_document (GtrCloseConfirmationDialog *dlg,
                                   const GList * list);
-
-static GList *get_selected_docs (GtkTreeModel * store);
 
 /*  Since we connect in the costructor we are sure this handler will be called
  *  before the user ones
  */
 static void
-response_cb (GtrCloseConfirmationDialog * dlg,
-            gint response_id, gpointer data)
+response_cb (GtrCloseConfirmationDialog *dlg,
+             char *response,
+             gpointer data)
 {
   GtrCloseConfirmationDialogPrivate *priv;
   priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
@@ -108,18 +104,9 @@ response_cb (GtrCloseConfirmationDialog * dlg,
   if (priv->selected_documents != NULL)
     g_list_free (priv->selected_documents);
 
-  if (response_id == GTK_RESPONSE_YES)
+  if (g_strcmp0 (response, "yes") == 0)
     {
-      if (GET_MODE (priv) == SINGLE_DOC_MODE)
-        {
-          priv->selected_documents = g_list_copy (priv->unsaved_documents);
-        }
-      else
-        {
-          g_return_if_fail (priv->list_store);
-
-          priv->selected_documents = get_selected_docs (priv->list_store);
-        }
+      priv->selected_documents = g_list_copy (priv->unsaved_documents);
     }
   else
     priv->selected_documents = NULL;
@@ -129,36 +116,32 @@ static void
 set_logout_mode (GtrCloseConfirmationDialog * dlg, gboolean logout_mode)
 {
 
-  gtk_dialog_add_button (GTK_DIALOG (dlg),
-                         _("Close _without Saving"), GTK_RESPONSE_NO);
+  adw_message_dialog_add_responses (
+    ADW_MESSAGE_DIALOG (dlg),
+    "cancel", _("_Cancel"),
+    "no", _("Close _without Saving"),
+    "yes", _("_Save"),
+    NULL
+  );
 
-  gtk_dialog_add_button (GTK_DIALOG (dlg),
-                         _("_Cancel"), GTK_RESPONSE_CANCEL);
-
-  gtk_dialog_add_button (GTK_DIALOG (dlg), _("_Save"), GTK_RESPONSE_YES);
-
-  gtk_dialog_set_default_response (GTK_DIALOG (dlg), GTK_RESPONSE_YES);
+  adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dlg),
+    "no", ADW_RESPONSE_DESTRUCTIVE);
+  adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dlg),
+    "yes", ADW_RESPONSE_SUGGESTED);
+  adw_message_dialog_set_default_response (ADW_MESSAGE_DIALOG (dlg), "yes");
 }
 
 static void
 gtr_close_confirmation_dialog_init (GtrCloseConfirmationDialog * dlg)
 {
-  GtkWidget *content_area = gtk_dialog_get_content_area (GTK_DIALOG (dlg));
-
   gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
   g_signal_connect (dlg, "response", G_CALLBACK (response_cb), NULL);
-
-  gtk_widget_set_margin_start (GTK_WIDGET (content_area), 6);
-  gtk_widget_set_margin_end (GTK_WIDGET (content_area), 6);
-  gtk_widget_set_margin_top (GTK_WIDGET (content_area), 6);
-  gtk_widget_set_margin_bottom (GTK_WIDGET (content_area), 6);
-
-  gtk_box_set_spacing (GTK_BOX (content_area), 14);
-  gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
-
   gtk_window_set_title (GTK_WINDOW (dlg), "");
+
+  adw_message_dialog_set_heading_use_markup (ADW_MESSAGE_DIALOG (dlg), TRUE);
+  adw_message_dialog_set_body_use_markup (ADW_MESSAGE_DIALOG (dlg), TRUE);
 }
 
 static void
@@ -257,34 +240,6 @@ static void
                                                           G_PARAM_CONSTRUCT_ONLY)));
 }
 
-static GList *
-get_selected_docs (GtkTreeModel * store)
-{
-  GList *list;
-  gboolean valid;
-  GtkTreeIter iter;
-
-  list = NULL;
-  valid = gtk_tree_model_get_iter_first (store, &iter);
-
-  while (valid)
-    {
-      gboolean to_save;
-      GtrPo *doc;
-
-      gtk_tree_model_get (store, &iter,
-                          SAVE_COLUMN, &to_save, DOC_COLUMN, &doc, -1);
-      if (to_save)
-        list = g_list_prepend (list, doc);
-
-      valid = gtk_tree_model_iter_next (store, &iter);
-    }
-
-  list = g_list_reverse (list);
-
-  return list;
-}
-
 GList *gtr_close_confirmation_dialog_get_selected_documents
   (GtrCloseConfirmationDialog * dlg)
 {
@@ -309,9 +264,7 @@ gtr_close_confirmation_dialog_new (GtkWindow * parent,
   g_return_val_if_fail (dlg != NULL, NULL);
 
   if (parent != NULL)
-    {
-      gtk_window_set_transient_for (GTK_WINDOW (dlg), parent);
-    }
+    gtk_window_set_transient_for (GTK_WINDOW (dlg), parent);
 
   return dlg;
 }
@@ -337,197 +290,30 @@ gtr_close_confirmation_dialog_new_single (GtkWindow * parent,
 static void
 build_single_doc_dialog (GtrCloseConfirmationDialog * dlg)
 {
-  GtkWidget *hbox;
-  GtkWidget *vbox;
-  GtkWidget *primary_label;
-  GtkWidget *image;
   GtrPo *doc;
-  GFile *location;
-  gchar *doc_name;
-  gchar *str;
-  gchar *markup_str;
   GtrCloseConfirmationDialogPrivate *priv;
+
+  g_autoptr (GFile) location = NULL;
+  g_autofree char *doc_name = NULL;
+
   priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
 
   g_return_if_fail (priv->unsaved_documents->data != NULL);
   doc = GTR_PO (priv->unsaved_documents->data);
-
-  /* Image */
-  image = gtk_image_new_from_icon_name ("dialog-warning-symbolic");
-  gtk_image_set_icon_size(GTK_IMAGE(image), GTK_ICON_SIZE_NORMAL);
-
-  gtk_widget_set_halign (image, 0.5);
-  gtk_widget_set_valign (image, 0.0);
-
-  /* Primary label */
-  primary_label = gtk_label_new (NULL);
-  gtk_label_set_wrap (GTK_LABEL (primary_label), TRUE);
-  gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
-  gtk_label_set_xalign (GTK_LABEL (primary_label) , 0.0);
-  gtk_label_set_yalign (GTK_LABEL (primary_label) , 0.5);
-  gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
-
   location = gtr_po_get_location (doc);
   doc_name = g_file_get_path (location);
-  g_object_unref (location);
 
-  str =
-    g_markup_printf_escaped (_
-                             ("Save the changes to document “%s” before closing?"),
-                             doc_name);
-  g_free (doc_name);
-
-  markup_str =
-    g_strconcat ("<span weight=\"bold\" size=\"larger\">", str, "</span>",
-                 NULL);
-  g_free (str);
-
-  gtk_label_set_markup (GTK_LABEL (primary_label), markup_str);
-  g_free (markup_str);
-
-  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_box_append (GTK_BOX (hbox), image);
-
-  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-  gtk_box_append (GTK_BOX (hbox), vbox);
-  gtk_box_append (GTK_BOX (vbox), primary_label);
-  gtk_box_append (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
-                  hbox);
-}
-
-static void
-populate_model (GtkTreeModel * store, GList * docs)
-{
-  GtkTreeIter iter;
-
-  while (docs != NULL)
-    {
-      GtrPo *po;
-      GFile *location;
-      gchar *name;
-
-      po = GTR_PO (docs->data);
-
-      location = gtr_po_get_location (po);
-      name = g_file_get_path (location);
-      g_object_unref (location);
-
-      gtk_list_store_append (GTK_LIST_STORE (store), &iter);
-      gtk_list_store_set (GTK_LIST_STORE (store), &iter,
-                          SAVE_COLUMN, TRUE,
-                          NAME_COLUMN, name, DOC_COLUMN, po, -1);
-
-      g_free (name);
-      docs = g_list_next (docs);
-    }
-}
-
-static void
-save_toggled (GtkCellRendererToggle * renderer,
-              gchar * path_str, GtkTreeModel * store)
-{
-  GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
-  GtkTreeIter iter;
-  gboolean active;
-
-  gtk_tree_model_get_iter (store, &iter, path);
-  gtk_tree_model_get (store, &iter, SAVE_COLUMN, &active, -1);
-
-  active ^= 1;
-
-  gtk_list_store_set (GTK_LIST_STORE (store), &iter, SAVE_COLUMN, active, -1);
-
-  gtk_tree_path_free (path);
-}
-
-static GtkWidget *
-create_treeview (GtrCloseConfirmationDialogPrivate * priv)
-{
-  GtkListStore *store;
-  GtkWidget *treeview;
-  GtkCellRenderer *renderer;
-  GtkTreeViewColumn *column;
-
-  treeview = gtk_tree_view_new ();
-  gtk_widget_set_size_request (treeview, 260, 120);
-  gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
-  gtk_tree_view_set_enable_search (GTK_TREE_VIEW (treeview), FALSE);
-
-  /* Create and populate the model */
-  store = gtk_list_store_new (N_COLUMNS, G_TYPE_BOOLEAN,
-                              G_TYPE_STRING, G_TYPE_POINTER);
-  populate_model (GTK_TREE_MODEL (store), priv->unsaved_documents);
-
-  /* Set model to the treeview */
-  gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), GTK_TREE_MODEL (store));
-  g_object_unref (store);
-
-  priv->list_store = GTK_TREE_MODEL (store);
-
-  /* Add columns */
-  if (!priv->disable_save_to_disk)
-    {
-      renderer = gtk_cell_renderer_toggle_new ();
-      g_signal_connect (renderer, "toggled",
-                        G_CALLBACK (save_toggled), store);
-
-      column = gtk_tree_view_column_new_with_attributes ("Save?",
-                                                         renderer,
-                                                         "active",
-                                                         SAVE_COLUMN, NULL);
-      gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-    }
-
-  renderer = gtk_cell_renderer_text_new ();
-  column = gtk_tree_view_column_new_with_attributes ("Name",
-                                                     renderer,
-                                                     "text",
-                                                     NAME_COLUMN, NULL);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-
-  return treeview;
+  adw_message_dialog_format_heading (ADW_MESSAGE_DIALOG (dlg),
+    _("Save the changes to document “%s” before closing?"), doc_name);
 }
 
 static void
 build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
 {
   GtrCloseConfirmationDialogPrivate *priv;
-  GtkWidget *hbox;
-  GtkWidget *image;
-  GtkWidget *vbox;
-  GtkWidget *primary_label;
-  GtkWidget *vbox2;
-  GtkWidget *select_label;
-  GtkWidget *scrolledwindow;
-  GtkWidget *treeview;
-  GtkWidget *secondary_label;
-  gchar *str;
-  gchar *markup_str;
+  g_autofree char *str = NULL;
+
   priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
-
-  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_set_hexpand (hbox, TRUE);
-  gtk_box_append (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))), hbox);
-
-  /* Image */
-  image = gtk_image_new_from_icon_name ("dialog-warning-symbolic");
-                                        //GTK_ICON_SIZE_DIALOG);
-  gtk_image_set_icon_size (GTK_IMAGE(image), GTK_ICON_SIZE_NORMAL);
-  gtk_widget_set_halign (image, 0.5);
-  gtk_widget_set_valign (image, 0.0);
-  gtk_box_append (GTK_BOX (hbox), image);
-
-  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 12);
-  gtk_widget_set_hexpand (vbox, TRUE);
-  gtk_box_append (GTK_BOX (hbox), vbox);
-
-  /* Primary label */
-  primary_label = gtk_label_new (NULL);
-  gtk_label_set_wrap (GTK_LABEL (primary_label), TRUE);
-  gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
-  gtk_label_set_xalign (GTK_LABEL (primary_label), 0.0);
-  gtk_label_set_yalign (GTK_LABEL (primary_label), 0.5);
-  gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
 
   if (priv->disable_save_to_disk)
     str =
@@ -546,56 +332,15 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
                         g_list_length (priv->unsaved_documents)),
                        g_list_length (priv->unsaved_documents));
 
-  markup_str =
-    g_strconcat ("<span weight=\"bold\" size=\"larger\">", str, "</span>",
-                 NULL);
-  g_free (str);
-
-  gtk_label_set_markup (GTK_LABEL (primary_label), markup_str);
-  g_free (markup_str);
-  gtk_box_append (GTK_BOX (vbox), primary_label);
-
-  vbox2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 8);
-  gtk_box_append (GTK_BOX (vbox), vbox2);
-
-  if (priv->disable_save_to_disk)
-    select_label =
-      gtk_label_new_with_mnemonic (_("Docum_ents with unsaved changes:"));
-  else
-    select_label =
-      gtk_label_new_with_mnemonic (_
-                                   ("S_elect the documents you want to save:"));
-
-  gtk_box_append (GTK_BOX (vbox2), select_label);
-  gtk_label_set_wrap (GTK_LABEL (select_label), TRUE);
-  gtk_label_set_xalign (GTK_LABEL (select_label), 0.0);
-  gtk_label_set_yalign (GTK_LABEL (select_label), 0.5);
-
-  scrolledwindow = gtk_scrolled_window_new ();
-  gtk_widget_set_vexpand (vbox2, TRUE);
-  gtk_box_append (GTK_BOX (vbox2), scrolledwindow);
-
-  treeview = create_treeview (priv);
-  gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (scrolledwindow), treeview);
+  adw_message_dialog_format_heading (ADW_MESSAGE_DIALOG (dlg), str);
 
   /* Secondary label */
   if (priv->disable_save_to_disk)
-    secondary_label =
-      gtk_label_new (_
-                     ("Saving has been disabled by the system administrator."));
+    adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dlg),
+      _("Saving has been disabled by the system administrator."));
   else
-    secondary_label = gtk_label_new (_("If you don’t save, "
-                                       "all your changes will be permanently lost."));
-
-  gtk_box_append (GTK_BOX (vbox2), secondary_label);
-  gtk_label_set_wrap (GTK_LABEL (secondary_label), TRUE);
-  gtk_label_set_xalign (GTK_LABEL (secondary_label), 0.0);
-  gtk_label_set_yalign (GTK_LABEL (secondary_label), 0.5);
-  gtk_label_set_selectable (GTK_LABEL (secondary_label), TRUE);
-
-  gtk_label_set_mnemonic_widget (GTK_LABEL (select_label), treeview);
-
-  gtk_widget_show (hbox);
+    adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dlg),
+      _("If you don’t save, all your changes will be permanently lost."));
 }
 
 static void

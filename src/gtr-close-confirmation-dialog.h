@@ -28,17 +28,14 @@
 
 #include <glib.h>
 #include <gtk/gtk.h>
+#include <adwaita.h>
 
 #include "gtr-po.h"
-
-// TODO: Replace this custom widget with something more standard, like
-// AdwMessageDialog
-// https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/class.MessageDialog.html
 
 G_BEGIN_DECLS
 #define GTR_TYPE_CLOSE_CONFIRMATION_DIALOG  (gtr_close_confirmation_dialog_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrCloseConfirmationDialog, gtr_close_confirmation_dialog, GTR, CLOSE_CONFIRMATION_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (GtrCloseConfirmationDialog, gtr_close_confirmation_dialog, GTR, CLOSE_CONFIRMATION_DIALOG, AdwMessageDialog)
 
 GtkWidget *gtr_close_confirmation_dialog_new        (GtkWindow * parent, GList * unsaved_documents, gboolean logout_mode);
 GtkWidget *gtr_close_confirmation_dialog_new_single (GtkWindow * parent, GtrPo * doc, gboolean logout_mode);
