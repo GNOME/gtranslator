@@ -111,18 +111,20 @@ gtr_progress_get_property (GObject    *object,
 }
 
 static void
-on_draw (GtkWidget       *widget,
+on_draw (GtkDrawingArea  *widget,
          cairo_t         *cr,
-         gpointer        data)
+         int              dwidth,
+         int              dheight,
+         gpointer         data)
 {
   GtrProgressPrivate *priv = gtr_progress_get_instance_private (GTR_PROGRESS (widget));
 
   GdkRGBA background;
   GdkRGBA foreground;
   GdkRGBA fuzzy_color;
-  gfloat translated = 0.0, fuzzy = 0.0;
-  gint total = priv->trans + priv->untrans + priv->fuzzy;
-  gint width, height;
+  float translated = 0.0, fuzzy = 0.0;
+  int total = priv->trans + priv->untrans + priv->fuzzy;
+  int width, height;
 
   gboolean dark = adw_style_manager_get_dark (
     adw_style_manager_get_default ()
@@ -150,8 +152,8 @@ on_draw (GtkWidget       *widget,
   translated = (float) (priv->trans) / (float) total;
   fuzzy = (float) (priv->fuzzy) / (float) total;
 
-  width = gtk_widget_get_allocated_width (widget);
-  height = gtk_widget_get_allocated_height (widget);
+  width = gtk_widget_get_allocated_width (GTK_WIDGET (widget));
+  height = gtk_widget_get_allocated_height (GTK_WIDGET (widget));
 
   gdk_cairo_set_source_rgba (cr, &background);
   cairo_rectangle (cr, 0, 0, width * total, height);
@@ -213,9 +215,7 @@ gtr_progress_init (GtrProgress *self)
   priv->fuzzy = 0;
 
   gtk_widget_set_size_request (GTK_WIDGET (self), -1, 8);
-  //g_signal_connect (G_OBJECT (self), "draw",
-                    //G_CALLBACK (on_draw), NULL);
-  gtk_drawing_area_set_draw_func (GTK_DRAWING_AREA(self), on_draw, NULL, NULL);
+  gtk_drawing_area_set_draw_func (GTK_DRAWING_AREA (self), on_draw, NULL, NULL);
 }
 
 GtrProgress*

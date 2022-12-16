@@ -52,7 +52,7 @@ gtr_upload_dialog_init (GtrUploadDialog *dlg)
   GtrUploadDialogPrivate *priv = gtr_upload_dialog_get_instance_private (dlg);
   GtkBox *content_area;
   GtkBuilder *builder;
-  gchar *root_objects[] = {
+  const char *root_objects[] = {
     "main_box",
     NULL
   };

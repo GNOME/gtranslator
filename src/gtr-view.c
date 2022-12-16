@@ -41,33 +41,6 @@
 
 #include <gtksourceview/gtksource.h>
 
-/**
- * Converts the language code to a complete language code with the country
- * If the language contains the country code this returns a new allocated
- * string copied from *lang*.
- *
- * In other case the code is duplicated by default:
- *
- * es -> es_ES
- * pt -> pt_PT
- */
-static gchar*
-get_default_lang (const gchar *lang) {
-  gchar *up;
-  gchar *ret;
-
-  if (g_strrstr (lang, "_"))
-    {
-      return g_strdup (lang);
-    }
-
-  up = g_ascii_strup (lang, -1);
-  ret = g_strdup_printf ("%s_%s", lang, up);
-  g_free (up);
-
-  return ret;
-}
-
 typedef struct
 {
   GSettings *editor_settings;
@@ -120,11 +93,11 @@ gtr_view_init (GtrView * view)
   g_ptr_array_add (dirs, NULL);
   langs = (gchar **) g_ptr_array_free (dirs, FALSE);
 
-  gtk_source_language_manager_set_search_path (lm, langs);
+  gtk_source_language_manager_set_search_path (lm, (const  char * const *) langs);
   lang = gtk_source_language_manager_get_language (lm, "gtranslator");
   g_strfreev (langs);
 
-  priv->buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+  priv->buffer = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
   gtk_source_buffer_set_language (priv->buffer, lang);
   gtk_text_view_set_buffer (GTK_TEXT_VIEW (view), GTK_TEXT_BUFFER (priv->buffer));
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), GTK_WRAP_WORD);
@@ -168,7 +141,6 @@ gtr_view_class_init (GtrViewClass * klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->dispose = gtr_view_dispose;
-  g_printf("class init: view\n");
 }
 
 /**
@@ -258,7 +230,7 @@ gtr_view_enable_visible_whitespace (GtrView * view, gboolean enable)
   langs[i] = gtr_dirs_get_gtr_sourceview_dir ();
 
   manager = gtk_source_language_manager_new ();
-  gtk_source_language_manager_set_search_path (manager, (gchar **)langs);
+  gtk_source_language_manager_set_search_path (manager, (const char * const *)langs);
   lang = gtk_source_language_manager_get_language (manager, "gtranslator");
 
   source = GTK_SOURCE_VIEW (view);

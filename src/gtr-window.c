@@ -140,8 +140,6 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
   GtrPo *po;
   gint translated, fuzzy, untranslated;
 
-  //g_return_if_fail (GTR_IS_MSG (message));
-
   po = gtr_tab_get_po (tab);
 
   translated = gtr_po_get_translated_count (po);
@@ -151,17 +149,6 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
   active_tab = gtr_window_get_active_tab (window);
   gtr_tab_set_progress (GTR_TAB (active_tab),
                         translated, untranslated, fuzzy);
-}
-
-static GtrWindow *
-get_drop_window (GtkWidget * widget)
-{
-  GtkWindow *target_window;
-
-  target_window = GTK_WINDOW(gtk_widget_get_root (widget));
-  g_return_val_if_fail (GTR_IS_WINDOW (target_window), NULL);
-
-  return GTR_WINDOW (target_window);
 }
 
 /* Handle drops on the GtrWindow */
@@ -174,7 +161,6 @@ drag_data_received_cb (GtkDropTarget * drop_target,
 {
   GtrWindow * window = GTR_WINDOW (data);
   GError * error = NULL;
-  GSList *locations = NULL;
 
   if (!G_VALUE_HOLDS (value, G_TYPE_FILE))
     return FALSE;
@@ -246,10 +232,7 @@ set_window_title (GtrWindow * window, gboolean with_path)
 
   // notebook headerbar
   header = GTK_HEADER_BAR (gtr_tab_get_header (GTR_TAB (priv->active_tab)));
-  //gtk_header_bar_set_title (header, title);
   gtk_widget_show(GTK_WIDGET(header));
-
-  //g_free (title);
 }
 
 static void
@@ -261,96 +244,6 @@ update_saved_state (GtrPo *po,
   GtrTab * tab = gtr_window_get_active_tab(GTR_WINDOW(window));
   gtr_tab_enable_upload (tab, gtr_po_can_dl_upload (po));
 }
-
-/*static void
-notebook_switch_page (GtkNotebook * nb,
-                      GtkWidget * page,
-                      gint page_num, GtrWindow * window)
-{
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-  GtrTab *tab;
-  GList *msg;
-  GtrPo *po;
-  gint n_pages;
-
-  tab = GTR_TAB (gtk_notebook_get_nth_page (nb, page_num));
-  if (tab == priv->active_tab)
-    return;
-
-  *
-   * Set the window title
-   *
-  n_pages = gtk_notebook_get_n_pages (nb);
-  if (n_pages == 1)
-    set_window_title (window, TRUE);
-  else
-    set_window_title (window, FALSE);
-
-  priv->active_tab = tab;
-
-  po = gtr_tab_get_po (tab);
-  msg = gtr_po_get_current_message (po);
-  gtr_window_update_statusbar_message_count (tab, msg->data, window);
-}*/
-
-/*static void
-notebook_page_removed (GtkNotebook * notebook,
-                       GtkWidget * child, guint page_num, GtrWindow * window)
-{
-  gint n_pages;
-
-  * Set the window title *
-  n_pages = gtk_notebook_get_n_pages (notebook);
-  if (n_pages == 1)
-    set_window_title (window, TRUE);
-  else
-    set_window_title (window, FALSE);
-}*/
-
-/*static void
-notebook_tab_close_request (GtrNotebook * notebook,
-                            GtrTab * tab, GtrWindow * window)
-{
-  * Note: we are destroying the tab before the default handler
-   * seems to be ok, but we need to keep an eye on this. *
-  gtr_close_tab (tab, window);
-}*/
-
-
-/* static void
-notebook_tab_added (GtkNotebook * notebook,
-                    GtkWidget * child, guint page_num, GtrWindow * window)
-{
-  GtrTab *tab = GTR_TAB (child);
-  gint n_pages;
-
-  g_return_if_fail (GTR_IS_TAB (tab));
-
-  * Set the window title *
-  n_pages = gtk_notebook_get_n_pages (notebook);
-  if (n_pages == 1)
-    set_window_title (window, TRUE);
-  else
-    set_window_title (window, FALSE);
-
-  g_signal_connect_after (child,
-                          "message_changed",
-                          G_CALLBACK
-                          (gtr_window_update_statusbar_message_count),
-                          window);
-
-  g_signal_connect_after (child,
-                          "message_changed",
-                          G_CALLBACK (update_undo_state),
-                          window);
-
-  g_signal_connect_after (child,
-                          "showed-message",
-                          G_CALLBACK (update_undo_state),
-                          window);
-
-  update_undo_state (NULL, NULL, window);
-}*/
 
 static void
 gtr_window_init (GtrWindow *window)
@@ -370,7 +263,7 @@ gtr_window_init (GtrWindow *window)
   /* Drag and drop */
   GtkDropTarget * drop_target = gtk_drop_target_new (G_TYPE_FILE, GDK_ACTION_COPY);
   g_signal_connect (drop_target, "drop", G_CALLBACK (drag_data_received_cb), window);
-  gtk_widget_add_controller (window, GTK_EVENT_CONTROLLER (drop_target));
+  gtk_widget_add_controller (GTK_WIDGET (window), GTK_EVENT_CONTROLLER (drop_target));
 
   // project selection
   priv->projects = GTK_WIDGET (gtr_projects_new (window));
@@ -450,29 +343,13 @@ gtr_window_finalize (GObject * object)
   G_OBJECT_CLASS (gtr_window_parent_class)->finalize (object);
 }
 
-/*static gboolean
-gtr_window_configure_event (GtkWidget * widget, GdkEventConfigure * event)
-{
-  GtrWindow *window = GTR_WINDOW (widget);
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-
-  priv->width = event->width;
-  priv->height = event->height;
-
-  return GTK_WIDGET_CLASS (gtr_window_parent_class)->configure_event (widget,
-                                                                      event);
-}*/
-
 static void
 gtr_window_class_init (GtrWindowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->finalize = gtr_window_finalize;
   object_class->dispose = gtr_window_dispose;
-
-  //widget_class->configure_event = gtr_window_configure_event; not used in gtk4
 
   gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass),
                                                "/org/gnome/translator/gtr-window.ui");
@@ -523,7 +400,6 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   GtrTab *tab;
 
   tab = gtr_tab_new (po, GTK_WINDOW (window));
-  g_return_if_fail (GTR_IS_TAB (tab));
   priv->active_tab = tab;
 
   g_signal_connect_after (tab,
@@ -584,9 +460,6 @@ gtr_window_get_active_tab (GtrWindow * window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   g_return_val_if_fail (priv != NULL, NULL);
-  //g_return_val_if_fail (priv->notebook != NULL, NULL);
-
-  //return gtr_notebook_get_page (GTR_NOTEBOOK (priv->notebook));
   return priv->active_tab;
 }
 
@@ -602,21 +475,7 @@ gtr_window_get_active_tab (GtrWindow * window)
 GList *
 gtr_window_get_all_tabs (GtrWindow * window)
 {
-  //GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-  //gint num_pages;
-  //gint i = 0;
   GList *toret = NULL;
-
-  /*num_pages =
-    gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook));
-
-  while (i < num_pages)
-    {
-      toret = g_list_append (toret,
-                             gtk_notebook_get_nth_page (GTK_NOTEBOOK
-                                                        (priv->notebook), i));
-      i++;
-    }*/
   GtrTab *tab = gtr_window_get_active_tab(window);
   if (tab != NULL) {
     toret = g_list_append (toret,
@@ -656,22 +515,6 @@ gtr_window_get_header_from_active_tab (GtrWindow * window)
 }
 
 /**
- * gtr_window_get_notebook:
- * @window: a #GtrWindow
- * 
- * Gets the main #GtrNotebook of the @window.
- *
- * Returns: (transfer none): the #GtrNotebook of the @window
- */
-/* GtrNotebook *
-gtr_window_get_notebook (GtrWindow * window)
-{
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-
-  return GTR_NOTEBOOK (priv->notebook);
-}*/
-
-/**
  * gtr_window_get_active_view:
  * @window: a #GtranslationWindow
  *
@@ -709,26 +552,8 @@ gtr_window_get_all_views (GtrWindow * window,
                           gboolean original, gboolean translated)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-  //gint numtabs;
-  //gint i;
   GList *views = NULL;
-  //GtkWidget *tab;
-
   g_return_val_if_fail (GTR_IS_WINDOW (window), NULL);
-
-  /*numtabs = gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook));
-  i = numtabs - 1;
-
-  while (i >= 0 && numtabs != 0)
-    {
-      tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (priv->notebook),
-                                       i);
-      views =
-        g_list_concat (views,
-                       gtr_tab_get_all_views (GTR_TAB (tab), original,
-                                              translated));
-      i--;
-    }*/
 
   views = g_list_concat (views,
                         gtr_tab_get_all_views(GTR_TAB(priv->active_tab), original, translated));
@@ -782,9 +607,7 @@ gtr_window_show_projects (GtrWindow *window)
 
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "projects");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "projects");
-  gtk_window_set_title (window,_("Select a Po file"));
-
-  //gtr_notebook_remove_all_pages (GTR_NOTEBOOK (priv->notebook));
+  gtk_window_set_title (GTK_WINDOW (window), _("Select a Po file"));
 }
 
 void
@@ -803,7 +626,7 @@ gtr_window_show_dlteams (GtrWindow *window)
 
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "dlteams");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "dlteams");
-  gtk_window_set_title (window,_("Load from Damned Lies"));
+  gtk_window_set_title (GTK_WINDOW (window), _("Load from Damned Lies"));
 
   /* Load teams and modules automatically */
   gtr_dl_teams_load_json (GTR_DL_TEAMS (priv->dlteams));
@@ -816,7 +639,7 @@ gtr_window_show_greeter (GtrWindow *window)
 
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "greeter");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "greeter");
-  gtk_window_set_title (window, _("Welcome to Translation Editor"));
+  gtk_window_set_title (GTK_WINDOW (window), _("Welcome to Translation Editor"));
 }
 
 void

@@ -67,7 +67,6 @@ gtr_lang_button_changed (GtkWidget  *widget,
 static void
 gtr_lang_button_dispose (GObject *object)
 {
-  GtrLangButtonPrivate *priv = gtr_lang_button_get_instance_private (GTR_LANG_BUTTON (object));
   G_OBJECT_CLASS (gtr_lang_button_parent_class)->dispose (object);
 }
 

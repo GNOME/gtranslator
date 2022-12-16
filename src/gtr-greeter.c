@@ -159,7 +159,6 @@ go_back_cb (GtkButton   *btn, GtrGreeter *self)
 static void
 gtr_greeter_dispose (GObject *object)
 {
-  GtrGreeterPrivate *priv = gtr_greeter_get_instance_private (GTR_GREETER (object));
   G_OBJECT_CLASS (gtr_greeter_parent_class)->dispose (object);
 }
 

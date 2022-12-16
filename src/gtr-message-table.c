@@ -272,7 +272,6 @@ gtr_message_table_init (GtrMessageTable * table)
 
   g_signal_connect (G_OBJECT (selection), "changed",
                     G_CALLBACK (gtr_message_table_selection_changed), table);
-  g_printf("init: message table\n");
 }
 
 static void
@@ -355,7 +354,6 @@ gtr_message_table_class_init (GtrMessageTableClass * klass)
                                                "/org/gnome/translator/gtr-message-table.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrMessageTable, treeview);
-  g_printf("class init: message table\n");
 }
 
 /**

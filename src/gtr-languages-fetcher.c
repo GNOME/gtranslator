@@ -191,34 +191,6 @@ fill_from_language_entry (GtrLanguagesFetcher *fetcher,
 }
 
 static void
-fill_from_language_code_entry (GtrLanguagesFetcher *fetcher,
-                               GtrLanguage         *lang)
-{
-  const gchar *entry_text;
-  GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-
-  entry_text = gtr_lang_button_get_lang (GTR_LANG_BUTTON (priv->language));
-  if (*entry_text == '\0')
-    {
-      const gchar *name;
-      name = gtr_language_get_name (lang);
-
-      if (name != NULL && *name != '\0')
-        gtr_lang_button_set_lang (GTR_LANG_BUTTON (priv->language), name);
-    }
-
-  fill_encoding_and_charset (fetcher);
-  entry_text = gtk_editable_get_text (GTK_EDITABLE (priv->plural_forms));
-  if (*entry_text == '\0')
-    {
-      const gchar *plural_form;
-      plural_form = gtr_language_get_plural_form (lang);
-      if (plural_form != NULL && *plural_form != '\0')
-        gtk_editable_set_text (GTK_EDITABLE (priv->plural_forms), plural_form);
-    }
-}
-
-static void
 on_language_activate (GtrLangButton       *btn,
                       GtrLanguagesFetcher *fetcher)
 {
