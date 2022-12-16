@@ -99,9 +99,11 @@ gtr_view_init (GtrView * view)
   priv = gtr_view_get_instance_private (view);
 
   priv->provider = gtk_css_provider_new ();
-  gtk_style_context_add_provider (gtk_widget_get_style_context (GTK_WIDGET (view)),
-                                  GTK_STYLE_PROVIDER (priv->provider),
-                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  gtk_style_context_add_provider_for_display (
+    gdk_display_get_default (),
+    GTK_STYLE_PROVIDER (priv->provider),
+    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
+  );
 
   priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
   priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");

@@ -23,6 +23,7 @@
 #include "gtr-progress.h"
 
 #include <glib/gi18n.h>
+#include <adwaita.h>
 
 typedef struct
 {
@@ -119,15 +120,32 @@ on_draw (GtkWidget       *widget,
   GdkRGBA background;
   GdkRGBA foreground;
   GdkRGBA fuzzy_color;
-  GtkStyleContext *style_context;
   gfloat translated = 0.0, fuzzy = 0.0;
   gint total = priv->trans + priv->untrans + priv->fuzzy;
   gint width, height;
 
-  style_context = gtk_widget_get_style_context (widget);
-  gtk_style_context_lookup_color (style_context, "theme_selected_bg_color", &foreground);
-  gtk_style_context_lookup_color (style_context, "warning_color", &fuzzy_color);
-  gtk_style_context_lookup_color (style_context, "error_color", &background);
+  gboolean dark = adw_style_manager_get_dark (
+    adw_style_manager_get_default ()
+  );
+
+  // Light theme
+  // Blue 3 (53, 132, 228) #3584e4
+  gdk_rgba_parse (&foreground, "#3584e4");
+  // Yellow 4 (245, 194, 17) #f5c211
+  gdk_rgba_parse (&fuzzy_color, "#f5c211");
+  // Red 4 (192, 28, 40) #c01c28
+  gdk_rgba_parse (&background, "#c01c28");
+
+  if (dark)
+    {
+      // Dark theme
+      // Blue 1 (153, 193, 241) #99c1f1
+      gdk_rgba_parse (&foreground, "#99c1f1");
+      // Yellow 1 (249, 240, 107) #f9f06b
+      gdk_rgba_parse (&fuzzy_color, "#f9f06b");
+      // Red 1 (246, 97, 81) #f66151
+      gdk_rgba_parse (&background, "#f66151");
+    }
 
   translated = (float) (priv->trans) / (float) total;
   fuzzy = (float) (priv->fuzzy) / (float) total;

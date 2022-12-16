@@ -66,6 +66,7 @@ colorize_cell (GtkTreeViewColumn *tree_column,
   GtrMsg *msg;
   gchar *message_error = NULL;
 
+  // TODO: use css for colors!
   GdkRGBA translated, fuzzy, untranslated, bg_color, fg_color;
   GtkStyleContext *style_context;
   style_context = gtk_widget_get_style_context (GTK_WIDGET (data));
