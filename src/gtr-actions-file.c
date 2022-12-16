@@ -137,9 +137,12 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
 }
 
 static void
-gtr_po_parse_files_from_dialog (GtkFileDialog *dialog, GAsyncResult *res, GtrWindow *window)
+gtr_po_parse_files_from_dialog (GObject *source, GAsyncResult *res, void *user_data)
 {
   GSList *locations = NULL;
+  GtkFileDialog *dialog = GTK_FILE_DIALOG (source);
+  GtrWindow *window = GTR_WINDOW (user_data);
+
   g_autoptr (GFile) file = NULL;
   g_autoptr (GFile) parent = NULL;
   g_autofree gchar *uri = NULL;
@@ -235,7 +238,7 @@ gtr_open_file_dialog_nocheck (GtrWindow *window)
                                  _("Open file for translation"),
                                  _gtr_application_get_last_dir (GTR_APP));
 
-  gtk_file_dialog_open (dialog, GTK_WINDOW (window), NULL, NULL, G_CALLBACK (gtr_po_parse_files_from_dialog), window);
+  gtk_file_dialog_open (dialog, GTK_WINDOW (window), NULL, NULL, gtr_po_parse_files_from_dialog, window);
 }
 
 void
@@ -250,11 +253,13 @@ gtr_open_file_dialog (GtrWindow *window)
 }
 
 static void
-save_dialog_response_cb (GtkFileDialog *dialog, GAsyncResult *res, GtrWindow *window)
+save_dialog_response_cb (GObject *source, GAsyncResult *res, void *user_data)
 {
   GError *error = NULL;
   GtrPo *po;
   GtrTab *tab;
+  GtkFileDialog *dialog = GTK_FILE_DIALOG (source);
+  GtrWindow *window = GTR_WINDOW (user_data);
 
   g_autofree char *filename = NULL;
   g_autoptr (GFile) file = NULL;
@@ -277,8 +282,7 @@ save_dialog_response_cb (GtkFileDialog *dialog, GAsyncResult *res, GtrWindow *wi
 
       if (error)
         {
-          GtkWidget *dialog;
-          dialog = gtk_alert_dialog_new ("%s", error->message);
+          GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
           gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
           g_object_unref (dialog);
           g_clear_error (&error);
@@ -301,10 +305,8 @@ _upload_file_callback (GObject      *object,
 {
   UserData *ud = user_data;
   g_autoptr(GInputStream) stream = NULL;
-  GtkWidget *dialog;
+  GtkAlertDialog *dialog;
   GtrTab *active_tab;
-  GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
-  //GtrNotebook *active_notebook;
 
   GtkWidget *upload_dialog = ud->dialog;
   GtkWidget *window = gtr_upload_dialog_get_parent (GTR_UPLOAD_DIALOG (upload_dialog));
@@ -502,7 +504,7 @@ gtr_save_file_as_dialog (GtrWindow * window)
                                  FILESEL_SAVE,
                                  _("Save file as…"), NULL);
 
-  gtk_file_dialog_save (dialog, GTK_WINDOW (window), NULL, NULL, NULL, G_CALLBACK (save_dialog_response_cb), window);
+  gtk_file_dialog_save (dialog, GTK_WINDOW (window), NULL, NULL, NULL, save_dialog_response_cb, window);
 }
 
 /*
@@ -522,8 +524,7 @@ gtr_save_current_file_dialog (GtkWidget * widget, GtrWindow * window)
 
   if (error)
     {
-      GtkWidget *dialog;
-      dialog = gtk_alert_dialog_new ("%s", error->message);
+      GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
       gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
       g_object_unref (dialog);
       g_clear_error (&error);
@@ -562,8 +563,7 @@ load_file_list (GtrWindow * window, const GSList * locations)
    */
   if (error != NULL)
     {
-      GtkWidget *dialog;
-      dialog = gtk_alert_dialog_new ("%s", error->message);
+      GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
       gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
       g_object_unref (dialog);
       g_error_free (error);
@@ -613,8 +613,7 @@ save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
 
   if(error)
   {
-    GtkWidget *dialog;
-    dialog = gtk_alert_dialog_new ("%s", error->message);
+    GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
     gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
     g_object_unref (dialog);
     g_clear_error (&error);
@@ -836,8 +835,7 @@ _gtr_actions_file_save_all (GtrWindow * window)
 
       if (error)
         {
-          GtkWidget *dialog;
-          dialog = gtk_alert_dialog_new ("%s", error->message);
+          GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
           gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
           g_object_unref (dialog);
           g_clear_error (&error);
