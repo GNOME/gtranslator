@@ -28,6 +28,7 @@
 #include <glib/gi18n.h>
 #include <string.h>
 #include <gio/gio.h>
+#include <adwaita.h>
 
 #include "gtr-profile-manager.h"
 #include "gtr-close-confirmation-dialog.h"
@@ -160,21 +161,19 @@ gtr_po_parse_files_from_dialog (GtkFileDialog *dialog, GAsyncResult *res, GtrWin
 }
 
 static void
-handle_save_current_dialog_response (GtkDialog *dialog,
-                                     gint response_id,
+handle_save_current_dialog_response (AdwMessageDialog *dialog,
+                                     char *response,
                                      void (*callback)(GtrWindow *))
 {
   GtrWindow *window = gtr_application_get_active_window (GTR_APP);
-  switch (response_id)
-    {
-      case GTK_RESPONSE_YES:
-        gtr_save_current_file_dialog (NULL, window);
-      case GTK_RESPONSE_NO:
-        callback (window);
-        break;
-      default:
-        break;
-    }
+
+  if (g_strcmp0 ("save", response) == 0)
+    gtr_save_current_file_dialog (NULL, window);
+
+  // callback for "save" and "no"
+  if (g_strcmp0 ("cancel", response) != 0)
+    callback (window);
+
   gtk_window_destroy (GTK_WINDOW (dialog));
 }
 
@@ -189,34 +188,36 @@ gtr_want_to_save_current_dialog (GtrWindow * window, void (*callback)(GtrWindow 
   g_autofree gchar *filename = NULL;
   g_autofree gchar *markup = NULL;
 
-  GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
-
   tab = gtr_window_get_active_tab (window);
   po = gtr_tab_get_po (tab);
   location = gtr_po_get_location (po);
   filename = g_file_get_path (location);
-
-  dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                   flags,
-                                   GTK_MESSAGE_WARNING,
-                                   GTK_BUTTONS_NONE, NULL);
 
   markup = g_strdup_printf (
     _("Do you want to save changes to this file: "
       "<span weight=\"bold\" size=\"large\">%s</span>?"),
     filename);
 
-  gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog), markup);
-  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+  dialog = adw_message_dialog_new (GTK_WINDOW (window), markup, NULL);
+  gtk_window_set_default_size (GTK_WINDOW (dialog), 800, 200);
+
+  adw_message_dialog_set_heading_use_markup (ADW_MESSAGE_DIALOG (dialog), TRUE);
+  adw_message_dialog_set_body_use_markup (ADW_MESSAGE_DIALOG (dialog), TRUE);
+
+  adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dialog),
     _("If you don't save, all your unsaved changes will be permanently lost."));
 
-  gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-                          _("Save and open"), GTK_RESPONSE_YES,
-                          _("Cancel"), GTK_RESPONSE_CANCEL,
-                          _("Continue without saving"), GTK_RESPONSE_NO,
-                          NULL);
+  adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
+                                    "cancel", _("Cancel"),
+                                    "no", _("Continue without saving"),
+                                    "save", _("Save and open"),
+                                    NULL);
+  adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog),
+    "no", ADW_RESPONSE_DESTRUCTIVE);
+  adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog),
+    "save", ADW_RESPONSE_SUGGESTED);
+  adw_message_dialog_set_default_response (ADW_MESSAGE_DIALOG (dialog), "save");
 
-  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
   g_signal_connect (dialog, "response", G_CALLBACK (handle_save_current_dialog_response), callback);
   gtk_window_present (GTK_WINDOW (dialog));
 }
@@ -271,22 +272,15 @@ save_dialog_response_cb (GtkFileDialog *dialog, GAsyncResult *res, GtrWindow *wi
   if (po != NULL)
     {
       gtr_po_set_location (po, location);
-
       g_object_unref (location);
-
       gtr_po_save_file (po, &error);
 
       if (error)
         {
           GtkWidget *dialog;
-          GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
-          dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                           flags,
-                                           GTK_MESSAGE_WARNING,
-                                           GTK_BUTTONS_OK,
-                                           "%s", error->message);
-          g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-          gtk_window_present (GTK_WINDOW (dialog));
+          dialog = gtk_alert_dialog_new ("%s", error->message);
+          gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+          g_object_unref (dialog);
           g_clear_error (&error);
           return;
         }
@@ -327,12 +321,7 @@ _upload_file_callback (GObject      *object,
     {
       if (status_code == SOUP_STATUS_FORBIDDEN)
         {
-          dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                           flags,
-                                           GTK_MESSAGE_INFO,
-                                           GTK_BUTTONS_OK,
-                                           _("This file has already been uploaded"));
-          //gtr_notebook_enable_upload (active_notebook, FALSE);
+          dialog = gtk_alert_dialog_new (_("This file has already been uploaded"));
           gtr_tab_enable_upload (active_tab, FALSE);
           goto end;
         }
@@ -349,11 +338,7 @@ _upload_file_callback (GObject      *object,
           message = g_strdup (soup_status_get_phrase (status_code));
         }
 
-      dialog = gtk_message_dialog_new_with_markup (
-        GTK_WINDOW (window),
-        flags,
-        GTK_MESSAGE_WARNING,
-        GTK_BUTTONS_CLOSE,
+      dialog = gtk_alert_dialog_new (
         _(
           "An error occurred while uploading the file: %s\n"
           "Maybe you've not configured your <i>l10n.gnome.org</i> "
@@ -364,18 +349,14 @@ _upload_file_callback (GObject      *object,
       goto end;
     }
 
-  dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                   flags,
-                                   GTK_MESSAGE_INFO,
-                                   GTK_BUTTONS_OK,
-                                   _("The file has been uploaded!"));
-
+  dialog = gtk_alert_dialog_new (_("The file has been uploaded!"));
   gtr_tab_enable_upload (active_tab, FALSE);
 
 end:
-  g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-  gtk_window_present (GTK_WINDOW (dialog));
-  gtk_window_destroy (GTK_WINDOW(upload_dialog));
+  gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+  g_object_unref (dialog);
+
+  gtk_window_destroy (GTK_WINDOW (upload_dialog));
   g_free (ud);
 }
 
@@ -542,13 +523,9 @@ gtr_save_current_file_dialog (GtkWidget * widget, GtrWindow * window)
   if (error)
     {
       GtkWidget *dialog;
-      GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
-      dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                       flags,
-                                       GTK_MESSAGE_WARNING,
-                                       GTK_BUTTONS_OK, "%s", error->message);
-      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-      gtk_window_present (GTK_WINDOW (dialog));
+      dialog = gtk_alert_dialog_new ("%s", error->message);
+      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+      g_object_unref (dialog);
       g_clear_error (&error);
       return;
     }
@@ -586,17 +563,9 @@ load_file_list (GtrWindow * window, const GSList * locations)
   if (error != NULL)
     {
       GtkWidget *dialog;
-      GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
-      /*
-       * We have to show the error in a dialog
-       */
-      dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                       flags,
-                                       GTK_MESSAGE_ERROR,
-                                       GTK_BUTTONS_CLOSE,
-                                       "%s", error->message);
-      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-      gtk_window_present (GTK_WINDOW (dialog));
+      dialog = gtk_alert_dialog_new ("%s", error->message);
+      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+      g_object_unref (dialog);
       g_error_free (error);
     }
 
@@ -645,14 +614,9 @@ save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
   if(error)
   {
     GtkWidget *dialog;
-    GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
-    dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                     flags,
-                                     GTK_MESSAGE_WARNING,
-                                     GTK_BUTTONS_OK,
-                                     "%s", error->message);
-    g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-    gtk_window_present (GTK_WINDOW (dialog));
+    dialog = gtk_alert_dialog_new ("%s", error->message);
+    gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+    g_object_unref (dialog);
     g_clear_error (&error);
     return;
   }
@@ -873,15 +837,9 @@ _gtr_actions_file_save_all (GtrWindow * window)
       if (error)
         {
           GtkWidget *dialog;
-          GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
-
-          dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                           flags,
-                                           GTK_MESSAGE_WARNING,
-                                           GTK_BUTTONS_OK,
-                                           "%s", error->message);
-          g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-          gtk_window_present (GTK_WINDOW (dialog));
+          dialog = gtk_alert_dialog_new ("%s", error->message);
+          gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+          g_object_unref (dialog);
           g_clear_error (&error);
 
           return;
