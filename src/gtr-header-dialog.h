@@ -16,8 +16,7 @@
  *
  */
 
-#ifndef __HEADER_DIALOG_H__
-#define __HEADER_DIALOG_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
@@ -25,41 +24,14 @@
 
 #include "gtr-window.h"
 
+G_BEGIN_DECLS
 
-/*
- * Type checking and casting macros
- */
-#define GTR_TYPE_HEADER_DIALOG		(gtr_header_dialog_get_type ())
-#define GTR_HEADER_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_HEADER_DIALOG, GtrHeaderDialog))
-#define GTR_HEADER_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_HEADER_DIALOG, GtrHeaderDialogClass))
-#define GTR_IS_HEADER_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_HEADER_DIALOG))
-#define GTR_IS_HEADER_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_HEADER_DIALOG))
-#define GTR_HEADER_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_HEADER_DIALOG, GtrHeaderDialogClass))
-
-/*
- * Main object structure
- */
-typedef struct _GtrHeaderDialog GtrHeaderDialog;
-
-/*
- * Class definition
- */
-typedef struct _GtrHeaderDialogClass GtrHeaderDialogClass;
-
-struct _GtrHeaderDialogClass
-{
-  GtkDialogClass parent_class;
-};
+#define GTR_TYPE_HEADER_DIALOG (gtr_header_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (GtrHeaderDialog, gtr_header_dialog, GTR, HEADER_DIALOG, GtkWindow)
 
 /*
  * Public methods
  */
-GType
-gtr_header_dialog_get_type (void)
-  G_GNUC_CONST;
+void gtr_show_header_dialog (GtrWindow * window);
 
-     GType gtr_header_dialog_register_type (GTypeModule * module);
-
-     void gtr_show_header_dialog (GtrWindow * window);
-
-#endif
+ G_END_DECLS

@@ -71,10 +71,10 @@ typedef struct
 
 struct _GtrHeaderDialog
 {
-  GtkDialog parent_instance;
+  GtkWindow parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrHeaderDialog, gtr_header_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrHeaderDialog, gtr_header_dialog, GTK_TYPE_WINDOW)
 
 static void
 gtr_header_dialog_dispose (GObject * object)
@@ -373,6 +373,7 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
   GtkBox *content_area;
   GtkBuilder *builder;
+
   GError *error = NULL;
   const char *root_objects[] = {
     "main_box",
@@ -381,22 +382,12 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
 
   priv->settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
 
-  gtk_dialog_add_buttons (GTK_DIALOG (dlg),
-                          _("_Close"), GTK_RESPONSE_CLOSE, NULL);
-
   gtk_window_set_title (GTK_WINDOW (dlg), _("Edit Header"));
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
-  content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
-
-  gtk_widget_set_margin_start (GTK_WIDGET (dlg), 6);
-  gtk_widget_set_margin_end (GTK_WIDGET (dlg), 6);
-  gtk_widget_set_margin_top (GTK_WIDGET (dlg), 6);
-  gtk_widget_set_margin_bottom (GTK_WIDGET (dlg), 6);
-  gtk_box_set_spacing (content_area, 6);
-
-  g_signal_connect (dlg, "response", G_CALLBACK (gtk_window_destroy), NULL);
+  content_area = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 6));
+  gtk_window_set_child (GTK_WINDOW (dlg), GTK_WIDGET (content_area));
 
   builder = gtk_builder_new ();
   gtk_builder_add_objects_from_resource (
