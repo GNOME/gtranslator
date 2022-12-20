@@ -80,6 +80,8 @@ typedef struct
   GtkWidget *dlteams;
   GtkWidget *greeter;
 
+  GtkWidget *toast_overlay;
+
   GtrTab *active_tab;
 
   gint width;
@@ -359,6 +361,7 @@ gtr_window_class_init (GtrWindowClass *klass)
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, main_box);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, stack);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, header_stack);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, toast_overlay);
 }
 
 static void
@@ -769,4 +772,11 @@ gtr_window_toggle_search_bar (GtrWindow *window)
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
 
   gtr_window_show_search_bar (window, !priv->search_bar_shown);
+}
+
+void
+gtr_window_add_toast (GtrWindow *window, AdwToast *toast)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
+  adw_toast_overlay_add_toast (ADW_TOAST_OVERLAY (priv->toast_overlay), toast);
 }

@@ -16,11 +16,15 @@
           </object>
         </child>
         <child>
-          <object class="GtkBox" id="main_box">
-            <property name="orientation">vertical</property>
+          <object class="AdwToastOverlay" id="toast_overlay">
             <child>
-              <object class="GtkStack" id="stack">
-                <property name="vexpand">1</property>
+              <object class="GtkBox" id="main_box">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkStack" id="stack">
+                    <property name="vexpand">1</property>
+                  </object>
+                </child>
               </object>
             </child>
           </object>

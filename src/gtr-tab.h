@@ -178,6 +178,8 @@ gtr_tab_get_header (GtrTab *tab);
 void gtr_tab_enable_find_button (GtrTab *tab, gboolean enable);
 void gtr_tab_hide_sort_menu (GtrTab *tab);
 
+GtkWindow *gtr_tab_get_window (GtrTab *tab);
+
 /* Semi-public methods */
 
 gchar *_gtr_tab_get_name (GtrTab * tab);

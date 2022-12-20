@@ -82,6 +82,7 @@ typedef struct
   GtrPo *po;
 
   GtkWidget *dock;
+  GtkWidget *window;
 
   /* Flap state */
   AdwFlap *hbox;
@@ -89,9 +90,6 @@ typedef struct
 
   GtkWidget *message_table;
   GtkWidget *context;
-
-  /*Info bar */
-  GtkWidget *infobar;
 
   /*Original text */
   GtkWidget *text_msgid;
@@ -421,16 +419,16 @@ gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
 
   if (message_error != NULL)
     {
-      gtr_tab_block_movement (tab);
+      g_autoptr (GtkAlertDialog) dialog = gtk_alert_dialog_new (_("There is an error in the message:"));
 
-      create_error_info_bar (_("There is an error in the message:"),
-                             message_error, tab);
+      gtr_tab_block_movement (tab);
+      gtk_alert_dialog_set_detail (GTK_ALERT_DIALOG (dialog), message_error);
+      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), gtr_tab_get_window (tab));
       g_free (message_error);
     }
   else
     {
       gtr_tab_unblock_movement (tab);
-      gtr_tab_set_info_bar (tab, NULL);
     }
 }
 
@@ -1228,6 +1226,7 @@ gtr_tab_new (GtrPo * po,
   gtr_context_init_tm (GTR_CONTEXT_PANEL (priv->context),
                        gtr_window_get_tm (GTR_WINDOW (window)));
 
+  priv->window = GTK_WIDGET (window);
   /* FIXME: make the po a property */
   priv->po = po;
   g_object_set_data (G_OBJECT (po), GTR_TAB_KEY, tab);
@@ -2102,40 +2101,6 @@ gtr_tab_go_to_number (GtrTab * tab, gint number)
 }
 
 /**
- * gtr_tab_set_info_bar:
- * @tab: a #GtrTab
- * @infobar: a #GtrMessageArea
- *
- * Sets the @infobar to be shown in the @tab.
- */
-void
-gtr_tab_set_info_bar (GtrTab * tab, GtkWidget * infobar)
-{
-  GtrTabPrivate *priv;
-
-  g_return_if_fail (GTR_IS_TAB (tab));
-
-  priv = gtr_tab_get_instance_private (tab);
-
-  if (priv->infobar == infobar)
-    return;
-
-  if (priv->infobar != NULL)
-    //gtk_widget_destroy (priv->infobar);
-    g_object_unref(priv->infobar);
-
-  priv->infobar = infobar;
-
-  if (infobar == NULL)
-    return;
-
-  gtk_box_prepend (GTK_BOX (tab), priv->infobar);
-
-  g_object_add_weak_pointer (G_OBJECT (priv->infobar),
-                             (gpointer *) & priv->infobar);
-}
-
-/**
  * gtr_tab_set_info:
  * @tab: a #GtrTab
  * @info: a string to show
@@ -2209,3 +2174,10 @@ gtr_tab_find_replace (GtrTab *tab,
   priv->find_replace_flag = set;
 }
 
+GtkWindow *
+gtr_tab_get_window (GtrTab *tab)
+{
+  GtrTabPrivate *priv;
+  priv = gtr_tab_get_instance_private (tab);
+  return GTK_WINDOW (priv->window);
+}
