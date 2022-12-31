@@ -42,7 +42,7 @@ gtr_file_chooser_new (GtkWindow * parent,
   if (dir)
   {
     g_autoptr (GFile) file = g_file_new_for_uri (dir);
-    gtk_file_dialog_set_current_folder (dialog, file);
+    gtk_file_dialog_set_initial_folder (dialog, file);
   }
 
   if (mode != FILESEL_SAVE)

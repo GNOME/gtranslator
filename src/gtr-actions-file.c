@@ -238,7 +238,7 @@ gtr_open_file_dialog_nocheck (GtrWindow *window)
                                  _("Open file for translation"),
                                  _gtr_application_get_last_dir (GTR_APP));
 
-  gtk_file_dialog_open (dialog, GTK_WINDOW (window), NULL, NULL, gtr_po_parse_files_from_dialog, window);
+  gtk_file_dialog_open (dialog, GTK_WINDOW (window), NULL, gtr_po_parse_files_from_dialog, window);
 }
 
 void
@@ -504,7 +504,7 @@ gtr_save_file_as_dialog (GtrWindow * window)
                                  FILESEL_SAVE,
                                  _("Save file as…"), NULL);
 
-  gtk_file_dialog_save (dialog, GTK_WINDOW (window), NULL, NULL, NULL, save_dialog_response_cb, window);
+  gtk_file_dialog_save (dialog, GTK_WINDOW (window), NULL, save_dialog_response_cb, window);
 }
 
 /*

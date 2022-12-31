@@ -104,7 +104,6 @@ on_search_button_clicked (GtkButton                  *button,
     dialog,
     GTK_WINDOW (dlg),
     NULL,
-    NULL,
     (GAsyncReadyCallback) (select_folder_cb),
     dlg
   );
