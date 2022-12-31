@@ -199,8 +199,8 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
   SoupStatus status_code;
   g_autoptr(GInputStream) stream = NULL;
 
-  gtk_widget_hide (priv->file_label);
-  gtk_widget_hide (priv->module_state_label);
+  gtk_widget_set_visible (priv->file_label, FALSE);
+  gtk_widget_set_visible (priv->module_state_label, FALSE);
   gtk_label_set_text (GTK_LABEL (priv->stats_label), "");
 
   /* Disable (down)load button */
@@ -448,7 +448,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   if (!priv->file_path)
     {
       gtk_label_set_text (GTK_LABEL (priv->file_label), "No file found.");
-      gtk_widget_show (priv->file_label);
+      gtk_widget_set_visible (priv->file_label, TRUE);
       return;
     }
 
@@ -459,7 +459,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   if (!priv->module_state)
     {
       gtk_label_set_text (GTK_LABEL (priv->module_state_label), _("No module state found."));
-      gtk_widget_show (priv->module_state_label);
+      gtk_widget_set_visible (priv->module_state_label, TRUE);
     }
 
   /* Get file statistics and show them to the user */
@@ -474,9 +474,9 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
 
   gtk_label_set_markup (GTK_LABEL (priv->stats_label), markup);
   gtk_label_set_text (GTK_LABEL (priv->file_label), strrchr (priv->file_path, '/') + 1);
-  gtk_widget_show (priv->file_label);
+  gtk_widget_set_visible (priv->file_label, TRUE);
   gtk_label_set_text (GTK_LABEL (priv->module_state_label), priv->module_state);
-  gtk_widget_show (priv->module_state_label);
+  gtk_widget_set_visible (priv->module_state_label, TRUE);
   /* Enable (down)load button */
   gtk_widget_set_sensitive (priv->load_button, TRUE);
 

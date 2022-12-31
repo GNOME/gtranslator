@@ -531,10 +531,10 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
   label = gtk_label_new (tab_label);
 
   scroll = gtk_scrolled_window_new ();
-  gtk_widget_show (scroll);
+  gtk_widget_set_visible (scroll, TRUE);
 
   view = gtr_view_new ();
-  gtk_widget_show (view);
+  gtk_widget_set_visible (view, TRUE);
 
   //gtk_container_add (GTK_CONTAINER (scroll), view);
   gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW(scroll), view);
@@ -606,11 +606,11 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
   if (msgctxt)
    {
      gtk_label_set_text (GTK_LABEL (priv->msgid_ctxt), msgctxt);
-     gtk_widget_show (priv->msgid_ctxt);
+     gtk_widget_set_visible (priv->msgid_ctxt, TRUE);
    }
   else
    {
-     gtk_widget_hide (priv->msgid_ctxt);
+     gtk_widget_set_visible (priv->msgid_ctxt, FALSE);
    }
 
   po = priv->po;
@@ -638,7 +638,7 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
       /*
        * Disable notebook tabs and hide widgets
        */
-      gtk_widget_hide (priv->text_plural_scroll);
+      gtk_widget_set_visible (priv->text_plural_scroll, FALSE);
       gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->trans_notebook), FALSE);
       gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->trans_notebook), 0);
       if (msgstr)
@@ -653,7 +653,7 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
     }
   else
     {
-      gtk_widget_show (priv->text_plural_scroll);
+      gtk_widget_set_visible (priv->text_plural_scroll, TRUE);
       gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->trans_notebook),
                                   TRUE);
       buf =
@@ -879,7 +879,7 @@ gtr_tab_init (GtrTab * tab)
   priv->find_replace_flag = FALSE;
   priv->progress = gtr_progress_new ();
   priv->progress_gesture_click = gtk_gesture_click_new ();
-  gtk_widget_show (GTK_WIDGET (priv->progress));
+  gtk_widget_set_visible (GTK_WIDGET (priv->progress), TRUE);
 
   gtk_widget_add_controller (priv->progress_box,
                              GTK_EVENT_CONTROLLER (priv->progress_gesture_click));
@@ -1259,7 +1259,7 @@ gtr_tab_new (GtrPo * po,
     gtr_po_emit_file_not_consistent (po);
   }
 
-  gtk_widget_show (GTK_WIDGET (tab));
+  gtk_widget_set_visible (GTK_WIDGET (tab), TRUE);
   return tab;
 }
 

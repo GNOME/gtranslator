@@ -439,7 +439,7 @@ gtr_context_init_tm (GtrContextPanel *panel,
   GtrContextPanelPrivate *priv = gtr_context_panel_get_instance_private(panel);
   priv->translation_memory_ui = gtr_translation_memory_ui_new (GTK_WIDGET (priv->tab),
                                                                tm);
-  gtk_widget_show (priv->translation_memory_ui);
+  gtk_widget_set_visible (priv->translation_memory_ui, TRUE);
   gtk_widget_set_size_request (priv->translation_memory_ui, 300, 400);
 
   GtkWidget* scrolled_win = gtk_scrolled_window_new ();

@@ -783,7 +783,7 @@ gtr_application_create_window (GtrApplication *app)
   g_signal_connect (window, "destroy",
                     G_CALLBACK (on_window_destroy_cb), app);
 
-  gtk_widget_show (GTK_WIDGET (window));
+  gtk_window_present (GTK_WINDOW (window));
 
   return window;
 }

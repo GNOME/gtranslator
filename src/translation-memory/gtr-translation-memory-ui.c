@@ -199,7 +199,7 @@ gtr_translation_memory_ui_init (GtrTranslationMemoryUi * tm_ui)
   priv->msg = NULL;
 
   priv->tree_view = gtk_tree_view_new ();
-  gtk_widget_show (priv->tree_view);
+  gtk_widget_set_visible (priv->tree_view, TRUE);
 
   model = gtk_list_store_new (N_COLUMNS, G_TYPE_INT, G_TYPE_INT, G_TYPE_STRING);
   gtk_tree_view_set_model (GTK_TREE_VIEW (priv->tree_view),

@@ -123,7 +123,7 @@ go_next_cb (GtkButton *btn, GtrGreeter *self)
   const char *child_name = NULL;
   GtrGreeterPrivate *priv = gtr_greeter_get_instance_private (GTR_GREETER (self));
 
-  gtk_widget_show (priv->back_button);
+  gtk_widget_set_visible (priv->back_button, TRUE);
   child_name = adw_view_stack_get_visible_child_name (ADW_VIEW_STACK (priv->greeter_stack));
 
   if (g_strcmp0 (child_name, "welcome") == 0)
@@ -152,7 +152,7 @@ go_back_cb (GtkButton   *btn, GtrGreeter *self)
   else if (g_strcmp0 (child_name, "profile") == 0)
     {
       adw_view_stack_set_visible_child_name (ADW_VIEW_STACK (priv->greeter_stack), "welcome");
-      gtk_widget_hide (priv->back_button);
+      gtk_widget_set_visible (priv->back_button, FALSE);
     }
 }
 

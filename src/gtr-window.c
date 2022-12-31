@@ -234,7 +234,7 @@ set_window_title (GtrWindow * window, gboolean with_path)
 
   // notebook headerbar
   header = GTK_HEADER_BAR (gtr_tab_get_header (GTR_TAB (priv->active_tab)));
-  gtk_widget_show(GTK_WIDGET(header));
+  gtk_widget_set_visible (GTK_WIDGET (header), TRUE);
 }
 
 static void
@@ -288,7 +288,7 @@ gtr_window_init (GtrWindow *window)
                        gtr_greeter_get_header (GTR_GREETER (priv->greeter)),
                        "greeter");
 
-  gtk_widget_show (priv->stack);
+  gtk_widget_set_visible (priv->stack, TRUE);
 
   // translation memory
   priv->translation_memory = GTR_TRANSLATION_MEMORY (gtr_gda_new());
@@ -420,7 +420,7 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
                           G_CALLBACK (update_undo_state),
                           window);
 
-  gtk_widget_show (GTK_WIDGET (tab));
+  gtk_widget_set_visible (GTK_WIDGET (tab), TRUE);
   gtr_window_update_statusbar_message_count(priv->active_tab,NULL, window);
 
   update_undo_state (tab, NULL, window);
