@@ -82,9 +82,14 @@
                   <object class="AdwActionRow">
                     <property name="title" translatable="true">Domain</property>
                     <child>
-                      <object class="GtkComboBoxText" id="domains_combobox">
+                      <object class="GtkDropDown" id="domains_combobox">
                         <property name="name">combo_domains</property>
                         <property name="valign">center</property>
+                        <property name="model">
+                          <object class="GListStore" id="domains_model">
+                            <property name="item-type">GtrDlTeamsDomain</property>
+                          </object>
+                        </property>
                       </object>
                     </child>
                   </object>
@@ -93,9 +98,15 @@
                   <object class="AdwActionRow">
                     <property name="title" translatable="true">Branch</property>
                     <child>
-                      <object class="GtkComboBoxText" id="branches_combobox">
+                      <object class="GtkDropDown" id="branches_combobox">
                         <property name="name">combo_branches</property>
                         <property name="valign">center</property>
+                        <property name="model">
+                          <object class="GtkStringList" id="branches_model">
+                            <items>
+                            </items>
+                          </object>
+                        </property>
                       </object>
                     </child>
                   </object>

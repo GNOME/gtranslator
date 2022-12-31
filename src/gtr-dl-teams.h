@@ -19,18 +19,23 @@
 #pragma once
 
 #include <gtk/gtk.h>
-//#include "libhandy-1/handy.h"
 #include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define GTR_TYPE_DL_TEAMS (gtr_dl_teams_get_type())
-
 G_DECLARE_FINAL_TYPE (GtrDlTeams, gtr_dl_teams, GTR, DL_TEAMS, AdwBin)
 
 GtrDlTeams* gtr_dl_teams_new         ();
 GtkWidget*  gtr_dl_teams_get_header  (GtrDlTeams *self);
 void        gtr_dl_teams_load_json   (GtrDlTeams *self);
 
-G_END_DECLS
+// Domains GObject
+#define GTR_TYPE_DL_TEAMS_DOMAIN (gtr_dl_teams_domain_get_type ())
+G_DECLARE_FINAL_TYPE (GtrDlTeamsDomain, gtr_dl_teams_domain, GTR, DL_TEAMS_DOMAIN, GObject)
 
+GtrDlTeamsDomain* gtr_dl_teams_domain_new (const char *name, const char *description);
+const char* gtr_dl_teams_domain_name (GtrDlTeamsDomain *domain);
+const char* gtr_dl_teams_domain_description (GtrDlTeamsDomain *domain);
+
+G_END_DECLS
