@@ -42,20 +42,10 @@ typedef struct
 
 struct _GtrViewer
 {
-  GtkDialog parent_instance;
+  GtkWindow parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrViewer, gtr_viewer, GTK_TYPE_DIALOG)
-
-static void
-dialog_response_handler (GtkDialog *dlg, gint res_id)
-{
-  switch (res_id)
-    {
-    default:
-      gtk_window_destroy (GTK_WINDOW (dlg));
-    }
-}
+G_DEFINE_TYPE_WITH_PRIVATE (GtrViewer, gtr_viewer, GTK_TYPE_WINDOW)
 
 static void
 gtr_viewer_init (GtrViewer *dlg)
@@ -70,18 +60,13 @@ gtr_viewer_init (GtrViewer *dlg)
   GtrViewerPrivate *priv = gtr_viewer_get_instance_private (dlg);
   GError *error = NULL;
 
-  gtk_dialog_add_buttons (GTK_DIALOG (dlg),
-                          _("_Close"), GTK_RESPONSE_CLOSE, NULL);
-
   gtk_window_set_title (GTK_WINDOW (dlg), _("Source Viewer"));
   gtk_window_set_default_size (GTK_WINDOW (dlg), 800, 600);
   gtk_window_set_resizable (GTK_WINDOW (dlg), TRUE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
-  content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
-
-  g_signal_connect (dlg,
-                    "response", G_CALLBACK (dialog_response_handler), NULL);
+  content_area = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 6));
+  gtk_window_set_child (GTK_WINDOW (dlg), GTK_WIDGET (content_area));
 
   /*Builder */
   builder = gtk_builder_new ();
@@ -115,7 +100,7 @@ gtr_viewer_init (GtrViewer *dlg)
   /* Source view */
   priv->view = gtk_source_view_new ();
   gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->view), FALSE);
-  gtk_widget_show (priv->view);
+  gtk_widget_set_visible (priv->view, TRUE);
   gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (sw), priv->view);
 
   gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW
@@ -147,23 +132,17 @@ gtr_viewer_class_init (GtrViewerClass *klass)
 static void
 error_dialog (GtkWindow *parent, const gchar *msg, ...)
 {
+  GtkAlertDialog *dialog;
   va_list ap;
-  gchar *tmp;
-  GtkWidget *dialog;
-  GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
+  g_autofree char *tmp = NULL;
 
   va_start (ap, msg);
   tmp = g_strdup_vprintf (msg, ap);
   va_end (ap);
 
-  dialog = gtk_message_dialog_new (parent,
-                                   flags,
-                                   GTK_MESSAGE_ERROR,
-                                   GTK_BUTTONS_OK, "%s", tmp);
-  g_free (tmp);
+  dialog = gtk_alert_dialog_new ("%s", tmp);
 
-  g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-  gtk_window_present (GTK_WINDOW (dialog));
+  gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (parent));
 }
 
 static gboolean
