@@ -18,8 +18,7 @@
  *   Daniel García <danigm@gnome.org>
  */
 
-#ifndef __UPLOAD_DIALOG_H__
-#define __UPLOAD_DIALOG_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
@@ -27,35 +26,9 @@
 
 G_BEGIN_DECLS
 
-/*
- * Type checking and casting macros
- */
 #define GTR_TYPE_UPLOAD_DIALOG          (gtr_upload_dialog_get_type ())
-#define GTR_UPLOAD_DIALOG(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_UPLOAD_DIALOG, GtrUploadDialog))
-#define GTR_UPLOAD_DIALOG_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_UPLOAD_DIALOG, GtrUploadDialogClass))
-#define GTR_IS_UPLOAD_DIALOG(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_UPLOAD_DIALOG))
-#define GTR_IS_UPLOAD_DIALOG_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_UPLOAD_DIALOG))
-#define GTR_UPLOAD_DIALOG_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_UPLOAD_DIALOG, GtrUploadDialogClass))
 
-/*
- * Main object structure
- */
-typedef struct _GtrUploadDialog GtrUploadDialog;
-
-struct _GtrUploadDialog
-{
-  GtkDialog parent_instance;
-};
-
-/*
- * Class definition
- */
-typedef struct _GtrUploadDialogClass GtrUploadDialogClass;
-
-struct _GtrUploadDialogClass
-{
-  GtkDialogClass parent_class;
-};
+G_DECLARE_FINAL_TYPE (GtrUploadDialog, gtr_upload_dialog, GTR, UPLOAD_DIALOG, GtkWindow)
 
 /*
  * Public methods
@@ -70,5 +43,3 @@ void               gtr_upload_dialog_set_loading      (GtrUploadDialog *dlg,
 GtkWidget         *gtr_upload_dialog_get_parent       (GtrUploadDialog *dlg);
 
 G_END_DECLS
-
-#endif

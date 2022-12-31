@@ -136,7 +136,7 @@ enum
   NO_OF_SIGNALS
 };
 
-guint signals[NO_OF_SIGNALS];
+static guint signals[NO_OF_SIGNALS];
 
 static gchar *message_error = NULL;
 

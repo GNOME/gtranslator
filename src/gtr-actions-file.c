@@ -364,7 +364,6 @@ end:
 
 void
 gtr_upload_file (GtkWidget *upload_dialog,
-                 int        response_id,
                  gpointer   user_data)
 {
   GtrTab *tab;
@@ -393,13 +392,6 @@ gtr_upload_file (GtkWidget *upload_dialog,
   const gchar *selected_domain;
 
   GtrWindow * window = GTR_WINDOW (user_data);
-
-  if (response_id != GTK_RESPONSE_ACCEPT)
-    {
-      gtk_window_destroy (GTK_WINDOW(upload_dialog));
-      return;
-    }
-
   upload_comment = gtr_upload_dialog_get_comment (GTR_UPLOAD_DIALOG (upload_dialog));
 
   /* Get file content */
@@ -489,7 +481,7 @@ gtr_upload_file_dialog (GtrWindow * window)
                    G_CALLBACK (gtr_upload_file),
                    window);
 
-  gtk_widget_show (GTK_WIDGET (dialog));
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 /*
@@ -669,7 +661,7 @@ gtr_close_tab (GtrTab * tab, GtrWindow * window)
                         G_CALLBACK
                         (close_confirmation_dialog_response_handler), window);
 
-      gtk_widget_show (dlg);
+      gtk_window_present (GTK_WINDOW (dlg));
     }
   else
     //_gtr_window_close_tab (window, tab);
@@ -739,7 +731,7 @@ close_all_documents (GtrWindow * window, gboolean logout_mode)
 
       g_list_free (list);
 
-      gtk_widget_show (dlg);
+      gtk_window_present (GTK_WINDOW (dlg));
     }
   else
     {
