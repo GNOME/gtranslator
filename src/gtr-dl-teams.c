@@ -132,21 +132,15 @@ gtr_dl_teams_parse_teams_json (GObject *object,
   GtrDlTeams *widget = GTR_DL_TEAMS (user_data);
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (widget);
 
-  GtkWidget *dialog;
+  GtkAlertDialog *dialog;
 
   /* Parse JSON */
   stream = soup_session_send_finish (SOUP_SESSION (object), result, &error);
 
   if (error)
     {
-      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
-                                             GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                             GTK_MESSAGE_WARNING,
-                                             GTK_BUTTONS_CLOSE,
-                                             "%s",
-                                             error->message);
-      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-      gtk_window_present (GTK_WINDOW (dialog));
+      dialog = gtk_alert_dialog_new ("%s", error->message);
+      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (priv->main_window));
       return;
     }
 
@@ -195,7 +189,7 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
   JsonObject *object;
   JsonNode *branchesNode;
   JsonNode *domainsNode;
-  GtkWidget *dialog;
+  GtkAlertDialog *dialog;
   SoupStatus status_code;
   g_autoptr(GInputStream) stream = NULL;
 
@@ -232,14 +226,8 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
           message = g_strdup (soup_message_get_reason_phrase (msg));
         }
 
-      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
-                                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_WARNING,
-                                       GTK_BUTTONS_CLOSE,
-                                       "Error loading module info: %s",
-                                       message);
-      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-      gtk_window_present (GTK_WINDOW (dialog));
+      dialog = gtk_alert_dialog_new (_("Error loading module info: %s"), message);
+      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (priv->main_window));
       return;
     }
 
@@ -314,20 +302,14 @@ gtr_dl_teams_parse_modules_json (GObject *object,
   GtrDlTeams *widget = GTR_DL_TEAMS (user_data);
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (widget);
 
-  GtkWidget *dialog;
+  GtkAlertDialog *dialog;
 
   /* Parse JSON */
   stream = soup_session_send_finish (SOUP_SESSION (object), result, &error);
   if (error)
     {
-      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
-                                             GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                             GTK_MESSAGE_WARNING,
-                                             GTK_BUTTONS_CLOSE,
-                                             "%s",
-                                             error->message);
-      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-      gtk_window_present (GTK_WINDOW (dialog));
+      dialog = gtk_alert_dialog_new ("%s", error->message);
+      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (priv->main_window));
       return;
     }
 
@@ -388,7 +370,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   JsonObject *stats_object;
   const char *format;
   char *markup;
-  GtkWidget *dialog;
+  GtkAlertDialog *dialog;
   SoupStatus status_code;
   g_autoptr(GInputStream) stream = NULL;
 
@@ -423,14 +405,8 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
           message = g_strdup (soup_message_get_reason_phrase (msg));
         }
 
-      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
-                                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_WARNING,
-                                       GTK_BUTTONS_CLOSE,
-                                       "Error loading file info: %s",
-                                       message);
-      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-      gtk_window_present (GTK_WINDOW (dialog));
+      dialog = gtk_alert_dialog_new (_("Error loading file info: %s"), message);
+      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (priv->main_window));
       return;
     }
 
@@ -505,7 +481,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   GFile *tmp_file = NULL;
   GFileIOStream *iostream = NULL;
   GOutputStream *output = NULL;
-  GtkWidget *dialog;
+  GtkAlertDialog *dialog;
   gboolean ret = FALSE;
   int file_index = 0;
   const char *dest_dir = g_get_user_special_dir (G_USER_DIRECTORY_DOWNLOAD);
@@ -553,14 +529,8 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
           message = g_strdup (soup_message_get_reason_phrase (msg));
         }
 
-      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
-                                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_WARNING,
-                                       GTK_BUTTONS_CLOSE,
-                                       "Error loading file: %s",
-                                       message);
-      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-      gtk_window_present (GTK_WINDOW (dialog));
+      dialog = gtk_alert_dialog_new (_("Error loading file: %s"), message);
+      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (priv->main_window));
       return;
     }
 
@@ -568,14 +538,8 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
 
   if (error != NULL)
     {
-      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
-                                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_WARNING,
-                                       GTK_BUTTONS_CLOSE,
-                                       "Error creating temp file: %s",
-                                       error->message);
-      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-      gtk_window_present (GTK_WINDOW (dialog));
+      dialog = gtk_alert_dialog_new (_("Error creating temp file: %s"), error->message);
+      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (priv->main_window));
       g_error_free (error);
       return;
     }
@@ -589,12 +553,8 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
 
   if (error != NULL)
     {
-      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
-                                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_WARNING,
-                                       GTK_BUTTONS_CLOSE,
-                                       "Error writing stream: %s",
-                                       error->message);
+      dialog = gtk_alert_dialog_new (_("Error writing stream: %s"), error->message);
+      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (priv->main_window));
       g_error_free (error);
       return;
     }
@@ -622,12 +582,8 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
 
   if (error != NULL)
     {
-      dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
-                                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                       GTK_MESSAGE_WARNING,
-                                       GTK_BUTTONS_CLOSE,
-                                       "Error creating tmp file %s",
-                                       error->message);
+      dialog = gtk_alert_dialog_new (_("Error creating tmp file: %s"), error->message);
+      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (priv->main_window));
       g_error_free (error);
       return;
     }
@@ -661,15 +617,17 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   GtrProfileManager *pmanager = NULL;
   GtrProfile *profile = NULL;
-  GtkWidget *dialog, *success_dialog;
+  GtkAlertDialog *dialog;
+  const char *auth_token = NULL;
+  SoupStatus status_code;
+  GError *error = NULL;
+
   g_autoptr (SoupSession) session = NULL;
   g_autoptr (SoupMessage) msg = NULL;
-  const char *auth_token = NULL;
+  g_autoptr(GInputStream) stream = NULL;
+  g_autofree gchar *message = NULL;
   g_autofree char *auth = NULL;
   g_autofree gchar *reserve_endpoint = NULL;
-  SoupStatus status_code;
-  g_autoptr(GInputStream) stream = NULL;
-  GError *error = NULL;
 
   pmanager = gtr_profile_manager_get_default ();
   profile = gtr_profile_manager_get_active_profile (pmanager);
@@ -694,8 +652,6 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
 
   if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
   {
-    g_autofree gchar *message = NULL;
-
     if (error)
       {
         message = error->message;
@@ -706,38 +662,28 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
         message = g_strdup (soup_message_get_reason_phrase (msg));
       }
 
-    dialog = gtk_message_dialog_new_with_markup (
-      GTK_WINDOW (priv->main_window),
-      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-      GTK_MESSAGE_WARNING,
-      GTK_BUTTONS_CLOSE,
+    dialog = gtk_alert_dialog_new (
       _(
         "An error occurred while reserving this module: %s\n"
-        "Maybe you've not configured your <i>l10n.gnome.org</i> "
-        "<b>token</b> correctly in your profile or you don't have "
+        "Maybe you've not configured your l10n.gnome.org "
+        "token correctly in your profile or you don't have "
         "permissions to reserve this module."
       ),
       message);
-    g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-    gtk_window_present (GTK_WINDOW (dialog));
-
+    gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (priv->main_window));
     return FALSE;
   }
 
   /* Display a message if the reserve for translation operation was successful */
-  success_dialog = gtk_message_dialog_new (GTK_WINDOW (priv->main_window),
-                                           GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                           GTK_MESSAGE_INFO,
-                                           GTK_BUTTONS_OK,
-                                           _("The file '%s.%s.%s.%s' has been successfully reserved"),
-                                           priv->selected_module,
-                                           priv->selected_branch,
-                                           priv->selected_team,
-                                           priv->selected_domain);
+  message = g_strdup_printf (
+    _("The file '%s.%s.%s.%s' has been successfully reserved"),
+    priv->selected_module,
+    priv->selected_branch,
+    priv->selected_team,
+    priv->selected_domain);
 
-  g_signal_connect (success_dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-  gtk_window_present (GTK_WINDOW (success_dialog));
   gtk_widget_set_sensitive (priv->reserve_button, FALSE);
+  gtr_window_add_toast_msg (GTR_WINDOW (priv->main_window), message);
 
   return TRUE;
 }

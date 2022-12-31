@@ -69,6 +69,7 @@ void gtr_window_show_focus_search_bar (GtrWindow *window, gboolean show);
 void gtr_window_toggle_search_bar (GtrWindow *window);
 
 void gtr_window_add_toast (GtrWindow *window, AdwToast *toast);
+void gtr_window_add_toast_msg (GtrWindow *window, const char *message);
 
 /** stack app states **/
 void gtr_window_show_projects (GtrWindow *window);

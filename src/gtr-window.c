@@ -47,6 +47,7 @@
 
 #include "codeview/gtr-codeview.h"
 
+#include <adwaita.h>
 #include <glib.h>
 #include <glib-object.h>
 #include <glib/gi18n.h>
@@ -171,18 +172,8 @@ drag_data_received_cb (GtkDropTarget * drop_target,
   gtr_open (g_value_get_object (value), window, &error);
   if (error != NULL)
     {
-      GtkWidget *dialog;
-      GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
-      /*
-       * We have to show the error in a dialog
-       */
-      dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                       flags,
-                                       GTK_MESSAGE_ERROR,
-                                       GTK_BUTTONS_CLOSE,
-                                       "%s", error->message);
-      g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-      gtk_window_present (GTK_WINDOW (dialog));
+      GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
+      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
       g_error_free (error);
     }
   return TRUE;
@@ -779,4 +770,13 @@ gtr_window_add_toast (GtrWindow *window, AdwToast *toast)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   adw_toast_overlay_add_toast (ADW_TOAST_OVERLAY (priv->toast_overlay), toast);
+}
+
+void
+gtr_window_add_toast_msg (GtrWindow *window,
+                          const char *message)
+{
+  AdwToast *toast = adw_toast_new_format ("%s", message);
+  adw_toast_set_timeout (toast, 10);
+  gtr_window_add_toast (window, toast);
 }
