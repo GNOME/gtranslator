@@ -63,7 +63,11 @@ show_info_bar (GtrTab * tab)
   const gchar * primary_text = msg_struct_temp.primary_text;
   const gchar * secondary_text = msg_struct_temp.secondary_text;
 
-  toast = adw_toast_new_format ("%s: %s", primary_text, secondary_text);
+  if (secondary_text)
+    toast = adw_toast_new_format ("%s: %s", primary_text, secondary_text);
+  else
+    toast = adw_toast_new_format ("%s", primary_text);
+
   adw_toast_set_timeout (toast, 0);
   g_signal_connect (G_OBJECT (toast), "dismissed",
                     G_CALLBACK (handle_info_bar_response), tab);
@@ -76,8 +80,8 @@ create_info_info_bar (const gchar * primary_text,
                       GtrTab * tab)
 {
   message_struct msg_struct_temp = {
-    g_strdup(primary_text),
-    g_strdup(secondary_text),
+    g_strdup (primary_text),
+    g_strdup (secondary_text),
   };
 
   if (msg_queue_arr == NULL)
