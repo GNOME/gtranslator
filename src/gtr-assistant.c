@@ -288,7 +288,7 @@ create_profiles_page1 (GtrAssistant * as)
   gtk_box_append (GTK_BOX (box), hbox);
 
   label = gtk_label_new (NULL);
-  markup = g_strdup_printf("<b>%s</b>", ("Translator name"));
+  markup = g_strdup_printf("<b>%s</b>", _("Translator name"));
   gtk_label_set_markup (GTK_LABEL (label), markup);
   g_free(markup);
   gtk_label_set_xalign (GTK_LABEL (label), 1.0);
