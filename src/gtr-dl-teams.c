@@ -728,11 +728,13 @@ gtr_dl_teams_save_combo_selected (GtkWidget  *widget,
       GtrDropDownOption *opt = GTR_DROP_DOWN_OPTION (
         gtk_drop_down_get_selected_item (GTK_DROP_DOWN (priv->modules_combobox))
       );
-      if (!opt)
-        return;
       if (priv->selected_module)
         g_free (priv->selected_module);
-      priv->selected_module = g_strdup (gtr_drop_down_option_get_name (opt));
+
+      if (opt)
+        priv->selected_module = g_strdup (gtr_drop_down_option_get_name (opt));
+      else
+        priv->selected_module = NULL;
 
       /* Reload module details on module change */
       gtr_dl_teams_load_module_details_json (widget, self);
@@ -742,25 +744,32 @@ gtr_dl_teams_save_combo_selected (GtkWidget  *widget,
       GtrDropDownOption *opt = GTR_DROP_DOWN_OPTION (
         gtk_drop_down_get_selected_item (GTK_DROP_DOWN (priv->teams_combobox))
       );
-      if (!opt)
-        return;
       if (priv->selected_team)
         g_free (priv->selected_team);
-      priv->selected_team = g_strdup (gtr_drop_down_option_get_name (opt));
+      if (opt)
+        priv->selected_team = g_strdup (gtr_drop_down_option_get_name (opt));
+      else
+        priv->selected_team = NULL;
     }
   else if (strcmp(name, "combo_branches") == 0)
     {
       int selected = gtk_drop_down_get_selected (GTK_DROP_DOWN (widget));
       if (priv->selected_branch)
         g_free (priv->selected_branch);
-      priv->selected_branch = g_strdup (gtk_string_list_get_string (priv->branches_model, selected));
+      if (selected != GTK_INVALID_LIST_POSITION)
+        priv->selected_branch = g_strdup (gtk_string_list_get_string (priv->branches_model, selected));
+      else
+        priv->selected_branch = NULL;
     }
   else if (strcmp(name, "combo_domains") == 0)
     {
       GObject *domain = gtk_drop_down_get_selected_item (GTK_DROP_DOWN (priv->domains_combobox));
       if (priv->selected_domain)
         g_free (priv->selected_domain);
-      priv->selected_domain = g_strdup (gtr_dl_teams_domain_name (GTR_DL_TEAMS_DOMAIN (domain)));
+      if (domain)
+        priv->selected_domain = g_strdup (gtr_dl_teams_domain_name (GTR_DL_TEAMS_DOMAIN (domain)));
+      else
+        priv->selected_domain = NULL;
     }
 
   /* Check if all four required values have been selected to proceed with loading PO file */
