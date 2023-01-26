@@ -14,14 +14,14 @@
 # Stephan Woidowski <swoidowski@t-online.de>, 2020.
 # Wolfgang Stöggl <c72578@yahoo.de>, 2015, 2018, 2021.
 # Philipp Kiemle <philipp.kiemle@gmail.com>, 2021-2022.
-# Jürgen Benvenuti <gastornis@posteo.org>, 2022.
+# Jürgen Benvenuti <gastornis@posteo.org>, 2022, 2023
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2022-06-08 08:25+0000\n"
-"PO-Revision-Date: 2022-06-23 14:50+0200\n"
+"POT-Creation-Date: 2023-01-25 20:32+0000\n"
+"PO-Revision-Date: 2023-01-26 12:05+0100\n"
 "Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -293,8 +293,8 @@ msgstr "Webseite des Übersetzungseditors"
 #: src/gtr-actions-file.c:217
 #, c-format
 msgid ""
-"Do you want to save changes to this file: <span weight=\"bold\" "
-"size=\"large\">%s</span>?"
+"Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
+"\">%s</span>?"
 msgstr ""
 "Wollen Sie die Änderungen an dieser Datei speichern: <span weight=\"bold\" "
 "size=\"large\">%s</span>?"
@@ -379,6 +379,10 @@ msgstr "Assistent"
 #: src/gtr-assistant.c:268
 msgid "Profile name"
 msgstr "Profilname"
+
+#: src/gtr-assistant.c:291
+msgid "Translator name"
+msgstr "Name des Übersetzers"
 
 #: src/gtr-assistant.c:314
 msgid "Translator email"
@@ -591,6 +595,11 @@ msgstr "Gettext-Übersetzungsvorlage"
 msgid "All files"
 msgstr "Alle Dateien"
 
+#: src/gtr-filter-selection.ui:61 src/gtr-filter-selection.ui:70
+#: src/gtr-lang-button.c:65
+msgid "Choose Language"
+msgstr "Sprache wählen"
+
 #: src/gtr-header-dialog.c:325
 msgid "Edit Header"
 msgstr "Kopfzeilen bearbeiten"
@@ -692,10 +701,6 @@ msgstr "Springe zu Übersetzung"
 #: src/gtr-jump-dialog.ui:33
 msgid "Enter message number:"
 msgstr "Geben Sie die Zeichenkettennummer ein:"
-
-#: src/gtr-lang-button.c:65
-msgid "Choose Language"
-msgstr "Sprache wählen"
 
 #: src/gtr-languages-fetcher.ui:49
 msgid "_Language"
