@@ -4,19 +4,115 @@
   <template class="GtrMessageTable" parent="GtkBox">
     <property name="orientation">vertical</property>
     <child>
-      <object class="GtkScrolledWindow" id="scrolledwindow1">
+      <object class="GtkScrolledWindow" id="scrolledwindow">
         <property name="vexpand">1</property>
         <property name="focusable">1</property>
         <property name="child">
-          <object class="GtkTreeView" id="treeview">
-            <property name="focusable">1</property>
-            <child internal-child="selection">
-              <object class="GtkTreeSelection" id="treeview-selection"/>
+
+
+          <object class="GtkListView" id="messages">
+            <style>
+              <class name="linked"/>
+              <class name="viewswitcher"/>
+            </style>
+            <property name="factory">
+              <object class="GtkBuilderListItemFactory">
+                <property name="bytes"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="GtkListItem">
+    <property name="child">
+      <object class="GtrMessageTableRow">
+        <binding name="msg">
+          <lookup name="item">GtkListItem</lookup>
+        </binding>
+      </object>
+    </property>
+  </template>
+</interface>
+                ]]></property>
+              </object>
+            </property>
+          </object>
+
+
+
+<!-- old column view
+          <object class="GtkColumnView" id="messages">
+            <style>
+              <class name="data-table"/>
+            </style>
+            <child>
+              <object class="GtkColumnViewColumn" id="id_column">
+                <property name="visible">false</property>
+                <property name="title" translatable="true">Id</property>
+                <property name="factory">
+                  <object class="GtkBuilderListItemFactory">
+                    <property name="bytes"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+<template class="GtkListItem">
+<property name="child">
+<object class="GtkLabel">
+<property name="xalign">0</property>
+<property name="ellipsize">end</property>
+<binding name="label">
+  <lookup name="position" type="GtrMsg">
+    <lookup name="item">GtkListItem</lookup>
+  </lookup>
+</binding>
+</object>
+</property>
+</template>
+</interface>
+                ]]></property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkColumnViewColumn" id="status_column">
+                <property name="visible">false</property>
+                <property name="title" translatable="true">Status</property>
+                <property name="factory">
+                  <object class="GtkBuilderListItemFactory">
+                    <property name="bytes"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+<template class="GtkListItem">
+<property name="child">
+<object class="GtkLabel">
+<property name="xalign">0</property>
+<property name="ellipsize">end</property>
+<binding name="label">
+  <lookup name="status_str" type="GtrMsg">
+    <lookup name="item">GtkListItem</lookup>
+  </lookup>
+</binding>
+</object>
+</property>
+</template>
+</interface>
+                ]]></property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkColumnViewColumn" id="original_column">
+                <property name="title" translatable="true">Original Message</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkColumnViewColumn" id="translation_column">
+                <property name="title" translatable="true">Translated Message</property>
+              </object>
             </child>
           </object>
+-->
+
         </property>
       </object>
     </child>
   </template>
-  <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf1"/>
 </interface>

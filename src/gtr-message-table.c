@@ -1,12 +1,13 @@
 /*
  * Copyright (C) 2007   Ignacio Casal Quinteiro <nacho.resa@gmail.com>
- *			Fatih Demir <kabalak@kabalak.net>
- *			Ross Golder <ross@golder.org>
- *			Gediminas Paulauskas <menesis@kabalak.net>
- *			Kevin Vandersloot <kfv101@psu.edu>
- *			Thomas Ziehmer <thomas@kabalak.net>
- *			Peeter Vois <peeter@kabalak.net>
- *			Seán de Búrca <leftmostcat@gmail.com>
+ *                      Fatih Demir <kabalak@kabalak.net>
+ *                      Ross Golder <ross@golder.org>
+ *                      Gediminas Paulauskas <menesis@kabalak.net>
+ *                      Kevin Vandersloot <kfv101@psu.edu>
+ *                      Thomas Ziehmer <thomas@kabalak.net>
+ *                      Peeter Vois <peeter@kabalak.net>
+ *                      Seán de Búrca <leftmostcat@gmail.com>
+ *                      Daniel Garcia Moreno <danigm@gnome.org>
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -27,7 +28,6 @@
 #endif
 
 #include "gtr-message-table.h"
-#include "gtr-message-table-model.h"
 #include "gtr-msg.h"
 #include "gtr-po.h"
 #include "gtr-tab.h"
@@ -46,237 +46,122 @@ enum
 
 typedef struct
 {
-  GtkWidget *treeview;
-  GtrMessageTableModel *store;
-  GtkTreeModel *sort_model;
+  GtkWidget *messages;
+  GListStore *store;
+  GtkSortListModel *sort_model;
+  GtkSingleSelection *selection;
+
+  // Sorters
+  GtkSorter *id_sorter;
+  GtkSorter *status_sorter;
+  GtkSorter *msg_sorter;
+  GtkSorter *translation_sorter;
 
   GtrTab *tab;
   GtrMessageTableSortBy sort_status;
 } GtrMessageTablePrivate;
 
+struct _GtrMessageTable
+{
+  GtkBox parent_instance;
+};
+
 G_DEFINE_TYPE_WITH_PRIVATE (GtrMessageTable, gtr_message_table, GTK_TYPE_BOX)
 
-static void
-colorize_cell (GtkTreeViewColumn *tree_column,
-               GtkCellRenderer *cell,
-               GtkTreeModel *tree_model,
-               GtkTreeIter *iter,
-               gpointer data)
+static gboolean
+scroll_to_selected (GtrMessageTable * table)
 {
-  GtrMsg *msg;
-  gchar *message_error = NULL;
+  GtkListView *list = NULL;
+  int selected = 0;
+  GtrMessageTablePrivate *priv;
 
-  // TODO: use css for colors!
-  GdkRGBA translated, fuzzy, untranslated, bg_color, fg_color;
-  GtkStyleContext *style_context;
-  style_context = gtk_widget_get_style_context (GTK_WIDGET (data));
-  gtk_style_context_lookup_color (style_context, "theme_fg_color", &translated);
-  gtk_style_context_lookup_color (style_context, "warning_color", &fuzzy);
-  gtk_style_context_lookup_color (style_context, "error_color", &untranslated);
-  gtk_style_context_lookup_color (style_context, "theme_bg_color", &bg_color);
-  gtk_style_context_lookup_color (style_context, "theme_selected_fg_color", &fg_color);
+  priv = gtr_message_table_get_instance_private (table);
+  selected = gtk_single_selection_get_selected (GTK_SINGLE_SELECTION (priv->selection));
 
-  gtk_tree_model_get (tree_model, iter,
-                      GTR_MESSAGE_TABLE_MODEL_POINTER_COLUMN, &msg,
-                      -1);
+  if (selected == GTK_INVALID_LIST_POSITION)
+    return FALSE;
 
-  message_error = gtr_msg_check (msg);
-  if (message_error)
-    {
-      g_free (message_error);
-      g_object_set (cell, "background-rgba", &untranslated, NULL);
-      g_object_set (cell, "foreground-rgba", &fg_color, NULL);
-      g_object_set (cell, "style", PANGO_STYLE_NORMAL, NULL);
-      g_object_set (cell, "weight", PANGO_WEIGHT_BOLD, NULL);
-    }
-  else if (gtr_msg_is_fuzzy (msg))
-    {
-      g_object_set (cell, "background-rgba", &bg_color, NULL);
-      g_object_set (cell, "foreground-rgba", &fuzzy, NULL);
-      g_object_set (cell, "style", PANGO_STYLE_ITALIC, NULL);
-      g_object_set (cell, "weight", PANGO_WEIGHT_NORMAL, NULL);
-    }
-  else if (gtr_msg_is_translated (msg))
-    {
-      g_object_set (cell, "background-rgba", &bg_color, NULL);
-      g_object_set (cell, "foreground-rgba", &translated, NULL);
-      g_object_set (cell, "style", PANGO_STYLE_NORMAL, NULL);
-      g_object_set (cell, "weight", PANGO_WEIGHT_NORMAL, NULL);
-    }
-  else
-    {
-      g_object_set (cell, "background-rgba", &bg_color, NULL);
-      g_object_set (cell, "foreground-rgba", &untranslated, NULL);
-      g_object_set (cell, "style", PANGO_STYLE_NORMAL, NULL);
-      g_object_set (cell, "weight", PANGO_WEIGHT_BOLD, NULL);
-    }
+  gtk_widget_activate_action (GTK_WIDGET (priv->messages), "list.scroll-to-item", "u", selected);
+
+  return FALSE;
 }
 
 static void
 showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrMessageTable * table)
 {
-  GtkTreePath *path;
-  GtkTreeSelection *selection;
-  GtkTreeIter iter, child_iter;
-  GtrMessageTablePrivate *priv;
-
-  priv = gtr_message_table_get_instance_private (table);
-
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->treeview));
-  gtr_message_table_get_message_iter (priv->store, msg, &child_iter);
-
-  gtk_tree_model_sort_convert_child_iter_to_iter (GTK_TREE_MODEL_SORT
-                                                  (priv->sort_model),
-                                                  &iter, &child_iter);
-
-  gtk_tree_selection_select_iter (selection, &iter);
-  path = gtk_tree_model_get_path (priv->sort_model, &iter);
-
-  gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (priv->treeview),
-                                path, NULL, TRUE, 0.5, 0.0);
-
-  gtk_tree_path_free (path);
+  g_idle_add ((GSourceFunc)scroll_to_selected, table);
 }
 
 static void
-gtr_message_table_selection_changed (GtkTreeSelection *selection,
+gtr_message_table_selection_changed (GObject *object,
+                                     GParamSpec *pspec,
                                      GtrMessageTable *table)
 {
-  GtkTreeIter iter;
-  GtkTreeModel *model;
   GtrMsg *msg;
   GtrMessageTablePrivate *priv;
 
-  g_return_if_fail (selection != NULL);
-
   priv = gtr_message_table_get_instance_private (table);
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter) == TRUE)
+  msg = gtk_single_selection_get_selected_item (GTK_SINGLE_SELECTION (object));
+  if (msg != NULL)
     {
-      gtk_tree_model_get (model, &iter,
-                          GTR_MESSAGE_TABLE_MODEL_POINTER_COLUMN, &msg, -1);
-
-      if (msg != NULL)
-        {
-          g_signal_handlers_block_by_func (priv->tab, showed_message_cb, table);
-          gtr_tab_message_go_to (priv->tab, msg,
-                                 FALSE, GTR_TAB_MOVE_NONE);
-          g_signal_handlers_unblock_by_func (priv->tab, showed_message_cb, table);
-        }
+      g_signal_handlers_block_by_func (priv->tab, showed_message_cb, table);
+      gtr_tab_message_go_to (priv->tab, msg, FALSE, GTR_TAB_MOVE_NONE);
+      g_signal_handlers_unblock_by_func (priv->tab, showed_message_cb, table);
     }
-}
-
-static void
-message_changed_cb (GtrTab * tab, GtrMsg * msg, GtrMessageTable * table)
-{
-  GtkTreePath *path;
-  GtkTreeIter iter;
-  GtrMessageTablePrivate *priv;
-
-  priv = gtr_message_table_get_instance_private (table);
-
-  if (!gtr_message_table_get_message_iter (GTR_MESSAGE_TABLE_MODEL (priv->store),
-                                           msg, &iter))
-    return;
-
-  path = gtk_tree_model_get_path (GTK_TREE_MODEL (priv->store), &iter);
-  gtr_message_table_model_update_row (GTR_MESSAGE_TABLE_MODEL (priv->store),
-                                      path);
-  gtk_tree_path_free (path);
-}
-
-static gint
-compare_by_status (gint a_status, gint b_status, gint a_pos, gint b_pos)
-{
-  if (a_status == b_status)
-    return a_pos - b_pos;
-  else
-    return a_status - b_status;
-}
-
-static gint
-model_compare_by_status (GtkTreeModel * model,
-                         GtkTreeIter * a, GtkTreeIter * b, gpointer user_data)
-{
-  gint a_status, b_status, a_pos, b_pos;
-
-  gtk_tree_model_get (model, a,
-                      GTR_MESSAGE_TABLE_MODEL_STATUS_COLUMN,
-                      &a_status,
-                      GTR_MESSAGE_TABLE_MODEL_ID_COLUMN, &a_pos, -1);
-  gtk_tree_model_get (model, b,
-                      GTR_MESSAGE_TABLE_MODEL_STATUS_COLUMN,
-                      &b_status,
-                      GTR_MESSAGE_TABLE_MODEL_ID_COLUMN, &b_pos, -1);
-
-  return compare_by_status (a_status, b_status, a_pos, b_pos);
 }
 
 static void
 gtr_message_table_init (GtrMessageTable * table)
 {
-  GtkTreeViewColumn *column;
-  GtkCellRenderer *renderer;
-  GtkTreeSelection *selection;
   GtrMessageTablePrivate *priv;
-
   priv = gtr_message_table_get_instance_private (table);
+
+  // GtkSorter to use with the GtkSortListModel
+  // Id column hidden for now
+  priv->id_sorter = GTK_SORTER (gtk_numeric_sorter_new (gtk_property_expression_new (GTR_TYPE_MSG, NULL, "position")));
+  // Status column hidden for now
+  priv->status_sorter = GTK_SORTER (gtk_string_sorter_new (gtk_property_expression_new (GTR_TYPE_MSG, NULL, "status_str")));
+  // First column, original message
+  priv->msg_sorter = GTK_SORTER (gtk_string_sorter_new (gtk_property_expression_new (GTR_TYPE_MSG, NULL, "original")));
+  // Second column, translation message
+  priv->translation_sorter = GTK_SORTER (gtk_string_sorter_new (gtk_property_expression_new (GTR_TYPE_MSG, NULL, "translation")));
+
   priv->sort_status = GTR_MESSAGE_TABLE_SORT_ID;
 
   gtk_orientable_set_orientation (GTK_ORIENTABLE (table),
                                   GTK_ORIENTATION_VERTICAL);
 
   gtk_widget_init_template (GTK_WIDGET (table));
-
-  renderer = gtk_cell_renderer_text_new ();
-  g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
-  if (gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL)
-    g_object_set (renderer, "xalign", 1.0, NULL);
-  column = gtk_tree_view_column_new_with_attributes (_("Original Message"),
-                                                     renderer,
-                                                     "text",
-                                                     GTR_MESSAGE_TABLE_MODEL_ORIGINAL_COLUMN,
-                                                     NULL);
-
-  gtk_tree_view_column_set_cell_data_func (column, renderer, colorize_cell,
-                                           table,
-                                           NULL);
-
-  gtk_tree_view_column_set_sort_column_id (column,
-                                           GTR_MESSAGE_TABLE_MODEL_ORIGINAL_COLUMN);
-  gtk_tree_view_column_set_expand (column, TRUE);
-  gtk_tree_view_column_set_resizable (column, TRUE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (priv->treeview), column);
-
-  renderer = gtk_cell_renderer_text_new ();
-  g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
-
-  column = gtk_tree_view_column_new_with_attributes (_("Translated Message"),
-                                                     renderer,
-                                                     "text",
-                                                     GTR_MESSAGE_TABLE_MODEL_TRANSLATION_COLUMN,
-                                                     NULL);
-
-  gtk_tree_view_column_set_cell_data_func (column, renderer, colorize_cell,
-                                           table,
-                                           NULL);
-
-  gtk_tree_view_column_set_sort_column_id (column,
-                                           GTR_MESSAGE_TABLE_MODEL_TRANSLATION_COLUMN);
-  gtk_tree_view_column_set_expand (column, TRUE);
-  gtk_tree_view_column_set_resizable (column, TRUE);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (priv->treeview), column);
-
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->treeview));
-  gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
-
-  g_signal_connect (G_OBJECT (selection), "changed",
-                    G_CALLBACK (gtr_message_table_selection_changed), table);
 }
 
 static void
 gtr_message_table_finalize (GObject * object)
 {
+  GtrMessageTable *table = GTR_MESSAGE_TABLE (object);
+  GtrMessageTablePrivate *priv;
+
+  priv = gtr_message_table_get_instance_private (table);
+  if (priv->store)
+    {
+      gtk_list_view_set_model (GTK_LIST_VIEW (priv->messages), NULL);
+      g_object_unref (priv->store);
+      g_object_unref (priv->selection);
+      g_object_unref (priv->sort_model);
+    }
+
+  if (priv->id_sorter)
+    {
+      g_object_unref (priv->id_sorter);
+      g_object_unref (priv->status_sorter);
+      g_object_unref (priv->msg_sorter);
+      g_object_unref (priv->translation_sorter);
+
+      priv->id_sorter = NULL;
+      priv->status_sorter = NULL;
+      priv->msg_sorter = NULL;
+      priv->translation_sorter = NULL;
+    }
+
   G_OBJECT_CLASS (gtr_message_table_parent_class)->finalize (object);
 }
 
@@ -297,8 +182,6 @@ gtr_message_table_set_property (GObject      *object,
       priv->tab = GTR_TAB (g_value_get_object (value));
       g_signal_connect (priv->tab,
                         "showed-message", G_CALLBACK (showed_message_cb), table);
-      g_signal_connect (priv->tab,
-                        "message-changed", G_CALLBACK (message_changed_cb), table);
       break;
 
     default:
@@ -353,7 +236,7 @@ gtr_message_table_class_init (GtrMessageTableClass * klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/translator/gtr-message-table.ui");
 
-  gtk_widget_class_bind_template_child_private (widget_class, GtrMessageTable, treeview);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrMessageTable, messages);
 }
 
 /**
@@ -381,33 +264,36 @@ void
 gtr_message_table_populate (GtrMessageTable * table, GtrMessageContainer * container)
 {
   GtrMessageTablePrivate *priv;
-
-  g_return_if_fail (table != NULL);
-  g_return_if_fail (container != NULL);
+  int count = 0;
+  int i = 0;
 
   priv = gtr_message_table_get_instance_private (table);
 
   if (priv->store)
     {
-      gtk_tree_view_set_model (GTK_TREE_VIEW (priv->treeview), NULL);
-      g_object_unref (priv->sort_model);
+      gtk_list_view_set_model (GTK_LIST_VIEW (priv->messages), NULL);
       g_object_unref (priv->store);
+      g_object_unref (priv->selection);
+      g_object_unref (priv->sort_model);
     }
 
-  priv->store = gtr_message_table_model_new (container);
-  priv->sort_model =
-    gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (priv->store));
+  priv->store = g_list_store_new (GTR_TYPE_MSG);
+  priv->sort_model = gtk_sort_list_model_new (G_LIST_MODEL (priv->store), NULL);
+  priv->selection = gtk_single_selection_new (G_LIST_MODEL (priv->sort_model));
 
-  gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE
-                                           (priv->sort_model),
-                                           NULL, NULL, NULL);
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (priv->sort_model),
-                                   GTR_MESSAGE_TABLE_MODEL_STATUS_COLUMN,
-                                   model_compare_by_status, NULL, NULL);
+  gtk_list_view_set_model (GTK_LIST_VIEW (priv->messages), GTK_SELECTION_MODEL (priv->selection));
+  g_signal_connect (priv->selection,
+                    "notify::selected",
+                    G_CALLBACK (gtr_message_table_selection_changed),
+                    table);
 
-  gtr_message_table_sort_by (table, priv->sort_status);
-  gtk_tree_view_set_model (GTK_TREE_VIEW (priv->treeview),
-                           priv->sort_model);
+  // Add all messages to the model
+  count = gtr_message_container_get_count (container);
+  for (i=0; i < count; i++)
+    {
+      GtrMsg *msg = gtr_message_container_get_message (container, i);
+      g_list_store_append (priv->store, msg);
+    }
 }
 
 /**
@@ -423,90 +309,76 @@ gtr_message_table_navigate (GtrMessageTable * table,
                             GtrMessageTableNavigation navigation,
                             GtrMessageTableNavigationFunc func)
 {
-  GtkTreeSelection *selection;
-  GtkTreeModel *model;
-  GtkTreePath *path;
-  GtkTreeIter iter;
-  GtrMessageTablePrivate *priv;
-  GtrMsg *msg;
-  gboolean cont = TRUE;
+  GtrMsg *msg = NULL;
+  GtrMessageTablePrivate *priv = NULL;
 
   priv = gtr_message_table_get_instance_private (table);
-
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->treeview));
-
-  if (!gtk_tree_selection_get_selected (selection, &model, &iter))
-    return NULL;
 
   switch (navigation)
     {
     case GTR_NAVIGATE_FIRST:
-      if (!gtk_tree_model_get_iter_first (model, &iter))
-        return NULL;
+      gtk_single_selection_set_selected (GTK_SINGLE_SELECTION (priv->selection), 0);
       break;
     case GTR_NAVIGATE_LAST:
       {
-        gint n_children;
-
-        n_children = gtk_tree_model_iter_n_children (model, NULL);
-
-        if (n_children <= 0)
-          return NULL;
-
-        if (!gtk_tree_model_iter_nth_child (model, &iter, NULL, n_children - 1))
-          return NULL;
+        int n_children = g_list_model_get_n_items (G_LIST_MODEL (priv->selection));
+        gtk_single_selection_set_selected (GTK_SINGLE_SELECTION (priv->selection), n_children - 1);
       }
       break;
     case GTR_NAVIGATE_NEXT:
       if (func)
         {
-          while (cont)
+          int next = gtk_single_selection_get_selected (GTK_SINGLE_SELECTION (priv->selection)) + 1;
+          while (TRUE)
             {
-              if (!gtk_tree_model_iter_next (model, &iter))
+              msg = (GtrMsg*) g_list_model_get_object (G_LIST_MODEL (priv->sort_model), next);
+              if (!msg)
                 return NULL;
 
-              gtk_tree_model_get (model, &iter,
-                                  GTR_MESSAGE_TABLE_MODEL_POINTER_COLUMN, &msg,
-                                  -1);
-
               if (func (msg))
-                cont = FALSE;
+                {
+                  gtk_single_selection_set_selected (GTK_SINGLE_SELECTION (priv->selection), next);
+                  return msg;
+                }
+
+              next += 1;
             }
         }
-      else if (!gtk_tree_model_iter_next (model, &iter))
-        return NULL;
+      else
+        {
+          int selected = gtk_single_selection_get_selected (GTK_SINGLE_SELECTION (priv->selection));
+          gtk_single_selection_set_selected (GTK_SINGLE_SELECTION (priv->selection), selected + 1);
+        }
 
       break;
     case GTR_NAVIGATE_PREV:
       if (func)
         {
-          while (cont)
+          int prev = gtk_single_selection_get_selected (GTK_SINGLE_SELECTION (priv->selection)) - 1;
+          while (TRUE)
             {
-              if (!gtk_tree_model_iter_previous (model, &iter))
+              msg = (GtrMsg*) g_list_model_get_object (G_LIST_MODEL (priv->sort_model), prev);
+              if (!msg)
                 return NULL;
 
-              gtk_tree_model_get (model, &iter,
-                                  GTR_MESSAGE_TABLE_MODEL_POINTER_COLUMN, &msg,
-                                  -1);
-
               if (func (msg))
-                cont = FALSE;
+                {
+                  gtk_single_selection_set_selected (GTK_SINGLE_SELECTION (priv->selection), prev);
+                  return msg;
+                }
+
+              prev -= 1;
             }
         }
-      else if (!gtk_tree_model_iter_previous (model, &iter))
-        return NULL;
+      else
+        {
+          int selected = gtk_single_selection_get_selected (GTK_SINGLE_SELECTION (priv->selection));
+          gtk_single_selection_set_selected (GTK_SINGLE_SELECTION (priv->selection), selected - 1);
+        }
       break;
     }
 
-  gtk_tree_selection_select_iter (selection, &iter);
-  path = gtk_tree_model_get_path (model, &iter);
-  gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (priv->treeview),
-                                path, NULL, TRUE, 0.5, 0.0);
-
-  gtk_tree_model_get (model, &iter,
-                      GTR_MESSAGE_TABLE_MODEL_POINTER_COLUMN, &msg,
-                      -1);
-
+  msg = gtk_single_selection_get_selected_item (GTK_SINGLE_SELECTION (priv->selection));
   return msg;
 }
 
@@ -521,46 +393,16 @@ gtr_message_table_sort_by (GtrMessageTable *table,
   switch (sort)
     {
     case GTR_MESSAGE_TABLE_SORT_STATUS:
-      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
-                                            (priv->sort_model),
-                                            GTR_MESSAGE_TABLE_MODEL_STATUS_COLUMN,
-                                            GTK_SORT_ASCENDING);
-      break;
-    case GTR_MESSAGE_TABLE_SORT_STATUS_DESC:
-      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
-                                            (priv->sort_model),
-                                            GTR_MESSAGE_TABLE_MODEL_STATUS_COLUMN,
-                                            GTK_SORT_DESCENDING);
+      gtk_sort_list_model_set_sorter (priv->sort_model, priv->status_sorter);
       break;
     case GTR_MESSAGE_TABLE_SORT_MSGID:
-      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
-                                            (priv->sort_model),
-                                            GTR_MESSAGE_TABLE_MODEL_ORIGINAL_COLUMN,
-                                            GTK_SORT_ASCENDING);
-      break;
-    case GTR_MESSAGE_TABLE_SORT_MSGID_DESC:
-      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
-                                            (priv->sort_model),
-                                            GTR_MESSAGE_TABLE_MODEL_ORIGINAL_COLUMN,
-                                            GTK_SORT_DESCENDING);
+      gtk_sort_list_model_set_sorter (priv->sort_model, priv->msg_sorter);
       break;
     case GTR_MESSAGE_TABLE_SORT_TRANSLATED:
-      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
-                                            (priv->sort_model),
-                                            GTR_MESSAGE_TABLE_MODEL_TRANSLATION_COLUMN,
-                                            GTK_SORT_ASCENDING);
-      break;
-    case GTR_MESSAGE_TABLE_SORT_TRANSLATED_DESC:
-      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
-                                            (priv->sort_model),
-                                            GTR_MESSAGE_TABLE_MODEL_TRANSLATION_COLUMN,
-                                            GTK_SORT_DESCENDING);
+      gtk_sort_list_model_set_sorter (priv->sort_model, priv->translation_sorter);
       break;
     case GTR_MESSAGE_TABLE_SORT_ID:
     default:
-      gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
-                                            (priv->sort_model),
-                                            GTR_MESSAGE_TABLE_MODEL_ID_COLUMN,
-                                            GTK_SORT_ASCENDING);
+      gtk_sort_list_model_set_sorter (priv->sort_model, priv->id_sorter);
     }
 }

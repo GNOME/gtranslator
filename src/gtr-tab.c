@@ -36,7 +36,6 @@
 #include "gtr-application.h"
 #include "gtr-context.h"
 #include "gtr-io-error-info-bar.h"
-#include "gtr-message-table.h"
 #include "gtr-msg.h"
 #include "gtr-tab-activatable.h"
 #include "gtr-tab.h"
@@ -614,6 +613,9 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
    }
 
   po = priv->po;
+  if (!po)
+    return;
+
   gtr_po_update_current_message (po, msg);
   msgid = gtr_msg_get_msgid (msg);
   if (msgid)
@@ -827,25 +829,29 @@ on_state_notify (GtrPo      *po,
 static void
 sort_by_id_cb (GtkWidget *checkbutton, GtrTab* tab)
 {
-  gtr_tab_sort_by(tab,(GtrMessageTableSortBy) 0);
+  if (gtk_check_button_get_active (GTK_CHECK_BUTTON (checkbutton)))
+    gtr_tab_sort_by (tab, GTR_MESSAGE_TABLE_SORT_ID);
 }
 
 static void
 sort_by_status_cb (GtkWidget *checkbutton, GtrTab* tab)
 {
-  gtr_tab_sort_by(tab,(GtrMessageTableSortBy) 1);
+  if (gtk_check_button_get_active (GTK_CHECK_BUTTON (checkbutton)))
+    gtr_tab_sort_by (tab, GTR_MESSAGE_TABLE_SORT_STATUS);
 }
 
 static void
 sort_by_msgid_cb (GtkWidget *checkbutton, GtrTab* tab)
 {
-  gtr_tab_sort_by(tab,(GtrMessageTableSortBy) 3);
+  if (gtk_check_button_get_active (GTK_CHECK_BUTTON (checkbutton)))
+    gtr_tab_sort_by (tab, GTR_MESSAGE_TABLE_SORT_MSGID);
 }
 
 static void
 sort_by_translated_cb (GtkWidget *checkbutton, GtrTab* tab)
 {
-  gtr_tab_sort_by(tab,(GtrMessageTableSortBy) 5);
+  if (gtk_check_button_get_active (GTK_CHECK_BUTTON (checkbutton)))
+    gtr_tab_sort_by (tab, GTR_MESSAGE_TABLE_SORT_TRANSLATED);
 }
 
 static void

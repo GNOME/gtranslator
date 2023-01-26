@@ -29,9 +29,9 @@
 
 #include "gtr-context.h"
 #include "gtr-msg.h"
+#include "gtr-message-table.h"
 #include "gtr-po.h"
 #include "gtr-view.h"
-#include "gtr-message-table-model.h"
 #include "gtr-search-bar.h"
 
 G_BEGIN_DECLS

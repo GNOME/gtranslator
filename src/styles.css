@@ -12,12 +12,22 @@
   color: @theme_selected_bg_color;
 }
 
+.fuzzy,
 .progress_fuzzy {
   color: @warning_color;
 }
 
+.fuzzy {
+  font-style: italic;
+}
+
+.untranslated,
 .progress_untranslated {
   color: @error_color;
+}
+
+.untranslated {
+  font-weight: bold;
 }
 
 #info_label.error {

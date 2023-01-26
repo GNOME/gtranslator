@@ -25,6 +25,7 @@
 #endif
 
 #include "gtr-msg.h"
+#include "gtr-enum-types.h"
 
 #include <glib.h>
 #include <glib-object.h>
@@ -43,6 +44,19 @@ typedef struct
   gint po_position;
 } GtrMsgPrivate;
 
+enum {
+  PROP_0,
+  PROP_POSITION,
+  PROP_FUZZY,
+  PROP_TRANSLATED,
+  PROP_ORIGINAL,
+  PROP_TRANSLATION,
+  PROP_STATUS,
+  PROP_STATUS_STR,
+
+  N_PROPS
+};
+static GParamSpec *properties[N_PROPS] = { NULL, };
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrMsg, gtr_msg, G_TYPE_OBJECT)
 
@@ -72,11 +86,85 @@ gtr_msg_finalize (GObject * object)
 }
 
 static void
+gtr_msg_get_property (GObject    *object,
+                      guint       property_id,
+                      GValue     *value,
+                      GParamSpec *pspec)
+{
+  GtrMsg *self = GTR_MSG (object);
+
+  switch (property_id)
+    {
+    case PROP_POSITION:
+      g_value_set_int (value, gtr_msg_get_po_position (self));
+      break;
+
+    case PROP_FUZZY:
+      g_value_set_boolean (value, gtr_msg_is_fuzzy (self));
+      break;
+
+    case PROP_TRANSLATED:
+      g_value_set_boolean (value, gtr_msg_is_translated (self));
+      break;
+
+    case PROP_ORIGINAL:
+      g_value_set_string (value, gtr_msg_get_msgid (self));
+      break;
+
+    case PROP_TRANSLATION:
+      g_value_set_string (value, gtr_msg_get_msgstr (self));
+      break;
+
+    case PROP_STATUS:
+      g_value_set_enum (value, gtr_msg_get_status (self));
+      break;
+
+    case PROP_STATUS_STR:
+      switch (gtr_msg_get_status (self))
+        {
+          case GTR_MSG_STATUS_UNTRANSLATED:
+            g_value_set_string (value, "untranslated");
+            break;
+          case GTR_MSG_STATUS_FUZZY:
+            g_value_set_string (value, "fuzzy");
+            break;
+          case GTR_MSG_STATUS_TRANSLATED:
+          default:
+            g_value_set_string (value, "translated");
+            break;
+        }
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+      break;
+    }
+}
+
+static void
 gtr_msg_class_init (GtrMsgClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = gtr_msg_finalize;
+  object_class->get_property = gtr_msg_get_property;
+
+  properties[PROP_POSITION] =
+    g_param_spec_int ("position", NULL, NULL, 0, G_MAXINT, 0, G_PARAM_READABLE);
+  properties[PROP_FUZZY] =
+    g_param_spec_boolean ("fuzzy", NULL, NULL, FALSE, G_PARAM_READABLE);
+  properties[PROP_TRANSLATED] =
+    g_param_spec_boolean ("translated", NULL, NULL, FALSE, G_PARAM_READABLE);
+  properties[PROP_ORIGINAL] =
+    g_param_spec_string ("original", NULL, NULL, NULL, G_PARAM_READABLE);
+  properties[PROP_TRANSLATION] =
+    g_param_spec_string ("translation", NULL, NULL, NULL, G_PARAM_READABLE);
+  properties[PROP_STATUS] =
+    g_param_spec_enum ("status", NULL, NULL, GTR_TYPE_MSG_STATUS, GTR_MSG_STATUS_UNTRANSLATED, G_PARAM_READABLE);
+  properties[PROP_STATUS_STR] =
+    g_param_spec_string ("status_str", NULL, NULL, NULL, G_PARAM_READABLE);
+
+  g_object_class_install_properties (object_class, N_PROPS, properties);
 }
 
 /***************************** Public funcs ***********************************/
@@ -242,6 +330,7 @@ gtr_msg_set_fuzzy (GtrMsg * msg, gboolean fuzzy)
       po_message_set_prev_msgid (priv->message, NULL);
 
     }
+  g_object_notify (G_OBJECT (msg), "fuzzy");
 }
 
 /**
@@ -258,6 +347,7 @@ gtr_msg_set_status (GtrMsg * msg, GtrMsgStatus status)
   g_return_if_fail (GTR_IS_MSG (msg));
 
   priv->status = status;
+  g_object_notify (G_OBJECT (msg), "status");
 }
 
 /**
@@ -339,6 +429,8 @@ gtr_msg_set_msgstr (GtrMsg * msg, const gchar * msgstr)
   g_return_if_fail (msgstr != NULL);
 
   po_message_set_msgstr (priv->message, msgstr);
+  g_object_notify (G_OBJECT (msg), "translation");
+  g_object_notify (G_OBJECT (msg), "translated");
 }
 
 
@@ -377,6 +469,8 @@ gtr_msg_set_msgstr_plural (GtrMsg * msg, gint index, const gchar * msgstr)
   g_return_if_fail (msgstr != NULL);
 
   po_message_set_msgstr_plural (priv->message, index, msgstr);
+  g_object_notify (G_OBJECT (msg), "translation");
+  g_object_notify (G_OBJECT (msg), "translated");
 }
 
 
@@ -446,6 +540,7 @@ gtr_msg_set_po_position (GtrMsg * msg, gint po_position)
   g_return_if_fail (GTR_IS_MSG (msg));
 
   priv->po_position = po_position;
+  g_object_notify (G_OBJECT (msg), "position");
 }
 
 /**
@@ -630,4 +725,10 @@ gtr_msg_check (GtrMsg * msg)
   message_error = NULL;
 
   return error;
+}
+
+gboolean
+gtr_msg_compare (GtrMsg *first, GtrMsg *second)
+{
+  return g_strcmp0 (gtr_msg_get_msgid (first), gtr_msg_get_msgid (second)) == 0;
 }
