@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Ekaterine Papava <papava.e@gtu.ge>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2022-04-21 07:59+0000\n"
-"PO-Revision-Date: 2022-07-27 09:36+0200\n"
-"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"POT-Creation-Date: 2023-01-25 20:32+0000\n"
+"PO-Revision-Date: 2023-01-26 15:15+0100\n"
+"Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: \n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -44,7 +44,7 @@ msgid ""
 "code viewer."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:157
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:161
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -82,7 +82,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:39
 msgid "Auto save files"
-msgstr ""
+msgstr "ფაილების ავტომატური შენახვა"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:40
 msgid "If true, automatically save files at specified intervals."
@@ -185,10 +185,10 @@ msgstr ""
 
 #: src/codeview/gtr-codeview.c:380
 msgid "Paths:"
-msgstr ""
+msgstr "ბილიკები:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
-#: src/gtr-io-error-info-bar.c:127 src/gtr-preferences-dialog.c:664
+#: src/gtr-io-error-info-bar.c:161 src/gtr-preferences-dialog.c:664
 #: src/translation-memory/gtr-translation-memory-dialog.c:305
 msgid "_Close"
 msgstr "დახურვა"
@@ -203,11 +203,11 @@ msgstr "საწყისი კოდი"
 
 #: src/gtr-actions-app.c:58
 msgid "Current Maintainers"
-msgstr ""
+msgstr "მიმდინარე ხელმძღვანელები"
 
 #: src/gtr-actions-app.c:62
 msgid "Previous Developers"
-msgstr ""
+msgstr "ყოფილი პროგრამისტები"
 
 #: src/gtr-actions-app.c:73
 msgid "Contributors"
@@ -234,8 +234,8 @@ msgstr ""
 #: src/gtr-actions-file.c:217
 #, c-format
 msgid ""
-"Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
-"\">%s</span>?"
+"Do you want to save changes to this file: <span weight=\"bold\" "
+"size=\"large\">%s</span>?"
 msgstr ""
 
 #: src/gtr-actions-file.c:223
@@ -304,6 +304,10 @@ msgstr "დამხმარე"
 #: src/gtr-assistant.c:268
 msgid "Profile name"
 msgstr "პროფილის სახელი"
+
+#: src/gtr-assistant.c:291
+msgid "Translator name"
+msgstr "მთარგმნელის სახელი"
 
 #: src/gtr-assistant.c:314
 msgid "Translator email"
@@ -391,7 +395,7 @@ msgstr "შენიშვნები:"
 
 #: src/gtr-context.c:313
 msgid "Add Note"
-msgstr ""
+msgstr "კომენტარის დამატება"
 
 #: src/gtr-context.c:318
 msgid "Edit"
@@ -403,7 +407,7 @@ msgstr ""
 
 #: src/gtr-context.c:366
 msgid "Context:"
-msgstr ""
+msgstr "კონტექსტი:"
 
 #: src/gtr-context.c:369
 msgid "Format:"
@@ -463,7 +467,7 @@ msgstr ""
 
 #: src/gtr-dl-teams.ui:143 src/gtr-projects.ui:58
 msgid "Open…"
-msgstr ""
+msgstr "გახსნა…"
 
 #: src/gtr-dl-teams.ui:166 src/gtr-notebook.ui:410 src/gtr-projects.ui:91
 msgid "Main Menu"
@@ -491,7 +495,7 @@ msgstr "გასვლა"
 
 #: src/gtr-file-dialogs.c:47
 msgid "_Open"
-msgstr ""
+msgstr "_გახსნა"
 
 #: src/gtr-file-dialogs.c:59
 msgid "Gettext translation"
@@ -505,9 +509,14 @@ msgstr ""
 msgid "All files"
 msgstr "ყველა ფაილი"
 
+#: src/gtr-filter-selection.ui:61 src/gtr-filter-selection.ui:70
+#: src/gtr-lang-button.c:65
+msgid "Choose Language"
+msgstr "აირჩიეთ ენა"
+
 #: src/gtr-header-dialog.c:325
 msgid "Edit Header"
-msgstr ""
+msgstr "თავსართის ჩასწორება"
 
 #: src/gtr-header-dialog.ui:71
 msgid "Use my options to complete the following entries:"
@@ -527,7 +536,7 @@ msgstr "ე_ნა:"
 
 #: src/gtr-header-dialog.ui:136
 msgid "Language _code:"
-msgstr ""
+msgstr "ენის _კოდი:"
 
 #: src/gtr-header-dialog.ui:149
 msgid "Language _Team email:"
@@ -593,7 +602,7 @@ msgstr ""
 msgid "Damned Lies Info"
 msgstr ""
 
-#: src/gtr-io-error-info-bar.c:150 src/gtr-jump-dialog.c:88
+#: src/gtr-io-error-info-bar.c:155 src/gtr-jump-dialog.c:88
 #: src/gtr-profile-dialog.c:173 src/gtr-profile-dialog.c:178
 #: src/translation-memory/gtr-translation-memory-dialog.c:104
 msgid "_OK"
@@ -601,14 +610,10 @@ msgstr "_დიახ"
 
 #: src/gtr-jump-dialog.c:92
 msgid "Go to Message"
-msgstr ""
+msgstr "შეტყობინებაზე გადასვლა"
 
 #: src/gtr-jump-dialog.ui:33
 msgid "Enter message number:"
-msgstr ""
-
-#: src/gtr-lang-button.c:65
-msgid "Choose Language"
 msgstr ""
 
 #: src/gtr-languages-fetcher.ui:49
@@ -629,7 +634,7 @@ msgstr ""
 
 #: src/gtr-languages-fetcher.ui:105
 msgid "_Plural forms"
-msgstr ""
+msgstr "_მრავლობითი ფორმები"
 
 #: src/gtr-languages-fetcher.ui:203
 msgid "_Edit options manually"
@@ -637,7 +642,7 @@ msgstr ""
 
 #: src/gtr-message-table.c:234
 msgid "Original Message"
-msgstr ""
+msgstr "საწყისი შეტყობინება"
 
 #: src/gtr-message-table.c:253
 msgid "Translated Message"
@@ -673,7 +678,7 @@ msgstr "ძებნა და ჩანაცვლება"
 
 #: src/gtr-notebook.ui:123 src/gtr-projects.ui:147
 msgid "Build translation memory"
-msgstr ""
+msgstr "თარგმანის მეხსიერების აგება"
 
 #: src/gtr-notebook.ui:133
 msgid "Edit header"
@@ -722,7 +727,7 @@ msgstr ""
 
 #: src/gtr-notebook.ui:423
 msgid "Find (<Ctrl><f>)"
-msgstr ""
+msgstr "ძებნა (<Ctrl><f>)"
 
 #: src/gtr-notebook.ui:453
 msgid "Save"
@@ -740,27 +745,27 @@ msgstr ""
 msgid "Upload file (<Ctrl>b)"
 msgstr ""
 
-#: src/gtr-po.c:492
+#: src/gtr-po.c:509
 #, c-format
 msgid "The file is empty"
 msgstr "ფაილი ცარიელია"
 
-#: src/gtr-po.c:501
+#: src/gtr-po.c:518
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr ""
 
-#: src/gtr-po.c:572
+#: src/gtr-po.c:589
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr ""
 
-#: src/gtr-po.c:588 src/gtr-po.c:607
+#: src/gtr-po.c:605 src/gtr-po.c:624
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr ""
 
-#: src/gtr-po.c:638
+#: src/gtr-po.c:655
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -768,17 +773,17 @@ msgid ""
 "Editor"
 msgstr ""
 
-#: src/gtr-po.c:706
+#: src/gtr-po.c:723
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr ""
 
-#: src/gtr-po.c:753
+#: src/gtr-po.c:770
 #, c-format
 msgid "No messages obtained from parser."
 msgstr ""
 
-#: src/gtr-po.c:807
+#: src/gtr-po.c:824
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -786,17 +791,17 @@ msgid ""
 "Your file should likely be named “%s.po”."
 msgstr ""
 
-#: src/gtr-po.c:835
+#: src/gtr-po.c:852
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr ""
 
-#: src/gtr-po.c:854
+#: src/gtr-po.c:871
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr ""
 
-#: src/gtr-po.c:866
+#: src/gtr-po.c:883
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr ""
@@ -941,7 +946,7 @@ msgstr ""
 
 #: src/gtr-profile-dialog.ui:240
 msgid "Language Settings"
-msgstr ""
+msgstr "ენის პარამეტრები"
 
 #: src/gtr-projects.ui:35
 msgid "Open a new .po file or drag & drop here"
@@ -999,47 +1004,47 @@ msgstr "სიტყვების გადატანა"
 msgid "Close document"
 msgstr "დოკუმენტის დახურვა"
 
-#: src/gtr-tab.c:347
+#: src/gtr-tab.c:419
 msgid "There is an error in the message:"
 msgstr ""
 
-#: src/gtr-tab.c:561 src/gtr-tab.c:687
+#: src/gtr-tab.c:632 src/gtr-tab.c:767
 msgid "fuzzy"
 msgstr "გადღაბნილი"
 
-#: src/gtr-tab.c:717
+#: src/gtr-tab.c:797
 #, c-format
 msgid "Plural %d"
 msgstr "მრავლობითი %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1307
+#: src/gtr-tab.c:1425
 msgid "Path:"
 msgstr "მისამართი:"
 
-#: src/gtr-tab.c:1974
+#: src/gtr-tab.c:2090
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr ""
 
-#: src/gtr-tab.c:1975
+#: src/gtr-tab.c:2091
 #, c-format
 msgid "Translated: %d"
 msgstr "თარგმნილია: %d"
 
-#: src/gtr-tab.c:1976
+#: src/gtr-tab.c:2092
 #, c-format
 msgid "Untranslated: %d"
 msgstr "უთარგმნელი: %d"
 
-#: src/gtr-tab.c:1977
+#: src/gtr-tab.c:2093
 #, c-format
 msgid "Fuzzy: %d"
-msgstr ""
+msgstr "ბუნდოვანი: %d"
 
 #: src/gtr-tab.ui:74
 msgid "_Original Message"
-msgstr ""
+msgstr "_საწყისი შეტყობინება"
 
 #: src/gtr-tab.ui:166
 msgid "Translate_d Text"
