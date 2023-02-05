@@ -1,18 +1,18 @@
 # Polish translation for gtranslator.
-# Copyright © 2001-2022 the gtranslator authors.
+# Copyright © 2001-2023 the gtranslator authors.
 # This file is distributed under the same license as the gtranslator package.
 # Grzegorz Kowal <g_kowal@poczta.onet.pl>, 2001.
 # Zbigniew Chyla <chyla@alice.ci.pwr.wroc.pl>, 2001-2003.
 # Artur Flinta <aflinta@at.kernel.pl>, 2003.
-# Piotr Drąg <piotrdrag@gmail.com>, 2011-2022.
-# Aviary.pl <community-poland@mozilla.org>, 2011-2022.
+# Piotr Drąg <piotrdrag@gmail.com>, 2011-2023.
+# Aviary.pl <community-poland@mozilla.org>, 2011-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2022-04-18 14:59+0000\n"
-"PO-Revision-Date: 2022-04-24 12:02+0200\n"
+"POT-Creation-Date: 2023-01-25 20:32+0000\n"
+"PO-Revision-Date: 2023-02-05 14:55+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -57,7 +57,7 @@ msgstr ""
 "takimi jak alternatywny język, wstawianie znaczników, integracja z systemem "
 "Subversion i przeglądarka kodu źródłowego."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:157
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:161
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -225,7 +225,7 @@ msgid "Paths:"
 msgstr "Ścieżki:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
-#: src/gtr-io-error-info-bar.c:127 src/gtr-preferences-dialog.c:664
+#: src/gtr-io-error-info-bar.c:161 src/gtr-preferences-dialog.c:664
 #: src/translation-memory/gtr-translation-memory-dialog.c:305
 msgid "_Close"
 msgstr "Za_mknij"
@@ -268,8 +268,8 @@ msgstr ""
 "Grzegorz Kowal <g_kowal@poczta.onet.pl>, 2001\n"
 "Zbigniew Chyla <chyla@alice.ci.pwr.wroc.pl>, 2001-2003\n"
 "Artur Flinta <aflinta@at.kernel.pl>, 2003\n"
-"Piotr Drąg <piotrdrag@gmail.com>, 2011-2022\n"
-"Aviary.pl <community-poland@mozilla.org>, 2011-2022"
+"Piotr Drąg <piotrdrag@gmail.com>, 2011-2023\n"
+"Aviary.pl <community-poland@mozilla.org>, 2011-2023"
 
 #: src/gtr-actions-app.c:114
 msgid "Translation Editor Web Site"
@@ -363,6 +363,10 @@ msgstr "Asystent"
 #: src/gtr-assistant.c:268
 msgid "Profile name"
 msgstr "Nazwa profilu"
+
+#: src/gtr-assistant.c:291
+msgid "Translator name"
+msgstr "Imię i nazwisko tłumacza"
 
 #: src/gtr-assistant.c:314
 msgid "Translator email"
@@ -576,6 +580,11 @@ msgstr "Szablon tłumaczenia gettext"
 msgid "All files"
 msgstr "Wszystkie pliki"
 
+#: src/gtr-filter-selection.ui:61 src/gtr-filter-selection.ui:70
+#: src/gtr-lang-button.c:65
+msgid "Choose Language"
+msgstr "Wybór języka"
+
 #: src/gtr-header-dialog.c:325
 msgid "Edit Header"
 msgstr "Modyfikowanie nagłówka"
@@ -664,7 +673,7 @@ msgstr "Stan DL:"
 msgid "Damned Lies Info"
 msgstr "Informacje z serwisu Damned Lies"
 
-#: src/gtr-io-error-info-bar.c:150 src/gtr-jump-dialog.c:88
+#: src/gtr-io-error-info-bar.c:155 src/gtr-jump-dialog.c:88
 #: src/gtr-profile-dialog.c:173 src/gtr-profile-dialog.c:178
 #: src/translation-memory/gtr-translation-memory-dialog.c:104
 msgid "_OK"
@@ -677,10 +686,6 @@ msgstr "Przejście do komunikatu"
 #: src/gtr-jump-dialog.ui:33
 msgid "Enter message number:"
 msgstr "Numer komunikatu:"
-
-#: src/gtr-lang-button.c:65
-msgid "Choose Language"
-msgstr "Wybór języka"
 
 #: src/gtr-languages-fetcher.ui:49
 msgid "_Language"
@@ -811,27 +816,27 @@ msgstr "Zapisuje jako (<Ctrl><Shift>S)"
 msgid "Upload file (<Ctrl>b)"
 msgstr "Wysyła plik (<Ctrl>b)"
 
-#: src/gtr-po.c:492
+#: src/gtr-po.c:509
 #, c-format
 msgid "The file is empty"
 msgstr "Plik jest pusty"
 
-#: src/gtr-po.c:501
+#: src/gtr-po.c:518
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Otwarcie pliku „%s” się nie powiodło: %s"
 
-#: src/gtr-po.c:572
+#: src/gtr-po.c:589
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Nie można konwertować z zestawu znaków „%s” na UTF-8"
 
-#: src/gtr-po.c:588 src/gtr-po.c:607
+#: src/gtr-po.c:605 src/gtr-po.c:624
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Nie można przechować pliku tymczasowego do konwersji kodowania"
 
-#: src/gtr-po.c:638
+#: src/gtr-po.c:655
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -842,17 +847,17 @@ msgstr ""
 "wiersza poleceń msgconv lub iconv przed otwarciem tego pliku za pomocą tego "
 "programu"
 
-#: src/gtr-po.c:706
+#: src/gtr-po.c:723
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Biblioteka gettext zwróciła pustą listę domen komunikatów."
 
-#: src/gtr-po.c:753
+#: src/gtr-po.c:770
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Brak komunikatów uzyskanych z parsera."
 
-#: src/gtr-po.c:807
+#: src/gtr-po.c:824
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -863,17 +868,17 @@ msgstr ""
 "Pliki .pot są tworzone w procesie kompilacji.\n"
 "Plik powinien prawdopodobnie nosić nazwę „%s.po”."
 
-#: src/gtr-po.c:835
+#: src/gtr-po.c:852
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Plik %s jest tylko do odczytu i nie może zostać zastąpiony"
 
-#: src/gtr-po.c:854
+#: src/gtr-po.c:871
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "W pliku PO jest błąd: %s"
 
-#: src/gtr-po.c:866
+#: src/gtr-po.c:883
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Wystąpił błąd podczas zapisywania pliku PO: %s"
@@ -1080,40 +1085,40 @@ msgstr "Automatyczny powrót do początku"
 msgid "Close document"
 msgstr "Zamyka dokument"
 
-#: src/gtr-tab.c:347
+#: src/gtr-tab.c:419
 msgid "There is an error in the message:"
 msgstr "Wystąpił błąd w komunikacie:"
 
-#: src/gtr-tab.c:561 src/gtr-tab.c:687
+#: src/gtr-tab.c:632 src/gtr-tab.c:767
 msgid "fuzzy"
 msgstr "niepewne"
 
-#: src/gtr-tab.c:717
+#: src/gtr-tab.c:797
 #, c-format
 msgid "Plural %d"
 msgstr "%d. liczba mnoga"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1307
+#: src/gtr-tab.c:1425
 msgid "Path:"
 msgstr "Ścieżka:"
 
-#: src/gtr-tab.c:1974
+#: src/gtr-tab.c:2090
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Przetłumaczone: %0.2f%%"
 
-#: src/gtr-tab.c:1975
+#: src/gtr-tab.c:2091
 #, c-format
 msgid "Translated: %d"
 msgstr "Przetłumaczone: %d"
 
-#: src/gtr-tab.c:1976
+#: src/gtr-tab.c:2092
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Nieprzetłumaczone: %d"
 
-#: src/gtr-tab.c:1977
+#: src/gtr-tab.c:2093
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Niepewne: %d"
