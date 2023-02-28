@@ -6,7 +6,6 @@ sources = [
   'gtr-edit-po.page',
   'gtr-faq.page',
   'gtr-goto-string-po.page',
-  'gtr-join-users.page',
   'gtr-main-window.page',
   'gtr-open-po.page',
   'gtr-profiles.page',
