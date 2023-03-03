@@ -1,5 +1,5 @@
 # Hungarian translation for gtranslator.
-# Copyright (C) 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022 Free Software Foundation, Inc.
+# Copyright (C) 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gtranslator package.
 #
 # Kristóf Kiszel <ulysses at kubuntu dot org>, 2012.
@@ -7,13 +7,13 @@
 # Bence Lukács <lukacs.bence1 at gmail dot com>, 2012.
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2012.
 # Balázs Meskó <mesko.balazs at fsf dot hu>, 2018, 2020.
-# Balázs Úr <ur.balazs at fsf dot hu>, 2013, 2014, 2016, 2017, 2019, 2020, 2021, 2022.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2013, 2014, 2016, 2017, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2022-07-25 09:59+0000\n"
-"PO-Revision-Date: 2022-09-01 02:15+0200\n"
+"POT-Creation-Date: 2023-01-25 20:32+0000\n"
+"PO-Revision-Date: 2023-03-03 02:14+0100\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 19.12.3\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -95,8 +95,8 @@ msgstr "Az elavult bejegyzések el legyenek-e távolítva mentéskor"
 msgid ""
 "If true, the obsolete entries will be removed from the file after saving"
 msgstr ""
-"Ha igaz, akkor az elavult bejegyzések el lesznek távolítva a fájlból a mentés"
-" után"
+"Ha igaz, akkor az elavult bejegyzések el lesznek távolítva a fájlból a "
+"mentés után"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:39
 msgid "Auto save files"
@@ -365,6 +365,11 @@ msgstr "Varázsló"
 msgid "Profile name"
 msgstr "Profil neve"
 
+#: src/gtr-assistant.c:291
+#| msgid "Translator’s _name:"
+msgid "Translator name"
+msgstr "Fordító neve"
+
 #: src/gtr-assistant.c:314
 msgid "Translator email"
 msgstr "Fordító e-mail címe"
@@ -573,6 +578,11 @@ msgstr "Gettext fordítási sablon"
 msgid "All files"
 msgstr "Minden fájl"
 
+#: src/gtr-filter-selection.ui:61 src/gtr-filter-selection.ui:70
+#: src/gtr-lang-button.c:65
+msgid "Choose Language"
+msgstr "Válasszon nyelvet"
+
 #: src/gtr-header-dialog.c:325
 msgid "Edit Header"
 msgstr "Fejléc szerkesztése"
@@ -598,7 +608,6 @@ msgid "Language _code:"
 msgstr "Nyelv _kódja:"
 
 #: src/gtr-header-dialog.ui:149
-#| msgid "Language gro_up email:"
 msgid "Language _Team email:"
 msgstr "Nyelvi _csapat e-mailje:"
 
@@ -675,10 +684,6 @@ msgstr "Ugrás üzenetre"
 #: src/gtr-jump-dialog.ui:33
 msgid "Enter message number:"
 msgstr "Adja meg az üzenet számát:"
-
-#: src/gtr-lang-button.c:65
-msgid "Choose Language"
-msgstr "Válasszon nyelvet"
 
 #: src/gtr-languages-fetcher.ui:49
 msgid "_Language"
@@ -1187,7 +1192,6 @@ msgid "Keyboard Shortcuts"
 msgstr "Gyorsbillentyűk"
 
 #: src/help-overlay.ui:54
-#| msgid "Help"
 msgctxt "shortcut window"
 msgid "Help"
 msgstr "Súgó"
