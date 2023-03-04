@@ -11,17 +11,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.9.9\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2022-04-24 16:43+0000\n"
-"PO-Revision-Date: 2022-04-30 22:10+1000\n"
-"Last-Translator: Ser82-png <sw@atrus.ru>\n"
+"POT-Creation-Date: 2023-01-25 20:32+0000\n"
+"PO-Revision-Date: 2023-02-01 12:22+0300\n"
+"Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -56,7 +56,7 @@ msgstr ""
 "Gtranslator также включает в себя систему модулей: альтернативный язык, "
 "вставка тэгов, интеграция с subversion и просмотрщик исходного кода."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:157
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:161
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -220,7 +220,7 @@ msgid "Paths:"
 msgstr "Пути:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
-#: src/gtr-io-error-info-bar.c:127 src/gtr-preferences-dialog.c:664
+#: src/gtr-io-error-info-bar.c:161 src/gtr-preferences-dialog.c:664
 #: src/translation-memory/gtr-translation-memory-dialog.c:305
 msgid "_Close"
 msgstr "_Закрыть"
@@ -269,11 +269,11 @@ msgstr "Домашняя страница Translation Editor"
 #: src/gtr-actions-file.c:217
 #, c-format
 msgid ""
-"Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
-"\">%s</span>?"
+"Do you want to save changes to this file: <span weight=\"bold\" "
+"size=\"large\">%s</span>?"
 msgstr ""
-"Вы хотите сохранить изменения в файл: <span weight=\"bold\" size=\"large\">"
-"%s</span>?"
+"Вы хотите сохранить изменения в файл: <span weight=\"bold\" "
+"size=\"large\">%s</span>?"
 
 #: src/gtr-actions-file.c:223
 msgid "If you don't save, all your unsaved changes will be permanently lost."
@@ -354,6 +354,10 @@ msgstr "Мастер"
 msgid "Profile name"
 msgstr "Название профиля"
 
+#: src/gtr-assistant.c:291
+msgid "Translator name"
+msgstr "Имя переводчика"
+
 #: src/gtr-assistant.c:314
 msgid "Translator email"
 msgstr "Эл. почта переводчика"
@@ -383,7 +387,7 @@ msgstr "Закрыть _без сохранения"
 #: src/gtr-preferences-dialog.c:460 src/gtr-profile-dialog.c:72
 #: src/translation-memory/gtr-translation-memory-dialog.c:105
 msgid "_Cancel"
-msgstr "О_тмена"
+msgstr "_Отменить"
 
 #: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:106
 #: src/gtr-file-dialogs.c:46
@@ -539,15 +543,15 @@ msgstr "Параметры"
 
 #: src/gtr-dl-teams.ui:235 src/gtr-notebook.ui:177 src/gtr-projects.ui:174
 msgid "Keyboard Shortcuts"
-msgstr "Комбинация клавиш"
+msgstr "Комбинации клавиш"
 
 #: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:186 src/gtr-projects.ui:188
 msgid "About"
-msgstr "О программе"
+msgstr "О приложении"
 
 #: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:204 src/gtr-projects.ui:216
 msgid "Quit"
-msgstr "Выйти"
+msgstr "Закрыть"
 
 #: src/gtr-file-dialogs.c:47
 msgid "_Open"
@@ -565,13 +569,18 @@ msgstr "Шаблон перевода Gettext"
 msgid "All files"
 msgstr "Все файлы"
 
+#: src/gtr-filter-selection.ui:61 src/gtr-filter-selection.ui:70
+#: src/gtr-lang-button.c:65
+msgid "Choose Language"
+msgstr "Выберите язык"
+
 #: src/gtr-header-dialog.c:325
 msgid "Edit Header"
 msgstr "Правка заголовка"
 
 #: src/gtr-header-dialog.ui:71
 msgid "Use my options to complete the following entries:"
-msgstr "Использовать личные настройки для заполнения полей заголовка"
+msgstr "Использовать мои параметры для заполнения следующих записей:"
 
 #: src/gtr-header-dialog.ui:95
 msgid "Translator’s _name:"
@@ -653,7 +662,7 @@ msgstr "Статус DL:"
 msgid "Damned Lies Info"
 msgstr "Информация Damned Lies"
 
-#: src/gtr-io-error-info-bar.c:150 src/gtr-jump-dialog.c:88
+#: src/gtr-io-error-info-bar.c:155 src/gtr-jump-dialog.c:88
 #: src/gtr-profile-dialog.c:173 src/gtr-profile-dialog.c:178
 #: src/translation-memory/gtr-translation-memory-dialog.c:104
 msgid "_OK"
@@ -667,17 +676,13 @@ msgstr "Перейти к сообщению"
 msgid "Enter message number:"
 msgstr "Введите номер сообщения:"
 
-#: src/gtr-lang-button.c:65
-msgid "Choose Language"
-msgstr "Выберите язык"
-
 #: src/gtr-languages-fetcher.ui:49
 msgid "_Language"
 msgstr "_Язык"
 
 #: src/gtr-languages-fetcher.ui:63
 msgid "Language _code"
-msgstr "_Код языка:"
+msgstr "_Код языка"
 
 #: src/gtr-languages-fetcher.ui:77
 msgid "Character _set"
@@ -685,7 +690,7 @@ msgstr "_Кодировка"
 
 #: src/gtr-languages-fetcher.ui:91
 msgid "Transfer en_coding"
-msgstr "Кодировка для _передачи:"
+msgstr "Кодировка для _передачи"
 
 #: src/gtr-languages-fetcher.ui:105
 msgid "_Plural forms"
@@ -800,27 +805,27 @@ msgstr "Сохранить как (<Ctrl><Shift>s)"
 msgid "Upload file (<Ctrl>b)"
 msgstr "Загрузить файл (<Ctrl>b)"
 
-#: src/gtr-po.c:492
+#: src/gtr-po.c:509
 #, c-format
 msgid "The file is empty"
 msgstr "Файл пуст"
 
-#: src/gtr-po.c:501
+#: src/gtr-po.c:518
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Сбой при открытии файла «%s»: %s"
 
-#: src/gtr-po.c:572
+#: src/gtr-po.c:589
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Не удалось преобразовать из кодировки '%s' в UTF-8"
 
-#: src/gtr-po.c:588 src/gtr-po.c:607
+#: src/gtr-po.c:605 src/gtr-po.c:624
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Не удалось создать временный файл для преобразования кодировки"
 
-#: src/gtr-po.c:638
+#: src/gtr-po.c:655
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -831,17 +836,17 @@ msgstr ""
 "инструменты командной строки msgconv или iconv перед открытием этого файла в "
 "GNOME Translation Editor"
 
-#: src/gtr-po.c:706
+#: src/gtr-po.c:723
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext вернул пустой список сообщений домена."
 
-#: src/gtr-po.c:753
+#: src/gtr-po.c:770
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Не получено сообщений от анализатора."
 
-#: src/gtr-po.c:807
+#: src/gtr-po.c:824
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -852,17 +857,17 @@ msgstr ""
 "Учтите, что такие файлы создаются при компиляции.\n"
 "Файл перевода должен иметь расширение “po“, скорее всего “%s.po“."
 
-#: src/gtr-po.c:835
+#: src/gtr-po.c:852
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Файл %s доступен только для чтения, его нельзя перезаписать"
 
-#: src/gtr-po.c:854
+#: src/gtr-po.c:871
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "При записи PO-файла произошла ошибка: %s"
 
-#: src/gtr-po.c:866
+#: src/gtr-po.c:883
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "При записи PO-файла произошла ошибка: %s"
@@ -913,7 +918,7 @@ msgstr "Создавать _резервную копию перевода пе�
 
 #: src/gtr-preferences-dialog.ui:236
 msgid "_Autosave files every"
-msgstr "_Интервал автосохранения:"
+msgstr "_Интервал автосохранения"
 
 #: src/gtr-preferences-dialog.ui:260
 msgid "_minutes"
@@ -1068,40 +1073,40 @@ msgstr "Поиск по всему переводу"
 msgid "Close document"
 msgstr "Закрыть документ"
 
-#: src/gtr-tab.c:347
+#: src/gtr-tab.c:419
 msgid "There is an error in the message:"
 msgstr "В сообщении есть ошибка:"
 
-#: src/gtr-tab.c:561 src/gtr-tab.c:687
+#: src/gtr-tab.c:632 src/gtr-tab.c:767
 msgid "fuzzy"
 msgstr "неточное"
 
-#: src/gtr-tab.c:717
+#: src/gtr-tab.c:797
 #, c-format
 msgid "Plural %d"
 msgstr "Множественное число (%d)"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1307
+#: src/gtr-tab.c:1425
 msgid "Path:"
 msgstr "Путь:"
 
-#: src/gtr-tab.c:1974
+#: src/gtr-tab.c:2090
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Переведено: %0.2f%%"
 
-#: src/gtr-tab.c:1975
+#: src/gtr-tab.c:2091
 #, c-format
 msgid "Translated: %d"
 msgstr "Переведено: %d"
 
-#: src/gtr-tab.c:1976
+#: src/gtr-tab.c:2092
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Не переведено: %d"
 
-#: src/gtr-tab.c:1977
+#: src/gtr-tab.c:2093
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Неточных: %d"
@@ -1112,7 +1117,7 @@ msgstr "_Исходное сообщение"
 
 #: src/gtr-tab.ui:166
 msgid "Translate_d Text"
-msgstr "_Переведённый текст:"
+msgstr "_Переведённый текст"
 
 #: src/gtr-upload-dialog.c:61
 msgid "_Upload"
@@ -1174,7 +1179,7 @@ msgstr "Параметры"
 #: src/help-overlay.ui:47
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
-msgstr "Комбинация клавиш"
+msgstr "Комбинации клавиш"
 
 #: src/help-overlay.ui:54
 msgctxt "shortcut window"
@@ -1184,7 +1189,7 @@ msgstr "Справка"
 #: src/help-overlay.ui:61
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Выйти"
+msgstr "Закрыть"
 
 #: src/help-overlay.ui:71
 msgctxt "shortcut window group"
@@ -1412,7 +1417,7 @@ msgstr ""
 #~ msgstr "_Справка"
 
 #~ msgid "_About GNOME Translation Editor"
-#~ msgstr "О GNOME Translation Editor"
+#~ msgstr "О приложении"
 
 #~ msgid "File saved."
 #~ msgstr "Файл сохранен."
@@ -1431,10 +1436,6 @@ msgstr ""
 
 #~ msgid "Phrase not found"
 #~ msgstr "Фраза не найдена"
-
-#, fuzzy
-#~ msgid "Edit notes"
-#~ msgstr "Шрифт редактора"
 
 #~ msgid "Replace _All"
 #~ msgstr "Заменить _все"
@@ -1811,9 +1812,6 @@ msgstr ""
 #~ msgid "Look for:"
 #~ msgstr "Искать:"
 
-#~ msgid "Open Tran"
-#~ msgstr "Open Tran"
-
 #~ msgid "Look for phrases in Open tran memory translation database."
 #~ msgstr "Поиск фраз в базе данных памяти переводов Open tran."
 
@@ -1850,7 +1848,7 @@ msgstr ""
 #~ msgstr "Активные разработчики"
 
 #~ msgid "About Gtranslator"
-#~ msgstr "О Gtranslator"
+#~ msgstr "О приложении"
 
 #~ msgid "D_one"
 #~ msgstr "_Готово"
