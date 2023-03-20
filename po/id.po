@@ -2,22 +2,22 @@
 # Copyright (C) 2003 THE gtranslator'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the gtranslator package.
 # Mohammad DAMT <mdamt@bisnisweb.com>, 2003.
-# Andika Triwidada <andika@gmail.com>, 2009-2013, 2016, 2017, 2020-2022.
+# Andika Triwidada <andika@gmail.com>, 2009-2013, 2016, 2017, 2020-2023.
 # Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-42\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2022-04-18 14:59+0000\n"
-"PO-Revision-Date: 2022-04-19 10:09+0700\n"
-"Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
+"POT-Creation-Date: 2023-01-25 20:32+0000\n"
+"PO-Revision-Date: 2023-03-20 16:09+0700\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -54,7 +54,7 @@ msgstr ""
 "bahasa alternatif, sisip tag, integrasi dengan subversion, dan penilik kode "
 "sumber."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:157
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:161
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -209,7 +209,7 @@ msgid "Paths:"
 msgstr "Path:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
-#: src/gtr-io-error-info-bar.c:127 src/gtr-preferences-dialog.c:664
+#: src/gtr-io-error-info-bar.c:161 src/gtr-preferences-dialog.c:664
 #: src/translation-memory/gtr-translation-memory-dialog.c:305
 msgid "_Close"
 msgstr "_Tutup"
@@ -248,7 +248,7 @@ msgstr "Penyunting berkas terjemahan untuk lokalisasi aplikasi dan pustaka."
 msgid "translator-credits"
 msgstr ""
 "Mohammad DAMT <mdamt@bisnisweb.com>, 2003.\n"
-"Andika Triwidada <andika@gmail.com>, 2009-2013, 2016, 2020-2022.\n"
+"Andika Triwidada <andika@gmail.com>, 2009-2013, 2016, 2020-2023.\n"
 "Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2022."
 
 #: src/gtr-actions-app.c:114
@@ -258,8 +258,8 @@ msgstr "Situs Web Penyunting Terjemahan"
 #: src/gtr-actions-file.c:217
 #, c-format
 msgid ""
-"Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
-"\">%s</span>?"
+"Do you want to save changes to this file: <span weight=\"bold\" "
+"size=\"large\">%s</span>?"
 msgstr ""
 "Apakah Anda ingin menyimpan perubahan pada berkas ini: <span weight=\"bold\" "
 "size=\"large\">%s</span>?"
@@ -345,6 +345,10 @@ msgstr "Pembantu"
 #: src/gtr-assistant.c:268
 msgid "Profile name"
 msgstr "Nama profil"
+
+#: src/gtr-assistant.c:291
+msgid "Translator name"
+msgstr "Nama penerjemah"
 
 #: src/gtr-assistant.c:314
 msgid "Translator email"
@@ -550,6 +554,11 @@ msgstr "Templat terjemahan gettext"
 msgid "All files"
 msgstr "Semua berkas"
 
+#: src/gtr-filter-selection.ui:61 src/gtr-filter-selection.ui:70
+#: src/gtr-lang-button.c:65
+msgid "Choose Language"
+msgstr "Pilih Bahasa"
+
 #: src/gtr-header-dialog.c:325
 msgid "Edit Header"
 msgstr "Sunting Header"
@@ -638,7 +647,7 @@ msgstr "Status DL:"
 msgid "Damned Lies Info"
 msgstr "Info Damned Lies"
 
-#: src/gtr-io-error-info-bar.c:150 src/gtr-jump-dialog.c:88
+#: src/gtr-io-error-info-bar.c:155 src/gtr-jump-dialog.c:88
 #: src/gtr-profile-dialog.c:173 src/gtr-profile-dialog.c:178
 #: src/translation-memory/gtr-translation-memory-dialog.c:104
 msgid "_OK"
@@ -651,10 +660,6 @@ msgstr "Pergi ke Pesan"
 #: src/gtr-jump-dialog.ui:33
 msgid "Enter message number:"
 msgstr "Masukkan nomor pesan:"
-
-#: src/gtr-lang-button.c:65
-msgid "Choose Language"
-msgstr "Pilih Bahasa"
 
 #: src/gtr-languages-fetcher.ui:49
 msgid "_Language"
@@ -785,27 +790,27 @@ msgstr "Simpan sebagai (<Ctrl><Shift>s)"
 msgid "Upload file (<Ctrl>b)"
 msgstr "Unggah berkas (<Ctrl>b)"
 
-#: src/gtr-po.c:492
+#: src/gtr-po.c:509
 #, c-format
 msgid "The file is empty"
 msgstr "Berkas ini kosong"
 
-#: src/gtr-po.c:501
+#: src/gtr-po.c:518
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Gagal membuka berkas \"%s\": %s"
 
-#: src/gtr-po.c:572
+#: src/gtr-po.c:589
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Tak bisa mengubah dari gugus karakter \"%s\" ke UTF-8"
 
-#: src/gtr-po.c:588 src/gtr-po.c:607
+#: src/gtr-po.c:605 src/gtr-po.c:624
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Tak bisa menyimpan berkas temporer bagi pengubahan pengodean"
 
-#: src/gtr-po.c:638
+#: src/gtr-po.c:655
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -816,17 +821,17 @@ msgstr ""
 "baris msgconv atau iconv sebelum membuka berkas ini dengan Penyunting "
 "Terjemahan GNOME"
 
-#: src/gtr-po.c:706
+#: src/gtr-po.c:723
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext mengembalikan daftar domain pesan null."
 
-#: src/gtr-po.c:753
+#: src/gtr-po.c:770
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Tidak ada pesan diperoleh dari pengurai."
 
-#: src/gtr-po.c:807
+#: src/gtr-po.c:824
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -837,17 +842,17 @@ msgstr ""
 "Berkas pot dibuat oleh proses kompilasi.\n"
 "Berkas Anda mungkin perlu dinamai \"%s.po\"."
 
-#: src/gtr-po.c:835
+#: src/gtr-po.c:852
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Berkas %s hanya dapat dibaca, dan tak bisa ditimpa"
 
-#: src/gtr-po.c:854
+#: src/gtr-po.c:871
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Ada galat menulis berkas PO: %s"
 
-#: src/gtr-po.c:866
+#: src/gtr-po.c:883
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Ada galat menulis berkas PO: %s"
@@ -1054,40 +1059,40 @@ msgstr "Melipat"
 msgid "Close document"
 msgstr "Tutup dokumen"
 
-#: src/gtr-tab.c:347
+#: src/gtr-tab.c:419
 msgid "There is an error in the message:"
 msgstr "Ada galat dalam pesan:"
 
-#: src/gtr-tab.c:561 src/gtr-tab.c:687
+#: src/gtr-tab.c:632 src/gtr-tab.c:767
 msgid "fuzzy"
 msgstr "ragu"
 
-#: src/gtr-tab.c:717
+#: src/gtr-tab.c:797
 #, c-format
 msgid "Plural %d"
 msgstr "Jamak %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1307
+#: src/gtr-tab.c:1425
 msgid "Path:"
 msgstr "Path:"
 
-#: src/gtr-tab.c:1974
+#: src/gtr-tab.c:2090
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Diterjemahkan: %0.2f%%"
 
-#: src/gtr-tab.c:1975
+#: src/gtr-tab.c:2091
 #, c-format
 msgid "Translated: %d"
 msgstr "Diterjemahkan: %d"
 
-#: src/gtr-tab.c:1976
+#: src/gtr-tab.c:2092
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Belum diterjemahkan: %d"
 
-#: src/gtr-tab.c:1977
+#: src/gtr-tab.c:2093
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Ragu: %d"
