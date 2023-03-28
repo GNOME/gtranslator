@@ -303,7 +303,6 @@ create_profile_row (GtrPreferencesDialog *dlg,
 /***************Profile pages****************/
 static void
 on_profile_dialog_response_cb (GtrProfileDialog     *profile_dialog,
-                               gint                  response_id,
                                GtrPreferencesDialog *dlg)
 {
   GtrProfileManager *prof_manager;
@@ -318,7 +317,7 @@ on_profile_dialog_response_cb (GtrProfileDialog     *profile_dialog,
   active_profile = gtr_profile_manager_get_active_profile (prof_manager);
 
   /* add new profile */
-  if (response_id == GTK_RESPONSE_ACCEPT)
+  if (!gtr_profile_dialog_get_editing (profile_dialog))
     {
       unsigned int n = g_slist_length (profiles);
       GtkWidget *row = create_profile_row (dlg, profile, active_profile);
@@ -326,7 +325,7 @@ on_profile_dialog_response_cb (GtrProfileDialog     *profile_dialog,
       gtr_profile_manager_add_profile (prof_manager, profile);
     }
   /* modify profile */
-  else if (response_id == GTK_RESPONSE_YES)
+  else
     {
       gtr_profile_manager_modify_profile (prof_manager, priv->editing_profile, profile);
       priv->editing_profile = NULL;
@@ -525,6 +524,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
   priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
   priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
+  priv->check_group = NULL;
 
   setup_profile_pages (dlg);
   setup_files_pages (dlg);

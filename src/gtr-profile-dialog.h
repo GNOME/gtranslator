@@ -33,7 +33,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_PROFILE_DIALOG (gtr_profile_dialog_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrProfileDialog, gtr_profile_dialog, GTR, PROFILE_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (GtrProfileDialog, gtr_profile_dialog, GTR, PROFILE_DIALOG, GtkWindow)
 
 /*
  * Public methods
@@ -41,5 +41,6 @@ G_DECLARE_FINAL_TYPE (GtrProfileDialog, gtr_profile_dialog, GTR, PROFILE_DIALOG,
 GtrProfileDialog   *gtr_profile_dialog_new              (GtkWidget  *parent,
                                                          GtrProfile *profile);
 GtrProfile         *gtr_profile_dialog_get_profile      (GtrProfileDialog *dlg);
+gboolean            gtr_profile_dialog_get_editing      (GtrProfileDialog *dlg);
 
 G_END_DECLS

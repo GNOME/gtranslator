@@ -46,16 +46,41 @@ typedef struct
   GtkWidget *author_email;
   GtkWidget *team_email;
 
+  GtkWidget *button_cancel;
+  GtkWidget *button_ok;
+
   GtkWidget *languages_fetcher;
   gboolean   editing;
 } GtrProfileDialogPrivate;
 
 struct _GtrProfileDialog
 {
-  GtkDialog parent_instance;
+  GtkWindow parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrProfileDialog, gtr_profile_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrProfileDialog, gtr_profile_dialog, GTK_TYPE_WINDOW)
+
+enum
+{
+  RESPONSE,
+  NO_OF_SIGNALS
+};
+
+static guint signals[NO_OF_SIGNALS];
+
+static void
+on_ok_button_clicked (GtkButton                  *button,
+                      GtrProfileDialog           *dlg)
+{
+  g_signal_emit (dlg, signals[RESPONSE], 0);
+}
+
+static void
+on_cancel_button_clicked (GtkButton                  *button,
+                          GtrProfileDialog           *dlg)
+{
+  gtk_window_destroy (GTK_WINDOW (dlg));
+}
 
 static void
 gtr_profile_dialog_class_init (GtrProfileDialogClass *klass)
@@ -71,6 +96,17 @@ gtr_profile_dialog_class_init (GtrProfileDialogClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, author_name);
   gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, author_email);
   gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, team_email);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, button_cancel);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, button_ok);
+
+  // Custom signals
+  signals[RESPONSE] =
+    g_signal_new ("response",
+                  G_OBJECT_CLASS_TYPE (klass),
+                  G_SIGNAL_RUN_LAST,
+                  0, NULL, NULL,
+                  g_cclosure_marshal_VOID__VOID,
+                  G_TYPE_NONE, 0);
 }
 
 static void
@@ -86,6 +122,11 @@ gtr_profile_dialog_init (GtrProfileDialog *dlg)
   gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
   gtk_widget_init_template (GTK_WIDGET (dlg));
+
+  g_signal_connect (GTK_BUTTON (priv->button_ok), "clicked",
+                    G_CALLBACK (on_ok_button_clicked), dlg);
+  g_signal_connect (GTK_BUTTON (priv->button_cancel), "clicked",
+                    G_CALLBACK (on_cancel_button_clicked), dlg);
 }
 
 static void
@@ -136,21 +177,11 @@ gtr_profile_dialog_new (GtkWidget  *parent,
 {
   GtrProfileDialog *dlg;
 
-  dlg = g_object_new (GTR_TYPE_PROFILE_DIALOG,"use-header-bar",TRUE, NULL);
+  dlg = g_object_new (GTR_TYPE_PROFILE_DIALOG, NULL);
 
   if (profile != NULL)
     {
       fill_entries (dlg, profile);
-
-      /* We distinguish in the preferences dialog if we are modifying
-         or adding a new profile depending on the response */
-      gtk_dialog_add_button (GTK_DIALOG (dlg),
-                             _("_OK"), GTK_RESPONSE_YES);
-    }
-  else
-    {
-      gtk_dialog_add_button (GTK_DIALOG (dlg),
-                             _("_OK"), GTK_RESPONSE_ACCEPT);
     }
 
   if (GTK_WINDOW (parent) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
@@ -202,4 +233,11 @@ gtr_profile_dialog_get_profile (GtrProfileDialog *dlg)
                                 gtr_languages_fetcher_get_plural_form (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
 
   return profile;
+}
+
+gboolean
+gtr_profile_dialog_get_editing (GtrProfileDialog *dlg)
+{
+  GtrProfileDialogPrivate *priv = gtr_profile_dialog_get_instance_private (dlg);
+  return priv->editing;
 }

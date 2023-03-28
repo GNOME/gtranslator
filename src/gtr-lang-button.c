@@ -91,7 +91,7 @@ gtr_lang_button_init (GtrLangButton *self)
   const GSList *o;
   GSList *langs;
   GtrLangButtonPrivate *priv = gtr_lang_button_get_instance_private (self);
-  g_autoptr (GtkExpression) expression = NULL;
+  GtkExpression *expression = NULL;
 
   languages = gtr_language_get_languages ();
   langs = g_slist_copy_deep ((GSList *)languages, copy_lang, NULL);

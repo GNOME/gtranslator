@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="GtrProfileDialog" parent="GtkDialog">
+  <template class="GtrProfileDialog" parent="GtkWindow">
     <property name="height-request">400</property>
-    <child type="action">
-      <object class="GtkButton" id="button_cancel">
-        <property name="label" translatable="yes">Cancel</property>
+    <property name="modal">True</property>
+    <property name="title" translatable="true">Upload to Damned Lies</property>
+    <property name="resizable">False</property>
+    <property name="deletable">False</property>
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="titlebar">
+        <style>
+          <class name="titlebar"/>
+        </style>
+        <child type="start">
+          <object class="GtkButton" id="button_cancel">
+            <property name="label" translatable="yes">Cancel</property>
+          </object>
+        </child>
+        <child type="end">
+          <object class="GtkButton" id="button_ok">
+            <property name="label" translatable="yes">Ok</property>
+          </object>
+        </child>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="cancel">button_cancel</action-widget>
-    </action-widgets>
-    <child>
 
+    <property name="child">
       <object class="GtkScrolledWindow">
           <property name="hscrollbar-policy">never</property>
           <property name="propagate-natural-width">1</property>
@@ -96,6 +109,6 @@
         </child>
       </object>
 
-    </child>
+    </property>
   </template>
 </interface>
