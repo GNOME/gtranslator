@@ -1,6 +1,10 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <template class="GtrMessageTableRow" parent="GtkBox">
+    <style>
+      <class name="message-table-row"/>
+    </style>
+
     <property name="orientation">horizontal</property>
     <property name="spacing">6</property>
     <property name="margin-start">6</property>

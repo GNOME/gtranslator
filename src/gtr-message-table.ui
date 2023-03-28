@@ -4,11 +4,57 @@
   <template class="GtrMessageTable" parent="GtkBox">
     <property name="orientation">vertical</property>
     <child>
+      <object class="GtkBox">
+        <style>
+          <class name="message-table-row-header"/>
+          <class name="caption-heading"/>
+          <class name="dim-label"/>
+        </style>
+        <property name="orientation">horizontal</property>
+        <property name="spacing">6</property>
+        <property name="margin-start">6</property>
+        <property name="margin-end">6</property>
+
+        <child>
+          <object class="GtkLabel">
+            <!-- hidden for now -->
+            <property name="visible">false</property>
+            <property name="xalign">1</property>
+            <property name="label">0</property>
+            <property name="width-request">40</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">6</property>
+            <property name="orientation">horizontal</property>
+            <property name="homogeneous">True</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="xalign">0</property>
+                <property name="ellipsize">end</property>
+                <property name="hexpand">true</property>
+                <property name="label" translatable="true">Original Message</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="xalign">0</property>
+                <property name="ellipsize">end</property>
+                <property name="hexpand">true</property>
+                <property name="label">translated</property>
+                <property name="label" translatable="true">Translated Message</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
       <object class="GtkScrolledWindow" id="scrolledwindow">
         <property name="vexpand">1</property>
         <property name="focusable">1</property>
         <property name="child">
-
 
           <object class="GtkListView" id="messages">
             <style>
@@ -34,82 +80,6 @@
               </object>
             </property>
           </object>
-
-
-
-<!-- old column view
-          <object class="GtkColumnView" id="messages">
-            <style>
-              <class name="data-table"/>
-            </style>
-            <child>
-              <object class="GtkColumnViewColumn" id="id_column">
-                <property name="visible">false</property>
-                <property name="title" translatable="true">Id</property>
-                <property name="factory">
-                  <object class="GtkBuilderListItemFactory">
-                    <property name="bytes"><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?>
-<interface>
-<template class="GtkListItem">
-<property name="child">
-<object class="GtkLabel">
-<property name="xalign">0</property>
-<property name="ellipsize">end</property>
-<binding name="label">
-  <lookup name="position" type="GtrMsg">
-    <lookup name="item">GtkListItem</lookup>
-  </lookup>
-</binding>
-</object>
-</property>
-</template>
-</interface>
-                ]]></property>
-                  </object>
-                </property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkColumnViewColumn" id="status_column">
-                <property name="visible">false</property>
-                <property name="title" translatable="true">Status</property>
-                <property name="factory">
-                  <object class="GtkBuilderListItemFactory">
-                    <property name="bytes"><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?>
-<interface>
-<template class="GtkListItem">
-<property name="child">
-<object class="GtkLabel">
-<property name="xalign">0</property>
-<property name="ellipsize">end</property>
-<binding name="label">
-  <lookup name="status_str" type="GtrMsg">
-    <lookup name="item">GtkListItem</lookup>
-  </lookup>
-</binding>
-</object>
-</property>
-</template>
-</interface>
-                ]]></property>
-                  </object>
-                </property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkColumnViewColumn" id="original_column">
-                <property name="title" translatable="true">Original Message</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkColumnViewColumn" id="translation_column">
-                <property name="title" translatable="true">Translated Message</property>
-              </object>
-            </child>
-          </object>
--->
 
         </property>
       </object>
