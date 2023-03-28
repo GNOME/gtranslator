@@ -196,12 +196,14 @@ setup_editor_pages (GtrPreferencesDialog * dlg)
 }
 
 static void
-on_font_set (GtkWidget *widget, GtrPreferencesDialog *dlg)
+on_font_set (GtkWidget *widget, GParamSpec *spec, GtrPreferencesDialog *dlg)
 {
   GtrPreferencesDialogPrivate *priv = gtr_preferences_dialog_get_instance_private (dlg);
+  PangoFontDescription *pango_font = NULL;
   g_autofree char *font = NULL;
 
-  font = gtk_font_chooser_get_font (GTK_FONT_CHOOSER (priv->font_button));
+  pango_font = gtk_font_dialog_button_get_font_desc (GTK_FONT_DIALOG_BUTTON (priv->font_button));
+  font = pango_font_description_to_string (pango_font);
   g_settings_set_string (priv->editor_settings, GTR_SETTINGS_FONT, font);
 }
 
@@ -515,6 +517,7 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
 {
   GtrPreferencesDialogPrivate *priv = gtr_preferences_dialog_get_instance_private (dlg);
   g_autofree char *font = NULL;
+  g_autoptr(PangoFontDescription) pango_font = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (dlg));
 
@@ -530,8 +533,9 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   font = g_settings_get_string (priv->editor_settings, GTR_SETTINGS_FONT);
   if (!strlen (font))
     font = get_default_font ();
-  gtk_font_chooser_set_font (GTK_FONT_CHOOSER (priv->font_button), font);
-  g_signal_connect (priv->font_button, "font-set", G_CALLBACK (on_font_set), dlg);
+  pango_font = pango_font_description_from_string (font);
+  gtk_font_dialog_button_set_font_desc (GTK_FONT_DIALOG_BUTTON (priv->font_button), pango_font);
+  g_signal_connect (priv->font_button, "notify::font-desc", G_CALLBACK (on_font_set), dlg);
 }
 
 static void

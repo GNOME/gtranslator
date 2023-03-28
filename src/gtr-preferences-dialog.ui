@@ -122,8 +122,13 @@
                 <property name="title" translatable="yes">_Font</property>
                 <property name="use_underline">True</property>
                 <child>
-                  <object class="GtkFontButton" id="font_button">
+                  <object class="GtkFontDialogButton" id="font_button">
                     <property name="valign">center</property>
+                    <property name="use-font">true</property>
+                    <property name="use-size">true</property>
+                    <property name="dialog">
+                      <object class="GtkFontDialog" />
+                    </property>
                   </object>
                 </child>
               </object>

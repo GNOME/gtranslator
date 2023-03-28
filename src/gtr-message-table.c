@@ -71,7 +71,6 @@ G_DEFINE_TYPE_WITH_PRIVATE (GtrMessageTable, gtr_message_table, GTK_TYPE_BOX)
 static gboolean
 scroll_to_selected (GtrMessageTable * table)
 {
-  GtkListView *list = NULL;
   int selected = 0;
   GtrMessageTablePrivate *priv;
 
