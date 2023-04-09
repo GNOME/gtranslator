@@ -7,13 +7,13 @@
 # Xabier Bayon <j.bayon@euskalnet.net>, 2003.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2004, 2005, 2006, 2007, 2009, 2010.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2014.
-# Asier Sarasua Garmendia <asiersarasua@ni.eus>, 2019, 2021, 2022.
+# Asier Sarasua Garmendia <asiersarasua@ni.eus>, 2019, 2021, 2022, 2023.
 #
 msgid ""
 msgstr "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2022-07-27 09:21+0000\n"
-"PO-Revision-Date: 2022-12-03 10:00+0100\n"
+"POT-Creation-Date: 2023-01-25 20:32+0000\n"
+"PO-Revision-Date: 2023-04-03 10:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -49,7 +49,7 @@ msgid ""
 "code viewer."
 msgstr "Gtranslator-ek pluginen sistema bat ere badauka: bestelako hizkuntza, etiketak txertatzea, subversion-ekin bateragarritasuna eta iturburuaren kodearen ikustailea bezalako plugin interesgarriekin."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:157
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:161
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -77,7 +77,7 @@ msgid ""
 msgstr "TRUE (egia) bada, abisatu erabiltzaileari itzulpeneko PO fitxategi bat gordetzean mezu lausoak baditu."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:32
-msgid "Whether the obsolete entries be removed upon saving"
+msgid "Whether to remove the obsolete entries upon saving"
 msgstr "Gordetzean, sarrera zaharkituak kenduko diren ala ez"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:33
@@ -193,7 +193,7 @@ msgid "Paths:"
 msgstr "Bide-izenak:"
 
 #: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
-#: src/gtr-io-error-info-bar.c:127 src/gtr-preferences-dialog.c:664
+#: src/gtr-io-error-info-bar.c:161 src/gtr-preferences-dialog.c:664
 #: src/translation-memory/gtr-translation-memory-dialog.c:305
 msgid "_Close"
 msgstr "It_xi"
@@ -318,6 +318,10 @@ msgstr "Laguntzailea"
 #: src/gtr-assistant.c:268
 msgid "Profile name"
 msgstr "Profilaren izena"
+
+#: src/gtr-assistant.c:291
+msgid "Translator name"
+msgstr "Itzultzailearen izena"
 
 #: src/gtr-assistant.c:314
 msgid "Translator email"
@@ -520,6 +524,11 @@ msgstr "Gettext itzulpen txantiloia"
 msgid "All files"
 msgstr "Fitxategi denak"
 
+#: src/gtr-filter-selection.ui:61 src/gtr-filter-selection.ui:70
+#: src/gtr-lang-button.c:65
+msgid "Choose Language"
+msgstr "Aukeratu hizkuntza"
+
 #: src/gtr-header-dialog.c:325
 msgid "Edit Header"
 msgstr "Editatu goiburukoa"
@@ -608,7 +617,7 @@ msgstr "GM egoera:"
 msgid "Damned Lies Info"
 msgstr "Gezur Madarikatuen informazioa"
 
-#: src/gtr-io-error-info-bar.c:150 src/gtr-jump-dialog.c:88
+#: src/gtr-io-error-info-bar.c:155 src/gtr-jump-dialog.c:88
 #: src/gtr-profile-dialog.c:173 src/gtr-profile-dialog.c:178
 #: src/translation-memory/gtr-translation-memory-dialog.c:104
 msgid "_OK"
@@ -621,10 +630,6 @@ msgstr "Joan mezura"
 #: src/gtr-jump-dialog.ui:33
 msgid "Enter message number:"
 msgstr "Sartu mezuaren zenbakia:"
-
-#: src/gtr-lang-button.c:65
-msgid "Choose Language"
-msgstr "Aukeratu hizkuntza"
 
 #: src/gtr-languages-fetcher.ui:49
 msgid "_Language"
@@ -755,27 +760,27 @@ msgstr "Gorde honela (<Ctrl><Shift>s)"
 msgid "Upload file (<Ctrl>b)"
 msgstr "Igo fitxategia (<Ctrl>b)"
 
-#: src/gtr-po.c:492
+#: src/gtr-po.c:509
 #, c-format
 msgid "The file is empty"
 msgstr "Fitxategia hutsik dago"
 
-#: src/gtr-po.c:501
+#: src/gtr-po.c:518
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Huts egin du “%s” fitxategia irekitzeak: %s"
 
-#: src/gtr-po.c:572
+#: src/gtr-po.c:589
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Ezin izan da “%s” karaktere-jokotik UTF-8 kodeketara bihurtu"
 
-#: src/gtr-po.c:588 src/gtr-po.c:607
+#: src/gtr-po.c:605 src/gtr-po.c:624
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Ezin izan da aldi bateko fitxategia gorde kodeketa bihurtzeko"
 
-#: src/gtr-po.c:638
+#: src/gtr-po.c:655
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -783,17 +788,17 @@ msgid ""
 "Editor"
 msgstr "Fitxategia UTF-8 kodeketara bihurtzeko saiakera guztiek huts egin dute. Erabili 'msgconv' edo 'iconv' komando-lerroak fitxategi hau GNOME itzulpen-editorearekin ireki aurretik."
 
-#: src/gtr-po.c:706
+#: src/gtr-po.c:723
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext-ek domeinu zerrenda mezu nulua itzuli du."
 
-#: src/gtr-po.c:753
+#: src/gtr-po.c:770
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Ez da mezurik lortu analizatzailetik."
 
-#: src/gtr-po.c:807
+#: src/gtr-po.c:824
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -803,17 +808,17 @@ msgstr "Fitxategia .pot luzapenarekin gordetzen ari zara.\n"
 "Pot fitxategiak konpilazio-prozesuak sortzen ditu.\n"
 "Zure fitxategiak “%s.po” izena eduki beharko luke."
 
-#: src/gtr-po.c:835
+#: src/gtr-po.c:852
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "%s fitxategia irakurtzeko soilik da, eta ezin da gainidatzi"
 
-#: src/gtr-po.c:854
+#: src/gtr-po.c:871
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Errore bat dago PO fitxategian: %s"
 
-#: src/gtr-po.c:866
+#: src/gtr-po.c:883
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Errore bat gertatu da PO fitxategia gordetzean: %s"
@@ -1016,40 +1021,40 @@ msgstr "Egokitu inguruan"
 msgid "Close document"
 msgstr "Itxi dokumentua"
 
-#: src/gtr-tab.c:347
+#: src/gtr-tab.c:419
 msgid "There is an error in the message:"
 msgstr "Errore bat dago mezuan:"
 
-#: src/gtr-tab.c:561 src/gtr-tab.c:687
+#: src/gtr-tab.c:632 src/gtr-tab.c:767
 msgid "fuzzy"
 msgstr "lausoa"
 
-#: src/gtr-tab.c:717
+#: src/gtr-tab.c:797
 #, c-format
 msgid "Plural %d"
 msgstr "%d plural"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1307
+#: src/gtr-tab.c:1425
 msgid "Path:"
 msgstr "Bidea:"
 
-#: src/gtr-tab.c:1974
+#: src/gtr-tab.c:2090
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Itzulia: %0.2f%%"
 
-#: src/gtr-tab.c:1975
+#: src/gtr-tab.c:2091
 #, c-format
 msgid "Translated: %d"
 msgstr "Itzulia: %d"
 
-#: src/gtr-tab.c:1976
+#: src/gtr-tab.c:2092
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Itzuli gabea: %d"
 
-#: src/gtr-tab.c:1977
+#: src/gtr-tab.c:2093
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Lausoa: %d"
@@ -1126,100 +1131,105 @@ msgstr "Laster-teklak"
 
 #: src/help-overlay.ui:54
 msgctxt "shortcut window"
+msgid "Help"
+msgstr "Laguntza"
+
+#: src/help-overlay.ui:61
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Irten"
 
-#: src/help-overlay.ui:64
+#: src/help-overlay.ui:71
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "Editatu"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:75
 msgctxt "shortcut window"
 msgid "Undo"
 msgstr "Desegin"
 
-#: src/help-overlay.ui:75
+#: src/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Redo"
 msgstr "Berregin"
 
-#: src/help-overlay.ui:82
+#: src/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Jarri/kendu lausoaren marka"
 
-#: src/help-overlay.ui:89
+#: src/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "Kopiatu jatorrizko testua itzulpenera"
 
-#: src/help-overlay.ui:99
+#: src/help-overlay.ui:106
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Nabigazioa"
 
-#: src/help-overlay.ui:103
+#: src/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Joan aurreko mezura"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Joan hurrengo mezura"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Joan itzuli gabeko aurreko mezura"
 
-#: src/help-overlay.ui:124
+#: src/help-overlay.ui:131
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Joan itzuli gabeko hurrengo mezura"
 
-#: src/help-overlay.ui:134
+#: src/help-overlay.ui:141
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Itzulpen-memoria"
 
-#: src/help-overlay.ui:138
+#: src/help-overlay.ui:145
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Eraiki itzulpen-memoriak"
 
-#: src/help-overlay.ui:145
+#: src/help-overlay.ui:152
 msgctxt "shortcut window"
 msgid "Copy below"
 msgstr "Kopiatu azpian"
 
-#: src/help-overlay.ui:155
+#: src/help-overlay.ui:162
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Bilatu eta ordeztu"
 
-#: src/help-overlay.ui:159
+#: src/help-overlay.ui:166
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Bilatu"
 
-#: src/help-overlay.ui:166
+#: src/help-overlay.ui:173
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Bilatu eta ordeztu"
 
-#: src/help-overlay.ui:173
+#: src/help-overlay.ui:180
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "Bilatu aurrerantz"
 
-#: src/help-overlay.ui:180
+#: src/help-overlay.ui:187
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Bilatu atzerantz"
 
-#: src/help-overlay.ui:187
+#: src/help-overlay.ui:194
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Ezkutatu bilatzeko eta ordezteko barra"
