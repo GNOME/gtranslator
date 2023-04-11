@@ -28,7 +28,6 @@
 typedef struct
 {
   GtkWidget *titlebar;
-  GtkWidget *main_box;
   GtkWidget *open_button;
   GtkWidget *dl_button;
 
@@ -71,8 +70,6 @@ gtr_projects_class_init (GtrProjectsClass *klass)
                                                "/org/gnome/translator/gtr-projects.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrProjects, titlebar);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrProjects, main_box);
-
   gtk_widget_class_bind_template_child_private (widget_class, GtrProjects, open_button);
   gtk_widget_class_bind_template_child_private (widget_class, GtrProjects, dl_button);
 }
