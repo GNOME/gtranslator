@@ -59,6 +59,7 @@ set_defines = [
   ['PACKAGE_LIBDIR', gtr_libdir],
   ['PACKAGE_LOCALEDIR', gtr_localedir],
   ['PACKAGE_URL', 'https://wiki.gnome.org/Apps/Gtranslator'],
+  ['PACKAGE_ISSUES_URL', 'https://gitlab.gnome.org/GNOME/gtranslator/-/issues'],
   ['PACKAGE_VERSION', gtr_version],
   ['PACKAGE_APPID', gtr_app_id],
   ['PROFILE', get_option('profile')],
