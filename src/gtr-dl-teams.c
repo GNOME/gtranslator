@@ -62,6 +62,8 @@ typedef struct
   gchar *module_state;
 
   GtrWindow *main_window;
+
+  SoupSession *soup_session;
 } GtrDlTeamsPrivate;
 
 struct _GtrDlTeams
@@ -196,7 +198,6 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   g_autoptr(SoupMessage) msg = NULL;
-  g_autoptr(SoupSession) session = NULL;
   g_autofree gchar *module_endpoint;
   g_autoptr(JsonParser) parser = NULL;
   gint i;
@@ -230,8 +231,7 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
   /* Get module details JSON from DL API */
   module_endpoint = g_strconcat ((const gchar *)API_URL, "modules/", priv->selected_module, NULL);
   msg = soup_message_new ("GET", module_endpoint);
-  session = soup_session_new ();
-  stream = soup_session_send (session, msg, NULL, &error);
+  stream = soup_session_send (priv->soup_session, msg, NULL, &error);
   status_code = soup_message_get_status (msg);
 
   if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
@@ -355,14 +355,25 @@ void
 gtr_dl_teams_load_json (GtrDlTeams *self)
 {
   /* Get team list JSON from DL */
-  g_autoptr(SoupSession) session = soup_session_new ();
-  g_autoptr(SoupMessage) message = soup_message_new ("GET", g_strconcat ((const gchar *)API_URL, "teams", NULL));
-  soup_session_send_async (session, message, G_PRIORITY_DEFAULT, NULL, gtr_dl_teams_parse_teams_json, self);
+  GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
+  SoupMessage *message = NULL;
+  char *url = NULL;
+
+  url = g_strconcat ((const gchar *)API_URL, "teams", NULL);
+  message = soup_message_new ("GET", url);
+  soup_session_send_async (priv->soup_session, message, G_PRIORITY_DEFAULT, NULL, gtr_dl_teams_parse_teams_json, self);
+
+
+  g_object_unref (message);
+  g_free (url);
 
   /* Get module list JSON from DL */
-  g_autoptr(SoupSession) session_modules = soup_session_new ();
-  g_autoptr(SoupMessage) message_modules = soup_message_new ("GET", g_strconcat ((const gchar *)API_URL, "modules", NULL));
-  soup_session_send_async (session_modules, message_modules, G_PRIORITY_DEFAULT, NULL, gtr_dl_teams_parse_modules_json, self);
+  url = g_strconcat ((const gchar *)API_URL, "modules", NULL);
+  message = soup_message_new ("GET", url);
+  soup_session_send_async (priv->soup_session, message, G_PRIORITY_DEFAULT, NULL, gtr_dl_teams_parse_modules_json, self);
+
+  g_object_unref (message);
+  g_free (url);
 }
 
 void gtr_dl_teams_verify_and_load (GtrDlTeams *self)
@@ -387,8 +398,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   JsonNode *node = NULL;
   g_autoptr(JsonParser) parser = NULL;
   JsonObject *object;
-  SoupMessage *msg;
-  SoupSession *session;
+  g_autoptr(SoupMessage) msg = NULL;
   GError *error = NULL;
   JsonNode *stats_node;
   JsonObject *stats_object;
@@ -411,8 +421,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
                                  NULL);
 
   msg = soup_message_new ("GET", stats_endpoint);
-  session = soup_session_new ();
-  stream = soup_session_send (session, msg, NULL, &error);
+  stream = soup_session_send (priv->soup_session, msg, NULL, &error);
   status_code = soup_message_get_status (msg);
 
   if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
@@ -499,8 +508,7 @@ static void
 gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  SoupMessage *msg;
-  SoupSession *session;
+  g_autoptr(SoupMessage) msg = NULL;
   GError *error = NULL;
   GFile *tmp_file = NULL;
   GFileIOStream *iostream = NULL;
@@ -534,9 +542,8 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
     }
 
   /* Load the file, save as temp; path to file is https://l10n.gnome.org/[priv->file_path] */
-  session = soup_session_new ();
   msg = soup_message_new ("GET", g_strconcat (DL_SERVER, g_strcompress(priv->file_path), NULL));
-  bytes = soup_session_send_and_read (session, msg, NULL, &error);
+  bytes = soup_session_send_and_read (priv->soup_session, msg, NULL, &error);
   status_code = soup_message_get_status (msg);
 
   if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
@@ -646,7 +653,6 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
   SoupStatus status_code;
   GError *error = NULL;
 
-  g_autoptr (SoupSession) session = NULL;
   g_autoptr (SoupMessage) msg = NULL;
   g_autoptr(GInputStream) stream = NULL;
   g_autofree gchar *message = NULL;
@@ -670,8 +676,7 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
   soup_message_set_flags (msg, SOUP_MESSAGE_NO_REDIRECT);
   soup_message_headers_append (soup_message_get_request_headers (msg),
                                "Authentication", auth);
-  session = soup_session_new ();
-  stream = soup_session_send (session, msg, NULL, &error);
+  stream = soup_session_send (priv->soup_session, msg, NULL, &error);
   status_code = soup_message_get_status (msg);
 
   if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
@@ -811,6 +816,11 @@ gtr_dl_teams_dispose (GObject *object)
       g_free (priv->file_path);
       priv->file_path = NULL;
     }
+  if (priv->soup_session)
+    {
+      g_object_unref (priv->soup_session);
+      priv->soup_session = NULL;
+    }
 
   G_OBJECT_CLASS (gtr_dl_teams_parent_class)->dispose (object);
 }
@@ -865,6 +875,8 @@ gtr_dl_teams_init (GtrDlTeams *self)
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   gtk_widget_init_template (GTK_WIDGET (self));
   GtkExpression *expression = NULL;
+
+  priv->soup_session = soup_session_new ();
 
   priv->main_window = NULL;
   priv->selected_team = NULL;
