@@ -777,18 +777,18 @@ gtr_view_reload_scheme_color (GtrView * view)
 void
 gtr_view_set_font (GtrView *view, char *font)
 {
-  PangoFontDescription *font_desc = NULL;
   g_autofree char *str = NULL;
   g_autofree char *css = NULL;
-  GtrViewPrivate *priv = gtr_view_get_instance_private (view);
-  GtkWidget *button = gtk_font_button_new ();
+  g_autoptr(GtkFontDialog) dialog = gtk_font_dialog_new ();
+  g_autoptr(PangoFontDescription) font_desc = NULL;
 
-  gtk_font_chooser_set_font (GTK_FONT_CHOOSER (button), font);
-  font_desc = gtk_font_chooser_get_font_desc (GTK_FONT_CHOOSER (button));
+  GtrViewPrivate *priv = gtr_view_get_instance_private (view);
+  GtkWidget *button = gtk_font_dialog_button_new (dialog);
+
+  font_desc = pango_font_description_from_string (font);
+  gtk_font_dialog_button_set_font_desc (GTK_FONT_DIALOG_BUTTON (button), font_desc);
+
   str = pango_font_description_to_css (font_desc);
   css = g_strdup_printf ("textview  %s", str ?: "");
-
   gtk_css_provider_load_from_data (priv->provider, css, -1);
-
-  pango_font_description_free (font_desc);
 }
