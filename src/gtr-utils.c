@@ -268,9 +268,8 @@ finally_2:
 void
 gtr_utils_help_display (GtkWindow * window)
 {
-  gtk_show_uri (GTK_WINDOW (window), "help:gtranslator",
-                          g_get_real_time ());
-                          //gtk_get_current_event_time (), NULL);
+  g_autoptr (GtkUriLauncher) uri_launcher = gtk_uri_launcher_new ("help:gtranslator");
+  gtk_uri_launcher_launch (uri_launcher, window, NULL, NULL, NULL);
 }
 
 gchar *
