@@ -350,40 +350,6 @@ clear_msgstr_activated (GSimpleAction *action,
 }
 
 static void
-shortcuts_activated (GSimpleAction *action,
-                     GVariant      *parameter,
-                     gpointer       user_data)
-{
-  GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  static GtkWidget *shortcuts_window;
-  GtkWindow *window = GTK_WINDOW (priv->active_window);
-
-  if (shortcuts_window == NULL)
-    {
-      GtkBuilder *builder;
-
-      builder = gtk_builder_new_from_resource ("/org/gnome/translator/help-overlay.ui");
-      shortcuts_window = GTK_WIDGET (gtk_builder_get_object (builder, "help_overlay"));
-
-      g_signal_connect (shortcuts_window,
-                "destroy",
-                G_CALLBACK (gtk_widget_destroyed),
-                &shortcuts_window);
-
-      g_object_unref (builder);
-    }
-
-    if (window != gtk_window_get_transient_for (GTK_WINDOW (shortcuts_window)))
-      {
-        gtk_window_set_transient_for (GTK_WINDOW (shortcuts_window), GTK_WINDOW (window));
-      }
-
-  gtk_widget_show_all (shortcuts_window);
-  gtk_window_present (GTK_WINDOW (shortcuts_window));
-}
-
-static void
 help_activated (GSimpleAction *action,
                 GVariant      *parameter,
                 gpointer       user_data)
@@ -647,7 +613,6 @@ static GActionEntry app_entries[] = {
   { "preferences", preferences_activated, NULL, NULL, NULL },
   { "edit_header", edit_header_activated, NULL, NULL, NULL },
   { "clear_msgstr", clear_msgstr_activated, NULL, NULL, NULL },
-  { "shortcuts", shortcuts_activated, NULL, NULL, NULL },
   { "help", help_activated, NULL, NULL, NULL },
   { "about", about_activated, NULL, NULL, NULL },
   { "quit", quit_activated, NULL, NULL, NULL }
@@ -666,6 +631,7 @@ gtr_application_startup (GApplication *application)
   GtrApplication *app = GTR_APPLICATION (application);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
+  g_application_set_resource_base_path (application, "/org/gnome/translator");
   G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
 
   hdy_init();
@@ -696,7 +662,6 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.saveas", "<Ctrl><Shift>s");
   set_kb (application, "app.upload_file", "<Ctrl>b");
   set_kb (application, "app.preferences", "<Ctrl>comma");
-  set_kb (application, "app.shortcuts", "<Ctrl>question");
   set_kb (application, "app.help", "F1");
   set_kb (application, "app.quit", "<Primary>q");
 
