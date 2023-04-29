@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-01-25 20:32+0000\n"
-"PO-Revision-Date: 2023-03-03 21:25+0200\n"
+"POT-Creation-Date: 2023-04-25 17:29+0000\n"
+"PO-Revision-Date: 2023-04-29 14:55+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -63,7 +63,7 @@ msgstr ""
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:672
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:638
 #: src/gtr-notebook.ui:216 src/gtr-window.c:229 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Käännösmuokkain"
@@ -527,7 +527,7 @@ msgid "Main Menu"
 msgstr "Päävalikko"
 
 #: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:151 src/gtr-projects.ui:119
-msgid "New window"
+msgid "New Window"
 msgstr "Uusi ikkuna"
 
 #: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:160 src/gtr-projects.ui:133
@@ -539,8 +539,8 @@ msgid "Keyboard Shortcuts"
 msgstr "Pikanäppäimet"
 
 #: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:186 src/gtr-projects.ui:188
-msgid "About"
-msgstr "Tietoja"
+msgid "About Translation Editor"
+msgstr "Tietoja - Käännösmuokkain"
 
 #: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:204 src/gtr-projects.ui:216
 msgid "Quit"
@@ -567,7 +567,7 @@ msgstr "Kaikki tiedostot"
 msgid "Choose Language"
 msgstr "Valitse kieli"
 
-#: src/gtr-header-dialog.c:325
+#: src/gtr-header-dialog.c:325 src/gtr-notebook.ui:133
 msgid "Edit Header"
 msgstr "Muokkaa otsakkeita"
 
@@ -726,16 +726,12 @@ msgid "Find"
 msgstr "Etsi"
 
 #: src/gtr-notebook.ui:114
-msgid "Find and replace"
+msgid "Find and Replace"
 msgstr "Etsi ja korvaa"
 
 #: src/gtr-notebook.ui:123 src/gtr-projects.ui:147
-msgid "Build translation memory"
+msgid "Build Translation Memory"
 msgstr "Rakenna käännösmuisti"
-
-#: src/gtr-notebook.ui:133
-msgid "Edit header"
-msgstr "Muokkaa otsaketta"
 
 #: src/gtr-notebook.ui:195 src/gtr-preferences-dialog.c:665
 #: src/gtr-projects.ui:202
@@ -1030,7 +1026,7 @@ msgstr "Kirjainkoko merkitsee"
 msgid "Match whole word only"
 msgstr "Täsmää vain kokonaiset sanat"
 
-#: src/gtr-search-bar.c:424
+#: src/gtr-search-bar.c:424 src/gtr-search-bar.ui:240
 msgid "Wrap around"
 msgstr "Jatka asiakirjan alusta"
 
@@ -1057,10 +1053,6 @@ msgstr "Vaihda toimintojen \"Etsi\" ja \"Etsi ja korvaa\" välillä"
 #: src/gtr-search-bar.ui:173
 msgid "Show or hide search options such as case sensitivity"
 msgstr "Näytä tai piilota hakuvalinnat kuten kirjainkoon merkitsevyys"
-
-#: src/gtr-search-bar.ui:240
-msgid "Wrap Around"
-msgstr "Jatka asiakirjan alusta"
 
 #: src/gtr-tab-label.c:280
 msgid "Close document"
@@ -1159,122 +1151,142 @@ msgctxt "shortcut window"
 msgid "Save the current file"
 msgstr "Tallenna nykyinen tiedosto"
 
-#: src/help-overlay.ui:32
+#: src/help-overlay.ui:32 src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Save the current file as"
 msgstr "Tallenna nykyinen tiedosto nimellä"
 
-#: src/help-overlay.ui:40
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Download from DL"
+msgstr "Lataa DL-palvelusta"
+
+#: src/help-overlay.ui:53
+msgctxt "shortcut window"
+msgid "Upload to DL"
+msgstr "Lähetä Damned Lies -palveluun"
+
+#: src/help-overlay.ui:60
 msgctxt "shortcut window"
 msgid "Preferences"
 msgstr "Asetukset"
 
-#: src/help-overlay.ui:47
+#: src/help-overlay.ui:67
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Pikanäppäimet"
 
-#: src/help-overlay.ui:54
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Help"
 msgstr "Ohje"
 
-#: src/help-overlay.ui:61
+#: src/help-overlay.ui:81
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Lopeta"
 
-#: src/help-overlay.ui:71
+#: src/help-overlay.ui:90
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "Muokkaus"
 
-#: src/help-overlay.ui:75
+#: src/help-overlay.ui:95
 msgctxt "shortcut window"
 msgid "Undo"
 msgstr "Kumoa"
 
-#: src/help-overlay.ui:82
+#: src/help-overlay.ui:102
 msgctxt "shortcut window"
 msgid "Redo"
 msgstr "Tee uudelleen"
 
-#: src/help-overlay.ui:89
+#: src/help-overlay.ui:109
+msgctxt "shortcut window"
+msgid "Clear translation"
+msgstr "Tyhjennä käännösteksti"
+
+#: src/help-overlay.ui:116
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Merkitse sumeaksi päälle/pois"
 
-#: src/help-overlay.ui:96
+#: src/help-overlay.ui:123
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "Kopioi alkuperäisen viestin sisältö käännöskenttään"
 
-#: src/help-overlay.ui:106
+#: src/help-overlay.ui:132
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Liikkuminen"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:137
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Siirry edelliseen viestiin"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:144
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Siirry seuraavaan viestiin"
 
-#: src/help-overlay.ui:124
+#: src/help-overlay.ui:151
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Siirry edelliseen kääntämättömään viestiin"
 
-#: src/help-overlay.ui:131
+#: src/help-overlay.ui:158
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Siirry seuraavaan kääntämättömään viestiin"
 
-#: src/help-overlay.ui:141
+#: src/help-overlay.ui:167
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Käännösmuisti"
 
-#: src/help-overlay.ui:145
+#: src/help-overlay.ui:172
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Rakenna käännösmuisti"
 
-#: src/help-overlay.ui:152
+#: src/help-overlay.ui:179
 msgctxt "shortcut window"
 msgid "Copy below"
 msgstr "Kopioi alle"
 
-#: src/help-overlay.ui:162
+#: src/help-overlay.ui:186
+msgctxt "shortcut window"
+msgid "Use 1st...9th suggestion"
+msgstr "Käytä 1.-9. ehdotusta"
+
+#: src/help-overlay.ui:195
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Etsi ja korvaa"
 
-#: src/help-overlay.ui:166
+#: src/help-overlay.ui:200
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Etsi"
 
-#: src/help-overlay.ui:173
+#: src/help-overlay.ui:207
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Etsi ja korvaa"
 
-#: src/help-overlay.ui:180
+#: src/help-overlay.ui:214
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "Jatka hakua eteenpäin"
 
-#: src/help-overlay.ui:187
+#: src/help-overlay.ui:221
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Jatka hakua taaksepäin"
 
-#: src/help-overlay.ui:194
+#: src/help-overlay.ui:228
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Piilota \"Etsi ja korvaa\"-palkki"
@@ -1393,23 +1405,32 @@ msgstr ""
 "Suurin ero pituudessa tekstien välillä, mikä näytetään osumana "
 "käännösmuistista."
 
+#~ msgid "New window"
+#~ msgstr "Uusi ikkuna"
+
+#~ msgid "About"
+#~ msgstr "Tietoja"
+
+#~ msgid "Build translation memory"
+#~ msgstr "Rakenna käännösmuisti"
+
+#~ msgid "Edit header"
+#~ msgstr "Muokkaa otsaketta"
+
+#~ msgid "Wrap Around"
+#~ msgstr "Jatka asiakirjan alusta"
+
 #~ msgid "Original-text"
 #~ msgstr "Alkuperäisen teksti"
 
 #~ msgid "Translated-text"
 #~ msgstr "Käännetty teksti"
 
-#~ msgid "_New Window"
-#~ msgstr "_Uusi ikkuna"
-
 #~ msgid "_Preferences"
 #~ msgstr "_Asetukset"
 
 #~ msgid "_Help"
 #~ msgstr "O_hje"
-
-#~ msgid "_About GNOME Translation Editor"
-#~ msgstr "_Tietoja - Käännösmuokkain"
 
 #~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
 #~ msgstr "Tiedosto '%s.%s.%s.%s' on lähetetty!"
@@ -1692,9 +1713,6 @@ msgstr ""
 #~ msgid "Insert Option nº %d"
 #~ msgstr "Sisällytä valinta nro %d"
 
-#~ msgid "_Build Translation Memory"
-#~ msgstr "_Rakenna käännösmuisti"
-
 #~ msgid "_Translation Memory"
 #~ msgstr "Käännös_muisti"
 
@@ -1961,9 +1979,6 @@ msgstr ""
 
 #~ msgid "Paste the contents of the clipboard"
 #~ msgstr "Liitä leikepöydän sisältö"
-
-#~ msgid "Clear the selected translation"
-#~ msgstr "Tyhjennä valittu käännösteksti"
 
 #~ msgid "Copy _Message to Translation"
 #~ msgstr "Kopioi _viesti käännökseen"
