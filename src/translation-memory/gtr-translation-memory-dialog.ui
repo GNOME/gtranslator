@@ -1,178 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="3.0"/>
-  <object class="GtkDialog" id="translation-memory-dialog">
-    <property name="can_focus">False</property>
-    <property name="margin_start">6</property>
-    <property name="margin_end">6</property>
-    <property name="margin_top">6</property>
-    <property name="margin_bottom">6</property>
-    <property name="type_hint">dialog</property>
-    <child>
-      <placeholder/>
+  <requires lib="gtk" version="4.0"/>
+  <template class="GtrTranslationMemoryDialog" parent="GtkWindow">
+    <property name="width-request">600</property>
+    <property name="modal">True</property>
+    <property name="title" translatable="true">Translation Editor Memory Manager</property>
+    <property name="resizable">False</property>
+    <property name="deletable">True</property>
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="titlebar">
+        <style>
+          <class name="titlebar"/>
+        </style>
+      </object>
     </child>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="dialog-vbox1">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child>
-          <object class="GtkBox" id="translation-memory-box">
-            <property name="visible">True</property>
+
+    <property name="child">
+      <object class="GtkOverlay" id="overlay">
+        <child type="overlay">
+          <object class="GtkProgressBar" id="add_database_progressbar">
             <property name="can_focus">False</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
-            <property name="margin_top">12</property>
-            <property name="margin_bottom">12</property>
-            <property name="orientation">vertical</property>
-            <property name="spacing">18</property>
+            <property name="visible">False</property>
+            <style>
+              <class name="osd"/>
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="AdwClamp">
+            <property name="maximum-size">500</property>
+            <property name="tightening-threshold">400</property>
             <child>
-              <object class="GtkBox" id="vbox9">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
+              <object class="GtkBox" id="main_box">
                 <property name="orientation">vertical</property>
-                <property name="spacing">6</property>
+                <property name="margin-bottom">12</property>
+                <property name="spacing">12</property>
                 <child>
-                  <object class="GtkLabel" id="label20">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Database:</property>
-                    <property name="xalign">0</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkBox" id="hbox8">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="true">Database</property>
+                    <property name="vexpand">true</property>
+                    <property name="valign">center</property>
                     <child>
-                      <object class="GtkLabel" id="label25">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                      <object class="AdwActionRow" id="directory">
+                        <property name="title" translatable="yes">Select the directory which contains PO files</property>
+                        <property name="subtitle" translatable="no"></property>
+                        <property name="activatable-widget">search_button</property>
+                        <child type="suffix">
+                          <object class="GtkButton" id="search_button">
+                            <property name="icon-name">preferences-system-search-symbolic</property>
+                            <property name="label" translatable="true">Search</property>
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkBox" id="vbox11">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">6</property>
-                        <property name="hexpand">True</property>
-                        <child>
-                          <object class="GtkLabel" id="label26">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Select the directory which contains PO files:</property>
-                            <property name="xalign">0</property>
+                      <object class="AdwActionRow" id="configuration">
+                        <property name="title" translatable="yes">Use only files with this name</property>
+                        <property name="subtitle" translatable="no"></property>
+                        <property name="activatable-widget">use_lang_profile_in_tm</property>
+                        <child type="prefix">
+                          <object class="GtkCheckButton" id="use_lang_profile_in_tm">
+                            <property name="valign">center</property>
                           </object>
                         </child>
-                        <child>
-                          <object class="GtkBox" id="hbox9">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="spacing">6</property>
-                            <child>
-                              <object class="GtkEntry" id="directory-entry">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">●</property>
-                                <property name="xalign">0.0099999997764825821</property>
-                                <property name="hexpand">True</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="search-button">
-                                <property name="icon-name">preferences-system-search-symbolic</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="add-database-button">
-                            <property name="label" translatable="yes">Add to Database</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkProgressBar" id="add-database-progressbar">
-                            <property name="can_focus">False</property>
-                            <property name="visible">False</property>
+                        <child type="suffix">
+                          <object class="GtkEntry" id="tm_lang_entry">
+                            <property name="valign">center</property>
                           </object>
                         </child>
                       </object>
                     </child>
                   </object>
                 </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkBox" id="vbox10">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
-                <property name="spacing">6</property>
                 <child>
-                  <object class="GtkLabel" id="label21">
+                  <object class="GtkButton" id="add_database_button">
+                    <property name="label" translatable="yes">Add to Database</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Configuration:</property>
-                    <property name="xalign">0</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkBox" id="alignment3">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkBox" id="hbox7">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkLabel" id="label22">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkBox" id="box1">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="orientation">vertical</property>
-                            <child>
-                              <object class="GtkBox" id="box2">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkCheckButton" id="use-lang-profile-in-tm">
-                                    <property name="label" translatable="yes">Use only files with this name:</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkEntry" id="tm-lang-entry">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="invisible_char">●</property>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <style>
+                      <class name="suggested-action"/>
+                    </style>
                   </object>
                 </child>
               </object>
@@ -180,6 +89,6 @@
           </object>
         </child>
       </object>
-    </child>
-  </object>
+    </property>
+  </template>
 </interface>

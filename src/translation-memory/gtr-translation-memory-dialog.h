@@ -15,40 +15,18 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __GTR_TRANSLATION_MEMORY_DIALOG_H__
-#define __GTR_TRANSLATION_MEMORY_DIALOG_H__
+#pragma once
 
 #include <gtk/gtk.h>
+#include <adwaita.h>
 #include "gtr-translation-memory.h"
 
 G_BEGIN_DECLS
 
 #define GTR_TYPE_TRANSLATION_MEMORY_DIALOG             (gtr_translation_memory_dialog_get_type ())
-#define GTR_TRANSLATION_MEMORY_DIALOG(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_TRANSLATION_MEMORY_DIALOG, GtrTranslationMemoryDialog))
-#define GTR_TRANSLATION_MEMORY_DIALOG_CONST(obj)       (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_TRANSLATION_MEMORY_DIALOG, GtrTranslationMemoryDialog const))
-#define GTR_TRANSLATION_MEMORY_DIALOG_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTR_TYPE_TRANSLATION_MEMORY_DIALOG, GtrTranslationMemoryDialogClass))
-#define GTR_IS_TRANSLATION_MEMORY_DIALOG(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_TRANSLATION_MEMORY_DIALOG))
-#define GTR_IS_TRANSLATION_MEMORY_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_TRANSLATION_MEMORY_DIALOG))
-#define GTR_TRANSLATION_MEMORY_DIALOG_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTR_TYPE_TRANSLATION_MEMORY_DIALOG, GtrTranslationMemoryDialogClass))
-
-typedef struct _GtrTranslationMemoryDialog         GtrTranslationMemoryDialog;
-typedef struct _GtrTranslationMemoryDialogClass    GtrTranslationMemoryDialogClass;
-
-struct _GtrTranslationMemoryDialog
-{
-  GtkDialog parent;
-};
-
-struct _GtrTranslationMemoryDialogClass
-{
-  GtkDialogClass parent_class;
-};
-
-GType            gtr_translation_memory_dialog_get_type     (void) G_GNUC_CONST;
+G_DECLARE_FINAL_TYPE (GtrTranslationMemoryDialog, gtr_translation_memory_dialog, GTR, TRANSLATION_MEMORY_DIALOG, GtkWindow)
 
 GtkWidget       *gtr_translation_memory_dialog_new          (GtkWindow *window,
                                                              GtrTranslationMemory *translation_memory);
 
 G_END_DECLS
-
-#endif /* __GTR_TRANSLATION_MEMORY_DIALOG_H__ */
