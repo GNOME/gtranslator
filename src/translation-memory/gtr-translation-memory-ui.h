@@ -23,12 +23,13 @@
 #include <glib.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define GTR_TYPE_TRANSLATION_MEMORY_UI          (gtr_translation_memory_ui_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrTranslationMemoryUi, gtr_translation_memory_ui, GTR, TRANSLATION_MEMORY_UI, GtkFrame)
+G_DECLARE_FINAL_TYPE (GtrTranslationMemoryUi, gtr_translation_memory_ui, GTR, TRANSLATION_MEMORY_UI, AdwBin)
 
 GType            gtr_translation_memory_ui_get_type             (void) G_GNUC_CONST;
 GType            gtr_translation_memory_ui_register_type        (GTypeModule            *module);

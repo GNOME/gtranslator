@@ -61,10 +61,10 @@ typedef struct
 
 struct _GtrTranslationMemoryUi
 {
-  GtkFrame parent_instance;
+  AdwBin parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrTranslationMemoryUi, gtr_translation_memory_ui, GTK_TYPE_FRAME)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrTranslationMemoryUi, gtr_translation_memory_ui, ADW_TYPE_BIN)
 
 // Type to use in the model to store translation memory entries
 #define GTR_TYPE_TM (gtr_tm_get_type ())
@@ -208,6 +208,7 @@ setup_widget (GtkSignalListItemFactory *factory,
   GtkWidget *box, *child;
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
+  gtk_widget_add_css_class (box, "message-table-row");
   gtk_list_item_set_child (list_item, box);
 
   // Shortcut
@@ -276,6 +277,7 @@ gtr_translation_memory_ui_init (GtrTranslationMemoryUi * tm_ui)
 
   model = GTK_SELECTION_MODEL (gtk_single_selection_new ((G_LIST_MODEL (priv->model))));
   priv->view = gtk_list_view_new (model, factory);
+  gtk_list_view_set_show_separators (GTK_LIST_VIEW (priv->view), TRUE);
   g_signal_connect (priv->view, "activate",
                     G_CALLBACK (row_activated), tm_ui);
 }
@@ -331,7 +333,7 @@ gtr_translation_memory_ui_new (GtkWidget *tab,
                     "showed-message", G_CALLBACK (showed_message_cb), tm_ui);
 
   /* Scrolledwindow needs to be realized to add a widget */
-  gtk_frame_set_child (GTK_FRAME (tm_ui), priv->view);
+  adw_bin_set_child (ADW_BIN (tm_ui), priv->view);
 
   return GTK_WIDGET (tm_ui);
 }
