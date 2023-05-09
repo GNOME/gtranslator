@@ -38,13 +38,6 @@ typedef struct
 {
   GSettings *settings;
 
-  GtkWidget *main_box;
-  GtkWidget *notebook;
-
-  GtkWidget *prj_page;
-  GtkWidget *lang_page;
-  GtkWidget *lang_vbox;
-
   GtkWidget *prj_id_version;
   GtkWidget *rmbt;
   GtkWidget *prj_comment;
@@ -71,10 +64,10 @@ typedef struct
 
 struct _GtrHeaderDialog
 {
-  GtkWindow parent_instance;
+  AdwPreferencesWindow parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrHeaderDialog, gtr_header_dialog, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrHeaderDialog, gtr_header_dialog, ADW_TYPE_PREFERENCES_WINDOW)
 
 static void
 gtr_header_dialog_dispose (GObject * object)
@@ -91,20 +84,45 @@ static void
 gtr_header_dialog_class_init (GtrHeaderDialogClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->dispose = gtr_header_dialog_dispose;
+
+  gtk_widget_class_set_template_from_resource (widget_class,
+                                               "/org/gnome/translator/gtr-header-dialog.ui");
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, take_my_options);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, translator);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, tr_email);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, language);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, lang_code);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, lg_email);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, charset);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, encoding);
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, prj_id_version);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, rmbt);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, pot_date);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, po_date);
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, prj_comment);
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, team);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, module);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, branch);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, domain);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, state);
 }
 
 static void
-take_my_options_checkbutton_toggled (GtkCheckButton * button,
-                                     GtrHeaderDialog * dlg)
+take_my_options_checkbutton_toggled (GtkSwitch *button,
+                                     GParamSpec *spec,
+                                     GtrHeaderDialog *dlg)
 {
   gboolean active;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
-  g_return_if_fail (button == GTK_CHECK_BUTTON (priv->take_my_options));
-
-  active = gtk_check_button_get_active (button);
+  active = gtk_switch_get_active (button);
 
   g_settings_set_boolean (priv->settings, GTR_SETTINGS_USE_PROFILE_VALUES,
                           active);
@@ -125,10 +143,10 @@ po_state_set_modified (GtrPo * po)
 }
 
 static void
-prj_comment_changed (GtkTextBuffer * buffer, GtrHeaderDialog * dlg)
+prj_comment_changed (GtkTextBuffer *buffer, GtrHeaderDialog * dlg)
 {
   GtkTextIter start, end;
-  gchar *text;
+  char *text;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
   gtk_text_buffer_get_bounds (buffer, &start, &end);
@@ -143,15 +161,12 @@ prj_comment_changed (GtkTextBuffer * buffer, GtrHeaderDialog * dlg)
 }
 
 static void
-prj_id_version_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
+prj_id_version_changed (GtkEditable *editable, GtrHeaderDialog * dlg)
 {
-  const gchar *text;
+  const char *text;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
-  //text = gtk_entry_get_text (GTK_ENTRY (widget));
-  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
-  text = gtk_entry_buffer_get_text (buffer);
-
+  text = gtk_editable_get_text (editable);
   if (text)
     {
       gtr_header_set_prj_id_version (gtr_po_get_header (priv->po), text);
@@ -160,15 +175,12 @@ prj_id_version_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 }
 
 static void
-rmbt_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
+rmbt_changed (GtkEditable *editable, GtrHeaderDialog * dlg)
 {
-  const gchar *text;
+  const char *text;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
-  //text = gtk_entry_get_text (GTK_ENTRY (widget));
-  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
-  text = gtk_entry_buffer_get_text (buffer);
-
+  text = gtk_editable_get_text (editable);
   if (text)
     {
       gtr_header_set_rmbt (gtr_po_get_header (priv->po), text);
@@ -177,15 +189,13 @@ rmbt_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 }
 
 static void
-translator_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
+translator_changed (GtkWidget *widget, GtrHeaderDialog * dlg)
 {
-  const gchar *name, *email;
+  const char *name, *email;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
-  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
-  name = gtk_entry_buffer_get_text (buffer);
-  buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
-  email = gtk_entry_buffer_get_text (buffer);
+  name = gtk_editable_get_text (GTK_EDITABLE (priv->translator));
+  email = gtk_editable_get_text (GTK_EDITABLE (priv->tr_email));
 
   if (name && email)
     {
@@ -197,18 +207,12 @@ translator_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 static void
 language_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 {
-  const gchar *language, *lg_email, *lang_code;
+  const char *language, *lg_email, *lang_code;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
-  // language = gtk_entry_get_text (GTK_ENTRY (priv->language));
-  language = gtk_entry_buffer_get_text (gtk_entry_get_buffer (GTK_ENTRY (priv->language)));
-
-  // lg_email = gtk_entry_get_text (GTK_ENTRY (priv->lg_email));
-  lg_email = gtk_entry_buffer_get_text (gtk_entry_get_buffer (GTK_ENTRY (priv->lg_email)));
-
-  // lang_code = gtk_entry_get_text (GTK_ENTRY (priv->lang_code));
-  lang_code = gtk_entry_buffer_get_text (gtk_entry_get_buffer (GTK_ENTRY (priv->lang_code)));
-
+  language = gtk_editable_get_text (GTK_EDITABLE (priv->language));
+  lg_email = gtk_editable_get_text (GTK_EDITABLE (priv->lg_email));
+  lang_code = gtk_editable_get_text (GTK_EDITABLE (priv->lang_code));
   if (language && lg_email)
     {
       gtr_header_set_language (gtr_po_get_header (priv->po),
@@ -221,21 +225,13 @@ language_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 static void
 dl_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 {
-  const gchar *team, *module, *branch, *domain;
+  const char *team, *module, *branch, *domain;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
-  //team = gtk_entry_get_text (GTK_ENTRY (priv->team));
-  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
-  team = gtk_entry_buffer_get_text (buffer);
-  //module = gtk_entry_get_text (GTK_ENTRY (priv->module));
-  buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
-  module = gtk_entry_buffer_get_text (buffer);
-  //branch = gtk_entry_get_text (GTK_ENTRY (priv->branch));
-  buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
-  branch = gtk_entry_buffer_get_text (buffer);
-  //domain = gtk_entry_get_text (GTK_ENTRY (priv->domain));
-  buffer = gtk_entry_get_buffer (GTK_ENTRY(widget));
-  domain = gtk_entry_buffer_get_text (buffer);
+  team = gtk_editable_get_text (GTK_EDITABLE (priv->team));
+  module = gtk_editable_get_text (GTK_EDITABLE (priv->module));
+  branch = gtk_editable_get_text (GTK_EDITABLE (priv->branch));
+  domain = gtk_editable_get_text (GTK_EDITABLE (priv->domain));
 
   gtr_header_set_dl_info (gtr_po_get_header (priv->po),
                           team, module, branch,
@@ -248,8 +244,8 @@ static void
 gtr_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
 {
   GtrHeader *header;
-  GtkTextBuffer *buffer;
   gchar *text;
+  GtkTextBuffer *buffer;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
   header = gtr_po_get_header (priv->po);
@@ -259,110 +255,83 @@ gtr_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
   gtk_text_buffer_set_text (buffer, gtr_header_get_comments (header), -1);
 
   text = gtr_header_get_prj_id_version (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->prj_id_version), text);
-  GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->prj_id_version));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
+  gtk_editable_set_text (GTK_EDITABLE (priv->prj_id_version), text);
   g_free (text);
 
   text = gtr_header_get_pot_date (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->pot_date), text);
-  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->pot_date));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
+  gtk_editable_set_text (GTK_EDITABLE (priv->pot_date), text);
   g_free (text);
 
   text = gtr_header_get_po_date (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->po_date), text);
-  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->po_date));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
+  gtk_editable_set_text (GTK_EDITABLE (priv->po_date), text);
   g_free (text);
 
   text = gtr_header_get_rmbt (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->rmbt), text);
-  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->rmbt));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
+  gtk_editable_set_text (GTK_EDITABLE (priv->rmbt), text);
   g_free (text);
 
   /* Translator and Language Information */
   text = gtr_header_get_translator (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->translator), text);
-  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->translator));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
+  gtk_editable_set_text (GTK_EDITABLE (priv->translator), text);
   g_free (text);
 
   text = gtr_header_get_tr_email (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->tr_email), text);
-  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->tr_email));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
+  gtk_editable_set_text (GTK_EDITABLE (priv->tr_email), text);
   g_free (text);
 
   text = gtr_header_get_language (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->language), text);
-  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->language));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
+  gtk_editable_set_text (GTK_EDITABLE (priv->language), text);
   g_free (text);
 
   text = gtr_header_get_language_code (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->lang_code), text);
-  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->lang_code));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
+  gtk_editable_set_text (GTK_EDITABLE (priv->lang_code), text);
   g_free (text);
 
   text = gtr_header_get_lg_email (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->lg_email), text);
-  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->lg_email));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
+  gtk_editable_set_text (GTK_EDITABLE (priv->lg_email), text);
   g_free (text);
 
   text = gtr_header_get_charset (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->charset), text);
-  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->charset));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
+  gtk_editable_set_text (GTK_EDITABLE (priv->charset), text);
   g_free (text);
 
   text = gtr_header_get_encoding (header);
-  //gtk_entry_set_text (GTK_ENTRY (priv->encoding), text);
-  entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->encoding));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
+  gtk_editable_set_text (GTK_EDITABLE (priv->encoding), text);
   g_free (text);
 
   /* Damned Lies Information */
   text = gtr_header_get_dl_team (header);
   if (text)
     {
-      entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->team));
-      gtk_entry_buffer_set_text (entry_buffer, text, -1);
+      gtk_editable_set_text (GTK_EDITABLE (priv->team), text);
       g_free (text);
     }
 
   text = gtr_header_get_dl_module (header);
   if (text)
     {
-      entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->module));
-      gtk_entry_buffer_set_text (entry_buffer, text, -1);
+      gtk_editable_set_text (GTK_EDITABLE (priv->module), text);
       g_free (text);
     }
 
   text = gtr_header_get_dl_branch (header);
   if (text)
     {
-      entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->branch));
-      gtk_entry_buffer_set_text (entry_buffer, text, -1);
+      gtk_editable_set_text (GTK_EDITABLE (priv->branch), text);
       g_free (text);
     }
 
   text = gtr_header_get_dl_domain (header);
   if (text)
     {
-      entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->domain));
-      gtk_entry_buffer_set_text (entry_buffer, text, -1);
+      gtk_editable_set_text (GTK_EDITABLE (priv->domain), text);
       g_free (text);
     }
 
   text = gtr_header_get_dl_state (header);
   if (text)
     {
-      entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(priv->state));
-      gtk_entry_buffer_set_text (entry_buffer, text, -1);
+      gtk_editable_set_text (GTK_EDITABLE (priv->state), text);
       g_free (text);
     }
 }
@@ -371,72 +340,17 @@ static void
 gtr_header_dialog_init (GtrHeaderDialog * dlg)
 {
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
-  GtkBox *content_area;
-  GtkBuilder *builder;
-
-  GError *error = NULL;
-  const char *root_objects[] = {
-    "main_box",
-    NULL
-  };
 
   priv->settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
 
   gtk_window_set_title (GTK_WINDOW (dlg), _("Edit Header"));
-  gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
+  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
-  content_area = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 6));
-  gtk_window_set_child (GTK_WINDOW (dlg), GTK_WIDGET (content_area));
+  gtk_widget_init_template (GTK_WIDGET (dlg));
 
-  builder = gtk_builder_new ();
-  gtk_builder_add_objects_from_resource (
-    builder, "/org/gnome/translator/gtr-header-dialog.ui",
-    root_objects,
-    &error
-  );
-
-  if (error != NULL)
-    {
-      g_warning ("Error parsing gtr-header-dialog.ui: %s", (error)->message);
-      g_error_free (error);
-    }
-
-  priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
-  g_object_ref (priv->main_box);
-  priv->notebook = GTK_WIDGET (gtk_builder_get_object (builder, "notebook"));
-  priv->lang_vbox = GTK_WIDGET (gtk_builder_get_object (builder, "lang_vbox"));
-  priv->prj_id_version = GTK_WIDGET (gtk_builder_get_object (builder, "prj_id_version"));
-  priv->rmbt = GTK_WIDGET (gtk_builder_get_object (builder, "rmbt"));
-  priv->prj_comment = GTK_WIDGET (gtk_builder_get_object (builder, "prj_comment"));
-  priv->take_my_options = GTK_WIDGET (gtk_builder_get_object (builder, "take_my_options"));
-  priv->translator = GTK_WIDGET (gtk_builder_get_object (builder, "tr_name"));
-  priv->tr_email = GTK_WIDGET (gtk_builder_get_object (builder, "tr_email"));
-  priv->pot_date = GTK_WIDGET (gtk_builder_get_object (builder, "pot_date"));
-  priv->po_date = GTK_WIDGET (gtk_builder_get_object (builder, "po_date"));
-  priv->language = GTK_WIDGET (gtk_builder_get_object (builder, "language_entry"));
-  priv->lang_code = GTK_WIDGET (gtk_builder_get_object (builder, "language_code_entry"));
-  priv->lg_email = GTK_WIDGET (gtk_builder_get_object (builder, "lg_email_entry"));
-  priv->charset = GTK_WIDGET (gtk_builder_get_object (builder, "charset_entry"));
-  priv->encoding = GTK_WIDGET (gtk_builder_get_object (builder, "encoding_entry"));
-  priv->team = GTK_WIDGET (gtk_builder_get_object (builder, "team"));
-  priv->module = GTK_WIDGET (gtk_builder_get_object (builder, "module"));
-  priv->branch = GTK_WIDGET (gtk_builder_get_object (builder, "branch"));
-  priv->domain = GTK_WIDGET (gtk_builder_get_object (builder, "domain"));
-  priv->state = GTK_WIDGET (gtk_builder_get_object (builder, "state"));
-
-  g_object_unref (builder);
-
-  gtk_box_append (content_area, priv->main_box);
-
-  gtk_widget_set_margin_start (priv->notebook, 6);
-  gtk_widget_set_margin_end (priv->notebook, 6);
-  gtk_widget_set_margin_top (priv->notebook, 6);
-  gtk_widget_set_margin_bottom (priv->notebook, 6);
-
-  gtk_check_button_set_active (GTK_CHECK_BUTTON (priv->take_my_options),
-                               g_settings_get_boolean (priv->settings,
-                                                       GTR_SETTINGS_USE_PROFILE_VALUES));
+  gtk_switch_set_active (GTK_SWITCH (priv->take_my_options),
+                         g_settings_get_boolean (priv->settings, GTR_SETTINGS_USE_PROFILE_VALUES));
 
   gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->prj_comment), TRUE);
 
@@ -445,14 +359,12 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
   gtk_widget_set_sensitive (priv->charset, FALSE);
   gtk_widget_set_sensitive (priv->state, FALSE);
 
-  if (gtk_check_button_get_active
-      (GTK_CHECK_BUTTON (priv->take_my_options)))
+  if (gtk_switch_get_active (GTK_SWITCH (priv->take_my_options)))
     {
       gboolean active;
 
       active =
-        gtk_check_button_get_active (GTK_CHECK_BUTTON
-                                     (priv->take_my_options));
+        gtk_switch_get_active (GTK_SWITCH (priv->take_my_options));
 
       gtk_widget_set_sensitive (priv->translator, !active);
       gtk_widget_set_sensitive (priv->tr_email, !active);
@@ -478,11 +390,10 @@ set_default_values (GtrHeaderDialog * dlg, GtrWindow * window)
   gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
 
   /*Connect signals */
-  g_signal_connect (priv->take_my_options, "toggled",
+  g_signal_connect (priv->take_my_options, "notify::active",
                     G_CALLBACK (take_my_options_checkbutton_toggled), dlg);
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->prj_comment));
-
   g_signal_connect (buffer, "changed", G_CALLBACK (prj_comment_changed), dlg);
 
   /* Connect signals to edit Project information on Header dialog */
@@ -531,10 +442,10 @@ gtr_show_header_dialog (GtrWindow * window)
   tab = gtr_window_get_active_tab (window);
   g_return_if_fail (tab != NULL);
 
-  dlg = GTK_WIDGET (g_object_new (GTR_TYPE_HEADER_DIALOG,
-                                  "use-header-bar", TRUE, NULL));
+  dlg = GTK_WIDGET (g_object_new (GTR_TYPE_HEADER_DIALOG, NULL));
   set_default_values (GTR_HEADER_DIALOG (dlg), window);
 
+  gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
   gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
   gtk_window_present (GTK_WINDOW (dlg));
 }
