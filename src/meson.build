@@ -153,6 +153,6 @@ executable(
   'main.c',
   include_directories: top_inc,
   dependencies: gtr_deps,
-  objects: libgtranslator.extract_all_objects(),
+  objects: libgtranslator.extract_all_objects(recursive: true),
   install: true,
 )
