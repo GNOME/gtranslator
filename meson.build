@@ -38,7 +38,7 @@ gtr_debug = gtr_buildtype.contains('debug')
 if gtr_debug
   profile = 'Devel'
   name_suffix = ' (Development)'
-  vcs_tag = run_command(find_program('git'), 'rev-parse', '--short', 'HEAD').stdout().strip()
+  vcs_tag = run_command(find_program('git'), 'rev-parse', '--short', 'HEAD', check: false).stdout().strip()
   version_suffix = '-' + (vcs_tag == '' ? 'devel' : vcs_tag)
 else
   profile = ''
