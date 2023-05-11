@@ -95,9 +95,9 @@ pkg = import('pkgconfig')
 
 top_inc = include_directories('.')
 
-data_dir = join_paths(meson.source_root(), 'data')
-po_dir = join_paths(meson.source_root(), 'po')
-src_dir = join_paths(meson.source_root(), 'src')
+data_dir = join_paths(meson.project_source_root(), 'data')
+po_dir = join_paths(meson.project_source_root(), 'po')
+src_dir = join_paths(meson.project_source_root(), 'src')
 
 ################
 # Dependencies #
