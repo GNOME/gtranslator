@@ -123,7 +123,7 @@ gtr_deps = [
   cc.find_library('gettextpo'),
 ]
 
-gtr_schemasdir = dependency('gio-2.0').get_pkgconfig_variable('schemasdir', define_variable: ['datadir', gtr_datadir])
+gtr_schemasdir = dependency('gio-2.0').get_variable(pkgconfig: 'schemasdir', pkgconfig_define: ['datadir', gtr_datadir])
 if gtr_schemasdir == ''
   gtr_schemasdir = join_paths(gtr_datadir, 'glib-2.0', 'schemas')
   message(gtr_schemasdir)
