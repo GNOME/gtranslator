@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the gtranslator package.
 # Mohammad DAMT <mdamt@bisnisweb.com>, 2003.
 # Andika Triwidada <andika@gmail.com>, 2009-2013, 2016, 2017, 2020-2023.
-# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2022.
+# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-42\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-01-25 20:32+0000\n"
-"PO-Revision-Date: 2023-03-20 16:09+0700\n"
-"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"POT-Creation-Date: 2023-04-25 17:29+0000\n"
+"PO-Revision-Date: 2023-05-10 14:49+0700\n"
+"Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgstr ""
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:672
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:638
 #: src/gtr-notebook.ui:216 src/gtr-window.c:229 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Penyunting Terjemahan"
@@ -249,7 +249,7 @@ msgid "translator-credits"
 msgstr ""
 "Mohammad DAMT <mdamt@bisnisweb.com>, 2003.\n"
 "Andika Triwidada <andika@gmail.com>, 2009-2013, 2016, 2020-2023.\n"
-"Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2022."
+"Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2023."
 
 #: src/gtr-actions-app.c:114
 msgid "Translation Editor Web Site"
@@ -519,8 +519,8 @@ msgid "Main Menu"
 msgstr "Menu Utama"
 
 #: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:151 src/gtr-projects.ui:119
-msgid "New window"
-msgstr "Jendela baru"
+msgid "New Window"
+msgstr "Jendela Baru"
 
 #: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:160 src/gtr-projects.ui:133
 msgid "Preferences"
@@ -531,8 +531,8 @@ msgid "Keyboard Shortcuts"
 msgstr "Pintasan Papan Tik"
 
 #: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:186 src/gtr-projects.ui:188
-msgid "About"
-msgstr "Tentang"
+msgid "About Translation Editor"
+msgstr "Tentang Penyunting Terjemahan"
 
 #: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:204 src/gtr-projects.ui:216
 msgid "Quit"
@@ -559,7 +559,7 @@ msgstr "Semua berkas"
 msgid "Choose Language"
 msgstr "Pilih Bahasa"
 
-#: src/gtr-header-dialog.c:325
+#: src/gtr-header-dialog.c:325 src/gtr-notebook.ui:133
 msgid "Edit Header"
 msgstr "Sunting Header"
 
@@ -718,16 +718,12 @@ msgid "Find"
 msgstr "Cari"
 
 #: src/gtr-notebook.ui:114
-msgid "Find and replace"
-msgstr "Cari dan ganti"
+msgid "Find and Replace"
+msgstr "Cari dan Ganti"
 
 #: src/gtr-notebook.ui:123 src/gtr-projects.ui:147
-msgid "Build translation memory"
+msgid "Build Translation Memory"
 msgstr "Bangun Ingatan Terjemahan"
-
-#: src/gtr-notebook.ui:133
-msgid "Edit header"
-msgstr "Sunting header"
 
 #: src/gtr-notebook.ui:195 src/gtr-preferences-dialog.c:665
 #: src/gtr-projects.ui:202
@@ -1021,7 +1017,7 @@ msgstr "Peka huruf besar kecil"
 msgid "Match whole word only"
 msgstr "Hanya cocok seluruh kata"
 
-#: src/gtr-search-bar.c:424
+#: src/gtr-search-bar.c:424 src/gtr-search-bar.ui:240
 msgid "Wrap around"
 msgstr "Melipat"
 
@@ -1050,10 +1046,6 @@ msgid "Show or hide search options such as case sensitivity"
 msgstr ""
 "Tampilkan atau sembunyikan opsi pencarian seperti misalnya peka huruf besar "
 "kecil"
-
-#: src/gtr-search-bar.ui:240
-msgid "Wrap Around"
-msgstr "Melipat"
 
 #: src/gtr-tab-label.c:280
 msgid "Close document"
@@ -1152,122 +1144,142 @@ msgctxt "shortcut window"
 msgid "Save the current file"
 msgstr "Menyimpan berkas ini"
 
-#: src/help-overlay.ui:32
+#: src/help-overlay.ui:32 src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Save the current file as"
 msgstr "Simpan berkas saat ini sebagai"
 
-#: src/help-overlay.ui:40
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Download from DL"
+msgstr "Unduh dari DL"
+
+#: src/help-overlay.ui:53
+msgctxt "shortcut window"
+msgid "Upload to DL"
+msgstr "Unggah ke DL"
+
+#: src/help-overlay.ui:60
 msgctxt "shortcut window"
 msgid "Preferences"
 msgstr "Preferensi"
 
-#: src/help-overlay.ui:47
+#: src/help-overlay.ui:67
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Pintasan Papan Tik"
 
-#: src/help-overlay.ui:54
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Help"
 msgstr "Bantuan"
 
-#: src/help-overlay.ui:61
+#: src/help-overlay.ui:81
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Keluar"
 
-#: src/help-overlay.ui:71
+#: src/help-overlay.ui:90
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "Sunting"
 
-#: src/help-overlay.ui:75
+#: src/help-overlay.ui:95
 msgctxt "shortcut window"
 msgid "Undo"
 msgstr "Tak jadi"
 
-#: src/help-overlay.ui:82
+#: src/help-overlay.ui:102
 msgctxt "shortcut window"
 msgid "Redo"
 msgstr "Jadi Lagi"
 
-#: src/help-overlay.ui:89
+#: src/help-overlay.ui:109
+msgctxt "shortcut window"
+msgid "Clear translation"
+msgstr "Kosongkan terjemahan"
+
+#: src/help-overlay.ui:116
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Tandai/hapus tanda sebagai ragu"
 
-#: src/help-overlay.ui:96
+#: src/help-overlay.ui:123
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "Salin teks asli ke terjemahan"
 
-#: src/help-overlay.ui:106
+#: src/help-overlay.ui:132
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Navigasi"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:137
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Ke pesan sebelumnya"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:144
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Ke pesan berikutnya"
 
-#: src/help-overlay.ui:124
+#: src/help-overlay.ui:151
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Ke pesan sebelumnya yang belum diterjemahkan"
 
-#: src/help-overlay.ui:131
+#: src/help-overlay.ui:158
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Ke pesan selanjutnya yang belum diterjemahkan"
 
-#: src/help-overlay.ui:141
+#: src/help-overlay.ui:167
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Ingatan Terjemahan"
 
-#: src/help-overlay.ui:145
+#: src/help-overlay.ui:172
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Bangun ingatan terjemahan"
 
-#: src/help-overlay.ui:152
+#: src/help-overlay.ui:179
 msgctxt "shortcut window"
 msgid "Copy below"
 msgstr "Salin di bawah"
 
-#: src/help-overlay.ui:162
+#: src/help-overlay.ui:186
+msgctxt "shortcut window"
+msgid "Use 1st...9th suggestion"
+msgstr "Gunakan saran ke-1...9"
+
+#: src/help-overlay.ui:195
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Cari & Ganti"
 
-#: src/help-overlay.ui:166
+#: src/help-overlay.ui:200
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Cari"
 
-#: src/help-overlay.ui:173
+#: src/help-overlay.ui:207
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Cari & Ganti"
 
-#: src/help-overlay.ui:180
+#: src/help-overlay.ui:214
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "Pencarian maju"
 
-#: src/help-overlay.ui:187
+#: src/help-overlay.ui:221
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Pencarian mundur"
 
-#: src/help-overlay.ui:194
+#: src/help-overlay.ui:228
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Sembunyikan bilah cari dan ganti"
@@ -1386,3 +1398,12 @@ msgid ""
 msgstr ""
 "Perbedaan panjang maksimum antar pesan yang ditampilkan sebagai cocok oleh "
 "ingatan terjemahan."
+
+#~ msgid "About"
+#~ msgstr "Tentang"
+
+#~ msgid "Edit header"
+#~ msgstr "Sunting header"
+
+#~ msgid "Wrap Around"
+#~ msgstr "Melipat"
