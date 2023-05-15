@@ -265,10 +265,10 @@ create_profile_row (GtrPreferencesDialog *dlg,
 
   // MenuButton
   gmenu = g_menu_new ();
-  gitem = g_menu_item_new (_("edit"), "profile.edit");
+  gitem = g_menu_item_new (_("Edit"), "profile.edit");
   g_menu_item_set_action_and_target (gitem, "profile.edit", "s", profile_name);
   g_menu_append_item (gmenu, gitem);
-  gitem = g_menu_item_new (_("delete"), "profile.delete");
+  gitem = g_menu_item_new (_("Delete"), "profile.delete");
   g_menu_item_set_action_and_target (gitem, "profile.delete", "s", profile_name);
   g_menu_append_item (gmenu, gitem);
 
