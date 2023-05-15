@@ -277,6 +277,7 @@ create_profile_row (GtrPreferencesDialog *dlg,
   gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (menu), G_MENU_MODEL (gmenu));
   gtk_menu_button_set_icon_name (GTK_MENU_BUTTON (menu), "view-more-symbolic");
   adw_action_row_add_suffix (ADW_ACTION_ROW (row), menu);
+  gtk_widget_add_css_class (menu, "flat");
 
   adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), check);
 
