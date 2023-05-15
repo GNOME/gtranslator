@@ -596,7 +596,6 @@ gtr_application_startup (GApplication *application)
   GtrApplication *app = GTR_APPLICATION (application);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  g_application_set_resource_base_path (application, "/org/gnome/translator");
   G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
   g_set_application_name (_("Translation Editor"));
   gtk_window_set_default_icon_name (PACKAGE_APPID);
@@ -738,6 +737,7 @@ gtr_application_new ()
   return GTR_APPLICATION (g_object_new (GTR_TYPE_APPLICATION,
                                         "application-id", PACKAGE_APPID,
                                         "flags", G_APPLICATION_HANDLES_OPEN,
+                                        "resource-base-path", "/org/gnome/translator/",
                                         NULL));
 }
 
