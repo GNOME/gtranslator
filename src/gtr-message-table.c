@@ -28,6 +28,7 @@
 #endif
 
 #include "gtr-message-table.h"
+#include "gtr-message-table-row.h"
 #include "gtr-msg.h"
 #include "gtr-po.h"
 #include "gtr-tab.h"
@@ -126,6 +127,8 @@ gtr_message_table_init (GtrMessageTable * table)
   priv->translation_sorter = GTK_SORTER (gtk_string_sorter_new (gtk_property_expression_new (GTR_TYPE_MSG, NULL, "translation")));
 
   priv->sort_status = GTR_MESSAGE_TABLE_SORT_ID;
+  priv->store = NULL;
+  priv->id_sorter = NULL;
 
   gtk_orientable_set_orientation (GTK_ORIENTABLE (table),
                                   GTK_ORIENTATION_VERTICAL);
@@ -232,6 +235,8 @@ gtr_message_table_class_init (GtrMessageTableClass * klass)
                                                         GTR_TYPE_TAB,
                                                         G_PARAM_READWRITE |
                                                         G_PARAM_CONSTRUCT_ONLY));
+
+  g_type_ensure (gtr_message_table_row_get_type ());
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/translator/gtr-message-table.ui");
@@ -388,6 +393,9 @@ gtr_message_table_sort_by (GtrMessageTable *table,
   GtrMessageTablePrivate *priv;
   priv = gtr_message_table_get_instance_private (table);
   priv->sort_status = sort;
+
+  if (!priv->store)
+    return;
 
   switch (sort)
     {
