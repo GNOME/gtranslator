@@ -2,7 +2,6 @@
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <object class="GtkDialog" id="dialog1">
-    <property name="can_focus">False</property>
     <property name="margin_start">6</property>
     <property name="margin_end">6</property>
     <property name="margin_top">6</property>
@@ -12,20 +11,17 @@
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox1">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <object class="GtkBox" id="main_box">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="vexpand">True</property>
             <property name="orientation">vertical</property>
             <property name="spacing">6</property>
             <child>
               <object class="GtkLabel" id="filename_label">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="xalign">0</property>
                 <property name="label" translatable="yes">Source code</property>
                 <attributes>
@@ -36,7 +32,6 @@
             <child>
               <object class="GtkScrolledWindow" id="scrolledwindow">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="vexpand">True</property>
                 <child>
                   <placeholder/>
