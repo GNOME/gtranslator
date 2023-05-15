@@ -676,10 +676,6 @@ gtr_application_setup_window (GApplication *application,
   window = gtr_application_create_window (GTR_APPLICATION (application));
   gtk_application_add_window (GTK_APPLICATION (application), GTK_WINDOW (window));
 
-  /** loading custom styles **/
-  if (g_strrstr (PACKAGE_APPID, "Devel") != NULL)
-    gtk_widget_add_css_class (GTK_WIDGET (window), "devel");
-
   /* If it is the first run, the default directory was created in this
    * run, then we show the First run greeter
    */

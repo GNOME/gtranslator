@@ -248,6 +248,10 @@ gtr_window_init (GtrWindow *window)
   priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
   priv->active_tab = NULL;
 
+  /* loading custom styles */
+  if (g_strrstr (PACKAGE_APPID, "Devel") != NULL)
+    gtk_widget_add_css_class (GTK_WIDGET (window), "devel");
+
   gtk_widget_init_template (GTK_WIDGET (window));
 
   /* Profile manager */
