@@ -600,6 +600,8 @@ gtr_application_startup (GApplication *application)
   g_set_application_name (_("Translation Editor"));
   gtk_window_set_default_icon_name (PACKAGE_APPID);
 
+  gtk_source_init ();
+
   /* Custom css */
   priv->provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (priv->provider, "/org/gnome/translator/styles.css");
