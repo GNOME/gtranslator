@@ -607,9 +607,6 @@ gtr_application_startup (GApplication *application)
   gtk_style_context_add_provider_for_display (gdk_display_get_default (),
                                               GTK_STYLE_PROVIDER (priv->provider), 600);
 
-  adw_style_manager_set_color_scheme (adw_style_manager_get_default (),
-                                      ADW_COLOR_SCHEME_PREFER_LIGHT);
-
   g_action_map_add_action_entries (G_ACTION_MAP (application), app_entries,
                                    G_N_ELEMENTS (app_entries), application);
 
