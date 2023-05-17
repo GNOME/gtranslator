@@ -144,7 +144,6 @@ gtr_message_table_finalize (GObject * object)
   priv = gtr_message_table_get_instance_private (table);
   if (priv->store)
     {
-      gtk_list_view_set_model (GTK_LIST_VIEW (priv->messages), NULL);
       g_object_unref (priv->store);
       g_object_unref (priv->selection);
       g_object_unref (priv->sort_model);
