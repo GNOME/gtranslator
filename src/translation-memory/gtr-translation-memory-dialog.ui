@@ -42,13 +42,11 @@
                     <child>
                       <object class="AdwActionRow" id="directory">
                         <property name="title" translatable="yes">Select the directory which contains PO files</property>
-                        <property name="subtitle" translatable="no"></property>
-                        <property name="activatable-widget">search_button</property>
+                        <property name="activatable">True</property>
+                        <signal name="activated" handler="select_directory_activated_cb" swapped="yes" />
                         <child type="suffix">
-                          <object class="GtkButton" id="search_button">
-                            <property name="icon-name">preferences-system-search-symbolic</property>
-                            <property name="label" translatable="true">Search</property>
-                            <property name="valign">center</property>
+                          <object class="GtkImage">
+                            <property name="icon-name">go-next-symbolic</property>
                           </object>
                         </child>
                       </object>
