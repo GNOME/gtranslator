@@ -239,12 +239,8 @@ static void
 clean_paths (GtrContextPanel *panel)
 {
   GtrContextPanelPrivate *priv = gtr_context_panel_get_instance_private (panel);
-  GtkListBoxRow *row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (priv->paths), 0);
-  while (row)
-    {
-      gtk_list_box_remove (GTK_LIST_BOX (priv->paths), GTK_WIDGET (row));
-      row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (priv->paths), 0);
-    }
+
+  gtk_list_box_remove_all (GTK_LIST_BOX (priv->paths));
 }
 
 static void
@@ -457,7 +453,7 @@ gtr_context_add_path (GtrContextPanel *panel,
                       const char      *filename,
                       int             line)
 {
-  GtkWidget *widget = NULL;
+  GtkWidget *row;
   GtrContextPanelPrivate *priv = gtr_context_panel_get_instance_private (panel);
 
   g_autofree char *text = g_strdup_printf ("%s:%d", filename, line);
@@ -465,8 +461,8 @@ gtr_context_add_path (GtrContextPanel *panel,
   // TODO: make file path clickable it should open the dialog GtrViewer with
   // the source if it's found in the local filesystem or try to open the gnome
   // gitlab if this looks like a gnome project?
-  widget = gtk_label_new (text);
-  gtk_label_set_xalign (GTK_LABEL (widget), 0.0);
+  row = adw_action_row_new ();
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), text);
 
-  gtk_list_box_append (GTK_LIST_BOX (priv->paths), widget);
+  gtk_list_box_append (GTK_LIST_BOX (priv->paths), row);
 }
