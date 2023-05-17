@@ -650,6 +650,7 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.tm_8", "<Ctrl>8");
   set_kb (application, "app.tm_9", "<Ctrl>9");
 
+  set_kb (application, "window.close", "<Ctrl>w");
 }
 
 static void
