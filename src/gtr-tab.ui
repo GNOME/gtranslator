@@ -280,81 +280,72 @@
   </object>
   <object class="GtkHeaderBar" id="titlebar">
     <child>
-      <object class="GtkBox">
-        <child>
-          <object class="GtkButton" id="open_button">
-            <property name="receives_default">1</property>
-            <property name="tooltip_text" translatable="1">Open a New File</property>
-            <property name="action_name">app.open</property>
-            <property name="icon_name">document-open-symbolic</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="dl_button">
-            <property name="tooltip_text" translatable="1">Open from Damned Lies</property>
-            <property name="action_name">app.dl</property>
-            <property name="icon_name">folder-download-symbolic</property>
-          </object>
-        </child>
+      <object class="GtkButton" id="open_button">
+        <property name="receives_default">1</property>
+        <property name="tooltip_text" translatable="1">Open a New File</property>
+        <property name="action_name">app.open</property>
+        <property name="icon_name">document-open-symbolic</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="dl_button">
+        <property name="tooltip_text" translatable="1">Open from Damned Lies</property>
+        <property name="action_name">app.dl</property>
+        <property name="icon_name">folder-download-symbolic</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparator">
         <style>
-          <class name="linked"/>
+          <class name="spacer"/>
         </style>
       </object>
     </child>
     <child>
-      <object class="GtkSeparator"/>
+      <object class="GtkButton" id="undo">
+        <property name="receives_default">1</property>
+        <property name="tooltip_text" translatable="1">Undo</property>
+        <property name="action_name">app.undo</property>
+        <property name="icon_name">edit-undo-symbolic</property>
+      </object>
     </child>
     <child>
-      <object class="GtkBox">
-        <child>
-          <object class="GtkButton" id="undo">
-            <property name="receives_default">1</property>
-            <property name="tooltip_text" translatable="1">Undo</property>
-            <property name="action_name">app.undo</property>
-            <property name="icon_name">edit-undo-symbolic</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="redo">
-            <property name="receives_default">1</property>
-            <property name="tooltip_text" translatable="1">Redo</property>
-            <property name="action_name">app.redo</property>
-            <property name="icon_name">edit-redo-symbolic</property>
-          </object>
-        </child>
+      <object class="GtkButton" id="redo">
+        <property name="receives_default">1</property>
+        <property name="tooltip_text" translatable="1">Redo</property>
+        <property name="action_name">app.redo</property>
+        <property name="icon_name">edit-redo-symbolic</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparator">
         <style>
-          <class name="linked"/>
+          <class name="spacer"/>
         </style>
       </object>
     </child>
     <child>
-      <object class="GtkSeparator"/>
-    </child>
-    <child>
-      <object class="GtkBox">
-        <child>
-          <object class="GtkButton" id="prev_untranslated">
-            <property name="receives_default">1</property>
-            <property name="tooltip_text" translatable="1">Previous message without translation (&lt;Alt&gt;&lt;Page Up&gt;)</property>
-            <property name="action_name">app.prev_no</property>
-            <property name="icon_name">go-up-symbolic</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="next_untranslated">
-            <property name="receives_default">1</property>
-            <property name="tooltip_text" translatable="1">Next message without translation (&lt;Alt&gt;&lt;Page Down&gt;)</property>
-            <property name="action_name">app.next_no</property>
-            <property name="icon_name">go-down-symbolic</property>
-          </object>
-        </child>
-        <style>
-          <class name="linked"/>
-        </style>
+      <object class="GtkButton" id="prev_untranslated">
+        <property name="receives_default">1</property>
+        <property name="tooltip_text" translatable="1">Previous message without translation (&lt;Alt&gt;&lt;Page Up&gt;)</property>
+        <property name="action_name">app.prev_no</property>
+        <property name="icon_name">go-up-symbolic</property>
       </object>
     </child>
     <child>
-      <object class="GtkSeparator"/>
+      <object class="GtkButton" id="next_untranslated">
+        <property name="receives_default">1</property>
+        <property name="tooltip_text" translatable="1">Next message without translation (&lt;Alt&gt;&lt;Page Down&gt;)</property>
+        <property name="action_name">app.next_no</property>
+        <property name="icon_name">go-down-symbolic</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparator">
+        <style>
+          <class name="spacer"/>
+        </style>
+      </object>
     </child>
     <child>
       <object class="GtkButton">
@@ -379,11 +370,11 @@
         <property name="popover">main_menu_popover</property>
         <property name="icon_name">open-menu-symbolic</property>
         <!-- TODO: To be replace in gtk4
-        <child internal-child="accessible">
-          <object class="AtkObject" id="main_menu-atkobject">
-            <property name="AtkObject::accessible-name" translatable="1">Main Menu</property>
-          </object>
-        </child>-->
+             <child internal-child="accessible">
+             <object class="AtkObject" id="main_menu-atkobject">
+             <property name="AtkObject::accessible-name" translatable="1">Main Menu</property>
+             </object>
+             </child>-->
       </object>
     </child>
     <child type="end">
