@@ -152,8 +152,8 @@ on_draw (GtkDrawingArea  *widget,
   translated = (float) (priv->trans) / (float) total;
   fuzzy = (float) (priv->fuzzy) / (float) total;
 
-  width = gtk_widget_get_allocated_width (GTK_WIDGET (widget));
-  height = gtk_widget_get_allocated_height (GTK_WIDGET (widget));
+  width = gtk_widget_get_width (GTK_WIDGET (widget));
+  height = gtk_widget_get_height (GTK_WIDGET (widget));
 
   gdk_cairo_set_source_rgba (cr, &background);
   cairo_rectangle (cr, 0, 0, width * total, height);
