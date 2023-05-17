@@ -130,6 +130,8 @@ gtr_message_table_init (GtrMessageTable * table)
   gtk_orientable_set_orientation (GTK_ORIENTABLE (table),
                                   GTK_ORIENTATION_VERTICAL);
 
+  priv->sort_model = gtk_sort_list_model_new (NULL, NULL);
+
   gtk_widget_init_template (GTK_WIDGET (table));
 }
 
@@ -273,11 +275,10 @@ gtr_message_table_populate (GtrMessageTable * table, GtrMessageContainer * conta
       gtk_list_view_set_model (GTK_LIST_VIEW (priv->messages), NULL);
       g_object_unref (priv->store);
       g_object_unref (priv->selection);
-      g_object_unref (priv->sort_model);
     }
 
   priv->store = g_list_store_new (GTR_TYPE_MSG);
-  priv->sort_model = gtk_sort_list_model_new (G_LIST_MODEL (priv->store), NULL);
+  gtk_sort_list_model_set_model (priv->sort_model, G_LIST_MODEL (priv->store));
   priv->selection = gtk_single_selection_new (G_LIST_MODEL (priv->sort_model));
 
   gtk_list_view_set_model (GTK_LIST_VIEW (priv->messages), GTK_SELECTION_MODEL (priv->selection));
