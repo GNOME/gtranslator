@@ -596,10 +596,11 @@ gtr_application_startup (GApplication *application)
   GtrApplication *app = GTR_APPLICATION (application);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  g_application_set_resource_base_path (application, "/org/gnome/translator");
   G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
   g_set_application_name (_("Translation Editor"));
   gtk_window_set_default_icon_name (PACKAGE_APPID);
+
+  gtk_source_init ();
 
   /* Custom css */
   priv->provider = gtk_css_provider_new ();
@@ -607,9 +608,6 @@ gtr_application_startup (GApplication *application)
 
   gtk_style_context_add_provider_for_display (gdk_display_get_default (),
                                               GTK_STYLE_PROVIDER (priv->provider), 600);
-
-  adw_style_manager_set_color_scheme (adw_style_manager_get_default (),
-                                      ADW_COLOR_SCHEME_PREFER_LIGHT);
 
   g_action_map_add_action_entries (G_ACTION_MAP (application), app_entries,
                                    G_N_ELEMENTS (app_entries), application);
@@ -677,10 +675,6 @@ gtr_application_setup_window (GApplication *application,
   window = gtr_application_create_window (GTR_APPLICATION (application));
   gtk_application_add_window (GTK_APPLICATION (application), GTK_WINDOW (window));
 
-  /** loading custom styles **/
-  if (g_strrstr (PACKAGE_APPID, "Devel") != NULL)
-    gtk_widget_add_css_class (GTK_WIDGET (window), "devel");
-
   /* If it is the first run, the default directory was created in this
    * run, then we show the First run greeter
    */
@@ -738,6 +732,7 @@ gtr_application_new ()
   return GTR_APPLICATION (g_object_new (GTR_TYPE_APPLICATION,
                                         "application-id", PACKAGE_APPID,
                                         "flags", G_APPLICATION_HANDLES_OPEN,
+                                        "resource-base-path", "/org/gnome/translator/",
                                         NULL));
 }
 

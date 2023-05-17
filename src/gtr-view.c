@@ -57,6 +57,12 @@ typedef struct
 G_DEFINE_TYPE_WITH_PRIVATE (GtrView, gtr_view, GTK_SOURCE_TYPE_VIEW)
 
 static void
+notify_dark_cb (GtrView *view)
+{
+  gtr_view_reload_scheme_color (view);
+}
+
+static void
 gtr_view_init (GtrView * view)
 {
   GtkSourceLanguageManager *lm;
@@ -66,6 +72,7 @@ gtr_view_init (GtrView * view)
   const gchar *const *temp;
   gchar *ui_dir;
   GtrViewPrivate *priv;
+  AdwStyleManager *manager;
 
   g_autofree char *font = NULL;
 
@@ -117,6 +124,9 @@ gtr_view_init (GtrView * view)
 
   /* Set scheme color according to preferences */
   gtr_view_reload_scheme_color (view);
+  manager = adw_style_manager_get_default ();
+  g_signal_connect_swapped (manager, "notify::dark",
+                            G_CALLBACK (notify_dark_cb), view);
   gtk_text_view_set_monospace (GTK_TEXT_VIEW (view), TRUE);
 }
 
@@ -758,18 +768,19 @@ gtr_view_reload_scheme_color (GtrView * view)
   GtkSourceBuffer *buf;
   GtkSourceStyleScheme *scheme;
   GtkSourceStyleSchemeManager *manager;
-  GtrViewPrivate *priv;
-  gchar *scheme_id;
+  const gchar *scheme_id;
+  AdwStyleManager *style_manager;
 
-  priv = gtr_view_get_instance_private (view);
-
+  style_manager = adw_style_manager_get_default ();
   buf = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
   manager = gtk_source_style_scheme_manager_get_default ();
 
-  scheme_id = g_settings_get_string (priv->ui_settings,
-                                     GTR_SETTINGS_COLOR_SCHEME);
+  if (adw_style_manager_get_dark (style_manager))
+    scheme_id = "Adwaita-dark";
+  else
+    scheme_id = "Adwaita";
+
   scheme = gtk_source_style_scheme_manager_get_scheme (manager, scheme_id);
-  g_free (scheme_id);
 
   gtk_source_buffer_set_style_scheme (buf, scheme);
 }

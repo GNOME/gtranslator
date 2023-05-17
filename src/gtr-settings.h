@@ -68,7 +68,6 @@ GSettings               *gtr_settings_new                       (void);
 #define GTR_SETTINGS_SPELLCHECK				"spellcheck"
 #define GTR_SETTINGS_FONT				"font"
 #define GTR_SETTINGS_PANEL_SWITCHER_STYLE		"panel-switcher-style"
-#define GTR_SETTINGS_COLOR_SCHEME			"color-scheme"
 #define GTR_SETTINGS_SORT_ORDER				"sort-order"
 #define GTR_SETTINGS_ACTIVE_PLUGINS			"active-plugins"
 

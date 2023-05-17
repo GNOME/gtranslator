@@ -248,6 +248,10 @@ gtr_window_init (GtrWindow *window)
   priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
   priv->active_tab = NULL;
 
+  /* loading custom styles */
+  if (g_strrstr (PACKAGE_APPID, "Devel") != NULL)
+    gtk_widget_add_css_class (GTK_WIDGET (window), "devel");
+
   gtk_widget_init_template (GTK_WIDGET (window));
 
   /* Profile manager */
@@ -644,8 +648,6 @@ gtr_window_show_tm_dialog (GtrWindow *window)
 
   dlg = gtr_translation_memory_dialog_new (GTK_WINDOW (window),
                                            priv->translation_memory);
-
-  g_signal_connect (dlg, "response", G_CALLBACK (gtk_window_destroy), NULL);
 
   gtk_window_present (GTK_WINDOW (dlg));
 }

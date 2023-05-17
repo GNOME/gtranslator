@@ -48,6 +48,40 @@ struct _GtrViewer
 G_DEFINE_TYPE_WITH_PRIVATE (GtrViewer, gtr_viewer, GTK_TYPE_WINDOW)
 
 static void
+source_view_update_theme (GtrViewer *dlg)
+{
+  AdwStyleManager *manager;
+  GtkSourceStyleSchemeManager *scheme_manager;
+  GtkSourceStyleScheme *scheme;
+  const gchar *scheme_name;
+  GtkSourceView *view;
+  GtkTextBuffer *buffer;
+  GtrViewerPrivate *priv = gtr_viewer_get_instance_private (dlg);
+
+  view = GTK_SOURCE_VIEW (priv->view);
+
+  manager = adw_style_manager_get_default ();
+
+  if (adw_style_manager_get_dark (manager))
+    scheme_name = "Adwaita-dark";
+  else
+    scheme_name = "Adwaita";
+
+  scheme_manager = gtk_source_style_scheme_manager_get_default ();
+  scheme = gtk_source_style_scheme_manager_get_scheme (scheme_manager,
+                                                       scheme_name);
+
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+  gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (buffer), scheme);
+}
+
+static void
+notify_dark_cb (GtrViewer *dlg)
+{
+  source_view_update_theme (dlg);
+}
+
+static void
 gtr_viewer_init (GtrViewer *dlg)
 {
   GtkBox *content_area;
@@ -59,6 +93,7 @@ gtr_viewer_init (GtrViewer *dlg)
   };
   GtrViewerPrivate *priv = gtr_viewer_get_instance_private (dlg);
   GError *error = NULL;
+  AdwStyleManager *manager;
 
   gtk_window_set_title (GTK_WINDOW (dlg), _("Source Viewer"));
   gtk_window_set_default_size (GTK_WINDOW (dlg), 800, 600);
@@ -99,6 +134,11 @@ gtr_viewer_init (GtrViewer *dlg)
 
   /* Source view */
   priv->view = gtk_source_view_new ();
+  source_view_update_theme (dlg);
+  manager = adw_style_manager_get_default ();
+  g_signal_connect_swapped (manager, "notify::dark",
+                            G_CALLBACK (notify_dark_cb), dlg);
+
   gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->view), FALSE);
   gtk_widget_set_visible (priv->view, TRUE);
   gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (sw), priv->view);

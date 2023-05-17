@@ -187,21 +187,6 @@ on_font_changed (GSettings * settings,
 }
 
 static void
-on_scheme_changed (GSettings * settings, const gchar * key, GtrSettings * gs)
-{
-  GList *views, *l;
-
-  views = gtr_application_get_views (GTR_APP, TRUE, TRUE);
-
-  for (l = views; l != NULL; l = g_list_next (l))
-    {
-      gtr_view_reload_scheme_color (GTR_VIEW (l->data));
-    }
-
-  g_list_free (views);
-}
-
-static void
 gtr_settings_init (GtrSettings * gs)
 {
   GtrSettingsPrivate *priv = gtr_settings_get_instance_private (gs);
@@ -231,9 +216,6 @@ gtr_settings_init (GtrSettings * gs)
   g_signal_connect (priv->editor,
                     "changed::spellcheck",
                     G_CALLBACK (on_spellcheck_changed), gs);
-  g_signal_connect (priv->ui,
-                    "changed::color-scheme",
-                    G_CALLBACK (on_scheme_changed), gs);
   g_signal_connect (priv->editor,
                     "changed::font",
                     G_CALLBACK (on_font_changed), gs);

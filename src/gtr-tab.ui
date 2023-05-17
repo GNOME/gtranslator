@@ -29,7 +29,6 @@
             <child>
               <object class="GtrMessageTable" id="message_table">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="tab">GtrTab</property>
                 <property name="height_request">350</property>
                 <property name="width_request">450</property>
@@ -83,7 +82,6 @@
                     <child>
                       <object class="GtkScrolledWindow" id="text_msgid_scroll">
                         <property name="vexpand">1</property>
-                        <property name="focusable">1</property>
                         <property name="has_frame">1</property>
                         <child>
                           <object class="GtrView" id="text_msgid">
@@ -95,7 +93,6 @@
                     <child>
                       <object class="GtkScrolledWindow" id="text_plural_scroll">
                         <property name="vexpand">1</property>
-                        <property name="focusable">1</property>
                         <property name="has_frame">1</property>
                         <child>
                           <object class="GtrView" id="text_msgid_plural">
@@ -121,7 +118,6 @@
                 <child>
                   <object class="GtkNotebook" id="trans_notebook">
                     <property name="vexpand">1</property>
-                    <property name="focusable">1</property>
                     <property name="show_border">0</property>
                   </object>
                 </child>
@@ -270,16 +266,12 @@
       <attribute name='action'>win.show-help-overlay</attribute>
     </item>
     <item>
-      <attribute name='label' translatable='yes'>About Translation Editor</attribute>
-      <attribute name='action'>app.about</attribute>
-    </item>
-    <item>
       <attribute name='label' translatable='yes'>Help</attribute>
       <attribute name='action'>app.help</attribute>
     </item>
     <item>
-      <attribute name='label' translatable='yes'>Quit</attribute>
-      <attribute name='action'>app.quit</attribute>
+      <attribute name='label' translatable='yes'>About Translation Editor</attribute>
+      <attribute name='action'>app.about</attribute>
     </item>
   </section>
   </menu>
@@ -291,7 +283,6 @@
       <object class="GtkBox">
         <child>
           <object class="GtkButton" id="open_button">
-            <property name="focusable">1</property>
             <property name="receives_default">1</property>
             <property name="tooltip_text" translatable="1">Open a new file (&lt;Ctrl&gt;o)</property>
             <property name="action_name">app.open</property>
@@ -317,7 +308,6 @@
       <object class="GtkBox">
         <child>
           <object class="GtkButton" id="undo">
-            <property name="focusable">1</property>
             <property name="receives_default">1</property>
             <property name="tooltip_text" translatable="1">Undo (&lt;Ctrl&gt;z)</property>
             <property name="action_name">app.undo</property>
@@ -326,7 +316,6 @@
         </child>
         <child>
           <object class="GtkButton" id="redo">
-            <property name="focusable">1</property>
             <property name="receives_default">1</property>
             <property name="tooltip_text" translatable="1">Redo (&lt;Ctrl&gt;&lt;Shift&gt;z)</property>
             <property name="action_name">app.redo</property>
@@ -345,7 +334,6 @@
       <object class="GtkBox">
         <child>
           <object class="GtkButton" id="prev_untranslated">
-            <property name="focusable">1</property>
             <property name="receives_default">1</property>
             <property name="tooltip_text" translatable="1">Previous message without translation (&lt;Alt&gt;&lt;Page Up&gt;)</property>
             <property name="action_name">app.prev_no</property>
@@ -354,7 +342,6 @@
         </child>
         <child>
           <object class="GtkButton" id="next_untranslated">
-            <property name="focusable">1</property>
             <property name="receives_default">1</property>
             <property name="tooltip_text" translatable="1">Next message without translation (&lt;Alt&gt;&lt;Page Down&gt;)</property>
             <property name="action_name">app.next_no</property>
@@ -379,23 +366,15 @@
     </child>
     <child>
       <object class="GtkMenuButton" id="sortby_menu">
-        <property name="focusable">1</property>
         <property name="receives_default">1</property>
         <property name="popover">order_menu_popover</property>
         <property name="tooltip_text" translatable="1">Sort messages by</property>
         <property name="icon_name">view-sort-ascending-symbolic</property>
-
-          <!-- TODO: To be replace in gtk4
-          <child internal-child="accessible">
-          <object class="AtkObject" id="sortby_menu-atkobject">
-            <property name="AtkObject::accessible-name" translatable="1">Order by menu</property>
-          </object>
-        </child>-->
+        <property name="primary">True</property>
       </object>
     </child>
     <child type="end">
       <object class="GtkMenuButton" id="main_menu">
-        <property name="focusable">1</property>
         <property name="receives_default">1</property>
         <property name="popover">main_menu_popover</property>
         <property name="icon_name">open-menu-symbolic</property>
@@ -409,7 +388,6 @@
     </child>
     <child type="end">
       <object class="GtkToggleButton" id="search_toggle">
-        <property name="focusable">1</property>
         <property name="receives_default">1</property>
         <property name="tooltip_text" translatable="1">Find (&lt;Ctrl&gt;&lt;f&gt;)</property>
         <property name="action_name">app.findtoggle</property>
@@ -427,7 +405,6 @@
         <child>
           <object class="GtkButton" id="save">
             <property name="label" translatable="1">Save</property>
-            <property name="focusable">1</property>
             <property name="receives_default">1</property>
             <property name="tooltip_text" translatable="1">Save the current file (&lt;Ctrl&gt;s)</property>
             <property name="action_name">app.save</property>
@@ -435,7 +412,6 @@
         </child>
         <child>
           <object class="GtkButton">
-            <property name="focusable">1</property>
             <property name="receives_default">1</property>
             <property name="tooltip_text" translatable="1">Save as (&lt;Ctrl&gt;&lt;Shift&gt;s)</property>
             <property name="action_name">app.saveas</property>
@@ -444,7 +420,6 @@
         </child>
         <child>
           <object class="GtkButton" id="upload">
-            <property name="focusable">1</property>
             <property name="receives_default">1</property>
             <property name="tooltip_text" translatable="1">Upload file (&lt;Ctrl&gt;b)</property>
             <property name="action_name">app.upload_file</property>

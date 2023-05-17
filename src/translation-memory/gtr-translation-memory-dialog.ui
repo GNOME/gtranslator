@@ -19,7 +19,6 @@
       <object class="GtkOverlay" id="overlay">
         <child type="overlay">
           <object class="GtkProgressBar" id="add_database_progressbar">
-            <property name="can_focus">False</property>
             <property name="visible">False</property>
             <style>
               <class name="osd"/>
@@ -60,7 +59,7 @@
                         <property name="subtitle" translatable="no"></property>
                         <property name="activatable-widget">use_lang_profile_in_tm</property>
                         <child type="prefix">
-                          <object class="GtkCheckButton" id="use_lang_profile_in_tm">
+                          <object class="GtkSwitch" id="use_lang_profile_in_tm">
                             <property name="valign">center</property>
                           </object>
                         </child>
@@ -77,10 +76,11 @@
                   <object class="GtkButton" id="add_database_button">
                     <property name="label" translatable="yes">Add to Database</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="halign">center</property>
                     <style>
                       <class name="suggested-action"/>
+                      <class name="pill"/>
                     </style>
                   </object>
                 </child>

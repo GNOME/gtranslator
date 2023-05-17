@@ -21,10 +21,6 @@
       <attribute name='label' translatable='yes'>About Translation Editor</attribute>
       <attribute name='action'>app.about</attribute>
     </item>
-    <item>
-      <attribute name='label' translatable='yes'>Quit</attribute>
-      <attribute name='action'>app.quit</attribute>
-    </item>
   </section>
   </menu>
 
@@ -163,8 +159,8 @@
 
             <child>
               <object class="GtkButton" id="load_button">
-                <property name="label" translatable="1">Load file</property>
-                <property name="halign">end</property>
+                <property name="label" translatable="yes">Load File</property>
+                <property name="halign">center</property>
                 <style>
                   <class name="pill"/>
                   <class name="suggested-action"/>
@@ -187,17 +183,11 @@
     </child>
     <child type="end">
       <object class="GtkMenuButton" id="main_menu">
-        <property name="focusable">1</property>
         <property name="receives_default">1</property>
         <property name="popover">main_menu_popover</property>
-        <child>
-          <object class="GtkImage">
-            <property name="icon_name">open-menu-symbolic</property>
-          </object>
-        </child>
-        <accessibility>
-          <property name="label" translatable="yes">Main Menu</property>
-        </accessibility>
+        <property name="icon_name">open-menu-symbolic</property>
+        <property name="primary">True</property>
+        <property name="tooltip-text" translatable="yes">Main Menu</property>
       </object>
     </child>
   </object>
