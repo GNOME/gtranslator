@@ -314,11 +314,6 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
 
   priv->tm_settings = g_settings_new ("org.gnome.gtranslator.plugins.translation-memory");
 
-  gtk_window_set_title (GTK_WINDOW (dlg), _("Translation Editor Memory Manager"));
-  gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
-  gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
-  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
-
   gtk_widget_init_template (GTK_WIDGET (dlg));
 
   prof_manager = gtr_profile_manager_get_default ();
