@@ -389,39 +389,38 @@
     </child>
     <child type="end">
       <object class="GtkSeparator">
-        <property name="margin_top">3</property>
-        <property name="margin_bottom">3</property>
+        <style>
+          <class name="spacer"/>
+        </style>
       </object>
     </child>
     <child type="end">
-      <object class="GtkBox">
+      <object class="GtkButton" id="upload">
+        <property name="receives_default">1</property>
+        <property name="tooltip_text" translatable="1">Upload File</property>
+        <property name="action_name">app.upload_file</property>
+        <property name="icon_name">document-send-symbolic</property>
+      </object>
+    </child>
+    <child type="end">
+      <object class="GtkButton">
+        <property name="receives_default">1</property>
+        <property name="tooltip_text" translatable="1">Save as</property>
+        <property name="action_name">app.saveas</property>
+        <property name="icon_name">document-save-as-symbolic</property>
+      </object>
+    </child>
+    <child type="end">
+      <object class="GtkButton" id="save">
+        <property name="receives_default">1</property>
+        <property name="tooltip_text" translatable="1">Save Current File</property>
+        <property name="action_name">app.save</property>
         <child>
-          <object class="GtkButton" id="save">
+          <object class="AdwButtonContent">
             <property name="label" translatable="1">Save</property>
-            <property name="receives_default">1</property>
-            <property name="tooltip_text" translatable="1">Save Current File</property>
-            <property name="action_name">app.save</property>
+            <property name="icon_name">document-save-symbolic</property>
           </object>
         </child>
-        <child>
-          <object class="GtkButton">
-            <property name="receives_default">1</property>
-            <property name="tooltip_text" translatable="1">Save as</property>
-            <property name="action_name">app.saveas</property>
-            <property name="icon_name">document-save-as-symbolic</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="upload">
-            <property name="receives_default">1</property>
-            <property name="tooltip_text" translatable="1">Upload File</property>
-            <property name="action_name">app.upload_file</property>
-            <property name="icon_name">document-send-symbolic</property>
-          </object>
-        </child>
-        <style>
-          <class name="linked"/>
-        </style>
       </object>
     </child>
     <style>
