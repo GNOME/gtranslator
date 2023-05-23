@@ -6,6 +6,7 @@
   <template class="GtrContextPanel" parent="GtkBox">
     <property name="orientation">vertical</property>
     <property name="spacing">2</property>
+    <property name="hexpand">False</property>
     <child>
       <object class="GtkBox" id="translation_memory_box">
         <property name="valign">center</property>
@@ -15,67 +16,84 @@
     <child>
       <object class="GtkScrolledWindow" id="sw">
         <property name="vexpand">1</property>
+        <property name="hscrollbar-policy">never</property>
         <property name="child">
           <object class="GtkBox" id="context_box">
-            <property name="margin-start">6</property>
-            <property name="margin-end">6</property>
-            <property name="margin-top">6</property>
-            <property name="margin-bottom">6</property>
+            <property name="margin-start">12</property>
+            <property name="margin-end">12</property>
+            <property name="margin-top">12</property>
+            <property name="margin-bottom">12</property>
             <property name="orientation">vertical</property>
             <!-- Notes -->
             <child>
-              <object class="GtkBox" id="notes_header_box">
-                <property name="orientation">horizontal</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="label" translatable="yes">Notes</property>
-                    <property name="xalign">0.0</property>
-                    <style><class name="heading"/></style>
-                  </object>
-                </child>
-                <child>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Notes</property>
+                <property name="header-suffix">
                   <object class="GtkButton" id="edit_notes">
                     <property name="icon-name">document-edit-symbolic</property>
-                    <property name="margin-start">6</property>
-                    <style><class name="circular"/></style>
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                  </object>
+                </property>
+                <child>
+                  <object class="AdwBin">
+                    <style>
+                      <class name="card"/>
+                    </style>
+                    <child>
+                      <object class="GtkTextView" id="notes">
+                        <property name="editable">0</property>
+                        <property name="wrap_mode">word</property>
+                        <property name="buffer">notesbuffer</property>
+                        <property name="height-request">48</property>
+                        <style>
+                          <class name="inline"/>
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkTextView" id="notes">
-                <property name="editable">0</property>
-                <property name="wrap_mode">word</property>
-                <property name="buffer">notesbuffer</property>
               </object>
             </child>
 
             <!-- comments -->
             <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">Extracted comments</property>
-                <property name="xalign">0.0</property>
-                <style><class name="heading"/></style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkTextView" id="comments">
-                <property name="editable">0</property>
-                <property name="wrap_mode">word</property>
-                <property name="buffer">commentsbuffer</property>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Extracted comments</property>
+                <child>
+                  <object class="AdwBin">
+                    <style>
+                      <class name="card"/>
+                    </style>
+                    <child>
+                      <object class="GtkTextView" id="comments">
+                        <property name="editable">0</property>
+                        <property name="wrap_mode">word</property>
+                        <property name="buffer">commentsbuffer</property>
+                        <property name="height-request">48</property>
+                        <style>
+                          <class name="inline"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
 
             <!-- paths -->
             <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">Paths</property>
-                <property name="xalign">0.0</property>
-                <style><class name="heading"/></style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkListBox" id="paths">
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Paths</property>
+                <child>
+                  <object class="GtkListBox" id="paths">
+                    <property name="selection-mode">none</property>
+                    <style>
+                      <class name="boxed-list"/>
+                    </style>
+                  </object>
+                </child>
               </object>
             </child>
           </object>

@@ -801,5 +801,5 @@ gtr_view_set_font (GtrView *view, char *font)
 
   str = pango_font_description_to_css (font_desc);
   css = g_strdup_printf ("textview  %s", str ?: "");
-  gtk_css_provider_load_from_data (priv->provider, css, -1);
+  gtk_css_provider_load_from_string (priv->provider, css);
 }

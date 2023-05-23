@@ -159,8 +159,7 @@ gtr_po_parse_files_from_dialog (GObject *source, GAsyncResult *res, void *user_d
    * Open the file via our centralized opening function.
    */
   locations = g_slist_append (locations, file);
-  load_file_list (window, (const GSList *) locations);
-  g_slist_free_full (locations, g_object_unref);
+  load_file_list (window, locations);
 }
 
 static void
