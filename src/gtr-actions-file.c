@@ -198,7 +198,6 @@ gtr_want_to_save_current_dialog (GtrWindow * window, void (*callback)(GtrWindow 
 
   title = g_strdup ("Unsaved Changes");
 
-  gtk_window_set_default_size (GTK_WINDOW (dialog), 800, 200);
   dialog = adw_message_dialog_new (GTK_WINDOW (window), title, NULL);
 
   adw_message_dialog_set_body_use_markup (ADW_MESSAGE_DIALOG (dialog), TRUE);
