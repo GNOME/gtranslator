@@ -200,6 +200,9 @@ static void
 gtr_greeter_init (GtrGreeter *self)
 {
   GtrGreeterPrivate *priv = gtr_greeter_get_instance_private (self);
+
+  g_type_ensure (GTR_TYPE_LANGUAGES_FETCHER);
+
   gtk_widget_init_template (GTK_WIDGET (self));
 
   g_signal_connect (priv->next_button,
