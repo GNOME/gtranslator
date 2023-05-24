@@ -859,7 +859,6 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, branches_combobox);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, branches_model);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, domains_model);
 }
 
 static char *
@@ -885,6 +884,10 @@ gtr_dl_teams_init (GtrDlTeams *self)
   priv->selected_domain = NULL;
   priv->file_path = NULL;
   priv->module_state = NULL;
+
+  priv->domains_model = g_list_store_new (GTR_TYPE_DL_TEAMS_DOMAIN);
+  gtk_drop_down_set_model (GTK_DROP_DOWN (priv->domains_combobox),
+                           G_LIST_MODEL (priv->domains_model));
 
   gtk_widget_set_sensitive (priv->load_button, FALSE);
   gtk_widget_set_sensitive (priv->reserve_button, FALSE);
