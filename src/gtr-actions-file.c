@@ -172,7 +172,7 @@ handle_save_current_dialog_response (AdwMessageDialog *dialog,
   if (g_strcmp0 ("save", response) == 0)
     gtr_save_current_file_dialog (NULL, window);
 
-  // callback for "save" and "no"
+  // callback for "save", "close", and "no"
   if (g_strcmp0 ("cancel", response) != 0)
     callback (window);
 
