@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_VIEWER (gtr_viewer_get_type())
 
-G_DECLARE_FINAL_TYPE (GtrViewer, gtr_viewer, GTR, VIEWER, GtkDialog)
+G_DECLARE_FINAL_TYPE (GtrViewer, gtr_viewer, GTR, VIEWER, GtkWindow)
 
 GType   gtr_viewer_register_type      (GTypeModule  *module);
 

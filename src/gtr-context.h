@@ -1,22 +1,22 @@
 /*
  * Copyright (C) 2007  Ignacio Casal Quinteiro <icq@gnome.org>
- * 
+ *               2022  Daniel Garcia Moreno <danigm@gnome.org>
+ *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
  *     the Free Software Foundation, either version 3 of the License, or
  *     (at your option) any later version.
- * 
+ *
  *     This program is distributed in the hope that it will be useful,
  *     but WITHOUT ANY WARRANTY; without even the implied warranty of
  *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *     GNU General Public License for more details.
- * 
+ *
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __CONTEXT_PANEL_H__
-#define __CONTEXT_PANEL_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
@@ -26,49 +26,16 @@
 #include "translation-memory/gtr-translation-memory.h"
 
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
-#define GTR_TYPE_CONTEXT_PANEL		(gtr_context_panel_get_type ())
-#define GTR_CONTEXT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_CONTEXT_PANEL, GtrContextPanel))
-#define GTR_CONTEXT_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_CONTEXT_PANEL, GtrContextPanelClass))
-#define GTR_IS_CONTEXT_PANEL(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_CONTEXT_PANEL))
-#define GTR_IS_CONTEXT_PANEL_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_CONTEXT_PANEL))
-#define GTR_CONTEXT_PANEL_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_CONTEXT_PANEL, GtrContextPanelClass))
+#define GTR_TYPE_CONTEXT_PANEL  (gtr_context_panel_get_type ())
 
-/*
- * Main object structure
- */
-typedef struct _GtrContextPanel GtrContextPanel;
-
-struct _GtrContextPanel
-{
-  GtkBox parent_instance;
-};
-
-/*
- * Class definition
- */
-typedef struct _GtrContextPanelClass GtrContextPanelClass;
-
-struct _GtrContextPanelClass
-{
-  GtkBoxClass parent_class;
-
-  void (* reloaded) (GtrContextPanel *panel,
-                     GtrMsg          *msg);
-};
+G_DECLARE_FINAL_TYPE (GtrContextPanel, gtr_context_panel, GTR, CONTEXT_PANEL, GtkBox)
 
 /*
  * Public methods
  */
 GType             gtr_context_panel_get_type              (void) G_GNUC_CONST;
-
 GtkWidget        *gtr_context_panel_new                   (void);
-
-GtkTextView      *gtr_context_panel_get_context_text_view (GtrContextPanel *panel);
-
 void              gtr_context_init_tm                     (GtrContextPanel *panel, GtrTranslationMemory *tm);
+void              gtr_context_add_path                    (GtrContextPanel *panel, const char *filename, int line);
 
 G_END_DECLS
-#endif /* __CONTEXT_PANEL_H__ */

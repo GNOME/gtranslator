@@ -15,8 +15,7 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __MESSAGE_TABLE_H__
-#define __MESSAGE_TABLE_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
@@ -24,39 +23,13 @@
 
 #include "gtr-message-container.h"
 #include "gtr-msg.h"
-#include "gtr-tab.h"
 
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
-#define GTR_TYPE_MESSAGE_TABLE		(gtr_message_table_get_type ())
-#define GTR_MESSAGE_TABLE(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_MESSAGE_TABLE, GtrMessageTable))
-#define GTR_MESSAGE_TABLE_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_MESSAGE_TABLE, GtrMessageTableClass))
-#define GTR_IS_MESSAGE_TABLE(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_MESSAGE_TABLE))
-#define GTR_IS_MESSAGE_TABLE_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_MESSAGE_TABLE))
-#define GTR_MESSAGE_TABLE_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_MESSAGE_TABLE, GtrMessageTableClass))
 
-/*
- * Main object structure
- */
-typedef struct _GtrMessageTable GtrMessageTable;
+#define GTR_TYPE_MESSAGE_TABLE (gtr_message_table_get_type ())
+G_DECLARE_FINAL_TYPE (GtrMessageTable, gtr_message_table, GTR, MESSAGE_TABLE, GtkBox)
 
-struct _GtrMessageTable
-{
-  GtkBox parent_instance;
-};
-
-/*
- * Class definition
- */
-typedef struct _GtrMessageTableClass GtrMessageTableClass;
 typedef gboolean (* GtrMessageTableNavigationFunc) (GtrMsg * msg);
-
-struct _GtrMessageTableClass
-{
-  GtkBoxClass parent_class;
-};
 
 typedef enum {
   GTR_NAVIGATE_PREV,
@@ -65,33 +38,34 @@ typedef enum {
   GTR_NAVIGATE_LAST
 } GtrMessageTableNavigation;
 
+typedef enum
+{
+  GTR_MESSAGE_TABLE_SORT_ID,
+  GTR_MESSAGE_TABLE_SORT_STATUS,
+  GTR_MESSAGE_TABLE_SORT_MSGID,
+  GTR_MESSAGE_TABLE_SORT_TRANSLATED,
+  GTR_MESSAGE_TABLE_SORT_N_COLUMNS
+} GtrMessageTableSortBy;
+
 /*
  * Public methods
  */
-GType
-gtr_message_table_get_type (void)
-  G_GNUC_CONST;
+GType gtr_message_table_register_type (GTypeModule * module);
 
-     GType gtr_message_table_register_type (GTypeModule * module);
+GtkWidget *gtr_message_table_new (void);
 
-     GtkWidget *gtr_message_table_new (void);
+void gtr_message_table_populate (GtrMessageTable * table,
+                                 GtrMessageContainer * container);
 
-     void gtr_message_table_populate (GtrMessageTable * table,
-                                      GtrMessageContainer * container);
+GtrMsg * gtr_message_table_navigate (GtrMessageTable * table,
+                                     GtrMessageTableNavigation navigation,
+                                     GtrMessageTableNavigationFunc func);
 
-     GtrMsg * gtr_message_table_navigate (GtrMessageTable * table,
-                                          GtrMessageTableNavigation navigation,
-                                          GtrMessageTableNavigationFunc func);
+void gtr_message_table_update_translation (GtrMessageTable * table,
+                                           GtrMsg * msg,
+                                           gchar * translation);
 
-
-     void
-       gtr_message_table_update_translation (GtrMessageTable *
-                                             table,
-                                             GtrMsg * msg,
-                                             gchar * translation);
-
-     void gtr_message_table_sort_by (GtrMessageTable *table,
-                                     GtrMessageTableSortBy sort);
+void gtr_message_table_sort_by (GtrMessageTable *table,
+                                GtrMessageTableSortBy sort);
 
 G_END_DECLS
-#endif /* __MESSAGE_TABLE_H__ */

@@ -141,8 +141,10 @@ open_file (GtkWidget *dialog, GtrAlternateLangPanel *panel)
   GList *l;
   GError *error = NULL;
 
-  po_file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-  file = g_file_new_for_path (po_file);
+  //po_file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+  file = gtk_file_chooser_get_file (chooser);
+  //filename = g_file_get_path(file);
+  //file = g_file_new_for_path (po_file);
   g_free (po_file);
 
   if (panel->priv->po != NULL)

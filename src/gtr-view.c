@@ -41,45 +41,6 @@
 
 #include <gtksourceview/gtksource.h>
 
-#include <gspell/gspell.h>
-
-/**
- * Converts the language code to a complete language code with the country
- * If the language contains the country code this returns a new allocated
- * string copied from *lang*.
- *
- * In other case the code is duplicated by default:
- *
- * es -> es_ES
- * pt -> pt_PT
- */
-static gchar*
-get_default_lang (const gchar *lang) {
-  gchar *up;
-  gchar *ret;
-
-  if (g_strrstr (lang, "_"))
-    {
-      return g_strdup (lang);
-    }
-
-  up = g_ascii_strup (lang, -1);
-  ret = g_strdup_printf ("%s_%s", lang, up);
-  g_free (up);
-
-  return ret;
-}
-
-static void
-inline_spellcheck (GObject *object,
-                   GParamSpec *param,
-                   GtrView *view)
-{
-  GspellTextView *gspell_view;
-  gspell_view = gspell_text_view_get_from_gtk_text_view (GTK_TEXT_VIEW (view));
-  gspell_text_view_set_inline_spell_checking (gspell_view, TRUE);
-}
-
 typedef struct
 {
   GSettings *editor_settings;
@@ -90,11 +51,16 @@ typedef struct
   guint search_flags;
   gchar *search_text;
 
-  GspellChecker *spell;
   GtkCssProvider *provider;
 } GtrViewPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrView, gtr_view, GTK_SOURCE_TYPE_VIEW)
+
+static void
+notify_dark_cb (GtrView *view)
+{
+  gtr_view_reload_scheme_color (view);
+}
 
 static void
 gtr_view_init (GtrView * view)
@@ -102,21 +68,23 @@ gtr_view_init (GtrView * view)
   GtkSourceLanguageManager *lm;
   GtkSourceLanguage *lang;
   GPtrArray *dirs;
-  gchar **langs;
+  gchar **langs = NULL;
   const gchar *const *temp;
   gchar *ui_dir;
   GtrViewPrivate *priv;
+  AdwStyleManager *manager;
 
   g_autofree char *font = NULL;
 
   priv = gtr_view_get_instance_private (view);
 
   priv->provider = gtk_css_provider_new ();
-  gtk_style_context_add_provider (gtk_widget_get_style_context (GTK_WIDGET (view)),
-                                  GTK_STYLE_PROVIDER (priv->provider),
-                                  GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  gtk_style_context_add_provider_for_display (
+    gdk_display_get_default (),
+    GTK_STYLE_PROVIDER (priv->provider),
+    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
+  );
 
-  priv->spell = NULL;
   priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
   priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
 
@@ -132,14 +100,13 @@ gtr_view_init (GtrView * view)
   g_ptr_array_add (dirs, NULL);
   langs = (gchar **) g_ptr_array_free (dirs, FALSE);
 
-  gtk_source_language_manager_set_search_path (lm, langs);
+  gtk_source_language_manager_set_search_path (lm, (const  char * const *) langs);
   lang = gtk_source_language_manager_get_language (lm, "gtranslator");
   g_strfreev (langs);
 
-  priv->buffer = gtk_source_buffer_new_with_language (lang);
-
-  gtk_text_view_set_buffer (GTK_TEXT_VIEW (view),
-                            GTK_TEXT_BUFFER (priv->buffer));
+  priv->buffer = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+  gtk_source_buffer_set_language (priv->buffer, lang);
+  gtk_text_view_set_buffer (GTK_TEXT_VIEW (view), GTK_TEXT_BUFFER (priv->buffer));
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), GTK_WRAP_WORD);
 
   /* Set syntax highlight according to preferences */
@@ -157,6 +124,9 @@ gtr_view_init (GtrView * view)
 
   /* Set scheme color according to preferences */
   gtr_view_reload_scheme_color (view);
+  manager = adw_style_manager_get_default ();
+  g_signal_connect_swapped (manager, "notify::dark",
+                            G_CALLBACK (notify_dark_cb), view);
   gtk_text_view_set_monospace (GTK_TEXT_VIEW (view), TRUE);
 }
 
@@ -170,7 +140,6 @@ gtr_view_dispose (GObject * object)
 
   g_clear_object (&priv->editor_settings);
   g_clear_object (&priv->ui_settings);
-  g_clear_object (&priv->spell);
   g_clear_object (&priv->provider);
 
   G_OBJECT_CLASS (gtr_view_parent_class)->dispose (object);
@@ -239,102 +208,6 @@ gtr_view_get_selected_text (GtrView * view,
   return TRUE;
 }
 
-void
-gtr_view_set_language (GtrView *view,
-                       const gchar *lang)
-{
-  GtrViewPrivate *priv = gtr_view_get_instance_private (view);
-  GList *langs = (GList *)gspell_language_get_available ();
-  gchar **lang_parts = NULL;
-  gboolean found = FALSE;
-  gchar *def_lang;
-
-  if (!lang || *lang == '\0')
-    return;
-
-  def_lang = get_default_lang (lang);
-
-  while (langs)
-    {
-      GspellLanguage *l = (GspellLanguage*) langs->data;
-      const gchar *code = gspell_language_get_code (l);
-      if (g_strcmp0 (def_lang, code) == 0)
-        {
-          gspell_checker_set_language (priv->spell, l);
-          // If we found the language exacly, we're finished
-          found = TRUE;
-          break;
-        }
-
-      langs = g_list_next (langs);
-    }
-
-  g_free (def_lang);
-
-  if (found)
-    return;
-
-  // Not found, trying again, but this time only with the first part of
-  // the language code
-
-  langs = (GList *)gspell_language_get_available ();
-  lang_parts = g_strsplit (lang, "_", 2);
-  while (langs)
-    {
-      GspellLanguage *l = (GspellLanguage*) langs->data;
-      const gchar *code = gspell_language_get_code (l);
-      gchar **parts = g_strsplit (code, "_", 2);
-      if (parts[0] && g_strcmp0 (parts[0], lang_parts[0]) == 0)
-        {
-          gspell_checker_set_language (priv->spell, l);
-          g_strfreev (parts);
-          found = TRUE;
-          break;
-        }
-      g_strfreev (parts);
-
-      langs = g_list_next (langs);
-    }
-  g_strfreev (lang_parts);
-
-  if (!found)
-    {
-      GspellTextView *gspell_view;
-      gspell_view = gspell_text_view_get_from_gtk_text_view (GTK_TEXT_VIEW (view));
-      gspell_text_view_set_inline_spell_checking (gspell_view, FALSE);
-    }
-}
-
-/**
- * gtr_view_enable_spellcheck:
- * @view: a #GtrView
- * @enable: TRUE if you want enable the spellcheck
- * 
- * Enables the spellcheck
- **/
-void
-gtr_view_enable_spellcheck (GtrView * view, gboolean enable)
-{
-  GtrViewPrivate *priv;
-  GspellTextView *gspell_view;
-  GtkTextBuffer *gtk_buffer;
-  GspellTextBuffer *gspell_buffer;
-
-  priv = gtr_view_get_instance_private (view);
-
-  priv->spell = gspell_checker_new (NULL);
-  gtk_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
-  gspell_buffer = gspell_text_buffer_get_from_gtk_text_buffer (gtk_buffer);
-  gspell_text_buffer_set_spell_checker (gspell_buffer, priv->spell);
-
-  gspell_view = gspell_text_view_get_from_gtk_text_view (GTK_TEXT_VIEW (view));
-  gspell_text_view_set_inline_spell_checking (gspell_view, enable);
-  gspell_text_view_set_enable_language_menu (gspell_view, TRUE);
-
-  g_signal_connect (G_OBJECT (priv->spell), "notify::language",
-                    G_CALLBACK (inline_spellcheck), view);
-}
-
 /**
  * gtr_view_enable_visible_whitespace:
  * @view: a #GtrView
@@ -367,7 +240,7 @@ gtr_view_enable_visible_whitespace (GtrView * view, gboolean enable)
   langs[i] = gtr_dirs_get_gtr_sourceview_dir ();
 
   manager = gtk_source_language_manager_new ();
-  gtk_source_language_manager_set_search_path (manager, (gchar **)langs);
+  gtk_source_language_manager_set_search_path (manager, (const char * const *)langs);
   lang = gtk_source_language_manager_get_language (manager, "gtranslator");
 
   source = GTK_SOURCE_VIEW (view);
@@ -400,15 +273,15 @@ void
 gtr_view_cut_clipboard (GtrView * view)
 {
   GtkTextBuffer *buffer;
-  GtkClipboard *clipboard;
+  GdkClipboard *clipboard;
 
   g_return_if_fail (GTR_IS_VIEW (view));
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
   g_return_if_fail (buffer != NULL);
 
-  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view),
-                                        GDK_SELECTION_CLIPBOARD);
+  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view));
+                                        //GDK_SELECTION_CLIPBOARD);
 
   /* FIXME: what is default editability of a buffer? */
   gtk_text_buffer_cut_clipboard (buffer,
@@ -431,15 +304,15 @@ void
 gtr_view_copy_clipboard (GtrView * view)
 {
   GtkTextBuffer *buffer;
-  GtkClipboard *clipboard;
+  GdkClipboard *clipboard;
 
   g_return_if_fail (GTR_IS_VIEW (view));
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
   g_return_if_fail (buffer != NULL);
 
-  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view),
-                                        GDK_SELECTION_CLIPBOARD);
+  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view));
+                                        //GDK_SELECTION_CLIPBOARD);
 
   gtk_text_buffer_copy_clipboard (buffer, clipboard);
 
@@ -457,15 +330,15 @@ void
 gtr_view_paste_clipboard (GtrView * view)
 {
   GtkTextBuffer *buffer;
-  GtkClipboard *clipboard;
+  GdkClipboard *clipboard;
 
   g_return_if_fail (GTR_IS_VIEW (view));
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
   g_return_if_fail (buffer != NULL);
 
-  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view),
-                                        GDK_SELECTION_CLIPBOARD);
+  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view));
+                                        //GDK_SELECTION_CLIPBOARD);
 
   /* FIXME: what is default editability of a buffer? */
   gtk_text_buffer_paste_clipboard (buffer,
@@ -895,18 +768,19 @@ gtr_view_reload_scheme_color (GtrView * view)
   GtkSourceBuffer *buf;
   GtkSourceStyleScheme *scheme;
   GtkSourceStyleSchemeManager *manager;
-  GtrViewPrivate *priv;
-  gchar *scheme_id;
+  const gchar *scheme_id;
+  AdwStyleManager *style_manager;
 
-  priv = gtr_view_get_instance_private (view);
-
+  style_manager = adw_style_manager_get_default ();
   buf = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
   manager = gtk_source_style_scheme_manager_get_default ();
 
-  scheme_id = g_settings_get_string (priv->ui_settings,
-                                     GTR_SETTINGS_COLOR_SCHEME);
+  if (adw_style_manager_get_dark (style_manager))
+    scheme_id = "Adwaita-dark";
+  else
+    scheme_id = "Adwaita";
+
   scheme = gtk_source_style_scheme_manager_get_scheme (manager, scheme_id);
-  g_free (scheme_id);
 
   gtk_source_buffer_set_style_scheme (buf, scheme);
 }
@@ -914,18 +788,18 @@ gtr_view_reload_scheme_color (GtrView * view)
 void
 gtr_view_set_font (GtrView *view, char *font)
 {
-  PangoFontDescription *font_desc = NULL;
   g_autofree char *str = NULL;
   g_autofree char *css = NULL;
-  GtrViewPrivate *priv = gtr_view_get_instance_private (view);
-  GtkWidget *button = gtk_font_button_new ();
+  g_autoptr(GtkFontDialog) dialog = gtk_font_dialog_new ();
+  g_autoptr(PangoFontDescription) font_desc = NULL;
 
-  gtk_font_chooser_set_font (GTK_FONT_CHOOSER (button), font);
-  font_desc = gtk_font_chooser_get_font_desc (GTK_FONT_CHOOSER (button));
+  GtrViewPrivate *priv = gtr_view_get_instance_private (view);
+  GtkWidget *button = gtk_font_dialog_button_new (dialog);
+
+  font_desc = pango_font_description_from_string (font);
+  gtk_font_dialog_button_set_font_desc (GTK_FONT_DIALOG_BUTTON (button), font_desc);
+
   str = pango_font_description_to_css (font_desc);
   css = g_strdup_printf ("textview  %s", str ?: "");
-
-  gtk_css_provider_load_from_data (priv->provider, css, -1, NULL);
-
-  pango_font_description_free (font_desc);
+  gtk_css_provider_load_from_string (priv->provider, css);
 }

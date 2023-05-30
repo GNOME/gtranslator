@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2007  Ignacio Casal Quinteiro <nacho.resa@gmail.com>
- * Copyright (C) 2022 Daniel Garcia <danigm@gnome.org>
+ * Copyright (C) 2023  Daniel García Moreno <danigm@gnome.org>
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -14,26 +13,26 @@
  *
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 #pragma once
 
+#include <glib.h>
+#include <glib-object.h>
 #include <gtk/gtk.h>
-#include <adwaita.h>
 
-#include "gtr-window.h"
+#include "gtr-msg.h"
 
 G_BEGIN_DECLS
 
-#define GTR_TYPE_PREFERENCES_DIALOG (gtr_preferences_dialog_get_type ())
+#define GTR_TYPE_MESSAGE_TABLE_ROW (gtr_message_table_row_get_type ())
+G_DECLARE_FINAL_TYPE (GtrMessageTableRow, gtr_message_table_row, GTR, MESSAGE_TABLE_ROW, GtkBox)
 
-G_DECLARE_FINAL_TYPE (GtrPreferencesDialog, gtr_preferences_dialog, GTR, PREFERENCES_DIALOG, AdwPreferencesWindow)
-
-/* Public methods */
-GType           gtr_preferences_dialog_get_type         (void)G_GNUC_CONST;
-
-void            gtr_show_preferences_dialog             (GtrWindow *window);
-int             gtr_prefs_get_remove_obsolete           (void);
+/*
+ * Public methods
+ */
+GtkWidget *gtr_message_table_row_new (void);
+void gtr_message_table_row_set_msg (GtrMessageTableRow *row, GtrMsg *msg);
 
 G_END_DECLS
+

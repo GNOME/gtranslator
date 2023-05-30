@@ -38,7 +38,6 @@ static gchar *gtr_locale_dir = NULL;
 static gchar *gtr_lib_dir = NULL;
 static gchar *gtr_plugins_dir = NULL;
 static gchar *gtr_plugins_data_dir = NULL;
-static gchar *gtr_pixmaps_dir = NULL;
 static gchar *gtr_sourceview_dir = NULL;
 
 void
@@ -91,7 +90,6 @@ gtr_dirs_init ()
   gtr_plugins_dir = g_build_filename (gtr_lib_dir, "plugins", NULL);
   gtr_plugins_data_dir = g_build_filename (gtr_data_dir, "plugins", NULL);
 
-  gtr_pixmaps_dir = g_build_filename (gtr_data_dir, "pixmaps", NULL);
   gtr_sourceview_dir = g_build_filename (gtr_data_dir, "sourceview", NULL);
 }
 
@@ -107,7 +105,6 @@ gtr_dirs_shutdown ()
   g_free (gtr_lib_dir);
   g_free (gtr_plugins_dir);
   g_free (gtr_plugins_data_dir);
-  g_free (gtr_pixmaps_dir);
   g_free (gtr_sourceview_dir);
 }
 
@@ -163,12 +160,6 @@ const gchar *
 gtr_dirs_get_gtr_plugins_data_dir (void)
 {
   return gtr_plugins_data_dir;
-}
-
-const gchar *
-gtr_dirs_get_gtr_pixmaps_dir (void)
-{
-  return gtr_pixmaps_dir;
 }
 
 const gchar *

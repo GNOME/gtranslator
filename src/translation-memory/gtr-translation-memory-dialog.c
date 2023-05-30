@@ -28,8 +28,9 @@ typedef struct
 {
   GSettings *tm_settings;
 
-  GtkWidget *directory_entry;
-  GtkWidget *search_button;
+  GtkWidget *directory;
+  GtkWidget *configuration;
+
   GtkWidget *add_database_button;
   GtkWidget *add_database_progressbar;
   GtkWidget *tm_lang_entry;
@@ -38,31 +39,50 @@ typedef struct
   GtrTranslationMemory *translation_memory;
 } GtrTranslationMemoryDialogPrivate;
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrTranslationMemoryDialog, gtr_translation_memory_dialog, GTK_TYPE_DIALOG)
+struct _GtrTranslationMemoryDialog
+{
+  GtkWindow parent;
+};
+
+G_DEFINE_TYPE_WITH_PRIVATE (GtrTranslationMemoryDialog, gtr_translation_memory_dialog, GTK_TYPE_WINDOW)
 
 static void
-native_response_cb (GtkNativeDialog *dialog, guint response, gpointer user_data)
+select_folder_cb (GtkFileDialog *dialog, GAsyncResult *res, gpointer user_data)
 {
   GtrTranslationMemoryDialog *dlg;
   GtrTranslationMemoryDialogPrivate *priv;
 
+  g_autofree char *filename = NULL;
+  g_autoptr (GFile) file = NULL;
+
   dlg = GTR_TRANSLATION_MEMORY_DIALOG (user_data);
   priv = gtr_translation_memory_dialog_get_instance_private (dlg);
 
-  if (response == GTK_RESPONSE_ACCEPT)
-    {
-      g_autofree char *filename = NULL;
-      GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
+  file = gtk_file_dialog_select_folder_finish (dialog, res, NULL);
 
-      filename = gtk_file_chooser_get_filename (chooser);
-      gtk_entry_set_text (GTK_ENTRY (priv->directory_entry),
-                          filename);
-      g_settings_set_string (priv->tm_settings,
-                             "po-directory",
-                             filename);
-    }
+  if (!file) return;
 
-  gtk_native_dialog_destroy (dialog);
+  filename = g_file_get_path (file);
+  adw_action_row_set_subtitle (ADW_ACTION_ROW (priv->directory), filename);
+  g_settings_set_string (priv->tm_settings, "po-directory", filename);
+}
+
+static void
+select_directory_activated_cb (GtrTranslationMemoryDialog *dlg)
+{
+  GtkFileDialog *dialog;
+
+  dialog = gtk_file_dialog_new ();
+  gtk_file_dialog_set_title (dialog, _("Select PO directory"));
+  gtk_file_dialog_set_modal (dialog, TRUE);
+
+  gtk_file_dialog_select_folder (
+    dialog,
+    GTK_WINDOW (dlg),
+    NULL,
+    (GAsyncReadyCallback) (select_folder_cb),
+    dlg
+  );
 }
 
 static void
@@ -86,27 +106,27 @@ static void
 gtr_translation_memory_dialog_class_init (GtrTranslationMemoryDialogClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->finalize = gtr_translation_memory_dialog_finalize;
   object_class->dispose = gtr_translation_memory_dialog_dispose;
+
+  gtk_widget_class_set_template_from_resource (
+    widget_class,
+    "/org/gnome/gtranslator/plugins/translation-memory/ui/gtr-translation-memory-dialog.ui"
+  );
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTranslationMemoryDialog, directory);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTranslationMemoryDialog, configuration);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTranslationMemoryDialog, add_database_button);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTranslationMemoryDialog, add_database_progressbar);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTranslationMemoryDialog, tm_lang_entry);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTranslationMemoryDialog, use_lang_profile_in_tm);
+
+  gtk_widget_class_bind_template_callback (widget_class, select_directory_activated_cb);
 }
 
 /***************Translation Memory pages****************/
-static void
-on_search_button_clicked (GtkButton                  *button,
-                          GtrTranslationMemoryDialog *dlg)
-{
-  GtkFileChooserNative *native;
-
-  native = gtk_file_chooser_native_new (_("Select PO directory"),
-                                        GTK_WINDOW (dlg),
-                                        GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-                                        _("_OK"),
-                                        _("_Cancel"));
-
-  g_signal_connect (native, "response", G_CALLBACK (native_response_cb), dlg);
-  gtk_native_dialog_show (GTK_NATIVE_DIALOG (native));
-}
 
 typedef struct _IdleData
 {
@@ -173,7 +193,7 @@ destroy_idle_data (gpointer data)
 {
   IdleData *d = (IdleData *) data;
 
-  gtk_widget_hide (GTK_WIDGET (d->progress));
+  gtk_widget_set_visible (GTK_WIDGET (d->progress), FALSE);
 
   g_slist_free_full (d->list, g_object_unref);
   g_free (d);
@@ -237,7 +257,7 @@ launch_gtr_scan_dir_task (GtrTranslationMemoryDialog *dlg,
   idata->add_database_button = priv->add_database_button;
 
   gtk_progress_bar_pulse (idata->progress);
-  gtk_widget_show (priv->add_database_progressbar);
+  gtk_widget_set_visible (priv->add_database_progressbar, TRUE);
 
   gtk_widget_set_sensitive (priv->add_database_button, FALSE);
 
@@ -287,46 +307,14 @@ static void
 gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
 {
   GtrTranslationMemoryDialogPrivate *priv = gtr_translation_memory_dialog_get_instance_private (dlg);
-  GtkWidget *content_area;
-  GtkBuilder *builder;
-  GtkWidget *content;
   GtrProfileManager *prof_manager;
   GtrProfile *profile;
   const gchar *language_code;
   gchar *filename = NULL;
-  gchar *root_objects[] = {
-    "translation-memory-box",
-    NULL
-  };
 
   priv->tm_settings = g_settings_new ("org.gnome.gtranslator.plugins.translation-memory");
 
-  gtk_dialog_add_buttons (GTK_DIALOG (dlg),
-                          _("_Close"),
-                          GTK_RESPONSE_CLOSE,
-                          NULL);
-
-  gtk_window_set_title (GTK_WINDOW (dlg), _("Translation Editor Memory Manager"));
-  gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
-  gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
-
-  content_area = gtk_dialog_get_content_area (GTK_DIALOG (dlg));
-
-  builder = gtk_builder_new ();
-  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/plugins/translation-memory/ui/gtr-translation-memory-dialog.ui", root_objects, NULL);
-  content = GTK_WIDGET (gtk_builder_get_object (builder, "translation-memory-box"));
-  g_object_ref (content);
-  priv->directory_entry = GTK_WIDGET (gtk_builder_get_object (builder, "directory-entry"));
-  priv->search_button = GTK_WIDGET (gtk_builder_get_object (builder, "search-button"));
-  priv->add_database_button = GTK_WIDGET (gtk_builder_get_object (builder, "add-database-button"));
-  priv->add_database_progressbar = GTK_WIDGET (gtk_builder_get_object (builder, "add-database-progressbar"));
-  priv->use_lang_profile_in_tm = GTK_WIDGET (gtk_builder_get_object (builder, "use-lang-profile-in-tm"));
-  priv->tm_lang_entry = GTK_WIDGET (gtk_builder_get_object (builder, "tm-lang-entry"));
-  g_object_unref (builder);
-
-  gtk_widget_set_vexpand (content, TRUE);
-  gtk_box_append (GTK_BOX (content_area), content);
-  g_object_unref (content);
+  gtk_widget_init_template (GTK_WIDGET (dlg));
 
   prof_manager = gtr_profile_manager_get_default ();
   profile = gtr_profile_manager_get_active_profile (prof_manager);
@@ -336,7 +324,8 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
       language_code = gtr_profile_get_language_code (profile);
       filename = g_strconcat (language_code, ".po", NULL);
 
-      gtk_entry_set_text (GTK_ENTRY (priv->tm_lang_entry), filename);
+      GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY (priv->tm_lang_entry));
+      gtk_entry_buffer_set_text (entry_buffer, filename, -1);
     }
   g_object_unref (prof_manager);
 
@@ -354,17 +343,14 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
   g_settings_bind (priv->tm_settings,
                    "po-directory",
-                   priv->directory_entry,
-                   "text",
+                   priv->directory,
+                   "subtitle",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
   g_settings_bind (priv->tm_settings,
                    "filename-restriction",
                    priv->tm_lang_entry,
                    "text",
                    G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
-
-  g_signal_connect (GTK_BUTTON (priv->search_button), "clicked",
-                    G_CALLBACK (on_search_button_clicked), dlg);
 
   g_signal_connect (GTK_BUTTON (priv->add_database_button), "clicked",
                     G_CALLBACK (on_add_database_button_clicked), dlg);
@@ -377,15 +363,16 @@ gtr_translation_memory_dialog_new (GtkWindow *window,
   GtrTranslationMemoryDialog *dlg;
   GtrTranslationMemoryDialogPrivate *priv;
 
-  dlg = GTR_TRANSLATION_MEMORY_DIALOG (g_object_new (GTR_TYPE_TRANSLATION_MEMORY_DIALOG,
-                                                     "use-header-bar", TRUE,
-                                                     "modal", TRUE,
-                                                     "transient-for", window,
-                                                     NULL));
+  dlg = GTR_TRANSLATION_MEMORY_DIALOG (g_object_new (GTR_TYPE_TRANSLATION_MEMORY_DIALOG, NULL));
   priv = gtr_translation_memory_dialog_get_instance_private (dlg);
 
   /* FIXME: use a property */
   priv->translation_memory = translation_memory;
+
+  if (window != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
+    {
+      gtk_window_set_transient_for (GTK_WINDOW (dlg), window);
+    }
 
   return GTK_WIDGET (dlg);
 }

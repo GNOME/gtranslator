@@ -19,13 +19,13 @@
 #pragma once
 
 #include <gtk/gtk.h>
-#include "gtr-filter-selection.h"
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define GTR_TYPE_LANG_BUTTON (gtr_lang_button_get_type())
 
-G_DECLARE_FINAL_TYPE (GtrLangButton, gtr_lang_button, GTR, LANG_BUTTON, GtrFilterSelection)
+G_DECLARE_FINAL_TYPE (GtrLangButton, gtr_lang_button, GTR, LANG_BUTTON, AdwBin)
 
 GtrLangButton*  gtr_lang_button_new       ();
 const gchar *   gtr_lang_button_get_lang  (GtrLangButton *self);

@@ -29,6 +29,7 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (GtrCodeView, gtr_code_view, GTR, CODE_VIEW, GObject)
 
 GtrCodeView*  gtr_code_view_new (GtrWindow *window);
+void gtr_code_view_show_source (GtrCodeView *codeview, const char *path, int line);
 
 G_END_DECLS
 

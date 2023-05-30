@@ -42,19 +42,43 @@ typedef struct
 
 struct _GtrViewer
 {
-  GtkDialog parent_instance;
+  GtkWindow parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrViewer, gtr_viewer, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrViewer, gtr_viewer, GTK_TYPE_WINDOW)
 
 static void
-dialog_response_handler (GtkDialog *dlg, gint res_id)
+source_view_update_theme (GtrViewer *dlg)
 {
-  switch (res_id)
-    {
-    default:
-      gtk_widget_destroy (GTK_WIDGET (dlg));
-    }
+  AdwStyleManager *manager;
+  GtkSourceStyleSchemeManager *scheme_manager;
+  GtkSourceStyleScheme *scheme;
+  const gchar *scheme_name;
+  GtkSourceView *view;
+  GtkTextBuffer *buffer;
+  GtrViewerPrivate *priv = gtr_viewer_get_instance_private (dlg);
+
+  view = GTK_SOURCE_VIEW (priv->view);
+
+  manager = adw_style_manager_get_default ();
+
+  if (adw_style_manager_get_dark (manager))
+    scheme_name = "Adwaita-dark";
+  else
+    scheme_name = "Adwaita";
+
+  scheme_manager = gtk_source_style_scheme_manager_get_default ();
+  scheme = gtk_source_style_scheme_manager_get_scheme (scheme_manager,
+                                                       scheme_name);
+
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+  gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (buffer), scheme);
+}
+
+static void
+notify_dark_cb (GtrViewer *dlg)
+{
+  source_view_update_theme (dlg);
 }
 
 static void
@@ -63,29 +87,36 @@ gtr_viewer_init (GtrViewer *dlg)
   GtkBox *content_area;
   GtkWidget *sw;
   GtkBuilder *builder;
-  gchar *root_objects[] = {
+  const gchar *root_objects[] = {
     "main_box",
     NULL
   };
   GtrViewerPrivate *priv = gtr_viewer_get_instance_private (dlg);
-
-  gtk_dialog_add_buttons (GTK_DIALOG (dlg),
-                          _("_Close"), GTK_RESPONSE_CLOSE, NULL);
+  GError *error = NULL;
+  AdwStyleManager *manager;
 
   gtk_window_set_title (GTK_WINDOW (dlg), _("Source Viewer"));
   gtk_window_set_default_size (GTK_WINDOW (dlg), 800, 600);
   gtk_window_set_resizable (GTK_WINDOW (dlg), TRUE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
-  content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
-
-  g_signal_connect (dlg,
-                    "response", G_CALLBACK (dialog_response_handler), NULL);
+  content_area = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 6));
+  gtk_window_set_child (GTK_WINDOW (dlg), GTK_WIDGET (content_area));
 
   /*Builder */
   builder = gtk_builder_new ();
-  gtk_builder_add_objects_from_resource (builder, "/org/gnome/gtranslator/plugins/codeview/ui/gtr-viewer.ui",
-  root_objects, NULL);
+  gtk_builder_add_objects_from_resource (
+    builder,
+    "/org/gnome/gtranslator/plugins/codeview/ui/gtr-viewer.ui",
+    root_objects,
+    &error
+  );
+
+  if (error != NULL)
+    {
+      g_warning ("Error parsing gtr-viewer.ui: %s", (error)->message);
+      g_error_free (error);
+    }
 
   priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
   g_object_ref (priv->main_box);
@@ -103,9 +134,14 @@ gtr_viewer_init (GtrViewer *dlg)
 
   /* Source view */
   priv->view = gtk_source_view_new ();
+  source_view_update_theme (dlg);
+  manager = adw_style_manager_get_default ();
+  g_signal_connect_swapped (manager, "notify::dark",
+                            G_CALLBACK (notify_dark_cb), dlg);
+
   gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->view), FALSE);
-  gtk_widget_show (priv->view);
-  gtk_container_add (GTK_CONTAINER (sw), priv->view);
+  gtk_widget_set_visible (priv->view, TRUE);
+  gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (sw), priv->view);
 
   gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW
                                               (priv->view), TRUE);
@@ -136,23 +172,17 @@ gtr_viewer_class_init (GtrViewerClass *klass)
 static void
 error_dialog (GtkWindow *parent, const gchar *msg, ...)
 {
+  GtkAlertDialog *dialog;
   va_list ap;
-  gchar *tmp;
-  GtkWidget *dialog;
-  GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL;
+  g_autofree char *tmp = NULL;
 
   va_start (ap, msg);
   tmp = g_strdup_vprintf (msg, ap);
   va_end (ap);
 
-  dialog = gtk_message_dialog_new (parent,
-                                   flags,
-                                   GTK_MESSAGE_ERROR,
-                                   GTK_BUTTONS_OK, "%s", tmp);
-  g_free (tmp);
+  dialog = gtk_alert_dialog_new ("%s", tmp);
 
-  g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
-  gtk_window_present (GTK_WINDOW (dialog));
+  gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (parent));
 }
 
 static gboolean
@@ -177,9 +207,9 @@ gtk_source_buffer_load_file (GtkSourceBuffer *source_buffer,
       return FALSE;
     }
 
-  gtk_source_buffer_begin_not_undoable_action (source_buffer);
+  gtk_text_buffer_begin_irreversible_action (GTK_TEXT_BUFFER(source_buffer));
   gtk_text_buffer_set_text (GTK_TEXT_BUFFER (source_buffer), buffer, -1);
-  gtk_source_buffer_end_not_undoable_action (source_buffer);
+  gtk_text_buffer_end_irreversible_action (GTK_TEXT_BUFFER(source_buffer));
   gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (source_buffer), FALSE);
 
   /* move cursor to the beginning */
@@ -407,39 +437,29 @@ jump_to_line (GtkTextView *view, gint line)
 void
 gtr_show_viewer (GtrWindow *window, const gchar *path, gint line)
 {
-  static GtrViewer *dlg = NULL;
+  GtrViewer *dlg = NULL;
   GtrViewerPrivate *priv;
+  GtkSourceBuffer *buffer;
+  g_autofree char *label = NULL;
 
-  g_return_if_fail (GTR_IS_WINDOW (window));
+  dlg = g_object_new (GTR_TYPE_VIEWER, "use-header-bar", TRUE, NULL);
+  priv = gtr_viewer_get_instance_private (dlg);
 
-  if (dlg == NULL)
-    {
-      GtkSourceBuffer *buffer;
-      gchar *label;
+  buffer =
+    GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
+                       (GTK_TEXT_VIEW (priv->view)));
 
-      dlg = g_object_new (GTR_TYPE_VIEWER, NULL);
-      priv = gtr_viewer_get_instance_private (dlg);
+  open_file (buffer, path);
+  jump_to_line (GTK_TEXT_VIEW (priv->view), line);
 
-      buffer =
-        GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
-                           (GTK_TEXT_VIEW (priv->view)));
-
-      open_file (buffer, path);
-      jump_to_line (GTK_TEXT_VIEW (priv->view), line);
-
-      label = g_strdup_printf ("<b>%s</b>", g_path_get_basename (path));
-      gtk_label_set_markup (GTK_LABEL (priv->filename_label), label);
-      g_free (label);
-
-      g_signal_connect (dlg,
-                        "destroy", G_CALLBACK (gtk_widget_destroyed), &dlg);
-      gtk_widget_show (GTK_WIDGET (dlg));
-    }
+  label = g_strdup_printf ("<b>%s</b>", g_path_get_basename (path));
+  gtk_label_set_markup (GTK_LABEL (priv->filename_label), label);
 
   if (GTK_WINDOW (window) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
     {
       gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
     }
+  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
   gtk_window_present (GTK_WINDOW (dlg));
 }

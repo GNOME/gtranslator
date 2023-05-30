@@ -68,15 +68,13 @@ GSettings               *gtr_settings_new                       (void);
 #define GTR_SETTINGS_SPELLCHECK				"spellcheck"
 #define GTR_SETTINGS_FONT				"font"
 #define GTR_SETTINGS_PANEL_SWITCHER_STYLE		"panel-switcher-style"
-#define GTR_SETTINGS_COLOR_SCHEME			"color-scheme"
 #define GTR_SETTINGS_SORT_ORDER				"sort-order"
 #define GTR_SETTINGS_ACTIVE_PLUGINS			"active-plugins"
 
 /* window state keys */
 #define GTR_SETTINGS_WINDOW_STATE			"state"
 #define GTR_SETTINGS_WINDOW_SIZE			"size"
-#define GTR_SETTINGS_CONTENT_PANEL_SIZE			"content-panel-size"
-#define GTR_SETTINGS_CONTEXT_PANEL_SIZE			"context-panel-size"
+#define GTR_SETTINGS_FLAP_STATE				"flap-state"
 
 G_END_DECLS
 

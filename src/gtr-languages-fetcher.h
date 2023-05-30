@@ -18,33 +18,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __GTR_LANGUAGES_FETCHER_H__
-#define __GTR_LANGUAGES_FETCHER_H__
+#pragma once
 
 #include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-#define GTR_TYPE_LANGUAGES_FETCHER		(gtr_languages_fetcher_get_type ())
-#define GTR_LANGUAGES_FETCHER(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_LANGUAGES_FETCHER, GtrLanguagesFetcher))
-#define GTR_LANGUAGES_FETCHER_CONST(obj)	(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_LANGUAGES_FETCHER, GtrLanguagesFetcher const))
-#define GTR_LANGUAGES_FETCHER_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTR_TYPE_LANGUAGES_FETCHER, GtrLanguagesFetcherClass))
-#define GTR_IS_LANGUAGES_FETCHER(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_LANGUAGES_FETCHER))
-#define GTR_IS_LANGUAGES_FETCHER_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_LANGUAGES_FETCHER))
-#define GTR_LANGUAGES_FETCHER_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), GTR_TYPE_LANGUAGES_FETCHER, GtrLanguagesFetcherClass))
+#define GTR_TYPE_LANGUAGES_FETCHER (gtr_languages_fetcher_get_type ())
 
-typedef struct _GtrLanguagesFetcher		GtrLanguagesFetcher;
-typedef struct _GtrLanguagesFetcherClass	GtrLanguagesFetcherClass;
+G_DECLARE_FINAL_TYPE (GtrLanguagesFetcher, gtr_languages_fetcher,
+                      GTR, LANGUAGES_FETCHER, AdwPreferencesGroup)
 
-struct _GtrLanguagesFetcherClass
-{
-  GtkBoxClass parent_class;
-
-  void (* changed) (GtrLanguagesFetcher *fetcher);
-  void (* lang_changed) (GtrLanguagesFetcher *fetcher);
-};
-
-GType                  gtr_languages_fetcher_get_type             (void) G_GNUC_CONST;
 
 GtkWidget             *gtr_languages_fetcher_new                  (void);
 
@@ -74,5 +59,3 @@ void                   gtr_languages_fetcher_set_plural_form      (GtrLanguagesF
                                                                    const gchar         *plural_form);
 
 G_END_DECLS
-
-#endif /* __GTR_LANGUAGES_FETCHER_H__ */

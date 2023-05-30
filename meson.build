@@ -59,6 +59,7 @@ set_defines = [
   ['PACKAGE_LIBDIR', gtr_libdir],
   ['PACKAGE_LOCALEDIR', gtr_localedir],
   ['PACKAGE_URL', 'https://wiki.gnome.org/Apps/Gtranslator'],
+  ['PACKAGE_ISSUES_URL', 'https://gitlab.gnome.org/GNOME/gtranslator/-/issues'],
   ['PACKAGE_VERSION', gtr_version],
   ['PACKAGE_APPID', gtr_app_id],
   ['PROFILE', get_option('profile')],
@@ -104,19 +105,19 @@ src_dir = join_paths(meson.project_source_root(), 'src')
 ################
 
 glib_dep = dependency('glib-2.0', version: '>= 2.71.3')
-gtk_dep = dependency('gtk+-3.0', version: '>= 3.22.20')
-libhandy_dep = dependency('libhandy-1', version: '>= 1.5.0')
+gtk_dep = dependency('gtk4', version: '>= 4.6.0')
+# libhandy_dep = dependency('libhandy-1', version: '>= 1.5.0')
+libadwaita_dep = dependency('libadwaita-1', version: '>= 1.1.0')
 
 gtr_deps = [
   glib_dep,
   gtk_dep,
-  libhandy_dep,
+  libadwaita_dep,
   dependency('libgda-6.0'),
   dependency('gio-2.0', version: '>= 2.36.0'),
   dependency('gsettings-desktop-schemas'),
-  dependency('gspell-1', version: '>= 1.2.0'),
   dependency('gthread-2.0', version: '>= 2.13.0'),
-  dependency('gtksourceview-4', version: '>= 4.0.2'),
+  dependency('gtksourceview-5', version: '>= 5.4.0'),
   dependency('libxml-2.0', version: '>= 2.4.12'),
   dependency('libsoup-3.0'),
   dependency('json-glib-1.0', version: '>= 1.2.0'),

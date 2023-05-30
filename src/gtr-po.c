@@ -136,7 +136,7 @@ enum
   NO_OF_SIGNALS
 };
 
-guint signals[NO_OF_SIGNALS];
+static guint signals[NO_OF_SIGNALS];
 
 static gchar *message_error = NULL;
 
@@ -992,11 +992,20 @@ void gtr_po_set_dl_info (GtrPo * po, gchar * team, gchar * module_name,
   priv->dl_domain = g_strdup (domain);
   priv->dl_state = g_strdup (module_state);
 
-  gtr_header_set_field (priv->header, "X-DL-Team", team);
-  gtr_header_set_field (priv->header, "X-DL-Module", module_name);
-  gtr_header_set_field (priv->header, "X-DL-Branch", branch);
-  gtr_header_set_field (priv->header, "X-DL-Domain", domain);
-  gtr_header_set_field (priv->header, "X-DL-State", module_state);
+  if (team)
+    gtr_header_set_field (priv->header, "X-DL-Team", team);
+
+  if (module_name)
+    gtr_header_set_field (priv->header, "X-DL-Module", module_name);
+
+  if (branch)
+    gtr_header_set_field (priv->header, "X-DL-Branch", branch);
+
+  if (domain)
+    gtr_header_set_field (priv->header, "X-DL-Domain", domain);
+
+  if (module_state)
+    gtr_header_set_field (priv->header, "X-DL-State", module_state);
 }
 /*
  * FIXME: We are not using this func.

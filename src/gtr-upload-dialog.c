@@ -37,57 +37,73 @@ typedef struct
   GtkWidget *label;
   GtkWidget *parent;
   GtkWidget *upload;
+  GtkWidget *cancel;
 } GtrUploadDialogPrivate;
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrUploadDialog, gtr_upload_dialog, GTK_TYPE_DIALOG)
+struct _GtrUploadDialog
+{
+  GtkWindow parent_instance;
+};
+
+G_DEFINE_TYPE_WITH_PRIVATE (GtrUploadDialog, gtr_upload_dialog, GTK_TYPE_WINDOW)
+
+enum
+{
+  RESPONSE,
+  NO_OF_SIGNALS
+};
+
+static guint signals[NO_OF_SIGNALS];
+
+static void
+on_upload_button_clicked (GtkButton                  *button,
+                          GtrUploadDialog            *dlg)
+{
+  g_signal_emit (GTR_UPLOAD_DIALOG (dlg), signals[RESPONSE], 0);
+}
+
+static void
+on_cancel_button_clicked (GtkButton                  *button,
+                          GtrUploadDialog            *dlg)
+{
+  gtk_window_destroy (GTK_WINDOW (dlg));
+}
 
 static void
 gtr_upload_dialog_class_init (GtrUploadDialogClass *klass)
 {
+  gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass),
+                                               "/org/gnome/translator/gtr-upload-dialog.ui");
+
+  /* Main layout widgets */
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, main_box);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, text_view);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, label);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, upload);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, cancel);
+
+  // Custom signals
+  signals[RESPONSE] =
+    g_signal_new ("response",
+                  G_OBJECT_CLASS_TYPE (klass),
+                  G_SIGNAL_RUN_LAST,
+                  0, NULL, NULL,
+                  g_cclosure_marshal_VOID__VOID,
+                  G_TYPE_NONE, 0);
 }
 
 static void
 gtr_upload_dialog_init (GtrUploadDialog *dlg)
 {
   GtrUploadDialogPrivate *priv = gtr_upload_dialog_get_instance_private (dlg);
-  GtkBox *content_area;
-  GtkBuilder *builder;
-  gchar *root_objects[] = {
-    "main_box",
-    NULL
-  };
+  gtk_widget_init_template (GTK_WIDGET (dlg));
 
-  priv->upload = gtk_dialog_add_button (GTK_DIALOG (dlg),
-                                        _("_Upload"), GTK_RESPONSE_ACCEPT);
-
-  gtk_window_set_title (GTK_WINDOW (dlg), _("Upload to Damned Lies"));
-  gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
-  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
-  content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
-
-  gtk_widget_set_margin_start (GTK_WIDGET (dlg), 6);
-  gtk_widget_set_margin_end (GTK_WIDGET (dlg), 6);
-  gtk_widget_set_margin_top (GTK_WIDGET (dlg), 6);
-  gtk_widget_set_margin_bottom (GTK_WIDGET (dlg), 6);
-  gtk_box_set_spacing (content_area, 6);
-
-  builder = gtk_builder_new ();
-  GError *error = NULL;
-  gtk_builder_add_objects_from_resource (builder, "/org/gnome/translator/gtr-upload-dialog.ui",
-                                         root_objects, &error);
-  if (error)
-  {
-    g_message("%s", error->message);
-  }
-  priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
-  g_object_ref (priv->main_box);
-  priv->text_view = GTK_WIDGET (gtk_builder_get_object (builder, "text_view"));
-  priv->label = GTK_WIDGET (gtk_builder_get_object (builder, "label"));
-  g_object_unref (builder);
-
-  gtk_box_append (content_area, priv->main_box);
+  g_signal_connect (GTK_BUTTON (priv->upload), "clicked",
+                    G_CALLBACK (on_upload_button_clicked), dlg);
+  g_signal_connect (GTK_BUTTON (priv->cancel), "clicked",
+                    G_CALLBACK (on_cancel_button_clicked), dlg);
 }
 
 GtrUploadDialog *

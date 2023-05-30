@@ -1,7 +1,7 @@
 {
     "app-id" : "org.gnome.GtranslatorDevel",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "43",
+    "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
     "command" : "gtranslator",
     "tags" : [
@@ -9,6 +9,7 @@
     ],
     "desktop-file-name-suffix" : "(Development) ",
     "finish-args" : [
+        "--device=dri",
         "--share=ipc",
         "--share=network",
         "--socket=fallback-x11",
@@ -18,7 +19,8 @@
         "--filesystem=~/.config/dconf:ro",
         "--filesystem=xdg-download",
         "--talk-name=ca.desrt.dconf",
-        "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
+        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
+        "--env=G_MESSAGES_DEBUG=all"
     ],
     "cleanup" : [
         "/include",
@@ -32,30 +34,6 @@
         "*.a"
     ],
     "modules" : [
-        {
-            "name" : "gspell",
-            "config-opts" : [
-                "--disable-gtk-doc",
-                "--disable-gtk-doc-html"
-            ],
-            "cleanup" : [
-                "/bin",
-                "/include",
-                "/lib/pkgconfig",
-                "*.la",
-                "/share/gir-1.0",
-                "/share/gtk-doc",
-                "/share/vala"
-            ],
-            "sources" : [
-                {
-                    "type" : "git",
-                    "url" : "https://gitlab.gnome.org/GNOME/gspell.git",
-                    "tag" : "1.9.1",
-                    "commit" : "5300d93dae00998801ef1be48da71dac4e2ebd1b"
-                }
-            ]
-        },
         {
             "name" : "libgda",
             "buildsystem" : "meson",

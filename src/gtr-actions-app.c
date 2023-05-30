@@ -55,12 +55,7 @@ void
 gtr_about_dialog (GtrWindow *window)
 {
   static const gchar *authors[] = {
-    N_("Current Maintainers"),
-    "------------------------",
     "Daniel Garcia Moreno <danigm@gnome.org>",
-    "",
-    N_("Previous Developers"),
-    "------------------------",
     "Seán de Búrca <leftmostcat@gmail.com>",
     "Ignacio Casal Quinteiro <icq@gnome.org>",
     "Pablo Sanxiao <psanxiao@gnome.org>",
@@ -69,9 +64,6 @@ gtr_about_dialog (GtrWindow *window)
     "Gediminas Paulauskas <menesis@delfi.lt>",
     "Thomas Ziehmer <thomas@kabalak.net>",
     "Peeter Vois <peeter@kabalak.net>",
-    "",
-    N_("Contributors"),
-    "------------------------",
     "Juan José Sánchez Penas <jjsanchez@igalia.com>",
     "Christian Kirbach <christian.kirbach@googlemail.com>",
     "Luca Ferreti <elle.uca@libero.it>",
@@ -90,27 +82,24 @@ gtr_about_dialog (GtrWindow *window)
     NULL
   };
 
-  static const gchar copyright[] =
-    "Copyright © 1999-2008 Free Software Foundation, Inc.\n"
-    "Copyright © 2007-2012 Ignacio Casal Quinteiro";
-
   static const gchar comments[] =
     N_("Translation file editing suite for localization of applications and libraries.");
 
-  gtk_show_about_dialog (GTK_WINDOW (window),
-                         "comments", _(comments),
-                         "authors", authors,
-                         "copyright", copyright,
+  adw_show_about_window (GTK_WINDOW (window),
+                         "application-name", _("Translation Editor"),
+                         "application-icon", PACKAGE_APPID,
+                         "version", get_version (),
+                         "copyright", "© 2023 The GNOME Foundation",
+                         "website", PACKAGE_URL,
+                         "issue-url", PACKAGE_ISSUES_URL,
                          "license-type", GTK_LICENSE_GPL_3_0,
+                         "developers", authors,
                          "documenters", documenters,
-                         "logo-icon-name", PACKAGE_APPID,
+                         "comments", _(comments),
                          /*
                           * Note to translators: put here your name and email so it will show
                           * up in the "about" box
                           */
                          "translator-credits", _("translator-credits"),
-                         "version", get_version (),
-                         "website", PACKAGE_URL,
-                         "website-label", _("Translation Editor Web Site"),
                          NULL);
 }

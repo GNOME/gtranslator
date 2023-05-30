@@ -30,7 +30,7 @@
 
 struct _GtrSearchBar
 {
-  GtkBin                  parent_instance;
+  AdwBin                  parent_instance;
 
   GBindingGroup           *search_bindings;
 
@@ -42,7 +42,8 @@ struct _GtrSearchBar
   GtkButton               *next_button;
   GtkEntry                *replace_entry;
   GtkEntry                *search_entry;
-  GtkGrid                 *search_options;
+  GtkRevealer             *search_options;
+  GtkRevealer             *replace_options;
   GtkLabel                *search_text_error;
 
   GtrWindow               *active_window;
@@ -74,7 +75,7 @@ enum {
   N_SIGNALS
 };
 
-G_DEFINE_FINAL_TYPE (GtrSearchBar, gtr_search_bar, GTK_TYPE_BIN)
+G_DEFINE_FINAL_TYPE (GtrSearchBar, gtr_search_bar, ADW_TYPE_BIN)
 
 static GParamSpec *properties [N_PROPS];
 static guint signals [N_SIGNALS];
@@ -88,7 +89,9 @@ gtr_search_bar_set_search_text (GtrSearchBar *dialog,
   g_return_if_fail (GTR_IS_SEARCH_BAR (dialog));
   g_return_if_fail (text != NULL);
 
-  gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), text);
+  //gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), text);
+  GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(dialog->search_entry));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
 }
 
 /*
@@ -97,37 +100,35 @@ gtr_search_bar_set_search_text (GtrSearchBar *dialog,
 const gchar*
 gtr_search_bar_get_search_text (GtrSearchBar *dialog)
 {
-  //g_assert (GTR_IS_SEARCH_BAR (dialog));
-  g_return_val_if_fail (GTR_IS_SEARCH_BAR (dialog), NULL);
-
-  return gtk_entry_get_text (GTK_ENTRY (dialog->search_entry));
+  const char *text;
+  GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY (dialog->search_entry));
+  text = gtk_entry_buffer_get_text (buffer);
+  return text;
 }
 
 void
 gtr_search_bar_set_replace_text (GtrSearchBar *dialog,
                                  const gchar  *text)
 {
-  //g_assert (GTR_IS_SEARCH_BAR (dialog));
-  g_return_if_fail (GTR_IS_SEARCH_BAR (dialog));
-  g_return_if_fail (text != NULL);
-
-  gtk_entry_set_text (GTK_ENTRY (dialog->replace_entry), text);
+  GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY (dialog->replace_entry));
+  gtk_entry_buffer_set_text (entry_buffer, text, -1);
 }
 
 const gchar *
 gtr_search_bar_get_replace_text (GtrSearchBar *dialog)
 {
-  g_return_val_if_fail (GTR_IS_SEARCH_BAR (dialog), NULL);
+  const char *text;
+  GtkEntryBuffer *buffer;
 
-  return gtk_entry_get_text (GTK_ENTRY (dialog->replace_entry));
+  buffer = gtk_entry_get_buffer (GTK_ENTRY (dialog->replace_entry));
+  text = gtk_entry_buffer_get_text (buffer);
+  return text;
 }
 
 void
 gtr_search_bar_set_original_text (GtrSearchBar *self,
                                   gboolean      at_original_text)
 {
-  g_return_if_fail (GTR_IS_SEARCH_BAR (self));
-
   if (self->at_original_text == at_original_text)
     return;
 
@@ -239,7 +240,8 @@ gtr_search_bar_get_wrap_around (GtrSearchBar *self)
 void
 gtr_hide_bar (GtrSearchBar *self)
 {
-  GtkWidget *window = gtk_widget_get_toplevel (GTK_WIDGET (self));
+  //GtkWidget *window = gtk_widget_get_toplevel (GTK_WIDGET (self));
+  GtkWindow *window = GTK_WINDOW(gtk_widget_get_root (GTK_WIDGET (self)));
 
   GtrTab *active_tab = gtr_window_get_active_tab (GTR_WINDOW (window));
 
@@ -249,28 +251,28 @@ gtr_hide_bar (GtrSearchBar *self)
 void
 gtr_search_bar_find_next (GtrSearchBar *self)
 {
-  GtkWidget *window = gtk_widget_get_toplevel (GTK_WIDGET (self));
+  GtkWindow *window = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
   do_find (self, GTR_WINDOW (window), FALSE);
 }
 
 void
 gtr_search_bar_find_prev (GtrSearchBar *self)
 {
-  GtkWidget *window = gtk_widget_get_toplevel (GTK_WIDGET (self));
+  GtkWindow *window = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
   do_find (self, GTR_WINDOW (window), TRUE);
 }
 
 void
 gtr_do_replace (GtrSearchBar *self)
 {
-  GtkWidget *window = gtk_widget_get_toplevel (GTK_WIDGET (self));
+  GtkWindow *window = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
   do_replace (self, GTR_WINDOW (window));
 }
 
 void
 gtr_do_replace_all (GtrSearchBar *self)
 {
-  GtkWidget *window = gtk_widget_get_toplevel (GTK_WIDGET (self));
+  GtkWindow *window = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
   do_replace_all (self, GTR_WINDOW (window));
 }
 
@@ -329,9 +331,7 @@ gtr_search_bar_set_replace_mode (GtrSearchBar *self,
   if (replace_mode != self->replace_mode)
     {
       self->replace_mode = replace_mode;
-      gtk_widget_set_visible (GTK_WIDGET (self->replace_entry), replace_mode);
-      gtk_widget_set_visible (GTK_WIDGET (self->replace_button), replace_mode);
-      gtk_widget_set_visible (GTK_WIDGET (self->replace_all_button), replace_mode);
+      gtk_revealer_set_reveal_child (self->replace_options, replace_mode);
       g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_REPLACE_MODE]);
     }
 }
@@ -386,71 +386,25 @@ pacify_null_text (GBinding     *binding,
   return TRUE;
 }
 
-static void
+static gboolean
 gtr_search_bar_grab_focus (GtkWidget *widget)
 {
   GtrSearchBar *self = (GtrSearchBar *)widget;
 
   g_assert (GTR_IS_SEARCH_BAR (self));
 
-  gtk_widget_grab_focus (GTK_WIDGET (self->search_entry));
+  return gtk_widget_grab_focus (GTK_WIDGET (self->search_entry));
 }
 
 static void
-search_entry_populate_popup (GtrSearchBar *self,
-                             GtkWidget    *widget,
-                             GtkEntry     *entry)
+gtr_search_bar_destroy (GObject *object)
 {
-  g_assert (GTR_IS_SEARCH_BAR (self));
-  g_assert (GTK_IS_MENU (widget));
-  g_assert (GTK_IS_ENTRY (entry));
-
-  if (GTK_IS_MENU (widget))
-    {
-      GtkWidget *item;
-      GtkWidget *sep;
-      guint pos = 0;
-
-      item = gtk_check_menu_item_new_with_label (_("Case sensitive"));
-      gtk_actionable_set_action_name (GTK_ACTIONABLE (item), "search-settings.case-sensitive");
-      gtk_menu_shell_insert (GTK_MENU_SHELL (widget), item, pos++);
-      gtk_widget_show (item);
-
-      item = gtk_check_menu_item_new_with_label (_("Match whole word only"));
-      gtk_actionable_set_action_name (GTK_ACTIONABLE (item), "search-settings.at-word-boundaries");
-      gtk_menu_shell_insert (GTK_MENU_SHELL (widget), item, pos++);
-      gtk_widget_show (item);
-
-      item = gtk_check_menu_item_new_with_label (_("Wrap around"));
-      gtk_actionable_set_action_name (GTK_ACTIONABLE (item), "search-settings.wrap-around");
-      gtk_menu_shell_insert (GTK_MENU_SHELL (widget), item, pos++);
-      gtk_widget_show (item);
-
-      item = gtk_check_menu_item_new_with_label (_("Original text"));
-      gtk_actionable_set_action_name (GTK_ACTIONABLE (item), "search-settings.at-original-text");
-      gtk_menu_shell_insert (GTK_MENU_SHELL (widget), item, pos++);
-      gtk_widget_show (item);
-
-      item = gtk_check_menu_item_new_with_label (_("Translated text"));
-      gtk_actionable_set_action_name (GTK_ACTIONABLE (item), "search-settings.at-translated-text");
-      gtk_menu_shell_insert (GTK_MENU_SHELL (widget), item, pos++);
-      gtk_widget_show (item);
-
-      sep = gtk_separator_menu_item_new ();
-      gtk_menu_shell_insert (GTK_MENU_SHELL (widget), sep, pos++);
-      gtk_widget_show (sep);
-    }
-}
-
-static void
-gtr_search_bar_destroy (GtkWidget *widget)
-{
-  GtrSearchBar *self = (GtrSearchBar *)widget;
+  GtrSearchBar *self = (GtrSearchBar *)object;
 
   g_clear_object (&self->search_bindings);
   g_clear_object (&self->search_entry_tag);
 
-  GTK_WIDGET_CLASS (gtr_search_bar_parent_class)->destroy (widget);
+  G_OBJECT_CLASS (gtr_search_bar_parent_class)->dispose (object);
 }
 
 gboolean
@@ -472,7 +426,7 @@ gtr_search_bar_set_show_options (GtrSearchBar *self,
   if (self->show_options != show_options)
     {
       self->show_options = show_options;
-      gtk_widget_set_visible (GTK_WIDGET (self->search_options), show_options);
+      gtk_revealer_set_reveal_child (self->search_options, show_options);
       g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_SHOW_OPTIONS]);
     }
 }
@@ -597,12 +551,11 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  GtkBindingSet *binding_set;
 
   object_class->get_property = gtr_search_bar_get_property;
   object_class->set_property = gtr_search_bar_set_property;
+  object_class->dispose = gtr_search_bar_destroy;
 
-  widget_class->destroy = gtr_search_bar_destroy;
   widget_class->grab_focus = gtr_search_bar_grab_focus;
 
   properties [PROP_REPLACE_MODE] =
@@ -651,17 +604,16 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, previous_button);
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, next_button);
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, search_options);
+  gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, replace_options);
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, search_text_error);
 
   gtk_widget_class_set_css_name (widget_class, "gtrsearchbar");
 
-  /* Replace by gtk_widget_class_add_binding_signal in gtk 4. */
-  /* Also add gtk_widget_class_add_binding for next-match and previous-match as
+  // TODO:
+  /* Add gtk_widget_class_add_binding for next-match and previous-match as
    * in gtksearchentry.c, which are already in the app as app.find-next and
    * app.find-prev */
-  binding_set = gtk_binding_set_by_class (klass);
-  gtk_binding_entry_add_signal (binding_set, GDK_KEY_Escape, 0,
-                                "stop-search", 0);
+  gtk_widget_class_add_binding_signal (GTK_WIDGET_CLASS (klass), GDK_KEY_Escape, 0, "stop-search", NULL);
 }
 
 static void
@@ -676,8 +628,6 @@ gtr_search_bar_init (GtrSearchBar *self)
   self->wrap_around = TRUE;
   self->at_original_text = TRUE;
   self->at_translated_text = TRUE;
-
-  g_object_set (G_OBJECT (self->next_button), "can-default", TRUE, NULL);
 
   self->search_bindings = g_binding_group_new ();
 
@@ -698,13 +648,8 @@ gtr_search_bar_init (GtrSearchBar *self)
                     "insert_text", G_CALLBACK (insert_text_handler), NULL);
 
   g_signal_connect_swapped (self->search_entry,
-                            "changed",
+                            "activate",
                             G_CALLBACK (gtr_search_bar_find_next),
-                            self);
-
-  g_signal_connect_swapped (self->search_entry,
-                            "populate-popup",
-                            G_CALLBACK (search_entry_populate_popup),
                             self);
 
   g_signal_connect_swapped (self->next_button,
@@ -734,12 +679,10 @@ void
 gtr_search_bar_set_found (GtrSearchBar *self,
                           gboolean found)
 {
-  GtkStyleContext *context = gtk_widget_get_style_context (
-    GTK_WIDGET (self->search_entry));
   if (found)
-    gtk_style_context_remove_class (context, "error");
+    gtk_widget_remove_css_class (GTK_WIDGET (self->search_entry), "error");
   else
-    gtk_style_context_add_class (context, "error");
+    gtk_widget_add_css_class (GTK_WIDGET (self->search_entry), "error");
 }
 
 /* Previously, declared but unimplemented */

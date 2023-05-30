@@ -20,8 +20,7 @@
  *   Pablo Sanxiao <psanxiao@gmail.com>
  */
 
-#ifndef __GTR_MSG_H__
-#define __GTR_MSG_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
@@ -30,14 +29,14 @@
 
 G_BEGIN_DECLS
 
-#define GTR_TYPE_MSG		(gtr_msg_get_type ())
-
+#define GTR_TYPE_MSG (gtr_msg_get_type ())
 G_DECLARE_DERIVABLE_TYPE (GtrMsg, gtr_msg, GTR, MSG, GObject)
 
 struct _GtrMsgClass
 {
   GObjectClass parent_class;
 };
+
 
 typedef enum
 {
@@ -93,6 +92,8 @@ const gchar               *gtr_msg_get_format               (GtrMsg      *msg);
 
 gchar                     *gtr_msg_check                    (GtrMsg      *msg);
 
+gboolean                  gtr_msg_compare                   (GtrMsg *first, GtrMsg *second);
+
 /* Semi-private methods */
 GtrMsg                   *_gtr_msg_new                      (po_message_iterator_t iter,
                                                              po_message_t          message);
@@ -107,4 +108,3 @@ void                      _gtr_msg_set_message              (GtrMsg             
                                                              po_message_t          message);
 
 G_END_DECLS
-#endif /* __GTR_MSG_H__ */

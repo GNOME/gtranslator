@@ -25,7 +25,6 @@
 #include <glib/gi18n.h>
 
 #include "gtr-actions.h"
-#include "gtr-jump-dialog.h"
 #include "gtr-tab.h"
 #include "gtr-window.h"
 
@@ -118,10 +117,4 @@ gtr_message_go_to_prev_fuzzy_or_untranslated (GtrWindow * window)
 
   current = gtr_window_get_active_tab (window);
   gtr_tab_go_to_prev_fuzzy_or_untrans (current);
-}
-
-void
-gtr_message_jump (GtrWindow * window)
-{
-  gtr_show_jump_dialog (window);
 }

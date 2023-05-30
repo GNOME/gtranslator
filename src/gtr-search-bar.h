@@ -20,12 +20,14 @@
 #pragma once
 
 #include <gtksourceview/gtksource.h>
+#include <adwaita.h>
+
 
 G_BEGIN_DECLS
 
 #define GTR_TYPE_SEARCH_BAR (gtr_search_bar_get_type())
 
-G_DECLARE_FINAL_TYPE (GtrSearchBar, gtr_search_bar, GTR, SEARCH_BAR, GtkBin)
+G_DECLARE_FINAL_TYPE (GtrSearchBar, gtr_search_bar, GTR, SEARCH_BAR, AdwBin)
 
 enum
 {

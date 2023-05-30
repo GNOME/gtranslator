@@ -1,46 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.15.3 on Fri Sep  6 09:32:24 2013 -->
 <interface>
-  <!-- interface-requires gtk+ 3.10 -->
-  <object class="GtkTextBuffer" id="textbuffer1"/>
+  <requires lib="gtk" version="4.0"/>
+  <object class="GtkTextBuffer" id="notesbuffer"/>
+  <object class="GtkTextBuffer" id="commentsbuffer"/>
   <template class="GtrContextPanel" parent="GtkBox">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
     <property name="orientation">vertical</property>
     <property name="spacing">2</property>
+    <property name="hexpand">False</property>
     <child>
-      <object class="GtkBox" id="translation_memory_box">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
+      <object class="GtkPaned" id="paned">
         <property name="orientation">vertical</property>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">False</property>
-        <property name="position">0</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkScrolledWindow" id="sw">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="shadow_type">none</property>
+        <property name="position">400</property>
         <child>
-          <object class="GtkTextView" id="context">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="editable">False</property>
-            <property name="wrap_mode">word</property>
-            <property name="buffer">textbuffer1</property>
+          <object class="GtkScrolledWindow" id="sw">
+            <property name="vexpand">1</property>
+            <property name="hscrollbar-policy">never</property>
+            <property name="child">
+              <object class="GtkBox" id="context_box">
+                <property name="margin-start">12</property>
+                <property name="margin-end">12</property>
+                <property name="margin-top">12</property>
+                <property name="margin-bottom">12</property>
+                <property name="orientation">vertical</property>
+                <!-- Notes -->
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="yes">Notes</property>
+                    <property name="header-suffix">
+                      <object class="GtkButton" id="edit_notes">
+                        <property name="icon-name">document-edit-symbolic</property>
+                        <style>
+                          <class name="flat"/>
+                        </style>
+                      </object>
+                    </property>
+                    <child>
+                      <object class="AdwBin">
+                        <style>
+                          <class name="card"/>
+                        </style>
+                        <child>
+                          <object class="GtkTextView" id="notes">
+                            <property name="editable">0</property>
+                            <property name="wrap_mode">word</property>
+                            <property name="buffer">notesbuffer</property>
+                            <property name="height-request">48</property>
+                            <style>
+                              <class name="inline"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <!-- comments -->
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="yes">Extracted comments</property>
+                    <child>
+                      <object class="AdwBin">
+                        <style>
+                          <class name="card"/>
+                        </style>
+                        <child>
+                          <object class="GtkTextView" id="comments">
+                            <property name="editable">0</property>
+                            <property name="wrap_mode">word</property>
+                            <property name="buffer">commentsbuffer</property>
+                            <property name="height-request">48</property>
+                            <style>
+                              <class name="inline"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <!-- paths -->
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="yes">Paths</property>
+                    <child>
+                      <object class="GtkListBox" id="paths">
+                        <property name="selection-mode">none</property>
+                        <style>
+                          <class name="boxed-list"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="translation_memory_box">
+            <property name="vexpand">1</property>
+            <property name="valign">start</property>
+            <property name="orientation">vertical</property>
           </object>
         </child>
       </object>
-      <packing>
-        <property name="expand">True</property>
-        <property name="fill">True</property>
-        <property name="position">1</property>
-      </packing>
     </child>
   </template>
 </interface>
-

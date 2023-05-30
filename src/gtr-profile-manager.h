@@ -79,6 +79,9 @@ void                   gtr_profile_manager_modify_profile     (GtrProfileManager
                                                                GtrProfile        *old_profile,
                                                                GtrProfile        *new_profile);
 
+GtrProfile            *gtr_profile_manager_get_profile        (GtrProfileManager *manager,
+                                                               const char        *name);
+
 G_END_DECLS
 
 #endif /* __GTR_PROFILE_MANAGER_H__ */

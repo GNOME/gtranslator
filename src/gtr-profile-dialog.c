@@ -1,23 +1,25 @@
 /*
  * Copyright (C) 2007  Pablo Sanxiao <psanxiao@gmail.com>
- *               2008  Igalia 
+ *               2008  Igalia
+ * Copyright (C) 2022 Daniel Garcia <dani@danigm.net>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
  *   Pablo Sanxiao <psanxiao@gmail.com>
  *   Ignacio Casal Quinteiro <icq@gnome.org>
+ *   Daniel Garcia <dani@danigm.net>
  */
 
 #ifdef HAVE_CONFIG_H
@@ -37,8 +39,6 @@
 
 typedef struct
 {
-  GtkWidget *main_box;
-
   GtkWidget *profile_name;
   GtkWidget *auth_token;
 
@@ -46,93 +46,109 @@ typedef struct
   GtkWidget *author_email;
   GtkWidget *team_email;
 
+  GtkWidget *button_cancel;
+  GtkWidget *button_ok;
+
   GtkWidget *languages_fetcher;
+  gboolean   editing;
 } GtrProfileDialogPrivate;
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrProfileDialog, gtr_profile_dialog, GTK_TYPE_DIALOG)
+struct _GtrProfileDialog
+{
+  GtkWindow parent_instance;
+};
+
+G_DEFINE_TYPE_WITH_PRIVATE (GtrProfileDialog, gtr_profile_dialog, GTK_TYPE_WINDOW)
+
+enum
+{
+  RESPONSE,
+  NO_OF_SIGNALS
+};
+
+static guint signals[NO_OF_SIGNALS];
+
+static void
+on_ok_button_clicked (GtkButton                  *button,
+                      GtrProfileDialog           *dlg)
+{
+  g_signal_emit (dlg, signals[RESPONSE], 0);
+}
+
+static void
+on_cancel_button_clicked (GtkButton                  *button,
+                          GtrProfileDialog           *dlg)
+{
+  gtk_window_destroy (GTK_WINDOW (dlg));
+}
 
 static void
 gtr_profile_dialog_class_init (GtrProfileDialogClass *klass)
 {
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  gtk_widget_class_set_template_from_resource (widget_class,
+                                               "/org/gnome/translator/gtr-profile-dialog.ui");
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, languages_fetcher);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, profile_name);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, auth_token);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, author_name);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, author_email);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, team_email);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, button_cancel);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, button_ok);
+
+  // Custom signals
+  signals[RESPONSE] =
+    g_signal_new ("response",
+                  G_OBJECT_CLASS_TYPE (klass),
+                  G_SIGNAL_RUN_LAST,
+                  0, NULL, NULL,
+                  g_cclosure_marshal_VOID__VOID,
+                  G_TYPE_NONE, 0);
 }
 
 static void
 gtr_profile_dialog_init (GtrProfileDialog *dlg)
 {
   GtrProfileDialogPrivate *priv = gtr_profile_dialog_get_instance_private (dlg);
-  GtkBox *content_area;
-  GtkWidget *fetcher_box;
-  GtkBuilder *builder;
-  gchar *root_objects[] = {
-    "main_box",
-    NULL
-  };
 
-  gtk_dialog_add_button (GTK_DIALOG (dlg),
-                         _("_Cancel"), GTK_RESPONSE_CANCEL);
+  priv->editing = FALSE;
 
   gtk_window_set_title (GTK_WINDOW (dlg), _("Translation Editor Profile"));
   gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
   gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
-  content_area = GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg)));
+  gtk_widget_init_template (GTK_WIDGET (dlg));
 
-  gtk_widget_set_margin_start (GTK_WIDGET (content_area), 6);
-  gtk_widget_set_margin_end (GTK_WIDGET (content_area), 6);
-  gtk_widget_set_margin_top (GTK_WIDGET (content_area), 6);
-  gtk_widget_set_margin_bottom (GTK_WIDGET (content_area), 6);
-  gtk_box_set_spacing (content_area, 6);
-
-  builder = gtk_builder_new ();
-  GError *error = NULL;
-  gtk_builder_add_objects_from_resource (builder, "/org/gnome/translator/gtr-profile-dialog.ui",
-                                         root_objects, &error);
-  if (error)
-  {
-    g_message("%s", error->message);
-  }
-  priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
-  g_object_ref (priv->main_box);
-  priv->profile_name = GTK_WIDGET (gtk_builder_get_object (builder, "profile_name"));
-  priv->auth_token = GTK_WIDGET (gtk_builder_get_object (builder, "auth_token"));
-  priv->author_name = GTK_WIDGET (gtk_builder_get_object (builder, "name"));
-  priv->author_email = GTK_WIDGET (gtk_builder_get_object (builder, "email"));
-  priv->team_email = GTK_WIDGET (gtk_builder_get_object (builder, "team_email"));
-  fetcher_box = GTK_WIDGET (gtk_builder_get_object (builder, "fetcher_box"));
-  g_object_unref (builder);
-
-  gtk_box_append (content_area, priv->main_box);
-
-  priv->languages_fetcher = gtr_languages_fetcher_new ();
-  gtk_widget_show (priv->languages_fetcher);
-  gtk_widget_set_hexpand (priv->languages_fetcher, TRUE);
-  gtk_box_append (GTK_BOX (fetcher_box), priv->languages_fetcher);
+  g_signal_connect (GTK_BUTTON (priv->button_ok), "clicked",
+                    G_CALLBACK (on_ok_button_clicked), dlg);
+  g_signal_connect (GTK_BUTTON (priv->button_cancel), "clicked",
+                    G_CALLBACK (on_cancel_button_clicked), dlg);
 }
 
 static void
 fill_entries (GtrProfileDialog *dlg, GtrProfile *profile)
 {
   GtrProfileDialogPrivate *priv = gtr_profile_dialog_get_instance_private (dlg);
+
+  priv->editing = TRUE;
   if (gtr_profile_get_name (profile) != NULL)
-    gtk_entry_set_text (GTK_ENTRY (priv->profile_name),
-                        gtr_profile_get_name (profile));
+    gtk_editable_set_text (GTK_EDITABLE (priv->profile_name), gtr_profile_get_name (profile));
 
   if (gtr_profile_get_auth_token (profile) != NULL)
-    gtk_entry_set_text (GTK_ENTRY (priv->auth_token),
-                        gtr_profile_get_auth_token (profile));                      
+    gtk_editable_set_text (GTK_EDITABLE (priv->auth_token), gtr_profile_get_auth_token (profile));
 
   if (gtr_profile_get_author_name (profile) != NULL)
-    gtk_entry_set_text (GTK_ENTRY (priv->author_name),
-                        gtr_profile_get_author_name (profile));
+    gtk_editable_set_text (GTK_EDITABLE (priv->author_name), gtr_profile_get_author_name (profile));
 
   if (gtr_profile_get_author_email (profile) != NULL)
-    gtk_entry_set_text (GTK_ENTRY (priv->author_email),
-                        gtr_profile_get_author_email (profile));
+    gtk_editable_set_text (GTK_EDITABLE (priv->author_email), gtr_profile_get_author_email (profile));
 
   if (gtr_profile_get_group_email (profile) != NULL)
-    gtk_entry_set_text (GTK_ENTRY (priv->team_email),
-                        gtr_profile_get_group_email (profile));
+    gtk_editable_set_text (GTK_EDITABLE (priv->team_email), gtr_profile_get_group_email (profile));
 
   if (gtr_profile_get_language_name (profile) != NULL)
     gtr_languages_fetcher_set_language_name (GTR_LANGUAGES_FETCHER (priv->languages_fetcher),
@@ -166,16 +182,6 @@ gtr_profile_dialog_new (GtkWidget  *parent,
   if (profile != NULL)
     {
       fill_entries (dlg, profile);
-
-      /* We distinguish in the preferences dialog if we are modifying
-         or adding a new profile depending on the response */
-      gtk_dialog_add_button (GTK_DIALOG (dlg),
-                             _("_OK"), GTK_RESPONSE_YES);
-    }
-  else
-    {
-      gtk_dialog_add_button (GTK_DIALOG (dlg),
-                             _("_OK"), GTK_RESPONSE_ACCEPT);
     }
 
   if (GTK_WINDOW (parent) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
@@ -197,19 +203,19 @@ gtr_profile_dialog_get_profile (GtrProfileDialog *dlg)
   profile = gtr_profile_new ();
 
   gtr_profile_set_name (profile,
-                        gtk_entry_get_text (GTK_ENTRY (priv->profile_name)));
+                        gtk_editable_get_text (GTK_EDITABLE (priv->profile_name)));
 
   gtr_profile_set_auth_token (profile,
-                        gtk_entry_get_text (GTK_ENTRY (priv->auth_token)));
+                        gtk_editable_get_text (GTK_EDITABLE (priv->auth_token)));
 
   gtr_profile_set_author_name (profile,
-                               gtk_entry_get_text (GTK_ENTRY (priv->author_name)));
+                               gtk_editable_get_text (GTK_EDITABLE (priv->author_name)));
 
   gtr_profile_set_author_email (profile,
-                                gtk_entry_get_text (GTK_ENTRY (priv->author_email)));
+                                gtk_editable_get_text (GTK_EDITABLE (priv->author_email)));
 
   gtr_profile_set_group_email (profile,
-                               gtk_entry_get_text (GTK_ENTRY (priv->team_email)));
+                               gtk_editable_get_text (GTK_EDITABLE (priv->team_email)));
 
   gtr_profile_set_language_name (profile,
                                  gtr_languages_fetcher_get_language_name (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
@@ -227,4 +233,11 @@ gtr_profile_dialog_get_profile (GtrProfileDialog *dlg)
                                 gtr_languages_fetcher_get_plural_form (GTR_LANGUAGES_FETCHER (priv->languages_fetcher)));
 
   return profile;
+}
+
+gboolean
+gtr_profile_dialog_get_editing (GtrProfileDialog *dlg)
+{
+  GtrProfileDialogPrivate *priv = gtr_profile_dialog_get_instance_private (dlg);
+  return priv->editing;
 }

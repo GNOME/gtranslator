@@ -29,9 +29,9 @@
 
 #include "gtr-context.h"
 #include "gtr-msg.h"
+#include "gtr-message-table.h"
 #include "gtr-po.h"
 #include "gtr-view.h"
-#include "gtr-message-table-model.h"
 #include "gtr-search-bar.h"
 
 G_BEGIN_DECLS
@@ -168,6 +168,17 @@ void gtr_tab_show_hide_search_bar (GtrTab * tab, gboolean show);
 void gtr_tab_find_next (GtrTab * tab);
 void gtr_tab_find_prev (GtrTab * tab);
 void gtr_tab_find_set_replace (GtrTab * tab, gboolean replace);
+
+/* notebook */
+void gtr_tab_enable_save (GtrTab *tab, gboolean enable);
+void gtr_tab_enable_upload (GtrTab *tab, gboolean enable);
+void gtr_tab_update_undo_buttons (GtrTab *tab, GtrView *view);
+GtkWidget *
+gtr_tab_get_header (GtrTab *tab);
+void gtr_tab_enable_find_button (GtrTab *tab, gboolean enable);
+void gtr_tab_hide_sort_menu (GtrTab *tab);
+
+GtkWindow *gtr_tab_get_window (GtrTab *tab);
 
 /* Semi-public methods */
 

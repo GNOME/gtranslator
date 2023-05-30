@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="GtrGreeter" parent="AdwBin">
+    <child>
+      <object class="AdwViewStack" id="greeter_stack">
+        <!-- Welcome page -->
+        <child>
+          <object class="AdwViewStackPage">
+            <property name="name">welcome</property>
+            <property name="title" translatable="true">Welcome</property>
+            <property name="child">
+
+              <object class="AdwClamp">
+                <property name="maximum-size">900</property>
+                <property name="tightening-threshold">400</property>
+                <property name="valign">fill</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="AdwStatusPage">
+                        <property name="title" translatable="true">Welcome to Translation Editor</property>
+                        <property name="icon-name">contact-new-symbolic</property>
+                        <property name="description">Before start to use the application, a profile should be created, but dont' worry, the app will guide you to do it in a minute.</property>
+                        <property name="vexpand">true</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+
+            </property>
+          </object>
+        </child>
+
+        <!-- Create profile page -->
+        <child>
+          <object class="AdwViewStackPage">
+            <property name="name">profile</property>
+            <property name="title" translatable="true">Create Profile</property>
+            <property name="child">
+
+              <object class="AdwClamp">
+                <property name="maximum-size">900</property>
+                <property name="tightening-threshold">400</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="true">Profile</property>
+                        <child>
+                          <object class="AdwEntryRow" id="profile_name">
+                            <property name="title" translatable="yes">Profile name</property>
+                            <property name="text" translatable="yes">default</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwEntryRow" id="name">
+                            <property name="title" translatable="yes">Translator name</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwEntryRow" id="email">
+                            <property name="title" translatable="yes">Translator email</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwEntryRow" id="team_email">
+                            <property name="title" translatable="yes">Translation team email</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtrLanguagesFetcher" id="languages_fetcher">
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+
+            </property>
+          </object>
+
+        </child>
+
+        <!-- Confirmation -->
+        <child>
+          <object class="AdwViewStackPage">
+            <property name="name">confirmation</property>
+            <property name="title" translatable="true">Confirmation</property>
+            <property name="child">
+
+              <object class="AdwClamp">
+                <property name="maximum-size">900</property>
+                <property name="tightening-threshold">400</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="true">Confirmation</property>
+                        <property name="vexpand">true</property>
+                        <property name="valign">center</property>
+                        <style>
+                          <class name="boxed-list"/>
+                        </style>
+                        <child>
+                          <object class="AdwActionRow" id="conf_profile">
+                            <property name="title" translatable="true">Profile name</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_name">
+                            <property name="title" translatable="true">Translator name</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_email">
+                            <property name="title" translatable="true">Translator email</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_team">
+                            <property name="title" translatable="true">Team email</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_lang">
+                            <property name="title" translatable="true">Language name</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_lang_code">
+                            <property name="title" translatable="true">Language code</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_charset">
+                            <property name="title" translatable="true">Character set</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_encoding">
+                            <property name="title" translatable="true">Transfer encoding</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_plural_forms">
+                            <property name="title" translatable="true">Plural form</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+
+            </property>
+          </object>
+
+        </child>
+
+      </object>
+    </child>
+  </template>
+
+  <object class="GtkHeaderBar" id="titlebar">
+    <style>
+      <class name="titlebar"/>
+    </style>
+    <property name="title-widget">
+      <object class="AdwWindowTitle">
+        <property name="title" translatable="true">Translation Editor</property>
+      </object>
+    </property>
+    <child type="start">
+      <object class="GtkButton" id="back_button">
+        <property name="icon-name">go-previous-symbolic</property>
+        <property name="visible">false</property>
+      </object>
+    </child>
+    <child type="end">
+      <object class="GtkButton" id="next_button">
+        <property name="label" translatable="true">Next</property>
+        <style>
+          <class name="suggested-action"/>
+        </style>
+      </object>
+    </child>
+  </object>
+</interface>

@@ -30,7 +30,6 @@
 #include "gtr-dirs.h"
 #include "gtr-header.h"
 #include "gtr-msg.h"
-#include "gtr-notebook.h"
 #include "gtr-tab.h"
 #include "gtr-po.h"
 #include "gtr-projects.h"
@@ -40,6 +39,7 @@
 #include "gtr-window.h"
 #include "gtr-window-activatable.h"
 #include "gtr-profile-manager.h"
+#include "gtr-greeter.h"
 
 #include "translation-memory/gtr-translation-memory.h"
 #include "translation-memory/gtr-translation-memory-dialog.h"
@@ -47,6 +47,7 @@
 
 #include "codeview/gtr-codeview.h"
 
+#include <adwaita.h>
 #include <glib.h>
 #include <glib-object.h>
 #include <glib/gi18n.h>
@@ -77,14 +78,16 @@ typedef struct
   GtkWidget *stack;
 
   GtkWidget *projects;
-  GtkWidget *notebook;
   GtkWidget *dlteams;
+  GtkWidget *greeter;
+
+  GtkWidget *toast_overlay;
 
   GtrTab *active_tab;
 
   gint width;
   gint height;
-  GdkWindowState window_state;
+  GdkToplevelState window_state;
 
   GtrProfileManager *prof_manager;
 
@@ -93,7 +96,12 @@ typedef struct
   guint dispose_has_run : 1;
 } GtrWindowPrivate;
 
-G_DEFINE_FINAL_TYPE_WITH_PRIVATE(GtrWindow, gtr_window, GTK_TYPE_APPLICATION_WINDOW)
+struct _GtrWindow
+{
+  AdwApplicationWindow parent_instance;
+};
+
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrWindow, gtr_window, ADW_TYPE_APPLICATION_WINDOW)
 
 enum
 {
@@ -116,9 +124,8 @@ update_undo_state (GtrTab     *tab,
                    GtrMsg     *msg,
                    GtrWindow  *window)
 {
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtrView *active_view = gtr_window_get_active_view (window);
-  gtr_notebook_update_undo_buttons (GTR_NOTEBOOK (priv->notebook), active_view);
+  gtr_tab_update_undo_buttons (GTR_TAB (tab), active_view);
 }
 
 /*
@@ -136,8 +143,6 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
   GtrPo *po;
   gint translated, fuzzy, untranslated;
 
-  g_return_if_fail (GTR_IS_MSG (message));
-
   po = gtr_tab_get_po (tab);
 
   translated = gtr_po_get_translated_count (po);
@@ -149,51 +154,39 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
                         translated, untranslated, fuzzy);
 }
 
-static GtrWindow *
-get_drop_window (GtkWidget * widget)
-{
-  GtkWidget *target_window;
-
-  target_window = gtk_widget_get_toplevel (widget);
-  g_return_val_if_fail (GTR_IS_WINDOW (target_window), NULL);
-
-  return GTR_WINDOW (target_window);
-}
-
 /* Handle drops on the GtrWindow */
-static void
-drag_data_received_cb (GtkWidget * widget,
-                       GdkDragContext * context,
-                       gint x,
-                       gint y,
-                       GtkSelectionData * selection_data,
-                       guint info, guint time, gpointer data)
+static gboolean
+drag_data_received_cb (GtkDropTarget * drop_target,
+                       const GValue * value,
+                       gdouble x,
+                       gdouble y,
+                       gpointer data)
 {
-  GtrWindow *window;
-  GSList *locations;
+  GtrWindow * window = GTR_WINDOW (data);
+  GError * error = NULL;
 
-  window = get_drop_window (widget);
+  if (!G_VALUE_HOLDS (value, G_TYPE_FILE))
+    return FALSE;
 
-  if (window == NULL)
-    return;
-
-  if (info == TARGET_URI_LIST)
+  gtr_window_remove_tab (window);
+  gtr_open (g_value_get_object (value), window, &error);
+  if (error != NULL)
     {
-      locations = gtr_utils_drop_get_locations (selection_data);
-      gtr_actions_load_locations (window, locations);
-
-      g_slist_free_full (locations, g_object_unref);
+      GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
+      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+      g_error_free (error);
     }
+  return TRUE;
 }
 
-static void
+void
 set_window_title (GtrWindow * window, gboolean with_path)
 {
   GtrPo *po;
   GtrPoState state;
   GtrTab *active_tab;
   GFile *file;
-  gchar *title;
+  g_autofree gchar *title;
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtkHeaderBar *header;
 
@@ -204,7 +197,6 @@ set_window_title (GtrWindow * window, gboolean with_path)
       active_tab = gtr_window_get_active_tab (window);
       po = gtr_tab_get_po (active_tab);
       state = gtr_po_get_state (gtr_tab_get_po (active_tab));
-      po = gtr_tab_get_po (active_tab);
       file = gtr_po_get_location (po);
       basename = g_file_get_basename (file);
 
@@ -212,13 +204,13 @@ set_window_title (GtrWindow * window, gboolean with_path)
         {
           /* Translators: this is the title of the window with a modified document */
           title = g_strdup_printf (_("*%s — Translation Editor"), basename);
-          gtr_notebook_enable_save (GTR_NOTEBOOK (priv->notebook), TRUE);
+          gtr_tab_enable_save (GTR_TAB (priv->active_tab), TRUE);
         }
       else
         {
           /* Translators: this is the title of the window with a document opened */
           title = g_strdup_printf (_("%s — Translation Editor"), basename);
-          gtr_notebook_enable_save (GTR_NOTEBOOK (priv->notebook), FALSE);
+          gtr_tab_enable_save (GTR_TAB (priv->active_tab), FALSE);
         }
 
       g_free (basename);
@@ -232,10 +224,8 @@ set_window_title (GtrWindow * window, gboolean with_path)
   gtk_window_set_title (GTK_WINDOW (window), title);
 
   // notebook headerbar
-  header = GTK_HEADER_BAR (gtr_notebook_get_header (GTR_NOTEBOOK (priv->notebook)));
-  gtk_header_bar_set_title (header, title);
-
-  g_free (title);
+  header = GTK_HEADER_BAR (gtr_tab_get_header (GTR_TAB (priv->active_tab)));
+  gtk_widget_set_visible (GTK_WIDGET (header), TRUE);
 }
 
 static void
@@ -243,164 +233,34 @@ update_saved_state (GtrPo *po,
                     GParamSpec *param,
                     gpointer window)
 {
-  GtrNotebook *active_notebook;
-  active_notebook = gtr_window_get_notebook (window);
   set_window_title (GTR_WINDOW (window), TRUE);
-  gtr_notebook_enable_upload (active_notebook, gtr_po_can_dl_upload (po));
-}
-
-static void
-notebook_switch_page (GtkNotebook * nb,
-                      GtkWidget * page,
-                      gint page_num, GtrWindow * window)
-{
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-  GtrTab *tab;
-  GList *msg;
-  GtrPo *po;
-  gint n_pages;
-
-  tab = GTR_TAB (gtk_notebook_get_nth_page (nb, page_num));
-  if (tab == priv->active_tab)
-    return;
-
-  /*
-   * Set the window title
-   */
-  n_pages = gtk_notebook_get_n_pages (nb);
-  if (n_pages == 1)
-    set_window_title (window, TRUE);
-  else
-    set_window_title (window, FALSE);
-
-  priv->active_tab = tab;
-
-  po = gtr_tab_get_po (tab);
-  msg = gtr_po_get_current_message (po);
-  gtr_window_update_statusbar_message_count (tab, msg->data, window);
-}
-
-static void
-notebook_page_removed (GtkNotebook * notebook,
-                       GtkWidget * child, guint page_num, GtrWindow * window)
-{
-  gint n_pages;
-
-  /* Set the window title */
-  n_pages = gtk_notebook_get_n_pages (notebook);
-  if (n_pages == 1)
-    set_window_title (window, TRUE);
-  else
-    set_window_title (window, FALSE);
-}
-
-static void
-notebook_tab_close_request (GtrNotebook * notebook,
-                            GtrTab * tab, GtrWindow * window)
-{
-  /* Note: we are destroying the tab before the default handler
-   * seems to be ok, but we need to keep an eye on this. */
-  gtr_close_tab (tab, window);
-}
-
-
-static void
-notebook_tab_added (GtkNotebook * notebook,
-                    GtkWidget * child, guint page_num, GtrWindow * window)
-{
-  GtrTab *tab = GTR_TAB (child);
-  gint n_pages;
-
-  g_return_if_fail (GTR_IS_TAB (tab));
-
-  /* Set the window title */
-  n_pages = gtk_notebook_get_n_pages (notebook);
-  if (n_pages == 1)
-    set_window_title (window, TRUE);
-  else
-    set_window_title (window, FALSE);
-
-  g_signal_connect_after (child,
-                          "message_changed",
-                          G_CALLBACK
-                          (gtr_window_update_statusbar_message_count),
-                          window);
-
-  g_signal_connect_after (child,
-                          "message_changed",
-                          G_CALLBACK (update_undo_state),
-                          window);
-
-  g_signal_connect_after (child,
-                          "showed-message",
-                          G_CALLBACK (update_undo_state),
-                          window);
-
-  update_undo_state (NULL, NULL, window);
+  GtrTab * tab = gtr_window_get_active_tab(GTR_WINDOW(window));
+  gtr_tab_enable_upload (tab, gtr_po_can_dl_upload (po));
 }
 
 static void
 gtr_window_init (GtrWindow *window)
 {
-  GtkTargetList *tl;
+  //GtkTargetList *tl;
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
   priv->search_bar_shown = FALSE;
   priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
+  priv->active_tab = NULL;
+
+  /* loading custom styles */
+  if (g_strrstr (PACKAGE_APPID, "Devel") != NULL)
+    gtk_widget_add_css_class (GTK_WIDGET (window), "devel");
 
   gtk_widget_init_template (GTK_WIDGET (window));
 
   /* Profile manager */
   priv->prof_manager = gtr_profile_manager_get_default ();
 
-  /* Drag and drop support, set targets to NULL because we add the
-     default uri_targets below */
-  gtk_drag_dest_set (GTK_WIDGET (window),
-                     GTK_DEST_DEFAULT_MOTION |
-                     GTK_DEST_DEFAULT_HIGHLIGHT |
-                     GTK_DEST_DEFAULT_DROP, NULL, 0, GDK_ACTION_COPY);
-
-  /* Add uri targets */
-  tl = gtk_drag_dest_get_target_list (GTK_WIDGET (window));
-
-  if (tl == NULL)
-    {
-      tl = gtk_target_list_new (NULL, 0);
-      gtk_drag_dest_set_target_list (GTK_WIDGET (window), tl);
-      gtk_target_list_unref (tl);
-    }
-
-  gtk_target_list_add_uri_targets (tl, TARGET_URI_LIST);
-
-  /* Connect signals */
-  g_signal_connect (window,
-                    "drag_data_received",
-                    G_CALLBACK (drag_data_received_cb), NULL);
-
-  /**
-   * Here we define different widgets that provides to append to the main
-   * stack and this widgets can also provide a custom headerbar
-   *
-   * With this widgets we have different views in the same window
-   */
-
-  // poeditor
-  priv->notebook = GTK_WIDGET (gtr_notebook_new ());
-  gtk_widget_show (priv->notebook);
-  g_signal_connect (priv->notebook, "switch-page",
-                    G_CALLBACK (notebook_switch_page), window);
-  g_signal_connect (priv->notebook, "page-added",
-                    G_CALLBACK (notebook_tab_added), window);
-  g_signal_connect (priv->notebook, "page-removed",
-                    G_CALLBACK (notebook_page_removed), window);
-  g_signal_connect (priv->notebook,
-                    "tab_close_request",
-                    G_CALLBACK (notebook_tab_close_request), window);
-
-  gtk_stack_add_named (GTK_STACK (priv->stack), priv->notebook, "poeditor");
-  gtk_stack_add_named (GTK_STACK (priv->header_stack),
-                       gtr_notebook_get_header (GTR_NOTEBOOK (priv->notebook)),
-                       "poeditor");
+  /* Drag and drop */
+  GtkDropTarget * drop_target = gtk_drop_target_new (G_TYPE_FILE, GDK_ACTION_COPY);
+  g_signal_connect (drop_target, "drop", G_CALLBACK (drag_data_received_cb), window);
+  gtk_widget_add_controller (GTK_WIDGET (window), GTK_EVENT_CONTROLLER (drop_target));
 
   // project selection
   priv->projects = GTK_WIDGET (gtr_projects_new (window));
@@ -416,7 +276,14 @@ gtr_window_init (GtrWindow *window)
                        gtr_dl_teams_get_header (GTR_DL_TEAMS (priv->dlteams)),
                        "dlteams");
 
-  gtk_widget_show_all (priv->stack);
+  // Greeter, First launch view
+  priv->greeter = GTK_WIDGET (gtr_greeter_new (window));
+  gtk_stack_add_named (GTK_STACK (priv->stack), priv->greeter, "greeter");
+  gtk_stack_add_named (GTK_STACK (priv->header_stack),
+                       gtr_greeter_get_header (GTR_GREETER (priv->greeter)),
+                       "greeter");
+
+  gtk_widget_set_visible (priv->stack, TRUE);
 
   // translation memory
   priv->translation_memory = GTR_TRANSLATION_MEMORY (gtr_gda_new());
@@ -429,9 +296,6 @@ gtr_window_init (GtrWindow *window)
                                                             "max-length-diff"));
   gtr_translation_memory_set_max_items (priv->translation_memory, 10);
 
-  // code view
-  priv->codeview = gtr_code_view_new (window);
-
   gtr_window_show_projects (window);
 }
 
@@ -441,9 +305,9 @@ save_window_state (GtrWindow * window)
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
   if ((priv->window_state &
-	 (GDK_WINDOW_STATE_MAXIMIZED | GDK_WINDOW_STATE_FULLSCREEN)) == 0)
+	 (GDK_TOPLEVEL_STATE_MAXIMIZED | GDK_TOPLEVEL_STATE_FULLSCREEN)) == 0)
     {
-      gtk_window_get_size (GTK_WINDOW (window), &priv->width, &priv->height);
+      gtk_window_get_default_size (GTK_WINDOW (window), &priv->width, &priv->height);
       g_settings_set (priv->state_settings, GTR_SETTINGS_WINDOW_SIZE,
 				"(ii)", priv->width, priv->height);
     }
@@ -476,29 +340,13 @@ gtr_window_finalize (GObject * object)
   G_OBJECT_CLASS (gtr_window_parent_class)->finalize (object);
 }
 
-static gboolean
-gtr_window_configure_event (GtkWidget * widget, GdkEventConfigure * event)
-{
-  GtrWindow *window = GTR_WINDOW (widget);
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-
-  priv->width = event->width;
-  priv->height = event->height;
-
-  return GTK_WIDGET_CLASS (gtr_window_parent_class)->configure_event (widget,
-                                                                      event);
-}
-
 static void
 gtr_window_class_init (GtrWindowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->finalize = gtr_window_finalize;
   object_class->dispose = gtr_window_dispose;
-
-  widget_class->configure_event = gtr_window_configure_event;
 
   gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass),
                                                "/org/gnome/translator/gtr-window.ui");
@@ -508,16 +356,30 @@ gtr_window_class_init (GtrWindowClass *klass)
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, main_box);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, stack);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, header_stack);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, toast_overlay);
 }
 
 static void
 searchbar_toggled (GtrTab * tab, gboolean revealed, GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
-  gtr_notebook_enable_find_button (GTR_NOTEBOOK (priv->notebook), revealed);
+  gtr_tab_enable_find_button (GTR_TAB (priv->active_tab), revealed);
+  priv->search_bar_shown = revealed;
 }
 
 /***************************** Public funcs ***********************************/
+void
+gtr_window_remove_tab (GtrWindow * window)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
+  if (priv->active_tab != NULL)
+  {
+    if (gtk_stack_get_child_by_name (GTK_STACK (priv->stack), "poeditor"))
+      gtk_stack_remove (GTK_STACK (priv->stack), GTK_WIDGET (priv->active_tab));
+
+    priv->active_tab = NULL;
+  }
+}
 
 /**
  * gtr_window_create_tab:
@@ -532,24 +394,44 @@ searchbar_toggled (GtrTab * tab, gboolean revealed, GtrWindow *window)
 GtrTab *
 gtr_window_create_tab (GtrWindow * window, GtrPo * po)
 {
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   GtrTab *tab;
 
-  // Remove all tabs when creating a new one,
-  // this way we only have one tab. This is a workaround
-  // to remove the tab functionality without change all
-  // the code
-  GList *tabs, *l;
-  tabs = gtr_window_get_all_tabs (window);
-  for (l = tabs; l != NULL; l = g_list_next (l))
-    _gtr_window_close_tab (window, l->data);
-  g_list_free (tabs);
-
   tab = gtr_tab_new (po, GTK_WINDOW (window));
-  gtk_widget_show (GTK_WIDGET (tab));
+  priv->active_tab = tab;
 
-  gtr_notebook_add_page (GTR_NOTEBOOK (priv->notebook), tab);
-  gtr_notebook_reset_sort (GTR_NOTEBOOK (priv->notebook));
+  g_signal_connect_after (tab,
+                          "message_changed",
+                          G_CALLBACK
+                          (gtr_window_update_statusbar_message_count),
+                          window);
+
+  g_signal_connect_after (tab,
+                          "message_changed",
+                          G_CALLBACK (update_undo_state),
+                          window);
+  g_signal_connect_after (tab,
+                          "showed-message",
+                          G_CALLBACK (update_undo_state),
+                          window);
+
+  gtk_widget_set_visible (GTK_WIDGET (tab), TRUE);
+  gtr_window_update_statusbar_message_count(priv->active_tab,NULL, window);
+
+  update_undo_state (tab, NULL, window);
+
+  if (gtk_stack_get_child_by_name (GTK_STACK (priv->stack), "poeditor") == NULL) {
+    gtk_stack_add_named (GTK_STACK (priv->stack), GTK_WIDGET(priv->active_tab), "poeditor");
+  }
+
+  if (gtk_stack_get_child_by_name (GTK_STACK (priv->header_stack), "poeditor") == NULL) {
+    gtk_stack_add_named (GTK_STACK (priv->header_stack),
+                         gtr_tab_get_header (GTR_TAB (priv->active_tab)),
+                         "poeditor");
+  }
+
+  // code view
+  priv->codeview = gtr_code_view_new (window);
 
   g_signal_connect_after (po,
                           "notify::state",
@@ -558,6 +440,8 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
                           window);
 
   g_signal_connect (tab, "searchbar-toggled", G_CALLBACK (searchbar_toggled), window);
+
+  set_window_title (window, TRUE);
   return tab;
 }
 
@@ -574,9 +458,7 @@ gtr_window_get_active_tab (GtrWindow * window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   g_return_val_if_fail (priv != NULL, NULL);
-  g_return_val_if_fail (priv->notebook != NULL, NULL);
-
-  return gtr_notebook_get_page (GTR_NOTEBOOK (priv->notebook));
+  return priv->active_tab;
 }
 
 /**
@@ -591,22 +473,13 @@ gtr_window_get_active_tab (GtrWindow * window)
 GList *
 gtr_window_get_all_tabs (GtrWindow * window)
 {
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-  gint num_pages;
-  gint i = 0;
   GList *toret = NULL;
-
-  num_pages =
-    gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook));
-
-  while (i < num_pages)
-    {
-      toret = g_list_append (toret,
-                             gtk_notebook_get_nth_page (GTK_NOTEBOOK
-                                                        (priv->notebook), i));
-      i++;
-    }
-
+  GtrTab *tab = gtr_window_get_active_tab(window);
+  if (tab != NULL) {
+    toret = g_list_append (toret,
+                          GTK_WIDGET(
+                            gtr_window_get_active_tab(window)));
+  }
   return toret;
 }
 
@@ -637,22 +510,6 @@ gtr_window_get_header_from_active_tab (GtrWindow * window)
   header = gtr_po_get_header (po);
 
   return header;
-}
-
-/**
- * gtr_window_get_notebook:
- * @window: a #GtrWindow
- * 
- * Gets the main #GtrNotebook of the @window.
- *
- * Returns: (transfer none): the #GtrNotebook of the @window
- */
-GtrNotebook *
-gtr_window_get_notebook (GtrWindow * window)
-{
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-
-  return GTR_NOTEBOOK (priv->notebook);
 }
 
 /**
@@ -693,26 +550,11 @@ gtr_window_get_all_views (GtrWindow * window,
                           gboolean original, gboolean translated)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-  gint numtabs;
-  gint i;
   GList *views = NULL;
-  GtkWidget *tab;
-
   g_return_val_if_fail (GTR_IS_WINDOW (window), NULL);
 
-  numtabs = gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook));
-  i = numtabs - 1;
-
-  while (i >= 0 && numtabs != 0)
-    {
-      tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (priv->notebook),
-                                       i);
-      views =
-        g_list_concat (views,
-                       gtr_tab_get_all_views (GTR_TAB (tab), original,
-                                              translated));
-      i--;
-    }
+  views = g_list_concat (views,
+                        gtr_tab_get_all_views(GTR_TAB(priv->active_tab), original, translated));
 
   return views;
 }
@@ -756,46 +598,6 @@ gtr_window_get_tab_from_location (GtrWindow * window, GFile * location)
   return NULL;
 }
 
-/**
- * gtr_window_set_active_tab:
- * @window: a #GtrWindow
- * @tab: a #GtrTab
- *
- * Sets the active tab for the @window.
- */
-void
-gtr_window_set_active_tab (GtrWindow * window, GtkWidget * tab)
-{
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-  gint page;
-
-  page = gtk_notebook_page_num (GTK_NOTEBOOK (priv->notebook), tab);
-
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), page);
-}
-
-/**
- * _gtr_window_close_tab:
- * @window: a #GtrWindow
- * @tab: a #GtrTab
- *
- * Closes the opened @tab of the @window and sets the right sensitivity of the
- * widgets.
- */
-void
-_gtr_window_close_tab (GtrWindow * window, GtrTab * tab)
-{
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-  gint i;
-
-  g_return_if_fail (GTR_IS_TAB (tab));
-
-  i = gtk_notebook_page_num (GTK_NOTEBOOK (priv->notebook),
-                             GTK_WIDGET (tab));
-  if (i != -1)
-    gtr_notebook_remove_page (GTR_NOTEBOOK (priv->notebook), i);
-}
-
 void
 gtr_window_show_projects (GtrWindow *window)
 {
@@ -803,8 +605,7 @@ gtr_window_show_projects (GtrWindow *window)
 
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "projects");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "projects");
-
-  gtr_notebook_remove_all_pages (GTR_NOTEBOOK (priv->notebook));
+  gtk_window_set_title (GTK_WINDOW (window), _("Select a Po file"));
 }
 
 void
@@ -823,13 +624,20 @@ gtr_window_show_dlteams (GtrWindow *window)
 
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "dlteams");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "dlteams");
+  gtk_window_set_title (GTK_WINDOW (window), _("Load from Damned Lies"));
+
+  /* Load teams and modules automatically */
+  gtr_dl_teams_load_json (GTR_DL_TEAMS (priv->dlteams));
 }
 
 void
-gtr_window_remove_all_pages (GtrWindow *window)
+gtr_window_show_greeter (GtrWindow *window)
 {
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-  gtr_notebook_remove_all_pages (GTR_NOTEBOOK (priv->notebook));
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
+
+  gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "greeter");
+  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "greeter");
+  gtk_window_set_title (GTK_WINDOW (window), _("Welcome to Translation Editor"));
 }
 
 void
@@ -840,8 +648,6 @@ gtr_window_show_tm_dialog (GtrWindow *window)
 
   dlg = gtr_translation_memory_dialog_new (GTK_WINDOW (window),
                                            priv->translation_memory);
-
-  g_signal_connect (dlg, "response", G_CALLBACK (gtk_widget_destroy), NULL);
 
   gtk_window_present (GTK_WINDOW (dlg));
 }
@@ -919,7 +725,7 @@ gtr_window_hide_sort_menu (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
 
-  gtr_notebook_hide_sort_menu (GTR_NOTEBOOK (priv->notebook));
+  gtr_tab_hide_sort_menu (GTR_TAB (priv->active_tab));
 }
 
 void
@@ -927,13 +733,13 @@ gtr_window_show_search_bar (GtrWindow *window,
                             gboolean show)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
-  GtrNotebook *notebook = GTR_NOTEBOOK (priv->notebook);
   GtrTab *tab = gtr_window_get_active_tab (window);
 
-  if (tab != NULL)
-    gtr_tab_show_hide_search_bar (tab, show);
+  if (!tab)
+    return;
 
-  gtr_notebook_enable_find_button(notebook, show);
+  gtr_tab_show_hide_search_bar (tab, show);
+  gtr_tab_enable_find_button (tab, show);
 
   priv->search_bar_shown = show;
 }
@@ -958,5 +764,21 @@ gtr_window_toggle_search_bar (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
 
-  gtr_window_show_search_bar(window, !priv->search_bar_shown);
+  gtr_window_show_search_bar (window, !priv->search_bar_shown);
+}
+
+void
+gtr_window_add_toast (GtrWindow *window, AdwToast *toast)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
+  adw_toast_overlay_add_toast (ADW_TOAST_OVERLAY (priv->toast_overlay), toast);
+}
+
+void
+gtr_window_add_toast_msg (GtrWindow *window,
+                          const char *message)
+{
+  AdwToast *toast = adw_toast_new_format ("%s", message);
+  adw_toast_set_timeout (toast, 10);
+  gtr_window_add_toast (window, toast);
 }

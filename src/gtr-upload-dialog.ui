@@ -2,54 +2,41 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.0"/>
-  <object class="GtkDialog" id="dialog1">
-    <property name="can_focus">False</property>
-    <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-    <property name="margin_start">6</property>
-    <property name="margin_end">6</property>
-    <property name="margin_top">6</property>
-    <property name="margin_bottom">6</property>
+  <template class="GtrUploadDialog" parent="GtkWindow">
     <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="type_hint">dialog</property>
+    <property name="title" translatable="true">Upload to Damned Lies</property>
+    <property name="resizable">False</property>
+    <property name="deletable">False</property>
     <child type="titlebar">
-      <placeholder/>
+      <object class="GtkHeaderBar" id="titlebar">
+        <style>
+          <class name="titlebar"/>
+        </style>
+        <child type="start">
+          <object class="GtkButton" id="cancel">
+            <property name="label" translatable="true">Cancel</property>
+          </object>
+        </child>
+        <child type="end">
+          <object class="GtkButton" id="upload">
+            <property name="label" translatable="true">Upload</property>
+            <style>
+              <class name="suggested-action"/>
+            </style>
+          </object>
+        </child>
+      </object>
     </child>
-    <child internal-child="vbox">
+    <property name="child">
       <object class="GtkBox" id="vbox1">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">6</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area1">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkBox" id="main_box">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
             <property name="spacing">6</property>
             <child>
               <object class="GtkLabel" id="label">
-                <property name="visible">False</property>
-                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">comment:</property>
                 <property name="xalign">0</property>
               </object>
@@ -58,21 +45,14 @@
               <object class="GtkTextView" id="text_view">
                 <property name="width_request">400</property>
                 <property name="height_request">100</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <style>
                   <class name="upload-comment"/>
                 </style>
               </object>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
       </object>
-    </child>
-  </object>
+    </property>
+  </template>
 </interface>

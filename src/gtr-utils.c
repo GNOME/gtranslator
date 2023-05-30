@@ -39,6 +39,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <adwaita.h>
 
 xmlDocPtr
 gtr_xml_new_doc (const gchar * name)
@@ -75,204 +76,17 @@ gtr_gtk_button_new_with_icon_name (const gchar * label,
 {
   GtkWidget *button;
 
-  button = gtk_button_new_with_mnemonic (label);
+  /*button = gtk_button_new_with_mnemonic (label);
   gtk_button_set_image (GTK_BUTTON (button),
                         gtk_image_new_from_icon_name (icon_name,
-                                                      GTK_ICON_SIZE_BUTTON));
+                                                      GTK_ICON_SIZE_BUTTON));*/
+  //button = gtk_button_new_from_icon_name (icon_name);
+  button = adw_button_content_new ();
+  adw_button_content_set_label (ADW_BUTTON_CONTENT(button), label);
+  adw_button_content_set_use_underline (ADW_BUTTON_CONTENT(button), true);
+  adw_button_content_set_icon_name (ADW_BUTTON_CONTENT(button), icon_name);
 
   return button;
-}
-
-/**
- * gtr_utils_menu_position_under_widget:
- * @menu: a #GtkMenu
- * @x: the x position of the widget
- * @y: the y position of the widget
- * @push_in: 
- * @user_data: the widget to get the position
- * 
- * It returns the position to popup a menu in a specific widget.
- */
-void
-gtr_utils_menu_position_under_widget (GtkMenu * menu,
-                                      gint * x,
-                                      gint * y,
-                                      gboolean * push_in, gpointer user_data)
-{
-  GtkWidget *w = GTK_WIDGET (user_data);
-  GtkRequisition requisition;
-  GtkAllocation allocation;
-
-  gdk_window_get_origin (gtk_widget_get_window (w), x, y);
-  gtk_widget_get_preferred_size (GTK_WIDGET (menu), &requisition,
-                                 NULL);
-  gtk_widget_get_allocation (w, &allocation);
-
-  if (gtk_widget_get_direction (w) == GTK_TEXT_DIR_RTL)
-    {
-      *x += allocation.x + allocation.width - requisition.width;
-    }
-  else
-    {
-      *x += allocation.x;
-    }
-
-  *y += allocation.y + allocation.height;
-
-  *push_in = TRUE;
-}
-
-/**
- * gtr_utils_menu_position_under_tree_view:
- * @menu: a #GtkMenu
- * @x: the x position of the widget
- * @y: the y position of the widget
- * @push_in: 
- * @user_data: the widget to get the position
- * 
- * It returns the position to popup a menu in a TreeView.
- */
-void
-gtr_utils_menu_position_under_tree_view (GtkMenu * menu,
-                                         gint * x,
-                                         gint * y,
-                                         gboolean * push_in,
-                                         gpointer user_data)
-{
-  GtkTreeView *tree = GTK_TREE_VIEW (user_data);
-  GtkTreeModel *model;
-  GtkTreeSelection *selection;
-  GtkTreeIter iter;
-
-  model = gtk_tree_view_get_model (tree);
-  g_return_if_fail (model != NULL);
-
-  selection = gtk_tree_view_get_selection (tree);
-  g_return_if_fail (selection != NULL);
-
-  if (gtk_tree_selection_get_selected (selection, NULL, &iter))
-    {
-      GtkTreePath *path;
-      GdkRectangle rect;
-
-      gdk_window_get_origin (gtk_widget_get_window (GTK_WIDGET (tree)), x, y);
-
-      path = gtk_tree_model_get_path (model, &iter);
-      gtk_tree_view_get_cell_area (tree, path, gtk_tree_view_get_column (tree, 0),      /* FIXME 0 for RTL ? */
-                                   &rect);
-      gtk_tree_path_free (path);
-
-      *x += rect.x;
-      *y += rect.y + rect.height;
-
-      if (gtk_widget_get_direction (GTK_WIDGET (tree)) == GTK_TEXT_DIR_RTL)
-        {
-          GtkRequisition requisition;
-          gtk_widget_get_preferred_size (GTK_WIDGET (menu),
-                                         &requisition, NULL);
-          *x += rect.width - requisition.width;
-        }
-    }
-  else
-    {
-      /* no selection -> regular "under widget" positioning */
-      gtr_utils_menu_position_under_widget (menu, x, y, push_in, tree);
-    }
-}
-
-
-static gboolean
-is_valid_scheme_character (gchar c)
-{
-  return g_ascii_isalnum (c) || c == '+' || c == '-' || c == '.';
-}
-
-static gboolean
-has_valid_scheme (const gchar * uri)
-{
-  const gchar *p;
-
-  p = uri;
-
-  if (!is_valid_scheme_character (*p))
-    {
-      return FALSE;
-    }
-
-  do
-    {
-      p++;
-    }
-  while (is_valid_scheme_character (*p));
-
-  return *p == ':';
-}
-
-static gboolean
-gtr_utils_is_valid_uri (const gchar * uri)
-{
-  const guchar *p;
-
-  if (uri == NULL)
-    return FALSE;
-
-  if (!has_valid_scheme (uri))
-    return FALSE;
-
-  /* We expect to have a fully valid set of characters */
-  for (p = (const guchar *) uri; *p; p++)
-    {
-      if (*p == '%')
-        {
-          ++p;
-          if (!g_ascii_isxdigit (*p))
-            return FALSE;
-
-          ++p;
-          if (!g_ascii_isxdigit (*p))
-            return FALSE;
-        }
-      else
-        {
-          if (*p <= 32 || *p >= 128)
-            return FALSE;
-        }
-    }
-
-  return TRUE;
-}
-
-/**
- * gtr_utils_drop_get_uris:
- * @selection_data: the #GtkSelectionData from drag_data_received
- *
- * Create a list of valid uri's from a uri-list drop.
- * 
- * Returns: a string array which will hold the uris or NULL if there 
- *		 were no valid uris. g_strfreev should be used when the 
- *		 string array is no longer used
- */
-GSList *
-gtr_utils_drop_get_locations (GtkSelectionData * selection_data)
-{
-  gchar **uris;
-  gint i;
-  GSList *locations = NULL;
-
-  uris = g_uri_list_extract_uris ((gchar *) gtk_selection_data_get_data (selection_data));
-
-  for (i = 0; uris[i] != NULL; i++)
-    {
-      GFile *file;
-      /* Silently ignore malformed URI/filename */
-      if (gtr_utils_is_valid_uri (uris[i]))
-        {
-          file = g_file_new_for_uri (uris[i]);
-          locations = g_slist_prepend (locations, file);
-        }
-    }
-
-  return locations;
 }
 
 gchar *
@@ -454,8 +268,8 @@ finally_2:
 void
 gtr_utils_help_display (GtkWindow * window)
 {
-  gtk_show_uri_on_window (GTK_WINDOW (window), "help:gtranslator",
-                          gtk_get_current_event_time (), NULL);
+  g_autoptr (GtkUriLauncher) uri_launcher = gtk_uri_launcher_new ("help:gtranslator");
+  gtk_uri_launcher_launch (uri_launcher, window, NULL, NULL, NULL);
 }
 
 gchar *
@@ -799,24 +613,6 @@ pango_font_description_to_css (PangoFontDescription *desc)
   g_string_append (s, "}");
 
   return g_string_free (s, FALSE);
-}
-
-void
-gtk_box_append (GtkBox *box, GtkWidget *child)
-{
-  gtk_container_add (GTK_CONTAINER (box), child);
-}
-
-void
-gtk_list_box_append (GtkListBox *box, GtkWidget *child)
-{
-  gtk_container_add (GTK_CONTAINER (box), child);
-}
-
-void
-gtk_list_box_remove (GtkListBox *box, GtkWidget *child)
-{
-  gtk_container_remove (GTK_CONTAINER (box), child);
 }
 
 // TODO: Improve this parser, this string parsing is weak

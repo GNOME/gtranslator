@@ -44,7 +44,7 @@ typedef struct _GtrHistoryEntryClass GtrHistoryEntryClass;
 
 struct _GtrHistoryEntryClass
 {
-  GtkComboBoxTextClass parent_class;
+  GtkComboBoxClass parent_class;
 };
 
 GType

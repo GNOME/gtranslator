@@ -28,19 +28,27 @@
 typedef struct
 {
   GtkWidget *language;
+
   GtkWidget *language_code;
   GtkWidget *charset;
   GtkWidget *encoding;
-  GtkWidget *team_email;
   GtkWidget *plural_forms;
-  GtkWidget *advanced;
 
-  GtkListStore *code_store;
+  GtkWidget *language_code_dropdown;
+  GtkWidget *charset_dropdown;
+  GtkWidget *encoding_dropdown;
+  GtkWidget *plural_forms_dropdown;
+
+  GtkStringList *code_store;
+  GtkStringList *charset_store;
+  GtkStringList *encoding_store;
+  GtkStringList *plural_forms_store;
+
 } GtrLanguagesFetcherPrivate;
 
 struct _GtrLanguagesFetcher
 {
-  GtkBox parent;
+  AdwPreferencesGroup parent;
 };
 
 /* Signals */
@@ -50,7 +58,7 @@ enum
   LAST_SIGNAL
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrLanguagesFetcher, gtr_languages_fetcher, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrLanguagesFetcher, gtr_languages_fetcher, ADW_TYPE_PREFERENCES_GROUP)
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
@@ -64,18 +72,34 @@ static void
 gtr_languages_fetcher_class_init (GtrLanguagesFetcherClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->finalize = gtr_languages_fetcher_finalize;
 
   signals[CHANGED] =
-    g_signal_new ("changed",
-                  G_OBJECT_CLASS_TYPE (object_class),
-                  G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (GtrLanguagesFetcherClass, changed),
-                  NULL, NULL,
-                  g_cclosure_marshal_VOID__VOID,
-                  G_TYPE_NONE,
-                  0);
+    g_signal_newv ("changed",
+                   G_OBJECT_CLASS_TYPE (object_class),
+                   G_SIGNAL_RUN_LAST,
+                   NULL, NULL, NULL, NULL,
+                   G_TYPE_NONE, 0, NULL);
+
+  gtk_widget_class_set_template_from_resource (widget_class,
+                                               "/org/gnome/translator/gtr-languages-fetcher.ui");
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrLanguagesFetcher, language);
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrLanguagesFetcher, language_code);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrLanguagesFetcher, language_code_dropdown);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrLanguagesFetcher, code_store);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrLanguagesFetcher, charset);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrLanguagesFetcher, charset_dropdown);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrLanguagesFetcher, charset_store);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrLanguagesFetcher, encoding);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrLanguagesFetcher, encoding_dropdown);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrLanguagesFetcher, encoding_store);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrLanguagesFetcher, plural_forms);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrLanguagesFetcher, plural_forms_dropdown);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrLanguagesFetcher, plural_forms_store);
 }
 
 static gint
@@ -109,14 +133,10 @@ append_from_languages (GtrLanguagesFetcher *fetcher)
   for (l = languages; l != NULL; l = g_slist_next (l))
     {
       GtrLanguage *lang = (GtrLanguage *)l->data;
-      GtkTreeIter iter2;
       const gchar *plural_form;
 
-      gtk_list_store_append (priv->code_store, &iter2);
-      gtk_list_store_set (priv->code_store, &iter2,
-                          0, gtr_language_get_code (lang),
-                          1, lang,
-                          -1);
+      gtk_string_list_append (GTK_STRING_LIST (priv->code_store),
+                              gtr_language_get_code (lang));
 
       plural_form = gtr_language_get_plural_form (lang);
       if (plural_form != NULL && *plural_form != '\0')
@@ -127,8 +147,8 @@ append_from_languages (GtrLanguagesFetcher *fetcher)
           if (value == NULL)
             {
               g_hash_table_insert (plurals, (gchar *)plural_form, GINT_TO_POINTER (1));
-              gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (priv->plural_forms),
-                                              plural_form);
+              gtk_string_list_append (GTK_STRING_LIST (priv->plural_forms_store),
+                                      plural_form);
             }
         }
     }
@@ -142,15 +162,13 @@ fill_encoding_and_charset (GtrLanguagesFetcher *fetcher)
   const gchar *text;
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
 
-  text = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->charset))));
+  text = gtk_editable_get_text (GTK_EDITABLE (priv->charset));
+  if (text == NULL || *text == '\0')
+    gtk_drop_down_set_selected (GTK_DROP_DOWN (priv->charset_dropdown), 0);
 
-  if (text == NULL || *text == '\0' || !gtk_widget_is_sensitive (priv->charset))
-    gtk_combo_box_set_active (GTK_COMBO_BOX (priv->charset), 0);
-
-  text = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->encoding))));
-
-  if (text == NULL || *text == '\0' || !gtk_widget_is_sensitive (priv->encoding))
-    gtk_combo_box_set_active (GTK_COMBO_BOX (priv->encoding), 0);
+  text = gtk_editable_get_text (GTK_EDITABLE (priv->encoding));
+  if (text == NULL || *text == '\0')
+    gtk_drop_down_set_selected (GTK_DROP_DOWN (priv->encoding_dropdown), 0);
 }
 
 static void
@@ -158,96 +176,18 @@ fill_from_language_entry (GtrLanguagesFetcher *fetcher,
                           GtrLanguage         *lang)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
+  const gchar *code;
+  const gchar *plural_form;
 
   fill_encoding_and_charset (fetcher);
 
-  const gchar *code;
   code = gtr_language_get_code (lang);
   if (code != NULL && *code != '\0')
-    gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->language_code))), code);
+    gtk_editable_set_text (GTK_EDITABLE (priv->language_code), code);
 
-  const gchar *plural_form;
   plural_form = gtr_language_get_plural_form (lang);
   if (plural_form != NULL && *plural_form != '\0')
-    gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))), plural_form);
-}
-
-static void
-fill_from_language_code_entry (GtrLanguagesFetcher *fetcher,
-                               GtrLanguage         *lang)
-{
-  const gchar *entry_text;
-  GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-
-  fill_encoding_and_charset (fetcher);
-
-  entry_text = gtr_lang_button_get_lang (GTR_LANG_BUTTON (priv->language));
-
-  if (*entry_text == '\0')
-    {
-      const gchar *name;
-
-      name = gtr_language_get_name (lang);
-
-      if (name != NULL && *name != '\0')
-        gtr_lang_button_set_lang (GTR_LANG_BUTTON (priv->language), name);
-    }
-
-  entry_text = gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))));
-
-  if (*entry_text == '\0')
-    {
-      const gchar *plural_form;
-
-      plural_form = gtr_language_get_plural_form (lang);
-
-      if (plural_form != NULL && *plural_form != '\0')
-        gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))), plural_form);
-    }
-}
-
-typedef void (* fill_method) (GtrLanguagesFetcher *fetcher, GtrLanguage *lang);
-
-static void
-fill_boxes (GtrLanguagesFetcher *fetcher,
-            const gchar         *text,
-            GtkTreeModel        *store,
-            fill_method          fill)
-{
-  gchar *entry_row;
-  GtkTreeIter iter;
-  GtrLanguage *lang;
-  gboolean found = FALSE;
-
-  if (text == NULL || *text == '\0' ||
-      !gtk_tree_model_get_iter_first (store, &iter))
-    return;
-
-  do
-    {
-      gtk_tree_model_get (store, &iter,
-                          0, &entry_row,
-                          -1);
-
-      if (entry_row != NULL && strcmp (entry_row, text) == 0)
-        {
-          found = TRUE;
-          g_free (entry_row);
-          break;
-        }
-
-      g_free (entry_row);
-    }
-  while (gtk_tree_model_iter_next (store, &iter));
-
-  if (found)
-    {
-      gtk_tree_model_get (store, &iter,
-                          1, &lang,
-                          -1);
-
-      fill (fetcher, lang);
-    }
+    gtk_editable_set_text (GTK_EDITABLE (priv->plural_forms), plural_form);
 }
 
 static void
@@ -273,27 +213,6 @@ on_language_activate (GtrLangButton       *btn,
 }
 
 static void
-on_language_code_activate (GtkEntry            *entry,
-                           GtrLanguagesFetcher *fetcher)
-{
-  GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  const gchar *text = gtk_entry_get_text (entry);
-
-  fill_boxes (fetcher, text, GTK_TREE_MODEL (priv->code_store),
-              fill_from_language_code_entry);
-}
-
-static gboolean
-on_language_code_focus_out_event (GtkEntry         *entry,
-                                  GdkEvent         *event,
-                                  GtrLanguagesFetcher *fetcher)
-{
-  on_language_code_activate (entry, fetcher);
-
-  return FALSE;
-}
-
-static void
 on_combo_box_changed (GtkWidget           *widget,
                       GtrLanguagesFetcher *fetcher)
 {
@@ -301,16 +220,39 @@ on_combo_box_changed (GtkWidget           *widget,
 }
 
 static void
-on_advanced_changed (GtkToggleButton     *widget,
-                     GtrLanguagesFetcher *fetcher)
+on_charset_changed (GtkWidget *widget, GParamSpec *spec, GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  gboolean active = gtk_toggle_button_get_active (widget);
+  int selected = gtk_drop_down_get_selected (GTK_DROP_DOWN (priv->charset_dropdown));
+  const char *charset = gtk_string_list_get_string (priv->charset_store, selected);
+  gtr_languages_fetcher_set_charset (fetcher, charset);
+}
 
-  gtk_widget_set_sensitive (priv->language_code, active);
-  gtk_widget_set_sensitive (priv->charset, active);
-  gtk_widget_set_sensitive (priv->encoding, active);
-  gtk_widget_set_sensitive (priv->plural_forms, active);
+static void
+on_encoding_changed (GtkWidget *widget, GParamSpec *spec, GtrLanguagesFetcher *fetcher)
+{
+  GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
+  int selected = gtk_drop_down_get_selected (GTK_DROP_DOWN (priv->encoding_dropdown));
+  const char *encoding = gtk_string_list_get_string (priv->encoding_store, selected);
+  gtr_languages_fetcher_set_encoding (fetcher, encoding);
+}
+
+static void
+on_plural_forms_changed (GtkWidget *widget, GParamSpec *spec, GtrLanguagesFetcher *fetcher)
+{
+  GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
+  int selected = gtk_drop_down_get_selected (GTK_DROP_DOWN (priv->plural_forms_dropdown));
+  const char *plural_forms = gtk_string_list_get_string (priv->plural_forms_store, selected);
+  gtr_languages_fetcher_set_plural_form (fetcher, plural_forms);
+}
+
+static void
+on_language_code_changed (GtkWidget *widget, GParamSpec *spec, GtrLanguagesFetcher *fetcher)
+{
+  GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
+  int selected = gtk_drop_down_get_selected (GTK_DROP_DOWN (priv->language_code_dropdown));
+  const char *lang = gtk_string_list_get_string (priv->code_store, selected);
+  gtr_languages_fetcher_set_language_code (fetcher, lang);
 }
 
 static void
@@ -325,58 +267,19 @@ on_lang_changed (GtkWidget           *widget,
 static void
 gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
 {
-  GtkWidget *content;
-  GtkBuilder *builder;
-  gchar *root_objects[] = {
-    "main_box",
-    "code_store",
-    NULL
-  };
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
 
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (fetcher),
-                                  GTK_ORIENTATION_VERTICAL);
+  g_type_ensure (GTR_TYPE_LANG_BUTTON);
 
-  g_type_ensure (gtr_lang_button_get_type ());
+  gtk_widget_init_template (GTK_WIDGET (fetcher));
 
-  builder = gtk_builder_new ();
-  gtk_builder_add_objects_from_resource (builder, "/org/gnome/translator/gtr-languages-fetcher.ui",
-                                         root_objects, NULL);
-
-  content = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));
-  g_object_ref (content);
-  priv->language = GTK_WIDGET (gtk_builder_get_object (builder, "language"));
-  priv->language_code = GTK_WIDGET (gtk_builder_get_object (builder, "language_code"));
-  priv->charset = GTK_WIDGET (gtk_builder_get_object (builder, "charset"));
-  priv->encoding = GTK_WIDGET (gtk_builder_get_object (builder, "encoding"));
-  priv->plural_forms = GTK_WIDGET (gtk_builder_get_object (builder, "plural_forms"));
-  priv->advanced = GTK_WIDGET (gtk_builder_get_object (builder, "advanced_check"));
-  priv->code_store = GTK_LIST_STORE (gtk_builder_get_object (builder, "code_store"));
-
-  g_object_unref (builder);
-
-  gtk_box_append (GTK_BOX (fetcher), content);
-
-  /* add items to comboboxes */
+  // add items to comboboxes
   append_from_languages (fetcher);
 
-  g_signal_connect (G_OBJECT (priv->language),
-                    "clicked",
-                    G_CALLBACK (on_language_activate),
-                    fetcher);
-  g_signal_connect (gtk_bin_get_child (GTK_BIN (priv->language_code)),
-                    "activate",
-                    G_CALLBACK (on_language_code_activate),
-                    fetcher);
-  g_signal_connect (gtk_bin_get_child (GTK_BIN (priv->language_code)),
-                    "focus-out-event",
-                    G_CALLBACK (on_language_code_focus_out_event),
-                    fetcher);
-
-  /* To emit the changed signal */
   g_signal_connect (priv->language, "changed",
                     G_CALLBACK (on_lang_changed),
                     fetcher);
+
   g_signal_connect (priv->language_code, "changed",
                     G_CALLBACK (on_combo_box_changed),
                     fetcher);
@@ -390,9 +293,26 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
                     G_CALLBACK (on_combo_box_changed),
                     fetcher);
 
-  g_signal_connect (priv->advanced, "toggled",
-                    G_CALLBACK (on_advanced_changed),
+  g_signal_connect (priv->charset_dropdown,
+                    "notify::selected",
+                    G_CALLBACK (on_charset_changed),
                     fetcher);
+  g_signal_connect (priv->encoding_dropdown,
+                    "notify::selected",
+                    G_CALLBACK (on_encoding_changed),
+                    fetcher);
+  g_signal_connect (priv->plural_forms_dropdown,
+                    "notify::selected",
+                    G_CALLBACK (on_plural_forms_changed),
+                    fetcher);
+  g_signal_connect (priv->language_code_dropdown,
+                    "notify::selected",
+                    G_CALLBACK (on_language_code_changed),
+                    fetcher);
+
+  // Intial values
+  on_charset_changed (NULL, NULL, fetcher);
+  on_encoding_changed (NULL, NULL, fetcher);
 }
 
 GtkWidget *
@@ -405,8 +325,6 @@ const gchar *
 gtr_languages_fetcher_get_language_name (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  g_return_val_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher), NULL);
-
   return gtr_lang_button_get_lang (GTR_LANG_BUTTON (priv->language));
 }
 
@@ -415,9 +333,6 @@ gtr_languages_fetcher_set_language_name (GtrLanguagesFetcher *fetcher,
                                          const gchar         *name)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  g_return_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher));
-  g_return_if_fail (name != NULL);
-
   gtr_lang_button_set_lang (GTR_LANG_BUTTON (priv->language), name);
 }
 
@@ -425,9 +340,7 @@ const gchar *
 gtr_languages_fetcher_get_language_code (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  g_return_val_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher), NULL);
-
-  return gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->language_code))));
+  return gtk_editable_get_text (GTK_EDITABLE (priv->language_code));
 }
 
 void
@@ -435,19 +348,14 @@ gtr_languages_fetcher_set_language_code (GtrLanguagesFetcher *fetcher,
                                          const gchar         *code)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  g_return_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher));
-  g_return_if_fail (code != NULL);
-
-  gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->language_code))), code);
+  gtk_editable_set_text (GTK_EDITABLE (priv->language_code), code);
 }
 
 const gchar *
 gtr_languages_fetcher_get_charset (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  g_return_val_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher), NULL);
-
-  return gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->charset))));
+  return gtk_editable_get_text (GTK_EDITABLE (priv->charset));
 }
 
 void
@@ -455,19 +363,14 @@ gtr_languages_fetcher_set_charset (GtrLanguagesFetcher *fetcher,
                                    const gchar         *charset)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  g_return_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher));
-  g_return_if_fail (charset != NULL);
-
-  gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->charset))), charset);
+  gtk_editable_set_text (GTK_EDITABLE (priv->charset), charset);
 }
 
 const gchar *
 gtr_languages_fetcher_get_encoding (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  g_return_val_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher), NULL);
-
-  return gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->encoding))));
+  return gtk_editable_get_text (GTK_EDITABLE (priv->encoding));
 }
 
 void
@@ -475,19 +378,14 @@ gtr_languages_fetcher_set_encoding (GtrLanguagesFetcher *fetcher,
                                     const gchar         *enc)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  g_return_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher));
-  g_return_if_fail (enc != NULL);
-
-  gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->encoding))), enc);
+  gtk_editable_set_text (GTK_EDITABLE (priv->encoding), enc);
 }
 
 const gchar *
 gtr_languages_fetcher_get_plural_form (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  g_return_val_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher), NULL);
-
-  return gtk_entry_get_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))));
+  return gtk_editable_get_text (GTK_EDITABLE (priv->plural_forms));
 }
 
 void
@@ -495,8 +393,5 @@ gtr_languages_fetcher_set_plural_form (GtrLanguagesFetcher *fetcher,
                                        const gchar         *plural_form)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  g_return_if_fail (GTR_IS_LANGUAGES_FETCHER (fetcher));
-  g_return_if_fail (plural_form != NULL);
-
-  gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (priv->plural_forms))), plural_form);
+  gtk_editable_set_text (GTK_EDITABLE (priv->plural_forms), plural_form);
 }

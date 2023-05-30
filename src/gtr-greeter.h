@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  Daniel Garcia Moreno <danigm@gnome.org>
+ * Copyright (C) 2022  Daniel Garcia <danigm@gnome.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,17 +21,15 @@
 #include <gtk/gtk.h>
 #include <adwaita.h>
 
+#include "gtr-window.h"
+
 G_BEGIN_DECLS
 
-#define GTR_TYPE_PROJECTS (gtr_projects_get_type())
+#define GTR_TYPE_GREETER (gtr_greeter_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrProjects, gtr_projects, GTR, PROJECTS, AdwBin)
+G_DECLARE_FINAL_TYPE (GtrGreeter, gtr_greeter, GTR, GREETER, AdwBin)
 
-GtrProjects*  gtr_projects_new         ();
-GtkWidget*    gtr_projects_get_header  (GtrProjects *self);
-void          gtr_projects_recent_add  (GtrProjects *self,
-                                        GFile *location,
-                                        gchar *jkkproject_id);
+GtrGreeter* gtr_greeter_new         (GtrWindow *main_window);
+GtkWidget*  gtr_greeter_get_header  (GtrGreeter *self);
 
 G_END_DECLS
-

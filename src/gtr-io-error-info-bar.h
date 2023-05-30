@@ -16,8 +16,7 @@
  *
  */
 
-#ifndef __IO_ERROR_MESSAGE_AREA_H__
-#define __IO_ERROR_MESSAGE_AREA_H__
+#pragma once
 
 #include "gtr-tab.h"
 
@@ -25,13 +24,9 @@
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
-  void create_error_info_bar (const gchar * primary_text,
-                              const gchar * secondary_text,
-                              GtrTab * tab);
 
   void create_info_info_bar (const gchar * primary_text,
                              const gchar * secondary_text,
                              GtrTab * tab);
 
 G_END_DECLS
-#endif

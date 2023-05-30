@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018  Daniel Garcia Moreno <danigm@gnome.org>
+ * Copyright (C) 2022  Daniel Garcia Moreno <danigm@gnome.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,19 +19,17 @@
 #pragma once
 
 #include <gtk/gtk.h>
-#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-#define GTR_TYPE_PROJECTS (gtr_projects_get_type())
+#define GTR_TYPE_DROP_DOWN_OPTION (gtr_drop_down_option_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrProjects, gtr_projects, GTR, PROJECTS, AdwBin)
+G_DECLARE_FINAL_TYPE (GtrDropDownOption, gtr_drop_down_option, GTR, DROP_DOWN_OPTION, GObject)
 
-GtrProjects*  gtr_projects_new         ();
-GtkWidget*    gtr_projects_get_header  (GtrProjects *self);
-void          gtr_projects_recent_add  (GtrProjects *self,
-                                        GFile *location,
-                                        gchar *jkkproject_id);
+GtrDropDownOption*  gtr_drop_down_option_new (const char *name, const char *description);
+gboolean gtr_drop_down_option_equal (GtrDropDownOption *opt1, GtrDropDownOption *opt2);
+const char *gtr_drop_down_option_get_name (GtrDropDownOption *opt);
+const char *gtr_drop_down_option_get_description (GtrDropDownOption *opt);
 
 G_END_DECLS
 

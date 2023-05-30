@@ -36,7 +36,6 @@
 #include "gtr-application.h"
 #include "gtr-context.h"
 #include "gtr-io-error-info-bar.h"
-#include "gtr-message-table.h"
 #include "gtr-msg.h"
 #include "gtr-tab-activatable.h"
 #include "gtr-tab.h"
@@ -68,7 +67,7 @@ typedef struct
   GSettings *editor_settings;
   GSettings *state_settings;
 
-  GtkWidget *progress_eventbox;
+  GtkGesture *progress_gesture_click;
   GtkWidget *progress_box;
   GtkWidget *progress_revealer;
   GtkWidget *progress_percentage;
@@ -82,18 +81,14 @@ typedef struct
   GtrPo *po;
 
   GtkWidget *dock;
+  GtkWidget *window;
 
-  /*Vertical and Horizontal Panes */
-  GtkPaned *hbox;
-  GtkPaned *vertical_box;
-  gint context_position;
-  gint content_position;
+  /* Flap state */
+  AdwFlap *hbox;
+  gboolean flap_state;
 
   GtkWidget *message_table;
   GtkWidget *context;
-
-  /*Info bar */
-  GtkWidget *infobar;
 
   /*Original text */
   GtkWidget *text_msgid;
@@ -124,10 +119,22 @@ typedef struct
   guint dispose_has_run : 1;
 
   /*Search Bar*/
-  GtkOverlay     *overlay;
-  GtkRevealer    *search_revealer;
-  GtrSearchBar   *search_bar;
-  GtkSearchEntry *search;
+  GtkSearchBar   *search_bar;
+  GtrSearchBar   *gtr_search_bar;
+
+  /* notebook code */
+  GtkWidget *titlebar;
+  GtkWidget *save;
+  GtkWidget *sort_id;
+  GtkWidget *sort_status;
+  GtkWidget *sort_msgid;
+  GtkWidget *sort_translated;
+  GtkWidget *order_menu_popover;
+  GtkWidget *search_toggle;
+  GtkWidget *upload;
+
+  GtkWidget *undo;
+  GtkWidget *redo;
 
 } GtrTabPrivate;
 
@@ -164,10 +171,7 @@ gtr_page_stop_search (GtrTab *tab,
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
-  g_assert (GTR_IS_TAB (tab));
-  g_assert (GTR_IS_SEARCH_BAR (priv->search_bar));
-
-  gtk_revealer_set_reveal_child (priv->search_revealer, FALSE);
+  gtk_search_bar_set_search_mode (priv->search_bar, FALSE);
 
 }
 
@@ -180,7 +184,7 @@ gtr_tab_focus_search_bar (GtrTab *tab)
   g_assert (GTR_IS_TAB (tab));
   priv = gtr_tab_get_instance_private (tab);
 
-  entry = (GtkEntry *) gtr_search_bar_get_search (priv->search_bar);
+  entry = (GtkEntry *) gtr_search_bar_get_search (priv->gtr_search_bar);
 
   gtk_entry_grab_focus_without_selecting (entry);
 }
@@ -190,10 +194,10 @@ gtr_tab_show_hide_search_bar (GtrTab *tab, gboolean show)
 {
   GtrTabPrivate *priv;
 
-  g_assert (GTR_IS_TAB (tab));
   priv = gtr_tab_get_instance_private (tab);
-
-  gtk_revealer_set_reveal_child (priv->search_revealer, show);
+  gtk_search_bar_set_search_mode (priv->search_bar, show);
+  if (show)
+    gtr_tab_focus_search_bar (tab);
 }
 
 void
@@ -204,7 +208,7 @@ gtr_tab_find_set_replace (GtrTab   *tab,
 
   g_assert (GTR_IS_TAB (tab));
   priv = gtr_tab_get_instance_private (tab);
-  gtr_search_bar_set_replace_mode (priv->search_bar, replace);
+  gtr_search_bar_set_replace_mode (priv->gtr_search_bar, replace);
 }
 
 void
@@ -213,7 +217,7 @@ gtr_tab_find_next (GtrTab * tab)
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
-  gtr_search_bar_find_next (priv->search_bar);
+  gtr_search_bar_find_next (priv->gtr_search_bar);
 }
 
 void
@@ -222,7 +226,7 @@ gtr_tab_find_prev (GtrTab * tab)
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
-  gtr_search_bar_find_prev (priv->search_bar);
+  gtr_search_bar_find_prev (priv->gtr_search_bar);
 }
 
 void
@@ -245,7 +249,7 @@ gtr_page_notify_child_revealed (GtrTab *tab,
        * as it can reselect the search text.
        */
       if (focus == NULL || !gtk_widget_is_ancestor (focus, GTK_WIDGET (revealer)))
-        gtk_widget_grab_focus (GTK_WIDGET (priv->search_bar));
+        gtk_widget_grab_focus (GTK_WIDGET (priv->gtr_search_bar));
     }
 }
 
@@ -414,16 +418,16 @@ gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
 
   if (message_error != NULL)
     {
-      gtr_tab_block_movement (tab);
+      g_autoptr (GtkAlertDialog) dialog = gtk_alert_dialog_new (_("There is an error in the message:"));
 
-      create_error_info_bar (_("There is an error in the message:"),
-                             message_error, tab);
+      gtr_tab_block_movement (tab);
+      gtk_alert_dialog_set_detail (GTK_ALERT_DIALOG (dialog), message_error);
+      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), gtr_tab_get_window (tab));
       g_free (message_error);
     }
   else
     {
       gtr_tab_unblock_movement (tab);
-      gtr_tab_set_info_bar (tab, NULL);
     }
 }
 
@@ -521,34 +525,25 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
 {
   GtkWidget *scroll;
   GtkWidget *label;
-  GtkWidget *widget;
-  GtrTabPrivate *priv;
+  GtkWidget *view;
 
   label = gtk_label_new (tab_label);
 
-  scroll = gtk_scrolled_window_new (NULL, NULL);
-  gtk_widget_show (scroll);
+  scroll = gtk_scrolled_window_new ();
+  gtk_widget_set_visible (scroll, TRUE);
 
-  widget = gtr_view_new ();
-  gtk_widget_show (widget);
+  view = gtr_view_new ();
+  gtk_widget_set_visible (view, TRUE);
 
-  priv = gtr_tab_get_instance_private (tab);
+  //gtk_container_add (GTK_CONTAINER (scroll), view);
+  gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW(scroll), view);
 
-  if (spellcheck &&
-      g_settings_get_boolean (priv->editor_settings,
-                              GTR_SETTINGS_SPELLCHECK))
-    {
-      gtr_view_enable_spellcheck (GTR_VIEW (widget), spellcheck);
-    }
-
-  gtk_container_add (GTK_CONTAINER (scroll), widget);
-
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
-                                       GTK_SHADOW_IN);
+  /*gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
+                                       GTK_SHADOW_IN);*/
 
   gtk_notebook_append_page (GTK_NOTEBOOK (box), scroll, label);
 
-  return widget;
+  return view;
 }
 
 static void
@@ -575,10 +570,10 @@ gtr_message_plural_forms (GtrTab * tab, GtrMsg * msg)
           buf =
             gtk_text_view_get_buffer (GTK_TEXT_VIEW
                                       (priv->trans_msgstr[i]));
-          gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER
-                                                       (buf));
+          //gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER (buf));
+          gtk_text_buffer_begin_irreversible_action (buf);
           gtk_text_buffer_set_text (buf, (gchar *) msgstr_plural, -1);
-          gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (buf));
+          gtk_text_buffer_end_irreversible_action (buf);
         }
     }
 }
@@ -610,23 +605,26 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
   if (msgctxt)
    {
      gtk_label_set_text (GTK_LABEL (priv->msgid_ctxt), msgctxt);
-     gtk_widget_show (priv->msgid_ctxt);
+     gtk_widget_set_visible (priv->msgid_ctxt, TRUE);
    }
   else
    {
-     gtk_widget_hide (priv->msgid_ctxt);
+     gtk_widget_set_visible (priv->msgid_ctxt, FALSE);
    }
 
   po = priv->po;
+  if (!po)
+    return;
+
   gtr_po_update_current_message (po, msg);
   msgid = gtr_msg_get_msgid (msg);
   if (msgid)
     {
       gchar *msg_error = gtr_msg_check (msg);
       buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->text_msgid));
-      gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER (buf));
+      gtk_text_buffer_begin_irreversible_action (buf);
       gtk_text_buffer_set_text (buf, (gchar *) msgid, -1);
-      gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (buf));
+      gtk_text_buffer_begin_irreversible_action (buf);
 
       if (gtr_msg_is_fuzzy (msg))
         gtk_label_set_text (GTK_LABEL (priv->msgid_tags), _("fuzzy"));
@@ -642,24 +640,22 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
       /*
        * Disable notebook tabs and hide widgets
        */
-      gtk_widget_hide (priv->text_plural_scroll);
+      gtk_widget_set_visible (priv->text_plural_scroll, FALSE);
       gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->trans_notebook), FALSE);
       gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->trans_notebook), 0);
       if (msgstr)
         {
-          buf =
-            gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[0]));
-          gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER
-                                                       (buf));
+          buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[0]));
+          gtk_text_buffer_begin_irreversible_action (buf);
           gtk_text_buffer_set_text (buf, (gchar *) msgstr, -1);
-          gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (buf));
+          gtk_text_buffer_end_irreversible_action (buf);
           gtk_label_set_mnemonic_widget (GTK_LABEL (priv->msgstr_label),
                                          priv->trans_msgstr[0]);
         }
     }
   else
     {
-      gtk_widget_show (priv->text_plural_scroll);
+      gtk_widget_set_visible (priv->text_plural_scroll, TRUE);
       gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->trans_notebook),
                                   TRUE);
       buf =
@@ -689,11 +685,11 @@ emit_selection_changed (GtkTextBuffer * buf, GParamSpec * spec, GtrTab * tab)
 }
 
 static void
-emit_searchbar_toggled (GtkRevealer *revealer,
-                        GParamSpec  *pspec,
-                        GtrTab      *tab)
+emit_searchbar_toggled (GtkSearchBar *search_bar,
+                        GParamSpec   *pspec,
+                        GtrTab       *tab)
 {
-  gboolean revealed = gtk_revealer_get_child_revealed (revealer);
+  gboolean revealed = gtk_search_bar_get_search_mode (search_bar);
   g_signal_emit (G_OBJECT (tab), signals[SEARCHBAR_TOGGLED], 0, revealed);
 }
 
@@ -793,14 +789,11 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
 
   do
     {
-
       label = g_strdup_printf (_("Plural %d"), i);
       priv->trans_msgstr[i] = gtr_tab_append_msgstr_page (label,
                                                           priv->trans_notebook,
                                                           TRUE,
                                                           tab);
-
-      gtr_view_set_language (GTR_VIEW (priv->trans_msgstr[i]), lang_code);
 
       buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[i]));
       g_signal_connect (buf, "end-user-action",
@@ -834,11 +827,37 @@ on_state_notify (GtrPo      *po,
 }
 
 static void
+sort_by_id_cb (GtkWidget *checkbutton, GtrTab* tab)
+{
+  if (gtk_check_button_get_active (GTK_CHECK_BUTTON (checkbutton)))
+    gtr_tab_sort_by (tab, GTR_MESSAGE_TABLE_SORT_ID);
+}
+
+static void
+sort_by_status_cb (GtkWidget *checkbutton, GtrTab* tab)
+{
+  if (gtk_check_button_get_active (GTK_CHECK_BUTTON (checkbutton)))
+    gtr_tab_sort_by (tab, GTR_MESSAGE_TABLE_SORT_STATUS);
+}
+
+static void
+sort_by_msgid_cb (GtkWidget *checkbutton, GtrTab* tab)
+{
+  if (gtk_check_button_get_active (GTK_CHECK_BUTTON (checkbutton)))
+    gtr_tab_sort_by (tab, GTR_MESSAGE_TABLE_SORT_MSGID);
+}
+
+static void
+sort_by_translated_cb (GtkWidget *checkbutton, GtrTab* tab)
+{
+  if (gtk_check_button_get_active (GTK_CHECK_BUTTON (checkbutton)))
+    gtr_tab_sort_by (tab, GTR_MESSAGE_TABLE_SORT_TRANSLATED);
+}
+
+static void
 gtr_tab_init (GtrTab * tab)
 {
-  GtrTabPrivate *priv;
-
-  priv = gtr_tab_get_instance_private (tab);
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
 
   gtk_widget_init_template (GTK_WIDGET (tab));
 
@@ -849,15 +868,9 @@ gtr_tab_init (GtrTab * tab)
 
   g_signal_connect (tab, "message-changed", G_CALLBACK (update_status), NULL);
 
-  /*Load gsettings for panes */
-  priv->context_position = g_settings_get_int (priv->state_settings,
-                                               GTR_SETTINGS_CONTEXT_PANEL_SIZE);
-
-  priv->content_position = g_settings_get_int (priv->state_settings,
-                                               GTR_SETTINGS_CONTENT_PANEL_SIZE);
-
-  gtk_paned_set_position (priv->hbox, priv->context_position);
-  gtk_paned_set_position (priv->vertical_box, priv->content_position);
+  /*Load gsettings for flap */
+  priv->flap_state = g_settings_get_boolean (priv->state_settings,
+                                             GTR_SETTINGS_FLAP_STATE);
 
   /* Manage auto save data */
   priv->autosave = g_settings_get_boolean (priv->files_settings,
@@ -871,14 +884,29 @@ gtr_tab_init (GtrTab * tab)
 
   priv->find_replace_flag = FALSE;
   priv->progress = gtr_progress_new ();
-  gtk_widget_show (GTK_WIDGET (priv->progress));
+  priv->progress_gesture_click = gtk_gesture_click_new ();
+  gtk_widget_set_visible (GTK_WIDGET (priv->progress), TRUE);
+
+  gtk_widget_add_controller (priv->progress_box,
+                             GTK_EVENT_CONTROLLER (priv->progress_gesture_click));
   gtk_box_append (GTK_BOX (priv->progress_box), GTK_WIDGET (priv->progress));
 
-  g_signal_connect (priv->progress_eventbox, "button-press-event",
+  g_signal_connect (priv->progress_gesture_click, "pressed",
                     G_CALLBACK (show_hide_revealer), tab);
 
-  g_signal_connect (priv->search_revealer, "notify::child-revealed",
+  g_signal_connect (priv->search_bar, "notify::search-mode-enabled",
                     G_CALLBACK (emit_searchbar_toggled), tab);
+
+  // TODO: related to header of gtr tab move to saperate header file
+  g_signal_connect (priv->sort_id, "toggled",
+                    G_CALLBACK(sort_by_id_cb), tab);
+  g_signal_connect (priv->sort_status, "toggled",
+                    G_CALLBACK(sort_by_status_cb), tab);
+  g_signal_connect (priv->sort_msgid, "toggled",
+                    G_CALLBACK(sort_by_msgid_cb), tab);
+  g_signal_connect (priv->sort_translated, "toggled",
+                    G_CALLBACK(sort_by_translated_cb), tab);
+  gtk_check_button_set_active (GTK_CHECK_BUTTON (priv->sort_id), TRUE);
 }
 
 static void
@@ -905,14 +933,10 @@ save_pane_state(GtrTab *tab)
 
   priv = gtr_tab_get_instance_private (tab);
 
-  priv->context_position = gtk_paned_get_position (priv->hbox);
-  priv->content_position = gtk_paned_get_position (priv->vertical_box);
+  priv->flap_state = adw_flap_get_folded (priv->hbox);
 
-  g_settings_set_int (priv->state_settings, GTR_SETTINGS_CONTEXT_PANEL_SIZE,
-                      priv->context_position);
-
-  g_settings_set_int (priv->state_settings, GTR_SETTINGS_CONTENT_PANEL_SIZE,
-                      priv->content_position);
+  g_settings_set_boolean (priv->state_settings, GTR_SETTINGS_FLAP_STATE,
+                          priv->flap_state);
 }
 
 static void
@@ -1087,18 +1111,28 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, trans_notebook);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, context);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, hbox);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, vertical_box);
 
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_eventbox);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_box);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_revealer);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_trans);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_fuzzy);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_untrans);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_percentage);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, overlay);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_bar);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_revealer);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, gtr_search_bar);
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, titlebar);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_id);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_status);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_msgid);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_translated);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, order_menu_popover);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_toggle);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, undo);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, redo);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, save);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, upload);
+
   gtk_widget_class_bind_template_callback (widget_class, gtr_page_notify_child_revealed);
   gtk_widget_class_bind_template_callback (widget_class, gtr_page_stop_search);
 
@@ -1109,6 +1143,67 @@ gtr_tab_class_init (GtrTabClass * klass)
 }
 
 /***************************** Public funcs ***********************************/
+
+void
+gtr_tab_hide_sort_menu (GtrTab *tab)
+{
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
+
+  if (priv->sort_id)
+    gtk_popover_popdown (GTK_POPOVER (priv->order_menu_popover));
+}
+
+void
+gtr_tab_enable_find_button (GtrTab *tab,
+                                 gboolean enable)
+{
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
+
+  if (priv->search_toggle)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->search_toggle), enable);
+}
+
+void
+gtr_tab_enable_save (GtrTab *tab,
+                          gboolean enable)
+{
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
+  gtk_widget_set_sensitive (priv->save, enable);
+}
+
+void
+gtr_tab_update_undo_buttons (GtrTab *tab,
+                                  GtrView  *view)
+{
+  GtkSourceBuffer *active_document;
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
+  gboolean can_undo, can_redo;
+  g_return_if_fail (view);
+
+  active_document =
+    GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+  g_return_if_fail(active_document);
+
+  can_undo = gtk_text_buffer_get_can_undo (GTK_TEXT_BUFFER(active_document));
+  can_redo = gtk_text_buffer_get_can_redo (GTK_TEXT_BUFFER(active_document));
+
+  gtk_widget_set_sensitive (priv->undo, can_undo);
+  gtk_widget_set_sensitive (priv->redo, can_redo);
+}
+
+void
+gtr_tab_enable_upload (GtrTab *tab, gboolean enable)
+{
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
+  gtk_widget_set_sensitive (priv->upload, enable);
+}
+
+GtkWidget *
+gtr_tab_get_header (GtrTab *tab)
+{
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
+  return priv->titlebar;
+}
 
 /**
  * gtr_tab_new:
@@ -1137,6 +1232,7 @@ gtr_tab_new (GtrPo * po,
   gtr_context_init_tm (GTR_CONTEXT_PANEL (priv->context),
                        gtr_window_get_tm (GTR_WINDOW (window)));
 
+  priv->window = GTK_WIDGET (window);
   /* FIXME: make the po a property */
   priv->po = po;
   g_object_set_data (G_OBJECT (po), GTR_TAB_KEY, tab);
@@ -1169,7 +1265,7 @@ gtr_tab_new (GtrPo * po,
     gtr_po_emit_file_not_consistent (po);
   }
 
-  gtk_widget_show (GTK_WIDGET (tab));
+  gtk_widget_set_visible (GTK_WIDGET (tab), TRUE);
   return tab;
 }
 
@@ -1296,12 +1392,7 @@ gtr_tab_message_go_to (GtrTab * tab,
                        GtrTabMove move)
 {
   static gboolean first_msg = TRUE;
-  GtrTabPrivate *priv;
-
-  g_return_if_fail (tab != NULL);
-  g_return_if_fail (GTR_IS_MSG (to_go));
-
-  priv = gtr_tab_get_instance_private (tab);
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
 
   if (!priv->blocking || first_msg)
     {
@@ -1369,10 +1460,11 @@ gtr_tab_message_go_to (GtrTab * tab,
       g_signal_emit (G_OBJECT (tab), signals[SHOWED_MESSAGE], 0,
                      GTR_MSG (to_go));
 
+
       // Grabbing the focus in the GtrView to edit the message
       // This is done in the idle add to avoid the focus grab from the
       // message-table
-      g_idle_add((GSourceFunc)msg_grab_focus, tab);
+      g_idle_add ((GSourceFunc)msg_grab_focus, tab);
     }
 }
 
@@ -2015,39 +2107,6 @@ gtr_tab_go_to_number (GtrTab * tab, gint number)
 }
 
 /**
- * gtr_tab_set_info_bar:
- * @tab: a #GtrTab
- * @infobar: a #GtrMessageArea
- *
- * Sets the @infobar to be shown in the @tab.
- */
-void
-gtr_tab_set_info_bar (GtrTab * tab, GtkWidget * infobar)
-{
-  GtrTabPrivate *priv;
-
-  g_return_if_fail (GTR_IS_TAB (tab));
-
-  priv = gtr_tab_get_instance_private (tab);
-
-  if (priv->infobar == infobar)
-    return;
-
-  if (priv->infobar != NULL)
-    gtk_widget_destroy (priv->infobar);
-
-  priv->infobar = infobar;
-
-  if (infobar == NULL)
-    return;
-
-  gtk_box_append (GTK_BOX (tab), priv->infobar);
-
-  g_object_add_weak_pointer (G_OBJECT (priv->infobar),
-                             (gpointer *) & priv->infobar);
-}
-
-/**
  * gtr_tab_set_info:
  * @tab: a #GtrTab
  * @info: a string to show
@@ -2121,3 +2180,10 @@ gtr_tab_find_replace (GtrTab *tab,
   priv->find_replace_flag = set;
 }
 
+GtkWindow *
+gtr_tab_get_window (GtrTab *tab)
+{
+  GtrTabPrivate *priv;
+  priv = gtr_tab_get_instance_private (tab);
+  return GTK_WINDOW (priv->window);
+}

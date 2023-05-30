@@ -160,23 +160,11 @@ on_visible_whitespace_changed (GSettings * settings,
   g_list_free (views);
 }
 
+// TODO: enable/disable the spellcheck when we've a replacement for gspell
 static void
 on_spellcheck_changed (GSettings * settings,
                        const gchar * key, GtrSettings * gs)
 {
-  GList *views, *l;
-  gboolean enable;
-
-  enable = g_settings_get_boolean (settings, key);
-
-  views = gtr_application_get_views (GTR_APP, TRUE, TRUE);
-
-  for (l = views; l != NULL; l = g_list_next (l))
-    {
-      gtr_view_enable_spellcheck (GTR_VIEW (l->data), enable);
-    }
-
-  g_list_free (views);
 }
 
 static void
@@ -193,21 +181,6 @@ on_font_changed (GSettings * settings,
   for (l = views; l != NULL; l = g_list_next (l))
     {
       gtr_view_set_font (GTR_VIEW (l->data), font);
-    }
-
-  g_list_free (views);
-}
-
-static void
-on_scheme_changed (GSettings * settings, const gchar * key, GtrSettings * gs)
-{
-  GList *views, *l;
-
-  views = gtr_application_get_views (GTR_APP, TRUE, TRUE);
-
-  for (l = views; l != NULL; l = g_list_next (l))
-    {
-      gtr_view_reload_scheme_color (GTR_VIEW (l->data));
     }
 
   g_list_free (views);
@@ -243,9 +216,6 @@ gtr_settings_init (GtrSettings * gs)
   g_signal_connect (priv->editor,
                     "changed::spellcheck",
                     G_CALLBACK (on_spellcheck_changed), gs);
-  g_signal_connect (priv->ui,
-                    "changed::color-scheme",
-                    G_CALLBACK (on_scheme_changed), gs);
   g_signal_connect (priv->editor,
                     "changed::font",
                     G_CALLBACK (on_font_changed), gs);
