@@ -119,7 +119,7 @@ set_logout_mode (GtrCloseConfirmationDialog * dlg, gboolean logout_mode)
   adw_message_dialog_add_responses (
     ADW_MESSAGE_DIALOG (dlg),
     "cancel", _("_Cancel"),
-    "no", _("Close _without Saving"),
+    "no", _("Close _Without Saving"),
     "yes", _("_Save"),
     NULL
   );
@@ -140,7 +140,6 @@ gtr_close_confirmation_dialog_init (GtrCloseConfirmationDialog * dlg)
   g_signal_connect (dlg, "response", G_CALLBACK (response_cb), NULL);
   gtk_window_set_title (GTK_WINDOW (dlg), "");
 
-  adw_message_dialog_set_heading_use_markup (ADW_MESSAGE_DIALOG (dlg), TRUE);
   adw_message_dialog_set_body_use_markup (ADW_MESSAGE_DIALOG (dlg), TRUE);
 }
 
@@ -301,9 +300,9 @@ build_single_doc_dialog (GtrCloseConfirmationDialog * dlg)
   g_return_if_fail (priv->unsaved_documents->data != NULL);
   doc = GTR_PO (priv->unsaved_documents->data);
   location = gtr_po_get_location (doc);
-  doc_name = g_file_get_path (location);
+  doc_name = g_file_get_basename (location);
 
-  adw_message_dialog_format_heading (ADW_MESSAGE_DIALOG (dlg),
+  adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dlg),
     _("Save the changes to document “%s” before closing?"), doc_name);
 }
 
@@ -332,15 +331,7 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
                         g_list_length (priv->unsaved_documents)),
                        g_list_length (priv->unsaved_documents));
 
-  adw_message_dialog_format_heading (ADW_MESSAGE_DIALOG (dlg), str);
-
-  /* Secondary label */
-  if (priv->disable_save_to_disk)
-    adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dlg),
-      _("Saving has been disabled by the system administrator."));
-  else
-    adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dlg),
-      _("If you don’t save, all your changes will be permanently lost."));
+  adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dlg), str);
 }
 
 static void
@@ -355,6 +346,7 @@ set_unsaved_document (GtrCloseConfirmationDialog * dlg, const GList * list)
 
   priv->unsaved_documents = g_list_copy ((GList *) list);
 
+  adw_message_dialog_set_heading (ADW_MESSAGE_DIALOG (dlg), _("Unsaved Changes"));
   if (GET_MODE (priv) == SINGLE_DOC_MODE)
     {
       build_single_doc_dialog (dlg);

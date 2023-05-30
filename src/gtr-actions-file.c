@@ -188,17 +188,13 @@ gtr_want_to_save_current_dialog (GtrWindow * window, void (*callback)(GtrWindow 
   GtkWidget *dialog;
   g_autoptr (GFile) location = NULL;
   g_autofree gchar *basename = NULL;
-  g_autofree gchar *title = NULL;
-  g_autofree gchar *body = NULL;
 
   tab = gtr_window_get_active_tab (window);
   po = gtr_tab_get_po (tab);
   location = gtr_po_get_location (po);
   basename = g_file_get_basename (location);
 
-  title = g_strdup ("Unsaved Changes");
-
-  dialog = adw_message_dialog_new (GTK_WINDOW (window), title, NULL);
+  dialog = adw_message_dialog_new (GTK_WINDOW (window), _("Unsaved Changes"), NULL);
 
   adw_message_dialog_set_body_use_markup (ADW_MESSAGE_DIALOG (dialog), TRUE);
 
