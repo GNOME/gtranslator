@@ -116,6 +116,7 @@ static void
 set_logout_mode (GtrCloseConfirmationDialog * dlg, gboolean logout_mode)
 {
 
+  adw_message_dialog_set_close_response (ADW_MESSAGE_DIALOG (dlg), "cancel");
   adw_message_dialog_add_responses (
     ADW_MESSAGE_DIALOG (dlg),
     "cancel", _("_Cancel"),
@@ -138,8 +139,6 @@ gtr_close_confirmation_dialog_init (GtrCloseConfirmationDialog * dlg)
   gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
   g_signal_connect (dlg, "response", G_CALLBACK (response_cb), NULL);
-  gtk_window_set_title (GTK_WINDOW (dlg), "");
-
   adw_message_dialog_set_body_use_markup (ADW_MESSAGE_DIALOG (dlg), TRUE);
 }
 
