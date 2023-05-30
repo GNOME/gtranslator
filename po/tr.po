@@ -19,10 +19,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-02-02 12:40+0000\n"
-"PO-Revision-Date: 2023-04-21 16:19+0300\n"
+"POT-Creation-Date: 2023-05-12 05:31+0000\n"
+"PO-Revision-Date: 2023-05-12 11:17+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <gnome-turk@gnome.org >\n"
+"Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,7 +73,7 @@ msgstr ""
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:672
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:638
 #: src/gtr-notebook.ui:216 src/gtr-window.c:229 src/gtr-window.ui:25
 msgid "Translation Editor"
 msgstr "Çeviri Düzenleyici"
@@ -216,8 +216,8 @@ msgid ""
 "See the .gtranslator-plugin file for obtaining the “Location” of a given "
 "plugin."
 msgstr ""
-"Etkin eklentiler listesi. Etkin eklentilerin “Konum”unu içerir. Belirli "
-"eklentinin “Konum”unu almak için .gtranslator-plugin dosyasına bakınız."
+"Etkin eklentiler listesi. Etkin eklentilerin “Konum”unu içerir. Belirli "
+"eklentinin “Konum”unu almak için .gtranslator-plugin dosyasına bakınız."
 
 #: src/codeview/gtr-codeview.c:380
 msgid "Paths:"
@@ -537,8 +537,8 @@ msgid "Main Menu"
 msgstr "Ana Menü"
 
 #: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:151 src/gtr-projects.ui:119
-msgid "New window"
-msgstr "Yeni pencere"
+msgid "New Window"
+msgstr "Yeni Pencere"
 
 #: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:160 src/gtr-projects.ui:133
 msgid "Preferences"
@@ -549,8 +549,8 @@ msgid "Keyboard Shortcuts"
 msgstr "Klavye Kısayolları"
 
 #: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:186 src/gtr-projects.ui:188
-msgid "About"
-msgstr "Hakkında"
+msgid "About Translation Editor"
+msgstr "Çeviri Düzenleyici Hakkında"
 
 #: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:204 src/gtr-projects.ui:216
 msgid "Quit"
@@ -577,7 +577,7 @@ msgstr "Tüm dosyalar"
 msgid "Choose Language"
 msgstr "Dil Seç"
 
-#: src/gtr-header-dialog.c:325
+#: src/gtr-header-dialog.c:325 src/gtr-notebook.ui:133
 msgid "Edit Header"
 msgstr "Başlığı Düzenle"
 
@@ -736,16 +736,12 @@ msgid "Find"
 msgstr "Bul"
 
 #: src/gtr-notebook.ui:114
-msgid "Find and replace"
-msgstr "Bul ve değiştir"
+msgid "Find and Replace"
+msgstr "Bul ve Değiştir"
 
 #: src/gtr-notebook.ui:123 src/gtr-projects.ui:147
-msgid "Build translation memory"
-msgstr "Çeviri belleği oluştur"
-
-#: src/gtr-notebook.ui:133
-msgid "Edit header"
-msgstr "Başlığı düzenle"
+msgid "Build Translation Memory"
+msgstr "Çeviri Belleği Oluştur"
 
 #: src/gtr-notebook.ui:195 src/gtr-preferences-dialog.c:665
 #: src/gtr-projects.ui:202
@@ -1039,7 +1035,7 @@ msgstr "Büyük küçük harf duyarlı"
 msgid "Match whole word only"
 msgstr "Yalnızca tüm sözcüğü eşleştir"
 
-#: src/gtr-search-bar.c:424
+#: src/gtr-search-bar.c:424 src/gtr-search-bar.ui:240
 msgid "Wrap around"
 msgstr "Başa sar"
 
@@ -1067,10 +1063,6 @@ msgstr "Bul ve Bul-ve-Değiştir arasında geçiş yap"
 msgid "Show or hide search options such as case sensitivity"
 msgstr ""
 "Büyük küçük harf duyarlılığı gibi arama seçeneklerini göster veya gizle"
-
-#: src/gtr-search-bar.ui:240
-msgid "Wrap Around"
-msgstr "Başa Sar"
 
 #: src/gtr-tab-label.c:280
 msgid "Close document"
@@ -1174,117 +1166,137 @@ msgctxt "shortcut window"
 msgid "Save the current file as"
 msgstr "Şu anki dosyayı farklı kaydet"
 
-#: src/help-overlay.ui:40
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Download from DL"
+msgstr "DL Sisteminden İndir"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Upload to DL"
+msgstr "DLʼye Yükle"
+
+#: src/help-overlay.ui:53
 msgctxt "shortcut window"
 msgid "Preferences"
 msgstr "Tercihler"
 
-#: src/help-overlay.ui:47
+#: src/help-overlay.ui:60
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Klavye Kısayolları"
 
-#: src/help-overlay.ui:54
+#: src/help-overlay.ui:67
 msgctxt "shortcut window"
 msgid "Help"
 msgstr "Yardım"
 
-#: src/help-overlay.ui:61
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Çık"
 
-#: src/help-overlay.ui:71
+#: src/help-overlay.ui:83
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "Düzenle"
 
-#: src/help-overlay.ui:75
+#: src/help-overlay.ui:88
 msgctxt "shortcut window"
 msgid "Undo"
 msgstr "Geri al"
 
-#: src/help-overlay.ui:82
+#: src/help-overlay.ui:95
 msgctxt "shortcut window"
 msgid "Redo"
 msgstr "Yinele"
 
-#: src/help-overlay.ui:89
+#: src/help-overlay.ui:102
+msgctxt "shortcut window"
+msgid "Clear translation"
+msgstr "Çeviriyi temizle"
+
+#: src/help-overlay.ui:109
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Bulanık olarak imle/imleme"
 
-#: src/help-overlay.ui:96
+#: src/help-overlay.ui:116
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "Özgün metni çeviriye kopyala"
 
-#: src/help-overlay.ui:106
+#: src/help-overlay.ui:125
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Gezinim"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:130
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Önceki iletiye git"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:137
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Sonraki iletiye git"
 
-#: src/help-overlay.ui:124
+#: src/help-overlay.ui:144
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Önceki çevrilmemiş iletiye git"
 
-#: src/help-overlay.ui:131
+#: src/help-overlay.ui:151
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Sonraki çevrilmemiş iletiye git"
 
-#: src/help-overlay.ui:141
+#: src/help-overlay.ui:160
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Çeviri Belleği"
 
-#: src/help-overlay.ui:145
+#: src/help-overlay.ui:165
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Çeviri belleği oluştur"
 
-#: src/help-overlay.ui:152
+#: src/help-overlay.ui:172
 msgctxt "shortcut window"
 msgid "Copy below"
 msgstr "Aşağı kopyala"
 
-#: src/help-overlay.ui:162
+#: src/help-overlay.ui:179
+msgctxt "shortcut window"
+msgid "Use 1st...9th suggestion"
+msgstr "1. ... 9. öneriyi kullan"
+
+#: src/help-overlay.ui:188
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Bul ve Değiştir"
 
-#: src/help-overlay.ui:166
+#: src/help-overlay.ui:193
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Bul"
 
-#: src/help-overlay.ui:173
+#: src/help-overlay.ui:200
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Bul ve değiştir"
 
-#: src/help-overlay.ui:180
+#: src/help-overlay.ui:207
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "İleri ara"
 
-#: src/help-overlay.ui:187
+#: src/help-overlay.ui:214
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Geri ara"
 
-#: src/help-overlay.ui:194
+#: src/help-overlay.ui:221
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Bul ve değiştir çubuğunu gizle"
