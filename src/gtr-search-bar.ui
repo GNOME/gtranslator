@@ -10,13 +10,14 @@
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkGrid">
-            <property name="column_spacing">8</property>
+            <property name="column_spacing">12</property>
             <child>
               <object class="GtkEntry" id="search_entry">
                 <property name="hexpand">1</property>
                 <property name="primary_icon_name">edit-find-symbolic</property>
                 <property name="primary_icon_activatable">0</property>
                 <property name="primary_icon_sensitive">0</property>
+                <property name="placeholder-text">Search</property>
                 <layout>
                   <property name="column">0</property>
                   <property name="row">0</property>
@@ -27,9 +28,7 @@
               <object class="GtkBox">
                 <property name="homogeneous">1</property>
                 <property name="valign">center</property>
-                <style>
-                  <class name="linked"/>
-                </style>
+                <property name="spacing">6</property>
                 <child>
                   <object class="GtkButton" id="previous_button">
                     <!--CLEANUP: <property name="action-name">editor-search.move-previous</property> -->
@@ -51,7 +50,7 @@
               <object class="GtkBox">
                 <property name="homogeneous">1</property>
                 <property name="valign">center</property>
-                <property name="spacing">8</property>
+                <property name="spacing">6</property>
                 <child>
                   <object class="GtkToggleButton">
                     <property name="active" bind-source="GtrSearchBar" bind-property="replace-mode" bind-flags="sync-create|bidirectional"/>
@@ -79,6 +78,7 @@
           <object class="GtkRevealer" id="replace_options">
             <child>
               <object class="GtkGrid">
+                <property name="margin_top">6</property>
                 <property name="column_spacing">8</property>
                 <child>
                   <object class="GtkEntry" id="replace_entry">
@@ -87,6 +87,7 @@
                     <property name="primary_icon_name">edit-find-replace-symbolic</property>
                     <property name="primary_icon_activatable">0</property>
                     <property name="primary_icon_sensitive">0</property>
+                    <property name="placeholder-text">Replace</property>
                     <layout>
                       <property name="column">0</property>
                       <property name="row">0</property>
@@ -122,6 +123,7 @@
           <object class="GtkRevealer" id="search_options">
             <child>
               <object class="GtkGrid">
+                <property name="margin_top">6</property>
                 <property name="column_spacing">8</property>
                 <child>
                   <object class="GtkCheckButton" id="case_sensitive">

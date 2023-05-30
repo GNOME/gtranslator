@@ -172,7 +172,7 @@ handle_save_current_dialog_response (AdwMessageDialog *dialog,
   if (g_strcmp0 ("save", response) == 0)
     gtr_save_current_file_dialog (NULL, window);
 
-  // callback for "save" and "no"
+  // callback for "save", "close", and "no"
   if (g_strcmp0 ("cancel", response) != 0)
     callback (window);
 
@@ -187,32 +187,29 @@ gtr_want_to_save_current_dialog (GtrWindow * window, void (*callback)(GtrWindow 
 
   GtkWidget *dialog;
   g_autoptr (GFile) location = NULL;
-  g_autofree gchar *filename = NULL;
-  g_autofree gchar *markup = NULL;
+  g_autofree gchar *basename = NULL;
+  g_autofree gchar *title = NULL;
+  g_autofree gchar *body = NULL;
 
   tab = gtr_window_get_active_tab (window);
   po = gtr_tab_get_po (tab);
   location = gtr_po_get_location (po);
-  filename = g_file_get_path (location);
+  basename = g_file_get_basename (location);
 
-  markup = g_strdup_printf (
-    _("Do you want to save changes to this file: "
-      "<span weight=\"bold\" size=\"large\">%s</span>?"),
-    filename);
+  title = g_strdup ("Unsaved Changes");
 
-  dialog = adw_message_dialog_new (GTK_WINDOW (window), markup, NULL);
-  gtk_window_set_default_size (GTK_WINDOW (dialog), 800, 200);
+  dialog = adw_message_dialog_new (GTK_WINDOW (window), title, NULL);
 
-  adw_message_dialog_set_heading_use_markup (ADW_MESSAGE_DIALOG (dialog), TRUE);
   adw_message_dialog_set_body_use_markup (ADW_MESSAGE_DIALOG (dialog), TRUE);
 
   adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dialog),
-    _("If you don't save, all your unsaved changes will be permanently lost."));
+                                  _("Do you want to write all the changes done to %s?"),
+                                  basename);
 
   adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
                                     "cancel", _("Cancel"),
-                                    "no", _("Continue without saving"),
-                                    "save", _("Save and open"),
+                                    "no", _("Continue Without Saving"),
+                                    "save", _("Save and Open"),
                                     NULL);
   adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog),
     "no", ADW_RESPONSE_DESTRUCTIVE);

@@ -268,6 +268,9 @@ static void
 gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
+
+  g_type_ensure (GTR_TYPE_LANG_BUTTON);
+
   gtk_widget_init_template (GTK_WIDGET (fetcher));
 
   // add items to comboboxes
