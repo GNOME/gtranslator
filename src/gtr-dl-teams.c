@@ -568,7 +568,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
 
   if (error != NULL)
     {
-      dialog = gtk_alert_dialog_new (_("Error creating temp file: %s"), error->message);
+      dialog = gtk_alert_dialog_new (_("Error creating tmp file: %s"), error->message);
       gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (priv->main_window));
       g_error_free (error);
       return;
