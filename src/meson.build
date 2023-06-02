@@ -30,7 +30,6 @@ enum_headers = files(
 
 sources = files(
   'gtr-actions-app.c',
-  'gtr-actions-documents.c',
   'gtr-actions-edit.c',
   'gtr-actions-file.c',
   'gtr-actions-go.c',
@@ -43,7 +42,6 @@ sources = files(
   'gtr-file-dialogs.c',
   'gtr-header.c',
   'gtr-header-dialog.c',
-  # 'gtr-history-entry.c',
   'gtr-io-error-info-bar.c',
   'gtr-language.c',
   'gtr-languages-fetcher.c',
@@ -95,13 +93,11 @@ sources += gnome.mkenums(
 )
 
 resource_data = files(
-  'gtranslator-ui.xml',
   'gtr-context.ui',
   'gtr-header-dialog.ui',
   'gtr-languages-fetcher.ui',
   'gtr-message-table.ui',
   'gtr-message-table-row.ui',
-  # 'gtr-notebook.ui',
   'gtr-preferences-dialog.ui',
   'gtr-profile-dialog.ui',
   'gtr-tab.ui',
