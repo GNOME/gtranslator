@@ -296,11 +296,11 @@ handle_file_is_inconsistent (GtrPo *po, GtrTab *tab)
   po_nplurals = gtr_header_get_nplurals (gtr_po_get_header (po));
   profile_nplurals = parse_nplurals_header (gtr_profile_get_plural_forms (active_profile));
 
-  info_msg_primary = g_strdup_printf ("File is not consistent with profile %s", profile_name);
-  info_msg_secondary = g_strdup_printf (
+  info_msg_primary = g_strdup_printf (_("File is not consistent with profile %s"), profile_name);
+  info_msg_secondary = g_strdup_printf (_(
     "File nplurals: %d, is different from profile nplurals %d.\n"
     "Kindly go to preferences and select a profile with consistent nplurals "
-    "values as this file %s.",
+    "values as this file %s."),
     po_nplurals, profile_nplurals, filename
   );
   gtr_tab_set_info (tab, info_msg_primary, info_msg_secondary);
