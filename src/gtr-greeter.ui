@@ -8,7 +8,7 @@
         <child>
           <object class="AdwViewStackPage">
             <property name="name">welcome</property>
-            <property name="title" translatable="true">Welcome</property>
+            <property name="title" translatable="yes">Welcome</property>
             <property name="child">
 
               <object class="AdwClamp">
@@ -20,7 +20,7 @@
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="AdwStatusPage">
-                        <property name="title" translatable="true">Welcome to Translation Editor</property>
+                        <property name="title" translatable="yes">Welcome to Translation Editor</property>
                         <property name="icon-name">contact-new-symbolic</property>
                         <property name="description">Before start to use the application, a profile should be created, but dont' worry, the app will guide you to do it in a minute.</property>
                         <property name="vexpand">true</property>
@@ -38,7 +38,7 @@
         <child>
           <object class="AdwViewStackPage">
             <property name="name">profile</property>
-            <property name="title" translatable="true">Create Profile</property>
+            <property name="title" translatable="yes">Create Profile</property>
             <property name="child">
 
               <object class="AdwClamp">
@@ -50,7 +50,7 @@
                     <property name="valign">center</property>
                     <child>
                       <object class="AdwPreferencesGroup">
-                        <property name="title" translatable="true">Profile</property>
+                        <property name="title" translatable="yes">Profile</property>
                         <child>
                           <object class="AdwEntryRow" id="profile_name">
                             <property name="title" translatable="yes">Profile name</property>
@@ -95,7 +95,7 @@
         <child>
           <object class="AdwViewStackPage">
             <property name="name">confirmation</property>
-            <property name="title" translatable="true">Confirmation</property>
+            <property name="title" translatable="yes">Confirmation</property>
             <property name="child">
 
               <object class="AdwClamp">
@@ -106,7 +106,7 @@
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="AdwPreferencesGroup">
-                        <property name="title" translatable="true">Confirmation</property>
+                        <property name="title" translatable="yes">Confirmation</property>
                         <property name="vexpand">true</property>
                         <property name="valign">center</property>
                         <style>
@@ -114,47 +114,47 @@
                         </style>
                         <child>
                           <object class="AdwActionRow" id="conf_profile">
-                            <property name="title" translatable="true">Profile name</property>
+                            <property name="title" translatable="yes">Profile name</property>
                           </object>
                         </child>
                         <child>
                           <object class="AdwActionRow" id="conf_name">
-                            <property name="title" translatable="true">Translator name</property>
+                            <property name="title" translatable="yes">Translator name</property>
                           </object>
                         </child>
                         <child>
                           <object class="AdwActionRow" id="conf_email">
-                            <property name="title" translatable="true">Translator email</property>
+                            <property name="title" translatable="yes">Translator email</property>
                           </object>
                         </child>
                         <child>
                           <object class="AdwActionRow" id="conf_team">
-                            <property name="title" translatable="true">Team email</property>
+                            <property name="title" translatable="yes">Team email</property>
                           </object>
                         </child>
                         <child>
                           <object class="AdwActionRow" id="conf_lang">
-                            <property name="title" translatable="true">Language name</property>
+                            <property name="title" translatable="yes">Language name</property>
                           </object>
                         </child>
                         <child>
                           <object class="AdwActionRow" id="conf_lang_code">
-                            <property name="title" translatable="true">Language code</property>
+                            <property name="title" translatable="yes">Language code</property>
                           </object>
                         </child>
                         <child>
                           <object class="AdwActionRow" id="conf_charset">
-                            <property name="title" translatable="true">Character set</property>
+                            <property name="title" translatable="yes">Character set</property>
                           </object>
                         </child>
                         <child>
                           <object class="AdwActionRow" id="conf_encoding">
-                            <property name="title" translatable="true">Transfer encoding</property>
+                            <property name="title" translatable="yes">Transfer encoding</property>
                           </object>
                         </child>
                         <child>
                           <object class="AdwActionRow" id="conf_plural_forms">
-                            <property name="title" translatable="true">Plural form</property>
+                            <property name="title" translatable="yes">Plural form</property>
                           </object>
                         </child>
                       </object>
@@ -178,7 +178,7 @@
     </style>
     <property name="title-widget">
       <object class="AdwWindowTitle">
-        <property name="title" translatable="true">Translation Editor</property>
+        <property name="title" translatable="yes">Translation Editor</property>
       </object>
     </property>
     <child type="start">
@@ -189,7 +189,7 @@
     </child>
     <child type="end">
       <object class="GtkButton" id="next_button">
-        <property name="label" translatable="true">Next</property>
+        <property name="label" translatable="yes">Next</property>
         <style>
           <class name="suggested-action"/>
         </style>

@@ -54,13 +54,13 @@
                 <child>
                   <object class="GtkToggleButton">
                     <property name="active" bind-source="GtrSearchBar" bind-property="replace-mode" bind-flags="sync-create|bidirectional"/>
-                    <property name="tooltip-text" translatable="1">Switch between Search and Search-and-Replace</property>
+                    <property name="tooltip-text" translatable="yes">Switch between Search and Search-and-Replace</property>
                     <property name="icon_name">edit-find-replace-symbolic</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkToggleButton" id="show_options">
-                    <property name="tooltip-text" translatable="1">Show or hide search options such as case sensitivity</property>
+                    <property name="tooltip-text" translatable="yes">Show or hide search options such as case sensitivity</property>
                     <property name="focus-on-click">0</property>
                     <property name="active" bind-source="GtrSearchBar" bind-property="show-options" bind-flags="sync-create|bidirectional"/>
                     <property name="icon_name">emblem-system-symbolic</property>
@@ -96,7 +96,7 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="replace_button">
-                    <property name="label" translatable="1">Replace</property>
+                    <property name="label" translatable="yes">Replace</property>
                     <layout>
                       <property name="column">1</property>
                       <property name="row">0</property>
@@ -105,7 +105,7 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="replace_all_button">
-                    <property name="label" translatable="1">Replace All</property>
+                    <property name="label" translatable="yes">Replace All</property>
                     <!--TODO: <property name="action-name">editor-search.replace-all</property> -->
                     <property name="action_name">editor-search.replace-all</property>
                     <layout>
@@ -127,7 +127,7 @@
                 <property name="column_spacing">8</property>
                 <child>
                   <object class="GtkCheckButton" id="case_sensitive">
-                    <property name="label" translatable="1">Case sensitive</property>
+                    <property name="label" translatable="yes">Case sensitive</property>
                     <property name="action-name">search-settings.case-sensitive</property>
                     <layout>
                       <property name="column">0</property>
@@ -137,7 +137,7 @@
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="whole_word">
-                    <property name="label" translatable="1">Match whole word only</property>
+                    <property name="label" translatable="yes">Match whole word only</property>
                     <property name="action-name">search-settings.at-word-boundaries</property>
                     <layout>
                       <property name="column">1</property>
@@ -147,7 +147,7 @@
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="wrap_around_button">
-                    <property name="label" translatable="1">Wrap around</property>
+                    <property name="label" translatable="yes">Wrap around</property>
                     <property name="action-name">search-settings.wrap-around</property>
                     <layout>
                       <property name="column">2</property>
@@ -157,7 +157,7 @@
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="original_text_checkbutton">
-                    <property name="label" translatable="1">Original text</property>
+                    <property name="label" translatable="yes">Original text</property>
                     <property name="action-name">search-settings.at-original-text</property>
                     <layout>
                       <property name="column">0</property>
@@ -167,7 +167,7 @@
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="translated_text_checkbutton">
-                    <property name="label" translatable="1">Translated text</property>
+                    <property name="label" translatable="yes">Translated text</property>
                     <property name="action-name">search-settings.at-translated-text</property>
                     <layout>
                       <property name="column">1</property>

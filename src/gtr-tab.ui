@@ -51,7 +51,7 @@
                           <object class="GtkLabel" id="msgid_label">
                             <property name="xalign">0</property>
                             <!--<property name="ypad">5</property>-->
-                            <property name="label" translatable="1">_Original Message</property>
+                            <property name="label" translatable="yes">_Original Message</property>
                             <property name="use_underline">1</property>
                             <attributes>
                               <attribute name="weight" value="bold"></attribute>
@@ -111,7 +111,7 @@
                     <property name="valign">center</property>
                     <property name="xalign">0</property>
                     <!--<property name="ypad">5</property>-->
-                    <property name="label" translatable="1">Translate_d Text</property>
+                    <property name="label" translatable="yes">Translate_d Text</property>
                     <property name="use_underline">1</property>
                     <attributes>
                       <attribute name="weight" value="bold"></attribute>
@@ -200,7 +200,7 @@
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkLabel">
-            <property name="label" translatable="1">Order messages by</property>
+            <property name="label" translatable="yes">Order messages by</property>
             <property name="margin_top">3</property>
             <property name="margin_bottom">3</property>
             <style>
@@ -211,24 +211,24 @@
         </child>
         <child>
           <object class="GtkCheckButton" id="sort_id">
-            <property name="label" translatable="1">Appearance in the original file</property>
+            <property name="label" translatable="yes">Appearance in the original file</property>
           </object>
         </child>
         <child>
           <object class="GtkCheckButton" id="sort_status">
-            <property name="label" translatable="1">Message status</property>
+            <property name="label" translatable="yes">Message status</property>
             <property name="group">sort_id</property>
           </object>
         </child>
         <child>
           <object class="GtkCheckButton" id="sort_msgid">
-            <property name="label" translatable="1">Original message</property>
+            <property name="label" translatable="yes">Original message</property>
             <property name="group">sort_id</property>
           </object>
         </child>
         <child>
           <object class="GtkCheckButton" id="sort_translated">
-            <property name="label" translatable="1">Translated message</property>
+            <property name="label" translatable="yes">Translated message</property>
             <property name="group">sort_id</property>
           </object>
         </child>
@@ -287,14 +287,14 @@
     <child>
       <object class="GtkButton" id="open_button">
         <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="1">Open a New File</property>
+        <property name="tooltip_text" translatable="yes">Open a New File</property>
         <property name="action_name">app.open</property>
         <property name="icon_name">document-open-symbolic</property>
       </object>
     </child>
     <child>
       <object class="GtkButton" id="dl_button">
-        <property name="tooltip_text" translatable="1">Open from Damned Lies</property>
+        <property name="tooltip_text" translatable="yes">Open from Damned Lies</property>
         <property name="action_name">app.dl</property>
         <property name="icon_name">folder-download-symbolic</property>
       </object>
@@ -309,7 +309,7 @@
     <child>
       <object class="GtkButton" id="undo">
         <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="1">Undo</property>
+        <property name="tooltip_text" translatable="yes">Undo</property>
         <property name="action_name">app.undo</property>
         <property name="icon_name">edit-undo-symbolic</property>
       </object>
@@ -317,7 +317,7 @@
     <child>
       <object class="GtkButton" id="redo">
         <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="1">Redo</property>
+        <property name="tooltip_text" translatable="yes">Redo</property>
         <property name="action_name">app.redo</property>
         <property name="icon_name">edit-redo-symbolic</property>
       </object>
@@ -332,7 +332,7 @@
     <child>
       <object class="GtkButton" id="prev_untranslated">
         <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="1">Previous message without translation (&lt;Alt&gt;&lt;Page Up&gt;)</property>
+        <property name="tooltip_text" translatable="yes">Previous message without translation (&lt;Alt&gt;&lt;Page Up&gt;)</property>
         <property name="action_name">app.prev_no</property>
         <property name="icon_name">go-up-symbolic</property>
       </object>
@@ -340,7 +340,7 @@
     <child>
       <object class="GtkButton" id="next_untranslated">
         <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="1">Next message without translation (&lt;Alt&gt;&lt;Page Down&gt;)</property>
+        <property name="tooltip_text" translatable="yes">Next message without translation (&lt;Alt&gt;&lt;Page Down&gt;)</property>
         <property name="action_name">app.next_no</property>
         <property name="icon_name">go-down-symbolic</property>
       </object>
@@ -355,7 +355,7 @@
     <child>
       <object class="GtkButton">
         <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="1">Toggle Fuzzy State</property>
+        <property name="tooltip_text" translatable="yes">Toggle Fuzzy State</property>
         <property name="action_name">app.fuzzy</property>
         <property name="icon_name">weather-fog-symbolic</property>
       </object>
@@ -364,7 +364,7 @@
       <object class="GtkMenuButton" id="sortby_menu">
         <property name="receives_default">1</property>
         <property name="popover">order_menu_popover</property>
-        <property name="tooltip_text" translatable="1">Sort messages by</property>
+        <property name="tooltip_text" translatable="yes">Sort messages by</property>
         <property name="icon_name">view-sort-ascending-symbolic</property>
         <property name="primary">True</property>
       </object>
@@ -381,7 +381,7 @@
     <child type="end">
       <object class="GtkToggleButton" id="search_toggle">
         <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="1">Find</property>
+        <property name="tooltip_text" translatable="yes">Find</property>
         <property name="action_name">app.findtoggle</property>
         <property name="icon_name">edit-find-symbolic</property>
       </object>
@@ -396,7 +396,7 @@
     <child type="end">
       <object class="GtkButton" id="upload">
         <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="1">Upload File</property>
+        <property name="tooltip_text" translatable="yes">Upload File</property>
         <property name="action_name">app.upload_file</property>
         <property name="icon_name">document-send-symbolic</property>
       </object>
@@ -404,7 +404,7 @@
     <child type="end">
       <object class="GtkButton">
         <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="1">Save as</property>
+        <property name="tooltip_text" translatable="yes">Save as</property>
         <property name="action_name">app.saveas</property>
         <property name="icon_name">document-save-as-symbolic</property>
       </object>
@@ -412,11 +412,11 @@
     <child type="end">
       <object class="GtkButton" id="save">
         <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="1">Save Current File</property>
+        <property name="tooltip_text" translatable="yes">Save Current File</property>
         <property name="action_name">app.save</property>
         <child>
           <object class="AdwButtonContent">
-            <property name="label" translatable="1">Save</property>
+            <property name="label" translatable="yes">Save</property>
             <property name="icon_name">document-save-symbolic</property>
           </object>
         </child>
