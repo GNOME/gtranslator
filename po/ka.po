@@ -1,16 +1,16 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Georgian translation for gtranslator.
+# Copyright (C) 2023 gtranslator authors.
+# This file is distributed under the same license as the gtranslator package.
 # Ekaterine Papava <papava.e@gtu.ge>, 2023.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-06-02 19:02+0000\n"
-"PO-Revision-Date: 2023-06-03 10:36+0200\n"
+"POT-Creation-Date: 2023-06-19 05:22+0000\n"
+"PO-Revision-Date: 2023-06-19 17:57+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
-"Language-Team: \n"
+"Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +44,7 @@ msgid ""
 "code viewer."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:161
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:174
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -152,7 +152,7 @@ msgstr "გვერდითი პანელის გადამრთვ�
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:104
 msgid "Style for switchers in the side panel."
-msgstr ""
+msgstr "გვერდით პანელში არსებული გადამრთველების სტილი."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:110
 msgid "Message list sort order"
@@ -221,7 +221,7 @@ msgstr "შენახვა და გახსნა"
 
 #: src/gtr-actions-file.c:230
 msgid "Open file for translation"
-msgstr ""
+msgstr "სათარგმნი ფაილის გახსნა"
 
 #: src/gtr-actions-file.c:318
 msgid "This file has already been uploaded"
@@ -238,7 +238,7 @@ msgstr ""
 
 #: src/gtr-actions-file.c:346
 msgid "The file has been uploaded!"
-msgstr ""
+msgstr "ფაილი ატვირთულია!"
 
 #: src/gtr-actions-file.c:489
 msgid "Save file as…"
@@ -311,20 +311,15 @@ msgstr "მოდულის მდგომარეობა ვერ მო
 msgid "Error loading file: %s"
 msgstr "ფაილის ჩატვირთვის შეცდომა: %s"
 
-#: src/gtr-dl-teams.c:571
+#: src/gtr-dl-teams.c:571 src/gtr-dl-teams.c:615
 #, c-format
-msgid "Error creating temp file: %s"
+msgid "Error creating tmp file: %s"
 msgstr "დროებითი ფაილის შექმნის შეცდომა: %s"
 
 #: src/gtr-dl-teams.c:586
 #, c-format
 msgid "Error writing stream: %s"
 msgstr "ნაკადის ჩაწერის შეცდომა: %s"
-
-#: src/gtr-dl-teams.c:615
-#, c-format
-msgid "Error creating tmp file: %s"
-msgstr "დროებითი ფაილის შექმნის შეცდომა: %s"
 
 #: src/gtr-dl-teams.c:624
 #, c-format
@@ -428,6 +423,12 @@ msgstr "კეთილი იყოს თქვენი მობრძან
 msgid "Welcome to Translation Editor"
 msgstr "კეთილი იყოს თქვენი მობრძანება თარგმანის რედაქტორში"
 
+#: src/gtr-greeter.ui:25
+msgid ""
+"Before start to use the application, a profile should be created, but don't "
+"worry, the app will guide you to do it in a minute."
+msgstr ""
+
 #: src/gtr-greeter.ui:41
 msgid "Create Profile"
 msgstr "პროფილის შექმნა"
@@ -494,7 +495,7 @@ msgstr "თავსართის ჩასწორება"
 
 #: src/gtr-header-dialog.ui:11
 msgid "Translator and Language"
-msgstr ""
+msgstr "მთარგმნელი და ენა"
 
 #: src/gtr-header-dialog.ui:15 src/gtr-header-dialog.ui:83
 #: src/gtr-header-dialog.ui:138 src/gtr-preferences-dialog.ui:14
@@ -664,11 +665,11 @@ msgstr "წაშლა"
 
 #: src/gtr-preferences-dialog.c:433
 msgid "Impossible to remove the active profile"
-msgstr ""
+msgstr "აქტიური პროფილის წაშლა შეუძლებელია"
 
 #: src/gtr-preferences-dialog.c:434
 msgid "Another profile should be selected as active before"
-msgstr ""
+msgstr "მანამდე ჯერ აქტიურად სხვა პროფილი უნდა მონიშნოთ"
 
 #: src/gtr-preferences-dialog.c:438
 msgid "_Ok"
@@ -676,11 +677,15 @@ msgstr "_დიახ"
 
 #: src/gtr-preferences-dialog.c:448
 msgid "Are you sure you want to delete this profile?"
-msgstr ""
+msgstr "დარწმუნებული ბრძანდებით, რომ გსურთ ამ პროფილის წაშლა?"
 
 #: src/gtr-preferences-dialog.c:454
 msgid "_Delete"
 msgstr "_წაშლა"
+
+#: src/gtr-preferences-dialog.ui:10
+msgid "F_iles"
+msgstr "_ფაილები"
 
 #: src/gtr-preferences-dialog.ui:17
 msgid "_Warn if PO file contains fuzzy translations"
@@ -696,7 +701,7 @@ msgstr "ავტომატური შენახვა"
 
 #: src/gtr-preferences-dialog.ui:44
 msgid "_Activate auto save"
-msgstr ""
+msgstr "_ავტომატური შენახვის ჩართვა"
 
 #: src/gtr-preferences-dialog.ui:55
 msgid "Autosave _interval"
@@ -705,6 +710,10 @@ msgstr "ავტომატური შენახვის _ინტერ
 #: src/gtr-preferences-dialog.ui:75
 msgid "Create a _backup copy of files before saving"
 msgstr ""
+
+#: src/gtr-preferences-dialog.ui:93
+msgid "_Editor"
+msgstr "_რედაქტორი"
 
 #: src/gtr-preferences-dialog.ui:97
 msgid "Text Display"
@@ -732,7 +741,11 @@ msgstr ""
 
 #: src/gtr-preferences-dialog.ui:156
 msgid "Check _spelling"
-msgstr ""
+msgstr "მართლწერის _შემოწმება"
+
+#: src/gtr-preferences-dialog.ui:174
+msgid "_Profiles"
+msgstr "_პროფილები"
 
 #: src/gtr-preferences-dialog.ui:178
 msgid "Profiles"
@@ -744,10 +757,10 @@ msgstr ""
 
 #: src/gtr-profile-dialog.ui:7 src/gtr-upload-dialog.ui:7
 msgid "Upload to Damned Lies"
-msgstr ""
+msgstr "Damned Lies-ზე ატვირთვა"
 
 #: src/gtr-profile-dialog.ui:22
-msgid "Ok"
+msgid "OK"
 msgstr "დიახ"
 
 #: src/gtr-profile-dialog.ui:48
@@ -772,7 +785,7 @@ msgstr "მთარგმნელი ჯგუფის _ელფოსტა
 
 #: src/gtr-profile-dialog.ui:87
 msgid "Damned Lies Integration"
-msgstr ""
+msgstr "Damned Lies ინტეგრაცია"
 
 #: src/gtr-profile-dialog.ui:88
 msgid ""
@@ -798,7 +811,11 @@ msgstr ""
 
 #: src/gtr-projects.ui:55
 msgid "Load from DL…"
-msgstr ""
+msgstr "DL-დან ჩატვირთვა…"
+
+#: src/gtr-search-bar.ui:20
+msgid "Search"
+msgstr "ძებნა"
 
 #: src/gtr-search-bar.ui:57
 msgid "Switch between Search and Search-and-Replace"
@@ -808,7 +825,7 @@ msgstr ""
 msgid "Show or hide search options such as case sensitivity"
 msgstr ""
 
-#: src/gtr-search-bar.ui:99
+#: src/gtr-search-bar.ui:90 src/gtr-search-bar.ui:99
 msgid "Replace"
 msgstr "ჩანაცვლება"
 
@@ -836,6 +853,19 @@ msgstr "საწყისი ტექსტი"
 msgid "Translated text"
 msgstr "ნათარგმნი ტექსტი"
 
+#: src/gtr-tab.c:299
+#, c-format
+msgid "File is not consistent with profile %s"
+msgstr ""
+
+#: src/gtr-tab.c:301
+#, c-format
+msgid ""
+"File nplurals: %d, is different from profile nplurals %d.\n"
+"Kindly go to preferences and select a profile with consistent nplurals "
+"values as this file %s."
+msgstr ""
+
 #: src/gtr-tab.c:421
 msgid "There is an error in the message:"
 msgstr ""
@@ -857,7 +887,7 @@ msgstr "მისამართი:"
 #: src/gtr-tab.c:2149
 #, c-format
 msgid "Translated: %0.2f%%"
-msgstr ""
+msgstr "თარგმნილია: %0.2f%%"
 
 #: src/gtr-tab.c:2150
 #, c-format
@@ -882,27 +912,27 @@ msgstr "_საწყისი შეტყობინება"
 #. <property name="ypad">5</property>
 #: src/gtr-tab.ui:114
 msgid "Translate_d Text"
-msgstr ""
+msgstr "_ნათარგმნი ტექსტი"
 
 #: src/gtr-tab.ui:203
 msgid "Order messages by"
-msgstr ""
+msgstr "შეტყობინებების დალაგება"
 
 #: src/gtr-tab.ui:214
 msgid "Appearance in the original file"
-msgstr ""
+msgstr "როგორ გამოიყურება საწყის ფაილში"
 
 #: src/gtr-tab.ui:219
 msgid "Message status"
-msgstr ""
+msgstr "შეტყობინების სტატუსი"
 
 #: src/gtr-tab.ui:225
 msgid "Original message"
-msgstr ""
+msgstr "საწყისი შეტყობინება"
 
 #: src/gtr-tab.ui:231
 msgid "Translated message"
-msgstr ""
+msgstr "თარგმნილი შეტყობინება"
 
 #: src/gtr-tab.ui:242 src/gtr-tab.ui:384
 msgid "Find"
@@ -918,7 +948,7 @@ msgstr "ახალი ფაილის გახსნა"
 
 #: src/gtr-tab.ui:297
 msgid "Open from Damned Lies"
-msgstr ""
+msgstr "Damned Lies-დან გახსნა"
 
 #: src/gtr-tab.ui:312
 msgid "Undo"
@@ -938,11 +968,11 @@ msgstr ""
 
 #: src/gtr-tab.ui:358
 msgid "Toggle Fuzzy State"
-msgstr ""
+msgstr "ბუნდოვნობის მდგომარეობის გადართვა"
 
 #: src/gtr-tab.ui:367
 msgid "Sort messages by"
-msgstr ""
+msgstr "შეტყობინებების დალაგება"
 
 #: src/gtr-tab.ui:399
 msgid "Upload File"
@@ -982,11 +1012,11 @@ msgstr "%s — თარგმანის რედაქტორი"
 
 #: src/gtr-window.c:608
 msgid "Select a Po file"
-msgstr ""
+msgstr "აირჩიეთ Po ფაილი"
 
 #: src/gtr-window.c:627
 msgid "Load from Damned Lies"
-msgstr ""
+msgstr "Damned Lies-დან ჩატვირთვა"
 
 #: src/help-overlay.ui:13
 msgctxt "shortcut window group"
@@ -1011,7 +1041,7 @@ msgstr "მიმდინარე ფაილის შენახვა, �
 #: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Download from DL"
-msgstr ""
+msgstr "DL-დან გადმოწერა"
 
 #: src/help-overlay.ui:46
 msgctxt "shortcut window"
@@ -1111,7 +1141,7 @@ msgstr "დააკოპირეთ ქვემოთ"
 #: src/help-overlay.ui:179
 msgctxt "shortcut window"
 msgid "Use 1st...9th suggestion"
-msgstr ""
+msgstr "გამოიყენეთ 1... მე -9 შეთავაზება"
 
 #: src/help-overlay.ui:188
 msgctxt "shortcut window group"
@@ -1156,7 +1186,7 @@ msgstr ""
 
 #: src/translation-memory/gtr-translation-memory-dialog.c:76
 msgid "Select PO directory"
-msgstr ""
+msgstr "აირჩიეთ PO საქაღალდე"
 
 #: src/translation-memory/gtr-translation-memory-dialog.ui:7
 msgid "Translation Editor Memory Manager"
@@ -1225,6 +1255,13 @@ msgid ""
 "translation memory."
 msgstr ""
 
+#, c-format
+#~ msgid "Error creating temp file: %s"
+#~ msgstr "დროებითი ფაილის შექმნის შეცდომა: %s"
+
+#~ msgid "Ok"
+#~ msgstr "დიახ"
+
 #~ msgid "Color scheme"
 #~ msgstr "ფერების სქემა"
 
@@ -1287,9 +1324,6 @@ msgstr ""
 
 #~ msgid "_minutes"
 #~ msgstr "_წუთი"
-
-#~ msgid "Editor"
-#~ msgstr "რედაქტორი"
 
 #~ msgid "_Name"
 #~ msgstr "_სახელი"
