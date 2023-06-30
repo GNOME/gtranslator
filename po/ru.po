@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.9.9\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-06-02 19:02+0000\n"
-"PO-Revision-Date: 2023-06-03 18:13+1000\n"
+"POT-Creation-Date: 2023-06-19 16:00+0000\n"
+"PO-Revision-Date: 2023-06-22 20:49+1000\n"
 "Last-Translator: Ser82-png <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -56,7 +56,7 @@ msgstr ""
 "Gtranslator также включает в себя систему модулей: альтернативный язык, "
 "вставка тэгов, интеграция с subversion и просмотрщик исходного кода."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:161
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:174
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -355,20 +355,15 @@ msgstr "Не найдено состояние модуля."
 msgid "Error loading file: %s"
 msgstr "Произошла ошибка при загрузке файла: %s"
 
-#: src/gtr-dl-teams.c:571
+#: src/gtr-dl-teams.c:571 src/gtr-dl-teams.c:615
 #, c-format
-msgid "Error creating temp file: %s"
+msgid "Error creating tmp file: %s"
 msgstr "При создании временного файла произошла ошибка: %s"
 
 #: src/gtr-dl-teams.c:586
 #, c-format
 msgid "Error writing stream: %s"
 msgstr "Произошла ошибка при записи потока: %s"
-
-#: src/gtr-dl-teams.c:615
-#, c-format
-msgid "Error creating tmp file: %s"
-msgstr "При создании временного файла произошла ошибка: %s"
 
 #: src/gtr-dl-teams.c:624
 #, c-format
@@ -474,6 +469,14 @@ msgstr "Добро пожаловать"
 #: src/gtr-greeter.ui:23 src/gtr-window.c:640
 msgid "Welcome to Translation Editor"
 msgstr "О приложении"
+
+#: src/gtr-greeter.ui:25
+msgid ""
+"Before start to use the application, a profile should be created, but don't "
+"worry, the app will guide you to do it in a minute."
+msgstr ""
+"Прежде чем начать пользоваться приложением, необходимо создать профиль, но "
+"не волнуйтесь, через минуту приложение подскажет вам, как это сделать."
 
 #: src/gtr-greeter.ui:41
 msgid "Create Profile"
@@ -724,7 +727,6 @@ msgid "Another profile should be selected as active before"
 msgstr "Сначала должен быть выбран другой профиль"
 
 #: src/gtr-preferences-dialog.c:438
-#| msgid "_OK"
 msgid "_Ok"
 msgstr "_Ok"
 
@@ -735,6 +737,10 @@ msgstr "Уверены, что хотите удалить этот профил
 #: src/gtr-preferences-dialog.c:454
 msgid "_Delete"
 msgstr "_Удалить"
+
+#: src/gtr-preferences-dialog.ui:10
+msgid "F_iles"
+msgstr "_Файлы"
 
 #: src/gtr-preferences-dialog.ui:17
 msgid "_Warn if PO file contains fuzzy translations"
@@ -759,6 +765,10 @@ msgstr "Интервал автосохранения"
 #: src/gtr-preferences-dialog.ui:75
 msgid "Create a _backup copy of files before saving"
 msgstr "Создавать _резервную копию перевода перед сохранением"
+
+#: src/gtr-preferences-dialog.ui:93
+msgid "_Editor"
+msgstr "_Редактор"
 
 #: src/gtr-preferences-dialog.ui:97
 msgid "Text Display"
@@ -788,6 +798,10 @@ msgstr "_Снимать статус неточного перевода с из
 msgid "Check _spelling"
 msgstr "Про_верять орфографию"
 
+#: src/gtr-preferences-dialog.ui:174
+msgid "_Profiles"
+msgstr "_Профили"
+
 #: src/gtr-preferences-dialog.ui:178
 msgid "Profiles"
 msgstr "Профили"
@@ -801,8 +815,8 @@ msgid "Upload to Damned Lies"
 msgstr "Выгрузить на Damned Lies"
 
 #: src/gtr-profile-dialog.ui:22
-msgid "Ok"
-msgstr "Ok"
+msgid "OK"
+msgstr "OK"
 
 #: src/gtr-profile-dialog.ui:48
 msgid "Profile Information"
@@ -825,7 +839,6 @@ msgid "Translation _team email"
 msgstr "Эл. почта _команды переводчиков"
 
 #: src/gtr-profile-dialog.ui:87
-#| msgid "Damned Lies Info"
 msgid "Damned Lies Integration"
 msgstr "Интеграция Damned Lies"
 
@@ -857,6 +870,10 @@ msgstr "Откройте файл PO или перетащите его сюда
 msgid "Load from DL…"
 msgstr "Скачать с DL…"
 
+#: src/gtr-search-bar.ui:20
+msgid "Search"
+msgstr "Поиск"
+
 #: src/gtr-search-bar.ui:57
 msgid "Switch between Search and Search-and-Replace"
 msgstr "Переключиться из Поиска в Поиск и замену"
@@ -866,7 +883,7 @@ msgid "Show or hide search options such as case sensitivity"
 msgstr ""
 "Показать или спрятать параметры поиска вроде чувствительности к регистру"
 
-#: src/gtr-search-bar.ui:99
+#: src/gtr-search-bar.ui:90 src/gtr-search-bar.ui:99
 msgid "Replace"
 msgstr "Заменить"
 
@@ -893,6 +910,22 @@ msgstr "Исходный текст"
 #: src/gtr-search-bar.ui:170
 msgid "Translated text"
 msgstr "Текст перевода"
+
+#: src/gtr-tab.c:299
+#, c-format
+msgid "File is not consistent with profile %s"
+msgstr "Файл не соответствует профилю %s"
+
+#: src/gtr-tab.c:301
+#, c-format
+msgid ""
+"File nplurals: %d, is different from profile nplurals %d.\n"
+"Kindly go to preferences and select a profile with consistent nplurals "
+"values as this file %s."
+msgstr ""
+"Значение nplurals файла: %d отличается от значения nplurals в профиле %d.\n"
+"Пожалуйста, перейдите в настройки и выберите профиль с согласованными с "
+"файлом %s значениями nplurals."
 
 #: src/gtr-tab.c:421
 msgid "There is an error in the message:"
@@ -1292,6 +1325,13 @@ msgstr ""
 "Максимальное отличие в длине между сообщениями, показанными памятью "
 "переводов как совпадающие."
 
+#, c-format
+#~ msgid "Error creating temp file: %s"
+#~ msgstr "При создании временного файла произошла ошибка: %s"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
+
 #~ msgid "Color scheme"
 #~ msgstr "Цветовая схема"
 
@@ -1455,9 +1495,6 @@ msgstr ""
 
 #~ msgid "Choose the editor font"
 #~ msgstr "Выбрать шрифт редактора"
-
-#~ msgid "Editor"
-#~ msgstr "Редактор"
 
 #~ msgid "_Name"
 #~ msgstr "И_мя"
@@ -1983,9 +2020,6 @@ msgstr ""
 
 #~ msgid "_View"
 #~ msgstr "_Вид"
-
-#~ msgid "_Search"
-#~ msgstr "П_оиск"
 
 #~ msgid "_Go"
 #~ msgstr "Пере_ход"
