@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-42\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-04-25 17:29+0000\n"
-"PO-Revision-Date: 2023-05-10 14:49+0700\n"
+"POT-Creation-Date: 2023-06-19 05:22+0000\n"
+"PO-Revision-Date: 2023-07-16 08:04+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
@@ -54,12 +54,12 @@ msgstr ""
 "bahasa alternatif, sisip tag, integrasi dengan subversion, dan penilik kode "
 "sumber."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:161
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:174
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:638
-#: src/gtr-notebook.ui:216 src/gtr-window.c:229 src/gtr-window.ui:25
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
+#: src/gtr-application.c:600 src/gtr-greeter.ui:181 src/gtr-window.c:221
 msgid "Translation Editor"
 msgstr "Penyunting Terjemahan"
 
@@ -171,19 +171,10 @@ msgid "Style for switchers in the side panel."
 msgstr "Gaya bagi penukar di panel sisi."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:110
-msgid "Color scheme"
-msgstr "Skema warna"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:111
-msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
-msgstr ""
-"Nama dari skema warna gtksourceview yang dipakai untuk penyorotan sintaks."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:117
 msgid "Message list sort order"
 msgstr "Pengurutan daftar pesan"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:118
+#: data/org.gnome.Gtranslator.gschema.xml.in:111
 msgid ""
 "Sort order to use in the message list. Possible values are “status”, “id”, "
 "“original-text” and “translated-text”."
@@ -191,11 +182,11 @@ msgstr ""
 "Pengurutan yang dipakai dalam daftar pesan. Nilai-nilai yang mungkin adalah "
 "\"status\", \"id\", \"original-text\", dan \"translated-text\"."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:153
+#: data/org.gnome.Gtranslator.gschema.xml.in:143
 msgid "Active plugins"
 msgstr "Plugin aktif"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:154
+#: data/org.gnome.Gtranslator.gschema.xml.in:144
 msgid ""
 "List of active plugins. It contains the “Location” of the active plugins. "
 "See the .gtranslator-plugin file for obtaining the “Location” of a given "
@@ -204,37 +195,15 @@ msgstr ""
 "Daftar plugin aktif. Ini memuat \"Lokasi\" dari plugin aktif. Lihat berkas ."
 "gtranslator-plugin untuk memperoleh \"Lokasi\" dari suatu plugin."
 
-#: src/codeview/gtr-codeview.c:380
-msgid "Paths:"
-msgstr "Path:"
-
-#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
-#: src/gtr-io-error-info-bar.c:161 src/gtr-preferences-dialog.c:664
-#: src/translation-memory/gtr-translation-memory-dialog.c:305
-msgid "_Close"
-msgstr "_Tutup"
-
-#: src/codeview/gtr-viewer.c:75
+#: src/codeview/gtr-viewer.c:98
 msgid "Source Viewer"
 msgstr "Penampil Sumber"
 
-#: src/codeview/gtr-viewer.ui:62
+#: src/codeview/gtr-viewer.ui:26
 msgid "Source code"
 msgstr "Kode sumber"
 
-#: src/gtr-actions-app.c:58
-msgid "Current Maintainers"
-msgstr "Para Pemelihara Kini"
-
-#: src/gtr-actions-app.c:62
-msgid "Previous Developers"
-msgstr "Para Pengembang Sebelumnya"
-
-#: src/gtr-actions-app.c:73
-msgid "Contributors"
-msgstr "Para Kontributor"
-
-#: src/gtr-actions-app.c:98
+#: src/gtr-actions-app.c:86
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -244,53 +213,44 @@ msgstr "Penyunting berkas terjemahan untuk lokalisasi aplikasi dan pustaka."
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:111
+#: src/gtr-actions-app.c:103
 msgid "translator-credits"
 msgstr ""
 "Mohammad DAMT <mdamt@bisnisweb.com>, 2003.\n"
 "Andika Triwidada <andika@gmail.com>, 2009-2013, 2016, 2020-2023.\n"
 "Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2023."
 
-#: src/gtr-actions-app.c:114
-msgid "Translation Editor Web Site"
-msgstr "Situs Web Penyunting Terjemahan"
+#: src/gtr-actions-file.c:197 src/gtr-close-confirmation-dialog.c:348
+msgid "Unsaved Changes"
+msgstr "Perubahan Belum Tersimpan"
 
-#: src/gtr-actions-file.c:217
+#: src/gtr-actions-file.c:202
 #, c-format
-msgid ""
-"Do you want to save changes to this file: <span weight=\"bold\" "
-"size=\"large\">%s</span>?"
-msgstr ""
-"Apakah Anda ingin menyimpan perubahan pada berkas ini: <span weight=\"bold\" "
-"size=\"large\">%s</span>?"
+msgid "Do you want to write all the changes done to %s?"
+msgstr "Apakah Anda ingin menulis semua perubahan yang dilakukan ke %s?"
 
-#: src/gtr-actions-file.c:223
-msgid "If you don't save, all your unsaved changes will be permanently lost."
-msgstr ""
-"Jika tidak disimpan, semua perubahan yang belum disimpan akan hilang secara "
-"permanen."
-
-#: src/gtr-actions-file.c:226
-msgid "Save and open"
-msgstr "Simpan dan buka"
-
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:206 src/gtr-context.c:150
+#: src/gtr-profile-dialog.ui:17 src/gtr-upload-dialog.ui:17
 msgid "Cancel"
 msgstr "Batal"
 
-#: src/gtr-actions-file.c:228
-msgid "Continue without saving"
-msgstr "Tutup tanpa menyimpan"
+#: src/gtr-actions-file.c:207
+msgid "Continue Without Saving"
+msgstr "Tutup Tanpa Menyimpan"
 
-#: src/gtr-actions-file.c:260
+#: src/gtr-actions-file.c:208
+msgid "Save and Open"
+msgstr "Simpan dan Buka"
+
+#: src/gtr-actions-file.c:230
 msgid "Open file for translation"
 msgstr "Buka berkas untuk diterjemahkan"
 
-#: src/gtr-actions-file.c:359
+#: src/gtr-actions-file.c:318
 msgid "This file has already been uploaded"
 msgstr "Berkas ini telah diunggah"
 
-#: src/gtr-actions-file.c:382
+#: src/gtr-actions-file.c:337
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -303,105 +263,38 @@ msgstr ""
 "benar di profil Anda atau Anda tidak memiliki izin untuk mengunggah modul "
 "ini."
 
-#: src/gtr-actions-file.c:395
+#: src/gtr-actions-file.c:346
 msgid "The file has been uploaded!"
 msgstr "Berkas telah diunggah!"
 
-#: src/gtr-actions-file.c:546
+#: src/gtr-actions-file.c:489
 msgid "Save file as…"
 msgstr "Simpan berkas sebagai…"
 
-#: src/gtr-assistant.c:128
-#, c-format
-msgid ""
-"Profile name: %s\n"
-"Translator name: %s\n"
-"Translator email: %s\n"
-"Language name: %s\n"
-"Team email: %s\n"
-"Language code: %s\n"
-"Character set: %s\n"
-"Transfer encoding: %s\n"
-"Plural form: %s\n"
-msgstr ""
-"Nama profil: %s\n"
-"Nama penerjemah: %s\n"
-"Email penerjemah: %s\n"
-"Nama bahasa: %s\n"
-"Email tim: %s\n"
-"Kode bahasa: %s\n"
-"Gugus karakter: %s\n"
-"Encoding transfer: %s\n"
-"Bentuk jamak: %s\n"
-
-#: src/gtr-assistant.c:170
-msgid "This assistant will help you to create the main profile."
-msgstr "Asisten ini akan membantu Anda membuat profil utama."
-
-#: src/gtr-assistant.c:176
-msgid "Assistant"
-msgstr "Pembantu"
-
-#: src/gtr-assistant.c:268
-msgid "Profile name"
-msgstr "Nama profil"
-
-#: src/gtr-assistant.c:291
-msgid "Translator name"
-msgstr "Nama penerjemah"
-
-#: src/gtr-assistant.c:314
-msgid "Translator email"
-msgstr "Surel penerjemah"
-
-#: src/gtr-assistant.c:337
-msgid "Team email"
-msgstr "Surel tim"
-
-#: src/gtr-assistant.c:353 src/gtr-preferences-dialog.c:588
-msgid "Profile"
-msgstr "Profil"
-
-#: src/gtr-assistant.c:447
-msgid "Language"
-msgstr "Bahasa"
-
-#: src/gtr-assistant.c:469
-msgid "Confirmation"
-msgstr "Konfirmasi"
-
-#: src/gtr-close-confirmation-dialog.c:123
-msgid "Close _without Saving"
-msgstr "Tutup tanpa Menyimpan"
-
-#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:108
-#: src/gtr-file-dialogs.c:47 src/gtr-jump-dialog.c:90
-#: src/gtr-preferences-dialog.c:460 src/gtr-profile-dialog.c:72
-#: src/translation-memory/gtr-translation-memory-dialog.c:105
+#: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:453
 msgid "_Cancel"
 msgstr "_Batal"
 
-#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:106
-#: src/gtr-file-dialogs.c:46
+#: src/gtr-close-confirmation-dialog.c:123
+msgid "Close _Without Saving"
+msgstr "Tutup _Tanpa Menyimpan"
+
+#: src/gtr-close-confirmation-dialog.c:124
 msgid "_Save"
 msgstr "_Simpan"
 
-#: src/gtr-close-confirmation-dialog.c:155
-msgid "Question"
-msgstr "Pertanyaan"
-
-#: src/gtr-close-confirmation-dialog.c:371
+#: src/gtr-close-confirmation-dialog.c:305
 #, c-format
 msgid "Save the changes to document “%s” before closing?"
 msgstr "Simpan perubahan ke dokumen \"%s\" sebelum menutup?"
 
-#: src/gtr-close-confirmation-dialog.c:543
+#: src/gtr-close-confirmation-dialog.c:319
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] "Perubahan ke %d dokumen akan hilang selamanya."
 
-#: src/gtr-close-confirmation-dialog.c:550
+#: src/gtr-close-confirmation-dialog.c:326
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -410,381 +303,328 @@ msgstr[0] ""
 "Ada %d dokumen dengan perubahan yang belum tersimpan. Simpan perubahan "
 "sebelum menutup?"
 
-#: src/gtr-close-confirmation-dialog.c:571
-msgid "Docum_ents with unsaved changes:"
-msgstr "Dokum_en dengan perubahan yang belum disimpan:"
+#: src/gtr-context.c:151 src/gtr-tab.ui:419
+msgid "Save"
+msgstr "Simpan"
 
-#: src/gtr-close-confirmation-dialog.c:575
-msgid "S_elect the documents you want to save:"
-msgstr "Pilih dokum_en yang ingin Anda simpan:"
-
-#: src/gtr-close-confirmation-dialog.c:595
-msgid "Saving has been disabled by the system administrator."
-msgstr "Penyimpanan telah dimatikan oleh administrator sistem."
-
-#: src/gtr-close-confirmation-dialog.c:597
-msgid "If you don’t save, all your changes will be permanently lost."
-msgstr "Jika tidak disimpan, seluruh perubahan yang Anda buat akan hilang."
-
-#: src/gtr-context.c:101
+#: src/gtr-context.c:157 src/gtr-context.ui:28
 msgid "Notes"
 msgstr "Catatan"
 
-#: src/gtr-context.c:305
-msgid "Notes:"
-msgstr "Catatan:"
+#: src/gtr-context.ui:61
+msgid "Extracted comments"
+msgstr "Komentar terekstrak"
 
-#: src/gtr-context.c:313
-msgid "Add Note"
-msgstr "Tambah Catatan"
+#: src/gtr-context.ui:86
+msgid "Paths"
+msgstr "Path"
 
-#: src/gtr-context.c:318
-msgid "Edit"
-msgstr "Edit"
+#: src/gtr-dl-teams.c:251
+#, c-format
+msgid "Error loading module info: %s"
+msgstr "Galat memuat info modul: %s"
 
-#: src/gtr-context.c:363
-msgid "Extracted comments:"
-msgstr "Komentar terekstrak:"
+#: src/gtr-dl-teams.c:441
+#, c-format
+msgid "Error loading file info: %s"
+msgstr "Galat saat memuat info berkas: %s"
 
-#: src/gtr-context.c:366
-msgid "Context:"
-msgstr "Context:"
-
-#: src/gtr-context.c:369
-msgid "Format:"
-msgstr "Format:"
-
-#: src/gtr-dl-teams.c:447
+#: src/gtr-dl-teams.c:470
 msgid "No module state found."
 msgstr "Tak ada status modul yang ditemukan."
 
-#: src/gtr-dl-teams.c:464
+#: src/gtr-dl-teams.c:562
 #, c-format
-msgid "The current state is: %s"
-msgstr "Status saat ini adalah: %s"
+msgid "Error loading file: %s"
+msgstr "Galat memuat berkas: %s"
 
-#: src/gtr-dl-teams.c:625
+#: src/gtr-dl-teams.c:571 src/gtr-dl-teams.c:615
+#, c-format
+msgid "Error creating tmp file: %s"
+msgstr "Galat membuat berkas tmp: %s"
+
+#: src/gtr-dl-teams.c:586
+#, c-format
+msgid "Error writing stream: %s"
+msgstr "Galat penulisan aliran: %s"
+
+#: src/gtr-dl-teams.c:624
 #, c-format
 msgid "The file '%s' has been saved in %s"
 msgstr "Berkas '%s' telah disimpan dalam %s"
 
-#: src/gtr-dl-teams.c:702
+#: src/gtr-dl-teams.c:695
 #, c-format
 msgid ""
 "An error occurred while reserving this module: %s\n"
-"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
-"correctly in your profile or you don't have permissions to reserve this "
-"module."
+"Maybe you've not configured your l10n.gnome.org token correctly in your "
+"profile or you don't have permissions to reserve this module."
 msgstr ""
 "Timbul galat saat memesan modul ini: %s\n"
-"Mungkin Anda belum mengonfigurasi <b>token</b> <i>l10n.gnome.org</i> dengan "
-"benar di profil Anda atau Anda tidak memiliki izin untuk memesan modul ini."
+"Mungkin Anda belum mengonfigurasi token l10n.gnome.org dengan benar di "
+"profil Anda atau Anda tidak memiliki izin untuk memesan modul ini."
 
-#: src/gtr-dl-teams.c:719
+#: src/gtr-dl-teams.c:707
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "Berkas '%s.%s.%s.%s' telah berhasil dipesan"
 
-#: src/gtr-dl-teams.c:869
-msgid "Translation Team"
-msgstr "Tim Penerjemahan"
-
-#: src/gtr-dl-teams.c:876
-msgid "Module"
-msgstr "Modul"
-
-#: src/gtr-dl-teams.ui:85
-msgid "Select team, module, branch and domain to get the translation file."
-msgstr ""
-"Pilih tim, modul, cabang, dan domain untuk mendapatkan berkas terjemahan."
-
-#: src/gtr-dl-teams.ui:106
-msgid "Reserve for translation"
-msgstr "Pesan untuk penerjemahan"
-
-#: src/gtr-dl-teams.ui:117
-msgid "Load file"
-msgstr "Muat berkas"
-
-#: src/gtr-dl-teams.ui:136
-msgid "Load from Damned Lies"
-msgstr "Muat dari Damned Lies"
-
-#: src/gtr-dl-teams.ui:143 src/gtr-projects.ui:58
-msgid "Open…"
-msgstr "Buka…"
-
-#: src/gtr-dl-teams.ui:166 src/gtr-notebook.ui:410 src/gtr-projects.ui:91
-msgid "Main Menu"
-msgstr "Menu Utama"
-
-#: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:151 src/gtr-projects.ui:119
+#: src/gtr-dl-teams.ui:7 src/gtr-projects.ui:7 src/gtr-tab.ui:260
 msgid "New Window"
 msgstr "Jendela Baru"
 
-#: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:160 src/gtr-projects.ui:133
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:264
 msgid "Preferences"
 msgstr "Preferensi"
 
-#: src/gtr-dl-teams.ui:235 src/gtr-notebook.ui:177 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:270
 msgid "Keyboard Shortcuts"
 msgstr "Pintasan Papan Tik"
 
-#: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:186 src/gtr-projects.ui:188
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:278
 msgid "About Translation Editor"
 msgstr "Tentang Penyunting Terjemahan"
 
-#: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:204 src/gtr-projects.ui:216
-msgid "Quit"
-msgstr "Keluar"
+#: src/gtr-dl-teams.ui:57 src/gtr-header-dialog.ui:141
+msgid "Team"
+msgstr "Tim"
 
-#: src/gtr-file-dialogs.c:47
-msgid "_Open"
-msgstr "_Buka"
+#: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:147
+msgid "Module"
+msgstr "Modul"
 
-#: src/gtr-file-dialogs.c:59
+#: src/gtr-dl-teams.ui:79 src/gtr-header-dialog.ui:159
+msgid "Domain"
+msgstr "Domain"
+
+#: src/gtr-dl-teams.ui:90 src/gtr-header-dialog.ui:153
+msgid "Branch"
+msgstr "Cabang"
+
+#: src/gtr-dl-teams.ui:107
+msgid "Reserve for translation"
+msgstr "Pesan untuk penerjemahan"
+
+#: src/gtr-dl-teams.ui:120
+msgid "Info"
+msgstr "Info"
+
+#: src/gtr-dl-teams.ui:123
+msgid "File"
+msgstr "Berkas"
+
+#: src/gtr-dl-teams.ui:133
+msgid "Translation State"
+msgstr "Status Terjemahan"
+
+#: src/gtr-dl-teams.ui:143
+msgid "Stats"
+msgstr "Statistik"
+
+#: src/gtr-dl-teams.ui:157
+msgid "Load File"
+msgstr "Muat Berkas"
+
+#: src/gtr-dl-teams.ui:176 src/gtr-projects.ui:50
+msgid "Open…"
+msgstr "Buka…"
+
+#: src/gtr-dl-teams.ui:185 src/gtr-projects.ui:64 src/gtr-tab.ui:377
+msgid "Main Menu"
+msgstr "Menu Utama"
+
+#: src/gtr-file-dialogs.c:57
 msgid "Gettext translation"
 msgstr "Terjemahan gettext"
 
-#: src/gtr-file-dialogs.c:68
+#: src/gtr-file-dialogs.c:65
 msgid "Gettext translation template"
 msgstr "Templat terjemahan gettext"
 
-#: src/gtr-file-dialogs.c:73
+#: src/gtr-file-dialogs.c:69
 msgid "All files"
 msgstr "Semua berkas"
 
-#: src/gtr-filter-selection.ui:61 src/gtr-filter-selection.ui:70
-#: src/gtr-lang-button.c:65
-msgid "Choose Language"
-msgstr "Pilih Bahasa"
+#: src/gtr-greeter.ui:11
+msgid "Welcome"
+msgstr "Selamat Datang"
 
-#: src/gtr-header-dialog.c:325 src/gtr-notebook.ui:133
+#: src/gtr-greeter.ui:23 src/gtr-window.c:640
+msgid "Welcome to Translation Editor"
+msgstr "Selamat Datang di Penyunting Terjemahan"
+
+#: src/gtr-greeter.ui:25
+msgid ""
+"Before start to use the application, a profile should be created, but don't "
+"worry, the app will guide you to do it in a minute."
+msgstr ""
+"Sebelum mulai menggunakan aplikasi ini, profil harus dibuat, tetapi jangan "
+"khawatir, aplikasi ini akan memandu Anda untuk melakukannya sebentar lagi."
+
+#: src/gtr-greeter.ui:41
+msgid "Create Profile"
+msgstr "Buat Profil"
+
+#: src/gtr-greeter.ui:53
+msgid "Profile"
+msgstr "Profil"
+
+#: src/gtr-greeter.ui:56 src/gtr-greeter.ui:117 src/gtr-profile-dialog.ui:53
+msgid "Profile name"
+msgstr "Nama profil"
+
+#: src/gtr-greeter.ui:57 src/gtr-profile-dialog.ui:54
+msgid "default"
+msgstr "bawaan"
+
+#: src/gtr-greeter.ui:63 src/gtr-greeter.ui:122
+msgid "Translator name"
+msgstr "Nama penerjemah"
+
+#: src/gtr-greeter.ui:69 src/gtr-greeter.ui:127
+msgid "Translator email"
+msgstr "Surel penerjemah"
+
+#: src/gtr-greeter.ui:75
+msgid "Translation team email"
+msgstr "Surel tim penerjemahan"
+
+#: src/gtr-greeter.ui:98 src/gtr-greeter.ui:109
+msgid "Confirmation"
+msgstr "Konfirmasi"
+
+#: src/gtr-greeter.ui:132
+msgid "Team email"
+msgstr "Surel tim"
+
+#: src/gtr-greeter.ui:137
+msgid "Language name"
+msgstr "Nama bahasa"
+
+#: src/gtr-greeter.ui:142 src/gtr-languages-fetcher.ui:21
+msgid "Language code"
+msgstr "Kode bahasa"
+
+#: src/gtr-greeter.ui:147 src/gtr-languages-fetcher.ui:41
+msgid "Character set"
+msgstr "Gugus karakter"
+
+#: src/gtr-greeter.ui:152 src/gtr-languages-fetcher.ui:61
+msgid "Transfer encoding"
+msgstr "Pengkodean transfer"
+
+#: src/gtr-greeter.ui:157
+msgid "Plural form"
+msgstr "Bentuk jamak"
+
+#: src/gtr-greeter.ui:192
+msgid "Next"
+msgstr "Selanjutnya"
+
+#: src/gtr-header-dialog.c:346 src/gtr-tab.ui:254
 msgid "Edit Header"
 msgstr "Sunting Header"
 
-#: src/gtr-header-dialog.ui:71
-msgid "Use my options to complete the following entries:"
-msgstr "Gunakan opsiku untuk melengkapi masukan berikut:"
-
-#: src/gtr-header-dialog.ui:95
-msgid "Translator’s _name:"
-msgstr "_Nama penerjemah:"
-
-#: src/gtr-header-dialog.ui:109
-msgid "Translator’s _email:"
-msgstr "Sur_el penerjemah:"
-
-#: src/gtr-header-dialog.ui:123
-msgid "_Language:"
-msgstr "Bahasa:"
-
-#: src/gtr-header-dialog.ui:136
-msgid "Language _code:"
-msgstr "Kode bahasa:"
-
-#: src/gtr-header-dialog.ui:149
-msgid "Language _Team email:"
-msgstr "Surel _Tim Bahasa:"
-
-#: src/gtr-header-dialog.ui:162
-msgid "Char_set:"
-msgstr "Gugu_s karakter:"
-
-#: src/gtr-header-dialog.ui:175
-msgid "Enc_oding:"
-msgstr "Enc_oding:"
-
-#: src/gtr-header-dialog.ui:273
+#: src/gtr-header-dialog.ui:11
 msgid "Translator and Language"
 msgstr "Penerjemah dan Bahasa"
 
-#: src/gtr-header-dialog.ui:299
-msgid "Project Id _version:"
-msgstr "_Versi proyek:"
+#: src/gtr-header-dialog.ui:15 src/gtr-header-dialog.ui:83
+#: src/gtr-header-dialog.ui:138 src/gtr-preferences-dialog.ui:14
+msgid "General"
+msgstr "Umum"
 
-#: src/gtr-header-dialog.ui:312
-msgid "Pot _file creation date:"
-msgstr "Tanggal pembuatan berkas Pot:"
+#: src/gtr-header-dialog.ui:18
+msgid "Use my options to complete the following entries"
+msgstr "Gunakan opsiku untuk melengkapi masukan berikut"
 
-#: src/gtr-header-dialog.ui:326
-msgid "Po file _revision date:"
-msgstr "Tanggal _revisi berkas po:"
+#: src/gtr-header-dialog.ui:31
+msgid "Translator’s _name"
+msgstr "_Nama penerjemah"
 
-#: src/gtr-header-dialog.ui:340
-msgid "Report message _bugs to:"
-msgstr "Laporkan _masalah pesan ke:"
+#: src/gtr-header-dialog.ui:37
+msgid "Translator’s _email"
+msgstr "Sur_el penerjemah"
 
-#: src/gtr-header-dialog.ui:409
-msgid "Project"
-msgstr "Proyek"
-
-#: src/gtr-header-dialog.ui:442
-msgid "Comment"
-msgstr "Komentar"
-
-#: src/gtr-header-dialog.ui:469
-msgid "DL Team:"
-msgstr "Tim DL:"
-
-#: src/gtr-header-dialog.ui:482
-msgid "DL Module:"
-msgstr "Modul DL:"
-
-#: src/gtr-header-dialog.ui:496
-msgid "DL Branch:"
-msgstr "Cabang DL:"
-
-#: src/gtr-header-dialog.ui:510
-msgid "DL Domain:"
-msgstr "Domain DL:"
-
-#: src/gtr-header-dialog.ui:524
-msgid "DL State:"
-msgstr "Status DL:"
-
-#: src/gtr-header-dialog.ui:602
-msgid "Damned Lies Info"
-msgstr "Info Damned Lies"
-
-#: src/gtr-io-error-info-bar.c:155 src/gtr-jump-dialog.c:88
-#: src/gtr-profile-dialog.c:173 src/gtr-profile-dialog.c:178
-#: src/translation-memory/gtr-translation-memory-dialog.c:104
-msgid "_OK"
-msgstr "_OK"
-
-#: src/gtr-jump-dialog.c:92
-msgid "Go to Message"
-msgstr "Pergi ke Pesan"
-
-#: src/gtr-jump-dialog.ui:33
-msgid "Enter message number:"
-msgstr "Masukkan nomor pesan:"
-
-#: src/gtr-languages-fetcher.ui:49
+#: src/gtr-header-dialog.ui:43
 msgid "_Language"
 msgstr "_Bahasa"
 
-#: src/gtr-languages-fetcher.ui:63
+#: src/gtr-header-dialog.ui:49
 msgid "Language _code"
 msgstr "_Kode bahasa"
 
-#: src/gtr-languages-fetcher.ui:77
-msgid "Character _set"
+#: src/gtr-header-dialog.ui:55
+msgid "Language _Team email"
+msgstr "Surel _Tim Bahasa"
+
+#: src/gtr-header-dialog.ui:61
+msgid "Char_set"
 msgstr "Gugu_s karakter"
 
-#: src/gtr-languages-fetcher.ui:91
-msgid "Transfer en_coding"
-msgstr "Peng_kodean transfer"
+#: src/gtr-header-dialog.ui:67
+msgid "Enc_oding"
+msgstr "Pengk_odean"
 
-#: src/gtr-languages-fetcher.ui:105
-msgid "_Plural forms"
-msgstr "Bentuk _jamak"
+#: src/gtr-header-dialog.ui:79
+msgid "Project"
+msgstr "Proyek"
 
-#: src/gtr-languages-fetcher.ui:203
-msgid "_Edit options manually"
-msgstr "Sunting opsi s_ecara manual"
+#: src/gtr-header-dialog.ui:86
+msgid "Project Id _version"
+msgstr "_Versi proyek"
 
-#: src/gtr-message-table.c:234
+#: src/gtr-header-dialog.ui:92
+msgid "Pot _file creation date"
+msgstr "Tanggal pembuatan berkas _Pot"
+
+#: src/gtr-header-dialog.ui:98
+msgid "Po file _revision date"
+msgstr "Tanggal _revisi berkas po"
+
+#: src/gtr-header-dialog.ui:104
+msgid "Report message _bugs to"
+msgstr "Laporkan _masalah pesan ke"
+
+#: src/gtr-header-dialog.ui:116
+msgid "Comment"
+msgstr "Komentar"
+
+#: src/gtr-header-dialog.ui:134
+msgid "Damned Lies Info"
+msgstr "Info Damned Lies"
+
+#: src/gtr-header-dialog.ui:165
+msgid "State"
+msgstr "Status"
+
+#: src/gtr-languages-fetcher.ui:5 src/gtr-languages-fetcher.ui:8
+msgid "Language"
+msgstr "Bahasa"
+
+#: src/gtr-languages-fetcher.ui:18
+msgid "Edit options manually"
+msgstr "Sunting opsi secara manual"
+
+#: src/gtr-languages-fetcher.ui:28
+msgid "Choose language code"
+msgstr "Pilih kode bahasa"
+
+#: src/gtr-languages-fetcher.ui:81
+msgid "Plural forms"
+msgstr "Bentuk jamak"
+
+#: src/gtr-languages-fetcher.ui:88
+msgid "Choose plural forms"
+msgstr "Pilih bentuk jamak"
+
+#: src/gtr-message-table.ui:37
 msgid "Original Message"
 msgstr "Teks Asli"
 
-#: src/gtr-message-table.c:253
+#: src/gtr-message-table.ui:46
 msgid "Translated Message"
 msgstr "Teks Terjemahan"
-
-#: src/gtr-notebook.ui:26
-msgid "Order messages by"
-msgstr "Urutkan pesan berdasarkan"
-
-#: src/gtr-notebook.ui:48
-msgid "Appearance in the original file"
-msgstr "Kemunculan dalam berkas asli"
-
-#: src/gtr-notebook.ui:57
-msgid "Message status"
-msgstr "Status pesan"
-
-#: src/gtr-notebook.ui:67
-msgid "Original message"
-msgstr "Pesan asli"
-
-#: src/gtr-notebook.ui:77
-msgid "Translated message"
-msgstr "Pesan terjemahan"
-
-#: src/gtr-notebook.ui:105
-msgid "Find"
-msgstr "Cari"
-
-#: src/gtr-notebook.ui:114
-msgid "Find and Replace"
-msgstr "Cari dan Ganti"
-
-#: src/gtr-notebook.ui:123 src/gtr-projects.ui:147
-msgid "Build Translation Memory"
-msgstr "Bangun Ingatan Terjemahan"
-
-#: src/gtr-notebook.ui:195 src/gtr-preferences-dialog.c:665
-#: src/gtr-projects.ui:202
-msgid "Help"
-msgstr "Bantuan"
-
-#: src/gtr-notebook.ui:227
-msgid "Open a new file (<Ctrl>o)"
-msgstr "Buka berkas baru (<Ctrl>o)"
-
-#: src/gtr-notebook.ui:241
-msgid "Open from Damned Lies (<Ctrl>d)"
-msgstr "Buka dari Damned Lies (<Ctrl>d)"
-
-#: src/gtr-notebook.ui:272
-msgid "Undo (<Ctrl>z)"
-msgstr "Urungkan (<Ctrl>z)"
-
-#: src/gtr-notebook.ui:288
-msgid "Redo (<Ctrl><Shift>z)"
-msgstr "Jadi lagi (<Ctrl><Shift>z)"
-
-#: src/gtr-notebook.ui:318
-msgid "Previous message without translation (<Alt><Page Up>)"
-msgstr "Pesan sebelumnya tanpa terjemahan (<Alt><Page Up>)"
-
-#: src/gtr-notebook.ui:334
-msgid "Next message without translation (<Alt><Page Down>)"
-msgstr "Pesan berikutnya tanpa terjemahan (<Alt><Page Down>)"
-
-#: src/gtr-notebook.ui:361
-msgid "Toggle fuzzy state (<Ctrl>+u)"
-msgstr "Jungkitkan keadaan ragu (<Ctrl>u)"
-
-#: src/gtr-notebook.ui:379
-msgid "Sort messages by"
-msgstr "Mengurutkan pesan menurut"
-
-#: src/gtr-notebook.ui:389
-msgid "Order by menu"
-msgstr "Urutkan berdasarkan menu"
-
-#: src/gtr-notebook.ui:423
-msgid "Find (<Ctrl><f>)"
-msgstr "Cari (<Ctrl><f>)"
-
-#: src/gtr-notebook.ui:453
-msgid "Save"
-msgstr "Simpan"
-
-#: src/gtr-notebook.ui:457
-msgid "Save the current file (<Ctrl>s)"
-msgstr "Simpan berkas saat ini (<Ctrl>s)"
-
-#: src/gtr-notebook.ui:466
-msgid "Save as (<Ctrl><Shift>s)"
-msgstr "Simpan sebagai (<Ctrl><Shift>s)"
-
-#: src/gtr-notebook.ui:482
-msgid "Upload file (<Ctrl>b)"
-msgstr "Unggah berkas (<Ctrl>b)"
 
 #: src/gtr-po.c:509
 #, c-format
@@ -853,139 +693,139 @@ msgstr "Ada galat menulis berkas PO: %s"
 msgid "There was an error writing the PO file: %s"
 msgstr "Ada galat menulis berkas PO: %s"
 
-#: src/gtr-preferences-dialog.c:436
+#: src/gtr-preferences-dialog.c:268
+msgid "Edit"
+msgstr "Edit"
+
+#: src/gtr-preferences-dialog.c:271
+msgid "Delete"
+msgstr "Hapus"
+
+#: src/gtr-preferences-dialog.c:433
 msgid "Impossible to remove the active profile"
 msgstr "Tak mungkin menghapus profil aktif"
 
-#: src/gtr-preferences-dialog.c:442
+#: src/gtr-preferences-dialog.c:434
 msgid "Another profile should be selected as active before"
 msgstr "Profil lain mesti dipilih sebagai aktif sebelumnya"
 
-#: src/gtr-preferences-dialog.c:455
+#: src/gtr-preferences-dialog.c:438
+msgid "_Ok"
+msgstr "_Ok"
+
+#: src/gtr-preferences-dialog.c:448
 msgid "Are you sure you want to delete this profile?"
 msgstr "Yakin ingin menghapus profil ini?"
 
-#: src/gtr-preferences-dialog.c:463
+#: src/gtr-preferences-dialog.c:454
 msgid "_Delete"
 msgstr "_Hapus"
 
-#: src/gtr-preferences-dialog.c:594
-msgid "Active"
-msgstr "Aktif"
+#: src/gtr-preferences-dialog.ui:10
+msgid "F_iles"
+msgstr "B_erkas"
 
-#: src/gtr-preferences-dialog.c:667 src/gtr-preferences-dialog.ui:52
-msgid "Translation Editor Preferences"
-msgstr "Preferensi Penyunting Terjemahan"
-
-#: src/gtr-preferences-dialog.ui:125
-msgid "General"
-msgstr "Umum"
-
-#: src/gtr-preferences-dialog.ui:144
+#: src/gtr-preferences-dialog.ui:17
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "Peringatkan bila berkas po memuat terjemahan ragu"
 
-#: src/gtr-preferences-dialog.ui:168
+#: src/gtr-preferences-dialog.ui:28
 msgid "_Remove obsolete entries on save"
 msgstr "Hapus ent_ri usang saat menyimpan"
 
-#: src/gtr-preferences-dialog.ui:190
+#: src/gtr-preferences-dialog.ui:41
 msgid "Autosave"
 msgstr "Simpan sendiri"
 
-#: src/gtr-preferences-dialog.ui:214
+#: src/gtr-preferences-dialog.ui:44
+msgid "_Activate auto save"
+msgstr "_Aktifkan penyimpanan otomatis"
+
+#: src/gtr-preferences-dialog.ui:55
+msgid "Autosave _interval"
+msgstr "Selang waktu peny_impanan otomatis"
+
+#: src/gtr-preferences-dialog.ui:75
 msgid "Create a _backup copy of files before saving"
 msgstr "_Buat salinan cadangan dari berkas sebelum menyimpan"
 
-#: src/gtr-preferences-dialog.ui:236
-msgid "_Autosave files every"
-msgstr "Simp_an sendiri berkas setiap"
+#: src/gtr-preferences-dialog.ui:93
+msgid "_Editor"
+msgstr "P_enyunting"
 
-#: src/gtr-preferences-dialog.ui:260
-msgid "_minutes"
-msgstr "_menit"
-
-#: src/gtr-preferences-dialog.ui:318
-msgid "Files"
-msgstr "Berkas"
-
-#: src/gtr-preferences-dialog.ui:345
+#: src/gtr-preferences-dialog.ui:97
 msgid "Text Display"
 msgstr "Tampilan Teks"
 
-#: src/gtr-preferences-dialog.ui:368
+#: src/gtr-preferences-dialog.ui:100
 msgid "_Highlight message syntax"
 msgstr "Tandai sintaks pesan"
 
-#: src/gtr-preferences-dialog.ui:384
+#: src/gtr-preferences-dialog.ui:111
 msgid "Make _whitespace visible"
 msgstr "Buat _whitespace nampak"
 
-#: src/gtr-preferences-dialog.ui:409
-msgid "Font:"
-msgstr "Fonta:"
+#: src/gtr-preferences-dialog.ui:122
+msgid "_Font"
+msgstr "Fonta"
 
-#: src/gtr-preferences-dialog.ui:421
-msgid "Choose the editor font"
-msgstr "Pilih fonta penyunting"
-
-#: src/gtr-preferences-dialog.ui:463
+#: src/gtr-preferences-dialog.ui:140
 msgid "Contents"
 msgstr "Isi"
 
-#: src/gtr-preferences-dialog.ui:486
+#: src/gtr-preferences-dialog.ui:143
 msgid "_Remove fuzzy status if message is changed"
 msgstr "Hapus status _ragu bila pesan diubah"
 
-#: src/gtr-preferences-dialog.ui:502
+#: src/gtr-preferences-dialog.ui:156
 msgid "Check _spelling"
 msgstr "Periksa ejaan"
 
-#: src/gtr-preferences-dialog.ui:541
-msgid "Editor"
-msgstr "Penyunting"
+#: src/gtr-preferences-dialog.ui:174
+msgid "_Profiles"
+msgstr "_Profil"
 
-#: src/gtr-preferences-dialog.ui:640
-msgid "Edit Profile"
-msgstr "Sunting Profil"
-
-#: src/gtr-preferences-dialog.ui:677
+#: src/gtr-preferences-dialog.ui:178
 msgid "Profiles"
 msgstr "Profil"
 
-#: src/gtr-profile-dialog.c:74
+#: src/gtr-profile-dialog.c:119
 msgid "Translation Editor Profile"
 msgstr "Profil Penyunting Terjemahan"
 
-#: src/gtr-profile-dialog.ui:71
-msgid "_Name"
-msgstr "_Nama"
+#: src/gtr-profile-dialog.ui:7 src/gtr-upload-dialog.ui:7
+msgid "Upload to Damned Lies"
+msgstr "Unggah ke Damned Lies"
 
-#: src/gtr-profile-dialog.ui:99
+#: src/gtr-profile-dialog.ui:22
+msgid "OK"
+msgstr "OK"
+
+#: src/gtr-profile-dialog.ui:48
 msgid "Profile Information"
 msgstr "Informasi Profil"
 
-#: src/gtr-profile-dialog.ui:116
+#: src/gtr-profile-dialog.ui:62
 msgid "Translator Information"
 msgstr "Informasi Penerjemah"
 
-#: src/gtr-profile-dialog.ui:134
-msgid "N_ame"
-msgstr "N_ama"
+#: src/gtr-profile-dialog.ui:67
+msgid "Translator _name"
+msgstr "_Nama penerjemah"
 
-#: src/gtr-profile-dialog.ui:149
-msgid "_Email"
-msgstr "Sur_el"
+#: src/gtr-profile-dialog.ui:73
+msgid "Translator _email"
+msgstr "Sur_el penerjemah"
 
-#: src/gtr-profile-dialog.ui:163
-msgid "_Team email"
-msgstr "Surel _tim"
+#: src/gtr-profile-dialog.ui:79
+msgid "Translation _team email"
+msgstr "Surel _tim penerjemahan"
 
-#: src/gtr-profile-dialog.ui:177
-msgid "_DL auth token"
-msgstr "Token auth _DL"
+#: src/gtr-profile-dialog.ui:87
+msgid "Damned Lies Integration"
+msgstr "Integrasi Damned Lies"
 
-#: src/gtr-profile-dialog.ui:178
+#: src/gtr-profile-dialog.ui:88
 msgid ""
 "GNOME Damned Lies integration token, go to your profile in https://l10n."
 "gnome.org/ to get it"
@@ -993,141 +833,235 @@ msgstr ""
 "Token integrasi GNOME Damned Lies, buka profil Anda https://l10n.gnome.org/ "
 "untuk mendapatkannya"
 
-#: src/gtr-profile-dialog.ui:240
-msgid "Language Settings"
-msgstr "Pengaturan Bahasa"
+#: src/gtr-profile-dialog.ui:93
+msgid "_Damned Lies auth token"
+msgstr "Token auth _Damned Lies"
 
-#: src/gtr-projects.ui:35
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:250
+msgid "Build Translation Memory"
+msgstr "Bangun Ingatan Terjemahan"
+
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:274
+msgid "Help"
+msgstr "Bantuan"
+
+#: src/gtr-projects.ui:39
 msgid "Open a new .po file or drag & drop here"
 msgstr "Buka sebuah berkas .po baru atau seret & jatuhkan ke sini"
 
-#: src/gtr-projects.ui:51
-msgid "Select a PO file"
-msgstr "Pilih sebuah berkas PO"
-
-#: src/gtr-projects.ui:68
+#: src/gtr-projects.ui:55
 msgid "Load from DL…"
 msgstr "Muat dari DL…"
 
-#: src/gtr-search-bar.c:414 src/gtr-search-bar.ui:212
-msgid "Case sensitive"
-msgstr "Peka huruf besar kecil"
+#: src/gtr-search-bar.ui:20
+msgid "Search"
+msgstr "Cari"
 
-#: src/gtr-search-bar.c:419 src/gtr-search-bar.ui:226
-msgid "Match whole word only"
-msgstr "Hanya cocok seluruh kata"
-
-#: src/gtr-search-bar.c:424 src/gtr-search-bar.ui:240
-msgid "Wrap around"
-msgstr "Melipat"
-
-#: src/gtr-search-bar.c:429 src/gtr-search-bar.ui:254
-msgid "Original text"
-msgstr "Teks asli"
-
-#: src/gtr-search-bar.c:434 src/gtr-search-bar.ui:268
-msgid "Translated text"
-msgstr "Teks terjemahan"
-
-#: src/gtr-search-bar.ui:121
-msgid "Replace"
-msgstr "Ganti"
-
-#: src/gtr-search-bar.ui:133
-msgid "Replace All"
-msgstr "Ganti Semua"
-
-#: src/gtr-search-bar.ui:153
+#: src/gtr-search-bar.ui:57
 msgid "Switch between Search and Search-and-Replace"
 msgstr "Bertukar antara Cari dan Cari-dan-Ganti"
 
-#: src/gtr-search-bar.ui:173
+#: src/gtr-search-bar.ui:63
 msgid "Show or hide search options such as case sensitivity"
 msgstr ""
 "Tampilkan atau sembunyikan opsi pencarian seperti misalnya peka huruf besar "
 "kecil"
 
-#: src/gtr-tab-label.c:280
-msgid "Close document"
-msgstr "Tutup dokumen"
+#: src/gtr-search-bar.ui:90 src/gtr-search-bar.ui:99
+msgid "Replace"
+msgstr "Ganti"
 
-#: src/gtr-tab.c:419
+#: src/gtr-search-bar.ui:108
+msgid "Replace All"
+msgstr "Ganti Semua"
+
+#: src/gtr-search-bar.ui:130
+msgid "Case sensitive"
+msgstr "Peka huruf besar kecil"
+
+#: src/gtr-search-bar.ui:140
+msgid "Match whole word only"
+msgstr "Hanya cocok seluruh kata"
+
+#: src/gtr-search-bar.ui:150
+msgid "Wrap around"
+msgstr "Melipat"
+
+#: src/gtr-search-bar.ui:160
+msgid "Original text"
+msgstr "Teks asli"
+
+#: src/gtr-search-bar.ui:170
+msgid "Translated text"
+msgstr "Teks terjemahan"
+
+#: src/gtr-tab.c:299
+#, c-format
+msgid "File is not consistent with profile %s"
+msgstr "Berkas tidak konsisten dengan profil %s"
+
+#: src/gtr-tab.c:301
+#, c-format
+msgid ""
+"File nplurals: %d, is different from profile nplurals %d.\n"
+"Kindly go to preferences and select a profile with consistent nplurals "
+"values as this file %s."
+msgstr ""
+"Berkas nplurals: %d, berbeda dengan profil nplurals %d.\n"
+"Silakan masuk ke preferensi dan pilih profil dengan nilai nplurals yang "
+"konsisten sebagai berkas %s ini."
+
+#: src/gtr-tab.c:421
 msgid "There is an error in the message:"
 msgstr "Ada galat dalam pesan:"
 
-#: src/gtr-tab.c:632 src/gtr-tab.c:767
+#: src/gtr-tab.c:630 src/gtr-tab.c:763
 msgid "fuzzy"
 msgstr "ragu"
 
-#: src/gtr-tab.c:797
+#: src/gtr-tab.c:792
 #, c-format
 msgid "Plural %d"
 msgstr "Jamak %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1425
+#: src/gtr-tab.c:1517
 msgid "Path:"
 msgstr "Path:"
 
-#: src/gtr-tab.c:2090
+#: src/gtr-tab.c:2149
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Diterjemahkan: %0.2f%%"
 
-#: src/gtr-tab.c:2091
+#: src/gtr-tab.c:2150
 #, c-format
 msgid "Translated: %d"
 msgstr "Diterjemahkan: %d"
 
-#: src/gtr-tab.c:2092
+#: src/gtr-tab.c:2151
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Belum diterjemahkan: %d"
 
-#: src/gtr-tab.c:2093
+#: src/gtr-tab.c:2152
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Ragu: %d"
 
-#: src/gtr-tab.ui:74
+#. <property name="ypad">5</property>
+#: src/gtr-tab.ui:54
 msgid "_Original Message"
 msgstr "Teks _Asli"
 
-#: src/gtr-tab.ui:166
+#. <property name="ypad">5</property>
+#: src/gtr-tab.ui:114
 msgid "Translate_d Text"
 msgstr "_Teks Terjemahan"
 
-#: src/gtr-upload-dialog.c:61
-msgid "_Upload"
-msgstr "_Unggah"
+#: src/gtr-tab.ui:203
+msgid "Order messages by"
+msgstr "Urutkan pesan berdasarkan"
 
-#: src/gtr-upload-dialog.c:63
-msgid "Upload to Damned Lies"
-msgstr "Unggah ke Damned Lies"
+#: src/gtr-tab.ui:214
+msgid "Appearance in the original file"
+msgstr "Kemunculan dalam berkas asli"
 
-#: src/gtr-upload-dialog.c:137
+#: src/gtr-tab.ui:219
+msgid "Message status"
+msgstr "Status pesan"
+
+#: src/gtr-tab.ui:225
+msgid "Original message"
+msgstr "Pesan asli"
+
+#: src/gtr-tab.ui:231
+msgid "Translated message"
+msgstr "Pesan terjemahan"
+
+#: src/gtr-tab.ui:242 src/gtr-tab.ui:384
+msgid "Find"
+msgstr "Cari"
+
+#: src/gtr-tab.ui:246
+msgid "Find and Replace"
+msgstr "Cari dan Ganti"
+
+#: src/gtr-tab.ui:290
+msgid "Open a New File"
+msgstr "Buka Berkas Baru"
+
+#: src/gtr-tab.ui:297
+msgid "Open from Damned Lies"
+msgstr "Buka dari Damned Lies"
+
+#: src/gtr-tab.ui:312
+msgid "Undo"
+msgstr "Tak Jadi"
+
+#: src/gtr-tab.ui:320
+msgid "Redo"
+msgstr "Jadi Lagi"
+
+#: src/gtr-tab.ui:335
+msgid "Previous message without translation (<Alt><Page Up>)"
+msgstr "Pesan sebelumnya tanpa terjemahan (<Alt><Page Up>)"
+
+#: src/gtr-tab.ui:343
+msgid "Next message without translation (<Alt><Page Down>)"
+msgstr "Pesan berikutnya tanpa terjemahan (<Alt><Page Down>)"
+
+#: src/gtr-tab.ui:358
+msgid "Toggle Fuzzy State"
+msgstr "Jungkitkan Keadaan Ragu"
+
+#: src/gtr-tab.ui:367
+msgid "Sort messages by"
+msgstr "Mengurutkan pesan menurut"
+
+#: src/gtr-tab.ui:399
+msgid "Upload File"
+msgstr "Unggah Berkas"
+
+#: src/gtr-tab.ui:407
+msgid "Save as"
+msgstr "Simpan sebagai"
+
+#: src/gtr-tab.ui:415
+msgid "Save Current File"
+msgstr "Simpan Berkas Kini"
+
+#: src/gtr-upload-dialog.c:153
 msgid "Uploading..."
 msgstr "Mengunggah..."
 
-#: src/gtr-upload-dialog.c:143
+#: src/gtr-upload-dialog.c:159 src/gtr-upload-dialog.ui:22
 msgid "Upload"
 msgstr "Unggah"
 
-#: src/gtr-upload-dialog.ui:53
+#: src/gtr-upload-dialog.ui:40
 msgid "comment:"
 msgstr "komentar:"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:214
+#: src/gtr-window.c:206
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Penyunting Terjemahan"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:220
+#: src/gtr-window.c:212
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Penyunting Terjemahan"
+
+#: src/gtr-window.c:608
+msgid "Select a Po file"
+msgstr "Pilih sebuah berkas Po"
+
+#: src/gtr-window.c:627
+msgid "Load from Damned Lies"
+msgstr "Muat dari Damned Lies"
 
 #: src/help-overlay.ui:13
 msgctxt "shortcut window group"
@@ -1144,142 +1078,142 @@ msgctxt "shortcut window"
 msgid "Save the current file"
 msgstr "Menyimpan berkas ini"
 
-#: src/help-overlay.ui:32 src/help-overlay.ui:39
+#: src/help-overlay.ui:32
 msgctxt "shortcut window"
 msgid "Save the current file as"
 msgstr "Simpan berkas saat ini sebagai"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Download from DL"
 msgstr "Unduh dari DL"
 
-#: src/help-overlay.ui:53
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Upload to DL"
 msgstr "Unggah ke DL"
 
-#: src/help-overlay.ui:60
+#: src/help-overlay.ui:53
 msgctxt "shortcut window"
 msgid "Preferences"
 msgstr "Preferensi"
 
-#: src/help-overlay.ui:67
+#: src/help-overlay.ui:60
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Pintasan Papan Tik"
 
-#: src/help-overlay.ui:74
+#: src/help-overlay.ui:67
 msgctxt "shortcut window"
 msgid "Help"
 msgstr "Bantuan"
 
-#: src/help-overlay.ui:81
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Keluar"
 
-#: src/help-overlay.ui:90
+#: src/help-overlay.ui:83
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "Sunting"
 
-#: src/help-overlay.ui:95
+#: src/help-overlay.ui:88
 msgctxt "shortcut window"
 msgid "Undo"
 msgstr "Tak jadi"
 
-#: src/help-overlay.ui:102
+#: src/help-overlay.ui:95
 msgctxt "shortcut window"
 msgid "Redo"
 msgstr "Jadi Lagi"
 
-#: src/help-overlay.ui:109
+#: src/help-overlay.ui:102
 msgctxt "shortcut window"
 msgid "Clear translation"
 msgstr "Kosongkan terjemahan"
 
-#: src/help-overlay.ui:116
+#: src/help-overlay.ui:109
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Tandai/hapus tanda sebagai ragu"
 
-#: src/help-overlay.ui:123
+#: src/help-overlay.ui:116
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "Salin teks asli ke terjemahan"
 
-#: src/help-overlay.ui:132
+#: src/help-overlay.ui:125
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Navigasi"
 
-#: src/help-overlay.ui:137
+#: src/help-overlay.ui:130
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Ke pesan sebelumnya"
 
-#: src/help-overlay.ui:144
+#: src/help-overlay.ui:137
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Ke pesan berikutnya"
 
-#: src/help-overlay.ui:151
+#: src/help-overlay.ui:144
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Ke pesan sebelumnya yang belum diterjemahkan"
 
-#: src/help-overlay.ui:158
+#: src/help-overlay.ui:151
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Ke pesan selanjutnya yang belum diterjemahkan"
 
-#: src/help-overlay.ui:167
+#: src/help-overlay.ui:160
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Ingatan Terjemahan"
 
-#: src/help-overlay.ui:172
+#: src/help-overlay.ui:165
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Bangun ingatan terjemahan"
 
-#: src/help-overlay.ui:179
+#: src/help-overlay.ui:172
 msgctxt "shortcut window"
 msgid "Copy below"
 msgstr "Salin di bawah"
 
-#: src/help-overlay.ui:186
+#: src/help-overlay.ui:179
 msgctxt "shortcut window"
 msgid "Use 1st...9th suggestion"
 msgstr "Gunakan saran ke-1...9"
 
-#: src/help-overlay.ui:195
+#: src/help-overlay.ui:188
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Cari & Ganti"
 
-#: src/help-overlay.ui:200
+#: src/help-overlay.ui:193
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Cari"
 
-#: src/help-overlay.ui:207
+#: src/help-overlay.ui:200
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Cari & Ganti"
 
-#: src/help-overlay.ui:214
+#: src/help-overlay.ui:207
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "Pencarian maju"
 
-#: src/help-overlay.ui:221
+#: src/help-overlay.ui:214
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Pencarian mundur"
 
-#: src/help-overlay.ui:228
+#: src/help-overlay.ui:221
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Sembunyikan bilah cari dan ganti"
@@ -1298,53 +1232,29 @@ msgstr ""
 "Jalankan '%s·--help' untuk melihat daftar lengkap dari pilihan perintah "
 "baris yang tersedia.\n"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:101
+#: src/translation-memory/gtr-translation-memory-dialog.c:76
 msgid "Select PO directory"
 msgstr "Pilih direktori PO"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:309
+#: src/translation-memory/gtr-translation-memory-dialog.ui:7
 msgid "Translation Editor Memory Manager"
 msgstr "Manajer Ingatan Penyunting Terjemahan"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:66
-msgid "Database:"
-msgstr "Basis data:"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:38
+msgid "Database"
+msgstr "Basis data"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:109
-msgid "Select the directory which contains PO files:"
-msgstr "Pilih direktori yang memuat berkas PO:"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:43
+msgid "Select the directory which contains PO files"
+msgstr "Pilih direktori yang memuat berkas PO"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:160
+#: src/translation-memory/gtr-translation-memory-dialog.ui:55
+msgid "Use only files with this name"
+msgstr "Gunakan hanya berkas dengan nama ini"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:74
 msgid "Add to Database"
 msgstr "Tambahkan ke Basis Data"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:215
-msgid "Configuration:"
-msgstr "Konfigurasi:"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:259
-msgid "Use only files with this name:"
-msgstr "Gunakan hanya berkas dengan nama ini:"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:255
-msgid "_Use this translation"
-msgstr "G_unakan terjemahan ini"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:260
-msgid "_Remove"
-msgstr "_Hapus"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:371
-msgid "Shortcut"
-msgstr "Tombol Pintas"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:380
-msgid "Level"
-msgstr "Tingkat"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:389
-msgid "String"
-msgstr "String"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
 msgid "PO directory"
@@ -1398,6 +1308,207 @@ msgid ""
 msgstr ""
 "Perbedaan panjang maksimum antar pesan yang ditampilkan sebagai cocok oleh "
 "ingatan terjemahan."
+
+#~ msgid "Color scheme"
+#~ msgstr "Skema warna"
+
+#~ msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
+#~ msgstr ""
+#~ "Nama dari skema warna gtksourceview yang dipakai untuk penyorotan sintaks."
+
+#~ msgid "_Close"
+#~ msgstr "_Tutup"
+
+#~ msgid "Current Maintainers"
+#~ msgstr "Para Pemelihara Kini"
+
+#~ msgid "Previous Developers"
+#~ msgstr "Para Pengembang Sebelumnya"
+
+#~ msgid "Contributors"
+#~ msgstr "Para Kontributor"
+
+#~ msgid "Translation Editor Web Site"
+#~ msgstr "Situs Web Penyunting Terjemahan"
+
+#, c-format
+#~ msgid ""
+#~ "Do you want to save changes to this file: <span weight=\"bold\" "
+#~ "size=\"large\">%s</span>?"
+#~ msgstr ""
+#~ "Apakah Anda ingin menyimpan perubahan pada berkas ini: <span "
+#~ "weight=\"bold\" size=\"large\">%s</span>?"
+
+#~ msgid ""
+#~ "If you don't save, all your unsaved changes will be permanently lost."
+#~ msgstr ""
+#~ "Jika tidak disimpan, semua perubahan yang belum disimpan akan hilang "
+#~ "secara permanen."
+
+#, c-format
+#~ msgid ""
+#~ "Profile name: %s\n"
+#~ "Translator name: %s\n"
+#~ "Translator email: %s\n"
+#~ "Language name: %s\n"
+#~ "Team email: %s\n"
+#~ "Language code: %s\n"
+#~ "Character set: %s\n"
+#~ "Transfer encoding: %s\n"
+#~ "Plural form: %s\n"
+#~ msgstr ""
+#~ "Nama profil: %s\n"
+#~ "Nama penerjemah: %s\n"
+#~ "Email penerjemah: %s\n"
+#~ "Nama bahasa: %s\n"
+#~ "Email tim: %s\n"
+#~ "Kode bahasa: %s\n"
+#~ "Gugus karakter: %s\n"
+#~ "Encoding transfer: %s\n"
+#~ "Bentuk jamak: %s\n"
+
+#~ msgid "This assistant will help you to create the main profile."
+#~ msgstr "Asisten ini akan membantu Anda membuat profil utama."
+
+#~ msgid "Assistant"
+#~ msgstr "Pembantu"
+
+#~ msgid "Question"
+#~ msgstr "Pertanyaan"
+
+#~ msgid "Docum_ents with unsaved changes:"
+#~ msgstr "Dokum_en dengan perubahan yang belum disimpan:"
+
+#~ msgid "S_elect the documents you want to save:"
+#~ msgstr "Pilih dokum_en yang ingin Anda simpan:"
+
+#~ msgid "Saving has been disabled by the system administrator."
+#~ msgstr "Penyimpanan telah dimatikan oleh administrator sistem."
+
+#~ msgid "If you don’t save, all your changes will be permanently lost."
+#~ msgstr "Jika tidak disimpan, seluruh perubahan yang Anda buat akan hilang."
+
+#~ msgid "Notes:"
+#~ msgstr "Catatan:"
+
+#~ msgid "Add Note"
+#~ msgstr "Tambah Catatan"
+
+#~ msgid "Context:"
+#~ msgstr "Context:"
+
+#~ msgid "Format:"
+#~ msgstr "Format:"
+
+#, c-format
+#~ msgid "The current state is: %s"
+#~ msgstr "Status saat ini adalah: %s"
+
+#~ msgid "Select team, module, branch and domain to get the translation file."
+#~ msgstr ""
+#~ "Pilih tim, modul, cabang, dan domain untuk mendapatkan berkas terjemahan."
+
+#~ msgid "Quit"
+#~ msgstr "Keluar"
+
+#~ msgid "_Open"
+#~ msgstr "_Buka"
+
+#~ msgid "_Language:"
+#~ msgstr "Bahasa:"
+
+#~ msgid "Language _code:"
+#~ msgstr "Kode bahasa:"
+
+#~ msgid "DL Module:"
+#~ msgstr "Modul DL:"
+
+#~ msgid "Go to Message"
+#~ msgstr "Pergi ke Pesan"
+
+#~ msgid "Enter message number:"
+#~ msgstr "Masukkan nomor pesan:"
+
+#~ msgid "Open a new file (<Ctrl>o)"
+#~ msgstr "Buka berkas baru (<Ctrl>o)"
+
+#~ msgid "Open from Damned Lies (<Ctrl>d)"
+#~ msgstr "Buka dari Damned Lies (<Ctrl>d)"
+
+#~ msgid "Undo (<Ctrl>z)"
+#~ msgstr "Urungkan (<Ctrl>z)"
+
+#~ msgid "Redo (<Ctrl><Shift>z)"
+#~ msgstr "Jadi lagi (<Ctrl><Shift>z)"
+
+#~ msgid "Order by menu"
+#~ msgstr "Urutkan berdasarkan menu"
+
+#~ msgid "Find (<Ctrl><f>)"
+#~ msgstr "Cari (<Ctrl><f>)"
+
+#~ msgid "Save the current file (<Ctrl>s)"
+#~ msgstr "Simpan berkas saat ini (<Ctrl>s)"
+
+#~ msgid "Save as (<Ctrl><Shift>s)"
+#~ msgstr "Simpan sebagai (<Ctrl><Shift>s)"
+
+#~ msgid "Upload file (<Ctrl>b)"
+#~ msgstr "Unggah berkas (<Ctrl>b)"
+
+#~ msgid "Active"
+#~ msgstr "Aktif"
+
+#~ msgid "Translation Editor Preferences"
+#~ msgstr "Preferensi Penyunting Terjemahan"
+
+#~ msgid "_Autosave files every"
+#~ msgstr "Simp_an sendiri berkas setiap"
+
+#~ msgid "_minutes"
+#~ msgstr "_menit"
+
+#~ msgid "Choose the editor font"
+#~ msgstr "Pilih fonta penyunting"
+
+#~ msgid "_Name"
+#~ msgstr "_Nama"
+
+#~ msgid "N_ame"
+#~ msgstr "N_ama"
+
+#~ msgid "_Email"
+#~ msgstr "Sur_el"
+
+#~ msgid "_Team email"
+#~ msgstr "Surel _tim"
+
+#~ msgid "Language Settings"
+#~ msgstr "Pengaturan Bahasa"
+
+#~ msgid "Close document"
+#~ msgstr "Tutup dokumen"
+
+#~ msgid "_Upload"
+#~ msgstr "_Unggah"
+
+#~ msgid "Configuration:"
+#~ msgstr "Konfigurasi:"
+
+#~ msgid "_Use this translation"
+#~ msgstr "G_unakan terjemahan ini"
+
+#~ msgid "_Remove"
+#~ msgstr "_Hapus"
+
+#~ msgid "Shortcut"
+#~ msgstr "Tombol Pintas"
+
+#~ msgid "Level"
+#~ msgstr "Tingkat"
+
+#~ msgid "String"
+#~ msgstr "String"
 
 #~ msgid "About"
 #~ msgstr "Tentang"
