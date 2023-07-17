@@ -20,16 +20,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-06-02 19:02+0000\n"
-"PO-Revision-Date: 2022-06-02 16:03-0300\n"
+"POT-Creation-Date: 2023-06-19 05:22+0000\n"
+"PO-Revision-Date: 2023-07-17 11:14-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Generator: Gtranslator 45.alpha0\n"
 "X-Project-Style: gnome\n"
 "X-DL-Team: pt_BR\n"
 "X-DL-Module: gtranslator\n"
@@ -73,7 +73,7 @@ msgstr ""
 "interessantes como idioma alternativo, inserir marcas, integração com "
 "subversion e um visualizador de código fonte."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:161
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:174
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -379,20 +379,15 @@ msgstr "Nenhum estado do módulo foi encontrado."
 msgid "Error loading file: %s"
 msgstr "Erro ao carregar o arquivo: %s"
 
-#: src/gtr-dl-teams.c:571
+#: src/gtr-dl-teams.c:571 src/gtr-dl-teams.c:615
 #, c-format
-msgid "Error creating temp file: %s"
+msgid "Error creating tmp file: %s"
 msgstr "Erro ao criar o arquivo temporário: %s"
 
 #: src/gtr-dl-teams.c:586
 #, c-format
 msgid "Error writing stream: %s"
 msgstr "Erro ao escrever o fluxo: %s"
-
-#: src/gtr-dl-teams.c:615
-#, c-format
-msgid "Error creating tmp file: %s"
-msgstr "Erro ao criar o arquivo temporário: %s"
 
 #: src/gtr-dl-teams.c:624
 #, c-format
@@ -498,6 +493,14 @@ msgstr "Boas-vindas"
 #: src/gtr-greeter.ui:23 src/gtr-window.c:640
 msgid "Welcome to Translation Editor"
 msgstr "Seja bem-vindo ao Editor de tradução"
+
+#: src/gtr-greeter.ui:25
+msgid ""
+"Before start to use the application, a profile should be created, but don't "
+"worry, the app will guide you to do it in a minute."
+msgstr ""
+"Antes de iniciar o uso do aplicativo, um perfil deve ser criado. Não se "
+"preocupe, pois o aplicativo vai te guiar para fazer isso em um minuto."
 
 #: src/gtr-greeter.ui:41
 msgid "Create Profile"
@@ -760,6 +763,10 @@ msgstr "Você tem certeza de que deseja excluir esse perfil?"
 msgid "_Delete"
 msgstr "E_xcluir"
 
+#: src/gtr-preferences-dialog.ui:10
+msgid "F_iles"
+msgstr "Arqu_ivos"
+
 #: src/gtr-preferences-dialog.ui:17
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "_Avisar se o arquivo PO contiver traduções aproximadas"
@@ -783,6 +790,10 @@ msgstr "_Intervalo de salvamento automático"
 #: src/gtr-preferences-dialog.ui:75
 msgid "Create a _backup copy of files before saving"
 msgstr "Criar uma cópia de _backup dos arquivos antes de salvar"
+
+#: src/gtr-preferences-dialog.ui:93
+msgid "_Editor"
+msgstr "_Editor"
 
 #: src/gtr-preferences-dialog.ui:97
 msgid "Text Display"
@@ -812,6 +823,10 @@ msgstr "_Remover status de “aproximada” ao editar a mensagem"
 msgid "Check _spelling"
 msgstr "_Verificar ortografia"
 
+#: src/gtr-preferences-dialog.ui:174
+msgid "_Profiles"
+msgstr "_Perfis"
+
 #: src/gtr-preferences-dialog.ui:178
 msgid "Profiles"
 msgstr "Perfis"
@@ -825,8 +840,8 @@ msgid "Upload to Damned Lies"
 msgstr "Envia para o Damned Lies"
 
 #: src/gtr-profile-dialog.ui:22
-msgid "Ok"
-msgstr "Ok"
+msgid "OK"
+msgstr "OK"
 
 #: src/gtr-profile-dialog.ui:48
 msgid "Profile Information"
@@ -880,6 +895,10 @@ msgstr "Abra um novo arquivo .po ou arraste & solte aqui"
 msgid "Load from DL…"
 msgstr "Carregar do DL…"
 
+#: src/gtr-search-bar.ui:20
+msgid "Search"
+msgstr "Pesquisa"
+
 #: src/gtr-search-bar.ui:57
 msgid "Switch between Search and Search-and-Replace"
 msgstr "Alterna entre Pesquisar e Pesquisar-e-Substituir"
@@ -890,7 +909,7 @@ msgstr ""
 "Mostra ou oculta as opções de pesquisa como, p.ex., diferenciação de "
 "maiúsculo/minúsculo"
 
-#: src/gtr-search-bar.ui:99
+#: src/gtr-search-bar.ui:90 src/gtr-search-bar.ui:99
 msgid "Replace"
 msgstr "Substituir"
 
@@ -917,6 +936,22 @@ msgstr "Texto original"
 #: src/gtr-search-bar.ui:170
 msgid "Translated text"
 msgstr "Texto traduzido"
+
+#: src/gtr-tab.c:299
+#, c-format
+msgid "File is not consistent with profile %s"
+msgstr "O arquivo não está consistente com o perfil %s"
+
+#: src/gtr-tab.c:301
+#, c-format
+msgid ""
+"File nplurals: %d, is different from profile nplurals %d.\n"
+"Kindly go to preferences and select a profile with consistent nplurals "
+"values as this file %s."
+msgstr ""
+"O nplurals do arquivo (%d) é diferente do nplurals do perfil (%d).\n"
+"Acesse as preferências e selecione um perfil com valores consistentes de "
+"nplurals conforme este arquivo %s."
 
 #: src/gtr-tab.c:421
 msgid "There is an error in the message:"
@@ -1322,6 +1357,13 @@ msgstr ""
 "Diferença máxima em comprimento entre as mensagens exibidas como ocorrências "
 "pela memória de tradução."
 
+#, c-format
+#~ msgid "Error creating temp file: %s"
+#~ msgstr "Erro ao criar o arquivo temporário: %s"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
+
 #~ msgid "Color scheme"
 #~ msgstr "Esquema de cores"
 
@@ -1347,11 +1389,11 @@ msgstr ""
 
 #, c-format
 #~ msgid ""
-#~ "Do you want to save changes to this file: <span weight=\"bold\" "
-#~ "size=\"large\">%s</span>?"
+#~ "Do you want to save changes to this file: <span weight=\"bold\" size="
+#~ "\"large\">%s</span>?"
 #~ msgstr ""
-#~ "Deseja salvar as alterações a este arquivo: <span weight=\"bold\" "
-#~ "size=\"large\">%s</span>?"
+#~ "Deseja salvar as alterações a este arquivo: <span weight=\"bold\" size="
+#~ "\"large\">%s</span>?"
 
 #~ msgid ""
 #~ "If you don't save, all your unsaved changes will be permanently lost."
@@ -1504,9 +1546,6 @@ msgstr ""
 
 #~ msgid "Choose the editor font"
 #~ msgstr "Escolher a fonte do editor"
-
-#~ msgid "Editor"
-#~ msgstr "Editor"
 
 #~ msgid "_Name"
 #~ msgstr "_Nome"
@@ -2155,9 +2194,6 @@ msgstr ""
 
 #~ msgid "_View"
 #~ msgstr "_Visualizar"
-
-#~ msgid "_Search"
-#~ msgstr "_Pesquisar"
 
 #~ msgid "_Go"
 #~ msgstr "_Ir"
