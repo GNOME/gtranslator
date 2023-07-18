@@ -98,8 +98,8 @@ typedef struct
 
   GtrPoState state;
 
-  /* Damned Lies(DL) teams are stored here */
-  gchar *dl_team;
+  /* Damned Lies(DL) lang are stored here */
+  gchar *dl_lang;
 
   /* DL modules */
   gchar *dl_module;
@@ -230,7 +230,7 @@ gtr_po_init (GtrPo * po)
   priv->po_contains_obsolete_entries = FALSE;
   priv->location = NULL;
   priv->gettext_po_file = NULL;
-  priv->dl_team = NULL;
+  priv->dl_lang = NULL;
   priv->dl_module = NULL;
   priv->dl_branch = NULL;
   priv->dl_domain = NULL;
@@ -250,8 +250,8 @@ gtr_po_finalize (GObject * object)
   if (priv->gettext_po_file)
     po_file_free (priv->gettext_po_file);
 
-  if (priv->dl_team)
-    g_free (priv->dl_team);
+  if (priv->dl_lang)
+    g_free (priv->dl_lang);
   if (priv->dl_module)
     g_free (priv->dl_module);
   if (priv->dl_branch)
@@ -982,18 +982,18 @@ gtr_po_set_state (GtrPo * po, GtrPoState state)
   g_object_notify (G_OBJECT (po), "state");
 }
 
-void gtr_po_set_dl_info (GtrPo * po, gchar * team, gchar * module_name,
+void gtr_po_set_dl_info (GtrPo * po, gchar * lang, gchar * module_name,
                          gchar * branch, gchar * domain, gchar * module_state)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-  priv->dl_team = g_strdup (team);
+  priv->dl_lang = g_strdup (lang);
   priv->dl_module = g_strdup (module_name);
   priv->dl_branch = g_strdup (branch);
   priv->dl_domain = g_strdup (domain);
   priv->dl_state = g_strdup (module_state);
 
-  if (team)
-    gtr_header_set_field (priv->header, "X-DL-Team", team);
+  if (lang)
+    gtr_header_set_field (priv->header, "X-DL-Lang", lang);
 
   if (module_name)
     gtr_header_set_field (priv->header, "X-DL-Module", module_name);
@@ -1457,10 +1457,10 @@ gtr_po_consistent_with_profile (GtrPo * po)
 }
 
 const gchar *
-gtr_po_get_dl_team (GtrPo *po)
+gtr_po_get_dl_lang (GtrPo *po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-  return priv->dl_team;
+  return priv->dl_lang;
 }
 
 const gchar *

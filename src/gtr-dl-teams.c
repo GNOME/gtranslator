@@ -44,8 +44,8 @@ typedef struct
   GtkWidget *module_state_label;
   GtkWidget *file_label;
 
-  GtkWidget *teams_combobox;
-  GListStore *teams_model;
+  GtkWidget *langs_combobox;
+  GListStore *langs_model;
   GtkWidget *modules_combobox;
   GListStore *modules_model;
   GtkWidget *domains_combobox;
@@ -54,7 +54,7 @@ typedef struct
   GtkStringList *branches_model;
   GListStore *domains_model;
 
-  gchar *selected_team;
+  gchar *selected_lang;
   gchar *selected_module;
   gchar *selected_branch;
   gchar *selected_domain;
@@ -107,8 +107,8 @@ gtr_dl_teams_combobox_add (JsonArray *array,
   GListStore *model = G_LIST_STORE (gtk_drop_down_get_model (GTK_DROP_DOWN (combo)));
   GtrDropDownOption *option = NULL;
 
-  const char *name = json_object_get_string_member (object, "name");
-  const char *desc = json_object_get_string_member (object, "description");
+  const char *name = json_object_get_string_member (object, "locale");
+  const char *desc = json_object_get_string_member (object, "name");
 
   option = gtr_drop_down_option_new (name, desc);
   g_list_store_append (model, option);
@@ -175,20 +175,20 @@ gtr_dl_teams_parse_teams_json (GObject *object,
   json_array_foreach_element (
     array,
     (JsonArrayForeach)gtr_dl_teams_combobox_add,
-    priv->teams_combobox
+    priv->langs_combobox
   );
 
   option = gtr_drop_down_option_new (def_lang, NULL);
   g_list_store_find_with_equal_func (
-    priv->teams_model,
+    priv->langs_model,
     option,
     (GEqualFunc)gtr_drop_down_option_equal,
     &def_lang_pos
   );
-  gtk_drop_down_set_selected (GTK_DROP_DOWN (priv->teams_combobox), def_lang_pos);
+  gtk_drop_down_set_selected (GTK_DROP_DOWN (priv->langs_combobox), def_lang_pos);
 
   /* Enable selection */
-  gtk_widget_set_sensitive (priv->teams_combobox, TRUE);
+  gtk_widget_set_sensitive (priv->langs_combobox, TRUE);
   g_object_unref (pmanager);
 }
 
@@ -359,7 +359,7 @@ gtr_dl_teams_load_json (GtrDlTeams *self)
   SoupMessage *message = NULL;
   char *url = NULL;
 
-  url = g_strconcat ((const gchar *)API_URL, "teams", NULL);
+  url = g_strconcat ((const gchar *)API_URL, "languages", NULL);
   message = soup_message_new ("GET", url);
   soup_session_send_async (priv->soup_session, message, G_PRIORITY_DEFAULT, NULL, gtr_dl_teams_parse_teams_json, self);
 
@@ -380,7 +380,7 @@ void gtr_dl_teams_verify_and_load (GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
 
-  if (priv->selected_team != NULL &&
+  if (priv->selected_lang != NULL &&
       priv->selected_module != NULL &&
       priv->selected_branch != NULL &&
       priv->selected_domain != NULL)
@@ -417,7 +417,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
                                  "/domains/",
                                  priv->selected_domain,
                                  "/languages/",
-                                 priv->selected_team,
+                                 priv->selected_lang,
                                  NULL);
 
   msg = soup_message_new ("GET", stats_endpoint);
@@ -628,7 +628,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
     GtrPo *po = gtr_tab_get_po(tab);
     GError *po_error = NULL;
     gtr_po_set_dl_info(po,
-                       priv->selected_team,
+                       priv->selected_lang,
                        priv->selected_module,
                        priv->selected_branch,
                        priv->selected_domain,
@@ -668,7 +668,7 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
                                   "modules/", priv->selected_module,
                                   "/branches/", priv->selected_branch,
                                   "/domains/", priv->selected_domain,
-                                  "/languages/", priv->selected_team,
+                                  "/languages/", priv->selected_lang,
                                   "/reserve", NULL);
 
   msg = soup_message_new ("POST", reserve_endpoint);
@@ -707,7 +707,7 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
     _("The file '%s.%s.%s.%s' has been successfully reserved"),
     priv->selected_module,
     priv->selected_branch,
-    priv->selected_team,
+    priv->selected_lang,
     priv->selected_domain);
 
   gtk_widget_set_sensitive (priv->reserve_button, FALSE);
@@ -743,17 +743,17 @@ gtr_dl_teams_save_combo_selected (GtkWidget  *widget,
       /* Reload module details on module change */
       gtr_dl_teams_load_module_details_json (widget, self);
     }
-  else if (strcmp(name, "combo_teams") == 0)
+  else if (strcmp(name, "combo_langs") == 0)
     {
       GtrDropDownOption *opt = GTR_DROP_DOWN_OPTION (
-        gtk_drop_down_get_selected_item (GTK_DROP_DOWN (priv->teams_combobox))
+        gtk_drop_down_get_selected_item (GTK_DROP_DOWN (priv->langs_combobox))
       );
-      if (priv->selected_team)
-        g_free (priv->selected_team);
+      if (priv->selected_lang)
+        g_free (priv->selected_lang);
       if (opt)
-        priv->selected_team = g_strdup (gtr_drop_down_option_get_name (opt));
+        priv->selected_lang = g_strdup (gtr_drop_down_option_get_name (opt));
       else
-        priv->selected_team = NULL;
+        priv->selected_lang = NULL;
     }
   else if (strcmp(name, "combo_branches") == 0)
     {
@@ -785,10 +785,10 @@ gtr_dl_teams_dispose (GObject *object)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (GTR_DL_TEAMS (object));
 
-  if (priv->selected_team)
+  if (priv->selected_lang)
     {
-      g_free (priv->selected_team);
-      priv->selected_team = NULL;
+      g_free (priv->selected_lang);
+      priv->selected_lang = NULL;
     }
   if (priv->selected_module)
     {
@@ -852,7 +852,7 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, open_button);
 
-  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, teams_combobox);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, langs_combobox);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, modules_combobox);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, domains_combobox);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, branches_combobox);
@@ -877,7 +877,7 @@ gtr_dl_teams_init (GtrDlTeams *self)
   priv->soup_session = soup_session_new ();
 
   priv->main_window = NULL;
-  priv->selected_team = NULL;
+  priv->selected_lang = NULL;
   priv->selected_module = NULL;
   priv->selected_branch = NULL;
   priv->selected_domain = NULL;
@@ -893,14 +893,14 @@ gtr_dl_teams_init (GtrDlTeams *self)
 
   /* Add combo boxes for DL teams and modules */
   expression = gtk_property_expression_new (GTR_TYPE_DROP_DOWN_OPTION, NULL, "description");
-  priv->teams_model = g_list_store_new (GTR_TYPE_DROP_DOWN_OPTION);
+  priv->langs_model = g_list_store_new (GTR_TYPE_DROP_DOWN_OPTION);
   gtk_drop_down_set_model (
-    GTK_DROP_DOWN (priv->teams_combobox),
-    G_LIST_MODEL (priv->teams_model)
+    GTK_DROP_DOWN (priv->langs_combobox),
+    G_LIST_MODEL (priv->langs_model)
   );
-  gtk_drop_down_set_expression (GTK_DROP_DOWN (priv->teams_combobox), expression);
-  gtk_drop_down_set_enable_search (GTK_DROP_DOWN (priv->teams_combobox), TRUE);
-  gtk_widget_set_sensitive (priv->teams_combobox, FALSE);
+  gtk_drop_down_set_expression (GTK_DROP_DOWN (priv->langs_combobox), expression);
+  gtk_drop_down_set_enable_search (GTK_DROP_DOWN (priv->langs_combobox), TRUE);
+  gtk_widget_set_sensitive (priv->langs_combobox, FALSE);
 
   expression = gtk_property_expression_new (GTR_TYPE_DROP_DOWN_OPTION, NULL, "name");
   priv->modules_model = g_list_store_new (GTR_TYPE_DROP_DOWN_OPTION);
@@ -918,7 +918,7 @@ gtr_dl_teams_init (GtrDlTeams *self)
                     self);
 
   /* Connect "changed" to all combo boxes */
-  g_signal_connect (priv->teams_combobox,
+  g_signal_connect (priv->langs_combobox,
                     "notify::selected",
                     G_CALLBACK (gtr_dl_teams_save_combo_selected),
                     self);

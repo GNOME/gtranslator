@@ -53,7 +53,7 @@ typedef struct
   GtkWidget *charset;
   GtkWidget *encoding;
 
-  GtkWidget *team;
+  GtkWidget *lang;
   GtkWidget *module;
   GtkWidget *branch;
   GtkWidget *domain;
@@ -107,7 +107,7 @@ gtr_header_dialog_class_init (GtrHeaderDialogClass * klass)
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, prj_comment);
 
-  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, team);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, lang);
   gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, module);
   gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, branch);
   gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, domain);
@@ -225,16 +225,16 @@ language_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 static void
 dl_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 {
-  const char *team, *module, *branch, *domain;
+  const char *lang, *module, *branch, *domain;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
-  team = gtk_editable_get_text (GTK_EDITABLE (priv->team));
+  lang = gtk_editable_get_text (GTK_EDITABLE (priv->lang));
   module = gtk_editable_get_text (GTK_EDITABLE (priv->module));
   branch = gtk_editable_get_text (GTK_EDITABLE (priv->branch));
   domain = gtk_editable_get_text (GTK_EDITABLE (priv->domain));
 
   gtr_header_set_dl_info (gtr_po_get_header (priv->po),
-                          team, module, branch,
+                          lang, module, branch,
                           domain);
 
   po_state_set_modified (priv->po);
@@ -300,10 +300,10 @@ gtr_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
   g_free (text);
 
   /* Damned Lies Information */
-  text = gtr_header_get_dl_team (header);
+  text = gtr_header_get_dl_lang (header);
   if (text)
     {
-      gtk_editable_set_text (GTK_EDITABLE (priv->team), text);
+      gtk_editable_set_text (GTK_EDITABLE (priv->lang), text);
       g_free (text);
     }
 
@@ -419,7 +419,7 @@ set_default_values (GtrHeaderDialog * dlg, GtrWindow * window)
   g_signal_connect (priv->lg_email, "changed",
                     G_CALLBACK (language_changed), dlg);
 
-  g_signal_connect (priv->team, "changed",
+  g_signal_connect (priv->lang, "changed",
                     G_CALLBACK (dl_changed), dlg);
 
   g_signal_connect (priv->module, "changed",

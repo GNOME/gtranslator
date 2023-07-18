@@ -104,14 +104,14 @@ GtrProfile      *gtr_header_get_profile              (GtrHeader *header);
 
 gchar           *gtr_header_get_language_code        (GtrHeader * header);
 
-gchar           *gtr_header_get_dl_team              (GtrHeader * header);
+gchar           *gtr_header_get_dl_lang              (GtrHeader * header);
 gchar           *gtr_header_get_dl_module            (GtrHeader * header);
 gchar           *gtr_header_get_dl_branch            (GtrHeader * header);
 gchar           *gtr_header_get_dl_domain            (GtrHeader * header);
 gchar           *gtr_header_get_dl_state             (GtrHeader * header);
 
 void            gtr_header_set_dl_info               (GtrHeader * header,
-                                                      const gchar * team,
+                                                      const gchar * lang,
                                                       const gchar * module_name,
                                                       const gchar * branch,
                                                       const gchar * domain);

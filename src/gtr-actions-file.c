@@ -66,7 +66,7 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
   GList *current;
   GtrView *active_view;
   GtrHeader *header;
-  gchar *dl_team;
+  gchar *dl_lang;
   gchar *dl_module;
   gchar *dl_branch;
   gchar *dl_domain;
@@ -91,7 +91,7 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
   }
 
   header = gtr_po_get_header (po);
-  dl_team = gtr_header_get_dl_team (header);
+  dl_lang = gtr_header_get_dl_lang (header);
   dl_module = gtr_header_get_dl_module (header);
   dl_branch = gtr_header_get_dl_branch (header);
   dl_domain = gtr_header_get_dl_domain (header);
@@ -101,7 +101,7 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
    * Set Damned Lies info when a po file is opened locally
    */
   gtr_po_set_dl_info(po,
-                     dl_team,
+                     dl_lang,
                      dl_module,
                      dl_branch,
                      dl_domain,
@@ -378,7 +378,7 @@ gtr_upload_file (GtkWidget *upload_dialog,
   g_autofree char *auth = NULL;
   g_autofree char *upload_comment = NULL;
   gsize size;
-  const gchar *selected_team;
+  const gchar *selected_lang;
   const gchar *selected_module;
   const gchar *selected_branch;
   const gchar *selected_domain;
@@ -420,16 +420,16 @@ gtr_upload_file (GtkWidget *upload_dialog,
   if (selected_domain == NULL)
     selected_domain = gtr_header_get_dl_domain (header);
 
-  selected_team = gtr_po_get_dl_team (po);
-  if (selected_team == NULL)
-    selected_team = gtr_header_get_dl_team (header);
+  selected_lang = gtr_po_get_dl_lang (po);
+  if (selected_lang == NULL)
+    selected_lang = gtr_header_get_dl_lang (header);
 
-  /* API endpoint: modules/[module]/branches/[branch]/domains/[domain]/languages/[team]/upload */
+  /* API endpoint: modules/[module]/branches/[branch]/domains/[domain]/languages/[lang]/upload */
   upload_endpoint = g_strconcat((const gchar *)API_URL,
                                 "modules/", selected_module,
                                 "/branches/", selected_branch,
                                 "/domains/", selected_domain,
-                                "/languages/", selected_team,
+                                "/languages/", selected_lang,
                                 "/upload", NULL);
 
   /* Init multipart container */

@@ -86,10 +86,10 @@ GQuark gtr_po_error_quark (void);
 
      void gtr_po_set_state (GtrPo * po, GtrPoState state);
 
-     void gtr_po_set_dl_info (GtrPo * po, gchar * team, gchar * module_name,
+     void gtr_po_set_dl_info (GtrPo * po, gchar * lang, gchar * module_name,
                               gchar * branch, gchar * domain, gchar * module_state);
 
-     const gchar *gtr_po_get_dl_team (GtrPo * po);
+     const gchar *gtr_po_get_dl_lang (GtrPo * po);
 
      const gchar *gtr_po_get_dl_module (GtrPo * po);
 

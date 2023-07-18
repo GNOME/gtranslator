@@ -500,7 +500,7 @@ gtr_header_set_encoding (GtrHeader * header, const gchar * encoding)
 
 void
 gtr_header_set_dl_info (GtrHeader * header,
-                         const gchar * team,
+                         const gchar * lang,
                          const gchar * module_name,
                          const gchar * branch,
                          const gchar * domain)
@@ -508,7 +508,7 @@ gtr_header_set_dl_info (GtrHeader * header,
 
   g_return_if_fail (GTR_IS_HEADER (header));
 
-  gtr_header_set_field (header, "X-DL-Team", team);
+  gtr_header_set_field (header, "X-DL-Lang", lang);
   gtr_header_set_field (header, "X-DL-Module", module_name);
   gtr_header_set_field (header, "X-DL-Branch", branch);
   gtr_header_set_field (header, "X-DL-Domain", domain);
@@ -516,21 +516,21 @@ gtr_header_set_dl_info (GtrHeader * header,
 }
 
 /**
- * gtr_header_get_dl_team:
+ * gtr_header_get_dl_lang:
  * @header: a #GtrHeader
  *
- * Gets the damned lies team of the header
+ * Gets the damned lies lang of the header
  *
  * Return value: (transfer full): a newly allocated string representing the
- *                damned lies team of the header
+ *                damned lies lang of the header
  */
 gchar *
-gtr_header_get_dl_team (GtrHeader * header)
+gtr_header_get_dl_lang (GtrHeader * header)
 {
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
 
   return po_header_field (gtr_msg_get_msgstr (GTR_MSG (header)),
-                          "X-DL-Team");
+                          "X-DL-Lang");
 }
 
 /**
