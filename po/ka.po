@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-06-19 05:22+0000\n"
-"PO-Revision-Date: 2023-06-19 17:57+0200\n"
+"POT-Creation-Date: 2023-07-18 19:18+0000\n"
+"PO-Revision-Date: 2023-07-19 06:11+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -355,9 +355,10 @@ msgstr "კლავიატურის მალსახმობები"
 msgid "About Translation Editor"
 msgstr "თარგმანის რედაქტორის შესახებ"
 
-#: src/gtr-dl-teams.ui:57 src/gtr-header-dialog.ui:141
-msgid "Team"
-msgstr "გუნდი"
+#: src/gtr-dl-teams.ui:57 src/gtr-languages-fetcher.ui:5
+#: src/gtr-languages-fetcher.ui:8
+msgid "Language"
+msgstr "ენა"
 
 #: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:147
 msgid "Module"
@@ -479,7 +480,7 @@ msgstr "სიმბოლოების კოდირება"
 
 #: src/gtr-greeter.ui:152 src/gtr-languages-fetcher.ui:61
 msgid "Transfer encoding"
-msgstr ""
+msgstr "გადაცემის კოდირება"
 
 #: src/gtr-greeter.ui:157
 msgid "Plural form"
@@ -540,7 +541,7 @@ msgstr "პროექტი"
 
 #: src/gtr-header-dialog.ui:86
 msgid "Project Id _version"
-msgstr ""
+msgstr "Project Id-ის ვერსია"
 
 #: src/gtr-header-dialog.ui:92
 msgid "Pot _file creation date"
@@ -548,7 +549,7 @@ msgstr "POT ფაილის _შექმნის თარიღი"
 
 #: src/gtr-header-dialog.ui:98
 msgid "Po file _revision date"
-msgstr ""
+msgstr "PO ფაილის გადასინჯვის თარიღი"
 
 #: src/gtr-header-dialog.ui:104
 msgid "Report message _bugs to"
@@ -560,19 +561,19 @@ msgstr "შენიშვნა"
 
 #: src/gtr-header-dialog.ui:134
 msgid "Damned Lies Info"
-msgstr ""
+msgstr "Damned Lies-ის ინფორმაცია"
+
+#: src/gtr-header-dialog.ui:141
+msgid "Lang"
+msgstr "ენა"
 
 #: src/gtr-header-dialog.ui:165
 msgid "State"
 msgstr "მდგომარეობა"
 
-#: src/gtr-languages-fetcher.ui:5 src/gtr-languages-fetcher.ui:8
-msgid "Language"
-msgstr "ენა"
-
 #: src/gtr-languages-fetcher.ui:18
 msgid "Edit options manually"
-msgstr ""
+msgstr "პარამეტრების ხელით ჩასწორება"
 
 #: src/gtr-languages-fetcher.ui:28
 msgid "Choose language code"
@@ -602,7 +603,7 @@ msgstr "ფაილი ცარიელია"
 #: src/gtr-po.c:518
 #, c-format
 msgid "Failed opening file “%s”: %s"
-msgstr ""
+msgstr "ფაილის \"%s\" გახსნის შეცდომა: %s"
 
 #: src/gtr-po.c:589
 #, c-format
@@ -721,7 +722,7 @@ msgstr "ტექსტის ჩვენება"
 
 #: src/gtr-preferences-dialog.ui:100
 msgid "_Highlight message syntax"
-msgstr ""
+msgstr "_შეტყობინების სინტაქსის გამოკვეთა"
 
 #: src/gtr-preferences-dialog.ui:111
 msgid "Make _whitespace visible"
@@ -1254,6 +1255,9 @@ msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
 msgstr ""
+
+#~ msgid "Team"
+#~ msgstr "გუნდი"
 
 #, c-format
 #~ msgid "Error creating temp file: %s"
