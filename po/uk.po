@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-06-19 05:22+0000\n"
-"PO-Revision-Date: 2023-06-25 18:08+0300\n"
+"POT-Creation-Date: 2023-07-18 19:18+0000\n"
+"PO-Revision-Date: 2023-07-20 21:06+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -395,9 +395,10 @@ msgstr "Клавіатурні скорочення"
 msgid "About Translation Editor"
 msgstr "Про «Редактор перекладів»"
 
-#: src/gtr-dl-teams.ui:57 src/gtr-header-dialog.ui:141
-msgid "Team"
-msgstr "Команда"
+#: src/gtr-dl-teams.ui:57 src/gtr-languages-fetcher.ui:5
+#: src/gtr-languages-fetcher.ui:8
+msgid "Language"
+msgstr "Мова"
 
 #: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:147
 msgid "Module"
@@ -468,9 +469,9 @@ msgid ""
 "Before start to use the application, a profile should be created, but don't "
 "worry, the app will guide you to do it in a minute."
 msgstr ""
-"Перш ніж ви почнете користуватися програмою, має бути створено профіль."
-" Втім, не переймайтеся — програма надасть вам настанови, щоб виконати це"
-" завдання за якусь хвилинку."
+"Перш ніж ви почнете користуватися програмою, має бути створено профіль. "
+"Втім, не переймайтеся — програма надасть вам настанови, щоб виконати це "
+"завдання за якусь хвилинку."
 
 #: src/gtr-greeter.ui:41
 msgid "Create Profile"
@@ -605,13 +606,14 @@ msgstr "Коментар"
 msgid "Damned Lies Info"
 msgstr "Відомості Damned Lies"
 
+#: src/gtr-header-dialog.ui:141
+#| msgid "Language"
+msgid "Lang"
+msgstr "Мова"
+
 #: src/gtr-header-dialog.ui:165
 msgid "State"
 msgstr "Стан"
-
-#: src/gtr-languages-fetcher.ui:5 src/gtr-languages-fetcher.ui:8
-msgid "Language"
-msgstr "Мова"
 
 #: src/gtr-languages-fetcher.ui:18
 msgid "Edit options manually"
@@ -761,7 +763,6 @@ msgid "Create a _backup copy of files before saving"
 msgstr "Створити _запасну копію перед збереженням"
 
 #: src/gtr-preferences-dialog.ui:93
-#| msgid "Editor"
 msgid "_Editor"
 msgstr "_Редактор"
 
@@ -794,7 +795,6 @@ msgid "Check _spelling"
 msgstr "Перевірка _правопису"
 
 #: src/gtr-preferences-dialog.ui:174
-#| msgid "Profiles"
 msgid "_Profiles"
 msgstr "П_рофілі"
 
@@ -920,10 +920,10 @@ msgid ""
 "Kindly go to preferences and select a profile with consistent nplurals "
 "values as this file %s."
 msgstr ""
-"Кількість форм множини, %d, у файлі не збігається із кількістю форм множини"
-" у профілі, %d.\n"
-"Будь ласка, перейдіть до параметрів і виберіть профіль, у якому кількість"
-" форм множини збігатиметься із значенням у файлі %s."
+"Кількість форм множини, %d, у файлі не збігається із кількістю форм множини "
+"у профілі, %d.\n"
+"Будь ласка, перейдіть до параметрів і виберіть профіль, у якому кількість "
+"форм множини збігатиметься із значенням у файлі %s."
 
 #: src/gtr-tab.c:421
 msgid "There is an error in the message:"
@@ -1321,6 +1321,9 @@ msgid ""
 "translation memory."
 msgstr ""
 "Максимальна різниця в довжині між рядком та прикладом у пам'яті перекладів."
+
+#~ msgid "Team"
+#~ msgstr "Команда"
 
 #, c-format
 #~| msgid "An error occurred while uploading the file: %s"
