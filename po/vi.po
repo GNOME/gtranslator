@@ -3,14 +3,14 @@
 # Copyright © 2016 Gnome i18n Project for Vietnamese.
 # Nguyễn Thái Ngọc Duy <pclouds@gmx.net>, 2002.
 # Clytie Siddall <clytie@riverland.net.au>, 2006.
-# Trần Ngọc Quân <vnwildman@gmail.com>, 2014-2021.
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2014-2021, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2021-09-19 06:00+0000\n"
-"PO-Revision-Date: 2021-09-23 07:58+0700\n"
+"POT-Creation-Date: 2023-07-28 18:07+0000\n"
+"PO-Revision-Date: 2023-07-29 09:09+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <gnome-vi-list@gnome.org>\n"
 "Language: vi\n"
@@ -18,7 +18,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Gtranslator 3.38.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -54,12 +53,12 @@ msgstr ""
 "vị như là ngôn ngữ thay thế, thêm thẻ, tích hợp với subversion và bộ xem mã "
 "nguồn."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:143
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:174
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:659
-#: src/gtr-notebook.ui:308 src/gtr-window.c:229 src/gtr-window.ui:25
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
+#: src/gtr-application.c:600 src/gtr-greeter.ui:181 src/gtr-window.c:221
 msgid "Translation Editor"
 msgstr "Trình sửa bản dịch"
 
@@ -84,35 +83,44 @@ msgstr ""
 "chuỗi tạm dịch."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:32
+msgid "Whether to remove the obsolete entries upon saving"
+msgstr "Có xóa các chuỗi không dùng nữa khi lưu hay không"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:33
+msgid ""
+"If true, the obsolete entries will be removed from the file after saving"
+msgstr "Nếu chọn, các chuỗi không dùng nữa sẽ bị xóa khỏi tệp sau khi lưu"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:39
 msgid "Auto save files"
 msgstr "Thường xuyên tự lưu"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:33
+#: data/org.gnome.Gtranslator.gschema.xml.in:40
 msgid "If true, automatically save files at specified intervals."
 msgstr "Nếu chọn, tự động lưu tập tin một cách đều đặn."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:39
+#: data/org.gnome.Gtranslator.gschema.xml.in:46
 msgid "Auto save interval"
-msgstr "Khoảng cách giữa các lần tự lưu"
+msgstr "Khoảng thời gian giữa các lần tự động lưu"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:40
+#: data/org.gnome.Gtranslator.gschema.xml.in:47
 msgid "Interval in minutes at which to automatically save files."
 msgstr "Khoảng thời gian giữa các lần tự động lưu tập tin."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:46
+#: data/org.gnome.Gtranslator.gschema.xml.in:53
 msgid "Create backup before saving"
 msgstr "Tạo bản sao trước khi lưu"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:47
+#: data/org.gnome.Gtranslator.gschema.xml.in:54
 msgid "If true, create a backup copy of a file before saving it."
 msgstr ""
 "Nếu chọn, sẽ tạo một bản sao lưu dự phòng của tập tin trước khi ghi lại."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:53
+#: data/org.gnome.Gtranslator.gschema.xml.in:60
 msgid "Use profile values for header"
 msgstr "Dùng các giá trị hồ sơ cho phần đầu"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:54
+#: data/org.gnome.Gtranslator.gschema.xml.in:61
 msgid ""
 "If true, overwrite the values in the PO header with those in the active "
 "profile."
@@ -120,53 +128,45 @@ msgstr ""
 "Nếu chọn, ghi đè các giá trị phần đầu PO bằng những thông tin trong hồ sơ "
 "đang kích hoạt."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:63
+#: data/org.gnome.Gtranslator.gschema.xml.in:70
 msgid "Highlight syntax in edit fields"
 msgstr "Tô sáng cú pháp của trường biên soạn"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:64
+#: data/org.gnome.Gtranslator.gschema.xml.in:71
 msgid "If true, apply syntax highlighting to strings in edit fields."
 msgstr "Nếu chọn, áp dụng tô sáng cú pháp cho chuỗi trong ô biên soạn."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:70
+#: data/org.gnome.Gtranslator.gschema.xml.in:77
 msgid "Make whitespace visible"
 msgstr "Hiện ký tự khoảng trắng"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:71
+#: data/org.gnome.Gtranslator.gschema.xml.in:78
 msgid "If true, display whitespace in strings as representative symbols."
 msgstr "Nếu chọn thì hiển thị ký hiệu khoảng trắng bằng các ký hiệu mô tả."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:77
+#: data/org.gnome.Gtranslator.gschema.xml.in:84
 msgid "Remove fuzzy status when message is changed"
 msgstr "Gỡ bỏ trạng thái tạm dịch nếu chuỗi đã thay đổi"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:78
+#: data/org.gnome.Gtranslator.gschema.xml.in:85
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr "Nếu chọn, xóa bỏ trạng thái là tạm dịch khi chúng thay đổi."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:84
+#: data/org.gnome.Gtranslator.gschema.xml.in:91
 msgid "Check spelling"
 msgstr "Kiểm tra lỗi chính tả"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:85
+#: data/org.gnome.Gtranslator.gschema.xml.in:92
 msgid "If true, check the spelling of translated messages."
 msgstr "Nếu chọn, kiểm tra chính tả của chuỗi đã dịch."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:96
+#: data/org.gnome.Gtranslator.gschema.xml.in:103
 msgid "Side panel switcher style"
 msgstr "Kiểu bảng chuyển bên cạnh"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:97
+#: data/org.gnome.Gtranslator.gschema.xml.in:104
 msgid "Style for switchers in the side panel."
 msgstr "Kiểu của bộ chuyển trong bảng bên."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:103
-msgid "Color scheme"
-msgstr "Lược đồ màu"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:104
-msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
-msgstr "Tên của lược đồ màu gtksourceview được dùng cho tô sáng cú pháp."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:110
 msgid "Message list sort order"
@@ -180,11 +180,11 @@ msgstr ""
 "Sắp xếp danh sách chuỗi. Các giá trị có thể là “status”, “id”, “original-"
 "text” và “translated-text”."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:146
+#: data/org.gnome.Gtranslator.gschema.xml.in:143
 msgid "Active plugins"
 msgstr "Phần bổ sung hoạt động"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:147
+#: data/org.gnome.Gtranslator.gschema.xml.in:144
 msgid ""
 "List of active plugins. It contains the “Location” of the active plugins. "
 "See the .gtranslator-plugin file for obtaining the “Location” of a given "
@@ -194,37 +194,15 @@ msgstr ""
 "hoạt động. Xem tập tin .gtranslator-plugin để lấy “Vị trí” của phần bổ sung "
 "đã cho."
 
-#: src/codeview/gtr-codeview.c:374
-msgid "Paths:"
-msgstr "Đường dẫn:"
-
-#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
-#: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:651
-#: src/translation-memory/gtr-translation-memory-dialog.c:299
-msgid "_Close"
-msgstr "Đó_ng"
-
-#: src/codeview/gtr-viewer.c:75
+#: src/codeview/gtr-viewer.c:98
 msgid "Source Viewer"
 msgstr "Xem mã nguồn"
 
-#: src/codeview/gtr-viewer.ui:59
+#: src/codeview/gtr-viewer.ui:26
 msgid "Source code"
 msgstr "Mã nguồn"
 
-#: src/gtr-actions-app.c:58
-msgid "Current Maintainers"
-msgstr "Những người bảo trì hiện nay"
-
-#: src/gtr-actions-app.c:62
-msgid "Previous Developers"
-msgstr "Những người phát triển trước đây"
-
-#: src/gtr-actions-app.c:73
-msgid "Contributors"
-msgstr "Người đóng góp"
-
-#: src/gtr-actions-app.c:98
+#: src/gtr-actions-app.c:86
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -235,48 +213,41 @@ msgstr ""
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:111
+#: src/gtr-actions-app.c:103
 msgid "translator-credits"
 msgstr "Nhóm Việt hóa GNOME <gnome-vi-list@gnome.org>"
 
-#: src/gtr-actions-app.c:114
-msgid "Translation Editor Web Site"
-msgstr "Trang web Trình sửa bản dịch"
+#: src/gtr-actions-file.c:197 src/gtr-close-confirmation-dialog.c:348
+msgid "Unsaved Changes"
+msgstr "Thay đổi chưa được lưu"
 
-#: src/gtr-actions-file.c:220
+#: src/gtr-actions-file.c:202
 #, c-format
-msgid ""
-"Do you want to save changes to this file: <span weight=\"bold\" size=\"large"
-"\">%s</span>?"
-msgstr ""
-"Bạn có muốn lưu thay đổi vào tệp này không: <span weight=\"bold\" size="
-"\"large\">%s</span>?"
+msgid "Do you want to write all the changes done to %s?"
+msgstr "Bạn có muốn ghi tất cả các thay đổi vào %s không?"
 
-#: src/gtr-actions-file.c:226
-msgid "If you don't save, all your unsaved changes will be permanently lost."
-msgstr "Nếu bạn không lưu, tất cả các thay đổi của bạn sẽ hoàn toàn bị mất."
-
-#: src/gtr-actions-file.c:229
-msgid "Save and open"
-msgstr "Lưu và mở"
-
-#: src/gtr-actions-file.c:230
+#: src/gtr-actions-file.c:206 src/gtr-context.c:150
+#: src/gtr-profile-dialog.ui:17 src/gtr-upload-dialog.ui:17
 msgid "Cancel"
 msgstr "Thôi"
 
-#: src/gtr-actions-file.c:231
-msgid "Continue without saving"
+#: src/gtr-actions-file.c:207
+msgid "Continue Without Saving"
 msgstr "Tiếp tục mà không lưu"
 
-#: src/gtr-actions-file.c:263
+#: src/gtr-actions-file.c:208
+msgid "Save and Open"
+msgstr "Lưu và mở"
+
+#: src/gtr-actions-file.c:230
 msgid "Open file for translation"
 msgstr "Mở tập tin để dịch"
 
-#: src/gtr-actions-file.c:369
+#: src/gtr-actions-file.c:318
 msgid "This file has already been uploaded"
 msgstr "Tập tin đã được tải lên rồi"
 
-#: src/gtr-actions-file.c:380
+#: src/gtr-actions-file.c:337
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -289,101 +260,38 @@ msgstr ""
 "cách đúng đắn trong hồ sơ của bạn hoặc là bạn không có quyền tải lên mô-đun "
 "này."
 
-#: src/gtr-actions-file.c:393
+#: src/gtr-actions-file.c:346
 msgid "The file has been uploaded!"
 msgstr "Tập tin đã được tải lên!"
 
-#: src/gtr-actions-file.c:548
+#: src/gtr-actions-file.c:489
 msgid "Save file as…"
 msgstr "Lưu tập tin dạng…"
 
-#: src/gtr-assistant.c:128
-#, c-format
-msgid ""
-"Profile name: %s\n"
-"Translator name: %s\n"
-"Translator email: %s\n"
-"Language name: %s\n"
-"Team email: %s\n"
-"Language code: %s\n"
-"Character set: %s\n"
-"Transfer encoding: %s\n"
-"Plural form: %s\n"
-msgstr ""
-"Tên hồ sơ: %s\n"
-"Tên người dịch: %s\n"
-"Thư điện tử của người dịch: %s\n"
-"Tên ngôn ngữ: %s\n"
-"Thư điện tử của nhóm: %s\n"
-"Mã ngôn ngữ: %s\n"
-"Bảng mã ký tự: %s\n"
-"Mã hóa chuyển giao: %s\n"
-"Dạng thức số nhiều: %s\n"
-
-#: src/gtr-assistant.c:167
-msgid "This assistant will help you to create the main profile."
-msgstr "Phần trợ lý này giúp bạn tạo hồ sơ chính."
-
-#: src/gtr-assistant.c:172
-msgid "Assistant"
-msgstr "Trợ lý"
-
-#: src/gtr-assistant.c:258
-msgid "Profile name"
-msgstr "Tên hồ sơ"
-
-#: src/gtr-assistant.c:302
-msgid "Translator email"
-msgstr "Thư điện tử của người dịch"
-
-#: src/gtr-assistant.c:324
-msgid "Team email"
-msgstr "Địa chỉ thư điện tử của nhóm"
-
-#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:575
-msgid "Profile"
-msgstr "Hồ sơ"
-
-#: src/gtr-assistant.c:429
-msgid "Language"
-msgstr "Ngôn ngữ"
-
-#: src/gtr-assistant.c:450
-msgid "Confirmation"
-msgstr "Xác nhận"
-
-#: src/gtr-close-confirmation-dialog.c:123
-msgid "Close _without Saving"
-msgstr "Đóng _không Lưu"
-
-#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:89
-#: src/gtr-file-dialogs.c:47 src/gtr-jump-dialog.c:90
-#: src/gtr-preferences-dialog.c:446 src/gtr-profile-dialog.c:72
-#: src/translation-memory/gtr-translation-memory-dialog.c:81
+#: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:453
 msgid "_Cancel"
 msgstr "_Thôi"
 
-#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:87
-#: src/gtr-file-dialogs.c:46
+#: src/gtr-close-confirmation-dialog.c:123
+msgid "Close _Without Saving"
+msgstr "Đóng _không Lưu"
+
+#: src/gtr-close-confirmation-dialog.c:124
 msgid "_Save"
 msgstr "_Lưu"
 
-#: src/gtr-close-confirmation-dialog.c:150
-msgid "Question"
-msgstr "Câu hỏi"
-
-#: src/gtr-close-confirmation-dialog.c:366
+#: src/gtr-close-confirmation-dialog.c:305
 #, c-format
 msgid "Save the changes to document “%s” before closing?"
 msgstr "Lưu các thay đổi trong tài liệu “%s” trước khi đóng lại chứ?"
 
-#: src/gtr-close-confirmation-dialog.c:530
+#: src/gtr-close-confirmation-dialog.c:319
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] "Các thay đổi trong tài liệu %d sẽ bị mất hoàn toàn."
 
-#: src/gtr-close-confirmation-dialog.c:537
+#: src/gtr-close-confirmation-dialog.c:326
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -392,405 +300,351 @@ msgstr[0] ""
 "Có %d tài liệu có thay đổi chưa được lưu. Lưu các thay đổi trước khi đóng "
 "lại chứ?"
 
-#: src/gtr-close-confirmation-dialog.c:558
-msgid "Docum_ents with unsaved changes:"
-msgstr "Tài liệu có thay đổi chư_a lưu:"
+#: src/gtr-context.c:151 src/gtr-tab.ui:419
+msgid "Save"
+msgstr "Lưu"
 
-#: src/gtr-close-confirmation-dialog.c:562
-msgid "S_elect the documents you want to save:"
-msgstr "_Chọn tài liệu bạn muốn lưu:"
-
-#: src/gtr-close-confirmation-dialog.c:581
-msgid "Saving has been disabled by the system administrator."
-msgstr "Việc lưu lại bị tắt bởi quản trị hệ thống."
-
-#: src/gtr-close-confirmation-dialog.c:583
-msgid "If you don’t save, all your changes will be permanently lost."
-msgstr "Nếu bạn không lưu tài liệu, các thay đổi của bạn sẽ hoàn toàn bị mất."
-
-#: src/gtr-context.c:82
+#: src/gtr-context.c:157 src/gtr-context.ui:28
 msgid "Notes"
 msgstr "Ghi chú"
 
-#: src/gtr-context.c:290
-msgid "Notes:"
-msgstr "Ghi chú:"
-
-#: src/gtr-context.c:298
-msgid "Add Note"
-msgstr "Thêm ghi chú"
-
-#: src/gtr-context.c:303
-msgid "Edit"
-msgstr "Chỉnh sửa"
-
-#: src/gtr-context.c:348
-msgid "Extracted comments:"
+#: src/gtr-context.ui:61
+msgid "Extracted comments"
 msgstr "Ghi chú trích ra từ mã nguồn:"
 
-#: src/gtr-context.c:351
-msgid "Context:"
-msgstr "Ngữ cảnh:"
+#: src/gtr-context.ui:86
+msgid "Paths"
+msgstr "Đường dẫn"
 
-#: src/gtr-context.c:354
-msgid "Format:"
-msgstr "Định dạng:"
+#: src/gtr-dl-teams.c:251
+#, c-format
+msgid "Error loading module info: %s"
+msgstr "Lỗi khi tải thông tin mô-đun: %s"
 
-#: src/gtr-dl-teams.c:419
+#: src/gtr-dl-teams.c:441
+#, c-format
+msgid "Error loading file info: %s"
+msgstr "Gặp lỗi khi tải thông tin tập tin: %s"
+
+#: src/gtr-dl-teams.c:470
 msgid "No module state found."
 msgstr "Không tìm thấy tình trạng của mô-đun."
 
-#: src/gtr-dl-teams.c:436
+#: src/gtr-dl-teams.c:562
 #, c-format
-msgid "The current state is: %s"
-msgstr "Tình trạng hiện tại là: %s"
+msgid "Error loading file: %s"
+msgstr "Gặp lỗi khi tải tập tin: %s"
 
-#: src/gtr-dl-teams.c:588
+#: src/gtr-dl-teams.c:571 src/gtr-dl-teams.c:615
+#, c-format
+msgid "Error creating tmp file: %s"
+msgstr "Gặp lỗi khi tạo tập tin tạm thời: %s"
+
+#: src/gtr-dl-teams.c:586
+#, c-format
+msgid "Error writing stream: %s"
+msgstr "Lỗi ghi luồng dữ liệu: %s"
+
+#: src/gtr-dl-teams.c:624
 #, c-format
 msgid "The file '%s' has been saved in %s"
 msgstr "Tập tin '%s' đã được lưu tại %s"
 
-#: src/gtr-dl-teams.c:648
+#: src/gtr-dl-teams.c:695
 #, c-format
 msgid ""
 "An error occurred while reserving this module: %s\n"
-"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
-"correctly in your profile or you don't have permissions to reserve this "
-"module."
+"Maybe you've not configured your l10n.gnome.org token correctly in your "
+"profile or you don't have permissions to reserve this module."
 msgstr ""
 "Có lỗi xảy ra trong khi nhận mô-đun này: %s\n"
-"Có lẽ bạn đã chưa cấu hình <b>thẻ</b> <i>l10n.gnome.org</i> của mình một "
-"cách đúng đắn trong hồ sơ của bạn hoặc là bạn không có quyền nhận mô-đun này."
+"Có lẽ bạn đã chưa cấu hình thẻ bài l10n.gnome.org của mình một cách đúng đắn "
+"trong hồ sơ của bạn hoặc là bạn không có quyền nhận mô-đun này."
 
-#: src/gtr-dl-teams.c:664
+#: src/gtr-dl-teams.c:707
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "Tập tin '%s.%s.%s.%s' đã được nhận thành công"
 
-#: src/gtr-dl-teams.c:814
-msgid "Translation Team"
-msgstr "Nhóm dịch"
-
-#: src/gtr-dl-teams.c:821
-msgid "Module"
-msgstr "Mô-đun"
-
-#: src/gtr-dl-teams.ui:85
-msgid "Select team, module, branch and domain to get the translation file."
-msgstr "Chọn nhóm, mô-đun, nhánh và tên miền để lấy tập tin dịch."
-
-#: src/gtr-dl-teams.ui:106
-msgid "Reserve for translation"
-msgstr "Nhận tập tin để dịch"
-
-#: src/gtr-dl-teams.ui:117
-msgid "Load file"
-msgstr "Tải tập tin"
-
-#: src/gtr-dl-teams.ui:136
-msgid "Load from Damned Lies"
-msgstr "Tải từ Damned Lies"
-
-#: src/gtr-dl-teams.ui:143 src/gtr-projects.ui:58
-msgid "Open…"
-msgstr "Mở…"
-
-#: src/gtr-dl-teams.ui:166 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
-msgid "Main Menu"
-msgstr "Trình đơn chính"
-
-#: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
-msgid "New window"
+#: src/gtr-dl-teams.ui:7 src/gtr-projects.ui:7 src/gtr-tab.ui:260
+msgid "New Window"
 msgstr "Cửa sổ mới"
 
-#: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:264
 msgid "Preferences"
 msgstr "Tùy thích"
 
-#: src/gtr-dl-teams.ui:235 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:270
 msgid "Keyboard Shortcuts"
 msgstr "Phím tắt bàn phím"
 
-#: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
-msgid "About"
-msgstr "Giới thiệu"
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:278
+msgid "About Translation Editor"
+msgstr "Giới thiệu về Trình sửa bản dịch"
 
-#: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
-msgid "Quit"
-msgstr "Thoát"
+#: src/gtr-dl-teams.ui:57 src/gtr-languages-fetcher.ui:5
+#: src/gtr-languages-fetcher.ui:8
+msgid "Language"
+msgstr "Ngôn ngữ"
 
-#: src/gtr-file-dialogs.c:47
-msgid "_Open"
-msgstr "_Mở"
+#: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:147
+msgid "Module"
+msgstr "Mô-đun"
 
-#: src/gtr-file-dialogs.c:61
+#: src/gtr-dl-teams.ui:79 src/gtr-header-dialog.ui:159
+msgid "Domain"
+msgstr "Miền"
+
+#: src/gtr-dl-teams.ui:90 src/gtr-header-dialog.ui:153
+msgid "Branch"
+msgstr "Nhánh"
+
+#: src/gtr-dl-teams.ui:107
+msgid "Reserve for translation"
+msgstr "Nhận tập tin để dịch"
+
+#: src/gtr-dl-teams.ui:120
+msgid "Info"
+msgstr "Thông tin"
+
+#: src/gtr-dl-teams.ui:123
+msgid "File"
+msgstr "Tập tin"
+
+#: src/gtr-dl-teams.ui:133
+msgid "Translation State"
+msgstr "Trạng thái bản dịch"
+
+#: src/gtr-dl-teams.ui:143
+msgid "Stats"
+msgstr "Thống kê"
+
+#: src/gtr-dl-teams.ui:157
+msgid "Load File"
+msgstr "Tải tập tin"
+
+#: src/gtr-dl-teams.ui:176 src/gtr-projects.ui:50
+msgid "Open…"
+msgstr "Mở…"
+
+#: src/gtr-dl-teams.ui:185 src/gtr-projects.ui:64 src/gtr-tab.ui:377
+msgid "Main Menu"
+msgstr "Trình đơn chính"
+
+#: src/gtr-file-dialogs.c:57
 msgid "Gettext translation"
 msgstr "Bản dịch gettext"
 
-#: src/gtr-file-dialogs.c:70
+#: src/gtr-file-dialogs.c:65
 msgid "Gettext translation template"
 msgstr "Bản mẫu thông dịch gettext"
 
-#: src/gtr-file-dialogs.c:75
+#: src/gtr-file-dialogs.c:69
 msgid "All files"
 msgstr "Mọi tập tin"
 
-#: src/gtr-header-dialog.c:325
+#: src/gtr-greeter.ui:11
+msgid "Welcome"
+msgstr "Chào mừng bạn"
+
+#: src/gtr-greeter.ui:23 src/gtr-window.c:640
+msgid "Welcome to Translation Editor"
+msgstr "Chào đón bạn sử dụng Trình sửa bản dịch"
+
+#: src/gtr-greeter.ui:25
+msgid ""
+"Before start to use the application, a profile should be created, but don't "
+"worry, the app will guide you to do it in a minute."
+msgstr ""
+"Trước khi bắt đầu sử dụng ứng dụng, bạn nên tạo một hồ sơ, nhưng đừng lo, "
+"ứng dụng sẽ hướng dẫn bạn thực hiện trong một phút."
+
+#: src/gtr-greeter.ui:41
+msgid "Create Profile"
+msgstr "Tạo hồ sơ"
+
+#: src/gtr-greeter.ui:53
+msgid "Profile"
+msgstr "Hồ sơ"
+
+#: src/gtr-greeter.ui:56 src/gtr-greeter.ui:117 src/gtr-profile-dialog.ui:53
+msgid "Profile name"
+msgstr "Tên hồ sơ"
+
+#: src/gtr-greeter.ui:57 src/gtr-profile-dialog.ui:54
+msgid "default"
+msgstr "mặc định"
+
+#: src/gtr-greeter.ui:63 src/gtr-greeter.ui:122
+msgid "Translator name"
+msgstr "Tên của người dịch"
+
+#: src/gtr-greeter.ui:69 src/gtr-greeter.ui:127
+msgid "Translator email"
+msgstr "Thư điện tử của người dịch"
+
+#: src/gtr-greeter.ui:75
+msgid "Translation team email"
+msgstr "Thư điện tử của nhóm dịch"
+
+#: src/gtr-greeter.ui:98 src/gtr-greeter.ui:109
+msgid "Confirmation"
+msgstr "Xác nhận"
+
+#: src/gtr-greeter.ui:132
+msgid "Team email"
+msgstr "Địa chỉ thư điện tử của nhóm"
+
+#: src/gtr-greeter.ui:137
+msgid "Language name"
+msgstr "Tên ngôn ngữ"
+
+#: src/gtr-greeter.ui:142 src/gtr-languages-fetcher.ui:21
+msgid "Language code"
+msgstr "Mã ngôn ngữ"
+
+#: src/gtr-greeter.ui:147 src/gtr-languages-fetcher.ui:41
+msgid "Character set"
+msgstr "Bộ mã ký tự"
+
+#: src/gtr-greeter.ui:152 src/gtr-languages-fetcher.ui:61
+msgid "Transfer encoding"
+msgstr "Bảng mã chuyển giao"
+
+#: src/gtr-greeter.ui:157
+msgid "Plural form"
+msgstr "Dạng số nhiều"
+
+#: src/gtr-greeter.ui:192
+msgid "Next"
+msgstr "Kế"
+
+#: src/gtr-header-dialog.c:346 src/gtr-tab.ui:254
 msgid "Edit Header"
 msgstr "Sửa phần đầu"
 
-#: src/gtr-header-dialog.ui:65
-msgid "Use my options to complete the following entries:"
-msgstr "Dùng tùy chọn của tôi để hoàn tất các mục sau:"
-
-#: src/gtr-header-dialog.ui:89
-msgid "Translator’s _name:"
-msgstr "Tê_n của người dịch:"
-
-#: src/gtr-header-dialog.ui:103
-msgid "Translator’s _email:"
-msgstr "T_hư điện tử người dịch:"
-
-#: src/gtr-header-dialog.ui:117
-msgid "_Language:"
-msgstr "_Ngôn ngữ:"
-
-#: src/gtr-header-dialog.ui:130
-msgid "Language _code:"
-msgstr "Mã _ngôn ngữ:"
-
-#: src/gtr-header-dialog.ui:143
-msgid "Language gro_up email:"
-msgstr "Địa chỉ thư nhó_m dịch:"
-
-#: src/gtr-header-dialog.ui:156
-msgid "Char_set:"
-msgstr "_Bộ mã:"
-
-#: src/gtr-header-dialog.ui:169
-msgid "Enc_oding:"
-msgstr "_Bảng mã:"
-
-#: src/gtr-header-dialog.ui:267
+#: src/gtr-header-dialog.ui:11
 msgid "Translator and Language"
 msgstr "Người dịch và Ngôn ngữ"
 
-#: src/gtr-header-dialog.ui:290
-msgid "Project Id _version:"
-msgstr "_Phiên bản Id của dự án:"
+#: src/gtr-header-dialog.ui:15 src/gtr-header-dialog.ui:83
+#: src/gtr-header-dialog.ui:138 src/gtr-preferences-dialog.ui:14
+msgid "General"
+msgstr "Chung"
 
-#: src/gtr-header-dialog.ui:303
-msgid "Pot _file creation date:"
-msgstr "Ngày tạo tậ_p tin POT:"
+#: src/gtr-header-dialog.ui:18
+msgid "Use my options to complete the following entries"
+msgstr "Dùng tùy chọn của tôi để hoàn tất các mục sau"
 
-#: src/gtr-header-dialog.ui:317
-msgid "Po file _revision date:"
-msgstr "Ngày _sửa tập tin .po:"
+#: src/gtr-header-dialog.ui:31
+msgid "Translator’s _name"
+msgstr "Tê_n của người dịch"
 
-#: src/gtr-header-dialog.ui:331
-msgid "Report message _bugs to:"
-msgstr "Thông báo _lỗi chuỗi gốc cho:"
+#: src/gtr-header-dialog.ui:37
+msgid "Translator’s _email"
+msgstr "T_hư điện tử người dịch"
 
-#: src/gtr-header-dialog.ui:400
-msgid "Project"
-msgstr "Dự án"
-
-#: src/gtr-header-dialog.ui:430
-msgid "Comment"
-msgstr "Chú thích"
-
-#: src/gtr-header-dialog.ui:454
-msgid "DL Team:"
-msgstr "Nhóm DL:"
-
-#: src/gtr-header-dialog.ui:467
-msgid "DL Module:"
-msgstr "Mô-đun DL:"
-
-#: src/gtr-header-dialog.ui:481
-msgid "DL Branch:"
-msgstr "Nhánh DL:"
-
-#: src/gtr-header-dialog.ui:495
-msgid "DL Domain:"
-msgstr "Miền DL:"
-
-#: src/gtr-header-dialog.ui:509
-msgid "DL State:"
-msgstr "Trạng thái DL:"
-
-#: src/gtr-header-dialog.ui:587
-msgid "Damned Lies Info"
-msgstr "Thông tin Damned Lies"
-
-#: src/gtr-io-error-info-bar.c:146 src/gtr-jump-dialog.c:88
-#: src/gtr-profile-dialog.c:171 src/gtr-profile-dialog.c:176
-#: src/translation-memory/gtr-translation-memory-dialog.c:80
-msgid "_OK"
-msgstr "Đồn_g ý"
-
-#: src/gtr-jump-dialog.c:92
-msgid "Go to Message"
-msgstr "Nhảy tới chuỗi"
-
-#: src/gtr-jump-dialog.ui:30
-msgid "Enter message number:"
-msgstr "Nhập vào số thứ tự của chuỗi:"
-
-#: src/gtr-lang-button.c:65
-msgid "Choose Language"
-msgstr "Chọn ngôn ngữ"
-
-#: src/gtr-languages-fetcher.ui:46
+#: src/gtr-header-dialog.ui:43
 msgid "_Language"
 msgstr "_Ngôn ngữ"
 
-#: src/gtr-languages-fetcher.ui:60
+#: src/gtr-header-dialog.ui:49
 msgid "Language _code"
 msgstr "Mã _ngôn ngữ"
 
-#: src/gtr-languages-fetcher.ui:74
-msgid "Character _set"
-msgstr "_Bộ mã ký tự"
+#: src/gtr-header-dialog.ui:55
+msgid "Language _Team email"
+msgstr "Địa chỉ thư nhó_m dịch"
+
+#: src/gtr-header-dialog.ui:61
+msgid "Char_set"
+msgstr "_Bộ mã"
+
+#: src/gtr-header-dialog.ui:67
+msgid "Enc_oding"
+msgstr "Bảng _mã"
+
+#: src/gtr-header-dialog.ui:79
+msgid "Project"
+msgstr "Dự án"
+
+#: src/gtr-header-dialog.ui:86
+msgid "Project Id _version"
+msgstr "_Phiên bản Id của dự án:"
+
+#: src/gtr-header-dialog.ui:92
+msgid "Pot _file creation date"
+msgstr "Ngày tạo tậ_p tin pot"
+
+#: src/gtr-header-dialog.ui:98
+msgid "Po file _revision date"
+msgstr "Ngày _sửa tập tin .po"
+
+#: src/gtr-header-dialog.ui:104
+msgid "Report message _bugs to"
+msgstr "Thông báo _lỗi chuỗi gốc cho"
+
+#: src/gtr-header-dialog.ui:116
+msgid "Comment"
+msgstr "Chú thích"
+
+#: src/gtr-header-dialog.ui:134
+msgid "Damned Lies Info"
+msgstr "Thông tin Damned Lies"
+
+#: src/gtr-header-dialog.ui:141
+msgid "Lang"
+msgstr "Tiếng"
+
+#: src/gtr-header-dialog.ui:165
+msgid "State"
+msgstr "Trạng thái"
+
+#: src/gtr-languages-fetcher.ui:18
+msgid "Edit options manually"
+msgstr "Sửa các tùy chọn bằng tay"
+
+#: src/gtr-languages-fetcher.ui:28
+msgid "Choose language code"
+msgstr "Chọn mã ngôn ngữ"
+
+#: src/gtr-languages-fetcher.ui:81
+msgid "Plural forms"
+msgstr "Dạng số nhiều"
 
 #: src/gtr-languages-fetcher.ui:88
-msgid "Transfer en_coding"
-msgstr "_Bảng mã chuyển giao"
+msgid "Choose plural forms"
+msgstr "Chọn dạng số nhiều"
 
-#: src/gtr-languages-fetcher.ui:102
-msgid "_Plural forms"
-msgstr "Dạng số nhiề_u"
-
-#: src/gtr-languages-fetcher.ui:200
-msgid "_Edit options manually"
-msgstr "_Sửa các tùy chọn bằng tay"
-
-#: src/gtr-message-table.c:234
+#: src/gtr-message-table.ui:37
 msgid "Original Message"
 msgstr "Chuỗi gốc"
 
-#: src/gtr-message-table.c:253
+#: src/gtr-message-table.ui:46
 msgid "Translated Message"
 msgstr "Chuỗi dịch"
 
-#: src/gtr-notebook.ui:26
-msgid "Order messages by"
-msgstr "Xếp các chuỗi theo"
-
-#: src/gtr-notebook.ui:58
-msgid "Appearance in the original file"
-msgstr "Xuất hiện trong tập tin gốc"
-
-#: src/gtr-notebook.ui:72
-msgid "Message status"
-msgstr "Tình trạng chuỗi"
-
-#: src/gtr-notebook.ui:87
-msgid "Original message"
-msgstr "Chuỗi gốc"
-
-#: src/gtr-notebook.ui:102
-msgid "Translated message"
-msgstr "Chuỗi dịch"
-
-#: src/gtr-notebook.ui:136
-msgid "Find"
-msgstr "Tìm"
-
-#: src/gtr-notebook.ui:150
-msgid "Find and replace"
-msgstr "Tìm và thay thế"
-
-#: src/gtr-notebook.ui:164 src/gtr-projects.ui:147
-msgid "Build translation memory"
-msgstr "Xây dựng bộ nhớ bản dịch"
-
-#: src/gtr-notebook.ui:179
-msgid "Edit header"
-msgstr "Sửa phần đầu"
-
-#: src/gtr-notebook.ui:276 src/gtr-preferences-dialog.c:652
-#: src/gtr-projects.ui:202
-msgid "Help"
-msgstr "Trợ giúp"
-
-#: src/gtr-notebook.ui:321
-msgid "Open a new file (<Ctrl>o)"
-msgstr "Mở một tập tin mới (<Ctrl>o)"
-
-#: src/gtr-notebook.ui:341
-msgid "Open from Damned Lies (<Ctrl>d)"
-msgstr "Mở từ Damned Lies (<Ctrl>d)"
-
-#: src/gtr-notebook.ui:387
-msgid "Undo (<Ctrl>z)"
-msgstr "Hoàn lại (<Ctrl>z)"
-
-#: src/gtr-notebook.ui:409
-msgid "Redo (<Ctrl><Shift>z)"
-msgstr "Làm lại (<Ctrl><Shift>z)"
-
-#: src/gtr-notebook.ui:454
-msgid "Previous message without translation (<Alt><Page Up>)"
-msgstr "Chuỗi kế trước chưa được dịch (<Alt><Page Up>)"
-
-#: src/gtr-notebook.ui:476
-msgid "Next message without translation (<Alt><Page Down>)"
-msgstr "Chuỗi kế tiếp chưa được dịch (<Alt><Page Down>)"
-
-#: src/gtr-notebook.ui:516
-msgid "Toggle fuzzy state (<Ctrl>+u)"
-msgstr "Bật/tắt trạng thái tạm dịch (<Ctrl>+u)"
-
-#: src/gtr-notebook.ui:537
-msgid "Sort messages by"
-msgstr "Xếp các chuỗi theo"
-
-#: src/gtr-notebook.ui:547
-msgid "Order by menu"
-msgstr "Xếp theo trình đơn"
-
-#: src/gtr-notebook.ui:585
-msgid "Find (<Ctrl><f>)"
-msgstr "Tìm (<Ctrl><f>)"
-
-#: src/gtr-notebook.ui:624
-msgid "Save"
-msgstr "Lưu"
-
-#: src/gtr-notebook.ui:628
-msgid "Save the current file (<Ctrl>s)"
-msgstr "Lưu tập tin hiện tại (<Ctrl>s)"
-
-#: src/gtr-notebook.ui:643
-msgid "Save as (<Ctrl><Shift>s)"
-msgstr "Lưu thành (<Ctrl><Shift>s)"
-
-#: src/gtr-notebook.ui:665
-msgid "Upload file (<Ctrl>b)"
-msgstr "Tải tập tin lên (<Ctrl>b)"
-
-#: src/gtr-po.c:487
+#: src/gtr-po.c:509
 #, c-format
 msgid "The file is empty"
 msgstr "Tập tin rỗng"
 
-#: src/gtr-po.c:496
+#: src/gtr-po.c:518
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Gặp lỗi khi mở tập tin “%s”: %s"
 
-#: src/gtr-po.c:577
+#: src/gtr-po.c:589
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Không thể đổi bảng mã “%s” sang UTF-8"
 
-#: src/gtr-po.c:594 src/gtr-po.c:614
+#: src/gtr-po.c:605 src/gtr-po.c:624
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Không thể lưu tập tin tạm cho việc chuyển đổi bảng mã"
 
-#: src/gtr-po.c:651
+#: src/gtr-po.c:655
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -800,17 +654,17 @@ msgstr ""
 "Gặp lỗi khi cố gắng chuyển đổi thành UTF-8, dùng công cụ dòng lệnh msgconv "
 "hay iconv trước khi mở tập tin này bằng Trình sửa bản dịch GNOME"
 
-#: src/gtr-po.c:719
+#: src/gtr-po.c:723
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext đã trả về một danh sách miền chuỗi rỗng."
 
-#: src/gtr-po.c:764
+#: src/gtr-po.c:770
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Chưa nhận chuỗi từ bộ phân tách."
 
-#: src/gtr-po.c:815
+#: src/gtr-po.c:824
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -821,150 +675,154 @@ msgstr ""
 "Tập tin .pot được tạo ra trong quá trình biên dịch.\n"
 "Tập tin của bạn nên được đặt tên là “%s.po”."
 
-#: src/gtr-po.c:828
+#: src/gtr-po.c:852
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Tập tin %s chỉ cho đọc, và không thể bị ghi đè"
 
-#: src/gtr-po.c:847
+#: src/gtr-po.c:871
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Có lỗi trong tập tin PO: %s"
 
-#: src/gtr-po.c:859
+#: src/gtr-po.c:883
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Gặp lỗi khi ghi tập tin PO: %s"
 
-#: src/gtr-preferences-dialog.c:422
+#: src/gtr-preferences-dialog.c:268
+msgid "Edit"
+msgstr "Chỉnh sửa"
+
+#: src/gtr-preferences-dialog.c:271
+msgid "Delete"
+msgstr "Xóa"
+
+#: src/gtr-preferences-dialog.c:433
 msgid "Impossible to remove the active profile"
 msgstr "Không thể xóa bỏ hồ sơ đang hoạt động"
 
-#: src/gtr-preferences-dialog.c:428
+#: src/gtr-preferences-dialog.c:434
 msgid "Another profile should be selected as active before"
 msgstr "Hồ sơ khác nữa có thể được chọn như là kích hoạt trước"
 
-#: src/gtr-preferences-dialog.c:441
+#: src/gtr-preferences-dialog.c:438
+msgid "_Ok"
+msgstr "Đồn_g ý"
+
+#: src/gtr-preferences-dialog.c:448
 msgid "Are you sure you want to delete this profile?"
 msgstr "Bạn có chắc muốn xóa hồ sơ này không?"
 
-#: src/gtr-preferences-dialog.c:449
+#: src/gtr-preferences-dialog.c:454
 msgid "_Delete"
 msgstr "_Xóa"
 
-#: src/gtr-preferences-dialog.c:581
-msgid "Active"
-msgstr "Hoạt động"
+#: src/gtr-preferences-dialog.ui:10
+msgid "F_iles"
+msgstr "_Tập tin"
 
-#: src/gtr-preferences-dialog.c:654 src/gtr-preferences-dialog.ui:49
-msgid "Translation Editor Preferences"
-msgstr "Tùy thích Trình sửa bản dịch"
-
-#: src/gtr-preferences-dialog.ui:119
-msgid "General"
-msgstr "Chung"
-
-#: src/gtr-preferences-dialog.ui:138
+#: src/gtr-preferences-dialog.ui:17
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "_Cảnh báo nếu tập tin chứa các chuỗi tạm dịch"
 
-#: src/gtr-preferences-dialog.ui:160
+#: src/gtr-preferences-dialog.ui:28
+msgid "_Remove obsolete entries on save"
+msgstr "_Gỡ bỏ các chuỗi không dùng nữa khi lưu"
+
+#: src/gtr-preferences-dialog.ui:41
 msgid "Autosave"
 msgstr "Tự động lưu"
 
-#: src/gtr-preferences-dialog.ui:184
+#: src/gtr-preferences-dialog.ui:44
+msgid "_Activate auto save"
+msgstr "_Kích hoạt chế độ lưu tự động"
+
+#: src/gtr-preferences-dialog.ui:55
+msgid "Autosave _interval"
+msgstr "Khoảng cách g_iữa các lần lưu tự động"
+
+#: src/gtr-preferences-dialog.ui:75
 msgid "Create a _backup copy of files before saving"
 msgstr "Tạo _bản sao của tập tin trước khi lưu"
 
-#: src/gtr-preferences-dialog.ui:206
-msgid "_Autosave files every"
-msgstr "_Tự động lưu tập tin mỗi"
+#: src/gtr-preferences-dialog.ui:93
+msgid "_Editor"
+msgstr "_Bộ soạn thảo"
 
-#: src/gtr-preferences-dialog.ui:230
-msgid "_minutes"
-msgstr "_phút"
-
-#: src/gtr-preferences-dialog.ui:288
-msgid "Files"
-msgstr "Tập tin"
-
-#: src/gtr-preferences-dialog.ui:312
+#: src/gtr-preferences-dialog.ui:97
 msgid "Text Display"
 msgstr "Hiển thị văn bản"
 
-#: src/gtr-preferences-dialog.ui:335
+#: src/gtr-preferences-dialog.ui:100
 msgid "_Highlight message syntax"
 msgstr "Tô _sáng cú pháp của chuỗi"
 
-#: src/gtr-preferences-dialog.ui:351
+#: src/gtr-preferences-dialog.ui:111
 msgid "Make _whitespace visible"
 msgstr "Hiện thị ký hiệu khoảng t_rắng"
 
-#: src/gtr-preferences-dialog.ui:376
-msgid "Font:"
-msgstr "Phông chữ:"
+#: src/gtr-preferences-dialog.ui:122
+msgid "_Font"
+msgstr "_Phông chữ"
 
-#: src/gtr-preferences-dialog.ui:388
-msgid "Choose the editor font"
-msgstr "Chọn phông trình soạn thảo"
-
-#: src/gtr-preferences-dialog.ui:430
+#: src/gtr-preferences-dialog.ui:140
 msgid "Contents"
 msgstr "Nội dung"
 
-#: src/gtr-preferences-dialog.ui:453
+#: src/gtr-preferences-dialog.ui:143
 msgid "_Remove fuzzy status if message is changed"
 msgstr "_Gỡ bỏ trạng thái tạm dịch nếu chuỗi đã thay đổi"
 
-#: src/gtr-preferences-dialog.ui:469
+#: src/gtr-preferences-dialog.ui:156
 msgid "Check _spelling"
 msgstr "Kiểm t_ra chính tả"
 
-#: src/gtr-preferences-dialog.ui:508
-msgid "Editor"
-msgstr "Bộ soạn thảo"
+#: src/gtr-preferences-dialog.ui:174
+msgid "_Profiles"
+msgstr "Hồ _sơ"
 
-#: src/gtr-preferences-dialog.ui:607
-msgid "Edit Profile"
-msgstr "Sửa hồ sơ"
-
-#: src/gtr-preferences-dialog.ui:644
+#: src/gtr-preferences-dialog.ui:178
 msgid "Profiles"
 msgstr "Hồ sơ"
 
-#: src/gtr-profile-dialog.c:74
+#: src/gtr-profile-dialog.c:119
 msgid "Translation Editor Profile"
 msgstr "Hồ sơ người sửa bản dịch"
 
-#: src/gtr-profile-dialog.ui:68
-msgid "_Name"
-msgstr "Tê_n"
+#: src/gtr-profile-dialog.ui:7 src/gtr-upload-dialog.ui:7
+msgid "Upload to Damned Lies"
+msgstr "Tải lên Damned Lies"
 
-#: src/gtr-profile-dialog.ui:96
+#: src/gtr-profile-dialog.ui:22
+msgid "OK"
+msgstr "Đồn_g ý"
+
+#: src/gtr-profile-dialog.ui:48
 msgid "Profile Information"
 msgstr "Thông tin hồ sơ"
 
-#: src/gtr-profile-dialog.ui:113
+#: src/gtr-profile-dialog.ui:62
 msgid "Translator Information"
 msgstr "Thông tin người dịch"
 
-#: src/gtr-profile-dialog.ui:131
-msgid "N_ame"
-msgstr "Tê_n"
+#: src/gtr-profile-dialog.ui:67
+msgid "Translator _name"
+msgstr "Tê_n của người dịch"
 
-#: src/gtr-profile-dialog.ui:146
-msgid "_Email"
-msgstr "Đị_a chỉ thư"
+#: src/gtr-profile-dialog.ui:73
+msgid "Translator _email"
+msgstr "T_hư điện tử của người dịch"
 
-#: src/gtr-profile-dialog.ui:160
-msgid "_Team email"
-msgstr "Địa chỉ thư điện tử của nhó_m"
+#: src/gtr-profile-dialog.ui:79
+msgid "Translation _team email"
+msgstr "Địa chỉ thư điện _tử của nhóm"
 
-#: src/gtr-profile-dialog.ui:174
-msgid "_DL auth token"
-msgstr "Thẻ xác thực _DL"
+#: src/gtr-profile-dialog.ui:87
+msgid "Damned Lies Integration"
+msgstr "Tích hợp Damned Lies"
 
-#: src/gtr-profile-dialog.ui:175
+#: src/gtr-profile-dialog.ui:88
 msgid ""
 "GNOME Damned Lies integration token, go to your profile in https://l10n."
 "gnome.org/ to get it"
@@ -972,167 +830,233 @@ msgstr ""
 "Thẻ tích phân GNOME Damned Lies, truy cập trang hồ sơ tại https://l10n.gnome."
 "org/ để lấy nó"
 
-#: src/gtr-profile-dialog.ui:237
-msgid "Language Settings"
-msgstr "Cài đặt ngôn ngữ"
+#: src/gtr-profile-dialog.ui:93
+msgid "_Damned Lies auth token"
+msgstr "Thẻ xác thực _Damned Lies"
 
-#: src/gtr-projects.ui:35
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:250
+msgid "Build Translation Memory"
+msgstr "Xây dựng bộ nhớ bản dịch"
+
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:274
+msgid "Help"
+msgstr "Trợ giúp"
+
+#: src/gtr-projects.ui:39
 msgid "Open a new .po file or drag & drop here"
-msgstr "Mở một tập tin .po mới hay kéo thả vào đây"
+msgstr "Mở một tập tin .po mới hoặc kéo rồi thả vào đây"
 
-#: src/gtr-projects.ui:51
-msgid "Select a PO file"
-msgstr "Chọn một tập tin PO"
-
-#: src/gtr-projects.ui:68
+#: src/gtr-projects.ui:55
 msgid "Load from DL…"
 msgstr "Tải từ DL…"
 
-#: src/gtr-search-bar.c:484 src/gtr-search-bar.ui:212
-msgid "Case sensitive"
-msgstr "Phân biệt HOA/thường"
+#: src/gtr-search-bar.ui:20
+msgid "Search"
+msgstr "Tìm kiếm"
 
-#: src/gtr-search-bar.c:489 src/gtr-search-bar.ui:225
-msgid "Match whole word only"
-msgstr "Chỉ khớp toàn bộ từ"
-
-#: src/gtr-search-bar.c:494
-msgid "Wrap around"
-msgstr "Cuộn vòng"
-
-#: src/gtr-search-bar.c:499
-msgid "Original text"
-msgstr "Chuỗi gốc"
-
-#: src/gtr-search-bar.c:504
-msgid "Translated text"
-msgstr "Bản dịch"
-
-#: src/gtr-search-bar.ui:121
-msgid "Replace"
-msgstr "Thay thế"
-
-#: src/gtr-search-bar.ui:133
-msgid "Replace All"
-msgstr "Thay thế tất cả"
-
-#: src/gtr-search-bar.ui:153
+#: src/gtr-search-bar.ui:57
 msgid "Switch between Search and Search-and-Replace"
 msgstr "Chuyển đổi giữa Tìm kiếm và Tìm kiếm và Thay thế"
 
-#: src/gtr-search-bar.ui:173
+#: src/gtr-search-bar.ui:63
 msgid "Show or hide search options such as case sensitivity"
 msgstr "Hiện hoặc ẩn các tùy chọn tìm kiếm như phân biệt HOA/thường"
 
-#: src/gtr-search-bar.ui:238
-msgid "Wrap Around"
+#: src/gtr-search-bar.ui:90 src/gtr-search-bar.ui:99
+msgid "Replace"
+msgstr "Thay thế"
+
+#: src/gtr-search-bar.ui:108
+msgid "Replace All"
+msgstr "Thay thế tất cả"
+
+#: src/gtr-search-bar.ui:130
+msgid "Case sensitive"
+msgstr "Phân biệt HOA/thường"
+
+#: src/gtr-search-bar.ui:140
+msgid "Match whole word only"
+msgstr "Chỉ khớp toàn bộ từ"
+
+#: src/gtr-search-bar.ui:150
+msgid "Wrap around"
 msgstr "Cuộn vòng"
 
-#: src/gtr-search-bar.ui:251
-msgid "Original-text"
+#: src/gtr-search-bar.ui:160
+msgid "Original text"
 msgstr "Chuỗi gốc"
 
-#: src/gtr-search-bar.ui:264
-msgid "Translated-text"
+#: src/gtr-search-bar.ui:170
+msgid "Translated text"
 msgstr "Bản dịch"
 
-#: src/gtr-tab-label.c:278
-msgid "Close document"
-msgstr "Đóng tài liệu"
+#: src/gtr-tab.c:299
+#, c-format
+msgid "File is not consistent with profile %s"
+msgstr "Tệp không nhất quán với hồ sơ %s"
 
-#: src/gtr-tab.c:341
+#: src/gtr-tab.c:301
+#, c-format
+msgid ""
+"File nplurals: %d, is different from profile nplurals %d.\n"
+"Kindly go to preferences and select a profile with consistent nplurals "
+"values as this file %s."
+msgstr ""
+"Số nhiều tệp: %d, khác với số nhiều hồ sơ %d.\n"
+"Vui lòng chuyển đến tùy chọn và chọn cấu hình có giá trị nplurals nhất quán "
+"như tệp này %s."
+
+#: src/gtr-tab.c:421
 msgid "There is an error in the message:"
 msgstr "Có lỗi trong chuỗi:"
 
-#: src/gtr-tab.c:555 src/gtr-tab.c:681
+#: src/gtr-tab.c:630 src/gtr-tab.c:763
 msgid "fuzzy"
 msgstr "tạm dịch"
 
-#: src/gtr-tab.c:711
+#: src/gtr-tab.c:792
 #, c-format
 msgid "Plural %d"
 msgstr "Số nhiều %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1306
+#: src/gtr-tab.c:1517
 msgid "Path:"
 msgstr "Đường dẫn:"
 
-#: src/gtr-tab.c:1973
+#: src/gtr-tab.c:2149
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Đã dịch: %0.2f%%"
 
-#: src/gtr-tab.c:1974
+#: src/gtr-tab.c:2150
 #, c-format
 msgid "Translated: %d"
 msgstr "Đã dịch: %d"
 
-#: src/gtr-tab.c:1975
+#: src/gtr-tab.c:2151
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Chưa dịch: %d"
 
-#: src/gtr-tab.c:1976
+#: src/gtr-tab.c:2152
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Tạm dịch: %d"
 
-#: src/gtr-tab.ui:79
+#. <property name="ypad">5</property>
+#: src/gtr-tab.ui:54
 msgid "_Original Message"
 msgstr "Chuỗi _gốc"
 
-#: src/gtr-tab.ui:171
+#. <property name="ypad">5</property>
+#: src/gtr-tab.ui:114
 msgid "Translate_d Text"
 msgstr "Bản _dịch"
 
-#: src/gtr-upload-dialog.c:60
-msgid "_Upload"
-msgstr "_Tải lên"
+#: src/gtr-tab.ui:203
+msgid "Order messages by"
+msgstr "Xếp các chuỗi theo"
 
-#: src/gtr-upload-dialog.c:62
-msgid "Upload to Damned Lies"
-msgstr "Tải lên Damned Lies"
+#: src/gtr-tab.ui:214
+msgid "Appearance in the original file"
+msgstr "Xuất hiện trong tập tin gốc"
 
-#: src/gtr-upload-dialog.c:134
+#: src/gtr-tab.ui:219
+msgid "Message status"
+msgstr "Tình trạng chuỗi"
+
+#: src/gtr-tab.ui:225
+msgid "Original message"
+msgstr "Chuỗi gốc"
+
+#: src/gtr-tab.ui:231
+msgid "Translated message"
+msgstr "Chuỗi dịch"
+
+#: src/gtr-tab.ui:242 src/gtr-tab.ui:384
+msgid "Find"
+msgstr "Tìm"
+
+#: src/gtr-tab.ui:246
+msgid "Find and Replace"
+msgstr "Tìm và thay thế"
+
+#: src/gtr-tab.ui:290
+msgid "Open a New File"
+msgstr "Mở tập tin mới"
+
+#: src/gtr-tab.ui:297
+msgid "Open from Damned Lies"
+msgstr "Mở từ Damned Lies"
+
+#: src/gtr-tab.ui:312
+msgid "Undo"
+msgstr "Hoàn lại"
+
+#: src/gtr-tab.ui:320
+msgid "Redo"
+msgstr "Làm lại"
+
+#: src/gtr-tab.ui:335
+msgid "Previous message without translation (<Alt><Page Up>)"
+msgstr "Chuỗi kế trước chưa được dịch (<Alt><Page Up>)"
+
+#: src/gtr-tab.ui:343
+msgid "Next message without translation (<Alt><Page Down>)"
+msgstr "Chuỗi kế tiếp chưa được dịch (<Alt><Page Down>)"
+
+#: src/gtr-tab.ui:358
+msgid "Toggle Fuzzy State"
+msgstr "Bật/tắt trạng thái tạm dịch"
+
+#: src/gtr-tab.ui:367
+msgid "Sort messages by"
+msgstr "Xếp các chuỗi theo"
+
+#: src/gtr-tab.ui:399
+msgid "Upload File"
+msgstr "Tải tập tin lên"
+
+#: src/gtr-tab.ui:407
+msgid "Save as"
+msgstr "Lưu dạng"
+
+#: src/gtr-tab.ui:415
+msgid "Save Current File"
+msgstr "Lưu tập tin hiện tại"
+
+#: src/gtr-upload-dialog.c:153
 msgid "Uploading..."
 msgstr "Đang tải lên..."
 
-#: src/gtr-upload-dialog.c:140
+#: src/gtr-upload-dialog.c:159 src/gtr-upload-dialog.ui:22
 msgid "Upload"
 msgstr "Tải lên"
 
-#: src/gtr-upload-dialog.ui:50
+#: src/gtr-upload-dialog.ui:40
 msgid "comment:"
 msgstr "ghi chú:"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:214
+#: src/gtr-window.c:206
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Trình sửa bản dịch"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:220
+#: src/gtr-window.c:212
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Trình sửa bản dịch"
 
-#: src/gtranslator-menu.ui:7
-msgid "_New Window"
-msgstr "Mở trong cửa _sổ mới"
+#: src/gtr-window.c:608
+msgid "Select a Po file"
+msgstr "Chọn một tập tin Po"
 
-#: src/gtranslator-menu.ui:13
-msgid "_Preferences"
-msgstr "Tù_y chỉnh"
-
-#: src/gtranslator-menu.ui:19
-msgid "_Help"
-msgstr "Trợ g_iúp"
-
-#: src/gtranslator-menu.ui:24
-msgid "_About GNOME Translation Editor"
-msgstr "_Giới thiệu về Trình sửa bản dịch GNOME"
+#: src/gtr-window.c:627
+msgid "Load from Damned Lies"
+msgstr "Tải từ Damned Lies"
 
 #: src/help-overlay.ui:13
 msgctxt "shortcut window group"
@@ -1154,112 +1078,137 @@ msgctxt "shortcut window"
 msgid "Save the current file as"
 msgstr "Lưu tập tin hiện tại thành"
 
-#: src/help-overlay.ui:40
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Download from DL"
+msgstr "Tải từ DL"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Upload to DL"
+msgstr "Tải lên DL"
+
+#: src/help-overlay.ui:53
 msgctxt "shortcut window"
 msgid "Preferences"
 msgstr "Tùy chỉnh"
 
-#: src/help-overlay.ui:47
+#: src/help-overlay.ui:60
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Phím tắt bàn phím"
 
-#: src/help-overlay.ui:54
+#: src/help-overlay.ui:67
+msgctxt "shortcut window"
+msgid "Help"
+msgstr "Trợ giúp"
+
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Thoát"
 
-#: src/help-overlay.ui:64
+#: src/help-overlay.ui:83
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "Chỉnh sửa"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:88
 msgctxt "shortcut window"
 msgid "Undo"
 msgstr "Hoàn lại"
 
-#: src/help-overlay.ui:75
+#: src/help-overlay.ui:95
 msgctxt "shortcut window"
 msgid "Redo"
 msgstr "Làm lại"
 
-#: src/help-overlay.ui:82
+#: src/help-overlay.ui:102
+msgctxt "shortcut window"
+msgid "Clear translation"
+msgstr "Xóa phần dịch"
+
+#: src/help-overlay.ui:109
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Đánh/Bỏ dấu là tạm dịch"
 
-#: src/help-overlay.ui:89
+#: src/help-overlay.ui:116
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "Chép nội dung chuỗi gốc vào phần dịch"
 
-#: src/help-overlay.ui:99
+#: src/help-overlay.ui:125
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Điều hướng"
 
-#: src/help-overlay.ui:103
+#: src/help-overlay.ui:130
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Đi tới chuỗi kế trước"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:137
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Đi tới chuỗi kế tiếp"
 
-#: src/help-overlay.ui:117
+#: src/help-overlay.ui:144
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Đi tới chuỗi chưa dịch kế trước"
 
-#: src/help-overlay.ui:124
+#: src/help-overlay.ui:151
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Đi tới chuỗi chưa dịch kế tiếp"
 
-#: src/help-overlay.ui:134
+#: src/help-overlay.ui:160
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Bộ nhớ bản dịch"
 
-#: src/help-overlay.ui:138
+#: src/help-overlay.ui:165
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Xây dựng bộ nhớ bản dịch"
 
-#: src/help-overlay.ui:145
+#: src/help-overlay.ui:172
 msgctxt "shortcut window"
 msgid "Copy below"
 msgstr "Sao chép bên dưới"
 
-#: src/help-overlay.ui:155
+#: src/help-overlay.ui:179
+msgctxt "shortcut window"
+msgid "Use 1st...9th suggestion"
+msgstr "Dùng gợi ý từ 1...9"
+
+#: src/help-overlay.ui:188
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Tìm & Thay thế"
 
-#: src/help-overlay.ui:159
+#: src/help-overlay.ui:193
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Tìm"
 
-#: src/help-overlay.ui:166
+#: src/help-overlay.ui:200
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Tìm & Thay thế"
 
-#: src/help-overlay.ui:173
+#: src/help-overlay.ui:207
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "Tìm xuôi"
 
-#: src/help-overlay.ui:180
+#: src/help-overlay.ui:214
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Tìm ngược"
 
-#: src/help-overlay.ui:187
+#: src/help-overlay.ui:221
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Ẩn thanh tìm & thay thế"
@@ -1277,53 +1226,29 @@ msgstr ""
 "%s\n"
 "Chạy “%s --help” để có danh sách tùy chọn dòng lệnh đầy đủ.\n"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:77
+#: src/translation-memory/gtr-translation-memory-dialog.c:76
 msgid "Select PO directory"
 msgstr "Chọn thư mục PO"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:303
+#: src/translation-memory/gtr-translation-memory-dialog.ui:7
 msgid "Translation Editor Memory Manager"
 msgstr "Quản lý bộ nhớ ‪‪Trình sửa bản dịch"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:60
-msgid "Database:"
-msgstr "Cơ sở dữ liệu:"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:38
+msgid "Database"
+msgstr "Cơ sở dữ liệu"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:103
-msgid "Select the directory which contains PO files:"
-msgstr "Chọn thư mục mà nó có chứa các tập tin PO:"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:43
+msgid "Select the directory which contains PO files"
+msgstr "Chọn thư mục mà nó có chứa các tập tin PO"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:154
+#: src/translation-memory/gtr-translation-memory-dialog.ui:55
+msgid "Use only files with this name"
+msgstr "Chỉ dùng những tập tin có tên"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:74
 msgid "Add to Database"
 msgstr "Thêm vào cơ sở dữ liệu"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:209
-msgid "Configuration:"
-msgstr "Cấu hình:"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:253
-msgid "Use only files with this name:"
-msgstr "Chỉ dùng những tập tin có tên:"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:255
-msgid "_Use this translation"
-msgstr "_Dùng bản dịch này"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:260
-msgid "_Remove"
-msgstr "_Xóa bỏ"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:371
-msgid "Shortcut"
-msgstr "Phím tắt"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:380
-msgid "Level"
-msgstr "Mức"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:389
-msgid "String"
-msgstr "Chuỗi"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
 msgid "PO directory"
@@ -1377,12 +1302,243 @@ msgid ""
 msgstr ""
 "Chiều dài khác biệt tối đa từ chuỗi đã hiển thị mà khớp với bộ nhớ bản dịch."
 
+#~ msgid "Team"
+#~ msgstr "Nhóm"
+
+#~ msgid "Color scheme"
+#~ msgstr "Lược đồ màu"
+
+#~ msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
+#~ msgstr "Tên của lược đồ màu gtksourceview được dùng cho tô sáng cú pháp."
+
+#~ msgid "_Close"
+#~ msgstr "Đó_ng"
+
+#~ msgid "Current Maintainers"
+#~ msgstr "Những người bảo trì hiện nay"
+
+#~ msgid "Previous Developers"
+#~ msgstr "Những người phát triển trước đây"
+
+#~ msgid "Contributors"
+#~ msgstr "Người đóng góp"
+
+#~ msgid "Translation Editor Web Site"
+#~ msgstr "Trang web Trình sửa bản dịch"
+
+#, c-format
+#~ msgid ""
+#~ "Do you want to save changes to this file: <span weight=\"bold\" "
+#~ "size=\"large\">%s</span>?"
+#~ msgstr ""
+#~ "Bạn có muốn lưu thay đổi vào tệp này không: <span weight=\"bold\" "
+#~ "size=\"large\">%s</span>?"
+
+#~ msgid ""
+#~ "If you don't save, all your unsaved changes will be permanently lost."
+#~ msgstr "Nếu bạn không lưu, tất cả các thay đổi của bạn sẽ hoàn toàn bị mất."
+
+#, c-format
+#~ msgid ""
+#~ "Profile name: %s\n"
+#~ "Translator name: %s\n"
+#~ "Translator email: %s\n"
+#~ "Language name: %s\n"
+#~ "Team email: %s\n"
+#~ "Language code: %s\n"
+#~ "Character set: %s\n"
+#~ "Transfer encoding: %s\n"
+#~ "Plural form: %s\n"
+#~ msgstr ""
+#~ "Tên hồ sơ: %s\n"
+#~ "Tên người dịch: %s\n"
+#~ "Thư điện tử của người dịch: %s\n"
+#~ "Tên ngôn ngữ: %s\n"
+#~ "Thư điện tử của nhóm: %s\n"
+#~ "Mã ngôn ngữ: %s\n"
+#~ "Bảng mã ký tự: %s\n"
+#~ "Mã hóa chuyển giao: %s\n"
+#~ "Dạng thức số nhiều: %s\n"
+
+#~ msgid "This assistant will help you to create the main profile."
+#~ msgstr "Phần trợ lý này giúp bạn tạo hồ sơ chính."
+
+#~ msgid "Assistant"
+#~ msgstr "Trợ lý"
+
+#~ msgid "Question"
+#~ msgstr "Câu hỏi"
+
+#~ msgid "Docum_ents with unsaved changes:"
+#~ msgstr "Tài liệu có thay đổi chư_a lưu:"
+
+#~ msgid "S_elect the documents you want to save:"
+#~ msgstr "_Chọn tài liệu bạn muốn lưu:"
+
+#~ msgid "Saving has been disabled by the system administrator."
+#~ msgstr "Việc lưu lại bị tắt bởi quản trị hệ thống."
+
+#~ msgid "If you don’t save, all your changes will be permanently lost."
+#~ msgstr ""
+#~ "Nếu bạn không lưu tài liệu, các thay đổi của bạn sẽ hoàn toàn bị mất."
+
+#~ msgid "Notes:"
+#~ msgstr "Ghi chú:"
+
+#~ msgid "Add Note"
+#~ msgstr "Thêm ghi chú"
+
+#~ msgid "Context:"
+#~ msgstr "Ngữ cảnh:"
+
+#~ msgid "Format:"
+#~ msgstr "Định dạng:"
+
+#, c-format
+#~ msgid "The current state is: %s"
+#~ msgstr "Tình trạng hiện tại là: %s"
+
+#~ msgid "Select team, module, branch and domain to get the translation file."
+#~ msgstr "Chọn nhóm, mô-đun, nhánh và tên miền để lấy tập tin dịch."
+
+#~ msgid "New window"
+#~ msgstr "Cửa sổ mới"
+
+#~ msgid "About"
+#~ msgstr "Giới thiệu"
+
+#~ msgid "Quit"
+#~ msgstr "Thoát"
+
+#~ msgid "_Open"
+#~ msgstr "_Mở"
+
+#~ msgid "_Language:"
+#~ msgstr "_Ngôn ngữ:"
+
+#~ msgid "Language _code:"
+#~ msgstr "Mã _ngôn ngữ:"
+
+#~ msgid "DL Module:"
+#~ msgstr "Mô-đun DL:"
+
+#~ msgid "DL State:"
+#~ msgstr "Trạng thái DL:"
+
+#~ msgid "Go to Message"
+#~ msgstr "Nhảy tới chuỗi"
+
+#~ msgid "Enter message number:"
+#~ msgstr "Nhập vào số thứ tự của chuỗi:"
+
+#~ msgid "Build translation memory"
+#~ msgstr "Xây dựng bộ nhớ bản dịch"
+
+#~ msgid "Edit header"
+#~ msgstr "Sửa phần đầu"
+
+#~ msgid "Open a new file (<Ctrl>o)"
+#~ msgstr "Mở một tập tin mới (<Ctrl>o)"
+
+#~ msgid "Open from Damned Lies (<Ctrl>d)"
+#~ msgstr "Mở từ Damned Lies (<Ctrl>d)"
+
+#~ msgid "Undo (<Ctrl>z)"
+#~ msgstr "Hoàn lại (<Ctrl>z)"
+
+#~ msgid "Redo (<Ctrl><Shift>z)"
+#~ msgstr "Làm lại (<Ctrl><Shift>z)"
+
+#~ msgid "Order by menu"
+#~ msgstr "Xếp theo trình đơn"
+
+#~ msgid "Find (<Ctrl><f>)"
+#~ msgstr "Tìm (<Ctrl><f>)"
+
+#~ msgid "Save the current file (<Ctrl>s)"
+#~ msgstr "Lưu tập tin hiện tại (<Ctrl>s)"
+
+#~ msgid "Save as (<Ctrl><Shift>s)"
+#~ msgstr "Lưu thành (<Ctrl><Shift>s)"
+
+#~ msgid "Upload file (<Ctrl>b)"
+#~ msgstr "Tải tập tin lên (<Ctrl>b)"
+
+#~ msgid "Active"
+#~ msgstr "Hoạt động"
+
+#~ msgid "Translation Editor Preferences"
+#~ msgstr "Tùy thích Trình sửa bản dịch"
+
+#~ msgid "_Autosave files every"
+#~ msgstr "_Tự động lưu tập tin mỗi"
+
+#~ msgid "_minutes"
+#~ msgstr "_phút"
+
+#~ msgid "Choose the editor font"
+#~ msgstr "Chọn phông trình soạn thảo"
+
+#~ msgid "_Name"
+#~ msgstr "Tê_n"
+
+#~ msgid "N_ame"
+#~ msgstr "Tê_n"
+
+#~ msgid "_Email"
+#~ msgstr "Đị_a chỉ thư"
+
+#~ msgid "_Team email"
+#~ msgstr "Địa chỉ thư điện tử của nhó_m"
+
+#~ msgid "Language Settings"
+#~ msgstr "Cài đặt ngôn ngữ"
+
+#~ msgid "Wrap Around"
+#~ msgstr "Cuộn vòng"
+
+#~ msgid "Original-text"
+#~ msgstr "Chuỗi gốc"
+
+#~ msgid "Translated-text"
+#~ msgstr "Bản dịch"
+
+#~ msgid "Close document"
+#~ msgstr "Đóng tài liệu"
+
+#~ msgid "_Upload"
+#~ msgstr "_Tải lên"
+
+#~ msgid "_Preferences"
+#~ msgstr "Tù_y chỉnh"
+
+#~ msgid "_Help"
+#~ msgstr "Trợ g_iúp"
+
+#~ msgid "Database:"
+#~ msgstr "Cơ sở dữ liệu:"
+
+#~ msgid "Configuration:"
+#~ msgstr "Cấu hình:"
+
+#~ msgid "_Use this translation"
+#~ msgstr "_Dùng bản dịch này"
+
+#~ msgid "_Remove"
+#~ msgstr "_Xóa bỏ"
+
+#~ msgid "Shortcut"
+#~ msgstr "Phím tắt"
+
+#~ msgid "Level"
+#~ msgstr "Mức"
+
+#~ msgid "String"
+#~ msgstr "Chuỗi"
+
 #, c-format
 #~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
 #~ msgstr "Tập tin '%s.%s.%s.%s' đã được tải lên!"
-
-#~ msgid "Do you want to save the changes?"
-#~ msgstr "Bạn có muốn lưu các thay đổi không?"
 
 #~ msgid "Warning"
 #~ msgstr "Cảnh báo"
@@ -1623,9 +1779,6 @@ msgstr ""
 #~ msgid "Look up words in a dictionary."
 #~ msgstr "Tìm từ ở trong từ điển"
 
-#~ msgid "Database"
-#~ msgstr "Cơ sở dữ liệu"
-
 #~ msgid "Word database"
 #~ msgstr "Cơ sở dữ liệu từ vựng"
 
@@ -1686,9 +1839,6 @@ msgstr ""
 #~ msgid "Insert Option nº %d"
 #~ msgstr "Tùy chọn chèn nº %d"
 
-#~ msgid "_Build Translation Memory"
-#~ msgstr "_Xây dựng bộ nhớ bản dịch"
-
 #~ msgid "_Translation Memory"
 #~ msgstr "_Dịch từ bộ nhớ"
 
@@ -1704,9 +1854,6 @@ msgstr ""
 
 #~ msgid "D_one"
 #~ msgstr "X_ong"
-
-#~ msgid "Status"
-#~ msgstr "Trạng thái"
 
 #~ msgid "ID"
 #~ msgstr "Mã số"
@@ -1889,9 +2036,6 @@ msgstr ""
 #~ msgid "_View"
 #~ msgstr "Trình _bày"
 
-#~ msgid "_Search"
-#~ msgstr "_Tìm kiếm"
-
 #~ msgid "_Go"
 #~ msgstr "_Đi"
 
@@ -1930,9 +2074,6 @@ msgstr ""
 
 #~ msgid "Paste the contents of the clipboard"
 #~ msgstr "Dán nội dung của clipboard"
-
-#~ msgid "Clear the selected translation"
-#~ msgstr "Xóa phần dịch đã chọn"
 
 #~ msgid "Copy _Message to Translation"
 #~ msgstr "Chép _Gốc → ô dịch"
@@ -2023,9 +2164,6 @@ msgstr ""
 
 #~ msgid "Activate next document"
 #~ msgstr "Tài liệu đang xem"
-
-#~ msgid "Activate '%s'"
-#~ msgstr "Kích hoạt “%s”"
 
 #~ msgid "Toolbar Editor"
 #~ msgstr "Hộp thoại sửa thanh công cụ"
@@ -2532,9 +2670,6 @@ msgstr ""
 #~ msgid "gtranslator's homepage on the web"
 #~ msgstr "trang chủ của gtranslator trên Mạng"
 
-#~ msgid "Save as"
-#~ msgstr "Lưu dạng"
-
 #~ msgid "Compile"
 #~ msgstr "Biên dịch"
 
@@ -2546,9 +2681,6 @@ msgstr ""
 
 #~ msgid "Back"
 #~ msgstr "Lùi"
-
-#~ msgid "Next"
-#~ msgstr "Kế"
 
 #~ msgid "Last"
 #~ msgstr "Cuối"
@@ -2576,9 +2708,6 @@ msgstr ""
 
 #~ msgid "All messages seem to be translated."
 #~ msgstr "Hình như mọi thông điệp đã được dịch."
-
-#~ msgid "Error autosaving file: %s"
-#~ msgstr "Gặp lỗi khi tự động lưu tập tin: %s"
 
 #~ msgid "Parser output"
 #~ msgstr "Kết xuất bộ phân tách"
