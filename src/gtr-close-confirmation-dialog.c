@@ -330,7 +330,7 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
                         g_list_length (priv->unsaved_documents)),
                        g_list_length (priv->unsaved_documents));
 
-  adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dlg), str);
+  adw_message_dialog_set_body (ADW_MESSAGE_DIALOG (dlg), str);
 }
 
 static void
