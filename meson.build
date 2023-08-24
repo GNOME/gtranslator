@@ -106,7 +106,6 @@ src_dir = join_paths(meson.project_source_root(), 'src')
 
 glib_dep = dependency('glib-2.0', version: '>= 2.71.3')
 gtk_dep = dependency('gtk4', version: '>= 4.6.0')
-# libhandy_dep = dependency('libhandy-1', version: '>= 1.5.0')
 libadwaita_dep = dependency('libadwaita-1', version: '>= 1.1.0')
 
 gtr_deps = [
@@ -121,6 +120,7 @@ gtr_deps = [
   dependency('libxml-2.0', version: '>= 2.4.12'),
   dependency('libsoup-3.0'),
   dependency('json-glib-1.0', version: '>= 1.2.0'),
+  dependency('libspelling-1'),
   cc.find_library('gettextpo'),
 ]
 

@@ -99,6 +99,7 @@ struct _GtrViewClass
      void gtr_view_reload_scheme_color (GtrView * view);
 
      void gtr_view_set_font (GtrView *view, char *font);
+     void gtr_view_set_lang (GtrView *view, const char *lang);
 
 
 /* Search macros */

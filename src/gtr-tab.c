@@ -526,6 +526,15 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
   GtkWidget *scroll;
   GtkWidget *label;
   GtkWidget *view;
+  GtrHeader *header;
+  GtrTabPrivate *priv;
+
+  g_autofree char *lang_code = NULL;
+
+  priv = gtr_tab_get_instance_private (tab);
+
+  header = gtr_po_get_header (priv->po);
+  lang_code = gtr_header_get_language_code (header);
 
   label = gtk_label_new (tab_label);
 
@@ -542,6 +551,7 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
                                        GTK_SHADOW_IN);*/
 
   gtk_notebook_append_page (GTK_NOTEBOOK (box), scroll, label);
+  gtr_view_set_lang (GTR_VIEW (view), lang_code);
 
   return view;
 }

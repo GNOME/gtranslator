@@ -40,6 +40,7 @@
 #include <gtk/gtk.h>
 
 #include <gtksourceview/gtksource.h>
+#include <libspelling.h>
 
 typedef struct
 {
@@ -47,6 +48,7 @@ typedef struct
   GSettings *ui_settings;
 
   GtkSourceBuffer *buffer;
+  SpellingChecker *checker;
 
   guint search_flags;
   gchar *search_text;
@@ -73,7 +75,9 @@ gtr_view_init (GtrView * view)
   gchar *ui_dir;
   GtrViewPrivate *priv;
   AdwStyleManager *manager;
+  GMenuModel *extra_menu = NULL;
 
+  g_autoptr(SpellingTextBufferAdapter) adapter = NULL;
   g_autofree char *font = NULL;
 
   priv = gtr_view_get_instance_private (view);
@@ -128,6 +132,15 @@ gtr_view_init (GtrView * view)
   g_signal_connect_swapped (manager, "notify::dark",
                             G_CALLBACK (notify_dark_cb), view);
   gtk_text_view_set_monospace (GTK_TEXT_VIEW (view), TRUE);
+
+  priv->checker = spelling_checker_new (spelling_provider_get_default (), "en_US");
+  adapter = spelling_text_buffer_adapter_new (priv->buffer, priv->checker);
+  extra_menu = spelling_text_buffer_adapter_get_menu_model (adapter);
+
+  gtk_text_view_set_extra_menu (GTK_TEXT_VIEW (view), extra_menu);
+  gtk_widget_insert_action_group (GTK_WIDGET (view), "spelling", G_ACTION_GROUP (adapter));
+  spelling_text_buffer_adapter_set_enabled (adapter, TRUE);
+  gtr_view_set_lang (GTR_VIEW (view), "en_US");
 }
 
 static void
@@ -141,6 +154,7 @@ gtr_view_dispose (GObject * object)
   g_clear_object (&priv->editor_settings);
   g_clear_object (&priv->ui_settings);
   g_clear_object (&priv->provider);
+  g_clear_object (&priv->checker);
 
   G_OBJECT_CLASS (gtr_view_parent_class)->dispose (object);
 }
@@ -808,4 +822,13 @@ gtr_view_set_font (GtrView *view, char *font)
 #else
   gtk_css_provider_load_from_data (priv->provider, css, -1);
 #endif
+}
+
+void
+gtr_view_set_lang (GtrView *view, const char *lang)
+{
+  GtrViewPrivate *priv;
+
+  priv = gtr_view_get_instance_private (view);
+  spelling_checker_set_language (priv->checker, lang);
 }
