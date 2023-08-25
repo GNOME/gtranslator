@@ -106,13 +106,19 @@ src_dir = join_paths(meson.project_source_root(), 'src')
 
 glib_dep = dependency('glib-2.0', version: '>= 2.71.3')
 gtk_dep = dependency('gtk4', version: '>= 4.6.0')
-# libhandy_dep = dependency('libhandy-1', version: '>= 1.5.0')
 libadwaita_dep = dependency('libadwaita-1', version: '>= 1.1.0')
+libspell_dep = dependency('libspelling-1', required: false)
+
+# if not libspell, we disable it
+if libspell_dep.found()
+  config_h.set('LIBSPELL', 1)
+endif
 
 gtr_deps = [
   glib_dep,
   gtk_dep,
   libadwaita_dep,
+  libspell_dep,
   dependency('libgda-6.0'),
   dependency('gio-2.0', version: '>= 2.36.0'),
   dependency('gsettings-desktop-schemas'),
@@ -164,7 +170,12 @@ output = '\n\n      GTranslator ' + gtr_version + '\n'
 output += '      =========================\n\n'
 output += '          Source ..........................: ' + meson.current_source_dir() + '\n'
 output += '          Prefix ..........................: ' + gtr_prefix + '\n'
-output += '          Compiler ........................: ' + cc.get_id() + '\n\n'
+output += '          Compiler ........................: ' + cc.get_id() + '\n'
+if libspell_dep.found()
+output += '          libspell ........................: enabled\n\n'
+else
+output += '          libspell ........................: disabled\n\n'
+endif
 output += '      Development options\n'
 output += '          Enable Debug: ...................: ' + gtr_debug.to_string() + '\n'
 output += '          Enable Documentation: ...........: ' + enable_gtk_doc.to_string() + '\n\n'
