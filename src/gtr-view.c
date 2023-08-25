@@ -40,7 +40,9 @@
 #include <gtk/gtk.h>
 
 #include <gtksourceview/gtksource.h>
+#ifdef LIBSPELL
 #include <libspelling.h>
+#endif
 
 typedef struct
 {
@@ -48,7 +50,9 @@ typedef struct
   GSettings *ui_settings;
 
   GtkSourceBuffer *buffer;
+#ifdef LIBSPELL
   SpellingChecker *checker;
+#endif
 
   guint search_flags;
   gchar *search_text;
@@ -75,9 +79,11 @@ gtr_view_init (GtrView * view)
   gchar *ui_dir;
   GtrViewPrivate *priv;
   AdwStyleManager *manager;
-  GMenuModel *extra_menu = NULL;
 
+#ifdef LIBSPELL
+  GMenuModel *extra_menu = NULL;
   g_autoptr(SpellingTextBufferAdapter) adapter = NULL;
+#endif
   g_autofree char *font = NULL;
 
   priv = gtr_view_get_instance_private (view);
@@ -133,6 +139,7 @@ gtr_view_init (GtrView * view)
                             G_CALLBACK (notify_dark_cb), view);
   gtk_text_view_set_monospace (GTK_TEXT_VIEW (view), TRUE);
 
+#ifdef LIBSPELL
   priv->checker = spelling_checker_new (spelling_provider_get_default (), "en_US");
   adapter = spelling_text_buffer_adapter_new (priv->buffer, priv->checker);
   extra_menu = spelling_text_buffer_adapter_get_menu_model (adapter);
@@ -141,6 +148,7 @@ gtr_view_init (GtrView * view)
   gtk_widget_insert_action_group (GTK_WIDGET (view), "spelling", G_ACTION_GROUP (adapter));
   spelling_text_buffer_adapter_set_enabled (adapter, TRUE);
   gtr_view_set_lang (GTR_VIEW (view), "en_US");
+#endif
 }
 
 static void
@@ -154,7 +162,9 @@ gtr_view_dispose (GObject * object)
   g_clear_object (&priv->editor_settings);
   g_clear_object (&priv->ui_settings);
   g_clear_object (&priv->provider);
+#ifdef LIBSPELL
   g_clear_object (&priv->checker);
+#endif
 
   G_OBJECT_CLASS (gtr_view_parent_class)->dispose (object);
 }
@@ -827,8 +837,10 @@ gtr_view_set_font (GtrView *view, char *font)
 void
 gtr_view_set_lang (GtrView *view, const char *lang)
 {
+#ifdef LIBSPELL
   GtrViewPrivate *priv;
 
   priv = gtr_view_get_instance_private (view);
   spelling_checker_set_language (priv->checker, lang);
+#endif
 }
