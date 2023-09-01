@@ -413,3 +413,20 @@ gtr_message_table_sort_by (GtrMessageTable *table,
       gtk_sort_list_model_set_sorter (priv->sort_model, priv->id_sorter);
     }
 }
+
+/**
+ * gtr_message_table_select:
+ * @msg: the #GtrMsg to select in the list view
+ *
+ * Select the @msg in the list view
+ */
+void
+gtr_message_table_select (GtrMessageTable * table, GtrMsg * msg)
+{
+  GtrMessageTablePrivate *priv = NULL;
+  unsigned int position = 0;
+  priv = gtr_message_table_get_instance_private (table);
+
+  g_list_store_find (priv->store, msg, &position);
+  gtk_single_selection_set_selected (GTK_SINGLE_SELECTION (priv->selection), position);
+}

@@ -1467,6 +1467,8 @@ gtr_tab_message_go_to (GtrTab * tab,
    */
   if (!searching)
     {
+      gtr_message_table_select (GTR_MESSAGE_TABLE (priv->message_table), GTR_MSG (to_go));
+
       g_signal_emit (G_OBJECT (tab), signals[SHOWED_MESSAGE], 0,
                      GTR_MSG (to_go));
 

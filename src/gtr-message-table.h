@@ -61,6 +61,8 @@ GtrMsg * gtr_message_table_navigate (GtrMessageTable * table,
                                      GtrMessageTableNavigation navigation,
                                      GtrMessageTableNavigationFunc func);
 
+void gtr_message_table_select (GtrMessageTable * table, GtrMsg * msg);
+
 void gtr_message_table_update_translation (GtrMessageTable * table,
                                            GtrMsg * msg,
                                            gchar * translation);
