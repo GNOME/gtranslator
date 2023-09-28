@@ -2199,3 +2199,11 @@ gtr_tab_get_window (GtrTab *tab)
   priv = gtr_tab_get_instance_private (tab);
   return GTK_WINDOW (priv->window);
 }
+
+
+GtkSingleSelection*
+gtr_tab_get_selection_model (GtrTab *tab)
+{
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
+  return gtr_message_table_get_selection_model (GTR_MESSAGE_TABLE (priv->message_table));
+}

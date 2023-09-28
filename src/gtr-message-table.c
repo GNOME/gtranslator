@@ -445,3 +445,10 @@ gtr_message_table_select (GtrMessageTable * table, GtrMsg * msg)
     }
   gtk_single_selection_set_selected (GTK_SINGLE_SELECTION (priv->selection), position);
 }
+
+GtkSingleSelection *
+gtr_message_table_get_selection_model (GtrMessageTable *table)
+{
+  GtrMessageTablePrivate *priv = gtr_message_table_get_instance_private (table);
+  return priv->selection;
+}

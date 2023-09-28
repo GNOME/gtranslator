@@ -169,6 +169,8 @@ void gtr_tab_find_next (GtrTab * tab);
 void gtr_tab_find_prev (GtrTab * tab);
 void gtr_tab_find_set_replace (GtrTab * tab, gboolean replace);
 
+GtkSingleSelection * gtr_tab_get_selection_model (GtrTab *tab);
+
 /* notebook */
 void gtr_tab_enable_save (GtrTab *tab, gboolean enable);
 void gtr_tab_enable_upload (GtrTab *tab, gboolean enable);

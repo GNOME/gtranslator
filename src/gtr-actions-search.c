@@ -180,12 +180,13 @@ find_in_list (GtrWindow * window,
               gboolean search_backwards)
 {
   GtrTab *tab = gtr_window_get_active_tab (window);
-  GtrPo *po = gtr_tab_get_po (tab);
-  GList *l = gtr_po_get_current_message (po);
-  GList *current;
   static GList *viewsaux = NULL;
 
-  current = l;
+  int i = 0, n = 0;
+  GtkSingleSelection *model = gtr_tab_get_selection_model (tab);
+  GtrMsg *current = NULL;
+  n = g_list_model_get_n_items (G_LIST_MODEL (model));
+  i = gtk_single_selection_get_selected (model);
 
   if (viewsaux == NULL)
     viewsaux = views;
@@ -197,6 +198,7 @@ find_in_list (GtrWindow * window,
 
   do
     {
+      current = g_list_model_get_item (G_LIST_MODEL (model), i);
       while (viewsaux != NULL)
         {
           gboolean aux = found;
@@ -204,38 +206,38 @@ find_in_list (GtrWindow * window,
           found = run_search (GTR_VIEW (viewsaux->data), found);
           if (found)
             {
-              gtr_tab_message_go_to (tab, l->data, FALSE, GTR_TAB_MOVE_NONE);
+              gtr_tab_message_go_to (tab, current, FALSE, GTR_TAB_MOVE_NONE);
               run_search (GTR_VIEW (viewsaux->data), aux);
               return TRUE;
             }
           viewsaux = viewsaux->next;
         }
-      if (!search_backwards)
+
+      if (search_backwards)
         {
-          if (l->next == NULL)
-            {
-              if (!wrap_around)
-                return FALSE;
-              l = g_list_first (l);
-            }
-          else
-            l = l->next;
+          i--;
+          if (i < 0 && !wrap_around)
+            return FALSE;
+          // wrap around
+          if (i < 0)
+            i = n - 1;
         }
       else
         {
-          if (l->prev == NULL)
-            {
-              if (!wrap_around)
-                return FALSE;
-              l = g_list_last (l);
-            }
-          else
-            l = l->prev;
+          i++;
+          if (i >= n && !wrap_around)
+          {
+            return FALSE;
+          }
+          // wrap around
+          if (i >= n)
+            i = 0;
         }
-      gtr_tab_message_go_to (tab, l->data, FALSE, GTR_TAB_MOVE_NONE);
+      current = g_list_model_get_item (G_LIST_MODEL (model), i);
+      gtr_tab_message_go_to (tab, current, FALSE, GTR_TAB_MOVE_NONE);
       viewsaux = views;
     }
-  while (l != current);
+  while (i >= 0 && i < n);
 
   return FALSE;
 }
