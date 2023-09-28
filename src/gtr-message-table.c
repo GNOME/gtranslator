@@ -108,6 +108,7 @@ gtr_message_table_selection_changed (GObject *object,
       gtr_tab_message_go_to (priv->tab, msg, FALSE, GTR_TAB_MOVE_NONE);
       g_signal_handlers_unblock_by_func (priv->tab, showed_message_cb, table);
     }
+
 }
 
 static void
@@ -425,8 +426,22 @@ gtr_message_table_select (GtrMessageTable * table, GtrMsg * msg)
 {
   GtrMessageTablePrivate *priv = NULL;
   unsigned int position = 0;
-  priv = gtr_message_table_get_instance_private (table);
+  int i = 0;
+  int nitems = 0;
+  GtrMsg *item = NULL;
 
-  g_list_store_find (priv->store, msg, &position);
+  priv = gtr_message_table_get_instance_private (table);
+  nitems = g_list_model_get_n_items (G_LIST_MODEL (priv->selection));
+
+  // look for the msg in the model
+  for (i=0; i < nitems; i++)
+    {
+      item = g_list_model_get_item (G_LIST_MODEL (priv->selection), i);
+      if (item == msg)
+        {
+          position = i;
+          break;
+        }
+    }
   gtk_single_selection_set_selected (GTK_SINGLE_SELECTION (priv->selection), position);
 }
