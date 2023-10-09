@@ -184,9 +184,11 @@ find_in_list (GtrWindow * window,
 
   int i = 0, n = 0;
   GtkSingleSelection *model = gtr_tab_get_selection_model (tab);
-  GtrMsg *current = NULL;
+  GtrMsg *current = NULL, *next = NULL;
   n = g_list_model_get_n_items (G_LIST_MODEL (model));
   i = gtk_single_selection_get_selected (model);
+
+  current = g_list_model_get_item (G_LIST_MODEL (model), i);
 
   if (viewsaux == NULL)
     viewsaux = views;
@@ -198,15 +200,14 @@ find_in_list (GtrWindow * window,
 
   do
     {
-      current = g_list_model_get_item (G_LIST_MODEL (model), i);
       while (viewsaux != NULL)
         {
           gboolean aux = found;
-
+          next = g_list_model_get_item (G_LIST_MODEL (model), i);
           found = run_search (GTR_VIEW (viewsaux->data), found);
           if (found)
             {
-              gtr_tab_message_go_to (tab, current, FALSE, GTR_TAB_MOVE_NONE);
+              gtr_tab_message_go_to (tab, next, FALSE, GTR_TAB_MOVE_NONE);
               run_search (GTR_VIEW (viewsaux->data), aux);
               return TRUE;
             }
@@ -217,7 +218,7 @@ find_in_list (GtrWindow * window,
         {
           i--;
           if (i < 0 && !wrap_around)
-            return FALSE;
+            goto notfound;
           // wrap around
           if (i < 0)
             i = n - 1;
@@ -226,19 +227,19 @@ find_in_list (GtrWindow * window,
         {
           i++;
           if (i >= n && !wrap_around)
-          {
-            return FALSE;
-          }
+            goto notfound;
           // wrap around
           if (i >= n)
             i = 0;
         }
-      current = g_list_model_get_item (G_LIST_MODEL (model), i);
-      gtr_tab_message_go_to (tab, current, FALSE, GTR_TAB_MOVE_NONE);
+      next = g_list_model_get_item (G_LIST_MODEL (model), i);
+      gtr_tab_message_go_to (tab, next, FALSE, GTR_TAB_MOVE_NONE);
       viewsaux = views;
     }
-  while (i >= 0 && i < n);
+  while (next != current);
 
+notfound:
+  gtr_tab_message_go_to (tab, current, FALSE, GTR_TAB_MOVE_NONE);
   return FALSE;
 }
 
