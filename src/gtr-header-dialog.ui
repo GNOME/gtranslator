@@ -8,7 +8,7 @@
     <!-- first page -->
     <child>
       <object class="AdwPreferencesPage">
-        <property name="title" translatable="yes">Translator and Language</property>
+        <property name="title" translatable="yes">Translator</property>
         <property name="icon_name">preferences-desktop-locale-symbolic</property>
         <child>
           <object class="AdwPreferencesGroup">
@@ -107,20 +107,25 @@
             </child>
           </object>
         </child>
-      </object>
-    </child>
-
-    <!-- Third page Comment -->
-    <child>
-      <object class="AdwPreferencesPage">
-        <property name="title" translatable="yes">Comment</property>
-        <property name="icon_name">user-available-symbolic</property>
         <child>
-          <object class="GtkScrolledWindow" id="scrolledwindow1">
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Comment</property>
             <child>
-              <object class="GtkTextView" id="prj_comment">
-                <property name="visible">True</property>
-                <property name="editable">False</property>
+              <object class="GtkScrolledWindow" id="scrolledwindow1">
+                <style>
+                  <class name="card"/>
+                </style>
+                <child>
+                  <object class="GtkTextView" id="prj_comment">
+                    <property name="editable">False</property>
+                    <property name="height_request">500</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <style>
+                      <class name="inline"/>
+                    </style>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
@@ -131,7 +136,7 @@
     <!-- Fourth page DL info -->
     <child>
       <object class="AdwPreferencesPage">
-        <property name="title" translatable="yes">Damned Lies Info</property>
+        <property name="title" translatable="yes">Damned Lies</property>
         <property name="icon_name">network-server-symbolic</property>
         <child>
           <object class="AdwPreferencesGroup">
