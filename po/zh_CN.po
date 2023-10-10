@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-07-18 19:18+0000\n"
-"PO-Revision-Date: 2023-08-05 16:22+0800\n"
+"POT-Creation-Date: 2023-10-10 05:17+0000\n"
+"PO-Revision-Date: 2023-10-10 19:03+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Gtranslator 42.0\n"
+"X-Generator: Gtranslator 45.2\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
@@ -57,7 +57,7 @@ msgstr ""
 "Gtranslator 也包含一个集合如替换语言、插入标签、open tran、与 subversion 和源"
 "代码查看器集成等许多有趣插件的插件系统。"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:174
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:182
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -389,15 +389,15 @@ msgstr "关于翻译编辑器"
 msgid "Language"
 msgstr "语言"
 
-#: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:147
+#: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:152
 msgid "Module"
 msgstr "模块"
 
-#: src/gtr-dl-teams.ui:79 src/gtr-header-dialog.ui:159
+#: src/gtr-dl-teams.ui:79 src/gtr-header-dialog.ui:164
 msgid "Domain"
 msgstr "域名"
 
-#: src/gtr-dl-teams.ui:90 src/gtr-header-dialog.ui:153
+#: src/gtr-dl-teams.ui:90 src/gtr-header-dialog.ui:158
 msgid "Branch"
 msgstr "分支"
 
@@ -526,11 +526,11 @@ msgid "Edit Header"
 msgstr "编辑文件头"
 
 #: src/gtr-header-dialog.ui:11
-msgid "Translator and Language"
-msgstr "翻译者和语言"
+msgid "Translator"
+msgstr "翻译者"
 
 #: src/gtr-header-dialog.ui:15 src/gtr-header-dialog.ui:83
-#: src/gtr-header-dialog.ui:138 src/gtr-preferences-dialog.ui:14
+#: src/gtr-header-dialog.ui:143 src/gtr-preferences-dialog.ui:14
 msgid "General"
 msgstr "常规"
 
@@ -586,19 +586,19 @@ msgstr "PO 文件修改日期(_R)"
 msgid "Report message _bugs to"
 msgstr "报告缺陷消息至(_B)"
 
-#: src/gtr-header-dialog.ui:116
+#: src/gtr-header-dialog.ui:112
 msgid "Comment"
 msgstr "注释"
 
-#: src/gtr-header-dialog.ui:134
-msgid "Damned Lies Info"
-msgstr "胡言乱语信息"
+#: src/gtr-header-dialog.ui:139
+msgid "Damned Lies"
+msgstr "胡言乱语"
 
-#: src/gtr-header-dialog.ui:141
+#: src/gtr-header-dialog.ui:146
 msgid "Lang"
 msgstr "语言"
 
-#: src/gtr-header-dialog.ui:165
+#: src/gtr-header-dialog.ui:170
 msgid "State"
 msgstr "状态"
 
@@ -910,36 +910,36 @@ msgstr ""
 msgid "There is an error in the message:"
 msgstr "消息中存在错误："
 
-#: src/gtr-tab.c:630 src/gtr-tab.c:763
+#: src/gtr-tab.c:640 src/gtr-tab.c:773
 msgid "fuzzy"
 msgstr "模糊"
 
-#: src/gtr-tab.c:792
+#: src/gtr-tab.c:802
 #, c-format
 msgid "Plural %d"
 msgstr "复数 %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1517
+#: src/gtr-tab.c:1529
 msgid "Path:"
 msgstr "路径："
 
-#: src/gtr-tab.c:2149
+#: src/gtr-tab.c:2161
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "已翻译：%0.2f%%"
 
-#: src/gtr-tab.c:2150
+#: src/gtr-tab.c:2162
 #, c-format
 msgid "Translated: %d"
 msgstr "已翻译：%d"
 
-#: src/gtr-tab.c:2151
+#: src/gtr-tab.c:2163
 #, c-format
 msgid "Untranslated: %d"
 msgstr "未翻译：%d"
 
-#: src/gtr-tab.c:2152
+#: src/gtr-tab.c:2164
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "模糊：%d"
@@ -1297,6 +1297,9 @@ msgid ""
 "translation memory."
 msgstr "显示的消息与翻译记忆匹配的消息的最大长度差。"
 
+#~ msgid "Translator and Language"
+#~ msgstr "翻译者和语言"
+
 #~ msgid "Team"
 #~ msgstr "团队"
 
@@ -1323,8 +1326,8 @@ msgstr "显示的消息与翻译记忆匹配的消息的最大长度差。"
 
 #, c-format
 #~ msgid ""
-#~ "Do you want to save changes to this file: <span weight=\"bold\" size="
-#~ "\"large\">%s</span>?"
+#~ "Do you want to save changes to this file: <span weight=\"bold\" "
+#~ "size=\"large\">%s</span>?"
 #~ msgstr ""
 #~ "您想保存修改至该文件：<span weight=\"bold\" size=\"large\">%s</span> 吗？"
 
