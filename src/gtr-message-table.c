@@ -150,7 +150,6 @@ gtr_message_table_finalize (GObject * object)
     {
       g_object_unref (priv->store);
       g_object_unref (priv->selection);
-      g_object_unref (priv->sort_model);
     }
 
   if (priv->id_sorter)
