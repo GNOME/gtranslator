@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-07-18 19:18+0000\n"
-"PO-Revision-Date: 2023-08-06 18:48+0300\n"
+"POT-Creation-Date: 2023-10-10 05:17+0000\n"
+"PO-Revision-Date: 2023-10-17 13:44+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4\n"
 "X-DL-Team: tr\n"
 "X-DL-Module: gtranslator\n"
 "X-DL-Branch: master\n"
@@ -69,7 +69,7 @@ msgstr ""
 "kaynak kod görüntüleyicisi gibi ilgi çekici birçok eklenti içeren eklenti "
 "sistemi de bulunuyor."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:174
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:182
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -293,7 +293,7 @@ msgstr "Dosyayı farklı kaydet…"
 
 #: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:453
 msgid "_Cancel"
-msgstr "_İptal"
+msgstr "İ_ptal"
 
 #: src/gtr-close-confirmation-dialog.c:123
 msgid "Close _Without Saving"
@@ -411,15 +411,15 @@ msgstr "Çeviri Düzenleyici Hakkında"
 msgid "Language"
 msgstr "Dil"
 
-#: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:147
+#: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:152
 msgid "Module"
 msgstr "Modül"
 
-#: src/gtr-dl-teams.ui:79 src/gtr-header-dialog.ui:159
+#: src/gtr-dl-teams.ui:79 src/gtr-header-dialog.ui:164
 msgid "Domain"
 msgstr "Etki Alanı"
 
-#: src/gtr-dl-teams.ui:90 src/gtr-header-dialog.ui:153
+#: src/gtr-dl-teams.ui:90 src/gtr-header-dialog.ui:158
 msgid "Branch"
 msgstr "Dal"
 
@@ -548,11 +548,11 @@ msgid "Edit Header"
 msgstr "Başlığı Düzenle"
 
 #: src/gtr-header-dialog.ui:11
-msgid "Translator and Language"
-msgstr "Çevirmen ve Dil"
+msgid "Translator"
+msgstr "Çevirmen"
 
 #: src/gtr-header-dialog.ui:15 src/gtr-header-dialog.ui:83
-#: src/gtr-header-dialog.ui:138 src/gtr-preferences-dialog.ui:14
+#: src/gtr-header-dialog.ui:143 src/gtr-preferences-dialog.ui:14
 msgid "General"
 msgstr "Genel"
 
@@ -608,19 +608,20 @@ msgstr "Po dosyasının _gözden geçirilme tarihi"
 msgid "Report message _bugs to"
 msgstr "İleti hatalarını şuraya bildir"
 
-#: src/gtr-header-dialog.ui:116
+#: src/gtr-header-dialog.ui:112
 msgid "Comment"
 msgstr "Açıklama"
 
-#: src/gtr-header-dialog.ui:134
-msgid "Damned Lies Info"
-msgstr "Damned Lies Bilgisi"
+#: src/gtr-header-dialog.ui:139
+#| msgid "Damned Lies Info"
+msgid "Damned Lies"
+msgstr "Damned Lies"
 
-#: src/gtr-header-dialog.ui:141
+#: src/gtr-header-dialog.ui:146
 msgid "Lang"
 msgstr "Dil"
 
-#: src/gtr-header-dialog.ui:165
+#: src/gtr-header-dialog.ui:170
 msgid "State"
 msgstr "Durum"
 
@@ -936,36 +937,36 @@ msgstr ""
 msgid "There is an error in the message:"
 msgstr "İletide hata var:"
 
-#: src/gtr-tab.c:630 src/gtr-tab.c:763
+#: src/gtr-tab.c:640 src/gtr-tab.c:773
 msgid "fuzzy"
 msgstr "bulanık"
 
-#: src/gtr-tab.c:792
+#: src/gtr-tab.c:802
 #, c-format
 msgid "Plural %d"
 msgstr "Çoğul %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1517
+#: src/gtr-tab.c:1529
 msgid "Path:"
 msgstr "Yol:"
 
-#: src/gtr-tab.c:2149
+#: src/gtr-tab.c:2161
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Çevrilen: %%%0.2f"
 
-#: src/gtr-tab.c:2150
+#: src/gtr-tab.c:2162
 #, c-format
 msgid "Translated: %d"
 msgstr "Çevrilen: %d"
 
-#: src/gtr-tab.c:2151
+#: src/gtr-tab.c:2163
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Çevrilmemiş: %d"
 
-#: src/gtr-tab.c:2152
+#: src/gtr-tab.c:2164
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Bulanık: %d"
@@ -1329,3 +1330,6 @@ msgid ""
 msgstr ""
 "Çeviri belleğince eşleşme olarak gösterilen iletiler arasındaki uzunluk "
 "türünden azami fark."
+
+#~ msgid "Translator and Language"
+#~ msgstr "Çevirmen ve Dil"
