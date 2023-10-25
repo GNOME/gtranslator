@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-07-18 19:18+0000\n"
-"PO-Revision-Date: 2023-07-25 15:13+0200\n"
+"POT-Creation-Date: 2023-10-10 05:17+0000\n"
+"PO-Revision-Date: 2023-10-10 16:26+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -57,7 +57,7 @@ msgstr ""
 "insticksmoduler, som alternativa språk, taggning, integration med subversion "
 "och källkodsläsare."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:174
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:182
 msgid "Daniel García Moreno"
 msgstr "Daniel García Moreno"
 
@@ -411,15 +411,15 @@ msgstr "Om Översättningsredigerare"
 msgid "Language"
 msgstr "Språk"
 
-#: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:147
+#: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:152
 msgid "Module"
 msgstr "Modul"
 
-#: src/gtr-dl-teams.ui:79 src/gtr-header-dialog.ui:159
+#: src/gtr-dl-teams.ui:79 src/gtr-header-dialog.ui:164
 msgid "Domain"
 msgstr "Domän"
 
-#: src/gtr-dl-teams.ui:90 src/gtr-header-dialog.ui:153
+#: src/gtr-dl-teams.ui:90 src/gtr-header-dialog.ui:158
 msgid "Branch"
 msgstr "Gren"
 
@@ -560,14 +560,14 @@ msgstr "Nästa"
 msgid "Edit Header"
 msgstr "Redigera po-filshuvud"
 
-# src/header_stuff.c:451
+# src/prefs.c:239
 #: src/gtr-header-dialog.ui:11
-msgid "Translator and Language"
-msgstr "Översättare och språk"
+msgid "Translator"
+msgstr "Översättare"
 
 # src/header_stuff.c:486
 #: src/gtr-header-dialog.ui:15 src/gtr-header-dialog.ui:83
-#: src/gtr-header-dialog.ui:138 src/gtr-preferences-dialog.ui:14
+#: src/gtr-header-dialog.ui:143 src/gtr-preferences-dialog.ui:14
 msgid "General"
 msgstr "Allmänt"
 
@@ -636,20 +636,20 @@ msgid "Report message _bugs to"
 msgstr "Rapportera _fel i meddelanden till"
 
 # src/header_stuff.c:462
-#: src/gtr-header-dialog.ui:116
+#: src/gtr-header-dialog.ui:112
 msgid "Comment"
 msgstr "Kommentar"
 
-#: src/gtr-header-dialog.ui:134
-msgid "Damned Lies Info"
-msgstr "Damned Lies-information"
+#: src/gtr-header-dialog.ui:139
+msgid "Damned Lies"
+msgstr "Förbannade lögner"
 
 # src/header_stuff.c:515 src/prefs.c:137
-#: src/gtr-header-dialog.ui:141
+#: src/gtr-header-dialog.ui:146
 msgid "Lang"
 msgstr "Språk"
 
-#: src/gtr-header-dialog.ui:165
+#: src/gtr-header-dialog.ui:170
 msgid "State"
 msgstr "Tillstånd"
 
@@ -986,40 +986,40 @@ msgid "There is an error in the message:"
 msgstr "Det finns ett fel i meddelandet:"
 
 # src/gui.c:385 src/gui.c:389 src/menus.c:348
-#: src/gtr-tab.c:630 src/gtr-tab.c:763
+#: src/gtr-tab.c:640 src/gtr-tab.c:773
 msgid "fuzzy"
 msgstr "luddig"
 
-#: src/gtr-tab.c:792
+#: src/gtr-tab.c:802
 #, c-format
 msgid "Plural %d"
 msgstr "Pluralis %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1517
+#: src/gtr-tab.c:1529
 msgid "Path:"
 msgstr "Sökväg:"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: src/gtr-tab.c:2149
+#: src/gtr-tab.c:2161
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Översatt: %0.2f%%"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: src/gtr-tab.c:2150
+#: src/gtr-tab.c:2162
 #, c-format
 msgid "Translated: %d"
 msgstr "Översatt: %d"
 
 # src/gui.c:407 src/gui.c:409
-#: src/gtr-tab.c:2151
+#: src/gtr-tab.c:2163
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Oöversatt: %d"
 
 # src/gui.c:385 src/gui.c:389 src/menus.c:348
-#: src/gtr-tab.c:2152
+#: src/gtr-tab.c:2164
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Luddigt: %d"
@@ -1400,6 +1400,10 @@ msgid ""
 msgstr ""
 "Maximal skillnad i längd mellan meddelanden visade som träffar av "
 "översättningsminnet."
+
+# src/header_stuff.c:451
+#~ msgid "Translator and Language"
+#~ msgstr "Översättare och språk"
 
 #~ msgid "Team"
 #~ msgstr "Grupp"
