@@ -146,7 +146,8 @@ gtr_view_init (GtrView * view)
 
   gtk_text_view_set_extra_menu (GTK_TEXT_VIEW (view), extra_menu);
   gtk_widget_insert_action_group (GTK_WIDGET (view), "spelling", G_ACTION_GROUP (adapter));
-  spelling_text_buffer_adapter_set_enabled (adapter, TRUE);
+  g_settings_bind (priv->editor_settings, GTR_SETTINGS_SPELLCHECK, adapter,
+                   "enabled", G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
   gtr_view_set_lang (GTR_VIEW (view), "en_US");
 #endif
 }
