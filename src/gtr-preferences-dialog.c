@@ -55,8 +55,8 @@ typedef struct
   GtkWidget *notebook;
 
   /* Files->General */
-  GtkSwitch *warn_if_contains_fuzzy;
-  GtkSwitch *remove_obsolete_entries;
+  AdwSwitchRow *warn_if_contains_fuzzy;
+  AdwSwitchRow *remove_obsolete_entries;
 
   /* Files->Autosave */
   GtkWidget *autosave_checkbutton;

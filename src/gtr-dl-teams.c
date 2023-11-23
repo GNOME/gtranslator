@@ -525,7 +525,8 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   GBytes *bytes;
 
   // reserve for translation first
-  reserve_first = gtk_switch_get_active (GTK_SWITCH (priv->reserve_button));
+  reserve_first
+      = adw_switch_row_get_active (ADW_SWITCH_ROW (priv->reserve_button));
   if (reserve_first)
     {
       ret = gtr_dl_teams_reserve_for_translation (priv->reserve_button, self);
