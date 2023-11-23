@@ -1,90 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="GtrTranslationMemoryDialog" parent="GtkWindow">
-    <property name="width-request">600</property>
+  <template class="GtrTranslationMemoryDialog" parent="AdwWindow">
+    <property name="width-request">360</property>
+    <property name="height-request">294</property>
     <property name="modal">True</property>
     <property name="title" translatable="yes">Translation Editor Memory Manager</property>
     <property name="destroy-with-parent">True</property>
-    <child type="titlebar">
-      <object class="GtkHeaderBar" id="titlebar">
-        <style>
-          <class name="titlebar"/>
-        </style>
-      </object>
-    </child>
-
-    <property name="child">
-      <object class="GtkOverlay" id="overlay">
-        <child type="overlay">
-          <object class="GtkProgressBar" id="add_database_progressbar">
-            <property name="visible">False</property>
-            <style>
-              <class name="osd"/>
-            </style>
-          </object>
+    <property name="content">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="GtkHeaderBar"/>
         </child>
-        <child>
-          <object class="AdwClamp">
-            <property name="maximum-size">500</property>
-            <property name="tightening-threshold">400</property>
+        <property name="content">
+          <object class="GtkOverlay" id="overlay">
+            <child type="overlay">
+              <object class="GtkProgressBar" id="add_database_progressbar">
+                <property name="visible">False</property>
+                <style>
+                  <class name="osd"/>
+                </style>
+              </object>
+            </child>
             <child>
-              <object class="GtkBox" id="main_box">
-                <property name="orientation">vertical</property>
-                <property name="margin-bottom">12</property>
-                <property name="spacing">12</property>
+              <object class="GtkScrolledWindow">
+                <property name="propagate-natural-height">True</property>
+                <property name="propagate-natural-width">True</property>
                 <child>
-                  <object class="AdwPreferencesGroup">
-                    <property name="title" translatable="yes">Database</property>
-                    <property name="vexpand">true</property>
-                    <property name="valign">center</property>
+                  <object class="AdwClamp">
+                    <property name="maximum-size">500</property>
+                    <property name="tightening-threshold">400</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-end">12</property>
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
                     <child>
-                      <object class="AdwActionRow" id="directory">
-                        <property name="title" translatable="yes">Select the directory which contains PO files</property>
-                        <property name="activatable">True</property>
-                        <signal name="activated" handler="select_directory_activated_cb" swapped="yes" />
-                        <child type="suffix">
-                          <object class="GtkImage">
-                            <property name="icon-name">go-next-symbolic</property>
+                      <object class="GtkBox" id="main_box">
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">12</property>
+                        <child>
+                          <object class="AdwPreferencesGroup">
+                            <property name="title" translatable="yes">Database</property>
+                            <property name="vexpand">true</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="AdwActionRow" id="directory">
+                                <property name="title" translatable="yes">Select the directory which contains PO files</property>
+                                <property name="activatable">True</property>
+                                <signal name="activated" handler="select_directory_activated_cb" swapped="yes" />
+                                <child type="suffix">
+                                  <object class="GtkImage">
+                                    <property name="icon-name">go-next-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="AdwActionRow" id="configuration">
+                                <property name="title" translatable="yes">Use only files with this name</property>
+                                <property name="subtitle" translatable="no"></property>
+                                <property name="activatable-widget">use_lang_profile_in_tm</property>
+                                <child type="prefix">
+                                  <object class="GtkSwitch" id="use_lang_profile_in_tm">
+                                    <property name="valign">center</property>
+                                  </object>
+                                </child>
+                                <child type="suffix">
+                                  <object class="GtkEntry" id="tm_lang_entry">
+                                    <property name="valign">center</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="add_database_button">
+                            <property name="label" translatable="yes">Add to Database</property>
+                            <property name="visible">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="halign">center</property>
+                            <style>
+                              <class name="suggested-action"/>
+                              <class name="pill"/>
+                            </style>
                           </object>
                         </child>
                       </object>
                     </child>
-                    <child>
-                      <object class="AdwActionRow" id="configuration">
-                        <property name="title" translatable="yes">Use only files with this name</property>
-                        <property name="subtitle" translatable="no"></property>
-                        <property name="activatable-widget">use_lang_profile_in_tm</property>
-                        <child type="prefix">
-                          <object class="GtkSwitch" id="use_lang_profile_in_tm">
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                        <child type="suffix">
-                          <object class="GtkEntry" id="tm_lang_entry">
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton" id="add_database_button">
-                    <property name="label" translatable="yes">Add to Database</property>
-                    <property name="visible">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="halign">center</property>
-                    <style>
-                      <class name="suggested-action"/>
-                      <class name="pill"/>
-                    </style>
                   </object>
                 </child>
               </object>
             </child>
           </object>
-        </child>
+        </property>
       </object>
     </property>
   </template>

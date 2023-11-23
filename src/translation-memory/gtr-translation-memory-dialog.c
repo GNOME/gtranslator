@@ -41,10 +41,11 @@ typedef struct
 
 struct _GtrTranslationMemoryDialog
 {
-  GtkWindow parent;
+  AdwWindow parent;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrTranslationMemoryDialog, gtr_translation_memory_dialog, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrTranslationMemoryDialog,
+                            gtr_translation_memory_dialog, ADW_TYPE_WINDOW)
 
 static void
 select_folder_cb (GtkFileDialog *dialog, GAsyncResult *res, gpointer user_data)
@@ -110,6 +111,9 @@ gtr_translation_memory_dialog_class_init (GtrTranslationMemoryDialogClass *klass
 
   object_class->finalize = gtr_translation_memory_dialog_finalize;
   object_class->dispose = gtr_translation_memory_dialog_dispose;
+
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0,
+                                       "window.close", NULL);
 
   gtk_widget_class_set_template_from_resource (
     widget_class,
