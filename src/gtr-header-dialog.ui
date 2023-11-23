@@ -14,16 +14,8 @@
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">General</property>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="take_my_options">
                 <property name="title" translatable="yes">Use my options to complete the following entries</property>
-                <property name="activatable-widget">take_my_options</property>
-                <child type="suffix">
-                  <object class="GtkSwitch" id="take_my_options">
-                    <property name="visible">True</property>
-                    <property name="receives_default">False</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
