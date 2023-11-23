@@ -2,56 +2,61 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.0"/>
-  <template class="GtrUploadDialog" parent="GtkWindow">
+  <template class="GtrUploadDialog" parent="AdwWindow">
     <property name="modal">True</property>
+    <property name="destroy-with-parent">True</property>
     <property name="title" translatable="yes">Upload to Damned Lies</property>
-    <property name="resizable">False</property>
     <property name="deletable">False</property>
-    <child type="titlebar">
-      <object class="GtkHeaderBar" id="titlebar">
-        <style>
-          <class name="titlebar"/>
-        </style>
-        <child type="start">
-          <object class="GtkButton" id="cancel">
-            <property name="label" translatable="yes">Cancel</property>
-          </object>
-        </child>
-        <child type="end">
-          <object class="GtkButton" id="upload">
-            <property name="label" translatable="yes">Upload</property>
-            <style>
-              <class name="suggested-action"/>
-            </style>
-          </object>
-        </child>
-      </object>
-    </child>
-    <property name="child">
-      <object class="GtkBox" id="vbox1">
-        <property name="orientation">vertical</property>
-        <property name="spacing">6</property>
-        <child>
-          <object class="GtkBox" id="main_box">
-            <property name="orientation">vertical</property>
-            <property name="spacing">6</property>
-            <child>
-              <object class="GtkLabel" id="label">
-                <property name="label" translatable="yes">comment:</property>
-                <property name="xalign">0</property>
+    <property name="content">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="GtkHeaderBar" id="titlebar">
+            <child type="start">
+              <object class="GtkButton" id="cancel">
+                <property name="label" translatable="yes">Cancel</property>
               </object>
             </child>
-            <child>
-              <object class="GtkTextView" id="text_view">
-                <property name="width_request">400</property>
-                <property name="height_request">100</property>
+            <child type="end">
+              <object class="GtkButton" id="upload">
+                <property name="label" translatable="yes">Upload</property>
                 <style>
-                  <class name="upload-comment"/>
+                  <class name="suggested-action"/>
                 </style>
               </object>
             </child>
           </object>
         </child>
+        <property name="content">
+          <object class="GtkScrolledWindow">
+            <property name="propagate-natural-height">True</property>
+            <property name="propagate-natural-width">True</property>
+            <property name="child">
+              <object class="AdwClamp">
+                <property name="child">
+                  <object class="GtkBox" id="main_box">
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <object class="GtkLabel" id="label">
+                        <property name="label" translatable="yes">comment:</property>
+                        <property name="xalign">0</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTextView" id="text_view">
+                        <property name="width_request">400</property>
+                        <property name="height_request">100</property>
+                        <style>
+                          <class name="upload-comment"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </property>
+          </object>
+        </property>
       </object>
     </property>
   </template>
