@@ -55,10 +55,11 @@ typedef struct
 
 struct _GtrProfileDialog
 {
-  GtkWindow parent_instance;
+  AdwWindow parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrProfileDialog, gtr_profile_dialog, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrProfileDialog, gtr_profile_dialog,
+                            ADW_TYPE_WINDOW)
 
 enum
 {
@@ -86,6 +87,9 @@ static void
 gtr_profile_dialog_class_init (GtrProfileDialogClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0,
+                                       "window.close", NULL);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/translator/gtr-profile-dialog.ui");
@@ -115,11 +119,6 @@ gtr_profile_dialog_init (GtrProfileDialog *dlg)
   GtrProfileDialogPrivate *priv = gtr_profile_dialog_get_instance_private (dlg);
 
   priv->editing = FALSE;
-
-  gtk_window_set_title (GTK_WINDOW (dlg), _("Translation Editor Profile"));
-  gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
-  gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
-  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
   gtk_widget_init_template (GTK_WIDGET (dlg));
 

@@ -23,8 +23,9 @@
 
 #pragma once
 
-#include <glib.h>
+#include <adwaita.h>
 #include <glib-object.h>
+#include <glib.h>
 #include <gtk/gtk.h>
 
 #include "gtr-profile.h"
@@ -33,7 +34,8 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_PROFILE_DIALOG (gtr_profile_dialog_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrProfileDialog, gtr_profile_dialog, GTR, PROFILE_DIALOG, GtkWindow)
+G_DECLARE_FINAL_TYPE (GtrProfileDialog, gtr_profile_dialog, GTR,
+                      PROFILE_DIALOG, AdwWindow)
 
 /*
  * Public methods
