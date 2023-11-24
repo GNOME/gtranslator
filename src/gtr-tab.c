@@ -123,7 +123,6 @@ typedef struct
   GtrSearchBar   *gtr_search_bar;
 
   /* notebook code */
-  GtkWidget *titlebar;
   GtkWidget *save;
   GtkWidget *sort_id;
   GtkWidget *sort_status;
@@ -1130,7 +1129,6 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_bar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, gtr_search_bar);
 
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, titlebar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_id);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_status);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_msgid);
@@ -1183,13 +1181,6 @@ gtr_tab_enable_upload (GtrTab *tab, gboolean enable)
 {
   GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
   gtk_widget_set_sensitive (priv->upload, enable);
-}
-
-GtkWidget *
-gtr_tab_get_header (GtrTab *tab)
-{
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-  return priv->titlebar;
 }
 
 /**
