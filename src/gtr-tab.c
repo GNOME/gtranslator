@@ -536,6 +536,7 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
 
   scroll = gtk_scrolled_window_new ();
   gtk_widget_add_css_class (scroll, "card");
+  gtk_widget_set_margin_top (scroll, 6);
 
   view = gtr_view_new ();
   gtk_widget_add_css_class (view, "inline");
