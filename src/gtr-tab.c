@@ -540,11 +540,7 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
   view = gtr_view_new ();
   gtk_widget_add_css_class (view, "inline");
 
-  //gtk_container_add (GTK_CONTAINER (scroll), view);
   gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW(scroll), view);
-
-  /*gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
-                                       GTK_SHADOW_IN);*/
 
   gtk_notebook_append_page (GTK_NOTEBOOK (box), scroll, label);
   gtr_view_set_lang (GTR_VIEW (view), lang_code);
