@@ -154,12 +154,18 @@
                   </object>
                 </child>
                 <child type="bottom">
-                  <object class="GtkBox" id="translation_box">
+                  <object class="GtkBox">
                     <property name="orientation">vertical</property>
+                    <property name="spacing">6</property>
+                    <property name="margin-start">6</property>
+                    <property name="margin-end">6</property>
+                    <property name="margin-top">6</property>
+                    <property name="margin-bottom">6</property>
                     <child>
                       <object class="GtkBox" id="text_vbox">
                         <property name="vexpand">1</property>
                         <property name="orientation">vertical</property>
+                        <property name="spacing">6</property>
                         <child>
                           <object class="GtkBox" id="text_hbox">
                             <property name="valign">center</property>
@@ -201,9 +207,16 @@
                         <child>
                           <object class="GtkScrolledWindow" id="text_msgid_scroll">
                             <property name="vexpand">1</property>
+                            <style>
+                              <class name="card"/>
+                            </style>
                             <child>
                               <object class="GtrView" id="text_msgid">
                                 <property name="editable">False</property>
+                                <property name="height-request">180</property>
+                                <style>
+                                  <class name="inline"/>
+                                </style>
                               </object>
                             </child>
                           </object>
@@ -211,9 +224,15 @@
                         <child>
                           <object class="GtkScrolledWindow" id="text_plural_scroll">
                             <property name="vexpand">1</property>
+                            <style>
+                              <class name="card"/>
+                            </style>
                             <child>
                               <object class="GtrView" id="text_msgid_plural">
                                 <property name="editable">False</property>
+                                <style>
+                                  <class name="inline"/>
+                                </style>
                               </object>
                             </child>
                           </object>
