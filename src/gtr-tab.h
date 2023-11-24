@@ -174,7 +174,6 @@ GtkSingleSelection * gtr_tab_get_selection_model (GtrTab *tab);
 /* notebook */
 void gtr_tab_enable_save (GtrTab *tab, gboolean enable);
 void gtr_tab_enable_upload (GtrTab *tab, gboolean enable);
-void gtr_tab_update_undo_buttons (GtrTab *tab, GtrView *view);
 GtkWidget *
 gtr_tab_get_header (GtrTab *tab);
 void gtr_tab_enable_find_button (GtrTab *tab, gboolean enable);
