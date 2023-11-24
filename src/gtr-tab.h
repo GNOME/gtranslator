@@ -19,9 +19,7 @@
  *   Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *   Pablo Sanxiao <psanxiao@gmail.com>
  */
-
-#ifndef __TAB_H__
-#define __TAB_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
@@ -35,30 +33,10 @@
 #include "gtr-search-bar.h"
 
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
-#define GTR_TYPE_TAB		(gtr_tab_get_type ())
-#define GTR_TAB(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_TAB, GtrTab))
-#define GTR_TAB_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_TAB, GtrTabClass))
-#define GTR_IS_TAB(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_TAB))
-#define GTR_IS_TAB_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_TAB))
-#define GTR_TAB_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_TAB, GtrTabClass))
 
-/*
- * Main object structure
- */
-typedef struct _GtrTab GtrTab;
+#define GTR_TYPE_TAB (gtr_tab_get_type ())
 
-struct _GtrTab
-{
-  GtkBox parent_instance;
-};
-
-/*
- * Class definition
- */
-typedef struct _GtrTabClass GtrTabClass;
+G_DECLARE_DERIVABLE_TYPE (GtrTab, gtr_tab, GTR, TAB, GtkBox)
 
 struct _GtrTabClass
 {
@@ -92,8 +70,6 @@ typedef enum
 /*
  * Public methods
  */
-GType gtr_tab_get_type (void) G_GNUC_CONST;
-
 GtrTab *gtr_tab_new (GtrPo * po, GtkWindow *window);
 
 GtrPo *gtr_tab_get_po (GtrTab * tab);
@@ -190,5 +166,3 @@ gchar *_gtr_tab_get_tooltips (GtrTab *tab);
 gboolean _gtr_tab_can_close (GtrTab * tab);
 
 G_END_DECLS
-
-#endif /* __TAB_H__ */
