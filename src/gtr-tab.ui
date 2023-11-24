@@ -3,9 +3,10 @@
   <requires lib="gtk" version="4.0"/>
   <template class="GtrTab" parent="AdwBin">
     <child>
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <child>
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+        <property name="bottom-bar-style">raised</property>
+        <child type="top">
           <object class="GtkSearchBar" id="search_bar">
             <child>
               <object class="GtrSearchBar" id="gtr_search_bar">
@@ -139,11 +140,7 @@
             </child>
           </object>
         </child>
-        <child>
-          <object class="GtkSeparator">
-          </object>
-        </child>
-        <child>
+        <child type="bottom">
           <object class="GtkBox" id="progress_box">
             <property name="orientation">vertical</property>
             <child>
