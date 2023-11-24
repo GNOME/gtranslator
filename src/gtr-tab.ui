@@ -25,8 +25,7 @@
               </object>
             </property>
             <property name="content">
-              <object class="GtkBox" id="vertical_box">
-                <property name="orientation">vertical</property>
+              <object class="AdwToolbarView">
                 <child>
                   <object class="GtrMessageTable" id="message_table">
                     <property name="visible">True</property>
@@ -35,11 +34,7 @@
                     <property name="width_request">450</property>
                   </object>
                 </child>
-                <child>
-                  <object class="GtkSeparator">
-                  </object>
-                </child>
-                <child>
+                <child type="bottom">
                   <object class="GtkBox" id="translation_box">
                     <property name="orientation">vertical</property>
                     <child>
