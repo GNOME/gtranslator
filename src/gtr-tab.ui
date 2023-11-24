@@ -1,190 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="GtrTab" parent="GtkBox">
-    <property name="orientation">vertical</property>
+  <template class="GtrTab" parent="AdwBin">
     <child>
-      <object class="GtkSearchBar" id="search_bar">
-        <child>
-          <object class="GtrSearchBar" id="gtr_search_bar">
-            <signal name="stop-search" handler="gtr_page_stop_search" swapped="true" object="GtrTab" />
-          </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="AdwFlap" id="hbox">
-        <property name="flap_position">end</property>
-        <property name="fold_policy">ADW_FLAP_FOLD_POLICY_NEVER</property>
-        <property name="locked">1</property>
-        <property name="reveal_flap">1</property>
-        <property name="separator">
-          <object class="GtkSeparator">
-            <property name="orientation">vertical</property>
-          </object>
-        </property>
-        <child>
-          <object class="GtkBox" id="vertical_box">
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtrMessageTable" id="message_table">
-                <property name="visible">True</property>
-                <property name="tab">GtrTab</property>
-                <property name="height_request">350</property>
-                <property name="width_request">450</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkSeparator">
-              </object>
-            </child>
-            <child>
-              <object class="GtkBox" id="translation_box">
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkBox" id="text_vbox">
-                    <property name="vexpand">1</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <object class="GtkBox" id="text_hbox">
-                        <property name="valign">center</property>
-                        <child>
-                          <object class="GtkLabel" id="msgid_label">
-                            <property name="xalign">0</property>
-                            <!--<property name="ypad">5</property>-->
-                            <property name="label" translatable="yes">_Original Message</property>
-                            <property name="use_underline">1</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"></attribute>
-                            </attributes>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="msgid_ctxt">
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="0"></property>
-                            <property name="use_underline">1</property>
-                            <property name="ellipsize">end</property>
-                            <style>
-                              <class name="msgcontext"/>
-                            </style>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="msgid_tags">
-                            <property name="xalign">0</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"></attribute>
-                            </attributes>
-                            <style>
-                              <class name="msgtags"/>
-                            </style>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkScrolledWindow" id="text_msgid_scroll">
-                        <property name="vexpand">1</property>
-                        <property name="has_frame">1</property>
-                        <child>
-                          <object class="GtrView" id="text_msgid">
-                            <property name="editable">False</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkScrolledWindow" id="text_plural_scroll">
-                        <property name="vexpand">1</property>
-                        <property name="has_frame">1</property>
-                        <child>
-                          <object class="GtrView" id="text_msgid_plural">
-                            <property name="editable">False</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="msgstr_label">
-                    <property name="valign">center</property>
-                    <property name="xalign">0</property>
-                    <!--<property name="ypad">5</property>-->
-                    <property name="label" translatable="yes">Translate_d Text</property>
-                    <property name="use_underline">1</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"></attribute>
-                    </attributes>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkNotebook" id="trans_notebook">
-                    <property name="vexpand">1</property>
-                    <property name="show_border">0</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child type="flap">
-          <object class="GtrContextPanel" id="context">
-            <property name="tab">GtrTab</property>
-            <property name="width_request">360</property>
-          </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="GtkSeparator">
-      </object>
-    </child>
-    <child>
-      <object class="GtkBox" id="progress_box">
+      <object class="GtkBox">
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkRevealer" id="progress_revealer">
-            <property name="reveal_child">1</property>
-            <property name="child">
-              <object class="GtkBox">
-                <property name="margin_start">6</property>
-                <property name="margin_end">6</property>
-                <property name="margin_top">6</property>
-                <property name="margin_bottom">6</property>
-                <property name="homogeneous">1</property>
+          <object class="GtkSearchBar" id="search_bar">
+            <child>
+              <object class="GtrSearchBar" id="gtr_search_bar">
+                <signal name="stop-search" handler="gtr_page_stop_search" swapped="true" object="GtrTab" />
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwFlap" id="hbox">
+            <property name="flap_position">end</property>
+            <property name="fold_policy">ADW_FLAP_FOLD_POLICY_NEVER</property>
+            <property name="locked">1</property>
+            <property name="reveal_flap">1</property>
+            <property name="separator">
+              <object class="GtkSeparator">
+                <property name="orientation">vertical</property>
+              </object>
+            </property>
+            <child>
+              <object class="GtkBox" id="vertical_box">
+                <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkLabel" id="progress_percentage">
-                    <property name="label">translated: 0.00%</property>
+                  <object class="GtrMessageTable" id="message_table">
+                    <property name="visible">True</property>
+                    <property name="tab">GtrTab</property>
+                    <property name="height_request">350</property>
+                    <property name="width_request">450</property>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="progress_trans">
-                    <property name="label">Translated: 0</property>
-                    <style>
-                      <class name="progress_trans"/>
-                    </style>
+                  <object class="GtkSeparator">
                   </object>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="progress_fuzzy">
-                    <property name="label">fuzzy: 0</property>
-                    <style>
-                      <class name="progress_fuzzy"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="progress_untrans">
-                    <property name="label">untranslated: 0</property>
-                    <style>
-                      <class name="progress_untranslated"/>
-                    </style>
+                  <object class="GtkBox" id="translation_box">
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkBox" id="text_vbox">
+                        <property name="vexpand">1</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkBox" id="text_hbox">
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkLabel" id="msgid_label">
+                                <property name="xalign">0</property>
+                                <!--<property name="ypad">5</property>-->
+                                <property name="label" translatable="yes">_Original Message</property>
+                                <property name="use_underline">1</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"></attribute>
+                                </attributes>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="msgid_ctxt">
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="0"></property>
+                                <property name="use_underline">1</property>
+                                <property name="ellipsize">end</property>
+                                <style>
+                                  <class name="msgcontext"/>
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="msgid_tags">
+                                <property name="xalign">0</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"></attribute>
+                                </attributes>
+                                <style>
+                                  <class name="msgtags"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkScrolledWindow" id="text_msgid_scroll">
+                            <property name="vexpand">1</property>
+                            <property name="has_frame">1</property>
+                            <child>
+                              <object class="GtrView" id="text_msgid">
+                                <property name="editable">False</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkScrolledWindow" id="text_plural_scroll">
+                            <property name="vexpand">1</property>
+                            <property name="has_frame">1</property>
+                            <child>
+                              <object class="GtrView" id="text_msgid_plural">
+                                <property name="editable">False</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="msgstr_label">
+                        <property name="valign">center</property>
+                        <property name="xalign">0</property>
+                        <!--<property name="ypad">5</property>-->
+                        <property name="label" translatable="yes">Translate_d Text</property>
+                        <property name="use_underline">1</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"></attribute>
+                        </attributes>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkNotebook" id="trans_notebook">
+                        <property name="vexpand">1</property>
+                        <property name="show_border">0</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
-            </property>
+            </child>
+            <child type="flap">
+              <object class="GtrContextPanel" id="context">
+                <property name="tab">GtrTab</property>
+                <property name="width_request">360</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="progress_box">
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkRevealer" id="progress_revealer">
+                <property name="reveal_child">1</property>
+                <property name="child">
+                  <object class="GtkBox">
+                    <property name="margin_start">6</property>
+                    <property name="margin_end">6</property>
+                    <property name="margin_top">6</property>
+                    <property name="margin_bottom">6</property>
+                    <property name="homogeneous">1</property>
+                    <child>
+                      <object class="GtkLabel" id="progress_percentage">
+                        <property name="label">translated: 0.00%</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="progress_trans">
+                        <property name="label">Translated: 0</property>
+                        <style>
+                          <class name="progress_trans"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="progress_fuzzy">
+                        <property name="label">fuzzy: 0</property>
+                        <style>
+                          <class name="progress_fuzzy"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="progress_untrans">
+                        <property name="label">untranslated: 0</property>
+                        <style>
+                          <class name="progress_untranslated"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </child>
           </object>
         </child>
       </object>

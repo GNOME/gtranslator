@@ -21,6 +21,7 @@
  */
 #pragma once
 
+#include <adwaita.h>
 #include <glib.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -36,11 +37,11 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_TAB (gtr_tab_get_type ())
 
-G_DECLARE_DERIVABLE_TYPE (GtrTab, gtr_tab, GTR, TAB, GtkBox)
+G_DECLARE_DERIVABLE_TYPE (GtrTab, gtr_tab, GTR, TAB, AdwBin)
 
 struct _GtrTabClass
 {
-  GtkBoxClass parent_class;
+  AdwBinClass parent_class;
 
   void (*showed_message) (GtrTab * tab, GtrMsg * msg);
   void (*message_changed) (GtrTab * tab, GtrMsg * msg);

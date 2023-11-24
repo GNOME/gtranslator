@@ -135,7 +135,7 @@ typedef struct
 
 } GtrTabPrivate;
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrTab, gtr_tab, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrTab, gtr_tab, ADW_TYPE_BIN)
 
 enum
 {
