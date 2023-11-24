@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <object class="GtkSeparator" id="sep">
-    <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
-  </object>
   <template class="GtrTab" parent="GtkBox">
     <property name="orientation">vertical</property>
     <child>
@@ -21,7 +18,11 @@
         <property name="fold_policy">ADW_FLAP_FOLD_POLICY_NEVER</property>
         <property name="locked">1</property>
         <property name="reveal_flap">1</property>
-        <property name="separator">sep</property>
+        <property name="separator">
+          <object class="GtkSeparator">
+            <property name="orientation">vertical</property>
+          </object>
+        </property>
         <child>
           <object class="GtkBox" id="vertical_box">
             <property name="orientation">vertical</property>
