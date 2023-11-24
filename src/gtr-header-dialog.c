@@ -115,14 +115,13 @@ gtr_header_dialog_class_init (GtrHeaderDialogClass * klass)
 }
 
 static void
-take_my_options_checkbutton_toggled (GtkSwitch *button,
-                                     GParamSpec *spec,
+take_my_options_checkbutton_toggled (AdwSwitchRow *button, GParamSpec *spec,
                                      GtrHeaderDialog *dlg)
 {
   gboolean active;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
-  active = gtk_switch_get_active (button);
+  active = adw_switch_row_get_active (button);
 
   g_settings_set_boolean (priv->settings, GTR_SETTINGS_USE_PROFILE_VALUES,
                           active);
@@ -349,8 +348,10 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
 
   gtk_widget_init_template (GTK_WIDGET (dlg));
 
-  gtk_switch_set_active (GTK_SWITCH (priv->take_my_options),
-                         g_settings_get_boolean (priv->settings, GTR_SETTINGS_USE_PROFILE_VALUES));
+  adw_switch_row_set_active (
+      ADW_SWITCH_ROW (priv->take_my_options),
+      g_settings_get_boolean (priv->settings,
+                              GTR_SETTINGS_USE_PROFILE_VALUES));
 
   gtk_text_view_set_editable (GTK_TEXT_VIEW (priv->prj_comment), TRUE);
 
@@ -359,12 +360,12 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
   gtk_widget_set_sensitive (priv->charset, FALSE);
   gtk_widget_set_sensitive (priv->state, FALSE);
 
-  if (gtk_switch_get_active (GTK_SWITCH (priv->take_my_options)))
+  if (adw_switch_row_get_active (ADW_SWITCH_ROW (priv->take_my_options)))
     {
       gboolean active;
 
-      active =
-        gtk_switch_get_active (GTK_SWITCH (priv->take_my_options));
+      active
+          = adw_switch_row_get_active (ADW_SWITCH_ROW (priv->take_my_options));
 
       gtk_widget_set_sensitive (priv->translator, !active);
       gtk_widget_set_sensitive (priv->tr_email, !active);

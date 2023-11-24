@@ -42,10 +42,11 @@ typedef struct
 
 struct _GtrUploadDialog
 {
-  GtkWindow parent_instance;
+  AdwWindow parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrUploadDialog, gtr_upload_dialog, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrUploadDialog, gtr_upload_dialog,
+                            ADW_TYPE_WINDOW)
 
 enum
 {
@@ -75,6 +76,9 @@ gtr_upload_dialog_class_init (GtrUploadDialogClass *klass)
   gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass),
                                                "/org/gnome/translator/gtr-upload-dialog.ui");
 
+  gtk_widget_class_add_binding_action (
+      GTK_WIDGET_CLASS (klass), GDK_KEY_Escape, 0, "window.close", NULL);
+
   /* Main layout widgets */
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, main_box);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, text_view);
@@ -97,8 +101,6 @@ gtr_upload_dialog_init (GtrUploadDialog *dlg)
 {
   GtrUploadDialogPrivate *priv = gtr_upload_dialog_get_instance_private (dlg);
   gtk_widget_init_template (GTK_WIDGET (dlg));
-
-  gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
   g_signal_connect (GTK_BUTTON (priv->upload), "clicked",
                     G_CALLBACK (on_upload_button_clicked), dlg);

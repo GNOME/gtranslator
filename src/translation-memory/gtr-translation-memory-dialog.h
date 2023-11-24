@@ -24,7 +24,9 @@
 G_BEGIN_DECLS
 
 #define GTR_TYPE_TRANSLATION_MEMORY_DIALOG             (gtr_translation_memory_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (GtrTranslationMemoryDialog, gtr_translation_memory_dialog, GTR, TRANSLATION_MEMORY_DIALOG, GtkWindow)
+G_DECLARE_FINAL_TYPE (GtrTranslationMemoryDialog,
+                      gtr_translation_memory_dialog, GTR,
+                      TRANSLATION_MEMORY_DIALOG, AdwWindow)
 
 GtkWidget       *gtr_translation_memory_dialog_new          (GtkWindow *window,
                                                              GtrTranslationMemory *translation_memory);

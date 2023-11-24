@@ -20,15 +20,17 @@
 
 #pragma once
 
-#include <glib.h>
+#include <adwaita.h>
 #include <glib-object.h>
+#include <glib.h>
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
 #define GTR_TYPE_UPLOAD_DIALOG          (gtr_upload_dialog_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrUploadDialog, gtr_upload_dialog, GTR, UPLOAD_DIALOG, GtkWindow)
+G_DECLARE_FINAL_TYPE (GtrUploadDialog, gtr_upload_dialog, GTR, UPLOAD_DIALOG,
+                      AdwWindow)
 
 /*
  * Public methods

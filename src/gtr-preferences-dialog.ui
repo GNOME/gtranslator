@@ -13,25 +13,15 @@
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">General</property>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="warn_if_contains_fuzzy">
                 <property name="title" translatable="yes">_Warn if PO file contains fuzzy translations</property>
                 <property name="use_underline">True</property>
-                <child>
-                  <object class="GtkSwitch" id="warn_if_contains_fuzzy">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="remove_obsolete_entries">
                 <property name="title" translatable="yes">_Remove obsolete entries on save</property>
                 <property name="use_underline">True</property>
-                <child>
-                  <object class="GtkSwitch" id="remove_obsolete_entries">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
@@ -40,45 +30,30 @@
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Autosave</property>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="autosave_checkbutton">
                 <property name="title" translatable="yes">_Activate auto save</property>
                 <property name="use_underline">True</property>
-                <child>
-                  <object class="GtkSwitch" id="autosave_checkbutton">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow">
-                <property name="title" translatable="yes">Autosave _interval</property>
+              <object class="AdwSpinRow" id="autosave_interval_spinbutton">
+                <property name="title" translatable="yes">Autosave _Interval</property>
                 <property name="use_underline">True</property>
-                <child>
-                  <object class="GtkSpinButton" id="autosave_interval_spinbutton">
-                    <property name="valign">center</property>
-                    <property name="adjustment">
-                      <object class="GtkAdjustment" id="adjustment1">
-                        <property name="lower">1</property>
-                        <property name="upper">30</property>
-                        <property name="value">4</property>
-                        <property name="step_increment">1</property>
-                        <property name="page_increment">10</property>
-                      </object>
-                    </property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment" id="adjustment1">
+                    <property name="lower">1</property>
+                    <property name="upper">30</property>
+                    <property name="value">4</property>
+                    <property name="step_increment">1</property>
+                    <property name="page_increment">10</property>
                   </object>
-                </child>
+                </property>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="create_backup">
                 <property name="title" translatable="yes">Create a _backup copy of files before saving</property>
                 <property name="use_underline">True</property>
-                <child>
-                  <object class="GtkSwitch" id="create_backup">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
@@ -96,25 +71,15 @@
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Text Display</property>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="highlight_syntax_checkbutton">
                 <property name="title" translatable="yes">_Highlight message syntax</property>
                 <property name="use_underline">True</property>
-                <child>
-                  <object class="GtkSwitch" id="highlight_syntax_checkbutton">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="visible_whitespace_checkbutton">
                 <property name="title" translatable="yes">Make _whitespace visible</property>
                 <property name="use_underline">True</property>
-                <child>
-                  <object class="GtkSwitch" id="visible_whitespace_checkbutton">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
@@ -139,27 +104,15 @@
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Contents</property>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="unmark_fuzzy_when_changed_checkbutton">
                 <property name="title" translatable="yes">_Remove fuzzy status if message is changed</property>
                 <property name="use_underline">True</property>
-                <child>
-                  <object class="GtkSwitch" id="unmark_fuzzy_when_changed_checkbutton">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow">
-                <!-- Hide this until we've the check spelling library -->
-                <property name="visible">false</property>
+              <object class="AdwSwitchRow" id="spellcheck_checkbutton">
                 <property name="title" translatable="yes">Check _spelling</property>
                 <property name="use_underline">True</property>
-                <child>
-                  <object class="GtkSwitch" id="spellcheck_checkbutton">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>

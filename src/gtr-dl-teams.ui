@@ -31,10 +31,10 @@
         <property name="tightening-threshold">400</property>
         <child>
           <object class="GtkBox" id="main_box">
-            <property name="margin_start">134</property>
-            <property name="margin_end">134</property>
-            <property name="margin_top">24</property>
-            <property name="margin_bottom">24</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">12</property>
+            <property name="margin_top">12</property>
+            <property name="margin_bottom">12</property>
             <property name="vexpand">0</property>
             <property name="valign">center</property>
             <property name="orientation">vertical</property>
@@ -103,13 +103,8 @@
                   </object>
                 </child>
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="AdwSwitchRow" id="reserve_button">
                     <property name="title" translatable="yes">Reserve for translation</property>
-                    <child>
-                      <object class="GtkSwitch" id="reserve_button">
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
               </object>

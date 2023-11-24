@@ -72,7 +72,6 @@ typedef struct
   GtrCodeView *codeview;
 
   GtkWidget *header_bar;
-  GtkWidget *main_box;
 
   GtkWidget *header_stack;
   GtkWidget *stack;
@@ -80,6 +79,8 @@ typedef struct
   GtkWidget *projects;
   GtkWidget *dlteams;
   GtkWidget *greeter;
+
+  AdwToolbarView *toolbar_view;
 
   GtkWidget *toast_overlay;
 
@@ -352,11 +353,13 @@ gtr_window_class_init (GtrWindowClass *klass)
                                                "/org/gnome/translator/gtr-window.ui");
 
   /* Main layout widgets */
-  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, header_bar);
-  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, main_box);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass),
+                                                GtrWindow, header_bar);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, stack);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, header_stack);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, toast_overlay);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass),
+                                                GtrWindow, toolbar_view);
 }
 
 static void
@@ -606,6 +609,7 @@ gtr_window_show_projects (GtrWindow *window)
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "projects");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "projects");
   gtk_window_set_title (GTK_WINDOW (window), _("Select a Po file"));
+  adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_FLAT);
 }
 
 void
@@ -615,6 +619,7 @@ gtr_window_show_poeditor (GtrWindow *window)
 
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "poeditor");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "poeditor");
+  adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_RAISED);
 }
 
 void
@@ -625,6 +630,7 @@ gtr_window_show_dlteams (GtrWindow *window)
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "dlteams");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "dlteams");
   gtk_window_set_title (GTK_WINDOW (window), _("Load from Damned Lies"));
+  adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_FLAT);
 
   /* Load teams and modules automatically */
   gtr_dl_teams_load_json (GTR_DL_TEAMS (priv->dlteams));
@@ -638,6 +644,7 @@ gtr_window_show_greeter (GtrWindow *window)
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "greeter");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "greeter");
   gtk_window_set_title (GTK_WINDOW (window), _("Welcome to Translation Editor"));
+  adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_FLAT);
 }
 
 void
