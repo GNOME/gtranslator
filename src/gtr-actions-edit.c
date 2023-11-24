@@ -33,60 +33,6 @@
 #include "gtr-window.h"
 
 void
-gtr_actions_edit_undo (GtrWindow * window)
-{
-  GtrView *active_view;
-  GtkSourceBuffer *active_document;
-  GtrTab *current;
-  GList *msg;
-  GtrPo *po;
-
-  current = gtr_window_get_active_tab (window);
-  po = gtr_tab_get_po (current);
-  msg = gtr_po_get_current_message (po);
-  active_view = gtr_window_get_active_view (window);
-
-  g_return_if_fail (active_view);
-
-  active_document =
-    GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
-                       (GTK_TEXT_VIEW (active_view)));
-
-  if (gtk_text_buffer_get_can_undo (GTK_TEXT_BUFFER(active_document)))
-    gtk_text_buffer_undo (GTK_TEXT_BUFFER(active_document));
-
-  gtk_widget_grab_focus (GTK_WIDGET (active_view));
-  g_signal_emit_by_name (current, "message_changed", msg->data);
-}
-
-void
-gtr_actions_edit_redo (GtrWindow * window)
-{
-  GtrView *active_view;
-  GtkSourceBuffer *active_document;
-  GtrTab *current;
-  GList *msg;
-  GtrPo *po;
-
-  current = gtr_window_get_active_tab (window);
-  po = gtr_tab_get_po (current);
-  msg = gtr_po_get_current_message (po);
-
-  active_view = gtr_window_get_active_view (window);
-  g_return_if_fail (active_view);
-
-  active_document =
-    GTK_SOURCE_BUFFER (gtk_text_view_get_buffer
-                       (GTK_TEXT_VIEW (active_view)));
-
-  if (gtk_text_buffer_get_can_redo (GTK_TEXT_BUFFER(active_document)))
-    gtk_text_buffer_redo (GTK_TEXT_BUFFER(active_document));
-
-  gtk_widget_grab_focus (GTK_WIDGET (active_view));
-  g_signal_emit_by_name (current, "message_changed", msg->data);
-}
-
-void
 gtr_actions_edit_cut (GtrWindow * window)
 {
   GtrView *active_view;

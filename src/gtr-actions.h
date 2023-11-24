@@ -70,10 +70,6 @@ void _gtr_actions_file_close_all (GtrWindow * window);
 void _gtr_actions_file_save_all (GtrWindow * window);
 
 /*Edit*/
-void gtr_actions_edit_undo (GtrWindow * window);
-
-void gtr_actions_edit_redo (GtrWindow * window);
-
 void gtr_actions_edit_cut (GtrWindow * window);
 
 void gtr_actions_edit_copy (GtrWindow * window);
