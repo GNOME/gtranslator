@@ -33,13 +33,20 @@ appdata_in = configure_file(
   configuration: appdata_conf,
 )
 
-i18n.merge_file(
+appstream_file = i18n.merge_file(
   input: appdata_in,
   output: appdata,
   po_dir: po_dir,
   install: true,
   install_dir: join_paths(gtr_datadir, 'metainfo'),
 )
+
+appstreamcli = find_program('appstreamcli', required: false)
+if appstreamcli.found()
+  test('Validate appstream file', appstreamcli,
+    args: ['validate', '--no-net', appstream_file]
+  )
+endif
 
 # GSettings schema
 schema_conf = configuration_data()
