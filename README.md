@@ -17,9 +17,9 @@ please file a report under the gtranslator product in GNOME gitlab at:
 
 If you have got any problems, need support, want to give any ideas, hints,
 blame us, spam us or declare your love to gtranslator you can do this via the
-gtranslator-devel mailing on gnome; you can register via:
+GNOME support forum:
 
-    http://mail.gnome.org/mailman/listinfo/gtranslator-list
+    https://discourse.gnome.org/c/applications/
 
 We've also an IRC channel, you can contact us directly in the #gtranslator channel:
 
