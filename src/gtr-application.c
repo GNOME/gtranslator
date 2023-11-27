@@ -551,7 +551,7 @@ static GActionEntry app_entries[] = {
   { "find", find_activated, NULL, NULL, NULL },
   { "find-next", find_next_activated, NULL, NULL, NULL },
   { "find-prev", find_prev_activated, NULL, NULL, NULL },
-  { "new_window", new_window_activated, NULL, NULL, NULL },
+  { "new-window", new_window_activated, NULL, NULL, NULL },
   { "preferences", preferences_activated, NULL, NULL, NULL },
   { "edit_header", edit_header_activated, NULL, NULL, NULL },
   { "clear_msgstr", clear_msgstr_activated, NULL, NULL, NULL },
