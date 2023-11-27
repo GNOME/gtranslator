@@ -412,26 +412,6 @@ dl_activated (GSimpleAction *action,
 }
 
 static void
-undo_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
-{
-  GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_actions_edit_undo (priv->active_window);
-}
-
-static void
-redo_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
-{
-  GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_actions_edit_redo (priv->active_window);
-}
-
-static void
 prev_activated (GSimpleAction *action,
                 GVariant      *parameter,
                 gpointer       user_data)
@@ -537,9 +517,6 @@ static GActionEntry app_entries[] = {
   { "open", open_activated, NULL, NULL, NULL },
   { "dl", dl_activated, NULL, NULL, NULL },
 
-  { "undo", undo_activated, NULL, NULL, NULL },
-  { "redo", redo_activated, NULL, NULL, NULL },
-
   { "prev", prev_activated, NULL, NULL, NULL },
   { "next", next_activated, NULL, NULL, NULL },
 
@@ -622,8 +599,6 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.help", "F1");
   set_kb (application, "app.quit", "<Primary>q");
 
-  set_kb (application, "app.undo", "<Ctrl>z");
-  set_kb (application, "app.redo", "<Ctrl><Shift>z");
   set_kb (application, "app.clear_msgstr", "<Ctrl>k");
 
   set_kb (application, "app.prev", "<Alt>Left");

@@ -120,15 +120,6 @@ free_match (gpointer data)
   g_slice_free (GtrTranslationMemoryMatch, match);
 }
 
-static void
-update_undo_state (GtrTab     *tab,
-                   GtrMsg     *msg,
-                   GtrWindow  *window)
-{
-  GtrView *active_view = gtr_window_get_active_view (window);
-  gtr_tab_update_undo_buttons (GTR_TAB (tab), active_view);
-}
-
 /*
  * gtr_window_update_statusbar_message_count:
  * 
@@ -404,24 +395,13 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   priv->active_tab = tab;
 
   g_signal_connect_after (tab,
-                          "message_changed",
+                          "message-changed",
                           G_CALLBACK
                           (gtr_window_update_statusbar_message_count),
                           window);
 
-  g_signal_connect_after (tab,
-                          "message_changed",
-                          G_CALLBACK (update_undo_state),
-                          window);
-  g_signal_connect_after (tab,
-                          "showed-message",
-                          G_CALLBACK (update_undo_state),
-                          window);
-
   gtk_widget_set_visible (GTK_WIDGET (tab), TRUE);
   gtr_window_update_statusbar_message_count(priv->active_tab,NULL, window);
-
-  update_undo_state (tab, NULL, window);
 
   if (gtk_stack_get_child_by_name (GTK_STACK (priv->stack), "poeditor") == NULL) {
     gtk_stack_add_named (GTK_STACK (priv->stack), GTK_WIDGET(priv->active_tab), "poeditor");

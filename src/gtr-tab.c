@@ -133,9 +133,6 @@ typedef struct
   GtkWidget *search_toggle;
   GtkWidget *upload;
 
-  GtkWidget *undo;
-  GtkWidget *redo;
-
 } GtrTabPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrTab, gtr_tab, GTK_TYPE_BOX)
@@ -1138,8 +1135,6 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_translated);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, order_menu_popover);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_toggle);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, undo);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, redo);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, save);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, upload);
 
@@ -1179,26 +1174,6 @@ gtr_tab_enable_save (GtrTab *tab,
 {
   GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
   gtk_widget_set_sensitive (priv->save, enable);
-}
-
-void
-gtr_tab_update_undo_buttons (GtrTab *tab,
-                                  GtrView  *view)
-{
-  GtkSourceBuffer *active_document;
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-  gboolean can_undo, can_redo;
-  g_return_if_fail (view);
-
-  active_document =
-    GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
-  g_return_if_fail(active_document);
-
-  can_undo = gtk_text_buffer_get_can_undo (GTK_TEXT_BUFFER(active_document));
-  can_redo = gtk_text_buffer_get_can_redo (GTK_TEXT_BUFFER(active_document));
-
-  gtk_widget_set_sensitive (priv->undo, can_undo);
-  gtk_widget_set_sensitive (priv->redo, can_redo);
 }
 
 void
