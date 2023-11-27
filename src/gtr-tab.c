@@ -84,7 +84,7 @@ typedef struct
   GtkWidget *window;
 
   /* Flap state */
-  AdwFlap *hbox;
+  AdwOverlaySplitView *overlay_split_view;
   gboolean flap_state;
 
   GtkWidget *message_table;
@@ -123,7 +123,6 @@ typedef struct
   GtrSearchBar   *gtr_search_bar;
 
   /* notebook code */
-  GtkWidget *titlebar;
   GtkWidget *save;
   GtkWidget *sort_id;
   GtkWidget *sort_status;
@@ -135,7 +134,7 @@ typedef struct
 
 } GtrTabPrivate;
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrTab, gtr_tab, GTK_TYPE_BOX)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrTab, gtr_tab, ADW_TYPE_BIN)
 
 enum
 {
@@ -536,16 +535,14 @@ gtr_tab_append_msgstr_page (const gchar * tab_label,
   label = gtk_label_new (tab_label);
 
   scroll = gtk_scrolled_window_new ();
-  gtk_widget_set_visible (scroll, TRUE);
+  gtk_widget_add_css_class (scroll, "card");
+  gtk_widget_set_margin_top (scroll, 6);
+  gtk_widget_set_size_request (scroll, -1, 75);
 
   view = gtr_view_new ();
-  gtk_widget_set_visible (view, TRUE);
+  gtk_widget_add_css_class (view, "inline");
 
-  //gtk_container_add (GTK_CONTAINER (scroll), view);
   gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW(scroll), view);
-
-  /*gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
-                                       GTK_SHADOW_IN);*/
 
   gtk_notebook_append_page (GTK_NOTEBOOK (box), scroll, label);
   gtr_view_set_lang (GTR_VIEW (view), lang_code);
@@ -878,6 +875,8 @@ gtr_tab_init (GtrTab * tab)
   /*Load gsettings for flap */
   priv->flap_state = g_settings_get_boolean (priv->state_settings,
                                              GTR_SETTINGS_FLAP_STATE);
+  adw_overlay_split_view_set_show_sidebar (priv->overlay_split_view,
+                                           priv->flap_state);
 
   /* Manage auto save data */
   priv->autosave = g_settings_get_boolean (priv->files_settings,
@@ -940,7 +939,7 @@ save_pane_state(GtrTab *tab)
 
   priv = gtr_tab_get_instance_private (tab);
 
-  priv->flap_state = adw_flap_get_folded (priv->hbox);
+  priv->flap_state = adw_overlay_split_view_get_show_sidebar (priv->overlay_split_view);
 
   g_settings_set_boolean (priv->state_settings, GTR_SETTINGS_FLAP_STATE,
                           priv->flap_state);
@@ -1117,7 +1116,7 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, msgstr_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, trans_notebook);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, context);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, hbox);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, overlay_split_view);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_box);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, progress_revealer);
@@ -1128,7 +1127,6 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_bar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, gtr_search_bar);
 
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, titlebar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_id);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_status);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_msgid);
@@ -1181,13 +1179,6 @@ gtr_tab_enable_upload (GtrTab *tab, gboolean enable)
 {
   GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
   gtk_widget_set_sensitive (priv->upload, enable);
-}
-
-GtkWidget *
-gtr_tab_get_header (GtrTab *tab)
-{
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-  return priv->titlebar;
 }
 
 /**

@@ -1,185 +1,315 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <object class="GtkSeparator" id="sep">
-    <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
-  </object>
-  <template class="GtrTab" parent="GtkBox">
-    <property name="orientation">vertical</property>
+  <template class="GtrTab" parent="AdwBin">
     <child>
-      <object class="GtkSearchBar" id="search_bar">
-        <child>
-          <object class="GtrSearchBar" id="gtr_search_bar">
-            <signal name="stop-search" handler="gtr_page_stop_search" swapped="true" object="GtrTab" />
-          </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="AdwFlap" id="hbox">
-        <property name="flap_position">end</property>
-        <property name="fold_policy">ADW_FLAP_FOLD_POLICY_NEVER</property>
-        <property name="locked">1</property>
-        <property name="reveal_flap">1</property>
-        <property name="separator">sep</property>
-        <child>
-          <object class="GtkBox" id="vertical_box">
-            <property name="orientation">vertical</property>
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+        <property name="bottom-bar-style">raised</property>
+        <child type="top">
+          <object class="GtkHeaderBar">
             <child>
-              <object class="GtrMessageTable" id="message_table">
-                <property name="visible">True</property>
-                <property name="tab">GtrTab</property>
-                <property name="height_request">350</property>
-                <property name="width_request">450</property>
+              <object class="GtkButton" id="open_button">
+                <property name="receives_default">1</property>
+                <property name="tooltip_text" translatable="yes">Open a New File</property>
+                <property name="action_name">app.open</property>
+                <property name="icon_name">document-open-symbolic</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="dl_button">
+                <property name="tooltip_text" translatable="yes">Open from Damned Lies</property>
+                <property name="action_name">app.dl</property>
+                <property name="icon_name">folder-download-symbolic</property>
               </object>
             </child>
             <child>
               <object class="GtkSeparator">
+                <style>
+                  <class name="spacer"/>
+                </style>
               </object>
             </child>
             <child>
-              <object class="GtkBox" id="translation_box">
-                <property name="orientation">vertical</property>
+              <object class="GtkButton" id="prev_untranslated">
+                <property name="receives_default">1</property>
+                <property name="tooltip_text" translatable="yes">Previous message without translation (&lt;Alt&gt;&lt;Page Up&gt;)</property>
+                <property name="action_name">app.prev_no</property>
+                <property name="icon_name">go-up-symbolic</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="next_untranslated">
+                <property name="receives_default">1</property>
+                <property name="tooltip_text" translatable="yes">Next message without translation (&lt;Alt&gt;&lt;Page Down&gt;)</property>
+                <property name="action_name">app.next_no</property>
+                <property name="icon_name">go-down-symbolic</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSeparator">
+                <style>
+                  <class name="spacer"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="receives_default">1</property>
+                <property name="tooltip_text" translatable="yes">Toggle Fuzzy State</property>
+                <property name="action_name">app.fuzzy</property>
+                <property name="icon_name">approximate-symbolic</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuButton" id="sortby_menu">
+                <property name="receives_default">1</property>
+                <property name="popover">order_menu_popover</property>
+                <property name="tooltip_text" translatable="yes">Sort messages by</property>
+                <property name="icon_name">view-sort-ascending-symbolic</property>
+                <property name="primary">True</property>
+              </object>
+            </child>
+            <child type="end">
+              <object class="GtkMenuButton" id="main_menu">
+                <property name="receives_default">1</property>
+                <property name="popover">main_menu_popover</property>
+                <property name="icon_name">open-menu-symbolic</property>
+                <property name="tooltip_text" translatable="yes">Main Menu</property>
+                <property name="primary">True</property>
+              </object>
+            </child>
+            <child type="end">
+              <object class="GtkToggleButton" id="search_toggle">
+                <property name="receives_default">1</property>
+                <property name="tooltip_text" translatable="yes">Find</property>
+                <property name="action_name">app.findtoggle</property>
+                <property name="icon_name">edit-find-symbolic</property>
+              </object>
+            </child>
+            <child type="end">
+              <object class="GtkSeparator">
+                <style>
+                  <class name="spacer"/>
+                </style>
+              </object>
+            </child>
+            <child type="end">
+              <object class="GtkButton" id="upload">
+                <property name="receives_default">1</property>
+                <property name="tooltip_text" translatable="yes">Upload File</property>
+                <property name="action_name">app.upload_file</property>
+                <property name="icon_name">document-send-symbolic</property>
+              </object>
+            </child>
+            <child type="end">
+              <object class="GtkButton">
+                <property name="receives_default">1</property>
+                <property name="tooltip_text" translatable="yes">Save as</property>
+                <property name="action_name">app.saveas</property>
+                <property name="icon_name">document-save-as-symbolic</property>
+              </object>
+            </child>
+            <child type="end">
+              <object class="GtkButton" id="save">
+                <property name="receives_default">1</property>
+                <property name="tooltip_text" translatable="yes">Save Current File</property>
+                <property name="action_name">app.save</property>
                 <child>
-                  <object class="GtkBox" id="text_vbox">
-                    <property name="vexpand">1</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <object class="GtkBox" id="text_hbox">
-                        <property name="valign">center</property>
-                        <child>
-                          <object class="GtkLabel" id="msgid_label">
-                            <property name="xalign">0</property>
-                            <!--<property name="ypad">5</property>-->
-                            <property name="label" translatable="yes">_Original Message</property>
-                            <property name="use_underline">1</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"></attribute>
-                            </attributes>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="msgid_ctxt">
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="0"></property>
-                            <property name="use_underline">1</property>
-                            <property name="ellipsize">end</property>
-                            <style>
-                              <class name="msgcontext"/>
-                            </style>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="msgid_tags">
-                            <property name="xalign">0</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"></attribute>
-                            </attributes>
-                            <style>
-                              <class name="msgtags"/>
-                            </style>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkScrolledWindow" id="text_msgid_scroll">
-                        <property name="vexpand">1</property>
-                        <property name="has_frame">1</property>
-                        <child>
-                          <object class="GtrView" id="text_msgid">
-                            <property name="editable">False</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkScrolledWindow" id="text_plural_scroll">
-                        <property name="vexpand">1</property>
-                        <property name="has_frame">1</property>
-                        <child>
-                          <object class="GtrView" id="text_msgid_plural">
-                            <property name="editable">False</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="msgstr_label">
-                    <property name="valign">center</property>
-                    <property name="xalign">0</property>
-                    <!--<property name="ypad">5</property>-->
-                    <property name="label" translatable="yes">Translate_d Text</property>
-                    <property name="use_underline">1</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"></attribute>
-                    </attributes>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkNotebook" id="trans_notebook">
-                    <property name="vexpand">1</property>
-                    <property name="show_border">0</property>
+                  <object class="AdwButtonContent">
+                    <property name="label" translatable="yes">Save</property>
+                    <property name="icon_name">document-save-symbolic</property>
                   </object>
                 </child>
               </object>
             </child>
           </object>
         </child>
-        <child type="flap">
-          <object class="GtrContextPanel" id="context">
-            <property name="tab">GtrTab</property>
-            <property name="width_request">360</property>
+        <child type="top">
+          <object class="GtkSearchBar" id="search_bar">
+            <child>
+              <object class="GtrSearchBar" id="gtr_search_bar">
+                <signal name="stop-search" handler="gtr_page_stop_search" swapped="true" object="GtrTab" />
+              </object>
+            </child>
           </object>
         </child>
-      </object>
-    </child>
-    <child>
-      <object class="GtkSeparator">
-      </object>
-    </child>
-    <child>
-      <object class="GtkBox" id="progress_box">
-        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkRevealer" id="progress_revealer">
-            <property name="reveal_child">1</property>
-            <property name="child">
-              <object class="GtkBox">
-                <property name="margin_start">6</property>
-                <property name="margin_end">6</property>
-                <property name="margin_top">6</property>
-                <property name="margin_bottom">6</property>
-                <property name="homogeneous">1</property>
+          <object class="AdwOverlaySplitView" id="overlay_split_view">
+            <property name="sidebar-position">end</property>
+            <property name="sidebar">
+              <object class="GtrContextPanel" id="context">
+                <property name="tab">GtrTab</property>
+                <property name="width_request">360</property>
+              </object>
+            </property>
+            <property name="content">
+              <object class="AdwToolbarView">
+                <style>
+                  <class name="view"/>
+                </style>
                 <child>
-                  <object class="GtkLabel" id="progress_percentage">
-                    <property name="label">translated: 0.00%</property>
+                  <object class="GtrMessageTable" id="message_table">
+                    <property name="visible">True</property>
+                    <property name="tab">GtrTab</property>
+                    <property name="height_request">350</property>
+                    <property name="width_request">450</property>
                   </object>
                 </child>
-                <child>
-                  <object class="GtkLabel" id="progress_trans">
-                    <property name="label">Translated: 0</property>
-                    <style>
-                      <class name="progress_trans"/>
-                    </style>
+                <child type="bottom">
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">6</property>
+                    <property name="margin-start">6</property>
+                    <property name="margin-end">6</property>
+                    <property name="margin-top">6</property>
+                    <property name="margin-bottom">6</property>
+                    <child>
+                      <object class="GtkBox" id="text_vbox">
+                        <property name="vexpand">1</property>
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">6</property>
+                        <child>
+                          <object class="GtkBox" id="text_hbox">
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkLabel" id="msgid_label">
+                                <property name="xalign">0</property>
+                                <!--<property name="ypad">5</property>-->
+                                <property name="label" translatable="yes">_Original Message</property>
+                                <property name="use_underline">1</property>
+                                <style>
+                                  <class name="heading"/>
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="msgid_ctxt">
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="0"></property>
+                                <property name="use_underline">1</property>
+                                <property name="ellipsize">end</property>
+                                <style>
+                                  <class name="msgcontext"/>
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="msgid_tags">
+                                <property name="xalign">0</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"></attribute>
+                                </attributes>
+                                <style>
+                                  <class name="msgtags"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkScrolledWindow" id="text_msgid_scroll">
+                            <property name="height-request">75</property>
+                            <style>
+                              <class name="card"/>
+                            </style>
+                            <child>
+                              <object class="GtrView" id="text_msgid">
+                                <property name="editable">False</property>
+                                <style>
+                                  <class name="inline"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkScrolledWindow" id="text_plural_scroll">
+                            <property name="height-request">75</property>
+                            <style>
+                              <class name="card"/>
+                            </style>
+                            <child>
+                              <object class="GtrView" id="text_msgid_plural">
+                                <property name="editable">False</property>
+                                <style>
+                                  <class name="inline"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="msgstr_label">
+                        <property name="valign">center</property>
+                        <property name="xalign">0</property>
+                        <!--<property name="ypad">5</property>-->
+                        <property name="label" translatable="yes">Translate_d Text</property>
+                        <property name="use_underline">1</property>
+                        <style>
+                          <class name="heading"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkNotebook" id="trans_notebook">
+                        <property name="vexpand">1</property>
+                        <property name="show_border">0</property>
+                        <style>
+                          <class name="translation-notebook"/>
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
-                <child>
-                  <object class="GtkLabel" id="progress_fuzzy">
-                    <property name="label">fuzzy: 0</property>
-                    <style>
-                      <class name="progress_fuzzy"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="progress_untrans">
-                    <property name="label">untranslated: 0</property>
-                    <style>
-                      <class name="progress_untranslated"/>
-                    </style>
+                <child type="bottom">
+                  <object class="GtkBox" id="progress_box">
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkRevealer" id="progress_revealer">
+                        <property name="reveal_child">1</property>
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="margin_start">6</property>
+                            <property name="margin_end">6</property>
+                            <property name="margin_top">6</property>
+                            <property name="margin_bottom">6</property>
+                            <property name="homogeneous">1</property>
+                            <child>
+                              <object class="GtkLabel" id="progress_percentage">
+                                <property name="label">translated: 0.00%</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="progress_trans">
+                                <property name="label">Translated: 0</property>
+                                <style>
+                                  <class name="progress_trans"/>
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="progress_fuzzy">
+                                <property name="label">fuzzy: 0</property>
+                                <style>
+                                  <class name="progress_fuzzy"/>
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="progress_untrans">
+                                <property name="label">untranslated: 0</property>
+                                <style>
+                                  <class name="progress_untranslated"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
@@ -282,125 +412,5 @@
   </menu>
   <object class="GtkPopoverMenu" id="main_menu_popover">
     <property name="menu_model">main-menu-model</property>
-  </object>
-  <object class="GtkHeaderBar" id="titlebar">
-    <child>
-      <object class="GtkButton" id="open_button">
-        <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="yes">Open a New File</property>
-        <property name="action_name">app.open</property>
-        <property name="icon_name">document-open-symbolic</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkButton" id="dl_button">
-        <property name="tooltip_text" translatable="yes">Open from Damned Lies</property>
-        <property name="action_name">app.dl</property>
-        <property name="icon_name">folder-download-symbolic</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkSeparator">
-        <style>
-          <class name="spacer"/>
-        </style>
-      </object>
-    </child>
-    <child>
-      <object class="GtkButton" id="prev_untranslated">
-        <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="yes">Previous message without translation (&lt;Alt&gt;&lt;Page Up&gt;)</property>
-        <property name="action_name">app.prev_no</property>
-        <property name="icon_name">go-up-symbolic</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkButton" id="next_untranslated">
-        <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="yes">Next message without translation (&lt;Alt&gt;&lt;Page Down&gt;)</property>
-        <property name="action_name">app.next_no</property>
-        <property name="icon_name">go-down-symbolic</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkSeparator">
-        <style>
-          <class name="spacer"/>
-        </style>
-      </object>
-    </child>
-    <child>
-      <object class="GtkButton">
-        <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="yes">Toggle Fuzzy State</property>
-        <property name="action_name">app.fuzzy</property>
-        <property name="icon_name">approximate-symbolic</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkMenuButton" id="sortby_menu">
-        <property name="receives_default">1</property>
-        <property name="popover">order_menu_popover</property>
-        <property name="tooltip_text" translatable="yes">Sort messages by</property>
-        <property name="icon_name">view-sort-ascending-symbolic</property>
-        <property name="primary">True</property>
-      </object>
-    </child>
-    <child type="end">
-      <object class="GtkMenuButton" id="main_menu">
-        <property name="receives_default">1</property>
-        <property name="popover">main_menu_popover</property>
-        <property name="icon_name">open-menu-symbolic</property>
-        <property name="tooltip_text" translatable="yes">Main Menu</property>
-        <property name="primary">True</property>
-      </object>
-    </child>
-    <child type="end">
-      <object class="GtkToggleButton" id="search_toggle">
-        <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="yes">Find</property>
-        <property name="action_name">app.findtoggle</property>
-        <property name="icon_name">edit-find-symbolic</property>
-      </object>
-    </child>
-    <child type="end">
-      <object class="GtkSeparator">
-        <style>
-          <class name="spacer"/>
-        </style>
-      </object>
-    </child>
-    <child type="end">
-      <object class="GtkButton" id="upload">
-        <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="yes">Upload File</property>
-        <property name="action_name">app.upload_file</property>
-        <property name="icon_name">document-send-symbolic</property>
-      </object>
-    </child>
-    <child type="end">
-      <object class="GtkButton">
-        <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="yes">Save as</property>
-        <property name="action_name">app.saveas</property>
-        <property name="icon_name">document-save-as-symbolic</property>
-      </object>
-    </child>
-    <child type="end">
-      <object class="GtkButton" id="save">
-        <property name="receives_default">1</property>
-        <property name="tooltip_text" translatable="yes">Save Current File</property>
-        <property name="action_name">app.save</property>
-        <child>
-          <object class="AdwButtonContent">
-            <property name="label" translatable="yes">Save</property>
-            <property name="icon_name">document-save-symbolic</property>
-          </object>
-        </child>
-      </object>
-    </child>
-    <style>
-      <class name="titlebar"/>
-    </style>
   </object>
 </interface>

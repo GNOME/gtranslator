@@ -9,7 +9,7 @@
 }
 
 .progress_trans {
-  color: @theme_selected_bg_color;
+  color: @accent_color;
 }
 
 .fuzzy,
@@ -30,14 +30,6 @@
   font-weight: bold;
 }
 
-#info_label.error {
-  color: @error_color;
-}
-
-#info_label.info {
-  color: @theme_fg_color;
-}
-
 .message-table-row {
   padding-top: 3px;
   padding-bottom: 3px;
@@ -55,4 +47,8 @@ textview.inline text {
 
 textview.inline {
   padding: 6px;
+}
+
+notebook.translation-notebook header {
+ border-bottom-style: none;
 }

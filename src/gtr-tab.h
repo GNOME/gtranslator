@@ -19,10 +19,9 @@
  *   Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  *   Pablo Sanxiao <psanxiao@gmail.com>
  */
+#pragma once
 
-#ifndef __TAB_H__
-#define __TAB_H__
-
+#include <adwaita.h>
 #include <glib.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -35,34 +34,14 @@
 #include "gtr-search-bar.h"
 
 G_BEGIN_DECLS
-/*
- * Type checking and casting macros
- */
-#define GTR_TYPE_TAB		(gtr_tab_get_type ())
-#define GTR_TAB(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_TAB, GtrTab))
-#define GTR_TAB_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_TAB, GtrTabClass))
-#define GTR_IS_TAB(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_TAB))
-#define GTR_IS_TAB_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_TAB))
-#define GTR_TAB_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_TAB, GtrTabClass))
 
-/*
- * Main object structure
- */
-typedef struct _GtrTab GtrTab;
+#define GTR_TYPE_TAB (gtr_tab_get_type ())
 
-struct _GtrTab
-{
-  GtkBox parent_instance;
-};
-
-/*
- * Class definition
- */
-typedef struct _GtrTabClass GtrTabClass;
+G_DECLARE_DERIVABLE_TYPE (GtrTab, gtr_tab, GTR, TAB, AdwBin)
 
 struct _GtrTabClass
 {
-  GtkBoxClass parent_class;
+  AdwBinClass parent_class;
 
   void (*showed_message) (GtrTab * tab, GtrMsg * msg);
   void (*message_changed) (GtrTab * tab, GtrMsg * msg);
@@ -92,8 +71,6 @@ typedef enum
 /*
  * Public methods
  */
-GType gtr_tab_get_type (void) G_GNUC_CONST;
-
 GtrTab *gtr_tab_new (GtrPo * po, GtkWindow *window);
 
 GtrPo *gtr_tab_get_po (GtrTab * tab);
@@ -174,8 +151,6 @@ GtkSingleSelection * gtr_tab_get_selection_model (GtrTab *tab);
 /* notebook */
 void gtr_tab_enable_save (GtrTab *tab, gboolean enable);
 void gtr_tab_enable_upload (GtrTab *tab, gboolean enable);
-GtkWidget *
-gtr_tab_get_header (GtrTab *tab);
 void gtr_tab_enable_find_button (GtrTab *tab, gboolean enable);
 void gtr_tab_hide_sort_menu (GtrTab *tab);
 
@@ -190,5 +165,3 @@ gchar *_gtr_tab_get_tooltips (GtrTab *tab);
 gboolean _gtr_tab_can_close (GtrTab * tab);
 
 G_END_DECLS
-
-#endif /* __TAB_H__ */
