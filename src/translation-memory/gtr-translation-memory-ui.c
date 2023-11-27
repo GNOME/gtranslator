@@ -277,7 +277,9 @@ gtr_translation_memory_ui_init (GtrTranslationMemoryUi * tm_ui)
 
   model = GTK_SELECTION_MODEL (gtk_single_selection_new ((G_LIST_MODEL (priv->model))));
   priv->view = gtk_list_view_new (model, factory);
-  gtk_list_view_set_show_separators (GTK_LIST_VIEW (priv->view), TRUE);
+  gtk_widget_add_css_class (priv->view, "navigation-sidebar");
+  gtk_widget_set_vexpand (priv->view, TRUE);
+  gtk_widget_set_hexpand (priv->view, TRUE);
   g_signal_connect (priv->view, "activate",
                     G_CALLBACK (row_activated), tm_ui);
 }
