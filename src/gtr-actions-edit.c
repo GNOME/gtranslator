@@ -107,7 +107,7 @@ gtr_message_status_toggle_fuzzy (GtrWindow * window)
   /*
    * Emit that message was changed.
    */
-  g_signal_emit_by_name (current, "message_changed", msg->data);
+  g_signal_emit_by_name (current, "message-changed", msg->data);
 }
 
 void

@@ -390,7 +390,7 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   priv->active_tab = tab;
 
   g_signal_connect_after (tab,
-                          "message_changed",
+                          "message-changed",
                           G_CALLBACK
                           (gtr_window_update_statusbar_message_count),
                           window);
