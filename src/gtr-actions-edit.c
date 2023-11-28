@@ -86,6 +86,19 @@ gtr_message_copy_to_translation (GtrWindow * window)
 }
 
 /*
+ * Copy the original message to the clipboard.
+ */
+void
+gtr_message_copy_original (GtrWindow * window)
+{
+  GtrTab *current;
+
+  current = gtr_window_get_active_tab (window);
+
+  gtr_tab_copy_original (current);
+}
+
+/*
  * Toggle the sticky status
  */
 void

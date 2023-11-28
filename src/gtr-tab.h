@@ -102,6 +102,8 @@ void gtr_tab_clear_msgstr_views (GtrTab * tab);
 
 void gtr_tab_copy_to_translation (GtrTab * tab);
 
+void gtr_tab_copy_original (GtrTab * tab);
+
 void gtr_tab_block_movement (GtrTab * tab);
 
 void gtr_tab_unblock_movement (GtrTab * tab);
