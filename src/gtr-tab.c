@@ -778,10 +778,9 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
 {
   GtrHeader *header;
   GtrTabPrivate *priv;
-  gchar *label;
   GtkTextBuffer *buf;
-  gint i = 0;
-  gchar *lang_code = NULL;
+  gint i;
+  g_autofree char *lang_code = NULL;
 
   priv = gtr_tab_get_instance_private (tab);
 
@@ -791,8 +790,10 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
   header = gtr_po_get_header (priv->po);
   lang_code = gtr_header_get_language_code (header);
 
-  do
+  for (i = 0; i < gtr_header_get_nplurals (header); i++)
     {
+      g_autofree char *label = NULL;
+
       label = g_strdup_printf (_("Plural %d"), i);
       priv->trans_msgstr[i] = gtr_tab_append_msgstr_page (label,
                                                           priv->trans_notebook,
@@ -807,11 +808,7 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
                               G_CALLBACK (emit_message_changed_signal), tab);
       g_signal_connect (buf, "notify::has-selection",
                         G_CALLBACK (emit_selection_changed), tab);
-      i++;
-      g_free (label);
     }
-  while (i < gtr_header_get_nplurals (header));
-  g_free (lang_code);
 }
 
 static void
@@ -1225,7 +1222,7 @@ gtr_tab_new (GtrPo * po,
   g_signal_connect (manager, "active-profile-changed",
                     G_CALLBACK (on_active_profile_changed), tab);
 
-    g_signal_connect (manager, "profile-modified",
+  g_signal_connect (manager, "profile-modified",
                     G_CALLBACK (on_profile_modified), tab);
 
   install_autosave_timeout_if_needed (tab);
