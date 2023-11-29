@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-11-24 06:53+0000\n"
-"PO-Revision-Date: 2023-11-26 21:57+0200\n"
+"POT-Creation-Date: 2023-11-29 06:26+0000\n"
+"PO-Revision-Date: 2023-11-29 22:48+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -21,8 +21,10 @@ msgstr ""
 "X-Generator: Lokalize 20.12.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
-msgid "Gtranslator"
-msgstr "Gtranslator"
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
+#: src/gtr-application.c:589 src/gtr-greeter.ui:181 src/gtr-window.c:212
+msgid "Translation Editor"
+msgstr "Редактор перекладів"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:8
 #: data/org.gnome.Gtranslator.desktop.in.in:5
@@ -57,15 +59,6 @@ msgstr ""
 "додаток вставлення теґів, додаток інтеграції із subversion та додаток "
 "перегляду початкового коду програм."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:197
-msgid "Daniel García Moreno"
-msgstr "Daniel García Moreno"
-
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:600 src/gtr-greeter.ui:181 src/gtr-window.c:222
-msgid "Translation Editor"
-msgstr "Редактор перекладів"
-
 #: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
 msgstr "Редактор файлів PO"
@@ -76,6 +69,11 @@ msgstr ""
 "Gtranslator;Translation;Editor;Gettext;Write;жтранслятор;жтранслатор;"
 "гтранслятор;жтранслатор;переклад;редактор;перекласти;геттекст;запис;"
 "інтерфейс;мова;"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:400
+msgid "New Window"
+msgstr "Нове вікно"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:24
 msgid "Warn if file contains fuzzy translations"
@@ -313,7 +311,7 @@ msgstr[0] "%d документ з незбереженими змінами. З�
 msgstr[1] "%d документа з незбереженими змінами. Зберегти перед закриттям?"
 msgstr[2] "%d документів з незбереженими змінами. Зберегти перед закриттям?"
 
-#: src/gtr-context.c:151 src/gtr-tab.ui:419
+#: src/gtr-context.c:151 src/gtr-tab.ui:120
 msgid "Save"
 msgstr "Зберегти"
 
@@ -379,19 +377,15 @@ msgstr ""
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "Файл «%s.%s.%s.%s» успішно зарезервовано"
 
-#: src/gtr-dl-teams.ui:7 src/gtr-projects.ui:7 src/gtr-tab.ui:260
-msgid "New Window"
-msgstr "Нове вікно"
-
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:264
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:404
 msgid "Preferences"
 msgstr "Налаштування"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:270
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:410
 msgid "Keyboard Shortcuts"
 msgstr "Клавіатурні скорочення"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:278
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:418
 msgid "About Translation Editor"
 msgstr "Про «Редактор перекладів»"
 
@@ -440,7 +434,7 @@ msgstr "Завантажити файл"
 msgid "Open…"
 msgstr "Відкрити…"
 
-#: src/gtr-dl-teams.ui:180 src/gtr-projects.ui:64 src/gtr-tab.ui:377
+#: src/gtr-dl-teams.ui:180 src/gtr-projects.ui:64 src/gtr-tab.ui:78
 msgid "Main Menu"
 msgstr "Головне меню"
 
@@ -460,7 +454,7 @@ msgstr "Усі файли"
 msgid "Welcome"
 msgstr "Вітаємо"
 
-#: src/gtr-greeter.ui:23 src/gtr-window.c:646
+#: src/gtr-greeter.ui:23 src/gtr-window.c:618
 msgid "Welcome to Translation Editor"
 msgstr "Вітаємо у «Редакторі перекладів»"
 
@@ -533,7 +527,7 @@ msgstr "Форма множини"
 msgid "Next"
 msgstr "Далі"
 
-#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:254
+#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:394
 msgid "Edit Header"
 msgstr "Змінити заголовок"
 
@@ -754,7 +748,6 @@ msgid "_Activate auto save"
 msgstr "З_адіяти автозбереження"
 
 #: src/gtr-preferences-dialog.ui:40
-#| msgid "Autosave _interval"
 msgid "Autosave _Interval"
 msgstr "_Інтервал автозбереження"
 
@@ -846,11 +839,11 @@ msgstr ""
 msgid "_Damned Lies auth token"
 msgstr "_Жетон розпізнавання DL"
 
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:250
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:390
 msgid "Build Translation Memory"
 msgstr "Зібрати пам'ять перекладів"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:274
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:414
 msgid "Help"
 msgstr "Довідка"
 
@@ -904,12 +897,12 @@ msgstr "Початковий текст"
 msgid "Translated text"
 msgstr "Перекладений текст"
 
-#: src/gtr-tab.c:299
+#: src/gtr-tab.c:295
 #, c-format
 msgid "File is not consistent with profile %s"
 msgstr "Файл є несумісним із профілем %s"
 
-#: src/gtr-tab.c:301
+#: src/gtr-tab.c:297
 #, c-format
 msgid ""
 "File nplurals: %d, is different from profile nplurals %d.\n"
@@ -921,125 +914,121 @@ msgstr ""
 "Будь ласка, перейдіть до параметрів і виберіть профіль, у якому кількість "
 "форм множини збігатиметься із значенням у файлі %s."
 
-#: src/gtr-tab.c:421
+#: src/gtr-tab.c:417
 msgid "There is an error in the message:"
 msgstr "Помилка у цьому повідомленні:"
 
-#: src/gtr-tab.c:640 src/gtr-tab.c:773
+#: src/gtr-tab.c:634 src/gtr-tab.c:767
 msgid "fuzzy"
 msgstr "неточний"
 
-#: src/gtr-tab.c:802
+#: src/gtr-tab.c:796
 #, c-format
 msgid "Plural %d"
 msgstr "Форма множини %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1529
+#: src/gtr-tab.c:1495
 msgid "Path:"
 msgstr "Шлях:"
 
-#: src/gtr-tab.c:2161
+#: src/gtr-tab.c:1744
+msgid "Copied to clipboard"
+msgstr "Скопійовано до буфера обміну"
+
+#: src/gtr-tab.c:2157
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Перекладено: %0.2f%%"
 
-#: src/gtr-tab.c:2162
+#: src/gtr-tab.c:2158
 #, c-format
 msgid "Translated: %d"
 msgstr "Перекладених: %d"
 
-#: src/gtr-tab.c:2163
+#: src/gtr-tab.c:2159
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Неперекладених: %d"
 
-#: src/gtr-tab.c:2164
+#: src/gtr-tab.c:2160
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Неточних: %d"
 
+#: src/gtr-tab.ui:14
+msgid "Open a New File"
+msgstr "Відкрити новий файл"
+
+#: src/gtr-tab.ui:21
+msgid "Open from Damned Lies"
+msgstr "Відкрити з Damned Lies"
+
+#: src/gtr-tab.ui:36
+msgid "Previous message without translation (<Alt><Page Up>)"
+msgstr "Попереднє неперекладене повідомлення (<Alt><Page Up>)"
+
+#: src/gtr-tab.ui:44
+msgid "Next message without translation (<Alt><Page Down>)"
+msgstr "Наступне неперекладене повідомлення (<Alt><Page Down>)"
+
+#: src/gtr-tab.ui:59
+msgid "Toggle Fuzzy State"
+msgstr "Перемкнути стан неточності"
+
+#: src/gtr-tab.ui:68
+msgid "Sort messages by"
+msgstr "Критерій упорядкування повідомлень"
+
+#: src/gtr-tab.ui:85 src/gtr-tab.ui:382
+msgid "Find"
+msgstr "Знайти"
+
+#: src/gtr-tab.ui:100
+msgid "Upload File"
+msgstr "Вивантажити файл"
+
+#: src/gtr-tab.ui:108
+msgid "Save as"
+msgstr "Зберегти як"
+
+#: src/gtr-tab.ui:116
+msgid "Save Current File"
+msgstr "Зберегти поточний файл"
+
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:54
+#: src/gtr-tab.ui:187
 msgid "_Original Message"
 msgstr "П_очаткове повідомлення"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:114
+#: src/gtr-tab.ui:257
 msgid "Translate_d Text"
 msgstr "Пере_кладений текст"
 
-#: src/gtr-tab.ui:203
+#: src/gtr-tab.ui:343
 msgid "Order messages by"
 msgstr "Критерій упорядкування повідомлень"
 
-#: src/gtr-tab.ui:214
+#: src/gtr-tab.ui:354
 msgid "Appearance in the original file"
 msgstr "Вигляд початкового файла"
 
-#: src/gtr-tab.ui:219
+#: src/gtr-tab.ui:359
 msgid "Message status"
 msgstr "Стан повідомлення"
 
-#: src/gtr-tab.ui:225
+#: src/gtr-tab.ui:365
 msgid "Original message"
 msgstr "Первісне повідомлення"
 
-#: src/gtr-tab.ui:231
+#: src/gtr-tab.ui:371
 msgid "Translated message"
 msgstr "Перекладене повідомлення"
 
-#: src/gtr-tab.ui:242 src/gtr-tab.ui:384
-msgid "Find"
-msgstr "Знайти"
-
-#: src/gtr-tab.ui:246
+#: src/gtr-tab.ui:386
 msgid "Find and Replace"
 msgstr "Знайти і замінити"
-
-#: src/gtr-tab.ui:290
-msgid "Open a New File"
-msgstr "Відкрити новий файл"
-
-#: src/gtr-tab.ui:297
-msgid "Open from Damned Lies"
-msgstr "Відкрити з Damned Lies"
-
-#: src/gtr-tab.ui:312
-msgid "Undo"
-msgstr "Скасувати"
-
-#: src/gtr-tab.ui:320
-msgid "Redo"
-msgstr "Повторити"
-
-#: src/gtr-tab.ui:335
-msgid "Previous message without translation (<Alt><Page Up>)"
-msgstr "Попереднє неперекладене повідомлення (<Alt><Page Up>)"
-
-#: src/gtr-tab.ui:343
-msgid "Next message without translation (<Alt><Page Down>)"
-msgstr "Наступне неперекладене повідомлення (<Alt><Page Down>)"
-
-#: src/gtr-tab.ui:358
-msgid "Toggle Fuzzy State"
-msgstr "Перемкнути стан неточності"
-
-#: src/gtr-tab.ui:367
-msgid "Sort messages by"
-msgstr "Критерій упорядкування повідомлень"
-
-#: src/gtr-tab.ui:399
-msgid "Upload File"
-msgstr "Вивантажити файл"
-
-#: src/gtr-tab.ui:407
-msgid "Save as"
-msgstr "Зберегти як"
-
-#: src/gtr-tab.ui:415
-msgid "Save Current File"
-msgstr "Зберегти поточний файл"
 
 #: src/gtr-upload-dialog.c:155
 msgid "Uploading..."
@@ -1058,22 +1047,22 @@ msgid "comment:"
 msgstr "коментар:"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:207
+#: src/gtr-window.c:197
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — редактор перекладів"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:213
+#: src/gtr-window.c:203
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — редактор перекладів"
 
-#: src/gtr-window.c:611
+#: src/gtr-window.c:581
 msgid "Select a Po file"
 msgstr "Виберіть файл PO"
 
-#: src/gtr-window.c:632
+#: src/gtr-window.c:603
 msgid "Load from Damned Lies"
 msgstr "Завантажити з Damned Lies"
 
@@ -1134,100 +1123,92 @@ msgstr "Редагувати"
 
 #: src/help-overlay.ui:88
 msgctxt "shortcut window"
-msgid "Undo"
-msgstr "Скасувати"
-
-#: src/help-overlay.ui:95
-msgctxt "shortcut window"
-msgid "Redo"
-msgstr "Повторити"
-
-#: src/help-overlay.ui:102
-msgctxt "shortcut window"
 msgid "Clear translation"
 msgstr "Вилучити переклад"
 
-#: src/help-overlay.ui:109
+#: src/help-overlay.ui:95
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Позначити або зняти позначення як неточного"
 
-#: src/help-overlay.ui:116
+#: src/help-overlay.ui:102
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "Скопіювати початковий текст у поле перекладу"
 
-#: src/help-overlay.ui:125
+#: src/help-overlay.ui:109
+#| msgctxt "shortcut window"
+#| msgid "Copy original text to translation"
+msgctxt "shortcut window"
+msgid "Copy original text to clipboard"
+msgstr "Скопіювати початковий текст до буфера обміну даними"
+
+#: src/help-overlay.ui:118
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Навігація"
 
-#: src/help-overlay.ui:130
+#: src/help-overlay.ui:123
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Перейти до попереднього повідомлення"
 
-#: src/help-overlay.ui:137
+#: src/help-overlay.ui:130
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Перейти до наступного повідомлення"
 
-#: src/help-overlay.ui:144
+#: src/help-overlay.ui:137
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Перейти до попереднього неперекладеного"
 
-#: src/help-overlay.ui:151
+#: src/help-overlay.ui:144
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Перейти до наступного неперекладеного"
 
-#: src/help-overlay.ui:160
+#: src/help-overlay.ui:153
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Пам'ять перекладів"
 
-#: src/help-overlay.ui:165
+#: src/help-overlay.ui:158
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Зібрати пам'ять перекладів"
 
-#: src/help-overlay.ui:172
-msgctxt "shortcut window"
-msgid "Copy below"
-msgstr "Копіювати нижче"
-
-#: src/help-overlay.ui:179
+#: src/help-overlay.ui:165
 msgctxt "shortcut window"
 msgid "Use 1st...9th suggestion"
 msgstr "Використати 1-у...9-у пропозицію"
 
-#: src/help-overlay.ui:188
+#: src/help-overlay.ui:174
 msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "Знайти і замінити"
+
+#: src/help-overlay.ui:179
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Знайти"
+
+#: src/help-overlay.ui:186
+msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Знайти і замінити"
 
 #: src/help-overlay.ui:193
 msgctxt "shortcut window"
-msgid "Find"
-msgstr "Знайти"
-
-#: src/help-overlay.ui:200
-msgctxt "shortcut window"
-msgid "Find & Replace"
-msgstr "Знайти і замінити"
-
-#: src/help-overlay.ui:207
-msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "Пошук далі"
 
-#: src/help-overlay.ui:214
+#: src/help-overlay.ui:200
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Пошук позаду"
 
-#: src/help-overlay.ui:221
+#: src/help-overlay.ui:207
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Приховати панель пошуку із заміною"
@@ -1321,6 +1302,30 @@ msgid ""
 "translation memory."
 msgstr ""
 "Максимальна різниця в довжині між рядком та прикладом у пам'яті перекладів."
+
+#~ msgid "Gtranslator"
+#~ msgstr "Gtranslator"
+
+#~ msgid "Daniel García Moreno"
+#~ msgstr "Daniel García Moreno"
+
+#~ msgid "Undo"
+#~ msgstr "Скасувати"
+
+#~ msgid "Redo"
+#~ msgstr "Повторити"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Undo"
+#~ msgstr "Скасувати"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Redo"
+#~ msgstr "Повторити"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Copy below"
+#~ msgstr "Копіювати нижче"
 
 #~ msgid "Translator and Language"
 #~ msgstr "Перекладач та мова"
