@@ -575,7 +575,7 @@ gtr_window_show_projects (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
-  gtk_widget_set_visible (GTK_STACK (priv->header_stack), TRUE);
+  gtk_widget_set_visible (GTK_WIDGET (priv->header_stack), TRUE);
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "projects");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "projects");
   gtk_window_set_title (GTK_WINDOW (window), _("Select a Po file"));
@@ -587,7 +587,7 @@ gtr_window_show_poeditor (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
-  gtk_widget_set_visible (GTK_STACK (priv->header_stack), FALSE);
+  gtk_widget_set_visible (GTK_WIDGET (priv->header_stack), FALSE);
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "poeditor");
   adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_RAISED);
 }
@@ -597,7 +597,7 @@ gtr_window_show_dlteams (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
-  gtk_widget_set_visible (GTK_STACK (priv->header_stack), TRUE);
+  gtk_widget_set_visible (GTK_WIDGET (priv->header_stack), TRUE);
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "dlteams");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "dlteams");
   gtk_window_set_title (GTK_WINDOW (window), _("Load from Damned Lies"));
@@ -612,7 +612,7 @@ gtr_window_show_greeter (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
 
-  gtk_widget_set_visible (GTK_STACK (priv->header_stack), TRUE);
+  gtk_widget_set_visible (GTK_WIDGET (priv->header_stack), TRUE);
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "greeter");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "greeter");
   gtk_window_set_title (GTK_WINDOW (window), _("Welcome to Translation Editor"));
