@@ -288,6 +288,17 @@ copy_text_activated (GSimpleAction *action,
 }
 
 static void
+copy_original_activated (GSimpleAction *action,
+                         GVariant      *parameter,
+                         gpointer       user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+
+  gtr_message_copy_original (priv->active_window);
+}
+
+static void
 preferences_activated (GSimpleAction *action,
                        GVariant      *parameter,
                        gpointer       user_data)
@@ -546,6 +557,7 @@ static GActionEntry app_entries[] = {
   { "tm_9", tm_activated, NULL, NULL, NULL },
 
   { "copy_text", copy_text_activated, NULL, NULL, NULL },
+  { "copy-original", copy_original_activated, NULL, NULL, NULL },
   { "find_and_replace", find_and_replace_activated, NULL, NULL, NULL },
   { "findtoggle", find_toggle_activated, NULL, NULL, NULL },
   { "find", find_activated, NULL, NULL, NULL },
@@ -613,6 +625,7 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.find-prev", "<Ctrl><Shift>g");
 
   set_kb (application, "app.copy_text", "<Ctrl>space");
+  set_kb (application, "app.copy-original", "<Ctrl><Shift>c");
 
   set_kb (application, "app.build_tm", "<Ctrl>plus");
   set_kb (application, "app.tm_1", "<Ctrl>1");

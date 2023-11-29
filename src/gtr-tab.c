@@ -1715,6 +1715,36 @@ gtr_tab_copy_to_translation (GtrTab * tab)
 }
 
 /**
+ * gtr_tab_copy_original:
+ * @tab: a #GtrTab
+ *
+ * Copies the text from the original text box to the clipboard.
+ */
+void
+gtr_tab_copy_original (GtrTab * tab)
+{
+  GtkTextBuffer *msgid;
+  GdkClipboard *clipboard;
+  g_autofree char *text = NULL;
+  GtkTextIter start, end;
+  GtrTabPrivate *priv;
+
+  g_return_if_fail (GTR_IS_TAB (tab));
+
+  priv = gtr_tab_get_instance_private (tab);
+
+  msgid = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->text_msgid));
+
+  gtk_text_buffer_get_bounds (msgid, &start, &end);
+  text = gtk_text_buffer_get_text (msgid, &start, &end, FALSE);
+
+  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (tab));
+  gdk_clipboard_set_text (clipboard, text);
+
+  gtr_window_add_toast_msg (GTR_WINDOW (priv->window), _("Copied to clipboard"));
+}
+
+/**
  * gtr_tab_block_movement:
  * @tab: a #GtrTab
  *

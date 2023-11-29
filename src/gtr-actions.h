@@ -79,6 +79,7 @@ void gtr_actions_edit_paste (GtrWindow * window);
 void gtr_actions_edit_header (GtrWindow * window);
 
 void gtr_message_copy_to_translation (GtrWindow * window);
+void gtr_message_copy_original (GtrWindow * window);
 
 void gtr_message_status_toggle_fuzzy (GtrWindow * window);
 
