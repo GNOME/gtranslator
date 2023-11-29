@@ -72,47 +72,11 @@ gtr_header_set_field (GtrHeader * header,
 static void
 parse_nplurals (GtrHeader * header)
 {
-  gchar *plural_forms;
-  gboolean use_profile_values;
   GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
+  g_autofree gchar *plural_forms = NULL;
 
   plural_forms = gtr_header_get_plural_forms (header);
-  priv->nplurals = -1;
-  use_profile_values = g_settings_get_boolean (priv->settings,
-                                               GTR_SETTINGS_USE_PROFILE_VALUES);
-
-  if (use_profile_values || !plural_forms)
-    {
-      const gchar *plural_form = NULL;
-      GtrProfile *profile;
-
-      if (priv->profile != NULL)
-        profile = priv->profile;
-      else
-        {
-          GtrProfileManager *prof_manager;
-
-          prof_manager = gtr_profile_manager_get_default ();
-          profile = gtr_profile_manager_get_active_profile (prof_manager);
-          g_object_unref (prof_manager);
-        }
-
-      if (profile)
-        plural_form = gtr_profile_get_plural_forms (profile);
-      else if (!plural_forms)
-        return;
-
-      if (plural_form)
-        {
-          g_free (plural_forms);
-          plural_forms = g_strdup (plural_form);
-        }
-      else if (!plural_forms)
-        return;
-    }
-
   priv->nplurals = parse_nplurals_header (plural_forms);
-  g_free (plural_forms);
 }
 
 static void
