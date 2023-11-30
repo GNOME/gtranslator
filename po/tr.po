@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-10-10 05:17+0000\n"
-"PO-Revision-Date: 2023-10-17 13:44+0300\n"
+"POT-Creation-Date: 2023-11-29 06:26+0000\n"
+"PO-Revision-Date: 2023-11-30 17:25+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-DL-Team: tr\n"
 "X-DL-Module: gtranslator\n"
 "X-DL-Branch: master\n"
@@ -36,8 +36,10 @@ msgstr ""
 "X-DL-State: None\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
-msgid "Gtranslator"
-msgstr "Gtranslator"
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
+#: src/gtr-application.c:589 src/gtr-greeter.ui:181 src/gtr-window.c:212
+msgid "Translation Editor"
+msgstr "Çeviri Düzenleyici"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:8
 #: data/org.gnome.Gtranslator.desktop.in.in:5
@@ -69,15 +71,6 @@ msgstr ""
 "kaynak kod görüntüleyicisi gibi ilgi çekici birçok eklenti içeren eklenti "
 "sistemi de bulunuyor."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:182
-msgid "Daniel García Moreno"
-msgstr "Daniel García Moreno"
-
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:600 src/gtr-greeter.ui:181 src/gtr-window.c:221
-msgid "Translation Editor"
-msgstr "Çeviri Düzenleyici"
-
 #: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
 msgstr "PO Dosyası Düzenleyici"
@@ -85,6 +78,11 @@ msgstr "PO Dosyası Düzenleyici"
 #: data/org.gnome.Gtranslator.desktop.in.in:14
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Çeviri;Tercüme;Düzenleyici;Gettext;Yazmak;Yazım;"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:400
+msgid "New Window"
+msgstr "Yeni Pencere"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:24
 msgid "Warn if file contains fuzzy translations"
@@ -250,7 +248,7 @@ msgid "Do you want to write all the changes done to %s?"
 msgstr "%s dosyasına yapılan tüm değişiklikleri kaydetmek ister misiniz?"
 
 #: src/gtr-actions-file.c:206 src/gtr-context.c:150
-#: src/gtr-profile-dialog.ui:17 src/gtr-upload-dialog.ui:17
+#: src/gtr-profile-dialog.ui:17 src/gtr-upload-dialog.ui:16
 msgid "Cancel"
 msgstr "İptal"
 
@@ -324,7 +322,7 @@ msgstr[0] ""
 "Kaydedilmemiş değişiklikler içeren %d adet belge var. Kapatmadan önce "
 "kaydedilsin mi?"
 
-#: src/gtr-context.c:151 src/gtr-tab.ui:419
+#: src/gtr-context.c:151 src/gtr-tab.ui:120
 msgid "Save"
 msgstr "Kaydet"
 
@@ -354,27 +352,27 @@ msgstr "Dosya bilgisi yüklenirken hata: %s"
 msgid "No module state found."
 msgstr "Modül durumu bulunamadı."
 
-#: src/gtr-dl-teams.c:562
+#: src/gtr-dl-teams.c:563
 #, c-format
 msgid "Error loading file: %s"
 msgstr "Dosya yüklenirken hata: %s"
 
-#: src/gtr-dl-teams.c:571 src/gtr-dl-teams.c:615
+#: src/gtr-dl-teams.c:572 src/gtr-dl-teams.c:616
 #, c-format
 msgid "Error creating tmp file: %s"
 msgstr "tmp dosyası oluşturulurken hata: %s"
 
-#: src/gtr-dl-teams.c:586
+#: src/gtr-dl-teams.c:587
 #, c-format
 msgid "Error writing stream: %s"
 msgstr "Akım yazılırken hata: %s"
 
-#: src/gtr-dl-teams.c:624
+#: src/gtr-dl-teams.c:625
 #, c-format
 msgid "The file '%s' has been saved in %s"
 msgstr "'%s' dosyası %s içine kaydedildi"
 
-#: src/gtr-dl-teams.c:695
+#: src/gtr-dl-teams.c:696
 #, c-format
 msgid ""
 "An error occurred while reserving this module: %s\n"
@@ -385,24 +383,20 @@ msgstr ""
 "Profilinizde l10n.gnome.org jetonunuzu doğru yapılandırmamış olabilirsiniz "
 "ya da bu modülü üzerinize almaya izniniz olmayabilir."
 
-#: src/gtr-dl-teams.c:707
+#: src/gtr-dl-teams.c:708
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "'%s.%s.%s.%s' dosyası başarıyla üzerinize alındı"
 
-#: src/gtr-dl-teams.ui:7 src/gtr-projects.ui:7 src/gtr-tab.ui:260
-msgid "New Window"
-msgstr "Yeni Pencere"
-
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:264
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:404
 msgid "Preferences"
 msgstr "Tercihler"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:270
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:410
 msgid "Keyboard Shortcuts"
 msgstr "Klavye Kısayolları"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:278
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:418
 msgid "About Translation Editor"
 msgstr "Çeviri Düzenleyici Hakkında"
 
@@ -411,15 +405,15 @@ msgstr "Çeviri Düzenleyici Hakkında"
 msgid "Language"
 msgstr "Dil"
 
-#: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:152
+#: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:144
 msgid "Module"
 msgstr "Modül"
 
-#: src/gtr-dl-teams.ui:79 src/gtr-header-dialog.ui:164
+#: src/gtr-dl-teams.ui:79 src/gtr-header-dialog.ui:156
 msgid "Domain"
 msgstr "Etki Alanı"
 
-#: src/gtr-dl-teams.ui:90 src/gtr-header-dialog.ui:158
+#: src/gtr-dl-teams.ui:90 src/gtr-header-dialog.ui:150
 msgid "Branch"
 msgstr "Dal"
 
@@ -427,31 +421,31 @@ msgstr "Dal"
 msgid "Reserve for translation"
 msgstr "Çeviriyi üzerine al"
 
-#: src/gtr-dl-teams.ui:120
+#: src/gtr-dl-teams.ui:115
 msgid "Info"
 msgstr "Bilgi"
 
-#: src/gtr-dl-teams.ui:123
+#: src/gtr-dl-teams.ui:118
 msgid "File"
 msgstr "Dosya"
 
-#: src/gtr-dl-teams.ui:133
+#: src/gtr-dl-teams.ui:128
 msgid "Translation State"
 msgstr "Çeviri Durumu"
 
-#: src/gtr-dl-teams.ui:143
+#: src/gtr-dl-teams.ui:138
 msgid "Stats"
 msgstr "İstatistik"
 
-#: src/gtr-dl-teams.ui:157
+#: src/gtr-dl-teams.ui:152
 msgid "Load File"
 msgstr "Dosya Yükle"
 
-#: src/gtr-dl-teams.ui:176 src/gtr-projects.ui:50
+#: src/gtr-dl-teams.ui:171 src/gtr-projects.ui:50
 msgid "Open…"
 msgstr "Aç…"
 
-#: src/gtr-dl-teams.ui:185 src/gtr-projects.ui:64 src/gtr-tab.ui:377
+#: src/gtr-dl-teams.ui:180 src/gtr-projects.ui:64 src/gtr-tab.ui:78
 msgid "Main Menu"
 msgstr "Ana Menü"
 
@@ -471,7 +465,7 @@ msgstr "Tüm dosyalar"
 msgid "Welcome"
 msgstr "Hoş Geldiniz"
 
-#: src/gtr-greeter.ui:23 src/gtr-window.c:640
+#: src/gtr-greeter.ui:23 src/gtr-window.c:618
 msgid "Welcome to Translation Editor"
 msgstr "Çeviri Düzenleyiciʼye Hoş Geldiniz"
 
@@ -491,11 +485,11 @@ msgstr "Profil Oluştur"
 msgid "Profile"
 msgstr "Profil"
 
-#: src/gtr-greeter.ui:56 src/gtr-greeter.ui:117 src/gtr-profile-dialog.ui:53
+#: src/gtr-greeter.ui:56 src/gtr-greeter.ui:117 src/gtr-profile-dialog.ui:52
 msgid "Profile name"
 msgstr "Profil adı"
 
-#: src/gtr-greeter.ui:57 src/gtr-profile-dialog.ui:54
+#: src/gtr-greeter.ui:57 src/gtr-profile-dialog.ui:53
 msgid "default"
 msgstr "Öntanımlı"
 
@@ -543,7 +537,7 @@ msgstr "Çoğul biçimler"
 msgid "Next"
 msgstr "Sonraki"
 
-#: src/gtr-header-dialog.c:346 src/gtr-tab.ui:254
+#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:394
 msgid "Edit Header"
 msgstr "Başlığı Düzenle"
 
@@ -551,8 +545,8 @@ msgstr "Başlığı Düzenle"
 msgid "Translator"
 msgstr "Çevirmen"
 
-#: src/gtr-header-dialog.ui:15 src/gtr-header-dialog.ui:83
-#: src/gtr-header-dialog.ui:143 src/gtr-preferences-dialog.ui:14
+#: src/gtr-header-dialog.ui:15 src/gtr-header-dialog.ui:75
+#: src/gtr-header-dialog.ui:135 src/gtr-preferences-dialog.ui:14
 msgid "General"
 msgstr "Genel"
 
@@ -560,68 +554,67 @@ msgstr "Genel"
 msgid "Use my options to complete the following entries"
 msgstr "Şu girdileri kişisel seçeneklerimi kullanarak tamamla"
 
-#: src/gtr-header-dialog.ui:31
+#: src/gtr-header-dialog.ui:23
 msgid "Translator’s _name"
 msgstr "Çevirmenin adı"
 
-#: src/gtr-header-dialog.ui:37
+#: src/gtr-header-dialog.ui:29
 msgid "Translator’s _email"
 msgstr "Çevirmenin e-postası"
 
-#: src/gtr-header-dialog.ui:43
+#: src/gtr-header-dialog.ui:35
 msgid "_Language"
 msgstr "_Dil"
 
-#: src/gtr-header-dialog.ui:49
+#: src/gtr-header-dialog.ui:41
 msgid "Language _code"
 msgstr "Dil _kodu"
 
-#: src/gtr-header-dialog.ui:55
+#: src/gtr-header-dialog.ui:47
 msgid "Language _Team email"
 msgstr "Dil _Takımı e-postası"
 
-#: src/gtr-header-dialog.ui:61
+#: src/gtr-header-dialog.ui:53
 msgid "Char_set"
 msgstr "Karakter kümesi"
 
-#: src/gtr-header-dialog.ui:67
+#: src/gtr-header-dialog.ui:59
 msgid "Enc_oding"
 msgstr "Kod_lama"
 
-#: src/gtr-header-dialog.ui:79
+#: src/gtr-header-dialog.ui:71
 msgid "Project"
 msgstr "Proje"
 
-#: src/gtr-header-dialog.ui:86
+#: src/gtr-header-dialog.ui:78
 msgid "Project Id _version"
 msgstr "Proje Id _sürümü"
 
-#: src/gtr-header-dialog.ui:92
+#: src/gtr-header-dialog.ui:84
 msgid "Pot _file creation date"
 msgstr "Pot _dosyasının oluşturulma tarihi"
 
-#: src/gtr-header-dialog.ui:98
+#: src/gtr-header-dialog.ui:90
 msgid "Po file _revision date"
 msgstr "Po dosyasının _gözden geçirilme tarihi"
 
-#: src/gtr-header-dialog.ui:104
+#: src/gtr-header-dialog.ui:96
 msgid "Report message _bugs to"
 msgstr "İleti hatalarını şuraya bildir"
 
-#: src/gtr-header-dialog.ui:112
+#: src/gtr-header-dialog.ui:104
 msgid "Comment"
 msgstr "Açıklama"
 
-#: src/gtr-header-dialog.ui:139
-#| msgid "Damned Lies Info"
+#: src/gtr-header-dialog.ui:131
 msgid "Damned Lies"
 msgstr "Damned Lies"
 
-#: src/gtr-header-dialog.ui:146
+#: src/gtr-header-dialog.ui:138
 msgid "Lang"
 msgstr "Dil"
 
-#: src/gtr-header-dialog.ui:170
+#: src/gtr-header-dialog.ui:162
 msgid "State"
 msgstr "Durum"
 
@@ -752,103 +745,99 @@ msgstr "_Dosyalar"
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "PO dosyası bulanık çeviri içeriyorsa _uyar"
 
-#: src/gtr-preferences-dialog.ui:28
+#: src/gtr-preferences-dialog.ui:23
 msgid "_Remove obsolete entries on save"
 msgstr "Kayıt sırasında kullanılmayan girdileri kaldır"
 
-#: src/gtr-preferences-dialog.ui:41
+#: src/gtr-preferences-dialog.ui:31
 msgid "Autosave"
 msgstr "Kendiliğinden Kaydet"
 
-#: src/gtr-preferences-dialog.ui:44
+#: src/gtr-preferences-dialog.ui:34
 msgid "_Activate auto save"
 msgstr "Kendiliğinden kaydetmeyi _etkinleştir"
 
-#: src/gtr-preferences-dialog.ui:55
-msgid "Autosave _interval"
-msgstr "Kendiliğinden kaydetme _aralığı"
+#: src/gtr-preferences-dialog.ui:40
+msgid "Autosave _Interval"
+msgstr "Kendiliğinden Kaydetme _Aralığı"
 
-#: src/gtr-preferences-dialog.ui:75
+#: src/gtr-preferences-dialog.ui:55
 msgid "Create a _backup copy of files before saving"
 msgstr "Kaydetmeden önce dosyanın _yedek kopyasını oluştur"
 
-#: src/gtr-preferences-dialog.ui:93
+#: src/gtr-preferences-dialog.ui:68
 msgid "_Editor"
 msgstr "_Düzenleyici"
 
-#: src/gtr-preferences-dialog.ui:97
+#: src/gtr-preferences-dialog.ui:72
 msgid "Text Display"
 msgstr "Metin Görünümü"
 
-#: src/gtr-preferences-dialog.ui:100
+#: src/gtr-preferences-dialog.ui:75
 msgid "_Highlight message syntax"
 msgstr "İleti söz dizimini _vurgula"
 
-#: src/gtr-preferences-dialog.ui:111
+#: src/gtr-preferences-dialog.ui:81
 msgid "Make _whitespace visible"
 msgstr "_Boşlukları görünür yap"
 
-#: src/gtr-preferences-dialog.ui:122
+#: src/gtr-preferences-dialog.ui:87
 msgid "_Font"
 msgstr "_Yazı tipi"
 
-#: src/gtr-preferences-dialog.ui:140
+#: src/gtr-preferences-dialog.ui:105
 msgid "Contents"
 msgstr "İçindekiler"
 
-#: src/gtr-preferences-dialog.ui:143
+#: src/gtr-preferences-dialog.ui:108
 msgid "_Remove fuzzy status if message is changed"
 msgstr "İleti değiştirildiğinde bulanık imini _kaldır"
 
-#: src/gtr-preferences-dialog.ui:156
+#: src/gtr-preferences-dialog.ui:114
 msgid "Check _spelling"
 msgstr "_Yazım denetimi yap"
 
-#: src/gtr-preferences-dialog.ui:174
+#: src/gtr-preferences-dialog.ui:127
 msgid "_Profiles"
 msgstr "_Profiller"
 
-#: src/gtr-preferences-dialog.ui:178
+#: src/gtr-preferences-dialog.ui:131
 msgid "Profiles"
 msgstr "Profiller"
 
-#: src/gtr-profile-dialog.c:119
+#: src/gtr-profile-dialog.ui:9
 msgid "Translation Editor Profile"
 msgstr "Çeviri Düzenleyici Profili"
-
-#: src/gtr-profile-dialog.ui:7 src/gtr-upload-dialog.ui:7
-msgid "Upload to Damned Lies"
-msgstr "Damned Lies sistemine yükle"
 
 #: src/gtr-profile-dialog.ui:22
 msgid "OK"
 msgstr "Tamam"
 
-#: src/gtr-profile-dialog.ui:48
+#: src/gtr-profile-dialog.ui:47
 msgid "Profile Information"
 msgstr "Profil Bilgisi"
 
-#: src/gtr-profile-dialog.ui:62
+#: src/gtr-profile-dialog.ui:61
 msgid "Translator Information"
 msgstr "Çevirmen Bilgisi"
 
-#: src/gtr-profile-dialog.ui:67
+#: src/gtr-profile-dialog.ui:66
 msgid "Translator _name"
 msgstr "Çevirmen _adı"
 
-#: src/gtr-profile-dialog.ui:73
+#: src/gtr-profile-dialog.ui:72
 msgid "Translator _email"
 msgstr "Çevirmen _e-postası"
 
-#: src/gtr-profile-dialog.ui:79
+#: src/gtr-profile-dialog.ui:78
 msgid "Translation _team email"
 msgstr "Çeviri _takımı e-postası"
 
-#: src/gtr-profile-dialog.ui:87
+#: src/gtr-profile-dialog.ui:86
 msgid "Damned Lies Integration"
 msgstr "Damned Lies Tümleşimi"
 
-#: src/gtr-profile-dialog.ui:88
+#: src/gtr-profile-dialog.ui:87
 msgid ""
 "GNOME Damned Lies integration token, go to your profile in https://l10n."
 "gnome.org/ to get it"
@@ -856,15 +845,15 @@ msgstr ""
 "GNOME Damned Lies tümleşim jetonu, almak için https://l10n.gnome.org/ "
 "adresindeki profilinize gidin"
 
-#: src/gtr-profile-dialog.ui:93
+#: src/gtr-profile-dialog.ui:92
 msgid "_Damned Lies auth token"
 msgstr "_Damned Lies kimlik doğrulama jetonu"
 
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:250
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:390
 msgid "Build Translation Memory"
 msgstr "Çeviri Belleği Oluştur"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:274
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:414
 msgid "Help"
 msgstr "Yardım"
 
@@ -917,12 +906,12 @@ msgstr "Özgün metin"
 msgid "Translated text"
 msgstr "Çevrilmiş metin"
 
-#: src/gtr-tab.c:299
+#: src/gtr-tab.c:295
 #, c-format
 msgid "File is not consistent with profile %s"
 msgstr "Dosya %s profiliyle tutarlı değil."
 
-#: src/gtr-tab.c:301
+#: src/gtr-tab.c:297
 #, c-format
 msgid ""
 "File nplurals: %d, is different from profile nplurals %d.\n"
@@ -933,155 +922,155 @@ msgstr ""
 "Lütfen tercihlere gidin ve %s dosyasıyla tutarlı nplurals değerlerine sahip "
 "bir profil seçin."
 
-#: src/gtr-tab.c:421
+#: src/gtr-tab.c:417
 msgid "There is an error in the message:"
 msgstr "İletide hata var:"
 
-#: src/gtr-tab.c:640 src/gtr-tab.c:773
+#: src/gtr-tab.c:634 src/gtr-tab.c:767
 msgid "fuzzy"
 msgstr "bulanık"
 
-#: src/gtr-tab.c:802
+#: src/gtr-tab.c:796
 #, c-format
 msgid "Plural %d"
 msgstr "Çoğul %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1529
+#: src/gtr-tab.c:1495
 msgid "Path:"
 msgstr "Yol:"
 
-#: src/gtr-tab.c:2161
+#: src/gtr-tab.c:1744
+msgid "Copied to clipboard"
+msgstr "Panoya kopyalandı"
+
+#: src/gtr-tab.c:2157
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Çevrilen: %%%0.2f"
 
-#: src/gtr-tab.c:2162
+#: src/gtr-tab.c:2158
 #, c-format
 msgid "Translated: %d"
 msgstr "Çevrilen: %d"
 
-#: src/gtr-tab.c:2163
+#: src/gtr-tab.c:2159
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Çevrilmemiş: %d"
 
-#: src/gtr-tab.c:2164
+#: src/gtr-tab.c:2160
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Bulanık: %d"
 
+#: src/gtr-tab.ui:14
+msgid "Open a New File"
+msgstr "Yeni Dosya Aç"
+
+#: src/gtr-tab.ui:21
+msgid "Open from Damned Lies"
+msgstr "Damned Lies Sisteminden Aç"
+
+#: src/gtr-tab.ui:36
+msgid "Previous message without translation (<Alt><Page Up>)"
+msgstr "Önceki çevirisiz ileti (<Alt><Page Up>)"
+
+#: src/gtr-tab.ui:44
+msgid "Next message without translation (<Alt><Page Down>)"
+msgstr "Sonraki çevirisiz ileti (<Alt><Page Down>)"
+
+#: src/gtr-tab.ui:59
+msgid "Toggle Fuzzy State"
+msgstr "Bulanık Durumunu Değiştir"
+
+#: src/gtr-tab.ui:68
+msgid "Sort messages by"
+msgstr "İletileri şuna göre sırala"
+
+#: src/gtr-tab.ui:85 src/gtr-tab.ui:382
+msgid "Find"
+msgstr "Bul"
+
+#: src/gtr-tab.ui:100
+msgid "Upload File"
+msgstr "Dosyayı Karşıya Yükle"
+
+#: src/gtr-tab.ui:108
+msgid "Save as"
+msgstr "Farklı Kaydet"
+
+#: src/gtr-tab.ui:116
+msgid "Save Current File"
+msgstr "Geçerli Dosyayı Kaydet"
+
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:54
+#: src/gtr-tab.ui:187
 msgid "_Original Message"
 msgstr "_Özgün İleti"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:114
+#: src/gtr-tab.ui:257
 msgid "Translate_d Text"
 msgstr "Ç_evrilmiş Metin"
 
-#: src/gtr-tab.ui:203
+#: src/gtr-tab.ui:343
 msgid "Order messages by"
 msgstr "İletileri şuna göre sırala"
 
-#: src/gtr-tab.ui:214
+#: src/gtr-tab.ui:354
 msgid "Appearance in the original file"
 msgstr "Özgün dosyadaki görünüm"
 
-#: src/gtr-tab.ui:219
+#: src/gtr-tab.ui:359
 msgid "Message status"
 msgstr "İleti durumu"
 
-#: src/gtr-tab.ui:225
+#: src/gtr-tab.ui:365
 msgid "Original message"
 msgstr "Özgün ileti"
 
-#: src/gtr-tab.ui:231
+#: src/gtr-tab.ui:371
 msgid "Translated message"
 msgstr "Çevrilen ileti"
 
-#: src/gtr-tab.ui:242 src/gtr-tab.ui:384
-msgid "Find"
-msgstr "Bul"
-
-#: src/gtr-tab.ui:246
+#: src/gtr-tab.ui:386
 msgid "Find and Replace"
 msgstr "Bul ve Değiştir"
 
-#: src/gtr-tab.ui:290
-msgid "Open a New File"
-msgstr "Yeni Dosya Aç"
-
-#: src/gtr-tab.ui:297
-msgid "Open from Damned Lies"
-msgstr "Damned Lies Sisteminden Aç"
-
-#: src/gtr-tab.ui:312
-msgid "Undo"
-msgstr "Geri al"
-
-#: src/gtr-tab.ui:320
-msgid "Redo"
-msgstr "Yinele"
-
-#: src/gtr-tab.ui:335
-msgid "Previous message without translation (<Alt><Page Up>)"
-msgstr "Önceki çevirisiz ileti (<Alt><Page Up>)"
-
-#: src/gtr-tab.ui:343
-msgid "Next message without translation (<Alt><Page Down>)"
-msgstr "Sonraki çevirisiz ileti (<Alt><Page Down>)"
-
-#: src/gtr-tab.ui:358
-msgid "Toggle Fuzzy State"
-msgstr "Bulanık Durumunu Değiştir"
-
-#: src/gtr-tab.ui:367
-msgid "Sort messages by"
-msgstr "İletileri şuna göre sırala"
-
-#: src/gtr-tab.ui:399
-msgid "Upload File"
-msgstr "Dosyayı Karşıya Yükle"
-
-#: src/gtr-tab.ui:407
-msgid "Save as"
-msgstr "Farklı Kaydet"
-
-#: src/gtr-tab.ui:415
-msgid "Save Current File"
-msgstr "Geçerli Dosyayı Kaydet"
-
-#: src/gtr-upload-dialog.c:153
+#: src/gtr-upload-dialog.c:155
 msgid "Uploading..."
 msgstr "Karşıya yükleniyor..."
 
-#: src/gtr-upload-dialog.c:159 src/gtr-upload-dialog.ui:22
+#: src/gtr-upload-dialog.c:161 src/gtr-upload-dialog.ui:21
 msgid "Upload"
 msgstr "Karşıya yükle"
 
-#: src/gtr-upload-dialog.ui:40
+#: src/gtr-upload-dialog.ui:8
+msgid "Upload to Damned Lies"
+msgstr "Damned Lies sistemine yükle"
+
+#: src/gtr-upload-dialog.ui:41
 msgid "comment:"
 msgstr "açıklama:"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:206
+#: src/gtr-window.c:197
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Çeviri Düzenleyici"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:212
+#: src/gtr-window.c:203
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Çeviri Düzenleyici"
 
-#: src/gtr-window.c:608
+#: src/gtr-window.c:581
 msgid "Select a Po file"
 msgstr "PO dosyası seç"
 
-#: src/gtr-window.c:627
+#: src/gtr-window.c:603
 msgid "Load from Damned Lies"
 msgstr "Damned Lies sisteminden yükle"
 
@@ -1142,100 +1131,90 @@ msgstr "Düzenle"
 
 #: src/help-overlay.ui:88
 msgctxt "shortcut window"
-msgid "Undo"
-msgstr "Geri al"
-
-#: src/help-overlay.ui:95
-msgctxt "shortcut window"
-msgid "Redo"
-msgstr "Yinele"
-
-#: src/help-overlay.ui:102
-msgctxt "shortcut window"
 msgid "Clear translation"
 msgstr "Çeviriyi temizle"
 
-#: src/help-overlay.ui:109
+#: src/help-overlay.ui:95
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "Bulanık olarak imle/imleme"
 
-#: src/help-overlay.ui:116
+#: src/help-overlay.ui:102
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "Özgün metni çeviriye kopyala"
 
-#: src/help-overlay.ui:125
+#: src/help-overlay.ui:109
+msgctxt "shortcut window"
+msgid "Copy original text to clipboard"
+msgstr "Özgün metni panoya kopyala"
+
+#: src/help-overlay.ui:118
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Gezinim"
 
-#: src/help-overlay.ui:130
+#: src/help-overlay.ui:123
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Önceki iletiye git"
 
-#: src/help-overlay.ui:137
+#: src/help-overlay.ui:130
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Sonraki iletiye git"
 
-#: src/help-overlay.ui:144
+#: src/help-overlay.ui:137
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Önceki çevrilmemiş iletiye git"
 
-#: src/help-overlay.ui:151
+#: src/help-overlay.ui:144
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Sonraki çevrilmemiş iletiye git"
 
-#: src/help-overlay.ui:160
+#: src/help-overlay.ui:153
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Çeviri Belleği"
 
-#: src/help-overlay.ui:165
+#: src/help-overlay.ui:158
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Çeviri belleği oluştur"
 
-#: src/help-overlay.ui:172
-msgctxt "shortcut window"
-msgid "Copy below"
-msgstr "Aşağı kopyala"
-
-#: src/help-overlay.ui:179
+#: src/help-overlay.ui:165
 msgctxt "shortcut window"
 msgid "Use 1st...9th suggestion"
 msgstr "1. ... 9. öneriyi kullan"
 
-#: src/help-overlay.ui:188
+#: src/help-overlay.ui:174
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Bul ve Değiştir"
 
-#: src/help-overlay.ui:193
+#: src/help-overlay.ui:179
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Bul"
 
-#: src/help-overlay.ui:200
+#: src/help-overlay.ui:186
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Bul ve değiştir"
 
-#: src/help-overlay.ui:207
+#: src/help-overlay.ui:193
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "İleri ara"
 
-#: src/help-overlay.ui:214
+#: src/help-overlay.ui:200
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Geri ara"
 
-#: src/help-overlay.ui:221
+#: src/help-overlay.ui:207
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Bul ve değiştir çubuğunu gizle"
@@ -1254,27 +1233,27 @@ msgstr ""
 "Kullanılabilir komut satırı seçeneklerinin tam listesini görmek için “%s --"
 "help” komutunu çalıştırın.\n"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:76
+#: src/translation-memory/gtr-translation-memory-dialog.c:77
 msgid "Select PO directory"
 msgstr "PO dizini seç"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:7
+#: src/translation-memory/gtr-translation-memory-dialog.ui:8
 msgid "Translation Editor Memory Manager"
 msgstr "Çeviri Düzenleyici Bellek Yöneticisi"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:38
+#: src/translation-memory/gtr-translation-memory-dialog.ui:43
 msgid "Database"
 msgstr "Veri tabanı"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:43
+#: src/translation-memory/gtr-translation-memory-dialog.ui:48
 msgid "Select the directory which contains PO files"
 msgstr "PO dosyalarını içeren dizini seç"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:55
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
 msgid "Use only files with this name"
 msgstr "Yalnızca bu adı taşıyan dosyaları kullan"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:74
+#: src/translation-memory/gtr-translation-memory-dialog.ui:79
 msgid "Add to Database"
 msgstr "Veri Tabanına Ekle"
 
@@ -1330,6 +1309,30 @@ msgid ""
 msgstr ""
 "Çeviri belleğince eşleşme olarak gösterilen iletiler arasındaki uzunluk "
 "türünden azami fark."
+
+#~ msgid "Gtranslator"
+#~ msgstr "Gtranslator"
+
+#~ msgid "Daniel García Moreno"
+#~ msgstr "Daniel García Moreno"
+
+#~ msgid "Undo"
+#~ msgstr "Geri al"
+
+#~ msgid "Redo"
+#~ msgstr "Yinele"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Undo"
+#~ msgstr "Geri al"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Redo"
+#~ msgstr "Yinele"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Copy below"
+#~ msgstr "Aşağı kopyala"
 
 #~ msgid "Translator and Language"
 #~ msgstr "Çevirmen ve Dil"
