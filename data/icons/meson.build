@@ -1,9 +1,8 @@
 scalable_dir = join_paths('hicolor', 'scalable', 'apps')
 
 install_data(
-  join_paths(scalable_dir, gtr_namespace + '.svg'),
+  join_paths(scalable_dir, gtr_app_id + '.svg'),
   install_dir: join_paths(gtr_datadir, 'icons', scalable_dir),
-  rename: '@0@.svg'.format(gtr_app_id),
 )
 
 symbolic_dir = join_paths('hicolor', 'symbolic', 'apps')
