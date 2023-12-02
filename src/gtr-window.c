@@ -179,7 +179,6 @@ set_window_title (GtrWindow * window, gboolean with_path)
   GtrTab *active_tab;
   GFile *file;
   g_autofree gchar *title;
-  GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
   if (with_path)
     {
@@ -195,13 +194,15 @@ set_window_title (GtrWindow * window, gboolean with_path)
         {
           /* Translators: this is the title of the window with a modified document */
           title = g_strdup_printf (_("*%s — Translation Editor"), basename);
-          gtr_tab_enable_save (GTR_TAB (priv->active_tab), TRUE);
+          gtk_widget_action_set_enabled (GTK_WIDGET (window), "win.save",
+                                         TRUE);
         }
       else
         {
           /* Translators: this is the title of the window with a document opened */
           title = g_strdup_printf (_("%s — Translation Editor"), basename);
-          gtr_tab_enable_save (GTR_TAB (priv->active_tab), FALSE);
+          gtk_widget_action_set_enabled (GTK_WIDGET (window), "win.save",
+                                         FALSE);
         }
 
       g_free (basename);
@@ -327,6 +328,47 @@ gtr_window_finalize (GObject * object)
   G_OBJECT_CLASS (gtr_window_parent_class)->finalize (object);
 }
 
+void
+gtr_window_save_current_tab (GtrWindow *self)
+{
+  g_autoptr (GError) error = NULL;
+  GtrTab *current;
+  GtrPo *po;
+
+  current = gtr_window_get_active_tab (self);
+  po = gtr_tab_get_po (current);
+
+  gtr_po_save_file (po, &error);
+
+  if (error)
+    {
+      AdwMessageDialog *dialog;
+      dialog = ADW_MESSAGE_DIALOG (adw_message_dialog_new (
+          GTK_WINDOW (self), _("Could not Save"), NULL));
+      adw_message_dialog_format_body (dialog, "%s", error->message);
+      adw_message_dialog_add_response (dialog, "ok", _("OK"));
+      adw_message_dialog_set_default_response (dialog, "ok");
+      adw_message_dialog_set_close_response (dialog, "ok");
+      adw_message_dialog_choose (
+          dialog, NULL, (GAsyncReadyCallback)adw_message_dialog_choose_finish,
+          NULL);
+      return;
+    }
+
+  /* We have to change the state of the tab */
+  gtr_po_set_state (po, GTR_PO_STATE_SAVED);
+  gtr_window_add_toast_msg (self, _("File saved"));
+}
+
+static void
+on_save_action (GtkWidget *widget, const char *action_name,
+                GVariant *parameter)
+{
+  GtrWindow *self = GTR_WINDOW (widget);
+
+  gtr_window_save_current_tab (self);
+}
+
 static void
 gtr_window_class_init (GtrWindowClass *klass)
 {
@@ -346,6 +388,9 @@ gtr_window_class_init (GtrWindowClass *klass)
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, toast_overlay);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass),
                                                 GtrWindow, toolbar_view);
+
+  gtk_widget_class_install_action (GTK_WIDGET_CLASS (klass), "win.save", NULL,
+                                   on_save_action);
 }
 
 static void

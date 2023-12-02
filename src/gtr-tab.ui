@@ -88,39 +88,11 @@
               </object>
             </child>
             <child type="end">
-              <object class="GtkSeparator">
-                <style>
-                  <class name="spacer"/>
-                </style>
-              </object>
-            </child>
-            <child type="end">
               <object class="GtkButton" id="upload">
                 <property name="receives_default">1</property>
                 <property name="tooltip_text" translatable="yes">Upload File</property>
                 <property name="action_name">app.upload_file</property>
                 <property name="icon_name">document-send-symbolic</property>
-              </object>
-            </child>
-            <child type="end">
-              <object class="GtkButton">
-                <property name="receives_default">1</property>
-                <property name="tooltip_text" translatable="yes">Save as</property>
-                <property name="action_name">app.saveas</property>
-                <property name="icon_name">document-save-as-symbolic</property>
-              </object>
-            </child>
-            <child type="end">
-              <object class="GtkButton" id="save">
-                <property name="receives_default">1</property>
-                <property name="tooltip_text" translatable="yes">Save Current File</property>
-                <property name="action_name">app.save</property>
-                <child>
-                  <object class="AdwButtonContent">
-                    <property name="label" translatable="yes">Save</property>
-                    <property name="icon_name">document-save-symbolic</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
@@ -374,6 +346,16 @@
   </object>
 
   <menu id='main-menu-model'>
+    <section>
+      <item>
+        <attribute name='label' translatable='yes'>Save</attribute>
+        <attribute name='action'>win.save</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>Save As…</attribute>
+        <attribute name='action'>app.saveas</attribute>
+      </item>
+    </section>
     <section>
       <item>
         <attribute name='label' translatable='yes'>Build Translation Memory</attribute>

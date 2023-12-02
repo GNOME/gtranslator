@@ -123,7 +123,6 @@ typedef struct
   GtrSearchBar   *gtr_search_bar;
 
   /* notebook code */
-  GtkWidget *save;
   GtkWidget *sort_id;
   GtkWidget *sort_status;
   GtkWidget *sort_msgid;
@@ -1123,7 +1122,6 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_translated);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, order_menu_popover);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_toggle);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, save);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, upload);
 
   gtk_widget_class_bind_template_callback (widget_class, gtr_page_notify_child_revealed);
@@ -1154,14 +1152,6 @@ gtr_tab_enable_find_button (GtrTab *tab,
 
   if (priv->search_toggle)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->search_toggle), enable);
-}
-
-void
-gtr_tab_enable_save (GtrTab *tab,
-                          gboolean enable)
-{
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-  gtk_widget_set_sensitive (priv->save, enable);
 }
 
 void
