@@ -610,6 +610,7 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.preferences", "<Ctrl>comma");
   set_kb (application, "app.help", "F1");
   set_kb (application, "app.quit", "<Primary>q");
+  set_kb (application, "app.new-window", "<Ctrl>n");
 
   set_kb (application, "app.clear_msgstr", "<Ctrl>k");
 
