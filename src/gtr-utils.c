@@ -36,10 +36,11 @@
 
 #include <string.h>
 
+#include <adwaita.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <adwaita.h>
+#include <libxml/parser.h>
 
 xmlDocPtr
 gtr_xml_new_doc (const gchar * name)
