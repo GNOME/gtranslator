@@ -77,4 +77,6 @@ void gtr_window_show_poeditor (GtrWindow *window);
 void gtr_window_show_dlteams (GtrWindow *window);
 void gtr_window_show_greeter (GtrWindow *window);
 
+void gtr_window_save_current_tab (GtrWindow *window);
+
 G_END_DECLS

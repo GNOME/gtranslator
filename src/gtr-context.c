@@ -230,7 +230,7 @@ add_extracted_comments (GtrContextPanel *panel, GtrMsg *msg)
 
   comments = gtr_msg_get_extracted_comments (msg);
   if (comments == NULL || *comments == '\0')
-    gtk_text_buffer_insert (priv->commentsbuffer, &iter, "-", -1);
+    gtk_text_buffer_insert (priv->commentsbuffer, &iter, "", -1);
   else
     gtk_text_buffer_insert (priv->commentsbuffer, &iter, comments, -1);
 }

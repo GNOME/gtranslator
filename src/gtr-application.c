@@ -386,16 +386,6 @@ saveas_activated (GSimpleAction *action,
 }
 
 static void
-save_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
-{
-  GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_save_current_file_dialog (NULL, priv->active_window);
-}
-
-static void
 open_activated (GSimpleAction *action,
                 GVariant      *parameter,
                 gpointer       user_data)
@@ -519,58 +509,56 @@ sort_by_activated (GSimpleAction *action,
   gtr_window_hide_sort_menu (w);
 }
 
-static GActionEntry app_entries[] = {
-  { "save", save_activated, NULL, NULL, NULL },
-  { "saveas", saveas_activated, NULL, NULL, NULL },
+static GActionEntry app_entries[]
+    = { { "saveas", saveas_activated, NULL, NULL, NULL },
 
-  { "upload_file", upload_file_activated, NULL, NULL, NULL },
+        { "upload_file", upload_file_activated, NULL, NULL, NULL },
 
-  { "open", open_activated, NULL, NULL, NULL },
-  { "dl", dl_activated, NULL, NULL, NULL },
+        { "open", open_activated, NULL, NULL, NULL },
+        { "dl", dl_activated, NULL, NULL, NULL },
 
-  { "prev", prev_activated, NULL, NULL, NULL },
-  { "next", next_activated, NULL, NULL, NULL },
+        { "prev", prev_activated, NULL, NULL, NULL },
+        { "next", next_activated, NULL, NULL, NULL },
 
-  { "prev_no", prev_no_activated, NULL, NULL, NULL },
-  { "next_no", next_no_activated, NULL, NULL, NULL },
+        { "prev_no", prev_no_activated, NULL, NULL, NULL },
+        { "next_no", next_no_activated, NULL, NULL, NULL },
 
-  { "fuzzy", toggle_fuzzy_activated, NULL, NULL, NULL },
+        { "fuzzy", toggle_fuzzy_activated, NULL, NULL, NULL },
 
-  // sort actions
-  { "sort_by_id", sort_by_activated, NULL, "0", NULL },
-  { "sort_by_status", sort_by_activated, NULL, "1", NULL },
-  { "sort_by_status_desc", sort_by_activated, NULL, "2", NULL },
-  { "sort_by_msgid", sort_by_activated, NULL, "3", NULL },
-  { "sort_by_msgid_desc", sort_by_activated, NULL, "4", NULL },
-  { "sort_by_translated", sort_by_activated, NULL, "5", NULL },
-  { "sort_by_translated_desc", sort_by_activated, NULL, "6", NULL },
+        // sort actions
+        { "sort_by_id", sort_by_activated, NULL, "0", NULL },
+        { "sort_by_status", sort_by_activated, NULL, "1", NULL },
+        { "sort_by_status_desc", sort_by_activated, NULL, "2", NULL },
+        { "sort_by_msgid", sort_by_activated, NULL, "3", NULL },
+        { "sort_by_msgid_desc", sort_by_activated, NULL, "4", NULL },
+        { "sort_by_translated", sort_by_activated, NULL, "5", NULL },
+        { "sort_by_translated_desc", sort_by_activated, NULL, "6", NULL },
 
-  { "build_tm", build_tm_activated, NULL, NULL, NULL },
-  { "tm_1", tm_activated, NULL, NULL, NULL },
-  { "tm_2", tm_activated, NULL, NULL, NULL },
-  { "tm_3", tm_activated, NULL, NULL, NULL },
-  { "tm_4", tm_activated, NULL, NULL, NULL },
-  { "tm_5", tm_activated, NULL, NULL, NULL },
-  { "tm_6", tm_activated, NULL, NULL, NULL },
-  { "tm_7", tm_activated, NULL, NULL, NULL },
-  { "tm_8", tm_activated, NULL, NULL, NULL },
-  { "tm_9", tm_activated, NULL, NULL, NULL },
+        { "build_tm", build_tm_activated, NULL, NULL, NULL },
+        { "tm_1", tm_activated, NULL, NULL, NULL },
+        { "tm_2", tm_activated, NULL, NULL, NULL },
+        { "tm_3", tm_activated, NULL, NULL, NULL },
+        { "tm_4", tm_activated, NULL, NULL, NULL },
+        { "tm_5", tm_activated, NULL, NULL, NULL },
+        { "tm_6", tm_activated, NULL, NULL, NULL },
+        { "tm_7", tm_activated, NULL, NULL, NULL },
+        { "tm_8", tm_activated, NULL, NULL, NULL },
+        { "tm_9", tm_activated, NULL, NULL, NULL },
 
-  { "copy_text", copy_text_activated, NULL, NULL, NULL },
-  { "copy-original", copy_original_activated, NULL, NULL, NULL },
-  { "find_and_replace", find_and_replace_activated, NULL, NULL, NULL },
-  { "findtoggle", find_toggle_activated, NULL, NULL, NULL },
-  { "find", find_activated, NULL, NULL, NULL },
-  { "find-next", find_next_activated, NULL, NULL, NULL },
-  { "find-prev", find_prev_activated, NULL, NULL, NULL },
-  { "new-window", new_window_activated, NULL, NULL, NULL },
-  { "preferences", preferences_activated, NULL, NULL, NULL },
-  { "edit_header", edit_header_activated, NULL, NULL, NULL },
-  { "clear_msgstr", clear_msgstr_activated, NULL, NULL, NULL },
-  { "help", help_activated, NULL, NULL, NULL },
-  { "about", about_activated, NULL, NULL, NULL },
-  { "quit", quit_activated, NULL, NULL, NULL }
-};
+        { "copy_text", copy_text_activated, NULL, NULL, NULL },
+        { "copy-original", copy_original_activated, NULL, NULL, NULL },
+        { "find_and_replace", find_and_replace_activated, NULL, NULL, NULL },
+        { "findtoggle", find_toggle_activated, NULL, NULL, NULL },
+        { "find", find_activated, NULL, NULL, NULL },
+        { "find-next", find_next_activated, NULL, NULL, NULL },
+        { "find-prev", find_prev_activated, NULL, NULL, NULL },
+        { "new-window", new_window_activated, NULL, NULL, NULL },
+        { "preferences", preferences_activated, NULL, NULL, NULL },
+        { "edit_header", edit_header_activated, NULL, NULL, NULL },
+        { "clear_msgstr", clear_msgstr_activated, NULL, NULL, NULL },
+        { "help", help_activated, NULL, NULL, NULL },
+        { "about", about_activated, NULL, NULL, NULL },
+        { "quit", quit_activated, NULL, NULL, NULL } };
 
 static void
 set_kb (GApplication *app, gchar *action, gchar *accel)
@@ -604,12 +592,13 @@ gtr_application_startup (GApplication *application)
   // keybindings
   set_kb (application, "app.open", "<Ctrl>o");
   set_kb (application, "app.dl", "<Ctrl>d");
-  set_kb (application, "app.save", "<Ctrl>s");
+  set_kb (application, "win.save", "<Ctrl>s");
   set_kb (application, "app.saveas", "<Ctrl><Shift>s");
   set_kb (application, "app.upload_file", "<Ctrl>b");
   set_kb (application, "app.preferences", "<Ctrl>comma");
   set_kb (application, "app.help", "F1");
   set_kb (application, "app.quit", "<Primary>q");
+  set_kb (application, "app.new-window", "<Ctrl>n");
 
   set_kb (application, "app.clear_msgstr", "<Ctrl>k");
 

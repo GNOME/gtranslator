@@ -170,7 +170,7 @@ handle_save_current_dialog_response (AdwMessageDialog *dialog,
   GtrWindow *window = gtr_application_get_active_window (GTR_APP);
 
   if (g_strcmp0 ("save", response) == 0)
-    gtr_save_current_file_dialog (NULL, window);
+    gtr_window_save_current_tab (window);
 
   // callback for "save", "close", and "no"
   if (g_strcmp0 ("cancel", response) != 0)
@@ -489,34 +489,6 @@ gtr_save_file_as_dialog (GtrWindow * window)
                                  _("Save file as…"), NULL);
 
   gtk_file_dialog_save (dialog, GTK_WINDOW (window), NULL, save_dialog_response_cb, window);
-}
-
-/*
- * A callback for Save
- */
-void
-gtr_save_current_file_dialog (GtkWidget * widget, GtrWindow * window)
-{
-  GError *error = NULL;
-  GtrTab *current;
-  GtrPo *po;
-
-  current = gtr_window_get_active_tab (window);
-  po = gtr_tab_get_po (current);
-
-  gtr_po_save_file (po, &error);
-
-  if (error)
-    {
-      GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
-      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
-      g_object_unref (dialog);
-      g_clear_error (&error);
-      return;
-    }
-
-  /* We have to change the state of the tab */
-  gtr_po_set_state (po, GTR_PO_STATE_SAVED);
 }
 
 static void

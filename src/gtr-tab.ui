@@ -88,39 +88,11 @@
               </object>
             </child>
             <child type="end">
-              <object class="GtkSeparator">
-                <style>
-                  <class name="spacer"/>
-                </style>
-              </object>
-            </child>
-            <child type="end">
               <object class="GtkButton" id="upload">
                 <property name="receives_default">1</property>
                 <property name="tooltip_text" translatable="yes">Upload File</property>
                 <property name="action_name">app.upload_file</property>
                 <property name="icon_name">document-send-symbolic</property>
-              </object>
-            </child>
-            <child type="end">
-              <object class="GtkButton">
-                <property name="receives_default">1</property>
-                <property name="tooltip_text" translatable="yes">Save as</property>
-                <property name="action_name">app.saveas</property>
-                <property name="icon_name">document-save-as-symbolic</property>
-              </object>
-            </child>
-            <child type="end">
-              <object class="GtkButton" id="save">
-                <property name="receives_default">1</property>
-                <property name="tooltip_text" translatable="yes">Save Current File</property>
-                <property name="action_name">app.save</property>
-                <child>
-                  <object class="AdwButtonContent">
-                    <property name="label" translatable="yes">Save</property>
-                    <property name="icon_name">document-save-symbolic</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
@@ -151,7 +123,6 @@
                 </style>
                 <child>
                   <object class="GtrMessageTable" id="message_table">
-                    <property name="visible">True</property>
                     <property name="tab">GtrTab</property>
                     <property name="height_request">350</property>
                     <property name="width_request">450</property>
@@ -174,7 +145,6 @@
                         <property name="margin-bottom">6</property>
                         <child>
                           <object class="GtkBox" id="text_vbox">
-                            <property name="vexpand">1</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
@@ -263,7 +233,6 @@
                         </child>
                         <child>
                           <object class="GtkNotebook" id="trans_notebook">
-                            <property name="vexpand">1</property>
                             <property name="show_border">0</property>
                             <style>
                               <class name="translation-notebook"/>
@@ -379,13 +348,15 @@
   <menu id='main-menu-model'>
     <section>
       <item>
-        <attribute name='label' translatable='yes'>Find</attribute>
-        <attribute name='action'>app.find</attribute>
+        <attribute name='label' translatable='yes'>Save</attribute>
+        <attribute name='action'>win.save</attribute>
       </item>
       <item>
-        <attribute name='label' translatable='yes'>Find and Replace</attribute>
-        <attribute name='action'>app.find_and_replace</attribute>
+        <attribute name='label' translatable='yes'>Save As…</attribute>
+        <attribute name='action'>app.saveas</attribute>
       </item>
+    </section>
+    <section>
       <item>
         <attribute name='label' translatable='yes'>Build Translation Memory</attribute>
         <attribute name='action'>app.build_tm</attribute>

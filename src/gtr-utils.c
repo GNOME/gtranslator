@@ -42,6 +42,16 @@
 #include <gtk/gtk.h>
 #include <libxml/parser.h>
 
+static void
+on_uri_launch (GObject *object, GAsyncResult *result, gpointer user_data)
+{
+  g_autoptr (GError) error = NULL;
+  gtk_uri_launcher_launch_finish (GTK_URI_LAUNCHER (object), result, &error);
+
+  if (error)
+    g_error ("Could not open uri: %s", error->message);
+}
+
 xmlDocPtr
 gtr_xml_new_doc (const gchar * name)
 {
@@ -270,7 +280,7 @@ void
 gtr_utils_help_display (GtkWindow * window)
 {
   g_autoptr (GtkUriLauncher) uri_launcher = gtk_uri_launcher_new ("help:gtranslator");
-  gtk_uri_launcher_launch (uri_launcher, window, NULL, NULL, NULL);
+  gtk_uri_launcher_launch (uri_launcher, window, NULL, on_uri_launch, NULL);
 }
 
 gchar *

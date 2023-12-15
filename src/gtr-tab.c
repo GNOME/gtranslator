@@ -123,7 +123,6 @@ typedef struct
   GtrSearchBar   *gtr_search_bar;
 
   /* notebook code */
-  GtkWidget *save;
   GtkWidget *sort_id;
   GtkWidget *sort_status;
   GtkWidget *sort_msgid;
@@ -276,15 +275,12 @@ msg_grab_focus (GtrTab *tab)
 static void
 handle_file_is_inconsistent (GtrPo *po, GtrTab *tab)
 {
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
   GtrProfileManager *manager = gtr_profile_manager_get_default ();
   GtrProfile *active_profile = gtr_profile_manager_get_active_profile (manager);
-  const char *profile_name = gtr_profile_get_name (active_profile);
   int profile_nplurals = -1;
   int po_nplurals = -1;
 
-  g_autofree char *info_msg_primary = NULL;
-  g_autofree char *info_msg_secondary = NULL;
+  const char *info_msg_primary;
   g_autofree char *filename = NULL;
   g_autoptr (GFile) po_file = gtr_po_get_location (po);
 
@@ -292,17 +288,13 @@ handle_file_is_inconsistent (GtrPo *po, GtrTab *tab)
   po_nplurals = gtr_header_get_nplurals (gtr_po_get_header (po));
   profile_nplurals = parse_nplurals_header (gtr_profile_get_plural_forms (active_profile));
 
-  info_msg_primary = g_strdup_printf (_("File is not consistent with profile %s"), profile_name);
-  info_msg_secondary = g_strdup_printf (_(
-    "File nplurals: %d, is different from profile nplurals %d.\n"
-    "Kindly go to preferences and select a profile with consistent nplurals "
-    "values as this file %s."),
-    po_nplurals, profile_nplurals, filename
-  );
-  gtr_tab_set_info (tab, info_msg_primary, info_msg_secondary);
-
-  GtkWidget *nb = priv->trans_notebook;
-  gtk_widget_set_sensitive (nb, FALSE);
+  info_msg_primary = _("Header's plural forms don't match profile's");
+  g_warning (
+      "File nplurals: %d, is different from profile nplurals %d.\n"
+      "Kindly go to preferences and select a profile with consistent nplurals "
+      "values as this file %s.",
+      po_nplurals, profile_nplurals, filename);
+  gtr_tab_set_info (tab, info_msg_primary, NULL);
 
   g_object_unref (manager);
 }
@@ -778,10 +770,9 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
 {
   GtrHeader *header;
   GtrTabPrivate *priv;
-  gchar *label;
   GtkTextBuffer *buf;
-  gint i = 0;
-  gchar *lang_code = NULL;
+  gint i;
+  g_autofree char *lang_code = NULL;
 
   priv = gtr_tab_get_instance_private (tab);
 
@@ -791,8 +782,10 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
   header = gtr_po_get_header (priv->po);
   lang_code = gtr_header_get_language_code (header);
 
-  do
+  for (i = 0; i < gtr_header_get_nplurals (header); i++)
     {
+      g_autofree char *label = NULL;
+
       label = g_strdup_printf (_("Plural %d"), i);
       priv->trans_msgstr[i] = gtr_tab_append_msgstr_page (label,
                                                           priv->trans_notebook,
@@ -807,11 +800,7 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
                               G_CALLBACK (emit_message_changed_signal), tab);
       g_signal_connect (buf, "notify::has-selection",
                         G_CALLBACK (emit_selection_changed), tab);
-      i++;
-      g_free (label);
     }
-  while (i < gtr_header_get_nplurals (header));
-  g_free (lang_code);
 }
 
 static void
@@ -1133,7 +1122,6 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_translated);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, order_menu_popover);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_toggle);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, save);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, upload);
 
   gtk_widget_class_bind_template_callback (widget_class, gtr_page_notify_child_revealed);
@@ -1164,14 +1152,6 @@ gtr_tab_enable_find_button (GtrTab *tab,
 
   if (priv->search_toggle)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->search_toggle), enable);
-}
-
-void
-gtr_tab_enable_save (GtrTab *tab,
-                          gboolean enable)
-{
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-  gtk_widget_set_sensitive (priv->save, enable);
 }
 
 void
@@ -1225,7 +1205,7 @@ gtr_tab_new (GtrPo * po,
   g_signal_connect (manager, "active-profile-changed",
                     G_CALLBACK (on_active_profile_changed), tab);
 
-    g_signal_connect (manager, "profile-modified",
+  g_signal_connect (manager, "profile-modified",
                     G_CALLBACK (on_profile_modified), tab);
 
   install_autosave_timeout_if_needed (tab);

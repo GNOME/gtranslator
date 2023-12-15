@@ -48,8 +48,6 @@ void gtr_want_to_save_current_dialog (GtrWindow * window, void (*callback)(GtrWi
 
 void gtr_open_file_dialog (GtrWindow * window);
 
-void gtr_save_current_file_dialog (GtkWidget * widget, GtrWindow * window);
-
 void gtr_save_file_as_dialog (GtrWindow * window);
 
 void gtr_upload_file_dialog (GtrWindow * window);
