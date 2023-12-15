@@ -30,11 +30,18 @@ static GArray * msg_queue_arr = NULL;
 
 typedef struct
 {
-  const gchar * primary_text;
-  const gchar * secondary_text;
+  gchar *primary_text;
+  gchar *secondary_text;
 } message_struct;
 
 static void show_info_bar (GtrTab * tab);
+
+static void
+msg_queue_element_clear (message_struct *msg_struct_temp)
+{
+  g_clear_pointer (&msg_struct_temp->primary_text, g_free);
+  g_clear_pointer (&msg_struct_temp->secondary_text, g_free);
+}
 
 /*
  * Callback func called when warning button is clicked
@@ -44,15 +51,14 @@ handle_info_bar_response (AdwToast *toast,
                           gpointer user_data)
 {
   GtrTab *tab = GTR_TAB (user_data);
- message_struct msg_struct_temp = g_array_index (msg_queue_arr, message_struct, 0);
- g_free ((gchar *)msg_struct_temp.primary_text);
- g_free ((gchar *)msg_struct_temp.secondary_text);
- msg_queue_arr = g_array_remove_index (msg_queue_arr, 0);
 
- if (msg_queue_arr->len > 0)
- {
-   show_info_bar (tab);
- }
+  if (msg_queue_arr->len > 0)
+    msg_queue_arr = g_array_remove_index (msg_queue_arr, 0);
+
+  if (msg_queue_arr->len > 0)
+    {
+      show_info_bar (tab);
+    }
 }
 
 static void
@@ -85,7 +91,11 @@ create_info_info_bar (const gchar * primary_text,
   };
 
   if (msg_queue_arr == NULL)
-    msg_queue_arr = g_array_new (FALSE, FALSE, sizeof (message_struct));
+    {
+      msg_queue_arr = g_array_new (FALSE, FALSE, sizeof (message_struct));
+      g_array_set_clear_func (msg_queue_arr,
+                              (GDestroyNotify)msg_queue_element_clear);
+    }
 
   g_array_append_val (msg_queue_arr, msg_struct_temp);
   show_info_bar (tab);
