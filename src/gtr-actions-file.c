@@ -274,9 +274,10 @@ save_dialog_response_cb (GObject *source, GAsyncResult *res, void *user_data)
 
       if (error)
         {
-          GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
-          gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
-          g_object_unref (dialog);
+          g_autoptr (GtkAlertDialog) dialog = NULL;
+          dialog = gtk_alert_dialog_new ("%s", error->message);
+          gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog),
+                                 GTK_WINDOW (window));
           return;
         }
 
@@ -296,7 +297,7 @@ _upload_file_callback (GObject      *object,
 {
   UserData *ud = user_data;
   g_autoptr(GInputStream) stream = NULL;
-  GtkAlertDialog *dialog;
+  g_autoptr (GtkAlertDialog) dialog = NULL;
   GtrTab *active_tab;
 
   GtkWidget *upload_dialog = ud->dialog;
@@ -342,7 +343,6 @@ _upload_file_callback (GObject      *object,
 
 end:
   gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
-  g_object_unref (dialog);
 
   gtk_window_destroy (GTK_WINDOW (upload_dialog));
   g_free (ud);
@@ -512,9 +512,9 @@ load_file_list (GtrWindow * window, const GSList * locations)
    */
   if (error != NULL)
     {
-      GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
+      g_autoptr (GtkAlertDialog) dialog
+          = gtk_alert_dialog_new ("%s", error->message);
       gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
-      g_object_unref (dialog);
     }
 
   g_slist_free ((GSList *) locations_to_load);
@@ -553,12 +553,12 @@ save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
   gtr_po_save_file (unsaved_documents->data, &error);
 
   if(error)
-  {
-    GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
-    gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
-    g_object_unref (dialog);
-    return;
-  }
+    {
+      g_autoptr (GtkAlertDialog) dialog;
+      dialog = gtk_alert_dialog_new ("%s", error->message);
+      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+      return;
+    }
 
   gtr_window_remove_tab (window);
   gtk_window_destroy (GTK_WINDOW (window));
@@ -729,9 +729,10 @@ _gtr_actions_file_save_all (GtrWindow * window)
 
       if (error)
         {
-          GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
-          gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
-          g_object_unref (dialog);
+          g_autoptr (GtkAlertDialog) dialog = NULL;
+          dialog = gtk_alert_dialog_new ("%s", error->message);
+          gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog),
+                                 GTK_WINDOW (window));
 
           return;
         }

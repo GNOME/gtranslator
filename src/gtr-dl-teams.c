@@ -150,7 +150,7 @@ gtr_dl_teams_parse_teams_json (GObject *object,
   GtrDlTeams *widget = GTR_DL_TEAMS (user_data);
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (widget);
 
-  GtkAlertDialog *dialog;
+  g_autoptr (GtkAlertDialog) dialog = NULL;
 
   /* Parse JSON */
   stream = soup_session_send_finish (SOUP_SESSION (object), result, &error);
@@ -206,7 +206,7 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
   JsonObject *object;
   JsonNode *branchesNode;
   JsonNode *domainsNode;
-  GtkAlertDialog *dialog;
+  g_autoptr (GtkAlertDialog) dialog = NULL;
   SoupStatus status_code;
   g_autoptr(GInputStream) stream = NULL;
 
@@ -326,7 +326,7 @@ gtr_dl_teams_parse_modules_json (GObject *object,
   GtrDlTeams *widget = GTR_DL_TEAMS (user_data);
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (widget);
 
-  GtkAlertDialog *dialog;
+  g_autoptr (GtkAlertDialog) dialog = NULL;
 
   /* Parse JSON */
   stream = soup_session_send_finish (SOUP_SESSION (object), result, &error);
@@ -404,7 +404,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   JsonObject *stats_object;
   const char *format;
   char *markup;
-  GtkAlertDialog *dialog;
+  g_autoptr (GtkAlertDialog) dialog = NULL;
   SoupStatus status_code;
   g_autoptr(GInputStream) stream = NULL;
 
@@ -648,7 +648,7 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   GtrProfileManager *pmanager = NULL;
   GtrProfile *profile = NULL;
-  GtkAlertDialog *dialog;
+  g_autoptr (GtkAlertDialog) dialog = NULL;
   const char *auth_token = NULL;
   SoupStatus status_code;
   g_autoptr (GError) error = NULL;

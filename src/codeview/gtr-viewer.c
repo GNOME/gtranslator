@@ -171,7 +171,7 @@ gtr_viewer_class_init (GtrViewerClass *klass)
 static void
 error_dialog (GtkWindow *parent, const gchar *msg, ...)
 {
-  GtkAlertDialog *dialog;
+  g_autoptr (GtkAlertDialog) dialog = NULL;
   va_list ap;
   g_autofree char *tmp = NULL;
 
