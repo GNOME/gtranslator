@@ -92,7 +92,7 @@ gtr_viewer_init (GtrViewer *dlg)
     NULL
   };
   GtrViewerPrivate *priv = gtr_viewer_get_instance_private (dlg);
-  GError *error = NULL;
+  g_autoptr (GError) error = NULL;
   AdwStyleManager *manager;
 
   gtk_window_set_title (GTK_WINDOW (dlg), _("Source Viewer"));
@@ -115,7 +115,6 @@ gtr_viewer_init (GtrViewer *dlg)
   if (error != NULL)
     {
       g_warning ("Error parsing gtr-viewer.ui: %s", (error)->message);
-      g_error_free (error);
     }
 
   priv->main_box = GTK_WIDGET (gtk_builder_get_object (builder, "main_box"));

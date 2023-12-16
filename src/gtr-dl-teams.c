@@ -143,7 +143,7 @@ gtr_dl_teams_parse_teams_json (GObject *object,
   const char *def_lang = NULL;
   unsigned int def_lang_pos = 0;
   GtrProfile *profile = NULL;
-  GError *error = NULL;
+  g_autoptr (GError) error = NULL;
   JsonNode *node = NULL;
   JsonArray *array = NULL;
 
@@ -318,7 +318,7 @@ gtr_dl_teams_parse_modules_json (GObject *object,
 {
   g_autoptr(JsonParser) parser = json_parser_new ();
   g_autoptr(GInputStream) stream = NULL;
-  GError *error = NULL;
+  g_autoptr (GError) error = NULL;
 
   JsonNode *node = NULL;
   JsonArray *array = NULL;
@@ -627,7 +627,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
     gtr_tab_set_info (tab, info_msg, NULL);
 
     GtrPo *po = gtr_tab_get_po(tab);
-    GError *po_error = NULL;
+    g_autoptr (GError) po_error = NULL;
     gtr_po_set_dl_info(po,
                        priv->selected_lang,
                        priv->selected_module,
@@ -651,7 +651,7 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
   GtkAlertDialog *dialog;
   const char *auth_token = NULL;
   SoupStatus status_code;
-  GError *error = NULL;
+  g_autoptr (GError) error = NULL;
 
   g_autoptr (SoupMessage) msg = NULL;
   g_autoptr(GInputStream) stream = NULL;
@@ -682,14 +682,9 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
   if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
   {
     if (error)
-      {
-        message = error->message;
-        g_clear_error (&error);
-      }
+      message = error->message;
     else
-      {
-        message = g_strdup (soup_message_get_reason_phrase (msg));
-      }
+      message = g_strdup (soup_message_get_reason_phrase (msg));
 
     dialog = gtk_alert_dialog_new (
       _(

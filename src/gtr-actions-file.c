@@ -247,7 +247,7 @@ gtr_open_file_dialog (GtrWindow *window)
 static void
 save_dialog_response_cb (GObject *source, GAsyncResult *res, void *user_data)
 {
-  GError *error = NULL;
+  g_autoptr (GError) error = NULL;
   GtrPo *po;
   GtrTab *tab;
   GtkFileDialog *dialog = GTK_FILE_DIALOG (source);
@@ -277,7 +277,6 @@ save_dialog_response_cb (GObject *source, GAsyncResult *res, void *user_data)
           GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
           gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
           g_object_unref (dialog);
-          g_clear_error (&error);
           return;
         }
 
@@ -305,7 +304,7 @@ _upload_file_callback (GObject      *object,
   SoupSession *session = SOUP_SESSION (object);
   SoupStatus status_code = soup_message_get_status (ud->msg);
 
-  GError *error = NULL;
+  g_autoptr (GError) error = NULL;
 
   stream = soup_session_send_finish (session, result, &error);
 
@@ -323,14 +322,9 @@ _upload_file_callback (GObject      *object,
       g_autofree gchar *message = NULL;
 
       if (error)
-        {
-          message = error->message;
-          g_clear_error (&error);
-        }
+        message = error->message;
       else
-        {
-          message = g_strdup (soup_status_get_phrase (status_code));
-        }
+        message = g_strdup (soup_status_get_phrase (status_code));
 
       dialog = gtk_alert_dialog_new (
         _(
@@ -361,7 +355,7 @@ gtr_upload_file (GtkWidget *upload_dialog,
   GtrTab *tab;
   GtrPo *po;
   GBytes *bytes;
-  GError *error = NULL;
+  g_autoptr (GError) error = NULL;
   GtrProfileManager *pmanager = NULL;
   GtrProfile *profile;
   GtrHeader *header;
@@ -392,10 +386,9 @@ gtr_upload_file (GtkWidget *upload_dialog,
   filename = g_file_get_basename (gtr_po_get_location (po));
   g_file_load_contents (gtr_po_get_location (po), NULL, &content, &size, NULL,
                         &error);
-  if (error != NULL) {
+  if (error != NULL)
     g_warning ("Error opening file %s: %s", filename, (error)->message);
-    g_error_free (error);
-  }
+
   bytes = g_bytes_new (content, size);
   header = gtr_po_get_header (po);
 
@@ -495,7 +488,7 @@ static void
 load_file_list (GtrWindow * window, const GSList * locations)
 {
   GSList *locations_to_load = NULL;
-  GError *error = NULL;
+  g_autoptr (GError) error = NULL;
 
   g_return_if_fail ((locations != NULL) && (locations->data != NULL));
 
@@ -522,7 +515,6 @@ load_file_list (GtrWindow * window, const GSList * locations)
       GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
       gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
       g_object_unref (dialog);
-      g_error_free (error);
     }
 
   g_slist_free ((GSList *) locations_to_load);
@@ -553,7 +545,7 @@ close_all_tabs (GtrWindow * window)
 static void
 save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
 {
-  GError *error = NULL;
+  g_autoptr (GError) error = NULL;
 
   if(unsaved_documents == NULL)
     return;
@@ -565,7 +557,6 @@ save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
     GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
     gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
     g_object_unref (dialog);
-    g_clear_error (&error);
     return;
   }
 
@@ -732,7 +723,7 @@ _gtr_actions_file_save_all (GtrWindow * window)
 
   for (l = list; l != NULL; l = g_list_next (l))
     {
-      GError *error = NULL;
+      g_autoptr (GError) error = NULL;
 
       gtr_po_save_file (GTR_PO (l->data), &error);
 
@@ -741,7 +732,6 @@ _gtr_actions_file_save_all (GtrWindow * window)
           GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
           gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
           g_object_unref (dialog);
-          g_clear_error (&error);
 
           return;
         }

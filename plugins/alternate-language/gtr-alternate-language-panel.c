@@ -139,7 +139,7 @@ open_file (GtkWidget *dialog, GtrAlternateLangPanel *panel)
   GtrMsg *current;
   GtrPo *current_po;
   GList *l;
-  GError *error = NULL;
+  g_autoptr (GError) error = NULL;
 
   //po_file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
   file = gtk_file_chooser_get_file (chooser);
@@ -167,7 +167,6 @@ open_file (GtkWidget *dialog, GtrAlternateLangPanel *panel)
                                          "%s", error->message);
       g_signal_connect (erdialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
       gtk_window_present (GTK_WINDOW (erdialog));
-      g_error_free (error);
       return;
     }
 
