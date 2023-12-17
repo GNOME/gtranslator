@@ -286,43 +286,31 @@ gtr_utils_help_display (GtkWindow * window)
 gchar *
 gtr_utils_get_current_date (void)
 {
-  time_t now;
-  struct tm *now_here;
-  gchar *date = g_malloc (11);
+  g_autoptr (GDateTime) now;
 
-  now = time (NULL);
-  now_here = localtime (&now);
-  strftime (date, 11, "%Y-%m-%d", now_here);
+  now = g_date_time_new_now_local ();
 
-  return date;
+  return g_date_time_format (now, "%Y-%m-%d");
 }
 
 gchar *
 gtr_utils_get_current_time (void)
 {
-  time_t now;
-  struct tm *now_here;
-  gchar *t = g_malloc (11);
+  g_autoptr (GDateTime) now;
 
-  now = time (NULL);
-  now_here = localtime (&now);
-  strftime (t, 11, "%H:%M%z", now_here);
+  now = g_date_time_new_now_local ();
 
-  return t;
+  return g_date_time_format (now, "%H:%M%z");
 }
 
 gchar *
 gtr_utils_get_current_year (void)
 {
-  time_t now;
-  struct tm *now_here;
-  gchar *year = g_malloc (5);
+  g_autoptr (GDateTime) now;
 
-  now = time (NULL);
-  now_here = localtime (&now);
-  strftime (year, 5, "%Y", now_here);
+  now = g_date_time_new_now_local ();
 
-  return year;
+  return g_date_time_format (now, "%Y");
 }
 
 gchar *
