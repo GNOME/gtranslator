@@ -690,7 +690,6 @@ gtr_application_create_window (GtrApplication *app)
                   "(ii)", &w, &h);
 
   gtk_window_set_default_size (GTK_WINDOW (window), w, h);
-  gtk_application_window_set_show_menubar (GTK_APPLICATION_WINDOW (window), FALSE);
 
   if ((state & GDK_TOPLEVEL_STATE_MAXIMIZED) != 0)
     gtk_window_maximize (GTK_WINDOW (window));
