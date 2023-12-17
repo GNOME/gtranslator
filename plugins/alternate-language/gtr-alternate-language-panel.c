@@ -134,25 +134,18 @@ showed_message_cb (GtrTab * tab, GtrMsg * msg, GtrAlternateLangPanel * panel)
 static void
 open_file (GtkWidget *dialog, GtrAlternateLangPanel *panel)
 {
-  GFile *file;
-  gchar *po_file;
+  g_autoptr (GFile) file = NULL;
   GtrMsg *current;
   GtrPo *current_po;
   GList *l;
   g_autoptr (GError) error = NULL;
 
-  //po_file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
   file = gtk_file_chooser_get_file (chooser);
-  //filename = g_file_get_path(file);
-  //file = g_file_new_for_path (po_file);
-  g_free (po_file);
 
   if (panel->priv->po != NULL)
     g_object_unref (panel->priv->po);
   panel->priv->po = gtr_po_new ();
   gtr_po_parse (panel->priv->po, file, &error);
-
-  g_object_unref (file);
 
   if (error != NULL)
     {

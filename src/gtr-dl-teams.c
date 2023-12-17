@@ -510,7 +510,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   g_autoptr(SoupMessage) msg = NULL;
   GError *error = NULL;
-  GFile *tmp_file = NULL;
+  g_autoptr (GFile) tmp_file = NULL;
   GFileIOStream *iostream = NULL;
   GOutputStream *output = NULL;
   GtkAlertDialog *dialog;
@@ -637,8 +637,6 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
     // Save to update the headers
     gtr_po_save_file(po, &po_error);
   }
-
-  g_object_unref (tmp_file);
 }
 
 /* Reserve for translation */
