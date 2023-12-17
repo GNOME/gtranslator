@@ -625,6 +625,7 @@ gtr_application_open (GApplication *application,
 static void
 gtr_application_activate (GApplication *application)
 {
+  G_APPLICATION_CLASS (gtr_application_parent_class)->activate (application);
   gtr_application_setup_window (application, NULL, 0);
 }
 
