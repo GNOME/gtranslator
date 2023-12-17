@@ -326,15 +326,10 @@ quit_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   GtkApplication *app = GTK_APPLICATION (user_data);
-  GList *windows, *l;
+  GList *windows;
 
-  // FIXME: this sucks, we need a way to deal with this in a better way
   windows = gtk_application_get_windows (app);
-
-  for (l = windows; l != NULL; l = g_list_next (l))
-    {
-      gtr_file_quit (l->data);
-    }
+  g_list_foreach (windows, (GFunc)gtr_file_quit, NULL);
 }
 
 static void
