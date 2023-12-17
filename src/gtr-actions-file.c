@@ -54,6 +54,15 @@ typedef struct {
   GtkWidget   *dialog;
 } UserData;
 
+static void
+user_data_free (UserData *ud)
+{
+  g_object_unref (ud->msg);
+  gtk_window_destroy (GTK_WINDOW (ud->dialog));
+
+  g_free (ud);
+}
+
 /*
  * The main file opening function. Checks that the file isn't already open,
  * and if not, opens it in a new tab.
@@ -344,8 +353,7 @@ _upload_file_callback (GObject      *object,
 end:
   gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
 
-  gtk_window_destroy (GTK_WINDOW (upload_dialog));
-  g_free (ud);
+  user_data_free (ud);
 }
 
 void
