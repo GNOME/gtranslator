@@ -772,5 +772,6 @@ _gtr_application_set_last_dir (GtrApplication * app, const gchar * last_dir)
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
   g_return_if_fail (GTR_IS_APPLICATION (app));
 
+  g_clear_pointer (&priv->last_dir, g_free);
   priv->last_dir = g_strdup (last_dir);
 }
