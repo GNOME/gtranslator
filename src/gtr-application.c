@@ -68,8 +68,6 @@ typedef struct
   GSettings *settings;
   GSettings *window_settings;
 
-  GtrWindow *active_window;
-
   gchar *last_dir;
 
   guint first_run : 1;
@@ -78,6 +76,13 @@ typedef struct
 G_DEFINE_TYPE_WITH_PRIVATE (GtrApplication, gtr_application, ADW_TYPE_APPLICATION)
 
 GtrWindow *gtr_application_create_window (GtrApplication *app);
+
+static GtrWindow *
+get_active_window (GtrApplication *app)
+{
+  return GTR_WINDOW (
+      gtk_application_get_active_window (GTK_APPLICATION (app)));
+}
 
 static gboolean
 ensure_user_config_dir (void)
@@ -111,26 +116,6 @@ on_window_delete_event_cb (GtrWindow * window,
   return TRUE;
 }
 
-static void
-set_active_window (GtrApplication *app,
-                   GtrWindow      *window)
-{
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  priv->active_window = window;
-}
-
-static void
-on_window_destroy_cb (GtrWindow *window, GtrApplication *app)
-{
-  GList *windows;
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-
-  windows = gtk_application_get_windows (GTK_APPLICATION (app));
-
-  if (window == priv->active_window)
-    set_active_window (app, windows != NULL ? windows->data : NULL);
-}
-
 static int
 handle_local_options_cb (GApplication *application, GVariantDict *options, gpointer user_data) {
   if (g_variant_dict_contains (options, "version")) {
@@ -147,7 +132,6 @@ gtr_application_init (GtrApplication *application)
   gchar *profiles_file;
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (application);
 
-  priv->active_window = NULL;
   priv->last_dir = NULL;
   priv->first_run = FALSE;
 
@@ -216,9 +200,8 @@ find_toggle_activated (GSimpleAction *action,
                        gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  gtr_window_toggle_search_bar (priv->active_window);
+  gtr_window_toggle_search_bar (get_active_window (app));
 }
 
 static void
@@ -227,11 +210,10 @@ find_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
+  GtrTab *active_tab = gtr_window_get_active_tab (get_active_window (app));
   g_return_if_fail (active_tab != NULL);
-  gtr_window_show_focus_search_bar (priv->active_window, TRUE);
+  gtr_window_show_focus_search_bar (get_active_window (app), TRUE);
   gtr_tab_find_set_replace (active_tab, FALSE);
 }
 
@@ -241,11 +223,10 @@ find_next_activated (GSimpleAction *action,
                      gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
+  GtrTab *active_tab = gtr_window_get_active_tab (get_active_window (app));
   g_return_if_fail (active_tab != NULL);
-  gtr_window_show_focus_search_bar (priv->active_window, TRUE);
+  gtr_window_show_focus_search_bar (get_active_window (app), TRUE);
   gtr_tab_find_next (active_tab);
 }
 
@@ -255,11 +236,10 @@ find_prev_activated (GSimpleAction *action,
                      gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
+  GtrTab *active_tab = gtr_window_get_active_tab (get_active_window (app));
   g_return_if_fail (active_tab != NULL);
-  gtr_window_show_focus_search_bar (priv->active_window, TRUE);
+  gtr_window_show_focus_search_bar (get_active_window (app), TRUE);
   gtr_tab_find_prev (active_tab);
 }
 
@@ -269,10 +249,9 @@ find_and_replace_activated (GSimpleAction *action,
                             gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
-  gtr_window_show_focus_search_bar (priv->active_window, TRUE);
+  GtrTab *active_tab = gtr_window_get_active_tab (get_active_window (app));
+  gtr_window_show_focus_search_bar (get_active_window (app), TRUE);
   gtr_tab_find_set_replace (active_tab, TRUE);
 }
 
@@ -282,9 +261,8 @@ copy_text_activated (GSimpleAction *action,
                      gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  gtr_message_copy_to_translation (priv->active_window);
+  gtr_message_copy_to_translation (get_active_window (app));
 }
 
 static void
@@ -293,9 +271,8 @@ copy_original_activated (GSimpleAction *action,
                          gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  gtr_message_copy_original (priv->active_window);
+  gtr_message_copy_original (get_active_window (app));
 }
 
 static void
@@ -304,8 +281,7 @@ preferences_activated (GSimpleAction *action,
                        gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_show_preferences_dialog (priv->active_window);
+  gtr_show_preferences_dialog (get_active_window (app));
 }
 
 static void
@@ -314,8 +290,7 @@ edit_header_activated (GSimpleAction *action,
                        gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_actions_edit_header (priv->active_window);
+  gtr_actions_edit_header (get_active_window (app));
 }
 
 static void
@@ -324,8 +299,7 @@ clear_msgstr_activated (GSimpleAction *action,
                         gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_actions_edit_clear (priv->active_window);
+  gtr_actions_edit_clear (get_active_window (app));
 }
 
 static void
@@ -334,8 +308,7 @@ help_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_show_help (GTK_WINDOW (priv->active_window));
+  gtr_show_help (GTK_WINDOW (get_active_window (app)));
 }
 
 static void
@@ -344,8 +317,7 @@ about_activated (GSimpleAction *action,
                  gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_about_dialog (priv->active_window);
+  gtr_about_dialog (get_active_window (app));
 }
 
 static void
@@ -371,8 +343,7 @@ upload_file_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_upload_file_dialog (priv->active_window);
+  gtr_upload_file_dialog (get_active_window (app));
 }
 
 static void
@@ -381,8 +352,7 @@ saveas_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_save_file_as_dialog (priv->active_window);
+  gtr_save_file_as_dialog (get_active_window (app));
 }
 
 static void
@@ -391,8 +361,7 @@ open_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_open_file_dialog (priv->active_window);
+  gtr_open_file_dialog (get_active_window (app));
 }
 
 static void
@@ -401,15 +370,15 @@ dl_activated (GSimpleAction *action,
               gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
-  GtrTab *active_tab = gtr_window_get_active_tab (priv->active_window);
+  GtrTab *active_tab = gtr_window_get_active_tab (get_active_window (app));
   GtrPoState state = gtr_po_get_state (gtr_tab_get_po (active_tab));
 
   if (state == GTR_PO_STATE_MODIFIED)
-    gtr_want_to_save_current_dialog (priv->active_window, gtr_window_show_dlteams);
+    gtr_want_to_save_current_dialog (get_active_window (app),
+                                     gtr_window_show_dlteams);
   else
-    gtr_window_show_dlteams (priv->active_window);
+    gtr_window_show_dlteams (get_active_window (app));
 }
 
 static void
@@ -418,8 +387,7 @@ prev_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_message_go_to_previous (priv->active_window);
+  gtr_message_go_to_previous (get_active_window (app));
 }
 
 static void
@@ -428,8 +396,7 @@ next_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_message_go_to_next (priv->active_window);
+  gtr_message_go_to_next (get_active_window (app));
 }
 
 static void
@@ -438,8 +405,7 @@ prev_no_activated (GSimpleAction *action,
                    gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_message_go_to_prev_fuzzy_or_untranslated (priv->active_window);
+  gtr_message_go_to_prev_fuzzy_or_untranslated (get_active_window (app));
 }
 
 static void
@@ -448,8 +414,7 @@ next_no_activated (GSimpleAction *action,
                    gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  gtr_message_go_to_next_fuzzy_or_untranslated (priv->active_window);
+  gtr_message_go_to_next_fuzzy_or_untranslated (get_active_window (app));
 }
 
 static void
@@ -458,8 +423,7 @@ build_tm_activated (GSimpleAction *action,
                     gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  GtrWindow *w = GTR_WINDOW (priv->active_window);
+  GtrWindow *w = GTR_WINDOW (get_active_window (app));
   gtr_window_show_tm_dialog (w);
 }
 
@@ -469,8 +433,7 @@ tm_activated (GSimpleAction *action,
               gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  GtrWindow *w = GTR_WINDOW (priv->active_window);
+  GtrWindow *w = GTR_WINDOW (get_active_window (app));
   gtr_window_tm_keybind (w, action);
 }
 
@@ -480,8 +443,7 @@ toggle_fuzzy_activated (GSimpleAction *action,
                         gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  GtrWindow *w = GTR_WINDOW (priv->active_window);
+  GtrWindow *w = GTR_WINDOW (get_active_window (app));
   gtr_message_status_toggle_fuzzy (w);
 }
 
@@ -491,7 +453,6 @@ sort_by_activated (GSimpleAction *action,
                    gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
   GtrWindow *w;
   GtrTab *tab;
 
@@ -501,7 +462,7 @@ sort_by_activated (GSimpleAction *action,
   g_object_get (G_OBJECT (action), "state", &st, NULL);
   sortby = g_variant_get_int32 (st);
 
-  w = GTR_WINDOW (priv->active_window);
+  w = GTR_WINDOW (get_active_window (app));
   if (!w) return;
   tab = gtr_window_get_active_tab (w);
   if (!tab) return;
@@ -743,9 +704,6 @@ gtr_application_create_window (GtrApplication *app)
   g_signal_connect (window, "close-request",
                     G_CALLBACK (on_window_delete_event_cb), app);
 
-  g_signal_connect (window, "destroy",
-                    G_CALLBACK (on_window_destroy_cb), app);
-
   gtk_window_present (GTK_WINDOW (window));
 
   return window;
@@ -767,13 +725,12 @@ gtr_application_get_views (GtrApplication * app,
                            gboolean original, gboolean translated)
 {
   GList *res = NULL;
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
-  res = g_list_concat (res,
-                       gtr_window_get_all_views (GTR_WINDOW (priv->active_window),
-                                                 original, translated));
+  res = g_list_concat (
+      res, gtr_window_get_all_views (GTR_WINDOW (get_active_window (app)),
+                                     original, translated));
 
   return res;
 }
@@ -787,10 +744,9 @@ gtr_application_get_views (GtrApplication * app,
 GtrWindow *
 gtr_application_get_active_window (GtrApplication * app)
 {
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
-  return GTR_WINDOW (priv->active_window);
+  return get_active_window (app);
 }
 
 /**
