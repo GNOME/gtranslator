@@ -100,6 +100,14 @@ typedef struct {
 } DialogData;
 
 static void
+dialog_data_free (DialogData *data)
+{
+  gtk_window_destroy (GTK_WINDOW (data->dialog));
+
+  g_free (data);
+}
+
+static void
 reload_values (GtrContextPanel *panel)
 {
   GtrContextPanelPrivate *priv;
@@ -114,9 +122,8 @@ static void
 close_notes (GtkWidget *widget, gpointer user_data)
 {
   DialogData *dd = user_data;
-  gtk_window_destroy (GTK_WINDOW (dd->dialog));
   reload_values (dd->panel);
-  g_free (dd);
+  dialog_data_free (dd);
 }
 
 static void
