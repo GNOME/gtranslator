@@ -188,10 +188,8 @@ new_window_activated (GSimpleAction *action,
                       gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  GtrWindow *window;
 
-  window = gtr_application_create_window (app);
-  gtk_application_add_window (GTK_APPLICATION (app), GTK_WINDOW (window));
+  gtr_application_create_window (app);
 }
 
 static void
@@ -597,7 +595,6 @@ gtr_application_setup_window (GApplication *application,
           file_list = g_slist_prepend (file_list, files[i]);
     }
   window = gtr_application_create_window (GTR_APPLICATION (application));
-  gtk_application_add_window (GTK_APPLICATION (application), GTK_WINDOW (window));
 
   /* If it is the first run, the default directory was created in this
    * run, then we show the First run greeter
@@ -676,11 +673,14 @@ gtr_application_create_window (GtrApplication *app)
   GdkToplevelState state;
   gint w, h;
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
+  GtkWindowGroup *group;
 
+  group = gtk_window_group_new ();
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
   window = g_object_new (GTR_TYPE_WINDOW, "application", app, NULL);
-  set_active_window (app, window);
+  gtk_window_group_add_window (group, GTK_WINDOW (window));
+  g_object_unref (group);
 
   state = g_settings_get_int (priv->window_settings,
                               GTR_SETTINGS_WINDOW_STATE);
