@@ -160,13 +160,6 @@ on_visible_whitespace_changed (GSettings * settings,
   g_list_free (views);
 }
 
-// TODO: enable/disable the spellcheck when we've a replacement for gspell
-static void
-on_spellcheck_changed (GSettings * settings,
-                       const gchar * key, GtrSettings * gs)
-{
-}
-
 static void
 on_font_changed (GSettings * settings,
                  const gchar * key, GtrSettings * gs)
@@ -210,12 +203,8 @@ gtr_settings_init (GtrSettings * gs)
   g_signal_connect (priv->editor,
                     "changed::highlight-syntax",
                     G_CALLBACK (on_syntax_highlighting_changed), gs);
-  g_signal_connect (priv->editor,
-                    "changed::visible-whitespace",
+  g_signal_connect (priv->editor, "changed::visible-whitespace",
                     G_CALLBACK (on_visible_whitespace_changed), gs);
-  g_signal_connect (priv->editor,
-                    "changed::spellcheck",
-                    G_CALLBACK (on_spellcheck_changed), gs);
   g_signal_connect (priv->editor,
                     "changed::font",
                     G_CALLBACK (on_font_changed), gs);
