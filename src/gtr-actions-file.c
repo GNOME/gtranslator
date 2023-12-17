@@ -43,8 +43,7 @@
 #include "gtr-window.h"
 #include "gtr-upload-dialog.h"
 
-#define GTR_TAB_SAVE_AS    "gtr-tab-save-as"
-#define GTR_IS_CLOSING_ALL "gtr-is-closing-all"
+#define GTR_TAB_SAVE_AS "gtr-tab-save-as"
 
 static void load_file_list (GtrWindow * window, const GSList * uris);
 static GList * get_modified_documents (GtrWindow * window);
@@ -608,9 +607,6 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog *dlg,
 void
 gtr_close_tab (GtrTab * tab, GtrWindow * window)
 {
-  g_object_set_data (G_OBJECT (window),
-                     GTR_IS_CLOSING_ALL, GINT_TO_POINTER (0));
-
   if (!_gtr_tab_can_close (tab))
     {
       GtkWidget *dlg;
@@ -711,9 +707,6 @@ close_all_documents (GtrWindow * window, gboolean logout_mode)
 void
 gtr_file_quit (GtrWindow * window)
 {
-  g_object_set_data (G_OBJECT (window),
-                     GTR_IS_CLOSING_ALL, GINT_TO_POINTER (1));
-
   close_all_documents (window, TRUE);
 }
 
