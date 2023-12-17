@@ -179,7 +179,7 @@ gtr_tab_focus_search_bar (GtrTab *tab)
   g_assert (GTR_IS_TAB (tab));
   priv = gtr_tab_get_instance_private (tab);
 
-  entry = (GtkEntry *) gtr_search_bar_get_search (priv->gtr_search_bar);
+  entry = gtr_search_bar_get_search (priv->gtr_search_bar);
 
   gtk_entry_grab_focus_without_selecting (entry);
 }

@@ -43,9 +43,7 @@ typedef enum
 } GtrSearchBarMsg;
 
 
-GtkSearchEntry  *gtr_search_bar_get_search       (GtrSearchBar *self);
-void             gtr_search_bar_set_search       (GtrSearchBar *self,
-                                                         GtkSearchEntry    *search);
+GtkEntry        *gtr_search_bar_get_search       (GtrSearchBar *self);
 gboolean         gtr_search_bar_get_show_options (GtrSearchBar *self);
 void             gtr_search_bar_set_show_options (GtrSearchBar *self,
                                                          gboolean            show_options);

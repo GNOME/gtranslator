@@ -686,8 +686,8 @@ gtr_search_bar_set_found (GtrSearchBar *self,
 }
 
 /* Previously, declared but unimplemented */
-GtkSearchEntry *
+GtkEntry *
 gtr_search_bar_get_search (GtrSearchBar *self)
 {
-  return (GtkSearchEntry *) self->search_entry;
+  return self->search_entry;
 }
