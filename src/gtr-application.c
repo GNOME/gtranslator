@@ -67,7 +67,6 @@ typedef struct
 {
   GSettings *settings;
   GSettings *window_settings;
-  GtkCssProvider *provider;
 
   GtrWindow *active_window;
 
@@ -182,7 +181,6 @@ gtr_application_dispose (GObject * object)
 
   g_clear_object (&priv->settings);
   g_clear_object (&priv->window_settings);
-  g_clear_object (&priv->provider);
 
   G_OBJECT_CLASS (gtr_application_parent_class)->dispose (object);
 }
@@ -570,21 +568,11 @@ set_kb (GApplication *app, gchar *action, gchar *accel)
 static void
 gtr_application_startup (GApplication *application)
 {
-  GtrApplication *app = GTR_APPLICATION (application);
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-
   G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
   g_set_application_name (_("Translation Editor"));
   gtk_window_set_default_icon_name (PACKAGE_APPID);
 
   gtk_source_init ();
-
-  /* Custom css */
-  priv->provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (priv->provider, "/org/gnome/translator/styles.css");
-
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (priv->provider), 600);
 
   g_action_map_add_action_entries (G_ACTION_MAP (application), app_entries,
                                    G_N_ELEMENTS (app_entries), application);
