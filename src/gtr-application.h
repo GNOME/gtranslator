@@ -43,7 +43,6 @@ GtrApplication  * gtr_application_new                    (void);
 GList *           gtr_application_get_views              (GtrApplication *app,
                                                           gboolean        original,
                                                           gboolean        translated);
-GtrWindow        *gtr_application_create_window          (GtrApplication *app);
 GtrWindow        *gtr_application_get_active_window      (GtrApplication *app);
 
 /* Non exported funcs */
