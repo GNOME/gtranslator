@@ -105,11 +105,7 @@ GQuark gtr_po_error_quark (void);
 
      void gtr_po_set_location (GtrPo * po, GFile * location);
 
-     gboolean gtr_po_get_write_perms (GtrPo * po);
-
      GList *gtr_po_get_messages (GtrPo * po);
-
-     void gtr_po_set_messages (GtrPo * po, GList * messages);
 
      GList *gtr_po_get_current_message (GtrPo * po);
 
