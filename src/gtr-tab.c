@@ -108,7 +108,6 @@ typedef struct
   GtkWidget *untranslated;
 
   /* Autosave */
-  GTimer *timer;
   gint autosave_interval;
   guint autosave_timeout;
   guint autosave : 1;
@@ -179,7 +178,7 @@ gtr_tab_focus_search_bar (GtrTab *tab)
   g_assert (GTR_IS_TAB (tab));
   priv = gtr_tab_get_instance_private (tab);
 
-  entry = (GtkEntry *) gtr_search_bar_get_search (priv->gtr_search_bar);
+  entry = gtr_search_bar_get_search (priv->gtr_search_bar);
 
   gtk_entry_grab_focus_without_selecting (entry);
 }
@@ -271,60 +270,6 @@ msg_grab_focus (GtrTab *tab)
   gtk_widget_grab_focus (priv->trans_msgstr[0]);
   return FALSE;
 }
-
-static void
-handle_file_is_inconsistent (GtrPo *po, GtrTab *tab)
-{
-  GtrProfileManager *manager = gtr_profile_manager_get_default ();
-  GtrProfile *active_profile = gtr_profile_manager_get_active_profile (manager);
-  int profile_nplurals = -1;
-  int po_nplurals = -1;
-
-  const char *info_msg_primary;
-  g_autofree char *filename = NULL;
-  g_autoptr (GFile) po_file = gtr_po_get_location (po);
-
-  filename = g_file_get_path (po_file);
-  po_nplurals = gtr_header_get_nplurals (gtr_po_get_header (po));
-  profile_nplurals = parse_nplurals_header (gtr_profile_get_plural_forms (active_profile));
-
-  info_msg_primary = _("Header's plural forms don't match profile's");
-  g_warning (
-      "File nplurals: %d, is different from profile nplurals %d.\n"
-      "Kindly go to preferences and select a profile with consistent nplurals "
-      "values as this file %s.",
-      po_nplurals, profile_nplurals, filename);
-  gtr_tab_set_info (tab, info_msg_primary, NULL);
-
-  g_object_unref (manager);
-}
-
-static void
-on_active_profile_changed (GtrProfileManager *manager, GtrProfile *profile, GtrTab *tab)
-{
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-  GtkWidget *nb = priv->trans_notebook;
-
-  GtrPo *po = priv->po;
-  if (!gtr_po_consistent_with_profile (po))
-  {
-    gtr_po_emit_file_not_consistent (po);
-  }
-  else
-  {
-    gtk_widget_set_sensitive (nb, TRUE);
-  }
-}
-
-static void
-on_profile_modified (GtrProfileManager *manager,
-                     GtrProfile *old_profile,
-                     GtrProfile *new_profile,
-                     GtrTab *tab)
-{
-  on_active_profile_changed (manager, new_profile, tab);
-}
-
 
 static void
 install_autosave_timeout (GtrTab * tab)
@@ -909,9 +854,6 @@ gtr_tab_finalize (GObject * object)
 
   priv = gtr_tab_get_instance_private (tab);
 
-  if (priv->timer != NULL)
-    g_timer_destroy (priv->timer);
-
   if (priv->autosave_timeout > 0)
     remove_autosave_timeout (tab);
 
@@ -1173,11 +1115,8 @@ gtr_tab_new (GtrPo * po,
 {
   GtrTab *tab;
   GtrTabPrivate *priv;
-  GtrProfileManager *manager;
 
   g_return_val_if_fail (po != NULL, NULL);
-
-  manager = gtr_profile_manager_get_default();
 
   tab = g_object_new (GTR_TYPE_TAB, NULL);
 
@@ -1196,15 +1135,6 @@ gtr_tab_new (GtrPo * po,
   g_signal_connect (po, "notify::state",
                     G_CALLBACK (on_state_notify), tab);
 
-  g_signal_connect (po, "file-is-inconsistent-with-profile",
-                    G_CALLBACK (handle_file_is_inconsistent), tab);
-
-  g_signal_connect (manager, "active-profile-changed",
-                    G_CALLBACK (on_active_profile_changed), tab);
-
-  g_signal_connect (manager, "profile-modified",
-                    G_CALLBACK (on_profile_modified), tab);
-
   install_autosave_timeout_if_needed (tab);
 
   /* Now we have to initialize the number of msgstr tabs */
@@ -1212,11 +1142,6 @@ gtr_tab_new (GtrPo * po,
 
   gtr_message_table_populate (GTR_MESSAGE_TABLE (priv->message_table),
                               GTR_MESSAGE_CONTAINER (priv->po));
-
-  if (!gtr_po_consistent_with_profile (po))
-  {
-    gtr_po_emit_file_not_consistent (po);
-  }
 
   gtk_widget_set_visible (GTK_WIDGET (tab), TRUE);
   return tab;

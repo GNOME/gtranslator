@@ -522,7 +522,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   g_autoptr(GFile) dest_file = NULL;
   gboolean reserve_first = FALSE;
   SoupStatus status_code;
-  GBytes *bytes;
+  g_autoptr (GBytes) bytes = NULL;
 
   // reserve for translation first
   reserve_first
@@ -576,11 +576,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
     }
 
   output = g_io_stream_get_output_stream (G_IO_STREAM (iostream));
-  g_output_stream_write_bytes (output,
-                               bytes,
-                               NULL,
-                               &error);
-  g_bytes_unref (bytes);
+  g_output_stream_write_bytes (output, bytes, NULL, &error);
 
   if (error != NULL)
     {

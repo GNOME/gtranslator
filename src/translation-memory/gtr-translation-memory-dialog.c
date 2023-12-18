@@ -248,12 +248,8 @@ launch_gtr_scan_dir_task (GtrTranslationMemoryDialog *dlg,
                           ScanDirTaskData            *data)
 {
   GTask *task;
-  GCancellable *cancellable;
   IdleData *idata;
   GtrTranslationMemoryDialogPrivate *priv = gtr_translation_memory_dialog_get_instance_private (dlg);
-
-  cancellable = g_cancellable_new ();
-  // TODO: connect cancellable cancel signal
 
   idata = g_new0 (IdleData, 1);
   idata->list = NULL;
@@ -266,9 +262,7 @@ launch_gtr_scan_dir_task (GtrTranslationMemoryDialog *dlg,
 
   gtk_widget_set_sensitive (priv->add_database_button, FALSE);
 
-  task = g_task_new (dlg,
-                     cancellable,
-                     (GAsyncReadyCallback)scan_dir_task_ready_cb,
+  task = g_task_new (dlg, NULL, (GAsyncReadyCallback)scan_dir_task_ready_cb,
                      idata);
 
   g_task_set_task_data (task, data, (GDestroyNotify)task_data_destroy);

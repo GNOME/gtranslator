@@ -171,11 +171,25 @@ gtr_view_dispose (GObject * object)
 }
 
 static void
+gtr_view_finalize (GObject *object)
+{
+  GtrView *view = GTR_VIEW (object);
+  GtrViewPrivate *priv;
+
+  priv = gtr_view_get_instance_private (view);
+
+  g_clear_pointer (&priv->search_text, g_free);
+
+  G_OBJECT_CLASS (gtr_view_parent_class)->finalize (object);
+}
+
+static void
 gtr_view_class_init (GtrViewClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->dispose = gtr_view_dispose;
+  object_class->finalize = gtr_view_finalize;
 }
 
 /**
@@ -827,12 +841,7 @@ gtr_view_set_font (GtrView *view, char *font)
   str = pango_font_description_to_css (font_desc);
   css = g_strdup_printf ("textview  %s", str ?: "");
 
-/** Compatibility with Sdk//44 **/
-#if GTK_CHECK_VERSION (4, 11, 4)
   gtk_css_provider_load_from_string (priv->provider, css);
-#else
-  gtk_css_provider_load_from_data (priv->provider, css, -1);
-#endif
 }
 
 void

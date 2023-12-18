@@ -15,13 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-
-
 #pragma once
 
 #include <gtksourceview/gtksource.h>
 #include <adwaita.h>
-
 
 G_BEGIN_DECLS
 
@@ -42,22 +39,18 @@ typedef enum
   GTR_SEARCH_BAR_MSG_ERROR
 } GtrSearchBarMsg;
 
-
-GtkSearchEntry  *gtr_search_bar_get_search       (GtrSearchBar *self);
-void             gtr_search_bar_set_search       (GtrSearchBar *self,
-                                                         GtkSearchEntry    *search);
+GtkEntry        *gtr_search_bar_get_search       (GtrSearchBar *self);
 gboolean         gtr_search_bar_get_show_options (GtrSearchBar *self);
 void             gtr_search_bar_set_show_options (GtrSearchBar *self,
-                                                         gboolean            show_options);
+                                                  gboolean      show_options);
 gboolean         gtr_search_bar_get_replace_mode (GtrSearchBar *self);
 void             gtr_search_bar_set_replace_mode (GtrSearchBar *self,
                                                   gboolean            replace_mode);
-const gchar      *gtr_search_bar_get_search_text (GtrSearchBar *dialog);
+const gchar     *gtr_search_bar_get_search_text (GtrSearchBar *dialog);
 void             gtr_search_bar_set_search_text (GtrSearchBar *dialog,
                                                  const gchar *text);
 
-
-const gchar      *gtr_search_bar_get_replace_text (GtrSearchBar *dialog);
+const gchar     *gtr_search_bar_get_replace_text (GtrSearchBar *dialog);
 void             gtr_search_bar_set_replace_text (GtrSearchBar *dialog,
                                                   const gchar *text);
 
@@ -98,4 +91,3 @@ void             gtr_search_bar_find_prev (GtrSearchBar *self);
 void             gtr_search_bar_set_found (GtrSearchBar *self, gboolean found);
 
 G_END_DECLS
-

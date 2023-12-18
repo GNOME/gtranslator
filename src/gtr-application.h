@@ -43,13 +43,11 @@ GtrApplication  * gtr_application_new                    (void);
 GList *           gtr_application_get_views              (GtrApplication *app,
                                                           gboolean        original,
                                                           gboolean        translated);
-GtrWindow        *gtr_application_create_window          (GtrApplication *app);
 GtrWindow        *gtr_application_get_active_window      (GtrApplication *app);
 
 /* Non exported funcs */
 const gchar     *_gtr_application_get_last_dir           (GtrApplication *app);
 void             _gtr_application_set_last_dir           (GtrApplication *app,
                                                           const gchar    *last_dir);
-GSettings       *_gtr_application_get_settings           (GtrApplication *app);
 
 G_END_DECLS

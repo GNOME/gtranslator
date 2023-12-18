@@ -43,8 +43,7 @@
 #include "gtr-window.h"
 #include "gtr-upload-dialog.h"
 
-#define GTR_TAB_SAVE_AS    "gtr-tab-save-as"
-#define GTR_IS_CLOSING_ALL "gtr-is-closing-all"
+#define GTR_TAB_SAVE_AS "gtr-tab-save-as"
 
 static void load_file_list (GtrWindow * window, const GSList * uris);
 static GList * get_modified_documents (GtrWindow * window);
@@ -362,7 +361,7 @@ gtr_upload_file (GtkWidget *upload_dialog,
 {
   GtrTab *tab;
   GtrPo *po;
-  GBytes *bytes;
+  g_autoptr (GBytes) bytes = NULL;
   g_autoptr (GError) error = NULL;
   GtrProfileManager *pmanager = NULL;
   GtrProfile *profile;
@@ -436,7 +435,6 @@ gtr_upload_file (GtkWidget *upload_dialog,
   /* Init multipart container */
   mpart = soup_multipart_new (SOUP_FORM_MIME_TYPE_MULTIPART);
   soup_multipart_append_form_file (mpart, "file", filename, mime_type, bytes);
-  g_bytes_unref (bytes);
   if (upload_comment)
     soup_multipart_append_form_string (mpart, "comment", upload_comment);
 
@@ -607,9 +605,6 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog *dlg,
 void
 gtr_close_tab (GtrTab * tab, GtrWindow * window)
 {
-  g_object_set_data (G_OBJECT (window),
-                     GTR_IS_CLOSING_ALL, GINT_TO_POINTER (0));
-
   if (!_gtr_tab_can_close (tab))
     {
       GtkWidget *dlg;
@@ -710,9 +705,6 @@ close_all_documents (GtrWindow * window, gboolean logout_mode)
 void
 gtr_file_quit (GtrWindow * window)
 {
-  g_object_set_data (G_OBJECT (window),
-                     GTR_IS_CLOSING_ALL, GINT_TO_POINTER (1));
-
   close_all_documents (window, TRUE);
 }
 

@@ -72,34 +72,6 @@ gtr_xml_open_file (const gchar * filename)
   return doc;
 }
 
-/**
- * gtr_gtk_button_new_with_icon_name:
- * @label: the label of the button
- * @icon_name: the icon name
- * 
- * Convenience function to create a #GtkButton with a stock image.
- * 
- * Returns: a new #GtkButton
- */
-GtkWidget *
-gtr_gtk_button_new_with_icon_name (const gchar * label,
-                                   const gchar * icon_name)
-{
-  GtkWidget *button;
-
-  /*button = gtk_button_new_with_mnemonic (label);
-  gtk_button_set_image (GTK_BUTTON (button),
-                        gtk_image_new_from_icon_name (icon_name,
-                                                      GTK_ICON_SIZE_BUTTON));*/
-  //button = gtk_button_new_from_icon_name (icon_name);
-  button = adw_button_content_new ();
-  adw_button_content_set_label (ADW_BUTTON_CONTENT(button), label);
-  adw_button_content_set_use_underline (ADW_BUTTON_CONTENT(button), true);
-  adw_button_content_set_icon_name (ADW_BUTTON_CONTENT(button), icon_name);
-
-  return button;
-}
-
 gchar *
 gtr_utils_escape_search_text (const gchar * text)
 {
@@ -286,43 +258,31 @@ gtr_utils_help_display (GtkWindow * window)
 gchar *
 gtr_utils_get_current_date (void)
 {
-  time_t now;
-  struct tm *now_here;
-  gchar *date = g_malloc (11);
+  g_autoptr (GDateTime) now;
 
-  now = time (NULL);
-  now_here = localtime (&now);
-  strftime (date, 11, "%Y-%m-%d", now_here);
+  now = g_date_time_new_now_local ();
 
-  return date;
+  return g_date_time_format (now, "%Y-%m-%d");
 }
 
 gchar *
 gtr_utils_get_current_time (void)
 {
-  time_t now;
-  struct tm *now_here;
-  gchar *t = g_malloc (11);
+  g_autoptr (GDateTime) now;
 
-  now = time (NULL);
-  now_here = localtime (&now);
-  strftime (t, 11, "%H:%M%z", now_here);
+  now = g_date_time_new_now_local ();
 
-  return t;
+  return g_date_time_format (now, "%H:%M%z");
 }
 
 gchar *
 gtr_utils_get_current_year (void)
 {
-  time_t now;
-  struct tm *now_here;
-  gchar *year = g_malloc (5);
+  g_autoptr (GDateTime) now;
 
-  now = time (NULL);
-  now_here = localtime (&now);
-  strftime (year, 5, "%Y", now_here);
+  now = g_date_time_new_now_local ();
 
-  return year;
+  return g_date_time_format (now, "%Y");
 }
 
 gchar *
@@ -631,6 +591,9 @@ pango_font_description_to_css (PangoFontDescription *desc)
 int
 parse_nplurals_header (const gchar * plurals_header)
 {
+  if (plurals_header == NULL)
+    return -1;
+
   gchar * pointer = g_strrstr (plurals_header, "nplurals");
 
   if (!pointer)
