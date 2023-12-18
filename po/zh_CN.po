@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-11-29 06:26+0000\n"
-"PO-Revision-Date: 2023-11-30 20:42+0800\n"
+"POT-Creation-Date: 2023-12-15 06:37+0000\n"
+"PO-Revision-Date: 2023-12-17 08:37+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -27,7 +27,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:589 src/gtr-greeter.ui:181 src/gtr-window.c:212
+#: src/gtr-application.c:577 src/gtr-greeter.ui:181 src/gtr-window.c:213
 msgid "Translation Editor"
 msgstr "翻译编辑器"
 
@@ -68,7 +68,7 @@ msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Translation;Editor;Gettext;Write;翻译;编辑器;写;"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:400
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:371
 msgid "New Window"
 msgstr "新建窗口"
 
@@ -300,7 +300,7 @@ msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] "有 %d 份含有未保存的改动的文档。要在关闭前保存吗？"
 
-#: src/gtr-context.c:151 src/gtr-tab.ui:120
+#: src/gtr-context.c:151 src/gtr-tab.ui:351
 msgid "Save"
 msgstr "保存"
 
@@ -366,15 +366,15 @@ msgstr ""
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "文件“%s.%s.%s.%s”已经成功占用"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:404
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:375
 msgid "Preferences"
 msgstr "首选项"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:410
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:381
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:418
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:389
 msgid "About Translation Editor"
 msgstr "关于翻译编辑器"
 
@@ -443,7 +443,7 @@ msgstr "所有文件"
 msgid "Welcome"
 msgstr "欢迎"
 
-#: src/gtr-greeter.ui:23 src/gtr-window.c:618
+#: src/gtr-greeter.ui:23 src/gtr-window.c:663
 msgid "Welcome to Translation Editor"
 msgstr "欢迎使用翻译编辑器"
 
@@ -515,7 +515,7 @@ msgstr "复数形式"
 msgid "Next"
 msgstr "下一步"
 
-#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:394
+#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:365
 msgid "Edit Header"
 msgstr "编辑文件头"
 
@@ -786,7 +786,7 @@ msgstr "配置文件"
 msgid "Translation Editor Profile"
 msgstr "翻译编辑器配置文件"
 
-#: src/gtr-profile-dialog.ui:22
+#: src/gtr-profile-dialog.ui:22 src/gtr-window.c:349
 msgid "OK"
 msgstr "确定"
 
@@ -825,11 +825,11 @@ msgstr ""
 msgid "_Damned Lies auth token"
 msgstr "胡言乱语认证令牌(_D)"
 
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:390
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:361
 msgid "Build Translation Memory"
 msgstr "构建翻译记忆"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:414
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:385
 msgid "Help"
 msgstr "帮助"
 
@@ -881,59 +881,48 @@ msgstr "原始文本"
 msgid "Translated text"
 msgstr "翻译文本"
 
-#: src/gtr-tab.c:295
-#, c-format
-msgid "File is not consistent with profile %s"
-msgstr "文件与配置文件 %s 不一致"
+#: src/gtr-tab.c:291
+msgid "Header's plural forms don't match profile's"
+msgstr "头部信息的复数格式与配置文件的不匹配"
 
-#: src/gtr-tab.c:297
-#, c-format
-msgid ""
-"File nplurals: %d, is different from profile nplurals %d.\n"
-"Kindly go to preferences and select a profile with consistent nplurals "
-"values as this file %s."
-msgstr ""
-"文件复数：%d，与配置文件复数 %d 不同。\n"
-"请前往首选项选择与该文件 %s 复数一致的配置文件。"
-
-#: src/gtr-tab.c:417
+#: src/gtr-tab.c:409
 msgid "There is an error in the message:"
 msgstr "消息中存在错误："
 
-#: src/gtr-tab.c:634 src/gtr-tab.c:767
+#: src/gtr-tab.c:626 src/gtr-tab.c:759
 msgid "fuzzy"
 msgstr "模糊"
 
-#: src/gtr-tab.c:796
+#: src/gtr-tab.c:789
 #, c-format
 msgid "Plural %d"
 msgstr "复数 %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1495
+#: src/gtr-tab.c:1475
 msgid "Path:"
 msgstr "路径："
 
-#: src/gtr-tab.c:1744
+#: src/gtr-tab.c:1724
 msgid "Copied to clipboard"
 msgstr "已复制到剪贴板"
 
-#: src/gtr-tab.c:2157
+#: src/gtr-tab.c:2137
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "已翻译：%0.2f%%"
 
-#: src/gtr-tab.c:2158
+#: src/gtr-tab.c:2138
 #, c-format
 msgid "Translated: %d"
 msgstr "已翻译：%d"
 
-#: src/gtr-tab.c:2159
+#: src/gtr-tab.c:2139
 #, c-format
 msgid "Untranslated: %d"
 msgstr "未翻译：%d"
 
-#: src/gtr-tab.c:2160
+#: src/gtr-tab.c:2140
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "模糊：%d"
@@ -962,55 +951,47 @@ msgstr "切换模糊状态"
 msgid "Sort messages by"
 msgstr "排序消息"
 
-#: src/gtr-tab.ui:85 src/gtr-tab.ui:382
+#: src/gtr-tab.ui:85
 msgid "Find"
 msgstr "查找"
 
-#: src/gtr-tab.ui:100
+#: src/gtr-tab.ui:93
 msgid "Upload File"
 msgstr "上传文件"
 
-#: src/gtr-tab.ui:108
-msgid "Save as"
-msgstr "另存为"
-
-#: src/gtr-tab.ui:116
-msgid "Save Current File"
-msgstr "保存当前文件"
-
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:187
+#: src/gtr-tab.ui:157
 msgid "_Original Message"
 msgstr "原始消息(_O)"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:257
+#: src/gtr-tab.ui:227
 msgid "Translate_d Text"
 msgstr "翻译文本(_D)"
 
-#: src/gtr-tab.ui:343
+#: src/gtr-tab.ui:312
 msgid "Order messages by"
 msgstr "排序消息"
 
-#: src/gtr-tab.ui:354
+#: src/gtr-tab.ui:323
 msgid "Appearance in the original file"
 msgstr "原始文件中的出现位置"
 
-#: src/gtr-tab.ui:359
+#: src/gtr-tab.ui:328
 msgid "Message status"
 msgstr "消息状态"
 
-#: src/gtr-tab.ui:365
+#: src/gtr-tab.ui:334
 msgid "Original message"
 msgstr "原始消息"
 
-#: src/gtr-tab.ui:371
+#: src/gtr-tab.ui:340
 msgid "Translated message"
 msgstr "翻译消息"
 
-#: src/gtr-tab.ui:386
-msgid "Find and Replace"
-msgstr "查找和替换"
+#: src/gtr-tab.ui:355
+msgid "Save As…"
+msgstr "另存为…"
 
 #: src/gtr-upload-dialog.c:155
 msgid "Uploading..."
@@ -1029,7 +1010,7 @@ msgid "comment:"
 msgstr "注释："
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:197
+#: src/gtr-window.c:196
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — 翻译编辑器"
@@ -1040,155 +1021,168 @@ msgstr "*%s — 翻译编辑器"
 msgid "%s — Translation Editor"
 msgstr "%s — 翻译编辑器"
 
-#: src/gtr-window.c:581
+#: src/gtr-window.c:347
+msgid "Could not Save"
+msgstr "无法保存"
+
+#: src/gtr-window.c:360
+msgid "File saved"
+msgstr "文件已保存"
+
+#: src/gtr-window.c:626
 msgid "Select a Po file"
 msgstr "选择 PO 文件"
 
-#: src/gtr-window.c:603
+#: src/gtr-window.c:648
 msgid "Load from Damned Lies"
 msgstr "从胡言乱语加载"
 
-#: src/help-overlay.ui:13
+#: src/help-overlay.ui:11
 msgctxt "shortcut window group"
 msgid "General"
 msgstr "常规"
 
-#: src/help-overlay.ui:18
+#: src/help-overlay.ui:15
 msgctxt "shortcut window"
 msgid "Open file"
 msgstr "打开文件"
 
-#: src/help-overlay.ui:25
+#: src/help-overlay.ui:21
 msgctxt "shortcut window"
 msgid "Save the current file"
 msgstr "保存当前文件"
 
-#: src/help-overlay.ui:32
+#: src/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Save the current file as"
 msgstr "另存当前文件为"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:33
 msgctxt "shortcut window"
 msgid "Download from DL"
 msgstr "从胡言乱语下载"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Upload to DL"
 msgstr "上传至胡言乱语"
 
-#: src/help-overlay.ui:53
+#: src/help-overlay.ui:45
 msgctxt "shortcut window"
 msgid "Preferences"
 msgstr "首选项"
 
-#: src/help-overlay.ui:60
+#: src/help-overlay.ui:51
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
-#: src/help-overlay.ui:67
+#: src/help-overlay.ui:57
 msgctxt "shortcut window"
 msgid "Help"
 msgstr "帮助"
 
-#: src/help-overlay.ui:74
+#: src/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "新建窗口"
+
+#: src/help-overlay.ui:69
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "退出"
 
-#: src/help-overlay.ui:83
+#: src/help-overlay.ui:77
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "编辑"
 
-#: src/help-overlay.ui:88
+#: src/help-overlay.ui:81
 msgctxt "shortcut window"
 msgid "Clear translation"
 msgstr "清除翻译"
 
-#: src/help-overlay.ui:95
+#: src/help-overlay.ui:87
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "标记/不标记为模糊"
 
-#: src/help-overlay.ui:102
+#: src/help-overlay.ui:93
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "复制原始文本到翻译"
 
-#: src/help-overlay.ui:109
+#: src/help-overlay.ui:99
 msgctxt "shortcut window"
 msgid "Copy original text to clipboard"
 msgstr "复制原始文本到剪贴板"
 
-#: src/help-overlay.ui:118
+#: src/help-overlay.ui:107
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "导航"
 
-#: src/help-overlay.ui:123
+#: src/help-overlay.ui:111
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "转到上条消息"
 
-#: src/help-overlay.ui:130
+#: src/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "转到下条消息"
 
-#: src/help-overlay.ui:137
+#: src/help-overlay.ui:123
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "转到上条未翻译消息"
 
-#: src/help-overlay.ui:144
+#: src/help-overlay.ui:129
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "转到下条未翻译消息"
 
-#: src/help-overlay.ui:153
+#: src/help-overlay.ui:137
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "翻译记忆"
 
-#: src/help-overlay.ui:158
+#: src/help-overlay.ui:141
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "构建翻译记忆"
 
-#: src/help-overlay.ui:165
+#: src/help-overlay.ui:147
 msgctxt "shortcut window"
 msgid "Use 1st...9th suggestion"
 msgstr "使用第 1 至 9 条建议"
 
-#: src/help-overlay.ui:174
+#: src/help-overlay.ui:155
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "查找和替换"
 
-#: src/help-overlay.ui:179
+#: src/help-overlay.ui:159
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "查找"
 
-#: src/help-overlay.ui:186
+#: src/help-overlay.ui:165
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "查找和替换"
 
-#: src/help-overlay.ui:193
+#: src/help-overlay.ui:171
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "向前搜索"
 
-#: src/help-overlay.ui:200
+#: src/help-overlay.ui:177
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "向后搜索"
 
-#: src/help-overlay.ui:207
+#: src/help-overlay.ui:183
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "隐藏查找和替换栏"
@@ -1276,6 +1270,28 @@ msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
 msgstr "显示的消息与翻译记忆匹配的消息的最大长度差。"
+
+#, c-format
+#~ msgid "File is not consistent with profile %s"
+#~ msgstr "文件与配置文件 %s 不一致"
+
+#, c-format
+#~ msgid ""
+#~ "File nplurals: %d, is different from profile nplurals %d.\n"
+#~ "Kindly go to preferences and select a profile with consistent nplurals "
+#~ "values as this file %s."
+#~ msgstr ""
+#~ "文件复数：%d，与配置文件复数 %d 不同。\n"
+#~ "请前往首选项选择与该文件 %s 复数一致的配置文件。"
+
+#~ msgid "Save as"
+#~ msgstr "另存为"
+
+#~ msgid "Save Current File"
+#~ msgstr "保存当前文件"
+
+#~ msgid "Find and Replace"
+#~ msgstr "查找和替换"
 
 #~ msgctxt "shortcut window"
 #~ msgid "Copy below"
@@ -1539,9 +1555,6 @@ msgstr "显示的消息与翻译记忆匹配的消息的最大长度差。"
 #~| msgid "The file '%s' has been saved in %s"
 #~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
 #~ msgstr "文件“%s.%s.%s.%s”已经上传！"
-
-#~ msgid "File saved."
-#~ msgstr "文件已保存。"
 
 #~ msgid "Files saved."
 #~ msgstr "文件已保存。"
