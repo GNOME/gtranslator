@@ -898,6 +898,8 @@ gtr_dl_teams_init (GtrDlTeams *self)
   );
   gtk_drop_down_set_expression (GTK_DROP_DOWN (priv->modules_combobox), expression);
   gtk_drop_down_set_enable_search (GTK_DROP_DOWN (priv->modules_combobox), TRUE);
+  gtk_drop_down_set_search_match_mode (GTK_DROP_DOWN (priv->modules_combobox),
+                                       GTK_STRING_FILTER_MATCH_MODE_SUBSTRING);
   gtk_widget_set_sensitive (priv->modules_combobox, FALSE);
 
   g_signal_connect (priv->open_button,
