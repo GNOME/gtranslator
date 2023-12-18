@@ -764,7 +764,7 @@ static void
 gtr_gda_init (GtrGda * self)
 {
   gchar *connection_string;
-  GError *error = NULL;
+  g_autoptr (GError) error = NULL;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
   gda_init ();
@@ -789,10 +789,7 @@ gtr_gda_init (GtrGda * self)
                                                     GDA_CONNECTION_OPTIONS_NONE,
                                                     &error);
   if (error)
-    {
-      g_warning ("Error creating database: %s", error->message);
-      g_error_free (error);
-    }
+    g_warning ("Error creating database: %s", error->message);
 
   gda_connection_execute_non_select_command (priv->db,
                                              "create table WORD ("

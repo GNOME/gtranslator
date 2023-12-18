@@ -150,7 +150,7 @@ drag_data_received_cb (GtkDropTarget * drop_target,
                        gpointer data)
 {
   GtrWindow * window = GTR_WINDOW (data);
-  GError * error = NULL;
+  g_autoptr (GError) error = NULL;
 
   if (!G_VALUE_HOLDS (value, G_TYPE_FILE))
     return FALSE;
@@ -159,9 +159,9 @@ drag_data_received_cb (GtkDropTarget * drop_target,
   gtr_open (g_value_get_object (value), window, &error);
   if (error != NULL)
     {
-      GtkAlertDialog *dialog = gtk_alert_dialog_new ("%s", error->message);
+      g_autoptr (GtkAlertDialog) dialog = NULL;
+      dialog = gtk_alert_dialog_new ("%s", error->message);
       gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
-      g_error_free (error);
     }
   return TRUE;
 }

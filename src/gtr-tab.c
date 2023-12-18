@@ -310,7 +310,7 @@ install_autosave_timeout_if_needed (GtrTab * tab)
 static gboolean
 gtr_tab_autosave (GtrTab * tab)
 {
-  GError *error = NULL;
+  g_autoptr (GError) error = NULL;
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
@@ -319,10 +319,7 @@ gtr_tab_autosave (GtrTab * tab)
 
   gtr_po_save_file (priv->po, &error);
   if (error)
-    {
-      g_warning ("%s", error->message);
-      g_error_free (error);
-    }
+    g_warning ("%s", error->message);
 
   return TRUE;
 }

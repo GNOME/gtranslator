@@ -143,14 +143,14 @@ gtr_dl_teams_parse_teams_json (GObject *object,
   const char *def_lang = NULL;
   unsigned int def_lang_pos = 0;
   GtrProfile *profile = NULL;
-  GError *error = NULL;
+  g_autoptr (GError) error = NULL;
   JsonNode *node = NULL;
   JsonArray *array = NULL;
 
   GtrDlTeams *widget = GTR_DL_TEAMS (user_data);
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (widget);
 
-  GtkAlertDialog *dialog;
+  g_autoptr (GtkAlertDialog) dialog = NULL;
 
   /* Parse JSON */
   stream = soup_session_send_finish (SOUP_SESSION (object), result, &error);
@@ -206,7 +206,7 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
   JsonObject *object;
   JsonNode *branchesNode;
   JsonNode *domainsNode;
-  GtkAlertDialog *dialog;
+  g_autoptr (GtkAlertDialog) dialog = NULL;
   SoupStatus status_code;
   g_autoptr(GInputStream) stream = NULL;
 
@@ -318,7 +318,7 @@ gtr_dl_teams_parse_modules_json (GObject *object,
 {
   g_autoptr(JsonParser) parser = json_parser_new ();
   g_autoptr(GInputStream) stream = NULL;
-  GError *error = NULL;
+  g_autoptr (GError) error = NULL;
 
   JsonNode *node = NULL;
   JsonArray *array = NULL;
@@ -326,7 +326,7 @@ gtr_dl_teams_parse_modules_json (GObject *object,
   GtrDlTeams *widget = GTR_DL_TEAMS (user_data);
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (widget);
 
-  GtkAlertDialog *dialog;
+  g_autoptr (GtkAlertDialog) dialog = NULL;
 
   /* Parse JSON */
   stream = soup_session_send_finish (SOUP_SESSION (object), result, &error);
@@ -404,7 +404,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   JsonObject *stats_object;
   const char *format;
   char *markup;
-  GtkAlertDialog *dialog;
+  g_autoptr (GtkAlertDialog) dialog = NULL;
   SoupStatus status_code;
   g_autoptr(GInputStream) stream = NULL;
 
@@ -510,7 +510,7 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   g_autoptr(SoupMessage) msg = NULL;
   GError *error = NULL;
-  GFile *tmp_file = NULL;
+  g_autoptr (GFile) tmp_file = NULL;
   GFileIOStream *iostream = NULL;
   GOutputStream *output = NULL;
   GtkAlertDialog *dialog;
@@ -615,26 +615,22 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
       return;
     }
 
-  if (gtr_open (dest_file, priv->main_window, &error)) {
-    GtrTab *tab = gtr_window_get_active_tab (priv->main_window);
-    g_autofree char *info_msg = NULL;
-    info_msg = g_strdup_printf (_("The file '%s' has been saved in %s"),
-                                basename, dest_dir);
-    gtr_tab_set_info (tab, info_msg, NULL);
+  if (gtr_open (dest_file, priv->main_window, &error))
+    {
+      GtrTab *tab = gtr_window_get_active_tab (priv->main_window);
+      g_autofree char *info_msg = NULL;
+      info_msg = g_strdup_printf (_("The file '%s' has been saved in %s"),
+                                  basename, dest_dir);
+      gtr_tab_set_info (tab, info_msg, NULL);
 
-    GtrPo *po = gtr_tab_get_po(tab);
-    GError *po_error = NULL;
-    gtr_po_set_dl_info(po,
-                       priv->selected_lang,
-                       priv->selected_module,
-                       priv->selected_branch,
-                       priv->selected_domain,
-                       priv->module_state);
-    // Save to update the headers
-    gtr_po_save_file(po, &po_error);
-  }
-
-  g_object_unref (tmp_file);
+      GtrPo *po = gtr_tab_get_po (tab);
+      g_autoptr (GError) po_error = NULL;
+      gtr_po_set_dl_info (po, priv->selected_lang, priv->selected_module,
+                          priv->selected_branch, priv->selected_domain,
+                          priv->module_state);
+      // Save to update the headers
+      gtr_po_save_file (po, &po_error);
+    }
 }
 
 /* Reserve for translation */
@@ -644,10 +640,10 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   GtrProfileManager *pmanager = NULL;
   GtrProfile *profile = NULL;
-  GtkAlertDialog *dialog;
+  g_autoptr (GtkAlertDialog) dialog = NULL;
   const char *auth_token = NULL;
   SoupStatus status_code;
-  GError *error = NULL;
+  g_autoptr (GError) error = NULL;
 
   g_autoptr (SoupMessage) msg = NULL;
   g_autoptr(GInputStream) stream = NULL;
@@ -678,14 +674,9 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
   if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
   {
     if (error)
-      {
-        message = error->message;
-        g_clear_error (&error);
-      }
+      message = error->message;
     else
-      {
-        message = g_strdup (soup_message_get_reason_phrase (msg));
-      }
+      message = g_strdup (soup_message_get_reason_phrase (msg));
 
     dialog = gtk_alert_dialog_new (
       _(
