@@ -631,6 +631,9 @@ pango_font_description_to_css (PangoFontDescription *desc)
 int
 parse_nplurals_header (const gchar * plurals_header)
 {
+  if (plurals_header == NULL)
+    return -1;
+
   gchar * pointer = g_strrstr (plurals_header, "nplurals");
 
   if (!pointer)
