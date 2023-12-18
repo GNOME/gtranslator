@@ -72,34 +72,6 @@ gtr_xml_open_file (const gchar * filename)
   return doc;
 }
 
-/**
- * gtr_gtk_button_new_with_icon_name:
- * @label: the label of the button
- * @icon_name: the icon name
- * 
- * Convenience function to create a #GtkButton with a stock image.
- * 
- * Returns: a new #GtkButton
- */
-GtkWidget *
-gtr_gtk_button_new_with_icon_name (const gchar * label,
-                                   const gchar * icon_name)
-{
-  GtkWidget *button;
-
-  /*button = gtk_button_new_with_mnemonic (label);
-  gtk_button_set_image (GTK_BUTTON (button),
-                        gtk_image_new_from_icon_name (icon_name,
-                                                      GTK_ICON_SIZE_BUTTON));*/
-  //button = gtk_button_new_from_icon_name (icon_name);
-  button = adw_button_content_new ();
-  adw_button_content_set_label (ADW_BUTTON_CONTENT(button), label);
-  adw_button_content_set_use_underline (ADW_BUTTON_CONTENT(button), true);
-  adw_button_content_set_icon_name (ADW_BUTTON_CONTENT(button), icon_name);
-
-  return button;
-}
-
 gchar *
 gtr_utils_escape_search_text (const gchar * text)
 {

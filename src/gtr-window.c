@@ -104,11 +104,6 @@ struct _GtrWindow
 
 G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrWindow, gtr_window, ADW_TYPE_APPLICATION_WINDOW)
 
-enum
-{
-  TARGET_URI_LIST = 100
-};
-
 static void update_saved_state (GtrPo *po, GParamSpec *param, gpointer window);
 
 static void

@@ -108,7 +108,6 @@ typedef struct
   GtkWidget *untranslated;
 
   /* Autosave */
-  GTimer *timer;
   gint autosave_interval;
   guint autosave_timeout;
   guint autosave : 1;
@@ -179,7 +178,7 @@ gtr_tab_focus_search_bar (GtrTab *tab)
   g_assert (GTR_IS_TAB (tab));
   priv = gtr_tab_get_instance_private (tab);
 
-  entry = (GtkEntry *) gtr_search_bar_get_search (priv->gtr_search_bar);
+  entry = gtr_search_bar_get_search (priv->gtr_search_bar);
 
   gtk_entry_grab_focus_without_selecting (entry);
 }
@@ -857,9 +856,6 @@ gtr_tab_finalize (GObject * object)
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
-
-  if (priv->timer != NULL)
-    g_timer_destroy (priv->timer);
 
   if (priv->autosave_timeout > 0)
     remove_autosave_timeout (tab);

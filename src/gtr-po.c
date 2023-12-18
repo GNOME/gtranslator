@@ -987,15 +987,6 @@ void gtr_po_set_dl_info (GtrPo * po, gchar * lang, gchar * module_name,
   if (module_state)
     gtr_header_set_field (priv->header, "X-DL-State", module_state);
 }
-/*
- * FIXME: We are not using this func.
- */
-gboolean
-gtr_po_get_write_perms (GtrPo * po)
-{
-  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-  return priv->no_write_perms;
-}
 
 /**
  * gtr_po_get_messages:
@@ -1011,23 +1002,6 @@ gtr_po_get_messages (GtrPo * po)
   g_return_val_if_fail (GTR_IS_PO (po), NULL);
 
   return priv->messages;
-}
-
-/* FIXME: this is hack, we should fix it */
-/**
- * gtr_po_set_messages:
- * @po: a #GtrPo
- * @messages: (element-type Gtranslator.Msg): a pointer to a new messages list.
- *
- * Sets an updated list of messages.
- **/
-void
-gtr_po_set_messages (GtrPo * po, GList * messages)
-{
-  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-  g_return_if_fail (GTR_IS_PO (po));
-
-  priv->messages = messages;
 }
 
 /**

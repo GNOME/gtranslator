@@ -235,24 +235,6 @@ add_extracted_comments (GtrContextPanel *panel, GtrMsg *msg)
     gtk_text_buffer_insert (priv->commentsbuffer, &iter, comments, -1);
 }
 
-/**
- * Compatibility with Sdk//44.
- * TODO: Remove when Sdk//45 is released.
-**/
-#if !GTK_CHECK_VERSION (4, 11, 4)
-void
-gtk_list_box_remove_all (GtkListBox *box)
-{
-  GtkWidget *widget = GTK_WIDGET (box);
-  GtkWidget *child;
-
-  g_return_if_fail (GTK_IS_LIST_BOX (box));
-
-  while ((child = gtk_widget_get_first_child (widget)) != NULL)
-    gtk_list_box_remove (box, child);
-}
-#endif
-
 static void
 clean_paths (GtrContextPanel *panel)
 {
