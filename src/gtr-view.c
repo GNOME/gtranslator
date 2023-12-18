@@ -171,11 +171,25 @@ gtr_view_dispose (GObject * object)
 }
 
 static void
+gtr_view_finalize (GObject *object)
+{
+  GtrView *view = GTR_VIEW (object);
+  GtrViewPrivate *priv;
+
+  priv = gtr_view_get_instance_private (view);
+
+  g_clear_pointer (&priv->search_text, g_free);
+
+  G_OBJECT_CLASS (gtr_view_parent_class)->finalize (object);
+}
+
+static void
 gtr_view_class_init (GtrViewClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->dispose = gtr_view_dispose;
+  object_class->finalize = gtr_view_finalize;
 }
 
 /**
