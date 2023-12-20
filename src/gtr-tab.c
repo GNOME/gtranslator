@@ -83,9 +83,7 @@ typedef struct
   GtkWidget *dock;
   GtkWidget *window;
 
-  /* Flap state */
   AdwOverlaySplitView *overlay_split_view;
-  gboolean flap_state;
 
   GtkWidget *message_table;
   GtkWidget *context;
@@ -803,12 +801,6 @@ gtr_tab_init (GtrTab * tab)
 
   g_signal_connect (tab, "message-changed", G_CALLBACK (update_status), NULL);
 
-  /*Load gsettings for flap */
-  priv->flap_state = g_settings_get_boolean (priv->state_settings,
-                                             GTR_SETTINGS_FLAP_STATE);
-  adw_overlay_split_view_set_show_sidebar (priv->overlay_split_view,
-                                           priv->flap_state);
-
   /* Manage auto save data */
   priv->autosave = g_settings_get_boolean (priv->files_settings,
                                            GTR_SETTINGS_AUTO_SAVE);
@@ -861,31 +853,14 @@ gtr_tab_finalize (GObject * object)
 }
 
 static void
-save_pane_state(GtrTab *tab)
-{
-  GtrTabPrivate *priv;
-
-  priv = gtr_tab_get_instance_private (tab);
-
-  priv->flap_state = adw_overlay_split_view_get_show_sidebar (priv->overlay_split_view);
-
-  g_settings_set_boolean (priv->state_settings, GTR_SETTINGS_FLAP_STATE,
-                          priv->flap_state);
-}
-
-static void
 gtr_tab_dispose (GObject * object)
 {
-  GtrTab *tab = GTR_TAB(object);
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (GTR_TAB (object));
 
   if (!priv->dispose_has_run)
-    {
-      save_pane_state (tab);
-      priv->dispose_has_run = TRUE;
-    }
+    priv->dispose_has_run = TRUE;
 
   g_clear_object (&priv->po);
   g_clear_object (&priv->ui_settings);
