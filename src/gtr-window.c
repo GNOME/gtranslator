@@ -66,6 +66,7 @@
 typedef struct
 {
   GSettings *state_settings;
+  GSettings *ui_settings;
   GSettings *tm_settings;
   GtrTranslationMemory *translation_memory;
 
@@ -226,9 +227,11 @@ gtr_window_init (GtrWindow *window)
 {
   //GtkTargetList *tl;
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  GAction *sort_action;
 
   priv->search_bar_shown = FALSE;
   priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
+  priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
   priv->active_tab = NULL;
 
   /* loading custom styles */
@@ -280,6 +283,10 @@ gtr_window_init (GtrWindow *window)
   gtr_translation_memory_set_max_items (priv->translation_memory, 10);
 
   gtr_window_show_projects (window);
+
+  sort_action
+      = g_settings_create_action (priv->ui_settings, GTR_SETTINGS_SORT_ORDER);
+  g_action_map_add_action (G_ACTION_MAP (window), sort_action);
 }
 
 static void
@@ -309,6 +316,7 @@ gtr_window_dispose (GObject * object)
     }
 
   g_clear_object (&priv->state_settings);
+  g_clear_object (&priv->ui_settings);
   g_clear_object (&priv->prof_manager);
   g_clear_object (&priv->translation_memory);
   g_clear_object (&priv->tm_settings);
@@ -737,14 +745,6 @@ gtr_window_tm_keybind (GtrWindow *window,
     }
 
   g_list_free_full (tm_list, free_match);
-}
-
-void
-gtr_window_hide_sort_menu (GtrWindow *window)
-{
-  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
-
-  gtr_tab_hide_sort_menu (GTR_TAB (priv->active_tab));
 }
 
 void

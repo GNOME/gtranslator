@@ -122,11 +122,6 @@ typedef struct
   GtrSearchBar   *gtr_search_bar;
 
   /* notebook code */
-  GtkWidget *sort_id;
-  GtkWidget *sort_status;
-  GtkWidget *sort_msgid;
-  GtkWidget *sort_translated;
-  GtkWidget *order_menu_popover;
   GtkWidget *search_toggle;
   GtkWidget *upload;
 
@@ -762,34 +757,6 @@ on_state_notify (GtrPo      *po,
 }
 
 static void
-sort_by_id_cb (GtkWidget *checkbutton, GtrTab* tab)
-{
-  if (gtk_check_button_get_active (GTK_CHECK_BUTTON (checkbutton)))
-    gtr_tab_sort_by (tab, GTR_MESSAGE_TABLE_SORT_ID);
-}
-
-static void
-sort_by_status_cb (GtkWidget *checkbutton, GtrTab* tab)
-{
-  if (gtk_check_button_get_active (GTK_CHECK_BUTTON (checkbutton)))
-    gtr_tab_sort_by (tab, GTR_MESSAGE_TABLE_SORT_STATUS);
-}
-
-static void
-sort_by_msgid_cb (GtkWidget *checkbutton, GtrTab* tab)
-{
-  if (gtk_check_button_get_active (GTK_CHECK_BUTTON (checkbutton)))
-    gtr_tab_sort_by (tab, GTR_MESSAGE_TABLE_SORT_MSGID);
-}
-
-static void
-sort_by_translated_cb (GtkWidget *checkbutton, GtrTab* tab)
-{
-  if (gtk_check_button_get_active (GTK_CHECK_BUTTON (checkbutton)))
-    gtr_tab_sort_by (tab, GTR_MESSAGE_TABLE_SORT_TRANSLATED);
-}
-
-static void
 gtr_tab_init (GtrTab * tab)
 {
   GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
@@ -833,17 +800,6 @@ gtr_tab_init (GtrTab * tab)
 
   g_signal_connect (priv->search_bar, "notify::search-mode-enabled",
                     G_CALLBACK (emit_searchbar_toggled), tab);
-
-  // TODO: related to header of gtr tab move to saperate header file
-  g_signal_connect (priv->sort_id, "toggled",
-                    G_CALLBACK(sort_by_id_cb), tab);
-  g_signal_connect (priv->sort_status, "toggled",
-                    G_CALLBACK(sort_by_status_cb), tab);
-  g_signal_connect (priv->sort_msgid, "toggled",
-                    G_CALLBACK(sort_by_msgid_cb), tab);
-  g_signal_connect (priv->sort_translated, "toggled",
-                    G_CALLBACK(sort_by_translated_cb), tab);
-  gtk_check_button_set_active (GTK_CHECK_BUTTON (priv->sort_id), TRUE);
 }
 
 static void
@@ -1055,11 +1011,6 @@ gtr_tab_class_init (GtrTabClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_bar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, gtr_search_bar);
 
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_id);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_status);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_msgid);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, sort_translated);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, order_menu_popover);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, search_toggle);
   gtk_widget_class_bind_template_child_private (widget_class, GtrTab, upload);
 
@@ -1073,15 +1024,6 @@ gtr_tab_class_init (GtrTabClass * klass)
 }
 
 /***************************** Public funcs ***********************************/
-
-void
-gtr_tab_hide_sort_menu (GtrTab *tab)
-{
-  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-
-  if (priv->sort_id)
-    gtk_popover_popdown (GTK_POPOVER (priv->order_menu_popover));
-}
 
 void
 gtr_tab_enable_find_button (GtrTab *tab,
@@ -2070,15 +2012,6 @@ gtr_tab_set_progress (GtrTab      *tab,
   g_free (trans_text);
   g_free (fuzzy_text);
   g_free (untrans_text);
-}
-
-void
-gtr_tab_sort_by (GtrTab *tab,
-                 GtrMessageTableSortBy sort)
-{
-  GtrTabPrivate *priv;
-  priv = gtr_tab_get_instance_private (tab);
-  gtr_message_table_sort_by (GTR_MESSAGE_TABLE (priv->message_table), sort);
 }
 
 void
