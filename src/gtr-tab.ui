@@ -61,15 +61,6 @@
                 <property name="icon_name">approximate-symbolic</property>
               </object>
             </child>
-            <child>
-              <object class="GtkMenuButton" id="sortby_menu">
-                <property name="receives_default">1</property>
-                <property name="popover">order_menu_popover</property>
-                <property name="tooltip_text" translatable="yes">Sort messages by</property>
-                <property name="icon_name">view-sort-ascending-symbolic</property>
-                <property name="primary">True</property>
-              </object>
-            </child>
             <child type="end">
               <object class="GtkMenuButton" id="main_menu">
                 <property name="receives_default">1</property>
@@ -299,52 +290,6 @@
     </child>
   </template>
 
-  <object class="GtkPopover" id="order_menu_popover">
-    <property name="child">
-      <object class="GtkBox">
-        <property name="margin_start">6</property>
-        <property name="margin_end">6</property>
-        <property name="margin_top">6</property>
-        <property name="margin_bottom">6</property>
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkLabel">
-            <property name="label" translatable="yes">Order messages by</property>
-            <property name="margin_top">3</property>
-            <property name="margin_bottom">3</property>
-            <style>
-              <class name="heading"/>
-              <class name="dim-label"/>
-            </style>
-          </object>
-        </child>
-        <child>
-          <object class="GtkCheckButton" id="sort_id">
-            <property name="label" translatable="yes">Appearance in the original file</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkCheckButton" id="sort_status">
-            <property name="label" translatable="yes">Message status</property>
-            <property name="group">sort_id</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkCheckButton" id="sort_msgid">
-            <property name="label" translatable="yes">Original message</property>
-            <property name="group">sort_id</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkCheckButton" id="sort_translated">
-            <property name="label" translatable="yes">Translated message</property>
-            <property name="group">sort_id</property>
-          </object>
-        </child>
-      </object>
-    </property>
-  </object>
-
   <menu id='main-menu-model'>
     <section>
       <item>
@@ -357,6 +302,29 @@
       </item>
     </section>
     <section>
+      <submenu>
+        <attribute name='label' translatable='yes'>So_rt Messages by…</attribute>
+        <item>
+          <attribute name='label' translatable='yes'>_Order of Appearance</attribute>
+          <attribute name='action'>win.sort-order</attribute>
+          <attribute name='target'>id</attribute>
+        </item>
+        <item>
+          <attribute name='label' translatable='yes'>_Message Status</attribute>
+          <attribute name='action'>win.sort-order</attribute>
+          <attribute name='target'>status</attribute>
+        </item>
+        <item>
+          <attribute name='label' translatable='yes'>_Original Message</attribute>
+          <attribute name='action'>win.sort-order</attribute>
+          <attribute name='target'>original-message</attribute>
+        </item>
+        <item>
+          <attribute name='label' translatable='yes'>_Translated Message</attribute>
+          <attribute name='action'>win.sort-order</attribute>
+          <attribute name='target'>translated-message</attribute>
+        </item>
+      </submenu>
       <item>
         <attribute name='label' translatable='yes'>Build Translation Memory</attribute>
         <attribute name='action'>app.build_tm</attribute>

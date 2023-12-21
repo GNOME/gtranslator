@@ -138,8 +138,6 @@ GtrMsg * gtr_tab_get_msg (GtrTab *tab);
 
 void gtr_tab_set_progress (GtrTab *tab, gint trans, gint untrans, gint fuzzy);
 
-void gtr_tab_sort_by (GtrTab *tab, GtrMessageTableSortBy sort);
-
 void gtr_tab_find_replace (GtrTab *tab, gboolean set);
 
 void gtr_tab_focus_search_bar (GtrTab *tab);
@@ -153,7 +151,6 @@ GtkSingleSelection * gtr_tab_get_selection_model (GtrTab *tab);
 /* notebook */
 void gtr_tab_enable_upload (GtrTab *tab, gboolean enable);
 void gtr_tab_enable_find_button (GtrTab *tab, gboolean enable);
-void gtr_tab_hide_sort_menu (GtrTab *tab);
 
 GtkWindow *gtr_tab_get_window (GtrTab *tab);
 

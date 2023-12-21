@@ -63,8 +63,6 @@ void gtr_window_remove_all_pages (GtrWindow *window);
 
 void gtr_window_tm_keybind (GtrWindow *window, GSimpleAction *action);
 
-void gtr_window_hide_sort_menu (GtrWindow *window);
-
 void gtr_window_show_focus_search_bar (GtrWindow *window, gboolean show);
 void gtr_window_toggle_search_bar (GtrWindow *window);
 

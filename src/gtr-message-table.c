@@ -27,12 +27,13 @@
 #include <config.h>
 #endif
 
-#include "gtr-message-table.h"
+#include "gtr-debug.h"
 #include "gtr-message-table-row.h"
+#include "gtr-message-table.h"
 #include "gtr-msg.h"
 #include "gtr-po.h"
+#include "gtr-settings.h"
 #include "gtr-tab.h"
-#include "gtr-debug.h"
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -60,6 +61,8 @@ typedef struct
 
   GtrTab *tab;
   GtrMessageTableSortBy sort_status;
+
+  GSettings *ui_settings;
 } GtrMessageTablePrivate;
 
 struct _GtrMessageTable
@@ -68,6 +71,17 @@ struct _GtrMessageTable
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrMessageTable, gtr_message_table, GTK_TYPE_BOX)
+
+static void
+on_sort_order_changed (GSettings *settings, gchar *key, gpointer user_data)
+{
+  GtrMessageTable *table = GTR_MESSAGE_TABLE (user_data);
+  GtrMessageTablePrivate *priv
+      = gtr_message_table_get_instance_private (table);
+
+  gtr_message_table_sort_by (
+      table, g_settings_get_enum (priv->ui_settings, GTR_SETTINGS_SORT_ORDER));
+}
 
 static gboolean
 scroll_to_selected (GtrMessageTable * table)
@@ -127,7 +141,10 @@ gtr_message_table_init (GtrMessageTable * table)
   // Second column, translation message
   priv->translation_sorter = GTK_SORTER (gtk_string_sorter_new (gtk_property_expression_new (GTR_TYPE_MSG, NULL, "translation")));
 
-  priv->sort_status = GTR_MESSAGE_TABLE_SORT_ID;
+  priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
+
+  priv->sort_status
+      = g_settings_get_enum (priv->ui_settings, GTR_SETTINGS_SORT_ORDER);
   priv->store = NULL;
   priv->id_sorter = NULL;
 
@@ -135,6 +152,9 @@ gtr_message_table_init (GtrMessageTable * table)
                                   GTK_ORIENTATION_VERTICAL);
 
   priv->sort_model = gtk_sort_list_model_new (NULL, NULL);
+
+  g_signal_connect (priv->ui_settings, "changed::sort-order",
+                    G_CALLBACK (on_sort_order_changed), table);
 
   gtk_widget_init_template (GTK_WIDGET (table));
 }
@@ -146,6 +166,9 @@ gtr_message_table_finalize (GObject * object)
   GtrMessageTablePrivate *priv;
 
   priv = gtr_message_table_get_instance_private (table);
+
+  g_clear_object (&priv->ui_settings);
+
   if (priv->store)
     {
       g_object_unref (priv->store);
@@ -298,6 +321,8 @@ gtr_message_table_populate (GtrMessageTable * table, GtrMessageContainer * conta
       GtrMsg *msg = gtr_message_container_get_message (container, i);
       g_list_store_append (priv->store, msg);
     }
+
+  gtr_message_table_sort_by (table, priv->sort_status);
 }
 
 /**
