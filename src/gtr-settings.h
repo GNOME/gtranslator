@@ -74,7 +74,6 @@ GSettings               *gtr_settings_new                       (void);
 /* window state keys */
 #define GTR_SETTINGS_WINDOW_STATE			"state"
 #define GTR_SETTINGS_WINDOW_SIZE			"size"
-#define GTR_SETTINGS_FLAP_STATE				"flap-state"
 
 G_END_DECLS
 
