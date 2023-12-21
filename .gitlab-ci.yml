@@ -8,9 +8,15 @@ stages:
 variables:
   BUNDLE: "org.gnome.GtranslatorDevel.flatpak"
 
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
 flatpak:
   extends: .flatpak
-  stage: test
+  stage: check
   variables:
     GIT_SUBMODULE_STRATEGY: normal
 
@@ -27,12 +33,12 @@ nightly:
     - 'flatpak'
 
 # Lint the code
-# clang-format:
-#  stage: check
-#  image: fedora:36
-#  script:
-#    - dnf install -y clang-tools-extra git
-#    - git fetch --depth 50 origin $CI_MERGE_REQUEST_TARGET_BRANCH_NAME:$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
-#    - git diff -U0 --no-color --relative $CI_MERGE_REQUEST_TARGET_BRANCH_NAME -- ':!build-aux/flatpak/*.json' | scripts/check-diff-style.sh
-#  rules:
-#    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_PROJECT_NAMESPACE != "GNOME"
+clang-format:
+  stage: check
+  image: fedora:36
+  script:
+    - dnf install -y clang-tools-extra git
+    - git fetch --depth 50 origin $CI_MERGE_REQUEST_TARGET_BRANCH_NAME:$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+    - git diff -U0 --no-color --relative $CI_MERGE_REQUEST_TARGET_BRANCH_NAME -- ':!build-aux/flatpak/*.json' | scripts/check-diff-style.sh
+  rules:
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_PROJECT_NAMESPACE != "GNOME"
