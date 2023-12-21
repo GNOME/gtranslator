@@ -20,9 +20,7 @@
  *
  */
 
-
-#ifndef __GTR_SETTINGS_H__
-#define __GTR_SETTINGS_H__
+#pragma once
 
 #include <glib-object.h>
 #include <glib.h>
@@ -30,30 +28,16 @@
 
 G_BEGIN_DECLS
 
-#define GTR_TYPE_SETTINGS		(gtr_settings_get_type ())
-#define GTR_SETTINGS(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_SETTINGS, GtrSettings))
-#define GTR_SETTINGS_CONST(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_SETTINGS, GtrSettings const))
-#define GTR_SETTINGS_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTR_TYPE_SETTINGS, GtrSettingsClass))
-#define GTR_IS_SETTINGS(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_SETTINGS))
-#define GTR_IS_SETTINGS_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_SETTINGS))
-#define GTR_SETTINGS_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), GTR_TYPE_SETTINGS, GtrSettingsClass))
+#define GTR_TYPE_SETTINGS (gtr_settings_get_type ())
 
-typedef struct _GtrSettings		GtrSettings;
-typedef struct _GtrSettingsClass	GtrSettingsClass;
-
-struct _GtrSettings
-{
-  GObject parent;
-};
+G_DECLARE_DERIVABLE_TYPE (GtrSettings, gtr_settings, GTR, SETTINGS, GObject)
 
 struct _GtrSettingsClass
 {
   GObjectClass parent_class;
 };
 
-GType                    gtr_settings_get_type                  (void) G_GNUC_CONST;
-
-GSettings               *gtr_settings_new                       (void);
+GSettings *gtr_settings_new (void);
 
 /* key constants: IMPORTANT: keep them in the same order as the schema */
 #define GTR_SETTINGS_WARN_IF_CONTAINS_FUZZY		"warn-if-contains-fuzzy"
@@ -74,7 +58,3 @@ GSettings               *gtr_settings_new                       (void);
 #define GTR_SETTINGS_WINDOW_SIZE			"size"
 
 G_END_DECLS
-
-#endif /* __GTR_SETTINGS_H__ */
-
-/* ex:ts=8:noet: */
