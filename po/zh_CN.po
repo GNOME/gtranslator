@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-12-15 06:37+0000\n"
-"PO-Revision-Date: 2023-12-17 08:37+0800\n"
+"POT-Creation-Date: 2023-12-22 06:03+0000\n"
+"PO-Revision-Date: 2023-12-22 18:24+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -27,7 +27,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:577 src/gtr-greeter.ui:181 src/gtr-window.c:213
+#: src/gtr-application.c:496 src/gtr-greeter.ui:181 src/gtr-window.c:209
 msgid "Translation Editor"
 msgstr "翻译编辑器"
 
@@ -68,127 +68,106 @@ msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Translation;Editor;Gettext;Write;翻译;编辑器;写;"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:371
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:339
 msgid "New Window"
 msgstr "新建窗口"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:24
+#: data/org.gnome.Gtranslator.gschema.xml.in:22
 msgid "Warn if file contains fuzzy translations"
 msgstr "如果文件包含模糊翻译则发出警告"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:25
+#: data/org.gnome.Gtranslator.gschema.xml.in:23
 msgid ""
 "If true, warn the user when saving a PO translation file containing fuzzy "
 "strings."
 msgstr "若选中，当保存含有模糊状态字符串的 PO 文件时，警告用户。"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:32
+#: data/org.gnome.Gtranslator.gschema.xml.in:30
 msgid "Whether to remove the obsolete entries upon saving"
 msgstr "保存时是否移除过时条目"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:33
+#: data/org.gnome.Gtranslator.gschema.xml.in:31
 msgid ""
 "If true, the obsolete entries will be removed from the file after saving"
 msgstr "如果设为 true，过时条目将在保存后从文件移除"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:39
+#: data/org.gnome.Gtranslator.gschema.xml.in:37
 msgid "Auto save files"
 msgstr "自动保存文件"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:40
+#: data/org.gnome.Gtranslator.gschema.xml.in:38
 msgid "If true, automatically save files at specified intervals."
 msgstr "若启用，按照指定的时间间隔自动保存 PO 文件。"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:46
+#: data/org.gnome.Gtranslator.gschema.xml.in:44
 msgid "Auto save interval"
 msgstr "自动保存时间间隔"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:47
+#: data/org.gnome.Gtranslator.gschema.xml.in:45
 msgid "Interval in minutes at which to automatically save files."
 msgstr "自动保存文件的时间间隔（以分钟为单位）。"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:53
+#: data/org.gnome.Gtranslator.gschema.xml.in:51
 msgid "Create backup before saving"
 msgstr "保存前创建备份"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:54
+#: data/org.gnome.Gtranslator.gschema.xml.in:52
 msgid "If true, create a backup copy of a file before saving it."
 msgstr "若选中，在保存文件前创建一个备份。"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:60
+#: data/org.gnome.Gtranslator.gschema.xml.in:58
 msgid "Use profile values for header"
 msgstr "在文件头中使用配置文件中的值"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:61
+#: data/org.gnome.Gtranslator.gschema.xml.in:59
 msgid ""
 "If true, overwrite the values in the PO header with those in the active "
 "profile."
 msgstr "若选中，用活动的配置文件覆盖 PO 文件头中的值。"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:70
+#: data/org.gnome.Gtranslator.gschema.xml.in:68
 msgid "Highlight syntax in edit fields"
 msgstr "语法高亮翻译消息"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:71
+#: data/org.gnome.Gtranslator.gschema.xml.in:69
 msgid "If true, apply syntax highlighting to strings in edit fields."
 msgstr "若选中，对编辑框中的字符串应用语法高亮。"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:77
+#: data/org.gnome.Gtranslator.gschema.xml.in:75
 msgid "Make whitespace visible"
 msgstr "使空白字符可见"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:78
+#: data/org.gnome.Gtranslator.gschema.xml.in:76
 msgid "If true, display whitespace in strings as representative symbols."
 msgstr "若选中，用指示符号来显示字符串中的空格。"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:84
+#: data/org.gnome.Gtranslator.gschema.xml.in:82
 msgid "Remove fuzzy status when message is changed"
 msgstr "改动消息时移除模糊翻译状态"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:85
+#: data/org.gnome.Gtranslator.gschema.xml.in:83
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr "若启用，在消息被改动时，将其模糊状态清除。"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:91
+#: data/org.gnome.Gtranslator.gschema.xml.in:89
 msgid "Check spelling"
 msgstr "拼写检查"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:92
+#: data/org.gnome.Gtranslator.gschema.xml.in:90
 msgid "If true, check the spelling of translated messages."
 msgstr "若选中，则检查已翻译消息的拼写。"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:103
-msgid "Side panel switcher style"
-msgstr "侧边面板切换器风格"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:104
-msgid "Style for switchers in the side panel."
-msgstr "侧边面板的切换器风格。"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:110
+#: data/org.gnome.Gtranslator.gschema.xml.in:101
 msgid "Message list sort order"
 msgstr "消息列表的排序次序"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:111
+#: data/org.gnome.Gtranslator.gschema.xml.in:102
 msgid ""
 "Sort order to use in the message list. Possible values are “status”, “id”, "
 "“original-text” and “translated-text”."
 msgstr ""
 "消息列表中使用的排序顺序。可选值有“status”（状态）、“id”（编号）、“original-"
 "text”（原始文本）和“translated-text”（翻译文本）。"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:143
-msgid "Active plugins"
-msgstr "激活的插件"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:144
-msgid ""
-"List of active plugins. It contains the “Location” of the active plugins. "
-"See the .gtranslator-plugin file for obtaining the “Location” of a given "
-"plugin."
-msgstr ""
-"启用的插件列表。它包含了活动插件的“位置”。查看 .gtranslator-plugin 文件来获取"
-"指定插件的“位置”。"
 
 #: src/codeview/gtr-viewer.c:98
 msgid "Source Viewer"
@@ -220,37 +199,37 @@ msgstr ""
 "Dz Chen <wsxy162@gmail.com>\n"
 "lumingzh <lumingzh@qq.com>"
 
-#: src/gtr-actions-file.c:197 src/gtr-close-confirmation-dialog.c:348
+#: src/gtr-actions-file.c:205 src/gtr-close-confirmation-dialog.c:348
 msgid "Unsaved Changes"
 msgstr "未保存的更改"
 
-#: src/gtr-actions-file.c:202
+#: src/gtr-actions-file.c:210
 #, c-format
 msgid "Do you want to write all the changes done to %s?"
 msgstr "您想要写入所有对 %s 的更改吗？"
 
-#: src/gtr-actions-file.c:206 src/gtr-context.c:150
+#: src/gtr-actions-file.c:214 src/gtr-context.c:157
 #: src/gtr-profile-dialog.ui:17 src/gtr-upload-dialog.ui:16
 msgid "Cancel"
 msgstr "取消"
 
-#: src/gtr-actions-file.c:207
+#: src/gtr-actions-file.c:215
 msgid "Continue Without Saving"
 msgstr "不保存继续"
 
-#: src/gtr-actions-file.c:208
+#: src/gtr-actions-file.c:216
 msgid "Save and Open"
 msgstr "保存并打开"
 
-#: src/gtr-actions-file.c:230
+#: src/gtr-actions-file.c:238
 msgid "Open file for translation"
 msgstr "打开文件进行翻译"
 
-#: src/gtr-actions-file.c:318
+#: src/gtr-actions-file.c:326
 msgid "This file has already been uploaded"
 msgstr "该文件已经上传"
 
-#: src/gtr-actions-file.c:337
+#: src/gtr-actions-file.c:340
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -262,11 +241,11 @@ msgstr ""
 "可能您尚未在配置文件中正确配置您的 <i>l10n.gnome.org</i> <b>令牌</b> 或没有上"
 "传该模块的权限。"
 
-#: src/gtr-actions-file.c:346
+#: src/gtr-actions-file.c:349
 msgid "The file has been uploaded!"
 msgstr "该文件已经上传！"
 
-#: src/gtr-actions-file.c:489
+#: src/gtr-actions-file.c:488
 msgid "Save file as…"
 msgstr "文件另存为…"
 
@@ -300,19 +279,23 @@ msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] "有 %d 份含有未保存的改动的文档。要在关闭前保存吗？"
 
-#: src/gtr-context.c:151 src/gtr-tab.ui:351
+#: src/gtr-context.c:158 src/gtr-tab.ui:296
 msgid "Save"
 msgstr "保存"
 
-#: src/gtr-context.c:157 src/gtr-context.ui:28
+#: src/gtr-context.c:164 src/gtr-context.ui:28
 msgid "Notes"
 msgstr "备注"
 
-#: src/gtr-context.ui:61
+#: src/gtr-context.ui:32 src/gtr-preferences-dialog.c:268
+msgid "Edit"
+msgstr "编辑"
+
+#: src/gtr-context.ui:62
 msgid "Extracted comments"
 msgstr "提取的注释"
 
-#: src/gtr-context.ui:86
+#: src/gtr-context.ui:87
 msgid "Paths"
 msgstr "路径"
 
@@ -335,22 +318,22 @@ msgstr "未找到模块状态。"
 msgid "Error loading file: %s"
 msgstr "加载文件时出错：%s"
 
-#: src/gtr-dl-teams.c:572 src/gtr-dl-teams.c:616
+#: src/gtr-dl-teams.c:572 src/gtr-dl-teams.c:612
 #, c-format
 msgid "Error creating tmp file: %s"
 msgstr "创建临时文件时出错：%s"
 
-#: src/gtr-dl-teams.c:587
+#: src/gtr-dl-teams.c:583
 #, c-format
 msgid "Error writing stream: %s"
 msgstr "写入数据流时出错：%s"
 
-#: src/gtr-dl-teams.c:625
+#: src/gtr-dl-teams.c:622
 #, c-format
 msgid "The file '%s' has been saved in %s"
 msgstr "文件“%s”已保存至 %s"
 
-#: src/gtr-dl-teams.c:696
+#: src/gtr-dl-teams.c:683
 #, c-format
 msgid ""
 "An error occurred while reserving this module: %s\n"
@@ -361,20 +344,20 @@ msgstr ""
 "可能您尚未在配置文件中正确配置您的 l10n.gnome.org 令牌或没有占用该模块的权"
 "限。"
 
-#: src/gtr-dl-teams.c:708
+#: src/gtr-dl-teams.c:695
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "文件“%s.%s.%s.%s”已经成功占用"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:375
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:343
 msgid "Preferences"
 msgstr "首选项"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:381
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:349
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:389
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:357
 msgid "About Translation Editor"
 msgstr "关于翻译编辑器"
 
@@ -383,15 +366,15 @@ msgstr "关于翻译编辑器"
 msgid "Language"
 msgstr "语言"
 
-#: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:144
+#: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:143
 msgid "Module"
 msgstr "模块"
 
-#: src/gtr-dl-teams.ui:79 src/gtr-header-dialog.ui:156
+#: src/gtr-dl-teams.ui:79 src/gtr-header-dialog.ui:155
 msgid "Domain"
 msgstr "域名"
 
-#: src/gtr-dl-teams.ui:90 src/gtr-header-dialog.ui:150
+#: src/gtr-dl-teams.ui:90 src/gtr-header-dialog.ui:149
 msgid "Branch"
 msgstr "分支"
 
@@ -423,7 +406,7 @@ msgstr "加载文件"
 msgid "Open…"
 msgstr "打开…"
 
-#: src/gtr-dl-teams.ui:180 src/gtr-projects.ui:64 src/gtr-tab.ui:78
+#: src/gtr-dl-teams.ui:180 src/gtr-projects.ui:64 src/gtr-tab.ui:69
 msgid "Main Menu"
 msgstr "主菜单"
 
@@ -443,7 +426,7 @@ msgstr "所有文件"
 msgid "Welcome"
 msgstr "欢迎"
 
-#: src/gtr-greeter.ui:23 src/gtr-window.c:663
+#: src/gtr-greeter.ui:23 src/gtr-window.c:666
 msgid "Welcome to Translation Editor"
 msgstr "欢迎使用翻译编辑器"
 
@@ -515,84 +498,84 @@ msgstr "复数形式"
 msgid "Next"
 msgstr "下一步"
 
-#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:365
+#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:333
 msgid "Edit Header"
 msgstr "编辑文件头"
 
-#: src/gtr-header-dialog.ui:11
+#: src/gtr-header-dialog.ui:10
 msgid "Translator"
 msgstr "翻译者"
 
-#: src/gtr-header-dialog.ui:15 src/gtr-header-dialog.ui:75
-#: src/gtr-header-dialog.ui:135 src/gtr-preferences-dialog.ui:14
+#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:74
+#: src/gtr-header-dialog.ui:134 src/gtr-preferences-dialog.ui:13
 msgid "General"
 msgstr "常规"
 
-#: src/gtr-header-dialog.ui:18
+#: src/gtr-header-dialog.ui:17
 msgid "Use my options to complete the following entries"
 msgstr "使用我的选项来完成下列条目"
 
-#: src/gtr-header-dialog.ui:23
+#: src/gtr-header-dialog.ui:22
 msgid "Translator’s _name"
 msgstr "翻译者姓名(_N)"
 
-#: src/gtr-header-dialog.ui:29
+#: src/gtr-header-dialog.ui:28
 msgid "Translator’s _email"
 msgstr "翻译者电子邮箱(_E)"
 
-#: src/gtr-header-dialog.ui:35
+#: src/gtr-header-dialog.ui:34
 msgid "_Language"
 msgstr "语言(_L)"
 
-#: src/gtr-header-dialog.ui:41
+#: src/gtr-header-dialog.ui:40
 msgid "Language _code"
 msgstr "语言代码(_C)"
 
-#: src/gtr-header-dialog.ui:47
+#: src/gtr-header-dialog.ui:46
 msgid "Language _Team email"
 msgstr "语言小组电子邮箱(_T)"
 
-#: src/gtr-header-dialog.ui:53
+#: src/gtr-header-dialog.ui:52
 msgid "Char_set"
 msgstr "字符集(_S)"
 
-#: src/gtr-header-dialog.ui:59
+#: src/gtr-header-dialog.ui:58
 msgid "Enc_oding"
 msgstr "编码(_O)"
 
-#: src/gtr-header-dialog.ui:71
+#: src/gtr-header-dialog.ui:70
 msgid "Project"
 msgstr "项目"
 
-#: src/gtr-header-dialog.ui:78
+#: src/gtr-header-dialog.ui:77
 msgid "Project Id _version"
 msgstr "项目编号版本(_V)"
 
-#: src/gtr-header-dialog.ui:84
+#: src/gtr-header-dialog.ui:83
 msgid "Pot _file creation date"
 msgstr "POT 文件创建日期(_F)"
 
-#: src/gtr-header-dialog.ui:90
+#: src/gtr-header-dialog.ui:89
 msgid "Po file _revision date"
 msgstr "PO 文件修改日期(_R)"
 
-#: src/gtr-header-dialog.ui:96
+#: src/gtr-header-dialog.ui:95
 msgid "Report message _bugs to"
 msgstr "报告缺陷消息至(_B)"
 
-#: src/gtr-header-dialog.ui:104
+#: src/gtr-header-dialog.ui:103
 msgid "Comment"
 msgstr "注释"
 
-#: src/gtr-header-dialog.ui:131
+#: src/gtr-header-dialog.ui:130
 msgid "Damned Lies"
 msgstr "胡言乱语"
 
-#: src/gtr-header-dialog.ui:138
+#: src/gtr-header-dialog.ui:137
 msgid "Lang"
 msgstr "语言"
 
-#: src/gtr-header-dialog.ui:162
+#: src/gtr-header-dialog.ui:161
 msgid "State"
 msgstr "状态"
 
@@ -620,27 +603,27 @@ msgstr "原始消息"
 msgid "Translated Message"
 msgstr "翻译消息"
 
-#: src/gtr-po.c:509
+#: src/gtr-po.c:489
 #, c-format
 msgid "The file is empty"
 msgstr "文件为空"
 
-#: src/gtr-po.c:518
+#: src/gtr-po.c:498
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "打开文件“%s”失败：%s"
 
-#: src/gtr-po.c:589
+#: src/gtr-po.c:569
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "无法从字符集“%s”转换到 UTF-8"
 
-#: src/gtr-po.c:605 src/gtr-po.c:624
+#: src/gtr-po.c:585 src/gtr-po.c:604
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "无法存储编码转换的临时文件"
 
-#: src/gtr-po.c:655
+#: src/gtr-po.c:635
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -650,17 +633,17 @@ msgstr ""
 "所有转换文件为 UTF-8 的尝试均失败，在用 GNOME 翻译编辑器打开此文件前使用 "
 "msgconv 或 iconv 命令行工具转换"
 
-#: src/gtr-po.c:723
+#: src/gtr-po.c:703
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext 返回了一个空的消息域列表。"
 
-#: src/gtr-po.c:770
+#: src/gtr-po.c:750
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "没有从解析器获得任何消息。"
 
-#: src/gtr-po.c:824
+#: src/gtr-po.c:804
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -671,24 +654,20 @@ msgstr ""
 "POT 文件是在编译过程中生成的。\n"
 "您的文件应该命名为“%s.po”。"
 
-#: src/gtr-po.c:852
+#: src/gtr-po.c:832
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "%s 是只读文件，无法被覆盖"
 
-#: src/gtr-po.c:871
+#: src/gtr-po.c:851
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "该 PO 文件存在错误：%s"
 
-#: src/gtr-po.c:883
+#: src/gtr-po.c:863
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "写入 PO 文件时发生错误：%s"
-
-#: src/gtr-preferences-dialog.c:268
-msgid "Edit"
-msgstr "编辑"
 
 #: src/gtr-preferences-dialog.c:271
 msgid "Delete"
@@ -714,71 +693,71 @@ msgstr "您确定要删除此配置文件？"
 msgid "_Delete"
 msgstr "删除(_D)"
 
-#: src/gtr-preferences-dialog.ui:10
+#: src/gtr-preferences-dialog.ui:9
 msgid "F_iles"
 msgstr "文件(_I)"
 
-#: src/gtr-preferences-dialog.ui:17
+#: src/gtr-preferences-dialog.ui:16
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "PO 文件包含模糊翻译则发出警告(_W)"
 
-#: src/gtr-preferences-dialog.ui:23
+#: src/gtr-preferences-dialog.ui:22
 msgid "_Remove obsolete entries on save"
 msgstr "保存时移除过时条目(_R)"
 
-#: src/gtr-preferences-dialog.ui:31
+#: src/gtr-preferences-dialog.ui:30
 msgid "Autosave"
 msgstr "自动保存"
 
-#: src/gtr-preferences-dialog.ui:34
+#: src/gtr-preferences-dialog.ui:33
 msgid "_Activate auto save"
 msgstr "激活自动保存(_A)"
 
-#: src/gtr-preferences-dialog.ui:40
+#: src/gtr-preferences-dialog.ui:39
 msgid "Autosave _Interval"
 msgstr "自动保存间隔(_I)"
 
-#: src/gtr-preferences-dialog.ui:55
+#: src/gtr-preferences-dialog.ui:54
 msgid "Create a _backup copy of files before saving"
 msgstr "保存文件前创建备份(_B)"
 
-#: src/gtr-preferences-dialog.ui:68
+#: src/gtr-preferences-dialog.ui:67
 msgid "_Editor"
 msgstr "编辑器(_E)"
 
-#: src/gtr-preferences-dialog.ui:72
+#: src/gtr-preferences-dialog.ui:71
 msgid "Text Display"
 msgstr "文本显示"
 
-#: src/gtr-preferences-dialog.ui:75
+#: src/gtr-preferences-dialog.ui:74
 msgid "_Highlight message syntax"
 msgstr "语法高亮消息(_H)"
 
-#: src/gtr-preferences-dialog.ui:81
+#: src/gtr-preferences-dialog.ui:80
 msgid "Make _whitespace visible"
 msgstr "显示空格字符(_W)"
 
-#: src/gtr-preferences-dialog.ui:87
+#: src/gtr-preferences-dialog.ui:86
 msgid "_Font"
 msgstr "字体(_F)"
 
-#: src/gtr-preferences-dialog.ui:105
+#: src/gtr-preferences-dialog.ui:104
 msgid "Contents"
 msgstr "内容"
 
-#: src/gtr-preferences-dialog.ui:108
+#: src/gtr-preferences-dialog.ui:107
 msgid "_Remove fuzzy status if message is changed"
 msgstr "消息被改动则移除模糊状态(_R)"
 
-#: src/gtr-preferences-dialog.ui:114
+#: src/gtr-preferences-dialog.ui:113
 msgid "Check _spelling"
 msgstr "拼写检查(_S)"
 
-#: src/gtr-preferences-dialog.ui:127
+#: src/gtr-preferences-dialog.ui:126
 msgid "_Profiles"
 msgstr "配置文件(_P)"
 
-#: src/gtr-preferences-dialog.ui:131
+#: src/gtr-preferences-dialog.ui:130
 msgid "Profiles"
 msgstr "配置文件"
 
@@ -786,7 +765,7 @@ msgstr "配置文件"
 msgid "Translation Editor Profile"
 msgstr "翻译编辑器配置文件"
 
-#: src/gtr-profile-dialog.ui:22 src/gtr-window.c:349
+#: src/gtr-profile-dialog.ui:22 src/gtr-window.c:352
 msgid "OK"
 msgstr "确定"
 
@@ -825,11 +804,11 @@ msgstr ""
 msgid "_Damned Lies auth token"
 msgstr "胡言乱语认证令牌(_D)"
 
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:361
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:329
 msgid "Build Translation Memory"
 msgstr "构建翻译记忆"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:385
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:353
 msgid "Help"
 msgstr "帮助"
 
@@ -861,68 +840,64 @@ msgstr "替换"
 msgid "Replace All"
 msgstr "全部替换"
 
-#: src/gtr-search-bar.ui:130
+#: src/gtr-search-bar.ui:129
 msgid "Case sensitive"
 msgstr "区分大小写"
 
-#: src/gtr-search-bar.ui:140
+#: src/gtr-search-bar.ui:139
 msgid "Match whole word only"
 msgstr "仅匹配整个单词"
 
-#: src/gtr-search-bar.ui:150
+#: src/gtr-search-bar.ui:149
 msgid "Wrap around"
 msgstr "从头查找"
 
-#: src/gtr-search-bar.ui:160
+#: src/gtr-search-bar.ui:159
 msgid "Original text"
 msgstr "原始文本"
 
-#: src/gtr-search-bar.ui:170
+#: src/gtr-search-bar.ui:169
 msgid "Translated text"
 msgstr "翻译文本"
 
-#: src/gtr-tab.c:291
-msgid "Header's plural forms don't match profile's"
-msgstr "头部信息的复数格式与配置文件的不匹配"
-
-#: src/gtr-tab.c:409
+#: src/gtr-tab.c:344
 msgid "There is an error in the message:"
 msgstr "消息中存在错误："
 
-#: src/gtr-tab.c:626 src/gtr-tab.c:759
+#: src/gtr-tab.c:561 src/gtr-tab.c:694
 msgid "fuzzy"
 msgstr "模糊"
 
-#: src/gtr-tab.c:789
+#: src/gtr-tab.c:724
 #, c-format
 msgid "Plural %d"
 msgstr "复数 %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1475
+#: src/gtr-tab.c:1314
 msgid "Path:"
 msgstr "路径："
 
-#: src/gtr-tab.c:1724
+#: src/gtr-tab.c:1563
 msgid "Copied to clipboard"
 msgstr "已复制到剪贴板"
 
-#: src/gtr-tab.c:2137
+#: src/gtr-tab.c:1976
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "已翻译：%0.2f%%"
 
-#: src/gtr-tab.c:2138
+#: src/gtr-tab.c:1977
 #, c-format
 msgid "Translated: %d"
 msgstr "已翻译：%d"
 
-#: src/gtr-tab.c:2139
+#: src/gtr-tab.c:1978
 #, c-format
 msgid "Untranslated: %d"
 msgstr "未翻译：%d"
 
-#: src/gtr-tab.c:2140
+#: src/gtr-tab.c:1979
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "模糊：%d"
@@ -947,51 +922,43 @@ msgstr "下条未翻译消息 (<Alt><Page Down>)"
 msgid "Toggle Fuzzy State"
 msgstr "切换模糊状态"
 
-#: src/gtr-tab.ui:68
-msgid "Sort messages by"
-msgstr "排序消息"
-
-#: src/gtr-tab.ui:85
+#: src/gtr-tab.ui:76
 msgid "Find"
 msgstr "查找"
 
-#: src/gtr-tab.ui:93
+#: src/gtr-tab.ui:84
 msgid "Upload File"
 msgstr "上传文件"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:157
+#: src/gtr-tab.ui:148 src/gtr-tab.ui:318
 msgid "_Original Message"
 msgstr "原始消息(_O)"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:227
+#: src/gtr-tab.ui:218
 msgid "Translate_d Text"
 msgstr "翻译文本(_D)"
 
-#: src/gtr-tab.ui:312
-msgid "Order messages by"
-msgstr "排序消息"
-
-#: src/gtr-tab.ui:323
-msgid "Appearance in the original file"
-msgstr "原始文件中的出现位置"
-
-#: src/gtr-tab.ui:328
-msgid "Message status"
-msgstr "消息状态"
-
-#: src/gtr-tab.ui:334
-msgid "Original message"
-msgstr "原始消息"
-
-#: src/gtr-tab.ui:340
-msgid "Translated message"
-msgstr "翻译消息"
-
-#: src/gtr-tab.ui:355
+#: src/gtr-tab.ui:300
 msgid "Save As…"
 msgstr "另存为…"
+
+#: src/gtr-tab.ui:306
+msgid "So_rt Messages by…"
+msgstr "排序消息(_R)…"
+
+#: src/gtr-tab.ui:308
+msgid "_Order of Appearance"
+msgstr "出现顺序(_O)"
+
+#: src/gtr-tab.ui:313
+msgid "_Message Status"
+msgstr "消息状态(_M)"
+
+#: src/gtr-tab.ui:323
+msgid "_Translated Message"
+msgstr "已翻译消息(_T)"
 
 #: src/gtr-upload-dialog.c:155
 msgid "Uploading..."
@@ -1010,30 +977,30 @@ msgid "comment:"
 msgstr "注释："
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:196
+#: src/gtr-window.c:192
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — 翻译编辑器"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:203
+#: src/gtr-window.c:199
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — 翻译编辑器"
 
-#: src/gtr-window.c:347
+#: src/gtr-window.c:350
 msgid "Could not Save"
 msgstr "无法保存"
 
-#: src/gtr-window.c:360
+#: src/gtr-window.c:363
 msgid "File saved"
 msgstr "文件已保存"
 
-#: src/gtr-window.c:626
+#: src/gtr-window.c:629
 msgid "Select a Po file"
 msgstr "选择 PO 文件"
 
-#: src/gtr-window.c:648
+#: src/gtr-window.c:651
 msgid "Load from Damned Lies"
 msgstr "从胡言乱语加载"
 
@@ -1270,6 +1237,38 @@ msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
 msgstr "显示的消息与翻译记忆匹配的消息的最大长度差。"
+
+#~ msgid "Side panel switcher style"
+#~ msgstr "侧边面板切换器风格"
+
+#~ msgid "Style for switchers in the side panel."
+#~ msgstr "侧边面板的切换器风格。"
+
+#~ msgid "Active plugins"
+#~ msgstr "激活的插件"
+
+#~ msgid ""
+#~ "List of active plugins. It contains the “Location” of the active plugins. "
+#~ "See the .gtranslator-plugin file for obtaining the “Location” of a given "
+#~ "plugin."
+#~ msgstr ""
+#~ "启用的插件列表。它包含了活动插件的“位置”。查看 .gtranslator-plugin 文件来"
+#~ "获取指定插件的“位置”。"
+
+#~ msgid "Header's plural forms don't match profile's"
+#~ msgstr "头部信息的复数格式与配置文件的不匹配"
+
+#~ msgid "Order messages by"
+#~ msgstr "排序消息"
+
+#~ msgid "Appearance in the original file"
+#~ msgstr "原始文件中的出现位置"
+
+#~ msgid "Original message"
+#~ msgstr "原始消息"
+
+#~ msgid "Translated message"
+#~ msgstr "翻译消息"
 
 #, c-format
 #~ msgid "File is not consistent with profile %s"
