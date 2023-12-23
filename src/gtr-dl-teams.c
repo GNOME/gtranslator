@@ -690,16 +690,9 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
     return FALSE;
   }
 
-  /* Display a message if the reserve for translation operation was successful */
-  message = g_strdup_printf (
-    _("The file '%s.%s.%s.%s' has been successfully reserved"),
-    priv->selected_module,
-    priv->selected_branch,
-    priv->selected_lang,
-    priv->selected_domain);
-
   gtk_widget_set_sensitive (priv->reserve_button, FALSE);
-  gtr_window_add_toast_msg (GTR_WINDOW (priv->main_window), message);
+  gtr_window_add_toast_msg (GTR_WINDOW (priv->main_window),
+                            _("The file has been successfully reserved"));
 
   return TRUE;
 }
