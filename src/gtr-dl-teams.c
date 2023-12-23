@@ -620,10 +620,8 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
   if (gtr_open (dest_file, priv->main_window, &error))
     {
       GtrTab *tab = gtr_window_get_active_tab (priv->main_window);
-      g_autofree char *info_msg = NULL;
-      info_msg = g_strdup_printf (_("The file '%s' has been saved in %s"),
-                                  basename, dest_dir);
-      gtr_tab_set_info (tab, info_msg, NULL);
+      g_info ("The file '%s' has been saved in '%s'", basename, dest_dir);
+      gtr_tab_set_info (tab, _("The file has been saved in your Downloads folder"), NULL);
 
       GtrPo *po = gtr_tab_get_po (tab);
       g_autoptr (GError) po_error = NULL;
