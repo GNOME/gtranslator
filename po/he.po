@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gTranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-11-29 06:26+0000\n"
-"PO-Revision-Date: 2023-12-07 12:09+0200\n"
+"POT-Creation-Date: 2023-12-22 06:03+0000\n"
+"PO-Revision-Date: 2023-12-25 11:43+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:589 src/gtr-greeter.ui:181 src/gtr-window.c:212
+#: src/gtr-application.c:496 src/gtr-greeter.ui:181 src/gtr-window.c:209
 msgid "Translation Editor"
 msgstr "עורך תרגום"
 
@@ -64,15 +64,15 @@ msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "תרגום;Gtranslator;עורך;Gettext;מתרגם;"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:400
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:339
 msgid "New Window"
 msgstr "חלון חדש"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:24
+#: data/org.gnome.Gtranslator.gschema.xml.in:22
 msgid "Warn if file contains fuzzy translations"
 msgstr "Warn if file contains fuzzy translations"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:25
+#: data/org.gnome.Gtranslator.gschema.xml.in:23
 msgid ""
 "If true, warn the user when saving a PO translation file containing fuzzy "
 "strings."
@@ -80,45 +80,45 @@ msgstr ""
 "If true, warn the user when saving a PO translation file containing fuzzy "
 "strings."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:32
+#: data/org.gnome.Gtranslator.gschema.xml.in:30
 msgid "Whether to remove the obsolete entries upon saving"
 msgstr "Whether to remove the obsolete entries upon saving"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:33
+#: data/org.gnome.Gtranslator.gschema.xml.in:31
 msgid ""
 "If true, the obsolete entries will be removed from the file after saving"
 msgstr ""
 "If true, the obsolete entries will be removed from the file after saving"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:39
+#: data/org.gnome.Gtranslator.gschema.xml.in:37
 msgid "Auto save files"
 msgstr "Auto save files"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:40
+#: data/org.gnome.Gtranslator.gschema.xml.in:38
 msgid "If true, automatically save files at specified intervals."
 msgstr "If true, automatically save files at specified intervals."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:46
+#: data/org.gnome.Gtranslator.gschema.xml.in:44
 msgid "Auto save interval"
 msgstr "Auto save interval"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:47
+#: data/org.gnome.Gtranslator.gschema.xml.in:45
 msgid "Interval in minutes at which to automatically save files."
 msgstr "Interval in minutes at which to automatically save files."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:53
+#: data/org.gnome.Gtranslator.gschema.xml.in:51
 msgid "Create backup before saving"
 msgstr "Create backup before saving"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:54
+#: data/org.gnome.Gtranslator.gschema.xml.in:52
 msgid "If true, create a backup copy of a file before saving it."
 msgstr "If true, create a backup copy of a file before saving it."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:60
+#: data/org.gnome.Gtranslator.gschema.xml.in:58
 msgid "Use profile values for header"
 msgstr "Use profile values for header"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:61
+#: data/org.gnome.Gtranslator.gschema.xml.in:59
 msgid ""
 "If true, overwrite the values in the PO header with those in the active "
 "profile."
@@ -126,71 +126,49 @@ msgstr ""
 "If true, overwrite the values in the PO header with those in the active "
 "profile."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:70
+#: data/org.gnome.Gtranslator.gschema.xml.in:68
 msgid "Highlight syntax in edit fields"
 msgstr "Highlight syntax in edit fields"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:71
+#: data/org.gnome.Gtranslator.gschema.xml.in:69
 msgid "If true, apply syntax highlighting to strings in edit fields."
 msgstr "If true, apply syntax highlighting to strings in edit fields."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:77
+#: data/org.gnome.Gtranslator.gschema.xml.in:75
 msgid "Make whitespace visible"
 msgstr "Make whitespace visible"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:78
+#: data/org.gnome.Gtranslator.gschema.xml.in:76
 msgid "If true, display whitespace in strings as representative symbols."
 msgstr "If true, display whitespace in strings as representative symbols."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:84
+#: data/org.gnome.Gtranslator.gschema.xml.in:82
 msgid "Remove fuzzy status when message is changed"
 msgstr "Remove fuzzy status when message is changed"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:85
+#: data/org.gnome.Gtranslator.gschema.xml.in:83
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr "If true, remove fuzzy status from translations when they are changed."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:91
+#: data/org.gnome.Gtranslator.gschema.xml.in:89
 msgid "Check spelling"
 msgstr "Check spelling"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:92
+#: data/org.gnome.Gtranslator.gschema.xml.in:90
 msgid "If true, check the spelling of translated messages."
 msgstr "If true, check the spelling of translated messages."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:103
-msgid "Side panel switcher style"
-msgstr "Side panel switcher style"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:104
-msgid "Style for switchers in the side panel."
-msgstr "Style for switchers in the side panel."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:110
+#: data/org.gnome.Gtranslator.gschema.xml.in:101
 msgid "Message list sort order"
 msgstr "Message list sort order"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:111
+#: data/org.gnome.Gtranslator.gschema.xml.in:102
 msgid ""
 "Sort order to use in the message list. Possible values are “status”, “id”, "
 "“original-text” and “translated-text”."
 msgstr ""
 "Sort order to use in the message list. Possible values are “status”, “id”, "
 "“original-text” and “translated-text”."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:143
-msgid "Active plugins"
-msgstr "Active plugins"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:144
-msgid ""
-"List of active plugins. It contains the “Location” of the active plugins. "
-"See the .gtranslator-plugin file for obtaining the “Location” of a given "
-"plugin."
-msgstr ""
-"List of active plugins. It contains the “Location” of the active plugins. "
-"See the .gtranslator-plugin file for obtaining the “Location” of a given "
-"plugin."
 
 #: src/codeview/gtr-viewer.c:98
 msgid "Source Viewer"
@@ -217,37 +195,37 @@ msgstr ""
 "יוסף אור בוצ׳קו <yoseforb@gmail.com>\n"
 "מיזם תרגום GNOME לעברית https://l10n.gnome.org/teams/he/"
 
-#: src/gtr-actions-file.c:197 src/gtr-close-confirmation-dialog.c:348
+#: src/gtr-actions-file.c:205 src/gtr-close-confirmation-dialog.c:348
 msgid "Unsaved Changes"
 msgstr "שינויים שלא נשמרו"
 
-#: src/gtr-actions-file.c:202
+#: src/gtr-actions-file.c:210
 #, c-format
 msgid "Do you want to write all the changes done to %s?"
 msgstr "האם ברצונך לכתוב את כל השינויים שבוצעו אל %s?"
 
-#: src/gtr-actions-file.c:206 src/gtr-context.c:150
+#: src/gtr-actions-file.c:214 src/gtr-context.c:157
 #: src/gtr-profile-dialog.ui:17 src/gtr-upload-dialog.ui:16
 msgid "Cancel"
 msgstr "ביטול"
 
-#: src/gtr-actions-file.c:207
+#: src/gtr-actions-file.c:215
 msgid "Continue Without Saving"
 msgstr "להמשיך בלי לשמור"
 
-#: src/gtr-actions-file.c:208
+#: src/gtr-actions-file.c:216
 msgid "Save and Open"
 msgstr "שמירה ופתיחה"
 
-#: src/gtr-actions-file.c:230
+#: src/gtr-actions-file.c:238
 msgid "Open file for translation"
 msgstr "פתיחת קובץ לתרגום"
 
-#: src/gtr-actions-file.c:318
+#: src/gtr-actions-file.c:326
 msgid "This file has already been uploaded"
 msgstr "קובץ זה כבר נטען"
 
-#: src/gtr-actions-file.c:337
+#: src/gtr-actions-file.c:340
 #, c-format
 msgid ""
 "An error occurred while uploading the file: %s\n"
@@ -259,11 +237,11 @@ msgstr ""
 "יתכן והגדרת בפרופיל שלך את <b>האסימון</b> שלך ב־‎<i>l10n.gnome.org</i> שלא "
 "כראוי או שאין לך את ההרשאות להעלאת מודול זה."
 
-#: src/gtr-actions-file.c:346
+#: src/gtr-actions-file.c:349
 msgid "The file has been uploaded!"
 msgstr "הקובץ הועלה!"
 
-#: src/gtr-actions-file.c:489
+#: src/gtr-actions-file.c:488
 msgid "Save file as…"
 msgstr "שמירת קובץ בשם…"
 
@@ -301,19 +279,23 @@ msgstr[0] ""
 msgstr[1] ""
 "ישנם %d מסמכים המכילים שינויים שלא נשמרו. האם לשמור את השינויים לפני הסגירה?"
 
-#: src/gtr-context.c:151 src/gtr-tab.ui:120
+#: src/gtr-context.c:158 src/gtr-tab.ui:296
 msgid "Save"
 msgstr "שמירה"
 
-#: src/gtr-context.c:157 src/gtr-context.ui:28
+#: src/gtr-context.c:164 src/gtr-context.ui:28
 msgid "Notes"
 msgstr "הערות"
 
-#: src/gtr-context.ui:61
+#: src/gtr-context.ui:32 src/gtr-preferences-dialog.c:268
+msgid "Edit"
+msgstr "עריכה"
+
+#: src/gtr-context.ui:62
 msgid "Extracted comments"
 msgstr "הערות שחולצו"
 
-#: src/gtr-context.ui:86
+#: src/gtr-context.ui:87
 msgid "Paths"
 msgstr "נתיבים"
 
@@ -336,22 +318,22 @@ msgstr "מצב המודול לא נמצא."
 msgid "Error loading file: %s"
 msgstr "אירעה שגיאה בטעינת הקובץ: %s"
 
-#: src/gtr-dl-teams.c:572 src/gtr-dl-teams.c:616
+#: src/gtr-dl-teams.c:572 src/gtr-dl-teams.c:612
 #, c-format
 msgid "Error creating tmp file: %s"
 msgstr "אירעה שגיאה ביצירת קובץ זמני:‏ %s"
 
-#: src/gtr-dl-teams.c:587
+#: src/gtr-dl-teams.c:583
 #, c-format
 msgid "Error writing stream: %s"
 msgstr ""
 
-#: src/gtr-dl-teams.c:625
+#: src/gtr-dl-teams.c:622
 #, c-format
 msgid "The file '%s' has been saved in %s"
 msgstr "הקובץ '%s' נשמר ב־‎%s"
 
-#: src/gtr-dl-teams.c:696
+#: src/gtr-dl-teams.c:683
 #, c-format
 msgid ""
 "An error occurred while reserving this module: %s\n"
@@ -362,20 +344,20 @@ msgstr ""
 "יתכן והגדרת בפרופיל שלך את האסימון שלך ב־‎l10n.gnome.org שלא כראוי או שאין לך "
 "את ההרשאות להגשת מודול זה."
 
-#: src/gtr-dl-teams.c:708
+#: src/gtr-dl-teams.c:695
 #, c-format
 msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgstr "הקובץ ‎'%s.%s.%s.%s' נשמר בהצלחה"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:404
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:343
 msgid "Preferences"
 msgstr "העדפות"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:410
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:349
 msgid "Keyboard Shortcuts"
 msgstr "צירופי מקשים"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:418
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:357
 msgid "About Translation Editor"
 msgstr "על אודות עורך התרגום"
 
@@ -384,15 +366,15 @@ msgstr "על אודות עורך התרגום"
 msgid "Language"
 msgstr "שפה"
 
-#: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:144
+#: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:143
 msgid "Module"
 msgstr "מודול"
 
-#: src/gtr-dl-teams.ui:79 src/gtr-header-dialog.ui:156
+#: src/gtr-dl-teams.ui:79 src/gtr-header-dialog.ui:155
 msgid "Domain"
 msgstr "מתחם"
 
-#: src/gtr-dl-teams.ui:90 src/gtr-header-dialog.ui:150
+#: src/gtr-dl-teams.ui:90 src/gtr-header-dialog.ui:149
 msgid "Branch"
 msgstr "ענף"
 
@@ -420,12 +402,12 @@ msgstr "סטטיסטיקה"
 msgid "Load File"
 msgstr "טעינת קובץ"
 
-#: src/gtr-dl-teams.ui:171 src/gtr-projects.ui:50
 # msgctxt "alternate lang"
+#: src/gtr-dl-teams.ui:171 src/gtr-projects.ui:50
 msgid "Open…"
 msgstr "פתיחה…"
 
-#: src/gtr-dl-teams.ui:180 src/gtr-projects.ui:64 src/gtr-tab.ui:78
+#: src/gtr-dl-teams.ui:180 src/gtr-projects.ui:64 src/gtr-tab.ui:69
 msgid "Main Menu"
 msgstr "תפריט ראשי"
 
@@ -445,7 +427,7 @@ msgstr "כל הקבצים"
 msgid "Welcome"
 msgstr "ברוך בואך"
 
-#: src/gtr-greeter.ui:23 src/gtr-window.c:618
+#: src/gtr-greeter.ui:23 src/gtr-window.c:666
 msgid "Welcome to Translation Editor"
 msgstr "ברוך בואך לעורך התרגום"
 
@@ -517,84 +499,84 @@ msgstr "צורות רבים"
 msgid "Next"
 msgstr "הבא"
 
-#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:394
+#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:333
 msgid "Edit Header"
 msgstr "עריכת הכותרת"
 
-#: src/gtr-header-dialog.ui:11
+#: src/gtr-header-dialog.ui:10
 msgid "Translator"
 msgstr "מתרגם"
 
-#: src/gtr-header-dialog.ui:15 src/gtr-header-dialog.ui:75
-#: src/gtr-header-dialog.ui:135 src/gtr-preferences-dialog.ui:14
+#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:74
+#: src/gtr-header-dialog.ui:134 src/gtr-preferences-dialog.ui:13
 msgid "General"
 msgstr "כללי"
 
-#: src/gtr-header-dialog.ui:18
+#: src/gtr-header-dialog.ui:17
 msgid "Use my options to complete the following entries"
 msgstr "יש להשתמש באפשרויות שלי כדי להשלים את הרשומות הבאות"
 
-#: src/gtr-header-dialog.ui:23
+#: src/gtr-header-dialog.ui:22
 msgid "Translator’s _name"
 msgstr "_שם המתרגם"
 
-#: src/gtr-header-dialog.ui:29
+#: src/gtr-header-dialog.ui:28
 msgid "Translator’s _email"
 msgstr "_דוא״ל של המתרגם"
 
-#: src/gtr-header-dialog.ui:35
+#: src/gtr-header-dialog.ui:34
 msgid "_Language"
 msgstr "_שפה"
 
-#: src/gtr-header-dialog.ui:41
+#: src/gtr-header-dialog.ui:40
 msgid "Language _code"
 msgstr "_קוד השפה"
 
-#: src/gtr-header-dialog.ui:47
+#: src/gtr-header-dialog.ui:46
 msgid "Language _Team email"
 msgstr "דוא״ל של _צוות השפה"
 
-#: src/gtr-header-dialog.ui:53
+#: src/gtr-header-dialog.ui:52
 msgid "Char_set"
 msgstr "ערכת _תווים"
 
-#: src/gtr-header-dialog.ui:59
+#: src/gtr-header-dialog.ui:58
 msgid "Enc_oding"
 msgstr "_קידוד"
 
-#: src/gtr-header-dialog.ui:71
+#: src/gtr-header-dialog.ui:70
 msgid "Project"
 msgstr "מיזם"
 
-#: src/gtr-header-dialog.ui:78
+#: src/gtr-header-dialog.ui:77
 msgid "Project Id _version"
 msgstr "מזהה _גרסת המיזם"
 
-#: src/gtr-header-dialog.ui:84
+#: src/gtr-header-dialog.ui:83
 msgid "Pot _file creation date"
 msgstr "תאריך _יצירת קובץ ה־Pot"
 
-#: src/gtr-header-dialog.ui:90
+#: src/gtr-header-dialog.ui:89
 msgid "Po file _revision date"
 msgstr "תאריך _סקירת קובץ ה־Po"
 
-#: src/gtr-header-dialog.ui:96
+#: src/gtr-header-dialog.ui:95
 msgid "Report message _bugs to"
 msgstr "דיווח על _שגיאות בהודעות לכתובת"
 
-#: src/gtr-header-dialog.ui:104
+#: src/gtr-header-dialog.ui:103
 msgid "Comment"
 msgstr "הערה"
 
-#: src/gtr-header-dialog.ui:131
+#: src/gtr-header-dialog.ui:130
 msgid "Damned Lies"
 msgstr "שקרים ארורים"
 
-#: src/gtr-header-dialog.ui:138
+#: src/gtr-header-dialog.ui:137
 msgid "Lang"
 msgstr "שפה"
 
-#: src/gtr-header-dialog.ui:162
+#: src/gtr-header-dialog.ui:161
 msgid "State"
 msgstr "מצב"
 
@@ -622,27 +604,27 @@ msgstr "ההודעה המקורית"
 msgid "Translated Message"
 msgstr "ההודעה המתורגמת"
 
-#: src/gtr-po.c:509
+#: src/gtr-po.c:489
 #, c-format
 msgid "The file is empty"
 msgstr "הקובץ ריק"
 
-#: src/gtr-po.c:518
+#: src/gtr-po.c:498
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "אירע כשל בפתיחת הקובץ „%s”:‏‏ %s"
 
-#: src/gtr-po.c:589
+#: src/gtr-po.c:569
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "לא ניתן להמיר מהקידוד „%s” ל־UTF-8"
 
-#: src/gtr-po.c:605 src/gtr-po.c:624
+#: src/gtr-po.c:585 src/gtr-po.c:604
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "לא ניתן לאחסן קובץ ריק לצורך המרת קידוד"
 
-#: src/gtr-po.c:655
+#: src/gtr-po.c:635
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -652,17 +634,17 @@ msgstr ""
 "כל הניסיונות להמרת הקובץ ל־UTF-8 כשלו, כדאי להשתמש בפקודה msgconv או ב־iconv "
 "לפני פתיחת קובץ זה עם עורך התרגום של GNOME"
 
-#: src/gtr-po.c:723
+#: src/gtr-po.c:703
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "מערכת ה־Gettext החזירה רשימת מתחם הודעות ריקה."
 
-#: src/gtr-po.c:770
+#: src/gtr-po.c:750
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "לא התקבלו הודעות מהמפענח."
 
-#: src/gtr-po.c:824
+#: src/gtr-po.c:804
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -673,24 +655,20 @@ msgstr ""
 "קובצי Pot נוצרים על ידי תהליך ההידור.\n"
 "כנראה ששם הקובץ שלך אמור להיות „%s.po”."
 
-#: src/gtr-po.c:852
+#: src/gtr-po.c:832
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "הקובץ %s הוא לקריאה בלבד ולא ניתן לשכתב עליו"
 
-#: src/gtr-po.c:871
+#: src/gtr-po.c:851
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "ישנה שגיאה בקובץ ה־PO:‏ %s"
 
-#: src/gtr-po.c:883
+#: src/gtr-po.c:863
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "אירעה שגיאה בכתיבת קובץ ה־PO:‏ %s"
-
-#: src/gtr-preferences-dialog.c:268
-msgid "Edit"
-msgstr "עריכה"
 
 #: src/gtr-preferences-dialog.c:271
 msgid "Delete"
@@ -716,71 +694,71 @@ msgstr "האם אכן ברצונך למחוק פרופיל זה?"
 msgid "_Delete"
 msgstr "_מחיקה"
 
-#: src/gtr-preferences-dialog.ui:10
+#: src/gtr-preferences-dialog.ui:9
 msgid "F_iles"
 msgstr "_קבצים"
 
-#: src/gtr-preferences-dialog.ui:17
+#: src/gtr-preferences-dialog.ui:16
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "הצגת א_זהרה אם קובץ PO מכיל תרגומים מעורפלים"
 
-#: src/gtr-preferences-dialog.ui:23
+#: src/gtr-preferences-dialog.ui:22
 msgid "_Remove obsolete entries on save"
 msgstr "_הסרת רשומות ישנות בשמירה"
 
-#: src/gtr-preferences-dialog.ui:31
+#: src/gtr-preferences-dialog.ui:30
 msgid "Autosave"
 msgstr "שמירה אוטומטית"
 
-#: src/gtr-preferences-dialog.ui:34
+#: src/gtr-preferences-dialog.ui:33
 msgid "_Activate auto save"
 msgstr "ה_פעלת שמירה אוטומטית"
 
-#: src/gtr-preferences-dialog.ui:40
+#: src/gtr-preferences-dialog.ui:39
 msgid "Autosave _Interval"
 msgstr "שמירה אוטומטית _פנימית"
 
-#: src/gtr-preferences-dialog.ui:55
+#: src/gtr-preferences-dialog.ui:54
 msgid "Create a _backup copy of files before saving"
 msgstr "יש ליצור עותק _גיבוי של הקבצים לפני השמירה"
 
-#: src/gtr-preferences-dialog.ui:68
+#: src/gtr-preferences-dialog.ui:67
 msgid "_Editor"
 msgstr "_עורך"
 
-#: src/gtr-preferences-dialog.ui:72
+#: src/gtr-preferences-dialog.ui:71
 msgid "Text Display"
 msgstr "תצוגת טקסט"
 
-#: src/gtr-preferences-dialog.ui:75
+#: src/gtr-preferences-dialog.ui:74
 msgid "_Highlight message syntax"
 msgstr "ה_דגשת תחביר ההודעה"
 
-#: src/gtr-preferences-dialog.ui:81
+#: src/gtr-preferences-dialog.ui:80
 msgid "Make _whitespace visible"
 msgstr "הפיכת הרוו_חים לגלויים"
 
-#: src/gtr-preferences-dialog.ui:87
+#: src/gtr-preferences-dialog.ui:86
 msgid "_Font"
 msgstr "_גופן"
 
-#: src/gtr-preferences-dialog.ui:105
+#: src/gtr-preferences-dialog.ui:104
 msgid "Contents"
 msgstr "תכנים"
 
-#: src/gtr-preferences-dialog.ui:108
+#: src/gtr-preferences-dialog.ui:107
 msgid "_Remove fuzzy status if message is changed"
 msgstr "ה_סרת מצב ערפול אם הודעה משתנה"
 
-#: src/gtr-preferences-dialog.ui:114
+#: src/gtr-preferences-dialog.ui:113
 msgid "Check _spelling"
 msgstr "בדיקת ה_איות"
 
-#: src/gtr-preferences-dialog.ui:127
+#: src/gtr-preferences-dialog.ui:126
 msgid "_Profiles"
 msgstr "_פרופילים"
 
-#: src/gtr-preferences-dialog.ui:131
+#: src/gtr-preferences-dialog.ui:130
 msgid "Profiles"
 msgstr "פרופילים"
 
@@ -788,7 +766,7 @@ msgstr "פרופילים"
 msgid "Translation Editor Profile"
 msgstr "פרופיל עורך התרגום"
 
-#: src/gtr-profile-dialog.ui:22
+#: src/gtr-profile-dialog.ui:22 src/gtr-window.c:352
 msgid "OK"
 msgstr "אישור"
 
@@ -828,11 +806,11 @@ msgstr ""
 msgid "_Damned Lies auth token"
 msgstr "אימות אסימון _שקרים ארורים"
 
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:390
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:329
 msgid "Build Translation Memory"
 msgstr "בניית זיכרון תרגום"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:414
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:353
 msgid "Help"
 msgstr "עזרה"
 
@@ -864,77 +842,64 @@ msgstr "החלפה"
 msgid "Replace All"
 msgstr "החלפת הכול"
 
-#: src/gtr-search-bar.ui:130
+#: src/gtr-search-bar.ui:129
 msgid "Case sensitive"
 msgstr "תלוי רישיות"
 
-#: src/gtr-search-bar.ui:140
+#: src/gtr-search-bar.ui:139
 msgid "Match whole word only"
 msgstr "התאמה למילים שלמות בלבד"
 
-#: src/gtr-search-bar.ui:150
+#: src/gtr-search-bar.ui:149
 msgid "Wrap around"
 msgstr "גלישה מסביב"
 
-#: src/gtr-search-bar.ui:160
+#: src/gtr-search-bar.ui:159
 msgid "Original text"
 msgstr "טקסט מקורי"
 
-#: src/gtr-search-bar.ui:170
+#: src/gtr-search-bar.ui:169
 msgid "Translated text"
 msgstr "טקסט מתורגם"
 
-#: src/gtr-tab.c:295
-#, c-format
-msgid "File is not consistent with profile %s"
-msgstr "הקובץ לא תואם עם הפרופיל %s"
-
-#: src/gtr-tab.c:297
-#, c-format
-msgid ""
-"File nplurals: %d, is different from profile nplurals %d.\n"
-"Kindly go to preferences and select a profile with consistent nplurals "
-"values as this file %s."
-msgstr ""
-
-#: src/gtr-tab.c:417
+#: src/gtr-tab.c:344
 msgid "There is an error in the message:"
 msgstr "ישנה שגיאה בהודעה:"
 
-#: src/gtr-tab.c:634 src/gtr-tab.c:767
+#: src/gtr-tab.c:561 src/gtr-tab.c:694
 msgid "fuzzy"
 msgstr "מעורפלת"
 
-#: src/gtr-tab.c:796
+#: src/gtr-tab.c:724
 #, c-format
 msgid "Plural %d"
 msgstr "ריבוי %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1495
+#: src/gtr-tab.c:1314
 msgid "Path:"
 msgstr "נתיב:"
 
-#: src/gtr-tab.c:1744
+#: src/gtr-tab.c:1563
 msgid "Copied to clipboard"
 msgstr "הועתק ללוח הגזירים"
 
-#: src/gtr-tab.c:2157
+#: src/gtr-tab.c:1976
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "מתורגם: %0.2f%%"
 
-#: src/gtr-tab.c:2158
+#: src/gtr-tab.c:1977
 #, c-format
 msgid "Translated: %d"
 msgstr "תורגם: %d"
 
-#: src/gtr-tab.c:2159
+#: src/gtr-tab.c:1978
 #, c-format
 msgid "Untranslated: %d"
 msgstr "לא תורגם: %d"
 
-#: src/gtr-tab.c:2160
+#: src/gtr-tab.c:1979
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "מעורפל: %d"
@@ -959,59 +924,43 @@ msgstr "מחרוזת הבאה לא מתורגמת (<Alt><Page Up>)"
 msgid "Toggle Fuzzy State"
 msgstr "סימון/ביטול מצב ערפול"
 
-#: src/gtr-tab.ui:68
-msgid "Sort messages by"
-msgstr "מיון מחרוזות לפי"
-
-#: src/gtr-tab.ui:85 src/gtr-tab.ui:382
+#: src/gtr-tab.ui:76
 msgid "Find"
 msgstr "חיפוש"
 
-#: src/gtr-tab.ui:100
+#: src/gtr-tab.ui:84
 msgid "Upload File"
 msgstr "העלאת קובץ"
 
-#: src/gtr-tab.ui:108
-msgid "Save as"
-msgstr "שמירה בשם"
-
-#: src/gtr-tab.ui:116
-msgid "Save Current File"
-msgstr "שמירת הקובץ הנוכחי"
-
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:187
+#: src/gtr-tab.ui:148 src/gtr-tab.ui:318
 msgid "_Original Message"
-msgstr "הודעה _מקורית"
+msgstr "מחרוזת _מקורית"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:257
+#: src/gtr-tab.ui:218
 msgid "Translate_d Text"
 msgstr "טקסט מ_תורגם"
 
-#: src/gtr-tab.ui:343
-msgid "Order messages by"
-msgstr "סידור מחרוזות לפי"
+#: src/gtr-tab.ui:300
+msgid "Save As…"
+msgstr "שמירה בשם…"
 
-#: src/gtr-tab.ui:354
-msgid "Appearance in the original file"
-msgstr "הופעה בקובץ המקורי"
+#: src/gtr-tab.ui:306
+msgid "So_rt Messages by…"
+msgstr "_מיון מחרוזות לפי…"
 
-#: src/gtr-tab.ui:359
-msgid "Message status"
-msgstr "מצב מחרוזת"
+#: src/gtr-tab.ui:308
+msgid "_Order of Appearance"
+msgstr "_סדר הופעה"
 
-#: src/gtr-tab.ui:365
-msgid "Original message"
-msgstr "מחורזת מקורית"
+#: src/gtr-tab.ui:313
+msgid "_Message Status"
+msgstr "מצב _מחרוזת"
 
-#: src/gtr-tab.ui:371
-msgid "Translated message"
-msgstr "מחרוזת מתורגמת"
-
-#: src/gtr-tab.ui:386
-msgid "Find and Replace"
-msgstr "חיפוש והחלפה"
+#: src/gtr-tab.ui:323
+msgid "_Translated Message"
+msgstr "מחרוזת _מתורגמת"
 
 #: src/gtr-upload-dialog.c:155
 msgid "Uploading..."
@@ -1030,166 +979,179 @@ msgid "comment:"
 msgstr "הערה:"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:197
+#: src/gtr-window.c:192
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "עורך תרגום - ‎*%s"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:203
+#: src/gtr-window.c:199
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "עורך תרגום - ‎%s"
 
-#: src/gtr-window.c:581
+#: src/gtr-window.c:350
+msgid "Could not Save"
+msgstr "לא ניתן לשמור"
+
+#: src/gtr-window.c:363
+msgid "File saved"
+msgstr "הקובץ נשמר"
+
+#: src/gtr-window.c:629
 msgid "Select a Po file"
 msgstr "בחירת קובץ PO"
 
-#: src/gtr-window.c:603
+#: src/gtr-window.c:651
 msgid "Load from Damned Lies"
 msgstr "טעינה משקרים ארורים"
 
-#: src/help-overlay.ui:13
+#: src/help-overlay.ui:11
 msgctxt "shortcut window group"
 msgid "General"
 msgstr "כללי"
 
-#: src/help-overlay.ui:18
+#: src/help-overlay.ui:15
 msgctxt "shortcut window"
 msgid "Open file"
 msgstr "פתיחת קובץ"
 
-#: src/help-overlay.ui:25
+#: src/help-overlay.ui:21
 msgctxt "shortcut window"
 msgid "Save the current file"
 msgstr "שמירת הקובץ הנוכחי"
 
-#: src/help-overlay.ui:32
+#: src/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Save the current file as"
 msgstr "שמירת הקובץ הנוכחי בשם"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:33
 msgctxt "shortcut window"
 msgid "Download from DL"
 msgstr "הורדה מ־DL"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Upload to DL"
 msgstr "העלאה ל־DL"
 
-#: src/help-overlay.ui:53
+#: src/help-overlay.ui:45
 msgctxt "shortcut window"
 msgid "Preferences"
 msgstr "העדפות"
 
-#: src/help-overlay.ui:60
+#: src/help-overlay.ui:51
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "צירופי מקשים"
 
-#: src/help-overlay.ui:67
+#: src/help-overlay.ui:57
 msgctxt "shortcut window"
 msgid "Help"
 msgstr "עזרה"
 
-#: src/help-overlay.ui:74
+#: src/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "חלון חדש"
+
+#: src/help-overlay.ui:69
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "יציאה"
 
-#: src/help-overlay.ui:83
+#: src/help-overlay.ui:77
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "עריכה"
 
-#: src/help-overlay.ui:88
+#: src/help-overlay.ui:81
 msgctxt "shortcut window"
 msgid "Clear translation"
 msgstr "ניקוי התרגום"
 
-#: src/help-overlay.ui:95
+#: src/help-overlay.ui:87
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "סימון/ביטול מצב ערפול"
 
-#: src/help-overlay.ui:102
+#: src/help-overlay.ui:93
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "העתקת תוכן המחרוזת המקורית לשדה התרגום"
 
-#: src/help-overlay.ui:109
+#: src/help-overlay.ui:99
 msgctxt "shortcut window"
 msgid "Copy original text to clipboard"
 msgstr "העתקת תוכן המחרוזת המקורית ללוח הגזירים"
 
-#: src/help-overlay.ui:118
+#: src/help-overlay.ui:107
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "ניווט"
 
-#: src/help-overlay.ui:123
+#: src/help-overlay.ui:111
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "מעבר למחרוזת הקודם"
 
-#: src/help-overlay.ui:130
+#: src/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "מעבר למחרוזת הבאה"
 
-#: src/help-overlay.ui:137
+#: src/help-overlay.ui:123
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "מעבר למחרוזת הקודמת שאינה מתורגמת"
 
-#: src/help-overlay.ui:144
+#: src/help-overlay.ui:129
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "מעבר למחרוזת הבאה שאינה מתורגמת"
 
-#: src/help-overlay.ui:153
+#: src/help-overlay.ui:137
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "זיכרון תרגום"
 
-#: src/help-overlay.ui:158
+#: src/help-overlay.ui:141
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "בניית זיכרון תרגום"
 
-#: src/help-overlay.ui:165
+#: src/help-overlay.ui:147
 msgctxt "shortcut window"
 msgid "Use 1st...9th suggestion"
 msgstr "שימוש בהצעה 1-9"
 
-#: src/help-overlay.ui:174
+#: src/help-overlay.ui:155
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "חיפוש והחלפה"
 
-#: src/help-overlay.ui:179
+#: src/help-overlay.ui:159
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "חיפוש"
 
-#: src/help-overlay.ui:186
+#: src/help-overlay.ui:165
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "חיפוש והחלפה"
 
-#: src/help-overlay.ui:193
+#: src/help-overlay.ui:171
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "חיפוש קדימה"
 
-#: src/help-overlay.ui:200
+#: src/help-overlay.ui:177
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "חיפוש לאחור"
 
-#: src/help-overlay.ui:207
+#: src/help-overlay.ui:183
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "הסתרת שורת החיפוש וההחלפה"
@@ -1284,6 +1246,49 @@ msgid ""
 msgstr ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
+
+#~ msgid "Side panel switcher style"
+#~ msgstr "Side panel switcher style"
+
+#~ msgid "Style for switchers in the side panel."
+#~ msgstr "Style for switchers in the side panel."
+
+#~ msgid "Active plugins"
+#~ msgstr "Active plugins"
+
+#~ msgid ""
+#~ "List of active plugins. It contains the “Location” of the active plugins. "
+#~ "See the .gtranslator-plugin file for obtaining the “Location” of a given "
+#~ "plugin."
+#~ msgstr ""
+#~ "List of active plugins. It contains the “Location” of the active plugins. "
+#~ "See the .gtranslator-plugin file for obtaining the “Location” of a given "
+#~ "plugin."
+
+#, c-format
+#~ msgid "File is not consistent with profile %s"
+#~ msgstr "הקובץ לא תואם עם הפרופיל %s"
+
+#~ msgid "Save as"
+#~ msgstr "שמירה בשם"
+
+#~ msgid "Save Current File"
+#~ msgstr "שמירת הקובץ הנוכחי"
+
+#~ msgid "Order messages by"
+#~ msgstr "סידור מחרוזות לפי"
+
+#~ msgid "Appearance in the original file"
+#~ msgstr "הופעה בקובץ המקורי"
+
+#~ msgid "Original message"
+#~ msgstr "מחורזת מקורית"
+
+#~ msgid "Translated message"
+#~ msgstr "מחרוזת מתורגמת"
+
+#~ msgid "Find and Replace"
+#~ msgstr "חיפוש והחלפה"
 
 #~ msgid "Gtranslator PO File Editor"
 #~ msgstr "עורך קובצי ה־PO‏ Gtranslator"
@@ -1678,9 +1683,6 @@ msgstr ""
 
 #~ msgid "Gtranslator Web Site"
 #~ msgstr "אתר הבית של Gtranslator"
-
-#~ msgid "File saved."
-#~ msgstr "הקובץ נשמר."
 
 #~ msgid "Files saved."
 #~ msgstr "הקבצים נשמרו."
