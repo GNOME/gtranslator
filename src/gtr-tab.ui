@@ -9,31 +9,9 @@
         <child type="top">
           <object class="GtkHeaderBar">
             <child>
-              <object class="GtkButton" id="open_button">
-                <property name="receives_default">1</property>
-                <property name="tooltip_text" translatable="yes">Open a New File</property>
-                <property name="action_name">app.open</property>
-                <property name="icon_name">document-open-symbolic</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkButton" id="dl_button">
-                <property name="tooltip_text" translatable="yes">Open from Damned Lies</property>
-                <property name="action_name">app.dl</property>
-                <property name="icon_name">folder-download-symbolic</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkSeparator">
-                <style>
-                  <class name="spacer"/>
-                </style>
-              </object>
-            </child>
-            <child>
               <object class="GtkButton" id="prev_untranslated">
                 <property name="receives_default">1</property>
-                <property name="tooltip_text" translatable="yes">Previous message without translation (&lt;Alt&gt;&lt;Page Up&gt;)</property>
+                <property name="tooltip_text" translatable="yes">Previous message without translation</property>
                 <property name="action_name">app.prev_no</property>
                 <property name="icon_name">go-up-symbolic</property>
               </object>
@@ -41,7 +19,7 @@
             <child>
               <object class="GtkButton" id="next_untranslated">
                 <property name="receives_default">1</property>
-                <property name="tooltip_text" translatable="yes">Next message without translation (&lt;Alt&gt;&lt;Page Down&gt;)</property>
+                <property name="tooltip_text" translatable="yes">Next message without translation</property>
                 <property name="action_name">app.next_no</property>
                 <property name="icon_name">go-down-symbolic</property>
               </object>
@@ -291,6 +269,16 @@
   </template>
 
   <menu id='main-menu-model'>
+    <section>
+      <item>
+        <attribute name='label' translatable='yes'>Open a New File</attribute>
+        <attribute name='action'>app.open</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>Open from Damned Lies</attribute>
+        <attribute name='action'>app.dl</attribute>
+      </item>
+    </section>
     <section>
       <item>
         <attribute name='label' translatable='yes'>Save</attribute>
