@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-12-22 06:03+0000\n"
-"PO-Revision-Date: 2023-12-23 23:11+0100\n"
+"POT-Creation-Date: 2023-12-28 10:20+0000\n"
+"PO-Revision-Date: 2023-12-28 20:23+0100\n"
 "Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -79,7 +79,7 @@ msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Übersetzung;Editor;Gettext;Schreiben;"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:339
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:327
 msgid "New Window"
 msgstr "Neues Fenster"
 
@@ -320,7 +320,7 @@ msgstr[1] ""
 "Es gibt %d Dokumente mit ungesicherten Änderungen. Möchten Sie die "
 "Änderungen vor dem Schließen speichern?"
 
-#: src/gtr-context.c:158 src/gtr-tab.ui:296
+#: src/gtr-context.c:158 src/gtr-tab.ui:284
 msgid "Save"
 msgstr "Speichern"
 
@@ -354,25 +354,24 @@ msgstr "Fehler beim Laden der Dateiinformation: %s"
 msgid "No module state found."
 msgstr "Kein Modul-Status gefunden."
 
-#: src/gtr-dl-teams.c:563
+#: src/gtr-dl-teams.c:564
 #, c-format
 msgid "Error loading file: %s"
 msgstr "Fehler beim Laden der Datei: %s"
 
-#: src/gtr-dl-teams.c:572 src/gtr-dl-teams.c:612
+#: src/gtr-dl-teams.c:573 src/gtr-dl-teams.c:614
 #, c-format
 msgid "Error creating tmp file: %s"
 msgstr "Fehler beim Erstellen der temporären Datei: %s"
 
-#: src/gtr-dl-teams.c:583
+#: src/gtr-dl-teams.c:584
 #, c-format
 msgid "Error writing stream: %s"
 msgstr "Fehler beim Schreiben des Datenstroms: %s"
 
-#: src/gtr-dl-teams.c:622
-#, c-format
-msgid "The file '%s' has been saved in %s"
-msgstr "Die Datei »%s« wurde in %s gespeichert"
+#: src/gtr-dl-teams.c:624
+msgid "The file has been saved in your Downloads folder"
+msgstr "Die Datei wurde in Ihrem »Downloads«-Ordner gespeichert"
 
 #: src/gtr-dl-teams.c:683
 #, c-format
@@ -387,19 +386,18 @@ msgstr ""
 "reservieren."
 
 #: src/gtr-dl-teams.c:695
-#, c-format
-msgid "The file '%s.%s.%s.%s' has been successfully reserved"
-msgstr "Die Datei »%s.%s.%s.%s« wurde erfolgreich reserviert"
+msgid "The file has been successfully reserved"
+msgstr "Die Datei wurde erfolgreich reserviert"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:343
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:331
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:349
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:337
 msgid "Keyboard Shortcuts"
 msgstr "Tastenkombinationen"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:357
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:345
 msgid "About Translation Editor"
 msgstr "Info zu Übersetzungseditor"
 
@@ -448,7 +446,7 @@ msgstr "Datei laden"
 msgid "Open…"
 msgstr "Öffnen …"
 
-#: src/gtr-dl-teams.ui:180 src/gtr-projects.ui:64 src/gtr-tab.ui:69
+#: src/gtr-dl-teams.ui:180 src/gtr-projects.ui:64 src/gtr-tab.ui:47
 msgid "Main Menu"
 msgstr "Hauptmenü"
 
@@ -541,7 +539,7 @@ msgstr "Pluralform"
 msgid "Next"
 msgstr "Weiter"
 
-#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:333
+#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:321
 msgid "Edit Header"
 msgstr "Kopfzeilen bearbeiten"
 
@@ -849,13 +847,13 @@ msgstr ""
 
 #: src/gtr-profile-dialog.ui:92
 msgid "_Damned Lies auth token"
-msgstr "»_Verdammte Lügen«-Legitimierungstoken"
+msgstr "»_Verdammte Lügen«-Legitimierungs-Token"
 
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:329
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:317
 msgid "Build Translation Memory"
 msgstr "Übersetzungsspeicher aufbauen"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:353
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:341
 msgid "Help"
 msgstr "Hilfe"
 
@@ -950,60 +948,60 @@ msgid "Fuzzy: %d"
 msgstr "Unklar: %d"
 
 #: src/gtr-tab.ui:14
-msgid "Open a New File"
-msgstr "Eine neue Datei öffnen"
+msgid "Previous message without translation"
+msgstr "Vorherige Zeichenkette ohne Übersetzung"
 
-#: src/gtr-tab.ui:21
-msgid "Open from Damned Lies"
-msgstr "Aus den »Verdammten Lügen« öffnen"
+#: src/gtr-tab.ui:22
+msgid "Next message without translation"
+msgstr "Nächste Zeichenkette ohne Übersetzung"
 
-#: src/gtr-tab.ui:36
-msgid "Previous message without translation (<Alt><Page Up>)"
-msgstr "Vorige Zeichenkette ohne Übersetzung (<Alt><Bild auf>)"
-
-#: src/gtr-tab.ui:44
-msgid "Next message without translation (<Alt><Page Down>)"
-msgstr "Nächste Zeichenkette ohne Übersetzung (<Alt><Bild ab>)"
-
-#: src/gtr-tab.ui:59
+#: src/gtr-tab.ui:37
 msgid "Toggle Fuzzy State"
 msgstr "Unklar-Status umschalten"
 
-#: src/gtr-tab.ui:76
+#: src/gtr-tab.ui:54
 msgid "Find"
 msgstr "Suchen"
 
-#: src/gtr-tab.ui:84
+#: src/gtr-tab.ui:62
 msgid "Upload File"
 msgstr "Datei hochladen"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:148 src/gtr-tab.ui:318
+#: src/gtr-tab.ui:126 src/gtr-tab.ui:306
 msgid "_Original Message"
 msgstr "_Ursprüngliche Zeichenkette"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:218
+#: src/gtr-tab.ui:196
 msgid "Translate_d Text"
 msgstr "_Übersetzter Text"
 
-#: src/gtr-tab.ui:300
+#: src/gtr-tab.ui:274
+msgid "Open a New File"
+msgstr "Eine neue Datei öffnen"
+
+#: src/gtr-tab.ui:278
+msgid "Open from Damned Lies"
+msgstr "Aus den »Verdammten Lügen« öffnen"
+
+#: src/gtr-tab.ui:288
 msgid "Save As…"
 msgstr "Speichern unter …"
 
-#: src/gtr-tab.ui:306
+#: src/gtr-tab.ui:294
 msgid "So_rt Messages by…"
 msgstr "Zeichenketten _sortieren nach …"
 
-#: src/gtr-tab.ui:308
+#: src/gtr-tab.ui:296
 msgid "_Order of Appearance"
 msgstr "_Darstellungsreihenfolge"
 
-#: src/gtr-tab.ui:313
+#: src/gtr-tab.ui:301
 msgid "_Message Status"
 msgstr "_Zeichenkettenstatus"
 
-#: src/gtr-tab.ui:323
+#: src/gtr-tab.ui:311
 msgid "_Translated Message"
 msgstr "Ü_bersetzte Zeichenkette"
 
