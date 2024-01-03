@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2023-12-22 06:03+0000\n"
-"PO-Revision-Date: 2023-12-22 18:24+0800\n"
+"POT-Creation-Date: 2023-12-28 10:20+0000\n"
+"PO-Revision-Date: 2023-12-31 17:06+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -68,7 +68,7 @@ msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Translation;Editor;Gettext;Write;翻译;编辑器;写;"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:339
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:327
 msgid "New Window"
 msgstr "新建窗口"
 
@@ -279,7 +279,7 @@ msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] "有 %d 份含有未保存的改动的文档。要在关闭前保存吗？"
 
-#: src/gtr-context.c:158 src/gtr-tab.ui:296
+#: src/gtr-context.c:158 src/gtr-tab.ui:284
 msgid "Save"
 msgstr "保存"
 
@@ -313,25 +313,24 @@ msgstr "加载文件信息时出错：%s"
 msgid "No module state found."
 msgstr "未找到模块状态。"
 
-#: src/gtr-dl-teams.c:563
+#: src/gtr-dl-teams.c:564
 #, c-format
 msgid "Error loading file: %s"
 msgstr "加载文件时出错：%s"
 
-#: src/gtr-dl-teams.c:572 src/gtr-dl-teams.c:612
+#: src/gtr-dl-teams.c:573 src/gtr-dl-teams.c:614
 #, c-format
 msgid "Error creating tmp file: %s"
 msgstr "创建临时文件时出错：%s"
 
-#: src/gtr-dl-teams.c:583
+#: src/gtr-dl-teams.c:584
 #, c-format
 msgid "Error writing stream: %s"
 msgstr "写入数据流时出错：%s"
 
-#: src/gtr-dl-teams.c:622
-#, c-format
-msgid "The file '%s' has been saved in %s"
-msgstr "文件“%s”已保存至 %s"
+#: src/gtr-dl-teams.c:624
+msgid "The file has been saved in your Downloads folder"
+msgstr "文件已保存至您的下载文件夹"
 
 #: src/gtr-dl-teams.c:683
 #, c-format
@@ -345,19 +344,18 @@ msgstr ""
 "限。"
 
 #: src/gtr-dl-teams.c:695
-#, c-format
-msgid "The file '%s.%s.%s.%s' has been successfully reserved"
-msgstr "文件“%s.%s.%s.%s”已经成功占用"
+msgid "The file has been successfully reserved"
+msgstr "文件已经成功占用"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:343
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:331
 msgid "Preferences"
 msgstr "首选项"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:349
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:337
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:357
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:345
 msgid "About Translation Editor"
 msgstr "关于翻译编辑器"
 
@@ -406,7 +404,7 @@ msgstr "加载文件"
 msgid "Open…"
 msgstr "打开…"
 
-#: src/gtr-dl-teams.ui:180 src/gtr-projects.ui:64 src/gtr-tab.ui:69
+#: src/gtr-dl-teams.ui:180 src/gtr-projects.ui:64 src/gtr-tab.ui:47
 msgid "Main Menu"
 msgstr "主菜单"
 
@@ -498,7 +496,7 @@ msgstr "复数形式"
 msgid "Next"
 msgstr "下一步"
 
-#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:333
+#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:321
 msgid "Edit Header"
 msgstr "编辑文件头"
 
@@ -804,11 +802,11 @@ msgstr ""
 msgid "_Damned Lies auth token"
 msgstr "胡言乱语认证令牌(_D)"
 
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:329
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:317
 msgid "Build Translation Memory"
 msgstr "构建翻译记忆"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:353
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:341
 msgid "Help"
 msgstr "帮助"
 
@@ -903,60 +901,60 @@ msgid "Fuzzy: %d"
 msgstr "模糊：%d"
 
 #: src/gtr-tab.ui:14
-msgid "Open a New File"
-msgstr "打开新文件"
+msgid "Previous message without translation"
+msgstr "上条未翻译消息"
 
-#: src/gtr-tab.ui:21
-msgid "Open from Damned Lies"
-msgstr "从胡言乱语打开"
+#: src/gtr-tab.ui:22
+msgid "Next message without translation"
+msgstr "下条未翻译消息"
 
-#: src/gtr-tab.ui:36
-msgid "Previous message without translation (<Alt><Page Up>)"
-msgstr "上条未翻译消息 (<Alt><Page Up>)"
-
-#: src/gtr-tab.ui:44
-msgid "Next message without translation (<Alt><Page Down>)"
-msgstr "下条未翻译消息 (<Alt><Page Down>)"
-
-#: src/gtr-tab.ui:59
+#: src/gtr-tab.ui:37
 msgid "Toggle Fuzzy State"
 msgstr "切换模糊状态"
 
-#: src/gtr-tab.ui:76
+#: src/gtr-tab.ui:54
 msgid "Find"
 msgstr "查找"
 
-#: src/gtr-tab.ui:84
+#: src/gtr-tab.ui:62
 msgid "Upload File"
 msgstr "上传文件"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:148 src/gtr-tab.ui:318
+#: src/gtr-tab.ui:126 src/gtr-tab.ui:306
 msgid "_Original Message"
 msgstr "原始消息(_O)"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:218
+#: src/gtr-tab.ui:196
 msgid "Translate_d Text"
 msgstr "翻译文本(_D)"
 
-#: src/gtr-tab.ui:300
+#: src/gtr-tab.ui:274
+msgid "Open a New File"
+msgstr "打开新文件"
+
+#: src/gtr-tab.ui:278
+msgid "Open from Damned Lies"
+msgstr "从胡言乱语打开"
+
+#: src/gtr-tab.ui:288
 msgid "Save As…"
 msgstr "另存为…"
 
-#: src/gtr-tab.ui:306
+#: src/gtr-tab.ui:294
 msgid "So_rt Messages by…"
 msgstr "排序消息(_R)…"
 
-#: src/gtr-tab.ui:308
+#: src/gtr-tab.ui:296
 msgid "_Order of Appearance"
 msgstr "出现顺序(_O)"
 
-#: src/gtr-tab.ui:313
+#: src/gtr-tab.ui:301
 msgid "_Message Status"
 msgstr "消息状态(_M)"
 
-#: src/gtr-tab.ui:323
+#: src/gtr-tab.ui:311
 msgid "_Translated Message"
 msgstr "已翻译消息(_T)"
 
