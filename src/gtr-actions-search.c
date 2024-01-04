@@ -173,81 +173,93 @@ run_search (GtrView * view, gboolean follow)
   return found;
 }
 
-gboolean
-find_in_list (GtrWindow * window,
-              GList * views,
-              gboolean wrap_around,
-              gboolean search_backwards)
+static gboolean
+_msg_equal_func (GtrMsg *msg, GRegex *regex, gboolean original_text,
+                 gboolean translated_text)
+{
+  const gchar *original = NULL;
+  const gchar *translated = NULL;
+  gboolean found = FALSE;
+
+  original = gtr_msg_get_msgid (msg);
+  translated = gtr_msg_get_msgstr (msg);
+  // TODO: search also in plurals msgs
+
+  if (original_text)
+    found = found || g_regex_match (regex, original, 0, NULL);
+  if (translated_text)
+    found = found || g_regex_match (regex, translated, 0, NULL);
+
+  return found;
+}
+
+gint
+find_in_selection_model (GtrWindow *window, GtrSearchBar *searchbar,
+                         gint current_pos, gboolean search_backwards)
 {
   GtrTab *tab = gtr_window_get_active_tab (window);
-  static GList *viewsaux = NULL;
+  GListStore *store = gtr_tab_get_model (tab);
+  GListModel *model = G_LIST_MODEL (gtr_tab_get_selection_model (tab));
+  g_autoptr (GRegex) regex = gtr_search_bar_regex (searchbar);
 
-  int i = 0, n = 0;
-  GtkSingleSelection *model = gtr_tab_get_selection_model (tab);
-  GtrMsg *current = NULL, *next = NULL;
-  n = g_list_model_get_n_items (G_LIST_MODEL (model));
-  i = gtk_single_selection_get_selected (model);
+  gboolean original_text;
+  gboolean translated_text;
+  gboolean wrap_around;
+  gboolean found = FALSE;
+  gint pos = -1;
+  gint i = 0;
+  gint nitems = g_list_model_get_n_items (model);
 
-  current = g_list_model_get_item (G_LIST_MODEL (model), i);
+  /* Views where find */
+  original_text = gtr_search_bar_get_original_text (searchbar);
+  translated_text = gtr_search_bar_get_translated_text (searchbar);
+  wrap_around = gtr_search_bar_get_wrap_around (searchbar);
 
-  if (viewsaux == NULL)
-    viewsaux = views;
-
-  /*
-   * Variable used to know when start search in from the beggining of the view
-   */
-  static gboolean found = FALSE;
-
-  do
+  i = current_pos;
+  if (search_backwards)
     {
-      while (viewsaux != NULL)
+      i = current_pos - 1;
+      if (wrap_around && i <= 0)
+        i = nitems - 1;
+    }
+  else
+    {
+      i = current_pos + 1;
+      if (wrap_around && i >= nitems)
+        i = 0;
+    }
+
+  // Stop when found or at the end of the list
+  while (!found && i >= 0 && i < nitems && i != current_pos)
+    {
+      GtrMsg *msg = GTR_MSG (g_list_model_get_item (model, i));
+      if (_msg_equal_func (msg, regex, original_text, translated_text))
         {
-          gboolean aux = found;
-          next = g_list_model_get_item (G_LIST_MODEL (model), i);
-          found = run_search (GTR_VIEW (viewsaux->data), found);
-          if (found)
-            {
-              gtr_tab_message_go_to (tab, next, FALSE, GTR_TAB_MOVE_NONE);
-              run_search (GTR_VIEW (viewsaux->data), aux);
-              return TRUE;
-            }
-          viewsaux = viewsaux->next;
+          found = TRUE;
+          pos = i;
+          break;
         }
 
       if (search_backwards)
-        {
-          i--;
-          if (i < 0 && !wrap_around)
-            goto notfound;
-          // wrap around
-          if (i < 0)
-            i = n - 1;
-        }
+        i--;
       else
-        {
-          i++;
-          if (i >= n && !wrap_around)
-            goto notfound;
-          // wrap around
-          if (i >= n)
-            i = 0;
-        }
-      next = g_list_model_get_item (G_LIST_MODEL (model), i);
-      gtr_tab_message_go_to (tab, next, FALSE, GTR_TAB_MOVE_NONE);
-      viewsaux = views;
-    }
-  while (next != current);
+        i++;
 
-notfound:
-  gtr_tab_message_go_to (tab, current, FALSE, GTR_TAB_MOVE_NONE);
-  return FALSE;
+      if (wrap_around)
+        {
+          i = i % nitems;
+          if (i < 0)
+            i = nitems + i;
+        }
+    }
+
+  return pos;
 }
 
-void
-do_find (GtrSearchBar * searchbar, GtrWindow * window, gboolean search_backwards)
+gboolean
+find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
 {
-  GtrTab *tab;
-  GList *views, *list, *current_msg;
+  GList *views, *list;
   gchar *search_text;
   const gchar *entry_text;
   gboolean original_text;
@@ -257,10 +269,10 @@ do_find (GtrSearchBar * searchbar, GtrWindow * window, gboolean search_backwards
   gboolean wrap_around;
   guint flags = 0;
   guint old_flags = 0;
-  gboolean found;
 
-  /* Used to store search options */
-  tab = gtr_window_get_active_tab (window);
+  // Use static to keep the search state between different calls
+  static GList *viewsaux = NULL;
+  static gboolean found = FALSE;
 
   entry_text = gtr_search_bar_get_search_text (searchbar);
 
@@ -276,16 +288,14 @@ do_find (GtrSearchBar * searchbar, GtrWindow * window, gboolean search_backwards
   if (!original_text && !translated_text)
     return;
 
-  /* Get textviews */
+  // Search the word in gtr-views widgets
   views = gtr_window_get_all_views (window, original_text, translated_text);
-
-  g_return_if_fail (views != NULL);
-
   list = views;
 
   GTR_SEARCH_SET_CASE_SENSITIVE (flags, match_case);
   GTR_SEARCH_SET_ENTIRE_WORD (flags, entire_word);
 
+  // Set the search options in all views
   while (list != NULL)
     {
       search_text =
@@ -301,13 +311,54 @@ do_find (GtrSearchBar * searchbar, GtrWindow * window, gboolean search_backwards
       list = list->next;
     }
 
-  current_msg = gtr_po_get_current_message (gtr_tab_get_po (tab));
-  found = find_in_list (window, views, wrap_around, search_backwards);
+  // Do the search in all views, keeping the state from previous calls.
+  if (viewsaux == NULL)
+    viewsaux = views;
+
+  while (viewsaux != NULL)
+    {
+      found = run_search (GTR_VIEW (viewsaux->data), found);
+      if (found)
+        return TRUE;
+      viewsaux = viewsaux->next;
+    }
+
+  return FALSE;
+}
+
+void
+do_find (GtrSearchBar *searchbar, GtrWindow *window, gboolean search_backwards)
+{
+  GtrTab *tab;
+  gboolean found = FALSE;
+  gint pos = -1;
+  gint current_pos = -1;
+
+  /* Used to store search options */
+  tab = gtr_window_get_active_tab (window);
+  found = find_in_list (window, searchbar);
+  // It appears in the current selected message, so nothing to do here
+  if (found)
+    {
+      gtr_search_bar_set_found (searchbar, found);
+      return;
+    }
+
+  // Not found in the current message, so look for the followings
+  current_pos
+      = gtk_single_selection_get_selected (gtr_tab_get_selection_model (tab));
+  pos = find_in_selection_model (window, searchbar, current_pos,
+                                 search_backwards);
+  if (pos >= 0)
+    {
+      gtk_single_selection_set_selected (gtr_tab_get_selection_model (tab),
+                                         GTK_INVALID_LIST_POSITION);
+      gtk_single_selection_set_selected (gtr_tab_get_selection_model (tab),
+                                         pos);
+      found = find_in_list (window, searchbar);
+    }
+
   restore_last_searched_data (searchbar, tab);
-
-  if (!found && current_msg)
-    gtr_tab_message_go_to (tab, current_msg->data, TRUE, GTR_TAB_MOVE_NONE);
-
   gtr_search_bar_set_found (searchbar, found);
 }
 

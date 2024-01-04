@@ -691,3 +691,44 @@ gtr_search_bar_get_search (GtrSearchBar *self)
 {
   return self->search_entry;
 }
+
+/**
+ * gtr_search_bar_regex:
+ * @self: a #GtrSearchBar
+ *
+ * Return value: (transfer full): A new #GRegex with the current search encoded
+ **/
+GRegex *
+gtr_search_bar_regex (GtrSearchBar *self)
+{
+  const gchar *entry_text;
+  gboolean match_case;
+  gboolean entire_word;
+
+  GRegex *regex = NULL;
+  GRegexCompileFlags cflags = G_REGEX_DEFAULT | G_REGEX_MULTILINE;
+
+  g_autofree char *pattern = NULL;
+  g_autofree char *escaped = NULL;
+
+  entry_text = gtr_search_bar_get_search_text (self);
+  escaped = g_regex_escape_string (entry_text, strlen (entry_text));
+
+  /* Flags */
+  match_case = gtr_search_bar_get_match_case (self);
+  entire_word = gtr_search_bar_get_entire_word (self);
+
+  if (!match_case)
+    cflags = cflags | G_REGEX_CASELESS;
+
+  if (entire_word)
+    {
+      pattern = g_strdup_printf ("^(.+[^\\w]+)?%s([^\\w]+.+)?$", escaped);
+    }
+  else
+    {
+      pattern = g_strdup_printf ("^.*%s.*$", escaped);
+    }
+  regex = g_regex_new (pattern, cflags, G_REGEX_MATCH_DEFAULT, NULL);
+  return regex;
+}

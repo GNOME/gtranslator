@@ -134,11 +134,7 @@ void search_bar_set_last_options (GtrSearchBar * dialog,
 gboolean run_search (GtrView * view,
                     gboolean follow);
 
-gboolean find_in_list (GtrWindow * window,
-                       GList * views,
-                       gboolean wrap_around,
-                       gboolean search_backwards);
-
+gboolean find_in_list (GtrWindow *window, GtrSearchBar *searchbar);
 
 void do_find (GtrSearchBar * dialog,
               GtrWindow * window,
