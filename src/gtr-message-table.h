@@ -70,5 +70,6 @@ void gtr_message_table_sort_by (GtrMessageTable *table,
                                 GtrMessageTableSortBy sort);
 
 GtkSingleSelection * gtr_message_table_get_selection_model (GtrMessageTable *table);
+GListStore *gtr_message_table_get_model (GtrMessageTable *table);
 
 G_END_DECLS

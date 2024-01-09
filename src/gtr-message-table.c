@@ -118,11 +118,8 @@ gtr_message_table_selection_changed (GObject *object,
   msg = gtk_single_selection_get_selected_item (GTK_SINGLE_SELECTION (object));
   if (msg != NULL)
     {
-      g_signal_handlers_block_by_func (priv->tab, showed_message_cb, table);
       gtr_tab_message_go_to (priv->tab, msg, FALSE, GTR_TAB_MOVE_NONE);
-      g_signal_handlers_unblock_by_func (priv->tab, showed_message_cb, table);
     }
-
 }
 
 static void
@@ -475,4 +472,12 @@ gtr_message_table_get_selection_model (GtrMessageTable *table)
 {
   GtrMessageTablePrivate *priv = gtr_message_table_get_instance_private (table);
   return priv->selection;
+}
+
+GListStore *
+gtr_message_table_get_model (GtrMessageTable *table)
+{
+  GtrMessageTablePrivate *priv
+      = gtr_message_table_get_instance_private (table);
+  return priv->store;
 }

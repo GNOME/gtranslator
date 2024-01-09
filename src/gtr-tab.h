@@ -129,6 +129,7 @@ gboolean gtr_tab_go_to_next_fuzzy_or_untrans (GtrTab * tab);
 gboolean gtr_tab_go_to_prev_fuzzy_or_untrans (GtrTab * tab);
 
 void gtr_tab_go_to_number (GtrTab * tab, gint number);
+void gtr_tab_go_to_position (GtrTab *tab, gint position);
 
 void gtr_tab_set_info_bar (GtrTab * tab, GtkWidget * infobar);
 
@@ -147,6 +148,7 @@ void gtr_tab_find_prev (GtrTab * tab);
 void gtr_tab_find_set_replace (GtrTab * tab, gboolean replace);
 
 GtkSingleSelection * gtr_tab_get_selection_model (GtrTab *tab);
+GListStore *gtr_tab_get_model (GtrTab *tab);
 
 /* notebook */
 void gtr_tab_enable_upload (GtrTab *tab, gboolean enable);

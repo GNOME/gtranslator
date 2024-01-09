@@ -1934,6 +1934,32 @@ gtr_tab_go_to_number (GtrTab * tab, gint number)
 }
 
 /**
+ * gtr_tab_go_to_position:
+ * @tab: a #GtrTab
+ * @position: the position in the list to go
+ *
+ * Jumps to the message in the @position in the current message list order.
+ */
+void
+gtr_tab_go_to_position (GtrTab *tab, gint position)
+{
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
+  GtkSingleSelection *model = gtr_message_table_get_selection_model (
+      GTR_MESSAGE_TABLE (priv->message_table));
+  GtrMsg *msg = NULL;
+
+  gtk_single_selection_set_selected (model, position);
+  msg = GTR_MSG (gtk_single_selection_get_selected_item (model));
+
+  g_signal_emit (G_OBJECT (tab), signals[SHOWED_MESSAGE], 0, msg);
+
+  // Grabbing the focus in the GtrView to edit the message
+  // This is done in the idle add to avoid the focus grab from the
+  // message-table
+  g_idle_add ((GSourceFunc)msg_grab_focus, tab);
+}
+
+/**
  * gtr_tab_set_info:
  * @tab: a #GtrTab
  * @info: a string to show
@@ -2012,4 +2038,11 @@ gtr_tab_get_selection_model (GtrTab *tab)
 {
   GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
   return gtr_message_table_get_selection_model (GTR_MESSAGE_TABLE (priv->message_table));
+}
+
+GListStore *
+gtr_tab_get_model (GtrTab *tab)
+{
+  GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
+  return gtr_message_table_get_model (GTR_MESSAGE_TABLE (priv->message_table));
 }

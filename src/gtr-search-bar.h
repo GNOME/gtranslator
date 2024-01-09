@@ -90,4 +90,6 @@ void             gtr_search_bar_find_prev (GtrSearchBar *self);
 
 void             gtr_search_bar_set_found (GtrSearchBar *self, gboolean found);
 
+GRegex *gtr_search_bar_regex (GtrSearchBar *self);
+
 G_END_DECLS
