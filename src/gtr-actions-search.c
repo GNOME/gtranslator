@@ -198,7 +198,6 @@ find_in_selection_model (GtrWindow *window, GtrSearchBar *searchbar,
                          gint current_pos, gboolean search_backwards)
 {
   GtrTab *tab = gtr_window_get_active_tab (window);
-  GListStore *store = gtr_tab_get_model (tab);
   GListModel *model = G_LIST_MODEL (gtr_tab_get_selection_model (tab));
   g_autoptr (GRegex) regex = gtr_search_bar_regex (searchbar);
 
@@ -266,7 +265,6 @@ find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
   gboolean translated_text;
   gboolean match_case;
   gboolean entire_word;
-  gboolean wrap_around;
   guint flags = 0;
   guint old_flags = 0;
 
@@ -283,10 +281,9 @@ find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
   /* Flags */
   match_case = gtr_search_bar_get_match_case (searchbar);
   entire_word = gtr_search_bar_get_entire_word (searchbar);
-  wrap_around = gtr_search_bar_get_wrap_around (searchbar);
 
   if (!original_text && !translated_text)
-    return;
+    return FALSE;
 
   // Search the word in gtr-views widgets
   views = gtr_window_get_all_views (window, original_text, translated_text);
