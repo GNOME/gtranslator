@@ -648,7 +648,7 @@ gtr_window_show_dlteams (GtrWindow *window)
   gtk_widget_set_visible (GTK_WIDGET (priv->header_stack), TRUE);
   gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "dlteams");
   gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "dlteams");
-  gtk_window_set_title (GTK_WINDOW (window), _("Load from Damned Lies"));
+  gtk_window_set_title (GTK_WINDOW (window), "");
   adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_FLAT);
 
   /* Load teams and modules automatically */

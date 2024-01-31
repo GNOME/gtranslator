@@ -26,135 +26,132 @@
 
   <template class="GtrDlTeams" parent="AdwBin">
     <child>
-      <object class="AdwClamp">
-        <property name="maximum-size">900</property>
-        <property name="tightening-threshold">400</property>
+      <object class="AdwStatusPage">
+        <property name="icon_name">view-restore-symbolic</property>
+        <property name="title" translatable="yes">Load from Damned Lies</property>
         <child>
-          <object class="GtkBox" id="main_box">
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
-            <property name="margin_top">12</property>
-            <property name="margin_bottom">12</property>
-            <property name="vexpand">0</property>
-            <property name="valign">center</property>
-            <property name="orientation">vertical</property>
-            <property name="spacing">14</property>
+          <object class="AdwClamp">
             <child>
-              <object class="GtkImage">
-                <property name="pixel_size">48</property>
-                <property name="icon_name">view-restore-symbolic</property>
-              </object>
-            </child>
-
-            <child>
-              <object class="GtkListBox">
-                <property name="selection-mode">none</property>
-                <style>
-                  <class name="boxed-list"/>
-                </style>
+              <object class="GtkBox">
+                <property name="margin_start">12</property>
+                <property name="margin_end">12</property>
+                <property name="margin_top">12</property>
+                <property name="margin_bottom">12</property>
+                <property name="vexpand">0</property>
+                <property name="valign">center</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">14</property>
                 <child>
-                  <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Language</property>
+                  <object class="GtkListBox">
+                    <property name="selection-mode">none</property>
+                    <style>
+                      <class name="boxed-list"/>
+                    </style>
                     <child>
-                      <object class="GtkDropDown" id="langs_combobox">
-                        <property name="name">combo_langs</property>
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Module</property>
-                    <child>
-                      <object class="GtkDropDown" id="modules_combobox">
-                        <property name="name">combo_modules</property>
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Domain</property>
-                    <child>
-                      <object class="GtkDropDown" id="domains_combobox">
-                        <property name="name">combo_domains</property>
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Branch</property>
-                    <child>
-                      <object class="GtkDropDown" id="branches_combobox">
-                        <property name="name">combo_branches</property>
-                        <property name="valign">center</property>
-                        <property name="model">
-                          <object class="GtkStringList" id="branches_model">
-                            <items>
-                            </items>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">Language</property>
+                        <child>
+                          <object class="GtkDropDown" id="langs_combobox">
+                            <property name="name">combo_langs</property>
+                            <property name="valign">center</property>
                           </object>
-                        </property>
+                        </child>
                       </object>
                     </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwSwitchRow" id="reserve_button">
-                    <property name="title" translatable="yes">Reserve for translation</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-
-            <child>
-              <object class="AdwPreferencesGroup">
-                <property name="title" translatable="yes">Info</property>
-                <child>
-                  <object class="AdwActionRow">
-                    <property name="title" translatable="yes">File</property>
                     <child>
-                      <object class="GtkLabel" id="file_label">
-                        <property name="valign">center</property>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">Module</property>
+                        <child>
+                          <object class="GtkDropDown" id="modules_combobox">
+                            <property name="name">combo_modules</property>
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Translation State</property>
                     <child>
-                      <object class="GtkLabel" id="module_state_label">
-                        <property name="valign">center</property>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">Domain</property>
+                        <child>
+                          <object class="GtkDropDown" id="domains_combobox">
+                            <property name="name">combo_domains</property>
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Stats</property>
                     <child>
-                      <object class="GtkLabel" id="stats_label">
-                        <property name="valign">center</property>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">Branch</property>
+                        <child>
+                          <object class="GtkDropDown" id="branches_combobox">
+                            <property name="name">combo_branches</property>
+                            <property name="valign">center</property>
+                            <property name="model">
+                              <object class="GtkStringList" id="branches_model">
+                                <items>
+                                </items>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwSwitchRow" id="reserve_button">
+                        <property name="title" translatable="yes">Reserve for translation</property>
                       </object>
                     </child>
                   </object>
                 </child>
 
-              </object>
-            </child>
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="yes">Info</property>
+                    <child>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">File</property>
+                        <child>
+                          <object class="GtkLabel" id="file_label">
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">Translation State</property>
+                        <child>
+                          <object class="GtkLabel" id="module_state_label">
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">Stats</property>
+                        <child>
+                          <object class="GtkLabel" id="stats_label">
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
 
-            <child>
-              <object class="GtkButton" id="load_button">
-                <property name="label" translatable="yes">Load File</property>
-                <property name="halign">center</property>
-                <style>
-                  <class name="pill"/>
-                  <class name="suggested-action"/>
-                </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="load_button">
+                    <property name="label" translatable="yes">Load File</property>
+                    <property name="halign">center</property>
+                    <style>
+                      <class name="pill"/>
+                      <class name="suggested-action"/>
+                    </style>
+                  </object>
+                </child>
               </object>
             </child>
           </object>

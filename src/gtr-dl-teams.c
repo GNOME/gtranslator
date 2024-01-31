@@ -36,7 +36,6 @@
 typedef struct
 {
   GtkWidget *titlebar;
-  GtkWidget *main_box;
   GtkWidget *open_button;
   GtkWidget *load_button;
   GtkWidget *reserve_button;
@@ -824,7 +823,6 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
                                                "/org/gnome/translator/gtr-dl-teams.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, titlebar);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, main_box);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, file_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, stats_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, module_state_label);
