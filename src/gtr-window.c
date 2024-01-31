@@ -407,8 +407,10 @@ gtr_window_remove_tab (GtrWindow * window)
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   if (priv->active_tab != NULL)
   {
-    if (gtk_stack_get_child_by_name (GTK_STACK (priv->stack), "poeditor"))
-      gtk_stack_remove (GTK_STACK (priv->stack), GTK_WIDGET (priv->active_tab));
+    AdwNavigationPage *page;
+    page = adw_navigation_view_find_page (priv->navigation_view, "poeditor");
+    if (page)
+      adw_navigation_view_remove (priv->navigation_view, page);
 
     priv->active_tab = NULL;
   }
@@ -429,6 +431,7 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   GtrTab *tab;
+  AdwNavigationPage *page;
 
   tab = gtr_tab_new (po, GTK_WINDOW (window));
   priv->active_tab = tab;
@@ -442,9 +445,19 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   gtk_widget_set_visible (GTK_WIDGET (tab), TRUE);
   gtr_window_update_statusbar_message_count(priv->active_tab,NULL, window);
 
-  if (gtk_stack_get_child_by_name (GTK_STACK (priv->stack), "poeditor") == NULL) {
-    gtk_stack_add_named (GTK_STACK (priv->stack), GTK_WIDGET(priv->active_tab), "poeditor");
-  }
+  page = adw_navigation_view_find_page (priv->navigation_view, "poeditor");
+  if (!page)
+    {
+      page = adw_navigation_page_new (GTK_WIDGET (tab), _("Translation Editor"));
+      adw_navigation_page_set_can_pop (page, FALSE);
+      adw_navigation_page_set_tag (page, "poeditor");
+      adw_navigation_view_add (priv->navigation_view, page);
+    }
+  else
+    {
+      adw_navigation_page_set_child (page, GTK_WIDGET (tab));
+      adw_navigation_view_pop_to_tag (priv->navigation_view, "poeditor");
+    }
 
   // code view
   priv->codeview = gtr_code_view_new (window);
@@ -619,7 +632,6 @@ gtr_window_show_projects (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
-  gtk_widget_set_visible (GTK_WIDGET (priv->header_stack), TRUE);
   adw_navigation_view_push_by_tag (priv->navigation_view, "projects");
   gtk_window_set_title (GTK_WINDOW (window), _("Select a Po file"));
   adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_FLAT);
@@ -629,10 +641,11 @@ void
 gtr_window_show_poeditor (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  AdwNavigationPage *page;
 
-  gtk_widget_set_visible (GTK_WIDGET (priv->header_stack), FALSE);
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "poeditor");
-  adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_RAISED);
+  page = adw_navigation_view_get_visible_page (priv->navigation_view);
+  if (g_strcmp0 ("poeditor", adw_navigation_page_get_tag (page)) != 0)
+    adw_navigation_view_push_by_tag (priv->navigation_view, "poeditor");
 }
 
 void
