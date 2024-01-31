@@ -615,8 +615,6 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
 
   if (gtr_open (dest_file, priv->main_window, &error))
     {
-      gtr_window_pop_view (priv->main_window);
-
       GtrTab *tab = gtr_window_get_active_tab (priv->main_window);
       g_info ("The file '%s' has been saved in '%s'", basename, dest_dir);
       gtr_tab_set_info (tab, _("The file has been saved in your Downloads folder"), NULL);

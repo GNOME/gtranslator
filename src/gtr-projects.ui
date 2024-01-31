@@ -35,10 +35,11 @@
   <template class="GtrProjects" parent="AdwNavigationPage">
     <property name="title" translatable="yes">Select a Po file</property>
     <property name="tag">projects</property>
+    <property name="can-pop">False</property>
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
-          <object class="GtkHeaderBar">
+          <object class="AdwHeaderBar">
             <child type="start">
               <object class="GtkButton" id="open_button">
                 <property name="label" translatable="yes">Open…</property>

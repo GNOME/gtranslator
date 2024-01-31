@@ -72,16 +72,9 @@ typedef struct
 
   GtrCodeView *codeview;
 
-  GtkWidget *header_bar;
-
-  GtkWidget *header_stack;
-  GtkWidget *stack;
-
   GtkWidget *projects;
   GtkWidget *dlteams;
   GtkWidget *greeter;
-
-  AdwToolbarView *toolbar_view;
 
   AdwNavigationView *navigation_view;
 
@@ -252,18 +245,12 @@ gtr_window_init (GtrWindow *window)
 
   // project selection
   priv->projects = GTK_WIDGET (gtr_projects_new (window));
-  adw_navigation_view_add (priv->navigation_view, ADW_NAVIGATION_PAGE (priv->projects));
 
   // DL team selection
   priv->dlteams = GTK_WIDGET (gtr_dl_teams_new (window));
-  adw_navigation_view_add (priv->navigation_view, ADW_NAVIGATION_PAGE (priv->dlteams));
 
   // Greeter, First launch view
   priv->greeter = GTK_WIDGET (gtr_greeter_new (window));
-  gtk_stack_add_named (GTK_STACK (priv->stack), priv->greeter, "greeter");
-  gtk_stack_add_named (GTK_STACK (priv->header_stack),
-                       gtr_greeter_get_header (GTR_GREETER (priv->greeter)),
-                       "greeter");
 
   // translation memory
   priv->translation_memory = GTR_TRANSLATION_MEMORY (gtr_gda_new());
@@ -276,10 +263,8 @@ gtr_window_init (GtrWindow *window)
                                                             "max-length-diff"));
   gtr_translation_memory_set_max_items (priv->translation_memory, 10);
 
-  gtr_window_show_projects (window);
-
   sort_action
-      = g_settings_create_action (priv->ui_settings, GTR_SETTINGS_SORT_ORDER);
+    = g_settings_create_action (priv->ui_settings, GTR_SETTINGS_SORT_ORDER);
   g_action_map_add_action (G_ACTION_MAP (window), sort_action);
 }
 
@@ -378,13 +363,7 @@ gtr_window_class_init (GtrWindowClass *klass)
                                                "/org/gnome/translator/gtr-window.ui");
 
   /* Main layout widgets */
-  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass),
-                                                GtrWindow, header_bar);
-  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, stack);
-  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, header_stack);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, toast_overlay);
-  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass),
-                                                GtrWindow, toolbar_view);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass),
                                                 GtrWindow, navigation_view);
 
@@ -442,7 +421,6 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
                           (gtr_window_update_statusbar_message_count),
                           window);
 
-  gtk_widget_set_visible (GTK_WIDGET (tab), TRUE);
   gtr_window_update_statusbar_message_count(priv->active_tab,NULL, window);
 
   page = adw_navigation_view_find_page (priv->navigation_view, "poeditor");
@@ -632,9 +610,8 @@ gtr_window_show_projects (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
-  adw_navigation_view_push_by_tag (priv->navigation_view, "projects");
-  gtk_window_set_title (GTK_WINDOW (window), _("Select a Po file"));
-  adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_FLAT);
+  adw_navigation_view_push (priv->navigation_view,
+                            ADW_NAVIGATION_PAGE (priv->projects));
 }
 
 void
@@ -653,11 +630,17 @@ gtr_window_show_dlteams (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
-  gtk_window_set_title (GTK_WINDOW (window), _("Load from Damned Lies"));
-  adw_navigation_view_push_by_tag (priv->navigation_view, "dlteams");
+  if (!adw_navigation_view_find_page (priv->navigation_view, "dlteams"))
+    {
+      adw_navigation_view_add (priv->navigation_view,
+                               ADW_NAVIGATION_PAGE (priv->dlteams));
 
-  /* Load teams and modules automatically */
-  gtr_dl_teams_load_json (GTR_DL_TEAMS (priv->dlteams));
+      /* Load teams and modules automatically */
+      gtr_dl_teams_load_json (GTR_DL_TEAMS (priv->dlteams));
+    }
+
+  adw_navigation_view_push (priv->navigation_view,
+                            ADW_NAVIGATION_PAGE (priv->dlteams));
 }
 
 void
@@ -665,11 +648,8 @@ gtr_window_show_greeter (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
 
-  gtk_widget_set_visible (GTK_WIDGET (priv->header_stack), TRUE);
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "greeter");
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "greeter");
-  gtk_window_set_title (GTK_WINDOW (window), _("Welcome to Translation Editor"));
-  adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_FLAT);
+  adw_navigation_view_push (priv->navigation_view,
+                            ADW_NAVIGATION_PAGE (priv->greeter));
 }
 
 void
@@ -805,11 +785,4 @@ gtr_window_add_toast_msg (GtrWindow *window,
   AdwToast *toast = adw_toast_new_format ("%s", message);
   adw_toast_set_timeout (toast, 10);
   gtr_window_add_toast (window, toast);
-}
-
-void
-gtr_window_pop_view (GtrWindow *window)
-{
-  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
-  adw_navigation_view_pop (priv->navigation_view);
 }
