@@ -252,10 +252,7 @@ gtr_window_init (GtrWindow *window)
 
   // project selection
   priv->projects = GTK_WIDGET (gtr_projects_new (window));
-  gtk_stack_add_named (GTK_STACK (priv->stack), priv->projects, "projects");
-  gtk_stack_add_named (GTK_STACK (priv->header_stack),
-                       gtr_projects_get_header (GTR_PROJECTS (priv->projects)),
-                       "projects");
+  adw_navigation_view_add (priv->navigation_view, ADW_NAVIGATION_PAGE (priv->projects));
 
   // DL team selection
   priv->dlteams = GTK_WIDGET (gtr_dl_teams_new (window));
@@ -623,8 +620,7 @@ gtr_window_show_projects (GtrWindow *window)
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
   gtk_widget_set_visible (GTK_WIDGET (priv->header_stack), TRUE);
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "projects");
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "projects");
+  adw_navigation_view_push_by_tag (priv->navigation_view, "projects");
   gtk_window_set_title (GTK_WINDOW (window), _("Select a Po file"));
   adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_FLAT);
 }
