@@ -35,8 +35,6 @@
 
 typedef struct
 {
-  GtkWidget *titlebar;
-  GtkWidget *open_button;
   GtkWidget *load_button;
   GtkWidget *reserve_button;
   GtkWidget *stats_label;
@@ -67,10 +65,10 @@ typedef struct
 
 struct _GtrDlTeams
 {
-  AdwBin parent_instance;
+  AdwNavigationPage parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrDlTeams, gtr_dl_teams, ADW_TYPE_BIN)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrDlTeams, gtr_dl_teams, ADW_TYPE_NAVIGATION_PAGE)
 
 typedef struct
 {
@@ -85,7 +83,6 @@ struct _GtrDlTeamsDomain
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrDlTeamsDomain, gtr_dl_teams_domain, G_TYPE_OBJECT)
 
-static void team_add_cb (GtkButton *btn, GtrDlTeams *self);
 static void gtr_dl_teams_save_combo_selected (GtkWidget *widget, GParamSpec *spec, GtrDlTeams *self);
 static void gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self);
 static void gtr_dl_teams_get_file_info (GtrDlTeams *self);
@@ -618,6 +615,8 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
 
   if (gtr_open (dest_file, priv->main_window, &error))
     {
+      gtr_window_pop_view (priv->main_window);
+
       GtrTab *tab = gtr_window_get_active_tab (priv->main_window);
       g_info ("The file '%s' has been saved in '%s'", basename, dest_dir);
       gtr_tab_set_info (tab, _("The file has been saved in your Downloads folder"), NULL);
@@ -822,14 +821,11 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/translator/gtr-dl-teams.ui");
 
-  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, titlebar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, file_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, stats_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, module_state_label);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, load_button);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, reserve_button);
-
-  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, open_button);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, langs_combobox);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, modules_combobox);
@@ -893,11 +889,6 @@ gtr_dl_teams_init (GtrDlTeams *self)
                                        GTK_STRING_FILTER_MATCH_MODE_SUBSTRING);
   gtk_widget_set_sensitive (priv->modules_combobox, FALSE);
 
-  g_signal_connect (priv->open_button,
-                    "clicked",
-                    G_CALLBACK (team_add_cb),
-                    self);
-
   /* Connect "changed" to all combo boxes */
   g_signal_connect (priv->langs_combobox,
                     "notify::selected",
@@ -938,23 +929,6 @@ gtr_dl_teams_new (GtrWindow *window)
 
   priv->main_window = window;
   return self;
-}
-
-GtkWidget *
-gtr_dl_teams_get_header (GtrDlTeams *self)
-{
-  GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  return priv->titlebar;
-}
-
-// static functions
-static void
-team_add_cb (GtkButton   *btn,
-             GtrDlTeams *self)
-{
-  GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  GtrWindow *window = GTR_WINDOW (priv->main_window);
-  gtr_open_file_dialog (window);
 }
 
 // Domains GObject

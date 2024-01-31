@@ -83,6 +83,8 @@ typedef struct
 
   AdwToolbarView *toolbar_view;
 
+  AdwNavigationView *navigation_view;
+
   GtkWidget *toast_overlay;
 
   GtrTab *active_tab;
@@ -257,10 +259,7 @@ gtr_window_init (GtrWindow *window)
 
   // DL team selection
   priv->dlteams = GTK_WIDGET (gtr_dl_teams_new (window));
-  gtk_stack_add_named (GTK_STACK (priv->stack), priv->dlteams, "dlteams");
-  gtk_stack_add_named (GTK_STACK (priv->header_stack),
-                       gtr_dl_teams_get_header (GTR_DL_TEAMS (priv->dlteams)),
-                       "dlteams");
+  adw_navigation_view_add (priv->navigation_view, ADW_NAVIGATION_PAGE (priv->dlteams));
 
   // Greeter, First launch view
   priv->greeter = GTK_WIDGET (gtr_greeter_new (window));
@@ -268,8 +267,6 @@ gtr_window_init (GtrWindow *window)
   gtk_stack_add_named (GTK_STACK (priv->header_stack),
                        gtr_greeter_get_header (GTR_GREETER (priv->greeter)),
                        "greeter");
-
-  gtk_widget_set_visible (priv->stack, TRUE);
 
   // translation memory
   priv->translation_memory = GTR_TRANSLATION_MEMORY (gtr_gda_new());
@@ -391,6 +388,8 @@ gtr_window_class_init (GtrWindowClass *klass)
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, toast_overlay);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass),
                                                 GtrWindow, toolbar_view);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass),
+                                                GtrWindow, navigation_view);
 
   gtk_widget_class_install_action (GTK_WIDGET_CLASS (klass), "win.save", NULL,
                                    on_save_action);
@@ -645,11 +644,8 @@ gtr_window_show_dlteams (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
-  gtk_widget_set_visible (GTK_WIDGET (priv->header_stack), TRUE);
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "dlteams");
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "dlteams");
-  gtk_window_set_title (GTK_WINDOW (window), "");
-  adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_FLAT);
+  gtk_window_set_title (GTK_WINDOW (window), _("Load from Damned Lies"));
+  adw_navigation_view_push_by_tag (priv->navigation_view, "dlteams");
 
   /* Load teams and modules automatically */
   gtr_dl_teams_load_json (GTR_DL_TEAMS (priv->dlteams));
@@ -800,4 +796,11 @@ gtr_window_add_toast_msg (GtrWindow *window,
   AdwToast *toast = adw_toast_new_format ("%s", message);
   adw_toast_set_timeout (toast, 10);
   gtr_window_add_toast (window, toast);
+}
+
+void
+gtr_window_pop_view (GtrWindow *window)
+{
+  GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
+  adw_navigation_view_pop (priv->navigation_view);
 }
