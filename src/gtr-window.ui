@@ -5,21 +5,10 @@
     <property name="default_width">800</property>
     <property name="default_height">600</property>
     <property name="content">
-      <object class="AdwToolbarView" id="toolbar_view">
-        <child type="top">
-          <object class="GtkStack" id="header_stack">
-            <child>
-              <object class="GtkHeaderBar" id="header_bar"/>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="AdwToastOverlay" id="toast_overlay">
-            <child>
-              <object class="GtkStack" id="stack"/>
-            </child>
-          </object>
-        </child>
+      <object class="AdwToastOverlay" id="toast_overlay">
+        <property name="child">
+          <object class="AdwNavigationView" id="navigation_view"/>
+        </property>
       </object>
     </property>
   </template>

@@ -569,6 +569,8 @@ gtr_application_setup_window (GApplication *application,
    */
   if (priv->first_run)
     gtr_window_show_greeter (window);
+  else
+    gtr_window_show_projects (window);
 
   if (file_list != NULL)
     {

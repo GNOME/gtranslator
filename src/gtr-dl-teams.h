@@ -24,10 +24,10 @@
 G_BEGIN_DECLS
 
 #define GTR_TYPE_DL_TEAMS (gtr_dl_teams_get_type())
-G_DECLARE_FINAL_TYPE (GtrDlTeams, gtr_dl_teams, GTR, DL_TEAMS, AdwBin)
+G_DECLARE_FINAL_TYPE (GtrDlTeams, gtr_dl_teams, GTR, DL_TEAMS,
+                      AdwNavigationPage)
 
 GtrDlTeams* gtr_dl_teams_new         ();
-GtkWidget*  gtr_dl_teams_get_header  (GtrDlTeams *self);
 void        gtr_dl_teams_load_json   (GtrDlTeams *self);
 
 // Domains GObject

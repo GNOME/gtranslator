@@ -30,7 +30,6 @@
 
 typedef struct
 {
-  GtkWidget *titlebar;
   GtkWidget *greeter_stack;
 
   GtkWidget *profile_name;
@@ -57,10 +56,10 @@ typedef struct
 
 struct _GtrGreeter
 {
-  AdwBin parent_instance;
+  AdwNavigationPage parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrGreeter, gtr_greeter, ADW_TYPE_BIN)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrGreeter, gtr_greeter, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
 add_profile (GtrGreeter *self)
@@ -173,7 +172,6 @@ gtr_greeter_class_init (GtrGreeterClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/translator/gtr-greeter.ui");
 
-  gtk_widget_class_bind_template_child_private (widget_class, GtrGreeter, titlebar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrGreeter, greeter_stack);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrGreeter, back_button);
@@ -224,11 +222,4 @@ gtr_greeter_new (GtrWindow *window)
 
   priv->main_window = window;
   return self;
-}
-
-GtkWidget *
-gtr_greeter_get_header (GtrGreeter *self)
-{
-  GtrGreeterPrivate *priv = gtr_greeter_get_instance_private (self);
-  return priv->titlebar;
 }

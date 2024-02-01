@@ -27,7 +27,6 @@
 
 typedef struct
 {
-  GtkWidget *titlebar;
   GtkWidget *open_button;
   GtkWidget *dl_button;
 
@@ -36,11 +35,11 @@ typedef struct
 
 struct _GtrProjects
 {
-  AdwBin parent_instance;
+  AdwNavigationPage parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrProjects, gtr_projects, ADW_TYPE_BIN)
-
+G_DEFINE_TYPE_WITH_PRIVATE (GtrProjects, gtr_projects,
+                            ADW_TYPE_NAVIGATION_PAGE)
 
 static void project_add_cb (GtkButton *btn, GtrProjects *self);
 static void switch_to_dl (GtkButton *btn, GtrProjects *self);
@@ -69,7 +68,6 @@ gtr_projects_class_init (GtrProjectsClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/translator/gtr-projects.ui");
 
-  gtk_widget_class_bind_template_child_private (widget_class, GtrProjects, titlebar);
   gtk_widget_class_bind_template_child_private (widget_class, GtrProjects, open_button);
   gtk_widget_class_bind_template_child_private (widget_class, GtrProjects, dl_button);
 }
@@ -101,13 +99,6 @@ gtr_projects_new (GtrWindow *window) {
 
   priv->main_window = window;
   return self;
-}
-
-GtkWidget *
-gtr_projects_get_header (GtrProjects *self)
-{
-  GtrProjectsPrivate *priv = gtr_projects_get_instance_private (self);
-  return priv->titlebar;
 }
 
 // static functions

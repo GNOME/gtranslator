@@ -72,16 +72,11 @@ typedef struct
 
   GtrCodeView *codeview;
 
-  GtkWidget *header_bar;
-
-  GtkWidget *header_stack;
-  GtkWidget *stack;
-
   GtkWidget *projects;
   GtkWidget *dlteams;
   GtkWidget *greeter;
 
-  AdwToolbarView *toolbar_view;
+  AdwNavigationView *navigation_view;
 
   GtkWidget *toast_overlay;
 
@@ -250,26 +245,12 @@ gtr_window_init (GtrWindow *window)
 
   // project selection
   priv->projects = GTK_WIDGET (gtr_projects_new (window));
-  gtk_stack_add_named (GTK_STACK (priv->stack), priv->projects, "projects");
-  gtk_stack_add_named (GTK_STACK (priv->header_stack),
-                       gtr_projects_get_header (GTR_PROJECTS (priv->projects)),
-                       "projects");
 
   // DL team selection
   priv->dlteams = GTK_WIDGET (gtr_dl_teams_new (window));
-  gtk_stack_add_named (GTK_STACK (priv->stack), priv->dlteams, "dlteams");
-  gtk_stack_add_named (GTK_STACK (priv->header_stack),
-                       gtr_dl_teams_get_header (GTR_DL_TEAMS (priv->dlteams)),
-                       "dlteams");
 
   // Greeter, First launch view
   priv->greeter = GTK_WIDGET (gtr_greeter_new (window));
-  gtk_stack_add_named (GTK_STACK (priv->stack), priv->greeter, "greeter");
-  gtk_stack_add_named (GTK_STACK (priv->header_stack),
-                       gtr_greeter_get_header (GTR_GREETER (priv->greeter)),
-                       "greeter");
-
-  gtk_widget_set_visible (priv->stack, TRUE);
 
   // translation memory
   priv->translation_memory = GTR_TRANSLATION_MEMORY (gtr_gda_new());
@@ -282,10 +263,8 @@ gtr_window_init (GtrWindow *window)
                                                             "max-length-diff"));
   gtr_translation_memory_set_max_items (priv->translation_memory, 10);
 
-  gtr_window_show_projects (window);
-
   sort_action
-      = g_settings_create_action (priv->ui_settings, GTR_SETTINGS_SORT_ORDER);
+    = g_settings_create_action (priv->ui_settings, GTR_SETTINGS_SORT_ORDER);
   g_action_map_add_action (G_ACTION_MAP (window), sort_action);
 }
 
@@ -384,13 +363,9 @@ gtr_window_class_init (GtrWindowClass *klass)
                                                "/org/gnome/translator/gtr-window.ui");
 
   /* Main layout widgets */
-  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass),
-                                                GtrWindow, header_bar);
-  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, stack);
-  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, header_stack);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, toast_overlay);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass),
-                                                GtrWindow, toolbar_view);
+                                                GtrWindow, navigation_view);
 
   gtk_widget_class_install_action (GTK_WIDGET_CLASS (klass), "win.save", NULL,
                                    on_save_action);
@@ -411,8 +386,10 @@ gtr_window_remove_tab (GtrWindow * window)
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   if (priv->active_tab != NULL)
   {
-    if (gtk_stack_get_child_by_name (GTK_STACK (priv->stack), "poeditor"))
-      gtk_stack_remove (GTK_STACK (priv->stack), GTK_WIDGET (priv->active_tab));
+    AdwNavigationPage *page;
+    page = adw_navigation_view_find_page (priv->navigation_view, "poeditor");
+    if (page)
+      adw_navigation_view_remove (priv->navigation_view, page);
 
     priv->active_tab = NULL;
   }
@@ -433,6 +410,7 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   GtrTab *tab;
+  AdwNavigationPage *page;
 
   tab = gtr_tab_new (po, GTK_WINDOW (window));
   priv->active_tab = tab;
@@ -443,12 +421,21 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
                           (gtr_window_update_statusbar_message_count),
                           window);
 
-  gtk_widget_set_visible (GTK_WIDGET (tab), TRUE);
   gtr_window_update_statusbar_message_count(priv->active_tab,NULL, window);
 
-  if (gtk_stack_get_child_by_name (GTK_STACK (priv->stack), "poeditor") == NULL) {
-    gtk_stack_add_named (GTK_STACK (priv->stack), GTK_WIDGET(priv->active_tab), "poeditor");
-  }
+  page = adw_navigation_view_find_page (priv->navigation_view, "poeditor");
+  if (!page)
+    {
+      page = adw_navigation_page_new (GTK_WIDGET (tab), _("Translation Editor"));
+      adw_navigation_page_set_can_pop (page, FALSE);
+      adw_navigation_page_set_tag (page, "poeditor");
+      adw_navigation_view_add (priv->navigation_view, page);
+    }
+  else
+    {
+      adw_navigation_page_set_child (page, GTK_WIDGET (tab));
+      adw_navigation_view_pop_to_tag (priv->navigation_view, "poeditor");
+    }
 
   // code view
   priv->codeview = gtr_code_view_new (window);
@@ -623,21 +610,19 @@ gtr_window_show_projects (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
-  gtk_widget_set_visible (GTK_WIDGET (priv->header_stack), TRUE);
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "projects");
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "projects");
-  gtk_window_set_title (GTK_WINDOW (window), _("Select a Po file"));
-  adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_FLAT);
+  adw_navigation_view_push (priv->navigation_view,
+                            ADW_NAVIGATION_PAGE (priv->projects));
 }
 
 void
 gtr_window_show_poeditor (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
+  AdwNavigationPage *page;
 
-  gtk_widget_set_visible (GTK_WIDGET (priv->header_stack), FALSE);
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "poeditor");
-  adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_RAISED);
+  page = adw_navigation_view_get_visible_page (priv->navigation_view);
+  if (g_strcmp0 ("poeditor", adw_navigation_page_get_tag (page)) != 0)
+    adw_navigation_view_push_by_tag (priv->navigation_view, "poeditor");
 }
 
 void
@@ -645,14 +630,17 @@ gtr_window_show_dlteams (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
-  gtk_widget_set_visible (GTK_WIDGET (priv->header_stack), TRUE);
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "dlteams");
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "dlteams");
-  gtk_window_set_title (GTK_WINDOW (window), _("Load from Damned Lies"));
-  adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_FLAT);
+  if (!adw_navigation_view_find_page (priv->navigation_view, "dlteams"))
+    {
+      adw_navigation_view_add (priv->navigation_view,
+                               ADW_NAVIGATION_PAGE (priv->dlteams));
 
-  /* Load teams and modules automatically */
-  gtr_dl_teams_load_json (GTR_DL_TEAMS (priv->dlteams));
+      /* Load teams and modules automatically */
+      gtr_dl_teams_load_json (GTR_DL_TEAMS (priv->dlteams));
+    }
+
+  adw_navigation_view_push (priv->navigation_view,
+                            ADW_NAVIGATION_PAGE (priv->dlteams));
 }
 
 void
@@ -660,11 +648,8 @@ gtr_window_show_greeter (GtrWindow *window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
 
-  gtk_widget_set_visible (GTK_WIDGET (priv->header_stack), TRUE);
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->header_stack), "greeter");
-  gtk_stack_set_visible_child_name (GTK_STACK (priv->stack), "greeter");
-  gtk_window_set_title (GTK_WINDOW (window), _("Welcome to Translation Editor"));
-  adw_toolbar_view_set_top_bar_style (priv->toolbar_view, ADW_TOOLBAR_FLAT);
+  adw_navigation_view_push (priv->navigation_view,
+                            ADW_NAVIGATION_PAGE (priv->greeter));
 }
 
 void
