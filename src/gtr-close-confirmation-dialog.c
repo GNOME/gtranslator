@@ -60,12 +60,12 @@ enum
 
 struct _GtrCloseConfirmationDialog
 {
-  AdwMessageDialog parent;
+  AdwAlertDialog parent;
 };
 
 struct _GtrCloseConfirmationDialogClass
 {
-  AdwMessageDialogClass parent_class;
+  AdwAlertDialogClass parent_class;
 };
 
 typedef struct
@@ -83,7 +83,7 @@ typedef struct
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrCloseConfirmationDialog,
                             gtr_close_confirmation_dialog,
-                            ADW_TYPE_MESSAGE_DIALOG)
+                            ADW_TYPE_ALERT_DIALOG)
 
 static void set_unsaved_document (GtrCloseConfirmationDialog *dlg,
                                   const GList * list);
@@ -116,30 +116,27 @@ static void
 set_logout_mode (GtrCloseConfirmationDialog * dlg, gboolean logout_mode)
 {
 
-  adw_message_dialog_set_close_response (ADW_MESSAGE_DIALOG (dlg), "cancel");
-  adw_message_dialog_add_responses (
-    ADW_MESSAGE_DIALOG (dlg),
+  adw_alert_dialog_set_close_response (ADW_ALERT_DIALOG (dlg), "cancel");
+  adw_alert_dialog_add_responses (
+    ADW_ALERT_DIALOG (dlg),
     "cancel", _("_Cancel"),
     "no", _("Close _Without Saving"),
     "yes", _("_Save"),
     NULL
   );
 
-  adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dlg),
+  adw_alert_dialog_set_response_appearance (ADW_ALERT_DIALOG (dlg),
     "no", ADW_RESPONSE_DESTRUCTIVE);
-  adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dlg),
+  adw_alert_dialog_set_response_appearance (ADW_ALERT_DIALOG (dlg),
     "yes", ADW_RESPONSE_SUGGESTED);
-  adw_message_dialog_set_default_response (ADW_MESSAGE_DIALOG (dlg), "yes");
+  adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dlg), "yes");
 }
 
 static void
 gtr_close_confirmation_dialog_init (GtrCloseConfirmationDialog * dlg)
 {
-  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
-  gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
-
   g_signal_connect (dlg, "response", G_CALLBACK (response_cb), NULL);
-  adw_message_dialog_set_body_use_markup (ADW_MESSAGE_DIALOG (dlg), TRUE);
+  adw_alert_dialog_set_body_use_markup (ADW_ALERT_DIALOG (dlg), TRUE);
 }
 
 static void
@@ -249,8 +246,7 @@ GList *gtr_close_confirmation_dialog_get_selected_documents
 }
 
 GtkWidget *
-gtr_close_confirmation_dialog_new (GtkWindow * parent,
-                                   GList * unsaved_documents,
+gtr_close_confirmation_dialog_new (GList * unsaved_documents,
                                    gboolean logout_mode)
 {
   GtkWidget *dlg;
@@ -260,16 +256,11 @@ gtr_close_confirmation_dialog_new (GtkWindow * parent,
                                   "unsaved_documents", unsaved_documents,
                                   "logout_mode", logout_mode, NULL));
   g_return_val_if_fail (dlg != NULL, NULL);
-
-  if (parent != NULL)
-    gtk_window_set_transient_for (GTK_WINDOW (dlg), parent);
-
   return dlg;
 }
 
 GtkWidget *
-gtr_close_confirmation_dialog_new_single (GtkWindow * parent,
-                                          GtrPo * doc, gboolean logout_mode)
+gtr_close_confirmation_dialog_new_single (GtrPo * doc, gboolean logout_mode)
 {
   GtkWidget *dlg;
   GList *unsaved_documents;
@@ -277,8 +268,7 @@ gtr_close_confirmation_dialog_new_single (GtkWindow * parent,
 
   unsaved_documents = g_list_prepend (NULL, doc);
 
-  dlg = gtr_close_confirmation_dialog_new (parent,
-                                           unsaved_documents, logout_mode);
+  dlg = gtr_close_confirmation_dialog_new (unsaved_documents, logout_mode);
 
   g_list_free (unsaved_documents);
 
@@ -301,7 +291,7 @@ build_single_doc_dialog (GtrCloseConfirmationDialog * dlg)
   location = gtr_po_get_location (doc);
   doc_name = g_file_get_basename (location);
 
-  adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dlg),
+  adw_alert_dialog_format_body (ADW_ALERT_DIALOG (dlg),
     _("Save the changes to document “%s” before closing?"), doc_name);
 }
 
@@ -330,7 +320,7 @@ build_multiple_docs_dialog (GtrCloseConfirmationDialog * dlg)
                         g_list_length (priv->unsaved_documents)),
                        g_list_length (priv->unsaved_documents));
 
-  adw_message_dialog_set_body (ADW_MESSAGE_DIALOG (dlg), str);
+  adw_alert_dialog_set_body (ADW_ALERT_DIALOG (dlg), str);
 }
 
 static void
@@ -345,7 +335,7 @@ set_unsaved_document (GtrCloseConfirmationDialog * dlg, const GList * list)
 
   priv->unsaved_documents = g_list_copy ((GList *) list);
 
-  adw_message_dialog_set_heading (ADW_MESSAGE_DIALOG (dlg), _("Unsaved Changes"));
+  adw_alert_dialog_set_heading (ADW_ALERT_DIALOG (dlg), _("Unsaved Changes"));
   if (GET_MODE (priv) == SINGLE_DOC_MODE)
     {
       build_single_doc_dialog (dlg);

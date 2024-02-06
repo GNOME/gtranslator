@@ -324,16 +324,15 @@ gtr_window_save_current_tab (GtrWindow *self)
 
   if (error)
     {
-      AdwMessageDialog *dialog;
-      dialog = ADW_MESSAGE_DIALOG (adw_message_dialog_new (
-          GTK_WINDOW (self), _("Could not Save"), NULL));
-      adw_message_dialog_format_body (dialog, "%s", error->message);
-      adw_message_dialog_add_response (dialog, "ok", _("OK"));
-      adw_message_dialog_set_default_response (dialog, "ok");
-      adw_message_dialog_set_close_response (dialog, "ok");
-      adw_message_dialog_choose (
-          dialog, NULL, (GAsyncReadyCallback)adw_message_dialog_choose_finish,
-          NULL);
+      AdwAlertDialog *dialog;
+      dialog = ADW_ALERT_DIALOG (adw_alert_dialog_new (
+          _("Could not Save"), error->message));
+      adw_alert_dialog_add_response (dialog, "ok", _("OK"));
+      adw_alert_dialog_set_default_response (dialog, "ok");
+      adw_alert_dialog_set_close_response (dialog, "ok");
+      adw_alert_dialog_choose (
+          dialog, GTK_WIDGET (self), NULL,
+          (GAsyncReadyCallback)adw_alert_dialog_choose_finish, NULL);
       return;
     }
 

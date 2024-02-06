@@ -334,7 +334,7 @@ on_profile_dialog_response_cb (GtrProfileDialog     *profile_dialog,
     }
 
   g_object_unref (prof_manager);
-  gtk_window_destroy (GTK_WINDOW (profile_dialog));
+  adw_dialog_close (ADW_DIALOG (profile_dialog));
 }
 
 static void
@@ -395,7 +395,7 @@ delete_confirm_dialog_cb (GtkWidget *dialog, char *response, GtrPreferencesDialo
   GtrProfile *profile = priv->editing_profile;
 
   priv->editing_profile = NULL;
-  gtk_window_destroy (GTK_WINDOW (dialog));
+  adw_dialog_close (ADW_DIALOG (dialog));
 
   if (g_strcmp0 (response, "cancel") == 0)
     return;
@@ -428,36 +428,32 @@ delete_button_clicked (GtkWidget            *widget,
     {
       if (active_profile == profile)
         {
-          GtkWidget *dialog = adw_message_dialog_new (
-            GTK_WINDOW (dlg),
+          AdwDialog *dialog = adw_alert_dialog_new (
             _("Impossible to remove the active profile"),
             _("Another profile should be selected as active before")
           );
 
-          adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
-                                            "ok",  _("_Ok"),
-                                            NULL);
+          adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("_Ok"));
+          adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
 
-          g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-          gtk_window_present (GTK_WINDOW (dialog));
+          adw_dialog_present (dialog, GTK_WIDGET (dlg));
         }
       else
         {
-          GtkWidget *dialog = adw_message_dialog_new (
-            GTK_WINDOW (dlg),
+          AdwDialog *dialog = adw_alert_dialog_new (
             _("Are you sure you want to delete this profile?"),
             NULL
           );
 
-          adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
-                                            "cancel",  _("_Cancel"),
-                                            "delete", _("_Delete"),
-                                            NULL);
+          adw_alert_dialog_add_responses (ADW_ALERT_DIALOG (dialog),
+                                          "cancel",  _("_Cancel"),
+                                          "delete", _("_Delete"),
+                                          NULL);
 
           priv->editing_profile = profile;
-          g_signal_connect (GTK_DIALOG (dialog), "response",
+          g_signal_connect (dialog, "response",
                             G_CALLBACK (delete_confirm_dialog_cb), dlg);
-          gtk_window_present (GTK_WINDOW (dialog));
+          adw_dialog_present (dialog, GTK_WIDGET (dlg));
         }
     }
 

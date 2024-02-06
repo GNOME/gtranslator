@@ -171,7 +171,7 @@ gtr_po_parse_files_from_dialog (GObject *source, GAsyncResult *res, void *user_d
 }
 
 static void
-handle_save_current_dialog_response (AdwMessageDialog *dialog,
+handle_save_current_dialog_response (AdwAlertDialog *dialog,
                                      char *response,
                                      void (*callback)(GtrWindow *))
 {
@@ -184,7 +184,7 @@ handle_save_current_dialog_response (AdwMessageDialog *dialog,
   if (g_strcmp0 ("cancel", response) != 0)
     callback (window);
 
-  gtk_window_destroy (GTK_WINDOW (dialog));
+  adw_dialog_force_close (ADW_DIALOG (dialog));
 }
 
 void
@@ -193,7 +193,7 @@ gtr_want_to_save_current_dialog (GtrWindow * window, void (*callback)(GtrWindow 
   GtrTab *tab;
   GtrPo *po;
 
-  GtkWidget *dialog;
+  AdwDialog *dialog;
   g_autoptr (GFile) location = NULL;
   g_autofree gchar *basename = NULL;
 
@@ -202,27 +202,26 @@ gtr_want_to_save_current_dialog (GtrWindow * window, void (*callback)(GtrWindow 
   location = gtr_po_get_location (po);
   basename = g_file_get_basename (location);
 
-  dialog = adw_message_dialog_new (GTK_WINDOW (window), _("Unsaved Changes"), NULL);
+  dialog = adw_alert_dialog_new (_("Unsaved Changes"), NULL);
+  adw_alert_dialog_set_body_use_markup (ADW_ALERT_DIALOG (dialog), TRUE);
 
-  adw_message_dialog_set_body_use_markup (ADW_MESSAGE_DIALOG (dialog), TRUE);
+  adw_alert_dialog_format_body (ADW_ALERT_DIALOG (dialog),
+                                _("Do you want to write all the changes done to %s?"),
+                                basename);
 
-  adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dialog),
-                                  _("Do you want to write all the changes done to %s?"),
-                                  basename);
-
-  adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
-                                    "cancel", _("Cancel"),
-                                    "no", _("Continue Without Saving"),
-                                    "save", _("Save and Open"),
-                                    NULL);
-  adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog),
+  adw_alert_dialog_add_responses (ADW_ALERT_DIALOG (dialog),
+                                  "cancel", _("Cancel"),
+                                  "no", _("Continue Without Saving"),
+                                  "save", _("Save and Open"),
+                                  NULL);
+  adw_alert_dialog_set_response_appearance (ADW_ALERT_DIALOG (dialog),
     "no", ADW_RESPONSE_DESTRUCTIVE);
-  adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog),
+  adw_alert_dialog_set_response_appearance (ADW_ALERT_DIALOG (dialog),
     "save", ADW_RESPONSE_SUGGESTED);
-  adw_message_dialog_set_default_response (ADW_MESSAGE_DIALOG (dialog), "save");
+  adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "save");
 
   g_signal_connect (dialog, "response", G_CALLBACK (handle_save_current_dialog_response), callback);
-  gtk_window_present (GTK_WINDOW (dialog));
+  adw_dialog_present (dialog, GTK_WIDGET (window));
 }
 
 /*
@@ -582,7 +581,7 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog *dlg,
       selected_documents = gtr_close_confirmation_dialog_get_selected_documents (dlg);
       if (selected_documents == NULL)
         {
-          gtk_window_destroy (GTK_WINDOW (dlg));
+          adw_dialog_close (ADW_DIALOG (dlg));
           close_all_tabs (window);
           return;
         }
@@ -594,12 +593,12 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog *dlg,
     }
   else if (g_strcmp0 (response, "no") == 0)
     {
-      gtk_window_destroy (GTK_WINDOW (dlg));
+      adw_dialog_close (ADW_DIALOG (dlg));
       close_all_tabs (window);
       return;
     }
 
-  gtk_window_destroy (GTK_WINDOW (dlg));
+  adw_dialog_close (ADW_DIALOG (dlg));
 }
 
 void
@@ -610,8 +609,7 @@ gtr_close_tab (GtrTab * tab, GtrWindow * window)
       GtkWidget *dlg;
 
       dlg =
-        gtr_close_confirmation_dialog_new_single (GTK_WINDOW (window),
-                                                  gtr_tab_get_po
+        gtr_close_confirmation_dialog_new_single (gtr_tab_get_po
                                                   (tab), FALSE);
 
       g_signal_connect (dlg,
@@ -619,7 +617,7 @@ gtr_close_tab (GtrTab * tab, GtrWindow * window)
                         G_CALLBACK
                         (close_confirmation_dialog_response_handler), window);
 
-      gtk_window_present (GTK_WINDOW (dlg));
+      adw_dialog_present (ADW_DIALOG (dlg), GTK_WIDGET (window));
     }
   else
     //_gtr_window_close_tab (window, tab);
@@ -679,8 +677,7 @@ close_all_documents (GtrWindow * window, gboolean logout_mode)
     {
       GtkWidget *dlg;
 
-      dlg = gtr_close_confirmation_dialog_new (GTK_WINDOW (window),
-                                               list, logout_mode);
+      dlg = gtr_close_confirmation_dialog_new (list, logout_mode);
 
       g_signal_connect (dlg,
                         "response",
@@ -689,7 +686,7 @@ close_all_documents (GtrWindow * window, gboolean logout_mode)
 
       g_list_free (list);
 
-      gtk_window_present (GTK_WINDOW (dlg));
+      adw_dialog_present (ADW_DIALOG (dlg), GTK_WIDGET (window));
     }
   else
     {
