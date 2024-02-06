@@ -82,11 +82,11 @@ typedef struct
 
 struct _GtrPreferencesDialog
 {
-  AdwPreferencesWindow parent_instance;
+  AdwPreferencesDialog parent_instance;
 };
 
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrPreferencesDialog, gtr_preferences_dialog, ADW_TYPE_PREFERENCES_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrPreferencesDialog, gtr_preferences_dialog, ADW_TYPE_PREFERENCES_DIALOG)
 
 static void fill_profile_listbox (GtrPreferencesDialog *dlg);
 
@@ -588,7 +588,5 @@ gtr_show_preferences_dialog (GtrWindow * window)
   dlg = GTK_WIDGET (g_object_new (GTR_TYPE_PREFERENCES_DIALOG,
                                    NULL));
 
-  gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
-  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
-  gtk_window_present (GTK_WINDOW (dlg));
+  adw_dialog_present (ADW_DIALOG (dlg), GTK_WIDGET (window));
 }

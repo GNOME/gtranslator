@@ -64,10 +64,10 @@ typedef struct
 
 struct _GtrHeaderDialog
 {
-  AdwPreferencesWindow parent_instance;
+  AdwPreferencesDialog parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrHeaderDialog, gtr_header_dialog, ADW_TYPE_PREFERENCES_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrHeaderDialog, gtr_header_dialog, ADW_TYPE_PREFERENCES_DIALOG)
 
 static void
 gtr_header_dialog_dispose (GObject * object)
@@ -342,9 +342,7 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
 
   priv->settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
 
-  gtk_window_set_title (GTK_WINDOW (dlg), _("Edit Header"));
-  gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
-  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
+  adw_dialog_set_title (ADW_DIALOG (dlg), _("Edit Header"));
 
   gtk_widget_init_template (GTK_WIDGET (dlg));
 
@@ -387,8 +385,6 @@ set_default_values (GtrHeaderDialog * dlg, GtrWindow * window)
   tab = gtr_window_get_active_tab (window);
   priv->po = gtr_tab_get_po (tab);
   gtr_header_dialog_fill_from_header (GTR_HEADER_DIALOG (dlg));
-
-  gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
 
   /*Connect signals */
   g_signal_connect (priv->take_my_options, "notify::active",
@@ -446,7 +442,5 @@ gtr_show_header_dialog (GtrWindow * window)
   dlg = GTK_WIDGET (g_object_new (GTR_TYPE_HEADER_DIALOG, NULL));
   set_default_values (GTR_HEADER_DIALOG (dlg), window);
 
-  gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
-  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
-  gtk_window_present (GTK_WINDOW (dlg));
+  adw_dialog_present (ADW_DIALOG (dlg), GTK_WIDGET (window));
 }
