@@ -49,15 +49,15 @@ static void load_file_list (GtrWindow * window, const GSList * uris);
 static GList * get_modified_documents (GtrWindow * window);
 
 typedef struct {
-  SoupMessage *msg;
-  GtkWidget   *dialog;
+  SoupMessage     *msg;
+  GtrUploadDialog *dialog;
 } UserData;
 
 static void
 user_data_free (UserData *ud)
 {
   g_object_unref (ud->msg);
-  gtk_window_destroy (GTK_WINDOW (ud->dialog));
+  adw_dialog_close (ADW_DIALOG (ud->dialog));
 
   g_free (ud);
 }
@@ -307,8 +307,8 @@ _upload_file_callback (GObject      *object,
   g_autoptr (GtkAlertDialog) dialog = NULL;
   GtrTab *active_tab;
 
-  GtkWidget *upload_dialog = ud->dialog;
-  GtkWidget *window = gtr_upload_dialog_get_parent (GTR_UPLOAD_DIALOG (upload_dialog));
+  GtrUploadDialog *upload_dialog = ud->dialog;
+  GtkWidget *window = gtr_upload_dialog_get_parent (upload_dialog);
   SoupSession *session = SOUP_SESSION (object);
   SoupStatus status_code = soup_message_get_status (ud->msg);
 
@@ -452,7 +452,7 @@ gtr_upload_file (GtkWidget *upload_dialog,
 
   UserData *ud;
   ud = g_new0 (UserData, 1);
-  ud->dialog = upload_dialog;
+  ud->dialog = GTR_UPLOAD_DIALOG (upload_dialog);
   ud->msg = msg;
   soup_session_send_async (session, msg, G_PRIORITY_DEFAULT, NULL, _upload_file_callback, ud);
 }
@@ -471,7 +471,7 @@ gtr_upload_file_dialog (GtrWindow * window)
                    G_CALLBACK (gtr_upload_file),
                    window);
 
-  gtk_window_present (GTK_WINDOW (dialog));
+  adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (window));
 }
 
 /*

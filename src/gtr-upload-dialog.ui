@@ -2,15 +2,14 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.0"/>
-  <template class="GtrUploadDialog" parent="AdwWindow">
-    <property name="modal">True</property>
-    <property name="destroy-with-parent">True</property>
+  <template class="GtrUploadDialog" parent="AdwDialog">
     <property name="title" translatable="yes">Upload to Damned Lies</property>
-    <property name="deletable">False</property>
-    <property name="content">
+    <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
-          <object class="GtkHeaderBar" id="titlebar">
+          <object class="AdwHeaderBar" id="titlebar">
+            <property name="show-end-title-buttons">False</property>
+            <property name="show-start-title-buttons">False</property>
             <child type="start">
               <object class="GtkButton" id="cancel">
                 <property name="label" translatable="yes">Cancel</property>
