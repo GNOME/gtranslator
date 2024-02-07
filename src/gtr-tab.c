@@ -341,11 +341,13 @@ gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
 
   if (message_error != NULL)
     {
-      g_autoptr (GtkAlertDialog) dialog = gtk_alert_dialog_new (_("There is an error in the message:"));
+      AdwDialog *dialog = adw_alert_dialog_new (
+        _("There is an error in the message"), message_error);
 
       gtr_tab_block_movement (tab);
-      gtk_alert_dialog_set_detail (GTK_ALERT_DIALOG (dialog), message_error);
-      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), gtr_tab_get_window (tab));
+      adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+      adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
+      adw_dialog_present (dialog, GTK_WIDGET (tab));
       g_free (message_error);
     }
   else

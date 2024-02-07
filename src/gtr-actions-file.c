@@ -281,10 +281,10 @@ save_dialog_response_cb (GObject *source, GAsyncResult *res, void *user_data)
 
       if (error)
         {
-          g_autoptr (GtkAlertDialog) dialog = NULL;
-          dialog = gtk_alert_dialog_new ("%s", error->message);
-          gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog),
-                                 GTK_WINDOW (window));
+          AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
+          adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+          adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
+          adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (window));
           return;
         }
 
@@ -304,7 +304,7 @@ _upload_file_callback (GObject      *object,
 {
   UserData *ud = user_data;
   g_autoptr(GInputStream) stream = NULL;
-  g_autoptr (GtkAlertDialog) dialog = NULL;
+  AdwDialog *dialog = NULL;
   GtrTab *active_tab;
 
   GtrUploadDialog *upload_dialog = ud->dialog;
@@ -322,7 +322,7 @@ _upload_file_callback (GObject      *object,
     {
       if (status_code == SOUP_STATUS_FORBIDDEN)
         {
-          dialog = gtk_alert_dialog_new (_("This file has already been uploaded"));
+          dialog = adw_alert_dialog_new (_("This file has already been uploaded"), NULL);
           gtr_tab_enable_upload (active_tab, FALSE);
           goto end;
         }
@@ -334,9 +334,10 @@ _upload_file_callback (GObject      *object,
       else
         message = g_strdup (soup_status_get_phrase (status_code));
 
-      dialog = gtk_alert_dialog_new (
+      dialog = adw_alert_dialog_new (_("Couldn't upload the file"), NULL);
+      adw_alert_dialog_format_body_markup (ADW_ALERT_DIALOG (dialog),
         _(
-          "An error occurred while uploading the file: %s\n"
+          "%s\n"
           "Maybe you've not configured your <i>l10n.gnome.org</i> "
           "<b>token</b> correctly in your profile or you don't have "
           "permissions to upload this module."
@@ -345,11 +346,13 @@ _upload_file_callback (GObject      *object,
       goto end;
     }
 
-  dialog = gtk_alert_dialog_new (_("The file has been uploaded!"));
+  dialog = adw_alert_dialog_new (_("The file has been uploaded!"), NULL);
+  adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+  adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
   gtr_tab_enable_upload (active_tab, FALSE);
 
 end:
-  gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+  adw_dialog_present (dialog, GTK_WIDGET (window));
 
   user_data_free (ud);
 }
@@ -517,9 +520,10 @@ load_file_list (GtrWindow * window, const GSList * locations)
    */
   if (error != NULL)
     {
-      g_autoptr (GtkAlertDialog) dialog
-          = gtk_alert_dialog_new ("%s", error->message);
-      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+      AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
+      adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+      adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
+      adw_dialog_present (dialog, GTK_WIDGET (window));
     }
 
   g_slist_free ((GSList *) locations_to_load);
@@ -559,9 +563,10 @@ save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
 
   if(error)
     {
-      g_autoptr (GtkAlertDialog) dialog;
-      dialog = gtk_alert_dialog_new ("%s", error->message);
-      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+      AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
+      adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+      adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
+      adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (window));
       return;
     }
 
@@ -726,10 +731,10 @@ _gtr_actions_file_save_all (GtrWindow * window)
 
       if (error)
         {
-          g_autoptr (GtkAlertDialog) dialog = NULL;
-          dialog = gtk_alert_dialog_new ("%s", error->message);
-          gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog),
-                                 GTK_WINDOW (window));
+          AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
+          adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+          adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
+          adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (window));
 
           return;
         }

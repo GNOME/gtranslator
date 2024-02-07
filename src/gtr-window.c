@@ -155,9 +155,10 @@ drag_data_received_cb (GtkDropTarget * drop_target,
   gtr_open (g_value_get_object (value), window, &error);
   if (error != NULL)
     {
-      g_autoptr (GtkAlertDialog) dialog = NULL;
-      dialog = gtk_alert_dialog_new ("%s", error->message);
-      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+      AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
+      adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+      adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
+      adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (window));
     }
   return TRUE;
 }

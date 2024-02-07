@@ -171,7 +171,7 @@ gtr_viewer_class_init (GtrViewerClass *klass)
 static void
 error_dialog (GtkWindow *parent, const gchar *msg, ...)
 {
-  g_autoptr (GtkAlertDialog) dialog = NULL;
+  AdwDialog *dialog;
   va_list ap;
   g_autofree char *tmp = NULL;
 
@@ -179,9 +179,10 @@ error_dialog (GtkWindow *parent, const gchar *msg, ...)
   tmp = g_strdup_vprintf (msg, ap);
   va_end (ap);
 
-  dialog = gtk_alert_dialog_new ("%s", tmp);
-
-  gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (parent));
+  dialog = adw_alert_dialog_new (NULL, tmp);
+  adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+  adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
+  adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (parent));
 }
 
 static gboolean
