@@ -188,8 +188,10 @@ new_window_activated (GSimpleAction *action,
                       gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrWindow *window;
 
-  gtr_application_create_window (app);
+  window = gtr_application_create_window (app);
+  gtr_window_show_projects (window);
 }
 
 static void
