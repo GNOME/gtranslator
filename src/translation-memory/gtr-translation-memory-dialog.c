@@ -41,11 +41,11 @@ typedef struct
 
 struct _GtrTranslationMemoryDialog
 {
-  AdwWindow parent;
+  AdwDialog parent;
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrTranslationMemoryDialog,
-                            gtr_translation_memory_dialog, ADW_TYPE_WINDOW)
+                            gtr_translation_memory_dialog, ADW_TYPE_DIALOG)
 
 static void
 select_folder_cb (GtkFileDialog *dialog, GAsyncResult *res, gpointer user_data)
@@ -79,7 +79,7 @@ select_directory_activated_cb (GtrTranslationMemoryDialog *dlg)
 
   gtk_file_dialog_select_folder (
     dialog,
-    GTK_WINDOW (dlg),
+    GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (dlg))),
     NULL,
     (GAsyncReadyCallback) (select_folder_cb),
     dlg
@@ -111,9 +111,6 @@ gtr_translation_memory_dialog_class_init (GtrTranslationMemoryDialogClass *klass
 
   object_class->finalize = gtr_translation_memory_dialog_finalize;
   object_class->dispose = gtr_translation_memory_dialog_dispose;
-
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0,
-                                       "window.close", NULL);
 
   gtk_widget_class_set_template_from_resource (
     widget_class,
@@ -356,8 +353,7 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
 }
 
 GtkWidget *
-gtr_translation_memory_dialog_new (GtkWindow *window,
-                                   GtrTranslationMemory *translation_memory)
+gtr_translation_memory_dialog_new (GtrTranslationMemory *translation_memory)
 {
   GtrTranslationMemoryDialog *dlg;
   GtrTranslationMemoryDialogPrivate *priv;
@@ -367,11 +363,6 @@ gtr_translation_memory_dialog_new (GtkWindow *window,
 
   /* FIXME: use a property */
   priv->translation_memory = translation_memory;
-
-  if (window != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
-    {
-      gtk_window_set_transient_for (GTK_WINDOW (dlg), window);
-    }
 
   return GTK_WIDGET (dlg);
 }

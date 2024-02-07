@@ -657,10 +657,9 @@ gtr_window_show_tm_dialog (GtrWindow *window)
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtkWidget *dlg;
 
-  dlg = gtr_translation_memory_dialog_new (GTK_WINDOW (window),
-                                           priv->translation_memory);
+  dlg = gtr_translation_memory_dialog_new (priv->translation_memory);
 
-  gtk_window_present (GTK_WINDOW (dlg));
+  adw_dialog_present (ADW_DIALOG (dlg), GTK_WIDGET (window));
 }
 
 GtrTranslationMemory *
