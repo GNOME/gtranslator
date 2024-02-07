@@ -96,13 +96,13 @@ static void showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrContextPanel *panel)
 typedef struct {
   GtrContextPanel *panel;
   GtkTextBuffer   *text_buffer;
-  GtkWidget       *dialog;
+  AdwDialog       *dialog;
 } DialogData;
 
 static void
 dialog_data_free (DialogData *data)
 {
-  gtk_window_destroy (GTK_WINDOW (data->dialog));
+  adw_dialog_close (data->dialog);
 
   g_free (data);
 }
@@ -138,9 +138,9 @@ static void
 setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
 {
   GtrContextPanelPrivate *priv;
-  GtkWidget *dialog;
+  AdwDialog *dialog;
   GtkWidget *scrolled_window;
-  GtkBox *dialog_area;
+  GtkWidget *toolbar_view;
   GtkWidget *text_view;
 
   GtkWidget *headerbar;
@@ -149,7 +149,6 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
 
   GtkTextBuffer *text_buffer = gtk_text_buffer_new (NULL);;
   DialogData *dd;
-  GtkWidget *toplevel = gtk_widget_get_ancestor (GTK_WIDGET (panel), GTK_TYPE_WINDOW);
 
   priv = gtr_context_panel_get_instance_private (panel);
 
@@ -160,14 +159,12 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
   gtk_header_bar_pack_start (GTK_HEADER_BAR (headerbar), cancel);
   gtk_header_bar_pack_end (GTK_HEADER_BAR (headerbar), save);
 
-  dialog = gtk_window_new ();
-  gtk_window_set_title (GTK_WINDOW (dialog), _("Notes"));
-  gtk_window_set_titlebar (GTK_WINDOW (dialog), headerbar);
-  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-  gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
+  dialog = adw_dialog_new ();
+  toolbar_view = adw_toolbar_view_new ();
+  adw_dialog_set_title (dialog, _("Notes"));
+  adw_dialog_set_child (dialog, toolbar_view);
+  adw_toolbar_view_add_top_bar (ADW_TOOLBAR_VIEW (toolbar_view), headerbar);
 
-  dialog_area = GTK_BOX (gtk_box_new (GTK_ORIENTATION_VERTICAL, 6));
   text_view = gtk_text_view_new_with_buffer (text_buffer);
 
   gtk_text_view_set_left_margin (GTK_TEXT_VIEW (text_view),10);
@@ -187,15 +184,13 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
   gtk_widget_set_margin_bottom (scrolled_window, 6);
 
   gtk_widget_set_vexpand (scrolled_window, TRUE);
-  gtk_box_append (dialog_area, scrolled_window);
-  gtk_window_set_child (GTK_WINDOW (dialog), GTK_WIDGET (dialog_area));
+  adw_toolbar_view_set_content (ADW_TOOLBAR_VIEW (toolbar_view), scrolled_window);
 
   text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
   gtk_text_buffer_set_text (text_buffer, gtr_msg_get_comment (priv->current_msg), -1);
 
-  gtk_widget_set_size_request (dialog, 400, 300);
-  gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-  gtk_window_set_deletable (GTK_WINDOW (dialog), FALSE);
+  adw_dialog_set_content_height (dialog, 300);
+  adw_dialog_set_content_width (dialog, 400);
 
   dd = g_new0 (DialogData, 1);
   dd->panel = panel;
@@ -205,7 +200,7 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
   g_signal_connect (cancel, "clicked", G_CALLBACK (close_notes), dd);
   g_signal_connect (save, "clicked", G_CALLBACK (save_notes), dd);
 
-  gtk_window_present (GTK_WINDOW (dialog));
+  adw_dialog_present (dialog, GTK_WIDGET (panel));
 }
 
 static void
