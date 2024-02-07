@@ -342,10 +342,10 @@ add_button_clicked (GtrPreferencesDialog *dlg)
 {
   GtrProfileDialog *profile_dialog;
 
-  profile_dialog = gtr_profile_dialog_new (GTK_WIDGET (dlg), NULL);
+  profile_dialog = gtr_profile_dialog_new (NULL);
   g_signal_connect (profile_dialog, "response",
                     G_CALLBACK (on_profile_dialog_response_cb), dlg);
-  gtk_window_present (GTK_WINDOW (profile_dialog));
+  adw_dialog_present (ADW_DIALOG (profile_dialog), GTK_WIDGET (dlg));
 }
 
 static void
@@ -378,10 +378,10 @@ edit_button_clicked (GtkWidget            *widget,
     {
       priv->editing_profile = profile;
       GtrProfileDialog *profile_dialog;
-      profile_dialog = gtr_profile_dialog_new (GTK_WIDGET (dlg), profile);
+      profile_dialog = gtr_profile_dialog_new (profile);
       g_signal_connect (profile_dialog, "response",
                         G_CALLBACK (on_profile_dialog_response_cb), dlg);
-      gtk_window_present (GTK_WINDOW (profile_dialog));
+      adw_dialog_present (ADW_DIALOG (profile_dialog), GTK_WIDGET (dlg));
     }
 
   g_object_unref (prof_manager);
