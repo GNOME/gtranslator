@@ -504,24 +504,3 @@ do_replace_all (GtrSearchBar *searchbar, GtrWindow * window)
   restore_last_searched_data (searchbar, tab);
   gtr_tab_find_replace (tab, FALSE);
 }
-
-void
-search_bar_response_cb (GtrSearchBar *dialog,
-                        gint         response_id,
-                        GtrWindow    *window)
-{
-  switch (response_id)
-    {
-    case GTR_SEARCH_BAR_FIND_RESPONSE:
-      do_find (dialog, window, FALSE);
-      break;
-    case GTR_SEARCH_BAR_REPLACE_RESPONSE:
-      do_replace (dialog, window);
-      break;
-    case GTR_SEARCH_BAR_REPLACE_ALL_RESPONSE:
-      do_replace_all (dialog, window);
-      break;
-    default:
-      gtk_window_destroy (GTK_WINDOW (dialog));
-    }
-}
