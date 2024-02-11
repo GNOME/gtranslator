@@ -3,1761 +3,2182 @@
 # Joe Man <trmetal@yahoo.com.hk>, 2002.
 # Abel Cheung <abel@oaka.org>, 2003.
 # Cheng-Chia Tseng <pswo10680@gmail.com>, 2010.
+# Freddy <freddy4212@gmail.com>, 2022.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.9.10\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-25 19:53+0800\n"
-"PO-Revision-Date: 2010-04-17 23:12+0800\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
+"POT-Creation-Date: 2024-02-07 23:52+0000\n"
+"PO-Revision-Date: 2024-02-11 22:09+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
-"Language-Team: Traditional Chinese <chinese-l10n@googlegroups.com>\n"
+"Language-Team: Chinese (Traditional) <chinese-l10n@googlegroups.com>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: ../data/desktop/gtranslator.desktop.in.in.h:1
-msgid "Gtranslator PO Editor"
-msgstr "Gtranslator PO 編輯器"
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
+#: src/gtr-application.c:498 src/gtr-window.c:204 src/gtr-window.c:429
+msgid "Translation Editor"
+msgstr "翻譯編輯器"
 
-#: ../data/desktop/gtranslator.desktop.in.in.h:2
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:8
+#: data/org.gnome.Gtranslator.desktop.in.in:5
 msgid "Translate and localize applications and libraries"
-msgstr "進行應用程式與函式庫的翻譯與本地化"
+msgstr "將應用程式與函式庫作翻譯與在地化"
 
-#: ../data/gtranslator.schemas.in.h:1
-msgid "Autosave files"
-msgstr "自動儲存檔案"
-
-#: ../data/gtranslator.schemas.in.h:2
-msgid "Autosave interval"
-msgstr "自動儲存間隔時間"
-
-#: ../data/gtranslator.schemas.in.h:3
-msgid "Check spelling"
-msgstr "檢查拼字"
-
-#: ../data/gtranslator.schemas.in.h:4
-msgid "Color scheme"
-msgstr "色彩配套"
-
-#: ../data/gtranslator.schemas.in.h:5
-msgid "Create backup before saving"
-msgstr "在儲存前建立備份"
-
-#: ../data/gtranslator.schemas.in.h:6
-msgid "Custom font to use for edit fields."
-msgstr "自訂編輯欄位使用的字型。"
-
-#: ../data/gtranslator.schemas.in.h:7
-msgid "Delete compiled GMO files"
-msgstr "刪除已編譯的 GMO 檔案"
-
-#: ../data/gtranslator.schemas.in.h:8
-msgid "Directory containing PO files to add to the translation memory."
-msgstr "含有 PO 檔的目錄，作為加入翻譯記憶之用。"
-
-#: ../data/gtranslator.schemas.in.h:9
-msgid "Editor font"
-msgstr "編輯器字型"
-
-#: ../data/gtranslator.schemas.in.h:10
-msgid "Filename to restrict search to"
-msgstr "用來限制搜尋的檔名"
-
-#: ../data/gtranslator.schemas.in.h:11
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:10
 msgid ""
-"Filename to which searching of the translation memory should be restricted."
-msgstr "要用來限制翻譯記憶的搜尋用檔名。"
-
-#: ../data/gtranslator.schemas.in.h:12
-msgid "Highlight syntax in edit fields"
-msgstr "編輯欄位的語法突顯處理"
-
-#: ../data/gtranslator.schemas.in.h:13
-msgid "If true, apply syntax highlighting to strings in edit fields."
+"Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
+"environment. It handles all forms of gettext po files and includes very "
+"useful features like find/replace, translation memory, different translator "
+"profiles, messages table (for having an overview of the translations/"
+"messages in the po file), easy navigation and editing of translation "
+"messages and comments of the translation where accurate."
 msgstr ""
+"Gtranslator 是 GNOME 桌面環境的增強型 gettext PO 檔編輯器。它支援所有類型的 "
+"gettext PO 檔，並包含多項實用功能；例如尋找與取代、翻譯記憶、譯者設定檔切換、"
+"條目視窗（概覽 PO 檔中的譯文/訊息），並能方便的移動與精準的編輯譯文訊息、評"
+"註。"
 
-#: ../data/gtranslator.schemas.in.h:14
-msgid "If true, automatically save files at specified intervals."
-msgstr ""
-
-#: ../data/gtranslator.schemas.in.h:15
-msgid "If true, check the spelling of translated messages."
-msgstr ""
-
-#: ../data/gtranslator.schemas.in.h:16
-msgid "If true, create a backup copy of a file before saving it."
-msgstr ""
-
-#: ../data/gtranslator.schemas.in.h:17
-msgid "If true, display whitespace in strings as representative symbols."
-msgstr ""
-
-#: ../data/gtranslator.schemas.in.h:18
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:19
 msgid ""
-"If true, only include files with a specified filename when searching the "
-"translation memory."
+"Gtranslator includes also a plugin system with many interesting plugins like "
+"alternate language, insert tags, integration with subversion and a source "
+"code viewer."
 msgstr ""
+"Gtranslator 支援擴充套件，能提供如語言替換、標記插入、subversion 整合以及源始"
+"碼檢視等功能。"
 
-#: ../data/gtranslator.schemas.in.h:19
-msgid ""
-"If true, overwrite the values in the PO header with those in the active "
-"profile."
+#: data/org.gnome.Gtranslator.desktop.in.in:4
+msgid "PO File Editor"
+msgstr "PO 檔編輯器"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:14
+msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr ""
+"Gtranslator;Translation;Editor;Gettext;Write;翻譯編輯器;PO檔編輯器;翻譯檔;PO"
+"檔案;在地化;"
 
-#: ../data/gtranslator.schemas.in.h:20
-msgid "If true, remove compiled GMO binary files when saving."
-msgstr ""
+#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:327
+msgid "New Window"
+msgstr "新視窗"
 
-#: ../data/gtranslator.schemas.in.h:21
-msgid "If true, remove fuzzy status from translations when they are changed."
-msgstr ""
+#: data/org.gnome.Gtranslator.gschema.xml.in:22
+msgid "Warn if file contains fuzzy translations"
+msgstr "檔案中若含有模糊譯文時請警示我"
 
-#: ../data/gtranslator.schemas.in.h:22
-msgid "If true, use a custom font for edit fields."
-msgstr ""
-
-#: ../data/gtranslator.schemas.in.h:23
+#: data/org.gnome.Gtranslator.gschema.xml.in:23
 msgid ""
 "If true, warn the user when saving a PO translation file containing fuzzy "
 "strings."
-msgstr ""
+msgstr "開啟後，儲存 PO 檔時若含有模糊譯文將警示使用者。"
 
-#: ../data/gtranslator.schemas.in.h:24
+#: data/org.gnome.Gtranslator.gschema.xml.in:30
+msgid "Whether to remove the obsolete entries upon saving"
+msgstr "儲存檔案時刪除棄用的條目"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:31
+msgid ""
+"If true, the obsolete entries will be removed from the file after saving"
+msgstr "開啟後，已棄用的條目會在儲存時被刪除"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:37
+msgid "Auto save files"
+msgstr "自動儲存檔案"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:38
+msgid "If true, automatically save files at specified intervals."
+msgstr "開啟後，檔案將依指定的時間間隔自動儲存。"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:44
+msgid "Auto save interval"
+msgstr "自動儲存間隔"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:45
 msgid "Interval in minutes at which to automatically save files."
-msgstr "自動儲存檔案的時間間隔（分鐘）"
+msgstr "自動儲存檔案的間隔(分鐘)。"
 
-#: ../data/gtranslator.schemas.in.h:25
-msgid "Make whitespace visible"
-msgstr "顯示空白"
+#: data/org.gnome.Gtranslator.gschema.xml.in:51
+msgid "Create backup before saving"
+msgstr "儲存前建立備份"
 
-#: ../data/gtranslator.schemas.in.h:26
-msgid ""
-"Maximum difference in length between messages displayed as matches by the "
-"translation memory."
-msgstr "翻譯記憶所顯示的符合訊息間的長度最大差異。"
+#: data/org.gnome.Gtranslator.gschema.xml.in:52
+msgid "If true, create a backup copy of a file before saving it."
+msgstr "開啟後，檔案會在儲存前建立備份。"
 
-#: ../data/gtranslator.schemas.in.h:27
-msgid "Maximum difference in message length"
-msgstr "訊息長度的最大差異"
-
-#: ../data/gtranslator.schemas.in.h:28
-msgid "Maximum number of missing words"
-msgstr "遺失字詞的最大數目"
-
-#: ../data/gtranslator.schemas.in.h:29
-msgid ""
-"Maximum number of words that can be missing from a message displayed as a "
-"match by the translation memory."
-msgstr "翻譯記憶顯示的符合訊息中可以遺失的最大字詞數目。"
-
-#: ../data/gtranslator.schemas.in.h:30
-msgid "Message list sort order"
-msgstr "訊息清單排列順序"
-
-#: ../data/gtranslator.schemas.in.h:31
-msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
-msgstr "要用來突顯語法的 gtksourceview 色彩配套名稱"
-
-#: ../data/gtranslator.schemas.in.h:32
-msgid "PO directory"
-msgstr "PO 目錄"
-
-#: ../data/gtranslator.schemas.in.h:33
-msgid "Remove fuzzy status when message is changed"
-msgstr "當訊息變更後移除模糊狀態"
-
-#: ../data/gtranslator.schemas.in.h:34
-msgid "Restrict search by filename"
-msgstr "依檔名限制搜尋"
-
-#: ../data/gtranslator.schemas.in.h:35
-#, fuzzy
-msgid "Side pane switcher style"
-msgstr "側邊窗格切換器樣式"
-
-#: ../data/gtranslator.schemas.in.h:36
-msgid ""
-"Sort order to use in the message list. Possible values are \"status\", \"id"
-"\", \"original_text\" and \"translated_text\"."
-msgstr ""
-"訊息清單要使用的排序方式。可能的值為「status」(狀態)、「id」、"
-"「original_text」(原文)，以及「translated_text」(譯文)。"
-
-#: ../data/gtranslator.schemas.in.h:37
-#, fuzzy
-msgid ""
-"Style for switchers in the side pane. Possible values are \"icons\", \"text"
-"\", \"icons_and_text\", \"tabs\" and \"system\"."
-msgstr ""
-"供側邊窗格內切換器使用的樣式。可能的值為「icons」(圖示)、「text」(文字)、"
-"「icons_and_text」(圖示與文字)、「tabs」(分頁)，以及「system」(系統)。"
-
-#: ../data/gtranslator.schemas.in.h:38
-msgid "Use custom font"
-msgstr "使用自訂字型"
-
-#: ../data/gtranslator.schemas.in.h:39
+#: data/org.gnome.Gtranslator.gschema.xml.in:58
 msgid "Use profile values for header"
-msgstr "檔頭使用個人設定檔的值"
-
-#: ../data/gtranslator.schemas.in.h:40
-msgid "Warn if file contains fuzzy translations"
-msgstr "如果檔案包含模糊翻譯時請通知我"
-
-#: ../data/po.lang.h:1
-msgid "Others"
-msgstr "其他"
-
-#: ../data/po.lang.h:2
-msgid "Special variable"
-msgstr "特殊變數"
-
-#: ../data/po.lang.h:3
-msgid "Tag"
-msgstr "標籤"
-
-#: ../data/po.lang.h:4
-msgid "gtranslator highlight"
-msgstr "gtranslator 突顯處理"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:128
-msgid "Message not found"
-msgstr "找不到訊息"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:231
-msgid "Open file for alternate language"
-msgstr "開啟作為替代語言的檔案"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:256
-msgid "File closed"
-msgstr "檔案已關閉"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:316
-msgctxt "alternate lang"
-msgid "_Open"
-msgstr "開啟(_O)"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:322
-msgctxt "alternate lang"
-msgid "_Close"
-msgstr "關閉(_C)"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:328
-msgctxt "alternate lang"
-msgid "Co_py"
-msgstr "複製(_P)"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:357
-msgid "There isn't any file loaded"
-msgstr "沒有載入任何檔案"
-
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:58
-msgid "_Alternate Language"
-msgstr "替代語言(_A)"
-
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:59
-msgid "Show the Alternate Language panel"
-msgstr "顯示替代語言面板"
-
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:118
-#: ../plugins/alternate-language/gtr-alternate-language.gtranslator-plugin.desktop.in.h:1
-msgid "Alternate Language"
-msgstr "替代語言"
-
-#: ../plugins/alternate-language/gtr-alternate-language.gtranslator-plugin.desktop.in.h:2
-msgid "Load an alternate language."
-msgstr "載入一種替代語言。"
-
-#: ../plugins/charmap/gtr-charmap-plugin.c:280
-#: ../plugins/charmap/gtr-charmap.gtranslator-plugin.desktop.in.h:1
-msgid "Character Map"
-msgstr "字元對應表"
-
-#: ../plugins/charmap/gtr-charmap.gtranslator-plugin.desktop.in.h:2
-msgid "Insert special characters just by clicking on them."
-msgstr "只要點擊特殊字元就能直接插入。"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:179
-#, c-format
-msgid "No dictionary source available with name '%s'"
-msgstr "沒有名稱為「%s」的可用字典來源"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:183
-msgid "Unable to find dictionary source"
-msgstr "無法尋找字典來源"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:198
-#, c-format
-msgid "No context available for source '%s'"
-msgstr "來源「%s」沒有可用的條目內容"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:202
-msgid "Unable to create a context"
-msgstr "無法建立條目"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:287
-#, c-format
-msgid "Dictionary source '%s' selected"
-msgstr "字典來源「%s」已選取"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:306
-#, c-format
-msgid "Strategy '%s' selected"
-msgstr "策略「%s」已選取"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:324
-#, c-format
-msgid "Database '%s' selected"
-msgstr "資料庫「%s」已選取"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:368
-#, c-format
-msgid "Word '%s' selected"
-msgstr "字詞「%s」已選取"
-
-#. speller
-#: ../plugins/dictionary/gtr-dict-panel.c:390
-msgid "Double-click on the word to look up"
-msgstr "對想要查詢的字詞點擊兩下"
-
-#. strat-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:395
-msgid "Double-click on the matching strategy to use"
-msgstr "對要使用的比對策略點擊兩下"
-
-#. source-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:401
-msgid "Double-click on the source to use"
-msgstr "對要使用的來源點擊兩下"
-
-#. db-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:411
-msgid "Double-click on the database to use"
-msgstr "對要使用的資料庫點擊兩下"
-
-#.
-#. * Look up Button
-#.
-#: ../plugins/dictionary/gtr-dict-panel.c:473
-msgid "Look _up:"
-msgstr "查詢(_U)："
-
-#: ../plugins/dictionary/gtr-dict-panel.c:543
-msgid "Similar words"
-msgstr "類似字詞"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:558
-msgid "Available dictionaries"
-msgstr "可用的字典"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:574
-msgid "Available strategies"
-msgstr "可用的策略"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:584
-msgid "Dictionary sources"
-msgstr "字典來源"
-
-#: ../plugins/dictionary/gtr-dict.gtranslator-plugin.desktop.in.h:1
-#: ../plugins/dictionary/gtr-dictionary-plugin.c:92
-msgid "Dictionary"
-msgstr "字典"
-
-#: ../plugins/dictionary/gtr-dict.gtranslator-plugin.desktop.in.h:2
-msgid "Look up words in a dictionary."
-msgstr "於字典內查詢字詞。"
-
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:44
-msgid "_Fullscreen"
-msgstr "全螢幕(_F)"
-
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:45
-msgid "Place window on fullscreen state"
-msgstr "切將視窗切換為全螢幕狀態"
-
-#: ../plugins/fullscreen/gtr-fullscreen.gtranslator-plugin.desktop.in.h:1
-msgid "Fullscreen"
-msgstr "全螢幕"
-
-#: ../plugins/fullscreen/gtr-fullscreen.gtranslator-plugin.desktop.in.h:2
-msgid "Place window in the fullscreen state."
-msgstr "切將視窗切換為全螢幕狀態。"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:74
-msgid "_Next Param"
-msgstr "下一個參數(_N)"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:75
-msgid "Insert the next param of the message"
-msgstr "插入這個訊息的下一個參數"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:77
-msgid "_Insert Params"
-msgstr "插入參數(_I)"
-
-#: ../plugins/insert-params/gtr-insert-params.gtranslator-plugin.desktop.in.h:1
-msgid "Insert Params"
-msgstr "插入參數"
-
-#: ../plugins/insert-params/gtr-insert-params.gtranslator-plugin.desktop.in.h:2
-msgid "Parameters detection and easy insertion."
-msgstr "參數偵測與簡易插入。"
-
-#: ../plugins/insert-tags/gtr-insert-tags-plugin.c:67
-msgid "_Next Tag"
-msgstr "下一個標籤(_N)"
-
-#: ../plugins/insert-tags/gtr-insert-tags-plugin.c:68
-msgid "Insert the next tag of the message"
-msgstr "插入訊息的下一個標籤"
-
-#: ../plugins/insert-tags/gtr-insert-tags-plugin.c:70
-msgid "_Insert Tags"
-msgstr "插入標籤(_I)"
-
-#: ../plugins/insert-tags/gtr-insert-tags.gtranslator-plugin.desktop.in.h:1
-msgid "Insert Tags"
-msgstr "插入標籤"
-
-#: ../plugins/insert-tags/gtr-insert-tags.gtranslator-plugin.desktop.in.h:2
-msgid "Tags detection and easy insertion."
-msgstr "標籤偵測與簡易插入。"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
-msgid "Code language of the results:"
-msgstr "結果的代碼語言："
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
-msgid "Code language to query open-tran:"
-msgstr "要查詢 open-tran 用的代碼語言："
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
-msgid "Open Tran Settings"
-msgstr "Open Tran 設定"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:248
-#, c-format
-msgid "ERROR: %d %s\n"
-msgstr "錯誤：%d %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:261
-#, c-format
-msgid "FAULT: %d %s\n"
-msgstr "嚴重錯誤：%d %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:266
-#: ../plugins/open-tran/gtr-open-tran-panel.c:276
-msgid "ERROR: could not parse response\n"
-msgstr "錯誤：無法解析回應\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:285
-#, c-format
-msgid "WRONG! Can't get result element %d\n"
-msgstr "錯誤！無法取得結果元素 %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:300
-#: ../src/gtr-actions-search.c:191
-msgid "Phrase not found"
-msgstr "找不到詞語"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:319
-msgid "You have to provide a phrase to search"
-msgstr "您必須提供搜尋用的詞語"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:328
-msgid "You have to provide a search language code"
-msgstr "您必須提供搜尋用的語言代碼"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:338
-msgid "You have to provide a language code for your language"
-msgstr "您必須提供您語言的語言代碼"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:366
-msgid "Type"
-msgstr "類型"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:377
-msgid "Open-Tran.eu"
-msgstr "Open-Tran.eu"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:414
-msgid "Look for:"
-msgstr "查詢："
-
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:104
-#: ../plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in.h:2
-msgid "Open Tran"
-msgstr "Open Tran"
-
-#: ../plugins/open-tran/gtr-open-tran.gtranslator-plugin.desktop.in.h:1
-msgid "Look for phrases in Open tran memory translation database."
-msgstr "在 Open tran memory 翻譯資料庫內查詢詞語。"
-
-#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:1
-msgid "Line command:"
-msgstr "列命令："
-
-#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:2
-msgid "Program command:"
-msgstr "程式命令："
-
-#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:3
-msgid "Source View Settings"
-msgstr "源碼檢視設定"
-
-#: ../plugins/source-code-view/gtr-source-code-view-dialog.ui.h:4
-msgid "Use external editor"
-msgstr "使用外部編輯器"
-
-#: ../plugins/source-code-view/gtr-source-code-view-plugin.c:111
-#, c-format
-msgid "Please install \"%s\" to be able to show the file"
-msgstr "請安裝「%s」才能顯示這個檔案"
-
-#: ../plugins/source-code-view/gtr-source-code-view-plugin.c:449
-msgid "Paths:"
-msgstr "路徑："
-
-#: ../plugins/source-code-view/gtr-source-code-view.gtranslator-plugin.desktop.in.h:1
-msgid "Show the message in the source code."
-msgstr "在源碼內顯示訊息。"
-
-#: ../plugins/source-code-view/gtr-source-code-view.gtranslator-plugin.desktop.in.h:2
-msgid "Source Code View"
-msgstr "源碼檢視"
-
-#: ../plugins/source-code-view/gtr-viewer.c:76
+msgstr "檔案標頭使用個人設定檔"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:59
+msgid ""
+"If true, overwrite the values in the PO header with those in the active "
+"profile."
+msgstr "開啟後，將使用目前的個人設定檔覆寫 PO 檔的標頭。"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:68
+msgid "Highlight syntax in edit fields"
+msgstr "在編輯欄使用語法標明"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:69
+msgid "If true, apply syntax highlighting to strings in edit fields."
+msgstr "開啟後，編輯欄的字串將套用語法標明。"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:75
+msgid "Make whitespace visible"
+msgstr "顯示空白標記"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:76
+msgid "If true, display whitespace in strings as representative symbols."
+msgstr "開啟後，字串空格處會顯示空白標記。"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:82
+msgid "Remove fuzzy status when message is changed"
+msgstr "譯文訊息修改後移除模糊狀態"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:83
+msgid "If true, remove fuzzy status from translations when they are changed."
+msgstr "開啟後，修改過的譯文會移除模糊狀態。"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:89
+msgid "Check spelling"
+msgstr "檢查拼寫"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:90
+msgid "If true, check the spelling of translated messages."
+msgstr "開啟後，會檢查譯文訊息拼寫是否正確。"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:101
+msgid "Message list sort order"
+msgstr "訊息列表排序方式"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:102
+msgid ""
+"Sort order to use in the message list. Possible values are “status”, “id”, "
+"“original-text” and “translated-text”."
+msgstr ""
+"訊息列表的排序方式。可能值為「status」(狀態)、「id」、「original_text」(原"
+"文)，以及「translated_text」(譯文)。"
+
+#: src/codeview/gtr-viewer.c:98
 msgid "Source Viewer"
 msgstr "源碼檢視器"
 
-#: ../plugins/source-code-view/gtr-viewer.ui.h:1
+#: src/codeview/gtr-viewer.ui:26
 msgid "Source code"
-msgstr "源碼"
+msgstr "源始碼"
 
-#: ../src/gtr-actions-file.c:203
-msgid "Open file for translation"
-msgstr "開啟要翻譯的檔案"
-
-#: ../src/gtr-actions-file.c:275 ../src/gtr-actions-file.c:393
-msgid "File saved."
-msgstr "檔案已儲存。"
-
-#: ../src/gtr-actions-file.c:324
-msgid "Save file as..."
-msgstr "儲存檔案為..."
-
-#: ../src/gtr-actions-file.c:790
-msgid "Files saved."
-msgstr "檔案已儲存。"
-
-#: ../src/gtr-actions-help.c:50
-msgid "Current Maintainers"
-msgstr "目前的維護者"
-
-#: ../src/gtr-actions-help.c:55
-msgid "Current Developers"
-msgstr "目前的開發者"
-
-#: ../src/gtr-actions-help.c:61
-msgid "Previous Developers"
-msgstr "上一個開發者"
-
-#: ../src/gtr-actions-help.c:69
-msgid "Contributors"
-msgstr "貢獻者"
-
-#: ../src/gtr-actions-help.c:89
-msgid ""
-"This program is free software: you can redistribute it and/or modify it "
-"under the terms of the GNU General Public License as published by the Free "
-"Software Foundation, either version 3 of the License, or (at your option) "
-"any later version."
-msgstr ""
-
-#: ../src/gtr-actions-help.c:93
-msgid ""
-"This program is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
-"more details."
-msgstr ""
-
-#: ../src/gtr-actions-help.c:97
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program.  If not, see <http://www.gnu.org/licenses/>."
-msgstr ""
-
-#: ../src/gtr-actions-help.c:119
+#: src/gtr-actions-app.c:86
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
-msgstr "應用程式與函式庫本地化的翻譯檔編輯套裝軟體。"
-
-#: ../src/gtr-actions-help.c:122
-msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
-msgstr "版權所有 © 1999-2008 自由軟體基金會"
-
-#: ../src/gtr-actions-help.c:124
-msgid "About Gtranslator"
-msgstr "關於 Gtranslator"
+msgstr "協助應用程式與函式庫在地化的翻譯檔編輯軟體。"
 
 #.
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/gtr-actions-help.c:129
+#: src/gtr-actions-app.c:103
 msgid "translator-credits"
 msgstr ""
 "如對翻譯有任何意見，請送一封電子郵件給\n"
 "以下地址，GNOME 翻譯團隊會盡快回覆您：\n"
 "chinese-l10n@googlegroups.com\n"
-"\n"
 "Joe Man <trmetal@yahoo.com.hk>, 2002\n"
 "Abel Cheung <abel@oaka.org>, 2003\n"
-"Cheng-Chia Tseng <pswo10680@gmail.com>, 2010"
+"Cheng-Chia Tseng <pswo10680@gmail.com>, 2010, 2024\n"
+"Freddy Cheng <freddy4212@gmail.com>, 2022"
 
-#: ../src/gtr-actions-help.c:133
-msgid "Gtranslator Web Site"
-msgstr "Gtranslator 網站"
+#: src/gtr-actions-file.c:205 src/gtr-close-confirmation-dialog.c:348
+msgid "Unsaved Changes"
+msgstr "變更尚未儲存"
 
-#: ../src/gtr-actions-search.c:170
+#: src/gtr-actions-file.c:210
 #, c-format
-msgid "Found and replaced %d occurrence"
-msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "找到並取代了 %d 個出現位置"
-msgstr[1] "找到並取代了 %d 個出現位置"
+msgid "Do you want to write all the changes done to %s?"
+msgstr "您是否想要將所有變更寫入 %s？"
 
-#: ../src/gtr-actions-search.c:179
-msgid "Found and replaced one occurrence"
-msgstr "找到並取代了一個出現位置"
+#: src/gtr-actions-file.c:214 src/gtr-context.c:157
+#: src/gtr-profile-dialog.ui:17 src/gtr-upload-dialog.ui:16
+msgid "Cancel"
+msgstr "取消"
 
-#: ../src/gtr-context.c:228
-msgid "Notes:"
-msgstr "備註："
+#: src/gtr-actions-file.c:215
+msgid "Continue Without Saving"
+msgstr "繼續且不儲存"
 
-#: ../src/gtr-context.c:236
-msgid "Add Note"
-msgstr "加入備註"
+#: src/gtr-actions-file.c:216
+msgid "Save and Open"
+msgstr "儲存並開啟"
 
-#: ../src/gtr-context.c:241
-msgid "Edit"
-msgstr "編輯"
+#: src/gtr-actions-file.c:238
+msgid "Open file for translation"
+msgstr "開啟要翻譯的檔案"
 
-#. Extracted comments
-#: ../src/gtr-context.c:284
-msgid "Extracted comments:"
-msgstr "抽出的備註"
+#: src/gtr-actions-file.c:326
+msgid "This file has already been uploaded"
+msgstr "已上傳檔案"
 
-#. Context
-#: ../src/gtr-context.c:288
-msgid "Context:"
-msgstr "條目："
-
-#. Format
-#: ../src/gtr-context.c:292
-msgid "Format:"
-msgstr "格式："
-
-#: ../src/dialogs/gtr-assistant.c:138
-#: ../src/dialogs/gtr-preferences-dialog.c:945
-msgid "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
-msgstr "<span weight=\"bold\" size=\"large\">字串已加入資料庫</span>"
-
-#: ../src/dialogs/gtr-assistant.c:285
+#: src/gtr-actions-file.c:340
 #, c-format
 msgid ""
-"Profile name: %s\n"
-"Translator name: %s\n"
-"Translator email: %s\n"
-"Language name: %s\n"
-"Team email: %s\n"
-"Language code: %s\n"
-"Character set: %s\n"
-"Transfer encoding: %s\n"
-"Plural form: %s\n"
-"Database path: %s"
+"An error occurred while uploading the file: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to upload this "
+"module."
 msgstr ""
-"個人設定檔名稱：%s\n"
-"翻譯者名稱：%s\n"
-"翻譯者電子郵件：%s\n"
-"語言名稱：%s\n"
-"團隊電子郵件：%s\n"
-"語言代碼：%s\n"
-"字元集：%s\n"
-"傳輸編碼：%s\n"
-"複數形式：%s\n"
-"資料庫路徑：%s"
+"上傳檔案時發生錯誤：%s\n"
+"可能是設定檔中的 <i>l10n.gnome.org</i> <b>通行代符</b>設定不正確；或沒有上傳"
+"此模組的權能。"
 
-#: ../src/dialogs/gtr-assistant.c:312
-msgid "None"
-msgstr "無"
+#: src/gtr-actions-file.c:349
+msgid "The file has been uploaded!"
+msgstr "已上傳檔案！"
 
-#: ../src/dialogs/gtr-assistant.c:335
-msgid ""
-"This assistant will help you to create the main profile\n"
-"and generate your translation memory database."
-msgstr ""
-"此助理會協助您建立主要的個人設定檔\n"
-"並產生您的翻譯記憶資料庫。"
+#: src/gtr-actions-file.c:488
+msgid "Save file as…"
+msgstr "另存為…"
 
-#: ../src/dialogs/gtr-assistant.c:341
-msgid "Assistant"
-msgstr "助理"
+#: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:453
+msgid "_Cancel"
+msgstr "取消(_C)"
 
-#: ../src/dialogs/gtr-assistant.c:433
-msgid "<b>Profile name:</b>"
-msgstr "<b>個人檔案名稱：</b>"
+#: src/gtr-close-confirmation-dialog.c:123
+msgid "Close _Without Saving"
+msgstr "關閉且不儲存(_W)"
 
-#: ../src/dialogs/gtr-assistant.c:452
-msgid "<b>Translator name:</b>"
-msgstr "<b>翻譯者姓名：</b>"
+#: src/gtr-close-confirmation-dialog.c:124
+msgid "_Save"
+msgstr "儲存(_S)"
 
-#: ../src/dialogs/gtr-assistant.c:471
-msgid "<b>Translator email:</b>"
-msgstr "<b>翻譯者電子郵件：</b>"
-
-#: ../src/dialogs/gtr-assistant.c:490
-msgid "<b>Language:</b>"
-msgstr "<b>語言：</b>"
-
-#: ../src/dialogs/gtr-assistant.c:509
-msgid "<b>Team email:</b>"
-msgstr "<b>團隊電子郵件：</b>"
-
-#: ../src/dialogs/gtr-assistant.c:521 ../src/dialogs/gtr-assistant.c:667
-#: ../src/dialogs/gtr-preferences-dialog.c:730 ../src/gtr-window.c:1483
-msgid "Profile"
-msgstr "個人檔案"
-
-#: ../src/dialogs/gtr-assistant.c:598
-msgid "<b>Language code:</b>"
-msgstr "<b>語言代碼：</b>"
-
-#: ../src/dialogs/gtr-assistant.c:617
-msgid "<b>Character set:</b>"
-msgstr "<b>字元集：</b>"
-
-#: ../src/dialogs/gtr-assistant.c:636
-msgid "<b>Transfer encoding:</b>"
-msgstr "<b>傳輸編碼：</b>"
-
-#: ../src/dialogs/gtr-assistant.c:655
-msgid "<b>Plural forms:</b>"
-msgstr "<b>複數形式：</b>"
-
-#: ../src/dialogs/gtr-assistant.c:676
-msgid "Checkout directory"
-msgstr "檢出目錄"
-
-#: ../src/dialogs/gtr-assistant.c:714
-msgid "<b>Select the path to generate the database:</b>"
-msgstr "<b>選取用來產生資料庫的路徑</b>"
-
-#: ../src/dialogs/gtr-assistant.c:743
-msgid "<b>Look for a specific PO filename:</b>"
-msgstr "<b>查詢特定的 PO 檔名：</b>"
-
-#: ../src/dialogs/gtr-assistant.c:752
-msgid "E.g.: gl.po"
-msgstr "例：gl.po"
-
-#: ../src/dialogs/gtr-assistant.c:756
-msgid "Generate Database"
-msgstr "產生資料庫"
-
-#: ../src/dialogs/gtr-assistant.c:782
-msgid "Confirmation"
-msgstr "確認"
-
-#: ../src/dialogs/gtr-close-confirmation-dialog.c:127
-msgid "Close _without Saving"
-msgstr "關閉而不儲存(_W)"
-
-#: ../src/dialogs/gtr-close-confirmation-dialog.c:157
-msgid "Question"
-msgstr "疑問"
-
-#: ../src/dialogs/gtr-close-confirmation-dialog.c:372
+#: src/gtr-close-confirmation-dialog.c:305
 #, c-format
-msgid "Save the changes to document \"%s\" before closing?"
-msgstr "要在關閉前儲存變更到文件「%s」嗎？"
+msgid "Save the changes to document “%s” before closing?"
+msgstr "關閉前要儲存對「%s」所作的更動嗎？"
 
-#: ../src/dialogs/gtr-close-confirmation-dialog.c:535
+#: src/gtr-close-confirmation-dialog.c:319
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
-msgstr[0] "%d 個文件所做的變更將會永遠喪失。"
-msgstr[1] "%d 個文件所做的變更將會永遠喪失。"
+msgstr[0] "對「%d」所作的更動將永久遺失。"
 
-#: ../src/dialogs/gtr-close-confirmation-dialog.c:542
+#: src/gtr-close-confirmation-dialog.c:326
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
-msgstr[0] "有 %d 個文件擁有尚未儲存的變更。要在關閉之前儲存變更嗎？"
-msgstr[1] "有 %d 個文件擁有尚未儲存的變更。要在關閉之前儲存變更嗎？"
+msgstr[0] "文件「%d」含有尚未儲存的更動，關閉前要先儲存嗎？"
 
-#: ../src/dialogs/gtr-close-confirmation-dialog.c:563
-msgid "Docum_ents with unsaved changes:"
-msgstr "文件有尚未儲存的變更(_E)："
+#: src/gtr-context.c:158 src/gtr-tab.ui:284
+msgid "Save"
+msgstr "儲存"
 
-#: ../src/dialogs/gtr-close-confirmation-dialog.c:567
-msgid "S_elect the documents you want to save:"
-msgstr "選取您想要儲存的文件(_S)："
+#: src/gtr-context.c:164 src/gtr-context.ui:28
+msgid "Notes"
+msgstr "備註"
 
-#: ../src/dialogs/gtr-close-confirmation-dialog.c:587
-msgid "Saving has been disabled by the system administrator."
-msgstr "儲存功能已經被系統管理員停用"
+#: src/gtr-context.ui:32 src/gtr-preferences-dialog.c:268
+msgid "Edit"
+msgstr "編輯備忘錄"
 
-#: ../src/dialogs/gtr-close-confirmation-dialog.c:589
-msgid "If you don't save, all your changes will be permanently lost."
-msgstr "如果您不儲存，您所有做出的變更將會永久喪失。"
+#: src/gtr-context.ui:62
+msgid "Extracted comments"
+msgstr "抽出的評註"
 
-#: ../src/dialogs/gtr-file-dialogs.c:62
+#: src/gtr-context.ui:87
+msgid "Paths"
+msgstr "路徑"
+
+#: src/gtr-dl-teams.c:247
+#, c-format
+msgid "Error loading module info: %s"
+msgstr "載入模組資訊錯誤：%s"
+
+#: src/gtr-dl-teams.c:437
+#, c-format
+msgid "Error loading file info: %s"
+msgstr "載入檔案資訊錯誤：%s"
+
+#: src/gtr-dl-teams.c:466
+msgid "No module state found."
+msgstr "找不到模組狀態。"
+
+#: src/gtr-dl-teams.c:560
+#, c-format
+msgid "Error loading file: %s"
+msgstr "檔案載入錯誤：%s"
+
+#: src/gtr-dl-teams.c:569 src/gtr-dl-teams.c:610
+#, c-format
+msgid "Error creating tmp file: %s"
+msgstr "暫時檔案建立錯誤：%s"
+
+#: src/gtr-dl-teams.c:580
+#, c-format
+msgid "Error writing stream: %s"
+msgstr "串流寫入錯誤：%s"
+
+#: src/gtr-dl-teams.c:620
+msgid "The file has been saved in your Downloads folder"
+msgstr "檔案已經儲存至您的「下載」資料夾"
+
+#: src/gtr-dl-teams.c:679
+#, c-format
+msgid ""
+"An error occurred while reserving this module: %s\n"
+"Maybe you've not configured your l10n.gnome.org token correctly in your "
+"profile or you don't have permissions to reserve this module."
+msgstr ""
+"保留此模組時遭遇錯誤：%s\n"
+"可能是您設定檔中的 l10n.gnome.org 通行代符設定不正確；或是您沒有保留此模組的"
+"權能。"
+
+#: src/gtr-dl-teams.c:691
+msgid "The file has been successfully reserved"
+msgstr "檔案已經成功保留"
+
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:331
+msgid "Preferences"
+msgstr "偏好設定"
+
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:337
+msgid "Keyboard Shortcuts"
+msgstr "鍵盤快捷鍵"
+
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:345
+msgid "About Translation Editor"
+msgstr "關於《翻譯編輯器》"
+
+#: src/gtr-dl-teams.ui:28 src/gtr-dl-teams.ui:49
+msgid "Load from Damned Lies"
+msgstr "從 Damned Lies 載入"
+
+#: src/gtr-dl-teams.ui:41 src/gtr-projects.ui:59 src/gtr-tab.ui:47
+msgid "Main Menu"
+msgstr "主選單"
+
+#: src/gtr-dl-teams.ui:70 src/gtr-languages-fetcher.ui:5
+#: src/gtr-languages-fetcher.ui:8
+msgid "Language"
+msgstr "語言"
+
+#: src/gtr-dl-teams.ui:81 src/gtr-header-dialog.ui:143
+msgid "Module"
+msgstr "模組"
+
+#: src/gtr-dl-teams.ui:92 src/gtr-header-dialog.ui:155
+msgid "Domain"
+msgstr "網域"
+
+#: src/gtr-dl-teams.ui:103 src/gtr-header-dialog.ui:149
+msgid "Branch"
+msgstr "分支"
+
+#: src/gtr-dl-teams.ui:120
+msgid "Reserve for translation"
+msgstr "欲翻譯請保留不動"
+
+#: src/gtr-dl-teams.ui:128
+msgid "Info"
+msgstr "資訊"
+
+#: src/gtr-dl-teams.ui:131
+msgid "File"
+msgstr "檔案"
+
+#: src/gtr-dl-teams.ui:141
+msgid "Translation State"
+msgstr "語言狀態"
+
+#: src/gtr-dl-teams.ui:151
+msgid "Stats"
+msgstr "統計"
+
+#: src/gtr-dl-teams.ui:165
+msgid "Load File"
+msgstr "載入檔案"
+
+#: src/gtr-file-dialogs.c:57
 msgid "Gettext translation"
-msgstr "Gettext 翻譯"
+msgstr "Gettext 翻譯檔"
 
-#: ../src/dialogs/gtr-file-dialogs.c:71
+#: src/gtr-file-dialogs.c:65
 msgid "Gettext translation template"
-msgstr "Gettext 翻譯樣板"
+msgstr "Gettext 模板"
 
-#: ../src/dialogs/gtr-file-dialogs.c:76
+#: src/gtr-file-dialogs.c:69
 msgid "All files"
 msgstr "所有檔案"
 
-#: ../src/dialogs/gtr-header-dialog.c:236
+#: src/gtr-greeter.ui:5 src/gtr-greeter.ui:45
+msgid "Welcome to Translation Editor"
+msgstr "歡迎使用翻譯編輯器"
+
+#: src/gtr-greeter.ui:19
+msgid "Next"
+msgstr "下一個"
+
+#: src/gtr-greeter.ui:33
+msgid "Welcome"
+msgstr "歡迎"
+
+#: src/gtr-greeter.ui:47
+msgid ""
+"Before start to use the application, a profile should be created, but don't "
+"worry, the app will guide you to do it in a minute."
+msgstr ""
+"在開始使用應用程式之前，應該先建立設定檔，不過別擔心，本程式會協助您快速完"
+"成。"
+
+#: src/gtr-greeter.ui:63
+msgid "Create Profile"
+msgstr "建立設定檔"
+
+#: src/gtr-greeter.ui:75
+msgid "Profile"
+msgstr "設定檔"
+
+#: src/gtr-greeter.ui:78 src/gtr-greeter.ui:139 src/gtr-profile-dialog.ui:52
+msgid "Profile name"
+msgstr "設定檔名稱"
+
+#: src/gtr-greeter.ui:79 src/gtr-profile-dialog.ui:53
+msgid "default"
+msgstr "預設"
+
+#: src/gtr-greeter.ui:85 src/gtr-greeter.ui:144
+msgid "Translator name"
+msgstr "譯者姓名"
+
+#: src/gtr-greeter.ui:91 src/gtr-greeter.ui:149
+msgid "Translator email"
+msgstr "譯者電子郵件"
+
+#: src/gtr-greeter.ui:97
+msgid "Translation team email"
+msgstr "翻譯團隊電子郵件"
+
+#: src/gtr-greeter.ui:120 src/gtr-greeter.ui:131
+msgid "Confirmation"
+msgstr "確認"
+
+#: src/gtr-greeter.ui:154
+msgid "Team email"
+msgstr "團隊電子郵件"
+
+#: src/gtr-greeter.ui:159
+msgid "Language name"
+msgstr "語言名稱"
+
+#: src/gtr-greeter.ui:164 src/gtr-languages-fetcher.ui:21
+msgid "Language code"
+msgstr "語言代碼"
+
+#: src/gtr-greeter.ui:169 src/gtr-languages-fetcher.ui:41
+msgid "Character set"
+msgstr "字元集"
+
+#: src/gtr-greeter.ui:174 src/gtr-languages-fetcher.ui:61
+msgid "Transfer encoding"
+msgstr "傳輸編碼"
+
+#: src/gtr-greeter.ui:179
+msgid "Plural form"
+msgstr "複數形式"
+
+#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:321
 msgid "Edit Header"
-msgstr "編輯檔頭"
+msgstr "編輯檔案標頭"
 
-#: ../src/dialogs/gtr-header-dialog.ui.h:1
-msgid "Char_set:"
-msgstr "字元集(_S)："
+#: src/gtr-header-dialog.ui:10
+msgid "Translator"
+msgstr "譯者"
 
-#: ../src/dialogs/gtr-header-dialog.ui.h:2
-msgid "Comment"
-msgstr "備註"
-
-#: ../src/dialogs/gtr-header-dialog.ui.h:3
-msgid "Enc_oding:"
-msgstr "編碼(_O)："
-
-#: ../src/dialogs/gtr-header-dialog.ui.h:4
-msgid "Language gro_up email:"
-msgstr "翻譯小組電子郵件(_U)："
-
-#: ../src/dialogs/gtr-header-dialog.ui.h:5
-msgid "Po file _revision date:"
-msgstr "Po 檔案修訂日期(_R)："
-
-#: ../src/dialogs/gtr-header-dialog.ui.h:6
-msgid "Pot _file creation date:"
-msgstr "Pot 檔案建立日期(_F)："
-
-#: ../src/dialogs/gtr-header-dialog.ui.h:7
-msgid "Project"
-msgstr "專案"
-
-#: ../src/dialogs/gtr-header-dialog.ui.h:8
-msgid "Project Id _version:"
-msgstr "專案 Id  版本(_V)："
-
-#: ../src/dialogs/gtr-header-dialog.ui.h:9
-msgid "Report message _bugs to:"
-msgstr "回報訊息臭蟲至(_B)："
-
-#: ../src/dialogs/gtr-header-dialog.ui.h:10
-msgid "Translator and Language"
-msgstr "翻譯者及語言"
-
-#: ../src/dialogs/gtr-header-dialog.ui.h:11
-msgid "Translator's _email:"
-msgstr "翻譯者電子郵件(_E)："
-
-#: ../src/dialogs/gtr-header-dialog.ui.h:12
-msgid "Translator's _name:"
-msgstr "翻譯者姓名(_N)："
-
-#: ../src/dialogs/gtr-header-dialog.ui.h:13
-msgid "Use my options to complete the following entries:"
-msgstr "在以下的項目中填上我的個人資料："
-
-#: ../src/dialogs/gtr-header-dialog.ui.h:14
-#: ../src/dialogs/gtr-profile-dialog.ui.h:9
-msgid "_Language:"
-msgstr "語言(_L)："
-
-#: ../src/dialogs/gtr-jump-dialog.c:91
-msgid "Go to Message"
-msgstr "前往訊息"
-
-#: ../src/dialogs/gtr-jump-dialog.ui.h:1
-msgid "Enter message number:"
-msgstr "輸入訊息編號："
-
-#: ../src/dialogs/gtr-preferences-dialog.c:585
-msgid ""
-"<span weight=\"bold\" size=\"large\">Impossible to remove the active "
-"profile</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"large\">不可能移除啟動中的個人設定檔</span>"
-
-#: ../src/dialogs/gtr-preferences-dialog.c:589
-msgid "Another profile should be selected as active before"
-msgstr "在這之前，另一個個人設定檔應該被選取為啟動中"
-
-#: ../src/dialogs/gtr-preferences-dialog.c:602
-msgid ""
-"<span weight=\"bold\" size=\"large\">Are you sure you want to delete this "
-"profile?</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"large\">您確定您想要刪除此個人設定檔？</span>"
-
-#: ../src/dialogs/gtr-preferences-dialog.c:736
-msgid "Active"
-msgstr "啟動中"
-
-#: ../src/dialogs/gtr-preferences-dialog.c:1198
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:14
-msgid "Gtranslator Preferences"
-msgstr "Gtranslator 偏好設定"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:1
-msgid "    "
-msgstr "    "
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:2
-msgid "Add to Database"
-msgstr "加入資料庫"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:3
-msgid "Anchor style:"
-msgstr "錨點樣式："
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:4
-msgid "Autosave"
-msgstr "自動儲存"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:5
-msgid "Check _spelling"
-msgstr "檢查拼字(_S)"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:6
-msgid "Configuration:"
-msgstr "配置："
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:7
-msgid "Contents"
-msgstr "內容"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:8
-msgid "Create a _backup copy of files before saving"
-msgstr "在儲存之前建立檔案備份(_B)"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:9
-msgid "Database:"
-msgstr "資料庫："
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:10
-msgid "Editor"
-msgstr "編輯器"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:11
-msgid "Editor _font:"
-msgstr "編輯器字型(_F)："
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:12
-msgid "Files"
-msgstr "檔案"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:13
+#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:74
+#: src/gtr-header-dialog.ui:134 src/gtr-preferences-dialog.ui:13
 msgid "General"
 msgstr "一般"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:15
-msgid "Interface"
-msgstr "介面"
+#: src/gtr-header-dialog.ui:17
+msgid "Use my options to complete the following entries"
+msgstr "使用我的選項完成下列條目"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:16
-msgid "Make _whitespace visible"
-msgstr "顯示空白(_W)"
+#: src/gtr-header-dialog.ui:22
+msgid "Translator’s _name"
+msgstr "譯者姓名(_N)"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:17
-msgid "Max. # of missing words:"
-msgstr "最大的遺失字詞數目："
+#: src/gtr-header-dialog.ui:28
+msgid "Translator’s _email"
+msgstr "譯者電子郵件(_E)"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:18
-msgid "Max. difference in sentence length:"
-msgstr "最大的句子長度差異："
+#: src/gtr-header-dialog.ui:34
+msgid "_Language"
+msgstr "語言(_L)"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:19
-msgid "Plugins"
-msgstr "外掛程式"
+#: src/gtr-header-dialog.ui:40
+msgid "Language _code"
+msgstr "語言代碼(_C)"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:20
-msgid "Profiles"
-msgstr "個人設定檔"
+#: src/gtr-header-dialog.ui:46
+msgid "Language _Team email"
+msgstr "語言團隊電子郵件(_T)"
 
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:21
-msgid "Scheme color:"
-msgstr "色彩配套："
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:22
-msgid "Select the directory which contains PO files:"
-msgstr "選取含有 PO 檔的目錄："
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:23
-msgid "Text Display"
-msgstr "文字顯示"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:24
-msgid "Translation Memory"
-msgstr "翻譯記憶"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:25
-msgid "Use _custom font"
-msgstr "使用自訂字型(_C)"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:26
-msgid "Use only files with this name:"
-msgstr "只使用含此名稱的檔案："
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:27
-msgid "_Autosave files every"
-msgstr "自動儲檔案每隔(_A)"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:28
-msgid "_Delete compiled GMO files"
-msgstr "刪除已編譯的 GNO 檔案(_D)"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:29
-msgid "_Highlight message syntax"
-msgstr "突顯訊息語法(_H)"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:30
-msgid "_Remove fuzzy status if message is changed"
-msgstr "訊息更改後移除模糊狀態(_R)"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:31
-msgid "_Warn if PO file contains fuzzy translations"
-msgstr "PO 檔案包含模糊翻譯時請通知我"
-
-#: ../src/dialogs/gtr-preferences-dialog.ui.h:32
-msgid "_minutes"
-msgstr "分鐘(_M)"
-
-#: ../src/dialogs/gtr-profile-dialog.c:85
-msgid "Gtranslator Profile"
-msgstr "Gtranslator 個人設定檔"
-
-#: ../src/dialogs/gtr-profile-dialog.ui.h:1
-msgid "Character _set"
+#: src/gtr-header-dialog.ui:52
+msgid "Char_set"
 msgstr "字元集(_S)"
 
-#: ../src/dialogs/gtr-profile-dialog.ui.h:2
-msgid "Language Settings"
-msgstr "語言設定"
+#: src/gtr-header-dialog.ui:58
+msgid "Enc_oding"
+msgstr "編碼(_O)"
 
-#: ../src/dialogs/gtr-profile-dialog.ui.h:3
-msgid "Language _code:"
-msgstr "語言代碼(_C)："
+#: src/gtr-header-dialog.ui:70
+msgid "Project"
+msgstr "專案"
 
-#: ../src/dialogs/gtr-profile-dialog.ui.h:4
-msgid "N_ame:"
-msgstr "名稱(_A)："
+#: src/gtr-header-dialog.ui:77
+msgid "Project Id _version"
+msgstr "專案 ID 版本(_V)"
 
-#: ../src/dialogs/gtr-profile-dialog.ui.h:5
-msgid "Profile Information"
-msgstr "個人檔案資訊"
+#: src/gtr-header-dialog.ui:83
+msgid "Pot _file creation date"
+msgstr "POT 檔建立日期(_F)"
 
-#: ../src/dialogs/gtr-profile-dialog.ui.h:6
-msgid "Transfer en_coding:"
-msgstr "傳輸編碼(_C)："
+#: src/gtr-header-dialog.ui:89
+msgid "Po file _revision date"
+msgstr "PO 檔修訂日期(_R)"
 
-#: ../src/dialogs/gtr-profile-dialog.ui.h:7
-msgid "Translator Information"
-msgstr "翻譯者資訊"
+#: src/gtr-header-dialog.ui:95
+msgid "Report message _bugs to"
+msgstr "翻譯問題回報處(_B)"
 
-#: ../src/dialogs/gtr-profile-dialog.ui.h:8
-msgid "_Email:"
-msgstr "電子郵件(_E)："
+#: src/gtr-header-dialog.ui:103
+msgid "Comment"
+msgstr "評註"
 
-#: ../src/dialogs/gtr-profile-dialog.ui.h:10
-msgid "_Name:"
-msgstr "名稱(_N)："
+#: src/gtr-header-dialog.ui:130
+msgid "Damned Lies"
+msgstr "Damned Lies"
 
-#: ../src/dialogs/gtr-profile-dialog.ui.h:11
-msgid "_Plural forms:"
-msgstr "複數形式(_P)："
+#: src/gtr-header-dialog.ui:137
+msgid "Lang"
+msgstr "語言"
 
-#: ../src/dialogs/gtr-profile-dialog.ui.h:12
-msgid "_Team email:"
-msgstr "團隊電子郵件(_T)："
-
-#: ../src/dialogs/gtr-search-dialog.c:328
-#: ../src/dialogs/gtr-search-dialog.ui.h:3
-msgid "Replace"
-msgstr "取代"
-
-#: ../src/dialogs/gtr-search-dialog.c:352
-msgid "Find"
-msgstr "尋找"
-
-#: ../src/dialogs/gtr-search-dialog.c:463
-msgid "Replace _All"
-msgstr "全部取代(_A)"
-
-#: ../src/dialogs/gtr-search-dialog.c:467
-msgid "_Replace"
-msgstr "取代(_R)"
-
-#: ../src/dialogs/gtr-search-dialog.ui.h:1
-msgid "Include fu_zzy strings"
-msgstr "包含模糊字串(_Z)"
-
-#: ../src/dialogs/gtr-search-dialog.ui.h:2
-msgid "Match _entire word only"
-msgstr "僅只符合完整字詞(_E)"
-
-#: ../src/dialogs/gtr-search-dialog.ui.h:4
-msgid "Replace All"
-msgstr "全部取代"
-
-#: ../src/dialogs/gtr-search-dialog.ui.h:5
-msgid "Replace _with: "
-msgstr "以此取代(_W)："
-
-#: ../src/dialogs/gtr-search-dialog.ui.h:6
-msgid "Search _backwards"
-msgstr "往後搜尋(_B)"
-
-#: ../src/dialogs/gtr-search-dialog.ui.h:7
-msgid "_Match case"
-msgstr "符合大小寫(_M)"
-
-#: ../src/dialogs/gtr-search-dialog.ui.h:8
-msgid "_Original text"
-msgstr "原文(_O)"
-
-#: ../src/dialogs/gtr-search-dialog.ui.h:9
-msgid "_Search for: "
-msgstr "搜尋(_S)："
-
-#: ../src/dialogs/gtr-search-dialog.ui.h:10
-msgid "_Translated text"
-msgstr "譯文(_T)"
-
-#: ../src/dialogs/gtr-search-dialog.ui.h:11
-msgid "_Wrap around"
-msgstr "循環搜尋"
-
-#: ../src/main.c:61
-msgid "[FILE...]"
-msgstr "[檔案..]"
-
-#: ../src/main.c:64
-msgid "Create a new toplevel window in an existing instance of Gtranslator"
-msgstr "在 Gtranslator 現存的實體內建立新的最上層視窗"
-
-#: ../src/main.c:92
-#, c-format
-msgid "%s: malformed file name or URI.\n"
-msgstr "%s：檔名或 URI 格式不良\n"
-
-#: ../src/main.c:240
-msgid "Gtranslator"
-msgstr "Gtranslator"
-
-#. Setup command line options
-#: ../src/main.c:244
-msgid "- Edit PO files"
-msgstr "- 編輯 PO 檔"
-
-#: ../src/main.c:256
-#, c-format
-msgid "Error during GConf initialization: %s."
-msgstr "GConf 初始化時發生錯誤：%s。"
-
-#: ../src/main.c:267
-#, c-format
-msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"執行 '%s --help' 來查看可用命令列選項的完整清單\n"
-
-#: ../src/gtr-message-table.c:265
-msgid "Status"
+#: src/gtr-header-dialog.ui:161
+msgid "State"
 msgstr "狀態"
 
-#: ../src/gtr-message-table.c:281
-msgid "ID"
-msgstr "ID"
+#: src/gtr-languages-fetcher.ui:18
+msgid "Edit options manually"
+msgstr "手動編輯選項"
 
-#: ../src/gtr-message-table.c:300
-msgid "Original Text"
-msgstr "原文"
+#: src/gtr-languages-fetcher.ui:28
+msgid "Choose language code"
+msgstr "選擇語言代碼"
 
-#: ../src/gtr-message-table.c:319
-msgid "Translated Text"
-msgstr "譯文"
+#: src/gtr-languages-fetcher.ui:81
+msgid "Plural forms"
+msgstr "複數形式"
 
-#: ../src/gtr-po.c:420
-#, c-format
-msgid "Failed opening file '%s': %s"
-msgstr "開啟檔案「%s」失敗：%s"
+#: src/gtr-languages-fetcher.ui:88
+msgid "Choose plural forms"
+msgstr "選擇複數形式"
 
-#: ../src/gtr-po.c:444
+#: src/gtr-message-table.ui:37
+msgid "Original Message"
+msgstr "原文訊息"
+
+#: src/gtr-message-table.ui:46
+msgid "Translated Message"
+msgstr "譯文訊息"
+
+#: src/gtr-po.c:489
 #, c-format
 msgid "The file is empty"
-msgstr "檔案是空的"
+msgstr "空白檔案"
 
-#: ../src/gtr-po.c:459
+#: src/gtr-po.c:498
+#, c-format
+msgid "Failed opening file “%s”: %s"
+msgstr "無法開啟檔案「%s」：%s"
+
+#: src/gtr-po.c:569
+#, c-format
+msgid "Could not convert from charset “%s” to UTF-8"
+msgstr "無法將「%s」字元集轉換為 UTF-8"
+
+#: src/gtr-po.c:585 src/gtr-po.c:604
+#, c-format
+msgid "Could not store temporary file for encoding conversion"
+msgstr "無法儲存暫存檔以供編碼轉換"
+
+#: src/gtr-po.c:635
+#, c-format
+msgid ""
+"All attempt to convert the file to UTF-8 has failed, use the msgconv or "
+"iconv command line tools before opening this file with GNOME Translation "
+"Editor"
+msgstr ""
+"將檔案轉換成 UTF-8 的所有嘗試皆失敗。在用 GNOME 翻譯編輯器開啟此檔案前，還請"
+"先使用 msgconv 或 iconv 命令列工具處理過"
+
+#: src/gtr-po.c:703
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext 傳回 null 訊息網域清單。"
 
-#: ../src/gtr-po.c:511
+#: src/gtr-po.c:750
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "沒有從解析器獲得任何訊息。"
 
-#: ../src/gtr-po.c:559
+#: src/gtr-po.c:804
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
 "Pot files are generated by the compilation process.\n"
-"Your file should likely be named '%s.po'."
+"Your file should likely be named “%s.po”."
 msgstr ""
-"您正嘗試將檔案儲存成 .pot。\n"
-"Pot 檔案應該是經編譯過程產生的。\n"
-"您的檔案應該儲存成‘%s.po’。"
+"您正嘗試將檔案儲存成 .pot 檔。\n"
+"Pot 檔案應該是要由編譯過程產生。\n"
+"您的檔案應該儲存成「%s.po」。"
 
-#: ../src/gtr-po.c:572
+#: src/gtr-po.c:832
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
-msgstr "檔案 %s 是唯讀狀態，無法覆寫"
+msgstr "檔案「%s」唯讀，無法覆寫"
 
-#: ../src/gtr-po.c:603
+#: src/gtr-po.c:851
+#, c-format
+msgid "There is an error in the PO file: %s"
+msgstr "PO 檔有錯誤：%s"
+
+#: src/gtr-po.c:863
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "寫入 PO 檔時發生錯誤：%s"
 
-#: ../src/plugin-system/gtr-plugin-manager.c:54
-msgid "Plugin"
-msgstr "外掛程式"
+#: src/gtr-preferences-dialog.c:271
+msgid "Delete"
+msgstr "刪除"
 
-#: ../src/plugin-system/gtr-plugin-manager.c:55
-msgid "Enabled"
-msgstr "已啟用"
+#: src/gtr-preferences-dialog.c:433
+msgid "Impossible to remove the active profile"
+msgstr "無法移除使用中的設定檔"
 
-#: ../src/plugin-system/gtr-plugin-manager.c:496
-msgid "_About"
-msgstr "關於(_A)"
+#: src/gtr-preferences-dialog.c:434
+msgid "Another profile should be selected as active before"
+msgstr "須將其他設定檔設定為使用中"
 
-#: ../src/plugin-system/gtr-plugin-manager.c:502
-msgid "C_onfigure"
-msgstr "組態(_C)"
+#: src/gtr-preferences-dialog.c:438
+msgid "_Ok"
+msgstr "確定"
 
-#: ../src/plugin-system/gtr-plugin-manager.c:510
-msgid "A_ctivate"
-msgstr "啟用(_C)"
+#: src/gtr-preferences-dialog.c:448
+msgid "Are you sure you want to delete this profile?"
+msgstr "確定刪除設定檔？"
 
-#: ../src/plugin-system/gtr-plugin-manager.c:520
-msgid "Ac_tivate All"
-msgstr "啟用全部(_T)"
+#: src/gtr-preferences-dialog.c:454
+msgid "_Delete"
+msgstr "刪除(_D)"
 
-#: ../src/plugin-system/gtr-plugin-manager.c:524
-msgid "_Deactivate All"
-msgstr "停用全部(_A)"
+#: src/gtr-preferences-dialog.ui:9
+msgid "F_iles"
+msgstr "檔案(_I)"
 
-#: ../src/plugin-system/gtr-plugin-manager.c:762
-msgid "Active plugins"
-msgstr "啟用外掛程式"
+#: src/gtr-preferences-dialog.ui:16
+msgid "_Warn if PO file contains fuzzy translations"
+msgstr "PO 檔若含有模糊譯文時請警示我(_W)"
 
-#: ../src/plugin-system/gtr-plugin-manager.c:791
-msgid "_About Plugin"
-msgstr "關於外掛程式(_A)"
+#: src/gtr-preferences-dialog.ui:22
+msgid "_Remove obsolete entries on save"
+msgstr "儲存時刪除棄用的條目(_R)"
 
-#: ../src/plugin-system/gtr-plugin-manager.c:795
-msgid "C_onfigure Plugin"
-msgstr "組態外掛程式(_C)"
+#: src/gtr-preferences-dialog.ui:30
+msgid "Autosave"
+msgstr "自動儲存"
 
-#: ../src/gtr-statusbar.c:117 ../src/gtr-statusbar.c:246
-msgid "INS"
-msgstr "插入"
+#: src/gtr-preferences-dialog.ui:33
+msgid "_Activate auto save"
+msgstr "啟用自動儲存(_A)"
 
-#: ../src/gtr-statusbar.c:118 ../src/gtr-statusbar.c:242
-msgid "OVR"
-msgstr "覆寫"
+#: src/gtr-preferences-dialog.ui:39
+msgid "Autosave _Interval"
+msgstr "自動儲存間隔(_I)"
 
-#: ../src/gtr-tab.c:211
+#: src/gtr-preferences-dialog.ui:54
+msgid "Create a _backup copy of files before saving"
+msgstr "在儲存之前建立備份檔案(_B)"
+
+#: src/gtr-preferences-dialog.ui:67
+msgid "_Editor"
+msgstr "編輯器(_E)"
+
+#: src/gtr-preferences-dialog.ui:71
+msgid "Text Display"
+msgstr "文字顯示"
+
+#: src/gtr-preferences-dialog.ui:74
+msgid "_Highlight message syntax"
+msgstr "標明訊息語法(_H)"
+
+#: src/gtr-preferences-dialog.ui:80
+msgid "Make _whitespace visible"
+msgstr "顯示空白標記(_W)"
+
+#: src/gtr-preferences-dialog.ui:86
+msgid "_Font"
+msgstr "字型(_F)"
+
+#: src/gtr-preferences-dialog.ui:104
+msgid "Contents"
+msgstr "內容"
+
+#: src/gtr-preferences-dialog.ui:107
+msgid "_Remove fuzzy status if message is changed"
+msgstr "譯文修改後移除模糊狀態(_R)"
+
+#: src/gtr-preferences-dialog.ui:113
+msgid "Check _spelling"
+msgstr "檢查拼寫(_S)"
+
+#: src/gtr-preferences-dialog.ui:126
+msgid "_Profiles"
+msgstr "設定檔(_P)"
+
+#: src/gtr-preferences-dialog.ui:130
+msgid "Profiles"
+msgstr "設定檔"
+
+#: src/gtr-profile-dialog.ui:9
+msgid "Translation Editor Profile"
+msgstr "翻譯編輯器設定檔"
+
+#: src/gtr-profile-dialog.ui:22 src/gtr-window.c:331
+msgid "OK"
+msgstr "確定"
+
+#: src/gtr-profile-dialog.ui:47
+msgid "Profile Information"
+msgstr "設定檔資訊"
+
+#: src/gtr-profile-dialog.ui:61
+msgid "Translator Information"
+msgstr "譯者資訊"
+
+#: src/gtr-profile-dialog.ui:66
+msgid "Translator _name"
+msgstr "譯者姓名(_N)"
+
+#: src/gtr-profile-dialog.ui:72
+msgid "Translator _email"
+msgstr "譯者電子郵件(_E)"
+
+#: src/gtr-profile-dialog.ui:78
+msgid "Translation _team email"
+msgstr "翻譯團隊電子郵件(_T)"
+
+#: src/gtr-profile-dialog.ui:86
+msgid "Damned Lies Integration"
+msgstr "Damned Lies 整合"
+
+#: src/gtr-profile-dialog.ui:87
+msgid ""
+"GNOME Damned Lies integration token, go to your profile in https://l10n."
+"gnome.org/ to get it"
+msgstr ""
+"前往 https://l10n.gnome.org/ 的個人頁面，以取得 GNOME Damned Lies 整合通行代"
+"符"
+
+#: src/gtr-profile-dialog.ui:92
+msgid "_Damned Lies auth token"
+msgstr "Damned Lies 認證代符(_D)"
+
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:317
+msgid "Build Translation Memory"
+msgstr "建置翻譯記憶資料庫"
+
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:341
+msgid "Help"
+msgstr "求助"
+
+#: src/gtr-projects.ui:36
+msgid "Select a Po file"
+msgstr "選擇 PO 檔案"
+
+#: src/gtr-projects.ui:45
+msgid "Open…"
+msgstr "開啟…"
+
+#: src/gtr-projects.ui:50
+msgid "Load from DL…"
+msgstr "從 Damned Lies 載入…"
+
+#: src/gtr-projects.ui:67
+msgid "Open a new .po file or drag & drop here"
+msgstr "開啟 PO 檔案或將其拖放到這裡"
+
+#: src/gtr-search-bar.ui:20
+msgid "Search"
+msgstr "搜尋"
+
+#: src/gtr-search-bar.ui:57
+msgid "Switch between Search and Search-and-Replace"
+msgstr "切換為尋找與取代"
+
+#: src/gtr-search-bar.ui:63
+msgid "Show or hide search options such as case sensitivity"
+msgstr "顯示或隱藏尋找選項"
+
+#: src/gtr-search-bar.ui:90 src/gtr-search-bar.ui:99
+msgid "Replace"
+msgstr "取代"
+
+#: src/gtr-search-bar.ui:108
+msgid "Replace All"
+msgstr "全部取代"
+
+#: src/gtr-search-bar.ui:128
+msgid "Case sensitive"
+msgstr "區分大小寫"
+
+#: src/gtr-search-bar.ui:138
+msgid "Match whole word only"
+msgstr "完全符合"
+
+#: src/gtr-search-bar.ui:148
+msgid "Wrap around"
+msgstr "循環搜尋"
+
+#: src/gtr-search-bar.ui:158
+msgid "Original text"
+msgstr "搜尋原文"
+
+#: src/gtr-search-bar.ui:168
+msgid "Translated text"
+msgstr "搜尋譯文"
+
+#: src/gtr-tab.c:344
 msgid "There is an error in the message:"
-msgstr "這個訊息內有錯誤："
+msgstr "譯文訊息中有錯誤："
 
-#: ../src/gtr-tab.c:529
+#: src/gtr-tab.c:561 src/gtr-tab.c:694
+msgid "fuzzy"
+msgstr "模糊"
+
+#: src/gtr-tab.c:724
 #, c-format
 msgid "Plural %d"
 msgstr "複數 %d"
 
-#: ../src/gtr-tab.c:591
-msgid "<b>Original Text:</b>"
-msgstr "<b>原文：</b>"
-
-#: ../src/gtr-tab.c:650
-msgid "<b>Translate_d Text:</b>"
-msgstr "<b>譯文(_D)：</b>"
-
-#: ../src/gtr-tab.c:700
-msgid "Context"
-msgstr "條目"
-
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1134
+#: src/gtr-tab.c:1314
 msgid "Path:"
 msgstr "路徑："
 
-#: ../src/gtr-tab-label.c:275
-msgid "Close document"
-msgstr "關閉文件"
+#: src/gtr-tab.c:1563
+msgid "Copied to clipboard"
+msgstr "已複製到剪貼簿"
 
-#. Translaters: This string is for a toggle to display a toolbar.
-#. * The name of the toolbar is automatically computed from the widgets
-#. * on the toolbar, and is placed at the %s. Note the _ before the %s
-#. * which is used to add mnemonics. We know that this is likely to
-#. * produce duplicates, but don't worry about it. If your language
-#. * normally has a mnemonic at the start, please use the _. If not,
-#. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:934
+#: src/gtr-tab.c:2002
 #, c-format
-msgid "Show “_%s”"
-msgstr "顯示「%s」"
+msgid "Translated: %0.2f%%"
+msgstr "完成度：%0.2f%%"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1397
-msgid "_Move on Toolbar"
-msgstr "在工具列上移動(_M)"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1398
-msgid "Move the selected item on the toolbar"
-msgstr "在工具列上移動所選的項目"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1399
-msgid "_Remove from Toolbar"
-msgstr "從工具列移除(_R)"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1400
-msgid "Remove the selected item from the toolbar"
-msgstr "從工具列移除所選的項目"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1401
-msgid "_Delete Toolbar"
-msgstr "刪除工具列(_D)"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1402
-msgid "Remove the selected toolbar"
-msgstr "移除所選的工具列"
-
-#: ../src/toolbareditor/egg-toolbar-editor.c:485
-msgid "Separator"
-msgstr "分隔符號"
-
-#: ../src/translation-memory/berkeley/gtr-db-base.c:158
-msgid "Running recovery..."
-msgstr "正在執行還原..."
-
-#: ../src/translation-memory/berkeley/gtr-db-base.c:167
+#: src/gtr-tab.c:2003
 #, c-format
-msgid "There was an error recovering the database: %s"
-msgstr "還原資料庫時有錯誤發生：%s"
+msgid "Translated: %d"
+msgstr "已翻譯條目數：%d"
 
-#: ../src/translation-memory/berkeley/gtr-db-base.c:175
+#: src/gtr-tab.c:2004
 #, c-format
-msgid "There was an error in database: %s"
-msgstr "資料庫內有錯誤：%s"
+msgid "Untranslated: %d"
+msgstr "未翻譯條目數：%d"
 
-#: ../src/translation-memory/gtr-translation-memory-ui.c:209
+#: src/gtr-tab.c:2005
 #, c-format
-msgid "Insert Option nº %d"
-msgstr "插入選項 nº %d"
-
-#: ../src/translation-memory/gtr-translation-memory-ui.c:286
-msgid "Shortcut"
-msgstr "捷徑"
-
-#: ../src/translation-memory/gtr-translation-memory-ui.c:295
-msgid "Level"
-msgstr "等級"
-
-#: ../src/translation-memory/gtr-translation-memory-ui.c:304
-msgid "String"
-msgstr "字串"
-
-#: ../src/gtr-utils.c:307
-msgid "Please check your installation."
-msgstr "請檢查您的安裝是否完整。"
-
-#: ../src/gtr-utils.c:368
-#, c-format
-msgid "Unable to open ui file %s. Error: %s"
-msgstr "無法開啟使用者介面檔案 %s。錯誤：%s"
-
-#: ../src/gtr-utils.c:388
-#, c-format
-msgid "Unable to find the object '%s' inside file %s."
-msgstr "無法尋找檔案 %s 內的物件「%s」。"
-
-#: ../src/gtr-utils.c:812
-msgid ""
-"Unable to display help. Please make sure the Gtranslator documentation "
-"package is installed."
-msgstr "無法顯示幫助。請確認 Gtranslator 文件套件是否已經安裝。"
-
-#: ../src/gtr-view.c:80
-#, c-format
-msgid "gtkspell error: %s\n"
-msgstr "gtkspell 錯誤： %s\n"
-
-#: ../src/gtr-view.c:82
-#, c-format
-msgid ""
-"GtkSpell was unable to initialize.\n"
-" %s"
-msgstr ""
-"GtkSpell 無法初始化。\n"
-" %s"
-
-#: ../src/gtr-window.c:123
-msgid "_File"
-msgstr "檔案(_F)"
-
-#: ../src/gtr-window.c:124
-msgid "_Edit"
-msgstr "編輯(_E)"
-
-#: ../src/gtr-window.c:125
-msgid "_View"
-msgstr "檢視(_V)"
-
-#: ../src/gtr-window.c:126
-msgid "_Search"
-msgstr "搜尋(_S)"
-
-#: ../src/gtr-window.c:127
-msgid "_Go"
-msgstr "前往(_G)"
-
-#: ../src/gtr-window.c:128
-msgid "_Documents"
-msgstr "文件(_D)"
-
-#: ../src/gtr-window.c:129
-msgid "_Help"
-msgstr "幫助(_H)"
-
-#: ../src/gtr-window.c:133
-msgid "Open a PO file"
-msgstr "開啟 po 檔案"
-
-#: ../src/gtr-window.c:135
-msgid "_Recent Files"
-msgstr "最近開檔紀錄(_R)"
-
-#: ../src/gtr-window.c:138
-msgid "Quit the program"
-msgstr "退出程式"
-
-#. Edit menu
-#: ../src/gtr-window.c:142
-msgid "T_oolbar"
-msgstr "工具列(_O)"
-
-#: ../src/gtr-window.c:145
-msgid "Edit gtranslator preferences"
-msgstr "編輯 gtranslator 偏好設定"
-
-#: ../src/gtr-window.c:147 ../src/gtr-window.c:193
-msgid "_Header..."
-msgstr "檔頭(_H)..."
-
-#. Help menu
-#: ../src/gtr-window.c:151
-msgid "_Contents"
-msgstr "內容(_C)"
-
-#: ../src/gtr-window.c:162
-msgid "Save the current file"
-msgstr "儲存目前的檔案"
-
-#: ../src/gtr-window.c:165
-msgid "Save the current file with another name"
-msgstr "用另一名稱儲存目前的檔案"
-
-#: ../src/gtr-window.c:171
-msgid "Close the current file"
-msgstr "關閉目前的檔案"
-
-#: ../src/gtr-window.c:176
-msgid "Undo last operation"
-msgstr "復原最近一次的操作"
-
-#: ../src/gtr-window.c:179
-msgid "Redo last undone operation"
-msgstr "取消復原上次的操作動作"
-
-#: ../src/gtr-window.c:182
-msgid "Cut the selected text"
-msgstr "剪下所選文字"
-
-#: ../src/gtr-window.c:185
-msgid "Copy the selected text"
-msgstr "複製所選文字"
-
-#: ../src/gtr-window.c:188
-msgid "Paste the contents of the clipboard"
-msgstr "貼上剪貼簿的內容"
-
-#: ../src/gtr-window.c:191
-msgid "Clear the selected translation"
-msgstr "清除所選的翻譯"
-
-#: ../src/gtr-window.c:195
-msgid "Copy _Message to Translation"
-msgstr "複製訊息到翻譯(_M)"
-
-#: ../src/gtr-window.c:197
-msgid "Copy original message contents to the translation field"
-msgstr "複製原文訊息內容到翻譯欄位"
-
-#: ../src/gtr-window.c:199
-msgid "Toggle _Fuzzy Status"
-msgstr "切換模糊狀態(_F)"
-
-#: ../src/gtr-window.c:200
-msgid "Toggle fuzzy status of a message"
-msgstr "切換訊息的模糊翻譯狀態"
-
-#: ../src/gtr-window.c:202
-msgid "_Translation Memory"
-msgstr "翻譯記憶(_T)"
-
-#. View menu
-#: ../src/gtr-window.c:207
-msgid "_Context"
-msgstr "條目(_C)"
-
-#: ../src/gtr-window.c:208
-msgid "Show the Context panel"
-msgstr "顯示條目面板"
-
-#. Go menu
-#: ../src/gtr-window.c:212
-msgid "_Previous Message"
-msgstr "上一個訊息(_P)"
-
-#: ../src/gtr-window.c:213
-msgid "Move back one message"
-msgstr "前往上一個訊息"
-
-#: ../src/gtr-window.c:215
-msgid "_Next Message"
-msgstr "下一個訊息(_N)"
-
-#: ../src/gtr-window.c:216
-msgid "Move forward one message"
-msgstr "前往下一個訊息"
-
-#: ../src/gtr-window.c:218
-msgid "_Go to Message..."
-msgstr "前往訊息(_G)..."
-
-#: ../src/gtr-window.c:219
-msgid "Jumps to a specific message"
-msgstr "跳到指定訊息"
-
-#: ../src/gtr-window.c:221
-msgid "_First Message"
-msgstr "第一個訊息(_F)"
-
-#: ../src/gtr-window.c:222
-msgid "Go to the first message"
-msgstr "前往最前的訊息"
-
-#: ../src/gtr-window.c:224
-msgid "_Last Message"
-msgstr "最後一個訊息(_L)"
-
-#: ../src/gtr-window.c:225
-msgid "Go to the last message"
-msgstr "前往最後的訊息"
-
-#: ../src/gtr-window.c:227
-msgid "Next Fuz_zy"
-msgstr "下一個模糊翻譯(_Z)"
-
-#: ../src/gtr-window.c:228
-msgid "Go to the next fuzzy message"
-msgstr "前往下一個模糊訊息"
-
-#: ../src/gtr-window.c:230
-msgid "Previous Fuzz_y"
-msgstr "上一個模糊(_Y)"
-
-#: ../src/gtr-window.c:231
-msgid "Go to the previous fuzzy message"
-msgstr "前往下一個模糊訊息"
-
-#: ../src/gtr-window.c:233
-msgid "Next _Untranslated"
-msgstr "下一個待譯訊息(_U)"
-
-#: ../src/gtr-window.c:234
-msgid "Go to the next untranslated message"
-msgstr "前往下一個待譯訊息"
-
-#: ../src/gtr-window.c:237
-msgid "Previ_ous Untranslated"
-msgstr "上一個待譯訊息(_O)"
-
-#: ../src/gtr-window.c:238
-msgid "Go to the previous untranslated message"
-msgstr "前往上一個待譯訊息"
-
-#: ../src/gtr-window.c:241
-msgid "Next Fu_zzy or Untranslated"
-msgstr "下一個模糊或待譯訊息(_U)"
-
-#: ../src/gtr-window.c:243
-msgid "Go to the next fuzzy or untranslated message"
-msgstr "前往下一個模糊或待譯訊息"
-
-#: ../src/gtr-window.c:246
-msgid "Pre_vious Fuzzy or Untranslated"
-msgstr "上一個模糊或是待譯(_V)"
-
-#: ../src/gtr-window.c:248
-msgid "Go to the previous fuzzy or untranslated message"
-msgstr "前往上一個模糊或待譯訊息"
-
-#: ../src/gtr-window.c:253
-msgid "Search for text"
-msgstr "搜尋文字"
-
-#: ../src/gtr-window.c:256
-msgid "Search for and replace text"
-msgstr "搜尋並取代文字"
-
-#. Documents menu
-#: ../src/gtr-window.c:260
-msgid "_Save All"
-msgstr "儲存全部(_S)"
-
-#: ../src/gtr-window.c:261
-msgid "Save all open files"
-msgstr "儲存所有開啟的檔案"
-
-#: ../src/gtr-window.c:263
-msgid "_Close All"
-msgstr "關閉全部(_C)"
-
-#: ../src/gtr-window.c:264
-msgid "Close all open files"
-msgstr "關閉所有開啟的檔案"
-
-#: ../src/gtr-window.c:266
-msgid "_Previous Document"
-msgstr "上一個文件(_P)"
-
-#: ../src/gtr-window.c:268
-msgid "Activate previous document"
-msgstr "啟動上一個文件"
-
-#: ../src/gtr-window.c:270
-msgid "_Next Document"
-msgstr "下一個文件(_N)"
-
-#: ../src/gtr-window.c:272
-msgid "Activate next document"
-msgstr "啟動下一個文件"
-
-#: ../src/gtr-window.c:705
-msgid "Untranslated"
-msgstr "待譯"
-
-#: ../src/gtr-window.c:708
-msgid "Translated"
-msgstr "已譯"
-
-#: ../src/gtr-window.c:711
-msgid "Fuzzy"
-msgstr "模糊"
-
-#: ../src/gtr-window.c:718
-#, c-format
-msgid "Current: %d"
-msgstr "目前：%d"
-
-#: ../src/gtr-window.c:719
-#, c-format
-msgid "Total: %d"
-msgstr "總共：%d"
-
-#: ../src/gtr-window.c:720
-#, c-format
-msgid "%d translated"
-msgid_plural "%d translated"
-msgstr[0] "%d 個已譯"
-msgstr[1] "%d 個已譯"
-
-#: ../src/gtr-window.c:723
-#, c-format
-msgid "%d fuzzy"
-msgid_plural "%d fuzzy"
-msgstr[0] "%d 個模糊"
-msgstr[1] "%d 個模糊"
-
-#: ../src/gtr-window.c:725
-#, c-format
-msgid "%d untranslated"
-msgid_plural "%d untranslated"
-msgstr[0] "%d 個待譯"
-msgstr[1] "%d 個待譯"
-
-#. Translators: %s is a URI
-#: ../src/gtr-window.c:779
-#, c-format
-msgid "Activate '%s'"
-msgstr "啟用「%s」"
+msgid "Fuzzy: %d"
+msgstr "模糊條目數：%d"
+
+#: src/gtr-tab.ui:14
+msgid "Previous message without translation"
+msgstr "上個未翻譯訊息條目"
+
+#: src/gtr-tab.ui:22
+msgid "Next message without translation"
+msgstr "下個未翻譯訊息條目"
+
+#: src/gtr-tab.ui:37
+msgid "Toggle Fuzzy State"
+msgstr "切換模糊狀態"
+
+#: src/gtr-tab.ui:54
+msgid "Find"
+msgstr "尋找"
+
+#: src/gtr-tab.ui:62
+msgid "Upload File"
+msgstr "上傳檔案"
+
+#. <property name="ypad">5</property>
+#: src/gtr-tab.ui:126 src/gtr-tab.ui:306
+msgid "_Original Message"
+msgstr "原文訊息(_O)"
+
+#. <property name="ypad">5</property>
+#: src/gtr-tab.ui:196
+msgid "Translate_d Text"
+msgstr "譯文(_D)"
+
+#: src/gtr-tab.ui:274
+msgid "Open a New File"
+msgstr "開啟新檔案"
+
+#: src/gtr-tab.ui:278
+msgid "Open from Damned Lies"
+msgstr "從 Damned Lies 開啟"
+
+#: src/gtr-tab.ui:288
+msgid "Save As…"
+msgstr "另存為…"
+
+#: src/gtr-tab.ui:294
+msgid "So_rt Messages by…"
+msgstr "訊息條目排序方式(_R)…"
+
+#: src/gtr-tab.ui:296
+msgid "_Order of Appearance"
+msgstr "出現順序(_O)"
+
+#: src/gtr-tab.ui:301
+msgid "_Message Status"
+msgstr "翻譯狀態(_M)"
+
+#: src/gtr-tab.ui:311
+msgid "_Translated Message"
+msgstr "譯文訊息(_T)"
+
+#: src/gtr-upload-dialog.c:155
+msgid "Uploading..."
+msgstr "正在上傳…"
+
+#: src/gtr-upload-dialog.c:161 src/gtr-upload-dialog.ui:21
+msgid "Upload"
+msgstr "上傳"
+
+#: src/gtr-upload-dialog.ui:8
+msgid "Upload to Damned Lies"
+msgstr "上傳到 Damned Lies"
+
+#: src/gtr-upload-dialog.ui:41
+msgid "comment:"
+msgstr "評註："
 
 #. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:953
+#: src/gtr-window.c:187
 #, c-format
-msgid "*%s - gtranslator"
-msgstr "*%s - gtranslator"
+msgid "*%s — Translation Editor"
+msgstr "*%s ― 翻譯編輯器"
 
 #. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:956
+#: src/gtr-window.c:194
 #, c-format
-msgid "%s - gtranslator"
-msgstr "%s - gtranslator"
+msgid "%s — Translation Editor"
+msgstr "%s ― 翻譯編輯器"
 
-#: ../src/gtr-window.c:962
-msgid "gtranslator"
-msgstr "gtranslator"
+#: src/gtr-window.c:329
+msgid "Could not Save"
+msgstr "無法儲存"
 
-#: ../src/gtr-window.c:1336
-msgid "Toolbar Editor"
-msgstr "工具列編輯器"
+#: src/gtr-window.c:342
+msgid "File saved"
+msgstr "檔案已儲存"
 
-#: ../src/gtr-window.c:1462
-msgid "No profile"
-msgstr "無個人檔案"
+#: src/help-overlay.ui:11
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "常規操作"
 
-#: ../src/gtr-window.c:1831
-msgid "Documents"
-msgstr "文件"
+#: src/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "開啟檔案"
+
+#: src/help-overlay.ui:21
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "儲存檔案"
+
+#: src/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "另存新檔"
+
+#: src/help-overlay.ui:33
+msgctxt "shortcut window"
+msgid "Download from DL"
+msgstr "從 Damned Lies 下載"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Upload to DL"
+msgstr "上傳到 Damned Lies"
+
+#: src/help-overlay.ui:45
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "偏好設定"
+
+#: src/help-overlay.ui:51
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "鍵盤快捷鍵"
+
+#: src/help-overlay.ui:57
+msgctxt "shortcut window"
+msgid "Help"
+msgstr "求助"
+
+#: src/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "新視窗"
+
+#: src/help-overlay.ui:69
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "退出"
+
+#: src/help-overlay.ui:77
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "編輯"
+
+#: src/help-overlay.ui:81
+msgctxt "shortcut window"
+msgid "Clear translation"
+msgstr "清除譯文"
+
+#: src/help-overlay.ui:87
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr "標記/取消標記為模糊譯文"
+
+#: src/help-overlay.ui:93
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "將原文複製到譯文欄位"
+
+#: src/help-overlay.ui:99
+msgctxt "shortcut window"
+msgid "Copy original text to clipboard"
+msgstr "將原文複製到剪貼簿"
+
+#: src/help-overlay.ui:107
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr "移動"
+
+#: src/help-overlay.ui:111
+msgctxt "shortcut window"
+msgid "Go to the previous message"
+msgstr "前往上個條目"
+
+#: src/help-overlay.ui:117
+msgctxt "shortcut window"
+msgid "Go to the next message"
+msgstr "前往下個條目"
+
+#: src/help-overlay.ui:123
+msgctxt "shortcut window"
+msgid "Go to the previous untranslated message"
+msgstr "前往上個未翻譯條目"
+
+#: src/help-overlay.ui:129
+msgctxt "shortcut window"
+msgid "Go to the next untranslated message"
+msgstr "前往下個未翻譯條目"
+
+#: src/help-overlay.ui:137
+msgctxt "shortcut window group"
+msgid "Translation Memory"
+msgstr "翻譯記憶"
+
+#: src/help-overlay.ui:141
+msgctxt "shortcut window"
+msgid "Build translation memory"
+msgstr "建置翻譯記憶資料庫"
+
+#: src/help-overlay.ui:147
+msgctxt "shortcut window"
+msgid "Use 1st...9th suggestion"
+msgstr "使用第1…第9項建議"
+
+#: src/help-overlay.ui:155
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "尋找與取代"
+
+#: src/help-overlay.ui:159
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "尋找"
+
+#: src/help-overlay.ui:165
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "尋找與取代"
+
+#: src/help-overlay.ui:171
+msgctxt "shortcut window"
+msgid "Forward-search"
+msgstr "往前尋找"
+
+#: src/help-overlay.ui:177
+msgctxt "shortcut window"
+msgid "Backward-search"
+msgstr "往後尋找"
+
+#: src/help-overlay.ui:183
+msgctxt "shortcut window"
+msgid "Hide find & replace bar"
+msgstr "隱藏尋找與取代工具列"
+
+#: src/main.c:97
+msgid "— Edit PO files"
+msgstr "― 編輯 PO 檔"
+
+#: src/main.c:101
+#, c-format
+msgid ""
+"%s\n"
+"Run “%s --help” to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"執行「%s --help」來查看可用命令列選項的完整清單。\n"
+
+#: src/translation-memory/gtr-translation-memory-dialog.c:77
+msgid "Select PO directory"
+msgstr "選擇 PO 目錄"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:8
+msgid "Translation Editor Memory Manager"
+msgstr "翻譯記憶管理員"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:43
+msgid "Database"
+msgstr "資料庫"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:48
+msgid "Select the directory which contains PO files"
+msgstr "選取包含 PO 檔的目錄"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
+msgid "Use only files with this name"
+msgstr "使用的檔案名稱須包含"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:79
+msgid "Add to Database"
+msgstr "加入資料庫"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
+msgid "PO directory"
+msgstr "PO 檔目錄"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
+msgid "Directory containing PO files to add to the translation memory."
+msgstr "將有 PO 檔的目錄加入到翻譯記憶資料庫。"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
+msgid "Restrict search by filename"
+msgstr "僅搜尋特定名稱的檔案"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
+msgid ""
+"If true, only include files with a specified filename when searching the "
+"translation memory."
+msgstr "開啟後，只會在特定名稱的檔案中搜尋翻譯記憶。"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
+msgid "Filename to restrict search to"
+msgstr "用來限制搜尋範圍的檔名"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
+msgid ""
+"Filename to which searching of the translation memory should be restricted."
+msgstr "要用來限制翻譯記憶的搜尋用檔名。"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
+msgid "Maximum number of missing words"
+msgstr "不符字詞的最大數目"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
+msgid ""
+"Maximum number of words that can be missing from a message displayed as a "
+"match by the translation memory."
+msgstr "翻譯記憶顯示的符合訊息中，可接受的不符字詞最大數目。"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
+msgid "Maximum difference in message length"
+msgstr "訊息長度的最大差異"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
+msgid ""
+"Maximum difference in length between messages displayed as matches by the "
+"translation memory."
+msgstr "翻譯訊息與符合的翻譯記憶間其差異長度最大容許值。"
+
+#~ msgid "Daniel García Moreno"
+#~ msgstr "Daniel García Moreno"
+
+#~ msgid "Side panel switcher style"
+#~ msgstr "切換側邊欄風格"
+
+#~ msgid "Style for switchers in the side panel."
+#~ msgstr "切換側邊欄的風格。"
+
+#~ msgid "Color scheme"
+#~ msgstr "配色方案"
+
+#, fuzzy
+#~ msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
+#~ msgstr "要用來突顯語法的 gtksourceview 色彩配套名稱"
+
+#~ msgid "Active plugins"
+#~ msgstr "啟用擴充套件"
+
+#~| msgctxt "alternate lang"
+#~| msgid "_Close"
+#~ msgid "_Close"
+#~ msgstr "關閉(_C)"
+
+#~ msgid "Current Maintainers"
+#~ msgstr "目前的維護者"
+
+#~ msgid "Previous Developers"
+#~ msgstr "先前的開發者"
+
+#~ msgid "Contributors"
+#~ msgstr "貢獻者"
+
+#~| msgid "Gtranslator Web Site"
+#~ msgid "Translation Editor Web Site"
+#~ msgstr "翻譯編輯器網站"
+
+#, c-format
+#~ msgid ""
+#~ "Do you want to save changes to this file: <span weight=\"bold\" "
+#~ "size=\"large\">%s</span>?"
+#~ msgstr ""
+#~ "將更動過的內容儲存到「 <span weight=\"bold\" size=\"large\">%s</span>」？"
+
+#~| msgid "If you don't save, all your changes will be permanently lost."
+#~ msgid ""
+#~ "If you don't save, all your unsaved changes will be permanently lost."
+#~ msgstr "若不儲存，將永久遺失所作的更動。"
+
+#, c-format
+#~ msgid ""
+#~ "Profile name: %s\n"
+#~ "Translator name: %s\n"
+#~ "Translator email: %s\n"
+#~ "Language name: %s\n"
+#~ "Team email: %s\n"
+#~ "Language code: %s\n"
+#~ "Character set: %s\n"
+#~ "Transfer encoding: %s\n"
+#~ "Plural form: %s\n"
+#~ msgstr ""
+#~ "設定檔：%s\n"
+#~ "翻譯者名稱：%s\n"
+#~ "翻譯者電子郵件：%s\n"
+#~ "語言：%s\n"
+#~ "翻譯團隊電子郵件：%s\n"
+#~ "語言代碼：%s\n"
+#~ "字元編碼：%s\n"
+#~ "傳輸編碼：%s\n"
+#~ "複數形式：%s\n"
+
+#~| msgid ""
+#~| "This assistant will help you to create the main profile\n"
+#~| "and generate your translation memory database."
+#~ msgid "This assistant will help you to create the main profile."
+#~ msgstr "精靈會協助建立設定檔。"
+
+#~ msgid "Assistant"
+#~ msgstr "精靈"
+
+#~ msgid "Question"
+#~ msgstr "問題"
+
+#~ msgid "Saving has been disabled by the system administrator."
+#~ msgstr "系統管理員不允許儲存。"
+
+#~| msgid "If you don't save, all your changes will be permanently lost."
+#~ msgid "If you don’t save, all your changes will be permanently lost."
+#~ msgstr "若不儲存，將永久遺失所作的更動。"
+
+#~ msgid "Notes:"
+#~ msgstr "備忘錄："
+
+#~ msgid "Add Note"
+#~ msgstr "加入備忘錄"
+
+#~ msgid "Context:"
+#~ msgstr "使用位置："
+
+#~ msgid "Format:"
+#~ msgstr "字串格式："
+
+#, c-format
+#~ msgid "The current state is: %s"
+#~ msgstr "目前狀態：%s"
+
+#~ msgid "Select team, module, branch and domain to get the translation file."
+#~ msgstr "選擇語言團隊、組件、版本分支及副檔名以取得翻譯檔。"
+
+#~| msgid "_About"
+#~ msgid "About"
+#~ msgstr "關於"
+
+#~ msgid "Quit"
+#~ msgstr "離開"
+
+#~| msgctxt "alternate lang"
+#~| msgid "_Open"
+#~ msgid "_Open"
+#~ msgstr "開啟(_O)"
+
+#~ msgid "_Language:"
+#~ msgstr "語言(_L)："
+
+#~ msgid "Language _code:"
+#~ msgstr "語言代碼(_C)："
+
+#~ msgid "Translator and Language"
+#~ msgstr "翻譯者及語言選項"
+
+#~ msgid "DL Team:"
+#~ msgstr "Damned Lies 語言團隊："
+
+#~ msgid "DL Module:"
+#~ msgstr "Damned Lies 組件："
+
+#~ msgid "DL State:"
+#~ msgstr "Damned Lies 狀態："
+
+#~ msgid "Go to Message"
+#~ msgstr "前往"
+
+#, fuzzy
+#~ msgid "Enter message number:"
+#~ msgstr "輸入訊息編號："
+
+#~| msgid "_Language:"
+#~ msgid ""
+#~ msgstr ""
+
+#~| msgid "Enter message number:"
+#~ msgid "Order messages by"
+#~ msgstr "排序依照"
+
+#~| msgid "Find in the po file"
+#~ msgid "Appearance in the original file"
+#~ msgstr "檔案順序"
+
+#~| msgid "Original Text"
+#~ msgid "Original message"
+#~ msgstr "原文順序"
+
+#~| msgid "Translated Text"
+#~ msgid "Translated message"
+#~ msgstr "譯文順序"
+
+#~| msgid "String to replace:"
+#~ msgid "Find and replace"
+#~ msgstr "尋找與取代"
+
+#~| msgid "Edit Header"
+#~ msgid "Edit header"
+#~ msgstr "編輯檔案標頭"
+
+#~| msgid "Open a PO file"
+#~ msgid "Open a new file (<Ctrl>o)"
+#~ msgstr "開啟檔案 (<Ctrl>o)"
+
+#~ msgid "Open from Damned Lies (<Ctrl>d)"
+#~ msgstr "從 Damned Lies 開啟(<Ctrl>d)"
+
+#~ msgid "Undo (<Ctrl>z)"
+#~ msgstr "還原 (<Ctrl>z)"
+
+#~ msgid "Redo (<Ctrl><Shift>z)"
+#~ msgstr "重做 (<Ctrl><Shift>z)"
+
+#~ msgid "Find (<Ctrl><f>)"
+#~ msgstr "尋找 (<Ctrl><f>)"
+
+#~| msgid "Save the current file"
+#~ msgid "Save the current file (<Ctrl>s)"
+#~ msgstr "儲存目前的檔案 (<Ctrl>s)"
+
+#~ msgid "Save as (<Ctrl><Shift>s)"
+#~ msgstr "另存新檔 (<Ctrl><Shift>s)"
+
+#~ msgid "Upload file (<Ctrl>b)"
+#~ msgstr "上傳檔案 (<Ctrl>b)"
+
+#~ msgid "Active"
+#~ msgstr "使用中"
+
+#~| msgid "Gtranslator Preferences"
+#~ msgid "Translation Editor Preferences"
+#~ msgstr "翻譯編輯器偏好設定"
+
+#~ msgid "_Autosave files every"
+#~ msgstr "自動儲存檔案的間隔(_A)。"
+
+#~ msgid "_minutes"
+#~ msgstr "分鐘(_M)"
+
+#~| msgid "Editor font"
+#~ msgid "Choose the editor font"
+#~ msgstr "選擇編輯器字型"
+
+#~| msgid "_Name:"
+#~ msgid "_Name"
+#~ msgstr "設定檔(_N)"
+
+#~| msgid "N_ame:"
+#~ msgid "N_ame"
+#~ msgstr "名稱(_A)"
+
+#~| msgid "_Email:"
+#~ msgid "_Email"
+#~ msgstr "電子郵件(_E)"
+
+#~| msgid "_Team email:"
+#~ msgid "_Team email"
+#~ msgstr "團隊電子郵件(_T)"
+
+#~ msgid "Language Settings"
+#~ msgstr "語言設定"
+
+#~| msgid "_Wrap around"
+#~ msgid "Wrap Around"
+#~ msgstr "循環搜尋"
+
+#~ msgid "Close document"
+#~ msgstr "關閉文件"
+
+#~ msgid "_Upload"
+#~ msgstr "上傳(_U)"
+
+#~| msgid "Undo"
+#~ msgctxt "shortcut window"
+#~ msgid "Undo"
+#~ msgstr "還原"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Redo"
+#~ msgstr "重做"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Copy below"
+#~ msgstr "套用對應的譯文"
+
+#~ msgid "Configuration:"
+#~ msgstr "選項："
+
+#~| msgid "Gettext translation"
+#~ msgid "_Use this translation"
+#~ msgstr "套用譯文(_U)"
+
+#~ msgid "_Remove"
+#~ msgstr "移除(_R)"
+
+#~ msgid "Shortcut"
+#~ msgstr "捷徑鍵"
+
+#~ msgid "Level"
+#~ msgstr "相似度"
+
+#~ msgid "String"
+#~ msgstr "譯文"
+
+#~ msgid "Custom font to use for edit fields."
+#~ msgstr "自訂編輯欄位使用的字型。"
+
+#~ msgid "Delete compiled GMO files"
+#~ msgstr "刪除已編譯的 GMO 檔案"
+
+#, fuzzy
+#~ msgid ""
+#~ "Style for switchers in the side pane. Possible values are \"icons\", "
+#~ "\"text\", \"icons_and_text\", \"tabs\" and \"system\"."
+#~ msgstr ""
+#~ "供側邊窗格內切換器使用的樣式。可能的值為「icons」(圖示)、「text」(文字)、"
+#~ "「icons_and_text」(圖示與文字)、「tabs」(分頁)，以及「system」(系統)。"
+
+#~ msgid "Use custom font"
+#~ msgstr "使用自訂字型"
+
+#~ msgid "Others"
+#~ msgstr "其他"
+
+#~ msgid "Special variable"
+#~ msgstr "特殊變數"
+
+#~ msgid "Tag"
+#~ msgstr "標籤"
+
+#~ msgid "gtranslator highlight"
+#~ msgstr "gtranslator 突顯處理"
+
+#~ msgid "Message not found"
+#~ msgstr "找不到訊息"
+
+#~ msgid "Open file for alternate language"
+#~ msgstr "開啟作為替代語言的檔案"
+
+#~ msgid "File closed"
+#~ msgstr "檔案已關閉"
+
+#~ msgctxt "alternate lang"
+#~ msgid "Co_py"
+#~ msgstr "複製(_P)"
+
+#~ msgid "There isn't any file loaded"
+#~ msgstr "沒有載入任何檔案"
+
+#~ msgid "_Alternate Language"
+#~ msgstr "替代語言(_A)"
+
+#~ msgid "Show the Alternate Language panel"
+#~ msgstr "顯示替代語言面板"
+
+#~ msgid "Alternate Language"
+#~ msgstr "替代語言"
+
+#~ msgid "Load an alternate language."
+#~ msgstr "載入一種替代語言。"
+
+#~ msgid "Character Map"
+#~ msgstr "字元對應表"
+
+#~ msgid "Insert special characters just by clicking on them."
+#~ msgstr "只要點擊特殊字元就能直接插入。"
+
+#, c-format
+#~ msgid "No dictionary source available with name '%s'"
+#~ msgstr "沒有名稱為「%s」的可用字典來源"
+
+#~ msgid "Unable to find dictionary source"
+#~ msgstr "無法尋找字典來源"
+
+#, c-format
+#~ msgid "No context available for source '%s'"
+#~ msgstr "來源「%s」沒有可用的條目內容"
+
+#~ msgid "Unable to create a context"
+#~ msgstr "無法建立條目"
+
+#, c-format
+#~ msgid "Dictionary source '%s' selected"
+#~ msgstr "字典來源「%s」已選取"
+
+#, c-format
+#~ msgid "Strategy '%s' selected"
+#~ msgstr "策略「%s」已選取"
+
+#, c-format
+#~ msgid "Database '%s' selected"
+#~ msgstr "資料庫「%s」已選取"
+
+#, c-format
+#~ msgid "Word '%s' selected"
+#~ msgstr "字詞「%s」已選取"
+
+#~ msgid "Double-click on the word to look up"
+#~ msgstr "對想要查詢的字詞點擊兩下"
+
+#~ msgid "Double-click on the matching strategy to use"
+#~ msgstr "對要使用的比對策略點擊兩下"
+
+#~ msgid "Double-click on the source to use"
+#~ msgstr "對要使用的來源點擊兩下"
+
+#~ msgid "Double-click on the database to use"
+#~ msgstr "對要使用的資料庫點擊兩下"
+
+#~ msgid "Look _up:"
+#~ msgstr "查詢(_U)："
+
+#~ msgid "Similar words"
+#~ msgstr "類似字詞"
+
+#~ msgid "Available dictionaries"
+#~ msgstr "可用的字典"
+
+#~ msgid "Available strategies"
+#~ msgstr "可用的策略"
+
+#~ msgid "Dictionary sources"
+#~ msgstr "字典來源"
+
+#~ msgid "Dictionary"
+#~ msgstr "字典"
+
+#~ msgid "Look up words in a dictionary."
+#~ msgstr "於字典內查詢字詞。"
+
+#~ msgid "_Fullscreen"
+#~ msgstr "全螢幕(_F)"
+
+#~ msgid "Place window on fullscreen state"
+#~ msgstr "切將視窗切換為全螢幕狀態"
+
+#~ msgid "Fullscreen"
+#~ msgstr "全螢幕"
+
+#~ msgid "Place window in the fullscreen state."
+#~ msgstr "切將視窗切換為全螢幕狀態。"
+
+#~ msgid "_Next Param"
+#~ msgstr "下一個參數(_N)"
+
+#~ msgid "Insert the next param of the message"
+#~ msgstr "插入這個訊息的下一個參數"
+
+#~ msgid "_Insert Params"
+#~ msgstr "插入參數(_I)"
+
+#~ msgid "Insert Params"
+#~ msgstr "插入參數"
+
+#~ msgid "Parameters detection and easy insertion."
+#~ msgstr "參數偵測與簡易插入。"
+
+#~ msgid "_Next Tag"
+#~ msgstr "下一個標籤(_N)"
+
+#~ msgid "Insert the next tag of the message"
+#~ msgstr "插入訊息的下一個標籤"
+
+#~ msgid "_Insert Tags"
+#~ msgstr "插入標籤(_I)"
+
+#~ msgid "Insert Tags"
+#~ msgstr "插入標籤"
+
+#~ msgid "Tags detection and easy insertion."
+#~ msgstr "標籤偵測與簡易插入。"
+
+#~ msgid "Code language of the results:"
+#~ msgstr "結果的代碼語言："
+
+#~ msgid "Code language to query open-tran:"
+#~ msgstr "要查詢 open-tran 用的代碼語言："
+
+#~ msgid "Open Tran Settings"
+#~ msgstr "Open Tran 設定"
+
+#, c-format
+#~ msgid "ERROR: %d %s\n"
+#~ msgstr "錯誤：%d %s\n"
+
+#, c-format
+#~ msgid "FAULT: %d %s\n"
+#~ msgstr "嚴重錯誤：%d %s\n"
+
+#~ msgid "ERROR: could not parse response\n"
+#~ msgstr "錯誤：無法解析回應\n"
+
+#, c-format
+#~ msgid "WRONG! Can't get result element %d\n"
+#~ msgstr "錯誤！無法取得結果元素 %d\n"
+
+#~ msgid "Phrase not found"
+#~ msgstr "找不到詞語"
+
+#~ msgid "You have to provide a phrase to search"
+#~ msgstr "您必須提供搜尋用的詞語"
+
+#~ msgid "You have to provide a search language code"
+#~ msgstr "您必須提供搜尋用的語言代碼"
+
+#~ msgid "You have to provide a language code for your language"
+#~ msgstr "您必須提供您語言的語言代碼"
+
+#~ msgid "Type"
+#~ msgstr "類型"
+
+#~ msgid "Open-Tran.eu"
+#~ msgstr "Open-Tran.eu"
+
+#~ msgid "Look for:"
+#~ msgstr "查詢："
+
+#~ msgid "Open Tran"
+#~ msgstr "Open Tran"
+
+#~ msgid "Look for phrases in Open tran memory translation database."
+#~ msgstr "在 Open tran memory 翻譯資料庫內查詢詞語。"
+
+#~ msgid "Line command:"
+#~ msgstr "列命令："
+
+#~ msgid "Program command:"
+#~ msgstr "程式命令："
+
+#~ msgid "Source View Settings"
+#~ msgstr "源碼檢視設定"
+
+#~ msgid "Use external editor"
+#~ msgstr "使用外部編輯器"
+
+#, c-format
+#~ msgid "Please install \"%s\" to be able to show the file"
+#~ msgstr "請安裝「%s」才能顯示這個檔案"
+
+#~ msgid "Show the message in the source code."
+#~ msgstr "在源碼內顯示訊息。"
+
+#~ msgid "Source Code View"
+#~ msgstr "源碼檢視"
+
+#~ msgid "Files saved."
+#~ msgstr "檔案已儲存。"
+
+#~ msgid "Current Developers"
+#~ msgstr "目前的開發者"
+
+#~ msgid "Copyright © 1999-2008 Free Software Foundation, Inc."
+#~ msgstr "版權所有 © 1999-2008 自由軟體基金會"
+
+#~ msgid "About Gtranslator"
+#~ msgstr "關於 Gtranslator"
+
+#, c-format
+#~ msgid "Found and replaced %d occurrence"
+#~ msgid_plural "Found and replaced %d occurrences"
+#~ msgstr[0] "找到並取代了 %d 個出現位置"
+#~ msgstr[1] "找到並取代了 %d 個出現位置"
+
+#~ msgid "Found and replaced one occurrence"
+#~ msgstr "找到並取代了一個出現位置"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
+#~ msgstr "<span weight=\"bold\" size=\"large\">字串已加入資料庫</span>"
+
+#~ msgid "None"
+#~ msgstr "無"
+
+#~ msgid "<b>Translator name:</b>"
+#~ msgstr "<b>翻譯者姓名：</b>"
+
+#~ msgid "<b>Translator email:</b>"
+#~ msgstr "<b>翻譯者電子郵件：</b>"
+
+#~ msgid "<b>Language:</b>"
+#~ msgstr "<b>語言：</b>"
+
+#~ msgid "<b>Team email:</b>"
+#~ msgstr "<b>團隊電子郵件：</b>"
+
+#~ msgid "<b>Language code:</b>"
+#~ msgstr "<b>語言代碼：</b>"
+
+#~ msgid "<b>Character set:</b>"
+#~ msgstr "<b>字元集：</b>"
+
+#~ msgid "<b>Transfer encoding:</b>"
+#~ msgstr "<b>傳輸編碼：</b>"
+
+#~ msgid "<b>Plural forms:</b>"
+#~ msgstr "<b>複數形式：</b>"
+
+#~ msgid "Checkout directory"
+#~ msgstr "檢出目錄"
+
+#~ msgid "<b>Select the path to generate the database:</b>"
+#~ msgstr "<b>選取用來產生資料庫的路徑</b>"
+
+#~ msgid "<b>Look for a specific PO filename:</b>"
+#~ msgstr "<b>查詢特定的 PO 檔名：</b>"
+
+#~ msgid "E.g.: gl.po"
+#~ msgstr "例：gl.po"
+
+#~ msgid "Generate Database"
+#~ msgstr "產生資料庫"
+
+#~ msgid "    "
+#~ msgstr "    "
+
+#~ msgid "Anchor style:"
+#~ msgstr "錨點樣式："
+
+#~ msgid "Editor _font:"
+#~ msgstr "編輯器字型(_F)："
+
+#~ msgid "Interface"
+#~ msgstr "介面"
+
+#~ msgid "Max. # of missing words:"
+#~ msgstr "最大的遺失字詞數目："
+
+#~ msgid "Max. difference in sentence length:"
+#~ msgstr "最大的句子長度差異："
+
+#~ msgid "Plugins"
+#~ msgstr "外掛程式"
+
+#~ msgid "Scheme color:"
+#~ msgstr "色彩配套："
+
+#~ msgid "Use _custom font"
+#~ msgstr "使用自訂字型(_C)"
+
+#~ msgid "_Delete compiled GMO files"
+#~ msgstr "刪除已編譯的 GNO 檔案(_D)"
+
+#~ msgid "Replace _All"
+#~ msgstr "全部取代(_A)"
+
+#~ msgid "_Replace"
+#~ msgstr "取代(_R)"
+
+#~ msgid "Include fu_zzy strings"
+#~ msgstr "包含模糊字串(_Z)"
+
+#~ msgid "Replace _with: "
+#~ msgstr "以此取代(_W)："
+
+#~ msgid "Search _backwards"
+#~ msgstr "往後搜尋(_B)"
+
+#~ msgid "_Match case"
+#~ msgstr "符合大小寫(_M)"
+
+#~ msgid "_Search for: "
+#~ msgstr "搜尋(_S)："
+
+#~ msgid "[FILE...]"
+#~ msgstr "[檔案..]"
+
+#~ msgid "Create a new toplevel window in an existing instance of Gtranslator"
+#~ msgstr "在 Gtranslator 現存的實體內建立新的最上層視窗"
+
+#, c-format
+#~ msgid "%s: malformed file name or URI.\n"
+#~ msgstr "%s：檔名或 URI 格式不良\n"
+
+#, c-format
+#~ msgid "Error during GConf initialization: %s."
+#~ msgstr "GConf 初始化時發生錯誤：%s。"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Plugin"
+#~ msgstr "外掛程式"
+
+#~ msgid "Enabled"
+#~ msgstr "已啟用"
+
+#~ msgid "C_onfigure"
+#~ msgstr "組態(_C)"
+
+#~ msgid "A_ctivate"
+#~ msgstr "啟用(_C)"
+
+#~ msgid "Ac_tivate All"
+#~ msgstr "啟用全部(_T)"
+
+#~ msgid "_Deactivate All"
+#~ msgstr "停用全部(_A)"
+
+#~ msgid "_About Plugin"
+#~ msgstr "關於外掛程式(_A)"
+
+#~ msgid "C_onfigure Plugin"
+#~ msgstr "組態外掛程式(_C)"
+
+#~ msgid "INS"
+#~ msgstr "插入"
+
+#~ msgid "OVR"
+#~ msgstr "覆寫"
+
+#~ msgid "<b>Original Text:</b>"
+#~ msgstr "<b>原文：</b>"
+
+#~ msgid "<b>Translate_d Text:</b>"
+#~ msgstr "<b>譯文(_D)：</b>"
+
+#~ msgid "Context"
+#~ msgstr "條目"
+
+#, c-format
+#~ msgid "Show “_%s”"
+#~ msgstr "顯示「%s」"
+
+#~ msgid "_Move on Toolbar"
+#~ msgstr "在工具列上移動(_M)"
+
+#~ msgid "Move the selected item on the toolbar"
+#~ msgstr "在工具列上移動所選的項目"
+
+#~ msgid "_Remove from Toolbar"
+#~ msgstr "從工具列移除(_R)"
+
+#~ msgid "Remove the selected item from the toolbar"
+#~ msgstr "從工具列移除所選的項目"
+
+#~ msgid "Remove the selected toolbar"
+#~ msgstr "移除所選的工具列"
+
+#~ msgid "Separator"
+#~ msgstr "分隔符號"
+
+#~ msgid "Running recovery..."
+#~ msgstr "正在執行還原..."
+
+#, c-format
+#~ msgid "There was an error recovering the database: %s"
+#~ msgstr "還原資料庫時有錯誤發生：%s"
+
+#, c-format
+#~ msgid "There was an error in database: %s"
+#~ msgstr "資料庫內有錯誤：%s"
+
+#, c-format
+#~ msgid "Insert Option nº %d"
+#~ msgstr "插入選項 nº %d"
+
+#~ msgid "Please check your installation."
+#~ msgstr "請檢查您的安裝是否完整。"
+
+#, c-format
+#~ msgid "Unable to open ui file %s. Error: %s"
+#~ msgstr "無法開啟使用者介面檔案 %s。錯誤：%s"
+
+#, c-format
+#~ msgid "Unable to find the object '%s' inside file %s."
+#~ msgstr "無法尋找檔案 %s 內的物件「%s」。"
+
+#~ msgid ""
+#~ "Unable to display help. Please make sure the Gtranslator documentation "
+#~ "package is installed."
+#~ msgstr "無法顯示幫助。請確認 Gtranslator 文件套件是否已經安裝。"
+
+#, c-format
+#~ msgid "gtkspell error: %s\n"
+#~ msgstr "gtkspell 錯誤： %s\n"
+
+#, c-format
+#~ msgid ""
+#~ "GtkSpell was unable to initialize.\n"
+#~ " %s"
+#~ msgstr ""
+#~ "GtkSpell 無法初始化。\n"
+#~ " %s"
+
+#~ msgid "_File"
+#~ msgstr "檔案(_F)"
+
+#~ msgid "_Edit"
+#~ msgstr "編輯(_E)"
+
+#~ msgid "_View"
+#~ msgstr "檢視(_V)"
+
+#~ msgid "_Go"
+#~ msgstr "前往(_G)"
+
+#~ msgid "_Documents"
+#~ msgstr "文件(_D)"
+
+#~ msgid "_Recent Files"
+#~ msgstr "最近開檔紀錄(_R)"
+
+#~ msgid "Quit the program"
+#~ msgstr "退出程式"
+
+#~ msgid "T_oolbar"
+#~ msgstr "工具列(_O)"
+
+#~ msgid "Edit gtranslator preferences"
+#~ msgstr "編輯 gtranslator 偏好設定"
+
+#~ msgid "_Header..."
+#~ msgstr "檔頭(_H)..."
+
+#~ msgid "_Contents"
+#~ msgstr "內容(_C)"
+
+#~ msgid "Save the current file with another name"
+#~ msgstr "用另一名稱儲存目前的檔案"
+
+#~ msgid "Close the current file"
+#~ msgstr "關閉目前的檔案"
+
+#~ msgid "Undo last operation"
+#~ msgstr "復原最近一次的操作"
+
+#~ msgid "Redo last undone operation"
+#~ msgstr "取消復原上次的操作動作"
+
+#~ msgid "Cut the selected text"
+#~ msgstr "剪下所選文字"
+
+#~ msgid "Copy the selected text"
+#~ msgstr "複製所選文字"
+
+#~ msgid "Paste the contents of the clipboard"
+#~ msgstr "貼上剪貼簿的內容"
+
+#~ msgid "Copy _Message to Translation"
+#~ msgstr "複製訊息到翻譯(_M)"
+
+#~ msgid "Toggle fuzzy status of a message"
+#~ msgstr "切換訊息的模糊翻譯狀態"
+
+#~ msgid "_Translation Memory"
+#~ msgstr "翻譯記憶(_T)"
+
+#~ msgid "_Context"
+#~ msgstr "條目(_C)"
+
+#~ msgid "Show the Context panel"
+#~ msgstr "顯示條目面板"
+
+#~ msgid "_Previous Message"
+#~ msgstr "上一個訊息(_P)"
+
+#~ msgid "Move back one message"
+#~ msgstr "前往上一個訊息"
+
+#~ msgid "_Next Message"
+#~ msgstr "下一個訊息(_N)"
+
+#~ msgid "Move forward one message"
+#~ msgstr "前往下一個訊息"
+
+#~ msgid "_Go to Message..."
+#~ msgstr "前往訊息(_G)..."
+
+#~ msgid "Jumps to a specific message"
+#~ msgstr "跳到指定訊息"
+
+#~ msgid "_First Message"
+#~ msgstr "第一個訊息(_F)"
+
+#~ msgid "Go to the first message"
+#~ msgstr "前往最前的訊息"
+
+#~ msgid "_Last Message"
+#~ msgstr "最後一個訊息(_L)"
+
+#~ msgid "Go to the last message"
+#~ msgstr "前往最後的訊息"
+
+#~ msgid "Next Fuz_zy"
+#~ msgstr "下一個模糊翻譯(_Z)"
+
+#~ msgid "Previous Fuzz_y"
+#~ msgstr "上一個模糊(_Y)"
+
+#~ msgid "Next _Untranslated"
+#~ msgstr "下一個待譯訊息(_U)"
+
+#~ msgid "Previ_ous Untranslated"
+#~ msgstr "上一個待譯訊息(_O)"
+
+#~ msgid "Next Fu_zzy or Untranslated"
+#~ msgstr "下一個模糊或待譯訊息(_U)"
+
+#~ msgid "Go to the next fuzzy or untranslated message"
+#~ msgstr "前往下一個模糊或待譯訊息"
+
+#~ msgid "Pre_vious Fuzzy or Untranslated"
+#~ msgstr "上一個模糊或是待譯(_V)"
+
+#~ msgid "Go to the previous fuzzy or untranslated message"
+#~ msgstr "前往上一個模糊或待譯訊息"
+
+#~ msgid "Search for text"
+#~ msgstr "搜尋文字"
+
+#~ msgid "Search for and replace text"
+#~ msgstr "搜尋並取代文字"
+
+#~ msgid "_Save All"
+#~ msgstr "儲存全部(_S)"
+
+#~ msgid "_Close All"
+#~ msgstr "關閉全部(_C)"
+
+#~ msgid "Close all open files"
+#~ msgstr "關閉所有開啟的檔案"
+
+#~ msgid "_Previous Document"
+#~ msgstr "上一個文件(_P)"
+
+#~ msgid "Activate previous document"
+#~ msgstr "啟動上一個文件"
+
+#~ msgid "_Next Document"
+#~ msgstr "下一個文件(_N)"
+
+#~ msgid "Activate next document"
+#~ msgstr "啟動下一個文件"
+
+#, c-format
+#~ msgid "Current: %d"
+#~ msgstr "目前：%d"
+
+#, c-format
+#~ msgid "Total: %d"
+#~ msgstr "總共：%d"
+
+#, c-format
+#~ msgid "%d translated"
+#~ msgid_plural "%d translated"
+#~ msgstr[0] "%d 個已譯"
+#~ msgstr[1] "%d 個已譯"
+
+#, c-format
+#~ msgid "%d fuzzy"
+#~ msgid_plural "%d fuzzy"
+#~ msgstr[0] "%d 個模糊"
+#~ msgstr[1] "%d 個模糊"
+
+#, c-format
+#~ msgid "%d untranslated"
+#~ msgid_plural "%d untranslated"
+#~ msgstr[0] "%d 個待譯"
+#~ msgstr[1] "%d 個待譯"
+
+#, c-format
+#~ msgid "%s - gtranslator"
+#~ msgstr "%s - gtranslator"
+
+#~ msgid "gtranslator"
+#~ msgstr "gtranslator"
+
+#~ msgid "Toolbar Editor"
+#~ msgstr "工具列編輯器"
+
+#~ msgid "Documents"
+#~ msgstr "文件"
 
 #~ msgid "Edit Comment"
 #~ msgstr "編輯備註"
@@ -1770,9 +2191,6 @@ msgstr "文件"
 
 #~ msgid "Open comment dialog"
 #~ msgstr "開啟備註對話盒"
-
-#~ msgid "Message Table"
-#~ msgstr "訊息表格"
 
 #~ msgid "C_omment..."
 #~ msgstr "備註(_O)..."
@@ -1833,14 +2251,8 @@ msgstr "文件"
 #~ msgid "Should ALL translations from `%s' be removed?"
 #~ msgstr "應否移除‘%s’檔內的所有翻譯訊息？"
 
-#~ msgid "Find in the po file"
-#~ msgstr "在 po 檔案內搜尋"
-
 #~ msgid "Enter search string:"
 #~ msgstr "輸入準備搜尋的字串："
-
-#~ msgid "Case sensitive"
-#~ msgstr "區分大小寫"
 
 #~ msgid "Find in:"
 #~ msgstr "搜尋範圍："
@@ -1850,9 +2262,6 @@ msgstr "文件"
 
 #~ msgid "Ignore hotkeys"
 #~ msgstr "不理會助憶鍵 (hotkey) 符號"
-
-#~ msgid "String to replace:"
-#~ msgstr "搜尋目標："
 
 #~ msgid "Replace string:"
 #~ msgstr "取代為："
@@ -1954,13 +2363,6 @@ msgstr "文件"
 #~ msgid "Please enter a search string"
 #~ msgstr "請輸入準備搜尋的字串"
 
-#~ msgid ""
-#~ "Could not find\n"
-#~ "\"%s\""
-#~ msgstr ""
-#~ "找不到\n"
-#~ "“%s”"
-
 #~ msgid "%s [ %i Fuzzy left ]"
 #~ msgid_plural "%s [ %i Fuzzy left ]"
 #~ msgstr[0] "%s [ 剩下 %i 個模糊字串 ]"
@@ -1988,9 +2390,6 @@ msgstr "文件"
 
 #~ msgid "gtranslator -- edit header"
 #~ msgstr "gtranslator -- 編輯檔頭"
-
-#~ msgid "Comments:"
-#~ msgstr "備註："
 
 #~ msgid "_File/Recen_t files/"
 #~ msgstr "檔案(_F)/最近開檔紀錄(_T)/"
@@ -2295,9 +2694,6 @@ msgstr "文件"
 #~ msgid "gtranslator's homepage on the web"
 #~ msgstr "gtranslator 的網址"
 
-#~ msgid "Save"
-#~ msgstr "存檔"
-
 #~ msgid "Save as"
 #~ msgstr "另存新檔"
 
@@ -2310,17 +2706,11 @@ msgstr "文件"
 #~ msgid "Header"
 #~ msgstr "檔頭"
 
-#~ msgid "Undo"
-#~ msgstr "復原"
-
 #~ msgid "First"
 #~ msgstr "最前"
 
 #~ msgid "Back"
 #~ msgstr "上一個"
-
-#~ msgid "Next"
-#~ msgstr "下一個"
 
 #~ msgid "Last"
 #~ msgstr "最後"
@@ -2498,9 +2888,6 @@ msgstr "文件"
 
 #~ msgid "Can't create directory `%s'!"
 #~ msgstr "無法建立目錄‘%s’！"
-
-#~ msgid "Error autosaving file: %s"
-#~ msgstr "自動儲存檔案錯誤：%s"
 
 #~ msgid "The geometry string \"%s\" couldn't be parsed!"
 #~ msgstr "無法分析指定視窗尺寸及位置的字串“%s”"
