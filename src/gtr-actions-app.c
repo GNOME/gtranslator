@@ -85,7 +85,7 @@ gtr_about_dialog (GtrWindow *window)
   static const gchar comments[] =
     N_("Translation file editing suite for localization of applications and libraries.");
 
-  adw_show_about_window (GTK_WINDOW (window),
+  adw_show_about_dialog (GTK_WIDGET (window),
                          "application-name", _("Translation Editor"),
                          "application-icon", PACKAGE_APPID,
                          "version", get_version (),

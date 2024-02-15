@@ -55,11 +55,11 @@ typedef struct
 
 struct _GtrProfileDialog
 {
-  AdwWindow parent_instance;
+  AdwDialog parent_instance;
 };
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrProfileDialog, gtr_profile_dialog,
-                            ADW_TYPE_WINDOW)
+                            ADW_TYPE_DIALOG)
 
 enum
 {
@@ -80,16 +80,13 @@ static void
 on_cancel_button_clicked (GtkButton                  *button,
                           GtrProfileDialog           *dlg)
 {
-  gtk_window_destroy (GTK_WINDOW (dlg));
+  adw_dialog_close (ADW_DIALOG (dlg));
 }
 
 static void
 gtr_profile_dialog_class_init (GtrProfileDialogClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0,
-                                       "window.close", NULL);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/translator/gtr-profile-dialog.ui");
@@ -171,8 +168,7 @@ fill_entries (GtrProfileDialog *dlg, GtrProfile *profile)
 }
 
 GtrProfileDialog *
-gtr_profile_dialog_new (GtkWidget  *parent,
-                        GtrProfile *profile)
+gtr_profile_dialog_new (GtrProfile *profile)
 {
   GtrProfileDialog *dlg;
 
@@ -181,11 +177,6 @@ gtr_profile_dialog_new (GtkWidget  *parent,
   if (profile != NULL)
     {
       fill_entries (dlg, profile);
-    }
-
-  if (GTK_WINDOW (parent) != gtk_window_get_transient_for (GTK_WINDOW (dlg)))
-    {
-      gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (parent));
     }
 
   return dlg;

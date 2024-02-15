@@ -155,9 +155,10 @@ drag_data_received_cb (GtkDropTarget * drop_target,
   gtr_open (g_value_get_object (value), window, &error);
   if (error != NULL)
     {
-      g_autoptr (GtkAlertDialog) dialog = NULL;
-      dialog = gtk_alert_dialog_new ("%s", error->message);
-      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+      AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
+      adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+      adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
+      adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (window));
     }
   return TRUE;
 }
@@ -324,16 +325,15 @@ gtr_window_save_current_tab (GtrWindow *self)
 
   if (error)
     {
-      AdwMessageDialog *dialog;
-      dialog = ADW_MESSAGE_DIALOG (adw_message_dialog_new (
-          GTK_WINDOW (self), _("Could not Save"), NULL));
-      adw_message_dialog_format_body (dialog, "%s", error->message);
-      adw_message_dialog_add_response (dialog, "ok", _("OK"));
-      adw_message_dialog_set_default_response (dialog, "ok");
-      adw_message_dialog_set_close_response (dialog, "ok");
-      adw_message_dialog_choose (
-          dialog, NULL, (GAsyncReadyCallback)adw_message_dialog_choose_finish,
-          NULL);
+      AdwAlertDialog *dialog;
+      dialog = ADW_ALERT_DIALOG (adw_alert_dialog_new (
+          _("Could not Save"), error->message));
+      adw_alert_dialog_add_response (dialog, "ok", _("OK"));
+      adw_alert_dialog_set_default_response (dialog, "ok");
+      adw_alert_dialog_set_close_response (dialog, "ok");
+      adw_alert_dialog_choose (
+          dialog, GTK_WIDGET (self), NULL,
+          (GAsyncReadyCallback)adw_alert_dialog_choose_finish, NULL);
       return;
     }
 
@@ -658,10 +658,9 @@ gtr_window_show_tm_dialog (GtrWindow *window)
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GtkWidget *dlg;
 
-  dlg = gtr_translation_memory_dialog_new (GTK_WINDOW (window),
-                                           priv->translation_memory);
+  dlg = gtr_translation_memory_dialog_new (priv->translation_memory);
 
-  gtk_window_present (GTK_WINDOW (dlg));
+  adw_dialog_present (ADW_DIALOG (dlg), GTK_WIDGET (window));
 }
 
 GtrTranslationMemory *

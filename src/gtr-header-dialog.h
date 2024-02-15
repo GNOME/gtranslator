@@ -28,7 +28,7 @@
 G_BEGIN_DECLS
 
 #define GTR_TYPE_HEADER_DIALOG (gtr_header_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (GtrHeaderDialog, gtr_header_dialog, GTR, HEADER_DIALOG, AdwPreferencesWindow)
+G_DECLARE_FINAL_TYPE (GtrHeaderDialog, gtr_header_dialog, GTR, HEADER_DIALOG, AdwPreferencesDialog)
 
 /*
  * Public methods

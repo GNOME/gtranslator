@@ -82,11 +82,11 @@ typedef struct
 
 struct _GtrPreferencesDialog
 {
-  AdwPreferencesWindow parent_instance;
+  AdwPreferencesDialog parent_instance;
 };
 
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrPreferencesDialog, gtr_preferences_dialog, ADW_TYPE_PREFERENCES_WINDOW)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrPreferencesDialog, gtr_preferences_dialog, ADW_TYPE_PREFERENCES_DIALOG)
 
 static void fill_profile_listbox (GtrPreferencesDialog *dlg);
 
@@ -334,7 +334,7 @@ on_profile_dialog_response_cb (GtrProfileDialog     *profile_dialog,
     }
 
   g_object_unref (prof_manager);
-  gtk_window_destroy (GTK_WINDOW (profile_dialog));
+  adw_dialog_close (ADW_DIALOG (profile_dialog));
 }
 
 static void
@@ -342,10 +342,10 @@ add_button_clicked (GtrPreferencesDialog *dlg)
 {
   GtrProfileDialog *profile_dialog;
 
-  profile_dialog = gtr_profile_dialog_new (GTK_WIDGET (dlg), NULL);
+  profile_dialog = gtr_profile_dialog_new (NULL);
   g_signal_connect (profile_dialog, "response",
                     G_CALLBACK (on_profile_dialog_response_cb), dlg);
-  gtk_window_present (GTK_WINDOW (profile_dialog));
+  adw_dialog_present (ADW_DIALOG (profile_dialog), GTK_WIDGET (dlg));
 }
 
 static void
@@ -378,10 +378,10 @@ edit_button_clicked (GtkWidget            *widget,
     {
       priv->editing_profile = profile;
       GtrProfileDialog *profile_dialog;
-      profile_dialog = gtr_profile_dialog_new (GTK_WIDGET (dlg), profile);
+      profile_dialog = gtr_profile_dialog_new (profile);
       g_signal_connect (profile_dialog, "response",
                         G_CALLBACK (on_profile_dialog_response_cb), dlg);
-      gtk_window_present (GTK_WINDOW (profile_dialog));
+      adw_dialog_present (ADW_DIALOG (profile_dialog), GTK_WIDGET (dlg));
     }
 
   g_object_unref (prof_manager);
@@ -395,7 +395,7 @@ delete_confirm_dialog_cb (GtkWidget *dialog, char *response, GtrPreferencesDialo
   GtrProfile *profile = priv->editing_profile;
 
   priv->editing_profile = NULL;
-  gtk_window_destroy (GTK_WINDOW (dialog));
+  adw_dialog_close (ADW_DIALOG (dialog));
 
   if (g_strcmp0 (response, "cancel") == 0)
     return;
@@ -428,36 +428,32 @@ delete_button_clicked (GtkWidget            *widget,
     {
       if (active_profile == profile)
         {
-          GtkWidget *dialog = adw_message_dialog_new (
-            GTK_WINDOW (dlg),
+          AdwDialog *dialog = adw_alert_dialog_new (
             _("Impossible to remove the active profile"),
             _("Another profile should be selected as active before")
           );
 
-          adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
-                                            "ok",  _("_Ok"),
-                                            NULL);
+          adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("_Ok"));
+          adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
 
-          g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-          gtk_window_present (GTK_WINDOW (dialog));
+          adw_dialog_present (dialog, GTK_WIDGET (dlg));
         }
       else
         {
-          GtkWidget *dialog = adw_message_dialog_new (
-            GTK_WINDOW (dlg),
+          AdwDialog *dialog = adw_alert_dialog_new (
             _("Are you sure you want to delete this profile?"),
             NULL
           );
 
-          adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
-                                            "cancel",  _("_Cancel"),
-                                            "delete", _("_Delete"),
-                                            NULL);
+          adw_alert_dialog_add_responses (ADW_ALERT_DIALOG (dialog),
+                                          "cancel",  _("_Cancel"),
+                                          "delete", _("_Delete"),
+                                          NULL);
 
           priv->editing_profile = profile;
-          g_signal_connect (GTK_DIALOG (dialog), "response",
+          g_signal_connect (dialog, "response",
                             G_CALLBACK (delete_confirm_dialog_cb), dlg);
-          gtk_window_present (GTK_WINDOW (dialog));
+          adw_dialog_present (dialog, GTK_WIDGET (dlg));
         }
     }
 
@@ -588,7 +584,5 @@ gtr_show_preferences_dialog (GtrWindow * window)
   dlg = GTK_WIDGET (g_object_new (GTR_TYPE_PREFERENCES_DIALOG,
                                    NULL));
 
-  gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
-  gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
-  gtk_window_present (GTK_WINDOW (dlg));
+  adw_dialog_present (ADW_DIALOG (dlg), GTK_WIDGET (window));
 }

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="GtrProfileDialog" parent="AdwWindow">
+  <template class="GtrProfileDialog" parent="AdwDialog">
     <property name="width-request">360</property>
     <property name="height-request">294</property>
-    <property name="modal">True</property>
-    <property name="destroy-with-parent">True</property>
     <property name="title" translatable="yes">Translation Editor Profile</property>
-    <property name="content">
+    <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
           <object class="GtkHeaderBar" id="titlebar">

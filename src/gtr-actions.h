@@ -146,10 +146,6 @@ void do_replace (GtrSearchBar * dialog,
 void do_replace_all (GtrSearchBar * dialog,
                      GtrWindow * window);
 
-void search_bar_response_cb (GtrSearchBar * dialog,
-                             gint response_id,
-                             GtrWindow    * window);
-
 /*Documents*/
 //void gtr_actions_documents_next_document (GtrWindow * window);
 

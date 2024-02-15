@@ -49,15 +49,15 @@ static void load_file_list (GtrWindow * window, const GSList * uris);
 static GList * get_modified_documents (GtrWindow * window);
 
 typedef struct {
-  SoupMessage *msg;
-  GtkWidget   *dialog;
+  SoupMessage     *msg;
+  GtrUploadDialog *dialog;
 } UserData;
 
 static void
 user_data_free (UserData *ud)
 {
   g_object_unref (ud->msg);
-  gtk_window_destroy (GTK_WINDOW (ud->dialog));
+  adw_dialog_close (ADW_DIALOG (ud->dialog));
 
   g_free (ud);
 }
@@ -171,7 +171,7 @@ gtr_po_parse_files_from_dialog (GObject *source, GAsyncResult *res, void *user_d
 }
 
 static void
-handle_save_current_dialog_response (AdwMessageDialog *dialog,
+handle_save_current_dialog_response (AdwAlertDialog *dialog,
                                      char *response,
                                      void (*callback)(GtrWindow *))
 {
@@ -184,7 +184,7 @@ handle_save_current_dialog_response (AdwMessageDialog *dialog,
   if (g_strcmp0 ("cancel", response) != 0)
     callback (window);
 
-  gtk_window_destroy (GTK_WINDOW (dialog));
+  adw_dialog_force_close (ADW_DIALOG (dialog));
 }
 
 void
@@ -193,7 +193,7 @@ gtr_want_to_save_current_dialog (GtrWindow * window, void (*callback)(GtrWindow 
   GtrTab *tab;
   GtrPo *po;
 
-  GtkWidget *dialog;
+  AdwDialog *dialog;
   g_autoptr (GFile) location = NULL;
   g_autofree gchar *basename = NULL;
 
@@ -202,27 +202,26 @@ gtr_want_to_save_current_dialog (GtrWindow * window, void (*callback)(GtrWindow 
   location = gtr_po_get_location (po);
   basename = g_file_get_basename (location);
 
-  dialog = adw_message_dialog_new (GTK_WINDOW (window), _("Unsaved Changes"), NULL);
+  dialog = adw_alert_dialog_new (_("Unsaved Changes"), NULL);
+  adw_alert_dialog_set_body_use_markup (ADW_ALERT_DIALOG (dialog), TRUE);
 
-  adw_message_dialog_set_body_use_markup (ADW_MESSAGE_DIALOG (dialog), TRUE);
+  adw_alert_dialog_format_body (ADW_ALERT_DIALOG (dialog),
+                                _("Do you want to write all the changes done to %s?"),
+                                basename);
 
-  adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dialog),
-                                  _("Do you want to write all the changes done to %s?"),
-                                  basename);
-
-  adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
-                                    "cancel", _("Cancel"),
-                                    "no", _("Continue Without Saving"),
-                                    "save", _("Save and Open"),
-                                    NULL);
-  adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog),
+  adw_alert_dialog_add_responses (ADW_ALERT_DIALOG (dialog),
+                                  "cancel", _("Cancel"),
+                                  "no", _("Continue Without Saving"),
+                                  "save", _("Save and Open"),
+                                  NULL);
+  adw_alert_dialog_set_response_appearance (ADW_ALERT_DIALOG (dialog),
     "no", ADW_RESPONSE_DESTRUCTIVE);
-  adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog),
+  adw_alert_dialog_set_response_appearance (ADW_ALERT_DIALOG (dialog),
     "save", ADW_RESPONSE_SUGGESTED);
-  adw_message_dialog_set_default_response (ADW_MESSAGE_DIALOG (dialog), "save");
+  adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "save");
 
   g_signal_connect (dialog, "response", G_CALLBACK (handle_save_current_dialog_response), callback);
-  gtk_window_present (GTK_WINDOW (dialog));
+  adw_dialog_present (dialog, GTK_WIDGET (window));
 }
 
 /*
@@ -282,10 +281,10 @@ save_dialog_response_cb (GObject *source, GAsyncResult *res, void *user_data)
 
       if (error)
         {
-          g_autoptr (GtkAlertDialog) dialog = NULL;
-          dialog = gtk_alert_dialog_new ("%s", error->message);
-          gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog),
-                                 GTK_WINDOW (window));
+          AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
+          adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+          adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
+          adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (window));
           return;
         }
 
@@ -305,11 +304,11 @@ _upload_file_callback (GObject      *object,
 {
   UserData *ud = user_data;
   g_autoptr(GInputStream) stream = NULL;
-  g_autoptr (GtkAlertDialog) dialog = NULL;
+  AdwDialog *dialog = NULL;
   GtrTab *active_tab;
 
-  GtkWidget *upload_dialog = ud->dialog;
-  GtkWidget *window = gtr_upload_dialog_get_parent (GTR_UPLOAD_DIALOG (upload_dialog));
+  GtrUploadDialog *upload_dialog = ud->dialog;
+  GtkWidget *window = gtr_upload_dialog_get_parent (upload_dialog);
   SoupSession *session = SOUP_SESSION (object);
   SoupStatus status_code = soup_message_get_status (ud->msg);
 
@@ -323,7 +322,7 @@ _upload_file_callback (GObject      *object,
     {
       if (status_code == SOUP_STATUS_FORBIDDEN)
         {
-          dialog = gtk_alert_dialog_new (_("This file has already been uploaded"));
+          dialog = adw_alert_dialog_new (_("This file has already been uploaded"), NULL);
           gtr_tab_enable_upload (active_tab, FALSE);
           goto end;
         }
@@ -335,9 +334,10 @@ _upload_file_callback (GObject      *object,
       else
         message = g_strdup (soup_status_get_phrase (status_code));
 
-      dialog = gtk_alert_dialog_new (
+      dialog = adw_alert_dialog_new (_("Couldn't upload the file"), NULL);
+      adw_alert_dialog_format_body_markup (ADW_ALERT_DIALOG (dialog),
         _(
-          "An error occurred while uploading the file: %s\n"
+          "%s\n"
           "Maybe you've not configured your <i>l10n.gnome.org</i> "
           "<b>token</b> correctly in your profile or you don't have "
           "permissions to upload this module."
@@ -346,11 +346,13 @@ _upload_file_callback (GObject      *object,
       goto end;
     }
 
-  dialog = gtk_alert_dialog_new (_("The file has been uploaded!"));
+  dialog = adw_alert_dialog_new (_("The file has been uploaded!"), NULL);
+  adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+  adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
   gtr_tab_enable_upload (active_tab, FALSE);
 
 end:
-  gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+  adw_dialog_present (dialog, GTK_WIDGET (window));
 
   user_data_free (ud);
 }
@@ -453,7 +455,7 @@ gtr_upload_file (GtkWidget *upload_dialog,
 
   UserData *ud;
   ud = g_new0 (UserData, 1);
-  ud->dialog = upload_dialog;
+  ud->dialog = GTR_UPLOAD_DIALOG (upload_dialog);
   ud->msg = msg;
   soup_session_send_async (session, msg, G_PRIORITY_DEFAULT, NULL, _upload_file_callback, ud);
 }
@@ -472,7 +474,7 @@ gtr_upload_file_dialog (GtrWindow * window)
                    G_CALLBACK (gtr_upload_file),
                    window);
 
-  gtk_window_present (GTK_WINDOW (dialog));
+  adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (window));
 }
 
 /*
@@ -518,9 +520,10 @@ load_file_list (GtrWindow * window, const GSList * locations)
    */
   if (error != NULL)
     {
-      g_autoptr (GtkAlertDialog) dialog
-          = gtk_alert_dialog_new ("%s", error->message);
-      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+      AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
+      adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+      adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
+      adw_dialog_present (dialog, GTK_WIDGET (window));
     }
 
   g_slist_free ((GSList *) locations_to_load);
@@ -560,9 +563,10 @@ save_and_close_all_documents (GList * unsaved_documents, GtrWindow * window)
 
   if(error)
     {
-      g_autoptr (GtkAlertDialog) dialog;
-      dialog = gtk_alert_dialog_new ("%s", error->message);
-      gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog), GTK_WINDOW (window));
+      AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
+      adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+      adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
+      adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (window));
       return;
     }
 
@@ -582,7 +586,7 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog *dlg,
       selected_documents = gtr_close_confirmation_dialog_get_selected_documents (dlg);
       if (selected_documents == NULL)
         {
-          gtk_window_destroy (GTK_WINDOW (dlg));
+          adw_dialog_close (ADW_DIALOG (dlg));
           close_all_tabs (window);
           return;
         }
@@ -594,12 +598,12 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog *dlg,
     }
   else if (g_strcmp0 (response, "no") == 0)
     {
-      gtk_window_destroy (GTK_WINDOW (dlg));
+      adw_dialog_close (ADW_DIALOG (dlg));
       close_all_tabs (window);
       return;
     }
 
-  gtk_window_destroy (GTK_WINDOW (dlg));
+  adw_dialog_close (ADW_DIALOG (dlg));
 }
 
 void
@@ -610,8 +614,7 @@ gtr_close_tab (GtrTab * tab, GtrWindow * window)
       GtkWidget *dlg;
 
       dlg =
-        gtr_close_confirmation_dialog_new_single (GTK_WINDOW (window),
-                                                  gtr_tab_get_po
+        gtr_close_confirmation_dialog_new_single (gtr_tab_get_po
                                                   (tab), FALSE);
 
       g_signal_connect (dlg,
@@ -619,7 +622,7 @@ gtr_close_tab (GtrTab * tab, GtrWindow * window)
                         G_CALLBACK
                         (close_confirmation_dialog_response_handler), window);
 
-      gtk_window_present (GTK_WINDOW (dlg));
+      adw_dialog_present (ADW_DIALOG (dlg), GTK_WIDGET (window));
     }
   else
     //_gtr_window_close_tab (window, tab);
@@ -679,8 +682,7 @@ close_all_documents (GtrWindow * window, gboolean logout_mode)
     {
       GtkWidget *dlg;
 
-      dlg = gtr_close_confirmation_dialog_new (GTK_WINDOW (window),
-                                               list, logout_mode);
+      dlg = gtr_close_confirmation_dialog_new (list, logout_mode);
 
       g_signal_connect (dlg,
                         "response",
@@ -689,7 +691,7 @@ close_all_documents (GtrWindow * window, gboolean logout_mode)
 
       g_list_free (list);
 
-      gtk_window_present (GTK_WINDOW (dlg));
+      adw_dialog_present (ADW_DIALOG (dlg), GTK_WIDGET (window));
     }
   else
     {
@@ -729,10 +731,10 @@ _gtr_actions_file_save_all (GtrWindow * window)
 
       if (error)
         {
-          g_autoptr (GtkAlertDialog) dialog = NULL;
-          dialog = gtk_alert_dialog_new ("%s", error->message);
-          gtk_alert_dialog_show (GTK_ALERT_DIALOG (dialog),
-                                 GTK_WINDOW (window));
+          AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
+          adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+          adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
+          adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (window));
 
           return;
         }

@@ -30,7 +30,7 @@ G_BEGIN_DECLS
 #define GTR_TYPE_UPLOAD_DIALOG          (gtr_upload_dialog_get_type ())
 
 G_DECLARE_FINAL_TYPE (GtrUploadDialog, gtr_upload_dialog, GTR, UPLOAD_DIALOG,
-                      AdwWindow)
+                      AdwDialog)
 
 /*
  * Public methods
