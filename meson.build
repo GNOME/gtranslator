@@ -32,8 +32,7 @@ gtr_pkgdatadir = join_paths(gtr_datadir, meson.project_name())
 
 gtr_namespace = 'org.gnome.Gtranslator'
 
-gtr_buildtype = get_option('buildtype')
-gtr_debug = gtr_buildtype.contains('debug')
+gtr_debug = get_option('profile') == 'development'
 
 if gtr_debug
   profile = 'Devel'
@@ -80,7 +79,7 @@ common_flags = ['-DHAVE_CONFIG_H']
 
 if gtr_debug
   common_flags += ['-DG_DISABLE_CAST_CHECKS']
-elif gtr_buildtype == 'release'
+else
   common_flags += [
     '-DG_DISABLE_ASSERT',
     #'-DG_DISABLE_CHECKS',
