@@ -637,10 +637,16 @@ gtr_window_show_dlteams (GtrWindow *window)
 
       /* Load teams and modules automatically */
       gtr_dl_teams_load_json (GTR_DL_TEAMS (priv->dlteams));
+      adw_navigation_view_push (priv->navigation_view,
+                                ADW_NAVIGATION_PAGE (priv->dlteams));
     }
-
-  adw_navigation_view_push (priv->navigation_view,
-                            ADW_NAVIGATION_PAGE (priv->dlteams));
+  else
+    {
+      adw_navigation_view_replace_with_tags (priv->navigation_view, (const char *[2]) {
+        "poeditor",
+        "dlteams",
+      }, 2);
+    }
 }
 
 void
