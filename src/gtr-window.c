@@ -782,6 +782,6 @@ gtr_window_add_toast_msg (GtrWindow *window,
                           const char *message)
 {
   AdwToast *toast = adw_toast_new_format ("%s", message);
-  adw_toast_set_timeout (toast, 10);
+  adw_toast_set_timeout (toast, 5);
   gtr_window_add_toast (window, toast);
 }
