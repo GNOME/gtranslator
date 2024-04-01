@@ -31,12 +31,14 @@
             <child>
               <object class="AdwSwitchRow" id="autosave_checkbutton">
                 <property name="title" translatable="yes">_Activate auto save</property>
+                <property name="subtitle" translatable="yes">Save the current file automatically</property>
                 <property name="use_underline">True</property>
               </object>
             </child>
             <child>
               <object class="AdwSpinRow" id="autosave_interval_spinbutton">
                 <property name="title" translatable="yes">Autosave _Interval</property>
+                <property name="subtitle" translatable="yes">Number of minutes to autosave</property>
                 <property name="use_underline">True</property>
                 <property name="adjustment">
                   <object class="GtkAdjustment" id="adjustment1">
