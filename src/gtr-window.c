@@ -317,6 +317,7 @@ gtr_window_save_current_tab (GtrWindow *self)
   g_autoptr (GError) error = NULL;
   GtrTab *current;
   GtrPo *po;
+  AdwToast *toast;
 
   current = gtr_window_get_active_tab (self);
   po = gtr_tab_get_po (current);
@@ -339,7 +340,9 @@ gtr_window_save_current_tab (GtrWindow *self)
 
   /* We have to change the state of the tab */
   gtr_po_set_state (po, GTR_PO_STATE_SAVED);
-  gtr_window_add_toast_msg (self, _("File saved"));
+  toast = adw_toast_new_format ("%s", _("File saved"));
+  adw_toast_set_timeout (toast, 1);
+  gtr_window_add_toast (self, toast);
 }
 
 static void
@@ -788,6 +791,6 @@ gtr_window_add_toast_msg (GtrWindow *window,
                           const char *message)
 {
   AdwToast *toast = adw_toast_new_format ("%s", message);
-  adw_toast_set_timeout (toast, 10);
+  adw_toast_set_timeout (toast, 5);
   gtr_window_add_toast (window, toast);
 }
