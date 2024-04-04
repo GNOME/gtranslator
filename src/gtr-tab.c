@@ -73,6 +73,8 @@ typedef struct
   GtkWidget *progress_fuzzy;
   GtkWidget *progress_untrans;
 
+  GtkWidget *main_paned;
+
   GtrProgress *progress;
   gboolean find_replace_flag;
 
@@ -770,6 +772,7 @@ static void
 gtr_tab_init (GtrTab * tab)
 {
   GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
+  int max_pos = -1;
 
   gtk_widget_init_template (GTK_WIDGET (tab));
 
@@ -804,6 +807,11 @@ gtr_tab_init (GtrTab * tab)
 
   g_signal_connect (priv->search_bar, "notify::search-mode-enabled",
                     G_CALLBACK (emit_searchbar_toggled), tab);
+
+  gtk_paned_set_shrink_end_child (GTK_PANED (priv->main_paned), FALSE);
+  g_object_get (G_OBJECT (priv->main_paned), "max-position", &max_pos, NULL);
+  gtk_paned_set_position (GTK_PANED (priv->main_paned), max_pos);
+  gtk_paned_set_wide_handle (GTK_PANED (priv->main_paned), TRUE);
 }
 
 static void
@@ -993,6 +1001,8 @@ gtr_tab_class_init (GtrTabClass * klass)
 
   gtk_widget_class_bind_template_callback (widget_class, gtr_page_notify_child_revealed);
   gtk_widget_class_bind_template_callback (widget_class, gtr_page_stop_search);
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrTab, main_paned);
 
   g_type_ensure (gtr_view_get_type ());
   g_type_ensure (gtr_context_panel_get_type ());
