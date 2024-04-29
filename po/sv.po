@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2024-03-22 21:09+0000\n"
-"PO-Revision-Date: 2024-03-22 23:41+0100\n"
+"POT-Creation-Date: 2024-04-24 05:14+0000\n"
+"PO-Revision-Date: 2024-04-24 23:00+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:498 src/gtr-window.c:205 src/gtr-window.c:429
+#: src/gtr-application.c:498 src/gtr-window.c:205 src/gtr-window.c:432
 msgid "Translation Editor"
 msgstr "Översättningsredigerare"
 
@@ -186,7 +186,7 @@ msgstr "Källkodsvisare"
 #: src/gtr-dl-teams.c:250 src/gtr-dl-teams.c:336 src/gtr-dl-teams.c:444
 #: src/gtr-dl-teams.c:569 src/gtr-dl-teams.c:581 src/gtr-dl-teams.c:594
 #: src/gtr-dl-teams.c:626 src/gtr-dl-teams.c:695 src/gtr-profile-dialog.ui:20
-#: src/gtr-tab.c:348 src/gtr-window.c:159 src/gtr-window.c:331
+#: src/gtr-tab.c:348 src/gtr-window.c:159 src/gtr-window.c:332
 msgid "OK"
 msgstr "OK"
 
@@ -783,56 +783,64 @@ msgstr "Spara automatiskt"
 msgid "_Activate auto save"
 msgstr "_Aktivera automatisk sparning"
 
-#: src/gtr-preferences-dialog.ui:39
+#: src/gtr-preferences-dialog.ui:34
+msgid "Save the current file automatically"
+msgstr "Spara aktuell fil automatiskt"
+
+#: src/gtr-preferences-dialog.ui:40
 msgid "Autosave _Interval"
 msgstr "_Intervall för att spara automatiskt"
 
-#: src/gtr-preferences-dialog.ui:54
+#: src/gtr-preferences-dialog.ui:41
+msgid "Number of minutes to autosave"
+msgstr "Antal minuter innan automatisk sparning"
+
+#: src/gtr-preferences-dialog.ui:56
 msgid "Create a _backup copy of files before saving"
 msgstr "Säkerhets_kopiera filer innan de sparas"
 
 # src/menus.c:315 src/menus.c:316
-#: src/gtr-preferences-dialog.ui:67
+#: src/gtr-preferences-dialog.ui:69
 msgid "_Editor"
 msgstr "R_edigerare"
 
-#: src/gtr-preferences-dialog.ui:71
+#: src/gtr-preferences-dialog.ui:73
 msgid "Text Display"
 msgstr "Textvisning"
 
-#: src/gtr-preferences-dialog.ui:74
+#: src/gtr-preferences-dialog.ui:76
 msgid "_Highlight message syntax"
 msgstr "_Markeringssyntax för meddelande"
 
-#: src/gtr-preferences-dialog.ui:80
+#: src/gtr-preferences-dialog.ui:82
 msgid "Make _whitespace visible"
 msgstr "Gör alla _tecken synliga"
 
-#: src/gtr-preferences-dialog.ui:86
+#: src/gtr-preferences-dialog.ui:88
 msgid "_Font"
 msgstr "_Typsnitt"
 
 # src/dialogs.c:508 src/dialogs.c:588
-#: src/gtr-preferences-dialog.ui:104
+#: src/gtr-preferences-dialog.ui:106
 msgid "Contents"
 msgstr "Innehåll"
 
 # src/prefs.c:162
-#: src/gtr-preferences-dialog.ui:107
+#: src/gtr-preferences-dialog.ui:109
 msgid "_Remove fuzzy status if message is changed"
 msgstr "Ta _bort luddig status om meddelandet har ändrats"
 
-#: src/gtr-preferences-dialog.ui:113
+#: src/gtr-preferences-dialog.ui:115
 msgid "Check _spelling"
 msgstr "Kontrollera _stavning"
 
 # data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: src/gtr-preferences-dialog.ui:126
+#: src/gtr-preferences-dialog.ui:128
 msgid "_Profiles"
 msgstr "_Profiler"
 
 # data/ui/nautilus-gtranslator-view-ui.xml.h:4
-#: src/gtr-preferences-dialog.ui:130
+#: src/gtr-preferences-dialog.ui:132
 msgid "Profiles"
 msgstr "Profiler"
 
@@ -909,43 +917,51 @@ msgstr "Öppna en ny .po-fil eller dra & släpp här"
 msgid "Search"
 msgstr "Sök"
 
-#: src/gtr-search-bar.ui:57
+#: src/gtr-search-bar.ui:35
+msgid "Previous Result"
+msgstr "Föregående resultat"
+
+#: src/gtr-search-bar.ui:41
+msgid "Next Result"
+msgstr "Nästa resultat"
+
+#: src/gtr-search-bar.ui:58
 msgid "Switch between Search and Search-and-Replace"
 msgstr "Växla mellan Sök och Sök-och-ersätt"
 
-#: src/gtr-search-bar.ui:63
+#: src/gtr-search-bar.ui:64
 msgid "Show or hide search options such as case sensitivity"
 msgstr "Visa eller dölj alternativ så som skiftlägeskänslighet"
 
 # src/dialogs.c:575 src/menus.c:362
-#: src/gtr-search-bar.ui:90 src/gtr-search-bar.ui:99
+#: src/gtr-search-bar.ui:91 src/gtr-search-bar.ui:100
 msgid "Replace"
 msgstr "Ersätt"
 
 # src/dialogs.c:576
-#: src/gtr-search-bar.ui:108
+#: src/gtr-search-bar.ui:109
 msgid "Replace All"
 msgstr "Ersätt alla"
 
-#: src/gtr-search-bar.ui:128
+#: src/gtr-search-bar.ui:129
 msgid "Case sensitive"
 msgstr "Skiftlägeskänslig"
 
-#: src/gtr-search-bar.ui:138
+#: src/gtr-search-bar.ui:139
 msgid "Match whole word only"
 msgstr "Matcha endast hela ord"
 
-#: src/gtr-search-bar.ui:148
+#: src/gtr-search-bar.ui:149
 msgid "Wrap around"
 msgstr "Börja om från början"
 
 # src/prefs.c:235
-#: src/gtr-search-bar.ui:158
+#: src/gtr-search-bar.ui:159
 msgid "Original text"
 msgstr "Källtext"
 
 # src/dialogs.c:496 src/dialogs.c:594 src/gui.c:398
-#: src/gtr-search-bar.ui:168
+#: src/gtr-search-bar.ui:169
 msgid "Translated text"
 msgstr "Översatt text"
 
@@ -1090,11 +1106,11 @@ msgstr "*%s — Översättningsredigerare"
 msgid "%s — Translation Editor"
 msgstr "%s — Översättningsredigerare"
 
-#: src/gtr-window.c:330
+#: src/gtr-window.c:331
 msgid "Could not Save"
 msgstr "Kunde inte spara"
 
-#: src/gtr-window.c:342
+#: src/gtr-window.c:343
 msgid "File saved"
 msgstr "Filen sparades"
 
@@ -1457,9 +1473,6 @@ msgstr ""
 
 #~ msgid "Current Maintainers"
 #~ msgstr "Nuvarande ansvariga"
-
-#~ msgid "Previous Developers"
-#~ msgstr "Tidigare utvecklare"
 
 #~ msgid "Contributors"
 #~ msgstr "Bidragsgivare"
