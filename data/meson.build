@@ -24,6 +24,7 @@ i18n.merge_file(
 # AppStream application metainfo
 appdata_conf = configuration_data()
 appdata_conf.set('appid', gtr_app_id)
+appdata_conf.set('version', meson.project_version())
 
 appdata = gtr_namespace + '.metainfo.xml'
 
