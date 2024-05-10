@@ -25,7 +25,7 @@ i18n.merge_file(
 appdata_conf = configuration_data()
 appdata_conf.set('appid', gtr_app_id)
 
-appdata = gtr_namespace + '.appdata.xml'
+appdata = gtr_namespace + '.metainfo.xml'
 
 appdata_in = configure_file(
   input: appdata + '.in.in',
