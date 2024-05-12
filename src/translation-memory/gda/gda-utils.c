@@ -56,17 +56,17 @@ static const gchar *badwords[] = {
 };
 
 static gboolean
-check_good_word (const gchar * word, gchar ** badwords)
+check_good_word (const gchar * word, gchar ** bad_words)
 {
   gboolean check = TRUE;
   gchar *lower = g_utf8_strdown (word, -1);
   gint i = 0;
 
-  while (badwords[i] != NULL)
+  while (bad_words[i] != NULL)
     {
       gchar *lower_collate = g_utf8_collate_key (lower, -1);
 
-      if (strcmp (lower_collate, badwords[i]) == 0)
+      if (strcmp (lower_collate, bad_words[i]) == 0)
         {
           check = FALSE;
           g_free (lower_collate);

@@ -281,10 +281,10 @@ save_dialog_response_cb (GObject *source, GAsyncResult *res, void *user_data)
 
       if (error)
         {
-          AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
-          adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
-          adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
-          adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (window));
+          AdwDialog *alert_dialog = adw_alert_dialog_new (NULL, error->message);
+          adw_alert_dialog_add_response (ADW_ALERT_DIALOG (alert_dialog), "ok", _("OK"));
+          adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (alert_dialog), "ok");
+          adw_dialog_present (ADW_DIALOG (alert_dialog), GTK_WIDGET (window));
           return;
         }
 
