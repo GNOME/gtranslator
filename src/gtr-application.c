@@ -485,7 +485,7 @@ static GActionEntry app_entries[]
         { "quit", quit_activated, NULL, NULL, NULL } };
 
 static void
-set_kb (GApplication *app, gchar *action, gchar *accel)
+set_kb (GApplication *app, const gchar *action, const gchar *accel)
 {
   const gchar *keys[] = {accel, NULL};
   gtk_application_set_accels_for_action (GTK_APPLICATION (app), action, keys);
