@@ -75,12 +75,7 @@ sources += gnome.genmarshal(
   marshal,
   sources: marshal + '.list',
   prefix: marshal.underscorify(),
-  extra_args: [
-    '-UG_ENABLE_DEBUG',
-    '--prototypes',
-  ],
-  install_header: true,
-  install_dir: gtr_includedir,
+  internal: true,
 )
 
 enum_types = 'gtr-enum-types'
