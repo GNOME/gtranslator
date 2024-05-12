@@ -33,7 +33,6 @@ G_DECLARE_FINAL_TYPE (GtrContextPanel, gtr_context_panel, GTR, CONTEXT_PANEL, Gt
 /*
  * Public methods
  */
-GType             gtr_context_panel_get_type              (void) G_GNUC_CONST;
 GtkWidget        *gtr_context_panel_new                   (void);
 void              gtr_context_init_tm                     (GtrContextPanel *panel, GtrTranslationMemory *tm);
 void              gtr_context_add_path                    (GtrContextPanel *panel, const char *filename, int line);

@@ -35,8 +35,6 @@ G_DECLARE_FINAL_TYPE (GtrUploadDialog, gtr_upload_dialog, GTR, UPLOAD_DIALOG,
 /*
  * Public methods
  */
-GType              gtr_upload_dialog_get_type         (void) G_GNUC_CONST;
-
 GtrUploadDialog   *gtr_upload_dialog_new              (GtkWidget *parent);
 
 char              *gtr_upload_dialog_get_comment      (GtrUploadDialog *dlg);

@@ -38,7 +38,6 @@ G_DECLARE_FINAL_TYPE (GtrApplication, gtr_application, GTR, APPLICATION, AdwAppl
 
 #define GTR_APP                         (GTR_APPLICATION (g_application_get_default ()))
 
-GType             gtr_application_get_type               (void)G_GNUC_CONST;
 GtrApplication  * gtr_application_new                    (void);
 GList *           gtr_application_get_views              (GtrApplication *app,
                                                           gboolean        original,
