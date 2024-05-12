@@ -63,6 +63,7 @@ update_cell_style (GtkWidget *cell, GtrMsg *msg)
         gtk_widget_add_css_class (cell, "fuzzy");
         gtk_widget_remove_css_class (cell, "untranslated");
         break;
+      case GTR_MSG_STATUS_TRANSLATED:
       default:
         gtk_widget_remove_css_class (cell, "fuzzy");
         gtk_widget_remove_css_class (cell, "untranslated");

@@ -402,6 +402,8 @@ gtr_message_table_navigate (GtrMessageTable * table,
           gtk_single_selection_set_selected (GTK_SINGLE_SELECTION (priv->selection), selected - 1);
         }
       break;
+    default:
+      break;
     }
 
   msg = gtk_single_selection_get_selected_item (GTK_SINGLE_SELECTION (priv->selection));
