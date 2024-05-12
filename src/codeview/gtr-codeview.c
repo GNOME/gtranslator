@@ -54,52 +54,6 @@ enum
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrCodeView, gtr_code_view, G_TYPE_OBJECT)
 
-static char *
-find_source_file (GtrCodeView *codeview,
-                  const char  *path)
-{
-  GtrTab *tab;
-  GtrPo *po;
-  GtrCodeViewPrivate *priv = gtr_code_view_get_instance_private (codeview);
-
-  g_autofree char *fullpath = NULL;
-  g_autofree char *dirname = NULL;
-  g_autoptr(GFile) location = NULL;
-  g_autoptr(GFile) podir = NULL;
-  g_autoptr(GFile) parent = NULL;
-
-  if (g_file_test (path, G_FILE_TEST_EXISTS))
-    return g_strdup (path);
-
-  tab = gtr_window_get_active_tab (priv->window);
-
-  if (!tab)
-    return NULL;
-  po = gtr_tab_get_po (tab);
-
-  // .po files should live in PROJECT/po/LANG.po and the path inside the po
-  // usually is relative to the PROJECT root, so we get the file path and
-  // go one directory up to prepend to the file path
-  location = gtr_po_get_location (po);
-  podir = g_file_get_parent (location);
-  parent = g_file_get_parent (podir);
-  dirname = g_file_get_path (parent);
-  fullpath = g_build_filename (dirname, path, NULL);
-
-  if (g_file_test (fullpath, G_FILE_TEST_EXISTS))
-    return g_strdup (fullpath);
-
-  return NULL;
-}
-
-void
-show_source (GtrCodeView *codeview, const char *path, int line)
-{
-  GtrCodeViewPrivate *priv = gtr_code_view_get_instance_private (codeview);
-  g_autofree char *fullpath = find_source_file (codeview, path);
-  gtr_show_viewer (priv->window, fullpath, line);
-}
-
 static void
 showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrCodeView *codeview)
 {

@@ -64,11 +64,5 @@ xmlDocPtr gtr_xml_open_file (const gchar * filename);
 
      gchar * pango_font_description_to_css (PangoFontDescription *desc);
 
-     void gtk_box_append (GtkBox *box, GtkWidget *child);
-
-     void gtk_list_box_append (GtkListBox *box, GtkWidget *child);
-
-     void gtk_list_box_remove (GtkListBox *box, GtkWidget *child);
-
      int parse_nplurals_header (const gchar * plurals_header);
 #endif
