@@ -41,7 +41,7 @@ static gchar *gtr_plugins_data_dir = NULL;
 static gchar *gtr_sourceview_dir = NULL;
 
 void
-gtr_dirs_init ()
+gtr_dirs_init (void)
 {
 #ifdef G_OS_WIN32
   gchar *win32_dir;
@@ -94,7 +94,7 @@ gtr_dirs_init ()
 }
 
 void
-gtr_dirs_shutdown ()
+gtr_dirs_shutdown (void)
 {
   g_free (user_config_dir);
   g_free (user_cache_dir);

@@ -990,7 +990,7 @@ gtr_gda_class_init (GtrGdaClass * klass)
  * Returns: a new #GtrGda object
  */
 GtrGda *
-gtr_gda_new ()
+gtr_gda_new (void)
 {
   GtrGda *gda;
 

@@ -193,7 +193,7 @@ _msg_equal_func (GtrMsg *msg, GRegex *regex, gboolean original_text,
   return found;
 }
 
-gint
+static gint
 find_in_selection_model (GtrWindow *window, GtrSearchBar *searchbar,
                          gint current_pos, gboolean search_backwards)
 {

@@ -154,7 +154,7 @@ gtr_language_lazy_init (void)
 }
 
 const GSList *
-gtr_language_get_languages ()
+gtr_language_get_languages (void)
 {
   gtr_language_lazy_init ();
 

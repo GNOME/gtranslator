@@ -621,7 +621,7 @@ gtr_application_class_init (GtrApplicationClass *klass)
 }
 
 GtrApplication *
-gtr_application_new ()
+gtr_application_new (void)
 {
   return GTR_APPLICATION (g_object_new (GTR_TYPE_APPLICATION,
                                         "application-id", PACKAGE_APPID,

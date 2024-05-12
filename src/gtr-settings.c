@@ -220,7 +220,7 @@ gtr_settings_class_init (GtrSettingsClass * klass)
 }
 
 GSettings *
-gtr_settings_new ()
+gtr_settings_new (void)
 {
   return g_object_new (GTR_TYPE_SETTINGS, NULL);
 }

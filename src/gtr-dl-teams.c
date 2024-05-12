@@ -378,7 +378,7 @@ gtr_dl_teams_load_json (GtrDlTeams *self)
   g_free (url);
 }
 
-void gtr_dl_teams_verify_and_load (GtrDlTeams *self)
+static void gtr_dl_teams_verify_and_load (GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
 

@@ -357,7 +357,7 @@ end:
   user_data_free (ud);
 }
 
-void
+static void
 gtr_upload_file (GtkWidget *upload_dialog,
                  gpointer   user_data)
 {

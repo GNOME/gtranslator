@@ -251,14 +251,14 @@ gtr_search_bar_find_prev (GtrSearchBar *self)
   do_find (self, GTR_WINDOW (window), TRUE);
 }
 
-void
+static void
 gtr_do_replace (GtrSearchBar *self)
 {
   GtkWindow *window = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
   do_replace (self, GTR_WINDOW (window));
 }
 
-void
+static void
 gtr_do_replace_all (GtrSearchBar *self)
 {
   GtkWindow *window = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
