@@ -79,6 +79,36 @@ common_flags = ['-DHAVE_CONFIG_H']
 
 if gtr_debug
   common_flags += ['-DG_DISABLE_CAST_CHECKS']
+  test_cflags = [
+    '-fno-strict-aliasing',
+    '-Wno-c++11-extensions',
+    '-Wno-missing-include-dirs',
+    '-Wno-typedef-redefinition',
+    '-Wno-tautological-constant-out-of-range-compare',
+    '-Wduplicated-branches',
+    '-Wduplicated-cond',
+    '-Wformat=2',
+    '-Wformat-nonliteral',
+    '-Wformat-security',
+    '-Wignored-qualifiers',
+    '-Wimplicit-function-declaration',
+    '-Wlogical-op',
+    '-Wmisleading-indentation',
+    '-Wmissing-format-attribute',
+    '-Wmissing-include-dirs',
+    '-Wmissing-noreturn',
+    '-Wnested-externs',
+    '-Wold-style-definition',
+    '-Wpointer-arith',
+    '-Wshadow',
+    '-Wstrict-prototypes',
+    '-Wswitch-default',
+    '-Wswitch-enum',
+    '-Wundef',
+    '-Wuninitialized',
+    '-Wunused',
+  ]
+  common_flags += cc.get_supported_arguments(test_cflags)
 else
   common_flags += [
     '-DG_DISABLE_ASSERT',
