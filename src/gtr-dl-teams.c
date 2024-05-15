@@ -404,7 +404,6 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   GError *error = NULL;
   JsonNode *stats_node;
   JsonObject *stats_object;
-  const char *format;
   char *markup;
   AdwDialog *dialog;
   SoupStatus status_code;
@@ -479,11 +478,11 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
   stats_node = json_object_get_member (object, "statistics");
   stats_object = json_node_get_object (stats_node);
 
-  format = "<span color=\"green\">\%d translated</span>, <span color=\"orange\">\%d fuzzy</span>, <span color=\"red\">\%d untranslated</span>";
-  markup = g_markup_printf_escaped (format,
-                                    json_object_get_int_member (stats_object, "trans"),
-                                    json_object_get_int_member (stats_object, "fuzzy"),
-                                    json_object_get_int_member (stats_object, "untrans"));
+  markup = g_markup_printf_escaped (
+    "<span color=\"green\">\%ld translated</span>, <span color=\"orange\">\%ld fuzzy</span>, <span color=\"red\">\%ld untranslated</span>",
+    json_object_get_int_member (stats_object, "trans"),
+    json_object_get_int_member (stats_object, "fuzzy"),
+    json_object_get_int_member (stats_object, "untrans"));
 
   gtk_label_set_markup (GTK_LABEL (priv->stats_label), markup);
   gtk_label_set_text (GTK_LABEL (priv->file_label), strrchr (priv->file_path, '/') + 1);
