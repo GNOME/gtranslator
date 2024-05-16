@@ -219,7 +219,7 @@ gtr_progress_init (GtrProgress *self)
 }
 
 GtrProgress*
-gtr_progress_new () {
+gtr_progress_new (void) {
   GtrProgress *self = g_object_new (GTR_TYPE_PROGRESS, NULL);
   return self;
 }

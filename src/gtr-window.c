@@ -163,7 +163,7 @@ drag_data_received_cb (GtkDropTarget * drop_target,
   return TRUE;
 }
 
-void
+static void
 set_window_title (GtrWindow * window, gboolean with_path)
 {
   GtrPo *po;
@@ -740,7 +740,7 @@ gtr_window_tm_keybind (GtrWindow *window,
   g_list_free_full (tm_list, free_match);
 }
 
-void
+static void
 gtr_window_show_search_bar (GtrWindow *window,
                             gboolean show)
 {

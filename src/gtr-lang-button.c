@@ -124,7 +124,7 @@ gtr_lang_button_init (GtrLangButton *self)
 }
 
 GtrLangButton*
-gtr_lang_button_new () {
+gtr_lang_button_new (void) {
   GtrLangButton *self = g_object_new (GTR_TYPE_LANG_BUTTON, NULL);
   return self;
 }

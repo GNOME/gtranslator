@@ -27,7 +27,7 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (GtrLangButton, gtr_lang_button, GTR, LANG_BUTTON, AdwBin)
 
-GtrLangButton*  gtr_lang_button_new       ();
+GtrLangButton*  gtr_lang_button_new       (void);
 const gchar *   gtr_lang_button_get_lang  (GtrLangButton *self);
 void            gtr_lang_button_set_lang  (GtrLangButton *self,
                                            const gchar   *name);

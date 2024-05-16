@@ -137,7 +137,7 @@ setup_files_autosave_page (GtrPreferencesDialog * dlg)
 }
 
 int
-gtr_prefs_get_remove_obsolete ()
+gtr_prefs_get_remove_obsolete (void)
 {
   GSettings *files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
   gboolean remove_obsolete_entries_bool = g_settings_get_boolean (files_settings, GTR_SETTINGS_REMOVE_OBSOLETE_ENTRIES);
@@ -208,7 +208,7 @@ on_font_set (GtkWidget *widget, GParamSpec *spec, GtrPreferencesDialog *dlg)
 }
 
 static char *
-get_default_font () {
+get_default_font (void) {
   g_autoptr(GSettings) settings = NULL;
   g_autoptr(GSettingsSchema) schema = NULL;
   GSettingsSchemaSource *source = g_settings_schema_source_get_default ();

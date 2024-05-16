@@ -47,6 +47,8 @@ struct _GtrViewer
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrViewer, gtr_viewer, GTK_TYPE_WINDOW)
 
+static void error_dialog (GtkWindow *parent, const gchar *msg, ...) __attribute__ ((format (printf, 2, 3)));
+
 static void
 source_view_update_theme (GtrViewer *dlg)
 {

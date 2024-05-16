@@ -314,7 +314,7 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
 }
 
 GtkWidget *
-gtr_languages_fetcher_new ()
+gtr_languages_fetcher_new (void)
 {
   return g_object_new (GTR_TYPE_LANGUAGES_FETCHER, NULL);
 }

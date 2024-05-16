@@ -27,7 +27,7 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (GtrDlTeams, gtr_dl_teams, GTR, DL_TEAMS,
                       AdwNavigationPage)
 
-GtrDlTeams* gtr_dl_teams_new         ();
+GtrDlTeams* gtr_dl_teams_new         (GtrWindow *window);
 void        gtr_dl_teams_load_json   (GtrDlTeams *self);
 
 // Domains GObject

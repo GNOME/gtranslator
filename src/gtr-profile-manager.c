@@ -47,7 +47,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (GtrProfileManager, gtr_profile_manager, G_TYPE_OBJEC
 static guint signals[LAST_SIGNAL];
 
 static gchar *
-get_profile_filename ()
+get_profile_filename (void)
 {
   const gchar *user_dir;
   gchar *file_name;
@@ -341,7 +341,7 @@ gtr_profile_manager_init (GtrProfileManager *manager)
 }
 
 GtrProfileManager *
-gtr_profile_manager_get_default ()
+gtr_profile_manager_get_default (void)
 {
   static GtrProfileManager *manager = NULL;
 
