@@ -34,21 +34,9 @@ void gtr_dirs_shutdown (void);
 
 const gchar *gtr_dirs_get_user_config_dir (void);
 
-const gchar *gtr_dirs_get_user_cache_dir (void);
-
-const gchar *gtr_dirs_get_user_plugins_dir (void);
-
 const gchar *gtr_dirs_get_gtr_data_dir (void);
 
-const gchar *gtr_dirs_get_gtr_help_dir (void);
-
 const gchar *gtr_dirs_get_gtr_locale_dir (void);
-
-const gchar *gtr_dirs_get_gtr_lib_dir (void);
-
-const gchar *gtr_dirs_get_gtr_plugins_dir (void);
-
-const gchar *gtr_dirs_get_gtr_plugins_data_dir (void);
 
 const gchar *gtr_dirs_get_gtr_sourceview_dir (void);
 
