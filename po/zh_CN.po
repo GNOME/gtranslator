@@ -14,20 +14,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2024-03-22 21:09+0000\n"
-"PO-Revision-Date: 2024-03-27 11:16+0800\n"
+"POT-Creation-Date: 2024-04-29 12:01+0000\n"
+"PO-Revision-Date: 2024-05-19 20:43+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
-"Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
+"Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Gtranslator 46.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 46.1\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:498 src/gtr-window.c:205 src/gtr-window.c:429
+#: src/gtr-application.c:498 src/gtr-window.c:205 src/gtr-window.c:432
 msgid "Translation Editor"
 msgstr "翻译编辑器"
 
@@ -179,7 +179,7 @@ msgstr "源码查看器"
 #: src/gtr-dl-teams.c:250 src/gtr-dl-teams.c:336 src/gtr-dl-teams.c:444
 #: src/gtr-dl-teams.c:569 src/gtr-dl-teams.c:581 src/gtr-dl-teams.c:594
 #: src/gtr-dl-teams.c:626 src/gtr-dl-teams.c:695 src/gtr-profile-dialog.ui:20
-#: src/gtr-tab.c:348 src/gtr-window.c:159 src/gtr-window.c:331
+#: src/gtr-tab.c:348 src/gtr-window.c:159 src/gtr-window.c:332
 msgid "OK"
 msgstr "确定"
 
@@ -724,51 +724,59 @@ msgstr "自动保存"
 msgid "_Activate auto save"
 msgstr "激活自动保存(_A)"
 
-#: src/gtr-preferences-dialog.ui:39
+#: src/gtr-preferences-dialog.ui:34
+msgid "Save the current file automatically"
+msgstr "自动保存当前文件"
+
+#: src/gtr-preferences-dialog.ui:40
 msgid "Autosave _Interval"
 msgstr "自动保存间隔(_I)"
 
-#: src/gtr-preferences-dialog.ui:54
+#: src/gtr-preferences-dialog.ui:41
+msgid "Number of minutes to autosave"
+msgstr "自动保存间隔的分钟数"
+
+#: src/gtr-preferences-dialog.ui:56
 msgid "Create a _backup copy of files before saving"
 msgstr "保存文件前创建备份(_B)"
 
-#: src/gtr-preferences-dialog.ui:67
+#: src/gtr-preferences-dialog.ui:69
 msgid "_Editor"
 msgstr "编辑器(_E)"
 
-#: src/gtr-preferences-dialog.ui:71
+#: src/gtr-preferences-dialog.ui:73
 msgid "Text Display"
 msgstr "文本显示"
 
-#: src/gtr-preferences-dialog.ui:74
+#: src/gtr-preferences-dialog.ui:76
 msgid "_Highlight message syntax"
 msgstr "语法高亮消息(_H)"
 
-#: src/gtr-preferences-dialog.ui:80
+#: src/gtr-preferences-dialog.ui:82
 msgid "Make _whitespace visible"
 msgstr "显示空格字符(_W)"
 
-#: src/gtr-preferences-dialog.ui:86
+#: src/gtr-preferences-dialog.ui:88
 msgid "_Font"
 msgstr "字体(_F)"
 
-#: src/gtr-preferences-dialog.ui:104
+#: src/gtr-preferences-dialog.ui:106
 msgid "Contents"
 msgstr "内容"
 
-#: src/gtr-preferences-dialog.ui:107
+#: src/gtr-preferences-dialog.ui:109
 msgid "_Remove fuzzy status if message is changed"
 msgstr "消息被改动则移除模糊状态(_R)"
 
-#: src/gtr-preferences-dialog.ui:113
+#: src/gtr-preferences-dialog.ui:115
 msgid "Check _spelling"
 msgstr "拼写检查(_S)"
 
-#: src/gtr-preferences-dialog.ui:126
+#: src/gtr-preferences-dialog.ui:128
 msgid "_Profiles"
 msgstr "配置文件(_P)"
 
-#: src/gtr-preferences-dialog.ui:130
+#: src/gtr-preferences-dialog.ui:132
 msgid "Profiles"
 msgstr "配置文件"
 
@@ -839,39 +847,47 @@ msgstr "打开新的 .po 文件或拖拽到这里"
 msgid "Search"
 msgstr "搜索"
 
-#: src/gtr-search-bar.ui:57
+#: src/gtr-search-bar.ui:35
+msgid "Previous Result"
+msgstr "上个结果"
+
+#: src/gtr-search-bar.ui:41
+msgid "Next Result"
+msgstr "下个结果"
+
+#: src/gtr-search-bar.ui:58
 msgid "Switch between Search and Search-and-Replace"
 msgstr "在搜索和搜索并替换间切换"
 
-#: src/gtr-search-bar.ui:63
+#: src/gtr-search-bar.ui:64
 msgid "Show or hide search options such as case sensitivity"
 msgstr "显示或隐藏如区分大小写等搜索选项"
 
-#: src/gtr-search-bar.ui:90 src/gtr-search-bar.ui:99
+#: src/gtr-search-bar.ui:91 src/gtr-search-bar.ui:100
 msgid "Replace"
 msgstr "替换"
 
-#: src/gtr-search-bar.ui:108
+#: src/gtr-search-bar.ui:109
 msgid "Replace All"
 msgstr "全部替换"
 
-#: src/gtr-search-bar.ui:128
+#: src/gtr-search-bar.ui:129
 msgid "Case sensitive"
 msgstr "区分大小写"
 
-#: src/gtr-search-bar.ui:138
+#: src/gtr-search-bar.ui:139
 msgid "Match whole word only"
 msgstr "仅匹配整个单词"
 
-#: src/gtr-search-bar.ui:148
+#: src/gtr-search-bar.ui:149
 msgid "Wrap around"
 msgstr "从头查找"
 
-#: src/gtr-search-bar.ui:158
+#: src/gtr-search-bar.ui:159
 msgid "Original text"
 msgstr "原始文本"
 
-#: src/gtr-search-bar.ui:168
+#: src/gtr-search-bar.ui:169
 msgid "Translated text"
 msgstr "翻译文本"
 
@@ -1003,11 +1019,11 @@ msgstr "*%s — 翻译编辑器"
 msgid "%s — Translation Editor"
 msgstr "%s — 翻译编辑器"
 
-#: src/gtr-window.c:330
+#: src/gtr-window.c:331
 msgid "Could not Save"
 msgstr "无法保存"
 
-#: src/gtr-window.c:342
+#: src/gtr-window.c:343
 msgid "File saved"
 msgstr "文件已保存"
 
@@ -2229,9 +2245,6 @@ msgstr "显示的消息与翻译记忆匹配的消息的最大长度差。"
 
 #~ msgid "Show the Context panel"
 #~ msgstr "显示上下文面板"
-
-#~ msgid "_Previous Message"
-#~ msgstr "前一条消息(_P)"
 
 #~ msgid "Move back one message"
 #~ msgstr "转到上一条消息"
