@@ -562,7 +562,7 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
       if (gtr_msg_is_fuzzy (msg))
         gtk_label_set_text (GTK_LABEL (priv->msgid_tags), _("fuzzy"));
       if (msg_error) {
-        gtk_label_set_text (GTK_LABEL (priv->msgid_tags), msg_error);
+        gtk_label_set_text (GTK_LABEL (priv->msgid_tags), g_strstrip (msg_error));
         g_free (msg_error);
       }
     }
@@ -689,7 +689,7 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
 
   msg_error = gtr_msg_check (msg);
   if (msg_error) {
-    gtk_label_set_text (GTK_LABEL (priv->msgid_tags), msg_error);
+    gtk_label_set_text (GTK_LABEL (priv->msgid_tags), g_strstrip (msg_error));
     g_free (msg_error);
   }
   else if (gtr_msg_is_fuzzy (msg))
