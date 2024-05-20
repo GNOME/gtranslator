@@ -4,6 +4,9 @@
   <requires lib="gtk+" version="3.0"/>
   <template class="GtrUploadDialog" parent="AdwDialog">
     <property name="title" translatable="yes">Upload to Damned Lies</property>
+    <style>
+      <class name="view"/>
+    </style>
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
@@ -29,6 +32,10 @@
           <object class="GtkScrolledWindow">
             <property name="propagate-natural-height">True</property>
             <property name="propagate-natural-width">True</property>
+            <property name="margin-start">6</property>
+            <property name="margin-end">6</property>
+            <property name="margin-top">6</property>
+            <property name="margin-bottom">6</property>
             <property name="child">
               <object class="AdwClamp">
                 <property name="child">
