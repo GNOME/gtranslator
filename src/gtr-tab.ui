@@ -118,7 +118,7 @@
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkBox" id="text_hbox">
-                                <property name="valign">center</property>
+                                <property name="spacing">12</property>
                                 <child>
                                   <object class="GtkLabel" id="msgid_label">
                                     <property name="xalign">0</property>
@@ -133,20 +133,16 @@
                                 <child>
                                   <object class="GtkLabel" id="msgid_ctxt">
                                     <property name="xalign">0</property>
-                                    <property name="label" translatable="0"></property>
                                     <property name="use_underline">1</property>
                                     <property name="ellipsize">end</property>
                                     <style>
-                                      <class name="msgcontext"/>
+                                      <class name="dim-label"/>
                                     </style>
                                   </object>
                                 </child>
                                 <child>
                                   <object class="GtkLabel" id="msgid_tags">
                                     <property name="xalign">0</property>
-                                    <attributes>
-                                      <attribute name="weight" value="bold"></attribute>
-                                    </attributes>
                                     <style>
                                       <class name="msgtags"/>
                                     </style>
