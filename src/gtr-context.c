@@ -153,6 +153,7 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
   priv = gtr_context_panel_get_instance_private (panel);
 
   headerbar = gtk_header_bar_new ();
+  gtk_header_bar_set_show_title_buttons (GTK_HEADER_BAR (headerbar), FALSE);
   cancel = gtk_button_new_with_label (_("Cancel"));
   save = gtk_button_new_with_label (_("Save"));
   gtk_widget_add_css_class (save, "suggested-action");
@@ -161,6 +162,7 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
 
   dialog = adw_dialog_new ();
   toolbar_view = adw_toolbar_view_new ();
+  gtk_widget_add_css_class (GTK_WIDGET (dialog), "view");
   adw_dialog_set_title (dialog, _("Notes"));
   adw_dialog_set_child (dialog, toolbar_view);
   adw_toolbar_view_add_top_bar (ADW_TOOLBAR_VIEW (toolbar_view), headerbar);
