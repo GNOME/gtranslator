@@ -36,7 +36,6 @@
 #include "gtr-application.h"
 #include "gtr-dirs.h"
 #include "gtr-file-dialogs.h"
-//#include "gtr-notebook.h"
 #include "gtr-po.h"
 #include "gtr-tab.h"
 #include "gtr-utils.h"
