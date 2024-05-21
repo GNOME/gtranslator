@@ -254,6 +254,7 @@ static void
 save_dialog_response_cb (GObject *source, GAsyncResult *res, void *user_data)
 {
   g_autoptr (GError) error = NULL;
+  g_autoptr (GError) save_error = NULL;
   GtrPo *po;
   GtrTab *tab;
   GtkFileDialog *dialog = GTK_FILE_DIALOG (source);
@@ -266,9 +267,23 @@ save_dialog_response_cb (GObject *source, GAsyncResult *res, void *user_data)
   tab = gtr_window_get_active_tab (window);
   po = gtr_tab_get_po (tab);
 
-  // FIXME: handle errors here
-  file = gtk_file_dialog_save_finish (dialog, res, NULL);
-  if (!file) return;
+  file = gtk_file_dialog_save_finish (dialog, res, &save_error);
+  if (save_error)
+  {
+    if (g_error_matches (save_error, GTK_DIALOG_ERROR, GTK_DIALOG_ERROR_DISMISSED))
+      return;
+
+    AdwDialog *alert_dialog;
+
+    alert_dialog = adw_alert_dialog_new (_("Could not save file"), NULL);
+    adw_alert_dialog_add_response (ADW_ALERT_DIALOG (alert_dialog), "ok", _("OK"));
+    adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (alert_dialog), "ok");
+    adw_dialog_present (ADW_DIALOG (alert_dialog), GTK_WIDGET (window));
+
+    g_error ("Could not save file: %s", save_error->message);
+
+    return;
+  }
   filename = g_file_get_path (file);
   location = g_file_new_for_path (filename);
 
