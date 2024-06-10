@@ -337,6 +337,10 @@ _upload_file_callback (GObject      *object,
       if (status_code == SOUP_STATUS_FORBIDDEN)
         {
           dialog = adw_alert_dialog_new (_("This file has already been uploaded"), NULL);
+          adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok",
+                                         _("OK"));
+          adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog),
+                                                 "ok");
           gtr_tab_enable_upload (active_tab, FALSE);
           goto end;
         }
