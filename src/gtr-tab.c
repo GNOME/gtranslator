@@ -1016,7 +1016,10 @@ void
 gtr_tab_enable_upload (GtrTab *tab, gboolean enable)
 {
   GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-  gtk_widget_set_sensitive (priv->upload, enable);
+  GtkApplication *app = gtk_window_get_application (GTK_WINDOW (priv->window));
+  GAction *action
+      = g_action_map_lookup_action (G_ACTION_MAP (app), "upload_file");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), enable);
 }
 
 /**
