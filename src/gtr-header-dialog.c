@@ -52,6 +52,7 @@ typedef struct
   GtkWidget *lg_email;
   GtkWidget *charset;
   GtkWidget *encoding;
+  GtkWidget *plural;
 
   GtkWidget *lang;
   GtkWidget *module;
@@ -99,6 +100,7 @@ gtr_header_dialog_class_init (GtrHeaderDialogClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, lg_email);
   gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, charset);
   gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, encoding);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, plural);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, prj_id_version);
   gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, rmbt);
@@ -132,6 +134,7 @@ take_my_options_checkbutton_toggled (AdwSwitchRow *button, GParamSpec *spec,
   gtk_widget_set_sensitive (priv->lang_code, !active);
   gtk_widget_set_sensitive (priv->lg_email, !active);
   gtk_widget_set_sensitive (priv->encoding, !active);
+  gtk_widget_set_sensitive (priv->plural, !active);
 }
 
 static void
@@ -222,6 +225,25 @@ language_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 }
 
 static void
+opt_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
+{
+  const char *encoding, *charset, *plural;
+  GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
+
+  encoding = gtk_editable_get_text (GTK_EDITABLE (priv->encoding));
+  charset = gtk_editable_get_text (GTK_EDITABLE (priv->charset));
+  plural = gtk_editable_get_text (GTK_EDITABLE (priv->plural));
+  if (encoding)
+    gtr_header_set_encoding (gtr_po_get_header (priv->po), encoding);
+  if (charset)
+    gtr_header_set_charset (gtr_po_get_header (priv->po), charset);
+  if (plural)
+    gtr_header_set_plural_forms (gtr_po_get_header (priv->po), plural);
+  if (encoding || charset || plural)
+    po_state_set_modified (priv->po);
+}
+
+static void
 dl_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 {
   const char *lang, *module, *branch, *domain;
@@ -298,6 +320,10 @@ gtr_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
   gtk_editable_set_text (GTK_EDITABLE (priv->encoding), text);
   g_free (text);
 
+  text = gtr_header_get_plural_forms (header);
+  gtk_editable_set_text (GTK_EDITABLE (priv->plural), text);
+  g_free (text);
+
   /* Damned Lies Information */
   text = gtr_header_get_dl_lang (header);
   if (text)
@@ -371,6 +397,7 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
       gtk_widget_set_sensitive (priv->lang_code, !active);
       gtk_widget_set_sensitive (priv->lg_email, !active);
       gtk_widget_set_sensitive (priv->encoding, !active);
+      gtk_widget_set_sensitive (priv->plural, !active);
     }
 }
 
@@ -415,6 +442,13 @@ set_default_values (GtrHeaderDialog * dlg, GtrWindow * window)
 
   g_signal_connect (priv->lg_email, "changed",
                     G_CALLBACK (language_changed), dlg);
+
+  g_signal_connect (priv->encoding, "changed",
+                    G_CALLBACK (opt_changed), dlg);
+  g_signal_connect (priv->charset, "changed",
+                    G_CALLBACK (opt_changed), dlg);
+  g_signal_connect (priv->plural, "changed",
+                    G_CALLBACK (opt_changed), dlg);
 
   g_signal_connect (priv->lang, "changed",
                     G_CALLBACK (dl_changed), dlg);
