@@ -732,3 +732,27 @@ gtr_msg_compare (GtrMsg *first, GtrMsg *second)
 {
   return g_strcmp0 (gtr_msg_get_msgid (first), gtr_msg_get_msgid (second)) == 0;
 }
+
+// Set the plurals for this message, add missing and remove extra
+gboolean
+gtr_msg_fix_plurals (GtrMsg *msg, int plurals)
+{
+  int i = 0;
+  const gchar *current = NULL;
+
+  if (!gtr_msg_get_msgid_plural (msg))
+    return FALSE;
+
+  for (i = 0; i < plurals; i++)
+    {
+      current = gtr_msg_get_msgstr_plural (msg, i);
+      if (!current)
+        gtr_msg_set_msgstr_plural (msg, i, "");
+    }
+  // Remove leftovers
+  current = gtr_msg_get_msgstr_plural (msg, i);
+  while (current)
+    gtr_msg_set_msgstr_plural (msg, i++, NULL);
+
+  return TRUE;
+}

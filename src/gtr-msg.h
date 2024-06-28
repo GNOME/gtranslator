@@ -92,6 +92,9 @@ const gchar               *gtr_msg_get_format               (GtrMsg      *msg);
 
 gchar                     *gtr_msg_check                    (GtrMsg      *msg);
 
+gboolean                  gtr_msg_fix_plurals               (GtrMsg      *msg,
+                                                             int plurals);
+
 gboolean                  gtr_msg_compare                   (GtrMsg *first, GtrMsg *second);
 
 /* Semi-private methods */
