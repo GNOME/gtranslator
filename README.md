@@ -6,9 +6,9 @@ functions are already implemented; gtranslator aims to be a very complete
 editing environment for translation issues within the GNU gettext/GNOME desktop
 world.
 
-You can check for the latest news and releases on the main gtranslator webpage:
+You can check for the latest news and releases on the gtranslator Gitlab repository:
 
-    https://wiki.gnome.org/Apps/Gtranslator
+    https://gitlab.gnome.org/GNOME/gtranslator/
 
 In the case you found a bug or wanted to give us a "wish-feature" of your own,
 please file a report under the gtranslator product in GNOME gitlab at:
