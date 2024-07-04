@@ -21,9 +21,9 @@ GNOME support forum:
 
     https://discourse.gnome.org/c/applications/
 
-We've also an IRC channel, you can contact us directly in the #gtranslator channel:
+We've also a Matrix channel, you can contact us directly in the #gtranslator:gnome.org channel:
 
-    https://wiki.gnome.org/Community/GettingInTouch/IRC
+    https://matrix.to/#/#gtranslator:gnome.org
 
 Please don't hesitate to file bug reports on
 https://gitlab.gnome.org/GNOME/gtranslator/issues/ or to share your comments,
