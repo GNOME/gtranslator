@@ -798,7 +798,7 @@ gtr_view_replace_all (GtrView * view,
  * gtr_view_reload_scheme_color:
  * @view: a #GtrView
  *
- * Reloads the gtksourceview scheme color. Neccessary when the scheme color 
+ * Reloads the gtksourceview scheme color. Necessary when the scheme color
  * changes.
  */
 void

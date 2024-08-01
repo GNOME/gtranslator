@@ -308,7 +308,7 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
                     G_CALLBACK (on_language_code_changed),
                     fetcher);
 
-  // Intial values
+  // Initial values
   on_charset_changed (NULL, NULL, fetcher);
   on_encoding_changed (NULL, NULL, fetcher);
 }
