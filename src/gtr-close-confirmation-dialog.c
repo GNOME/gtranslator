@@ -88,7 +88,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (GtrCloseConfirmationDialog,
 static void set_unsaved_document (GtrCloseConfirmationDialog *dlg,
                                   const GList * list);
 
-/*  Since we connect in the costructor we are sure this handler will be called
+/*  Since we connect in the constructor we are sure this handler will be called
  *  before the user ones
  */
 static void

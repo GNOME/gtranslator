@@ -61,7 +61,7 @@
 #define GTR_STOCK_FUZZY_UNTRANS_NEXT "gtranslator-fuzzy-untranslated-next"
 #define GTR_STOCK_FUZZY_UNTRANS_PREV "gtranslator-fuzzy-untranslated-prev"
 
-#define PROFILE_DATA "GtrWidnowProfileData"
+#define PROFILE_DATA "GtrWindowProfileData"
 
 typedef struct
 {

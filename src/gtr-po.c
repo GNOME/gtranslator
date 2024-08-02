@@ -647,7 +647,7 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
  * @location: the file to open
  * @error: a variable to store the errors
  *
- * Parses all things related to the #GtrPo and initilizes all neccessary
+ * Parses all things related to the #GtrPo and initializes all necessary
  * variables.
  **/
 gboolean
@@ -712,7 +712,7 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
 
   /*
    * Determine whether first message is the header or not, and
-   * if so, process it seperately. Otherwise, treat as a normal
+   * if so, process it separately. Otherwise, treat as a normal
    * message.
    */
   priv->messages = NULL;
@@ -787,7 +787,7 @@ gtr_po_save_file (GtrPo * po, GError ** error)
   po_message_t message;
 
   /*
-   * Initialice the handler error.
+   * Initialize the handler error.
    */
   handler.xerror = &on_gettext_po_xerror;
   handler.xerror2 = &on_gettext_po_xerror2;

@@ -1138,7 +1138,7 @@ gtr_tab_get_active_view (GtrTab * tab)
  * gtr_tab_get_all_views:
  * @tab: the #GtranslationTab
  * @original: TRUE if you want original TextViews.
- * @translated: TRUE if you want tranlated TextViews.
+ * @translated: TRUE if you want translated TextViews.
  *
  * Returns all the views currently present in #GtranslationTab
  *

@@ -468,7 +468,7 @@ do_replace_all (GtrSearchBar *searchbar, GtrWindow * window)
   g_return_if_fail ((search_entry_text) != NULL);
   g_return_if_fail ((*search_entry_text) != '\0');
 
-  /* replace text may be "", we just delete all occurrencies */
+  /* replace text may be "", we just delete all occurrences */
   replace_entry_text = gtr_search_bar_get_replace_text (searchbar);
   g_return_if_fail ((replace_entry_text) != NULL);
 
