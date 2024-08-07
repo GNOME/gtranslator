@@ -2,31 +2,28 @@
 # Copyright (C) YEAR gtranslator COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# OIS <mistresssilvara@hotmail.com>, 2020-2022.
+# OIS <mistresssilvara@hotmail.com>, 2020-2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 3.22\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2022-12-09 21:49+0000\n"
-"PO-Revision-Date: 2022-12-10 06:05+0700\n"
+"POT-Creation-Date: 2024-07-29 20:49+0000\n"
+"PO-Revision-Date: 2024-08-03 18:21+0700\n"
 "Last-Translator: OIS <mistresssilvara@hotmail.com>\n"
-"Language-Team: Interlingue; Occidental <None>\n"
+"Language-Team: Interlingue <NONE>\n"
 "Language: ie\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1)\n"
-"X-Generator: Gtranslator 42.0\n"
-"X-DL-Team: ie\n"
-"X-DL-Module: gtranslator\n"
-"X-DL-Branch: master\n"
-"X-DL-Domain: po\n"
-"X-DL-State: Translating\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Gtranslator 46.1\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
-msgid "Gtranslator"
-msgstr "Gtranslator"
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
+#: src/gtr-application.c:498 src/gtr-window.c:205 src/gtr-window.c:432
+msgid "Translation Editor"
+msgstr "Redactor de traductiones"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:8
 #: data/org.gnome.Gtranslator.desktop.in.in:5
@@ -50,15 +47,6 @@ msgid ""
 "code viewer."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:161
-msgid "Daniel García Moreno"
-msgstr "Daniel García Moreno"
-
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:672
-#: src/gtr-notebook.ui:216 src/gtr-window.c:229 src/gtr-window.ui:25
-msgid "Translation Editor"
-msgstr "Redactor de traductiones"
-
 #: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
 msgstr "Redactor de files PO"
@@ -67,162 +55,126 @@ msgstr "Redactor de files PO"
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Traduction;Redactor;Gettext;Scrir;Script;"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:24
+#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:322
+msgid "New Window"
+msgstr "Nov fenestre"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:22
 msgid "Warn if file contains fuzzy translations"
 msgstr "Avisar si li file contene ínprecis traductiones"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:25
+#: data/org.gnome.Gtranslator.gschema.xml.in:23
 msgid ""
 "If true, warn the user when saving a PO translation file containing fuzzy "
 "strings."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:32
+#: data/org.gnome.Gtranslator.gschema.xml.in:30
 msgid "Whether to remove the obsolete entries upon saving"
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:33
+#: data/org.gnome.Gtranslator.gschema.xml.in:31
 msgid ""
 "If true, the obsolete entries will be removed from the file after saving"
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:39
+#: data/org.gnome.Gtranslator.gschema.xml.in:37
 msgid "Auto save files"
 msgstr "Autogardar"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:40
+#: data/org.gnome.Gtranslator.gschema.xml.in:38
 msgid "If true, automatically save files at specified intervals."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:46
+#: data/org.gnome.Gtranslator.gschema.xml.in:44
 msgid "Auto save interval"
 msgstr "Intervalle"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:47
+#: data/org.gnome.Gtranslator.gschema.xml.in:45
 msgid "Interval in minutes at which to automatically save files."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:53
+#: data/org.gnome.Gtranslator.gschema.xml.in:51
 msgid "Create backup before saving"
 msgstr "Crear un copie de reserve ante que gardar"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:54
+#: data/org.gnome.Gtranslator.gschema.xml.in:52
 msgid "If true, create a backup copy of a file before saving it."
 msgstr "Crear un copie de reserve ante que gardar it."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:60
-#, fuzzy
+#: data/org.gnome.Gtranslator.gschema.xml.in:58
 msgid "Use profile values for header"
-msgstr "Usa ; por separar multiplic valores."
+msgstr "Usar li valores del profil por li cap-parte"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:61
+#: data/org.gnome.Gtranslator.gschema.xml.in:59
 msgid ""
 "If true, overwrite the values in the PO header with those in the active "
 "profile."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:70
+#: data/org.gnome.Gtranslator.gschema.xml.in:68
 msgid "Highlight syntax in edit fields"
 msgstr "Colorar li sintaxe in campes de redaction"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:71
+#: data/org.gnome.Gtranslator.gschema.xml.in:69
 msgid "If true, apply syntax highlighting to strings in edit fields."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:77
+#: data/org.gnome.Gtranslator.gschema.xml.in:75
 msgid "Make whitespace visible"
 msgstr "Revelar spacies"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:78
+#: data/org.gnome.Gtranslator.gschema.xml.in:76
 msgid "If true, display whitespace in strings as representative symbols."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:84
+#: data/org.gnome.Gtranslator.gschema.xml.in:82
 msgid "Remove fuzzy status when message is changed"
 msgstr "Remover li ínprecis statu si li textu es modificat"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:85
+#: data/org.gnome.Gtranslator.gschema.xml.in:83
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:91
+#: data/org.gnome.Gtranslator.gschema.xml.in:89
 msgid "Check spelling"
 msgstr "Controlar li ortografie"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:92
+#: data/org.gnome.Gtranslator.gschema.xml.in:90
 msgid "If true, check the spelling of translated messages."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:103
-#, fuzzy
-msgid "Side panel switcher style"
-msgstr "Monstrar li panel lateral"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:104
-#, fuzzy
-msgid "Style for switchers in the side panel."
-msgstr "Monstrar li panel lateral"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:110
-msgid "Color scheme"
-msgstr "Schema de colores"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:111
-msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
-msgstr ""
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:117
+#: data/org.gnome.Gtranslator.gschema.xml.in:101
 msgid "Message list sort order"
 msgstr "Órdine del liste de textus"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:118
+#: data/org.gnome.Gtranslator.gschema.xml.in:102
 msgid ""
 "Sort order to use in the message list. Possible values are “status”, “id”, "
 "“original-text” and “translated-text”."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:153
-msgid "Active plugins"
-msgstr "Activ plugines"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:154
-msgid ""
-"List of active plugins. It contains the “Location” of the active plugins. "
-"See the .gtranslator-plugin file for obtaining the “Location” of a given "
-"plugin."
-msgstr ""
-
-#: src/codeview/gtr-codeview.c:380
-msgid "Paths:"
-msgstr "Rutes:"
-
-#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:323
-#: src/gtr-io-error-info-bar.c:161 src/gtr-preferences-dialog.c:664
-#: src/translation-memory/gtr-translation-memory-dialog.c:305
-msgid "_Close"
-msgstr "_Cluder"
-
-#: src/codeview/gtr-viewer.c:75
+#: src/codeview/gtr-viewer.c:100
 msgid "Source Viewer"
 msgstr "Visor del fonte"
 
-#: src/codeview/gtr-viewer.ui:62
+#: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:279
+#: src/gtr-actions-file.c:299 src/gtr-actions-file.c:341
+#: src/gtr-actions-file.c:368 src/gtr-actions-file.c:542
+#: src/gtr-actions-file.c:585 src/gtr-actions-file.c:753 src/gtr-dl-teams.c:157
+#: src/gtr-dl-teams.c:250 src/gtr-dl-teams.c:336 src/gtr-dl-teams.c:443
+#: src/gtr-dl-teams.c:568 src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:593
+#: src/gtr-dl-teams.c:625 src/gtr-dl-teams.c:694 src/gtr-profile-dialog.ui:20
+#: src/gtr-tab.c:348 src/gtr-window.c:159 src/gtr-window.c:332
+msgid "OK"
+msgstr "OK"
+
+#: src/codeview/gtr-viewer.ui:26
 msgid "Source code"
 msgstr "Code de fonte"
 
-#: src/gtr-actions-app.c:58
-msgid "Current Maintainers"
-msgstr "Actual mantentores"
-
-#: src/gtr-actions-app.c:62
-msgid "Previous Developers"
-msgstr "Anteyan developatores"
-
-#: src/gtr-actions-app.c:73
-msgid "Contributors"
-msgstr "Contributores"
-
-#: src/gtr-actions-app.c:98
+#: src/gtr-actions-app.c:86
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
@@ -234,155 +186,93 @@ msgstr ""
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: src/gtr-actions-app.c:111
+#: src/gtr-actions-app.c:103
 msgid "translator-credits"
-msgstr "OIS <mistresssilvara@hotmail.com>, 2020-22"
+msgstr "OIS <mistresssilvara@hotmail.com>, 2020-24"
 
-#: src/gtr-actions-app.c:114
-msgid "Translation Editor Web Site"
-msgstr "Website del Redactor de traductiones"
+#: src/gtr-actions-file.c:204 src/gtr-close-confirmation-dialog.c:338
+msgid "Unsaved Changes"
+msgstr "Íngardat modificationes"
 
-#: src/gtr-actions-file.c:217
+#: src/gtr-actions-file.c:208
 #, c-format
-msgid ""
-"Do you want to save changes to this file: <span weight=\"bold\" "
-"size=\"large\">%s</span>?"
-msgstr ""
-"Esque vu vole gardar modificationes de ti file: <span weight=\"bold\" "
-"size=\"large\">%s</span>?"
+msgid "Do you want to write all the changes done to %s?"
+msgstr "Esque vu vole gardar omni modificationes de «%s»?"
 
-#: src/gtr-actions-file.c:223
-msgid "If you don't save, all your unsaved changes will be permanently lost."
-msgstr "Si vu ne garda it, omni modificationes va esser perdit irrevocabilmen."
-
-#: src/gtr-actions-file.c:226
-msgid "Save and open"
-msgstr "Gardar e aperter"
-
-#: src/gtr-actions-file.c:227
+#: src/gtr-actions-file.c:212 src/gtr-context.c:157
+#: src/gtr-profile-dialog.ui:15 src/gtr-upload-dialog.ui:18
 msgid "Cancel"
 msgstr "Anullar"
 
-#: src/gtr-actions-file.c:228
-msgid "Continue without saving"
+#: src/gtr-actions-file.c:213
+msgid "Continue Without Saving"
 msgstr "Continuar sin gardar"
 
-#: src/gtr-actions-file.c:260
+#: src/gtr-actions-file.c:214
+msgid "Save and Open"
+msgstr "Gardar e aperter"
+
+#: src/gtr-actions-file.c:236
 msgid "Open file for translation"
 msgstr "Aperter un file por traduction"
 
-#: src/gtr-actions-file.c:359
+#: src/gtr-actions-file.c:278
+msgid "Could not save file"
+msgstr "Ne successat gardar li file"
+
+#: src/gtr-actions-file.c:339
 msgid "This file has already been uploaded"
 msgstr "Ti file ja esset cargat"
 
-#: src/gtr-actions-file.c:382
+#: src/gtr-actions-file.c:355
+msgid "Couldn't upload the file"
+msgstr "Ne successat cargar li file"
+
+#: src/gtr-actions-file.c:358
 #, c-format
 msgid ""
-"An error occurred while uploading the file: %s\n"
+"%s\n"
 "Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
 "correctly in your profile or you don't have permissions to upload this "
 "module."
 msgstr ""
-"Un errore evenit cargante li file: %s\n"
+"%s\n"
 "Fórsan vu ne ha configurat vor <b>token</b> de <i>l10n.gnome.org</i> in vor "
 "profil o vu ne have permissiones cargar ti module."
 
-#: src/gtr-actions-file.c:395
+#: src/gtr-actions-file.c:367
 msgid "The file has been uploaded!"
 msgstr "Li file sta cargat!"
 
-#: src/gtr-actions-file.c:546
+#: src/gtr-actions-file.c:508
 msgid "Save file as…"
 msgstr "Gardar li file quam..."
 
-#: src/gtr-assistant.c:128
-#, c-format
-msgid ""
-"Profile name: %s\n"
-"Translator name: %s\n"
-"Translator email: %s\n"
-"Language name: %s\n"
-"Team email: %s\n"
-"Language code: %s\n"
-"Character set: %s\n"
-"Transfer encoding: %s\n"
-"Plural form: %s\n"
-msgstr ""
-"Profil: %s\n"
-"Traductor: %s\n"
-"E-post de trad.: %s\n"
-"Lingue: %s\n"
-"E-post del equip: %s\n"
-"Code del lingue: %s\n"
-"Codification: %s\n"
-"Cod. de transferte: %s\n"
-"Plurales: %s\n"
-
-#: src/gtr-assistant.c:170
-msgid "This assistant will help you to create the main profile."
-msgstr "Ti assistente va assister vos in creation del primari profil."
-
-#: src/gtr-assistant.c:176
-msgid "Assistant"
-msgstr "Assistente"
-
-#: src/gtr-assistant.c:268
-msgid "Profile name"
-msgstr "Nómine de profil"
-
-#: src/gtr-assistant.c:314
-msgid "Translator email"
-msgstr "E-post del traductor"
-
-#: src/gtr-assistant.c:337
-msgid "Team email"
-msgstr "E-post del equip"
-
-#: src/gtr-assistant.c:353 src/gtr-preferences-dialog.c:588
-msgid "Profile"
-msgstr "Profil"
-
-#: src/gtr-assistant.c:447
-msgid "Language"
-msgstr "Lingue"
-
-#: src/gtr-assistant.c:469
-msgid "Confirmation"
-msgstr "Confirmation"
-
-#: src/gtr-close-confirmation-dialog.c:123
-msgid "Close _without Saving"
-msgstr "Clúder si_n gardar"
-
-#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:108
-#: src/gtr-file-dialogs.c:47 src/gtr-jump-dialog.c:90
-#: src/gtr-preferences-dialog.c:460 src/gtr-profile-dialog.c:72
-#: src/translation-memory/gtr-translation-memory-dialog.c:105
+#: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:449
 msgid "_Cancel"
 msgstr "A_nullar"
 
-#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:106
-#: src/gtr-file-dialogs.c:46
+#: src/gtr-close-confirmation-dialog.c:123
+msgid "Close _Without Saving"
+msgstr "Cluder si_n gardar"
+
+#: src/gtr-close-confirmation-dialog.c:124
 msgid "_Save"
 msgstr "_Gardar"
 
-#: src/gtr-close-confirmation-dialog.c:155
-msgid "Question"
-msgstr "Question"
-
-#: src/gtr-close-confirmation-dialog.c:371
+#: src/gtr-close-confirmation-dialog.c:295
 #, c-format
 msgid "Save the changes to document “%s” before closing?"
 msgstr "Gardar li modificationes del document «%s» ante que cluder?"
 
-#: src/gtr-close-confirmation-dialog.c:543
+#: src/gtr-close-confirmation-dialog.c:309
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] "Li modificationes de %d documente va esser perdit irrevocabilmen."
 msgstr[1] "Li modificationes de %d documentes va esser perdit irrevocabilmen."
 
-#: src/gtr-close-confirmation-dialog.c:550
+#: src/gtr-close-confirmation-dialog.c:316
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -392,405 +282,348 @@ msgstr[0] ""
 msgstr[1] ""
 "Hay %d documentes con íngardat modificationes. Gardar les ante que cluder?"
 
-#: src/gtr-close-confirmation-dialog.c:571
-msgid "Docum_ents with unsaved changes:"
-msgstr "Docum_entes con íngardat modificationes:"
-
-#: src/gtr-close-confirmation-dialog.c:575
-msgid "S_elect the documents you want to save:"
-msgstr "S_electe li documentes quel vu vole gardar:"
-
-#: src/gtr-close-confirmation-dialog.c:595
-msgid "Saving has been disabled by the system administrator."
-msgstr "Gardation esset depermisset per li administrator del sistema."
-
-#: src/gtr-close-confirmation-dialog.c:597
-msgid "If you don’t save, all your changes will be permanently lost."
-msgstr "Si vu ne garda it, omni modificationes va esser perdit irrevocabilmen."
-
-#: src/gtr-context.c:101
-msgid "Notes"
-msgstr "Notas"
-
-#: src/gtr-context.c:305
-msgid "Notes:"
-msgstr "Notas:"
-
-#: src/gtr-context.c:313
-msgid "Add Note"
-msgstr "Adjunter un nota"
-
-#: src/gtr-context.c:318
-msgid "Edit"
-msgstr "Redacter"
-
-#: src/gtr-context.c:363
-msgid "Extracted comments:"
-msgstr "Extractet notas:"
-
-#: src/gtr-context.c:366
-msgid "Context:"
-msgstr "Contextu:"
-
-#: src/gtr-context.c:369
-msgid "Format:"
-msgstr "Formate:"
-
-#: src/gtr-dl-teams.c:447
-msgid "No module state found."
-msgstr "Li statu del module ne esset trovat."
-
-#: src/gtr-dl-teams.c:464
-#, c-format
-msgid "The current state is: %s"
-msgstr "Li actual statu es: %s"
-
-#: src/gtr-dl-teams.c:625
-#, c-format
-msgid "The file '%s' has been saved in %s"
-msgstr "Li file «%s» sta gardat a %s"
-
-#: src/gtr-dl-teams.c:702
-#, c-format
-msgid ""
-"An error occurred while reserving this module: %s\n"
-"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
-"correctly in your profile or you don't have permissions to reserve this "
-"module."
-msgstr ""
-"Un errore evenit reservante ti module: %s\n"
-"Fórsan vu ne ha configurat vor <b>token</b> de <i>l10n.gnome.org</i> in vor "
-"profil o vu ne have permissiones reservar ti module."
-
-#: src/gtr-dl-teams.c:719
-#, c-format
-msgid "The file '%s.%s.%s.%s' has been successfully reserved"
-msgstr "Li file «%s.%s.%s.%s» sta reservat successosimen."
-
-#: src/gtr-dl-teams.c:869
-msgid "Translation Team"
-msgstr "Equip de traduction"
-
-#: src/gtr-dl-teams.c:876
-msgid "Module"
-msgstr "Module"
-
-#: src/gtr-dl-teams.ui:85
-msgid "Select team, module, branch and domain to get the translation file."
-msgstr "Selecte un equip, branche e dominia por obtener un file de traduction."
-
-#: src/gtr-dl-teams.ui:106
-msgid "Reserve for translation"
-msgstr "Reservar por traduction"
-
-#: src/gtr-dl-teams.ui:117
-msgid "Load file"
-msgstr "Cargar li file"
-
-#: src/gtr-dl-teams.ui:136
-msgid "Load from Damned Lies"
-msgstr "Cargar ex Damned Lies"
-
-#: src/gtr-dl-teams.ui:143 src/gtr-projects.ui:58
-msgid "Open…"
-msgstr "Aperter…"
-
-#: src/gtr-dl-teams.ui:166 src/gtr-notebook.ui:410 src/gtr-projects.ui:91
-msgid "Main Menu"
-msgstr "Menú principal"
-
-#: src/gtr-dl-teams.ui:194 src/gtr-notebook.ui:151 src/gtr-projects.ui:119
-msgid "New window"
-msgstr "Nov fenestre"
-
-#: src/gtr-dl-teams.ui:208 src/gtr-notebook.ui:160 src/gtr-projects.ui:133
-msgid "Preferences"
-msgstr "Preferenties"
-
-#: src/gtr-dl-teams.ui:235 src/gtr-notebook.ui:177 src/gtr-projects.ui:174
-msgid "Keyboard Shortcuts"
-msgstr "Rapid-tastes"
-
-#: src/gtr-dl-teams.ui:249 src/gtr-notebook.ui:186 src/gtr-projects.ui:188
-msgid "About"
-msgstr "Pri"
-
-#: src/gtr-dl-teams.ui:263 src/gtr-notebook.ui:204 src/gtr-projects.ui:216
-msgid "Quit"
-msgstr "Surtir"
-
-#: src/gtr-file-dialogs.c:47
-msgid "_Open"
-msgstr "_Aperter"
-
-#: src/gtr-file-dialogs.c:59
-msgid "Gettext translation"
-msgstr "Traduction Gettext"
-
-#: src/gtr-file-dialogs.c:68
-msgid "Gettext translation template"
-msgstr "Modelle de traduction Gettext"
-
-#: src/gtr-file-dialogs.c:73
-msgid "All files"
-msgstr "Omni files"
-
-#: src/gtr-header-dialog.c:325
-msgid "Edit Header"
-msgstr "Redacter li cap-parte"
-
-#: src/gtr-header-dialog.ui:71
-msgid "Use my options to complete the following entries:"
-msgstr "Usar mi parametres por compleer li sequent:"
-
-#: src/gtr-header-dialog.ui:95
-msgid "Translator’s _name:"
-msgstr "_Nómine de traductor:"
-
-#: src/gtr-header-dialog.ui:109
-msgid "Translator’s _email:"
-msgstr "_E-post de traductor:"
-
-#: src/gtr-header-dialog.ui:123
-msgid "_Language:"
-msgstr "_Lingue:"
-
-#: src/gtr-header-dialog.ui:136
-msgid "Language _code:"
-msgstr "_Code de lingue:"
-
-#: src/gtr-header-dialog.ui:149
-msgid "Language _Team email:"
-msgstr "E-pos_t del equip de lingue"
-
-#: src/gtr-header-dialog.ui:162
-msgid "Char_set:"
-msgstr "C_odification:"
-
-#: src/gtr-header-dialog.ui:175
-msgid "Enc_oding:"
-msgstr "C_odification:"
-
-#: src/gtr-header-dialog.ui:273
-msgid "Translator and Language"
-msgstr "Traductor e lingue"
-
-#: src/gtr-header-dialog.ui:299
-msgid "Project Id _version:"
-msgstr "_Version del ID del projecte:"
-
-#: src/gtr-header-dialog.ui:312
-msgid "Pot _file creation date:"
-msgstr "Date de creation del _file .pot:"
-
-#: src/gtr-header-dialog.ui:326
-msgid "Po file _revision date:"
-msgstr "Date de _modification del file .po:"
-
-#: src/gtr-header-dialog.ui:340
-msgid "Report message _bugs to:"
-msgstr "Ples raportar de_fectes de missages a:"
-
-#: src/gtr-header-dialog.ui:409
-msgid "Project"
-msgstr "Projecte"
-
-#: src/gtr-header-dialog.ui:442
-msgid "Comment"
-msgstr "Comenta"
-
-#: src/gtr-header-dialog.ui:469
-msgid "DL Team:"
-msgstr "Equipe DL:"
-
-#: src/gtr-header-dialog.ui:482
-msgid "DL Module:"
-msgstr "Module DL:"
-
-#: src/gtr-header-dialog.ui:496
-msgid "DL Branch:"
-msgstr "Branche DL:"
-
-#: src/gtr-header-dialog.ui:510
-msgid "DL Domain:"
-msgstr "Dominia DL:"
-
-#: src/gtr-header-dialog.ui:524
-msgid "DL State:"
-msgstr "Statu DL:"
-
-#: src/gtr-header-dialog.ui:602
-msgid "Damned Lies Info"
-msgstr "Damned Lies"
-
-#: src/gtr-io-error-info-bar.c:155 src/gtr-jump-dialog.c:88
-#: src/gtr-profile-dialog.c:173 src/gtr-profile-dialog.c:178
-#: src/translation-memory/gtr-translation-memory-dialog.c:104
-msgid "_OK"
-msgstr "_OK"
-
-#: src/gtr-jump-dialog.c:92
-msgid "Go to Message"
-msgstr "Ear a textu"
-
-#: src/gtr-jump-dialog.ui:33
-msgid "Enter message number:"
-msgstr "Numeró de textu:"
-
-#: src/gtr-lang-button.c:65
-msgid "Choose Language"
-msgstr "Selecter un lingue"
-
-#: src/gtr-languages-fetcher.ui:49
-msgid "_Language"
-msgstr "_Lingue"
-
-#: src/gtr-languages-fetcher.ui:63
-msgid "Language _code"
-msgstr "_Code de lingue"
-
-#: src/gtr-languages-fetcher.ui:77
-msgid "Character _set"
-msgstr "_Codification"
-
-#: src/gtr-languages-fetcher.ui:91
-msgid "Transfer en_coding"
-msgstr "Codification de _transferte"
-
-#: src/gtr-languages-fetcher.ui:105
-msgid "_Plural forms"
-msgstr "Formes del _plurale"
-
-#: src/gtr-languages-fetcher.ui:203
-msgid "_Edit options manually"
-msgstr "R_edacter manualmen"
-
-#: src/gtr-message-table.c:234
-msgid "Original Message"
-msgstr "Original textu"
-
-#: src/gtr-message-table.c:253
-msgid "Translated Message"
-msgstr "Traductet textu"
-
-#: src/gtr-notebook.ui:26
-msgid "Order messages by"
-msgstr "Ordinar secun"
-
-#: src/gtr-notebook.ui:48
-msgid "Appearance in the original file"
-msgstr "Ordine in li files"
-
-#: src/gtr-notebook.ui:57
-msgid "Message status"
-msgstr "Statu de textu"
-
-#: src/gtr-notebook.ui:67
-msgid "Original message"
-msgstr "Original textu"
-
-#: src/gtr-notebook.ui:77
-msgid "Translated message"
-msgstr "Traductet textu"
-
-#: src/gtr-notebook.ui:105
-msgid "Find"
-msgstr "Trovar"
-
-#: src/gtr-notebook.ui:114
-msgid "Find and replace"
-msgstr "Trovar e substituer"
-
-#: src/gtr-notebook.ui:123 src/gtr-projects.ui:147
-msgid "Build translation memory"
-msgstr "Constructer MdT"
-
-#: src/gtr-notebook.ui:133
-msgid "Edit header"
-msgstr "Redacter li cap-parte"
-
-#: src/gtr-notebook.ui:195 src/gtr-preferences-dialog.c:665
-#: src/gtr-projects.ui:202
-msgid "Help"
-msgstr "Auxilie"
-
-#: src/gtr-notebook.ui:227
-msgid "Open a new file (<Ctrl>o)"
-msgstr "Aperter un nov file (<Ctrl>o)"
-
-#: src/gtr-notebook.ui:241
-msgid "Open from Damned Lies (<Ctrl>d)"
-msgstr "Aperter ex Damned Lies (<Ctrl>d)"
-
-#: src/gtr-notebook.ui:272
-msgid "Undo (<Ctrl>z)"
-msgstr "Defar (<Ctrl>z)"
-
-#: src/gtr-notebook.ui:288
-msgid "Redo (<Ctrl><Shift>z)"
-msgstr "Refar (<Ctrl><Shift>z)"
-
-#: src/gtr-notebook.ui:318
-msgid "Previous message without translation (<Alt><Page Up>)"
-msgstr "Precedent íntraductet textu (<Alt><Page Up>)"
-
-#: src/gtr-notebook.ui:334
-msgid "Next message without translation (<Alt><Page Down>)"
-msgstr "Sequent íntraductet textu (<Alt><Page Up>)"
-
-#: src/gtr-notebook.ui:361
-msgid "Toggle fuzzy state (<Ctrl>+u)"
-msgstr "(Ín)precis (<Ctrl>+u)"
-
-#: src/gtr-notebook.ui:379
-msgid "Sort messages by"
-msgstr "Ordinar catenes secun"
-
-#: src/gtr-notebook.ui:389
-msgid "Order by menu"
-msgstr "Ordinar secun"
-
-#: src/gtr-notebook.ui:423
-msgid "Find (<Ctrl><f>)"
-msgstr "Trovar (<Ctrl><f>)"
-
-#: src/gtr-notebook.ui:453
+#: src/gtr-context.c:158 src/gtr-tab.ui:279
 msgid "Save"
 msgstr "Gardar"
 
-#: src/gtr-notebook.ui:457
-msgid "Save the current file (<Ctrl>s)"
-msgstr "Gardar li actual file (<Ctrl>s)"
+#: src/gtr-context.c:166 src/gtr-context.ui:28
+msgid "Notes"
+msgstr "Notas"
 
-#: src/gtr-notebook.ui:466
-msgid "Save as (<Ctrl><Shift>s)"
-msgstr "Gardar quam (<Ctrl><Shift>s)"
+#: src/gtr-context.ui:32 src/gtr-preferences-dialog.c:268
+msgid "Edit"
+msgstr "Redacter"
 
-#: src/gtr-notebook.ui:482
-msgid "Upload file (<Ctrl>b)"
-msgstr "Cargar li file (<Ctrl>b)"
+#: src/gtr-context.ui:62
+msgid "Extracted comments"
+msgstr "Extractet notas"
 
-#: src/gtr-po.c:509
+#: src/gtr-context.ui:87
+msgid "Paths"
+msgstr "Rutes"
+
+#: src/gtr-dl-teams.c:249
+msgid "Error loading module info"
+msgstr "Un errore evenit cargante information pri li module"
+
+#: src/gtr-dl-teams.c:442
+msgid "Error loading file info"
+msgstr "Un errore evenit cargante information pri li file"
+
+#: src/gtr-dl-teams.c:473
+msgid "No module state found."
+msgstr "Li statu del module ne esset trovat."
+
+#: src/gtr-dl-teams.c:567
+msgid "Error loading file"
+msgstr "Un errore evenit cargante li file"
+
+#: src/gtr-dl-teams.c:578 src/gtr-dl-teams.c:624
+msgid "Error creating tmp file"
+msgstr "Un errore evenit creante un file temporari"
+
+#: src/gtr-dl-teams.c:592
+msgid "Error writing stream"
+msgstr "Un errore evenit scriente un fluvie"
+
+#: src/gtr-dl-teams.c:636
+msgid "The file has been saved in your Downloads folder"
+msgstr "Li file sta gardat a vor fólder Descargas"
+
+#: src/gtr-dl-teams.c:693
+msgid "Could not reserve module"
+msgstr "Ne successat reservar li module"
+
+#: src/gtr-dl-teams.c:698
+#, c-format
+msgid ""
+"%s\n"
+"Maybe you've not configured your l10n.gnome.org token correctly in your "
+"profile or you don't have permissions to reserve this module."
+msgstr ""
+"%s\n"
+"Fórsan vu ne ha configurat vor <b>token</b> de <i>l10n.gnome.org</i> in vor "
+"profil o vu ne have permissiones reservar ti module."
+
+#: src/gtr-dl-teams.c:710
+msgid "The file has been successfully reserved"
+msgstr "Li file sta reservat successosimen"
+
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:326
+msgid "Preferences"
+msgstr "Preferenties"
+
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:332
+msgid "Keyboard Shortcuts"
+msgstr "Rapid-tastes"
+
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:340
+msgid "About Translation Editor"
+msgstr "Pri li Redactor de traductiones"
+
+#: src/gtr-dl-teams.ui:28 src/gtr-dl-teams.ui:49
+msgid "Load from Damned Lies"
+msgstr "Cargar ex Damned Lies"
+
+#: src/gtr-dl-teams.ui:41 src/gtr-projects.ui:59 src/gtr-tab.ui:47
+msgid "Main Menu"
+msgstr "Menú principal"
+
+#: src/gtr-dl-teams.ui:70 src/gtr-languages-fetcher.ui:5
+#: src/gtr-languages-fetcher.ui:8
+msgid "Language"
+msgstr "Lingue"
+
+#: src/gtr-dl-teams.ui:81 src/gtr-header-dialog.ui:143
+msgid "Module"
+msgstr "Module"
+
+#: src/gtr-dl-teams.ui:92 src/gtr-header-dialog.ui:155
+msgid "Domain"
+msgstr "Dominia"
+
+#: src/gtr-dl-teams.ui:103 src/gtr-header-dialog.ui:149
+msgid "Branch"
+msgstr "Branche"
+
+#: src/gtr-dl-teams.ui:120
+msgid "Reserve for translation"
+msgstr "Reservar por traduction"
+
+#: src/gtr-dl-teams.ui:128
+msgid "Info"
+msgstr "Information"
+
+#: src/gtr-dl-teams.ui:131
+msgid "File"
+msgstr "File"
+
+#: src/gtr-dl-teams.ui:141
+msgid "Translation State"
+msgstr "Statu de traduction"
+
+#: src/gtr-dl-teams.ui:151
+msgid "Stats"
+msgstr "Statistica"
+
+#: src/gtr-dl-teams.ui:165
+msgid "Load File"
+msgstr "Cargar li file"
+
+#: src/gtr-file-dialogs.c:57
+msgid "Gettext translation"
+msgstr "Traduction Gettext"
+
+#: src/gtr-file-dialogs.c:65
+msgid "Gettext translation template"
+msgstr "Modelle de traduction Gettext"
+
+#: src/gtr-file-dialogs.c:69
+msgid "All files"
+msgstr "Omni files"
+
+#: src/gtr-greeter.ui:5 src/gtr-greeter.ui:45
+msgid "Welcome to Translation Editor"
+msgstr "Benevenit al Redactor de traductiones"
+
+#: src/gtr-greeter.ui:19
+msgid "Next"
+msgstr "Sequent"
+
+#: src/gtr-greeter.ui:33
+msgid "Welcome"
+msgstr "Benevenit"
+
+#: src/gtr-greeter.ui:47
+msgid ""
+"Before start to use the application, a profile should be created, but don't "
+"worry, the app will guide you to do it in a minute."
+msgstr ""
+"Ante que usar ti application, on deve crear un profil. Li application va "
+"assister vos crear it in un minute."
+
+#: src/gtr-greeter.ui:63
+msgid "Create Profile"
+msgstr "Crear un profile"
+
+#: src/gtr-greeter.ui:75
+msgid "Profile"
+msgstr "Profil"
+
+#: src/gtr-greeter.ui:78 src/gtr-greeter.ui:139 src/gtr-profile-dialog.ui:50
+msgid "Profile name"
+msgstr "Nómine de profil"
+
+#: src/gtr-greeter.ui:79 src/gtr-profile-dialog.ui:51
+msgid "default"
+msgstr "predefinit"
+
+#: src/gtr-greeter.ui:85 src/gtr-greeter.ui:144
+msgid "Translator name"
+msgstr "Nómine de traductor"
+
+#: src/gtr-greeter.ui:91 src/gtr-greeter.ui:149
+msgid "Translator email"
+msgstr "E-post del traductor"
+
+#: src/gtr-greeter.ui:97
+msgid "Translation team email"
+msgstr "E-post del equip de traduction"
+
+#: src/gtr-greeter.ui:120 src/gtr-greeter.ui:131
+msgid "Confirmation"
+msgstr "Confirmation"
+
+#: src/gtr-greeter.ui:154
+msgid "Team email"
+msgstr "E-post del equip"
+
+#: src/gtr-greeter.ui:159
+msgid "Language name"
+msgstr "Lingue"
+
+#: src/gtr-greeter.ui:164 src/gtr-languages-fetcher.ui:21
+msgid "Language code"
+msgstr "Code de lingue"
+
+#: src/gtr-greeter.ui:169 src/gtr-languages-fetcher.ui:41
+msgid "Character set"
+msgstr "Codification"
+
+#: src/gtr-greeter.ui:174 src/gtr-languages-fetcher.ui:61
+msgid "Transfer encoding"
+msgstr "Codification de transferte"
+
+#: src/gtr-greeter.ui:179
+msgid "Plural form"
+msgstr "Formes del plurale"
+
+#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:316
+msgid "Edit Header"
+msgstr "Redacter li cap-parte"
+
+#: src/gtr-header-dialog.ui:10
+msgid "Translator"
+msgstr "Traductor"
+
+#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:74
+#: src/gtr-header-dialog.ui:134 src/gtr-preferences-dialog.ui:13
+msgid "General"
+msgstr "General"
+
+#: src/gtr-header-dialog.ui:17
+msgid "Use my options to complete the following entries"
+msgstr "Usar mi parametres por compleer li sequent"
+
+#: src/gtr-header-dialog.ui:22
+msgid "Translator’s _name"
+msgstr "_Nómine de traductor"
+
+#: src/gtr-header-dialog.ui:28
+msgid "Translator’s _email"
+msgstr "_E-post de traductor"
+
+#: src/gtr-header-dialog.ui:34
+msgid "_Language"
+msgstr "_Lingue"
+
+#: src/gtr-header-dialog.ui:40
+msgid "Language _code"
+msgstr "_Code de lingue"
+
+#: src/gtr-header-dialog.ui:46
+msgid "Language _Team email"
+msgstr "E-post del equip de lingue"
+
+#: src/gtr-header-dialog.ui:52
+msgid "Char_set"
+msgstr "C_odification"
+
+#: src/gtr-header-dialog.ui:58
+msgid "Enc_oding"
+msgstr "Codification de transferte"
+
+#: src/gtr-header-dialog.ui:70
+msgid "Project"
+msgstr "Projecte"
+
+#: src/gtr-header-dialog.ui:77
+msgid "Project Id _version"
+msgstr "_Version del ID del projecte"
+
+#: src/gtr-header-dialog.ui:83
+msgid "Pot _file creation date"
+msgstr "Date de creation del _file .pot"
+
+#: src/gtr-header-dialog.ui:89
+msgid "Po file _revision date"
+msgstr "Date de _modification del file .po"
+
+#: src/gtr-header-dialog.ui:95
+msgid "Report message _bugs to"
+msgstr "Ples raportar de_fectes de missages a"
+
+#: src/gtr-header-dialog.ui:103
+msgid "Comment"
+msgstr "Comenta"
+
+#: src/gtr-header-dialog.ui:130
+msgid "Damned Lies"
+msgstr "Damned Lies"
+
+#: src/gtr-header-dialog.ui:137
+msgid "Lang"
+msgstr "Lingue"
+
+#: src/gtr-header-dialog.ui:161
+msgid "State"
+msgstr "Statu"
+
+#: src/gtr-languages-fetcher.ui:18
+msgid "Edit options manually"
+msgstr "Redacter manualmen"
+
+#: src/gtr-languages-fetcher.ui:28
+msgid "Choose language code"
+msgstr "Selecter un code de lingue"
+
+#: src/gtr-languages-fetcher.ui:81
+msgid "Plural forms"
+msgstr "Formes del plurale"
+
+#: src/gtr-languages-fetcher.ui:88
+msgid "Choose plural forms"
+msgstr "Selecter formes del plurale"
+
+#: src/gtr-message-table.ui:37
+msgid "Original Message"
+msgstr "Original textu"
+
+#: src/gtr-message-table.ui:46
+msgid "Translated Message"
+msgstr "Traductet textu"
+
+#: src/gtr-po.c:489
 #, c-format
 msgid "The file is empty"
 msgstr "Li file es vacui"
 
-#: src/gtr-po.c:518
+#: src/gtr-po.c:498
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Ne successat aperter li file «%s»: %s"
 
-#: src/gtr-po.c:589
+#: src/gtr-po.c:569
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Ne successat converter ex li codification «%s» a UTF-8"
 
-#: src/gtr-po.c:605 src/gtr-po.c:624
+#: src/gtr-po.c:585 src/gtr-po.c:604
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Ne successat gardar un temporari file por converter li codification"
 
-#: src/gtr-po.c:655
+#: src/gtr-po.c:635
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -801,17 +634,17 @@ msgstr ""
 "msgconv o iconv ante que aperter ti-ci file med Redactor de traductiones de "
 "GNOME"
 
-#: src/gtr-po.c:723
+#: src/gtr-po.c:703
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext retrodat un vacui liste de dominias."
 
-#: src/gtr-po.c:770
+#: src/gtr-po.c:750
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Null catenes obtenet del analisator."
 
-#: src/gtr-po.c:824
+#: src/gtr-po.c:804
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -822,368 +655,454 @@ msgstr ""
 "Files .pot es generat durante li compilation.\n"
 "Forsan vor file deve esser nominat «%s.po»."
 
-#: src/gtr-po.c:852
+#: src/gtr-po.c:832
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Li file %s es solmen-letion, on ne posse superscrir it"
 
-#: src/gtr-po.c:871
+#: src/gtr-po.c:851
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Li file PO contene un errore: %s"
 
-#: src/gtr-po.c:883
+#: src/gtr-po.c:863
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Un errore evenit scriente li file PO: %s"
 
-#: src/gtr-preferences-dialog.c:436
+#: src/gtr-preferences-dialog.c:271
+msgid "Delete"
+msgstr "Remover"
+
+#: src/gtr-preferences-dialog.c:432
 msgid "Impossible to remove the active profile"
 msgstr "On ne posse remover li activ profil"
 
-#: src/gtr-preferences-dialog.c:442
+#: src/gtr-preferences-dialog.c:433
 msgid "Another profile should be selected as active before"
 msgstr "Un altri profil deve esser fat activ ante to"
 
-#: src/gtr-preferences-dialog.c:455
+#: src/gtr-preferences-dialog.c:436
+msgid "_Ok"
+msgstr "_OK"
+
+#: src/gtr-preferences-dialog.c:444
 msgid "Are you sure you want to delete this profile?"
 msgstr "Esque vu vole deleter ti-ci profil?"
 
-#: src/gtr-preferences-dialog.c:463
+#: src/gtr-preferences-dialog.c:450
 msgid "_Delete"
 msgstr "_Deleter"
 
-#: src/gtr-preferences-dialog.c:594
-msgid "Active"
-msgstr "Activ"
+#: src/gtr-preferences-dialog.ui:9
+msgid "F_iles"
+msgstr "F_iles"
 
-#: src/gtr-preferences-dialog.c:667 src/gtr-preferences-dialog.ui:52
-msgid "Translation Editor Preferences"
-msgstr "Preferenties del redactor"
-
-#: src/gtr-preferences-dialog.ui:125
-msgid "General"
-msgstr "General"
-
-#: src/gtr-preferences-dialog.ui:144
+#: src/gtr-preferences-dialog.ui:16
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "_Avisar si li file PO contene ínprecis traductiones"
 
-#: src/gtr-preferences-dialog.ui:168
+#: src/gtr-preferences-dialog.ui:22
 msgid "_Remove obsolete entries on save"
 msgstr "_Remover obsolet catenes ante que gardar"
 
-#: src/gtr-preferences-dialog.ui:190
+#: src/gtr-preferences-dialog.ui:30
 msgid "Autosave"
 msgstr "Autogardar"
 
-#: src/gtr-preferences-dialog.ui:214
+#: src/gtr-preferences-dialog.ui:33
+msgid "_Activate auto save"
+msgstr "Gardar _automaticmen"
+
+#: src/gtr-preferences-dialog.ui:34
+msgid "Save the current file automatically"
+msgstr "Gardar li actual file automaticmen"
+
+#: src/gtr-preferences-dialog.ui:40
+msgid "Autosave _Interval"
+msgstr "_Intervalle de gardation automatic"
+
+#: src/gtr-preferences-dialog.ui:41
+msgid "Number of minutes to autosave"
+msgstr "Númere de minutes ante que gardar automaticmen"
+
+#: src/gtr-preferences-dialog.ui:56
 msgid "Create a _backup copy of files before saving"
 msgstr "Crear un copie de _reserve ante que gardar"
 
-#: src/gtr-preferences-dialog.ui:236
-msgid "_Autosave files every"
-msgstr "_Autogardar chascun"
+#: src/gtr-preferences-dialog.ui:69
+msgid "_Editor"
+msgstr "R_edactor"
 
-#: src/gtr-preferences-dialog.ui:260
-msgid "_minutes"
-msgstr "_minutes"
-
-#: src/gtr-preferences-dialog.ui:318
-msgid "Files"
-msgstr "Files"
-
-#: src/gtr-preferences-dialog.ui:345
+#: src/gtr-preferences-dialog.ui:73
 msgid "Text Display"
 msgstr "Vise de textu"
 
-#: src/gtr-preferences-dialog.ui:368
+#: src/gtr-preferences-dialog.ui:76
 msgid "_Highlight message syntax"
 msgstr "_Colorar li sintaxe"
 
-#: src/gtr-preferences-dialog.ui:384
+#: src/gtr-preferences-dialog.ui:82
 msgid "Make _whitespace visible"
 msgstr "Re_velar spacies"
 
-#: src/gtr-preferences-dialog.ui:409
-msgid "Font:"
-msgstr "Fonde:"
+#: src/gtr-preferences-dialog.ui:88
+msgid "_Font"
+msgstr "_Fonde"
 
-#: src/gtr-preferences-dialog.ui:421
-msgid "Choose the editor font"
-msgstr "Selecter li fonde del editor"
-
-#: src/gtr-preferences-dialog.ui:463
+#: src/gtr-preferences-dialog.ui:106
 msgid "Contents"
 msgstr "Contenete"
 
-#: src/gtr-preferences-dialog.ui:486
+#: src/gtr-preferences-dialog.ui:109
 msgid "_Remove fuzzy status if message is changed"
 msgstr "_Remover li ínprecis statu si li textu es modificat"
 
-#: src/gtr-preferences-dialog.ui:502
+#: src/gtr-preferences-dialog.ui:115
 msgid "Check _spelling"
 msgstr "Controlar _ortografie"
 
-#: src/gtr-preferences-dialog.ui:541
-msgid "Editor"
-msgstr "Redactor"
+#: src/gtr-preferences-dialog.ui:128
+msgid "_Profiles"
+msgstr "_Profiles"
 
-#: src/gtr-preferences-dialog.ui:640
-msgid "Edit Profile"
-msgstr "Modificar li profile"
-
-#: src/gtr-preferences-dialog.ui:677
+#: src/gtr-preferences-dialog.ui:132
 msgid "Profiles"
 msgstr "Profiles"
 
-#: src/gtr-profile-dialog.c:74
+#: src/gtr-profile-dialog.ui:7
 msgid "Translation Editor Profile"
 msgstr "Profil del redactor"
 
-#: src/gtr-profile-dialog.ui:71
-msgid "_Name"
-msgstr "_Nómine"
-
-#: src/gtr-profile-dialog.ui:99
+#: src/gtr-profile-dialog.ui:45
 msgid "Profile Information"
 msgstr "Information de profil"
 
-#: src/gtr-profile-dialog.ui:116
+#: src/gtr-profile-dialog.ui:59
 msgid "Translator Information"
 msgstr "Information pri li traductor"
 
-#: src/gtr-profile-dialog.ui:134
-msgid "N_ame"
-msgstr "Nó_mine"
+#: src/gtr-profile-dialog.ui:64
+msgid "Translator _name"
+msgstr "_Nómine de traductor"
 
-#: src/gtr-profile-dialog.ui:149
-msgid "_Email"
-msgstr "_E-post"
+#: src/gtr-profile-dialog.ui:70
+msgid "Translator _email"
+msgstr "_E-post de traductor"
 
-#: src/gtr-profile-dialog.ui:163
-msgid "_Team email"
-msgstr "E-pos_t del equip"
+#: src/gtr-profile-dialog.ui:76
+msgid "Translation _team email"
+msgstr "_E-post de equip de traduction"
 
-#: src/gtr-profile-dialog.ui:177
-msgid "_DL auth token"
-msgstr "Aut-token de _DL"
+#: src/gtr-profile-dialog.ui:84
+msgid "Damned Lies Integration"
+msgstr "Integration con Damned Lies"
 
-#: src/gtr-profile-dialog.ui:178
+#: src/gtr-profile-dialog.ui:85
 msgid ""
 "GNOME Damned Lies integration token, go to your profile in https://l10n."
 "gnome.org/ to get it"
 msgstr ""
+"Token de integration de Damned Lies; on posse obtener it in su profil che "
+"https://l10n.gnome.org"
 
-#: src/gtr-profile-dialog.ui:240
-msgid "Language Settings"
-msgstr "Parametres de lingue"
+#: src/gtr-profile-dialog.ui:90
+msgid "_Damned Lies auth token"
+msgstr "Aut-token de _Damned Lies"
 
-#: src/gtr-projects.ui:35
-msgid "Open a new .po file or drag & drop here"
-msgstr "Aperte un nov file .po o fa cader un ci"
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:312
+msgid "Build Translation Memory"
+msgstr "Constructer li MdT"
 
-#: src/gtr-projects.ui:51
-msgid "Select a PO file"
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:336
+msgid "Help"
+msgstr "Auxilie"
+
+#: src/gtr-projects.ui:36
+msgid "Select po File"
 msgstr "Selecter un file PO"
 
-#: src/gtr-projects.ui:68
+#: src/gtr-projects.ui:45
+msgid "Open…"
+msgstr "Aperter…"
+
+#: src/gtr-projects.ui:50
 msgid "Load from DL…"
 msgstr "Cargar ex DL…"
 
-#: src/gtr-search-bar.c:414 src/gtr-search-bar.ui:212
-msgid "Case sensitive"
-msgstr "Atenter a MAJ/min"
+#: src/gtr-projects.ui:67
+msgid "Open a new .po file or drag & drop here"
+msgstr "Aperte un nov file .po o fa cader un ci"
 
-#: src/gtr-search-bar.c:419 src/gtr-search-bar.ui:226
-msgid "Match whole word only"
-msgstr "Solmen integri paroles"
+#: src/gtr-search-bar.ui:20
+msgid "Search"
+msgstr "Serchar"
 
-#: src/gtr-search-bar.c:424
-msgid "Wrap around"
-msgstr "Ciclic sercha"
+#: src/gtr-search-bar.ui:35
+msgid "Previous Result"
+msgstr "Precedent resultate"
 
-#: src/gtr-search-bar.c:429 src/gtr-search-bar.ui:254
-msgid "Original text"
-msgstr "Original textu"
+#: src/gtr-search-bar.ui:41
+msgid "Next Result"
+msgstr "Sequent resultate"
 
-#: src/gtr-search-bar.c:434 src/gtr-search-bar.ui:268
-msgid "Translated text"
-msgstr "Traductet textu"
-
-#: src/gtr-search-bar.ui:121
-msgid "Replace"
-msgstr "Substituer"
-
-#: src/gtr-search-bar.ui:133
-msgid "Replace All"
-msgstr "Substituer omni"
-
-#: src/gtr-search-bar.ui:153
+#: src/gtr-search-bar.ui:58
 msgid "Switch between Search and Search-and-Replace"
 msgstr "Alterar li mode de sercha e de substitution"
 
-#: src/gtr-search-bar.ui:173
+#: src/gtr-search-bar.ui:64
 msgid "Show or hide search options such as case sensitivity"
 msgstr "Monstrar o celar parametres quam atention a MAJ/min"
 
-#: src/gtr-search-bar.ui:240
-msgid "Wrap Around"
+#: src/gtr-search-bar.ui:91 src/gtr-search-bar.ui:100
+msgid "Replace"
+msgstr "Substituer"
+
+#: src/gtr-search-bar.ui:109
+msgid "Replace All"
+msgstr "Substituer omni"
+
+#: src/gtr-search-bar.ui:129
+msgid "Case sensitive"
+msgstr "Atenter a MAJ/min"
+
+#: src/gtr-search-bar.ui:139
+msgid "Match whole word only"
+msgstr "Solmen integri paroles"
+
+#: src/gtr-search-bar.ui:149
+msgid "Wrap around"
 msgstr "Ciclic sercha"
 
-#: src/gtr-tab-label.c:280
-msgid "Close document"
-msgstr "Cluder li document"
+#: src/gtr-search-bar.ui:159
+msgid "Original text"
+msgstr "Original textu"
 
-#: src/gtr-tab.c:419
-msgid "There is an error in the message:"
-msgstr "Li textu contene un errore:"
+#: src/gtr-search-bar.ui:169
+msgid "Translated text"
+msgstr "Traductet textu"
 
-#: src/gtr-tab.c:632 src/gtr-tab.c:767
+#: src/gtr-tab.c:345
+msgid "There is an error in the message"
+msgstr "Li textu contene un errore"
+
+#: src/gtr-tab.c:563 src/gtr-tab.c:696
 msgid "fuzzy"
 msgstr "ínprecis"
 
-#: src/gtr-tab.c:797
+#: src/gtr-tab.c:726
 #, c-format
 msgid "Plural %d"
 msgstr "Plurale %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1425
+#: src/gtr-tab.c:1319
 msgid "Path:"
 msgstr "Rute:"
 
-#: src/gtr-tab.c:2090
+#: src/gtr-tab.c:1568
+msgid "Copied to clipboard"
+msgstr "Sta copiat al Paperiere"
+
+#: src/gtr-tab.c:2007
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Traductet: %0.2f%%"
 
-#: src/gtr-tab.c:2091
+#: src/gtr-tab.c:2008
 #, c-format
 msgid "Translated: %d"
 msgstr "Traductet: %d"
 
-#: src/gtr-tab.c:2092
+#: src/gtr-tab.c:2009
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Íntraductet: %d"
 
-#: src/gtr-tab.c:2093
+#: src/gtr-tab.c:2010
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Ínprecis: %d"
 
-#: src/gtr-tab.ui:74
+#: src/gtr-tab.ui:14
+msgid "Previous message without translation"
+msgstr "Precedent íntraductet textu"
+
+#: src/gtr-tab.ui:22
+msgid "Next message without translation"
+msgstr "Sequent íntraductet textu"
+
+#: src/gtr-tab.ui:37
+msgid "Toggle Fuzzy State"
+msgstr "(Ín)precis"
+
+#: src/gtr-tab.ui:54
+msgid "Find"
+msgstr "Trovar"
+
+#: src/gtr-tab.ui:62
+msgid "Upload File"
+msgstr "Cargar li file"
+
+#. <property name="ypad">5</property>
+#: src/gtr-tab.ui:126 src/gtr-tab.ui:301
 msgid "_Original Message"
 msgstr "_Original textu"
 
-#: src/gtr-tab.ui:166
+#: src/gtr-tab.ui:191
 msgid "Translate_d Text"
 msgstr "_Traductet textu"
 
-#: src/gtr-upload-dialog.c:61
-msgid "_Upload"
-msgstr "_Cargar"
+#: src/gtr-tab.ui:269
+msgid "Open a New File"
+msgstr "Aperter un nov file"
 
-#: src/gtr-upload-dialog.c:63
-msgid "Upload to Damned Lies"
-msgstr "Cargar a Damned Lies"
+#: src/gtr-tab.ui:273
+msgid "Open from Damned Lies"
+msgstr "Aperter ex Damned Lies"
 
-#: src/gtr-upload-dialog.c:137
+#: src/gtr-tab.ui:283
+msgid "Save As…"
+msgstr "Gardar quam..."
+
+#: src/gtr-tab.ui:289
+msgid "So_rt Messages by…"
+msgstr "O_rdinar catenes secun..."
+
+#: src/gtr-tab.ui:291
+msgid "_Order of Appearance"
+msgstr "_Natural órdine"
+
+#: src/gtr-tab.ui:296
+msgid "_Message Status"
+msgstr "Stat_u de textu"
+
+#: src/gtr-tab.ui:306
+msgid "_Translated Message"
+msgstr "_Traductet textu"
+
+#: src/gtr-upload-dialog.c:147
 msgid "Uploading..."
 msgstr "Cargante..."
 
-#: src/gtr-upload-dialog.c:143
+#: src/gtr-upload-dialog.c:153 src/gtr-upload-dialog.ui:23
 msgid "Upload"
 msgstr "Cargar"
 
-#: src/gtr-upload-dialog.ui:53
+#: src/gtr-upload-dialog.ui:6
+msgid "Upload to Damned Lies"
+msgstr "Cargar a Damned Lies"
+
+#: src/gtr-upload-dialog.ui:47
 msgid "comment:"
 msgstr "comenta:"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:214
+#: src/gtr-window.c:188
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Redactor de traductiones"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:220
+#: src/gtr-window.c:195
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Redactor de traductiones"
 
-#: src/help-overlay.ui:13
+#: src/gtr-window.c:331
+msgid "Could not Save"
+msgstr "Ne successat gardar"
+
+#: src/gtr-window.c:343
+msgid "File saved"
+msgstr "File sta gardat"
+
+#: src/help-overlay.ui:11
 msgctxt "shortcut window group"
 msgid "General"
 msgstr "General"
 
-#: src/help-overlay.ui:18
+#: src/help-overlay.ui:15
 msgctxt "shortcut window"
 msgid "Open file"
 msgstr "Aperter un file"
 
-#: src/help-overlay.ui:25
+#: src/help-overlay.ui:21
 msgctxt "shortcut window"
 msgid "Save the current file"
 msgstr "Gardar li actual file"
 
-#: src/help-overlay.ui:32
+#: src/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Save the current file as"
 msgstr "Gardar li actual file quam"
 
-#: src/help-overlay.ui:40
+#: src/help-overlay.ui:33
+msgctxt "shortcut window"
+msgid "Download from DL"
+msgstr "Descargar ex DL"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Upload to DL"
+msgstr "Cargar a DL"
+
+#: src/help-overlay.ui:45
 msgctxt "shortcut window"
 msgid "Preferences"
 msgstr "Preferenties"
 
-#: src/help-overlay.ui:47
+#: src/help-overlay.ui:51
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Rapid-tastes"
 
-#: src/help-overlay.ui:54
+#: src/help-overlay.ui:57
 msgctxt "shortcut window"
 msgid "Help"
 msgstr "Auxilie"
 
-#: src/help-overlay.ui:61
+#: src/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Nov fenestre"
+
+#: src/help-overlay.ui:69
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Salir"
 
-#: src/help-overlay.ui:71
+#: src/help-overlay.ui:77
 msgctxt "shortcut window group"
 msgid "Edit"
 msgstr "Redacter"
 
-#: src/help-overlay.ui:75
+#: src/help-overlay.ui:81
 msgctxt "shortcut window"
-msgid "Undo"
-msgstr "Defar"
+msgid "Clear translation"
+msgstr "Vacuar li traduction"
 
-#: src/help-overlay.ui:82
-msgctxt "shortcut window"
-msgid "Redo"
-msgstr "Refar"
-
-#: src/help-overlay.ui:89
+#: src/help-overlay.ui:87
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
 msgstr "(De)marcar quam ínprecis"
 
-#: src/help-overlay.ui:96
+#: src/help-overlay.ui:93
 msgctxt "shortcut window"
 msgid "Copy original text to translation"
 msgstr "Copiar li originale al traduction"
 
-#: src/help-overlay.ui:106
+#: src/help-overlay.ui:99
+msgctxt "shortcut window"
+msgid "Copy original text to clipboard"
+msgstr "Copiar li originale al Paperiere"
+
+#: src/help-overlay.ui:107
 msgctxt "shortcut window group"
 msgid "Navigation"
 msgstr "Navigation"
 
-#: src/help-overlay.ui:110
+#: src/help-overlay.ui:111
 msgctxt "shortcut window"
 msgid "Go to the previous message"
 msgstr "Ear al precedent textu"
@@ -1193,57 +1112,57 @@ msgctxt "shortcut window"
 msgid "Go to the next message"
 msgstr "Ear al sequent textu"
 
-#: src/help-overlay.ui:124
+#: src/help-overlay.ui:123
 msgctxt "shortcut window"
 msgid "Go to the previous untranslated message"
 msgstr "Ear al precent íntraductet textu"
 
-#: src/help-overlay.ui:131
+#: src/help-overlay.ui:129
 msgctxt "shortcut window"
 msgid "Go to the next untranslated message"
 msgstr "Ear al sequent íntraductet textu"
 
-#: src/help-overlay.ui:141
+#: src/help-overlay.ui:137
 msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Memorie de traductiones"
 
-#: src/help-overlay.ui:145
+#: src/help-overlay.ui:141
 msgctxt "shortcut window"
 msgid "Build translation memory"
 msgstr "Constructer li MdT"
 
-#: src/help-overlay.ui:152
+#: src/help-overlay.ui:147
 msgctxt "shortcut window"
-msgid "Copy below"
-msgstr "Copiar a infra"
+msgid "Use 1st...9th suggestion"
+msgstr "Usar li suggestion nró 1...9"
 
-#: src/help-overlay.ui:162
+#: src/help-overlay.ui:155
 msgctxt "shortcut window group"
 msgid "Find & Replace"
 msgstr "Trovar e substituer"
 
-#: src/help-overlay.ui:166
+#: src/help-overlay.ui:159
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Trovar"
 
-#: src/help-overlay.ui:173
+#: src/help-overlay.ui:165
 msgctxt "shortcut window"
 msgid "Find & Replace"
 msgstr "Trovar e substituer"
 
-#: src/help-overlay.ui:180
+#: src/help-overlay.ui:171
 msgctxt "shortcut window"
 msgid "Forward-search"
 msgstr "Serchar avan"
 
-#: src/help-overlay.ui:187
+#: src/help-overlay.ui:177
 msgctxt "shortcut window"
 msgid "Backward-search"
 msgstr "Serchar retro"
 
-#: src/help-overlay.ui:194
+#: src/help-overlay.ui:183
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Celar li barra de sercha"
@@ -1261,53 +1180,29 @@ msgstr ""
 "%s\n"
 "Usa «%s --help» por vider un complet liste de comandes.\n"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:101
+#: src/translation-memory/gtr-translation-memory-dialog.c:77
 msgid "Select PO directory"
 msgstr "Selecter un fólder PO"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:309
+#: src/translation-memory/gtr-translation-memory-dialog.ui:7
 msgid "Translation Editor Memory Manager"
 msgstr "Gerente de memorie del redactor de traductiones"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:66
-msgid "Database:"
-msgstr "Base de data:"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:41
+msgid "Database"
+msgstr "Base de data"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:109
-msgid "Select the directory which contains PO files:"
-msgstr "Selecte li fólder que contene files .po:"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:46
+msgid "Select the directory which contains PO files"
+msgstr "Selecte li fólder que contene files .po"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:160
+#: src/translation-memory/gtr-translation-memory-dialog.ui:58
+msgid "Use only files with this name"
+msgstr "Solmen usar files con ti nómine"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:77
 msgid "Add to Database"
 msgstr "Adjunter al base"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:215
-msgid "Configuration:"
-msgstr "Configuration:"
-
-#: src/translation-memory/gtr-translation-memory-dialog.ui:259
-msgid "Use only files with this name:"
-msgstr "Solmen usar files con li nómine:"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:255
-msgid "_Use this translation"
-msgstr "_Usar ti-ci traduction"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:260
-msgid "_Remove"
-msgstr "_Remover"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:371
-msgid "Shortcut"
-msgstr "Rapid-taste"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:380
-msgid "Level"
-msgstr "Similita"
-
-#: src/translation-memory/gtr-translation-memory-ui.c:389
-msgid "String"
-msgstr "Catene"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
 msgid "PO directory"
@@ -1356,63 +1251,3 @@ msgid ""
 "translation memory."
 msgstr ""
 
-#~ msgid "Do you want to save the changes?"
-#~ msgstr "Esque vu vole gardar li modificationes?"
-
-#~ msgid "Warning"
-#~ msgstr "Avise"
-
-#~ msgid "File saved."
-#~ msgstr "File gardat."
-
-#~ msgid "Files saved."
-#~ msgstr "Files gardat."
-
-#~ msgid "Phrase not found"
-#~ msgstr "Frase ne esset trovat"
-
-#~ msgid "Replace _All"
-#~ msgstr "Substituer _omni"
-
-#~ msgid "_Replace"
-#~ msgstr "_Substituer"
-
-#~ msgid "Search _backwards"
-#~ msgstr "Serchar r_etro"
-
-#~ msgid "INS"
-#~ msgstr "INS"
-
-#~ msgid "OVR"
-#~ msgstr "SUR"
-
-#~ msgid "Translated"
-#~ msgstr "Traductet"
-
-#~ msgid "Fuzzy"
-#~ msgstr "Ínprecis"
-
-#, c-format
-#~ msgid "Total: %d"
-#~ msgstr "Total: %d"
-
-#, c-format
-#~ msgid "%d translated"
-#~ msgid_plural "%d translated"
-#~ msgstr[0] "%d traductet"
-#~ msgstr[1] "%d traductet"
-
-#~ msgid "No profile"
-#~ msgstr "Null profil"
-
-#~ msgid "_New Window"
-#~ msgstr "Nov _fenestre"
-
-#~ msgid "_Preferences"
-#~ msgstr "_Preferenties"
-
-#~ msgid "_Help"
-#~ msgstr "Au_xilie"
-
-#~ msgid "_About GNOME Translation Editor"
-#~ msgstr "_Pri Redactor de traductiones de GNOME"
