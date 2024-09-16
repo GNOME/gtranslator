@@ -10,19 +10,28 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.0\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=gtranslator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-08-13 09:13+0000\n"
-"PO-Revision-Date: 2014-09-15 20:56+0700\n"
-"Last-Translator: Akom Chotiphantawanon <knight2000@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
+"POT-Creation-Date: 2020-06-20 09:48+0000\n"
+"PO-Revision-Date: 2020-07-25 07:40+0700\n"
+"Last-Translator: knight2000 <knight2000@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "Language: th\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.5.7\n"
 
-#: ../data/gtranslator.appdata.xml.in.h:1
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
+msgid "Gtranslator"
+msgstr "Gtranslator"
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:8
+#: data/org.gnome.Gtranslator.desktop.in.in:5
+msgid "Translate and localize applications and libraries"
+msgstr "แปลและปรับโปรแกรมและไลบรารีให้เหมาะกับผู้ใช้ในท้องถิ่น"
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:10
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -37,773 +46,205 @@ msgstr ""
 "(เพื่อให้เห็นภาพรวมของการแปล/ข้อความในแฟ้ม po), "
 "การเลื่อนและแก้ไขที่ง่ายดายสำหรับข้อความแปลและหมายเหตุของการแปลในจุดที่ถูกต้อง"
 
-#: ../data/gtranslator.appdata.xml.in.h:2
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:19
+#| msgid ""
+#| "Gtranslator includes also a plugin system with many interesting plugins "
+#| "like alternate language, insert tags, open tran, integration with "
+#| "subversion and a source code viewer."
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
-"alternate language, insert tags, open tran, integration with subversion and "
-"a source code viewer."
+"alternate language, insert tags, integration with subversion and a source "
+"code viewer."
 msgstr ""
-"Gtranslator ยังมีระบบปลั๊กอิน พร้อมกับมีปลั๊กอินที่น่าสนใจมากมาย เช่น ภาษาอื่น, แทรกแท็ก, open "
-"tran, การเชื่อมรวมกับ subversion และเครื่องมือดูซอร์สโค้ด"
+"Gtranslator ยังมีระบบปลั๊กอิน พร้อมกับมีปลั๊กอินที่น่าสนใจมากมาย เช่น ภาษาอื่น, แทรกแท็ก, "
+"การเชื่อมรวมกับ subversion และเครื่องมือดูซอร์สโค้ด"
 
-#: ../data/desktop/gtranslator.desktop.in.in.h:1 ../src/gtr-application.c:328
-msgid "Gtranslator"
-msgstr "Gtranslator"
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:99
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
 
-#: ../data/desktop/gtranslator.desktop.in.in.h:2
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-application.c:657
+#: src/gtr-notebook.ui:308 src/gtr-window.c:320 src/gtr-window.ui:25
+#| msgid "Translation Memory"
+msgid "Translation Editor"
+msgstr "เครื่องมือแก้ไขคำแปล"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
 msgstr "เครื่องมือแก้ไขแฟ้ม PO"
 
-#: ../data/desktop/gtranslator.desktop.in.in.h:3
-msgid "Gtranslator PO File Editor"
-msgstr "เครื่องมือแก้ไขแฟ้ม PO Gtranslator"
+#: data/org.gnome.Gtranslator.desktop.in.in:14
+#| msgid "Gtranslator Translation Memory Manager"
+msgid "Gtranslator;Translation;Editor;Gettext;Write;"
+msgstr "Gtranslator;คำแปล;เครื่องมือแก้ไข;Gettext;Write;"
 
-#: ../data/desktop/gtranslator.desktop.in.in.h:4
-msgid "Translate and localize applications and libraries"
-msgstr "แปลและปรับโปรแกรมและไลบรารีให้เหมาะกับผู้ใช้ในท้องถิ่น"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:1
+#: data/org.gnome.Gtranslator.gschema.xml.in:24
 msgid "Warn if file contains fuzzy translations"
 msgstr "เตือนถ้าแฟ้มมีคำแปลคลุมเครือ"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:2
+#: data/org.gnome.Gtranslator.gschema.xml.in:25
 msgid ""
 "If true, warn the user when saving a PO translation file containing fuzzy "
 "strings."
 msgstr "ถ้าเป็นจริง จะเตือนผู้ใช้เมื่อบันทึกแฟ้มคำแปล PO ที่มีข้อความที่คลุมเครืออยู่"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:3
+#: data/org.gnome.Gtranslator.gschema.xml.in:32
 msgid "Auto save files"
 msgstr "บันทึกแฟ้มโดยอัตโนมัติ"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:4
+#: data/org.gnome.Gtranslator.gschema.xml.in:33
 msgid "If true, automatically save files at specified intervals."
 msgstr "ถ้าเป็นจริง จะบันทึกแฟ้มโดยอัตโนมัติเป็นระยะตามช่วงเวลาที่กำหนด"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:5
+#: data/org.gnome.Gtranslator.gschema.xml.in:39
 msgid "Auto save interval"
 msgstr "ช่วงเวลาการบันทึกอัตโนมัติ"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:6
+#: data/org.gnome.Gtranslator.gschema.xml.in:40
 msgid "Interval in minutes at which to automatically save files."
 msgstr "ช่วงเวลาเป็นนาทีที่จะบันทึกแฟ้มโดยอัตโนมัติ"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:7
+#: data/org.gnome.Gtranslator.gschema.xml.in:46
 msgid "Create backup before saving"
 msgstr "สำรองข้อมูลก่อนบันทึก"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:8
+#: data/org.gnome.Gtranslator.gschema.xml.in:47
 msgid "If true, create a backup copy of a file before saving it."
 msgstr "ถ้าเป็นจริง จะสร้างสำเนาแฟ้มเดิมก่อนบันทึก"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:9
+#: data/org.gnome.Gtranslator.gschema.xml.in:53
 msgid "Use profile values for header"
 msgstr "ใช้ค่าจากโพรไฟล์สำหรับส่วนหัว"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:10
+#: data/org.gnome.Gtranslator.gschema.xml.in:54
 msgid ""
 "If true, overwrite the values in the PO header with those in the active "
 "profile."
 msgstr "ถ้าเป็นจริง จะเขียนทับค่าในส่วนหัวของ PO ด้วยค่าในโพรไฟล์ที่ใช้งานอยู่"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:11
+#: data/org.gnome.Gtranslator.gschema.xml.in:63
 msgid "Highlight syntax in edit fields"
 msgstr "เน้นไวยากรณ์ในช่องแก้ไขข้อมูล"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:12
+#: data/org.gnome.Gtranslator.gschema.xml.in:64
 msgid "If true, apply syntax highlighting to strings in edit fields."
 msgstr "ถ้าเป็นจริง จะเน้นไวยากรณ์ในข้อความในช่องแก้ไขข้อมูล"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:13
+#: data/org.gnome.Gtranslator.gschema.xml.in:70
 msgid "Make whitespace visible"
 msgstr "ทำให้มองเห็นช่องว่าง"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:14
+#: data/org.gnome.Gtranslator.gschema.xml.in:71
 msgid "If true, display whitespace in strings as representative symbols."
 msgstr "ถ้าเป็นจริง จะแสดงช่องว่างในข้อความด้วยสัญลักษณ์แทน"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:15
-msgid "Use custom font"
-msgstr "ใช้แบบอักษรกำหนดเอง"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:16
-msgid "If true, use a custom font for edit fields."
-msgstr "ถ้าเป็นจริง จะใช้แบบอักษรกำหนดเองสำหรับช่องแก้ไขข้อความต่างๆ"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:17
-msgid "Editor font"
-msgstr "แบบอักษรของเครื่องมือแก้ไข"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:18
-msgid "Custom font to use for edit fields."
-msgstr "แบบอักษรที่กำหนดเองที่จะใช้กับช่องแก้ไขข้อมูล"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:19
+#: data/org.gnome.Gtranslator.gschema.xml.in:77
 msgid "Remove fuzzy status when message is changed"
 msgstr "ลบสถานะคลุมเครือเมื่อข้อความมีการเปลี่ยนแปลง"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:20
+#: data/org.gnome.Gtranslator.gschema.xml.in:78
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr "ถ้าเป็นจริง จะลบสถานะคลุมเครือของคำแปลเมื่อมีการเปลี่ยนแปลง"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:21
+#: data/org.gnome.Gtranslator.gschema.xml.in:84
 msgid "Check spelling"
 msgstr "ตรวจตัวสะกด"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:22
+#: data/org.gnome.Gtranslator.gschema.xml.in:85
 msgid "If true, check the spelling of translated messages."
 msgstr "ถ้าเป็นจริง จะตรวจตัวสะกดของคำแปล"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:23
+#: data/org.gnome.Gtranslator.gschema.xml.in:93
 msgid "Side panel switcher style"
 msgstr "รูปแบบของที่เปิด/ปิดพาเนลด้านข้าง"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:24
+#: data/org.gnome.Gtranslator.gschema.xml.in:94
 msgid "Style for switchers in the side panel."
 msgstr "รูปแบบของที่เปิด/ปิดในพาเนลด้านข้าง"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:25
+#: data/org.gnome.Gtranslator.gschema.xml.in:100
 msgid "Color scheme"
 msgstr "ชุดสี"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:26
+#: data/org.gnome.Gtranslator.gschema.xml.in:101
 msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
 msgstr "ชื่อของชุดสีของ gtksourceview ที่ใช้สำหรับเน้นไวยากรณ์"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:27
+#: data/org.gnome.Gtranslator.gschema.xml.in:107
 msgid "Message list sort order"
 msgstr "การเรียงลำดับรายการข้อความ"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:28
+#: data/org.gnome.Gtranslator.gschema.xml.in:108
+#| msgid ""
+#| "Sort order to use in the message list. Possible values are \"status\", "
+#| "\"id\", \"original-text\" and \"translated-text\"."
 msgid ""
-"Sort order to use in the message list. Possible values are \"status\", \"id"
-"\", \"original-text\" and \"translated-text\"."
+"Sort order to use in the message list. Possible values are “status”, “id”, "
+"“original-text” and “translated-text”."
 msgstr ""
-"ลำดับการจัดเรียงที่ใช้ในรายการข้อความ ค่าที่เป็นไปได้คือ \"status\" (สถานะ), \"id\", "
-"\"original-text\" (ข้อความต้นฉบับ) และ \"translated-text\" (คำแปล)"
+"ลำดับการจัดเรียงที่ใช้ในรายการข้อความ ค่าที่เป็นไปได้คือ “status” (สถานะ), “id”, "
+"“original-text” (ข้อความต้นฉบับ) และ “translated-text” (คำแปล)"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:29
+#: data/org.gnome.Gtranslator.gschema.xml.in:143
 msgid "Active plugins"
 msgstr "ปลั๊กอินที่เปิดใช้"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.in.h:30
+#: data/org.gnome.Gtranslator.gschema.xml.in:144
+#| msgid ""
+#| "List of active plugins. It contains the \"Location\" of the active "
+#| "plugins. See the .gtranslator-plugin file for obtaining the \"Location\" "
+#| "of a given plugin."
 msgid ""
-"List of active plugins. It contains the \"Location\" of the active plugins. "
-"See the .gtranslator-plugin file for obtaining the \"Location\" of a given "
+"List of active plugins. It contains the “Location” of the active plugins. "
+"See the .gtranslator-plugin file for obtaining the “Location” of a given "
 "plugin."
 msgstr ""
-"รายชื่อปลั๊กอินที่เปิดใช้ โดยเก็บ \"ตำแหน่ง\" ของปลั๊กอินที่เปิดใช้ ดูที่แฟ้ม .gtranslator-plugin "
-"ถ้าต้องการทราบ \"ตำแหน่ง\" ของปลั๊กอินใดๆ"
+"รายชื่อปลั๊กอินที่เปิดใช้ โดยเก็บ “ตำแหน่ง” ของปลั๊กอินที่เปิดใช้ ดูที่แฟ้ม .gtranslator-plugin "
+"ถ้าต้องการทราบ “ตำแหน่ง” ของปลั๊กอินใดๆ"
 
-#: ../data/po.lang.h:1
-msgid "Others"
-msgstr "อื่นๆ"
-
-#: ../data/po.lang.h:2
-msgid "gtranslator highlight"
-msgstr "การเน้นไวยากรณ์ของ gtranslator"
-
-#: ../data/po.lang.h:3
-msgid "Tag"
-msgstr "แท็ก"
-
-#: ../data/po.lang.h:4
-msgid "Special variable"
-msgstr "ตัวแปรพิเศษ"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:126
-msgid "Message not found"
-msgstr "ไม่พบข้อความ"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:229
-msgid "Open file for alternate language"
-msgstr "เปิดแฟ้มสำหรับภาษาอื่น"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:254
-msgid "File closed"
-msgstr "แฟ้มปิดแล้ว"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:322
-msgctxt "alternate lang"
-msgid "_Open"
-msgstr "_เปิด"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:328
-msgctxt "alternate lang"
-msgid "_Close"
-msgstr "ปิ_ด"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:334
-msgctxt "alternate lang"
-msgid "Co_py"
-msgstr "_คัดลอก"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:363
-msgid "There isn't any file loaded"
-msgstr "ไม่มีแฟ้มใดโหลดอยู่"
-
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:81
-msgid "_Alternate Language"
-msgstr "ภาษา_อื่น"
-
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:82
-msgid "Show the Alternate Language panel"
-msgstr "แสดงพาเนลภาษาอื่น"
-
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:222
-#: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:1
-msgid "Alternate Language"
-msgstr "ภาษาอื่น"
-
-#: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:2
-msgid "Load an alternate language."
-msgstr "โหลดภาษาอื่น"
-
-#. ex:et:ts=4:
-#: ../plugins/charmap/charmap/__init__.py:42
-#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:1
-msgid "Character Map"
-msgstr "ผังอักขระ"
-
-#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:2
-msgid "Insert special characters just by clicking on them."
-msgstr "แทรกอักขระพิเศษด้วยการคลิกเลือก"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:1
-msgid "Source View Settings"
-msgstr "ตั้งค่าการแสดงซอร์ส"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:2
-msgid "Use external editor"
-msgstr "ใช้เครื่องมือแก้ไขภายนอก"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:3
-msgid "Program command:"
-msgstr "คำสั่งเรียกโปรแกรม:"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:4
-msgid "Line command:"
-msgstr "คำสั่งเลือกบรรทัด:"
-
-#: ../plugins/codeview/gtr-codeview-plugin.c:129
-#, c-format
-msgid "Please install \"%s\" to be able to show the file"
-msgstr "กรุณาติดตั้ง \"%s\" เพื่อให้แสดงแฟ้มได้"
-
-#: ../plugins/codeview/gtr-codeview-plugin.c:497
+#: src/codeview/gtr-codeview.c:374
 msgid "Paths:"
 msgstr "พาธ:"
 
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:1
-msgid "Source Code View"
-msgstr "ดูซอร์สโค้ด"
+#: src/codeview/gtr-viewer.c:73 src/gtr-header-dialog.c:278
+#: src/gtr-io-error-info-bar.c:123 src/gtr-preferences-dialog.c:622
+#: src/translation-memory/gtr-translation-memory-dialog.c:299
+#| msgctxt "alternate lang"
+#| msgid "_Close"
+msgid "_Close"
+msgstr "ปิ_ด"
 
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:2
-msgid "Show the message in the source code."
-msgstr "แสดงข้อความในซอร์สโค้ด"
-
-#: ../plugins/codeview/gtr-viewer.c:80
+#: src/codeview/gtr-viewer.c:75
 msgid "Source Viewer"
 msgstr "เครื่องมือดูซอร์ส"
 
-#: ../plugins/codeview/gtr-viewer.ui.h:1
+#: src/codeview/gtr-viewer.ui:59
 msgid "Source code"
 msgstr "ซอร์สโค้ด"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:1
-msgid "Use the System Editor"
-msgstr "ใช้เครื่องมือแก้ไขของระบบ"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:2
-msgid "Whether use the system editor to show the source code"
-msgstr "จะใช้เครื่องมือแก้ไขของระบบเพื่อแสดงซอร์สโค้ดหรือไม่"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:3
-msgid "The Editor to Launch"
-msgstr "เครื่องมือแก้ไขที่จะเรียก"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:4
-msgid "The command to launch the editor you want to use"
-msgstr "คำสั่งสำหรับเรียกเครื่องมือแก้ไขที่คุณต้องการ"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:5
-msgid "Arguments for the Command"
-msgstr "อาร์กิวเมนต์สำหรับคำสั่ง"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.in.h:6
-msgid "Arguments to pass to the program command line to select the line"
-msgstr "อาร์กิวเมนต์ที่จะส่งในบรรทัดคำสั่งเรียกโปรแกรมเพื่อเลือกบรรทัด"
-
-#: ../plugins/dictionary/gtr-dictionary-plugin.c:140
-#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:1
-msgid "Dictionary"
-msgstr "พจนานุกรม"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:166
-#, c-format
-msgid "No dictionary source available with name '%s'"
-msgstr "ไม่มีแหล่งพจนานุกรมชื่อ '%s'"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:170
-msgid "Unable to find dictionary source"
-msgstr "หาแหล่งพจนานุกรมไม่พบ"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:185
-#, c-format
-msgid "No context available for source '%s'"
-msgstr "ไม่มีบริบทสำหรับแหล่ง '%s'"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:189
-msgid "Unable to create a context"
-msgstr "ไม่สามารถสร้างบริบทได้"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:272
-#, c-format
-msgid "Dictionary source '%s' selected"
-msgstr "เลือกแหล่งพจนานุกรม '%s' แล้ว"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:291
-#, c-format
-msgid "Strategy '%s' selected"
-msgstr "เลือกกลวิธี '%s' แล้ว"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:309
-#, c-format
-msgid "Database '%s' selected"
-msgstr "เลือกฐานข้อมูล '%s' แล้ว"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:353
-#, c-format
-msgid "Word '%s' selected"
-msgstr "เลือกคำ '%s' แล้ว"
-
-#. speller
-#: ../plugins/dictionary/gtr-dict-panel.c:375
-msgid "Double-click on the word to look up"
-msgstr "ดับเบิลคลิกที่คำที่จะเปิดหา"
-
-#. strat-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:380
-msgid "Double-click on the matching strategy to use"
-msgstr "ดับเบิลคลิกที่กลวิธีการค้นที่จะใช้"
-
-#. source-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:386
-msgid "Double-click on the source to use"
-msgstr "ดับเบิลคลิกที่แหล่งที่จะใช้"
-
-#. db-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:396
-msgid "Double-click on the database to use"
-msgstr "ดับเบิลคลิกที่ฐานข้อมูลที่จะใช้"
-
-#. Look up Button
-#: ../plugins/dictionary/gtr-dict-panel.c:502
-msgid "Look _up:"
-msgstr "เปิด_หา:"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:559
-msgid "Similar words"
-msgstr "คำคล้าย"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:572
-msgid "Available dictionaries"
-msgstr "พจนานุกรมที่มี"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:586
-msgid "Available strategies"
-msgstr "กลวิธีที่มี"
-
-#: ../plugins/dictionary/gtr-dict-panel.c:596
-msgid "Dictionary sources"
-msgstr "แหล่งพจนานุกรม"
-
-#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:2
-msgid "Look up words in a dictionary."
-msgstr "เปิดหาคำในพจนานุกรม"
-
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:1
-msgid "Database"
-msgstr "ฐานข้อมูล"
-
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:2
-msgid "Word database"
-msgstr "ฐานข้อมูลคำ"
-
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:3
-msgid "Source Name"
-msgstr "ชื่อแหล่ง"
-
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:4
-msgid "Strategy"
-msgstr "กลวิธี"
-
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.in.h:5
-msgid "Panel Position"
-msgstr "ตำแหน่งพาเนล"
-
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:67
-msgid "_Fullscreen"
-msgstr "เ_ต็มจอ"
-
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:68
-msgid "Place window on fullscreen state"
-msgstr "ปรับหน้าต่างให้อยู่ในสถานะเต็มจอ"
-
-#: ../plugins/fullscreen/gtr-fullscreen.plugin.desktop.in.h:1
-msgid "Fullscreen"
-msgstr "เต็มจอ"
-
-#: ../plugins/fullscreen/gtr-fullscreen.plugin.desktop.in.h:2
-msgid "Place window in the fullscreen state."
-msgstr "ปรับหน้าต่างให้อยู่ในสถานะเต็มจอ"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:113
-msgid "_Next Param"
-msgstr "พารามิเตอร์_ถัดไป"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:114
-msgid "Insert the next param of the message"
-msgstr "แทรกพารามิเตอร์ถัดไปของข้อความ"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:116
-msgid "_Insert Params"
-msgstr "แ_ทรกพารามิเตอร์"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:117
-msgid "_Next Tag"
-msgstr "แท็ก_ถัดไป"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:118
-msgid "Insert the next tag of the message"
-msgstr "แทรกแท็กถัดไปของข้อความ"
-
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:120
-msgid "_Insert Tags"
-msgstr "แ_ทรกแท็ก"
-
-#: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:1
-msgid "Insert Params or Tags"
-msgstr "แทรกพารามิเตอร์หรือแท็ก"
-
-#: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:2
-msgid "Parameters and tags detection featuring easy insertion."
-msgstr "ตรวจหาพารามิเตอร์และแท็ก และช่วยแทรกอย่างสะดวก"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:1
-msgid "Open Tran Settings"
-msgstr "ตั้งค่า Open Tran"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:2
-msgid "Language code for the Open-Tran query:"
-msgstr "รหัสภาษาสำหรับการสอบถาม Open-Tran:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:3
-msgid "Language code of the translated results:"
-msgstr "รหัสภาษาของผลลัพธ์การแปล:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:4
-msgid "Use a local \"mirror\" copy of the Open-Tran server"
-msgstr "ใช้เซิร์ฟเวอร์ \"สำเนา\" ของ Open-Tran ในเครื่อง"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:5
-msgid "Mirror server URL:"
-msgstr "URL ของเซิร์ฟเวอร์สำเนา:"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:7
-#, no-c-format
-msgid ""
-"<i>The URL should be of the form:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"The two \"%s\" markers and the final slash must not be omitted.</i>"
-msgstr ""
-"<i>URL ควรจะอยู่ในรูปแบบ:\n"
-"<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
-"สัญลักษณ์กำหนดตำแหน่ง \"%s\" ทั้งสองและขีดทับที่ท้ายสุดต้องคงอยู่</i>"
-
-#: ../plugins/open-tran/gtr-open-tran-dialog.ui.h:10
-msgid "Mirror Server"
-msgstr "เซิร์ฟเวอร์สำเนา"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:222
-#, c-format
-msgid "ERROR: Cannot access %s\n"
-msgstr "ข้อผิดพลาด: ไม่สามารถเข้าถึง %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:238
-msgid "Error in server response, GET failed\n"
-msgstr "ข้อผิดพลาดในคำตอบของเซิร์ฟเวอร์: GET ล้มเหลว\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:250
-#, c-format
-msgid "Cannot parse server response, %s\n"
-msgstr "ไม่สามารถแจงคำตอบของเซิร์ฟเวอร์: %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:264
-#, c-format
-msgid "Cannot parse server response, not an array? %s\n"
-msgstr "ไม่สามารถแจงคำตอบของเซิร์ฟเวอร์ ไม่เป็นแอร์เรย์หรือไม่? %s\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:287
-#, c-format
-msgid "WRONG! Can't get result element %d\n"
-msgstr "ผิด! ไม่สามารถอ่านองค์ประกอบ %d ของผลลัพธ์\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:297
-#, c-format
-msgid "WRONG! Can't parse result element %d as object\n"
-msgstr "ผิด! ไม่สามารถแจงองค์ประกอบ %d ของผลลัพธ์เป็นอ็อบเจกต์\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:311
-#, c-format
-msgid "WRONG! Can't read projects for result element %d\n"
-msgstr "ผิด! ไม่สามารถอ่านโครงการสำหรับองค์ประกอบ %d ของผลลัพธ์\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:335
-#, c-format
-msgid "%s[%s] Count:%d"
-msgstr "%s[%s] จำนวน:%d"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:345
-#, c-format
-msgid "WRONG! Malformed project: %d\n"
-msgstr "ผิด! โครงการผิดรูปแบบ: %d\n"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:359
-#: ../src/gtr-actions-search.c:191
-msgid "Phrase not found"
-msgstr "ไม่พบวลี"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:383
-msgid "You have to provide a phrase to search"
-msgstr "คุณต้องป้อนวลีที่จะค้นหาด้วย"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:392
-msgid "You have to provide a search language code in the plugin configuration"
-msgstr "คุณต้องกำหนดรหัสภาษาของการค้นหาในการตั้งค่าปลั๊กอินด้วย"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:402
-msgid ""
-"You have to provide a language code for your language in the plugin "
-"configuration"
-msgstr "คุณต้องกำหนดรหัสภาษาสำหรับภาษาของคุณในการตั้งค่าปลั๊กอินด้วย"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:415
-msgid ""
-"Either use the main open-tran.eu server, or enter a server URL in the plugin "
-"configuration,"
-msgstr "ใช้เซิร์ฟเวอร์หลักของ open-tran.eu หรือไม่ก็ป้อน URL ของเซิร์ฟเวอร์ในการตั้งค่าปลั๊กอิน"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:453
-msgid "Type"
-msgstr "ชนิด"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:464
-msgid "Open-Tran.eu"
-msgstr "Open-Tran.eu"
-
-#: ../plugins/open-tran/gtr-open-tran-panel.c:510
-msgid "Look for:"
-msgstr "ค้นหา:"
-
-#: ../plugins/open-tran/gtr-open-tran-plugin.c:162
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:1
-msgid "Open Tran"
-msgstr "Open Tran"
-
-#: ../plugins/open-tran/gtr-open-tran.plugin.desktop.in.h:2
-msgid "Look for phrases in Open tran memory translation database."
-msgstr "ค้นหาวลีในฐานข้อมูลคลังคำแปลของ Open Tran"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:1
-msgid "Search Code"
-msgstr "รหัสที่ค้นหา"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:2
-msgid "The language code to search for"
-msgstr "รหัสภาษาของข้อความที่จะค้นหา"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:3
-msgid "Own Code"
-msgstr "รหัสของคุณ"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:4
-msgid "The language code in which you want the results"
-msgstr "รหัสภาษาของผลลัพธ์ที่คุณต้องการ"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:5
-msgid "Use Mirror Server"
-msgstr "ใช้เซิร์ฟเวอร์สำเนา"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:6
-msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
-msgstr "ใช้เซิร์ฟเวอร์สำเนาในเครื่องของเซิร์ฟเวอร์หลัก Open-Tran ที่ open-tran.eu"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:7
-msgid "Mirror Server URL"
-msgstr "URL ของเซิร์ฟเวอร์สำเนา"
-
-#: ../plugins/open-tran/org.gnome.gtranslator.plugins.open-tran.gschema.xml.in.in.h:8
-msgid "URL of an Open-Tran mirror server"
-msgstr "URL ของเซิร์ฟเวอร์ Open-Tran ฉบับสำเนา"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
-msgid "Strings added to database"
-msgstr "เพิ่มข้อความลงฐานข้อมูลแล้ว"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:224
-msgid "Please specify a valid path to build the translation memory"
-msgstr "กรุณาระบุพาธที่ถูกต้องเพื่อสร้างคลังคำแปล"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:291
-msgid "Gtranslator Translation Memory Manager"
-msgstr "เครื่องมือจัดการคลังคำแปลของ Gtranslator"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:1
-msgid "Database:"
-msgstr "ฐานข้อมูล:"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:2
-msgid "Select the directory which contains PO files:"
-msgstr "เลือกไดเรกทอรีที่เก็บแฟ้ม PO:"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:3
-msgid "Add to Database"
-msgstr "เพิ่มลงฐานข้อมูล"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:4
-msgid "Configuration:"
-msgstr "การตั้งค่า:"
-
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:5
-msgid "Use only files with this name:"
-msgstr "ใช้เฉพาะแฟ้มชื่อนี้:"
-
-#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:1
-#: ../plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
-msgid "Translation Memory"
-msgstr "คลังคำแปล"
-
-#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:2
-msgid "Get translation suggestions from a data base."
-msgstr "รับคำแนะนำการแปลจากฐานข้อมูล"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:207
-#, c-format
-msgid "Insert Option nº %d"
-msgstr "แทรกตัวเลือก nº %d"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:325
-msgid "_Use this translation"
-msgstr "ใ_ช้คำแปลนี้"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:330
-msgid "_Remove"
-msgstr "_ลบออก"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:445
-msgid "Shortcut"
-msgstr "ปุ่มลัด"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:454
-msgid "Level"
-msgstr "ระดับ"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:463
-msgid "String"
-msgstr "ข้อความ"
-
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:81
-msgid "_Build Translation Memory"
-msgstr "_สร้างคลังคำแปล"
-
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:82
-msgid "Build translation memory"
-msgstr "สร้างคลังคำแปล"
-
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
-#: ../src/gtr-window.c:180
-msgid "_Translation Memory"
-msgstr "_คลังคำแปล"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:1
-msgid "PO directory"
-msgstr "ไดเรกทอรีของ PO"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:2
-msgid "Directory containing PO files to add to the translation memory."
-msgstr "ไดเรกทอรีที่เก็บแฟ้ม PO ที่จะเพิ่มเข้าในคลังคำแปล"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:3
-msgid "Restrict search by filename"
-msgstr "จำกัดการค้นหาโดยใช้ชื่อแฟ้ม"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:4
-msgid ""
-"If true, only include files with a specified filename when searching the "
-"translation memory."
-msgstr "ถ้าเป็นจริง จะนับรวมเฉพาะแฟ้มที่มีชื่อตามที่ระบุเท่านั้นในการค้นคลังคำแปล"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:5
-msgid "Filename to restrict search to"
-msgstr "ชื่อแฟ้มที่ใช้จำกัดการค้นหา"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:6
-msgid ""
-"Filename to which searching of the translation memory should be restricted."
-msgstr "ชื่อแฟ้มที่จะใช้จำกัดการค้นหาคลังคำแปล"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:7
-msgid "Maximum number of missing words"
-msgstr "จำนวนคำสูงสุดที่ขาด"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:8
-msgid ""
-"Maximum number of words that can be missing from a message displayed as a "
-"match by the translation memory."
-msgstr "จำนวนคำสูงสุดที่ยอมให้ขาดจากข้อความที่แสดงว่าตรงกันในคลังคำแปล"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:9
-msgid "Maximum difference in message length"
-msgstr "ผลต่างสูงสุดของความยาวข้อความ"
-
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.in.h:10
-msgid ""
-"Maximum difference in length between messages displayed as matches by the "
-"translation memory."
-msgstr "ผลต่างสูงสุดของความยาวของข้อความที่แสดงว่าตรงกันในคลังคำแปล"
-
-#: ../src/gtr-actions-app.c:48
+#: src/gtr-actions-app.c:48
 msgid "Current Maintainers"
 msgstr "ผู้ดูแลปัจจุบัน"
 
-#: ../src/gtr-actions-app.c:52
-msgid "Current Developers"
-msgstr "นักพัฒนาปัจจุบัน"
-
-#: ../src/gtr-actions-app.c:57
+#: src/gtr-actions-app.c:52
 msgid "Previous Developers"
 msgstr "นักพัฒนาในอดีต"
 
-#: ../src/gtr-actions-app.c:66
+#: src/gtr-actions-app.c:63
 msgid "Contributors"
 msgstr "ผู้ร่วมสมทบ"
 
-#: ../src/gtr-actions-app.c:90
+#: src/gtr-actions-app.c:88
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
 msgstr "ชุดแก้ไขแฟ้มการแปลสำหรับปรับโปรแกรมและไลบรารีให้เหมาะกับผู้ใช้ท้องถิ่น"
 
-#: ../src/gtr-actions-app.c:106
-msgid "About Gtranslator"
-msgstr "เกี่ยวกับ Gtranslator"
-
 #.
 #. * Note to translators: put here your name and email so it will show
 #. * up in the "about" box
 #.
-#: ../src/gtr-actions-app.c:111
+#: src/gtr-actions-app.c:101
 msgid "translator-credits"
 msgstr ""
 "Ross Golder <ross@golder.org>\n"
@@ -811,57 +252,38 @@ msgstr ""
 "Sira Nokyoongtong <gumaraa@gmail.com>\n"
 "Akom Chotiphantawanon <knight2000@gmail.com>"
 
-#: ../src/gtr-actions-app.c:114
-msgid "Gtranslator Web Site"
-msgstr "เว็บไซต์ของ Gtranslator"
+#: src/gtr-actions-app.c:104
+#| msgid "Gtranslator Web Site"
+msgid "Translation Editor Web Site"
+msgstr "เว็บไซต์ของเครื่องมือแก้ไขคำแปล"
 
-#: ../src/gtr-actions-file.c:201
+#: src/gtr-actions-file.c:204 src/gtr-application.c:458
+#| msgid "Docum_ents with unsaved changes:"
+msgid "Do you want to save the changes?"
+msgstr "คุณต้องการบันทึกการเปลี่ยนแปลงหรือไม่?"
+
+#: src/gtr-actions-file.c:205 src/gtr-application.c:459
+msgid "Warning"
+msgstr "คำเตือน"
+
+#: src/gtr-actions-file.c:223
 msgid "Open file for translation"
 msgstr "เปิดแฟ้มเพื่อแปล"
 
-#: ../src/gtr-actions-file.c:273 ../src/gtr-actions-file.c:390
+#: src/gtr-actions-file.c:295 src/gtr-actions-file.c:412
 msgid "File saved."
 msgstr "บันทึกแฟ้มแล้ว"
 
-#: ../src/gtr-actions-file.c:321
-msgid "Save file as..."
-msgstr "บันทึกแฟ้มเป็น..."
+#: src/gtr-actions-file.c:343
+#| msgid "Save file as..."
+msgid "Save file as…"
+msgstr "บันทึกแฟ้มเป็น…"
 
-#: ../src/gtr-actions-file.c:779
+#: src/gtr-actions-file.c:804
 msgid "Files saved."
 msgstr "บันทึกแฟ้มแล้ว"
 
-#: ../src/gtr-actions-search.c:170
-#, c-format
-msgid "Found and replaced %d occurrence"
-msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "พบและแทนที่ %d แห่ง"
-
-#: ../src/gtr-actions-search.c:179
-msgid "Found and replaced one occurrence"
-msgstr "พบและแทนที่แห่งเดียว"
-
-#: ../src/gtranslator-menu.ui.h:1
-msgid "_New Window"
-msgstr "หน้าต่างใ_หม่"
-
-#: ../src/gtranslator-menu.ui.h:2
-msgid "_Preferences"
-msgstr "_ปรับแต่ง"
-
-#: ../src/gtranslator-menu.ui.h:3
-msgid "_Help"
-msgstr "_วิธีใช้"
-
-#: ../src/gtranslator-menu.ui.h:4
-msgid "_About"
-msgstr "เ_กี่ยวกับ"
-
-#: ../src/gtranslator-menu.ui.h:5
-msgid "_Quit"
-msgstr "_ออก"
-
-#: ../src/gtr-assistant.c:130
+#: src/gtr-assistant.c:128
 #, c-format
 msgid ""
 "Profile name: %s\n"
@@ -884,901 +306,1707 @@ msgstr ""
 "การลงรหัสข้อมูลถ่ายโอน: %s\n"
 "รูปพหูพจน์: %s\n"
 
-#: ../src/gtr-assistant.c:169
+#: src/gtr-assistant.c:167
 msgid "This assistant will help you to create the main profile."
 msgstr "เครื่องมือช่วยนี้จะช่วยคุณสร้างโพรไฟล์หลัก"
 
-#: ../src/gtr-assistant.c:174
+#: src/gtr-assistant.c:172
 msgid "Assistant"
 msgstr "เครื่องมือช่วย"
 
-#: ../src/gtr-assistant.c:247
-msgid "Profile name:"
-msgstr "ชื่อโพรไฟล์:"
+#: src/gtr-assistant.c:258
+#| msgid "Profile name:"
+msgid "Profile name"
+msgstr "ชื่อโพรไฟล์"
 
-#: ../src/gtr-assistant.c:289
-msgid "Translator email:"
-msgstr "อีเมลผู้แปล:"
+#: src/gtr-assistant.c:302
+#| msgid "Translator email:"
+msgid "Translator email"
+msgstr "อีเมลผู้แปล"
 
-#: ../src/gtr-assistant.c:303 ../src/gtr-assistant.c:395
-#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:1192
+#: src/gtr-assistant.c:324
+#| msgid "_Team email:"
+msgid "Team email"
+msgstr "อีเมลทีมแปล"
+
+#: src/gtr-assistant.c:339 src/gtr-preferences-dialog.c:547
+#: src/gtr-window.c:558
 msgid "Profile"
 msgstr "โพรไฟล์"
 
-#: ../src/gtr-assistant.c:415
+#: src/gtr-assistant.c:429
+#| msgid "_Language:"
+msgid "Language"
+msgstr "ภาษา"
+
+#: src/gtr-assistant.c:450
 msgid "Confirmation"
 msgstr "การยืนยัน"
 
-#: ../src/gtr-close-confirmation-dialog.c:126
+#: src/gtr-close-confirmation-dialog.c:123
 msgid "Close _without Saving"
 msgstr "_ปิดโดยไม่บันทึก"
 
-#: ../src/gtr-close-confirmation-dialog.c:155
+#: src/gtr-close-confirmation-dialog.c:126 src/gtr-context.c:89
+#: src/gtr-file-dialogs.c:45 src/gtr-jump-dialog.c:90
+#: src/gtr-preferences-dialog.c:418 src/gtr-profile-dialog.c:71
+#: src/translation-memory/gtr-translation-memory-dialog.c:81
+msgid "_Cancel"
+msgstr "_ยกเลิก"
+
+#: src/gtr-close-confirmation-dialog.c:128 src/gtr-context.c:87
+#: src/gtr-file-dialogs.c:47
+msgid "_Save"
+msgstr "_บันทึก"
+
+#: src/gtr-close-confirmation-dialog.c:150
 msgid "Question"
 msgstr "คำถาม"
 
-#: ../src/gtr-close-confirmation-dialog.c:370
+#: src/gtr-close-confirmation-dialog.c:366
 #, c-format
-msgid "Save the changes to document \"%s\" before closing?"
-msgstr "บันทึกการเปลี่ยนแปลงในเอกสาร \"%s\" ก่อนปิดหรือไม่?"
+#| msgid "Save the changes to document \"%s\" before closing?"
+msgid "Save the changes to document “%s” before closing?"
+msgstr "บันทึกการเปลี่ยนแปลงในเอกสาร “%s” ก่อนปิดหรือไม่?"
 
-#: ../src/gtr-close-confirmation-dialog.c:533
+#: src/gtr-close-confirmation-dialog.c:530
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] "การเปลี่ยนแปลงในเอกสารทั้ง %d ฉบับจะสูญหายอย่างถาวร"
 
-#: ../src/gtr-close-confirmation-dialog.c:540
+#: src/gtr-close-confirmation-dialog.c:537
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] "มีเอกสาร %d ฉบับที่ยังไม่บันทึก จะบันทึกก่อนปิดหรือไม่?"
 
-#: ../src/gtr-close-confirmation-dialog.c:561
+#: src/gtr-close-confirmation-dialog.c:558
 msgid "Docum_ents with unsaved changes:"
 msgstr "เ_อกสารที่มีการแก้ไขแต่ยังไม่บันทึก:"
 
-#: ../src/gtr-close-confirmation-dialog.c:565
+#: src/gtr-close-confirmation-dialog.c:562
 msgid "S_elect the documents you want to save:"
 msgstr "เ_ลือกเอกสารที่ต้องการบันทึก:"
 
-#: ../src/gtr-close-confirmation-dialog.c:583
+#: src/gtr-close-confirmation-dialog.c:581
 msgid "Saving has been disabled by the system administrator."
 msgstr "การบันทึกถูกผู้ดูแลระบบห้ามไว้"
 
-#: ../src/gtr-close-confirmation-dialog.c:585
-msgid "If you don't save, all your changes will be permanently lost."
+#: src/gtr-close-confirmation-dialog.c:583
+#| msgid "If you don't save, all your changes will be permanently lost."
+msgid "If you don’t save, all your changes will be permanently lost."
 msgstr "ถ้าคุณไม่บันทึก การแก้ไขทั้งหมดจะสูญหายอย่างถาวร"
 
-#: ../src/gtr-context.c:234
+#: src/gtr-context.c:82
+#| msgid "Notes:"
+msgid "Notes"
+msgstr "บันทึกข้อความ"
+
+#: src/gtr-context.c:290
 msgid "Notes:"
 msgstr "บันทึกข้อความ:"
 
-#: ../src/gtr-context.c:242
+#: src/gtr-context.c:298
 msgid "Add Note"
 msgstr "เพิ่มบันทึกข้อความ"
 
-#: ../src/gtr-context.c:247
+#: src/gtr-context.c:303
 msgid "Edit"
 msgstr "แก้ไข"
 
-#. Extracted comments
-#: ../src/gtr-context.c:293
+#: src/gtr-context.c:348
 msgid "Extracted comments:"
 msgstr "หมายเหตุที่แยกออกมาได้:"
 
-#. Context
-#: ../src/gtr-context.c:297
+#: src/gtr-context.c:351
 msgid "Context:"
 msgstr "บริบท:"
 
-#. Format
-#: ../src/gtr-context.c:301
+#: src/gtr-context.c:354
 msgid "Format:"
 msgstr "รูปแบบ:"
 
-#: ../src/gtr-context.ui.h:1
-msgid "D_one"
-msgstr "เ_สร็จสิ้น"
+#: src/gtr-dl-teams.c:617
+#| msgid "Translation Memory"
+msgid "Translation Team"
+msgstr "ทีมการแปล"
 
-#: ../src/gtr-file-dialogs.c:62
+#: src/gtr-dl-teams.c:624
+msgid "Module"
+msgstr "มอดูล"
+
+#: src/gtr-dl-teams.ui:60
+msgid "Select team, module, branch and domain to get the translation file."
+msgstr "เลือกทีม, มอดูล, แขนงและโดเมนเพื่อรับแฟ้มคำแปล"
+
+#: src/gtr-dl-teams.ui:81
+#| msgid "No profile"
+msgid "Load file"
+msgstr "โหลดแฟ้ม"
+
+#: src/gtr-dl-teams.ui:98
+msgid "Load from Damned Lies"
+msgstr "โหลดจาก Damned Lies"
+
+#: src/gtr-dl-teams.ui:105 src/gtr-projects.ui:58
+#| msgid "_Open"
+msgid "Open…"
+msgstr "เปิด…"
+
+#: src/gtr-dl-teams.ui:128 src/gtr-notebook.ui:571 src/gtr-projects.ui:91
+msgid "Main Menu"
+msgstr "เมนูหลัก"
+
+#: src/gtr-dl-teams.ui:156 src/gtr-notebook.ui:207 src/gtr-projects.ui:119
+#| msgid "_New Window"
+msgid "New window"
+msgstr "หน้าต่างใหม่"
+
+#: src/gtr-dl-teams.ui:170 src/gtr-notebook.ui:221 src/gtr-projects.ui:133
+#| msgid "_Preferences"
+msgid "Preferences"
+msgstr "ปรับแต่ง"
+
+#: src/gtr-dl-teams.ui:197 src/gtr-notebook.ui:248 src/gtr-projects.ui:174
+#| msgid "Shortcut"
+msgid "Keyboard Shortcuts"
+msgstr "ปุ่มลัด"
+
+#: src/gtr-dl-teams.ui:211 src/gtr-notebook.ui:262 src/gtr-projects.ui:188
+#| msgid "_About"
+msgid "About"
+msgstr "เกี่ยวกับ"
+
+#: src/gtr-dl-teams.ui:225 src/gtr-notebook.ui:290 src/gtr-projects.ui:216
+#| msgid "_Quit"
+msgid "Quit"
+msgstr "_ออก"
+
+#: src/gtr-file-dialogs.c:48
+msgid "_Open"
+msgstr "_เปิด"
+
+#: src/gtr-file-dialogs.c:62
 msgid "Gettext translation"
 msgstr "แฟ้มคำแปลของ gettext"
 
-#: ../src/gtr-file-dialogs.c:71
+#: src/gtr-file-dialogs.c:71
 msgid "Gettext translation template"
 msgstr "แฟ้มต้นแบบแบบคำแปลของ gettext"
 
-#: ../src/gtr-file-dialogs.c:76
+#: src/gtr-file-dialogs.c:76
 msgid "All files"
 msgstr "ทุกแฟ้ม"
 
-#: ../src/gtr-header-dialog.c:269
+#: src/gtr-header-dialog.c:280
 msgid "Edit Header"
 msgstr "แก้ไขข้อมูลส่วนหัว"
 
-#: ../src/gtr-header-dialog.ui.h:1
-msgid "Comment"
-msgstr "Comment"
-
-#: ../src/gtr-header-dialog.ui.h:2
-msgid "Project Id _version:"
-msgstr "_รุ่นของโครงการ:"
-
-#: ../src/gtr-header-dialog.ui.h:3
-msgid "Pot _file creation date:"
-msgstr "วันที่_สร้างแฟ้ม POT"
-
-#: ../src/gtr-header-dialog.ui.h:4
-msgid "Po file _revision date:"
-msgstr "วันที่แ_ก้ไขแฟ้ม PO:"
-
-#: ../src/gtr-header-dialog.ui.h:5
-msgid "Report message _bugs to:"
-msgstr "รายงานคำแปล_ผิดพลาดที่:"
-
-#: ../src/gtr-header-dialog.ui.h:6
-msgid "Project"
-msgstr "โครงการ"
-
-#: ../src/gtr-header-dialog.ui.h:7
+#: src/gtr-header-dialog.ui:65
 msgid "Use my options to complete the following entries:"
 msgstr "ใช้ข้อมูลของฉันเติมข้อมูลรายการต่อไปนี้:"
 
-#: ../src/gtr-header-dialog.ui.h:8
-msgid "Translator's _name:"
+#: src/gtr-header-dialog.ui:89
+#| msgid "Translator's _name:"
+msgid "Translator’s _name:"
 msgstr "_ชื่อผู้แปล:"
 
-#: ../src/gtr-header-dialog.ui.h:9
-msgid "Translator's _email:"
+#: src/gtr-header-dialog.ui:103
+#| msgid "Translator's _email:"
+msgid "Translator’s _email:"
 msgstr "อีเ_มลผู้แปล:"
 
-#: ../src/gtr-header-dialog.ui.h:10 ../src/gtr-languages-fetcher.ui.h:5
+#: src/gtr-header-dialog.ui:117
 msgid "_Language:"
 msgstr "_ภาษา:"
 
-#: ../src/gtr-header-dialog.ui.h:11
-msgid "Language gro_up email:"
-msgstr "อีเมลของ_กลุ่มแปลภาษา:"
-
-#: ../src/gtr-header-dialog.ui.h:12
-msgid "Char_set:"
-msgstr "รหัส_อักขระ:"
-
-#: ../src/gtr-header-dialog.ui.h:13
-msgid "Enc_oding:"
-msgstr "การ_ลงรหัส:"
-
-#: ../src/gtr-header-dialog.ui.h:14
-msgid "Translator and Language"
-msgstr "ผู้แปลและภาษา"
-
-#: ../src/gtr-jump-dialog.c:93
-msgid "Go to Message"
-msgstr "ไปยังข้อความ"
-
-#: ../src/gtr-jump-dialog.ui.h:1
-msgid "Enter message number:"
-msgstr "ไปที่ข้อความที่:"
-
-#: ../src/gtr-languages-fetcher.ui.h:1
-msgid "_Team email:"
-msgstr "อีเมล_ทีมแปล:"
-
-#: ../src/gtr-languages-fetcher.ui.h:2
-msgid "Transfer en_coding:"
-msgstr "การ_ลงรหัสข้อมูลถ่ายโอน:"
-
-#: ../src/gtr-languages-fetcher.ui.h:3
-msgid "Character _set"
-msgstr "รหัส_อักขระ:"
-
-#: ../src/gtr-languages-fetcher.ui.h:4
+#: src/gtr-header-dialog.ui:130
 msgid "Language _code:"
 msgstr "รหัส_ภาษา:"
 
-#: ../src/gtr-languages-fetcher.ui.h:6
-msgid "_Plural forms:"
-msgstr "รูป_พหูพจน์:"
+#: src/gtr-header-dialog.ui:143
+msgid "Language gro_up email:"
+msgstr "อีเมลของ_กลุ่มแปลภาษา:"
 
-#: ../src/gtr-message-table.c:181
-msgid "Status"
-msgstr "สถานะ"
+#: src/gtr-header-dialog.ui:156
+msgid "Char_set:"
+msgstr "รหัส_อักขระ:"
 
-#: ../src/gtr-message-table.c:193
-msgid "ID"
-msgstr "เลขที่"
+#: src/gtr-header-dialog.ui:169
+msgid "Enc_oding:"
+msgstr "การ_ลงรหัส:"
 
-#: ../src/gtr-message-table.c:208
+#: src/gtr-header-dialog.ui:267
+msgid "Translator and Language"
+msgstr "ผู้แปลและภาษา"
+
+#: src/gtr-header-dialog.ui:290
+msgid "Project Id _version:"
+msgstr "_รุ่นของโครงการ:"
+
+#: src/gtr-header-dialog.ui:303
+msgid "Pot _file creation date:"
+msgstr "วันที่_สร้างแฟ้ม POT"
+
+#: src/gtr-header-dialog.ui:317
+msgid "Po file _revision date:"
+msgstr "วันที่แ_ก้ไขแฟ้ม PO:"
+
+#: src/gtr-header-dialog.ui:331
+msgid "Report message _bugs to:"
+msgstr "รายงานคำแปล_ผิดพลาดที่:"
+
+#: src/gtr-header-dialog.ui:400
+msgid "Project"
+msgstr "โครงการ"
+
+#: src/gtr-header-dialog.ui:430
+msgid "Comment"
+msgstr "Comment"
+
+#: src/gtr-jump-dialog.c:88 src/gtr-profile-dialog.c:165
+#: src/gtr-profile-dialog.c:170
+#: src/translation-memory/gtr-translation-memory-dialog.c:80
+msgid "_OK"
+msgstr "_ตกลง"
+
+#: src/gtr-jump-dialog.c:92
+msgid "Go to Message"
+msgstr "ไปยังข้อความ"
+
+#: src/gtr-jump-dialog.ui:30
+msgid "Enter message number:"
+msgstr "ไปที่ข้อความที่:"
+
+#: src/gtr-lang-button.c:65
+#| msgid "_Language:"
+msgid "Choose Language"
+msgstr "เลือกภาษา"
+
+#: src/gtr-languages-fetcher.ui:46
+#| msgid "_Language:"
+msgid "_Language"
+msgstr "_ภาษา"
+
+#: src/gtr-languages-fetcher.ui:60
+#| msgid "Language _code:"
+msgid "Language _code"
+msgstr "รหัส_ภาษา"
+
+#: src/gtr-languages-fetcher.ui:74
+msgid "Character _set"
+msgstr "รหัส_อักขระ:"
+
+#: src/gtr-languages-fetcher.ui:88
+#| msgid "Transfer en_coding:"
+msgid "Transfer en_coding"
+msgstr "การ_ลงรหัสข้อมูลถ่ายโอน"
+
+#: src/gtr-languages-fetcher.ui:102
+#| msgid "_Plural forms:"
+msgid "_Plural forms"
+msgstr "รูป_พหูพจน์"
+
+#: src/gtr-languages-fetcher.ui:200
+msgid "_Edit options manually"
+msgstr "แ_ก้ไขตัวเลือกด้วยตนเอง"
+
+#: src/gtr-message-table.c:234
 msgid "Original Message"
 msgstr "ข้อความต้นฉบับ"
 
-#: ../src/gtr-message-table.c:223
+#: src/gtr-message-table.c:253
 msgid "Translated Message"
 msgstr "คำแปล"
 
-#: ../src/gtr-po.c:439
+#: src/gtr-notebook.ui:26
+#| msgid "Enter message number:"
+msgid "Order messages by"
+msgstr "ลำดับข้อความโดย"
+
+#: src/gtr-notebook.ui:58
+#| msgid "Find in the po file"
+msgid "Appearance in the original file"
+msgstr "ปรากฏในแฟ้มต้นฉบับ"
+
+#: src/gtr-notebook.ui:72
+#| msgid "Message Details"
+msgid "Message status"
+msgstr "สถานะข้อความ"
+
+#: src/gtr-notebook.ui:87
+#| msgid "Original Message"
+msgid "Original message"
+msgstr "ข้อความต้นฉบับ"
+
+#: src/gtr-notebook.ui:102
+#| msgid "Translated Message"
+msgid "Translated message"
+msgstr "คำแปล"
+
+#: src/gtr-notebook.ui:136
+msgid "Find"
+msgstr "หา"
+
+#: src/gtr-notebook.ui:150
+#| msgid "String to replace:"
+msgid "Find and replace"
+msgstr "หาและแทนที่"
+
+#: src/gtr-notebook.ui:164 src/gtr-projects.ui:147
+msgid "Build translation memory"
+msgstr "สร้างคลังคำแปล"
+
+#: src/gtr-notebook.ui:179
+#| msgid "Edit Header"
+msgid "Edit header"
+msgstr "แก้ไขข้อมูลส่วนหัว"
+
+#: src/gtr-notebook.ui:276 src/gtr-preferences-dialog.c:623
+#: src/gtr-projects.ui:202
+#| msgid "_Help"
+msgid "Help"
+msgstr "วิธีใช้"
+
+#: src/gtr-notebook.ui:321
+#| msgid "Open a PO file"
+msgid "Open a new file (<Ctrl>o)"
+msgstr "เปิดแฟ้มใหม่ (<Ctrl>o)"
+
+#: src/gtr-notebook.ui:341
+msgid "Open from Damned Lies (<Ctrl>d)"
+msgstr "เปิดจาก Damned Lies (<Ctrl>d)"
+
+#: src/gtr-notebook.ui:387
+msgid "Undo (<Ctrl>z)"
+msgstr "เรียกคืน (<Ctrl>z)"
+
+#: src/gtr-notebook.ui:409
+msgid "Redo (<Ctrl><Shift>z)"
+msgstr "ทำซ้ำ (<Ctrl><Shift>z)"
+
+#: src/gtr-notebook.ui:454
+msgid "Previous message without translation (<Alt><Page Up>)"
+msgstr "ข้อความก่อนหน้าโดยไม่แปล (<Alt><Page Up>)"
+
+#: src/gtr-notebook.ui:476
+msgid "Next message without translation (<Alt><Page Down>)"
+msgstr "ข้อความถัดไปโดยไม่แปล (<Alt><Page Down>)"
+
+#: src/gtr-notebook.ui:516
+#| msgid "Toggle _Fuzzy Status"
+msgid "Toggle fuzzy state (<Ctrl>+u)"
+msgstr "สลับสถานะความคลุมเครือ (<Ctrl>+u)"
+
+#: src/gtr-notebook.ui:537
+#| msgid "Report message _bugs to:"
+msgid "Sort messages by"
+msgstr "เรียงข้อความโดย"
+
+#: src/gtr-notebook.ui:547
+msgid "Order by menu"
+msgstr "ลำดับโดยเมนู"
+
+#: src/gtr-notebook.ui:585
+msgid "Find (<Ctrl><f>)"
+msgstr "หา (<Ctrl><f>)"
+
+#: src/gtr-notebook.ui:624
+#| msgid "_Save"
+msgid "Save"
+msgstr "บันทึก"
+
+#: src/gtr-notebook.ui:628
+#| msgid "Save the current file"
+msgid "Save the current file (<Ctrl>s)"
+msgstr "บันทึกแฟ้มปัจจุบัน (<Ctrl>s)"
+
+#: src/gtr-notebook.ui:643
+msgid "Save as (<Ctrl><Shift>s)"
+msgstr "บันทึกเป็น (<Ctrl><Shift>s)"
+
+#: src/gtr-po.c:440
 #, c-format
 msgid "The file is empty"
 msgstr "แฟ้มว่างเปล่า"
 
-#: ../src/gtr-po.c:448
+#: src/gtr-po.c:449
 #, c-format
-msgid "Failed opening file '%s': %s"
-msgstr "เปิดแฟ้ม '%s' ไม่สำเร็จ: %s"
+#| msgid "Failed opening file '%s': %s"
+msgid "Failed opening file “%s”: %s"
+msgstr "เปิดแฟ้ม “%s” ไม่สำเร็จ: %s"
 
-#: ../src/gtr-po.c:522
+#: src/gtr-po.c:530
 #, c-format
-msgid "Could not convert from charset '%s' to UTF-8"
-msgstr "ไม่สามารถแปลงรหัสอักขระจาก '%s' เป็น UTF-8"
+#| msgid "Could not convert from charset '%s' to UTF-8"
+msgid "Could not convert from charset “%s” to UTF-8"
+msgstr "ไม่สามารถแปลงรหัสอักขระจาก “%s” เป็น UTF-8"
 
-#: ../src/gtr-po.c:539 ../src/gtr-po.c:559
+#: src/gtr-po.c:547 src/gtr-po.c:567
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "ไม่สามารถจัดเก็บแฟ้มชั่วคราวสำหรับแปลงรหัสอักขระ"
 
-#: ../src/gtr-po.c:596
+#: src/gtr-po.c:604
 #, c-format
+#| msgid ""
+#| "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
+#| "iconv command line tools before opening this file with gtranslator"
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
-"iconv command line tools before opening this file with gtranslator"
+"iconv command line tools before opening this file with GNOME Translation "
+"Editor"
 msgstr ""
 "ความพยายามทั้งหมดที่จะแปลงแฟ้มเป็น UTF-8 ล้มเหลว กรุณาใช้เครื่องมือบรรทัดคำสั่ง msgconv หรือ "
-"iconv แปลงรหัสอักขระ ก่อนที่จะเปิดแฟ้มนี้ด้วย gtranslator"
+"iconv แปลงรหัสอักขระ ก่อนที่จะเปิดแฟ้มนี้ด้วยเครื่องมือแก้ไขคำแปลของ GNOME"
 
-#: ../src/gtr-po.c:664
+#: src/gtr-po.c:672
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "gettext ให้ค่ารายการโดเมนข้อความเป็นรายการว่างเปล่า"
 
-#: ../src/gtr-po.c:709
+#: src/gtr-po.c:717
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "ตัวแจงอ่านไม่ได้ข้อความอะไร"
 
-#: ../src/gtr-po.c:757
+#: src/gtr-po.c:768
 #, c-format
+#| msgid ""
+#| "You are saving a file with a .pot extension.\n"
+#| "Pot files are generated by the compilation process.\n"
+#| "Your file should likely be named '%s.po'."
 msgid ""
 "You are saving a file with a .pot extension.\n"
 "Pot files are generated by the compilation process.\n"
-"Your file should likely be named '%s.po'."
+"Your file should likely be named “%s.po”."
 msgstr ""
 "คุณกำลังบันทึกแฟ้มด้วยนามสกุล .pot\n"
 "แฟ้ม pot จะสร้างจากกระบวนการคอมไพล์เท่านั้น\n"
-"แฟ้มของคุณน่าจะชื่อ '%s.po' มากกว่า"
+"แฟ้มของคุณน่าจะชื่อ “%s.po” มากกว่า"
 
-#: ../src/gtr-po.c:770
+#: src/gtr-po.c:781
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "แฟ้ม %s อ่านได้อย่างเดียว ไม่สามารถเขียนทับได้"
 
-#: ../src/gtr-po.c:801
+#: src/gtr-po.c:800
+#, c-format
+#| msgid "There was an error writing the PO file: %s"
+msgid "There is an error in the PO file: %s"
+msgstr "เกิดข้อผิดพลาดในแฟ้ม PO: %s"
+
+#: src/gtr-po.c:812
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "เกิดข้อผิดพลาดขณะเขียนแฟ้ม PO: %s"
 
-#: ../src/gtr-preferences-dialog.c:397
+#: src/gtr-preferences-dialog.c:394
 msgid "Impossible to remove the active profile"
 msgstr "ไม่สามารถลบโพรไฟล์ที่ใช้งานอยู่"
 
-#: ../src/gtr-preferences-dialog.c:403
+#: src/gtr-preferences-dialog.c:400
 msgid "Another profile should be selected as active before"
 msgstr "ควรเลือกโพรไฟล์อื่นขึ้นมาใช้งานแทนก่อน"
 
-#: ../src/gtr-preferences-dialog.c:416
+#: src/gtr-preferences-dialog.c:413
 msgid "Are you sure you want to delete this profile?"
 msgstr "คุณแน่ใจหรือไม่ว่าต้องการลบโพรไฟล์นี้?"
 
-#: ../src/gtr-preferences-dialog.c:552
+#: src/gtr-preferences-dialog.c:421
+#| msgid "Deleted"
+msgid "_Delete"
+msgstr "_ลบ"
+
+#: src/gtr-preferences-dialog.c:553
 msgid "Active"
 msgstr "ใช้งาน"
 
-#: ../src/gtr-preferences-dialog.c:621 ../src/gtr-preferences-dialog.ui.h:1
-msgid "Gtranslator Preferences"
-msgstr "ปรับแต่ง Gtranslator"
+#: src/gtr-preferences-dialog.c:625 src/gtr-preferences-dialog.ui:49
+#| msgid "Gtranslator Preferences"
+msgid "Translation Editor Preferences"
+msgstr "ปรับแต่งเครื่องมือแก้ไขคำแปล"
 
-#: ../src/gtr-preferences-dialog.ui.h:2
+#: src/gtr-preferences-dialog.ui:119
 msgid "General"
 msgstr "ทั่วไป"
 
-#: ../src/gtr-preferences-dialog.ui.h:3
+#: src/gtr-preferences-dialog.ui:138
 msgid "_Warn if PO file contains fuzzy translations"
 msgstr "เ_ตือนถ้าแฟ้ม PO มีคำแปลคลุมเครือ"
 
-#: ../src/gtr-preferences-dialog.ui.h:4
+#: src/gtr-preferences-dialog.ui:160
 msgid "Autosave"
 msgstr "บันทึกอัตโนมัติ"
 
-#: ../src/gtr-preferences-dialog.ui.h:5
+#: src/gtr-preferences-dialog.ui:184
 msgid "Create a _backup copy of files before saving"
 msgstr "_สำรองแฟ้มเดิมก่อนบันทึก"
 
-#: ../src/gtr-preferences-dialog.ui.h:6
+#: src/gtr-preferences-dialog.ui:206
 msgid "_Autosave files every"
 msgstr "_บันทึกแฟ้มโดยอัตโนมัติทุกๆ"
 
-#: ../src/gtr-preferences-dialog.ui.h:7
+#: src/gtr-preferences-dialog.ui:230
 msgid "_minutes"
 msgstr "_นาที"
 
-#: ../src/gtr-preferences-dialog.ui.h:8
+#: src/gtr-preferences-dialog.ui:288
 msgid "Files"
 msgstr "แฟ้ม"
 
-#: ../src/gtr-preferences-dialog.ui.h:9
+#: src/gtr-preferences-dialog.ui:312
 msgid "Text Display"
 msgstr "การแสดงข้อความ"
 
-#: ../src/gtr-preferences-dialog.ui.h:10
+#: src/gtr-preferences-dialog.ui:335
 msgid "_Highlight message syntax"
 msgstr "เ_น้นไวยากรณ์ในข้อความ"
 
-#: ../src/gtr-preferences-dialog.ui.h:11
+#: src/gtr-preferences-dialog.ui:351
 msgid "Make _whitespace visible"
 msgstr "ทำให้มองเห็น_ช่องว่าง"
 
-#: ../src/gtr-preferences-dialog.ui.h:12
-msgid "Use _custom font"
-msgstr "ใช้แบบอักษรกำหนดเ_อง"
-
-#: ../src/gtr-preferences-dialog.ui.h:13
-msgid "Editor _font:"
-msgstr "แ_บบอักษรเครื่องมือแก้ไข:"
-
-#: ../src/gtr-preferences-dialog.ui.h:14
+#: src/gtr-preferences-dialog.ui:392
 msgid "Contents"
 msgstr "เนื้อหา"
 
-#: ../src/gtr-preferences-dialog.ui.h:15
+#: src/gtr-preferences-dialog.ui:415
 msgid "_Remove fuzzy status if message is changed"
 msgstr "_ลบสถานะคลุมเครือถ้าข้อความมีการเปลี่ยนแปลง"
 
-#: ../src/gtr-preferences-dialog.ui.h:16
+#: src/gtr-preferences-dialog.ui:431
 msgid "Check _spelling"
 msgstr "ตรวจตัว_สะกด"
 
-#: ../src/gtr-preferences-dialog.ui.h:17
+#: src/gtr-preferences-dialog.ui:470
 msgid "Editor"
 msgstr "เครื่องมือแก้ไข"
 
-#: ../src/gtr-preferences-dialog.ui.h:18
+#: src/gtr-preferences-dialog.ui:569
 msgid "Edit Profile"
 msgstr "แก้ไขโพรไฟล์"
 
-#: ../src/gtr-preferences-dialog.ui.h:19
+#: src/gtr-preferences-dialog.ui:606
 msgid "Profiles"
 msgstr "โพรไฟล์"
 
-#: ../src/gtr-profile-dialog.c:82
-msgid "Gtranslator Profile"
-msgstr "โพรไฟล์ Gtranslator"
+#: src/gtr-profile-dialog.c:73
+#| msgid "Gtranslator Profile"
+msgid "Translation Editor Profile"
+msgstr "โพรไฟล์เครื่องมือแก้ไขคำแปล"
 
-#: ../src/gtr-profile-dialog.ui.h:1
+#: src/gtr-profile-dialog.ui:68
+#| msgid "_Name:"
+msgid "_Name"
+msgstr "_ชื่อ"
+
+#: src/gtr-profile-dialog.ui:96
 msgid "Profile Information"
 msgstr "ข้อมูลโพรไฟล์"
 
-#: ../src/gtr-profile-dialog.ui.h:2
-msgid "_Name:"
-msgstr "_ชื่อ:"
-
-#: ../src/gtr-profile-dialog.ui.h:3
+#: src/gtr-profile-dialog.ui:113
 msgid "Translator Information"
 msgstr "ข้อมูลผู้แปล"
 
-#: ../src/gtr-profile-dialog.ui.h:4
-msgid "_Email:"
-msgstr "อีเ_มล:"
+#: src/gtr-profile-dialog.ui:131
+#| msgid "N_ame:"
+msgid "N_ame"
+msgstr "ชื่_อ"
 
-#: ../src/gtr-profile-dialog.ui.h:5
-msgid "N_ame:"
-msgstr "ชื่_อ:"
+#: src/gtr-profile-dialog.ui:146
+#| msgid "_Email:"
+msgid "_Email"
+msgstr "อีเ_มล"
 
-#: ../src/gtr-profile-dialog.ui.h:6
+#: src/gtr-profile-dialog.ui:160
+#| msgid "_Team email:"
+msgid "_Team email"
+msgstr "อีเมล_ทีมแปล"
+
+#: src/gtr-profile-dialog.ui:209
 msgid "Language Settings"
 msgstr "ค่าตั้งของภาษา"
 
-#: ../src/gtr-search-dialog.c:347 ../src/gtr-search-dialog.ui.h:1
+#: src/gtr-projects.ui:35
+msgid "Open a new .po file or drag & drop here"
+msgstr "เปิดแฟ้ม .po หรือลากวางที่นี่"
+
+#: src/gtr-projects.ui:51
+#| msgid "Open a PO file"
+msgid "Select a PO file"
+msgstr "เลือกแฟ้ม PO"
+
+#: src/gtr-projects.ui:68
+msgid "Load from DL…"
+msgstr "โหลดจาก DL…"
+
+#: src/gtr-search-bar.c:484 src/gtr-search-bar.ui:212
+msgid "Case sensitive"
+msgstr "ตัวพิมพ์ใหญ่-เล็กตรงกัน"
+
+#: src/gtr-search-bar.c:489 src/gtr-search-bar.ui:225
+#| msgid "Match _entire word only"
+msgid "Match whole word only"
+msgstr "ค้นหาทั้_งคำ"
+
+#: src/gtr-search-bar.c:494
+#| msgid "_Wrap around"
+msgid "Wrap around"
+msgstr "หมดแล้วเริ่มใหม่"
+
+#: src/gtr-search-bar.c:499
+#| msgid "_Original text"
+msgid "Original text"
+msgstr "ข้อความต้นฉบับ"
+
+#: src/gtr-search-bar.c:504
+#| msgid "_Translated text"
+msgid "Translated text"
+msgstr "คำแปล"
+
+#: src/gtr-search-bar.ui:121
 msgid "Replace"
 msgstr "แทนที่"
 
-#: ../src/gtr-search-dialog.c:369
-msgid "Find"
-msgstr "หา"
-
-#: ../src/gtr-search-dialog.c:457
-msgid "Replace _All"
-msgstr "แทนที่ทั้งห_มด"
-
-#: ../src/gtr-search-dialog.c:461
-msgid "_Replace"
-msgstr "แ_ทนที่"
-
-#: ../src/gtr-search-dialog.ui.h:2
+#: src/gtr-search-bar.ui:133
 msgid "Replace All"
 msgstr "แทนที่ทั้งหมด"
 
-#: ../src/gtr-search-dialog.ui.h:3
-msgid "_Search for: "
-msgstr "_ค้นหา: "
+#: src/gtr-search-bar.ui:153
+msgid "Switch between Search and Search-and-Replace"
+msgstr "สลับระหว่างค้นหาและค้นหา-และ-แทนที่"
 
-#: ../src/gtr-search-dialog.ui.h:4
-msgid "Replace _with: "
-msgstr "แท_นที่ด้วย:"
+#: src/gtr-search-bar.ui:173
+msgid "Show or hide search options such as case sensitivity"
+msgstr "แสดงหรือซ่อนตัวเลือกค้นหา เช่น ตัวพิมพ์ใหญ่-เล็กตรงกัน"
 
-#: ../src/gtr-search-dialog.ui.h:5
-msgid "_Original text"
-msgstr "ข้อความ_ต้นฉบับ"
+#: src/gtr-search-bar.ui:238
+#| msgid "_Wrap around"
+msgid "Wrap Around"
+msgstr "หมดแล้วเริ่มใหม่"
 
-#: ../src/gtr-search-dialog.ui.h:6
-msgid "_Translated text"
-msgstr "_คำแปล"
+#: src/gtr-search-bar.ui:251
+#| msgid "_Original text"
+msgid "Original-text"
+msgstr "ข้อความต้นฉบับ"
 
-#: ../src/gtr-search-dialog.ui.h:7
-msgid "Include fu_zzy strings"
-msgstr "รวมข้อความ_คลุมเครือด้วย"
+#: src/gtr-search-bar.ui:264
+#| msgid "_Translated text"
+msgid "Translated-text"
+msgstr "คำแปล"
 
-#: ../src/gtr-search-dialog.ui.h:8
-msgid "_Match case"
-msgstr "ตัวพิมพ์ใหญ่-เ_ล็กตรงกัน"
-
-#: ../src/gtr-search-dialog.ui.h:9
-msgid "Match _entire word only"
-msgstr "ค้นหาทั้_งคำ"
-
-#: ../src/gtr-search-dialog.ui.h:10
-msgid "Search _backwards"
-msgstr "ค้นหา_ย้อนกลับ"
-
-#: ../src/gtr-search-dialog.ui.h:11
-msgid "_Wrap around"
-msgstr "หมดแล้วเ_ริ่มใหม่"
-
-#: ../src/gtr-statusbar.c:119 ../src/gtr-statusbar.c:248
+#: src/gtr-statusbar.c:117 src/gtr-statusbar.c:252
 msgid "INS"
 msgstr "แทรก"
 
-#: ../src/gtr-statusbar.c:120 ../src/gtr-statusbar.c:244
+#: src/gtr-statusbar.c:118 src/gtr-statusbar.c:248
 msgid "OVR"
 msgstr "ทับ"
 
-#: ../src/gtr-tab.c:209
+#: src/gtr-tab-label.c:278
+msgid "Close document"
+msgstr "ปิดเอกสาร"
+
+#: src/gtr-tab.c:335
 msgid "There is an error in the message:"
 msgstr "มีความผิดพลาดในข้อความ:"
 
-#: ../src/gtr-tab.c:537
+#: src/gtr-tab.c:549 src/gtr-tab.c:675
+#| msgid "Fuzzy"
+msgid "fuzzy"
+msgstr "คลุมเครือ"
+
+#: src/gtr-tab.c:705
 #, c-format
 msgid "Plural %d"
 msgstr "พหูพจน์ %d"
 
 #. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1058
+#: src/gtr-tab.c:1264
 msgid "Path:"
 msgstr "พาธ:"
 
-#: ../src/gtr-tab-label.c:277
-msgid "Close document"
-msgstr "ปิดเอกสาร"
-
-#: ../src/gtr-tab.ui.h:1
-msgid "_Original Message:"
-msgstr "ข้อความ_ต้นฉบับ:"
-
-#: ../src/gtr-tab.ui.h:2
-msgid "Translate_d Text:"
-msgstr "คำแ_ปล:"
-
-#: ../src/gtr-utils.c:516
-msgid ""
-"Unable to display help. Please make sure the Gtranslator documentation "
-"package is installed."
-msgstr ""
-"ไม่สามารถแสดงวิธีใช้ กรุณาตรวจสอบให้แน่ใจว่าได้ติดตั้งแพกเกจเอกสารของ Gtranslator แล้ว"
-
-#: ../src/gtr-view.c:81
+#: src/gtr-tab.c:1914
 #, c-format
-msgid "gtkspell error: %s\n"
-msgstr "ข้อผิดพลาด gtkspell: %s\n"
+#| msgid "Translated"
+msgid "Translated: %0.2f%%"
+msgstr "แปลแล้ว: %0.2f%%"
 
-#: ../src/gtr-view.c:83
+#: src/gtr-tab.c:1915
 #, c-format
-msgid ""
-"GtkSpell was unable to initialize.\n"
-" %s"
-msgstr ""
-"ไม่สามารถเริ่มต้น GtkSpell ได้\n"
-" %s"
+#| msgid "Untranslated: %d"
+msgid "Translated: %d"
+msgstr "แปลแล้ว: %d"
 
-#: ../src/gtr-window.c:113 ../src/gtr-window.ui.h:1
-msgid "_File"
-msgstr "แ_ฟ้ม"
+#: src/gtr-tab.c:1916
+#, c-format
+msgid "Untranslated: %d"
+msgstr "ยังไม่แปล: %d"
 
-#: ../src/gtr-window.c:114 ../src/gtr-window.ui.h:7
-msgid "_Edit"
-msgstr "แ_ก้ไข"
+#: src/gtr-tab.c:1917
+#, c-format
+msgid "Fuzzy: %d"
+msgstr "คลุมเครือ: %d"
 
-#: ../src/gtr-window.c:115 ../src/gtr-window.ui.h:19
-msgid "_View"
-msgstr "มุ_มมอง"
+#: src/gtr-tab.ui:79
+#| msgid "_Original Message:"
+msgid "_Original Message"
+msgstr "ข้อความ_ต้นฉบับ"
 
-#: ../src/gtr-window.c:116 ../src/gtr-window.ui.h:45
-msgid "_Search"
-msgstr "_ค้นหา"
+#: src/gtr-tab.ui:171
+#| msgid "Translate_d Text:"
+msgid "Translate_d Text"
+msgstr "คำแ_ปล"
 
-#: ../src/gtr-window.c:117 ../src/gtr-window.ui.h:22
-msgid "_Go"
-msgstr "ไ_ป"
-
-#: ../src/gtr-window.c:118
-msgid "_Tools"
-msgstr "เ_ครื่องมือ"
-
-#: ../src/gtr-window.c:119 ../src/gtr-window.ui.h:48
-msgid "_Documents"
-msgstr "เ_อกสาร"
-
-#: ../src/gtr-window.c:123 ../src/gtr-window.ui.h:2
-msgid "Open a PO file"
-msgstr "เปิดแฟ้ม PO"
-
-#: ../src/gtr-window.c:125 ../src/gtr-window.ui.h:3
-msgid "_Recent Files"
-msgstr "แฟ้ม_ล่าสุด"
-
-#. Edit menu
-#: ../src/gtr-window.c:129
-msgid "T_oolbar"
-msgstr "แถบเ_ครื่องมือ"
-
-#: ../src/gtr-window.c:131 ../src/gtr-window.c:171
-msgid "_Header..."
-msgstr "ส่วนหั_ว..."
-
-#: ../src/gtr-window.c:140 ../src/gtr-window.ui.h:4
-msgid "Save the current file"
-msgstr "บันทึกแฟ้มปัจจุบัน"
-
-#: ../src/gtr-window.c:143 ../src/gtr-window.ui.h:5
-msgid "Save the current file with another name"
-msgstr "บันทึกแฟ้มปัจจุบันโดยตั้งชื่อใหม่"
-
-#: ../src/gtr-window.c:149 ../src/gtr-window.ui.h:6
-msgid "Close the current file"
-msgstr "ปิดแฟ้มปัจจุบัน"
-
-#: ../src/gtr-window.c:154 ../src/gtr-window.ui.h:8
-msgid "Undo last operation"
-msgstr "เรียกคืนการทำคำสั่งสุดท้าย"
-
-#: ../src/gtr-window.c:157 ../src/gtr-window.ui.h:9
-msgid "Redo last undone operation"
-msgstr "ทำซ้ำคำสั่งที่เรียกคืนล่าสุด"
-
-#: ../src/gtr-window.c:160 ../src/gtr-window.ui.h:10
-msgid "Cut the selected text"
-msgstr "ตัดส่วนที่เลือก"
-
-#: ../src/gtr-window.c:163 ../src/gtr-window.ui.h:11
-msgid "Copy the selected text"
-msgstr "คัดลอกส่วนที่เลือก"
-
-#: ../src/gtr-window.c:166 ../src/gtr-window.ui.h:12
-msgid "Paste the contents of the clipboard"
-msgstr "แปะเนื้อหาจากคลิปบอร์ด"
-
-#: ../src/gtr-window.c:169 ../src/gtr-window.ui.h:13
-msgid "Clear the selected translation"
-msgstr "ล้างคำแปลที่เลือก"
-
-#: ../src/gtr-window.c:173 ../src/gtr-window.ui.h:16
-msgid "Copy _Message to Translation"
-msgstr "คัดลอก_ข้อความไปเป็นคำแปล"
-
-#: ../src/gtr-window.c:175 ../src/gtr-window.ui.h:15
-msgid "Copy original message contents to the translation field"
-msgstr "คัดลอกข้อความต้นฉบับไปยังช่องคำแปล"
-
-#: ../src/gtr-window.c:177 ../src/gtr-window.ui.h:18
-msgid "Toggle _Fuzzy Status"
-msgstr "สลับสถานะความ_คลุมเครือ"
-
-#: ../src/gtr-window.c:178 ../src/gtr-window.ui.h:17
-msgid "Toggle fuzzy status of a message"
-msgstr "สลับสถานะความคลุมเครือของข้อความ"
-
-#. View menu
-#: ../src/gtr-window.c:185 ../src/gtr-window.ui.h:21
-msgid "_Message Details"
-msgstr "รายละเอียด_ข้อความ"
-
-#: ../src/gtr-window.c:186
-msgid "Show the Context panel"
-msgstr "แสดงช่องบริบท"
-
-#. Go menu
-#: ../src/gtr-window.c:190 ../src/gtr-window.ui.h:23
-msgid "_Previous Message"
-msgstr "ข้อความ_ก่อนหน้า"
-
-#: ../src/gtr-window.c:191 ../src/gtr-window.ui.h:24
-msgid "Move back one message"
-msgstr "เลื่อนกลับไปหนึ่งข้อความ"
-
-#: ../src/gtr-window.c:193 ../src/gtr-window.ui.h:25
-msgid "_Next Message"
-msgstr "ข้อความ_ถัดไป"
-
-#: ../src/gtr-window.c:194 ../src/gtr-window.ui.h:26
-msgid "Move forward one message"
-msgstr "เลื่อนไปข้างหน้าหนึ่งข้อความ"
-
-#: ../src/gtr-window.c:196
-msgid "_Go to Message..."
-msgstr "ไ_ปที่ข้อความ..."
-
-#: ../src/gtr-window.c:197 ../src/gtr-window.ui.h:28
-msgid "Jumps to a specific message"
-msgstr "ไปยังข้อความที่กำหนด"
-
-#: ../src/gtr-window.c:199 ../src/gtr-window.ui.h:29
-msgid "_First Message"
-msgstr "ข้อความแ_รก"
-
-#: ../src/gtr-window.c:200 ../src/gtr-window.ui.h:30
-msgid "Go to the first message"
-msgstr "ไปยังข้อความแรกสุด"
-
-#: ../src/gtr-window.c:202 ../src/gtr-window.ui.h:31
-msgid "_Last Message"
-msgstr "ข้อความสุ_ดท้าย"
-
-#: ../src/gtr-window.c:203 ../src/gtr-window.ui.h:32
-msgid "Go to the last message"
-msgstr "ไปยังข้อความสุดท้าย"
-
-#: ../src/gtr-window.c:205 ../src/gtr-window.ui.h:36
-msgid "Next Fuz_zy"
-msgstr "ข้อความคลุมเค_รือถัดไป"
-
-#: ../src/gtr-window.c:206 ../src/gtr-window.ui.h:35
-msgid "Go to the next fuzzy message"
-msgstr "ไปยังข้อความคลุมเครือถัดไป"
-
-#: ../src/gtr-window.c:208 ../src/gtr-window.ui.h:34
-msgid "Previous Fuzz_y"
-msgstr "ข้อความ_คลุมเครือก่อนหน้า"
-
-#: ../src/gtr-window.c:209 ../src/gtr-window.ui.h:33
-msgid "Go to the previous fuzzy message"
-msgstr "ไปยังข้อความคลุมเครือก่อนหน้า"
-
-#: ../src/gtr-window.c:211 ../src/gtr-window.ui.h:40
-msgid "Next _Untranslated"
-msgstr "ข้อความยังไ_ม่แปลถัดไป"
-
-#: ../src/gtr-window.c:212 ../src/gtr-window.ui.h:39
-msgid "Go to the next untranslated message"
-msgstr "ไปยังข้อความถัดไปที่ยังไม่ได้แปล"
-
-#: ../src/gtr-window.c:215 ../src/gtr-window.ui.h:38
-msgid "Previ_ous Untranslated"
-msgstr "ข้อความ_ยังไม่แปลก่อนหน้า"
-
-#: ../src/gtr-window.c:216 ../src/gtr-window.ui.h:37
-msgid "Go to the previous untranslated message"
-msgstr "ไปยังข้อความก่อนหน้าที่ยังไม่ได้แปล"
-
-#: ../src/gtr-window.c:219 ../src/gtr-window.ui.h:44
-msgid "Next Fu_zzy or Untranslated"
-msgstr "ข้อความคลุมเครือหรื_อยังไม่แปลถัดไป"
-
-#: ../src/gtr-window.c:221 ../src/gtr-window.ui.h:43
-msgid "Go to the next fuzzy or untranslated message"
-msgstr "ไปยังข้อความถัดไปที่คลุมเครือหรือยังไม่ได้แปล"
-
-#: ../src/gtr-window.c:224 ../src/gtr-window.ui.h:42
-msgid "Pre_vious Fuzzy or Untranslated"
-msgstr "ข้อความคลุมเครือ_หรือยังไม่แปลก่อนหน้า"
-
-#: ../src/gtr-window.c:226 ../src/gtr-window.ui.h:41
-msgid "Go to the previous fuzzy or untranslated message"
-msgstr "ไปยังข้อความก่อนหน้าที่คลุมเครือหรือยังไม่ได้แปล"
-
-#: ../src/gtr-window.c:231 ../src/gtr-window.ui.h:46
-msgid "Search for text"
-msgstr "ค้นหาข้อความ"
-
-#: ../src/gtr-window.c:234 ../src/gtr-window.ui.h:47
-msgid "Search for and replace text"
-msgstr "ค้นหาและแทนที่ข้อความ"
-
-#. Documents menu
-#: ../src/gtr-window.c:238 ../src/gtr-window.ui.h:49
-msgid "_Save All"
-msgstr "_บันทึกทั้งหมด"
-
-#: ../src/gtr-window.c:239 ../src/gtr-window.ui.h:50
-msgid "Save all open files"
-msgstr "บันทึกแฟ้มที่เปิดอยู่ทั้งหมด"
-
-#: ../src/gtr-window.c:241 ../src/gtr-window.ui.h:51
-msgid "_Close All"
-msgstr "ปิ_ดทั้งหมด"
-
-#: ../src/gtr-window.c:242 ../src/gtr-window.ui.h:52
-msgid "Close all open files"
-msgstr "ปิดแฟ้มที่เปิดอยู่ทั้งหมด"
-
-#: ../src/gtr-window.c:244 ../src/gtr-window.ui.h:54
-msgid "_Previous Document"
-msgstr "เอกสาร_ก่อนหน้า"
-
-#: ../src/gtr-window.c:246 ../src/gtr-window.ui.h:53
-msgid "Activate previous document"
-msgstr "ไปที่เอกสารก่อนหน้า"
-
-#: ../src/gtr-window.c:248 ../src/gtr-window.ui.h:56
-msgid "_Next Document"
-msgstr "เอกสาร_ถัดไป"
-
-#: ../src/gtr-window.c:250 ../src/gtr-window.ui.h:55
-msgid "Activate next document"
-msgstr "ไปที่เอกสารถัดไป"
-
-#: ../src/gtr-window.c:419
+#: src/gtr-window.c:175
 msgid "Untranslated"
 msgstr "ยังไม่แปล"
 
-#: ../src/gtr-window.c:422
+#: src/gtr-window.c:178
 msgid "Translated"
 msgstr "แปลแล้ว"
 
-#: ../src/gtr-window.c:425
+#: src/gtr-window.c:181
 msgid "Fuzzy"
 msgstr "คลุมเครือ"
 
-#: ../src/gtr-window.c:432
+#: src/gtr-window.c:188
 #, c-format
 msgid "Current: %d"
 msgstr "ปัจจุบัน: %d"
 
-#: ../src/gtr-window.c:433
+#: src/gtr-window.c:189
 #, c-format
 msgid "Total: %d"
 msgstr "ทั้งหมด: %d"
 
-#: ../src/gtr-window.c:434
+#: src/gtr-window.c:190
 #, c-format
 msgid "%d translated"
 msgid_plural "%d translated"
 msgstr[0] "แปลแล้ว %d"
 
-#: ../src/gtr-window.c:437
+#: src/gtr-window.c:193
 #, c-format
 msgid "%d fuzzy"
 msgid_plural "%d fuzzy"
 msgstr[0] "คลุมเครือ %d"
 
-#: ../src/gtr-window.c:439
+#: src/gtr-window.c:195
 #, c-format
 msgid "%d untranslated"
 msgid_plural "%d untranslated"
 msgstr[0] "ยังไม่แปล %d"
 
-#. Translators: %s is a URI
-#: ../src/gtr-window.c:493
-#, c-format
-msgid "Activate '%s'"
-msgstr "เปิด '%s'"
-
 #. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:666
+#: src/gtr-window.c:305
 #, c-format
-msgid "*%s - gtranslator"
-msgstr "*%s - gtranslator"
+#| msgid "*%s - gtranslator"
+msgid "*%s — Translation Editor"
+msgstr "*%s — เครื่องมือแก้ไขคำแปล"
 
 #. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:669
+#: src/gtr-window.c:311
 #, c-format
-msgid "%s - gtranslator"
-msgstr "%s - gtranslator"
+#| msgid "Translation Memory"
+msgid "%s — Translation Editor"
+msgstr "%s — เครื่องมือแก้ไขคำแปล"
 
-#: ../src/gtr-window.c:675
-msgid "gtranslator"
-msgstr "gtranslator"
-
-#: ../src/gtr-window.c:1039
-msgid "Toolbar Editor"
-msgstr "เครื่องมือแก้ไขแถบเครื่องมือ"
-
-#: ../src/gtr-window.c:1165
+#: src/gtr-window.c:542
 msgid "No profile"
 msgstr "ไม่มีโพรไฟล์"
 
-#: ../src/gtr-window.c:1194
+#: src/gtr-window.c:560
 msgid "Profile for the active document"
 msgstr "โพรไฟล์สำหรับเอกสารที่ทำงานอยู่"
 
-#: ../src/gtr-window.ui.h:14
-msgid "_Header…"
-msgstr "ส่วน_หัว…"
+#: src/gtranslator-menu.ui:7
+msgid "_New Window"
+msgstr "หน้าต่างใ_หม่"
 
-#: ../src/gtr-window.ui.h:20
-msgid "Show the context panel"
-msgstr "แสดงช่องบริบท"
+#: src/gtranslator-menu.ui:13
+msgid "_Preferences"
+msgstr "_ปรับแต่ง"
 
-#: ../src/gtr-window.ui.h:27
-msgid "_Go to Message…"
-msgstr "ไ_ปยังข้อความ…"
+#: src/gtranslator-menu.ui:19
+msgid "_Help"
+msgstr "_วิธีใช้"
 
-#: ../src/gtr-window.ui.h:57
-msgid "_Open"
-msgstr "_เปิด"
+#: src/gtranslator-menu.ui:24
+#| msgid "The GNOME translation program"
+msgid "_About GNOME Translation Editor"
+msgstr "เ_กี่ยวกับเครื่องมือแก้ไขคำแปลสำหรับ GNOME"
 
-#: ../src/gtr-window.ui.h:58
-msgid "_Save"
-msgstr "_บันทึก"
+#: src/help-overlay.ui:13
+#| msgid "General"
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "ทั่วไป"
 
-#: ../src/gtr-window.ui.h:59
-msgid "_Undo"
-msgstr "เรี_ยกคืน"
+#: src/help-overlay.ui:18
+#| msgid "Open a PO file"
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "เปิดแฟ้ม"
 
-#: ../src/gtr-window.ui.h:60
-msgid "_Redo"
-msgstr "_ทำซ้ำ"
+#: src/help-overlay.ui:25
+#| msgid "Save the current file"
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "บันทึกแฟ้มปัจจุบัน"
 
-#: ../src/main.c:97
-msgid "- Edit PO files"
-msgstr "- แก้ไขแฟ้ม PO"
+#: src/help-overlay.ui:32
+#| msgid "Save the current file"
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "บันทึกแฟ้มปัจจุบันเป็น"
 
-#: ../src/main.c:101
+#: src/help-overlay.ui:40
+#| msgid "_Preferences"
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "ปรับแต่ง"
+
+#: src/help-overlay.ui:47
+#| msgid "Shortcut"
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "ปุ่มลัด"
+
+#: src/help-overlay.ui:54
+#| msgid "_Quit"
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "ออก"
+
+#: src/help-overlay.ui:64
+#| msgid "Edit"
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "แก้ไข"
+
+#: src/help-overlay.ui:68
+#| msgid "_Undo"
+msgctxt "shortcut window"
+msgid "Undo"
+msgstr "เรียกคืน"
+
+#: src/help-overlay.ui:75
+#| msgid "_Redo"
+msgctxt "shortcut window"
+msgid "Redo"
+msgstr "ทำซ้ำ"
+
+#: src/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr "ทำเครื่องหมาย/เลิกทำเครื่องหมายเป็นคลุมเครือ"
+
+#: src/help-overlay.ui:89
+#| msgid "Copy original message contents to the translation field"
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "คัดลอกข้อความต้นฉบับไปยังคำแปล"
+
+#: src/help-overlay.ui:99
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr "ท่องดู"
+
+#: src/help-overlay.ui:103
+#| msgid "Go to the previous fuzzy message"
+msgctxt "shortcut window"
+msgid "Go to the previous message"
+msgstr "ไปยังข้อความก่อนหน้า"
+
+#: src/help-overlay.ui:110
+#| msgid "Go to the next fuzzy message"
+msgctxt "shortcut window"
+msgid "Go to the next message"
+msgstr "ไปยังข้อความถัดไป"
+
+#: src/help-overlay.ui:117
+#| msgid "Go to the previous untranslated message"
+msgctxt "shortcut window"
+msgid "Go to the previous untranslated message"
+msgstr "ไปยังข้อความก่อนหน้าที่ยังไม่ได้แปล"
+
+#: src/help-overlay.ui:124
+#| msgid "Go to the next untranslated message"
+msgctxt "shortcut window"
+msgid "Go to the next untranslated message"
+msgstr "ไปยังข้อความถัดไปที่ยังไม่ได้แปล"
+
+#: src/help-overlay.ui:134
+#| msgid "Translation Memory"
+msgctxt "shortcut window group"
+msgid "Translation Memory"
+msgstr "คลังคำแปล"
+
+#: src/help-overlay.ui:138
+#| msgid "Build translation memory"
+msgctxt "shortcut window"
+msgid "Build translation memory"
+msgstr "สร้างคลังคำแปล"
+
+#: src/help-overlay.ui:145
+msgctxt "shortcut window"
+msgid "Copy below"
+msgstr "คัดลอกด้านล่าง"
+
+#: src/help-overlay.ui:155
+#| msgid "Replace"
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "หา & แทนที่"
+
+#: src/help-overlay.ui:159
+#| msgid "Find"
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "หา"
+
+#: src/help-overlay.ui:166
+#| msgid "Replace"
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "หา & แทนที่"
+
+#: src/help-overlay.ui:173
+msgctxt "shortcut window"
+msgid "Forward-search"
+msgstr "ค้นหาเดินหน้า"
+
+#: src/help-overlay.ui:180
+msgctxt "shortcut window"
+msgid "Backward-search"
+msgstr "ค้นหาถอยหลัง"
+
+#: src/help-overlay.ui:187
+msgctxt "shortcut window"
+msgid "Hide find & replace bar"
+msgstr "ซ่อนแถบ หา & แทนที่"
+
+#: src/main.c:97
+#| msgid "- Edit PO files"
+msgid "— Edit PO files"
+msgstr "— แก้ไขแฟ้ม PO"
+
+#: src/main.c:101
 #, c-format
+#| msgid ""
+#| "%s\n"
+#| "Run '%s --help' to see a full list of available command line options.\n"
 msgid ""
 "%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
+"Run “%s --help” to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"เรียก '%s --help' เพื่อดูตัวเลือกทั้งหมดที่มีสำหรับบรรทัดคำสั่ง\n"
+"เรียก “%s --help” เพื่อดูตัวเลือกทั้งหมดที่มีสำหรับบรรทัดคำสั่ง\n"
 
-#. Translaters: This string is for a toggle to display a toolbar.
-#. * The name of the toolbar is automatically computed from the widgets
-#. * on the toolbar, and is placed at the %s. Note the _ before the %s
-#. * which is used to add mnemonics. We know that this is likely to
-#. * produce duplicates, but don't worry about it. If your language
-#. * normally has a mnemonic at the start, please use the _. If not,
-#. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:991
-#, c-format
-msgid "Show “_%s”"
-msgstr "แสดงแถบ “_%s”"
+#: src/translation-memory/gtr-translation-memory-dialog.c:77
+#| msgid "PO directory"
+msgid "Select PO directory"
+msgstr "เลือกไดเรกทอรีของ PO"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1484
-msgid "_Move on Toolbar"
-msgstr "_ย้ายที่ในแถบเครื่องมือ"
+#: src/translation-memory/gtr-translation-memory-dialog.c:303
+#| msgid "Gtranslator Translation Memory Manager"
+msgid "Translation Editor Memory Manager"
+msgstr "เครื่องมือจัดการคลังคำแปลของเครื่องมือแก้ไขคำแปล"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1485
-msgid "Move the selected item on the toolbar"
-msgstr "ย้ายรายการที่เลือกในแถบเครื่องมือ"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
+msgid "Database:"
+msgstr "ฐานข้อมูล:"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1486
-msgid "_Remove from Toolbar"
-msgstr "_ลบออกจากแถบเครื่องมือ"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:103
+msgid "Select the directory which contains PO files:"
+msgstr "เลือกไดเรกทอรีที่เก็บแฟ้ม PO:"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1487
-msgid "Remove the selected item from the toolbar"
-msgstr "ลบรายการที่เลือกออกจากแถบเครื่องมือ"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:154
+msgid "Add to Database"
+msgstr "เพิ่มลงฐานข้อมูล"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1488
-msgid "_Delete Toolbar"
-msgstr "_ลบแถบเครื่องมือ"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:209
+msgid "Configuration:"
+msgstr "การตั้งค่า:"
 
-#: ../src/toolbareditor/egg-editable-toolbar.c:1489
-msgid "Remove the selected toolbar"
-msgstr "ลบแถบเครื่องมือที่เลือก"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:253
+msgid "Use only files with this name:"
+msgstr "ใช้เฉพาะแฟ้มชื่อนี้:"
 
-#: ../src/toolbareditor/egg-toolbar-editor.c:488
-msgid "Separator"
-msgstr "เส้นแบ่ง"
+#: src/translation-memory/gtr-translation-memory-ui.c:255
+msgid "_Use this translation"
+msgstr "ใ_ช้คำแปลนี้"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:260
+msgid "_Remove"
+msgstr "_ลบออก"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:371
+msgid "Shortcut"
+msgstr "ปุ่มลัด"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:380
+msgid "Level"
+msgstr "ระดับ"
+
+#: src/translation-memory/gtr-translation-memory-ui.c:389
+msgid "String"
+msgstr "ข้อความ"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
+msgid "PO directory"
+msgstr "ไดเรกทอรีของ PO"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
+msgid "Directory containing PO files to add to the translation memory."
+msgstr "ไดเรกทอรีที่เก็บแฟ้ม PO ที่จะเพิ่มเข้าในคลังคำแปล"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
+msgid "Restrict search by filename"
+msgstr "จำกัดการค้นหาโดยใช้ชื่อแฟ้ม"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
+msgid ""
+"If true, only include files with a specified filename when searching the "
+"translation memory."
+msgstr "ถ้าเป็นจริง จะนับรวมเฉพาะแฟ้มที่มีชื่อตามที่ระบุเท่านั้นในการค้นคลังคำแปล"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
+msgid "Filename to restrict search to"
+msgstr "ชื่อแฟ้มที่ใช้จำกัดการค้นหา"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
+msgid ""
+"Filename to which searching of the translation memory should be restricted."
+msgstr "ชื่อแฟ้มที่จะใช้จำกัดการค้นหาคลังคำแปล"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
+msgid "Maximum number of missing words"
+msgstr "จำนวนคำสูงสุดที่ขาด"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
+msgid ""
+"Maximum number of words that can be missing from a message displayed as a "
+"match by the translation memory."
+msgstr "จำนวนคำสูงสุดที่ยอมให้ขาดจากข้อความที่แสดงว่าตรงกันในคลังคำแปล"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
+msgid "Maximum difference in message length"
+msgstr "ผลต่างสูงสุดของความยาวข้อความ"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
+msgid ""
+"Maximum difference in length between messages displayed as matches by the "
+"translation memory."
+msgstr "ผลต่างสูงสุดของความยาวของข้อความที่แสดงว่าตรงกันในคลังคำแปล"
+
+#~ msgid "Gtranslator PO File Editor"
+#~ msgstr "เครื่องมือแก้ไขแฟ้ม PO Gtranslator"
+
+#~ msgid "Use custom font"
+#~ msgstr "ใช้แบบอักษรกำหนดเอง"
+
+#~ msgid "If true, use a custom font for edit fields."
+#~ msgstr "ถ้าเป็นจริง จะใช้แบบอักษรกำหนดเองสำหรับช่องแก้ไขข้อความต่างๆ"
+
+#~ msgid "Editor font"
+#~ msgstr "แบบอักษรของเครื่องมือแก้ไข"
+
+#~ msgid "Custom font to use for edit fields."
+#~ msgstr "แบบอักษรที่กำหนดเองที่จะใช้กับช่องแก้ไขข้อมูล"
+
+#~ msgid "Others"
+#~ msgstr "อื่นๆ"
+
+#~ msgid "gtranslator highlight"
+#~ msgstr "การเน้นไวยากรณ์ของ gtranslator"
+
+#~ msgid "Tag"
+#~ msgstr "แท็ก"
+
+#~ msgid "Special variable"
+#~ msgstr "ตัวแปรพิเศษ"
+
+#~ msgid "Message not found"
+#~ msgstr "ไม่พบข้อความ"
+
+#~ msgid "Open file for alternate language"
+#~ msgstr "เปิดแฟ้มสำหรับภาษาอื่น"
+
+#~ msgid "File closed"
+#~ msgstr "แฟ้มปิดแล้ว"
+
+#~ msgctxt "alternate lang"
+#~ msgid "_Open"
+#~ msgstr "_เปิด"
+
+#~ msgctxt "alternate lang"
+#~ msgid "Co_py"
+#~ msgstr "_คัดลอก"
+
+#~ msgid "There isn't any file loaded"
+#~ msgstr "ไม่มีแฟ้มใดโหลดอยู่"
+
+#~ msgid "_Alternate Language"
+#~ msgstr "ภาษา_อื่น"
+
+#~ msgid "Show the Alternate Language panel"
+#~ msgstr "แสดงพาเนลภาษาอื่น"
+
+#~ msgid "Alternate Language"
+#~ msgstr "ภาษาอื่น"
+
+#~ msgid "Load an alternate language."
+#~ msgstr "โหลดภาษาอื่น"
+
+#~ msgid "Character Map"
+#~ msgstr "ผังอักขระ"
+
+#~ msgid "Insert special characters just by clicking on them."
+#~ msgstr "แทรกอักขระพิเศษด้วยการคลิกเลือก"
+
+#~ msgid "Source View Settings"
+#~ msgstr "ตั้งค่าการแสดงซอร์ส"
+
+#~ msgid "Use external editor"
+#~ msgstr "ใช้เครื่องมือแก้ไขภายนอก"
+
+#~ msgid "Program command:"
+#~ msgstr "คำสั่งเรียกโปรแกรม:"
+
+#~ msgid "Line command:"
+#~ msgstr "คำสั่งเลือกบรรทัด:"
+
+#~ msgid "Please install \"%s\" to be able to show the file"
+#~ msgstr "กรุณาติดตั้ง \"%s\" เพื่อให้แสดงแฟ้มได้"
+
+#~ msgid "Source Code View"
+#~ msgstr "ดูซอร์สโค้ด"
+
+#~ msgid "Show the message in the source code."
+#~ msgstr "แสดงข้อความในซอร์สโค้ด"
+
+#~ msgid "Use the System Editor"
+#~ msgstr "ใช้เครื่องมือแก้ไขของระบบ"
+
+#~ msgid "Whether use the system editor to show the source code"
+#~ msgstr "จะใช้เครื่องมือแก้ไขของระบบเพื่อแสดงซอร์สโค้ดหรือไม่"
+
+#~ msgid "The Editor to Launch"
+#~ msgstr "เครื่องมือแก้ไขที่จะเรียก"
+
+#~ msgid "The command to launch the editor you want to use"
+#~ msgstr "คำสั่งสำหรับเรียกเครื่องมือแก้ไขที่คุณต้องการ"
+
+#~ msgid "Arguments for the Command"
+#~ msgstr "อาร์กิวเมนต์สำหรับคำสั่ง"
+
+#~ msgid "Arguments to pass to the program command line to select the line"
+#~ msgstr "อาร์กิวเมนต์ที่จะส่งในบรรทัดคำสั่งเรียกโปรแกรมเพื่อเลือกบรรทัด"
+
+#~ msgid "Dictionary"
+#~ msgstr "พจนานุกรม"
+
+#~ msgid "No dictionary source available with name '%s'"
+#~ msgstr "ไม่มีแหล่งพจนานุกรมชื่อ '%s'"
+
+#~ msgid "Unable to find dictionary source"
+#~ msgstr "หาแหล่งพจนานุกรมไม่พบ"
+
+#~ msgid "No context available for source '%s'"
+#~ msgstr "ไม่มีบริบทสำหรับแหล่ง '%s'"
+
+#~ msgid "Unable to create a context"
+#~ msgstr "ไม่สามารถสร้างบริบทได้"
+
+#~ msgid "Dictionary source '%s' selected"
+#~ msgstr "เลือกแหล่งพจนานุกรม '%s' แล้ว"
+
+#~ msgid "Strategy '%s' selected"
+#~ msgstr "เลือกกลวิธี '%s' แล้ว"
+
+#~ msgid "Database '%s' selected"
+#~ msgstr "เลือกฐานข้อมูล '%s' แล้ว"
+
+#~ msgid "Word '%s' selected"
+#~ msgstr "เลือกคำ '%s' แล้ว"
+
+#~ msgid "Double-click on the word to look up"
+#~ msgstr "ดับเบิลคลิกที่คำที่จะเปิดหา"
+
+#~ msgid "Double-click on the matching strategy to use"
+#~ msgstr "ดับเบิลคลิกที่กลวิธีการค้นที่จะใช้"
+
+#~ msgid "Double-click on the source to use"
+#~ msgstr "ดับเบิลคลิกที่แหล่งที่จะใช้"
+
+#~ msgid "Double-click on the database to use"
+#~ msgstr "ดับเบิลคลิกที่ฐานข้อมูลที่จะใช้"
+
+#~ msgid "Look _up:"
+#~ msgstr "เปิด_หา:"
+
+#~ msgid "Similar words"
+#~ msgstr "คำคล้าย"
+
+#~ msgid "Available dictionaries"
+#~ msgstr "พจนานุกรมที่มี"
+
+#~ msgid "Available strategies"
+#~ msgstr "กลวิธีที่มี"
+
+#~ msgid "Dictionary sources"
+#~ msgstr "แหล่งพจนานุกรม"
+
+#~ msgid "Look up words in a dictionary."
+#~ msgstr "เปิดหาคำในพจนานุกรม"
+
+#~ msgid "Database"
+#~ msgstr "ฐานข้อมูล"
+
+#~ msgid "Word database"
+#~ msgstr "ฐานข้อมูลคำ"
+
+#~ msgid "Source Name"
+#~ msgstr "ชื่อแหล่ง"
+
+#~ msgid "Strategy"
+#~ msgstr "กลวิธี"
+
+#~ msgid "Panel Position"
+#~ msgstr "ตำแหน่งพาเนล"
+
+#~ msgid "_Fullscreen"
+#~ msgstr "เ_ต็มจอ"
+
+#~ msgid "Place window on fullscreen state"
+#~ msgstr "ปรับหน้าต่างให้อยู่ในสถานะเต็มจอ"
+
+#~ msgid "Fullscreen"
+#~ msgstr "เต็มจอ"
+
+#~ msgid "Place window in the fullscreen state."
+#~ msgstr "ปรับหน้าต่างให้อยู่ในสถานะเต็มจอ"
+
+#~ msgid "_Next Param"
+#~ msgstr "พารามิเตอร์_ถัดไป"
+
+#~ msgid "Insert the next param of the message"
+#~ msgstr "แทรกพารามิเตอร์ถัดไปของข้อความ"
+
+#~ msgid "_Insert Params"
+#~ msgstr "แ_ทรกพารามิเตอร์"
+
+#~ msgid "_Next Tag"
+#~ msgstr "แท็ก_ถัดไป"
+
+#~ msgid "Insert the next tag of the message"
+#~ msgstr "แทรกแท็กถัดไปของข้อความ"
+
+#~ msgid "_Insert Tags"
+#~ msgstr "แ_ทรกแท็ก"
+
+#~ msgid "Insert Params or Tags"
+#~ msgstr "แทรกพารามิเตอร์หรือแท็ก"
+
+#~ msgid "Parameters and tags detection featuring easy insertion."
+#~ msgstr "ตรวจหาพารามิเตอร์และแท็ก และช่วยแทรกอย่างสะดวก"
+
+#~ msgid "Open Tran Settings"
+#~ msgstr "ตั้งค่า Open Tran"
+
+#~ msgid "Language code for the Open-Tran query:"
+#~ msgstr "รหัสภาษาสำหรับการสอบถาม Open-Tran:"
+
+#~ msgid "Language code of the translated results:"
+#~ msgstr "รหัสภาษาของผลลัพธ์การแปล:"
+
+#~ msgid "Use a local \"mirror\" copy of the Open-Tran server"
+#~ msgstr "ใช้เซิร์ฟเวอร์ \"สำเนา\" ของ Open-Tran ในเครื่อง"
+
+#~ msgid "Mirror server URL:"
+#~ msgstr "URL ของเซิร์ฟเวอร์สำเนา:"
+
+#~ msgid ""
+#~ "<i>The URL should be of the form:\n"
+#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+#~ "The two \"%s\" markers and the final slash must not be omitted.</i>"
+#~ msgstr ""
+#~ "<i>URL ควรจะอยู่ในรูปแบบ:\n"
+#~ "<b>http://%s.%s.open-tran.example.com/json/suggest/</b>\n"
+#~ "สัญลักษณ์กำหนดตำแหน่ง \"%s\" ทั้งสองและขีดทับที่ท้ายสุดต้องคงอยู่</i>"
+
+#~ msgid "Mirror Server"
+#~ msgstr "เซิร์ฟเวอร์สำเนา"
+
+#~ msgid "ERROR: Cannot access %s\n"
+#~ msgstr "ข้อผิดพลาด: ไม่สามารถเข้าถึง %s\n"
+
+#~ msgid "Error in server response, GET failed\n"
+#~ msgstr "ข้อผิดพลาดในคำตอบของเซิร์ฟเวอร์: GET ล้มเหลว\n"
+
+#~ msgid "Cannot parse server response, %s\n"
+#~ msgstr "ไม่สามารถแจงคำตอบของเซิร์ฟเวอร์: %s\n"
+
+#~ msgid "Cannot parse server response, not an array? %s\n"
+#~ msgstr "ไม่สามารถแจงคำตอบของเซิร์ฟเวอร์ ไม่เป็นแอร์เรย์หรือไม่? %s\n"
+
+#~ msgid "WRONG! Can't get result element %d\n"
+#~ msgstr "ผิด! ไม่สามารถอ่านองค์ประกอบ %d ของผลลัพธ์\n"
+
+#~ msgid "WRONG! Can't parse result element %d as object\n"
+#~ msgstr "ผิด! ไม่สามารถแจงองค์ประกอบ %d ของผลลัพธ์เป็นอ็อบเจกต์\n"
+
+#~ msgid "WRONG! Can't read projects for result element %d\n"
+#~ msgstr "ผิด! ไม่สามารถอ่านโครงการสำหรับองค์ประกอบ %d ของผลลัพธ์\n"
+
+#~ msgid "%s[%s] Count:%d"
+#~ msgstr "%s[%s] จำนวน:%d"
+
+#~ msgid "WRONG! Malformed project: %d\n"
+#~ msgstr "ผิด! โครงการผิดรูปแบบ: %d\n"
+
+#~ msgid "Phrase not found"
+#~ msgstr "ไม่พบวลี"
+
+#~ msgid "You have to provide a phrase to search"
+#~ msgstr "คุณต้องป้อนวลีที่จะค้นหาด้วย"
+
+#~ msgid ""
+#~ "You have to provide a search language code in the plugin configuration"
+#~ msgstr "คุณต้องกำหนดรหัสภาษาของการค้นหาในการตั้งค่าปลั๊กอินด้วย"
+
+#~ msgid ""
+#~ "You have to provide a language code for your language in the plugin "
+#~ "configuration"
+#~ msgstr "คุณต้องกำหนดรหัสภาษาสำหรับภาษาของคุณในการตั้งค่าปลั๊กอินด้วย"
+
+#~ msgid ""
+#~ "Either use the main open-tran.eu server, or enter a server URL in the "
+#~ "plugin configuration,"
+#~ msgstr ""
+#~ "ใช้เซิร์ฟเวอร์หลักของ open-tran.eu หรือไม่ก็ป้อน URL ของเซิร์ฟเวอร์ในการตั้งค่าปลั๊กอิน"
+
+#~ msgid "Type"
+#~ msgstr "ชนิด"
+
+#~ msgid "Open-Tran.eu"
+#~ msgstr "Open-Tran.eu"
+
+#~ msgid "Look for:"
+#~ msgstr "ค้นหา:"
+
+#~ msgid "Open Tran"
+#~ msgstr "Open Tran"
+
+#~ msgid "Look for phrases in Open tran memory translation database."
+#~ msgstr "ค้นหาวลีในฐานข้อมูลคลังคำแปลของ Open Tran"
+
+#~ msgid "Search Code"
+#~ msgstr "รหัสที่ค้นหา"
+
+#~ msgid "The language code to search for"
+#~ msgstr "รหัสภาษาของข้อความที่จะค้นหา"
+
+#~ msgid "Own Code"
+#~ msgstr "รหัสของคุณ"
+
+#~ msgid "The language code in which you want the results"
+#~ msgstr "รหัสภาษาของผลลัพธ์ที่คุณต้องการ"
+
+#~ msgid "Use Mirror Server"
+#~ msgstr "ใช้เซิร์ฟเวอร์สำเนา"
+
+#~ msgid "Use a local copy of the main Open-Tran server at open-tran.eu"
+#~ msgstr "ใช้เซิร์ฟเวอร์สำเนาในเครื่องของเซิร์ฟเวอร์หลัก Open-Tran ที่ open-tran.eu"
+
+#~ msgid "Mirror Server URL"
+#~ msgstr "URL ของเซิร์ฟเวอร์สำเนา"
+
+#~ msgid "URL of an Open-Tran mirror server"
+#~ msgstr "URL ของเซิร์ฟเวอร์ Open-Tran ฉบับสำเนา"
+
+#~ msgid "Strings added to database"
+#~ msgstr "เพิ่มข้อความลงฐานข้อมูลแล้ว"
+
+#~ msgid "Please specify a valid path to build the translation memory"
+#~ msgstr "กรุณาระบุพาธที่ถูกต้องเพื่อสร้างคลังคำแปล"
+
+#~ msgid "Get translation suggestions from a data base."
+#~ msgstr "รับคำแนะนำการแปลจากฐานข้อมูล"
+
+#~ msgid "Insert Option nº %d"
+#~ msgstr "แทรกตัวเลือก nº %d"
+
+#~ msgid "_Build Translation Memory"
+#~ msgstr "_สร้างคลังคำแปล"
+
+#~ msgid "_Translation Memory"
+#~ msgstr "_คลังคำแปล"
+
+#~ msgid "Current Developers"
+#~ msgstr "นักพัฒนาปัจจุบัน"
+
+#~ msgid "About Gtranslator"
+#~ msgstr "เกี่ยวกับ Gtranslator"
+
+#~ msgid "Found and replaced %d occurrence"
+#~ msgid_plural "Found and replaced %d occurrences"
+#~ msgstr[0] "พบและแทนที่ %d แห่ง"
+
+#~ msgid "Found and replaced one occurrence"
+#~ msgstr "พบและแทนที่แห่งเดียว"
+
+#~ msgid "D_one"
+#~ msgstr "เ_สร็จสิ้น"
+
+#~ msgid "Status"
+#~ msgstr "สถานะ"
+
+#~ msgid "ID"
+#~ msgstr "เลขที่"
+
+#~ msgid "Use _custom font"
+#~ msgstr "ใช้แบบอักษรกำหนดเ_อง"
+
+#~ msgid "Editor _font:"
+#~ msgstr "แ_บบอักษรเครื่องมือแก้ไข:"
+
+#~ msgid "Replace _All"
+#~ msgstr "แทนที่ทั้งห_มด"
+
+#~ msgid "_Replace"
+#~ msgstr "แ_ทนที่"
+
+#~ msgid "_Search for: "
+#~ msgstr "_ค้นหา: "
+
+#~ msgid "Replace _with: "
+#~ msgstr "แท_นที่ด้วย:"
+
+#~ msgid "Include fu_zzy strings"
+#~ msgstr "รวมข้อความ_คลุมเครือด้วย"
+
+#~ msgid "_Match case"
+#~ msgstr "ตัวพิมพ์ใหญ่-เ_ล็กตรงกัน"
+
+#~ msgid "Search _backwards"
+#~ msgstr "ค้นหา_ย้อนกลับ"
+
+#~ msgid ""
+#~ "Unable to display help. Please make sure the Gtranslator documentation "
+#~ "package is installed."
+#~ msgstr ""
+#~ "ไม่สามารถแสดงวิธีใช้ กรุณาตรวจสอบให้แน่ใจว่าได้ติดตั้งแพกเกจเอกสารของ Gtranslator แล้ว"
+
+#~ msgid "gtkspell error: %s\n"
+#~ msgstr "ข้อผิดพลาด gtkspell: %s\n"
+
+#~ msgid ""
+#~ "GtkSpell was unable to initialize.\n"
+#~ " %s"
+#~ msgstr ""
+#~ "ไม่สามารถเริ่มต้น GtkSpell ได้\n"
+#~ " %s"
+
+#~ msgid "_File"
+#~ msgstr "แ_ฟ้ม"
+
+#~ msgid "_Edit"
+#~ msgstr "แ_ก้ไข"
+
+#~ msgid "_View"
+#~ msgstr "มุ_มมอง"
+
+#~ msgid "_Search"
+#~ msgstr "_ค้นหา"
+
+#~ msgid "_Go"
+#~ msgstr "ไ_ป"
+
+#~ msgid "_Tools"
+#~ msgstr "เ_ครื่องมือ"
+
+#~ msgid "_Documents"
+#~ msgstr "เ_อกสาร"
+
+#~ msgid "_Recent Files"
+#~ msgstr "แฟ้ม_ล่าสุด"
+
+#~ msgid "T_oolbar"
+#~ msgstr "แถบเ_ครื่องมือ"
+
+#~ msgid "_Header..."
+#~ msgstr "ส่วนหั_ว..."
+
+#~ msgid "Save the current file with another name"
+#~ msgstr "บันทึกแฟ้มปัจจุบันโดยตั้งชื่อใหม่"
+
+#~ msgid "Close the current file"
+#~ msgstr "ปิดแฟ้มปัจจุบัน"
+
+#~ msgid "Undo last operation"
+#~ msgstr "เรียกคืนการทำคำสั่งสุดท้าย"
+
+#~ msgid "Redo last undone operation"
+#~ msgstr "ทำซ้ำคำสั่งที่เรียกคืนล่าสุด"
+
+#~ msgid "Cut the selected text"
+#~ msgstr "ตัดส่วนที่เลือก"
+
+#~ msgid "Copy the selected text"
+#~ msgstr "คัดลอกส่วนที่เลือก"
+
+#~ msgid "Paste the contents of the clipboard"
+#~ msgstr "แปะเนื้อหาจากคลิปบอร์ด"
+
+#~ msgid "Clear the selected translation"
+#~ msgstr "ล้างคำแปลที่เลือก"
+
+#~ msgid "Copy _Message to Translation"
+#~ msgstr "คัดลอก_ข้อความไปเป็นคำแปล"
+
+#~ msgid "Toggle fuzzy status of a message"
+#~ msgstr "สลับสถานะความคลุมเครือของข้อความ"
+
+#~ msgid "_Message Details"
+#~ msgstr "รายละเอียด_ข้อความ"
+
+#~ msgid "Show the Context panel"
+#~ msgstr "แสดงช่องบริบท"
+
+#~ msgid "_Previous Message"
+#~ msgstr "ข้อความ_ก่อนหน้า"
+
+#~ msgid "Move back one message"
+#~ msgstr "เลื่อนกลับไปหนึ่งข้อความ"
+
+#~ msgid "_Next Message"
+#~ msgstr "ข้อความ_ถัดไป"
+
+#~ msgid "Move forward one message"
+#~ msgstr "เลื่อนไปข้างหน้าหนึ่งข้อความ"
+
+#~ msgid "_Go to Message..."
+#~ msgstr "ไ_ปที่ข้อความ..."
+
+#~ msgid "Jumps to a specific message"
+#~ msgstr "ไปยังข้อความที่กำหนด"
+
+#~ msgid "_First Message"
+#~ msgstr "ข้อความแ_รก"
+
+#~ msgid "Go to the first message"
+#~ msgstr "ไปยังข้อความแรกสุด"
+
+#~ msgid "_Last Message"
+#~ msgstr "ข้อความสุ_ดท้าย"
+
+#~ msgid "Go to the last message"
+#~ msgstr "ไปยังข้อความสุดท้าย"
+
+#~ msgid "Next Fuz_zy"
+#~ msgstr "ข้อความคลุมเค_รือถัดไป"
+
+#~ msgid "Previous Fuzz_y"
+#~ msgstr "ข้อความ_คลุมเครือก่อนหน้า"
+
+#~ msgid "Next _Untranslated"
+#~ msgstr "ข้อความยังไ_ม่แปลถัดไป"
+
+#~ msgid "Previ_ous Untranslated"
+#~ msgstr "ข้อความ_ยังไม่แปลก่อนหน้า"
+
+#~ msgid "Next Fu_zzy or Untranslated"
+#~ msgstr "ข้อความคลุมเครือหรื_อยังไม่แปลถัดไป"
+
+#~ msgid "Go to the next fuzzy or untranslated message"
+#~ msgstr "ไปยังข้อความถัดไปที่คลุมเครือหรือยังไม่ได้แปล"
+
+#~ msgid "Pre_vious Fuzzy or Untranslated"
+#~ msgstr "ข้อความคลุมเครือ_หรือยังไม่แปลก่อนหน้า"
+
+#~ msgid "Go to the previous fuzzy or untranslated message"
+#~ msgstr "ไปยังข้อความก่อนหน้าที่คลุมเครือหรือยังไม่ได้แปล"
+
+#~ msgid "Search for text"
+#~ msgstr "ค้นหาข้อความ"
+
+#~ msgid "Search for and replace text"
+#~ msgstr "ค้นหาและแทนที่ข้อความ"
+
+#~ msgid "_Save All"
+#~ msgstr "_บันทึกทั้งหมด"
+
+#~ msgid "Save all open files"
+#~ msgstr "บันทึกแฟ้มที่เปิดอยู่ทั้งหมด"
+
+#~ msgid "_Close All"
+#~ msgstr "ปิ_ดทั้งหมด"
+
+#~ msgid "Close all open files"
+#~ msgstr "ปิดแฟ้มที่เปิดอยู่ทั้งหมด"
+
+#~ msgid "_Previous Document"
+#~ msgstr "เอกสาร_ก่อนหน้า"
+
+#~ msgid "Activate previous document"
+#~ msgstr "ไปที่เอกสารก่อนหน้า"
+
+#~ msgid "_Next Document"
+#~ msgstr "เอกสาร_ถัดไป"
+
+#~ msgid "Activate next document"
+#~ msgstr "ไปที่เอกสารถัดไป"
+
+#~ msgid "Activate '%s'"
+#~ msgstr "เปิด '%s'"
+
+#~ msgid "%s - gtranslator"
+#~ msgstr "%s - gtranslator"
+
+#~ msgid "gtranslator"
+#~ msgstr "gtranslator"
+
+#~ msgid "Toolbar Editor"
+#~ msgstr "เครื่องมือแก้ไขแถบเครื่องมือ"
+
+#~ msgid "_Header…"
+#~ msgstr "ส่วน_หัว…"
+
+#~ msgid "Show the context panel"
+#~ msgstr "แสดงช่องบริบท"
+
+#~ msgid "_Go to Message…"
+#~ msgstr "ไ_ปยังข้อความ…"
+
+#~ msgid "Show “_%s”"
+#~ msgstr "แสดงแถบ “_%s”"
+
+#~ msgid "_Move on Toolbar"
+#~ msgstr "_ย้ายที่ในแถบเครื่องมือ"
+
+#~ msgid "Move the selected item on the toolbar"
+#~ msgstr "ย้ายรายการที่เลือกในแถบเครื่องมือ"
+
+#~ msgid "_Remove from Toolbar"
+#~ msgstr "_ลบออกจากแถบเครื่องมือ"
+
+#~ msgid "Remove the selected item from the toolbar"
+#~ msgstr "ลบรายการที่เลือกออกจากแถบเครื่องมือ"
+
+#~ msgid "_Delete Toolbar"
+#~ msgstr "_ลบแถบเครื่องมือ"
+
+#~ msgid "Remove the selected toolbar"
+#~ msgstr "ลบแถบเครื่องมือที่เลือก"
+
+#~ msgid "Separator"
+#~ msgstr "เส้นแบ่ง"
 
 #~ msgid "Plugins"
 #~ msgstr "ปลั๊กอิน"
@@ -1788,9 +2016,6 @@ msgstr "เส้นแบ่ง"
 
 #~ msgid "Translation Fields"
 #~ msgstr "ช่องข้อมูลการแปล"
-
-#~ msgid "Message Details"
-#~ msgstr "รายละเอียดข้อความ"
 
 #~ msgid ""
 #~ "<span weight=\"bold\" size=\"large\">Strings added to database</span>"
@@ -1896,9 +2121,6 @@ msgstr "เส้นแบ่ง"
 #~ msgid "Modified"
 #~ msgstr "เปลี่ยนแปลง"
 
-#~ msgid "Deleted"
-#~ msgstr "ลบ"
-
 #~ msgid "<b>Language:</b>"
 #~ msgstr "<b>ภาษา:</b>"
 
@@ -1971,15 +2193,6 @@ msgstr "เส้นแบ่ง"
 #~ msgid "Status: %s"
 #~ msgstr "สถานะ: %s"
 
-#~ msgid "Fuzzy: %d"
-#~ msgstr "คลุมเครือ: %d"
-
-#~ msgid "Untranslated: %d"
-#~ msgstr "ยังไม่แปล: %d"
-
-#~ msgid "The GNOME translation program"
-#~ msgstr "โปรแกรมแปลภาษาสำหรับ GNOME"
-
 #~ msgid "_View/_Bookmarks/"
 #~ msgstr "มุ_มมอง/_ที่คั่นหน้า/"
 
@@ -2026,14 +2239,8 @@ msgstr "เส้นแบ่ง"
 #~ msgid "Should ALL translations from `%s' be removed?"
 #~ msgstr "จะลบคำแปล \"ทั้งหมด\" ออกจาก `%s' หรือไม่?"
 
-#~ msgid "Find in the po file"
-#~ msgstr "หาในแฟ้ม po"
-
 #~ msgid "Enter search string:"
 #~ msgstr "ป้อนข้อความที่จะค้นหา:"
-
-#~ msgid "Case sensitive"
-#~ msgstr "ตัวพิมพ์ใหญ่-เล็กตรงกัน"
 
 #~ msgid "Find in:"
 #~ msgstr "หาใน:"
@@ -2043,9 +2250,6 @@ msgstr "เส้นแบ่ง"
 
 #~ msgid "Ignore hotkeys"
 #~ msgstr "ไม่สนใจปุ่มลัด"
-
-#~ msgid "String to replace:"
-#~ msgstr "ข้อความที่จะค้นหา:"
 
 #~ msgid "Replace string:"
 #~ msgstr "แทนที่ด้วยข้อความ:"
