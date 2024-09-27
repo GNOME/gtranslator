@@ -15,13 +15,13 @@
 # Enrico Nicoletto <liverig@gmail.com>, 2013, 2021.
 # Paulo Rodrigues <paulo@rodrigues.pw>, 2022.
 # Rafael Fontenelle <rafaelff@gnome.org>, 2013-2024.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2024-09-16 00:52+0000\n"
-"PO-Revision-Date: 2024-09-20 23:44-0300\n"
+"POT-Creation-Date: 2024-09-27 05:23+0000\n"
+"PO-Revision-Date: 2024-09-27 16:34-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>\n"
 "Language: pt_BR\n"
@@ -39,7 +39,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:498 src/gtr-window.c:205 src/gtr-window.c:432
+#: src/gtr-application.c:508 src/gtr-window.c:205 src/gtr-window.c:432
 msgid "Translation Editor"
 msgstr "Editor de tradução"
 
@@ -84,7 +84,7 @@ msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Tradução;Editor;Gettext;Escrever;"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:322
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:329
 msgid "New Window"
 msgstr "Nova janela"
 
@@ -304,6 +304,10 @@ msgstr "O arquivo já foi enviado!"
 msgid "Save file as…"
 msgstr "Salvar arquivo como…"
 
+#: src/gtr-application.c:302
+msgid "Fixed plurals"
+msgstr "Plurais corrigidos"
+
 #: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:449
 msgid "_Cancel"
 msgstr "_Cancelar"
@@ -407,15 +411,15 @@ msgstr ""
 msgid "The file has been successfully reserved"
 msgstr "O arquivo foi reservado com sucesso"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:326
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:333
 msgid "Preferences"
 msgstr "Preferências"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:332
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:339
 msgid "Keyboard Shortcuts"
 msgstr "Atalhos de teclado"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:340
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:347
 msgid "About Translation Editor"
 msgstr "Sobre o Editor de Tradução do GNOME"
 
@@ -432,15 +436,15 @@ msgstr "Menu principal"
 msgid "Language"
 msgstr "Idioma"
 
-#: src/gtr-dl-teams.ui:81 src/gtr-header-dialog.ui:143
+#: src/gtr-dl-teams.ui:81 src/gtr-header-dialog.ui:149
 msgid "Module"
 msgstr "Módulo"
 
-#: src/gtr-dl-teams.ui:92 src/gtr-header-dialog.ui:155
+#: src/gtr-dl-teams.ui:92 src/gtr-header-dialog.ui:161
 msgid "Domain"
 msgstr "Domínio"
 
-#: src/gtr-dl-teams.ui:103 src/gtr-header-dialog.ui:149
+#: src/gtr-dl-teams.ui:103 src/gtr-header-dialog.ui:155
 msgid "Branch"
 msgstr "Ramo"
 
@@ -556,7 +560,7 @@ msgstr "Codificação de transferência"
 msgid "Plural form"
 msgstr "Formas de plural"
 
-#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:316
+#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:316
 msgid "Edit Header"
 msgstr "Editar cabeçalho"
 
@@ -564,8 +568,8 @@ msgstr "Editar cabeçalho"
 msgid "Translator"
 msgstr "Tradutor"
 
-#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:74
-#: src/gtr-header-dialog.ui:134 src/gtr-preferences-dialog.ui:13
+#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:80
+#: src/gtr-header-dialog.ui:140 src/gtr-preferences-dialog.ui:13
 msgid "General"
 msgstr "Geral"
 
@@ -601,39 +605,43 @@ msgstr "Conjunto de _caracteres"
 msgid "Enc_oding"
 msgstr "C_odificação"
 
-#: src/gtr-header-dialog.ui:70
+#: src/gtr-header-dialog.ui:64
+msgid "_Plural forms"
+msgstr "Formas de _plural"
+
+#: src/gtr-header-dialog.ui:76
 msgid "Project"
 msgstr "Projeto"
 
-#: src/gtr-header-dialog.ui:77
+#: src/gtr-header-dialog.ui:83
 msgid "Project Id _version"
 msgstr "_Versão de identificação do projeto"
 
-#: src/gtr-header-dialog.ui:83
+#: src/gtr-header-dialog.ui:89
 msgid "Pot _file creation date"
 msgstr "Data de criação do a_rquivo POT"
 
-#: src/gtr-header-dialog.ui:89
+#: src/gtr-header-dialog.ui:95
 msgid "Po file _revision date"
 msgstr "Data de _revisão do arquivo PO"
 
-#: src/gtr-header-dialog.ui:95
+#: src/gtr-header-dialog.ui:101
 msgid "Report message _bugs to"
 msgstr "Relatar e_rros de mensagens para"
 
-#: src/gtr-header-dialog.ui:103
+#: src/gtr-header-dialog.ui:109
 msgid "Comment"
 msgstr "Comentário"
 
-#: src/gtr-header-dialog.ui:130
+#: src/gtr-header-dialog.ui:136
 msgid "Damned Lies"
 msgstr "Damned Lies"
 
-#: src/gtr-header-dialog.ui:137
+#: src/gtr-header-dialog.ui:143
 msgid "Lang"
 msgstr "Idioma"
 
-#: src/gtr-header-dialog.ui:161
+#: src/gtr-header-dialog.ui:167
 msgid "State"
 msgstr "Estado"
 
@@ -873,7 +881,7 @@ msgstr "Token de autenticação _Damned Lies"
 msgid "Build Translation Memory"
 msgstr "Compilar memória de tradução"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:336
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:343
 msgid "Help"
 msgstr "Ajuda"
 
@@ -1041,6 +1049,14 @@ msgstr "_Estado da mensagem"
 #: src/gtr-tab.ui:306
 msgid "_Translated Message"
 msgstr "_Mensagem traduzida"
+
+#: src/gtr-tab.ui:320
+msgid "Advanced Tools"
+msgstr "Ferramentas avançadas"
+
+#: src/gtr-tab.ui:322
+msgid "Fix plural messages"
+msgstr "Corrigir mensagens com plural"
 
 #: src/gtr-upload-dialog.c:147
 msgid "Uploading..."
@@ -1368,9 +1384,6 @@ msgstr ""
 
 #~ msgid "Appearance in the original file"
 #~ msgstr "Aparência no arquivo original"
-
-#~ msgid "Original message"
-#~ msgstr "Mensagem original"
 
 #~ msgid "Translated message"
 #~ msgstr "Mensagem traduzida"
