@@ -191,31 +191,30 @@ gtr_dl_teams_parse_teams_json (GObject *object,
 }
 
 static void
-gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
-                                       GtrDlTeams *self)
+gtr_dl_teams_parse_module_details (GObject *object, GAsyncResult *result, gpointer user_data)
 {
+  GtrDlTeams *self = GTR_DL_TEAMS (user_data);
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  g_autoptr(SoupMessage) msg = NULL;
-  g_autofree gchar *module_endpoint;
-  g_autoptr(JsonParser) parser = NULL;
   gint i;
-  GError *error = NULL;
   JsonNode *node = NULL;
-  JsonObject *object;
+  JsonObject *jobject;
   JsonNode *branchesNode;
   JsonNode *domainsNode;
   AdwDialog *dialog;
-  SoupStatus status_code;
+
+  g_autoptr (GError) error = NULL;
+  g_autoptr(JsonParser) parser = NULL;
   g_autoptr(GInputStream) stream = NULL;
 
-  gtk_widget_set_visible (priv->file_label, FALSE);
-  gtk_widget_set_visible (priv->module_state_label, FALSE);
-  gtk_label_set_text (GTK_LABEL (priv->stats_label), "");
-
-  /* Disable (down)load button */
-  gtk_widget_set_sensitive (priv->branches_combobox, FALSE);
-  gtk_widget_set_sensitive (priv->domains_combobox, FALSE);
-  gtk_widget_set_sensitive (priv->load_button, FALSE);
+  stream = soup_session_send_finish (SOUP_SESSION (object), result, &error);
+  if (error)
+    {
+      dialog = adw_alert_dialog_new (_("Error loading module info"), error->message);
+      adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+      adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
+      adw_dialog_present (dialog, GTK_WIDGET (priv->main_window));
+      return;
+    }
 
   gtk_string_list_splice (
     priv->branches_model,
@@ -223,46 +222,16 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
     g_list_model_get_n_items (G_LIST_MODEL (priv->branches_model)),
     NULL
   );
-
   g_list_store_remove_all (priv->domains_model);
-
-  /* Get module details JSON from DL API */
-  module_endpoint = g_strconcat ((const gchar *)API_URL, "modules/", priv->selected_module, NULL);
-  msg = soup_message_new ("GET", module_endpoint);
-  stream = soup_session_send (priv->soup_session, msg, NULL, &error);
-  status_code = soup_message_get_status (msg);
-
-  if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
-    {
-      g_autofree gchar *message = NULL;
-
-      if (error)
-        {
-          message = error->message;
-          g_clear_error (&error);
-        }
-      else
-        {
-          message = g_strdup (soup_message_get_reason_phrase (msg));
-        }
-
-      dialog = adw_alert_dialog_new (_("Error loading module info"), message);
-      adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
-      adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
-      adw_dialog_present (dialog, GTK_WIDGET (priv->main_window));
-      return;
-    }
-
   parser = json_parser_new ();
 
   /* Load response body and fill branches and domains, then show widgets */
   json_parser_load_from_stream (parser, stream, NULL, &error);
   node = json_parser_get_root (parser);
-
-  object = json_node_get_object(node);
+  jobject = json_node_get_object (node);
 
   /* branches */
-  branchesNode = json_object_get_member (object, "branches");
+  branchesNode = json_object_get_member (jobject, "branches");
 
   if (branchesNode != NULL)
     {
@@ -284,7 +253,7 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
   // TODO: check why there are no branches, display notification to user
 
   /* domains */
-  domainsNode = json_object_get_member (object, "domains");
+  domainsNode = json_object_get_member (jobject, "domains");
 
   if (domainsNode != NULL)
     {
@@ -309,6 +278,30 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
       gtk_widget_set_sensitive (priv->domains_combobox, TRUE);
     }
   // TODO: check why there are no domains and display notification to user
+}
+
+static void
+gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
+                                       GtrDlTeams *self)
+{
+  GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
+
+  g_autoptr(SoupMessage) msg = NULL;
+  g_autofree gchar *module_endpoint;
+
+  gtk_widget_set_visible (priv->file_label, FALSE);
+  gtk_widget_set_visible (priv->module_state_label, FALSE);
+  gtk_label_set_text (GTK_LABEL (priv->stats_label), "");
+
+  /* Disable (down)load button */
+  gtk_widget_set_sensitive (priv->branches_combobox, FALSE);
+  gtk_widget_set_sensitive (priv->domains_combobox, FALSE);
+  gtk_widget_set_sensitive (priv->load_button, FALSE);
+
+  /* Get module details JSON from DL API */
+  module_endpoint = g_strconcat ((const gchar *)API_URL, "modules/", priv->selected_module, NULL);
+  msg = soup_message_new ("GET", module_endpoint);
+  soup_session_send_async (priv->soup_session, msg, G_PRIORITY_DEFAULT, NULL, gtr_dl_teams_parse_module_details, self);
 }
 
 static void
@@ -393,53 +386,26 @@ static void gtr_dl_teams_verify_and_load (GtrDlTeams *self)
 }
 
 static void
-gtr_dl_teams_get_file_info (GtrDlTeams *self)
+gtr_dl_teams_parse_file_info (GObject *object, GAsyncResult *result, gpointer user_data)
 {
+  GtrDlTeams *self = GTR_DL_TEAMS (user_data);
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  gchar *stats_endpoint;
   JsonNode *node = NULL;
-  g_autoptr(JsonParser) parser = NULL;
-  JsonObject *object;
-  g_autoptr(SoupMessage) msg = NULL;
-  GError *error = NULL;
+  JsonObject *jobject;
   JsonNode *stats_node;
   JsonObject *stats_object;
   char *markup;
   AdwDialog *dialog;
-  SoupStatus status_code;
+
+  g_autoptr(JsonParser) parser = NULL;
+  g_autoptr (GError) error = NULL;
   g_autoptr(GInputStream) stream = NULL;
 
-  /* API endpoint: modules/[module]/branches/[branch]/domains/[domain]/languages/[team] */
-  stats_endpoint = g_strconcat ((const gchar *)API_URL,
-                                 "modules/",
-                                 priv->selected_module,
-                                 "/branches/",
-                                 priv->selected_branch,
-                                 "/domains/",
-                                 priv->selected_domain,
-                                 "/languages/",
-                                 priv->selected_lang,
-                                 NULL);
+  stream = soup_session_send_finish (SOUP_SESSION (object), result, &error);
 
-  msg = soup_message_new ("GET", stats_endpoint);
-  stream = soup_session_send (priv->soup_session, msg, NULL, &error);
-  status_code = soup_message_get_status (msg);
-
-  if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
+  if (error)
     {
-      g_autofree gchar *message = NULL;
-
-      if (error)
-        {
-          message = error->message;
-          g_clear_error (&error);
-        }
-      else
-        {
-          message = g_strdup (soup_message_get_reason_phrase (msg));
-        }
-
-      dialog = adw_alert_dialog_new (_("Error loading file info"), message);
+      dialog = adw_alert_dialog_new (_("Error loading file info"), error->message);
       adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
       adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
       adw_dialog_present (dialog, GTK_WIDGET (priv->main_window));
@@ -447,15 +413,13 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
     }
 
   parser = json_parser_new ();
-
   /* Load response body and get path to PO file */
   json_parser_load_from_stream (parser, stream, NULL, &error);
   node = json_parser_get_root (parser);
-
-  object = json_node_get_object(node);
+  jobject = json_node_get_object(node);
 
   /* Save file path; escape the string - slashes inside! */
-  priv->file_path = g_strescape (json_object_get_string_member (object, "po_file"), "");
+  priv->file_path = g_strescape (json_object_get_string_member (jobject, "po_file"), "");
 
   if (!priv->file_path)
     {
@@ -466,7 +430,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
 
   if (priv->module_state)
     g_free (priv->module_state);
-  priv->module_state = g_strdup (json_object_get_string_member (object, "state"));
+  priv->module_state = g_strdup (json_object_get_string_member (jobject, "state"));
 
   if (!priv->module_state)
     {
@@ -475,7 +439,7 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
     }
 
   /* Get file statistics and show them to the user */
-  stats_node = json_object_get_member (object, "statistics");
+  stats_node = json_object_get_member (jobject, "statistics");
   stats_object = json_node_get_object (stats_node);
 
   markup = g_markup_printf_escaped (
@@ -505,6 +469,34 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
     }
 
   g_free (markup);
+}
+
+static void
+gtr_dl_teams_get_file_info (GtrDlTeams *self)
+{
+  GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
+  gchar *stats_endpoint;
+  g_autoptr(SoupMessage) msg = NULL;
+
+  /* API endpoint: modules/[module]/branches/[branch]/domains/[domain]/languages/[team] */
+  stats_endpoint = g_strconcat ((const gchar *)API_URL,
+                                 "modules/",
+                                 priv->selected_module,
+                                 "/branches/",
+                                 priv->selected_branch,
+                                 "/domains/",
+                                 priv->selected_domain,
+                                 "/languages/",
+                                 priv->selected_lang,
+                                 NULL);
+
+  msg = soup_message_new ("GET", stats_endpoint);
+  soup_session_send_async (priv->soup_session,
+                           msg,
+                           G_PRIORITY_DEFAULT,
+                           NULL,
+                           gtr_dl_teams_parse_file_info,
+                           self);
 }
 
 static void
