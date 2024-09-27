@@ -328,6 +328,8 @@ gtr_msg_set_fuzzy (GtrMsg * msg, gboolean fuzzy)
   if (!fuzzy)
     {
       po_message_set_prev_msgid (priv->message, NULL);
+      po_message_set_prev_msgid_plural (priv->message, NULL);
+      po_message_set_prev_msgctxt (priv->message, NULL);
 
     }
   g_object_notify (G_OBJECT (msg), "fuzzy");
