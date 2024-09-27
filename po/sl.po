@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2024-05-21 16:59+0000\n"
-"PO-Revision-Date: 2024-05-27 14:41+0200\n"
+"POT-Creation-Date: 2024-09-27 05:23+0000\n"
+"PO-Revision-Date: 2024-09-27 22:31+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:498 src/gtr-window.c:205 src/gtr-window.c:432
+#: src/gtr-application.c:508 src/gtr-window.c:205 src/gtr-window.c:432
 msgid "Translation Editor"
 msgstr "Urejevalnik prevodov"
 
@@ -69,7 +69,7 @@ msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Urejevalnik;prevodov;prevodi;GTranslator;gettext;pisanje;"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:322
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:329
 msgid "New Window"
 msgstr "Novo okno"
 
@@ -186,13 +186,13 @@ msgid "Source Viewer"
 msgstr "Prikazovalnik kode"
 
 #: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:279
-#: src/gtr-actions-file.c:299 src/gtr-actions-file.c:364
-#: src/gtr-actions-file.c:538 src/gtr-actions-file.c:581
-#: src/gtr-actions-file.c:749 src/gtr-dl-teams.c:157 src/gtr-dl-teams.c:250
-#: src/gtr-dl-teams.c:336 src/gtr-dl-teams.c:443 src/gtr-dl-teams.c:568
-#: src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:593 src/gtr-dl-teams.c:625
-#: src/gtr-dl-teams.c:694 src/gtr-profile-dialog.ui:20 src/gtr-tab.c:348
-#: src/gtr-window.c:159 src/gtr-window.c:332
+#: src/gtr-actions-file.c:299 src/gtr-actions-file.c:341
+#: src/gtr-actions-file.c:368 src/gtr-actions-file.c:542
+#: src/gtr-actions-file.c:585 src/gtr-actions-file.c:753 src/gtr-dl-teams.c:157
+#: src/gtr-dl-teams.c:250 src/gtr-dl-teams.c:336 src/gtr-dl-teams.c:443
+#: src/gtr-dl-teams.c:568 src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:593
+#: src/gtr-dl-teams.c:625 src/gtr-dl-teams.c:694 src/gtr-profile-dialog.ui:20
+#: src/gtr-tab.c:348 src/gtr-window.c:159 src/gtr-window.c:332
 msgid "OK"
 msgstr "V redu"
 
@@ -254,11 +254,11 @@ msgstr "Datoteke ni mogoče shraniti"
 msgid "This file has already been uploaded"
 msgstr "Ta datoteka je že naložena"
 
-#: src/gtr-actions-file.c:351
+#: src/gtr-actions-file.c:355
 msgid "Couldn't upload the file"
 msgstr "Datoteke ni bilo mogoče naložiti"
 
-#: src/gtr-actions-file.c:354
+#: src/gtr-actions-file.c:358
 #, c-format
 msgid ""
 "%s\n"
@@ -269,13 +269,17 @@ msgstr ""
 "%sMorda v svojem profilu niste pravilno nastavili <b>žetona</b> <i>l10n."
 "gnome.org</i> ali nimate ustreznih pravic za nalaganje tega modula."
 
-#: src/gtr-actions-file.c:363
+#: src/gtr-actions-file.c:367
 msgid "The file has been uploaded!"
 msgstr "Datoteka je bila naložena!"
 
-#: src/gtr-actions-file.c:504
+#: src/gtr-actions-file.c:508
 msgid "Save file as…"
 msgstr "Shrani datoteko kot ..."
+
+#: src/gtr-application.c:302
+msgid "Fixed plurals"
+msgstr "Popravljene množinske oblike"
 
 #: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:449
 msgid "_Cancel"
@@ -388,15 +392,15 @@ msgstr ""
 msgid "The file has been successfully reserved"
 msgstr "Datoteka je bila uspešno rezervirana"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:326
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:333
 msgid "Preferences"
 msgstr "Možnosti"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:332
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:339
 msgid "Keyboard Shortcuts"
 msgstr "Tipkovne bližnjice"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:340
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:347
 msgid "About Translation Editor"
 msgstr "O programu Urejevalnik prevodov"
 
@@ -413,15 +417,15 @@ msgstr "Glavni meni"
 msgid "Language"
 msgstr "Jezik"
 
-#: src/gtr-dl-teams.ui:81 src/gtr-header-dialog.ui:143
+#: src/gtr-dl-teams.ui:81 src/gtr-header-dialog.ui:149
 msgid "Module"
 msgstr "Modul"
 
-#: src/gtr-dl-teams.ui:92 src/gtr-header-dialog.ui:155
+#: src/gtr-dl-teams.ui:92 src/gtr-header-dialog.ui:161
 msgid "Domain"
 msgstr "Domena"
 
-#: src/gtr-dl-teams.ui:103 src/gtr-header-dialog.ui:149
+#: src/gtr-dl-teams.ui:103 src/gtr-header-dialog.ui:155
 msgid "Branch"
 msgstr "Veja"
 
@@ -537,7 +541,7 @@ msgstr "Kodiranje prenosa"
 msgid "Plural form"
 msgstr "Množinske oblike"
 
-#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:316
+#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:316
 msgid "Edit Header"
 msgstr "Uredi glavo"
 
@@ -545,8 +549,8 @@ msgstr "Uredi glavo"
 msgid "Translator"
 msgstr "Prevajalec"
 
-#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:74
-#: src/gtr-header-dialog.ui:134 src/gtr-preferences-dialog.ui:13
+#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:80
+#: src/gtr-header-dialog.ui:140 src/gtr-preferences-dialog.ui:13
 msgid "General"
 msgstr "Splošno"
 
@@ -582,39 +586,43 @@ msgstr "Zna_kovni nabor"
 msgid "Enc_oding"
 msgstr "K_odiranje"
 
-#: src/gtr-header-dialog.ui:70
+#: src/gtr-header-dialog.ui:64
+msgid "_Plural forms"
+msgstr "_Množinske oblike"
+
+#: src/gtr-header-dialog.ui:76
 msgid "Project"
 msgstr "Projekt"
 
-#: src/gtr-header-dialog.ui:77
+#: src/gtr-header-dialog.ui:83
 msgid "Project Id _version"
 msgstr "_Različica ID projekta"
 
-#: src/gtr-header-dialog.ui:83
+#: src/gtr-header-dialog.ui:89
 msgid "Pot _file creation date"
 msgstr "Datum ustvarjanja _datoteke .pot"
 
-#: src/gtr-header-dialog.ui:89
+#: src/gtr-header-dialog.ui:95
 msgid "Po file _revision date"
 msgstr "Datum _predelave datoteke .po"
 
-#: src/gtr-header-dialog.ui:95
+#: src/gtr-header-dialog.ui:101
 msgid "Report message _bugs to"
 msgstr "O _hroščih v prevodih poročaj"
 
-#: src/gtr-header-dialog.ui:103
+#: src/gtr-header-dialog.ui:109
 msgid "Comment"
 msgstr "Opomba"
 
-#: src/gtr-header-dialog.ui:130
+#: src/gtr-header-dialog.ui:136
 msgid "Damned Lies"
 msgstr "Presnete laži"
 
-#: src/gtr-header-dialog.ui:137
+#: src/gtr-header-dialog.ui:143
 msgid "Lang"
 msgstr "Jezik"
 
-#: src/gtr-header-dialog.ui:161
+#: src/gtr-header-dialog.ui:167
 msgid "State"
 msgstr "Stanje"
 
@@ -853,7 +861,7 @@ msgstr "_Žeton overjanja Presnetih laži"
 msgid "Build Translation Memory"
 msgstr "Izgradi pomnilnik prevodov"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:336
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:343
 msgid "Help"
 msgstr "Pomoč"
 
@@ -936,30 +944,30 @@ msgid "Plural %d"
 msgstr "Množinska oblika %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1316
+#: src/gtr-tab.c:1319
 msgid "Path:"
 msgstr "Pot:"
 
-#: src/gtr-tab.c:1565
+#: src/gtr-tab.c:1568
 msgid "Copied to clipboard"
 msgstr "Kopirano na odložišče"
 
-#: src/gtr-tab.c:2004
+#: src/gtr-tab.c:2007
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Prevedeno: %0.2f%%"
 
-#: src/gtr-tab.c:2005
+#: src/gtr-tab.c:2008
 #, c-format
 msgid "Translated: %d"
 msgstr "Prevedeno: %d"
 
-#: src/gtr-tab.c:2006
+#: src/gtr-tab.c:2009
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Neprevedeno: %d"
 
-#: src/gtr-tab.c:2007
+#: src/gtr-tab.c:2010
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Ohlapno: %d"
@@ -1020,6 +1028,14 @@ msgstr "Stanje _niza"
 #: src/gtr-tab.ui:306
 msgid "_Translated Message"
 msgstr "_Prevedeni niz"
+
+#: src/gtr-tab.ui:320
+msgid "Advanced Tools"
+msgstr "Napredna orodja"
+
+#: src/gtr-tab.ui:322
+msgid "Fix plural messages"
+msgstr "Popravi sporočila v množini"
 
 #: src/gtr-upload-dialog.c:147
 msgid "Uploading..."
