@@ -86,7 +86,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (GtrDlTeamsDomain, gtr_dl_teams_domain, G_TYPE_OBJECT
 static void gtr_dl_teams_save_combo_selected (GtkWidget *widget, GParamSpec *spec, GtrDlTeams *self);
 static void gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self);
 static void gtr_dl_teams_get_file_info (GtrDlTeams *self);
-static gboolean gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self);
+static void gtr_dl_teams_reserve_for_translation (GtrDlTeams *self);
 
 struct _StringObject {
   GObject parent_instance;
@@ -201,15 +201,20 @@ gtr_dl_teams_parse_module_details (GObject *object, GAsyncResult *result, gpoint
   JsonNode *branchesNode;
   JsonNode *domainsNode;
   AdwDialog *dialog;
+  SoupStatus status_code;
+  SoupMessage *msg = NULL;
 
   g_autoptr (GError) error = NULL;
   g_autoptr(JsonParser) parser = NULL;
   g_autoptr(GInputStream) stream = NULL;
 
   stream = soup_session_send_finish (SOUP_SESSION (object), result, &error);
-  if (error)
+  msg = soup_session_get_async_result_message (SOUP_SESSION (object), result);
+  status_code = soup_message_get_status (msg);
+  if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
     {
-      dialog = adw_alert_dialog_new (_("Error loading module info"), error->message);
+      const char *m = error ? error->message : soup_message_get_reason_phrase (msg);
+      dialog = adw_alert_dialog_new (_("Error loading module info"), m);
       adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
       adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
       adw_dialog_present (dialog, GTK_WIDGET (priv->main_window));
@@ -396,16 +401,20 @@ gtr_dl_teams_parse_file_info (GObject *object, GAsyncResult *result, gpointer us
   JsonObject *stats_object;
   char *markup;
   AdwDialog *dialog;
+  SoupStatus status_code;
+  SoupMessage *msg = NULL;
 
   g_autoptr(JsonParser) parser = NULL;
   g_autoptr (GError) error = NULL;
   g_autoptr(GInputStream) stream = NULL;
 
   stream = soup_session_send_finish (SOUP_SESSION (object), result, &error);
-
-  if (error)
+  msg = soup_session_get_async_result_message (SOUP_SESSION (object), result);
+  status_code = soup_message_get_status (msg);
+  if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
     {
-      dialog = adw_alert_dialog_new (_("Error loading file info"), error->message);
+      const char *m = error ? error->message : soup_message_get_reason_phrase (msg);
+      dialog = adw_alert_dialog_new (_("Error loading file info"), m);
       adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
       adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
       adw_dialog_present (dialog, GTK_WIDGET (priv->main_window));
@@ -500,63 +509,37 @@ gtr_dl_teams_get_file_info (GtrDlTeams *self)
 }
 
 static void
-gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
+gtr_dl_teams_download_file_done (GObject *object, GAsyncResult *result, gpointer user_data)
 {
+  GtrDlTeams *self = GTR_DL_TEAMS (user_data);
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  g_autoptr(SoupMessage) msg = NULL;
-  GError *error = NULL;
-  g_autoptr (GFile) tmp_file = NULL;
-  GFileIOStream *iostream = NULL;
-  GOutputStream *output = NULL;
-  AdwDialog *dialog;
-  gboolean ret = FALSE;
+
   int file_index = 0;
   const char *dest_dir = g_get_user_special_dir (G_USER_DIRECTORY_DOWNLOAD);
+  gboolean ret = FALSE;
+
+  AdwDialog *dialog;
+
+  GFileIOStream *iostream = NULL;
+  GOutputStream *output = NULL;
+  SoupMessage *msg = NULL;
+  SoupStatus status_code;
+
+  g_autoptr (GFile) tmp_file = NULL;
+  g_autoptr(GFile) dest_file = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GBytes) bytes = NULL;
   g_autofree char *basename = NULL;
   g_autofree char *og_basename = NULL;
   g_autofree char *file_path = NULL;
-  g_autoptr(GFile) dest_file = NULL;
-  gboolean reserve_first = FALSE;
-  SoupStatus status_code;
-  g_autoptr (GBytes) bytes = NULL;
 
-  // reserve for translation first
-  reserve_first
-      = adw_switch_row_get_active (ADW_SWITCH_ROW (priv->reserve_button));
-  if (reserve_first)
-    {
-      ret = gtr_dl_teams_reserve_for_translation (priv->reserve_button, self);
-      if (!ret)
-        return;
-
-      if (priv->module_state)
-        g_free (priv->module_state);
-
-      // The reserve was successful, so we should change the module_state to
-      // "Translating"
-      priv->module_state = g_strdup ("Translating");
-    }
-
-  /* Load the file, save as temp; path to file is https://l10n.gnome.org/[priv->file_path] */
-  msg = soup_message_new ("GET", g_strconcat (DL_SERVER, g_strcompress(priv->file_path), NULL));
-  bytes = soup_session_send_and_read (priv->soup_session, msg, NULL, &error);
+  bytes = soup_session_send_and_read_finish (SOUP_SESSION (object), result, &error);
+  msg = soup_session_get_async_result_message (SOUP_SESSION (object), result);
   status_code = soup_message_get_status (msg);
-
   if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
     {
-      g_autofree gchar *message = NULL;
-
-      if (error)
-        {
-          message = error->message;
-          g_clear_error (&error);
-        }
-      else
-        {
-          message = g_strdup (soup_message_get_reason_phrase (msg));
-        }
-
-      dialog = adw_alert_dialog_new (_("Error loading file"), message);
+      const char *m = error ? error->message : soup_message_get_reason_phrase (msg);
+      dialog = adw_alert_dialog_new (_("Error loading file"), m);
       adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
       adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
       adw_dialog_present (dialog, GTK_WIDGET (priv->main_window));
@@ -564,7 +547,6 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
     }
 
   tmp_file = g_file_new_tmp (NULL, &iostream, &error);
-
   if (error != NULL)
     {
       dialog = adw_alert_dialog_new (_("Error creating tmp file"),
@@ -572,20 +554,17 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
       adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
       adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
       adw_dialog_present (dialog, GTK_WIDGET (priv->main_window));
-      g_error_free (error);
       return;
     }
 
   output = g_io_stream_get_output_stream (G_IO_STREAM (iostream));
   g_output_stream_write_bytes (output, bytes, NULL, &error);
-
   if (error != NULL)
     {
       dialog = adw_alert_dialog_new (_("Error writing stream"), error->message);
       adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
       adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
       adw_dialog_present (dialog, GTK_WIDGET (priv->main_window));
-      g_error_free (error);
       return;
     }
 
@@ -617,18 +596,18 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
       adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
       adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
       adw_dialog_present (dialog, GTK_WIDGET (priv->main_window));
-      g_error_free (error);
       return;
     }
 
   if (gtr_open (dest_file, priv->main_window, &error))
     {
+      g_autoptr (GError) po_error = NULL;
+
       GtrTab *tab = gtr_window_get_active_tab (priv->main_window);
       g_info ("The file '%s' has been saved in '%s'", basename, dest_dir);
       gtr_tab_set_info (tab, _("The file has been saved in your Downloads folder"), NULL);
 
       GtrPo *po = gtr_tab_get_po (tab);
-      g_autoptr (GError) po_error = NULL;
       gtr_po_set_dl_info (po, priv->selected_lang, priv->selected_module,
                           priv->selected_branch, priv->selected_domain,
                           priv->module_state);
@@ -637,21 +616,88 @@ gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
     }
 }
 
+static void
+gtr_dl_teams_download_file (GtrDlTeams *self)
+{
+  GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
+  g_autoptr(SoupMessage) msg = NULL;
+
+  /* Load the file, save as temp; path to file is https://l10n.gnome.org/[priv->file_path] */
+  msg = soup_message_new ("GET", g_strconcat (DL_SERVER, g_strcompress(priv->file_path), NULL));
+  soup_session_send_and_read_async (priv->soup_session, msg, G_PRIORITY_DEFAULT, NULL,
+                                    (GAsyncReadyCallback)gtr_dl_teams_download_file_done,
+                                    self);
+}
+
+static void
+gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self)
+{
+  GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
+  gboolean reserve_first = FALSE;
+
+  // reserve for translation first
+  reserve_first = adw_switch_row_get_active (ADW_SWITCH_ROW (priv->reserve_button));
+  if (reserve_first)
+    gtr_dl_teams_reserve_for_translation (self);
+  else
+    gtr_dl_teams_download_file (self);
+}
+
+static void
+gtr_dl_teams_reserve_for_translation_done (GObject *object, GAsyncResult *result, gpointer user_data)
+{
+  GtrDlTeams *self = GTR_DL_TEAMS (user_data);
+  GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
+  AdwDialog *dialog;
+  SoupStatus status_code;
+  SoupMessage *msg = NULL;
+
+  g_autoptr (GError) error = NULL;
+
+  soup_session_send_finish (SOUP_SESSION (object), result, &error);
+  msg = soup_session_get_async_result_message (SOUP_SESSION (object), result);
+  status_code = soup_message_get_status (msg);
+  if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
+    {
+      dialog = adw_alert_dialog_new (_("Could not reserve module"), NULL);
+      adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+      adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
+      adw_alert_dialog_format_body (ADW_ALERT_DIALOG (dialog),
+        _(
+          "%s\n"
+          "Maybe you've not configured your l10n.gnome.org "
+          "token correctly in your profile or you don't have "
+          "permissions to reserve this module."
+        ),
+        error ? error->message : soup_message_get_reason_phrase (msg));
+      adw_dialog_present (dialog, GTK_WIDGET (priv->main_window));
+      return;
+   }
+
+  gtk_widget_set_sensitive (priv->reserve_button, FALSE);
+  gtr_window_add_toast_msg (GTR_WINDOW (priv->main_window),
+                            _("The file has been successfully reserved"));
+
+  // The reserve was successful, so we should change the module_state to
+  // "Translating"
+  if (priv->module_state)
+    g_free (priv->module_state);
+  priv->module_state = g_strdup ("Translating");
+
+  // After reserve we always download
+  gtr_dl_teams_download_file (self);
+}
+
 /* Reserve for translation */
-static gboolean
-gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
+static void
+gtr_dl_teams_reserve_for_translation (GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   GtrProfileManager *pmanager = NULL;
   GtrProfile *profile = NULL;
-  AdwDialog *dialog;
   const char *auth_token = NULL;
-  SoupStatus status_code;
-  g_autoptr (GError) error = NULL;
 
   g_autoptr (SoupMessage) msg = NULL;
-  g_autoptr(GInputStream) stream = NULL;
-  g_autofree gchar *message = NULL;
   g_autofree char *auth = NULL;
   g_autofree gchar *reserve_endpoint = NULL;
 
@@ -672,36 +718,7 @@ gtr_dl_teams_reserve_for_translation (GtkWidget *button, GtrDlTeams *self)
   soup_message_set_flags (msg, SOUP_MESSAGE_NO_REDIRECT);
   soup_message_headers_append (soup_message_get_request_headers (msg),
                                "Authentication", auth);
-  stream = soup_session_send (priv->soup_session, msg, NULL, &error);
-  status_code = soup_message_get_status (msg);
-
-  if (error || !SOUP_STATUS_IS_SUCCESSFUL (status_code))
-  {
-    if (error)
-      message = error->message;
-    else
-      message = g_strdup (soup_message_get_reason_phrase (msg));
-
-    dialog = adw_alert_dialog_new (_("Could not reserve module"), NULL);
-    adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
-    adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
-    adw_alert_dialog_format_body (ADW_ALERT_DIALOG (dialog),
-      _(
-        "%s\n"
-        "Maybe you've not configured your l10n.gnome.org "
-        "token correctly in your profile or you don't have "
-        "permissions to reserve this module."
-      ),
-      message);
-    adw_dialog_present (dialog, GTK_WIDGET (priv->main_window));
-    return FALSE;
-  }
-
-  gtk_widget_set_sensitive (priv->reserve_button, FALSE);
-  gtr_window_add_toast_msg (GTR_WINDOW (priv->main_window),
-                            _("The file has been successfully reserved"));
-
-  return TRUE;
+  soup_session_send_async (priv->soup_session, msg, G_PRIORITY_DEFAULT, NULL, gtr_dl_teams_reserve_for_translation_done, self);
 }
 
 static void
