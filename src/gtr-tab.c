@@ -140,7 +140,6 @@ enum
 enum
 {
   PROP_0,
-  PROP_NAME,
   PROP_AUTOSAVE,
   PROP_AUTOSAVE_INTERVAL
 };
@@ -937,15 +936,6 @@ gtr_tab_class_init (GtrTabClass * klass)
 
   /* Properties */
   g_object_class_install_property (object_class,
-                                   PROP_NAME,
-                                   g_param_spec_string ("name",
-                                                        "Name",
-                                                        "The tab's name",
-                                                        NULL,
-                                                        G_PARAM_READABLE |
-                                                        G_PARAM_STATIC_STRINGS));
-
-  g_object_class_install_property (object_class,
                                    PROP_AUTOSAVE,
                                    g_param_spec_boolean ("autosave",
                                                          "Autosave",
@@ -1268,37 +1258,6 @@ gtr_tab_message_go_to (GtrTab * tab,
       // message-table
       g_idle_add ((GSourceFunc)msg_grab_focus, tab);
     }
-}
-
-/**
- * _gtr_tab_get_name:
- * @tab: a #GtrTab 
- * 
- * Return value: a new allocated string with the name of the @tab.
- */
-gchar *
-_gtr_tab_get_name (GtrTab *tab)
-{
-  GtrHeader *header;
-  GtrPoState state;
-  GtrTabPrivate *priv;
-  const gchar *str;
-  gchar *tab_name;
-
-  priv = gtr_tab_get_instance_private (tab);
-
-  header = gtr_po_get_header (priv->po);
-  state = gtr_po_get_state (priv->po);
-
-  str = gtr_header_get_prj_id_version (header);
-
-  if (state == GTR_PO_STATE_MODIFIED)
-    {
-      tab_name = g_strdup_printf ("*%s", str);
-      return tab_name;
-    }
-
-  return g_strdup (str);
 }
 
 gchar *
