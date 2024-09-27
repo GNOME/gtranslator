@@ -294,6 +294,15 @@ edit_header_activated (GSimpleAction *action,
 }
 
 static void
+fix_plurals_activated (GSimpleAction *action, GVariant *parameter,
+                       gpointer user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  gtr_actions_fix_plurals (get_active_window (app));
+  gtr_window_add_toast_msg (get_active_window (app), _("Fixed plurals"));
+}
+
+static void
 clear_msgstr_activated (GSimpleAction *action,
                         GVariant      *parameter,
                         gpointer       user_data)
@@ -479,6 +488,7 @@ static GActionEntry app_entries[]
         { "new-window", new_window_activated, NULL, NULL, NULL },
         { "preferences", preferences_activated, NULL, NULL, NULL },
         { "edit_header", edit_header_activated, NULL, NULL, NULL },
+        { "fix-plurals", fix_plurals_activated, NULL, NULL, NULL },
         { "clear_msgstr", clear_msgstr_activated, NULL, NULL, NULL },
         { "help", help_activated, NULL, NULL, NULL },
         { "about", about_activated, NULL, NULL, NULL },

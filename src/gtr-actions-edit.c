@@ -140,3 +140,27 @@ gtr_actions_edit_clear (GtrWindow * window)
 
   gtr_tab_clear_msgstr_views (tab);
 }
+
+void
+gtr_actions_fix_plurals (GtrWindow *window)
+{
+  GtrTab *current = NULL;
+  GtrPo *po = NULL;
+  GList *msg_list = NULL;
+  GtrHeader *header = NULL;
+  int plurals = 0;
+
+  current = gtr_window_get_active_tab (window);
+  po = gtr_tab_get_po (current);
+  header = gtr_po_get_header (po);
+  msg_list = gtr_po_get_messages (po);
+  plurals = gtr_header_get_nplurals (header);
+
+  // TODO: Show a confirmation dialog
+
+  for (; msg_list; msg_list = g_list_next (msg_list))
+    {
+      GtrMsg *msg = GTR_MSG (msg_list->data);
+      gtr_msg_fix_plurals (msg, plurals);
+    }
+}
