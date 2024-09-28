@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2024-05-21 16:59+0000\n"
-"PO-Revision-Date: 2024-05-22 11:19+0300\n"
+"POT-Creation-Date: 2024-09-27 05:23+0000\n"
+"PO-Revision-Date: 2024-09-28 21:11+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
-"Language-Team: Ukrainian\n"
+"Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:498 src/gtr-window.c:205 src/gtr-window.c:432
+#: src/gtr-application.c:508 src/gtr-window.c:205 src/gtr-window.c:432
 msgid "Translation Editor"
 msgstr "Редактор перекладів"
 
@@ -71,7 +71,7 @@ msgstr ""
 "інтерфейс;мова;"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:322
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:329
 msgid "New Window"
 msgstr "Нове вікно"
 
@@ -177,21 +177,21 @@ msgid ""
 "“original-text” and “translated-text”."
 msgstr ""
 "Порядок сортування списку повідомлень. Можливі значення «status» (стан), "
-"«id» (ідентифікатор), «original-text» (початковий текст) і «translated-"
-"text» (текст перекладу)."
+"«id» (ідентифікатор), «original-text» (початковий текст) і «translated-text» "
+"(текст перекладу)."
 
 #: src/codeview/gtr-viewer.c:100
 msgid "Source Viewer"
 msgstr "Переглядач джерельного коду"
 
 #: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:279
-#: src/gtr-actions-file.c:299 src/gtr-actions-file.c:364
-#: src/gtr-actions-file.c:538 src/gtr-actions-file.c:581
-#: src/gtr-actions-file.c:749 src/gtr-dl-teams.c:157 src/gtr-dl-teams.c:250
-#: src/gtr-dl-teams.c:336 src/gtr-dl-teams.c:443 src/gtr-dl-teams.c:568
-#: src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:593 src/gtr-dl-teams.c:625
-#: src/gtr-dl-teams.c:694 src/gtr-profile-dialog.ui:20 src/gtr-tab.c:348
-#: src/gtr-window.c:159 src/gtr-window.c:332
+#: src/gtr-actions-file.c:299 src/gtr-actions-file.c:341
+#: src/gtr-actions-file.c:368 src/gtr-actions-file.c:542
+#: src/gtr-actions-file.c:585 src/gtr-actions-file.c:753 src/gtr-dl-teams.c:157
+#: src/gtr-dl-teams.c:250 src/gtr-dl-teams.c:336 src/gtr-dl-teams.c:443
+#: src/gtr-dl-teams.c:568 src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:593
+#: src/gtr-dl-teams.c:625 src/gtr-dl-teams.c:694 src/gtr-profile-dialog.ui:20
+#: src/gtr-tab.c:348 src/gtr-window.c:159 src/gtr-window.c:332
 msgid "OK"
 msgstr "Гаразд"
 
@@ -243,7 +243,6 @@ msgid "Open file for translation"
 msgstr "Відкрити файл для перекладу"
 
 #: src/gtr-actions-file.c:278
-#| msgid "Could not Save"
 msgid "Could not save file"
 msgstr "Не вдалося зберегти файл"
 
@@ -251,11 +250,11 @@ msgstr "Не вдалося зберегти файл"
 msgid "This file has already been uploaded"
 msgstr "Цей файл вже вивантажено"
 
-#: src/gtr-actions-file.c:351
+#: src/gtr-actions-file.c:355
 msgid "Couldn't upload the file"
 msgstr "Не вдалося вивантажити файл"
 
-#: src/gtr-actions-file.c:354
+#: src/gtr-actions-file.c:358
 #, c-format
 msgid ""
 "%s\n"
@@ -267,13 +266,17 @@ msgstr ""
 "Можливо, ви не налаштувати ваш <i>l10n.gnome.org</i>-<b>жетон</b> у вашому "
 "профілі або ви не маєте прав доступу до вивантаження цього модуля."
 
-#: src/gtr-actions-file.c:363
+#: src/gtr-actions-file.c:367
 msgid "The file has been uploaded!"
 msgstr "Файл вивантажено!"
 
-#: src/gtr-actions-file.c:504
+#: src/gtr-actions-file.c:508
 msgid "Save file as…"
 msgstr "Зберегти файл як…"
+
+#: src/gtr-application.c:302
+msgid "Fixed plurals"
+msgstr "Виправлено форми множини"
 
 #: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:449
 msgid "_Cancel"
@@ -377,15 +380,15 @@ msgstr ""
 msgid "The file has been successfully reserved"
 msgstr "Файл успішно зарезервовано"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:326
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:333
 msgid "Preferences"
 msgstr "Налаштування"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:332
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:339
 msgid "Keyboard Shortcuts"
 msgstr "Клавіатурні скорочення"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:340
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:347
 msgid "About Translation Editor"
 msgstr "Про «Редактор перекладів»"
 
@@ -402,15 +405,15 @@ msgstr "Головне меню"
 msgid "Language"
 msgstr "Мова"
 
-#: src/gtr-dl-teams.ui:81 src/gtr-header-dialog.ui:143
+#: src/gtr-dl-teams.ui:81 src/gtr-header-dialog.ui:149
 msgid "Module"
 msgstr "Модуль"
 
-#: src/gtr-dl-teams.ui:92 src/gtr-header-dialog.ui:155
+#: src/gtr-dl-teams.ui:92 src/gtr-header-dialog.ui:161
 msgid "Domain"
 msgstr "Домен"
 
-#: src/gtr-dl-teams.ui:103 src/gtr-header-dialog.ui:149
+#: src/gtr-dl-teams.ui:103 src/gtr-header-dialog.ui:155
 msgid "Branch"
 msgstr "Гілка"
 
@@ -527,7 +530,7 @@ msgstr "Кодування перенесення"
 msgid "Plural form"
 msgstr "Форма множини"
 
-#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:316
+#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:316
 msgid "Edit Header"
 msgstr "Змінити заголовок"
 
@@ -535,8 +538,8 @@ msgstr "Змінити заголовок"
 msgid "Translator"
 msgstr "Перекладач"
 
-#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:74
-#: src/gtr-header-dialog.ui:134 src/gtr-preferences-dialog.ui:13
+#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:80
+#: src/gtr-header-dialog.ui:140 src/gtr-preferences-dialog.ui:13
 msgid "General"
 msgstr "Головне"
 
@@ -572,39 +575,44 @@ msgstr "Набір _символів"
 msgid "Enc_oding"
 msgstr "Код_ування"
 
-#: src/gtr-header-dialog.ui:70
+#: src/gtr-header-dialog.ui:64
+#| msgid "Plural forms"
+msgid "_Plural forms"
+msgstr "_Форми множини"
+
+#: src/gtr-header-dialog.ui:76
 msgid "Project"
 msgstr "Проект"
 
-#: src/gtr-header-dialog.ui:77
+#: src/gtr-header-dialog.ui:83
 msgid "Project Id _version"
 msgstr "_Версія проекту"
 
-#: src/gtr-header-dialog.ui:83
+#: src/gtr-header-dialog.ui:89
 msgid "Pot _file creation date"
 msgstr "Дата створення pot-_файла"
 
-#: src/gtr-header-dialog.ui:89
+#: src/gtr-header-dialog.ui:95
 msgid "Po file _revision date"
 msgstr "Дата _зміни po-файла"
 
-#: src/gtr-header-dialog.ui:95
+#: src/gtr-header-dialog.ui:101
 msgid "Report message _bugs to"
 msgstr "Відправляти звіт про _помилки до"
 
-#: src/gtr-header-dialog.ui:103
+#: src/gtr-header-dialog.ui:109
 msgid "Comment"
 msgstr "Коментар"
 
-#: src/gtr-header-dialog.ui:130
+#: src/gtr-header-dialog.ui:136
 msgid "Damned Lies"
 msgstr "Damned Lies"
 
-#: src/gtr-header-dialog.ui:137
+#: src/gtr-header-dialog.ui:143
 msgid "Lang"
 msgstr "Мова"
 
-#: src/gtr-header-dialog.ui:161
+#: src/gtr-header-dialog.ui:167
 msgid "State"
 msgstr "Стан"
 
@@ -843,7 +851,7 @@ msgstr "_Жетон розпізнавання DL"
 msgid "Build Translation Memory"
 msgstr "Зібрати пам'ять перекладів"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:336
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:343
 msgid "Help"
 msgstr "Довідка"
 
@@ -927,30 +935,30 @@ msgid "Plural %d"
 msgstr "Форма множини %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1316
+#: src/gtr-tab.c:1319
 msgid "Path:"
 msgstr "Шлях:"
 
-#: src/gtr-tab.c:1565
+#: src/gtr-tab.c:1568
 msgid "Copied to clipboard"
 msgstr "Скопійовано до буфера обміну"
 
-#: src/gtr-tab.c:2004
+#: src/gtr-tab.c:2007
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Перекладено: %0.2f%%"
 
-#: src/gtr-tab.c:2005
+#: src/gtr-tab.c:2008
 #, c-format
 msgid "Translated: %d"
 msgstr "Перекладених: %d"
 
-#: src/gtr-tab.c:2006
+#: src/gtr-tab.c:2009
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Неперекладених: %d"
 
-#: src/gtr-tab.c:2007
+#: src/gtr-tab.c:2010
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Неточних: %d"
@@ -1011,6 +1019,15 @@ msgstr "Ст_ан повідомлення"
 #: src/gtr-tab.ui:306
 msgid "_Translated Message"
 msgstr "П_ерекладене повідомлення"
+
+#: src/gtr-tab.ui:320
+msgid "Advanced Tools"
+msgstr "Додаткові інструменти"
+
+#: src/gtr-tab.ui:322
+#| msgid "Original message"
+msgid "Fix plural messages"
+msgstr "Виправити повідомлення із формами множини"
 
 #: src/gtr-upload-dialog.c:147
 msgid "Uploading..."
@@ -1313,9 +1330,6 @@ msgstr ""
 
 #~ msgid "Appearance in the original file"
 #~ msgstr "Вигляд початкового файла"
-
-#~ msgid "Original message"
-#~ msgstr "Первісне повідомлення"
 
 #~ msgid "Translated message"
 #~ msgstr "Перекладене повідомлення"
