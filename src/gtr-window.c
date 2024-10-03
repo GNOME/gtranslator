@@ -415,6 +415,7 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   GtrTab *tab;
   AdwNavigationPage *page;
 
+  gtr_window_remove_tab (window);
   tab = gtr_tab_new (po, GTK_WINDOW (window));
   priv->active_tab = tab;
 

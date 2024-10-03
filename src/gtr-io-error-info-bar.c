@@ -59,6 +59,7 @@ handle_info_bar_response (AdwToast *toast,
     {
       show_info_bar (tab);
     }
+  g_object_unref (tab);
 }
 
 static void
@@ -75,6 +76,9 @@ show_info_bar (GtrTab * tab)
     toast = adw_toast_new_format ("%s", primary_text);
 
   adw_toast_set_timeout (toast, 0);
+  // Increase reference for tab, to avoid segfault on dismissed if tab
+  // is removed
+  g_object_ref (tab);
   g_signal_connect (G_OBJECT (toast), "dismissed",
                     G_CALLBACK (handle_info_bar_response), tab);
   gtr_window_add_toast (GTR_WINDOW (gtr_tab_get_window (tab)), toast);
