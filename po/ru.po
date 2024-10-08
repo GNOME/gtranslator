@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator 1.9.9\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2024-05-28 08:03+0000\n"
-"PO-Revision-Date: 2024-06-01 00:39+1000\n"
+"POT-Creation-Date: 2024-09-27 05:23+0000\n"
+"PO-Revision-Date: 2024-09-30 13:11+1000\n"
 "Last-Translator: Ser82-png <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -25,7 +25,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:498 src/gtr-window.c:205 src/gtr-window.c:432
+#: src/gtr-application.c:508 src/gtr-window.c:205 src/gtr-window.c:432
 msgid "Translation Editor"
 msgstr "Редактор переводов"
 
@@ -67,7 +67,7 @@ msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Translation;Editor;Gettext;Write;Перевод;Редактор;Писать;"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:322
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:329
 msgid "New Window"
 msgstr "Новое окно"
 
@@ -187,13 +187,13 @@ msgid "Source Viewer"
 msgstr "Просмотр исходного кода"
 
 #: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:279
-#: src/gtr-actions-file.c:299 src/gtr-actions-file.c:364
-#: src/gtr-actions-file.c:538 src/gtr-actions-file.c:581
-#: src/gtr-actions-file.c:749 src/gtr-dl-teams.c:157 src/gtr-dl-teams.c:250
-#: src/gtr-dl-teams.c:336 src/gtr-dl-teams.c:443 src/gtr-dl-teams.c:568
-#: src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:593 src/gtr-dl-teams.c:625
-#: src/gtr-dl-teams.c:694 src/gtr-profile-dialog.ui:20 src/gtr-tab.c:348
-#: src/gtr-window.c:159 src/gtr-window.c:332
+#: src/gtr-actions-file.c:299 src/gtr-actions-file.c:341
+#: src/gtr-actions-file.c:368 src/gtr-actions-file.c:542
+#: src/gtr-actions-file.c:585 src/gtr-actions-file.c:753 src/gtr-dl-teams.c:157
+#: src/gtr-dl-teams.c:250 src/gtr-dl-teams.c:336 src/gtr-dl-teams.c:443
+#: src/gtr-dl-teams.c:568 src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:593
+#: src/gtr-dl-teams.c:625 src/gtr-dl-teams.c:694 src/gtr-profile-dialog.ui:20
+#: src/gtr-tab.c:348 src/gtr-window.c:159 src/gtr-window.c:332
 msgid "OK"
 msgstr "OK"
 
@@ -253,11 +253,11 @@ msgstr "Не удалось сохранить файл"
 msgid "This file has already been uploaded"
 msgstr "Этот файл уже был выгружен"
 
-#: src/gtr-actions-file.c:351
+#: src/gtr-actions-file.c:355
 msgid "Couldn't upload the file"
 msgstr "Не удалось выгрузить файл"
 
-#: src/gtr-actions-file.c:354
+#: src/gtr-actions-file.c:358
 #, c-format
 msgid ""
 "%s\n"
@@ -269,13 +269,17 @@ msgstr ""
 "Возможно вы не настроили <b>токен</b> <i>l10n.gnome.org</i> в своём профиле "
 "или у вас нет разрешения на выгрузку этого модуля."
 
-#: src/gtr-actions-file.c:363
+#: src/gtr-actions-file.c:367
 msgid "The file has been uploaded!"
 msgstr "Файл выгружен!"
 
-#: src/gtr-actions-file.c:504
+#: src/gtr-actions-file.c:508
 msgid "Save file as…"
 msgstr "Сохранить файл как…"
+
+#: src/gtr-application.c:302
+msgid "Fixed plurals"
+msgstr "Исправлены формы множественного числа"
 
 #: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:449
 msgid "_Cancel"
@@ -384,15 +388,15 @@ msgstr ""
 msgid "The file has been successfully reserved"
 msgstr "Файл был успешно зарезервирован"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:326
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:333
 msgid "Preferences"
 msgstr "Параметры"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:332
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:339
 msgid "Keyboard Shortcuts"
 msgstr "Комбинации клавиш"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:340
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:347
 msgid "About Translation Editor"
 msgstr "О приложении"
 
@@ -409,15 +413,15 @@ msgstr "Главное меню"
 msgid "Language"
 msgstr "Язык"
 
-#: src/gtr-dl-teams.ui:81 src/gtr-header-dialog.ui:143
+#: src/gtr-dl-teams.ui:81 src/gtr-header-dialog.ui:149
 msgid "Module"
 msgstr "Модуль"
 
-#: src/gtr-dl-teams.ui:92 src/gtr-header-dialog.ui:155
+#: src/gtr-dl-teams.ui:92 src/gtr-header-dialog.ui:161
 msgid "Domain"
 msgstr "Домен"
 
-#: src/gtr-dl-teams.ui:103 src/gtr-header-dialog.ui:149
+#: src/gtr-dl-teams.ui:103 src/gtr-header-dialog.ui:155
 msgid "Branch"
 msgstr "Ветка"
 
@@ -533,7 +537,7 @@ msgstr "Кодировка для передачи"
 msgid "Plural form"
 msgstr "Множественные формы"
 
-#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:316
+#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:316
 msgid "Edit Header"
 msgstr "Правка заголовка"
 
@@ -541,8 +545,8 @@ msgstr "Правка заголовка"
 msgid "Translator"
 msgstr "Переводчик"
 
-#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:74
-#: src/gtr-header-dialog.ui:134 src/gtr-preferences-dialog.ui:13
+#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:80
+#: src/gtr-header-dialog.ui:140 src/gtr-preferences-dialog.ui:13
 msgid "General"
 msgstr "Общие"
 
@@ -578,39 +582,43 @@ msgstr "_Набор символов"
 msgid "Enc_oding"
 msgstr "_Кодировка"
 
-#: src/gtr-header-dialog.ui:70
+#: src/gtr-header-dialog.ui:64
+msgid "_Plural forms"
+msgstr "Формы _множественного числа"
+
+#: src/gtr-header-dialog.ui:76
 msgid "Project"
 msgstr "Проект"
 
-#: src/gtr-header-dialog.ui:77
+#: src/gtr-header-dialog.ui:83
 msgid "Project Id _version"
 msgstr "В_ерсия Id проекта"
 
-#: src/gtr-header-dialog.ui:83
+#: src/gtr-header-dialog.ui:89
 msgid "Pot _file creation date"
 msgstr "Дата _создания pot-файла"
 
-#: src/gtr-header-dialog.ui:89
+#: src/gtr-header-dialog.ui:95
 msgid "Po file _revision date"
 msgstr "Дата _обновления po-файла"
 
-#: src/gtr-header-dialog.ui:95
+#: src/gtr-header-dialog.ui:101
 msgid "Report message _bugs to"
 msgstr "_Куда сообщать об ошибках"
 
-#: src/gtr-header-dialog.ui:103
+#: src/gtr-header-dialog.ui:109
 msgid "Comment"
 msgstr "Комментарий"
 
-#: src/gtr-header-dialog.ui:130
+#: src/gtr-header-dialog.ui:136
 msgid "Damned Lies"
 msgstr "Damned Lies"
 
-#: src/gtr-header-dialog.ui:137
+#: src/gtr-header-dialog.ui:143
 msgid "Lang"
 msgstr "Язык"
 
-#: src/gtr-header-dialog.ui:161
+#: src/gtr-header-dialog.ui:167
 msgid "State"
 msgstr "Статус"
 
@@ -849,7 +857,7 @@ msgstr "Токен аутентификации _Damned Lies"
 msgid "Build Translation Memory"
 msgstr "Создать память переводов"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:336
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:343
 msgid "Help"
 msgstr "Справка"
 
@@ -932,30 +940,30 @@ msgid "Plural %d"
 msgstr "Множественное число (%d)"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1316
+#: src/gtr-tab.c:1319
 msgid "Path:"
 msgstr "Путь:"
 
-#: src/gtr-tab.c:1565
+#: src/gtr-tab.c:1568
 msgid "Copied to clipboard"
 msgstr "Скопировано в буфер обмена"
 
-#: src/gtr-tab.c:2004
+#: src/gtr-tab.c:2007
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Переведено: %0.2f%%"
 
-#: src/gtr-tab.c:2005
+#: src/gtr-tab.c:2008
 #, c-format
 msgid "Translated: %d"
 msgstr "Переведено: %d"
 
-#: src/gtr-tab.c:2006
+#: src/gtr-tab.c:2009
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Не переведено: %d"
 
-#: src/gtr-tab.c:2007
+#: src/gtr-tab.c:2010
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Неточных: %d"
@@ -1016,6 +1024,14 @@ msgstr "Статусу _сообщения"
 #: src/gtr-tab.ui:306
 msgid "_Translated Message"
 msgstr "Тексту _перевода"
+
+#: src/gtr-tab.ui:320
+msgid "Advanced Tools"
+msgstr "Дополнительные инструменты"
+
+#: src/gtr-tab.ui:322
+msgid "Fix plural messages"
+msgstr "Исправить сообщения с формами множественного числа"
 
 #: src/gtr-upload-dialog.c:147
 msgid "Uploading..."
@@ -1322,9 +1338,6 @@ msgstr ""
 
 #~ msgid "Appearance in the original file"
 #~ msgstr "По порядку появления в файле перевода"
-
-#~ msgid "Original message"
-#~ msgstr "По исходному тексту"
 
 #~ msgid "Translated message"
 #~ msgstr "По переводу"
