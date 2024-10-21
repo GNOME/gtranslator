@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.26\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2024-07-29 20:49+0000\n"
-"PO-Revision-Date: 2024-09-03 19:34+0100\n"
+"POT-Creation-Date: 2024-09-27 05:23+0000\n"
+"PO-Revision-Date: 2024-10-21 14:51+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.gnome.org/languages/pt/>\n"
 "Language: pt\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-DL-Lang: pt\n"
 "X-DL-Module: gtranslator\n"
 "X-DL-Branch: master\n"
@@ -33,7 +33,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:498 src/gtr-window.c:205 src/gtr-window.c:432
+#: src/gtr-application.c:508 src/gtr-window.c:205 src/gtr-window.c:432
 msgid "Translation Editor"
 msgstr "Editor de Traduções"
 
@@ -77,7 +77,7 @@ msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Tradução;Editor;Gettext;Gravar;"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:322
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:329
 msgid "New Window"
 msgstr "Nova janela"
 
@@ -290,6 +290,10 @@ msgstr "Este ficheiro já foi enviado!"
 msgid "Save file as…"
 msgstr "Gravar ficheiro como…"
 
+#: src/gtr-application.c:302
+msgid "Fixed plurals"
+msgstr "Plurais corrigidos"
+
 #: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:449
 msgid "_Cancel"
 msgstr "_Cancelar"
@@ -393,15 +397,15 @@ msgstr ""
 msgid "The file has been successfully reserved"
 msgstr "O ficheiro foi reservado com sucesso"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:326
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:333
 msgid "Preferences"
 msgstr "Preferências"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:332
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:339
 msgid "Keyboard Shortcuts"
-msgstr "Atalhos de teclado"
+msgstr "Teclas de atalho"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:340
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:347
 msgid "About Translation Editor"
 msgstr "Acerca do Editor de Traduções"
 
@@ -418,15 +422,15 @@ msgstr "Menu Principal"
 msgid "Language"
 msgstr "Idioma"
 
-#: src/gtr-dl-teams.ui:81 src/gtr-header-dialog.ui:143
+#: src/gtr-dl-teams.ui:81 src/gtr-header-dialog.ui:149
 msgid "Module"
 msgstr "Módulo"
 
-#: src/gtr-dl-teams.ui:92 src/gtr-header-dialog.ui:155
+#: src/gtr-dl-teams.ui:92 src/gtr-header-dialog.ui:161
 msgid "Domain"
 msgstr "Domínio"
 
-#: src/gtr-dl-teams.ui:103 src/gtr-header-dialog.ui:149
+#: src/gtr-dl-teams.ui:103 src/gtr-header-dialog.ui:155
 msgid "Branch"
 msgstr "Ramo"
 
@@ -512,7 +516,7 @@ msgstr "Correio electrónico do tradutor"
 
 #: src/gtr-greeter.ui:97
 msgid "Translation team email"
-msgstr "Correio electrónico da equipa de tradução"
+msgstr "Correio eletrónico da equipa de tradução"
 
 #: src/gtr-greeter.ui:120 src/gtr-greeter.ui:131
 msgid "Confirmation"
@@ -520,7 +524,7 @@ msgstr "Confirmação"
 
 #: src/gtr-greeter.ui:154
 msgid "Team email"
-msgstr "Correio electrónico da equipa"
+msgstr "Correio eletrónico da equipa"
 
 #: src/gtr-greeter.ui:159
 msgid "Language name"
@@ -532,7 +536,7 @@ msgstr "Código de idioma"
 
 #: src/gtr-greeter.ui:169 src/gtr-languages-fetcher.ui:41
 msgid "Character set"
-msgstr "Conjunto de caractere"
+msgstr "Conjunto de caracteres"
 
 #: src/gtr-greeter.ui:174 src/gtr-languages-fetcher.ui:61
 msgid "Transfer encoding"
@@ -542,7 +546,7 @@ msgstr "Codificação de transferência"
 msgid "Plural form"
 msgstr "Formas plurais"
 
-#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:316
+#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:316
 msgid "Edit Header"
 msgstr "Editar cabeçalho"
 
@@ -550,8 +554,8 @@ msgstr "Editar cabeçalho"
 msgid "Translator"
 msgstr "Tradutor"
 
-#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:74
-#: src/gtr-header-dialog.ui:134 src/gtr-preferences-dialog.ui:13
+#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:80
+#: src/gtr-header-dialog.ui:140 src/gtr-preferences-dialog.ui:13
 msgid "General"
 msgstr "Geral"
 
@@ -565,7 +569,7 @@ msgstr "_Nome do tradutor"
 
 #: src/gtr-header-dialog.ui:28
 msgid "Translator’s _email"
-msgstr "Corr_eio electrónico do tradutor"
+msgstr "Corr_eio eletrónico do tradutor"
 
 #: src/gtr-header-dialog.ui:34
 msgid "_Language"
@@ -577,49 +581,53 @@ msgstr "_Código de idioma"
 
 #: src/gtr-header-dialog.ui:46
 msgid "Language _Team email"
-msgstr "Correio electrónico da eq_uipa do idioma"
+msgstr "Correio eletrónico da eq_uipa do idioma"
 
 #: src/gtr-header-dialog.ui:52
 msgid "Char_set"
-msgstr "Conjunto de caractere_s"
+msgstr "Conjunto de caratere_s"
 
 #: src/gtr-header-dialog.ui:58
 msgid "Enc_oding"
 msgstr "C_odificação"
 
-#: src/gtr-header-dialog.ui:70
+#: src/gtr-header-dialog.ui:64
+msgid "_Plural forms"
+msgstr "Formas _plurais"
+
+#: src/gtr-header-dialog.ui:76
 msgid "Project"
 msgstr "Projeto"
 
-#: src/gtr-header-dialog.ui:77
+#: src/gtr-header-dialog.ui:83
 msgid "Project Id _version"
 msgstr "_Versão ID do projeto"
 
-#: src/gtr-header-dialog.ui:83
+#: src/gtr-header-dialog.ui:89
 msgid "Pot _file creation date"
 msgstr "Data de criação do _ficheiro POT"
 
-#: src/gtr-header-dialog.ui:89
+#: src/gtr-header-dialog.ui:95
 msgid "Po file _revision date"
 msgstr "Data _revisão do ficheiro PO"
 
-#: src/gtr-header-dialog.ui:95
+#: src/gtr-header-dialog.ui:101
 msgid "Report message _bugs to"
 msgstr "Reportar mensagens de e_rro a"
 
-#: src/gtr-header-dialog.ui:103
+#: src/gtr-header-dialog.ui:109
 msgid "Comment"
 msgstr "Comentários"
 
-#: src/gtr-header-dialog.ui:130
+#: src/gtr-header-dialog.ui:136
 msgid "Damned Lies"
 msgstr "Damned Lies"
 
-#: src/gtr-header-dialog.ui:137
+#: src/gtr-header-dialog.ui:143
 msgid "Lang"
 msgstr "Idioma"
 
-#: src/gtr-header-dialog.ui:161
+#: src/gtr-header-dialog.ui:167
 msgid "State"
 msgstr "Estado"
 
@@ -702,7 +710,7 @@ msgstr ""
 #: src/gtr-po.c:832
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
-msgstr "O ficheiro %s está apenas para leitura e não pode ser susbtituído"
+msgstr "O ficheiro %s está apenas para leitura e não pode ser substituído"
 
 #: src/gtr-po.c:851
 #, c-format
@@ -752,11 +760,11 @@ msgstr "_Remover entradas obsoletas ao gravar"
 
 #: src/gtr-preferences-dialog.ui:30
 msgid "Autosave"
-msgstr "Auto-gravar"
+msgstr "Gravação automática"
 
 #: src/gtr-preferences-dialog.ui:33
 msgid "_Activate auto save"
-msgstr "_Activar gravação automaticamente"
+msgstr "_Ativar gravação automaticamente"
 
 #: src/gtr-preferences-dialog.ui:34
 msgid "Save the current file automatically"
@@ -780,7 +788,7 @@ msgstr "_Editor"
 
 #: src/gtr-preferences-dialog.ui:73
 msgid "Text Display"
-msgstr "Exibir Texto"
+msgstr "Exibir texto"
 
 #: src/gtr-preferences-dialog.ui:76
 msgid "_Highlight message syntax"
@@ -833,11 +841,11 @@ msgstr "_Nome do tradutor"
 
 #: src/gtr-profile-dialog.ui:70
 msgid "Translator _email"
-msgstr "Correio _electrónico do tradutor"
+msgstr "Correio _eletrónico do tradutor"
 
 #: src/gtr-profile-dialog.ui:76
 msgid "Translation _team email"
-msgstr "Correio electrónico da equipa de tradução"
+msgstr "Correio eletrónico da equipa de tradução"
 
 #: src/gtr-profile-dialog.ui:84
 msgid "Damned Lies Integration"
@@ -859,7 +867,7 @@ msgstr "token auth _Damned Lies"
 msgid "Build Translation Memory"
 msgstr "Construir memória de tradução"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:336
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:343
 msgid "Help"
 msgstr "Ajuda"
 
@@ -992,11 +1000,11 @@ msgstr "Enviar ficheiro"
 #. <property name="ypad">5</property>
 #: src/gtr-tab.ui:126 src/gtr-tab.ui:301
 msgid "_Original Message"
-msgstr "Mensagem _Original"
+msgstr "Mensagem _original"
 
 #: src/gtr-tab.ui:191
 msgid "Translate_d Text"
-msgstr "Texto Tra_duzido"
+msgstr "Texto tra_duzido"
 
 #: src/gtr-tab.ui:269
 msgid "Open a New File"
@@ -1016,7 +1024,7 @@ msgstr "Ordenar mensagens por…"
 
 #: src/gtr-tab.ui:291
 msgid "_Order of Appearance"
-msgstr "Ordem de aparição"
+msgstr "Ordem de apresentação"
 
 #: src/gtr-tab.ui:296
 msgid "_Message Status"
@@ -1025,6 +1033,14 @@ msgstr "Estado da _mensagem"
 #: src/gtr-tab.ui:306
 msgid "_Translated Message"
 msgstr "Mensagem _traduzida"
+
+#: src/gtr-tab.ui:320
+msgid "Advanced Tools"
+msgstr "Ferramentas avançadas"
+
+#: src/gtr-tab.ui:322
+msgid "Fix plural messages"
+msgstr "Corrigir mensagens plurais"
 
 #: src/gtr-upload-dialog.c:147
 msgid "Uploading..."
@@ -1100,7 +1116,7 @@ msgstr "Preferências"
 #: src/help-overlay.ui:51
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
-msgstr "Atalhos de teclado"
+msgstr "Teclas de atalho"
 
 #: src/help-overlay.ui:57
 msgctxt "shortcut window"
@@ -1125,7 +1141,7 @@ msgstr "Editar"
 #: src/help-overlay.ui:81
 msgctxt "shortcut window"
 msgid "Clear translation"
-msgstr "Limpar a tradução"
+msgstr "Limpar tradução"
 
 #: src/help-overlay.ui:87
 msgctxt "shortcut window"
@@ -1170,7 +1186,7 @@ msgstr "Ir para a próxima mensagem a traduzir"
 #: src/help-overlay.ui:137
 msgctxt "shortcut window group"
 msgid "Translation Memory"
-msgstr "Memória de Tradução"
+msgstr "Memória de tradução"
 
 #: src/help-overlay.ui:141
 msgctxt "shortcut window"
@@ -1210,7 +1226,7 @@ msgstr "Busca reversa"
 #: src/help-overlay.ui:183
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
-msgstr "Esconder barra de Procurar e Substituir"
+msgstr "Ocultar barra de Procurar e Substituir"
 
 #: src/main.c:97
 msgid "— Edit PO files"
@@ -1267,8 +1283,8 @@ msgid ""
 "If true, only include files with a specified filename when searching the "
 "translation memory."
 msgstr ""
-"Se verdadeiro, incluir só ficheiros com um nome específico ao procurar na "
-"memória de tradução."
+"Se verdadeiro, incluir apenas ficheiros com um nome específico ao procurar "
+"na memória de tradução."
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
 msgid "Filename to restrict search to"
@@ -1347,9 +1363,6 @@ msgstr ""
 
 #~ msgid "Appearance in the original file"
 #~ msgstr "Aparecimento no ficheiro original"
-
-#~ msgid "Original message"
-#~ msgstr "Mensagem original"
 
 #~ msgid "Translated message"
 #~ msgstr "Mensagem traduzida"
