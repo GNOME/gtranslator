@@ -46,10 +46,10 @@ static void
 on_uri_launch (GObject *object, GAsyncResult *result, gpointer user_data)
 {
   g_autoptr (GError) error = NULL;
-  gtk_uri_launcher_launch_finish (GTK_URI_LAUNCHER (object), result, &error);
+  g_app_info_launch_default_for_uri_finish (result, &error);
 
   if (error)
-    g_error ("Could not open uri: %s", error->message);
+    g_error ("Could not open help: %s", error->message);
 }
 
 xmlDocPtr
@@ -251,8 +251,20 @@ finally_2:
 void
 gtr_utils_help_display (GtkWindow * window)
 {
-  g_autoptr (GtkUriLauncher) uri_launcher = gtk_uri_launcher_new ("help:gtranslator");
-  gtk_uri_launcher_launch (uri_launcher, window, NULL, on_uri_launch, NULL);
+  GdkDisplay *display;
+  GAppLaunchContext *context;
+
+  display = gtk_widget_get_display (GTK_WIDGET (window));
+  if (display != NULL)
+    context = G_APP_LAUNCH_CONTEXT (gdk_display_get_app_launch_context (display));
+  else
+    context = NULL;
+
+  g_app_info_launch_default_for_uri_async ("help:gtranslator", context,
+                                           NULL, on_uri_launch, NULL);
+
+  if (context)
+    g_object_unref (context);
 }
 
 gchar *
