@@ -8,13 +8,15 @@
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
-          <object class="GtkHeaderBar"/>
+          <object class="AdwHeaderBar"/>
         </child>
         <property name="content">
           <object class="GtkOverlay" id="overlay">
             <child type="overlay">
               <object class="GtkProgressBar" id="add_database_progressbar">
                 <property name="visible">False</property>
+                <property name="valign">start</property>
+                <property name="halign">fill</property>
                 <style>
                   <class name="osd"/>
                 </style>
