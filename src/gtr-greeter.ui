@@ -33,23 +33,11 @@
                 <property name="title" translatable="yes">Welcome</property>
                 <property name="child">
 
-                  <object class="AdwClamp">
-                    <property name="maximum-size">900</property>
-                    <property name="tightening-threshold">400</property>
-                    <property name="valign">fill</property>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="AdwStatusPage">
-                            <property name="title" translatable="yes">Welcome to Translation Editor</property>
-                            <property name="icon-name">contact-new-symbolic</property>
-                            <property name="description" translatable="yes">Before start to use the application, a profile should be created, but don't worry, the app will guide you to do it in a minute.</property>
-                            <property name="vexpand">true</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+                  <object class="AdwStatusPage">
+                    <property name="title" translatable="yes">Welcome to Translation Editor</property>
+                    <property name="icon-name">contact-new-symbolic</property>
+                    <property name="description" translatable="yes">Before start to use the application, a profile should be created, but don't worry, the app will guide you to do it in a minute.</property>
+                    <property name="vexpand">true</property>
                   </object>
 
                 </property>
@@ -63,47 +51,39 @@
                 <property name="title" translatable="yes">Create Profile</property>
                 <property name="child">
 
-                  <object class="AdwClamp">
-                    <property name="maximum-size">900</property>
-                    <property name="tightening-threshold">400</property>
+                  <object class="AdwPreferencesPage">
                     <child>
-                      <object class="GtkBox">
-                        <property name="orientation">vertical</property>
-                        <property name="valign">center</property>
+                      <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="yes">Profile</property>
                         <child>
-                          <object class="AdwPreferencesGroup">
-                            <property name="title" translatable="yes">Profile</property>
-                            <child>
-                              <object class="AdwEntryRow" id="profile_name">
-                                <property name="title" translatable="yes">Profile name</property>
-                                <property name="text" translatable="yes">default</property>
-                                <property name="use_underline">True</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="AdwEntryRow" id="name">
-                                <property name="title" translatable="yes">Translator name</property>
-                                <property name="use_underline">True</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="AdwEntryRow" id="email">
-                                <property name="title" translatable="yes">Translator email</property>
-                                <property name="use_underline">True</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="AdwEntryRow" id="team_email">
-                                <property name="title" translatable="yes">Translation team email</property>
-                                <property name="use_underline">True</property>
-                              </object>
-                            </child>
+                          <object class="AdwEntryRow" id="profile_name">
+                            <property name="title" translatable="yes">Profile name</property>
+                            <property name="text" translatable="yes">default</property>
+                            <property name="use_underline">True</property>
                           </object>
                         </child>
                         <child>
-                          <object class="GtrLanguagesFetcher" id="languages_fetcher">
+                          <object class="AdwEntryRow" id="name">
+                            <property name="title" translatable="yes">Translator name</property>
+                            <property name="use_underline">True</property>
                           </object>
                         </child>
+                        <child>
+                          <object class="AdwEntryRow" id="email">
+                            <property name="title" translatable="yes">Translator email</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwEntryRow" id="team_email">
+                            <property name="title" translatable="yes">Translation team email</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtrLanguagesFetcher" id="languages_fetcher">
                       </object>
                     </child>
                   </object>
@@ -120,65 +100,58 @@
                 <property name="title" translatable="yes">Confirmation</property>
                 <property name="child">
 
-                  <object class="AdwClamp">
-                    <property name="maximum-size">900</property>
-                    <property name="tightening-threshold">400</property>
+                  <object class="AdwPreferencesPage">
                     <child>
-                      <object class="GtkBox">
-                        <property name="orientation">vertical</property>
+                      <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="yes">Confirmation</property>
+                        <property name="vexpand">true</property>
+                        <property name="valign">center</property>
+                        <style>
+                          <class name="boxed-list"/>
+                        </style>
                         <child>
-                          <object class="AdwPreferencesGroup">
-                            <property name="title" translatable="yes">Confirmation</property>
-                            <property name="vexpand">true</property>
-                            <property name="valign">center</property>
-                            <style>
-                              <class name="boxed-list"/>
-                            </style>
-                            <child>
-                              <object class="AdwActionRow" id="conf_profile">
-                                <property name="title" translatable="yes">Profile name</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="AdwActionRow" id="conf_name">
-                                <property name="title" translatable="yes">Translator name</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="AdwActionRow" id="conf_email">
-                                <property name="title" translatable="yes">Translator email</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="AdwActionRow" id="conf_team">
-                                <property name="title" translatable="yes">Team email</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="AdwActionRow" id="conf_lang">
-                                <property name="title" translatable="yes">Language name</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="AdwActionRow" id="conf_lang_code">
-                                <property name="title" translatable="yes">Language code</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="AdwActionRow" id="conf_charset">
-                                <property name="title" translatable="yes">Character set</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="AdwActionRow" id="conf_encoding">
-                                <property name="title" translatable="yes">Transfer encoding</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="AdwActionRow" id="conf_plural_forms">
-                                <property name="title" translatable="yes">Plural form</property>
-                              </object>
-                            </child>
+                          <object class="AdwActionRow" id="conf_profile">
+                            <property name="title" translatable="yes">Profile name</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_name">
+                            <property name="title" translatable="yes">Translator name</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_email">
+                            <property name="title" translatable="yes">Translator email</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_team">
+                            <property name="title" translatable="yes">Team email</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_lang">
+                            <property name="title" translatable="yes">Language name</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_lang_code">
+                            <property name="title" translatable="yes">Language code</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_charset">
+                            <property name="title" translatable="yes">Character set</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_encoding">
+                            <property name="title" translatable="yes">Transfer encoding</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="conf_plural_forms">
+                            <property name="title" translatable="yes">Plural form</property>
                           </object>
                         </child>
                       </object>
