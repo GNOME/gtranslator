@@ -737,13 +737,12 @@ gtr_dl_teams_save_combo_selected (GtkWidget  *widget,
       GtrDropDownOption *opt = GTR_DROP_DOWN_OPTION (
         gtk_drop_down_get_selected_item (GTK_DROP_DOWN (priv->modules_combobox))
       );
-      if (priv->selected_module)
-        g_free (priv->selected_module);
+      g_clear_pointer (&priv->selected_module, g_free);
+      g_clear_pointer (&priv->selected_branch, g_free);
+      g_clear_pointer (&priv->selected_domain, g_free);
 
       if (opt)
         priv->selected_module = g_strdup (gtr_drop_down_option_get_name (opt));
-      else
-        priv->selected_module = NULL;
 
       /* Reload module details on module change */
       gtr_dl_teams_load_module_details_json (widget, self);
