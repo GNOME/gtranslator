@@ -33,6 +33,14 @@
 
 #include <glib/gi18n.h>
 
+/* From https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/css-variables.html */
+#define GTR_ERROR_DARK "#ff938c"
+#define GTR_WARNING_DARK "#ffc252"
+#define GTR_SUCCESS_DARK "#78e9ab"
+#define GTR_ERROR_LIGHT "#c30000"
+#define GTR_WARNING_LIGHT "#905400"
+#define GTR_SUCCESS_LIGHT "#007c3d"
+
 typedef struct
 {
   GtkWidget *load_button;
@@ -402,6 +410,10 @@ gtr_dl_teams_parse_file_info (GObject *object, GAsyncResult *result, gpointer us
   AdwDialog *dialog;
   SoupStatus status_code;
   SoupMessage *msg = NULL;
+  AdwStyleManager *style_manager;
+  const char *error_color;
+  const char *success_color;
+  const char *warning_color;
 
   g_autoptr(JsonParser) parser = NULL;
   g_autoptr (GError) error = NULL;
@@ -450,10 +462,27 @@ gtr_dl_teams_parse_file_info (GObject *object, GAsyncResult *result, gpointer us
   stats_node = json_object_get_member (jobject, "statistics");
   stats_object = json_node_get_object (stats_node);
 
+  style_manager = adw_style_manager_get_default ();
+  if (adw_style_manager_get_dark (style_manager))
+    {
+      error_color = GTR_ERROR_DARK;
+      success_color = GTR_SUCCESS_DARK;
+      warning_color = GTR_WARNING_DARK;
+    }
+  else
+    {
+      error_color = GTR_ERROR_LIGHT;
+      success_color = GTR_SUCCESS_LIGHT;
+      warning_color = GTR_WARNING_LIGHT;
+    }
+
   markup = g_markup_printf_escaped (
-    "<span color=\"green\">\%ld translated</span>, <span color=\"orange\">\%ld fuzzy</span>, <span color=\"red\">\%ld untranslated</span>",
+    "<span color=\"%s\">\%ld translated</span>, <span color=\"%s\">\%ld fuzzy</span>, <span color=\"%s\">\%ld untranslated</span>",
+    success_color,
     json_object_get_int_member (stats_object, "trans"),
+    warning_color,
     json_object_get_int_member (stats_object, "fuzzy"),
+    error_color,
     json_object_get_int_member (stats_object, "untrans"));
 
   gtk_label_set_markup (GTK_LABEL (priv->stats_label), markup);
@@ -888,6 +917,9 @@ gtr_dl_teams_init (GtrDlTeams *self)
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   gtk_widget_init_template (GTK_WIDGET (self));
   GtkExpression *expression = NULL;
+  AdwStyleManager *style_manager;
+
+  style_manager = adw_style_manager_get_default ();
 
   priv->soup_session = soup_session_new ();
 
@@ -952,6 +984,11 @@ gtr_dl_teams_init (GtrDlTeams *self)
                     "clicked",
                     G_CALLBACK (gtr_dl_teams_load_po_file),
                     self);
+
+  g_signal_connect_swapped (style_manager,
+                            "notify::dark",
+                            G_CALLBACK (gtr_dl_teams_verify_and_load),
+                            self);
 
   expression = gtk_cclosure_expression_new (G_TYPE_STRING,
                                             NULL,
