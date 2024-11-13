@@ -61,7 +61,7 @@ sources = files(
   'gtr-projects.c',
   'gtr-dl-teams.c',
   'gtr-drop-down-option.c',
-  'gtr-lang-button.c',
+  'gtr-lang-combo-row.c',
   'gtr-progress.c',
   'gtr-window.c',
   'gtr-search-bar.c',

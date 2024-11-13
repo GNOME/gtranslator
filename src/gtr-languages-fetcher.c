@@ -22,7 +22,7 @@
 #include "gtr-languages-fetcher.h"
 #include "gtr-language.h"
 #include "gtr-utils.h"
-#include "gtr-lang-button.h"
+#include "gtr-lang-combo-row.h"
 #include <string.h>
 
 typedef struct
@@ -189,11 +189,11 @@ fill_from_language_entry (GtrLanguagesFetcher *fetcher,
 }
 
 static void
-on_language_activate (GtrLangButton       *btn,
+on_language_activate (GtrLangComboRow     *btn,
                       GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  const gchar *text = gtr_lang_button_get_lang (GTR_LANG_BUTTON (priv->language));
+  const gchar *text = gtr_lang_combo_row_get_lang (GTR_LANG_COMBO_ROW (priv->language));
   GtrLanguage *lang;
   const GSList *l;
   const GSList *languages = gtr_language_get_languages ();
@@ -259,7 +259,7 @@ on_lang_changed (GtkWidget           *widget,
                  GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  on_language_activate (GTR_LANG_BUTTON (priv->language), fetcher);
+  on_language_activate (GTR_LANG_COMBO_ROW (priv->language), fetcher);
   g_signal_emit (fetcher, signals[CHANGED], 0, NULL);
 }
 
@@ -268,7 +268,7 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
 
-  g_type_ensure (GTR_TYPE_LANG_BUTTON);
+  g_type_ensure (GTR_TYPE_LANG_COMBO_ROW);
 
   gtk_widget_init_template (GTK_WIDGET (fetcher));
 
@@ -324,7 +324,7 @@ const gchar *
 gtr_languages_fetcher_get_language_name (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  return gtr_lang_button_get_lang (GTR_LANG_BUTTON (priv->language));
+  return gtr_lang_combo_row_get_lang (GTR_LANG_COMBO_ROW (priv->language));
 }
 
 void
@@ -332,7 +332,7 @@ gtr_languages_fetcher_set_language_name (GtrLanguagesFetcher *fetcher,
                                          const gchar         *name)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  gtr_lang_button_set_lang (GTR_LANG_BUTTON (priv->language), name);
+  gtr_lang_combo_row_set_lang (GTR_LANG_COMBO_ROW (priv->language), name);
 }
 
 const gchar *

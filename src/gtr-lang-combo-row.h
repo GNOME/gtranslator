@@ -23,14 +23,15 @@
 
 G_BEGIN_DECLS
 
-#define GTR_TYPE_LANG_BUTTON (gtr_lang_button_get_type())
+#define GTR_TYPE_LANG_COMBO_ROW (gtr_lang_combo_row_get_type())
 
-G_DECLARE_FINAL_TYPE (GtrLangButton, gtr_lang_button, GTR, LANG_BUTTON, AdwComboRow)
+G_DECLARE_FINAL_TYPE (GtrLangComboRow, gtr_lang_combo_row, GTR, LANG_COMBO_ROW, AdwComboRow)
 
-GtrLangButton*  gtr_lang_button_new       (void);
-const gchar *   gtr_lang_button_get_lang  (GtrLangButton *self);
-void            gtr_lang_button_set_lang  (GtrLangButton *self,
-                                           const gchar   *name);
+GtrLangComboRow*  gtr_lang_combo_row_new       (void);
+
+const gchar *     gtr_lang_combo_row_get_lang  (GtrLangComboRow *self);
+void              gtr_lang_combo_row_set_lang  (GtrLangComboRow *self,
+                                                const gchar     *name);
 
 G_END_DECLS
 
