@@ -255,6 +255,7 @@ on_language_code_changed (GtkWidget *widget, GParamSpec *spec, GtrLanguagesFetch
 
 static void
 on_lang_changed (GtkWidget           *widget,
+                 GParamSpec          *spec,
                  GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
@@ -274,7 +275,7 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
   // add items to comboboxes
   append_from_languages (fetcher);
 
-  g_signal_connect (priv->language, "changed",
+  g_signal_connect (priv->language, "notify::selected",
                     G_CALLBACK (on_lang_changed),
                     fetcher);
 
