@@ -749,13 +749,12 @@ gtr_dl_teams_modules_combo_selected_notify (GtkWidget  *widget,
     adw_combo_row_get_selected_item (ADW_COMBO_ROW (priv->modules_comborow))
   );
 
-  if (priv->selected_module)
-    g_free (priv->selected_module);
+  g_clear_pointer (&priv->selected_module, g_free);
+  g_clear_pointer (&priv->selected_branch, g_free);
+  g_clear_pointer (&priv->selected_domain, g_free);
 
   if (opt)
     priv->selected_module = g_strdup (gtr_drop_down_option_get_name (opt));
-  else
-    priv->selected_module = NULL;
 
   /* Reload module details on module change */
   gtr_dl_teams_load_module_details_json (widget, self);
