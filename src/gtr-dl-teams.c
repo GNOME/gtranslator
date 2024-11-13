@@ -43,7 +43,7 @@ typedef struct
 
   GtkWidget *langs_comborow;
   GListStore *langs_model;
-  GtkWidget *modules_combobox;
+  GtkWidget *modules_comborow;
   GListStore *modules_model;
   GtkWidget *domains_combobox;
   GtkWidget *branches_combobox;
@@ -112,13 +112,13 @@ gtr_dl_teams_combobox_add (JsonArray   *array,
 }
 
 static void
-gtr_dl_modules_combobox_add (JsonArray *array,
-                             int index,
-                             JsonNode *element,
-                             GtkDropDown *combo)
+gtr_dl_modules_combobox_add (JsonArray   *array,
+                             int          index,
+                             JsonNode    *element,
+                             AdwComboRow *combo)
 {
   JsonObject *object = json_node_get_object (element);
-  GListStore *model = G_LIST_STORE (gtk_drop_down_get_model (GTK_DROP_DOWN (combo)));
+  GListStore *model = G_LIST_STORE (adw_combo_row_get_model (ADW_COMBO_ROW (combo)));
   GtrDropDownOption *option = NULL;
 
   const char *name = json_object_get_string_member (object, "name");
@@ -345,10 +345,10 @@ gtr_dl_teams_parse_modules_json (GObject *object,
   json_array_foreach_element (
     array,
     (JsonArrayForeach)gtr_dl_modules_combobox_add,
-    priv->modules_combobox
+    priv->modules_comborow
   );
 
-  gtk_widget_set_sensitive (priv->modules_combobox, TRUE);
+  gtk_widget_set_sensitive (priv->modules_comborow, TRUE);
 }
 
 void
@@ -741,6 +741,30 @@ gtr_dl_teams_langs_combo_selected_notify (GtkWidget  *widget,
 }
 
 static void
+gtr_dl_teams_modules_combo_selected_notify (GtkWidget  *widget,
+                                            GParamSpec *spec,
+                                            GtrDlTeams *self)
+{
+  GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
+  GtrDropDownOption *opt = GTR_DROP_DOWN_OPTION (
+    adw_combo_row_get_selected_item (ADW_COMBO_ROW (priv->modules_comborow))
+  );
+
+  if (priv->selected_module)
+    g_free (priv->selected_module);
+
+  if (opt)
+    priv->selected_module = g_strdup (gtr_drop_down_option_get_name (opt));
+  else
+    priv->selected_module = NULL;
+
+  /* Reload module details on module change */
+  gtr_dl_teams_load_module_details_json (widget, self);
+
+  gtr_dl_teams_verify_and_load (self);
+}
+
+static void
 gtr_dl_teams_save_combo_selected (GtkWidget  *widget,
                                   GParamSpec *spec,
                                   GtrDlTeams *self)
@@ -751,23 +775,7 @@ gtr_dl_teams_save_combo_selected (GtkWidget  *widget,
   /* Save selected combo option */
   name = gtk_widget_get_name (widget);
 
-  if (strcmp(name, "combo_modules") == 0)
-    {
-      GtrDropDownOption *opt = GTR_DROP_DOWN_OPTION (
-        gtk_drop_down_get_selected_item (GTK_DROP_DOWN (priv->modules_combobox))
-      );
-      if (priv->selected_module)
-        g_free (priv->selected_module);
-
-      if (opt)
-        priv->selected_module = g_strdup (gtr_drop_down_option_get_name (opt));
-      else
-        priv->selected_module = NULL;
-
-      /* Reload module details on module change */
-      gtr_dl_teams_load_module_details_json (widget, self);
-    }
-  else if (strcmp(name, "combo_branches") == 0)
+  if (strcmp(name, "combo_branches") == 0)
     {
       int selected = gtk_drop_down_get_selected (GTK_DROP_DOWN (widget));
       if (priv->selected_branch)
@@ -861,7 +869,7 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, reserve_button);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, langs_comborow);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, modules_combobox);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, modules_comborow);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, domains_combobox);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, branches_combobox);
 
@@ -912,24 +920,24 @@ gtr_dl_teams_init (GtrDlTeams *self)
 
   expression = gtk_property_expression_new (GTR_TYPE_DROP_DOWN_OPTION, NULL, "name");
   priv->modules_model = g_list_store_new (GTR_TYPE_DROP_DOWN_OPTION);
-  gtk_drop_down_set_model (
-    GTK_DROP_DOWN (priv->modules_combobox),
+  adw_combo_row_set_model (
+    ADW_COMBO_ROW (priv->modules_comborow),
     G_LIST_MODEL (priv->modules_model)
   );
-  gtk_drop_down_set_expression (GTK_DROP_DOWN (priv->modules_combobox), expression);
-  gtk_drop_down_set_enable_search (GTK_DROP_DOWN (priv->modules_combobox), TRUE);
-  gtk_drop_down_set_search_match_mode (GTK_DROP_DOWN (priv->modules_combobox),
+  adw_combo_row_set_expression (ADW_COMBO_ROW (priv->modules_comborow), expression);
+  adw_combo_row_set_enable_search (ADW_COMBO_ROW (priv->modules_comborow), TRUE);
+  adw_combo_row_set_search_match_mode (ADW_COMBO_ROW (priv->modules_comborow),
                                        GTK_STRING_FILTER_MATCH_MODE_SUBSTRING);
-  gtk_widget_set_sensitive (priv->modules_combobox, FALSE);
+  gtk_widget_set_sensitive (priv->modules_comborow, FALSE);
 
   /* Connect "changed" to all combo boxes */
   g_signal_connect (priv->langs_comborow,
                     "notify::selected-item",
                     G_CALLBACK (gtr_dl_teams_langs_combo_selected_notify),
                     self);
-  g_signal_connect (priv->modules_combobox,
-                    "notify::selected",
-                    G_CALLBACK (gtr_dl_teams_save_combo_selected),
+  g_signal_connect (priv->modules_comborow,
+                    "notify::selected-item",
+                    G_CALLBACK (gtr_dl_teams_modules_combo_selected_notify),
                     self);
   g_signal_connect (priv->domains_combobox,
                     "notify::selected-item",
