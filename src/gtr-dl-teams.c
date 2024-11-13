@@ -483,7 +483,7 @@ static void
 gtr_dl_teams_get_file_info (GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  gchar *stats_endpoint;
+  g_autofree char *stats_endpoint;
   g_autoptr(SoupMessage) msg = NULL;
 
   /* API endpoint: modules/[module]/branches/[branch]/domains/[domain]/languages/[team] */
