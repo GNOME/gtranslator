@@ -23,28 +23,20 @@
 #include <glib/gi18n.h>
 
 #include "gtr-language.h"
-#include "gtr-lang-button.h"
+#include "gtr-lang-combo-row.h"
 #include "gtr-drop-down-option.h"
 
 typedef struct
 {
   GListStore *model;
-  GtkWidget *widget;
-} GtrLangButtonPrivate;
+} GtrLangComboRowPrivate;
 
-struct _GtrLangButton
+struct _GtrLangComboRow
 {
-  AdwBin parent_instance;
+  AdwComboRow parent_instance;
 };
 
-enum
-{
-  CHANGED,
-  LAST_SIGNAL
-};
-
-G_DEFINE_TYPE_WITH_PRIVATE (GtrLangButton, gtr_lang_button, ADW_TYPE_BIN)
-static guint signals[LAST_SIGNAL] = { 0 };
+G_DEFINE_TYPE_WITH_PRIVATE (GtrLangComboRow, gtr_lang_combo_row, ADW_TYPE_COMBO_ROW)
 
 static gpointer
 copy_lang (gconstpointer src,
@@ -57,40 +49,17 @@ copy_lang (gconstpointer src,
 }
 
 static void
-gtr_lang_button_changed (GtkWidget  *widget,
-                         GParamSpec *spec,
-                         GtrLangButton *self)
+gtr_lang_combo_row_class_init (GtrLangComboRowClass *klass)
 {
-  g_signal_emit (self, signals[CHANGED], 0, NULL);
 }
 
 static void
-gtr_lang_button_dispose (GObject *object)
-{
-  G_OBJECT_CLASS (gtr_lang_button_parent_class)->dispose (object);
-}
-
-static void
-gtr_lang_button_class_init (GtrLangButtonClass *klass)
-{
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  object_class->dispose = gtr_lang_button_dispose;
-
-  signals[CHANGED] =
-    g_signal_newv ("changed",
-                   G_OBJECT_CLASS_TYPE (object_class),
-                   G_SIGNAL_RUN_LAST,
-                   NULL, NULL, NULL, NULL,
-                   G_TYPE_NONE, 0, NULL);
-}
-
-static void
-gtr_lang_button_init (GtrLangButton *self)
+gtr_lang_combo_row_init (GtrLangComboRow *self)
 {
   const GSList *languages;
   const GSList *o;
   GSList *langs;
-  GtrLangButtonPrivate *priv = gtr_lang_button_get_instance_private (self);
+  GtrLangComboRowPrivate *priv = gtr_lang_combo_row_get_instance_private (self);
   GtkExpression *expression = NULL;
 
   languages = gtr_language_get_languages ();
@@ -99,10 +68,10 @@ gtr_lang_button_init (GtrLangButton *self)
 
   expression = gtk_property_expression_new (GTR_TYPE_DROP_DOWN_OPTION, NULL, "name");
   priv->model = g_list_store_new (GTR_TYPE_DROP_DOWN_OPTION);
-  priv->widget = GTK_WIDGET (
-    gtk_drop_down_new (G_LIST_MODEL (priv->model), expression)
-  );
-  gtk_drop_down_set_enable_search (GTK_DROP_DOWN (priv->widget), TRUE);
+  adw_combo_row_set_model (ADW_COMBO_ROW (self), G_LIST_MODEL (priv->model));
+  adw_combo_row_set_expression (ADW_COMBO_ROW (self), expression);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), _("Languages"));
+  adw_combo_row_set_enable_search (ADW_COMBO_ROW (self), TRUE);
 
   for (o = langs; o != NULL; o = g_slist_next (o))
     {
@@ -112,29 +81,21 @@ gtr_lang_button_init (GtrLangButton *self)
       g_object_unref (option);
     }
 
-  adw_bin_set_child (ADW_BIN (self), priv->widget);
-
   if (langs)
     g_slist_free_full (langs, g_free);
-
-  g_signal_connect (priv->widget,
-                    "notify::selected",
-                    G_CALLBACK (gtr_lang_button_changed),
-                    self);
 }
 
-GtrLangButton*
-gtr_lang_button_new (void) {
-  GtrLangButton *self = g_object_new (GTR_TYPE_LANG_BUTTON, NULL);
+GtrLangComboRow*
+gtr_lang_combo_row_new (void) {
+  GtrLangComboRow *self = g_object_new (GTR_TYPE_LANG_COMBO_ROW, NULL);
   return self;
 }
 
 const gchar *
-gtr_lang_button_get_lang (GtrLangButton *self)
+gtr_lang_combo_row_get_lang (GtrLangComboRow *self)
 {
-  GtrLangButtonPrivate *priv = gtr_lang_button_get_instance_private (GTR_LANG_BUTTON (self));
   GtrDropDownOption *opt = GTR_DROP_DOWN_OPTION (
-    gtk_drop_down_get_selected_item (GTK_DROP_DOWN (priv->widget))
+    adw_combo_row_get_selected_item (ADW_COMBO_ROW (self))
   );
   if (!opt)
     return NULL;
@@ -143,10 +104,10 @@ gtr_lang_button_get_lang (GtrLangButton *self)
 }
 
 void
-gtr_lang_button_set_lang (GtrLangButton *self,
+gtr_lang_combo_row_set_lang (GtrLangComboRow *self,
                           const gchar   *name)
 {
-  GtrLangButtonPrivate *priv = gtr_lang_button_get_instance_private (GTR_LANG_BUTTON (self));
+  GtrLangComboRowPrivate *priv = gtr_lang_combo_row_get_instance_private (GTR_LANG_COMBO_ROW (self));
   unsigned int lang_pos = 0;
   GtrDropDownOption *option = gtr_drop_down_option_new (name, NULL);
 
@@ -156,6 +117,6 @@ gtr_lang_button_set_lang (GtrLangButton *self,
     (GEqualFunc)gtr_drop_down_option_equal,
     &lang_pos
   );
-  gtk_drop_down_set_selected (GTK_DROP_DOWN (priv->widget), lang_pos);
+  adw_combo_row_set_selected (ADW_COMBO_ROW (self), lang_pos);
 }
 
