@@ -273,6 +273,9 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
   // add items to comboboxes
   append_from_languages (fetcher);
 
+  // Populate other settings based on default language.
+  update_language (fetcher);
+
   g_signal_connect (priv->language, "notify::selected",
                     G_CALLBACK (on_lang_changed),
                     fetcher);
