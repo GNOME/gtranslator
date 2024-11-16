@@ -290,7 +290,6 @@ save_dialog_response_cb (GObject *source, GAsyncResult *res, void *user_data)
   if (po != NULL)
     {
       gtr_po_set_location (po, location);
-      g_object_unref (location);
       gtr_po_save_file (po, &error);
 
       if (error)
@@ -304,10 +303,6 @@ save_dialog_response_cb (GObject *source, GAsyncResult *res, void *user_data)
 
       /* We have to change the state of the tab */
       gtr_po_set_state (po, GTR_PO_STATE_SAVED);
-    }
-  else
-    {
-      g_object_unref (location);
     }
 }
 
