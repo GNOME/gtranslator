@@ -110,8 +110,10 @@
     <child name="history-entry" schema="org.gnome.gtranslator.state.history-entry"/>
   </schema>
   <schema id="org.gnome.gtranslator.state.window" path="/org/gnome/gtranslator/state/window/">
-    <key name="state" type="i">
-      <default>0</default>
+    <key name="window-maximized" type="b">
+      <default>false</default>
+      <summary>Window maximized</summary>
+      <description>Window maximized state</description>
     </key>
     <key name="size" type="(ii)">
       <default>(775, 500)</default>

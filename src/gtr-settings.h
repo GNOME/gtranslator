@@ -54,7 +54,7 @@ GSettings *gtr_settings_new (void);
 #define GTR_SETTINGS_SORT_ORDER				"sort-order"
 
 /* window state keys */
-#define GTR_SETTINGS_WINDOW_STATE			"state"
+#define GTR_SETTINGS_WINDOW_MAXIMIZED		"window-maximized"
 #define GTR_SETTINGS_WINDOW_SIZE			"size"
 
 G_END_DECLS
