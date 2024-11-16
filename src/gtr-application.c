@@ -652,10 +652,10 @@ GtrWindow *
 gtr_application_create_window (GtrApplication *app)
 {
   GtrWindow *window;
-  GdkToplevelState state;
   gint w, h;
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
   GtkWindowGroup *group;
+  gboolean is_maximized;
 
   group = gtk_window_group_new ();
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
@@ -664,19 +664,16 @@ gtr_application_create_window (GtrApplication *app)
   gtk_window_group_add_window (group, GTK_WINDOW (window));
   g_object_unref (group);
 
-  state = g_settings_get_int (priv->window_settings,
-                              GTR_SETTINGS_WINDOW_STATE);
-
   g_settings_get (priv->window_settings,
                   GTR_SETTINGS_WINDOW_SIZE,
                   "(ii)", &w, &h);
 
   gtk_window_set_default_size (GTK_WINDOW (window), w, h);
 
-  if ((state & GDK_TOPLEVEL_STATE_MAXIMIZED) != 0)
+  is_maximized = g_settings_get_boolean (priv->window_settings,
+                                         GTR_SETTINGS_WINDOW_MAXIMIZED);
+  if (is_maximized)
     gtk_window_maximize (GTK_WINDOW (window));
-  else
-    gtk_window_unmaximize (GTK_WINDOW (window));
 
   g_signal_connect (window, "close-request",
                     G_CALLBACK (on_window_delete_event_cb), app);
