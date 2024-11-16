@@ -395,6 +395,7 @@ gtr_window_remove_tab (GtrWindow * window)
       adw_navigation_view_remove (priv->navigation_view, page);
 
     priv->active_tab = NULL;
+    priv->search_bar_shown = FALSE;
   }
 }
 
