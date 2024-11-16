@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2024-09-27 05:23+0000\n"
-"PO-Revision-Date: 2024-09-28 21:11+0300\n"
+"POT-Creation-Date: 2024-11-16 11:21+0000\n"
+"PO-Revision-Date: 2024-11-16 14:47+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:508 src/gtr-window.c:205 src/gtr-window.c:432
+#: src/gtr-application.c:508 src/gtr-window.c:205 src/gtr-window.c:433
 msgid "Translation Editor"
 msgstr "Редактор перекладів"
 
@@ -187,10 +187,10 @@ msgstr "Переглядач джерельного коду"
 #: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:279
 #: src/gtr-actions-file.c:299 src/gtr-actions-file.c:341
 #: src/gtr-actions-file.c:368 src/gtr-actions-file.c:542
-#: src/gtr-actions-file.c:585 src/gtr-actions-file.c:753 src/gtr-dl-teams.c:157
-#: src/gtr-dl-teams.c:250 src/gtr-dl-teams.c:336 src/gtr-dl-teams.c:443
-#: src/gtr-dl-teams.c:568 src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:593
-#: src/gtr-dl-teams.c:625 src/gtr-dl-teams.c:694 src/gtr-profile-dialog.ui:20
+#: src/gtr-actions-file.c:585 src/gtr-actions-file.c:753 src/gtr-dl-teams.c:164
+#: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:341 src/gtr-dl-teams.c:429
+#: src/gtr-dl-teams.c:571 src/gtr-dl-teams.c:582 src/gtr-dl-teams.c:593
+#: src/gtr-dl-teams.c:624 src/gtr-dl-teams.c:691 src/gtr-profile-dialog.ui:20
 #: src/gtr-tab.c:348 src/gtr-window.c:159 src/gtr-window.c:332
 msgid "OK"
 msgstr "Гаразд"
@@ -333,23 +333,23 @@ msgstr "Додаткові коментарі"
 msgid "Paths"
 msgstr "Шляхи"
 
-#: src/gtr-dl-teams.c:249
+#: src/gtr-dl-teams.c:224
 msgid "Error loading module info"
 msgstr "Помилка під час спроби завантажити дані модуля"
 
-#: src/gtr-dl-teams.c:442
+#: src/gtr-dl-teams.c:428
 msgid "Error loading file info"
 msgstr "Помилка під час спроби завантажити дані файла"
 
-#: src/gtr-dl-teams.c:473
+#: src/gtr-dl-teams.c:457
 msgid "No module state found."
 msgstr "Не знайдено стану модуля."
 
-#: src/gtr-dl-teams.c:567
+#: src/gtr-dl-teams.c:570
 msgid "Error loading file"
 msgstr "Помилка під час спроби завантажити файл"
 
-#: src/gtr-dl-teams.c:578 src/gtr-dl-teams.c:624
+#: src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:623
 msgid "Error creating tmp file"
 msgstr "Помилка під час створення тимчасового файла"
 
@@ -361,11 +361,11 @@ msgstr "Помилка під час спроби записати потоко�
 msgid "The file has been saved in your Downloads folder"
 msgstr "Файл було збережено до вашої теки «Завантаження»"
 
-#: src/gtr-dl-teams.c:693
+#: src/gtr-dl-teams.c:690
 msgid "Could not reserve module"
 msgstr "Не вдалося зарезервувати модуль"
 
-#: src/gtr-dl-teams.c:698
+#: src/gtr-dl-teams.c:695
 #, c-format
 msgid ""
 "%s\n"
@@ -376,7 +376,7 @@ msgstr ""
 "Можливо, ви не налаштувати ваш l10n.gnome.org-жетон у вашому профілі або ви "
 "не маєте прав доступу до резервування цього модуля."
 
-#: src/gtr-dl-teams.c:710
+#: src/gtr-dl-teams.c:707
 msgid "The file has been successfully reserved"
 msgstr "Файл успішно зарезервовано"
 
@@ -401,43 +401,42 @@ msgid "Main Menu"
 msgstr "Головне меню"
 
 #: src/gtr-dl-teams.ui:70 src/gtr-languages-fetcher.ui:5
-#: src/gtr-languages-fetcher.ui:8
 msgid "Language"
 msgstr "Мова"
 
-#: src/gtr-dl-teams.ui:81 src/gtr-header-dialog.ui:149
+#: src/gtr-dl-teams.ui:75 src/gtr-header-dialog.ui:149
 msgid "Module"
 msgstr "Модуль"
 
-#: src/gtr-dl-teams.ui:92 src/gtr-header-dialog.ui:161
+#: src/gtr-dl-teams.ui:80 src/gtr-header-dialog.ui:161
 msgid "Domain"
 msgstr "Домен"
 
-#: src/gtr-dl-teams.ui:103 src/gtr-header-dialog.ui:155
+#: src/gtr-dl-teams.ui:85 src/gtr-header-dialog.ui:155
 msgid "Branch"
 msgstr "Гілка"
 
-#: src/gtr-dl-teams.ui:120
+#: src/gtr-dl-teams.ui:93
 msgid "Reserve for translation"
 msgstr "Зарезервовано для перекладу"
 
-#: src/gtr-dl-teams.ui:128
+#: src/gtr-dl-teams.ui:101
 msgid "Info"
 msgstr "Інформація"
 
-#: src/gtr-dl-teams.ui:131
+#: src/gtr-dl-teams.ui:104
 msgid "File"
 msgstr "Файли"
 
-#: src/gtr-dl-teams.ui:141
+#: src/gtr-dl-teams.ui:114
 msgid "Translation State"
 msgstr "Стан перекладу"
 
-#: src/gtr-dl-teams.ui:151
+#: src/gtr-dl-teams.ui:124
 msgid "Stats"
 msgstr "Статистика"
 
-#: src/gtr-dl-teams.ui:165
+#: src/gtr-dl-teams.ui:138
 msgid "Load File"
 msgstr "Завантажити файл"
 
@@ -453,7 +452,7 @@ msgstr "Шаблон перекладу Gettext"
 msgid "All files"
 msgstr "Усі файли"
 
-#: src/gtr-greeter.ui:5 src/gtr-greeter.ui:45
+#: src/gtr-greeter.ui:5 src/gtr-greeter.ui:37
 msgid "Welcome to Translation Editor"
 msgstr "Вітаємо у «Редакторі перекладів»"
 
@@ -465,7 +464,7 @@ msgstr "Далі"
 msgid "Welcome"
 msgstr "Вітаємо"
 
-#: src/gtr-greeter.ui:47
+#: src/gtr-greeter.ui:39
 msgid ""
 "Before start to use the application, a profile should be created, but don't "
 "worry, the app will guide you to do it in a minute."
@@ -474,59 +473,59 @@ msgstr ""
 "Втім, не переймайтеся — програма надасть вам настанови, щоб виконати це "
 "завдання за якусь хвилинку."
 
-#: src/gtr-greeter.ui:63
+#: src/gtr-greeter.ui:51
 msgid "Create Profile"
 msgstr "Створити профіль"
 
-#: src/gtr-greeter.ui:75
+#: src/gtr-greeter.ui:57
 msgid "Profile"
 msgstr "Профіль"
 
-#: src/gtr-greeter.ui:78 src/gtr-greeter.ui:139 src/gtr-profile-dialog.ui:50
+#: src/gtr-greeter.ui:60 src/gtr-greeter.ui:114 src/gtr-profile-dialog.ui:50
 msgid "Profile name"
 msgstr "Назва профілю"
 
-#: src/gtr-greeter.ui:79 src/gtr-profile-dialog.ui:51
+#: src/gtr-greeter.ui:61 src/gtr-profile-dialog.ui:51
 msgid "default"
 msgstr "типовий"
 
-#: src/gtr-greeter.ui:85 src/gtr-greeter.ui:144
+#: src/gtr-greeter.ui:67 src/gtr-greeter.ui:119
 msgid "Translator name"
 msgstr "Ім’я перекладача"
 
-#: src/gtr-greeter.ui:91 src/gtr-greeter.ui:149
+#: src/gtr-greeter.ui:73 src/gtr-greeter.ui:124
 msgid "Translator email"
 msgstr "Адреса ел. пошти перекладача"
 
-#: src/gtr-greeter.ui:97
+#: src/gtr-greeter.ui:79
 msgid "Translation team email"
 msgstr "Адреса ел. пошти команди перекладу"
 
-#: src/gtr-greeter.ui:120 src/gtr-greeter.ui:131
+#: src/gtr-greeter.ui:100 src/gtr-greeter.ui:106
 msgid "Confirmation"
 msgstr "Підтвердження"
 
-#: src/gtr-greeter.ui:154
+#: src/gtr-greeter.ui:129
 msgid "Team email"
 msgstr "Адреса ел. пошти команди"
 
-#: src/gtr-greeter.ui:159
+#: src/gtr-greeter.ui:134
 msgid "Language name"
 msgstr "Назва мови"
 
-#: src/gtr-greeter.ui:164 src/gtr-languages-fetcher.ui:21
+#: src/gtr-greeter.ui:139 src/gtr-languages-fetcher.ui:14
 msgid "Language code"
 msgstr "Код мови"
 
-#: src/gtr-greeter.ui:169 src/gtr-languages-fetcher.ui:41
+#: src/gtr-greeter.ui:144 src/gtr-languages-fetcher.ui:34
 msgid "Character set"
 msgstr "Кодування символів"
 
-#: src/gtr-greeter.ui:174 src/gtr-languages-fetcher.ui:61
+#: src/gtr-greeter.ui:149 src/gtr-languages-fetcher.ui:54
 msgid "Transfer encoding"
 msgstr "Кодування перенесення"
 
-#: src/gtr-greeter.ui:179
+#: src/gtr-greeter.ui:154
 msgid "Plural form"
 msgstr "Форма множини"
 
@@ -576,7 +575,6 @@ msgid "Enc_oding"
 msgstr "Код_ування"
 
 #: src/gtr-header-dialog.ui:64
-#| msgid "Plural forms"
 msgid "_Plural forms"
 msgstr "_Форми множини"
 
@@ -616,19 +614,24 @@ msgstr "Мова"
 msgid "State"
 msgstr "Стан"
 
-#: src/gtr-languages-fetcher.ui:18
+#: src/gtr-lang-combo-row.c:73
+#| msgid "Language"
+msgid "Languages"
+msgstr "Мови"
+
+#: src/gtr-languages-fetcher.ui:11
 msgid "Edit options manually"
 msgstr "Редагувати параметри вручну"
 
-#: src/gtr-languages-fetcher.ui:28
+#: src/gtr-languages-fetcher.ui:21
 msgid "Choose language code"
 msgstr "Виберіть код мови"
 
-#: src/gtr-languages-fetcher.ui:81
+#: src/gtr-languages-fetcher.ui:74
 msgid "Plural forms"
 msgstr "Форми множини"
 
-#: src/gtr-languages-fetcher.ui:88
+#: src/gtr-languages-fetcher.ui:81
 msgid "Choose plural forms"
 msgstr "Виберіть форми множини"
 
@@ -1025,7 +1028,6 @@ msgid "Advanced Tools"
 msgstr "Додаткові інструменти"
 
 #: src/gtr-tab.ui:322
-#| msgid "Original message"
 msgid "Fix plural messages"
 msgstr "Виправити повідомлення із формами множини"
 
@@ -1237,19 +1239,19 @@ msgstr "Виберіть каталог PO"
 msgid "Translation Editor Memory Manager"
 msgstr "Керування пам'яттю перекладів"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:41
+#: src/translation-memory/gtr-translation-memory-dialog.ui:43
 msgid "Database"
 msgstr "База даних"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:46
+#: src/translation-memory/gtr-translation-memory-dialog.ui:48
 msgid "Select the directory which contains PO files"
 msgstr "Виберіть каталог який містить PO-файли"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:58
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
 msgid "Use only files with this name"
 msgstr "Використовувати файли лише з такою назвою"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:77
+#: src/translation-memory/gtr-translation-memory-dialog.ui:79
 msgid "Add to Database"
 msgstr "Додати у базу даних"
 
