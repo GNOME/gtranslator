@@ -1,37 +1,39 @@
 # Serbian translation of gtranslator
-# Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003—2017.
+# Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003—2022.
 # This file is distributed under the same license as the gtranslator package.
 # Veljko M. Stanojević <veljko@vms.homelinux.net>
 # Miloš Popović <gpopac@gmail.com>, 2009—2010.
-# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2010—2017.
+# Marko M. Kostić <marko.m.kostic@gmail.com>, 2020.
+# Dušan Simić <dusan.simic1810@gmail.com>, 2021.
+# Miroslav Nikolić <miroslavnikolić@rocketmail.com>, 2010—20-2024.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gtransl"
-"ator&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-10 10:20+0000\n"
-"PO-Revision-Date: 2017-02-25 20:05+0200\n"
-"Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
-"Language-Team: Serbian <(nothing)>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
+"POT-Creation-Date: 2024-11-16 11:19+0000\n"
+"PO-Revision-Date: 2024-11-17 10:41+0100\n"
+"Last-Translator: Miroslav Nikolić <miroslavnikolić@rocketmail.com>\n"
+"Language-Team: Serbian <srpski <gnome-sr@googlegroups.org>>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
-"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2\n"
 "X-Project-Style: gnome\n"
+"X-Generator: Gtranslator 46.1\n"
 
-#: ../data/gtranslator.appdata.xml.in.h:1
-#: ../data/desktop/gtranslator.desktop.in.h:1 ../src/gtr-application.c:326
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 msgid "Gtranslator"
 msgstr "Gnomov prevodilac"
 
-#: ../data/gtranslator.appdata.xml.in.h:2
-#: ../data/desktop/gtranslator.desktop.in.h:4
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:8
+#: data/org.gnome.Gtranslator.desktop.in.in:5
 msgid "Translate and localize applications and libraries"
 msgstr "Prevodite i lokalizujte programe i biblioteke"
 
-#: ../data/gtranslator.appdata.xml.in.h:3
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:10
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -46,11 +48,7 @@ msgstr ""
 "različiti profili prevodioca, tabela poruka (zarad pregleda prevoda/poruka u "
 "po datoteci), lako kretanje i uređivanje poruka prevoda i napomena o prevodu."
 
-#: ../data/gtranslator.appdata.xml.in.h:4
-#| msgid ""
-#| "Gtranslator includes also a plugin system with many interesting plugins "
-#| "like alternate language, insert tags, open tran, integration with "
-#| "subversion and a source code viewer."
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:19
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
 "alternate language, insert tags, integration with subversion and a source "
@@ -60,19 +58,30 @@ msgstr ""
 "priključcima kao što je izborni jezik, oznake umetanja, objedinjavanje sa "
 "pregledačem subverzije i izvornog koda."
 
-#: ../data/desktop/gtranslator.desktop.in.h:2
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:197
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
+#: src/gtr-application.c:600 src/gtr-greeter.ui:181 src/gtr-window.c:221
+msgid "Translation Editor"
+msgstr "Uređivač prevoda"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "PO File Editor"
 msgstr "Uređivač PO datoteka"
 
-#: ../data/desktop/gtranslator.desktop.in.h:3
-msgid "Gtranslator PO File Editor"
-msgstr "Gnomov prevodilac za PO datoteke"
+#: data/org.gnome.Gtranslator.desktop.in.in:14
+msgid "Gtranslator;Translation;Editor;Gettext;Write;"
+msgstr ""
+"Gtranslator;Translation;Editor;Gettext;Write;G-translator;prevod;uređivač;"
+"gettekst;pisanje;G-translator;prevod;uređivač;gettekst;pisanje;uredjivac;"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:1
+#: data/org.gnome.Gtranslator.gschema.xml.in:24
 msgid "Warn if file contains fuzzy translations"
 msgstr "Upozorenje ukoliko prevod sadrži nejasne poruke"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:2
+#: data/org.gnome.Gtranslator.gschema.xml.in:25
 msgid ""
 "If true, warn the user when saving a PO translation file containing fuzzy "
 "strings."
@@ -80,38 +89,47 @@ msgstr ""
 "Ukoliko je izabrano, upozoriće vas prilikom čuvanja datoteke prevoda koja "
 "sadrži nejasne poruke."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:3
+#: data/org.gnome.Gtranslator.gschema.xml.in:32
+msgid "Whether to remove the obsolete entries upon saving"
+msgstr "Da li će sčuvati zastarele unose nakon čuvanja"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:33
+msgid ""
+"If true, the obsolete entries will be removed from the file after saving"
+msgstr "Ako je izabrano, zastareli unosi biće uklonjeni iz datoteke nakon čuvnja"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:39
 msgid "Auto save files"
 msgstr "Automatsko čuvanje datoteka"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:4
+#: data/org.gnome.Gtranslator.gschema.xml.in:40
 msgid "If true, automatically save files at specified intervals."
 msgstr ""
 "Ukoliko je izabrano, datoteke će biti sačuvane u zadatom vremenskom "
 "intervalu."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:5
+#: data/org.gnome.Gtranslator.gschema.xml.in:46
 msgid "Auto save interval"
 msgstr "Vreme automatskog čuvanja"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:6
+#: data/org.gnome.Gtranslator.gschema.xml.in:47
 msgid "Interval in minutes at which to automatically save files."
 msgstr "Vreme u minutima nakon koga će sam sačuvati datoteke."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:7
+#: data/org.gnome.Gtranslator.gschema.xml.in:53
 msgid "Create backup before saving"
 msgstr "Stvaranje rezerve pre čuvanja"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:8
+#: data/org.gnome.Gtranslator.gschema.xml.in:54
 msgid "If true, create a backup copy of a file before saving it."
 msgstr ""
 "Ukoliko je izabrano, praviće rezervnu kopiju datoteke pre njenog čuvanja."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:9
+#: data/org.gnome.Gtranslator.gschema.xml.in:60
 msgid "Use profile values for header"
 msgstr "Koristi vrednosti iz profila za zaglavlje"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:10
+#: data/org.gnome.Gtranslator.gschema.xml.in:61
 msgid ""
 "If true, overwrite the values in the PO header with those in the active "
 "profile."
@@ -119,486 +137,1157 @@ msgstr ""
 "Ukoliko je izabrano, prepisaće vrednsoti zaglavlja PO datoteke onim iz "
 "aktivnog profila."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:11
+#: data/org.gnome.Gtranslator.gschema.xml.in:70
 msgid "Highlight syntax in edit fields"
 msgstr "Ističe sintakse poruka"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:12
+#: data/org.gnome.Gtranslator.gschema.xml.in:71
 msgid "If true, apply syntax highlighting to strings in edit fields."
 msgstr "Ukoliko je izabrano, isticaće sintaksu u poljima prevoda."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:13
+#: data/org.gnome.Gtranslator.gschema.xml.in:77
 msgid "Make whitespace visible"
 msgstr "Čini razmake vidljivim"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:14
+#: data/org.gnome.Gtranslator.gschema.xml.in:78
 msgid "If true, display whitespace in strings as representative symbols."
 msgstr ""
 "Ukoliko je izabrano, razmaci između reči biće prikazani u vidu simbola."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:15
-msgid "Use custom font"
-msgstr "Koristi proizvoljni font"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:16
-msgid "If true, use a custom font for edit fields."
-msgstr "Ukoliko je izabrano, koristiće proizvoljan font za uređivanje prevoda."
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:17
-msgid "Editor font"
-msgstr "Font uređivanja"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:18
-msgid "Custom font to use for edit fields."
-msgstr "Proizvoljni font za tekst prevoda."
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:19
+#: data/org.gnome.Gtranslator.gschema.xml.in:84
 msgid "Remove fuzzy status when message is changed"
 msgstr "Uklanjanje stanja nejasne poruke nakon njene izmene"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:20
+#: data/org.gnome.Gtranslator.gschema.xml.in:85
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr ""
 "Ukoliko je izabrano, stanje nejasnih poruka biće uklonjeno nakon njihove izmene."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:21
+#: data/org.gnome.Gtranslator.gschema.xml.in:91
 msgid "Check spelling"
 msgstr "Provera pisanja"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:22
+#: data/org.gnome.Gtranslator.gschema.xml.in:92
 msgid "If true, check the spelling of translated messages."
 msgstr "Ukoliko je izabrano, vršiće se provera pisanja u prevodu."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:23
+#: data/org.gnome.Gtranslator.gschema.xml.in:103
 msgid "Side panel switcher style"
 msgstr "Izgled prebacivača bočne površi"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:24
+#: data/org.gnome.Gtranslator.gschema.xml.in:104
 msgid "Style for switchers in the side panel."
 msgstr "Stil prebacivača u bočnoj površi."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:25
-msgid "Color scheme"
-msgstr "Šema boje"
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:26
-msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
-msgstr "Naziv „gtksourceview“ šeme boja za isticanje sintakse."
-
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:27
+#: data/org.gnome.Gtranslator.gschema.xml.in:110
 msgid "Message list sort order"
 msgstr "Redosled liste poruka"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:28
+#: data/org.gnome.Gtranslator.gschema.xml.in:111
 msgid ""
-"Sort order to use in the message list. Possible values are \"status\", \"id"
-"\", \"original-text\" and \"translated-text\"."
+"Sort order to use in the message list. Possible values are “status”, “id”, "
+"“original-text” and “translated-text”."
 msgstr ""
 "Redosled sortiranja spiska poruka. Dozvoljene vrednosti su „status“, „id“, "
 "„original-text“ i „translated-text“."
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:29
+#: data/org.gnome.Gtranslator.gschema.xml.in:143
 msgid "Active plugins"
 msgstr "Uključeni dodaci"
 
-#: ../data/org.gnome.gtranslator.gschema.xml.in.h:30
+#: data/org.gnome.Gtranslator.gschema.xml.in:144
 msgid ""
-"List of active plugins. It contains the \"Location\" of the active plugins. "
-"See the .gtranslator-plugin file for obtaining the \"Location\" of a given "
+"List of active plugins. It contains the “Location” of the active plugins. "
+"See the .gtranslator-plugin file for obtaining the “Location” of a given "
 "plugin."
 msgstr ""
 "Spisak uključenih dodataka. Sadrži „Lokaciju“ aktivnih dodataka. Pogledajte "
 "datoteku „.gtranslator-plugin“ da biste saznali „Lokaciju“ željenog dodatka."
 
-#: ../data/po.lang.h:1
-msgid "Others"
-msgstr "Ostalo"
-
-#: ../data/po.lang.h:2
-msgid "gtranslator highlight"
-msgstr "Isticanje teksta"
-
-#: ../data/po.lang.h:3
-msgid "Tag"
-msgstr "Oznaka"
-
-#: ../data/po.lang.h:4
-msgid "Special variable"
-msgstr "Posebna promenljiva"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:126
-msgid "Message not found"
-msgstr "Poruka nije pronađena"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:229
-msgid "Open file for alternate language"
-msgstr "Otvorite datoteku za jezik zamene"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:254
-msgid "File closed"
-msgstr "Datoteka je zatvorena"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:322
-msgctxt "alternate lang"
-msgid "_Open"
-msgstr "_Otvori"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:328
-msgctxt "alternate lang"
-msgid "_Close"
-msgstr "_Zatvori"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:334
-msgctxt "alternate lang"
-msgid "Co_py"
-msgstr "_Umnoži"
-
-#: ../plugins/alternate-language/gtr-alternate-language-panel.c:363
-msgid "There isn't any file loaded"
-msgstr "Nije učitana nijedna datoteka"
-
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:81
-msgid "_Alternate Language"
-msgstr "_Jezik zamene"
-
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:82
-msgid "Show the Alternate Language panel"
-msgstr "Prikazuje panel jezika zamene"
-
-#: ../plugins/alternate-language/gtr-alternate-language-plugin.c:222
-#: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:1
-msgid "Alternate Language"
-msgstr "Jezik zamene"
-
-#: ../plugins/alternate-language/gtr-alternate-language.plugin.desktop.in.h:2
-msgid "Load an alternate language."
-msgstr "Učitava jezik zamene."
-
-#. ex:et:ts=4:
-#: ../plugins/charmap/charmap/__init__.py:42
-#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:1
-msgid "Character Map"
-msgstr "Tablica znakova"
-
-#: ../plugins/charmap/gtr-charmap.plugin.desktop.in.h:2
-msgid "Insert special characters just by clicking on them."
-msgstr "Umeće posebne znake jednostavnim klikom na njih."
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:1
-msgid "Source View Settings"
-msgstr "Podešavanja pregleda izvora"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:2
-msgid "Use external editor"
-msgstr "Koristi spoljni program za uređivanje"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:3
-msgid "Program command:"
-msgstr "Naredba programa:"
-
-#: ../plugins/codeview/gtr-codeview-dialog.ui.h:4
-msgid "Line command:"
-msgstr "Naredba linije:"
-
-#: ../plugins/codeview/gtr-codeview-plugin.c:129
-#, c-format
-msgid "Please install \"%s\" to be able to show the file"
-msgstr "Instalirajte „%s“ za prikaz ove datoteke"
-
-#: ../plugins/codeview/gtr-codeview-plugin.c:497
-msgid "Paths:"
-msgstr "Putanje:"
-
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:1
-msgid "Source Code View"
-msgstr "Prikaz izvornog koda"
-
-#: ../plugins/codeview/gtr-codeview.plugin.desktop.in.h:2
-msgid "Show the message in the source code."
-msgstr "Prikazuje poruke u izvornom kodu."
-
-#: ../plugins/codeview/gtr-viewer.c:80
+#: src/codeview/gtr-viewer.c:98
 msgid "Source Viewer"
 msgstr "Prikazivanje izvora"
 
-#: ../plugins/codeview/gtr-viewer.ui.h:1
+#: src/codeview/gtr-viewer.ui:26
 msgid "Source code"
 msgstr "Izvorni kȏd"
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:1
-msgid "Use the System Editor"
-msgstr "Koristi Uređivač sistema"
+#: src/gtr-actions-app.c:86
+msgid ""
+"Translation file editing suite for localization of applications and "
+"libraries."
+msgstr "Program za uređivanje datoteka sa prevodima programa i biblioteka."
 
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:2
-msgid "Whether use the system editor to show the source code"
-msgstr "Da li će biti korišćen uređivač sistema za prikazivanje izvornog kôda"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:3
-msgid "The Editor to Launch"
-msgstr "Uređivač za pokretanje"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:4
-msgid "The command to launch the editor you want to use"
-msgstr "Naredba za pokretanje uređivača koji želite da koristite"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:5
-msgid "Arguments for the Command"
-msgstr "Argument za naredbu"
-
-#: ../plugins/codeview/org.gnome.gtranslator.plugins.codeview.gschema.xml.in.h:6
-msgid "Arguments to pass to the program command line to select the line"
+#.
+#. * Note to translators: put here your name and email so it will show
+#. * up in the "about" box
+#.
+#: src/gtr-actions-app.c:103
+msgid "translator-credits"
 msgstr ""
-"Argument koji će biti prosleđen komandnoj liniji programa za biranje linije"
+"Veljko M. Stanojević <veljko@vms.homelinux.net>\n"
+"Miloš Popović <gpopac@gmail.com>\n"
+"Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
+"Marko M. Kostić <marko.m.kostic@gmail.com>\n"
+"Dušan Simić <dusan.simic1810@gmail.com>\n"
+"\n"
+"Prevod.org — prevod na srpski jezik."
 
-#: ../plugins/dictionary/gtr-dictionary-plugin.c:140
-#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:1
-msgid "Dictionary"
-msgstr "Rečnik"
+#: src/gtr-actions-file.c:197 src/gtr-close-confirmation-dialog.c:348
+msgid "Unsaved Changes"
+msgstr "Nesačuvane promene"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:166
+#: src/gtr-actions-file.c:202
 #, c-format
-msgid "No dictionary source available with name '%s'"
-msgstr "Nije dostupan rečnik sa nazivom „%s“"
+msgid "Do you want to write all the changes done to %s?"
+msgstr "Da li želite da upišete sve izmene nad %s?"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:170
-msgid "Unable to find dictionary source"
-msgstr "Ne mogu da pronađem izvor rečnika"
+#: src/gtr-actions-file.c:206 src/gtr-context.c:150
+#: src/gtr-profile-dialog.ui:17 src/gtr-upload-dialog.ui:17
+msgid "Cancel"
+msgstr "Otkaži"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:185
+#: src/gtr-actions-file.c:207
+msgid "Continue Without Saving"
+msgstr "Nastavi bez čuvanja"
+
+#: src/gtr-actions-file.c:208
+msgid "Save and Open"
+msgstr "Sačuvaj i otvori"
+
+#: src/gtr-actions-file.c:230
+msgid "Open file for translation"
+msgstr "Otvorite datoteku za prevođenje"
+
+#: src/gtr-actions-file.c:318
+msgid "This file has already been uploaded"
+msgstr "Ova datoteka je već otpremljena"
+
+#: src/gtr-actions-file.c:337
 #, c-format
-msgid "No context available for source '%s'"
-msgstr "Nije dostupna pojava poruke za „%s“"
+msgid ""
+"An error occurred while uploading the file: %s\n"
+"Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
+"correctly in your profile or you don't have permissions to upload this "
+"module."
+msgstr ""
+"Došlo je do greške prilikom otpremanja datoteke: %s\n"
+"Možda niste ispravno podesili vašu <i>l10n.gnome.org</i> <b>skupinu</b> na "
+"vašem profilu ili nemate ovlašćenja da otpremite ovaj modul."
 
-#: ../plugins/dictionary/gtr-dict-panel.c:189
-msgid "Unable to create a context"
-msgstr "Ne mogu da obrazujem pojavu poruke"
+#: src/gtr-actions-file.c:346
+msgid "The file has been uploaded!"
+msgstr "Ova datoteka je već otpremljena!"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:272
+#: src/gtr-actions-file.c:489
+msgid "Save file as…"
+msgstr "Sačuvaj kao…"
+
+#: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:453
+msgid "_Cancel"
+msgstr "_Otkaži"
+
+#: src/gtr-close-confirmation-dialog.c:123
+msgid "Close _Without Saving"
+msgstr "Zatvori bez _čuvanja"
+
+#: src/gtr-close-confirmation-dialog.c:124
+msgid "_Save"
+msgstr "_Sačuvaj"
+
+#: src/gtr-close-confirmation-dialog.c:305
 #, c-format
-msgid "Dictionary source '%s' selected"
-msgstr "Izabran je izvor rečnika „%s“"
+msgid "Save the changes to document “%s” before closing?"
+msgstr "Da sačuvam izmene u dokumentu „%s“ pre zatvaranja?"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:291
+#: src/gtr-close-confirmation-dialog.c:319
 #, c-format
-msgid "Strategy '%s' selected"
-msgstr "Izabrana je strategija „%s“"
+msgid "Changes to %d document will be permanently lost."
+msgid_plural "Changes to %d documents will be permanently lost."
+msgstr[0] "Izmene u %d dokumentu će biti trajno odbačene."
+msgstr[1] "Izmene u %d dokumenta će biti trajno odbačene."
+msgstr[2] "Izmene u %d dokumenata će biti trajno odbačene."
+msgstr[3] "Izmene učinjene u dokumentu će biti trajno odbačene."
 
-#: ../plugins/dictionary/gtr-dict-panel.c:309
+#: src/gtr-close-confirmation-dialog.c:326
 #, c-format
-msgid "Database '%s' selected"
-msgstr "Izabrana je baza podataka „%s“"
+msgid "There is %d document with unsaved changes. Save changes before closing?"
+msgid_plural ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr[0] ""
+"%d dokument ima nesačuvane izmene. Da li da ih sačuvam pre zatvaranja?"
+msgstr[1] ""
+"%d dokumenta imaju nesačuvane izmene. Da li da ih sačuvam pre zatvaranja?"
+msgstr[2] ""
+"%d dokumenata imaju nesačuvane izmene. Da li da ih sačuvam pre zatvaranja?"
+msgstr[3] "Dokument ima nesačuvane izmene. Da li da ih sačuvam pre zatvaranja?"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:353
+#: src/gtr-context.c:151 src/gtr-tab.ui:419
+msgid "Save"
+msgstr "Sačuvaj"
+
+#: src/gtr-context.c:157 src/gtr-context.ui:28
+msgid "Notes"
+msgstr "Beleške"
+
+#: src/gtr-context.ui:61
+msgid "Extracted comments"
+msgstr "Izvučene napomene"
+
+#: src/gtr-context.ui:86
+msgid "Paths"
+msgstr "Putanje"
+
+#: src/gtr-dl-teams.c:251
 #, c-format
-msgid "Word '%s' selected"
-msgstr "Izabrana je reč „%s“"
+msgid "Error loading module info: %s"
+msgstr "Ne mogu da učitam podatke o modulu: %s"
 
-#. speller
-#: ../plugins/dictionary/gtr-dict-panel.c:375
-msgid "Double-click on the word to look up"
-msgstr "Dvaput kliknite na reč da je potražite"
+#: src/gtr-dl-teams.c:441
+#, c-format
+msgid "Error loading file info: %s"
+msgstr "Ne mogu da pročitam podatke o datoteci: %s"
 
-#. strat-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:380
-msgid "Double-click on the matching strategy to use"
-msgstr "Dvaput kliknite na podudarajuću strategiju da je koristite"
+#: src/gtr-dl-teams.c:470
+msgid "No module state found."
+msgstr "Nisam našao stanje modula."
 
-#. source-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:386
-msgid "Double-click on the source to use"
-msgstr "Dvaput kliknite na izvor da ga koristite"
+#: src/gtr-dl-teams.c:562
+#, c-format
+msgid "Error loading file: %s"
+msgstr "Greška prilikom učitavanja datoteke: %s"
 
-#. db-chooser
-#: ../plugins/dictionary/gtr-dict-panel.c:396
-msgid "Double-click on the database to use"
-msgstr "Dvaput kliknite na bazu podataka da je koristite"
+#: src/gtr-dl-teams.c:571 src/gtr-dl-teams.c:615
+#, c-format
+msgid "Error creating tmp file: %s"
+msgstr "Greška prilikom pravljenja privremene datoteke: %s"
 
-#. Look up Button
-#: ../plugins/dictionary/gtr-dict-panel.c:502
-msgid "Look _up:"
-msgstr "_Pronađi:"
+#: src/gtr-dl-teams.c:586
+#, c-format
+msgid "Error writing stream: %s"
+msgstr "greška prilikom upisa u tok: %s"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:559
-msgid "Similar words"
-msgstr "Slične reči"
+#: src/gtr-dl-teams.c:624
+#, c-format
+msgid "The file '%s' has been saved in %s"
+msgstr "Datoteka „%s“ je sačuvana u „%s“"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:572
-msgid "Available dictionaries"
-msgstr "Dostupni rečnici"
+#: src/gtr-dl-teams.c:695
+#, c-format
+msgid ""
+"An error occurred while reserving this module: %s\n"
+"Maybe you've not configured your l10n.gnome.org token correctly in your "
+"profile or you don't have permissions to reserve this module."
+msgstr ""
+"Došlo je do greške prilikom rezervisanja ovog modula: %s\n"
+"Možda niste ispravno podesili vaš l10n.gnome.org žeton unutar profila ili "
+"nemate ovlašćenja da rezervišete ovaj modul."
 
-#: ../plugins/dictionary/gtr-dict-panel.c:586
-msgid "Available strategies"
-msgstr "Dostupne strategije"
+#: src/gtr-dl-teams.c:707
+#, c-format
+msgid "The file '%s.%s.%s.%s' has been successfully reserved"
+msgstr "Datoteka „%s.%s.%s.%s“ je uspešno rezervisana"
 
-#: ../plugins/dictionary/gtr-dict-panel.c:596
-msgid "Dictionary sources"
-msgstr "Izvori rečnika"
+#: src/gtr-dl-teams.ui:7 src/gtr-projects.ui:7 src/gtr-tab.ui:260
+msgid "New Window"
+msgstr "Novi prozor"
 
-#: ../plugins/dictionary/gtr-dict.plugin.desktop.in.h:2
-msgid "Look up words in a dictionary."
-msgstr "Tražite reči u rečniku."
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:264
+msgid "Preferences"
+msgstr "Postavke"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:1
-msgid "Database"
-msgstr "Baza podataka"
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:270
+msgid "Keyboard Shortcuts"
+msgstr "Prečice na tastaturi"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:2
-msgid "Word database"
-msgstr "Baza podataka reči"
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:278
+msgid "About Translation Editor"
+msgstr "O Uređivaču prevoda"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:3
-msgid "Source Name"
-msgstr "Ime izvora"
+#: src/gtr-dl-teams.ui:57 src/gtr-languages-fetcher.ui:5
+#: src/gtr-languages-fetcher.ui:8
+msgid "Language"
+msgstr "Jezik"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:4
-msgid "Strategy"
-msgstr "Strategija"
+#: src/gtr-dl-teams.ui:68 src/gtr-header-dialog.ui:152
+msgid "Module"
+msgstr "Modul"
 
-#: ../plugins/dictionary/org.gnome.gtranslator.plugins.dictionary.gschema.xml.in.h:5
-msgid "Panel Position"
-msgstr "Položaj panela"
+#: src/gtr-dl-teams.ui:79 src/gtr-header-dialog.ui:164
+msgid "Domain"
+msgstr "Domen"
 
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:67
-msgid "_Fullscreen"
-msgstr "_Ceo ekran"
+#: src/gtr-dl-teams.ui:90 src/gtr-header-dialog.ui:158
+msgid "Branch"
+msgstr "Grana"
 
-#: ../plugins/fullscreen/gtr-fullscreen-plugin.c:68
-msgid "Place window on fullscreen state"
-msgstr "Prikazuje prozor preko celog ekrana"
+#: src/gtr-dl-teams.ui:107
+msgid "Reserve for translation"
+msgstr "Rezerviši za prevođenje"
 
-#: ../plugins/fullscreen/gtr-fullscreen.plugin.desktop.in.h:1
-msgid "Fullscreen"
-msgstr "Ceo ekran"
+#: src/gtr-dl-teams.ui:120
+msgid "Info"
+msgstr "Podaci"
 
-#: ../plugins/fullscreen/gtr-fullscreen.plugin.desktop.in.h:2
-msgid "Place window in the fullscreen state."
-msgstr "Prikazuje prozor preko celog ekrana."
+#: src/gtr-dl-teams.ui:123
+msgid "File"
+msgstr "Datoteka"
 
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:113
-msgid "_Next Param"
-msgstr "_Sledeći parametar"
+#: src/gtr-dl-teams.ui:133
+msgid "Translation State"
+msgstr "Stanje prevoda"
 
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:114
-msgid "Insert the next param of the message"
-msgstr "Umeće sledeći parametar poruke"
+#: src/gtr-dl-teams.ui:143
+msgid "Stats"
+msgstr "Statistika"
 
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:116
-msgid "_Insert Params"
-msgstr "_Umetni parametre"
+#: src/gtr-dl-teams.ui:157
+msgid "Load File"
+msgstr "Učitaj "
 
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:117
-msgid "_Next Tag"
-msgstr "Sle_deća oznaka"
+#: src/gtr-dl-teams.ui:176 src/gtr-projects.ui:50
+msgid "Open…"
+msgstr "Otvori…"
 
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:118
-msgid "Insert the next tag of the message"
-msgstr "Umeće narednu oznaku poruke"
+#: src/gtr-dl-teams.ui:185 src/gtr-projects.ui:64 src/gtr-tab.ui:377
+msgid "Main Menu"
+msgstr "Glavni izbornik"
 
-#: ../plugins/insert-params/gtr-insert-params-plugin.c:120
-msgid "_Insert Tags"
-msgstr "Umetni o_znake"
+#: src/gtr-file-dialogs.c:57
+msgid "Gettext translation"
+msgstr "Gettekst prevod (.po)"
 
-#: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:1
-msgid "Insert Params or Tags"
-msgstr "Umetni parametre ili oznake"
+#: src/gtr-file-dialogs.c:65
+msgid "Gettext translation template"
+msgstr "Šablon Gettekst prevoda (.pot)"
 
-#: ../plugins/insert-params/gtr-insert-params.plugin.desktop.in.h:2
-msgid "Parameters and tags detection featuring easy insertion."
-msgstr "Nalaženje i lako umetanje parametara i oznaka."
+#: src/gtr-file-dialogs.c:69
+msgid "All files"
+msgstr "Sve datoteke"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:167
-msgid "Strings added to database"
-msgstr "Niske su dodate u bazu podataka"
+#: src/gtr-greeter.ui:11
+msgid "Welcome"
+msgstr "Dobrodošli"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:224
-msgid "Please specify a valid path to build the translation memory"
-msgstr "Molim navedite ispravnu putanju za stvaranje prevodilačke memorije"
+#: src/gtr-greeter.ui:23 src/gtr-window.c:640
+msgid "Welcome to Translation Editor"
+msgstr "Dobrodošli u Uređivač prevoda"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.c:291
-msgid "Gtranslator Translation Memory Manager"
-msgstr "Upravnik prevodilačke memorije"
+#: src/gtr-greeter.ui:25
+msgid ""
+"Before start to use the application, a profile should be created, but don't "
+"worry, the app will guide you to do it in a minute."
+msgstr ""
+"Pre nego što počnete da koristite program, potrebno je da napravite profila, "
+"ali ne brinite, ovaj program će vas provesti kroz ceo proces za koji minut."
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:1
-msgid "Database:"
-msgstr "Baza podataka:"
+#: src/gtr-greeter.ui:41
+msgid "Create Profile"
+msgstr "Napravi profil"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:2
-msgid "Select the directory which contains PO files:"
-msgstr "Izaberite direktorijum sa PO datotekama:"
+#: src/gtr-greeter.ui:53
+msgid "Profile"
+msgstr "Profil"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:3
-msgid "Add to Database"
-msgstr "Dodaj u bazu podataka"
+#: src/gtr-greeter.ui:56 src/gtr-greeter.ui:117 src/gtr-profile-dialog.ui:53
+msgid "Profile name"
+msgstr "Naziv profila"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:4
-msgid "Configuration:"
-msgstr "Podešavanje:"
+#: src/gtr-greeter.ui:57 src/gtr-profile-dialog.ui:54
+msgid "default"
+msgstr "podrazumevano"
 
-#: ../plugins/translation-memory/gtr-translation-memory-dialog.ui.h:5
-msgid "Use only files with this name:"
-msgstr "Koristi samo datoteke sa ovim imenom:"
+#: src/gtr-greeter.ui:63 src/gtr-greeter.ui:122
+msgid "Translator name"
+msgstr "Ime prevodioca"
 
-#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:1
-#: ../plugins/translation-memory/gtr-translation-memory-tab-activatable.c:178
+#: src/gtr-greeter.ui:69 src/gtr-greeter.ui:127
+msgid "Translator email"
+msgstr "E-pošta prevodioca"
+
+#: src/gtr-greeter.ui:75
+msgid "Translation team email"
+msgstr "Adresa e-pošte prevodilačkog tima"
+
+#: src/gtr-greeter.ui:98 src/gtr-greeter.ui:109
+msgid "Confirmation"
+msgstr "Potvrda"
+
+#: src/gtr-greeter.ui:132
+msgid "Team email"
+msgstr "E-pošta tima"
+
+#: src/gtr-greeter.ui:137
+msgid "Language name"
+msgstr "Naziv jezika"
+
+#: src/gtr-greeter.ui:142 src/gtr-languages-fetcher.ui:21
+msgid "Language code"
+msgstr "Kod jezika"
+
+#: src/gtr-greeter.ui:147 src/gtr-languages-fetcher.ui:41
+msgid "Character set"
+msgstr "Skup znakova"
+
+#: src/gtr-greeter.ui:152 src/gtr-languages-fetcher.ui:61
+msgid "Transfer encoding"
+msgstr "Prenesi kodiranje"
+
+#: src/gtr-greeter.ui:157
+msgid "Plural form"
+msgstr "Oblici množine"
+
+#: src/gtr-greeter.ui:192
+msgid "Next"
+msgstr "Sledeće"
+
+#: src/gtr-header-dialog.c:346 src/gtr-tab.ui:254
+msgid "Edit Header"
+msgstr "Uređivanje zaglavlja"
+
+#: src/gtr-header-dialog.ui:11
+msgid "Translator"
+msgstr "Prevodilac"
+
+#: src/gtr-header-dialog.ui:15 src/gtr-header-dialog.ui:83
+#: src/gtr-header-dialog.ui:143 src/gtr-preferences-dialog.ui:14
+msgid "General"
+msgstr "Opšte"
+
+#: src/gtr-header-dialog.ui:18
+msgid "Use my options to complete the following entries"
+msgstr "Koristi moje opcije za dovršavanje sledećih unosa"
+
+#: src/gtr-header-dialog.ui:31
+msgid "Translator’s _name"
+msgstr "I_me prevodioca"
+
+#: src/gtr-header-dialog.ui:37
+msgid "Translator’s _email"
+msgstr "E-pošta prevodioca"
+
+#: src/gtr-header-dialog.ui:43
+msgid "_Language"
+msgstr "_Jezik"
+
+#: src/gtr-header-dialog.ui:49
+msgid "Language _code"
+msgstr "_Šifra jezika"
+
+#: src/gtr-header-dialog.ui:55
+msgid "Language _Team email"
+msgstr "E-pošta prevodilačke _grupe"
+
+#: src/gtr-header-dialog.ui:61
+msgid "Char_set"
+msgstr "_Skup znakova"
+
+#: src/gtr-header-dialog.ui:67
+msgid "Enc_oding"
+msgstr "_Kodiranje"
+
+#: src/gtr-header-dialog.ui:79
+msgid "Project"
+msgstr "Projekat"
+
+#: src/gtr-header-dialog.ui:86
+msgid "Project Id _version"
+msgstr "_IB izdanje projekta"
+
+#: src/gtr-header-dialog.ui:92
+msgid "Pot _file creation date"
+msgstr "Datum na_stanka pot datoteke"
+
+#: src/gtr-header-dialog.ui:98
+msgid "Po file _revision date"
+msgstr "Datum _revizije po datoteke"
+
+#: src/gtr-header-dialog.ui:104
+msgid "Report message _bugs to"
+msgstr "Prijavite greške u programu _na"
+
+#: src/gtr-header-dialog.ui:112
+msgid "Comment"
+msgstr "Napomena"
+
+#: src/gtr-header-dialog.ui:139
+msgid "Damned Lies"
+msgstr "Proklete laži"
+
+#: src/gtr-header-dialog.ui:146
+msgid "Lang"
+msgstr "Jezik"
+
+#: src/gtr-header-dialog.ui:170
+msgid "State"
+msgstr "Stanje"
+
+#: src/gtr-languages-fetcher.ui:18
+msgid "Edit options manually"
+msgstr "Uredi opcije ručno"
+
+#: src/gtr-languages-fetcher.ui:28
+msgid "Choose language code"
+msgstr "Izaberi kod jezika"
+
+#: src/gtr-languages-fetcher.ui:81
+msgid "Plural forms"
+msgstr "Oblici množine"
+
+#: src/gtr-languages-fetcher.ui:88
+msgid "Choose plural forms"
+msgstr "Izaberite oblike množine"
+
+#: src/gtr-message-table.ui:37
+msgid "Original Message"
+msgstr "Izvorna poruka"
+
+#: src/gtr-message-table.ui:46
+msgid "Translated Message"
+msgstr "Prevedena poruka"
+
+#: src/gtr-po.c:509
+#, c-format
+msgid "The file is empty"
+msgstr "Datoteka je prazna"
+
+#: src/gtr-po.c:518
+#, c-format
+msgid "Failed opening file “%s”: %s"
+msgstr "Nisam uspeo da otvorim datoteku „%s“: %s"
+
+#: src/gtr-po.c:589
+#, c-format
+msgid "Could not convert from charset “%s” to UTF-8"
+msgstr "Ne mogu da pretvorim iz skupa znakova „%s“ u UTF-8"
+
+#: src/gtr-po.c:605 src/gtr-po.c:624
+#, c-format
+msgid "Could not store temporary file for encoding conversion"
+msgstr "Ne mogu da uskladištim privremenu biblioteku za pretvaranje šifrovanja"
+
+#: src/gtr-po.c:655
+#, c-format
+msgid ""
+"All attempt to convert the file to UTF-8 has failed, use the msgconv or "
+"iconv command line tools before opening this file with GNOME Translation "
+"Editor"
+msgstr ""
+"Svi pokušaji da pretvorim datoteku u UTF-8 su propali, upotrebite „msgconv“ "
+"ili „iconv“ alate linije naredbi pre nego što otvorite ovu datoteku u "
+"Gnomovom Uređivaču prevoda"
+
+#: src/gtr-po.c:723
+#, c-format
+msgid "Gettext returned a null message domain list."
+msgstr "Gettekst je vratio praznu poruku sa spiskom domena."
+
+#: src/gtr-po.c:770
+#, c-format
+msgid "No messages obtained from parser."
+msgstr "Nisu dobivene poruke iz programa za obradu."
+
+#: src/gtr-po.c:824
+#, c-format
+msgid ""
+"You are saving a file with a .pot extension.\n"
+"Pot files are generated by the compilation process.\n"
+"Your file should likely be named “%s.po”."
+msgstr ""
+"Vi čuvate datoteku sa nastavkom „.pot“.\n"
+"Pot datoteke se stvaraju u procesu sabiranja prevoda.\n"
+"Vaša datoteka bi trebala biti nazvana „%s.po“."
+
+#: src/gtr-po.c:852
+#, c-format
+msgid "The file %s is read-only, and can not be overwritten"
+msgstr "Datoteka „%s“ se može samo čitati i ne možete je prepisati drugom"
+
+#: src/gtr-po.c:871
+#, c-format
+msgid "There is an error in the PO file: %s"
+msgstr "Postoji greška u PO datoteci: %s"
+
+#: src/gtr-po.c:883
+#, c-format
+msgid "There was an error writing the PO file: %s"
+msgstr "Došlo je do greške prilikom pisanja PO datoteke: %s"
+
+#: src/gtr-preferences-dialog.c:268
+msgid "Edit"
+msgstr "Izmeni"
+
+#: src/gtr-preferences-dialog.c:271
+msgid "Delete"
+msgstr "Obriši"
+
+#: src/gtr-preferences-dialog.c:433
+msgid "Impossible to remove the active profile"
+msgstr "Ne mogu da uklonim aktivni profil"
+
+#: src/gtr-preferences-dialog.c:434
+msgid "Another profile should be selected as active before"
+msgstr "Morate najpre aktivirati neki drugi profil"
+
+#: src/gtr-preferences-dialog.c:438
+msgid "_Ok"
+msgstr "_U redu"
+
+#: src/gtr-preferences-dialog.c:448
+msgid "Are you sure you want to delete this profile?"
+msgstr "Da li ste sigurni da želite da obrišete ovaj profil?"
+
+#: src/gtr-preferences-dialog.c:454
+msgid "_Delete"
+msgstr "_Obriši"
+
+#: src/gtr-preferences-dialog.ui:10
+msgid "F_iles"
+msgstr "_Datoteke"
+
+#: src/gtr-preferences-dialog.ui:17
+msgid "_Warn if PO file contains fuzzy translations"
+msgstr "U_pozori ukoliko PO datoteka sadrži nejasne poruke"
+
+#: src/gtr-preferences-dialog.ui:28
+msgid "_Remove obsolete entries on save"
+msgstr "U_kloni zastarele unose pri čuvanju"
+
+#: src/gtr-preferences-dialog.ui:41
+msgid "Autosave"
+msgstr "Automatsko čuvanje"
+
+#: src/gtr-preferences-dialog.ui:44
+msgid "_Activate auto save"
+msgstr "O_mogući automatsko čuvanje"
+
+#: src/gtr-preferences-dialog.ui:55
+msgid "Autosave _interval"
+msgstr "_Interval za automatsko čuvanje"
+
+#: src/gtr-preferences-dialog.ui:75
+msgid "Create a _backup copy of files before saving"
+msgstr "Napravi _rezervnu kopiju pre čuvanja"
+
+#: src/gtr-preferences-dialog.ui:93
+msgid "_Editor"
+msgstr "Ure_đivač"
+
+#: src/gtr-preferences-dialog.ui:97
+msgid "Text Display"
+msgstr "Prikazivanje teksta"
+
+#: src/gtr-preferences-dialog.ui:100
+msgid "_Highlight message syntax"
+msgstr "Is_takni sintaksu poruke"
+
+#: src/gtr-preferences-dialog.ui:111
+msgid "Make _whitespace visible"
+msgstr "Prikaži _razmake između reči"
+
+#: src/gtr-preferences-dialog.ui:122
+msgid "_Font"
+msgstr "_Font"
+
+#: src/gtr-preferences-dialog.ui:140
+msgid "Contents"
+msgstr "Sadržaj"
+
+#: src/gtr-preferences-dialog.ui:143
+msgid "_Remove fuzzy status if message is changed"
+msgstr "U_kloni stanje nejasne poruke ako je izmenjena"
+
+#: src/gtr-preferences-dialog.ui:156
+msgid "Check _spelling"
+msgstr "_Proveri pisanje"
+
+#: src/gtr-preferences-dialog.ui:174
+msgid "_Profiles"
+msgstr "Pr_ofili"
+
+#: src/gtr-preferences-dialog.ui:178
+msgid "Profiles"
+msgstr "Profili"
+
+#: src/gtr-profile-dialog.c:119
+msgid "Translation Editor Profile"
+msgstr "Profil Gnomovog Uređivača prevoda"
+
+#: src/gtr-profile-dialog.ui:7 src/gtr-upload-dialog.ui:7
+msgid "Upload to Damned Lies"
+msgstr "Otpremi na Proklete Laži"
+
+#: src/gtr-profile-dialog.ui:22
+msgid "OK"
+msgstr "U redu"
+
+#: src/gtr-profile-dialog.ui:48
+msgid "Profile Information"
+msgstr "Podaci o profilu"
+
+#: src/gtr-profile-dialog.ui:62
+msgid "Translator Information"
+msgstr "Podaci o prevodiocu"
+
+#: src/gtr-profile-dialog.ui:67
+msgid "Translator _name"
+msgstr "I_me prevodioca"
+
+#: src/gtr-profile-dialog.ui:73
+msgid "Translator _email"
+msgstr "E-po_šta prevodioca"
+
+#: src/gtr-profile-dialog.ui:79
+msgid "Translation _team email"
+msgstr "E-poš_ta prevodilačkog tima"
+
+#: src/gtr-profile-dialog.ui:87
+msgid "Damned Lies Integration"
+msgstr "Integracija za Prokletim lažima"
+
+#: src/gtr-profile-dialog.ui:88
+msgid ""
+"GNOME Damned Lies integration token, go to your profile in https://l10n."
+"gnome.org/ to get it"
+msgstr ""
+"Skupina integracije Gnomovih Prokletih laži, idite na vaš profil na „https://"
+"l10n.gnome.org/“ da ga nabavite"
+
+#: src/gtr-profile-dialog.ui:93
+msgid "_Damned Lies auth token"
+msgstr "_Žeton za prijavu na Proklete laži"
+
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:250
+msgid "Build Translation Memory"
+msgstr "Napravi prevodilačku memoriju"
+
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:274
+msgid "Help"
+msgstr "Pomoć"
+
+#: src/gtr-projects.ui:39
+msgid "Open a new .po file or drag & drop here"
+msgstr "Otvorite novu .po datoteku ili je prevucite i pustite ovde"
+
+#: src/gtr-projects.ui:55
+msgid "Load from DL…"
+msgstr "Učitaj sa Prokletih Laži…"
+
+#: src/gtr-search-bar.ui:20
+msgid "Search"
+msgstr "Pretraga"
+
+#: src/gtr-search-bar.ui:57
+msgid "Switch between Search and Search-and-Replace"
+msgstr "Promeni između režima „Pretraga“ i „Pronađi i zameni“"
+
+#: src/gtr-search-bar.ui:63
+msgid "Show or hide search options such as case sensitivity"
+msgstr "Prikaži ili sakrij opcije pretraživanja kao što je veličina slova"
+
+#: src/gtr-search-bar.ui:90 src/gtr-search-bar.ui:99
+msgid "Replace"
+msgstr "Zameni"
+
+#: src/gtr-search-bar.ui:108
+msgid "Replace All"
+msgstr "Zameni sve"
+
+#: src/gtr-search-bar.ui:130
+msgid "Case sensitive"
+msgstr "Razlikuj veličinu slova"
+
+#: src/gtr-search-bar.ui:140
+msgid "Match whole word only"
+msgstr "Uporedi samo cele reči"
+
+#: src/gtr-search-bar.ui:150
+msgid "Wrap around"
+msgstr "Prelamaj okolo"
+
+#: src/gtr-search-bar.ui:160
+msgid "Original text"
+msgstr "Izvorni tekst"
+
+#: src/gtr-search-bar.ui:170
+msgid "Translated text"
+msgstr "Prevedeni tekst"
+
+#: src/gtr-tab.c:299
+#, c-format
+msgid "File is not consistent with profile %s"
+msgstr "Datoteka nije saglasna sa profilom %s"
+
+#: src/gtr-tab.c:301
+#, c-format
+msgid ""
+"File nplurals: %d, is different from profile nplurals %d.\n"
+"Kindly go to preferences and select a profile with consistent nplurals "
+"values as this file %s."
+msgstr ""
+"Polje nplurals u datoteci: %d, se razlikuje od polja u profilu %d.\n"
+"Idite u podešavanja i izaberite profil koji ima iste nplurals vrednosti kao "
+"datoteka %s."
+
+#: src/gtr-tab.c:421
+msgid "There is an error in the message:"
+msgstr "Postoji greška u poruci:"
+
+#: src/gtr-tab.c:640 src/gtr-tab.c:773
+msgid "fuzzy"
+msgstr "nejasno"
+
+#: src/gtr-tab.c:802
+#, c-format
+msgid "Plural %d"
+msgstr "Množina %d"
+
+#. Translators: Path to the document opened
+#: src/gtr-tab.c:1529
+msgid "Path:"
+msgstr "Putanja:"
+
+#: src/gtr-tab.c:2161
+#, c-format
+msgid "Translated: %0.2f%%"
+msgstr "Prevedeno: %0.2f%%"
+
+#: src/gtr-tab.c:2162
+#, c-format
+msgid "Translated: %d"
+msgstr "Prevedeno: %d"
+
+#: src/gtr-tab.c:2163
+#, c-format
+msgid "Untranslated: %d"
+msgstr "Neprevedeno: %d"
+
+#: src/gtr-tab.c:2164
+#, c-format
+msgid "Fuzzy: %d"
+msgstr "Nejasno: %d"
+
+#. <property name="ypad">5</property>
+#: src/gtr-tab.ui:54
+msgid "_Original Message"
+msgstr "Izv_orna poruka"
+
+#. <property name="ypad">5</property>
+#: src/gtr-tab.ui:114
+msgid "Translate_d Text"
+msgstr "Preve_dena poruka"
+
+#: src/gtr-tab.ui:203
+msgid "Order messages by"
+msgstr "Poređaj poruke po"
+
+#: src/gtr-tab.ui:214
+msgid "Appearance in the original file"
+msgstr "Izgled u izvornoj datoteci"
+
+#: src/gtr-tab.ui:219
+msgid "Message status"
+msgstr "Stanje poruke"
+
+#: src/gtr-tab.ui:225
+msgid "Original message"
+msgstr "Izvorna poruka"
+
+#: src/gtr-tab.ui:231
+msgid "Translated message"
+msgstr "Prevedena poruka"
+
+#: src/gtr-tab.ui:242 src/gtr-tab.ui:384
+msgid "Find"
+msgstr "Nađi"
+
+#: src/gtr-tab.ui:246
+msgid "Find and Replace"
+msgstr "Nađi i zameni"
+
+#: src/gtr-tab.ui:290
+msgid "Open a New File"
+msgstr "Otvori novu datoteku"
+
+#: src/gtr-tab.ui:297
+msgid "Open from Damned Lies"
+msgstr "Otvori sa Prokletih laži"
+
+#: src/gtr-tab.ui:312
+msgid "Undo"
+msgstr "Opozovi"
+
+#: src/gtr-tab.ui:320
+msgid "Redo"
+msgstr "Ponovi"
+
+#: src/gtr-tab.ui:335
+msgid "Previous message without translation (<Alt><Page Up>)"
+msgstr "Prethodna neprevedena poruka (<Alt><Page Up>)"
+
+#: src/gtr-tab.ui:343
+msgid "Next message without translation (<Alt><Page Down>)"
+msgstr "Sledeća neprevedena poruka (<Alt><Page Down>)"
+
+#: src/gtr-tab.ui:358
+msgid "Toggle Fuzzy State"
+msgstr "Promeni stanje nejasnosti"
+
+#: src/gtr-tab.ui:367
+msgid "Sort messages by"
+msgstr "Poređaj poruke po"
+
+#: src/gtr-tab.ui:399
+msgid "Upload File"
+msgstr "Pošalji datoteku"
+
+#: src/gtr-tab.ui:407
+msgid "Save as"
+msgstr "Sačuvaj kao"
+
+#: src/gtr-tab.ui:415
+msgid "Save Current File"
+msgstr "Sačuvaj trenutnu datoteku"
+
+#: src/gtr-upload-dialog.c:153
+msgid "Uploading..."
+msgstr "Otpremljuje se..."
+
+#: src/gtr-upload-dialog.c:159 src/gtr-upload-dialog.ui:22
+msgid "Upload"
+msgstr "Otpremi"
+
+#: src/gtr-upload-dialog.ui:40
+msgid "comment:"
+msgstr "napomena:"
+
+#. Translators: this is the title of the window with a modified document
+#: src/gtr-window.c:206
+#, c-format
+msgid "*%s — Translation Editor"
+msgstr "*%s — Uređivač prevoda"
+
+#. Translators: this is the title of the window with a document opened
+#: src/gtr-window.c:212
+#, c-format
+msgid "%s — Translation Editor"
+msgstr "%s — Uređivač prevoda"
+
+#: src/gtr-window.c:608
+msgid "Select a Po file"
+msgstr "Izaberite po datoteku"
+
+#: src/gtr-window.c:627
+msgid "Load from Damned Lies"
+msgstr "Učitaj sa Prokletih Laži"
+
+#: src/help-overlay.ui:13
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "Opšte"
+
+#: src/help-overlay.ui:18
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "Otvara PO datoteku"
+
+#: src/help-overlay.ui:25
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "Čuva trenutnu datoteku"
+
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "Čuva trenutnu datoteku kao"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Download from DL"
+msgstr "Preuzmi sa Prokletih laži"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Upload to DL"
+msgstr "Pošalji na Proklete laži"
+
+#: src/help-overlay.ui:53
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "Postavke"
+
+#: src/help-overlay.ui:60
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "Prečice na tastaturi"
+
+#: src/help-overlay.ui:67
+msgctxt "shortcut window"
+msgid "Help"
+msgstr "Pomoć"
+
+#: src/help-overlay.ui:74
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Izlaz"
+
+#: src/help-overlay.ui:83
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "Uredi"
+
+#: src/help-overlay.ui:88
+msgctxt "shortcut window"
+msgid "Undo"
+msgstr "Opozovi"
+
+#: src/help-overlay.ui:95
+msgctxt "shortcut window"
+msgid "Redo"
+msgstr "Ponovi"
+
+#: src/help-overlay.ui:102
+msgctxt "shortcut window"
+msgid "Clear translation"
+msgstr "Obriši prevod"
+
+#: src/help-overlay.ui:109
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr "Označi ili skini oznaku nejasnosti"
+
+#: src/help-overlay.ui:116
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "Kopiraj izvorni tekst u prevod"
+
+#: src/help-overlay.ui:125
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr "Navigacija"
+
+#: src/help-overlay.ui:130
+msgctxt "shortcut window"
+msgid "Go to the previous message"
+msgstr "Ide na prethodnu poruku"
+
+#: src/help-overlay.ui:137
+msgctxt "shortcut window"
+msgid "Go to the next message"
+msgstr "Ide na sledeću poruku"
+
+#: src/help-overlay.ui:144
+msgctxt "shortcut window"
+msgid "Go to the previous untranslated message"
+msgstr "Ide na prethodnu neprevedenu poruku"
+
+#: src/help-overlay.ui:151
+msgctxt "shortcut window"
+msgid "Go to the next untranslated message"
+msgstr "Ide na sledeću neprevedenu poruku"
+
+#: src/help-overlay.ui:160
+msgctxt "shortcut window group"
 msgid "Translation Memory"
 msgstr "Prevodilačka memorija"
 
-#: ../plugins/translation-memory/gtr-translation-memory.plugin.desktop.in.h:2
-msgid "Get translation suggestions from a data base."
-msgstr "Pronađite savete prilikom prevođenja u bazi podataka."
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:207
-#, c-format
-msgid "Insert Option nº %d"
-msgstr "Umetni opciju br. %d"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:325
-msgid "_Use this translation"
-msgstr "_Koristi ovaj prevod"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:330
-msgid "_Remove"
-msgstr "_Ukloni"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:445
-msgid "Shortcut"
-msgstr "Prečica"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:454
-msgid "Level"
-msgstr "Nivo"
-
-#: ../plugins/translation-memory/gtr-translation-memory-ui.c:463
-msgid "String"
-msgstr "Niska"
-
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:81
-msgid "_Build Translation Memory"
-msgstr "_Napravi prevodilačku memoriju"
-
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:82
+#: src/help-overlay.ui:165
+msgctxt "shortcut window"
 msgid "Build translation memory"
-msgstr "Napravite prevodilačku memoriju"
+msgstr "Napravi prevodilačku memoriju"
 
-#: ../plugins/translation-memory/gtr-translation-memory-window-activatable.c:84
-msgid "_Translation Memory"
-msgstr "Prevodilačka _memorija"
+#: src/help-overlay.ui:172
+msgctxt "shortcut window"
+msgid "Copy below"
+msgstr "Kopiraj ispod"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:1
+#: src/help-overlay.ui:179
+msgctxt "shortcut window"
+msgid "Use 1st...9th suggestion"
+msgstr "Koristi 1., …, 9. predlog"
+
+#: src/help-overlay.ui:188
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "Nađi i zameni"
+
+#: src/help-overlay.ui:193
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Traži"
+
+#: src/help-overlay.ui:200
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "Nađi i zameni"
+
+#: src/help-overlay.ui:207
+msgctxt "shortcut window"
+msgid "Forward-search"
+msgstr "Pretraga unapred"
+
+#: src/help-overlay.ui:214
+msgctxt "shortcut window"
+msgid "Backward-search"
+msgstr "Povratna pretraga"
+
+#: src/help-overlay.ui:221
+msgctxt "shortcut window"
+msgid "Hide find & replace bar"
+msgstr "Sakrij traku pretrage i zamene"
+
+#: src/main.c:97
+msgid "— Edit PO files"
+msgstr "— uređujte PO datoteke"
+
+#: src/main.c:101
+#, c-format
+msgid ""
+"%s\n"
+"Run “%s --help” to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Pokrenite „%s --help“ za spisak svih dostupnih opcija naredbene linije.\n"
+
+#: src/translation-memory/gtr-translation-memory-dialog.c:76
+msgid "Select PO directory"
+msgstr "Izaberite PO fasciklu"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:7
+msgid "Translation Editor Memory Manager"
+msgstr "Upravnik prevodilačke memorije Uređivača prevoda"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:38
+msgid "Database"
+msgstr "Baza podataka"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:43
+msgid "Select the directory which contains PO files"
+msgstr "Izaberite direktorijum sa po datotekama"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:55
+msgid "Use only files with this name"
+msgstr "Koristi samo datoteke sa ovim imenom"
+
+#: src/translation-memory/gtr-translation-memory-dialog.ui:74
+msgid "Add to Database"
+msgstr "Dodaj u bazu podataka"
+
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
 msgid "PO directory"
 msgstr "PO direktorijum"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:2
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
 msgid "Directory containing PO files to add to the translation memory."
 msgstr ""
 "Direktorijum koji sadrži PO datoteke koje želite da dodate u prevodilačku "
 "memoriju."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:3
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
 msgid "Restrict search by filename"
 msgstr "Sužavanje pretrage na ime datoteke"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:4
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
 msgid ""
 "If true, only include files with a specified filename when searching the "
 "translation memory."
@@ -606,20 +1295,20 @@ msgstr ""
 "Ukoliko je izabrano, uključiće samo datoteke sa zadatim imenom prilikom "
 "pretrage prevodilačke memorije."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:5
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
 msgid "Filename to restrict search to"
 msgstr "Ime datoteke za koje se vezuje pretraga"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:6
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
 msgid ""
 "Filename to which searching of the translation memory should be restricted."
 msgstr "Ime datoteke za koje se vezuje pretraga prevodilačke memorije."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:7
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
 msgid "Maximum number of missing words"
 msgstr "Najveći broj reči koje nedostaju"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:8
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
 msgid ""
 "Maximum number of words that can be missing from a message displayed as a "
 "match by the translation memory."
@@ -627,11 +1316,11 @@ msgstr ""
 "Najveći broj reči koje mogu da nedostaju u poruci prikazanoj kao "
 "podudarajućoj u prevodilačkoj memoriji."
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:9
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
 msgid "Maximum difference in message length"
 msgstr "Najveća razlika u dužini poruka"
 
-#: ../plugins/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in.h:10
+#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
 msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
@@ -639,777 +1328,619 @@ msgstr ""
 "Najveća razlika u dužini između poruka koje će biti prikazane kao "
 "podudarajuće u prevodilačkoj memoriji."
 
-#: ../src/gtr-actions-app.c:48
-msgid "Current Maintainers"
-msgstr "Program trenutno održavaju"
+#~ msgid "Color scheme"
+#~ msgstr "Šema boje"
 
-#: ../src/gtr-actions-app.c:52
-msgid "Current Developers"
-msgstr "Trenutni razvojni tim"
+#~ msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
+#~ msgstr "Naziv „gtksourceview“ šeme boja za isticanje sintakse."
 
-#: ../src/gtr-actions-app.c:57
-msgid "Previous Developers"
-msgstr "Prethodni programeri"
+#~ msgid "_Close"
+#~ msgstr "_Zatvori"
 
-#: ../src/gtr-actions-app.c:66
-msgid "Contributors"
-msgstr "Programu su doprineli"
+#~ msgid "Current Maintainers"
+#~ msgstr "Program trenutno održavaju"
 
-#: ../src/gtr-actions-app.c:90
-msgid ""
-"Translation file editing suite for localization of applications and "
-"libraries."
-msgstr "Program za uređivanje datoteka sa prevodima programa i biblioteka."
+#~ msgid "Previous Developers"
+#~ msgstr "Prethodni programeri"
 
-#: ../src/gtr-actions-app.c:106
-msgid "About Gtranslator"
-msgstr "O programu"
+#~ msgid "Contributors"
+#~ msgstr "Programu su doprineli"
 
-#.
-#. * Note to translators: put here your name and email so it will show
-#. * up in the "about" box
-#.
-#: ../src/gtr-actions-app.c:111
-msgid "translator-credits"
-msgstr ""
-"Veljko M. Stanojević <veljko@vms.homelinux.net>\n"
-"Miloš Popović <gpopac@gmail.com>\n"
-"Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
-"\n"
-"Prevod.org — prevod na srpski jezik."
+#~ msgid "Translation Editor Web Site"
+#~ msgstr "Internet stranica Uređivača prevoda"
 
-#: ../src/gtr-actions-app.c:114
-msgid "Gtranslator Web Site"
-msgstr "Internet stranica Gnomovog prevodioca"
-
-#: ../src/gtr-actions-file.c:191
-msgid "Open file for translation"
-msgstr "Otvorite datoteku za prevođenje"
-
-#: ../src/gtr-actions-file.c:263 ../src/gtr-actions-file.c:380
-msgid "File saved."
-msgstr "Datoteka je sačuvana."
-
-#: ../src/gtr-actions-file.c:311
-msgid "Save file as..."
-msgstr "Sačuvaj kao..."
-
-#: ../src/gtr-actions-file.c:769
-msgid "Files saved."
-msgstr "Datoteke su sačuvane."
-
-#: ../src/gtr-actions-search.c:170
 #, c-format
-msgid "Found and replaced %d occurrence"
-msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "Pronašao sam i zamenio %d pojavu"
-msgstr[1] "Pronašao sam i zamenio %d pojave"
-msgstr[2] "Pronašao sam i zamenio %d pojava"
-msgstr[3] "Pronašao sam i zamenio jednu pojavu"
+#~ msgid ""
+#~ "Do you want to save changes to this file: <span weight=\"bold\" "
+#~ "size=\"large\">%s</span>?"
+#~ msgstr ""
+#~ "Da li želite da sačuvate izmene u ovu datoteku: <span weight=\"bold\" "
+#~ "size=\"large\">%s</span>?"
 
-#: ../src/gtr-actions-search.c:179
-msgid "Found and replaced one occurrence"
-msgstr "Pronašao sam i zamenio jednu pojavu"
+#~ msgid ""
+#~ "If you don't save, all your unsaved changes will be permanently lost."
+#~ msgstr "Ukoliko ne sačuvate, sve vaše izmene biće trajno odbačene."
 
-#: ../src/gtr-actions-search.c:191
-msgid "Phrase not found"
-msgstr "Izraz nije pronađen"
-
-#: ../src/gtranslator-menu.ui.h:1
-msgid "_New Window"
-msgstr "_Novi prozor"
-
-#: ../src/gtranslator-menu.ui.h:2
-msgid "_Preferences"
-msgstr "_Postavke"
-
-#: ../src/gtranslator-menu.ui.h:3
-msgid "_Help"
-msgstr "_Pomoć"
-
-#: ../src/gtranslator-menu.ui.h:4
-msgid "_About"
-msgstr "_O programu"
-
-#: ../src/gtranslator-menu.ui.h:5
-msgid "_Quit"
-msgstr "_Izađi"
-
-#: ../src/gtr-assistant.c:130
 #, c-format
-msgid ""
-"Profile name: %s\n"
-"Translator name: %s\n"
-"Translator email: %s\n"
-"Language name: %s\n"
-"Team email: %s\n"
-"Language code: %s\n"
-"Character set: %s\n"
-"Transfer encoding: %s\n"
-"Plural form: %s\n"
-msgstr ""
-"Ime profila: %s\n"
-"Ime prevodioca: %s\n"
-"El. pošta: %s\n"
-"Ime jezika: %s\n"
-"El. pošta tima: %s\n"
-"Šifra jezika: %s\n"
-"Skup znakova: %s\n"
-"Kodiranje: %s\n"
-"Oblici množine: %s\n"
+#~ msgid ""
+#~ "Profile name: %s\n"
+#~ "Translator name: %s\n"
+#~ "Translator email: %s\n"
+#~ "Language name: %s\n"
+#~ "Team email: %s\n"
+#~ "Language code: %s\n"
+#~ "Character set: %s\n"
+#~ "Transfer encoding: %s\n"
+#~ "Plural form: %s\n"
+#~ msgstr ""
+#~ "Ime profila: %s\n"
+#~ "Ime prevodioca: %s\n"
+#~ "E-pošta: %s\n"
+#~ "Ime jezika: %s\n"
+#~ "E-pošta tima: %s\n"
+#~ "Šifra jezika: %s\n"
+#~ "Skup znakova: %s\n"
+#~ "Kodiranje: %s\n"
+#~ "Oblici množine: %s\n"
 
-#: ../src/gtr-assistant.c:169
-msgid "This assistant will help you to create the main profile."
-msgstr "Ovaj asistent će vam pomoći da napravite glavni profil."
+#~ msgid "This assistant will help you to create the main profile."
+#~ msgstr "Ovaj asistent će vam pomoći da napravite glavni profil."
 
-#: ../src/gtr-assistant.c:174
-msgid "Assistant"
-msgstr "Asistent"
+#~ msgid "Assistant"
+#~ msgstr "Asistent"
 
-#: ../src/gtr-assistant.c:247
-msgid "Profile name:"
-msgstr "Naziv profila:"
+#~ msgid "Question"
+#~ msgstr "Pitanje"
 
-#: ../src/gtr-assistant.c:289
-msgid "Translator email:"
-msgstr "El. pošta prevodioca:"
+#~ msgid "Docum_ents with unsaved changes:"
+#~ msgstr "Dokum_enti sa nesačuvanim izmenama:"
 
-#: ../src/gtr-assistant.c:303 ../src/gtr-assistant.c:395
-#: ../src/gtr-preferences-dialog.c:546 ../src/gtr-window.c:460
-msgid "Profile"
-msgstr "Profil"
+#~ msgid "S_elect the documents you want to save:"
+#~ msgstr "Izaberite _dokumente koje želite da sačuvate:"
 
-#: ../src/gtr-assistant.c:415
-msgid "Confirmation"
-msgstr "Potvrda"
+#~ msgid "Saving has been disabled by the system administrator."
+#~ msgstr "Čuvanje je onemogućeno od strane administratora sistema."
 
-#: ../src/gtr-close-confirmation-dialog.c:126
-msgid "Close _without Saving"
-msgstr "Zatvori bez _čuvanja"
+#~ msgid "If you don’t save, all your changes will be permanently lost."
+#~ msgstr "Ukoliko ne sačuvate, sve vaše izmene će biti trajno odbačene."
 
-#: ../src/gtr-close-confirmation-dialog.c:155
-msgid "Question"
-msgstr "Pitanje"
+#~ msgid "Notes:"
+#~ msgstr "Beleške:"
 
-#: ../src/gtr-close-confirmation-dialog.c:370
+#~ msgid "Add Note"
+#~ msgstr "Dodaj belešku"
+
+#~ msgid "Context:"
+#~ msgstr "Smisao:"
+
+#~ msgid "Format:"
+#~ msgstr "Format:"
+
 #, c-format
-msgid "Save the changes to document \"%s\" before closing?"
-msgstr "Da sačuvam izmene u dokumentu „%s“ pre zatvaranja?"
-
-#: ../src/gtr-close-confirmation-dialog.c:533
-#, c-format
-msgid "Changes to %d document will be permanently lost."
-msgid_plural "Changes to %d documents will be permanently lost."
-msgstr[0] "Izmene učinjene u %d dokumentu će biti trajno odbačene."
-msgstr[1] "Izmene učinjene u %d dokumenta će biti trajno odbačene."
-msgstr[2] "Izmene učinjene u %d dokumenata će biti trajno odbačene."
-msgstr[3] "Izmene učinjene u dokumentu će biti trajno odbačene."
-
-#: ../src/gtr-close-confirmation-dialog.c:540
-#, c-format
-msgid "There is %d document with unsaved changes. Save changes before closing?"
-msgid_plural ""
-"There are %d documents with unsaved changes. Save changes before closing?"
-msgstr[0] "%d dokument ima nesačuvane izmene. Da li da ih sačuvam pre zatvaranja?"
-msgstr[1] ""
-"%d dokumenta imaju nesačuvane izmene. Da li da ih sačuvam pre zatvaranja?"
-msgstr[2] ""
-"%d dokumenata imaju nesačuvane izmene. Da li da ih sačuvam pre zatvaranja?"
-msgstr[3] "Dokument ima nesačuvane izmene. Da li da ih sačuvam pre zatvaranja?"
-
-#: ../src/gtr-close-confirmation-dialog.c:561
-msgid "Docum_ents with unsaved changes:"
-msgstr "Dokum_enti sa nesačuvanim izmenama:"
-
-#: ../src/gtr-close-confirmation-dialog.c:565
-msgid "S_elect the documents you want to save:"
-msgstr "Izaberite _dokumente koje želite da sačuvate:"
-
-#: ../src/gtr-close-confirmation-dialog.c:583
-msgid "Saving has been disabled by the system administrator."
-msgstr "Čuvanje je onemogućeno od strane administratora sistema."
-
-#: ../src/gtr-close-confirmation-dialog.c:585
-msgid "If you don't save, all your changes will be permanently lost."
-msgstr "Ukoliko ne sačuvate, sve vaše izmene će biti trajno odbačene."
-
-#: ../src/gtr-context.c:234
-msgid "Notes:"
-msgstr "Beleške:"
-
-#: ../src/gtr-context.c:242
-msgid "Add Note"
-msgstr "Dodaj belešku"
-
-#: ../src/gtr-context.c:247
-msgid "Edit"
-msgstr "Izmeni"
-
-#. Extracted comments
-#: ../src/gtr-context.c:293
-msgid "Extracted comments:"
-msgstr "Izvučene napomene:"
-
-#. Context
-#: ../src/gtr-context.c:297
-msgid "Context:"
-msgstr "Pojava:"
-
-#. Format
-#: ../src/gtr-context.c:301
-msgid "Format:"
-msgstr "Format:"
-
-#: ../src/gtr-context.ui.h:1
-msgid "D_one"
-msgstr "_Urađeno"
-
-#: ../src/gtr-file-dialogs.c:62
-msgid "Gettext translation"
-msgstr "Gettekst prevod (.po)"
-
-#: ../src/gtr-file-dialogs.c:71
-msgid "Gettext translation template"
-msgstr "Šablon Gettekst prevoda (.pot)"
-
-#: ../src/gtr-file-dialogs.c:76
-msgid "All files"
-msgstr "Sve datoteke"
-
-#: ../src/gtr-header-dialog.c:269
-msgid "Edit Header"
-msgstr "Uređivanje zaglavlja"
-
-#: ../src/gtr-header-dialog.ui.h:1
-msgid "Comment"
-msgstr "Napomena"
-
-#: ../src/gtr-header-dialog.ui.h:2
-msgid "Project Id _version:"
-msgstr "_Izdanje projekta:"
-
-#: ../src/gtr-header-dialog.ui.h:3
-msgid "Pot _file creation date:"
-msgstr "Datum _stvaranja Pot datoteke:"
-
-#: ../src/gtr-header-dialog.ui.h:4
-msgid "Po file _revision date:"
-msgstr "Datum _revizije Po datoteke:"
-
-#: ../src/gtr-header-dialog.ui.h:5
-msgid "Report message _bugs to:"
-msgstr "Prijavite greške u programu _na:"
-
-#: ../src/gtr-header-dialog.ui.h:6
-msgid "Project"
-msgstr "Projekat"
-
-#: ../src/gtr-header-dialog.ui.h:7
-msgid "Use my options to complete the following entries:"
-msgstr "Koristi moje opcije za dovršavanje sledećih unosa:"
-
-#: ../src/gtr-header-dialog.ui.h:8
-msgid "Translator's _name:"
-msgstr "I_me prevodioca:"
-
-#: ../src/gtr-header-dialog.ui.h:9
-msgid "Translator's _email:"
-msgstr "_El. pošta prevodioca:"
-
-#: ../src/gtr-header-dialog.ui.h:10 ../src/gtr-languages-fetcher.ui.h:5
-msgid "_Language:"
-msgstr "_Jezik:"
-
-#: ../src/gtr-header-dialog.ui.h:11
-msgid "Language gro_up email:"
-msgstr "El. pošta prevodilačke _grupe:"
-
-#: ../src/gtr-header-dialog.ui.h:12
-msgid "Char_set:"
-msgstr "_Skup znakova:"
-
-#: ../src/gtr-header-dialog.ui.h:13
-msgid "Enc_oding:"
-msgstr "_Kodiranje:"
-
-#: ../src/gtr-header-dialog.ui.h:14
-msgid "Translator and Language"
-msgstr "Prevodilac i jezik"
-
-#: ../src/gtr-jump-dialog.c:93
-msgid "Go to Message"
-msgstr "Idi na poruku"
-
-#: ../src/gtr-jump-dialog.ui.h:1
-msgid "Enter message number:"
-msgstr "Unesite broj poruke:"
-
-#: ../src/gtr-languages-fetcher.ui.h:1
-msgid "_Team email:"
-msgstr "El. _pošta tima:"
-
-#: ../src/gtr-languages-fetcher.ui.h:2
-msgid "Transfer en_coding:"
-msgstr "_Koridanje:"
-
-#: ../src/gtr-languages-fetcher.ui.h:3
-msgid "Character _set"
-msgstr "Skup _znakova"
-
-#: ../src/gtr-languages-fetcher.ui.h:4
-msgid "Language _code:"
-msgstr "Šifra _jezika:"
-
-#: ../src/gtr-languages-fetcher.ui.h:6
-msgid "_Plural forms:"
-msgstr "Oblici _množine:"
-
-#: ../src/gtr-message-table.c:181
-msgid "Status"
-msgstr "Stanje"
-
-#: ../src/gtr-message-table.c:193
-msgid "ID"
-msgstr "IB"
-
-#: ../src/gtr-message-table.c:208
-msgid "Original Message"
-msgstr "Izvorni tekst"
-
-#: ../src/gtr-message-table.c:223
-msgid "Translated Message"
-msgstr "Prevedeni tekst"
-
-#: ../src/gtr-po.c:439
-#, c-format
-msgid "The file is empty"
-msgstr "Datoteka je prazna"
-
-#: ../src/gtr-po.c:448
-#, c-format
-msgid "Failed opening file '%s': %s"
-msgstr "Nisam uspeo da otvorim datoteku „%s“: %s"
-
-#: ../src/gtr-po.c:522
-#, c-format
-msgid "Could not convert from charset '%s' to UTF-8"
-msgstr "Ne mogu da pretvorim iz skupa znakova „%s“ u UTF-8"
-
-#: ../src/gtr-po.c:539 ../src/gtr-po.c:559
-#, c-format
-msgid "Could not store temporary file for encoding conversion"
-msgstr "Ne mogu da uskladištim privremenu biblioteku za pretvaranje šifrovanja"
-
-#: ../src/gtr-po.c:596
-#, c-format
-msgid ""
-"All attempt to convert the file to UTF-8 has failed, use the msgconv or "
-"iconv command line tools before opening this file with gtranslator"
-msgstr ""
-"Svi pokušaji da pretvorim datoteku u UTF-8 su propali, upotrebite „msgconv“ "
-"ili „iconv“ alate linije naredbi pre nego što otvorite ovu datoteku u "
-"Gnomovom prevodiocu"
-
-#: ../src/gtr-po.c:664
-#, c-format
-msgid "Gettext returned a null message domain list."
-msgstr "Gettekst je vratio praznu poruku sa spiskom domena."
-
-#: ../src/gtr-po.c:709
-#, c-format
-msgid "No messages obtained from parser."
-msgstr "Nisu dobivene poruke iz programa za obradu."
-
-#: ../src/gtr-po.c:757
-#, c-format
-msgid ""
-"You are saving a file with a .pot extension.\n"
-"Pot files are generated by the compilation process.\n"
-"Your file should likely be named '%s.po'."
-msgstr ""
-"Vi čuvate datoteku sa nastavkom „.pot“.\n"
-"Pot datoteke se stvaraju u procesu popunjavanja.\n"
-"Vaša datoteka bi trebala biti nazvana „%s.po“."
-
-#: ../src/gtr-po.c:770
-#, c-format
-msgid "The file %s is read-only, and can not be overwritten"
-msgstr "Datoteka „%s“ se može samo čitati i ne možete je prepisati drugom"
-
-#: ../src/gtr-po.c:801
-#, c-format
-msgid "There was an error writing the PO file: %s"
-msgstr "Došlo je do greške prilikom pisanja PO datoteke: %s"
-
-#: ../src/gtr-preferences-dialog.c:397
-msgid "Impossible to remove the active profile"
-msgstr "Ne mogu da uklonim aktivni profil"
-
-#: ../src/gtr-preferences-dialog.c:403
-msgid "Another profile should be selected as active before"
-msgstr "Morate najpre aktivirati neki drugi profil"
-
-#: ../src/gtr-preferences-dialog.c:416
-msgid "Are you sure you want to delete this profile?"
-msgstr "Da li ste sigurni da želite da obrišete ovaj profil?"
-
-#: ../src/gtr-preferences-dialog.c:552
-msgid "Active"
-msgstr "Aktivan"
-
-#: ../src/gtr-preferences-dialog.c:621 ../src/gtr-preferences-dialog.ui.h:1
-msgid "Gtranslator Preferences"
-msgstr "Postavke Gnomovog prevodioca"
-
-#: ../src/gtr-preferences-dialog.ui.h:2
-msgid "General"
-msgstr "Opšte"
-
-#: ../src/gtr-preferences-dialog.ui.h:3
-msgid "_Warn if PO file contains fuzzy translations"
-msgstr "_Upozori ukoliko PO datoteka sadrži nejasne poruke"
-
-#: ../src/gtr-preferences-dialog.ui.h:4
-msgid "Autosave"
-msgstr "Automatsko čuvanje"
-
-#: ../src/gtr-preferences-dialog.ui.h:5
-msgid "Create a _backup copy of files before saving"
-msgstr "Napravi _rezervnu kopiju pre čuvanja"
-
-#: ../src/gtr-preferences-dialog.ui.h:6
-msgid "_Autosave files every"
-msgstr "_Sam sačuvaj datoteke nakon"
-
-#: ../src/gtr-preferences-dialog.ui.h:7
-msgid "_minutes"
-msgstr "_minuta"
-
-#: ../src/gtr-preferences-dialog.ui.h:8
-msgid "Files"
-msgstr "Datoteke"
-
-#: ../src/gtr-preferences-dialog.ui.h:9
-msgid "Text Display"
-msgstr "Prikazivanje teksta"
-
-#: ../src/gtr-preferences-dialog.ui.h:10
-msgid "_Highlight message syntax"
-msgstr "Is_takni sintaksu poruke"
-
-#: ../src/gtr-preferences-dialog.ui.h:11
-msgid "Make _whitespace visible"
-msgstr "Prikaži _razmake između reči"
-
-#: ../src/gtr-preferences-dialog.ui.h:12
-msgid "Use _custom font"
-msgstr "_Koristi proizvoljan font"
-
-#: ../src/gtr-preferences-dialog.ui.h:13
-msgid "Editor _font:"
-msgstr "_Font teksta:"
-
-#: ../src/gtr-preferences-dialog.ui.h:14
-msgid "Contents"
-msgstr "Sadržaj"
-
-#: ../src/gtr-preferences-dialog.ui.h:15
-msgid "_Remove fuzzy status if message is changed"
-msgstr "U_kloni stanje nejasne poruke ako je izmenjena"
-
-#: ../src/gtr-preferences-dialog.ui.h:16
-msgid "Check _spelling"
-msgstr "_Proveri pisanje"
-
-#: ../src/gtr-preferences-dialog.ui.h:17
-msgid "Editor"
-msgstr "Uređivanje"
-
-#: ../src/gtr-preferences-dialog.ui.h:18
-msgid "Edit Profile"
-msgstr "Uredite profil"
-
-#: ../src/gtr-preferences-dialog.ui.h:19
-msgid "Profiles"
-msgstr "Profili"
-
-#: ../src/gtr-profile-dialog.c:82
-msgid "Gtranslator Profile"
-msgstr "Profil Gnomovog prevodioca"
-
-#: ../src/gtr-profile-dialog.ui.h:1
-msgid "Profile Information"
-msgstr "Podaci o profilu"
-
-#: ../src/gtr-profile-dialog.ui.h:2
-msgid "_Name:"
-msgstr "_Ime:"
-
-#: ../src/gtr-profile-dialog.ui.h:3
-msgid "Translator Information"
-msgstr "Podaci o prevodiocu"
-
-#: ../src/gtr-profile-dialog.ui.h:4
-msgid "_Email:"
-msgstr "_El. pošta:"
-
-#: ../src/gtr-profile-dialog.ui.h:5
-msgid "N_ame:"
-msgstr "_Ime:"
-
-#: ../src/gtr-profile-dialog.ui.h:6
-msgid "Language Settings"
-msgstr "Podešavanje jezika"
-
-#: ../src/gtr-search-dialog.c:347 ../src/gtr-search-dialog.ui.h:1
-msgid "Replace"
-msgstr "Zameni"
-
-#: ../src/gtr-search-dialog.c:369
-msgid "Find"
-msgstr "Traženje reči"
-
-#: ../src/gtr-search-dialog.c:457
-msgid "Replace _All"
-msgstr "Zameni _sve"
-
-#: ../src/gtr-search-dialog.c:461
-msgid "_Replace"
-msgstr "Z_ameni"
-
-#: ../src/gtr-search-dialog.ui.h:2
-msgid "Replace All"
-msgstr "Zameni sve"
-
-#: ../src/gtr-search-dialog.ui.h:3
-msgid "_Search for: "
-msgstr "_Potraži: "
-
-#: ../src/gtr-search-dialog.ui.h:4
-msgid "Replace _with: "
-msgstr "Zameni _sa: "
-
-#: ../src/gtr-search-dialog.ui.h:5
-msgid "_Original text"
-msgstr "U _izvornom tekstu"
-
-#: ../src/gtr-search-dialog.ui.h:6
-msgid "_Translated text"
-msgstr "U pre_vedenom tekstu"
-
-#: ../src/gtr-search-dialog.ui.h:7
-msgid "Include fu_zzy strings"
-msgstr "Uključi i _nejasne poruke"
-
-#: ../src/gtr-search-dialog.ui.h:8
-msgid "_Match case"
-msgstr "_Uporedi velika i mala slova"
-
-#: ../src/gtr-search-dialog.ui.h:9
-msgid "Match _entire word only"
-msgstr "Uporedi samo _cele reči"
-
-#: ../src/gtr-search-dialog.ui.h:10
-msgid "Search _backwards"
-msgstr "Traži u_nazad"
-
-#: ../src/gtr-search-dialog.ui.h:11
-msgid "_Wrap around"
-msgstr "P_relamaj"
-
-#: ../src/gtr-statusbar.c:119 ../src/gtr-statusbar.c:248
-msgid "INS"
-msgstr "UMETNI"
-
-#: ../src/gtr-statusbar.c:120 ../src/gtr-statusbar.c:244
-msgid "OVR"
-msgstr "PREPIŠI"
-
-#: ../src/gtr-tab.c:209
-msgid "There is an error in the message:"
-msgstr "Postoji greška u poruci:"
-
-#: ../src/gtr-tab.c:537
-#, c-format
-msgid "Plural %d"
-msgstr "Množina %d"
-
-#. Translators: Path to the document opened
-#: ../src/gtr-tab.c:1055
-msgid "Path:"
-msgstr "Putanja:"
-
-#: ../src/gtr-tab-label.c:277
-msgid "Close document"
-msgstr "Zatvori dokument"
-
-#: ../src/gtr-tab.ui.h:1
-msgid "_Original Message:"
-msgstr "_Izvorni tekst:"
-
-#: ../src/gtr-tab.ui.h:2
-msgid "Translate_d Text:"
-msgstr "_Prevedeni tekst:"
-
-#: ../src/gtr-utils.c:516
-msgid ""
-"Unable to display help. Please make sure the Gtranslator documentation "
-"package is installed."
-msgstr ""
-"Ne mogu da prikažem pomoć. Proverite da li je instaliran paket za pomoć u "
-"Gnomovom prevodiocu."
-
-#: ../src/gtr-view.c:78
-#, c-format
-msgid "gtkspell error: %s\n"
-msgstr "„gtkspell“ greška: %s\n"
-
-#: ../src/gtr-view.c:80
-#, c-format
-msgid ""
-"GtkSpell was unable to initialize.\n"
-" %s"
-msgstr ""
-"Ne mogu da pokrenem „GtkSpell“.\n"
-" %s"
-
-#: ../src/gtr-window.c:129
-msgid "Untranslated"
-msgstr "neprevedena"
-
-#: ../src/gtr-window.c:132
-msgid "Translated"
-msgstr "prevedena"
-
-#: ../src/gtr-window.c:135
-msgid "Fuzzy"
-msgstr "nejasna"
-
-#: ../src/gtr-window.c:142
-#, c-format
-msgid "Current: %d"
-msgstr "Poruka br. %d"
-
-#: ../src/gtr-window.c:143
-#, c-format
-msgid "Total: %d"
-msgstr "Ukupan br. poruka: %d"
-
-#: ../src/gtr-window.c:144
-#, c-format
-msgid "%d translated"
-msgid_plural "%d translated"
-msgstr[0] "%d prevedena"
-msgstr[1] "%d prevedene"
-msgstr[2] "%d prevedenih"
-msgstr[3] "Jedna prevedena"
-
-#: ../src/gtr-window.c:147
-#, c-format
-msgid "%d fuzzy"
-msgid_plural "%d fuzzy"
-msgstr[0] "%d nejasna"
-msgstr[1] "%d nejasne"
-msgstr[2] "%d nejasnih"
-msgstr[3] "Jedna nejasna"
-
-#: ../src/gtr-window.c:149
-#, c-format
-msgid "%d untranslated"
-msgid_plural "%d untranslated"
-msgstr[0] "%d neprevedena"
-msgstr[1] "%d neprevedene"
-msgstr[2] "%d neprevedenih"
-msgstr[3] "Jedna neprevedena"
-
-#. Translators: this is the title of the window with a modified document
-#: ../src/gtr-window.c:252
-#, c-format
-msgid "*%s - gtranslator"
-msgstr "*%s — Gnomov prevodilac"
-
-#. Translators: this is the title of the window with a document opened
-#: ../src/gtr-window.c:255
-#, c-format
-msgid "%s - gtranslator"
-msgstr "%s — Gnomov prevodilac"
-
-#: ../src/gtr-window.c:261
-msgid "gtranslator"
-msgstr "Gnomov prevodilac"
-
-#: ../src/gtr-window.c:444
-msgid "No profile"
-msgstr "Nema profila"
-
-#: ../src/gtr-window.c:462
-msgid "Profile for the active document"
-msgstr "Profil za trenutni dokument"
-
-#: ../src/gtr-window.ui.h:1
-msgid "Projects"
-msgstr "Projekti"
-
-#: ../src/gtr-window.ui.h:2
-msgid "Add project"
-msgstr "Dodaj projekat"
-
-#: ../src/gtr-window.ui.h:3
-msgid "Remove project"
-msgstr "Ukloni projekat"
-
-#: ../src/main.c:97
-msgid "- Edit PO files"
-msgstr "— uređujte PO datoteke"
-
-#: ../src/main.c:101
-#, c-format
-msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"Pokrenite „%s --help“ za spisak svih dostupnih opcija komandne linije.\n"
-
-#. Translaters: This string is for a toggle to display a toolbar.
-#. * The name of the toolbar is automatically computed from the widgets
-#. * on the toolbar, and is placed at the %s. Note the _ before the %s
-#. * which is used to add mnemonics. We know that this is likely to
-#. * produce duplicates, but don't worry about it. If your language
-#. * normally has a mnemonic at the start, please use the _. If not,
-#. * please remove.
-#: ../src/toolbareditor/egg-editable-toolbar.c:991
-#, c-format
-msgid "Show “_%s”"
-msgstr "Prikaži „_%s“"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1484
-msgid "_Move on Toolbar"
-msgstr "_Premesti na paletu alatki"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1485
-msgid "Move the selected item on the toolbar"
-msgstr "Premešta označenu stavku na paletu sa alatkama"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1486
-msgid "_Remove from Toolbar"
-msgstr "_Ukloni sa palete alatki"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1487
-msgid "Remove the selected item from the toolbar"
-msgstr "Uklanja izabranu stavku iz palete sa alatkama"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1488
-msgid "_Delete Toolbar"
-msgstr "_Obriši paletu alatki"
-
-#: ../src/toolbareditor/egg-editable-toolbar.c:1489
-msgid "Remove the selected toolbar"
-msgstr "Uklanja izabranu paletu sa alatkama"
-
-#: ../src/toolbareditor/egg-toolbar-editor.c:488
-msgid "Separator"
-msgstr "Razdvajač"
+#~ msgid "The current state is: %s"
+#~ msgstr "Trenutno stanje je: %s"
+
+#~ msgid "Select team, module, branch and domain to get the translation file."
+#~ msgstr ""
+#~ "Izaberite tim, modul, granu i domen za dobavljanje prevodilačke datoteke."
+
+#~ msgid "New window"
+#~ msgstr "Novi prozor"
+
+#~ msgid "About"
+#~ msgstr "O programu"
+
+#~ msgid "Quit"
+#~ msgstr "Izađi"
+
+#~ msgid "_Open"
+#~ msgstr "_Otvori"
+
+#~ msgid "_Language:"
+#~ msgstr "_Jezik:"
+
+#~ msgid "Language _code:"
+#~ msgstr "Šifra _jezika:"
+
+#~ msgid "Translator and Language"
+#~ msgstr "Prevodilac i jezik"
+
+#~ msgid "DL Team:"
+#~ msgstr "Tim Prokletih laži:"
+
+#~ msgid "DL Module:"
+#~ msgstr "Modul Prokletih laži:"
+
+#~ msgid "DL State:"
+#~ msgstr "Stanje na Prokletim lažima:"
+
+#~ msgid "Go to Message"
+#~ msgstr "Idi na poruku"
+
+#~ msgid "Enter message number:"
+#~ msgstr "Unesite broj poruke:"
+
+#~ msgid "Build translation memory"
+#~ msgstr "Napravi prevodilačku memoriju"
+
+#~ msgid "Edit header"
+#~ msgstr "Uredi zaglavlje"
+
+#~ msgid "Open a new file (<Ctrl>o)"
+#~ msgstr "Otvori novu datoteku (<Ctrl>o)"
+
+#~ msgid "Open from Damned Lies (<Ctrl>d)"
+#~ msgstr "Otvori sa Prokletih Laži (<Ctrl>d)"
+
+#~ msgid "Undo (<Ctrl>z)"
+#~ msgstr "Opozovi (<Ctrl>z)"
+
+#~ msgid "Redo (<Ctrl><Shift>z)"
+#~ msgstr "Ponovi (<Ctrl><Shift>z)"
+
+#~ msgid "Order by menu"
+#~ msgstr "Izbornik ređanja"
+
+#~ msgid "Find (<Ctrl><f>)"
+#~ msgstr "Pronađi (<Ctrl><f>)"
+
+#~ msgid "Save the current file (<Ctrl>s)"
+#~ msgstr "Sačuvaj trenutnu datoteku (<Ctrl>s)"
+
+#~ msgid "Save as (<Ctrl><Shift>s)"
+#~ msgstr "Sačuvaj kao (<Ctrl><Shift>s)"
+
+#~ msgid "Upload file (<Ctrl>b)"
+#~ msgstr "Otpremi datoteku (<Ctrl>b)"
+
+#~ msgid "Active"
+#~ msgstr "Aktivan"
+
+#~ msgid "Translation Editor Preferences"
+#~ msgstr "Postavke Gnomovog Uređivača prevoda"
+
+#~ msgid "_Autosave files every"
+#~ msgstr "_Sam sačuvaj datoteke nakon"
+
+#~ msgid "_minutes"
+#~ msgstr "_minuta"
+
+#~ msgid "Choose the editor font"
+#~ msgstr "Izaberite zgled slova uređivača"
+
+#~ msgid "_Name"
+#~ msgstr "_Naziv"
+
+#~ msgid "N_ame"
+#~ msgstr "_Ime"
+
+#~ msgid "_Email"
+#~ msgstr "_El. pošta"
+
+#~ msgid "_Team email"
+#~ msgstr "El. _pošta tima"
+
+#~ msgid "Language Settings"
+#~ msgstr "Podešavanje jezika"
+
+#~ msgid "Wrap Around"
+#~ msgstr "Prelamaj okolo"
+
+#~ msgid "Close document"
+#~ msgstr "Zatvori dokument"
+
+#~ msgid "_Upload"
+#~ msgstr "_Otpremi"
+
+#~ msgid "Database:"
+#~ msgstr "Baza podataka:"
+
+#~ msgid "Configuration:"
+#~ msgstr "Podešavanje:"
+
+#~ msgid "_Use this translation"
+#~ msgstr "_Koristi ovaj prevod"
+
+#~ msgid "_Remove"
+#~ msgstr "_Ukloni"
+
+#~ msgid "Shortcut"
+#~ msgstr "Prečica"
+
+#~ msgid "Level"
+#~ msgstr "Nivo"
+
+#~ msgid "String"
+#~ msgstr "Niska"
+
+#~ msgid "Original-text"
+#~ msgstr "Izvorni-tekst"
+
+#~ msgid "Translated-text"
+#~ msgstr "Prevedeni-tekst"
+
+#~ msgid "_Preferences"
+#~ msgstr "_Postavke"
+
+#~ msgid "_Help"
+#~ msgstr "_Pomoć"
+
+#~| msgid "The file '%s' has been saved in %s"
+#~ msgid "The file '%s.%s.%s.%s' has been uploaded!"
+#~ msgstr "Datoteka „%s.%s.%s.%s“ je otpremljena!"
+
+#~ msgid "Warning"
+#~ msgstr "Upozorenje"
+
+#~ msgid "File saved."
+#~ msgstr "Datoteka je sačuvana."
+
+#~ msgid "Files saved."
+#~ msgstr "Datoteke su sačuvane."
+
+#~ msgid "INS"
+#~ msgstr "UMETNI"
+
+#~ msgid "OVR"
+#~ msgstr "PREPIŠI"
+
+#~ msgid "Untranslated"
+#~ msgstr "Neprevedeno"
+
+#~ msgid "Translated"
+#~ msgstr "Prevedeno"
+
+#~ msgid "Fuzzy"
+#~ msgstr "Nejasno"
+
+#~ msgid "Current: %d"
+#~ msgstr "Poruka br. %d"
+
+#~ msgid "Total: %d"
+#~ msgstr "Ukupan br. poruka: %d"
+
+#~ msgid "%d translated"
+#~ msgid_plural "%d translated"
+#~ msgstr[0] "%d prevedena"
+#~ msgstr[1] "%d prevedene"
+#~ msgstr[2] "%d prevedenih"
+#~ msgstr[3] "Jedna prevedena"
+
+#~ msgid "%d fuzzy"
+#~ msgid_plural "%d fuzzy"
+#~ msgstr[0] "%d nejasna"
+#~ msgstr[1] "%d nejasne"
+#~ msgstr[2] "%d nejasnih"
+#~ msgstr[3] "Jedna nejasna"
+
+#~ msgid "%d untranslated"
+#~ msgid_plural "%d untranslated"
+#~ msgstr[0] "%d neprevedena"
+#~ msgstr[1] "%d neprevedene"
+#~ msgstr[2] "%d neprevedenih"
+#~ msgstr[3] "Jedna neprevedena"
+
+#~ msgid "No profile"
+#~ msgstr "Nema profila"
+
+#~ msgid "Profile for the active document"
+#~ msgstr "Profil za trenutni dokument"
+
+#~ msgid "Gtranslator PO File Editor"
+#~ msgstr "Gnomov prevodilac za PO datoteke"
+
+#~ msgid "Use custom font"
+#~ msgstr "Koristi proizvoljni font"
+
+#~ msgid "If true, use a custom font for edit fields."
+#~ msgstr ""
+#~ "Ukoliko je izabrano, koristiće proizvoljan font za uređivanje prevoda."
+
+#~ msgid "Custom font to use for edit fields."
+#~ msgstr "Proizvoljni font za tekst prevoda."
+
+#~ msgid "Others"
+#~ msgstr "Ostalo"
+
+#~ msgid "gtranslator highlight"
+#~ msgstr "Isticanje teksta"
+
+#~ msgid "Tag"
+#~ msgstr "Oznaka"
+
+#~ msgid "Special variable"
+#~ msgstr "Posebna promenljiva"
+
+#~ msgid "Message not found"
+#~ msgstr "Poruka nije pronađena"
+
+#~ msgid "Open file for alternate language"
+#~ msgstr "Otvorite datoteku za jezik zamene"
+
+#~ msgid "File closed"
+#~ msgstr "Datoteka je zatvorena"
+
+#~ msgctxt "alternate lang"
+#~ msgid "_Open"
+#~ msgstr "_Otvori"
+
+#~ msgctxt "alternate lang"
+#~ msgid "Co_py"
+#~ msgstr "_Umnoži"
+
+#~ msgid "There isn't any file loaded"
+#~ msgstr "Nije učitana nijedna datoteka"
+
+#~ msgid "_Alternate Language"
+#~ msgstr "_Jezik zamene"
+
+#~ msgid "Show the Alternate Language panel"
+#~ msgstr "Prikazuje panel jezika zamene"
+
+#~ msgid "Alternate Language"
+#~ msgstr "Jezik zamene"
+
+#~ msgid "Load an alternate language."
+#~ msgstr "Učitava jezik zamene."
+
+#~ msgid "Character Map"
+#~ msgstr "Tablica znakova"
+
+#~ msgid "Insert special characters just by clicking on them."
+#~ msgstr "Umeće posebne znake jednostavnim klikom na njih."
+
+#~ msgid "Source View Settings"
+#~ msgstr "Podešavanja pregleda izvora"
+
+#~ msgid "Use external editor"
+#~ msgstr "Koristi spoljni program za uređivanje"
+
+#~ msgid "Program command:"
+#~ msgstr "Naredba programa:"
+
+#~ msgid "Line command:"
+#~ msgstr "Naredba linije:"
+
+#~ msgid "Please install \"%s\" to be able to show the file"
+#~ msgstr "Instalirajte „%s“ za prikaz ove datoteke"
+
+#~ msgid "Source Code View"
+#~ msgstr "Prikaz izvornog koda"
+
+#~ msgid "Show the message in the source code."
+#~ msgstr "Prikazuje poruke u izvornom kodu."
+
+#~ msgid "Use the System Editor"
+#~ msgstr "Koristi Uređivač sistema"
+
+#~ msgid "Whether use the system editor to show the source code"
+#~ msgstr ""
+#~ "Da li će biti korišćen uređivač sistema za prikazivanje izvornog kôda"
+
+#~ msgid "The Editor to Launch"
+#~ msgstr "Uređivač za pokretanje"
+
+#~ msgid "The command to launch the editor you want to use"
+#~ msgstr "Naredba za pokretanje uređivača koji želite da koristite"
+
+#~ msgid "Arguments for the Command"
+#~ msgstr "Argument za naredbu"
+
+#~ msgid "Arguments to pass to the program command line to select the line"
+#~ msgstr ""
+#~ "Argument koji će biti prosleđen komandnoj liniji programa za biranje linije"
+
+#~ msgid "Dictionary"
+#~ msgstr "Rečnik"
+
+#~ msgid "No dictionary source available with name '%s'"
+#~ msgstr "Nije dostupan rečnik sa nazivom „%s“"
+
+#~ msgid "Unable to find dictionary source"
+#~ msgstr "Ne mogu da pronađem izvor rečnika"
+
+#~ msgid "No context available for source '%s'"
+#~ msgstr "Nije dostupna pojava poruke za „%s“"
+
+#~ msgid "Unable to create a context"
+#~ msgstr "Ne mogu da obrazujem pojavu poruke"
+
+#~ msgid "Dictionary source '%s' selected"
+#~ msgstr "Izabran je izvor rečnika „%s“"
+
+#~ msgid "Strategy '%s' selected"
+#~ msgstr "Izabrana je strategija „%s“"
+
+#~ msgid "Database '%s' selected"
+#~ msgstr "Izabrana je baza podataka „%s“"
+
+#~ msgid "Word '%s' selected"
+#~ msgstr "Izabrana je reč „%s“"
+
+#~ msgid "Double-click on the word to look up"
+#~ msgstr "Dvaput kliknite na reč da je potražite"
+
+#~ msgid "Double-click on the matching strategy to use"
+#~ msgstr "Dvaput kliknite na podudarajuću strategiju da je koristite"
+
+#~ msgid "Double-click on the source to use"
+#~ msgstr "Dvaput kliknite na izvor da ga koristite"
+
+#~ msgid "Double-click on the database to use"
+#~ msgstr "Dvaput kliknite na bazu podataka da je koristite"
+
+#~ msgid "Look _up:"
+#~ msgstr "_Pronađi:"
+
+#~ msgid "Similar words"
+#~ msgstr "Slične reči"
+
+#~ msgid "Available dictionaries"
+#~ msgstr "Dostupni rečnici"
+
+#~ msgid "Available strategies"
+#~ msgstr "Dostupne strategije"
+
+#~ msgid "Dictionary sources"
+#~ msgstr "Izvori rečnika"
+
+#~ msgid "Look up words in a dictionary."
+#~ msgstr "Tražite reči u rečniku."
+
+#~ msgid "Word database"
+#~ msgstr "Baza podataka reči"
+
+#~ msgid "Source Name"
+#~ msgstr "Ime izvora"
+
+#~ msgid "Strategy"
+#~ msgstr "Strategija"
+
+#~ msgid "Panel Position"
+#~ msgstr "Položaj panela"
+
+#~ msgid "_Fullscreen"
+#~ msgstr "_Ceo ekran"
+
+#~ msgid "Place window on fullscreen state"
+#~ msgstr "Prikazuje prozor preko celog ekrana"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Ceo ekran"
+
+#~ msgid "Place window in the fullscreen state."
+#~ msgstr "Prikazuje prozor preko celog ekrana."
+
+#~ msgid "_Next Param"
+#~ msgstr "_Sledeći parametar"
+
+#~ msgid "Insert the next param of the message"
+#~ msgstr "Umeće sledeći parametar poruke"
+
+#~ msgid "_Insert Params"
+#~ msgstr "_Umetni parametre"
+
+#~ msgid "Insert the next tag of the message"
+#~ msgstr "Umeće narednu oznaku poruke"
+
+#~ msgid "_Insert Tags"
+#~ msgstr "Umetni o_znake"
+
+#~ msgid "Insert Params or Tags"
+#~ msgstr "Umetni parametre ili oznake"
+
+#~ msgid "Parameters and tags detection featuring easy insertion."
+#~ msgstr "Nalaženje i lako umetanje parametara i oznaka."
+
+#~ msgid "Strings added to database"
+#~ msgstr "Niske su dodate u bazu podataka"
+
+#~ msgid "Please specify a valid path to build the translation memory"
+#~ msgstr "Molim navedite ispravnu putanju za stvaranje prevodilačke memorije"
+
+#~ msgid "Get translation suggestions from a data base."
+#~ msgstr "Pronađite savete prilikom prevođenja u bazi podataka."
+
+#~ msgid "Insert Option nº %d"
+#~ msgstr "Umetni opciju br. %d"
+
+#~ msgid "_Translation Memory"
+#~ msgstr "Prevodilačka _memorija"
+
+#~ msgid "Current Developers"
+#~ msgstr "Trenutni razvojni tim"
+
+#~ msgid "Found and replaced one occurrence"
+#~ msgstr "Pronašao sam i zamenio jednu pojavu"
+
+#~ msgid "Phrase not found"
+#~ msgstr "Izraz nije pronađen"
+
+#~ msgid "D_one"
+#~ msgstr "_Urađeno"
+
+#~ msgid "ID"
+#~ msgstr "IB"
+
+#~ msgid "Use _custom font"
+#~ msgstr "_Koristi proizvoljan font"
+
+#~ msgid "Editor _font:"
+#~ msgstr "_Font teksta:"
+
+#~ msgid "Replace _All"
+#~ msgstr "Zameni _sve"
+
+#~ msgid "_Replace"
+#~ msgstr "Z_ameni"
+
+#~ msgid "_Search for: "
+#~ msgstr "_Potraži: "
+
+#~ msgid "Replace _with: "
+#~ msgstr "Zameni _sa: "
+
+#~ msgid "Include fu_zzy strings"
+#~ msgstr "Uključi i _nejasne poruke"
+
+#~ msgid "_Match case"
+#~ msgstr "_Uporedi velika i mala slova"
+
+#~ msgid "Search _backwards"
+#~ msgstr "Traži u_nazad"
+
+#~ msgid ""
+#~ "Unable to display help. Please make sure the Gtranslator documentation "
+#~ "package is installed."
+#~ msgstr ""
+#~ "Ne mogu da prikažem pomoć. Proverite da li je instaliran paket za pomoć u "
+#~ "Gnomovom prevodiocu."
+
+#~ msgid "gtkspell error: %s\n"
+#~ msgstr "„gtkspell“ greška: %s\n"
+
+#~ msgid ""
+#~ "GtkSpell was unable to initialize.\n"
+#~ " %s"
+#~ msgstr ""
+#~ "Ne mogu da pokrenem „GtkSpell“.\n"
+#~ " %s"
+
+#~ msgid "%s - gtranslator"
+#~ msgstr "%s — Gnomov prevodilac"
+
+#~ msgid "gtranslator"
+#~ msgstr "Gnomov prevodilac"
+
+#~ msgid "Projects"
+#~ msgstr "Projekti"
+
+#~ msgid "Add project"
+#~ msgstr "Dodaj projekat"
+
+#~ msgid "Remove project"
+#~ msgstr "Ukloni projekat"
+
+#~ msgid "Show “_%s”"
+#~ msgstr "Prikaži „_%s“"
+
+#~ msgid "_Move on Toolbar"
+#~ msgstr "_Premesti na paletu alatki"
+
+#~ msgid "Move the selected item on the toolbar"
+#~ msgstr "Premešta označenu stavku na paletu sa alatkama"
+
+#~ msgid "_Remove from Toolbar"
+#~ msgstr "_Ukloni sa palete alatki"
+
+#~ msgid "Remove the selected item from the toolbar"
+#~ msgstr "Uklanja izabranu stavku iz palete sa alatkama"
+
+#~ msgid "Remove the selected toolbar"
+#~ msgstr "Uklanja izabranu paletu sa alatkama"
+
+#~ msgid "Separator"
+#~ msgstr "Razdvajač"
 
 #~ msgid "Open Tran Settings"
 #~ msgstr "Postavke Otvorenog prevoda"
@@ -1535,9 +2066,6 @@ msgstr "Razdvajač"
 #~ msgid "_View"
 #~ msgstr "P_regled"
 
-#~ msgid "_Search"
-#~ msgstr "_Pretraži"
-
 #~ msgid "_Go"
 #~ msgstr "_Idi"
 
@@ -1547,9 +2075,6 @@ msgstr "Razdvajač"
 #~ msgid "_Documents"
 #~ msgstr "Doku_menti"
 
-#~ msgid "Open a PO file"
-#~ msgstr "Otvara PO datoteku"
-
 #~ msgid "_Recent Files"
 #~ msgstr "_Skorašnje datoteke"
 
@@ -1558,9 +2083,6 @@ msgstr "Razdvajač"
 
 #~ msgid "_Header..."
 #~ msgstr "Zaglavlje..."
-
-#~ msgid "Save the current file"
-#~ msgstr "Čuva trenutnu datoteku"
 
 #~ msgid "Save the current file with another name"
 #~ msgstr "Čuva trenutnu datoteku pod drugim imenom"
@@ -1583,23 +2105,11 @@ msgstr "Razdvajač"
 #~ msgid "Paste the contents of the clipboard"
 #~ msgstr "Umeće sadržaj iz ostave"
 
-#~ msgid "Clear the selected translation"
-#~ msgstr "Briše izabranu poruku prevoda"
-
 #~ msgid "Copy _Message to Translation"
 #~ msgstr "Prepi_ši poruku u prevod"
 
-#~ msgid "Copy original message contents to the translation field"
-#~ msgstr "Prepisuje sadržaj izvorne poruke u polje prevoda"
-
-#~ msgid "Toggle _Fuzzy Status"
-#~ msgstr "P_romeni stanje nejasne poruke"
-
 #~ msgid "Toggle fuzzy status of a message"
 #~ msgstr "Menja stanje nejasne poruke"
-
-#~ msgid "_Message Details"
-#~ msgstr "_Pojedinosti poruke"
 
 #~ msgid "Show the Context panel"
 #~ msgstr "Prikazuje površ sa mestom gde se prevod javlja u programu"
@@ -1637,26 +2147,14 @@ msgstr "Razdvajač"
 #~ msgid "Next Fuz_zy"
 #~ msgstr "Sledeća _nejasna"
 
-#~ msgid "Go to the next fuzzy message"
-#~ msgstr "Ide na sledeću nejasnu poruku"
-
 #~ msgid "Previous Fuzz_y"
 #~ msgstr "Prethodna n_ejasna"
-
-#~ msgid "Go to the previous fuzzy message"
-#~ msgstr "Ide na prethodnu nejasnu poruku"
 
 #~ msgid "Next _Untranslated"
 #~ msgstr "S_ledeća neprevedena"
 
-#~ msgid "Go to the next untranslated message"
-#~ msgstr "Ide na sledeću neprevedenu poruku"
-
 #~ msgid "Previ_ous Untranslated"
 #~ msgstr "P_rethodna neprevedena"
-
-#~ msgid "Go to the previous untranslated message"
-#~ msgstr "Ide na prethodnu neprevedenu poruku"
 
 #~ msgid "Next Fu_zzy or Untranslated"
 #~ msgstr "_Sledeća nejasna ili neprevedena"
@@ -1679,9 +2177,6 @@ msgstr "Razdvajač"
 #~ msgid "_Save All"
 #~ msgstr "_Sačuvaj sve"
 
-#~ msgid "Save all open files"
-#~ msgstr "Čuva sve otvorene datoteke"
-
 #~ msgid "_Close All"
 #~ msgstr "_Zatvori sve"
 
@@ -1700,9 +2195,6 @@ msgstr "Razdvajač"
 #~ msgid "Activate next document"
 #~ msgstr "Prikazuje naredni dokument"
 
-#~ msgid "Activate '%s'"
-#~ msgstr "Prikaži „%s“"
-
 #~ msgid "Toolbar Editor"
 #~ msgstr "Urednik palete sa alatima"
 
@@ -1717,18 +2209,3 @@ msgstr "Razdvajač"
 #~| msgid "Go to Message"
 #~ msgid "_Go to Message…"
 #~ msgstr "_Idi na poruku…"
-
-#~| msgctxt "alternate lang"
-#~| msgid "_Open"
-#~ msgid "_Open"
-#~ msgstr "_Otvori"
-
-#~| msgid "_Save All"
-#~ msgid "_Save"
-#~ msgstr "_Sačuvaj"
-
-#~ msgid "_Undo"
-#~ msgstr "_Opozovi"
-
-#~ msgid "_Redo"
-#~ msgstr "_Ponovi"
