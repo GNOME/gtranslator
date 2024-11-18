@@ -646,8 +646,9 @@ gtr_window_show_dlteams (GtrWindow *window)
     }
   else
     {
+      AdwNavigationPage *current = adw_navigation_view_get_visible_page (priv->navigation_view);
       adw_navigation_view_replace_with_tags (priv->navigation_view, (const char *[2]) {
-        "poeditor",
+        adw_navigation_page_get_tag (current),
         "dlteams",
       }, 2);
     }
