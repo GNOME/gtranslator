@@ -351,11 +351,10 @@ add_button_clicked (GtrPreferencesDialog *dlg)
 static void
 on_profile_row_cb (GtkListBox *profiles, GtkListBoxRow *row, GtrPreferencesDialog *dlg)
 {
-  const char *name = gtk_widget_get_name (GTK_WIDGET (row));
-  if (g_strcmp0 (name, "add_profile") == 0)
-    {
-      add_button_clicked (dlg);
-    }
+  GtrPreferencesDialogPrivate *priv = gtr_preferences_dialog_get_instance_private (dlg);
+
+  if (GTK_WIDGET (row) == priv->add_profile)
+    add_button_clicked (dlg);
 }
 
 static void
@@ -465,12 +464,11 @@ clear_profile_listbox (GtrPreferencesDialog *dlg)
 {
   GtrPreferencesDialogPrivate *priv = gtr_preferences_dialog_get_instance_private (dlg);
   GtkWidget *widget = GTK_WIDGET (gtk_list_box_get_row_at_index (GTK_LIST_BOX (priv->profiles), 0));
-  const char *name = gtk_widget_get_name (GTK_WIDGET (widget));
-  while (g_strcmp0 (name, "add_profile") != 0)
+
+  while (widget != priv->add_profile)
     {
       gtk_list_box_remove (GTK_LIST_BOX (priv->profiles), widget);
       widget = GTK_WIDGET (gtk_list_box_get_row_at_index (GTK_LIST_BOX (priv->profiles), 0));
-      name = gtk_widget_get_name (GTK_WIDGET (widget));
     }
 }
 
