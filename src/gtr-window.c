@@ -84,7 +84,6 @@ typedef struct
 
   gint width;
   gint height;
-  GdkToplevelState window_state;
 
   GtrProfileManager *prof_manager;
 
@@ -274,13 +273,13 @@ save_window_state (GtrWindow * window)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
-  if ((priv->window_state &
-	 (GDK_TOPLEVEL_STATE_MAXIMIZED | GDK_TOPLEVEL_STATE_FULLSCREEN)) == 0)
-    {
-      gtk_window_get_default_size (GTK_WINDOW (window), &priv->width, &priv->height);
-      g_settings_set (priv->state_settings, GTR_SETTINGS_WINDOW_SIZE,
-				"(ii)", priv->width, priv->height);
-    }
+  gtk_window_get_default_size (GTK_WINDOW (window), &priv->width, &priv->height);
+  gboolean is_maximized = gtk_window_is_maximized (GTK_WINDOW (window));
+
+  g_settings_set (priv->state_settings, GTR_SETTINGS_WINDOW_SIZE,
+                  "(ii)", priv->width, priv->height);
+  g_settings_set_boolean (priv->state_settings, GTR_SETTINGS_WINDOW_MAXIMIZED,
+                          is_maximized);
 }
 
 static void
