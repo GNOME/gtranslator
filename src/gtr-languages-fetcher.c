@@ -189,8 +189,7 @@ fill_from_language_entry (GtrLanguagesFetcher *fetcher,
 }
 
 static void
-on_language_activate (GtrLangComboRow     *btn,
-                      GtrLanguagesFetcher *fetcher)
+update_language (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
   const gchar *text = gtr_lang_combo_row_get_lang (GTR_LANG_COMBO_ROW (priv->language));
@@ -258,8 +257,7 @@ on_lang_changed (GtkWidget           *widget,
                  GParamSpec          *spec,
                  GtrLanguagesFetcher *fetcher)
 {
-  GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  on_language_activate (GTR_LANG_COMBO_ROW (priv->language), fetcher);
+  update_language (fetcher);
   g_signal_emit (fetcher, signals[CHANGED], 0, NULL);
 }
 
@@ -274,6 +272,9 @@ gtr_languages_fetcher_init (GtrLanguagesFetcher *fetcher)
 
   // add items to comboboxes
   append_from_languages (fetcher);
+
+  // Populate other settings based on default language.
+  update_language (fetcher);
 
   g_signal_connect (priv->language, "notify::selected",
                     G_CALLBACK (on_lang_changed),
