@@ -158,8 +158,6 @@ GtkWindow *gtr_tab_get_window (GtrTab *tab);
 
 /* Semi-public methods */
 
-gchar *_gtr_tab_get_name (GtrTab * tab);
-
 gchar *_gtr_tab_get_tooltips (GtrTab *tab);
 
 gboolean _gtr_tab_can_close (GtrTab * tab);
