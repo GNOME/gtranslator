@@ -376,6 +376,11 @@ dl_activated (GSimpleAction *action,
   GtrApplication *app = GTR_APPLICATION (user_data);
 
   GtrTab *active_tab = gtr_window_get_active_tab (get_active_window (app));
+  if (active_tab == NULL) {
+    gtr_window_show_dlteams (get_active_window (app));
+    return;
+  }
+
   GtrPoState state = gtr_po_get_state (gtr_tab_get_po (active_tab));
 
   if (state == GTR_PO_STATE_MODIFIED)
