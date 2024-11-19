@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2024-11-16 11:21+0000\n"
-"PO-Revision-Date: 2024-11-16 14:47+0200\n"
+"POT-Creation-Date: 2024-11-18 08:20+0000\n"
+"PO-Revision-Date: 2024-11-19 18:20+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:508 src/gtr-window.c:205 src/gtr-window.c:433
+#: src/gtr-application.c:508 src/gtr-window.c:204 src/gtr-window.c:432
 msgid "Translation Editor"
 msgstr "Редактор перекладів"
 
@@ -180,18 +180,26 @@ msgstr ""
 "«id» (ідентифікатор), «original-text» (початковий текст) і «translated-text» "
 "(текст перекладу)."
 
+#: data/org.gnome.Gtranslator.gschema.xml.in:115
+msgid "Window maximized"
+msgstr "Вікно розгорнуто"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:116
+msgid "Window maximized state"
+msgstr "Стан розгорнутості вікна"
+
 #: src/codeview/gtr-viewer.c:100
 msgid "Source Viewer"
 msgstr "Переглядач джерельного коду"
 
 #: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:279
-#: src/gtr-actions-file.c:299 src/gtr-actions-file.c:341
-#: src/gtr-actions-file.c:368 src/gtr-actions-file.c:542
-#: src/gtr-actions-file.c:585 src/gtr-actions-file.c:753 src/gtr-dl-teams.c:164
+#: src/gtr-actions-file.c:298 src/gtr-actions-file.c:336
+#: src/gtr-actions-file.c:363 src/gtr-actions-file.c:537
+#: src/gtr-actions-file.c:580 src/gtr-actions-file.c:748 src/gtr-dl-teams.c:164
 #: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:341 src/gtr-dl-teams.c:429
 #: src/gtr-dl-teams.c:571 src/gtr-dl-teams.c:582 src/gtr-dl-teams.c:593
 #: src/gtr-dl-teams.c:624 src/gtr-dl-teams.c:691 src/gtr-profile-dialog.ui:20
-#: src/gtr-tab.c:348 src/gtr-window.c:159 src/gtr-window.c:332
+#: src/gtr-tab.c:347 src/gtr-window.c:158 src/gtr-window.c:331
 msgid "OK"
 msgstr "Гаразд"
 
@@ -246,15 +254,15 @@ msgstr "Відкрити файл для перекладу"
 msgid "Could not save file"
 msgstr "Не вдалося зберегти файл"
 
-#: src/gtr-actions-file.c:339
+#: src/gtr-actions-file.c:334
 msgid "This file has already been uploaded"
 msgstr "Цей файл вже вивантажено"
 
-#: src/gtr-actions-file.c:355
+#: src/gtr-actions-file.c:350
 msgid "Couldn't upload the file"
 msgstr "Не вдалося вивантажити файл"
 
-#: src/gtr-actions-file.c:358
+#: src/gtr-actions-file.c:353
 #, c-format
 msgid ""
 "%s\n"
@@ -266,11 +274,11 @@ msgstr ""
 "Можливо, ви не налаштувати ваш <i>l10n.gnome.org</i>-<b>жетон</b> у вашому "
 "профілі або ви не маєте прав доступу до вивантаження цього модуля."
 
-#: src/gtr-actions-file.c:367
+#: src/gtr-actions-file.c:362
 msgid "The file has been uploaded!"
 msgstr "Файл вивантажено!"
 
-#: src/gtr-actions-file.c:508
+#: src/gtr-actions-file.c:503
 msgid "Save file as…"
 msgstr "Зберегти файл як…"
 
@@ -278,7 +286,7 @@ msgstr "Зберегти файл як…"
 msgid "Fixed plurals"
 msgstr "Виправлено форми множини"
 
-#: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:449
+#: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:448
 msgid "_Cancel"
 msgstr "_Скасувати"
 
@@ -615,7 +623,6 @@ msgid "State"
 msgstr "Стан"
 
 #: src/gtr-lang-combo-row.c:73
-#| msgid "Language"
 msgid "Languages"
 msgstr "Мови"
 
@@ -714,23 +721,23 @@ msgstr "Помилка запису PO-файла: %s"
 msgid "Delete"
 msgstr "Вилучити"
 
-#: src/gtr-preferences-dialog.c:432
+#: src/gtr-preferences-dialog.c:431
 msgid "Impossible to remove the active profile"
 msgstr "Неможливо вилучити активний профіль"
 
-#: src/gtr-preferences-dialog.c:433
+#: src/gtr-preferences-dialog.c:432
 msgid "Another profile should be selected as active before"
 msgstr "Спочатку треба вибрати інший активний профіль"
 
-#: src/gtr-preferences-dialog.c:436
+#: src/gtr-preferences-dialog.c:435
 msgid "_Ok"
 msgstr "_Гаразд"
 
-#: src/gtr-preferences-dialog.c:444
+#: src/gtr-preferences-dialog.c:443
 msgid "Are you sure you want to delete this profile?"
 msgstr "Ви справді хочете вилучити цей профіль?"
 
-#: src/gtr-preferences-dialog.c:450
+#: src/gtr-preferences-dialog.c:449
 msgid "_Delete"
 msgstr "В_илучити"
 
@@ -809,6 +816,11 @@ msgstr "П_рофілі"
 #: src/gtr-preferences-dialog.ui:132
 msgid "Profiles"
 msgstr "Профілі"
+
+#: src/gtr-preferences-dialog.ui:143
+#| msgid "_Profiles"
+msgid "_Add Profile"
+msgstr "_Додати профіль"
 
 #: src/gtr-profile-dialog.ui:7
 msgid "Translation Editor Profile"
@@ -924,44 +936,44 @@ msgstr "Початковий текст"
 msgid "Translated text"
 msgstr "Перекладений текст"
 
-#: src/gtr-tab.c:345
+#: src/gtr-tab.c:344
 msgid "There is an error in the message"
 msgstr "Помилка у повідомленні"
 
-#: src/gtr-tab.c:563 src/gtr-tab.c:696
+#: src/gtr-tab.c:562 src/gtr-tab.c:695
 msgid "fuzzy"
 msgstr "неточний"
 
-#: src/gtr-tab.c:726
+#: src/gtr-tab.c:725
 #, c-format
 msgid "Plural %d"
 msgstr "Форма множини %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1319
+#: src/gtr-tab.c:1278
 msgid "Path:"
 msgstr "Шлях:"
 
-#: src/gtr-tab.c:1568
+#: src/gtr-tab.c:1527
 msgid "Copied to clipboard"
 msgstr "Скопійовано до буфера обміну"
 
-#: src/gtr-tab.c:2007
+#: src/gtr-tab.c:1966
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Перекладено: %0.2f%%"
 
-#: src/gtr-tab.c:2008
+#: src/gtr-tab.c:1967
 #, c-format
 msgid "Translated: %d"
 msgstr "Перекладених: %d"
 
-#: src/gtr-tab.c:2009
+#: src/gtr-tab.c:1968
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Неперекладених: %d"
 
-#: src/gtr-tab.c:2010
+#: src/gtr-tab.c:1969
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Неточних: %d"
@@ -1048,22 +1060,22 @@ msgid "comment:"
 msgstr "коментар:"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:188
+#: src/gtr-window.c:187
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — редактор перекладів"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:195
+#: src/gtr-window.c:194
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — редактор перекладів"
 
-#: src/gtr-window.c:331
+#: src/gtr-window.c:330
 msgid "Could not Save"
 msgstr "Не вдалося зберегти"
 
-#: src/gtr-window.c:343
+#: src/gtr-window.c:342
 msgid "File saved"
 msgstr "Файл збережено"
 
