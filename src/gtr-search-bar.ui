@@ -78,39 +78,29 @@
         <child>
           <object class="GtkRevealer" id="replace_options">
             <child>
-              <object class="GtkGrid">
+              <object class="GtkBox">
                 <property name="margin_top">6</property>
-                <property name="column_spacing">8</property>
+                <property name="spacing">6</property>
                 <child>
                   <object class="GtkEntry" id="replace_entry">
                     <property name="width-chars">20</property>
-                    <property name="max-width-chars">30</property>
                     <property name="primary_icon_name">edit-find-replace-symbolic</property>
                     <property name="primary_icon_activatable">0</property>
                     <property name="primary_icon_sensitive">0</property>
                     <property name="placeholder-text" translatable="yes">Replace</property>
-                    <layout>
-                      <property name="column">0</property>
-                      <property name="row">0</property>
-                    </layout>
+                    <property name="hexpand">True</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton" id="replace_button">
                     <property name="label" translatable="yes">Replace</property>
-                    <layout>
-                      <property name="column">1</property>
-                      <property name="row">0</property>
-                    </layout>
+                    <property name="can-shrink">True</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton" id="replace_all_button">
                     <property name="label" translatable="yes">Replace All</property>
-                    <layout>
-                      <property name="column">2</property>
-                      <property name="row">0</property>
-                    </layout>
+                    <property name="can-shrink">True</property>
                   </object>
                 </child>
 
