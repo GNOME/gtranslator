@@ -752,9 +752,9 @@ gtr_msg_fix_plurals (GtrMsg *msg, int plurals)
         gtr_msg_set_msgstr_plural (msg, i, "");
     }
   // Remove leftovers
-  current = gtr_msg_get_msgstr_plural (msg, i);
-  while (current)
-    gtr_msg_set_msgstr_plural (msg, i++, NULL);
+  current = gtr_msg_get_msgstr_plural (msg, plurals);
+  if (current)
+    gtr_msg_set_msgstr_plural (msg, plurals++, "");
 
   return TRUE;
 }
