@@ -622,6 +622,16 @@ emit_searchbar_toggled (GtkSearchBar *search_bar,
                         GtrTab       *tab)
 {
   gboolean revealed = gtk_search_bar_get_search_mode (search_bar);
+
+  if (!revealed)
+    {
+      GtrTabPrivate *priv;
+      GtkEntry *entry;
+      priv = gtr_tab_get_instance_private (tab);
+      entry = gtr_search_bar_get_search (priv->gtr_search_bar);
+      gtk_editable_set_text (GTK_EDITABLE (entry), "");
+    }
+
   g_signal_emit (G_OBJECT (tab), signals[SEARCHBAR_TOGGLED], 0, revealed);
 }
 
