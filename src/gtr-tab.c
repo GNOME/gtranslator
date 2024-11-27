@@ -172,7 +172,7 @@ gtr_tab_focus_search_bar (GtrTab *tab)
 
   entry = gtr_search_bar_get_search (priv->gtr_search_bar);
 
-  gtk_entry_grab_focus_without_selecting (entry);
+  gtk_widget_grab_focus (GTK_WIDGET (entry));
 }
 
 void
