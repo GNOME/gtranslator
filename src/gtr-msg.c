@@ -468,7 +468,6 @@ gtr_msg_set_msgstr_plural (GtrMsg * msg, gint index, const gchar * msgstr)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_if_fail (GTR_IS_MSG (msg));
-  g_return_if_fail (msgstr != NULL);
 
   po_message_set_msgstr_plural (priv->message, index, msgstr);
   g_object_notify (G_OBJECT (msg), "translation");
@@ -752,9 +751,17 @@ gtr_msg_fix_plurals (GtrMsg *msg, int plurals)
         gtr_msg_set_msgstr_plural (msg, i, "");
     }
   // Remove leftovers
-  current = gtr_msg_get_msgstr_plural (msg, plurals);
-  if (current)
-    gtr_msg_set_msgstr_plural (msg, plurals++, "");
+  // We need to set NULL to the latest element to reduce the number of
+  // plurals so need to do it in reverse
+  // https://www.gnu.org/software/gettext/manual/html_node/po_005fmessage_005ft-API.html#index-po_005fmessage_005fset_005fmsgstr_005fplural
+
+  // Get the latest index with plural translation
+  while (gtr_msg_get_msgstr_plural (msg, i++));
+
+  // Remove all not needed plurals, in reverse order because of the
+  // API. It only reduce the number of plurals if it's the last index
+  while (i >= plurals)
+    gtr_msg_set_msgstr_plural (msg, i--, NULL);
 
   return TRUE;
 }
