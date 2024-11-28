@@ -161,6 +161,8 @@ gtr_actions_fix_plurals (GtrWindow *window)
   for (; msg_list; msg_list = g_list_next (msg_list))
     {
       GtrMsg *msg = GTR_MSG (msg_list->data);
-      gtr_msg_fix_plurals (msg, plurals);
+      if (gtr_msg_fix_plurals (msg, plurals))
+        gtk_widget_action_set_enabled (GTK_WIDGET (window),
+                                       "win.save", TRUE);
     }
 }
