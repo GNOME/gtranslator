@@ -281,7 +281,11 @@ preferences_activated (GSimpleAction *action,
                        gpointer       user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
-  gtr_show_preferences_dialog (get_active_window (app));
+  GtrWindow *window;
+
+  window = get_active_window (app);
+  if (adw_application_window_get_visible_dialog (ADW_APPLICATION_WINDOW (window)) == NULL)
+    gtr_show_preferences_dialog (window);
 }
 
 static void
