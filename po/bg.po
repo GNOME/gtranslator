@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2024-10-21 13:52+0000\n"
-"PO-Revision-Date: 2024-10-26 09:36+0200\n"
+"POT-Creation-Date: 2024-12-02 23:50+0000\n"
+"PO-Revision-Date: 2024-12-17 06:30+0100\n"
 "Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
 "Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
 "Language: bg\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:508 src/gtr-window.c:205 src/gtr-window.c:433
+#: src/gtr-application.c:517 src/gtr-window.c:204 src/gtr-window.c:433
 msgid "Translation Editor"
 msgstr "Редактор на преводи"
 
@@ -63,12 +63,10 @@ msgstr "Редактор на po-файлове"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:14
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
-msgstr ""
-"превеждане;превод;редактор;писане;gtranslator;translation;editor;gettext;"
-"write;"
+msgstr "превеждане;превод;редактор;писане;gtranslator;translation;editor;gettext;write;"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:329
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:325
 msgid "New Window"
 msgstr "Нов прозорец"
 
@@ -178,18 +176,26 @@ msgstr ""
 "стойности са „status“ (състояние), „id“ (идентификатор), „original-text“ "
 "(оригинален текст) и „translated-text“ (преведен текст)."
 
+#: data/org.gnome.Gtranslator.gschema.xml.in:115
+msgid "Window maximized"
+msgstr "Максимизиран прозорец"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:116
+msgid "Window maximized state"
+msgstr "Прозорецът е в максимизирано състояние."
+
 #: src/codeview/gtr-viewer.c:100
 msgid "Source Viewer"
 msgstr "Преглед на изходен код"
 
 #: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:279
-#: src/gtr-actions-file.c:299 src/gtr-actions-file.c:341
-#: src/gtr-actions-file.c:368 src/gtr-actions-file.c:542
-#: src/gtr-actions-file.c:585 src/gtr-actions-file.c:753 src/gtr-dl-teams.c:157
-#: src/gtr-dl-teams.c:218 src/gtr-dl-teams.c:334 src/gtr-dl-teams.c:418
-#: src/gtr-dl-teams.c:543 src/gtr-dl-teams.c:554 src/gtr-dl-teams.c:565
-#: src/gtr-dl-teams.c:596 src/gtr-dl-teams.c:663 src/gtr-profile-dialog.ui:20
-#: src/gtr-tab.c:348 src/gtr-window.c:159 src/gtr-window.c:332
+#: src/gtr-actions-file.c:298 src/gtr-actions-file.c:336
+#: src/gtr-actions-file.c:363 src/gtr-actions-file.c:537
+#: src/gtr-actions-file.c:580 src/gtr-actions-file.c:748 src/gtr-dl-teams.c:164
+#: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:341 src/gtr-dl-teams.c:429
+#: src/gtr-dl-teams.c:571 src/gtr-dl-teams.c:582 src/gtr-dl-teams.c:593
+#: src/gtr-dl-teams.c:624 src/gtr-dl-teams.c:691 src/gtr-profile-dialog.ui:20
+#: src/gtr-tab.c:347 src/gtr-window.c:158 src/gtr-window.c:331
 msgid "OK"
 msgstr "Добре"
 
@@ -214,8 +220,8 @@ msgid "translator-credits"
 msgstr ""
 "Ясен Праматаров &lt;<a href='mailto:turin@fsa-bg.org'>turin@fsa-bg.org</"
 "a>&gt;\n"
-"Twlvnn Kraftwerk &lt;<a href='mailto:kraft_werk@tutanota."
-"com'>kraft_werk@tutanota.com</a>&gt;\n"
+"Twlvnn Kraftwerk &lt;<a "
+"href='mailto:kraft_werk@tutanota.com'>kraft_werk@tutanota.com</a>&gt;\n"
 "\n"
 "\n"
 "Проектът за превод на GNOME има нужда от подкрепа.\n"
@@ -254,15 +260,15 @@ msgstr "Отваряне на файл за превод"
 msgid "Could not save file"
 msgstr "Файлът не може да бъде запазен"
 
-#: src/gtr-actions-file.c:339
+#: src/gtr-actions-file.c:334
 msgid "This file has already been uploaded"
 msgstr "Този файл вече е качен"
 
-#: src/gtr-actions-file.c:355
+#: src/gtr-actions-file.c:350
 msgid "Couldn't upload the file"
 msgstr "Файлът не може да бъде качен"
 
-#: src/gtr-actions-file.c:358
+#: src/gtr-actions-file.c:353
 #, c-format
 msgid ""
 "%s\n"
@@ -271,22 +277,22 @@ msgid ""
 "module."
 msgstr ""
 "%s\n"
-"Може да не сте настроили правилно <b>жетона</b> за регистрацията в <i>l10n."
-"gnome.org</i> или да нямате право да качите този модул."
+"Може да не сте настроили правилно <b>жетона</b> за регистрацията в "
+"<i>l10n.gnome.org</i> или да нямате право да качите този модул."
 
-#: src/gtr-actions-file.c:367
+#: src/gtr-actions-file.c:362
 msgid "The file has been uploaded!"
 msgstr "Файлът е качен!"
 
-#: src/gtr-actions-file.c:508
+#: src/gtr-actions-file.c:503
 msgid "Save file as…"
 msgstr "Запазване на файла като…"
 
-#: src/gtr-application.c:302
+#: src/gtr-application.c:306
 msgid "Fixed plurals"
 msgstr "Коригирани множествени числа"
 
-#: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:449
+#: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:448
 msgid "_Cancel"
 msgstr "_Отказване"
 
@@ -322,7 +328,7 @@ msgstr[1] ""
 "Има %d документа с незапазени промени. Искате ли да ги запазите, преди да "
 "затворите?"
 
-#: src/gtr-context.c:158 src/gtr-tab.ui:279
+#: src/gtr-context.c:158 src/gtr-tab.ui:275
 msgid "Save"
 msgstr "Запазване"
 
@@ -342,39 +348,39 @@ msgstr "Извлечени коментари"
 msgid "Paths"
 msgstr "Пътища"
 
-#: src/gtr-dl-teams.c:217
+#: src/gtr-dl-teams.c:224
 msgid "Error loading module info"
 msgstr "Грешка при зареждане на информацията за модула"
 
-#: src/gtr-dl-teams.c:417
+#: src/gtr-dl-teams.c:428
 msgid "Error loading file info"
 msgstr "Грешка при зареждане на информацията за файла"
 
-#: src/gtr-dl-teams.c:446
+#: src/gtr-dl-teams.c:457
 msgid "No module state found."
 msgstr "Състоянието на модула не е намерено."
 
-#: src/gtr-dl-teams.c:542
+#: src/gtr-dl-teams.c:570
 msgid "Error loading file"
 msgstr "Грешка при зареждане на файла"
 
-#: src/gtr-dl-teams.c:552 src/gtr-dl-teams.c:595
+#: src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:623
 msgid "Error creating tmp file"
 msgstr "Грешка при създаването на временен файл"
 
-#: src/gtr-dl-teams.c:564
+#: src/gtr-dl-teams.c:592
 msgid "Error writing stream"
 msgstr "Грешка в потока за записване"
 
-#: src/gtr-dl-teams.c:608
+#: src/gtr-dl-teams.c:636
 msgid "The file has been saved in your Downloads folder"
 msgstr "Файлът е запазен в папката „Свалени“"
 
-#: src/gtr-dl-teams.c:662
+#: src/gtr-dl-teams.c:690
 msgid "Could not reserve module"
 msgstr "Модулът не може да се резервира"
 
-#: src/gtr-dl-teams.c:667
+#: src/gtr-dl-teams.c:695
 #, c-format
 msgid ""
 "%s\n"
@@ -385,19 +391,19 @@ msgstr ""
 "Може да не сте настроили правилно жетона за регистрацията в l10n.gnome.org "
 "или да нямате право да резервирате този модул."
 
-#: src/gtr-dl-teams.c:679
+#: src/gtr-dl-teams.c:707
 msgid "The file has been successfully reserved"
 msgstr "Файлът е успешно резервиран"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:333
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:329
 msgid "Preferences"
 msgstr "Настройки"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:339
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:335
 msgid "Keyboard Shortcuts"
 msgstr "Клавишни комбинации"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:347
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:343
 msgid "About Translation Editor"
 msgstr "Относно „Редактор на преводи“"
 
@@ -410,43 +416,42 @@ msgid "Main Menu"
 msgstr "Основно меню"
 
 #: src/gtr-dl-teams.ui:70 src/gtr-languages-fetcher.ui:5
-#: src/gtr-languages-fetcher.ui:8
 msgid "Language"
 msgstr "Език"
 
-#: src/gtr-dl-teams.ui:81 src/gtr-header-dialog.ui:149
+#: src/gtr-dl-teams.ui:75 src/gtr-header-dialog.ui:149
 msgid "Module"
 msgstr "Модул"
 
-#: src/gtr-dl-teams.ui:92 src/gtr-header-dialog.ui:161
+#: src/gtr-dl-teams.ui:80 src/gtr-header-dialog.ui:161
 msgid "Domain"
 msgstr "Домейн"
 
-#: src/gtr-dl-teams.ui:103 src/gtr-header-dialog.ui:155
+#: src/gtr-dl-teams.ui:85 src/gtr-header-dialog.ui:155
 msgid "Branch"
 msgstr "Разклонение"
 
-#: src/gtr-dl-teams.ui:120
+#: src/gtr-dl-teams.ui:93
 msgid "Reserve for translation"
 msgstr "Резервиране за превод"
 
-#: src/gtr-dl-teams.ui:128
+#: src/gtr-dl-teams.ui:101
 msgid "Info"
 msgstr "Информация"
 
-#: src/gtr-dl-teams.ui:131
+#: src/gtr-dl-teams.ui:104
 msgid "File"
 msgstr "Файл"
 
-#: src/gtr-dl-teams.ui:141
+#: src/gtr-dl-teams.ui:114
 msgid "Translation State"
 msgstr "Състояние на превода"
 
-#: src/gtr-dl-teams.ui:151
+#: src/gtr-dl-teams.ui:124
 msgid "Stats"
 msgstr "Статистика"
 
-#: src/gtr-dl-teams.ui:165
+#: src/gtr-dl-teams.ui:138
 msgid "Load File"
 msgstr "Зареждане на файл"
 
@@ -462,7 +467,7 @@ msgstr "Шаблон на превод с gettext"
 msgid "All files"
 msgstr "Всички файлове"
 
-#: src/gtr-greeter.ui:5 src/gtr-greeter.ui:45
+#: src/gtr-greeter.ui:5 src/gtr-greeter.ui:37
 msgid "Welcome to Translation Editor"
 msgstr "Добре дошли в „Редактор на преводи“"
 
@@ -474,7 +479,7 @@ msgstr "Напред"
 msgid "Welcome"
 msgstr "Добре дошли"
 
-#: src/gtr-greeter.ui:47
+#: src/gtr-greeter.ui:39
 msgid ""
 "Before start to use the application, a profile should be created, but don't "
 "worry, the app will guide you to do it in a minute."
@@ -483,63 +488,63 @@ msgstr ""
 "регистрация, но не се притеснявайте, програмата ще ви помогне да я създадете "
 "за минута."
 
-#: src/gtr-greeter.ui:63
+#: src/gtr-greeter.ui:51
 msgid "Create Profile"
 msgstr "Създаване на регистрация"
 
-#: src/gtr-greeter.ui:75
+#: src/gtr-greeter.ui:57
 msgid "Profile"
 msgstr "Регистрация"
 
-#: src/gtr-greeter.ui:78 src/gtr-greeter.ui:139 src/gtr-profile-dialog.ui:50
+#: src/gtr-greeter.ui:60 src/gtr-greeter.ui:114 src/gtr-profile-dialog.ui:50
 msgid "Profile name"
 msgstr "Име на регистрацията"
 
-#: src/gtr-greeter.ui:79 src/gtr-profile-dialog.ui:51
+#: src/gtr-greeter.ui:61 src/gtr-profile-dialog.ui:51
 msgid "default"
 msgstr "стандартно"
 
-#: src/gtr-greeter.ui:85 src/gtr-greeter.ui:144
+#: src/gtr-greeter.ui:67 src/gtr-greeter.ui:119
 msgid "Translator name"
 msgstr "Име на преводача"
 
-#: src/gtr-greeter.ui:91 src/gtr-greeter.ui:149
+#: src/gtr-greeter.ui:73 src/gtr-greeter.ui:124
 msgid "Translator email"
 msgstr "Е-поща на преводача"
 
-#: src/gtr-greeter.ui:97
+#: src/gtr-greeter.ui:79
 msgid "Translation team email"
 msgstr "Е-поща на екипа"
 
-#: src/gtr-greeter.ui:120 src/gtr-greeter.ui:131
+#: src/gtr-greeter.ui:100 src/gtr-greeter.ui:106
 msgid "Confirmation"
 msgstr "Потвърждаване"
 
-#: src/gtr-greeter.ui:154
+#: src/gtr-greeter.ui:129
 msgid "Team email"
 msgstr "Е-поща на екипа"
 
-#: src/gtr-greeter.ui:159
+#: src/gtr-greeter.ui:134
 msgid "Language name"
 msgstr "Име на езика"
 
-#: src/gtr-greeter.ui:164 src/gtr-languages-fetcher.ui:21
+#: src/gtr-greeter.ui:139 src/gtr-languages-fetcher.ui:14
 msgid "Language code"
 msgstr "Код на езика"
 
-#: src/gtr-greeter.ui:169 src/gtr-languages-fetcher.ui:41
+#: src/gtr-greeter.ui:144 src/gtr-languages-fetcher.ui:34
 msgid "Character set"
 msgstr "Кодова таблица"
 
-#: src/gtr-greeter.ui:174 src/gtr-languages-fetcher.ui:61
+#: src/gtr-greeter.ui:149 src/gtr-languages-fetcher.ui:54
 msgid "Transfer encoding"
 msgstr "Кодиране при прехвърляне"
 
-#: src/gtr-greeter.ui:179
+#: src/gtr-greeter.ui:154
 msgid "Plural form"
 msgstr "Множествено число"
 
-#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:316
+#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:312
 msgid "Edit Header"
 msgstr "Редактиране на заглавната част"
 
@@ -624,19 +629,23 @@ msgstr "Език"
 msgid "State"
 msgstr "Състояние"
 
-#: src/gtr-languages-fetcher.ui:18
+#: src/gtr-lang-combo-row.c:73
+msgid "Languages"
+msgstr "Езици"
+
+#: src/gtr-languages-fetcher.ui:11
 msgid "Edit options manually"
 msgstr "Ръчно редактиране на опциите"
 
-#: src/gtr-languages-fetcher.ui:28
+#: src/gtr-languages-fetcher.ui:21
 msgid "Choose language code"
 msgstr "Избиране на код на езика"
 
-#: src/gtr-languages-fetcher.ui:81
+#: src/gtr-languages-fetcher.ui:74
 msgid "Plural forms"
 msgstr "Множествени числа"
 
-#: src/gtr-languages-fetcher.ui:88
+#: src/gtr-languages-fetcher.ui:81
 msgid "Choose plural forms"
 msgstr "Избиране на форми за множествено число"
 
@@ -720,23 +729,23 @@ msgstr "Грешка при запазването на po-файла: %s"
 msgid "Delete"
 msgstr "Изтриване"
 
-#: src/gtr-preferences-dialog.c:432
+#: src/gtr-preferences-dialog.c:431
 msgid "Impossible to remove the active profile"
 msgstr "Не е възможно да изтриете текущата регистрация"
 
-#: src/gtr-preferences-dialog.c:433
+#: src/gtr-preferences-dialog.c:432
 msgid "Another profile should be selected as active before"
 msgstr "Първо изберете друга регистрация за текуща"
 
-#: src/gtr-preferences-dialog.c:436
+#: src/gtr-preferences-dialog.c:435
 msgid "_Ok"
 msgstr "_Добре"
 
-#: src/gtr-preferences-dialog.c:444
+#: src/gtr-preferences-dialog.c:443
 msgid "Are you sure you want to delete this profile?"
 msgstr "Сигурни ли сте, че искате да изтриете тази регистрация?"
 
-#: src/gtr-preferences-dialog.c:450
+#: src/gtr-preferences-dialog.c:449
 msgid "_Delete"
 msgstr "_Изтриване"
 
@@ -816,6 +825,10 @@ msgstr "_Регистрации"
 msgid "Profiles"
 msgstr "Регистрации"
 
+#: src/gtr-preferences-dialog.ui:143
+msgid "_Add Profile"
+msgstr "_Добавяне на регистрация"
+
 #: src/gtr-profile-dialog.ui:7
 msgid "Translation Editor Profile"
 msgstr "Регистрация на „Редактор на преводи“"
@@ -846,8 +859,8 @@ msgstr "Интеграция с Damned Lies"
 
 #: src/gtr-profile-dialog.ui:85
 msgid ""
-"GNOME Damned Lies integration token, go to your profile in https://l10n."
-"gnome.org/ to get it"
+"GNOME Damned Lies integration token, go to your profile in https://"
+"l10n.gnome.org/ to get it"
 msgstr ""
 "Жетон за интеграция на GNOME Damned Lies. Може да го получите от в "
 "регистрацията си в https://l10n.gnome.org/"
@@ -856,11 +869,11 @@ msgstr ""
 msgid "_Damned Lies auth token"
 msgstr "_Жетон за удостоверяване в Damned Lies"
 
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:312
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:308
 msgid "Build Translation Memory"
-msgstr "Сглобяване на паметта за преводи"
+msgstr "Изграждане на паметта за преводи"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:343
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:339
 msgid "Help"
 msgstr "Помощ"
 
@@ -902,72 +915,72 @@ msgstr ""
 "Показване или скриване на опциите за търсене, като например чувствителност "
 "към регистъра"
 
-#: src/gtr-search-bar.ui:91 src/gtr-search-bar.ui:100
+#: src/gtr-search-bar.ui:90 src/gtr-search-bar.ui:96
 msgid "Replace"
 msgstr "Замяна"
 
-#: src/gtr-search-bar.ui:109
+#: src/gtr-search-bar.ui:102
 msgid "Replace All"
 msgstr "Заместване на всички"
 
-#: src/gtr-search-bar.ui:129
+#: src/gtr-search-bar.ui:119
 msgid "Case sensitive"
 msgstr "Чувствителност към регистъра"
 
-#: src/gtr-search-bar.ui:139
+#: src/gtr-search-bar.ui:129
 msgid "Match whole word only"
 msgstr "Съвпадане само на цели думи"
 
-#: src/gtr-search-bar.ui:149
+#: src/gtr-search-bar.ui:139
 msgid "Wrap around"
 msgstr "След края — от началото"
 
-#: src/gtr-search-bar.ui:159
+#: src/gtr-search-bar.ui:149
 msgid "Original text"
 msgstr "Първоначален текст"
 
-#: src/gtr-search-bar.ui:169
+#: src/gtr-search-bar.ui:159
 msgid "Translated text"
 msgstr "Преведен текст"
 
-#: src/gtr-tab.c:345
+#: src/gtr-tab.c:344
 msgid "There is an error in the message"
 msgstr "В съобщението има грешка"
 
-#: src/gtr-tab.c:563 src/gtr-tab.c:696
+#: src/gtr-tab.c:562 src/gtr-tab.c:705
 msgid "fuzzy"
 msgstr "неясно"
 
-#: src/gtr-tab.c:726
+#: src/gtr-tab.c:735
 #, c-format
 msgid "Plural %d"
 msgstr "Множествено число %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1319
+#: src/gtr-tab.c:1288
 msgid "Path:"
 msgstr "Път:"
 
-#: src/gtr-tab.c:1568
+#: src/gtr-tab.c:1537
 msgid "Copied to clipboard"
 msgstr "Копирано в буфера за обмен"
 
-#: src/gtr-tab.c:2007
+#: src/gtr-tab.c:1976
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Преведено: %0.2f%%"
 
-#: src/gtr-tab.c:2008
+#: src/gtr-tab.c:1977
 #, c-format
 msgid "Translated: %d"
 msgstr "Преведени: %d"
 
-#: src/gtr-tab.c:2009
+#: src/gtr-tab.c:1978
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Непреведени: %d"
 
-#: src/gtr-tab.c:2010
+#: src/gtr-tab.c:1979
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Неясни: %d"
@@ -993,47 +1006,47 @@ msgid "Upload File"
 msgstr "Качване на файла"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:126 src/gtr-tab.ui:301
+#: src/gtr-tab.ui:122 src/gtr-tab.ui:297
 msgid "_Original Message"
 msgstr "_Първоначално съобщение"
 
-#: src/gtr-tab.ui:191
+#: src/gtr-tab.ui:187
 msgid "Translate_d Text"
 msgstr "Преве_ден текст"
 
-#: src/gtr-tab.ui:269
+#: src/gtr-tab.ui:265
 msgid "Open a New File"
 msgstr "Отваряне на нов файл"
 
-#: src/gtr-tab.ui:273
+#: src/gtr-tab.ui:269
 msgid "Open from Damned Lies"
 msgstr "Отваряне от Damned Lies"
 
-#: src/gtr-tab.ui:283
+#: src/gtr-tab.ui:279
 msgid "Save As…"
 msgstr "Запазване като…"
 
-#: src/gtr-tab.ui:289
+#: src/gtr-tab.ui:285
 msgid "So_rt Messages by…"
 msgstr "_Подреждане на съобщенията по…"
 
-#: src/gtr-tab.ui:291
+#: src/gtr-tab.ui:287
 msgid "_Order of Appearance"
 msgstr "_Ред на поява"
 
-#: src/gtr-tab.ui:296
+#: src/gtr-tab.ui:292
 msgid "_Message Status"
 msgstr "Състояние на _съобщението"
 
-#: src/gtr-tab.ui:306
+#: src/gtr-tab.ui:302
 msgid "_Translated Message"
 msgstr "_Преведено съобщение"
 
-#: src/gtr-tab.ui:320
+#: src/gtr-tab.ui:316
 msgid "Advanced Tools"
 msgstr "Допълнителни инструменти"
 
-#: src/gtr-tab.ui:322
+#: src/gtr-tab.ui:318
 msgid "Fix plural messages"
 msgstr "Коригиране на множествените числа"
 
@@ -1054,22 +1067,22 @@ msgid "comment:"
 msgstr "коментар:"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:188
+#: src/gtr-window.c:187
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "* %s — Редактор на преводи"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:195
+#: src/gtr-window.c:194
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Редактор на преводи"
 
-#: src/gtr-window.c:331
+#: src/gtr-window.c:330
 msgid "Could not Save"
 msgstr "Не може да се запази"
 
-#: src/gtr-window.c:343
+#: src/gtr-window.c:342
 msgid "File saved"
 msgstr "Файлът е запазен"
 
@@ -1186,7 +1199,7 @@ msgstr "Памет за преводи"
 #: src/help-overlay.ui:141
 msgctxt "shortcut window"
 msgid "Build translation memory"
-msgstr "Сглобяване на паметта за преводи"
+msgstr "Изграждане на паметта за преводи"
 
 #: src/help-overlay.ui:147
 msgctxt "shortcut window"
@@ -1245,19 +1258,19 @@ msgstr "Избиране на po-папка"
 msgid "Translation Editor Memory Manager"
 msgstr "Управление на паметта за преводи"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:41
+#: src/translation-memory/gtr-translation-memory-dialog.ui:43
 msgid "Database"
 msgstr "База от данни"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:46
+#: src/translation-memory/gtr-translation-memory-dialog.ui:48
 msgid "Select the directory which contains PO files"
 msgstr "Изберете папката с po-файлове"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:58
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
 msgid "Use only files with this name"
 msgstr "Използване само на файлове с това име"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:77
+#: src/translation-memory/gtr-translation-memory-dialog.ui:79
 msgid "Add to Database"
 msgstr "Добавяне в базата от данни"
 
