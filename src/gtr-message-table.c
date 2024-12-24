@@ -95,7 +95,8 @@ scroll_to_selected (GtrMessageTable * table)
   if (selected == GTK_INVALID_LIST_POSITION)
     return FALSE;
 
-  gtk_widget_activate_action (GTK_WIDGET (priv->messages), "list.scroll-to-item", "u", selected);
+  gtk_list_view_scroll_to (GTK_LIST_VIEW (priv->messages), selected,
+                           GTK_LIST_SCROLL_NONE, NULL);
 
   return FALSE;
 }
