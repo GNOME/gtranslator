@@ -327,36 +327,23 @@ void
 do_find (GtrSearchBar *searchbar, GtrWindow *window, gboolean search_backwards)
 {
   GtrTab *tab;
-  gboolean found = FALSE;
   gint pos = -1;
   gint current_pos = -1;
 
   /* Used to store search options */
   tab = gtr_window_get_active_tab (window);
-  found = find_in_list (window, searchbar);
-  // It appears in the current selected message, so nothing to do here
-  if (found)
-    {
-      gtr_search_bar_set_found (searchbar, found);
-      return;
-    }
 
   // Not found in the current message, so look for the followings
   current_pos
       = gtk_single_selection_get_selected (gtr_tab_get_selection_model (tab));
   pos = find_in_selection_model (window, searchbar, current_pos,
                                  search_backwards);
+  gtr_search_bar_set_found (searchbar, pos > -1);
   if (pos >= 0)
-    {
-      gtk_single_selection_set_selected (gtr_tab_get_selection_model (tab),
-                                         GTK_INVALID_LIST_POSITION);
-      gtk_single_selection_set_selected (gtr_tab_get_selection_model (tab),
-                                         pos);
-      found = find_in_list (window, searchbar);
-    }
+    gtk_single_selection_set_selected (gtr_tab_get_selection_model (tab),
+                                       pos);
 
   restore_last_searched_data (searchbar, tab);
-  gtr_search_bar_set_found (searchbar, found);
 }
 
 static void
