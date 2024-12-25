@@ -15,12 +15,16 @@
             <property name="show-start-title-buttons">False</property>
             <child type="start">
               <object class="GtkButton" id="cancel">
-                <property name="label" translatable="yes">Cancel</property>
+                <property name="label" translatable="yes">_Cancel</property>
+                <property name="can-shrink">True</property>
+                <property name="use-underline">True</property>
               </object>
             </child>
             <child type="end">
               <object class="GtkButton" id="upload">
-                <property name="label" translatable="yes">Upload</property>
+                <property name="label" translatable="yes">_Upload</property>
+                <property name="can-shrink">True</property>
+                <property name="use-underline">True</property>
                 <style>
                   <class name="suggested-action"/>
                 </style>

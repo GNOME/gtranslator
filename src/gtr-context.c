@@ -154,8 +154,12 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
 
   headerbar = gtk_header_bar_new ();
   gtk_header_bar_set_show_title_buttons (GTK_HEADER_BAR (headerbar), FALSE);
-  cancel = gtk_button_new_with_label (_("Cancel"));
-  save = gtk_button_new_with_label (_("Save"));
+  cancel = gtk_button_new_with_label (_("_Cancel"));
+  save = gtk_button_new_with_label (_("_Save"));
+  gtk_button_set_can_shrink (GTK_BUTTON (cancel), TRUE);
+  gtk_button_set_can_shrink (GTK_BUTTON (save), TRUE);
+  gtk_button_set_use_underline (GTK_BUTTON (cancel), TRUE);
+  gtk_button_set_use_underline (GTK_BUTTON (save), TRUE);
   gtk_widget_add_css_class (save, "suggested-action");
   gtk_header_bar_pack_start (GTK_HEADER_BAR (headerbar), cancel);
   gtk_header_bar_pack_end (GTK_HEADER_BAR (headerbar), save);
