@@ -45,9 +45,9 @@ typedef struct
 {
   GtkWidget *load_button;
   GtkWidget *reserve_button;
-  GtkWidget *stats_label;
-  GtkWidget *module_state_label;
-  GtkWidget *file_label;
+  GtkWidget *stats_row;
+  GtkWidget *module_state_row;
+  GtkWidget *file_row;
 
   GtkWidget *langs_comborow;
   GListStore *langs_model;
@@ -301,9 +301,7 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
   g_autoptr(SoupMessage) msg = NULL;
   g_autofree gchar *module_endpoint;
 
-  gtk_widget_set_visible (priv->file_label, FALSE);
-  gtk_widget_set_visible (priv->module_state_label, FALSE);
-  gtk_label_set_text (GTK_LABEL (priv->stats_label), "");
+  adw_action_row_set_subtitle (ADW_ACTION_ROW (priv->stats_row), "");
 
   /* Disable (down)load button */
   gtk_widget_set_sensitive (priv->branches_comborow, FALSE);
@@ -443,8 +441,7 @@ gtr_dl_teams_parse_file_info (GObject *object, GAsyncResult *result, gpointer us
 
   if (!priv->file_path)
     {
-      gtk_label_set_text (GTK_LABEL (priv->file_label), "No file found.");
-      gtk_widget_set_visible (priv->file_label, TRUE);
+      adw_action_row_set_subtitle (ADW_ACTION_ROW (priv->file_row), _("No file found"));
       return;
     }
 
@@ -453,10 +450,7 @@ gtr_dl_teams_parse_file_info (GObject *object, GAsyncResult *result, gpointer us
   priv->module_state = g_strdup (json_object_get_string_member (jobject, "state"));
 
   if (!priv->module_state)
-    {
-      gtk_label_set_text (GTK_LABEL (priv->module_state_label), _("No module state found."));
-      gtk_widget_set_visible (priv->module_state_label, TRUE);
-    }
+    adw_action_row_set_subtitle (ADW_ACTION_ROW (priv->module_state_row), _("No module state found."));
 
   /* Get file statistics and show them to the user */
   stats_node = json_object_get_member (jobject, "statistics");
@@ -485,11 +479,9 @@ gtr_dl_teams_parse_file_info (GObject *object, GAsyncResult *result, gpointer us
     error_color,
     json_object_get_int_member (stats_object, "untrans"));
 
-  gtk_label_set_markup (GTK_LABEL (priv->stats_label), markup);
-  gtk_label_set_text (GTK_LABEL (priv->file_label), strrchr (priv->file_path, '/') + 1);
-  gtk_widget_set_visible (priv->file_label, TRUE);
-  gtk_label_set_text (GTK_LABEL (priv->module_state_label), priv->module_state);
-  gtk_widget_set_visible (priv->module_state_label, TRUE);
+  adw_action_row_set_subtitle (ADW_ACTION_ROW (priv->stats_row), markup);
+  adw_action_row_set_subtitle (ADW_ACTION_ROW (priv->file_row), strrchr (priv->file_path, '/') + 1);
+  adw_action_row_set_subtitle (ADW_ACTION_ROW (priv->module_state_row), priv->module_state);
   /* Enable (down)load button */
   gtk_widget_set_sensitive (priv->load_button, TRUE);
 
@@ -890,9 +882,9 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/translator/gtr-dl-teams.ui");
 
-  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, file_label);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, stats_label);
-  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, module_state_label);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, file_row);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, stats_row);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, module_state_row);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, load_button);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, reserve_button);
 

@@ -100,33 +100,28 @@
                       <object class="AdwPreferencesGroup">
                         <property name="title" translatable="yes">Info</property>
                         <child>
-                          <object class="AdwActionRow">
+                          <object class="AdwActionRow" id="file_row">
                             <property name="title" translatable="yes">File</property>
-                            <child>
-                              <object class="GtkLabel" id="file_label">
-                                <property name="valign">center</property>
-                              </object>
-                            </child>
+                            <style>
+                              <class name="property"/>
+                            </style>
                           </object>
                         </child>
                         <child>
-                          <object class="AdwActionRow">
+                          <object class="AdwActionRow" id="module_state_row">
                             <property name="title" translatable="yes">Translation State</property>
-                            <child>
-                              <object class="GtkLabel" id="module_state_label">
-                                <property name="valign">center</property>
-                              </object>
-                            </child>
+                            <style>
+                              <class name="property"/>
+                            </style>
                           </object>
                         </child>
                         <child>
-                          <object class="AdwActionRow">
+                          <object class="AdwActionRow" id="stats_row">
                             <property name="title" translatable="yes">Stats</property>
-                            <child>
-                              <object class="GtkLabel" id="stats_label">
-                                <property name="valign">center</property>
-                              </object>
-                            </child>
+                            <property name="use-markup">True</property>
+                            <style>
+                              <class name="property"/>
+                            </style>
                           </object>
                         </child>
 
