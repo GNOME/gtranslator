@@ -134,25 +134,20 @@ restore_last_searched_data (GtrSearchBar * dialog, GtrTab * tab)
     }
 }
 
-gboolean
-run_search (GtrView * view, gboolean follow)
+int
+run_search (GtrView * view, int offset)
 {
   GtkSourceBuffer *doc;
   GtkTextIter start_iter;
   GtkTextIter match_start;
   GtkTextIter match_end;
-  gboolean found = FALSE;
+  int found = 0;
 
   g_return_val_if_fail (GTR_IS_VIEW (view), FALSE);
 
   doc = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
 
-  if (!follow)
-    gtk_text_buffer_get_start_iter (GTK_TEXT_BUFFER (doc), &start_iter);
-  else
-    gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),
-                                          NULL, &start_iter);
-
+  gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &start_iter, offset);
   found = gtr_view_search_forward (view,
                                    &start_iter,
                                    NULL, &match_start, &match_end);
@@ -163,14 +158,14 @@ run_search (GtrView * view, gboolean follow)
 
       gtk_text_buffer_move_mark_by_name (GTK_TEXT_BUFFER (doc),
                                          "selection_bound", &match_end);
-
+      return gtk_text_iter_get_offset (&match_end);
     }
   else
     {
       gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &start_iter);
     }
 
-  return found;
+  return 0;
 }
 
 static gboolean
@@ -270,7 +265,8 @@ find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
 
   // Use static to keep the search state between different calls
   static GList *viewsaux = NULL;
-  static gboolean found = FALSE;
+  // offset of last found word in textview
+  static int offset = 0;
 
   entry_text = gtr_search_bar_get_search_text (searchbar);
 
@@ -314,8 +310,8 @@ find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
 
   while (viewsaux != NULL)
     {
-      found = run_search (GTR_VIEW (viewsaux->data), found);
-      if (found)
+      offset = run_search (GTR_VIEW (viewsaux->data), offset);
+      if (offset > 0)
         return TRUE;
       viewsaux = viewsaux->next;
     }
@@ -329,9 +325,18 @@ do_find (GtrSearchBar *searchbar, GtrWindow *window, gboolean search_backwards)
   GtrTab *tab;
   gint pos = -1;
   gint current_pos = -1;
+  gboolean found = FALSE;
 
   /* Used to store search options */
   tab = gtr_window_get_active_tab (window);
+
+  found = find_in_list (window, searchbar);
+  // It appears in the current selected message, so nothing to do here
+  if (found)
+    {
+      gtr_search_bar_set_found (searchbar, TRUE);
+      return;
+    }
 
   // Not found in the current message, so look for the followings
   current_pos
@@ -340,8 +345,11 @@ do_find (GtrSearchBar *searchbar, GtrWindow *window, gboolean search_backwards)
                                  search_backwards);
   gtr_search_bar_set_found (searchbar, pos > -1);
   if (pos >= 0)
-    gtk_single_selection_set_selected (gtr_tab_get_selection_model (tab),
-                                       pos);
+    {
+      gtk_single_selection_set_selected (gtr_tab_get_selection_model (tab),
+                                         pos);
+      found = find_in_list (window, searchbar);
+    }
 
   restore_last_searched_data (searchbar, tab);
 }
