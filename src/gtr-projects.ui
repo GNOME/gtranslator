@@ -40,20 +40,6 @@
       <object class="AdwToolbarView">
         <child type="top">
           <object class="AdwHeaderBar">
-            <child type="start">
-              <object class="GtkButton" id="open_button">
-                <property name="label" translatable="yes">_Open…</property>
-                <property name="can-shrink">True</property>
-                <property name="use-underline">True</property>
-              </object>
-            </child>
-            <child type="start">
-              <object class="GtkButton" id="dl_button">
-                <property name="label" translatable="yes">_Load from DL…</property>
-                <property name="can-shrink">True</property>
-                <property name="use-underline">True</property>
-              </object>
-            </child>
             <child type="end">
               <object class="GtkMenuButton" id="main_menu">
                 <property name="receives_default">1</property>
@@ -68,7 +54,36 @@
          <property name="content">
            <object class="AdwStatusPage" id="status_page">
              <property name="icon_name">document-new-symbolic</property>
-             <property name="title" translatable="yes">Open a new .po file or drag &amp; drop here</property>
+             <property name="title" translatable="yes">Open Translation File</property>
+             <property name="description" translatable="yes">Drag and drop .po files here</property>
+             <child>
+               <object class="GtkBox">
+                 <property name="orientation">vertical</property>
+                 <property name="spacing">12</property>
+                 <child>
+                   <object class="GtkButton" id="open_button">
+                     <property name="label" translatable="yes">_Open…</property>
+                     <property name="can-shrink">True</property>
+                     <property name="use-underline">True</property>
+                     <property name="halign">center</property>
+                     <style>
+                       <class name="pill"/>
+                     </style>
+                   </object>
+                 </child>
+                 <child>
+                   <object class="GtkButton" id="dl_button">
+                     <property name="label" translatable="yes">_Load from DL…</property>
+                     <property name="can-shrink">True</property>
+                     <property name="use-underline">True</property>
+                     <property name="halign">center</property>
+                     <style>
+                       <class name="pill"/>
+                     </style>
+                   </object>
+                 </child>
+               </object>
+             </child>
            </object>
          </property>
       </object>
@@ -78,5 +93,13 @@
 
   <object class="GtkPopoverMenu" id="main_menu_popover">
     <property name="menu_model">app-menu</property>
+  </object>
+
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="dl_button"/>
+      <widget name="open_button"/>
+    </widgets>
   </object>
 </interface>
