@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-01-11 15:51+0000\n"
-"PO-Revision-Date: 2025-01-11 23:41+0200\n"
+"POT-Creation-Date: 2025-01-23 10:19+0000\n"
+"PO-Revision-Date: 2025-01-24 21:05+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -347,7 +347,6 @@ msgid "Error loading file info"
 msgstr "Помилка під час спроби завантажити дані файла"
 
 #: src/gtr-dl-teams.c:444
-#| msgid "No module state found."
 msgid "No file found"
 msgstr "Файл не знайдено"
 
@@ -406,7 +405,7 @@ msgstr "Про «Редактор перекладів»"
 msgid "Load from Damned Lies"
 msgstr "Завантажити з Damned Lies"
 
-#: src/gtr-dl-teams.ui:41 src/gtr-projects.ui:63 src/gtr-tab.ui:47
+#: src/gtr-dl-teams.ui:41 src/gtr-projects.ui:49 src/gtr-tab.ui:47
 msgid "Main Menu"
 msgstr "Головне меню"
 
@@ -447,7 +446,6 @@ msgid "Stats"
 msgstr "Статистика"
 
 #: src/gtr-dl-teams.ui:133
-#| msgid "Load File"
 msgid "_Load File"
 msgstr "З_авантажити файл"
 
@@ -468,7 +466,6 @@ msgid "Welcome to Translation Editor"
 msgstr "Вітаємо у «Редакторі перекладів»"
 
 #: src/gtr-greeter.ui:19
-#| msgid "Next"
 msgid "_Next"
 msgstr "_Далі"
 
@@ -830,7 +827,6 @@ msgid "Translation Editor Profile"
 msgstr "Профіль «Редактора перекладів»"
 
 #: src/gtr-profile-dialog.ui:22
-#| msgid "OK"
 msgid "_OK"
 msgstr "_Гаразд"
 
@@ -882,19 +878,22 @@ msgstr "Довідка"
 msgid "Select po File"
 msgstr "Виберіть файл PO"
 
-#: src/gtr-projects.ui:45
-#| msgid "Open…"
+#: src/gtr-projects.ui:57
+#| msgid "Translation State"
+msgid "Open Translation File"
+msgstr "Відкрити файл перекладу"
+
+#: src/gtr-projects.ui:58
+msgid "Drag and drop .po files here"
+msgstr "Перетягніть файли .po сюди і скиньте їх"
+
+#: src/gtr-projects.ui:65
 msgid "_Open…"
 msgstr "_Відкрити…"
 
-#: src/gtr-projects.ui:52
-#| msgid "Load from DL…"
+#: src/gtr-projects.ui:76
 msgid "_Load from DL…"
 msgstr "Зава_нтажити з DL…"
-
-#: src/gtr-projects.ui:71
-msgid "Open a new .po file or drag & drop here"
-msgstr "Відкрийте файл .po або перетягніть і скиньте його сюди"
 
 #: src/gtr-search-bar.ui:20
 msgid "Search"
@@ -923,12 +922,10 @@ msgid "Replace"
 msgstr "Замінити"
 
 #: src/gtr-search-bar.ui:96
-#| msgid "Replace"
 msgid "_Replace"
 msgstr "За_мінити"
 
 #: src/gtr-search-bar.ui:103
-#| msgid "Replace All"
 msgid "Replace _All"
 msgstr "Замінити вс_юди"
 
@@ -1288,7 +1285,6 @@ msgid "Use only files with this name"
 msgstr "Використовувати файли лише з такою назвою"
 
 #: src/translation-memory/gtr-translation-memory-dialog.ui:79
-#| msgid "Add to Database"
 msgid "_Add to Database"
 msgstr "Д_одати у базу даних"
 
@@ -1343,6 +1339,9 @@ msgid ""
 "translation memory."
 msgstr ""
 "Максимальна різниця в довжині між рядком та прикладом у пам'яті перекладів."
+
+#~ msgid "Open a new .po file or drag & drop here"
+#~ msgstr "Відкрийте файл .po або перетягніть і скиньте його сюди"
 
 #~ msgid "Side panel switcher style"
 #~ msgstr "Перемикач стилю бічної панелі"
