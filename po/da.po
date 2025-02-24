@@ -3,7 +3,7 @@
 # Kenneth Christiansen <kenneth@ripen.dk>, 2000.
 # Keld Simonsen <keld@dkuug.dk>, 2000.
 # Joe Hansen <joedalton2@yahoo.dk>, 2009, 2010, 2011, 2012.
-# Alan Mortensen <alanmortensen.am@gmail.com>, 2017-19, 2022-24.
+# Alan Mortensen <alanmortensen.am@gmail.com>, 2017-19, 2022-25.
 # scootergrisen, 2020.
 #
 # scootergrisen: "Translation Editor" er i skrivende stund oversat til "Oversættelsesprogram"
@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2024-09-16 00:52+0000\n"
-"PO-Revision-Date: 2024-09-24 19:17+0200\n"
+"POT-Creation-Date: 2025-02-15 10:09+0000\n"
+"PO-Revision-Date: 2025-02-18 18:28+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -28,7 +28,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:498 src/gtr-window.c:205 src/gtr-window.c:432
+#: src/gtr-application.c:517 src/gtr-window.c:204 src/gtr-window.c:433
 msgid "Translation Editor"
 msgstr "Oversættelsesprogram"
 
@@ -72,7 +72,7 @@ msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Oversættelse;Redigering;Gettext;Skriv;"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:322
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:324
 msgid "New Window"
 msgstr "Nyt vindue"
 
@@ -181,18 +181,26 @@ msgstr ""
 "Sorteringsrækkefølge til brug i beskedlisten. Mulige værdier er “status”, "
 "“id”, “original-text” og “translated-text”."
 
+#: data/org.gnome.Gtranslator.gschema.xml.in:115
+msgid "Window maximized"
+msgstr "Vindue maksimeret"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:116
+msgid "Window maximized state"
+msgstr "Tilstand for maksimeret vindue"
+
 #: src/codeview/gtr-viewer.c:100
 msgid "Source Viewer"
 msgstr "Kildefremviser"
 
 #: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:279
-#: src/gtr-actions-file.c:299 src/gtr-actions-file.c:341
-#: src/gtr-actions-file.c:368 src/gtr-actions-file.c:542
-#: src/gtr-actions-file.c:585 src/gtr-actions-file.c:753 src/gtr-dl-teams.c:157
-#: src/gtr-dl-teams.c:250 src/gtr-dl-teams.c:336 src/gtr-dl-teams.c:443
-#: src/gtr-dl-teams.c:568 src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:593
-#: src/gtr-dl-teams.c:625 src/gtr-dl-teams.c:694 src/gtr-profile-dialog.ui:20
-#: src/gtr-tab.c:348 src/gtr-window.c:159 src/gtr-window.c:332
+#: src/gtr-actions-file.c:298 src/gtr-actions-file.c:336
+#: src/gtr-actions-file.c:363 src/gtr-actions-file.c:537
+#: src/gtr-actions-file.c:580 src/gtr-actions-file.c:748 src/gtr-dl-teams.c:164
+#: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:339 src/gtr-dl-teams.c:427
+#: src/gtr-dl-teams.c:563 src/gtr-dl-teams.c:574 src/gtr-dl-teams.c:585
+#: src/gtr-dl-teams.c:616 src/gtr-dl-teams.c:683 src/gtr-tab.c:347
+#: src/gtr-window.c:158 src/gtr-window.c:331
 msgid "OK"
 msgstr "OK"
 
@@ -231,8 +239,7 @@ msgstr "Ændringer som ikke er gemt"
 msgid "Do you want to write all the changes done to %s?"
 msgstr "Vil du skrive alle ændringer til %s?"
 
-#: src/gtr-actions-file.c:212 src/gtr-context.c:157
-#: src/gtr-profile-dialog.ui:15 src/gtr-upload-dialog.ui:18
+#: src/gtr-actions-file.c:212
 msgid "Cancel"
 msgstr "Annullér"
 
@@ -252,15 +259,15 @@ msgstr "Åbn fil der skal oversættes"
 msgid "Could not save file"
 msgstr "Kunne ikke gemme filen"
 
-#: src/gtr-actions-file.c:339
+#: src/gtr-actions-file.c:334
 msgid "This file has already been uploaded"
 msgstr "Filen er allerede blevet overført"
 
-#: src/gtr-actions-file.c:355
+#: src/gtr-actions-file.c:350
 msgid "Couldn't upload the file"
 msgstr "Kunne ikke overføre filen"
 
-#: src/gtr-actions-file.c:358
+#: src/gtr-actions-file.c:353
 #, c-format
 msgid ""
 "%s\n"
@@ -273,15 +280,21 @@ msgstr ""
 "korrekt i din profil, eller også har du ikke rettigheder til at overføre "
 "dette modul."
 
-#: src/gtr-actions-file.c:367
+#: src/gtr-actions-file.c:362
 msgid "The file has been uploaded!"
 msgstr "Filen er blevet overført!"
 
-#: src/gtr-actions-file.c:508
+#: src/gtr-actions-file.c:503
 msgid "Save file as…"
 msgstr "Gem fil som …"
 
-#: src/gtr-close-confirmation-dialog.c:122 src/gtr-preferences-dialog.c:449
+#: src/gtr-application.c:306
+msgid "Fixed plurals"
+msgstr "Faste flertalsformer"
+
+#: src/gtr-close-confirmation-dialog.c:122 src/gtr-context.c:157
+#: src/gtr-preferences-dialog.c:448 src/gtr-profile-dialog.ui:15
+#: src/gtr-upload-dialog.ui:18
 msgid "_Cancel"
 msgstr "_Annullér"
 
@@ -289,7 +302,7 @@ msgstr "_Annullér"
 msgid "Close _Without Saving"
 msgstr "Luk _uden at gemme"
 
-#: src/gtr-close-confirmation-dialog.c:124
+#: src/gtr-close-confirmation-dialog.c:124 src/gtr-context.c:158
 msgid "_Save"
 msgstr "_Gem"
 
@@ -317,11 +330,7 @@ msgstr[1] ""
 "Der er %d dokumenter med ændringer, som ikke er gemt. Gem ændringer før "
 "lukning?"
 
-#: src/gtr-context.c:158 src/gtr-tab.ui:279
-msgid "Save"
-msgstr "Gem"
-
-#: src/gtr-context.c:166 src/gtr-context.ui:28
+#: src/gtr-context.c:170 src/gtr-context.ui:28
 msgid "Notes"
 msgstr "Noter"
 
@@ -337,39 +346,43 @@ msgstr "Udtrukne kommentarer"
 msgid "Paths"
 msgstr "Stier"
 
-#: src/gtr-dl-teams.c:249
+#: src/gtr-dl-teams.c:224
 msgid "Error loading module info"
 msgstr "Fejl ved indlæsning af moduloplysninger"
 
-#: src/gtr-dl-teams.c:442
+#: src/gtr-dl-teams.c:426
 msgid "Error loading file info"
 msgstr "Fejl ved indlæsning af filoplysninger"
 
-#: src/gtr-dl-teams.c:473
+#: src/gtr-dl-teams.c:444
+msgid "No file found"
+msgstr "Ingen fil fundet"
+
+#: src/gtr-dl-teams.c:453
 msgid "No module state found."
 msgstr "Ingen modultilstand fundet."
 
-#: src/gtr-dl-teams.c:567
+#: src/gtr-dl-teams.c:562
 msgid "Error loading file"
 msgstr "Fejl ved indlæsning af fil"
 
-#: src/gtr-dl-teams.c:578 src/gtr-dl-teams.c:624
+#: src/gtr-dl-teams.c:572 src/gtr-dl-teams.c:615
 msgid "Error creating tmp file"
 msgstr "Fejl under oprettelse af tmp-fil"
 
-#: src/gtr-dl-teams.c:592
+#: src/gtr-dl-teams.c:584
 msgid "Error writing stream"
 msgstr "Fejl under skrivning af strøm"
 
-#: src/gtr-dl-teams.c:636
+#: src/gtr-dl-teams.c:628
 msgid "The file has been saved in your Downloads folder"
 msgstr "Filen er blevet gemt i din Hentet-mappe"
 
-#: src/gtr-dl-teams.c:693
+#: src/gtr-dl-teams.c:682
 msgid "Could not reserve module"
 msgstr "Kunne ikke reservere modulet"
 
-#: src/gtr-dl-teams.c:698
+#: src/gtr-dl-teams.c:687
 #, c-format
 msgid ""
 "%s\n"
@@ -380,19 +393,19 @@ msgstr ""
 "Måske har du ikke konfigureret dit l10n.gnome.org-token korrekt i din "
 "profil, eller også har du ikke rettigheder til at reservere dette modul."
 
-#: src/gtr-dl-teams.c:710
+#: src/gtr-dl-teams.c:699
 msgid "The file has been successfully reserved"
 msgstr "Filen er reserveret"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:326
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:328
 msgid "Preferences"
 msgstr "Indstillinger"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:332
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:334
 msgid "Keyboard Shortcuts"
 msgstr "Tastaturgenveje"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:340
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:342
 msgid "About Translation Editor"
 msgstr "Om Oversættelsesprogram"
 
@@ -400,50 +413,49 @@ msgstr "Om Oversættelsesprogram"
 msgid "Load from Damned Lies"
 msgstr "Indlæs fra Damned Lies"
 
-#: src/gtr-dl-teams.ui:41 src/gtr-projects.ui:59 src/gtr-tab.ui:47
+#: src/gtr-dl-teams.ui:41 src/gtr-projects.ui:49 src/gtr-tab.ui:47
 msgid "Main Menu"
 msgstr "Hovedmenu"
 
 #: src/gtr-dl-teams.ui:70 src/gtr-languages-fetcher.ui:5
-#: src/gtr-languages-fetcher.ui:8
 msgid "Language"
 msgstr "Sprog"
 
-#: src/gtr-dl-teams.ui:81 src/gtr-header-dialog.ui:143
+#: src/gtr-dl-teams.ui:75 src/gtr-header-dialog.ui:149
 msgid "Module"
 msgstr "Modul"
 
-#: src/gtr-dl-teams.ui:92 src/gtr-header-dialog.ui:155
+#: src/gtr-dl-teams.ui:80 src/gtr-header-dialog.ui:161
 msgid "Domain"
 msgstr "Domæne"
 
-#: src/gtr-dl-teams.ui:103 src/gtr-header-dialog.ui:149
+#: src/gtr-dl-teams.ui:85 src/gtr-header-dialog.ui:155
 msgid "Branch"
 msgstr "Gren"
 
-#: src/gtr-dl-teams.ui:120
+#: src/gtr-dl-teams.ui:93
 msgid "Reserve for translation"
 msgstr "Reservér til oversættelse"
 
-#: src/gtr-dl-teams.ui:128
+#: src/gtr-dl-teams.ui:101
 msgid "Info"
 msgstr "Oplysninger"
 
-#: src/gtr-dl-teams.ui:131
+#: src/gtr-dl-teams.ui:104
 msgid "File"
 msgstr "Fil"
 
-#: src/gtr-dl-teams.ui:141
+#: src/gtr-dl-teams.ui:112
 msgid "Translation State"
 msgstr "Oversættelsestilstand"
 
-#: src/gtr-dl-teams.ui:151
+#: src/gtr-dl-teams.ui:120
 msgid "Stats"
 msgstr "Statistik"
 
-#: src/gtr-dl-teams.ui:165
-msgid "Load File"
-msgstr "Indlæs fil"
+#: src/gtr-dl-teams.ui:133
+msgid "_Load File"
+msgstr "_Indlæs fil"
 
 #: src/gtr-file-dialogs.c:57
 msgid "Gettext translation"
@@ -457,19 +469,19 @@ msgstr "Skabelon for Gettextoversættelse"
 msgid "All files"
 msgstr "Alle filer"
 
-#: src/gtr-greeter.ui:5 src/gtr-greeter.ui:45
+#: src/gtr-greeter.ui:5 src/gtr-greeter.ui:39
 msgid "Welcome to Translation Editor"
 msgstr "Velkommen til Oversættelsesprogram"
 
 #: src/gtr-greeter.ui:19
-msgid "Next"
-msgstr "Næste"
+msgid "_Next"
+msgstr "_Næste"
 
-#: src/gtr-greeter.ui:33
+#: src/gtr-greeter.ui:35
 msgid "Welcome"
 msgstr "Velkommen"
 
-#: src/gtr-greeter.ui:47
+#: src/gtr-greeter.ui:41
 msgid ""
 "Before start to use the application, a profile should be created, but don't "
 "worry, the app will guide you to do it in a minute."
@@ -477,63 +489,63 @@ msgstr ""
 "Før du begynder at bruge programmet, skal der oprettes en profil. Det tager "
 "kun et øjeblik, og programmet vil guide dig igennem processen."
 
-#: src/gtr-greeter.ui:63
+#: src/gtr-greeter.ui:53
 msgid "Create Profile"
 msgstr "Opret profil"
 
-#: src/gtr-greeter.ui:75
+#: src/gtr-greeter.ui:59
 msgid "Profile"
 msgstr "Profil"
 
-#: src/gtr-greeter.ui:78 src/gtr-greeter.ui:139 src/gtr-profile-dialog.ui:50
+#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:116 src/gtr-profile-dialog.ui:54
 msgid "Profile name"
 msgstr "Profilnavn"
 
-#: src/gtr-greeter.ui:79 src/gtr-profile-dialog.ui:51
+#: src/gtr-greeter.ui:63 src/gtr-profile-dialog.ui:55
 msgid "default"
 msgstr "standard"
 
-#: src/gtr-greeter.ui:85 src/gtr-greeter.ui:144
+#: src/gtr-greeter.ui:69 src/gtr-greeter.ui:121
 msgid "Translator name"
 msgstr "Oversætterens navn"
 
-#: src/gtr-greeter.ui:91 src/gtr-greeter.ui:149
+#: src/gtr-greeter.ui:75 src/gtr-greeter.ui:126
 msgid "Translator email"
 msgstr "Oversætterens e-mail"
 
-#: src/gtr-greeter.ui:97
+#: src/gtr-greeter.ui:81
 msgid "Translation team email"
 msgstr "Oversættelsesholdets e-mailadresse"
 
-#: src/gtr-greeter.ui:120 src/gtr-greeter.ui:131
+#: src/gtr-greeter.ui:102 src/gtr-greeter.ui:108
 msgid "Confirmation"
 msgstr "Bekræftelse"
 
-#: src/gtr-greeter.ui:154
+#: src/gtr-greeter.ui:131
 msgid "Team email"
 msgstr "Oversættelsesholdets e-mail"
 
-#: src/gtr-greeter.ui:159
+#: src/gtr-greeter.ui:136
 msgid "Language name"
 msgstr "Sprognavn"
 
-#: src/gtr-greeter.ui:164 src/gtr-languages-fetcher.ui:21
+#: src/gtr-greeter.ui:141 src/gtr-languages-fetcher.ui:14
 msgid "Language code"
 msgstr "Sprogkode"
 
-#: src/gtr-greeter.ui:169 src/gtr-languages-fetcher.ui:41
+#: src/gtr-greeter.ui:146 src/gtr-languages-fetcher.ui:34
 msgid "Character set"
 msgstr "Tegnsæt"
 
-#: src/gtr-greeter.ui:174 src/gtr-languages-fetcher.ui:61
+#: src/gtr-greeter.ui:151 src/gtr-languages-fetcher.ui:54
 msgid "Transfer encoding"
 msgstr "Overførselskodning"
 
-#: src/gtr-greeter.ui:179
+#: src/gtr-greeter.ui:156
 msgid "Plural form"
 msgstr "Flertalsform"
 
-#: src/gtr-header-dialog.c:345 src/gtr-tab.ui:316
+#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:311
 msgid "Edit Header"
 msgstr "Rediger teksthovedet"
 
@@ -541,8 +553,8 @@ msgstr "Rediger teksthovedet"
 msgid "Translator"
 msgstr "Oversættelsesprogram"
 
-#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:74
-#: src/gtr-header-dialog.ui:134 src/gtr-preferences-dialog.ui:13
+#: src/gtr-header-dialog.ui:14 src/gtr-header-dialog.ui:80
+#: src/gtr-header-dialog.ui:140 src/gtr-preferences-dialog.ui:13
 msgid "General"
 msgstr "Generelt"
 
@@ -578,55 +590,63 @@ msgstr "_Tegnsæt"
 msgid "Enc_oding"
 msgstr "_Kodning"
 
-#: src/gtr-header-dialog.ui:70
+#: src/gtr-header-dialog.ui:64
+msgid "_Plural forms"
+msgstr "_Flertalsformer"
+
+#: src/gtr-header-dialog.ui:76
 msgid "Project"
 msgstr "Projekt"
 
-#: src/gtr-header-dialog.ui:77
+#: src/gtr-header-dialog.ui:83
 msgid "Project Id _version"
 msgstr "Projekt-id-_version"
 
-#: src/gtr-header-dialog.ui:83
+#: src/gtr-header-dialog.ui:89
 msgid "Pot _file creation date"
 msgstr "_Dato for oprettelse af pot-fil"
 
-#: src/gtr-header-dialog.ui:89
+#: src/gtr-header-dialog.ui:95
 msgid "Po file _revision date"
 msgstr "Po-filens _revisionsdato"
 
-#: src/gtr-header-dialog.ui:95
+#: src/gtr-header-dialog.ui:101
 msgid "Report message _bugs to"
 msgstr "Rapportér _fejl i teksterne til"
 
-#: src/gtr-header-dialog.ui:103
+#: src/gtr-header-dialog.ui:109
 msgid "Comment"
 msgstr "Kommentar"
 
-#: src/gtr-header-dialog.ui:130
+#: src/gtr-header-dialog.ui:136
 msgid "Damned Lies"
 msgstr "Damned Lies"
 
-#: src/gtr-header-dialog.ui:137
+#: src/gtr-header-dialog.ui:143
 msgid "Lang"
 msgstr "Sprog"
 
-#: src/gtr-header-dialog.ui:161
+#: src/gtr-header-dialog.ui:167
 msgid "State"
 msgstr "Tilstand"
 
-#: src/gtr-languages-fetcher.ui:18
+#: src/gtr-lang-combo-row.c:73
+msgid "Languages"
+msgstr "Sprog"
+
+#: src/gtr-languages-fetcher.ui:11
 msgid "Edit options manually"
 msgstr "Redigér indstillinger manuelt"
 
-#: src/gtr-languages-fetcher.ui:28
+#: src/gtr-languages-fetcher.ui:21
 msgid "Choose language code"
 msgstr "Vælg sprogkode"
 
-#: src/gtr-languages-fetcher.ui:81
+#: src/gtr-languages-fetcher.ui:74
 msgid "Plural forms"
 msgstr "Flertalsformer"
 
-#: src/gtr-languages-fetcher.ui:88
+#: src/gtr-languages-fetcher.ui:81
 msgid "Choose plural forms"
 msgstr "Vælg flertalsformer"
 
@@ -634,7 +654,7 @@ msgstr "Vælg flertalsformer"
 msgid "Original Message"
 msgstr "Oprindelig besked"
 
-#: src/gtr-message-table.ui:46
+#: src/gtr-message-table.ui:45
 msgid "Translated Message"
 msgstr "Oversat besked"
 
@@ -709,23 +729,23 @@ msgstr "Der opstod en fejl under skrivning af po-filen: %s"
 msgid "Delete"
 msgstr "Slet"
 
-#: src/gtr-preferences-dialog.c:432
+#: src/gtr-preferences-dialog.c:431
 msgid "Impossible to remove the active profile"
 msgstr "Umuligt at fjerne den aktive profil"
 
-#: src/gtr-preferences-dialog.c:433
+#: src/gtr-preferences-dialog.c:432
 msgid "Another profile should be selected as active before"
 msgstr "En anden profil bør vælges som den aktive først"
 
-#: src/gtr-preferences-dialog.c:436
+#: src/gtr-preferences-dialog.c:435
 msgid "_Ok"
 msgstr "_OK"
 
-#: src/gtr-preferences-dialog.c:444
+#: src/gtr-preferences-dialog.c:443
 msgid "Are you sure you want to delete this profile?"
 msgstr "Er du sikker på, du ønsker at slette denne profil?"
 
-#: src/gtr-preferences-dialog.c:450
+#: src/gtr-preferences-dialog.c:449
 msgid "_Delete"
 msgstr "_Slet"
 
@@ -805,35 +825,43 @@ msgstr "_Profiler"
 msgid "Profiles"
 msgstr "Profiler"
 
+#: src/gtr-preferences-dialog.ui:143
+msgid "_Add Profile"
+msgstr "_Tilføj profil"
+
 #: src/gtr-profile-dialog.ui:7
 msgid "Translation Editor Profile"
 msgstr "Oversættelsesprogram — profil"
 
-#: src/gtr-profile-dialog.ui:45
+#: src/gtr-profile-dialog.ui:22
+msgid "_OK"
+msgstr "_OK"
+
+#: src/gtr-profile-dialog.ui:49
 msgid "Profile Information"
 msgstr "Profilinformation"
 
-#: src/gtr-profile-dialog.ui:59
+#: src/gtr-profile-dialog.ui:63
 msgid "Translator Information"
 msgstr "Oversætterinformation"
 
-#: src/gtr-profile-dialog.ui:64
+#: src/gtr-profile-dialog.ui:68
 msgid "Translator _name"
 msgstr "Oversætterens _navn"
 
-#: src/gtr-profile-dialog.ui:70
+#: src/gtr-profile-dialog.ui:74
 msgid "Translator _email"
 msgstr "Oversætterens _e-mailadresse"
 
-#: src/gtr-profile-dialog.ui:76
+#: src/gtr-profile-dialog.ui:80
 msgid "Translation _team email"
 msgstr "O_versættelsesholdets e-mailadresse"
 
-#: src/gtr-profile-dialog.ui:84
+#: src/gtr-profile-dialog.ui:88
 msgid "Damned Lies Integration"
 msgstr "Damned Lies-integration"
 
-#: src/gtr-profile-dialog.ui:85
+#: src/gtr-profile-dialog.ui:89
 msgid ""
 "GNOME Damned Lies integration token, go to your profile in https://l10n."
 "gnome.org/ to get it"
@@ -841,15 +869,15 @@ msgstr ""
 "Integrationstoken til GNOME Damned Lies — gå til din profil på https://l10n."
 "gnome.org/ for at hente den"
 
-#: src/gtr-profile-dialog.ui:90
+#: src/gtr-profile-dialog.ui:94
 msgid "_Damned Lies auth token"
 msgstr "_Damned Lies-godkendelsestoken"
 
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:312
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:307
 msgid "Build Translation Memory"
 msgstr "Byg oversættelseshukommelse"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:336
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:338
 msgid "Help"
 msgstr "Hjælp"
 
@@ -857,17 +885,21 @@ msgstr "Hjælp"
 msgid "Select po File"
 msgstr "Vælg po-fil"
 
-#: src/gtr-projects.ui:45
-msgid "Open…"
-msgstr "Åbn …"
+#: src/gtr-projects.ui:57
+msgid "Open Translation File"
+msgstr "Åbn oversættelsesfil"
 
-#: src/gtr-projects.ui:50
-msgid "Load from DL…"
-msgstr "Indlæs fra DL …"
+#: src/gtr-projects.ui:58
+msgid "Drag and drop .po files here"
+msgstr "Træk-og-slip .po-filer her"
 
-#: src/gtr-projects.ui:67
-msgid "Open a new .po file or drag & drop here"
-msgstr "Åbn en ny .po-fil eller træk-og-slip her"
+#: src/gtr-projects.ui:65
+msgid "_Open…"
+msgstr "_Åbn …"
+
+#: src/gtr-projects.ui:76
+msgid "_Load from DL…"
+msgstr "_Indlæs fra DL …"
 
 #: src/gtr-search-bar.ui:20
 msgid "Search"
@@ -891,72 +923,76 @@ msgstr ""
 "Vis eller skjul søgeindstillinger såsom om der skelnes mellem store og små "
 "bogstaver"
 
-#: src/gtr-search-bar.ui:91 src/gtr-search-bar.ui:100
+#: src/gtr-search-bar.ui:90
 msgid "Replace"
 msgstr "Erstat"
 
-#: src/gtr-search-bar.ui:109
-msgid "Replace All"
-msgstr "Erstat alle"
+#: src/gtr-search-bar.ui:96
+msgid "_Replace"
+msgstr "_Erstat"
 
-#: src/gtr-search-bar.ui:129
+#: src/gtr-search-bar.ui:103
+msgid "Replace _All"
+msgstr "Erstat _alle"
+
+#: src/gtr-search-bar.ui:121
 msgid "Case sensitive"
 msgstr "Der skelnes mellem store og små bogstaver"
 
-#: src/gtr-search-bar.ui:139
+#: src/gtr-search-bar.ui:131
 msgid "Match whole word only"
 msgstr "Søg kun efter hele ord"
 
-#: src/gtr-search-bar.ui:149
+#: src/gtr-search-bar.ui:141
 msgid "Wrap around"
 msgstr "Ombryd"
 
-#: src/gtr-search-bar.ui:159
+#: src/gtr-search-bar.ui:151
 msgid "Original text"
 msgstr "Oprindelig tekst"
 
-#: src/gtr-search-bar.ui:169
+#: src/gtr-search-bar.ui:161
 msgid "Translated text"
 msgstr "Oversat tekst"
 
-#: src/gtr-tab.c:345
+#: src/gtr-tab.c:344
 msgid "There is an error in the message"
 msgstr "Der er en fejl i beskeden"
 
-#: src/gtr-tab.c:563 src/gtr-tab.c:696
+#: src/gtr-tab.c:562 src/gtr-tab.c:705
 msgid "fuzzy"
 msgstr "uafklaret"
 
-#: src/gtr-tab.c:726
+#: src/gtr-tab.c:735
 #, c-format
 msgid "Plural %d"
 msgstr "Flertal %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1319
+#: src/gtr-tab.c:1288
 msgid "Path:"
 msgstr "Sti:"
 
-#: src/gtr-tab.c:1568
+#: src/gtr-tab.c:1537
 msgid "Copied to clipboard"
 msgstr "Kopieret til udklipsholder"
 
-#: src/gtr-tab.c:2007
+#: src/gtr-tab.c:1976
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Oversat: %0.2f%%"
 
-#: src/gtr-tab.c:2008
+#: src/gtr-tab.c:1977
 #, c-format
 msgid "Translated: %d"
 msgstr "Oversat: %d"
 
-#: src/gtr-tab.c:2009
+#: src/gtr-tab.c:1978
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Uoversat: %d"
 
-#: src/gtr-tab.c:2010
+#: src/gtr-tab.c:1979
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Uafklaret: %d"
@@ -982,47 +1018,59 @@ msgid "Upload File"
 msgstr "Overfør fil"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:126 src/gtr-tab.ui:301
+#: src/gtr-tab.ui:122 src/gtr-tab.ui:296
 msgid "_Original Message"
 msgstr "_Oprindelig besked"
 
-#: src/gtr-tab.ui:191
+#: src/gtr-tab.ui:186
 msgid "Translate_d Text"
 msgstr "Oversat _tekst"
 
-#: src/gtr-tab.ui:269
+#: src/gtr-tab.ui:264
 msgid "Open a New File"
 msgstr "Åbn en ny fil"
 
-#: src/gtr-tab.ui:273
+#: src/gtr-tab.ui:268
 msgid "Open from Damned Lies"
 msgstr "Åbn fra Damned Lies"
 
-#: src/gtr-tab.ui:283
+#: src/gtr-tab.ui:274
+msgid "Save"
+msgstr "Gem"
+
+#: src/gtr-tab.ui:278
 msgid "Save As…"
 msgstr "Gem som …"
 
-#: src/gtr-tab.ui:289
+#: src/gtr-tab.ui:284
 msgid "So_rt Messages by…"
 msgstr "So_rtér beskeder efter …"
 
-#: src/gtr-tab.ui:291
+#: src/gtr-tab.ui:286
 msgid "_Order of Appearance"
 msgstr "_Visningsrækkefølge"
 
-#: src/gtr-tab.ui:296
+#: src/gtr-tab.ui:291
 msgid "_Message Status"
 msgstr "_Beskedstatus"
 
-#: src/gtr-tab.ui:306
+#: src/gtr-tab.ui:301
 msgid "_Translated Message"
 msgstr "O_versat besked"
+
+#: src/gtr-tab.ui:315
+msgid "Advanced Tools"
+msgstr "Avancerede værktøjer"
+
+#: src/gtr-tab.ui:317
+msgid "Fix plural messages"
+msgstr "Ret flertalsbeskeder"
 
 #: src/gtr-upload-dialog.c:147
 msgid "Uploading..."
 msgstr "Overfører …"
 
-#: src/gtr-upload-dialog.c:153 src/gtr-upload-dialog.ui:23
+#: src/gtr-upload-dialog.c:153
 msgid "Upload"
 msgstr "Overfør"
 
@@ -1030,27 +1078,31 @@ msgstr "Overfør"
 msgid "Upload to Damned Lies"
 msgstr "Overfør til Damned Lies"
 
-#: src/gtr-upload-dialog.ui:47
+#: src/gtr-upload-dialog.ui:25
+msgid "_Upload"
+msgstr "_Overfør"
+
+#: src/gtr-upload-dialog.ui:51
 msgid "comment:"
 msgstr "kommentar:"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:188
+#: src/gtr-window.c:187
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Oversættelsesprogram"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:195
+#: src/gtr-window.c:194
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Oversættelsesprogram"
 
-#: src/gtr-window.c:331
+#: src/gtr-window.c:330
 msgid "Could not Save"
 msgstr "Kunne ikke gemme"
 
-#: src/gtr-window.c:343
+#: src/gtr-window.c:342
 msgid "File saved"
 msgstr "Fil gemt"
 
@@ -1226,21 +1278,21 @@ msgstr "Vælg po-mappe"
 msgid "Translation Editor Memory Manager"
 msgstr "Håndtering af oversættelseshukommelse til Oversættelsesprogram"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:41
+#: src/translation-memory/gtr-translation-memory-dialog.ui:43
 msgid "Database"
 msgstr "Database"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:46
+#: src/translation-memory/gtr-translation-memory-dialog.ui:48
 msgid "Select the directory which contains PO files"
 msgstr "Vælg mappen, der indeholder po-filer"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:58
+#: src/translation-memory/gtr-translation-memory-dialog.ui:60
 msgid "Use only files with this name"
 msgstr "Brug kun filer med dette navn"
 
-#: src/translation-memory/gtr-translation-memory-dialog.ui:77
-msgid "Add to Database"
-msgstr "Tilføj til database"
+#: src/translation-memory/gtr-translation-memory-dialog.ui:79
+msgid "_Add to Database"
+msgstr "_Tilføj til database"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
 msgid "PO directory"
@@ -1297,6 +1349,9 @@ msgstr ""
 "Maksimal forskel i længde mellem beskeder vist som resultater af "
 "oversættelseshukommelsen."
 
+#~ msgid "Open a new .po file or drag & drop here"
+#~ msgstr "Åbn en ny .po-fil eller træk-og-slip her"
+
 #~ msgid "Gtranslator"
 #~ msgstr "Gtranslator"
 
@@ -1340,9 +1395,6 @@ msgstr ""
 
 #~ msgid "Appearance in the original file"
 #~ msgstr "Udseende i den oprindelige fil"
-
-#~ msgid "Original message"
-#~ msgstr "Oprindelig besked"
 
 #~ msgid "Translated message"
 #~ msgstr "Oversat besked"
@@ -1570,9 +1622,6 @@ msgstr ""
 
 #~ msgid "Close document"
 #~ msgstr "Luk dokument"
-
-#~ msgid "_Upload"
-#~ msgstr "_Overfør"
 
 #~ msgid "Configuration:"
 #~ msgstr "Konfiguration:"
