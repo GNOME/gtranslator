@@ -1,10 +1,17 @@
-# Gtranslator (-the GNOME translation making program-)
+<a href="https://flathub.org/apps/details/org.gnome.Gtranslator">
+<img src="https://flathub.org/api/badge?svg&locale=en&light" width="190px" />
+</a>
 
-gtranslator is a quite comfortable gettext po/po.gz/(g)mo files editor for the
-GNOME platform with many features. It's evolving quite fast and many useful
-functions are already implemented; gtranslator aims to be a very complete
-editing environment for translation issues within the GNU gettext/GNOME desktop
-world.
+# Gtranslator (-the GNOME translation making program-)
+<img src="data/icons/hicolor/scalable/apps/org.gnome.Gtranslator.svg" width="128" height="128" />
+<p>Translate and localize applications and libraries</p>
+
+Gtranslator is an enhanced gettext po file editor for the GNOME desktop
+environment. It handles all forms of gettext po files and includes very useful
+features like find/replace, translation memory, different translator profiles,
+messages table (for having an overview of the translations/messages in the po
+file), easy navigation and editing of translation messages and comments of the
+translation where accurate.
 
 You can check for the latest news and releases on the gtranslator Gitlab repository:
 
@@ -31,6 +38,12 @@ ideas, suggestions with us on our mailing list - we do really, really, really
 appreciate any kind of feedback and user comments very much in the
 community/gtranslator field :-)
 
+## Screenshots
+
+<div align="center">
+![screenshot](doc/screenshots/screenshot1.png)
+</div>
+
 ## How to build
 
 If you get this code from the git repository the easier way to build is using
@@ -45,3 +58,13 @@ meson _build
 ninja -C _build
 ninja -C _build install
 ```
+
+## Translations
+
+Helping to translate Gtranslator or add support to a new language is very
+welcome. You can find everything you need at:
+[l10n.gnome.org/module/gtranslator/](https://l10n.gnome.org/module/gtranslator/)
+
+## Code Of Conduct
+
+This project follows the [GNOME Code of Conduct](https://conduct.gnome.org/).
