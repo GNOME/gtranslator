@@ -85,7 +85,8 @@
               </object>
             </property>
             <property name="content">
-              <object class="AdwToolbarView">
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
                 <style>
                   <class name="view"/>
                 </style>
@@ -96,10 +97,13 @@
                     <property name="width_request">450</property>
                   </object>
                 </child>
-                <child type="bottom">
+                <child>
                   <object class="GtkBox">
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
+                    <style>
+                      <class name="tab-bottom-bar"/>
+                    </style>
                     <child>
                       <object class="GtkBox">
                         <property name="orientation">vertical</property>
