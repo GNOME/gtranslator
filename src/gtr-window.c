@@ -223,6 +223,7 @@ gtr_window_init (GtrWindow *window)
   //GtkTargetList *tl;
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
   GAction *sort_action;
+  GAction *show_id_column_action;
 
   priv->search_bar_shown = FALSE;
   priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
@@ -266,6 +267,10 @@ gtr_window_init (GtrWindow *window)
   sort_action
     = g_settings_create_action (priv->ui_settings, GTR_SETTINGS_SORT_ORDER);
   g_action_map_add_action (G_ACTION_MAP (window), sort_action);
+
+  show_id_column_action
+      = g_settings_create_action (priv->ui_settings, GTR_SETTINGS_SHOW_ID_COLUMN);
+  g_action_map_add_action (G_ACTION_MAP (window), show_id_column_action);
 }
 
 static void

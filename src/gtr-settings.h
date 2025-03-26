@@ -52,6 +52,7 @@ GSettings *gtr_settings_new (void);
 #define GTR_SETTINGS_SPELLCHECK				"spellcheck"
 #define GTR_SETTINGS_FONT				"font"
 #define GTR_SETTINGS_SORT_ORDER				"sort-order"
+#define GTR_SETTINGS_SHOW_ID_COLUMN		"show-id-column"
 
 /* window state keys */
 #define GTR_SETTINGS_WINDOW_MAXIMIZED		"window-maximized"
