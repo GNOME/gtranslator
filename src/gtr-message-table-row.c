@@ -21,6 +21,7 @@
 
 #include "gtr-message-table-row.h"
 #include "gtr-msg.h"
+#include "gtr-settings.h"
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -40,6 +41,7 @@ typedef struct
   GtkWidget *translated;
 
   GtrMsg *msg;
+  GSettings *ui_settings;
 } GtrMessageTableRowPrivate;
 
 struct _GtrMessageTableRow
@@ -72,6 +74,17 @@ update_cell_style (GtkWidget *cell, GtrMsg *msg)
 }
 
 static void
+on_show_id_column_changed (GSettings *settings, gchar *key, gpointer user_data)
+{
+  GtrMessageTableRow *row = GTR_MESSAGE_TABLE_ROW (user_data);
+  GtrMessageTableRowPrivate *priv
+      = gtr_message_table_row_get_instance_private (row);
+  gboolean show_id = g_settings_get_boolean (priv->ui_settings, GTR_SETTINGS_SHOW_ID_COLUMN);
+
+  gtk_widget_set_visible (priv->id, show_id);
+}
+
+static void
 update_msg (GtrMsg             *msg,
             GParamSpec         *pspec,
             GtrMessageTableRow *row)
@@ -98,7 +111,17 @@ update_msg (GtrMsg             *msg,
 static void
 gtr_message_table_row_init (GtrMessageTableRow *row)
 {
+  GtrMessageTableRowPrivate *priv;
+  priv = gtr_message_table_row_get_instance_private (row);
+  priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
+
+  g_signal_connect (priv->ui_settings, "changed::show-id-column",
+                    G_CALLBACK (on_show_id_column_changed), row);
+
   gtk_widget_init_template (GTK_WIDGET (row));
+
+  // Initial setup
+  on_show_id_column_changed (NULL, NULL, row);
 }
 
 static void
@@ -109,6 +132,7 @@ gtr_message_table_row_finalize (GObject *object)
 
   priv = gtr_message_table_row_get_instance_private (row);
 
+  g_clear_object (&priv->ui_settings);
   if (priv->msg)
     {
       g_signal_handlers_disconnect_by_func (priv->msg, update_msg, row);
