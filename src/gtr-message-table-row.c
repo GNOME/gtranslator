@@ -74,17 +74,6 @@ update_cell_style (GtkWidget *cell, GtrMsg *msg)
 }
 
 static void
-on_show_id_column_changed (GSettings *settings, gchar *key, gpointer user_data)
-{
-  GtrMessageTableRow *row = GTR_MESSAGE_TABLE_ROW (user_data);
-  GtrMessageTableRowPrivate *priv
-      = gtr_message_table_row_get_instance_private (row);
-  gboolean show_id = g_settings_get_boolean (priv->ui_settings, GTR_SETTINGS_SHOW_ID_COLUMN);
-
-  gtk_widget_set_visible (priv->id, show_id);
-}
-
-static void
 update_msg (GtrMsg             *msg,
             GParamSpec         *pspec,
             GtrMessageTableRow *row)
@@ -115,13 +104,11 @@ gtr_message_table_row_init (GtrMessageTableRow *row)
   priv = gtr_message_table_row_get_instance_private (row);
   priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
 
-  g_signal_connect (priv->ui_settings, "changed::show-id-column",
-                    G_CALLBACK (on_show_id_column_changed), row);
-
   gtk_widget_init_template (GTK_WIDGET (row));
 
-  // Initial setup
-  on_show_id_column_changed (NULL, NULL, row);
+  g_settings_bind (priv->ui_settings, GTR_SETTINGS_SHOW_ID_COLUMN,
+                   priv->id, "visible",
+                   G_SETTINGS_BIND_DEFAULT);
 }
 
 static void

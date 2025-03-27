@@ -62,7 +62,6 @@ typedef struct
 
   GtrTab *tab;
   GtrMessageTableSortBy sort_status;
-  gboolean show_id_column;
 
   GSettings *ui_settings;
 } GtrMessageTablePrivate;
@@ -83,18 +82,6 @@ on_sort_order_changed (GSettings *settings, gchar *key, gpointer user_data)
 
   gtr_message_table_sort_by (
       table, g_settings_get_enum (priv->ui_settings, GTR_SETTINGS_SORT_ORDER));
-}
-
-static void
-on_show_id_column_changed (GSettings *settings, gchar *key, gpointer user_data)
-{
-  GtrMessageTable *table = GTR_MESSAGE_TABLE (user_data);
-  GtrMessageTablePrivate *priv
-      = gtr_message_table_get_instance_private (table);
-
-  priv->show_id_column =
-      g_settings_get_boolean (priv->ui_settings, GTR_SETTINGS_SHOW_ID_COLUMN);
-  gtk_widget_set_visible (priv->idlabel, priv->show_id_column);
 }
 
 static gboolean
@@ -160,9 +147,6 @@ gtr_message_table_init (GtrMessageTable * table)
   priv->store = NULL;
   priv->id_sorter = NULL;
 
-  priv->show_id_column
-      = g_settings_get_boolean (priv->ui_settings, GTR_SETTINGS_SHOW_ID_COLUMN);
-
   gtk_orientable_set_orientation (GTK_ORIENTABLE (table),
                                   GTK_ORIENTATION_VERTICAL);
 
@@ -171,12 +155,11 @@ gtr_message_table_init (GtrMessageTable * table)
   g_signal_connect (priv->ui_settings, "changed::sort-order",
                     G_CALLBACK (on_sort_order_changed), table);
 
-  g_signal_connect (priv->ui_settings, "changed::show-id-column",
-                    G_CALLBACK (on_show_id_column_changed), table);
-
   gtk_widget_init_template (GTK_WIDGET (table));
 
-  gtk_widget_set_visible (priv->idlabel, priv->show_id_column);
+  g_settings_bind (priv->ui_settings, GTR_SETTINGS_SHOW_ID_COLUMN,
+                   priv->idlabel, "visible",
+                   G_SETTINGS_BIND_DEFAULT);
 }
 
 static void
