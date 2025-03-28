@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-02-03 12:26+0000\n"
-"PO-Revision-Date: 2025-02-04 10:12+0800\n"
+"POT-Creation-Date: 2025-03-27 11:23+0000\n"
+"PO-Revision-Date: 2025-03-28 18:52+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -23,11 +23,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Gtranslator 47.1\n"
+"X-Generator: Gtranslator 48.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:517 src/gtr-window.c:204 src/gtr-window.c:433
+#: src/gtr-application.c:517 src/gtr-window.c:204 src/gtr-window.c:438
 msgid "Translation Editor"
 msgstr "翻译编辑器"
 
@@ -68,7 +68,7 @@ msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Translation;Editor;Gettext;Write;翻译;编辑器;写;"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:324
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:332
 msgid "New Window"
 msgstr "新建窗口"
 
@@ -169,11 +169,19 @@ msgstr ""
 "消息列表中使用的排序顺序。可选值有“status”（状态）、“id”（编号）、“original-"
 "text”（原始文本）和“translated-text”（翻译文本）。"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:115
+#: data/org.gnome.Gtranslator.gschema.xml.in:109
+msgid "Show ID column"
+msgstr "显示标识符栏"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:110
+msgid "If true, displays a column with the id of the message on the editor."
+msgstr "如果设为 true，会在编辑器上增加一栏来显示消息的标识符。"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:122
 msgid "Window maximized"
 msgstr "窗口最大化"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:116
+#: data/org.gnome.Gtranslator.gschema.xml.in:123
 msgid "Window maximized state"
 msgstr "窗口最大化状态"
 
@@ -188,7 +196,7 @@ msgstr "源码查看器"
 #: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:339 src/gtr-dl-teams.c:427
 #: src/gtr-dl-teams.c:563 src/gtr-dl-teams.c:574 src/gtr-dl-teams.c:585
 #: src/gtr-dl-teams.c:616 src/gtr-dl-teams.c:683 src/gtr-tab.c:347
-#: src/gtr-window.c:158 src/gtr-window.c:331
+#: src/gtr-window.c:158 src/gtr-window.c:336
 msgid "OK"
 msgstr "确定"
 
@@ -378,15 +386,15 @@ msgstr ""
 msgid "The file has been successfully reserved"
 msgstr "文件已经成功占用"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:328
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:336
 msgid "Preferences"
 msgstr "首选项"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:334
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:342
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:342
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:350
 msgid "About Translation Editor"
 msgstr "关于翻译编辑器"
 
@@ -526,7 +534,7 @@ msgstr "传输编码"
 msgid "Plural form"
 msgstr "复数形式"
 
-#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:311
+#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:319
 msgid "Edit Header"
 msgstr "编辑文件头"
 
@@ -631,11 +639,11 @@ msgstr "复数形式"
 msgid "Choose plural forms"
 msgstr "选择复数形式"
 
-#: src/gtr-message-table.ui:37
+#: src/gtr-message-table.ui:35
 msgid "Original Message"
 msgstr "原始消息"
 
-#: src/gtr-message-table.ui:45
+#: src/gtr-message-table.ui:43
 msgid "Translated Message"
 msgstr "翻译消息"
 
@@ -852,11 +860,11 @@ msgstr ""
 msgid "_Damned Lies auth token"
 msgstr "胡言乱语认证令牌(_D)"
 
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:307
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:315
 msgid "Build Translation Memory"
 msgstr "构建翻译记忆"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:338
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:346
 msgid "Help"
 msgstr "帮助"
 
@@ -995,51 +1003,55 @@ msgid "Upload File"
 msgstr "上传文件"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:122 src/gtr-tab.ui:296
+#: src/gtr-tab.ui:126 src/gtr-tab.ui:300
 msgid "_Original Message"
 msgstr "原始消息(_O)"
 
-#: src/gtr-tab.ui:186
+#: src/gtr-tab.ui:190
 msgid "Translate_d Text"
 msgstr "翻译文本(_D)"
 
-#: src/gtr-tab.ui:264
+#: src/gtr-tab.ui:268
 msgid "Open a New File"
 msgstr "打开新文件"
 
-#: src/gtr-tab.ui:268
+#: src/gtr-tab.ui:272
 msgid "Open from Damned Lies"
 msgstr "从胡言乱语打开"
 
-#: src/gtr-tab.ui:274
+#: src/gtr-tab.ui:278
 msgid "Save"
 msgstr "保存"
 
-#: src/gtr-tab.ui:278
+#: src/gtr-tab.ui:282
 msgid "Save As…"
 msgstr "另存为…"
 
-#: src/gtr-tab.ui:284
+#: src/gtr-tab.ui:288
 msgid "So_rt Messages by…"
 msgstr "排序消息(_R)…"
 
-#: src/gtr-tab.ui:286
+#: src/gtr-tab.ui:290
 msgid "_Order of Appearance"
 msgstr "出现顺序(_O)"
 
-#: src/gtr-tab.ui:291
+#: src/gtr-tab.ui:295
 msgid "_Message Status"
 msgstr "消息状态(_M)"
 
-#: src/gtr-tab.ui:301
+#: src/gtr-tab.ui:305
 msgid "_Translated Message"
 msgstr "已翻译消息(_T)"
 
-#: src/gtr-tab.ui:315
+#: src/gtr-tab.ui:311
+msgid "Show ID Column"
+msgstr "显示标识符栏"
+
+#: src/gtr-tab.ui:323
 msgid "Advanced Tools"
 msgstr "高级工具"
 
-#: src/gtr-tab.ui:317
+#: src/gtr-tab.ui:325
 msgid "Fix plural messages"
 msgstr "修复复数消息"
 
@@ -1075,11 +1087,11 @@ msgstr "*%s — 翻译编辑器"
 msgid "%s — Translation Editor"
 msgstr "%s — 翻译编辑器"
 
-#: src/gtr-window.c:330
+#: src/gtr-window.c:335
 msgid "Could not Save"
 msgstr "无法保存"
 
-#: src/gtr-window.c:342
+#: src/gtr-window.c:347
 msgid "File saved"
 msgstr "文件已保存"
 
