@@ -4,7 +4,7 @@
 
 # Gtranslator (-the GNOME translation making program-)
 <img src="data/icons/hicolor/scalable/apps/org.gnome.Gtranslator.svg" width="128" height="128" />
-<p>Translate and localize applications and libraries</p>
+<p>Translate apps in your language</p>
 
 Gtranslator is an enhanced gettext po file editor for the GNOME desktop
 environment. It handles all forms of gettext po files and includes very useful
