@@ -613,8 +613,15 @@ gtr_application_open (GApplication *application,
 static void
 gtr_application_activate (GApplication *application)
 {
+  GtkWindow *window;
   G_APPLICATION_CLASS (gtr_application_parent_class)->activate (application);
-  gtr_application_setup_window (application, NULL, 0);
+
+  window = gtk_application_get_active_window (GTK_APPLICATION (application));
+
+  if (window != NULL)
+    gtk_window_present (window);
+  else
+    gtr_application_setup_window (application, NULL, 0);
 }
 
 static void
