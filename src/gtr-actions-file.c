@@ -521,6 +521,9 @@ load_file_list (GtrWindow * window, const GSList * locations)
     {
       g_return_if_fail (locations_to_load->data != NULL);
 
+      if (gtr_window_get_active_tab (window) != NULL)
+        window = gtr_application_create_window (GTR_APP);
+
       if (!gtr_open (locations_to_load->data, window, &error))
         break;
 
