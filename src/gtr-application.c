@@ -597,7 +597,6 @@ gtr_application_setup_window (GApplication *application,
     {
       file_list = g_slist_reverse (file_list);
       gtr_actions_load_locations (window, file_list);
-      g_slist_free (file_list);
     }
 }
 
