@@ -531,11 +531,10 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
   g_autofree gchar *content = NULL;
   gboolean utf8_valid;
   gsize size;
-  g_autoptr (GError) err = NULL;
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  g_file_load_contents (priv->location, NULL, &content, &size, NULL, &err);
-  if (err != NULL)
+  g_file_load_contents (priv->location, NULL, &content, &size, NULL, error);
+  if (*error != NULL)
     return FALSE;
 
   utf8_valid = g_utf8_validate (content, size, NULL);
