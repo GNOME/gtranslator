@@ -12,16 +12,16 @@
 # Atilla ÖNTAŞ <atilla_ontas@mandriva.org>, 2009, 2010.
 # Muhammet Kara <muhammetk@gmail.com>, 2011-2021.
 # Özgür Baskın <queeup@zoho.com>, 2021.
-# Sabri Ünal <libreajans@gmail.com>, 2019, 2020, 2022-2025.
+# Sabri Ünal <yakushabb@gmail.com>, 2019, 2020, 2022-2025.
 # Emin Tufan Çetin <etcetin@gmail.com>, 2018-2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-02-04 02:16+0000\n"
-"PO-Revision-Date: 2025-02-09 19:18+0300\n"
-"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
+"POT-Creation-Date: 2025-04-02 19:43+0000\n"
+"PO-Revision-Date: 2025-04-03 08:00+0300\n"
+"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:517 src/gtr-window.c:204 src/gtr-window.c:433
+#: src/gtr-application.c:517 src/gtr-window.c:204 src/gtr-window.c:438
 msgid "Translation Editor"
 msgstr "Çeviri Düzenleyici"
 
@@ -78,11 +78,6 @@ msgstr "PO Dosyası Düzenleyici"
 #: data/org.gnome.Gtranslator.desktop.in.in:14
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Çeviri;Tercüme;Düzenleyici;Gettext;Yazmak;Yazım;"
-
-#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:324
-msgid "New Window"
-msgstr "Yeni Pencere"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:22
 msgid "Warn if file contains fuzzy translations"
@@ -188,11 +183,19 @@ msgstr ""
 "İleti listesinde kullanılacak sıralama düzeni. Olası değerler: “status”, "
 "“id”, “original-text” ve “translated-text”."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:115
+#: data/org.gnome.Gtranslator.gschema.xml.in:109
+msgid "Show ID column"
+msgstr "Kimlik sütununu göster"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:110
+msgid "If true, displays a column with the id of the message on the editor."
+msgstr "Eğer doğruysa, iletinin kimliğini düzenleyicide bir sütunda gösterir."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:122
 msgid "Window maximized"
 msgstr "Pencere ekranı kapladı"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:116
+#: data/org.gnome.Gtranslator.gschema.xml.in:123
 msgid "Window maximized state"
 msgstr "Pencerenin ekranı kaplama durumu"
 
@@ -207,7 +210,7 @@ msgstr "Kaynak Gösterici"
 #: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:339 src/gtr-dl-teams.c:427
 #: src/gtr-dl-teams.c:563 src/gtr-dl-teams.c:574 src/gtr-dl-teams.c:585
 #: src/gtr-dl-teams.c:616 src/gtr-dl-teams.c:683 src/gtr-tab.c:347
-#: src/gtr-window.c:158 src/gtr-window.c:331
+#: src/gtr-window.c:158 src/gtr-window.c:336
 msgid "OK"
 msgstr "Tamam"
 
@@ -230,11 +233,9 @@ msgstr ""
 #: src/gtr-actions-app.c:103
 msgid "translator-credits"
 msgstr ""
-"Barış Çiçek <baris@teamforce.name.tr>\n"
-"Atilla Öntaş <atilla_ontas@mandriva.org>\n"
-"Muhammet Kara <muhammetk@gmail.com>\n"
 "Emin Tufan Çetin <etcetin@gmail.com>\n"
-"Sabri Ünal <libreajans@gmail.com>"
+"Sabri Ünal <yakushabb@gmail.com>\n"
+"Muhammet Kara <muhammetk@gmail.com>"
 
 #: src/gtr-actions-file.c:204 src/gtr-close-confirmation-dialog.c:338
 msgid "Unsaved Changes"
@@ -400,15 +401,19 @@ msgstr ""
 msgid "The file has been successfully reserved"
 msgstr "Dosya üzerinize alındı"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:328
+#: src/gtr-dl-teams.ui:7 src/gtr-projects.ui:7 src/gtr-tab.ui:332
+msgid "New Window"
+msgstr "Yeni Pencere"
+
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:336
 msgid "Preferences"
 msgstr "Tercihler"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:334
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:342
 msgid "Keyboard Shortcuts"
 msgstr "Klavye Kısayolları"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:342
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:350
 msgid "About Translation Editor"
 msgstr "Çeviri Düzenleyici Hakkında"
 
@@ -548,7 +553,7 @@ msgstr "Aktarma kodlaması"
 msgid "Plural form"
 msgstr "Çoğul biçimler"
 
-#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:311
+#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:319
 msgid "Edit Header"
 msgstr "Başlığı Düzenle"
 
@@ -653,11 +658,11 @@ msgstr "Çoğul biçimler"
 msgid "Choose plural forms"
 msgstr "Çoğul biçimleri seç"
 
-#: src/gtr-message-table.ui:37
+#: src/gtr-message-table.ui:35
 msgid "Original Message"
 msgstr "Özgün İleti"
 
-#: src/gtr-message-table.ui:45
+#: src/gtr-message-table.ui:43
 msgid "Translated Message"
 msgstr "Çevrilmiş İleti"
 
@@ -876,11 +881,11 @@ msgstr ""
 msgid "_Damned Lies auth token"
 msgstr "_Damned Lies kimlik doğrulama jetonu"
 
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:307
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:315
 msgid "Build Translation Memory"
 msgstr "Çeviri Belleği Oluştur"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:338
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:346
 msgid "Help"
 msgstr "Yardım"
 
@@ -1020,51 +1025,55 @@ msgid "Upload File"
 msgstr "Dosyayı Karşıya Yükle"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:122 src/gtr-tab.ui:296
+#: src/gtr-tab.ui:126 src/gtr-tab.ui:300
 msgid "_Original Message"
 msgstr "_Özgün İleti"
 
-#: src/gtr-tab.ui:186
+#: src/gtr-tab.ui:190
 msgid "Translate_d Text"
 msgstr "Ç_evrilmiş Metin"
 
-#: src/gtr-tab.ui:264
+#: src/gtr-tab.ui:268
 msgid "Open a New File"
 msgstr "Yeni Dosya Aç"
 
-#: src/gtr-tab.ui:268
+#: src/gtr-tab.ui:272
 msgid "Open from Damned Lies"
 msgstr "Damned Lies Sisteminden Aç"
 
-#: src/gtr-tab.ui:274
+#: src/gtr-tab.ui:278
 msgid "Save"
 msgstr "Kaydet"
 
-#: src/gtr-tab.ui:278
+#: src/gtr-tab.ui:282
 msgid "Save As…"
 msgstr "Farklı Kaydet…"
 
-#: src/gtr-tab.ui:284
+#: src/gtr-tab.ui:288
 msgid "So_rt Messages by…"
 msgstr "İletileri Şuna Göre _Sırala…"
 
-#: src/gtr-tab.ui:286
+#: src/gtr-tab.ui:290
 msgid "_Order of Appearance"
 msgstr "Görünüm _Sırası"
 
-#: src/gtr-tab.ui:291
+#: src/gtr-tab.ui:295
 msgid "_Message Status"
 msgstr "İleti _Durumu"
 
-#: src/gtr-tab.ui:301
+#: src/gtr-tab.ui:305
 msgid "_Translated Message"
 msgstr "Ç_evrilmiş İleti"
 
-#: src/gtr-tab.ui:315
+#: src/gtr-tab.ui:311
+msgid "Show ID Column"
+msgstr "Kimlik Sütununu Göster"
+
+#: src/gtr-tab.ui:323
 msgid "Advanced Tools"
 msgstr "Gelişmiş Araçlar"
 
-#: src/gtr-tab.ui:317
+#: src/gtr-tab.ui:325
 msgid "Fix plural messages"
 msgstr "Çoğul iletileri düzelt"
 
@@ -1100,11 +1109,11 @@ msgstr "*%s — Çeviri Düzenleyici"
 msgid "%s — Translation Editor"
 msgstr "%s — Çeviri Düzenleyici"
 
-#: src/gtr-window.c:330
+#: src/gtr-window.c:335
 msgid "Could not Save"
 msgstr "Kaydedilemedi"
 
-#: src/gtr-window.c:342
+#: src/gtr-window.c:347
 msgid "File saved"
 msgstr "Dosya kaydedildi"
 
