@@ -12,3 +12,10 @@ DBusActivatable=true
 MimeType=text/x-gettext-translation;text/x-gettext-translation-template;
 Categories=GNOME;GTK;Development;Utility;Translation;
 Keywords=Gtranslator;Translation;Editor;Gettext;Write;
+Actions=new-window;
+
+[Desktop Action new-window]
+Exec=gtranslator --new-window
+Name=New Window
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+Icon=window-new

@@ -118,6 +118,18 @@ on_window_delete_event_cb (GtrWindow * window,
 
 static int
 handle_local_options_cb (GApplication *application, GVariantDict *options, gpointer user_data) {
+  if (g_variant_dict_contains (options, "new-window"))
+    {
+      g_application_register (application, NULL, NULL);
+
+      if (g_application_get_is_remote (application))
+        {
+          g_action_group_activate_action (G_ACTION_GROUP (application),
+                                          "new-window", NULL);
+          return 0;
+        }
+    }
+
   if (g_variant_dict_contains (options, "version")) {
     g_print ("%s - %s\n", PACKAGE, PACKAGE_VERSION);
     return 0;
@@ -135,10 +147,11 @@ gtr_application_init (GtrApplication *application)
   priv->last_dir = NULL;
   priv->first_run = FALSE;
 
-  GOptionEntry options[] = {
-      {"version", 'v', 0, G_OPTION_ARG_NONE, NULL, "Print version information and exit", NULL},
-      {NULL}
-  };
+  GOptionEntry options[] = { { "new-window", 'w', 0, G_OPTION_ARG_NONE, NULL,
+                               "Open a new window", NULL },
+                             { "version", 'v', 0, G_OPTION_ARG_NONE, NULL,
+                               "Print version information and exit", NULL },
+                             { NULL } };
 
   g_application_add_main_option_entries (G_APPLICATION (application), options);
 
