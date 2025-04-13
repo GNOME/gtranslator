@@ -23,6 +23,7 @@ gtr_datadir = join_paths(gtr_prefix, get_option('datadir'))
 gtr_includedir = join_paths(gtr_prefix, get_option('includedir'))
 gtr_libdir = join_paths(gtr_prefix, get_option('libdir'))
 gtr_localedir = join_paths(gtr_prefix, get_option('localedir'))
+gtr_bindir = join_paths(gtr_prefix, get_option('bindir'))
 
 gtr_pkgdatadir = join_paths(gtr_datadir, meson.project_name())
 

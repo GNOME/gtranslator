@@ -62,6 +62,20 @@ configure_file(
   install_dir: gtr_schemasdir,
 )
 
+# D-Bus service file
+service_conf = configuration_data()
+service_conf.set('appid', gtr_app_id)
+service_conf.set('bindir', gtr_bindir)
+
+service = gtr_namespace + '.service'
+
+configure_file(
+  input: service + '.in',
+  output: service,
+  configuration: service_conf,
+  install_dir: join_paths(gtr_datadir, 'dbus-1', 'services'),
+)
+
 install_data(
   'gtr-plural-forms.ini',
   'gtr-languages.ini',
