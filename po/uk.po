@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-03-27 11:23+0000\n"
-"PO-Revision-Date: 2025-03-27 13:52+0200\n"
+"POT-Creation-Date: 2025-04-21 08:39+0000\n"
+"PO-Revision-Date: 2025-04-21 17:17+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
-"=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 23.04.3\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
@@ -28,8 +28,9 @@ msgstr "Редактор перекладів"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:8
 #: data/org.gnome.Gtranslator.desktop.in.in:5
-msgid "Translate and localize applications and libraries"
-msgstr "Переклад та локалізація програм та бібліотек"
+#| msgid "Translator and Language"
+msgid "Translate apps in your language"
+msgstr "Перекладайте програми вашою мовою"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:10
 msgid ""
@@ -63,17 +64,12 @@ msgstr ""
 msgid "PO File Editor"
 msgstr "Редактор файлів PO"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:14
+#: data/org.gnome.Gtranslator.desktop.in.in:15
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr ""
 "Gtranslator;Translation;Editor;Gettext;Write;жтранслятор;жтранслатор;"
 "гтранслятор;жтранслатор;переклад;редактор;перекласти;геттекст;запис;"
 "інтерфейс;мова;"
-
-#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:332
-msgid "New Window"
-msgstr "Нове вікно"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:22
 msgid "Warn if file contains fuzzy translations"
@@ -102,7 +98,8 @@ msgstr "Автозбереження файлів"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:38
 msgid "If true, automatically save files at specified intervals."
-msgstr "Якщо обрано, файли автоматично зберігаються через зазначений інтервал."
+msgstr ""
+"Якщо обрано, файли автоматично зберігаються через зазначений інтервал."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:44
 msgid "Auto save interval"
@@ -186,8 +183,8 @@ msgstr "Показувати стовпчик ідентифікатора"
 #: data/org.gnome.Gtranslator.gschema.xml.in:110
 msgid "If true, displays a column with the id of the message on the editor."
 msgstr ""
-"Якщо вибрано, у редакторі буде показано стовпчик із ідентифікатором"
-" повідомлення."
+"Якщо вибрано, у редакторі буде показано стовпчик із ідентифікатором "
+"повідомлення."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:122
 msgid "Window maximized"
@@ -203,8 +200,8 @@ msgstr "Переглядач джерельного коду"
 
 #: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:279
 #: src/gtr-actions-file.c:298 src/gtr-actions-file.c:336
-#: src/gtr-actions-file.c:363 src/gtr-actions-file.c:537
-#: src/gtr-actions-file.c:580 src/gtr-actions-file.c:748 src/gtr-dl-teams.c:164
+#: src/gtr-actions-file.c:363 src/gtr-actions-file.c:540
+#: src/gtr-actions-file.c:583 src/gtr-actions-file.c:751 src/gtr-dl-teams.c:164
 #: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:339 src/gtr-dl-teams.c:427
 #: src/gtr-dl-teams.c:563 src/gtr-dl-teams.c:574 src/gtr-dl-teams.c:585
 #: src/gtr-dl-teams.c:616 src/gtr-dl-teams.c:683 src/gtr-tab.c:347
@@ -323,7 +320,8 @@ msgstr[2] "Зміни у %d документах буде назавжди вт�
 
 #: src/gtr-close-confirmation-dialog.c:316
 #, c-format
-msgid "There is %d document with unsaved changes. Save changes before closing?"
+msgid ""
+"There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] "%d документ з незбереженими змінами. Зберегти перед закриттям?"
@@ -396,6 +394,10 @@ msgstr ""
 #: src/gtr-dl-teams.c:699
 msgid "The file has been successfully reserved"
 msgstr "Файл успішно зарезервовано"
+
+#: src/gtr-dl-teams.ui:7 src/gtr-projects.ui:7 src/gtr-tab.ui:332
+msgid "New Window"
+msgstr "Нове вікно"
 
 #: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:336
 msgid "Preferences"
@@ -669,17 +671,17 @@ msgstr "Файл порожній"
 msgid "Failed opening file “%s”: %s"
 msgstr "Не вдалося відкрити файл «%s»: %s"
 
-#: src/gtr-po.c:569
+#: src/gtr-po.c:568
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Не вдалося виконати перетворення з кодування «%s» до UTF-8"
 
-#: src/gtr-po.c:585 src/gtr-po.c:604
+#: src/gtr-po.c:584 src/gtr-po.c:603
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Не вдалося зберегти файл тимчасових даних для перетворення кодування"
 
-#: src/gtr-po.c:635
+#: src/gtr-po.c:634
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -690,17 +692,17 @@ msgstr ""
 "Скористайтеся засобами командного рядка msgconv або iconv, перш ніж "
 "відкривати цей файл у редакторі перекладів GNOME."
 
-#: src/gtr-po.c:703
+#: src/gtr-po.c:702
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext повернув порожній список доменів."
 
-#: src/gtr-po.c:750
+#: src/gtr-po.c:749
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Жодного повідомлення не отримано від синтаксичного аналізатора."
 
-#: src/gtr-po.c:804
+#: src/gtr-po.c:803
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -711,17 +713,17 @@ msgstr ""
 "Pot-файли створюються в процесі компіляції.\n"
 "Файл повинен мати назву, подібну до «%s.po»."
 
-#: src/gtr-po.c:832
+#: src/gtr-po.c:831
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Файл %s лише для читання і він не може бути перезаписаний"
 
-#: src/gtr-po.c:851
+#: src/gtr-po.c:850
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Виявлено помилку у файлі PO: %s"
 
-#: src/gtr-po.c:863
+#: src/gtr-po.c:862
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Помилка запису PO-файла: %s"
@@ -1351,6 +1353,9 @@ msgid ""
 msgstr ""
 "Максимальна різниця в довжині між рядком та прикладом у пам'яті перекладів."
 
+#~ msgid "Translate and localize applications and libraries"
+#~ msgstr "Переклад та локалізація програм та бібліотек"
+
 #~ msgid "Open a new .po file or drag & drop here"
 #~ msgstr "Відкрийте файл .po або перетягніть і скиньте його сюди"
 
@@ -1430,9 +1435,6 @@ msgstr ""
 #~ msgctxt "shortcut window"
 #~ msgid "Copy below"
 #~ msgstr "Копіювати нижче"
-
-#~ msgid "Translator and Language"
-#~ msgstr "Перекладач та мова"
 
 #~ msgid "Team"
 #~ msgstr "Команда"
