@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-03-27 11:23+0000\n"
-"PO-Revision-Date: 2025-03-28 18:52+0800\n"
+"POT-Creation-Date: 2025-04-21 08:39+0000\n"
+"PO-Revision-Date: 2025-04-21 18:41+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -33,8 +33,8 @@ msgstr "翻译编辑器"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:8
 #: data/org.gnome.Gtranslator.desktop.in.in:5
-msgid "Translate and localize applications and libraries"
-msgstr "对应用程序和库进行翻译和本地化"
+msgid "Translate apps in your language"
+msgstr "将应用翻译为您的语言"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:10
 msgid ""
@@ -63,14 +63,9 @@ msgstr ""
 msgid "PO File Editor"
 msgstr "PO 文件编辑器"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:14
+#: data/org.gnome.Gtranslator.desktop.in.in:15
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Translation;Editor;Gettext;Write;翻译;编辑器;写;"
-
-#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:332
-msgid "New Window"
-msgstr "新建窗口"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:22
 msgid "Warn if file contains fuzzy translations"
@@ -191,8 +186,8 @@ msgstr "源码查看器"
 
 #: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:279
 #: src/gtr-actions-file.c:298 src/gtr-actions-file.c:336
-#: src/gtr-actions-file.c:363 src/gtr-actions-file.c:537
-#: src/gtr-actions-file.c:580 src/gtr-actions-file.c:748 src/gtr-dl-teams.c:164
+#: src/gtr-actions-file.c:363 src/gtr-actions-file.c:540
+#: src/gtr-actions-file.c:583 src/gtr-actions-file.c:751 src/gtr-dl-teams.c:164
 #: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:339 src/gtr-dl-teams.c:427
 #: src/gtr-dl-teams.c:563 src/gtr-dl-teams.c:574 src/gtr-dl-teams.c:585
 #: src/gtr-dl-teams.c:616 src/gtr-dl-teams.c:683 src/gtr-tab.c:347
@@ -385,6 +380,10 @@ msgstr ""
 #: src/gtr-dl-teams.c:699
 msgid "The file has been successfully reserved"
 msgstr "文件已经成功占用"
+
+#: src/gtr-dl-teams.ui:7 src/gtr-projects.ui:7 src/gtr-tab.ui:332
+msgid "New Window"
+msgstr "新建窗口"
 
 #: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:336
 msgid "Preferences"
@@ -657,17 +656,17 @@ msgstr "文件为空"
 msgid "Failed opening file “%s”: %s"
 msgstr "打开文件“%s”失败：%s"
 
-#: src/gtr-po.c:569
+#: src/gtr-po.c:568
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "无法从字符集“%s”转换到 UTF-8"
 
-#: src/gtr-po.c:585 src/gtr-po.c:604
+#: src/gtr-po.c:584 src/gtr-po.c:603
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "无法存储编码转换的临时文件"
 
-#: src/gtr-po.c:635
+#: src/gtr-po.c:634
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -677,17 +676,17 @@ msgstr ""
 "所有转换文件为 UTF-8 的尝试均失败，在用 GNOME 翻译编辑器打开此文件前使用 "
 "msgconv 或 iconv 命令行工具转换"
 
-#: src/gtr-po.c:703
+#: src/gtr-po.c:702
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext 返回了一个空的消息域列表。"
 
-#: src/gtr-po.c:750
+#: src/gtr-po.c:749
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "没有从解析器获得任何消息。"
 
-#: src/gtr-po.c:804
+#: src/gtr-po.c:803
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -698,17 +697,17 @@ msgstr ""
 "POT 文件是在编译过程中生成的。\n"
 "您的文件应该命名为“%s.po”。"
 
-#: src/gtr-po.c:832
+#: src/gtr-po.c:831
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "%s 是只读文件，无法被覆盖"
 
-#: src/gtr-po.c:851
+#: src/gtr-po.c:850
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "该 PO 文件存在错误：%s"
 
-#: src/gtr-po.c:863
+#: src/gtr-po.c:862
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "写入 PO 文件时发生错误：%s"
@@ -1329,6 +1328,9 @@ msgid ""
 "translation memory."
 msgstr "显示的消息与翻译记忆匹配的消息的最大长度差。"
 
+#~ msgid "Translate and localize applications and libraries"
+#~ msgstr "对应用程序和库进行翻译和本地化"
+
 #~ msgid "Open a new .po file or drag & drop here"
 #~ msgstr "打开新的 .po 文件或拖拽到这里"
 
@@ -1409,9 +1411,6 @@ msgstr "显示的消息与翻译记忆匹配的消息的最大长度差。"
 #~ msgctxt "shortcut window"
 #~ msgid "Redo"
 #~ msgstr "重做"
-
-#~ msgid "Translator and Language"
-#~ msgstr "翻译者和语言"
 
 #~ msgid "Team"
 #~ msgstr "团队"
