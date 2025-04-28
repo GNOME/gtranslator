@@ -19,16 +19,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-04-02 19:43+0000\n"
-"PO-Revision-Date: 2025-04-03 08:00+0300\n"
-"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
+"POT-Creation-Date: 2025-04-21 08:39+0000\n"
+"PO-Revision-Date: 2025-04-24 19:39+0300\n"
+"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-DL-Team: tr\n"
 "X-DL-Module: gtranslator\n"
 "X-DL-Branch: master\n"
@@ -43,8 +43,8 @@ msgstr "Çeviri Düzenleyici"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:8
 #: data/org.gnome.Gtranslator.desktop.in.in:5
-msgid "Translate and localize applications and libraries"
-msgstr "Uygulamaları ve kütüphaneleri çevir ve yerelleştir"
+msgid "Translate apps in your language"
+msgstr "Uygulamaları kendi dilinize çevirin"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:10
 msgid ""
@@ -75,7 +75,7 @@ msgstr ""
 msgid "PO File Editor"
 msgstr "PO Dosyası Düzenleyici"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:14
+#: data/org.gnome.Gtranslator.desktop.in.in:15
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Çeviri;Tercüme;Düzenleyici;Gettext;Yazmak;Yazım;"
 
@@ -205,8 +205,8 @@ msgstr "Kaynak Gösterici"
 
 #: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:279
 #: src/gtr-actions-file.c:298 src/gtr-actions-file.c:336
-#: src/gtr-actions-file.c:363 src/gtr-actions-file.c:537
-#: src/gtr-actions-file.c:580 src/gtr-actions-file.c:748 src/gtr-dl-teams.c:164
+#: src/gtr-actions-file.c:363 src/gtr-actions-file.c:540
+#: src/gtr-actions-file.c:583 src/gtr-actions-file.c:751 src/gtr-dl-teams.c:164
 #: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:339 src/gtr-dl-teams.c:427
 #: src/gtr-dl-teams.c:563 src/gtr-dl-teams.c:574 src/gtr-dl-teams.c:585
 #: src/gtr-dl-teams.c:616 src/gtr-dl-teams.c:683 src/gtr-tab.c:347
@@ -676,17 +676,17 @@ msgstr "Dosya boş"
 msgid "Failed opening file “%s”: %s"
 msgstr "“%s” dosyası açılamıyor: %s"
 
-#: src/gtr-po.c:569
+#: src/gtr-po.c:568
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "“%s” karakter kümesinden UTF-8’e dönüşüm yapılamadı"
 
-#: src/gtr-po.c:585 src/gtr-po.c:604
+#: src/gtr-po.c:584 src/gtr-po.c:603
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Kodlama dönüşümü için geçici dosya kaydedilemedi"
 
-#: src/gtr-po.c:635
+#: src/gtr-po.c:634
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -697,17 +697,17 @@ msgstr ""
 "Çeviri Düzenleyici ile açmadan önce msgconv ya da iconv komut satırı "
 "araçlarını kullanın"
 
-#: src/gtr-po.c:703
+#: src/gtr-po.c:702
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext boş ileti alan listesi döndürdü."
 
-#: src/gtr-po.c:750
+#: src/gtr-po.c:749
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Çözümleyiciden hiçbir ileti alınamadı."
 
-#: src/gtr-po.c:804
+#: src/gtr-po.c:803
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -718,17 +718,17 @@ msgstr ""
 "Pot dosyaları derleme işlemi sırasında oluşturulur.\n"
 "Dosyanız, “%s.po” gibi adlandırılmalıdır."
 
-#: src/gtr-po.c:832
+#: src/gtr-po.c:831
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "%s dosyası salt okunur, ve üzerine yazılamaz"
 
-#: src/gtr-po.c:851
+#: src/gtr-po.c:850
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "PO dosyasında hata var: %s"
 
-#: src/gtr-po.c:863
+#: src/gtr-po.c:862
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "PO dosyası yazımında hata oluştu: %s"
@@ -1357,3 +1357,6 @@ msgid ""
 msgstr ""
 "Çeviri belleğince eşleşme olarak gösterilen iletiler arasındaki uzunluk "
 "türünden azami fark."
+
+#~ msgid "Translate and localize applications and libraries"
+#~ msgstr "Uygulamaları ve kütüphaneleri çevir ve yerelleştir"
