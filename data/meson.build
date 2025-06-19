@@ -71,7 +71,7 @@ service = gtr_namespace + '.service'
 
 configure_file(
   input: service + '.in',
-  output: service,
+  output: '@0@.service'.format(gtr_app_id),
   configuration: service_conf,
   install_dir: join_paths(gtr_datadir, 'dbus-1', 'services'),
 )
