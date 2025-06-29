@@ -136,7 +136,7 @@ src_dir = join_paths(meson.project_source_root(), 'src')
 
 glib_dep = dependency('glib-2.0', version: '>= 2.71.3')
 gtk_dep = dependency('gtk4', version: '>= 4.12.0')
-libadwaita_dep = dependency('libadwaita-1', version: '>= 1.6.alpha')
+libadwaita_dep = dependency('libadwaita-1', version: '>= 1.8.alpha')
 libspell_dep = dependency('libspelling-1', required: false)
 
 # if not libspell, we disable it
