@@ -212,11 +212,7 @@ setup_widget (GtkSignalListItemFactory *factory,
   gtk_list_item_set_child (list_item, box);
 
   // Shortcut
-  // child = gtk_shortcut_label_new (NULL); // This widget is too big
-  child = gtk_label_new (NULL);
-  gtk_widget_set_vexpand (child, FALSE);
-  gtk_widget_set_valign (child, GTK_ALIGN_CENTER);
-  gtk_label_set_xalign (GTK_LABEL (child), 0.0);
+  child = adw_shortcut_label_new ("");
   gtk_box_append (GTK_BOX (box), child);
 
   // Level
@@ -247,8 +243,8 @@ bind_widget (GtkSignalListItemFactory *factory,
 
   // shortcut
   child = gtk_widget_get_first_child (box);
-  sc = g_strdup_printf ("Ctrl+%s", gdk_keyval_name (tm->shortcut));
-  gtk_label_set_text (GTK_LABEL (child), sc);
+  sc = g_strdup_printf ("<Ctrl>%s", gdk_keyval_name (tm->shortcut));
+  adw_shortcut_label_set_accelerator (ADW_SHORTCUT_LABEL (child), sc);
 
   // level
   child = gtk_widget_get_next_sibling (child);
