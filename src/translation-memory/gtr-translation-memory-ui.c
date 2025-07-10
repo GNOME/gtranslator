@@ -207,8 +207,9 @@ setup_widget (GtkSignalListItemFactory *factory,
 {
   GtkWidget *box, *child;
 
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
-  gtk_widget_add_css_class (box, "message-table-row");
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  gtk_widget_set_margin_top (box, 6);
+  gtk_widget_set_margin_bottom (box, 6);
   gtk_list_item_set_child (list_item, box);
 
   // Shortcut
