@@ -108,14 +108,6 @@ ensure_user_config_dir (void)
   return ret;
 }
 
-static gboolean
-on_window_delete_event_cb (GtrWindow * window,
-                           GdkEvent * event, GtrApplication * app)
-{
-  gtr_file_quit (window);
-  return TRUE;
-}
-
 static int
 handle_local_options_cb (GApplication *application, GVariantDict *options, gpointer user_data) {
   if (g_variant_dict_contains (options, "new-window"))
@@ -702,9 +694,6 @@ gtr_application_create_window (GtrApplication *app)
                                          GTR_SETTINGS_WINDOW_MAXIMIZED);
   if (is_maximized)
     gtk_window_maximize (GTK_WINDOW (window));
-
-  g_signal_connect (window, "close-request",
-                    G_CALLBACK (on_window_delete_event_cb), app);
 
   gtk_window_present (GTK_WINDOW (window));
 

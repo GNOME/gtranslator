@@ -315,6 +315,14 @@ gtr_window_finalize (GObject * object)
   G_OBJECT_CLASS (gtr_window_parent_class)->finalize (object);
 }
 
+static gboolean
+gtr_window_close_request (GtkWindow *window)
+{
+  gtr_file_quit (GTR_WINDOW (window));
+
+  return GTK_WINDOW_CLASS (gtr_window_parent_class)->close_request (window);
+}
+
 void
 gtr_window_save_current_tab (GtrWindow *self)
 {
@@ -362,9 +370,12 @@ static void
 gtr_window_class_init (GtrWindowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWindowClass *window_class = GTK_WINDOW_CLASS (klass);
 
   object_class->finalize = gtr_window_finalize;
   object_class->dispose = gtr_window_dispose;
+
+  window_class->close_request = gtr_window_close_request;
 
   gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass),
                                                "/org/gnome/translator/gtr-window.ui");
