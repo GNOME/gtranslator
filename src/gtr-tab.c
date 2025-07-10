@@ -241,17 +241,20 @@ gtr_page_notify_child_revealed (GtrTab *tab,
 
 //----------------------------------------------------------------//
 
-static gboolean
-show_hide_revealer (GtkWidget *widget, GdkEvent *ev, GtrTab *tab)
+static void
+show_hide_revealer (GtkGesture    *gesture,
+                    int            n_click,
+                    double         x,
+                    double         y,
+                    GtrTab        *tab)
 {
   GtrTabPrivate *priv;
   GtkRevealer *rev;
 
+  gtk_gesture_set_state (GTK_GESTURE (gesture), GTK_EVENT_SEQUENCE_CLAIMED);
   priv = gtr_tab_get_instance_private (tab);
   rev = GTK_REVEALER (priv->progress_revealer);
   gtk_revealer_set_reveal_child (rev, !gtk_revealer_get_reveal_child (rev));
-
-  return TRUE;
 }
 
 static gboolean
