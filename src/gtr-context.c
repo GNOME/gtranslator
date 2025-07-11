@@ -170,7 +170,7 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
   dialog = adw_dialog_new ();
   toolbar_view = adw_toolbar_view_new ();
   gtk_widget_add_css_class (GTK_WIDGET (dialog), "view");
-  adw_dialog_set_title (dialog, _("Notes"));
+  adw_dialog_set_title (dialog, _("Edit Notes"));
   adw_dialog_set_child (dialog, toolbar_view);
   adw_toolbar_view_add_top_bar (ADW_TOOLBAR_VIEW (toolbar_view), headerbar);
 
