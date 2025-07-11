@@ -147,13 +147,12 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
   GtkWidget *save;
   GtkWidget *cancel;
 
-  GtkTextBuffer *text_buffer = gtk_text_buffer_new (NULL);;
+  GtkTextBuffer *text_buffer = gtk_text_buffer_new (NULL);
   DialogData *dd;
 
   priv = gtr_context_panel_get_instance_private (panel);
 
-  headerbar = gtk_header_bar_new ();
-  gtk_header_bar_set_show_title_buttons (GTK_HEADER_BAR (headerbar), FALSE);
+  headerbar = adw_header_bar_new ();
   cancel = gtk_button_new_with_label (_("_Cancel"));
   save = gtk_button_new_with_label (_("_Save"));
   gtk_button_set_can_shrink (GTK_BUTTON (cancel), TRUE);
@@ -161,8 +160,12 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
   gtk_button_set_use_underline (GTK_BUTTON (cancel), TRUE);
   gtk_button_set_use_underline (GTK_BUTTON (save), TRUE);
   gtk_widget_add_css_class (save, "suggested-action");
-  gtk_header_bar_pack_start (GTK_HEADER_BAR (headerbar), cancel);
-  gtk_header_bar_pack_end (GTK_HEADER_BAR (headerbar), save);
+  adw_header_bar_pack_start (ADW_HEADER_BAR (headerbar), cancel);
+  adw_header_bar_pack_end (ADW_HEADER_BAR (headerbar), save);
+  adw_header_bar_set_show_start_title_buttons (ADW_HEADER_BAR (headerbar),
+                                               FALSE);
+  adw_header_bar_set_show_end_title_buttons (ADW_HEADER_BAR (headerbar),
+                                             FALSE);
 
   dialog = adw_dialog_new ();
   toolbar_view = adw_toolbar_view_new ();
