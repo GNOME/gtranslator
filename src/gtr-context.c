@@ -176,8 +176,10 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
 
   text_view = gtk_text_view_new_with_buffer (text_buffer);
 
-  gtk_text_view_set_left_margin (GTK_TEXT_VIEW (text_view),10);
-  gtk_text_view_set_right_margin (GTK_TEXT_VIEW (text_view),10);
+  gtk_text_view_set_left_margin (GTK_TEXT_VIEW (text_view),12);
+  gtk_text_view_set_right_margin (GTK_TEXT_VIEW (text_view),12);
+  gtk_text_view_set_top_margin (GTK_TEXT_VIEW (text_view),12);
+  gtk_text_view_set_bottom_margin (GTK_TEXT_VIEW (text_view),12);
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_CHAR);
   gtk_text_view_set_pixels_inside_wrap (GTK_TEXT_VIEW (text_view),0);
 
@@ -187,10 +189,6 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
                                   GTK_POLICY_AUTOMATIC);
 
   gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (scrolled_window), text_view);
-  gtk_widget_set_margin_start (scrolled_window, 6);
-  gtk_widget_set_margin_end (scrolled_window, 6);
-  gtk_widget_set_margin_top (scrolled_window, 6);
-  gtk_widget_set_margin_bottom (scrolled_window, 6);
 
   gtk_widget_set_vexpand (scrolled_window, TRUE);
   adw_toolbar_view_set_content (ADW_TOOLBAR_VIEW (toolbar_view), scrolled_window);
@@ -198,8 +196,9 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
   text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
   gtk_text_buffer_set_text (text_buffer, gtr_msg_get_comment (priv->current_msg), -1);
 
-  adw_dialog_set_content_height (dialog, 300);
-  adw_dialog_set_content_width (dialog, 400);
+  adw_dialog_set_focus (dialog, text_view);
+  adw_dialog_set_content_height (dialog, 350);
+  adw_dialog_set_content_width (dialog, 500);
 
   dd = g_new0 (DialogData, 1);
   dd->panel = panel;
