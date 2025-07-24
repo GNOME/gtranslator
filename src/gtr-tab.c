@@ -1534,7 +1534,8 @@ gtr_tab_copy_original (GtrTab * tab)
   clipboard = gtk_widget_get_clipboard (GTK_WIDGET (tab));
   gdk_clipboard_set_text (clipboard, text);
 
-  gtr_window_add_toast_msg (GTR_WINDOW (priv->window), _("Copied to clipboard"));
+  gtr_window_add_toast_msg (GTR_WINDOW (priv->window),
+                            _("Copied original to clipboard"));
 }
 
 /**
