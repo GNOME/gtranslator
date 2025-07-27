@@ -8,27 +8,26 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-04-21 08:39+0000\n"
-"PO-Revision-Date: 2025-04-21 17:17+0300\n"
+"POT-Creation-Date: 2025-07-27 13:16+0000\n"
+"PO-Revision-Date: 2025-07-27 21:18+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
+"=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 23.04.3\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:517 src/gtr-window.c:204 src/gtr-window.c:438
+#: data/org.gnome.Gtranslator.desktop.in.in:2 src/gtr-actions-app.c:89
+#: src/gtr-application.c:530 src/gtr-window.c:204 src/gtr-window.c:438
 msgid "Translation Editor"
 msgstr "Редактор перекладів"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:8
-#: data/org.gnome.Gtranslator.desktop.in.in:5
-#| msgid "Translator and Language"
+#: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "Translate apps in your language"
 msgstr "Перекладайте програми вашою мовою"
 
@@ -60,16 +59,20 @@ msgstr ""
 "додаток вставлення теґів, додаток інтеграції із subversion та додаток "
 "перегляду початкового коду програм."
 
-#: data/org.gnome.Gtranslator.desktop.in.in:4
+#: data/org.gnome.Gtranslator.desktop.in.in:3
 msgid "PO File Editor"
 msgstr "Редактор файлів PO"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:15
+#: data/org.gnome.Gtranslator.desktop.in.in:14
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr ""
-"Gtranslator;Translation;Editor;Gettext;Write;жтранслятор;жтранслатор;"
-"гтранслятор;жтранслатор;переклад;редактор;перекласти;геттекст;запис;"
-"інтерфейс;мова;"
+"Gtranslator;Translation;Editor;Gettext;Write;жтранслятор;жтранслатор;гтранслят"
+"ор;жтранслатор;переклад;редактор;перекласти;геттекст;запис;інтерфейс;мова;"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:332
+msgid "New Window"
+msgstr "Нове вікно"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:22
 msgid "Warn if file contains fuzzy translations"
@@ -98,8 +101,7 @@ msgstr "Автозбереження файлів"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:38
 msgid "If true, automatically save files at specified intervals."
-msgstr ""
-"Якщо обрано, файли автоматично зберігаються через зазначений інтервал."
+msgstr "Якщо обрано, файли автоматично зберігаються через зазначений інтервал."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:44
 msgid "Auto save interval"
@@ -287,11 +289,11 @@ msgstr "Файл вивантажено!"
 msgid "Save file as…"
 msgstr "Зберегти файл як…"
 
-#: src/gtr-application.c:306
+#: src/gtr-application.c:319
 msgid "Fixed plurals"
 msgstr "Виправлено форми множини"
 
-#: src/gtr-close-confirmation-dialog.c:122 src/gtr-context.c:157
+#: src/gtr-close-confirmation-dialog.c:122 src/gtr-context.c:156
 #: src/gtr-preferences-dialog.c:448 src/gtr-profile-dialog.ui:15
 #: src/gtr-upload-dialog.ui:18
 msgid "_Cancel"
@@ -301,7 +303,7 @@ msgstr "_Скасувати"
 msgid "Close _Without Saving"
 msgstr "Закрити б_ез збереження"
 
-#: src/gtr-close-confirmation-dialog.c:124 src/gtr-context.c:158
+#: src/gtr-close-confirmation-dialog.c:124 src/gtr-context.c:157
 msgid "_Save"
 msgstr "З_берегти"
 
@@ -320,15 +322,19 @@ msgstr[2] "Зміни у %d документах буде назавжди вт�
 
 #: src/gtr-close-confirmation-dialog.c:316
 #, c-format
-msgid ""
-"There is %d document with unsaved changes. Save changes before closing?"
+msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] "%d документ з незбереженими змінами. Зберегти перед закриттям?"
 msgstr[1] "%d документа з незбереженими змінами. Зберегти перед закриттям?"
 msgstr[2] "%d документів з незбереженими змінами. Зберегти перед закриттям?"
 
-#: src/gtr-context.c:170 src/gtr-context.ui:28
+#: src/gtr-context.c:173
+#| msgid "Notes"
+msgid "Edit Notes"
+msgstr "Редагувати нотатки"
+
+#: src/gtr-context.ui:28
 msgid "Notes"
 msgstr "Нотатки"
 
@@ -394,10 +400,6 @@ msgstr ""
 #: src/gtr-dl-teams.c:699
 msgid "The file has been successfully reserved"
 msgstr "Файл успішно зарезервовано"
-
-#: src/gtr-dl-teams.ui:7 src/gtr-projects.ui:7 src/gtr-tab.ui:332
-msgid "New Window"
-msgstr "Нове вікно"
 
 #: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:336
 msgid "Preferences"
@@ -866,8 +868,8 @@ msgstr "Інтеграція з Damned Lies"
 
 #: src/gtr-profile-dialog.ui:89
 msgid ""
-"GNOME Damned Lies integration token, go to your profile in https://l10n."
-"gnome.org/ to get it"
+"GNOME Damned Lies integration token, go to your profile in https://"
+"l10n.gnome.org/ to get it"
 msgstr ""
 "Жетон інтеграції до GNOME Damned Lies. Для отримання перейдіть до сторінки "
 "вашого профілю на https://l10n.gnome.org/"
@@ -1113,156 +1115,6 @@ msgstr "Не вдалося зберегти"
 msgid "File saved"
 msgstr "Файл збережено"
 
-#: src/help-overlay.ui:11
-msgctxt "shortcut window group"
-msgid "General"
-msgstr "Загальні"
-
-#: src/help-overlay.ui:15
-msgctxt "shortcut window"
-msgid "Open file"
-msgstr "Відкрити файл"
-
-#: src/help-overlay.ui:21
-msgctxt "shortcut window"
-msgid "Save the current file"
-msgstr "Зберегти поточний файл"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Save the current file as"
-msgstr "Зберегти поточний файл як"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Download from DL"
-msgstr "Отримати з DL"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Upload to DL"
-msgstr "Вивантажити на DL"
-
-#: src/help-overlay.ui:45
-msgctxt "shortcut window"
-msgid "Preferences"
-msgstr "Налаштування"
-
-#: src/help-overlay.ui:51
-msgctxt "shortcut window"
-msgid "Keyboard Shortcuts"
-msgstr "Клавіатурні скорочення"
-
-#: src/help-overlay.ui:57
-msgctxt "shortcut window"
-msgid "Help"
-msgstr "Довідка"
-
-#: src/help-overlay.ui:63
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Нове вікно"
-
-#: src/help-overlay.ui:69
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr "Вийти"
-
-#: src/help-overlay.ui:77
-msgctxt "shortcut window group"
-msgid "Edit"
-msgstr "Редагувати"
-
-#: src/help-overlay.ui:81
-msgctxt "shortcut window"
-msgid "Clear translation"
-msgstr "Вилучити переклад"
-
-#: src/help-overlay.ui:87
-msgctxt "shortcut window"
-msgid "Mark/Unmark as fuzzy"
-msgstr "Позначити або зняти позначення як неточного"
-
-#: src/help-overlay.ui:93
-msgctxt "shortcut window"
-msgid "Copy original text to translation"
-msgstr "Скопіювати початковий текст у поле перекладу"
-
-#: src/help-overlay.ui:99
-msgctxt "shortcut window"
-msgid "Copy original text to clipboard"
-msgstr "Скопіювати початковий текст до буфера обміну даними"
-
-#: src/help-overlay.ui:107
-msgctxt "shortcut window group"
-msgid "Navigation"
-msgstr "Навігація"
-
-#: src/help-overlay.ui:111
-msgctxt "shortcut window"
-msgid "Go to the previous message"
-msgstr "Перейти до попереднього повідомлення"
-
-#: src/help-overlay.ui:117
-msgctxt "shortcut window"
-msgid "Go to the next message"
-msgstr "Перейти до наступного повідомлення"
-
-#: src/help-overlay.ui:123
-msgctxt "shortcut window"
-msgid "Go to the previous untranslated message"
-msgstr "Перейти до попереднього неперекладеного"
-
-#: src/help-overlay.ui:129
-msgctxt "shortcut window"
-msgid "Go to the next untranslated message"
-msgstr "Перейти до наступного неперекладеного"
-
-#: src/help-overlay.ui:137
-msgctxt "shortcut window group"
-msgid "Translation Memory"
-msgstr "Пам'ять перекладів"
-
-#: src/help-overlay.ui:141
-msgctxt "shortcut window"
-msgid "Build translation memory"
-msgstr "Зібрати пам'ять перекладів"
-
-#: src/help-overlay.ui:147
-msgctxt "shortcut window"
-msgid "Use 1st...9th suggestion"
-msgstr "Використати 1-у...9-у пропозицію"
-
-#: src/help-overlay.ui:155
-msgctxt "shortcut window group"
-msgid "Find & Replace"
-msgstr "Знайти і замінити"
-
-#: src/help-overlay.ui:159
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Знайти"
-
-#: src/help-overlay.ui:165
-msgctxt "shortcut window"
-msgid "Find & Replace"
-msgstr "Знайти і замінити"
-
-#: src/help-overlay.ui:171
-msgctxt "shortcut window"
-msgid "Forward-search"
-msgstr "Пошук далі"
-
-#: src/help-overlay.ui:177
-msgctxt "shortcut window"
-msgid "Backward-search"
-msgstr "Пошук позаду"
-
-#: src/help-overlay.ui:183
-msgctxt "shortcut window"
-msgid "Hide find & replace bar"
-msgstr "Приховати панель пошуку із заміною"
-
 #: src/main.c:97
 msgid "— Edit PO files"
 msgstr "– Редагування PO-файлів"
@@ -1276,6 +1128,162 @@ msgstr ""
 "%s\n"
 "Віддайте команду «%s --help», щоб побачити повний список наявних параметрів "
 "командного рядка.\n"
+
+#: src/shortcuts-dialog.ui:6
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "Загальні"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "Відкрити файл"
+
+#: src/shortcuts-dialog.ui:16
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "Зберегти поточний файл"
+
+#: src/shortcuts-dialog.ui:22
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "Зберегти поточний файл як"
+
+#: src/shortcuts-dialog.ui:28
+msgctxt "shortcut window"
+msgid "Download from DL"
+msgstr "Отримати з DL"
+
+#: src/shortcuts-dialog.ui:34
+msgctxt "shortcut window"
+msgid "Upload to DL"
+msgstr "Вивантажити на DL"
+
+#: src/shortcuts-dialog.ui:40
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "Налаштування"
+
+#: src/shortcuts-dialog.ui:46
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "Клавіатурні скорочення"
+
+#: src/shortcuts-dialog.ui:52
+msgctxt "shortcut window"
+msgid "Help"
+msgstr "Довідка"
+
+#: src/shortcuts-dialog.ui:58
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Нове вікно"
+
+#: src/shortcuts-dialog.ui:63
+#| msgid "New Window"
+msgctxt "shortcut window"
+msgid "Close Window"
+msgstr "Закрити вікно"
+
+#: src/shortcuts-dialog.ui:70
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Вийти"
+
+#: src/shortcuts-dialog.ui:78
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "Редагувати"
+
+#: src/shortcuts-dialog.ui:82
+msgctxt "shortcut window"
+msgid "Clear translation"
+msgstr "Вилучити переклад"
+
+#: src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr "Позначити або зняти позначення як неточного"
+
+#: src/shortcuts-dialog.ui:94
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "Скопіювати початковий текст у поле перекладу"
+
+#: src/shortcuts-dialog.ui:100
+msgctxt "shortcut window"
+msgid "Copy original text to clipboard"
+msgstr "Скопіювати початковий текст до буфера обміну даними"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr "Навігація"
+
+#: src/shortcuts-dialog.ui:112
+msgctxt "shortcut window"
+msgid "Go to the previous message"
+msgstr "Перейти до попереднього повідомлення"
+
+#: src/shortcuts-dialog.ui:118
+msgctxt "shortcut window"
+msgid "Go to the next message"
+msgstr "Перейти до наступного повідомлення"
+
+#: src/shortcuts-dialog.ui:124
+msgctxt "shortcut window"
+msgid "Go to the previous untranslated message"
+msgstr "Перейти до попереднього неперекладеного"
+
+#: src/shortcuts-dialog.ui:130
+msgctxt "shortcut window"
+msgid "Go to the next untranslated message"
+msgstr "Перейти до наступного неперекладеного"
+
+#: src/shortcuts-dialog.ui:138
+msgctxt "shortcut window group"
+msgid "Translation Memory"
+msgstr "Пам'ять перекладів"
+
+#: src/shortcuts-dialog.ui:142
+msgctxt "shortcut window"
+msgid "Build translation memory"
+msgstr "Зібрати пам'ять перекладів"
+
+#: src/shortcuts-dialog.ui:148
+msgctxt "shortcut window"
+msgid "Use 1st...9th suggestion"
+msgstr "Використати 1-у...9-у пропозицію"
+
+#: src/shortcuts-dialog.ui:156
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "Знайти і замінити"
+
+#: src/shortcuts-dialog.ui:160
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Знайти"
+
+#: src/shortcuts-dialog.ui:166
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "Знайти і замінити"
+
+#: src/shortcuts-dialog.ui:172
+msgctxt "shortcut window"
+msgid "Forward-search"
+msgstr "Пошук далі"
+
+#: src/shortcuts-dialog.ui:178
+msgctxt "shortcut window"
+msgid "Backward-search"
+msgstr "Пошук позаду"
+
+#: src/shortcuts-dialog.ui:184
+msgctxt "shortcut window"
+msgid "Hide find & replace bar"
+msgstr "Приховати панель пошуку із заміною"
 
 #: src/translation-memory/gtr-translation-memory-dialog.c:77
 msgid "Select PO directory"
