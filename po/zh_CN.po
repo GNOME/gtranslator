@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-04-21 08:39+0000\n"
-"PO-Revision-Date: 2025-04-21 18:41+0800\n"
+"POT-Creation-Date: 2025-07-28 09:17+0000\n"
+"PO-Revision-Date: 2025-07-29 09:26+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -26,13 +26,13 @@ msgstr ""
 "X-Generator: Gtranslator 48.0\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:517 src/gtr-window.c:204 src/gtr-window.c:438
+#: data/org.gnome.Gtranslator.desktop.in.in:2 src/gtr-actions-app.c:89
+#: src/gtr-application.c:530 src/gtr-window.c:204 src/gtr-window.c:438
 msgid "Translation Editor"
 msgstr "翻译编辑器"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:8
-#: data/org.gnome.Gtranslator.desktop.in.in:5
+#: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "Translate apps in your language"
 msgstr "将应用翻译为您的语言"
 
@@ -59,13 +59,18 @@ msgstr ""
 "Gtranslator 也包含一个集合如替换语言、插入标签、open tran、与 subversion 和源"
 "代码查看器集成等许多有趣插件的插件系统。"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:4
+#: data/org.gnome.Gtranslator.desktop.in.in:3
 msgid "PO File Editor"
 msgstr "PO 文件编辑器"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:15
+#: data/org.gnome.Gtranslator.desktop.in.in:14
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Translation;Editor;Gettext;Write;翻译;编辑器;写;"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:332
+msgid "New Window"
+msgstr "新建窗口"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:22
 msgid "Warn if file contains fuzzy translations"
@@ -278,11 +283,11 @@ msgstr "该文件已经上传！"
 msgid "Save file as…"
 msgstr "文件另存为…"
 
-#: src/gtr-application.c:306
+#: src/gtr-application.c:319
 msgid "Fixed plurals"
 msgstr "已修复复数形式"
 
-#: src/gtr-close-confirmation-dialog.c:122 src/gtr-context.c:157
+#: src/gtr-close-confirmation-dialog.c:122 src/gtr-context.c:156
 #: src/gtr-preferences-dialog.c:448 src/gtr-profile-dialog.ui:15
 #: src/gtr-upload-dialog.ui:18
 msgid "_Cancel"
@@ -292,7 +297,7 @@ msgstr "取消(_C)"
 msgid "Close _Without Saving"
 msgstr "不保存关闭(_W)"
 
-#: src/gtr-close-confirmation-dialog.c:124 src/gtr-context.c:158
+#: src/gtr-close-confirmation-dialog.c:124 src/gtr-context.c:157
 msgid "_Save"
 msgstr "保存(_S)"
 
@@ -314,7 +319,11 @@ msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] "有 %d 份含有未保存的改动的文档。要在关闭前保存吗？"
 
-#: src/gtr-context.c:170 src/gtr-context.ui:28
+#: src/gtr-context.c:173
+msgid "Edit Notes"
+msgstr "编辑备注"
+
+#: src/gtr-context.ui:28
 msgid "Notes"
 msgstr "备注"
 
@@ -380,10 +389,6 @@ msgstr ""
 #: src/gtr-dl-teams.c:699
 msgid "The file has been successfully reserved"
 msgstr "文件已经成功占用"
-
-#: src/gtr-dl-teams.ui:7 src/gtr-projects.ui:7 src/gtr-tab.ui:332
-msgid "New Window"
-msgstr "新建窗口"
 
 #: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:336
 msgid "Preferences"
@@ -1094,156 +1099,6 @@ msgstr "无法保存"
 msgid "File saved"
 msgstr "文件已保存"
 
-#: src/help-overlay.ui:11
-msgctxt "shortcut window group"
-msgid "General"
-msgstr "常规"
-
-#: src/help-overlay.ui:15
-msgctxt "shortcut window"
-msgid "Open file"
-msgstr "打开文件"
-
-#: src/help-overlay.ui:21
-msgctxt "shortcut window"
-msgid "Save the current file"
-msgstr "保存当前文件"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Save the current file as"
-msgstr "另存当前文件为"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Download from DL"
-msgstr "从胡言乱语下载"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Upload to DL"
-msgstr "上传至胡言乱语"
-
-#: src/help-overlay.ui:45
-msgctxt "shortcut window"
-msgid "Preferences"
-msgstr "首选项"
-
-#: src/help-overlay.ui:51
-msgctxt "shortcut window"
-msgid "Keyboard Shortcuts"
-msgstr "键盘快捷键"
-
-#: src/help-overlay.ui:57
-msgctxt "shortcut window"
-msgid "Help"
-msgstr "帮助"
-
-#: src/help-overlay.ui:63
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "新建窗口"
-
-#: src/help-overlay.ui:69
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr "退出"
-
-#: src/help-overlay.ui:77
-msgctxt "shortcut window group"
-msgid "Edit"
-msgstr "编辑"
-
-#: src/help-overlay.ui:81
-msgctxt "shortcut window"
-msgid "Clear translation"
-msgstr "清除翻译"
-
-#: src/help-overlay.ui:87
-msgctxt "shortcut window"
-msgid "Mark/Unmark as fuzzy"
-msgstr "标记/不标记为模糊"
-
-#: src/help-overlay.ui:93
-msgctxt "shortcut window"
-msgid "Copy original text to translation"
-msgstr "复制原始文本到翻译"
-
-#: src/help-overlay.ui:99
-msgctxt "shortcut window"
-msgid "Copy original text to clipboard"
-msgstr "复制原始文本到剪贴板"
-
-#: src/help-overlay.ui:107
-msgctxt "shortcut window group"
-msgid "Navigation"
-msgstr "导航"
-
-#: src/help-overlay.ui:111
-msgctxt "shortcut window"
-msgid "Go to the previous message"
-msgstr "转到上条消息"
-
-#: src/help-overlay.ui:117
-msgctxt "shortcut window"
-msgid "Go to the next message"
-msgstr "转到下条消息"
-
-#: src/help-overlay.ui:123
-msgctxt "shortcut window"
-msgid "Go to the previous untranslated message"
-msgstr "转到上条未翻译消息"
-
-#: src/help-overlay.ui:129
-msgctxt "shortcut window"
-msgid "Go to the next untranslated message"
-msgstr "转到下条未翻译消息"
-
-#: src/help-overlay.ui:137
-msgctxt "shortcut window group"
-msgid "Translation Memory"
-msgstr "翻译记忆"
-
-#: src/help-overlay.ui:141
-msgctxt "shortcut window"
-msgid "Build translation memory"
-msgstr "构建翻译记忆"
-
-#: src/help-overlay.ui:147
-msgctxt "shortcut window"
-msgid "Use 1st...9th suggestion"
-msgstr "使用第 1 至 9 条建议"
-
-#: src/help-overlay.ui:155
-msgctxt "shortcut window group"
-msgid "Find & Replace"
-msgstr "查找和替换"
-
-#: src/help-overlay.ui:159
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "查找"
-
-#: src/help-overlay.ui:165
-msgctxt "shortcut window"
-msgid "Find & Replace"
-msgstr "查找和替换"
-
-#: src/help-overlay.ui:171
-msgctxt "shortcut window"
-msgid "Forward-search"
-msgstr "向前搜索"
-
-#: src/help-overlay.ui:177
-msgctxt "shortcut window"
-msgid "Backward-search"
-msgstr "向后搜索"
-
-#: src/help-overlay.ui:183
-msgctxt "shortcut window"
-msgid "Hide find & replace bar"
-msgstr "隐藏查找和替换栏"
-
 #: src/main.c:97
 msgid "— Edit PO files"
 msgstr "— 编辑 PO 文件"
@@ -1256,6 +1111,161 @@ msgid ""
 msgstr ""
 "%s\n"
 "运行“%s --help”查看可用命令行选项的完整列表。\n"
+
+#: src/shortcuts-dialog.ui:6
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "常规"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "打开文件"
+
+#: src/shortcuts-dialog.ui:16
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "保存当前文件"
+
+#: src/shortcuts-dialog.ui:22
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "另存当前文件为"
+
+#: src/shortcuts-dialog.ui:28
+msgctxt "shortcut window"
+msgid "Download from DL"
+msgstr "从胡言乱语下载"
+
+#: src/shortcuts-dialog.ui:34
+msgctxt "shortcut window"
+msgid "Upload to DL"
+msgstr "上传至胡言乱语"
+
+#: src/shortcuts-dialog.ui:40
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "首选项"
+
+#: src/shortcuts-dialog.ui:46
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "键盘快捷键"
+
+#: src/shortcuts-dialog.ui:52
+msgctxt "shortcut window"
+msgid "Help"
+msgstr "帮助"
+
+#: src/shortcuts-dialog.ui:58
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "新建窗口"
+
+#: src/shortcuts-dialog.ui:63
+msgctxt "shortcut window"
+msgid "Close Window"
+msgstr "关闭窗口"
+
+#: src/shortcuts-dialog.ui:70
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "退出"
+
+#: src/shortcuts-dialog.ui:78
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "编辑"
+
+#: src/shortcuts-dialog.ui:82
+msgctxt "shortcut window"
+msgid "Clear translation"
+msgstr "清除翻译"
+
+#: src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr "标记/不标记为模糊"
+
+#: src/shortcuts-dialog.ui:94
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "复制原始文本到翻译"
+
+#: src/shortcuts-dialog.ui:100
+msgctxt "shortcut window"
+msgid "Copy original text to clipboard"
+msgstr "复制原始文本到剪贴板"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr "导航"
+
+#: src/shortcuts-dialog.ui:112
+msgctxt "shortcut window"
+msgid "Go to the previous message"
+msgstr "转到上条消息"
+
+#: src/shortcuts-dialog.ui:118
+msgctxt "shortcut window"
+msgid "Go to the next message"
+msgstr "转到下条消息"
+
+#: src/shortcuts-dialog.ui:124
+msgctxt "shortcut window"
+msgid "Go to the previous untranslated message"
+msgstr "转到上条未翻译消息"
+
+#: src/shortcuts-dialog.ui:130
+msgctxt "shortcut window"
+msgid "Go to the next untranslated message"
+msgstr "转到下条未翻译消息"
+
+#: src/shortcuts-dialog.ui:138
+msgctxt "shortcut window group"
+msgid "Translation Memory"
+msgstr "翻译记忆"
+
+#: src/shortcuts-dialog.ui:142
+msgctxt "shortcut window"
+msgid "Build translation memory"
+msgstr "构建翻译记忆"
+
+#: src/shortcuts-dialog.ui:148
+msgctxt "shortcut window"
+msgid "Use 1st...9th suggestion"
+msgstr "使用第 1 至 9 条建议"
+
+#: src/shortcuts-dialog.ui:156
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "查找和替换"
+
+#: src/shortcuts-dialog.ui:160
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "查找"
+
+#: src/shortcuts-dialog.ui:166
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "查找和替换"
+
+#: src/shortcuts-dialog.ui:172
+msgctxt "shortcut window"
+msgid "Forward-search"
+msgstr "向前搜索"
+
+#: src/shortcuts-dialog.ui:178
+msgctxt "shortcut window"
+msgid "Backward-search"
+msgstr "向后搜索"
+
+#: src/shortcuts-dialog.ui:184
+msgctxt "shortcut window"
+msgid "Hide find & replace bar"
+msgstr "隐藏查找和替换栏"
 
 #: src/translation-memory/gtr-translation-memory-dialog.c:77
 msgid "Select PO directory"
@@ -1696,9 +1706,6 @@ msgstr "显示的消息与翻译记忆匹配的消息的最大长度差。"
 
 #~ msgid "Phrase not found"
 #~ msgstr "词组未找到"
-
-#~ msgid "Edit notes"
-#~ msgstr "编辑备注"
 
 #~ msgid "_Search for: "
 #~ msgstr "搜索(_S)："
