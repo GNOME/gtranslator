@@ -380,16 +380,16 @@ gtr_header_set_language (GtrHeader * header,
                          const gchar * lang_code,
                          const gchar * email)
 {
-  g_autofree char *lang_temp = NULL;
+  g_autofree char *lang_team = NULL;
 
   g_return_if_fail (GTR_IS_HEADER (header));
 
   if (email && g_strcmp0 (email, "") != 0)
-    lang_temp = g_strdup_printf ("%s <%s>", language, email);
+    lang_team = g_strdup_printf ("%s <%s>", language, email);
   else
-    lang_temp = g_strdup (language);
+    lang_team = g_strdup (language);
 
-  gtr_header_set_field (header, "Language-Team", lang_temp);
+  gtr_header_set_field (header, "Language-Team", lang_team);
   gtr_header_set_field (header, "Language", lang_code);
 }
 
