@@ -8,6 +8,7 @@
 # $ ruff check --select=ALL --ignore=D,ANN101,S310 update_langs.py
 from __future__ import annotations
 
+import configparser
 import json
 import urllib
 import urllib.request
@@ -54,23 +55,19 @@ def main() -> None:
 
 
 def write_languages(languages: list[Lang], w: io.TextIOWrapper) -> None:
-    lines = ["[Languages]\n"]
-    for lang in languages:
-        locale = lang.locale
-        name = lang.name
-        lines.append(f"{locale}={name}\n")
-
-    w.writelines(lines)
+    config = configparser.ConfigParser()
+    config.optionxform = str
+    config["Languages"] = {lang.locale: lang.name for lang in languages}
+    config.write(w, space_around_delimiters=False)
 
 
 def write_plurals(languages: list[Lang], w: io.TextIOWrapper) -> None:
-    lines = ["[Plural Forms]\n"]
-    for lang in languages:
-        locale = lang.locale
-        if plurals := lang.plurals:
-            lines.append(f"{locale}={plurals}\n")
-
-    w.writelines(lines)
+    config = configparser.ConfigParser(interpolation=None)
+    config.optionxform = str
+    config["Plural Forms"] = {
+        lang.locale: lang.plurals for lang in languages if lang.plurals
+    }
+    config.write(w, space_around_delimiters=False)
 
 
 if __name__ == "__main__":
