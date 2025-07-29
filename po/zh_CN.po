@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-07-28 09:17+0000\n"
-"PO-Revision-Date: 2025-07-29 09:26+0800\n"
+"POT-Creation-Date: 2025-07-29 16:28+0000\n"
+"PO-Revision-Date: 2025-07-30 07:04+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -27,7 +27,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:2 src/gtr-actions-app.c:89
-#: src/gtr-application.c:530 src/gtr-window.c:204 src/gtr-window.c:438
+#: src/gtr-application.c:522 src/gtr-window.c:204 src/gtr-window.c:449
 msgid "Translation Editor"
 msgstr "翻译编辑器"
 
@@ -195,8 +195,8 @@ msgstr "源码查看器"
 #: src/gtr-actions-file.c:583 src/gtr-actions-file.c:751 src/gtr-dl-teams.c:164
 #: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:339 src/gtr-dl-teams.c:427
 #: src/gtr-dl-teams.c:563 src/gtr-dl-teams.c:574 src/gtr-dl-teams.c:585
-#: src/gtr-dl-teams.c:616 src/gtr-dl-teams.c:683 src/gtr-tab.c:347
-#: src/gtr-window.c:158 src/gtr-window.c:336
+#: src/gtr-dl-teams.c:616 src/gtr-dl-teams.c:683 src/gtr-tab.c:350
+#: src/gtr-window.c:158 src/gtr-window.c:344
 msgid "OK"
 msgstr "确定"
 
@@ -283,7 +283,7 @@ msgstr "该文件已经上传！"
 msgid "Save file as…"
 msgstr "文件另存为…"
 
-#: src/gtr-application.c:319
+#: src/gtr-application.c:311
 msgid "Fixed plurals"
 msgstr "已修复复数形式"
 
@@ -944,44 +944,44 @@ msgstr "原始文本"
 msgid "Translated text"
 msgstr "翻译文本"
 
-#: src/gtr-tab.c:344
+#: src/gtr-tab.c:347
 msgid "There is an error in the message"
 msgstr "消息中存在错误"
 
-#: src/gtr-tab.c:562 src/gtr-tab.c:705
+#: src/gtr-tab.c:565 src/gtr-tab.c:708
 msgid "fuzzy"
 msgstr "模糊"
 
-#: src/gtr-tab.c:735
+#: src/gtr-tab.c:738
 #, c-format
 msgid "Plural %d"
 msgstr "复数 %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1288
+#: src/gtr-tab.c:1291
 msgid "Path:"
 msgstr "路径："
 
-#: src/gtr-tab.c:1537
-msgid "Copied to clipboard"
-msgstr "已复制到剪贴板"
+#: src/gtr-tab.c:1541
+msgid "Copied original to clipboard"
+msgstr "已将原始内容复制到剪贴板"
 
-#: src/gtr-tab.c:1976
+#: src/gtr-tab.c:1980
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "已翻译：%0.2f%%"
 
-#: src/gtr-tab.c:1977
+#: src/gtr-tab.c:1981
 #, c-format
 msgid "Translated: %d"
 msgstr "已翻译：%d"
 
-#: src/gtr-tab.c:1978
+#: src/gtr-tab.c:1982
 #, c-format
 msgid "Untranslated: %d"
 msgstr "未翻译：%d"
 
-#: src/gtr-tab.c:1979
+#: src/gtr-tab.c:1983
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "模糊：%d"
@@ -1091,11 +1091,11 @@ msgstr "*%s — 翻译编辑器"
 msgid "%s — Translation Editor"
 msgstr "%s — 翻译编辑器"
 
-#: src/gtr-window.c:335
+#: src/gtr-window.c:343
 msgid "Could not Save"
 msgstr "无法保存"
 
-#: src/gtr-window.c:347
+#: src/gtr-window.c:355
 msgid "File saved"
 msgstr "文件已保存"
 
@@ -1337,6 +1337,9 @@ msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
 msgstr "显示的消息与翻译记忆匹配的消息的最大长度差。"
+
+#~ msgid "Copied to clipboard"
+#~ msgstr "已复制到剪贴板"
 
 #~ msgid "Translate and localize applications and libraries"
 #~ msgstr "对应用程序和库进行翻译和本地化"
