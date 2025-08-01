@@ -88,8 +88,6 @@ typedef struct
   GtrProfileManager *prof_manager;
 
   gboolean search_bar_shown;
-
-  guint dispose_has_run : 1;
 } GtrWindowPrivate;
 
 struct _GtrWindow
@@ -293,12 +291,6 @@ gtr_window_dispose (GObject * object)
   GtrWindow *window = GTR_WINDOW (object);
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
-  if (!priv->dispose_has_run)
-    {
-      save_window_state (window);
-      priv->dispose_has_run = TRUE;
-    }
-
   g_clear_object (&priv->state_settings);
   g_clear_object (&priv->ui_settings);
   g_clear_object (&priv->prof_manager);
@@ -319,6 +311,8 @@ static gboolean
 gtr_window_close_request (GtkWindow *window)
 {
   gtr_file_quit (GTR_WINDOW (window));
+
+  save_window_state (GTR_WINDOW (window));
 
   return GTK_WINDOW_CLASS (gtr_window_parent_class)->close_request (window);
 }
