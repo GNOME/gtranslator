@@ -184,6 +184,8 @@ gtr_application_finalize (GObject *object)
 
   g_free (priv->last_dir);
 
+  gtk_source_finalize ();
+
   G_OBJECT_CLASS (gtr_application_parent_class)->finalize (object);
 }
 
