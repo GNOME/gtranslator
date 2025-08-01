@@ -682,6 +682,50 @@ on_gettext_po_xerror2 (gint severity,
   g_warning ("Error: %s.\n %s", message_text1, message_text2);
 }
 
+gchar *
+gtr_msg_check_format (GtrMsg * msg)
+{
+  gchar *error = NULL;
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
+  struct po_xerror_handler handler;
+
+  g_return_val_if_fail (msg != NULL, NULL);
+
+  message_error = NULL;
+
+  handler.xerror = &on_gettext_po_xerror;
+  handler.xerror2 = &on_gettext_po_xerror2;
+
+  po_message_check_format (priv->message, &handler);
+
+  g_set_str (&error, message_error);
+  g_set_str (&message_error, NULL);
+
+  return error;
+}
+
+gchar *
+gtr_msg_check_all (GtrMsg * msg)
+{
+  gchar *error = NULL;
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
+  struct po_xerror_handler handler;
+
+  g_return_val_if_fail (msg != NULL, NULL);
+
+  handler.xerror = &on_gettext_po_xerror;
+  handler.xerror2 = &on_gettext_po_xerror2;
+
+  po_message_check_all (priv->message, priv->iterator, &handler);
+
+  if (!gtr_msg_is_fuzzy (msg) && gtr_msg_is_translated (msg))
+    g_set_str (&error, message_error);
+
+  g_set_str (&message_error, NULL);
+
+  return error;
+}
+
 /**
  * gtr_msg_check:
  * @msg: a #GtrMsg
@@ -696,34 +740,10 @@ gchar *
 gtr_msg_check (GtrMsg * msg)
 {
   gchar *error = NULL;
-  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
-  struct po_xerror_handler handler;
 
-  g_return_val_if_fail (msg != NULL, NULL);
-
-  /* We are not freeing the message_error so at start should be NULL
-   * always for us
-   */
-  message_error = NULL;
-
-  handler.xerror = &on_gettext_po_xerror;
-  handler.xerror2 = &on_gettext_po_xerror2;
-
-  po_message_check_all (priv->message, priv->iterator, &handler);
-
-  if (gtr_msg_is_fuzzy (msg) || !gtr_msg_is_translated (msg))
-    {
-      if (message_error)
-        g_free (message_error);
-      message_error = NULL;
-    }
-
-  if (message_error)
-    {
-      error = g_strdup (message_error);
-      g_free (message_error);
-    }
-  message_error = NULL;
+  error = gtr_msg_check_all (msg);
+  if (!error)
+    error = gtr_msg_check_format (msg);
 
   return error;
 }
