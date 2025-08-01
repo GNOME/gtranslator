@@ -71,7 +71,7 @@ notify_dark_cb (GtrView *view)
 static void
 gtr_view_init (GtrView * view)
 {
-  GtkSourceLanguageManager *lm;
+  g_autoptr (GtkSourceLanguageManager) lm;
   GtkSourceLanguage *lang;
   GPtrArray *dirs;
   gchar **langs = NULL;
