@@ -61,6 +61,7 @@ gtr_settings_dispose (GObject * object)
   GtrSettingsPrivate *priv = gtr_settings_get_instance_private (gs);
 
   g_clear_object (&priv->interface);
+  g_clear_object (&priv->files);
   g_clear_object (&priv->editor);
   g_clear_object (&priv->ui);
 
