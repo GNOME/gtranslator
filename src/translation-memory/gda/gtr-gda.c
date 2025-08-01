@@ -763,7 +763,7 @@ prepare_statement(GdaSqlParser *parser, const gchar *query)
 static void
 gtr_gda_init (GtrGda * self)
 {
-  gchar *connection_string;
+  g_autofree gchar *connection_string = NULL;
   g_autoptr (GError) error = NULL;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
