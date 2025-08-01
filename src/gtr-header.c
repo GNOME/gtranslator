@@ -797,9 +797,12 @@ update_comments (GtrHeader *header, const gchar *comments)
   while (new_comments->str[new_comments->len - 1] == '\n')
     new_comments = g_string_truncate (new_comments, new_comments->len - 1);
 
-  /* Add \n\n for an extra newline at the end of the comments */
-  g_string_append_printf (new_comments, "\n%s <%s>, %s\n\n",
-                          translator, email, years);
+
+  if (!g_settings_get_boolean (priv->settings, GTR_SETTINGS_OMIT_HEADER_CREDIT))
+    g_string_append_printf (new_comments, "\n%s <%s>, %s",
+                            translator, email, years);
+
+  g_string_append (new_comments, "\n\n");
 
   g_free (years);
   g_free (current_year);

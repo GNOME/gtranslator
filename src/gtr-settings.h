@@ -46,6 +46,7 @@ GSettings *gtr_settings_new (void);
 #define GTR_SETTINGS_AUTO_SAVE_INTERVAL			"auto-save-interval"
 #define GTR_SETTINGS_CREATE_BACKUP			"create-backup"
 #define GTR_SETTINGS_USE_PROFILE_VALUES			"use-profile-values"
+#define GTR_SETTINGS_OMIT_HEADER_CREDIT		"omit-header-credit"
 #define GTR_SETTINGS_HIGHLIGHT_SYNTAX			"highlight-syntax"
 #define GTR_SETTINGS_VISIBLE_WHITESPACE			"visible-whitespace"
 #define GTR_SETTINGS_UNMARK_FUZZY_WHEN_CHANGED		"unmark-fuzzy-when-changed"
