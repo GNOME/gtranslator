@@ -170,25 +170,12 @@ gtr_message_table_finalize (GObject * object)
   priv = gtr_message_table_get_instance_private (table);
 
   g_clear_object (&priv->ui_settings);
-
-  if (priv->store)
-    {
-      g_object_unref (priv->store);
-      g_object_unref (priv->selection);
-    }
-
-  if (priv->id_sorter)
-    {
-      g_object_unref (priv->id_sorter);
-      g_object_unref (priv->status_sorter);
-      g_object_unref (priv->msg_sorter);
-      g_object_unref (priv->translation_sorter);
-
-      priv->id_sorter = NULL;
-      priv->status_sorter = NULL;
-      priv->msg_sorter = NULL;
-      priv->translation_sorter = NULL;
-    }
+  g_clear_object (&priv->store);
+  g_clear_object (&priv->selection);
+  g_clear_object (&priv->id_sorter);
+  g_clear_object (&priv->status_sorter);
+  g_clear_object (&priv->translation_sorter);
+  g_clear_object (&priv->msg_sorter);
 
   G_OBJECT_CLASS (gtr_message_table_parent_class)->finalize (object);
 }
