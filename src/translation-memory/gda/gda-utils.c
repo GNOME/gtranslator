@@ -59,8 +59,10 @@ static gboolean
 check_good_word (const gchar * word, gchar ** bad_words)
 {
   gboolean check = TRUE;
-  gchar *lower = g_utf8_strdown (word, -1);
+  g_autofree gchar *lower = NULL;
   gint i = 0;
+
+  lower = g_utf8_strdown (word, -1);
 
   while (bad_words[i] != NULL)
     {
