@@ -689,11 +689,13 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
       g_warning ("%s\n", inner_error->message);
 
       g_error_free (inner_error);
+      g_strfreev (words);
 
       return NULL;
     }
 
   matches = g_list_reverse (matches);
+  g_strfreev (words);
   return matches;
 }
 
