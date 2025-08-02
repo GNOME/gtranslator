@@ -260,7 +260,7 @@ gtr_view_enable_visible_whitespace (GtrView * view, gboolean enable)
   GtkSourceView *source;
   GtkSourceSpaceDrawer *drawer;
   GtkSourceBuffer *buffer;
-  GtkSourceLanguageManager *manager;
+  g_autoptr (GtkSourceLanguageManager) manager;
   GtkSourceLanguage *lang;
   const gchar * const * deflangs = NULL;
   const gchar *langs[20] = {NULL};
