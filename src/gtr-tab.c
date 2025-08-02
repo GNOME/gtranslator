@@ -1047,7 +1047,7 @@ gtr_tab_new (GtrPo * po,
 
   priv->window = GTK_WIDGET (window);
   /* FIXME: make the po a property */
-  priv->po = po;
+  g_set_object (&priv->po, po);
   g_object_set_data (G_OBJECT (po), GTR_TAB_KEY, tab);
 
   g_signal_connect (po, "notify::location",
