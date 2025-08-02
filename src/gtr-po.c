@@ -262,6 +262,7 @@ gtr_po_dispose (GObject * object)
   GtrPo *po = GTR_PO (object);
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
+  g_clear_object (&priv->header);
   g_clear_object (&priv->location);
 
   G_OBJECT_CLASS (gtr_po_parent_class)->dispose (object);
