@@ -386,7 +386,7 @@ gtr_search_bar_grab_focus (GtkWidget *widget)
 }
 
 static void
-gtr_search_bar_destroy (GObject *object)
+gtr_search_bar_dispose (GObject *object)
 {
   GtrSearchBar *self = (GtrSearchBar *)object;
 
@@ -543,7 +543,7 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
 
   object_class->get_property = gtr_search_bar_get_property;
   object_class->set_property = gtr_search_bar_set_property;
-  object_class->dispose = gtr_search_bar_destroy;
+  object_class->dispose = gtr_search_bar_dispose;
 
   widget_class->grab_focus = gtr_search_bar_grab_focus;
 
