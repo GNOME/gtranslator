@@ -714,11 +714,6 @@ close_all_documents (GtrWindow * window, gboolean logout_mode)
   else
     {
       close_all_tabs (window);
-
-      if (logout_mode)
-        {
-          gtk_window_destroy (GTK_WINDOW (window));
-        }
     }
 }
 
