@@ -938,6 +938,7 @@ gtr_dl_teams_init (GtrDlTeams *self)
     G_LIST_MODEL (priv->langs_model)
   );
   adw_combo_row_set_expression (ADW_COMBO_ROW (priv->langs_comborow), expression);
+  gtk_expression_unref (expression);
   adw_combo_row_set_enable_search (ADW_COMBO_ROW (priv->langs_comborow), TRUE);
   gtk_widget_set_sensitive (priv->langs_comborow, FALSE);
 
@@ -948,6 +949,7 @@ gtr_dl_teams_init (GtrDlTeams *self)
     G_LIST_MODEL (priv->modules_model)
   );
   adw_combo_row_set_expression (ADW_COMBO_ROW (priv->modules_comborow), expression);
+  gtk_expression_unref (expression);
   adw_combo_row_set_enable_search (ADW_COMBO_ROW (priv->modules_comborow), TRUE);
   adw_combo_row_set_search_match_mode (ADW_COMBO_ROW (priv->modules_comborow),
                                        GTK_STRING_FILTER_MATCH_MODE_SUBSTRING);
@@ -988,6 +990,7 @@ gtr_dl_teams_init (GtrDlTeams *self)
                                             G_CALLBACK (domains_expression),
                                             NULL, NULL);
   adw_combo_row_set_expression (ADW_COMBO_ROW (priv->domains_comborow), expression);
+  gtk_expression_unref (expression);
 }
 
 GtrDlTeams*
