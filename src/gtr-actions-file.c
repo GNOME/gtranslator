@@ -167,6 +167,8 @@ gtr_po_parse_files_from_dialog (GObject *source, GAsyncResult *res, void *user_d
    */
   locations = g_slist_append (locations, file);
   load_file_list (window, locations);
+
+  g_object_unref (dialog);
 }
 
 static void
