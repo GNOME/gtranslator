@@ -113,7 +113,6 @@ typedef struct
   guint blocking : 1;
 
   guint tab_realized : 1;
-  guint dispose_has_run : 1;
 
   /*Search Bar*/
   GtkSearchBar   *search_bar;
@@ -828,9 +827,6 @@ gtr_tab_dispose (GObject * object)
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (GTR_TAB (object));
-
-  if (!priv->dispose_has_run)
-    priv->dispose_has_run = TRUE;
 
   g_clear_object (&priv->po);
   g_clear_object (&priv->ui_settings);
