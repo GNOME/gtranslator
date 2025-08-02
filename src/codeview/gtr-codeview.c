@@ -111,7 +111,7 @@ gtr_code_view_set_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_WINDOW:
-      priv->window = GTR_WINDOW (g_value_dup_object (value));
+      priv->window = GTR_WINDOW (g_value_get_object (value));
       break;
 
     default:
