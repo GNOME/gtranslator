@@ -166,6 +166,8 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
   g_strfreev (priv->tm_list);
 
   priv->tm_list = g_new (gchar *, MAX_ELEMENTS + 1);
+  if (priv->tm_list_id)
+    g_free (priv->tm_list_id);
   priv->tm_list_id = g_new (gint, MAX_ELEMENTS + 1);
 
   i = 0;
@@ -303,6 +305,7 @@ gtr_translation_memory_ui_finalize (GObject * object)
   DEBUG_PRINT ("Finalize translation memory ui");
 
   g_strfreev (priv->tm_list);
+  g_free (priv->tm_list_id);
 
   G_OBJECT_CLASS (gtr_translation_memory_ui_parent_class)->finalize (object);
 }
