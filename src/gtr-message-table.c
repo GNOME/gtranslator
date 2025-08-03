@@ -145,7 +145,6 @@ gtr_message_table_init (GtrMessageTable * table)
   priv->sort_status
       = g_settings_get_enum (priv->ui_settings, GTR_SETTINGS_SORT_ORDER);
   priv->store = NULL;
-  priv->id_sorter = NULL;
 
   gtk_orientable_set_orientation (GTK_ORIENTABLE (table),
                                   GTK_ORIENTATION_VERTICAL);
