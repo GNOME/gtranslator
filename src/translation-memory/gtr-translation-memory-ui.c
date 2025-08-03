@@ -194,7 +194,7 @@ row_activated (GtkListView            *view,
                GtrTranslationMemoryUi *tm_ui)
 {
   GtkSingleSelection *model;
-  GtrTm *tm;
+  g_autoptr(GtrTm) tm;
 
   model = GTK_SINGLE_SELECTION (gtk_list_view_get_model (view));
   tm = GTR_TM (g_list_model_get_object (gtk_single_selection_get_model (model), position));
