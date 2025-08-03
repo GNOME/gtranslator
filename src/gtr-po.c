@@ -253,6 +253,9 @@ gtr_po_finalize (GObject * object)
   if (priv->dl_state)
     g_free (priv->dl_state);
 
+  if (priv->iter)
+    po_message_iterator_free (priv->iter);
+
   G_OBJECT_CLASS (gtr_po_parent_class)->finalize (object);
 }
 
@@ -521,6 +524,8 @@ _gtr_po_load (GtrPo * po, GFile * location, GError ** error)
       priv->header = gtr_header_new (iter, message);
     }
 
+  if (priv->iter)
+    po_message_iterator_free (priv->iter);
   priv->iter = iter;
 
   return TRUE;
