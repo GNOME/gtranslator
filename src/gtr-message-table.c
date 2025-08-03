@@ -322,7 +322,7 @@ gtr_message_table_populate (GtrMessageTable * table, GtrMessageContainer * conta
  * @navigation:
  * @func: (scope call):
  *
- * Returns: (transfer none):
+ * Returns: (transfer full):
  */
 GtrMsg *
 gtr_message_table_navigate (GtrMessageTable * table,
@@ -351,14 +351,14 @@ gtr_message_table_navigate (GtrMessageTable * table,
           int next = gtk_single_selection_get_selected (GTK_SINGLE_SELECTION (priv->selection)) + 1;
           while (TRUE)
             {
-              msg = (GtrMsg*) g_list_model_get_object (G_LIST_MODEL (priv->sort_model), next);
+              msg = GTR_MSG (g_list_model_get_object (G_LIST_MODEL (priv->sort_model), next));
               if (!msg)
                 return NULL;
 
               if (func (msg))
                 {
                   gtk_single_selection_set_selected (GTK_SINGLE_SELECTION (priv->selection), next);
-                  return msg;
+                  return g_steal_pointer (&msg);
                 }
 
               next += 1;
@@ -377,14 +377,14 @@ gtr_message_table_navigate (GtrMessageTable * table,
           int prev = gtk_single_selection_get_selected (GTK_SINGLE_SELECTION (priv->selection)) - 1;
           while (TRUE)
             {
-              msg = (GtrMsg*) g_list_model_get_object (G_LIST_MODEL (priv->sort_model), prev);
+              msg = GTR_MSG (g_list_model_get_object (G_LIST_MODEL (priv->sort_model), prev));
               if (!msg)
                 return NULL;
 
               if (func (msg))
                 {
                   gtk_single_selection_set_selected (GTK_SINGLE_SELECTION (priv->selection), prev);
-                  return msg;
+                  return g_steal_pointer (&msg);
                 }
 
               prev -= 1;
@@ -400,8 +400,8 @@ gtr_message_table_navigate (GtrMessageTable * table,
       break;
     }
 
-  msg = gtk_single_selection_get_selected_item (GTK_SINGLE_SELECTION (priv->selection));
-  return msg;
+  msg = g_object_ref (gtk_single_selection_get_selected_item (GTK_SINGLE_SELECTION (priv->selection)));
+  return g_steal_pointer (&msg);
 }
 
 void
