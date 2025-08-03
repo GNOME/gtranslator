@@ -642,9 +642,11 @@ gtr_dl_teams_download_file (GtrDlTeams *self)
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   g_autoptr(SoupMessage) msg = NULL;
   g_autofree gchar *api_endpoint;
+  g_autofree gchar *escaped_file_path;
 
   /* Load the file, save as temp; path to file is https://l10n.gnome.org/[priv->file_path] */
-  api_endpoint = g_strconcat (DL_SERVER, g_strcompress(priv->file_path), NULL);
+  escaped_file_path = g_strcompress (priv->file_path);
+  api_endpoint = g_strconcat (DL_SERVER, escaped_file_path, NULL);
   msg = soup_message_new ("GET", api_endpoint);
   soup_session_send_and_read_async (priv->soup_session, msg, G_PRIORITY_DEFAULT, NULL,
                                     (GAsyncReadyCallback)gtr_dl_teams_download_file_done,
