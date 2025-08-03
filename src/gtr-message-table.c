@@ -445,7 +445,6 @@ gtr_message_table_select (GtrMessageTable * table, GtrMsg * msg)
   unsigned int position = 0;
   int i = 0;
   int nitems = 0;
-  GtrMsg *item = NULL;
 
   priv = gtr_message_table_get_instance_private (table);
   nitems = g_list_model_get_n_items (G_LIST_MODEL (priv->selection));
@@ -453,6 +452,7 @@ gtr_message_table_select (GtrMessageTable * table, GtrMsg * msg)
   // look for the msg in the model
   for (i=0; i < nitems; i++)
     {
+      g_autoptr(GtrMsg) item;
       item = g_list_model_get_item (G_LIST_MODEL (priv->selection), i);
       if (item == msg)
         {
