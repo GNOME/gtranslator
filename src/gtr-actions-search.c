@@ -226,7 +226,7 @@ find_in_selection_model (GtrWindow *window, GtrSearchBar *searchbar,
   // Stop when found or at the end of the list
   while (!found && i >= 0 && i < nitems && i != current_pos)
     {
-      GtrMsg *msg = GTR_MSG (g_list_model_get_item (model, i));
+      g_autoptr(GtrMsg) msg = GTR_MSG (g_list_model_get_item (model, i));
       if (_msg_equal_func (msg, regex, original_text, translated_text))
         {
           found = TRUE;
