@@ -275,15 +275,16 @@ gtr_dl_teams_parse_module_details (GObject *object, GAsyncResult *result, gpoint
 
       for (i=0; i < json_array_get_length (domains_array); i++)
         {
+          g_autoptr(GtrDlTeamsDomain) teams_domain;
+
           domain_element = json_array_get_element (domains_array, i);
           domain_object = json_node_get_object (domain_element);
-          g_list_store_append (
-            priv->domains_model,
-            gtr_dl_teams_domain_new (
-              json_object_get_string_member (domain_object, "name"),
-              json_object_get_string_member (domain_object, "description")
-            )
+          teams_domain = gtr_dl_teams_domain_new (
+            json_object_get_string_member (domain_object, "name"),
+            json_object_get_string_member (domain_object, "description")
           );
+
+          g_list_store_append (priv->domains_model, teams_domain);
         }
 
       adw_combo_row_set_selected (ADW_COMBO_ROW (priv->domains_comborow), 0);
