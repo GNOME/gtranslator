@@ -174,7 +174,7 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
   for (l = tm_list; l && i < MAX_ELEMENTS; l = l->next)
     {
       GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) l->data;
-      GtrTm *tm = gtr_tm_new (GDK_KEY_1 + i, match->level, match->match);
+      g_autoptr(GtrTm) tm = gtr_tm_new (GDK_KEY_1 + i, match->level, match->match);
 
       priv->tm_list_id[i] = match->id;
       priv->tm_list[i] = g_strdup (match->match);
