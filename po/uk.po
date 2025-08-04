@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-07-30 07:55+0000\n"
-"PO-Revision-Date: 2025-07-30 22:00+0300\n"
+"POT-Creation-Date: 2025-08-04 16:19+0000\n"
+"PO-Revision-Date: 2025-08-04 20:01+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -70,7 +70,7 @@ msgstr ""
 "тор;жтранслатор;переклад;редактор;перекласти;геттекст;запис;інтерфейс;мова;"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:332
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:333
 msgid "New Window"
 msgstr "Нове вікно"
 
@@ -132,45 +132,58 @@ msgstr ""
 "Якщо обрано, перезаписувати дані у заголовку PO-файла даними з активного "
 "профілю."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:68
+#: data/org.gnome.Gtranslator.gschema.xml.in:66
+#| msgid "Edit header"
+msgid "Omit credits in header"
+msgstr "Пропустити подяки у заголовку"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:67
+msgid ""
+"If true, the 'author <email> year' comment won't be added to the PO header's "
+"copyright."
+msgstr ""
+"Якщо має значення «true», коментар «автор <email> рік» не буде додано до"
+" заголовка авторських прав PO."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:76
 msgid "Highlight syntax in edit fields"
 msgstr "Підсвічувати синтаксис у полі редагування"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:69
+#: data/org.gnome.Gtranslator.gschema.xml.in:77
 msgid "If true, apply syntax highlighting to strings in edit fields."
 msgstr ""
 "Якщо обрано, застосовувати підсвічування синтаксису для рядків у полі "
 "редагування."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:75
+#: data/org.gnome.Gtranslator.gschema.xml.in:83
 msgid "Make whitespace visible"
 msgstr "Робити пробіли видимими"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:76
+#: data/org.gnome.Gtranslator.gschema.xml.in:84
 msgid "If true, display whitespace in strings as representative symbols."
 msgstr "Якщо обрано, показувати пробіли спеціальним символом."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:82
+#: data/org.gnome.Gtranslator.gschema.xml.in:90
 msgid "Remove fuzzy status when message is changed"
 msgstr "Вилучати мітку fuzzy, якщо рядок був змінений"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:83
+#: data/org.gnome.Gtranslator.gschema.xml.in:91
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr "Якщо обрано, вилучати мітку fuzzy, якщо рядок був змінений."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:89
+#: data/org.gnome.Gtranslator.gschema.xml.in:97
 msgid "Check spelling"
 msgstr "Перевірка правопису"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:90
+#: data/org.gnome.Gtranslator.gschema.xml.in:98
 msgid "If true, check the spelling of translated messages."
 msgstr "Якщо обрано, перевіряти орфографію перекладених повідомлень."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:101
+#: data/org.gnome.Gtranslator.gschema.xml.in:109
 msgid "Message list sort order"
 msgstr "Порядок сортування списку рядків"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:102
+#: data/org.gnome.Gtranslator.gschema.xml.in:110
 msgid ""
 "Sort order to use in the message list. Possible values are “status”, “id”, "
 "“original-text” and “translated-text”."
@@ -179,21 +192,21 @@ msgstr ""
 "«id» (ідентифікатор), «original-text» (початковий текст) і «translated-text» "
 "(текст перекладу)."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:109
+#: data/org.gnome.Gtranslator.gschema.xml.in:117
 msgid "Show ID column"
 msgstr "Показувати стовпчик ідентифікатора"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:110
+#: data/org.gnome.Gtranslator.gschema.xml.in:118
 msgid "If true, displays a column with the id of the message on the editor."
 msgstr ""
 "Якщо вибрано, у редакторі буде показано стовпчик із ідентифікатором "
 "повідомлення."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:122
+#: data/org.gnome.Gtranslator.gschema.xml.in:130
 msgid "Window maximized"
 msgstr "Вікно розгорнуто"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:123
+#: data/org.gnome.Gtranslator.gschema.xml.in:131
 msgid "Window maximized state"
 msgstr "Стан розгорнутості вікна"
 
@@ -402,15 +415,15 @@ msgstr ""
 msgid "The file has been successfully reserved"
 msgstr "Файл успішно зарезервовано"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:336
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:337
 msgid "Preferences"
 msgstr "Налаштування"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:342
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:343
 msgid "Keyboard Shortcuts"
 msgstr "Клавіатурні скорочення"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:350
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:351
 msgid "About Translation Editor"
 msgstr "Про «Редактор перекладів»"
 
@@ -551,7 +564,7 @@ msgstr "Кодування перенесення"
 msgid "Plural form"
 msgstr "Форма множини"
 
-#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:319
+#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:320
 msgid "Edit Header"
 msgstr "Змінити заголовок"
 
@@ -879,11 +892,11 @@ msgstr ""
 msgid "_Damned Lies auth token"
 msgstr "_Жетон розпізнавання DL"
 
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:315
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:316
 msgid "Build Translation Memory"
 msgstr "Зібрати пам'ять перекладів"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:346
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:347
 msgid "Help"
 msgstr "Довідка"
 
@@ -980,8 +993,6 @@ msgid "Path:"
 msgstr "Шлях:"
 
 #: src/gtr-tab.c:1541
-#| msgctxt "shortcut window"
-#| msgid "Copy original text to clipboard"
 msgid "Copied original to clipboard"
 msgstr "Скопіювати початковий текст до буфера обміну даними"
 
@@ -1026,55 +1037,55 @@ msgid "Upload File"
 msgstr "Вивантажити файл"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:126 src/gtr-tab.ui:300
+#: src/gtr-tab.ui:126 src/gtr-tab.ui:301
 msgid "_Original Message"
 msgstr "П_очаткове повідомлення"
 
-#: src/gtr-tab.ui:190
+#: src/gtr-tab.ui:191
 msgid "Translate_d Text"
 msgstr "Пере_кладений текст"
 
-#: src/gtr-tab.ui:268
+#: src/gtr-tab.ui:269
 msgid "Open a New File"
 msgstr "Відкрити новий файл"
 
-#: src/gtr-tab.ui:272
+#: src/gtr-tab.ui:273
 msgid "Open from Damned Lies"
 msgstr "Відкрити з Damned Lies"
 
-#: src/gtr-tab.ui:278
+#: src/gtr-tab.ui:279
 msgid "Save"
 msgstr "Зберегти"
 
-#: src/gtr-tab.ui:282
+#: src/gtr-tab.ui:283
 msgid "Save As…"
 msgstr "Зберегти як…"
 
-#: src/gtr-tab.ui:288
+#: src/gtr-tab.ui:289
 msgid "So_rt Messages by…"
 msgstr "_Критерій упорядкування повідомлень…"
 
-#: src/gtr-tab.ui:290
+#: src/gtr-tab.ui:291
 msgid "_Order of Appearance"
 msgstr "_Порядок появи"
 
-#: src/gtr-tab.ui:295
+#: src/gtr-tab.ui:296
 msgid "_Message Status"
 msgstr "Ст_ан повідомлення"
 
-#: src/gtr-tab.ui:305
+#: src/gtr-tab.ui:306
 msgid "_Translated Message"
 msgstr "П_ерекладене повідомлення"
 
-#: src/gtr-tab.ui:311
+#: src/gtr-tab.ui:312
 msgid "Show ID Column"
 msgstr "Показувати стовпчик ідентифікатора"
 
-#: src/gtr-tab.ui:323
+#: src/gtr-tab.ui:324
 msgid "Advanced Tools"
 msgstr "Додаткові інструменти"
 
-#: src/gtr-tab.ui:325
+#: src/gtr-tab.ui:326
 msgid "Fix plural messages"
 msgstr "Виправити повідомлення із формами множини"
 
@@ -1661,9 +1672,6 @@ msgstr ""
 
 #~ msgid "About"
 #~ msgstr "Про програму"
-
-#~ msgid "Edit header"
-#~ msgstr "Змінити заголовок"
 
 #~ msgid "Wrap Around"
 #~ msgstr "Циклічно"
