@@ -216,6 +216,7 @@ setup_widget (GtkSignalListItemFactory *factory,
 
   // Shortcut
   child = adw_shortcut_label_new ("");
+  gtk_widget_set_valign (child, GTK_ALIGN_CENTER);
   gtk_box_append (GTK_BOX (box), child);
 
   // Level
