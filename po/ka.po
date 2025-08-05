@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-04-21 08:39+0000\n"
-"PO-Revision-Date: 2025-05-10 03:27+0200\n"
+"POT-Creation-Date: 2025-08-05 05:28+0000\n"
+"PO-Revision-Date: 2025-08-06 01:27+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -16,16 +16,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
-#: data/org.gnome.Gtranslator.desktop.in.in:3 src/gtr-actions-app.c:89
-#: src/gtr-application.c:517 src/gtr-window.c:204 src/gtr-window.c:438
+#: data/org.gnome.Gtranslator.desktop.in.in:2 src/gtr-actions-app.c:89
+#: src/gtr-application.c:524 src/gtr-window.c:202 src/gtr-window.c:444
 msgid "Translation Editor"
 msgstr "თარგმანის რედაქტორი"
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:8
-#: data/org.gnome.Gtranslator.desktop.in.in:5
+#: data/org.gnome.Gtranslator.desktop.in.in:4
 msgid "Translate apps in your language"
 msgstr "თარგმნეთ აპები თქვენს ენაზე"
 
@@ -46,13 +46,18 @@ msgid ""
 "code viewer."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.desktop.in.in:4
+#: data/org.gnome.Gtranslator.desktop.in.in:3
 msgid "PO File Editor"
 msgstr "PO ფაილის რედაქტორი"
 
-#: data/org.gnome.Gtranslator.desktop.in.in:15
+#: data/org.gnome.Gtranslator.desktop.in.in:14
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
 msgstr "Gtranslator;Translation;Editor;Gettext;Write;"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:333
+msgid "New Window"
+msgstr "ახალი ფანჯარა"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:22
 msgid "Warn if file contains fuzzy translations"
@@ -66,7 +71,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:30
 msgid "Whether to remove the obsolete entries upon saving"
-msgstr ""
+msgstr "წაიშლება თუ არა მოძველებული ჩანაწერები შენახვისას"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:31
 msgid ""
@@ -80,6 +85,7 @@ msgstr "ფაილების ავტომატური შენახ�
 #: data/org.gnome.Gtranslator.gschema.xml.in:38
 msgid "If true, automatically save files at specified intervals."
 msgstr ""
+"თუ ჭეშმარიტია, მოხდება ფაილების ავტომატური შენახვა მითითებულ ინტერვალებში."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:44
 msgid "Auto save interval"
@@ -87,7 +93,7 @@ msgstr "ავტომატური შენახვის ინტერ�
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:45
 msgid "Interval in minutes at which to automatically save files."
-msgstr ""
+msgstr "ინტერვალი წუთებში, როცა ფაილების შენახვა ავტომატურად მოხდება."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:51
 msgid "Create backup before saving"
@@ -95,7 +101,7 @@ msgstr "შექმენით სარეზერვო ასლი შე
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:52
 msgid "If true, create a backup copy of a file before saving it."
-msgstr ""
+msgstr "თუ ჭეშმარიტია, მოხდება ფაილების მარქაფი მათ შენახვამდე."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:58
 msgid "Use profile values for header"
@@ -107,61 +113,71 @@ msgid ""
 "profile."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:68
+#: data/org.gnome.Gtranslator.gschema.xml.in:66
+msgid "Omit credits in header"
+msgstr "კრედიტების გამოტოვება თავსართში"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:67
+msgid ""
+"If true, the 'author <email> year' comment won't be added to the PO header's "
+"copyright."
+msgstr ""
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:76
 msgid "Highlight syntax in edit fields"
 msgstr "სინტაქსის გამოკვეთა ჩასწორების ველებში"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:69
+#: data/org.gnome.Gtranslator.gschema.xml.in:77
 msgid "If true, apply syntax highlighting to strings in edit fields."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:75
+#: data/org.gnome.Gtranslator.gschema.xml.in:83
 msgid "Make whitespace visible"
 msgstr "ხილული გამოტოვებები"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:76
+#: data/org.gnome.Gtranslator.gschema.xml.in:84
 msgid "If true, display whitespace in strings as representative symbols."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:82
+#: data/org.gnome.Gtranslator.gschema.xml.in:90
 msgid "Remove fuzzy status when message is changed"
-msgstr ""
+msgstr "ბუნდოვნობის სტატუსის მოცილება შეტყობინების ცვლილებისას"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:83
+#: data/org.gnome.Gtranslator.gschema.xml.in:91
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:89
+#: data/org.gnome.Gtranslator.gschema.xml.in:97
 msgid "Check spelling"
 msgstr "მართლწერის შემოწმება"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:90
+#: data/org.gnome.Gtranslator.gschema.xml.in:98
 msgid "If true, check the spelling of translated messages."
-msgstr ""
+msgstr "თუ ჭეშმარიტია, შემოწმდება თარგმნილი შეტყობინებების მართლწერა."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:101
+#: data/org.gnome.Gtranslator.gschema.xml.in:109
 msgid "Message list sort order"
 msgstr "შეტყობინებების სიის დალაგების მიმდევრობა"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:102
+#: data/org.gnome.Gtranslator.gschema.xml.in:110
 msgid ""
 "Sort order to use in the message list. Possible values are “status”, “id”, "
 "“original-text” and “translated-text”."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:109
+#: data/org.gnome.Gtranslator.gschema.xml.in:117
 msgid "Show ID column"
 msgstr "ID-ის სვეტის ჩვენება"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:110
+#: data/org.gnome.Gtranslator.gschema.xml.in:118
 msgid "If true, displays a column with the id of the message on the editor."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:122
+#: data/org.gnome.Gtranslator.gschema.xml.in:130
 msgid "Window maximized"
 msgstr "გადიდებული ფანჯარა"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:123
+#: data/org.gnome.Gtranslator.gschema.xml.in:131
 msgid "Window maximized state"
 msgstr "ფანჯრის სრულად გაშლილი მდგომარეობა"
 
@@ -169,14 +185,14 @@ msgstr "ფანჯრის სრულად გაშლილი მდგ
 msgid "Source Viewer"
 msgstr "კოდის ნახვა"
 
-#: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:279
-#: src/gtr-actions-file.c:298 src/gtr-actions-file.c:336
-#: src/gtr-actions-file.c:363 src/gtr-actions-file.c:540
-#: src/gtr-actions-file.c:583 src/gtr-actions-file.c:751 src/gtr-dl-teams.c:164
-#: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:339 src/gtr-dl-teams.c:427
-#: src/gtr-dl-teams.c:563 src/gtr-dl-teams.c:574 src/gtr-dl-teams.c:585
-#: src/gtr-dl-teams.c:616 src/gtr-dl-teams.c:683 src/gtr-tab.c:347
-#: src/gtr-window.c:158 src/gtr-window.c:336
+#: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:281
+#: src/gtr-actions-file.c:300 src/gtr-actions-file.c:338
+#: src/gtr-actions-file.c:365 src/gtr-actions-file.c:542
+#: src/gtr-actions-file.c:585 src/gtr-actions-file.c:748 src/gtr-dl-teams.c:164
+#: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:340 src/gtr-dl-teams.c:428
+#: src/gtr-dl-teams.c:564 src/gtr-dl-teams.c:575 src/gtr-dl-teams.c:586
+#: src/gtr-dl-teams.c:617 src/gtr-dl-teams.c:688 src/gtr-tab.c:349
+#: src/gtr-window.c:156 src/gtr-window.c:339
 msgid "OK"
 msgstr "დიახ"
 
@@ -198,44 +214,44 @@ msgstr ""
 msgid "translator-credits"
 msgstr "თემური დოღონაძე"
 
-#: src/gtr-actions-file.c:204 src/gtr-close-confirmation-dialog.c:338
+#: src/gtr-actions-file.c:206 src/gtr-close-confirmation-dialog.c:338
 msgid "Unsaved Changes"
 msgstr "შეუნახავი ცვლილებები"
 
-#: src/gtr-actions-file.c:208
+#: src/gtr-actions-file.c:210
 #, c-format
 msgid "Do you want to write all the changes done to %s?"
 msgstr ""
 
-#: src/gtr-actions-file.c:212
+#: src/gtr-actions-file.c:214
 msgid "Cancel"
 msgstr "გაუქმენა"
 
-#: src/gtr-actions-file.c:213
+#: src/gtr-actions-file.c:215
 msgid "Continue Without Saving"
 msgstr "შენახვის გარეშე გაგრძელება"
 
-#: src/gtr-actions-file.c:214
+#: src/gtr-actions-file.c:216
 msgid "Save and Open"
 msgstr "შენახვა და გახსნა"
 
-#: src/gtr-actions-file.c:236
+#: src/gtr-actions-file.c:238
 msgid "Open file for translation"
 msgstr "სათარგმნი ფაილის გახსნა"
 
-#: src/gtr-actions-file.c:278
+#: src/gtr-actions-file.c:280
 msgid "Could not save file"
 msgstr "ფაილის შენახვა შეუძლებელია"
 
-#: src/gtr-actions-file.c:334
+#: src/gtr-actions-file.c:336
 msgid "This file has already been uploaded"
 msgstr "ეს ფაილი უკვე ატვირთულია"
 
-#: src/gtr-actions-file.c:350
+#: src/gtr-actions-file.c:352
 msgid "Couldn't upload the file"
 msgstr "ფაილის ატვირთვა შეუძლებელია"
 
-#: src/gtr-actions-file.c:353
+#: src/gtr-actions-file.c:355
 #, c-format
 msgid ""
 "%s\n"
@@ -244,20 +260,20 @@ msgid ""
 "module."
 msgstr ""
 
-#: src/gtr-actions-file.c:362
+#: src/gtr-actions-file.c:364
 msgid "The file has been uploaded!"
 msgstr "ფაილი ატვირთულია!"
 
-#: src/gtr-actions-file.c:503
+#: src/gtr-actions-file.c:505
 msgid "Save file as…"
 msgstr "ფაილის შენახვა როგორც…"
 
-#: src/gtr-application.c:306
+#: src/gtr-application.c:313
 msgid "Fixed plurals"
 msgstr "გასწორდა მრავლობითი ფორმები"
 
-#: src/gtr-close-confirmation-dialog.c:122 src/gtr-context.c:157
-#: src/gtr-preferences-dialog.c:448 src/gtr-profile-dialog.ui:15
+#: src/gtr-close-confirmation-dialog.c:122 src/gtr-context.c:156
+#: src/gtr-preferences-dialog.c:450 src/gtr-profile-dialog.ui:15
 #: src/gtr-upload-dialog.ui:18
 msgid "_Cancel"
 msgstr "_გაუქმება"
@@ -266,7 +282,7 @@ msgstr "_გაუქმება"
 msgid "Close _Without Saving"
 msgstr "დახურვა _შენახვის გარეშე"
 
-#: src/gtr-close-confirmation-dialog.c:124 src/gtr-context.c:158
+#: src/gtr-close-confirmation-dialog.c:124 src/gtr-context.c:157
 msgid "_Save"
 msgstr "_შენახვა"
 
@@ -279,8 +295,8 @@ msgstr ""
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ცვლილებები %d დოკუმენტში სამუდამოდ დაიკარგება."
+msgstr[1] "ცვლილებები %d დოკუმენტში სამუდამოდ დაიკარგება."
 
 #: src/gtr-close-confirmation-dialog.c:316
 #, c-format
@@ -290,7 +306,11 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/gtr-context.c:170 src/gtr-context.ui:28
+#: src/gtr-context.c:173
+msgid "Edit Notes"
+msgstr "შენიშვნების ჩასწორება"
+
+#: src/gtr-context.ui:28
 msgid "Notes"
 msgstr "შენიშვნები"
 
@@ -310,39 +330,39 @@ msgstr "ბილიკები"
 msgid "Error loading module info"
 msgstr "მოდულის ინფორმაციის ჩატვირთვის შეცდომა"
 
-#: src/gtr-dl-teams.c:426
+#: src/gtr-dl-teams.c:427
 msgid "Error loading file info"
 msgstr "ფაილის ინფორმაციის ჩატვირთვის შეცდომა"
 
-#: src/gtr-dl-teams.c:444
+#: src/gtr-dl-teams.c:445
 msgid "No file found"
 msgstr "ფაილი ვერ ვიპოვე"
 
-#: src/gtr-dl-teams.c:453
+#: src/gtr-dl-teams.c:454
 msgid "No module state found."
 msgstr "მოდულის მდგომარეობა ვერ მოიძებნა."
 
-#: src/gtr-dl-teams.c:562
+#: src/gtr-dl-teams.c:563
 msgid "Error loading file"
 msgstr "ფაილის ჩატვირთვის შეცდომა"
 
-#: src/gtr-dl-teams.c:572 src/gtr-dl-teams.c:615
+#: src/gtr-dl-teams.c:573 src/gtr-dl-teams.c:616
 msgid "Error creating tmp file"
 msgstr "დროებითი ფაილის შექმნის შეცდომა"
 
-#: src/gtr-dl-teams.c:584
+#: src/gtr-dl-teams.c:585
 msgid "Error writing stream"
 msgstr "ნაკადის ჩაწერის შეცდომა"
 
-#: src/gtr-dl-teams.c:628
+#: src/gtr-dl-teams.c:629
 msgid "The file has been saved in your Downloads folder"
 msgstr "ფაილი შენახულია გადმოწერების თქვენს საქაღალდეში"
 
-#: src/gtr-dl-teams.c:682
-msgid "Could not reserve module"
-msgstr ""
-
 #: src/gtr-dl-teams.c:687
+msgid "Could not reserve module"
+msgstr "ვერ დავიცავი მოდული"
+
+#: src/gtr-dl-teams.c:692
 #, c-format
 msgid ""
 "%s\n"
@@ -350,23 +370,19 @@ msgid ""
 "profile or you don't have permissions to reserve this module."
 msgstr ""
 
-#: src/gtr-dl-teams.c:699
+#: src/gtr-dl-teams.c:704
 msgid "The file has been successfully reserved"
 msgstr "ფაილი წარმატებითაა დაცული"
 
-#: src/gtr-dl-teams.ui:7 src/gtr-projects.ui:7 src/gtr-tab.ui:332
-msgid "New Window"
-msgstr "ახალი ფანჯარა"
-
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:336
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:337
 msgid "Preferences"
 msgstr "გამართვა"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:342
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:343
 msgid "Keyboard Shortcuts"
 msgstr "კლავიატურის მალსახმობები"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:350
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:351
 msgid "About Translation Editor"
 msgstr "თარგმანის რედაქტორის შესახებ"
 
@@ -504,7 +520,7 @@ msgstr "გადაცემის კოდირება"
 msgid "Plural form"
 msgstr "Მრავლობითი ფორმა"
 
-#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:319
+#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:320
 msgid "Edit Header"
 msgstr "თავსართის ჩასწორება"
 
@@ -571,7 +587,7 @@ msgstr "PO ფაილის გადასინჯვის თარიღ�
 
 #: src/gtr-header-dialog.ui:101
 msgid "Report message _bugs to"
-msgstr ""
+msgstr "შეტყობინე_ბის შეცდომების ანგარიშის გაგზავნა მისამართზე"
 
 #: src/gtr-header-dialog.ui:109
 msgid "Comment"
@@ -617,27 +633,27 @@ msgstr "საწყისი შეტყობინება"
 msgid "Translated Message"
 msgstr "თარგმნილი შეტყობინება"
 
-#: src/gtr-po.c:489
+#: src/gtr-po.c:493
 #, c-format
 msgid "The file is empty"
 msgstr "ფაილი ცარიელია"
 
-#: src/gtr-po.c:498
+#: src/gtr-po.c:502
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "ფაილის \"%s\" გახსნის შეცდომა: %s"
 
-#: src/gtr-po.c:568
+#: src/gtr-po.c:574
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr ""
 
-#: src/gtr-po.c:584 src/gtr-po.c:603
+#: src/gtr-po.c:590 src/gtr-po.c:609
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr ""
 
-#: src/gtr-po.c:634
+#: src/gtr-po.c:640
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -645,17 +661,17 @@ msgid ""
 "Editor"
 msgstr ""
 
-#: src/gtr-po.c:702
+#: src/gtr-po.c:708
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr ""
 
-#: src/gtr-po.c:749
+#: src/gtr-po.c:755
 #, c-format
 msgid "No messages obtained from parser."
 msgstr ""
 
-#: src/gtr-po.c:803
+#: src/gtr-po.c:809
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -663,42 +679,42 @@ msgid ""
 "Your file should likely be named “%s.po”."
 msgstr ""
 
-#: src/gtr-po.c:831
+#: src/gtr-po.c:837
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr ""
 
-#: src/gtr-po.c:850
+#: src/gtr-po.c:856
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "შეცდომა PO ფაილში: %s"
 
-#: src/gtr-po.c:862
+#: src/gtr-po.c:868
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "შეცდომა PO ფაილის ჩაწერისას: %s"
 
-#: src/gtr-preferences-dialog.c:271
+#: src/gtr-preferences-dialog.c:272
 msgid "Delete"
 msgstr "წაშლა"
 
-#: src/gtr-preferences-dialog.c:431
+#: src/gtr-preferences-dialog.c:433
 msgid "Impossible to remove the active profile"
 msgstr "აქტიური პროფილის წაშლა შეუძლებელია"
 
-#: src/gtr-preferences-dialog.c:432
+#: src/gtr-preferences-dialog.c:434
 msgid "Another profile should be selected as active before"
 msgstr "მანამდე ჯერ აქტიურად სხვა პროფილი უნდა მონიშნოთ"
 
-#: src/gtr-preferences-dialog.c:435
+#: src/gtr-preferences-dialog.c:437
 msgid "_Ok"
 msgstr "_დიახ"
 
-#: src/gtr-preferences-dialog.c:443
+#: src/gtr-preferences-dialog.c:445
 msgid "Are you sure you want to delete this profile?"
 msgstr "დარწმუნებული ბრძანდებით, რომ გსურთ ამ პროფილის წაშლა?"
 
-#: src/gtr-preferences-dialog.c:449
+#: src/gtr-preferences-dialog.c:451
 msgid "_Delete"
 msgstr "_წაშლა"
 
@@ -712,7 +728,7 @@ msgstr ""
 
 #: src/gtr-preferences-dialog.ui:22
 msgid "_Remove obsolete entries on save"
-msgstr ""
+msgstr "მოძველებული ჩანაწე_რების წაშლა შენახვისას"
 
 #: src/gtr-preferences-dialog.ui:30
 msgid "Autosave"
@@ -732,7 +748,7 @@ msgstr "ავტოშენახვის _ინტერვალი"
 
 #: src/gtr-preferences-dialog.ui:41
 msgid "Number of minutes to autosave"
-msgstr ""
+msgstr "წუთების რაოდენობა ავტოშენახვისთვის"
 
 #: src/gtr-preferences-dialog.ui:56
 msgid "Create a _backup copy of files before saving"
@@ -752,7 +768,7 @@ msgstr "_შეტყობინების სინტაქსის გა
 
 #: src/gtr-preferences-dialog.ui:82
 msgid "Make _whitespace visible"
-msgstr ""
+msgstr "_ხილული გამოტოვებები"
 
 #: src/gtr-preferences-dialog.ui:88
 msgid "_Font"
@@ -784,7 +800,7 @@ msgstr "პროფილის დ_ამატება"
 
 #: src/gtr-profile-dialog.ui:7
 msgid "Translation Editor Profile"
-msgstr ""
+msgstr "თარგმანის რედაქტორის პროფილი"
 
 #: src/gtr-profile-dialog.ui:22
 msgid "_OK"
@@ -816,19 +832,19 @@ msgstr "Damned Lies ინტეგრაცია"
 
 #: src/gtr-profile-dialog.ui:89
 msgid ""
-"GNOME Damned Lies integration token, go to your profile in https://l10n."
-"gnome.org/ to get it"
+"GNOME Damned Lies integration token, go to your profile in https://"
+"l10n.gnome.org/ to get it"
 msgstr ""
 
 #: src/gtr-profile-dialog.ui:94
 msgid "_Damned Lies auth token"
-msgstr ""
+msgstr "_Damned Lies-ის ავტორიზაციის ტოკენი"
 
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:315
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:316
 msgid "Build Translation Memory"
 msgstr "თარგმანის მეხსიერების აგება"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:346
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:347
 msgid "Help"
 msgstr "დახმარება"
 
@@ -842,7 +858,7 @@ msgstr "თარგმანის ფაილის გახსნა"
 
 #: src/gtr-projects.ui:58
 msgid "Drag and drop .po files here"
-msgstr ""
+msgstr "გადმოათრიეთ და დააგდეთ .po ფაილები აქ"
 
 #: src/gtr-projects.ui:65
 msgid "_Open…"
@@ -904,27 +920,27 @@ msgstr "საწყისი ტექსტი"
 msgid "Translated text"
 msgstr "ნათარგმნი ტექსტი"
 
-#: src/gtr-tab.c:344
+#: src/gtr-tab.c:346
 msgid "There is an error in the message"
 msgstr "შეტყობინება შეცდომას შეიცავს"
 
-#: src/gtr-tab.c:562 src/gtr-tab.c:705
+#: src/gtr-tab.c:564 src/gtr-tab.c:707
 msgid "fuzzy"
 msgstr "გადღაბნილი"
 
-#: src/gtr-tab.c:735
+#: src/gtr-tab.c:737
 #, c-format
 msgid "Plural %d"
 msgstr "მრავლობითი %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1288
+#: src/gtr-tab.c:1287
 msgid "Path:"
 msgstr "მისამართი:"
 
 #: src/gtr-tab.c:1537
-msgid "Copied to clipboard"
-msgstr "დაკოპირდა გაცვლის ბაფერში"
+msgid "Copied original to clipboard"
+msgstr "ორიგინალი ტექსტი დაკოპირდა ბუფერში"
 
 #: src/gtr-tab.c:1976
 #, c-format
@@ -967,55 +983,55 @@ msgid "Upload File"
 msgstr "ფაილის ატვირთვა"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:126 src/gtr-tab.ui:300
+#: src/gtr-tab.ui:126 src/gtr-tab.ui:301
 msgid "_Original Message"
 msgstr "_საწყისი შეტყობინება"
 
-#: src/gtr-tab.ui:190
+#: src/gtr-tab.ui:191
 msgid "Translate_d Text"
 msgstr "_ნათარგმნი ტექსტი"
 
-#: src/gtr-tab.ui:268
+#: src/gtr-tab.ui:269
 msgid "Open a New File"
 msgstr "ახალი ფაილის გახსნა"
 
-#: src/gtr-tab.ui:272
+#: src/gtr-tab.ui:273
 msgid "Open from Damned Lies"
 msgstr "Damned Lies-დან გახსნა"
 
-#: src/gtr-tab.ui:278
+#: src/gtr-tab.ui:279
 msgid "Save"
 msgstr "შენახვა"
 
-#: src/gtr-tab.ui:282
+#: src/gtr-tab.ui:283
 msgid "Save As…"
 msgstr "შენახვა, როგორც…"
 
-#: src/gtr-tab.ui:288
+#: src/gtr-tab.ui:289
 msgid "So_rt Messages by…"
 msgstr "შეტყობინებების _დალაგების პირობა…"
 
-#: src/gtr-tab.ui:290
+#: src/gtr-tab.ui:291
 msgid "_Order of Appearance"
 msgstr "გამ_ოჩენის მიმდევრობა"
 
-#: src/gtr-tab.ui:295
+#: src/gtr-tab.ui:296
 msgid "_Message Status"
 msgstr "შ_ეტყობინების სტატუსი"
 
-#: src/gtr-tab.ui:305
+#: src/gtr-tab.ui:306
 msgid "_Translated Message"
 msgstr "_ნათარგმნი შეტყობინება"
 
-#: src/gtr-tab.ui:311
+#: src/gtr-tab.ui:312
 msgid "Show ID Column"
 msgstr "ID-ის სვეტის ჩვენება"
 
-#: src/gtr-tab.ui:323
+#: src/gtr-tab.ui:324
 msgid "Advanced Tools"
 msgstr "დამატებითი ხელსაწყოები"
 
-#: src/gtr-tab.ui:325
+#: src/gtr-tab.ui:326
 msgid "Fix plural messages"
 msgstr "მრავლობით შეტყობინებების გასწორება"
 
@@ -1040,174 +1056,24 @@ msgid "comment:"
 msgstr "კომენტარი:"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:187
+#: src/gtr-window.c:185
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — თარგმანის რედაქტორი"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:194
+#: src/gtr-window.c:192
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — თარგმანის რედაქტორი"
 
-#: src/gtr-window.c:335
+#: src/gtr-window.c:338
 msgid "Could not Save"
 msgstr "შენახვის შეცდომა"
 
-#: src/gtr-window.c:347
+#: src/gtr-window.c:350
 msgid "File saved"
 msgstr "ფაილი შნახულია"
-
-#: src/help-overlay.ui:11
-msgctxt "shortcut window group"
-msgid "General"
-msgstr "საერთო"
-
-#: src/help-overlay.ui:15
-msgctxt "shortcut window"
-msgid "Open file"
-msgstr "ფაილის გახსნა"
-
-#: src/help-overlay.ui:21
-msgctxt "shortcut window"
-msgid "Save the current file"
-msgstr "მიმდინარე ფაილის შენახვა"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Save the current file as"
-msgstr "მიმდინარე ფაილის შენახვა, როგორც"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Download from DL"
-msgstr "DL-დან გადმოწერა"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Upload to DL"
-msgstr "DL-ზე ატვირთვა"
-
-#: src/help-overlay.ui:45
-msgctxt "shortcut window"
-msgid "Preferences"
-msgstr "გამართვა"
-
-#: src/help-overlay.ui:51
-msgctxt "shortcut window"
-msgid "Keyboard Shortcuts"
-msgstr "კლავიატურის მალსახმობები"
-
-#: src/help-overlay.ui:57
-msgctxt "shortcut window"
-msgid "Help"
-msgstr "დახმარება"
-
-#: src/help-overlay.ui:63
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "ახალი ფანჯარა"
-
-#: src/help-overlay.ui:69
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr "გასვლა"
-
-#: src/help-overlay.ui:77
-msgctxt "shortcut window group"
-msgid "Edit"
-msgstr "რედაქტირება"
-
-#: src/help-overlay.ui:81
-msgctxt "shortcut window"
-msgid "Clear translation"
-msgstr "თარგმანის გაწმენდა"
-
-#: src/help-overlay.ui:87
-msgctxt "shortcut window"
-msgid "Mark/Unmark as fuzzy"
-msgstr "ბუნდოვნების ნიშნის დადება/მოხსნა"
-
-#: src/help-overlay.ui:93
-msgctxt "shortcut window"
-msgid "Copy original text to translation"
-msgstr "ორიგინალი ტექსტის თარგმანში კოპირება"
-
-#: src/help-overlay.ui:99
-msgctxt "shortcut window"
-msgid "Copy original text to clipboard"
-msgstr "ორიგინალი ტექსტის ბუფერში კოპირება"
-
-#: src/help-overlay.ui:107
-msgctxt "shortcut window group"
-msgid "Navigation"
-msgstr "ნავიგაცია"
-
-#: src/help-overlay.ui:111
-msgctxt "shortcut window"
-msgid "Go to the previous message"
-msgstr "წინა შეტყობინებაზე გადასვლა"
-
-#: src/help-overlay.ui:117
-msgctxt "shortcut window"
-msgid "Go to the next message"
-msgstr "შემდეგ შეტყობინებაზე გადასვლა"
-
-#: src/help-overlay.ui:123
-msgctxt "shortcut window"
-msgid "Go to the previous untranslated message"
-msgstr "წინა უთარგმნელ შეტყობინებაზე გადასვლა"
-
-#: src/help-overlay.ui:129
-msgctxt "shortcut window"
-msgid "Go to the next untranslated message"
-msgstr "შემდეგ უთარგმნელ შეტყობინებაზე გადასვლა"
-
-#: src/help-overlay.ui:137
-msgctxt "shortcut window group"
-msgid "Translation Memory"
-msgstr "თარგმანის მეხსიერება"
-
-#: src/help-overlay.ui:141
-msgctxt "shortcut window"
-msgid "Build translation memory"
-msgstr "თარგმანის მეხსიერების აგება"
-
-#: src/help-overlay.ui:147
-msgctxt "shortcut window"
-msgid "Use 1st...9th suggestion"
-msgstr "გამოიყენეთ 1... მე -9 შეთავაზება"
-
-#: src/help-overlay.ui:155
-msgctxt "shortcut window group"
-msgid "Find & Replace"
-msgstr "პოვნა და ჩანაცვლება"
-
-#: src/help-overlay.ui:159
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "ძიება"
-
-#: src/help-overlay.ui:165
-msgctxt "shortcut window"
-msgid "Find & Replace"
-msgstr "პოვნა და ჩანაცვლება"
-
-#: src/help-overlay.ui:171
-msgctxt "shortcut window"
-msgid "Forward-search"
-msgstr "წინ ძებნა"
-
-#: src/help-overlay.ui:177
-msgctxt "shortcut window"
-msgid "Backward-search"
-msgstr "უკან ძებნა"
-
-#: src/help-overlay.ui:183
-msgctxt "shortcut window"
-msgid "Hide find & replace bar"
-msgstr "ძებნისა და ჩანაცვლების პანელის დამალვა"
 
 #: src/main.c:97
 msgid "— Edit PO files"
@@ -1222,6 +1088,161 @@ msgstr ""
 "%s\n"
 "გაუშვით '%s --help' ხელმისაწვდომი ბრძანების სტრიქონის პარამეტრების სრული "
 "სიის სანახავად.\n"
+
+#: src/shortcuts-dialog.ui:6
+msgctxt "shortcut window group"
+msgid "General"
+msgstr "საერთო"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "Open file"
+msgstr "ფაილის გახსნა"
+
+#: src/shortcuts-dialog.ui:16
+msgctxt "shortcut window"
+msgid "Save the current file"
+msgstr "მიმდინარე ფაილის შენახვა"
+
+#: src/shortcuts-dialog.ui:22
+msgctxt "shortcut window"
+msgid "Save the current file as"
+msgstr "მიმდინარე ფაილის შენახვა, როგორც"
+
+#: src/shortcuts-dialog.ui:28
+msgctxt "shortcut window"
+msgid "Download from DL"
+msgstr "DL-დან გადმოწერა"
+
+#: src/shortcuts-dialog.ui:34
+msgctxt "shortcut window"
+msgid "Upload to DL"
+msgstr "DL-ზე ატვირთვა"
+
+#: src/shortcuts-dialog.ui:40
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "გამართვა"
+
+#: src/shortcuts-dialog.ui:46
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "კლავიატურის მალსახმობები"
+
+#: src/shortcuts-dialog.ui:52
+msgctxt "shortcut window"
+msgid "Help"
+msgstr "დახმარება"
+
+#: src/shortcuts-dialog.ui:58
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "ახალი ფანჯარა"
+
+#: src/shortcuts-dialog.ui:63
+msgctxt "shortcut window"
+msgid "Close Window"
+msgstr "ფანჯრის დახურვა"
+
+#: src/shortcuts-dialog.ui:70
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "გასვლა"
+
+#: src/shortcuts-dialog.ui:78
+msgctxt "shortcut window group"
+msgid "Edit"
+msgstr "რედაქტირება"
+
+#: src/shortcuts-dialog.ui:82
+msgctxt "shortcut window"
+msgid "Clear translation"
+msgstr "თარგმანის გაწმენდა"
+
+#: src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Mark/Unmark as fuzzy"
+msgstr "ბუნდოვნების ნიშნის დადება/მოხსნა"
+
+#: src/shortcuts-dialog.ui:94
+msgctxt "shortcut window"
+msgid "Copy original text to translation"
+msgstr "ორიგინალი ტექსტის თარგმანში კოპირება"
+
+#: src/shortcuts-dialog.ui:100
+msgctxt "shortcut window"
+msgid "Copy original text to clipboard"
+msgstr "ორიგინალი ტექსტის ბუფერში კოპირება"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window group"
+msgid "Navigation"
+msgstr "ნავიგაცია"
+
+#: src/shortcuts-dialog.ui:112
+msgctxt "shortcut window"
+msgid "Go to the previous message"
+msgstr "წინა შეტყობინებაზე გადასვლა"
+
+#: src/shortcuts-dialog.ui:118
+msgctxt "shortcut window"
+msgid "Go to the next message"
+msgstr "შემდეგ შეტყობინებაზე გადასვლა"
+
+#: src/shortcuts-dialog.ui:124
+msgctxt "shortcut window"
+msgid "Go to the previous untranslated message"
+msgstr "წინა უთარგმნელ შეტყობინებაზე გადასვლა"
+
+#: src/shortcuts-dialog.ui:130
+msgctxt "shortcut window"
+msgid "Go to the next untranslated message"
+msgstr "შემდეგ უთარგმნელ შეტყობინებაზე გადასვლა"
+
+#: src/shortcuts-dialog.ui:138
+msgctxt "shortcut window group"
+msgid "Translation Memory"
+msgstr "თარგმანის მეხსიერება"
+
+#: src/shortcuts-dialog.ui:142
+msgctxt "shortcut window"
+msgid "Build translation memory"
+msgstr "თარგმანის მეხსიერების აგება"
+
+#: src/shortcuts-dialog.ui:148
+msgctxt "shortcut window"
+msgid "Use 1st...9th suggestion"
+msgstr "გამოიყენეთ 1... მე -9 შეთავაზება"
+
+#: src/shortcuts-dialog.ui:156
+msgctxt "shortcut window group"
+msgid "Find & Replace"
+msgstr "პოვნა და ჩანაცვლება"
+
+#: src/shortcuts-dialog.ui:160
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "ძიება"
+
+#: src/shortcuts-dialog.ui:166
+msgctxt "shortcut window"
+msgid "Find & Replace"
+msgstr "პოვნა და ჩანაცვლება"
+
+#: src/shortcuts-dialog.ui:172
+msgctxt "shortcut window"
+msgid "Forward-search"
+msgstr "წინ ძებნა"
+
+#: src/shortcuts-dialog.ui:178
+msgctxt "shortcut window"
+msgid "Backward-search"
+msgstr "უკან ძებნა"
+
+#: src/shortcuts-dialog.ui:184
+msgctxt "shortcut window"
+msgid "Hide find & replace bar"
+msgstr "ძებნისა და ჩანაცვლების პანელის დამალვა"
 
 #: src/translation-memory/gtr-translation-memory-dialog.c:77
 msgid "Select PO directory"
@@ -1293,6 +1314,9 @@ msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
 msgstr ""
+
+#~ msgid "Copied to clipboard"
+#~ msgstr "დაკოპირდა გაცვლის ბაფერში"
 
 #~ msgid "Translate and localize applications and libraries"
 #~ msgstr "თარგნეთ აპლიკაციები და ბიბლიოთეკები"
@@ -1450,9 +1474,6 @@ msgstr ""
 
 #~ msgid "About"
 #~ msgstr "შესახებ"
-
-#~ msgid "Edit header"
-#~ msgstr "თავსართის ჩასწორება"
 
 #~ msgid "Wrap Around"
 #~ msgstr "სიტყვების გადატანა"
