@@ -290,7 +290,7 @@ gtr_translation_memory_ui_dispose (GObject * object)
   GtrTranslationMemoryUi *tm_ui = GTR_TRANSLATION_MEMORY_UI (object);
   GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (tm_ui);
 
-  DEBUG_PRINT ("Dispose translation memory ui");
+  g_debug ("Dispose translation memory ui");
 
   g_clear_object (&priv->msg);
 
@@ -303,7 +303,7 @@ gtr_translation_memory_ui_finalize (GObject * object)
   GtrTranslationMemoryUi *tm_ui = GTR_TRANSLATION_MEMORY_UI (object);
   GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (tm_ui);
 
-  DEBUG_PRINT ("Finalize translation memory ui");
+  g_debug ("Finalize translation memory ui");
 
   g_strfreev (priv->tm_list);
   g_free (priv->tm_list_id);

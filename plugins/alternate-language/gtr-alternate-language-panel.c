@@ -361,7 +361,7 @@ gtr_alternate_lang_panel_dispose (GObject *object)
 {
   GtrAlternateLangPanel *panel = GTR_ALTERNATE_LANG_PANEL (object);
 
-  DEBUG_PRINT ("Disposing alternate lang panel");
+  g_debug ("Disposing alternate lang panel");
 
   if (panel->priv->showed_message_id != 0)
     {
