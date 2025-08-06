@@ -195,11 +195,11 @@ row_activated (GtkListView            *view,
                uint                    position,
                GtrTranslationMemoryUi *tm_ui)
 {
-  GtkSingleSelection *model;
+  GListModel *model;
   g_autoptr(GtrTm) tm;
 
-  model = GTK_SINGLE_SELECTION (gtk_list_view_get_model (view));
-  tm = GTR_TM (g_list_model_get_object (gtk_single_selection_get_model (model), position));
+  model = G_LIST_MODEL (gtk_list_view_get_model (view));
+  tm = GTR_TM (g_list_model_get_object (model, position));
   choose_translation (tm_ui, tm->match);
 }
 
@@ -275,7 +275,7 @@ gtr_translation_memory_ui_init (GtrTranslationMemoryUi * tm_ui)
   g_signal_connect (factory, "setup", G_CALLBACK (setup_widget), NULL);
   g_signal_connect (factory, "bind", G_CALLBACK (bind_widget), NULL);
 
-  model = GTK_SELECTION_MODEL (gtk_single_selection_new ((G_LIST_MODEL (priv->model))));
+  model = GTK_SELECTION_MODEL (gtk_no_selection_new ((G_LIST_MODEL (priv->model))));
   priv->view = gtk_list_view_new (model, factory);
   gtk_widget_add_css_class (priv->view, "navigation-sidebar");
   gtk_widget_set_vexpand (priv->view, TRUE);
