@@ -32,7 +32,6 @@
 #include "gtr-utils.h"
 #include "gtr-view.h"
 #include "gtr-application.h"
-#include "gtr-debug.h"
 
 #include <glib.h>
 #include <glib/gi18n.h>

@@ -12,7 +12,6 @@ gtr_build_ident_h = vcs_tag(
 enum_headers = files(
   'gtr-application.h',
   'gtr-context.h',
-  'gtr-debug.h',
   'gtr-header.h',
   'gtr-message-container.h',
   'gtr-message-table.h',

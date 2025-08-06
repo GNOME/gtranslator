@@ -25,7 +25,6 @@
 #include "gtr-po.h"
 #include "gtr-tab.h"
 #include "gtr-view.h"
-#include "gtr-debug.h"
 #include "gtr-utils.h"
 
 #include <string.h>

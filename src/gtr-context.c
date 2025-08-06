@@ -22,7 +22,6 @@
 
 #include "gtr-context.h"
 #include "gtr-tab.h"
-#include "gtr-debug.h"
 #include "gtr-utils.h"
 #include "translation-memory/gtr-translation-memory-ui.h"
 

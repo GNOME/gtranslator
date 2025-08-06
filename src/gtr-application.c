@@ -29,7 +29,6 @@
 #include "gtr-actions.h"
 #include "gtr-actions-app.h"
 #include "gtr-application.h"
-#include "gtr-debug.h"
 #include "gtr-dirs.h"
 #include "gtr-settings.h"
 #include "gtr-utils.h"

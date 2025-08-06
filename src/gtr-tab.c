@@ -43,7 +43,6 @@
 #include "gtr-settings.h"
 #include "gtr-view.h"
 #include "gtr-dirs.h"
-#include "gtr-debug.h"
 #include "gtr-window.h"
 #include "gtr-progress.h"
 #include "gtr-actions.h"

@@ -29,7 +29,6 @@
 #include "gtr-tab.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
-#include "gtr-debug.h"
 
 #include <string.h>
 #include <glib.h>

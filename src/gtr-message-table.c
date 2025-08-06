@@ -27,7 +27,6 @@
 #include <config.h>
 #endif
 
-#include "gtr-debug.h"
 #include "gtr-message-table-row.h"
 #include "gtr-message-table.h"
 #include "gtr-msg.h"

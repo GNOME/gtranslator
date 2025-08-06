@@ -32,7 +32,6 @@
 #endif
 
 #include "gtr-application.h"
-#include "gtr-debug.h"
 #include "gtr-file-dialogs.h"
 #include "gtr-po.h"
 #include "gtr-msg.h"
