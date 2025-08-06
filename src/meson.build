@@ -119,11 +119,16 @@ incs = [
   codeview_inc,
 ]
 
+c_args = [
+  '-DG_LOG_DOMAIN="@0@"'.format(gtr_app_id),
+]
+
 libgtranslator = shared_library(
   meson.project_name(),
   sources: sources + translation_mem_sources + codeview_sources + [gtr_build_ident_h],
   include_directories: incs,
   dependencies: gtr_deps,
+  c_args: c_args,
 )
 
 libgtranslator_dep = declare_dependency(
@@ -138,6 +143,7 @@ libgtranslator_dep = declare_dependency(
 executable(
   meson.project_name(),
   'main.c',
+  c_args: c_args,
   include_directories: top_inc,
   dependencies: gtr_deps,
   objects: libgtranslator.extract_all_objects(recursive: true),

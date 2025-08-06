@@ -16,8 +16,6 @@
  *
  */
 
-#define G_LOG_DOMAIN "gtr-search-bar"
-
 #include "config.h"
 
 #include <glib/gi18n.h>
