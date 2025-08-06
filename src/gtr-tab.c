@@ -825,6 +825,8 @@ gtr_tab_dispose (GObject * object)
 {
   GtrTabPrivate *priv;
 
+  g_debug ("Disposing tab");
+
   priv = gtr_tab_get_instance_private (GTR_TAB (object));
 
   g_clear_object (&priv->po);

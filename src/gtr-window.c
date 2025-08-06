@@ -290,6 +290,8 @@ gtr_window_dispose (GObject * object)
   GtrWindow *window = GTR_WINDOW (object);
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
 
+  g_debug ("Dispose window");
+
   g_clear_object (&priv->state_settings);
   g_clear_object (&priv->ui_settings);
   g_clear_object (&priv->prof_manager);

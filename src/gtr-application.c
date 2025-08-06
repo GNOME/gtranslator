@@ -169,6 +169,9 @@ gtr_application_dispose (GObject * object)
   GtrApplication *app = GTR_APPLICATION (object);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
+  g_debug ("Disposing App");
+
+
   g_clear_object (&priv->settings);
   g_clear_object (&priv->window_settings);
 
@@ -523,6 +526,8 @@ gtr_application_startup (GApplication *application)
   g_set_application_name (_("Translation Editor"));
   gtk_window_set_default_icon_name (PACKAGE_APPID);
 
+  g_debug ("App startup");
+
   gtk_source_init ();
 
   g_action_map_add_action_entries (G_ACTION_MAP (application), app_entries,
@@ -620,6 +625,8 @@ gtr_application_activate (GApplication *application)
 {
   GtkWindow *window;
   G_APPLICATION_CLASS (gtr_application_parent_class)->activate (application);
+
+  g_debug ("App activate");
 
   window = gtk_application_get_active_window (GTK_APPLICATION (application));
 

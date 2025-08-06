@@ -374,6 +374,8 @@ gtr_context_panel_constructed (GObject *object)
 static void
 gtr_context_panel_dispose (GObject *object)
 {
+  g_debug ("Disposing context panel");
+
   G_OBJECT_CLASS (gtr_context_panel_parent_class)->dispose (object);
 }
 
