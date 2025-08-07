@@ -598,15 +598,15 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog *dlg,
                                             GtrWindow *window)
 {
   GList *selected_documents;
+
+  adw_dialog_close (ADW_DIALOG (dlg));
   if (g_strcmp0 (response, "yes") == 0)
     {
       /* Save and Close */
       selected_documents = gtr_close_confirmation_dialog_get_selected_documents (dlg);
       if (selected_documents == NULL)
         {
-          adw_dialog_close (ADW_DIALOG (dlg));
           close_all_tabs (window);
-          return;
         }
       else
         {
@@ -616,12 +616,8 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog *dlg,
     }
   else if (g_strcmp0 (response, "no") == 0)
     {
-      adw_dialog_close (ADW_DIALOG (dlg));
       close_all_tabs (window);
-      return;
     }
-
-  adw_dialog_close (ADW_DIALOG (dlg));
 }
 
 void
