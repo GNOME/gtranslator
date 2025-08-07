@@ -315,7 +315,10 @@ gtr_window_close_request (GtkWindow *window)
 
   save_window_state (GTR_WINDOW (window));
 
-  return GTK_WINDOW_CLASS (gtr_window_parent_class)->close_request (window);
+  // Window is removed in gtr_file_quit, after confirmation of save
+  // dialog, return TRUE will avoid the close of the window and let
+  // the gtr_file_quit handle it with the close confirmation dialog
+  return TRUE;
 }
 
 void
