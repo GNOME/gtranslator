@@ -307,13 +307,23 @@ find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
   // Do the search in all views, keeping the state from previous calls.
   if (viewsaux == NULL)
     viewsaux = views;
+  else
+    g_free (views);
 
   while (viewsaux != NULL)
     {
       offset = run_search (GTR_VIEW (viewsaux->data), offset);
       if (offset > 0)
         return TRUE;
-      viewsaux = viewsaux->next;
+      if (viewsaux->next != NULL)
+        {
+          viewsaux = viewsaux->next;
+        }
+      else
+        {
+          g_free (viewsaux);
+          viewsaux = NULL;
+        }
     }
 
   return FALSE;
