@@ -428,22 +428,27 @@ add_actions (GtrSearchBar *self)
 
   action = g_property_action_new ("case-sensitive", self, "case-sensitive");
   g_action_map_add_action (G_ACTION_MAP (group), G_ACTION (action));
+  g_object_unref (action);
 
   action = g_property_action_new ("at-word-boundaries", self, "at-word-boundaries");
   g_action_map_add_action (G_ACTION_MAP (group), G_ACTION (action));
+  g_object_unref (action);
 
   action = g_property_action_new ("wrap-around", self, "wrap-around");
   g_action_map_add_action (G_ACTION_MAP (group), G_ACTION (action));
+  g_object_unref (action);
 
   action = g_property_action_new ("at-original-text", self, "at-original-text");
   g_action_map_add_action (G_ACTION_MAP (group), G_ACTION (action));
+  g_object_unref (action);
 
   action = g_property_action_new ("at-translated-text", self, "at-translated-text");
   g_action_map_add_action (G_ACTION_MAP (group), G_ACTION (action));
+  g_object_unref (action);
 
   gtk_widget_insert_action_group (GTK_WIDGET (self), "search-settings", G_ACTION_GROUP (group));
 
-  g_object_unref (action);
+  g_object_unref (group);
 }
 
 
