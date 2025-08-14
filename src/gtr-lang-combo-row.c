@@ -60,7 +60,7 @@ gtr_lang_combo_row_init (GtrLangComboRow *self)
   const GSList *o;
   GSList *langs;
   GtrLangComboRowPrivate *priv = gtr_lang_combo_row_get_instance_private (self);
-  GtkExpression *expression = NULL;
+  g_autoptr(GtkExpression) expression = NULL;
 
   languages = gtr_language_get_languages ();
   langs = g_slist_copy_deep ((GSList *)languages, copy_lang, NULL);
