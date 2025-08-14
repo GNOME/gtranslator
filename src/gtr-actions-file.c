@@ -167,8 +167,6 @@ gtr_po_parse_files_from_dialog (GObject *source, GAsyncResult *res, void *user_d
    */
   locations = g_slist_append (locations, file);
   load_file_list (window, locations);
-
-  g_object_unref (dialog);
 }
 
 static void
@@ -231,7 +229,7 @@ gtr_want_to_save_current_dialog (GtrWindow * window, void (*callback)(GtrWindow 
 static void
 gtr_open_file_dialog_nocheck (GtrWindow *window)
 {
-  GtkFileDialog *dialog;
+  g_autoptr(GtkFileDialog) dialog = NULL;
 
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
                                  FILESEL_OPEN,
@@ -498,7 +496,7 @@ gtr_upload_file_dialog (GtrWindow * window)
 void
 gtr_save_file_as_dialog (GtrWindow * window)
 {
-  GtkFileDialog *dialog;
+  g_autoptr(GtkFileDialog) dialog = NULL;
 
   dialog = gtr_file_chooser_new (GTK_WINDOW (window),
                                  FILESEL_SAVE,
