@@ -73,11 +73,11 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
   GList *current;
   GtrView *active_view;
   GtrHeader *header;
-  gchar *dl_lang;
-  gchar *dl_module;
-  gchar *dl_branch;
-  gchar *dl_domain;
-  gchar *dl_module_state;
+  g_autofree gchar *dl_lang  = NULL;
+  g_autofree gchar *dl_module  = NULL;
+  g_autofree gchar *dl_branch  = NULL;
+  g_autofree gchar *dl_domain  = NULL;
+  g_autofree gchar *dl_module_state  = NULL;
 
   /*
    * If the filename can't be opened, pass the error back to the caller
