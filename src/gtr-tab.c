@@ -436,6 +436,7 @@ gtr_message_translation_update (GtkTextBuffer * textbuffer, GtrTab * tab)
 
       /* Write back to PO file in memory */
       gtr_msg_set_msgstr_plural (msg, i, translation);
+      g_free (translation);
       return;
     }
 
