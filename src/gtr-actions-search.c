@@ -446,7 +446,8 @@ void
 do_replace_all (GtrSearchBar *searchbar, GtrWindow * window)
 {
   GtrTab *tab;
-  GList *views, *l;
+  g_autoptr (GList) views = NULL;
+  GList *l;
   GList *current_msg, *aux;
   const gchar *search_entry_text;
   const gchar *replace_entry_text;
