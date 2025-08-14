@@ -109,7 +109,7 @@ gtr_lang_combo_row_set_lang (GtrLangComboRow *self,
 {
   GtrLangComboRowPrivate *priv = gtr_lang_combo_row_get_instance_private (GTR_LANG_COMBO_ROW (self));
   unsigned int lang_pos = 0;
-  GtrDropDownOption *option = gtr_drop_down_option_new (name, NULL);
+  g_autoptr(GtrDropDownOption) option = gtr_drop_down_option_new (name, NULL);
 
   g_list_store_find_with_equal_func (
     priv->model,
