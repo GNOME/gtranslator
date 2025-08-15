@@ -684,8 +684,8 @@ update_comments (GtrHeader *header, const gchar *comments)
   GtrProfile *active_profile;
   GString *new_comments;
   gchar **comment_lines;
-  gchar *translator;
-  gchar *email;
+  g_autofree char *translator = NULL;
+  g_autofree char *email = NULL;
   gchar *current_year;
   gchar *first_year = NULL;
   gchar *years = NULL;
