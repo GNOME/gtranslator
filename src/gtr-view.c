@@ -115,7 +115,6 @@ gtr_view_init (GtrView * view)
 
   priv->buffer = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
   gtk_source_buffer_set_language (priv->buffer, lang);
-  gtk_text_view_set_buffer (GTK_TEXT_VIEW (view), GTK_TEXT_BUFFER (priv->buffer));
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), GTK_WRAP_WORD);
 
   /* Set syntax highlight according to preferences */
