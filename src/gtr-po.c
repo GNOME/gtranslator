@@ -827,6 +827,7 @@ gtr_po_save_file (GtrPo * po, GError ** error)
         }
     }
 
+  po_message_iterator_free (iter);
 
   if (is_read_only (filename))
     {
