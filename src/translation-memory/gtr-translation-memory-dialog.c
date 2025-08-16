@@ -71,7 +71,7 @@ select_folder_cb (GtkFileDialog *dialog, GAsyncResult *res, gpointer user_data)
 static void
 select_directory_activated_cb (GtrTranslationMemoryDialog *dlg)
 {
-  GtkFileDialog *dialog;
+  g_autoptr(GtkFileDialog) dialog = NULL;
 
   dialog = gtk_file_dialog_new ();
   gtk_file_dialog_set_title (dialog, _("Select PO directory"));
