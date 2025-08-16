@@ -61,7 +61,7 @@ void gtr_file_close (GtrWindow * window);
 void gtr_file_quit (GtrWindow * window);
 
 void gtr_actions_load_locations (GtrWindow * window,
-                                 const GSList * locations);
+                                 GSList * locations);
 
 void _gtr_actions_file_close_all (GtrWindow * window);
 

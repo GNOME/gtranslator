@@ -44,7 +44,7 @@
 
 #define GTR_TAB_SAVE_AS "gtr-tab-save-as"
 
-static void load_file_list (GtrWindow * window, const GSList * uris);
+static void load_file_list (GtrWindow * window, GSList * uris);
 static GList * get_modified_documents (GtrWindow * window);
 
 typedef struct {
@@ -506,7 +506,7 @@ gtr_save_file_as_dialog (GtrWindow * window)
 }
 
 static void
-load_file_list (GtrWindow * window, const GSList * locations)
+load_file_list (GtrWindow * window, GSList * locations)
 {
   GSList *locations_to_load = NULL;
   g_autoptr (GError) error = NULL;
@@ -552,7 +552,7 @@ load_file_list (GtrWindow * window, const GSList * locations)
  * Ignore non-existing URIs
  */
 void
-gtr_actions_load_locations (GtrWindow * window, const GSList * locations)
+gtr_actions_load_locations (GtrWindow * window, GSList * locations)
 {
   g_return_if_fail (GTR_IS_WINDOW (window));
   g_return_if_fail ((locations != NULL) && (locations->data != NULL));
