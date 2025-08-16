@@ -133,13 +133,13 @@ gtr_gda_utils_split_string_in_words (const gchar * string)
         start = s;
       if (attrs[i].is_word_end)
         {
-          gchar *word;
+          g_autofree gchar *word = NULL;
 
           end = s;
           word = g_strndup (start, end - start);
 
           if (check_good_word (word, badwords_collate))
-            g_ptr_array_add (array, word);
+            g_ptr_array_add (array, g_steal_pointer (&word));
         }
 
       i++;
