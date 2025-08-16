@@ -450,7 +450,7 @@ _gtr_po_load (GtrPo * po, GFile * location, GError ** error)
   po_message_iterator_t iter;
   po_message_t message;
   const gchar *msgid;
-  gchar *filename;
+  g_autofree char *filename = NULL;
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
   /*
@@ -483,7 +483,6 @@ _gtr_po_load (GtrPo * po, GFile * location, GError ** error)
     }
 
   priv->gettext_po_file = po_file_read (filename, &handler);
-  g_free (filename);
 
   if (po_file_is_empty (priv->gettext_po_file))
     {
@@ -500,7 +499,6 @@ _gtr_po_load (GtrPo * po, GFile * location, GError ** error)
                    GTR_PO_ERROR_FILENAME,
                    _("Failed opening file “%s”: %s"),
                    filename, g_strerror (errno));
-      g_free (filename);
       return FALSE;
     }
 
