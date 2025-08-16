@@ -165,7 +165,7 @@ gtr_po_parse_files_from_dialog (GObject *source, GAsyncResult *res, void *user_d
   /*
    * Open the file via our centralized opening function.
    */
-  locations = g_slist_append (locations, file);
+  locations = g_slist_append (locations, g_steal_pointer (&file));
   load_file_list (window, locations);
 }
 
@@ -542,7 +542,7 @@ load_file_list (GtrWindow * window, GSList * locations)
       adw_dialog_present (dialog, GTK_WIDGET (window));
     }
 
-  g_slist_free ((GSList *) locations_to_load);
+  g_slist_free_full (locations, g_object_unref);
 }
 
 
