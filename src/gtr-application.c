@@ -592,7 +592,7 @@ gtr_application_setup_window (GApplication *application,
          * malformed files passed on the command-line.
          */
         if (files[i] != NULL)
-          file_list = g_slist_prepend (file_list, files[i]);
+          file_list = g_slist_prepend (file_list, g_object_ref (files[i]));
     }
   window = gtr_application_create_window (GTR_APPLICATION (application));
 
