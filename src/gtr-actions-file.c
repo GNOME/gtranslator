@@ -68,7 +68,7 @@ user_data_free (UserData *ud)
 gboolean
 gtr_open (GFile * location, GtrWindow * window, GError ** error)
 {
-  g_autoptr (GtrPo) po;
+  g_autoptr (GtrPo) po = NULL;
   GtrTab *tab;
   GList *current;
   GtrView *active_view;
