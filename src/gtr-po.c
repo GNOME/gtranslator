@@ -965,15 +965,20 @@ gtr_po_set_state (GtrPo * po, GtrPoState state)
   g_object_notify (G_OBJECT (po), "state");
 }
 
-void gtr_po_set_dl_info (GtrPo * po, gchar * lang, gchar * module_name,
-                         gchar * branch, gchar * domain, gchar * module_state)
+void
+gtr_po_set_dl_info (GtrPo *po,
+                    const gchar *lang,
+                    const gchar *module_name,
+                    const gchar *branch,
+                    const gchar *domain,
+                    const gchar *module_state)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-  priv->dl_lang = g_strdup (lang);
-  priv->dl_module = g_strdup (module_name);
-  priv->dl_branch = g_strdup (branch);
-  priv->dl_domain = g_strdup (domain);
-  priv->dl_state = g_strdup (module_state);
+  g_set_str (&priv->dl_lang, lang);
+  g_set_str (&priv->dl_module, module_name);
+  g_set_str (&priv->dl_branch, branch);
+  g_set_str (&priv->dl_domain, domain);
+  g_set_str (&priv->dl_state, module_state);
 
   if (lang)
     gtr_header_set_field (priv->header, "X-DL-Lang", lang);
