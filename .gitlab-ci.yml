@@ -43,3 +43,12 @@ clang-format:
     - git diff -U0 --no-color --relative $CI_MERGE_REQUEST_TARGET_BRANCH_NAME -- ':!build-aux/flatpak/*.json' | scripts/check-diff-style.sh
   rules:
     - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_PROJECT_NAMESPACE != "GNOME"
+
+check-potfiles:
+  image: fedora:latest
+  stage: check
+  script:
+    - dnf install --quiet -y gettext python3
+    - curl --proto '=https' --tlsv1.2 -sSf -O
+        https://gitlab.gnome.org/msandova/check-potfiles/-/raw/master/check_potfiles.py
+    - python3 check_potfiles.py --directory src --directory data
