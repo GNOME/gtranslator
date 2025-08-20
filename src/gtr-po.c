@@ -678,10 +678,7 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
   priv->location = g_file_dup (location);
 
   if (!_gtr_po_load_ensure_utf8 (po, error))
-    {
-      g_object_unref (po);
-      return FALSE;
-    }
+    return FALSE;
 
   /*
    * No need to return; this can be corrected by the user
@@ -703,7 +700,6 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
                    GTR_PO_ERROR,
                    GTR_PO_ERROR_GETTEXT,
                    _("Gettext returned a null message domain list."));
-      g_object_unref (po);
       return FALSE;
     }
   while (domains[i])
@@ -750,7 +746,6 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
                    GTR_PO_ERROR,
                    GTR_PO_ERROR_OTHER,
                    _("No messages obtained from parser."));
-      g_object_unref (po);
       return FALSE;
     }
 
