@@ -19,8 +19,7 @@
 #include <config.h>
 #endif
 
-#include <libgda.h>
-#include <sql-parser/gda-sql-parser.h>
+#include <sqlite3.h>
 #include "gtr-gda.h"
 #include "gtr-translation-memory.h"
 #include "gtr-dirs.h"
@@ -30,27 +29,27 @@
 #include <glib-object.h>
 #include <string.h>
 
+G_DEFINE_QUARK (gtr_gda_error, gtr_gda_error)
+
 static void
 gtr_translation_memory_iface_init (GtrTranslationMemoryInterface * iface);
 
 typedef struct
 {
-  GdaConnection *db;
-
-  GdaSqlParser *parser;
+  sqlite3 *db;
 
   /* prepared statements */
-  GdaStatement *stmt_find_orig;
-  GdaStatement *stmt_select_trans;
-  GdaStatement *stmt_select_word;
-  GdaStatement *stmt_find_trans;
+  sqlite3_stmt *stmt_find_orig;
+  sqlite3_stmt *stmt_select_trans;
+  sqlite3_stmt *stmt_select_word;
+  sqlite3_stmt *stmt_find_trans;
 
-  GdaStatement *stmt_insert_orig;
-  GdaStatement *stmt_insert_word;
-  GdaStatement *stmt_insert_link;
-  GdaStatement *stmt_insert_trans;
+  sqlite3_stmt *stmt_insert_orig;
+  sqlite3_stmt *stmt_insert_word;
+  sqlite3_stmt *stmt_insert_link;
+  sqlite3_stmt *stmt_insert_trans;
 
-  GdaStatement *stmt_delete_trans;
+  sqlite3_stmt *stmt_delete_trans;
 
   guint max_omits;
   guint max_delta;
@@ -66,81 +65,201 @@ G_DEFINE_FINAL_TYPE_WITH_CODE (GtrGda,
                                G_IMPLEMENT_INTERFACE (GTR_TYPE_TRANSLATION_MEMORY,
                                                       gtr_translation_memory_iface_init))
 
-static gint
-select_integer (GdaConnection *db,
-                GdaStatement *stmt,
-                GdaSet *params,
-                GError **error)
+static void
+bind_int (sqlite3_stmt *stmt, int idx, int value)
 {
-  GdaDataModel *model;
-  GError *inner_error;
-  gint result = 0;
+  int rc = sqlite3_bind_int (stmt, idx, value);
+  if (rc != SQLITE_OK)
+    g_critical ("Could not bind int %d to statement at idx %d", value, idx);
+}
 
-  inner_error = NULL;
-  model = gda_connection_statement_execute_select (db, stmt, params,
-                                                   &inner_error);
-  g_object_unref (params);
+static void
+bind_text (sqlite3_stmt *stmt, int idx, const char *txt)
+{
+  int rc = sqlite3_bind_text (stmt, idx, txt, -1, SQLITE_TRANSIENT);
+  if (rc != SQLITE_OK)
+    g_critical ("Could not bind text %s to statement at idx %d", txt, idx);
+}
 
-  if (!model)
+static gint
+select_integer (sqlite3      *db,
+                sqlite3_stmt *stmt,
+                GError      **error,
+                int           n_args,
+                ...)
+{
+  va_list args;
+  int result = 0;
+
+  va_start (args, n_args);
+
+  for (int i = 0; i < n_args; i++)
     {
-      g_propagate_error (error, inner_error);
-      return 0;
-    }
-
-  if (gda_data_model_get_n_rows (model) > 0)
-    {
-      const GValue * val;
-
-      inner_error = NULL;
-      val = gda_data_model_get_typed_value_at (model,
-                                               0, 0,
-                                               G_TYPE_INT,
-                                               FALSE,
-                                               &inner_error);
-      if (val)
-        result = g_value_get_int (val);
+      GType type = va_arg (args, GType);
+      if (type == G_TYPE_STRING)
+        {
+          const char *charg = va_arg (args, const char *);
+          bind_text (stmt, i + 1, charg);
+        }
+      else if (type == G_TYPE_INT)
+        {
+          int iarg = va_arg (args, int);
+          bind_int (stmt, i + 1, iarg);
+        }
       else
-        g_propagate_error (error, inner_error);
+        {
+          g_critical ("Unknown type when selecting integer");
+        }
     }
 
-  g_object_unref (model);
+  va_end (args);
+
+  int rc = sqlite3_step (stmt);
+  if (rc == SQLITE_ROW)
+    {
+      result = sqlite3_column_int (stmt, 0);
+    }
+  else if (rc != SQLITE_DONE)
+    {
+      result = -1;
+      if (error)
+        *error = g_error_new_literal (GTR_GDA_ERROR, rc,
+                                      sqlite3_errmsg (db));
+    }
+  sqlite3_reset (stmt);
+  sqlite3_clear_bindings (stmt);
 
   return result;
 }
 
-static gint
-insert_row (GdaConnection *db,
-            GdaStatement *stmt,
-            GdaSet *params,
-            GError **error)
+static int
+insert_row (sqlite3      *db,
+            sqlite3_stmt *stmt,
+            GError      **error,
+            int           n_args,
+            ...)
 {
-  GdaSet *last_row;
-  GError *inner_error;
-  const GValue * val;
-  gint result = 0;
+  va_list args;
+  int rc;
+  int rowid;
 
-  inner_error = NULL;
-  if (-1 == gda_connection_statement_execute_non_select (db,
-                                                         stmt,
-                                                         params,
-                                                         &last_row,
-                                                         &inner_error))
+  va_start (args, n_args);
+
+  for (int i = 0; i < n_args; i++)
     {
-      g_object_unref (params);
-      g_propagate_error (error, inner_error);
+      GType type = va_arg (args, GType);
+      if (type == G_TYPE_STRING)
+        {
+          const char *charg = va_arg (args, const char *);
+          bind_text (stmt, i + 1, charg);
+        }
+      else if (type == G_TYPE_INT)
+        {
+          int iarg = va_arg (args, int);
+          bind_int (stmt, i + 1, iarg);
+        }
+      else
+        {
+          g_critical ("Unknown type when inserting row");
+        }
+    }
+
+  va_end (args);
+
+  rc = sqlite3_step (stmt);
+
+  sqlite3_reset (stmt);
+  sqlite3_clear_bindings (stmt);
+
+  if (rc != SQLITE_DONE)
+    {
+      if (error)
+        *error = g_error_new_literal (GTR_GDA_ERROR, rc,
+                                      sqlite3_errmsg (db));
+
       return 0;
     }
-  g_object_unref (params);
 
-  g_return_val_if_fail (last_row != NULL, 0);
+  rowid = sqlite3_last_insert_rowid (db);
 
-  val = gda_set_get_holder_value (last_row, "+0");
-  if (val)
-    result = g_value_get_int (val);
+  return rowid;
+}
 
-  g_object_unref (last_row);
+static int
+execute_non_select_command (sqlite3    *db,
+                            const char *sql)
+{
+  char *errmsg = NULL;
+  int rc = sqlite3_exec (db, sql, NULL, NULL, &errmsg);
+  if (rc != SQLITE_OK)
+    {
+      g_warning ("SQLite error: %s", errmsg);
+      sqlite3_free (errmsg);
+    }
+  return rc;
+}
 
-  return result;
+static gboolean
+begin_transaction (sqlite3 *db, GError **error)
+{
+  char *errmsg = NULL;
+  int rc = sqlite3_exec (db, "BEGIN TRANSACTION", NULL, NULL, &errmsg);
+  if (rc != SQLITE_OK)
+    {
+      if (error)
+        *error = g_error_new_literal (GTR_GDA_ERROR, rc,
+                                      sqlite3_errmsg (db));
+      g_critical ("Could not begin transaction: %s", errmsg);
+      sqlite3_free (errmsg);
+    }
+  return rc == SQLITE_OK;
+}
+
+static void
+commit_transaction (sqlite3 *db)
+{
+  char *errmsg = NULL;
+  int rc = sqlite3_exec (db, "COMMIT", NULL, NULL, &errmsg);
+  if (rc != SQLITE_OK)
+    {
+      g_critical ("Could not commit transaction: %s", errmsg);
+      sqlite3_free (errmsg);
+    }
+}
+
+static void
+rollback_transaction (sqlite3 *db)
+{
+  char *errmsg = NULL;
+  int rc = sqlite3_exec (db, "ROLLBACK", NULL, NULL, &errmsg);
+  if (rc != SQLITE_OK)
+    {
+      g_critical ("Could not rollback transaction: %s", errmsg);
+      sqlite3_free (errmsg);
+    }
+}
+
+static void
+execute_non_select (sqlite3      *db,
+                    sqlite3_stmt *stmt,
+                    int           value1,
+                    int           value2,
+                    GError      **error)
+{
+  if (value1 >= 0)
+    bind_int (stmt, 1, value1);
+
+  if (value2 >= 0)
+    bind_int (stmt, 2, value2);
+
+  int rc = sqlite3_step (stmt);
+
+  sqlite3_reset (stmt);
+  sqlite3_clear_bindings (stmt);
+
+  if (rc != SQLITE_DONE && error)
+    *error = g_error_new_literal (GTR_GDA_ERROR, rc,
+                                  sqlite3_errmsg (db));
 }
 
 static int
@@ -194,12 +313,8 @@ gtr_gda_words_append (GtrGda *self,
   /* look for word */
   {
     inner_error = NULL;
-    word_id = select_integer (priv->db,
-                              priv->stmt_select_word,
-                              gda_set_new_inline (1,
-                                                  "value", G_TYPE_STRING,
-                                                  word),
-                              &inner_error);
+    word_id = select_integer (priv->db, priv->stmt_select_word, &inner_error,
+                              1, G_TYPE_STRING, word);
     if (inner_error)
       {
         g_propagate_error (error, inner_error);
@@ -210,11 +325,8 @@ gtr_gda_words_append (GtrGda *self,
   if (word_id == 0)
     {
       inner_error = NULL;
-      word_id = insert_row (priv->db,
-                            priv->stmt_insert_word,
-                            gda_set_new_inline (1,
-                                                "value", G_TYPE_STRING, word),
-                            &inner_error);
+      word_id = insert_row (priv->db, priv->stmt_insert_word, &inner_error, 1,
+                            G_TYPE_STRING, word);
       if (inner_error)
         {
           g_propagate_error (error, inner_error);
@@ -224,21 +336,13 @@ gtr_gda_words_append (GtrGda *self,
 
   /* insert link */
   {
-    GdaSet *params;
-
-    params = gda_set_new_inline (2,
-                                 "word_id", G_TYPE_INT, word_id,
-                                 "orig_id", G_TYPE_INT, orig_id);
-
     inner_error = NULL;
-    if (-1 == gda_connection_statement_execute_non_select (priv->db,
-                                                           priv->stmt_insert_link,
-                                                           params,
-                                                           NULL,
-                                                           &inner_error))
-      g_propagate_error (error, inner_error);
+    execute_non_select (priv->db, priv->stmt_insert_link,
+                        word_id, orig_id,
+                        &inner_error);
 
-    g_object_unref (params);
+    if (inner_error)
+      g_propagate_error (error, inner_error);
   }
 }
 
@@ -257,10 +361,9 @@ gtr_gda_store_impl (GtrGda *self,
   inner_error = NULL;
   orig_id = select_integer (priv->db,
                             priv->stmt_find_orig,
-                            gda_set_new_inline (1,
-                                                "original", G_TYPE_STRING,
-                                                original),
-                            &inner_error);
+                            &inner_error,
+                            1, G_TYPE_STRING, original);
+
   if (inner_error)
     {
       g_propagate_error (error, inner_error);
@@ -276,13 +379,11 @@ gtr_gda_store_impl (GtrGda *self,
 
       inner_error = NULL;
       orig_id = insert_row (priv->db,
-                            priv->stmt_insert_orig,
-                            gda_set_new_inline (2,
-                                                "original", G_TYPE_STRING,
-                                                original,
-                                                "sentence_size", G_TYPE_INT,
-                                                (gint) sz),
-                            &inner_error);
+                  priv->stmt_insert_orig,
+                  &inner_error,
+                  2,
+                  G_TYPE_STRING, original,
+                  G_TYPE_INT, sz);
       if (inner_error)
         goto error;
 
@@ -302,14 +403,8 @@ gtr_gda_store_impl (GtrGda *self,
       inner_error = NULL;
       found_translation = select_integer (priv->db,
                                           priv->stmt_find_trans,
-                                          gda_set_new_inline (2,
-                                                              "orig_id",
-                                                              G_TYPE_INT,
-                                                              orig_id,
-                                                              "value",
-                                                              G_TYPE_STRING,
-                                                              translation),
-                                          &inner_error);
+                                          &inner_error,
+                                          2, G_TYPE_INT, orig_id, G_TYPE_STRING, translation);
       if (inner_error)
         goto error;
     }
@@ -319,12 +414,11 @@ gtr_gda_store_impl (GtrGda *self,
       inner_error = NULL;
       insert_row (priv->db,
                   priv->stmt_insert_trans,
-                  gda_set_new_inline (2,
-                                      "orig_id", G_TYPE_INT,
-                                      orig_id,
-                                      "value", G_TYPE_STRING,
-                                      translation),
-                  &inner_error);
+                  &inner_error,
+                  2,
+                  G_TYPE_INT, orig_id,
+                  G_TYPE_STRING, translation);
+
       if (inner_error)
         goto error;
     }
@@ -348,10 +442,7 @@ gtr_gda_store (GtrTranslationMemory * tm, GtrMsg * msg)
   g_return_val_if_fail (GTR_IS_GDA (self), FALSE);
 
   error = NULL;
-  if (!gda_connection_begin_transaction (priv->db,
-                                         NULL,
-                                         GDA_TRANSACTION_ISOLATION_READ_COMMITTED,
-                                         &error))
+  if (!begin_transaction (priv->db, &error))
     {
       g_warning ("starting transaction failed: %s", error->message);
       g_error_free (error);
@@ -371,9 +462,9 @@ gtr_gda_store (GtrTranslationMemory * tm, GtrMsg * msg)
     }
 
   if (result)
-    gda_connection_commit_transaction (priv->db, NULL, NULL);
+    commit_transaction (priv->db);
   else
-    gda_connection_rollback_transaction (priv->db, NULL, NULL);
+    rollback_transaction (priv->db);
 
   return result;
 }
@@ -390,10 +481,7 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
   g_return_val_if_fail (GTR_IS_GDA (self), FALSE);
 
   error = NULL;
-  if (!gda_connection_begin_transaction (priv->db,
-                                         NULL,
-                                         GDA_TRANSACTION_ISOLATION_READ_COMMITTED,
-                                         &error))
+  if (!begin_transaction (priv->db, &error))
     {
       g_warning ("starting transaction failed: %s", error->message);
       g_error_free (error);
@@ -412,7 +500,7 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
                                    gtr_msg_get_msgid (msg),
                                    gtr_msg_get_msgstr (msg),
                                    &error);
-      if (!result)
+      if (error)
         {
           g_warning ("storing message failed: %s", error->message);
           g_error_free (error);
@@ -421,9 +509,9 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
     }
 
   if (result)
-    gda_connection_commit_transaction (priv->db, NULL, NULL);
+    commit_transaction (priv->db);
   else
-    gda_connection_rollback_transaction (priv->db, NULL, NULL);
+    rollback_transaction (priv->db);
 
   return result;
 }
@@ -433,28 +521,17 @@ gtr_gda_remove (GtrTranslationMemory *tm,
                 gint translation_id)
 {
   GtrGda *self = GTR_GDA (tm);
-  GdaSet *params;
   GError *error;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
-  params = gda_set_new_inline (1,
-                               "id_trans",
-                               G_TYPE_INT,
-                               translation_id);
-
   error = NULL;
-  gda_connection_statement_execute_non_select (priv->db,
-                                               priv->stmt_delete_trans,
-                                               params,
-                                               NULL,
-                                               &error);
+  execute_non_select (priv->db, priv->stmt_delete_trans, translation_id, -1,
+                      &error);
   if (error)
     {
       g_warning ("removing translation failed: %s", error->message);
       g_error_free (error);
     }
-
-  g_object_unref (params);
 }
 
 static void
@@ -481,7 +558,7 @@ build_lookup_query (GtrGda *self, guint word_count)
                           "from "
                           "     TRANS, ORIG "
                           "where ORIG.ID = TRANS.ORIG_ID "
-                          "  and ORIG.VALUE = ##phrase::string "
+                          "  and ORIG.VALUE = ?1 "
                           "union "
                           "select "
                           "    TRANS.VALUE, "
@@ -497,7 +574,7 @@ build_lookup_query (GtrGda *self, guint word_count)
                           "          WORD, WORD_ORIG_LINK, ORIG "
                           "      where WORD.ID = WORD_ORIG_LINK.WORD_ID "
                           "        and ORIG.ID = WORD_ORIG_LINK.ORIG_ID "
-                          "        and ORIG.VALUE <> ##phrase::string "
+                          "        and ORIG.VALUE <> ?1 "
                           "        and ORIG.SENTENCE_SIZE between %u and %u "
                           "        and WORD.VALUE in (",
                           word_count,
@@ -506,7 +583,7 @@ build_lookup_query (GtrGda *self, guint word_count)
 
   for (i = 0; i < word_count; ++i)
     {
-      g_string_append_printf (query, "##word%d::string", i);
+      g_string_append_printf (query, "?%u", i + 2);
       if (i != word_count - 1)
         g_string_append (query, ", ");
     }
@@ -524,26 +601,34 @@ build_lookup_query (GtrGda *self, guint word_count)
   return g_string_free_and_steal (query);
 }
 
-static GdaStatement *
+static sqlite3_stmt *
 gtr_gda_get_lookup_statement (GtrGda *self, guint word_count, GError **error)
 {
-  GdaStatement *stmt;
-  gchar *query;
+  sqlite3_stmt *stmt = NULL;
+  g_autofree gchar *query = NULL;
+  int rc;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
-  stmt = GDA_STATEMENT (g_hash_table_lookup (priv->lookup_query_cache,
-                                             GUINT_TO_POINTER (word_count)));
+  stmt = g_hash_table_lookup (priv->lookup_query_cache,
+                              GUINT_TO_POINTER (word_count));
 
   if (stmt)
     return stmt;
 
   query = build_lookup_query (self, word_count);
-  stmt = gda_sql_parser_parse_string (priv->parser,
-                                      query,
-                                      NULL,
-                                      error);
-  g_free (query);
 
+  rc = sqlite3_prepare_v2 (priv->db, query, -1, &stmt, NULL);
+
+  if (rc != SQLITE_OK)
+    {
+      if (error)
+        *error = g_error_new_literal (GTR_GDA_ERROR, rc,
+                                      sqlite3_errmsg (priv->db));
+
+      return NULL;
+    }
+
+  // The hashmap takes ownership of the SQlite3 statement
   g_hash_table_insert (priv->lookup_query_cache,
                        GUINT_TO_POINTER (word_count),
                        stmt);
@@ -559,10 +644,8 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
   guint cnt = 0;
   GList *matches = NULL;
   GError *inner_error;
-  GdaStatement *stmt = NULL;
-  GdaSet *params = NULL;
-  GdaDataModel *model = NULL;
-  gint i;
+  sqlite3_stmt *stmt = NULL;
+  int rc;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
   g_return_val_if_fail (GTR_IS_GDA (self), NULL);
@@ -580,105 +663,37 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
   if (inner_error)
     goto end;
 
-  inner_error = NULL;
-  if (!gda_statement_get_parameters (stmt, &params, &inner_error))
-    goto end;
+  bind_text (stmt, 1, phrase);
 
-  inner_error = NULL;
-  gda_set_set_holder_value (params,
-                            &inner_error,
-                            "phrase", phrase);
-  if (inner_error)
-    goto end;
+  for (int i = 0; i < cnt; ++i)
+    bind_text (stmt, i + 2, words[i]);
 
-  {
-    gchar word_id[25];
-    for (i = 0; i < cnt; i++)
-      {
-        sprintf (word_id, "word%d", i);
+  while ((rc = sqlite3_step (stmt)) == SQLITE_ROW)
+    {
+      const unsigned char *val = sqlite3_column_text (stmt, 0);
+      int score = sqlite3_column_int (stmt, 1);
+      int id = sqlite3_column_int (stmt, 2);
 
-        inner_error = NULL;
-        gda_set_set_holder_value (params,
-                                  &inner_error,
-                                  word_id, words[i]);
-        if (inner_error)
-          goto end;
-      }
-  }
+      GtrTranslationMemoryMatch *match = g_new0 (GtrTranslationMemoryMatch, 1);
+      match->match = g_strdup ((const char *)val);
+      match->level = score;
+      match->id = id;
+      matches = g_list_prepend (matches, match);
+    }
 
-  inner_error = NULL;
-  model = gda_connection_statement_execute_select (priv->db,
-                                                   stmt,
-                                                   params,
-                                                   &inner_error);
-  if (!model)
-    goto end;
+  sqlite3_reset (stmt);
+  sqlite3_clear_bindings (stmt);
 
-  {
-    gint count = gda_data_model_get_n_rows (model);
-    for (i = 0; i < count; ++i)
-      {
-        const GValue * val;
-        gchar *suggestion;
-        gint score;
-        gint id;
-        GtrTranslationMemoryMatch *match;
-
-        inner_error = NULL;
-        val = gda_data_model_get_typed_value_at (model,
-                                                 0, i,
-                                                 G_TYPE_STRING,
-                                                 FALSE,
-                                                 &inner_error);
-        if (!val)
-          goto end;
-
-        suggestion = g_value_dup_string (val);
-
-        inner_error = NULL;
-        val = gda_data_model_get_typed_value_at (model,
-                                                 1, i,
-                                                 G_TYPE_INT,
-                                                 FALSE,
-                                                 &inner_error);
-        if (!val)
-          {
-            g_free (suggestion);
-            goto end;
-          }
-
-        score = g_value_get_int (val);
-
-        inner_error = NULL;
-        val = gda_data_model_get_typed_value_at (model,
-                                                 2, i,
-                                                 G_TYPE_INT,
-                                                 FALSE,
-                                                 &inner_error);
-        if (!val)
-          {
-            g_free (suggestion);
-            goto end;
-          }
-
-        id = g_value_get_int (val);
-
-        match = g_new0 (GtrTranslationMemoryMatch, 1);
-        match->match = suggestion;
-        match->level = score;
-        match->id = id;
-
-        matches = g_list_prepend (matches, match);
-      }
-  }
+  if (rc != SQLITE_DONE)
+    inner_error = g_error_new_literal (GTR_GDA_ERROR, rc,
+                                       sqlite3_errmsg (priv->db));
 
  end:
-
-  if (model)
-    g_object_unref (model);
-  if (params)
-    g_object_unref (params);
-
+  if (stmt)
+    {
+      sqlite3_reset (stmt);
+      sqlite3_clear_bindings (stmt);
+    }
   if (inner_error)
     {
       g_list_free_full (matches, free_match);
@@ -743,57 +758,55 @@ initialize_db (GtrGda *self)
 {
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
-  gda_connection_execute_non_select_command (priv->db,
-                                             "create table if not exists WORD ("
-                                             "ID integer primary key autoincrement,"
-                                             "VALUE text unique)",
-                                             NULL);
+  execute_non_select_command (priv->db,
+                              "create table if not exists WORD ("
+                              "ID integer primary key autoincrement,"
+                              "VALUE text unique)");
 
-  gda_connection_execute_non_select_command (priv->db,
-                                             "create table if not exists WORD_ORIG_LINK ("
-                                             "WORD_ID integer,"
-                                             "ORIG_ID integer,"
-                                             "primary key (WORD_ID, ORIG_ID))",
-                                             NULL);
+  execute_non_select_command (priv->db,
+                              "create table if not exists WORD_ORIG_LINK ("
+                              "WORD_ID integer,"
+                              "ORIG_ID integer,"
+                              "primary key (WORD_ID, ORIG_ID))");
 
-  gda_connection_execute_non_select_command (priv->db,
-                                             "create table if not exists ORIG ("
-                                             "ID integer primary key autoincrement,"
-                                             "VALUE text unique,"
-                                             "SENTENCE_SIZE integer)",
-                                             NULL);
+  execute_non_select_command (priv->db,
+                              "create table if not exists ORIG ("
+                              "ID integer primary key autoincrement,"
+                              "VALUE text unique,"
+                              "SENTENCE_SIZE integer)");
 
-  gda_connection_execute_non_select_command (priv->db,
-                                             "create table if not exists TRANS ("
-                                             "ID integer primary key autoincrement,"
-                                             "ORIG_ID integer,"
-                                             "VALUE text)",
-                                             NULL);
+  execute_non_select_command (priv->db,
+                              "create table if not exists TRANS ("
+                              "ID integer primary key autoincrement,"
+                              "ORIG_ID integer,"
+                              "VALUE text)");
 
-  gda_connection_execute_non_select_command (priv->db,
-                                             "create index "
-                                             "if not exists IDX_TRANS_ORIG_ID "
-                                             "on TRANS (ORIG_ID)",
-                                             NULL);
+  execute_non_select_command (priv->db,
+                              "create index "
+                              "if not exists IDX_TRANS_ORIG_ID "
+                              "on TRANS (ORIG_ID)");
 }
 
-static GdaStatement *
-prepare_statement(GdaSqlParser *parser, const gchar *query)
+static sqlite3_stmt *
+prepare_statement (sqlite3 *db, const gchar *query)
 {
-  GError *error = NULL;
-  GdaStatement *statement = gda_sql_parser_parse_string (parser,
-                                                         query,
-                                                         NULL,
-                                                         &error);
+  sqlite3_stmt *statement;
+  int rc;
 
-  if (error)
+  rc = sqlite3_prepare_v2 (db,
+                           query,
+                           -1,
+                           &statement,
+                           NULL);
+
+  if (rc != SQLITE_OK)
     {
       g_error ("gtr-gda.c: prepare_statement: "
-               "gda_sql_parser_parse_string failed.\n"
+               "sqlite3_prepare_v2 failed.\n"
                "query: %s\n"
                "error message: %s\n",
                query,
-               error->message);
+               sqlite3_errmsg (db));
     }
   return statement;
 }
@@ -804,101 +817,92 @@ gtr_gda_init (GtrGda * self)
   g_autofree gchar *connection_string = NULL;
   g_autoptr (GError) error = NULL;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
+  g_auto (GPathBuf) path;
+  g_autofree char *db_filepath = NULL;
+  const gchar *config_dir;
 
-  gda_init ();
+  config_dir = gtr_dirs_get_user_config_dir ();
+  g_path_buf_init_from_path (&path, config_dir);
+  g_path_buf_push (&path, "translation-memory.db");
+  db_filepath = g_path_buf_to_path (&path);
 
-  {
-    const gchar *config_dir;
-    gchar *encoded_config_dir;
-
-    config_dir = gtr_dirs_get_user_config_dir ();
-    encoded_config_dir = gda_rfc1738_encode (config_dir);
-
-    connection_string = g_strdup_printf ("DB_DIR=%s;"
-                                         "DB_NAME=translation-memory",
-                                         encoded_config_dir);
-
-    g_free (encoded_config_dir);
-  }
-
-  priv->db = gda_connection_open_from_string ("Sqlite",
-                                                    connection_string,
-                                                    NULL,
-                                                    GDA_CONNECTION_OPTIONS_NONE,
-                                                    &error);
-  if (error)
-    g_warning ("Error creating database: %s", error->message);
+  int rc = sqlite3_open_v2 (db_filepath,
+                            &priv->db,
+                            SQLITE_OPEN_FULLMUTEX | SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE,
+                            NULL);
+  if (rc != SQLITE_OK)
+    {
+      g_warning ("Error creating database: %s", sqlite3_errmsg (priv->db));
+      sqlite3_close_v2 (priv->db);
+      priv->db = NULL;
+    }
 
   initialize_db (self);
 
   /* prepare statements */
 
-  priv->parser = gda_connection_create_parser (priv->db);
-  if (priv->parser == NULL)
-    priv->parser = gda_sql_parser_new ();
-
   priv->stmt_find_orig =
-    prepare_statement (priv->parser,
+    prepare_statement (priv->db,
                        "select ID from ORIG "
-                       "where VALUE=##original::string");
+                       "where VALUE=?1");
 
   priv->stmt_select_word =
-    prepare_statement (priv->parser,
+    prepare_statement (priv->db,
                        "select ID from WORD "
-                       "where VALUE=##value::string");
+                       "where VALUE=?1");
 
   priv->stmt_select_trans =
-    prepare_statement (priv->parser,
+    prepare_statement (priv->db,
                        "select VALUE from TRANS "
-                       "where ORIG_ID=##orig_id::int");
+                       "where ORIG_ID=?1");
 
   priv->stmt_find_trans =
-    prepare_statement (priv->parser,
+    prepare_statement (priv->db,
                        "select ID from TRANS "
-                       "where ORIG_ID=##orig_id::int "
-                       "and VALUE=##value::string");
+                       "where ORIG_ID=?1 "
+                       "and VALUE=?2");
 
   priv->stmt_insert_orig =
-    prepare_statement (priv->parser,
+    prepare_statement (priv->db,
                        "insert into "
                        "ORIG (VALUE, SENTENCE_SIZE) "
                        "values "
-                       "(##original::string, ##sentence_size::int)");
+                       "(?1, ?2)");
 
   priv->stmt_insert_word =
-    prepare_statement (priv->parser,
+    prepare_statement (priv->db,
                        "insert into "
                        "WORD (VALUE) "
                        "values "
-                       "(##value::string)");
+                       "(?1)");
 
   priv->stmt_insert_link =
-    prepare_statement (priv->parser,
+    prepare_statement (priv->db,
                        "insert into "
                        "WORD_ORIG_LINK (WORD_ID, ORIG_ID) "
                        "values "
-                       "(##word_id::int, ##orig_id::int)");
+                       "(?, ?)");
 
   priv->stmt_insert_trans =
-    prepare_statement (priv->parser,
+    prepare_statement (priv->db,
                        "insert into "
                        "TRANS (ORIG_ID, VALUE) "
                        "values "
-                       "(##orig_id::int, ##value::string)");
+                       "(?1, ?2)");
 
   priv->stmt_delete_trans =
-    prepare_statement (priv->parser,
+    prepare_statement (priv->db,
                        "delete from TRANS "
-                       "where id = ##id_trans::int");
+                       "where id = ?1");
 
   priv->max_omits = 0;
   priv->max_delta = 0;
   priv->max_items = 0;
 
   priv->lookup_query_cache = g_hash_table_new_full (g_direct_hash,
-                                                          g_direct_equal,
-                                                          NULL,
-                                                          g_object_unref);
+                                                    g_direct_equal,
+                                                    NULL,
+                                                    (GDestroyNotify)sqlite3_finalize);
 }
 
 static void
@@ -909,62 +913,56 @@ gtr_gda_dispose (GObject * object)
 
   if (priv->stmt_find_orig != NULL)
     {
-      g_object_unref (priv->stmt_find_orig);
+      sqlite3_finalize (priv->stmt_find_orig);
       priv->stmt_find_orig = NULL;
     }
 
   if (priv->stmt_select_trans != NULL)
     {
-      g_object_unref (priv->stmt_select_trans);
+      sqlite3_finalize (priv->stmt_select_trans);
       priv->stmt_select_trans = NULL;
     }
 
   if (priv->stmt_find_trans != NULL)
     {
-      g_object_unref (priv->stmt_find_trans);
+      sqlite3_finalize (priv->stmt_find_trans);
       priv->stmt_find_trans = NULL;
     }
 
   if (priv->stmt_select_word != NULL)
     {
-      g_object_unref (priv->stmt_select_word);
+      sqlite3_finalize (priv->stmt_select_word);
       priv->stmt_select_word = NULL;
     }
 
   if (priv->stmt_insert_orig != NULL)
     {
-      g_object_unref (priv->stmt_insert_orig);
+      sqlite3_finalize (priv->stmt_insert_orig);
       priv->stmt_insert_orig = NULL;
     }
 
   if (priv->stmt_insert_word != NULL)
     {
-      g_object_unref (priv->stmt_insert_word);
+      sqlite3_finalize (priv->stmt_insert_word);
       priv->stmt_insert_word = NULL;
     }
 
   if (priv->stmt_insert_link != NULL)
     {
-      g_object_unref (priv->stmt_insert_link);
+      sqlite3_finalize (priv->stmt_insert_link);
       priv->stmt_insert_link = NULL;
     }
 
   if (priv->stmt_insert_trans != NULL)
     {
-      g_object_unref (priv->stmt_insert_trans);
+      sqlite3_finalize (priv->stmt_insert_trans);
       priv->stmt_insert_trans = NULL;
     }
 
   if (priv->stmt_delete_trans != NULL)
     {
-      g_object_unref (priv->stmt_delete_trans);
+      sqlite3_finalize (priv->stmt_delete_trans);
       priv->stmt_delete_trans = NULL;
-    }
-
-  if (priv->parser != NULL)
-    {
-      g_object_unref (priv->parser);
-      priv->parser = NULL;
     }
 
   if (priv->lookup_query_cache != NULL)
@@ -975,7 +973,7 @@ gtr_gda_dispose (GObject * object)
 
   if (priv->db != NULL)
     {
-      g_object_unref (priv->db);
+      sqlite3_close_v2 (priv->db);
       priv->db = NULL;
     }
 

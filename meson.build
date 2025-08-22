@@ -134,7 +134,7 @@ src_dir = join_paths(meson.project_source_root(), 'src')
 # Dependencies #
 ################
 
-glib_dep = dependency('glib-2.0', version: '>= 2.71.3')
+glib_dep = dependency('glib-2.0', version: '>= 2.76')
 gtk_dep = dependency('gtk4', version: '>= 4.12.0')
 libadwaita_dep = dependency('libadwaita-1', version: '>= 1.8.alpha')
 libspell_dep = dependency('libspelling-1', required: false)
@@ -149,7 +149,7 @@ gtr_deps = [
   gtk_dep,
   libadwaita_dep,
   libspell_dep,
-  dependency('libgda-6.0'),
+  dependency('sqlite3'),
   dependency('gio-2.0', version: '>= 2.36.0'),
   dependency('gsettings-desktop-schemas'),
   dependency('gthread-2.0', version: '>= 2.13.0'),

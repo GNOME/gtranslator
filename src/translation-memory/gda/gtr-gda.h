@@ -22,6 +22,8 @@
 
 G_BEGIN_DECLS
 
+#define GTR_GDA_ERROR (gtr_gda_error_quark ())
+
 #define GTR_TYPE_GDA		(gtr_gda_get_type ())
 
 G_DECLARE_FINAL_TYPE (GtrGda, gtr_gda, GTR, GDA, GObject)
@@ -37,5 +39,7 @@ struct _GtrGdaClass
 };
 
 GtrGda                 *gtr_gda_new                     (void);
+
+GQuark                  gtr_gda_error_quark             (void) G_GNUC_CONST;
 
 G_END_DECLS
