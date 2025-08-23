@@ -1599,7 +1599,7 @@ _gtr_tab_finish_edition (GtrTab * tab)
 void
 gtr_tab_go_to_next (GtrTab * tab)
 {
-  g_autoptr(GtrMsg) msg;
+  g_autoptr(GtrMsg) msg = NULL;
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
@@ -1623,7 +1623,7 @@ gtr_tab_go_to_next (GtrTab * tab)
 void
 gtr_tab_go_to_prev (GtrTab * tab)
 {
-  g_autoptr(GtrMsg) msg;
+  g_autoptr(GtrMsg) msg = NULL;
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
@@ -1647,7 +1647,7 @@ gtr_tab_go_to_prev (GtrTab * tab)
 void
 gtr_tab_go_to_first (GtrTab * tab)
 {
-  g_autoptr(GtrMsg) msg;
+  g_autoptr(GtrMsg) msg = NULL;
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
@@ -1671,7 +1671,7 @@ gtr_tab_go_to_first (GtrTab * tab)
 void
 gtr_tab_go_to_last (GtrTab * tab)
 {
-  g_autoptr(GtrMsg) msg;
+  g_autoptr(GtrMsg) msg = NULL;
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
@@ -1697,7 +1697,7 @@ gtr_tab_go_to_last (GtrTab * tab)
 gboolean
 gtr_tab_go_to_next_fuzzy (GtrTab * tab)
 {
-  g_autoptr(GtrMsg) msg;
+  g_autoptr(GtrMsg) msg = NULL;
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
@@ -1728,7 +1728,7 @@ gtr_tab_go_to_next_fuzzy (GtrTab * tab)
 gboolean
 gtr_tab_go_to_prev_fuzzy (GtrTab * tab)
 {
-  g_autoptr(GtrMsg) msg;
+  g_autoptr(GtrMsg) msg = NULL;
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
@@ -1771,7 +1771,7 @@ message_is_fuzzy_or_untranslated (GtrMsg * msg)
 gboolean
 gtr_tab_go_to_next_untrans (GtrTab * tab)
 {
-  g_autoptr(GtrMsg) msg;
+  g_autoptr(GtrMsg) msg = NULL;
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
@@ -1802,7 +1802,7 @@ gtr_tab_go_to_next_untrans (GtrTab * tab)
 gboolean
 gtr_tab_go_to_prev_untrans (GtrTab * tab)
 {
-  g_autoptr(GtrMsg) msg;
+  g_autoptr(GtrMsg) msg = NULL;
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
@@ -1833,7 +1833,7 @@ gtr_tab_go_to_prev_untrans (GtrTab * tab)
 gboolean
 gtr_tab_go_to_next_fuzzy_or_untrans (GtrTab * tab)
 {
-  g_autoptr(GtrMsg) msg;
+  g_autoptr(GtrMsg) msg = NULL;
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
@@ -1864,7 +1864,7 @@ gtr_tab_go_to_next_fuzzy_or_untrans (GtrTab * tab)
 gboolean
 gtr_tab_go_to_prev_fuzzy_or_untrans (GtrTab * tab)
 {
-  g_autoptr(GtrMsg) msg;
+  g_autoptr(GtrMsg) msg = NULL;
   GtrTabPrivate *priv;
 
   priv = gtr_tab_get_instance_private (tab);
