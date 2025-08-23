@@ -46,7 +46,6 @@ gtr_scan_dir (GFile * dir, GSList ** list, const gchar * po_name)
 {
   GFileInfo *info;
   GError *error;
-  GFile *file;
   GFileEnumerator *enumerator;
 
   error = NULL;
@@ -65,6 +64,7 @@ gtr_scan_dir (GFile * dir, GSList ** list, const gchar * po_name)
       while ((info =
               g_file_enumerator_next_file (enumerator, NULL, &error)) != NULL)
         {
+          g_autoptr (GFile) file = NULL;
           const gchar *name;
           g_autofree char *filename = NULL;
 
@@ -82,9 +82,10 @@ gtr_scan_dir (GFile * dir, GSList ** list, const gchar * po_name)
             filename = g_strdup (".po");
 
           if (g_str_has_suffix (name, filename))
-            *list = g_slist_prepend (*list, file);
+            *list = g_slist_prepend (*list, g_steal_pointer (&file));
+          else
+            gtr_scan_dir (file, list, po_name);
 
-          gtr_scan_dir (file, list, po_name);
           g_object_unref (info);
         }
       g_file_enumerator_close (enumerator, NULL, NULL);
