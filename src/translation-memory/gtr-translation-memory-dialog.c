@@ -218,6 +218,11 @@ task_data_destroy (ScanDirTaskData *data)
 }
 
 static void
+g_slist_free_files (GSList *list) {
+  g_slist_free_full (list, g_object_unref);
+}
+
+static void
 scan_dir_task_func (GTask                      *task,
                     GtrTranslationMemoryDialog *dlg,
                     ScanDirTaskData            *data,
@@ -225,7 +230,7 @@ scan_dir_task_func (GTask                      *task,
 {
   GSList *list = NULL;
   gtr_scan_dir (data->dir, &list, data->restriction);
-  g_task_return_pointer (task, list, (GDestroyNotify)g_slist_free);
+  g_task_return_pointer (task, list, (GDestroyNotify)g_slist_free_files);
 }
 
 static void
