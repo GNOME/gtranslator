@@ -567,12 +567,6 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
 
   g_return_val_if_fail (GTR_IS_GDA (self), NULL);
 
-  if (!gda_connection_begin_transaction (priv->db,
-                                         NULL,
-                                         GDA_TRANSACTION_ISOLATION_READ_COMMITTED,
-                                         NULL))
-    return NULL;
-
   words = gtr_gda_split_string_in_words (phrase);
   if (!words)
     {
@@ -684,8 +678,6 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
     g_object_unref (model);
   if (params)
     g_object_unref (params);
-
-  gda_connection_rollback_transaction (priv->db, NULL, NULL);
 
   if (inner_error)
     {
