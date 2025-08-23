@@ -477,7 +477,7 @@ build_lookup_query (GtrGda *self, guint word_count)
                           "select "
                           "    TRANS.VALUE, "
                           "    100 SCORE, "
-			  "    TRANS.ID "
+                          "    TRANS.ID "
                           "from "
                           "     TRANS, ORIG "
                           "where ORIG.ID = TRANS.ORIG_ID "
