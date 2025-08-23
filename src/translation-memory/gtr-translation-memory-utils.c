@@ -83,7 +83,7 @@ gtr_scan_dir (GFile * dir, GSList ** list, const gchar * po_name)
 
           if (g_str_has_suffix (name, filename))
             *list = g_slist_prepend (*list, g_steal_pointer (&file));
-          else
+          else if (g_file_info_get_file_type (info) != G_FILE_TYPE_DIRECTORY)
             gtr_scan_dir (file, list, po_name);
 
           g_clear_object (&info);
