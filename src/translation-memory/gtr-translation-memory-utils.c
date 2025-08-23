@@ -86,7 +86,7 @@ gtr_scan_dir (GFile * dir, GSList ** list, const gchar * po_name)
           else
             gtr_scan_dir (file, list, po_name);
 
-          g_object_unref (info);
+          g_clear_object (&info);
         }
       g_file_enumerator_close (enumerator, NULL, NULL);
       g_object_unref (enumerator);
