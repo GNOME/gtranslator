@@ -794,27 +794,27 @@ gtr_gda_init (GtrGda * self)
     g_warning ("Error creating database: %s", error->message);
 
   gda_connection_execute_non_select_command (priv->db,
-                                             "create table WORD ("
+                                             "create table if not exists WORD ("
                                              "ID integer primary key autoincrement,"
                                              "VALUE text unique)",
                                              NULL);
 
   gda_connection_execute_non_select_command (priv->db,
-                                             "create table WORD_ORIG_LINK ("
+                                             "create table if not exists WORD_ORIG_LINK ("
                                              "WORD_ID integer,"
                                              "ORIG_ID integer,"
                                              "primary key (WORD_ID, ORIG_ID))",
                                              NULL);
 
   gda_connection_execute_non_select_command (priv->db,
-                                             "create table ORIG ("
+                                             "create table if not exists ORIG ("
                                              "ID integer primary key autoincrement,"
                                              "VALUE text unique,"
                                              "SENTENCE_SIZE integer)",
                                              NULL);
 
   gda_connection_execute_non_select_command (priv->db,
-                                             "create table TRANS ("
+                                             "create table if not exists TRANS ("
                                              "ID integer primary key autoincrement,"
                                              "ORIG_ID integer,"
                                              "VALUE text)",
