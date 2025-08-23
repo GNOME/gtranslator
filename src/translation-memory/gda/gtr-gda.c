@@ -521,7 +521,7 @@ build_lookup_query (GtrGda *self, guint word_count)
                           word_count - priv->max_omits,
                           priv->max_items);
 
-  return g_string_free (query, FALSE);
+  return g_string_free_and_steal (query);
 }
 
 static GdaStatement *
