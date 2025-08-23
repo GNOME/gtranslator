@@ -451,7 +451,7 @@ gtr_message_table_select (GtrMessageTable * table, GtrMsg * msg)
   // look for the msg in the model
   for (i=0; i < nitems; i++)
     {
-      g_autoptr(GtrMsg) item;
+      g_autoptr(GtrMsg) item = NULL;
       item = g_list_model_get_item (G_LIST_MODEL (priv->selection), i);
       if (item == msg)
         {

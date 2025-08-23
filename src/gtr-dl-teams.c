@@ -275,7 +275,7 @@ gtr_dl_teams_parse_module_details (GObject *object, GAsyncResult *result, gpoint
 
       for (i=0; i < json_array_get_length (domains_array); i++)
         {
-          g_autoptr(GtrDlTeamsDomain) teams_domain;
+          g_autoptr(GtrDlTeamsDomain) teams_domain = NULL;
 
           domain_element = json_array_get_element (domains_array, i);
           domain_object = json_node_get_object (domain_element);
@@ -300,7 +300,7 @@ gtr_dl_teams_load_module_details_json (GtkWidget  *widget,
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
 
   g_autoptr(SoupMessage) msg = NULL;
-  g_autofree gchar *module_endpoint;
+  g_autofree gchar *module_endpoint = NULL;
 
   adw_action_row_set_subtitle (ADW_ACTION_ROW (priv->stats_row), "");
 
@@ -505,7 +505,7 @@ static void
 gtr_dl_teams_get_file_info (GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  g_autofree char *stats_endpoint;
+  g_autofree char *stats_endpoint = NULL;
   g_autoptr(SoupMessage) msg = NULL;
 
   /* API endpoint: modules/[module]/branches/[branch]/domains/[domain]/languages/[team] */
@@ -642,8 +642,8 @@ gtr_dl_teams_download_file (GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   g_autoptr(SoupMessage) msg = NULL;
-  g_autofree gchar *api_endpoint;
-  g_autofree gchar *escaped_file_path;
+  g_autofree gchar *api_endpoint = NULL;
+  g_autofree gchar *escaped_file_path = NULL;
 
   /* Load the file, save as temp; path to file is https://l10n.gnome.org/[priv->file_path] */
   escaped_file_path = g_strcompress (priv->file_path);

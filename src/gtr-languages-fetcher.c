@@ -122,7 +122,7 @@ static void
 append_from_languages (GtrLanguagesFetcher *fetcher)
 {
   const GSList *languages, *l;
-  g_autoptr (GHashTable) plurals;
+  g_autoptr (GHashTable) plurals = NULL;
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
 
   plurals = g_hash_table_new (g_str_hash, g_int_equal);

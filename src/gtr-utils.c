@@ -270,7 +270,7 @@ gtr_utils_help_display (GtkWindow * window)
 gchar *
 gtr_utils_get_current_date (void)
 {
-  g_autoptr (GDateTime) now;
+  g_autoptr (GDateTime) now = NULL;
 
   now = g_date_time_new_now_local ();
 
@@ -280,7 +280,7 @@ gtr_utils_get_current_date (void)
 gchar *
 gtr_utils_get_current_time (void)
 {
-  g_autoptr (GDateTime) now;
+  g_autoptr (GDateTime) now = NULL;
 
   now = g_date_time_new_now_local ();
 
@@ -290,7 +290,7 @@ gtr_utils_get_current_time (void)
 gchar *
 gtr_utils_get_current_year (void)
 {
-  g_autoptr (GDateTime) now;
+  g_autoptr (GDateTime) now = NULL;
 
   now = g_date_time_new_now_local ();
 

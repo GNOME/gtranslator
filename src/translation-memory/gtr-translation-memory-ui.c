@@ -195,7 +195,7 @@ row_activated (GtkListView            *view,
                GtrTranslationMemoryUi *tm_ui)
 {
   GListModel *model;
-  g_autoptr(GtrTm) tm;
+  g_autoptr(GtrTm) tm = NULL;
 
   model = G_LIST_MODEL (gtk_list_view_get_model (view));
   tm = GTR_TM (g_list_model_get_object (model, position));

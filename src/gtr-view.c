@@ -70,7 +70,7 @@ notify_dark_cb (GtrView *view)
 static void
 gtr_view_init (GtrView * view)
 {
-  g_autoptr (GtkSourceLanguageManager) lm;
+  g_autoptr (GtkSourceLanguageManager) lm = NULL;
   GtkSourceLanguage *lang;
   GPtrArray *dirs;
   gchar **langs = NULL;
@@ -258,7 +258,7 @@ gtr_view_enable_visible_whitespace (GtrView * view, gboolean enable)
   GtkSourceView *source;
   GtkSourceSpaceDrawer *drawer;
   GtkSourceBuffer *buffer;
-  g_autoptr (GtkSourceLanguageManager) manager;
+  g_autoptr (GtkSourceLanguageManager) manager = NULL;
   const gchar * const * deflangs = NULL;
   const gchar *langs[20] = {NULL};
   gint i = 0;

@@ -166,7 +166,7 @@ set_window_title (GtrWindow * window, gboolean with_path)
   GtrPoState state;
   GtrTab *active_tab;
   GFile *file;
-  g_autofree gchar *title;
+  g_autofree gchar *title = NULL;
 
   if (with_path)
     {
