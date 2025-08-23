@@ -62,7 +62,7 @@ gtr_scan_dir (GFile * dir, GSList ** list, const gchar * po_name)
               g_file_enumerator_next_file (enumerator, NULL, &error)) != NULL)
         {
           const gchar *name;
-          gchar *filename;
+          g_autofree char *filename = NULL;
 
           name = g_file_info_get_name (info);
           file = g_file_get_child (dir, name);
@@ -79,7 +79,6 @@ gtr_scan_dir (GFile * dir, GSList ** list, const gchar * po_name)
 
           if (g_str_has_suffix (name, filename))
             *list = g_slist_prepend (*list, file);
-          g_free (filename);
 
           gtr_scan_dir (file, list, po_name);
           g_object_unref (info);
