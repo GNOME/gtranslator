@@ -738,6 +738,45 @@ gtr_translation_memory_iface_init (GtrTranslationMemoryInterface * iface)
   iface->set_max_items = gtr_gda_set_max_items;
 }
 
+static void
+initialize_db (GtrGda *self)
+{
+  GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
+
+  gda_connection_execute_non_select_command (priv->db,
+                                             "create table if not exists WORD ("
+                                             "ID integer primary key autoincrement,"
+                                             "VALUE text unique)",
+                                             NULL);
+
+  gda_connection_execute_non_select_command (priv->db,
+                                             "create table if not exists WORD_ORIG_LINK ("
+                                             "WORD_ID integer,"
+                                             "ORIG_ID integer,"
+                                             "primary key (WORD_ID, ORIG_ID))",
+                                             NULL);
+
+  gda_connection_execute_non_select_command (priv->db,
+                                             "create table if not exists ORIG ("
+                                             "ID integer primary key autoincrement,"
+                                             "VALUE text unique,"
+                                             "SENTENCE_SIZE integer)",
+                                             NULL);
+
+  gda_connection_execute_non_select_command (priv->db,
+                                             "create table if not exists TRANS ("
+                                             "ID integer primary key autoincrement,"
+                                             "ORIG_ID integer,"
+                                             "VALUE text)",
+                                             NULL);
+
+  gda_connection_execute_non_select_command (priv->db,
+                                             "create index "
+                                             "if not exists IDX_TRANS_ORIG_ID "
+                                             "on TRANS (ORIG_ID)",
+                                             NULL);
+}
+
 static GdaStatement *
 prepare_statement(GdaSqlParser *parser, const gchar *query)
 {
@@ -790,38 +829,7 @@ gtr_gda_init (GtrGda * self)
   if (error)
     g_warning ("Error creating database: %s", error->message);
 
-  gda_connection_execute_non_select_command (priv->db,
-                                             "create table if not exists WORD ("
-                                             "ID integer primary key autoincrement,"
-                                             "VALUE text unique)",
-                                             NULL);
-
-  gda_connection_execute_non_select_command (priv->db,
-                                             "create table if not exists WORD_ORIG_LINK ("
-                                             "WORD_ID integer,"
-                                             "ORIG_ID integer,"
-                                             "primary key (WORD_ID, ORIG_ID))",
-                                             NULL);
-
-  gda_connection_execute_non_select_command (priv->db,
-                                             "create table if not exists ORIG ("
-                                             "ID integer primary key autoincrement,"
-                                             "VALUE text unique,"
-                                             "SENTENCE_SIZE integer)",
-                                             NULL);
-
-  gda_connection_execute_non_select_command (priv->db,
-                                             "create table if not exists TRANS ("
-                                             "ID integer primary key autoincrement,"
-                                             "ORIG_ID integer,"
-                                             "VALUE text)",
-                                             NULL);
-
-  gda_connection_execute_non_select_command (priv->db,
-                                             "create index "
-                                             "if not exists IDX_TRANS_ORIG_ID "
-                                             "on TRANS (ORIG_ID)",
-                                             NULL);
+  initialize_db (self);
 
   /* prepare statements */
 
