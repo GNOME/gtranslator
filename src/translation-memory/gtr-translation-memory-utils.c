@@ -54,10 +54,14 @@ gtr_scan_dir (GFile * dir, GSList ** list, const gchar * po_name)
                                           G_FILE_ATTRIBUTE_STANDARD_NAME,
                                           G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS,
                                           NULL, &error);
-  if (enumerator)
+  if (error)
     {
-      error = NULL;
-
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_DIRECTORY))
+        g_warning ("Could not enumerate files %s", error->message);
+      g_clear_error (&error);
+    }
+  else
+    {
       while ((info =
               g_file_enumerator_next_file (enumerator, NULL, &error)) != NULL)
         {
@@ -89,6 +93,7 @@ gtr_scan_dir (GFile * dir, GSList ** list, const gchar * po_name)
       if (error)
         {
           g_warning ("%s", error->message);
+          g_clear_error (&error);
         }
     }
 }
