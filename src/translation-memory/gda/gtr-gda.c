@@ -959,16 +959,16 @@ gtr_gda_dispose (GObject * object)
       priv->parser = NULL;
     }
 
-  if (priv->db != NULL)
-    {
-      g_object_unref (priv->db);
-      priv->db = NULL;
-    }
-
   if (priv->lookup_query_cache != NULL)
     {
       g_hash_table_unref (priv->lookup_query_cache);
       priv->lookup_query_cache = NULL;
+    }
+
+  if (priv->db != NULL)
+    {
+      g_object_unref (priv->db);
+      priv->db = NULL;
     }
 
   G_OBJECT_CLASS (gtr_gda_parent_class)->dispose (object);
