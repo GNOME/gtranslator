@@ -574,6 +574,11 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
     return NULL;
 
   words = gtr_gda_split_string_in_words (phrase);
+  if (!words)
+    {
+      g_warning ("Failed to split string into words");
+      return NULL;
+    }
   cnt = g_strv_length (words);
 
   inner_error = NULL;
