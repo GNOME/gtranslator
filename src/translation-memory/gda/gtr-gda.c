@@ -463,7 +463,7 @@ free_match (gpointer data)
   GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) data;
 
   g_free (match->match);
-  g_slice_free (GtrTranslationMemoryMatch, match);
+  g_free (match);
 }
 
 static gchar*
@@ -664,7 +664,7 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
 
         id = g_value_get_int (val);
 
-        match = g_slice_new (GtrTranslationMemoryMatch);
+        match = g_new0 (GtrTranslationMemoryMatch, 1);
         match->match = suggestion;
         match->level = score;
         match->id = id;
