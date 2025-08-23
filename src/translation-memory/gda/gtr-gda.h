@@ -14,9 +14,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-#ifndef __GDA_BACKEND_H__
-#define __GDA_BACKEND_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
@@ -41,4 +39,3 @@ struct _GtrGdaClass
 GtrGda                 *gtr_gda_new                     (void);
 
 G_END_DECLS
-#endif /* __GDA_BACKEND_H__ */
