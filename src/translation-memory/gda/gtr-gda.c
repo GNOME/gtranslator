@@ -480,6 +480,8 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
 
   g_return_val_if_fail (GTR_IS_GDA (self), FALSE);
 
+  g_debug ("Storing list of messages in translation memory");
+
   error = NULL;
   if (!begin_transaction (priv->db, &error))
     {
