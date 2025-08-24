@@ -38,7 +38,7 @@ struct _GtrGdaClass
   GObjectClass parent_class;
 };
 
-GtrGda                 *gtr_gda_new                     (void);
+GtrGda                 *gtr_gda_new                     (void) G_GNUC_WARN_UNUSED_RESULT;
 
 GQuark                  gtr_gda_error_quark             (void) G_GNUC_CONST;
 
