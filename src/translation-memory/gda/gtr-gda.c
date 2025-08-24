@@ -701,6 +701,11 @@ gtr_gda_set_max_omits (GtrTranslationMemory * tm, gsize omits)
   GtrGda *self = GTR_GDA (tm);
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
+  if (priv->max_omits == omits)
+    return;
+
+  g_debug ("Running gtr_gda_set_max_omits: %ld", omits);
+
   priv->max_omits = omits;
   g_hash_table_remove_all (priv->lookup_query_cache);
 }
@@ -711,6 +716,11 @@ gtr_gda_set_max_delta (GtrTranslationMemory * tm, gsize delta)
   GtrGda *self = GTR_GDA (tm);
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
+  if (priv->max_delta == delta)
+    return;
+
+  g_debug ("Running gtr_gda_set_max_delta: %ld", delta);
+
   priv->max_delta = delta;
   g_hash_table_remove_all (priv->lookup_query_cache);
 }
@@ -720,6 +730,11 @@ gtr_gda_set_max_items (GtrTranslationMemory * tm, gint items)
 {
   GtrGda *self = GTR_GDA (tm);
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
+
+  if (priv->max_items == items)
+    return;
+
+  g_debug ("Running gtr_gda_set_max_items: %d", items);
 
   priv->max_items = items;
   g_hash_table_remove_all (priv->lookup_query_cache);
@@ -878,9 +893,12 @@ gtr_gda_init (GtrGda * self)
                        "delete from TRANS "
                        "where id = ?1");
 
-  priv->max_omits = 0;
-  priv->max_delta = 0;
-  priv->max_items = 0;
+  /* GSetting default for max-missing-words */
+  priv->max_omits = 2;
+  /* GSetting default for max-length-diff */
+  priv->max_delta = 2;
+  /* Default used at gtr_window_init */
+  priv->max_items = 10;
 
   priv->lookup_query_cache = g_hash_table_new_full (g_direct_hash,
                                                     g_direct_equal,
