@@ -61,9 +61,6 @@ gboolean        gtr_translation_memory_store            (GtrTranslationMemory   
 gboolean        gtr_translation_memory_store_list       (GtrTranslationMemory   *obj,
                                                          GList                  *msg);
 
-void            gtr_translation_memory_remove           (GtrTranslationMemory   *obj,
-                                                         gint            	translation_id);
-
 GList          *gtr_translation_memory_lookup           (GtrTranslationMemory   *obj,
                                                          const gchar            *phrase);
 

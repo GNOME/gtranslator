@@ -78,30 +78,6 @@ gtr_translation_memory_store_list_default (GtrTranslationMemory * obj,
 }
 
 /**
- * gtr_translation_memory_remove:
- * @obj: a #GtrTranslationMemory
- * @original: the original message.
- * @translation: the translation to remove.
- *
- * Removes @translation of @original from translation memory.
- */
-void
-gtr_translation_memory_remove (GtrTranslationMemory * obj,
-			                         gint  translation_id)
-{
-  g_return_if_fail (GTR_IS_TRANSLATION_MEMORY (obj));
-  return GTR_TRANSLATION_MEMORY_GET_IFACE (obj)->remove (obj,
-							 translation_id);
-}
-
-/* Default implementation */
-static void
-gtr_translation_memory_remove_default (GtrTranslationMemory * obj,
-			                                 gint translation_id)
-{
-}
-
-/**
  * gtr_translation_memory_lookup:
  * @obj: a #GtrTranslationMemory
  * @phrase: the unstranslated text to search for translations.
@@ -195,7 +171,6 @@ gtr_translation_memory_default_init (GtrTranslationMemoryInterface *iface)
 
   iface->store = gtr_translation_memory_store_default;
   iface->store_list = gtr_translation_memory_store_list_default;
-  iface->remove = gtr_translation_memory_remove_default;
   iface->lookup = gtr_translation_memory_lookup_default;
   iface->set_max_omits = gtr_translation_memory_set_max_omits_default;
   iface->set_max_delta = gtr_translation_memory_set_max_delta_default;

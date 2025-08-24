@@ -517,24 +517,6 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
 }
 
 static void
-gtr_gda_remove (GtrTranslationMemory *tm,
-                gint translation_id)
-{
-  GtrGda *self = GTR_GDA (tm);
-  GError *error;
-  GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
-
-  error = NULL;
-  execute_non_select (priv->db, priv->stmt_delete_trans, translation_id, -1,
-                      &error);
-  if (error)
-    {
-      g_warning ("removing translation failed: %s", error->message);
-      g_error_free (error);
-    }
-}
-
-static void
 free_match (gpointer data)
 {
   GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) data;
@@ -746,7 +728,6 @@ gtr_translation_memory_iface_init (GtrTranslationMemoryInterface * iface)
 {
   iface->store = gtr_gda_store;
   iface->store_list = gtr_gda_store_list;
-  iface->remove = gtr_gda_remove;
   iface->lookup = gtr_gda_lookup;
   iface->set_max_omits = gtr_gda_set_max_omits;
   iface->set_max_delta = gtr_gda_set_max_delta;
