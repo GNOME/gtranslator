@@ -85,9 +85,6 @@ void gtr_message_status_toggle_fuzzy (GtrWindow * window);
 
 void gtr_actions_edit_clear (GtrWindow * window);
 
-/* View */
-void gtr_actions_view_context (GtrWindow * window);
-
 /*Go*/
 void gtr_message_go_to_first (GtrWindow * window);
 

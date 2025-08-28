@@ -31,7 +31,6 @@ sources = files(
   'gtr-actions-file.c',
   'gtr-actions-go.c',
   'gtr-actions-search.c',
-  'gtr-actions-view.c',
   'gtr-application.c',
   'gtr-close-confirmation-dialog.c',
   'gtr-context.c',
