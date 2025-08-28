@@ -27,7 +27,6 @@
 #include "gtr-utils.h"
 #include "gtr-viewer.h"
 #include "gtr-window.h"
-#include "gtr-window-activatable.h"
 
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>

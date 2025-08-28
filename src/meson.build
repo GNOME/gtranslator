@@ -22,7 +22,6 @@ enum_headers = files(
   'gtr-tab-activatable.h',
   'gtr-tab.h',
   'gtr-view.h',
-  'gtr-window-activatable.h',
   'gtr-window.h',
   'gtr-search-bar.h',
 )

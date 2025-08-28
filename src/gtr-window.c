@@ -36,7 +36,6 @@
 #include "gtr-settings.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
-#include "gtr-window-activatable.h"
 #include "gtr-profile-manager.h"
 #include "gtr-greeter.h"
 
