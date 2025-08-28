@@ -37,7 +37,6 @@
 #include "gtr-context.h"
 #include "gtr-io-error-info-bar.h"
 #include "gtr-msg.h"
-#include "gtr-tab-activatable.h"
 #include "gtr-tab.h"
 #include "gtr-po.h"
 #include "gtr-settings.h"
