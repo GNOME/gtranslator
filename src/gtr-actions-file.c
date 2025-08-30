@@ -382,6 +382,7 @@ gtr_upload_file (GtkWidget *upload_dialog,
   GtrProfile *profile;
   GtrHeader *header;
   g_autoptr (SoupMultipart) mpart = NULL;
+  g_autoptr (GFile) location_file = NULL;
 
   SoupMessage *msg = NULL;
   static SoupSession *session = NULL;
@@ -405,8 +406,9 @@ gtr_upload_file (GtkWidget *upload_dialog,
   /* Get file content */
   tab = gtr_window_get_active_tab (window);
   po = gtr_tab_get_po (tab);
-  filename = g_file_get_basename (gtr_po_get_location (po));
-  g_file_load_contents (gtr_po_get_location (po), NULL, &content, &size, NULL,
+  location_file = gtr_po_get_location (po);
+  filename = g_file_get_basename (location_file);
+  g_file_load_contents (location_file, NULL, &content, &size, NULL,
                         &error);
   if (error != NULL)
     g_warning ("Error opening file %s: %s", filename, (error)->message);
