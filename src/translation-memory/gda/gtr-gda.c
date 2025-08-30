@@ -268,10 +268,10 @@ string_comparator (const void *s1, const void *s2)
   return strcmp (*(const gchar **) s1, *(const gchar **) s2);
 }
 
-static gchar **
+static GStrv
 gtr_gda_split_string_in_words (const gchar *phrase)
 {
-  gchar **words = gtr_gda_utils_split_string_in_words (phrase);
+  GStrv words = gtr_gda_utils_split_string_in_words (phrase);
   gsize count = g_strv_length (words);
   gint w;
   gint r;
@@ -354,7 +354,7 @@ gtr_gda_store_impl (GtrGda *self,
 {
   gint orig_id;
   gboolean found_translation = FALSE;
-  gchar **words = NULL;
+  g_auto(GStrv) words = NULL;
   GError *inner_error;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
@@ -395,8 +395,6 @@ gtr_gda_store_impl (GtrGda *self,
           if (inner_error)
             goto error;
         }
-
-      g_strfreev (words);
     }
   else
     {
@@ -426,7 +424,6 @@ gtr_gda_store_impl (GtrGda *self,
   return TRUE;
 
  error:
-  g_strfreev (words);
   g_propagate_error (error, inner_error);
   return FALSE;
 }
@@ -624,7 +621,7 @@ static GList *
 gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
 {
   GtrGda *self = GTR_GDA (tm);
-  gchar **words = NULL;
+  g_auto(GStrv) words = NULL;
   guint cnt = 0;
   GList *matches = NULL;
   GError *inner_error;
@@ -685,13 +682,11 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
       g_warning ("%s\n", inner_error->message);
 
       g_error_free (inner_error);
-      g_strfreev (words);
 
       return NULL;
     }
 
   matches = g_list_reverse (matches);
-  g_strfreev (words);
   return matches;
 }
 

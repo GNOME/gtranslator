@@ -26,6 +26,6 @@
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 
-gchar **gtr_gda_utils_split_string_in_words (const gchar *string);
+GStrv gtr_gda_utils_split_string_in_words (const gchar *string);
 
 #endif

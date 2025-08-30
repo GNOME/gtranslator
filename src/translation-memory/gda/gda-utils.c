@@ -89,12 +89,12 @@ check_good_word (const gchar * word, gchar ** bad_words)
  * 
  * Returns: an array of words of the processed text
  */
-gchar **
+GStrv
 gtr_gda_utils_split_string_in_words (const gchar * string)
 {
   PangoLanguage *lang = pango_language_from_string ("en");
   PangoLogAttr *attrs;
-  GPtrArray *array;
+  g_autoptr(GStrvBuilder) builder = g_strv_builder_new ();
   gint char_len;
   gint i = 0;
   gchar *s;
@@ -122,8 +122,6 @@ gtr_gda_utils_split_string_in_words (const gchar * string)
   pango_get_log_attrs (string,
                        strlen (string), -1, lang, attrs, char_len + 1);
 
-  array = g_ptr_array_new ();
-
   s = (gchar *) string;
   while (i <= char_len)
     {
@@ -139,7 +137,7 @@ gtr_gda_utils_split_string_in_words (const gchar * string)
           word = g_strndup (start, end - start);
 
           if (check_good_word (word, badwords_collate))
-            g_ptr_array_add (array, g_steal_pointer (&word));
+            g_strv_builder_take (builder, g_steal_pointer (&word));
         }
 
       i++;
@@ -147,8 +145,6 @@ gtr_gda_utils_split_string_in_words (const gchar * string)
     }
 
   g_free (attrs);
-  g_ptr_array_add (array, NULL);
 
-  return (gchar **) g_ptr_array_free (array, FALSE);
+  return g_strv_builder_end (builder);
 }
-
