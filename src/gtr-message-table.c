@@ -328,7 +328,6 @@ gtr_message_table_navigate (GtrMessageTable * table,
                             GtrMessageTableNavigation navigation,
                             GtrMessageTableNavigationFunc func)
 {
-  GtrMsg *msg = NULL;
   GtrMessageTablePrivate *priv = NULL;
 
   priv = gtr_message_table_get_instance_private (table);
@@ -350,6 +349,7 @@ gtr_message_table_navigate (GtrMessageTable * table,
           int next = gtk_single_selection_get_selected (GTK_SINGLE_SELECTION (priv->selection)) + 1;
           while (TRUE)
             {
+              g_autoptr(GtrMsg) msg = NULL;
               msg = GTR_MSG (g_list_model_get_object (G_LIST_MODEL (priv->sort_model), next));
               if (!msg)
                 return NULL;
@@ -376,6 +376,7 @@ gtr_message_table_navigate (GtrMessageTable * table,
           int prev = gtk_single_selection_get_selected (GTK_SINGLE_SELECTION (priv->selection)) - 1;
           while (TRUE)
             {
+              g_autoptr(GtrMsg) msg = NULL;
               msg = GTR_MSG (g_list_model_get_object (G_LIST_MODEL (priv->sort_model), prev));
               if (!msg)
                 return NULL;
@@ -399,6 +400,7 @@ gtr_message_table_navigate (GtrMessageTable * table,
       break;
     }
 
+  g_autoptr(GtrMsg) msg = NULL;
   msg = g_object_ref (gtk_single_selection_get_selected_item (GTK_SINGLE_SELECTION (priv->selection)));
   return g_steal_pointer (&msg);
 }
