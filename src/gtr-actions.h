@@ -52,8 +52,6 @@ void gtr_save_file_as_dialog (GtrWindow * window);
 
 void gtr_upload_file_dialog (GtrWindow * window);
 
-gboolean gtr_open (GFile * location, GtrWindow * window, GError ** error);
-
 void gtr_close_tab (GtrTab * tab, GtrWindow * window);
 
 void gtr_file_close (GtrWindow * window);

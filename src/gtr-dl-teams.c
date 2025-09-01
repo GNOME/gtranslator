@@ -626,20 +626,32 @@ gtr_dl_teams_download_file_done (GObject *object, GAsyncResult *result, gpointer
       return;
     }
 
-  if (gtr_open (dest_file, priv->main_window, &error))
+  g_autoptr(GtrPo) po = NULL;
+  po = gtr_po_new_from_file (dest_file, &error);
+  if (error)
     {
+      dialog = adw_alert_dialog_new (NULL, error->message);
+      adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
+      adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
+      adw_dialog_present (dialog, GTK_WIDGET (priv->main_window));
+      return;
+    }
+  else
+    {
+      GtrTab *tab;
       g_autoptr (GError) po_error = NULL;
 
-      GtrTab *tab = gtr_window_get_active_tab (priv->main_window);
-      g_info ("The file '%s' has been saved in '%s'", basename, dest_dir);
-      gtr_tab_set_info (tab, _("The file has been saved in your Downloads folder"), NULL);
-
-      GtrPo *po = gtr_tab_get_po (tab);
       gtr_po_set_dl_info (po, priv->selected_lang, priv->selected_module,
                           priv->selected_branch, priv->selected_domain,
                           priv->module_state, priv->vcs_web);
       // Save to update the headers
       gtr_po_save_file (po, &po_error);
+      if (po_error)
+        g_error ("Could not save po file %s", po_error->message);
+
+      gtr_window_set_po (priv->main_window, po);
+      tab = gtr_window_get_active_tab (priv->main_window);
+      gtr_tab_set_info (tab, _("The file has been saved in your Downloads folder"), NULL);
     }
 }
 

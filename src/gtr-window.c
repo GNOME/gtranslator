@@ -142,12 +142,17 @@ drag_data_received_cb (GtkDropTarget * drop_target,
 {
   GtrWindow * window = GTR_WINDOW (data);
   g_autoptr (GError) error = NULL;
+  g_autoptr (GtrPo) po = NULL;
+  GFile *location;
 
   if (!G_VALUE_HOLDS (value, G_TYPE_FILE))
     return FALSE;
 
+  location = g_value_get_object (value);
+
   gtr_window_remove_tab (window);
-  gtr_open (g_value_get_object (value), window, &error);
+
+  po = gtr_po_new_from_file (location, &error);
   if (error != NULL)
     {
       AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
@@ -155,6 +160,8 @@ drag_data_received_cb (GtkDropTarget * drop_target,
       adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
       adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (window));
     }
+  gtr_window_set_po (window, po);
+
   return TRUE;
 }
 

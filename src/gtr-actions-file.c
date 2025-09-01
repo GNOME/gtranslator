@@ -61,91 +61,6 @@ user_data_free (UserData *ud)
   g_free (ud);
 }
 
-/*
- * The main file opening function. Checks that the file isn't already open,
- * and if not, opens it in a new tab.
- */
-gboolean
-gtr_open (GFile * location, GtrWindow * window, GError ** error)
-{
-  g_autoptr (GtrPo) po = NULL;
-  GtrTab *tab;
-  GList *current;
-  GtrView *active_view;
-  GtrHeader *header;
-  g_autofree gchar *dl_lang  = NULL;
-  g_autofree gchar *dl_module  = NULL;
-  g_autofree gchar *dl_branch  = NULL;
-  g_autofree gchar *dl_domain  = NULL;
-  g_autofree gchar *dl_module_state  = NULL;
-  g_autofree gchar *dl_vcs_web  = NULL;
-
-  /*
-   * If the filename can't be opened, pass the error back to the caller
-   * to handle.
-   */
-
-  po = gtr_po_new_from_file (location, error);
-  if (error) {
-    gtr_window_show_projects (window);
-    // TODO: show error message
-    return FALSE;
-  }
-
-  if ((*error != NULL)
-      && (((GError *) * error)->code != GTR_PO_ERROR_RECOVERY)) {
-    gtr_window_show_projects (window);
-    return FALSE;
-  }
-
-  header = gtr_po_get_header (po);
-  dl_lang = gtr_header_get_dl_lang (header);
-  dl_module = gtr_header_get_dl_module (header);
-  dl_branch = gtr_header_get_dl_branch (header);
-  dl_domain = gtr_header_get_dl_domain (header);
-  dl_module_state = gtr_header_get_dl_state (header);
-  dl_vcs_web = gtr_header_get_dl_vcs_web (header);
-
-  /*
-   * Set Damned Lies info when a po file is opened locally
-   */
-  gtr_po_set_dl_info(po,
-                     dl_lang,
-                     dl_module,
-                     dl_branch,
-                     dl_domain,
-                     dl_module_state,
-                     dl_vcs_web);
-
-  /*
-   * Create a page to add to our list of open files
-   */
-  tab = gtr_window_create_tab (window, po);
-
-  /*
-   * Activate the upload file icon if the po file is in the appropriate
-   * state as on the vertimus workflow
-   */
-  //active_notebook = gtr_window_get_notebook (window);
-  gtr_tab_enable_upload (tab, gtr_po_can_dl_upload (po));
-
-  /*
-   * Show the current message.
-   */
-  current = gtr_po_get_current_message (po);
-  gtr_tab_message_go_to (tab, current->data, FALSE, GTR_TAB_MOVE_NONE);
-
-  /*
-   * Grab the focus
-   */
-  active_view = gtr_tab_get_active_view (tab);
-  gtk_widget_grab_focus (GTK_WIDGET (active_view));
-
-  gtr_window_show_poeditor (window);
-
-  return TRUE;
-}
-
 static void
 gtr_po_parse_files_from_dialog (GObject *source, GAsyncResult *res, void *user_data)
 {
@@ -524,13 +439,22 @@ load_file_list (GtrWindow * window, GSList * locations)
 
   while (locations_to_load != NULL)
     {
+      g_autoptr (GtrPo) po = NULL;
+
       g_return_if_fail (locations_to_load->data != NULL);
 
       if (gtr_window_get_active_tab (window) != NULL)
         window = gtr_application_create_window (GTR_APP);
 
-      if (!gtr_open (locations_to_load->data, window, &error))
-        break;
+      po = gtr_po_new_from_file (locations_to_load->data, &error);
+      if (error)
+        {
+          g_error ("Could not load po file %s",
+                   g_file_get_path (locations_to_load->data));
+          break;
+        }
+
+      gtr_window_set_po (window, po);
 
       locations_to_load = g_slist_next (locations_to_load);
     }
