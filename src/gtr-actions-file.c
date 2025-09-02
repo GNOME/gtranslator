@@ -78,6 +78,7 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
   g_autofree gchar *dl_branch  = NULL;
   g_autofree gchar *dl_domain  = NULL;
   g_autofree gchar *dl_module_state  = NULL;
+  g_autofree gchar *dl_vcs_web  = NULL;
 
   /*
    * If the filename can't be opened, pass the error back to the caller
@@ -103,6 +104,7 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
   dl_branch = gtr_header_get_dl_branch (header);
   dl_domain = gtr_header_get_dl_domain (header);
   dl_module_state = gtr_header_get_dl_state (header);
+  dl_vcs_web = gtr_header_get_dl_vcs_web (header);
 
   /*
    * Set Damned Lies info when a po file is opened locally
@@ -112,7 +114,8 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
                      dl_module,
                      dl_branch,
                      dl_domain,
-                     dl_module_state);
+                     dl_module_state,
+                     dl_vcs_web);
 
   /*
    * Create a page to add to our list of open files
