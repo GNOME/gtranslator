@@ -15,22 +15,22 @@ translation where accurate.
 
 You can check for the latest news and releases on the gtranslator Gitlab repository:
 
-    https://gitlab.gnome.org/GNOME/gtranslator/
+>   https://gitlab.gnome.org/GNOME/gtranslator/
 
 In the case you found a bug or wanted to give us a "wish-feature" of your own,
 please file a report under the gtranslator product in GNOME gitlab at:
 
-    https://gitlab.gnome.org/GNOME/gtranslator/issues/
+>   https://gitlab.gnome.org/GNOME/gtranslator/issues/
 
 If you have got any problems, need support, want to give any ideas, hints,
 blame us, spam us or declare your love to gtranslator you can do this via the
 GNOME support forum:
 
-    https://discourse.gnome.org/c/applications/
+>   https://discourse.gnome.org/c/applications/
 
 We've also a Matrix channel, you can contact us directly in the #gtranslator:gnome.org channel:
 
-    https://matrix.to/#/#gtranslator:gnome.org
+>   https://matrix.to/#/#gtranslator:gnome.org
 
 Please don't hesitate to file bug reports on
 https://gitlab.gnome.org/GNOME/gtranslator/issues/ or to share your comments,
