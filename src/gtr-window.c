@@ -876,3 +876,35 @@ gtr_window_add_toast_msg (GtrWindow *window,
   adw_toast_set_timeout (toast, 5);
   gtr_window_add_toast (window, toast);
 }
+
+static void
+on_launch (GObject *object, GAsyncResult *result, gpointer user_data)
+{
+  g_autoptr (GError) error = NULL;
+  gtk_uri_launcher_launch_finish (GTK_URI_LAUNCHER (object), result, &error);
+
+  if (error)
+    g_error ("Could not open uri: %s", error->message);
+}
+
+void
+gtr_window_open_file_in_browser (GtrWindow  *self,
+                                 const char *vcs_web,
+                                 const char *module,
+                                 const char *file,
+                                 const char *branch_name,
+                                 int         line_number)
+{
+  g_autoptr(GtkUriLauncher) launcher = NULL;
+  g_autofree char *module_endpoint = NULL;
+  g_autofree char *uri = NULL;
+  g_autofree char *file_with_line = NULL;
+
+  file_with_line = g_strdup_printf ("%s#L%d", file, line_number);
+  uri = g_build_path ("/", vcs_web, "/-/blob/", branch_name, file_with_line, NULL);
+
+  g_debug ("Opening %s", uri);
+
+  launcher = gtk_uri_launcher_new (uri);
+  gtk_uri_launcher_launch (launcher, GTK_WINDOW (self), NULL, on_launch, NULL);
+}

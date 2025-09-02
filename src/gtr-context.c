@@ -23,6 +23,7 @@
 #include "gtr-context.h"
 #include "gtr-tab.h"
 #include "gtr-utils.h"
+#include "gtr-window.h"
 #include "translation-memory/gtr-translation-memory-ui.h"
 
 #include <glib.h>
@@ -459,13 +460,46 @@ gtr_context_init_tm (GtrContextPanel *panel,
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_win), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 }
 
+typedef struct {
+  char *filename;
+  char *vcs_web;
+  char *module_name;
+  char *branch_name;
+  int line;
+} UriData;
+
+static void
+uri_data_free (UriData *ud)
+{
+  g_clear_pointer (&ud->vcs_web, g_free);
+  g_clear_pointer (&ud->filename, g_free);
+  g_clear_pointer (&ud->branch_name, g_free);
+  g_clear_pointer (&ud->module_name, g_free);
+
+  g_free (ud);
+}
+
+static void
+on_row_activated (AdwActionRow *row,
+                  gpointer      user_data)
+{
+  UriData *ud = user_data;
+
+  GtrWindow *parent = GTR_WINDOW (gtk_widget_get_root (GTK_WIDGET (row)));
+
+  gtr_window_open_file_in_browser (parent, ud->vcs_web, ud->module_name,
+                                   ud->filename, ud->branch_name, ud->line);
+}
+
 void
 gtr_context_add_path (GtrContextPanel *panel,
                       const char      *filename,
                       int             line)
 {
   GtkWidget *row;
+  GtrPo *po;
   GtrContextPanelPrivate *priv = gtr_context_panel_get_instance_private (panel);
+  const char *module, *branch, *vcs_web;
 
   g_autofree char *text = g_strdup_printf ("%s:%d", filename, line);
 
@@ -474,6 +508,32 @@ gtr_context_add_path (GtrContextPanel *panel,
   // gitlab if this looks like a gnome project?
   row = adw_action_row_new ();
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), text);
+
+  po = gtr_tab_get_po (priv->tab);
+  module = gtr_po_get_dl_module (po);
+  branch = gtr_po_get_dl_branch (po);
+  vcs_web = gtr_po_get_dl_vcs_web (po);
+
+  // Check that we have enough information to form the URI.
+  if (module && branch && vcs_web)
+    {
+      UriData *ud;
+      GtkWidget *image;
+
+      image = gtk_image_new_from_icon_name ("external-link-symbolic");
+      adw_action_row_add_suffix (ADW_ACTION_ROW (row), image);
+      gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), true);
+
+      ud = g_new0 (UriData, 1);
+      g_set_str (&ud->filename, filename);
+      g_set_str (&ud->branch_name, branch);
+      g_set_str (&ud->module_name, module);
+      g_set_str (&ud->vcs_web, vcs_web);
+      ud->line = line;
+
+      g_signal_connect_data (row, "activated", G_CALLBACK (on_row_activated),
+                             ud, (GClosureNotify)uri_data_free, G_CONNECT_DEFAULT);
+    }
 
   gtk_list_box_append (GTK_LIST_BOX (priv->paths), row);
 }

@@ -79,4 +79,11 @@ void gtr_window_show_greeter (GtrWindow *window);
 
 void gtr_window_save_current_tab (GtrWindow *window);
 
+void gtr_window_open_file_in_browser (GtrWindow  *self,
+                                      const char *vcs_web,
+                                      const char *module,
+                                      const char *file,
+                                      const char *branch_name,
+                                      int         line_number);
+
 G_END_DECLS
