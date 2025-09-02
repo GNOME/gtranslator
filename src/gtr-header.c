@@ -52,7 +52,7 @@ struct _GtrHeader
 
 G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrHeader, gtr_header, GTR_TYPE_MSG)
 
-static void
+void
 gtr_header_set_field (GtrHeader * header,
                       const gchar * field, const gchar * data)
 {

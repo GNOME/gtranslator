@@ -132,22 +132,6 @@ enum
 static gchar *message_error = NULL;
 
 static void
-gtr_header_set_field (GtrHeader * header,
-                      const gchar * field, const gchar * data)
-{
-  gchar *msgstr;
-
-  g_return_if_fail (GTR_IS_HEADER (header));
-  g_return_if_fail (data != NULL);
-
-  msgstr = po_header_set_field (gtr_msg_get_msgstr (GTR_MSG (header)),
-                                field, data);
-  gtr_msg_set_msgstr (GTR_MSG (header), msgstr);
-
-  g_free (msgstr);
-}
-
-static void
 gtr_po_set_property (GObject      *object,
                      guint         prop_id,
                      const GValue *value,

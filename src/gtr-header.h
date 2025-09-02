@@ -116,6 +116,10 @@ void            gtr_header_set_dl_info               (GtrHeader * header,
                                                       const gchar * branch,
                                                       const gchar * domain);
 
+void             gtr_header_set_field                (GtrHeader   *header,
+                                                      const gchar *field,
+                                                      const gchar *data);
+
 G_END_DECLS
 
 #endif /* __HEADER_H__ */
