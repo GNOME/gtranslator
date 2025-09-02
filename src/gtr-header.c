@@ -59,7 +59,9 @@ gtr_header_set_field (GtrHeader * header,
   gchar *msgstr;
 
   g_return_if_fail (GTR_IS_HEADER (header));
-  g_return_if_fail (data != NULL);
+
+  if (!data || g_strcmp0 (data, "") == 0)
+    return;
 
   msgstr = po_header_set_field (gtr_msg_get_msgstr (GTR_MSG (header)),
                                 field, data);
