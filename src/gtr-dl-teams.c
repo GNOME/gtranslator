@@ -631,7 +631,7 @@ gtr_dl_teams_download_file_done (GObject *object, GAsyncResult *result, gpointer
       GtrPo *po = gtr_tab_get_po (tab);
       gtr_po_set_dl_info (po, priv->selected_lang, priv->selected_module,
                           priv->selected_branch, priv->selected_domain,
-                          priv->module_state);
+                          priv->module_state, NULL);
       // Save to update the headers
       gtr_po_save_file (po, &po_error);
     }

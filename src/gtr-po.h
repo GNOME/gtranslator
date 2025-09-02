@@ -87,7 +87,8 @@ GQuark gtr_po_error_quark (void);
      void gtr_po_set_state (GtrPo * po, GtrPoState state);
 
      void gtr_po_set_dl_info (GtrPo * po, const gchar * lang, const gchar * module_name,
-                              const gchar * branch, const gchar * domain, const gchar * module_state);
+                              const gchar * branch, const gchar * domain, const gchar * module_state,
+                              const gchar *vcs_web);
 
      const gchar *gtr_po_get_dl_lang (GtrPo * po);
 
@@ -98,6 +99,8 @@ GQuark gtr_po_error_quark (void);
      const gchar *gtr_po_get_dl_domain (GtrPo * po);
 
      const gchar *gtr_po_get_dl_module_state (GtrPo * po);
+
+     const gchar *gtr_po_get_dl_vcs_web (GtrPo * po);
 
      gboolean gtr_po_can_dl_upload (GtrPo * po);
 

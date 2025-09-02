@@ -112,6 +112,8 @@ typedef struct
   /* The state of a DL module */
   gchar *dl_state;
 
+  char *dl_vcs_web;
+
   /* Marks if the file was changed;  */
   guint file_changed : 1;
 } GtrPoPrivate;
@@ -210,6 +212,7 @@ gtr_po_init (GtrPo * po)
   priv->dl_branch = NULL;
   priv->dl_domain = NULL;
   priv->dl_state = NULL;
+  priv->dl_vcs_web = NULL;
 }
 
 static void
@@ -235,6 +238,7 @@ gtr_po_finalize (GObject * object)
     g_free (priv->dl_domain);
   if (priv->dl_state)
     g_free (priv->dl_state);
+  g_clear_pointer (&priv->dl_vcs_web, g_free);
 
   if (priv->iter)
     po_message_iterator_free (priv->iter);
@@ -950,7 +954,8 @@ gtr_po_set_dl_info (GtrPo *po,
                     const gchar *module_name,
                     const gchar *branch,
                     const gchar *domain,
-                    const gchar *module_state)
+                    const gchar *module_state,
+                    const gchar *vcs_web)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_set_str (&priv->dl_lang, lang);
@@ -958,6 +963,10 @@ gtr_po_set_dl_info (GtrPo *po,
   g_set_str (&priv->dl_branch, branch);
   g_set_str (&priv->dl_domain, domain);
   g_set_str (&priv->dl_state, module_state);
+  g_set_str (&priv->dl_vcs_web, vcs_web);
+
+  if (vcs_web)
+    gtr_header_set_field (priv->header, "X-DL-VCS-Web", vcs_web);
 
   if (lang)
     gtr_header_set_field (priv->header, "X-DL-Lang", lang);
@@ -1401,6 +1410,13 @@ gtr_po_get_dl_module_state (GtrPo *po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   return priv->dl_state;
+}
+
+const gchar *
+gtr_po_get_dl_vcs_web (GtrPo *po)
+{
+  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
+  return priv->dl_vcs_web;
 }
 
 gboolean
