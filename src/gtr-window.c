@@ -469,6 +469,66 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
   return tab;
 }
 
+void
+gtr_window_set_po (GtrWindow *window, GtrPo *po)
+{
+  GtrTab *tab;
+  GList *current;
+  GtrView *active_view;
+  GtrHeader *header;
+  g_autofree gchar *dl_vcs_web  = NULL;
+  g_autofree gchar *dl_lang  = NULL;
+  g_autofree gchar *dl_module  = NULL;
+  g_autofree gchar *dl_branch  = NULL;
+  g_autofree gchar *dl_domain  = NULL;
+  g_autofree gchar *dl_module_state  = NULL;
+
+  header = gtr_po_get_header (po);
+  dl_lang = gtr_header_get_dl_lang (header);
+  dl_module = gtr_header_get_dl_module (header);
+  dl_branch = gtr_header_get_dl_branch (header);
+  dl_domain = gtr_header_get_dl_domain (header);
+  dl_module_state = gtr_header_get_dl_state (header);
+  dl_vcs_web = gtr_header_get_dl_vcs_web (header);
+
+  /*
+   * Set Damned Lies info when a po file is opened locally
+   */
+  gtr_po_set_dl_info (po,
+                      dl_lang,
+                      dl_module,
+                      dl_branch,
+                      dl_domain,
+                      dl_module_state,
+                      dl_vcs_web);
+
+  /*
+   * Create a page to add to our list of open files
+   */
+  tab = gtr_window_create_tab (window, po);
+
+  /*
+   * Activate the upload file icon if the po file is in the appropriate
+   * state as on the vertimus workflow
+   */
+  //active_notebook = gtr_window_get_notebook (window);
+  gtr_tab_enable_upload (tab, gtr_po_can_dl_upload (po));
+
+  /*
+   * Show the current message.
+   */
+  current = gtr_po_get_current_message (po);
+  gtr_tab_message_go_to (tab, current->data, FALSE, GTR_TAB_MOVE_NONE);
+
+  /*
+   * Grab the focus
+   */
+  active_view = gtr_tab_get_active_view (tab);
+  gtk_widget_grab_focus (GTK_WIDGET (active_view));
+
+  gtr_window_show_poeditor (window);
+}
+
 /**
  * gtr_window_get_active_tab:
  * @window: a #GtrWindow

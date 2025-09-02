@@ -39,6 +39,8 @@ G_DECLARE_FINAL_TYPE (GtrWindow, gtr_window, GTR, WINDOW, AdwApplicationWindow)
 
 GtrTab *gtr_window_create_tab (GtrWindow * window, GtrPo * po);
 
+void gtr_window_set_po (GtrWindow * window, GtrPo * po);
+
 GtrTab *gtr_window_get_active_tab (GtrWindow * window);
 
 GList *gtr_window_get_all_tabs (GtrWindow * window);
