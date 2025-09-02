@@ -508,6 +508,7 @@ gtr_context_add_path (GtrContextPanel *panel,
   // gitlab if this looks like a gnome project?
   row = adw_action_row_new ();
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), text);
+  adw_preferences_row_set_title_selectable (ADW_PREFERENCES_ROW (row), true);
 
   po = gtr_tab_get_po (priv->tab);
   module = gtr_po_get_dl_module (po);
