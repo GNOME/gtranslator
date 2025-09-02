@@ -751,6 +751,18 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
   return TRUE;
 }
 
+GtrPo*
+gtr_po_new_from_file (GFile   *location,
+                      GError **error)
+{
+  g_autoptr(GtrPo) po = gtr_po_new ();
+
+  if (!gtr_po_parse (po, location, error))
+    return NULL;
+
+  return g_steal_pointer (&po);
+}
+
 /**
  * gtr_po_save_file:
  * @po: a #GtrPo
