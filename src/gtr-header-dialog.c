@@ -256,7 +256,7 @@ dl_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 
   gtr_header_set_dl_info (gtr_po_get_header (priv->po),
                           lang, module, branch,
-                          domain);
+                          domain, NULL);
 
   po_state_set_modified (priv->po);
 }

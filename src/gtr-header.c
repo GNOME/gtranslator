@@ -470,7 +470,8 @@ gtr_header_set_dl_info (GtrHeader * header,
                          const gchar * lang,
                          const gchar * module_name,
                          const gchar * branch,
-                         const gchar * domain)
+                         const gchar * domain,
+                         const char  * vcs_web)
 {
 
   g_return_if_fail (GTR_IS_HEADER (header));
@@ -479,7 +480,7 @@ gtr_header_set_dl_info (GtrHeader * header,
   gtr_header_set_field (header, "X-DL-Module", module_name);
   gtr_header_set_field (header, "X-DL-Branch", branch);
   gtr_header_set_field (header, "X-DL-Domain", domain);
-
+  gtr_header_set_field (header, "X-DL-VCS-Web", vcs_web);
 }
 
 /**
@@ -534,6 +535,15 @@ gtr_header_get_dl_branch (GtrHeader * header)
 
   return po_header_field (gtr_msg_get_msgstr (GTR_MSG (header)),
                           "X-DL-Branch");
+}
+
+char *
+gtr_header_get_dl_vcs_web (GtrHeader * header)
+{
+  g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
+
+  return po_header_field (gtr_msg_get_msgstr (GTR_MSG (header)),
+                          "X-DL-VCS-Web");
 }
 
 /**
