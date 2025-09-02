@@ -444,6 +444,7 @@ gtr_dl_teams_parse_file_info (GObject *object, GAsyncResult *result, gpointer us
   jobject = json_node_get_object(node);
 
   /* Save file path; escape the string - slashes inside! */
+  g_clear_pointer (&priv->file_path, g_free);
   priv->file_path = g_strescape (json_object_get_string_member (jobject, "po_file"), "");
 
   if (!priv->file_path)
