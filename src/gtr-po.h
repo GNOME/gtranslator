@@ -74,11 +74,8 @@ typedef enum
  */
 GQuark gtr_po_error_quark (void);
 
-     GtrPo *gtr_po_new (void);
      GtrPo *gtr_po_new_from_file (GFile   *location,
                                   GError **error) G_GNUC_WARN_UNUSED_RESULT;
-
-     gboolean gtr_po_parse (GtrPo * po, GFile * location, GError ** error);
 
      void gtr_po_save_header_in_msg (GtrPo * po, GtrHeader * header);
 

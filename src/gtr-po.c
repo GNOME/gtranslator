@@ -640,7 +640,7 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
  * Parses all things related to the #GtrPo and initializes all necessary
  * variables.
  **/
-gboolean
+static bool
 gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
 {
   GtrMsg *msg;

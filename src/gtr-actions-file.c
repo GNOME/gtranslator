@@ -85,8 +85,8 @@ gtr_open (GFile * location, GtrWindow * window, GError ** error)
    * to handle.
    */
 
-  po = gtr_po_new ();
-  if (!gtr_po_parse (po, location, error)) {
+  po = gtr_po_new_from_file (location, error);
+  if (error) {
     gtr_window_show_projects (window);
     // TODO: show error message
     return FALSE;
