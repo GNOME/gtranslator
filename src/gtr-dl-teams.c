@@ -65,6 +65,7 @@ typedef struct
   gchar *selected_domain;
   gchar *file_path;
   gchar *module_state;
+  gchar *vcs_web;
 
   GtrWindow *main_window;
 
@@ -207,6 +208,7 @@ gtr_dl_teams_parse_module_details (GObject *object, GAsyncResult *result, gpoint
   JsonObject *jobject;
   JsonNode *branchesNode;
   JsonNode *domainsNode;
+  JsonNode *vcsWebNode;
   AdwDialog *dialog;
   SoupStatus status_code;
   SoupMessage *msg = NULL;
@@ -241,6 +243,10 @@ gtr_dl_teams_parse_module_details (GObject *object, GAsyncResult *result, gpoint
   json_parser_load_from_stream (parser, stream, NULL, &error);
   node = json_parser_get_root (parser);
   jobject = json_node_get_object (node);
+
+  vcsWebNode = json_object_get_member (jobject, "vcs_web");
+  if (vcsWebNode)
+    g_set_str (&priv->vcs_web, json_node_get_string (vcsWebNode));
 
   /* branches */
   branchesNode = json_object_get_member (jobject, "branches");
@@ -631,7 +637,7 @@ gtr_dl_teams_download_file_done (GObject *object, GAsyncResult *result, gpointer
       GtrPo *po = gtr_tab_get_po (tab);
       gtr_po_set_dl_info (po, priv->selected_lang, priv->selected_module,
                           priv->selected_branch, priv->selected_domain,
-                          priv->module_state, NULL);
+                          priv->module_state, priv->vcs_web);
       // Save to update the headers
       gtr_po_save_file (po, &po_error);
     }
@@ -830,6 +836,7 @@ gtr_dl_teams_dispose (GObject *object)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (GTR_DL_TEAMS (object));
 
+  g_clear_pointer (&priv->vcs_web, g_free);
   if (priv->selected_lang)
     {
       g_free (priv->selected_lang);
@@ -927,6 +934,7 @@ gtr_dl_teams_init (GtrDlTeams *self)
   priv->selected_domain = NULL;
   priv->file_path = NULL;
   priv->module_state = NULL;
+  priv->vcs_web = NULL;
 
   priv->domains_model = g_list_store_new (GTR_TYPE_DL_TEAMS_DOMAIN);
   adw_combo_row_set_model (ADW_COMBO_ROW (priv->domains_comborow),
