@@ -548,7 +548,6 @@ gtr_dl_teams_download_file_done (GObject *object, GAsyncResult *result, gpointer
 
   AdwDialog *dialog;
 
-  GFileIOStream *iostream = NULL;
   GOutputStream *output = NULL;
   SoupMessage *msg = NULL;
   SoupStatus status_code;
@@ -557,6 +556,7 @@ gtr_dl_teams_download_file_done (GObject *object, GAsyncResult *result, gpointer
   g_autoptr(GFile) dest_file = NULL;
   g_autoptr (GError) error = NULL;
   g_autoptr (GBytes) bytes = NULL;
+  g_autoptr (GFileIOStream) iostream = NULL;
   g_autofree char *basename = NULL;
   g_autofree char *og_basename = NULL;
   g_autofree char *file_path = NULL;
