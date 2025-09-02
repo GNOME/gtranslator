@@ -25,7 +25,6 @@
 #include "gtr-context.h"
 #include "gtr-dirs.h"
 #include "gtr-utils.h"
-#include "gtr-viewer.h"
 #include "gtr-window.h"
 
 #include <glib/gi18n-lib.h>
