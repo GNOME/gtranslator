@@ -59,6 +59,7 @@ typedef struct
   GtkWidget *branch;
   GtkWidget *domain;
   GtkWidget *state;
+  GtkWidget *vcs_web;
 
   GtrPo     *po;
 } GtrHeaderDialogPrivate;
@@ -114,6 +115,7 @@ gtr_header_dialog_class_init (GtrHeaderDialogClass * klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, branch);
   gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, domain);
   gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, state);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrHeaderDialog, vcs_web);
 }
 
 static void
@@ -246,17 +248,18 @@ opt_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 static void
 dl_changed (GtkWidget * widget, GtrHeaderDialog * dlg)
 {
-  const char *lang, *module, *branch, *domain;
+  const char *lang, *module, *branch, *domain, *vcs_web;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
   lang = gtk_editable_get_text (GTK_EDITABLE (priv->lang));
   module = gtk_editable_get_text (GTK_EDITABLE (priv->module));
   branch = gtk_editable_get_text (GTK_EDITABLE (priv->branch));
   domain = gtk_editable_get_text (GTK_EDITABLE (priv->domain));
+  vcs_web = gtk_editable_get_text (GTK_EDITABLE (priv->vcs_web));
 
   gtr_header_set_dl_info (gtr_po_get_header (priv->po),
                           lang, module, branch,
-                          domain, NULL);
+                          domain, vcs_web);
 
   po_state_set_modified (priv->po);
 }
@@ -268,6 +271,7 @@ gtr_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
   gchar *text;
   GtkTextBuffer *buffer;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
+  g_autofree gchar *vcs_web  = NULL;
 
   header = gtr_po_get_header (priv->po);
 
@@ -359,6 +363,10 @@ gtr_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
       gtk_editable_set_text (GTK_EDITABLE (priv->state), text);
       g_free (text);
     }
+
+  vcs_web = gtr_header_get_dl_vcs_web (header);
+  if (vcs_web)
+    gtk_editable_set_text (GTK_EDITABLE (priv->vcs_web), vcs_web);
 }
 
 static void
@@ -460,6 +468,9 @@ set_default_values (GtrHeaderDialog * dlg, GtrWindow * window)
                     G_CALLBACK (dl_changed), dlg);
 
   g_signal_connect (priv->domain, "changed",
+                    G_CALLBACK (dl_changed), dlg);
+
+  g_signal_connect (priv->vcs_web, "changed",
                     G_CALLBACK (dl_changed), dlg);
 }
 
