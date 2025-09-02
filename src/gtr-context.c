@@ -522,6 +522,7 @@ gtr_context_add_path (GtrContextPanel *panel,
       GtkWidget *image;
 
       image = gtk_image_new_from_icon_name ("external-link-symbolic");
+      gtk_widget_set_tooltip_text (image, _("Open in Browser"));
       adw_action_row_add_suffix (ADW_ACTION_ROW (row), image);
       gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), true);
 
