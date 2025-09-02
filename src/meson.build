@@ -1,6 +1,7 @@
 src_inc = include_directories('.')
 
 subdir('translation-memory')
+subdir('codeview')
 
 gtr_build_ident_h = vcs_tag(
      fallback: meson.project_version(),
@@ -111,6 +112,7 @@ sources += gnome.compile_resources(
 incs = [
   top_inc,
   translation_mem_inc,
+  codeview_inc,
 ]
 
 c_args = [
@@ -119,7 +121,7 @@ c_args = [
 
 libgtranslator = shared_library(
   meson.project_name(),
-  sources: sources + translation_mem_sources + [gtr_build_ident_h],
+  sources: sources + translation_mem_sources + codeview_sources + [gtr_build_ident_h],
   include_directories: incs,
   dependencies: gtr_deps,
   c_args: c_args,

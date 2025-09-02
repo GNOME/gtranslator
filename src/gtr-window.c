@@ -43,6 +43,8 @@
 #include "translation-memory/gtr-translation-memory-dialog.h"
 #include "translation-memory/gda/gtr-gda.h"
 
+#include "codeview/gtr-codeview.h"
+
 #include <adwaita.h>
 #include <glib.h>
 #include <glib-object.h>
@@ -65,6 +67,8 @@ typedef struct
   GSettings *ui_settings;
   GSettings *tm_settings;
   GtrTranslationMemory *translation_memory;
+
+  GtrCodeView *codeview;
 
   GtkWidget *projects;
   GtkWidget *dlteams;
@@ -292,6 +296,7 @@ gtr_window_dispose (GObject * object)
   g_clear_object (&priv->prof_manager);
   g_clear_object (&priv->translation_memory);
   g_clear_object (&priv->tm_settings);
+  g_clear_object (&priv->codeview);
 
   G_OBJECT_CLASS (gtr_window_parent_class)->dispose (object);
 }
@@ -448,6 +453,9 @@ gtr_window_create_tab (GtrWindow * window, GtrPo * po)
       adw_navigation_page_set_child (page, GTK_WIDGET (tab));
       adw_navigation_view_pop_to_tag (priv->navigation_view, "poeditor");
     }
+
+  // code view
+  priv->codeview = gtr_code_view_new (window);
 
   g_signal_connect_after (po,
                           "notify::state",
