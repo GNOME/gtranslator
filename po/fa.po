@@ -3,14 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # میر سبحان <me@mirsobhan.ir>, 2025.
+# Goudarz Jafari <me@goudarzjafari.com>, 2025.
+# Danial Behzadi <dani.behzi@ubuntu.com>, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-08-17 05:28+0000\n"
-"PO-Revision-Date: 2025-08-18 03:02+0330\n"
-"Last-Translator: میر سبحان <me@mirsobhan.ir>\n"
+"POT-Creation-Date: 2025-09-05 06:27+0000\n"
+"PO-Revision-Date: 2025-09-07 12:32+0330\n"
+"Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +28,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:2 src/gtr-actions-app.c:89
-#: src/gtr-application.c:526 src/gtr-window.c:201 src/gtr-window.c:447
+#: src/gtr-application.c:526 src/gtr-window.c:196 src/gtr-window.c:441
 msgid "Translation Editor"
 msgstr "ویرایشگر ترجمه"
 
@@ -46,7 +48,7 @@ msgid ""
 msgstr ""
 "جی‌ترنسلیتور یک ویرایشگر پروندهٔ gettext po برای محیط دسکتاپ گنوم است. این "
 "برنامه همهٔ اَشکال پرونده‌های gettext po را مدیریت می‌کند و شامل ویژگی‌های بسیار "
-"مفیدی مانند یافتن/جای‌گزینی، حافظهٔ ترجمه، نمایه‌های مختلف مترجم، جدول پیام‌ها "
+"مفیدی مانند یافتن/جایگزینی، حافظهٔ ترجمه، نماگرهای مختلف مترجم، جدول پیام‌ها "
 "(برای مرور کلی ترجمه‌ها/پیام‌ها در پروندهٔ po)، ناوبری آسان و ویرایش پیام‌های "
 "ترجمه است و دیدگاه‌های ترجمه در آنجا دقیق است."
 
@@ -86,12 +88,13 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:30
 msgid "Whether to remove the obsolete entries upon saving"
-msgstr ""
+msgstr "این که ورودی‌های منسوخ هنگام ذخیره کردن برداشته شوند یا نه"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:31
 msgid ""
 "If true, the obsolete entries will be removed from the file after saving"
 msgstr ""
+"اگر درست باشد، ورودی‌های منسوخ پس از ذخیره کردن از پرونده برداشته خواهند شد"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:37
 msgid "Auto save files"
@@ -120,14 +123,14 @@ msgstr "اگر درست باشد، قبل از ذخیرهٔ پرونده، یک 
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:58
 msgid "Use profile values for header"
-msgstr "از مقادیر نمایه برای سرایند استفاده می‌کند"
+msgstr "از مقادیر نماگر برای سرایند استفاده می‌کند"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:59
 msgid ""
 "If true, overwrite the values in the PO header with those in the active "
 "profile."
 msgstr ""
-"اگر درست باشد، مقادیر موجود در سرایند PO را با مقادیر موجود در نمایهٔ فعّال "
+"اگر درست باشد، مقادیر موجود در سرایند PO را با مقادیر موجود در نماگر فعّال "
 "بازنویسی می‌کند."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:66
@@ -139,10 +142,12 @@ msgid ""
 "If true, the 'author <email> year' comment won't be added to the PO header's "
 "copyright."
 msgstr ""
+"اگر مقدار درست باشد، دیدگاه «مؤلف <رایانامه> سال» به بخش حق نشر سربرگ PO "
+"اضافه نخواهد شد."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:76
 msgid "Highlight syntax in edit fields"
-msgstr "نحو نگارش را در زمینه‌های ویرایش برجسته می‌کند"
+msgstr "برجستگی نحو در زمینه‌های ویرایش"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:77
 msgid "If true, apply syntax highlighting to strings in edit fields."
@@ -183,49 +188,30 @@ msgid ""
 "Sort order to use in the message list. Possible values are “status”, “id”, "
 "“original-text” and “translated-text”."
 msgstr ""
-"ترتیب استفاده را در فهرست پیام بچینید. مقادیر احتمالی عبارتند از «وضعیت»، "
-"«شناسه»، «متن اصلی» و «متن ترجمه شده»."
+"ترتیب استفاده شده در سیاههٔ پیام‌ها. مقدارهای ممکن: status، ‏id، ‏original-text "
+"و translated-text"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:117
 msgid "Show ID column"
-msgstr "نمایش شناسه ستون"
+msgstr "نمایش شناسهٔ ستون"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:118
 msgid "If true, displays a column with the id of the message on the editor."
-msgstr ""
+msgstr "اگر مقدار درست باشد، ستونی با شناسه پیام در ویرایشگر نمایش داده می‌شود."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:130
 msgid "Window maximized"
-msgstr ""
+msgstr "پنجره بیشینه"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:131
 msgid "Window maximized state"
-msgstr ""
-
-#: src/codeview/gtr-viewer.c:100
-msgid "Source Viewer"
-msgstr "بینندهٔ منبع"
-
-#: src/codeview/gtr-viewer.c:185 src/gtr-actions-file.c:281
-#: src/gtr-actions-file.c:300 src/gtr-actions-file.c:338
-#: src/gtr-actions-file.c:365 src/gtr-actions-file.c:542
-#: src/gtr-actions-file.c:585 src/gtr-actions-file.c:744 src/gtr-dl-teams.c:164
-#: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:340 src/gtr-dl-teams.c:428
-#: src/gtr-dl-teams.c:564 src/gtr-dl-teams.c:575 src/gtr-dl-teams.c:586
-#: src/gtr-dl-teams.c:617 src/gtr-dl-teams.c:688 src/gtr-tab.c:348
-#: src/gtr-window.c:155 src/gtr-window.c:342
-msgid "OK"
-msgstr "تأیید"
-
-#: src/codeview/gtr-viewer.ui:26
-msgid "Source code"
-msgstr "کدمنبع"
+msgstr "وضعیت بیشینگی پنجره"
 
 #: src/gtr-actions-app.c:86
 msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
-msgstr "مجموعه ویرایش پروندهٔ ترجمه برای محلی‌سازی برنامه‌ها و کتابخانه‌ها."
+msgstr "مجموعه ویرایش پروندهٔ ترجمه برای محلی سازی برنامه‌ها و کتابخانه‌ها."
 
 #.
 #. * Note to translators: put here your name and email so it will show
@@ -235,63 +221,71 @@ msgstr "مجموعه ویرایش پروندهٔ ترجمه برای محلی‌
 msgid "translator-credits"
 msgstr ""
 "سید اسحاق مقیم شهیدانی <eshagh094@gmail.com>\n"
-"روزبه پورنادر <roozbeh@farsiweb.info>"
+"روزبه پورنادر <roozbeh@farsiweb.info>\n"
+"گودرز جعفری <me@goudarzjafari.com>\n"
+"دانیال بهزادی <dani.behzi@ubuntu.com>"
 
-#: src/gtr-actions-file.c:206 src/gtr-close-confirmation-dialog.c:338
+#: src/gtr-actions-file.c:204 src/gtr-close-confirmation-dialog.c:338
 msgid "Unsaved Changes"
 msgstr "تغییرات ذخیره نشده"
 
-#: src/gtr-actions-file.c:210
+#: src/gtr-actions-file.c:208
 #, c-format
 msgid "Do you want to write all the changes done to %s?"
-msgstr ""
+msgstr "ذخیرهٔ همهٔ تغییرات انجام شده روی %s؟"
 
-#: src/gtr-actions-file.c:214
+#: src/gtr-actions-file.c:212
 msgid "Cancel"
 msgstr "انصراف"
 
-#: src/gtr-actions-file.c:215
+#: src/gtr-actions-file.c:213
 msgid "Continue Without Saving"
 msgstr "ادامه بدون ذخیره"
 
-#: src/gtr-actions-file.c:216
+#: src/gtr-actions-file.c:214
 msgid "Save and Open"
 msgstr "ذخیره و گشودن"
 
-#: src/gtr-actions-file.c:238
+#: src/gtr-actions-file.c:236
 msgid "Open file for translation"
 msgstr "گشودن پرونده برای ترجمه"
 
-#: src/gtr-actions-file.c:280
+#: src/gtr-actions-file.c:278
 msgid "Could not save file"
 msgstr "ناتوانی در ذخیره پرونده"
 
-#: src/gtr-actions-file.c:336
+#: src/gtr-actions-file.c:279 src/gtr-actions-file.c:298
+#: src/gtr-actions-file.c:336 src/gtr-actions-file.c:363
+#: src/gtr-actions-file.c:542 src/gtr-actions-file.c:585
+#: src/gtr-actions-file.c:744 src/gtr-dl-teams.c:164 src/gtr-dl-teams.c:225
+#: src/gtr-dl-teams.c:340 src/gtr-dl-teams.c:428 src/gtr-dl-teams.c:564
+#: src/gtr-dl-teams.c:575 src/gtr-dl-teams.c:586 src/gtr-dl-teams.c:617
+#: src/gtr-dl-teams.c:688 src/gtr-tab.c:347 src/gtr-window.c:150
+#: src/gtr-window.c:336
+msgid "OK"
+msgstr "تأیید"
+
+#: src/gtr-actions-file.c:334
 msgid "This file has already been uploaded"
 msgstr "این پرونده هم‌اکنون بارگذاری شده است"
 
-#: src/gtr-actions-file.c:352
+#: src/gtr-actions-file.c:350
 msgid "Couldn't upload the file"
-msgstr ""
+msgstr "امکان بارگذاری پرونده وجود ندارد"
 
-#: src/gtr-actions-file.c:355
-#, fuzzy, c-format
-#| msgid ""
-#| "An error occurred while uploading the file: %s\n"
-#| "Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
-#| "correctly in your profile or you don't have permissions to upload this "
-#| "module."
+#: src/gtr-actions-file.c:353
+#, c-format
 msgid ""
 "%s\n"
 "Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
 "correctly in your profile or you don't have permissions to upload this "
 "module."
 msgstr ""
-"هنگام بارگذاری پرونده خطایی رخ داد: %s\n"
-"شاید شما <b>ژتون</b> <i>l10n.gnome.org</i> خود را به درستی در نمایه خود "
-"پیکربندی نکرده‌اید، یا مجوز بارگذاری این پیمانه را ندارید."
+"%s\n"
+"شاید <b>ژتون </b><i>l10n.gnome.org</i> خود را به درستی در نماگرتان پیکربندی "
+"نکرده‌ یا اجازهٔ بارگذاری این پیمانه را ندارید."
 
-#: src/gtr-actions-file.c:364
+#: src/gtr-actions-file.c:362
 msgid "The file has been uploaded!"
 msgstr "پرونده بارگذاری شد!"
 
@@ -301,7 +295,7 @@ msgstr "ذخیرهٔ پرونده به عنوان…"
 
 #: src/gtr-application.c:315
 msgid "Fixed plurals"
-msgstr ""
+msgstr "جمع‌های اصلاح‌شده"
 
 #: src/gtr-close-confirmation-dialog.c:122 src/gtr-context.c:155
 #: src/gtr-preferences-dialog.c:450 src/gtr-profile-dialog.ui:15
@@ -310,8 +304,6 @@ msgid "_Cancel"
 msgstr "_لغو"
 
 #: src/gtr-close-confirmation-dialog.c:123
-#, fuzzy
-#| msgid "Close _without Saving"
 msgid "Close _Without Saving"
 msgstr "بستن _بدون ذخیره"
 
@@ -338,10 +330,10 @@ msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] ""
-"اینجا %Id سند با تغییرات ذخیره نشده وجود دارد. قبل از بسته شدن تغییرات ذخیره "
+"این‌جا %Id سند با تغییرات ذخیره نشده وجود دارد. قبل از بسته شدن تغییرات ذخیره "
 "شود؟"
 msgstr[1] ""
-"اینجا %Id سند با تغییرات ذخیره نشده وجود دارد. قبل از بسته شدن تغییرات ذخیره "
+"این‌جا %Id سند با تغییرات ذخیره نشده وجود دارد. قبل از بسته شدن تغییرات ذخیره "
 "شوند؟"
 
 #: src/gtr-context.c:172
@@ -366,11 +358,11 @@ msgstr "مسیرها"
 
 #: src/gtr-dl-teams.c:224
 msgid "Error loading module info"
-msgstr ""
+msgstr "خطا در بار کردن اطّلاعات پیمانه"
 
 #: src/gtr-dl-teams.c:427
 msgid "Error loading file info"
-msgstr ""
+msgstr "خطا در بار کردن اطّلاعات پرونده"
 
 #: src/gtr-dl-teams.c:445
 msgid "No file found"
@@ -382,49 +374,40 @@ msgstr "هیچ وضعیت پیمانه‌ای یافت نشد."
 
 #: src/gtr-dl-teams.c:563
 msgid "Error loading file"
-msgstr ""
+msgstr "خطا در بار کردن پرونده"
 
 #: src/gtr-dl-teams.c:573 src/gtr-dl-teams.c:616
 msgid "Error creating tmp file"
-msgstr ""
+msgstr "خطا در ایجاد پرونده موقت"
 
 #: src/gtr-dl-teams.c:585
 msgid "Error writing stream"
-msgstr ""
+msgstr "خطا در نوشتن جریان"
 
 #  در این رشته از نویسهٔ ایزوله اولین نویسهٔ قوی استفاده شده است
 #: src/gtr-dl-teams.c:629
-#, fuzzy
-#| msgid "The file '%s' has been saved in %s"
 msgid "The file has been saved in your Downloads folder"
-msgstr "پروندهٔ «⁨%s⁩» در ⁨%s⁩ ذخیره شد"
+msgstr "پرونده در ⁨شاخهٔ بارگیریتان ذخیره شد"
 
 #: src/gtr-dl-teams.c:687
 msgid "Could not reserve module"
 msgstr "پیمانه رزرو نشد"
 
 #: src/gtr-dl-teams.c:692
-#, fuzzy, c-format
-#| msgid ""
-#| "An error occurred while reserving this module: %s\n"
-#| "Maybe you've not configured your <i>l10n.gnome.org</i> <b>token</b> "
-#| "correctly in your profile or you don't have permissions to reserve this "
-#| "module."
+#, c-format
 msgid ""
 "%s\n"
 "Maybe you've not configured your l10n.gnome.org token correctly in your "
 "profile or you don't have permissions to reserve this module."
 msgstr ""
-"هنگام حفظ کردن این پیمانه خطایی رخ داد: %s\n"
-"شاید شما <b>ژتون</b> <i>l10n.gnome.org</i> خود را به درستی در نمایه خود "
-"پیکربندی نکرده‌اید، یا مجوز حفظ کردن این پیمانه را ندارید."
+"%s\n"
+"شاید ژتون l10n.gnome.org خود را به درستی در نماگرتان پیکربندی نکرده یا اجارهٔ "
+"حفاظت این پیمانه را ندارید."
 
 # در این رشته از نویسهٔ ایزوله اولین نویسهٔ قوی استفاده شده است
 #: src/gtr-dl-teams.c:704
-#, fuzzy
-#| msgid "The file '%s.%s.%s.%s' has been successfully reserved"
 msgid "The file has been successfully reserved"
-msgstr "پروندهٔ «⁨%s.%s.%s.%s⁩» با موفقیت حفظ شد"
+msgstr "پرونده با موفقیت حفاظت شد"
 
 #: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:337
 msgid "Preferences"
@@ -456,7 +439,7 @@ msgstr "پیمانه"
 
 #: src/gtr-dl-teams.ui:80 src/gtr-header-dialog.ui:161
 msgid "Domain"
-msgstr "دامنهٔ"
+msgstr "دامنه"
 
 #: src/gtr-dl-teams.ui:85 src/gtr-header-dialog.ui:155
 msgid "Branch"
@@ -464,11 +447,11 @@ msgstr "شاخه"
 
 #: src/gtr-dl-teams.ui:93
 msgid "Reserve for translation"
-msgstr "حفظ کردن برای ترجمه"
+msgstr "حفاظت برای ترجمه"
 
 #: src/gtr-dl-teams.ui:101
 msgid "Info"
-msgstr "اطلاعات"
+msgstr "اطّلاعات"
 
 #: src/gtr-dl-teams.ui:104
 msgid "File"
@@ -484,7 +467,7 @@ msgstr "آمار"
 
 #: src/gtr-dl-teams.ui:133
 msgid "_Load File"
-msgstr "بار کردن پرونده"
+msgstr "_بار کردن پرونده"
 
 #: src/gtr-file-dialogs.c:57
 msgid "Gettext translation"
@@ -515,18 +498,20 @@ msgid ""
 "Before start to use the application, a profile should be created, but don't "
 "worry, the app will guide you to do it in a minute."
 msgstr ""
+"پیش از شروع استفاده از برنامه، باید یک نماگر ایجاد شود، اما نگران نباشید، "
+"برنامه در عرض یک دقیقه شما را راهنمایی خواهد کرد."
 
 #: src/gtr-greeter.ui:53
 msgid "Create Profile"
-msgstr "ایجاد نمایه"
+msgstr "ایجاد نماگر"
 
 #: src/gtr-greeter.ui:59
 msgid "Profile"
-msgstr "نمایه"
+msgstr "نماگر"
 
 #: src/gtr-greeter.ui:62 src/gtr-greeter.ui:116 src/gtr-profile-dialog.ui:54
 msgid "Profile name"
-msgstr "نام نمایه"
+msgstr "نام نماگر"
 
 #: src/gtr-greeter.ui:63 src/gtr-profile-dialog.ui:55
 msgid "default"
@@ -562,19 +547,15 @@ msgstr "رمز زبان"
 
 #: src/gtr-greeter.ui:146 src/gtr-languages-fetcher.ui:34
 msgid "Character set"
-msgstr "مجموعهٔ کاراکتر"
+msgstr "مجموعهٔ نویسه"
 
 #: src/gtr-greeter.ui:151 src/gtr-languages-fetcher.ui:54
-#, fuzzy
-#| msgid "Transfer en_coding"
 msgid "Transfer encoding"
-msgstr "_رمزگذاری انتقال"
+msgstr "رمزگذاری انتقال"
 
 #: src/gtr-greeter.ui:156
-#, fuzzy
-#| msgid "_Plural forms"
 msgid "Plural form"
-msgstr "_شکل‌های جمع"
+msgstr "شکل جمع"
 
 #: src/gtr-header-dialog.c:371 src/gtr-tab.ui:320
 msgid "Edit Header"
@@ -590,22 +571,16 @@ msgid "General"
 msgstr "عمومی"
 
 #: src/gtr-header-dialog.ui:17
-#, fuzzy
-#| msgid "Use my options to complete the following entries:"
 msgid "Use my options to complete the following entries"
-msgstr "از انتخاب‌های من برای تکمیل ورودی‌های زیر استفاده شود:"
+msgstr "از انتخاب‌های من برای تکمیل ورودی‌های زیر استفاده شود"
 
 #: src/gtr-header-dialog.ui:22
-#, fuzzy
-#| msgid "Translator’s _name:"
 msgid "Translator’s _name"
-msgstr "_نام مترجم:"
+msgstr "_نام مترجم"
 
 #: src/gtr-header-dialog.ui:28
-#, fuzzy
-#| msgid "Translator’s _email:"
 msgid "Translator’s _email"
-msgstr "_رایانامهٔ مترجم:"
+msgstr "_رایانامهٔ مترجم"
 
 #: src/gtr-header-dialog.ui:34
 msgid "_Language"
@@ -616,22 +591,16 @@ msgid "Language _code"
 msgstr "_کد زبان"
 
 #: src/gtr-header-dialog.ui:46
-#, fuzzy
-#| msgid "Language gro_up email:"
 msgid "Language _Team email"
-msgstr "رایانامهٔ _تیم زبان:"
+msgstr "رایانامهٔ _تیم زبان"
 
 #: src/gtr-header-dialog.ui:52
-#, fuzzy
-#| msgid "Char_set:"
 msgid "Char_set"
-msgstr "_مجموعهٔ نویسه:"
+msgstr "_مجموعه نویسه"
 
 #: src/gtr-header-dialog.ui:58
-#, fuzzy
-#| msgid "Enc_oding:"
 msgid "Enc_oding"
-msgstr "_رمزگذاری:"
+msgstr "_رمزگذاری"
 
 #: src/gtr-header-dialog.ui:64
 msgid "_Plural forms"
@@ -642,38 +611,28 @@ msgid "Project"
 msgstr "پروژه"
 
 #: src/gtr-header-dialog.ui:83
-#, fuzzy
-#| msgid "Project Id _version:"
 msgid "Project Id _version"
-msgstr "_نگارش شناسهٔ پروژه:"
+msgstr "_نگارش شناسهٔ پروژه"
 
 #: src/gtr-header-dialog.ui:89
-#, fuzzy
-#| msgid "Pot _file creation date:"
 msgid "Pot _file creation date"
-msgstr "تاریخ ایجاد _پروندهٔ Pot:"
+msgstr "تاریخ ایجاد _پروندهٔ Pot"
 
 #: src/gtr-header-dialog.ui:95
-#, fuzzy
-#| msgid "Po file _revision date:"
 msgid "Po file _revision date"
-msgstr "تاریخ _بازبینی پروندهٔ Po:"
+msgstr "تاریخ _بازبینی پروندهٔ Po"
 
 #: src/gtr-header-dialog.ui:101
-#, fuzzy
-#| msgid "Report message _bugs to:"
 msgid "Report message _bugs to"
-msgstr "گزارش _مشکلات پیام به:"
+msgstr "گزارش _مشکلات پیام به"
 
 #: src/gtr-header-dialog.ui:109
 msgid "Comment"
 msgstr "دیدگاه"
 
 #: src/gtr-header-dialog.ui:136
-#, fuzzy
-#| msgid "Damned Lies Info"
 msgid "Damned Lies"
-msgstr "اطّلاعات دروغ‌های ملعون"
+msgstr "دروغ‌های ملعون"
 
 #: src/gtr-header-dialog.ui:143
 msgid "Lang"
@@ -688,26 +647,20 @@ msgid "Languages"
 msgstr "زبان‌ها"
 
 #: src/gtr-languages-fetcher.ui:11
-#, fuzzy
-#| msgid "_Edit options manually"
 msgid "Edit options manually"
-msgstr "_ویرایش انتخاب‌ها به صورت دستی"
+msgstr "ویرایش دستی گزینه‌ها"
 
 #: src/gtr-languages-fetcher.ui:21
 msgid "Choose language code"
-msgstr "کد زبان را انتخاب کنید"
+msgstr "گزینش کد زبان"
 
 #: src/gtr-languages-fetcher.ui:74
-#, fuzzy
-#| msgid "_Plural forms"
 msgid "Plural forms"
-msgstr "_شکل‌های جمع"
+msgstr "شکل‌های جمع"
 
 #: src/gtr-languages-fetcher.ui:81
-#, fuzzy
-#| msgid "_Plural forms"
 msgid "Choose plural forms"
-msgstr "_شکل‌های جمع"
+msgstr "گزینش شکل‌های جمع"
 
 #: src/gtr-message-table.ui:35
 msgid "Original Message"
@@ -715,51 +668,51 @@ msgstr "پیام اصلی"
 
 #: src/gtr-message-table.ui:43
 msgid "Translated Message"
-msgstr "پیام ترجمه شده"
+msgstr "پیام ترجمه شده"
 
-#: src/gtr-po.c:492
+#: src/gtr-po.c:491
 #, c-format
 msgid "The file is empty"
 msgstr "پرونده خالی است"
 
 # در این رشته از نویسهٔ ایزوله اولین نویسهٔ قوی استفاده شده است
-#: src/gtr-po.c:501
+#: src/gtr-po.c:500
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "گشودن پروندهٔ «⁨%s⁩» شکست خورد: %s"
 
-#: src/gtr-po.c:573
+#: src/gtr-po.c:571
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "نمی‌توان مجموعهٔ نویسهٔ «%s» را به UTF-8 تبدیل کرد"
 
-#: src/gtr-po.c:589 src/gtr-po.c:608
+#: src/gtr-po.c:587 src/gtr-po.c:606
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "نمی‌توان پروندهٔ موقتی را برای تبدیل کدگذاری ذخیره کرد"
 
-#: src/gtr-po.c:639
+#: src/gtr-po.c:637
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
 "iconv command line tools before opening this file with GNOME Translation "
 "Editor"
 msgstr ""
-"تمام تلاش‌ها برای تبدیل پرونده به UTF-8 شکست خوردند، پیش از گشودن این پرونده "
-"با ویرایشگر ترجمهٔ گنوم، از ابزارهای خط فرمان msgconv یا iconv استفاده کنید"
+"تمام تلاش‌ها برای تبدیل پرونده به UTF-8 شکست خوردند. استفاده از ابزارهای خط "
+"فرمان msgconv یا iconv پیش از گشودن این پرونده با ویرایشگر ترجمهٔ گنوم"
 
-#: src/gtr-po.c:707
+#: src/gtr-po.c:702
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext یک فهرست دامنهٔ پیام تهی را بازگرداند."
 
-#: src/gtr-po.c:754
+#: src/gtr-po.c:748
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "هیچ پیامی از تجزیه کننده بدست نیامده است."
 
 # در این رشته از نویسهٔ LRM استفاده شده است
-#: src/gtr-po.c:808
+#: src/gtr-po.c:801
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -771,17 +724,17 @@ msgstr ""
 "نام پرونده شما احتمالاً باید «%s.po» باشد."
 
 # در این رشته از نویسهٔ ایزوله اولین نویسهٔ قوی استفاده شده است
-#: src/gtr-po.c:836
+#: src/gtr-po.c:830
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "پروندهٔ ⁨%s⁩ فقط خواندنی است و نمی‌توان آن را بازنویسی کرد"
 
-#: src/gtr-po.c:855
+#: src/gtr-po.c:849
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "خطایی در پروندهٔ PO وجود دارد: %s"
 
-#: src/gtr-po.c:867
+#: src/gtr-po.c:861
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "هنگام نوشتن پروندهٔ PO خطایی رخ داد: %s"
@@ -792,11 +745,11 @@ msgstr "حذف"
 
 #: src/gtr-preferences-dialog.c:433
 msgid "Impossible to remove the active profile"
-msgstr "برداشتن نمایهٔ فعّال غیرممکن است"
+msgstr "برداشتن نماگر فعّال غیرممکن است"
 
 #: src/gtr-preferences-dialog.c:434
 msgid "Another profile should be selected as active before"
-msgstr "نمایهٔ دیگری باید قبلاً به عنوان فعّال گزیده شود"
+msgstr "نماگر دیگری باید قبلاً به عنوان فعّال گزیده شود"
 
 #: src/gtr-preferences-dialog.c:437
 msgid "_Ok"
@@ -804,7 +757,7 @@ msgstr "تأیید"
 
 #: src/gtr-preferences-dialog.c:445
 msgid "Are you sure you want to delete this profile?"
-msgstr "آیا مطمئن هستید که می‌خواهید این نمایه را حذف کنید؟"
+msgstr "اطمینان از حذف این نماگر؟"
 
 #: src/gtr-preferences-dialog.c:451
 msgid "_Delete"
@@ -820,7 +773,7 @@ msgstr "اگر پروندهٔ PO دارای ترجمه‌های نامشخص ا�
 
 #: src/gtr-preferences-dialog.ui:22
 msgid "_Remove obsolete entries on save"
-msgstr ""
+msgstr "_برداشتن ورودی‌های منسوخ هنگام ذخیره"
 
 #: src/gtr-preferences-dialog.ui:30
 msgid "Autosave"
@@ -828,20 +781,15 @@ msgstr "ذخیرهٔ خودکار"
 
 #: src/gtr-preferences-dialog.ui:33
 msgid "_Activate auto save"
-msgstr ""
+msgstr "_فعّال سازی ذخیرهٔ خودکار"
 
 #: src/gtr-preferences-dialog.ui:34
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Save the current file as"
 msgid "Save the current file automatically"
-msgstr "ذخیرهٔ پروندهٔ فعلی با عنوان"
+msgstr "ذخیرهٔ خودکار پروندهٔ کنونی"
 
 #: src/gtr-preferences-dialog.ui:40
-#, fuzzy
-#| msgid "Auto save interval"
 msgid "Autosave _Interval"
-msgstr "فاصلهٔ بین ذخیرهٔ خودکار"
+msgstr "_دورهٔ ذخیرهٔ خودکار"
 
 #: src/gtr-preferences-dialog.ui:41
 msgid "Number of minutes to autosave"
@@ -849,7 +797,7 @@ msgstr "تعداد دقایق تا ذخیره خودکار"
 
 #: src/gtr-preferences-dialog.ui:56
 msgid "Create a _backup copy of files before saving"
-msgstr "قبل از ذخیره کردن، یک رونوشت _پشتیبان از پرونده‌ها ایجاد شود"
+msgstr "ایجاد رونوشتی _پشتیبان پیش از ذخیره کردن"
 
 #: src/gtr-preferences-dialog.ui:69
 msgid "_Editor"
@@ -865,11 +813,11 @@ msgstr "_نحو نگارش پیام برجسته شود"
 
 #: src/gtr-preferences-dialog.ui:82
 msgid "Make _whitespace visible"
-msgstr "_فضای سفید نمایان شود"
+msgstr "نمایان کردن _فضای سفید"
 
 #: src/gtr-preferences-dialog.ui:88
 msgid "_Font"
-msgstr "قلم"
+msgstr "_قلم"
 
 #: src/gtr-preferences-dialog.ui:106
 msgid "Contents"
@@ -885,19 +833,19 @@ msgstr "بررسی ا_ملاء"
 
 #: src/gtr-preferences-dialog.ui:128
 msgid "_Profiles"
-msgstr "نمایه‌ها"
+msgstr "_نماگرها"
 
 #: src/gtr-preferences-dialog.ui:132
 msgid "Profiles"
-msgstr "نمایه‌ها"
+msgstr "نماگرها"
 
 #: src/gtr-preferences-dialog.ui:143
 msgid "_Add Profile"
-msgstr "افزودن نمایه"
+msgstr "_افزودن نماگر"
 
 #: src/gtr-profile-dialog.ui:7
 msgid "Translation Editor Profile"
-msgstr "نمایهٔ ویراستار ترجمه"
+msgstr "نماگر ویراستار ترجمه"
 
 #: src/gtr-profile-dialog.ui:22
 msgid "_OK"
@@ -905,7 +853,7 @@ msgstr "_تأیید"
 
 #: src/gtr-profile-dialog.ui:49
 msgid "Profile Information"
-msgstr "اطّلاعات نمایه"
+msgstr "اطّلاعات نماگر"
 
 #: src/gtr-profile-dialog.ui:63
 msgid "Translator Information"
@@ -913,7 +861,7 @@ msgstr "اطّلاعات مترجم"
 
 #: src/gtr-profile-dialog.ui:68
 msgid "Translator _name"
-msgstr "_نام مترجم:"
+msgstr "_نام مترجم"
 
 #: src/gtr-profile-dialog.ui:74
 msgid "Translator _email"
@@ -924,22 +872,20 @@ msgid "Translation _team email"
 msgstr "رایانامهٔ _تیم ترجمه"
 
 #: src/gtr-profile-dialog.ui:88
-#, fuzzy
-#| msgid "Damned Lies Info"
 msgid "Damned Lies Integration"
-msgstr "اطّلاعات دروغ‌های ملعون"
+msgstr "یکپارچگی دروغ‌های ملعون"
 
 #: src/gtr-profile-dialog.ui:89
 msgid ""
-"GNOME Damned Lies integration token, go to your profile in https://l10n."
-"gnome.org/ to get it"
+"GNOME Damned Lies integration token, go to your profile in https://"
+"l10n.gnome.org/ to get it"
 msgstr ""
-"ژتون ادغام دروغ‌های ملعون گنوم، برای دریافت آن به نمایهٔ خود در https://l10n."
-"gnome.org/ بروید"
+"ژتون ادغام دروغ‌های ملعون گنوم، برای دریافت آن به نماگر خود در https://"
+"l10n.gnome.org/ بروید"
 
 #: src/gtr-profile-dialog.ui:94
 msgid "_Damned Lies auth token"
-msgstr "ژتون احراز دروغ‌های ملعون"
+msgstr "ژتون هویت‌سنجی دروغ‌های ملعون"
 
 #: src/gtr-projects.ui:15 src/gtr-tab.ui:316
 msgid "Build Translation Memory"
@@ -951,7 +897,7 @@ msgstr "راهنما"
 
 #: src/gtr-projects.ui:36
 msgid "Select po File"
-msgstr " پرونده PO برگزینید"
+msgstr "گزینش پروندهٔ PO"
 
 #: src/gtr-projects.ui:57
 msgid "Open Translation File"
@@ -959,7 +905,7 @@ msgstr "گشودن پرونده ترجمه"
 
 #: src/gtr-projects.ui:58
 msgid "Drag and drop .po files here"
-msgstr "پرونده‌های .po را بکشید و اینجا رها کنید"
+msgstr "کشیدن و انداختن پرونده‌های ‪.po‬ در این‌جا"
 
 #: src/gtr-projects.ui:65
 msgid "_Open…"
@@ -967,7 +913,7 @@ msgstr "‏_گشودن…"
 
 #: src/gtr-projects.ui:76
 msgid "_Load from DL…"
-msgstr "بار کردن از دروغ‌های ملعون"
+msgstr "_بار کردن از دروغ‌های ملعون…"
 
 #: src/gtr-search-bar.ui:20
 msgid "Search"
@@ -983,15 +929,15 @@ msgstr "نتیجه بعدی"
 
 #: src/gtr-search-bar.ui:58
 msgid "Switch between Search and Search-and-Replace"
-msgstr "تعویض میان «جست‌وجو» و «جست‌وجو و جای‌گزینی»"
+msgstr "تعویض میان «جست‌وجو» و «جست‌وجو و جایگزینی»"
 
 #: src/gtr-search-bar.ui:64
 msgid "Show or hide search options such as case sensitivity"
-msgstr "نمایش یا پنهان کردن گزینه‌های جست‌وجو مانند حساسیت حروف کوچک و بزرگ"
+msgstr "نمایش یا نهفتن گزینه‌های جست‌وجو چون حسّاسیت حروف کوچک و بزرگ"
 
 #: src/gtr-search-bar.ui:90
 msgid "Replace"
-msgstr "جای‌گزینی"
+msgstr "جایگزینی"
 
 #: src/gtr-search-bar.ui:96
 msgid "_Replace"
@@ -1021,7 +967,7 @@ msgstr "متن اصلی"
 msgid "Translated text"
 msgstr "متن ترجمه شده"
 
-#: src/gtr-tab.c:345
+#: src/gtr-tab.c:344
 msgid "There is an error in the message"
 msgstr "خطایی در پیام وجود دارد"
 
@@ -1047,7 +993,7 @@ msgstr "متن اصلی به تخته‌گیره رونوشت شد"
 #: src/gtr-tab.c:1977
 #, c-format
 msgid "Translated: %0.2f%%"
-msgstr "ترجمه شده: ⁦%I 0.2f٪⁩"
+msgstr "ترجمه شده: %I 0.2f٪⁩"
 
 #: src/gtr-tab.c:1978
 #, c-format
@@ -1065,23 +1011,17 @@ msgid "Fuzzy: %d"
 msgstr "نامشخص: %Id"
 
 #: src/gtr-tab.ui:14
-#, fuzzy
-#| msgid "Previous message without translation (<Alt><Page Up>)"
 msgid "Previous message without translation"
-msgstr "پیام قبلی بدون ترجمه (دگرساز + صفحهٔ بالا)"
+msgstr "پیام قبلی بدون ترجمه"
 
 #: src/gtr-tab.ui:22
-#, fuzzy
-#| msgid "Next message without translation (<Alt><Page Down>)"
 msgid "Next message without translation"
-msgstr "پیام بعدی بدون ترجمه (دگرساز + صفحهٔ پایین)"
+msgstr "پیام بعدی بدون ترجمه"
 
 # در این رشته از نویسهٔ LRM استفاده شده است
 #: src/gtr-tab.ui:37
-#, fuzzy
-#| msgid "Toggle fuzzy state (<Ctrl>+u)"
 msgid "Toggle Fuzzy State"
-msgstr "تغییر وضعیت نامشخص (مهار + u )"
+msgstr "تغییر وضعیت نامشخّص"
 
 #: src/gtr-tab.ui:54
 msgid "Find"
@@ -1117,24 +1057,20 @@ msgid "Save As…"
 msgstr "ذخیرهٔ عنوان…"
 
 #: src/gtr-tab.ui:289
-#, fuzzy
-#| msgid "Sort messages by"
 msgid "So_rt Messages by…"
-msgstr "چینش پیام‌ها بر اساس"
+msgstr "_چینش پیام‌ها بر اساس…"
 
 #: src/gtr-tab.ui:291
 msgid "_Order of Appearance"
-msgstr "‏چینش ظاهر"
+msgstr "_‏چینش ظاهر"
 
 #: src/gtr-tab.ui:296
 msgid "_Message Status"
-msgstr "وضعیت پیام"
+msgstr "_وضعیت پیام"
 
 #: src/gtr-tab.ui:306
-#, fuzzy
-#| msgid "Translated Message"
 msgid "_Translated Message"
-msgstr "پیام ترجمه شده"
+msgstr "پیام _ترجمه شده"
 
 #: src/gtr-tab.ui:312
 msgid "Show ID Column"
@@ -1145,14 +1081,12 @@ msgid "Advanced Tools"
 msgstr "ابزارهای پیشرفته"
 
 #: src/gtr-tab.ui:326
-#, fuzzy
-#| msgid "Original message"
 msgid "Fix plural messages"
-msgstr "پیام اصلی"
+msgstr "تصحیح پیام‌های جمع"
 
 #: src/gtr-upload-dialog.c:147
 msgid "Uploading..."
-msgstr "در حال بارگذاری ..."
+msgstr "بارگذاشتن…"
 
 #: src/gtr-upload-dialog.c:153
 msgid "Upload"
@@ -1171,22 +1105,22 @@ msgid "comment:"
 msgstr "دیدگاه:"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:184
+#: src/gtr-window.c:179
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — ویرایشگر ترجمه"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:191
+#: src/gtr-window.c:186
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — ویرایشگر ترجمه"
 
-#: src/gtr-window.c:341
+#: src/gtr-window.c:335
 msgid "Could not Save"
 msgstr "ذخیره نشد"
 
-#: src/gtr-window.c:353
+#: src/gtr-window.c:347
 msgid "File saved"
 msgstr "پرونده‌ ذخیره شد"
 
@@ -1202,7 +1136,7 @@ msgid ""
 "Run “%s --help” to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"برای مشاهده لیست کامل گزینه‌های موجود در خط فرمان، «⁦%s --help⁩» را اجرا کنید.\n"
+"اجرای ‪%s --help‬ برای دیدن سیاهه‌ای کامل از گزینه‌های موجود خط فرمان.\n"
 
 #: src/shortcuts-dialog.ui:6
 msgctxt "shortcut window group"
@@ -1272,7 +1206,7 @@ msgstr "ویرایش"
 #: src/shortcuts-dialog.ui:82
 msgctxt "shortcut window"
 msgid "Clear translation"
-msgstr "پاک کردن ترجمه"
+msgstr "پاک سازی ترجمه"
 
 #: src/shortcuts-dialog.ui:88
 msgctxt "shortcut window"
@@ -1332,7 +1266,7 @@ msgstr "استفاده از پیشنهاد ۱م...۹م"
 #: src/shortcuts-dialog.ui:156
 msgctxt "shortcut window group"
 msgid "Find & Replace"
-msgstr "یافتن و جای‌گزینی"
+msgstr "یافتن و جایگزینی"
 
 #: src/shortcuts-dialog.ui:160
 msgctxt "shortcut window"
@@ -1342,26 +1276,26 @@ msgstr "یافتن"
 #: src/shortcuts-dialog.ui:166
 msgctxt "shortcut window"
 msgid "Find & Replace"
-msgstr "یافتن و جای‌گزینی"
+msgstr "یافتن و جایگزینی"
 
 #: src/shortcuts-dialog.ui:172
 msgctxt "shortcut window"
 msgid "Forward-search"
-msgstr "جستجوی روبه‌جلو"
+msgstr "جست‌وجوی پیش‌رو"
 
 #: src/shortcuts-dialog.ui:178
 msgctxt "shortcut window"
 msgid "Backward-search"
-msgstr "جستجوی روبه‌عقب"
+msgstr "جست‌وجوی پس‌رو"
 
 #: src/shortcuts-dialog.ui:184
 msgctxt "shortcut window"
 msgid "Hide find & replace bar"
-msgstr "مخفی کردن نوار یافتن و جای‌گزینی"
+msgstr "نهفتن نوار یافتن و جایگزینی"
 
 #: src/translation-memory/gtr-translation-memory-dialog.c:77
 msgid "Select PO directory"
-msgstr "شاخهٔ PO را برگزینید"
+msgstr "گزینش شاخهٔ PO"
 
 #: src/translation-memory/gtr-translation-memory-dialog.ui:7
 msgid "Translation Editor Memory Manager"
@@ -1369,23 +1303,19 @@ msgstr "مدیریت حافظهٔ ویرایشگر ترجمه"
 
 #: src/translation-memory/gtr-translation-memory-dialog.ui:43
 msgid "Database"
-msgstr "پایگاه‌داده"
+msgstr "پایگاه داده"
 
 #: src/translation-memory/gtr-translation-memory-dialog.ui:48
-#, fuzzy
-#| msgid "Select the directory which contains PO files:"
 msgid "Select the directory which contains PO files"
-msgstr "شاخهٔ دارای پرونده‌های PO را برگزینید:"
+msgstr "گزینش شاخهٔ دارای پرونده‌های PO"
 
 #: src/translation-memory/gtr-translation-memory-dialog.ui:60
-#, fuzzy
-#| msgid "Use only files with this name:"
 msgid "Use only files with this name"
-msgstr "فقط از پرونده‌هایی با این نام استفاده شود:"
+msgstr "استفاده فقط از پرونده‌هایی با این نام"
 
 #: src/translation-memory/gtr-translation-memory-dialog.ui:79
 msgid "_Add to Database"
-msgstr "0افزودن به پایگاه داده"
+msgstr "_افزودن به پایگاه داده"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
 msgid "PO directory"
@@ -1409,7 +1339,7 @@ msgstr ""
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
 msgid "Filename to restrict search to"
-msgstr "نام پرونده برای محدود کردن جست‌وجو به"
+msgstr "نام پرونده برای محدود کردن جست‌وجو"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
 msgid ""
@@ -1439,279 +1369,3 @@ msgid ""
 msgstr ""
 "بیشینهٔ تفاوت طول بین پیام‌هایی که به عنوان مطابقت توسط حافظهٔ ترجمه نمایش داده "
 "می‌شوند."
-
-#~ msgid "Translate and localize applications and libraries"
-#~ msgstr "ترجمه و بومی‌سازی برنامه‌ها و کتابخانه‌ها"
-
-#~ msgid "Daniel García Moreno"
-#~ msgstr "دانیل گارسیا مورنو"
-
-#~ msgid "Side panel switcher style"
-#~ msgstr "سبک تعویض‌گر تابلوی کناری"
-
-#~ msgid "Style for switchers in the side panel."
-#~ msgstr "سبک برای تعویض‌گرها در تابلوی کناری."
-
-#~ msgid "Color scheme"
-#~ msgstr "شِمای رنگ"
-
-#~ msgid "Name of a gtksourceview color scheme to use for syntax highlighting."
-#~ msgstr ""
-#~ "نام شِمای رنگی gtksourceview که برای برجسته‌سازی نحو نگارش استفاده می‌شود."
-
-#~ msgid "Active plugins"
-#~ msgstr "افزایه‌های فعّال"
-
-# در این رشته از نویسهٔ LRM استفاده شده است
-#~ msgid ""
-#~ "List of active plugins. It contains the “Location” of the active plugins. "
-#~ "See the .gtranslator-plugin file for obtaining the “Location” of a given "
-#~ "plugin."
-#~ msgstr ""
-#~ "فهرست افزایه‌های فعّال. این دارای «مکان» افزایه‌های فعّال است. برای به دست "
-#~ "آوردن «مکان» افزایهٔ مشخص شده، پروندهٔ ‎.gtranslator-plugin را ببینید."
-
-#~ msgid "_Close"
-#~ msgstr "_بستن"
-
-#~ msgid "Current Maintainers"
-#~ msgstr "نگهدارندگان فعلی"
-
-#~ msgid "Contributors"
-#~ msgstr "مشارکت‌کنندگان"
-
-#~ msgid "Translation Editor Web Site"
-#~ msgstr "پایگاه وب ویرایشگر ترجمه"
-
-# در این رشته از نویسهٔ ایزوله اولین نویسهٔ قوی استفاده شده است
-#~ msgid ""
-#~ "Do you want to save changes to this file: <span weight=\"bold\" "
-#~ "size=\"large\">%s</span>?"
-#~ msgstr ""
-#~ "آیا می‌خواهید تغییرات را در این پرونده ذخیره کنید: <span weight=\"bold\" "
-#~ "size=\"large\">⁨%s⁩</span>؟"
-
-#~ msgid ""
-#~ "If you don't save, all your unsaved changes will be permanently lost."
-#~ msgstr ""
-#~ "اگر ذخیره نکنید، همه تغییرات ذخیره نشده شما برای همیشه از بین می‌روند."
-
-#~ msgid ""
-#~ "Profile name: %s\n"
-#~ "Translator name: %s\n"
-#~ "Translator email: %s\n"
-#~ "Language name: %s\n"
-#~ "Team email: %s\n"
-#~ "Language code: %s\n"
-#~ "Character set: %s\n"
-#~ "Transfer encoding: %s\n"
-#~ "Plural form: %s\n"
-#~ msgstr ""
-#~ "نام نمایه: %s\n"
-#~ "نام مترجم: %s\n"
-#~ "رایانامهٔ مترجم: %s\n"
-#~ "نام زبان: %s\n"
-#~ "رایانامهٔ تیم: %s\n"
-#~ "کد زبان: %s\n"
-#~ "مجموعهٔ نویسه: %s\n"
-#~ "رمزگذاری انتقال: %s\n"
-#~ "شکل جمع: %s\n"
-
-#~ msgid "This assistant will help you to create the main profile."
-#~ msgstr "این دستیار به شما در ایجاد نمایه اصلی کمک می‌کند."
-
-#~ msgid "Assistant"
-#~ msgstr "دستیار"
-
-#~ msgid "Question"
-#~ msgstr "پرسش"
-
-#~ msgid "Docum_ents with unsaved changes:"
-#~ msgstr "ا_سناد با تغییرات ذخیره نشده:"
-
-#~ msgid "S_elect the documents you want to save:"
-#~ msgstr "اسنادی را که می‌خواهید ذخیره کنید، برگزینید:"
-
-#~ msgid "Saving has been disabled by the system administrator."
-#~ msgstr "ذخیره کردن توسط مدیر سیستم غیرفعّال شده است."
-
-#~ msgid "If you don’t save, all your changes will be permanently lost."
-#~ msgstr "اگر ذخیره نکنید، همه تغییرات شما برای همیشه از بین می‌روند."
-
-#~ msgid "Notes:"
-#~ msgstr "یادداشت‌ها:"
-
-#~ msgid "Add Note"
-#~ msgstr "افزودن یادداشت"
-
-#~ msgid "Context:"
-#~ msgstr "متن نوشته:"
-
-#~ msgid "Format:"
-#~ msgstr "قالب:"
-
-#~ msgid "The current state is: %s"
-#~ msgstr "وضعیت فعلی: %s"
-
-#~ msgid "Select team, module, branch and domain to get the translation file."
-#~ msgstr "برای دریافت پروندهٔ ترجمه، تیم، پیمانه، شاخه و دامنه را برگزینید."
-
-#~ msgid "New window"
-#~ msgstr "پنجرهٔ جدید"
-
-#~ msgid "About"
-#~ msgstr "درباره"
-
-#~ msgid "Quit"
-#~ msgstr "ترک"
-
-#~ msgid "_Open"
-#~ msgstr "_گشودن"
-
-#~ msgid "_Language:"
-#~ msgstr "_زبان:"
-
-#~ msgid "Language _code:"
-#~ msgstr "_کد زبان:"
-
-#~ msgid "DL Team:"
-#~ msgstr "تیم DL:"
-
-#~ msgid "DL Module:"
-#~ msgstr "پیمانهٔ DL:"
-
-#~ msgid "Go to Message"
-#~ msgstr "رفتن به پیام"
-
-#~ msgid "Enter message number:"
-#~ msgstr "شماره پیام را وارد کنید:"
-
-#~ msgid "Order messages by"
-#~ msgstr "ترتیب پیام‌ها بر اساس"
-
-#~ msgid "Appearance in the original file"
-#~ msgstr "ظاهر در پروندهٔ اصلی"
-
-#~ msgid "Translated message"
-#~ msgstr "پیام ترجمه شده"
-
-#~ msgid "Find and replace"
-#~ msgstr "یافتن و جای‌گزینی"
-
-# در این رشته از نویسهٔ LRM استفاده شده است
-#~ msgid "Open a new file (<Ctrl>o)"
-#~ msgstr "گشودن یک پروندهٔ جدید (مهار + o)"
-
-# در این رشته از نویسهٔ LRM استفاده شده است
-#~ msgid "Open from Damned Lies (<Ctrl>d)"
-#~ msgstr "گشودن از دروغ‌های ملعون (مهار + d)"
-
-# در این رشته از نویسهٔ LRM استفاده شده است
-#~ msgid "Undo (<Ctrl>z)"
-#~ msgstr "بازگردان (مهار + z)"
-
-# در این رشته از نویسهٔ LRM استفاده شده است
-#~ msgid "Redo (<Ctrl><Shift>z)"
-#~ msgstr "انجام دوباره (مهار + تبدیل + z)"
-
-#~ msgid "Order by menu"
-#~ msgstr "ترتیب بر اساس فهرست"
-
-# در متن منبع اشکالی وجود دارد. (نویسه «f» نباید بین <> باشد)
-# * در این رشته از نویسهٔ LRM استفاده شده است
-#~ msgid "Find (<Ctrl><f>)"
-#~ msgstr "یافتن (مهار + f)"
-
-# در این رشته از نویسهٔ LRM استفاده شده است
-#~ msgid "Save the current file (<Ctrl>s)"
-#~ msgstr "ذخیرهٔ پروندهٔ فعلی (مهار + s)"
-
-# در این رشته از نویسهٔ LRM استفاده شده است
-#~ msgid "Save as (<Ctrl><Shift>s)"
-#~ msgstr "ذخیره به عنوان (مهار + تبدیل + s)"
-
-# در این رشته از نویسهٔ LRM استفاده شده است
-#~ msgid "Upload file (<Ctrl>b)"
-#~ msgstr "بارگذاری پرونده (مهار + b)"
-
-#~ msgid "Active"
-#~ msgstr "فعّال"
-
-#~ msgid "Translation Editor Preferences"
-#~ msgstr "ترجیحات ویرایشگر ترجمه"
-
-#~ msgid "_Autosave files every"
-#~ msgstr "_ذخیرهٔ خودکار پرونده‌ها هر"
-
-#~ msgid "_minutes"
-#~ msgstr "_دقیقه"
-
-#~ msgid "Choose the editor font"
-#~ msgstr "قلم ویرایشگر را انتخاب کنید"
-
-#~ msgid "_Name"
-#~ msgstr "_نام"
-
-#~ msgid "N_ame"
-#~ msgstr "ن_ام"
-
-#~ msgid "_Email"
-#~ msgstr "_رایانامه"
-
-#~ msgid "_Team email"
-#~ msgstr "رایانامهٔ _تیم"
-
-#~ msgid "Language Settings"
-#~ msgstr "تنظیمات زبان"
-
-# در این رشته از نویسهٔ LRM استفاده شده است
-#~ msgid "Open a new .po file or drag & drop here"
-#~ msgstr "یک پرونده ‎.po جدید بگشایید یا به اینجا بکشید و رها کنید"
-
-#~ msgid "Wrap Around"
-#~ msgstr "پیچیدن به اطراف"
-
-#~ msgid "Original-text"
-#~ msgstr "متن اصلی"
-
-#~ msgid "Translated-text"
-#~ msgstr "متن ترجمه شده"
-
-#~ msgid "Close document"
-#~ msgstr "بستن سند"
-
-#~ msgid "_Preferences"
-#~ msgstr "_ترجیحات"
-
-#~ msgid "_Help"
-#~ msgstr "_راهنما"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Undo"
-#~ msgstr "برگردان"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Redo"
-#~ msgstr "انجام دوباره"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Copy below"
-#~ msgstr "رونوشت به زیر"
-
-#~ msgid "Configuration:"
-#~ msgstr "پیکربندی:"
-
-#~ msgid "_Use this translation"
-#~ msgstr "_از این ترجمه استفاده کنید"
-
-#~ msgid "_Remove"
-#~ msgstr "_برداشتن"
-
-#~ msgid "Shortcut"
-#~ msgstr "میان‌بر"
-
-#~ msgid "Level"
-#~ msgstr "سطح"
-
-#~ msgid "String"
-#~ msgstr "رشته"
