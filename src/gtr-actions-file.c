@@ -433,8 +433,6 @@ load_file_list (GtrWindow * window, GSList * locations)
 
   g_return_if_fail ((locations != NULL) && (locations->data != NULL));
 
-  gtr_window_remove_tab (window);
-
   locations_to_load = g_slist_reverse ((GSList*) locations);
 
   while (locations_to_load != NULL)
@@ -443,17 +441,18 @@ load_file_list (GtrWindow * window, GSList * locations)
 
       g_return_if_fail (locations_to_load->data != NULL);
 
-      if (gtr_window_get_active_tab (window) != NULL)
-        window = gtr_application_create_window (GTR_APP);
-
       po = gtr_po_new_from_file (locations_to_load->data, &error);
       if (error)
         {
-          g_error ("Could not load po file %s",
-                   g_file_get_path (locations_to_load->data));
+          g_log (NULL,
+                 G_LOG_LEVEL_WARNING,
+                 "Could not load po file %s",
+                 g_file_get_path (locations_to_load->data));
           break;
         }
 
+      if (gtr_window_get_active_tab (window) != NULL)
+        window = gtr_application_create_window (GTR_APP);
       gtr_window_set_po (window, po);
 
       locations_to_load = g_slist_next (locations_to_load);
