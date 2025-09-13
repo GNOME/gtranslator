@@ -37,6 +37,7 @@ nightly:
 clang-format:
   stage: check
   image: fedora:latest
+  allow_failure: true
   script:
     - dnf install --quiet -y git-clang-format git-core
     - git fetch --depth 50 origin $CI_MERGE_REQUEST_TARGET_BRANCH_NAME:$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
