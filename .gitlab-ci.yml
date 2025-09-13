@@ -36,11 +36,11 @@ nightly:
 # Lint the code
 clang-format:
   stage: check
-  image: fedora:36
+  image: fedora:latest
   script:
-    - dnf install -y clang-tools-extra git
+    - dnf install --quiet -y git-clang-format git-core
     - git fetch --depth 50 origin $CI_MERGE_REQUEST_TARGET_BRANCH_NAME:$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
-    - git diff -U0 --no-color --relative $CI_MERGE_REQUEST_TARGET_BRANCH_NAME -- ':!build-aux/flatpak/*.json' | scripts/check-diff-style.sh
+    - git-clang-format $CI_MERGE_REQUEST_TARGET_BRANCH_NAME --style GNU --diff
   rules:
     - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_PROJECT_NAMESPACE != "GNOME"
 
