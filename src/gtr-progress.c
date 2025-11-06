@@ -131,8 +131,8 @@ on_draw (GtkDrawingArea  *widget,
   );
 
   // Light theme
-  // Blue 3 (53, 132, 228) #3584e4
-  gdk_rgba_parse (&foreground, "#3584e4");
+  // Green 3 (51, 209, 122) #33D17A
+  gdk_rgba_parse (&foreground, "#33D17A");
   // Yellow 4 (245, 194, 17) #f5c211
   gdk_rgba_parse (&fuzzy_color, "#f5c211");
   // Red 4 (192, 28, 40) #c01c28
@@ -141,8 +141,8 @@ on_draw (GtkDrawingArea  *widget,
   if (dark)
     {
       // Dark theme
-      // Blue 1 (153, 193, 241) #99c1f1
-      gdk_rgba_parse (&foreground, "#99c1f1");
+      // Green 1 (143, 240, 164) #8FF0A4
+      gdk_rgba_parse (&foreground, "#8FF0A4");
       // Yellow 1 (249, 240, 107) #f9f06b
       gdk_rgba_parse (&fuzzy_color, "#f9f06b");
       // Red 1 (246, 97, 81) #f66151
