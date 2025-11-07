@@ -34,10 +34,11 @@ typedef struct
 {
   GtkWidget *main_box;
   GtkWidget *text_view;
-  GtkWidget *label;
   GtkWidget *parent;
   GtkWidget *upload;
   GtkWidget *cancel;
+  GtkEventController *event_controller;
+  char *placeholder_text;
 } GtrUploadDialogPrivate;
 
 struct _GtrUploadDialog
@@ -55,6 +56,44 @@ enum
 };
 
 static guint signals[NO_OF_SIGNALS];
+
+static void
+on_enter (GtkEventControllerFocus *ev,
+          GtrUploadDialog         *dlg)
+{
+  GtkTextIter start, end;
+  char * comment = NULL;
+
+  GtrUploadDialogPrivate *priv = gtr_upload_dialog_get_instance_private (dlg);
+  GtkTextView *view = GTK_TEXT_VIEW (priv->text_view);
+  GtkTextBuffer *buffer = gtk_text_view_get_buffer (view);
+
+  gtk_text_buffer_get_start_iter (buffer, &start);
+  gtk_text_buffer_get_end_iter (buffer, &end);
+  comment = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);
+
+  if (strcmp (comment, priv->placeholder_text) == 0)
+    gtk_text_buffer_set_text (buffer, "", -1);
+}
+
+static void
+on_leave (GtkEventControllerFocus *ev,
+          GtrUploadDialog         *dlg)
+{
+  GtkTextIter start, end;
+  char * comment = NULL;
+
+  GtrUploadDialogPrivate *priv = gtr_upload_dialog_get_instance_private (dlg);
+  GtkTextView *view = GTK_TEXT_VIEW (priv->text_view);
+  GtkTextBuffer *buffer = gtk_text_view_get_buffer (view);
+
+  gtk_text_buffer_get_start_iter (buffer, &start);
+  gtk_text_buffer_get_end_iter (buffer, &end);
+  comment = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);
+
+  if (strcmp (comment, "") == 0)
+    gtk_text_buffer_set_text (buffer, priv->placeholder_text, -1);
+}
 
 static void
 on_upload_button_clicked (GtkButton                  *button,
@@ -79,7 +118,6 @@ gtr_upload_dialog_class_init (GtrUploadDialogClass *klass)
   /* Main layout widgets */
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, main_box);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, text_view);
-  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, label);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, upload);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, cancel);
 
@@ -97,12 +135,27 @@ static void
 gtr_upload_dialog_init (GtrUploadDialog *dlg)
 {
   GtrUploadDialogPrivate *priv = gtr_upload_dialog_get_instance_private (dlg);
+  GtkTextView *view = NULL;
+  GtkTextBuffer *buffer = NULL;
+
   gtk_widget_init_template (GTK_WIDGET (dlg));
 
   g_signal_connect (GTK_BUTTON (priv->upload), "clicked",
                     G_CALLBACK (on_upload_button_clicked), dlg);
   g_signal_connect (GTK_BUTTON (priv->cancel), "clicked",
                     G_CALLBACK (on_cancel_button_clicked), dlg);
+
+  priv->placeholder_text = _("Comment");
+
+  view = GTK_TEXT_VIEW (priv->text_view);
+  buffer = gtk_text_view_get_buffer (view);
+  gtk_text_buffer_set_text (buffer, priv->placeholder_text, -1);
+
+  priv->event_controller = gtk_event_controller_focus_new ();
+  g_signal_connect (priv->event_controller, "enter", G_CALLBACK (on_enter), dlg);
+  g_signal_connect (priv->event_controller, "leave", G_CALLBACK (on_leave), dlg);
+
+  gtk_widget_add_controller (priv->text_view, GTK_EVENT_CONTROLLER (priv->event_controller));
 }
 
 GtrUploadDialog *
