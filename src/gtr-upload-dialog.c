@@ -32,7 +32,6 @@
 
 typedef struct
 {
-  GtkWidget *main_box;
   GtkWidget *text_view;
   GtkWidget *parent;
   GtkWidget *upload;
@@ -116,7 +115,6 @@ gtr_upload_dialog_class_init (GtrUploadDialogClass *klass)
                                                "/org/gnome/translator/gtr-upload-dialog.ui");
 
   /* Main layout widgets */
-  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, main_box);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, text_view);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, upload);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, cancel);
