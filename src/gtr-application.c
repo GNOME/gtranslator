@@ -26,23 +26,23 @@
 #include <config.h>
 #endif
 
-#include "gtr-actions.h"
 #include "gtr-actions-app.h"
+#include "gtr-actions.h"
 #include "gtr-application.h"
 #include "gtr-dirs.h"
-#include "gtr-settings.h"
-#include "gtr-utils.h"
-#include "gtr-window.h"
 #include "gtr-preferences-dialog.h"
 #include "gtr-search-bar.h"
+#include "gtr-settings.h"
 #include "gtr-tab.h"
+#include "gtr-utils.h"
+#include "gtr-window.h"
 
-#include <glib.h>
-#include <glib-object.h>
+#include <adwaita.h>
 #include <gio/gio.h>
+#include <glib-object.h>
+#include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <adwaita.h>
 
 #ifdef ENABLE_INTROSPECTION
 #include <girepository.h>
@@ -72,7 +72,8 @@ typedef struct
   guint first_run : 1;
 } GtrApplicationPrivate;
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrApplication, gtr_application, ADW_TYPE_APPLICATION)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrApplication, gtr_application,
+                            ADW_TYPE_APPLICATION)
 
 GtrWindow *gtr_application_create_window (GtrApplication *app);
 
@@ -108,7 +109,9 @@ ensure_user_config_dir (void)
 }
 
 static int
-handle_local_options_cb (GApplication *application, GVariantDict *options, gpointer user_data) {
+handle_local_options_cb (GApplication *application, GVariantDict *options,
+                         gpointer user_data)
+{
   if (g_variant_dict_contains (options, "new-window"))
     {
       g_application_register (application, NULL, NULL);
@@ -121,10 +124,11 @@ handle_local_options_cb (GApplication *application, GVariantDict *options, gpoin
         }
     }
 
-  if (g_variant_dict_contains (options, "version")) {
-    g_print ("%s - %s\n", PACKAGE, PACKAGE_VERSION);
-    return 0;
-  }
+  if (g_variant_dict_contains (options, "version"))
+    {
+      g_print ("%s - %s\n", PACKAGE, PACKAGE_VERSION);
+      return 0;
+    }
   return -1;
 }
 
@@ -133,7 +137,8 @@ gtr_application_init (GtrApplication *application)
 {
   const gchar *gtr_folder;
   gchar *profiles_file;
-  GtrApplicationPrivate *priv = gtr_application_get_instance_private (application);
+  GtrApplicationPrivate *priv
+      = gtr_application_get_instance_private (application);
 
   priv->last_dir = NULL;
   priv->first_run = FALSE;
@@ -146,14 +151,16 @@ gtr_application_init (GtrApplication *application)
 
   g_application_add_main_option_entries (G_APPLICATION (application), options);
 
-  g_signal_connect (application, "handle-local-options", G_CALLBACK (handle_local_options_cb), NULL);
+  g_signal_connect (application, "handle-local-options",
+                    G_CALLBACK (handle_local_options_cb), NULL);
 
   /* Creating config folder */
   ensure_user_config_dir (); /* FIXME: is this really needed ? */
 
   /* Load settings */
   priv->settings = gtr_settings_new ();
-  priv->window_settings = g_settings_new ("org.gnome.gtranslator.state.window");
+  priv->window_settings
+      = g_settings_new ("org.gnome.gtranslator.state.window");
 
   /* If the config folder exists but there is no profile */
   gtr_folder = gtr_dirs_get_user_config_dir ();
@@ -164,13 +171,12 @@ gtr_application_init (GtrApplication *application)
 }
 
 static void
-gtr_application_dispose (GObject * object)
+gtr_application_dispose (GObject *object)
 {
   GtrApplication *app = GTR_APPLICATION (object);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
 
   g_debug ("Disposing App");
-
 
   g_clear_object (&priv->settings);
   g_clear_object (&priv->window_settings);
@@ -192,9 +198,8 @@ gtr_application_finalize (GObject *object)
 }
 
 static void
-new_window_activated (GSimpleAction *action,
-                      GVariant      *parameter,
-                      gpointer       user_data)
+new_window_activated (GSimpleAction *action, GVariant *parameter,
+                      gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrWindow *window;
@@ -204,9 +209,8 @@ new_window_activated (GSimpleAction *action,
 }
 
 static void
-find_toggle_activated (GSimpleAction *action,
-                       GVariant      *parameter,
-                       gpointer       user_data)
+find_toggle_activated (GSimpleAction *action, GVariant *parameter,
+                       gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
 
@@ -214,9 +218,7 @@ find_toggle_activated (GSimpleAction *action,
 }
 
 static void
-find_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
+find_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
 
@@ -227,9 +229,8 @@ find_activated (GSimpleAction *action,
 }
 
 static void
-find_next_activated (GSimpleAction *action,
-                     GVariant      *parameter,
-                     gpointer       user_data)
+find_next_activated (GSimpleAction *action, GVariant *parameter,
+                     gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
 
@@ -240,9 +241,8 @@ find_next_activated (GSimpleAction *action,
 }
 
 static void
-find_prev_activated (GSimpleAction *action,
-                     GVariant      *parameter,
-                     gpointer       user_data)
+find_prev_activated (GSimpleAction *action, GVariant *parameter,
+                     gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
 
@@ -253,9 +253,8 @@ find_prev_activated (GSimpleAction *action,
 }
 
 static void
-find_and_replace_activated (GSimpleAction *action,
-                            GVariant      *parameter,
-                            gpointer       user_data)
+find_and_replace_activated (GSimpleAction *action, GVariant *parameter,
+                            gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
 
@@ -265,9 +264,8 @@ find_and_replace_activated (GSimpleAction *action,
 }
 
 static void
-copy_text_activated (GSimpleAction *action,
-                     GVariant      *parameter,
-                     gpointer       user_data)
+copy_text_activated (GSimpleAction *action, GVariant *parameter,
+                     gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
 
@@ -275,9 +273,8 @@ copy_text_activated (GSimpleAction *action,
 }
 
 static void
-copy_original_activated (GSimpleAction *action,
-                         GVariant      *parameter,
-                         gpointer       user_data)
+copy_original_activated (GSimpleAction *action, GVariant *parameter,
+                         gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
 
@@ -285,22 +282,22 @@ copy_original_activated (GSimpleAction *action,
 }
 
 static void
-preferences_activated (GSimpleAction *action,
-                       GVariant      *parameter,
-                       gpointer       user_data)
+preferences_activated (GSimpleAction *action, GVariant *parameter,
+                       gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrWindow *window;
 
   window = get_active_window (app);
-  if (adw_application_window_get_visible_dialog (ADW_APPLICATION_WINDOW (window)) == NULL)
+  if (adw_application_window_get_visible_dialog (
+          ADW_APPLICATION_WINDOW (window))
+      == NULL)
     gtr_show_preferences_dialog (window);
 }
 
 static void
-edit_header_activated (GSimpleAction *action,
-                       GVariant      *parameter,
-                       gpointer       user_data)
+edit_header_activated (GSimpleAction *action, GVariant *parameter,
+                       gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_actions_edit_header (get_active_window (app));
@@ -312,40 +309,34 @@ fix_plurals_activated (GSimpleAction *action, GVariant *parameter,
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_actions_fix_plurals (get_active_window (app));
-  gtr_window_add_toast_msg (get_active_window (app), _("Fixed plurals"));
+  gtr_window_add_toast_msg (get_active_window (app), _ ("Fixed plurals"));
 }
 
 static void
-clear_msgstr_activated (GSimpleAction *action,
-                        GVariant      *parameter,
-                        gpointer       user_data)
+clear_msgstr_activated (GSimpleAction *action, GVariant *parameter,
+                        gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_actions_edit_clear (get_active_window (app));
 }
 
 static void
-help_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
+help_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_show_help (GTK_WINDOW (get_active_window (app)));
 }
 
 static void
-about_activated (GSimpleAction *action,
-                 GVariant      *parameter,
-                 gpointer       user_data)
+about_activated (GSimpleAction *action, GVariant *parameter,
+                 gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_about_dialog (get_active_window (app));
 }
 
 static void
-quit_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
+quit_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
 {
   GtkApplication *app = GTK_APPLICATION (user_data);
   GList *windows;
@@ -355,44 +346,39 @@ quit_activated (GSimpleAction *action,
 }
 
 static void
-upload_file_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
+upload_file_activated (GSimpleAction *action, GVariant *parameter,
+                       gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_upload_file_dialog (get_active_window (app));
 }
 
 static void
-saveas_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
+saveas_activated (GSimpleAction *action, GVariant *parameter,
+                  gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_save_file_as_dialog (get_active_window (app));
 }
 
 static void
-open_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
+open_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_open_file_dialog (get_active_window (app));
 }
 
 static void
-dl_activated (GSimpleAction *action,
-              GVariant      *parameter,
-              gpointer       user_data)
+dl_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
 
   GtrTab *active_tab = gtr_window_get_active_tab (get_active_window (app));
-  if (active_tab == NULL) {
-    gtr_window_show_dlteams (get_active_window (app));
-    return;
-  }
+  if (active_tab == NULL)
+    {
+      gtr_window_show_dlteams (get_active_window (app));
+      return;
+    }
 
   GtrPoState state = gtr_po_get_state (gtr_tab_get_po (active_tab));
 
@@ -404,45 +390,38 @@ dl_activated (GSimpleAction *action,
 }
 
 static void
-prev_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
+prev_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_message_go_to_previous (get_active_window (app));
 }
 
 static void
-next_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
+next_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_message_go_to_next (get_active_window (app));
 }
 
 static void
-prev_no_activated (GSimpleAction *action,
-                   GVariant      *parameter,
-                   gpointer       user_data)
+prev_no_activated (GSimpleAction *action, GVariant *parameter,
+                   gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_message_go_to_prev_fuzzy_or_untranslated (get_active_window (app));
 }
 
 static void
-next_no_activated (GSimpleAction *action,
-                   GVariant      *parameter,
-                   gpointer       user_data)
+next_no_activated (GSimpleAction *action, GVariant *parameter,
+                   gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_message_go_to_next_fuzzy_or_untranslated (get_active_window (app));
 }
 
 static void
-build_tm_activated (GSimpleAction *action,
-                    GVariant      *parameter,
-                    gpointer       user_data)
+build_tm_activated (GSimpleAction *action, GVariant *parameter,
+                    gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrWindow *w = GTR_WINDOW (get_active_window (app));
@@ -450,9 +429,16 @@ build_tm_activated (GSimpleAction *action,
 }
 
 static void
-tm_activated (GSimpleAction *action,
-              GVariant      *parameter,
-              gpointer       user_data)
+update_from_pot_activated (GSimpleAction *action, GVariant *parameter,
+                           gpointer user_data)
+{
+  GtrApplication *app = GTR_APPLICATION (user_data);
+  GtrWindow *w = GTR_WINDOW (get_active_window (app));
+  gtr_update_from_pot_dialog (w);
+}
+
+static void
+tm_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrWindow *w = GTR_WINDOW (get_active_window (app));
@@ -460,9 +446,8 @@ tm_activated (GSimpleAction *action,
 }
 
 static void
-toggle_fuzzy_activated (GSimpleAction *action,
-                        GVariant      *parameter,
-                        gpointer       user_data)
+toggle_fuzzy_activated (GSimpleAction *action, GVariant *parameter,
+                        gpointer user_data)
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   GtrWindow *w = GTR_WINDOW (get_active_window (app));
@@ -471,6 +456,8 @@ toggle_fuzzy_activated (GSimpleAction *action,
 
 static GActionEntry app_entries[]
     = { { "saveas", saveas_activated, NULL, NULL, NULL },
+
+        { "update_from_pot", update_from_pot_activated, NULL, NULL, NULL },
 
         { "upload_file", upload_file_activated, NULL, NULL, NULL },
 
@@ -515,7 +502,7 @@ static GActionEntry app_entries[]
 static void
 set_kb (GApplication *app, const gchar *action, const gchar *accel)
 {
-  const gchar *keys[] = {accel, NULL};
+  const gchar *keys[] = { accel, NULL };
   gtk_application_set_accels_for_action (GTK_APPLICATION (app), action, keys);
 }
 
@@ -523,7 +510,7 @@ static void
 gtr_application_startup (GApplication *application)
 {
   G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
-  g_set_application_name (_("Translation Editor"));
+  g_set_application_name (_ ("Translation Editor"));
   gtk_window_set_default_icon_name (PACKAGE_APPID);
 
   g_debug ("App startup");
@@ -571,13 +558,14 @@ gtr_application_startup (GApplication *application)
   set_kb (application, "app.tm_8", "<Ctrl>8");
   set_kb (application, "app.tm_9", "<Ctrl>9");
 
+  /* optional accel for update */
+  set_kb (application, "app.update_from_pot", NULL);
   set_kb (application, "window.close", "<Ctrl>w");
 }
 
 static void
-gtr_application_setup_window (GApplication *application,
-                              GFile       **files,
-                              gint          n_files)
+gtr_application_setup_window (GApplication *application, GFile **files,
+                              gint n_files)
 {
   GtrApplication *app = GTR_APPLICATION (application);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
@@ -612,10 +600,8 @@ gtr_application_setup_window (GApplication *application,
 }
 
 static void
-gtr_application_open (GApplication *application,
-                      GFile       **files,
-                      gint          n_files,
-                      const gchar  *hint)
+gtr_application_open (GApplication *application, GFile **files, gint n_files,
+                      const gchar *hint)
 {
   gtr_application_setup_window (application, files, n_files);
 }
@@ -661,11 +647,10 @@ gtr_application_class_init (GtrApplicationClass *klass)
 GtrApplication *
 gtr_application_new (void)
 {
-  return GTR_APPLICATION (g_object_new (GTR_TYPE_APPLICATION,
-                                        "application-id", PACKAGE_APPID,
-                                        "flags", G_APPLICATION_HANDLES_OPEN,
-                                        "resource-base-path", "/org/gnome/translator/",
-                                        NULL));
+  return GTR_APPLICATION (
+      g_object_new (GTR_TYPE_APPLICATION, "application-id", PACKAGE_APPID,
+                    "flags", G_APPLICATION_HANDLES_OPEN, "resource-base-path",
+                    "/org/gnome/translator/", NULL));
 }
 
 /**
@@ -692,9 +677,8 @@ gtr_application_create_window (GtrApplication *app)
   gtk_window_group_add_window (group, GTK_WINDOW (window));
   g_object_unref (group);
 
-  g_settings_get (priv->window_settings,
-                  GTR_SETTINGS_WINDOW_SIZE,
-                  "(ii)", &w, &h);
+  g_settings_get (priv->window_settings, GTR_SETTINGS_WINDOW_SIZE, "(ii)", &w,
+                  &h);
 
   gtk_window_set_default_size (GTK_WINDOW (window), w, h);
 
@@ -720,8 +704,8 @@ gtr_application_create_window (GtrApplication *app)
  * a newly allocated list of #GtranslationApplication objects
  */
 GList *
-gtr_application_get_views (GtrApplication * app,
-                           gboolean original, gboolean translated)
+gtr_application_get_views (GtrApplication *app, gboolean original,
+                           gboolean translated)
 {
   GList *res = NULL;
 
@@ -741,7 +725,7 @@ gtr_application_get_views (GtrApplication * app,
  * Return value: (transfer none): the active #GtrWindow
  **/
 GtrWindow *
-gtr_application_get_active_window (GtrApplication * app)
+gtr_application_get_active_window (GtrApplication *app)
 {
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
@@ -755,7 +739,7 @@ gtr_application_get_active_window (GtrApplication * app)
  * Return value: the last dir where a file was opened in the GtkFileChooser
  */
 const gchar *
-_gtr_application_get_last_dir (GtrApplication * app)
+_gtr_application_get_last_dir (GtrApplication *app)
 {
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
@@ -770,7 +754,7 @@ _gtr_application_get_last_dir (GtrApplication * app)
  * GtkFileChooser.
  */
 void
-_gtr_application_set_last_dir (GtrApplication * app, const gchar * last_dir)
+_gtr_application_set_last_dir (GtrApplication *app, const gchar *last_dir)
 {
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
   g_return_if_fail (GTR_IS_APPLICATION (app));

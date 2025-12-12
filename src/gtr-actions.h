@@ -65,6 +65,8 @@ void _gtr_actions_file_close_all (GtrWindow * window);
 
 void _gtr_actions_file_save_all (GtrWindow * window);
 
+void gtr_update_from_pot_dialog (GtrWindow *window);
+
 /*Edit*/
 void gtr_actions_edit_cut (GtrWindow * window);
 
