@@ -90,6 +90,18 @@
                       </object>
                     </child>
                     <child>
+                      <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="yes">Damned Lies Integration</property>
+                        <property name="description" translatable="yes">GNOME Damned Lies integration token, go to your profile in https://l10n.gnome.org/ to get it</property>
+                        <child>
+                          <object class="AdwEntryRow" id="auth_token">
+                            <property name="title" translatable="yes">_Damned Lies auth token</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtrLanguagesFetcher" id="languages_fetcher">
                       </object>
                     </child>

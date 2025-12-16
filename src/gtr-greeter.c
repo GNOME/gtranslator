@@ -37,6 +37,7 @@ typedef struct
   GtkWidget *email;
   GtkWidget *team_email;
   GtkWidget *languages_fetcher;
+  GtkWidget *auth_token;
 
   GtkWidget *next_button;
   GtkWidget *back_button;
@@ -76,6 +77,7 @@ add_profile (GtrGreeter *self)
   gtr_profile_set_author_name (profile, gtk_editable_get_text (GTK_EDITABLE (priv->name)));
   gtr_profile_set_author_email (profile, gtk_editable_get_text (GTK_EDITABLE (priv->email)));
   gtr_profile_set_group_email (profile, gtk_editable_get_text (GTK_EDITABLE (priv->team_email)));
+  gtr_profile_set_auth_token (profile, gtk_editable_get_text (GTK_EDITABLE (priv->auth_token)));
 
   gtr_profile_set_language_name (profile, gtr_languages_fetcher_get_language_name (lf));
   gtr_profile_set_language_code (profile, gtr_languages_fetcher_get_language_code (lf));
@@ -182,6 +184,7 @@ gtr_greeter_class_init (GtrGreeterClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrGreeter, email);
   gtk_widget_class_bind_template_child_private (widget_class, GtrGreeter, team_email);
   gtk_widget_class_bind_template_child_private (widget_class, GtrGreeter, languages_fetcher);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrGreeter, auth_token);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrGreeter, conf_profile);
   gtk_widget_class_bind_template_child_private (widget_class, GtrGreeter, conf_name);
