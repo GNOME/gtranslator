@@ -122,7 +122,6 @@
   </schema>
   <schema id="org.gnome.gtranslator.state" path="/org/gnome/gtranslator/state/">
     <child name="window" schema="org.gnome.gtranslator.state.window"/>
-    <child name="history-entry" schema="org.gnome.gtranslator.state.history-entry"/>
   </schema>
   <schema id="org.gnome.gtranslator.state.window" path="/org/gnome/gtranslator/state/window/">
     <key name="window-maximized" type="b">
@@ -133,8 +132,6 @@
     <key name="size" type="(ii)">
       <default>(1000, 500)</default>
     </key>
-  </schema>
-  <schema id="org.gnome.gtranslator.state.history-entry" path="/org/gnome/gtranslator/state/history-entry/">
   </schema>
   <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gtranslator.plugins" path="/org/gnome/gtranslator/plugins/">
   </schema>
