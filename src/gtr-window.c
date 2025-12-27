@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -108,7 +108,7 @@ free_match (gpointer data)
 
 /*
  * gtr_window_update_statusbar_message_count:
- * 
+ *
  * This func is used to show the global status of the message list
  * in the statusbar widget.
  */
@@ -421,10 +421,10 @@ gtr_window_remove_tab (GtrWindow * window)
  * gtr_window_create_tab:
  * @window: a #GtrWindow
  * @po: a #GtrPo
- * 
+ *
  * Adds a new #GtrTab to the #GtrNotebook and returns the
  * #GtrTab.
- * 
+ *
  * Returns: (transfer none): a new #GtrTab object
  */
 GtrTab *
@@ -539,7 +539,7 @@ gtr_window_set_po (GtrWindow *window, GtrPo *po)
 /**
  * gtr_window_get_active_tab:
  * @window: a #GtrWindow
- * 
+ *
  * Gets the active #GtrTab of the @window.
  *
  * Returns: (transfer none): the active #GtrTab of the @window.
