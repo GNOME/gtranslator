@@ -85,11 +85,11 @@ update_msg (GtrMsg             *msg,
   priv = gtr_message_table_row_get_instance_private (row);
 
   text = gtr_msg_get_msgid (msg);
-  gtk_label_set_label (GTK_LABEL (priv->original), text);
+  gtk_inscription_set_text (GTK_INSCRIPTION (priv->original), text);
   text = gtr_msg_get_msgstr (msg);
-  gtk_label_set_label (GTK_LABEL (priv->translated), text);
+  gtk_inscription_set_text (GTK_INSCRIPTION (priv->translated), text);
   pos = g_strdup_printf ("%d", gtr_msg_get_po_position (msg));
-  gtk_label_set_label (GTK_LABEL (priv->id), pos);
+  gtk_inscription_set_text (GTK_INSCRIPTION (priv->id), pos);
 
   // Update css classes for all columns
   update_cell_style (priv->original, msg);
