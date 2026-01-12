@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-12-12 11:40+0000\n"
-"PO-Revision-Date: 2025-12-12 22:55+0100\n"
+"POT-Creation-Date: 2026-01-11 09:07+0000\n"
+"PO-Revision-Date: 2026-01-12 08:22+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -202,11 +202,11 @@ msgid "If true, displays a column with the id of the message on the editor."
 msgstr ""
 "Če je možnost potrjena, prikaže stolpec z ID-jem sporočila v urejevalniku."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:130
+#: data/org.gnome.Gtranslator.gschema.xml.in:129
 msgid "Window maximized"
 msgstr "Okno povečano"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:131
+#: data/org.gnome.Gtranslator.gschema.xml.in:130
 msgid "Window maximized state"
 msgstr "Stanje povečanega okna"
 
@@ -395,6 +395,10 @@ msgstr[3] ""
 msgid "Edit Notes"
 msgstr "Uredi opombe"
 
+#: src/gtr-context.c:525
+msgid "Open in Browser"
+msgstr "Odpri v brskalniku"
+
 #: src/gtr-context.ui:28
 msgid "Notes"
 msgstr "Opombe"
@@ -558,11 +562,11 @@ msgstr ""
 msgid "Create Profile"
 msgstr "Ustvari profil"
 
-#: src/gtr-greeter.ui:59
-msgid "Profile"
-msgstr "Profil"
+#: src/gtr-greeter.ui:59 src/gtr-profile-dialog.ui:49
+msgid "Profile Information"
+msgstr "Podatki profila"
 
-#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:116 src/gtr-profile-dialog.ui:54
+#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:130 src/gtr-profile-dialog.ui:54
 msgid "Profile name"
 msgstr "Ime profila"
 
@@ -570,47 +574,75 @@ msgstr "Ime profila"
 msgid "default"
 msgstr "privzeto"
 
-#: src/gtr-greeter.ui:69 src/gtr-greeter.ui:121
-msgid "Translator name"
-msgstr "Ime prevajalca"
+#: src/gtr-greeter.ui:71 src/gtr-profile-dialog.ui:63
+msgid "Translator Information"
+msgstr "Podatki o prevajalcu"
 
-#: src/gtr-greeter.ui:75 src/gtr-greeter.ui:126
-msgid "Translator email"
-msgstr "E-naslov prevajalca"
+#: src/gtr-greeter.ui:74 src/gtr-profile-dialog.ui:68
+msgid "Translator _name"
+msgstr "_Ime prevajalca"
 
-#: src/gtr-greeter.ui:81
-msgid "Translation team email"
-msgstr "E-naslov prevajalske ekipe"
+#: src/gtr-greeter.ui:80 src/gtr-profile-dialog.ui:74
+msgid "Translator _email"
+msgstr "_E-naslov prevajalca"
 
-#: src/gtr-greeter.ui:102 src/gtr-greeter.ui:108
+#: src/gtr-greeter.ui:86 src/gtr-profile-dialog.ui:80
+msgid "Translation _team email"
+msgstr "E-nas_lov prevajalske ekipe"
+
+#: src/gtr-greeter.ui:94 src/gtr-profile-dialog.ui:88
+msgid "Damned Lies Integration"
+msgstr "Integracija s Presnetimi lažmi"
+
+#: src/gtr-greeter.ui:95 src/gtr-profile-dialog.ui:89
+msgid ""
+"GNOME Damned Lies integration token, go to your profile in https://"
+"l10n.gnome.org/ to get it"
+msgstr ""
+"Žeton za integracijo s Presnetimi lažmi GNOME; pojdite v svoj profil na "
+"naslovu https://l10n.gnome.org/, da ga dobite"
+
+#: src/gtr-greeter.ui:98 src/gtr-profile-dialog.ui:94
+msgid "_Damned Lies auth token"
+msgstr "_Žeton overjanja Presnetih laži"
+
+#: src/gtr-greeter.ui:119 src/gtr-greeter.ui:125
 msgid "Confirmation"
 msgstr "Potrditev"
 
-#: src/gtr-greeter.ui:131
+#: src/gtr-greeter.ui:135
+msgid "Translator name"
+msgstr "Ime prevajalca"
+
+#: src/gtr-greeter.ui:140
+msgid "Translator email"
+msgstr "E-naslov prevajalca"
+
+#: src/gtr-greeter.ui:145
 msgid "Team email"
 msgstr "E-naslov ekipe"
 
-#: src/gtr-greeter.ui:136
+#: src/gtr-greeter.ui:150
 msgid "Language name"
 msgstr "Ime jezika"
 
-#: src/gtr-greeter.ui:141 src/gtr-languages-fetcher.ui:14
+#: src/gtr-greeter.ui:155 src/gtr-languages-fetcher.ui:14
 msgid "Language code"
 msgstr "Koda jezika"
 
-#: src/gtr-greeter.ui:146 src/gtr-languages-fetcher.ui:34
+#: src/gtr-greeter.ui:160 src/gtr-languages-fetcher.ui:34
 msgid "Character set"
 msgstr "Znakovni nabor"
 
-#: src/gtr-greeter.ui:151 src/gtr-languages-fetcher.ui:54
+#: src/gtr-greeter.ui:165 src/gtr-languages-fetcher.ui:54
 msgid "Transfer encoding"
 msgstr "Kodiranje prenosa"
 
-#: src/gtr-greeter.ui:156
+#: src/gtr-greeter.ui:170
 msgid "Plural form"
 msgstr "Množinske oblike"
 
-#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:324
+#: src/gtr-header-dialog.c:379 src/gtr-tab.ui:324
 msgid "Edit Header"
 msgstr "Uredi glavo"
 
@@ -694,6 +726,10 @@ msgstr "Jezik"
 #: src/gtr-header-dialog.ui:167
 msgid "State"
 msgstr "Stanje"
+
+#: src/gtr-header-dialog.ui:173
+msgid "VCS Browser"
+msgstr "Brskalnik VCS"
 
 #: src/gtr-lang-combo-row.c:73
 msgid "Languages"
@@ -901,42 +937,6 @@ msgstr "Profil Urejevalnika prevodov"
 #: src/gtr-profile-dialog.ui:22
 msgid "_OK"
 msgstr "V _redu"
-
-#: src/gtr-profile-dialog.ui:49
-msgid "Profile Information"
-msgstr "Podatki profila"
-
-#: src/gtr-profile-dialog.ui:63
-msgid "Translator Information"
-msgstr "Podatki o prevajalcu"
-
-#: src/gtr-profile-dialog.ui:68
-msgid "Translator _name"
-msgstr "_Ime prevajalca"
-
-#: src/gtr-profile-dialog.ui:74
-msgid "Translator _email"
-msgstr "_E-naslov prevajalca"
-
-#: src/gtr-profile-dialog.ui:80
-msgid "Translation _team email"
-msgstr "E-nas_lov prevajalske ekipe"
-
-#: src/gtr-profile-dialog.ui:88
-msgid "Damned Lies Integration"
-msgstr "Integracija s Presnetimi lažmi"
-
-#: src/gtr-profile-dialog.ui:89
-msgid ""
-"GNOME Damned Lies integration token, go to your profile in https://"
-"l10n.gnome.org/ to get it"
-msgstr ""
-"Žeton za integracijo s Presnetimi lažmi GNOME; pojdite v svoj profil na "
-"naslovu https://l10n.gnome.org/, da ga dobite"
-
-#: src/gtr-profile-dialog.ui:94
-msgid "_Damned Lies auth token"
-msgstr "_Žeton overjanja Presnetih laži"
 
 #: src/gtr-projects.ui:15 src/gtr-tab.ui:320
 msgid "Build Translation Memory"
