@@ -8,14 +8,14 @@
 # YunQiang Su <wzssyqa@gmail.com>, 2010.
 # Dz Chen <wsxy162@gmail.com>, 2015.
 # Dingzhong Chen <wsxy162@gmail.com>, 2019.
-# lumingzh <lumingzh@qq.com>, 2016-2025.
+# lumingzh <lumingzh@qq.com>, 2016-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-12-12 21:56+0000\n"
-"PO-Revision-Date: 2025-12-13 11:54+0800\n"
+"POT-Creation-Date: 2026-01-11 09:07+0000\n"
+"PO-Revision-Date: 2026-01-13 07:59+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -188,11 +188,11 @@ msgstr "显示标识符栏"
 msgid "If true, displays a column with the id of the message on the editor."
 msgstr "如果设为 true，会在编辑器上增加一栏来显示消息的标识符。"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:130
+#: data/org.gnome.Gtranslator.gschema.xml.in:129
 msgid "Window maximized"
 msgstr "窗口最大化"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:131
+#: data/org.gnome.Gtranslator.gschema.xml.in:130
 msgid "Window maximized state"
 msgstr "窗口最大化状态"
 
@@ -368,6 +368,10 @@ msgstr[0] "有 %d 份含有未保存的改动的文档。要在关闭前保存�
 msgid "Edit Notes"
 msgstr "编辑备注"
 
+#: src/gtr-context.c:525
+msgid "Open in Browser"
+msgstr "在浏览器中打开"
+
 #: src/gtr-context.ui:28
 msgid "Notes"
 msgstr "备注"
@@ -531,11 +535,11 @@ msgstr ""
 msgid "Create Profile"
 msgstr "创建配置文件"
 
-#: src/gtr-greeter.ui:59
-msgid "Profile"
-msgstr "配置文件"
+#: src/gtr-greeter.ui:59 src/gtr-profile-dialog.ui:49
+msgid "Profile Information"
+msgstr "配置文件信息"
 
-#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:116 src/gtr-profile-dialog.ui:54
+#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:130 src/gtr-profile-dialog.ui:54
 msgid "Profile name"
 msgstr "配置名称"
 
@@ -543,47 +547,74 @@ msgstr "配置名称"
 msgid "default"
 msgstr "默认"
 
-#: src/gtr-greeter.ui:69 src/gtr-greeter.ui:121
-msgid "Translator name"
-msgstr "翻译者姓名"
+#: src/gtr-greeter.ui:71 src/gtr-profile-dialog.ui:63
+msgid "Translator Information"
+msgstr "翻译者信息"
 
-#: src/gtr-greeter.ui:75 src/gtr-greeter.ui:126
-msgid "Translator email"
-msgstr "翻译者电子邮箱"
+#: src/gtr-greeter.ui:74 src/gtr-profile-dialog.ui:68
+msgid "Translator _name"
+msgstr "翻译者姓名(_N)"
 
-#: src/gtr-greeter.ui:81
-msgid "Translation team email"
-msgstr "翻译团队电子邮箱"
+#: src/gtr-greeter.ui:80 src/gtr-profile-dialog.ui:74
+msgid "Translator _email"
+msgstr "翻译者电子邮箱(_E)"
 
-#: src/gtr-greeter.ui:102 src/gtr-greeter.ui:108
+#: src/gtr-greeter.ui:86 src/gtr-profile-dialog.ui:80
+msgid "Translation _team email"
+msgstr "翻译团队电子邮箱(_T)"
+
+#: src/gtr-greeter.ui:94 src/gtr-profile-dialog.ui:88
+msgid "Damned Lies Integration"
+msgstr "胡言乱语集成"
+
+#: src/gtr-greeter.ui:95 src/gtr-profile-dialog.ui:89
+msgid ""
+"GNOME Damned Lies integration token, go to your profile in https://"
+"l10n.gnome.org/ to get it"
+msgstr ""
+"GNOME 胡言乱语集成令牌，访问 https://l10n.gnome.org/ 中您的配置文件以获取它"
+
+#: src/gtr-greeter.ui:98 src/gtr-profile-dialog.ui:94
+msgid "_Damned Lies auth token"
+msgstr "胡言乱语认证令牌(_D)"
+
+#: src/gtr-greeter.ui:119 src/gtr-greeter.ui:125
 msgid "Confirmation"
 msgstr "确认"
 
-#: src/gtr-greeter.ui:131
+#: src/gtr-greeter.ui:135
+msgid "Translator name"
+msgstr "翻译者姓名"
+
+#: src/gtr-greeter.ui:140
+msgid "Translator email"
+msgstr "翻译者电子邮箱"
+
+#: src/gtr-greeter.ui:145
 msgid "Team email"
 msgstr "团队电子邮箱"
 
-#: src/gtr-greeter.ui:136
+#: src/gtr-greeter.ui:150
 msgid "Language name"
 msgstr "语言名称"
 
-#: src/gtr-greeter.ui:141 src/gtr-languages-fetcher.ui:14
+#: src/gtr-greeter.ui:155 src/gtr-languages-fetcher.ui:14
 msgid "Language code"
 msgstr "语言代码"
 
-#: src/gtr-greeter.ui:146 src/gtr-languages-fetcher.ui:34
+#: src/gtr-greeter.ui:160 src/gtr-languages-fetcher.ui:34
 msgid "Character set"
 msgstr "字符集"
 
-#: src/gtr-greeter.ui:151 src/gtr-languages-fetcher.ui:54
+#: src/gtr-greeter.ui:165 src/gtr-languages-fetcher.ui:54
 msgid "Transfer encoding"
 msgstr "传输编码"
 
-#: src/gtr-greeter.ui:156
+#: src/gtr-greeter.ui:170
 msgid "Plural form"
 msgstr "复数形式"
 
-#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:324
+#: src/gtr-header-dialog.c:379 src/gtr-tab.ui:324
 msgid "Edit Header"
 msgstr "编辑文件头"
 
@@ -667,6 +698,10 @@ msgstr "语言"
 #: src/gtr-header-dialog.ui:167
 msgid "State"
 msgstr "状态"
+
+#: src/gtr-header-dialog.ui:173
+msgid "VCS Browser"
+msgstr "VCS 浏览器"
 
 #: src/gtr-lang-combo-row.c:73
 msgid "Languages"
@@ -873,41 +908,6 @@ msgstr "翻译编辑器配置文件"
 #: src/gtr-profile-dialog.ui:22
 msgid "_OK"
 msgstr "确定(_O)"
-
-#: src/gtr-profile-dialog.ui:49
-msgid "Profile Information"
-msgstr "配置文件信息"
-
-#: src/gtr-profile-dialog.ui:63
-msgid "Translator Information"
-msgstr "翻译者信息"
-
-#: src/gtr-profile-dialog.ui:68
-msgid "Translator _name"
-msgstr "翻译者姓名(_N)"
-
-#: src/gtr-profile-dialog.ui:74
-msgid "Translator _email"
-msgstr "翻译者电子邮箱(_E)"
-
-#: src/gtr-profile-dialog.ui:80
-msgid "Translation _team email"
-msgstr "翻译团队电子邮箱(_T)"
-
-#: src/gtr-profile-dialog.ui:88
-msgid "Damned Lies Integration"
-msgstr "胡言乱语集成"
-
-#: src/gtr-profile-dialog.ui:89
-msgid ""
-"GNOME Damned Lies integration token, go to your profile in https://"
-"l10n.gnome.org/ to get it"
-msgstr ""
-"GNOME 胡言乱语集成令牌，访问 https://l10n.gnome.org/ 中您的配置文件以获取它"
-
-#: src/gtr-profile-dialog.ui:94
-msgid "_Damned Lies auth token"
-msgstr "胡言乱语认证令牌(_D)"
 
 #: src/gtr-projects.ui:15 src/gtr-tab.ui:320
 msgid "Build Translation Memory"
@@ -1382,6 +1382,12 @@ msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
 msgstr "显示的消息与翻译记忆匹配的消息的最大长度差。"
+
+#~ msgid "Profile"
+#~ msgstr "配置文件"
+
+#~ msgid "Translation team email"
+#~ msgstr "翻译团队电子邮箱"
 
 #~ msgid "Source Viewer"
 #~ msgstr "源码查看器"
