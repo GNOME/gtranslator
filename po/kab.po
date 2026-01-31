@@ -2,14 +2,14 @@
 # Copyright (C) 2024 gtranslator's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gtranslator package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# ButterflyOfFire <butterflyoffire@protonmail.com>, 2024-2025.
+# ButterflyOfFire <butterflyoffire@protonmail.com>, 2024-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-09-23 09:48+0000\n"
-"PO-Revision-Date: 2025-09-25 18:58+0100\n"
+"POT-Creation-Date: 2026-01-11 09:07+0000\n"
+"PO-Revision-Date: 2026-01-31 15:13+0100\n"
 "Last-Translator: ButterflyOfFire <butterflyoffire@protonmail.com>\n"
 "Language-Team: Kabyle\n"
 "Language: kab\n"
@@ -27,7 +27,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:7
 #: data/org.gnome.Gtranslator.desktop.in.in:2 src/gtr-actions-app.c:89
-#: src/gtr-application.c:526 src/gtr-window.c:206 src/gtr-window.c:452
+#: src/gtr-application.c:513 src/gtr-window.c:206 src/gtr-window.c:452
 msgid "Translation Editor"
 msgstr "Amaẓrag n tsuqilt"
 
@@ -59,10 +59,10 @@ msgstr "Amaẓrag n yifulya PO"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:14
 msgid "Gtranslator;Translation;Editor;Gettext;Write;"
-msgstr "Gtranslator;TTasuqilt;Amaẓrag;Gettext;Aru;"
+msgstr "Gtranslator;Tasuqilt;Amaẓrag;Gettext;Aru;"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:333
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:337
 msgid "New Window"
 msgstr "Asfaylu amaynut"
 
@@ -179,11 +179,11 @@ msgstr ""
 msgid "If true, displays a column with the id of the message on the editor."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:130
+#: data/org.gnome.Gtranslator.gschema.xml.in:129
 msgid "Window maximized"
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:131
+#: data/org.gnome.Gtranslator.gschema.xml.in:130
 msgid "Window maximized state"
 msgstr ""
 
@@ -201,39 +201,15 @@ msgstr ""
 msgid "translator-credits"
 msgstr "  ButterflyOfFire"
 
-#: src/gtr-actions-file.c:122 src/gtr-close-confirmation-dialog.c:338
-msgid "Unsaved Changes"
-msgstr "Isenfal ur nettwaklas ara"
-
-#: src/gtr-actions-file.c:126
-#, c-format
-msgid "Do you want to write all the changes done to %s?"
+#: src/gtr-actions-file.c:94
+msgid "Failed to update from template"
 msgstr ""
 
-#: src/gtr-actions-file.c:130
-msgid "Cancel"
-msgstr "Semmet"
-
-#: src/gtr-actions-file.c:131
-msgid "Continue Without Saving"
-msgstr "Kemmel war asekles"
-
-#: src/gtr-actions-file.c:132
-msgid "Save and Open"
-msgstr "Sekles sakin ldi"
-
-#: src/gtr-actions-file.c:154
-msgid "Open file for translation"
-msgstr "Ldi afaylu i usuqel"
-
-#: src/gtr-actions-file.c:196
-msgid "Could not save file"
-msgstr "Ulamek asekles n ufaylu"
-
-#: src/gtr-actions-file.c:197 src/gtr-actions-file.c:216
-#: src/gtr-actions-file.c:254 src/gtr-actions-file.c:281
-#: src/gtr-actions-file.c:468 src/gtr-actions-file.c:511
-#: src/gtr-actions-file.c:670 src/gtr-dl-teams.c:165 src/gtr-dl-teams.c:227
+#: src/gtr-actions-file.c:98 src/gtr-actions-file.c:161
+#: src/gtr-actions-file.c:440 src/gtr-actions-file.c:462
+#: src/gtr-actions-file.c:501 src/gtr-actions-file.c:527
+#: src/gtr-actions-file.c:711 src/gtr-actions-file.c:754
+#: src/gtr-actions-file.c:912 src/gtr-dl-teams.c:165 src/gtr-dl-teams.c:227
 #: src/gtr-dl-teams.c:346 src/gtr-dl-teams.c:434 src/gtr-dl-teams.c:571
 #: src/gtr-dl-teams.c:582 src/gtr-dl-teams.c:593 src/gtr-dl-teams.c:624
 #: src/gtr-dl-teams.c:635 src/gtr-dl-teams.c:707 src/gtr-tab.c:347
@@ -241,15 +217,77 @@ msgstr "Ulamek asekles n ufaylu"
 msgid "OK"
 msgstr "Ih"
 
-#: src/gtr-actions-file.c:252
-msgid "This file has already been uploaded"
+#: src/gtr-actions-file.c:126
+msgid "msgmerge failed"
+msgstr "msgmerge yecceḍ"
+
+#: src/gtr-actions-file.c:151
+msgid "Updated from Template"
+msgstr "Yettuleqqem seg tmudemt"
+
+#: src/gtr-actions-file.c:154
+#, c-format
+msgid ""
+"Messages: %d → %d (%+d)\n"
+"Translated: %d → %d (%+d)\n"
+"Fuzzy: %d → %d (%+d)\n"
+"Untranslated: %d → %d (%+d)"
 msgstr ""
 
-#: src/gtr-actions-file.c:268
+#: src/gtr-actions-file.c:212
+msgid "msgmerge not found on PATH. Install gettext (msgmerge) and try again."
+msgstr ""
+
+#: src/gtr-actions-file.c:238
+msgid "Failed to start msgmerge"
+msgstr ""
+
+#: src/gtr-actions-file.c:255
+msgid "Select Template (.pot)"
+msgstr "Fren tamudemt (.pot)"
+
+#: src/gtr-actions-file.c:270
+msgid "Gettext translation template (*.pot)"
+msgstr "Tamudemt n tsuqilt Gettext (*.pot)"
+
+#: src/gtr-actions-file.c:363 src/gtr-close-confirmation-dialog.c:338
+msgid "Unsaved Changes"
+msgstr "Isenfal ur nettwaklas ara"
+
+#: src/gtr-actions-file.c:368
+#, c-format
+msgid "Do you want to write all the changes done to %s?"
+msgstr ""
+
+#: src/gtr-actions-file.c:371
+msgid "Cancel"
+msgstr "Semmet"
+
+#: src/gtr-actions-file.c:372
+msgid "Continue Without Saving"
+msgstr "Kemmel war asekles"
+
+#: src/gtr-actions-file.c:372
+msgid "Save and Open"
+msgstr "Sekles sakin ldi"
+
+#: src/gtr-actions-file.c:394
+msgid "Open file for translation"
+msgstr "Ldi afaylu i usuqel"
+
+#: src/gtr-actions-file.c:438
+msgid "Could not save file"
+msgstr "Ulamek asekles n ufaylu"
+
+#: src/gtr-actions-file.c:499
+msgid "This file has already been uploaded"
+msgstr "Afaylu-a yettuceyyeɛ yakan"
+
+#: src/gtr-actions-file.c:515
 msgid "Couldn't upload the file"
 msgstr ""
 
-#: src/gtr-actions-file.c:271
+#: src/gtr-actions-file.c:518
 #, c-format
 msgid ""
 "%s\n"
@@ -258,21 +296,21 @@ msgid ""
 "module."
 msgstr ""
 
-#: src/gtr-actions-file.c:280
+#: src/gtr-actions-file.c:526
 msgid "The file has been uploaded!"
-msgstr "Afaylu-nii yettwaceyyeɛ!"
+msgstr "Afaylu-nni yettwaceyyeɛ!"
 
-#: src/gtr-actions-file.c:423
+#: src/gtr-actions-file.c:666
 msgid "Save file as…"
 msgstr "Sekles afaylu am…"
 
-#: src/gtr-application.c:315
+#: src/gtr-application.c:312
 msgid "Fixed plurals"
 msgstr ""
 
 #: src/gtr-close-confirmation-dialog.c:122 src/gtr-context.c:156
 #: src/gtr-preferences-dialog.c:450 src/gtr-profile-dialog.ui:15
-#: src/gtr-upload-dialog.ui:18
+#: src/gtr-upload-dialog.ui:20
 msgid "_Cancel"
 msgstr "Semmet (_C)"
 
@@ -308,6 +346,10 @@ msgstr[1] ""
 msgid "Edit Notes"
 msgstr "Ẓreg tizmilin"
 
+#: src/gtr-context.c:525
+msgid "Open in Browser"
+msgstr "Ldi deg yiminig"
+
 #: src/gtr-context.ui:28
 msgid "Notes"
 msgstr "Tizmilin"
@@ -342,7 +384,7 @@ msgstr ""
 
 #: src/gtr-dl-teams.c:570
 msgid "Error loading file"
-msgstr ""
+msgstr "Tuccḍa deg uɛebbi n ufaylu"
 
 #: src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:623
 msgid "Error creating tmp file"
@@ -372,15 +414,15 @@ msgstr ""
 msgid "The file has been successfully reserved"
 msgstr "Afaylu-nni tettwaṭṭef akken iwata"
 
-#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:337
+#: src/gtr-dl-teams.ui:11 src/gtr-projects.ui:11 src/gtr-tab.ui:341
 msgid "Preferences"
 msgstr "Imenyafen"
 
-#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:343
+#: src/gtr-dl-teams.ui:17 src/gtr-projects.ui:21 src/gtr-tab.ui:347
 msgid "Keyboard Shortcuts"
 msgstr "Inegzumen n unasiw"
 
-#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:351
+#: src/gtr-dl-teams.ui:21 src/gtr-projects.ui:29 src/gtr-tab.ui:355
 msgid "About Translation Editor"
 msgstr "Ɣef Umaẓrag n tsuqilt"
 
@@ -466,11 +508,11 @@ msgstr ""
 msgid "Create Profile"
 msgstr "Snulfu-d amaɣnu"
 
-#: src/gtr-greeter.ui:59
-msgid "Profile"
-msgstr "Amaɣnu"
+#: src/gtr-greeter.ui:59 src/gtr-profile-dialog.ui:49
+msgid "Profile Information"
+msgstr "Talɣut ɣef umaɣnu"
 
-#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:116 src/gtr-profile-dialog.ui:54
+#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:130 src/gtr-profile-dialog.ui:54
 msgid "Profile name"
 msgstr "Isem n umaɣnu"
 
@@ -478,47 +520,73 @@ msgstr "Isem n umaɣnu"
 msgid "default"
 msgstr "amezwer"
 
-#: src/gtr-greeter.ui:69 src/gtr-greeter.ui:121
-msgid "Translator name"
-msgstr "Isem n umsuqel"
+#: src/gtr-greeter.ui:71 src/gtr-profile-dialog.ui:63
+msgid "Translator Information"
+msgstr "Talɣut ɣef umsuqel"
 
-#: src/gtr-greeter.ui:75 src/gtr-greeter.ui:126
-msgid "Translator email"
-msgstr "Imayl n umsuqel"
+#: src/gtr-greeter.ui:74 src/gtr-profile-dialog.ui:68
+msgid "Translator _name"
+msgstr "Isem _n umsuqel"
 
-#: src/gtr-greeter.ui:81
-msgid "Translation team email"
-msgstr "Imaylt n wegraw n tsuqilt"
+#: src/gtr-greeter.ui:80 src/gtr-profile-dialog.ui:74
+msgid "Translator _email"
+msgstr "Imayl n umsuq_el"
 
-#: src/gtr-greeter.ui:102 src/gtr-greeter.ui:108
+#: src/gtr-greeter.ui:86 src/gtr-profile-dialog.ui:80
+msgid "Translation _team email"
+msgstr "Imayl n wegraw n _tsuqilt"
+
+#: src/gtr-greeter.ui:94 src/gtr-profile-dialog.ui:88
+msgid "Damned Lies Integration"
+msgstr ""
+
+#: src/gtr-greeter.ui:95 src/gtr-profile-dialog.ui:89
+msgid ""
+"GNOME Damned Lies integration token, go to your profile in https://"
+"l10n.gnome.org/ to get it"
+msgstr ""
+
+#: src/gtr-greeter.ui:98 src/gtr-profile-dialog.ui:94
+msgid "_Damned Lies auth token"
+msgstr "Tiddest n usesteb n _Damned Lies"
+
+#: src/gtr-greeter.ui:119 src/gtr-greeter.ui:125
 msgid "Confirmation"
 msgstr "Asentem"
 
-#: src/gtr-greeter.ui:131
+#: src/gtr-greeter.ui:135
+msgid "Translator name"
+msgstr "Isem n umsuqel"
+
+#: src/gtr-greeter.ui:140
+msgid "Translator email"
+msgstr "Imayl n umsuqel"
+
+#: src/gtr-greeter.ui:145
 msgid "Team email"
 msgstr "Imayl n wegraw"
 
-#: src/gtr-greeter.ui:136
+#: src/gtr-greeter.ui:150
 msgid "Language name"
 msgstr "Isem n tutlayt"
 
-#: src/gtr-greeter.ui:141 src/gtr-languages-fetcher.ui:14
+#: src/gtr-greeter.ui:155 src/gtr-languages-fetcher.ui:14
 msgid "Language code"
 msgstr "Tangalt n tutlayt"
 
-#: src/gtr-greeter.ui:146 src/gtr-languages-fetcher.ui:34
+#: src/gtr-greeter.ui:160 src/gtr-languages-fetcher.ui:34
 msgid "Character set"
 msgstr ""
 
-#: src/gtr-greeter.ui:151 src/gtr-languages-fetcher.ui:54
+#: src/gtr-greeter.ui:165 src/gtr-languages-fetcher.ui:54
 msgid "Transfer encoding"
 msgstr ""
 
-#: src/gtr-greeter.ui:156
+#: src/gtr-greeter.ui:170
 msgid "Plural form"
 msgstr "Talɣa n usget"
 
-#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:320
+#: src/gtr-header-dialog.c:379 src/gtr-tab.ui:324
 msgid "Edit Header"
 msgstr "Ẓreg aqeṛṛu"
 
@@ -537,11 +605,11 @@ msgstr ""
 
 #: src/gtr-header-dialog.ui:22
 msgid "Translator’s _name"
-msgstr ""
+msgstr "Isem n umsuqel"
 
 #: src/gtr-header-dialog.ui:28
 msgid "Translator’s _email"
-msgstr ""
+msgstr "Imayl n umsuqel"
 
 #: src/gtr-header-dialog.ui:34
 msgid "_Language"
@@ -553,7 +621,7 @@ msgstr "Tangalt n tutlayt (_C)"
 
 #: src/gtr-header-dialog.ui:46
 msgid "Language _Team email"
-msgstr ""
+msgstr "Tutlayt n wegraw n tsuqilt"
 
 #: src/gtr-header-dialog.ui:52
 msgid "Char_set"
@@ -587,7 +655,7 @@ msgstr ""
 msgid "Report message _bugs to"
 msgstr ""
 
-#: src/gtr-header-dialog.ui:109
+#: src/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:146
 msgid "Comment"
 msgstr "Awennit"
 
@@ -603,13 +671,17 @@ msgstr "Tutlayt"
 msgid "State"
 msgstr "Addad"
 
+#: src/gtr-header-dialog.ui:173
+msgid "VCS Browser"
+msgstr "Iminig VCS"
+
 #: src/gtr-lang-combo-row.c:73
 msgid "Languages"
 msgstr "Tutlayin"
 
 #: src/gtr-languages-fetcher.ui:11
 msgid "Edit options manually"
-msgstr ""
+msgstr "Ẓreg tixtiṛiyin s ufus"
 
 #: src/gtr-languages-fetcher.ui:21
 msgid "Choose language code"
@@ -639,7 +711,7 @@ msgstr "Afaylu-nni d ilem"
 #: src/gtr-po.c:488
 #, c-format
 msgid "Failed opening file “%s”: %s"
-msgstr ""
+msgstr "Tuccḍa deg tulya n ufaylu “%s”: %s"
 
 #: src/gtr-po.c:559
 #, c-format
@@ -685,7 +757,7 @@ msgstr ""
 #: src/gtr-po.c:849
 #, c-format
 msgid "There is an error in the PO file: %s"
-msgstr ""
+msgstr "Tella teccḍa deg ufaylu PO: %s"
 
 #: src/gtr-po.c:861
 #, c-format
@@ -804,45 +876,11 @@ msgstr "Amaɣnu n umaẓrag n tsuqilt"
 msgid "_OK"
 msgstr "Ih (_O)"
 
-#: src/gtr-profile-dialog.ui:49
-msgid "Profile Information"
-msgstr "Talɣut ɣef umaɣnu"
-
-#: src/gtr-profile-dialog.ui:63
-msgid "Translator Information"
-msgstr "Talɣut ɣef umsuqel"
-
-#: src/gtr-profile-dialog.ui:68
-msgid "Translator _name"
-msgstr ""
-
-#: src/gtr-profile-dialog.ui:74
-msgid "Translator _email"
-msgstr ""
-
-#: src/gtr-profile-dialog.ui:80
-msgid "Translation _team email"
-msgstr ""
-
-#: src/gtr-profile-dialog.ui:88
-msgid "Damned Lies Integration"
-msgstr ""
-
-#: src/gtr-profile-dialog.ui:89
-msgid ""
-"GNOME Damned Lies integration token, go to your profile in https://"
-"l10n.gnome.org/ to get it"
-msgstr ""
-
-#: src/gtr-profile-dialog.ui:94
-msgid "_Damned Lies auth token"
-msgstr ""
-
-#: src/gtr-projects.ui:15 src/gtr-tab.ui:316
+#: src/gtr-projects.ui:15 src/gtr-tab.ui:320
 msgid "Build Translation Memory"
 msgstr "Bnu-d takatut n tsuqilt"
 
-#: src/gtr-projects.ui:25 src/gtr-tab.ui:347
+#: src/gtr-projects.ui:25 src/gtr-tab.ui:351
 msgid "Help"
 msgstr "Tallalt"
 
@@ -981,13 +1019,13 @@ msgid "Upload File"
 msgstr "Sali afaylu"
 
 #. <property name="ypad">5</property>
-#: src/gtr-tab.ui:126 src/gtr-tab.ui:301
+#: src/gtr-tab.ui:126 src/gtr-tab.ui:305
 msgid "_Original Message"
 msgstr "Izen aneṣli (_O)"
 
 #: src/gtr-tab.ui:191
 msgid "Translate_d Text"
-msgstr ""
+msgstr "Tasu_qilt n weḍris"
 
 #: src/gtr-tab.ui:269
 msgid "Open a New File"
@@ -1005,39 +1043,43 @@ msgstr "Sekles"
 msgid "Save As…"
 msgstr "Sekles am…"
 
-#: src/gtr-tab.ui:289
-msgid "So_rt Messages by…"
-msgstr ""
+#: src/gtr-tab.ui:287
+msgid "Update from Template…"
+msgstr "Leqqem seg tmudemt…"
 
-#: src/gtr-tab.ui:291
+#: src/gtr-tab.ui:293
+msgid "So_rt Messages by…"
+msgstr "Smizzwer iznan s…"
+
+#: src/gtr-tab.ui:295
 msgid "_Order of Appearance"
 msgstr ""
 
-#: src/gtr-tab.ui:296
+#: src/gtr-tab.ui:300
 msgid "_Message Status"
 msgstr ""
 
-#: src/gtr-tab.ui:306
+#: src/gtr-tab.ui:310
 msgid "_Translated Message"
 msgstr ""
 
-#: src/gtr-tab.ui:312
+#: src/gtr-tab.ui:316
 msgid "Show ID Column"
 msgstr ""
 
-#: src/gtr-tab.ui:324
+#: src/gtr-tab.ui:328
 msgid "Advanced Tools"
 msgstr "Ifecka leqqayen"
 
-#: src/gtr-tab.ui:326
+#: src/gtr-tab.ui:330
 msgid "Fix plural messages"
 msgstr ""
 
-#: src/gtr-upload-dialog.c:147
+#: src/gtr-upload-dialog.c:198
 msgid "Uploading..."
 msgstr "Aceyyeɛ..."
 
-#: src/gtr-upload-dialog.c:153
+#: src/gtr-upload-dialog.c:204
 msgid "Upload"
 msgstr "Asali"
 
@@ -1045,13 +1087,9 @@ msgstr "Asali"
 msgid "Upload to Damned Lies"
 msgstr "Ssali-t ɣer Damned Lies"
 
-#: src/gtr-upload-dialog.ui:25
+#: src/gtr-upload-dialog.ui:27
 msgid "_Upload"
 msgstr "Ceyyeɛ"
-
-#: src/gtr-upload-dialog.ui:51
-msgid "comment:"
-msgstr "awennit"
 
 #. Translators: this is the title of the window with a modified document
 #: src/gtr-window.c:189
@@ -1177,7 +1215,7 @@ msgstr "Tunigin"
 #: src/shortcuts-dialog.ui:112
 msgctxt "shortcut window"
 msgid "Go to the previous message"
-msgstr ""
+msgstr "Ddu ɣer usebta uzwir"
 
 #: src/shortcuts-dialog.ui:118
 msgctxt "shortcut window"
