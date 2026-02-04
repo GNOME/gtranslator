@@ -1,14 +1,14 @@
 # Georgian translation for gtranslator.
 # Copyright (C) 2023 gtranslator authors.
 # This file is distributed under the same license as the gtranslator package.
-# Ekaterine Papava <papava.e@gtu.ge>, 2023-2025.
+# Ekaterine Papava <papava.e@gtu.ge>, 2023-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-12-17 14:37+0000\n"
-"PO-Revision-Date: 2025-12-20 08:53+0100\n"
+"POT-Creation-Date: 2026-02-01 08:29+0000\n"
+"PO-Revision-Date: 2026-02-04 03:52+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -45,6 +45,10 @@ msgid ""
 "alternate language, insert tags, integration with subversion and a source "
 "code viewer."
 msgstr ""
+
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:34
+msgid "Translators's main interface"
+msgstr "მთარგმნელის მთავარი ინტერფეისი"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:3
 msgid "PO File Editor"
@@ -173,11 +177,11 @@ msgstr "ID-ის სვეტის ჩვენება"
 msgid "If true, displays a column with the id of the message on the editor."
 msgstr ""
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:130
+#: data/org.gnome.Gtranslator.gschema.xml.in:129
 msgid "Window maximized"
 msgstr "გადიდებული ფანჯარა"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:131
+#: data/org.gnome.Gtranslator.gschema.xml.in:130
 msgid "Window maximized state"
 msgstr "ფანჯრის სრულად გაშლილი მდგომარეობა"
 
@@ -339,6 +343,10 @@ msgstr[1] ""
 #: src/gtr-context.c:173
 msgid "Edit Notes"
 msgstr "შენიშვნების ჩასწორება"
+
+#: src/gtr-context.c:525
+msgid "Open in Browser"
+msgstr "ბრაუზერში გახსნა"
 
 #: src/gtr-context.ui:28
 msgid "Notes"
@@ -502,7 +510,7 @@ msgstr "პროფილის შექმნა"
 msgid "Profile Information"
 msgstr "პროფილის ინფორმაცია"
 
-#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:133 src/gtr-profile-dialog.ui:54
+#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:130 src/gtr-profile-dialog.ui:54
 msgid "Profile name"
 msgstr "პროფილის სახელი"
 
@@ -544,39 +552,39 @@ msgstr "_Damned Lies-ის ავტორიზაციის ტოკენ
 msgid "Confirmation"
 msgstr "დასტური"
 
-#: src/gtr-greeter.ui:138
+#: src/gtr-greeter.ui:135
 msgid "Translator name"
 msgstr "მთარგმნელის სახელი"
 
-#: src/gtr-greeter.ui:143
+#: src/gtr-greeter.ui:140
 msgid "Translator email"
 msgstr "მთარგმნელის ელფოსტა"
 
-#: src/gtr-greeter.ui:148
+#: src/gtr-greeter.ui:145
 msgid "Team email"
 msgstr "გუნდს ელფოსტა"
 
-#: src/gtr-greeter.ui:153
+#: src/gtr-greeter.ui:150
 msgid "Language name"
 msgstr "ენის სახელი"
 
-#: src/gtr-greeter.ui:158 src/gtr-languages-fetcher.ui:14
+#: src/gtr-greeter.ui:155 src/gtr-languages-fetcher.ui:14
 msgid "Language code"
 msgstr "ენის კოდი"
 
-#: src/gtr-greeter.ui:163 src/gtr-languages-fetcher.ui:34
+#: src/gtr-greeter.ui:160 src/gtr-languages-fetcher.ui:34
 msgid "Character set"
 msgstr "სიმბოლოების კოდირება"
 
-#: src/gtr-greeter.ui:168 src/gtr-languages-fetcher.ui:54
+#: src/gtr-greeter.ui:165 src/gtr-languages-fetcher.ui:54
 msgid "Transfer encoding"
 msgstr "გადაცემის კოდირება"
 
-#: src/gtr-greeter.ui:173
+#: src/gtr-greeter.ui:170
 msgid "Plural form"
 msgstr "Მრავლობითი ფორმა"
 
-#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:324
+#: src/gtr-header-dialog.c:379 src/gtr-tab.ui:324
 msgid "Edit Header"
 msgstr "თავსართის ჩასწორება"
 
@@ -660,6 +668,10 @@ msgstr "ენა"
 #: src/gtr-header-dialog.ui:167
 msgid "State"
 msgstr "მდგომარეობა"
+
+#: src/gtr-header-dialog.ui:173
+msgid "VCS Browser"
+msgstr "VCS-ის ბრაუზერი"
 
 #: src/gtr-lang-combo-row.c:73
 msgid "Languages"
@@ -1099,7 +1111,7 @@ msgstr "ფაილი შნახულია"
 
 #: src/main.c:97
 msgid "— Edit PO files"
-msgstr "— PO ფაილების შესწორება"
+msgstr "— PO ფაილების ჩასწორება"
 
 #: src/main.c:101
 #, c-format
