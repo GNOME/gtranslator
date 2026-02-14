@@ -1,18 +1,18 @@
 # Swedish messages for gtranslator.
-# Copyright © 2000-2025 Free Software Foundation, Inc.
+# Copyright © 2000-2026 Free Software Foundation, Inc.
 # Christian Rose <menthos@menthos.com>, 2000, 2001, 2002, 2003.
 # Martin Norbäck <d95mback@dtek.chalmers.se>, 2000.
 # Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008, 2009, 2010.
 # Åke Engelbrektson <eson57@gmail.com>, 2014.
-# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.
 # Luna Jernberg <droidbittin@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2025-12-17 08:23+0000\n"
-"PO-Revision-Date: 2025-12-25 13:07+0100\n"
+"POT-Creation-Date: 2026-02-01 08:29+0000\n"
+"PO-Revision-Date: 2026-02-08 22:20+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -59,6 +59,11 @@ msgstr ""
 "Gtranslator innehåller också ett instickssystem med många intressanta "
 "insticksmoduler, som alternativa språk, taggning, integration med subversion "
 "och källkodsläsare."
+
+# src/header_stuff.c:509
+#: data/org.gnome.Gtranslator.appdata.xml.in.in:34
+msgid "Translators's main interface"
+msgstr "Översättarens huvudgränssnitt"
 
 # src/menus.c:315 src/menus.c:316
 #: data/org.gnome.Gtranslator.desktop.in.in:3
@@ -202,11 +207,11 @@ msgstr "Visa ID-kolumn"
 msgid "If true, displays a column with the id of the message on the editor."
 msgstr "Om true (sant) visas en kolumn med ID för meddelandet i redigeraren."
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:130
+#: data/org.gnome.Gtranslator.gschema.xml.in:129
 msgid "Window maximized"
 msgstr "Fönster maximerat"
 
-#: data/org.gnome.Gtranslator.gschema.xml.in:131
+#: data/org.gnome.Gtranslator.gschema.xml.in:130
 msgid "Window maximized state"
 msgstr "Maximerat tillstånd för fönster"
 
@@ -396,6 +401,10 @@ msgstr[1] ""
 msgid "Edit Notes"
 msgstr "Redigera anteckningar"
 
+#: src/gtr-context.c:525
+msgid "Open in Browser"
+msgstr "Öppna i bläddrare"
+
 #: src/gtr-context.ui:28
 msgid "Notes"
 msgstr "Anteckningar"
@@ -573,7 +582,7 @@ msgid "Profile Information"
 msgstr "Profilinformation"
 
 # src/prefs.c:108
-#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:133 src/gtr-profile-dialog.ui:54
+#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:130 src/gtr-profile-dialog.ui:54
 msgid "Profile name"
 msgstr "Profilnamn"
 
@@ -622,44 +631,44 @@ msgid "Confirmation"
 msgstr "Bekräftelse"
 
 # src/header_stuff.c:509
-#: src/gtr-greeter.ui:138
+#: src/gtr-greeter.ui:135
 msgid "Translator name"
 msgstr "Översättarens namn"
 
 # src/header_stuff.c:512
-#: src/gtr-greeter.ui:143
+#: src/gtr-greeter.ui:140
 msgid "Translator email"
 msgstr "Översättarens e-post"
 
-#: src/gtr-greeter.ui:148
+#: src/gtr-greeter.ui:145
 msgid "Team email"
 msgstr "Gruppens e-post"
 
 # src/header_stuff.c:515 src/prefs.c:137
-#: src/gtr-greeter.ui:153
+#: src/gtr-greeter.ui:150
 msgid "Language name"
 msgstr "Språknamn"
 
 # src/prefs.c:141
-#: src/gtr-greeter.ui:158 src/gtr-languages-fetcher.ui:14
+#: src/gtr-greeter.ui:155 src/gtr-languages-fetcher.ui:14
 msgid "Language code"
 msgstr "Språkkod"
 
 # src/header_stuff.c:524 src/prefs.c:150
-#: src/gtr-greeter.ui:163 src/gtr-languages-fetcher.ui:34
+#: src/gtr-greeter.ui:160 src/gtr-languages-fetcher.ui:34
 msgid "Character set"
 msgstr "Teckenuppsättning"
 
-#: src/gtr-greeter.ui:168 src/gtr-languages-fetcher.ui:54
+#: src/gtr-greeter.ui:165 src/gtr-languages-fetcher.ui:54
 msgid "Transfer encoding"
 msgstr "Överföringskodning"
 
 # src/menus.c:135 src/menus.c:367
-#: src/gtr-greeter.ui:173
+#: src/gtr-greeter.ui:170
 msgid "Plural form"
 msgstr "Pluralform"
 
-#: src/gtr-header-dialog.c:371 src/gtr-tab.ui:324
+#: src/gtr-header-dialog.c:379 src/gtr-tab.ui:324
 msgid "Edit Header"
 msgstr "Redigera po-filshuvud"
 
@@ -760,6 +769,10 @@ msgstr "Språk"
 #: src/gtr-header-dialog.ui:167
 msgid "State"
 msgstr "Tillstånd"
+
+#: src/gtr-header-dialog.ui:173
+msgid "VCS Browser"
+msgstr "Versionshanteringsbläddrare"
 
 # src/header_stuff.c:515 src/prefs.c:137
 #: src/gtr-lang-combo-row.c:73
@@ -1638,28 +1651,6 @@ msgstr ""
 #~ "If you don't save, all your unsaved changes will be permanently lost."
 #~ msgstr ""
 #~ "Om du inte sparar så kommer dina osparade ändringar att gå förlorade."
-
-#, c-format
-#~ msgid ""
-#~ "Profile name: %s\n"
-#~ "Translator name: %s\n"
-#~ "Translator email: %s\n"
-#~ "Language name: %s\n"
-#~ "Team email: %s\n"
-#~ "Language code: %s\n"
-#~ "Character set: %s\n"
-#~ "Transfer encoding: %s\n"
-#~ "Plural form: %s\n"
-#~ msgstr ""
-#~ "Profilnamn: %s\n"
-#~ "Översättarens namn: %s\n"
-#~ "Översättarens e-post: %s\n"
-#~ "Språk: %s\n"
-#~ "Gruppens e-post: %s\n"
-#~ "Språkkod: %s\n"
-#~ "Teckenuppsättning: %s\n"
-#~ "Överföringskodning %s\n"
-#~ "Pluralform: %s\n"
 
 #~ msgid "This assistant will help you to create the main profile."
 #~ msgstr "Denna guide hjälper dig att skapa en huvudprofil."
