@@ -552,6 +552,9 @@ gtr_dl_teams_download_file_done (GObject *object, GAsyncResult *result, gpointer
   SoupMessage *msg = NULL;
   SoupStatus status_code;
 
+  gsize n_bytes;
+  const gchar *bytes_buf;
+
   g_autoptr (GFile) tmp_file = NULL;
   g_autoptr(GFile) dest_file = NULL;
   g_autoptr (GError) error = NULL;
@@ -586,7 +589,8 @@ gtr_dl_teams_download_file_done (GObject *object, GAsyncResult *result, gpointer
     }
 
   output = g_io_stream_get_output_stream (G_IO_STREAM (iostream));
-  g_output_stream_write_bytes (output, bytes, NULL, &error);
+  bytes_buf = g_bytes_get_data (bytes, &n_bytes);
+  g_output_stream_write_all (output, bytes_buf, n_bytes, NULL, NULL, &error);
   if (error != NULL)
     {
       dialog = adw_alert_dialog_new (_("Error writing stream"), error->message);
