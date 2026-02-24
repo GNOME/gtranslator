@@ -811,7 +811,7 @@ gtr_tab_init (GtrTab * tab)
   gtk_paned_set_shrink_end_child (GTK_PANED (priv->main_paned), FALSE);
   g_object_get (G_OBJECT (priv->main_paned), "max-position", &max_pos, NULL);
   gtk_paned_set_position (GTK_PANED (priv->main_paned), max_pos);
-  gtk_paned_set_wide_handle (GTK_PANED (priv->main_paned), TRUE);
+  gtk_paned_set_wide_handle (GTK_PANED (priv->main_paned), FALSE);
 }
 
 static void
