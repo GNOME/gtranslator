@@ -91,7 +91,7 @@ static void
 show_update_error (GtrWindow *window, const gchar *message)
 {
   AdwDialog *alert_dialog
-      = adw_alert_dialog_new (_ ("Failed to update from template"), NULL);
+      = adw_alert_dialog_new (_ ("Could not update from template"), NULL);
   adw_alert_dialog_format_body (ADW_ALERT_DIALOG (alert_dialog), "%s",
                                 message);
   adw_alert_dialog_add_response (ADW_ALERT_DIALOG (alert_dialog), "ok",
@@ -153,6 +153,9 @@ _msgmerge_finished (GObject *source, GAsyncResult *res, gpointer user_data)
          * This replaces the old in-memory state with the merged version,
          * preventing data loss and making changes immediately visible. */
         gtr_window_set_po (ctx->window, po_after);
+
+        /* Mark the file as modified so the app prompts to save on close. */
+        gtr_po_set_state (po_after, GTR_PO_STATE_MODIFIED);
 
         AdwDialog *summary
             = adw_alert_dialog_new (_ ("Updated from Template"), NULL);
@@ -301,10 +304,15 @@ gtr_update_from_pot_dialog (GtrWindow *window)
   g_autoptr (GList) list = NULL;
   list = get_modified_documents (window);
   if (list != NULL)
-    gtr_want_to_save_current_dialog (window,
-                                     gtr_update_from_pot_dialog_nocheck);
-  else
-    gtr_update_from_pot_dialog_nocheck (window);
+    {
+      /* Merging on top of unsaved changes would discard them. Require the
+       * user to save first so the merge always starts from a clean state. */
+      show_update_error (window,
+                         _ ("Please save the current file before updating "
+                            "from a template."));
+      return;
+    }
+  gtr_update_from_pot_dialog_nocheck (window);
 }
 
 static void
