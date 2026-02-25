@@ -808,10 +808,11 @@ gtr_tab_init (GtrTab * tab)
   g_signal_connect (priv->search_bar, "notify::search-mode-enabled",
                     G_CALLBACK (emit_searchbar_toggled), tab);
 
+  // This property setting in gtr-tab.ui do not work for some reason,
+  // so setting manually here
   gtk_paned_set_shrink_end_child (GTK_PANED (priv->main_paned), FALSE);
   g_object_get (G_OBJECT (priv->main_paned), "max-position", &max_pos, NULL);
   gtk_paned_set_position (GTK_PANED (priv->main_paned), max_pos);
-  gtk_paned_set_wide_handle (GTK_PANED (priv->main_paned), FALSE);
 }
 
 static void
