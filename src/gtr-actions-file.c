@@ -129,7 +129,9 @@ _msgmerge_finished (GObject *source, GAsyncResult *res, gpointer user_data)
       return;
     }
 
-  /* Compute post-merge stats by parsing from disk into a temporary PO. */
+  /* Reload the updated PO file from disk and update the UI.
+   * This ensures changes are immediately visible and prevents data loss
+   * if the user closes without saving. */
   {
     g_autoptr (GError) parse_err = NULL;
     GtrPo *po_after = gtr_po_new_from_file (ctx->po_location, &parse_err);
@@ -146,6 +148,11 @@ _msgmerge_finished (GObject *source, GAsyncResult *res, gpointer user_data)
         const gint d_untranslated
             = after_untranslated - ctx->prev_untranslated;
         const gint d_total = after_total - ctx->prev_total;
+
+        /* Update the window with the freshly merged PO file.
+         * This replaces the old in-memory state with the merged version,
+         * preventing data loss and making changes immediately visible. */
+        gtr_window_set_po (ctx->window, po_after);
 
         AdwDialog *summary
             = adw_alert_dialog_new (_ ("Updated from Template"), NULL);
