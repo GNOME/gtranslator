@@ -641,13 +641,10 @@ gtr_window_get_all_views (GtrWindow * window,
                           gboolean original, gboolean translated)
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private(window);
-  GList *views = NULL;
+
   g_return_val_if_fail (GTR_IS_WINDOW (window), NULL);
 
-  views = g_list_concat (views,
-                        gtr_tab_get_all_views(GTR_TAB(priv->active_tab), original, translated));
-
-  return views;
+  return gtr_tab_get_all_views (GTR_TAB (priv->active_tab), original, translated);
 }
 
 /**

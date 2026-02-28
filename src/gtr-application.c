@@ -707,15 +707,10 @@ GList *
 gtr_application_get_views (GtrApplication *app, gboolean original,
                            gboolean translated)
 {
-  GList *res = NULL;
-
   g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
 
-  res = g_list_concat (
-      res, gtr_window_get_all_views (GTR_WINDOW (get_active_window (app)),
-                                     original, translated));
-
-  return res;
+  return gtr_window_get_all_views (GTR_WINDOW (get_active_window (app)),
+                                   original, translated);
 }
 
 /**
