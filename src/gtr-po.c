@@ -663,6 +663,7 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
   /*
    * Get filename path.
    */
+  g_clear_object (&priv->location);
   priv->location = g_file_dup (location);
 
   if (!_gtr_po_load_ensure_utf8 (po, error))
@@ -682,6 +683,10 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
   /*
    * Determine the message domains to track
    */
+  if (priv->domains) {
+    g_list_free_full (priv->domains, g_free);
+    priv->domains = NULL;
+  }
   if (!(domains = po_file_domains (priv->gettext_po_file)))
     {
       if (*error != NULL)
@@ -703,7 +708,11 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
    * if so, process it separately. Otherwise, treat as a normal
    * message.
    */
-  priv->messages = NULL;
+  if (priv->messages) {
+    g_list_free_full (priv->messages, g_object_unref);
+    priv->messages = NULL;
+  }
+  priv->po_contains_obsolete_entries = FALSE;
   iter = priv->iter;
 
   /* Post-process these into a linked list of GtrMsgs. */
