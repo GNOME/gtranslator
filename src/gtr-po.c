@@ -132,6 +132,7 @@ enum
 };
 
 static gchar *message_error = NULL;
+static gint error_severity = -1;
 
 static void
 gtr_po_set_property (GObject      *object,
@@ -340,6 +341,7 @@ on_gettext_po_xerror (gint severity,
                       gint multiline_p, const gchar * message_text)
 {
   g_set_str (&message_error, message_text);
+  error_severity = severity;
 }
 
 static void
@@ -354,6 +356,7 @@ on_gettext_po_xerror2 (gint severity,
 {
   g_set_str (&message_error, NULL);
   message_error = g_strdup_printf ("%s.\n %s", message_text1, message_text2);
+  error_severity = severity;
 }
 
 static gboolean
@@ -788,12 +791,13 @@ gtr_po_save_file (GtrPo * po, GError ** error)
 {
   struct po_xerror_handler handler;
   gchar *filename;
-  gchar *msg_error;
   GtrHeader *header;
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   /* can't use priv->iter as its already exhausted*/
   po_message_iterator_t iter = po_message_iterator (priv->gettext_po_file, NULL);
   po_message_t message;
+
+  g_autoptr (GError) check_error = NULL;
 
   /*
    * Initialize the handler error.
@@ -853,15 +857,14 @@ gtr_po_save_file (GtrPo * po, GError ** error)
   /*
    * Check if the file is right
    */
-  msg_error = gtr_po_check_po_file (po);
-  if (msg_error != NULL)
+  gtr_po_check_po_file (po, &check_error);
+  if (g_error_matches (check_error, GTR_PO_ERROR, GTR_PO_ERROR_MSG_CHECK_FATAL))
     {
       g_set_error (error,
                    GTR_PO_ERROR,
                    GTR_PO_ERROR_GETTEXT,
                    _("There is an error in the PO file: %s"),
-                   msg_error);
-      g_free (msg_error);
+                   check_error->message);
       g_free (filename);
       return;
     }
@@ -1379,27 +1382,32 @@ gtr_po_get_message_position (GtrPo * po)
 /**
  * gtr_po_check_po_file:
  * @po: a #GtrPo
+ * @error: return location for an error
  *
  * Test whether an entire PO file is valid, like msgfmt does it.
- * Returns: If it is invalid, returns the error. The return value must be freed
- * with g_free.
  **/
-gchar *
-gtr_po_check_po_file (GtrPo * po)
+void
+gtr_po_check_po_file (GtrPo   *po,
+                      GError **error)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   struct po_xerror_handler handler;
 
-  g_return_val_if_fail (po != NULL, NULL);
+  g_return_if_fail (po != NULL);
 
   handler.xerror = &on_gettext_po_xerror;
   handler.xerror2 = &on_gettext_po_xerror2;
   g_set_str (&message_error, NULL);
+  error_severity = -1;
 
   //TODO: handle error and mark wrong msgids
   po_file_check_all (priv->gettext_po_file, &handler);
 
-  return message_error;
+  g_set_error (error,
+               GTR_PO_ERROR,
+               (error_severity == PO_SEVERITY_FATAL_ERROR) ? GTR_PO_ERROR_MSG_CHECK_FATAL : GTR_PO_ERROR_GETTEXT,
+               _("There is an error in the PO file: %s"),
+               message_error);
 }
 
 const gchar *

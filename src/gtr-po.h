@@ -61,6 +61,7 @@ enum
   GTR_PO_ERROR_READONLY,
   GTR_PO_ERROR_ENCODING,
   GTR_PO_ERROR_OTHER,
+  GTR_PO_ERROR_MSG_CHECK_FATAL,
 };
 
 typedef enum
@@ -148,7 +149,7 @@ gtr_po_get_messages_count (GtrPo * po);
 gint
 gtr_po_get_message_position (GtrPo * po);
 
-     gchar *gtr_po_check_po_file (GtrPo * po);
+void gtr_po_check_po_file (GtrPo *po, GError **error);
 
 /* Unexported funcs */
      void
