@@ -546,7 +546,7 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
           GOutputStream *converter_stream, *stream;
           GCharsetConverter *converter;
           GIOStream *iostream;
-          GFile *tmp;
+          g_autoptr (GFile) tmp = NULL;
 
           /* Store UTF-8 converted file in $TMP */
           converter = g_charset_converter_new ("UTF-8", charset, NULL);
