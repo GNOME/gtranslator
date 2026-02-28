@@ -663,10 +663,7 @@ on_gettext_po_xerror (gint severity,
                       const gchar * filename, size_t lineno, size_t column,
                       gint multiline_p, const gchar * message_text)
 {
-  if (message_text)
-    message_error = g_strdup (message_text);
-  else
-    message_error = NULL;
+  g_set_str (&message_error, message_text);
 }
 
 static void

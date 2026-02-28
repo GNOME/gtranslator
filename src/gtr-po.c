@@ -339,7 +339,7 @@ on_gettext_po_xerror (gint severity,
                       const gchar * filename, size_t lineno, size_t column,
                       gint multiline_p, const gchar * message_text)
 {
-  message_error = g_strdup (message_text);
+  g_set_str (&message_error, message_text);
 }
 
 static void
@@ -352,6 +352,7 @@ on_gettext_po_xerror2 (gint severity,
                        size_t column2, gint multiline_p2,
                        const gchar * message_text2)
 {
+  g_set_str (&message_error, NULL);
   message_error = g_strdup_printf ("%s.\n %s", message_text1, message_text2);
 }
 
