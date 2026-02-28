@@ -758,16 +758,14 @@ gtr_msg_compare (GtrMsg *first, GtrMsg *second)
 gboolean
 gtr_msg_fix_plurals (GtrMsg *msg, int plurals)
 {
-  int i = 0;
-  const gchar *current = NULL;
+  int highest_idx = -1;
 
   if (!gtr_msg_get_msgid_plural (msg))
     return FALSE;
 
-  for (i = 0; i < plurals; i++)
+  for (int i = 0; i < plurals; i++)
     {
-      current = gtr_msg_get_msgstr_plural (msg, i);
-      if (!current)
+      if (!gtr_msg_get_msgstr_plural (msg, i))
         gtr_msg_set_msgstr_plural (msg, i, "");
     }
   // Remove leftovers
@@ -776,12 +774,18 @@ gtr_msg_fix_plurals (GtrMsg *msg, int plurals)
   // https://www.gnu.org/software/gettext/manual/html_node/po_005fmessage_005ft-API.html#index-po_005fmessage_005fset_005fmsgstr_005fplural
 
   // Get the latest index with plural translation
-  while (gtr_msg_get_msgstr_plural (msg, i++));
+  for (int i = plurals; ; ++i) {
+    if (!gtr_msg_get_msgstr_plural (msg, i))
+      break;
+
+    highest_idx = i;
+  }
 
   // Remove all not needed plurals, in reverse order because of the
   // API. It only reduce the number of plurals if it's the last index
-  while (i >= plurals)
-    gtr_msg_set_msgstr_plural (msg, i--, NULL);
+  for (int i = highest_idx; i >= plurals; --i) {
+    gtr_msg_set_msgstr_plural (msg, i, NULL);
+  }
 
   return TRUE;
 }
