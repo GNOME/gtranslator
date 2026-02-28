@@ -1394,7 +1394,7 @@ gtr_po_check_po_file (GtrPo * po)
 
   handler.xerror = &on_gettext_po_xerror;
   handler.xerror2 = &on_gettext_po_xerror2;
-  message_error = NULL;
+  g_set_str (&message_error, NULL);
 
   //TODO: handle error and mark wrong msgids
   po_file_check_all (priv->gettext_po_file, &handler);
