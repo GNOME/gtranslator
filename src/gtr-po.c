@@ -1200,7 +1200,7 @@ gtr_po_get_next_fuzzy_or_untrans (GtrPo * po)
  *
  * Return value: (transfer none) (element-type Gtranslator.Msg):
  *               a pointer to the previously fuzzy or
- *               untranslated message or NULL if there is not previously 
+ *               untranslated message or NULL if there is not previously
  *               fuzzy or untranslated message.
  **/
 GList *
