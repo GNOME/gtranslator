@@ -193,6 +193,7 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
   gtk_widget_set_vexpand (scrolled_window, TRUE);
   adw_toolbar_view_set_content (ADW_TOOLBAR_VIEW (toolbar_view), scrolled_window);
 
+  g_object_unref (text_buffer);
   text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
   gtk_text_buffer_set_text (text_buffer, gtr_msg_get_comment (priv->current_msg), -1);
 
@@ -207,6 +208,7 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
 
   g_signal_connect (cancel, "clicked", G_CALLBACK (close_notes), dd);
   g_signal_connect (save, "clicked", G_CALLBACK (save_notes), dd);
+  g_signal_connect (dialog, "closed", G_CALLBACK (dialog_closed), dd);
 
   adw_dialog_present (dialog, GTK_WIDGET (panel));
 }
