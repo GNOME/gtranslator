@@ -54,8 +54,6 @@ GtrView *gtr_window_get_active_view (GtrWindow * window);
 GList *gtr_window_get_all_views (GtrWindow * window,
                                gboolean original, gboolean translated);
 
-GtkWidget *gtr_window_get_tab_from_location (GtrWindow * window, GFile * location);
-
 void gtr_window_remove_tab (GtrWindow * window);
 
 GtrTranslationMemory * gtr_window_get_tm (GtrWindow *window);

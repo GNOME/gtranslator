@@ -647,45 +647,6 @@ gtr_window_get_all_views (GtrWindow * window,
   return gtr_tab_get_all_views (GTR_TAB (priv->active_tab), original, translated);
 }
 
-/**
- * gtr_window_get_tab_from_location:
- * @window: a #GtrWindow
- * @location: the GFile of the po file of the #GtrTab
- *
- * Gets the #GtrTab of the #GtrWindows that matches with the
- * @location.
- *
- * Returns: (transfer none): the #GtrTab which @location matches with its po file.
- */
-GtkWidget *
-gtr_window_get_tab_from_location (GtrWindow * window, GFile * location)
-{
-  GList *tabs, *l;
-  GtrPo *po;
-  GFile *po_location;
-
-  g_return_val_if_fail (GTR_IS_WINDOW (window), NULL);
-
-  tabs = gtr_window_get_all_tabs (window);
-
-  for (l = tabs; l != NULL; l = g_list_next (l))
-    {
-      po = gtr_tab_get_po (GTR_TAB (l->data));
-
-      po_location = gtr_po_get_location (po);
-
-      if (g_file_equal (location, po_location) == TRUE)
-        {
-          g_object_unref (po_location);
-
-          return l->data;
-        }
-      g_object_unref (po_location);
-    }
-
-  return NULL;
-}
-
 void
 gtr_window_show_projects (GtrWindow *window)
 {
