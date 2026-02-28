@@ -675,6 +675,8 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
     {
       g_set_error (error,
                    GTR_PO_ERROR, GTR_PO_ERROR_RECOVERY, "%s", message_error);
+      g_free (message_error);
+      message_error = NULL;
     }
 
   /*
