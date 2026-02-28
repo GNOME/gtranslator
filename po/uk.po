@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-02-01 08:29+0000\n"
-"PO-Revision-Date: 2026-02-03 06:35+0200\n"
+"POT-Creation-Date: 2026-02-25 20:57+0000\n"
+"PO-Revision-Date: 2026-02-28 20:24+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -60,7 +60,6 @@ msgstr ""
 "перегляду початкового коду програм."
 
 #: data/org.gnome.Gtranslator.appdata.xml.in.in:34
-#| msgid "Translator name"
 msgid "Translators's main interface"
 msgstr "Основний інтерфейс «Перекладача»"
 
@@ -232,17 +231,18 @@ msgstr ""
 "Sergiy Gavrylov <sergiovana@bigmir.net>"
 
 #: src/gtr-actions-file.c:94
-msgid "Failed to update from template"
-msgstr "Не вдалося виконати оновлення з шаблону"
+#| msgid "Failed to update from template"
+msgid "Could not update from template"
+msgstr "Не вдалося оновити з шаблону"
 
-#: src/gtr-actions-file.c:98 src/gtr-actions-file.c:161
-#: src/gtr-actions-file.c:440 src/gtr-actions-file.c:462
-#: src/gtr-actions-file.c:501 src/gtr-actions-file.c:527
-#: src/gtr-actions-file.c:711 src/gtr-actions-file.c:754
-#: src/gtr-actions-file.c:912 src/gtr-dl-teams.c:165 src/gtr-dl-teams.c:227
-#: src/gtr-dl-teams.c:346 src/gtr-dl-teams.c:434 src/gtr-dl-teams.c:571
-#: src/gtr-dl-teams.c:582 src/gtr-dl-teams.c:593 src/gtr-dl-teams.c:624
-#: src/gtr-dl-teams.c:635 src/gtr-dl-teams.c:707 src/gtr-tab.c:347
+#: src/gtr-actions-file.c:98 src/gtr-actions-file.c:171
+#: src/gtr-actions-file.c:455 src/gtr-actions-file.c:477
+#: src/gtr-actions-file.c:516 src/gtr-actions-file.c:542
+#: src/gtr-actions-file.c:726 src/gtr-actions-file.c:769
+#: src/gtr-actions-file.c:927 src/gtr-dl-teams.c:165 src/gtr-dl-teams.c:227
+#: src/gtr-dl-teams.c:346 src/gtr-dl-teams.c:434 src/gtr-dl-teams.c:574
+#: src/gtr-dl-teams.c:585 src/gtr-dl-teams.c:597 src/gtr-dl-teams.c:628
+#: src/gtr-dl-teams.c:639 src/gtr-dl-teams.c:711 src/gtr-tab.c:347
 #: src/gtr-window.c:157 src/gtr-window.c:347
 msgid "OK"
 msgstr "Гаразд"
@@ -251,11 +251,11 @@ msgstr "Гаразд"
 msgid "msgmerge failed"
 msgstr "Помилка msgmerge"
 
-#: src/gtr-actions-file.c:151
+#: src/gtr-actions-file.c:161
 msgid "Updated from Template"
 msgstr "Оновлено з шаблону"
 
-#: src/gtr-actions-file.c:154
+#: src/gtr-actions-file.c:164
 #, c-format
 msgid ""
 "Messages: %d → %d (%+d)\n"
@@ -268,62 +268,67 @@ msgstr ""
 "Перекладено неточно: %d → %d (%+d)\n"
 "Не перекладено: %d → %d (%+d)"
 
-#: src/gtr-actions-file.c:212
+#: src/gtr-actions-file.c:222
 msgid "msgmerge not found on PATH. Install gettext (msgmerge) and try again."
 msgstr ""
 "msgmerge не знайдено у каталогах PATH. Встановіть gettext (msgmerge) і "
 "повторіть спробу."
 
-#: src/gtr-actions-file.c:238
+#: src/gtr-actions-file.c:248
 msgid "Failed to start msgmerge"
 msgstr "Не вдалося запустити msgmerge"
 
-#: src/gtr-actions-file.c:255
+#: src/gtr-actions-file.c:265
 msgid "Select Template (.pot)"
 msgstr "Виберіть шаблон (.pot)"
 
-#: src/gtr-actions-file.c:270
+#: src/gtr-actions-file.c:280
 msgid "Gettext translation template (*.pot)"
 msgstr "Шаблон перекладу Gettext (*.pot)"
 
-#: src/gtr-actions-file.c:363 src/gtr-close-confirmation-dialog.c:338
+#: src/gtr-actions-file.c:311
+msgid "Please save the current file before updating from a template."
+msgstr ""
+"Перш ніж оновлювати дані з шаблону, будь ласка, збережіть поточний файл."
+
+#: src/gtr-actions-file.c:378 src/gtr-close-confirmation-dialog.c:338
 msgid "Unsaved Changes"
 msgstr "Незбережені зміни"
 
-#: src/gtr-actions-file.c:368
+#: src/gtr-actions-file.c:383
 #, c-format
 msgid "Do you want to write all the changes done to %s?"
 msgstr "Хочете записати усі зміни, які внесено до %s?"
 
-#: src/gtr-actions-file.c:371
+#: src/gtr-actions-file.c:386
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: src/gtr-actions-file.c:372
+#: src/gtr-actions-file.c:387
 msgid "Continue Without Saving"
 msgstr "Продовжити без збереження"
 
-#: src/gtr-actions-file.c:372
+#: src/gtr-actions-file.c:387
 msgid "Save and Open"
 msgstr "Зберегти і відкрити"
 
-#: src/gtr-actions-file.c:394
+#: src/gtr-actions-file.c:409
 msgid "Open file for translation"
 msgstr "Відкрити файл для перекладу"
 
-#: src/gtr-actions-file.c:438
+#: src/gtr-actions-file.c:453
 msgid "Could not save file"
 msgstr "Не вдалося зберегти файл"
 
-#: src/gtr-actions-file.c:499
+#: src/gtr-actions-file.c:514
 msgid "This file has already been uploaded"
 msgstr "Цей файл вже вивантажено"
 
-#: src/gtr-actions-file.c:515
+#: src/gtr-actions-file.c:530
 msgid "Couldn't upload the file"
 msgstr "Не вдалося вивантажити файл"
 
-#: src/gtr-actions-file.c:518
+#: src/gtr-actions-file.c:533
 #, c-format
 msgid ""
 "%s\n"
@@ -335,11 +340,11 @@ msgstr ""
 "Можливо, ви не налаштувати ваш <i>l10n.gnome.org</i>-<b>жетон</b> у вашому "
 "профілі або ви не маєте прав доступу до вивантаження цього модуля."
 
-#: src/gtr-actions-file.c:526
+#: src/gtr-actions-file.c:541
 msgid "The file has been uploaded!"
 msgstr "Файл вивантажено!"
 
-#: src/gtr-actions-file.c:666
+#: src/gtr-actions-file.c:681
 msgid "Save file as…"
 msgstr "Зберегти файл як…"
 
@@ -424,27 +429,27 @@ msgstr "Файл не знайдено"
 msgid "No module state found."
 msgstr "Не знайдено стану модуля."
 
-#: src/gtr-dl-teams.c:570
+#: src/gtr-dl-teams.c:573
 msgid "Error loading file"
 msgstr "Помилка під час спроби завантажити файл"
 
-#: src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:623
+#: src/gtr-dl-teams.c:583 src/gtr-dl-teams.c:627
 msgid "Error creating tmp file"
 msgstr "Помилка під час створення тимчасового файла"
 
-#: src/gtr-dl-teams.c:592
+#: src/gtr-dl-teams.c:596
 msgid "Error writing stream"
 msgstr "Помилка під час спроби записати потокові дані"
 
-#: src/gtr-dl-teams.c:655
+#: src/gtr-dl-teams.c:659
 msgid "The file has been saved in your Downloads folder"
 msgstr "Файл було збережено до вашої теки «Завантаження»"
 
-#: src/gtr-dl-teams.c:706
+#: src/gtr-dl-teams.c:710
 msgid "Could not reserve module"
 msgstr "Не вдалося зарезервувати модуль"
 
-#: src/gtr-dl-teams.c:711
+#: src/gtr-dl-teams.c:715
 #, c-format
 msgid ""
 "%s\n"
@@ -455,7 +460,7 @@ msgstr ""
 "Можливо, ви не налаштувати ваш l10n.gnome.org-жетон у вашому профілі або ви "
 "не маєте прав доступу до резервування цього модуля."
 
-#: src/gtr-dl-teams.c:723
+#: src/gtr-dl-teams.c:727
 msgid "The file has been successfully reserved"
 msgstr "Файл успішно зарезервовано"
 
