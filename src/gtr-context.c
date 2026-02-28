@@ -102,8 +102,6 @@ typedef struct {
 static void
 dialog_data_free (DialogData *data)
 {
-  adw_dialog_close (data->dialog);
-
   g_free (data);
 }
 
@@ -119,11 +117,18 @@ reload_values (GtrContextPanel *panel)
 }
 
 static void
+dialog_closed (GtkWidget *widget, gpointer user_data)
+{
+  DialogData *dd = user_data;
+  dialog_data_free (dd);
+}
+
+static void
 close_notes (GtkWidget *widget, gpointer user_data)
 {
   DialogData *dd = user_data;
   reload_values (dd->panel);
-  dialog_data_free (dd);
+  adw_dialog_close (dd->dialog);
 }
 
 static void
