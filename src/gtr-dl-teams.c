@@ -843,6 +843,8 @@ gtr_dl_teams_dispose (GObject *object)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (GTR_DL_TEAMS (object));
 
+  g_debug ("Disposing GtrDlTeams");
+
   g_clear_pointer (&priv->vcs_web, g_free);
   g_clear_pointer (&priv->selected_lang, g_free);
   g_clear_pointer (&priv->selected_module, g_free);
@@ -851,6 +853,10 @@ gtr_dl_teams_dispose (GObject *object)
   g_clear_pointer (&priv->module_state, g_free);
   g_clear_pointer (&priv->file_path, g_free);
   g_clear_object (&priv->soup_session);
+
+  g_clear_object (&priv->langs_model);
+  g_clear_object (&priv->modules_model);
+  g_clear_object (&priv->domains_model);
 
   G_OBJECT_CLASS (gtr_dl_teams_parent_class)->dispose (object);
 }
