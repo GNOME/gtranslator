@@ -821,14 +821,11 @@ gtr_view_set_font (GtrView *view, char *font)
 {
   g_autofree char *str = NULL;
   g_autofree char *css = NULL;
-  g_autoptr(GtkFontDialog) dialog = gtk_font_dialog_new ();
   g_autoptr(PangoFontDescription) font_desc = NULL;
 
   GtrViewPrivate *priv = gtr_view_get_instance_private (view);
-  GtkWidget *button = gtk_font_dialog_button_new (dialog);
 
   font_desc = pango_font_description_from_string (font);
-  gtk_font_dialog_button_set_font_desc (GTK_FONT_DIALOG_BUTTON (button), font_desc);
 
   str = pango_font_description_to_css (font_desc);
   css = g_strdup_printf ("textview  %s", str ?: "");
