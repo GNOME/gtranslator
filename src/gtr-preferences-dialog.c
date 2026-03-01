@@ -246,7 +246,7 @@ create_profile_row (GtrPreferencesDialog *dlg,
   GtkWidget *row = NULL;
   GtkWidget *check = NULL;
   GtkWidget *menu = NULL;
-  GMenu *gmenu = NULL;
+  g_autoptr (GMenu) gmenu = NULL;
   GMenuItem *gitem = NULL;
 
   GtrPreferencesDialogPrivate *priv = gtr_preferences_dialog_get_instance_private (dlg);
