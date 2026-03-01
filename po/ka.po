@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-02-01 08:29+0000\n"
-"PO-Revision-Date: 2026-02-04 03:52+0100\n"
+"POT-Creation-Date: 2026-02-25 20:57+0000\n"
+"PO-Revision-Date: 2026-03-01 14:13+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -200,17 +200,17 @@ msgid "translator-credits"
 msgstr "თემური დოღონაძე"
 
 #: src/gtr-actions-file.c:94
-msgid "Failed to update from template"
+msgid "Could not update from template"
 msgstr "ნიმუშიდან განახლება ჩავარდა"
 
-#: src/gtr-actions-file.c:98 src/gtr-actions-file.c:161
-#: src/gtr-actions-file.c:440 src/gtr-actions-file.c:462
-#: src/gtr-actions-file.c:501 src/gtr-actions-file.c:527
-#: src/gtr-actions-file.c:711 src/gtr-actions-file.c:754
-#: src/gtr-actions-file.c:912 src/gtr-dl-teams.c:165 src/gtr-dl-teams.c:227
-#: src/gtr-dl-teams.c:346 src/gtr-dl-teams.c:434 src/gtr-dl-teams.c:571
-#: src/gtr-dl-teams.c:582 src/gtr-dl-teams.c:593 src/gtr-dl-teams.c:624
-#: src/gtr-dl-teams.c:635 src/gtr-dl-teams.c:707 src/gtr-tab.c:347
+#: src/gtr-actions-file.c:98 src/gtr-actions-file.c:171
+#: src/gtr-actions-file.c:455 src/gtr-actions-file.c:477
+#: src/gtr-actions-file.c:516 src/gtr-actions-file.c:542
+#: src/gtr-actions-file.c:726 src/gtr-actions-file.c:769
+#: src/gtr-actions-file.c:927 src/gtr-dl-teams.c:165 src/gtr-dl-teams.c:227
+#: src/gtr-dl-teams.c:346 src/gtr-dl-teams.c:434 src/gtr-dl-teams.c:574
+#: src/gtr-dl-teams.c:585 src/gtr-dl-teams.c:597 src/gtr-dl-teams.c:628
+#: src/gtr-dl-teams.c:639 src/gtr-dl-teams.c:711 src/gtr-tab.c:347
 #: src/gtr-window.c:157 src/gtr-window.c:347
 msgid "OK"
 msgstr "დიახ"
@@ -219,11 +219,11 @@ msgstr "დიახ"
 msgid "msgmerge failed"
 msgstr "msgmerge-ის შეცდომა"
 
-#: src/gtr-actions-file.c:151
+#: src/gtr-actions-file.c:161
 msgid "Updated from Template"
 msgstr "განახლდა შაბლონიდან"
 
-#: src/gtr-actions-file.c:154
+#: src/gtr-actions-file.c:164
 #, c-format
 msgid ""
 "Messages: %d → %d (%+d)\n"
@@ -232,60 +232,64 @@ msgid ""
 "Untranslated: %d → %d (%+d)"
 msgstr ""
 
-#: src/gtr-actions-file.c:212
+#: src/gtr-actions-file.c:222
 msgid "msgmerge not found on PATH. Install gettext (msgmerge) and try again."
 msgstr ""
 
-#: src/gtr-actions-file.c:238
+#: src/gtr-actions-file.c:248
 msgid "Failed to start msgmerge"
 msgstr "msgmerge-ის გაშვების შეცდომა"
 
-#: src/gtr-actions-file.c:255
+#: src/gtr-actions-file.c:265
 msgid "Select Template (.pot)"
 msgstr "აირჩიეთ ნიმუში (.pot)"
 
-#: src/gtr-actions-file.c:270
+#: src/gtr-actions-file.c:280
 msgid "Gettext translation template (*.pot)"
 msgstr "Gettext-ის თარგმანის შაბლონი (*.pot)"
 
-#: src/gtr-actions-file.c:363 src/gtr-close-confirmation-dialog.c:338
+#: src/gtr-actions-file.c:311
+msgid "Please save the current file before updating from a template."
+msgstr ""
+
+#: src/gtr-actions-file.c:378 src/gtr-close-confirmation-dialog.c:338
 msgid "Unsaved Changes"
 msgstr "შეუნახავი ცვლილებები"
 
-#: src/gtr-actions-file.c:368
+#: src/gtr-actions-file.c:383
 #, c-format
 msgid "Do you want to write all the changes done to %s?"
 msgstr ""
 
-#: src/gtr-actions-file.c:371
+#: src/gtr-actions-file.c:386
 msgid "Cancel"
 msgstr "გაუქმენა"
 
-#: src/gtr-actions-file.c:372
+#: src/gtr-actions-file.c:387
 msgid "Continue Without Saving"
 msgstr "შენახვის გარეშე გაგრძელება"
 
-#: src/gtr-actions-file.c:372
+#: src/gtr-actions-file.c:387
 msgid "Save and Open"
 msgstr "შენახვა და გახსნა"
 
-#: src/gtr-actions-file.c:394
+#: src/gtr-actions-file.c:409
 msgid "Open file for translation"
 msgstr "სათარგმნი ფაილის გახსნა"
 
-#: src/gtr-actions-file.c:438
+#: src/gtr-actions-file.c:453
 msgid "Could not save file"
 msgstr "ფაილის შენახვა შეუძლებელია"
 
-#: src/gtr-actions-file.c:499
+#: src/gtr-actions-file.c:514
 msgid "This file has already been uploaded"
 msgstr "ეს ფაილი უკვე ატვირთულია"
 
-#: src/gtr-actions-file.c:515
+#: src/gtr-actions-file.c:530
 msgid "Couldn't upload the file"
 msgstr "ფაილის ატვირთვა შეუძლებელია"
 
-#: src/gtr-actions-file.c:518
+#: src/gtr-actions-file.c:533
 #, c-format
 msgid ""
 "%s\n"
@@ -294,11 +298,11 @@ msgid ""
 "module."
 msgstr ""
 
-#: src/gtr-actions-file.c:526
+#: src/gtr-actions-file.c:541
 msgid "The file has been uploaded!"
 msgstr "ფაილი ატვირთულია!"
 
-#: src/gtr-actions-file.c:666
+#: src/gtr-actions-file.c:681
 msgid "Save file as…"
 msgstr "ფაილის შენახვა როგორც…"
 
@@ -380,27 +384,27 @@ msgstr "ფაილი ვერ ვიპოვე"
 msgid "No module state found."
 msgstr "მოდულის მდგომარეობა ვერ მოიძებნა."
 
-#: src/gtr-dl-teams.c:570
+#: src/gtr-dl-teams.c:573
 msgid "Error loading file"
 msgstr "ფაილის ჩატვირთვის შეცდომა"
 
-#: src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:623
+#: src/gtr-dl-teams.c:583 src/gtr-dl-teams.c:627
 msgid "Error creating tmp file"
 msgstr "დროებითი ფაილის შექმნის შეცდომა"
 
-#: src/gtr-dl-teams.c:592
+#: src/gtr-dl-teams.c:596
 msgid "Error writing stream"
 msgstr "ნაკადის ჩაწერის შეცდომა"
 
-#: src/gtr-dl-teams.c:655
+#: src/gtr-dl-teams.c:659
 msgid "The file has been saved in your Downloads folder"
 msgstr "ფაილი შენახულია გადმოწერების თქვენს საქაღალდეში"
 
-#: src/gtr-dl-teams.c:706
+#: src/gtr-dl-teams.c:710
 msgid "Could not reserve module"
 msgstr "ვერ დავიცავი მოდული"
 
-#: src/gtr-dl-teams.c:711
+#: src/gtr-dl-teams.c:715
 #, c-format
 msgid ""
 "%s\n"
@@ -408,7 +412,7 @@ msgid ""
 "profile or you don't have permissions to reserve this module."
 msgstr ""
 
-#: src/gtr-dl-teams.c:723
+#: src/gtr-dl-teams.c:727
 msgid "The file has been successfully reserved"
 msgstr "ფაილი წარმატებითაა დაცული"
 
@@ -737,7 +741,7 @@ msgstr ""
 #: src/gtr-po.c:736
 #, c-format
 msgid "No messages obtained from parser."
-msgstr ""
+msgstr "დამმუშავებლიდან შეტყობინებები მიღებული არაა."
 
 #: src/gtr-po.c:801
 #, c-format
@@ -1322,7 +1326,7 @@ msgstr ""
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
 msgid "Filename to restrict search to"
-msgstr ""
+msgstr "ძებნის შეზღუდვა ფაილის სახელით"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
 msgid ""
@@ -1331,7 +1335,7 @@ msgstr ""
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
 msgid "Maximum number of missing words"
-msgstr ""
+msgstr "ნაკლული სიტყვების მაქს. რაოდენობა"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
 msgid ""
@@ -1341,7 +1345,7 @@ msgstr ""
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
 msgid "Maximum difference in message length"
-msgstr ""
+msgstr "მაქს. სხვაობა შეტყობინების სიგრძეში"
 
 #: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
 msgid ""
