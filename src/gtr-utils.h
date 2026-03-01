@@ -48,10 +48,6 @@ xmlDocPtr gtr_xml_open_file (const gchar * filename);
 
      gchar *gtr_utils_get_current_year (void);
 
-     gchar *gtr_utils_reduce_path (const gchar * path);
-
-     gchar *gtr_utils_escape_underscores (const gchar * text, gssize length);
-
      gchar *gtr_utils_get_file_from_pixmapsdir (const gchar * filename);
 
      gchar *gtr_utils_get_file_from_pkgdatadir (const gchar * filename);

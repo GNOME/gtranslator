@@ -297,69 +297,6 @@ gtr_utils_get_current_year (void)
   return g_date_time_format (now, "%Y");
 }
 
-gchar *
-gtr_utils_reduce_path (const gchar * path)
-{
-  gchar *new_str;
-  gchar **array;
-
-  array = g_strsplit (path, "/", -1);
-
-  new_str =
-    g_build_filename (array[1], "/../", array[g_strv_length (array) - 1],
-                      NULL);
-
-  if (strlen (new_str) >= 30)
-    {
-      g_free (new_str);
-      new_str =
-        g_build_filename ("../", array[g_strv_length (array) - 1], NULL);
-    }
-  return new_str;
-}
-
-/*
- * Doubles underscore to avoid spurious menu accels.
- * Got from gedit
- */
-gchar *
-gtr_utils_escape_underscores (const gchar * text, gssize length)
-{
-  GString *str;
-  const gchar *p;
-  const gchar *end;
-
-  g_return_val_if_fail (text != NULL, NULL);
-
-  if (length < 0)
-    length = strlen (text);
-
-  str = g_string_sized_new (length);
-
-  p = text;
-  end = text + length;
-
-  while (p != end)
-    {
-      const gchar *next;
-      next = g_utf8_next_char (p);
-
-      switch (*p)
-        {
-        case '_':
-          g_string_append (str, "__");
-          break;
-        default:
-          g_string_append_len (str, p, next - p);
-          break;
-        }
-
-      p = next;
-    }
-
-  return g_string_free (str, FALSE);
-}
-
 // Removes the extension from a filename
 gchar *
 gtr_utils_get_filename (const gchar * filename)
