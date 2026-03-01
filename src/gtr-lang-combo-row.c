@@ -49,8 +49,24 @@ copy_lang (gconstpointer src,
 }
 
 static void
+gtr_lang_combo_row_dispose (GObject *object)
+{
+  GtrLangComboRow *self = GTR_LANG_COMBO_ROW (object);
+  GtrLangComboRowPrivate *priv = gtr_lang_combo_row_get_instance_private (self);
+
+  g_clear_object (&priv->model);
+
+  g_debug ("Disposing GtrLangComboRow");
+
+  G_OBJECT_CLASS (gtr_lang_combo_row_parent_class)->dispose (object);
+}
+
+static void
 gtr_lang_combo_row_class_init (GtrLangComboRowClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  object_class->dispose = gtr_lang_combo_row_dispose;
 }
 
 static void
