@@ -344,11 +344,9 @@ maybe_escape_regex (GBinding     *binding,
     }
   else
     {
-      g_autofree gchar *unescaped = NULL;
+      gchar *unescaped = gtk_source_utils_unescape_search_text (entry_text);
 
-      entry_text = unescaped = gtk_source_utils_unescape_search_text (entry_text);
-
-      g_value_set_string (to_value, entry_text);
+      g_value_take_string (to_value, unescaped);
     }
 
   return TRUE;
