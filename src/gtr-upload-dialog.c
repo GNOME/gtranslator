@@ -61,7 +61,7 @@ on_enter (GtkEventControllerFocus *ev,
           GtrUploadDialog         *dlg)
 {
   GtkTextIter start, end;
-  char * comment = NULL;
+  g_autofree char *comment = NULL;
 
   GtrUploadDialogPrivate *priv = gtr_upload_dialog_get_instance_private (dlg);
   GtkTextView *view = GTK_TEXT_VIEW (priv->text_view);
@@ -80,7 +80,7 @@ on_leave (GtkEventControllerFocus *ev,
           GtrUploadDialog         *dlg)
 {
   GtkTextIter start, end;
-  char * comment = NULL;
+  g_autofree char *comment = NULL;
 
   GtrUploadDialogPrivate *priv = gtr_upload_dialog_get_instance_private (dlg);
   GtkTextView *view = GTK_TEXT_VIEW (priv->text_view);
