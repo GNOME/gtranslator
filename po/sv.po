@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-02-01 08:29+0000\n"
-"PO-Revision-Date: 2026-02-08 22:20+0100\n"
+"POT-Creation-Date: 2026-02-25 20:57+0000\n"
+"PO-Revision-Date: 2026-02-26 22:07+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -242,17 +242,17 @@ msgstr ""
 "<tp-sv@listor.tp-sv.se>."
 
 #: src/gtr-actions-file.c:94
-msgid "Failed to update from template"
-msgstr "Misslyckades med att uppdatera från mall"
+msgid "Could not update from template"
+msgstr "Kunde inte uppdatera från mall"
 
-#: src/gtr-actions-file.c:98 src/gtr-actions-file.c:161
-#: src/gtr-actions-file.c:440 src/gtr-actions-file.c:462
-#: src/gtr-actions-file.c:501 src/gtr-actions-file.c:527
-#: src/gtr-actions-file.c:711 src/gtr-actions-file.c:754
-#: src/gtr-actions-file.c:912 src/gtr-dl-teams.c:165 src/gtr-dl-teams.c:227
-#: src/gtr-dl-teams.c:346 src/gtr-dl-teams.c:434 src/gtr-dl-teams.c:571
-#: src/gtr-dl-teams.c:582 src/gtr-dl-teams.c:593 src/gtr-dl-teams.c:624
-#: src/gtr-dl-teams.c:635 src/gtr-dl-teams.c:707 src/gtr-tab.c:347
+#: src/gtr-actions-file.c:98 src/gtr-actions-file.c:171
+#: src/gtr-actions-file.c:455 src/gtr-actions-file.c:477
+#: src/gtr-actions-file.c:516 src/gtr-actions-file.c:542
+#: src/gtr-actions-file.c:726 src/gtr-actions-file.c:769
+#: src/gtr-actions-file.c:927 src/gtr-dl-teams.c:165 src/gtr-dl-teams.c:227
+#: src/gtr-dl-teams.c:346 src/gtr-dl-teams.c:434 src/gtr-dl-teams.c:574
+#: src/gtr-dl-teams.c:585 src/gtr-dl-teams.c:597 src/gtr-dl-teams.c:628
+#: src/gtr-dl-teams.c:639 src/gtr-dl-teams.c:711 src/gtr-tab.c:347
 #: src/gtr-window.c:157 src/gtr-window.c:347
 msgid "OK"
 msgstr "OK"
@@ -261,11 +261,11 @@ msgstr "OK"
 msgid "msgmerge failed"
 msgstr "msgmerge misslyckades"
 
-#: src/gtr-actions-file.c:151
+#: src/gtr-actions-file.c:161
 msgid "Updated from Template"
 msgstr "Uppdaterad från mall"
 
-#: src/gtr-actions-file.c:154
+#: src/gtr-actions-file.c:164
 #, c-format
 msgid ""
 "Messages: %d → %d (%+d)\n"
@@ -278,63 +278,67 @@ msgstr ""
 "Luddigt: %d → %d (%+d)\n"
 "Oöversatt: %d → %d (%+d)"
 
-#: src/gtr-actions-file.c:212
+#: src/gtr-actions-file.c:222
 msgid "msgmerge not found on PATH. Install gettext (msgmerge) and try again."
 msgstr ""
 "msgmerge hittades inte på PATH. Installera gettext (msgmerge) och försök "
 "igen."
 
-#: src/gtr-actions-file.c:238
+#: src/gtr-actions-file.c:248
 msgid "Failed to start msgmerge"
 msgstr "Misslyckades med att starta msgmerge"
 
-#: src/gtr-actions-file.c:255
+#: src/gtr-actions-file.c:265
 msgid "Select Template (.pot)"
 msgstr "Välj mall (.pot)"
 
 # src/menus.c:217 src/menus.c:342
-#: src/gtr-actions-file.c:270
+#: src/gtr-actions-file.c:280
 msgid "Gettext translation template (*.pot)"
 msgstr "Gettext-översättningsmall (*.pot)"
 
-#: src/gtr-actions-file.c:363 src/gtr-close-confirmation-dialog.c:338
+#: src/gtr-actions-file.c:311
+msgid "Please save the current file before updating from a template."
+msgstr "Spara den aktuella filen innan du uppdaterar från en mall."
+
+#: src/gtr-actions-file.c:378 src/gtr-close-confirmation-dialog.c:338
 msgid "Unsaved Changes"
 msgstr "Osparade ändringar"
 
-#: src/gtr-actions-file.c:368
+#: src/gtr-actions-file.c:383
 #, c-format
 msgid "Do you want to write all the changes done to %s?"
 msgstr "Vill du skriva alla ändringar som gjorts till %s?"
 
-#: src/gtr-actions-file.c:371
+#: src/gtr-actions-file.c:386
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/gtr-actions-file.c:372
+#: src/gtr-actions-file.c:387
 msgid "Continue Without Saving"
 msgstr "Fortsätt utan att spara"
 
-#: src/gtr-actions-file.c:372
+#: src/gtr-actions-file.c:387
 msgid "Save and Open"
 msgstr "Spara och öppna"
 
-#: src/gtr-actions-file.c:394
+#: src/gtr-actions-file.c:409
 msgid "Open file for translation"
 msgstr "Öppna fil för översättning"
 
-#: src/gtr-actions-file.c:438
+#: src/gtr-actions-file.c:453
 msgid "Could not save file"
 msgstr "Kunde inte spara fil"
 
-#: src/gtr-actions-file.c:499
+#: src/gtr-actions-file.c:514
 msgid "This file has already been uploaded"
 msgstr "Denna fil har redan skickats"
 
-#: src/gtr-actions-file.c:515
+#: src/gtr-actions-file.c:530
 msgid "Couldn't upload the file"
 msgstr "Kunde inte skicka filen"
 
-#: src/gtr-actions-file.c:518
+#: src/gtr-actions-file.c:533
 #, c-format
 msgid ""
 "%s\n"
@@ -346,12 +350,12 @@ msgstr ""
 "Du har kanske inte konfigurerat din <b>token</b> för <i>l10n.gnome.org</i> "
 "korrekt i din profil, eller så har du inte rättighet att skicka denna modul."
 
-#: src/gtr-actions-file.c:526
+#: src/gtr-actions-file.c:541
 msgid "The file has been uploaded!"
 msgstr "Filen har skickats!"
 
 # src/menus.c:281
-#: src/gtr-actions-file.c:666
+#: src/gtr-actions-file.c:681
 msgid "Save file as…"
 msgstr "Spara fil som…"
 
@@ -439,27 +443,27 @@ msgstr "Ingen fil hittades"
 msgid "No module state found."
 msgstr "Inget modultillstånd hittades."
 
-#: src/gtr-dl-teams.c:570
+#: src/gtr-dl-teams.c:573
 msgid "Error loading file"
 msgstr "Fel vid inläsning av fil"
 
-#: src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:623
+#: src/gtr-dl-teams.c:583 src/gtr-dl-teams.c:627
 msgid "Error creating tmp file"
 msgstr "Fel vid skapande av temporärfil"
 
-#: src/gtr-dl-teams.c:592
+#: src/gtr-dl-teams.c:596
 msgid "Error writing stream"
 msgstr "Fel vid skrivning av ström"
 
-#: src/gtr-dl-teams.c:655
+#: src/gtr-dl-teams.c:659
 msgid "The file has been saved in your Downloads folder"
 msgstr "Filen har sparats i din hämtningsmapp"
 
-#: src/gtr-dl-teams.c:706
+#: src/gtr-dl-teams.c:710
 msgid "Could not reserve module"
 msgstr "Kunde inte reservera modul"
 
-#: src/gtr-dl-teams.c:711
+#: src/gtr-dl-teams.c:715
 #, c-format
 msgid ""
 "%s\n"
@@ -470,7 +474,7 @@ msgstr ""
 "Du har kanske inte konfigurerat din token för l10n.gnome.org korrekt i din "
 "profil, eller så har du inte rättighet att reservera denna modul."
 
-#: src/gtr-dl-teams.c:723
+#: src/gtr-dl-teams.c:727
 msgid "The file has been successfully reserved"
 msgstr "Lyckades reservera filen"
 
