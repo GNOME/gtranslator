@@ -22,20 +22,20 @@ i18n.merge_file(
 )
 
 # AppStream application metainfo
-appdata_conf = configuration_data()
-appdata_conf.set('appid', gtr_app_id)
+metainfo_conf = configuration_data()
+metainfo_conf.set('appid', gtr_app_id)
 
-appdata = gtr_namespace + '.appdata.xml'
+metainfo = gtr_namespace + '.metainfo.xml'
 
-appdata_in = configure_file(
-  input: appdata + '.in.in',
-  output: appdata + '.in',
-  configuration: appdata_conf,
+metainfo_in = configure_file(
+  input: metainfo + '.in.in',
+  output: metainfo + '.in',
+  configuration: metainfo_conf,
 )
 
 appstream_file = i18n.merge_file(
-  input: appdata_in,
-  output: appdata,
+  input: metainfo_in,
+  output: metainfo,
   po_dir: po_dir,
   install: true,
   install_dir: join_paths(gtr_datadir, 'metainfo'),
