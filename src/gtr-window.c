@@ -553,28 +553,6 @@ gtr_window_get_active_tab (GtrWindow * window)
 }
 
 /**
- * gtr_window_get_all_tabs:
- * @window: a #GtrWindow
- *
- * Gets a list of all tabs in the @window or NULL if there is no tab opened.
- *
- * Returns: (transfer container) (element-type Gtranslator.Tab):
- * a list of all tabs in the @window or NULL if there is no tab opened.
- */
-GList *
-gtr_window_get_all_tabs (GtrWindow * window)
-{
-  GList *toret = NULL;
-  GtrTab *tab = gtr_window_get_active_tab(window);
-  if (tab != NULL) {
-    toret = g_list_append (toret,
-                          GTK_WIDGET(
-                            gtr_window_get_active_tab(window)));
-  }
-  return toret;
-}
-
-/**
  * gtr_window_get_header_from_active_tab:
  * @window: a #GtrWindow
  *
