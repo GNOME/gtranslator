@@ -22,23 +22,6 @@
 
 #pragma once
 
-#include <glib-object.h>
-#include <glib.h>
-#include <gio/gio.h>
-
-G_BEGIN_DECLS
-
-#define GTR_TYPE_SETTINGS (gtr_settings_get_type ())
-
-G_DECLARE_DERIVABLE_TYPE (GtrSettings, gtr_settings, GTR, SETTINGS, GObject)
-
-struct _GtrSettingsClass
-{
-  GObjectClass parent_class;
-};
-
-GSettings *gtr_settings_new (void);
-
 /* key constants: IMPORTANT: keep them in the same order as the schema */
 #define GTR_SETTINGS_WARN_IF_CONTAINS_FUZZY		"warn-if-contains-fuzzy"
 #define GTR_SETTINGS_REMOVE_OBSOLETE_ENTRIES            "remove-obsolete-entries"
@@ -58,5 +41,3 @@ GSettings *gtr_settings_new (void);
 /* window state keys */
 #define GTR_SETTINGS_WINDOW_MAXIMIZED		"window-maximized"
 #define GTR_SETTINGS_WINDOW_SIZE			"size"
-
-G_END_DECLS

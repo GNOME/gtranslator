@@ -50,7 +50,6 @@ sources = files(
   'gtr-profile.c',
   'gtr-profile-dialog.c',
   'gtr-profile-manager.c',
-  'gtr-settings.c',
   'gtr-tab.c',
   'gtr-utils.c',
   'gtr-view.c',

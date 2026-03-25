@@ -66,7 +66,6 @@ struct _GtrApplicationClass
 
 typedef struct
 {
-  GSettings *settings;
   GSettings *window_settings;
 
   gchar *last_dir;
@@ -160,7 +159,6 @@ gtr_application_init (GtrApplication *application)
   ensure_user_config_dir (); /* FIXME: is this really needed ? */
 
   /* Load settings */
-  priv->settings = gtr_settings_new ();
   priv->window_settings
       = g_settings_new ("org.gnome.Gtranslator.state.window");
 
@@ -180,7 +178,6 @@ gtr_application_dispose (GObject *object)
 
   g_debug ("Disposing App");
 
-  g_clear_object (&priv->settings);
   g_clear_object (&priv->window_settings);
 
   G_OBJECT_CLASS (gtr_application_parent_class)->dispose (object);

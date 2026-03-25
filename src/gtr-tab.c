@@ -769,6 +769,33 @@ on_state_notify (GtrPo      *po,
 }
 
 static void
+update_auto_save (GtrTab *tab)
+{
+  GtrTabPrivate *priv;
+  gboolean auto_save;
+
+  priv = gtr_tab_get_instance_private (tab);
+
+  auto_save = g_settings_get_boolean (priv->editor_settings, GTR_SETTINGS_AUTO_SAVE);
+  gtr_tab_set_autosave_enabled (tab, auto_save);
+}
+
+static void
+update_auto_save_interval (GtrTab *tab)
+{
+  GtrTabPrivate *priv;
+  gint auto_save_interval;
+
+  priv = gtr_tab_get_instance_private (tab);
+
+  auto_save_interval = g_settings_get_int (priv->editor_settings, GTR_SETTINGS_AUTO_SAVE_INTERVAL);
+  if (auto_save_interval <= 0)
+    auto_save_interval = 1;
+
+  gtr_tab_set_autosave_interval (tab, auto_save_interval);
+}
+
+static void
 gtr_tab_init (GtrTab * tab)
 {
   GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
@@ -784,14 +811,14 @@ gtr_tab_init (GtrTab * tab)
   g_signal_connect (tab, "message-changed", G_CALLBACK (update_status), NULL);
 
   /* Manage auto save data */
-  priv->autosave = g_settings_get_boolean (priv->files_settings,
-                                           GTR_SETTINGS_AUTO_SAVE);
-  priv->autosave = (priv->autosave != FALSE);
+  g_signal_connect (priv->files_settings, "changed::auto-save",
+                    G_CALLBACK (update_auto_save), tab);
+  update_auto_save (tab);
 
-  priv->autosave_interval = g_settings_get_int (priv->files_settings,
-                                                GTR_SETTINGS_AUTO_SAVE_INTERVAL);
-  if (priv->autosave_interval <= 0)
-    priv->autosave_interval = 1;
+
+  g_signal_connect (priv->files_settings, "changed::auto-save-interval",
+                    G_CALLBACK (update_auto_save_interval), tab);
+  update_auto_save_interval (tab);
 
   priv->find_replace_flag = FALSE;
   priv->progress = gtr_progress_new ();
