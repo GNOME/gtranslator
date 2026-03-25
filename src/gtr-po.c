@@ -1016,7 +1016,7 @@ gtr_po_set_dl_info (GtrPo *po,
  * gtr_po_get_messages:
  * @po: a #GtrPo
  *
- * Return value: (transfer container) (element-type Gtranslator.Msg):
+ * Return value: (transfer none) (element-type Gtranslator.Msg):
  *               a pointer to the messages list
  **/
 GList *
