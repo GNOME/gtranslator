@@ -87,7 +87,7 @@ on_auto_save_interval_changed (GSettings * settings,
   const GList *windows, *l;
   gint auto_save_interval;
 
-  g_settings_get (settings, key, "u", &auto_save_interval);
+  auto_save_interval = g_settings_get_int (settings, key);
 
   windows = gtk_application_get_windows (GTK_APPLICATION (GTR_APP));
 
