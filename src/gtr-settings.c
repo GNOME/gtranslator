@@ -36,22 +36,9 @@ typedef struct
   GSettings *editor;
   GSettings *ui;
   GSettings *files;
-
-  gchar *old_scheme;
 } GtrSettingsPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrSettings, gtr_settings, G_TYPE_OBJECT)
-
-static void
-gtr_settings_finalize (GObject * object)
-{
-  GtrSettings *gs = GTR_SETTINGS (object);
-  GtrSettingsPrivate *priv = gtr_settings_get_instance_private (gs);
-
-  g_free (priv->old_scheme);
-
-  G_OBJECT_CLASS (gtr_settings_parent_class)->finalize (object);
-}
 
 static void
 gtr_settings_dispose (GObject * object)
@@ -184,8 +171,6 @@ gtr_settings_init (GtrSettings * gs)
 {
   GtrSettingsPrivate *priv = gtr_settings_get_instance_private (gs);
 
-  priv->old_scheme = NULL;
-
   priv->files = g_settings_new ("org.gnome.Gtranslator.preferences.files");
   priv->editor = g_settings_new ("org.gnome.Gtranslator.preferences.editor");
   priv->ui = g_settings_new ("org.gnome.Gtranslator.preferences.ui");
@@ -215,7 +200,6 @@ gtr_settings_class_init (GtrSettingsClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->finalize = gtr_settings_finalize;
   object_class->dispose = gtr_settings_dispose;
 }
 
