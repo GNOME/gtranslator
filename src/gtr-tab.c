@@ -768,31 +768,19 @@ on_state_notify (GtrPo      *po,
   g_object_notify (G_OBJECT (tab), "name");
 }
 
-static void
-update_auto_save (GtrTab *tab)
+static gboolean
+get_mapping (GValue   *value,
+             GVariant *variant,
+             gpointer  user_data)
 {
-  GtrTabPrivate *priv;
-  gboolean auto_save;
+  gint v = g_variant_get_int32 (variant);
 
-  priv = gtr_tab_get_instance_private (tab);
+  if (v <= 0)
+    v = 1;
 
-  auto_save = g_settings_get_boolean (priv->editor_settings, GTR_SETTINGS_AUTO_SAVE);
-  gtr_tab_set_autosave_enabled (tab, auto_save);
-}
+  g_value_set_int (value, v);
 
-static void
-update_auto_save_interval (GtrTab *tab)
-{
-  GtrTabPrivate *priv;
-  gint auto_save_interval;
-
-  priv = gtr_tab_get_instance_private (tab);
-
-  auto_save_interval = g_settings_get_int (priv->editor_settings, GTR_SETTINGS_AUTO_SAVE_INTERVAL);
-  if (auto_save_interval <= 0)
-    auto_save_interval = 1;
-
-  gtr_tab_set_autosave_interval (tab, auto_save_interval);
+  return TRUE;
 }
 
 static void
@@ -811,14 +799,17 @@ gtr_tab_init (GtrTab * tab)
   g_signal_connect (tab, "message-changed", G_CALLBACK (update_status), NULL);
 
   /* Manage auto save data */
-  g_signal_connect (priv->files_settings, "changed::auto-save",
-                    G_CALLBACK (update_auto_save), tab);
-  update_auto_save (tab);
+  g_settings_bind (priv->files_settings, GTR_SETTINGS_AUTO_SAVE,
+                   tab, "autosave",
+                   G_SETTINGS_BIND_DEFAULT);
 
-
-  g_signal_connect (priv->files_settings, "changed::auto-save-interval",
-                    G_CALLBACK (update_auto_save_interval), tab);
-  update_auto_save_interval (tab);
+  g_settings_bind_with_mapping (priv->files_settings, GTR_SETTINGS_AUTO_SAVE_INTERVAL,
+                                tab, "autosave-interval",
+                                G_SETTINGS_BIND_DEFAULT,
+                                get_mapping,
+                                NULL,
+                                NULL,
+                                NULL);
 
   priv->find_replace_flag = FALSE;
   priv->progress = gtr_progress_new ();
