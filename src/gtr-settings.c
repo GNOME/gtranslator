@@ -32,7 +32,6 @@
 
 typedef struct
 {
-  GSettings *editor;
   GSettings *files;
 } GtrSettingsPrivate;
 
@@ -45,7 +44,6 @@ gtr_settings_dispose (GObject * object)
   GtrSettingsPrivate *priv = gtr_settings_get_instance_private (gs);
 
   g_clear_object (&priv->files);
-  g_clear_object (&priv->editor);
 
   G_OBJECT_CLASS (gtr_settings_parent_class)->dispose (object);
 }
@@ -103,72 +101,11 @@ on_auto_save_interval_changed (GSettings * settings,
 }
 
 static void
-on_syntax_highlighting_changed (GSettings * settings,
-                                const gchar * key, GtrSettings * gs)
-{
-  GList *views, *l;
-  gboolean enable;
-
-  enable = g_settings_get_boolean (settings, key);
-
-  views = gtr_application_get_views (GTR_APP, TRUE, TRUE);
-
-  for (l = views; l != NULL; l = g_list_next (l))
-    {
-      GtkSourceBuffer *buf;
-
-      buf = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (l->data)));
-      gtk_source_buffer_set_highlight_syntax (buf, enable);
-    }
-
-  g_list_free (views);
-}
-
-static void
-on_visible_whitespace_changed (GSettings * settings,
-                               const gchar * key, GtrSettings * gs)
-{
-  GList *views, *l;
-  gboolean enable;
-
-  enable = g_settings_get_boolean (settings, key);
-
-  views = gtr_application_get_views (GTR_APP, TRUE, TRUE);
-
-  for (l = views; l != NULL; l = g_list_next (l))
-    {
-      gtr_view_enable_visible_whitespace (GTR_VIEW (l->data), enable);
-    }
-
-  g_list_free (views);
-}
-
-static void
-on_font_changed (GSettings * settings,
-                 const gchar * key, GtrSettings * gs)
-{
-  GList *views, *l;
-  g_autofree char *font = NULL;
-
-  font = g_settings_get_string (settings, GTR_SETTINGS_FONT);
-
-  views = gtr_application_get_views (GTR_APP, TRUE, TRUE);
-
-  for (l = views; l != NULL; l = g_list_next (l))
-    {
-      gtr_view_set_font (GTR_VIEW (l->data), font);
-    }
-
-  g_list_free (views);
-}
-
-static void
 gtr_settings_init (GtrSettings * gs)
 {
   GtrSettingsPrivate *priv = gtr_settings_get_instance_private (gs);
 
   priv->files = g_settings_new ("org.gnome.Gtranslator.preferences.files");
-  priv->editor = g_settings_new ("org.gnome.Gtranslator.preferences.editor");
 
   /* editor changes */
   g_signal_connect (priv->files,
@@ -177,14 +114,6 @@ gtr_settings_init (GtrSettings * gs)
   g_signal_connect (priv->files,
                     "changed::autosave-interval",
                     G_CALLBACK (on_auto_save_interval_changed), gs);
-  g_signal_connect (priv->editor,
-                    "changed::highlight-syntax",
-                    G_CALLBACK (on_syntax_highlighting_changed), gs);
-  g_signal_connect (priv->editor, "changed::visible-whitespace",
-                    G_CALLBACK (on_visible_whitespace_changed), gs);
-  g_signal_connect (priv->editor,
-                    "changed::font",
-                    G_CALLBACK (on_font_changed), gs);
 }
 
 static void

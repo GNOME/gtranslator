@@ -68,6 +68,43 @@ notify_dark_cb (GtrView *view)
 }
 
 static void
+update_highlight_syntax (GtrView *view)
+{
+  GtrViewPrivate *priv;
+  gboolean enabled;
+
+  priv = gtr_view_get_instance_private (view);
+
+  enabled = g_settings_get_boolean (priv->editor_settings, GTR_SETTINGS_HIGHLIGHT_SYNTAX);
+  gtk_source_buffer_set_highlight_syntax (priv->buffer, enabled);
+}
+
+static void
+update_fonts (GtrView *view)
+{
+  GtrViewPrivate *priv;
+  g_autofree char *font = NULL;
+
+  priv = gtr_view_get_instance_private (view);
+
+  font = g_settings_get_string (priv->editor_settings, GTR_SETTINGS_FONT);
+  gtr_view_set_font (view, font);
+}
+
+static void
+update_visible_whitespace (GtrView *view)
+{
+  GtrViewPrivate *priv;
+  gboolean enabled;
+
+  priv = gtr_view_get_instance_private (view);
+
+  enabled = g_settings_get_boolean (priv->editor_settings, GTR_SETTINGS_VISIBLE_WHITESPACE);
+  gtr_view_enable_visible_whitespace (view, enabled);
+}
+
+
+static void
 gtr_view_init (GtrView * view)
 {
   g_autoptr (GtkSourceLanguageManager) lm = NULL;
@@ -83,7 +120,6 @@ gtr_view_init (GtrView * view)
   GMenuModel *extra_menu = NULL;
   g_autoptr(SpellingTextBufferAdapter) adapter = NULL;
 #endif
-  g_autofree char *font = NULL;
 
   priv = gtr_view_get_instance_private (view);
 
@@ -115,17 +151,18 @@ gtr_view_init (GtrView * view)
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), GTK_WRAP_WORD);
 
   /* Set syntax highlight according to preferences */
-  gtk_source_buffer_set_highlight_syntax (priv->buffer,
-                                          g_settings_get_boolean (priv->editor_settings,
-                                                                  GTR_SETTINGS_HIGHLIGHT_SYNTAX));
+  g_signal_connect_swapped (priv->editor_settings, "changed::highlight-syntax",
+                            G_CALLBACK (update_highlight_syntax), view);
+  update_highlight_syntax (view);
 
   /* Set dot char according to preferences */
-  gtr_view_enable_visible_whitespace (view,
-                                      g_settings_get_boolean (priv->editor_settings,
-                                                              GTR_SETTINGS_VISIBLE_WHITESPACE));
+  g_signal_connect_swapped (priv->editor_settings, "changed::visible-whitespace",
+                            G_CALLBACK (update_visible_whitespace), view);
+  update_visible_whitespace (view);
 
-  font = g_settings_get_string (priv->editor_settings, GTR_SETTINGS_FONT);
-  gtr_view_set_font (view, font);
+  g_signal_connect_swapped (priv->editor_settings, "changed::font",
+                            G_CALLBACK (update_fonts), view);
+  update_fonts (view);
 
   /* Set scheme color according to preferences */
   gtr_view_reload_scheme_color (view);
