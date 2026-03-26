@@ -318,8 +318,6 @@ gtr_view_enable_visible_whitespace (GtrView * view, gboolean enable)
   buffer = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
   gtk_source_buffer_set_implicit_trailing_newline (buffer, FALSE);
 
-  gtk_source_buffer_set_highlight_syntax (buffer, TRUE);
-
   if (enable)
     gtk_source_space_drawer_set_types_for_locations (drawer,
                                                      GTK_SOURCE_SPACE_LOCATION_ALL,
