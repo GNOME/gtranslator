@@ -9,7 +9,6 @@
   <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gtranslator" path="/org/gnome/gtranslator/">
     <child name="preferences" schema="org.gnome.gtranslator.preferences"/>
     <child name="state" schema="org.gnome.gtranslator.state"/>
-    <child name="plugins" schema="org.gnome.gtranslator.plugins"/>
   </schema>
   <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gtranslator.preferences" path="/org/gnome/gtranslator/preferences/">
     <child name="files" schema="org.gnome.gtranslator.preferences.files"/>
@@ -132,7 +131,5 @@
     <key name="size" type="(ii)">
       <default>(1000, 500)</default>
     </key>
-  </schema>
-  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gtranslator.plugins" path="/org/gnome/gtranslator/plugins/">
   </schema>
 </schemalist>
