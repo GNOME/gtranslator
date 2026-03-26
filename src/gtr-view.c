@@ -109,10 +109,6 @@ gtr_view_init (GtrView * view)
 {
   g_autoptr (GtkSourceLanguageManager) lm = NULL;
   GtkSourceLanguage *lang;
-  g_autoptr(GStrvBuilder) builder = g_strv_builder_new ();
-  g_auto(GStrv) langs = NULL;
-  const gchar *const *temp;
-  gchar *ui_dir;
   GtrViewPrivate *priv;
   AdwStyleManager *manager;
   GtkSourceSpaceDrawer *drawer;
@@ -135,16 +131,6 @@ gtr_view_init (GtrView * view)
   priv->ui_settings = g_settings_new ("org.gnome.Gtranslator.preferences.ui");
 
   lm = gtk_source_language_manager_new ();
-
-  for (temp = gtk_source_language_manager_get_search_path (lm);
-       temp != NULL && *temp != NULL; ++temp)
-    g_strv_builder_add (builder, *temp);
-
-  ui_dir = g_build_filename (gtr_dirs_get_gtr_data_dir (), "ui", NULL);
-  g_strv_builder_take (builder, ui_dir);
-  langs = g_strv_builder_end (builder);
-
-  gtk_source_language_manager_set_search_path (lm, (const  char * const *) langs);
   lang = gtk_source_language_manager_get_language (lm, "gtranslator");
 
   priv->buffer = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
