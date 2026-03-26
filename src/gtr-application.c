@@ -31,6 +31,8 @@
 #include "gtr-application.h"
 #include "gtr-dirs.h"
 #include "gtr-preferences-dialog.h"
+#include "gtr-resources.h"
+#include "gtr-translation-memory-resources.h"
 #include "gtr-search-bar.h"
 #include "gtr-settings.h"
 #include "gtr-tab.h"
@@ -514,6 +516,9 @@ gtr_application_startup (GApplication *application)
   gtk_window_set_default_icon_name (PACKAGE_APPID);
 
   g_debug ("App startup");
+
+  g_resources_register (gtr_get_resource ());
+  g_resources_register (gtr_translation_memory_get_resource ());
 
   gtk_source_init ();
 

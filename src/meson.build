@@ -100,7 +100,7 @@ resource_data = files(
 sources += gnome.compile_resources(
   'gtr-resources',
   'gtranslator.gresource.xml',
-  c_name: 'gtr_resources',
+  c_name: 'gtr',
   dependencies: resource_data,
   export: true,
 )

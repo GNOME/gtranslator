@@ -15,6 +15,7 @@ translation_mem_sources += gnome.compile_resources(
   'gtr-translation-memory-resources',
   'gtr-translation-memory.gresource.xml',
   dependencies: resource_data,
+  c_name: 'gtr_translation_memory',
   export: true,
 )
 
