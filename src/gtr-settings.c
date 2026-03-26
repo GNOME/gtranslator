@@ -186,9 +186,9 @@ gtr_settings_init (GtrSettings * gs)
 
   priv->old_scheme = NULL;
 
-  priv->files = g_settings_new ("org.gnome.gtranslator.preferences.files");
-  priv->editor = g_settings_new ("org.gnome.gtranslator.preferences.editor");
-  priv->ui = g_settings_new ("org.gnome.gtranslator.preferences.ui");
+  priv->files = g_settings_new ("org.gnome.Gtranslator.preferences.files");
+  priv->editor = g_settings_new ("org.gnome.Gtranslator.preferences.editor");
+  priv->ui = g_settings_new ("org.gnome.Gtranslator.preferences.ui");
 
   /* Load settings */
   priv->interface = g_settings_new ("org.gnome.desktop.interface");

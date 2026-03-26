@@ -374,7 +374,7 @@ gtr_header_dialog_init (GtrHeaderDialog * dlg)
 {
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
 
-  priv->settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
+  priv->settings = g_settings_new ("org.gnome.Gtranslator.preferences.files");
 
   adw_dialog_set_title (ADW_DIALOG (dlg), _("Edit Header"));
 

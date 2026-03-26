@@ -22,7 +22,7 @@ translation_mem_sources += gnome.compile_resources(
 translation_mem_schema_conf = configuration_data()
 translation_mem_schema_conf.set('GETTEXT_PACKAGE', meson.project_name())
 
-schema = 'org.gnome.gtranslator.plugins.translation-memory.gschema.xml'
+schema = 'org.gnome.Gtranslator.plugins.translation-memory.gschema.xml'
 
 configure_file(
   input: schema + '.in',

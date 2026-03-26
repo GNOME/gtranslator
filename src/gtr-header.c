@@ -99,7 +99,7 @@ gtr_header_init (GtrHeader * header)
   priv->nplurals = -1;
   priv->profile = NULL;
 
-  priv->settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
+  priv->settings = g_settings_new ("org.gnome.Gtranslator.preferences.files");
   priv->prof_manager = gtr_profile_manager_get_default ();
 
   g_signal_connect (priv->prof_manager, "profile-removed",

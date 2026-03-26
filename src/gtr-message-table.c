@@ -143,7 +143,7 @@ gtr_message_table_init (GtrMessageTable *table)
   priv->translation_sorter = GTK_SORTER (gtk_string_sorter_new (
       gtk_property_expression_new (GTR_TYPE_MSG, NULL, "translation")));
 
-  priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
+  priv->ui_settings = g_settings_new ("org.gnome.Gtranslator.preferences.ui");
 
   priv->sort_status
       = g_settings_get_enum (priv->ui_settings, GTR_SETTINGS_SORT_ORDER);

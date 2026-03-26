@@ -228,8 +228,8 @@ gtr_window_init (GtrWindow *window)
   GAction *show_id_column_action;
 
   priv->search_bar_shown = FALSE;
-  priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
-  priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
+  priv->state_settings = g_settings_new ("org.gnome.Gtranslator.state.window");
+  priv->ui_settings = g_settings_new ("org.gnome.Gtranslator.preferences.ui");
   priv->active_tab = NULL;
 
   /* loading custom styles */
@@ -257,7 +257,7 @@ gtr_window_init (GtrWindow *window)
 
   // translation memory
   priv->translation_memory = GTR_TRANSLATION_MEMORY (gtr_gda_new());
-  priv->tm_settings = g_settings_new ("org.gnome.gtranslator.plugins.translation-memory");
+  priv->tm_settings = g_settings_new ("org.gnome.Gtranslator.plugins.translation-memory");
   gtr_translation_memory_set_max_omits (priv->translation_memory,
                                         g_settings_get_int (priv->tm_settings,
                                                             "max-missing-words"));

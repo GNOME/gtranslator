@@ -776,10 +776,10 @@ gtr_tab_init (GtrTab * tab)
 
   gtk_widget_init_template (GTK_WIDGET (tab));
 
-  priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
-  priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
-  priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
-  priv->state_settings = g_settings_new ("org.gnome.gtranslator.state.window");
+  priv->ui_settings = g_settings_new ("org.gnome.Gtranslator.preferences.ui");
+  priv->files_settings = g_settings_new ("org.gnome.Gtranslator.preferences.files");
+  priv->editor_settings = g_settings_new ("org.gnome.Gtranslator.preferences.editor");
+  priv->state_settings = g_settings_new ("org.gnome.Gtranslator.state.window");
 
   g_signal_connect (tab, "message-changed", G_CALLBACK (update_status), NULL);
 

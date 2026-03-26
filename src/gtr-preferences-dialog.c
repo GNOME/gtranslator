@@ -140,7 +140,7 @@ int
 gtr_prefs_get_remove_obsolete (void)
 {
   g_autoptr (GSettings) files_settings = NULL;
-  files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
+  files_settings = g_settings_new ("org.gnome.Gtranslator.preferences.files");
   gboolean remove_obsolete_entries_bool = g_settings_get_boolean (files_settings, GTR_SETTINGS_REMOVE_OBSOLETE_ENTRIES);
   return remove_obsolete_entries_bool;
 }
@@ -519,9 +519,9 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
   gtk_widget_init_template (GTK_WIDGET (dlg));
 
   priv->editing_profile = NULL;
-  priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
-  priv->editor_settings = g_settings_new ("org.gnome.gtranslator.preferences.editor");
-  priv->files_settings = g_settings_new ("org.gnome.gtranslator.preferences.files");
+  priv->ui_settings = g_settings_new ("org.gnome.Gtranslator.preferences.ui");
+  priv->editor_settings = g_settings_new ("org.gnome.Gtranslator.preferences.editor");
+  priv->files_settings = g_settings_new ("org.gnome.Gtranslator.preferences.files");
   priv->check_group = NULL;
 
   setup_profile_pages (dlg);

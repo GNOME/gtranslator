@@ -1,21 +1,21 @@
 <schemalist>
-  <enum id="org.gnome.gtranslator.Sorting">
+  <enum id="org.gnome.Gtranslator.Sorting">
     <value nick="id" value="0" />
     <value nick="status" value="1" />
     <value nick="original-message" value="2" />
     <value nick="translated-message" value="3" />
   </enum>
 
-  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gtranslator" path="/org/gnome/gtranslator/">
-    <child name="preferences" schema="org.gnome.gtranslator.preferences"/>
-    <child name="state" schema="org.gnome.gtranslator.state"/>
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.Gtranslator" path="/org/gnome/gtranslator/">
+    <child name="preferences" schema="org.gnome.Gtranslator.preferences"/>
+    <child name="state" schema="org.gnome.Gtranslator.state"/>
   </schema>
-  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gtranslator.preferences" path="/org/gnome/gtranslator/preferences/">
-    <child name="files" schema="org.gnome.gtranslator.preferences.files"/>
-    <child name="editor" schema="org.gnome.gtranslator.preferences.editor"/>
-    <child name="ui" schema="org.gnome.gtranslator.preferences.ui"/>
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.Gtranslator.preferences" path="/org/gnome/gtranslator/preferences/">
+    <child name="files" schema="org.gnome.Gtranslator.preferences.files"/>
+    <child name="editor" schema="org.gnome.Gtranslator.preferences.editor"/>
+    <child name="ui" schema="org.gnome.Gtranslator.preferences.ui"/>
   </schema>
-  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gtranslator.preferences.files" path="/org/gnome/gtranslator/preferences/files/">
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.Gtranslator.preferences.files" path="/org/gnome/gtranslator/preferences/files/">
     <key name="warn-if-contains-fuzzy" type="b">
       <default>true</default>
       <summary>Warn if file contains fuzzy translations</summary>
@@ -69,7 +69,7 @@
       </description>
     </key>
   </schema>
-  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gtranslator.preferences.editor" path="/org/gnome/gtranslator/preferences/editor/">
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.Gtranslator.preferences.editor" path="/org/gnome/gtranslator/preferences/editor/">
     <key name="highlight-syntax" type="b">
       <default>true</default>
       <summary>Highlight syntax in edit fields</summary>
@@ -102,8 +102,8 @@
       <default>''</default>
     </key>
   </schema>
-  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gtranslator.preferences.ui" path="/org/gnome/gtranslator/preferences/ui/">
-    <key name="sort-order" enum="org.gnome.gtranslator.Sorting">
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.Gtranslator.preferences.ui" path="/org/gnome/gtranslator/preferences/ui/">
+    <key name="sort-order" enum="org.gnome.Gtranslator.Sorting">
       <default>'id'</default>
       <summary>Message list sort order</summary>
       <description>
@@ -119,10 +119,10 @@
       </description>
     </key>
   </schema>
-  <schema id="org.gnome.gtranslator.state" path="/org/gnome/gtranslator/state/">
-    <child name="window" schema="org.gnome.gtranslator.state.window"/>
+  <schema id="org.gnome.Gtranslator.state" path="/org/gnome/gtranslator/state/">
+    <child name="window" schema="org.gnome.Gtranslator.state.window"/>
   </schema>
-  <schema id="org.gnome.gtranslator.state.window" path="/org/gnome/gtranslator/state/window/">
+  <schema id="org.gnome.Gtranslator.state.window" path="/org/gnome/gtranslator/state/window/">
     <key name="window-maximized" type="b">
       <default>false</default>
       <summary>Window maximized</summary>

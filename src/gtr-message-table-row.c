@@ -102,7 +102,7 @@ gtr_message_table_row_init (GtrMessageTableRow *row)
 {
   GtrMessageTableRowPrivate *priv;
   priv = gtr_message_table_row_get_instance_private (row);
-  priv->ui_settings = g_settings_new ("org.gnome.gtranslator.preferences.ui");
+  priv->ui_settings = g_settings_new ("org.gnome.Gtranslator.preferences.ui");
 
   gtk_widget_init_template (GTK_WIDGET (row));
 

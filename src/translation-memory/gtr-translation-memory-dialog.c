@@ -310,7 +310,7 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
   const gchar *language_code;
   gchar *filename = NULL;
 
-  priv->tm_settings = g_settings_new ("org.gnome.gtranslator.plugins.translation-memory");
+  priv->tm_settings = g_settings_new ("org.gnome.Gtranslator.plugins.translation-memory");
 
   gtk_widget_init_template (GTK_WIDGET (dlg));
 

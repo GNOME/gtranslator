@@ -160,7 +160,7 @@ gtr_application_init (GtrApplication *application)
   /* Load settings */
   priv->settings = gtr_settings_new ();
   priv->window_settings
-      = g_settings_new ("org.gnome.gtranslator.state.window");
+      = g_settings_new ("org.gnome.Gtranslator.state.window");
 
   /* If the config folder exists but there is no profile */
   gtr_folder = gtr_dirs_get_user_config_dir ();
