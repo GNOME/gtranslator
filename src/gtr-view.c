@@ -111,7 +111,6 @@ gtr_view_init (GtrView * view)
   GtkSourceLanguage *lang;
   GtrViewPrivate *priv;
   AdwStyleManager *manager;
-  GtkSourceSpaceDrawer *drawer;
 
 #ifdef LIBSPELL
   GMenuModel *extra_menu = NULL;
@@ -138,9 +137,6 @@ gtr_view_init (GtrView * view)
   gtk_source_buffer_set_implicit_trailing_newline (priv->buffer, FALSE);
 
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), GTK_WRAP_WORD);
-
-  drawer = gtk_source_view_get_space_drawer (GTK_SOURCE_VIEW (view));
-  gtk_source_space_drawer_set_enable_matrix (drawer, TRUE);
 
   /* Set syntax highlight according to preferences */
   g_signal_connect_swapped (priv->editor_settings, "changed::highlight-syntax",
@@ -286,15 +282,7 @@ gtr_view_enable_visible_whitespace (GtrView * view, gboolean enable)
   g_return_if_fail (GTR_IS_VIEW (view));
 
   drawer = gtk_source_view_get_space_drawer (GTK_SOURCE_VIEW (view));
-
-  if (enable)
-    gtk_source_space_drawer_set_types_for_locations (drawer,
-                                                     GTK_SOURCE_SPACE_LOCATION_ALL,
-                                                     GTK_SOURCE_SPACE_TYPE_ALL);
-  else
-    gtk_source_space_drawer_set_types_for_locations (drawer,
-                                                     GTK_SOURCE_SPACE_LOCATION_NONE,
-                                                     GTK_SOURCE_SPACE_TYPE_NONE);
+  gtk_source_space_drawer_set_enable_matrix (drawer, enable);
 }
 
 /**
