@@ -66,7 +66,7 @@ gtr_projects_class_init (GtrProjectsClass *klass)
   object_class->dispose = gtr_projects_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/translator/gtr-projects.ui");
+                                               "/org/gnome/Gtranslator/gtr-projects.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrProjects, open_button);
   gtk_widget_class_bind_template_child_private (widget_class, GtrProjects, dl_button);

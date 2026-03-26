@@ -244,7 +244,7 @@ gtr_message_table_class_init (GtrMessageTableClass *klass)
   g_type_ensure (gtr_message_table_row_get_type ());
 
   gtk_widget_class_set_template_from_resource (
-      widget_class, "/org/gnome/translator/gtr-message-table.ui");
+      widget_class, "/org/gnome/Gtranslator/gtr-message-table.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrMessageTable,
                                                 messages);

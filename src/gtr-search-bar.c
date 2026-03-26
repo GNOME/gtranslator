@@ -586,7 +586,7 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
                   NULL, NULL, NULL,
                   G_TYPE_NONE, 0);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/translator/gtr-search-bar.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Gtranslator/gtr-search-bar.ui");
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, replace_all_button);
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, replace_button);
   gtk_widget_class_bind_template_child (widget_class, GtrSearchBar, replace_entry);

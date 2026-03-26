@@ -193,7 +193,7 @@ gtr_message_table_row_class_init (GtrMessageTableRowClass * klass)
                                                         G_PARAM_READWRITE));
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/translator/gtr-message-table-row.ui");
+                                               "/org/gnome/Gtranslator/gtr-message-table-row.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrMessageTableRow, id);
   gtk_widget_class_bind_template_child_private (widget_class, GtrMessageTableRow, original);

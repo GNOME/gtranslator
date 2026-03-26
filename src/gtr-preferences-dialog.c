@@ -558,7 +558,7 @@ gtr_preferences_dialog_class_init (GtrPreferencesDialogClass * klass)
   object_class->dispose = gtr_preferences_dialog_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/translator/gtr-preferences-dialog.ui");
+                                               "/org/gnome/Gtranslator/gtr-preferences-dialog.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrPreferencesDialog, warn_if_contains_fuzzy);
   gtk_widget_class_bind_template_child_private (widget_class, GtrPreferencesDialog, remove_obsolete_entries);

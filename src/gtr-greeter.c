@@ -172,7 +172,7 @@ gtr_greeter_class_init (GtrGreeterClass *klass)
   object_class->dispose = gtr_greeter_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/translator/gtr-greeter.ui");
+                                               "/org/gnome/Gtranslator/gtr-greeter.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrGreeter, greeter_stack);
 

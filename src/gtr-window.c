@@ -381,7 +381,7 @@ gtr_window_class_init (GtrWindowClass *klass)
   window_class->close_request = gtr_window_close_request;
 
   gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass),
-                                               "/org/gnome/translator/gtr-window.ui");
+                                               "/org/gnome/Gtranslator/gtr-window.ui");
 
   /* Main layout widgets */
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrWindow, toast_overlay);

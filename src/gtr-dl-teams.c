@@ -909,7 +909,7 @@ gtr_dl_teams_class_init (GtrDlTeamsClass *klass)
   object_class->dispose = gtr_dl_teams_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/translator/gtr-dl-teams.ui");
+                                               "/org/gnome/Gtranslator/gtr-dl-teams.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, file_row);
   gtk_widget_class_bind_template_child_private (widget_class, GtrDlTeams, stats_row);

@@ -650,7 +650,7 @@ gtr_application_new (void)
   return GTR_APPLICATION (
       g_object_new (GTR_TYPE_APPLICATION, "application-id", PACKAGE_APPID,
                     "flags", G_APPLICATION_HANDLES_OPEN, "resource-base-path",
-                    "/org/gnome/translator/", NULL));
+                    "/org/gnome/Gtranslator/", NULL));
 }
 
 /**

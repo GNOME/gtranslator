@@ -419,7 +419,7 @@ gtr_context_panel_class_init (GtrContextPanelClass * klass)
                                                         G_PARAM_CONSTRUCT_ONLY));
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/translator/gtr-context.ui");
+                                               "/org/gnome/Gtranslator/gtr-context.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, sw);
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, translation_memory_box);

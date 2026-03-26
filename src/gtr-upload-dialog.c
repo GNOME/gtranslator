@@ -112,7 +112,7 @@ static void
 gtr_upload_dialog_class_init (GtrUploadDialogClass *klass)
 {
   gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass),
-                                               "/org/gnome/translator/gtr-upload-dialog.ui");
+                                               "/org/gnome/Gtranslator/gtr-upload-dialog.ui");
 
   /* Main layout widgets */
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GtrUploadDialog, text_view);
