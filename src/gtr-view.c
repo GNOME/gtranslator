@@ -115,6 +115,7 @@ gtr_view_init (GtrView * view)
   gchar *ui_dir;
   GtrViewPrivate *priv;
   AdwStyleManager *manager;
+  GtkSourceSpaceDrawer *drawer;
 
 #ifdef LIBSPELL
   GMenuModel *extra_menu = NULL;
@@ -148,7 +149,12 @@ gtr_view_init (GtrView * view)
 
   priv->buffer = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
   gtk_source_buffer_set_language (priv->buffer, lang);
+  gtk_source_buffer_set_implicit_trailing_newline (priv->buffer, FALSE);
+
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), GTK_WRAP_WORD);
+
+  drawer = gtk_source_view_get_space_drawer (GTK_SOURCE_VIEW (view));
+  gtk_source_space_drawer_set_enable_matrix (drawer, TRUE);
 
   /* Set syntax highlight according to preferences */
   g_signal_connect_swapped (priv->editor_settings, "changed::highlight-syntax",
@@ -289,9 +295,7 @@ gtr_view_get_selected_text (GtrView * view,
 void
 gtr_view_enable_visible_whitespace (GtrView * view, gboolean enable)
 {
-  GtkSourceView *source;
   GtkSourceSpaceDrawer *drawer;
-  GtkSourceBuffer *buffer;
   g_autoptr (GtkSourceLanguageManager) manager = NULL;
   const gchar * const * deflangs = NULL;
   const gchar *langs[20] = {NULL};
@@ -312,11 +316,7 @@ gtr_view_enable_visible_whitespace (GtrView * view, gboolean enable)
   manager = gtk_source_language_manager_new ();
   gtk_source_language_manager_set_search_path (manager, (const char * const *)langs);
 
-  source = GTK_SOURCE_VIEW (view);
-  drawer = gtk_source_view_get_space_drawer (source);
-  gtk_source_space_drawer_set_enable_matrix (drawer, TRUE);
-  buffer = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
-  gtk_source_buffer_set_implicit_trailing_newline (buffer, FALSE);
+  drawer = gtk_source_view_get_space_drawer (GTK_SOURCE_VIEW (view));
 
   if (enable)
     gtk_source_space_drawer_set_types_for_locations (drawer,
