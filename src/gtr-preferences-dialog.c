@@ -530,7 +530,10 @@ gtr_preferences_dialog_init (GtrPreferencesDialog * dlg)
 
   font = g_settings_get_string (priv->editor_settings, GTR_SETTINGS_FONT);
   if (!strlen (font))
-    font = get_default_font ();
+    {
+      g_clear_pointer (&font, g_free);
+      font = get_default_font ();
+    }
   pango_font = pango_font_description_from_string (font);
   gtk_font_dialog_button_set_font_desc (GTK_FONT_DIALOG_BUTTON (priv->font_button), pango_font);
   g_signal_connect (priv->font_button, "notify::font-desc", G_CALLBACK (on_font_set), dlg);
