@@ -190,7 +190,7 @@ gnome.post_install(
   update_desktop_database: true,
 )
 
-output = '\n\n      GTranslator ' + gtr_version + '\n'
+output = '\n\n      Gtranslator ' + gtr_version + '\n'
 output += '      =========================\n\n'
 output += '          Source ..........................: ' + meson.current_source_dir() + '\n'
 output += '          Prefix ..........................: ' + gtr_prefix + '\n'
