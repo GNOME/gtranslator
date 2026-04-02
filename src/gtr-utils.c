@@ -233,7 +233,7 @@ g_utf8_caselessnmatch (const gchar * s1,
   if (len_s1 < len_s2)
     goto finally_2;
 
-  ret = (strncmp (normalized_s1, normalized_s2, len_s2) == 0);
+  ret = (g_strcmp0 (normalized_s1, normalized_s2) == 0);
 
 finally_2:
   g_free (normalized_s1);
