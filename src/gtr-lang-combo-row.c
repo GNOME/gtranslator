@@ -36,7 +36,7 @@ struct _GtrLangComboRow
   AdwComboRow parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrLangComboRow, gtr_lang_combo_row, ADW_TYPE_COMBO_ROW)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrLangComboRow, gtr_lang_combo_row, ADW_TYPE_COMBO_ROW)
 
 static gpointer
 copy_lang (gconstpointer src,

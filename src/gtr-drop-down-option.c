@@ -33,7 +33,7 @@ struct _GtrDropDownOption {
   char *description;
 };
 
-G_DEFINE_TYPE (GtrDropDownOption, gtr_drop_down_option, G_TYPE_OBJECT);
+G_DEFINE_FINAL_TYPE (GtrDropDownOption, gtr_drop_down_option, G_TYPE_OBJECT);
 
 static void
 gtr_drop_down_option_init (GtrDropDownOption *option)

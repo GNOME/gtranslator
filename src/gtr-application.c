@@ -73,8 +73,8 @@ typedef struct
   guint first_run : 1;
 } GtrApplicationPrivate;
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrApplication, gtr_application,
-                            ADW_TYPE_APPLICATION)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrApplication, gtr_application,
+                                  ADW_TYPE_APPLICATION)
 
 GtrWindow *gtr_application_create_window (GtrApplication *app);
 

@@ -69,7 +69,7 @@ struct _GtrHeaderDialog
   AdwPreferencesDialog parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrHeaderDialog, gtr_header_dialog, ADW_TYPE_PREFERENCES_DIALOG)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrHeaderDialog, gtr_header_dialog, ADW_TYPE_PREFERENCES_DIALOG)
 
 static void
 gtr_header_dialog_dispose (GObject * object)

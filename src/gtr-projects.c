@@ -38,8 +38,8 @@ struct _GtrProjects
   AdwNavigationPage parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrProjects, gtr_projects,
-                            ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrProjects, gtr_projects,
+                                  ADW_TYPE_NAVIGATION_PAGE)
 
 static void project_add_cb (GtkButton *btn, GtrProjects *self);
 static void switch_to_dl (GtkButton *btn, GtrProjects *self);

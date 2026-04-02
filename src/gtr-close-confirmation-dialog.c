@@ -81,7 +81,7 @@ typedef struct
                          (priv->unsaved_documents->next == NULL)) ? \
                           SINGLE_DOC_MODE : MULTIPLE_DOCS_MODE)
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrCloseConfirmationDialog,
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrCloseConfirmationDialog,
                             gtr_close_confirmation_dialog,
                             ADW_TYPE_ALERT_DIALOG)
 

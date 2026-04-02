@@ -77,7 +77,7 @@ struct _GtrDlTeams
   AdwNavigationPage parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrDlTeams, gtr_dl_teams, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrDlTeams, gtr_dl_teams, ADW_TYPE_NAVIGATION_PAGE)
 
 typedef struct
 {
@@ -90,7 +90,7 @@ struct _GtrDlTeamsDomain
   GObject parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrDlTeamsDomain, gtr_dl_teams_domain, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrDlTeamsDomain, gtr_dl_teams_domain, G_TYPE_OBJECT)
 
 static void gtr_dl_teams_load_po_file (GtkButton *button, GtrDlTeams *self);
 static void gtr_dl_teams_get_file_info (GtrDlTeams *self);

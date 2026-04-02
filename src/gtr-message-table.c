@@ -70,7 +70,7 @@ struct _GtrMessageTable
   GtkBox parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrMessageTable, gtr_message_table, GTK_TYPE_BOX)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrMessageTable, gtr_message_table, GTK_TYPE_BOX)
 
 static void
 on_sort_order_changed (GSettings *settings, gchar *key, gpointer user_data)

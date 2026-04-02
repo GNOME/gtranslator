@@ -50,7 +50,7 @@ enum
   PROP_WINDOW
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrCodeView, gtr_code_view, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrCodeView, gtr_code_view, G_TYPE_OBJECT)
 
 static void
 showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrCodeView *codeview)

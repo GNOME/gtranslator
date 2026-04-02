@@ -63,7 +63,7 @@ struct _GtrTranslationMemoryUi
   AdwBin parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrTranslationMemoryUi, gtr_translation_memory_ui, ADW_TYPE_BIN)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrTranslationMemoryUi, gtr_translation_memory_ui, ADW_TYPE_BIN)
 
 // Type to use in the model to store translation memory entries
 #define GTR_TYPE_TM (gtr_tm_get_type ())
@@ -76,7 +76,7 @@ struct _GtrTm {
   char *match;
 };
 
-G_DEFINE_TYPE (GtrTm, gtr_tm, G_TYPE_OBJECT);
+G_DEFINE_FINAL_TYPE (GtrTm, gtr_tm, G_TYPE_OBJECT);
 
 static void
 gtr_tm_init (GtrTm *tm)

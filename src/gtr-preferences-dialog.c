@@ -86,7 +86,7 @@ struct _GtrPreferencesDialog
 };
 
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrPreferencesDialog, gtr_preferences_dialog, ADW_TYPE_PREFERENCES_DIALOG)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrPreferencesDialog, gtr_preferences_dialog, ADW_TYPE_PREFERENCES_DIALOG)
 
 static void fill_profile_listbox (GtrPreferencesDialog *dlg);
 

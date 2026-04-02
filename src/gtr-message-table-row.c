@@ -49,7 +49,7 @@ struct _GtrMessageTableRow
   GtkBox parent_instance;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrMessageTableRow, gtr_message_table_row, GTK_TYPE_BOX)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrMessageTableRow, gtr_message_table_row, GTK_TYPE_BOX)
 
 
 static void
