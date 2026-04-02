@@ -185,8 +185,7 @@ gtr_message_table_row_class_init (GtrMessageTableRowClass * klass)
   g_object_class_install_property (object_class,
                                    PROP_MSG,
                                    g_param_spec_object ("msg",
-                                                        "MSG",
-                                                        "The row msg",
+                                                        NULL, NULL,
                                                         GTR_TYPE_MSG,
                                                         G_PARAM_READWRITE));
 

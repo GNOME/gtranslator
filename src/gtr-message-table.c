@@ -238,7 +238,7 @@ gtr_message_table_class_init (GtrMessageTableClass *klass)
 
   g_object_class_install_property (
       object_class, PROP_TAB,
-      g_param_spec_object ("tab", "TAB", "The active tab", GTR_TYPE_TAB,
+      g_param_spec_object ("tab", NULL, NULL, GTR_TYPE_TAB,
                            G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 
   g_type_ensure (gtr_message_table_row_get_type ());

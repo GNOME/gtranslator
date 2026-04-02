@@ -412,8 +412,7 @@ gtr_context_panel_class_init (GtrContextPanelClass * klass)
   g_object_class_install_property (object_class,
                                    PROP_TAB,
                                    g_param_spec_object ("tab",
-                                                        "TAB",
-                                                        "The active tab",
+                                                        NULL, NULL,
                                                         GTR_TYPE_TAB,
                                                         G_PARAM_READWRITE |
                                                         G_PARAM_CONSTRUCT_ONLY));

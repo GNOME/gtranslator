@@ -975,8 +975,7 @@ gtr_tab_class_init (GtrTabClass * klass)
   g_object_class_install_property (object_class,
                                    PROP_AUTOSAVE,
                                    g_param_spec_boolean ("autosave",
-                                                         "Autosave",
-                                                         "Autosave feature",
+                                                         NULL, NULL,
                                                          TRUE,
                                                          G_PARAM_READWRITE |
                                                          G_PARAM_STATIC_STRINGS));
@@ -984,8 +983,7 @@ gtr_tab_class_init (GtrTabClass * klass)
   g_object_class_install_property (object_class,
                                    PROP_AUTOSAVE_INTERVAL,
                                    g_param_spec_int ("autosave-interval",
-                                                     "AutosaveInterval",
-                                                     "Time between two autosaves",
+                                                     NULL, NULL,
                                                      0,
                                                      G_MAXINT,
                                                      0,

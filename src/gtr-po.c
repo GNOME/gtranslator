@@ -308,14 +308,13 @@ gtr_po_class_init (GtrPoClass * klass)
   g_object_class_install_property (object_class,
                                    PROP_LOCATION,
                                    g_param_spec_object ("location",
-                                                        "Location",
-                                                        "The po's location",
+                                                        NULL, NULL,
                                                         G_TYPE_FILE,
                                                         G_PARAM_READWRITE));
 
   g_object_class_install_property (
       object_class, PROP_STATE,
-      g_param_spec_enum ("state", "State", "The po's state", GTR_TYPE_PO_STATE,
+      g_param_spec_enum ("state", NULL, NULL, GTR_TYPE_PO_STATE,
                          GTR_PO_STATE_SAVED, G_PARAM_READABLE));
 }
 

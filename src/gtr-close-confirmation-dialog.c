@@ -220,16 +220,14 @@ static void
   g_object_class_install_property (gobject_class,
                                    PROP_UNSAVED_DOCUMENTS,
                                    g_param_spec_pointer ("unsaved_documents",
-                                                         "Unsaved Documents",
-                                                         "List of Unsaved Documents",
+                                                         NULL, NULL,
                                                          (G_PARAM_READWRITE |
                                                           G_PARAM_CONSTRUCT_ONLY)));
 
   g_object_class_install_property (gobject_class,
                                    PROP_LOGOUT_MODE,
                                    g_param_spec_boolean ("logout_mode",
-                                                         "Logout Mode",
-                                                         "Whether the dialog is in logout mode",
+                                                         NULL, NULL,
                                                          FALSE,
                                                          (G_PARAM_READWRITE |
                                                           G_PARAM_CONSTRUCT_ONLY)));

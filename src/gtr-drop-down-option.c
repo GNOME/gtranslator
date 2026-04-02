@@ -109,12 +109,12 @@ gtr_drop_down_option_class_init (GtrDropDownOptionClass *class)
   object_class->get_property = gtr_drop_down_get_property;
 
   option_properties[PROP_NAME] =
-    g_param_spec_string ("name", "Name", "Name",
+    g_param_spec_string ("name", NULL, NULL,
                       NULL,
                       G_PARAM_CONSTRUCT | G_PARAM_READWRITE);
 
   option_properties[PROP_DESCRIPTION] =
-    g_param_spec_string ("description", "Description", "Description",
+    g_param_spec_string ("description", NULL, NULL,
                       NULL,
                       G_PARAM_CONSTRUCT | G_PARAM_READWRITE);
 

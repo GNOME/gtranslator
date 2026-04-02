@@ -180,24 +180,21 @@ gtr_progress_class_init (GtrProgressClass *klass)
 
   properties[PROP_TRANS] =
       g_param_spec_int ("translated",
-                        "Translated",
-                        "Translated messages",
+                        NULL, NULL,
                         0,
                         INT_MAX,
                         0,
                         G_PARAM_READWRITE);
   properties[PROP_UNTRANS] =
       g_param_spec_int ("untranslated",
-                        "Untranslated",
-                        "Untranslated messages",
+                        NULL, NULL,
                         0,
                         INT_MAX,
                         0,
                         G_PARAM_READWRITE);
   properties[PROP_FUZZY] =
       g_param_spec_int ("fuzzy",
-                        "Fuzzy",
-                        "Fuzzy messages",
+                        NULL, NULL,
                         0,
                         INT_MAX,
                         0,
