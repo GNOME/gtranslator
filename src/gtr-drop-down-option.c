@@ -64,14 +64,10 @@ gtr_drop_down_set_property (GObject      *object,
   switch (property_id)
     {
     case PROP_NAME:
-      if (self->name)
-        g_free (self->name);
-      self->name = g_value_dup_string (value);
+      g_set_str (&self->name, g_value_get_string (value));
       break;
     case PROP_DESCRIPTION:
-      if (self->description)
-        g_free (self->description);
-      self->description = g_value_dup_string (value);
+      g_set_str (&self->description, g_value_get_string (value));
       break;
     default:
       /* We don't have any other property... */

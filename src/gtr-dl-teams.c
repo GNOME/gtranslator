@@ -453,9 +453,7 @@ gtr_dl_teams_parse_file_info (GObject *object, GAsyncResult *result, gpointer us
       return;
     }
 
-  if (priv->module_state)
-    g_free (priv->module_state);
-  priv->module_state = g_strdup (json_object_get_string_member (jobject, "state"));
+  g_set_str (&priv->module_state, json_object_get_string_member (jobject, "state"));
 
   if (!priv->module_state)
     adw_action_row_set_subtitle (ADW_ACTION_ROW (priv->module_state_row), _("No module state found."));
@@ -728,9 +726,7 @@ gtr_dl_teams_reserve_for_translation_done (GObject *object, GAsyncResult *result
 
   // The reserve was successful, so we should change the module_state to
   // "Translating"
-  if (priv->module_state)
-    g_free (priv->module_state);
-  priv->module_state = g_strdup ("Translating");
+  g_set_str (&priv->module_state, "Translating");
 
   // After reserve we always download
   gtr_dl_teams_download_file (self);
