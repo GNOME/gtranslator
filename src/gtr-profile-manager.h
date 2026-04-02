@@ -19,46 +19,16 @@
  */
 
 
-#ifndef __GTR_PROFILE_MANAGER_H__
-#define __GTR_PROFILE_MANAGER_H__
+#pragma once
 
 #include <glib-object.h>
 #include "gtr-profile.h"
 
 G_BEGIN_DECLS
 
-#define GTR_TYPE_PROFILE_MANAGER		(gtr_profile_manager_get_type ())
-#define GTR_PROFILE_MANAGER(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_PROFILE_MANAGER, GtrProfileManager))
-#define GTR_PROFILE_MANAGER_CONST(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_PROFILE_MANAGER, GtrProfileManager const))
-#define GTR_PROFILE_MANAGER_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GTR_TYPE_PROFILE_MANAGER, GtrProfileManagerClass))
-#define GTR_IS_PROFILE_MANAGER(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_PROFILE_MANAGER))
-#define GTR_IS_PROFILE_MANAGER_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GTR_TYPE_PROFILE_MANAGER))
-#define GTR_PROFILE_MANAGER_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), GTR_TYPE_PROFILE_MANAGER, GtrProfileManagerClass))
+#define GTR_TYPE_PROFILE_MANAGER (gtr_profile_manager_get_type ())
 
-typedef struct _GtrProfileManager		GtrProfileManager;
-typedef struct _GtrProfileManagerClass		GtrProfileManagerClass;
-
-struct _GtrProfileManager
-{
-  GObject parent;
-};
-
-struct _GtrProfileManagerClass
-{
-  GObjectClass parent_class;
-
-  void (* active_profile_changed) (GtrProfileManager *manager,
-                                   GtrProfile        *profile);
-  void (* profile_added) (GtrProfileManager *manager,
-                          GtrProfile        *profile);
-  void (* profile_removed) (GtrProfileManager *manager,
-                            GtrProfile        *profile);
-  void (* profile_modified) (GtrProfileManager *manager,
-                             GtrProfile        *old_profile,
-                             GtrProfile        *new_profile);
-};
-
-GType                  gtr_profile_manager_get_type           (void) G_GNUC_CONST;
+G_DECLARE_FINAL_TYPE (GtrProfileManager, gtr_profile_manager, GTR, PROFILE_MANAGER, GObject)
 
 GtrProfileManager     *gtr_profile_manager_get_default        (void);
 
@@ -83,5 +53,3 @@ GtrProfile            *gtr_profile_manager_get_profile        (GtrProfileManager
                                                                const char        *name);
 
 G_END_DECLS
-
-#endif /* __GTR_PROFILE_MANAGER_H__ */

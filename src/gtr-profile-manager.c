@@ -33,6 +33,13 @@ typedef struct
   GtrProfile *active_profile;
 } GtrProfileManagerPrivate;
 
+struct _GtrProfileManager
+{
+  GObject parent_instance;
+};
+
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrProfileManager, gtr_profile_manager, G_TYPE_OBJECT)
+
 enum
 {
   ACTIVE_PROFILE_CHANGED,
@@ -41,8 +48,6 @@ enum
   PROFILE_MODIFIED,
   LAST_SIGNAL
 };
-
-G_DEFINE_TYPE_WITH_PRIVATE (GtrProfileManager, gtr_profile_manager, G_TYPE_OBJECT)
 
 static guint signals[LAST_SIGNAL];
 
@@ -81,7 +86,7 @@ gtr_profile_manager_class_init (GtrProfileManagerClass *klass)
     g_signal_new ("active-profile-changed",
                   G_OBJECT_CLASS_TYPE (klass),
                   G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (GtrProfileManagerClass, active_profile_changed),
+                  0,
                   NULL, NULL,
                   g_cclosure_marshal_VOID__OBJECT,
                   G_TYPE_NONE, 1, GTR_TYPE_PROFILE);
@@ -89,7 +94,7 @@ gtr_profile_manager_class_init (GtrProfileManagerClass *klass)
     g_signal_new ("profile-added",
                   G_OBJECT_CLASS_TYPE (klass),
                   G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (GtrProfileManagerClass, profile_added),
+                  0,
                   NULL, NULL,
                   g_cclosure_marshal_VOID__OBJECT,
                   G_TYPE_NONE, 1, GTR_TYPE_PROFILE);
@@ -97,7 +102,7 @@ gtr_profile_manager_class_init (GtrProfileManagerClass *klass)
     g_signal_new ("profile-removed",
                   G_OBJECT_CLASS_TYPE (klass),
                   G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (GtrProfileManagerClass, profile_removed),
+                  0,
                   NULL, NULL,
                   g_cclosure_marshal_VOID__OBJECT,
                   G_TYPE_NONE, 1, GTR_TYPE_PROFILE);
@@ -105,7 +110,7 @@ gtr_profile_manager_class_init (GtrProfileManagerClass *klass)
     g_signal_new ("profile-modified",
                   G_OBJECT_CLASS_TYPE (klass),
                   G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (GtrProfileManagerClass, profile_modified),
+                  0,
                   NULL, NULL,
                   gtr_marshal_VOID__OBJECT_OBJECT,
                   G_TYPE_NONE,
