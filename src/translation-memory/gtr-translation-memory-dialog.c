@@ -264,6 +264,7 @@ launch_gtr_scan_dir_task (GtrTranslationMemoryDialog *dlg,
                      idata);
 
   g_task_set_task_data (task, data, (GDestroyNotify)task_data_destroy);
+  g_task_set_source_tag (task, launch_gtr_scan_dir_task);
 
   g_task_run_in_thread (task,
                         (GTaskThreadFunc) scan_dir_task_func);
