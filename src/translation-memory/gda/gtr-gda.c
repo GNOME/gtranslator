@@ -306,13 +306,12 @@ gtr_gda_words_append (GtrGda *self,
                       gint orig_id,
                       GError **error)
 {
-  GError *inner_error;
+  GError *inner_error = NULL;
   gint word_id = 0;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
   /* look for word */
   {
-    inner_error = NULL;
     word_id = select_integer (priv->db, priv->stmt_select_word, &inner_error,
                               1, G_TYPE_STRING, word);
     if (inner_error)
@@ -355,10 +354,9 @@ gtr_gda_store_impl (GtrGda *self,
   gint orig_id;
   gboolean found_translation = FALSE;
   g_auto(GStrv) words = NULL;
-  GError *inner_error;
+  GError *inner_error = NULL;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
-  inner_error = NULL;
   orig_id = select_integer (priv->db,
                             priv->stmt_find_orig,
                             &inner_error,
@@ -433,12 +431,11 @@ gtr_gda_store (GtrTranslationMemory * tm, GtrMsg * msg)
 {
   GtrGda *self = GTR_GDA (tm);
   gboolean result;
-  GError *error;
+  GError *error = NULL;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
   g_return_val_if_fail (GTR_IS_GDA (self), FALSE);
 
-  error = NULL;
   if (!begin_transaction (priv->db, &error))
     {
       g_warning ("starting transaction failed: %s", error->message);
@@ -472,14 +469,13 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
   GtrGda *self = GTR_GDA (tm);
   gboolean result = TRUE;
   GList *l;
-  GError *error;
+  GError *error = NULL;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
   g_return_val_if_fail (GTR_IS_GDA (self), FALSE);
 
   g_debug ("Storing list of messages in translation memory");
 
-  error = NULL;
   if (!begin_transaction (priv->db, &error))
     {
       g_warning ("starting transaction failed: %s", error->message);
@@ -624,7 +620,7 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
   g_auto(GStrv) words = NULL;
   guint cnt = 0;
   GList *matches = NULL;
-  GError *inner_error;
+  GError *inner_error = NULL;
   sqlite3_stmt *stmt = NULL;
   int rc;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
@@ -639,7 +635,6 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
     }
   cnt = g_strv_length (words);
 
-  inner_error = NULL;
   stmt = gtr_gda_get_lookup_statement (self, cnt, &inner_error);
   if (inner_error)
     goto end;

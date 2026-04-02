@@ -45,10 +45,9 @@ void
 gtr_scan_dir (GFile * dir, GSList ** list, const gchar * po_name)
 {
   GFileInfo *info;
-  GError *error;
+  GError *error = NULL;
   GFileEnumerator *enumerator;
 
-  error = NULL;
   enumerator = g_file_enumerate_children (dir,
                                           G_FILE_ATTRIBUTE_STANDARD_NAME,
                                           G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS,
