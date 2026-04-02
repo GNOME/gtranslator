@@ -219,17 +219,13 @@ gtr_message_table_row_set_msg (GtrMessageTableRow *row, GtrMsg *msg)
   priv = gtr_message_table_row_get_instance_private (row);
 
   if (priv->msg)
-    {
-      g_signal_handlers_disconnect_by_func (priv->msg, update_msg, row);
-      g_object_unref (priv->msg);
-      priv->msg = NULL;
-    }
+    g_signal_handlers_disconnect_by_func (priv->msg, update_msg, row);
 
-  if (!msg)
+  g_set_object (&priv->msg, msg);
+
+  if (!priv->msg)
     return;
 
-  priv->msg = msg;
-  g_object_ref (priv->msg);
   g_signal_connect (priv->msg, "notify", G_CALLBACK (update_msg), row);
 
   update_msg (priv->msg, NULL, row);
