@@ -850,41 +850,13 @@ gtr_dl_teams_dispose (GObject *object)
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (GTR_DL_TEAMS (object));
 
   g_clear_pointer (&priv->vcs_web, g_free);
-  if (priv->selected_lang)
-    {
-      g_free (priv->selected_lang);
-      priv->selected_lang = NULL;
-    }
-  if (priv->selected_module)
-    {
-      g_free (priv->selected_module);
-      priv->selected_module = NULL;
-    }
-  if (priv->selected_branch)
-    {
-      g_free (priv->selected_branch);
-      priv->selected_branch = NULL;
-    }
-  if (priv->selected_domain)
-    {
-      g_free (priv->selected_domain);
-      priv->selected_domain = NULL;
-    }
-  if (priv->module_state)
-    {
-      g_free (priv->module_state);
-      priv->module_state = NULL;
-    }
-  if (priv->file_path)
-    {
-      g_free (priv->file_path);
-      priv->file_path = NULL;
-    }
-  if (priv->soup_session)
-    {
-      g_object_unref (priv->soup_session);
-      priv->soup_session = NULL;
-    }
+  g_clear_pointer (&priv->selected_lang, g_free);
+  g_clear_pointer (&priv->selected_module, g_free);
+  g_clear_pointer (&priv->selected_branch, g_free);
+  g_clear_pointer (&priv->selected_domain, g_free);
+  g_clear_pointer (&priv->module_state, g_free);
+  g_clear_pointer (&priv->file_path, g_free);
+  g_clear_object (&priv->soup_session);
 
   G_OBJECT_CLASS (gtr_dl_teams_parent_class)->dispose (object);
 }
@@ -1060,10 +1032,9 @@ static void
 gtr_dl_teams_domain_dispose (GObject *object)
 {
   GtrDlTeamsDomainPrivate *priv = gtr_dl_teams_domain_get_instance_private (GTR_DL_TEAMS_DOMAIN (object));
-  if (priv->name)
-    g_free (priv->name);
-  if (priv->description)
-    g_free (priv->description);
+
+  g_clear_pointer (&priv->name, g_free);
+  g_clear_pointer (&priv->description, g_free);
 
   G_OBJECT_CLASS (gtr_dl_teams_domain_parent_class)->dispose (object);
 }

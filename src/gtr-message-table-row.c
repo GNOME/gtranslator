@@ -121,11 +121,9 @@ gtr_message_table_row_finalize (GObject *object)
 
   g_clear_object (&priv->ui_settings);
   if (priv->msg)
-    {
-      g_signal_handlers_disconnect_by_func (priv->msg, update_msg, row);
-      g_object_unref (priv->msg);
-      priv->msg = NULL;
-    }
+    g_signal_handlers_disconnect_by_func (priv->msg, update_msg, row);
+
+  g_clear_object (&priv->msg);
 
   G_OBJECT_CLASS (gtr_message_table_row_parent_class)->finalize (object);
 }

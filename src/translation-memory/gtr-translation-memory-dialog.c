@@ -207,8 +207,7 @@ typedef struct
 static void
 task_data_destroy (ScanDirTaskData *data)
 {
-  if (data->restriction)
-    g_free (data->restriction);
+  g_clear_pointer (&data->restriction, g_free);
   g_object_unref (data->dir);
 
   g_free (data);

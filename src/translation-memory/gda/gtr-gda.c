@@ -955,11 +955,7 @@ gtr_gda_dispose (GObject * object)
       priv->stmt_delete_trans = NULL;
     }
 
-  if (priv->lookup_query_cache != NULL)
-    {
-      g_hash_table_unref (priv->lookup_query_cache);
-      priv->lookup_query_cache = NULL;
-    }
+  g_clear_pointer (&priv->lookup_query_cache, g_hash_table_unref);
 
   if (priv->db != NULL)
     {

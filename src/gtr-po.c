@@ -224,21 +224,18 @@ gtr_po_finalize (GObject * object)
 
   g_list_free_full (priv->messages, g_object_unref);
   g_list_free_full (priv->domains, g_free);
-  g_free (priv->obsolete);
+
+  g_clear_pointer (&priv->obsolete, g_free);
 
   if (priv->gettext_po_file)
     po_file_free (priv->gettext_po_file);
 
-  if (priv->dl_lang)
-    g_free (priv->dl_lang);
-  if (priv->dl_module)
-    g_free (priv->dl_module);
-  if (priv->dl_branch)
-    g_free (priv->dl_branch);
-  if (priv->dl_domain)
-    g_free (priv->dl_domain);
-  if (priv->dl_state)
-    g_free (priv->dl_state);
+  g_clear_pointer (&priv->dl_lang, g_free);
+  g_clear_pointer (&priv->dl_module, g_free);
+  g_clear_pointer (&priv->dl_branch, g_free);
+  g_clear_pointer (&priv->dl_domain, g_free);
+  g_clear_pointer (&priv->dl_state, g_free);
+
   g_clear_pointer (&priv->dl_vcs_web, g_free);
 
   if (priv->iter)
@@ -451,22 +448,14 @@ _gtr_po_load (GtrPo * po, GFile * location, GError ** error)
   handler.xerror = &on_gettext_po_xerror;
   handler.xerror2 = &on_gettext_po_xerror2;
 
-  if (message_error != NULL)
-    {
-      g_free (message_error);
-      message_error = NULL;
-    }
+  g_clear_pointer (&message_error, g_free);
 
   filename = g_file_get_path (location);
 
   if (priv->gettext_po_file)
     po_file_free (priv->gettext_po_file);
 
-  if (priv->header)
-    {
-      g_object_unref (priv->header);
-      priv->header = NULL;
-    }
+  g_clear_object (&priv->header);
 
   if (priv->iter)
     {
@@ -658,11 +647,7 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
   g_return_val_if_fail (GTR_IS_PO (po), FALSE);
   g_return_val_if_fail (location != NULL, FALSE);
 
-  if (message_error != NULL)
-    {
-      g_free (message_error);
-      message_error = NULL;
-    }
+  g_clear_pointer (&message_error, g_free);
 
   /*
    * Get filename path.
@@ -680,9 +665,8 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
     {
       g_set_error (error,
                    GTR_PO_ERROR, GTR_PO_ERROR_RECOVERY, "%s", message_error);
-      g_free (message_error);
-      message_error = NULL;
     }
+  g_clear_pointer (&message_error, g_free);
 
   /*
    * Determine the message domains to track
