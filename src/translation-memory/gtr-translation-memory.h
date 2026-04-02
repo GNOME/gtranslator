@@ -15,8 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _GTR_TRANSLATION_MEMORY_H_
-#define _GTR_TRANSLATION_MEMORY_H_
+#pragma once
 
 #include <glib-object.h>
 #include "gtr-msg.h"
@@ -74,4 +73,3 @@ void            gtr_translation_memory_set_max_items    (GtrTranslationMemory   
                                                          gint                    items);
 
 G_END_DECLS
-#endif

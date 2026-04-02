@@ -15,13 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __GTR_ACTIONS_APP_H__
-#define __GTR_ACTIONS_APP_H__
+#pragma once
 
 #include "gtr-window.h"
 
 void gtr_show_help (GtkWindow *window);
 
 void gtr_about_dialog (GtrWindow *window);
-
-#endif

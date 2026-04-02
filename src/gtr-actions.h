@@ -16,8 +16,7 @@
  *
  */
 
-#ifndef __ACTIONS_H__
-#define __ACTIONS_H__
+#pragma once
 
 #include <gtk/gtk.h>
 #include <gio/gio.h>
@@ -154,4 +153,3 @@ void do_replace_all (GtrSearchBar * dialog,
 void gtr_window_show_home_page (gpointer useless);
 
 G_END_DECLS
-#endif

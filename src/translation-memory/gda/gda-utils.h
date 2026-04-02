@@ -20,12 +20,9 @@
  *   Ignacio Casal Quinteiro <icq@gnome.org>
  */
 
-#ifndef GDA_UTILS_H
-#define GDA_UTILS_H 1
+#pragma once
 
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 
 GStrv gtr_gda_utils_split_string_in_words (const gchar *string);
-
-#endif

@@ -18,8 +18,7 @@
  *   Carlos Garnacho <carlosg@gnome.org>
  */
 
-#ifndef __MESSAGE_CONTAINER_H__
-#define __MESSAGE_CONTAINER_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
@@ -55,5 +54,3 @@ gint     gtr_message_container_get_count   (GtrMessageContainer * container);
 
 
 G_END_DECLS
-
-#endif /* __MESSAGE_CONTAINER_H__ */

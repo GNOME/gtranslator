@@ -20,8 +20,7 @@
  *   Ignacio Casal Quinteiro <icq@gnome.org>
  */
 
-#ifndef __HEADER_H__
-#define __HEADER_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
@@ -123,5 +122,3 @@ void             gtr_header_set_field                (GtrHeader   *header,
                                                       const gchar *data);
 
 G_END_DECLS
-
-#endif /* __HEADER_H__ */

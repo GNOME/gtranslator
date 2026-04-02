@@ -16,8 +16,7 @@
  *
  */
 
-#ifndef __FILE_DIALOGS_H__
-#define __FILE_DIALOGS_H__
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -32,5 +31,3 @@ typedef enum
 GtkFileDialog *gtr_file_chooser_new (GtkWindow * parent,
                                      FileselMode mode,
                                      const gchar * title, const gchar * dir);
-
-#endif

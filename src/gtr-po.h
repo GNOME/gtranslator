@@ -21,8 +21,7 @@
  *   Ignacio Casal Quinteiro <nacho.resa@gmail.com>
  */
 
-#ifndef __PO_H__
-#define __PO_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
@@ -158,4 +157,3 @@ void gtr_po_check_po_file (GtrPo *po, GError **error);
      void _gtr_po_increase_decrease_fuzzy (GtrPo * po, gboolean increase);
 
 G_END_DECLS
-#endif /* __PO_H__ */

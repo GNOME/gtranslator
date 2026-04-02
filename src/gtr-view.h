@@ -16,8 +16,7 @@
  *
  */
 
-#ifndef __VIEW_H__
-#define __VIEW_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
@@ -116,4 +115,3 @@ struct _GtrViewClass
 (sflags |= GTR_SEARCH_CASE_SENSITIVE) : (sflags &= ~GTR_SEARCH_CASE_SENSITIVE))
 
 G_END_DECLS
-#endif /* __VIEW_H__ */

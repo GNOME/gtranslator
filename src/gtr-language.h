@@ -20,8 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __GTR_LANGUAGE_H__
-#define __GTR_LANGUAGE_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
@@ -47,5 +46,3 @@ const gchar             *gtr_language_get_name           (const GtrLanguage *lan
 const gchar             *gtr_language_get_plural_form    (const GtrLanguage *lang);
 
 G_END_DECLS
-
-#endif  /* __GTR_LANGUAGE_H__ */

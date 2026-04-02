@@ -20,8 +20,7 @@
  *   Pablo Sanxiao <psanxiao@gmail.com>
  */
 
-#ifndef GTR_UTILS_H
-#define GTR_UTILS_H 1
+#pragma once
 
 #include <gtk/gtk.h>
 #include <libxml/tree.h>
@@ -61,4 +60,3 @@ xmlDocPtr gtr_xml_open_file (const gchar * filename);
      gchar * pango_font_description_to_css (PangoFontDescription *desc);
 
      int parse_nplurals_header (const gchar * plurals_header);
-#endif

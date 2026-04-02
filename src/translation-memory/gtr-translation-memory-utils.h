@@ -20,8 +20,7 @@
  *   Ignacio Casal Quinteiro <icq@gnome.org>
  */
 
-#ifndef GTR_TRANSLATION_MEMORY_UTILS_H
-#define GTR_TRANSLATION_MEMORY_UTILS_H
+#pragma once
 
 #include <gtk/gtk.h>
 #include <gio/gio.h>
@@ -29,5 +28,3 @@
 void    gtr_scan_dir    (GFile         *dir,
                          GSList       **list,
                          const gchar   *po_name);
-
-#endif

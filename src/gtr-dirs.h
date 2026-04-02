@@ -19,9 +19,7 @@
  *
  */
 
-
-#ifndef __GTR_DIRS_H__
-#define __GTR_DIRS_H__
+#pragma once
 
 #include <glib.h>
 
@@ -43,5 +41,3 @@ const gchar *gtr_dirs_get_gtr_sourceview_dir (void);
 gchar *gtr_dirs_get_ui_file (const gchar * file);
 
 G_END_DECLS
-#endif /* __GTR_DIRS_H__ */
-/* ex:ts=8:noet: */
