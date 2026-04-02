@@ -774,12 +774,11 @@ gtr_dl_teams_langs_combo_selected_notify (GtkWidget  *widget,
   GtrDropDownOption *opt = GTR_DROP_DOWN_OPTION (
     adw_combo_row_get_selected_item (ADW_COMBO_ROW (priv->langs_comborow))
   );
-  if (priv->selected_lang)
-    g_free (priv->selected_lang);
+
   if (opt)
-    priv->selected_lang = g_strdup (gtr_drop_down_option_get_name (opt));
+    g_set_str (&priv->selected_lang, gtr_drop_down_option_get_name (opt));
   else
-    priv->selected_lang = NULL;
+    g_clear_pointer (&priv->selected_lang, g_free);
 
   gtr_dl_teams_verify_and_load (self);
 }
@@ -815,12 +814,10 @@ gtr_dl_teams_domains_combo_selected_notify (GtkWidget  *widget,
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   GObject *domain = adw_combo_row_get_selected_item (ADW_COMBO_ROW (priv->domains_comborow));
 
-  if (priv->selected_domain)
-    g_free (priv->selected_domain);
   if (domain)
-    priv->selected_domain = g_strdup (gtr_dl_teams_domain_name (GTR_DL_TEAMS_DOMAIN (domain)));
+    g_set_str (&priv->selected_domain, gtr_dl_teams_domain_name (GTR_DL_TEAMS_DOMAIN (domain)));
   else
-    priv->selected_domain = NULL;
+    g_clear_pointer (&priv->selected_domain, g_free);
 
   gtr_dl_teams_verify_and_load (self);
 }
@@ -833,12 +830,11 @@ gtr_dl_teams_branches_combo_selected_notify (GtkWidget  *widget,
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
 
   int selected = adw_combo_row_get_selected (ADW_COMBO_ROW (widget));
-  if (priv->selected_branch)
-    g_free (priv->selected_branch);
+
   if (selected != GTK_INVALID_LIST_POSITION)
-    priv->selected_branch = g_strdup (gtk_string_list_get_string (priv->branches_model, selected));
+    g_set_str (&priv->selected_branch, gtk_string_list_get_string (priv->branches_model, selected));
   else
-    priv->selected_branch = NULL;
+    g_clear_pointer (&priv->selected_branch, g_free);
 
   /* Check if all four required values have been selected to proceed with loading PO file */
   gtr_dl_teams_verify_and_load (self);
