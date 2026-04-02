@@ -19,47 +19,16 @@
  *   Pablo Sanxiao <psanxiao@gmail.com>
  */
 
-#ifndef __PROFILE_H__
-#define __PROFILE_H__
+#pragma once
 
 #include <glib.h>
 #include <glib-object.h>
 
-/*
- * Utility Macros
- */
+G_BEGIN_DECLS
 
-#define GTR_TYPE_PROFILE		(gtr_profile_get_type ())
-#define GTR_PROFILE(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GTR_TYPE_PROFILE, GtrProfile))
-#define GTR_PROFILE_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GTR_TYPE_PROFILE, GtrProfileClass))
-#define GTR_IS_PROFILE(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GTR_TYPE_PROFILE))
-#define GTR_IS_PROFILE_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GTR_TYPE_PROFILE))
-#define GTR_PROFILE_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GTR_TYPE_PROFILE, GtrProfileClass))
+#define GTR_TYPE_PROFILE (gtr_profile_get_type ())
 
-/*
- * Main object structure
- */
-typedef struct _GtrProfile GtrProfile;
-
-struct _GtrProfile
-{
-  GObject parent_instance;
-};
-
-/*
- * Class definition
- */
-typedef struct _GtrProfileClass GtrProfileClass;
-
-struct _GtrProfileClass
-{
-  GObjectClass parent_class;
-};
-
-/*
- * Public methods
- */
-GType                 gtr_profile_get_type            (void)G_GNUC_CONST;
+G_DECLARE_FINAL_TYPE (GtrProfile, gtr_profile, GTR, PROFILE, GObject)
 
 GtrProfile           *gtr_profile_new                 (void);
 
@@ -103,4 +72,4 @@ const gchar          *gtr_profile_get_plural_forms    (GtrProfile  *profile);
 void                  gtr_profile_set_plural_forms    (GtrProfile  *profile,
                                                        const gchar *data);
 
-#endif /* __PROFILE_H__ */
+G_END_DECLS

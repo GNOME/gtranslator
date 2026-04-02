@@ -58,7 +58,12 @@ typedef struct
   gchar *plural_forms;
 } GtrProfilePrivate;
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrProfile, gtr_profile, G_TYPE_OBJECT)
+struct _GtrProfile
+{
+  GObject parent_instance;
+};
+
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrProfile, gtr_profile, G_TYPE_OBJECT)
 
 static void
 gtr_profile_init (GtrProfile *profile)
