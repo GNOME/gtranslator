@@ -201,7 +201,7 @@ update_language (GtrLanguagesFetcher *fetcher)
     {
       lang = (GtrLanguage*)l->data;
       const gchar *langname = gtr_language_get_name (lang);
-      if (text != NULL && strcmp (langname, text) == 0)
+      if (text != NULL && g_strcmp0 (langname, text) == 0)
         {
           fill_from_language_entry (fetcher, lang);
           break;

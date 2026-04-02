@@ -265,7 +265,7 @@ execute_non_select (sqlite3      *db,
 static int
 string_comparator (const void *s1, const void *s2)
 {
-  return strcmp (*(const gchar **) s1, *(const gchar **) s2);
+  return g_strcmp0 (*(const gchar **) s1, *(const gchar **) s2);
 }
 
 static GStrv
@@ -285,7 +285,7 @@ gtr_gda_split_string_in_words (const gchar *phrase)
   r = 1;
   for (; r < count; ++r)
     {
-      if (0 == strcmp (words[r], words[w-1]))
+      if (0 == g_strcmp0 (words[r], words[w-1]))
         {
           g_free (words[r]);
         }

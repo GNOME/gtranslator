@@ -136,7 +136,7 @@ gtr_drop_down_option_new (const char *name, const char *description)
 gboolean
 gtr_drop_down_option_equal (GtrDropDownOption *opt1, GtrDropDownOption *opt2)
 {
-    if (strcmp (opt1->name, opt2->name))
+    if (g_strcmp0 (opt1->name, opt2->name))
         return FALSE;
     return TRUE;
 }

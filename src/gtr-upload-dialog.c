@@ -71,7 +71,7 @@ on_enter (GtkEventControllerFocus *ev,
   gtk_text_buffer_get_end_iter (buffer, &end);
   comment = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);
 
-  if (strcmp (comment, priv->placeholder_text) == 0)
+  if (g_strcmp0 (comment, priv->placeholder_text) == 0)
     gtk_text_buffer_set_text (buffer, "", -1);
 }
 
@@ -90,7 +90,7 @@ on_leave (GtkEventControllerFocus *ev,
   gtk_text_buffer_get_end_iter (buffer, &end);
   comment = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);
 
-  if (strcmp (comment, "") == 0)
+  if (g_strcmp0 (comment, "") == 0)
     gtk_text_buffer_set_text (buffer, priv->placeholder_text, -1);
 }
 

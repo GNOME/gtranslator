@@ -768,7 +768,7 @@ update_comments (GtrHeader *header, const gchar *comments)
               if (g_strrstr (search, "-"))
                 {
                   gchar **array = g_strsplit (search, "-", 2);
-                  if (*array[0] != '\0' && strcmp (array[0], current_year) != 0)
+                  if (*array[0] != '\0' && g_strcmp0 (array[0], current_year) != 0)
                     first_year = g_strdup (array[0]);
 
                   g_strfreev (array);
@@ -776,7 +776,7 @@ update_comments (GtrHeader *header, const gchar *comments)
                   break;
                 }
 
-              if (*search != '\0' && strcmp (search, current_year) != 0)
+              if (*search != '\0' && g_strcmp0 (search, current_year) != 0)
                 {
                   first_year = g_strdup (search);
                   g_free (search);

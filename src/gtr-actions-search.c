@@ -295,7 +295,7 @@ find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
         gtr_view_get_search_text (GTR_VIEW (list->data), &old_flags);
 
       if ((search_text == NULL) ||
-          (strcmp (search_text, entry_text) != 0) || (flags != old_flags))
+          (g_strcmp0 (search_text, entry_text) != 0) || (flags != old_flags))
         {
           gtr_view_set_search_text (GTR_VIEW (list->data), entry_text, flags);
         }
@@ -414,7 +414,7 @@ do_replace (GtrSearchBar * dialog, GtrWindow * window)
   match_case = gtr_search_bar_get_match_case (dialog);
 
   if ((selected_text == NULL) ||
-      (match_case && (strcmp (selected_text, unescaped_search_text) != 0)) ||
+      (match_case && (g_strcmp0 (selected_text, unescaped_search_text) != 0)) ||
       (!match_case && !g_utf8_caselessnmatch (selected_text,
                                               unescaped_search_text,
                                               strlen (selected_text),

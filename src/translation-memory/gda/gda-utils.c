@@ -68,7 +68,7 @@ check_good_word (const gchar * word, gchar ** bad_words)
     {
       gchar *lower_collate = g_utf8_collate_key (lower, -1);
 
-      if (strcmp (lower_collate, bad_words[i]) == 0)
+      if (g_strcmp0 (lower_collate, bad_words[i]) == 0)
         {
           check = FALSE;
           g_free (lower_collate);

@@ -492,9 +492,9 @@ gtr_dl_teams_parse_file_info (GObject *object, GAsyncResult *result, gpointer us
   gtk_widget_set_sensitive (priv->load_button, TRUE);
 
   /* Enable the reserve button if a module's state is either None or Translated or ToReview */
-  if (strcmp(priv->module_state, "None") == 0 ||
-      strcmp(priv->module_state, "Translated") == 0 ||
-      strcmp(priv->module_state, "ToReview") == 0)
+  if (g_strcmp0 (priv->module_state, "None") == 0 ||
+      g_strcmp0 (priv->module_state, "Translated") == 0 ||
+      g_strcmp0 (priv->module_state, "ToReview") == 0)
     {
       gtk_widget_set_sensitive (priv->reserve_button, TRUE);
     }

@@ -533,7 +533,7 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
       if (priv->header)
         charset = gtr_header_get_charset (priv->header);
 
-      if (charset && *charset && strcmp (charset, "UTF-8") != 0)
+      if (charset && *charset && g_strcmp0 (charset, "UTF-8") != 0)
         {
           GOutputStream *converter_stream, *stream;
           GCharsetConverter *converter;
