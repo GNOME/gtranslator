@@ -190,17 +190,4 @@ gnome.post_install(
   update_desktop_database: true,
 )
 
-output = '\n\n      Gtranslator ' + gtr_version + '\n'
-output += '      =========================\n\n'
-output += '          Source ..........................: ' + meson.current_source_dir() + '\n'
-output += '          Prefix ..........................: ' + gtr_prefix + '\n'
-output += '          Compiler ........................: ' + cc.get_id() + '\n'
-if libspell_dep.found()
-output += '          libspell ........................: enabled\n\n'
-else
-output += '          libspell ........................: disabled\n\n'
-endif
-output += '      Development options\n'
-output += '          Enable Debug: ...................: ' + gtr_debug.to_string() + '\n'
-output += '    Now type "ninja -C ' + meson.current_build_dir() + '" to build ' + meson.project_name() + '\n\n'
-message(output)
+summary('libspelling', libspell_dep.found())
