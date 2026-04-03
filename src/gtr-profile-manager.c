@@ -38,7 +38,7 @@ struct _GtrProfileManager
   GObject parent_instance;
 };
 
-G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrProfileManager, gtr_profile_manager, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrProfileManager, gtr_profile_manager, G_TYPE_OBJECT);
 
 enum
 {

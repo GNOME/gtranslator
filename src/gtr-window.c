@@ -93,7 +93,7 @@ struct _GtrWindow
   AdwApplicationWindow parent_instance;
 };
 
-G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrWindow, gtr_window, ADW_TYPE_APPLICATION_WINDOW)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrWindow, gtr_window, ADW_TYPE_APPLICATION_WINDOW);
 
 static void update_saved_state (GtrPo *po, GParamSpec *param, gpointer window);
 

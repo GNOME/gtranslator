@@ -24,7 +24,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_PROGRESS (gtr_progress_get_type())
 
-G_DECLARE_FINAL_TYPE (GtrProgress, gtr_progress, GTR, PROGRESS, GtkDrawingArea)
+G_DECLARE_FINAL_TYPE (GtrProgress, gtr_progress, GTR, PROGRESS, GtkDrawingArea);
 
 GtrProgress*  gtr_progress_new             (void);
 void          gtr_progress_set             (GtrProgress *self,

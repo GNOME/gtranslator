@@ -29,7 +29,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_TRANSLATION_MEMORY_UI          (gtr_translation_memory_ui_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrTranslationMemoryUi, gtr_translation_memory_ui, GTR, TRANSLATION_MEMORY_UI, AdwBin)
+G_DECLARE_FINAL_TYPE (GtrTranslationMemoryUi, gtr_translation_memory_ui, GTR, TRANSLATION_MEMORY_UI, AdwBin);
 
 GType            gtr_translation_memory_ui_register_type        (GTypeModule            *module);
 GtkWidget       *gtr_translation_memory_ui_new                  (GtkWidget              *tab,

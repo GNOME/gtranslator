@@ -58,7 +58,7 @@ enum
   LAST_SIGNAL
 };
 
-G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrLanguagesFetcher, gtr_languages_fetcher, ADW_TYPE_PREFERENCES_GROUP)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrLanguagesFetcher, gtr_languages_fetcher, ADW_TYPE_PREFERENCES_GROUP);
 
 static guint signals[LAST_SIGNAL] = { 0 };
 

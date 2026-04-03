@@ -25,7 +25,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_LANG_COMBO_ROW (gtr_lang_combo_row_get_type())
 
-G_DECLARE_FINAL_TYPE (GtrLangComboRow, gtr_lang_combo_row, GTR, LANG_COMBO_ROW, AdwComboRow)
+G_DECLARE_FINAL_TYPE (GtrLangComboRow, gtr_lang_combo_row, GTR, LANG_COMBO_ROW, AdwComboRow);
 
 GtrLangComboRow*  gtr_lang_combo_row_new       (void);
 

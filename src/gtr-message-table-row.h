@@ -26,7 +26,7 @@
 G_BEGIN_DECLS
 
 #define GTR_TYPE_MESSAGE_TABLE_ROW (gtr_message_table_row_get_type ())
-G_DECLARE_FINAL_TYPE (GtrMessageTableRow, gtr_message_table_row, GTR, MESSAGE_TABLE_ROW, GtkBox)
+G_DECLARE_FINAL_TYPE (GtrMessageTableRow, gtr_message_table_row, GTR, MESSAGE_TABLE_ROW, GtkBox);
 
 /*
  * Public methods

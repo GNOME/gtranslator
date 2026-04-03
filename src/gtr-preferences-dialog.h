@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_PREFERENCES_DIALOG (gtr_preferences_dialog_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrPreferencesDialog, gtr_preferences_dialog, GTR, PREFERENCES_DIALOG, AdwPreferencesDialog)
+G_DECLARE_FINAL_TYPE (GtrPreferencesDialog, gtr_preferences_dialog, GTR, PREFERENCES_DIALOG, AdwPreferencesDialog);
 
 /* Public methods */
 void            gtr_show_preferences_dialog             (GtrWindow *window);

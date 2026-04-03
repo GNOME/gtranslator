@@ -24,7 +24,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_DROP_DOWN_OPTION (gtr_drop_down_option_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrDropDownOption, gtr_drop_down_option, GTR, DROP_DOWN_OPTION, GObject)
+G_DECLARE_FINAL_TYPE (GtrDropDownOption, gtr_drop_down_option, GTR, DROP_DOWN_OPTION, GObject);
 
 GtrDropDownOption*  gtr_drop_down_option_new (const char *name, const char *description);
 gboolean gtr_drop_down_option_equal (GtrDropDownOption *opt1, GtrDropDownOption *opt2);

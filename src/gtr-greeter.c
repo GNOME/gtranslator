@@ -62,7 +62,7 @@ struct _GtrGreeter
   AdwNavigationPage parent_instance;
 };
 
-G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrGreeter, gtr_greeter, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrGreeter, gtr_greeter, ADW_TYPE_NAVIGATION_PAGE);
 
 static void
 add_profile (GtrGreeter *self)

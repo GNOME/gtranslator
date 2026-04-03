@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_PROFILE_MANAGER (gtr_profile_manager_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrProfileManager, gtr_profile_manager, GTR, PROFILE_MANAGER, GObject)
+G_DECLARE_FINAL_TYPE (GtrProfileManager, gtr_profile_manager, GTR, PROFILE_MANAGER, GObject);
 
 GtrProfileManager     *gtr_profile_manager_get_default        (void);
 

@@ -26,7 +26,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_CODE_VIEW (gtr_code_view_get_type())
 
-G_DECLARE_FINAL_TYPE (GtrCodeView, gtr_code_view, GTR, CODE_VIEW, GObject)
+G_DECLARE_FINAL_TYPE (GtrCodeView, gtr_code_view, GTR, CODE_VIEW, GObject);
 
 GtrCodeView*  gtr_code_view_new (GtrWindow *window);
 

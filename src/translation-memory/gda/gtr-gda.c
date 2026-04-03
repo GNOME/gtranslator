@@ -29,7 +29,7 @@
 #include <glib-object.h>
 #include <string.h>
 
-G_DEFINE_QUARK (gtr_gda_error, gtr_gda_error)
+G_DEFINE_QUARK (gtr_gda_error, gtr_gda_error);
 
 static void
 gtr_translation_memory_iface_init (GtrTranslationMemoryInterface * iface);

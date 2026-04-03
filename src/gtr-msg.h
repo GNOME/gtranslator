@@ -30,7 +30,7 @@
 G_BEGIN_DECLS
 
 #define GTR_TYPE_MSG (gtr_msg_get_type ())
-G_DECLARE_DERIVABLE_TYPE (GtrMsg, gtr_msg, GTR, MSG, GObject)
+G_DECLARE_DERIVABLE_TYPE (GtrMsg, gtr_msg, GTR, MSG, GObject);
 
 struct _GtrMsgClass
 {

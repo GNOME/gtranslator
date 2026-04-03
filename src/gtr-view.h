@@ -29,7 +29,7 @@ G_BEGIN_DECLS
  */
 #define GTR_TYPE_VIEW		(gtr_view_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrView, gtr_view, GTR, VIEW, GtkSourceView)
+G_DECLARE_FINAL_TYPE (GtrView, gtr_view, GTR, VIEW, GtkSourceView);
 
 typedef enum
 {

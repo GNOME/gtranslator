@@ -35,7 +35,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_WINDOW (gtr_window_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrWindow, gtr_window, GTR, WINDOW, AdwApplicationWindow)
+G_DECLARE_FINAL_TYPE (GtrWindow, gtr_window, GTR, WINDOW, AdwApplicationWindow);
 
 GtrTab *gtr_window_create_tab (GtrWindow * window, GtrPo * po);
 

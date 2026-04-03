@@ -24,7 +24,7 @@
 
 #include "gtr-message-container.h"
 
-G_DEFINE_INTERFACE (GtrMessageContainer, gtr_message_container, G_TYPE_OBJECT)
+G_DEFINE_INTERFACE (GtrMessageContainer, gtr_message_container, G_TYPE_OBJECT);
 
 static void
 gtr_message_container_default_init (GtrMessageContainerInterface * iface)

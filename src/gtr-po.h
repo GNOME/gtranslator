@@ -37,7 +37,7 @@ G_BEGIN_DECLS
  */
 #define GTR_TYPE_PO		(gtr_po_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrPo, gtr_po, GTR, PO, GObject)
+G_DECLARE_FINAL_TYPE (GtrPo, gtr_po, GTR, PO, GObject);
 
 struct _GtrPo
 {

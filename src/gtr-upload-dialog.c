@@ -45,7 +45,7 @@ struct _GtrUploadDialog
   AdwDialog parent_instance;
 };
 
-G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrUploadDialog, gtr_upload_dialog, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrUploadDialog, gtr_upload_dialog, ADW_TYPE_DIALOG);
 
 enum
 {

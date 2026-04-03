@@ -59,7 +59,7 @@ typedef struct
   GtkCssProvider *provider;
 } GtrViewPrivate;
 
-G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrView, gtr_view, GTK_SOURCE_TYPE_VIEW)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrView, gtr_view, GTK_SOURCE_TYPE_VIEW);
 
 static void
 notify_dark_cb (GtrView *view)

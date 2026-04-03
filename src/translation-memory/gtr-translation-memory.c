@@ -17,7 +17,7 @@
 
 #include "gtr-translation-memory.h"
 
-G_DEFINE_INTERFACE (GtrTranslationMemory, gtr_translation_memory, G_TYPE_OBJECT)
+G_DEFINE_INTERFACE (GtrTranslationMemory, gtr_translation_memory, G_TYPE_OBJECT);
 
 /**
  * gtr_translation_memory_store:

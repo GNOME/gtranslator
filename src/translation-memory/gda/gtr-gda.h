@@ -26,7 +26,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_GDA		(gtr_gda_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrGda, gtr_gda, GTR, GDA, GObject)
+G_DECLARE_FINAL_TYPE (GtrGda, gtr_gda, GTR, GDA, GObject);
 
 struct _GtrGda
 {

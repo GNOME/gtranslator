@@ -32,7 +32,7 @@ void        gtr_dl_teams_load_json   (GtrDlTeams *self);
 
 // Domains GObject
 #define GTR_TYPE_DL_TEAMS_DOMAIN (gtr_dl_teams_domain_get_type ())
-G_DECLARE_FINAL_TYPE (GtrDlTeamsDomain, gtr_dl_teams_domain, GTR, DL_TEAMS_DOMAIN, GObject)
+G_DECLARE_FINAL_TYPE (GtrDlTeamsDomain, gtr_dl_teams_domain, GTR, DL_TEAMS_DOMAIN, GObject);
 
 GtrDlTeamsDomain* gtr_dl_teams_domain_new (const char *name, const char *description);
 const char* gtr_dl_teams_domain_name (GtrDlTeamsDomain *domain);

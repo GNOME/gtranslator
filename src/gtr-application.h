@@ -34,7 +34,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_APPLICATION (gtr_application_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrApplication, gtr_application, GTR, APPLICATION, AdwApplication)
+G_DECLARE_FINAL_TYPE (GtrApplication, gtr_application, GTR, APPLICATION, AdwApplication);
 
 #define GTR_APP                         (GTR_APPLICATION (g_application_get_default ()))
 

@@ -48,7 +48,7 @@ enum
 
 static GParamSpec *properties[N_PROPERTIES] = { NULL, };
 
-G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrProgress, gtr_progress, GTK_TYPE_DRAWING_AREA)
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrProgress, gtr_progress, GTK_TYPE_DRAWING_AREA);
 
 static void
 gtr_progress_dispose (GObject *object)

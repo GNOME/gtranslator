@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_PROFILE (gtr_profile_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrProfile, gtr_profile, GTR, PROFILE, GObject)
+G_DECLARE_FINAL_TYPE (GtrProfile, gtr_profile, GTR, PROFILE, GObject);
 
 GtrProfile           *gtr_profile_new                 (void);
 

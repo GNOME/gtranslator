@@ -27,7 +27,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_GREETER (gtr_greeter_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrGreeter, gtr_greeter, GTR, GREETER, AdwNavigationPage)
+G_DECLARE_FINAL_TYPE (GtrGreeter, gtr_greeter, GTR, GREETER, AdwNavigationPage);
 
 GtrGreeter* gtr_greeter_new         (GtrWindow *main_window);
 

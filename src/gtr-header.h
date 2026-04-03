@@ -34,7 +34,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_HEADER			(gtr_header_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrHeader, gtr_header, GTR, HEADER, GtrMsg)
+G_DECLARE_FINAL_TYPE (GtrHeader, gtr_header, GTR, HEADER, GtrMsg);
 
 struct _GtrHeaderClass
 {

@@ -58,7 +58,7 @@ enum {
 };
 static GParamSpec *properties[N_PROPS] = { NULL, };
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrMsg, gtr_msg, G_TYPE_OBJECT)
+G_DEFINE_TYPE_WITH_PRIVATE (GtrMsg, gtr_msg, G_TYPE_OBJECT);
 
 static gchar *message_error = NULL;
 

@@ -27,7 +27,7 @@
 G_BEGIN_DECLS
 
 #define GTR_TYPE_MESSAGE_TABLE (gtr_message_table_get_type ())
-G_DECLARE_FINAL_TYPE (GtrMessageTable, gtr_message_table, GTR, MESSAGE_TABLE, GtkBox)
+G_DECLARE_FINAL_TYPE (GtrMessageTable, gtr_message_table, GTR, MESSAGE_TABLE, GtkBox);
 
 typedef gboolean (* GtrMessageTableNavigationFunc) (GtrMsg * msg);
 

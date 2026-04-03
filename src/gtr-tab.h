@@ -37,7 +37,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_TAB (gtr_tab_get_type ())
 
-G_DECLARE_DERIVABLE_TYPE (GtrTab, gtr_tab, GTR, TAB, AdwBin)
+G_DECLARE_DERIVABLE_TYPE (GtrTab, gtr_tab, GTR, TAB, AdwBin);
 
 struct _GtrTabClass
 {
