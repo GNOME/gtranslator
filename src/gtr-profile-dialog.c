@@ -39,6 +39,8 @@
 
 typedef struct
 {
+  GtkWidget *d_l_integration_group;
+
   GtkWidget *profile_name;
   GtkWidget *auth_token;
 
@@ -91,6 +93,7 @@ gtr_profile_dialog_class_init (GtrProfileDialogClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/Gtranslator/gtr-profile-dialog.ui");
 
+  gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, d_l_integration_group);
   gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, languages_fetcher);
   gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, profile_name);
   gtk_widget_class_bind_template_child_private (widget_class, GtrProfileDialog, auth_token);
@@ -115,9 +118,14 @@ gtr_profile_dialog_init (GtrProfileDialog *dlg)
 {
   GtrProfileDialogPrivate *priv = gtr_profile_dialog_get_instance_private (dlg);
 
+  g_autofree gchar *description = NULL;
+
   priv->editing = FALSE;
 
   gtk_widget_init_template (GTK_WIDGET (dlg));
+
+  description = g_strdup_printf (_("GNOME Damned Lies integration token, go to your profile in %s to get it"), DL_SERVER);
+  adw_preferences_group_set_description (ADW_PREFERENCES_GROUP (priv->d_l_integration_group), description);
 
   g_signal_connect (GTK_BUTTON (priv->button_ok), "clicked",
                     G_CALLBACK (on_ok_button_clicked), dlg);

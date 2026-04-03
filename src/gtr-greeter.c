@@ -32,6 +32,8 @@ typedef struct
 {
   GtkWidget *greeter_stack;
 
+  GtkWidget *d_l_integration_group;
+
   GtkWidget *profile_name;
   GtkWidget *name;
   GtkWidget *email;
@@ -174,6 +176,8 @@ gtr_greeter_class_init (GtrGreeterClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/Gtranslator/gtr-greeter.ui");
 
+  gtk_widget_class_bind_template_child_private (widget_class, GtrGreeter, d_l_integration_group);
+
   gtk_widget_class_bind_template_child_private (widget_class, GtrGreeter, greeter_stack);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrGreeter, back_button);
@@ -202,9 +206,14 @@ gtr_greeter_init (GtrGreeter *self)
 {
   GtrGreeterPrivate *priv = gtr_greeter_get_instance_private (self);
 
+  g_autofree gchar *description = NULL;
+
   g_type_ensure (GTR_TYPE_LANGUAGES_FETCHER);
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  description = g_strdup_printf (_("GNOME Damned Lies integration token, go to your profile in %s to get it"), DL_SERVER);
+  adw_preferences_group_set_description (ADW_PREFERENCES_GROUP (priv->d_l_integration_group), description);
 
   g_signal_connect (priv->next_button,
                     "clicked",
