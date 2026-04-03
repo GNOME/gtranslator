@@ -124,14 +124,17 @@ typedef struct
 
 } GtrTabPrivate;
 
-G_DEFINE_TYPE_WITH_PRIVATE (GtrTab, gtr_tab, ADW_TYPE_BIN);
+struct _GtrTab
+{
+  AdwBin parent_instance;
+};
+
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrTab, gtr_tab, ADW_TYPE_BIN);
 
 enum
 {
   SHOWED_MESSAGE,
   MESSAGE_CHANGED,
-  MESSAGE_EDITION_FINISHED,
-  SELECTION_CHANGED,
   SEARCHBAR_TOGGLED,
   LAST_SIGNAL
 };
@@ -614,12 +617,6 @@ emit_message_changed_signal (GtkTextBuffer * buf, GtrTab * tab)
 }
 
 static void
-emit_selection_changed (GtkTextBuffer * buf, GParamSpec * spec, GtrTab * tab)
-{
-  g_signal_emit (G_OBJECT (tab), signals[SELECTION_CHANGED], 0);
-}
-
-static void
 emit_searchbar_toggled (GtkSearchBar *search_bar,
                         GParamSpec   *pspec,
                         GtrTab       *tab)
@@ -747,8 +744,6 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
 
       g_signal_connect_after (buf, "end_user_action",
                               G_CALLBACK (emit_message_changed_signal), tab);
-      g_signal_connect (buf, "notify::has-selection",
-                        G_CALLBACK (emit_selection_changed), tab);
     }
 }
 
@@ -924,14 +919,12 @@ gtr_tab_class_init (GtrTabClass * klass)
 
   widget_class->realize = gtr_tab_realize;
 
-  klass->message_edition_finished = gtr_tab_edition_finished;
-
   /* Signals */
   signals[SHOWED_MESSAGE] =
     g_signal_new ("showed-message",
                   G_OBJECT_CLASS_TYPE (klass),
                   G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (GtrTabClass, showed_message),
+                  0,
                   NULL, NULL,
                   g_cclosure_marshal_VOID__OBJECT,
                   G_TYPE_NONE, 1, GTR_TYPE_MSG);
@@ -940,33 +933,16 @@ gtr_tab_class_init (GtrTabClass * klass)
     g_signal_new ("message-changed",
                   G_OBJECT_CLASS_TYPE (klass),
                   G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (GtrTabClass, message_changed),
+                  0,
                   NULL, NULL,
                   g_cclosure_marshal_VOID__OBJECT,
                   G_TYPE_NONE, 1, GTR_TYPE_MSG);
-
-  signals[MESSAGE_EDITION_FINISHED] =
-    g_signal_new ("message-edition-finished",
-                  G_OBJECT_CLASS_TYPE (klass),
-                  G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (GtrTabClass, message_edition_finished),
-                  NULL, NULL,
-                  g_cclosure_marshal_VOID__OBJECT,
-                  G_TYPE_NONE, 1, GTR_TYPE_MSG);
-  signals[SELECTION_CHANGED] =
-    g_signal_new ("selection-changed",
-                  G_OBJECT_CLASS_TYPE (klass),
-                  G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (GtrTabClass, selection_changed),
-                  NULL, NULL,
-                  g_cclosure_marshal_VOID__VOID,
-                  G_TYPE_NONE, 0);
 
   signals[SEARCHBAR_TOGGLED] =
     g_signal_new ("searchbar-toggled",
                   G_OBJECT_CLASS_TYPE (klass),
                   G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (GtrTabClass, searchbar_toggled),
+                  0,
                   NULL, NULL,
                   g_cclosure_marshal_VOID__BOOLEAN,
                   G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
@@ -1610,8 +1586,7 @@ _gtr_tab_finish_edition (GtrTab * tab)
   current_msg = gtr_po_get_current_message (priv->po);
 
   /* movement is blocked/unblocked within the handler */
-  g_signal_emit (G_OBJECT (tab), signals[MESSAGE_EDITION_FINISHED],
-		 0, GTR_MSG (current_msg->data));
+  gtr_tab_edition_finished (tab, GTR_MSG (current_msg->data));
 
   return !priv->blocking;
 }

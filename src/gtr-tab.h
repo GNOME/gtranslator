@@ -37,18 +37,7 @@ G_BEGIN_DECLS
 
 #define GTR_TYPE_TAB (gtr_tab_get_type ())
 
-G_DECLARE_DERIVABLE_TYPE (GtrTab, gtr_tab, GTR, TAB, AdwBin);
-
-struct _GtrTabClass
-{
-  AdwBinClass parent_class;
-
-  void (*showed_message) (GtrTab * tab, GtrMsg * msg);
-  void (*message_changed) (GtrTab * tab, GtrMsg * msg);
-  void (*message_edition_finished) (GtrTab * tab, GtrMsg * msg);
-  void (*selection_changed) (GtrTab * tab);
-  void (*searchbar_toggled) (GtrTab * tab, gboolean revealed);
-};
+G_DECLARE_FINAL_TYPE (GtrTab, gtr_tab, GTR, TAB, AdwBin);
 
 typedef enum
 {
