@@ -125,8 +125,7 @@ gtr_profile_set_name (GtrProfile  *profile,
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (priv->name);
-  priv->name = g_strdup (data);
+  g_set_str (&priv->name, data);
 }
 
 const gchar *
@@ -146,8 +145,7 @@ gtr_profile_set_auth_token (GtrProfile  *profile,
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (priv->auth_token);
-  priv->auth_token = g_strdup (data);
+  g_set_str (&priv->auth_token, data);
 }
 
 const gchar *
@@ -167,8 +165,7 @@ gtr_profile_set_author_name (GtrProfile  *profile,
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (priv->author_name);
-  priv->author_name = g_strdup (data);
+  g_set_str (&priv->author_name, data);
 }
 
 const gchar *
@@ -188,8 +185,7 @@ gtr_profile_set_author_email (GtrProfile  *profile,
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (priv->author_email);
-  priv->author_email = g_strdup (data);
+  g_set_str (&priv->author_email, data);
 }
 
 const gchar *
@@ -209,8 +205,7 @@ gtr_profile_set_language_name (GtrProfile  *profile,
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (priv->language_name);
-  priv->language_name = g_strdup (data);
+  g_set_str (&priv->language_name, data);
 }
 
 const gchar *
@@ -230,8 +225,7 @@ gtr_profile_set_language_code (GtrProfile  *profile,
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (priv->language_code);
-  priv->language_code = g_strdup (data);
+  g_set_str (&priv->language_code, data);
 }
 
 const gchar *
@@ -251,8 +245,7 @@ gtr_profile_set_charset (GtrProfile  *profile,
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (priv->charset);
-  priv->charset = g_strdup (data);
+  g_set_str (&priv->charset, data);
 }
 
 const gchar *
@@ -272,8 +265,7 @@ gtr_profile_set_encoding (GtrProfile  *profile,
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (priv->encoding);
-  priv->encoding = g_strdup (data);
+  g_set_str (&priv->encoding, data);
 }
 
 const gchar *
@@ -293,8 +285,7 @@ gtr_profile_set_group_email (GtrProfile  *profile,
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (priv->group_email);
-  priv->group_email = g_strdup (data);
+  g_set_str (&priv->group_email, data);
 }
 
 const gchar *
@@ -314,6 +305,5 @@ gtr_profile_set_plural_forms (GtrProfile  *profile,
   g_return_if_fail (GTR_IS_PROFILE (profile));
   g_return_if_fail (data != NULL);
 
-  g_free (priv->plural_forms);
-  priv->plural_forms = g_strdup (data);
+  g_set_str (&priv->plural_forms, data);
 }
