@@ -36,7 +36,7 @@
  */
 struct _GtrContextPanel
 {
-  GtkBox parent_instance;
+  AdwBin parent_instance;
 };
 
 /*
@@ -73,7 +73,7 @@ typedef struct
   GtkWidget *paths;
 } GtrContextPanelPrivate;
 
-G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrContextPanel, gtr_context_panel, GTK_TYPE_BOX);
+G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrContextPanel, gtr_context_panel, ADW_TYPE_BIN);
 
 enum
 {

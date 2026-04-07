@@ -18,6 +18,7 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <glib.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -28,7 +29,7 @@
 G_BEGIN_DECLS
 #define GTR_TYPE_CONTEXT_PANEL  (gtr_context_panel_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtrContextPanel, gtr_context_panel, GTR, CONTEXT_PANEL, GtkBox);
+G_DECLARE_FINAL_TYPE (GtrContextPanel, gtr_context_panel, GTR, CONTEXT_PANEL, AdwBin);
 
 /*
  * Public methods

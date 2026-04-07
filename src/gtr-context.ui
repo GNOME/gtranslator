@@ -3,10 +3,7 @@
   <requires lib="gtk" version="4.0"/>
   <object class="GtkTextBuffer" id="notesbuffer"/>
   <object class="GtkTextBuffer" id="commentsbuffer"/>
-  <template class="GtrContextPanel" parent="GtkBox">
-    <property name="orientation">vertical</property>
-    <property name="spacing">2</property>
-    <property name="hexpand">False</property>
+  <template class="GtrContextPanel" parent="AdwBin">
     <child>
       <object class="GtkPaned" id="paned">
         <property name="orientation">vertical</property>
