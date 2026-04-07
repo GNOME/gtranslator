@@ -52,17 +52,41 @@ G_DEFINE_BOXED_TYPE (GtrLanguage, gtr_language,
  * do nothing */
 
 GtrLanguage *
-gtr_language_copy (const GtrLanguage *lang)
+gtr_language_new (char *code,
+                  char *name)
 {
-  g_return_val_if_fail (lang != NULL, NULL);
+  GtrLanguage *self;
 
-  return (GtrLanguage *) lang;
+  self = g_new0 (GtrLanguage, 1);
+  self->code = code;
+  self->name = name;
+
+  return self;
+}
+
+GtrLanguage *
+gtr_language_copy (GtrLanguage *lang)
+{
+  GtrLanguage *self;
+
+  self = g_new0 (GtrLanguage, 1);
+  self->code = g_strdup (lang->code);
+  self->name = g_strdup (lang->name);
+  self->plural_form = g_strdup (lang->plural_form);
+
+  return self;
 }
 
 void
 gtr_language_free (GtrLanguage *lang)
 {
   g_return_if_fail (lang != NULL);
+
+  g_free (lang->code);
+  g_free (lang->name);
+  g_free (lang->plural_form);
+
+  g_free (lang);
 }
 
 static void
@@ -135,10 +159,11 @@ gtr_language_lazy_init (void)
   langs = g_key_file_get_keys (lang_file, "Languages", &n, NULL);
   for (i=0; i<n; i++)
     {
-      GtrLanguage *gtr_lang = g_slice_new (GtrLanguage);
+      GtrLanguage *gtr_lang;
+
       lang = langs[i];
-      gtr_lang->code = g_strdup (lang);
-      gtr_lang->name = g_key_file_get_string (lang_file, "Languages", lang, NULL);
+      gtr_lang = gtr_language_new (g_strdup (lang),
+                                   g_key_file_get_string (lang_file, "Languages", lang, NULL));
       load_plural_form (gtr_lang);
       languages = g_slist_prepend (languages, gtr_lang);
     }
