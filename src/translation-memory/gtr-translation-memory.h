@@ -21,13 +21,10 @@
 #include "gtr-msg.h"
 
 G_BEGIN_DECLS
-#define GTR_TYPE_TRANSLATION_MEMORY (gtr_translation_memory_get_type ())
-#define GTR_TRANSLATION_MEMORY(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_TRANSLATION_MEMORY, GtrTranslationMemory))
-#define GTR_IS_TRANSLATION_MEMORY(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_TRANSLATION_MEMORY))
-#define GTR_TRANSLATION_MEMORY_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTR_TYPE_TRANSLATION_MEMORY, GtrTranslationMemoryInterface))
 
-typedef struct _GtrTranslationMemory GtrTranslationMemory;
-typedef struct _GtrTranslationMemoryInterface GtrTranslationMemoryInterface;
+#define GTR_TYPE_TRANSLATION_MEMORY (gtr_translation_memory_get_type ())
+
+G_DECLARE_INTERFACE (GtrTranslationMemory, gtr_translation_memory, GTR, TRANSLATION_MEMORY, GObject);
 
 struct _GtrTranslationMemoryInterface
 {
@@ -51,8 +48,6 @@ struct _GtrTranslationMemoryMatch
   gint level;
   gint id;
 };
-
-GType           gtr_translation_memory_get_type         (void);
 
 gboolean        gtr_translation_memory_store            (GtrTranslationMemory   *obj,
                                                          GtrMsg                 *msg);

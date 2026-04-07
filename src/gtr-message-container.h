@@ -26,13 +26,9 @@
 
 G_BEGIN_DECLS
 
-#define GTR_TYPE_MESSAGE_CONTAINER           (gtr_message_container_get_type ())
-#define GTR_MESSAGE_CONTAINER(obj)           (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTR_TYPE_MESSAGE_CONTAINER, GtrMessageContainer))
-#define GTR_IS_MESSAGE_CONTAINER(obj)        (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTR_TYPE_MESSAGE_CONTAINER))
-#define GTR_MESSAGE_CONTAINER_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), GTR_TYPE_MESSAGE_CONTAINER, GtrMessageContainerInterface))
+#define GTR_TYPE_MESSAGE_CONTAINER (gtr_message_container_get_type ())
 
-typedef struct _GtrMessageContainer GtrMessageContainer;
-typedef struct _GtrMessageContainerInterface GtrMessageContainerInterface;
+G_DECLARE_INTERFACE (GtrMessageContainer, gtr_message_container, GTR, MESSAGE_CONTAINER, GObject);
 
 struct _GtrMessageContainerInterface
 {
@@ -45,7 +41,6 @@ struct _GtrMessageContainerInterface
   gint     (* get_count)          (GtrMessageContainer *container);
 };
 
-GType    gtr_message_container_get_type    (void) G_GNUC_CONST;
 GtrMsg * gtr_message_container_get_message (GtrMessageContainer * container,
                                             gint number);
 gint     gtr_message_container_get_message_number (GtrMessageContainer * container,
