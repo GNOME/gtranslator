@@ -103,7 +103,7 @@ free_match (gpointer data)
   GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) data;
 
   g_free (match->match);
-  g_slice_free (GtrTranslationMemoryMatch, match);
+  g_free (match);
 }
 
 /*
