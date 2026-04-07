@@ -70,20 +70,9 @@ gboolean         gtr_search_bar_get_entire_word (GtrSearchBar * dialog);
 void             gtr_search_bar_set_entire_word (GtrSearchBar *dialog,
                                                  gboolean entire_word);
 
-gboolean         gtr_search_bar_get_backwards (GtrSearchBar *dialog);
-void             gtr_search_bar_set_backwards (GtrSearchBar *dialog,
-                                               gboolean backwards);
-
 gboolean         gtr_search_bar_get_wrap_around (GtrSearchBar *dialog);
 void             gtr_search_bar_set_wrap_around (GtrSearchBar *dialog,
                                                  gboolean wrap_around);
-
-void             gtr_search_bar_show_message (GtrSearchBar *dialog,
-                                              char *message,
-                                              GtrSearchBarMsg info_type);
-
-void             gtr_search_bar_present_with_time (GtrSearchBar * dialog,
-                                                   guint32 timestamp);
 
 void             gtr_search_bar_find_next (GtrSearchBar *self);
 void             gtr_search_bar_find_prev (GtrSearchBar *self);

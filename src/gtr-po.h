@@ -77,8 +77,6 @@ GQuark gtr_po_error_quark (void);
      GtrPo *gtr_po_new_from_file (GFile   *location,
                                   GError **error) G_GNUC_WARN_UNUSED_RESULT;
 
-     void gtr_po_save_header_in_msg (GtrPo * po, GtrHeader * header);
-
      void gtr_po_save_file (GtrPo * po, GError ** error);
 
      GtrPoState gtr_po_get_state (GtrPo * po);

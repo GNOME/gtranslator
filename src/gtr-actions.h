@@ -106,10 +106,6 @@ void gtr_message_go_to_next_fuzzy_or_untranslated (GtrWindow * window);
 void gtr_message_go_to_prev_fuzzy_or_untranslated (GtrWindow * window);
 
 /*Search*/
-void _gtr_actions_search_find (GtrWindow * window);
-
-void _gtr_actions_search_replace (GtrWindow * window);
-
 void gtr_page_stop_search (GtrTab * tab,
                            GtrSearchBar * search_bar);
 
@@ -143,13 +139,5 @@ void do_replace (GtrSearchBar * dialog,
 
 void do_replace_all (GtrSearchBar * dialog,
                      GtrWindow * window);
-
-/*Documents*/
-//void gtr_actions_documents_next_document (GtrWindow * window);
-
-//void gtr_actions_documents_previous_document (GtrWindow * window);
-
-/*Help*/
-void gtr_window_show_home_page (gpointer useless);
 
 G_END_DECLS

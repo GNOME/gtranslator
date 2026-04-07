@@ -39,21 +39,11 @@ xmlDocPtr gtr_xml_open_file (const gchar * filename);
 
      void gtr_utils_help_display (GtkWindow * parent);
 
-     gchar *gtr_utils_get_user_config_dir (void);
-
      gchar *gtr_utils_get_current_date (void);
 
      gchar *gtr_utils_get_current_time (void);
 
      gchar *gtr_utils_get_current_year (void);
-
-     gchar *gtr_utils_get_file_from_pixmapsdir (const gchar * filename);
-
-     gchar *gtr_utils_get_file_from_pkgdatadir (const gchar * filename);
-
-     gchar *gtr_utils_get_datadir (void);
-
-     gchar *gtr_utils_get_win32_plugindir (void);
 
      gchar * gtr_utils_get_filename (const gchar * filename);
 

@@ -49,8 +49,6 @@ typedef enum
 /*
  * Public methods
  */
-GType gtr_message_table_register_type (GTypeModule * module);
-
 GtkWidget *gtr_message_table_new (void);
 
 void gtr_message_table_populate (GtrMessageTable * table,
@@ -61,10 +59,6 @@ GtrMsg * gtr_message_table_navigate (GtrMessageTable * table,
                                      GtrMessageTableNavigationFunc func);
 
 void gtr_message_table_select (GtrMessageTable * table, GtrMsg * msg);
-
-void gtr_message_table_update_translation (GtrMessageTable * table,
-                                           GtrMsg * msg,
-                                           gchar * translation);
 
 void gtr_message_table_sort_by (GtrMessageTable *table,
                                 GtrMessageTableSortBy sort);

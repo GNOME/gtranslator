@@ -29,9 +29,6 @@ G_DECLARE_FINAL_TYPE (GtrProjects, gtr_projects, GTR, PROJECTS,
                       AdwNavigationPage)
 
 GtrProjects*  gtr_projects_new         (GtrWindow *window);
-void          gtr_projects_recent_add  (GtrProjects *self,
-                                        GFile *location,
-                                        gchar *jkkproject_id);
 
 G_END_DECLS
 

@@ -45,8 +45,6 @@ GtrTab *gtr_window_get_active_tab (GtrWindow * window);
 
 GtrHeader * gtr_window_get_header_from_active_tab (GtrWindow * window);
 
-GtkWidget *gtr_window_get_statusbar (GtrWindow * window);
-
 GtrView *gtr_window_get_active_view (GtrWindow * window);
 
 GList *gtr_window_get_all_views (GtrWindow * window,
@@ -56,8 +54,6 @@ void gtr_window_remove_tab (GtrWindow * window);
 
 GtrTranslationMemory * gtr_window_get_tm (GtrWindow *window);
 void gtr_window_show_tm_dialog (GtrWindow *window);
-
-void gtr_window_remove_all_pages (GtrWindow *window);
 
 void gtr_window_tm_keybind (GtrWindow *window, GSimpleAction *action);
 
