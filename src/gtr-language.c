@@ -215,3 +215,9 @@ gtr_language_get_plural_form (const GtrLanguage *lang)
 
   return lang->plural_form;
 }
+
+void
+gtr_languages_finalize (void)
+{
+  g_slist_free_full (languages, (GDestroyNotify) gtr_language_free);
+}

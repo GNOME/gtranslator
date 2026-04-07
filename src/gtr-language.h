@@ -45,4 +45,6 @@ const gchar             *gtr_language_get_name           (const GtrLanguage *lan
 
 const gchar             *gtr_language_get_plural_form    (const GtrLanguage *lang);
 
+void                     gtr_languages_finalize          (void);
+
 G_END_DECLS
