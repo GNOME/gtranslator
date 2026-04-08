@@ -152,7 +152,7 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
   GtkWidget *save;
   GtkWidget *cancel;
 
-  GtkTextBuffer *text_buffer = gtk_text_buffer_new (NULL);
+  g_autoptr (GtkTextBuffer) text_buffer = gtk_text_buffer_new (NULL);
   DialogData *dd;
 
   priv = gtr_context_panel_get_instance_private (panel);
@@ -198,8 +198,6 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
   gtk_widget_set_vexpand (scrolled_window, TRUE);
   adw_toolbar_view_set_content (ADW_TOOLBAR_VIEW (toolbar_view), scrolled_window);
 
-  g_object_unref (text_buffer);
-  text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
   gtk_text_buffer_set_text (text_buffer, gtr_msg_get_comment (priv->current_msg), -1);
 
   adw_dialog_set_focus (dialog, text_view);
@@ -208,7 +206,7 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
 
   dd = g_new0 (DialogData, 1);
   dd->panel = panel;
-  dd->text_buffer = text_buffer;
+  dd->text_buffer = g_steal_pointer (&text_buffer);
   dd->dialog = dialog;
 
   g_signal_connect (cancel, "clicked", G_CALLBACK (close_notes), dd);

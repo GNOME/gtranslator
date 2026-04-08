@@ -248,7 +248,7 @@ create_profile_row (GtrPreferencesDialog *dlg,
   GtkWidget *check = NULL;
   GtkWidget *menu = NULL;
   g_autoptr (GMenu) gmenu = NULL;
-  GMenuItem *gitem = NULL;
+  g_autoptr (GMenuItem) gitem = NULL;
 
   GtrPreferencesDialogPrivate *priv = gtr_preferences_dialog_get_instance_private (dlg);
 
@@ -273,7 +273,6 @@ create_profile_row (GtrPreferencesDialog *dlg,
   gitem = g_menu_item_new (_("Delete"), "profile.delete");
   g_menu_item_set_action_and_target (gitem, "profile.delete", "s", profile_name);
   g_menu_append_item (gmenu, gitem);
-  g_object_unref (gitem);
 
   menu = gtk_menu_button_new ();
   gtk_widget_set_valign (menu, GTK_ALIGN_CENTER);

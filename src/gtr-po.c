@@ -385,8 +385,8 @@ static gboolean
 is_read_only (const gchar * filename)
 {
   gboolean ret = TRUE;          /* default to read only */
-  GFileInfo *info;
-  GFile *location;
+  g_autoptr (GFileInfo) info = NULL;
+  g_autoptr (GFile) location = NULL;
 
   location = g_file_new_for_path (filename);
 
@@ -396,18 +396,9 @@ is_read_only (const gchar * filename)
   info = g_file_query_info (location,
                             G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE,
                             G_FILE_QUERY_INFO_NONE, NULL, NULL);
-  g_object_unref (location);
 
-  if (info != NULL)
-    {
-      if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE))
-        {
-          ret = !g_file_info_get_attribute_boolean (info,
-                                                    G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE);
-        }
-
-      g_object_unref (info);
-    }
+  if (info != NULL && g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE))
+    ret = !g_file_info_get_attribute_boolean (info, G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE);
 
   return ret;
 }

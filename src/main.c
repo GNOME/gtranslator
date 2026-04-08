@@ -74,7 +74,7 @@ setup_path (void)
 gint
 main (gint argc, gchar * argv[])
 {
-  GtrApplication *app;
+  g_autoptr (GtrApplication) app = NULL;
   gint status;
 
   gtr_dirs_init ();
@@ -111,7 +111,6 @@ main (gint argc, gchar * argv[])
 
   status = g_application_run (G_APPLICATION (app), argc, argv);
 
-  g_object_unref (app);
   gtr_dirs_shutdown ();
 
   /* Make sure settings are saved */

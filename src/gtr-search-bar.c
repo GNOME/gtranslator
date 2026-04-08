@@ -419,7 +419,7 @@ gtr_search_bar_set_show_options (GtrSearchBar *self,
 static void
 add_actions (GtrSearchBar *self)
 {
-  GSimpleActionGroup *group;
+  g_autoptr (GSimpleActionGroup) group = NULL;
   GPropertyAction *action;
 
   group = g_simple_action_group_new ();
@@ -445,8 +445,6 @@ add_actions (GtrSearchBar *self)
   g_object_unref (action);
 
   gtk_widget_insert_action_group (GTK_WIDGET (self), "search-settings", G_ACTION_GROUP (group));
-
-  g_object_unref (group);
 }
 
 

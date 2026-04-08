@@ -672,7 +672,7 @@ gtr_application_create_window (GtrApplication *app)
   GtrWindow *window;
   gint w, h;
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
-  GtkWindowGroup *group;
+  g_autoptr (GtkWindowGroup) group = NULL;
   gboolean is_maximized;
 
   group = gtk_window_group_new ();
@@ -680,7 +680,6 @@ gtr_application_create_window (GtrApplication *app)
 
   window = g_object_new (GTR_TYPE_WINDOW, "application", app, NULL);
   gtk_window_group_add_window (group, GTK_WINDOW (window));
-  g_object_unref (group);
 
   g_settings_get (priv->window_settings, GTR_SETTINGS_WINDOW_SIZE, "(ii)", &w,
                   &h);

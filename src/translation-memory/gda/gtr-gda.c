@@ -439,11 +439,10 @@ gtr_gda_store (GtrTranslationMemory * tm, GtrMsg * msg)
   if (!begin_transaction (priv->db, &error))
     {
       g_warning ("starting transaction failed: %s", error->message);
-      g_error_free (error);
+      g_clear_error (&error);
       return FALSE;
     }
 
-  error = NULL;
   result = gtr_gda_store_impl (self,
                                gtr_msg_get_msgid (msg),
                                gtr_msg_get_msgstr (msg),
@@ -452,7 +451,7 @@ gtr_gda_store (GtrTranslationMemory * tm, GtrMsg * msg)
   if (error)
     {
       g_warning ("storing message failed: %s", error->message);
-      g_error_free (error);
+      g_clear_error (&error);
     }
 
   if (result)
@@ -479,7 +478,7 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
   if (!begin_transaction (priv->db, &error))
     {
       g_warning ("starting transaction failed: %s", error->message);
-      g_error_free (error);
+      g_clear_error (&error);
       return FALSE;
     }
 
@@ -490,7 +489,6 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
       if (!gtr_msg_is_translated (msg) || gtr_msg_is_fuzzy (msg))
         continue;
 
-      error = NULL;
       result = gtr_gda_store_impl (self,
                                    gtr_msg_get_msgid (msg),
                                    gtr_msg_get_msgstr (msg),
@@ -498,7 +496,7 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
       if (error)
         {
           g_warning ("storing message failed: %s", error->message);
-          g_error_free (error);
+          g_clear_error (&error);
           break;
         }
     }
@@ -620,7 +618,7 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
   g_auto(GStrv) words = NULL;
   guint cnt = 0;
   GList *matches = NULL;
-  GError *inner_error = NULL;
+  g_autoptr (GError) inner_error = NULL;
   sqlite3_stmt *stmt = NULL;
   int rc;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
@@ -675,8 +673,6 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
       g_list_free_full (matches, free_match);
 
       g_warning ("%s\n", inner_error->message);
-
-      g_error_free (inner_error);
 
       return NULL;
     }

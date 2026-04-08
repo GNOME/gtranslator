@@ -258,8 +258,8 @@ static void
 gtr_update_from_pot_dialog_nocheck (GtrWindow *window)
 {
   g_autoptr (GtkFileDialog) dialog = NULL;
-  GListStore *filters = NULL;
-  GtkFileFilter *pot = NULL;
+  g_autoptr (GListStore) filters = NULL;
+  g_autoptr (GtkFileFilter) pot = NULL;
 
   dialog = gtk_file_dialog_new ();
   gtk_file_dialog_set_title (dialog, _ ("Select Template (.pot)"));
@@ -288,11 +288,8 @@ gtr_update_from_pot_dialog_nocheck (GtrWindow *window)
   /* Keep filters alive for dialog lifetime (and implicitly the pot it
    * contains) */
   g_object_set_data_full (G_OBJECT (dialog), "gtr-update-pot-filters",
-                          g_object_ref (filters),
+                          g_steal_pointer (&filters),
                           (GDestroyNotify)g_object_unref);
-  /* Balance local refs */
-  g_object_unref (pot);
-  g_object_unref (filters);
 
   gtk_file_dialog_open (dialog, GTK_WINDOW (window), NULL,
                         _update_from_pot_finish, window);

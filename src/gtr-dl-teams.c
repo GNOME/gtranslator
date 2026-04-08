@@ -109,14 +109,13 @@ gtr_dl_teams_combobox_add (JsonArray   *array,
 {
   JsonObject *object = json_node_get_object (element);
   GListStore *model = G_LIST_STORE (adw_combo_row_get_model (ADW_COMBO_ROW (combo)));
-  GtrDropDownOption *option = NULL;
+  g_autoptr (GtrDropDownOption) option = NULL;
 
   const char *name = json_object_get_string_member (object, "locale");
   const char *desc = json_object_get_string_member (object, "name");
 
   option = gtr_drop_down_option_new (name, desc);
   g_list_store_append (model, option);
-  g_object_unref (option);
 }
 
 static void
@@ -127,12 +126,11 @@ gtr_dl_modules_combobox_add (JsonArray   *array,
 {
   JsonObject *object = json_node_get_object (element);
   GListStore *model = G_LIST_STORE (adw_combo_row_get_model (ADW_COMBO_ROW (combo)));
-  GtrDropDownOption *option = NULL;
+  g_autoptr (GtrDropDownOption) option = NULL;
 
   const char *name = json_object_get_string_member (object, "name");
   option = gtr_drop_down_option_new (name, NULL);
   g_list_store_append (model, option);
-  g_object_unref (option);
 }
 
 static void
@@ -611,7 +609,7 @@ gtr_dl_teams_download_file_done (GObject *object, GAsyncResult *result, gpointer
       g_autofree char *tmpname = gtr_utils_get_filename (og_basename);
       g_free (basename);
       g_free (file_path);
-      g_object_unref (dest_file);
+      g_clear_object (&dest_file);
       g_clear_error (&error);
 
       basename = g_strdup_printf ("%s (%d).po", tmpname, ++file_index);
