@@ -123,7 +123,7 @@ gtr_utils_escape_search_text (const gchar * text)
       p = next;
     }
 
-  return g_string_free (str, FALSE);
+  return g_string_free_and_steal (str);
 }
 
 gchar *
@@ -197,7 +197,7 @@ gtr_utils_unescape_search_text (const gchar * text)
       cur = next;
     }
 
-  return g_string_free (str, FALSE);
+  return g_string_free_and_steal (str);
 }
 
 /*
@@ -532,7 +532,7 @@ pango_font_description_to_css (PangoFontDescription *desc)
 
   g_string_append (s, "}");
 
-  return g_string_free (s, FALSE);
+  return g_string_free_and_steal (s);
 }
 
 // TODO: Improve this parser, this string parsing is weak
