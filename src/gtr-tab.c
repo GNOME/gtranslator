@@ -332,8 +332,7 @@ remove_autosave_timeout (GtrTab * tab)
   priv = gtr_tab_get_instance_private (tab);
   g_return_if_fail (priv->autosave_timeout > 0);
 
-  g_source_remove (priv->autosave_timeout);
-  priv->autosave_timeout = 0;
+  g_clear_handle_id (&priv->autosave_timeout, g_source_remove);
 }
 
 static void
