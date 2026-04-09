@@ -123,14 +123,14 @@ gtr_msg_get_property (GObject    *object,
       switch (gtr_msg_get_status (self))
         {
           case GTR_MSG_STATUS_UNTRANSLATED:
-            g_value_set_string (value, "untranslated");
+            g_value_set_static_string (value, "untranslated");
             break;
           case GTR_MSG_STATUS_FUZZY:
-            g_value_set_string (value, "fuzzy");
+            g_value_set_static_string (value, "fuzzy");
             break;
           case GTR_MSG_STATUS_TRANSLATED:
           default:
-            g_value_set_string (value, "translated");
+            g_value_set_static_string (value, "translated");
             break;
         }
       break;
