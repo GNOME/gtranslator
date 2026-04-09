@@ -143,10 +143,13 @@ enum
 {
   PROP_0,
   PROP_AUTOSAVE,
-  PROP_AUTOSAVE_INTERVAL
+  PROP_AUTOSAVE_INTERVAL,
+  N_PROPERTIES
 };
 
 static guint signals[LAST_SIGNAL];
+
+static GParamSpec *props[N_PROPERTIES];
 
 static gboolean gtr_tab_autosave (GtrTab * tab);
 
@@ -747,22 +750,6 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
     }
 }
 
-static void
-on_location_notify (GtrPo      *po,
-                    GParamSpec *pspec,
-                    GtrTab     *tab)
-{
-  g_object_notify (G_OBJECT (tab), "name");
-}
-
-static void
-on_state_notify (GtrPo      *po,
-                 GParamSpec *pspec,
-                 GtrTab     *tab)
-{
-  g_object_notify (G_OBJECT (tab), "name");
-}
-
 static gboolean
 get_mapping (GValue   *value,
              GVariant *variant,
@@ -948,23 +935,20 @@ gtr_tab_class_init (GtrTabClass * klass)
                   G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
 
   /* Properties */
-  g_object_class_install_property (object_class,
-                                   PROP_AUTOSAVE,
-                                   g_param_spec_boolean ("autosave",
-                                                         NULL, NULL,
-                                                         TRUE,
-                                                         G_PARAM_READWRITE |
-                                                         G_PARAM_STATIC_STRINGS));
+  props[PROP_AUTOSAVE] = g_param_spec_boolean ("autosave",
+                                               NULL, NULL,
+                                               TRUE,
+                                               G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
-  g_object_class_install_property (object_class,
-                                   PROP_AUTOSAVE_INTERVAL,
-                                   g_param_spec_int ("autosave-interval",
-                                                     NULL, NULL,
-                                                     0,
-                                                     G_MAXINT,
-                                                     0,
-                                                     G_PARAM_READWRITE |
-                                                     G_PARAM_STATIC_STRINGS));
+  props[PROP_AUTOSAVE_INTERVAL] = g_param_spec_int ("autosave-interval",
+                                                    NULL, NULL,
+                                                    0,
+                                                    G_MAXINT,
+                                                    0,
+                                                    G_PARAM_READWRITE |
+                                                    G_PARAM_STATIC_STRINGS);
+
+  g_object_class_install_properties (object_class, N_PROPERTIES, props);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/Gtranslator/gtr-tab.ui");
@@ -1053,12 +1037,6 @@ gtr_tab_new (GtrPo * po,
   /* FIXME: make the po a property */
   g_set_object (&priv->po, po);
   g_object_set_data (G_OBJECT (po), GTR_TAB_KEY, tab);
-
-  g_signal_connect (po, "notify::location",
-                    G_CALLBACK (on_location_notify), tab);
-
-  g_signal_connect (po, "notify::state",
-                    G_CALLBACK (on_state_notify), tab);
 
   install_autosave_timeout_if_needed (tab);
 

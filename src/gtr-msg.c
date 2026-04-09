@@ -332,7 +332,7 @@ gtr_msg_set_fuzzy (GtrMsg * msg, gboolean fuzzy)
       po_message_set_prev_msgctxt (priv->message, NULL);
 
     }
-  g_object_notify (G_OBJECT (msg), "fuzzy");
+  g_object_notify_by_pspec (G_OBJECT (msg), properties[PROP_FUZZY]);
 }
 
 /**
@@ -348,8 +348,11 @@ gtr_msg_set_status (GtrMsg * msg, GtrMsgStatus status)
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_if_fail (GTR_IS_MSG (msg));
 
+  if (priv->status == status)
+    return;
+
   priv->status = status;
-  g_object_notify (G_OBJECT (msg), "status");
+  g_object_notify_by_pspec (G_OBJECT (msg), properties[PROP_STATUS]);
 }
 
 /**
@@ -431,8 +434,8 @@ gtr_msg_set_msgstr (GtrMsg * msg, const gchar * msgstr)
   g_return_if_fail (msgstr != NULL);
 
   po_message_set_msgstr (priv->message, msgstr);
-  g_object_notify (G_OBJECT (msg), "translation");
-  g_object_notify (G_OBJECT (msg), "translated");
+  g_object_notify_by_pspec (G_OBJECT (msg), properties[PROP_TRANSLATION]);
+  g_object_notify_by_pspec (G_OBJECT (msg), properties[PROP_TRANSLATED]);
 }
 
 
@@ -470,8 +473,8 @@ gtr_msg_set_msgstr_plural (GtrMsg * msg, gint index, const gchar * msgstr)
   g_return_if_fail (GTR_IS_MSG (msg));
 
   po_message_set_msgstr_plural (priv->message, index, msgstr);
-  g_object_notify (G_OBJECT (msg), "translation");
-  g_object_notify (G_OBJECT (msg), "translated");
+  g_object_notify_by_pspec (G_OBJECT (msg), properties[PROP_TRANSLATION]);
+  g_object_notify_by_pspec (G_OBJECT (msg), properties[PROP_TRANSLATED]);
 }
 
 
@@ -540,8 +543,11 @@ gtr_msg_set_po_position (GtrMsg * msg, gint po_position)
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_if_fail (GTR_IS_MSG (msg));
 
+  if (priv->po_position == po_position)
+    return;
+
   priv->po_position = po_position;
-  g_object_notify (G_OBJECT (msg), "position");
+  g_object_notify_by_pspec (G_OBJECT (msg), properties[PROP_POSITION]);
 }
 
 /**

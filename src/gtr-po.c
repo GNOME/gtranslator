@@ -128,8 +128,10 @@ enum
 {
   PROP_0,
   PROP_LOCATION,
-  PROP_STATE
+  PROP_STATE,
+  N_PROPERTIES
 };
+static GParamSpec *props[N_PROPERTIES];
 
 static gchar *message_error = NULL;
 static gint error_severity = -1;
@@ -305,17 +307,18 @@ gtr_po_class_init (GtrPoClass * klass)
   object_class->get_property = gtr_po_get_property;
   object_class->set_property = gtr_po_set_property;
 
-  g_object_class_install_property (object_class,
-                                   PROP_LOCATION,
-                                   g_param_spec_object ("location",
-                                                        NULL, NULL,
-                                                        G_TYPE_FILE,
-                                                        G_PARAM_READWRITE));
+  props[PROP_LOCATION] = g_param_spec_object ("location",
+                                              NULL, NULL,
+                                              G_TYPE_FILE,
+                                              G_PARAM_READWRITE);
 
-  g_object_class_install_property (
-      object_class, PROP_STATE,
-      g_param_spec_enum ("state", NULL, NULL, GTR_TYPE_PO_STATE,
-                         GTR_PO_STATE_SAVED, G_PARAM_READABLE));
+  props[PROP_STATE] = g_param_spec_enum ("state",
+                                         NULL, NULL,
+                                         GTR_TYPE_PO_STATE,
+                                         GTR_PO_STATE_SAVED,
+                                         G_PARAM_READABLE);
+
+  g_object_class_install_properties (object_class, N_PROPERTIES, props);
 }
 
 /*
@@ -914,7 +917,7 @@ gtr_po_set_location (GtrPo * po, GFile * location)
 
   priv->location = g_file_dup (location);
 
-  g_object_notify (G_OBJECT (po), "location");
+  g_object_notify_by_pspec (G_OBJECT (po), props[PROP_LOCATION]);
 }
 
 /**
@@ -945,9 +948,12 @@ gtr_po_set_state (GtrPo * po, GtrPoState state)
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_if_fail (GTR_IS_PO (po));
 
+  if (priv->state == state)
+    return;
+
   priv->state = state;
 
-  g_object_notify (G_OBJECT (po), "state");
+  g_object_notify_by_pspec (G_OBJECT (po), props[PROP_STATE]);
 }
 
 void
