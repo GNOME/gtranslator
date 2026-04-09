@@ -315,15 +315,11 @@ find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
       offset = run_search (GTR_VIEW (viewsaux->data), offset);
       if (offset > 0)
         return TRUE;
+
       if (viewsaux->next != NULL)
-        {
-          viewsaux = viewsaux->next;
-        }
+        viewsaux = viewsaux->next;
       else
-        {
-          g_list_free (viewsaux);
-          viewsaux = NULL;
-        }
+        g_clear_list (&viewsaux, NULL);
     }
 
   return FALSE;
