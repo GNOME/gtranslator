@@ -562,14 +562,14 @@ gtr_upload_file (GtkWidget *upload_dialog, gpointer user_data)
   SoupMessage *msg = NULL;
   static SoupSession *session = NULL;
 
-  g_autofree gchar *content = NULL;
+  const guchar *data;
+  gsize data_size;
   g_autofree gchar *mime_type = NULL;
   g_autofree gchar *filename = NULL;
   g_autofree gchar *upload_endpoint = NULL;
   const char *auth_token = NULL;
   g_autofree char *auth = NULL;
   g_autofree char *upload_comment = NULL;
-  gsize size;
   const gchar *selected_lang;
   const gchar *selected_module;
   const gchar *selected_branch;
@@ -584,16 +584,15 @@ gtr_upload_file (GtkWidget *upload_dialog, gpointer user_data)
   po = gtr_tab_get_po (tab);
   location_file = gtr_po_get_location (po);
   filename = g_file_get_basename (location_file);
-  g_file_load_contents (location_file, NULL, &content, &size, NULL, &error);
+  bytes = g_file_load_bytes (location_file, NULL, NULL, &error);
   if (error != NULL)
     g_warning ("Error opening file %s: %s", filename, (error)->message);
 
-  bytes = g_bytes_new (content, size);
   header = gtr_po_get_header (po);
 
   /* Check mimetype */
-  mime_type
-      = g_content_type_guess (filename, (const guchar *)content, size, NULL);
+  data = g_bytes_get_data (bytes, &data_size);
+  mime_type = g_content_type_guess (filename, data, data_size, NULL);
 
   /* Get the authentication token from the user profile */
   pmanager = gtr_profile_manager_get_default ();
