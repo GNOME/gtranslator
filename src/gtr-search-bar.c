@@ -601,7 +601,7 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
   /* Add gtk_widget_class_add_binding for next-match and previous-match as
    * in gtksearchentry.c, which are already in the app as app.find-next and
    * app.find-prev */
-  gtk_widget_class_add_binding_signal (GTK_WIDGET_CLASS (klass), GDK_KEY_Escape, 0, "stop-search", NULL);
+  gtk_widget_class_add_binding_signal (GTK_WIDGET_CLASS (klass), GDK_KEY_Escape, GDK_NO_MODIFIER_MASK, "stop-search", NULL);
 }
 
 static void
