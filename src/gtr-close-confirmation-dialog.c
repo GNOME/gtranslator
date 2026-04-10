@@ -39,8 +39,11 @@ enum
 {
   PROP_0,
   PROP_UNSAVED_DOCUMENTS,
-  PROP_LOGOUT_MODE
+  PROP_LOGOUT_MODE,
+  N_PROPS
 };
+
+static GParamSpec *props [N_PROPS];
 
 /* Mode */
 enum
@@ -209,20 +212,18 @@ static void
   gobject_class->get_property = gtr_close_confirmation_dialog_get_property;
   gobject_class->finalize = gtr_close_confirmation_dialog_finalize;
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_UNSAVED_DOCUMENTS,
-                                   g_param_spec_pointer ("unsaved_documents",
-                                                         NULL, NULL,
-                                                         (G_PARAM_READWRITE |
-                                                          G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS)));
+  props[PROP_UNSAVED_DOCUMENTS] =
+    g_param_spec_pointer ("unsaved_documents",
+                          NULL, NULL,
+                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_LOGOUT_MODE,
-                                   g_param_spec_boolean ("logout_mode",
-                                                         NULL, NULL,
-                                                         FALSE,
-                                                         (G_PARAM_READWRITE |
-                                                          G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS)));
+  props[PROP_LOGOUT_MODE] =
+    g_param_spec_boolean ("logout_mode",
+                          NULL, NULL,
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  g_object_class_install_properties (gobject_class, N_PROPS, props);
 }
 
 GList *gtr_close_confirmation_dialog_get_selected_documents
