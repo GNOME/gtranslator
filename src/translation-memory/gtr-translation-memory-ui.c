@@ -185,7 +185,7 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
   /* Ensure last element is NULL */
   priv->tm_list[i] = NULL;
 
-  g_list_free_full (tm_list, free_match);
+  g_clear_list (&tm_list, free_match);
 }
 
 static void

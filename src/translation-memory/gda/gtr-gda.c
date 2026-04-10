@@ -670,7 +670,7 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
     }
   if (inner_error)
     {
-      g_list_free_full (matches, free_match);
+      g_clear_list (&matches, free_match);
 
       g_warning ("%s\n", inner_error->message);
 

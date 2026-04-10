@@ -755,7 +755,7 @@ gtr_window_tm_keybind (GtrWindow *window,
       gtk_text_buffer_end_user_action (buffer);
     }
 
-  g_list_free_full (tm_list, free_match);
+  g_clear_list (&tm_list, free_match);
 }
 
 static void

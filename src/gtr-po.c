@@ -224,8 +224,8 @@ gtr_po_finalize (GObject * object)
   GtrPo *po = GTR_PO (object);
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
-  g_list_free_full (priv->messages, g_object_unref);
-  g_list_free_full (priv->domains, g_free);
+  g_clear_list (&priv->messages, g_object_unref);
+  g_clear_list (&priv->domains, g_free);
 
   g_clear_pointer (&priv->obsolete, g_free);
 
@@ -661,13 +661,11 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
     }
   g_clear_pointer (&message_error, g_free);
 
+  g_clear_list (&priv->domains, g_free);
+
   /*
    * Determine the message domains to track
    */
-  if (priv->domains) {
-    g_list_free_full (priv->domains, g_free);
-    priv->domains = NULL;
-  }
   if (!(domains = po_file_domains (priv->gettext_po_file)))
     {
       if (*error != NULL)
@@ -689,10 +687,7 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
    * if so, process it separately. Otherwise, treat as a normal
    * message.
    */
-  if (priv->messages) {
-    g_list_free_full (priv->messages, g_object_unref);
-    priv->messages = NULL;
-  }
+  g_clear_list (&priv->messages, g_object_unref);
   priv->po_contains_obsolete_entries = FALSE;
   iter = priv->iter;
 

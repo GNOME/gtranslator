@@ -101,15 +101,10 @@ response_cb (GtrCloseConfirmationDialog *dlg,
 
   g_return_if_fail (GTR_IS_CLOSE_CONFIRMATION_DIALOG (dlg));
 
-  if (priv->selected_documents != NULL)
-    g_list_free (priv->selected_documents);
+  g_clear_list (&priv->selected_documents, NULL);
 
   if (g_strcmp0 (response, "yes") == 0)
-    {
-      priv->selected_documents = g_list_copy (priv->unsaved_documents);
-    }
-  else
-    priv->selected_documents = NULL;
+    priv->selected_documents = g_list_copy (priv->unsaved_documents);
 }
 
 static void
@@ -145,11 +140,8 @@ gtr_close_confirmation_dialog_finalize (GObject * object)
   GtrCloseConfirmationDialogPrivate *priv;
   priv = gtr_close_confirmation_dialog_get_instance_private (GTR_CLOSE_CONFIRMATION_DIALOG (object));
 
-  if (priv->unsaved_documents != NULL)
-    g_list_free (priv->unsaved_documents);
-
-  if (priv->selected_documents != NULL)
-    g_list_free (priv->selected_documents);
+  g_clear_list (&priv->unsaved_documents, NULL);
+  g_clear_list (&priv->selected_documents, NULL);
 
   /* Call the parent's destructor */
   G_OBJECT_CLASS (gtr_close_confirmation_dialog_parent_class)->finalize

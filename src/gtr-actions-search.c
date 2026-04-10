@@ -308,7 +308,7 @@ find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
   if (viewsaux == NULL)
     viewsaux = views;
   else
-    g_list_free (views);
+    g_clear_list (&views, NULL);
 
   while (viewsaux != NULL)
     {
