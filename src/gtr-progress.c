@@ -184,21 +184,21 @@ gtr_progress_class_init (GtrProgressClass *klass)
                         0,
                         INT_MAX,
                         0,
-                        G_PARAM_READWRITE);
+                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
   properties[PROP_UNTRANS] =
       g_param_spec_int ("untranslated",
                         NULL, NULL,
                         0,
                         INT_MAX,
                         0,
-                        G_PARAM_READWRITE);
+                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
   properties[PROP_FUZZY] =
       g_param_spec_int ("fuzzy",
                         NULL, NULL,
                         0,
                         INT_MAX,
                         0,
-                        G_PARAM_READWRITE);
+                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPERTIES, properties);
 }

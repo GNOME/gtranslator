@@ -214,7 +214,7 @@ static void
                                    g_param_spec_pointer ("unsaved_documents",
                                                          NULL, NULL,
                                                          (G_PARAM_READWRITE |
-                                                          G_PARAM_CONSTRUCT_ONLY)));
+                                                          G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS)));
 
   g_object_class_install_property (gobject_class,
                                    PROP_LOGOUT_MODE,
@@ -222,7 +222,7 @@ static void
                                                          NULL, NULL,
                                                          FALSE,
                                                          (G_PARAM_READWRITE |
-                                                          G_PARAM_CONSTRUCT_ONLY)));
+                                                          G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS)));
 }
 
 GList *gtr_close_confirmation_dialog_get_selected_documents

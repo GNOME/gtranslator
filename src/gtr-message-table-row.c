@@ -187,7 +187,7 @@ gtr_message_table_row_class_init (GtrMessageTableRowClass * klass)
                                    g_param_spec_object ("msg",
                                                         NULL, NULL,
                                                         GTR_TYPE_MSG,
-                                                        G_PARAM_READWRITE));
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/Gtranslator/gtr-message-table-row.ui");

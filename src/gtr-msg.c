@@ -150,19 +150,19 @@ gtr_msg_class_init (GtrMsgClass * klass)
   object_class->get_property = gtr_msg_get_property;
 
   properties[PROP_POSITION] =
-    g_param_spec_int ("position", NULL, NULL, 0, G_MAXINT, 0, G_PARAM_READABLE);
+    g_param_spec_int ("position", NULL, NULL, 0, G_MAXINT, 0, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
   properties[PROP_FUZZY] =
-    g_param_spec_boolean ("fuzzy", NULL, NULL, FALSE, G_PARAM_READABLE);
+    g_param_spec_boolean ("fuzzy", NULL, NULL, FALSE, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
   properties[PROP_TRANSLATED] =
-    g_param_spec_boolean ("translated", NULL, NULL, FALSE, G_PARAM_READABLE);
+    g_param_spec_boolean ("translated", NULL, NULL, FALSE, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
   properties[PROP_ORIGINAL] =
-    g_param_spec_string ("original", NULL, NULL, NULL, G_PARAM_READABLE);
+    g_param_spec_string ("original", NULL, NULL, NULL, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
   properties[PROP_TRANSLATION] =
-    g_param_spec_string ("translation", NULL, NULL, NULL, G_PARAM_READABLE);
+    g_param_spec_string ("translation", NULL, NULL, NULL, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
   properties[PROP_STATUS] =
-    g_param_spec_enum ("status", NULL, NULL, GTR_TYPE_MSG_STATUS, GTR_MSG_STATUS_UNTRANSLATED, G_PARAM_READABLE);
+    g_param_spec_enum ("status", NULL, NULL, GTR_TYPE_MSG_STATUS, GTR_MSG_STATUS_UNTRANSLATED, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
   properties[PROP_STATUS_STR] =
-    g_param_spec_string ("status_str", NULL, NULL, NULL, G_PARAM_READABLE);
+    g_param_spec_string ("status_str", NULL, NULL, NULL, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 }

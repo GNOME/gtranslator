@@ -413,7 +413,7 @@ gtr_context_panel_class_init (GtrContextPanelClass * klass)
                                                         NULL, NULL,
                                                         GTR_TYPE_TAB,
                                                         G_PARAM_READWRITE |
-                                                        G_PARAM_CONSTRUCT_ONLY));
+                                                        G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/Gtranslator/gtr-context.ui");

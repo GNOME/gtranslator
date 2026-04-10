@@ -556,23 +556,23 @@ gtr_search_bar_class_init (GtrSearchBarClass *klass)
 
   properties [PROP_CASE_SENSITIVE] =
     g_param_spec_boolean ("case-sensitive", NULL, NULL, FALSE,
-                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   properties [PROP_AT_WORD_BOUNDARIES] =
     g_param_spec_boolean ("at-word-boundaries", NULL, NULL, FALSE,
-                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   properties [PROP_WRAP_AROUND] =
     g_param_spec_boolean ("wrap-around", NULL, NULL, TRUE,
-                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   properties [PROP_AT_ORIGINAL_TEXT] =
     g_param_spec_boolean ("at-original-text", NULL, NULL, TRUE,
-                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   properties [PROP_AT_TRANSLATED_TEXT] =
     g_param_spec_boolean ("at-translated-text", NULL, NULL, TRUE,
-                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 

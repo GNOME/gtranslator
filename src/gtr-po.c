@@ -310,13 +310,13 @@ gtr_po_class_init (GtrPoClass * klass)
   props[PROP_LOCATION] = g_param_spec_object ("location",
                                               NULL, NULL,
                                               G_TYPE_FILE,
-                                              G_PARAM_READWRITE);
+                                              G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   props[PROP_STATE] = g_param_spec_enum ("state",
                                          NULL, NULL,
                                          GTR_TYPE_PO_STATE,
                                          GTR_PO_STATE_SAVED,
-                                         G_PARAM_READABLE);
+                                         G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPERTIES, props);
 }

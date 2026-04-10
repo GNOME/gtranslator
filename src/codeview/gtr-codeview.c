@@ -164,7 +164,7 @@ gtr_code_view_class_init (GtrCodeViewClass *klass)
 
   param = g_param_spec_object ("window", NULL, NULL,
                                GTR_TYPE_WINDOW,
-                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
+                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_property (object_class, PROP_WINDOW, param);
 }
