@@ -83,7 +83,7 @@ on_sort_order_changed (GSettings *settings, gchar *key, gpointer user_data)
       table, g_settings_get_enum (priv->ui_settings, GTR_SETTINGS_SORT_ORDER));
 }
 
-static gboolean
+static void
 scroll_to_selected (GtrMessageTable *table)
 {
   int selected = 0;
@@ -94,18 +94,16 @@ scroll_to_selected (GtrMessageTable *table)
       GTK_SINGLE_SELECTION (priv->selection));
 
   if (selected == GTK_INVALID_LIST_POSITION)
-    return FALSE;
+    return;
 
   gtk_list_view_scroll_to (GTK_LIST_VIEW (priv->messages), selected,
                            GTK_LIST_SCROLL_NONE, NULL);
-
-  return FALSE;
 }
 
 static void
 showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrMessageTable *table)
 {
-  g_idle_add ((GSourceFunc)scroll_to_selected, table);
+  g_idle_add_once ((GSourceOnceFunc)scroll_to_selected, table);
 }
 
 static void
