@@ -314,13 +314,13 @@ gtr_tab_autosave (GtrTab * tab)
 
   priv = gtr_tab_get_instance_private (tab);
   if (!(gtr_po_get_state (priv->po) == GTR_PO_STATE_MODIFIED))
-    return TRUE;
+    return G_SOURCE_CONTINUE;
 
   gtr_po_save_file (priv->po, &error);
   if (error)
     g_warning ("%s", error->message);
 
-  return TRUE;
+  return G_SOURCE_CONTINUE;
 }
 
 static void

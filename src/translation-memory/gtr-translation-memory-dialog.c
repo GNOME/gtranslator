@@ -159,7 +159,7 @@ add_to_database (gpointer data_pointer)
       location = (GFile *) l->data;
       po = gtr_po_new_from_file (location, &error);
       if (error)
-        return TRUE;
+        return G_SOURCE_CONTINUE;
 
       msg_list = gtr_po_get_messages (po);
 
@@ -168,7 +168,7 @@ add_to_database (gpointer data_pointer)
   else
     {
       gtk_widget_set_sensitive (data->add_database_button, TRUE);
-      return FALSE;
+      return G_SOURCE_REMOVE;
     }
 
   percentage =
@@ -184,7 +184,7 @@ add_to_database (gpointer data_pointer)
       gtk_progress_bar_set_fraction (data->progress, percentage);
     }
 
-  return TRUE;
+  return G_SOURCE_CONTINUE;
 }
 
 static void
