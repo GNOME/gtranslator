@@ -364,6 +364,8 @@ gtr_context_panel_constructed (GObject *object)
   GtrContextPanel *panel = GTR_CONTEXT_PANEL (object);
   GtrContextPanelPrivate *priv;
 
+  G_OBJECT_CLASS (gtr_context_panel_parent_class)->constructed (object);
+
   priv = gtr_context_panel_get_instance_private(panel);
 
   if (!priv->tab)
