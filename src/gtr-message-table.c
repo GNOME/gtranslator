@@ -133,7 +133,7 @@ gtr_message_table_init (GtrMessageTable *table)
       gtk_property_expression_new (GTR_TYPE_MSG, NULL, "position")));
   // Status column hidden for now
   priv->status_sorter = GTK_SORTER (gtk_string_sorter_new (
-      gtk_property_expression_new (GTR_TYPE_MSG, NULL, "status_str")));
+      gtk_property_expression_new (GTR_TYPE_MSG, NULL, "status-str")));
   // First column, original message
   priv->msg_sorter = GTK_SORTER (gtk_string_sorter_new (
       gtk_property_expression_new (GTR_TYPE_MSG, NULL, "original")));

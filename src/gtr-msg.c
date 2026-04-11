@@ -162,7 +162,7 @@ gtr_msg_class_init (GtrMsgClass * klass)
   properties[PROP_STATUS] =
     g_param_spec_enum ("status", NULL, NULL, GTR_TYPE_MSG_STATUS, GTR_MSG_STATUS_UNTRANSLATED, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
   properties[PROP_STATUS_STR] =
-    g_param_spec_string ("status_str", NULL, NULL, NULL, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
+    g_param_spec_string ("status-str", NULL, NULL, NULL, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 }

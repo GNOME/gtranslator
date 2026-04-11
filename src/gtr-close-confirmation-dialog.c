@@ -213,12 +213,12 @@ static void
   gobject_class->finalize = gtr_close_confirmation_dialog_finalize;
 
   props[PROP_UNSAVED_DOCUMENTS] =
-    g_param_spec_pointer ("unsaved_documents",
+    g_param_spec_pointer ("unsaved-documents",
                           NULL, NULL,
                           G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_LOGOUT_MODE] =
-    g_param_spec_boolean ("logout_mode",
+    g_param_spec_boolean ("logout-mode",
                           NULL, NULL,
                           FALSE,
                           G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
@@ -244,8 +244,8 @@ gtr_close_confirmation_dialog_new (GList * unsaved_documents,
   g_return_val_if_fail (unsaved_documents != NULL, NULL);
 
   dlg = GTK_WIDGET (g_object_new (GTR_TYPE_CLOSE_CONFIRMATION_DIALOG,
-                                  "unsaved_documents", unsaved_documents,
-                                  "logout_mode", logout_mode, NULL));
+                                  "unsaved-documents", unsaved_documents,
+                                  "logout-mode", logout_mode, NULL));
   g_return_val_if_fail (dlg != NULL, NULL);
   return dlg;
 }
