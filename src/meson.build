@@ -75,11 +75,9 @@ sources += gnome.genmarshal(
 
 enum_types = 'gtr-enum-types'
 
-sources += gnome.mkenums(
+sources += gnome.mkenums_simple(
   enum_types,
   sources: enum_headers,
-  c_template: enum_types + '.c.template',
-  h_template: enum_types + '.h.template',
 )
 
 resource_data = files(
