@@ -47,14 +47,6 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#ifdef ENABLE_INTROSPECTION
-#include <girepository.h>
-#endif
-
-#ifdef GDK_WINDOWING_X11
-#include <gdk/gdk.h>
-#endif
-
 struct _GtrApplication
 {
   AdwApplication base_instance;
