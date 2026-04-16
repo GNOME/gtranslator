@@ -22,35 +22,190 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-03-14 09:46+0000\n"
-"PO-Revision-Date: 2026-03-13 22:56-0300\n"
+"POT-Creation-Date: 2026-04-10 06:34+0000\n"
+"PO-Revision-Date: 2026-04-16 17:11-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
-"Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao/>\n"
+"Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 49.0\n"
+"X-Generator: Gtranslator 50.0\n"
 "X-Project-Style: gnome\n"
 "X-DL-Team: pt_BR\n"
 "X-DL-Module: gtranslator\n"
 "X-DL-Branch: master\n"
 "X-DL-Domain: po\n"
 "X-DL-State: Translating\n"
+"X-DL-VCS-Web: https://gitlab.gnome.org/GNOME/gtranslator/\n"
+"X-DL-Lang: pt_BR\n"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:7
-#: data/org.gnome.Gtranslator.desktop.in.in:2 src/gtr-actions-app.c:89
-#: src/gtr-application.c:513 src/gtr-window.c:206 src/gtr-window.c:452
+#: data/org.gnome.Gtranslator.desktop.in.in:2
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:7 src/gtr-actions-app.c:89
+#: src/gtr-application.c:515 src/gtr-window.c:206 src/gtr-window.c:452
 msgid "Translation Editor"
 msgstr "Editor de tradução"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:8
+#: data/org.gnome.Gtranslator.desktop.in.in:3
+msgid "PO File Editor"
+msgstr "Editor de arquivos PO"
+
 #: data/org.gnome.Gtranslator.desktop.in.in:4
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:8
 msgid "Translate apps in your language"
 msgstr "Traduza aplicativos para seu idioma"
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:10
+#: data/org.gnome.Gtranslator.desktop.in.in:14
+msgid "Gtranslator;Translation;Editor;Gettext;Write;"
+msgstr "Gtranslator;Tradução;Editor;Gettext;Escrever;"
+
+#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
+#: src/gtr-projects.ui:7 src/gtr-tab.ui:340
+msgid "New Window"
+msgstr "Nova janela"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:21
+msgid "Warn if file contains fuzzy translations"
+msgstr "Avisar se o arquivo PO contiver traduções aproximadas"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:22
+msgid ""
+"If true, warn the user when saving a PO translation file containing fuzzy "
+"strings."
+msgstr ""
+"Caso verdadeiro, avisa o usuário ao salvar um arquivo PO contendo mensagens "
+"aproximadas."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:29
+msgid "Whether to remove the obsolete entries upon saving"
+msgstr "Se deve-se remover as entradas obsoletas ao salvar"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:30
+msgid ""
+"If true, the obsolete entries will be removed from the file after saving"
+msgstr "Caso verdadeiro, as entradas obsoletas serão removidas ao salvar"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:36
+msgid "Auto save files"
+msgstr "Salvar automaticamente"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:37
+msgid "If true, automatically save files at specified intervals."
+msgstr ""
+"Caso verdadeiro, salva automaticamente os arquivos em intervalos "
+"especificados."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:43
+msgid "Auto save interval"
+msgstr "Intervalo de salvamento automático"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:44
+msgid "Interval in minutes at which to automatically save files."
+msgstr "Intervalo em minutos no qual salvar automaticamente os arquivos."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:50
+msgid "Create backup before saving"
+msgstr "Criar backup antes de salvar"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:51
+msgid "If true, create a backup copy of a file before saving it."
+msgstr ""
+"Caso verdadeiro, cria uma cópia de backup de um arquivo antes de salvá-lo."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:57
+msgid "Use profile values for header"
+msgstr "Usar valores do perfil no cabeçalho"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:58
+msgid ""
+"If true, overwrite the values in the PO header with those in the active "
+"profile."
+msgstr ""
+"Caso verdadeiro, sobrescreve os valores do cabeçalho PO com os valores do "
+"perfil ativo."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:65
+msgid "Omit credits in header"
+msgstr "Omitir créditos no cabeçalho"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:66
+msgid ""
+"If true, the 'author <email> year' comment won't be added to the PO header's "
+"copyright."
+msgstr ""
+"Se verdadeiro, o comentário “autor <e-mail>, ano” não será adicionado aos "
+"direitos autorais do cabeçalho do PO."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:75
+msgid "Highlight syntax in edit fields"
+msgstr "Destacar sintaxe nos campos de edição"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:76
+msgid "If true, apply syntax highlighting to strings in edit fields."
+msgstr ""
+"Caso verdadeiro, aplica o destaque de sintaxe às mensagens nos campos de "
+"edição."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:82
+msgid "Make whitespace visible"
+msgstr "Tornar visíveis os espaços em branco"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:83
+msgid "If true, display whitespace in strings as representative symbols."
+msgstr ""
+"Caso verdadeiro, exibe o espaço em branco em mensagens na forma de símbolos "
+"representativos."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:89
+msgid "Remove fuzzy status when message is changed"
+msgstr "Remover status de “aproximada” ao alterar a mensagem"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:90
+msgid "If true, remove fuzzy status from translations when they are changed."
+msgstr ""
+"Caso verdadeiro, remover o status de “aproximada” das traduções quando elas "
+"são alteradas."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:96
+msgid "Check spelling"
+msgstr "Verificar ortografia"
+
+# 'Se' estava correto, trocou-se por 'Caso' para padronizar com as mensagens anteriores.
+#: data/org.gnome.Gtranslator.gschema.xml.in:97
+msgid "If true, check the spelling of translated messages."
+msgstr "Caso verdadeiro, verifica a ortografia das mensagens traduzidas."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:108
+msgid "Message list sort order"
+msgstr "Ordem da lista de mensagens"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:109
+msgid ""
+"Sort order to use in the message list. Possible values are “status”, “id”, "
+"“original-text” and “translated-text”."
+msgstr ""
+"Ordem a ser usada na lista de mensagens. Os valores possíveis são “status”, "
+"“id” (índice), “original-text” (texto original) e “translated-text” (texto "
+"traduzido)."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:116
+msgid "Show ID column"
+msgstr "Mostrar coluna de ID"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:117
+msgid "If true, displays a column with the id of the message on the editor."
+msgstr "Se verdadeiro, mostra uma coluna com o ID da mensagem no editor."
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:128
+msgid "Window maximized"
+msgstr "Janela maximizada"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:129
+msgid "Window maximized state"
+msgstr "Estado de janela maximizada"
+
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:10
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
 "environment. It handles all forms of gettext po files and includes very "
@@ -67,7 +222,7 @@ msgstr ""
 "simplificada e a edição de mensagens e comentários de tradução tornou-se "
 "mais precisa."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:19
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:19
 msgid ""
 "Gtranslator includes also a plugin system with many interesting plugins like "
 "alternate language, insert tags, integration with subversion and a source "
@@ -77,162 +232,9 @@ msgstr ""
 "interessantes como idioma alternativo, inserir marcas, integração com "
 "subversion e um visualizador de código fonte."
 
-#: data/org.gnome.Gtranslator.appdata.xml.in.in:34
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:34
 msgid "Translator's main interface"
 msgstr "Interface principal do tradutor"
-
-#: data/org.gnome.Gtranslator.desktop.in.in:3
-msgid "PO File Editor"
-msgstr "Editor de arquivos PO"
-
-#: data/org.gnome.Gtranslator.desktop.in.in:14
-msgid "Gtranslator;Translation;Editor;Gettext;Write;"
-msgstr "Gtranslator;Tradução;Editor;Gettext;Escrever;"
-
-#: data/org.gnome.Gtranslator.desktop.in.in:19 src/gtr-dl-teams.ui:7
-#: src/gtr-projects.ui:7 src/gtr-tab.ui:340
-msgid "New Window"
-msgstr "Nova janela"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:22
-msgid "Warn if file contains fuzzy translations"
-msgstr "Avisar se o arquivo PO contiver traduções aproximadas"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:23
-msgid ""
-"If true, warn the user when saving a PO translation file containing fuzzy "
-"strings."
-msgstr ""
-"Caso verdadeiro, avisa o usuário ao salvar um arquivo PO contendo mensagens "
-"aproximadas."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:30
-msgid "Whether to remove the obsolete entries upon saving"
-msgstr "Se deve-se remover as entradas obsoletas ao salvar"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:31
-msgid ""
-"If true, the obsolete entries will be removed from the file after saving"
-msgstr "Caso verdadeiro, as entradas obsoletas serão removidas ao salvar"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:37
-msgid "Auto save files"
-msgstr "Salvar automaticamente"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:38
-msgid "If true, automatically save files at specified intervals."
-msgstr ""
-"Caso verdadeiro, salva automaticamente os arquivos em intervalos "
-"especificados."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:44
-msgid "Auto save interval"
-msgstr "Intervalo de salvamento automático"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:45
-msgid "Interval in minutes at which to automatically save files."
-msgstr "Intervalo em minutos no qual salvar automaticamente os arquivos."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:51
-msgid "Create backup before saving"
-msgstr "Criar backup antes de salvar"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:52
-msgid "If true, create a backup copy of a file before saving it."
-msgstr ""
-"Caso verdadeiro, cria uma cópia de backup de um arquivo antes de salvá-lo."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:58
-msgid "Use profile values for header"
-msgstr "Usar valores do perfil no cabeçalho"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:59
-msgid ""
-"If true, overwrite the values in the PO header with those in the active "
-"profile."
-msgstr ""
-"Caso verdadeiro, sobrescreve os valores do cabeçalho PO com os valores do "
-"perfil ativo."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:66
-msgid "Omit credits in header"
-msgstr "Omitir créditos no cabeçalho"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:67
-msgid ""
-"If true, the 'author <email> year' comment won't be added to the PO header's "
-"copyright."
-msgstr ""
-"Se verdadeiro, o comentário “autor <e-mail>, ano” não será adicionado aos "
-"direitos autorais do cabeçalho do PO."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:76
-msgid "Highlight syntax in edit fields"
-msgstr "Destacar sintaxe nos campos de edição"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:77
-msgid "If true, apply syntax highlighting to strings in edit fields."
-msgstr ""
-"Caso verdadeiro, aplica o destaque de sintaxe às mensagens nos campos de "
-"edição."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:83
-msgid "Make whitespace visible"
-msgstr "Tornar visíveis os espaços em branco"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:84
-msgid "If true, display whitespace in strings as representative symbols."
-msgstr ""
-"Caso verdadeiro, exibe o espaço em branco em mensagens na forma de símbolos "
-"representativos."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:90
-msgid "Remove fuzzy status when message is changed"
-msgstr "Remover status de “aproximada” ao alterar a mensagem"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:91
-msgid "If true, remove fuzzy status from translations when they are changed."
-msgstr ""
-"Caso verdadeiro, remover o status de “aproximada” das traduções quando elas "
-"são alteradas."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:97
-msgid "Check spelling"
-msgstr "Verificar ortografia"
-
-# 'Se' estava correto, trocou-se por 'Caso' para padronizar com as mensagens anteriores.
-#: data/org.gnome.Gtranslator.gschema.xml.in:98
-msgid "If true, check the spelling of translated messages."
-msgstr "Caso verdadeiro, verifica a ortografia das mensagens traduzidas."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:109
-msgid "Message list sort order"
-msgstr "Ordem da lista de mensagens"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:110
-msgid ""
-"Sort order to use in the message list. Possible values are “status”, “id”, "
-"“original-text” and “translated-text”."
-msgstr ""
-"Ordem a ser usada na lista de mensagens. Os valores possíveis são “status”, "
-"“id” (índice), “original-text” (texto original) e “translated-text” (texto "
-"traduzido)."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:117
-msgid "Show ID column"
-msgstr "Mostrar coluna de ID"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:118
-msgid "If true, displays a column with the id of the message on the editor."
-msgstr "Se verdadeiro, mostra uma coluna com o ID da mensagem no editor."
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:129
-msgid "Window maximized"
-msgstr "Janela maximizada"
-
-#: data/org.gnome.Gtranslator.gschema.xml.in:130
-msgid "Window maximized state"
-msgstr "Estado de janela maximizada"
 
 #: src/gtr-actions-app.c:86
 msgid ""
@@ -266,13 +268,13 @@ msgid "Could not update from template"
 msgstr "Não foi possível atualizar de um modelo"
 
 #: src/gtr-actions-file.c:98 src/gtr-actions-file.c:171
-#: src/gtr-actions-file.c:455 src/gtr-actions-file.c:477
-#: src/gtr-actions-file.c:516 src/gtr-actions-file.c:542
-#: src/gtr-actions-file.c:726 src/gtr-actions-file.c:769
-#: src/gtr-actions-file.c:927 src/gtr-dl-teams.c:165 src/gtr-dl-teams.c:227
-#: src/gtr-dl-teams.c:346 src/gtr-dl-teams.c:434 src/gtr-dl-teams.c:574
-#: src/gtr-dl-teams.c:585 src/gtr-dl-teams.c:597 src/gtr-dl-teams.c:628
-#: src/gtr-dl-teams.c:639 src/gtr-dl-teams.c:711 src/gtr-tab.c:349
+#: src/gtr-actions-file.c:452 src/gtr-actions-file.c:474
+#: src/gtr-actions-file.c:513 src/gtr-actions-file.c:539
+#: src/gtr-actions-file.c:722 src/gtr-actions-file.c:765
+#: src/gtr-actions-file.c:923 src/gtr-dl-teams.c:163 src/gtr-dl-teams.c:225
+#: src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:432 src/gtr-dl-teams.c:570
+#: src/gtr-dl-teams.c:581 src/gtr-dl-teams.c:593 src/gtr-dl-teams.c:624
+#: src/gtr-dl-teams.c:635 src/gtr-dl-teams.c:707 src/gtr-tab.c:354
 #: src/gtr-window.c:157 src/gtr-window.c:347
 msgid "OK"
 msgstr "OK"
@@ -316,48 +318,48 @@ msgstr "Selecione o modelo (.pot)"
 msgid "Gettext translation template (*.pot)"
 msgstr "Modelo de tradução gettext (*.pot)"
 
-#: src/gtr-actions-file.c:311
+#: src/gtr-actions-file.c:308
 msgid "Please save the current file before updating from a template."
 msgstr "Salva o arquivo atual antes de atualizar a partir de um modelo."
 
-#: src/gtr-actions-file.c:378 src/gtr-close-confirmation-dialog.c:338
+#: src/gtr-actions-file.c:375 src/gtr-close-confirmation-dialog.c:336
 msgid "Unsaved Changes"
 msgstr "Alterações não salvas"
 
-#: src/gtr-actions-file.c:383
+#: src/gtr-actions-file.c:380
 #, c-format
 msgid "Do you want to write all the changes done to %s?"
 msgstr "Você deseja gravar todas as alterações feitas a %s?"
 
-#: src/gtr-actions-file.c:386
+#: src/gtr-actions-file.c:383
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/gtr-actions-file.c:387
+#: src/gtr-actions-file.c:384
 msgid "Continue Without Saving"
 msgstr "Continuar sem salvar"
 
-#: src/gtr-actions-file.c:387
+#: src/gtr-actions-file.c:384
 msgid "Save and Open"
 msgstr "Salvar e abrir"
 
-#: src/gtr-actions-file.c:409
+#: src/gtr-actions-file.c:406
 msgid "Open file for translation"
 msgstr "Abrir arquivo para tradução"
 
-#: src/gtr-actions-file.c:453
+#: src/gtr-actions-file.c:450
 msgid "Could not save file"
 msgstr "Não foi possível salvar"
 
-#: src/gtr-actions-file.c:514
+#: src/gtr-actions-file.c:511
 msgid "This file has already been uploaded"
 msgstr "Esse arquivo já foi enviado"
 
-#: src/gtr-actions-file.c:530
+#: src/gtr-actions-file.c:527
 msgid "Couldn't upload the file"
 msgstr "Não foi possível enviar o arquivo"
 
-#: src/gtr-actions-file.c:533
+#: src/gtr-actions-file.c:530
 #, c-format
 msgid ""
 "%s\n"
@@ -370,15 +372,15 @@ msgstr ""
 "corretamente em seu perfil ou você não possui permissões para enviar esse "
 "módulo."
 
-#: src/gtr-actions-file.c:541
+#: src/gtr-actions-file.c:538
 msgid "The file has been uploaded!"
 msgstr "O arquivo já foi enviado!"
 
-#: src/gtr-actions-file.c:681
+#: src/gtr-actions-file.c:677
 msgid "Save file as…"
 msgstr "Salvar arquivo como…"
 
-#: src/gtr-application.c:312
+#: src/gtr-application.c:314
 msgid "Fixed plurals"
 msgstr "Plurais corrigidos"
 
@@ -396,19 +398,19 @@ msgstr "_Fechar sem salvar"
 msgid "_Save"
 msgstr "_Salvar"
 
-#: src/gtr-close-confirmation-dialog.c:295
+#: src/gtr-close-confirmation-dialog.c:293
 #, c-format
 msgid "Save the changes to document “%s” before closing?"
 msgstr "Salvar as alterações do documento “%s” antes de fechar?"
 
-#: src/gtr-close-confirmation-dialog.c:309
+#: src/gtr-close-confirmation-dialog.c:307
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] "Alterações em %d documento serão permanentemente perdidas."
 msgstr[1] "Alterações em %d documentos serão permanentemente perdidas."
 
-#: src/gtr-close-confirmation-dialog.c:316
+#: src/gtr-close-confirmation-dialog.c:314
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -424,63 +426,63 @@ msgstr[1] ""
 msgid "Edit Notes"
 msgstr "Editar notas"
 
-#: src/gtr-context.c:532
+#: src/gtr-context.c:529
 msgid "Open in Browser"
 msgstr "Abrir no navegador"
 
-#: src/gtr-context.ui:28
+#: src/gtr-context.ui:25
 msgid "Notes"
 msgstr "Notas"
 
-#: src/gtr-context.ui:32 src/gtr-preferences-dialog.c:268
+#: src/gtr-context.ui:29 src/gtr-preferences-dialog.c:269
 msgid "Edit"
 msgstr "Editar"
 
-#: src/gtr-context.ui:62
+#: src/gtr-context.ui:59
 msgid "Extracted comments"
 msgstr "Comentários extraídos"
 
-#: src/gtr-context.ui:87
+#: src/gtr-context.ui:84
 msgid "Paths"
 msgstr "Caminhos"
 
-#: src/gtr-dl-teams.c:226
+#: src/gtr-dl-teams.c:224
 msgid "Error loading module info"
 msgstr "Erro ao carregar informações do módulo"
 
-#: src/gtr-dl-teams.c:433
+#: src/gtr-dl-teams.c:431
 msgid "Error loading file info"
 msgstr "Erro ao carregar informações do arquivo"
 
-#: src/gtr-dl-teams.c:452
+#: src/gtr-dl-teams.c:450
 msgid "No file found"
 msgstr "Nenhum arquivo foi encontrado"
 
-#: src/gtr-dl-teams.c:461
+#: src/gtr-dl-teams.c:457
 msgid "No module state found."
 msgstr "Nenhum estado do módulo foi encontrado."
 
-#: src/gtr-dl-teams.c:573
+#: src/gtr-dl-teams.c:569
 msgid "Error loading file"
 msgstr "Erro ao carregar o arquivo"
 
-#: src/gtr-dl-teams.c:583 src/gtr-dl-teams.c:627
+#: src/gtr-dl-teams.c:579 src/gtr-dl-teams.c:623
 msgid "Error creating tmp file"
 msgstr "Erro ao criar o arquivo temporário"
 
-#: src/gtr-dl-teams.c:596
+#: src/gtr-dl-teams.c:592
 msgid "Error writing stream"
 msgstr "Erro ao escrever o fluxo"
 
-#: src/gtr-dl-teams.c:659
+#: src/gtr-dl-teams.c:655
 msgid "The file has been saved in your Downloads folder"
 msgstr "O arquivo foi salvo em sua pasta Downloads"
 
-#: src/gtr-dl-teams.c:710
+#: src/gtr-dl-teams.c:706
 msgid "Could not reserve module"
 msgstr "Não foi possível reservar o módulo"
 
-#: src/gtr-dl-teams.c:715
+#: src/gtr-dl-teams.c:711
 #, c-format
 msgid ""
 "%s\n"
@@ -491,7 +493,7 @@ msgstr ""
 "Talvez seu token do l10n.gnome.org não tenha sido configurado corretamente "
 "em seu perfil ou você não tenha permissões para reservar esse módulo."
 
-#: src/gtr-dl-teams.c:727
+#: src/gtr-dl-teams.c:723
 msgid "The file has been successfully reserved"
 msgstr "O arquivo foi reservado com sucesso"
 
@@ -567,6 +569,13 @@ msgstr "Modelo de catálogo de mensagens"
 msgid "All files"
 msgstr "Todos os arquivos"
 
+#: src/gtr-greeter.c:215 src/gtr-profile-dialog.c:127
+#, c-format
+msgid "GNOME Damned Lies integration token, go to your profile in %s to get it"
+msgstr ""
+"Token de integração do GNOME Damned Lies, acesse seu perfil em %s para obtê-"
+"lo"
+
 #: src/gtr-greeter.ui:5 src/gtr-greeter.ui:39
 msgid "Welcome to Translation Editor"
 msgstr "Seja bem-vindo ao Editor de tradução"
@@ -595,7 +604,7 @@ msgstr "Criar perfil"
 msgid "Profile Information"
 msgstr "Informações do perfil"
 
-#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:130 src/gtr-profile-dialog.ui:54
+#: src/gtr-greeter.ui:62 src/gtr-greeter.ui:129 src/gtr-profile-dialog.ui:54
 msgid "Profile name"
 msgstr "Nome do perfil"
 
@@ -623,51 +632,43 @@ msgstr "_E-mail da equipe de tradução"
 msgid "Damned Lies Integration"
 msgstr "Integração com Damned Lies"
 
-#: src/gtr-greeter.ui:95 src/gtr-profile-dialog.ui:89
-msgid ""
-"GNOME Damned Lies integration token, go to your profile in https://"
-"l10n.gnome.org/ to get it"
-msgstr ""
-"Token de integração do GNOME Damned Lies, para obtê-lo dirija-se a seu "
-"perfil em https://l10n.gnome.org/"
-
-#: src/gtr-greeter.ui:98 src/gtr-profile-dialog.ui:94
+#: src/gtr-greeter.ui:97 src/gtr-profile-dialog.ui:93
 msgid "_Damned Lies auth token"
 msgstr "Token de autenticação _Damned Lies"
 
-#: src/gtr-greeter.ui:119 src/gtr-greeter.ui:125
+#: src/gtr-greeter.ui:118 src/gtr-greeter.ui:124
 msgid "Confirmation"
 msgstr "Confirmação"
 
-#: src/gtr-greeter.ui:135
+#: src/gtr-greeter.ui:134
 msgid "Translator name"
 msgstr "Nome do tradutor"
 
-#: src/gtr-greeter.ui:140
+#: src/gtr-greeter.ui:139
 msgid "Translator email"
 msgstr "E-mail do tradutor"
 
-#: src/gtr-greeter.ui:145
+#: src/gtr-greeter.ui:144
 msgid "Team email"
 msgstr "E-mail da equipe"
 
-#: src/gtr-greeter.ui:150
+#: src/gtr-greeter.ui:149
 msgid "Language name"
 msgstr "Nome do idioma"
 
-#: src/gtr-greeter.ui:155 src/gtr-languages-fetcher.ui:14
+#: src/gtr-greeter.ui:154 src/gtr-languages-fetcher.ui:14
 msgid "Language code"
 msgstr "Código do idioma"
 
-#: src/gtr-greeter.ui:160 src/gtr-languages-fetcher.ui:34
+#: src/gtr-greeter.ui:159 src/gtr-languages-fetcher.ui:34
 msgid "Character set"
 msgstr "Conjunto de caracteres"
 
-#: src/gtr-greeter.ui:165 src/gtr-languages-fetcher.ui:54
+#: src/gtr-greeter.ui:164 src/gtr-languages-fetcher.ui:54
 msgid "Transfer encoding"
 msgstr "Codificação de transferência"
 
-#: src/gtr-greeter.ui:170
+#: src/gtr-greeter.ui:169
 msgid "Plural form"
 msgstr "Formas de plural"
 
@@ -740,7 +741,7 @@ msgstr "Data de _revisão do arquivo PO"
 msgid "Report message _bugs to"
 msgstr "Relatar e_rros de mensagens para"
 
-#: src/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:146
+#: src/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:145
 msgid "Comment"
 msgstr "Comentário"
 
@@ -788,28 +789,28 @@ msgstr "Mensagem original"
 msgid "Translated Message"
 msgstr "Mensagem traduzida"
 
-#: src/gtr-po.c:483
+#: src/gtr-po.c:465
 #, c-format
 msgid "The file is empty"
 msgstr "O arquivo está vazio"
 
-#: src/gtr-po.c:492
+#: src/gtr-po.c:474
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Falha ao abrir o arquivo “%s”: %s"
 
-#: src/gtr-po.c:563
+#: src/gtr-po.c:545
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Não foi possível converter do conjunto de caracteres “%s” para UTF-8"
 
-#: src/gtr-po.c:579 src/gtr-po.c:598
+#: src/gtr-po.c:561 src/gtr-po.c:580
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr ""
 "Não foi possível armazenar arquivo temporário para conversão da codificação"
 
-#: src/gtr-po.c:629
+#: src/gtr-po.c:611
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -820,17 +821,17 @@ msgstr ""
 "ferramentas de linha de comando msgconv ou iconv antes de abrir este arquivo "
 "com o Editor de Tradução do GNOME"
 
-#: src/gtr-po.c:701
+#: src/gtr-po.c:678
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "O gettext retornou uma lista nula de mensagens do domínio."
 
-#: src/gtr-po.c:751
+#: src/gtr-po.c:728
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Nenhuma mensagem obtida do interpretador."
 
-#: src/gtr-po.c:817
+#: src/gtr-po.c:794
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -841,22 +842,22 @@ msgstr ""
 "Os arquivos POT são criados no processo de compilação.\n"
 "Seu arquivo deveria ser nomeado como “%s.po”."
 
-#: src/gtr-po.c:847
+#: src/gtr-po.c:824
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "O arquivo %s é somente-leitura, e não pode ser sobrescrito"
 
-#: src/gtr-po.c:866 src/gtr-po.c:1409
+#: src/gtr-po.c:843 src/gtr-po.c:1389
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Há um erro no arquivo PO: %s"
 
-#: src/gtr-po.c:877
+#: src/gtr-po.c:854
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Houve um erro ao escrever o arquivo PO: %s"
 
-#: src/gtr-preferences-dialog.c:272
+#: src/gtr-preferences-dialog.c:273
 msgid "Delete"
 msgstr "Excluir"
 
@@ -1050,44 +1051,44 @@ msgstr "Texto original"
 msgid "Translated text"
 msgstr "Texto traduzido"
 
-#: src/gtr-tab.c:346
+#: src/gtr-tab.c:351
 msgid "There is an error in the message"
 msgstr "Há um erro na mensagem"
 
-#: src/gtr-tab.c:565 src/gtr-tab.c:708
+#: src/gtr-tab.c:570 src/gtr-tab.c:707
 msgid "fuzzy"
 msgstr "aproximada"
 
-#: src/gtr-tab.c:738
+#: src/gtr-tab.c:737
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1299
+#: src/gtr-tab.c:1268
 msgid "Path:"
 msgstr "Caminho:"
 
-#: src/gtr-tab.c:1549
+#: src/gtr-tab.c:1518
 msgid "Copied original to clipboard"
 msgstr "Copiado o original para a área de transferência"
 
-#: src/gtr-tab.c:1988
+#: src/gtr-tab.c:1956
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Traduzidas: %0.2f%%"
 
-#: src/gtr-tab.c:1989
+#: src/gtr-tab.c:1957
 #, c-format
 msgid "Translated: %d"
 msgstr "Traduzidas: %d"
 
-#: src/gtr-tab.c:1990
+#: src/gtr-tab.c:1958
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Não traduzidas: %d"
 
-#: src/gtr-tab.c:1991
+#: src/gtr-tab.c:1959
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Aproximadas: %d"
@@ -1169,11 +1170,11 @@ msgstr "Ferramentas avançadas"
 msgid "Fix plural messages"
 msgstr "Corrigir mensagens com plural"
 
-#: src/gtr-upload-dialog.c:198
+#: src/gtr-upload-dialog.c:197
 msgid "Uploading..."
 msgstr "Enviando…"
 
-#: src/gtr-upload-dialog.c:204
+#: src/gtr-upload-dialog.c:203
 msgid "Upload"
 msgstr "Enviar"
 
@@ -1402,20 +1403,20 @@ msgstr "Usar apenas arquivos com esse nome"
 msgid "_Add to Database"
 msgstr "_Adicionar ao banco de dados"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:5
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:5
 msgid "PO directory"
 msgstr "Diretório PO"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:6
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:6
 msgid "Directory containing PO files to add to the translation memory."
 msgstr ""
 "Diretório contendo arquivos PO a serem adicionados à memória de tradução."
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:12
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:12
 msgid "Restrict search by filename"
 msgstr "Restringir a pesquisa por nome de arquivo"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:13
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:13
 msgid ""
 "If true, only include files with a specified filename when searching the "
 "translation memory."
@@ -1423,21 +1424,21 @@ msgstr ""
 "Caso verdadeiro, inclui apenas arquivos com um determinado nome ao pesquisar "
 "a memória de tradução."
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:20
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:20
 msgid "Filename to restrict search to"
 msgstr "Restringir a pesquisa ao nome de arquivo"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:21
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:21
 msgid ""
 "Filename to which searching of the translation memory should be restricted."
 msgstr ""
 "Nome de arquivo ao qual a pesquisa de memória de tradução deve ser restrita."
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:28
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:28
 msgid "Maximum number of missing words"
 msgstr "Número máximo de palavras ausentes"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:29
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:29
 msgid ""
 "Maximum number of words that can be missing from a message displayed as a "
 "match by the translation memory."
@@ -1445,11 +1446,11 @@ msgstr ""
 "Número máximo de palavras que podem estar ausentes em uma mensagem exibida "
 "como uma ocorrência pela memória de tradução."
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:36
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:36
 msgid "Maximum difference in message length"
 msgstr "Diferença máxima de comprimento das mensagens"
 
-#: src/translation-memory/org.gnome.gtranslator.plugins.translation-memory.gschema.xml.in:37
+#: src/translation-memory/org.gnome.Gtranslator.plugins.translation-memory.gschema.xml.in:37
 msgid ""
 "Maximum difference in length between messages displayed as matches by the "
 "translation memory."
