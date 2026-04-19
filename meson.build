@@ -79,7 +79,6 @@ assert(cc.has_function('strerror'), '"strerror" not found')
 common_flags = ['-DHAVE_CONFIG_H']
 
 if gtr_debug
-  common_flags += ['-DG_DISABLE_CAST_CHECKS']
   test_cflags = [
     '-fno-strict-aliasing',
     '-Wno-missing-include-dirs',
