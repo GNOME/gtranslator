@@ -110,7 +110,6 @@ if gtr_debug
 else
   common_flags += [
     '-DG_DISABLE_ASSERT',
-    #'-DG_DISABLE_CHECKS',
     '-DG_DISABLE_CAST_CHECKS',
   ]
 endif
