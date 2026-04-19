@@ -82,10 +82,7 @@ if gtr_debug
   common_flags += ['-DG_DISABLE_CAST_CHECKS']
   test_cflags = [
     '-fno-strict-aliasing',
-    '-Wno-c++11-extensions',
     '-Wno-missing-include-dirs',
-    '-Wno-typedef-redefinition',
-    '-Wno-tautological-constant-out-of-range-compare',
     '-Wduplicated-branches',
     '-Wduplicated-cond',
     '-Wformat=2',
