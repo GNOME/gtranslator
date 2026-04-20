@@ -103,8 +103,8 @@ ensure_user_config_dir (void)
 }
 
 static int
-handle_local_options_cb (GApplication *application, GVariantDict *options,
-                         gpointer user_data)
+gtr_application_handle_local_options (GApplication *application,
+                                      GVariantDict *options)
 {
   if (g_variant_dict_contains (options, "new-window"))
     {
@@ -144,9 +144,6 @@ gtr_application_init (GtrApplication *application)
                              { NULL } };
 
   g_application_add_main_option_entries (G_APPLICATION (application), options);
-
-  g_signal_connect (application, "handle-local-options",
-                    G_CALLBACK (handle_local_options_cb), NULL);
 
   /* Creating config folder */
   ensure_user_config_dir (); /* FIXME: is this really needed ? */
@@ -639,6 +636,7 @@ gtr_application_class_init (GtrApplicationClass *klass)
   application_class->open = gtr_application_open;
   application_class->activate = gtr_application_activate;
   application_class->shutdown = gtr_application_shutdown;
+  application_class->handle_local_options = gtr_application_handle_local_options;
 }
 
 GtrApplication *
