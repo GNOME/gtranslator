@@ -37,6 +37,8 @@ typedef struct
   GtkWidget *use_lang_profile_in_tm;
 
   GtrTranslationMemory *translation_memory;
+
+  guint add_to_db_id;
 } GtrTranslationMemoryDialogPrivate;
 
 struct _GtrTranslationMemoryDialog
@@ -89,6 +91,11 @@ select_directory_activated_cb (GtrTranslationMemoryDialog *dlg)
 static void
 gtr_translation_memory_dialog_finalize (GObject *object)
 {
+  GtrTranslationMemoryDialog *dlg = GTR_TRANSLATION_MEMORY_DIALOG (object);
+  GtrTranslationMemoryDialogPrivate *priv = gtr_translation_memory_dialog_get_instance_private (dlg);
+
+  g_clear_handle_id (&priv->add_to_db_id, g_source_remove);
+
   G_OBJECT_CLASS (gtr_translation_memory_dialog_parent_class)->finalize (object);
 }
 
@@ -134,6 +141,7 @@ typedef struct _IdleData
   GSList *list;
   GtkProgressBar *progress;
   GtrTranslationMemory *tm;
+  GtrTranslationMemoryDialog *this;
   GtkWidget *add_database_button;
 } IdleData;
 
@@ -234,11 +242,14 @@ scan_dir_task_ready_cb (GtrTranslationMemoryDialog *dlg,
                         GTask                      *task,
                         IdleData                   *data)
 {
-  data->list = g_task_propagate_pointer (task, NULL);
+  GtrTranslationMemoryDialogPrivate *priv;
 
-  g_idle_add_full (G_PRIORITY_HIGH_IDLE + 30,
-                   (GSourceFunc) add_to_database,
-                   data, (GDestroyNotify) destroy_idle_data);
+  priv = gtr_translation_memory_dialog_get_instance_private (data->this);
+
+  data->list = g_task_propagate_pointer (task, NULL);
+  priv->add_to_db_id = g_idle_add_full (G_PRIORITY_HIGH_IDLE + 30,
+                                        (GSourceFunc) add_to_database,
+                                        data, (GDestroyNotify) destroy_idle_data);
 }
 
 static void
@@ -254,6 +265,7 @@ launch_gtr_scan_dir_task (GtrTranslationMemoryDialog *dlg,
   idata->tm = priv->translation_memory;
   idata->progress = GTK_PROGRESS_BAR (priv->add_database_progressbar);
   idata->add_database_button = priv->add_database_button;
+  idata->this = dlg;
 
   gtk_progress_bar_pulse (idata->progress);
   gtk_widget_set_visible (priv->add_database_progressbar, TRUE);
