@@ -125,7 +125,7 @@ append_from_languages (GtrLanguagesFetcher *fetcher)
   g_autoptr (GHashTable) plurals = NULL;
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
 
-  plurals = g_hash_table_new (g_str_hash, g_int_equal);
+  plurals = g_hash_table_new_full (g_str_hash, g_int_equal, g_free, NULL);
 
   languages = gtr_language_get_languages ();
   languages = g_slist_sort ((GSList *)languages, compare_languages_code);
@@ -146,7 +146,7 @@ append_from_languages (GtrLanguagesFetcher *fetcher)
           value = g_hash_table_lookup (plurals, plural_form);
           if (value == NULL)
             {
-              g_hash_table_insert (plurals, (gchar *)plural_form, GINT_TO_POINTER (1));
+              g_hash_table_insert (plurals, g_strdup (plural_form), GINT_TO_POINTER (1));
               gtk_string_list_append (GTK_STRING_LIST (priv->plural_forms_store),
                                       plural_form);
             }
