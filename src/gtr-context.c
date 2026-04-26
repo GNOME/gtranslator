@@ -78,8 +78,10 @@ G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrContextPanel, gtr_context_panel, ADW_TYPE_B
 enum
 {
   PROP_0,
-  PROP_TAB
+  PROP_TAB,
+  N_PROPS
 };
+static GParamSpec *props[N_PROPS];
 
 /* Signals */
 enum
@@ -409,13 +411,13 @@ gtr_context_panel_class_init (GtrContextPanelClass * klass)
                   1,
                   GTR_TYPE_MSG);
 
-  g_object_class_install_property (object_class,
-                                   PROP_TAB,
-                                   g_param_spec_object ("tab",
-                                                        NULL, NULL,
-                                                        GTR_TYPE_TAB,
-                                                        G_PARAM_READWRITE |
-                                                        G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS));
+  props[PROP_TAB] =
+    g_param_spec_object ("tab",
+                         NULL, NULL,
+                         GTR_TYPE_TAB,
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  g_object_class_install_properties (object_class, N_PROPS, props);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/Gtranslator/gtr-context.ui");

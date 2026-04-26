@@ -47,8 +47,10 @@ struct _GtrCodeView
 enum
 {
   PROP_0,
-  PROP_WINDOW
+  PROP_WINDOW,
+  N_PROPS
 };
+static GParamSpec *props[N_PROPS];
 
 G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrCodeView, gtr_code_view, G_TYPE_OBJECT);
 
@@ -155,18 +157,18 @@ static void
 gtr_code_view_class_init (GtrCodeViewClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GParamSpec *param;
 
   object_class->finalize = gtr_code_view_finalize;
   object_class->dispose = gtr_code_view_dispose;
   object_class->get_property = gtr_code_view_get_property;
   object_class->set_property = gtr_code_view_set_property;
 
-  param = g_param_spec_object ("window", NULL, NULL,
-                               GTR_TYPE_WINDOW,
-                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS);
+  props[PROP_WINDOW] =
+    g_param_spec_object ("window", NULL, NULL,
+                         GTR_TYPE_WINDOW,
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS);
 
-  g_object_class_install_property (object_class, PROP_WINDOW, param);
+  g_object_class_install_properties (object_class, N_PROPS, props);
 }
 
 static void

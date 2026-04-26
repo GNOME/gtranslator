@@ -32,7 +32,9 @@ enum
 {
   PROP_0,
   PROP_MSG,
+  N_PROPS
 };
+static GParamSpec *props[N_PROPS];
 
 typedef struct
 {
@@ -182,12 +184,13 @@ gtr_message_table_row_class_init (GtrMessageTableRowClass * klass)
   object_class->set_property = gtr_message_table_row_set_property;
   object_class->get_property = gtr_message_table_row_get_property;
 
-  g_object_class_install_property (object_class,
-                                   PROP_MSG,
-                                   g_param_spec_object ("msg",
-                                                        NULL, NULL,
-                                                        GTR_TYPE_MSG,
-                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+  props[PROP_MSG] =
+    g_param_spec_object ("msg",
+                         NULL, NULL,
+                         GTR_TYPE_MSG,
+                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
+  g_object_class_install_properties (object_class, N_PROPS, props);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/Gtranslator/gtr-message-table-row.ui");
