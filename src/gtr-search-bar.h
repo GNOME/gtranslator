@@ -17,8 +17,8 @@
  */
 #pragma once
 
-#include <gtksourceview/gtksource.h>
 #include <adwaita.h>
+#include <gtksourceview/gtksource.h>
 
 G_BEGIN_DECLS
 

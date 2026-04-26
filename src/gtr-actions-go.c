@@ -20,9 +20,9 @@
 #include <config.h>
 #endif
 
-#include <gtk/gtk.h>
 #include <glib.h>
 #include <glib/gi18n.h>
+#include <gtk/gtk.h>
 
 #include "gtr-actions.h"
 #include "gtr-tab.h"

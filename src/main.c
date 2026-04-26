@@ -24,14 +24,15 @@
 #include <config.h>
 #endif
 
-#include "gtr-application.h"
-#include "gtr-dirs.h"
-
 #include <errno.h>
 #include <locale.h>
+
+#include <gio/gio.h>
 #include <glib.h>
 #include <glib/gi18n.h>
-#include <gio/gio.h>
+
+#include "gtr-application.h"
+#include "gtr-dirs.h"
 
 #ifdef G_OS_WIN32
 #define SAVE_DATADIR DATADIR

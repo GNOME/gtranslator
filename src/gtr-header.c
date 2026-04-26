@@ -25,16 +25,18 @@
 #include <config.h>
 #endif
 
-#include "gtr-application.h"
 #include "gtr-header.h"
-#include "gtr-settings.h"
-#include "gtr-profile.h"
-#include "gtr-profile-manager.h"
-#include "gtr-utils.h"
 
-#include <glib.h>
-#include <glib-object.h>
 #include <string.h>
+
+#include <glib-object.h>
+#include <glib.h>
+
+#include "gtr-application.h"
+#include "gtr-profile-manager.h"
+#include "gtr-profile.h"
+#include "gtr-settings.h"
+#include "gtr-utils.h"
 
 typedef struct
 {

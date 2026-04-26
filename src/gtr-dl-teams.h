@@ -18,8 +18,8 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
 #include <adwaita.h>
+#include <gtk/gtk.h>
 
 #include "gtr-window.h"
 

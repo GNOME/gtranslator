@@ -24,11 +24,12 @@
 #include <config.h>
 #endif
 
+#include <string.h>
+
 #include <adwaita.h>
 #include <gio/gio.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <string.h>
 
 #include "gtr-actions.h"
 #include "gtr-application.h"

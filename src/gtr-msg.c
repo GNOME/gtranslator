@@ -25,13 +25,14 @@
 #endif
 
 #include "gtr-msg.h"
-#include "gtr-enum-types.h"
 
-#include <glib.h>
+#include <gettext-po.h>
 #include <glib-object.h>
+#include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <gettext-po.h>
+
+#include "gtr-enum-types.h"
 
 typedef struct
 {

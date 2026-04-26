@@ -28,16 +28,17 @@
 #endif
 
 #include <string.h>
-#include <glib/gi18n.h>
+
 #include <gdk/gdkkeysyms.h>
+#include <glib/gi18n.h>
 #include <gtksourceview/gtksource.h>
 
 #include "gtr-actions.h"
 #include "gtr-msg.h"
+#include "gtr-search-bar.h"
 #include "gtr-utils.h"
 #include "gtr-view.h"
 #include "gtr-window.h"
-#include "gtr-search-bar.h"
 
 
 #define GTR_LAST_SEARCH_DATA_KEY	"gtr-last-search-data-key"

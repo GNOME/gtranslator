@@ -26,25 +26,27 @@
 #include <config.h>
 #endif
 
+#include "gtr-preferences-dialog.h"
+
+#include <string.h>
+
+#include <gio/gio.h>
+#include <glib-object.h>
+#include <glib.h>
+#include <glib/gi18n.h>
+#include <gtk/gtk.h>
+#include <gtksourceview/gtksource.h>
+
 #include "gtr-actions-app.h"
 #include "gtr-application.h"
 #include "gtr-dirs.h"
-#include "gtr-preferences-dialog.h"
-#include "gtr-settings.h"
-#include "gtr-profile.h"
-#include "gtr-profile-manager.h"
-#include "gtr-utils.h"
-#include "gtr-profile-dialog.h"
 #include "gtr-po.h"
+#include "gtr-profile-dialog.h"
+#include "gtr-profile-manager.h"
+#include "gtr-profile.h"
+#include "gtr-settings.h"
 #include "gtr-utils.h"
-
-#include <glib.h>
-#include <glib/gi18n.h>
-#include <glib-object.h>
-#include <gio/gio.h>
-#include <gtk/gtk.h>
-#include <string.h>
-#include <gtksourceview/gtksource.h>
+#include "gtr-utils.h"
 
 typedef struct
 {

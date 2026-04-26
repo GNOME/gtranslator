@@ -31,26 +31,27 @@
 #include <config.h>
 #endif
 
-#include "gtr-application.h"
-#include "gtr-file-dialogs.h"
 #include "gtr-po.h"
-#include "gtr-msg.h"
-#include "gtr-enum-types.h"
-#include "gtr-profile.h"
-#include "gtr-profile-manager.h"
-#include "gtr-utils.h"
-#include "gtr-message-container.h"
-#include "gtr-preferences-dialog.h"
 
-#include <string.h>
 #include <errno.h>
+#include <string.h>
 
-#include <glib.h>
-#include <glib-object.h>
-#include <glib/gi18n.h>
-#include <gtk/gtk.h>
 #include <gettext-po.h>
 #include <gio/gio.h>
+#include <glib-object.h>
+#include <glib.h>
+#include <glib/gi18n.h>
+#include <gtk/gtk.h>
+
+#include "gtr-application.h"
+#include "gtr-enum-types.h"
+#include "gtr-file-dialogs.h"
+#include "gtr-message-container.h"
+#include "gtr-msg.h"
+#include "gtr-preferences-dialog.h"
+#include "gtr-profile-manager.h"
+#include "gtr-profile.h"
+#include "gtr-utils.h"
 
 static void gtr_po_message_container_init (GtrMessageContainerInterface *iface);
 

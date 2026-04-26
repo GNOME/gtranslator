@@ -24,33 +24,32 @@
 #include <config.h>
 #endif
 
-#include "gtr-actions.h"
-#include "gtr-application.h"
-#include "gtr-dirs.h"
-#include "gtr-header.h"
-#include "gtr-msg.h"
-#include "gtr-tab.h"
-#include "gtr-po.h"
-#include "gtr-projects.h"
-#include "gtr-dl-teams.h"
-#include "gtr-settings.h"
-#include "gtr-utils.h"
 #include "gtr-window.h"
-#include "gtr-profile-manager.h"
-#include "gtr-greeter.h"
-
-#include "translation-memory/gtr-translation-memory.h"
-#include "translation-memory/gtr-translation-memory-dialog.h"
-#include "translation-memory/gda/gtr-gda.h"
-
-#include "codeview/gtr-codeview.h"
 
 #include <adwaita.h>
-#include <glib.h>
 #include <glib-object.h>
+#include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
+
+#include "codeview/gtr-codeview.h"
+#include "gtr-actions.h"
+#include "gtr-application.h"
+#include "gtr-dirs.h"
+#include "gtr-dl-teams.h"
+#include "gtr-greeter.h"
+#include "gtr-header.h"
+#include "gtr-msg.h"
+#include "gtr-po.h"
+#include "gtr-profile-manager.h"
+#include "gtr-projects.h"
+#include "gtr-settings.h"
+#include "gtr-tab.h"
+#include "gtr-utils.h"
+#include "translation-memory/gda/gtr-gda.h"
+#include "translation-memory/gtr-translation-memory-dialog.h"
+#include "translation-memory/gtr-translation-memory.h"
 
 #define GTR_STOCK_FUZZY_NEXT "gtranslator-fuzzy-next"
 #define GTR_STOCK_FUZZY_PREV "gtranslator-fuzzy-prev"

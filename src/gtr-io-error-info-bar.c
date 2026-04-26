@@ -18,13 +18,14 @@
  */
 
 #include "gtr-io-error-info-bar.h"
-#include "gtr-utils.h"
-#include "gtr-tab.h"
-#include "gtr-window.h"
 
 #include <glib.h>
-#include <gtk/gtk.h>
 #include <glib/gi18n.h>
+#include <gtk/gtk.h>
+
+#include "gtr-tab.h"
+#include "gtr-utils.h"
+#include "gtr-window.h"
 
 static GArray * msg_queue_arr = NULL;
 

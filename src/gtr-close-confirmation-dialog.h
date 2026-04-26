@@ -26,9 +26,9 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <glib.h>
 #include <gtk/gtk.h>
-#include <adwaita.h>
 
 #include "gtr-po.h"
 

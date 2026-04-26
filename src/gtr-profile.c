@@ -20,12 +20,13 @@
  *   Ignacio Casal Quinteiro <icq@gnome.org>
  */
 
-#include "gtr-application.h"
 #include "gtr-profile.h"
-#include "gtr-preferences-dialog.h"
-#include "gtr-utils.h"
 
 #include <glib.h>
+
+#include "gtr-application.h"
+#include "gtr-preferences-dialog.h"
+#include "gtr-utils.h"
 
 typedef struct
 {

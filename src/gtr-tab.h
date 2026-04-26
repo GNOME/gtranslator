@@ -22,16 +22,16 @@
 #pragma once
 
 #include <adwaita.h>
-#include <glib.h>
 #include <glib-object.h>
+#include <glib.h>
 #include <gtk/gtk.h>
 
 #include "gtr-context.h"
-#include "gtr-msg.h"
 #include "gtr-message-table.h"
+#include "gtr-msg.h"
 #include "gtr-po.h"
-#include "gtr-view.h"
 #include "gtr-search-bar.h"
+#include "gtr-view.h"
 
 G_BEGIN_DECLS
 

@@ -20,13 +20,14 @@
 #include <config.h>
 #endif
 
+#include "gtr-greeter.h"
+
 #include <glib/gi18n.h>
 
-#include "gtr-greeter.h"
-#include "gtr-window.h"
-#include "gtr-profile.h"
-#include "gtr-profile-manager.h"
 #include "gtr-languages-fetcher.h"
+#include "gtr-profile-manager.h"
+#include "gtr-profile.h"
+#include "gtr-window.h"
 
 typedef struct
 {

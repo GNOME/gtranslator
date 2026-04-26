@@ -26,19 +26,7 @@
 #include <config.h>
 #endif
 
-#include "gtr-actions-app.h"
-#include "gtr-actions.h"
 #include "gtr-application.h"
-#include "gtr-dirs.h"
-#include "gtr-language.h"
-#include "gtr-preferences-dialog.h"
-#include "gtr-resources.h"
-#include "gtr-translation-memory-resources.h"
-#include "gtr-search-bar.h"
-#include "gtr-settings.h"
-#include "gtr-tab.h"
-#include "gtr-utils.h"
-#include "gtr-window.h"
 
 #include <adwaita.h>
 #include <gio/gio.h>
@@ -46,6 +34,19 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+
+#include "gtr-actions-app.h"
+#include "gtr-actions.h"
+#include "gtr-dirs.h"
+#include "gtr-language.h"
+#include "gtr-preferences-dialog.h"
+#include "gtr-resources.h"
+#include "gtr-search-bar.h"
+#include "gtr-settings.h"
+#include "gtr-tab.h"
+#include "gtr-translation-memory-resources.h"
+#include "gtr-utils.h"
+#include "gtr-window.h"
 
 struct _GtrApplication
 {

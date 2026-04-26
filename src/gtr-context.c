@@ -21,15 +21,16 @@
 #endif
 
 #include "gtr-context.h"
+
+#include <glib-object.h>
+#include <glib.h>
+#include <glib/gi18n.h>
+#include <gtk/gtk.h>
+
 #include "gtr-tab.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
 #include "translation-memory/gtr-translation-memory-ui.h"
-
-#include <glib.h>
-#include <glib/gi18n.h>
-#include <glib-object.h>
-#include <gtk/gtk.h>
 
 /*
  * Main object structure

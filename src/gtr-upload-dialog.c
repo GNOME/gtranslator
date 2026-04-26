@@ -23,12 +23,14 @@
 #endif
 
 #include "gtr-upload-dialog.h"
-#include "gtr-utils.h"
 
 #include <string.h>
+
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+
+#include "gtr-utils.h"
 
 typedef struct
 {

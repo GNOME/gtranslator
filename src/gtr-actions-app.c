@@ -24,15 +24,15 @@
 #endif
 
 #include "gtr-actions-app.h"
-#include "gtr-dirs.h"
-#include "gtr-utils.h"
-#include "gtr-window.h"
-#include "gtr-build-ident.h"
 
 #include <glib.h>
 #include <glib/gi18n.h>
-
 #include <gtk/gtk.h>
+
+#include "gtr-build-ident.h"
+#include "gtr-dirs.h"
+#include "gtr-utils.h"
+#include "gtr-window.h"
 
 /* Show the user's guide for gtranslator */
 void

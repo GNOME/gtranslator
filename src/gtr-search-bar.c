@@ -18,13 +18,14 @@
 
 #include "config.h"
 
+#include "gtr-search-bar.h"
+
 #include <glib/gi18n.h>
 
-#include "gtr-search-bar.h"
 #include "gtr-actions.h"
 #include "gtr-tab.h"
-#include "gtr-window.h"
 #include "gtr-utils.h"
+#include "gtr-window.h"
 
 struct _GtrSearchBar
 {

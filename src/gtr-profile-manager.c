@@ -18,14 +18,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "gtr-dirs.h"
-#include "gtr-marshal.h"
 #include "gtr-profile-manager.h"
-#include "gtr-profile.h"
 
 #include <libxml/tree.h>
 #include <libxml/xmlreader.h>
 #include <libxml/xmlsave.h>
+
+#include "gtr-dirs.h"
+#include "gtr-marshal.h"
+#include "gtr-profile.h"
 
 typedef struct
 {

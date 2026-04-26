@@ -25,20 +25,20 @@
 #include <config.h>
 #endif
 
+#include "gtr-view.h"
+
 #include <string.h>
 
+#include <glib-object.h>
+#include <glib.h>
+#include <glib/gi18n.h>
+#include <gtk/gtk.h>
+#include <gtksourceview/gtksource.h>
+
+#include "gtr-application.h"
 #include "gtr-dirs.h"
 #include "gtr-settings.h"
 #include "gtr-utils.h"
-#include "gtr-view.h"
-#include "gtr-application.h"
-
-#include <glib.h>
-#include <glib/gi18n.h>
-#include <glib-object.h>
-#include <gtk/gtk.h>
-
-#include <gtksourceview/gtksource.h>
 #ifdef LIBSPELL
 #include <libspelling.h>
 #endif

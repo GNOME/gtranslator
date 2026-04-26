@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include <glib.h>
 #include <glib-object.h>
+#include <glib.h>
 
 #include "gtr-msg.h"
 #include "gtr-profile.h"

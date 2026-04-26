@@ -20,11 +20,12 @@
 #include <config.h>
 #endif
 
+#include "gtr-lang-combo-row.h"
+
 #include <glib/gi18n.h>
 
-#include "gtr-language.h"
-#include "gtr-lang-combo-row.h"
 #include "gtr-drop-down-option.h"
+#include "gtr-language.h"
 
 typedef struct
 {

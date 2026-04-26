@@ -19,15 +19,17 @@
 #include <config.h>
 #endif
 
-#include <sqlite3.h>
 #include "gtr-gda.h"
-#include "gtr-translation-memory.h"
-#include "gtr-dirs.h"
-#include "gda-utils.h"
 
-#include <glib.h>
-#include <glib-object.h>
 #include <string.h>
+
+#include <glib-object.h>
+#include <glib.h>
+#include <sqlite3.h>
+
+#include "gda-utils.h"
+#include "gtr-dirs.h"
+#include "gtr-translation-memory.h"
 
 G_DEFINE_QUARK (gtr_gda_error, gtr_gda_error);
 

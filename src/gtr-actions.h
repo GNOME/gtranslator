@@ -18,12 +18,12 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
 #include <gio/gio.h>
-
-#include "gtr-window.h"
-#include "gtr-search-bar.h"
+#include <gtk/gtk.h>
 #include <libsoup/soup.h>
+
+#include "gtr-search-bar.h"
+#include "gtr-window.h"
 
 G_BEGIN_DECLS
 /*File*/

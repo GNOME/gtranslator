@@ -20,13 +20,13 @@
 #include <config.h>
 #endif
 
-#include <gtk/gtk.h>
-#include <gtksourceview/gtksource.h>
 #include <glib.h>
 #include <glib/gi18n.h>
+#include <gtk/gtk.h>
+#include <gtksourceview/gtksource.h>
 
-#include "gtr-header-dialog.h"
 #include "gtr-actions.h"
+#include "gtr-header-dialog.h"
 #include "gtr-msg.h"
 #include "gtr-po.h"
 #include "gtr-tab.h"

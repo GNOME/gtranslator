@@ -18,10 +18,10 @@
 
 #pragma once
 
-#include "gtr-tab.h"
-
 #include <glib.h>
 #include <gtk/gtk.h>
+
+#include "gtr-tab.h"
 
 G_BEGIN_DECLS
 

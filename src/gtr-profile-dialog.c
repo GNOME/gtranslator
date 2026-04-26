@@ -26,16 +26,18 @@
 #include <config.h>
 #endif
 
-#include "gtr-dirs.h"
 #include "gtr-profile-dialog.h"
-#include "gtr-profile.h"
-#include "gtr-utils.h"
-#include "gtr-languages-fetcher.h"
 
 #include <string.h>
+
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+
+#include "gtr-dirs.h"
+#include "gtr-languages-fetcher.h"
+#include "gtr-profile.h"
+#include "gtr-utils.h"
 
 typedef struct
 {

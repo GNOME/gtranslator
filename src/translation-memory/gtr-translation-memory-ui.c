@@ -22,20 +22,22 @@
 #include <config.h>
 #endif
 
-#include "gtr-application.h"
-#include "gtr-po.h"
-#include "gtr-translation-memory.h"
 #include "gtr-translation-memory-ui.h"
-#include "gtr-tab.h"
-#include "gtr-utils.h"
-#include "gtr-window.h"
 
 #include <string.h>
+
+#include <gdk/gdkkeysyms.h>
+#include <glib-object.h>
 #include <glib.h>
 #include <glib/gi18n.h>
-#include <glib-object.h>
 #include <gtk/gtk.h>
-#include <gdk/gdkkeysyms.h>
+
+#include "gtr-application.h"
+#include "gtr-po.h"
+#include "gtr-tab.h"
+#include "gtr-translation-memory.h"
+#include "gtr-utils.h"
+#include "gtr-window.h"
 
 #define MAX_ELEMENTS 9
 

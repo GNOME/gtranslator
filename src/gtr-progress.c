@@ -22,8 +22,8 @@
 
 #include "gtr-progress.h"
 
-#include <glib/gi18n.h>
 #include <adwaita.h>
+#include <glib/gi18n.h>
 
 typedef struct
 {

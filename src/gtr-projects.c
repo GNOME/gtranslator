@@ -20,10 +20,11 @@
 #include <config.h>
 #endif
 
-#include "gtr-actions.h"
 #include "gtr-projects.h"
-#include "gtr-window.h"
+
+#include "gtr-actions.h"
 #include "gtr-utils.h"
+#include "gtr-window.h"
 
 typedef struct
 {

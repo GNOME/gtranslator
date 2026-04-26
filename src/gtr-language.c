@@ -24,9 +24,10 @@
 #include <config.h>
 #endif
 
+#include "gtr-language.h"
+
 #include <glib/gi18n.h>
 
-#include "gtr-language.h"
 #include "gtr-dirs.h"
 
 #define GTR_PLURAL_FORMS_FILENAME	"gtr-plural-forms.ini"

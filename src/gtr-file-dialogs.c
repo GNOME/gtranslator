@@ -16,13 +16,14 @@
  *
  */
 
+#include "gtr-file-dialogs.h"
+
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#include "gtr-file-dialogs.h"
-#include "gtr-tab.h"
 #include "gtr-po.h"
+#include "gtr-tab.h"
 #include "gtr-window.h"
 
 /*

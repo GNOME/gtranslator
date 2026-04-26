@@ -24,14 +24,15 @@
 #include <config.h>
 #endif
 
-#include <glib/gi18n.h>
-#include <adwaita.h>
-
 #include "gtr-close-confirmation-dialog.h"
+
+#include <adwaita.h>
+#include <glib/gi18n.h>
+
 #include "gtr-application.h"
+#include "gtr-po.h"
 #include "gtr-utils.h"
 #include "gtr-window.h"
-#include "gtr-po.h"
 
 
 /* Properties */

@@ -32,7 +32,6 @@
 #endif
 
 #include "gtr-utils.h"
-#include "gtr-dirs.h"
 
 #include <string.h>
 
@@ -41,6 +40,8 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <libxml/parser.h>
+
+#include "gtr-dirs.h"
 
 static void
 on_uri_launch (GObject *object, GAsyncResult *result, gpointer user_data)

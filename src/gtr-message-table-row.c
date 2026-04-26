@@ -20,13 +20,14 @@
 #endif
 
 #include "gtr-message-table-row.h"
-#include "gtr-msg.h"
-#include "gtr-settings.h"
 
+#include <glib-object.h>
 #include <glib.h>
 #include <glib/gi18n.h>
-#include <glib-object.h>
 #include <gtk/gtk.h>
+
+#include "gtr-msg.h"
+#include "gtr-settings.h"
 
 enum
 {

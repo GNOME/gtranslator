@@ -21,18 +21,20 @@
 #include <config.h>
 #endif
 
+#include "gtr-header-dialog.h"
+
+#include <string.h>
+
+#include <glib-object.h>
 #include <glib.h>
 #include <glib/gi18n.h>
-#include <glib-object.h>
 #include <gtk/gtk.h>
-#include <string.h>
 
 #include "gtr-application.h"
 #include "gtr-dirs.h"
-#include "gtr-header-dialog.h"
-#include "gtr-utils.h"
-#include "gtr-settings.h"
 #include "gtr-po.h"
+#include "gtr-settings.h"
+#include "gtr-utils.h"
 
 typedef struct
 {

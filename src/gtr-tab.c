@@ -28,31 +28,32 @@
  *   Thomas Ziehmer <thomas@kabalak.net>
  */
 
-#include "gtr-profile.h"
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#include "gtr-application.h"
-#include "gtr-context.h"
-#include "gtr-io-error-info-bar.h"
-#include "gtr-msg.h"
 #include "gtr-tab.h"
-#include "gtr-po.h"
-#include "gtr-settings.h"
-#include "gtr-view.h"
-#include "gtr-dirs.h"
-#include "gtr-window.h"
-#include "gtr-progress.h"
-#include "gtr-actions.h"
-#include "gtr-utils.h"
-#include "gtr-profile-manager.h"
 
-#include <glib.h>
 #include <glib-object.h>
+#include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
+
+#include "gtr-actions.h"
+#include "gtr-application.h"
+#include "gtr-context.h"
+#include "gtr-dirs.h"
+#include "gtr-io-error-info-bar.h"
+#include "gtr-msg.h"
+#include "gtr-po.h"
+#include "gtr-profile-manager.h"
+#include "gtr-profile.h"
+#include "gtr-progress.h"
+#include "gtr-settings.h"
+#include "gtr-utils.h"
+#include "gtr-view.h"
+#include "gtr-window.h"
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #define MAX_PLURALS 6
 

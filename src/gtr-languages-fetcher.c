@@ -18,12 +18,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "gtr-dirs.h"
 #include "gtr-languages-fetcher.h"
+
+#include <string.h>
+
+#include "gtr-dirs.h"
+#include "gtr-lang-combo-row.h"
 #include "gtr-language.h"
 #include "gtr-utils.h"
-#include "gtr-lang-combo-row.h"
-#include <string.h>
 
 typedef struct
 {

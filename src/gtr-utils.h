@@ -22,9 +22,9 @@
 
 #pragma once
 
+#include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <libxml/tree.h>
-#include <gio/gio.h>
 
 xmlDocPtr gtr_xml_new_doc (const gchar * name);
 

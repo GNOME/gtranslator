@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
 #include <gio/gio.h>
+#include <gtk/gtk.h>
 
 void    gtr_scan_dir    (GFile         *dir,
                          GSList       **list,

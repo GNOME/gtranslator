@@ -27,17 +27,18 @@
 #include <config.h>
 #endif
 
-#include "gtr-message-table-row.h"
 #include "gtr-message-table.h"
-#include "gtr-msg.h"
-#include "gtr-po.h"
-#include "gtr-settings.h"
-#include "gtr-tab.h"
 
 #include <glib-object.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+
+#include "gtr-message-table-row.h"
+#include "gtr-msg.h"
+#include "gtr-po.h"
+#include "gtr-settings.h"
+#include "gtr-tab.h"
 
 enum
 {

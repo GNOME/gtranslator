@@ -20,18 +20,18 @@
 #include <config.h>
 #endif
 
-#include "gtr-actions.h"
 #include "gtr-dl-teams.h"
-#include "gtr-window.h"
-#include "gtr-utils.h"
-#include "gtr-profile-manager.h"
-#include "gtr-drop-down-option.h"
-#include <libsoup/soup.h>
-
-#include <json-glib/json-glib.h>
-#include <json-glib/json-gobject.h>
 
 #include <glib/gi18n.h>
+#include <json-glib/json-glib.h>
+#include <json-glib/json-gobject.h>
+#include <libsoup/soup.h>
+
+#include "gtr-actions.h"
+#include "gtr-drop-down-option.h"
+#include "gtr-profile-manager.h"
+#include "gtr-utils.h"
+#include "gtr-window.h"
 
 /* From https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/css-variables.html */
 #define GTR_ERROR_DARK "#ff938c"

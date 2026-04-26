@@ -22,10 +22,10 @@
 
 #pragma once
 
-#include <glib.h>
-#include <glib-object.h>
-#include <gtk/gtk.h>
 #include <adwaita.h>
+#include <glib-object.h>
+#include <glib.h>
+#include <gtk/gtk.h>
 
 #include "gtr-header.h"
 #include "gtr-tab.h"

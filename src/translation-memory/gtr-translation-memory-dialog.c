@@ -16,12 +16,13 @@
  */
 
 #include "gtr-translation-memory-dialog.h"
-#include "gtr-profile-manager.h"
-#include "gtr-translation-memory-utils.h"
-#include "gtr-po.h"
-#include "gtr-utils.h"
 
 #include <glib/gi18n.h>
+
+#include "gtr-po.h"
+#include "gtr-profile-manager.h"
+#include "gtr-translation-memory-utils.h"
+#include "gtr-utils.h"
 
 
 typedef struct

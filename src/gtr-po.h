@@ -23,11 +23,11 @@
 
 #pragma once
 
-#include <glib.h>
-#include <glib-object.h>
-#include <gtk/gtk.h>
 #include <gettext-po.h>
 #include <gio/gio.h>
+#include <glib-object.h>
+#include <glib.h>
+#include <gtk/gtk.h>
 
 #include "gtr-header.h"
 
