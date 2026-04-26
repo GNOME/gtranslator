@@ -53,3 +53,15 @@ check-potfiles:
     - curl --proto '=https' --tlsv1.2 -sSf -O
         https://gitlab.gnome.org/msandova/check-potfiles/-/raw/master/check_potfiles.py
     - python3 check_potfiles.py --directory src --directory data
+
+goblint:
+  stage: check
+  image:
+    name: "ghcr.io/bilelmoussaoui/goblint:latest"
+    entrypoint: [""]
+  script:
+    - goblint --format gitlab-codequality > goblint-codequality.json
+  artifacts:
+    expire_in: "1 week"
+    reports:
+      codequality: goblint-codequality.json
