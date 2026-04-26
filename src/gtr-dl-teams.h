@@ -21,6 +21,8 @@
 #include <gtk/gtk.h>
 #include <adwaita.h>
 
+#include "gtr-window.h"
+
 G_BEGIN_DECLS
 
 #define GTR_TYPE_DL_TEAMS (gtr_dl_teams_get_type())

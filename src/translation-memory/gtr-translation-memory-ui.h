@@ -25,6 +25,8 @@
 #include <gtk/gtk.h>
 #include <adwaita.h>
 
+#include "gtr-window.h"
+
 G_BEGIN_DECLS
 
 #define GTR_TYPE_TRANSLATION_MEMORY_UI          (gtr_translation_memory_ui_get_type ())
