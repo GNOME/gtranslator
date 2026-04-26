@@ -36,7 +36,7 @@ typedef enum
   GTR_SEARCH_DONT_SET_FLAGS = 1 << 0,
   GTR_SEARCH_ENTIRE_WORD = 1 << 1,
   GTR_SEARCH_CASE_SENSITIVE = 1 << 2
-} GtrSearchFlags;
+} G_GNUC_FLAG_ENUM GtrSearchFlags;
 
 /*
  * Main object structure
