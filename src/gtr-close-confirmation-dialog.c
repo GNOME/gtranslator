@@ -87,7 +87,7 @@ typedef struct
 
 G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrCloseConfirmationDialog,
                             gtr_close_confirmation_dialog,
-                            ADW_TYPE_ALERT_DIALOG)
+                            ADW_TYPE_ALERT_DIALOG);
 
 static void set_unsaved_document (GtrCloseConfirmationDialog *dlg,
                                   const GList * list);

@@ -65,7 +65,7 @@ G_DEFINE_FINAL_TYPE_WITH_CODE (GtrGda,
                                G_TYPE_OBJECT,
                                G_ADD_PRIVATE (GtrGda)
                                G_IMPLEMENT_INTERFACE (GTR_TYPE_TRANSLATION_MEMORY,
-                                                      gtr_translation_memory_iface_init))
+                                                      gtr_translation_memory_iface_init));
 
 static void
 bind_int (sqlite3_stmt *stmt, int idx, int value)

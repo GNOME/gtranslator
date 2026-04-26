@@ -48,7 +48,7 @@ struct _GtrTranslationMemoryDialog
 };
 
 G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrTranslationMemoryDialog,
-                                  gtr_translation_memory_dialog, ADW_TYPE_DIALOG)
+                                  gtr_translation_memory_dialog, ADW_TYPE_DIALOG);
 
 static void
 select_folder_cb (GtkFileDialog *dialog, GAsyncResult *res, gpointer user_data)

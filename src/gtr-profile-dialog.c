@@ -63,7 +63,7 @@ struct _GtrProfileDialog
 };
 
 G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrProfileDialog, gtr_profile_dialog,
-                                  ADW_TYPE_DIALOG)
+                                  ADW_TYPE_DIALOG);
 
 enum
 {

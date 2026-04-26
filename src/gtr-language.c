@@ -46,7 +46,7 @@ static GSList *languages = NULL;
 
 G_DEFINE_BOXED_TYPE (GtrLanguage, gtr_language,
                      gtr_language_copy,
-                     gtr_language_free)
+                     gtr_language_free);
 
 /* These are to make language bindings happy. Since Languages are
  * const, copy() just returns the same pointer and frees() doesn't
