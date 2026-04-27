@@ -94,7 +94,7 @@ static void
 load_plural_form (GtrLanguage *lang)
 {
   gchar *plural_form = NULL;
-  gchar **parts = NULL;
+  g_auto (GStrv) parts = NULL;
 
   plural_form = g_key_file_get_string (plurals_file, "Plural Forms", lang->code, NULL);
 
@@ -112,8 +112,6 @@ load_plural_form (GtrLanguage *lang)
     lang->plural_form = plural_form;
   else
     lang->plural_form = NULL;
-
-  g_strfreev (parts);
 }
 
 typedef enum
@@ -128,7 +126,7 @@ gtr_language_lazy_init (void)
 {
   gchar *filename;
   GKeyFile *lang_file;
-  gchar **langs;
+  g_auto (GStrv) langs = NULL;
   gchar *lang;
   gsize n, i;
 
@@ -168,7 +166,6 @@ gtr_language_lazy_init (void)
       load_plural_form (gtr_lang);
       languages = g_slist_prepend (languages, gtr_lang);
     }
-  g_strfreev (langs);
 
   languages = g_slist_reverse (languages);
 

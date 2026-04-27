@@ -697,7 +697,7 @@ update_comments (GtrHeader *header, const gchar *comments)
 {
   GtrProfile *active_profile;
   GString *new_comments;
-  gchar **comment_lines;
+  g_auto (GStrv) comment_lines = NULL;
   g_autofree char *translator = NULL;
   g_autofree char *email = NULL;
   g_autofree char *current_year;
@@ -736,17 +736,14 @@ update_comments (GtrHeader *header, const gchar *comments)
     {
       if (g_str_has_prefix (comment_lines[i], translator))
         {
-          gchar **year_array;
+          g_auto (GStrv) year_array = NULL;
           gint j;
 
           year_array = g_strsplit (comment_lines[i], ",", -1);
 
           // Empty comment
           if (year_array == NULL || year_array[0] == NULL)
-            {
-              g_strfreev (year_array);
-              continue;
-            }
+            continue;
 
           for (j = 1; year_array[j] != NULL; j++)
             {
@@ -769,11 +766,12 @@ update_comments (GtrHeader *header, const gchar *comments)
               // looking for YEAR1-YEAR2.
               if (g_strrstr (search, "-"))
                 {
-                  gchar **array = g_strsplit (search, "-", 2);
+                  g_auto (GStrv) array = NULL;
+
+                  array = g_strsplit (search, "-", 2);
                   if (*array[0] != '\0' && g_strcmp0 (array[0], current_year) != 0)
                     first_year = g_strdup (array[0]);
 
-                  g_strfreev (array);
                   break;
                 }
 
@@ -783,8 +781,6 @@ update_comments (GtrHeader *header, const gchar *comments)
                   break;
                 }
             }
-
-          g_strfreev (year_array);
         }
       else
         {
@@ -792,8 +788,6 @@ update_comments (GtrHeader *header, const gchar *comments)
           new_comments = g_string_append_c (new_comments, '\n');
         }
     }
-
-  g_strfreev (comment_lines);
 
   if (first_year && first_year != current_year)
     years = g_strdup_printf ("%s-%s.", first_year, current_year);

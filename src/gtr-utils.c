@@ -303,7 +303,7 @@ gchar *
 gtr_utils_get_filename (const gchar * filename)
 {
   gchar *new_str;
-  gchar **array;
+  g_auto (GStrv) array = NULL;
   int l = 0;
 
   array = g_strsplit (filename, ".", -1);
@@ -318,8 +318,6 @@ gtr_utils_get_filename (const gchar * filename)
       new_str = g_strjoin (".", tmp, array[i], NULL);
       g_free (tmp);
     }
-
-  g_strfreev (array);
 
   return new_str;
 }
