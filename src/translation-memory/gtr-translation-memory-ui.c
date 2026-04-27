@@ -149,7 +149,7 @@ static void
 showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
 {
   const gchar *msgid;
-  gint i;
+  int i = 0;
   GList *tm_list = NULL;
   GList *l = NULL;
   GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (tm_ui);
@@ -165,8 +165,7 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
 
   tm_list = gtr_translation_memory_lookup (priv->translation_memory, msgid);
 
-  i = 0;
-  for (l = tm_list; l && i < MAX_ELEMENTS; l = l->next)
+  for (l = tm_list; l && i < MAX_ELEMENTS; l = g_list_next (l), i++)
     {
       GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) l->data;
       g_autoptr(GtrTm) tm = gtr_tm_new (GDK_KEY_1 + i, match->level, match->match);
@@ -174,8 +173,6 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
       g_strv_builder_add (builder, match->match);
 
       g_list_store_append (priv->model, tm);
-
-      i++;
     }
 
   g_strfreev (priv->tm_list);
