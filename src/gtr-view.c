@@ -831,6 +831,9 @@ gtr_view_set_lang (GtrView *view, const char *lang)
 #ifdef LIBSPELL
   GtrViewPrivate *priv;
 
+  if (lang == NULL)
+    return;
+
   priv = gtr_view_get_instance_private (view);
   spelling_checker_set_language (priv->checker, lang);
 #endif
