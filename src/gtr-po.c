@@ -520,19 +520,19 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
   if (!_gtr_po_load (po, priv->location, error))
     return FALSE;
 
-  if (!utf8_valid &&
-      priv->header)
+  if (!utf8_valid && priv->header)
     {
-      gchar *charset = NULL;
+      g_autofree char *charset = NULL;
 
       if (priv->header)
         charset = gtr_header_get_charset (priv->header);
 
       if (charset && *charset && g_strcmp0 (charset, "UTF-8") != 0)
         {
-          GOutputStream *converter_stream, *stream;
-          GCharsetConverter *converter;
-          GIOStream *iostream;
+          g_autoptr (GOutputStream) converter_stream = NULL;
+          GOutputStream *stream;
+          g_autoptr (GCharsetConverter) converter = NULL;
+          g_autoptr (GFileIOStream) iostream = NULL;
           g_autoptr (GFile) tmp = NULL;
 
           /* Store UTF-8 converted file in $TMP */
@@ -545,13 +545,11 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
                            GTR_PO_ERROR_ENCODING,
                            _("Could not convert from charset “%s” to UTF-8"),
                            charset);
-              g_free (charset);
               return FALSE;
             }
 
-          g_free (charset);
           tmp = g_file_new_tmp ("gtranslator-XXXXXX.po",
-                                (GFileIOStream **) &iostream,
+                                &iostream,
                                 NULL);
 
           if (!tmp)
@@ -561,11 +559,10 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
                            GTR_PO_ERROR_ENCODING,
                            _("Could not store temporary "
                              "file for encoding conversion"));
-              g_object_unref (converter);
               return FALSE;
             }
 
-          stream = g_io_stream_get_output_stream (iostream);
+          stream = g_io_stream_get_output_stream (G_IO_STREAM (iostream));
           converter_stream =
             g_converter_output_stream_new (stream,
                                            G_CONVERTER (converter));
@@ -580,15 +577,8 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
                            GTR_PO_ERROR_ENCODING,
                            _("Could not store temporary "
                              "file for encoding conversion"));
-              g_object_unref (converter_stream);
-              g_object_unref (iostream);
-              g_object_unref (converter);
               return FALSE;
             }
-
-          g_object_unref (converter_stream);
-          g_object_unref (iostream);
-          g_object_unref (converter);
 
           /* Now load again the converted file */
           if (!_gtr_po_load (po, tmp, error))
