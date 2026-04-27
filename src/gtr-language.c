@@ -125,7 +125,7 @@ static void
 gtr_language_lazy_init (void)
 {
   gchar *filename;
-  GKeyFile *lang_file;
+  g_autoptr (GKeyFile) lang_file = NULL;
   g_auto (GStrv) langs = NULL;
   gchar *lang;
   gsize n, i;
@@ -171,7 +171,6 @@ gtr_language_lazy_init (void)
 
   /* free the file, not needed anymore */
   g_key_file_free (plurals_file);
-  g_key_file_free (lang_file);
 
   initialized = TRUE;
 }

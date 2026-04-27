@@ -93,9 +93,8 @@ gtr_lang_combo_row_init (GtrLangComboRow *self)
   for (o = langs; o != NULL; o = g_slist_next (o))
     {
       const char *lang = (char *)o->data;
-      GtrDropDownOption *option = gtr_drop_down_option_new (lang, NULL);
+      g_autoptr (GtrDropDownOption) option = gtr_drop_down_option_new (lang, NULL);
       g_list_store_append (priv->model, option);
-      g_object_unref (option);
     }
 
   if (langs)
