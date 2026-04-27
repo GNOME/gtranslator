@@ -700,9 +700,9 @@ update_comments (GtrHeader *header, const gchar *comments)
   gchar **comment_lines;
   g_autofree char *translator = NULL;
   g_autofree char *email = NULL;
-  gchar *current_year;
-  gchar *first_year = NULL;
-  gchar *years = NULL;
+  g_autofree char *current_year;
+  g_autofree char *first_year = NULL;
+  g_autofree char *years = NULL;
   gboolean use_profile_values;
   gint i;
   GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
@@ -750,7 +750,7 @@ update_comments (GtrHeader *header, const gchar *comments)
 
           for (j = 1; year_array[j] != NULL; j++)
             {
-              gchar *search;
+              g_autofree char *search = NULL;
 
               if (g_str_has_suffix (year_array[j], "."))
                 {
@@ -774,18 +774,14 @@ update_comments (GtrHeader *header, const gchar *comments)
                     first_year = g_strdup (array[0]);
 
                   g_strfreev (array);
-                  g_free (search);
                   break;
                 }
 
               if (*search != '\0' && g_strcmp0 (search, current_year) != 0)
                 {
                   first_year = g_strdup (search);
-                  g_free (search);
                   break;
                 }
-
-              g_free (search);
             }
 
           g_strfreev (year_array);
@@ -800,10 +796,7 @@ update_comments (GtrHeader *header, const gchar *comments)
   g_strfreev (comment_lines);
 
   if (first_year && first_year != current_year)
-    {
-      years = g_strdup_printf ("%s-%s.", first_year, current_year);
-      g_free (first_year);
-    }
+    years = g_strdup_printf ("%s-%s.", first_year, current_year);
   else
     years = g_strdup_printf ("%s.", current_year);
 
@@ -817,9 +810,6 @@ update_comments (GtrHeader *header, const gchar *comments)
                             translator, email, years);
 
   g_string_append (new_comments, "\n\n");
-
-  g_free (years);
-  g_free (current_year);
 
   gtr_header_set_comments (header, new_comments->str);
 

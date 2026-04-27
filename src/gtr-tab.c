@@ -1949,7 +1949,10 @@ gtr_tab_set_progress (GtrTab      *tab,
                       gint         fuzzy)
 {
   GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
-  gchar *percentage, *trans_text, *fuzzy_text, *untrans_text;
+  g_autofree char *percentage = NULL;
+  g_autofree char *trans_text = NULL;
+  g_autofree char *fuzzy_text = NULL;
+  g_autofree char *untrans_text = NULL;
 
   gtr_progress_set (priv->progress, trans, untrans, fuzzy);
 
@@ -1962,11 +1965,6 @@ gtr_tab_set_progress (GtrTab      *tab,
   gtk_label_set_text (GTK_LABEL (priv->progress_fuzzy), fuzzy_text);
   gtk_label_set_text (GTK_LABEL (priv->progress_untrans), untrans_text);
   gtk_label_set_text (GTK_LABEL (priv->progress_trans), trans_text);
-
-  g_free (percentage);
-  g_free (trans_text);
-  g_free (fuzzy_text);
-  g_free (untrans_text);
 }
 
 void

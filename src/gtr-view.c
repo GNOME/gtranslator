@@ -688,8 +688,8 @@ gtr_view_replace_all (GtrView * view,
   GtrViewPrivate *priv;
   gboolean found = TRUE;
   gint cont = 0;
-  gchar *search_text;
-  gchar *replace_text;
+  g_autofree char *search_text = NULL;
+  g_autofree char *replace_text = NULL;
   gint replace_text_len;
   GtkTextBuffer *buffer;
 
@@ -765,15 +765,6 @@ gtr_view_replace_all (GtrView * view,
   while (found);
 
   gtk_text_buffer_end_user_action (buffer);
-
-  /* re-enable cursor_moved emission and notify
-   * the current position 
-   */
-  //priv->stop_cursor_moved_emission = FALSE;
-  //emit_cursor_moved (GTK_SOURCE_BUFFER(buffer));
-
-  g_free (search_text);
-  g_free (replace_text);
 
   return cont;
 }

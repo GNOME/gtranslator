@@ -255,7 +255,7 @@ gboolean
 find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
 {
   GList *views, *list;
-  gchar *search_text;
+  g_autofree char *search_text = NULL;
   const gchar *entry_text;
   gboolean original_text;
   gboolean translated_text;
@@ -301,7 +301,6 @@ find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
           gtr_view_set_search_text (GTR_VIEW (list->data), entry_text, flags);
         }
 
-      g_free (search_text);
       list = list->next;
     }
 
