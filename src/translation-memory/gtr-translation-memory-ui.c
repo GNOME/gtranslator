@@ -53,8 +53,7 @@ typedef struct
   GtrTab *tab;
   GListStore *model;
 
-  gchar **tm_list;
-  gint *tm_list_id;
+  GStrv tm_list;
 
   GtkWidget *popup_menu;
   GtrMsg *msg;
@@ -154,6 +153,7 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
   GList *tm_list = NULL;
   GList *l = NULL;
   GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (tm_ui);
+  g_autoptr (GStrvBuilder) builder = g_strv_builder_new ();
 
   g_list_store_remove_all (priv->model);
 
@@ -164,11 +164,6 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
   msgid = gtr_msg_get_msgid (msg);
 
   tm_list = gtr_translation_memory_lookup (priv->translation_memory, msgid);
-  g_strfreev (priv->tm_list);
-
-  priv->tm_list = g_new (gchar *, MAX_ELEMENTS + 1);
-  g_free (priv->tm_list_id);
-  priv->tm_list_id = g_new (gint, MAX_ELEMENTS + 1);
 
   i = 0;
   for (l = tm_list; l && i < MAX_ELEMENTS; l = l->next)
@@ -176,16 +171,15 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
       GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) l->data;
       g_autoptr(GtrTm) tm = gtr_tm_new (GDK_KEY_1 + i, match->level, match->match);
 
-      priv->tm_list_id[i] = match->id;
-      priv->tm_list[i] = g_strdup (match->match);
+      g_strv_builder_add (builder, match->match);
 
       g_list_store_append (priv->model, tm);
 
       i++;
     }
 
-  /* Ensure last element is NULL */
-  priv->tm_list[i] = NULL;
+  g_strfreev (priv->tm_list);
+  priv->tm_list = g_strv_builder_end (builder);
 
   g_clear_list (&tm_list, free_match);
 }
@@ -306,7 +300,6 @@ gtr_translation_memory_ui_finalize (GObject * object)
   g_debug ("Finalize translation memory ui");
 
   g_strfreev (priv->tm_list);
-  g_free (priv->tm_list_id);
 
   G_OBJECT_CLASS (gtr_translation_memory_ui_parent_class)->finalize (object);
 }
