@@ -31,7 +31,7 @@
 #include <gtk/gtk.h>
 
 
-static const gchar *badwords[] = {
+static const GStrv badwords = (char *[]) {
   "a",
   //"all",
   "an",
@@ -99,21 +99,16 @@ gtr_gda_utils_split_string_in_words (const gchar * string)
   gint i = 0;
   gchar *s;
   gchar *start = NULL;
-  static gchar **badwords_collate = NULL;
+  static GStrv badwords_collate = NULL;
 
   if (badwords_collate == NULL)
     {
-      gint words_size = g_strv_length ((gchar **) badwords);
-      gint x = 0;
+      g_autoptr (GStrvBuilder) badwords_builder = g_strv_builder_new ();
 
-      badwords_collate = g_new0 (gchar *, words_size + 1);
+      for (int x = 0; x < g_strv_length (badwords); x++)
+        g_strv_builder_take (badwords_builder, g_utf8_collate_key (badwords[x], -1));
 
-      while (badwords[x] != NULL)
-        {
-          badwords_collate[x] = g_utf8_collate_key (badwords[x], -1);
-          x++;
-        }
-      badwords_collate[x] = NULL;
+      badwords_collate = g_strv_builder_end (badwords_builder);
     }
 
   char_len = g_utf8_strlen (string, -1);
