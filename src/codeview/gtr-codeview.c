@@ -59,19 +59,22 @@ G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrCodeView, gtr_code_view, G_TYPE_OBJECT);
 static void
 showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrCodeView *codeview)
 {
-  const gchar *filename = NULL;
-  gint i = 0;
-  gint *line = NULL;
   GtrContextPanel *panel;
   panel = gtr_tab_get_context_panel (tab);
 
-  filename = gtr_msg_get_filename (msg, i);
-  while (filename)
-    {
-      line = gtr_msg_get_file_line (msg, i);
-      gtr_context_add_path (panel, filename, GPOINTER_TO_INT (line));
-      filename = gtr_msg_get_filename (msg, ++i);
-    }
+  for (int i = 0; ; i++)
+  {
+    int *line = NULL;
+    const gchar *filename = NULL;
+
+    filename = gtr_msg_get_filename (msg, i);
+
+    if (!filename)
+      break;
+
+    line = gtr_msg_get_file_line (msg, i);
+    gtr_context_add_path (panel, filename, GPOINTER_TO_INT (line));
+  }
 }
 
 static void
