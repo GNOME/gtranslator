@@ -129,6 +129,15 @@ gtr_code_view_dispose (GObject *object)
 static void
 gtr_code_view_finalize (GObject *object)
 {
+  GtrCodeView *self = GTR_CODE_VIEW (object);
+  GtrCodeViewPrivate *priv = gtr_code_view_get_instance_private (self);
+
+  if (priv->tab)
+    g_signal_handlers_disconnect_by_func (priv->tab, update_filename, self);
+
+  if (priv->panel)
+    g_signal_handlers_disconnect_by_func (priv->panel, update_filename, self);
+
   G_OBJECT_CLASS (gtr_code_view_parent_class)->finalize (object);
 }
 
