@@ -744,7 +744,7 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
       g_signal_connect (buf, "end-user-action",
                         G_CALLBACK (gtr_message_translation_update), tab);
 
-      g_signal_connect_after (buf, "end_user_action",
+      g_signal_connect_after (buf, "end-user-action",
                               G_CALLBACK (emit_message_changed_signal), tab);
     }
 }
