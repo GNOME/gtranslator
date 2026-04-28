@@ -483,11 +483,11 @@ gtr_context_init_tm (GtrContextPanel *panel,
 }
 
 typedef struct {
-  char *filename;
-  char *vcs_web;
-  char *module_name;
-  char *branch_name;
-  int line;
+  char  *filename;
+  char  *vcs_web;
+  char  *module_name;
+  char  *branch_name;
+  size_t line;
 } UriData;
 
 static void
@@ -516,14 +516,19 @@ on_row_activated (AdwActionRow *row,
 void
 gtr_context_add_path (GtrContextPanel *panel,
                       const char      *filename,
-                      int             line)
+                      size_t           line)
 {
   GtkWidget *row;
   GtrPo *po;
   GtrContextPanelPrivate *priv = gtr_context_panel_get_instance_private (panel);
   const char *module, *branch, *vcs_web;
 
-  g_autofree char *text = g_strdup_printf ("%s:%d", filename, line);
+  g_autofree char *text = NULL;
+
+  if (line > 0)
+    text = g_strdup_printf ("%s:%ld", filename, line);
+  else
+    text = g_strdup_printf ("%s", filename);
 
   // TODO: make file path clickable it should open the dialog GtrViewer with
   // the source if it's found in the local filesystem or try to open the gnome

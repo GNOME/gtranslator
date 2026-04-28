@@ -828,14 +828,18 @@ gtr_window_open_file_in_browser (GtrWindow  *self,
                                  const char *module,
                                  const char *file,
                                  const char *branch_name,
-                                 int         line_number)
+                                 size_t      line_number)
 {
   g_autoptr(GtkUriLauncher) launcher = NULL;
   g_autofree char *module_endpoint = NULL;
   g_autofree char *uri = NULL;
   g_autofree char *file_with_line = NULL;
 
-  file_with_line = g_strdup_printf ("%s#L%d", file, line_number);
+  if (line_number > 0)
+    file_with_line = g_strdup_printf ("%s#L%ld", file, line_number);
+  else
+    file_with_line = g_strdup (file);
+
   uri = g_build_path ("/", vcs_web, "/-/blob/", branch_name, file_with_line, NULL);
 
   g_debug ("Opening %s", uri);

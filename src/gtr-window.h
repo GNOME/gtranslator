@@ -76,6 +76,6 @@ void gtr_window_open_file_in_browser (GtrWindow  *self,
                                       const char *module,
                                       const char *file,
                                       const char *branch_name,
-                                      int         line_number);
+                                      size_t      line_number);
 
 G_END_DECLS

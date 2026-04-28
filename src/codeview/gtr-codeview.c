@@ -65,7 +65,7 @@ update_filename (GtrCodeView *self, GtrMsg *msg)
 
   for (int i = 0; ; i++)
   {
-    int *line = NULL;
+    size_t line;
     const gchar *filename = NULL;
 
     filename = gtr_msg_get_filename (msg, i);
@@ -74,7 +74,7 @@ update_filename (GtrCodeView *self, GtrMsg *msg)
       break;
 
     line = gtr_msg_get_file_line (msg, i);
-    gtr_context_add_path (priv->panel, filename, GPOINTER_TO_INT (line));
+    gtr_context_add_path (priv->panel, filename, line);
   }
 }
 

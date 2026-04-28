@@ -595,23 +595,23 @@ gtr_msg_get_filename (GtrMsg * msg, gint i)
  * @msg: a #GtrMsg
  * @i: the i-th file for a message.
  *
- * Return value: (transfer none): the i-th file line for a message, or NULL if
- *               @i is out of range.
+ * Return value: (transfer none): the i-th file line for a message, or 0 if
+ *   @i is out of range.
  */
-gint *
+size_t
 gtr_msg_get_file_line (GtrMsg * msg, gint i)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
-  g_return_val_if_fail (GTR_IS_MSG (msg), (gint *) 0);
-
   po_filepos_t filepos;
+
+  g_return_val_if_fail (GTR_IS_MSG (msg), 0);
 
   filepos = po_message_filepos (priv->message, i);
 
   if (filepos == NULL)
-    return NULL;
+    return 0;
 
-  return (gint *) po_filepos_start_line (filepos);
+  return po_filepos_start_line (filepos);
 }
 
 /**

@@ -83,7 +83,7 @@ const gchar               *gtr_msg_get_extracted_comments   (GtrMsg      *msg);
 const gchar               *gtr_msg_get_filename             (GtrMsg      *msg,
                                                              gint         i);
 
-gint                      *gtr_msg_get_file_line            (GtrMsg      *msg,
+size_t                     gtr_msg_get_file_line            (GtrMsg      *msg,
                                                              gint         i);
 
 const gchar               *gtr_msg_get_msgctxt              (GtrMsg      *msg);
