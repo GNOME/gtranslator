@@ -88,6 +88,8 @@ update_from_pot_ctx_free (UpdateFromPotCtx *ctx)
   g_free (ctx);
 }
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (UpdateFromPotCtx, update_from_pot_ctx_free);
+
 static void
 show_update_error (GtrWindow *window, const gchar *message)
 {
@@ -106,7 +108,7 @@ static void
 _msgmerge_finished (GObject *source, GAsyncResult *res, gpointer user_data)
 {
   GSubprocess *proc = G_SUBPROCESS (source);
-  UpdateFromPotCtx *ctx = user_data;
+  g_autoptr (UpdateFromPotCtx) ctx = user_data;
   g_autofree gchar *stdout_str = NULL;
   g_autofree gchar *stderr_str = NULL;
   g_autoptr (GError) error = NULL;
@@ -117,7 +119,6 @@ _msgmerge_finished (GObject *source, GAsyncResult *res, gpointer user_data)
   if (error)
     {
       show_update_error (ctx->window, error->message);
-      update_from_pot_ctx_free (ctx);
       return;
     }
 
@@ -126,7 +127,6 @@ _msgmerge_finished (GObject *source, GAsyncResult *res, gpointer user_data)
       const gchar *body
           = (stderr_str && *stderr_str) ? stderr_str : _ ("msgmerge failed");
       show_update_error (ctx->window, body);
-      update_from_pot_ctx_free (ctx);
       return;
     }
 
@@ -179,8 +179,6 @@ _msgmerge_finished (GObject *source, GAsyncResult *res, gpointer user_data)
         show_update_error (ctx->window, parse_err->message);
       }
   }
-
-  update_from_pot_ctx_free (ctx);
 }
 
 static void
@@ -226,7 +224,7 @@ _update_from_pot_finish (GObject *source, GAsyncResult *res,
     }
 
   /* Snapshot current stats before merging */
-  UpdateFromPotCtx *ctx = g_new0 (UpdateFromPotCtx, 1);
+  g_autoptr (UpdateFromPotCtx) ctx = g_new0 (UpdateFromPotCtx, 1);
   ctx->window = g_object_ref (window);
   ctx->po_location = g_object_ref (po_location);
   ctx->pot_path = g_strdup (pot_path);
@@ -247,12 +245,11 @@ _update_from_pot_finish (GObject *source, GAsyncResult *res,
     {
       show_update_error (window, spawn_error ? spawn_error->message
                                              : _ ("Failed to start msgmerge"));
-      update_from_pot_ctx_free (ctx);
       return;
     }
 
   g_subprocess_communicate_utf8_async (ctx->proc, NULL, NULL,
-                                       _msgmerge_finished, ctx);
+                                       _msgmerge_finished, g_steal_pointer (&ctx));
 }
 
 static void
