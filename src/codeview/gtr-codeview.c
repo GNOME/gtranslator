@@ -39,6 +39,8 @@ typedef struct
 {
   GtrWindow *window;
   GSList *tags;
+  GtrTab *tab;
+  GtrContextPanel *panel;
 } GtrCodeViewPrivate;
 
 struct _GtrCodeView
@@ -57,10 +59,9 @@ static GParamSpec *props[N_PROPS];
 G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrCodeView, gtr_code_view, G_TYPE_OBJECT);
 
 static void
-showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrCodeView *codeview)
+update_filename (GtrCodeView *self, GtrMsg *msg)
 {
-  GtrContextPanel *panel;
-  panel = gtr_tab_get_context_panel (tab);
+  GtrCodeViewPrivate *priv = gtr_code_view_get_instance_private (self);
 
   for (int i = 0; ; i++)
   {
@@ -73,35 +74,8 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrCodeView *codeview)
       break;
 
     line = gtr_msg_get_file_line (msg, i);
-    gtr_context_add_path (panel, filename, GPOINTER_TO_INT (line));
+    gtr_context_add_path (priv->panel, filename, GPOINTER_TO_INT (line));
   }
-}
-
-static void
-on_context_panel_reloaded (GtrContextPanel *panel,
-                           GtrMsg          *msg,
-                           GtrCodeView     *codeview)
-{
-  GtrTab *tab;
-  GtrCodeViewPrivate *priv = gtr_code_view_get_instance_private (codeview);
-
-  tab = gtr_window_get_active_tab (priv->window);
-
-  showed_message_cb (tab, msg, codeview);
-}
-
-static void
-page_added_cb (GtkWidget   *tab,
-               GtrCodeView *codeview)
-{
-  GtrContextPanel *panel;
-  panel = gtr_tab_get_context_panel (GTR_TAB (tab));
-
-  g_signal_connect_after (tab, "showed-message",
-                          G_CALLBACK (showed_message_cb), codeview);
-
-  g_signal_connect (panel, "reloaded",
-                    G_CALLBACK (on_context_panel_reloaded), codeview);
 }
 
 static void
@@ -189,16 +163,22 @@ gtr_code_view_new (GtrWindow *window)
   GtrCodeView *self = g_object_new (GTR_TYPE_CODE_VIEW,
                                     "window", window, NULL);
   GtrCodeViewPrivate *priv = gtr_code_view_get_instance_private (self);
-  GtkWidget *tab;
   GtrPo *po;
   GList *msg;
 
-  tab = GTK_WIDGET (gtr_window_get_active_tab (priv->window));
+  priv->tab = gtr_window_get_active_tab (priv->window);
 
-  po = gtr_tab_get_po (GTR_TAB (tab));
+  po = gtr_tab_get_po (priv->tab);
   msg = gtr_po_get_current_message (po);
-  page_added_cb (tab, self);
-  showed_message_cb (GTR_TAB (tab), msg->data, self);
+  priv->panel = gtr_tab_get_context_panel (priv->tab);
+
+  g_signal_connect_swapped (priv->tab, "showed-message",
+                            G_CALLBACK (update_filename), self);
+
+  g_signal_connect_swapped (priv->panel, "reloaded",
+                            G_CALLBACK (update_filename), self);
+
+  update_filename (self, msg->data);
 
   return self;
 }
