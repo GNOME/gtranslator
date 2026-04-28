@@ -391,12 +391,25 @@ gtr_context_panel_dispose (GObject *object)
 }
 
 static void
+gtr_context_panel_finalize (GObject *object)
+{
+  GtrContextPanel *self = GTR_CONTEXT_PANEL (object);
+  GtrContextPanelPrivate *priv = gtr_context_panel_get_instance_private (self);
+
+  if (priv->tab)
+    g_signal_handlers_disconnect_by_func (priv->tab, showed_message_cb, self);
+
+  G_OBJECT_CLASS (gtr_context_panel_parent_class)->finalize (object);
+}
+
+static void
 gtr_context_panel_class_init (GtrContextPanelClass * klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->dispose = gtr_context_panel_dispose;
+  object_class->finalize = gtr_context_panel_finalize;
   object_class->set_property = gtr_context_panel_set_property;
   object_class->get_property = gtr_context_panel_get_property;
   object_class->constructed = gtr_context_panel_constructed;

@@ -296,6 +296,9 @@ gtr_translation_memory_ui_finalize (GObject * object)
 
   g_debug ("Finalize translation memory ui");
 
+  if (priv->tab)
+    g_signal_handlers_disconnect_by_func (priv->tab, showed_message_cb, tm_ui);
+
   g_strfreev (priv->tm_list);
 
   G_OBJECT_CLASS (gtr_translation_memory_ui_parent_class)->finalize (object);
@@ -322,7 +325,7 @@ gtr_translation_memory_ui_new (GtkWidget *tab,
   priv->tab = GTR_TAB (tab);
   priv->translation_memory = translation_memory;
 
-  g_signal_connect (tab,
+  g_signal_connect (priv->tab,
                     "showed-message", G_CALLBACK (showed_message_cb), tm_ui);
 
   /* Scrolledwindow needs to be realized to add a widget */

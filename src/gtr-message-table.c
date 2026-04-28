@@ -172,6 +172,9 @@ gtr_message_table_finalize (GObject *object)
 
   priv = gtr_message_table_get_instance_private (table);
 
+  if (priv->tab)
+    g_signal_handlers_disconnect_by_func (priv->tab, showed_message_cb, table);
+
   g_clear_object (&priv->ui_settings);
   g_clear_object (&priv->store);
   g_clear_object (&priv->selection);
