@@ -3,7 +3,7 @@
 # Has to be run at the root of the project:
 # $ python scripts/update_langs.py
 #
-# Formated and linted with:
+# Formatted and linted with:
 # $ ruff format update_langs.py
 # $ ruff check --select=ALL --ignore=D,ANN101,S310 update_langs.py
 from __future__ import annotations

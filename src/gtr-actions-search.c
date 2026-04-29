@@ -344,7 +344,7 @@ do_find (GtrSearchBar *searchbar, GtrWindow *window, gboolean search_backwards)
       return;
     }
 
-  // Not found in the current message, so look for the followings
+  // Not found in the current message, so look for the following
   current_pos
       = gtk_single_selection_get_selected (gtr_tab_get_selection_model (tab));
   pos = find_in_selection_model (window, searchbar, current_pos,

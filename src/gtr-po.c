@@ -383,7 +383,7 @@ po_file_is_empty (po_file_t file)
  *
  * This method is copied from gedit, file gedit-commands-file.c
  *
- * Returns: False if file is writeable. True if file doesn't exists, is read-only or read-only attribute can't be check
+ * Returns: False if file is writable. True if file doesn't exists, is read-only or read-only attribute can't be check
  */
 static gboolean
 is_read_only (const gchar * filename)
