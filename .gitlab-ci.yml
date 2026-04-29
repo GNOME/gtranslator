@@ -65,3 +65,9 @@ goblint:
     expire_in: "1 week"
     reports:
       codequality: goblint-codequality.json
+
+codespell:
+  stage: check
+  script:
+    - dnf install --quiet -y codespell
+    - codespell --check-filenames --skip po,help,doc,NEWS,*.ini,gtranslator.lang
