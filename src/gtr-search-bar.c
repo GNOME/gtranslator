@@ -289,7 +289,7 @@ insert_text_handler (GtkEditable * editable,
 
   insert_text = TRUE;
 
-  g_signal_stop_emission_by_name (editable, "insert_text");
+  g_signal_stop_emission_by_name (editable, "insert-text");
 
   gtk_editable_insert_text (editable, escaped_text, new_len, position);
 
