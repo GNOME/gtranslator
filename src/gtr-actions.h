@@ -125,8 +125,8 @@ void search_bar_set_last_replace_text (GtrSearchBar * dialog,
 void search_bar_set_last_options (GtrSearchBar * dialog,
                                   LastSearchData * data);
 
-gboolean run_search (GtrView * view,
-                    gboolean follow);
+int run_search (GtrView *view,
+                int      follow);
 
 gboolean find_in_list (GtrWindow *window, GtrSearchBar *searchbar);
 

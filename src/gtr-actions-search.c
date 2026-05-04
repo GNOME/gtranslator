@@ -136,7 +136,7 @@ restore_last_searched_data (GtrSearchBar * dialog, GtrTab * tab)
 }
 
 int
-run_search (GtrView * view, int offset)
+run_search (GtrView *view, int offset)
 {
   GtkSourceBuffer *doc;
   GtkTextIter start_iter;
