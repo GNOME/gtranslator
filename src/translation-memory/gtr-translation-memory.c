@@ -180,4 +180,9 @@ gtr_translation_memory_default_init (GtrTranslationMemoryInterface *iface)
     initialized = TRUE;
 }
 
-
+void
+gtr_translation_memory_match_free (GtrTranslationMemoryMatch *match)
+{
+  g_free (match->match);
+  g_free (match);
+}

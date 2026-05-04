@@ -137,20 +137,11 @@ choose_translation (GtrTranslationMemoryUi *tm_ui, const gchar *translation)
 }
 
 static void
-free_match (gpointer data)
-{
-  GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) data;
-
-  g_free (match->match);
-  g_free (match);
-}
-
-static void
 showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
 {
   const gchar *msgid;
   int i = 0;
-  GList *tm_list = NULL;
+  g_autolist (GtrTranslationMemoryMatch) tm_list = NULL;
   GList *l = NULL;
   GtrTranslationMemoryUiPrivate *priv = gtr_translation_memory_ui_get_instance_private (tm_ui);
   g_autoptr (GStrvBuilder) builder = g_strv_builder_new ();
@@ -177,8 +168,6 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
 
   g_strfreev (priv->tm_list);
   priv->tm_list = g_strv_builder_end (builder);
-
-  g_clear_list (&tm_list, free_match);
 }
 
 static void

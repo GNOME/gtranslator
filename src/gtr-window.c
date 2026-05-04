@@ -96,15 +96,6 @@ G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrWindow, gtr_window, ADW_TYPE_APPLICATION_WI
 
 static void update_saved_state (GtrPo *po, GParamSpec *param, gpointer window);
 
-static void
-free_match (gpointer data)
-{
-  GtrTranslationMemoryMatch *match = (GtrTranslationMemoryMatch *) data;
-
-  g_free (match->match);
-  g_free (match);
-}
-
 /*
  * gtr_window_update_statusbar_message_count:
  *
@@ -701,7 +692,7 @@ gtr_window_tm_keybind (GtrWindow *window,
 {
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   GtrTranslationMemory *tm = priv->translation_memory;
-  GList *tm_list;
+  g_autolist (GtrTranslationMemoryMatch) tm_list = NULL;
   const gchar *msgid;
   GtrTab *tab = gtr_window_get_active_tab (window);
   GtrMsg *msg;
@@ -753,8 +744,6 @@ gtr_window_tm_keybind (GtrWindow *window,
       gtr_po_set_state (po, GTR_PO_STATE_MODIFIED);
       gtk_text_buffer_end_user_action (buffer);
     }
-
-  g_clear_list (&tm_list, free_match);
 }
 
 static void

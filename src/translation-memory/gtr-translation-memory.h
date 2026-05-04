@@ -67,4 +67,8 @@ void            gtr_translation_memory_set_max_delta    (GtrTranslationMemory   
 void            gtr_translation_memory_set_max_items    (GtrTranslationMemory   *obj,
                                                          gint                    items);
 
+void            gtr_translation_memory_match_free       (GtrTranslationMemoryMatch *match);
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (GtrTranslationMemoryMatch, gtr_translation_memory_match_free);
+
 G_END_DECLS
