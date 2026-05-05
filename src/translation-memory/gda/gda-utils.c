@@ -96,7 +96,6 @@ gtr_gda_utils_split_string_in_words (const gchar * string)
   PangoLogAttr *attrs;
   g_autoptr(GStrvBuilder) builder = g_strv_builder_new ();
   gint char_len;
-  gint i = 0;
   gchar *s;
   gchar *start = NULL;
   static GStrv badwords_collate = NULL;
@@ -105,8 +104,8 @@ gtr_gda_utils_split_string_in_words (const gchar * string)
     {
       g_autoptr (GStrvBuilder) badwords_builder = g_strv_builder_new ();
 
-      for (int x = 0; x < g_strv_length (badwords); x++)
-        g_strv_builder_take (badwords_builder, g_utf8_collate_key (badwords[x], -1));
+      for (int i = 0; i < g_strv_length (badwords); i++)
+        g_strv_builder_take (badwords_builder, g_utf8_collate_key (badwords[i], -1));
 
       badwords_collate = g_strv_builder_end (badwords_builder);
     }
@@ -118,7 +117,7 @@ gtr_gda_utils_split_string_in_words (const gchar * string)
                        strlen (string), -1, lang, attrs, char_len + 1);
 
   s = (gchar *) string;
-  while (i <= char_len)
+  for (int i = 0; i <= char_len; i++)
     {
       gchar *end;
 
@@ -135,7 +134,6 @@ gtr_gda_utils_split_string_in_words (const gchar * string)
             g_strv_builder_take (builder, g_steal_pointer (&word));
         }
 
-      i++;
       s = g_utf8_next_char (s);
     }
 
