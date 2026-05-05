@@ -48,9 +48,7 @@ G_DEFINE_BOXED_TYPE (GtrLanguage, gtr_language,
                      gtr_language_copy,
                      gtr_language_free);
 
-/* These are to make language bindings happy. Since Languages are
- * const, copy() just returns the same pointer and frees() doesn't
- * do nothing */
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (GtrLanguage, gtr_language_free);
 
 GtrLanguage *
 gtr_language_new (char *code,
