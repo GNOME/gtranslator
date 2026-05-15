@@ -150,6 +150,9 @@ gtr_po_set_property (GObject      *object,
     case PROP_LOCATION:
       gtr_po_set_location (po, G_FILE (g_value_get_object (value)));
       break;
+    case PROP_STATE:
+      g_assert_not_reached ();
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
