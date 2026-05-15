@@ -904,7 +904,9 @@ gtr_dl_teams_init (GtrDlTeams *self)
 {
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
   gtk_widget_init_template (GTK_WIDGET (self));
-  GtkExpression *expression = NULL;
+  g_autoptr (GtkExpression) description_expr = NULL;
+  g_autoptr (GtkExpression) name_expr = NULL;
+  g_autoptr (GtkExpression) domains_closure_expr = NULL;
   AdwStyleManager *style_manager;
 
   style_manager = adw_style_manager_get_default ();
@@ -928,25 +930,23 @@ gtr_dl_teams_init (GtrDlTeams *self)
   gtk_widget_set_sensitive (priv->reserve_button, FALSE);
 
   /* Add combo boxes for DL teams and modules */
-  expression = gtk_property_expression_new (GTR_TYPE_DROP_DOWN_OPTION, NULL, "description");
+  description_expr = gtk_property_expression_new (GTR_TYPE_DROP_DOWN_OPTION, NULL, "description");
   priv->langs_model = g_list_store_new (GTR_TYPE_DROP_DOWN_OPTION);
   adw_combo_row_set_model (
     ADW_COMBO_ROW (priv->langs_comborow),
     G_LIST_MODEL (priv->langs_model)
   );
-  adw_combo_row_set_expression (ADW_COMBO_ROW (priv->langs_comborow), expression);
-  gtk_expression_unref (expression);
+  adw_combo_row_set_expression (ADW_COMBO_ROW (priv->langs_comborow), description_expr);
   adw_combo_row_set_enable_search (ADW_COMBO_ROW (priv->langs_comborow), TRUE);
   gtk_widget_set_sensitive (priv->langs_comborow, FALSE);
 
-  expression = gtk_property_expression_new (GTR_TYPE_DROP_DOWN_OPTION, NULL, "name");
+  name_expr = gtk_property_expression_new (GTR_TYPE_DROP_DOWN_OPTION, NULL, "name");
   priv->modules_model = g_list_store_new (GTR_TYPE_DROP_DOWN_OPTION);
   adw_combo_row_set_model (
     ADW_COMBO_ROW (priv->modules_comborow),
     G_LIST_MODEL (priv->modules_model)
   );
-  adw_combo_row_set_expression (ADW_COMBO_ROW (priv->modules_comborow), expression);
-  gtk_expression_unref (expression);
+  adw_combo_row_set_expression (ADW_COMBO_ROW (priv->modules_comborow), name_expr);
   adw_combo_row_set_enable_search (ADW_COMBO_ROW (priv->modules_comborow), TRUE);
   adw_combo_row_set_search_match_mode (ADW_COMBO_ROW (priv->modules_comborow),
                                        GTK_STRING_FILTER_MATCH_MODE_SUBSTRING);
@@ -981,13 +981,12 @@ gtr_dl_teams_init (GtrDlTeams *self)
                             G_CALLBACK (gtr_dl_teams_verify_and_load),
                             self);
 
-  expression = gtk_cclosure_expression_new (G_TYPE_STRING,
-                                            NULL,
-                                            0, NULL,
-                                            G_CALLBACK (domains_expression),
-                                            NULL, NULL);
-  adw_combo_row_set_expression (ADW_COMBO_ROW (priv->domains_comborow), expression);
-  gtk_expression_unref (expression);
+  domains_closure_expr = gtk_cclosure_expression_new (G_TYPE_STRING,
+                                                      NULL,
+                                                      0, NULL,
+                                                      G_CALLBACK (domains_expression),
+                                                      NULL, NULL);
+  adw_combo_row_set_expression (ADW_COMBO_ROW (priv->domains_comborow), domains_closure_expr);
 }
 
 GtrDlTeams*
