@@ -366,24 +366,23 @@ gtr_dl_teams_load_json (GtrDlTeams *self)
 {
   /* Get team list JSON from DL */
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  SoupMessage *message = NULL;
-  char *url = NULL;
+  g_autoptr (SoupMessage) languages_message = NULL;
+  g_autoptr (SoupMessage) modules_message = NULL;
+  g_autofree char *languages_url = NULL;
+  g_autofree char *modules_url = NULL;
 
-  url = g_strconcat ((const gchar *)API_URL, "languages", NULL);
-  message = soup_message_new ("GET", url);
-  soup_session_send_async (priv->soup_session, message, G_PRIORITY_DEFAULT, NULL, gtr_dl_teams_parse_teams_json, self);
-
-
-  g_object_unref (message);
-  g_free (url);
+  languages_url = g_strconcat (API_URL, "languages", NULL);
+  languages_message = soup_message_new ("GET", languages_url);
+  soup_session_send_async (priv->soup_session, languages_message,
+                           G_PRIORITY_DEFAULT, NULL,
+                           gtr_dl_teams_parse_teams_json, self);
 
   /* Get module list JSON from DL */
-  url = g_strconcat ((const gchar *)API_URL, "modules", NULL);
-  message = soup_message_new ("GET", url);
-  soup_session_send_async (priv->soup_session, message, G_PRIORITY_DEFAULT, NULL, gtr_dl_teams_parse_modules_json, self);
-
-  g_object_unref (message);
-  g_free (url);
+  modules_url = g_strconcat (API_URL, "modules", NULL);
+  modules_message = soup_message_new ("GET", modules_url);
+  soup_session_send_async (priv->soup_session, modules_message,
+                           G_PRIORITY_DEFAULT, NULL,
+                           gtr_dl_teams_parse_modules_json, self);
 }
 
 static void gtr_dl_teams_verify_and_load (GtrDlTeams *self)
