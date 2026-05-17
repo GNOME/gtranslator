@@ -35,4 +35,4 @@ G_DECLARE_FINAL_TYPE (GtrHeaderDialog, gtr_header_dialog, GTR, HEADER_DIALOG, Ad
  */
 void gtr_show_header_dialog (GtrWindow * window);
 
- G_END_DECLS
+G_END_DECLS
