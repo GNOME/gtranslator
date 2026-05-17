@@ -696,7 +696,7 @@ static void
 update_comments (GtrHeader *header, const gchar *comments)
 {
   GtrProfile *active_profile;
-  GString *new_comments;
+  g_autoptr (GString) new_comments = g_string_new ("");
   g_auto (GStrv) comment_lines = NULL;
   g_autofree char *translator = NULL;
   g_autofree char *email = NULL;
@@ -730,7 +730,6 @@ update_comments (GtrHeader *header, const gchar *comments)
     }
 
   comment_lines = g_strsplit (comments, "\n", -1);
-  new_comments = g_string_new ("");
 
   for (i = 0; comment_lines != NULL && comment_lines[i] != NULL; i++)
     {
@@ -806,8 +805,6 @@ update_comments (GtrHeader *header, const gchar *comments)
   g_string_append (new_comments, "\n\n");
 
   gtr_header_set_comments (header, new_comments->str);
-
-  g_string_free (new_comments, TRUE);
 }
 
 /* FIXME: complete this */
