@@ -94,11 +94,11 @@ static void
 show_update_error (GtrWindow *window, const gchar *message)
 {
   AdwDialog *alert_dialog
-      = adw_alert_dialog_new (_ ("Could not update from template"), NULL);
+      = adw_alert_dialog_new (_("Could not update from template"), NULL);
   adw_alert_dialog_format_body (ADW_ALERT_DIALOG (alert_dialog), "%s",
                                 message);
   adw_alert_dialog_add_response (ADW_ALERT_DIALOG (alert_dialog), "ok",
-                                 _ ("OK"));
+                                 _("OK"));
   adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (alert_dialog),
                                          "ok");
   adw_dialog_present (ADW_DIALOG (alert_dialog), GTK_WIDGET (window));
@@ -125,7 +125,7 @@ _msgmerge_finished (GObject *source, GAsyncResult *res, gpointer user_data)
   if (!g_subprocess_get_successful (proc))
     {
       const gchar *body
-          = (stderr_str && *stderr_str) ? stderr_str : _ ("msgmerge failed");
+          = (stderr_str && *stderr_str) ? stderr_str : _("msgmerge failed");
       show_update_error (ctx->window, body);
       return;
     }
@@ -159,17 +159,17 @@ _msgmerge_finished (GObject *source, GAsyncResult *res, gpointer user_data)
         gtr_po_set_state (po_after, GTR_PO_STATE_MODIFIED);
 
         AdwDialog *summary
-            = adw_alert_dialog_new (_ ("Updated from Template"), NULL);
+            = adw_alert_dialog_new (_("Updated from Template"), NULL);
         adw_alert_dialog_format_body (
             ADW_ALERT_DIALOG (summary),
-            _ ("Messages: %d → %d (%+d)\nTranslated: %d → %d (%+d)\nFuzzy: %d "
+            _("Messages: %d → %d (%+d)\nTranslated: %d → %d (%+d)\nFuzzy: %d "
                "→ %d (%+d)\nUntranslated: %d → %d (%+d)"),
             ctx->prev_total, after_total, d_total, ctx->prev_translated,
             after_translated, d_translated, ctx->prev_fuzzy, after_fuzzy,
             d_fuzzy, ctx->prev_untranslated, after_untranslated,
             d_untranslated);
         adw_alert_dialog_add_response (ADW_ALERT_DIALOG (summary), "ok",
-                                       _ ("OK"));
+                                       _("OK"));
         adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (summary),
                                                "ok");
         adw_dialog_present (ADW_DIALOG (summary), GTK_WIDGET (ctx->window));
@@ -218,7 +218,7 @@ _update_from_pot_finish (GObject *source, GAsyncResult *res,
   g_autofree gchar *msgmerge_path = g_find_program_in_path ("msgmerge");
   if (!msgmerge_path)
     {
-      show_update_error (window, _ ("msgmerge not found on PATH. Install "
+      show_update_error (window, _("msgmerge not found on PATH. Install "
                                     "gettext (msgmerge) and try again."));
       return;
     }
@@ -244,7 +244,7 @@ _update_from_pot_finish (GObject *source, GAsyncResult *res,
   if (!ctx->proc)
     {
       show_update_error (window, spawn_error ? spawn_error->message
-                                             : _ ("Failed to start msgmerge"));
+                                             : _("Failed to start msgmerge"));
       return;
     }
 
@@ -260,7 +260,7 @@ gtr_update_from_pot_dialog_nocheck (GtrWindow *window)
   g_autoptr (GtkFileFilter) pot = NULL;
 
   dialog = gtk_file_dialog_new ();
-  gtk_file_dialog_set_title (dialog, _ ("Select Template (.pot)"));
+  gtk_file_dialog_set_title (dialog, _("Select Template (.pot)"));
   gtk_file_dialog_set_modal (dialog, TRUE);
 
   /* Preserve last directory if available */
@@ -275,7 +275,7 @@ gtr_update_from_pot_dialog_nocheck (GtrWindow *window)
 
   /* Filter: only POT files; enforce it (no alternate filters) */
   pot = gtk_file_filter_new ();
-  gtk_file_filter_set_name (pot, _ ("Gettext translation template (*.pot)"));
+  gtk_file_filter_set_name (pot, _("Gettext translation template (*.pot)"));
   gtk_file_filter_add_pattern (pot, "*.pot");
   gtk_file_filter_add_suffix (pot, "pot");
 
@@ -303,7 +303,7 @@ gtr_update_from_pot_dialog (GtrWindow *window)
       /* Merging on top of unsaved changes would discard them. Require the
        * user to save first so the merge always starts from a clean state. */
       show_update_error (window,
-                         _ ("Please save the current file before updating "
+                         _("Please save the current file before updating "
                             "from a template."));
       return;
     }
@@ -370,16 +370,16 @@ gtr_want_to_save_current_dialog (GtrWindow *window,
   location = gtr_po_get_location (po);
   basename = g_file_get_basename (location);
 
-  dialog = adw_alert_dialog_new (_ ("Unsaved Changes"), NULL);
+  dialog = adw_alert_dialog_new (_("Unsaved Changes"), NULL);
   adw_alert_dialog_set_body_use_markup (ADW_ALERT_DIALOG (dialog), TRUE);
 
   adw_alert_dialog_format_body (
       ADW_ALERT_DIALOG (dialog),
-      _ ("Do you want to write all the changes done to %s?"), basename);
+      _("Do you want to write all the changes done to %s?"), basename);
 
   adw_alert_dialog_add_responses (
-      ADW_ALERT_DIALOG (dialog), "cancel", _ ("Cancel"), "no",
-      _ ("Continue Without Saving"), "save", _ ("Save and Open"), NULL);
+      ADW_ALERT_DIALOG (dialog), "cancel", _("Cancel"), "no",
+      _("Continue Without Saving"), "save", _("Save and Open"), NULL);
   adw_alert_dialog_set_response_appearance (ADW_ALERT_DIALOG (dialog), "no",
                                             ADW_RESPONSE_DESTRUCTIVE);
   adw_alert_dialog_set_response_appearance (ADW_ALERT_DIALOG (dialog), "save",
@@ -401,7 +401,7 @@ gtr_open_file_dialog_nocheck (GtrWindow *window)
   g_autoptr (GtkFileDialog) dialog = NULL;
 
   dialog = gtr_file_chooser_new (GTK_WINDOW (window), FILESEL_OPEN,
-                                 _ ("Open file for translation"),
+                                 _("Open file for translation"),
                                  _gtr_application_get_last_dir (GTR_APP));
 
   gtk_file_dialog_open (dialog, GTK_WINDOW (window), NULL,
@@ -445,9 +445,9 @@ save_dialog_response_cb (GObject *source, GAsyncResult *res, void *user_data)
 
       AdwDialog *alert_dialog;
 
-      alert_dialog = adw_alert_dialog_new (_ ("Could not save file"), NULL);
+      alert_dialog = adw_alert_dialog_new (_("Could not save file"), NULL);
       adw_alert_dialog_add_response (ADW_ALERT_DIALOG (alert_dialog), "ok",
-                                     _ ("OK"));
+                                     _("OK"));
       adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (alert_dialog),
                                              "ok");
       adw_dialog_present (ADW_DIALOG (alert_dialog), GTK_WIDGET (window));
@@ -469,7 +469,7 @@ save_dialog_response_cb (GObject *source, GAsyncResult *res, void *user_data)
           AdwDialog *alert_dialog
               = adw_alert_dialog_new (NULL, error->message);
           adw_alert_dialog_add_response (ADW_ALERT_DIALOG (alert_dialog), "ok",
-                                         _ ("OK"));
+                                         _("OK"));
           adw_alert_dialog_set_default_response (
               ADW_ALERT_DIALOG (alert_dialog), "ok");
           adw_dialog_present (ADW_DIALOG (alert_dialog), GTK_WIDGET (window));
@@ -506,9 +506,9 @@ _upload_file_callback (GObject *object, GAsyncResult *result,
       if (status_code == SOUP_STATUS_FORBIDDEN)
         {
           dialog = adw_alert_dialog_new (
-              _ ("This file has already been uploaded"), NULL);
+              _("This file has already been uploaded"), NULL);
           adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok",
-                                         _ ("OK"));
+                                         _("OK"));
           adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog),
                                                  "ok");
           gtr_tab_enable_upload (active_tab, FALSE);
@@ -522,10 +522,10 @@ _upload_file_callback (GObject *object, GAsyncResult *result,
       else
         message = g_strdup (soup_status_get_phrase (status_code));
 
-      dialog = adw_alert_dialog_new (_ ("Couldn't upload the file"), NULL);
+      dialog = adw_alert_dialog_new (_("Couldn't upload the file"), NULL);
       adw_alert_dialog_format_body_markup (
           ADW_ALERT_DIALOG (dialog),
-          _ ("%s\n"
+          _("%s\n"
              "Maybe you've not configured your <i>l10n.gnome.org</i> "
              "<b>token</b> correctly in your profile or you don't have "
              "permissions to upload this module."),
@@ -533,8 +533,8 @@ _upload_file_callback (GObject *object, GAsyncResult *result,
       goto end;
     }
 
-  dialog = adw_alert_dialog_new (_ ("The file has been uploaded!"), NULL);
-  adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _ ("OK"));
+  dialog = adw_alert_dialog_new (_("The file has been uploaded!"), NULL);
+  adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok", _("OK"));
   adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
   gtr_tab_enable_upload (active_tab, FALSE);
 
@@ -672,7 +672,7 @@ gtr_save_file_as_dialog (GtrWindow *window)
   g_autoptr (GtkFileDialog) dialog = NULL;
 
   dialog = gtr_file_chooser_new (GTK_WINDOW (window), FILESEL_SAVE,
-                                 _ ("Save file as…"), NULL);
+                                 _("Save file as…"), NULL);
 
   gtk_file_dialog_save (dialog, GTK_WINDOW (window), NULL,
                         save_dialog_response_cb, window);
@@ -717,7 +717,7 @@ load_file_list (GtrWindow *window, GSList *locations)
     {
       AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
       adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok",
-                                     _ ("OK"));
+                                     _("OK"));
       adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
       adw_dialog_present (dialog, GTK_WIDGET (window));
     }
@@ -760,7 +760,7 @@ save_and_close_all_documents (GList *unsaved_documents, GtrWindow *window)
     {
       AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
       adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok",
-                                     _ ("OK"));
+                                     _("OK"));
       adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
       adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (window));
       return;
@@ -918,7 +918,7 @@ _gtr_actions_file_save_all (GtrWindow *window)
         {
           AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
           adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok",
-                                         _ ("OK"));
+                                         _("OK"));
           adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog),
                                                  "ok");
           adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (window));

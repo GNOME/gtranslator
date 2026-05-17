@@ -301,7 +301,7 @@ fix_plurals_activated (GSimpleAction *action, GVariant *parameter,
 {
   GtrApplication *app = GTR_APPLICATION (user_data);
   gtr_actions_fix_plurals (get_active_window (app));
-  gtr_window_add_toast_msg (get_active_window (app), _ ("Fixed plurals"));
+  gtr_window_add_toast_msg (get_active_window (app), _("Fixed plurals"));
 }
 
 static void
@@ -502,7 +502,7 @@ static void
 gtr_application_startup (GApplication *application)
 {
   G_APPLICATION_CLASS (gtr_application_parent_class)->startup (application);
-  g_set_application_name (_ ("Translation Editor"));
+  g_set_application_name (_("Translation Editor"));
   gtk_window_set_default_icon_name (PACKAGE_APPID);
 
   g_debug ("App startup");
