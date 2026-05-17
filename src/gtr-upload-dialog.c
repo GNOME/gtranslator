@@ -196,7 +196,7 @@ gtr_upload_dialog_set_loading (GtrUploadDialog *dlg,
     {
       gtk_widget_set_sensitive (priv->text_view, FALSE);
       gtk_widget_set_sensitive (priv->upload, FALSE);
-      gtk_button_set_label (GTK_BUTTON (priv->upload), _("Uploading..."));
+      gtk_button_set_label (GTK_BUTTON (priv->upload), _("Uploading…"));
     }
   else
     {
