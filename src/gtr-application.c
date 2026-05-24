@@ -50,7 +50,7 @@
 
 struct _GtrApplication
 {
-  AdwApplication base_instance;
+  AdwApplication parent_instance;
 };
 
 struct _GtrApplicationClass
