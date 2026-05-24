@@ -1029,20 +1029,6 @@ gtr_po_update_current_message (GtrPo * po, GtrMsg * msg)
 }
 
 /**
- * gtr_po_get_domains:
- * @po: a #GtrPo
- *
- * Return value: (transfer none) (element-type utf8):
- *               a pointer to the domains list
- **/
-GList *
-gtr_po_get_domains (GtrPo * po)
-{
-  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-  return priv->domains;
-}
-
-/**
  * gtr_po_get_po_file: (skip)
  * @po: a #GtrPo
  *
@@ -1055,173 +1041,6 @@ gtr_po_get_po_file (GtrPo * po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   return priv->gettext_po_file;
-}
-
-/**
- * gtr_po_get_next_fuzzy:
- * @po: a #GtrPo
- *
- * Return value: (transfer none) (element-type Gtranslator.Msg):
- *               a pointer to the next fuzzy message
- **/
-GList *
-gtr_po_get_next_fuzzy (GtrPo * po)
-{
-  GList *msg;
-  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-
-  msg = priv->current;
-  while ((msg = g_list_next (msg)))
-    {
-      if (gtr_msg_is_fuzzy (msg->data))
-        return msg;
-    }
-
-  return NULL;
-}
-
-
-/**
- * gtr_po_get_prev_fuzzy:
- * @po: a #GtrPo
- *
- * Return value: (transfer none) (element-type Gtranslator.Msg):
- *               a pointer to the previously fuzzy message
- **/
-GList *
-gtr_po_get_prev_fuzzy (GtrPo * po)
-{
-  GList *msg;
-  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-
-  msg = priv->current;
-  while ((msg = g_list_previous (msg)))
-    {
-      if (gtr_msg_is_fuzzy (msg->data))
-        return msg;
-    }
-
-  return NULL;
-}
-
-
-/**
- * gtr_po_get_next_untrans:
- * @po: a #GtrPo
- *
- * Return value: (transfer none) (element-type Gtranslator.Msg):
- *               a pointer to the next untranslated message
- **/
-GList *
-gtr_po_get_next_untrans (GtrPo * po)
-{
-  GList *msg;
-  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-
-  msg = priv->current;
-  while ((msg = g_list_next (msg)))
-    {
-      if (!gtr_msg_is_translated (msg->data))
-        return msg;
-    }
-
-  return NULL;
-}
-
-
-/**
- * gtr_po_get_prev_untrans:
- * @po: a #GtrPo
- *
- * Return value: (transfer none) (element-type Gtranslator.Msg):
- *                a pointer to the previously untranslated
- *                message or NULL if there are not previously untranslated
- *                message.
- **/
-GList *
-gtr_po_get_prev_untrans (GtrPo * po)
-{
-  GList *msg;
-  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-
-  msg = priv->current;
-  while ((msg = g_list_previous (msg)))
-    {
-      if (!gtr_msg_is_translated (msg->data))
-        return msg;
-    }
-
-  return NULL;
-}
-
-/**
- * gtr_po_get_next_fuzzy_or_untrans:
- * @po: a #GtrPo
- *
- * Return value: (transfer none) (element-type Gtranslator.Msg):
- *               a pointer to the next fuzzy or untranslated
- *               message or NULL if there is not next fuzzy or untranslated
- *               message.
- **/
-GList *
-gtr_po_get_next_fuzzy_or_untrans (GtrPo * po)
-{
-  GList *msg;
-  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-
-  msg = priv->current;
-  while ((msg = g_list_next (msg)))
-    {
-      if (gtr_msg_is_fuzzy (msg->data) || !gtr_msg_is_translated (msg->data))
-        return msg;
-    }
-
-  return NULL;
-}
-
-/**
- * gtr_po_get_prev_fuzzy_or_untrans:
- * @po: a #GtrPo
- *
- * Return value: (transfer none) (element-type Gtranslator.Msg):
- *               a pointer to the previously fuzzy or
- *               untranslated message or NULL if there is not previously
- *               fuzzy or untranslated message.
- **/
-GList *
-gtr_po_get_prev_fuzzy_or_untrans (GtrPo * po)
-{
-  GList *msg;
-  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-
-  msg = priv->current;
-  while ((msg = g_list_previous (msg)))
-    {
-      if (gtr_msg_is_fuzzy (msg->data) || !gtr_msg_is_translated (msg->data))
-        return msg;
-    }
-
-  return NULL;
-}
-
-/**
- * gtr_po_get_msg_from_number:
- * @po: a #GtrPo
- * @number: the message to jump
- *
- * Gets the message at the given position.
- *
- * Returns: (transfer none) (element-type Gtranslator.Msg):
- *          the message at the given position.
- */
-GList *
-gtr_po_get_msg_from_number (GtrPo *po,
-                            int    number)
-{
-  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-  g_return_val_if_fail (GTR_IS_PO (po), NULL);
-
-  return g_list_nth (priv->messages, number);
 }
 
 /**
@@ -1335,21 +1154,6 @@ gtr_po_get_messages_count (GtrPo * po)
 }
 
 /**
- * gtr_po_get_message_position:
- * @po: a #GtrPo
- *
- * Return value: the number of the current message.
- **/
-int
-gtr_po_get_message_position (GtrPo * po)
-{
-  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-  g_return_val_if_fail (GTR_IS_PO (po), -1);
-
-  return gtr_msg_get_po_position (GTR_MSG (priv->current->data));
-}
-
-/**
  * gtr_po_check_po_file:
  * @po: a #GtrPo
  * @error: return location for an error
@@ -1406,13 +1210,6 @@ gtr_po_get_dl_domain (GtrPo *po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   return priv->dl_domain;
-}
-
-const char *
-gtr_po_get_dl_module_state (GtrPo *po)
-{
-  GtrPoPrivate *priv = gtr_po_get_instance_private (po);
-  return priv->dl_state;
 }
 
 const char *

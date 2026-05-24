@@ -798,37 +798,6 @@ close_confirmation_dialog_response_handler (GtrCloseConfirmationDialog *dlg,
     }
 }
 
-void
-gtr_close_tab (GtrTab *tab, GtrWindow *window)
-{
-  if (!_gtr_tab_can_close (tab))
-    {
-      GtkWidget *dlg;
-
-      dlg = gtr_close_confirmation_dialog_new_single (gtr_tab_get_po (tab),
-                                                      FALSE);
-
-      g_signal_connect (
-          dlg, "response",
-          G_CALLBACK (close_confirmation_dialog_response_handler), window);
-
-      adw_dialog_present (ADW_DIALOG (dlg), GTK_WIDGET (window));
-    }
-  else
-    //_gtr_window_close_tab (window, tab);
-    gtr_window_remove_tab (window);
-}
-
-void
-gtr_file_close (GtrWindow *window)
-{
-  GtrTab *tab;
-
-  tab = gtr_window_get_active_tab (window);
-
-  gtr_close_tab (tab, window);
-}
-
 static GList *
 get_modified_documents (GtrWindow *window)
 {
@@ -893,42 +862,4 @@ void
 gtr_file_quit (GtrWindow *window)
 {
   close_all_documents (window, TRUE);
-}
-
-void
-_gtr_actions_file_close_all (GtrWindow *window)
-{
-  close_all_documents (window, FALSE);
-}
-
-void
-_gtr_actions_file_save_all (GtrWindow *window)
-{
-  GList *list, *l;
-
-  list = get_modified_documents (window);
-
-  for (l = list; l != NULL; l = g_list_next (l))
-    {
-      g_autoptr (GError) error = NULL;
-
-      gtr_po_save_file (GTR_PO (l->data), &error);
-
-      if (error)
-        {
-          AdwDialog *dialog = adw_alert_dialog_new (NULL, error->message);
-          adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "ok",
-                                         _("OK"));
-          adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog),
-                                                 "ok");
-          adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (window));
-
-          return;
-        }
-
-      /* We have to change the state of the tab */
-      gtr_po_set_state (GTR_PO (l->data), GTR_PO_STATE_SAVED);
-    }
-
-  g_list_free (list);
 }

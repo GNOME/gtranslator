@@ -81,18 +81,6 @@ static unsigned int signals [N_SIGNALS];
 
 /*----------------------------------------NEW RE-WRITTEN METHODS--------------------------------------*/
 
-void
-gtr_search_bar_set_search_text (GtrSearchBar *dialog,
-                                const char   *text)
-{
-  g_return_if_fail (GTR_IS_SEARCH_BAR (dialog));
-  g_return_if_fail (text != NULL);
-
-  //gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), text);
-  GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY(dialog->search_entry));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
-}
-
 /*
  * The text must be unescaped before searching.
  */
@@ -103,14 +91,6 @@ gtr_search_bar_get_search_text (GtrSearchBar *dialog)
   GtkEntryBuffer *buffer = gtk_entry_get_buffer (GTK_ENTRY (dialog->search_entry));
   text = gtk_entry_buffer_get_text (buffer);
   return text;
-}
-
-void
-gtr_search_bar_set_replace_text (GtrSearchBar *dialog,
-                                 const char   *text)
-{
-  GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY (dialog->replace_entry));
-  gtk_entry_buffer_set_text (entry_buffer, text, -1);
 }
 
 const char *

@@ -197,21 +197,6 @@ _gtr_msg_new (po_message_iterator_t iter, po_message_t message)
 }
 
 /**
- * gtr_msg_get_iterator:
- * @msg: a #GtrMsg
- *
- * Return value: the message iterator in gettext format
- **/
-po_message_iterator_t
-_gtr_msg_get_iterator (GtrMsg * msg)
-{
-  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
-  g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
-
-  return priv->iterator;
-}
-
-/**
  * gtr_msg_set_iterator:
  * @msg: a #GtrMsg
  * @iter: the po_message_iterator_t to set into the @msg
@@ -638,37 +623,6 @@ gtr_msg_get_msgctxt (GtrMsg * msg)
   return po_message_msgctxt (priv->message);
 }
 
-/**
- * gtr_msg_get_format:
- * @msg: a #GtrMsg
- *
- * Return the pretty name associated with a format type.
- * For example, for "csharp-format", return "C#".
- * Return NULL if the are no format type in the message.
- *
- * Return value: (transfer none): the pretty name associated with a format type
- *               or NULL if the message hasn't any format type.
- */
-const char *
-gtr_msg_get_format (GtrMsg * msg)
-{
-  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
-  const char *const *format_list;
-  int i;
-
-  g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
-
-  format_list = po_format_list ();
-
-  for (i = 0; format_list[i] != NULL; i++)
-    {
-      if (po_message_is_format (priv->message, format_list[i]))
-        return po_format_pretty_name (format_list[i]);
-    }
-
-  return NULL;
-}
-
 /*
  * Functions to manage the gettext errors
  */
@@ -758,12 +712,6 @@ gtr_msg_check (GtrMsg * msg)
     error = gtr_msg_check_format (msg);
 
   return error;
-}
-
-gboolean
-gtr_msg_compare (GtrMsg *first, GtrMsg *second)
-{
-  return g_strcmp0 (gtr_msg_get_msgid (first), gtr_msg_get_msgid (second)) == 0;
 }
 
 // Set the plurals for this message, add missing and remove extra

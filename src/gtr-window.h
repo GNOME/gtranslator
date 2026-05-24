@@ -43,8 +43,6 @@ void gtr_window_set_po (GtrWindow * window, GtrPo * po);
 
 GtrTab *gtr_window_get_active_tab (GtrWindow * window);
 
-GtrHeader * gtr_window_get_header_from_active_tab (GtrWindow * window);
-
 GtrView *gtr_window_get_active_view (GtrWindow * window);
 
 GList *gtr_window_get_all_views (GtrWindow * window,

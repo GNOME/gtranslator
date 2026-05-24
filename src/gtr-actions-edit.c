@@ -32,46 +32,6 @@
 #include "gtr-tab.h"
 #include "gtr-window.h"
 
-void
-gtr_actions_edit_cut (GtrWindow * window)
-{
-  GtrView *active_view;
-
-  active_view = gtr_window_get_active_view (window);
-  g_return_if_fail (active_view);
-
-  gtr_view_cut_clipboard (active_view);
-
-  gtk_widget_grab_focus (GTK_WIDGET (active_view));
-}
-
-void
-gtr_actions_edit_copy (GtrWindow * window)
-{
-  GtrView *active_view;
-
-  active_view = gtr_window_get_active_view (window);
-  g_return_if_fail (active_view);
-
-  gtr_view_copy_clipboard (active_view);
-
-  gtk_widget_grab_focus (GTK_WIDGET (active_view));
-}
-
-void
-gtr_actions_edit_paste (GtrWindow * window)
-{
-  GtrView *active_view;
-
-  active_view = gtr_window_get_active_view (window);
-  g_return_if_fail (active_view);
-
-  gtr_view_paste_clipboard (active_view);
-
-  gtk_widget_grab_focus (GTK_WIDGET (active_view));
-}
-
-
 /*
  * Use the untranslated message as the translation.
  */

@@ -36,8 +36,6 @@ const char *gtr_dirs_get_gtr_data_dir (void);
 
 const char *gtr_dirs_get_gtr_locale_dir (void);
 
-const char *gtr_dirs_get_gtr_sourceview_dir (void);
-
 char *gtr_dirs_get_ui_file (const char *file);
 
 G_END_DECLS

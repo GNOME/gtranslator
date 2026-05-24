@@ -58,8 +58,6 @@ void            gtr_header_set_rmbt                  (GtrHeader  *header,
                                                       const char *rmbt);
 
 char           *gtr_header_get_pot_date              (GtrHeader  *header);
-void            gtr_header_set_pot_date              (GtrHeader  *header,
-                                                      const char *pot_date);
 
 char           *gtr_header_get_po_date               (GtrHeader  *header);
 void            gtr_header_set_po_date               (GtrHeader  *header,
@@ -96,10 +94,6 @@ void            gtr_header_set_plural_forms          (GtrHeader  *header,
 int             gtr_header_get_nplurals              (GtrHeader  *header);
 
 void            gtr_header_update_header             (GtrHeader  *header);
-
-void            gtr_header_set_profile               (GtrHeader  *header,
-                                                      GtrProfile *profile);
-GtrProfile     *gtr_header_get_profile               (GtrHeader  *header);
 
 char           *gtr_header_get_language_code         (GtrHeader  *header);
 

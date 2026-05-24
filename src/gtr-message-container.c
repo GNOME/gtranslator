@@ -49,17 +49,6 @@ gtr_message_container_get_message (GtrMessageContainer *container,
 }
 
 int
-gtr_message_container_get_message_number (GtrMessageContainer * container,
-                                          GtrMsg * msg)
-{
-  g_return_val_if_fail (GTR_IS_MESSAGE_CONTAINER (container), -1);
-  g_return_val_if_fail (GTR_IS_MSG (msg), -1);
-
-  return GTR_MESSAGE_CONTAINER_GET_IFACE (container)->get_message_number (container, msg);
-}
-
-
-int
 gtr_message_container_get_count (GtrMessageContainer * container)
 {
   g_return_val_if_fail (GTR_IS_MESSAGE_CONTAINER (container), 0);

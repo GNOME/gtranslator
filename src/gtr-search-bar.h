@@ -47,12 +47,8 @@ gboolean         gtr_search_bar_get_replace_mode (GtrSearchBar *self);
 void             gtr_search_bar_set_replace_mode (GtrSearchBar *self,
                                                   gboolean      replace_mode);
 const char      *gtr_search_bar_get_search_text  (GtrSearchBar *dialog);
-void             gtr_search_bar_set_search_text  (GtrSearchBar *dialog,
-                                                  const char   *text);
 
 const char      *gtr_search_bar_get_replace_text (GtrSearchBar *dialog);
-void             gtr_search_bar_set_replace_text (GtrSearchBar *dialog,
-                                                  const char   *text);
 
 gboolean         gtr_search_bar_get_original_text (GtrSearchBar *dialog);
 void             gtr_search_bar_set_original_text (GtrSearchBar *dialog,

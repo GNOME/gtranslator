@@ -26,10 +26,6 @@
 #include <gtk/gtk.h>
 #include <libxml/tree.h>
 
-xmlDocPtr gtr_xml_new_doc (const char *name);
-
-xmlDocPtr gtr_xml_open_file (const char *filename);
-
      char *gtr_utils_escape_search_text (const char *text);
 
      char *gtr_utils_unescape_search_text (const char *text);

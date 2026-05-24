@@ -95,8 +95,6 @@ const char *gtr_po_get_dl_branch (GtrPo *po);
 
 const char *gtr_po_get_dl_domain (GtrPo *po);
 
-const char *gtr_po_get_dl_module_state (GtrPo *po);
-
 const char *gtr_po_get_dl_vcs_web (GtrPo *po);
 
 gboolean gtr_po_can_dl_upload (GtrPo *po);
@@ -111,23 +109,7 @@ GList *gtr_po_get_current_message (GtrPo *po);
 
 void gtr_po_update_current_message (GtrPo *po, GtrMsg * msg);
 
-GList *gtr_po_get_domains (GtrPo *po);
-
 po_file_t gtr_po_get_po_file (GtrPo *po);
-
-GList *gtr_po_get_next_fuzzy (GtrPo *po);
-
-GList *gtr_po_get_prev_fuzzy (GtrPo *po);
-
-GList *gtr_po_get_next_untrans (GtrPo *po);
-
-GList *gtr_po_get_prev_untrans (GtrPo *po);
-
-GList *gtr_po_get_next_fuzzy_or_untrans (GtrPo *po);
-
-GList *gtr_po_get_prev_fuzzy_or_untrans (GtrPo *po);
-
-GList *gtr_po_get_msg_from_number (GtrPo *po, int number);
 
 GtrHeader *gtr_po_get_header (GtrPo *po);
 
@@ -138,8 +120,6 @@ int gtr_po_get_fuzzy_count (GtrPo *po);
 int gtr_po_get_untranslated_count (GtrPo *po);
 
 int gtr_po_get_messages_count (GtrPo *po);
-
-int gtr_po_get_message_position (GtrPo *po);
 
 void gtr_po_check_po_file (GtrPo *po, GError **error);
 

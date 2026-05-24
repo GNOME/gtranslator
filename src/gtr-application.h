@@ -40,9 +40,6 @@ G_DECLARE_FINAL_TYPE (GtrApplication, gtr_application, GTR, APPLICATION, AdwAppl
 
 GtrApplication  * gtr_application_new                    (void);
 GtrWindow *gtr_application_create_window (GtrApplication *app);
-GList *           gtr_application_get_views              (GtrApplication *app,
-                                                          gboolean        original,
-                                                          gboolean        translated);
 GtrWindow        *gtr_application_get_active_window      (GtrApplication *app);
 
 /* Non exported funcs */

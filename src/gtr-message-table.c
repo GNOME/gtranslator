@@ -494,11 +494,3 @@ gtr_message_table_get_selection_model (GtrMessageTable *table)
       = gtr_message_table_get_instance_private (table);
   return priv->selection;
 }
-
-GListStore *
-gtr_message_table_get_model (GtrMessageTable *table)
-{
-  GtrMessageTablePrivate *priv
-      = gtr_message_table_get_instance_private (table);
-  return priv->store;
-}

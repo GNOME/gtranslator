@@ -53,26 +53,6 @@ on_uri_launch (GObject *object, GAsyncResult *result, gpointer user_data)
     g_error ("Could not open help: %s", error->message);
 }
 
-xmlDocPtr
-gtr_xml_new_doc (const char *name)
-{
-  xmlNodePtr root;
-  xmlDocPtr doc;
-  doc = xmlNewDoc ((const xmlChar *)"1.0");
-  root = xmlNewDocNode (doc, NULL, (const xmlChar *)name, NULL);
-  xmlDocSetRootElement (doc, root);
-  return doc;
-}
-
-xmlDocPtr
-gtr_xml_open_file (const char *filename)
-{
-  xmlDocPtr doc;
-  g_return_val_if_fail (filename != NULL, NULL);
-  doc = xmlParseFile (filename);
-  return doc;
-}
-
 char *
 gtr_utils_escape_search_text (const char *text)
 {

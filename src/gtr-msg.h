@@ -88,20 +88,15 @@ size_t                    gtr_msg_get_file_line             (GtrMsg     *msg,
 
 const char               *gtr_msg_get_msgctxt               (GtrMsg     *msg);
 
-const char               *gtr_msg_get_format                (GtrMsg     *msg);
-
 char                     *gtr_msg_check                     (GtrMsg     *msg);
 
 gboolean                  gtr_msg_fix_plurals               (GtrMsg     *msg,
                                                              int         plurals);
 
-gboolean                  gtr_msg_compare                   (GtrMsg *first, GtrMsg *second);
-
 /* Semi-private methods */
 GtrMsg                   *_gtr_msg_new                      (po_message_iterator_t iter,
                                                              po_message_t          message);
 
-po_message_iterator_t     _gtr_msg_get_iterator             (GtrMsg *msg);
 void                      _gtr_msg_set_iterator             (GtrMsg               *msg,
                                                              po_message_iterator_t iter);
 

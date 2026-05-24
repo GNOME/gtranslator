@@ -690,27 +690,6 @@ gtr_application_create_window (GtrApplication *app)
 }
 
 /**
- * gtr_application_get_views:
- * @app: the #GtranslationApplication
- * @original: TRUE if you want original TextViews.
- * @translated: TRUE if you want translated TextViews.
- *
- * Returns all the views currently present in #GtranslationApplication
- *
- * Return value: (transfer container) (element-type Gtranslator.View):
- * a newly allocated list of #GtranslationApplication objects
- */
-GList *
-gtr_application_get_views (GtrApplication *app, gboolean original,
-                           gboolean translated)
-{
-  g_return_val_if_fail (GTR_IS_APPLICATION (app), NULL);
-
-  return gtr_window_get_all_views (GTR_WINDOW (get_active_window (app)),
-                                   original, translated);
-}
-
-/**
  * gtr_application_get_active_window:
  * @app: a #GtrApplication
  *

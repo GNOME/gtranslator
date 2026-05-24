@@ -77,8 +77,6 @@ void gtr_tab_message_go_to (GtrTab * tab,
                             GtrMsg * to_go,
                             gboolean searching, GtrTabMove move);
 
-GtrTab *gtr_tab_get_from_document (GtrPo * po);
-
 gboolean gtr_tab_get_autosave_enabled (GtrTab * tab);
 
 void gtr_tab_set_autosave_enabled (GtrTab * tab, gboolean enable);
@@ -101,24 +99,9 @@ void gtr_tab_go_to_next (GtrTab * tab);
 
 void gtr_tab_go_to_prev (GtrTab * tab);
 
-void gtr_tab_go_to_first (GtrTab * tab);
-
-void gtr_tab_go_to_last (GtrTab * tab);
-
-gboolean gtr_tab_go_to_next_fuzzy (GtrTab * tab);
-
-gboolean gtr_tab_go_to_prev_fuzzy (GtrTab * tab);
-
-gboolean gtr_tab_go_to_next_untrans (GtrTab * tab);
-
-gboolean gtr_tab_go_to_prev_untrans (GtrTab * tab);
-
 gboolean gtr_tab_go_to_next_fuzzy_or_untrans (GtrTab * tab);
 
 gboolean gtr_tab_go_to_prev_fuzzy_or_untrans (GtrTab * tab);
-
-void gtr_tab_go_to_number   (GtrTab *tab, int number);
-void gtr_tab_go_to_position (GtrTab *tab, int position);
 
 void gtr_tab_set_info (GtrTab * tab, const char * primary, const char * secondary);
 
@@ -135,18 +118,11 @@ void gtr_tab_find_prev (GtrTab * tab);
 void gtr_tab_find_set_replace (GtrTab * tab, gboolean replace);
 
 GtkSingleSelection * gtr_tab_get_selection_model (GtrTab *tab);
-GListStore *gtr_tab_get_model (GtrTab *tab);
 
 /* notebook */
 void gtr_tab_enable_upload (GtrTab *tab, gboolean enable);
 void gtr_tab_enable_find_button (GtrTab *tab, gboolean enable);
 
 GtkWindow *gtr_tab_get_window (GtrTab *tab);
-
-/* Semi-public methods */
-
-char *_gtr_tab_get_tooltips (GtrTab *tab);
-
-gboolean _gtr_tab_can_close (GtrTab * tab);
 
 G_END_DECLS

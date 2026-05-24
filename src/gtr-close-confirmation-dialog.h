@@ -38,9 +38,7 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (GtrCloseConfirmationDialog, gtr_close_confirmation_dialog, GTR, CLOSE_CONFIRMATION_DIALOG, AdwAlertDialog);
 
 GtkWidget *gtr_close_confirmation_dialog_new        (GList * unsaved_documents, gboolean logout_mode);
-GtkWidget *gtr_close_confirmation_dialog_new_single (GtrPo * doc, gboolean logout_mode);
 
-const GList * gtr_close_confirmation_dialog_get_unsaved_documents (GtrCloseConfirmationDialog * dlg);
 GList * gtr_close_confirmation_dialog_get_selected_documents (GtrCloseConfirmationDialog * dlg);
 
 G_END_DECLS

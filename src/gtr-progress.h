@@ -31,9 +31,6 @@ void          gtr_progress_set             (GtrProgress *self,
                                             int          trans,
                                             int          untrans,
                                             int          fuzzy);
-int           gtr_progress_get_trans       (GtrProgress *self);
-int           gtr_progress_get_untrans     (GtrProgress *self);
-int           gtr_progress_get_fuzzy       (GtrProgress *self);
 
 G_END_DECLS
 

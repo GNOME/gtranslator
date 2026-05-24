@@ -44,8 +44,6 @@ struct _GtrMessageContainerInterface
 
 GtrMsg *gtr_message_container_get_message        (GtrMessageContainer *container,
                                                   int                  number);
-int     gtr_message_container_get_message_number (GtrMessageContainer *container,
-                                                  GtrMsg              *msg);
 int     gtr_message_container_get_count          (GtrMessageContainer *container);
 
 

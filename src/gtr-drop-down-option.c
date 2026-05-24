@@ -144,9 +144,3 @@ gtr_drop_down_option_get_name (GtrDropDownOption *opt)
 {
   return opt->name;
 }
-
-const char *
-gtr_drop_down_option_get_description (GtrDropDownOption *opt)
-{
-  return opt->description;
-}

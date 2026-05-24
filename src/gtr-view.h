@@ -67,31 +67,17 @@ struct _GtrViewClass
      void gtr_view_enable_visible_whitespace
        (GtrView * view, gboolean enable);
 
-     void gtr_view_cut_clipboard (GtrView * view);
-
-     void gtr_view_copy_clipboard (GtrView * view);
-
-     void gtr_view_paste_clipboard (GtrView * view);
-
      void gtr_view_set_search_text (GtrView      *view,
                                     const char   *text,
                                     unsigned int  flags);
 
      char *gtr_view_get_search_text (GtrView *view, unsigned int *flags);
 
-     gboolean gtr_view_get_can_search_again (GtrView * view);
-
      gboolean gtr_view_search_forward (GtrView * view,
                                        const GtkTextIter * start,
                                        const GtkTextIter * end,
                                        GtkTextIter * match_start,
                                        GtkTextIter * match_end);
-
-     gboolean gtr_view_search_backward (GtrView * view,
-                                        const GtkTextIter * start,
-                                        const GtkTextIter * end,
-                                        GtkTextIter * match_start,
-                                        GtkTextIter * match_end);
 
      int gtr_view_replace_all (GtrView     *view,
                                const char  *find,

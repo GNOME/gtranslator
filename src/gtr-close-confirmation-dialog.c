@@ -251,22 +251,6 @@ gtr_close_confirmation_dialog_new (GList * unsaved_documents,
   return dlg;
 }
 
-GtkWidget *
-gtr_close_confirmation_dialog_new_single (GtrPo * doc, gboolean logout_mode)
-{
-  GtkWidget *dlg;
-  GList *unsaved_documents;
-  g_return_val_if_fail (doc != NULL, NULL);
-
-  unsaved_documents = g_list_prepend (NULL, doc);
-
-  dlg = gtr_close_confirmation_dialog_new (unsaved_documents, logout_mode);
-
-  g_list_free (unsaved_documents);
-
-  return dlg;
-}
-
 static void
 build_single_doc_dialog (GtrCloseConfirmationDialog * dlg)
 {
@@ -336,14 +320,4 @@ set_unsaved_document (GtrCloseConfirmationDialog * dlg, const GList * list)
     {
       build_multiple_docs_dialog (dlg);
     }
-}
-
-const GList *gtr_close_confirmation_dialog_get_unsaved_documents
-  (GtrCloseConfirmationDialog * dlg)
-{
-  GtrCloseConfirmationDialogPrivate *priv;
-  priv = gtr_close_confirmation_dialog_get_instance_private (dlg);
-  g_return_val_if_fail (GTR_IS_CLOSE_CONFIRMATION_DIALOG (dlg), NULL);
-
-  return priv->unsaved_documents;
 }

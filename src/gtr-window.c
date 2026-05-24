@@ -543,35 +543,6 @@ gtr_window_get_active_tab (GtrWindow * window)
 }
 
 /**
- * gtr_window_get_header_from_active_tab:
- * @window: a #GtrWindow
- *
- * Gets the #GtrHeader of the #GtrPo of in the active
- * #GtrTab.
- *
- * Returns: (transfer none): the #GtrHeader of the #GtrPo of in the active
- * #GtrTab
- */
-GtrHeader *
-gtr_window_get_header_from_active_tab (GtrWindow * window)
-{
-  GtrTab *current_page;
-  GtrPo *po;
-  GtrHeader *header;
-
-  g_return_val_if_fail (GTR_IS_WINDOW (window), NULL);
-
-  current_page = gtr_window_get_active_tab (window);
-  if (!current_page)
-    return NULL;
-
-  po = gtr_tab_get_po (current_page);
-  header = gtr_po_get_header (po);
-
-  return header;
-}
-
-/**
  * gtr_window_get_active_view:
  * @window: a #GtranslationWindow
  *

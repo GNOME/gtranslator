@@ -82,33 +82,6 @@ last_search_data_set (LastSearchData * data, GtrSearchBar * dialog)
   data->wrap_around = gtr_search_bar_get_wrap_around (dialog);
 }
 
-void
-search_bar_set_last_find_text (GtrSearchBar * dialog,
-                                  LastSearchData * data)
-{
-  if (data->find_text)
-    gtr_search_bar_set_search_text (dialog, data->find_text);
-}
-
-void
-search_bar_set_last_replace_text (GtrSearchBar * dialog,
-                                  LastSearchData * data)
-{
-  if (data->replace_text)
-    gtr_search_bar_set_replace_text (dialog, data->replace_text);
-}
-
-void
-search_bar_set_last_options (GtrSearchBar *   dialog,
-                             LastSearchData * data)
-{
-  gtr_search_bar_set_original_text (dialog, data->original_text);
-  gtr_search_bar_set_translated_text (dialog, data->translated_text);
-  gtr_search_bar_set_match_case (dialog, data->match_case);
-  gtr_search_bar_set_entire_word (dialog, data->entire_word);
-  gtr_search_bar_set_wrap_around (dialog, data->wrap_around);
-}
-
 /*
  * Used to get the old search data and store the new values.
  */

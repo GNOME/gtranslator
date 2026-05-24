@@ -30,15 +30,6 @@
 
 
 void
-gtr_message_go_to_first (GtrWindow * window)
-{
-  GtrTab *current;
-
-  current = gtr_window_get_active_tab (window);
-  gtr_tab_go_to_first (current);
-}
-
-void
 gtr_message_go_to_previous (GtrWindow * window)
 {
   GtrTab *current;
@@ -54,51 +45,6 @@ gtr_message_go_to_next (GtrWindow * window)
 
   current = gtr_window_get_active_tab (window);
   gtr_tab_go_to_next (current);
-}
-
-void
-gtr_message_go_to_last (GtrWindow * window)
-{
-  GtrTab *current;
-
-  current = gtr_window_get_active_tab (window);
-  gtr_tab_go_to_last (current);
-}
-
-void
-gtr_message_go_to_next_fuzzy (GtrWindow * window)
-{
-  GtrTab *current;
-
-  current = gtr_window_get_active_tab (window);
-  gtr_tab_go_to_next_fuzzy (current);
-}
-
-void
-gtr_message_go_to_prev_fuzzy (GtrWindow * window)
-{
-  GtrTab *current;
-
-  current = gtr_window_get_active_tab (window);
-  gtr_tab_go_to_prev_fuzzy (current);
-}
-
-void
-gtr_message_go_to_next_untranslated (GtrWindow * window)
-{
-  GtrTab *current;
-
-  current = gtr_window_get_active_tab (window);
-  gtr_tab_go_to_next_untrans (current);
-}
-
-void
-gtr_message_go_to_prev_untranslated (GtrWindow * window)
-{
-  GtrTab *current;
-
-  current = gtr_window_get_active_tab (window);
-  gtr_tab_go_to_prev_untrans (current);
 }
 
 void

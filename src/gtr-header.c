@@ -245,15 +245,6 @@ gtr_header_get_pot_date (GtrHeader * header)
                           "POT-Creation-Date");
 }
 
-void
-gtr_header_set_pot_date (GtrHeader *header, const char *pot_date)
-{
-  g_return_if_fail (GTR_IS_HEADER (header));
-  g_return_if_fail (pot_date != NULL);
-
-  gtr_header_set_field (header, "POT-Creation-Date", pot_date);
-}
-
 char *
 gtr_header_get_po_date (GtrHeader * header)
 {
@@ -845,31 +836,4 @@ gtr_header_update_header (GtrHeader * header)
 
   /* Update X-Generator field */
   gtr_header_set_field (header, "X-Generator", "Gtranslator "PACKAGE_VERSION);
-}
-
-void
-gtr_header_set_profile (GtrHeader  *header,
-                        GtrProfile *profile)
-{
-  GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
-  g_return_if_fail (GTR_IS_HEADER (header));
-
-  priv->profile = g_object_ref (profile);
-}
-
-/**
- * gtr_header_get_profile:
- * @header: a #GtrHeader
- *
- * Gets the profile of the header
- *
- * Return value: (transfer none): the profile of the header.
- */
-GtrProfile *
-gtr_header_get_profile (GtrHeader *header)
-{
-  GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
-  g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
-
-  return priv->profile;
 }

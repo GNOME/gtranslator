@@ -99,12 +99,6 @@ gtr_dirs_get_gtr_locale_dir (void)
   return gtr_locale_dir;
 }
 
-const char *
-gtr_dirs_get_gtr_sourceview_dir (void)
-{
-  return gtr_sourceview_dir;
-}
-
 char *
 gtr_dirs_get_ui_file (const char *file)
 {

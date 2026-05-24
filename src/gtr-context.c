@@ -274,9 +274,6 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrContextPanel *panel)
   add_extracted_comments (panel, msg);
 
   clean_paths (panel);
-
-  // TODO: Add this to the panel
-  // gtr_msg_get_format (msg)
 }
 
 static void

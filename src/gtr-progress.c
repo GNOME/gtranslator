@@ -246,25 +246,3 @@ gtr_progress_set (GtrProgress *self,
 
   gtk_widget_queue_draw (GTK_WIDGET (self));
 }
-
-int
-gtr_progress_get_trans (GtrProgress *self)
-{
-  GtrProgressPrivate *priv = gtr_progress_get_instance_private (self);
-  return priv->trans;
-}
-
-int
-gtr_progress_get_untrans (GtrProgress *self)
-{
-  GtrProgressPrivate *priv = gtr_progress_get_instance_private (self);
-  return priv->untrans;
-}
-
-int
-gtr_progress_get_fuzzy (GtrProgress *self)
-{
-  GtrProgressPrivate *priv = gtr_progress_get_instance_private (self);
-  return priv->fuzzy;
-}
-
