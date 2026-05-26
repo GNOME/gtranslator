@@ -26,7 +26,7 @@
 
 #include <string.h>
 
-#include <gdk/gdkkeysyms.h>
+#include <gdk/gdk.h>
 #include <glib-object.h>
 #include <glib.h>
 #include <glib/gi18n.h>
