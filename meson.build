@@ -1,5 +1,6 @@
 project(
-  'gtranslator', 'c',
+  'gtranslator',
+  'c',
   version: '50.0',
   license: 'GPL3+',
   meson_version: '>= 1.7',
@@ -38,7 +39,13 @@ gtr_debug = get_option('profile') == 'development'
 if gtr_debug
   profile = 'Devel'
   name_suffix = ' (Development)'
-  vcs_tag = run_command(find_program('git'), 'rev-parse', '--short', 'HEAD', check: false).stdout().strip()
+  vcs_tag = run_command(
+    find_program('git'),
+    'rev-parse',
+    '--short',
+    'HEAD',
+    check: false,
+  ).stdout().strip()
   version_suffix = '-' + (vcs_tag == '' ? 'devel' : vcs_tag)
 else
   profile = ''
@@ -59,7 +66,10 @@ set_defines = [
   ['PACKAGE_LIBDIR', gtr_libdir],
   ['PACKAGE_LOCALEDIR', gtr_localedir],
   ['PACKAGE_URL', 'https://gitlab.gnome.org/GNOME/gtranslator/'],
-  ['PACKAGE_ISSUES_URL', 'https://gitlab.gnome.org/GNOME/gtranslator/-/issues'],
+  [
+    'PACKAGE_ISSUES_URL',
+    'https://gitlab.gnome.org/GNOME/gtranslator/-/issues',
+  ],
   ['PACKAGE_VERSION', gtr_version],
   ['PACKAGE_APPID', gtr_app_id],
   ['PROFILE', get_option('profile')],
@@ -69,7 +79,7 @@ set_defines = [
   ['API_URL', get_option('dl_server') + '/api/v1/'],
 ]
 
-foreach define: set_defines
+foreach define : set_defines
   config_h.set_quoted(define[0], define[1])
 endforeach
 
@@ -155,13 +165,16 @@ gtr_deps = [
   cc.find_library('gettextpo'),
 ]
 
-gtr_schemasdir = dependency('gio-2.0').get_variable(pkgconfig: 'schemasdir', pkgconfig_define: ['datadir', gtr_datadir])
+gtr_schemasdir = dependency('gio-2.0').get_variable(
+  pkgconfig: 'schemasdir',
+  pkgconfig_define: ['datadir', gtr_datadir],
+)
 if gtr_schemasdir == ''
   gtr_schemasdir = join_paths(gtr_datadir, 'glib-2.0', 'schemas')
   message(gtr_schemasdir)
 endif
 
-itstool = find_program  ('itstool')
+itstool = find_program('itstool')
 
 ###########
 # Subdirs #
