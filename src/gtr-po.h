@@ -74,84 +74,78 @@ typedef enum
  */
 GQuark gtr_po_error_quark (void);
 
-     GtrPo *gtr_po_new_from_file (GFile   *location,
-                                  GError **error) G_GNUC_WARN_UNUSED_RESULT;
+GtrPo *gtr_po_new_from_file (GFile   *location,
+                             GError **error) G_GNUC_WARN_UNUSED_RESULT;
 
-     void gtr_po_save_file (GtrPo * po, GError ** error);
+void gtr_po_save_file (GtrPo *po, GError ** error);
 
-     GtrPoState gtr_po_get_state (GtrPo * po);
+GtrPoState gtr_po_get_state (GtrPo *po);
 
-     void gtr_po_set_state (GtrPo * po, GtrPoState state);
+void gtr_po_set_state (GtrPo *po, GtrPoState state);
 
-     void gtr_po_set_dl_info (GtrPo * po, const gchar * lang, const gchar * module_name,
-                              const gchar * branch, const gchar * domain, const gchar * module_state,
-                              const gchar *vcs_web);
+void gtr_po_set_dl_info (GtrPo *po, const char *lang, const char *module_name,
+                         const char *branch, const char *domain, const char *module_state,
+                         const char *vcs_web);
 
-     const gchar *gtr_po_get_dl_lang (GtrPo * po);
+const char *gtr_po_get_dl_lang (GtrPo *po);
 
-     const gchar *gtr_po_get_dl_module (GtrPo * po);
+const char *gtr_po_get_dl_module (GtrPo *po);
 
-     const gchar *gtr_po_get_dl_branch (GtrPo * po);
+const char *gtr_po_get_dl_branch (GtrPo *po);
 
-     const gchar *gtr_po_get_dl_domain (GtrPo * po);
+const char *gtr_po_get_dl_domain (GtrPo *po);
 
-     const gchar *gtr_po_get_dl_module_state (GtrPo * po);
+const char *gtr_po_get_dl_module_state (GtrPo *po);
 
-     const gchar *gtr_po_get_dl_vcs_web (GtrPo * po);
+const char *gtr_po_get_dl_vcs_web (GtrPo *po);
 
-     gboolean gtr_po_can_dl_upload (GtrPo * po);
+gboolean gtr_po_can_dl_upload (GtrPo *po);
 
-     GFile *gtr_po_get_location (GtrPo * po);
+GFile *gtr_po_get_location (GtrPo *po);
 
-     void gtr_po_set_location (GtrPo * po, GFile * location);
+void gtr_po_set_location (GtrPo *po, GFile * location);
 
-     GList *gtr_po_get_messages (GtrPo * po);
+GList *gtr_po_get_messages (GtrPo *po);
 
-     GList *gtr_po_get_current_message (GtrPo * po);
+GList *gtr_po_get_current_message (GtrPo *po);
 
-     void gtr_po_update_current_message (GtrPo * po, GtrMsg * msg);
+void gtr_po_update_current_message (GtrPo *po, GtrMsg * msg);
 
-     GList *gtr_po_get_domains (GtrPo * po);
+GList *gtr_po_get_domains (GtrPo *po);
 
-     po_file_t gtr_po_get_po_file (GtrPo * po);
+po_file_t gtr_po_get_po_file (GtrPo *po);
 
-     GList *gtr_po_get_next_fuzzy (GtrPo * po);
+GList *gtr_po_get_next_fuzzy (GtrPo *po);
 
-     GList *gtr_po_get_prev_fuzzy (GtrPo * po);
+GList *gtr_po_get_prev_fuzzy (GtrPo *po);
 
-     GList *gtr_po_get_next_untrans (GtrPo * po);
+GList *gtr_po_get_next_untrans (GtrPo *po);
 
-     GList *gtr_po_get_prev_untrans (GtrPo * po);
+GList *gtr_po_get_prev_untrans (GtrPo *po);
 
-     GList *gtr_po_get_next_fuzzy_or_untrans (GtrPo * po);
+GList *gtr_po_get_next_fuzzy_or_untrans (GtrPo *po);
 
-     GList *gtr_po_get_prev_fuzzy_or_untrans (GtrPo * po);
+GList *gtr_po_get_prev_fuzzy_or_untrans (GtrPo *po);
 
-     GList *gtr_po_get_msg_from_number (GtrPo * po, gint number);
+GList *gtr_po_get_msg_from_number (GtrPo *po, int number);
 
-     GtrHeader *gtr_po_get_header (GtrPo * po);
+GtrHeader *gtr_po_get_header (GtrPo *po);
 
-gint
-gtr_po_get_translated_count (GtrPo * po);
+int gtr_po_get_translated_count (GtrPo *po);
 
-gint
-gtr_po_get_fuzzy_count (GtrPo * po);
+int gtr_po_get_fuzzy_count (GtrPo *po);
 
-gint
-gtr_po_get_untranslated_count (GtrPo * po);
+int gtr_po_get_untranslated_count (GtrPo *po);
 
-gint
-gtr_po_get_messages_count (GtrPo * po);
+int gtr_po_get_messages_count (GtrPo *po);
 
-gint
-gtr_po_get_message_position (GtrPo * po);
+int gtr_po_get_message_position (GtrPo *po);
 
 void gtr_po_check_po_file (GtrPo *po, GError **error);
 
 /* Unexported funcs */
-     void
-       _gtr_po_increase_decrease_translated (GtrPo * po, gboolean increase);
+void _gtr_po_increase_decrease_translated (GtrPo *po, gboolean increase);
 
-     void _gtr_po_increase_decrease_fuzzy (GtrPo * po, gboolean increase);
+void _gtr_po_increase_decrease_fuzzy (GtrPo *po, gboolean increase);
 
 G_END_DECLS

@@ -245,7 +245,7 @@ create_profile_row (GtrPreferencesDialog *dlg,
                     GtrProfile           *profile,
                     GtrProfile           *active_profile)
 {
-  const gchar *profile_name;
+  const char *profile_name;
   GtkWidget *row = NULL;
   GtkWidget *check = NULL;
   GtkWidget *menu = NULL;

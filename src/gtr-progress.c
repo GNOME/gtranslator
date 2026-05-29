@@ -27,9 +27,9 @@
 
 typedef struct
 {
-  gint trans;
-  gint untrans;
-  gint fuzzy;
+  int trans;
+  int untrans;
+  int fuzzy;
 } GtrProgressPrivate;
 
 struct _GtrProgress
@@ -64,7 +64,7 @@ gtr_progress_finalize (GObject *object)
 
 static void
 gtr_progress_set_property (GObject      *object,
-                           guint         prop_id,
+                           unsigned int  prop_id,
                            const GValue *value,
                            GParamSpec   *pspec)
 {
@@ -87,10 +87,10 @@ gtr_progress_set_property (GObject      *object,
 }
 
 static void
-gtr_progress_get_property (GObject    *object,
-                           guint       prop_id,
-                           GValue     *value,
-                           GParamSpec *pspec)
+gtr_progress_get_property (GObject     *object,
+                           unsigned int prop_id,
+                           GValue      *value,
+                           GParamSpec  *pspec)
 {
   GtrProgressPrivate *priv = gtr_progress_get_instance_private (GTR_PROGRESS (object));
 
@@ -223,9 +223,9 @@ gtr_progress_new (void) {
 
 void
 gtr_progress_set (GtrProgress *self,
-                  gint         trans,
-                  gint         untrans,
-                  gint         fuzzy)
+                  int          trans,
+                  int          untrans,
+                  int          fuzzy)
 {
   GtrProgressPrivate *priv = gtr_progress_get_instance_private (self);
   if (trans != priv->trans)
@@ -247,21 +247,21 @@ gtr_progress_set (GtrProgress *self,
   gtk_widget_queue_draw (GTK_WIDGET (self));
 }
 
-gint
+int
 gtr_progress_get_trans (GtrProgress *self)
 {
   GtrProgressPrivate *priv = gtr_progress_get_instance_private (self);
   return priv->trans;
 }
 
-gint
+int
 gtr_progress_get_untrans (GtrProgress *self)
 {
   GtrProgressPrivate *priv = gtr_progress_get_instance_private (self);
   return priv->untrans;
 }
 
-gint
+int
 gtr_progress_get_fuzzy (GtrProgress *self)
 {
   GtrProgressPrivate *priv = gtr_progress_get_instance_private (self);

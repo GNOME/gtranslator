@@ -27,4 +27,4 @@
 
 void    gtr_scan_dir    (GFile         *dir,
                          GSList       **list,
-                         const gchar   *po_name);
+                         const char    *po_name);

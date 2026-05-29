@@ -33,29 +33,29 @@ G_DECLARE_FINAL_TYPE (GtrLanguagesFetcher, gtr_languages_fetcher,
 
 GtkWidget             *gtr_languages_fetcher_new                  (void);
 
-const gchar           *gtr_languages_fetcher_get_language_name    (GtrLanguagesFetcher *fetcher);
+const char            *gtr_languages_fetcher_get_language_name    (GtrLanguagesFetcher *fetcher);
 
 void                   gtr_languages_fetcher_set_language_name    (GtrLanguagesFetcher *fetcher,
-                                                                   const gchar         *name);
+                                                                   const char          *name);
 
-const gchar           *gtr_languages_fetcher_get_language_code    (GtrLanguagesFetcher *fetcher);
+const char            *gtr_languages_fetcher_get_language_code    (GtrLanguagesFetcher *fetcher);
 
 void                   gtr_languages_fetcher_set_language_code    (GtrLanguagesFetcher *fetcher,
-                                                                   const gchar         *code);
+                                                                   const char          *code);
 
-const gchar           *gtr_languages_fetcher_get_charset          (GtrLanguagesFetcher *fetcher);
+const char            *gtr_languages_fetcher_get_charset          (GtrLanguagesFetcher *fetcher);
 
 void                   gtr_languages_fetcher_set_charset          (GtrLanguagesFetcher *fetcher,
-                                                                   const gchar         *charset);
+                                                                   const char          *charset);
 
-const gchar           *gtr_languages_fetcher_get_encoding         (GtrLanguagesFetcher *fetcher);
+const char            *gtr_languages_fetcher_get_encoding         (GtrLanguagesFetcher *fetcher);
 
 void                   gtr_languages_fetcher_set_encoding         (GtrLanguagesFetcher *fetcher,
-                                                                   const gchar         *enc);
+                                                                   const char          *enc);
 
-const gchar           *gtr_languages_fetcher_get_plural_form      (GtrLanguagesFetcher *fetcher);
+const char            *gtr_languages_fetcher_get_plural_form      (GtrLanguagesFetcher *fetcher);
 
 void                   gtr_languages_fetcher_set_plural_form      (GtrLanguagesFetcher *fetcher,
-                                                                   const gchar         *plural_form);
+                                                                   const char          *plural_form);
 
 G_END_DECLS

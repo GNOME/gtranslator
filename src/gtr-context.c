@@ -91,7 +91,7 @@ enum
   LAST_SIGNAL
 };
 
-static guint signals[LAST_SIGNAL] = { 0 };
+static unsigned int signals[LAST_SIGNAL] = { 0 };
 
 static void buffer_end_user_action (GtkTextBuffer *buffer, GtrContextPanel *panel);
 static void showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrContextPanel *panel);
@@ -222,7 +222,7 @@ setup_notes_edition (GtkWidget *button, GtrContextPanel *panel)
 static void
 add_notes (GtrContextPanel *panel, GtrMsg *msg)
 {
-  const gchar *comments;
+  const char *comments;
   GtrContextPanelPrivate *priv;
   GtkTextIter iter;
 
@@ -237,7 +237,7 @@ add_notes (GtrContextPanel *panel, GtrMsg *msg)
 static void
 add_extracted_comments (GtrContextPanel *panel, GtrMsg *msg)
 {
-  const gchar *comments;
+  const char *comments;
   GtrContextPanelPrivate *priv;
   GtkTextIter iter;
 
@@ -283,7 +283,7 @@ static void
 buffer_end_user_action (GtkTextBuffer *buffer, GtrContextPanel *panel)
 {
   GtkTextIter start, end;
-  gchar *text;
+  char *text;
   GtrContextPanelPrivate *priv;
   GtrPo *po;
   GtrPoState po_state;
@@ -317,7 +317,7 @@ gtr_context_panel_init (GtrContextPanel *panel)
 
 static void
 gtr_context_panel_set_property (GObject      *object,
-                                guint         prop_id,
+                                unsigned int  prop_id,
                                 const GValue *value,
                                 GParamSpec   *pspec)
 {
@@ -339,10 +339,10 @@ gtr_context_panel_set_property (GObject      *object,
 }
 
 static void
-gtr_context_panel_get_property (GObject    *object,
-                                guint       prop_id,
-                                GValue     *value,
-                                GParamSpec *pspec)
+gtr_context_panel_get_property (GObject      *object,
+                                unsigned int  prop_id,
+                                GValue       *value,
+                                GParamSpec   *pspec)
 {
   GtrContextPanel *panel = GTR_CONTEXT_PANEL (object);
   GtrContextPanelPrivate *priv;

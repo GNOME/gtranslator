@@ -28,12 +28,12 @@ G_DECLARE_FINAL_TYPE (GtrProgress, gtr_progress, GTR, PROGRESS, GtkDrawingArea);
 
 GtrProgress*  gtr_progress_new             (void);
 void          gtr_progress_set             (GtrProgress *self,
-                                            gint         trans,
-                                            gint         untrans,
-                                            gint         fuzzy);
-gint          gtr_progress_get_trans       (GtrProgress *self);
-gint          gtr_progress_get_untrans     (GtrProgress *self);
-gint          gtr_progress_get_fuzzy       (GtrProgress *self);
+                                            int          trans,
+                                            int          untrans,
+                                            int          fuzzy);
+int           gtr_progress_get_trans       (GtrProgress *self);
+int           gtr_progress_get_untrans     (GtrProgress *self);
+int           gtr_progress_get_fuzzy       (GtrProgress *self);
 
 G_END_DECLS
 

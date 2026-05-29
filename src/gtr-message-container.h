@@ -37,16 +37,16 @@ struct _GtrMessageContainerInterface
 
   GtrMsg * (* get_message)        (GtrMessageContainer *container,
                                    gint                 number);
-  gint     (* get_message_number) (GtrMessageContainer *container,
-                                   GtrMsg *msg);
-  gint     (* get_count)          (GtrMessageContainer *container);
+  int      (* get_message_number) (GtrMessageContainer *container,
+                                   GtrMsg              *msg);
+  int      (* get_count)          (GtrMessageContainer *container);
 };
 
-GtrMsg * gtr_message_container_get_message (GtrMessageContainer * container,
-                                            gint number);
-gint     gtr_message_container_get_message_number (GtrMessageContainer * container,
-                                                   GtrMsg * msg);
-gint     gtr_message_container_get_count   (GtrMessageContainer * container);
+GtrMsg *gtr_message_container_get_message        (GtrMessageContainer *container,
+                                                  int                  number);
+int     gtr_message_container_get_message_number (GtrMessageContainer *container,
+                                                  GtrMsg              *msg);
+int     gtr_message_container_get_count          (GtrMessageContainer *container);
 
 
 G_END_DECLS

@@ -76,7 +76,7 @@ struct _GtrMessageTable
 G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrMessageTable, gtr_message_table, GTK_TYPE_BOX);
 
 static void
-on_sort_order_changed (GSettings *settings, gchar *key, gpointer user_data)
+on_sort_order_changed (GSettings *settings, char *key, gpointer user_data)
 {
   GtrMessageTable *table = GTR_MESSAGE_TABLE (user_data);
   GtrMessageTablePrivate *priv
@@ -187,8 +187,10 @@ gtr_message_table_finalize (GObject *object)
 }
 
 static void
-gtr_message_table_set_property (GObject *object, guint prop_id,
-                                const GValue *value, GParamSpec *pspec)
+gtr_message_table_set_property (GObject      *object,
+                                unsigned int  prop_id,
+                                const GValue *value,
+                                GParamSpec   *pspec)
 {
   GtrMessageTable *table = GTR_MESSAGE_TABLE (object);
   GtrMessageTablePrivate *priv;
@@ -210,8 +212,10 @@ gtr_message_table_set_property (GObject *object, guint prop_id,
 }
 
 static void
-gtr_message_table_get_property (GObject *object, guint prop_id, GValue *value,
-                                GParamSpec *pspec)
+gtr_message_table_get_property (GObject     *object,
+                                unsigned int prop_id,
+                                GValue      *value,
+                                GParamSpec  *pspec)
 {
   GtrMessageTable *table = GTR_MESSAGE_TABLE (object);
   GtrMessageTablePrivate *priv;

@@ -47,8 +47,8 @@ struct _GtrSearchBar
 
   GtrWindow               *active_window;
 
-  guint                    show_options : 1;
-  guint                    replace_mode : 1;
+  unsigned int             show_options : 1;
+  unsigned int             replace_mode : 1;
 
   gboolean                 case_sensitive;
   gboolean                 at_word_boundaries;
@@ -77,13 +77,13 @@ enum {
 G_DEFINE_FINAL_TYPE (GtrSearchBar, gtr_search_bar, ADW_TYPE_BIN);
 
 static GParamSpec *properties [N_PROPS];
-static guint signals [N_SIGNALS];
+static unsigned int signals [N_SIGNALS];
 
 /*----------------------------------------NEW RE-WRITTEN METHODS--------------------------------------*/
 
 void
 gtr_search_bar_set_search_text (GtrSearchBar *dialog,
-                                const gchar  *text)
+                                const char   *text)
 {
   g_return_if_fail (GTR_IS_SEARCH_BAR (dialog));
   g_return_if_fail (text != NULL);
@@ -96,7 +96,7 @@ gtr_search_bar_set_search_text (GtrSearchBar *dialog,
 /*
  * The text must be unescaped before searching.
  */
-const gchar*
+const char*
 gtr_search_bar_get_search_text (GtrSearchBar *dialog)
 {
   const char *text;
@@ -107,13 +107,13 @@ gtr_search_bar_get_search_text (GtrSearchBar *dialog)
 
 void
 gtr_search_bar_set_replace_text (GtrSearchBar *dialog,
-                                 const gchar  *text)
+                                 const char   *text)
 {
   GtkEntryBuffer *entry_buffer = gtk_entry_get_buffer (GTK_ENTRY (dialog->replace_entry));
   gtk_entry_buffer_set_text (entry_buffer, text, -1);
 }
 
-const gchar *
+const char *
 gtr_search_bar_get_replace_text (GtrSearchBar *dialog)
 {
   const char *text;
@@ -265,13 +265,15 @@ gtr_do_replace_all (GtrSearchBar *self)
 }
 
 static void
-insert_text_handler (GtkEditable * editable,
-                     const gchar * text,
-                     gint length, gint * position, gpointer data)
+insert_text_handler (GtkEditable *editable,
+                     const char  *text,
+                     int          length,
+                     int         *position,
+                     gpointer     data)
 {
   static gboolean insert_text = FALSE;
-  gchar *escaped_text;
-  gint new_len;
+  char *escaped_text;
+  int new_len;
 
   /* To avoid recursive behavior */
   if (insert_text)
@@ -331,7 +333,7 @@ maybe_escape_regex (GBinding     *binding,
                     gpointer      user_data)
 {
   GtrSearchBar *self = user_data;
-  const gchar *entry_text;
+  const char *entry_text;
 
   g_assert (GTR_IS_SEARCH_BAR (self));
   g_assert (from_value != NULL);
@@ -345,7 +347,7 @@ maybe_escape_regex (GBinding     *binding,
     }
   else
     {
-      gchar *unescaped = gtk_source_utils_unescape_search_text (entry_text);
+      char *unescaped = gtk_source_utils_unescape_search_text (entry_text);
 
       g_value_take_string (to_value, unescaped);
     }
@@ -450,10 +452,10 @@ add_actions (GtrSearchBar *self)
 
 
 static void
-gtr_search_bar_get_property (GObject    *object,
-                             guint       prop_id,
-                             GValue     *value,
-                             GParamSpec *pspec)
+gtr_search_bar_get_property (GObject      *object,
+                             unsigned int  prop_id,
+                             GValue       *value,
+                             GParamSpec   *pspec)
 {
   GtrSearchBar *self = GTR_SEARCH_BAR (object);
 
@@ -494,7 +496,7 @@ gtr_search_bar_get_property (GObject    *object,
 
 static void
 gtr_search_bar_set_property (GObject      *object,
-                             guint         prop_id,
+                             unsigned int  prop_id,
                              const GValue *value,
                              GParamSpec   *pspec)
 {
@@ -690,7 +692,7 @@ gtr_search_bar_get_search (GtrSearchBar *self)
 GRegex *
 gtr_search_bar_regex (GtrSearchBar *self)
 {
-  const gchar *entry_text;
+  const char *entry_text;
   gboolean match_case;
   gboolean entire_word;
 

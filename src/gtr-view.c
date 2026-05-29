@@ -53,8 +53,8 @@ typedef struct
   SpellingChecker *checker;
 #endif
 
-  guint search_flags;
-  gchar *search_text;
+  unsigned int search_flags;
+  char *search_text;
 
   GtkCssProvider *provider;
 } GtrViewPrivate;
@@ -239,8 +239,9 @@ gtr_view_new (void)
  * Returns: TRUE if the @selected_text was got correctly.
  */
 gboolean
-gtr_view_get_selected_text (GtrView * view,
-                            gchar ** selected_text, gint * len)
+gtr_view_get_selected_text (GtrView   *view,
+                            char     **selected_text,
+                            int       *len)
 {
   GtkTextIter start, end;
   GtkTextBuffer *doc;
@@ -385,10 +386,12 @@ gtr_view_paste_clipboard (GtrView * view)
  * Stores the text to search for in the @view with some specific @flags.
  */
 void
-gtr_view_set_search_text (GtrView * view, const gchar * text, guint flags)
+gtr_view_set_search_text (GtrView      *view,
+                          const char   *text,
+                          unsigned int  flags)
 {
   GtrViewPrivate *priv;
-  gchar *converted_text;
+  char *converted_text;
 
   g_return_if_fail (GTR_IS_VIEW (view));
 
@@ -450,8 +453,9 @@ gtr_view_set_search_text (GtrView * view, const gchar * text, guint flags)
  * 
  * Returns: the text to search for it.
  */
-gchar *
-gtr_view_get_search_text (GtrView * view, guint * flags)
+char *
+gtr_view_get_search_text (GtrView      *view,
+                          unsigned int *flags)
 {
   GtrViewPrivate *priv;
 
@@ -677,9 +681,11 @@ gtr_view_search_backward (GtrView * view,
  * 
  * Returns: the number of replacements made it.
  */
-gint
-gtr_view_replace_all (GtrView * view,
-                      const gchar * find, const gchar * replace, guint flags)
+int
+gtr_view_replace_all (GtrView      *view,
+                      const char   *find,
+                      const char   *replace,
+                      unsigned int  flags)
 {
   GtkTextIter iter;
   GtkTextIter m_start;
@@ -687,10 +693,10 @@ gtr_view_replace_all (GtrView * view,
   GtkTextSearchFlags search_flags = 0;
   GtrViewPrivate *priv;
   gboolean found = TRUE;
-  gint cont = 0;
+  int cont = 0;
   g_autofree char *search_text = NULL;
   g_autofree char *replace_text = NULL;
-  gint replace_text_len;
+  int replace_text_len;
   GtkTextBuffer *buffer;
 
   g_return_val_if_fail (GTR_IS_VIEW (view), 0);
@@ -782,7 +788,7 @@ gtr_view_reload_scheme_color (GtrView * view)
   GtkSourceBuffer *buf;
   GtkSourceStyleScheme *scheme;
   GtkSourceStyleSchemeManager *manager;
-  const gchar *scheme_id;
+  const char *scheme_id;
   AdwStyleManager *style_manager;
 
   style_manager = adw_style_manager_get_default ();

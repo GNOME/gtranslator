@@ -29,9 +29,9 @@ G_DECLARE_FINAL_TYPE (GtrLangComboRow, gtr_lang_combo_row, GTR, LANG_COMBO_ROW, 
 
 GtrLangComboRow*  gtr_lang_combo_row_new       (void);
 
-const gchar *     gtr_lang_combo_row_get_lang  (GtrLangComboRow *self);
-void              gtr_lang_combo_row_set_lang  (GtrLangComboRow *self,
-                                                const gchar     *name);
+const char      *gtr_lang_combo_row_get_lang  (GtrLangComboRow *self);
+void             gtr_lang_combo_row_set_lang  (GtrLangComboRow *self,
+                                               const char      *name);
 
 G_END_DECLS
 

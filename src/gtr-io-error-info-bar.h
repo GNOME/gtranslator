@@ -25,8 +25,8 @@
 
 G_BEGIN_DECLS
 
-  void create_info_info_bar (const gchar * primary_text,
-                             const gchar * secondary_text,
-                             GtrTab * tab);
+void create_info_info_bar (const char *primary_text,
+                           const char *secondary_text,
+                           GtrTab     *tab);
 
 G_END_DECLS

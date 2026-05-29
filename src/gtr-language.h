@@ -39,11 +39,11 @@ void                     gtr_language_free               (GtrLanguage       *lan
 
 const GSList            *gtr_language_get_languages      (void);
 
-const gchar             *gtr_language_get_code           (const GtrLanguage *lang);
+const char              *gtr_language_get_code           (const GtrLanguage *lang);
 
-const gchar             *gtr_language_get_name           (const GtrLanguage *lang);
+const char              *gtr_language_get_name           (const GtrLanguage *lang);
 
-const gchar             *gtr_language_get_plural_form    (const GtrLanguage *lang);
+const char              *gtr_language_get_plural_form    (const GtrLanguage *lang);
 
 void                     gtr_languages_finalize          (void);
 

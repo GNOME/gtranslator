@@ -39,7 +39,7 @@ typedef struct
 
   GtrTranslationMemory *translation_memory;
 
-  guint add_to_db_id;
+  unsigned int add_to_db_id;
 } GtrTranslationMemoryDialogPrivate;
 
 struct _GtrTranslationMemoryDialog
@@ -151,7 +151,7 @@ add_to_database (gpointer data_pointer)
 {
   IdleData *data = (IdleData *) data_pointer;
   static GSList *l = NULL;
-  gdouble percentage;
+  double percentage;
 
   if (l == NULL)
     l = data->list;
@@ -210,7 +210,7 @@ destroy_idle_data (gpointer data)
 typedef struct
 {
   GFile *dir;
-  gchar *restriction;
+  char *restriction;
 } ScanDirTaskData;
 
 static void
@@ -287,7 +287,7 @@ static void
 on_add_database_button_clicked (GtkButton                  *button,
                                 GtrTranslationMemoryDialog *dlg)
 {
-  gchar *dir_name;
+  char *dir_name;
   GtrTranslationMemoryDialogPrivate *priv = gtr_translation_memory_dialog_get_instance_private (dlg);
   ScanDirTaskData *scan_dir_data;
 
@@ -320,8 +320,8 @@ gtr_translation_memory_dialog_init (GtrTranslationMemoryDialog *dlg)
   GtrTranslationMemoryDialogPrivate *priv = gtr_translation_memory_dialog_get_instance_private (dlg);
   GtrProfileManager *prof_manager;
   GtrProfile *profile;
-  const gchar *language_code;
-  gchar *filename = NULL;
+  const char *language_code;
+  char *filename = NULL;
 
   priv->tm_settings = g_settings_new ("org.gnome.Gtranslator.plugins.translation-memory");
 

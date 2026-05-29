@@ -44,9 +44,9 @@ struct _GtrTranslationMemoryInterface
 typedef struct _GtrTranslationMemoryMatch GtrTranslationMemoryMatch;
 struct _GtrTranslationMemoryMatch
 {
-  gchar *match;
-  gint level;
-  gint id;
+  char *match;
+  int level;
+  int id;
 };
 
 gboolean        gtr_translation_memory_store            (GtrTranslationMemory   *obj,
@@ -56,16 +56,16 @@ gboolean        gtr_translation_memory_store_list       (GtrTranslationMemory   
                                                          GList                  *msg);
 
 GList          *gtr_translation_memory_lookup           (GtrTranslationMemory   *obj,
-                                                         const gchar            *phrase);
+                                                         const char             *phrase);
 
 void            gtr_translation_memory_set_max_omits    (GtrTranslationMemory   *obj,
-                                                         gsize                   omits);
+                                                         size_t                  omits);
 
 void            gtr_translation_memory_set_max_delta    (GtrTranslationMemory   *obj,
-                                                         gsize                   delta);
+                                                         size_t                  delta);
 
 void            gtr_translation_memory_set_max_items    (GtrTranslationMemory   *obj,
-                                                         gint                    items);
+                                                         int                     items);
 
 void            gtr_translation_memory_match_free       (GtrTranslationMemoryMatch *match);
 

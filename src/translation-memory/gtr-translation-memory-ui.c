@@ -110,7 +110,8 @@ gtr_tm_new (uint shortcut, int level, const char *match)
 }
 
 static void
-choose_translation (GtrTranslationMemoryUi *tm_ui, const gchar *translation)
+choose_translation (GtrTranslationMemoryUi *tm_ui,
+                    const char             *translation)
 {
   GtrView *view;
   GtkTextBuffer *buffer;
@@ -139,7 +140,7 @@ choose_translation (GtrTranslationMemoryUi *tm_ui, const gchar *translation)
 static void
 showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrTranslationMemoryUi *tm_ui)
 {
-  const gchar *msgid;
+  const char *msgid;
   int i = 0;
   g_autolist (GtrTranslationMemoryMatch) tm_list = NULL;
   GList *l = NULL;

@@ -60,8 +60,9 @@ struct _GtrViewClass
  */
      GtkWidget *gtr_view_new (void);
 
-     gboolean gtr_view_get_selected_text (GtrView * view,
-                                          gchar ** selected_text, gint * len);
+     gboolean gtr_view_get_selected_text (GtrView *view,
+                                          char   **selected_text,
+                                          int     *len);
 
      void gtr_view_enable_visible_whitespace
        (GtrView * view, gboolean enable);
@@ -72,10 +73,11 @@ struct _GtrViewClass
 
      void gtr_view_paste_clipboard (GtrView * view);
 
-     void gtr_view_set_search_text (GtrView * view,
-                                    const gchar * text, guint flags);
+     void gtr_view_set_search_text (GtrView      *view,
+                                    const char   *text,
+                                    unsigned int  flags);
 
-     gchar *gtr_view_get_search_text (GtrView * view, guint * flags);
+     char *gtr_view_get_search_text (GtrView *view, unsigned int *flags);
 
      gboolean gtr_view_get_can_search_again (GtrView * view);
 
@@ -91,9 +93,10 @@ struct _GtrViewClass
                                         GtkTextIter * match_start,
                                         GtkTextIter * match_end);
 
-     gint gtr_view_replace_all (GtrView * view,
-                                const gchar * find,
-                                const gchar * replace, guint flags);
+     int gtr_view_replace_all (GtrView     *view,
+                               const char  *find,
+                               const char  *replace,
+                               unsigned int flags);
 
      void gtr_view_reload_scheme_color (GtrView * view);
 

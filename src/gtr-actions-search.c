@@ -59,7 +59,7 @@ last_search_data_free (LastSearchData *data)
 void
 last_search_data_set (LastSearchData * data, GtrSearchBar * dialog)
 {
-  const gchar *str;
+  const char *str;
 
   str = gtr_search_bar_get_search_text (dialog);
   if (str != NULL && *str != '\0')
@@ -173,8 +173,8 @@ static gboolean
 _msg_equal_func (GtrMsg *msg, GRegex *regex, gboolean original_text,
                  gboolean translated_text)
 {
-  const gchar *original = NULL;
-  const gchar *translated = NULL;
+  const char *original = NULL;
+  const char *translated = NULL;
   gboolean found = FALSE;
 
   original = gtr_msg_get_msgid (msg);
@@ -189,9 +189,9 @@ _msg_equal_func (GtrMsg *msg, GRegex *regex, gboolean original_text,
   return found;
 }
 
-static gint
+static int
 find_in_selection_model (GtrWindow *window, GtrSearchBar *searchbar,
-                         gint current_pos, gboolean search_backwards)
+                         int current_pos, gboolean search_backwards)
 {
   GtrTab *tab = gtr_window_get_active_tab (window);
   GListModel *model = G_LIST_MODEL (gtr_tab_get_selection_model (tab));
@@ -201,9 +201,9 @@ find_in_selection_model (GtrWindow *window, GtrSearchBar *searchbar,
   gboolean translated_text;
   gboolean wrap_around;
   gboolean found = FALSE;
-  gint pos = -1;
-  gint i = 0;
-  gint nitems = g_list_model_get_n_items (model);
+  int pos = -1;
+  int i = 0;
+  int nitems = g_list_model_get_n_items (model);
 
   /* Views where find */
   original_text = gtr_search_bar_get_original_text (searchbar);
@@ -256,13 +256,13 @@ find_in_list (GtrWindow *window, GtrSearchBar *searchbar)
 {
   GList *views, *list;
   g_autofree char *search_text = NULL;
-  const gchar *entry_text;
+  const char *entry_text;
   gboolean original_text;
   gboolean translated_text;
   gboolean match_case;
   gboolean entire_word;
-  guint flags = 0;
-  guint old_flags = 0;
+  unsigned int flags = 0;
+  unsigned int old_flags = 0;
 
   // Use static to keep the search state between different calls
   static GList *viewsaux = NULL;
@@ -329,8 +329,8 @@ void
 do_find (GtrSearchBar *searchbar, GtrWindow *window, gboolean search_backwards)
 {
   GtrTab *tab;
-  gint pos = -1;
-  gint current_pos = -1;
+  int pos = -1;
+  int current_pos = -1;
   gboolean found = FALSE;
 
   /* Used to store search options */
@@ -361,7 +361,7 @@ do_find (GtrSearchBar *searchbar, GtrWindow *window, gboolean search_backwards)
 }
 
 static void
-replace_selected_text (GtkTextBuffer * buffer, const gchar * replace)
+replace_selected_text (GtkTextBuffer * buffer, const char * replace)
 {
   g_return_if_fail (gtk_text_buffer_get_selection_bounds
                     (buffer, NULL, NULL));
@@ -380,11 +380,11 @@ void
 do_replace (GtrSearchBar * dialog, GtrWindow * window)
 {
   GtrView *view;
-  const gchar *search_entry_text;
-  const gchar *replace_entry_text;
-  gchar *unescaped_search_text;
-  gchar *unescaped_replace_text;
-  gchar *selected_text = NULL;
+  const char *search_entry_text;
+  const char *replace_entry_text;
+  char *unescaped_search_text;
+  char *unescaped_replace_text;
+  char *selected_text = NULL;
   gboolean match_case;
   GtrTab *tab;
 
@@ -445,12 +445,12 @@ do_replace_all (GtrSearchBar *searchbar, GtrWindow * window)
   g_autoptr (GList) views = NULL;
   GList *l;
   GList *current_msg, *aux;
-  const gchar *search_entry_text;
-  const gchar *replace_entry_text;
+  const char *search_entry_text;
+  const char *replace_entry_text;
   gboolean match_case;
   gboolean entire_word;
-  guint flags = 0;
-  gint count = 0;
+  unsigned int flags = 0;
+  int count = 0;
 
   tab = gtr_window_get_active_tab (window);
   gtr_tab_find_replace (tab, TRUE);

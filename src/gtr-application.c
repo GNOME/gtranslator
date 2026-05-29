@@ -62,9 +62,9 @@ typedef struct
 {
   GSettings *window_settings;
 
-  gchar *last_dir;
+  char *last_dir;
 
-  guint first_run : 1;
+  unsigned int first_run : 1;
 } GtrApplicationPrivate;
 
 G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrApplication, gtr_application,
@@ -82,9 +82,9 @@ get_active_window (GtrApplication *app)
 static gboolean
 ensure_user_config_dir (void)
 {
-  const gchar *config_dir;
+  const char *config_dir;
   gboolean ret = TRUE;
-  gint res;
+  int res;
 
   config_dir = gtr_dirs_get_user_config_dir ();
   if (config_dir == NULL)
@@ -130,8 +130,8 @@ gtr_application_handle_local_options (GApplication *application,
 static void
 gtr_application_init (GtrApplication *application)
 {
-  const gchar *gtr_folder;
-  gchar *profiles_file;
+  const char *gtr_folder;
+  char *profiles_file;
   GtrApplicationPrivate *priv
       = gtr_application_get_instance_private (application);
 
@@ -492,9 +492,9 @@ static GActionEntry app_entries[]
         { "quit", quit_activated, NULL, NULL, NULL } };
 
 static void
-set_kb (GApplication *app, const gchar *action, const gchar *accel)
+set_kb (GApplication *app, const char *action, const char *accel)
 {
-  const gchar *keys[] = { accel, NULL };
+  const char *keys[] = { accel, NULL };
   gtk_application_set_accels_for_action (GTK_APPLICATION (app), action, keys);
 }
 
@@ -560,7 +560,7 @@ gtr_application_startup (GApplication *application)
 
 static void
 gtr_application_setup_window (GApplication *application, GFile **files,
-                              gint n_files)
+                              int n_files)
 {
   GtrApplication *app = GTR_APPLICATION (application);
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
@@ -569,7 +569,7 @@ gtr_application_setup_window (GApplication *application, GFile **files,
 
   if (files != NULL)
     {
-      gint i;
+      int i;
       for (i = 0; i < n_files; ++i)
         /* I don't know whether GApplication gets rid of
          * malformed files passed on the command-line.
@@ -595,8 +595,10 @@ gtr_application_setup_window (GApplication *application, GFile **files,
 }
 
 static void
-gtr_application_open (GApplication *application, GFile **files, gint n_files,
-                      const gchar *hint)
+gtr_application_open (GApplication *application,
+                      GFile       **files,
+                      int           n_files,
+                      const char   *hint)
 {
   gtr_application_setup_window (application, files, n_files);
 }
@@ -661,7 +663,7 @@ GtrWindow *
 gtr_application_create_window (GtrApplication *app)
 {
   GtrWindow *window;
-  gint w, h;
+  int w, h;
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
   g_autoptr (GtkWindowGroup) group = NULL;
   gboolean is_maximized;
@@ -728,7 +730,7 @@ gtr_application_get_active_window (GtrApplication *app)
  *
  * Return value: the last dir where a file was opened in the GtkFileChooser
  */
-const gchar *
+const char *
 _gtr_application_get_last_dir (GtrApplication *app)
 {
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
@@ -744,7 +746,7 @@ _gtr_application_get_last_dir (GtrApplication *app)
  * GtkFileChooser.
  */
 void
-_gtr_application_set_last_dir (GtrApplication *app, const gchar *last_dir)
+_gtr_application_set_last_dir (GtrApplication *app, const char *last_dir)
 {
   GtrApplicationPrivate *priv = gtr_application_get_instance_private (app);
   g_return_if_fail (GTR_IS_APPLICATION (app));

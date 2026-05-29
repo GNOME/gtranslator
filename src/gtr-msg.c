@@ -42,7 +42,7 @@ typedef struct
 
   GtrMsgStatus status;
 
-  gint po_position;
+  int po_position;
 } GtrMsgPrivate;
 
 enum {
@@ -61,7 +61,7 @@ static GParamSpec *properties[N_PROPS] = { NULL, };
 
 G_DEFINE_TYPE_WITH_PRIVATE (GtrMsg, gtr_msg, G_TYPE_OBJECT);
 
-static gchar *message_error = NULL;
+static char *message_error = NULL;
 
 static void
 gtr_msg_recalc_status (GtrMsg *msg)
@@ -87,10 +87,10 @@ gtr_msg_finalize (GObject * object)
 }
 
 static void
-gtr_msg_get_property (GObject    *object,
-                      guint       property_id,
-                      GValue     *value,
-                      GParamSpec *pspec)
+gtr_msg_get_property (GObject     *object,
+                      unsigned int property_id,
+                      GValue      *value,
+                      GParamSpec  *pspec)
 {
   GtrMsg *self = GTR_MSG (object);
 
@@ -278,11 +278,11 @@ gtr_msg_is_translated (GtrMsg *msg)
     return gtr_msg_get_msgstr (msg)[0] != '\0';
   else
     {
-      gint i;
+      int i;
 
       for (i = 0;; i++)
         {
-          const gchar *msgstr_i = gtr_msg_get_msgstr_plural (msg, i);
+          const char *msgstr_i = gtr_msg_get_msgstr_plural (msg, i);
           if (msgstr_i == NULL)
             break;
           if (msgstr_i[0] == '\0')
@@ -377,7 +377,7 @@ gtr_msg_get_status (GtrMsg * msg)
  *
  * Return value: the msgid (untranslated English string) of a message.
  **/
-const gchar *
+const char *
 gtr_msg_get_msgid (GtrMsg * msg)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
@@ -394,7 +394,7 @@ gtr_msg_get_msgid (GtrMsg * msg)
  * Return value: (transfer none): the msgid_plural (untranslated English plural
  *               string) of a message, or NULL for a message without plural.
  **/
-const gchar *
+const char *
 gtr_msg_get_msgid_plural (GtrMsg * msg)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
@@ -409,7 +409,7 @@ gtr_msg_get_msgid_plural (GtrMsg * msg)
  * Return value: (transfer none): the msgstr (translation) of a message.
  * Return the empty string for an untranslated message.
  **/
-const gchar *
+const char *
 gtr_msg_get_msgstr (GtrMsg * msg)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
@@ -428,7 +428,8 @@ gtr_msg_get_msgstr (GtrMsg * msg)
  * Use an empty string to denote an untranslated message.
  **/
 void
-gtr_msg_set_msgstr (GtrMsg * msg, const gchar * msgstr)
+gtr_msg_set_msgstr (GtrMsg     *msg,
+                    const char *msgstr)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_if_fail (GTR_IS_MSG (msg));
@@ -449,8 +450,9 @@ gtr_msg_set_msgstr (GtrMsg * msg, const gchar * msgstr)
  *               handling, or NULL when the index is out of range or for a
  *               message without plural.
  **/
-const gchar *
-gtr_msg_get_msgstr_plural (GtrMsg * msg, gint index)
+const char *
+gtr_msg_get_msgstr_plural (GtrMsg *msg,
+                           int     index)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
@@ -468,7 +470,9 @@ gtr_msg_get_msgstr_plural (GtrMsg * msg, gint index)
  * Use a NULL value at the end to reduce the number of plural forms.
  **/
 void
-gtr_msg_set_msgstr_plural (GtrMsg * msg, gint index, const gchar * msgstr)
+gtr_msg_set_msgstr_plural (GtrMsg     *msg,
+                           int         index,
+                           const char *msgstr)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_if_fail (GTR_IS_MSG (msg));
@@ -485,7 +489,7 @@ gtr_msg_set_msgstr_plural (GtrMsg * msg, gint index, const gchar * msgstr)
  *
  * Return value: (transfer none) the comments for a message.
  **/
-const gchar *
+const char *
 gtr_msg_get_comment (GtrMsg * msg)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
@@ -504,7 +508,8 @@ gtr_msg_get_comment (GtrMsg * msg)
  * ending in a newline, or empty.
  **/
 void
-gtr_msg_set_comment (GtrMsg * msg, const gchar * comment)
+gtr_msg_set_comment (GtrMsg     *msg,
+                     const char *comment)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_if_fail (GTR_IS_MSG (msg));
@@ -522,7 +527,7 @@ gtr_msg_set_comment (GtrMsg * msg, const gchar * comment)
  * Gets the position of this message in the PO file in relation to the other
  * messages.
  **/
-gint
+int
 gtr_msg_get_po_position (GtrMsg * msg)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
@@ -539,7 +544,8 @@ gtr_msg_get_po_position (GtrMsg * msg)
  * Sets the numerical position of this message in relation to other messages.
  **/
 void
-gtr_msg_set_po_position (GtrMsg * msg, gint po_position)
+gtr_msg_set_po_position (GtrMsg *msg,
+                         int     po_position)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_if_fail (GTR_IS_MSG (msg));
@@ -557,7 +563,7 @@ gtr_msg_set_po_position (GtrMsg * msg, gint po_position)
  *
  * Return value: (transfer none): the extracted comments for a message.
  **/
-const gchar *
+const char *
 gtr_msg_get_extracted_comments (GtrMsg * msg)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
@@ -574,8 +580,9 @@ gtr_msg_get_extracted_comments (GtrMsg * msg)
  * Return value: (transfer none): the i-th filename for a message, or NULL if
  *               @i is out of range.
  */
-const gchar *
-gtr_msg_get_filename (GtrMsg * msg, gint i)
+const char *
+gtr_msg_get_filename (GtrMsg *msg,
+                      int     i)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
@@ -599,7 +606,8 @@ gtr_msg_get_filename (GtrMsg * msg, gint i)
  *   @i is out of range.
  */
 size_t
-gtr_msg_get_file_line (GtrMsg * msg, gint i)
+gtr_msg_get_file_line (GtrMsg *msg,
+                       int     i)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   po_filepos_t filepos;
@@ -621,7 +629,7 @@ gtr_msg_get_file_line (GtrMsg * msg, gint i)
  * Return value: (transfer none): the context of a message, or NULL for a
  *               message not restricted to a context.
  */
-const gchar *
+const char *
 gtr_msg_get_msgctxt (GtrMsg * msg)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
@@ -641,12 +649,12 @@ gtr_msg_get_msgctxt (GtrMsg * msg)
  * Return value: (transfer none): the pretty name associated with a format type
  *               or NULL if the message hasn't any format type.
  */
-const gchar *
+const char *
 gtr_msg_get_format (GtrMsg * msg)
 {
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
-  const gchar *const *format_list;
-  gint i;
+  const char *const *format_list;
+  int i;
 
   g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
 
@@ -665,31 +673,31 @@ gtr_msg_get_format (GtrMsg * msg)
  * Functions to manage the gettext errors
  */
 static void
-on_gettext_po_xerror (gint severity,
+on_gettext_po_xerror (int          severity,
                       po_message_t message,
-                      const gchar * filename, size_t lineno, size_t column,
-                      gint multiline_p, const gchar * message_text)
+                      const char *filename, size_t lineno, size_t column,
+                      int multiline_p, const char *message_text)
 {
   g_set_str (&message_error, message_text);
 }
 
 static void
-on_gettext_po_xerror2 (gint severity,
-                       po_message_t message1,
-                       const gchar * filename1, size_t lineno1,
-                       size_t column1, gint multiline_p1,
-                       const gchar * message_text1, po_message_t message2,
-                       const gchar * filename2, size_t lineno2,
-                       size_t column2, gint multiline_p2,
-                       const gchar * message_text2)
+on_gettext_po_xerror2 (int           severity,
+                       po_message_t  message1,
+                       const char   *filename1,     size_t       lineno1,
+                       size_t        column1,       int          multiline_p1,
+                       const char   *message_text1, po_message_t message2,
+                       const char   *filename2,     size_t       lineno2,
+                       size_t        column2,       int          multiline_p2,
+                       const char   *message_text2)
 {
   g_warning ("Error: %s.\n %s", message_text1, message_text2);
 }
 
-gchar *
+char *
 gtr_msg_check_format (GtrMsg * msg)
 {
-  gchar *error = NULL;
+  char *error = NULL;
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   struct po_xerror_handler handler;
 
@@ -708,10 +716,10 @@ gtr_msg_check_format (GtrMsg * msg)
   return error;
 }
 
-gchar *
+char *
 gtr_msg_check_all (GtrMsg * msg)
 {
-  gchar *error = NULL;
+  char *error = NULL;
   GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
   struct po_xerror_handler handler;
 
@@ -740,10 +748,10 @@ gtr_msg_check_all (GtrMsg * msg)
  * Return value: (transfer full): the message error or NULL if there is not any
  *               error. Must be freed with g_free.
  **/
-gchar *
+char *
 gtr_msg_check (GtrMsg * msg)
 {
-  gchar *error = NULL;
+  char *error = NULL;
 
   error = gtr_msg_check_all (msg);
   if (!error)

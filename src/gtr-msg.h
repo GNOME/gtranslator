@@ -56,44 +56,44 @@ GtrMsgStatus               gtr_msg_get_status               (GtrMsg      *msg);
 void                       gtr_msg_set_status               (GtrMsg      *msg,
                                                              GtrMsgStatus status);
 
-const gchar               *gtr_msg_get_msgid                (GtrMsg      *msg);
+const char               *gtr_msg_get_msgid                 (GtrMsg      *msg);
 
-const gchar               *gtr_msg_get_msgid_plural         (GtrMsg      *msg);
+const char               *gtr_msg_get_msgid_plural          (GtrMsg      *msg);
 
-const gchar               *gtr_msg_get_msgstr               (GtrMsg      *msg);
+const char               *gtr_msg_get_msgstr                (GtrMsg      *msg);
 void                       gtr_msg_set_msgstr               (GtrMsg      *msg,
-                                                             const gchar *msgstr);
+                                                             const char  *msgstr);
 
-const gchar               *gtr_msg_get_msgstr_plural        (GtrMsg      *msg,
-                                                             gint         index);
-void                       gtr_msg_set_msgstr_plural        (GtrMsg      *msg,
-                                                             gint         index,
-                                                             const gchar *msgstr);
+const char               *gtr_msg_get_msgstr_plural         (GtrMsg     *msg,
+                                                             int         index);
+void                      gtr_msg_set_msgstr_plural         (GtrMsg     *msg,
+                                                             int         index,
+                                                             const char *msgstr);
 
-const gchar               *gtr_msg_get_comment              (GtrMsg      *msg);
-void                       gtr_msg_set_comment              (GtrMsg      *msg,
-                                                             const gchar *comment);
+const char               *gtr_msg_get_comment               (GtrMsg      *msg);
+void                      gtr_msg_set_comment               (GtrMsg      *msg,
+                                                             const char  *comment);
 
-gint                       gtr_msg_get_po_position          (GtrMsg      *msg);
-void                       gtr_msg_set_po_position          (GtrMsg      *msg,
-                                                             gint         po_position);
+int                       gtr_msg_get_po_position           (GtrMsg      *msg);
+void                      gtr_msg_set_po_position           (GtrMsg      *msg,
+                                                             int          po_position);
 
-const gchar               *gtr_msg_get_extracted_comments   (GtrMsg      *msg);
+const char               *gtr_msg_get_extracted_comments    (GtrMsg     *msg);
 
-const gchar               *gtr_msg_get_filename             (GtrMsg      *msg,
-                                                             gint         i);
+const char               *gtr_msg_get_filename              (GtrMsg     *msg,
+                                                             int         i);
 
-size_t                     gtr_msg_get_file_line            (GtrMsg      *msg,
-                                                             gint         i);
+size_t                    gtr_msg_get_file_line             (GtrMsg     *msg,
+                                                             int         i);
 
-const gchar               *gtr_msg_get_msgctxt              (GtrMsg      *msg);
+const char               *gtr_msg_get_msgctxt               (GtrMsg     *msg);
 
-const gchar               *gtr_msg_get_format               (GtrMsg      *msg);
+const char               *gtr_msg_get_format                (GtrMsg     *msg);
 
-gchar                     *gtr_msg_check                    (GtrMsg      *msg);
+char                     *gtr_msg_check                     (GtrMsg     *msg);
 
-gboolean                  gtr_msg_fix_plurals               (GtrMsg      *msg,
-                                                             int plurals);
+gboolean                  gtr_msg_fix_plurals               (GtrMsg     *msg,
+                                                             int         plurals);
 
 gboolean                  gtr_msg_compare                   (GtrMsg *first, GtrMsg *second);
 

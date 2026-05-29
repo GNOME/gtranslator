@@ -59,13 +59,13 @@ typedef struct
   GtkStringList *branches_model;
   GListStore *domains_model;
 
-  gchar *selected_lang;
-  gchar *selected_module;
-  gchar *selected_branch;
-  gchar *selected_domain;
-  gchar *file_path;
-  gchar *module_state;
-  gchar *vcs_web;
+  char *selected_lang;
+  char *selected_module;
+  char *selected_branch;
+  char *selected_domain;
+  char *file_path;
+  char *module_state;
+  char *vcs_web;
 
   GtrWindow *main_window;
 
@@ -201,7 +201,7 @@ gtr_dl_teams_parse_module_details (GObject *object, GAsyncResult *result, gpoint
 {
   GtrDlTeams *self = GTR_DL_TEAMS (user_data);
   GtrDlTeamsPrivate *priv = gtr_dl_teams_get_instance_private (self);
-  gint i;
+  int i;
   JsonNode *node = NULL;
   JsonObject *jobject;
   JsonNode *branchesNode;
@@ -547,8 +547,8 @@ gtr_dl_teams_download_file_done (GObject *object, GAsyncResult *result, gpointer
   SoupMessage *msg = NULL;
   SoupStatus status_code;
 
-  gsize n_bytes;
-  const gchar *bytes_buf;
+  size_t n_bytes;
+  const char *bytes_buf;
 
   g_autoptr (GFile) tmp_file = NULL;
   g_autoptr(GFile) dest_file = NULL;

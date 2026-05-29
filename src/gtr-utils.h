@@ -26,27 +26,29 @@
 #include <gtk/gtk.h>
 #include <libxml/tree.h>
 
-xmlDocPtr gtr_xml_new_doc (const gchar * name);
+xmlDocPtr gtr_xml_new_doc (const char *name);
 
-xmlDocPtr gtr_xml_open_file (const gchar * filename);
+xmlDocPtr gtr_xml_open_file (const char *filename);
 
-     gchar *gtr_utils_escape_search_text (const gchar * text);
+     char *gtr_utils_escape_search_text (const char *text);
 
-     gchar *gtr_utils_unescape_search_text (const gchar * text);
+     char *gtr_utils_unescape_search_text (const char *text);
 
-     gboolean g_utf8_caselessnmatch (const gchar * s1,
-                                     const gchar * s2, gssize n1, gssize n2);
+     gboolean g_utf8_caselessnmatch (const char *s1,
+                                     const char *s2,
+                                     ssize_t     n1,
+                                     ssize_t     n2);
 
      void gtr_utils_help_display (GtkWindow * parent);
 
-     gchar *gtr_utils_get_current_date (void);
+     char *gtr_utils_get_current_date (void);
 
-     gchar *gtr_utils_get_current_time (void);
+     char *gtr_utils_get_current_time (void);
 
-     gchar *gtr_utils_get_current_year (void);
+     char *gtr_utils_get_current_year (void);
 
-     gchar * gtr_utils_get_filename (const gchar * filename);
+     char *gtr_utils_get_filename (const char *filename);
 
-     gchar * pango_font_description_to_css (PangoFontDescription *desc);
+     char *pango_font_description_to_css (PangoFontDescription *desc);
 
-     int parse_nplurals_header (const gchar * plurals_header);
+     int parse_nplurals_header (const char *plurals_header);

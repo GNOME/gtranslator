@@ -54,7 +54,7 @@ on_uri_launch (GObject *object, GAsyncResult *result, gpointer user_data)
 }
 
 xmlDocPtr
-gtr_xml_new_doc (const gchar * name)
+gtr_xml_new_doc (const char *name)
 {
   xmlNodePtr root;
   xmlDocPtr doc;
@@ -65,7 +65,7 @@ gtr_xml_new_doc (const gchar * name)
 }
 
 xmlDocPtr
-gtr_xml_open_file (const gchar * filename)
+gtr_xml_open_file (const char *filename)
 {
   xmlDocPtr doc;
   g_return_val_if_fail (filename != NULL, NULL);
@@ -73,13 +73,13 @@ gtr_xml_open_file (const gchar * filename)
   return doc;
 }
 
-gchar *
-gtr_utils_escape_search_text (const gchar * text)
+char *
+gtr_utils_escape_search_text (const char *text)
 {
   GString *str;
-  gint length;
-  const gchar *p;
-  const gchar *end;
+  int length;
+  const char *p;
+  const char *end;
 
   if (text == NULL)
     return NULL;
@@ -99,7 +99,7 @@ gtr_utils_escape_search_text (const gchar * text)
 
   while (p != end)
     {
-      const gchar *next;
+      const char *next;
       next = g_utf8_next_char (p);
 
       switch (*p)
@@ -127,15 +127,15 @@ gtr_utils_escape_search_text (const gchar * text)
   return g_string_free_and_steal (str);
 }
 
-gchar *
-gtr_utils_unescape_search_text (const gchar * text)
+char *
+gtr_utils_unescape_search_text (const char *text)
 {
   GString *str;
-  gint length;
+  int length;
   gboolean drop_prev = FALSE;
-  const gchar *cur;
-  const gchar *end;
-  const gchar *prev;
+  const char *cur;
+  const char *end;
+  const char *prev;
 
   if (text == NULL)
     return NULL;
@@ -150,7 +150,7 @@ gtr_utils_unescape_search_text (const gchar * text)
 
   while (cur != end)
     {
-      const gchar *next;
+      const char *next;
       next = g_utf8_next_char (cur);
 
       if (prev && (*prev == '\\'))
@@ -205,14 +205,16 @@ gtr_utils_unescape_search_text (const gchar * text)
  * n: len of the string in bytes
  */
 gboolean
-g_utf8_caselessnmatch (const gchar * s1,
-                       const gchar * s2, gssize n1, gssize n2)
+g_utf8_caselessnmatch (const char *s1,
+                       const char *s2,
+                       ssize_t     n1,
+                       ssize_t     n2)
 {
-  gchar *casefold;
-  gchar *normalized_s1;
-  gchar *normalized_s2;
-  gint len_s1;
-  gint len_s2;
+  char *casefold;
+  char *normalized_s1;
+  char *normalized_s2;
+  int len_s1;
+  int len_s2;
   gboolean ret = FALSE;
 
   g_return_val_if_fail (s1 != NULL, FALSE);
@@ -268,7 +270,7 @@ gtr_utils_help_display (GtkWindow * window)
     g_object_unref (context);
 }
 
-gchar *
+char *
 gtr_utils_get_current_date (void)
 {
   g_autoptr (GDateTime) now = NULL;
@@ -278,7 +280,7 @@ gtr_utils_get_current_date (void)
   return g_date_time_format (now, "%Y-%m-%d");
 }
 
-gchar *
+char *
 gtr_utils_get_current_time (void)
 {
   g_autoptr (GDateTime) now = NULL;
@@ -288,7 +290,7 @@ gtr_utils_get_current_time (void)
   return g_date_time_format (now, "%H:%M%z");
 }
 
-gchar *
+char *
 gtr_utils_get_current_year (void)
 {
   g_autoptr (GDateTime) now = NULL;
@@ -299,10 +301,10 @@ gtr_utils_get_current_year (void)
 }
 
 // Removes the extension from a filename
-gchar *
-gtr_utils_get_filename (const gchar * filename)
+char *
+gtr_utils_get_filename (const char *filename)
 {
-  gchar *new_str;
+  char *new_str;
   g_auto (GStrv) array = NULL;
   int l = 0;
 
@@ -381,7 +383,7 @@ skip:
 
 /* Copied from gtkfontbutton.c */
 /* The only difference is the definition of `s`. */
-gchar *
+char *
 pango_font_description_to_css (PangoFontDescription *desc)
 {
   GString *s;
@@ -537,12 +539,12 @@ pango_font_description_to_css (PangoFontDescription *desc)
 // TODO: Improve this parser, this string parsing is weak
 // It could be better to use GRegex: https://docs.gtk.org/glib/method.Regex.match.html
 int
-parse_nplurals_header (const gchar * plurals_header)
+parse_nplurals_header (const char *plurals_header)
 {
   if (plurals_header == NULL)
     return -1;
 
-  gchar * pointer = g_strrstr (plurals_header, "nplurals");
+  char * pointer = g_strrstr (plurals_header, "nplurals");
 
   if (!pointer)
     return -1;

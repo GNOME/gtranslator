@@ -31,16 +31,16 @@ G_BEGIN_DECLS
 typedef struct _LastSearchData LastSearchData;
 struct _LastSearchData
 {
-  gchar *find_text;
-  gchar *replace_text;
+  char *find_text;
+  char *replace_text;
 
-  gint original_text:1;
-  gint translated_text:1;
-  gint fuzzy_messages:1;
-  gint match_case:1;
-  gint entire_word:1;
-  gint backwards:1;
-  gint wrap_around:1;
+  int original_text:1;
+  int translated_text:1;
+  int fuzzy_messages:1;
+  int match_case:1;
+  int entire_word:1;
+  int backwards:1;
+  int wrap_around:1;
 };
 
 void gtr_want_to_save_current_dialog (GtrWindow * window, void (*callback)(GtrWindow *));

@@ -44,7 +44,7 @@ copy_lang (gconstpointer src,
            gpointer      data)
 {
   GtrLanguage *lang = (GtrLanguage *)src;
-  const gchar *langname = gtr_language_get_name (lang);
+  const char *langname = gtr_language_get_name (lang);
 
   return g_strdup ((char *)langname);
 }
@@ -107,7 +107,7 @@ gtr_lang_combo_row_new (void) {
   return self;
 }
 
-const gchar *
+const char *
 gtr_lang_combo_row_get_lang (GtrLangComboRow *self)
 {
   GtrDropDownOption *opt = GTR_DROP_DOWN_OPTION (
@@ -121,7 +121,7 @@ gtr_lang_combo_row_get_lang (GtrLangComboRow *self)
 
 void
 gtr_lang_combo_row_set_lang (GtrLangComboRow *self,
-                          const gchar   *name)
+                             const char      *name)
 {
   GtrLangComboRowPrivate *priv = gtr_lang_combo_row_get_instance_private (GTR_LANG_COMBO_ROW (self));
   unsigned int lang_pos = 0;

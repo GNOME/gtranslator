@@ -133,7 +133,7 @@ gtr_message_table_row_finalize (GObject *object)
 
 static void
 gtr_message_table_row_set_property (GObject      *object,
-                                    guint         prop_id,
+                                    unsigned int  prop_id,
                                     const GValue *value,
                                     GParamSpec   *pspec)
 {
@@ -152,10 +152,10 @@ gtr_message_table_row_set_property (GObject      *object,
 }
 
 static void
-gtr_message_table_row_get_property (GObject    *object,
-                                    guint       prop_id,
-                                    GValue     *value,
-                                    GParamSpec *pspec)
+gtr_message_table_row_get_property (GObject      *object,
+                                    unsigned int  prop_id,
+                                    GValue       *value,
+                                    GParamSpec   *pspec)
 {
   GtrMessageTableRow *row = GTR_MESSAGE_TABLE_ROW (object);
   GtrMessageTableRowPrivate *priv;

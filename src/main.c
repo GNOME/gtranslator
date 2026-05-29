@@ -47,9 +47,9 @@
 static void
 setup_path (void)
 {
-  gchar *path;
-  gchar *installdir;
-  gchar *bin;
+  char *path;
+  char *installdir;
+  char *bin;
 
   installdir = g_win32_get_package_installation_directory_of_module (NULL);
 
@@ -68,11 +68,11 @@ setup_path (void)
 #endif
 
 /* The ubiquitous main function... */
-gint
-main (gint argc, gchar * argv[])
+int
+main (int argc, char *argv[])
 {
   g_autoptr (GtrApplication) app = NULL;
-  gint status;
+  int status;
 
   gtr_dirs_init ();
 

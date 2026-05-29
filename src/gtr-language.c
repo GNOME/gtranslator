@@ -35,9 +35,9 @@
 
 struct _GtrLanguage
 {
-  gchar *code;
-  gchar *name;
-  gchar *plural_form;
+  char *code;
+  char *name;
+  char *plural_form;
 };
 
 static gboolean initialized = FALSE;
@@ -91,7 +91,7 @@ gtr_language_free (GtrLanguage *lang)
 static void
 load_plural_form (GtrLanguage *lang)
 {
-  gchar *plural_form = NULL;
+  char *plural_form = NULL;
   g_auto (GStrv) parts = NULL;
 
   plural_form = g_key_file_get_string (plurals_file, "Plural Forms", lang->code, NULL);
@@ -122,11 +122,11 @@ typedef enum
 static void
 gtr_language_lazy_init (void)
 {
-  gchar *filename;
+  char *filename;
   g_autoptr (GKeyFile) lang_file = NULL;
   g_auto (GStrv) langs = NULL;
-  gchar *lang;
-  gsize n, i;
+  char *lang;
+  size_t n, i;
 
   if (initialized)
     return;
@@ -181,7 +181,7 @@ gtr_language_get_languages (void)
   return languages;
 }
 
-const gchar *
+const char *
 gtr_language_get_code (const GtrLanguage *lang)
 {
   g_return_val_if_fail (lang != NULL, NULL);
@@ -191,7 +191,7 @@ gtr_language_get_code (const GtrLanguage *lang)
   return lang->code;
 }
 
-const gchar *
+const char *
 gtr_language_get_name (const GtrLanguage *lang)
 {
   g_return_val_if_fail (lang != NULL, NULL);
@@ -201,7 +201,7 @@ gtr_language_get_name (const GtrLanguage *lang)
   return lang->name;
 }
 
-const gchar *
+const char *
 gtr_language_get_plural_form (const GtrLanguage *lang)
 {
   g_return_val_if_fail (lang != NULL, NULL);

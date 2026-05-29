@@ -62,7 +62,7 @@ enum
 
 G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrLanguagesFetcher, gtr_languages_fetcher, ADW_TYPE_PREFERENCES_GROUP);
 
-static guint signals[LAST_SIGNAL] = { 0 };
+static unsigned int signals[LAST_SIGNAL] = { 0 };
 
 static void
 gtr_languages_fetcher_finalize (GObject *object)
@@ -104,12 +104,12 @@ gtr_languages_fetcher_class_init (GtrLanguagesFetcherClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, GtrLanguagesFetcher, plural_forms_store);
 }
 
-static gint
+static int
 compare_languages_code (gconstpointer a,
                         gconstpointer b)
 {
   GtrLanguage *lang1, *lang2;
-  const gchar *name1, *name2;
+  const char *name1, *name2;
 
   lang1 = (GtrLanguage *) a;
   lang2 = (GtrLanguage *) b;
@@ -135,7 +135,7 @@ append_from_languages (GtrLanguagesFetcher *fetcher)
   for (l = languages; l != NULL; l = g_slist_next (l))
     {
       GtrLanguage *lang = (GtrLanguage *)l->data;
-      const gchar *plural_form;
+      const char *plural_form;
 
       gtk_string_list_append (GTK_STRING_LIST (priv->code_store),
                               gtr_language_get_code (lang));
@@ -143,7 +143,7 @@ append_from_languages (GtrLanguagesFetcher *fetcher)
       plural_form = gtr_language_get_plural_form (lang);
       if (plural_form != NULL && *plural_form != '\0')
         {
-          gint *value;
+          int *value;
 
           value = g_hash_table_lookup (plurals, plural_form);
           if (value == NULL)
@@ -159,7 +159,7 @@ append_from_languages (GtrLanguagesFetcher *fetcher)
 static void
 fill_encoding_and_charset (GtrLanguagesFetcher *fetcher)
 {
-  const gchar *text;
+  const char *text;
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
 
   text = gtk_editable_get_text (GTK_EDITABLE (priv->charset));
@@ -176,8 +176,8 @@ fill_from_language_entry (GtrLanguagesFetcher *fetcher,
                           GtrLanguage         *lang)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  const gchar *code;
-  const gchar *plural_form;
+  const char *code;
+  const char *plural_form;
 
   fill_encoding_and_charset (fetcher);
 
@@ -194,7 +194,7 @@ static void
 update_language (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
-  const gchar *text = gtr_lang_combo_row_get_lang (GTR_LANG_COMBO_ROW (priv->language));
+  const char *text = gtr_lang_combo_row_get_lang (GTR_LANG_COMBO_ROW (priv->language));
   GtrLanguage *lang;
   const GSList *l;
   const GSList *languages = gtr_language_get_languages ();
@@ -202,7 +202,7 @@ update_language (GtrLanguagesFetcher *fetcher)
   for (l = languages; l != NULL; l = g_slist_next (l))
     {
       lang = (GtrLanguage*)l->data;
-      const gchar *langname = gtr_language_get_name (lang);
+      const char *langname = gtr_language_get_name (lang);
       if (text != NULL && g_strcmp0 (langname, text) == 0)
         {
           fill_from_language_entry (fetcher, lang);
@@ -323,7 +323,7 @@ gtr_languages_fetcher_new (void)
   return g_object_new (GTR_TYPE_LANGUAGES_FETCHER, NULL);
 }
 
-const gchar *
+const char *
 gtr_languages_fetcher_get_language_name (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
@@ -332,13 +332,13 @@ gtr_languages_fetcher_get_language_name (GtrLanguagesFetcher *fetcher)
 
 void
 gtr_languages_fetcher_set_language_name (GtrLanguagesFetcher *fetcher,
-                                         const gchar         *name)
+                                         const char          *name)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
   gtr_lang_combo_row_set_lang (GTR_LANG_COMBO_ROW (priv->language), name);
 }
 
-const gchar *
+const char *
 gtr_languages_fetcher_get_language_code (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
@@ -347,13 +347,13 @@ gtr_languages_fetcher_get_language_code (GtrLanguagesFetcher *fetcher)
 
 void
 gtr_languages_fetcher_set_language_code (GtrLanguagesFetcher *fetcher,
-                                         const gchar         *code)
+                                         const char          *code)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
   gtk_editable_set_text (GTK_EDITABLE (priv->language_code), code);
 }
 
-const gchar *
+const char *
 gtr_languages_fetcher_get_charset (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
@@ -362,13 +362,13 @@ gtr_languages_fetcher_get_charset (GtrLanguagesFetcher *fetcher)
 
 void
 gtr_languages_fetcher_set_charset (GtrLanguagesFetcher *fetcher,
-                                   const gchar         *charset)
+                                   const char          *charset)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
   gtk_editable_set_text (GTK_EDITABLE (priv->charset), charset);
 }
 
-const gchar *
+const char *
 gtr_languages_fetcher_get_encoding (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
@@ -377,13 +377,13 @@ gtr_languages_fetcher_get_encoding (GtrLanguagesFetcher *fetcher)
 
 void
 gtr_languages_fetcher_set_encoding (GtrLanguagesFetcher *fetcher,
-                                    const gchar         *enc)
+                                    const char          *enc)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
   gtk_editable_set_text (GTK_EDITABLE (priv->encoding), enc);
 }
 
-const gchar *
+const char *
 gtr_languages_fetcher_get_plural_form (GtrLanguagesFetcher *fetcher)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
@@ -392,7 +392,7 @@ gtr_languages_fetcher_get_plural_form (GtrLanguagesFetcher *fetcher)
 
 void
 gtr_languages_fetcher_set_plural_form (GtrLanguagesFetcher *fetcher,
-                                       const gchar         *plural_form)
+                                       const char          *plural_form)
 {
   GtrLanguagesFetcherPrivate *priv = gtr_languages_fetcher_get_instance_private (fetcher);
   gtk_editable_set_text (GTK_EDITABLE (priv->plural_forms), plural_form);

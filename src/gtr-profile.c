@@ -31,32 +31,32 @@
 typedef struct
 {
   /* Identify the profile */
-  gchar *name;
+  char *name;
 
   /* Authentication token */
-  gchar *auth_token;
+  char *auth_token;
 
   /* Translator's information */
-  gchar *author_name;
-  gchar *author_email;
+  char *author_name;
+  char *author_email;
 
   /* Complete language name */
-  gchar *language_name;
+  char *language_name;
 
   /* Language code. Example: "en" -> English */
-  gchar *language_code;
+  char *language_code;
 
   /* Set of characters. Example: UTF-8 */
-  gchar *charset;
+  char *charset;
 
   /* Encoding. Example: 8 bits */
-  gchar *encoding;
+  char *encoding;
 
   /* Email of the group of translation */
-  gchar *group_email;
+  char *group_email;
 
   /* Plural forms */
-  gchar *plural_forms;
+  char *plural_forms;
 } GtrProfilePrivate;
 
 struct _GtrProfile
@@ -109,7 +109,7 @@ gtr_profile_new (void)
   return g_object_new (GTR_TYPE_PROFILE, NULL);
 }
 
-const gchar *
+const char *
 gtr_profile_get_name (GtrProfile *profile)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
@@ -120,7 +120,7 @@ gtr_profile_get_name (GtrProfile *profile)
 
 void
 gtr_profile_set_name (GtrProfile  *profile,
-                      const gchar *data)
+                      const char  *data)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
@@ -129,7 +129,7 @@ gtr_profile_set_name (GtrProfile  *profile,
   g_set_str (&priv->name, data);
 }
 
-const gchar *
+const char *
 gtr_profile_get_auth_token (GtrProfile *profile)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
@@ -140,7 +140,7 @@ gtr_profile_get_auth_token (GtrProfile *profile)
 
 void
 gtr_profile_set_auth_token (GtrProfile  *profile,
-                            const gchar *data)
+                            const char  *data)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
@@ -149,7 +149,7 @@ gtr_profile_set_auth_token (GtrProfile  *profile,
   g_set_str (&priv->auth_token, data);
 }
 
-const gchar *
+const char *
 gtr_profile_get_author_name (GtrProfile *profile)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
@@ -160,7 +160,7 @@ gtr_profile_get_author_name (GtrProfile *profile)
 
 void
 gtr_profile_set_author_name (GtrProfile  *profile,
-                             const gchar *data)
+                             const char  *data)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
@@ -169,7 +169,7 @@ gtr_profile_set_author_name (GtrProfile  *profile,
   g_set_str (&priv->author_name, data);
 }
 
-const gchar *
+const char *
 gtr_profile_get_author_email (GtrProfile *profile)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
@@ -180,7 +180,7 @@ gtr_profile_get_author_email (GtrProfile *profile)
 
 void
 gtr_profile_set_author_email (GtrProfile  *profile,
-                              const gchar *data)
+                              const char  *data)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
@@ -189,7 +189,7 @@ gtr_profile_set_author_email (GtrProfile  *profile,
   g_set_str (&priv->author_email, data);
 }
 
-const gchar *
+const char *
 gtr_profile_get_language_name (GtrProfile *profile)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
@@ -200,7 +200,7 @@ gtr_profile_get_language_name (GtrProfile *profile)
 
 void
 gtr_profile_set_language_name (GtrProfile  *profile,
-                               const gchar *data)
+                               const char  *data)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
@@ -209,7 +209,7 @@ gtr_profile_set_language_name (GtrProfile  *profile,
   g_set_str (&priv->language_name, data);
 }
 
-const gchar *
+const char *
 gtr_profile_get_language_code (GtrProfile *profile)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
@@ -220,7 +220,7 @@ gtr_profile_get_language_code (GtrProfile *profile)
 
 void
 gtr_profile_set_language_code (GtrProfile  *profile,
-                               const gchar *data)
+                               const char  *data)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
@@ -229,7 +229,7 @@ gtr_profile_set_language_code (GtrProfile  *profile,
   g_set_str (&priv->language_code, data);
 }
 
-const gchar *
+const char *
 gtr_profile_get_charset (GtrProfile *profile)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
@@ -240,7 +240,7 @@ gtr_profile_get_charset (GtrProfile *profile)
 
 void
 gtr_profile_set_charset (GtrProfile  *profile,
-                         const gchar *data)
+                         const char  *data)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
@@ -249,7 +249,7 @@ gtr_profile_set_charset (GtrProfile  *profile,
   g_set_str (&priv->charset, data);
 }
 
-const gchar *
+const char *
 gtr_profile_get_encoding (GtrProfile *profile)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
@@ -260,7 +260,7 @@ gtr_profile_get_encoding (GtrProfile *profile)
 
 void
 gtr_profile_set_encoding (GtrProfile  *profile,
-                          const gchar *data)
+                          const char  *data)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
@@ -269,7 +269,7 @@ gtr_profile_set_encoding (GtrProfile  *profile,
   g_set_str (&priv->encoding, data);
 }
 
-const gchar *
+const char *
 gtr_profile_get_group_email (GtrProfile *profile)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
@@ -280,7 +280,7 @@ gtr_profile_get_group_email (GtrProfile *profile)
 
 void
 gtr_profile_set_group_email (GtrProfile  *profile,
-                             const gchar *data)
+                             const char  *data)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));
@@ -289,7 +289,7 @@ gtr_profile_set_group_email (GtrProfile  *profile,
   g_set_str (&priv->group_email, data);
 }
 
-const gchar *
+const char *
 gtr_profile_get_plural_forms (GtrProfile *profile)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
@@ -300,7 +300,7 @@ gtr_profile_get_plural_forms (GtrProfile *profile)
 
 void
 gtr_profile_set_plural_forms (GtrProfile  *profile,
-                              const gchar *data)
+                              const char  *data)
 {
   GtrProfilePrivate *priv = gtr_profile_get_instance_private (profile);
   g_return_if_fail (GTR_IS_PROFILE (profile));

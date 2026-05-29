@@ -44,7 +44,7 @@ typedef struct
 
   GtrProfileManager *prof_manager;
   GtrProfile *profile;
-  gint nplurals;
+  int nplurals;
 } GtrHeaderPrivate;
 
 struct _GtrHeader
@@ -55,10 +55,11 @@ struct _GtrHeader
 G_DEFINE_FINAL_TYPE_WITH_PRIVATE (GtrHeader, gtr_header, GTR_TYPE_MSG);
 
 void
-gtr_header_set_field (GtrHeader * header,
-                      const gchar * field, const gchar * data)
+gtr_header_set_field (GtrHeader  *header,
+                      const char *field,
+                      const char *data)
 {
-  gchar *msgstr;
+  char *msgstr;
 
   g_return_if_fail (GTR_IS_HEADER (header));
 
@@ -178,7 +179,7 @@ gtr_header_new (po_message_iterator_t iter, po_message_t message)
  *
  * Return value: the comments of the header.
  */
-const gchar *
+const char *
 gtr_header_get_comments (GtrHeader * header)
 {
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
@@ -187,7 +188,8 @@ gtr_header_get_comments (GtrHeader * header)
 }
 
 void
-gtr_header_set_comments (GtrHeader * header, const gchar * comments)
+gtr_header_set_comments (GtrHeader  *header,
+                         const char *comments)
 {
   g_return_if_fail (GTR_IS_HEADER (header));
   g_return_if_fail (comments != NULL);
@@ -195,7 +197,7 @@ gtr_header_set_comments (GtrHeader * header, const gchar * comments)
   po_message_set_comments (_gtr_msg_get_message (GTR_MSG (header)), comments);
 }
 
-gchar *
+char *
 gtr_header_get_prj_id_version (GtrHeader * header)
 {
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
@@ -205,8 +207,8 @@ gtr_header_get_prj_id_version (GtrHeader * header)
 }
 
 void
-gtr_header_set_prj_id_version (GtrHeader * header,
-                               const gchar * prj_id_version)
+gtr_header_set_prj_id_version (GtrHeader  *header,
+                               const char *prj_id_version)
 {
   g_return_if_fail (GTR_IS_HEADER (header));
   g_return_if_fail (prj_id_version != NULL);
@@ -214,7 +216,7 @@ gtr_header_set_prj_id_version (GtrHeader * header,
   gtr_header_set_field (header, "Project-Id-Version", prj_id_version);
 }
 
-gchar *
+char *
 gtr_header_get_rmbt (GtrHeader * header)
 {
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
@@ -224,7 +226,8 @@ gtr_header_get_rmbt (GtrHeader * header)
 }
 
 void
-gtr_header_set_rmbt (GtrHeader * header, const gchar * rmbt)
+gtr_header_set_rmbt (GtrHeader  *header,
+                     const char *rmbt)
 {
   /* FIXME: rmbt is not a good name */
   g_return_if_fail (GTR_IS_HEADER (header));
@@ -233,7 +236,7 @@ gtr_header_set_rmbt (GtrHeader * header, const gchar * rmbt)
   gtr_header_set_field (header, "Report-Msgid-Bugs-To", rmbt);
 }
 
-gchar *
+char *
 gtr_header_get_pot_date (GtrHeader * header)
 {
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
@@ -243,7 +246,7 @@ gtr_header_get_pot_date (GtrHeader * header)
 }
 
 void
-gtr_header_set_pot_date (GtrHeader * header, const gchar * pot_date)
+gtr_header_set_pot_date (GtrHeader *header, const char *pot_date)
 {
   g_return_if_fail (GTR_IS_HEADER (header));
   g_return_if_fail (pot_date != NULL);
@@ -251,7 +254,7 @@ gtr_header_set_pot_date (GtrHeader * header, const gchar * pot_date)
   gtr_header_set_field (header, "POT-Creation-Date", pot_date);
 }
 
-gchar *
+char *
 gtr_header_get_po_date (GtrHeader * header)
 {
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
@@ -261,7 +264,8 @@ gtr_header_get_po_date (GtrHeader * header)
 }
 
 void
-gtr_header_set_po_date (GtrHeader * header, const gchar * po_date)
+gtr_header_set_po_date (GtrHeader  *header,
+                        const char *po_date)
 {
   g_return_if_fail (GTR_IS_HEADER (header));
   g_return_if_fail (po_date != NULL);
@@ -269,10 +273,10 @@ gtr_header_set_po_date (GtrHeader * header, const gchar * po_date)
   gtr_header_set_field (header, "PO-Revision-Date", po_date);
 }
 
-gchar *
+char *
 gtr_header_get_translator (GtrHeader * header)
 {
-  gchar *space, *translator_temp, *translator;
+  char *space, *translator_temp, *translator;
 
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
 
@@ -290,10 +294,10 @@ gtr_header_get_translator (GtrHeader * header)
   return translator;
 }
 
-gchar *
+char *
 gtr_header_get_tr_email (GtrHeader * header)
 {
-  gchar *space, *email_temp, *email;
+  char *space, *email_temp, *email;
 
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
 
@@ -312,10 +316,11 @@ gtr_header_get_tr_email (GtrHeader * header)
 }
 
 void
-gtr_header_set_translator (GtrHeader * header,
-                           const gchar * name, const gchar * email)
+gtr_header_set_translator (GtrHeader  *header,
+                           const char *name,
+                           const char *email)
 {
-  gchar *translator;
+  char *translator;
 
   g_return_if_fail (GTR_IS_HEADER (header));
 
@@ -326,10 +331,10 @@ gtr_header_set_translator (GtrHeader * header,
   g_free (translator);
 }
 
-gchar *
+char *
 gtr_header_get_language (GtrHeader * header)
 {
-  gchar *space, *lang_temp, *language;
+  char *space, *lang_temp, *language;
 
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
 
@@ -347,20 +352,20 @@ gtr_header_get_language (GtrHeader * header)
   return language;
 }
 
-gchar *
+char *
 gtr_header_get_language_code (GtrHeader * header)
 {
-  gchar *language;
+  char *language;
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
   language = po_header_field (gtr_msg_get_msgstr (GTR_MSG (header)),
                               "Language");
   return language;
 }
 
-gchar *
+char *
 gtr_header_get_lg_email (GtrHeader * header)
 {
-  gchar *space, *email_temp, *email;
+  char *space, *email_temp, *email;
 
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
 
@@ -379,10 +384,10 @@ gtr_header_get_lg_email (GtrHeader * header)
 }
 
 void
-gtr_header_set_language (GtrHeader * header,
-                         const gchar * language,
-                         const gchar * lang_code,
-                         const gchar * email)
+gtr_header_set_language (GtrHeader  *header,
+                         const char *language,
+                         const char *lang_code,
+                         const char *email)
 {
   g_autofree char *lang_team = NULL;
 
@@ -397,7 +402,7 @@ gtr_header_set_language (GtrHeader * header,
   gtr_header_set_field (header, "Language", lang_code);
 }
 
-gchar *
+char *
 gtr_header_get_mime_version (GtrHeader * header)
 {
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
@@ -407,17 +412,17 @@ gtr_header_get_mime_version (GtrHeader * header)
 }
 
 void
-gtr_header_set_mime_version (GtrHeader * header, const gchar * mime_version)
+gtr_header_set_mime_version (GtrHeader * header, const char * mime_version)
 {
   g_return_if_fail (GTR_IS_HEADER (header));
 
   gtr_header_set_field (header, "MIME-Version", mime_version);
 }
 
-gchar *
+char *
 gtr_header_get_charset (GtrHeader * header)
 {
-  gchar *space, *charset_temp, *charset;
+  char *space, *charset_temp, *charset;
 
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
 
@@ -437,9 +442,10 @@ gtr_header_get_charset (GtrHeader * header)
 }
 
 void
-gtr_header_set_charset (GtrHeader * header, const gchar * charset)
+gtr_header_set_charset (GtrHeader  *header,
+                        const char *charset)
 {
-  gchar *set;
+  char *set;
 
   g_return_if_fail (GTR_IS_HEADER (header));
 
@@ -450,7 +456,7 @@ gtr_header_set_charset (GtrHeader * header, const gchar * charset)
   g_free (set);
 }
 
-gchar *
+char *
 gtr_header_get_encoding (GtrHeader * header)
 {
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
@@ -460,7 +466,8 @@ gtr_header_get_encoding (GtrHeader * header)
 }
 
 void
-gtr_header_set_encoding (GtrHeader * header, const gchar * encoding)
+gtr_header_set_encoding (GtrHeader  *header,
+                         const char *encoding)
 {
   g_return_if_fail (GTR_IS_HEADER (header));
 
@@ -468,12 +475,12 @@ gtr_header_set_encoding (GtrHeader * header, const gchar * encoding)
 }
 
 void
-gtr_header_set_dl_info (GtrHeader * header,
-                         const gchar * lang,
-                         const gchar * module_name,
-                         const gchar * branch,
-                         const gchar * domain,
-                         const char  * vcs_web)
+gtr_header_set_dl_info (GtrHeader   *header,
+                        const char  *lang,
+                        const char  *module_name,
+                        const char  *branch,
+                        const char  *domain,
+                        const char  *vcs_web)
 {
 
   g_return_if_fail (GTR_IS_HEADER (header));
@@ -494,7 +501,7 @@ gtr_header_set_dl_info (GtrHeader * header,
  * Return value: (transfer full): a newly allocated string representing the
  *                damned lies lang of the header
  */
-gchar *
+char *
 gtr_header_get_dl_lang (GtrHeader * header)
 {
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
@@ -512,7 +519,7 @@ gtr_header_get_dl_lang (GtrHeader * header)
  * Return value: (transfer full): a newly allocated string representing the
  *                damned lies module of the header
  */
-gchar *
+char *
 gtr_header_get_dl_module (GtrHeader * header)
 {
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
@@ -530,7 +537,7 @@ gtr_header_get_dl_module (GtrHeader * header)
  * Return value: (transfer full): a newly allocated string representing the
  *                damned lies branch of the header
  */
-gchar *
+char *
 gtr_header_get_dl_branch (GtrHeader * header)
 {
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
@@ -557,7 +564,7 @@ gtr_header_get_dl_vcs_web (GtrHeader * header)
  * Return value: (transfer full): a newly allocated string representing the
  *                damned lies domain of the header
  */
-gchar *
+char *
 gtr_header_get_dl_domain (GtrHeader * header)
 {
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
@@ -575,7 +582,7 @@ gtr_header_get_dl_domain (GtrHeader * header)
  * Return value: (transfer full): a newly allocated string representing the
  *                damned lies module state of the header
  */
-gchar *
+char *
 gtr_header_get_dl_state (GtrHeader * header)
 {
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
@@ -590,7 +597,7 @@ gtr_header_get_dl_state (GtrHeader * header)
  *
  * Return value: a new allocated string with the plural form of the po file.
  */
-gchar *
+char *
 gtr_header_get_plural_forms (GtrHeader * header)
 {
   g_return_val_if_fail (GTR_IS_HEADER (header), NULL);
@@ -607,7 +614,8 @@ gtr_header_get_plural_forms (GtrHeader * header)
  * Sets the plural form string in the @header and it sets the number of plurals.
  */
 void
-gtr_header_set_plural_forms (GtrHeader * header, const gchar * plural_forms)
+gtr_header_set_plural_forms (GtrHeader  *header,
+                             const char *plural_forms)
 {
   g_return_if_fail (GTR_IS_HEADER (header));
   g_return_if_fail (plural_forms != NULL);
@@ -626,7 +634,7 @@ gtr_header_set_plural_forms (GtrHeader * header, const gchar * plural_forms)
  * form in the po file it returns the predefined by user number of plurals 
  * or 1 if there is not a plural form string stored.
  */
-gint
+int
 gtr_header_get_nplurals (GtrHeader * header)
 {
   GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
@@ -675,9 +683,9 @@ set_profile_values (GtrHeader *header)
 static void
 update_po_date (GtrHeader * header)
 {
-  gchar *current_date;
-  gchar *current_time;
-  gchar *new_date;
+  char *current_date;
+  char *current_time;
+  char *new_date;
 
   current_date = gtr_utils_get_current_date ();
   current_time = gtr_utils_get_current_time ();
@@ -693,7 +701,7 @@ update_po_date (GtrHeader * header)
 }
 
 static void
-update_comments (GtrHeader *header, const gchar *comments)
+update_comments (GtrHeader *header, const char *comments)
 {
   GtrProfile *active_profile;
   g_autoptr (GString) new_comments = g_string_new ("");
@@ -704,7 +712,7 @@ update_comments (GtrHeader *header, const gchar *comments)
   g_autofree char *first_year = NULL;
   g_autofree char *years = NULL;
   gboolean use_profile_values;
-  gint i;
+  int i;
   GtrHeaderPrivate *priv = gtr_header_get_instance_private (header);
 
   if (priv->profile != NULL)
@@ -736,7 +744,7 @@ update_comments (GtrHeader *header, const gchar *comments)
       if (g_str_has_prefix (comment_lines[i], translator))
         {
           g_auto (GStrv) year_array = NULL;
-          gint j;
+          int j;
 
           year_array = g_strsplit (comment_lines[i], ",", -1);
 
@@ -750,7 +758,7 @@ update_comments (GtrHeader *header, const gchar *comments)
 
               if (g_str_has_suffix (year_array[j], "."))
                 {
-                  gint len;
+                  int len;
 
                   len = g_utf8_strlen (year_array[j], -1);
                   search = g_strndup (year_array[j], len - 1);
@@ -816,7 +824,7 @@ add_default_comments (GtrHeader * header)
 void
 gtr_header_update_header (GtrHeader * header)
 {
-  const gchar *comments;
+  const char *comments;
 
   /* If needed update the header with the profile values */
   set_profile_values (header);

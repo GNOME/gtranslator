@@ -107,13 +107,13 @@ typedef struct
   GtkWidget *untranslated;
 
   /* Autosave */
-  gint autosave_interval;
-  guint autosave_timeout;
-  guint autosave : 1;
+  int autosave_interval;
+  unsigned int autosave_timeout;
+  unsigned int autosave : 1;
   /*Blocking movement */
-  guint blocking : 1;
+  unsigned int blocking : 1;
 
-  guint tab_realized : 1;
+  unsigned int tab_realized : 1;
 
   /*Search Bar*/
   GtkSearchBar   *search_bar;
@@ -148,7 +148,7 @@ enum
   N_PROPERTIES
 };
 
-static guint signals[LAST_SIGNAL];
+static unsigned int signals[LAST_SIGNAL];
 
 static GParamSpec *props[N_PROPERTIES];
 
@@ -275,7 +275,7 @@ static void
 install_autosave_timeout (GtrTab * tab)
 {
   GtrTabPrivate *priv;
-  gint timeout;
+  int timeout;
 
   priv = gtr_tab_get_instance_private (tab);
   g_return_if_fail (priv->autosave_timeout <= 0);
@@ -338,7 +338,7 @@ remove_autosave_timeout (GtrTab * tab)
 static void
 gtr_tab_edition_finished (GtrTab * tab, GtrMsg * msg)
 {
-  gchar *message_error;
+  char *message_error;
 
   /*
    * Checking message
@@ -375,10 +375,10 @@ gtr_message_translation_update (GtkTextBuffer * textbuffer, GtrTab * tab)
   GList *msg_aux;
   GtrMsg *msg;
   GtrTabPrivate *priv;
-  const gchar *check;
-  gchar *translation;
+  const char *check;
+  char *translation;
   gboolean unmark_fuzzy;
-  gint i;
+  int i;
 
   priv = gtr_tab_get_instance_private (tab);
 
@@ -451,9 +451,10 @@ gtr_message_translation_update (GtkTextBuffer * textbuffer, GtrTab * tab)
 }
 
 static GtkWidget *
-gtr_tab_append_msgstr_page (const gchar * tab_label,
-                            GtkWidget * box, gboolean spellcheck,
-                            GtrTab *tab)
+gtr_tab_append_msgstr_page (const char *tab_label,
+                            GtkWidget  *box,
+                            gboolean    spellcheck,
+                            GtrTab     *tab)
 {
   GtkWidget *scroll;
   GtkWidget *label;
@@ -492,8 +493,8 @@ gtr_message_plural_forms (GtrTab * tab, GtrMsg * msg)
   GtrHeader *header;
   GtkTextBuffer *buf;
   GtrTabPrivate *priv;
-  const gchar *msgstr_plural;
-  gint i;
+  const char *msgstr_plural;
+  int i;
 
   g_return_if_fail (tab != NULL);
   g_return_if_fail (msg != NULL);
@@ -532,9 +533,9 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
   GtrTabPrivate *priv;
   GtrPo *po;
   GtkTextBuffer *buf;
-  const gchar *msgid, *msgid_plural;
-  const gchar *msgstr;
-  const gchar *msgctxt;
+  const char *msgid, *msgid_plural;
+  const char *msgstr;
+  const char *msgctxt;
 
   g_return_if_fail (GTR_IS_TAB (tab));
 
@@ -560,7 +561,7 @@ gtr_tab_show_message (GtrTab * tab, GtrMsg * msg)
   msgid = gtr_msg_get_msgid (msg);
   if (msgid)
     {
-      gchar *msg_error = gtr_msg_check (msg);
+      char *msg_error = gtr_msg_check (msg);
       buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->text_msgid));
       gtk_text_buffer_begin_irreversible_action (buf);
       gtk_text_buffer_set_text (buf, (gchar *) msgid, -1);
@@ -644,7 +645,7 @@ update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
   GtrPoState po_state;
   GtrTabPrivate *priv;
   gboolean fuzzy, translated;
-  gchar *msg_error = NULL;
+  char *msg_error = NULL;
 
   priv = gtr_tab_get_instance_private (tab);
 
@@ -719,7 +720,7 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
   GtrHeader *header;
   GtrTabPrivate *priv;
   GtkTextBuffer *buf;
-  gint i;
+  int i;
   g_autofree char *lang_code = NULL;
 
   priv = gtr_tab_get_instance_private (tab);
@@ -754,7 +755,7 @@ get_mapping (GValue   *value,
              GVariant *variant,
              gpointer  user_data)
 {
-  gint v = g_variant_get_int32 (variant);
+  int v = g_variant_get_int32 (variant);
 
   if (v <= 0)
     v = 1;
@@ -848,7 +849,7 @@ gtr_tab_dispose (GObject * object)
 
 static void
 gtr_tab_get_property (GObject * object,
-                      guint prop_id, GValue * value, GParamSpec * pspec)
+                      unsigned int prop_id, GValue * value, GParamSpec * pspec)
 {
   GtrTab *tab = GTR_TAB (object);
 
@@ -868,7 +869,7 @@ gtr_tab_get_property (GObject * object,
 
 static void
 gtr_tab_set_property (GObject * object,
-                      guint prop_id, const GValue * value, GParamSpec * pspec)
+                      unsigned int prop_id, const GValue * value, GParamSpec * pspec)
 {
   GtrTab *tab = GTR_TAB (object);
 
@@ -1070,7 +1071,7 @@ gtr_tab_get_po (GtrTab * tab)
  *
  * Return value: the number of the active translation notebook.
  **/
-gint
+int
 gtr_tab_get_active_trans_tab (GtrTab * tab)
 {
   GtrTabPrivate *priv;
@@ -1105,7 +1106,7 @@ GtrView *
 gtr_tab_get_active_view (GtrTab * tab)
 {
   GtrTabPrivate *priv;
-  gint num;
+  int num;
 
   priv = gtr_tab_get_instance_private (tab);
 
@@ -1130,7 +1131,7 @@ gtr_tab_get_all_views (GtrTab * tab, gboolean original, gboolean translated)
 {
   GList *ret = NULL;
   GtrTabPrivate *priv;
-  gint i = 0;
+  int i = 0;
 
   g_return_val_if_fail (GTR_IS_TAB (tab), NULL);
 
@@ -1177,7 +1178,7 @@ gtr_tab_message_go_to (GtrTab * tab,
   if (!priv->blocking || first_msg)
     {
       gboolean plurals;
-      gint current_page, n_pages;
+      int current_page, n_pages;
       /*
        * If the current message is plural and we press next/prev
        * we have to change to the next/prev plural tab in case is not
@@ -1249,13 +1250,13 @@ gtr_tab_message_go_to (GtrTab * tab,
     }
 }
 
-gchar *
+char *
 _gtr_tab_get_tooltips (GtrTab *tab)
 {
   GFile *location;
   GtrTabPrivate *priv;
-  gchar *tooltips;
-  gchar *path;
+  char *tooltips;
+  char *path;
 
   priv = gtr_tab_get_instance_private (tab);
 
@@ -1373,7 +1374,7 @@ gtr_tab_set_autosave_enabled (GtrTab * tab, gboolean enable)
  *
  * Return value: the value of the autosave
  **/
-gint
+int
 gtr_tab_get_autosave_interval (GtrTab * tab)
 {
   GtrTabPrivate *priv;
@@ -1395,7 +1396,8 @@ gtr_tab_get_autosave_interval (GtrTab * tab)
  * argument.
  **/
 void
-gtr_tab_set_autosave_interval (GtrTab * tab, gint interval)
+gtr_tab_set_autosave_interval (GtrTab *tab,
+                               int     interval)
 {
   GtrTabPrivate *priv;
 
@@ -1429,7 +1431,7 @@ gtr_tab_set_autosave_interval (GtrTab * tab, gint interval)
 void
 gtr_tab_clear_msgstr_views (GtrTab * tab)
 {
-  gint i = 0;
+  int i = 0;
   GtrHeader *header;
   GtkTextBuffer *buf;
   GtrTabPrivate *priv;
@@ -1462,8 +1464,8 @@ void
 gtr_tab_copy_to_translation (GtrTab * tab)
 {
   GtkTextBuffer *msgstr, *msgid;
-  gint page_index;
-  gchar *text;
+  int page_index;
+  char *text;
   GtkTextIter start, end;
   GtrTabPrivate *priv;
 
@@ -1870,7 +1872,8 @@ gtr_tab_go_to_prev_fuzzy_or_untrans (GtrTab * tab)
  * exists it does not jump.
  */
 void
-gtr_tab_go_to_number (GtrTab * tab, gint number)
+gtr_tab_go_to_number (GtrTab  *tab,
+                      int      number)
 {
   GtrPo *po;
   GList *msg;
@@ -1894,7 +1897,8 @@ gtr_tab_go_to_number (GtrTab * tab, gint number)
  * Jumps to the message in the @position in the current message list order.
  */
 void
-gtr_tab_go_to_position (GtrTab *tab, gint position)
+gtr_tab_go_to_position (GtrTab *tab,
+                        int     position)
 {
   GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
   GtkSingleSelection *model = gtr_message_table_get_selection_model (
@@ -1943,9 +1947,9 @@ gtr_tab_get_msg (GtrTab *tab)
 
 void
 gtr_tab_set_progress (GtrTab      *tab,
-                      gint         trans,
-                      gint         untrans,
-                      gint         fuzzy)
+                      int          trans,
+                      int          untrans,
+                      int          fuzzy)
 {
   GtrTabPrivate *priv = gtr_tab_get_instance_private (tab);
   g_autofree char *percentage = NULL;

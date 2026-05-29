@@ -66,7 +66,7 @@ update_filename (GtrCodeView *self, GtrMsg *msg)
   for (int i = 0; ; i++)
   {
     size_t line;
-    const gchar *filename = NULL;
+    const char *filename = NULL;
 
     filename = gtr_msg_get_filename (msg, i);
 
@@ -80,7 +80,7 @@ update_filename (GtrCodeView *self, GtrMsg *msg)
 
 static void
 gtr_code_view_set_property (GObject      *object,
-                            guint         prop_id,
+                            unsigned int  prop_id,
                             const GValue *value,
                             GParamSpec   *pspec)
 {
@@ -100,10 +100,10 @@ gtr_code_view_set_property (GObject      *object,
 }
 
 static void
-gtr_code_view_get_property (GObject    *object,
-                            guint       prop_id,
-                            GValue     *value,
-                            GParamSpec *pspec)
+gtr_code_view_get_property (GObject      *object,
+                            unsigned int  prop_id,
+                            GValue       *value,
+                            GParamSpec   *pspec)
 {
   GtrCodeView *code_view = GTR_CODE_VIEW (object);
   GtrCodeViewPrivate *priv = gtr_code_view_get_instance_private (code_view);

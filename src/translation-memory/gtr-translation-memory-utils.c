@@ -42,7 +42,9 @@
  * g_slist_free_full (list, g_object_unref).
  */
 void
-gtr_scan_dir (GFile * dir, GSList ** list, const gchar * po_name)
+gtr_scan_dir (GFile      *dir,
+              GSList    **list,
+              const char *po_name)
 {
   GFileInfo *info;
   GError *error = NULL;
@@ -64,7 +66,7 @@ gtr_scan_dir (GFile * dir, GSList ** list, const gchar * po_name)
               g_file_enumerator_next_file (enumerator, NULL, &error)) != NULL)
         {
           g_autoptr (GFile) file = NULL;
-          const gchar *name;
+          const char *name;
           g_autofree char *filename = NULL;
 
           name = g_file_info_get_name (info);

@@ -67,11 +67,11 @@ typedef struct
 {
   GtrWindow *window;
   GFile *po_location;
-  gchar *pot_path;
-  gint prev_translated;
-  gint prev_fuzzy;
-  gint prev_untranslated;
-  gint prev_total;
+  char *pot_path;
+  int prev_translated;
+  int prev_fuzzy;
+  int prev_untranslated;
+  int prev_total;
   GSubprocess *proc;
 } UpdateFromPotCtx;
 
@@ -91,7 +91,7 @@ update_from_pot_ctx_free (UpdateFromPotCtx *ctx)
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (UpdateFromPotCtx, update_from_pot_ctx_free);
 
 static void
-show_update_error (GtrWindow *window, const gchar *message)
+show_update_error (GtrWindow *window, const char *message)
 {
   AdwDialog *alert_dialog
       = adw_alert_dialog_new (_("Could not update from template"), NULL);
@@ -124,7 +124,7 @@ _msgmerge_finished (GObject *source, GAsyncResult *res, gpointer user_data)
 
   if (!g_subprocess_get_successful (proc))
     {
-      const gchar *body
+      const char *body
           = (stderr_str && *stderr_str) ? stderr_str : _("msgmerge failed");
       show_update_error (ctx->window, body);
       return;
@@ -138,17 +138,17 @@ _msgmerge_finished (GObject *source, GAsyncResult *res, gpointer user_data)
     GtrPo *po_after = gtr_po_new_from_file (ctx->po_location, &parse_err);
     if (po_after)
       {
-        const gint after_translated = gtr_po_get_translated_count (po_after);
-        const gint after_fuzzy = gtr_po_get_fuzzy_count (po_after);
-        const gint after_untranslated
+        const int after_translated = gtr_po_get_translated_count (po_after);
+        const int after_fuzzy = gtr_po_get_fuzzy_count (po_after);
+        const int after_untranslated
             = gtr_po_get_untranslated_count (po_after);
-        const gint after_total = gtr_po_get_messages_count (po_after);
+        const int after_total = gtr_po_get_messages_count (po_after);
 
-        const gint d_translated = after_translated - ctx->prev_translated;
-        const gint d_fuzzy = after_fuzzy - ctx->prev_fuzzy;
-        const gint d_untranslated
+        const int d_translated = after_translated - ctx->prev_translated;
+        const int d_fuzzy = after_fuzzy - ctx->prev_fuzzy;
+        const int d_untranslated
             = after_untranslated - ctx->prev_untranslated;
-        const gint d_total = after_total - ctx->prev_total;
+        const int d_total = after_total - ctx->prev_total;
 
         /* Update the window with the freshly merged PO file.
          * This replaces the old in-memory state with the merged version,
@@ -234,7 +234,7 @@ _update_from_pot_finish (GObject *source, GAsyncResult *res,
   ctx->prev_total = gtr_po_get_messages_count (po);
 
   /* Launch msgmerge asynchronously so the UI stays responsive */
-  const gchar *argv[]
+  const char *argv[]
       = { "msgmerge", "-U", "--previous", po_path, ctx->pot_path, NULL };
   g_autoptr (GError) spawn_error = NULL;
   ctx->proc = g_subprocess_newv (
@@ -265,7 +265,7 @@ gtr_update_from_pot_dialog_nocheck (GtrWindow *window)
 
   /* Preserve last directory if available */
   {
-    const gchar *last_dir = _gtr_application_get_last_dir (GTR_APP);
+    const char *last_dir = _gtr_application_get_last_dir (GTR_APP);
     if (last_dir)
       {
         g_autoptr (GFile) folder = g_file_new_for_uri (last_dir);
@@ -560,18 +560,18 @@ gtr_upload_file (GtkWidget *upload_dialog, gpointer user_data)
   SoupMessage *msg = NULL;
   static SoupSession *session = NULL;
 
-  const guchar *data;
-  gsize data_size;
+  const unsigned char *data;
+  size_t data_size;
   g_autofree gchar *mime_type = NULL;
   g_autofree gchar *filename = NULL;
   g_autofree gchar *upload_endpoint = NULL;
   const char *auth_token = NULL;
   g_autofree char *auth = NULL;
   g_autofree char *upload_comment = NULL;
-  const gchar *selected_lang;
-  const gchar *selected_module;
-  const gchar *selected_branch;
-  const gchar *selected_domain;
+  const char *selected_lang;
+  const char *selected_module;
+  const char *selected_branch;
+  const char *selected_domain;
 
   GtrWindow *window = GTR_WINDOW (user_data);
   upload_comment

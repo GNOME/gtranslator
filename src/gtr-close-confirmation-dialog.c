@@ -153,10 +153,10 @@ gtr_close_confirmation_dialog_finalize (GObject * object)
 }
 
 static void
-gtr_close_confirmation_dialog_set_property (GObject * object,
-                                            guint prop_id,
-                                            const GValue * value,
-                                            GParamSpec * pspec)
+gtr_close_confirmation_dialog_set_property (GObject      *object,
+                                            unsigned int  prop_id,
+                                            const GValue *value,
+                                            GParamSpec   *pspec)
 {
   GtrCloseConfirmationDialog *dlg;
 
@@ -179,10 +179,10 @@ gtr_close_confirmation_dialog_set_property (GObject * object,
 }
 
 static void
-gtr_close_confirmation_dialog_get_property (GObject * object,
-                                            guint prop_id,
-                                            GValue * value,
-                                            GParamSpec * pspec)
+gtr_close_confirmation_dialog_get_property (GObject      *object,
+                                            unsigned int  prop_id,
+                                            GValue       *value,
+                                            GParamSpec   *pspec)
 {
   GtrCloseConfirmationDialogPrivate *priv;
   priv = gtr_close_confirmation_dialog_get_instance_private (GTR_CLOSE_CONFIRMATION_DIALOG (object));

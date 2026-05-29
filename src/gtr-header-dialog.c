@@ -270,7 +270,7 @@ static void
 gtr_header_dialog_fill_from_header (GtrHeaderDialog * dlg)
 {
   GtrHeader *header;
-  gchar *text;
+  char *text;
   GtkTextBuffer *buffer;
   GtrHeaderDialogPrivate *priv = gtr_header_dialog_get_instance_private (dlg);
   g_autofree gchar *vcs_web  = NULL;

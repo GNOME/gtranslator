@@ -28,6 +28,7 @@ typedef enum
   FILESEL_SAVE
 } FileselMode;
 
-GtkFileDialog *gtr_file_chooser_new (GtkWindow * parent,
-                                     FileselMode mode,
-                                     const gchar * title, const gchar * dir);
+GtkFileDialog *gtr_file_chooser_new (GtkWindow   *parent,
+                                     FileselMode  mode,
+                                     const char  *title,
+                                     const char  *dir);

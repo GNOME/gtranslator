@@ -64,7 +64,7 @@ GtrTab *gtr_tab_new (GtrPo * po, GtkWindow *window);
 
 GtrPo *gtr_tab_get_po (GtrTab * tab);
 
-gint gtr_tab_get_active_trans_tab (GtrTab * tab);
+int gtr_tab_get_active_trans_tab (GtrTab * tab);
 
 GtrContextPanel *gtr_tab_get_context_panel (GtrTab * tab);
 
@@ -83,9 +83,9 @@ gboolean gtr_tab_get_autosave_enabled (GtrTab * tab);
 
 void gtr_tab_set_autosave_enabled (GtrTab * tab, gboolean enable);
 
-gint gtr_tab_get_autosave_interval (GtrTab * tab);
+int gtr_tab_get_autosave_interval (GtrTab * tab);
 
-void gtr_tab_set_autosave_interval (GtrTab * tab, gint interval);
+void gtr_tab_set_autosave_interval (GtrTab * tab, int interval);
 
 void gtr_tab_clear_msgstr_views (GtrTab * tab);
 
@@ -117,14 +117,14 @@ gboolean gtr_tab_go_to_next_fuzzy_or_untrans (GtrTab * tab);
 
 gboolean gtr_tab_go_to_prev_fuzzy_or_untrans (GtrTab * tab);
 
-void gtr_tab_go_to_number (GtrTab * tab, gint number);
-void gtr_tab_go_to_position (GtrTab *tab, gint position);
+void gtr_tab_go_to_number   (GtrTab *tab, int number);
+void gtr_tab_go_to_position (GtrTab *tab, int position);
 
 void gtr_tab_set_info (GtrTab * tab, const char * primary, const char * secondary);
 
 GtrMsg * gtr_tab_get_msg (GtrTab *tab);
 
-void gtr_tab_set_progress (GtrTab *tab, gint trans, gint untrans, gint fuzzy);
+void gtr_tab_set_progress (GtrTab *tab, int trans, int untrans, int fuzzy);
 
 void gtr_tab_find_replace (GtrTab *tab, gboolean set);
 
@@ -145,7 +145,7 @@ GtkWindow *gtr_tab_get_window (GtrTab *tab);
 
 /* Semi-public methods */
 
-gchar *_gtr_tab_get_tooltips (GtrTab *tab);
+char *_gtr_tab_get_tooltips (GtrTab *tab);
 
 gboolean _gtr_tab_can_close (GtrTab * tab);
 

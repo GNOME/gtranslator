@@ -54,7 +54,7 @@ get_version (void)
 void
 gtr_about_dialog (GtrWindow *window)
 {
-  static const gchar *authors[] = {
+  static const char *authors[] = {
     "Daniel Garcia Moreno <danigm@gnome.org>",
     "Seán de Búrca <leftmostcat@gmail.com>",
     "Ignacio Casal Quinteiro <icq@gnome.org>",
@@ -74,7 +74,7 @@ gtr_about_dialog (GtrWindow *window)
     "Yuri Penkin",
     NULL
   };
-  static const gchar *documenters[] = {
+  static const char *documenters[] = {
     "GNOME Documentation Project",
     "Abel Cheung <deaddog@deaddog.org>",
     "Emese Kovacs <emese@gnome.hu>",
@@ -82,7 +82,7 @@ gtr_about_dialog (GtrWindow *window)
     NULL
   };
 
-  static const gchar comments[] =
+  static const char comments[] =
     N_("Translation file editing suite for localization of applications and libraries.");
 
   adw_show_about_dialog (GTK_WIDGET (window),

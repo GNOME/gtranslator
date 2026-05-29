@@ -50,13 +50,13 @@ enum
   LAST_SIGNAL
 };
 
-static guint signals[LAST_SIGNAL];
+static unsigned int signals[LAST_SIGNAL];
 
-static gchar *
+static char *
 get_profile_filename (void)
 {
-  const gchar *user_dir;
-  gchar *file_name;
+  const char *user_dir;
+  char *file_name;
 
   user_dir = gtr_dirs_get_user_config_dir ();
   file_name = g_build_filename (user_dir, "profiles.xml", NULL);
@@ -204,7 +204,7 @@ parse_profile (GtrProfileManager *manager,
 static gboolean
 load_profiles (GtrProfileManager *manager)
 {
-  gchar *file_name;
+  char *file_name;
   xmlDocPtr doc;
   xmlNodePtr cur;
 
@@ -298,7 +298,7 @@ save_profiles (GtrProfileManager *manager)
 {
   xmlDocPtr  doc;
   xmlNodePtr root;
-  gchar *file_name;
+  char *file_name;
   GSList *l;
   GtrProfileManagerPrivate *priv = gtr_profile_manager_get_instance_private (manager);
 
@@ -320,7 +320,7 @@ save_profiles (GtrProfileManager *manager)
   file_name = get_profile_filename ();
   if (file_name != NULL)
     {
-      const gchar *config_dir;
+      const char *config_dir;
       int res;
 
       /* make sure the config dir exists */

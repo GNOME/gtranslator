@@ -39,8 +39,8 @@ gtr_message_container_default_init (GtrMessageContainerInterface * iface)
  * Returns: (transfer none):
  */
 GtrMsg *
-gtr_message_container_get_message (GtrMessageContainer * container,
-                                   gint number)
+gtr_message_container_get_message (GtrMessageContainer *container,
+                                   int                  number)
 {
   g_return_val_if_fail (GTR_IS_MESSAGE_CONTAINER (container), NULL);
 
@@ -48,7 +48,7 @@ gtr_message_container_get_message (GtrMessageContainer * container,
                                                                    number);
 }
 
-gint
+int
 gtr_message_container_get_message_number (GtrMessageContainer * container,
                                           GtrMsg * msg)
 {
@@ -59,7 +59,7 @@ gtr_message_container_get_message_number (GtrMessageContainer * container,
 }
 
 
-gint
+int
 gtr_message_container_get_count (GtrMessageContainer * container)
 {
   g_return_val_if_fail (GTR_IS_MESSAGE_CONTAINER (container), 0);

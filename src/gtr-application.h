@@ -46,8 +46,8 @@ GList *           gtr_application_get_views              (GtrApplication *app,
 GtrWindow        *gtr_application_get_active_window      (GtrApplication *app);
 
 /* Non exported funcs */
-const gchar     *_gtr_application_get_last_dir           (GtrApplication *app);
-void             _gtr_application_set_last_dir           (GtrApplication *app,
-                                                          const gchar    *last_dir);
+const char       *_gtr_application_get_last_dir          (GtrApplication *app);
+void              _gtr_application_set_last_dir          (GtrApplication *app,
+                                                          const char     *last_dir);
 
 G_END_DECLS

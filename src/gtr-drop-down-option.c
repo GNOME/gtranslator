@@ -55,7 +55,7 @@ gtr_drop_down_option_finalize (GObject *object)
 
 static void
 gtr_drop_down_set_property (GObject      *object,
-                            guint         property_id,
+                            unsigned int  property_id,
                             const GValue *value,
                             GParamSpec   *pspec)
 {
@@ -77,10 +77,10 @@ gtr_drop_down_set_property (GObject      *object,
 }
 
 static void
-gtr_drop_down_get_property (GObject    *object,
-                            guint       property_id,
-                            GValue     *value,
-                            GParamSpec *pspec)
+gtr_drop_down_get_property (GObject      *object,
+                            unsigned int  property_id,
+                            GValue       *value,
+                            GParamSpec   *pspec)
 {
   GtrDropDownOption *self = GTR_DROP_DOWN_OPTION (object);
 

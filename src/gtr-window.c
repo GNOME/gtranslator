@@ -79,8 +79,8 @@ typedef struct
 
   GtrTab *active_tab;
 
-  gint width;
-  gint height;
+  int width;
+  int height;
 
   GtrProfileManager *prof_manager;
 
@@ -109,7 +109,7 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
 {
   GtrTab *active_tab;
   GtrPo *po;
-  gint translated, fuzzy, untranslated;
+  int translated, fuzzy, untranslated;
 
   po = gtr_tab_get_po (tab);
 
@@ -124,11 +124,11 @@ gtr_window_update_statusbar_message_count (GtrTab * tab,
 
 /* Handle drops on the GtrWindow */
 static gboolean
-drag_data_received_cb (GtkDropTarget * drop_target,
-                       const GValue * value,
-                       gdouble x,
-                       gdouble y,
-                       gpointer data)
+drag_data_received_cb (GtkDropTarget  *drop_target,
+                       const GValue   *value,
+                       double          x,
+                       double          y,
+                       gpointer        data)
 {
   GtrWindow * window = GTR_WINDOW (data);
   g_autoptr (GError) error = NULL;
@@ -165,7 +165,7 @@ set_window_title (GtrWindow * window, gboolean with_path)
 
   if (with_path)
     {
-      gchar *basename;
+      char *basename;
 
       active_tab = gtr_window_get_active_tab (window);
       po = gtr_tab_get_po (active_tab);
@@ -693,14 +693,14 @@ gtr_window_tm_keybind (GtrWindow *window,
   GtrWindowPrivate *priv = gtr_window_get_instance_private (window);
   GtrTranslationMemory *tm = priv->translation_memory;
   g_autolist (GtrTranslationMemoryMatch) tm_list = NULL;
-  const gchar *msgid;
+  const char *msgid;
   GtrTab *tab = gtr_window_get_active_tab (window);
   GtrMsg *msg;
-  const gchar *action_name;
+  const char *action_name;
   GtrPo *po;
   GtrView *view;
   GtkTextBuffer *buffer;
-  gint index = 0;
+  int index = 0;
   GtrTranslationMemoryMatch *match = NULL;
 
   if (!tab)

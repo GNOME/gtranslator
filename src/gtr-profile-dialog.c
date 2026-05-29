@@ -71,7 +71,7 @@ enum
   NO_OF_SIGNALS
 };
 
-static guint signals[NO_OF_SIGNALS];
+static unsigned int signals[NO_OF_SIGNALS];
 
 static void
 on_ok_button_clicked (GtkButton                  *button,

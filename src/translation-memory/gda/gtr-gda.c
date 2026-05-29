@@ -53,9 +53,9 @@ typedef struct
 
   sqlite3_stmt *stmt_delete_trans;
 
-  guint max_omits;
-  guint max_delta;
-  gint max_items;
+  unsigned int max_omits;
+  unsigned int max_delta;
+  int max_items;
 
   GHashTable *lookup_query_cache;
 } GtrGdaPrivate;
@@ -83,7 +83,7 @@ bind_text (sqlite3_stmt *stmt, int idx, const char *txt)
     g_critical ("Could not bind text %s to statement at idx %d", txt, idx);
 }
 
-static gint
+static int
 select_integer (sqlite3      *db,
                 sqlite3_stmt *stmt,
                 GError      **error,
@@ -271,12 +271,12 @@ string_comparator (const void *s1, const void *s2)
 }
 
 static GStrv
-gtr_gda_split_string_in_words (const gchar *phrase)
+gtr_gda_split_string_in_words (const char *phrase)
 {
   GStrv words = gtr_gda_utils_split_string_in_words (phrase);
-  gsize count = g_strv_length (words);
-  gint w;
-  gint r;
+  size_t count = g_strv_length (words);
+  int w;
+  int r;
 
   if (count <= 1)
     return words;
@@ -303,13 +303,13 @@ gtr_gda_split_string_in_words (const gchar *phrase)
 }
 
 static void
-gtr_gda_words_append (GtrGda *self,
-                      const gchar * word,
-                      gint orig_id,
-                      GError **error)
+gtr_gda_words_append (GtrGda     *self,
+                      const char *word,
+                      int         orig_id,
+                      GError    **error)
 {
   GError *inner_error = NULL;
-  gint word_id = 0;
+  int word_id = 0;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
   /* look for word */
@@ -348,12 +348,12 @@ gtr_gda_words_append (GtrGda *self,
 }
 
 static gboolean
-gtr_gda_store_impl (GtrGda *self,
-                    const gchar * original,
-                    const gchar * translation,
-                    GError **error)
+gtr_gda_store_impl (GtrGda      *self,
+                    const char  *original,
+                    const char  *translation,
+                    GError     **error)
 {
-  gint orig_id;
+  int orig_id;
   gboolean found_translation = FALSE;
   g_auto(GStrv) words = NULL;
   GError *inner_error = NULL;
@@ -372,7 +372,7 @@ gtr_gda_store_impl (GtrGda *self,
 
   if (orig_id == 0)
     {
-      gsize sz, i;
+      size_t sz, i;
 
       words = gtr_gda_split_string_in_words (original);
       sz = g_strv_length (words);
@@ -511,11 +511,12 @@ gtr_gda_store_list (GtrTranslationMemory * tm, GList * msgs)
   return result;
 }
 
-static gchar*
-build_lookup_query (GtrGda *self, guint word_count)
+static char*
+build_lookup_query (GtrGda      *self,
+                    unsigned int word_count)
 {
   GString * query = g_string_sized_new (1024);
-  guint i;
+  unsigned int i;
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
   g_string_append_printf (query,
@@ -570,7 +571,9 @@ build_lookup_query (GtrGda *self, guint word_count)
 }
 
 static sqlite3_stmt *
-gtr_gda_get_lookup_statement (GtrGda *self, guint word_count, GError **error)
+gtr_gda_get_lookup_statement (GtrGda       *self,
+                              unsigned int  word_count,
+                              GError      **error)
 {
   sqlite3_stmt *stmt = NULL;
   g_autofree gchar *query = NULL;
@@ -605,11 +608,12 @@ gtr_gda_get_lookup_statement (GtrGda *self, guint word_count, GError **error)
 }
 
 static GList *
-gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
+gtr_gda_lookup (GtrTranslationMemory *tm,
+                const char           *phrase)
 {
   GtrGda *self = GTR_GDA (tm);
   g_auto(GStrv) words = NULL;
-  guint cnt = 0;
+  unsigned int cnt = 0;
   g_autolist (GtrTranslationMemoryMatch) matches = NULL;
   g_autoptr (GError) inner_error = NULL;
   sqlite3_stmt *stmt = NULL;
@@ -673,7 +677,8 @@ gtr_gda_lookup (GtrTranslationMemory * tm, const gchar * phrase)
 }
 
 static void
-gtr_gda_set_max_omits (GtrTranslationMemory * tm, gsize omits)
+gtr_gda_set_max_omits (GtrTranslationMemory *tm,
+                       size_t                omits)
 {
   GtrGda *self = GTR_GDA (tm);
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
@@ -688,7 +693,8 @@ gtr_gda_set_max_omits (GtrTranslationMemory * tm, gsize omits)
 }
 
 static void
-gtr_gda_set_max_delta (GtrTranslationMemory * tm, gsize delta)
+gtr_gda_set_max_delta (GtrTranslationMemory *tm,
+                       size_t                delta)
 {
   GtrGda *self = GTR_GDA (tm);
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
@@ -703,7 +709,8 @@ gtr_gda_set_max_delta (GtrTranslationMemory * tm, gsize delta)
 }
 
 static void
-gtr_gda_set_max_items (GtrTranslationMemory * tm, gint items)
+gtr_gda_set_max_items (GtrTranslationMemory *tm,
+                       int                   items)
 {
   GtrGda *self = GTR_GDA (tm);
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
@@ -763,7 +770,8 @@ initialize_db (GtrGda *self)
 }
 
 static sqlite3_stmt *
-prepare_statement (sqlite3 *db, const gchar *query)
+prepare_statement (sqlite3    *db,
+                   const char *query)
 {
   sqlite3_stmt *statement;
   int rc;
@@ -793,7 +801,7 @@ gtr_gda_init (GtrGda * self)
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
   g_auto (GPathBuf) path;
   g_autofree char *db_filepath = NULL;
-  const gchar *config_dir;
+  const char *config_dir;
 
   config_dir = gtr_dirs_get_user_config_dir ();
   g_path_buf_init_from_path (&path, config_dir);

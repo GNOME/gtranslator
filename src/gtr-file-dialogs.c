@@ -30,9 +30,10 @@
  * File chooser dialog
  */
 GtkFileDialog *
-gtr_file_chooser_new (GtkWindow * parent,
-                      FileselMode mode,
-                      const gchar * title, const gchar * dir)
+gtr_file_chooser_new (GtkWindow   *parent,
+                      FileselMode  mode,
+                      const char  *title,
+                      const char  *dir)
 {
   GtkFileDialog *dialog;
 

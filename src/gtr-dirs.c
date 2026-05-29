@@ -29,16 +29,16 @@
 #include <ige-mac-bundle.h>
 #endif
 
-static gchar *user_config_dir = NULL;
-static gchar *gtr_data_dir = NULL;
-static gchar *gtr_locale_dir = NULL;
-static gchar *gtr_sourceview_dir = NULL;
+static char *user_config_dir = NULL;
+static char *gtr_data_dir = NULL;
+static char *gtr_locale_dir = NULL;
+static char *gtr_sourceview_dir = NULL;
 
 void
 gtr_dirs_init (void)
 {
 #ifdef G_OS_WIN32
-  gchar *win32_dir;
+  char *win32_dir;
 
   win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
 
@@ -52,8 +52,8 @@ gtr_dirs_init (void)
 
   if (ige_mac_bundle_get_is_app_bundle (bundle))
     {
-      const gchar *bundle_data_dir = ige_mac_bundle_get_datadir (bundle);
-      const gchar *bundle_resource_dir =
+      const char *bundle_data_dir = ige_mac_bundle_get_datadir (bundle);
+      const char *bundle_resource_dir =
         ige_mac_bundle_get_resourcesdir (bundle);
 
       gtr_data_dir = g_build_filename (bundle_data_dir, "gtranslator", NULL);
@@ -81,34 +81,34 @@ gtr_dirs_shutdown (void)
   g_free (gtr_sourceview_dir);
 }
 
-const gchar *
+const char *
 gtr_dirs_get_user_config_dir (void)
 {
   return user_config_dir;
 }
 
-const gchar *
+const char *
 gtr_dirs_get_gtr_data_dir (void)
 {
   return gtr_data_dir;
 }
 
-const gchar *
+const char *
 gtr_dirs_get_gtr_locale_dir (void)
 {
   return gtr_locale_dir;
 }
 
-const gchar *
+const char *
 gtr_dirs_get_gtr_sourceview_dir (void)
 {
   return gtr_sourceview_dir;
 }
 
-gchar *
-gtr_dirs_get_ui_file (const gchar * file)
+char *
+gtr_dirs_get_ui_file (const char *file)
 {
-  gchar *ui_file;
+  char *ui_file;
 
   g_return_val_if_fail (file != NULL, NULL);
 

@@ -56,17 +56,17 @@ static const GStrv badwords = (char *[]) {
 };
 
 static gboolean
-check_good_word (const gchar * word, gchar ** bad_words)
+check_good_word (const char *word, char **bad_words)
 {
   gboolean check = TRUE;
   g_autofree gchar *lower = NULL;
-  gint i = 0;
+  int i = 0;
 
   lower = g_utf8_strdown (word, -1);
 
   while (bad_words[i] != NULL)
     {
-      gchar *lower_collate = g_utf8_collate_key (lower, -1);
+      char *lower_collate = g_utf8_collate_key (lower, -1);
 
       if (g_strcmp0 (lower_collate, bad_words[i]) == 0)
         {
@@ -90,14 +90,14 @@ check_good_word (const gchar * word, gchar ** bad_words)
  * Returns: an array of words of the processed text
  */
 GStrv
-gtr_gda_utils_split_string_in_words (const gchar * string)
+gtr_gda_utils_split_string_in_words (const char *string)
 {
   PangoLanguage *lang = pango_language_from_string ("en");
   PangoLogAttr *attrs;
   g_autoptr(GStrvBuilder) builder = g_strv_builder_new ();
-  gint char_len;
-  gchar *s;
-  gchar *start = NULL;
+  int char_len;
+  char *s;
+  char *start = NULL;
   static GStrv badwords_collate = NULL;
 
   if (badwords_collate == NULL)
@@ -119,7 +119,7 @@ gtr_gda_utils_split_string_in_words (const gchar * string)
   s = (gchar *) string;
   for (int i = 0; i <= char_len; i++)
     {
-      gchar *end;
+      char *end;
 
       if (attrs[i].is_word_start)
         start = s;

@@ -76,7 +76,7 @@ typedef struct
   GList *current;
 
   /* The obsolete messages are stored within this gchar. */
-  gchar *obsolete;
+  char *obsolete;
 
   /* Whether po file contains obsolete entries or not */
   gboolean po_contains_obsolete_entries;
@@ -85,13 +85,13 @@ typedef struct
   gboolean no_write_perms;
 
   /* Translated entries count */
-  guint translated;
+  unsigned int translated;
 
   /* Fuzzy entries count */
-  guint fuzzy;
+  unsigned int fuzzy;
 
   /* Autosave timeout timer */
-  guint autosave_timeout;
+  unsigned int autosave_timeout;
 
   /* Header object */
   GtrHeader *header;
@@ -99,24 +99,24 @@ typedef struct
   GtrPoState state;
 
   /* Damned Lies(DL) lang are stored here */
-  gchar *dl_lang;
+  char *dl_lang;
 
   /* DL modules */
-  gchar *dl_module;
+  char *dl_module;
 
   /*  DL branches */
-  gchar *dl_branch;
+  char *dl_branch;
 
   /*  DL domains */
-  gchar *dl_domain;
+  char *dl_domain;
 
   /* The state of a DL module */
-  gchar *dl_state;
+  char *dl_state;
 
   char *dl_vcs_web;
 
   /* Marks if the file was changed;  */
-  guint file_changed : 1;
+  unsigned int file_changed : 1;
 } GtrPoPrivate;
 
 
@@ -134,12 +134,12 @@ enum
 };
 static GParamSpec *props[N_PROPERTIES];
 
-static gchar *message_error = NULL;
-static gint error_severity = -1;
+static char *message_error = NULL;
+static int error_severity = -1;
 
 static void
 gtr_po_set_property (GObject      *object,
-                     guint         prop_id,
+                     unsigned int  prop_id,
                      const GValue *value,
                      GParamSpec   *pspec)
 {
@@ -161,7 +161,7 @@ gtr_po_set_property (GObject      *object,
 
 static void
 gtr_po_get_property (GObject * object,
-                     guint prop_id, GValue * value, GParamSpec * pspec)
+                     unsigned int prop_id, GValue * value, GParamSpec * pspec)
 {
   GtrPo *po = GTR_PO (object);
 
@@ -264,7 +264,7 @@ gtr_po_dispose (GObject * object)
 
 static GtrMsg *
 gtr_po_message_container_get_message (GtrMessageContainer *container,
-                                      gint number)
+                                      int                  number)
 {
   GtrPo *po = GTR_PO (container);
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
@@ -272,7 +272,7 @@ gtr_po_message_container_get_message (GtrMessageContainer *container,
   return g_list_nth_data (priv->messages, number);
 }
 
-static gint
+static int
 gtr_po_message_container_get_message_number (GtrMessageContainer * container,
                                              GtrMsg * msg)
 {
@@ -284,7 +284,7 @@ gtr_po_message_container_get_message_number (GtrMessageContainer * container,
   return g_list_position (priv->messages, list);
 }
 
-static gint
+static int
 gtr_po_message_container_get_count (GtrMessageContainer * container)
 {
   GtrPo *po = GTR_PO (container);
@@ -338,24 +338,24 @@ gtr_po_error_quark (void)
 }
 
 static void
-on_gettext_po_xerror (gint severity,
+on_gettext_po_xerror (int severity,
                       po_message_t message,
-                      const gchar * filename, size_t lineno, size_t column,
-                      gint multiline_p, const gchar * message_text)
+                      const char * filename, size_t lineno, size_t column,
+                      int multiline_p, const char * message_text)
 {
   g_set_str (&message_error, message_text);
   error_severity = severity;
 }
 
 static void
-on_gettext_po_xerror2 (gint severity,
+on_gettext_po_xerror2 (int          severity,
                        po_message_t message1,
-                       const gchar * filename1, size_t lineno1,
-                       size_t column1, gint multiline_p1,
-                       const gchar * message_text1, po_message_t message2,
-                       const gchar * filename2, size_t lineno2,
-                       size_t column2, gint multiline_p2,
-                       const gchar * message_text2)
+                       const char  *filename1,     size_t       lineno1,
+                       size_t       column1,       int          multiline_p1,
+                       const char  *message_text1, po_message_t message2,
+                       const char  *filename2,     size_t       lineno2,
+                       size_t       column2,       int          multiline_p2,
+                       const char  *message_text2)
 {
   g_set_str (&message_error, NULL);
   message_error = g_strdup_printf ("%s.\n %s", message_text1, message_text2);
@@ -365,7 +365,7 @@ on_gettext_po_xerror2 (gint severity,
 static gboolean
 po_file_is_empty (po_file_t file)
 {
-  const gchar *const *domains = po_file_domains (file);
+  const char *const *domains = po_file_domains (file);
 
   for (; *domains != NULL; domains++)
     {
@@ -389,7 +389,7 @@ po_file_is_empty (po_file_t file)
  * Returns: False if file is writable. True if file doesn't exists, is read-only or read-only attribute can't be check
  */
 static gboolean
-is_read_only (const gchar * filename)
+is_read_only (const char *filename)
 {
   gboolean ret = TRUE;          /* default to read only */
   g_autoptr (GFileInfo) info = NULL;
@@ -435,7 +435,7 @@ _gtr_po_load (GtrPo * po, GFile * location, GError ** error)
   struct po_xerror_handler handler;
   po_message_iterator_t iter;
   po_message_t message;
-  const gchar *msgid;
+  const char *msgid;
   g_autofree char *filename = NULL;
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
@@ -511,7 +511,7 @@ _gtr_po_load_ensure_utf8 (GtrPo * po, GError ** error)
 {
   g_autofree gchar *content = NULL;
   gboolean utf8_valid;
-  gsize size;
+  size_t size;
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
   g_file_load_contents (priv->location, NULL, &content, &size, NULL, error);
@@ -626,9 +626,9 @@ gtr_po_parse (GtrPo * po, GFile * location, GError ** error)
   GtrMsg *msg;
   po_message_t message;
   po_message_iterator_t iter;
-  const gchar *const *domains;
-  gint i = 0;
-  gint pos = 1;
+  const char *const *domains;
+  int i = 0;
+  int pos = 1;
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
 
   g_return_val_if_fail (GTR_IS_PO (po), FALSE);
@@ -756,7 +756,7 @@ void
 gtr_po_save_file (GtrPo * po, GError ** error)
 {
   struct po_xerror_handler handler;
-  gchar *filename;
+  char *filename;
   GtrHeader *header;
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   /* can't use priv->iter as its already exhausted*/
@@ -946,13 +946,13 @@ gtr_po_set_state (GtrPo * po, GtrPoState state)
 }
 
 void
-gtr_po_set_dl_info (GtrPo *po,
-                    const gchar *lang,
-                    const gchar *module_name,
-                    const gchar *branch,
-                    const gchar *domain,
-                    const gchar *module_state,
-                    const gchar *vcs_web)
+gtr_po_set_dl_info (GtrPo      *po,
+                    const char *lang,
+                    const char *module_name,
+                    const char *branch,
+                    const char *domain,
+                    const char *module_state,
+                    const char *vcs_web)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_set_str (&priv->dl_lang, lang);
@@ -1022,7 +1022,7 @@ gtr_po_get_current_message (GtrPo * po)
 void
 gtr_po_update_current_message (GtrPo * po, GtrMsg * msg)
 {
-  gint i;
+  int i;
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   i = g_list_index (priv->messages, msg);
   priv->current = g_list_nth (priv->messages, i);
@@ -1215,7 +1215,8 @@ gtr_po_get_prev_fuzzy_or_untrans (GtrPo * po)
  *          the message at the given position.
  */
 GList *
-gtr_po_get_msg_from_number (GtrPo * po, gint number)
+gtr_po_get_msg_from_number (GtrPo *po,
+                            int    number)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   g_return_val_if_fail (GTR_IS_PO (po), NULL);
@@ -1244,7 +1245,7 @@ gtr_po_get_header (GtrPo * po)
  *
  * Return value: the count of the translated messages.
  **/
-gint
+int
 gtr_po_get_translated_count (GtrPo * po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
@@ -1276,7 +1277,7 @@ _gtr_po_increase_decrease_translated (GtrPo * po, gboolean increase)
  *
  * Return value: the count of the fuzzy messages.
  **/
-gint
+int
 gtr_po_get_fuzzy_count (GtrPo * po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
@@ -1308,7 +1309,7 @@ _gtr_po_increase_decrease_fuzzy (GtrPo * po, gboolean increase)
  *
  * Return value: the count of the untranslated messages.
  **/
-gint
+int
 gtr_po_get_untranslated_count (GtrPo * po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
@@ -1324,7 +1325,7 @@ gtr_po_get_untranslated_count (GtrPo * po)
  *
  * Return value: the number of messages messages.
  **/
-gint
+int
 gtr_po_get_messages_count (GtrPo * po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
@@ -1339,7 +1340,7 @@ gtr_po_get_messages_count (GtrPo * po)
  *
  * Return value: the number of the current message.
  **/
-gint
+int
 gtr_po_get_message_position (GtrPo * po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
@@ -1379,42 +1380,42 @@ gtr_po_check_po_file (GtrPo   *po,
                message_error);
 }
 
-const gchar *
+const char *
 gtr_po_get_dl_lang (GtrPo *po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   return priv->dl_lang;
 }
 
-const gchar *
+const char *
 gtr_po_get_dl_module (GtrPo *po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   return priv->dl_module;
 }
 
-const gchar *
+const char *
 gtr_po_get_dl_branch (GtrPo *po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   return priv->dl_branch;
 }
 
-const gchar *
+const char *
 gtr_po_get_dl_domain (GtrPo *po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   return priv->dl_domain;
 }
 
-const gchar *
+const char *
 gtr_po_get_dl_module_state (GtrPo *po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);
   return priv->dl_state;
 }
 
-const gchar *
+const char *
 gtr_po_get_dl_vcs_web (GtrPo *po)
 {
   GtrPoPrivate *priv = gtr_po_get_instance_private (po);

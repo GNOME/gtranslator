@@ -25,4 +25,4 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
-GStrv gtr_gda_utils_split_string_in_words (const gchar *string);
+GStrv gtr_gda_utils_split_string_in_words (const char *string);

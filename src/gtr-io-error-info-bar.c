@@ -31,8 +31,8 @@ static GArray * msg_queue_arr = NULL;
 
 typedef struct
 {
-  gchar *primary_text;
-  gchar *secondary_text;
+  char *primary_text;
+  char *secondary_text;
 } message_struct;
 
 static void show_info_bar (GtrTab * tab);
@@ -68,8 +68,8 @@ show_info_bar (GtrTab * tab)
 {
   AdwToast *toast;
   message_struct msg_struct_temp = g_array_index (msg_queue_arr, message_struct, 0);
-  const gchar * primary_text = msg_struct_temp.primary_text;
-  const gchar * secondary_text = msg_struct_temp.secondary_text;
+  const char* primary_text = msg_struct_temp.primary_text;
+  const char* secondary_text = msg_struct_temp.secondary_text;
 
   if (secondary_text)
     toast = adw_toast_new_format ("%s: %s", primary_text, secondary_text);
@@ -86,9 +86,9 @@ show_info_bar (GtrTab * tab)
 }
 
 void
-create_info_info_bar (const gchar * primary_text,
-                      const gchar * secondary_text,
-                      GtrTab * tab)
+create_info_info_bar (const char *primary_text,
+                      const char *secondary_text,
+                      GtrTab     *tab)
 {
   message_struct msg_struct_temp = {
     g_strdup (primary_text),
