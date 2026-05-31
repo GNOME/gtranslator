@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: gtranslator gnome-3-38\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
 "POT-Creation-Date: 2026-05-29 16:33+0000\n"
-"PO-Revision-Date: 2026-05-31 11:17+0200\n"
+"PO-Revision-Date: 2026-05-31 16:39+0200\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -47,7 +47,7 @@ msgstr "Fereastră nouă"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:21
 msgid "Warn if file contains fuzzy translations"
-msgstr "Atenționează dacă fișierul conține traduceri imprecise"
+msgstr "Atenționează dacă fișierul conține traduceri de revizuit"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:22
 msgid ""
@@ -55,7 +55,7 @@ msgid ""
 "strings."
 msgstr ""
 "Dacă este adevărat, atenționează utilizatorul când se salvează o traducere "
-"PO ce conține șiruri imprecise."
+"PO ce conține șiruri de revizuit."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:29
 msgid "Whether to remove the obsolete entries upon saving"
@@ -141,12 +141,12 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:89
 msgid "Remove fuzzy status when message is changed"
-msgstr "Elimină starea imprecisă când mesajul este modificat"
+msgstr "Elimină starea „de revizuit” când mesajul este modificat"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:90
 msgid "If true, remove fuzzy status from translations when they are changed."
 msgstr ""
-"Dacă este adevărat, elimină starea de imprecizie a traducerii când este "
+"Dacă este adevărat, elimină starea „de revizuit” a traducerii când este "
 "modificată."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:96
@@ -266,7 +266,7 @@ msgid ""
 msgstr ""
 "Șiruri: %d → %d (%+d)\n"
 "Traduse: %d → %d (%+d)\n"
-"Imprecise: %d → %d (%+d)\n"
+"De revizuit: %d → %d (%+d)\n"
 "Netraduse: %d → %d (%+d)"
 
 #: src/gtr-actions-file.c:221
@@ -858,7 +858,7 @@ msgstr "F_ișiere"
 
 #: src/gtr-preferences-dialog.ui:16
 msgid "_Warn if PO file contains fuzzy translations"
-msgstr "_Atenționează dacă fișierul PO conține traduceri imprecise"
+msgstr "_Atenționează dacă fișierul PO conține traduceri de revizuit"
 
 #: src/gtr-preferences-dialog.ui:22
 msgid "_Remove obsolete entries on save"
@@ -914,7 +914,7 @@ msgstr "Conținut"
 
 #: src/gtr-preferences-dialog.ui:109
 msgid "_Remove fuzzy status if message is changed"
-msgstr "_Elimină starea imprecisă dacă mesajul este modificat"
+msgstr "_Elimină starea „de revizuit” dacă mesajul este modificat"
 
 #: src/gtr-preferences-dialog.ui:115
 msgid "Check _spelling"
@@ -1027,7 +1027,7 @@ msgstr "Șirul conține o eroare"
 
 #: src/gtr-tab.c:571 src/gtr-tab.c:708
 msgid "fuzzy"
-msgstr "imprecisă"
+msgstr "de revizuit"
 
 #: src/gtr-tab.c:738
 #, c-format
@@ -1061,7 +1061,7 @@ msgstr "Netraduse: %d"
 #: src/gtr-tab.c:1965
 #, c-format
 msgid "Fuzzy: %d"
-msgstr "Imprecise: %d"
+msgstr "De revizuit: %d"
 
 #: src/gtr-tab.ui:14
 msgid "Previous message without translation"
@@ -1073,7 +1073,7 @@ msgstr "Urătorul șir fără traducere"
 
 #: src/gtr-tab.ui:37
 msgid "Toggle Fuzzy State"
-msgstr "Schimbă starea imprecisă"
+msgstr "Schimbă starea „de revizuit”"
 
 #: src/gtr-tab.ui:54
 msgid "Find"
@@ -1249,7 +1249,7 @@ msgstr "Șterge traducerea"
 #: src/shortcuts-dialog.ui:88
 msgctxt "shortcut window"
 msgid "Mark/Unmark as fuzzy"
-msgstr "Adaugă/Elimină starea imprecisă"
+msgstr "Adaugă/Elimină starea „de revizuit”"
 
 #: src/shortcuts-dialog.ui:94
 msgctxt "shortcut window"
