@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-04-06 12:11+0000\n"
+"POT-Creation-Date: 2026-05-29 16:33+0000\n"
 "PO-Revision-Date: 2026-03-26 09:07+0100\n"
 "Last-Translator: Марко М. Костић <marko.m.kostic@gmail.com>\n"
 "Language-Team: Serbian <српски <gnome-sr@googlegroups.org>>\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.desktop.in.in:2
 #: data/org.gnome.Gtranslator.metainfo.xml.in.in:7 src/gtr-actions-app.c:89
-#: src/gtr-application.c:512 src/gtr-window.c:206 src/gtr-window.c:452
+#: src/gtr-application.c:505 src/gtr-window.c:196 src/gtr-window.c:442
 msgid "Translation Editor"
 msgstr "Уређивач превода"
 
@@ -234,31 +234,31 @@ msgstr ""
 "Душан Симић <dusan.simic1810@gmail.com>\n"
 "Превод на српски језик https://гном.срб"
 
-#: src/gtr-actions-file.c:94
+#: src/gtr-actions-file.c:97
 msgid "Could not update from template"
 msgstr "Не могу да ажурирам из шаблона"
 
-#: src/gtr-actions-file.c:98 src/gtr-actions-file.c:171
-#: src/gtr-actions-file.c:455 src/gtr-actions-file.c:477
-#: src/gtr-actions-file.c:516 src/gtr-actions-file.c:542
-#: src/gtr-actions-file.c:726 src/gtr-actions-file.c:769
-#: src/gtr-actions-file.c:927 src/gtr-dl-teams.c:165 src/gtr-dl-teams.c:227
-#: src/gtr-dl-teams.c:346 src/gtr-dl-teams.c:434 src/gtr-dl-teams.c:572
-#: src/gtr-dl-teams.c:583 src/gtr-dl-teams.c:595 src/gtr-dl-teams.c:626
-#: src/gtr-dl-teams.c:637 src/gtr-dl-teams.c:709 src/gtr-tab.c:352
-#: src/gtr-window.c:157 src/gtr-window.c:347
+#: src/gtr-actions-file.c:101 src/gtr-actions-file.c:172
+#: src/gtr-actions-file.c:450 src/gtr-actions-file.c:472
+#: src/gtr-actions-file.c:511 src/gtr-actions-file.c:537
+#: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763
+#: src/gtr-actions-file.c:921 src/gtr-dl-teams.c:163 src/gtr-dl-teams.c:225
+#: src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:431 src/gtr-dl-teams.c:569
+#: src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:592 src/gtr-dl-teams.c:623
+#: src/gtr-dl-teams.c:634 src/gtr-dl-teams.c:706 src/gtr-tab.c:354
+#: src/gtr-window.c:147 src/gtr-window.c:337
 msgid "OK"
 msgstr "У реду"
 
-#: src/gtr-actions-file.c:126
+#: src/gtr-actions-file.c:128
 msgid "msgmerge failed"
 msgstr "„msgmerge“ није успео"
 
-#: src/gtr-actions-file.c:161
+#: src/gtr-actions-file.c:162
 msgid "Updated from Template"
 msgstr "Ажурирано из шаблона"
 
-#: src/gtr-actions-file.c:164
+#: src/gtr-actions-file.c:165
 #, c-format
 msgid ""
 "Messages: %d → %d (%+d)\n"
@@ -271,66 +271,66 @@ msgstr ""
 "Нејасно: %d → %d (%+d)\n"
 "Непреведено: %d → %d (%+d)"
 
-#: src/gtr-actions-file.c:222
+#: src/gtr-actions-file.c:221
 msgid "msgmerge not found on PATH. Install gettext (msgmerge) and try again."
 msgstr ""
 "„msgmerge“ није пронађен у путањи (PATH). Инсталирајте „gettext“ (msgmerge) "
 "и покушајте поново."
 
-#: src/gtr-actions-file.c:248
+#: src/gtr-actions-file.c:247
 msgid "Failed to start msgmerge"
 msgstr "Нисам успео да покренем „msgmerge“"
 
-#: src/gtr-actions-file.c:265
+#: src/gtr-actions-file.c:263
 msgid "Select Template (.pot)"
 msgstr "Изаберите шаблон (.pot)"
 
-#: src/gtr-actions-file.c:280
+#: src/gtr-actions-file.c:278
 msgid "Gettext translation template (*.pot)"
 msgstr "Геттекст шаблон превода (*.pot)"
 
-#: src/gtr-actions-file.c:311
+#: src/gtr-actions-file.c:306
 msgid "Please save the current file before updating from a template."
 msgstr "Сачувајте тренутну датотеку пре ажурирања из шаблона."
 
-#: src/gtr-actions-file.c:378 src/gtr-close-confirmation-dialog.c:336
+#: src/gtr-actions-file.c:373 src/gtr-close-confirmation-dialog.c:330
 msgid "Unsaved Changes"
 msgstr "Несачуване измене"
 
-#: src/gtr-actions-file.c:383
+#: src/gtr-actions-file.c:378
 #, c-format
 msgid "Do you want to write all the changes done to %s?"
 msgstr "Да ли желите да запишете све измене учињене у „%s“?"
 
-#: src/gtr-actions-file.c:386
+#: src/gtr-actions-file.c:381
 msgid "Cancel"
 msgstr "Откажи"
 
-#: src/gtr-actions-file.c:387
+#: src/gtr-actions-file.c:382
 msgid "Continue Without Saving"
 msgstr "Настави без чувања"
 
-#: src/gtr-actions-file.c:387
+#: src/gtr-actions-file.c:382
 msgid "Save and Open"
 msgstr "Сачувај и отвори"
 
-#: src/gtr-actions-file.c:409
+#: src/gtr-actions-file.c:404
 msgid "Open file for translation"
 msgstr "Отворите датотеку за превођење"
 
-#: src/gtr-actions-file.c:453
+#: src/gtr-actions-file.c:448
 msgid "Could not save file"
 msgstr "Не могу да сачувам датотеку"
 
-#: src/gtr-actions-file.c:514
+#: src/gtr-actions-file.c:509
 msgid "This file has already been uploaded"
 msgstr "Ова датотека је већ отпремљена"
 
-#: src/gtr-actions-file.c:530
+#: src/gtr-actions-file.c:525
 msgid "Couldn't upload the file"
 msgstr "Не могу да отпремим датотеку"
 
-#: src/gtr-actions-file.c:533
+#: src/gtr-actions-file.c:528
 #, c-format
 msgid ""
 "%s\n"
@@ -342,38 +342,38 @@ msgstr ""
 "Можда нисте исправно подесили вашу <i>l10n.gnome.org</i> <b>скупину</b> на "
 "вашем профилу или немате овлашћења да отпремите овај модул."
 
-#: src/gtr-actions-file.c:541
+#: src/gtr-actions-file.c:536
 msgid "The file has been uploaded!"
 msgstr "Ова датотека је већ отпремљена!"
 
-#: src/gtr-actions-file.c:681
+#: src/gtr-actions-file.c:675
 msgid "Save file as…"
 msgstr "Сачувај као…"
 
-#: src/gtr-application.c:311
+#: src/gtr-application.c:304
 msgid "Fixed plurals"
 msgstr "Множине су исправљене"
 
-#: src/gtr-close-confirmation-dialog.c:122 src/gtr-context.c:161
-#: src/gtr-preferences-dialog.c:451 src/gtr-profile-dialog.ui:15
+#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:164
+#: src/gtr-preferences-dialog.c:452 src/gtr-profile-dialog.ui:15
 #: src/gtr-upload-dialog.ui:20
 msgid "_Cancel"
 msgstr "_Откажи"
 
-#: src/gtr-close-confirmation-dialog.c:123
+#: src/gtr-close-confirmation-dialog.c:122
 msgid "Close _Without Saving"
 msgstr "Затвори без _чувања"
 
-#: src/gtr-close-confirmation-dialog.c:124 src/gtr-context.c:162
+#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:165
 msgid "_Save"
 msgstr "_Сачувај"
 
-#: src/gtr-close-confirmation-dialog.c:293
+#: src/gtr-close-confirmation-dialog.c:287
 #, c-format
 msgid "Save the changes to document “%s” before closing?"
 msgstr "Да сачувам измене у документу „%s“ пре затварања?"
 
-#: src/gtr-close-confirmation-dialog.c:307
+#: src/gtr-close-confirmation-dialog.c:301
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
@@ -382,7 +382,7 @@ msgstr[1] "Измене у %d документа ће бити трајно од
 msgstr[2] "Измене у %d докумената ће бити трајно одбачене."
 msgstr[3] "Измене у %d документу ће бити трајно одбачене."
 
-#: src/gtr-close-confirmation-dialog.c:314
+#: src/gtr-close-confirmation-dialog.c:308
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -396,67 +396,67 @@ msgstr[2] ""
 msgstr[3] ""
 "%d документ има несачуване измене. Да ли да их сачувам пре затварања?"
 
-#: src/gtr-context.c:178
+#: src/gtr-context.c:181
 msgid "Edit Notes"
 msgstr "Уреди напомене"
 
-#: src/gtr-context.c:531
+#: src/gtr-context.c:552
 msgid "Open in Browser"
 msgstr "Отвори у прегледачу"
 
-#: src/gtr-context.ui:28
+#: src/gtr-context.ui:25
 msgid "Notes"
 msgstr "Белешке"
 
-#: src/gtr-context.ui:32 src/gtr-preferences-dialog.c:269
+#: src/gtr-context.ui:29 src/gtr-preferences-dialog.c:271
 msgid "Edit"
 msgstr "Измени"
 
-#: src/gtr-context.ui:62
+#: src/gtr-context.ui:59
 msgid "Extracted comments"
 msgstr "Извучене напомене"
 
-#: src/gtr-context.ui:87
+#: src/gtr-context.ui:84
 msgid "Paths"
 msgstr "Путање"
 
-#: src/gtr-dl-teams.c:226
+#: src/gtr-dl-teams.c:224
 msgid "Error loading module info"
 msgstr "Грешка учитавања података модула"
 
-#: src/gtr-dl-teams.c:433
+#: src/gtr-dl-teams.c:430
 msgid "Error loading file info"
 msgstr "Грешка учитавања података датотеке"
 
-#: src/gtr-dl-teams.c:452
+#: src/gtr-dl-teams.c:449
 msgid "No file found"
 msgstr "Нисам нашао датотеку"
 
-#: src/gtr-dl-teams.c:459
+#: src/gtr-dl-teams.c:456
 msgid "No module state found."
 msgstr "Нисам нашао стање модула."
 
-#: src/gtr-dl-teams.c:571
+#: src/gtr-dl-teams.c:568
 msgid "Error loading file"
 msgstr "Грешка учитавања датотеке"
 
-#: src/gtr-dl-teams.c:581 src/gtr-dl-teams.c:625
+#: src/gtr-dl-teams.c:578 src/gtr-dl-teams.c:622
 msgid "Error creating tmp file"
 msgstr "Грешка стварања привремене датотеке"
 
-#: src/gtr-dl-teams.c:594
+#: src/gtr-dl-teams.c:591
 msgid "Error writing stream"
 msgstr "Грешка писања тока"
 
-#: src/gtr-dl-teams.c:657
+#: src/gtr-dl-teams.c:654
 msgid "The file has been saved in your Downloads folder"
 msgstr "Датотека је сачувана у вашој фасцикли за преузимања"
 
-#: src/gtr-dl-teams.c:708
+#: src/gtr-dl-teams.c:705
 msgid "Could not reserve module"
 msgstr "Не могу да резервишем модул"
 
-#: src/gtr-dl-teams.c:713
+#: src/gtr-dl-teams.c:710
 #, c-format
 msgid ""
 "%s\n"
@@ -467,7 +467,7 @@ msgstr ""
 "Можда нисте исправно подесили вашу „l10n.gnome.org“ скупину на вашем профилу "
 "или немате овлашћења да резервишете овај модул."
 
-#: src/gtr-dl-teams.c:725
+#: src/gtr-dl-teams.c:722
 msgid "The file has been successfully reserved"
 msgstr "Датотека је успешно резервисана"
 
@@ -531,22 +531,24 @@ msgstr "Стања"
 msgid "_Load File"
 msgstr "_Учитај датотеку"
 
-#: src/gtr-file-dialogs.c:57
+#: src/gtr-file-dialogs.c:59
 msgid "Gettext translation"
 msgstr "Геттекст превод (.po)"
 
-#: src/gtr-file-dialogs.c:65
+#: src/gtr-file-dialogs.c:67
 msgid "Gettext translation template"
 msgstr "Шаблон Геттекст превода (.pot)"
 
-#: src/gtr-file-dialogs.c:69
+#: src/gtr-file-dialogs.c:71
 msgid "All files"
 msgstr "Све датотеке"
 
-#: src/gtr-greeter.c:215 src/gtr-profile-dialog.c:127
+#: src/gtr-greeter.c:216 src/gtr-profile-dialog.c:129
 #, c-format
 msgid "GNOME Damned Lies integration token, go to your profile in %s to get it"
-msgstr "Токен за интеграцију са Гномовим „Проклетим лажима“, идите на ваш профил у %s да га набавите"
+msgstr ""
+"Токен за интеграцију са Гномовим „Проклетим лажима“, идите на ваш профил у "
+"%s да га набавите"
 
 #: src/gtr-greeter.ui:5 src/gtr-greeter.ui:39
 msgid "Welcome to Translation Editor"
@@ -644,7 +646,7 @@ msgstr "Пренеси кодирање"
 msgid "Plural form"
 msgstr "Облици множине"
 
-#: src/gtr-header-dialog.c:379 src/gtr-tab.ui:327
+#: src/gtr-header-dialog.c:381 src/gtr-tab.ui:327
 msgid "Edit Header"
 msgstr "Уређивање заглавља"
 
@@ -713,7 +715,7 @@ msgstr "Датум _ревизије По датотеке"
 msgid "Report message _bugs to"
 msgstr "Грешке у преводу пријавите _на"
 
-#: src/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:145
+#: src/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:147
 msgid "Comment"
 msgstr "Напомена"
 
@@ -733,7 +735,7 @@ msgstr "Стање"
 msgid "VCS Browser"
 msgstr "ВЦС прегледач"
 
-#: src/gtr-lang-combo-row.c:89
+#: src/gtr-lang-combo-row.c:90
 msgid "Languages"
 msgstr "Језици"
 
@@ -761,27 +763,27 @@ msgstr "Изворна порука"
 msgid "Translated Message"
 msgstr "Преведена порука"
 
-#: src/gtr-po.c:471
+#: src/gtr-po.c:469
 #, c-format
 msgid "The file is empty"
 msgstr "Датотека је празна"
 
-#: src/gtr-po.c:480
+#: src/gtr-po.c:478
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Нисам успео да отворим датотеку „%s“: %s"
 
-#: src/gtr-po.c:551
+#: src/gtr-po.c:549
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Не могу да претворим из скупа знакова „%s“ у УТФ-8"
 
-#: src/gtr-po.c:567 src/gtr-po.c:586
+#: src/gtr-po.c:563 src/gtr-po.c:581
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Не могу да ускладиштим привремену библиотеку за претварање шифровања"
 
-#: src/gtr-po.c:617
+#: src/gtr-po.c:605
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -792,17 +794,17 @@ msgstr ""
 "или „iconv“ алате линије наредби пре него што отворите ову датотеку у "
 "Гномовом Уређивачу превода"
 
-#: src/gtr-po.c:684
+#: src/gtr-po.c:670
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Геттекст је вратио празну поруку са списком домена."
 
-#: src/gtr-po.c:734
+#: src/gtr-po.c:717
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Нису добивене поруке из програма за обраду."
 
-#: src/gtr-po.c:800
+#: src/gtr-po.c:783
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -813,42 +815,42 @@ msgstr ""
 "Пот датотеке се стварају у процесу сабирања превода.\n"
 "Ваша датотека би требала бити названа „%s.po“."
 
-#: src/gtr-po.c:830
+#: src/gtr-po.c:813
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Датотека „%s“ се може само читати и не можете је преписати другом"
 
-#: src/gtr-po.c:849 src/gtr-po.c:1392
+#: src/gtr-po.c:832 src/gtr-po.c:1379
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Постоји грешка у ПО датотеци: %s"
 
-#: src/gtr-po.c:860
+#: src/gtr-po.c:843
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Дошло је до грешке приликом писања ПО датотеке: %s"
 
-#: src/gtr-preferences-dialog.c:273
+#: src/gtr-preferences-dialog.c:275
 msgid "Delete"
 msgstr "Обриши"
 
-#: src/gtr-preferences-dialog.c:434
+#: src/gtr-preferences-dialog.c:435
 msgid "Impossible to remove the active profile"
 msgstr "Не могу да уклоним активни профил"
 
-#: src/gtr-preferences-dialog.c:435
+#: src/gtr-preferences-dialog.c:436
 msgid "Another profile should be selected as active before"
 msgstr "Морате најпре активирати неки други профил"
 
-#: src/gtr-preferences-dialog.c:438
+#: src/gtr-preferences-dialog.c:439
 msgid "_Ok"
 msgstr "_У реду"
 
-#: src/gtr-preferences-dialog.c:446
+#: src/gtr-preferences-dialog.c:447
 msgid "Are you sure you want to delete this profile?"
 msgstr "Да ли сте сигурни да желите да обришете овај профил?"
 
-#: src/gtr-preferences-dialog.c:452
+#: src/gtr-preferences-dialog.c:453
 msgid "_Delete"
 msgstr "_Обриши"
 
@@ -1020,44 +1022,44 @@ msgstr "Изворни текст"
 msgid "Translated text"
 msgstr "Преведени текст"
 
-#: src/gtr-tab.c:349
+#: src/gtr-tab.c:351
 msgid "There is an error in the message"
 msgstr "Постоји грешка у поруци"
 
-#: src/gtr-tab.c:568 src/gtr-tab.c:705
+#: src/gtr-tab.c:571 src/gtr-tab.c:708
 msgid "fuzzy"
 msgstr "нејасно"
 
-#: src/gtr-tab.c:735
+#: src/gtr-tab.c:738
 #, c-format
 msgid "Plural %d"
 msgstr "Множина %d"
 
 #. Translators: Path to the document opened
-#: src/gtr-tab.c:1291
+#: src/gtr-tab.c:1268
 msgid "Path:"
 msgstr "Путања:"
 
-#: src/gtr-tab.c:1541
+#: src/gtr-tab.c:1519
 msgid "Copied original to clipboard"
 msgstr "Изворни текст умножен у оставу"
 
-#: src/gtr-tab.c:1979
+#: src/gtr-tab.c:1962
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Преведено: %0.2f%%"
 
-#: src/gtr-tab.c:1980
+#: src/gtr-tab.c:1963
 #, c-format
 msgid "Translated: %d"
 msgstr "Преведено: %d"
 
-#: src/gtr-tab.c:1981
+#: src/gtr-tab.c:1964
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Непреведено: %d"
 
-#: src/gtr-tab.c:1982
+#: src/gtr-tab.c:1965
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Нејасно: %d"
@@ -1139,11 +1141,11 @@ msgstr "Напредни алати"
 msgid "Fix plural messages"
 msgstr "Исправи поруке множине"
 
-#: src/gtr-upload-dialog.c:197
-msgid "Uploading..."
-msgstr "Отпремљује се..."
+#: src/gtr-upload-dialog.c:199
+msgid "Uploading…"
+msgstr "Отпремам…"
 
-#: src/gtr-upload-dialog.c:203
+#: src/gtr-upload-dialog.c:205
 msgid "Upload"
 msgstr "Отпреми"
 
@@ -1156,37 +1158,24 @@ msgid "_Upload"
 msgstr "_Отпреми"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:189
+#: src/gtr-window.c:179
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s — Уређивач превода"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:196
+#: src/gtr-window.c:186
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s — Уређивач превода"
 
-#: src/gtr-window.c:346
+#: src/gtr-window.c:336
 msgid "Could not Save"
 msgstr "Не могу да сачувам"
 
-#: src/gtr-window.c:358
+#: src/gtr-window.c:348
 msgid "File saved"
 msgstr "Датотека је сачувана"
-
-#: src/main.c:97
-msgid "— Edit PO files"
-msgstr "— уређујте ПО датотеке"
-
-#: src/main.c:101
-#, c-format
-msgid ""
-"%s\n"
-"Run “%s --help” to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"Покрените „%s --help“ за списак свих доступних опција наредбене линије.\n"
 
 #: src/shortcuts-dialog.ui:6
 msgctxt "shortcut window group"
@@ -1343,7 +1332,7 @@ msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Сакриј траку претраге и замене"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:77
+#: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "Select PO directory"
 msgstr "Изаберите ПО фасциклу"
 
