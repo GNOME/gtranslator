@@ -116,7 +116,7 @@ c_args = [
   '-DG_LOG_DOMAIN="@0@"'.format(gtr_app_id),
 ]
 
-libgtranslator = shared_library(
+libgtranslator = static_library(
   meson.project_name(),
   sources: sources + translation_mem_sources + codeview_sources + [
     gtr_build_ident_h,
@@ -124,6 +124,8 @@ libgtranslator = shared_library(
   include_directories: incs,
   dependencies: gtr_deps,
   c_args: c_args,
+  install: false,
+  gnu_symbol_visibility: 'internal',
 )
 
 libgtranslator_dep = declare_dependency(
@@ -143,4 +145,5 @@ executable(
   dependencies: gtr_deps,
   objects: libgtranslator.extract_all_objects(recursive: true),
   install: true,
+  gnu_symbol_visibility: 'internal',
 )
