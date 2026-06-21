@@ -42,9 +42,9 @@
           <object class="AdwHeaderBar">
             <child type="end">
               <object class="GtkMenuButton" id="main_menu">
-                <property name="receives_default">1</property>
+                <property name="receives-default">1</property>
                 <property name="popover">main_menu_popover</property>
-                <property name="icon_name">open-menu-symbolic</property>
+                <property name="icon-name">open-menu-symbolic</property>
                 <property name="primary">True</property>
                 <property name="tooltip-text" translatable="yes">Main Menu</property>
               </object>
@@ -53,7 +53,7 @@
         </child>
          <property name="content">
            <object class="AdwStatusPage" id="status_page">
-             <property name="icon_name">document-new-symbolic</property>
+             <property name="icon-name">document-new-symbolic</property>
              <property name="title" translatable="yes">Open Translation File</property>
              <property name="description" translatable="yes">Drag and drop .po files here</property>
              <child>
@@ -92,7 +92,7 @@
 
 
   <object class="GtkPopoverMenu" id="main_menu_popover">
-    <property name="menu_model">app-menu</property>
+    <property name="menu-model">app-menu</property>
   </object>
 
   <object class="GtkSizeGroup">

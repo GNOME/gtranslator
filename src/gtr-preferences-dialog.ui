@@ -5,7 +5,7 @@
   <template class="GtrPreferencesDialog" parent="AdwPreferencesDialog">
     <child>
       <object class="AdwPreferencesPage">
-        <property name="icon_name">folder-documents-symbolic</property>
+        <property name="icon-name">folder-documents-symbolic</property>
         <property name="title" translatable="yes">F_iles</property>
         <property name="use-underline">True</property>
         <child>
@@ -14,13 +14,13 @@
             <child>
               <object class="AdwSwitchRow" id="warn_if_contains_fuzzy">
                 <property name="title" translatable="yes">_Warn if PO file contains fuzzy translations</property>
-                <property name="use_underline">True</property>
+                <property name="use-underline">True</property>
               </object>
             </child>
             <child>
               <object class="AdwSwitchRow" id="remove_obsolete_entries">
                 <property name="title" translatable="yes">_Remove obsolete entries on save</property>
-                <property name="use_underline">True</property>
+                <property name="use-underline">True</property>
               </object>
             </child>
           </object>
@@ -32,21 +32,21 @@
               <object class="AdwSwitchRow" id="autosave_checkbutton">
                 <property name="title" translatable="yes">_Activate auto save</property>
                 <property name="subtitle" translatable="yes">Save the current file automatically</property>
-                <property name="use_underline">True</property>
+                <property name="use-underline">True</property>
               </object>
             </child>
             <child>
               <object class="AdwSpinRow" id="autosave_interval_spinbutton">
                 <property name="title" translatable="yes">Autosave _Interval</property>
                 <property name="subtitle" translatable="yes">Number of minutes to autosave</property>
-                <property name="use_underline">True</property>
+                <property name="use-underline">True</property>
                 <property name="adjustment">
                   <object class="GtkAdjustment" id="adjustment1">
                     <property name="lower">1</property>
                     <property name="upper">30</property>
                     <property name="value">4</property>
-                    <property name="step_increment">1</property>
-                    <property name="page_increment">10</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
                   </object>
                 </property>
               </object>
@@ -54,7 +54,7 @@
             <child>
               <object class="AdwSwitchRow" id="create_backup">
                 <property name="title" translatable="yes">Create a _backup copy of files before saving</property>
-                <property name="use_underline">True</property>
+                <property name="use-underline">True</property>
               </object>
             </child>
           </object>
@@ -65,7 +65,7 @@
     <!-- Second page Editor -->
     <child>
       <object class="AdwPreferencesPage">
-        <property name="icon_name">applications-system-symbolic</property>
+        <property name="icon-name">applications-system-symbolic</property>
         <property name="title" translatable="yes">_Editor</property>
         <property name="use-underline">True</property>
         <child>
@@ -74,19 +74,19 @@
             <child>
               <object class="AdwSwitchRow" id="highlight_syntax_checkbutton">
                 <property name="title" translatable="yes">_Highlight message syntax</property>
-                <property name="use_underline">True</property>
+                <property name="use-underline">True</property>
               </object>
             </child>
             <child>
               <object class="AdwSwitchRow" id="visible_whitespace_checkbutton">
                 <property name="title" translatable="yes">Make _whitespace visible</property>
-                <property name="use_underline">True</property>
+                <property name="use-underline">True</property>
               </object>
             </child>
             <child>
               <object class="AdwActionRow">
                 <property name="title" translatable="yes">_Font</property>
-                <property name="use_underline">True</property>
+                <property name="use-underline">True</property>
                 <child>
                   <object class="GtkFontDialogButton" id="font_button">
                     <property name="valign">center</property>
@@ -107,13 +107,13 @@
             <child>
               <object class="AdwSwitchRow" id="unmark_fuzzy_when_changed_checkbutton">
                 <property name="title" translatable="yes">_Remove fuzzy status if message is changed</property>
-                <property name="use_underline">True</property>
+                <property name="use-underline">True</property>
               </object>
             </child>
             <child>
               <object class="AdwSwitchRow" id="spellcheck_checkbutton">
                 <property name="title" translatable="yes">Check _spelling</property>
-                <property name="use_underline">True</property>
+                <property name="use-underline">True</property>
               </object>
             </child>
           </object>
@@ -124,7 +124,7 @@
     <!-- Third page Profile -->
     <child>
       <object class="AdwPreferencesPage">
-        <property name="icon_name">system-users-symbolic</property>
+        <property name="icon-name">system-users-symbolic</property>
         <property name="title" translatable="yes">_Profiles</property>
         <property name="use-underline">True</property>
         <child>

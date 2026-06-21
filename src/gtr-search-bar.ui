@@ -10,13 +10,13 @@
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkGrid">
-            <property name="column_spacing">12</property>
+            <property name="column-spacing">12</property>
             <child>
               <object class="GtkEntry" id="search_entry">
                 <property name="hexpand">1</property>
-                <property name="primary_icon_name">edit-find-symbolic</property>
-                <property name="primary_icon_activatable">0</property>
-                <property name="primary_icon_sensitive">0</property>
+                <property name="primary-icon-name">edit-find-symbolic</property>
+                <property name="primary-icon-activatable">0</property>
+                <property name="primary-icon-sensitive">0</property>
                 <property name="placeholder-text" translatable="yes">Search</property>
                 <layout>
                   <property name="column">0</property>
@@ -31,14 +31,14 @@
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkButton" id="previous_button">
-                    <property name="icon_name">go-up-symbolic</property>
-                    <property name="tooltip_text" translatable="yes">Previous Result</property>
+                    <property name="icon-name">go-up-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Previous Result</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton" id="next_button">
-                    <property name="icon_name">go-down-symbolic</property>
-                    <property name="tooltip_text" translatable="yes">Next Result</property>
+                    <property name="icon-name">go-down-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Next Result</property>
                   </object>
                 </child>
                 <layout>
@@ -56,7 +56,7 @@
                   <object class="GtkToggleButton">
                     <property name="active" bind-source="GtrSearchBar" bind-property="replace-mode" bind-flags="sync-create|bidirectional"/>
                     <property name="tooltip-text" translatable="yes">Switch between Search and Search-and-Replace</property>
-                    <property name="icon_name">edit-find-replace-symbolic</property>
+                    <property name="icon-name">edit-find-replace-symbolic</property>
                   </object>
                 </child>
                 <child>
@@ -64,7 +64,7 @@
                     <property name="tooltip-text" translatable="yes">Show or hide search options such as case sensitivity</property>
                     <property name="focus-on-click">0</property>
                     <property name="active" bind-source="GtrSearchBar" bind-property="show-options" bind-flags="sync-create|bidirectional"/>
-                    <property name="icon_name">settings-symbolic</property>
+                    <property name="icon-name">settings-symbolic</property>
                   </object>
                 </child>
                 <layout>
@@ -79,14 +79,14 @@
           <object class="GtkRevealer" id="replace_options">
             <child>
               <object class="GtkBox">
-                <property name="margin_top">6</property>
+                <property name="margin-top">6</property>
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkEntry" id="replace_entry">
                     <property name="width-chars">20</property>
-                    <property name="primary_icon_name">edit-find-replace-symbolic</property>
-                    <property name="primary_icon_activatable">0</property>
-                    <property name="primary_icon_sensitive">0</property>
+                    <property name="primary-icon-name">edit-find-replace-symbolic</property>
+                    <property name="primary-icon-activatable">0</property>
+                    <property name="primary-icon-sensitive">0</property>
                     <property name="placeholder-text" translatable="yes">Replace</property>
                     <property name="hexpand">True</property>
                   </object>
@@ -114,8 +114,8 @@
           <object class="GtkRevealer" id="search_options">
             <child>
               <object class="GtkGrid">
-                <property name="margin_top">6</property>
-                <property name="column_spacing">8</property>
+                <property name="margin-top">6</property>
+                <property name="column-spacing">8</property>
                 <child>
                   <object class="GtkCheckButton" id="case_sensitive">
                     <property name="label" translatable="yes">Case sensitive</property>
