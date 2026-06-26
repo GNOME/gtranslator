@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator gnome-3-38\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-05-29 16:33+0000\n"
-"PO-Revision-Date: 2026-05-31 16:39+0200\n"
+"POT-Creation-Date: 2026-06-21 07:33+0000\n"
+"PO-Revision-Date: 2026-06-26 11:17+0200\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -18,8 +18,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);\n"
-"X-Generator: Gtranslator 48.0\n"
+"X-Generator: Gtranslator 50.0\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-DL-VCS-Web: https://gitlab.gnome.org/GNOME/gtranslator/\n"
+"X-DL-Lang: ro\n"
+"X-DL-Module: gtranslator\n"
+"X-DL-Branch: master\n"
+"X-DL-Domain: po\n"
+"X-DL-State: Translating\n"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:2
 #: data/org.gnome.Gtranslator.metainfo.xml.in.in:7 src/gtr-actions-app.c:89
@@ -220,7 +226,8 @@ msgid ""
 "Translation file editing suite for localization of applications and "
 "libraries."
 msgstr ""
-"Suită de tradus fișiere pentru localizarea aplicațiilor și bibliotecilor."
+"Program pentru modificarea fișierelor de traducere pentru aplicații și "
+"biblioteci."
 
 #.
 #. * Note to translators: put here your name and email so it will show
@@ -239,12 +246,11 @@ msgstr "Nu s-a putut actualiza din model"
 #: src/gtr-actions-file.c:101 src/gtr-actions-file.c:172
 #: src/gtr-actions-file.c:450 src/gtr-actions-file.c:472
 #: src/gtr-actions-file.c:511 src/gtr-actions-file.c:537
-#: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763
-#: src/gtr-actions-file.c:921 src/gtr-dl-teams.c:163 src/gtr-dl-teams.c:225
-#: src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:431 src/gtr-dl-teams.c:569
-#: src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:592 src/gtr-dl-teams.c:623
-#: src/gtr-dl-teams.c:634 src/gtr-dl-teams.c:706 src/gtr-tab.c:354
-#: src/gtr-window.c:147 src/gtr-window.c:337
+#: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763 src/gtr-dl-teams.c:163
+#: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:431
+#: src/gtr-dl-teams.c:569 src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:592
+#: src/gtr-dl-teams.c:623 src/gtr-dl-teams.c:634 src/gtr-dl-teams.c:706
+#: src/gtr-tab.c:354 src/gtr-window.c:147 src/gtr-window.c:337
 msgid "OK"
 msgstr "Bine"
 
@@ -291,7 +297,7 @@ msgstr "Model de traducere Gettext (*.pot)"
 msgid "Please save the current file before updating from a template."
 msgstr "Salvează fișierul actual înainte de a-l actualiza dintr-un model."
 
-#: src/gtr-actions-file.c:373 src/gtr-close-confirmation-dialog.c:330
+#: src/gtr-actions-file.c:373 src/gtr-close-confirmation-dialog.c:314
 msgid "Unsaved Changes"
 msgstr "Modificări nesalvate"
 
@@ -366,12 +372,12 @@ msgstr "Închide _fără a salva"
 msgid "_Save"
 msgstr "_Salvează"
 
-#: src/gtr-close-confirmation-dialog.c:287
+#: src/gtr-close-confirmation-dialog.c:271
 #, c-format
 msgid "Save the changes to document “%s” before closing?"
 msgstr "Se salvează modificările documentului „%s” înainte de închidere?"
 
-#: src/gtr-close-confirmation-dialog.c:301
+#: src/gtr-close-confirmation-dialog.c:285
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
@@ -379,7 +385,7 @@ msgstr[0] "Modificările unui document vor fi pierdute definitiv."
 msgstr[1] "Modificările făcute în %d documente vor fi pierdute definitiv."
 msgstr[2] "Modificările făcute în %d de documente vor fi pierdute definitiv."
 
-#: src/gtr-close-confirmation-dialog.c:308
+#: src/gtr-close-confirmation-dialog.c:292
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -398,7 +404,7 @@ msgstr[2] ""
 msgid "Edit Notes"
 msgstr "Modifică observațiile"
 
-#: src/gtr-context.c:552
+#: src/gtr-context.c:549
 msgid "Open in Browser"
 msgstr "Deschide în navigator"
 
@@ -483,7 +489,7 @@ msgstr "Despre Modifică traduceri"
 
 #: src/gtr-dl-teams.ui:28 src/gtr-dl-teams.ui:49
 msgid "Load from Damned Lies"
-msgstr "Încarcă din Minciuni blestemate"
+msgstr "Descarcă din Minciuni blestemate"
 
 #: src/gtr-dl-teams.ui:41 src/gtr-projects.ui:49 src/gtr-tab.ui:47
 msgid "Main Menu"
@@ -515,7 +521,7 @@ msgstr "Informații"
 
 #: src/gtr-dl-teams.ui:104
 msgid "File"
-msgstr "Fișier"
+msgstr "Fișierul"
 
 #: src/gtr-dl-teams.ui:112
 msgid "Translation State"
@@ -527,7 +533,7 @@ msgstr "Statistici"
 
 #: src/gtr-dl-teams.ui:133
 msgid "_Load File"
-msgstr "Încarcă _fișierul"
+msgstr "_Descarcă fișierul"
 
 #: src/gtr-file-dialogs.c:59
 msgid "Gettext translation"
@@ -695,7 +701,7 @@ msgstr "Forme de _plural"
 
 #: src/gtr-header-dialog.ui:76
 msgid "Project"
-msgstr "Proiect"
+msgstr "Proiectul"
 
 #: src/gtr-header-dialog.ui:83
 msgid "Project Id _version"
@@ -818,7 +824,7 @@ msgstr ""
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Fișierul %s este doar de citit, și nu poate fi suprascris"
 
-#: src/gtr-po.c:832 src/gtr-po.c:1379
+#: src/gtr-po.c:832 src/gtr-po.c:1183
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Există o eroare în fișierul PO: %s"
@@ -962,11 +968,11 @@ msgstr "Trage și așează aici fișiere .po"
 
 #: src/gtr-projects.ui:65
 msgid "_Open…"
-msgstr "_Deschide…"
+msgstr "D_eschide…"
 
 #: src/gtr-projects.ui:76
 msgid "_Load from DL…"
-msgstr "Î_ncarcă din MB…"
+msgstr "_Descarcă din MB…"
 
 #: src/gtr-search-bar.ui:20
 msgid "Search"
@@ -1034,31 +1040,26 @@ msgstr "de revizuit"
 msgid "Plural %d"
 msgstr "Plural %d"
 
-#. Translators: Path to the document opened
-#: src/gtr-tab.c:1268
-msgid "Path:"
-msgstr "Calea:"
-
-#: src/gtr-tab.c:1519
+#: src/gtr-tab.c:1461
 msgid "Copied original to clipboard"
 msgstr "Originalul a fost copiat"
 
-#: src/gtr-tab.c:1962
+#: src/gtr-tab.c:1673
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Traduse: %0.2f%%"
 
-#: src/gtr-tab.c:1963
+#: src/gtr-tab.c:1674
 #, c-format
 msgid "Translated: %d"
 msgstr "Traduse: %d"
 
-#: src/gtr-tab.c:1964
+#: src/gtr-tab.c:1675
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Netraduse: %d"
 
-#: src/gtr-tab.c:1965
+#: src/gtr-tab.c:1676
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "De revizuit: %d"
@@ -1069,7 +1070,7 @@ msgstr "Șirul precedent fără traducere"
 
 #: src/gtr-tab.ui:22
 msgid "Next message without translation"
-msgstr "Urătorul șir fără traducere"
+msgstr "Următorul șir fără traducere"
 
 #: src/gtr-tab.ui:37
 msgid "Toggle Fuzzy State"
