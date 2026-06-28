@@ -812,7 +812,12 @@ gtr_tab_init (GtrTab * tab)
   // so setting manually here
   gtk_paned_set_shrink_end_child (GTK_PANED (priv->main_paned), FALSE);
   g_object_get (G_OBJECT (priv->main_paned), "max-position", &max_pos, NULL);
-  gtk_paned_set_position (GTK_PANED (priv->main_paned), max_pos);
+  int paned_position = g_settings_get_int (priv->state_settings, "translating-area-height");
+  if (paned_position < 0)
+    paned_position = max_pos;
+
+  gtk_paned_set_position (GTK_PANED (priv->main_paned), paned_position);
+  g_debug ("Loading a translating-area-height of %d", paned_position);
 }
 
 static void
@@ -837,6 +842,10 @@ gtr_tab_dispose (GObject * object)
   g_debug ("Disposing tab");
 
   priv = gtr_tab_get_instance_private (GTR_TAB (object));
+
+  int paned_position = gtk_paned_get_position (GTK_PANED (priv->main_paned));
+  g_settings_set_int (priv->state_settings, "translating-area-height", paned_position);
+  g_debug ("Saving a translating-area-height of %d", paned_position);
 
   g_clear_object (&priv->po);
   g_clear_object (&priv->ui_settings);
