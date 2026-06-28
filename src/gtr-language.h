@@ -31,7 +31,7 @@ typedef struct _GtrLanguage GtrLanguage;
 
 #define GTR_TYPE_LANGUAGE (gtr_language_get_type ())
 
-GType                    gtr_language_get_type           (void) G_GNUC_CONST;
+GType                    gtr_language_get_type           (void);
 
 /* These should not be used, they are just to make python bindings happy */
 GtrLanguage             *gtr_language_copy               (GtrLanguage       *lang);
