@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-05-18 06:32+0000\n"
-"PO-Revision-Date: 2026-05-18 17:53+0200\n"
+"POT-Creation-Date: 2026-06-29 14:48+0000\n"
+"PO-Revision-Date: 2026-06-29 17:53+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -185,6 +185,14 @@ msgstr "Okno povečano"
 msgid "Window maximized state"
 msgstr "Stanje povečanega okna"
 
+#: data/org.gnome.Gtranslator.gschema.xml.in:136
+msgid "Translation area height"
+msgstr "Višina področja prevoda"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:137
+msgid "Height of the translation area panel."
+msgstr "Višina pulta s prevodom."
+
 #: data/org.gnome.Gtranslator.metainfo.xml.in.in:10
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
@@ -241,12 +249,11 @@ msgstr "Posodobitev iz predloge ni uspela"
 #: src/gtr-actions-file.c:101 src/gtr-actions-file.c:172
 #: src/gtr-actions-file.c:450 src/gtr-actions-file.c:472
 #: src/gtr-actions-file.c:511 src/gtr-actions-file.c:537
-#: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763
-#: src/gtr-actions-file.c:921 src/gtr-dl-teams.c:163 src/gtr-dl-teams.c:225
-#: src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:431 src/gtr-dl-teams.c:569
-#: src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:592 src/gtr-dl-teams.c:623
-#: src/gtr-dl-teams.c:634 src/gtr-dl-teams.c:706 src/gtr-tab.c:354
-#: src/gtr-window.c:147 src/gtr-window.c:337
+#: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763 src/gtr-dl-teams.c:163
+#: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:431
+#: src/gtr-dl-teams.c:569 src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:592
+#: src/gtr-dl-teams.c:623 src/gtr-dl-teams.c:634 src/gtr-dl-teams.c:706
+#: src/gtr-tab.c:354 src/gtr-window.c:147 src/gtr-window.c:337
 msgid "OK"
 msgstr "V redu"
 
@@ -293,7 +300,7 @@ msgstr "Predloga prevoda gettext (*.pot)"
 msgid "Please save the current file before updating from a template."
 msgstr "Shranite trenutno datoteko pred posodabljanjem iz predloge."
 
-#: src/gtr-actions-file.c:373 src/gtr-close-confirmation-dialog.c:330
+#: src/gtr-actions-file.c:373 src/gtr-close-confirmation-dialog.c:314
 msgid "Unsaved Changes"
 msgstr "Neshranjene spremembe"
 
@@ -367,12 +374,12 @@ msgstr "Zapri _brez shranjevanja"
 msgid "_Save"
 msgstr "_Shrani"
 
-#: src/gtr-close-confirmation-dialog.c:287
+#: src/gtr-close-confirmation-dialog.c:271
 #, c-format
 msgid "Save the changes to document “%s” before closing?"
 msgstr "Ali želite pred zapiranjem shraniti spremembe dokumenta »%s«?"
 
-#: src/gtr-close-confirmation-dialog.c:301
+#: src/gtr-close-confirmation-dialog.c:285
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
@@ -381,7 +388,7 @@ msgstr[1] "Spremembe %d dokumenta bodo trajno izgubljene."
 msgstr[2] "Spremembe %d dokumentov bodo trajno izgubljene."
 msgstr[3] "Spremembe %d dokumentov bodo trajno izgubljene."
 
-#: src/gtr-close-confirmation-dialog.c:308
+#: src/gtr-close-confirmation-dialog.c:292
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -403,7 +410,7 @@ msgstr[3] ""
 msgid "Edit Notes"
 msgstr "Uredi opombe"
 
-#: src/gtr-context.c:552
+#: src/gtr-context.c:549
 msgid "Open in Browser"
 msgstr "Odpri v brskalniku"
 
@@ -534,15 +541,15 @@ msgstr "Statistika"
 msgid "_Load File"
 msgstr "_Naloži datoteko"
 
-#: src/gtr-file-dialogs.c:58
+#: src/gtr-file-dialogs.c:59
 msgid "Gettext translation"
 msgstr "Prevod gettext"
 
-#: src/gtr-file-dialogs.c:66
+#: src/gtr-file-dialogs.c:67
 msgid "Gettext translation template"
 msgstr "Predloga prevoda gettext"
 
-#: src/gtr-file-dialogs.c:70
+#: src/gtr-file-dialogs.c:71
 msgid "All files"
 msgstr "Vse datoteke"
 
@@ -823,7 +830,7 @@ msgstr ""
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Datoteka %s je dostopna le za branje in je ni mogoče prepisati"
 
-#: src/gtr-po.c:832 src/gtr-po.c:1378
+#: src/gtr-po.c:832 src/gtr-po.c:1183
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "V datoteki PO je zaznana napaka: %s"
@@ -1030,40 +1037,35 @@ msgstr "Prevedeno besedilo"
 msgid "There is an error in the message"
 msgstr "V besedilu je napaka"
 
-#: src/gtr-tab.c:570 src/gtr-tab.c:707
+#: src/gtr-tab.c:571 src/gtr-tab.c:708
 msgid "fuzzy"
 msgstr "ohlapno"
 
-#: src/gtr-tab.c:737
+#: src/gtr-tab.c:738
 #, c-format
 msgid "Plural %d"
 msgstr "Množinska oblika %d"
 
-#. Translators: Path to the document opened
-#: src/gtr-tab.c:1267
-msgid "Path:"
-msgstr "Pot:"
-
-#: src/gtr-tab.c:1517
+#: src/gtr-tab.c:1470
 msgid "Copied original to clipboard"
 msgstr "Izvirno besedilo kopirano v odložišče"
 
-#: src/gtr-tab.c:1958
+#: src/gtr-tab.c:1682
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Prevedeno: %0.2f%%"
 
-#: src/gtr-tab.c:1959
+#: src/gtr-tab.c:1683
 #, c-format
 msgid "Translated: %d"
 msgstr "Prevedeno: %d"
 
-#: src/gtr-tab.c:1960
+#: src/gtr-tab.c:1684
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Neprevedeno: %d"
 
-#: src/gtr-tab.c:1961
+#: src/gtr-tab.c:1685
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Ohlapno: %d"
