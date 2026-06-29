@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-05-18 06:32+0000\n"
-"PO-Revision-Date: 2026-05-18 15:00+0300\n"
+"POT-Creation-Date: 2026-06-29 14:48+0000\n"
+"PO-Revision-Date: 2026-06-29 22:11+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -181,6 +181,16 @@ msgstr "Вікно розгорнуто"
 msgid "Window maximized state"
 msgstr "Стан розгорнутості вікна"
 
+#: data/org.gnome.Gtranslator.gschema.xml.in:136
+#| msgid "Translation team email"
+msgid "Translation area height"
+msgstr "Висота області перекладу"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:137
+#| msgid "Gettext translation template"
+msgid "Height of the translation area panel."
+msgstr "Висота панелі області перекладу."
+
 #: data/org.gnome.Gtranslator.metainfo.xml.in.in:10
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
@@ -237,12 +247,11 @@ msgstr "Не вдалося оновити з шаблону"
 #: src/gtr-actions-file.c:101 src/gtr-actions-file.c:172
 #: src/gtr-actions-file.c:450 src/gtr-actions-file.c:472
 #: src/gtr-actions-file.c:511 src/gtr-actions-file.c:537
-#: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763
-#: src/gtr-actions-file.c:921 src/gtr-dl-teams.c:163 src/gtr-dl-teams.c:225
-#: src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:431 src/gtr-dl-teams.c:569
-#: src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:592 src/gtr-dl-teams.c:623
-#: src/gtr-dl-teams.c:634 src/gtr-dl-teams.c:706 src/gtr-tab.c:354
-#: src/gtr-window.c:147 src/gtr-window.c:337
+#: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763 src/gtr-dl-teams.c:163
+#: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:431
+#: src/gtr-dl-teams.c:569 src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:592
+#: src/gtr-dl-teams.c:623 src/gtr-dl-teams.c:634 src/gtr-dl-teams.c:706
+#: src/gtr-tab.c:354 src/gtr-window.c:147 src/gtr-window.c:337
 msgid "OK"
 msgstr "Гаразд"
 
@@ -290,7 +299,7 @@ msgid "Please save the current file before updating from a template."
 msgstr ""
 "Перш ніж оновлювати дані з шаблону, будь ласка, збережіть поточний файл."
 
-#: src/gtr-actions-file.c:373 src/gtr-close-confirmation-dialog.c:330
+#: src/gtr-actions-file.c:373 src/gtr-close-confirmation-dialog.c:314
 msgid "Unsaved Changes"
 msgstr "Незбережені зміни"
 
@@ -365,12 +374,12 @@ msgstr "Закрити б_ез збереження"
 msgid "_Save"
 msgstr "З_берегти"
 
-#: src/gtr-close-confirmation-dialog.c:287
+#: src/gtr-close-confirmation-dialog.c:271
 #, c-format
 msgid "Save the changes to document “%s” before closing?"
 msgstr "Зберегти зміни у документі «%s» перед закриттям?"
 
-#: src/gtr-close-confirmation-dialog.c:301
+#: src/gtr-close-confirmation-dialog.c:285
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
@@ -378,7 +387,7 @@ msgstr[0] "Зміни у %d документі буде назавжди втр�
 msgstr[1] "Зміни у %d документах буде назавжди втрачено."
 msgstr[2] "Зміни у %d документах буде назавжди втрачено."
 
-#: src/gtr-close-confirmation-dialog.c:308
+#: src/gtr-close-confirmation-dialog.c:292
 #, c-format
 msgid ""
 "There is %d document with unsaved changes. Save changes before closing?"
@@ -392,7 +401,7 @@ msgstr[2] "%d документів з незбереженими змінами.
 msgid "Edit Notes"
 msgstr "Редагувати нотатки"
 
-#: src/gtr-context.c:552
+#: src/gtr-context.c:549
 msgid "Open in Browser"
 msgstr "Відкрити у браузері"
 
@@ -523,15 +532,15 @@ msgstr "Статистика"
 msgid "_Load File"
 msgstr "З_авантажити файл"
 
-#: src/gtr-file-dialogs.c:58
+#: src/gtr-file-dialogs.c:59
 msgid "Gettext translation"
 msgstr "Переклад Gettext"
 
-#: src/gtr-file-dialogs.c:66
+#: src/gtr-file-dialogs.c:67
 msgid "Gettext translation template"
 msgstr "Шаблон перекладу Gettext"
 
-#: src/gtr-file-dialogs.c:70
+#: src/gtr-file-dialogs.c:71
 msgid "All files"
 msgstr "Усі файли"
 
@@ -814,7 +823,7 @@ msgstr ""
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Файл %s лише для читання і він не може бути перезаписаний"
 
-#: src/gtr-po.c:832 src/gtr-po.c:1378
+#: src/gtr-po.c:832 src/gtr-po.c:1183
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Виявлено помилку у файлі PO: %s"
@@ -1022,40 +1031,35 @@ msgstr "Перекладений текст"
 msgid "There is an error in the message"
 msgstr "Помилка у повідомленні"
 
-#: src/gtr-tab.c:570 src/gtr-tab.c:707
+#: src/gtr-tab.c:571 src/gtr-tab.c:708
 msgid "fuzzy"
 msgstr "неточний"
 
-#: src/gtr-tab.c:737
+#: src/gtr-tab.c:738
 #, c-format
 msgid "Plural %d"
 msgstr "Форма множини %d"
 
-#. Translators: Path to the document opened
-#: src/gtr-tab.c:1267
-msgid "Path:"
-msgstr "Шлях:"
-
-#: src/gtr-tab.c:1517
+#: src/gtr-tab.c:1470
 msgid "Copied original to clipboard"
 msgstr "Скопіювати початковий текст до буфера обміну даними"
 
-#: src/gtr-tab.c:1958
+#: src/gtr-tab.c:1682
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Перекладено: %0.2f%%"
 
-#: src/gtr-tab.c:1959
+#: src/gtr-tab.c:1683
 #, c-format
 msgid "Translated: %d"
 msgstr "Перекладених: %d"
 
-#: src/gtr-tab.c:1960
+#: src/gtr-tab.c:1684
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Неперекладених: %d"
 
-#: src/gtr-tab.c:1961
+#: src/gtr-tab.c:1685
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Неточних: %d"
@@ -1138,7 +1142,6 @@ msgid "Fix plural messages"
 msgstr "Виправити повідомлення із формами множини"
 
 #: src/gtr-upload-dialog.c:199
-#| msgid "Uploading..."
 msgid "Uploading…"
 msgstr "Вивантаження…"
 
@@ -1405,6 +1408,9 @@ msgid ""
 msgstr ""
 "Максимальна різниця в довжині між рядком та прикладом у пам'яті перекладів."
 
+#~ msgid "Path:"
+#~ msgstr "Шлях:"
+
 #~ msgid "— Edit PO files"
 #~ msgstr "– Редагування PO-файлів"
 
@@ -1419,9 +1425,6 @@ msgstr ""
 
 #~ msgid "Profile"
 #~ msgstr "Профіль"
-
-#~ msgid "Translation team email"
-#~ msgstr "Адреса ел. пошти команди перекладу"
 
 #~ msgid "Source Viewer"
 #~ msgstr "Переглядач джерельного коду"
