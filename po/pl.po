@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-05-18 06:32+0000\n"
-"PO-Revision-Date: 2026-06-18 12:28+0200\n"
+"POT-Creation-Date: 2026-06-29 14:48+0000\n"
+"PO-Revision-Date: 2026-07-04 13:10+0200\n"
 "Last-Translator: Victoria Niedzielska <victorian@gnome.org>\n"
 "Language-Team: Polish <https://l10n.gnome.org/teams/pl/>\n"
 "Language: pl\n"
@@ -120,7 +120,7 @@ msgid ""
 "If true, the 'author <email> year' comment won't be added to the PO header's "
 "copyright."
 msgstr ""
-"Jeżeli wynosi „true”, to komentarz „autor <email> rok” nie zostanie dodany "
+"Jeżeli wynosi „true”, to komentarz „autor <e-mail> rok” nie zostanie dodany "
 "do informacji o prawach autorskich w nagłówku pliku."
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:75
@@ -191,6 +191,14 @@ msgstr "Zmaksymalizowane okno"
 msgid "Window maximized state"
 msgstr "Czy okno jest zmaksymalizowane"
 
+#: data/org.gnome.Gtranslator.gschema.xml.in:136
+msgid "Translation area height"
+msgstr "Wysokość przestrzeni tłumaczenia"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:137
+msgid "Height of the translation area panel."
+msgstr "Wysokość panela przestrzeni tłumaczenia."
+
 #: data/org.gnome.Gtranslator.metainfo.xml.in.in:10
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
@@ -251,12 +259,11 @@ msgstr "Nie udało się zaktualizować z szablonu"
 #: src/gtr-actions-file.c:101 src/gtr-actions-file.c:172
 #: src/gtr-actions-file.c:450 src/gtr-actions-file.c:472
 #: src/gtr-actions-file.c:511 src/gtr-actions-file.c:537
-#: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763
-#: src/gtr-actions-file.c:921 src/gtr-dl-teams.c:163 src/gtr-dl-teams.c:225
-#: src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:431 src/gtr-dl-teams.c:569
-#: src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:592 src/gtr-dl-teams.c:623
-#: src/gtr-dl-teams.c:634 src/gtr-dl-teams.c:706 src/gtr-tab.c:354
-#: src/gtr-window.c:147 src/gtr-window.c:337
+#: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763 src/gtr-dl-teams.c:163
+#: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:431
+#: src/gtr-dl-teams.c:569 src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:592
+#: src/gtr-dl-teams.c:623 src/gtr-dl-teams.c:634 src/gtr-dl-teams.c:706
+#: src/gtr-tab.c:354 src/gtr-window.c:147 src/gtr-window.c:337
 msgid "OK"
 msgstr "OK"
 
@@ -303,7 +310,7 @@ msgstr "Szablon tłumaczenia gettext (*.pot)"
 msgid "Please save the current file before updating from a template."
 msgstr "Proszę zapisać bieżący plik przed aktualizowaniem z szablonu."
 
-#: src/gtr-actions-file.c:373 src/gtr-close-confirmation-dialog.c:330
+#: src/gtr-actions-file.c:373 src/gtr-close-confirmation-dialog.c:314
 msgid "Unsaved Changes"
 msgstr "Niezapisane zmiany"
 
@@ -379,12 +386,12 @@ msgstr "Zamknij _bez zapisywania"
 msgid "_Save"
 msgstr "_Zapisz"
 
-#: src/gtr-close-confirmation-dialog.c:287
+#: src/gtr-close-confirmation-dialog.c:271
 #, c-format
 msgid "Save the changes to document “%s” before closing?"
 msgstr "Zapisać zmiany przed zamknięciem pliku „%s”?"
 
-#: src/gtr-close-confirmation-dialog.c:301
+#: src/gtr-close-confirmation-dialog.c:285
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
@@ -392,7 +399,7 @@ msgstr[0] "Zmiany zostaną bezpowrotnie utracone w 1 pliku."
 msgstr[1] "Zmiany zostaną bezpowrotnie utracone w %d plikach."
 msgstr[2] "Zmiany zostaną bezpowrotnie utracone w %d plikach."
 
-#: src/gtr-close-confirmation-dialog.c:308
+#: src/gtr-close-confirmation-dialog.c:292
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -408,7 +415,7 @@ msgstr[2] ""
 msgid "Edit Notes"
 msgstr "Modyfikuj notatki"
 
-#: src/gtr-context.c:552
+#: src/gtr-context.c:549
 msgid "Open in Browser"
 msgstr "Otwórz w przeglądarce"
 
@@ -539,15 +546,15 @@ msgstr "Statystyki"
 msgid "_Load File"
 msgstr "_Wczytaj plik"
 
-#: src/gtr-file-dialogs.c:58
+#: src/gtr-file-dialogs.c:59
 msgid "Gettext translation"
 msgstr "Tłumaczenie gettext"
 
-#: src/gtr-file-dialogs.c:66
+#: src/gtr-file-dialogs.c:67
 msgid "Gettext translation template"
 msgstr "Szablon tłumaczenia gettext"
 
-#: src/gtr-file-dialogs.c:70
+#: src/gtr-file-dialogs.c:71
 msgid "All files"
 msgstr "Wszystkie pliki"
 
@@ -604,11 +611,11 @@ msgstr "_Imię i nazwisko tłumacza"
 
 #: src/gtr-greeter.ui:80 src/gtr-profile-dialog.ui:74
 msgid "Translator _email"
-msgstr "Adres _email tłumacza"
+msgstr "Adres _e-mail tłumacza"
 
 #: src/gtr-greeter.ui:86 src/gtr-profile-dialog.ui:80
 msgid "Translation _team email"
-msgstr "Adres email _zespołu tłumaczenia"
+msgstr "Adres e-mail _zespołu tłumaczenia"
 
 #: src/gtr-greeter.ui:94 src/gtr-profile-dialog.ui:88
 msgid "Damned Lies Integration"
@@ -628,11 +635,11 @@ msgstr "Imię i nazwisko tłumacza"
 
 #: src/gtr-greeter.ui:139
 msgid "Translator email"
-msgstr "Adres email tłumacza"
+msgstr "Adres e-mail tłumacza"
 
 #: src/gtr-greeter.ui:144
 msgid "Team email"
-msgstr "Adres email zespołu"
+msgstr "Adres e-mail zespołu"
 
 #: src/gtr-greeter.ui:149
 msgid "Language name"
@@ -677,7 +684,7 @@ msgstr "Imię i _nazwisko tłumacza"
 
 #: src/gtr-header-dialog.ui:28
 msgid "Translator’s _email"
-msgstr "Adres _email tłumacza"
+msgstr "Adres _e-mail tłumacza"
 
 #: src/gtr-header-dialog.ui:34
 msgid "_Language"
@@ -689,7 +696,7 @@ msgstr "_Kod języka"
 
 #: src/gtr-header-dialog.ui:46
 msgid "Language _Team email"
-msgstr "Adres email _zespołu językowego"
+msgstr "Adres e-mail _zespołu językowego"
 
 #: src/gtr-header-dialog.ui:52
 msgid "Char_set"
@@ -828,7 +835,7 @@ msgstr ""
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Plik „%s” jest tylko do odczytu i nie może zostać zastąpiony"
 
-#: src/gtr-po.c:832 src/gtr-po.c:1378
+#: src/gtr-po.c:832 src/gtr-po.c:1183
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "W pliku PO jest błąd: %s"
@@ -1035,40 +1042,35 @@ msgstr "Przetłumaczony tekst"
 msgid "There is an error in the message"
 msgstr "Jest błąd w ciągu"
 
-#: src/gtr-tab.c:570 src/gtr-tab.c:707
+#: src/gtr-tab.c:571 src/gtr-tab.c:708
 msgid "fuzzy"
 msgstr "niepewne"
 
-#: src/gtr-tab.c:737
+#: src/gtr-tab.c:738
 #, c-format
 msgid "Plural %d"
 msgstr "%d. liczba mnoga"
 
-#. Translators: Path to the document opened
-#: src/gtr-tab.c:1267
-msgid "Path:"
-msgstr "Ścieżka:"
-
-#: src/gtr-tab.c:1517
+#: src/gtr-tab.c:1470
 msgid "Copied original to clipboard"
 msgstr "Skopiowano oryginalny tekst do schowka"
 
-#: src/gtr-tab.c:1958
+#: src/gtr-tab.c:1682
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Przetłumaczone: %0.2f%%"
 
-#: src/gtr-tab.c:1959
+#: src/gtr-tab.c:1683
 #, c-format
 msgid "Translated: %d"
 msgstr "Przetłumaczone: %d"
 
-#: src/gtr-tab.c:1960
+#: src/gtr-tab.c:1684
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Nieprzetłumaczone: %d"
 
-#: src/gtr-tab.c:1961
+#: src/gtr-tab.c:1685
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Niepewne: %d"
@@ -1418,6 +1420,9 @@ msgstr ""
 "Maksymalna różnica w długości między ciągami wyświetlanymi jako pasujące "
 "przez pamięć tłumaczeń."
 
+#~ msgid "Path:"
+#~ msgstr "Ścieżka:"
+
 #~ msgid "— Edit PO files"
 #~ msgstr "— modyfikowanie plików PO"
 
@@ -1462,9 +1467,6 @@ msgstr ""
 
 #~ msgid "Profile"
 #~ msgstr "Profil"
-
-#~ msgid "Translation team email"
-#~ msgstr "Adres e-mail zespołu tłumaczenia"
 
 #~ msgid "Open a new .po file or drag & drop here"
 #~ msgstr "Proszę otworzyć nowy plik PO lub przeciągnąć go tutaj"
