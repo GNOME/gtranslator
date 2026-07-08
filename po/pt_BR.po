@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-04-10 06:34+0000\n"
-"PO-Revision-Date: 2026-04-21 08:21-0300\n"
+"POT-Creation-Date: 2026-06-29 14:48+0000\n"
+"PO-Revision-Date: 2026-07-08 20:55-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>\n"
 "Language: pt_BR\n"
@@ -43,7 +43,7 @@ msgstr ""
 
 #: data/org.gnome.Gtranslator.desktop.in.in:2
 #: data/org.gnome.Gtranslator.metainfo.xml.in.in:7 src/gtr-actions-app.c:89
-#: src/gtr-application.c:515 src/gtr-window.c:206 src/gtr-window.c:452
+#: src/gtr-application.c:505 src/gtr-window.c:196 src/gtr-window.c:442
 msgid "Translation Editor"
 msgstr "Editor de tradução"
 
@@ -205,6 +205,14 @@ msgstr "Janela maximizada"
 msgid "Window maximized state"
 msgstr "Estado de janela maximizada"
 
+#: data/org.gnome.Gtranslator.gschema.xml.in:136
+msgid "Translation area height"
+msgstr "Altura da área de tradução"
+
+#: data/org.gnome.Gtranslator.gschema.xml.in:137
+msgid "Height of the translation area panel."
+msgstr "Altura do painel da área de tradução."
+
 #: data/org.gnome.Gtranslator.metainfo.xml.in.in:10
 msgid ""
 "Gtranslator is an enhanced gettext po file editor for the GNOME desktop "
@@ -263,31 +271,30 @@ msgstr ""
 "Víttor Paulo Vieira da Costa <vittorpaulovc@gmail.com>\n"
 "Juliano de Souza Camargo <julianosc@pm.me>"
 
-#: src/gtr-actions-file.c:94
+#: src/gtr-actions-file.c:97
 msgid "Could not update from template"
 msgstr "Não foi possível atualizar de um modelo"
 
-#: src/gtr-actions-file.c:98 src/gtr-actions-file.c:171
-#: src/gtr-actions-file.c:452 src/gtr-actions-file.c:474
-#: src/gtr-actions-file.c:513 src/gtr-actions-file.c:539
-#: src/gtr-actions-file.c:722 src/gtr-actions-file.c:765
-#: src/gtr-actions-file.c:923 src/gtr-dl-teams.c:163 src/gtr-dl-teams.c:225
-#: src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:432 src/gtr-dl-teams.c:570
-#: src/gtr-dl-teams.c:581 src/gtr-dl-teams.c:593 src/gtr-dl-teams.c:624
-#: src/gtr-dl-teams.c:635 src/gtr-dl-teams.c:707 src/gtr-tab.c:354
-#: src/gtr-window.c:157 src/gtr-window.c:347
+#: src/gtr-actions-file.c:101 src/gtr-actions-file.c:172
+#: src/gtr-actions-file.c:450 src/gtr-actions-file.c:472
+#: src/gtr-actions-file.c:511 src/gtr-actions-file.c:537
+#: src/gtr-actions-file.c:720 src/gtr-actions-file.c:763 src/gtr-dl-teams.c:163
+#: src/gtr-dl-teams.c:225 src/gtr-dl-teams.c:344 src/gtr-dl-teams.c:431
+#: src/gtr-dl-teams.c:569 src/gtr-dl-teams.c:580 src/gtr-dl-teams.c:592
+#: src/gtr-dl-teams.c:623 src/gtr-dl-teams.c:634 src/gtr-dl-teams.c:706
+#: src/gtr-tab.c:354 src/gtr-window.c:147 src/gtr-window.c:337
 msgid "OK"
 msgstr "OK"
 
-#: src/gtr-actions-file.c:126
+#: src/gtr-actions-file.c:128
 msgid "msgmerge failed"
 msgstr "msgmerge falhou"
 
-#: src/gtr-actions-file.c:161
+#: src/gtr-actions-file.c:162
 msgid "Updated from Template"
 msgstr "Atualizado dum modelo"
 
-#: src/gtr-actions-file.c:164
+#: src/gtr-actions-file.c:165
 #, c-format
 msgid ""
 "Messages: %d → %d (%+d)\n"
@@ -300,66 +307,66 @@ msgstr ""
 "Aproximadas: %d → %d (%+d)\n"
 "Não traduzidas: %d → %d (%+d)"
 
-#: src/gtr-actions-file.c:222
+#: src/gtr-actions-file.c:221
 msgid "msgmerge not found on PATH. Install gettext (msgmerge) and try again."
 msgstr ""
 "msgmerge não encontrado no PATH. Instale o gettext (msgmerge) e tente "
 "novamente."
 
-#: src/gtr-actions-file.c:248
+#: src/gtr-actions-file.c:247
 msgid "Failed to start msgmerge"
 msgstr "Falha ao iniciar o msgmerge"
 
-#: src/gtr-actions-file.c:265
+#: src/gtr-actions-file.c:263
 msgid "Select Template (.pot)"
 msgstr "Selecione o modelo (.pot)"
 
-#: src/gtr-actions-file.c:280
+#: src/gtr-actions-file.c:278
 msgid "Gettext translation template (*.pot)"
 msgstr "Modelo de tradução gettext (*.pot)"
 
-#: src/gtr-actions-file.c:308
+#: src/gtr-actions-file.c:306
 msgid "Please save the current file before updating from a template."
 msgstr "Salva o arquivo atual antes de atualizar a partir de um modelo."
 
-#: src/gtr-actions-file.c:375 src/gtr-close-confirmation-dialog.c:336
+#: src/gtr-actions-file.c:373 src/gtr-close-confirmation-dialog.c:314
 msgid "Unsaved Changes"
 msgstr "Alterações não salvas"
 
-#: src/gtr-actions-file.c:380
+#: src/gtr-actions-file.c:378
 #, c-format
 msgid "Do you want to write all the changes done to %s?"
 msgstr "Você deseja gravar todas as alterações feitas a %s?"
 
-#: src/gtr-actions-file.c:383
+#: src/gtr-actions-file.c:381
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/gtr-actions-file.c:384
+#: src/gtr-actions-file.c:382
 msgid "Continue Without Saving"
 msgstr "Continuar sem salvar"
 
-#: src/gtr-actions-file.c:384
+#: src/gtr-actions-file.c:382
 msgid "Save and Open"
 msgstr "Salvar e abrir"
 
-#: src/gtr-actions-file.c:406
+#: src/gtr-actions-file.c:404
 msgid "Open file for translation"
 msgstr "Abrir arquivo para tradução"
 
-#: src/gtr-actions-file.c:450
+#: src/gtr-actions-file.c:448
 msgid "Could not save file"
 msgstr "Não foi possível salvar"
 
-#: src/gtr-actions-file.c:511
+#: src/gtr-actions-file.c:509
 msgid "This file has already been uploaded"
 msgstr "Esse arquivo já foi enviado"
 
-#: src/gtr-actions-file.c:527
+#: src/gtr-actions-file.c:525
 msgid "Couldn't upload the file"
 msgstr "Não foi possível enviar o arquivo"
 
-#: src/gtr-actions-file.c:530
+#: src/gtr-actions-file.c:528
 #, c-format
 msgid ""
 "%s\n"
@@ -372,45 +379,45 @@ msgstr ""
 "corretamente em seu perfil ou você não possui permissões para enviar esse "
 "módulo."
 
-#: src/gtr-actions-file.c:538
+#: src/gtr-actions-file.c:536
 msgid "The file has been uploaded!"
 msgstr "O arquivo foi enviado!"
 
-#: src/gtr-actions-file.c:677
+#: src/gtr-actions-file.c:675
 msgid "Save file as…"
 msgstr "Salvar arquivo como…"
 
-#: src/gtr-application.c:314
+#: src/gtr-application.c:304
 msgid "Fixed plurals"
 msgstr "Plurais corrigidos"
 
-#: src/gtr-close-confirmation-dialog.c:122 src/gtr-context.c:161
-#: src/gtr-preferences-dialog.c:450 src/gtr-profile-dialog.ui:15
+#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:164
+#: src/gtr-preferences-dialog.c:452 src/gtr-profile-dialog.ui:15
 #: src/gtr-upload-dialog.ui:20
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: src/gtr-close-confirmation-dialog.c:123
+#: src/gtr-close-confirmation-dialog.c:122
 msgid "Close _Without Saving"
 msgstr "_Fechar sem salvar"
 
-#: src/gtr-close-confirmation-dialog.c:124 src/gtr-context.c:162
+#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:165
 msgid "_Save"
 msgstr "_Salvar"
 
-#: src/gtr-close-confirmation-dialog.c:293
+#: src/gtr-close-confirmation-dialog.c:271
 #, c-format
 msgid "Save the changes to document “%s” before closing?"
 msgstr "Salvar as alterações do documento “%s” antes de fechar?"
 
-#: src/gtr-close-confirmation-dialog.c:307
+#: src/gtr-close-confirmation-dialog.c:285
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] "Alterações em %d documento serão permanentemente perdidas."
 msgstr[1] "Alterações em %d documentos serão permanentemente perdidas."
 
-#: src/gtr-close-confirmation-dialog.c:314
+#: src/gtr-close-confirmation-dialog.c:292
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -422,11 +429,11 @@ msgstr[1] ""
 "Existem %d documentos com alterações não salvas. Salvar as alterações antes "
 "de fechar?"
 
-#: src/gtr-context.c:178
+#: src/gtr-context.c:181
 msgid "Edit Notes"
 msgstr "Editar notas"
 
-#: src/gtr-context.c:529
+#: src/gtr-context.c:549
 msgid "Open in Browser"
 msgstr "Abrir no navegador"
 
@@ -434,7 +441,7 @@ msgstr "Abrir no navegador"
 msgid "Notes"
 msgstr "Notas"
 
-#: src/gtr-context.ui:29 src/gtr-preferences-dialog.c:269
+#: src/gtr-context.ui:29 src/gtr-preferences-dialog.c:271
 msgid "Edit"
 msgstr "Editar"
 
@@ -450,39 +457,39 @@ msgstr "Caminhos"
 msgid "Error loading module info"
 msgstr "Erro ao carregar informações do módulo"
 
-#: src/gtr-dl-teams.c:431
+#: src/gtr-dl-teams.c:430
 msgid "Error loading file info"
 msgstr "Erro ao carregar informações do arquivo"
 
-#: src/gtr-dl-teams.c:450
+#: src/gtr-dl-teams.c:449
 msgid "No file found"
 msgstr "Nenhum arquivo foi encontrado"
 
-#: src/gtr-dl-teams.c:457
+#: src/gtr-dl-teams.c:456
 msgid "No module state found."
 msgstr "Nenhum estado do módulo foi encontrado."
 
-#: src/gtr-dl-teams.c:569
+#: src/gtr-dl-teams.c:568
 msgid "Error loading file"
 msgstr "Erro ao carregar o arquivo"
 
-#: src/gtr-dl-teams.c:579 src/gtr-dl-teams.c:623
+#: src/gtr-dl-teams.c:578 src/gtr-dl-teams.c:622
 msgid "Error creating tmp file"
 msgstr "Erro ao criar o arquivo temporário"
 
-#: src/gtr-dl-teams.c:592
+#: src/gtr-dl-teams.c:591
 msgid "Error writing stream"
 msgstr "Erro ao escrever o fluxo"
 
-#: src/gtr-dl-teams.c:655
+#: src/gtr-dl-teams.c:654
 msgid "The file has been saved in your Downloads folder"
 msgstr "O arquivo foi salvo em sua pasta Downloads"
 
-#: src/gtr-dl-teams.c:706
+#: src/gtr-dl-teams.c:705
 msgid "Could not reserve module"
 msgstr "Não foi possível reservar o módulo"
 
-#: src/gtr-dl-teams.c:711
+#: src/gtr-dl-teams.c:710
 #, c-format
 msgid ""
 "%s\n"
@@ -493,7 +500,7 @@ msgstr ""
 "Talvez seu token do l10n.gnome.org não tenha sido configurado corretamente "
 "em seu perfil ou você não tenha permissões para reservar esse módulo."
 
-#: src/gtr-dl-teams.c:723
+#: src/gtr-dl-teams.c:722
 msgid "The file has been successfully reserved"
 msgstr "O arquivo foi reservado com sucesso"
 
@@ -557,19 +564,19 @@ msgstr "Estatísticas"
 msgid "_Load File"
 msgstr "_Carregar arquivo"
 
-#: src/gtr-file-dialogs.c:57
+#: src/gtr-file-dialogs.c:59
 msgid "Gettext translation"
 msgstr "Catálogo de mensagens"
 
-#: src/gtr-file-dialogs.c:65
+#: src/gtr-file-dialogs.c:67
 msgid "Gettext translation template"
 msgstr "Modelo de catálogo de mensagens"
 
-#: src/gtr-file-dialogs.c:69
+#: src/gtr-file-dialogs.c:71
 msgid "All files"
 msgstr "Todos os arquivos"
 
-#: src/gtr-greeter.c:215 src/gtr-profile-dialog.c:127
+#: src/gtr-greeter.c:216 src/gtr-profile-dialog.c:129
 #, c-format
 msgid "GNOME Damned Lies integration token, go to your profile in %s to get it"
 msgstr ""
@@ -672,7 +679,7 @@ msgstr "Codificação de transferência"
 msgid "Plural form"
 msgstr "Formas de plural"
 
-#: src/gtr-header-dialog.c:379 src/gtr-tab.ui:327
+#: src/gtr-header-dialog.c:381 src/gtr-tab.ui:327
 msgid "Edit Header"
 msgstr "Editar cabeçalho"
 
@@ -741,7 +748,7 @@ msgstr "Data de _revisão do arquivo PO"
 msgid "Report message _bugs to"
 msgstr "Relatar e_rros de mensagens para"
 
-#: src/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:145
+#: src/gtr-header-dialog.ui:109 src/gtr-upload-dialog.c:147
 msgid "Comment"
 msgstr "Comentário"
 
@@ -761,7 +768,7 @@ msgstr "Estado"
 msgid "VCS Browser"
 msgstr "Navegador de VCS"
 
-#: src/gtr-lang-combo-row.c:89
+#: src/gtr-lang-combo-row.c:90
 msgid "Languages"
 msgstr "Idiomas"
 
@@ -789,28 +796,28 @@ msgstr "Mensagem original"
 msgid "Translated Message"
 msgstr "Mensagem traduzida"
 
-#: src/gtr-po.c:465
+#: src/gtr-po.c:469
 #, c-format
 msgid "The file is empty"
 msgstr "O arquivo está vazio"
 
-#: src/gtr-po.c:474
+#: src/gtr-po.c:478
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Falha ao abrir o arquivo “%s”: %s"
 
-#: src/gtr-po.c:545
+#: src/gtr-po.c:549
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Não foi possível converter do conjunto de caracteres “%s” para UTF-8"
 
-#: src/gtr-po.c:561 src/gtr-po.c:580
+#: src/gtr-po.c:563 src/gtr-po.c:581
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr ""
 "Não foi possível armazenar arquivo temporário para conversão da codificação"
 
-#: src/gtr-po.c:611
+#: src/gtr-po.c:605
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -821,17 +828,17 @@ msgstr ""
 "ferramentas de linha de comando msgconv ou iconv antes de abrir este arquivo "
 "com o Editor de Tradução do GNOME"
 
-#: src/gtr-po.c:678
+#: src/gtr-po.c:670
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "O gettext retornou uma lista nula de mensagens do domínio."
 
-#: src/gtr-po.c:728
+#: src/gtr-po.c:717
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Nenhuma mensagem obtida do interpretador."
 
-#: src/gtr-po.c:794
+#: src/gtr-po.c:783
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -842,42 +849,42 @@ msgstr ""
 "Os arquivos POT são criados no processo de compilação.\n"
 "Seu arquivo deveria ser nomeado como “%s.po”."
 
-#: src/gtr-po.c:824
+#: src/gtr-po.c:813
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "O arquivo %s é somente-leitura, e não pode ser sobrescrito"
 
-#: src/gtr-po.c:843 src/gtr-po.c:1389
+#: src/gtr-po.c:832 src/gtr-po.c:1183
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Há um erro no arquivo PO: %s"
 
-#: src/gtr-po.c:854
+#: src/gtr-po.c:843
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Houve um erro ao escrever o arquivo PO: %s"
 
-#: src/gtr-preferences-dialog.c:273
+#: src/gtr-preferences-dialog.c:275
 msgid "Delete"
 msgstr "Excluir"
 
-#: src/gtr-preferences-dialog.c:433
+#: src/gtr-preferences-dialog.c:435
 msgid "Impossible to remove the active profile"
 msgstr "Não é possível remover o perfil ativo"
 
-#: src/gtr-preferences-dialog.c:434
+#: src/gtr-preferences-dialog.c:436
 msgid "Another profile should be selected as active before"
 msgstr "Outro perfil deve ser anteriormente selecionado como ativo"
 
-#: src/gtr-preferences-dialog.c:437
+#: src/gtr-preferences-dialog.c:439
 msgid "_Ok"
 msgstr "_OK"
 
-#: src/gtr-preferences-dialog.c:445
+#: src/gtr-preferences-dialog.c:447
 msgid "Are you sure you want to delete this profile?"
 msgstr "Você tem certeza de que deseja excluir esse perfil?"
 
-#: src/gtr-preferences-dialog.c:451
+#: src/gtr-preferences-dialog.c:453
 msgid "_Delete"
 msgstr "E_xcluir"
 
@@ -1055,40 +1062,35 @@ msgstr "Texto traduzido"
 msgid "There is an error in the message"
 msgstr "Há um erro na mensagem"
 
-#: src/gtr-tab.c:570 src/gtr-tab.c:707
+#: src/gtr-tab.c:571 src/gtr-tab.c:708
 msgid "fuzzy"
 msgstr "aproximada"
 
-#: src/gtr-tab.c:737
+#: src/gtr-tab.c:738
 #, c-format
 msgid "Plural %d"
 msgstr "Plural %d"
 
-#. Translators: Path to the document opened
-#: src/gtr-tab.c:1268
-msgid "Path:"
-msgstr "Caminho:"
-
-#: src/gtr-tab.c:1518
+#: src/gtr-tab.c:1470
 msgid "Copied original to clipboard"
 msgstr "Copiado o original para a área de transferência"
 
-#: src/gtr-tab.c:1956
+#: src/gtr-tab.c:1682
 #, c-format
 msgid "Translated: %0.2f%%"
 msgstr "Traduzidas: %0.2f%%"
 
-#: src/gtr-tab.c:1957
+#: src/gtr-tab.c:1683
 #, c-format
 msgid "Translated: %d"
 msgstr "Traduzidas: %d"
 
-#: src/gtr-tab.c:1958
+#: src/gtr-tab.c:1684
 #, c-format
 msgid "Untranslated: %d"
 msgstr "Não traduzidas: %d"
 
-#: src/gtr-tab.c:1959
+#: src/gtr-tab.c:1685
 #, c-format
 msgid "Fuzzy: %d"
 msgstr "Aproximadas: %d"
@@ -1170,11 +1172,11 @@ msgstr "Ferramentas avançadas"
 msgid "Fix plural messages"
 msgstr "Corrigir mensagens com plural"
 
-#: src/gtr-upload-dialog.c:197
-msgid "Uploading..."
+#: src/gtr-upload-dialog.c:199
+msgid "Uploading…"
 msgstr "Enviando…"
 
-#: src/gtr-upload-dialog.c:203
+#: src/gtr-upload-dialog.c:205
 msgid "Upload"
 msgstr "Enviar"
 
@@ -1187,38 +1189,24 @@ msgid "_Upload"
 msgstr "_Enviar"
 
 #. Translators: this is the title of the window with a modified document
-#: src/gtr-window.c:189
+#: src/gtr-window.c:179
 #, c-format
 msgid "*%s — Translation Editor"
 msgstr "*%s – Editor de tradução"
 
 #. Translators: this is the title of the window with a document opened
-#: src/gtr-window.c:196
+#: src/gtr-window.c:186
 #, c-format
 msgid "%s — Translation Editor"
 msgstr "%s – Editor de tradução"
 
-#: src/gtr-window.c:346
+#: src/gtr-window.c:336
 msgid "Could not Save"
 msgstr "Não foi possível salvar"
 
-#: src/gtr-window.c:358
+#: src/gtr-window.c:348
 msgid "File saved"
 msgstr "Arquivo salvo"
-
-#: src/main.c:97
-msgid "— Edit PO files"
-msgstr "— Edite arquivos PO"
-
-#: src/main.c:101
-#, c-format
-msgid ""
-"%s\n"
-"Run “%s --help” to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"Execute “%s --help” para ver uma lista completa das opções de linha de "
-"comando disponíveis.\n"
 
 #: src/shortcuts-dialog.ui:6
 msgctxt "shortcut window group"
@@ -1379,7 +1367,7 @@ msgctxt "shortcut window"
 msgid "Hide find & replace bar"
 msgstr "Oculta a barra de localização e substituição"
 
-#: src/translation-memory/gtr-translation-memory-dialog.c:77
+#: src/translation-memory/gtr-translation-memory-dialog.c:80
 msgid "Select PO directory"
 msgstr "Selecionar o diretório de PO"
 
@@ -1458,11 +1446,23 @@ msgstr ""
 "Diferença máxima em comprimento entre as mensagens exibidas como ocorrências "
 "pela memória de tradução."
 
+#~ msgid "Path:"
+#~ msgstr "Caminho:"
+
+#~ msgid "— Edit PO files"
+#~ msgstr "— Edite arquivos PO"
+
+#, c-format
+#~ msgid ""
+#~ "%s\n"
+#~ "Run “%s --help” to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Execute “%s --help” para ver uma lista completa das opções de linha de "
+#~ "comando disponíveis.\n"
+
 #~ msgid "Profile"
 #~ msgstr "Perfil"
-
-#~ msgid "Translation team email"
-#~ msgstr "E-mail da equipe de tradução"
 
 #~ msgid "Source Viewer"
 #~ msgstr "Visualizador de código-fonte"
