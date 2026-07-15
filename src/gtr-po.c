@@ -454,11 +454,7 @@ _gtr_po_load (GtrPo * po, GFile * location, GError ** error)
 
   g_clear_object (&priv->header);
 
-  if (priv->iter)
-    {
-      po_message_iterator_free (priv->iter);
-      priv->iter = NULL;
-    }
+  g_clear_pointer (&priv->iter, po_message_iterator_free);
 
   priv->gettext_po_file = po_file_read (filename, &handler);
 

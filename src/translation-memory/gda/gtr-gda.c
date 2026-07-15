@@ -815,8 +815,7 @@ gtr_gda_init (GtrGda * self)
   if (rc != SQLITE_OK)
     {
       g_warning ("Error creating database: %s", sqlite3_errmsg (priv->db));
-      sqlite3_close_v2 (priv->db);
-      priv->db = NULL;
+      g_clear_pointer (&priv->db, sqlite3_close_v2);
     }
 
   initialize_db (self);
@@ -896,67 +895,17 @@ gtr_gda_dispose (GObject * object)
   GtrGda *self = GTR_GDA (object);
   GtrGdaPrivate *priv = gtr_gda_get_instance_private (self);
 
-  if (priv->stmt_find_orig != NULL)
-    {
-      sqlite3_finalize (priv->stmt_find_orig);
-      priv->stmt_find_orig = NULL;
-    }
-
-  if (priv->stmt_select_trans != NULL)
-    {
-      sqlite3_finalize (priv->stmt_select_trans);
-      priv->stmt_select_trans = NULL;
-    }
-
-  if (priv->stmt_find_trans != NULL)
-    {
-      sqlite3_finalize (priv->stmt_find_trans);
-      priv->stmt_find_trans = NULL;
-    }
-
-  if (priv->stmt_select_word != NULL)
-    {
-      sqlite3_finalize (priv->stmt_select_word);
-      priv->stmt_select_word = NULL;
-    }
-
-  if (priv->stmt_insert_orig != NULL)
-    {
-      sqlite3_finalize (priv->stmt_insert_orig);
-      priv->stmt_insert_orig = NULL;
-    }
-
-  if (priv->stmt_insert_word != NULL)
-    {
-      sqlite3_finalize (priv->stmt_insert_word);
-      priv->stmt_insert_word = NULL;
-    }
-
-  if (priv->stmt_insert_link != NULL)
-    {
-      sqlite3_finalize (priv->stmt_insert_link);
-      priv->stmt_insert_link = NULL;
-    }
-
-  if (priv->stmt_insert_trans != NULL)
-    {
-      sqlite3_finalize (priv->stmt_insert_trans);
-      priv->stmt_insert_trans = NULL;
-    }
-
-  if (priv->stmt_delete_trans != NULL)
-    {
-      sqlite3_finalize (priv->stmt_delete_trans);
-      priv->stmt_delete_trans = NULL;
-    }
-
+  g_clear_pointer (&priv->stmt_find_orig, sqlite3_finalize);
+  g_clear_pointer (&priv->stmt_select_trans, sqlite3_finalize);
+  g_clear_pointer (&priv->stmt_find_trans, sqlite3_finalize);
+  g_clear_pointer (&priv->stmt_select_word, sqlite3_finalize);
+  g_clear_pointer (&priv->stmt_insert_orig, sqlite3_finalize);
+  g_clear_pointer (&priv->stmt_insert_word, sqlite3_finalize);
+  g_clear_pointer (&priv->stmt_insert_link, sqlite3_finalize);
+  g_clear_pointer (&priv->stmt_insert_trans, sqlite3_finalize);
+  g_clear_pointer (&priv->stmt_delete_trans, sqlite3_finalize);
   g_clear_pointer (&priv->lookup_query_cache, g_hash_table_unref);
-
-  if (priv->db != NULL)
-    {
-      sqlite3_close_v2 (priv->db);
-      priv->db = NULL;
-    }
+  g_clear_pointer (&priv->db, sqlite3_close_v2);
 
   G_OBJECT_CLASS (gtr_gda_parent_class)->dispose (object);
 }
