@@ -403,7 +403,7 @@ static void
 add_actions (GtrSearchBar *self)
 {
   g_autoptr (GSimpleActionGroup) group = NULL;
-  GPropertyAction *action;
+  g_autoptr (GPropertyAction) action = NULL;
 
   group = g_simple_action_group_new ();
 
@@ -425,7 +425,6 @@ add_actions (GtrSearchBar *self)
 
   action = g_property_action_new ("at-translated-text", self, "at-translated-text");
   g_action_map_add_action (G_ACTION_MAP (group), G_ACTION (action));
-  g_object_unref (action);
 
   gtk_widget_insert_action_group (GTK_WIDGET (self), "search-settings", G_ACTION_GROUP (group));
 }
