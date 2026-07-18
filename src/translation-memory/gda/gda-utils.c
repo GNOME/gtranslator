@@ -93,7 +93,7 @@ GStrv
 gtr_gda_utils_split_string_in_words (const char *string)
 {
   PangoLanguage *lang = pango_language_from_string ("en");
-  PangoLogAttr *attrs;
+  g_autofree PangoLogAttr *attrs = NULL;
   g_autoptr(GStrvBuilder) builder = g_strv_builder_new ();
   int char_len;
   char *s;
@@ -136,8 +136,6 @@ gtr_gda_utils_split_string_in_words (const char *string)
 
       s = g_utf8_next_char (s);
     }
-
-  g_free (attrs);
 
   return g_strv_builder_end (builder);
 }
