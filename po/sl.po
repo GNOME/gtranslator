@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-06-29 14:48+0000\n"
-"PO-Revision-Date: 2026-06-29 17:53+0200\n"
+"POT-Creation-Date: 2026-07-17 21:18+0000\n"
+"PO-Revision-Date: 2026-07-22 16:29+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -221,6 +221,12 @@ msgstr ""
 #: data/org.gnome.Gtranslator.metainfo.xml.in.in:34
 msgid "Translator's main interface"
 msgstr "Glavni vmesnik prevajalca"
+
+#. developer_name tag deprecated with Appstream 1.0
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:323
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:325
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
 
 #: src/gtr-actions-app.c:86
 msgid ""
@@ -773,27 +779,27 @@ msgstr "Izvorni niz"
 msgid "Translated Message"
 msgstr "Prevedeni niz"
 
-#: src/gtr-po.c:469
+#: src/gtr-po.c:465
 #, c-format
 msgid "The file is empty"
 msgstr "Datoteka je prazna"
 
-#: src/gtr-po.c:478
+#: src/gtr-po.c:474
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Odpiranje datoteke »%s« je spodletelo: %s"
 
-#: src/gtr-po.c:549
+#: src/gtr-po.c:545
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Pretvorba iz nabora znakov »%s« v UTF-8 ni uspela"
 
-#: src/gtr-po.c:563 src/gtr-po.c:581
+#: src/gtr-po.c:559 src/gtr-po.c:577
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Začasne datoteke za pretvorbo kodiranja ni uspelo"
 
-#: src/gtr-po.c:605
+#: src/gtr-po.c:601
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -804,17 +810,17 @@ msgstr ""
 "vrstice msgconv ali iconv, preden to datoteko odprete s programom "
 "Urejevalnik prevodov GNOME"
 
-#: src/gtr-po.c:670
+#: src/gtr-po.c:666
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Program Gettext je vrnil seznam domen brez vključenih nizov."
 
-#: src/gtr-po.c:717
+#: src/gtr-po.c:713
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Razčlenjevalnik ni izpisal nobenega niza."
 
-#: src/gtr-po.c:783
+#: src/gtr-po.c:779
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -825,17 +831,17 @@ msgstr ""
 "se ustvarijo med kodnim prevajanjem. Najverjetneje\n"
 "jo je treba preimenovati v datoteko z imenom »%s.po«."
 
-#: src/gtr-po.c:813
+#: src/gtr-po.c:809
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Datoteka %s je dostopna le za branje in je ni mogoče prepisati"
 
-#: src/gtr-po.c:832 src/gtr-po.c:1183
+#: src/gtr-po.c:828 src/gtr-po.c:1179
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "V datoteki PO je zaznana napaka: %s"
 
-#: src/gtr-po.c:843
+#: src/gtr-po.c:839
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Prišlo je do napake med zapisovanjem datoteke PO: %s"
