@@ -70,6 +70,11 @@ typedef struct
   GtkWidget *comments;
   GtkTextBuffer *commentsbuffer;
 
+  // previous source text ("#| msgid")
+  GtkWidget *previous_source_group;
+  GtkWidget *previous_source;
+  GtkTextBuffer *previous_source_buffer;
+
   // paths
   GtkWidget *paths;
 } GtrContextPanelPrivate;
@@ -254,6 +259,28 @@ add_extracted_comments (GtrContextPanel *panel, GtrMsg *msg)
 }
 
 static void
+add_previous_source_text (GtrContextPanel *panel, GtrMsg *msg)
+{
+  const char *prev_msgid;
+  GtrContextPanelPrivate *priv;
+
+  priv = gtr_context_panel_get_instance_private (panel);
+
+  prev_msgid = gtr_msg_get_prev_msgid (msg);
+
+  if (prev_msgid && g_strcmp0 (prev_msgid, "") != 0)
+    {
+      gtk_text_buffer_set_text (priv->previous_source_buffer, prev_msgid, -1);
+      gtk_widget_set_visible (priv->previous_source_group, TRUE);
+    }
+  else
+    {
+      gtk_text_buffer_set_text (priv->previous_source_buffer, "", 0);
+      gtk_widget_set_visible (priv->previous_source_group, FALSE);
+    }
+}
+
+static void
 clean_paths (GtrContextPanel *panel)
 {
   GtrContextPanelPrivate *priv = gtr_context_panel_get_instance_private (panel);
@@ -272,6 +299,7 @@ showed_message_cb (GtrTab *tab, GtrMsg *msg, GtrContextPanel *panel)
 
   add_notes (panel, msg);
   add_extracted_comments (panel, msg);
+  add_previous_source_text (panel, msg);
 
   clean_paths (panel);
 }
@@ -442,6 +470,10 @@ gtr_context_panel_class_init (GtrContextPanelClass * klass)
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, comments);
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, commentsbuffer);
+
+  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, previous_source_group);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, previous_source);
+  gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, previous_source_buffer);
 
   gtk_widget_class_bind_template_child_private (widget_class, GtrContextPanel, paths);
 }

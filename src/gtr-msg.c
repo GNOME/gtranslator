@@ -558,6 +558,26 @@ gtr_msg_get_extracted_comments (GtrMsg * msg)
 }
 
 /**
+ * gtr_msg_get_prev_msgid:
+ * @msg: a #GtrMsg
+ *
+ * Gets the previous msgid (`#| msgid` comment) stored for this message, or
+ * `NULL` if there is none. This is usually set by msgmerge on fuzzy matches, to
+ * keep the original string that was translated before the source string
+ * changed.
+ *
+ * Returns: (transfer none) (nullable): the previous msgid
+ */
+const char *
+gtr_msg_get_prev_msgid (GtrMsg * msg)
+{
+  GtrMsgPrivate *priv = gtr_msg_get_instance_private (msg);
+  g_return_val_if_fail (GTR_IS_MSG (msg), NULL);
+
+  return po_message_prev_msgid (priv->message);
+}
+
+/**
  * gtr_msg_get_filename:
  * @msg: a #GtrMsg
  * @i: the i-th file for a message.

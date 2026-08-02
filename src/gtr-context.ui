@@ -78,6 +78,34 @@
                   </object>
                 </child>
 
+                <!-- previous source text (previous msgid, "#| msgid") -->
+                <child>
+                  <object class="AdwPreferencesGroup" id="previous_source_group">
+                    <property name="title" translatable="yes">Previous Source Text</property>
+                    <property name="visible">False</property>
+                    <child>
+                      <object class="AdwBin">
+                        <style>
+                          <class name="card"/>
+                        </style>
+                        <child>
+                          <object class="GtkTextView" id="previous_source">
+                            <property name="editable">False</property>
+                            <property name="wrap-mode">word</property>
+                            <property name="buffer">
+                              <object class="GtkTextBuffer" id="previous_source_buffer"/>
+                            </property>
+                            <property name="height-request">48</property>
+                            <style>
+                              <class name="inline"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
                 <!-- paths -->
                 <child>
                   <object class="AdwPreferencesGroup">

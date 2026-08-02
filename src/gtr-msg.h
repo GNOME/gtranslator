@@ -80,6 +80,8 @@ void                      gtr_msg_set_po_position           (GtrMsg      *msg,
 
 const char               *gtr_msg_get_extracted_comments    (GtrMsg     *msg);
 
+const char               *gtr_msg_get_prev_msgid            (GtrMsg     *msg);
+
 const char               *gtr_msg_get_filename              (GtrMsg     *msg,
                                                              int         i);
 
