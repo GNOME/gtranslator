@@ -3,22 +3,22 @@
 # Yuri Syrota <rasta@renome.rovno.ua>, 2000.
 # Sergey Panasenko <nitay@users.sourceforge.net>, 2009.
 # Sergiy Gavrylov <sergiovana@bigmir.net>, 2010, 2011.
-# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2022, 2023, 2024, 2025, 2026.
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2023, 2024, 2025, 2026 Yuri Chornoivan <yurchor@ukr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: gtranslator.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gtranslator/issues\n"
-"POT-Creation-Date: 2026-06-29 14:48+0000\n"
-"PO-Revision-Date: 2026-06-29 22:11+0300\n"
+"POT-Creation-Date: 2026-08-03 16:50+0000\n"
+"PO-Revision-Date: 2026-08-03 20:52+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 23.04.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
+"=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #: data/org.gnome.Gtranslator.desktop.in.in:2
 #: data/org.gnome.Gtranslator.metainfo.xml.in.in:7 src/gtr-actions-app.c:89
@@ -182,12 +182,10 @@ msgid "Window maximized state"
 msgstr "Стан розгорнутості вікна"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:136
-#| msgid "Translation team email"
 msgid "Translation area height"
 msgstr "Висота області перекладу"
 
 #: data/org.gnome.Gtranslator.gschema.xml.in:137
-#| msgid "Gettext translation template"
 msgid "Height of the translation area panel."
 msgstr "Висота панелі області перекладу."
 
@@ -222,6 +220,12 @@ msgstr ""
 #: data/org.gnome.Gtranslator.metainfo.xml.in.in:34
 msgid "Translator's main interface"
 msgstr "Основний інтерфейс «Перекладача»"
+
+#. developer_name tag deprecated with Appstream 1.0
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:323
+#: data/org.gnome.Gtranslator.metainfo.xml.in.in:325
+msgid "Daniel García Moreno"
+msgstr "Daniel García Moreno"
 
 #: src/gtr-actions-app.c:86
 msgid ""
@@ -360,7 +364,7 @@ msgstr "Зберегти файл як…"
 msgid "Fixed plurals"
 msgstr "Виправлено форми множини"
 
-#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:164
+#: src/gtr-close-confirmation-dialog.c:121 src/gtr-context.c:169
 #: src/gtr-preferences-dialog.c:452 src/gtr-profile-dialog.ui:15
 #: src/gtr-upload-dialog.ui:20
 msgid "_Cancel"
@@ -370,7 +374,7 @@ msgstr "_Скасувати"
 msgid "Close _Without Saving"
 msgstr "Закрити б_ез збереження"
 
-#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:165
+#: src/gtr-close-confirmation-dialog.c:123 src/gtr-context.c:170
 msgid "_Save"
 msgstr "З_берегти"
 
@@ -397,11 +401,11 @@ msgstr[0] "%d документ з незбереженими змінами. З�
 msgstr[1] "%d документа з незбереженими змінами. Зберегти перед закриттям?"
 msgstr[2] "%d документів з незбереженими змінами. Зберегти перед закриттям?"
 
-#: src/gtr-context.c:181
+#: src/gtr-context.c:186
 msgid "Edit Notes"
 msgstr "Редагувати нотатки"
 
-#: src/gtr-context.c:549
+#: src/gtr-context.c:581
 msgid "Open in Browser"
 msgstr "Відкрити у браузері"
 
@@ -414,10 +418,16 @@ msgid "Edit"
 msgstr "Змінити"
 
 #: src/gtr-context.ui:59
-msgid "Extracted comments"
-msgstr "Додаткові коментарі"
+#| msgid "Extracted comments"
+msgid "Extracted Comments"
+msgstr "Видобуті коментарі"
 
 #: src/gtr-context.ui:84
+#| msgid "Previous Result"
+msgid "Previous Source Text"
+msgstr "Попередній початковий текст"
+
+#: src/gtr-context.ui:112
 msgid "Paths"
 msgstr "Шляхи"
 
@@ -766,27 +776,27 @@ msgstr "Початкове повідомлення"
 msgid "Translated Message"
 msgstr "Перекладене повідомлення"
 
-#: src/gtr-po.c:469
+#: src/gtr-po.c:465
 #, c-format
 msgid "The file is empty"
 msgstr "Файл порожній"
 
-#: src/gtr-po.c:478
+#: src/gtr-po.c:474
 #, c-format
 msgid "Failed opening file “%s”: %s"
 msgstr "Не вдалося відкрити файл «%s»: %s"
 
-#: src/gtr-po.c:549
+#: src/gtr-po.c:545
 #, c-format
 msgid "Could not convert from charset “%s” to UTF-8"
 msgstr "Не вдалося виконати перетворення з кодування «%s» до UTF-8"
 
-#: src/gtr-po.c:563 src/gtr-po.c:581
+#: src/gtr-po.c:559 src/gtr-po.c:577
 #, c-format
 msgid "Could not store temporary file for encoding conversion"
 msgstr "Не вдалося зберегти файл тимчасових даних для перетворення кодування"
 
-#: src/gtr-po.c:605
+#: src/gtr-po.c:601
 #, c-format
 msgid ""
 "All attempt to convert the file to UTF-8 has failed, use the msgconv or "
@@ -797,17 +807,17 @@ msgstr ""
 "Скористайтеся засобами командного рядка msgconv або iconv, перш ніж "
 "відкривати цей файл у редакторі перекладів GNOME."
 
-#: src/gtr-po.c:670
+#: src/gtr-po.c:666
 #, c-format
 msgid "Gettext returned a null message domain list."
 msgstr "Gettext повернув порожній список доменів."
 
-#: src/gtr-po.c:717
+#: src/gtr-po.c:713
 #, c-format
 msgid "No messages obtained from parser."
 msgstr "Жодного повідомлення не отримано від синтаксичного аналізатора."
 
-#: src/gtr-po.c:783
+#: src/gtr-po.c:779
 #, c-format
 msgid ""
 "You are saving a file with a .pot extension.\n"
@@ -818,17 +828,17 @@ msgstr ""
 "Pot-файли створюються в процесі компіляції.\n"
 "Файл повинен мати назву, подібну до «%s.po»."
 
-#: src/gtr-po.c:813
+#: src/gtr-po.c:809
 #, c-format
 msgid "The file %s is read-only, and can not be overwritten"
 msgstr "Файл %s лише для читання і він не може бути перезаписаний"
 
-#: src/gtr-po.c:832 src/gtr-po.c:1183
+#: src/gtr-po.c:828 src/gtr-po.c:1179
 #, c-format
 msgid "There is an error in the PO file: %s"
 msgstr "Виявлено помилку у файлі PO: %s"
 
-#: src/gtr-po.c:843
+#: src/gtr-po.c:839
 #, c-format
 msgid "There was an error writing the PO file: %s"
 msgstr "Помилка запису PO-файла: %s"
@@ -1499,9 +1509,6 @@ msgstr ""
 
 #~ msgid "Gtranslator"
 #~ msgstr "Gtranslator"
-
-#~ msgid "Daniel García Moreno"
-#~ msgstr "Daniel García Moreno"
 
 #~ msgid "Undo"
 #~ msgstr "Скасувати"
