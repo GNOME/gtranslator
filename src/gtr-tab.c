@@ -639,6 +639,13 @@ emit_searchbar_toggled (GtkSearchBar *search_bar,
 }
 
 static void
+on_user_action (GtkTextBuffer *buf, GtrTab *tab)
+{
+  gtr_message_translation_update (buf, tab);
+  emit_message_changed_signal (buf, tab);
+}
+
+static void
 update_status (GtrTab * tab, GtrMsg * msg, gpointer useless)
 {
   GtrMsgStatus status;
@@ -742,11 +749,14 @@ gtr_tab_add_msgstr_tabs (GtrTab * tab)
                                                           tab);
 
       buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (priv->trans_msgstr[i]));
-      g_signal_connect (buf, "end-user-action",
-                        G_CALLBACK (gtr_message_translation_update), tab);
-
       g_signal_connect_after (buf, "end-user-action",
-                              G_CALLBACK (emit_message_changed_signal), tab);
+                              G_CALLBACK (on_user_action), tab);
+
+      g_signal_connect_after (buf, "undo",
+                              G_CALLBACK (on_user_action), tab);
+
+      g_signal_connect_after (buf, "redo",
+                              G_CALLBACK (on_user_action), tab);
     }
 }
 
